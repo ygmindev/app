@@ -16,7 +16,6 @@ import type { FilterQuery } from '@mikro-orm/core';
 import { MikroORM } from '@mikro-orm/core';
 import type { EntityManager, MongoDriver } from '@mikro-orm/mongodb';
 import { get, keys, set, unset } from 'lodash';
-import type { Filter, UpdateFilter } from 'mongodb';
 
 export abstract class _Database implements DatabaseModel {
   protected _params: DatabaseParamsModel;
@@ -89,7 +88,7 @@ export abstract class _Database implements DatabaseModel {
               )
               .next()
           : collection.findOne(
-              cleanDocument(filter) as Filter<TType>,
+              cleanDocument(filter) as object,
               options && { projection: options.project },
             ))) as TType;
         return { result: result || undefined };
@@ -125,7 +124,7 @@ export abstract class _Database implements DatabaseModel {
               .toArray()
           : collection
               .find(
-                cleanDocument(filter) as Filter<TType>,
+                cleanDocument(filter) as object,
                 options && { limit: options.take, projection: options.project, skip: options.skip },
               )
               .toArray())) as TType[];
@@ -152,11 +151,10 @@ export abstract class _Database implements DatabaseModel {
               .fork({})
               .getConnection()
               .getCollection<TType & object>(name)
-              .findOneAndUpdate(
-                cleanDocument(filter) as Filter<TType & object>,
-                _update as UpdateFilter<TType & object>,
-                { projection: options?.project, returnDocument: 'after' },
-              )
+              .findOneAndUpdate(cleanDocument(filter) as object, _update as object, {
+                projection: options?.project,
+                returnDocument: 'after',
+              })
           ).value as ResultModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
 
           return { result };

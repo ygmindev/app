@@ -1,4 +1,5 @@
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
+import { act } from '@lib/frontend/testing/utils/act/act';
 import { renderHook } from '@lib/frontend/testing/utils/renderHook/renderHook';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/testing/resources/DummyEntityResource/DummyEntityResource.constants';
@@ -21,7 +22,8 @@ describe('entityResource', () => {
       }),
     );
 
-    await create.current.query({ form: { stringProperty: 'stringProperty' } });
+    act(async () => await create.current.query({ form: { stringProperty: 'stringProperty' } }));
+
     expect(1).toStrictEqual(1);
 
     unmount();
