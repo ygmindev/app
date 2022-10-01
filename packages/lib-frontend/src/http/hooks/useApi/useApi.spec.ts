@@ -18,8 +18,10 @@ describe(displayName, () => {
 
   test('works with get', async () => {
     const scope = nock(uri(URI_PARAMS)).get('').reply(200, SUCCESS);
-    const { result } = renderHook(() => useApi(URI_PARAMS));
+    const { result, unmount } = renderHook(() => useApi(URI_PARAMS));
     await result.current.get({ path: '' });
     scope.done();
+
+    unmount();
   });
 });

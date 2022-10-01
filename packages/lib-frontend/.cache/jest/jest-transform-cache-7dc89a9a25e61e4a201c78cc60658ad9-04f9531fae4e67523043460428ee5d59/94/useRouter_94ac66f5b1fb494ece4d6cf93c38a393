@@ -1,7 +1,0 @@
-0bf352790c5a4ed5273222bb608a9489
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.useRouter = void 0;
-var _useRouter_1 = require("@lib/frontend/routing/hooks/useRouter/_useRouter");
-Object.defineProperty(exports, "useRouter", { enumerable: true, get: function () { return _useRouter_1._useRouter; } });
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy9yb3V0aW5nL2hvb2tzL3VzZVJvdXRlci91c2VSb3V0ZXIudHMiLCJtYXBwaW5ncyI6Ijs7O0FBQUEsK0VBQTJGO0FBQWxGLHVHQUFBLFVBQVUsT0FBYSIsIm5hbWVzIjpbXSwic291cmNlcyI6WyIvVXNlcnMveWdtaW4vUHJvamVjdHMvbW9ub192Mi9hcHAzL2FwcC9wYWNrYWdlcy9saWItZnJvbnRlbmQvc3JjL3JvdXRpbmcvaG9va3MvdXNlUm91dGVyL3VzZVJvdXRlci50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgeyBfdXNlUm91dGVyIGFzIHVzZVJvdXRlciB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvcm91dGluZy9ob29rcy91c2VSb3V0ZXIvX3VzZVJvdXRlcic7XG4iXSwidmVyc2lvbiI6M30=

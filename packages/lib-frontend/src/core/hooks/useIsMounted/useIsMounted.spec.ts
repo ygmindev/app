@@ -6,7 +6,9 @@ const { displayName } = withTest({ target: () => useIsMounted });
 
 describe(displayName, () => {
   test('works', async () => {
-    const { result } = renderHook(() => useIsMounted());
+    const { result, unmount } = renderHook(() => useIsMounted());
     expect(result.current).toStrictEqual(true);
+
+    unmount();
   });
 });

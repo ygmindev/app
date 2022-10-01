@@ -15,6 +15,7 @@ describe(displayName, () => {
 
     act(() => result.current.setFieldValue(VALUE_NEW));
     expect(result.current.fieldValue).toBe(VALUE_NEW);
+
     unmount();
   });
 });

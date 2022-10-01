@@ -1,1 +1,0 @@
-{"file":"/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-shared/src/core/core.constants.ts","mappings":";;;AAAa,QAAA,IAAI,GAAG,MAAM,CAAC","names":[],"sources":["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-shared/src/core/core.constants.ts"],"sourcesContent":["export const CORE = 'core';\n"],"version":3}

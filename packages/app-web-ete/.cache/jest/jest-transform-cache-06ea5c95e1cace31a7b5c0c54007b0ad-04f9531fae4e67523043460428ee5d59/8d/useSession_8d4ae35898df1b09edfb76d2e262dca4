@@ -1,7 +1,0 @@
-067a7996cde05ff7b7a68cd40e42c802
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.useSession = void 0;
-var _useSession_1 = require("@lib/frontend/auth/hooks/useSession/_useSession");
-Object.defineProperty(exports, "useSession", { enumerable: true, get: function () { return _useSession_1._useSession; } });
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy9hdXRoL2hvb2tzL3VzZVNlc3Npb24vdXNlU2Vzc2lvbi50cyIsIm1hcHBpbmdzIjoiOzs7QUFBQSwrRUFBNEY7QUFBbkYseUdBQUEsV0FBVyxPQUFjIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIi9Vc2Vycy95Z21pbi9Qcm9qZWN0cy9tb25vX3YyL2FwcDMvYXBwL3BhY2thZ2VzL2xpYi1mcm9udGVuZC9zcmMvYXV0aC9ob29rcy91c2VTZXNzaW9uL3VzZVNlc3Npb24udHMiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IHsgX3VzZVNlc3Npb24gYXMgdXNlU2Vzc2lvbiB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvYXV0aC9ob29rcy91c2VTZXNzaW9uL191c2VTZXNzaW9uJztcbiJdLCJ2ZXJzaW9uIjozfQ==

@@ -1,1 +1,0 @@
-{"version":3,"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAaA,8BAAsB,GAAtB","names":["exports"],"sources":["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Dropdown/Dropdown.constants.ts"],"sourcesContent":["export const DROPDOWN_MAX_HEIGHT = 400;\n"]}

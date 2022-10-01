@@ -1,1 +1,0 @@
-{"version":3,"names":["RCTDeviceEventEmitter"],"sources":["index.js"],"sourcesContent":["import RCTDeviceEventEmitter from '../../vendor/react-native/NativeEventEmitter/RCTDeviceEventEmitter';\nexport default RCTDeviceEventEmitter;"],"mappings":";;;;;;;AAAA;;eACeA,iC"}

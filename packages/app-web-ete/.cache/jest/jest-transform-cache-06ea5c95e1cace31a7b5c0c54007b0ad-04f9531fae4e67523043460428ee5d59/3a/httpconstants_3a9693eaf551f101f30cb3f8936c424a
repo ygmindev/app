@@ -1,7 +1,0 @@
-59afa3721d66b683cf5ded9bbfa16fb2
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.APP_URI = void 0;
-const appUri_1 = require("@lib/shared/http/utils/appUri/appUri");
-exports.APP_URI = (0, appUri_1.appUri)();
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy9odHRwL2h0dHAuY29uc3RhbnRzLnRzIiwibWFwcGluZ3MiOiI7OztBQUFBLGlFQUE4RDtBQUVqRCxRQUFBLE9BQU8sR0FBRyxJQUFBLGVBQU0sR0FBRSxDQUFDIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIi9Vc2Vycy95Z21pbi9Qcm9qZWN0cy9tb25vX3YyL2FwcDMvYXBwL3BhY2thZ2VzL2xpYi1mcm9udGVuZC9zcmMvaHR0cC9odHRwLmNvbnN0YW50cy50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBhcHBVcmkgfSBmcm9tICdAbGliL3NoYXJlZC9odHRwL3V0aWxzL2FwcFVyaS9hcHBVcmknO1xuXG5leHBvcnQgY29uc3QgQVBQX1VSSSA9IGFwcFVyaSgpO1xuIl0sInZlcnNpb24iOjN9

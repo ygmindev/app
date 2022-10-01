@@ -1,1 +1,0 @@
-{"version":3,"names":["PanResponder"],"sources":["index.js"],"sourcesContent":["import PanResponder from '../../vendor/react-native/PanResponder';\nexport default PanResponder;"],"mappings":";;;;;;;AAAA;;eACeA,wB"}

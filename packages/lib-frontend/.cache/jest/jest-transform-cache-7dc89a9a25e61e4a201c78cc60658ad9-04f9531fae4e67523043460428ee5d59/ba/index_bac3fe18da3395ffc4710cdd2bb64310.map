@@ -1,1 +1,0 @@
-{"file":"/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-config/src/jest/__mocks__/file/index.ts","mappings":";;AAAA,kBAAe,gBAAgB,CAAC","names":[],"sources":["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-config/src/jest/__mocks__/file/index.ts"],"sourcesContent":["export default 'test-file-stub';\n"],"version":3}

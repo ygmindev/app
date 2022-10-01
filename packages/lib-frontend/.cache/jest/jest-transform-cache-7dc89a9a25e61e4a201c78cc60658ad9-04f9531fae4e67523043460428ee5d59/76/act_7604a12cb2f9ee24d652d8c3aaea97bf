@@ -1,7 +1,0 @@
-5924deb31a8ea656666d68aee8e6a1bf
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.act = void 0;
-var _act_1 = require("@lib/frontend/testing/utils/act/_act");
-Object.defineProperty(exports, "act", { enumerable: true, get: function () { return _act_1._act; } });
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy90ZXN0aW5nL3V0aWxzL2FjdC9hY3QudHN4IiwibWFwcGluZ3MiOiI7OztBQUFBLDZEQUFtRTtBQUExRCwyRkFBQSxJQUFJLE9BQU8iLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy90ZXN0aW5nL3V0aWxzL2FjdC9hY3QudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCB7IF9hY3QgYXMgYWN0IH0gZnJvbSAnQGxpYi9mcm9udGVuZC90ZXN0aW5nL3V0aWxzL2FjdC9fYWN0JztcbiJdLCJ2ZXJzaW9uIjozfQ==

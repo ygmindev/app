@@ -1,6 +1,0 @@
-d2c49b21e19ea89d5f6cb4e8544b1c92
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.LOCALE = void 0;
-exports.LOCALE = 'locale';
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLXNoYXJlZC9zcmMvbG9jYWxlL2xvY2FsZS5jb25zdGFudHMudHMiLCJtYXBwaW5ncyI6Ijs7O0FBQWEsUUFBQSxNQUFNLEdBQUcsUUFBUSxDQUFDIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIi9Vc2Vycy95Z21pbi9Qcm9qZWN0cy9tb25vX3YyL2FwcDMvYXBwL3BhY2thZ2VzL2xpYi1zaGFyZWQvc3JjL2xvY2FsZS9sb2NhbGUuY29uc3RhbnRzLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBjb25zdCBMT0NBTEUgPSAnbG9jYWxlJztcbiJdLCJ2ZXJzaW9uIjozfQ==

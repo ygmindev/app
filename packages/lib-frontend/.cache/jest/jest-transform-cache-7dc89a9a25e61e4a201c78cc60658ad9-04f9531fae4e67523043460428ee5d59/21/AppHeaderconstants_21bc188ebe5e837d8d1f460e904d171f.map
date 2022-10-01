@@ -1,1 +1,0 @@
-{"file":"/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/app/containers/AppHeader/AppHeader.constants.ts","mappings":";;;AAAa,QAAA,iBAAiB,GAAG,EAAE,CAAC","names":[],"sources":["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/app/containers/AppHeader/AppHeader.constants.ts"],"sourcesContent":["export const APP_HEADER_HEIGHT = 60;\n"],"version":3}

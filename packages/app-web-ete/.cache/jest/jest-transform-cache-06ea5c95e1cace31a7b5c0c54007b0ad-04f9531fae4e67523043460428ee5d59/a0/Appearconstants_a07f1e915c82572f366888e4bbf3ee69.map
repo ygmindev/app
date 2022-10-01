@@ -1,1 +1,0 @@
-{"file":"/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Appear/Appear.constants.ts","mappings":";;;AAAa,QAAA,iBAAiB,GAAG,GAAG,CAAC","names":[],"sources":["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Appear/Appear.constants.ts"],"sourcesContent":["export const APPEAR_SCALE_FROM = 0.9;\n"],"version":3}

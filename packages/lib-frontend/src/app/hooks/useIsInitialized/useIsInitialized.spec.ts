@@ -6,6 +6,10 @@ const { displayName } = withTest({ target: () => useIsInitialized });
 
 describe(displayName, () => {
   test('works', async () => {
-    const { result } = renderHook(() => useIsInitialized());
+    const { result, unmount } = renderHook(() => useIsInitialized());
+
+    expect(1).toStrictEqual(1);
+
+    unmount();
   });
 });

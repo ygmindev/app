@@ -1,8 +1,0 @@
-71ae3d4b54430c10fa524b8c28dcb6b3
-{
-  "labels": {
-    "testingWithElements": "testing with elements: <0>{{value1}}</0> <1>{{value2}}</1>",
-    "testingWithParams": "testing with params: {{value1}} {{value2}}",
-    "testingWithString": "testing with string"
-  }
-}

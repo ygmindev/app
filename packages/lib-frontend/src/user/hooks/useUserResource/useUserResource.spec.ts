@@ -6,6 +6,8 @@ const { displayName } = withTest({ target: () => useUserResource });
 
 describe(displayName, () => {
   test('works', async () => {
-    const { result } = renderHook(() => useUserResource());
+    const { result, unmount } = renderHook(() => useUserResource());
+
+    unmount();
   });
 });

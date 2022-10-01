@@ -8,20 +8,22 @@ import type {
 } from '@lib/shared/testing/resources/DummyEntityResource/DummyEntityResource.models';
 
 describe('entityResource', () => {
-  const { result: create } = renderHook(() =>
-    useResourceMethod<
-      RESOURCE_METHOD_TYPE.CREATE,
-      DummyEntityResourceModel,
-      DummyEntityResourceFormModel
-    >({
-      fields: [{ result: ['_id'] }],
-      method: RESOURCE_METHOD_TYPE.CREATE,
-      name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
-    }),
-  );
-
   test('works', async () => {
+    const { result: create, unmount } = renderHook(() =>
+      useResourceMethod<
+        RESOURCE_METHOD_TYPE.CREATE,
+        DummyEntityResourceModel,
+        DummyEntityResourceFormModel
+      >({
+        fields: [{ result: ['_id'] }],
+        method: RESOURCE_METHOD_TYPE.CREATE,
+        name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
+      }),
+    );
+
     await create.current.query({ form: { stringProperty: 'stringProperty' } });
     expect(1).toStrictEqual(1);
+
+    unmount();
   });
 });

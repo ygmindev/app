@@ -1,7 +1,0 @@
-fc287c0c191ace559e28620f2a8e64ad
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.render = void 0;
-var _render_1 = require("@lib/frontend/testing/utils/render/_render");
-Object.defineProperty(exports, "render", { enumerable: true, get: function () { return _render_1._render; } });
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy90ZXN0aW5nL3V0aWxzL3JlbmRlci9yZW5kZXIudHN4IiwibWFwcGluZ3MiOiI7OztBQUFBLHNFQUErRTtBQUF0RSxpR0FBQSxPQUFPLE9BQVUiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy90ZXN0aW5nL3V0aWxzL3JlbmRlci9yZW5kZXIudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCB7IF9yZW5kZXIgYXMgcmVuZGVyIH0gZnJvbSAnQGxpYi9mcm9udGVuZC90ZXN0aW5nL3V0aWxzL3JlbmRlci9fcmVuZGVyJztcbiJdLCJ2ZXJzaW9uIjozfQ==

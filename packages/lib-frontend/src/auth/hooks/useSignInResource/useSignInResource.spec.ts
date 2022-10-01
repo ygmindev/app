@@ -6,6 +6,8 @@ const { displayName } = withTest({ target: () => useSignInResourceResource });
 
 describe(displayName, () => {
   test('works', async () => {
-    const { result } = renderHook(() => useSignInResourceResource());
+    const { result, unmount } = renderHook(() => useSignInResourceResource());
+
+    unmount();
   });
 });

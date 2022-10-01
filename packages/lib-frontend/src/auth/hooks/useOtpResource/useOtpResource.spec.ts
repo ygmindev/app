@@ -6,6 +6,8 @@ const { displayName } = withTest({ target: () => useOtpResource });
 
 describe(displayName, () => {
   test('works', async () => {
-    const { result } = renderHook(() => useOtpResource());
+    const { result, unmount } = renderHook(() => useOtpResource());
+
+    unmount();
   });
 });
