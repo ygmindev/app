@@ -1,0 +1,74 @@
+a9c9a39e1c15c51bf6838e376020df69
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = useLazyRef;
+
+var React = _interopRequireWildcard(require("react"));
+
+function _getRequireWildcardCache(nodeInterop) {
+  if (typeof WeakMap !== "function") return null;
+  var cacheBabelInterop = new WeakMap();
+  var cacheNodeInterop = new WeakMap();
+  return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) {
+    return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
+  })(nodeInterop);
+}
+
+function _interopRequireWildcard(obj, nodeInterop) {
+  if (!nodeInterop && obj && obj.__esModule) {
+    return obj;
+  }
+
+  if (obj === null || (0, _typeof2["default"])(obj) !== "object" && typeof obj !== "function") {
+    return {
+      "default": obj
+    };
+  }
+
+  var cache = _getRequireWildcardCache(nodeInterop);
+
+  if (cache && cache.has(obj)) {
+    return cache.get(obj);
+  }
+
+  var newObj = {};
+  var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+
+  for (var key in obj) {
+    if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
+      var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+
+      if (desc && (desc.get || desc.set)) {
+        Object.defineProperty(newObj, key, desc);
+      } else {
+        newObj[key] = obj[key];
+      }
+    }
+  }
+
+  newObj["default"] = obj;
+
+  if (cache) {
+    cache.set(obj, newObj);
+  }
+
+  return newObj;
+}
+
+function useLazyRef(callback) {
+  var lazyRef = React.useRef();
+
+  if (lazyRef.current === undefined) {
+    lazyRef.current = callback();
+  }
+
+  return lazyRef;
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7QUFBQTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUVlLFNBQVNBLFVBQVQsQ0FBdUJDLFFBQXZCLEVBQTBDO0VBQ3ZELElBQU1DLE9BQU8sR0FBR0MsS0FBSyxDQUFDQyxNQUFORCxFQUFoQjs7RUFFQSxJQUFJRCxPQUFPLENBQUNHLE9BQVJILEtBQW9CSSxTQUF4QixFQUFtQztJQUNqQ0osT0FBTyxDQUFDRyxPQUFSSCxHQUFrQkQsUUFBUSxFQUExQkM7RUFDRDs7RUFFRCxPQUFPQSxPQUFQO0FBQ0QiLCJuYW1lcyI6WyJ1c2VMYXp5UmVmIiwiY2FsbGJhY2siLCJsYXp5UmVmIiwiUmVhY3QiLCJ1c2VSZWYiLCJjdXJyZW50IiwidW5kZWZpbmVkIl0sInNvdXJjZXMiOlsidXNlTGF6eVJlZi50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0ICogYXMgUmVhY3QgZnJvbSAncmVhY3QnO1xuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiB1c2VMYXp5UmVmPFQ+KGNhbGxiYWNrOiAoKSA9PiBUKSB7XG4gIGNvbnN0IGxhenlSZWYgPSBSZWFjdC51c2VSZWY8VCB8IHVuZGVmaW5lZD4oKTtcblxuICBpZiAobGF6eVJlZi5jdXJyZW50ID09PSB1bmRlZmluZWQpIHtcbiAgICBsYXp5UmVmLmN1cnJlbnQgPSBjYWxsYmFjaygpO1xuICB9XG5cbiAgcmV0dXJuIGxhenlSZWYgYXMgUmVhY3QuTXV0YWJsZVJlZk9iamVjdDxUPjtcbn1cbiJdfQ==

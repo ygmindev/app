@@ -1,0 +1,154 @@
+ccb38d865e0ea006250974cfc0d4358e
+"use strict";
+
+/* istanbul ignore next */
+function cov_p7wf1v0um() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/locale/providers/LocaleProvider/LocaleProvider.tsx";
+  var hash = "97da4956e9fe5a273c9cfe93b7134c292a7c9774";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/locale/providers/LocaleProvider/LocaleProvider.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 32
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 24
+        },
+        end: {
+          line: 4,
+          column: 96
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 0
+        },
+        end: {
+          line: 5,
+          column: 135
+        }
+      },
+      "4": {
+        start: {
+          line: 5,
+          column: 88
+        },
+        end: {
+          line: 5,
+          column: 129
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 5,
+            column: 74
+          },
+          end: {
+            line: 5,
+            column: 75
+          }
+        },
+        loc: {
+          start: {
+            line: 5,
+            column: 86
+          },
+          end: {
+            line: 5,
+            column: 131
+          }
+        },
+        line: 5
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/locale/providers/LocaleProvider/LocaleProvider.tsx",
+      mappings: ";;;AAAA,iGAAkH;AAAzG,iHAAA,eAAe,OAAkB",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/locale/providers/LocaleProvider/LocaleProvider.tsx"],
+      sourcesContent: ["export { _LocaleProvider as LocaleProvider } from '@lib/frontend/locale/providers/LocaleProvider/_LocaleProvider';\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "97da4956e9fe5a273c9cfe93b7134c292a7c9774"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_p7wf1v0um = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_p7wf1v0um();
+cov_p7wf1v0um().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_p7wf1v0um().s[1]++;
+exports.LocaleProvider = void 0;
+
+var _LocaleProvider_1 =
+/* istanbul ignore next */
+(cov_p7wf1v0um().s[2]++, require("@lib/frontend/locale/providers/LocaleProvider/_LocaleProvider"));
+
+/* istanbul ignore next */
+cov_p7wf1v0um().s[3]++;
+Object.defineProperty(exports, "LocaleProvider", {
+  enumerable: true,
+  get: function () {
+    /* istanbul ignore next */
+    cov_p7wf1v0um().f[0]++;
+    cov_p7wf1v0um().s[4]++;
+    return _LocaleProvider_1._LocaleProvider;
+  }
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQTtBQUFBO0FBQUE7Ozs7QUFBU0E7RUFBQUM7RUFBQUM7SUFBQTtJQUFBO0lBQUE7SUFBQTtFQUFlO0FBQWYiLCJuYW1lcyI6WyJPYmplY3QiLCJlbnVtZXJhYmxlIiwiZ2V0Il0sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy9sb2NhbGUvcHJvdmlkZXJzL0xvY2FsZVByb3ZpZGVyL0xvY2FsZVByb3ZpZGVyLnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgeyBfTG9jYWxlUHJvdmlkZXIgYXMgTG9jYWxlUHJvdmlkZXIgfSBmcm9tICdAbGliL2Zyb250ZW5kL2xvY2FsZS9wcm92aWRlcnMvTG9jYWxlUHJvdmlkZXIvX0xvY2FsZVByb3ZpZGVyJztcbiJdfQ==

@@ -1,0 +1,13 @@
+0c288dad84698c9033f2be254b98d6d9
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _VirtualizedList = _interopRequireDefault(require("../../vendor/react-native/VirtualizedList"));
+
+var _default = _VirtualizedList["default"];
+exports["default"] = _default;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJWaXJ0dWFsaXplZExpc3QiXSwic291cmNlcyI6WyJpbmRleC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIENvcHlyaWdodCAoYykgTWV0YSBQbGF0Zm9ybXMsIEluYy4gYW5kIGFmZmlsaWF0ZXMuXG4gKlxuICogVGhpcyBzb3VyY2UgY29kZSBpcyBsaWNlbnNlZCB1bmRlciB0aGUgTUlUIGxpY2Vuc2UgZm91bmQgaW4gdGhlXG4gKiBMSUNFTlNFIGZpbGUgaW4gdGhlIHJvb3QgZGlyZWN0b3J5IG9mIHRoaXMgc291cmNlIHRyZWUuXG4gKlxuICogXG4gKi9cbmltcG9ydCBWaXJ0dWFsaXplZExpc3QgZnJvbSAnLi4vLi4vdmVuZG9yL3JlYWN0LW5hdGl2ZS9WaXJ0dWFsaXplZExpc3QnO1xuZXhwb3J0IGRlZmF1bHQgVmlydHVhbGl6ZWRMaXN0OyJdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQVFBOztlQUNlQSwyQiJ9

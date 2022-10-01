@@ -1,0 +1,11 @@
+a2ffbc5ca3f8eab6e5a9197733bd9b79
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NetworkError = void 0;
+class NetworkError extends Error {
+    constructor() {
+        super('Network Error');
+    }
+}
+exports.NetworkError = NetworkError;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLXNoYXJlZC9zcmMvY29yZS9lcnJvcnMvTmV0d29ya0Vycm9yL05ldHdvcmtFcnJvci50cyIsIm1hcHBpbmdzIjoiOzs7QUFBQSxNQUFhLFlBQWEsU0FBUSxLQUFLO0lBQ3JDO1FBQ0UsS0FBSyxDQUFDLGVBQWUsQ0FBQyxDQUFDO0lBQ3pCLENBQUM7Q0FDRjtBQUpELG9DQUlDIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIi9Vc2Vycy95Z21pbi9Qcm9qZWN0cy9tb25vX3YyL2FwcDMvYXBwL3BhY2thZ2VzL2xpYi1zaGFyZWQvc3JjL2NvcmUvZXJyb3JzL05ldHdvcmtFcnJvci9OZXR3b3JrRXJyb3IudHMiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGNsYXNzIE5ldHdvcmtFcnJvciBleHRlbmRzIEVycm9yIHtcbiAgY29uc3RydWN0b3IoKSB7XG4gICAgc3VwZXIoJ05ldHdvcmsgRXJyb3InKTtcbiAgfVxufVxuIl0sInZlcnNpb24iOjN9

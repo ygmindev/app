@@ -1,0 +1,11 @@
+aec58dde2a547c98d1e196dba7d28745
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.InvalidTypeError = void 0;
+class InvalidTypeError extends Error {
+    constructor(actual, expected) {
+        super(`input type: ${typeof actual} (actual) vs ${expected} (expected)`);
+    }
+}
+exports.InvalidTypeError = InvalidTypeError;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLXNoYXJlZC9zcmMvY29yZS9lcnJvcnMvSW52YWxpZFR5cGVFcnJvci9JbnZhbGlkVHlwZUVycm9yLnRzIiwibWFwcGluZ3MiOiI7OztBQUFBLE1BQWEsZ0JBQWlCLFNBQVEsS0FBSztJQUN6QyxZQUFZLE1BQWUsRUFBRSxRQUFpQjtRQUM1QyxLQUFLLENBQUMsZUFBZSxPQUFPLE1BQU0sZ0JBQWdCLFFBQVEsYUFBYSxDQUFDLENBQUM7SUFDM0UsQ0FBQztDQUNGO0FBSkQsNENBSUMiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLXNoYXJlZC9zcmMvY29yZS9lcnJvcnMvSW52YWxpZFR5cGVFcnJvci9JbnZhbGlkVHlwZUVycm9yLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBjbGFzcyBJbnZhbGlkVHlwZUVycm9yIGV4dGVuZHMgRXJyb3Ige1xuICBjb25zdHJ1Y3RvcihhY3R1YWw6IHVua25vd24sIGV4cGVjdGVkOiB1bmtub3duKSB7XG4gICAgc3VwZXIoYGlucHV0IHR5cGU6ICR7dHlwZW9mIGFjdHVhbH0gKGFjdHVhbCkgdnMgJHtleHBlY3RlZH0gKGV4cGVjdGVkKWApO1xuICB9XG59XG4iXSwidmVyc2lvbiI6M30=

@@ -1,0 +1,404 @@
+b9981015ea49fdb0401d31b189b57fa6
+"use strict";
+
+/* istanbul ignore next */
+function cov_9qrgsoxzi() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/http/hooks/useHttp/useHttp.ts";
+  var hash = "22bb3da845d2541ecb74e84059cdf43daf27614d";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/http/hooks/useHttp/useHttp.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 25
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 19
+        },
+        end: {
+          line: 4,
+          column: 80
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 33
+        },
+        end: {
+          line: 5,
+          column: 93
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 23
+        },
+        end: {
+          line: 6,
+          column: 83
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 22
+        },
+        end: {
+          line: 7,
+          column: 79
+        }
+      },
+      "6": {
+        start: {
+          line: 8,
+          column: 16
+        },
+        end: {
+          line: 19,
+          column: 1
+        }
+      },
+      "7": {
+        start: {
+          line: 9,
+          column: 25
+        },
+        end: {
+          line: 9,
+          column: 51
+        }
+      },
+      "8": {
+        start: {
+          line: 10,
+          column: 4
+        },
+        end: {
+          line: 18,
+          column: 7
+        }
+      },
+      "9": {
+        start: {
+          line: 13,
+          column: 12
+        },
+        end: {
+          line: 15,
+          column: 58
+        }
+      },
+      "10": {
+        start: {
+          line: 16,
+          column: 12
+        },
+        end: {
+          line: 16,
+          column: 41
+        }
+      },
+      "11": {
+        start: {
+          line: 20,
+          column: 0
+        },
+        end: {
+          line: 20,
+          column: 26
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 8,
+            column: 16
+          },
+          end: {
+            line: 8,
+            column: 17
+          }
+        },
+        loc: {
+          start: {
+            line: 8,
+            column: 44
+          },
+          end: {
+            line: 19,
+            column: 1
+          }
+        },
+        line: 8
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 12,
+            column: 17
+          },
+          end: {
+            line: 12,
+            column: 18
+          }
+        },
+        loc: {
+          start: {
+            line: 12,
+            column: 30
+          },
+          end: {
+            line: 17,
+            column: 9
+          }
+        },
+        line: 12
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 13,
+            column: 21
+          },
+          end: {
+            line: 15,
+            column: 56
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 14,
+            column: 18
+          },
+          end: {
+            line: 14,
+            column: 56
+          }
+        }, {
+          start: {
+            line: 15,
+            column: 18
+          },
+          end: {
+            line: 15,
+            column: 56
+          }
+        }],
+        line: 13
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 13,
+            column: 21
+          },
+          end: {
+            line: 13,
+            column: 109
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 13,
+            column: 21
+          },
+          end: {
+            line: 13,
+            column: 65
+          }
+        }, {
+          start: {
+            line: 13,
+            column: 69
+          },
+          end: {
+            line: 13,
+            column: 109
+          }
+        }],
+        line: 13
+      },
+      "2": {
+        loc: {
+          start: {
+            line: 16,
+            column: 19
+          },
+          end: {
+            line: 16,
+            column: 40
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 16,
+            column: 19
+          },
+          end: {
+            line: 16,
+            column: 26
+          }
+        }, {
+          start: {
+            line: 16,
+            column: 30
+          },
+          end: {
+            line: 16,
+            column: 40
+          }
+        }],
+        line: 16
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0],
+      "2": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/http/hooks/useHttp/useHttp.ts",
+      mappings: ";;;AACA,iFAA8E;AAC9E,8FAAiG;AACjG,oFAAiF;AACjF,gFAA6E;AAEtE,MAAM,OAAO,GAAiB,CAAC,EAAE,OAAO,EAAE,GAAG,MAAM,EAAE,EAAE,EAAE;IAC9D,MAAM,EAAE,QAAQ,EAAE,GAAG,IAAA,mBAAQ,GAAE,CAAC;IAChC,OAAO,IAAI,yBAAW,CAAC;QACrB,GAAG,MAAM;QAET,OAAO,EAAE,KAAK,EAAE,CAAC,EAAE,EAAE;YACnB,QAAQ,CACN,CAAC,eAAe,EAAE,KAAK,CAAC,CAAC,QAAQ,CAAC,CAAC,CAAC,OAAO,CAAC,IAAI,CAAC,YAAY,2BAAY;gBACvE,CAAC,CAAC,sCAAa;gBACf,CAAC,CAAC,sCAAa,CAClB,CAAC;YACF,OAAO,OAAO,IAAI,OAAO,CAAC,CAAC,CAAC,CAAC;QAC/B,CAAC;KACF,CAAC,CAAC;AACL,CAAC,CAAC;AAdW,QAAA,OAAO,WAclB",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/http/hooks/useHttp/useHttp.ts"],
+      sourcesContent: ["import type { UseHttpModel } from '@lib/frontend/http/hooks/useHttp/useHttp.models';\nimport { useAlert } from '@lib/frontend/notification/hooks/useAlert/useAlert';\nimport { NETWORK_ALERT, UNKNOWN_ALERT } from '@lib/frontend/notification/notification.constants';\nimport { NetworkError } from '@lib/shared/core/errors/NetworkError/NetworkError';\nimport { HttpService } from '@lib/shared/http/utils/HttpService/HttpService';\n\nexport const useHttp: UseHttpModel = ({ onError, ...params }) => {\n  const { alertAdd } = useAlert();\n  return new HttpService({\n    ...params,\n\n    onError: async (e) => {\n      alertAdd(\n        ['Network Error', '503'].includes(e.message) || e instanceof NetworkError\n          ? NETWORK_ALERT\n          : UNKNOWN_ALERT,\n      );\n      return onError && onError(e);\n    },\n  });\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "22bb3da845d2541ecb74e84059cdf43daf27614d"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_9qrgsoxzi = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_9qrgsoxzi();
+cov_9qrgsoxzi().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_9qrgsoxzi().s[1]++;
+exports.useHttp = void 0;
+const useAlert_1 =
+/* istanbul ignore next */
+(cov_9qrgsoxzi().s[2]++, require("@lib/frontend/notification/hooks/useAlert/useAlert"));
+const notification_constants_1 =
+/* istanbul ignore next */
+(cov_9qrgsoxzi().s[3]++, require("@lib/frontend/notification/notification.constants"));
+const NetworkError_1 =
+/* istanbul ignore next */
+(cov_9qrgsoxzi().s[4]++, require("@lib/shared/core/errors/NetworkError/NetworkError"));
+const HttpService_1 =
+/* istanbul ignore next */
+(cov_9qrgsoxzi().s[5]++, require("@lib/shared/http/utils/HttpService/HttpService"));
+
+/* istanbul ignore next */
+cov_9qrgsoxzi().s[6]++;
+
+const useHttp = ({
+  onError,
+  ...params
+}) => {
+  /* istanbul ignore next */
+  cov_9qrgsoxzi().f[0]++;
+  const {
+    alertAdd
+  } =
+  /* istanbul ignore next */
+  (cov_9qrgsoxzi().s[7]++, (0, useAlert_1.useAlert)());
+
+  /* istanbul ignore next */
+  cov_9qrgsoxzi().s[8]++;
+  return new HttpService_1.HttpService({ ...params,
+    onError: async (e) => {
+      /* istanbul ignore next */
+      cov_9qrgsoxzi().f[1]++;
+      cov_9qrgsoxzi().s[9]++;
+      alertAdd(
+      /* istanbul ignore next */
+      (cov_9qrgsoxzi().b[1][0]++, ['Network Error', '503'].includes(e.message)) ||
+      /* istanbul ignore next */
+      (cov_9qrgsoxzi().b[1][1]++, e instanceof NetworkError_1.NetworkError) ?
+      /* istanbul ignore next */
+      (cov_9qrgsoxzi().b[0][0]++, notification_constants_1.NETWORK_ALERT) :
+      /* istanbul ignore next */
+      (cov_9qrgsoxzi().b[0][1]++, notification_constants_1.UNKNOWN_ALERT));
+
+      /* istanbul ignore next */
+      cov_9qrgsoxzi().s[10]++;
+      return (
+        /* istanbul ignore next */
+        (cov_9qrgsoxzi().b[2][0]++, onError) &&
+        /* istanbul ignore next */
+        (cov_9qrgsoxzi().b[2][1]++, onError(e))
+      );
+    }
+  });
+};
+
+/* istanbul ignore next */
+cov_9qrgsoxzi().s[11]++;
+exports.useHttp = useHttp;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQWlCTTs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFoQk47QUFBQTtBQUFBO0FBQ0E7QUFBQTtBQUFBO0FBQ0E7QUFBQTtBQUFBO0FBQ0E7QUFBQTtBQUFBOzs7OztBQUVPLE1BQU1BLE9BQU8sR0FBaUIsQ0FBQztFQUFFQyxPQUFGO0VBQVcsR0FBR0M7QUFBZCxDQUFELEtBQTJCO0VBQUE7RUFBQTtFQUM5RCxNQUFNO0lBQUVDO0VBQUY7RUFBQTtFQUFBLHlCQUFlLDBCQUFmLENBQU47O0VBRDhEO0VBQUE7RUFFOUQsT0FBTyxJQUFJQyx5QkFBSixDQUFnQixFQUNyQixHQUFHRixNQURrQjtJQUdyQkQsT0FBTyxFQUFFLE9BQU9JLENBQVAsS0FBWTtNQUFBO01BQUE7TUFBQTtNQUNuQkYsUUFBUTtNQUNOO01BQUEsNkJBQUMsZUFBRCxFQUFrQixLQUFsQixFQUF5QkcsUUFBekIsQ0FBa0NELENBQUMsQ0FBQ0UsT0FBcEM7TUFBQTtNQUFBLDRCQUFnREYsQ0FBQyxZQUFZRywyQkFBN0Q7TUFBQTtNQUFBLDRCQUNJQyxzQ0FESjtNQUFBO01BQUEsNEJBRUlBLHNDQUZKLENBRE0sQ0FBUjs7TUFEbUI7TUFBQTtNQU1uQixPQUFPO1FBQUE7UUFBQSxtQ0FBTztRQUFBO1FBQUEsNEJBQUlSLE9BQU8sQ0FBQ0ksQ0FBRCxDQUFYO01BQWQ7SUFDRDtFQVZvQixDQUFoQixDQUFQO0FBWUQsQ0FkTTs7OztBQUFNSyxrQkFBT1YsT0FBUCIsIm5hbWVzIjpbInVzZUh0dHAiLCJvbkVycm9yIiwicGFyYW1zIiwiYWxlcnRBZGQiLCJIdHRwU2VydmljZV8xIiwiZSIsImluY2x1ZGVzIiwibWVzc2FnZSIsIk5ldHdvcmtFcnJvcl8xIiwibm90aWZpY2F0aW9uX2NvbnN0YW50c18xIiwiZXhwb3J0cyJdLCJzb3VyY2VzIjpbIi9Vc2Vycy95Z21pbi9Qcm9qZWN0cy9tb25vX3YyL2FwcDMvYXBwL3BhY2thZ2VzL2xpYi1mcm9udGVuZC9zcmMvaHR0cC9ob29rcy91c2VIdHRwL3VzZUh0dHAudHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHR5cGUgeyBVc2VIdHRwTW9kZWwgfSBmcm9tICdAbGliL2Zyb250ZW5kL2h0dHAvaG9va3MvdXNlSHR0cC91c2VIdHRwLm1vZGVscyc7XG5pbXBvcnQgeyB1c2VBbGVydCB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvbm90aWZpY2F0aW9uL2hvb2tzL3VzZUFsZXJ0L3VzZUFsZXJ0JztcbmltcG9ydCB7IE5FVFdPUktfQUxFUlQsIFVOS05PV05fQUxFUlQgfSBmcm9tICdAbGliL2Zyb250ZW5kL25vdGlmaWNhdGlvbi9ub3RpZmljYXRpb24uY29uc3RhbnRzJztcbmltcG9ydCB7IE5ldHdvcmtFcnJvciB9IGZyb20gJ0BsaWIvc2hhcmVkL2NvcmUvZXJyb3JzL05ldHdvcmtFcnJvci9OZXR3b3JrRXJyb3InO1xuaW1wb3J0IHsgSHR0cFNlcnZpY2UgfSBmcm9tICdAbGliL3NoYXJlZC9odHRwL3V0aWxzL0h0dHBTZXJ2aWNlL0h0dHBTZXJ2aWNlJztcblxuZXhwb3J0IGNvbnN0IHVzZUh0dHA6IFVzZUh0dHBNb2RlbCA9ICh7IG9uRXJyb3IsIC4uLnBhcmFtcyB9KSA9PiB7XG4gIGNvbnN0IHsgYWxlcnRBZGQgfSA9IHVzZUFsZXJ0KCk7XG4gIHJldHVybiBuZXcgSHR0cFNlcnZpY2Uoe1xuICAgIC4uLnBhcmFtcyxcblxuICAgIG9uRXJyb3I6IGFzeW5jIChlKSA9PiB7XG4gICAgICBhbGVydEFkZChcbiAgICAgICAgWydOZXR3b3JrIEVycm9yJywgJzUwMyddLmluY2x1ZGVzKGUubWVzc2FnZSkgfHwgZSBpbnN0YW5jZW9mIE5ldHdvcmtFcnJvclxuICAgICAgICAgID8gTkVUV09SS19BTEVSVFxuICAgICAgICAgIDogVU5LTk9XTl9BTEVSVCxcbiAgICAgICk7XG4gICAgICByZXR1cm4gb25FcnJvciAmJiBvbkVycm9yKGUpO1xuICAgIH0sXG4gIH0pO1xufTtcbiJdfQ==

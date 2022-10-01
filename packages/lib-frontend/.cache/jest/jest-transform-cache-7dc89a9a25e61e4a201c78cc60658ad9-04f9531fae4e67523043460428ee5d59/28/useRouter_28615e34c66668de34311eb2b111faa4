@@ -1,0 +1,154 @@
+3b238cf615dd451e20cb7621ecd8b86b
+"use strict";
+
+/* istanbul ignore next */
+function cov_1frzvw8u2a() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/routing/hooks/useRouter/useRouter.ts";
+  var hash = "056ad9acbc2f5029635aaa137c6bec307b91bb94";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/routing/hooks/useRouter/useRouter.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 27
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 19
+        },
+        end: {
+          line: 4,
+          column: 78
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 0
+        },
+        end: {
+          line: 5,
+          column: 120
+        }
+      },
+      "4": {
+        start: {
+          line: 5,
+          column: 83
+        },
+        end: {
+          line: 5,
+          column: 114
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 5,
+            column: 69
+          },
+          end: {
+            line: 5,
+            column: 70
+          }
+        },
+        loc: {
+          start: {
+            line: 5,
+            column: 81
+          },
+          end: {
+            line: 5,
+            column: 116
+          }
+        },
+        line: 5
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/routing/hooks/useRouter/useRouter.ts",
+      mappings: ";;;AAAA,+EAA2F;AAAlF,uGAAA,UAAU,OAAa",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/routing/hooks/useRouter/useRouter.ts"],
+      sourcesContent: ["export { _useRouter as useRouter } from '@lib/frontend/routing/hooks/useRouter/_useRouter';\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "056ad9acbc2f5029635aaa137c6bec307b91bb94"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_1frzvw8u2a = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_1frzvw8u2a();
+cov_1frzvw8u2a().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_1frzvw8u2a().s[1]++;
+exports.useRouter = void 0;
+
+var _useRouter_1 =
+/* istanbul ignore next */
+(cov_1frzvw8u2a().s[2]++, require("@lib/frontend/routing/hooks/useRouter/_useRouter"));
+
+/* istanbul ignore next */
+cov_1frzvw8u2a().s[3]++;
+Object.defineProperty(exports, "useRouter", {
+  enumerable: true,
+  get: function () {
+    /* istanbul ignore next */
+    cov_1frzvw8u2a().f[0]++;
+    cov_1frzvw8u2a().s[4]++;
+    return _useRouter_1._useRouter;
+  }
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQTtBQUFBO0FBQUE7Ozs7QUFBU0E7RUFBQUM7RUFBQUM7SUFBQTtJQUFBO0lBQUE7SUFBQTtFQUFVO0FBQVYiLCJuYW1lcyI6WyJPYmplY3QiLCJlbnVtZXJhYmxlIiwiZ2V0Il0sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy9yb3V0aW5nL2hvb2tzL3VzZVJvdXRlci91c2VSb3V0ZXIudHMiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IHsgX3VzZVJvdXRlciBhcyB1c2VSb3V0ZXIgfSBmcm9tICdAbGliL2Zyb250ZW5kL3JvdXRpbmcvaG9va3MvdXNlUm91dGVyL191c2VSb3V0ZXInO1xuIl19

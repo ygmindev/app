@@ -1,0 +1,7 @@
+1160d48b0e57e5c1edce2e82b6b57977
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.trimDeep = void 0;
+const trimDeep = (value) => value.replace(/(?:\n(?:\s*))+|\s\s+/g, ' ').trim();
+exports.trimDeep = trimDeep;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLXNoYXJlZC9zcmMvY29yZS91dGlscy90cmltRGVlcC90cmltRGVlcC50cyIsIm1hcHBpbmdzIjoiOzs7QUFBTyxNQUFNLFFBQVEsR0FBRyxDQUFDLEtBQWEsRUFBVSxFQUFFLENBQ2hELEtBQUssQ0FBQyxPQUFPLENBQUMsdUJBQXVCLEVBQUUsR0FBRyxDQUFDLENBQUMsSUFBSSxFQUFFLENBQUM7QUFEeEMsUUFBQSxRQUFRLFlBQ2dDIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIi9Vc2Vycy95Z21pbi9Qcm9qZWN0cy9tb25vX3YyL2FwcDMvYXBwL3BhY2thZ2VzL2xpYi1zaGFyZWQvc3JjL2NvcmUvdXRpbHMvdHJpbURlZXAvdHJpbURlZXAudHMiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGNvbnN0IHRyaW1EZWVwID0gKHZhbHVlOiBzdHJpbmcpOiBzdHJpbmcgPT5cbiAgdmFsdWUucmVwbGFjZSgvKD86XFxuKD86XFxzKikpK3xcXHNcXHMrL2csICcgJykudHJpbSgpO1xuIl0sInZlcnNpb24iOjN9

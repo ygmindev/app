@@ -1,0 +1,22 @@
+4fa082faf8781e20db7876e1c5d488bf
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getImageSourceSync = exports.getImageSource = exports["default"] = exports.Button = void 0;
+
+var _createIconSet = _interopRequireDefault(require("./lib/create-icon-set"));
+
+var _FontAwesome = _interopRequireDefault(require("./glyphmaps/FontAwesome.json"));
+
+var iconSet = (0, _createIconSet["default"])(_FontAwesome["default"], 'FontAwesome', 'FontAwesome.ttf');
+var _default = iconSet;
+exports["default"] = _default;
+var Button = iconSet.Button,
+    getImageSource = iconSet.getImageSource,
+    getImageSourceSync = iconSet.getImageSourceSync;
+exports.getImageSourceSync = getImageSourceSync;
+exports.getImageSource = getImageSource;
+exports.Button = Button;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJpY29uU2V0IiwiY3JlYXRlSWNvblNldCIsImdseXBoTWFwIiwiQnV0dG9uIiwiZ2V0SW1hZ2VTb3VyY2UiLCJnZXRJbWFnZVNvdXJjZVN5bmMiXSwic291cmNlcyI6WyJGb250QXdlc29tZS5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIEZvbnRBd2Vzb21lIGljb24gc2V0IGNvbXBvbmVudC5cbiAqIFVzYWdlOiA8Rm9udEF3ZXNvbWUgbmFtZT1cImljb24tbmFtZVwiIHNpemU9ezIwfSBjb2xvcj1cIiM0RjhFRjdcIiAvPlxuICovXG5cbmltcG9ydCBjcmVhdGVJY29uU2V0IGZyb20gJy4vbGliL2NyZWF0ZS1pY29uLXNldCc7XG5pbXBvcnQgZ2x5cGhNYXAgZnJvbSAnLi9nbHlwaG1hcHMvRm9udEF3ZXNvbWUuanNvbic7XG5cbmNvbnN0IGljb25TZXQgPSBjcmVhdGVJY29uU2V0KGdseXBoTWFwLCAnRm9udEF3ZXNvbWUnLCAnRm9udEF3ZXNvbWUudHRmJyk7XG5cbmV4cG9ydCBkZWZhdWx0IGljb25TZXQ7XG5leHBvcnQgY29uc3Qge1xuICBCdXR0b24sXG4gIGdldEltYWdlU291cmNlLFxuICBnZXRJbWFnZVNvdXJjZVN5bmMsXG59ID0gaWNvblNldDtcbiJdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUtBOztBQUNBOztBQUVBLElBQU1BLE9BQU8sR0FBRyxJQUFBQyx5QkFBQSxFQUFjQyx1QkFBZCxFQUF3QixhQUF4QixFQUF1QyxpQkFBdkMsQ0FBaEI7ZUFFZUYsTzs7QUFDUixJQUNMRyxNQURLLEdBSUhILE9BSkcsQ0FDTEcsTUFESztBQUFBLElBRUxDLGNBRkssR0FJSEosT0FKRyxDQUVMSSxjQUZLO0FBQUEsSUFHTEMsa0JBSEssR0FJSEwsT0FKRyxDQUdMSyxrQkFISyJ9

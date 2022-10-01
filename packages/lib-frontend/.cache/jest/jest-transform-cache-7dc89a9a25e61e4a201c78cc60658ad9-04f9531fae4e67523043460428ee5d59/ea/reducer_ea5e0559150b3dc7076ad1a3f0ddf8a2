@@ -1,0 +1,339 @@
+b97bd83ac5602a037072adb367395b83
+"use strict";
+
+/* istanbul ignore next */
+function cov_dd4mnkoxh() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/notification/stores/reducer/reducer.ts";
+  var hash = "4a6fdc51b894cb8f80843db45e4ab3a404574cef";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/notification/stores/reducer/reducer.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 4,
+          column: 0
+        },
+        end: {
+          line: 4,
+          column: 67
+        }
+      },
+      "2": {
+        start: {
+          line: 5,
+          column: 28
+        },
+        end: {
+          line: 5,
+          column: 98
+        }
+      },
+      "3": {
+        start: {
+          line: 6,
+          column: 14
+        },
+        end: {
+          line: 6,
+          column: 55
+        }
+      },
+      "4": {
+        start: {
+          line: 7,
+          column: 33
+        },
+        end: {
+          line: 7,
+          column: 91
+        }
+      },
+      "5": {
+        start: {
+          line: 8,
+          column: 18
+        },
+        end: {
+          line: 8,
+          column: 45
+        }
+      },
+      "6": {
+        start: {
+          line: 9,
+          column: 0
+        },
+        end: {
+          line: 25,
+          column: 87
+        }
+      },
+      "7": {
+        start: {
+          line: 14,
+          column: 35
+        },
+        end: {
+          line: 16,
+          column: 13
+        }
+      },
+      "8": {
+        start: {
+          line: 18,
+          column: 16
+        },
+        end: {
+          line: 18,
+          column: 46
+        }
+      },
+      "9": {
+        start: {
+          line: 22,
+          column: 12
+        },
+        end: {
+          line: 22,
+          column: 75
+        }
+      },
+      "10": {
+        start: {
+          line: 22,
+          column: 59
+        },
+        end: {
+          line: 22,
+          column: 73
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 14,
+            column: 21
+          },
+          end: {
+            line: 14,
+            column: 22
+          }
+        },
+        loc: {
+          start: {
+            line: 14,
+            column: 35
+          },
+          end: {
+            line: 16,
+            column: 13
+          }
+        },
+        line: 14
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 17,
+            column: 21
+          },
+          end: {
+            line: 17,
+            column: 22
+          }
+        },
+        loc: {
+          start: {
+            line: 17,
+            column: 45
+          },
+          end: {
+            line: 19,
+            column: 13
+          }
+        },
+        line: 17
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 21,
+            column: 21
+          },
+          end: {
+            line: 21,
+            column: 22
+          }
+        },
+        loc: {
+          start: {
+            line: 21,
+            column: 45
+          },
+          end: {
+            line: 23,
+            column: 9
+          }
+        },
+        line: 21
+      },
+      "3": {
+        name: "(anonymous_3)",
+        decl: {
+          start: {
+            line: 22,
+            column: 47
+          },
+          end: {
+            line: 22,
+            column: 48
+          }
+        },
+        loc: {
+          start: {
+            line: 22,
+            column: 59
+          },
+          end: {
+            line: 22,
+            column: 73
+          }
+        },
+        line: 22
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/notification/stores/reducer/reducer.ts",
+      mappings: ";;;;AACA,mGAAyG;AACzG,wDAAqD;AACrD,4FAA+E;AAE/E,8CAA+C;AAIlC,KAAiE,IAAA,qBAAW,EAGvF;IACA,YAAY,EAAE,8CAA0B;IACxC,IAAI,EAAE,qCAAY;IAClB,QAAQ,EAAE;QACR,QAAQ,EAAE;YACR,OAAO,EAAE,CAAC,OAA+B,EAAE,EAAE,CAAC,CAAC;gBAC7C,OAAO,EAAE,EAAE,GAAG,OAAO,EAAE,EAAE,EAAE,IAAA,SAAG,EAAC,OAAO,CAAC,EAAE;aAC1C,CAAC;YACF,OAAO,EAAE,CAAC,KAAK,EAAE,EAAE,OAAO,EAA6B,EAAE,EAAE;gBACzD,KAAK,CAAC,MAAM,CAAC,OAAO,CAAC,OAAO,CAAC,CAAC;YAChC,CAAC;SACF;QACD,WAAW,EAAE,CAAC,KAAK,EAAE,EAAE,OAAO,EAAyB,EAAE,EAAE;YACzD,KAAK,CAAC,MAAM,GAAG,KAAK,CAAC,MAAM,CAAC,MAAM,CAAC,CAAC,EAAE,EAAE,EAAE,EAAE,EAAE,CAAC,EAAE,KAAK,OAAO,CAAC,CAAC;QACjE,CAAC;KACF;CACF,CAAC,EAnBsB,2BAAmB,eAAW,2BAAmB,cAmBtE",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/notification/stores/reducer/reducer.ts"],
+      sourcesContent: ["import type { AlertModel } from '@lib/frontend/notification/components/Alert/Alert.models';\nimport { NOTIFICATION_STATE_INITIAL } from '@lib/frontend/notification/stores/reducer/reducer.constants';\nimport { uid } from '@lib/shared/core/utils/uid/uid';\nimport { NOTIFICATION } from '@lib/shared/notification/notification.constants';\nimport type { PayloadAction, SliceCaseReducers } from '@reduxjs/toolkit';\nimport { createSlice } from '@reduxjs/toolkit';\n\nimport type { NotificationStateModel } from './reducer.models';\n\nexport const { actions: notificationActions, reducer: notificationReducer } = createSlice<\n  NotificationStateModel,\n  SliceCaseReducers<NotificationStateModel>\n>({\n  initialState: NOTIFICATION_STATE_INITIAL,\n  name: NOTIFICATION,\n  reducers: {\n    alertAdd: {\n      prepare: (payload: Omit<AlertModel, 'id'>) => ({\n        payload: { ...payload, id: uid('alert') },\n      }),\n      reducer: (state, { payload }: PayloadAction<AlertModel>) => {\n        state.alerts.unshift(payload);\n      },\n    },\n    alertRemove: (state, { payload }: PayloadAction<string>) => {\n      state.alerts = state.alerts.filter(({ id }) => id !== payload);\n    },\n  },\n});\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "4a6fdc51b894cb8f80843db45e4ab3a404574cef"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_dd4mnkoxh = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_dd4mnkoxh();
+
+var _a;
+
+/* istanbul ignore next */
+cov_dd4mnkoxh().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_dd4mnkoxh().s[1]++;
+exports.notificationReducer = exports.notificationActions = void 0;
+const reducer_constants_1 =
+/* istanbul ignore next */
+(cov_dd4mnkoxh().s[2]++, require("@lib/frontend/notification/stores/reducer/reducer.constants"));
+const uid_1 =
+/* istanbul ignore next */
+(cov_dd4mnkoxh().s[3]++, require("@lib/shared/core/utils/uid/uid"));
+const notification_constants_1 =
+/* istanbul ignore next */
+(cov_dd4mnkoxh().s[4]++, require("@lib/shared/notification/notification.constants"));
+const toolkit_1 =
+/* istanbul ignore next */
+(cov_dd4mnkoxh().s[5]++, require("@reduxjs/toolkit"));
+
+/* istanbul ignore next */
+cov_dd4mnkoxh().s[6]++;
+_a = (0, toolkit_1.createSlice)({
+  initialState: reducer_constants_1.NOTIFICATION_STATE_INITIAL,
+  name: notification_constants_1.NOTIFICATION,
+  reducers: {
+    alertAdd: {
+      prepare: (payload) => {
+        /* istanbul ignore next */
+        cov_dd4mnkoxh().f[0]++;
+        cov_dd4mnkoxh().s[7]++;
+        return {
+          payload: { ...payload,
+            id: (0, uid_1.uid)('alert')
+          }
+        };
+      },
+      reducer: (state, {
+        payload
+      }) => {
+        /* istanbul ignore next */
+        cov_dd4mnkoxh().f[1]++;
+        cov_dd4mnkoxh().s[8]++;
+        state.alerts.unshift(payload);
+      }
+    },
+    alertRemove: (state, {
+      payload
+    }) => {
+      /* istanbul ignore next */
+      cov_dd4mnkoxh().f[2]++;
+      cov_dd4mnkoxh().s[9]++;
+      state.alerts = state.alerts.filter(({
+        id
+      }) => {
+        /* istanbul ignore next */
+        cov_dd4mnkoxh().f[3]++;
+        cov_dd4mnkoxh().s[10]++;
+        return id !== payload;
+      });
+    }
+  }
+}), exports.notificationActions = _a.actions, exports.notificationReducer = _a.reducer;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFDQTtBQUFBO0FBQUE7QUFDQTtBQUFBO0FBQUE7QUFDQTtBQUFBO0FBQUE7QUFFQTtBQUFBO0FBQUE7Ozs7QUFJYUEsS0FBaUUsMkJBRzVFO0VBQ0FDLFlBQVksRUFBRUMsOENBRGQ7RUFFQUMsSUFBSSxFQUFFQyxxQ0FGTjtFQUdBQyxRQUFRLEVBQUU7SUFDUkMsUUFBUSxFQUFFO01BQ1JDLE9BQU8sRUFBRSxDQUFDQyxPQUFELEtBQXNDO1FBQUE7UUFBQTtRQUFBO1FBQUE7VUFDN0NBLE9BQU8sRUFBRSxFQUFFLEdBQUdBLE9BQUw7WUFBY0MsRUFBRSxFQUFFLGVBQUksT0FBSjtVQUFsQjtRQURvQztNQUU5QyxDQUhPO01BSVJDLE9BQU8sRUFBRSxDQUFDQyxLQUFELEVBQVE7UUFBRUg7TUFBRixDQUFSLEtBQWtEO1FBQUE7UUFBQTtRQUFBO1FBQ3pERyxLQUFLLENBQUNDLE1BQU4sQ0FBYUMsT0FBYixDQUFxQkwsT0FBckI7TUFDRDtJQU5PLENBREY7SUFTUk0sV0FBVyxFQUFFLENBQUNILEtBQUQsRUFBUTtNQUFFSDtJQUFGLENBQVIsS0FBOEM7TUFBQTtNQUFBO01BQUE7TUFDekRHLEtBQUssQ0FBQ0MsTUFBTixHQUFlRCxLQUFLLENBQUNDLE1BQU4sQ0FBYUcsTUFBYixDQUFvQixDQUFDO1FBQUVOO01BQUYsQ0FBRCxLQUFZO1FBQUE7UUFBQTtRQUFBO1FBQUEsU0FBRSxLQUFLRCxPQUFQO01BQWMsQ0FBOUMsQ0FBZjtJQUNEO0VBWE87QUFIVixDQUg0RSxDQUFqRSxFQUFXUSw4QkFBbUJoQixVQUE5QixFQUF5Q2dCLDhCQUFtQmhCLFVBQTVEIiwibmFtZXMiOlsiX2EiLCJpbml0aWFsU3RhdGUiLCJyZWR1Y2VyX2NvbnN0YW50c18xIiwibmFtZSIsIm5vdGlmaWNhdGlvbl9jb25zdGFudHNfMSIsInJlZHVjZXJzIiwiYWxlcnRBZGQiLCJwcmVwYXJlIiwicGF5bG9hZCIsImlkIiwicmVkdWNlciIsInN0YXRlIiwiYWxlcnRzIiwidW5zaGlmdCIsImFsZXJ0UmVtb3ZlIiwiZmlsdGVyIiwiZXhwb3J0cyJdLCJzb3VyY2VzIjpbIi9Vc2Vycy95Z21pbi9Qcm9qZWN0cy9tb25vX3YyL2FwcDMvYXBwL3BhY2thZ2VzL2xpYi1mcm9udGVuZC9zcmMvbm90aWZpY2F0aW9uL3N0b3Jlcy9yZWR1Y2VyL3JlZHVjZXIudHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHR5cGUgeyBBbGVydE1vZGVsIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9ub3RpZmljYXRpb24vY29tcG9uZW50cy9BbGVydC9BbGVydC5tb2RlbHMnO1xuaW1wb3J0IHsgTk9USUZJQ0FUSU9OX1NUQVRFX0lOSVRJQUwgfSBmcm9tICdAbGliL2Zyb250ZW5kL25vdGlmaWNhdGlvbi9zdG9yZXMvcmVkdWNlci9yZWR1Y2VyLmNvbnN0YW50cyc7XG5pbXBvcnQgeyB1aWQgfSBmcm9tICdAbGliL3NoYXJlZC9jb3JlL3V0aWxzL3VpZC91aWQnO1xuaW1wb3J0IHsgTk9USUZJQ0FUSU9OIH0gZnJvbSAnQGxpYi9zaGFyZWQvbm90aWZpY2F0aW9uL25vdGlmaWNhdGlvbi5jb25zdGFudHMnO1xuaW1wb3J0IHR5cGUgeyBQYXlsb2FkQWN0aW9uLCBTbGljZUNhc2VSZWR1Y2VycyB9IGZyb20gJ0ByZWR1eGpzL3Rvb2xraXQnO1xuaW1wb3J0IHsgY3JlYXRlU2xpY2UgfSBmcm9tICdAcmVkdXhqcy90b29sa2l0JztcblxuaW1wb3J0IHR5cGUgeyBOb3RpZmljYXRpb25TdGF0ZU1vZGVsIH0gZnJvbSAnLi9yZWR1Y2VyLm1vZGVscyc7XG5cbmV4cG9ydCBjb25zdCB7IGFjdGlvbnM6IG5vdGlmaWNhdGlvbkFjdGlvbnMsIHJlZHVjZXI6IG5vdGlmaWNhdGlvblJlZHVjZXIgfSA9IGNyZWF0ZVNsaWNlPFxuICBOb3RpZmljYXRpb25TdGF0ZU1vZGVsLFxuICBTbGljZUNhc2VSZWR1Y2VyczxOb3RpZmljYXRpb25TdGF0ZU1vZGVsPlxuPih7XG4gIGluaXRpYWxTdGF0ZTogTk9USUZJQ0FUSU9OX1NUQVRFX0lOSVRJQUwsXG4gIG5hbWU6IE5PVElGSUNBVElPTixcbiAgcmVkdWNlcnM6IHtcbiAgICBhbGVydEFkZDoge1xuICAgICAgcHJlcGFyZTogKHBheWxvYWQ6IE9taXQ8QWxlcnRNb2RlbCwgJ2lkJz4pID0+ICh7XG4gICAgICAgIHBheWxvYWQ6IHsgLi4ucGF5bG9hZCwgaWQ6IHVpZCgnYWxlcnQnKSB9LFxuICAgICAgfSksXG4gICAgICByZWR1Y2VyOiAoc3RhdGUsIHsgcGF5bG9hZCB9OiBQYXlsb2FkQWN0aW9uPEFsZXJ0TW9kZWw+KSA9PiB7XG4gICAgICAgIHN0YXRlLmFsZXJ0cy51bnNoaWZ0KHBheWxvYWQpO1xuICAgICAgfSxcbiAgICB9LFxuICAgIGFsZXJ0UmVtb3ZlOiAoc3RhdGUsIHsgcGF5bG9hZCB9OiBQYXlsb2FkQWN0aW9uPHN0cmluZz4pID0+IHtcbiAgICAgIHN0YXRlLmFsZXJ0cyA9IHN0YXRlLmFsZXJ0cy5maWx0ZXIoKHsgaWQgfSkgPT4gaWQgIT09IHBheWxvYWQpO1xuICAgIH0sXG4gIH0sXG59KTtcbiJdfQ==

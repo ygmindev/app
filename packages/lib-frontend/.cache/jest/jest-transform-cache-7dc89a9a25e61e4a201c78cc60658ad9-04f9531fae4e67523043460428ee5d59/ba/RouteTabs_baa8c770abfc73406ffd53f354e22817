@@ -1,0 +1,329 @@
+07f66c28d4e5c8feece38977753a91ee
+"use strict";
+
+/* istanbul ignore next */
+function cov_sdn5fesfp() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/routing/containers/RouteTabs/RouteTabs.tsx";
+  var hash = "1c99d96bef34b0aafddfbc41f34eb8ce03e2ba53";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/routing/containers/RouteTabs/RouteTabs.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 27
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 22
+        },
+        end: {
+          line: 4,
+          column: 50
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 15
+        },
+        end: {
+          line: 5,
+          column: 65
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 20
+        },
+        end: {
+          line: 6,
+          column: 78
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 17
+        },
+        end: {
+          line: 7,
+          column: 34
+        }
+      },
+      "6": {
+        start: {
+          line: 8,
+          column: 18
+        },
+        end: {
+          line: 12,
+          column: 1
+        }
+      },
+      "7": {
+        start: {
+          line: 9,
+          column: 31
+        },
+        end: {
+          line: 9,
+          column: 59
+        }
+      },
+      "8": {
+        start: {
+          line: 10,
+          column: 23
+        },
+        end: {
+          line: 10,
+          column: 74
+        }
+      },
+      "9": {
+        start: {
+          line: 10,
+          column: 57
+        },
+        end: {
+          line: 10,
+          column: 73
+        }
+      },
+      "10": {
+        start: {
+          line: 11,
+          column: 4
+        },
+        end: {
+          line: 11,
+          column: 138
+        }
+      },
+      "11": {
+        start: {
+          line: 13,
+          column: 0
+        },
+        end: {
+          line: 13,
+          column: 30
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 8,
+            column: 18
+          },
+          end: {
+            line: 8,
+            column: 19
+          }
+        },
+        loc: {
+          start: {
+            line: 8,
+            column: 42
+          },
+          end: {
+            line: 12,
+            column: 1
+          }
+        },
+        line: 8
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 10,
+            column: 48
+          },
+          end: {
+            line: 10,
+            column: 49
+          }
+        },
+        loc: {
+          start: {
+            line: 10,
+            column: 57
+          },
+          end: {
+            line: 10,
+            column: 73
+          }
+        },
+        line: 10
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 11,
+            column: 95
+          },
+          end: {
+            line: 11,
+            column: 133
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 11,
+            column: 108
+          },
+          end: {
+            line: 11,
+            column: 121
+          }
+        }, {
+          start: {
+            line: 11,
+            column: 124
+          },
+          end: {
+            line: 11,
+            column: 133
+          }
+        }],
+        line: 11
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0
+    },
+    b: {
+      "0": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/routing/containers/RouteTabs/RouteTabs.tsx",
+      mappings: ";;;;AAAA,kEAA+D;AAG/D,+EAA4E;AAC5E,mCAA8B;AAEvB,MAAM,SAAS,GAAkC,CAAC,EAAE,IAAI,EAAE,GAAG,KAAK,EAAE,EAAE,EAAE;IAC7E,MAAM,EAAE,QAAQ,EAAE,IAAI,EAAE,GAAG,IAAA,qBAAS,GAAE,CAAC;IACvC,MAAM,UAAU,GAAG,IAAA,aAAI,EAAC,IAAI,EAAE,CAAC,GAAG,EAAE,EAAE,CAAC,QAAQ,CAAC,GAAG,CAAC,EAAE,CAAC,CAAC,CAAC;IACzD,OAAO,CACL,uBAAC,WAAI,OACC,KAAK,EACT,QAAQ,EAAE,IAAI,EACd,IAAI,EAAE,IAAI,EACV,KAAK,EAAE,UAAU,CAAC,CAAC,CAAC,UAAU,CAAC,EAAE,CAAC,CAAC,CAAC,SAAS,GAC7C,CACH,CAAC;AACJ,CAAC,CAAC;AAXW,QAAA,SAAS,aAWpB",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/routing/containers/RouteTabs/RouteTabs.tsx"],
+      sourcesContent: ["import { Tabs } from '@lib/frontend/core/components/Tabs/Tabs';\nimport type { SFCModel } from '@lib/frontend/core/core.models';\nimport type { RouteTabsPropsModel } from '@lib/frontend/routing/containers/RouteTabs/RouteTabs.models';\nimport { useRouter } from '@lib/frontend/routing/hooks/useRouter/useRouter';\nimport { find } from 'lodash';\n\nexport const RouteTabs: SFCModel<RouteTabsPropsModel> = ({ tabs, ...props }) => {\n  const { isActive, push } = useRouter();\n  const currentTab = find(tabs, (tab) => isActive(tab.id));\n  return (\n    <Tabs\n      {...props}\n      onChange={push}\n      tabs={tabs}\n      value={currentTab ? currentTab.id : undefined}\n    />\n  );\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "1c99d96bef34b0aafddfbc41f34eb8ce03e2ba53"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_sdn5fesfp = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_sdn5fesfp();
+cov_sdn5fesfp().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_sdn5fesfp().s[1]++;
+exports.RouteTabs = void 0;
+const jsx_runtime_1 =
+/* istanbul ignore next */
+(cov_sdn5fesfp().s[2]++, require("react/jsx-runtime"));
+const Tabs_1 =
+/* istanbul ignore next */
+(cov_sdn5fesfp().s[3]++, require("@lib/frontend/core/components/Tabs/Tabs"));
+const useRouter_1 =
+/* istanbul ignore next */
+(cov_sdn5fesfp().s[4]++, require("@lib/frontend/routing/hooks/useRouter/useRouter"));
+const lodash_1 =
+/* istanbul ignore next */
+(cov_sdn5fesfp().s[5]++, require("lodash"));
+
+/* istanbul ignore next */
+cov_sdn5fesfp().s[6]++;
+
+const RouteTabs = ({
+  tabs,
+  ...props
+}) => {
+  /* istanbul ignore next */
+  cov_sdn5fesfp().f[0]++;
+  const {
+    isActive,
+    push
+  } =
+  /* istanbul ignore next */
+  (cov_sdn5fesfp().s[7]++, (0, useRouter_1.useRouter)());
+  const currentTab =
+  /* istanbul ignore next */
+  (cov_sdn5fesfp().s[8]++, (0, lodash_1.find)(tabs, (tab) => {
+    /* istanbul ignore next */
+    cov_sdn5fesfp().f[1]++;
+    cov_sdn5fesfp().s[9]++;
+    return isActive(tab.id);
+  }));
+
+  /* istanbul ignore next */
+  cov_sdn5fesfp().s[10]++;
+  return (0, jsx_runtime_1.jsx)(Tabs_1.Tabs, { ...props,
+    onChange: push,
+    tabs: tabs,
+    value: currentTab ?
+    /* istanbul ignore next */
+    (cov_sdn5fesfp().b[0][0]++, currentTab.id) :
+    /* istanbul ignore next */
+    (cov_sdn5fesfp().b[0][1]++, undefined)
+  });
+};
+
+/* istanbul ignore next */
+cov_sdn5fesfp().s[11]++;
+exports.RouteTabs = RouteTabs;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBO0FBQUE7QUFBQTtBQUdBO0FBQUE7QUFBQTtBQUNBO0FBQUE7QUFBQTs7Ozs7QUFFTyxNQUFNQSxTQUFTLEdBQWtDLENBQUM7RUFBRUMsSUFBRjtFQUFRLEdBQUdDO0FBQVgsQ0FBRCxLQUF1QjtFQUFBO0VBQUE7RUFDN0UsTUFBTTtJQUFFQyxRQUFGO0lBQVlDO0VBQVo7RUFBQTtFQUFBLHlCQUFxQiw0QkFBckIsQ0FBTjtFQUNBLE1BQU1DLFVBQVU7RUFBQTtFQUFBLHlCQUFHLG1CQUFLSixJQUFMLEVBQVcsQ0FBQ0ssR0FBRCxLQUFTO0lBQUE7SUFBQTtJQUFBO0lBQUEsZUFBUSxDQUFDQSxHQUFHLENBQUNDLEVBQUwsQ0FBUjtFQUFnQixDQUFwQyxDQUFILENBQWhCOztFQUY2RTtFQUFBO0VBRzdFLE9BQ0UsdUJBQUNDLFdBQUQsRUFBSyxLQUNDTixLQUREO0lBRUhPLFFBQVEsRUFBRUwsSUFGUDtJQUdISCxJQUFJLEVBQUVBLElBSEg7SUFJSFMsS0FBSyxFQUFFTCxVQUFVO0lBQUE7SUFBQSw0QkFBR0EsVUFBVSxDQUFDRSxFQUFkO0lBQUE7SUFBQSw0QkFBbUJJLFNBQW5CO0VBSmQsQ0FBTCxDQURGO0FBUUQsQ0FYTTs7OztBQUFNQyxvQkFBU1osU0FBVCIsIm5hbWVzIjpbIlJvdXRlVGFicyIsInRhYnMiLCJwcm9wcyIsImlzQWN0aXZlIiwicHVzaCIsImN1cnJlbnRUYWIiLCJ0YWIiLCJpZCIsIlRhYnNfMSIsIm9uQ2hhbmdlIiwidmFsdWUiLCJ1bmRlZmluZWQiLCJleHBvcnRzIl0sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy9yb3V0aW5nL2NvbnRhaW5lcnMvUm91dGVUYWJzL1JvdXRlVGFicy50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgVGFicyB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvY29yZS9jb21wb25lbnRzL1RhYnMvVGFicyc7XG5pbXBvcnQgdHlwZSB7IFNGQ01vZGVsIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9jb3JlL2NvcmUubW9kZWxzJztcbmltcG9ydCB0eXBlIHsgUm91dGVUYWJzUHJvcHNNb2RlbCB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvcm91dGluZy9jb250YWluZXJzL1JvdXRlVGFicy9Sb3V0ZVRhYnMubW9kZWxzJztcbmltcG9ydCB7IHVzZVJvdXRlciB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvcm91dGluZy9ob29rcy91c2VSb3V0ZXIvdXNlUm91dGVyJztcbmltcG9ydCB7IGZpbmQgfSBmcm9tICdsb2Rhc2gnO1xuXG5leHBvcnQgY29uc3QgUm91dGVUYWJzOiBTRkNNb2RlbDxSb3V0ZVRhYnNQcm9wc01vZGVsPiA9ICh7IHRhYnMsIC4uLnByb3BzIH0pID0+IHtcbiAgY29uc3QgeyBpc0FjdGl2ZSwgcHVzaCB9ID0gdXNlUm91dGVyKCk7XG4gIGNvbnN0IGN1cnJlbnRUYWIgPSBmaW5kKHRhYnMsICh0YWIpID0+IGlzQWN0aXZlKHRhYi5pZCkpO1xuICByZXR1cm4gKFxuICAgIDxUYWJzXG4gICAgICB7Li4ucHJvcHN9XG4gICAgICBvbkNoYW5nZT17cHVzaH1cbiAgICAgIHRhYnM9e3RhYnN9XG4gICAgICB2YWx1ZT17Y3VycmVudFRhYiA/IGN1cnJlbnRUYWIuaWQgOiB1bmRlZmluZWR9XG4gICAgLz5cbiAgKTtcbn07XG4iXX0=

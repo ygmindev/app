@@ -1,0 +1,107 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "lst",
+            "type": "node",
+            "request": "launch",
+            "stopOnEntry": false,
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "args": ["lst"],
+            "outputCapture": "std"
+        },
+        {
+            "name": "lsl",
+            "type": "node",
+            "request": "launch",
+            "stopOnEntry": false,
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "args": ["lsl"],
+            "outputCapture": "std"
+        },
+        {
+            "name": "ssd",
+            "type": "node",
+            "request": "launch",
+            "stopOnEntry": false,
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "args": ["ssd"],
+            "outputCapture": "std"
+        },
+        {
+            "name": "awsd",
+            "type": "node",
+            "request": "launch",
+            "stopOnEntry": false,
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "args": ["awsd"],
+            "outputCapture": "std"
+        },
+        {
+            "name": "awd",
+            "type": "node",
+            "request": "launch",
+            "stopOnEntry": false,
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "args": ["awd"],
+            "outputCapture": "std"
+        },
+        {
+            "name": "lbt",
+            "type": "node",
+            "request": "launch",
+            "stopOnEntry": false,
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "args": ["lbt"],
+            "outputCapture": "std"
+        },
+        {
+            "name": "lft",
+            "type": "node",
+            "request": "launch",
+            "stopOnEntry": false,
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "args": ["lft"],
+            "outputCapture": "std"
+        },
+        {
+            "name": "lft",
+            "type": "node",
+            "request": "launch",
+            "stopOnEntry": false,
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "args": ["lft"],
+            "outputCapture": "std"
+        },
+        {
+            "name": "sld",
+            "type": "node",
+            "request": "launch",
+            "stopOnEntry": false,
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "args": ["sld"],
+            "outputCapture": "std"
+        },
+        {
+            "name": "slb",
+            "type": "node",
+            "request": "launch",
+            "stopOnEntry": false,
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "args": ["slb"],
+            "outputCapture": "std"
+        },
+        {
+            "name": "sll",
+            "type": "node",
+            "request": "launch",
+            "stopOnEntry": false,
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "args": ["sll"],
+            "outputCapture": "std"
+        }
+    ]
+}

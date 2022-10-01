@@ -1,0 +1,174 @@
+63195eb1ce5146299a36550723f09407
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
+
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
+
+var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var React = _interopRequireWildcard(require("react"));
+
+function _getRequireWildcardCache(nodeInterop) {
+  if (typeof WeakMap !== "function") return null;
+  var cacheBabelInterop = new WeakMap();
+  var cacheNodeInterop = new WeakMap();
+  return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) {
+    return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
+  })(nodeInterop);
+}
+
+function _interopRequireWildcard(obj, nodeInterop) {
+  if (!nodeInterop && obj && obj.__esModule) {
+    return obj;
+  }
+
+  if (obj === null || (0, _typeof2["default"])(obj) !== "object" && typeof obj !== "function") {
+    return {
+      "default": obj
+    };
+  }
+
+  var cache = _getRequireWildcardCache(nodeInterop);
+
+  if (cache && cache.has(obj)) {
+    return cache.get(obj);
+  }
+
+  var newObj = {};
+  var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+
+  for (var key in obj) {
+    if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
+      var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+
+      if (desc && (desc.get || desc.set)) {
+        Object.defineProperty(newObj, key, desc);
+      } else {
+        newObj[key] = obj[key];
+      }
+    }
+  }
+
+  newObj["default"] = obj;
+
+  if (cache) {
+    cache.set(obj, newObj);
+  }
+
+  return newObj;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+var PortalConsumer = function (_React$Component) {
+  (0, _inherits2["default"])(PortalConsumer, _React$Component);
+
+  var _super = _createSuper(PortalConsumer);
+
+  function PortalConsumer() {
+    var _this;
+
+    (0, _classCallCheck2["default"])(this, PortalConsumer);
+    _this = _super.apply(this, arguments);
+
+    _defineProperty((0, _assertThisInitialized2["default"])(_this), "key", void 0);
+
+    return _this;
+  }
+
+  (0, _createClass2["default"])(PortalConsumer, [{
+    key: "componentDidMount",
+    value: function () {
+      var _componentDidMount = (0, _asyncToGenerator2["default"])(_regenerator["default"].mark(function _callee() {
+        return _regenerator["default"].wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.checkManager();
+                _context.next = 3;
+                return Promise.resolve();
+
+              case 3:
+                this.key = this.props.manager.mount(this.props.children);
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function componentDidMount() {
+        return _componentDidMount.apply(this, arguments);
+      }
+
+      return componentDidMount;
+    }()
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      this.checkManager();
+      this.props.manager.update(this.key, this.props.children);
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.checkManager();
+      this.props.manager.unmount(this.key);
+    }
+  }, {
+    key: "checkManager",
+    value: function checkManager() {
+      if (!this.props.manager) {
+        throw new Error('Looks like you forgot to wrap your root component with `Provider` component from `react-native-paper`.\n\n' + "Please read our getting-started guide and make sure you've followed all the required steps.\n\n" + 'https://callstack.github.io/react-native-paper/getting-started.html');
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return null;
+    }
+  }]);
+  return PortalConsumer;
+}(React.Component);
+
+exports["default"] = PortalConsumer;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBUXFCQSxjOzs7OztFQUE4QztJQUFBOztJQUFBO0lBQUE7O0lBQUFDOztJQUFBO0VBQUE7Ozs7OytGQUMxQztRQUFBO1VBQUE7WUFBQTtjQUFBO2dCQUNyQixLQUFLQyxZQUFMO2dCQURxQjtnQkFBQSxPQUlmQyxPQUFPLENBQUNDLE9BQVJELEVBSmU7O2NBQUE7Z0JBTXJCLEtBQUtFLEdBQUwsR0FBVyxLQUFLQyxLQUFMLENBQVdDLE9BQVgsQ0FBbUJDLEtBQW5CLENBQXlCLEtBQUtGLEtBQUwsQ0FBV0csUUFBcEMsQ0FBWDs7Y0FOcUI7Y0FBQTtnQkFBQTtZQUFBO1VBQUE7UUFBQTtNQUFBLEM7Ozs7Ozs7Ozs7V0FTdkJDLDhCQUFxQjtNQUNuQixLQUFLUixZQUFMO01BRUEsS0FBS0ksS0FBTCxDQUFXQyxPQUFYLENBQW1CSSxNQUFuQixDQUEwQixLQUFLTixHQUEvQixFQUFvQyxLQUFLQyxLQUFMLENBQVdHLFFBQS9DO0lBQ0Q7OztXQUVERyxnQ0FBdUI7TUFDckIsS0FBS1YsWUFBTDtNQUVBLEtBQUtJLEtBQUwsQ0FBV0MsT0FBWCxDQUFtQk0sT0FBbkIsQ0FBMkIsS0FBS1IsR0FBaEM7SUFDRDs7O1dBSU9ILHdCQUFlO01BQ3JCLElBQUksQ0FBQyxLQUFLSSxLQUFMLENBQVdDLE9BQWhCLEVBQXlCO1FBQ3ZCLE1BQU0sSUFBSU8sS0FBSixDQUNKLCtHQUNFLGlHQURGLEdBRUUscUVBSEUsQ0FBTjtNQUtEO0lBQ0Y7OztXQUVEQyxrQkFBUztNQUNQLE9BQU8sSUFBUDtJQUNEOzs7RUFwQ3lDQyxLQUFLLENBQUNDLFMiLCJuYW1lcyI6WyJQb3J0YWxDb25zdW1lciIsIl9kZWZpbmVQcm9wZXJ0eSIsImNoZWNrTWFuYWdlciIsIlByb21pc2UiLCJyZXNvbHZlIiwia2V5IiwicHJvcHMiLCJtYW5hZ2VyIiwibW91bnQiLCJjaGlsZHJlbiIsImNvbXBvbmVudERpZFVwZGF0ZSIsInVwZGF0ZSIsImNvbXBvbmVudFdpbGxVbm1vdW50IiwidW5tb3VudCIsIkVycm9yIiwicmVuZGVyIiwiUmVhY3QiLCJDb21wb25lbnQiXSwic291cmNlcyI6WyJQb3J0YWxDb25zdW1lci50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0ICogYXMgUmVhY3QgZnJvbSAncmVhY3QnO1xuaW1wb3J0IHR5cGUgeyBQb3J0YWxNZXRob2RzIH0gZnJvbSAnLi9Qb3J0YWxIb3N0JztcblxudHlwZSBQcm9wcyA9IHtcbiAgbWFuYWdlcjogUG9ydGFsTWV0aG9kcztcbiAgY2hpbGRyZW46IFJlYWN0LlJlYWN0Tm9kZTtcbn07XG5cbmV4cG9ydCBkZWZhdWx0IGNsYXNzIFBvcnRhbENvbnN1bWVyIGV4dGVuZHMgUmVhY3QuQ29tcG9uZW50PFByb3BzPiB7XG4gIGFzeW5jIGNvbXBvbmVudERpZE1vdW50KCkge1xuICAgIHRoaXMuY2hlY2tNYW5hZ2VyKCk7XG5cbiAgICAvLyBEZWxheSB1cGRhdGluZyB0byBwcmV2ZW50IFJlYWN0IGZyb20gZ29pbmcgdG8gaW5maW5pdGUgbG9vcFxuICAgIGF3YWl0IFByb21pc2UucmVzb2x2ZSgpO1xuXG4gICAgdGhpcy5rZXkgPSB0aGlzLnByb3BzLm1hbmFnZXIubW91bnQodGhpcy5wcm9wcy5jaGlsZHJlbik7XG4gIH1cblxuICBjb21wb25lbnREaWRVcGRhdGUoKSB7XG4gICAgdGhpcy5jaGVja01hbmFnZXIoKTtcblxuICAgIHRoaXMucHJvcHMubWFuYWdlci51cGRhdGUodGhpcy5rZXksIHRoaXMucHJvcHMuY2hpbGRyZW4pO1xuICB9XG5cbiAgY29tcG9uZW50V2lsbFVubW91bnQoKSB7XG4gICAgdGhpcy5jaGVja01hbmFnZXIoKTtcblxuICAgIHRoaXMucHJvcHMubWFuYWdlci51bm1vdW50KHRoaXMua2V5KTtcbiAgfVxuXG4gIHByaXZhdGUga2V5OiBhbnk7XG5cbiAgcHJpdmF0ZSBjaGVja01hbmFnZXIoKSB7XG4gICAgaWYgKCF0aGlzLnByb3BzLm1hbmFnZXIpIHtcbiAgICAgIHRocm93IG5ldyBFcnJvcihcbiAgICAgICAgJ0xvb2tzIGxpa2UgeW91IGZvcmdvdCB0byB3cmFwIHlvdXIgcm9vdCBjb21wb25lbnQgd2l0aCBgUHJvdmlkZXJgIGNvbXBvbmVudCBmcm9tIGByZWFjdC1uYXRpdmUtcGFwZXJgLlxcblxcbicgK1xuICAgICAgICAgIFwiUGxlYXNlIHJlYWQgb3VyIGdldHRpbmctc3RhcnRlZCBndWlkZSBhbmQgbWFrZSBzdXJlIHlvdSd2ZSBmb2xsb3dlZCBhbGwgdGhlIHJlcXVpcmVkIHN0ZXBzLlxcblxcblwiICtcbiAgICAgICAgICAnaHR0cHM6Ly9jYWxsc3RhY2suZ2l0aHViLmlvL3JlYWN0LW5hdGl2ZS1wYXBlci9nZXR0aW5nLXN0YXJ0ZWQuaHRtbCdcbiAgICAgICk7XG4gICAgfVxuICB9XG5cbiAgcmVuZGVyKCkge1xuICAgIHJldHVybiBudWxsO1xuICB9XG59XG4iXX0=

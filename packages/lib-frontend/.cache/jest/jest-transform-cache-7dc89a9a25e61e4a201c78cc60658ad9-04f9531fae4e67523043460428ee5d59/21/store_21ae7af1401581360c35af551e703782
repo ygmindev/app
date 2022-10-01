@@ -1,0 +1,122 @@
+b413be3652f72583d0f76b762218d030
+"use strict";
+
+/* istanbul ignore next */
+function cov_hbr0tm0jv() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/root/stores/store/store.ts";
+  var hash = "17849931ddc08b61c61c23f302816d78f726616b";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/root/stores/store/store.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 42
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 25
+        },
+        end: {
+          line: 4,
+          column: 91
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 0
+        },
+        end: {
+          line: 5,
+          column: 55
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 0
+        },
+        end: {
+          line: 6,
+          column: 42
+        }
+      }
+    },
+    fnMap: {},
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    f: {},
+    b: {},
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/root/stores/store/store.ts",
+      mappings: ";;;AAAA,4FAAyF;AAG5E,QAAA,KAAK,GAAG,IAAA,+BAAc,GAAE,CAAC;AAEzB,QAAA,QAAQ,GAAG,aAAK,CAAC,QAAoB,CAAC",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/root/stores/store/store.ts"],
+      sourcesContent: ["import { configureStore } from '@lib/frontend/root/stores/configureStore/configureStore';\nimport type { Dispatch } from 'redux';\n\nexport const store = configureStore();\n\nexport const dispatch = store.dispatch as Dispatch;\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "17849931ddc08b61c61c23f302816d78f726616b"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_hbr0tm0jv = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_hbr0tm0jv();
+cov_hbr0tm0jv().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_hbr0tm0jv().s[1]++;
+exports.dispatch = exports.store = void 0;
+const configureStore_1 =
+/* istanbul ignore next */
+(cov_hbr0tm0jv().s[2]++, require("@lib/frontend/root/stores/configureStore/configureStore"));
+
+/* istanbul ignore next */
+cov_hbr0tm0jv().s[3]++;
+exports.store = (0, configureStore_1.configureStore)();
+
+/* istanbul ignore next */
+cov_hbr0tm0jv().s[4]++;
+exports.dispatch = exports.store.dispatch;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBO0FBQUE7QUFBQTs7OztBQUdhQSxnQkFBUSxzQ0FBUjs7OztBQUVBQSxtQkFBV0EsY0FBTUMsUUFBakIiLCJuYW1lcyI6WyJleHBvcnRzIiwiZGlzcGF0Y2giXSwic291cmNlcyI6WyIvVXNlcnMveWdtaW4vUHJvamVjdHMvbW9ub192Mi9hcHAzL2FwcC9wYWNrYWdlcy9saWItZnJvbnRlbmQvc3JjL3Jvb3Qvc3RvcmVzL3N0b3JlL3N0b3JlLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGNvbmZpZ3VyZVN0b3JlIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9yb290L3N0b3Jlcy9jb25maWd1cmVTdG9yZS9jb25maWd1cmVTdG9yZSc7XG5pbXBvcnQgdHlwZSB7IERpc3BhdGNoIH0gZnJvbSAncmVkdXgnO1xuXG5leHBvcnQgY29uc3Qgc3RvcmUgPSBjb25maWd1cmVTdG9yZSgpO1xuXG5leHBvcnQgY29uc3QgZGlzcGF0Y2ggPSBzdG9yZS5kaXNwYXRjaCBhcyBEaXNwYXRjaDtcbiJdfQ==

@@ -1,0 +1,166 @@
+5940d45f414959c21205a5d6d1b232b0
+"use strict";
+
+/* istanbul ignore next */
+function cov_a1peey6yt() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/root/hooks/useSelector/useSelector.ts";
+  var hash = "a0a41297e83868f0b891ecab9e7f404246917ea8";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/root/hooks/useSelector/useSelector.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 29
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 22
+        },
+        end: {
+          line: 4,
+          column: 44
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 20
+        },
+        end: {
+          line: 5,
+          column: 74
+        }
+      },
+      "4": {
+        start: {
+          line: 5,
+          column: 34
+        },
+        end: {
+          line: 5,
+          column: 74
+        }
+      },
+      "5": {
+        start: {
+          line: 6,
+          column: 0
+        },
+        end: {
+          line: 6,
+          column: 34
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 5,
+            column: 20
+          },
+          end: {
+            line: 5,
+            column: 21
+          }
+        },
+        loc: {
+          start: {
+            line: 5,
+            column: 34
+          },
+          end: {
+            line: 5,
+            column: 74
+          }
+        },
+        line: 5
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/root/hooks/useSelector/useSelector.ts",
+      mappings: ";;;AACA,6CAA0D;AAEnD,MAAM,WAAW,GAAG,CAAQ,QAA0C,EAAS,EAAE,CACtF,IAAA,yBAAY,EAAwB,QAAQ,CAAC,CAAC;AADnC,QAAA,WAAW,eACwB",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/root/hooks/useSelector/useSelector.ts"],
+      sourcesContent: ["import type { RootStateModel } from '@lib/frontend/root/stores/reducer/reducer.models';\nimport { useSelector as _useSelector } from 'react-redux';\n\nexport const useSelector = <TType>(selector: (state: RootStateModel) => TType): TType =>\n  _useSelector<RootStateModel, TType>(selector);\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "a0a41297e83868f0b891ecab9e7f404246917ea8"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_a1peey6yt = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_a1peey6yt();
+cov_a1peey6yt().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_a1peey6yt().s[1]++;
+exports.useSelector = void 0;
+const react_redux_1 =
+/* istanbul ignore next */
+(cov_a1peey6yt().s[2]++, require("react-redux"));
+
+/* istanbul ignore next */
+cov_a1peey6yt().s[3]++;
+
+const useSelector = (selector) => {
+  /* istanbul ignore next */
+  cov_a1peey6yt().f[0]++;
+  cov_a1peey6yt().s[4]++;
+  return (0, react_redux_1.useSelector)(selector);
+};
+
+/* istanbul ignore next */
+cov_a1peey6yt().s[5]++;
+exports.useSelector = useSelector;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQ0E7QUFBQTtBQUFBOzs7OztBQUVPLE1BQU1BLFdBQVcsR0FBRyxDQUFRQyxRQUFSLEtBQ3pCO0VBQUE7RUFBQTtFQUFBO0VBQUEsc0NBQW9DQSxRQUFwQztBQUE2QyxDQUR4Qzs7OztBQUFNQyxzQkFBV0YsV0FBWCIsIm5hbWVzIjpbInVzZVNlbGVjdG9yIiwic2VsZWN0b3IiLCJleHBvcnRzIl0sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy9yb290L2hvb2tzL3VzZVNlbGVjdG9yL3VzZVNlbGVjdG9yLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB0eXBlIHsgUm9vdFN0YXRlTW9kZWwgfSBmcm9tICdAbGliL2Zyb250ZW5kL3Jvb3Qvc3RvcmVzL3JlZHVjZXIvcmVkdWNlci5tb2RlbHMnO1xuaW1wb3J0IHsgdXNlU2VsZWN0b3IgYXMgX3VzZVNlbGVjdG9yIH0gZnJvbSAncmVhY3QtcmVkdXgnO1xuXG5leHBvcnQgY29uc3QgdXNlU2VsZWN0b3IgPSA8VFR5cGU+KHNlbGVjdG9yOiAoc3RhdGU6IFJvb3RTdGF0ZU1vZGVsKSA9PiBUVHlwZSk6IFRUeXBlID0+XG4gIF91c2VTZWxlY3RvcjxSb290U3RhdGVNb2RlbCwgVFR5cGU+KHNlbGVjdG9yKTtcbiJdfQ==

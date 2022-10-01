@@ -1,0 +1,18 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "app-native": "packages/app-native",
+    "app-web": "packages/app-web",
+    "app-web-ete": "packages/app-web-ete",
+    "app-web-story": "packages/app-web-story",
+    "lib-backend": "packages/lib-backend",
+    "lib-config": "packages/lib-config",
+    "lib-frontend": "packages/lib-frontend",
+    "lib-shared": "packages/lib-shared",
+    "server-lambda": "packages/server-lambda",
+    "server-sandbox": "packages/server-sandbox",
+    "tool-generate": "packages/tool-generate",
+    "tool-task": "packages/tool-task"
+  }
+}

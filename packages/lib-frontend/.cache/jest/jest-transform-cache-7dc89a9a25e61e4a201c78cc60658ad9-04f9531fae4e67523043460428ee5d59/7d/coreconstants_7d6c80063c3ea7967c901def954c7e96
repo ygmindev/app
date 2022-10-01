@@ -1,0 +1,6 @@
+29adfeea011daac54e3c03fddbfa898b
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CORE = void 0;
+exports.CORE = 'core';
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLXNoYXJlZC9zcmMvY29yZS9jb3JlLmNvbnN0YW50cy50cyIsIm1hcHBpbmdzIjoiOzs7QUFBYSxRQUFBLElBQUksR0FBRyxNQUFNLENBQUMiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLXNoYXJlZC9zcmMvY29yZS9jb3JlLmNvbnN0YW50cy50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgY29uc3QgQ09SRSA9ICdjb3JlJztcbiJdLCJ2ZXJzaW9uIjozfQ==

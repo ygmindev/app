@@ -1,0 +1,295 @@
+ade2816e179d06bbfdb49319ebe9b918
+"use strict";
+
+/* istanbul ignore next */
+function cov_2cbj0ose4u() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Dropdown/Dropdown.tsx";
+  var hash = "d9fede34a6543244a989fb8f26602e23fa394b64";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Dropdown/Dropdown.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 26
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 22
+        },
+        end: {
+          line: 4,
+          column: 50
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 20
+        },
+        end: {
+          line: 5,
+          column: 79
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 29
+        },
+        end: {
+          line: 6,
+          column: 97
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 18
+        },
+        end: {
+          line: 7,
+          column: 74
+        }
+      },
+      "6": {
+        start: {
+          line: 8,
+          column: 20
+        },
+        end: {
+          line: 8,
+          column: 78
+        }
+      },
+      "7": {
+        start: {
+          line: 9,
+          column: 26
+        },
+        end: {
+          line: 9,
+          column: 86
+        }
+      },
+      "8": {
+        start: {
+          line: 10,
+          column: 17
+        },
+        end: {
+          line: 13,
+          column: 1
+        }
+      },
+      "9": {
+        start: {
+          line: 11,
+          column: 23
+        },
+        end: {
+          line: 11,
+          column: 60
+        }
+      },
+      "10": {
+        start: {
+          line: 12,
+          column: 4
+        },
+        end: {
+          line: 12,
+          column: 660
+        }
+      },
+      "11": {
+        start: {
+          line: 14,
+          column: 0
+        },
+        end: {
+          line: 14,
+          column: 28
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 10,
+            column: 17
+          },
+          end: {
+            line: 10,
+            column: 18
+          }
+        },
+        loc: {
+          start: {
+            line: 10,
+            column: 107
+          },
+          end: {
+            line: 13,
+            column: 1
+          }
+        },
+        line: 10
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Dropdown/Dropdown.tsx",
+      mappings: ";;;;AAAA,gFAA6E;AAC7E,kGAAgG;AAEhG,2EAAwE;AAExE,+EAA4E;AAC5E,uFAG2D;AAEpD,MAAM,QAAQ,GAAiC,CAAC,EACrD,MAAM,EACN,QAAQ,EACR,WAAW,EACX,MAAM,EACN,MAAM,EACN,OAAO,EACP,KAAK,EACL,OAAO,EACP,GAAG,KAAK,EACT,EAAE,EAAE;IACH,MAAM,EAAE,MAAM,EAAE,GAAG,IAAA,qBAAS,EAAC,EAAE,KAAK,EAAE,CAAC,CAAC;IACxC,OAAO,CACL,uBAAC,qBAAS,IACR,MAAM,EAAE,MAAM,EACd,WAAW,EAAE,WAAW,EACxB,MAAM,EAAE,MAAM,EACd,MAAM,EAAE,MAAM,EACd,OAAO,EAAE,OAAO,EAChB,KAAK,EAAE,KAAK,EACZ,OAAO,EAAE,OAAO,EAChB,KAAK,EAAE,MAAM,YACb,uBAAC,iBAAO,IACN,eAAe,EAAE,sCAAoB,CAAC,IAAI,EAC1C,MAAM,QACN,WAAW,QACX,QAAQ,QACR,OAAO,EAAE,KAAK,EACd,KAAK,EAAE,OAAO,EACd,MAAM,EAAE,MAAM,EACd,IAAI,EAAE,CAAC,KAAK,EACZ,KAAK,kBACL,uBAAC,iBAAO,IACN,IAAI,QACJ,oBAAoB,QACpB,SAAS,EAAE,wCAAmB,EAC9B,CAAC,EAAE,kCAAgB,CAAC,KAAK,YACxB,QAAQ,GACD,GACF,GACA,CACb,CAAC;AACJ,CAAC,CAAC;AA1CW,QAAA,QAAQ,YA0CnB",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Dropdown/Dropdown.tsx"],
+      sourcesContent: ["import { _Dropdown } from '@lib/frontend/core/components/Dropdown/_Dropdown';\nimport { DROPDOWN_MAX_HEIGHT } from '@lib/frontend/core/components/Dropdown/Dropdown.constants';\nimport type { DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/Dropdown.models';\nimport { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';\nimport type { SFCModel } from '@lib/frontend/core/core.models';\nimport { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';\nimport {\n  THEME_BASIC_SIZE,\n  THEME_RELATIVE_COLOR,\n} from '@lib/frontend/styling/utils/theme/theme.constants';\n\nexport const Dropdown: SFCModel<DropdownPropsModel> = ({\n  anchor,\n  children,\n  isFullWidth,\n  isLeft,\n  isOpen,\n  isRight,\n  isTop,\n  onClose,\n  ...props\n}) => {\n  const { styles } = useStyles({ props });\n  return (\n    <_Dropdown\n      anchor={anchor}\n      isFullWidth={isFullWidth}\n      isLeft={isLeft}\n      isOpen={isOpen}\n      isRight={isRight}\n      isTop={isTop}\n      onClose={onClose}\n      style={styles}>\n      <Wrapper\n        backgroundColor={THEME_RELATIVE_COLOR.MAIN}\n        border\n        isFullWidth\n        isShadow\n        mBottom={isTop}\n        mLeft={isRight}\n        mRight={isLeft}\n        mTop={!isTop}\n        round>\n        <Wrapper\n          grow\n          isVerticalScrollable\n          maxHeight={DROPDOWN_MAX_HEIGHT}\n          p={THEME_BASIC_SIZE.SMALL}>\n          {children}\n        </Wrapper>\n      </Wrapper>\n    </_Dropdown>\n  );\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "d9fede34a6543244a989fb8f26602e23fa394b64"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_2cbj0ose4u = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_2cbj0ose4u();
+cov_2cbj0ose4u().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_2cbj0ose4u().s[1]++;
+exports.Dropdown = void 0;
+const jsx_runtime_1 =
+/* istanbul ignore next */
+(cov_2cbj0ose4u().s[2]++, require("react/jsx-runtime"));
+
+const _Dropdown_1 =
+/* istanbul ignore next */
+(cov_2cbj0ose4u().s[3]++, require("@lib/frontend/core/components/Dropdown/_Dropdown"));
+
+const Dropdown_constants_1 =
+/* istanbul ignore next */
+(cov_2cbj0ose4u().s[4]++, require("@lib/frontend/core/components/Dropdown/Dropdown.constants"));
+const Wrapper_1 =
+/* istanbul ignore next */
+(cov_2cbj0ose4u().s[5]++, require("@lib/frontend/core/components/Wrapper/Wrapper"));
+const useStyles_1 =
+/* istanbul ignore next */
+(cov_2cbj0ose4u().s[6]++, require("@lib/frontend/styling/hooks/useStyles/useStyles"));
+const theme_constants_1 =
+/* istanbul ignore next */
+(cov_2cbj0ose4u().s[7]++, require("@lib/frontend/styling/utils/theme/theme.constants"));
+
+/* istanbul ignore next */
+cov_2cbj0ose4u().s[8]++;
+
+const Dropdown = ({
+  anchor,
+  children,
+  isFullWidth,
+  isLeft,
+  isOpen,
+  isRight,
+  isTop,
+  onClose,
+  ...props
+}) => {
+  /* istanbul ignore next */
+  cov_2cbj0ose4u().f[0]++;
+  const {
+    styles
+  } =
+  /* istanbul ignore next */
+  (cov_2cbj0ose4u().s[9]++, (0, useStyles_1.useStyles)({
+    props
+  }));
+
+  /* istanbul ignore next */
+  cov_2cbj0ose4u().s[10]++;
+  return (0, jsx_runtime_1.jsx)(_Dropdown_1._Dropdown, {
+    anchor: anchor,
+    isFullWidth: isFullWidth,
+    isLeft: isLeft,
+    isOpen: isOpen,
+    isRight: isRight,
+    isTop: isTop,
+    onClose: onClose,
+    style: styles,
+    children: (0, jsx_runtime_1.jsx)(Wrapper_1.Wrapper, {
+      backgroundColor: theme_constants_1.THEME_RELATIVE_COLOR.MAIN,
+      border: true,
+      isFullWidth: true,
+      isShadow: true,
+      mBottom: isTop,
+      mLeft: isRight,
+      mRight: isLeft,
+      mTop: !isTop,
+      round: true,
+      children: (0, jsx_runtime_1.jsx)(Wrapper_1.Wrapper, {
+        grow: true,
+        isVerticalScrollable: true,
+        maxHeight: Dropdown_constants_1.DROPDOWN_MAX_HEIGHT,
+        p: theme_constants_1.THEME_BASIC_SIZE.SMALL,
+        children: children
+      })
+    })
+  });
+};
+
+/* istanbul ignore next */
+cov_2cbj0ose4u().s[11]++;
+exports.Dropdown = Dropdown;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBO0FBQUE7QUFBQTs7QUFDQTtBQUFBO0FBQUE7QUFFQTtBQUFBO0FBQUE7QUFFQTtBQUFBO0FBQUE7QUFDQTtBQUFBO0FBQUE7Ozs7O0FBS08sTUFBTUEsUUFBUSxHQUFpQyxDQUFDO0VBQ3JEQyxNQURxRDtFQUVyREMsUUFGcUQ7RUFHckRDLFdBSHFEO0VBSXJEQyxNQUpxRDtFQUtyREMsTUFMcUQ7RUFNckRDLE9BTnFEO0VBT3JEQyxLQVBxRDtFQVFyREMsT0FScUQ7RUFTckQsR0FBR0M7QUFUa0QsQ0FBRCxLQVVqRDtFQUFBO0VBQUE7RUFDSCxNQUFNO0lBQUVDO0VBQUY7RUFBQTtFQUFBLDBCQUFhLDJCQUFVO0lBQUVEO0VBQUYsQ0FBVixDQUFiLENBQU47O0VBREc7RUFBQTtFQUVILE9BQ0UsdUJBQUNFLHFCQUFELEVBQVU7SUFDUlYsTUFBTSxFQUFFQSxNQURBO0lBRVJFLFdBQVcsRUFBRUEsV0FGTDtJQUdSQyxNQUFNLEVBQUVBLE1BSEE7SUFJUkMsTUFBTSxFQUFFQSxNQUpBO0lBS1JDLE9BQU8sRUFBRUEsT0FMRDtJQU1SQyxLQUFLLEVBQUVBLEtBTkM7SUFPUkMsT0FBTyxFQUFFQSxPQVBEO0lBUVJJLEtBQUssRUFBRUYsTUFSQztJQVFLUixVQUNiLHVCQUFDVyxpQkFBRCxFQUFRO01BQ05DLGVBQWUsRUFBRUMsdUNBQXFCQyxJQURoQztNQUVOQyxNQUFNLE1BRkE7TUFHTmQsV0FBVyxNQUhMO01BSU5lLFFBQVEsTUFKRjtNQUtOQyxPQUFPLEVBQUVaLEtBTEg7TUFNTmEsS0FBSyxFQUFFZCxPQU5EO01BT05lLE1BQU0sRUFBRWpCLE1BUEY7TUFRTmtCLElBQUksRUFBRSxDQUFDZixLQVJEO01BU05nQixLQUFLLE1BVEM7TUFTRHJCLFVBQ0wsdUJBQUNXLGlCQUFELEVBQVE7UUFDTlcsSUFBSSxNQURFO1FBRU5DLG9CQUFvQixNQUZkO1FBR05DLFNBQVMsRUFBRUMsd0NBSEw7UUFJTkMsQ0FBQyxFQUFFYixtQ0FBaUJjLEtBSmQ7UUFJbUIzQixVQUN4QkE7TUFMSyxDQUFSO0lBVk0sQ0FBUjtFQVRRLENBQVYsQ0FERjtBQThCRCxDQTFDTTs7OztBQUFNNEIsbUJBQVE5QixRQUFSIiwibmFtZXMiOlsiRHJvcGRvd24iLCJhbmNob3IiLCJjaGlsZHJlbiIsImlzRnVsbFdpZHRoIiwiaXNMZWZ0IiwiaXNPcGVuIiwiaXNSaWdodCIsImlzVG9wIiwib25DbG9zZSIsInByb3BzIiwic3R5bGVzIiwiX0Ryb3Bkb3duXzEiLCJzdHlsZSIsIldyYXBwZXJfMSIsImJhY2tncm91bmRDb2xvciIsInRoZW1lX2NvbnN0YW50c18xIiwiTUFJTiIsImJvcmRlciIsImlzU2hhZG93IiwibUJvdHRvbSIsIm1MZWZ0IiwibVJpZ2h0IiwibVRvcCIsInJvdW5kIiwiZ3JvdyIsImlzVmVydGljYWxTY3JvbGxhYmxlIiwibWF4SGVpZ2h0IiwiRHJvcGRvd25fY29uc3RhbnRzXzEiLCJwIiwiU01BTEwiLCJleHBvcnRzIl0sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy9jb3JlL2NvbXBvbmVudHMvRHJvcGRvd24vRHJvcGRvd24udHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IF9Ecm9wZG93biB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvY29yZS9jb21wb25lbnRzL0Ryb3Bkb3duL19Ecm9wZG93bic7XG5pbXBvcnQgeyBEUk9QRE9XTl9NQVhfSEVJR0hUIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9jb3JlL2NvbXBvbmVudHMvRHJvcGRvd24vRHJvcGRvd24uY29uc3RhbnRzJztcbmltcG9ydCB0eXBlIHsgRHJvcGRvd25Qcm9wc01vZGVsIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9jb3JlL2NvbXBvbmVudHMvRHJvcGRvd24vRHJvcGRvd24ubW9kZWxzJztcbmltcG9ydCB7IFdyYXBwZXIgfSBmcm9tICdAbGliL2Zyb250ZW5kL2NvcmUvY29tcG9uZW50cy9XcmFwcGVyL1dyYXBwZXInO1xuaW1wb3J0IHR5cGUgeyBTRkNNb2RlbCB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvY29yZS9jb3JlLm1vZGVscyc7XG5pbXBvcnQgeyB1c2VTdHlsZXMgfSBmcm9tICdAbGliL2Zyb250ZW5kL3N0eWxpbmcvaG9va3MvdXNlU3R5bGVzL3VzZVN0eWxlcyc7XG5pbXBvcnQge1xuICBUSEVNRV9CQVNJQ19TSVpFLFxuICBUSEVNRV9SRUxBVElWRV9DT0xPUixcbn0gZnJvbSAnQGxpYi9mcm9udGVuZC9zdHlsaW5nL3V0aWxzL3RoZW1lL3RoZW1lLmNvbnN0YW50cyc7XG5cbmV4cG9ydCBjb25zdCBEcm9wZG93bjogU0ZDTW9kZWw8RHJvcGRvd25Qcm9wc01vZGVsPiA9ICh7XG4gIGFuY2hvcixcbiAgY2hpbGRyZW4sXG4gIGlzRnVsbFdpZHRoLFxuICBpc0xlZnQsXG4gIGlzT3BlbixcbiAgaXNSaWdodCxcbiAgaXNUb3AsXG4gIG9uQ2xvc2UsXG4gIC4uLnByb3BzXG59KSA9PiB7XG4gIGNvbnN0IHsgc3R5bGVzIH0gPSB1c2VTdHlsZXMoeyBwcm9wcyB9KTtcbiAgcmV0dXJuIChcbiAgICA8X0Ryb3Bkb3duXG4gICAgICBhbmNob3I9e2FuY2hvcn1cbiAgICAgIGlzRnVsbFdpZHRoPXtpc0Z1bGxXaWR0aH1cbiAgICAgIGlzTGVmdD17aXNMZWZ0fVxuICAgICAgaXNPcGVuPXtpc09wZW59XG4gICAgICBpc1JpZ2h0PXtpc1JpZ2h0fVxuICAgICAgaXNUb3A9e2lzVG9wfVxuICAgICAgb25DbG9zZT17b25DbG9zZX1cbiAgICAgIHN0eWxlPXtzdHlsZXN9PlxuICAgICAgPFdyYXBwZXJcbiAgICAgICAgYmFja2dyb3VuZENvbG9yPXtUSEVNRV9SRUxBVElWRV9DT0xPUi5NQUlOfVxuICAgICAgICBib3JkZXJcbiAgICAgICAgaXNGdWxsV2lkdGhcbiAgICAgICAgaXNTaGFkb3dcbiAgICAgICAgbUJvdHRvbT17aXNUb3B9XG4gICAgICAgIG1MZWZ0PXtpc1JpZ2h0fVxuICAgICAgICBtUmlnaHQ9e2lzTGVmdH1cbiAgICAgICAgbVRvcD17IWlzVG9wfVxuICAgICAgICByb3VuZD5cbiAgICAgICAgPFdyYXBwZXJcbiAgICAgICAgICBncm93XG4gICAgICAgICAgaXNWZXJ0aWNhbFNjcm9sbGFibGVcbiAgICAgICAgICBtYXhIZWlnaHQ9e0RST1BET1dOX01BWF9IRUlHSFR9XG4gICAgICAgICAgcD17VEhFTUVfQkFTSUNfU0laRS5TTUFMTH0+XG4gICAgICAgICAge2NoaWxkcmVufVxuICAgICAgICA8L1dyYXBwZXI+XG4gICAgICA8L1dyYXBwZXI+XG4gICAgPC9fRHJvcGRvd24+XG4gICk7XG59O1xuIl19

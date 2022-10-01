@@ -1,0 +1,11 @@
+import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { cli } from '@tool/task/core/utils/cli/cli';
+
+const { displayName } = withTest({ target: () => cli });
+
+describe(displayName, () => {
+  test('works', async () => {
+    const result = await cli();
+    expect(result).toStrictEqual({});
+  });
+});

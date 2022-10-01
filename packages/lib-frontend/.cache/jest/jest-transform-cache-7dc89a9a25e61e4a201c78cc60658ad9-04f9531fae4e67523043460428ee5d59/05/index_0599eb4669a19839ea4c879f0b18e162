@@ -1,0 +1,21 @@
+7849f821cadd140e2b6218d717380cf5
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _reactDom = require("react-dom");
+
+var findNodeHandle = function findNodeHandle(component) {
+  var node;
+
+  try {
+    node = (0, _reactDom.findDOMNode)(component);
+  } catch (e) {}
+
+  return node;
+};
+
+var _default = findNodeHandle;
+exports["default"] = _default;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJmaW5kTm9kZUhhbmRsZSIsImNvbXBvbmVudCIsIm5vZGUiLCJmaW5kRE9NTm9kZSIsImUiXSwic291cmNlcyI6WyJpbmRleC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIENvcHlyaWdodCAoYykgTmljb2xhcyBHYWxsYWdoZXIuXG4gKiBDb3B5cmlnaHQgKGMpIE1ldGEgUGxhdGZvcm1zLCBJbmMuIGFuZCBhZmZpbGlhdGVzLlxuICpcbiAqIFRoaXMgc291cmNlIGNvZGUgaXMgbGljZW5zZWQgdW5kZXIgdGhlIE1JVCBsaWNlbnNlIGZvdW5kIGluIHRoZVxuICogTElDRU5TRSBmaWxlIGluIHRoZSByb290IGRpcmVjdG9yeSBvZiB0aGlzIHNvdXJjZSB0cmVlLlxuICpcbiAqIFxuICovXG5pbXBvcnQgeyBmaW5kRE9NTm9kZSB9IGZyb20gJ3JlYWN0LWRvbSc7XG5cbnZhciBmaW5kTm9kZUhhbmRsZSA9IGNvbXBvbmVudCA9PiB7XG4gIHZhciBub2RlO1xuXG4gIHRyeSB7XG4gICAgbm9kZSA9IGZpbmRET01Ob2RlKGNvbXBvbmVudCk7XG4gIH0gY2F0Y2ggKGUpIHt9XG5cbiAgcmV0dXJuIG5vZGU7XG59O1xuXG5leHBvcnQgZGVmYXVsdCBmaW5kTm9kZUhhbmRsZTsiXSwibWFwcGluZ3MiOiI7Ozs7O0FBU0E7O0FBRUEsSUFBSUEsY0FBYyxHQUFHLFNBQWpCQSxjQUFpQixDQUFBQyxTQUFTLEVBQUk7RUFDaEMsSUFBSUMsSUFBSjs7RUFFQSxJQUFJO0lBQ0ZBLElBQUksR0FBRyxJQUFBQyxxQkFBQSxFQUFZRixTQUFaLENBQVA7RUFDRCxDQUZELENBRUUsT0FBT0csQ0FBUCxFQUFVLENBQUU7O0VBRWQsT0FBT0YsSUFBUDtBQUNELENBUkQ7O2VBVWVGLGMifQ==

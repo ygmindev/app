@@ -1,0 +1,1 @@
+export const MOBILE_WIDTH_THRESHOLD = 700;

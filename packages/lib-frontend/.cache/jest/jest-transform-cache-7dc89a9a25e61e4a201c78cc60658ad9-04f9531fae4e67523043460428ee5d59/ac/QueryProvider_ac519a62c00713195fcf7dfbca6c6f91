@@ -1,0 +1,154 @@
+cc28b69014f151fb4fae525c0efaab24
+"use strict";
+
+/* istanbul ignore next */
+function cov_1opmtmef1i() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/providers/QueryProvider/QueryProvider.tsx";
+  var hash = "e579799d6d48b5a16001afc5ab1983e24c58ffd0";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/providers/QueryProvider/QueryProvider.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 31
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 23
+        },
+        end: {
+          line: 4,
+          column: 91
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 0
+        },
+        end: {
+          line: 5,
+          column: 132
+        }
+      },
+      "4": {
+        start: {
+          line: 5,
+          column: 87
+        },
+        end: {
+          line: 5,
+          column: 126
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 5,
+            column: 73
+          },
+          end: {
+            line: 5,
+            column: 74
+          }
+        },
+        loc: {
+          start: {
+            line: 5,
+            column: 85
+          },
+          end: {
+            line: 5,
+            column: 128
+          }
+        },
+        line: 5
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/providers/QueryProvider/QueryProvider.tsx",
+      mappings: ";;;AAAA,4FAA4G;AAAnG,+GAAA,cAAc,OAAiB",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/providers/QueryProvider/QueryProvider.tsx"],
+      sourcesContent: ["export { _QueryProvider as QueryProvider } from '@lib/frontend/core/providers/QueryProvider/_QueryProvider';\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "e579799d6d48b5a16001afc5ab1983e24c58ffd0"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_1opmtmef1i = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_1opmtmef1i();
+cov_1opmtmef1i().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_1opmtmef1i().s[1]++;
+exports.QueryProvider = void 0;
+
+var _QueryProvider_1 =
+/* istanbul ignore next */
+(cov_1opmtmef1i().s[2]++, require("@lib/frontend/core/providers/QueryProvider/_QueryProvider"));
+
+/* istanbul ignore next */
+cov_1opmtmef1i().s[3]++;
+Object.defineProperty(exports, "QueryProvider", {
+  enumerable: true,
+  get: function () {
+    /* istanbul ignore next */
+    cov_1opmtmef1i().f[0]++;
+    cov_1opmtmef1i().s[4]++;
+    return _QueryProvider_1._QueryProvider;
+  }
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQTtBQUFBO0FBQUE7Ozs7QUFBU0E7RUFBQUM7RUFBQUM7SUFBQTtJQUFBO0lBQUE7SUFBQTtFQUFjO0FBQWQiLCJuYW1lcyI6WyJPYmplY3QiLCJlbnVtZXJhYmxlIiwiZ2V0Il0sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy9jb3JlL3Byb3ZpZGVycy9RdWVyeVByb3ZpZGVyL1F1ZXJ5UHJvdmlkZXIudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCB7IF9RdWVyeVByb3ZpZGVyIGFzIFF1ZXJ5UHJvdmlkZXIgfSBmcm9tICdAbGliL2Zyb250ZW5kL2NvcmUvcHJvdmlkZXJzL1F1ZXJ5UHJvdmlkZXIvX1F1ZXJ5UHJvdmlkZXInO1xuIl19

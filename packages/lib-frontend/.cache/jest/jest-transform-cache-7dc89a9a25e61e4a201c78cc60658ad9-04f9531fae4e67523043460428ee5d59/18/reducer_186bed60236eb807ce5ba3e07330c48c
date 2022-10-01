@@ -1,0 +1,27 @@
+34f5f127c24e68238d89ffbea3ab1243
+"use strict";
+var _a;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.notificationReducer = exports.notificationActions = void 0;
+const reducer_constants_1 = require("@lib/frontend/notification/stores/reducer/reducer.constants");
+const uid_1 = require("@lib/shared/core/utils/uid/uid");
+const notification_constants_1 = require("@lib/shared/notification/notification.constants");
+const toolkit_1 = require("@reduxjs/toolkit");
+_a = (0, toolkit_1.createSlice)({
+    initialState: reducer_constants_1.NOTIFICATION_STATE_INITIAL,
+    name: notification_constants_1.NOTIFICATION,
+    reducers: {
+        alertAdd: {
+            prepare: (payload) => ({
+                payload: { ...payload, id: (0, uid_1.uid)('alert') },
+            }),
+            reducer: (state, { payload }) => {
+                state.alerts.unshift(payload);
+            },
+        },
+        alertRemove: (state, { payload }) => {
+            state.alerts = state.alerts.filter(({ id }) => id !== payload);
+        },
+    },
+}), exports.notificationActions = _a.actions, exports.notificationReducer = _a.reducer;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy9ub3RpZmljYXRpb24vc3RvcmVzL3JlZHVjZXIvcmVkdWNlci50cyIsIm1hcHBpbmdzIjoiOzs7O0FBQ0EsbUdBQXlHO0FBQ3pHLHdEQUFxRDtBQUNyRCw0RkFBK0U7QUFFL0UsOENBQStDO0FBSWxDLEtBQWlFLElBQUEscUJBQVcsRUFHdkY7SUFDQSxZQUFZLEVBQUUsOENBQTBCO0lBQ3hDLElBQUksRUFBRSxxQ0FBWTtJQUNsQixRQUFRLEVBQUU7UUFDUixRQUFRLEVBQUU7WUFDUixPQUFPLEVBQUUsQ0FBQyxPQUErQixFQUFFLEVBQUUsQ0FBQyxDQUFDO2dCQUM3QyxPQUFPLEVBQUUsRUFBRSxHQUFHLE9BQU8sRUFBRSxFQUFFLEVBQUUsSUFBQSxTQUFHLEVBQUMsT0FBTyxDQUFDLEVBQUU7YUFDMUMsQ0FBQztZQUNGLE9BQU8sRUFBRSxDQUFDLEtBQUssRUFBRSxFQUFFLE9BQU8sRUFBNkIsRUFBRSxFQUFFO2dCQUN6RCxLQUFLLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsQ0FBQztZQUNoQyxDQUFDO1NBQ0Y7UUFDRCxXQUFXLEVBQUUsQ0FBQyxLQUFLLEVBQUUsRUFBRSxPQUFPLEVBQXlCLEVBQUUsRUFBRTtZQUN6RCxLQUFLLENBQUMsTUFBTSxHQUFHLEtBQUssQ0FBQyxNQUFNLENBQUMsTUFBTSxDQUFDLENBQUMsRUFBRSxFQUFFLEVBQUUsRUFBRSxFQUFFLENBQUMsRUFBRSxLQUFLLE9BQU8sQ0FBQyxDQUFDO1FBQ2pFLENBQUM7S0FDRjtDQUNGLENBQUMsRUFuQnNCLDJCQUFtQixlQUFXLDJCQUFtQixjQW1CdEUiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy9ub3RpZmljYXRpb24vc3RvcmVzL3JlZHVjZXIvcmVkdWNlci50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgdHlwZSB7IEFsZXJ0TW9kZWwgfSBmcm9tICdAbGliL2Zyb250ZW5kL25vdGlmaWNhdGlvbi9jb21wb25lbnRzL0FsZXJ0L0FsZXJ0Lm1vZGVscyc7XG5pbXBvcnQgeyBOT1RJRklDQVRJT05fU1RBVEVfSU5JVElBTCB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvbm90aWZpY2F0aW9uL3N0b3Jlcy9yZWR1Y2VyL3JlZHVjZXIuY29uc3RhbnRzJztcbmltcG9ydCB7IHVpZCB9IGZyb20gJ0BsaWIvc2hhcmVkL2NvcmUvdXRpbHMvdWlkL3VpZCc7XG5pbXBvcnQgeyBOT1RJRklDQVRJT04gfSBmcm9tICdAbGliL3NoYXJlZC9ub3RpZmljYXRpb24vbm90aWZpY2F0aW9uLmNvbnN0YW50cyc7XG5pbXBvcnQgdHlwZSB7IFBheWxvYWRBY3Rpb24sIFNsaWNlQ2FzZVJlZHVjZXJzIH0gZnJvbSAnQHJlZHV4anMvdG9vbGtpdCc7XG5pbXBvcnQgeyBjcmVhdGVTbGljZSB9IGZyb20gJ0ByZWR1eGpzL3Rvb2xraXQnO1xuXG5pbXBvcnQgdHlwZSB7IE5vdGlmaWNhdGlvblN0YXRlTW9kZWwgfSBmcm9tICcuL3JlZHVjZXIubW9kZWxzJztcblxuZXhwb3J0IGNvbnN0IHsgYWN0aW9uczogbm90aWZpY2F0aW9uQWN0aW9ucywgcmVkdWNlcjogbm90aWZpY2F0aW9uUmVkdWNlciB9ID0gY3JlYXRlU2xpY2U8XG4gIE5vdGlmaWNhdGlvblN0YXRlTW9kZWwsXG4gIFNsaWNlQ2FzZVJlZHVjZXJzPE5vdGlmaWNhdGlvblN0YXRlTW9kZWw+XG4+KHtcbiAgaW5pdGlhbFN0YXRlOiBOT1RJRklDQVRJT05fU1RBVEVfSU5JVElBTCxcbiAgbmFtZTogTk9USUZJQ0FUSU9OLFxuICByZWR1Y2Vyczoge1xuICAgIGFsZXJ0QWRkOiB7XG4gICAgICBwcmVwYXJlOiAocGF5bG9hZDogT21pdDxBbGVydE1vZGVsLCAnaWQnPikgPT4gKHtcbiAgICAgICAgcGF5bG9hZDogeyAuLi5wYXlsb2FkLCBpZDogdWlkKCdhbGVydCcpIH0sXG4gICAgICB9KSxcbiAgICAgIHJlZHVjZXI6IChzdGF0ZSwgeyBwYXlsb2FkIH06IFBheWxvYWRBY3Rpb248QWxlcnRNb2RlbD4pID0+IHtcbiAgICAgICAgc3RhdGUuYWxlcnRzLnVuc2hpZnQocGF5bG9hZCk7XG4gICAgICB9LFxuICAgIH0sXG4gICAgYWxlcnRSZW1vdmU6IChzdGF0ZSwgeyBwYXlsb2FkIH06IFBheWxvYWRBY3Rpb248c3RyaW5nPikgPT4ge1xuICAgICAgc3RhdGUuYWxlcnRzID0gc3RhdGUuYWxlcnRzLmZpbHRlcigoeyBpZCB9KSA9PiBpZCAhPT0gcGF5bG9hZCk7XG4gICAgfSxcbiAgfSxcbn0pO1xuIl0sInZlcnNpb24iOjN9

@@ -1,0 +1,81 @@
+6119d1cd19f015804b1351fedb323049
+"use strict";
+
+var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _typeof2 = _interopRequireDefault2(require("@babel/runtime/helpers/typeof"));
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Provider = exports.Consumer = void 0;
+
+var React = _interopRequireWildcard(require("react"));
+
+var _MaterialCommunityIcon = _interopRequireDefault(require("../components/MaterialCommunityIcon"));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    "default": obj
+  };
+}
+
+function _getRequireWildcardCache(nodeInterop) {
+  if (typeof WeakMap !== "function") return null;
+  var cacheBabelInterop = new WeakMap();
+  var cacheNodeInterop = new WeakMap();
+  return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) {
+    return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
+  })(nodeInterop);
+}
+
+function _interopRequireWildcard(obj, nodeInterop) {
+  if (!nodeInterop && obj && obj.__esModule) {
+    return obj;
+  }
+
+  if (obj === null || (0, _typeof2["default"])(obj) !== "object" && typeof obj !== "function") {
+    return {
+      "default": obj
+    };
+  }
+
+  var cache = _getRequireWildcardCache(nodeInterop);
+
+  if (cache && cache.has(obj)) {
+    return cache.get(obj);
+  }
+
+  var newObj = {};
+  var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+
+  for (var key in obj) {
+    if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
+      var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+
+      if (desc && (desc.get || desc.set)) {
+        Object.defineProperty(newObj, key, desc);
+      } else {
+        newObj[key] = obj[key];
+      }
+    }
+  }
+
+  newObj["default"] = obj;
+
+  if (cache) {
+    cache.set(obj, newObj);
+  }
+
+  return newObj;
+}
+
+var _React$createContext = React.createContext({
+  icon: _MaterialCommunityIcon["default"]
+}),
+    Provider = _React$createContext.Provider,
+    Consumer = _React$createContext.Consumer;
+
+exports.Consumer = Consumer;
+exports.Provider = Provider;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7QUFBQTs7QUFDQTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQVFPLDJCQUErQkEsS0FBSyxDQUFDQyxhQUFORCxDQUE4QjtFQUNsRUUsSUFBSSxFQUFFQztBQUQ0RCxDQUE5QkgsQ0FBL0I7QUFBQSxJQUFRSSxRQUFSLHdCQUFRQSxRQUFSO0FBQUEsSUFBa0JDLFFBQWxCLHdCQUFrQkEsUUFBbEIiLCJuYW1lcyI6WyJSZWFjdCIsImNyZWF0ZUNvbnRleHQiLCJpY29uIiwiTWF0ZXJpYWxDb21tdW5pdHlJY29uIiwiUHJvdmlkZXIiLCJDb25zdW1lciJdLCJzb3VyY2VzIjpbInNldHRpbmdzLnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgKiBhcyBSZWFjdCBmcm9tICdyZWFjdCc7XG5pbXBvcnQgTWF0ZXJpYWxDb21tdW5pdHlJY29uLCB7XG4gIEljb25Qcm9wcyxcbn0gZnJvbSAnLi4vY29tcG9uZW50cy9NYXRlcmlhbENvbW11bml0eUljb24nO1xuXG5leHBvcnQgdHlwZSBTZXR0aW5ncyA9IHtcbiAgaWNvbjogKHsgbmFtZSwgY29sb3IsIHNpemUsIGRpcmVjdGlvbiB9OiBJY29uUHJvcHMpID0+IFJlYWN0LlJlYWN0Tm9kZTtcbn07XG5cbmV4cG9ydCBjb25zdCB7IFByb3ZpZGVyLCBDb25zdW1lciB9ID0gUmVhY3QuY3JlYXRlQ29udGV4dDxTZXR0aW5ncz4oe1xuICBpY29uOiBNYXRlcmlhbENvbW11bml0eUljb24sXG59KTtcbiJdfQ==

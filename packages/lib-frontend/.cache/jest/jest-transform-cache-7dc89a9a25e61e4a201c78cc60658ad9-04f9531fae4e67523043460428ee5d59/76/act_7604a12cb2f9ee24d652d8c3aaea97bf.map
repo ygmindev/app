@@ -1,0 +1,1 @@
+{"file":"/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/testing/utils/act/act.tsx","mappings":";;;AAAA,6DAAmE;AAA1D,2FAAA,IAAI,OAAO","names":[],"sources":["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/testing/utils/act/act.tsx"],"sourcesContent":["export { _act as act } from '@lib/frontend/testing/utils/act/_act';\n"],"version":3}

@@ -1,0 +1,10 @@
+lib-shared/
+    withName -> withAction?
+
+lib-backend/
+    withEntity -> no need for isSchemaInput - Input?
+
+
+- */resources
+- database/Repository.models
+- replace operation with withMethod

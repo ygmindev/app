@@ -1,0 +1,247 @@
+082c8b400b350e6b0e9d9d99285afc6c
+"use strict";
+
+/* istanbul ignore next */
+function cov_6qbqcuigt() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/utils/styler/borderStyler/borderStyler.constants.ts";
+  var hash = "aa8f1c3bdb05e5698748418f4f9c4161454cbafb";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/utils/styler/borderStyler/borderStyler.constants.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 58
+        }
+      },
+      "2": {
+        start: {
+          line: 5,
+          column: 0
+        },
+        end: {
+          line: 10,
+          column: 83
+        }
+      },
+      "3": {
+        start: {
+          line: 6,
+          column: 4
+        },
+        end: {
+          line: 6,
+          column: 42
+        }
+      },
+      "4": {
+        start: {
+          line: 7,
+          column: 4
+        },
+        end: {
+          line: 7,
+          column: 38
+        }
+      },
+      "5": {
+        start: {
+          line: 8,
+          column: 4
+        },
+        end: {
+          line: 8,
+          column: 40
+        }
+      },
+      "6": {
+        start: {
+          line: 9,
+          column: 4
+        },
+        end: {
+          line: 9,
+          column: 36
+        }
+      },
+      "7": {
+        start: {
+          line: 11,
+          column: 0
+        },
+        end: {
+          line: 17,
+          column: 2
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 5,
+            column: 1
+          },
+          end: {
+            line: 5,
+            column: 2
+          }
+        },
+        loc: {
+          start: {
+            line: 5,
+            column: 29
+          },
+          end: {
+            line: 10,
+            column: 1
+          }
+        },
+        line: 5
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 10,
+            column: 22
+          },
+          end: {
+            line: 10,
+            column: 81
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 10,
+            column: 22
+          },
+          end: {
+            line: 10,
+            column: 46
+          }
+        }, {
+          start: {
+            line: 10,
+            column: 51
+          },
+          end: {
+            line: 10,
+            column: 80
+          }
+        }],
+        line: 10
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {
+      "0": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/utils/styler/borderStyler/borderStyler.constants.ts",
+      mappings: ";;;AAEA,IAAY,gBAKX;AALD,WAAY,gBAAgB;IAC1B,qCAAiB,CAAA;IACjB,iCAAa,CAAA;IACb,mCAAe,CAAA;IACf,+BAAW,CAAA;AACb,CAAC,EALW,gBAAgB,GAAhB,wBAAgB,KAAhB,wBAAgB,QAK3B;AAEY,QAAA,aAAa,GAAkD;IAC1E,SAAS,EAAE,CAAC;IACZ,WAAW,EAAE,MAAM;IACnB,YAAY,EAAE,EAAE,MAAM,EAAE,CAAC,EAAE,KAAK,EAAE,CAAC,EAAE;IACrC,aAAa,EAAE,GAAG;IAClB,YAAY,EAAE,CAAC;CAChB,CAAC",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/utils/styler/borderStyler/borderStyler.constants.ts"],
+      sourcesContent: ["import type { ShadowStyleIOS, ViewStyle } from 'react-native';\n\nexport enum BORDER_DIRECTION {\n  BOTTOM = 'bottom',\n  LEFT = 'left',\n  RIGHT = 'right',\n  TOP = 'top',\n}\n\nexport const BORDER_SHADOW: ShadowStyleIOS & Pick<ViewStyle, 'elevation'> = {\n  elevation: 1,\n  shadowColor: '#000',\n  shadowOffset: { height: 1, width: 0 },\n  shadowOpacity: 0.3,\n  shadowRadius: 3,\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "aa8f1c3bdb05e5698748418f4f9c4161454cbafb"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_6qbqcuigt = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_6qbqcuigt();
+cov_6qbqcuigt().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_6qbqcuigt().s[1]++;
+exports.BORDER_SHADOW = exports.BORDER_DIRECTION = void 0;
+var BORDER_DIRECTION;
+
+/* istanbul ignore next */
+cov_6qbqcuigt().s[2]++;
+
+(function (BORDER_DIRECTION) {
+  /* istanbul ignore next */
+  cov_6qbqcuigt().f[0]++;
+  cov_6qbqcuigt().s[3]++;
+  BORDER_DIRECTION["BOTTOM"] = "bottom";
+
+  /* istanbul ignore next */
+  cov_6qbqcuigt().s[4]++;
+  BORDER_DIRECTION["LEFT"] = "left";
+
+  /* istanbul ignore next */
+  cov_6qbqcuigt().s[5]++;
+  BORDER_DIRECTION["RIGHT"] = "right";
+
+  /* istanbul ignore next */
+  cov_6qbqcuigt().s[6]++;
+  BORDER_DIRECTION["TOP"] = "top";
+})(BORDER_DIRECTION =
+/* istanbul ignore next */
+(cov_6qbqcuigt().b[0][0]++, exports.BORDER_DIRECTION) ||
+/* istanbul ignore next */
+(cov_6qbqcuigt().b[0][1]++, exports.BORDER_DIRECTION = {}));
+
+/* istanbul ignore next */
+cov_6qbqcuigt().s[7]++;
+exports.BORDER_SHADOW = {
+  elevation: 1,
+  shadowColor: '#000',
+  shadowOffset: {
+    height: 1,
+    width: 0
+  },
+  shadowOpacity: 0.3,
+  shadowRadius: 3
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7SUFjRTs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFaRixJQUFZQSxnQkFBWjs7Ozs7QUFBQSxXQUFZQSxnQkFBWixFQUE0QjtFQUFBO0VBQUE7RUFBQTtFQUMxQkE7O0VBRDBCO0VBQUE7RUFFMUJBOztFQUYwQjtFQUFBO0VBRzFCQTs7RUFIMEI7RUFBQTtFQUkxQkE7QUFDRCxDQUxELEVBQVlBLGdCQUFnQjtBQUFoQjtBQUFBO0FBQUE7QUFBQSx1REFBZ0IsRUFBaEIsQ0FBWjs7OztBQU9hQyx3QkFBK0Q7RUFDMUVDLFNBQVMsRUFBRSxDQUQrRDtFQUUxRUMsV0FBVyxFQUFFLE1BRjZEO0VBRzFFQyxZQUFZLEVBQUU7SUFBRUMsTUFBTSxFQUFFLENBQVY7SUFBYUMsS0FBSyxFQUFFO0VBQXBCLENBSDREO0VBSTFFQyxhQUFhLEVBQUUsR0FKMkQ7RUFLMUVDLFlBQVksRUFBRTtBQUw0RCxDQUEvRCIsIm5hbWVzIjpbIkJPUkRFUl9ESVJFQ1RJT04iLCJleHBvcnRzIiwiZWxldmF0aW9uIiwic2hhZG93Q29sb3IiLCJzaGFkb3dPZmZzZXQiLCJoZWlnaHQiLCJ3aWR0aCIsInNoYWRvd09wYWNpdHkiLCJzaGFkb3dSYWRpdXMiXSwic291cmNlcyI6WyIvVXNlcnMveWdtaW4vUHJvamVjdHMvbW9ub192Mi9hcHAzL2FwcC9wYWNrYWdlcy9saWItZnJvbnRlbmQvc3JjL3N0eWxpbmcvdXRpbHMvc3R5bGVyL2JvcmRlclN0eWxlci9ib3JkZXJTdHlsZXIuY29uc3RhbnRzLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB0eXBlIHsgU2hhZG93U3R5bGVJT1MsIFZpZXdTdHlsZSB9IGZyb20gJ3JlYWN0LW5hdGl2ZSc7XG5cbmV4cG9ydCBlbnVtIEJPUkRFUl9ESVJFQ1RJT04ge1xuICBCT1RUT00gPSAnYm90dG9tJyxcbiAgTEVGVCA9ICdsZWZ0JyxcbiAgUklHSFQgPSAncmlnaHQnLFxuICBUT1AgPSAndG9wJyxcbn1cblxuZXhwb3J0IGNvbnN0IEJPUkRFUl9TSEFET1c6IFNoYWRvd1N0eWxlSU9TICYgUGljazxWaWV3U3R5bGUsICdlbGV2YXRpb24nPiA9IHtcbiAgZWxldmF0aW9uOiAxLFxuICBzaGFkb3dDb2xvcjogJyMwMDAnLFxuICBzaGFkb3dPZmZzZXQ6IHsgaGVpZ2h0OiAxLCB3aWR0aDogMCB9LFxuICBzaGFkb3dPcGFjaXR5OiAwLjMsXG4gIHNoYWRvd1JhZGl1czogMyxcbn07XG4iXX0=

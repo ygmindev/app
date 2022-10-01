@@ -1,0 +1,174 @@
+4c8924f6a67bd566e785b5b7e4513887
+"use strict";
+
+/* istanbul ignore next */
+function cov_1zsmgt1kph() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/testing/utils/scroll/_scroll.tsx";
+  var hash = "0ba12dadd885d2dc9acb285f5c1c0750c8b332dc";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/testing/utils/scroll/_scroll.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 25
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 16
+        },
+        end: {
+          line: 4,
+          column: 49
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 16
+        },
+        end: {
+          line: 7,
+          column: 2
+        }
+      },
+      "4": {
+        start: {
+          line: 5,
+          column: 39
+        },
+        end: {
+          line: 7,
+          column: 2
+        }
+      },
+      "5": {
+        start: {
+          line: 8,
+          column: 0
+        },
+        end: {
+          line: 8,
+          column: 26
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 5,
+            column: 16
+          },
+          end: {
+            line: 5,
+            column: 17
+          }
+        },
+        loc: {
+          start: {
+            line: 5,
+            column: 39
+          },
+          end: {
+            line: 7,
+            column: 2
+          }
+        },
+        line: 5
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/testing/utils/scroll/_scroll.tsx",
+      mappings: ";;;AACA,kDAAmD;AAG5C,MAAM,OAAO,GAAG,CAAC,OAAqB,EAAE,EAAE,CAAC,EAAE,CAAC,EAAiB,EAAW,EAAE,CACjF,iBAAS,CAAC,MAAM,CAAC,OAA6B,EAAE;IAC9C,MAAM,EAAE,EAAE,UAAU,EAAE,CAAC,EAAE,SAAS,EAAE,CAAC,EAAE;CACxC,CAAC,CAAC;AAHQ,QAAA,OAAO,WAGf",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/testing/utils/scroll/_scroll.tsx"],
+      sourcesContent: ["import type { PositionModel } from '@lib/frontend/core/utils/measure/measure.models';\nimport { fireEvent } from '@testing-library/react';\nimport type { ReactElement } from 'react';\n\nexport const _scroll = (element: ReactElement, { x, y }: PositionModel): unknown =>\n  fireEvent.scroll(element as unknown as Element, {\n    target: { scrollLeft: x, scrollTop: y },\n  });\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "0ba12dadd885d2dc9acb285f5c1c0750c8b332dc"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_1zsmgt1kph = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_1zsmgt1kph();
+cov_1zsmgt1kph().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_1zsmgt1kph().s[1]++;
+exports._scroll = void 0;
+const react_1 =
+/* istanbul ignore next */
+(cov_1zsmgt1kph().s[2]++, require("@testing-library/react"));
+
+/* istanbul ignore next */
+cov_1zsmgt1kph().s[3]++;
+
+const _scroll = (element, {
+  x,
+  y
+}) => {
+  /* istanbul ignore next */
+  cov_1zsmgt1kph().f[0]++;
+  cov_1zsmgt1kph().s[4]++;
+  return react_1.fireEvent.scroll(element, {
+    target: {
+      scrollLeft: x,
+      scrollTop: y
+    }
+  });
+};
+
+/* istanbul ignore next */
+cov_1zsmgt1kph().s[5]++;
+exports._scroll = _scroll;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQ0E7QUFBQTtBQUFBOzs7OztBQUdPLE1BQU1BLE9BQU8sR0FBRyxDQUFDQyxPQUFELEVBQXdCO0VBQUVDLENBQUY7RUFBS0M7QUFBTCxDQUF4QixLQUNyQjtFQUFBO0VBQUE7RUFBQTtFQUFBLHlCQUFVQyxNQUFWLENBQWlCSCxPQUFqQixFQUFnRDtJQUM5Q0ksTUFBTSxFQUFFO01BQUVDLFVBQVUsRUFBRUosQ0FBZDtNQUFpQkssU0FBUyxFQUFFSjtJQUE1QjtFQURzQyxDQUFoRDtBQUVFLENBSEc7Ozs7QUFBTUssa0JBQU9SLE9BQVAiLCJuYW1lcyI6WyJfc2Nyb2xsIiwiZWxlbWVudCIsIngiLCJ5Iiwic2Nyb2xsIiwidGFyZ2V0Iiwic2Nyb2xsTGVmdCIsInNjcm9sbFRvcCIsImV4cG9ydHMiXSwic291cmNlcyI6WyIvVXNlcnMveWdtaW4vUHJvamVjdHMvbW9ub192Mi9hcHAzL2FwcC9wYWNrYWdlcy9saWItZnJvbnRlbmQvc3JjL3Rlc3RpbmcvdXRpbHMvc2Nyb2xsL19zY3JvbGwudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB0eXBlIHsgUG9zaXRpb25Nb2RlbCB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvY29yZS91dGlscy9tZWFzdXJlL21lYXN1cmUubW9kZWxzJztcbmltcG9ydCB7IGZpcmVFdmVudCB9IGZyb20gJ0B0ZXN0aW5nLWxpYnJhcnkvcmVhY3QnO1xuaW1wb3J0IHR5cGUgeyBSZWFjdEVsZW1lbnQgfSBmcm9tICdyZWFjdCc7XG5cbmV4cG9ydCBjb25zdCBfc2Nyb2xsID0gKGVsZW1lbnQ6IFJlYWN0RWxlbWVudCwgeyB4LCB5IH06IFBvc2l0aW9uTW9kZWwpOiB1bmtub3duID0+XG4gIGZpcmVFdmVudC5zY3JvbGwoZWxlbWVudCBhcyB1bmtub3duIGFzIEVsZW1lbnQsIHtcbiAgICB0YXJnZXQ6IHsgc2Nyb2xsTGVmdDogeCwgc2Nyb2xsVG9wOiB5IH0sXG4gIH0pO1xuIl19

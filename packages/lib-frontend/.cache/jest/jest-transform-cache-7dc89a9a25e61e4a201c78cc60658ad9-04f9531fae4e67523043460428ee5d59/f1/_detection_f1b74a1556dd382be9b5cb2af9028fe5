@@ -1,0 +1,367 @@
+2335714bb339d2cc2838d73649114ce1
+"use strict";
+
+/* istanbul ignore next */
+function cov_10pl03gkyt() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/locale/providers/LocaleProvider/detection/_detection.ts";
+  var hash = "0b7155556c45fb5152c4f2a0152f6a8e0c7ae517";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/locale/providers/LocaleProvider/detection/_detection.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 22
+        },
+        end: {
+          line: 4,
+          column: 1
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 4
+        },
+        end: {
+          line: 3,
+          column: 62
+        }
+      },
+      "2": {
+        start: {
+          line: 5,
+          column: 0
+        },
+        end: {
+          line: 5,
+          column: 62
+        }
+      },
+      "3": {
+        start: {
+          line: 6,
+          column: 0
+        },
+        end: {
+          line: 6,
+          column: 48
+        }
+      },
+      "4": {
+        start: {
+          line: 7,
+          column: 41
+        },
+        end: {
+          line: 7,
+          column: 84
+        }
+      },
+      "5": {
+        start: {
+          line: 8,
+          column: 0
+        },
+        end: {
+          line: 8,
+          column: 156
+        }
+      },
+      "6": {
+        start: {
+          line: 8,
+          column: 83
+        },
+        end: {
+          line: 8,
+          column: 150
+        }
+      },
+      "7": {
+        start: {
+          line: 9,
+          column: 0
+        },
+        end: {
+          line: 17,
+          column: 2
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 2,
+            column: 56
+          },
+          end: {
+            line: 2,
+            column: 57
+          }
+        },
+        loc: {
+          start: {
+            line: 2,
+            column: 71
+          },
+          end: {
+            line: 4,
+            column: 1
+          }
+        },
+        line: 2
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 8,
+            column: 69
+          },
+          end: {
+            line: 8,
+            column: 70
+          }
+        },
+        loc: {
+          start: {
+            line: 8,
+            column: 81
+          },
+          end: {
+            line: 8,
+            column: 152
+          }
+        },
+        line: 8
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 2,
+            column: 22
+          },
+          end: {
+            line: 4,
+            column: 1
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 2,
+            column: 23
+          },
+          end: {
+            line: 2,
+            column: 27
+          }
+        }, {
+          start: {
+            line: 2,
+            column: 31
+          },
+          end: {
+            line: 2,
+            column: 51
+          }
+        }, {
+          start: {
+            line: 2,
+            column: 56
+          },
+          end: {
+            line: 4,
+            column: 1
+          }
+        }],
+        line: 2
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 3,
+            column: 11
+          },
+          end: {
+            line: 3,
+            column: 61
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 3,
+            column: 37
+          },
+          end: {
+            line: 3,
+            column: 40
+          }
+        }, {
+          start: {
+            line: 3,
+            column: 43
+          },
+          end: {
+            line: 3,
+            column: 61
+          }
+        }],
+        line: 3
+      },
+      "2": {
+        loc: {
+          start: {
+            line: 3,
+            column: 12
+          },
+          end: {
+            line: 3,
+            column: 33
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 3,
+            column: 12
+          },
+          end: {
+            line: 3,
+            column: 15
+          }
+        }, {
+          start: {
+            line: 3,
+            column: 19
+          },
+          end: {
+            line: 3,
+            column: 33
+          }
+        }],
+        line: 3
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0
+    },
+    b: {
+      "0": [0, 0, 0],
+      "1": [0, 0],
+      "2": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/locale/providers/LocaleProvider/detection/_detection.ts",
+      mappings: ";;;;;;AAAA,qFAAwE;AAA/D,8IAAA,OAAO,OAAa;AAEhB,QAAA,UAAU,GAAG;IACxB,MAAM,EAAE,CAAC,cAAc,EAAE,QAAQ,CAAC;IAClC,aAAa,EAAE,EAAE,IAAI,EAAE,GAAG,EAAE,QAAQ,EAAE,IAAI,EAAE;IAC5C,YAAY,EAAE,KAAK;IACnB,mBAAmB,EAAE,CAAC;IACtB,wBAAwB,EAAE,CAAC;IAC3B,kBAAkB,EAAE,KAAK;IACzB,KAAK,EAAE,CAAC,QAAQ,EAAE,cAAc,EAAE,SAAS,EAAE,MAAM,EAAE,WAAW,CAAC;CAClE,CAAC",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/locale/providers/LocaleProvider/detection/_detection.ts"],
+      sourcesContent: ["export { default as _Detector } from 'i18next-browser-languagedetector';\n\nexport const _detection = {\n  caches: ['localStorage', 'cookie'],\n  cookieOptions: { path: '/', sameSite: true },\n  lookupCookie: 'lng',\n  lookupFromPathIndex: 0,\n  lookupFromSubdomainIndex: 0,\n  lookupLocalStorage: 'lng',\n  order: ['cookie', 'localStorage', 'htmlTag', 'path', 'subdomain'],\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "0b7155556c45fb5152c4f2a0152f6a8e0c7ae517"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_10pl03gkyt = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_10pl03gkyt();
+
+var __importDefault =
+/* istanbul ignore next */
+(cov_10pl03gkyt().s[0]++,
+/* istanbul ignore next */
+(cov_10pl03gkyt().b[0][0]++, this) &&
+/* istanbul ignore next */
+(cov_10pl03gkyt().b[0][1]++, this.__importDefault) ||
+/* istanbul ignore next */
+(cov_10pl03gkyt().b[0][2]++, function (mod) {
+  /* istanbul ignore next */
+  cov_10pl03gkyt().f[0]++;
+  cov_10pl03gkyt().s[1]++;
+  return (
+    /* istanbul ignore next */
+    (cov_10pl03gkyt().b[2][0]++, mod) &&
+    /* istanbul ignore next */
+    (cov_10pl03gkyt().b[2][1]++, mod.__esModule) ?
+    /* istanbul ignore next */
+    (cov_10pl03gkyt().b[1][0]++, mod) :
+    /* istanbul ignore next */
+    (cov_10pl03gkyt().b[1][1]++, {
+      "default": mod
+    })
+  );
+}));
+
+/* istanbul ignore next */
+cov_10pl03gkyt().s[2]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_10pl03gkyt().s[3]++;
+exports._detection = exports._Detector = void 0;
+var i18next_browser_languagedetector_1 =
+/* istanbul ignore next */
+(cov_10pl03gkyt().s[4]++, require("i18next-browser-languagedetector"));
+
+/* istanbul ignore next */
+cov_10pl03gkyt().s[5]++;
+Object.defineProperty(exports, "_Detector", {
+  enumerable: true,
+  get: function () {
+    /* istanbul ignore next */
+    cov_10pl03gkyt().f[1]++;
+    cov_10pl03gkyt().s[6]++;
+    return __importDefault(i18next_browser_languagedetector_1).default;
+  }
+});
+
+/* istanbul ignore next */
+cov_10pl03gkyt().s[7]++;
+exports._detection = {
+  caches: ['localStorage', 'cookie'],
+  cookieOptions: {
+    path: '/',
+    sameSite: true
+  },
+  lookupCookie: 'lng',
+  lookupFromPathIndex: 0,
+  lookupFromSubdomainIndex: 0,
+  lookupLocalStorage: 'lng',
+  order: ['cookie', 'localStorage', 'htmlTag', 'path', 'subdomain']
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7SUFTVTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBVFY7QUFBQTtBQUFBOzs7O0FBQVNBO0VBQUFDO0VBQUFDO0lBQUE7SUFBQTtJQUFBO0lBQUE7RUFBTztBQUFQOzs7O0FBRUlDLHFCQUFhO0VBQ3hCQyxNQUFNLEVBQUUsQ0FBQyxjQUFELEVBQWlCLFFBQWpCLENBRGdCO0VBRXhCQyxhQUFhLEVBQUU7SUFBRUMsSUFBSSxFQUFFLEdBQVI7SUFBYUMsUUFBUSxFQUFFO0VBQXZCLENBRlM7RUFHeEJDLFlBQVksRUFBRSxLQUhVO0VBSXhCQyxtQkFBbUIsRUFBRSxDQUpHO0VBS3hCQyx3QkFBd0IsRUFBRSxDQUxGO0VBTXhCQyxrQkFBa0IsRUFBRSxLQU5JO0VBT3hCQyxLQUFLLEVBQUUsQ0FBQyxRQUFELEVBQVcsY0FBWCxFQUEyQixTQUEzQixFQUFzQyxNQUF0QyxFQUE4QyxXQUE5QztBQVBpQixDQUFiIiwibmFtZXMiOlsiT2JqZWN0IiwiZW51bWVyYWJsZSIsImdldCIsImV4cG9ydHMiLCJjYWNoZXMiLCJjb29raWVPcHRpb25zIiwicGF0aCIsInNhbWVTaXRlIiwibG9va3VwQ29va2llIiwibG9va3VwRnJvbVBhdGhJbmRleCIsImxvb2t1cEZyb21TdWJkb21haW5JbmRleCIsImxvb2t1cExvY2FsU3RvcmFnZSIsIm9yZGVyIl0sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy9sb2NhbGUvcHJvdmlkZXJzL0xvY2FsZVByb3ZpZGVyL2RldGVjdGlvbi9fZGV0ZWN0aW9uLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCB7IGRlZmF1bHQgYXMgX0RldGVjdG9yIH0gZnJvbSAnaTE4bmV4dC1icm93c2VyLWxhbmd1YWdlZGV0ZWN0b3InO1xuXG5leHBvcnQgY29uc3QgX2RldGVjdGlvbiA9IHtcbiAgY2FjaGVzOiBbJ2xvY2FsU3RvcmFnZScsICdjb29raWUnXSxcbiAgY29va2llT3B0aW9uczogeyBwYXRoOiAnLycsIHNhbWVTaXRlOiB0cnVlIH0sXG4gIGxvb2t1cENvb2tpZTogJ2xuZycsXG4gIGxvb2t1cEZyb21QYXRoSW5kZXg6IDAsXG4gIGxvb2t1cEZyb21TdWJkb21haW5JbmRleDogMCxcbiAgbG9va3VwTG9jYWxTdG9yYWdlOiAnbG5nJyxcbiAgb3JkZXI6IFsnY29va2llJywgJ2xvY2FsU3RvcmFnZScsICdodG1sVGFnJywgJ3BhdGgnLCAnc3ViZG9tYWluJ10sXG59O1xuIl19

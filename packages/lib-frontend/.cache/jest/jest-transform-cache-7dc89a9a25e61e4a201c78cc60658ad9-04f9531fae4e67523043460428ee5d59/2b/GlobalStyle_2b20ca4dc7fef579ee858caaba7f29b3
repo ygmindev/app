@@ -1,0 +1,313 @@
+4ec10dd7334eb9a01402e0d3f10807d0
+"use strict";
+
+/* istanbul ignore next */
+function cov_1m7qp0dxoo() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/containers/GlobalStyle/GlobalStyle.tsx";
+  var hash = "7c92d95b3b14349369eab08851f2ae9fff2e0879";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/containers/GlobalStyle/GlobalStyle.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 29
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 16
+        },
+        end: {
+          line: 4,
+          column: 32
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 24
+        },
+        end: {
+          line: 5,
+          column: 66
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 16
+        },
+        end: {
+          line: 6,
+          column: 32
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 26
+        },
+        end: {
+          line: 7,
+          column: 109
+        }
+      },
+      "6": {
+        start: {
+          line: 8,
+          column: 23
+        },
+        end: {
+          line: 8,
+          column: 103
+        }
+      },
+      "7": {
+        start: {
+          line: 9,
+          column: 28
+        },
+        end: {
+          line: 9,
+          column: 56
+        }
+      },
+      "8": {
+        start: {
+          line: 10,
+          column: 0
+        },
+        end: {
+          line: 70,
+          column: 2
+        }
+      }
+    },
+    fnMap: {},
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 10,
+            column: 22
+          },
+          end: {
+            line: 70,
+            column: 1
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 11,
+            column: 6
+          },
+          end: {
+            line: 11,
+            column: 22
+          }
+        }, {
+          start: {
+            line: 12,
+            column: 6
+          },
+          end: {
+            line: 70,
+            column: 1
+          }
+        }],
+        line: 10
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 10,
+            column: 22
+          },
+          end: {
+            line: 10,
+            column: 67
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 10,
+            column: 22
+          },
+          end: {
+            line: 10,
+            column: 53
+          }
+        }, {
+          start: {
+            line: 10,
+            column: 57
+          },
+          end: {
+            line: 10,
+            column: 67
+          }
+        }],
+        line: 10
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0
+    },
+    f: {},
+    b: {
+      "0": [0, 0],
+      "1": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/containers/GlobalStyle/GlobalStyle.tsx",
+      mappings: ";;;;AAAA,mEAAoE;AACpE,iCAAiC;AACjC,8GAA0E;AAC1E,wGAAoE;AACpE,yDAAsD;AAEzC,QAAA,WAAW,GACtB,OAAO,CAAC,GAAG,CAAC,QAAQ,KAAK,MAAM,IAAI,UAAU;IAC3C,CAAC,CAAC,gBAAQ;IACV,CAAC,CAAC,IAAA,qCAAiB,EAAA;;;eAGR,sBAAQ;;;;;eAKR,yBAAW;;;;;;;;;;mBAUP,iCAAiB,CAAC,IAAI,EAAE,MAAM;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;CAwChD,CAAC",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/containers/GlobalStyle/GlobalStyle.tsx"],
+      sourcesContent: ["import { commonThemeConfig } from '@lib/config/theme/common.config';\nimport { Fragment } from 'react';\nimport FontAwesome from 'react-native-vector-icons/Fonts/FontAwesome.ttf';\nimport Ionicons from 'react-native-vector-icons/Fonts/Ionicons.ttf';\nimport { createGlobalStyle } from 'styled-components';\n\nexport const GlobalStyle =\n  process.env.NODE_ENV === 'test' || __IS_SSR__\n    ? Fragment\n    : createGlobalStyle`\n  @font-face {\n    font-family: 'Ionicons';\n    src: url(${Ionicons});\n  }\n\n  @font-face {\n    font-family: 'FontAwesome';\n    src: url(${FontAwesome});\n  }\n\n  html, body, #root {\n    height: 100%;\n    margin: 0;\n    padding: 0;\n  }\n\n  body {\n    font-family: ${commonThemeConfig.font?.family};\n    font-smoothing: antialiased;\n    overflow-y: scroll;\n  }\n\n  #root {\n    display: flex;\n    flex-direction: column;\n  }\n\n  a, a:visited {\n    cursor: pointer;\n    text-decoration-line: none;\n  }\n  [aria-disabled='true'] {\n    cursor: initial !important;\n  }\n\n  input[type=number]::-webkit-inner-spin-button,\n  input[type=number]::-webkit-outer-spin-button {\n    -webkit-appearance: none v;\n    margin: 0 !important!important\n  }\n  input:-webkit-autofill {\n    -webkit-background-clip: text;\n  }\n  input {\n    min-width: 0 !important;\n    border: none !important;\n    outline: inherit !important;\n    cursor: inherit !important;\n  }\n\n  img {\n    background-repeat: no-repeat;\n  }\n\n  #react-refresh-overlay {\n    display: none !important;\n  }\n`;\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "7c92d95b3b14349369eab08851f2ae9fff2e0879"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_1m7qp0dxoo = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_1m7qp0dxoo();
+cov_1m7qp0dxoo().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_1m7qp0dxoo().s[1]++;
+exports.GlobalStyle = void 0;
+const tslib_1 =
+/* istanbul ignore next */
+(cov_1m7qp0dxoo().s[2]++, require("tslib"));
+const common_config_1 =
+/* istanbul ignore next */
+(cov_1m7qp0dxoo().s[3]++, require("@lib/config/theme/common.config"));
+const react_1 =
+/* istanbul ignore next */
+(cov_1m7qp0dxoo().s[4]++, require("react"));
+const FontAwesome_ttf_1 =
+/* istanbul ignore next */
+(cov_1m7qp0dxoo().s[5]++, tslib_1.__importDefault(require("react-native-vector-icons/Fonts/FontAwesome.ttf")));
+const Ionicons_ttf_1 =
+/* istanbul ignore next */
+(cov_1m7qp0dxoo().s[6]++, tslib_1.__importDefault(require("react-native-vector-icons/Fonts/Ionicons.ttf")));
+const styled_components_1 =
+/* istanbul ignore next */
+(cov_1m7qp0dxoo().s[7]++, require("styled-components"));
+
+/* istanbul ignore next */
+cov_1m7qp0dxoo().s[8]++;
+exports.GlobalStyle =
+/* istanbul ignore next */
+(cov_1m7qp0dxoo().b[1][0]++, process.env.NODE_ENV === 'test') ||
+/* istanbul ignore next */
+(cov_1m7qp0dxoo().b[1][1]++, __IS_SSR__) ?
+/* istanbul ignore next */
+(cov_1m7qp0dxoo().b[0][0]++, react_1.Fragment) :
+/* istanbul ignore next */
+(cov_1m7qp0dxoo().b[0][1]++, (0, styled_components_1.createGlobalStyle)`
+  @font-face {
+    font-family: 'Ionicons';
+    src: url(${Ionicons_ttf_1.default});
+  }
+
+  @font-face {
+    font-family: 'FontAwesome';
+    src: url(${FontAwesome_ttf_1.default});
+  }
+
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: ${common_config_1.commonThemeConfig.font?.family};
+    font-smoothing: antialiased;
+    overflow-y: scroll;
+  }
+
+  #root {
+    display: flex;
+    flex-direction: column;
+  }
+
+  a, a:visited {
+    cursor: pointer;
+    text-decoration-line: none;
+  }
+  [aria-disabled='true'] {
+    cursor: initial !important;
+  }
+
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none v;
+    margin: 0 !important!important
+  }
+  input:-webkit-autofill {
+    -webkit-background-clip: text;
+  }
+  input {
+    min-width: 0 !important;
+    border: none !important;
+    outline: inherit !important;
+    cursor: inherit !important;
+  }
+
+  img {
+    background-repeat: no-repeat;
+  }
+
+  #react-refresh-overlay {
+    display: none !important;
+  }
+`);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBO0FBQUE7QUFBQTtBQUNBO0FBQUE7QUFBQTtBQUNBO0FBQUE7QUFBQTtBQUNBO0FBQUE7QUFBQTtBQUNBO0FBQUE7QUFBQTs7OztBQUVhQTtBQUNYO0FBQUEsb0NBQU8sQ0FBQ0MsR0FBUixDQUFZQyxRQUFaLEtBQXlCLE1BQXpCO0FBQUE7QUFBQSw2QkFBbUNDLFVBQW5DO0FBQUE7QUFBQSw2QkFDSUMsZ0JBREo7QUFBQTtBQUFBLDZCQUVJLDBDQUFpQjs7O2VBR1JDLHNCQUFROzs7OztlQUtSQyx5QkFBVzs7Ozs7Ozs7OzttQkFVUEMsa0NBQWtCQyxJQUFsQixFQUF3QkMsTUFBTTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztDQXBCL0MsQ0FEVyIsIm5hbWVzIjpbImV4cG9ydHMiLCJlbnYiLCJOT0RFX0VOViIsIl9fSVNfU1NSX18iLCJyZWFjdF8xIiwiSW9uaWNvbnNfdHRmXzEiLCJGb250QXdlc29tZV90dGZfMSIsImNvbW1vbl9jb25maWdfMSIsImZvbnQiLCJmYW1pbHkiXSwic291cmNlcyI6WyIvVXNlcnMveWdtaW4vUHJvamVjdHMvbW9ub192Mi9hcHAzL2FwcC9wYWNrYWdlcy9saWItZnJvbnRlbmQvc3JjL3N0eWxpbmcvY29udGFpbmVycy9HbG9iYWxTdHlsZS9HbG9iYWxTdHlsZS50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgY29tbW9uVGhlbWVDb25maWcgfSBmcm9tICdAbGliL2NvbmZpZy90aGVtZS9jb21tb24uY29uZmlnJztcbmltcG9ydCB7IEZyYWdtZW50IH0gZnJvbSAncmVhY3QnO1xuaW1wb3J0IEZvbnRBd2Vzb21lIGZyb20gJ3JlYWN0LW5hdGl2ZS12ZWN0b3ItaWNvbnMvRm9udHMvRm9udEF3ZXNvbWUudHRmJztcbmltcG9ydCBJb25pY29ucyBmcm9tICdyZWFjdC1uYXRpdmUtdmVjdG9yLWljb25zL0ZvbnRzL0lvbmljb25zLnR0Zic7XG5pbXBvcnQgeyBjcmVhdGVHbG9iYWxTdHlsZSB9IGZyb20gJ3N0eWxlZC1jb21wb25lbnRzJztcblxuZXhwb3J0IGNvbnN0IEdsb2JhbFN0eWxlID1cbiAgcHJvY2Vzcy5lbnYuTk9ERV9FTlYgPT09ICd0ZXN0JyB8fCBfX0lTX1NTUl9fXG4gICAgPyBGcmFnbWVudFxuICAgIDogY3JlYXRlR2xvYmFsU3R5bGVgXG4gIEBmb250LWZhY2Uge1xuICAgIGZvbnQtZmFtaWx5OiAnSW9uaWNvbnMnO1xuICAgIHNyYzogdXJsKCR7SW9uaWNvbnN9KTtcbiAgfVxuXG4gIEBmb250LWZhY2Uge1xuICAgIGZvbnQtZmFtaWx5OiAnRm9udEF3ZXNvbWUnO1xuICAgIHNyYzogdXJsKCR7Rm9udEF3ZXNvbWV9KTtcbiAgfVxuXG4gIGh0bWwsIGJvZHksICNyb290IHtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgbWFyZ2luOiAwO1xuICAgIHBhZGRpbmc6IDA7XG4gIH1cblxuICBib2R5IHtcbiAgICBmb250LWZhbWlseTogJHtjb21tb25UaGVtZUNvbmZpZy5mb250Py5mYW1pbHl9O1xuICAgIGZvbnQtc21vb3RoaW5nOiBhbnRpYWxpYXNlZDtcbiAgICBvdmVyZmxvdy15OiBzY3JvbGw7XG4gIH1cblxuICAjcm9vdCB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICB9XG5cbiAgYSwgYTp2aXNpdGVkIHtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgdGV4dC1kZWNvcmF0aW9uLWxpbmU6IG5vbmU7XG4gIH1cbiAgW2FyaWEtZGlzYWJsZWQ9J3RydWUnXSB7XG4gICAgY3Vyc29yOiBpbml0aWFsICFpbXBvcnRhbnQ7XG4gIH1cblxuICBpbnB1dFt0eXBlPW51bWJlcl06Oi13ZWJraXQtaW5uZXItc3Bpbi1idXR0b24sXG4gIGlucHV0W3R5cGU9bnVtYmVyXTo6LXdlYmtpdC1vdXRlci1zcGluLWJ1dHRvbiB7XG4gICAgLXdlYmtpdC1hcHBlYXJhbmNlOiBub25lIHY7XG4gICAgbWFyZ2luOiAwICFpbXBvcnRhbnQhaW1wb3J0YW50XG4gIH1cbiAgaW5wdXQ6LXdlYmtpdC1hdXRvZmlsbCB7XG4gICAgLXdlYmtpdC1iYWNrZ3JvdW5kLWNsaXA6IHRleHQ7XG4gIH1cbiAgaW5wdXQge1xuICAgIG1pbi13aWR0aDogMCAhaW1wb3J0YW50O1xuICAgIGJvcmRlcjogbm9uZSAhaW1wb3J0YW50O1xuICAgIG91dGxpbmU6IGluaGVyaXQgIWltcG9ydGFudDtcbiAgICBjdXJzb3I6IGluaGVyaXQgIWltcG9ydGFudDtcbiAgfVxuXG4gIGltZyB7XG4gICAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgfVxuXG4gICNyZWFjdC1yZWZyZXNoLW92ZXJsYXkge1xuICAgIGRpc3BsYXk6IG5vbmUgIWltcG9ydGFudDtcbiAgfVxuYDtcbiJdfQ==

@@ -1,0 +1,352 @@
+b9d2d692ecb8fe358676c1b38884e88e
+"use strict";
+
+/* istanbul ignore next */
+function cov_148m2hgohy() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Loading/Loading.tsx";
+  var hash = "feddffd7af0091ba2a13ffa2ca0d20a893eaee34";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Loading/Loading.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 25
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 22
+        },
+        end: {
+          line: 4,
+          column: 50
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 19
+        },
+        end: {
+          line: 5,
+          column: 76
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 20
+        },
+        end: {
+          line: 6,
+          column: 78
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 19
+        },
+        end: {
+          line: 7,
+          column: 75
+        }
+      },
+      "6": {
+        start: {
+          line: 8,
+          column: 17
+        },
+        end: {
+          line: 8,
+          column: 34
+        }
+      },
+      "7": {
+        start: {
+          line: 9,
+          column: 16
+        },
+        end: {
+          line: 15,
+          column: 1
+        }
+      },
+      "8": {
+        start: {
+          line: 10,
+          column: 23
+        },
+        end: {
+          line: 10,
+          column: 60
+        }
+      },
+      "9": {
+        start: {
+          line: 11,
+          column: 18
+        },
+        end: {
+          line: 11,
+          column: 44
+        }
+      },
+      "10": {
+        start: {
+          line: 12,
+          column: 21
+        },
+        end: {
+          line: 12,
+          column: 61
+        }
+      },
+      "11": {
+        start: {
+          line: 13,
+          column: 22
+        },
+        end: {
+          line: 13,
+          column: 70
+        }
+      },
+      "12": {
+        start: {
+          line: 14,
+          column: 4
+        },
+        end: {
+          line: 14,
+          column: 126
+        }
+      },
+      "13": {
+        start: {
+          line: 16,
+          column: 0
+        },
+        end: {
+          line: 16,
+          column: 26
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 9,
+            column: 16
+          },
+          end: {
+            line: 9,
+            column: 17
+          }
+        },
+        loc: {
+          start: {
+            line: 9,
+            column: 73
+          },
+          end: {
+            line: 15,
+            column: 1
+          }
+        },
+        line: 9
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 9,
+            column: 19
+          },
+          end: {
+            line: 9,
+            column: 36
+          }
+        },
+        type: "default-arg",
+        locations: [{
+          start: {
+            line: 9,
+            column: 27
+          },
+          end: {
+            line: 9,
+            column: 36
+          }
+        }],
+        line: 9
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 9,
+            column: 38
+          },
+          end: {
+            line: 9,
+            column: 48
+          }
+        },
+        type: "default-arg",
+        locations: [{
+          start: {
+            line: 9,
+            column: 45
+          },
+          end: {
+            line: 9,
+            column: 48
+          }
+        }],
+        line: 9
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {
+      "0": [0],
+      "1": [0]
+    },
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Loading/Loading.tsx",
+      mappings: ";;;;AAAA,6EAA0E;AAG1E,+EAA4E;AAC5E,4EAAyE;AACzE,mCAA6B;AAEtB,MAAM,OAAO,GAAgC,CAAC,EACnD,KAAK,GAAG,SAAS,EACjB,IAAI,GAAG,GAAG,EACV,MAAM,EACN,GAAG,KAAK,EACT,EAAE,EAAE;IACH,MAAM,EAAE,MAAM,EAAE,GAAG,IAAA,qBAAS,EAAC,EAAE,KAAK,EAAE,CAAC,CAAC;IACxC,MAAM,KAAK,GAAG,IAAA,mBAAQ,GAAE,CAAC;IACzB,MAAM,QAAQ,GAAG,IAAA,YAAG,EAAC,KAAK,CAAC,IAAI,CAAC,IAAI,EAAE,IAAI,CAAC,CAAC;IAC5C,MAAM,SAAS,GAAG,IAAA,YAAG,EAAC,KAAK,CAAC,MAAM,EAAE,CAAC,KAAK,EAAE,MAAM,CAAC,CAAC,CAAC;IACrD,OAAO,CACL,uBAAC,mBAAQ,IACP,KAAK,EAAE,SAAS,EAChB,IAAI,EAAE,QAAQ,EACd,KAAK,EAAE,MAAM,EACb,MAAM,EAAE,MAAM,GACd,CACH,CAAC;AACJ,CAAC,CAAC;AAlBW,QAAA,OAAO,WAkBlB",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Loading/Loading.tsx"],
+      sourcesContent: ["import { _Loading } from '@lib/frontend/core/components/Loading/_Loading';\nimport type { LoadingPropsModel } from '@lib/frontend/core/components/Loading/Loading.models';\nimport type { SFCModel } from '@lib/frontend/core/core.models';\nimport { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';\nimport { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';\nimport { get } from 'lodash';\n\nexport const Loading: SFCModel<LoadingPropsModel> = ({\n  color = 'primary',\n  size = 'm',\n  testID,\n  ...props\n}) => {\n  const { styles } = useStyles({ props });\n  const theme = useTheme();\n  const fontSize = get(theme.font.size, size);\n  const fontColor = get(theme.colors, [color, 'main']);\n  return (\n    <_Loading\n      color={fontColor}\n      size={fontSize}\n      style={styles}\n      testID={testID}\n    />\n  );\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "feddffd7af0091ba2a13ffa2ca0d20a893eaee34"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_148m2hgohy = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_148m2hgohy();
+cov_148m2hgohy().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_148m2hgohy().s[1]++;
+exports.Loading = void 0;
+const jsx_runtime_1 =
+/* istanbul ignore next */
+(cov_148m2hgohy().s[2]++, require("react/jsx-runtime"));
+
+const _Loading_1 =
+/* istanbul ignore next */
+(cov_148m2hgohy().s[3]++, require("@lib/frontend/core/components/Loading/_Loading"));
+
+const useStyles_1 =
+/* istanbul ignore next */
+(cov_148m2hgohy().s[4]++, require("@lib/frontend/styling/hooks/useStyles/useStyles"));
+const useTheme_1 =
+/* istanbul ignore next */
+(cov_148m2hgohy().s[5]++, require("@lib/frontend/styling/hooks/useTheme/useTheme"));
+const lodash_1 =
+/* istanbul ignore next */
+(cov_148m2hgohy().s[6]++, require("lodash"));
+
+/* istanbul ignore next */
+cov_148m2hgohy().s[7]++;
+
+const Loading = ({
+  color =
+  /* istanbul ignore next */
+  (cov_148m2hgohy().b[0][0]++, 'primary'),
+  size =
+  /* istanbul ignore next */
+  (cov_148m2hgohy().b[1][0]++, 'm'),
+  testID,
+  ...props
+}) => {
+  /* istanbul ignore next */
+  cov_148m2hgohy().f[0]++;
+  const {
+    styles
+  } =
+  /* istanbul ignore next */
+  (cov_148m2hgohy().s[8]++, (0, useStyles_1.useStyles)({
+    props
+  }));
+  const theme =
+  /* istanbul ignore next */
+  (cov_148m2hgohy().s[9]++, (0, useTheme_1.useTheme)());
+  const fontSize =
+  /* istanbul ignore next */
+  (cov_148m2hgohy().s[10]++, (0, lodash_1.get)(theme.font.size, size));
+  const fontColor =
+  /* istanbul ignore next */
+  (cov_148m2hgohy().s[11]++, (0, lodash_1.get)(theme.colors, [color, 'main']));
+
+  /* istanbul ignore next */
+  cov_148m2hgohy().s[12]++;
+  return (0, jsx_runtime_1.jsx)(_Loading_1._Loading, {
+    color: fontColor,
+    size: fontSize,
+    style: styles,
+    testID: testID
+  });
+};
+
+/* istanbul ignore next */
+cov_148m2hgohy().s[13]++;
+exports.Loading = Loading;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBT2E7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQVBiO0FBQUE7QUFBQTs7QUFHQTtBQUFBO0FBQUE7QUFDQTtBQUFBO0FBQUE7QUFDQTtBQUFBO0FBQUE7Ozs7O0FBRU8sTUFBTUEsT0FBTyxHQUFnQyxDQUFDO0VBQ25EQyxLQUFLO0VBQUE7RUFBQSw2QkFBRyxTQUFILENBRDhDO0VBRW5EQyxJQUFJO0VBQUE7RUFBQSw2QkFBRyxHQUFILENBRitDO0VBR25EQyxNQUhtRDtFQUluRCxHQUFHQztBQUpnRCxDQUFELEtBSy9DO0VBQUE7RUFBQTtFQUNILE1BQU07SUFBRUM7RUFBRjtFQUFBO0VBQUEsMEJBQWEsMkJBQVU7SUFBRUQ7RUFBRixDQUFWLENBQWIsQ0FBTjtFQUNBLE1BQU1FLEtBQUs7RUFBQTtFQUFBLDBCQUFHLDBCQUFILENBQVg7RUFDQSxNQUFNQyxRQUFRO0VBQUE7RUFBQSwyQkFBRyxrQkFBSUQsS0FBSyxDQUFDRSxJQUFOLENBQVdOLElBQWYsRUFBcUJBLElBQXJCLENBQUgsQ0FBZDtFQUNBLE1BQU1PLFNBQVM7RUFBQTtFQUFBLDJCQUFHLGtCQUFJSCxLQUFLLENBQUNJLE1BQVYsRUFBa0IsQ0FBQ1QsS0FBRCxFQUFRLE1BQVIsQ0FBbEIsQ0FBSCxDQUFmOztFQUpHO0VBQUE7RUFLSCxPQUNFLHVCQUFDVSxtQkFBRCxFQUFTO0lBQ1BWLEtBQUssRUFBRVEsU0FEQTtJQUVQUCxJQUFJLEVBQUVLLFFBRkM7SUFHUEssS0FBSyxFQUFFUCxNQUhBO0lBSVBGLE1BQU0sRUFBRUE7RUFKRCxDQUFULENBREY7QUFRRCxDQWxCTTs7OztBQUFNVSxrQkFBT2IsT0FBUCIsIm5hbWVzIjpbIkxvYWRpbmciLCJjb2xvciIsInNpemUiLCJ0ZXN0SUQiLCJwcm9wcyIsInN0eWxlcyIsInRoZW1lIiwiZm9udFNpemUiLCJmb250IiwiZm9udENvbG9yIiwiY29sb3JzIiwiX0xvYWRpbmdfMSIsInN0eWxlIiwiZXhwb3J0cyJdLCJzb3VyY2VzIjpbIi9Vc2Vycy95Z21pbi9Qcm9qZWN0cy9tb25vX3YyL2FwcDMvYXBwL3BhY2thZ2VzL2xpYi1mcm9udGVuZC9zcmMvY29yZS9jb21wb25lbnRzL0xvYWRpbmcvTG9hZGluZy50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgX0xvYWRpbmcgfSBmcm9tICdAbGliL2Zyb250ZW5kL2NvcmUvY29tcG9uZW50cy9Mb2FkaW5nL19Mb2FkaW5nJztcbmltcG9ydCB0eXBlIHsgTG9hZGluZ1Byb3BzTW9kZWwgfSBmcm9tICdAbGliL2Zyb250ZW5kL2NvcmUvY29tcG9uZW50cy9Mb2FkaW5nL0xvYWRpbmcubW9kZWxzJztcbmltcG9ydCB0eXBlIHsgU0ZDTW9kZWwgfSBmcm9tICdAbGliL2Zyb250ZW5kL2NvcmUvY29yZS5tb2RlbHMnO1xuaW1wb3J0IHsgdXNlU3R5bGVzIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9zdHlsaW5nL2hvb2tzL3VzZVN0eWxlcy91c2VTdHlsZXMnO1xuaW1wb3J0IHsgdXNlVGhlbWUgfSBmcm9tICdAbGliL2Zyb250ZW5kL3N0eWxpbmcvaG9va3MvdXNlVGhlbWUvdXNlVGhlbWUnO1xuaW1wb3J0IHsgZ2V0IH0gZnJvbSAnbG9kYXNoJztcblxuZXhwb3J0IGNvbnN0IExvYWRpbmc6IFNGQ01vZGVsPExvYWRpbmdQcm9wc01vZGVsPiA9ICh7XG4gIGNvbG9yID0gJ3ByaW1hcnknLFxuICBzaXplID0gJ20nLFxuICB0ZXN0SUQsXG4gIC4uLnByb3BzXG59KSA9PiB7XG4gIGNvbnN0IHsgc3R5bGVzIH0gPSB1c2VTdHlsZXMoeyBwcm9wcyB9KTtcbiAgY29uc3QgdGhlbWUgPSB1c2VUaGVtZSgpO1xuICBjb25zdCBmb250U2l6ZSA9IGdldCh0aGVtZS5mb250LnNpemUsIHNpemUpO1xuICBjb25zdCBmb250Q29sb3IgPSBnZXQodGhlbWUuY29sb3JzLCBbY29sb3IsICdtYWluJ10pO1xuICByZXR1cm4gKFxuICAgIDxfTG9hZGluZ1xuICAgICAgY29sb3I9e2ZvbnRDb2xvcn1cbiAgICAgIHNpemU9e2ZvbnRTaXplfVxuICAgICAgc3R5bGU9e3N0eWxlc31cbiAgICAgIHRlc3RJRD17dGVzdElEfVxuICAgIC8+XG4gICk7XG59O1xuIl19

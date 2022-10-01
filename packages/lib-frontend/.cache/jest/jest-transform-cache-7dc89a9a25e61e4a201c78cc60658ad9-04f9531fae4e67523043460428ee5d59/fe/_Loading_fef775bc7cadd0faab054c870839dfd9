@@ -1,0 +1,177 @@
+aee758f9155ef4de24fde9a93a3ad763
+"use strict";
+
+/* istanbul ignore next */
+function cov_2eppn5u1cs() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Loading/_Loading.tsx";
+  var hash = "d318d965d0f051fa9cb064e071ba77b5675576db";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Loading/_Loading.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 26
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 27
+        },
+        end: {
+          line: 4,
+          column: 96
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 40
+        },
+        end: {
+          line: 5,
+          column: 80
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 0
+        },
+        end: {
+          line: 15,
+          column: 3
+        }
+      },
+      "5": {
+        start: {
+          line: 8,
+          column: 44
+        },
+        end: {
+          line: 14,
+          column: 5
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 8,
+            column: 14
+          },
+          end: {
+            line: 8,
+            column: 15
+          }
+        },
+        loc: {
+          start: {
+            line: 8,
+            column: 44
+          },
+          end: {
+            line: 14,
+            column: 5
+          }
+        },
+        line: 8
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Loading/_Loading.tsx",
+      mappings: ";;;AACA,iGAA8F;AAC9F,iFAAqD;AAGxC,QAAA,QAAQ,GAAG,IAAA,mCAAgB,EAAmC;IACzE,SAAS,EAAE,oCAAI;IACf,QAAQ,EAAE,CAAC,EAAE,KAAK,EAAE,IAAI,EAAE,MAAM,EAAE,EAAE,EAAE,CAAC,CAAC;QACtC,SAAS,EAAE,IAAI;QACf,KAAK;QACL,gBAAgB,EAAE,IAAI;QACtB,IAAI;QACJ,MAAM;KACP,CAAC;CACH,CAAC,CAAC",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Loading/_Loading.tsx"],
+      sourcesContent: ["import type { _LoadingPropsModel } from '@lib/frontend/core/components/Loading/_Loading.models';\nimport { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';\nimport { Flow } from 'react-native-animated-spinkit';\nimport type { SpinnerProps } from 'react-native-animated-spinkit/lib/typescript/SpinnerProps';\n\nexport const _Loading = composeComponent<_LoadingPropsModel, SpinnerProps>({\n  Component: Flow,\n  getProps: ({ color, size, testID }) => ({\n    animating: true,\n    color,\n    hidesWhenStopped: true,\n    size,\n    testID,\n  }),\n});\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "d318d965d0f051fa9cb064e071ba77b5675576db"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_2eppn5u1cs = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_2eppn5u1cs();
+cov_2eppn5u1cs().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_2eppn5u1cs().s[1]++;
+exports._Loading = void 0;
+const composeComponent_1 =
+/* istanbul ignore next */
+(cov_2eppn5u1cs().s[2]++, require("@lib/frontend/core/utils/composeComponent/composeComponent"));
+const react_native_animated_spinkit_1 =
+/* istanbul ignore next */
+(cov_2eppn5u1cs().s[3]++, require("react-native-animated-spinkit"));
+
+/* istanbul ignore next */
+cov_2eppn5u1cs().s[4]++;
+exports._Loading = (0, composeComponent_1.composeComponent)({
+  Component: react_native_animated_spinkit_1.Flow,
+  getProps: ({
+    color,
+    size,
+    testID
+  }) => {
+    /* istanbul ignore next */
+    cov_2eppn5u1cs().f[0]++;
+    cov_2eppn5u1cs().s[5]++;
+    return {
+      animating: true,
+      color,
+      hidesWhenStopped: true,
+      size,
+      testID
+    };
+  }
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQ0E7QUFBQTtBQUFBO0FBQ0E7QUFBQTtBQUFBOzs7O0FBR2FBLG1CQUFXLHlDQUFtRDtFQUN6RUMsU0FBUyxFQUFFQyxvQ0FEOEQ7RUFFekVDLFFBQVEsRUFBRSxDQUFDO0lBQUVDLEtBQUY7SUFBU0MsSUFBVDtJQUFlQztFQUFmLENBQUQsS0FBOEI7SUFBQTtJQUFBO0lBQUE7SUFBQTtNQUN0Q0MsU0FBUyxFQUFFLElBRDJCO01BRXRDSCxLQUZzQztNQUd0Q0ksZ0JBQWdCLEVBQUUsSUFIb0I7TUFJdENILElBSnNDO01BS3RDQztJQUxzQztFQU12QztBQVJ3RSxDQUFuRCxDQUFYIiwibmFtZXMiOlsiZXhwb3J0cyIsIkNvbXBvbmVudCIsInJlYWN0X25hdGl2ZV9hbmltYXRlZF9zcGlua2l0XzEiLCJnZXRQcm9wcyIsImNvbG9yIiwic2l6ZSIsInRlc3RJRCIsImFuaW1hdGluZyIsImhpZGVzV2hlblN0b3BwZWQiXSwic291cmNlcyI6WyIvVXNlcnMveWdtaW4vUHJvamVjdHMvbW9ub192Mi9hcHAzL2FwcC9wYWNrYWdlcy9saWItZnJvbnRlbmQvc3JjL2NvcmUvY29tcG9uZW50cy9Mb2FkaW5nL19Mb2FkaW5nLnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgdHlwZSB7IF9Mb2FkaW5nUHJvcHNNb2RlbCB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvY29yZS9jb21wb25lbnRzL0xvYWRpbmcvX0xvYWRpbmcubW9kZWxzJztcbmltcG9ydCB7IGNvbXBvc2VDb21wb25lbnQgfSBmcm9tICdAbGliL2Zyb250ZW5kL2NvcmUvdXRpbHMvY29tcG9zZUNvbXBvbmVudC9jb21wb3NlQ29tcG9uZW50JztcbmltcG9ydCB7IEZsb3cgfSBmcm9tICdyZWFjdC1uYXRpdmUtYW5pbWF0ZWQtc3BpbmtpdCc7XG5pbXBvcnQgdHlwZSB7IFNwaW5uZXJQcm9wcyB9IGZyb20gJ3JlYWN0LW5hdGl2ZS1hbmltYXRlZC1zcGlua2l0L2xpYi90eXBlc2NyaXB0L1NwaW5uZXJQcm9wcyc7XG5cbmV4cG9ydCBjb25zdCBfTG9hZGluZyA9IGNvbXBvc2VDb21wb25lbnQ8X0xvYWRpbmdQcm9wc01vZGVsLCBTcGlubmVyUHJvcHM+KHtcbiAgQ29tcG9uZW50OiBGbG93LFxuICBnZXRQcm9wczogKHsgY29sb3IsIHNpemUsIHRlc3RJRCB9KSA9PiAoe1xuICAgIGFuaW1hdGluZzogdHJ1ZSxcbiAgICBjb2xvcixcbiAgICBoaWRlc1doZW5TdG9wcGVkOiB0cnVlLFxuICAgIHNpemUsXG4gICAgdGVzdElELFxuICB9KSxcbn0pO1xuIl19

@@ -1,0 +1,22 @@
+1a7eeb0a3ab0066b1fc24e1f9b9c6b39
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getImageSourceSync = exports.getImageSource = exports["default"] = exports.Button = void 0;
+
+var _createIconSet = _interopRequireDefault(require("./lib/create-icon-set"));
+
+var _MaterialCommunityIcons = _interopRequireDefault(require("./glyphmaps/MaterialCommunityIcons.json"));
+
+var iconSet = (0, _createIconSet["default"])(_MaterialCommunityIcons["default"], 'Material Design Icons', 'MaterialCommunityIcons.ttf');
+var _default = iconSet;
+exports["default"] = _default;
+var Button = iconSet.Button,
+    getImageSource = iconSet.getImageSource,
+    getImageSourceSync = iconSet.getImageSourceSync;
+exports.getImageSourceSync = getImageSourceSync;
+exports.getImageSource = getImageSource;
+exports.Button = Button;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJpY29uU2V0IiwiY3JlYXRlSWNvblNldCIsImdseXBoTWFwIiwiQnV0dG9uIiwiZ2V0SW1hZ2VTb3VyY2UiLCJnZXRJbWFnZVNvdXJjZVN5bmMiXSwic291cmNlcyI6WyJNYXRlcmlhbENvbW11bml0eUljb25zLmpzIl0sInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogTWF0ZXJpYWxDb21tdW5pdHlJY29ucyBpY29uIHNldCBjb21wb25lbnQuXG4gKiBVc2FnZTogPE1hdGVyaWFsQ29tbXVuaXR5SWNvbnMgbmFtZT1cImljb24tbmFtZVwiIHNpemU9ezIwfSBjb2xvcj1cIiM0RjhFRjdcIiAvPlxuICovXG5cbmltcG9ydCBjcmVhdGVJY29uU2V0IGZyb20gJy4vbGliL2NyZWF0ZS1pY29uLXNldCc7XG5pbXBvcnQgZ2x5cGhNYXAgZnJvbSAnLi9nbHlwaG1hcHMvTWF0ZXJpYWxDb21tdW5pdHlJY29ucy5qc29uJztcblxuY29uc3QgaWNvblNldCA9IGNyZWF0ZUljb25TZXQoZ2x5cGhNYXAsICdNYXRlcmlhbCBEZXNpZ24gSWNvbnMnLCAnTWF0ZXJpYWxDb21tdW5pdHlJY29ucy50dGYnKTtcblxuZXhwb3J0IGRlZmF1bHQgaWNvblNldDtcbmV4cG9ydCBjb25zdCB7XG4gIEJ1dHRvbixcbiAgZ2V0SW1hZ2VTb3VyY2UsXG4gIGdldEltYWdlU291cmNlU3luYyxcbn0gPSBpY29uU2V0O1xuIl0sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBS0E7O0FBQ0E7O0FBRUEsSUFBTUEsT0FBTyxHQUFHLElBQUFDLHlCQUFBLEVBQWNDLGtDQUFkLEVBQXdCLHVCQUF4QixFQUFpRCw0QkFBakQsQ0FBaEI7ZUFFZUYsTzs7QUFDUixJQUNMRyxNQURLLEdBSUhILE9BSkcsQ0FDTEcsTUFESztBQUFBLElBRUxDLGNBRkssR0FJSEosT0FKRyxDQUVMSSxjQUZLO0FBQUEsSUFHTEMsa0JBSEssR0FJSEwsT0FKRyxDQUdMSyxrQkFISyJ9

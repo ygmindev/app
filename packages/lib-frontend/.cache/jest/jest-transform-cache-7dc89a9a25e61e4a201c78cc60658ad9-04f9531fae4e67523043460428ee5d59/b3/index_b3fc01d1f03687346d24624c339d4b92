@@ -1,0 +1,27 @@
+fc904c57abbf7df7e992519d989ce2bd
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
+var Alert = function () {
+  function Alert() {
+    (0, _classCallCheck2["default"])(this, Alert);
+  }
+
+  (0, _createClass2["default"])(Alert, null, [{
+    key: "alert",
+    value: function alert() {}
+  }]);
+  return Alert;
+}();
+
+var _default = Alert;
+exports["default"] = _default;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJBbGVydCJdLCJzb3VyY2VzIjpbImluZGV4LmpzIl0sInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogQ29weXJpZ2h0IChjKSBOaWNvbGFzIEdhbGxhZ2hlci5cbiAqXG4gKiBUaGlzIHNvdXJjZSBjb2RlIGlzIGxpY2Vuc2VkIHVuZGVyIHRoZSBNSVQgbGljZW5zZSBmb3VuZCBpbiB0aGVcbiAqIExJQ0VOU0UgZmlsZSBpbiB0aGUgcm9vdCBkaXJlY3Rvcnkgb2YgdGhpcyBzb3VyY2UgdHJlZS5cbiAqXG4gKiBcbiAqL1xuY2xhc3MgQWxlcnQge1xuICBzdGF0aWMgYWxlcnQoKSB7fVxuXG59XG5cbmV4cG9ydCBkZWZhdWx0IEFsZXJ0OyJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7SUFRTUEsSzs7Ozs7OztXQUNKLGlCQUFlLENBQUU7Ozs7O2VBSUpBLEsifQ==

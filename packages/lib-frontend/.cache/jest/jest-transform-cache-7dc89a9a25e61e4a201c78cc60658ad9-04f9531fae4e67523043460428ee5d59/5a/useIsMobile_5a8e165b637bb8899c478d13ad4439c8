@@ -1,0 +1,239 @@
+ceeb9472d0687bd333d066ad9270ff9f
+"use strict";
+
+/* istanbul ignore next */
+function cov_2onskpmvsy() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/hooks/useIsMobile/useIsMobile.ts";
+  var hash = "24723f58c2633f39b74f35a5d630936336cbb766";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/hooks/useIsMobile/useIsMobile.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 29
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 32
+        },
+        end: {
+          line: 4,
+          column: 101
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 23
+        },
+        end: {
+          line: 5,
+          column: 88
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 20
+        },
+        end: {
+          line: 9,
+          column: 1
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 22
+        },
+        end: {
+          line: 7,
+          column: 56
+        }
+      },
+      "6": {
+        start: {
+          line: 8,
+          column: 4
+        },
+        end: {
+          line: 8,
+          column: 89
+        }
+      },
+      "7": {
+        start: {
+          line: 10,
+          column: 0
+        },
+        end: {
+          line: 10,
+          column: 34
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 6,
+            column: 20
+          },
+          end: {
+            line: 6,
+            column: 21
+          }
+        },
+        loc: {
+          start: {
+            line: 6,
+            column: 26
+          },
+          end: {
+            line: 9,
+            column: 1
+          }
+        },
+        line: 6
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 8,
+            column: 11
+          },
+          end: {
+            line: 8,
+            column: 88
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 8,
+            column: 11
+          },
+          end: {
+            line: 8,
+            column: 30
+          }
+        }, {
+          start: {
+            line: 8,
+            column: 34
+          },
+          end: {
+            line: 8,
+            column: 88
+          }
+        }],
+        line: 8
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {
+      "0": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/hooks/useIsMobile/useIsMobile.ts",
+      mappings: ";;;AAAA,sGAAoG;AACpG,yFAAsF;AAE/E,MAAM,WAAW,GAAG,GAAY,EAAE;IACvC,MAAM,EAAE,KAAK,EAAE,GAAG,IAAA,2BAAY,GAAE,CAAC;IACjC,OAAO,KAAK,KAAK,SAAS,IAAI,KAAK,GAAG,8CAAsB,CAAC;AAC/D,CAAC,CAAC;AAHW,QAAA,WAAW,eAGtB",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/hooks/useIsMobile/useIsMobile.ts"],
+      sourcesContent: ["import { MOBILE_WIDTH_THRESHOLD } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile.constants';\nimport { useDimension } from '@lib/frontend/platform/hooks/useDimension/useDimension';\n\nexport const useIsMobile = (): boolean => {\n  const { width } = useDimension();\n  return width !== undefined && width < MOBILE_WIDTH_THRESHOLD;\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "24723f58c2633f39b74f35a5d630936336cbb766"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_2onskpmvsy = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_2onskpmvsy();
+cov_2onskpmvsy().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_2onskpmvsy().s[1]++;
+exports.useIsMobile = void 0;
+const useIsMobile_constants_1 =
+/* istanbul ignore next */
+(cov_2onskpmvsy().s[2]++, require("@lib/frontend/core/hooks/useIsMobile/useIsMobile.constants"));
+const useDimension_1 =
+/* istanbul ignore next */
+(cov_2onskpmvsy().s[3]++, require("@lib/frontend/platform/hooks/useDimension/useDimension"));
+
+/* istanbul ignore next */
+cov_2onskpmvsy().s[4]++;
+
+const useIsMobile = () => {
+  /* istanbul ignore next */
+  cov_2onskpmvsy().f[0]++;
+  const {
+    width
+  } =
+  /* istanbul ignore next */
+  (cov_2onskpmvsy().s[5]++, (0, useDimension_1.useDimension)());
+
+  /* istanbul ignore next */
+  cov_2onskpmvsy().s[6]++;
+  return (
+    /* istanbul ignore next */
+    (cov_2onskpmvsy().b[0][0]++, width !== undefined) &&
+    /* istanbul ignore next */
+    (cov_2onskpmvsy().b[0][1]++, width < useIsMobile_constants_1.MOBILE_WIDTH_THRESHOLD)
+  );
+};
+
+/* istanbul ignore next */
+cov_2onskpmvsy().s[7]++;
+exports.useIsMobile = useIsMobile;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBO0FBQUE7QUFBQTtBQUNBO0FBQUE7QUFBQTs7Ozs7QUFFTyxNQUFNQSxXQUFXLEdBQUcsTUFBYztFQUFBO0VBQUE7RUFDdkMsTUFBTTtJQUFFQztFQUFGO0VBQUE7RUFBQSwwQkFBWSxrQ0FBWixDQUFOOztFQUR1QztFQUFBO0VBRXZDLE9BQU87SUFBQTtJQUFBLGtDQUFLLEtBQUtDLFNBQVY7SUFBQTtJQUFBLDZCQUF1QkQsS0FBSyxHQUFHRSw4Q0FBL0I7RUFBUDtBQUNELENBSE07Ozs7QUFBTUMsc0JBQVdKLFdBQVgiLCJuYW1lcyI6WyJ1c2VJc01vYmlsZSIsIndpZHRoIiwidW5kZWZpbmVkIiwidXNlSXNNb2JpbGVfY29uc3RhbnRzXzEiLCJleHBvcnRzIl0sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy9jb3JlL2hvb2tzL3VzZUlzTW9iaWxlL3VzZUlzTW9iaWxlLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE1PQklMRV9XSURUSF9USFJFU0hPTEQgfSBmcm9tICdAbGliL2Zyb250ZW5kL2NvcmUvaG9va3MvdXNlSXNNb2JpbGUvdXNlSXNNb2JpbGUuY29uc3RhbnRzJztcbmltcG9ydCB7IHVzZURpbWVuc2lvbiB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvcGxhdGZvcm0vaG9va3MvdXNlRGltZW5zaW9uL3VzZURpbWVuc2lvbic7XG5cbmV4cG9ydCBjb25zdCB1c2VJc01vYmlsZSA9ICgpOiBib29sZWFuID0+IHtcbiAgY29uc3QgeyB3aWR0aCB9ID0gdXNlRGltZW5zaW9uKCk7XG4gIHJldHVybiB3aWR0aCAhPT0gdW5kZWZpbmVkICYmIHdpZHRoIDwgTU9CSUxFX1dJRFRIX1RIUkVTSE9MRDtcbn07XG4iXX0=

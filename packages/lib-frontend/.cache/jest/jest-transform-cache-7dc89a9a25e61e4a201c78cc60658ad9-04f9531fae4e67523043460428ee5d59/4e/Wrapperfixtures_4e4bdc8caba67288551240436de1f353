@@ -1,0 +1,457 @@
+771c9b8b0d7db213b46d8401aa8c8fc3
+"use strict";
+
+/* istanbul ignore next */
+function cov_2jdcoxlmg3() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Wrapper/Wrapper.fixtures.tsx";
+  var hash = "0e3c017753f5a28f6606e187335d48959a854f4e";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Wrapper/Wrapper.fixtures.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 32
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 22
+        },
+        end: {
+          line: 4,
+          column: 50
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 15
+        },
+        end: {
+          line: 5,
+          column: 65
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 18
+        },
+        end: {
+          line: 6,
+          column: 74
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 26
+        },
+        end: {
+          line: 7,
+          column: 86
+        }
+      },
+      "6": {
+        start: {
+          line: 8,
+          column: 14
+        },
+        end: {
+          line: 8,
+          column: 55
+        }
+      },
+      "7": {
+        start: {
+          line: 9,
+          column: 16
+        },
+        end: {
+          line: 9,
+          column: 32
+        }
+      },
+      "8": {
+        start: {
+          line: 10,
+          column: 29
+        },
+        end: {
+          line: 10,
+          column: 32
+        }
+      },
+      "9": {
+        start: {
+          line: 11,
+          column: 23
+        },
+        end: {
+          line: 15,
+          column: 1
+        }
+      },
+      "10": {
+        start: {
+          line: 12,
+          column: 19
+        },
+        end: {
+          line: 12,
+          column: 110
+        }
+      },
+      "11": {
+        start: {
+          line: 12,
+          column: 46
+        },
+        end: {
+          line: 12,
+          column: 94
+        }
+      },
+      "12": {
+        start: {
+          line: 13,
+          column: 17
+        },
+        end: {
+          line: 13,
+          column: 104
+        }
+      },
+      "13": {
+        start: {
+          line: 13,
+          column: 44
+        },
+        end: {
+          line: 13,
+          column: 90
+        }
+      },
+      "14": {
+        start: {
+          line: 14,
+          column: 4
+        },
+        end: {
+          line: 14,
+          column: 304
+        }
+      },
+      "15": {
+        start: {
+          line: 16,
+          column: 0
+        },
+        end: {
+          line: 16,
+          column: 40
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 11,
+            column: 23
+          },
+          end: {
+            line: 11,
+            column: 24
+          }
+        },
+        loc: {
+          start: {
+            line: 11,
+            column: 89
+          },
+          end: {
+            line: 15,
+            column: 1
+          }
+        },
+        line: 11
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 12,
+            column: 40
+          },
+          end: {
+            line: 12,
+            column: 41
+          }
+        },
+        loc: {
+          start: {
+            line: 12,
+            column: 46
+          },
+          end: {
+            line: 12,
+            column: 94
+          }
+        },
+        line: 12
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 13,
+            column: 38
+          },
+          end: {
+            line: 13,
+            column: 39
+          }
+        },
+        loc: {
+          start: {
+            line: 13,
+            column: 44
+          },
+          end: {
+            line: 13,
+            column: 90
+          }
+        },
+        line: 13
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 12,
+            column: 46
+          },
+          end: {
+            line: 12,
+            column: 94
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 12,
+            column: 46
+          },
+          end: {
+            line: 12,
+            column: 57
+          }
+        }, {
+          start: {
+            line: 12,
+            column: 61
+          },
+          end: {
+            line: 12,
+            column: 94
+          }
+        }],
+        line: 12
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 13,
+            column: 44
+          },
+          end: {
+            line: 13,
+            column: 90
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 13,
+            column: 44
+          },
+          end: {
+            line: 13,
+            column: 53
+          }
+        }, {
+          start: {
+            line: 13,
+            column: 57
+          },
+          end: {
+            line: 13,
+            column: 90
+          }
+        }],
+        line: 13
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Wrapper/Wrapper.fixtures.tsx",
+      mappings: ";;;;AAAA,kEAA+D;AAC/D,2EAAwE;AAGxE,uFAAgF;AAChF,wDAAqD;AACrD,iCAAgC;AAEhC,MAAM,oBAAoB,GAAG,GAAG,CAAC;AAO1B,MAAM,cAAc,GAAuC,CAAC,EACjE,QAAQ,EACR,MAAM,EAAE,WAAW,EACnB,IAAI,EAAE,SAAS,EACf,GAAG,KAAK,EACT,EAAE,EAAE;IACH,MAAM,MAAM,GAAG,IAAA,eAAO,EAAC,GAAG,EAAE,CAAC,WAAW,IAAI,IAAA,SAAG,EAAC,iBAAiB,CAAC,EAAE,CAAC,WAAW,CAAC,CAAC,CAAC;IACnF,MAAM,IAAI,GAAG,IAAA,eAAO,EAAC,GAAG,EAAE,CAAC,SAAS,IAAI,IAAA,SAAG,EAAC,iBAAiB,CAAC,EAAE,CAAC,SAAS,CAAC,CAAC,CAAC;IAC7E,OAAO,CACL,wBAAC,iBAAO,IACN,eAAe,EAAE,6BAAW,CAAC,OAAO,EACpC,MAAM,EAAE,oBAAoB,EAC5B,QAAQ,QAER,MAAM,EAAE,MAAM,EACd,KAAK,EAAE,oBAAoB,KACvB,KAAK,aACT,uBAAC,WAAI,cAAE,IAAI,GAAQ,EAClB,QAAQ,KALJ,MAAM,CAMH,CACX,CAAC;AACJ,CAAC,CAAC;AArBW,QAAA,cAAc,kBAqBzB",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Wrapper/Wrapper.fixtures.tsx"],
+      sourcesContent: ["import { Text } from '@lib/frontend/core/components/Text/Text';\nimport { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';\nimport type { WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';\nimport type { SFCModel } from '@lib/frontend/core/core.models';\nimport { THEME_COLOR } from '@lib/frontend/styling/utils/theme/theme.constants';\nimport { uid } from '@lib/shared/core/utils/uid/uid';\nimport { useMemo } from 'react';\n\nconst WRAPPER_FIXTURE_SIZE = 100;\n\nexport interface WrapperFixturePropsModel extends WrapperPropsModel {\n  testID?: string;\n  text?: string;\n}\n\nexport const WrapperFixture: SFCModel<WrapperFixturePropsModel> = ({\n  children,\n  testID: testIDProps,\n  text: textProps,\n  ...props\n}) => {\n  const testID = useMemo(() => testIDProps || uid('wrapper-fixture'), [testIDProps]);\n  const text = useMemo(() => textProps || uid('wrapper-fixture'), [textProps]);\n  return (\n    <Wrapper\n      backgroundColor={THEME_COLOR.PRIMARY}\n      height={WRAPPER_FIXTURE_SIZE}\n      isCenter\n      key={testID}\n      testID={testID}\n      width={WRAPPER_FIXTURE_SIZE}\n      {...props}>\n      <Text>{text}</Text>\n      {children}\n    </Wrapper>\n  );\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "0e3c017753f5a28f6606e187335d48959a854f4e"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_2jdcoxlmg3 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_2jdcoxlmg3();
+cov_2jdcoxlmg3().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_2jdcoxlmg3().s[1]++;
+exports.WrapperFixture = void 0;
+const jsx_runtime_1 =
+/* istanbul ignore next */
+(cov_2jdcoxlmg3().s[2]++, require("react/jsx-runtime"));
+const Text_1 =
+/* istanbul ignore next */
+(cov_2jdcoxlmg3().s[3]++, require("@lib/frontend/core/components/Text/Text"));
+const Wrapper_1 =
+/* istanbul ignore next */
+(cov_2jdcoxlmg3().s[4]++, require("@lib/frontend/core/components/Wrapper/Wrapper"));
+const theme_constants_1 =
+/* istanbul ignore next */
+(cov_2jdcoxlmg3().s[5]++, require("@lib/frontend/styling/utils/theme/theme.constants"));
+const uid_1 =
+/* istanbul ignore next */
+(cov_2jdcoxlmg3().s[6]++, require("@lib/shared/core/utils/uid/uid"));
+const react_1 =
+/* istanbul ignore next */
+(cov_2jdcoxlmg3().s[7]++, require("react"));
+const WRAPPER_FIXTURE_SIZE =
+/* istanbul ignore next */
+(cov_2jdcoxlmg3().s[8]++, 100);
+
+/* istanbul ignore next */
+cov_2jdcoxlmg3().s[9]++;
+
+const WrapperFixture = ({
+  children,
+  testID: testIDProps,
+  text: textProps,
+  ...props
+}) => {
+  /* istanbul ignore next */
+  cov_2jdcoxlmg3().f[0]++;
+  const testID =
+  /* istanbul ignore next */
+  (cov_2jdcoxlmg3().s[10]++, (0, react_1.useMemo)(() => {
+    /* istanbul ignore next */
+    cov_2jdcoxlmg3().f[1]++;
+    cov_2jdcoxlmg3().s[11]++;
+    return (
+      /* istanbul ignore next */
+      (cov_2jdcoxlmg3().b[0][0]++, testIDProps) ||
+      /* istanbul ignore next */
+      (cov_2jdcoxlmg3().b[0][1]++, (0, uid_1.uid)('wrapper-fixture'))
+    );
+  }, [testIDProps]));
+  const text =
+  /* istanbul ignore next */
+  (cov_2jdcoxlmg3().s[12]++, (0, react_1.useMemo)(() => {
+    /* istanbul ignore next */
+    cov_2jdcoxlmg3().f[2]++;
+    cov_2jdcoxlmg3().s[13]++;
+    return (
+      /* istanbul ignore next */
+      (cov_2jdcoxlmg3().b[1][0]++, textProps) ||
+      /* istanbul ignore next */
+      (cov_2jdcoxlmg3().b[1][1]++, (0, uid_1.uid)('wrapper-fixture'))
+    );
+  }, [textProps]));
+
+  /* istanbul ignore next */
+  cov_2jdcoxlmg3().s[14]++;
+  return (0, jsx_runtime_1.jsxs)(Wrapper_1.Wrapper, {
+    backgroundColor: theme_constants_1.THEME_COLOR.PRIMARY,
+    height: WRAPPER_FIXTURE_SIZE,
+    isCenter: true,
+    testID: testID,
+    width: WRAPPER_FIXTURE_SIZE,
+    ...props,
+    children: [(0, jsx_runtime_1.jsx)(Text_1.Text, {
+      children: text
+    }), children]
+  }, testID);
+};
+
+/* istanbul ignore next */
+cov_2jdcoxlmg3().s[15]++;
+exports.WrapperFixture = WrapperFixture;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBZWE7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBZmI7QUFBQTtBQUFBO0FBQ0E7QUFBQTtBQUFBO0FBR0E7QUFBQTtBQUFBO0FBQ0E7QUFBQTtBQUFBO0FBQ0E7QUFBQTtBQUFBO0FBRUEsTUFBTUEsb0JBQW9CO0FBQUE7QUFBQSwwQkFBRyxHQUFILENBQTFCOzs7OztBQU9PLE1BQU1DLGNBQWMsR0FBdUMsQ0FBQztFQUNqRUMsUUFEaUU7RUFFakVDLE1BQU0sRUFBRUMsV0FGeUQ7RUFHakVDLElBQUksRUFBRUMsU0FIMkQ7RUFJakUsR0FBR0M7QUFKOEQsQ0FBRCxLQUs3RDtFQUFBO0VBQUE7RUFDSCxNQUFNSixNQUFNO0VBQUE7RUFBQSwyQkFBRyxxQkFBUSxNQUFNO0lBQUE7SUFBQTtJQUFBO0lBQUE7TUFBQTtNQUFBLHdDQUFXO01BQUE7TUFBQSw2QkFBSSxlQUFJLGlCQUFKLENBQUo7SUFBWDtFQUFxQyxDQUFuRCxFQUFxRCxDQUFDQyxXQUFELENBQXJELENBQUgsQ0FBWjtFQUNBLE1BQU1DLElBQUk7RUFBQTtFQUFBLDJCQUFHLHFCQUFRLE1BQU07SUFBQTtJQUFBO0lBQUE7SUFBQTtNQUFBO01BQUEsc0NBQVM7TUFBQTtNQUFBLDZCQUFJLGVBQUksaUJBQUosQ0FBSjtJQUFUO0VBQW1DLENBQWpELEVBQW1ELENBQUNDLFNBQUQsQ0FBbkQsQ0FBSCxDQUFWOztFQUZHO0VBQUE7RUFHSCxPQUNFLHdCQUFDRSxpQkFBRCxFQUFRO0lBQ05DLGVBQWUsRUFBRUMsOEJBQVlDLE9BRHZCO0lBRU5DLE1BQU0sRUFBRVosb0JBRkY7SUFHTmEsUUFBUSxNQUhGO0lBS05WLE1BQU0sRUFBRUEsTUFMRjtJQU1OVyxLQUFLLEVBQUVkLG9CQU5EO0lBTXFCLEdBQ3ZCTyxLQVBFO0lBT0dMLFdBQ1QsdUJBQUNhLFdBQUQsRUFBSztNQUFBYixVQUFFRztJQUFGLENBQUwsQ0FEUyxFQUVSSCxRQUZRO0VBUEgsQ0FBUixFQUlPQyxNQUpQLENBREY7QUFhRCxDQXJCTTs7OztBQUFNYSx5QkFBY2YsY0FBZCIsIm5hbWVzIjpbIldSQVBQRVJfRklYVFVSRV9TSVpFIiwiV3JhcHBlckZpeHR1cmUiLCJjaGlsZHJlbiIsInRlc3RJRCIsInRlc3RJRFByb3BzIiwidGV4dCIsInRleHRQcm9wcyIsInByb3BzIiwiV3JhcHBlcl8xIiwiYmFja2dyb3VuZENvbG9yIiwidGhlbWVfY29uc3RhbnRzXzEiLCJQUklNQVJZIiwiaGVpZ2h0IiwiaXNDZW50ZXIiLCJ3aWR0aCIsIlRleHRfMSIsImV4cG9ydHMiXSwic291cmNlcyI6WyIvVXNlcnMveWdtaW4vUHJvamVjdHMvbW9ub192Mi9hcHAzL2FwcC9wYWNrYWdlcy9saWItZnJvbnRlbmQvc3JjL2NvcmUvY29tcG9uZW50cy9XcmFwcGVyL1dyYXBwZXIuZml4dHVyZXMudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IFRleHQgfSBmcm9tICdAbGliL2Zyb250ZW5kL2NvcmUvY29tcG9uZW50cy9UZXh0L1RleHQnO1xuaW1wb3J0IHsgV3JhcHBlciB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvY29yZS9jb21wb25lbnRzL1dyYXBwZXIvV3JhcHBlcic7XG5pbXBvcnQgdHlwZSB7IFdyYXBwZXJQcm9wc01vZGVsIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9jb3JlL2NvbXBvbmVudHMvV3JhcHBlci9XcmFwcGVyLm1vZGVscyc7XG5pbXBvcnQgdHlwZSB7IFNGQ01vZGVsIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9jb3JlL2NvcmUubW9kZWxzJztcbmltcG9ydCB7IFRIRU1FX0NPTE9SIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9zdHlsaW5nL3V0aWxzL3RoZW1lL3RoZW1lLmNvbnN0YW50cyc7XG5pbXBvcnQgeyB1aWQgfSBmcm9tICdAbGliL3NoYXJlZC9jb3JlL3V0aWxzL3VpZC91aWQnO1xuaW1wb3J0IHsgdXNlTWVtbyB9IGZyb20gJ3JlYWN0JztcblxuY29uc3QgV1JBUFBFUl9GSVhUVVJFX1NJWkUgPSAxMDA7XG5cbmV4cG9ydCBpbnRlcmZhY2UgV3JhcHBlckZpeHR1cmVQcm9wc01vZGVsIGV4dGVuZHMgV3JhcHBlclByb3BzTW9kZWwge1xuICB0ZXN0SUQ/OiBzdHJpbmc7XG4gIHRleHQ/OiBzdHJpbmc7XG59XG5cbmV4cG9ydCBjb25zdCBXcmFwcGVyRml4dHVyZTogU0ZDTW9kZWw8V3JhcHBlckZpeHR1cmVQcm9wc01vZGVsPiA9ICh7XG4gIGNoaWxkcmVuLFxuICB0ZXN0SUQ6IHRlc3RJRFByb3BzLFxuICB0ZXh0OiB0ZXh0UHJvcHMsXG4gIC4uLnByb3BzXG59KSA9PiB7XG4gIGNvbnN0IHRlc3RJRCA9IHVzZU1lbW8oKCkgPT4gdGVzdElEUHJvcHMgfHwgdWlkKCd3cmFwcGVyLWZpeHR1cmUnKSwgW3Rlc3RJRFByb3BzXSk7XG4gIGNvbnN0IHRleHQgPSB1c2VNZW1vKCgpID0+IHRleHRQcm9wcyB8fCB1aWQoJ3dyYXBwZXItZml4dHVyZScpLCBbdGV4dFByb3BzXSk7XG4gIHJldHVybiAoXG4gICAgPFdyYXBwZXJcbiAgICAgIGJhY2tncm91bmRDb2xvcj17VEhFTUVfQ09MT1IuUFJJTUFSWX1cbiAgICAgIGhlaWdodD17V1JBUFBFUl9GSVhUVVJFX1NJWkV9XG4gICAgICBpc0NlbnRlclxuICAgICAga2V5PXt0ZXN0SUR9XG4gICAgICB0ZXN0SUQ9e3Rlc3RJRH1cbiAgICAgIHdpZHRoPXtXUkFQUEVSX0ZJWFRVUkVfU0laRX1cbiAgICAgIHsuLi5wcm9wc30+XG4gICAgICA8VGV4dD57dGV4dH08L1RleHQ+XG4gICAgICB7Y2hpbGRyZW59XG4gICAgPC9XcmFwcGVyPlxuICApO1xufTtcbiJdfQ==

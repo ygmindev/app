@@ -1,0 +1,3 @@
+export enum HOOK_TYPE {
+  BEFORE_CREATE = 'BEFORE_CREATE',
+}

@@ -1,0 +1,553 @@
+cd50576c4d04323902082cdcf6e9131e
+"use strict";
+
+/* istanbul ignore next */
+function cov_18ahmlxov9() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/hooks/useStyles/useStyles.ts";
+  var hash = "a221bc6822f87228f5287075bea160a73d365c6b";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/hooks/useStyles/useStyles.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 27
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 22
+        },
+        end: {
+          line: 4,
+          column: 81
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 19
+        },
+        end: {
+          line: 5,
+          column: 75
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 17
+        },
+        end: {
+          line: 6,
+          column: 34
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 16
+        },
+        end: {
+          line: 7,
+          column: 32
+        }
+      },
+      "6": {
+        start: {
+          line: 8,
+          column: 23
+        },
+        end: {
+          line: 8,
+          column: 46
+        }
+      },
+      "7": {
+        start: {
+          line: 9,
+          column: 18
+        },
+        end: {
+          line: 23,
+          column: 1
+        }
+      },
+      "8": {
+        start: {
+          line: 10,
+          column: 18
+        },
+        end: {
+          line: 10,
+          column: 44
+        }
+      },
+      "9": {
+        start: {
+          line: 11,
+          column: 21
+        },
+        end: {
+          line: 11,
+          column: 53
+        }
+      },
+      "10": {
+        start: {
+          line: 12,
+          column: 28
+        },
+        end: {
+          line: 12,
+          column: 117
+        }
+      },
+      "11": {
+        start: {
+          line: 12,
+          column: 55
+        },
+        end: {
+          line: 12,
+          column: 101
+        }
+      },
+      "12": {
+        start: {
+          line: 13,
+          column: 27
+        },
+        end: {
+          line: 15,
+          column: 54
+        }
+      },
+      "13": {
+        start: {
+          line: 13,
+          column: 54
+        },
+        end: {
+          line: 15,
+          column: 18
+        }
+      },
+      "14": {
+        start: {
+          line: 13,
+          column: 127
+        },
+        end: {
+          line: 15,
+          column: 16
+        }
+      },
+      "15": {
+        start: {
+          line: 16,
+          column: 19
+        },
+        end: {
+          line: 16,
+          column: 150
+        }
+      },
+      "16": {
+        start: {
+          line: 16,
+          column: 46
+        },
+        end: {
+          line: 16,
+          column: 114
+        }
+      },
+      "17": {
+        start: {
+          line: 17,
+          column: 4
+        },
+        end: {
+          line: 22,
+          column: 6
+        }
+      },
+      "18": {
+        start: {
+          line: 20,
+          column: 55
+        },
+        end: {
+          line: 20,
+          column: 59
+        }
+      },
+      "19": {
+        start: {
+          line: 24,
+          column: 0
+        },
+        end: {
+          line: 24,
+          column: 30
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 9,
+            column: 18
+          },
+          end: {
+            line: 9,
+            column: 19
+          }
+        },
+        loc: {
+          start: {
+            line: 9,
+            column: 43
+          },
+          end: {
+            line: 23,
+            column: 1
+          }
+        },
+        line: 9
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 12,
+            column: 49
+          },
+          end: {
+            line: 12,
+            column: 50
+          }
+        },
+        loc: {
+          start: {
+            line: 12,
+            column: 55
+          },
+          end: {
+            line: 12,
+            column: 101
+          }
+        },
+        line: 12
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 13,
+            column: 48
+          },
+          end: {
+            line: 13,
+            column: 49
+          }
+        },
+        loc: {
+          start: {
+            line: 13,
+            column: 54
+          },
+          end: {
+            line: 15,
+            column: 18
+          }
+        },
+        line: 13
+      },
+      "3": {
+        name: "(anonymous_3)",
+        decl: {
+          start: {
+            line: 13,
+            column: 115
+          },
+          end: {
+            line: 13,
+            column: 116
+          }
+        },
+        loc: {
+          start: {
+            line: 13,
+            column: 127
+          },
+          end: {
+            line: 15,
+            column: 16
+          }
+        },
+        line: 13
+      },
+      "4": {
+        name: "(anonymous_4)",
+        decl: {
+          start: {
+            line: 16,
+            column: 40
+          },
+          end: {
+            line: 16,
+            column: 41
+          }
+        },
+        loc: {
+          start: {
+            line: 16,
+            column: 46
+          },
+          end: {
+            line: 16,
+            column: 114
+          }
+        },
+        line: 16
+      },
+      "5": {
+        name: "(anonymous_5)",
+        decl: {
+          start: {
+            line: 20,
+            column: 28
+          },
+          end: {
+            line: 20,
+            column: 29
+          }
+        },
+        loc: {
+          start: {
+            line: 20,
+            column: 55
+          },
+          end: {
+            line: 20,
+            column: 59
+          }
+        },
+        line: 20
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 13,
+            column: 127
+          },
+          end: {
+            line: 15,
+            column: 16
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 14,
+            column: 10
+          },
+          end: {
+            line: 14,
+            column: 44
+          }
+        }, {
+          start: {
+            line: 15,
+            column: 10
+          },
+          end: {
+            line: 15,
+            column: 16
+          }
+        }],
+        line: 13
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    b: {
+      "0": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/hooks/useStyles/useStyles.ts",
+      mappings: ";;;AAAA,kFAA+E;AAK/E,4EAAyE;AAGzE,mCAAyC;AACzC,iCAAgC;AAChC,+CAA0C;AAEnC,MAAM,SAAS,GAAG,CAAS,EAChC,KAAK,EACL,OAAO,GACsB,EAA0B,EAAE;IACzD,MAAM,KAAK,GAAG,IAAA,mBAAQ,GAAE,CAAC;IACzB,MAAM,QAAQ,GAAG,IAAA,yBAAW,GAAE,CAAC;IAE/B,MAAM,eAAe,GAAG,IAAA,eAAO,EAAa,GAAG,EAAE,CAAC,yBAAU,CAAC,OAAO,CAAC,KAAK,CAAC,KAAK,CAAC,EAAE,CAAC,KAAK,CAAC,KAAK,CAAC,CAAC,CAAC;IAClG,MAAM,cAAc,GAAG,IAAA,eAAO,EAC5B,GAAG,EAAE,CACH,yBAAU,CAAC,OAAO,CAChB,IAAA,YAAG,EAAC,OAAO,EAAE,CAAC,MAAM,EAAE,EAAE,CACtB,IAAA,mBAAU,EAAC,MAAM,CAAC;QAChB,CAAC,CAAE,MAA+B,CAAC,KAAK,EAAE,EAAE,QAAQ,EAAE,KAAK,EAAE,CAAC;QAC9D,CAAC,CAAC,MAAM,CACX,CACF,EACH,CAAC,KAAK,EAAE,OAAO,EAAE,KAAK,EAAE,QAAQ,CAAC,CAClC,CAAC;IACF,MAAM,MAAM,GAAG,IAAA,eAAO,EACpB,GAAG,EAAE,CAAC,yBAAU,CAAC,OAAO,CAAC,CAAC,cAAc,EAAE,eAAe,CAAC,CAAC,EAC3D,CAAC,cAAc,EAAE,eAAe,CAAC,CAClC,CAAC;IAEF,OAAO;QACL,cAAc;QACd,eAAe;QACf,iBAAiB,EAAE,CAAC,CAAC,EAAE,KAAK,EAAE,CAAC,EAAE,GAAG,IAAI,EAAE,EAAE,EAAE,CAAC,IAAI,CAAC,CAAC,KAAK,CAAC;QAC3D,MAAM;KACP,CAAC;AACJ,CAAC,CAAC;AA9BW,QAAA,SAAS,aA8BpB",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/hooks/useStyles/useStyles.ts"],
+      sourcesContent: ["import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';\nimport type {\n  UseStylesModel,\n  UseStylesParamsModel,\n} from '@lib/frontend/styling/hooks/useStyles/useStyles.models';\nimport { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';\nimport type { StyleModel } from '@lib/frontend/styling/styling.models';\nimport type { StylerModel } from '@lib/frontend/styling/utils/styler/styler.models';\nimport { isFunction, map } from 'lodash';\nimport { useMemo } from 'react';\nimport { StyleSheet } from 'react-native';\n\nexport const useStyles = <TProps>({\n  props,\n  stylers,\n}: UseStylesParamsModel<TProps>): UseStylesModel<TProps> => {\n  const theme = useTheme();\n  const isMobile = useIsMobile();\n\n  const inheritedStyles = useMemo<StyleModel>(() => StyleSheet.flatten(props.style), [props.style]);\n  const computedStyles = useMemo<StyleModel>(\n    () =>\n      StyleSheet.flatten(\n        map(stylers, (styler) =>\n          isFunction(styler)\n            ? (styler as StylerModel<unknown>)(props, { isMobile, theme })\n            : styler,\n        ),\n      ),\n    [props, stylers, theme, isMobile],\n  );\n  const styles = useMemo<StyleModel>(\n    () => StyleSheet.flatten([computedStyles, inheritedStyles]),\n    [computedStyles, inheritedStyles],\n  );\n\n  return {\n    computedStyles,\n    inheritedStyles,\n    propsWithOutStyle: (({ style: _, ...rest }) => rest)(props),\n    styles,\n  };\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "a221bc6822f87228f5287075bea160a73d365c6b"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_18ahmlxov9 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_18ahmlxov9();
+cov_18ahmlxov9().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_18ahmlxov9().s[1]++;
+exports.useStyles = void 0;
+const useIsMobile_1 =
+/* istanbul ignore next */
+(cov_18ahmlxov9().s[2]++, require("@lib/frontend/core/hooks/useIsMobile/useIsMobile"));
+const useTheme_1 =
+/* istanbul ignore next */
+(cov_18ahmlxov9().s[3]++, require("@lib/frontend/styling/hooks/useTheme/useTheme"));
+const lodash_1 =
+/* istanbul ignore next */
+(cov_18ahmlxov9().s[4]++, require("lodash"));
+const react_1 =
+/* istanbul ignore next */
+(cov_18ahmlxov9().s[5]++, require("react"));
+const react_native_1 =
+/* istanbul ignore next */
+(cov_18ahmlxov9().s[6]++, require("react-native"));
+
+/* istanbul ignore next */
+cov_18ahmlxov9().s[7]++;
+
+const useStyles = ({
+  props,
+  stylers
+}) => {
+  /* istanbul ignore next */
+  cov_18ahmlxov9().f[0]++;
+  const theme =
+  /* istanbul ignore next */
+  (cov_18ahmlxov9().s[8]++, (0, useTheme_1.useTheme)());
+  const isMobile =
+  /* istanbul ignore next */
+  (cov_18ahmlxov9().s[9]++, (0, useIsMobile_1.useIsMobile)());
+  const inheritedStyles =
+  /* istanbul ignore next */
+  (cov_18ahmlxov9().s[10]++, (0, react_1.useMemo)(() => {
+    /* istanbul ignore next */
+    cov_18ahmlxov9().f[1]++;
+    cov_18ahmlxov9().s[11]++;
+    return react_native_1.StyleSheet.flatten(props.style);
+  }, [props.style]));
+  const computedStyles =
+  /* istanbul ignore next */
+  (cov_18ahmlxov9().s[12]++, (0, react_1.useMemo)(() => {
+    /* istanbul ignore next */
+    cov_18ahmlxov9().f[2]++;
+    cov_18ahmlxov9().s[13]++;
+    return react_native_1.StyleSheet.flatten((0, lodash_1.map)(stylers, (styler) => {
+      /* istanbul ignore next */
+      cov_18ahmlxov9().f[3]++;
+      cov_18ahmlxov9().s[14]++;
+      return (0, lodash_1.isFunction)(styler) ?
+      /* istanbul ignore next */
+      (cov_18ahmlxov9().b[0][0]++, styler(props, {
+        isMobile,
+        theme
+      })) :
+      /* istanbul ignore next */
+      (cov_18ahmlxov9().b[0][1]++, styler);
+    }));
+  }, [props, stylers, theme, isMobile]));
+  const styles =
+  /* istanbul ignore next */
+  (cov_18ahmlxov9().s[15]++, (0, react_1.useMemo)(() => {
+    /* istanbul ignore next */
+    cov_18ahmlxov9().f[4]++;
+    cov_18ahmlxov9().s[16]++;
+    return react_native_1.StyleSheet.flatten([computedStyles, inheritedStyles]);
+  }, [computedStyles, inheritedStyles]));
+
+  /* istanbul ignore next */
+  cov_18ahmlxov9().s[17]++;
+  return {
+    computedStyles,
+    inheritedStyles,
+    propsWithOutStyle: (({
+      style: _,
+      ...rest
+    }) => {
+      /* istanbul ignore next */
+      cov_18ahmlxov9().f[5]++;
+      cov_18ahmlxov9().s[18]++;
+      return rest;
+    })(props),
+    styles
+  };
+};
+
+/* istanbul ignore next */
+cov_18ahmlxov9().s[19]++;
+exports.useStyles = useStyles;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQStCUTs7Ozs7Ozs7Ozs7Ozs7Ozs7QUEvQlI7QUFBQTtBQUFBO0FBS0E7QUFBQTtBQUFBO0FBR0E7QUFBQTtBQUFBO0FBQ0E7QUFBQTtBQUFBO0FBQ0E7QUFBQTtBQUFBOzs7OztBQUVPLE1BQU1BLFNBQVMsR0FBRyxDQUFTO0VBQ2hDQyxLQURnQztFQUVoQ0M7QUFGZ0MsQ0FBVCxLQUdrQztFQUFBO0VBQUE7RUFDekQsTUFBTUMsS0FBSztFQUFBO0VBQUEsMEJBQUcsMEJBQUgsQ0FBWDtFQUNBLE1BQU1DLFFBQVE7RUFBQTtFQUFBLDBCQUFHLGdDQUFILENBQWQ7RUFFQSxNQUFNQyxlQUFlO0VBQUE7RUFBQSwyQkFBRyxxQkFBb0IsTUFBTTtJQUFBO0lBQUE7SUFBQTtJQUFBLGlDQUFXQyxPQUFYLENBQW1CTCxLQUFLLENBQUNNLEtBQXpCO0VBQStCLENBQXpELEVBQTJELENBQUNOLEtBQUssQ0FBQ00sS0FBUCxDQUEzRCxDQUFILENBQXJCO0VBQ0EsTUFBTUMsY0FBYztFQUFBO0VBQUEsMkJBQUcscUJBQ3JCLE1BQ0U7SUFBQTtJQUFBO0lBQUE7SUFBQSxpQ0FBV0YsT0FBWCxDQUNFLGtCQUFJSixPQUFKLEVBQWEsQ0FBQ08sTUFBRCxLQUNYO01BQUE7TUFBQTtNQUFBO01BQUEsZ0NBQVdBLE1BQVg7TUFBQTtNQUFBLDZCQUNLQSxNQUErQixDQUFDUixLQUFELEVBQVE7UUFBRUcsUUFBRjtRQUFZRDtNQUFaLENBQVIsQ0FEcEM7TUFBQTtNQUFBLDZCQUVJTSxNQUZKO0lBRVUsQ0FIWixDQURGO0VBTUMsQ0FSa0IsRUFTckIsQ0FBQ1IsS0FBRCxFQUFRQyxPQUFSLEVBQWlCQyxLQUFqQixFQUF3QkMsUUFBeEIsQ0FUcUIsQ0FBSCxDQUFwQjtFQVdBLE1BQU1NLE1BQU07RUFBQTtFQUFBLDJCQUFHLHFCQUNiLE1BQU07SUFBQTtJQUFBO0lBQUE7SUFBQSxpQ0FBV0osT0FBWCxDQUFtQixDQUFDRSxjQUFELEVBQWlCSCxlQUFqQixDQUFuQjtFQUFxRCxDQUQ5QyxFQUViLENBQUNHLGNBQUQsRUFBaUJILGVBQWpCLENBRmEsQ0FBSCxDQUFaOztFQWhCeUQ7RUFBQTtFQXFCekQsT0FBTztJQUNMRyxjQURLO0lBRUxILGVBRks7SUFHTE0saUJBQWlCLEVBQUUsQ0FBQyxDQUFDO01BQUVKLEtBQUssRUFBRUssQ0FBVDtNQUFZLEdBQUdDO0lBQWYsQ0FBRCxLQUEyQkE7TUFBQUE7TUFBQUE7TUFBQUE7TUFBQUEsV0FBSTtJQUFBLENBQWhDLEVBQWtDWixLQUFsQyxDQUhkO0lBSUxTO0VBSkssQ0FBUDtBQU1ELENBOUJNOzs7O0FBQU1JLG9CQUFTZCxTQUFUIiwibmFtZXMiOlsidXNlU3R5bGVzIiwicHJvcHMiLCJzdHlsZXJzIiwidGhlbWUiLCJpc01vYmlsZSIsImluaGVyaXRlZFN0eWxlcyIsImZsYXR0ZW4iLCJzdHlsZSIsImNvbXB1dGVkU3R5bGVzIiwic3R5bGVyIiwic3R5bGVzIiwicHJvcHNXaXRoT3V0U3R5bGUiLCJfIiwicmVzdCIsImV4cG9ydHMiXSwic291cmNlcyI6WyIvVXNlcnMveWdtaW4vUHJvamVjdHMvbW9ub192Mi9hcHAzL2FwcC9wYWNrYWdlcy9saWItZnJvbnRlbmQvc3JjL3N0eWxpbmcvaG9va3MvdXNlU3R5bGVzL3VzZVN0eWxlcy50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyB1c2VJc01vYmlsZSB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvY29yZS9ob29rcy91c2VJc01vYmlsZS91c2VJc01vYmlsZSc7XG5pbXBvcnQgdHlwZSB7XG4gIFVzZVN0eWxlc01vZGVsLFxuICBVc2VTdHlsZXNQYXJhbXNNb2RlbCxcbn0gZnJvbSAnQGxpYi9mcm9udGVuZC9zdHlsaW5nL2hvb2tzL3VzZVN0eWxlcy91c2VTdHlsZXMubW9kZWxzJztcbmltcG9ydCB7IHVzZVRoZW1lIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9zdHlsaW5nL2hvb2tzL3VzZVRoZW1lL3VzZVRoZW1lJztcbmltcG9ydCB0eXBlIHsgU3R5bGVNb2RlbCB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvc3R5bGluZy9zdHlsaW5nLm1vZGVscyc7XG5pbXBvcnQgdHlwZSB7IFN0eWxlck1vZGVsIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9zdHlsaW5nL3V0aWxzL3N0eWxlci9zdHlsZXIubW9kZWxzJztcbmltcG9ydCB7IGlzRnVuY3Rpb24sIG1hcCB9IGZyb20gJ2xvZGFzaCc7XG5pbXBvcnQgeyB1c2VNZW1vIH0gZnJvbSAncmVhY3QnO1xuaW1wb3J0IHsgU3R5bGVTaGVldCB9IGZyb20gJ3JlYWN0LW5hdGl2ZSc7XG5cbmV4cG9ydCBjb25zdCB1c2VTdHlsZXMgPSA8VFByb3BzPih7XG4gIHByb3BzLFxuICBzdHlsZXJzLFxufTogVXNlU3R5bGVzUGFyYW1zTW9kZWw8VFByb3BzPik6IFVzZVN0eWxlc01vZGVsPFRQcm9wcz4gPT4ge1xuICBjb25zdCB0aGVtZSA9IHVzZVRoZW1lKCk7XG4gIGNvbnN0IGlzTW9iaWxlID0gdXNlSXNNb2JpbGUoKTtcblxuICBjb25zdCBpbmhlcml0ZWRTdHlsZXMgPSB1c2VNZW1vPFN0eWxlTW9kZWw+KCgpID0+IFN0eWxlU2hlZXQuZmxhdHRlbihwcm9wcy5zdHlsZSksIFtwcm9wcy5zdHlsZV0pO1xuICBjb25zdCBjb21wdXRlZFN0eWxlcyA9IHVzZU1lbW88U3R5bGVNb2RlbD4oXG4gICAgKCkgPT5cbiAgICAgIFN0eWxlU2hlZXQuZmxhdHRlbihcbiAgICAgICAgbWFwKHN0eWxlcnMsIChzdHlsZXIpID0+XG4gICAgICAgICAgaXNGdW5jdGlvbihzdHlsZXIpXG4gICAgICAgICAgICA/IChzdHlsZXIgYXMgU3R5bGVyTW9kZWw8dW5rbm93bj4pKHByb3BzLCB7IGlzTW9iaWxlLCB0aGVtZSB9KVxuICAgICAgICAgICAgOiBzdHlsZXIsXG4gICAgICAgICksXG4gICAgICApLFxuICAgIFtwcm9wcywgc3R5bGVycywgdGhlbWUsIGlzTW9iaWxlXSxcbiAgKTtcbiAgY29uc3Qgc3R5bGVzID0gdXNlTWVtbzxTdHlsZU1vZGVsPihcbiAgICAoKSA9PiBTdHlsZVNoZWV0LmZsYXR0ZW4oW2NvbXB1dGVkU3R5bGVzLCBpbmhlcml0ZWRTdHlsZXNdKSxcbiAgICBbY29tcHV0ZWRTdHlsZXMsIGluaGVyaXRlZFN0eWxlc10sXG4gICk7XG5cbiAgcmV0dXJuIHtcbiAgICBjb21wdXRlZFN0eWxlcyxcbiAgICBpbmhlcml0ZWRTdHlsZXMsXG4gICAgcHJvcHNXaXRoT3V0U3R5bGU6ICgoeyBzdHlsZTogXywgLi4ucmVzdCB9KSA9PiByZXN0KShwcm9wcyksXG4gICAgc3R5bGVzLFxuICB9O1xufTtcbiJdfQ==

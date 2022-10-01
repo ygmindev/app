@@ -1,0 +1,12 @@
+c9c803e4bd49d3177c547a1c9c73b340
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.USER_FIXTURE = void 0;
+exports.USER_FIXTURE = {
+    _id: 'uid',
+    created: new Date(2000, 1, 1),
+    email: 'user@email.com',
+    first: 'fist',
+    last: 'last',
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLXNoYXJlZC9zcmMvdXNlci9yZXNvdXJjZXMvVXNlci9Vc2VyLmZpeHR1cmVzLnRzIiwibWFwcGluZ3MiOiI7OztBQUVhLFFBQUEsWUFBWSxHQUFjO0lBQ3JDLEdBQUcsRUFBRSxLQUFLO0lBQ1YsT0FBTyxFQUFFLElBQUksSUFBSSxDQUFDLElBQUksRUFBRSxDQUFDLEVBQUUsQ0FBQyxDQUFDO0lBQzdCLEtBQUssRUFBRSxnQkFBZ0I7SUFDdkIsS0FBSyxFQUFFLE1BQU07SUFDYixJQUFJLEVBQUUsTUFBTTtDQUNiLENBQUMiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLXNoYXJlZC9zcmMvdXNlci9yZXNvdXJjZXMvVXNlci9Vc2VyLmZpeHR1cmVzLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB0eXBlIHsgVXNlck1vZGVsIH0gZnJvbSAnQGxpYi9zaGFyZWQvdXNlci9yZXNvdXJjZXMvVXNlci9Vc2VyLm1vZGVscyc7XG5cbmV4cG9ydCBjb25zdCBVU0VSX0ZJWFRVUkU6IFVzZXJNb2RlbCA9IHtcbiAgX2lkOiAndWlkJyxcbiAgY3JlYXRlZDogbmV3IERhdGUoMjAwMCwgMSwgMSksXG4gIGVtYWlsOiAndXNlckBlbWFpbC5jb20nLFxuICBmaXJzdDogJ2Zpc3QnLFxuICBsYXN0OiAnbGFzdCcsXG59O1xuIl0sInZlcnNpb24iOjN9

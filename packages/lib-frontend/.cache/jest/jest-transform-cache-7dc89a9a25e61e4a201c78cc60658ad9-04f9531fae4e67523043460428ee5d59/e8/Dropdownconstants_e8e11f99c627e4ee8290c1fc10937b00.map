@@ -1,0 +1,1 @@
+{"file":"/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Dropdown/Dropdown.constants.ts","mappings":";;;AAAa,QAAA,mBAAmB,GAAG,GAAG,CAAC","names":[],"sources":["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/components/Dropdown/Dropdown.constants.ts"],"sourcesContent":["export const DROPDOWN_MAX_HEIGHT = 400;\n"],"version":3}
