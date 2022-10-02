@@ -16,7 +16,14 @@ export const NATIVE_EXTENSIONS = _permuteExtensions(
 
 export const PACKAGE_PREFIXES: Array<string> = ['app', 'asset', 'lib', 'server', 'tool'];
 
-export const CLEAN_PATTERNS = ['**/.cache', '**/*.log*', 'dist', 'coverage', 'public/assets'];
+export const CLEAN_PATTERNS = [
+  '**/.cache',
+  '**/*.log*',
+  '**/.DS_Store',
+  '**/dist',
+  '**/coverage',
+  '**/public/assets',
+];
 
 export const TEST_EXTENSIONS = ['e2e', 'spec'];
 

@@ -7,10 +7,11 @@ import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { readFileSync, writeFileSync } from 'fs';
 import { uniq } from 'lodash';
 
-export const _package: GeneratorParamsModel = {
+export const jsPackage: GeneratorParamsModel = {
   onSuccess: async ({ variables }) => {
     const root = variables && variables['{{ROOT}}'];
     const target = variables && variables['{{TARGET}}'];
+
     if (root && target) {
       // typescript paths
       let dir = fromConfig('typescript/tsconfig.paths.json');

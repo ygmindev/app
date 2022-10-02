@@ -43,6 +43,7 @@
     "i18next-http-backend": "^1.4.4",
     "inversify": "^6.0.1",
     "lodash": "^4.17.21",
+    "minimatch": "^5.1.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.37",
     "mongodb": "^4.10.0",
@@ -210,6 +211,7 @@
   "bundledDependencies": [
     "@app/native",
     "@app/web",
+    "@app/web-admin",
     "@app/web-ete",
     "@app/web-storybook",
     "@asset/static",

@@ -6,23 +6,21 @@ import { BOILERPLATE_TEMPLATE_VARIABLE_PATTERN } from '@tool/generate/utils/boil
 import type { BoilerplateParamsModel } from '@tool/generate/utils/boilerplate/boilerplate.models';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
-import { readFileSync, statSync } from 'fs';
+import { readFileSync } from 'fs';
 import { flatten, keys, pullAll, trim, uniq } from 'lodash';
 import { basename, join } from 'path';
 
-const _getTemplateVariables = async (templateDir: string): Promise<Array<string>> => {
-  const base = basename(templateDir);
+const _getTemplateVariables = async (from: string): Promise<Array<string>> => {
+  const base = basename(from);
   let variables: Array<string> = base.match(BOILERPLATE_TEMPLATE_VARIABLE_PATTERN) || [];
-  if (statSync(templateDir).isDirectory()) {
-    const paths = children({ from: templateDir, isDirectory: true });
-    variables = variables.concat(
-      flatten(
-        await Promise.all(paths.map(async ({ fullPath }) => _getTemplateVariables(fullPath))),
-      ),
-    );
-  } else {
-    const content = readFileSync(templateDir, 'utf8');
-    variables = variables.concat(content.match(BOILERPLATE_TEMPLATE_VARIABLE_PATTERN) || []);
+
+  for (const child of children({ from })) {
+    if (child.isDirectory) {
+      variables = variables.concat(flatten(await _getTemplateVariables(child.fullPath)));
+    } else {
+      const content = readFileSync(child.fullPath, 'utf8');
+      variables = variables.concat(content.match(BOILERPLATE_TEMPLATE_VARIABLE_PATTERN) || []);
+    }
   }
 
   return variables;
