@@ -6,7 +6,6 @@ import { HOOK_TYPE } from '@lib/backend/resource/decorators/withHook/withHook.co
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { forEach } from 'lodash';
-import { ObjectId } from 'mongodb';
 
 @withEntity({ isAbstract: true })
 export class EntityResource implements EntityResourceModel {
@@ -14,7 +13,7 @@ export class EntityResource implements EntityResourceModel {
   created: Date = new Date();
 
   @withField({ type: FIELD_TYPE.PRIMARY_KEY })
-  _id: string = new ObjectId() as unknown as string;
+  _id!: string;
 
   @withHook({ type: HOOK_TYPE.BEFORE_CREATE })
   async beforeCreate(): Promise<void> {

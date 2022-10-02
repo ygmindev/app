@@ -22,7 +22,9 @@ describe('entityResource', () => {
       }),
     );
 
-    act(async () => await create.current.query({ form: { stringProperty: 'stringProperty' } }));
+    await act(
+      async () => await create.current.query({ form: { stringProperty: 'stringProperty' } }),
+    );
 
     expect(1).toStrictEqual(1);
 

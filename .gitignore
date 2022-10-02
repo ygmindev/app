@@ -10,6 +10,11 @@ npm-debug.log
 yarn-error.log
 *.jsbundle
 
+# Tests
+test-results
+playwright-report
+coverage
+
 # IDEs and editors
 .idea
 .project
@@ -29,7 +34,6 @@ yarn-error.log
 # misc
 .sass-cache
 connect.lock
-coverage
 libpeerconnection.log
 npm-debug.log
 yarn-error.log

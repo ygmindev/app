@@ -12,7 +12,7 @@ let isBootstrapped: boolean;
 const graphQlHandler = new ApolloServer({
   context: async ({ context, event }): Promise<Context> => getContext({ context, event }),
   formatError: (e): GraphQLFormattedError => {
-    error(`GraphQL Error: ${JSON.stringify(e)}`);
+    error(`GraphQL Error:\n${JSON.stringify(e, null, 2)}`);
     return {
       ...e,
       extensions: {

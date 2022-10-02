@@ -26,7 +26,11 @@ const _getColumn = <TType>({
   type,
 }: WithFieldParamsModel<TType>): PropertyDecorator => {
   if (Resource) {
-    return Embedded(() => Resource, { array: isArray, nullable: isOptional }) as PropertyDecorator;
+    return (
+      isArray
+        ? Embedded(() => Resource, { array: true, nullable: isOptional })
+        : Property({ nullable: isOptional, type: () => Resource })
+    ) as PropertyDecorator;
   }
   const [_Field, _options] = (() => {
     if (isArray) {
@@ -34,7 +38,7 @@ const _getColumn = <TType>({
     }
     switch (type) {
       case FIELD_TYPE.PRIMARY_KEY:
-        return [PrimaryKey, {}];
+        return [PrimaryKey, { type: 'ObjectId' }];
       case FIELD_TYPE.ID:
         return [Property, { type: 'ObjectId' }];
       case FIELD_TYPE.STRING:

@@ -9,6 +9,7 @@ const { displayName } = withTest({ target: () => cleanDocument });
 describe(displayName, () => {
   const VALUE: Record<string, unknown> = {
     _id: randomString(24),
+    _objectId: new ObjectId(),
     a: 'a',
     b: 1,
     c: null,
@@ -18,7 +19,7 @@ describe(displayName, () => {
   test('works', async () => {
     const result = cleanDocument(VALUE);
     expect(result).toEqual({
-      ...pick(VALUE, ['a', 'b', 'c']),
+      ...pick(VALUE, ['a', 'b', 'c', '_objectId']),
       _id: new ObjectId(VALUE._id as string),
     });
   });
