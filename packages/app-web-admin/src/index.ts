@@ -1,4 +1,4 @@
-import { App } from '@app/web/app/containers/App/App';
+import { App } from '@app/web-admin/app/containers/App/App';
 import type { ComponentType } from 'react';
 import { AppRegistry } from 'react-native';
 

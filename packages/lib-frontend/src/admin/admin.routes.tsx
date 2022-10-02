@@ -1,14 +1,22 @@
+import { RESOURCE } from '@lib/frontend/app/app.constants';
 import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
 import { authRoutes } from '@lib/frontend/auth/auth.routes';
 import { devRoutes } from '@lib/frontend/dev/dev.routes';
 import type { PageModel } from '@lib/frontend/routing/components/Page/Page.models';
 import { NotFound } from '@lib/frontend/routing/containers/NotFound/NotFound';
 
-export const appRoutes: Array<PageModel> = [
+export const adminRoutes: Array<PageModel> = [
   {
     Layout: AppLayout,
     pathname: '/',
-    routes: [...authRoutes],
+    routes: [
+      ...authRoutes,
+
+      {
+        element: <NotFound />,
+        pathname: RESOURCE,
+      },
+    ],
   },
 
   ...devRoutes,

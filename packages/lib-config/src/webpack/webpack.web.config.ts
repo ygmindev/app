@@ -19,7 +19,9 @@ export const webpackConfig = (
 
     values: [
       {
-        devServer: { devMiddleware: { writeToDisk: true } },
+        devServer: {
+          devMiddleware: { writeToDisk: true },
+        },
 
         module: {
           rules: [

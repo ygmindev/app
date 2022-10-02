@@ -1,1 +1,1 @@
-export const APP_NAME = 'APP_ADMIN';
+export const APP_NAME = 'APP_WEB_ADMIN';
