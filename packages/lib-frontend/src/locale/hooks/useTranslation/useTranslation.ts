@@ -7,7 +7,7 @@ import { isFunction } from 'lodash';
 export const useTranslation = (ns: Array<string> = []): UseTranslationModel => {
   const { isInitialized, t: _t } = _useTranslation([...ns, ...(i18nConfig.defaultNS || [])]);
 
-  const t = <TParams = void>(key?: TranslationTextModel, params?: TParams): string =>
+  const t = <TParams = undefined>(key?: TranslationTextModel, params?: TParams): string =>
     key && isInitialized ? (isFunction(key) ? key({ isInitialized, t }) : _t(key, params)) : '';
 
   return { isInitialized, t };

@@ -1,4 +1,4 @@
-export interface LocationModel<TParams = void> {
-  params?: TParams;
+export interface LocationModel<TParams = undefined> {
+  params: TParams;
   pathname: string;
 }

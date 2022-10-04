@@ -10,7 +10,7 @@ import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import type { ReactElement } from 'react';
 import { useImperativeHandle } from 'react';
 
-export const Popup = <TParams = void,>({
+export const Popup = <TParams = undefined,>({
   forwardedRef,
   height = POPUP_DEFAULT_SIZE,
   onClose,

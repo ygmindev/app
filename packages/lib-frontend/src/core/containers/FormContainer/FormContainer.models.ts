@@ -23,12 +23,12 @@ export interface FormContainerFieldModel<TType, TKey extends string>
   ): ReactElement;
 }
 
-export interface FormContainerRowModel<TType, TKeys extends string[] = string[]>
+export interface FormContainerRowModel<TType, TKeys extends Array<string> = Array<string>>
   extends WithIdModel {
   fields?: Array<FormContainerFieldModel<TType, TKeys[number]>>;
 }
 
-export interface FormContainerPropsModel<TType, TKeys extends string[][] = string[][]>
+export interface FormContainerPropsModel<TType, TKeys extends Array<string>[] = Array<string>[]>
   extends UseFormParamsModel<TType>,
     Pick<FormPropsModel, 'onClose' | 'closeLabel' | 'isFullWidth' | 'isLoading' | 'isDisabled'>,
     Pick<WithFieldPropsModel, 'isAutoFocus'>,

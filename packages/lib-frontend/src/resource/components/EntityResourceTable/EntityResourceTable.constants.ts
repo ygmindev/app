@@ -1,0 +1,1 @@
+export const ENTITY_RESOURCE_TABLE_NROWS = 10;

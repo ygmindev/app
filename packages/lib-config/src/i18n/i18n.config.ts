@@ -5,11 +5,12 @@ import type { InitOptions } from 'i18next';
 
 export const LANGUAGE_DEFAULT = 'en';
 
-export const LANGUAGES_SUPPORTED: string[] = ['en', 'kr'];
+export const LANGUAGES_SUPPORTED: Array<string> = ['en', 'kr'];
 
-export const NS_DEFAULT: string[] = [CORE, process.env.NODE_ENV !== 'production' && TESTING].filter(
-  Boolean,
-) as string[];
+export const NS_DEFAULT: Array<string> = [
+  CORE,
+  process.env.NODE_ENV !== 'production' && TESTING,
+].filter(Boolean) as Array<string>;
 
 export const i18nConfig: InitOptions = {
   debug: false,

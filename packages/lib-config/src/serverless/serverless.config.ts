@@ -48,7 +48,7 @@ export const serverlessConfig = merge({
             allowedHeaders: ['*'],
             allowedOrigins: [
               ...new Set([
-                appUri({ name: 'APP_ADMIN' }),
+                appUri({ name: 'APP_WEB_ADMIN' }),
                 appUri({ name: 'APP_SSR' }),
                 appUri({ name: APP_WEB_NAME }),
               ]),

@@ -1,12 +1,12 @@
 import type { OAuthRedirectPropsModel } from '@lib/frontend/auth/containers/OAuthRedirect/OAuthRedirect.models';
 import { POPUP_EVENT } from '@lib/frontend/core/components/Popup/Popup.constants';
-import type { SFCModel } from '@lib/frontend/core/core.models';
+import type { FCModel } from '@lib/frontend/core/core.models';
 import { useRouter } from '@lib/frontend/routing/hooks/useRouter/useRouter';
 import { appUri } from '@lib/shared/http/utils/appUri/appUri';
 import { useEffect } from 'react';
 
 // TODO: native?
-export const OAuthRedirect: SFCModel<OAuthRedirectPropsModel> = () => {
+export const OAuthRedirect: FCModel<OAuthRedirectPropsModel> = () => {
   const { location } = useRouter();
 
   useEffect(() => {

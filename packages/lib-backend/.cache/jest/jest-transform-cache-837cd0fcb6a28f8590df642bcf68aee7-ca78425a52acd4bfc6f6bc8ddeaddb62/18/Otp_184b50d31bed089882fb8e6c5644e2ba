@@ -1,0 +1,45 @@
+c591fe6ffd8966167320f94129467537
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Otp = exports.OtpForm = void 0;
+const tslib_1 = require("tslib");
+const Otp_constants_1 = require("@lib/backend/auth/resources/Otp/Otp.constants");
+const withAccess_1 = require("@lib/backend/resource/decorators/withAccess/withAccess");
+const withEntity_1 = require("@lib/backend/resource/decorators/withEntity/withEntity");
+const withField_1 = require("@lib/backend/resource/decorators/withField/withField");
+const EntityResource_1 = require("@lib/backend/resource/resources/EntityResource/EntityResource");
+const Access_constants_1 = require("@lib/shared/auth/resources/Access/Access.constants");
+const Otp_constants_2 = require("@lib/shared/auth/resources/Otp/Otp.constants");
+let OtpForm = class OtpForm {
+    username;
+};
+tslib_1.__decorate([
+    (0, withField_1.withField)({ isUnique: true }),
+    tslib_1.__metadata("design:type", String)
+], OtpForm.prototype, "username", void 0);
+OtpForm = tslib_1.__decorate([
+    (0, withEntity_1.withEntity)({ name: `${Otp_constants_2.OTP_RESOURCE_NAME}Form` })
+], OtpForm);
+exports.OtpForm = OtpForm;
+let Otp = class Otp extends EntityResource_1.EntityResource {
+    username;
+    otp;
+};
+tslib_1.__decorate([
+    (0, withField_1.withField)({ isUnique: true }),
+    tslib_1.__metadata("design:type", String)
+], Otp.prototype, "username", void 0);
+tslib_1.__decorate([
+    (0, withField_1.withField)({ expire: Otp_constants_1.OTP_EXPIRATION_SECONDS }),
+    tslib_1.__metadata("design:type", Date)
+], Otp.prototype, "created", void 0);
+tslib_1.__decorate([
+    (0, withAccess_1.withAccess)({ level: Access_constants_1.ACCESS_LEVEL.PROHIBITED }),
+    (0, withField_1.withField)(),
+    tslib_1.__metadata("design:type", String)
+], Otp.prototype, "otp", void 0);
+Otp = tslib_1.__decorate([
+    (0, withEntity_1.withEntity)({ isRepository: true, name: Otp_constants_2.OTP_RESOURCE_NAME })
+], Otp);
+exports.Otp = Otp;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWJhY2tlbmQvc3JjL2F1dGgvcmVzb3VyY2VzL090cC9PdHAudHMiLCJtYXBwaW5ncyI6Ijs7OztBQUFBLGlGQUF1RjtBQUN2Rix1RkFBb0Y7QUFDcEYsdUZBQW9GO0FBQ3BGLG9GQUFpRjtBQUNqRixrR0FBK0Y7QUFDL0YseUZBQWtGO0FBQ2xGLGdGQUFpRjtBQUlqRixJQUFhLE9BQU8sR0FBcEIsTUFBYSxPQUFPO0lBRWxCLFFBQVEsQ0FBVTtDQUNuQixDQUFBO0FBREM7SUFEQyxJQUFBLHFCQUFTLEVBQUMsRUFBRSxRQUFRLEVBQUUsSUFBSSxFQUFFLENBQUM7O3lDQUNaO0FBRlAsT0FBTztJQURuQixJQUFBLHVCQUFVLEVBQUMsRUFBRSxJQUFJLEVBQUUsR0FBRyxpQ0FBaUIsTUFBTSxFQUFFLENBQUM7R0FDcEMsT0FBTyxDQUduQjtBQUhZLDBCQUFPO0FBTXBCLElBQWEsR0FBRyxHQUFoQixNQUFhLEdBQUksU0FBUSwrQkFBYztJQUVyQyxRQUFRLENBQVU7SUFPbEIsR0FBRyxDQUFVO0NBQ2QsQ0FBQTtBQVJDO0lBREMsSUFBQSxxQkFBUyxFQUFDLEVBQUUsUUFBUSxFQUFFLElBQUksRUFBRSxDQUFDOztxQ0FDWjtBQUdsQjtJQURDLElBQUEscUJBQVMsRUFBQyxFQUFFLE1BQU0sRUFBRSxzQ0FBc0IsRUFBRSxDQUFDO3NDQUM3QixJQUFJO29DQUFDO0FBSXRCO0lBRkMsSUFBQSx1QkFBVSxFQUFDLEVBQUUsS0FBSyxFQUFFLCtCQUFZLENBQUMsVUFBVSxFQUFFLENBQUM7SUFDOUMsSUFBQSxxQkFBUyxHQUFFOztnQ0FDQztBQVRGLEdBQUc7SUFEZixJQUFBLHVCQUFVLEVBQUMsRUFBRSxZQUFZLEVBQUUsSUFBSSxFQUFFLElBQUksRUFBRSxpQ0FBaUIsRUFBRSxDQUFDO0dBQy9DLEdBQUcsQ0FVZjtBQVZZLGtCQUFHIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIi9Vc2Vycy95Z21pbi9Qcm9qZWN0cy9tb25vX3YyL2FwcDMvYXBwL3BhY2thZ2VzL2xpYi1iYWNrZW5kL3NyYy9hdXRoL3Jlc291cmNlcy9PdHAvT3RwLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE9UUF9FWFBJUkFUSU9OX1NFQ09ORFMgfSBmcm9tICdAbGliL2JhY2tlbmQvYXV0aC9yZXNvdXJjZXMvT3RwL090cC5jb25zdGFudHMnO1xuaW1wb3J0IHsgd2l0aEFjY2VzcyB9IGZyb20gJ0BsaWIvYmFja2VuZC9yZXNvdXJjZS9kZWNvcmF0b3JzL3dpdGhBY2Nlc3Mvd2l0aEFjY2Vzcyc7XG5pbXBvcnQgeyB3aXRoRW50aXR5IH0gZnJvbSAnQGxpYi9iYWNrZW5kL3Jlc291cmNlL2RlY29yYXRvcnMvd2l0aEVudGl0eS93aXRoRW50aXR5JztcbmltcG9ydCB7IHdpdGhGaWVsZCB9IGZyb20gJ0BsaWIvYmFja2VuZC9yZXNvdXJjZS9kZWNvcmF0b3JzL3dpdGhGaWVsZC93aXRoRmllbGQnO1xuaW1wb3J0IHsgRW50aXR5UmVzb3VyY2UgfSBmcm9tICdAbGliL2JhY2tlbmQvcmVzb3VyY2UvcmVzb3VyY2VzL0VudGl0eVJlc291cmNlL0VudGl0eVJlc291cmNlJztcbmltcG9ydCB7IEFDQ0VTU19MRVZFTCB9IGZyb20gJ0BsaWIvc2hhcmVkL2F1dGgvcmVzb3VyY2VzL0FjY2Vzcy9BY2Nlc3MuY29uc3RhbnRzJztcbmltcG9ydCB7IE9UUF9SRVNPVVJDRV9OQU1FIH0gZnJvbSAnQGxpYi9zaGFyZWQvYXV0aC9yZXNvdXJjZXMvT3RwL090cC5jb25zdGFudHMnO1xuaW1wb3J0IHR5cGUgeyBPdHBGb3JtTW9kZWwsIE90cE1vZGVsIH0gZnJvbSAnQGxpYi9zaGFyZWQvYXV0aC9yZXNvdXJjZXMvT3RwL090cC5tb2RlbHMnO1xuXG5Ad2l0aEVudGl0eSh7IG5hbWU6IGAke09UUF9SRVNPVVJDRV9OQU1FfUZvcm1gIH0pXG5leHBvcnQgY2xhc3MgT3RwRm9ybSBpbXBsZW1lbnRzIE90cEZvcm1Nb2RlbCB7XG4gIEB3aXRoRmllbGQoeyBpc1VuaXF1ZTogdHJ1ZSB9KVxuICB1c2VybmFtZSE6IHN0cmluZztcbn1cblxuQHdpdGhFbnRpdHkoeyBpc1JlcG9zaXRvcnk6IHRydWUsIG5hbWU6IE9UUF9SRVNPVVJDRV9OQU1FIH0pXG5leHBvcnQgY2xhc3MgT3RwIGV4dGVuZHMgRW50aXR5UmVzb3VyY2UgaW1wbGVtZW50cyBPdHBNb2RlbCB7XG4gIEB3aXRoRmllbGQoeyBpc1VuaXF1ZTogdHJ1ZSB9KVxuICB1c2VybmFtZSE6IHN0cmluZztcblxuICBAd2l0aEZpZWxkKHsgZXhwaXJlOiBPVFBfRVhQSVJBVElPTl9TRUNPTkRTIH0pXG4gIGRlY2xhcmUgY3JlYXRlZDogRGF0ZTtcblxuICBAd2l0aEFjY2Vzcyh7IGxldmVsOiBBQ0NFU1NfTEVWRUwuUFJPSElCSVRFRCB9KVxuICBAd2l0aEZpZWxkKClcbiAgb3RwITogc3RyaW5nO1xufVxuIl0sInZlcnNpb24iOjN9

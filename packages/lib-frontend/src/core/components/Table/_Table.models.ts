@@ -1,11 +1,11 @@
 import type { TableColumnModel } from '@lib/frontend/core/components/Table/Table.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 
-export interface _TablePropsModel<TRow> {
-  columns: Array<TableColumnModel<TRow>>;
-  data?: Array<TRow>;
+export interface _TablePropsModel<TType> {
+  columns: Array<TableColumnModel<TType, unknown>>;
+  data?: Array<TType>;
   isFullWidth?: boolean;
   onMount?: CallableModel;
-  onSelect?(rows: Array<TRow>): void;
+  onSelect?(rows: Array<TType>): void;
   select?: 'multiple' | 'single';
 }

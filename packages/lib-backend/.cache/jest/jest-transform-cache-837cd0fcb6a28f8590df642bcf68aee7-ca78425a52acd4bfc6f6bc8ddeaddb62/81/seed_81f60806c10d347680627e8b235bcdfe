@@ -1,0 +1,46 @@
+3e4bb538e0371c53fc8c93f023ff4733
+"use strict";
+// import { DatabaseMain } from '@lib/backend/database/utils/DatabaseMain/DatabaseMain';
+// import { Container } from '@lib/shared/core/utils/Container/Container';
+// import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/testing/resources/DummyEntityResource/DummyEntityResource.constants';
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.seed = void 0;
+// const DATA = [
+//   { stringProperty: 'stringProperty1' },
+//   { stringProperty: 'stringProperty1' },
+//   {
+//     stringProperty: 'stringProperty1',
+//     stringPropertyOptional: 'stringPropertyOptional1',
+//   },
+//   {
+//     stringArrayProperty: ['stringArrayPropertyElement1'],
+//     stringProperty: 'stringProperty1',
+//     stringPropertyOptional: 'stringPropertyOptional1',
+//   },
+//   { stringProperty: 'stringProperty2' },
+//   { stringProperty: 'stringProperty2' },
+// ];
+// export const seed = async (): Promise<void> => {
+//   const database = Container.get(DatabaseMain);
+//   const repository = database.getRepository({ name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME });
+//   await repository.clear();
+//   for (const form of DATA) {
+//     await repository.create({ form });
+//   }
+// };
+const DatabaseMain_1 = require("@lib/backend/database/utils/DatabaseMain/DatabaseMain");
+const seed_constants_1 = require("@lib/backend/database/utils/seed/seed.constants");
+const Container_1 = require("@lib/shared/core/utils/Container/Container");
+const lodash_1 = require("lodash");
+const seed = async () => {
+    const database = Container_1.Container.get(DatabaseMain_1.DatabaseMain);
+    for (const [k, v] of (0, lodash_1.toPairs)(seed_constants_1.SEED_DATA)) {
+        const repository = database.getRepository({ name: k });
+        await repository.clear();
+        for (const form of v) {
+            await repository.create({ form });
+        }
+    }
+};
+exports.seed = seed;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWJhY2tlbmQvc3JjL2RhdGFiYXNlL3V0aWxzL3NlZWQvc2VlZC50cyIsIm1hcHBpbmdzIjoiO0FBQUEsd0ZBQXdGO0FBQ3hGLDBFQUEwRTtBQUMxRSx5SUFBeUk7OztBQUV6SSxpQkFBaUI7QUFDakIsMkNBQTJDO0FBQzNDLDJDQUEyQztBQUMzQyxNQUFNO0FBQ04seUNBQXlDO0FBQ3pDLHlEQUF5RDtBQUN6RCxPQUFPO0FBQ1AsTUFBTTtBQUNOLDREQUE0RDtBQUM1RCx5Q0FBeUM7QUFDekMseURBQXlEO0FBQ3pELE9BQU87QUFDUCwyQ0FBMkM7QUFDM0MsMkNBQTJDO0FBQzNDLEtBQUs7QUFFTCxtREFBbUQ7QUFDbkQsa0RBQWtEO0FBQ2xELDhGQUE4RjtBQUM5Riw4QkFBOEI7QUFDOUIsK0JBQStCO0FBQy9CLHlDQUF5QztBQUN6QyxNQUFNO0FBQ04sS0FBSztBQUVMLHdGQUFxRjtBQUNyRixvRkFBNEU7QUFDNUUsMEVBQXVFO0FBQ3ZFLG1DQUFpQztBQUUxQixNQUFNLElBQUksR0FBRyxLQUFLLElBQW1CLEVBQUU7SUFDNUMsTUFBTSxRQUFRLEdBQUcscUJBQVMsQ0FBQyxHQUFHLENBQUMsMkJBQVksQ0FBQyxDQUFDO0lBQzdDLEtBQUssTUFBTSxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsSUFBSSxJQUFBLGdCQUFPLEVBQUMsMEJBQVMsQ0FBQyxFQUFFO1FBQ3ZDLE1BQU0sVUFBVSxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsRUFBRSxJQUFJLEVBQUUsQ0FBQyxFQUFFLENBQUMsQ0FBQztRQUN2RCxNQUFNLFVBQVUsQ0FBQyxLQUFLLEVBQUUsQ0FBQztRQUN6QixLQUFLLE1BQU0sSUFBSSxJQUFJLENBQUMsRUFBRTtZQUNwQixNQUFNLFVBQVUsQ0FBQyxNQUFNLENBQUMsRUFBRSxJQUFJLEVBQUUsQ0FBQyxDQUFDO1NBQ25DO0tBQ0Y7QUFDSCxDQUFDLENBQUM7QUFUVyxRQUFBLElBQUksUUFTZiIsIm5hbWVzIjpbXSwic291cmNlcyI6WyIvVXNlcnMveWdtaW4vUHJvamVjdHMvbW9ub192Mi9hcHAzL2FwcC9wYWNrYWdlcy9saWItYmFja2VuZC9zcmMvZGF0YWJhc2UvdXRpbHMvc2VlZC9zZWVkLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIGltcG9ydCB7IERhdGFiYXNlTWFpbiB9IGZyb20gJ0BsaWIvYmFja2VuZC9kYXRhYmFzZS91dGlscy9EYXRhYmFzZU1haW4vRGF0YWJhc2VNYWluJztcbi8vIGltcG9ydCB7IENvbnRhaW5lciB9IGZyb20gJ0BsaWIvc2hhcmVkL2NvcmUvdXRpbHMvQ29udGFpbmVyL0NvbnRhaW5lcic7XG4vLyBpbXBvcnQgeyBEVU1NWV9FTlRJVFlfUkVTT1VSQ0VfUkVTT1VSQ0VfTkFNRSB9IGZyb20gJ0BsaWIvc2hhcmVkL3Rlc3RpbmcvcmVzb3VyY2VzL0R1bW15RW50aXR5UmVzb3VyY2UvRHVtbXlFbnRpdHlSZXNvdXJjZS5jb25zdGFudHMnO1xuXG4vLyBjb25zdCBEQVRBID0gW1xuLy8gICB7IHN0cmluZ1Byb3BlcnR5OiAnc3RyaW5nUHJvcGVydHkxJyB9LFxuLy8gICB7IHN0cmluZ1Byb3BlcnR5OiAnc3RyaW5nUHJvcGVydHkxJyB9LFxuLy8gICB7XG4vLyAgICAgc3RyaW5nUHJvcGVydHk6ICdzdHJpbmdQcm9wZXJ0eTEnLFxuLy8gICAgIHN0cmluZ1Byb3BlcnR5T3B0aW9uYWw6ICdzdHJpbmdQcm9wZXJ0eU9wdGlvbmFsMScsXG4vLyAgIH0sXG4vLyAgIHtcbi8vICAgICBzdHJpbmdBcnJheVByb3BlcnR5OiBbJ3N0cmluZ0FycmF5UHJvcGVydHlFbGVtZW50MSddLFxuLy8gICAgIHN0cmluZ1Byb3BlcnR5OiAnc3RyaW5nUHJvcGVydHkxJyxcbi8vICAgICBzdHJpbmdQcm9wZXJ0eU9wdGlvbmFsOiAnc3RyaW5nUHJvcGVydHlPcHRpb25hbDEnLFxuLy8gICB9LFxuLy8gICB7IHN0cmluZ1Byb3BlcnR5OiAnc3RyaW5nUHJvcGVydHkyJyB9LFxuLy8gICB7IHN0cmluZ1Byb3BlcnR5OiAnc3RyaW5nUHJvcGVydHkyJyB9LFxuLy8gXTtcblxuLy8gZXhwb3J0IGNvbnN0IHNlZWQgPSBhc3luYyAoKTogUHJvbWlzZTx2b2lkPiA9PiB7XG4vLyAgIGNvbnN0IGRhdGFiYXNlID0gQ29udGFpbmVyLmdldChEYXRhYmFzZU1haW4pO1xuLy8gICBjb25zdCByZXBvc2l0b3J5ID0gZGF0YWJhc2UuZ2V0UmVwb3NpdG9yeSh7IG5hbWU6IERVTU1ZX0VOVElUWV9SRVNPVVJDRV9SRVNPVVJDRV9OQU1FIH0pO1xuLy8gICBhd2FpdCByZXBvc2l0b3J5LmNsZWFyKCk7XG4vLyAgIGZvciAoY29uc3QgZm9ybSBvZiBEQVRBKSB7XG4vLyAgICAgYXdhaXQgcmVwb3NpdG9yeS5jcmVhdGUoeyBmb3JtIH0pO1xuLy8gICB9XG4vLyB9O1xuXG5pbXBvcnQgeyBEYXRhYmFzZU1haW4gfSBmcm9tICdAbGliL2JhY2tlbmQvZGF0YWJhc2UvdXRpbHMvRGF0YWJhc2VNYWluL0RhdGFiYXNlTWFpbic7XG5pbXBvcnQgeyBTRUVEX0RBVEEgfSBmcm9tICdAbGliL2JhY2tlbmQvZGF0YWJhc2UvdXRpbHMvc2VlZC9zZWVkLmNvbnN0YW50cyc7XG5pbXBvcnQgeyBDb250YWluZXIgfSBmcm9tICdAbGliL3NoYXJlZC9jb3JlL3V0aWxzL0NvbnRhaW5lci9Db250YWluZXInO1xuaW1wb3J0IHsgdG9QYWlycyB9IGZyb20gJ2xvZGFzaCc7XG5cbmV4cG9ydCBjb25zdCBzZWVkID0gYXN5bmMgKCk6IFByb21pc2U8dm9pZD4gPT4ge1xuICBjb25zdCBkYXRhYmFzZSA9IENvbnRhaW5lci5nZXQoRGF0YWJhc2VNYWluKTtcbiAgZm9yIChjb25zdCBbaywgdl0gb2YgdG9QYWlycyhTRUVEX0RBVEEpKSB7XG4gICAgY29uc3QgcmVwb3NpdG9yeSA9IGRhdGFiYXNlLmdldFJlcG9zaXRvcnkoeyBuYW1lOiBrIH0pO1xuICAgIGF3YWl0IHJlcG9zaXRvcnkuY2xlYXIoKTtcbiAgICBmb3IgKGNvbnN0IGZvcm0gb2Ygdikge1xuICAgICAgYXdhaXQgcmVwb3NpdG9yeS5jcmVhdGUoeyBmb3JtIH0pO1xuICAgIH1cbiAgfVxufTtcbiJdLCJ2ZXJzaW9uIjozfQ==

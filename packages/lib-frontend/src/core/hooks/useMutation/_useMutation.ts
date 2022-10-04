@@ -6,7 +6,7 @@ import { useAlert } from '@lib/frontend/notification/hooks/useAlert/useAlert';
 import { UNKNOWN_ALERT } from '@lib/frontend/notification/notification.constants';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const _useMutation = <TParams = void, TResult = void, TError extends Error = Error>({
+export const _useMutation = <TParams = undefined, TResult = void, TError extends Error = Error>({
   id,
   mutate: mutateParams,
   onError,

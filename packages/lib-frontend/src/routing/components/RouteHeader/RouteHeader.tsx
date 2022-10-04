@@ -27,10 +27,10 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({
       testID={testID}>
       {paths && (
         <Wrapper isRowAlign>
-          {paths.map((path, i) =>
-            path.title ? (
-              <Fragment key={path.pathname}>
-                <Link onPress={() => push(path.pathname)}>{path.title}</Link>
+          {paths.map(({ pathname, title }, i) =>
+            title ? (
+              <Fragment key={pathname}>
+                <Link onPress={() => push({ params: {}, pathname })}>{title}</Link>
                 {i ? <Icon icon={ICON.chevronRight} /> : null}
               </Fragment>
             ) : null,

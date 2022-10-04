@@ -6,7 +6,7 @@ export interface WebpackLoaderModel {
 }
 
 export interface WebpackParamsModel {
-  entry?: Record<string, string | string[]>;
+  entry?: Record<string, string | Array<string>>;
   globals: Partial<GlobalsConfigModels>;
   loader?: WebpackLoaderModel;
   transpile?: Array<string | RegExp>;

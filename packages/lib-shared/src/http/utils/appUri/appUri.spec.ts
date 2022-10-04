@@ -7,9 +7,12 @@ const { displayName } = withTest({ target: () => appUri });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = appUri({ name: 'APP_ADMIN' });
+    const result = appUri({ name: 'APP_WEB_ADMIN' });
     expect(result).toStrictEqual(
-      uri({ host: getEnv('REACT_APP_APP_ADMIN_HOST'), port: getEnv('REACT_APP_APP_ADMIN_PORT') }),
+      uri({
+        host: getEnv('REACT_APP_APP_WEB_ADMIN_HOST'),
+        port: getEnv('REACT_APP_APP_WEB_ADMIN_PORT'),
+      }),
     );
   });
 });

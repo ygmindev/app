@@ -1,7 +1,7 @@
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
 
 export interface _UseMutationParamsModel<
-  TParams = void,
+  TParams = undefined,
   TResult = void,
   TError extends Error = Error,
 > extends WithIdModel {
@@ -12,7 +12,7 @@ export interface _UseMutationParamsModel<
 }
 
 export interface _UseMutationResultModel<
-  TParams = void,
+  TParams = undefined,
   TResult = void,
   TError extends Error = Error,
 > extends WithIdModel {

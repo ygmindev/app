@@ -1,3 +1,4 @@
+import { Resource } from '@lib/frontend/admin/containers/Resource/Resource';
 import { RESOURCE } from '@lib/frontend/app/app.constants';
 import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
 import { authRoutes } from '@lib/frontend/auth/auth.routes';
@@ -13,8 +14,8 @@ export const adminRoutes: Array<PageModel> = [
       ...authRoutes,
 
       {
-        element: <NotFound />,
-        pathname: RESOURCE,
+        element: <Resource />,
+        pathname: `${RESOURCE}/:name`,
       },
     ],
   },

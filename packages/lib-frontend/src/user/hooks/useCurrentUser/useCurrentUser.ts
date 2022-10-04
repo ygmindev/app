@@ -8,7 +8,7 @@ export const useCurrentUser = (): EntityResourcePartialModel<UserModel> | null =
   const { replace } = useRouter();
   const user = useSelector((state) => state.user.currentUser);
   if (!user) {
-    replace(SIGN_IN);
+    replace({ params: {}, pathname: SIGN_IN });
     return null;
   }
   return user;

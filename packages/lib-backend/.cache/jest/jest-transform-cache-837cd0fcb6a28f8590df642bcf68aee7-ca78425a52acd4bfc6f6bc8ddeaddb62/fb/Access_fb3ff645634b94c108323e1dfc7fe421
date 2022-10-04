@@ -1,0 +1,27 @@
+aa404dfb609b8b36b0ed1f02cb212f75
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Access = void 0;
+const tslib_1 = require("tslib");
+const withEntity_1 = require("@lib/backend/resource/decorators/withEntity/withEntity");
+const withField_1 = require("@lib/backend/resource/decorators/withField/withField");
+const withField_constants_1 = require("@lib/backend/resource/decorators/withField/withField.constants");
+const EntityResource_1 = require("@lib/backend/resource/resources/EntityResource/EntityResource");
+const Access_constants_1 = require("@lib/shared/auth/resources/Access/Access.constants");
+let Access = class Access extends EntityResource_1.EntityResource {
+    _uid;
+    role;
+};
+tslib_1.__decorate([
+    (0, withField_1.withField)({ type: withField_constants_1.FIELD_TYPE.ID }),
+    tslib_1.__metadata("design:type", String)
+], Access.prototype, "_uid", void 0);
+tslib_1.__decorate([
+    (0, withField_1.withField)({ type: withField_constants_1.FIELD_TYPE.STRING }),
+    tslib_1.__metadata("design:type", String)
+], Access.prototype, "role", void 0);
+Access = tslib_1.__decorate([
+    (0, withEntity_1.withEntity)({ isRepository: true, name: Access_constants_1.ACCESS_RESOURCE_NAME })
+], Access);
+exports.Access = Access;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWJhY2tlbmQvc3JjL2F1dGgvcmVzb3VyY2VzL0FjY2Vzcy9BY2Nlc3MudHMiLCJtYXBwaW5ncyI6Ijs7OztBQUFBLHVGQUFvRjtBQUNwRixvRkFBaUY7QUFDakYsd0dBQTRGO0FBQzVGLGtHQUErRjtBQUMvRix5RkFBMEY7QUFJMUYsSUFBYSxNQUFNLEdBQW5CLE1BQWEsTUFBTyxTQUFRLCtCQUFjO0lBRXhDLElBQUksQ0FBVTtJQUdkLElBQUksQ0FBbUI7Q0FDeEIsQ0FBQTtBQUpDO0lBREMsSUFBQSxxQkFBUyxFQUFDLEVBQUUsSUFBSSxFQUFFLGdDQUFVLENBQUMsRUFBRSxFQUFFLENBQUM7O29DQUNyQjtBQUdkO0lBREMsSUFBQSxxQkFBUyxFQUFDLEVBQUUsSUFBSSxFQUFFLGdDQUFVLENBQUMsTUFBTSxFQUFFLENBQUM7O29DQUNoQjtBQUxaLE1BQU07SUFEbEIsSUFBQSx1QkFBVSxFQUFDLEVBQUUsWUFBWSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsdUNBQW9CLEVBQUUsQ0FBQztHQUNsRCxNQUFNLENBTWxCO0FBTlksd0JBQU0iLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWJhY2tlbmQvc3JjL2F1dGgvcmVzb3VyY2VzL0FjY2Vzcy9BY2Nlc3MudHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgd2l0aEVudGl0eSB9IGZyb20gJ0BsaWIvYmFja2VuZC9yZXNvdXJjZS9kZWNvcmF0b3JzL3dpdGhFbnRpdHkvd2l0aEVudGl0eSc7XG5pbXBvcnQgeyB3aXRoRmllbGQgfSBmcm9tICdAbGliL2JhY2tlbmQvcmVzb3VyY2UvZGVjb3JhdG9ycy93aXRoRmllbGQvd2l0aEZpZWxkJztcbmltcG9ydCB7IEZJRUxEX1RZUEUgfSBmcm9tICdAbGliL2JhY2tlbmQvcmVzb3VyY2UvZGVjb3JhdG9ycy93aXRoRmllbGQvd2l0aEZpZWxkLmNvbnN0YW50cyc7XG5pbXBvcnQgeyBFbnRpdHlSZXNvdXJjZSB9IGZyb20gJ0BsaWIvYmFja2VuZC9yZXNvdXJjZS9yZXNvdXJjZXMvRW50aXR5UmVzb3VyY2UvRW50aXR5UmVzb3VyY2UnO1xuaW1wb3J0IHsgQUNDRVNTX1JFU09VUkNFX05BTUUgfSBmcm9tICdAbGliL3NoYXJlZC9hdXRoL3Jlc291cmNlcy9BY2Nlc3MvQWNjZXNzLmNvbnN0YW50cyc7XG5pbXBvcnQgdHlwZSB7IEFjY2Vzc01vZGVsLCBBY2Nlc3NSb2xlTW9kZWwgfSBmcm9tICdAbGliL3NoYXJlZC9hdXRoL3Jlc291cmNlcy9BY2Nlc3MvQWNjZXNzLm1vZGVscyc7XG5cbkB3aXRoRW50aXR5KHsgaXNSZXBvc2l0b3J5OiB0cnVlLCBuYW1lOiBBQ0NFU1NfUkVTT1VSQ0VfTkFNRSB9KVxuZXhwb3J0IGNsYXNzIEFjY2VzcyBleHRlbmRzIEVudGl0eVJlc291cmNlIGltcGxlbWVudHMgQWNjZXNzTW9kZWwge1xuICBAd2l0aEZpZWxkKHsgdHlwZTogRklFTERfVFlQRS5JRCB9KVxuICBfdWlkITogc3RyaW5nO1xuXG4gIEB3aXRoRmllbGQoeyB0eXBlOiBGSUVMRF9UWVBFLlNUUklORyB9KVxuICByb2xlITogQWNjZXNzUm9sZU1vZGVsO1xufVxuIl0sInZlcnNpb24iOjN9

@@ -1,9 +1,6 @@
 import type { ThemeConfigModel } from '@lib/config/theme/theme.models';
 import type { _TablePropsModel } from '@lib/frontend/core/components/Table/_Table.models';
-import type {
-  TableColumnModel,
-  TableColumnRendererModel,
-} from '@lib/frontend/core/components/Table/Table.models';
+import type { TableColumnModel } from '@lib/frontend/core/components/Table/Table.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
@@ -48,14 +45,14 @@ const _Component = styled.div`
   }
 `;
 
-export const _Table = <TRow,>({
+export const _Table = <TType,>({
   columns,
   data,
   isFullWidth,
   onMount,
   onSelect,
   select,
-}: _TablePropsModel<TRow>): ReactElement<_TablePropsModel<TRow>> => {
+}: _TablePropsModel<TType>): ReactElement<_TablePropsModel<TType>> => {
   const { t } = useTranslation();
   const theme = useTheme();
   const [gridApi, setGridApi] = useState<GridApi>();
@@ -67,36 +64,40 @@ export const _Table = <TRow,>({
     onSelect && onSelect(selectedRows);
   };
 
-  const _getColumnDef = <TCol,>(column: TableColumnModel<TRow>, i: number): ColDef => {
+  const _getColumnDef = <TValue,>(
+    {
+      field,
+      flex,
+      isHidden,
+      isPinned,
+      name,
+      renderer,
+      sort,
+      width,
+    }: TableColumnModel<TType, TValue>,
+    i: number,
+  ): ColDef => {
     const isSelection = select !== undefined && i === 0;
     const definition: ColDef = {
       checkboxSelection: isSelection,
-      field: column.field,
-      flex: column.flex,
+      field,
+      flex,
       headerCheckboxSelection: isSelection,
       headerCheckboxSelectionFilteredOnly: isSelection,
-      headerName: t(column.name),
-      hide: column.isHidden,
-      maxWidth: column.width,
-      minWidth: column.width,
-      pinned: column.isPinned ? 'left' : undefined,
-      sort: column.sort,
-      sortable: !isEmpty(column.sort),
-      suppressSizeToFit: (column.width || 0) > 0,
-      width: column.width,
+      headerName: t(name),
+      hide: isHidden,
+      maxWidth: width,
+      minWidth: width,
+      pinned: isPinned ? 'left' : undefined,
+      sort,
+      sortable: !isEmpty(sort),
+      suppressSizeToFit: (width || 0) > 0,
+      width,
     };
 
-    if (column.renderer) {
+    if (renderer) {
       definition.cellRenderer = ({ node, value }: ICellRendererParams) => (
-        <Wrapper
-          grow
-          isRowAlign>
-          {(column.renderer as TableColumnRendererModel<TRow, TCol>)({
-            column,
-            row: node && node.data,
-            value,
-          })}
-        </Wrapper>
+        <Wrapper isRowAlign>{renderer({ row: node && node.data, value })}</Wrapper>
       );
     }
 

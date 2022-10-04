@@ -16,7 +16,7 @@ import { flatten, get, isEqual, map, pick } from 'lodash';
 import type { ReactElement } from 'react';
 import { cloneElement, useCallback } from 'react';
 
-export const FormContainer = <TType, TKeys extends string[][] = string[][]>({
+export const FormContainer = <TType, TKeys extends Array<string>[] = Array<string>[]>({
   closeLabel,
   initialValues,
   isAutoFocus,

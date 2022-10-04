@@ -6,7 +6,7 @@ import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import type { ReactElement } from 'react';
 import { useState } from 'react';
 
-export const Table = <TRow,>({
+export const Table = <TType,>({
   columns,
   data,
   isFullWidth,
@@ -15,7 +15,7 @@ export const Table = <TRow,>({
   select,
   testID,
   ...props
-}: TablePropsModel<TRow>): ReactElement<TablePropsModel<TRow>> => {
+}: TablePropsModel<TType>): ReactElement<TablePropsModel<TType>> => {
   const { styles } = useStyles({ props });
   const [isMounted, setIsMounted] = useState<boolean>(false);
   return (

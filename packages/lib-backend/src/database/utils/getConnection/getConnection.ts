@@ -22,14 +22,17 @@ export const getConnection = async <TType, TRoot = undefined>({
   const skip = Math.max(startOffset, 0);
   const take = Math.max(endOffset - startOffset, 1);
   const { result } = await getMany({ filter, options: { skip, take } });
-  if (result) {
+
+  if (result && result.length) {
     const edges = result.map((node, index) => ({
       cursor: offsetToCursor(startOffset + index),
       node,
     }));
+
     const { 0: firstEdge, length, [length - 1]: lastEdge } = edges;
     const lowerBound = after ? afterOffset + 1 : 0;
     const upperBound = before ? Math.min(beforeOffset, count) : count;
+
     const pageInfo = {
       endCursor: lastEdge.cursor,
       hasNextPage: first ? endOffset < upperBound : false,
@@ -38,5 +41,8 @@ export const getConnection = async <TType, TRoot = undefined>({
     };
     return { edges, pageInfo };
   }
-  return undefined;
+  return {
+    edges: [],
+    pageInfo: { endCursor: '', hasNextPage: false, hasPreviousPage: false, startCursor: '' },
+  };
 };

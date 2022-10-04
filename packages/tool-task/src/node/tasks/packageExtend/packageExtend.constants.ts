@@ -1,4 +1,4 @@
-export const PACKAGE_EXTEND_KEYS: string[] = [
+export const PACKAGE_EXTEND_KEYS: Array<string> = [
   'bundledDependencies',
   'dependencies',
   'devDependencies',

@@ -1,3 +1,5 @@
+export const RESOURCE = 'resource';
+
 export enum RESOURCE_METHOD_TYPE {
   CREATE = 'Create',
   GET = 'Get',

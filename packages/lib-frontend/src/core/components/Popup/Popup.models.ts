@@ -5,7 +5,7 @@ export interface PopupRefModel {
   open(uri: string): void;
 }
 
-export interface PopupPropsModel<TParams = void>
+export interface PopupPropsModel<TParams = undefined>
   extends DimensionModel,
     WithForwardedRefPropsModel<PopupRefModel> {
   onClose?(params?: TParams): void;

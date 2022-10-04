@@ -6,10 +6,10 @@ import type { UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withEntity({ isRepository: true, name: USER_RESOURCE_NAME })
 export class User extends EntityResource implements UserModel {
-  @withField({ isUnique: true })
+  @withField({ isOptional: true, isUnique: true })
   email?: string;
 
-  @withField({ isUnique: true })
+  @withField({ isOptional: true, isUnique: true })
   phone?: string;
 
   @withField()

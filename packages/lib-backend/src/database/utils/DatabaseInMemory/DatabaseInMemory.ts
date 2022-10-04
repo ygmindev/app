@@ -14,11 +14,9 @@ export class DatabaseInMemory {
   start = async (): Promise<void> => {
     if (!this._isActive()) {
       debug('Starting database');
-      const SERVER_DATABASE_URL = getEnv('SERVER_DATABASE_URL')
-        .replace('mongodb://', '')
-        .split(':');
-      const port = toNumber(SERVER_DATABASE_URL.pop());
-      const ip = SERVER_DATABASE_URL.join(':');
+      const MONGO_DATABASE_URL = getEnv('MONGO_DATABASE_URL').replace('mongodb://', '').split(':');
+      const port = toNumber(MONGO_DATABASE_URL.pop());
+      const ip = MONGO_DATABASE_URL.join(':');
       this._server = await MongoMemoryServer.create({ instance: { ip, port } });
     }
   };

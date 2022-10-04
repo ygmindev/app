@@ -1,0 +1,8 @@
+96251be76d3c95796c5fa8c092382af0
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isEmpty = void 0;
+const lodash_1 = require("lodash");
+const isEmpty = (value) => value === '' || (0, lodash_1.isNil)(value) || JSON.stringify(value) === '{}';
+exports.isEmpty = isEmpty;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLXNoYXJlZC9zcmMvY29yZS91dGlscy9pc0VtcHR5L2lzRW1wdHkudHMiLCJtYXBwaW5ncyI6Ijs7O0FBQUEsbUNBQStCO0FBRXhCLE1BQU0sT0FBTyxHQUFHLENBQUMsS0FBYyxFQUFXLEVBQUUsQ0FDakQsS0FBSyxLQUFLLEVBQUUsSUFBSSxJQUFBLGNBQUssRUFBQyxLQUFLLENBQUMsSUFBSSxJQUFJLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxLQUFLLElBQUksQ0FBQztBQURwRCxRQUFBLE9BQU8sV0FDNkMiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLXNoYXJlZC9zcmMvY29yZS91dGlscy9pc0VtcHR5L2lzRW1wdHkudHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgaXNOaWwgfSBmcm9tICdsb2Rhc2gnO1xuXG5leHBvcnQgY29uc3QgaXNFbXB0eSA9ICh2YWx1ZTogdW5rbm93bik6IGJvb2xlYW4gPT5cbiAgdmFsdWUgPT09ICcnIHx8IGlzTmlsKHZhbHVlKSB8fCBKU09OLnN0cmluZ2lmeSh2YWx1ZSkgPT09ICd7fSc7XG4iXSwidmVyc2lvbiI6M30=
