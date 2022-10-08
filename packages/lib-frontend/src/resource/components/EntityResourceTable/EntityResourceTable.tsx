@@ -72,8 +72,10 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
         select={TABLE_SELECT_TYPE.SINGLE}
       />
 
-      <EntityResourceModal
+      <EntityResourceModal<TType, TForm>
+        data={selectedRows ? selectedRows[0] : undefined}
         isOpen={selectedRows && selectedRows.length === 1}
+        name={name}
         onClose={() => {
           setSelectedRows(undefined);
           ref.current?.deselectRows();

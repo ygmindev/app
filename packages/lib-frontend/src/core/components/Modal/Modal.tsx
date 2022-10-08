@@ -80,8 +80,11 @@ export const Modal: FCModel<ModalPropsModel> = ({
                   </Press>
                 )}
               </Wrapper>
-              {/* Content */}
-              <Wrapper grow>{children}</Wrapper>
+              <Wrapper
+                grow
+                isCenter>
+                {children}
+              </Wrapper>
             </Wrapper>
           </KeyboardProvider>
         </Wrapper>

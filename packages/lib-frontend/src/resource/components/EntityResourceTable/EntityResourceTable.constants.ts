@@ -6,14 +6,14 @@ import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityR
 export const ENTITY_RESOURCE_TABLE_LIMIT = 10;
 
 export const ENTITY_RESOURCE_COLUMNS: Array<TableColumnModel<EntityResourceModel, unknown>> = [
-  { field: '_id', isHidden: true, name: ({ t }) => t('resource:labels.id') },
+  { id: '_id', isHidden: true, label: ({ t }) => t('resource:labels.id') },
   {
-    field: 'created',
     formatter: ({ value }) =>
       dateTimeFormat({
         format: DATE_TIME_FORMAT_TYPE.DATE_TIME_MINUTES,
         value: value as unknown as Date,
       }),
-    name: ({ t }) => t('resource:labels.created'),
+    id: 'created',
+    label: ({ t }) => t('resource:labels.created'),
   },
 ];

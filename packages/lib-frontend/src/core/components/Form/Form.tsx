@@ -7,6 +7,7 @@ import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { FLEX_JUSTIFY } from '@lib/frontend/styling/utils/styler/flexStyler/flexStyler.constants';
+import { THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
 
 export const Form: SFCModel<FormPropsModel> = ({
   children,
@@ -14,6 +15,7 @@ export const Form: SFCModel<FormPropsModel> = ({
   isDisabled,
   isFullWidth,
   isLoading,
+  left,
   onClose,
   onReset,
   onSubmit,
@@ -37,10 +39,11 @@ export const Form: SFCModel<FormPropsModel> = ({
         isDistribute={isFullWidth}
         isRowAlign
         justify={isFullWidth ? undefined : FLEX_JUSTIFY.FLEX_END}
-        spacing="s">
+        spacing={THEME_SIZE.SMALL}>
+        {left}
         {onClose && (
           <Button
-            icon={ICON.times}
+            icon={ICON.chevronLeft}
             isDisabled={isLoading}
             isTransparent
             onPress={() => {

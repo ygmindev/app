@@ -1,12 +1,13 @@
 {
   "labels": {
-    "cancel": "cancel",
-    "continue": "continue",
-    "email": "email",
-    "noResult": "no result",
-    "submit": "submit"
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "noResult": "No result",
+    "remove": "Remove",
+    "submit": "Submit"
   },
   "messages": {
+    "confirmRemove": "Are you sure you want to remove?",
     "incorrectLength": "TRANSLATION_MISSING",
     "incorrectRange": "TRANSLATION_MISSING",
     "invalidDate": "TRANSLATION_MISSING",

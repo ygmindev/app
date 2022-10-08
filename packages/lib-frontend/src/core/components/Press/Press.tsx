@@ -1,4 +1,5 @@
 import { Activate } from '@lib/frontend/core/components/Activate/Activate';
+import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import type { PressPropsModel } from '@lib/frontend/core/components/Press/Press.models';
 import { Text } from '@lib/frontend/core/components/Text/Text';
@@ -10,7 +11,6 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
 import type { StyleModel } from '@lib/frontend/styling/styling.models';
-import { THEME_BASIC_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
 import { useTracking } from '@lib/frontend/tracking/hooks/useTracking/useTracking';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { isFunction } from 'lodash';
@@ -78,7 +78,7 @@ export const Press: SFCModel<PressPropsModel> = ({
             }
             onPressIn={onPressIn}
             onPressOut={onPressOut}
-            p={THEME_BASIC_SIZE.SMALL}
+            p
             round
             style={
               [styles, !isDisabled && (isActive || isPressed) ? _to : _from].filter(
@@ -101,12 +101,14 @@ export const Press: SFCModel<PressPropsModel> = ({
             {confirmMessage && <Text>{confirmMessage}</Text>}
             <Wrapper isRowAlign>
               <Button
+                icon={ICON.chevronLeft}
                 isDisabled={isDisabled}
                 isTransparent
                 onPress={() => setConfirmModalIsOpen(false)}>
                 {t('core:labels.cancel')}
               </Button>
               <Button
+                icon={ICON.chevronRight}
                 isDisabled={isDisabled}
                 onPress={async () => {
                   onPress && onPress();

@@ -30,9 +30,12 @@ export interface FormContainerRowModel<TType, TKeys extends Array<string> = Arra
 
 export interface FormContainerPropsModel<TType, TKeys extends Array<string>[] = Array<string>[]>
   extends UseFormParamsModel<TType>,
-    Pick<FormPropsModel, 'onClose' | 'closeLabel' | 'isFullWidth' | 'isLoading' | 'isDisabled'>,
+    Pick<
+      FormPropsModel,
+      'onClose' | 'closeLabel' | 'isFullWidth' | 'isLoading' | 'isDisabled' | 'left'
+    >,
     Pick<WithFieldPropsModel, 'isAutoFocus'>,
     WithStyleParamsModel,
     WithTestIdModel {
-  rows?: Array<FormContainerRowModel<TType, TKeys[number]>>;
+  rows: Array<FormContainerRowModel<TType, TKeys[number]>>;
 }

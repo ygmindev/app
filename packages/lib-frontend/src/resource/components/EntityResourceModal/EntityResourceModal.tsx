@@ -1,21 +1,74 @@
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
-import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import type { FCModel } from '@lib/frontend/core/core.models';
+import { FormContainer } from '@lib/frontend/core/containers/FormContainer/FormContainer';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import type { EntityResourceModalPropsModel } from '@lib/frontend/resource/components/EntityResourceModal/EntityResourceModal.models';
+import { ENTITY_RESOURCE_COLUMNS } from '@lib/frontend/resource/components/EntityResourceTable/EntityResourceTable.constants';
+import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
+import { THEME_COLOR } from '@lib/frontend/styling/utils/theme/theme.constants';
+import { CORE } from '@lib/shared/core/core.constants';
+import { withId } from '@lib/shared/core/decorators/withId/withId';
+import { warn } from '@lib/shared/logging/utils/logger/logger';
+import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import type {
+  EntityResourceDataModel,
+  EntityResourceModel,
+} from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import type { FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
+import type { ReactElement } from 'react';
 
-export const EntityResourceModal: FCModel<EntityResourceModalPropsModel> = ({
+export const EntityResourceModal = <TType extends EntityResourceModel, TForm>({
+  data,
   isOpen,
+  name,
   onClose,
   testID,
-  ...props
-}) => {
+}: EntityResourceModalPropsModel<TType, TForm>): ReactElement<
+  EntityResourceModalPropsModel<TType, TForm>
+> => {
+  const { t } = useTranslation([CORE]);
+
+  const { query: remove } = useResourceMethod<
+    RESOURCE_METHOD_TYPE.REMOVE,
+    EntityResourceModel,
+    TForm
+  >({ fields: [{ result: ['_id'] }], method: RESOURCE_METHOD_TYPE.REMOVE, name });
+
+  const _handleSubmit = async (values: EntityResourceDataModel<TType>): Promise<void> => {
+    warn(values);
+  };
+
+  const _handleDelete = async (): Promise<void> => {
+    data && (await remove({ filter: { _id: data._id } as FilterModel<TType> }));
+    onClose && onClose();
+  };
+
   return (
     <Modal
       isOpen={isOpen}
       onClose={onClose}>
       <Wrapper testID={testID}>
-        <Text>hi</Text>
+        <FormContainer<EntityResourceDataModel<TType> | undefined>
+          initialValues={data}
+          left={
+            <Button
+              color={THEME_COLOR.ERROR}
+              confirmMessage={t('core:messages.confirmRemove')}
+              icon={ICON.timesCircle}
+              onPress={_handleDelete}>
+              {t('core:labels.remove')}
+            </Button>
+          }
+          onClose={onClose}
+          onSubmit={_handleSubmit}
+          rows={withId([
+            ...ENTITY_RESOURCE_COLUMNS.map(({ id, label }) => ({
+              fields: [{ id, isDisabled: true, label }],
+            })),
+          ])}
+        />
       </Wrapper>
     </Modal>
   );

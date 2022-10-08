@@ -69,12 +69,12 @@ export const _Table = <TType,>({
 
   const _getColumnDef = <TValue,>(
     {
-      field,
       flex,
       formatter,
+      id,
       isHidden,
       isPinned,
-      name,
+      label,
       renderer,
       sort,
       width,
@@ -84,11 +84,11 @@ export const _Table = <TType,>({
     const isSelection = select !== undefined && i === 0;
     const definition: ColDef = {
       checkboxSelection: isSelection,
-      field,
+      field: id,
       flex,
       headerCheckboxSelection: isSelection,
       headerCheckboxSelectionFilteredOnly: isSelection,
-      headerName: t(name),
+      headerName: t(label),
       hide: isHidden,
       maxWidth: width,
       minWidth: width,

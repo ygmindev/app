@@ -7,18 +7,18 @@ export interface TableFixtureRowModel {
   stringColumn: string;
 }
 
-export const TABLE_FIXTURE_COLUMNS: Array<TableColumnModel<TableFixtureRowModel>> = [
+export const TABLE_FIXTURE_COLUMNS: Array<TableColumnModel<TableFixtureRowModel, unknown>> = [
   {
-    field: 'stringColumn',
-    name: 'String Column',
+    id: 'stringColumn',
+    label: 'String Column',
   },
   {
-    field: 'numberColumn',
-    name: 'Number Column',
+    id: 'numberColumn',
+    label: 'Number Column',
   },
   {
-    field: 'dateColumn',
-    name: 'Date Column',
+    id: 'dateColumn',
+    label: 'Date Column',
   },
 ];
 

@@ -3,13 +3,17 @@ import { useSelector } from '@lib/frontend/root/hooks/useSelector/useSelector';
 import { useRouter } from '@lib/frontend/routing/hooks/useRouter/useRouter';
 import type { EntityResourcePartialModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import type { UserModel } from '@lib/shared/user/resources/User/User.models';
+import { useEffect } from 'react';
 
-export const useCurrentUser = (): EntityResourcePartialModel<UserModel> | null => {
-  const { replace } = useRouter();
+export const useCurrentUser = (): EntityResourcePartialModel<UserModel> | null | undefined => {
   const user = useSelector((state) => state.user.currentUser);
-  if (!user) {
-    replace({ params: {}, pathname: SIGN_IN });
-    return null;
-  }
+  const { replace } = useRouter();
+
+  useEffect(() => {
+    if (user === null) {
+      replace({ params: {}, pathname: SIGN_IN });
+    }
+  }, [user]);
+
   return user;
 };

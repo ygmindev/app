@@ -21,7 +21,7 @@ export const USERNAME_FORM_FIELDS: Array<FormContainerRowModel<UsernameFormModel
         autoComplete: 'email',
         icon: ICON.email,
         id: 'username',
-        label: ({ t }) => t('core:labels.email'),
+        label: ({ t }) => t('user:labels.email'),
       },
     ]),
   },

@@ -13,12 +13,12 @@ export type TableSelectTypeModel = `${TABLE_SELECT_TYPE}`;
 export type TableSortTypeModel = `${TABLE_SORT_TYPE}`;
 
 export interface TableColumnModel<TType, TValue> {
-  field: string;
   flex?: number;
   formatter?: TableColumnFormatterModel<TType, TValue>;
+  id: string;
   isHidden?: boolean;
   isPinned?: boolean;
-  name?: TranslationTextModel;
+  label?: TranslationTextModel;
   renderer?: TableColumnRendererModel<TType, TValue>;
   sort?: TableSortTypeModel;
   width?: number;

@@ -22,6 +22,7 @@ export const FormContainer = <TType, TKeys extends Array<string>[] = Array<strin
   isAutoFocus,
   isFullWidth,
   isLoading: isLoadingProps,
+  left,
   onClose,
   onSubmit,
   rows,
@@ -61,6 +62,7 @@ export const FormContainer = <TType, TKeys extends Array<string>[] = Array<strin
       icon,
       id,
       isAutoFocus,
+      isDisabled,
       label,
       render,
       type,
@@ -74,7 +76,7 @@ export const FormContainer = <TType, TKeys extends Array<string>[] = Array<strin
           error={get(errors, id) || undefined}
           icon={icon}
           isAutoFocus={isAutoFocus}
-          isDisabled={_isLoading}
+          isDisabled={_isLoading || isDisabled}
           key={id}
           label={label}
           onChange={handleChange(id)}
@@ -110,6 +112,7 @@ export const FormContainer = <TType, TKeys extends Array<string>[] = Array<strin
         closeLabel={closeLabel}
         isFullWidth={isFullWidth}
         isLoading={_isLoading}
+        left={left}
         onClose={onClose}
         onSubmit={async () => handleSubmit()}>
         {fieldComponents}
