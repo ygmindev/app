@@ -4,15 +4,15 @@ import type { PaginationModel } from '@lib/shared/resource/utils/Pagination/Pagi
 
 @withEntity({ name: 'Pagination' })
 export class Pagination implements PaginationModel {
-  @withField()
+  @withField({ isOptional: true })
   before?: string;
 
-  @withField()
+  @withField({ isOptional: true })
   after?: string;
 
   @withField()
-  first?: number;
+  first!: number;
 
-  @withField()
+  @withField({ isOptional: true })
   last?: number;
 }

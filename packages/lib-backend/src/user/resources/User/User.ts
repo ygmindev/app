@@ -12,9 +12,9 @@ export class User extends EntityResource implements UserModel {
   @withField({ isOptional: true, isUnique: true })
   phone?: string;
 
-  @withField()
+  @withField({ isOptional: true })
   first?: string;
 
-  @withField()
+  @withField({ isOptional: true })
   last?: string;
 }

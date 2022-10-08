@@ -1,4 +1,4 @@
-import { bootstrap } from '@lib/shared/bootstrap/bootstrap';
+import { initialize } from '@lib/shared/setup/utils/initialize/initialize';
 
 jest.mock('@lib/backend/file/utils/fromRoot/fromRoot', () => ({
   __esModule: true,
@@ -10,5 +10,5 @@ jest.mock('@lib/backend/file/utils/fromWorking/fromWorking', () => ({
 }));
 
 beforeAll(async () => {
-  await bootstrap();
+  await initialize();
 });

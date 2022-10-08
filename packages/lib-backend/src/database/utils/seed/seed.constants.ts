@@ -19,5 +19,8 @@ export const SEED_DATA: SeedDataModel = {
     { stringProperty: 'stringProperty2' },
   ],
 
-  [USER_RESOURCE_NAME]: [{ email: 'ygmindev@gmail.com', first: 'YG', last: 'Min' }],
+  [USER_RESOURCE_NAME]: [
+    { email: 'ygmindev@gmail.com', first: 'YG', last: 'Min' },
+    { email: 'admin@gmail.com', first: 'Admin', last: 'Admin' },
+  ],
 };

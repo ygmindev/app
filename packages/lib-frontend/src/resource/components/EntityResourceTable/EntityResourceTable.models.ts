@@ -11,5 +11,5 @@ export interface EntityResourceTablePropsModel<TType extends EntityResourceModel
       'name' | 'fields'
     > {
   columns: Array<TableColumnModel<TType, unknown>>;
-  nrows?: number;
+  limit?: number;
 }

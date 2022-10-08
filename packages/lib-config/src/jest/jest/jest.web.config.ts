@@ -18,6 +18,8 @@ export const jestConfig = merge({
 
   values: [
     {
+      globalTeardown: fromConfig('jest/globalTeardown/globalTeardown.frontend.ts'),
+
       globals: globalsConfig,
 
       moduleFileExtensions: [...WEB_EXTENSIONS, ...FRONTEND_EXTENSIONS, ...NODE_EXTENSIONS].map(

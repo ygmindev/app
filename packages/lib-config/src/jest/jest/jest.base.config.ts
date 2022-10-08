@@ -15,6 +15,8 @@ export const jestConfig: Config.InitialOptions = {
 
   coverageReporters: ['lcov'],
 
+  globalTeardown: fromConfig('jest/globalTeardown/globalTeardown.base.ts'),
+
   globals: {
     __NAME__: 'TEST',
   },

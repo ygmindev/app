@@ -1,9 +1,0 @@
-9e4afcae251958ca15324a58db5bd3f0
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.HOOK_TYPE = void 0;
-var HOOK_TYPE;
-(function (HOOK_TYPE) {
-    HOOK_TYPE["BEFORE_CREATE"] = "BEFORE_CREATE";
-})(HOOK_TYPE = exports.HOOK_TYPE || (exports.HOOK_TYPE = {}));
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWJhY2tlbmQvc3JjL3Jlc291cmNlL2RlY29yYXRvcnMvd2l0aEhvb2svd2l0aEhvb2suY29uc3RhbnRzLnRzIiwibWFwcGluZ3MiOiI7OztBQUFBLElBQVksU0FFWDtBQUZELFdBQVksU0FBUztJQUNuQiw0Q0FBK0IsQ0FBQTtBQUNqQyxDQUFDLEVBRlcsU0FBUyxHQUFULGlCQUFTLEtBQVQsaUJBQVMsUUFFcEIiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWJhY2tlbmQvc3JjL3Jlc291cmNlL2RlY29yYXRvcnMvd2l0aEhvb2svd2l0aEhvb2suY29uc3RhbnRzLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBlbnVtIEhPT0tfVFlQRSB7XG4gIEJFRk9SRV9DUkVBVEUgPSAnQkVGT1JFX0NSRUFURScsXG59XG4iXSwidmVyc2lvbiI6M30=

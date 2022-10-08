@@ -1,5 +1,5 @@
-import { bootstrap } from '@lib/backend/bootstrap/bootstrap';
+import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 
 beforeAll(async () => {
-  await bootstrap();
+  await initialize();
 });

@@ -26,6 +26,7 @@ const _getField = <TType>({
 
 const _getColumn = <TType>({
   Resource,
+  defaultValue,
   isArray,
   isOptional,
   type,
@@ -54,7 +55,11 @@ const _getColumn = <TType>({
         return [Property, { type: undefined }];
     }
   })();
-  return _Field({ ..._options, nullable: isOptional }) as PropertyDecorator;
+  return _Field({
+    ..._options,
+    nullable: isOptional,
+    onCreate: defaultValue || undefined,
+  }) as PropertyDecorator;
 };
 
 export const withField =
@@ -65,6 +70,7 @@ export const withField =
     isArray,
     isOptional,
     isUnique,
+    defaultValue,
   }: WithFieldParamsModel<TType> = {}): PropertyDecorator =>
   (target, propertyKey) => {
     (expire || isUnique) &&
@@ -75,5 +81,5 @@ export const withField =
 
     _getField({ Resource, isArray, isOptional, type })(target, propertyKey);
 
-    _getColumn({ Resource, isArray, isOptional, type })(target, propertyKey);
+    _getColumn({ Resource, defaultValue, isArray, isOptional, type })(target, propertyKey);
   };

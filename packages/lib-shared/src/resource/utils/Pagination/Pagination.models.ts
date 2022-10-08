@@ -1,6 +1,6 @@
 export interface PaginationModel {
   after?: string;
   before?: string;
-  first?: number;
+  first: number;
   last?: number;
 }

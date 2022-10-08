@@ -1,20 +1,16 @@
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
 
-export interface _UseQueryParamsModel<TResult = void> extends WithIdModel {
+export interface _UseQueryParamsModel<TType> extends WithIdModel {
   cache?: number | boolean;
-  isDisabled?: boolean;
-  isInfinite?: boolean;
-  onSuccess?(result: TResult): Promise<unknown>;
-  query(): Promise<TResult | null>;
+  query(): Promise<TType | null>;
 }
 
-export interface _UseQueryResultModel<TResult = void, TError extends Error = Error>
-  extends WithIdModel {
-  data?: TResult | null | undefined;
-  error?: TError | null | undefined;
+export interface _UseQueryResultModel<TType, TError extends Error = Error> extends WithIdModel {
+  data?: TType | null;
+  error?: TError | null;
   isError: boolean;
   isLoading: boolean;
-  query(): Promise<TResult | null | undefined>;
-  resetQuery(id: string): unknown;
-  setQueryData(id: string, data?: TResult | null): unknown;
+  query(): Promise<TType | null>;
+  resetQuery(id: string): void;
+  setQueryData(id: string, data?: TType | null): void;
 }

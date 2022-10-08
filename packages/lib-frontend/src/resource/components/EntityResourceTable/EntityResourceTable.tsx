@@ -1,22 +1,24 @@
 import { Table } from '@lib/frontend/core/components/Table/Table';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { useQuery } from '@lib/frontend/core/hooks/useQuery/useQuery';
+import { useQueryConnection } from '@lib/frontend/core/hooks/useQueryConnection/useQueryConnection';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { ENTITY_RESOURCE_TABLE_NROWS } from '@lib/frontend/resource/components/EntityResourceTable/EntityResourceTable.constants';
+import { ENTITY_RESOURCE_TABLE_LIMIT } from '@lib/frontend/resource/components/EntityResourceTable/EntityResourceTable.constants';
 import type { EntityResourceTablePropsModel } from '@lib/frontend/resource/components/EntityResourceTable/EntityResourceTable.models';
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { RESOURCE, RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import type { ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
+import { reduce } from 'lodash';
 import type { ReactElement } from 'react';
-import { useState } from 'react';
+import { useEffect } from 'react';
 
 export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
   columns,
   fields,
   name,
   testID,
-  nrows = ENTITY_RESOURCE_TABLE_NROWS,
+  limit = ENTITY_RESOURCE_TABLE_LIMIT,
   ...props
 }: EntityResourceTablePropsModel<TType, TForm>): ReactElement<
   EntityResourceTablePropsModel<TType, TForm>
@@ -24,31 +26,27 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
   const { styles } = useStyles({ props });
   useTranslation([RESOURCE]);
 
-  const [endCursor, setEndCursor] = useState<string | undefined>();
-
   const { query: getConnection } = useResourceMethod<
     RESOURCE_METHOD_TYPE.GET_CONNECTION,
     TType,
     TForm
-  >({
-    fields,
-    method: RESOURCE_METHOD_TYPE.GET_CONNECTION,
-    name,
-  });
+  >({ fields, method: RESOURCE_METHOD_TYPE.GET_CONNECTION, name });
 
-  const { data, isLoading } = useQuery<Array<TType>>({
+  const { data, queryNext } = useQueryConnection<TType>({
     id: `${name}${RESOURCE_METHOD_TYPE.GET_CONNECTION}`,
-    isInfinite: true,
-    query: async () => {
+    limit,
+    query: async (params) => {
       const { result } = await getConnection({
         filter: {},
-        pagination: { after: endCursor, first: nrows },
+        pagination: params || { first: limit },
       });
-      setEndCursor(result?.pageInfo.endCursor || undefined);
-      console.warn(result);
-      return result?.edges.map(({ node }) => node) || [];
+      return result || null;
     },
   });
+
+  useEffect(() => {
+    queryNext();
+  }, []);
 
   return (
     <Wrapper
@@ -57,7 +55,11 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
       testID={testID}>
       <Table<TType>
         columns={columns}
-        data={data || []}
+        data={reduce<ConnectionModel<TType> | null, Array<TType>>(
+          data?.pages,
+          (result, page) => [...result, ...(page?.edges.map(({ node }) => node) || [])],
+          [],
+        )}
       />
     </Wrapper>
   );

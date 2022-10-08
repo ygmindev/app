@@ -9,6 +9,8 @@ export const jestConfig = merge({
 
   values: [
     {
+      globalTeardown: fromConfig('jest/globalTeardown/globalTeardown.backend.ts'),
+
       globals: globalsConfig,
 
       setupFilesAfterEnv: [fromConfig('jest/setupFilesAfterEnv/setupFilesAfterEnv.backend.ts')],
