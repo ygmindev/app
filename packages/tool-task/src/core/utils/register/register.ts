@@ -64,7 +64,6 @@ export const register = <TOptions = object>({
     .join('');
 
   if (_registry[_alias]) {
-    console.warn(_registry);
     throw new DuplicateError(`${_alias} existis`);
   }
 

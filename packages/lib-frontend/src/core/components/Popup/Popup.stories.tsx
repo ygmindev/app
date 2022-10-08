@@ -7,6 +7,7 @@ import type {
 } from '@lib/frontend/core/components/Popup/Popup.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
+import { debug } from '@lib/shared/logging/utils/logger/logger';
 import { useRef } from 'react';
 
 const Component: SFCModel<PopupPropsModel> = (props) => {
@@ -18,7 +19,7 @@ const Component: SFCModel<PopupPropsModel> = (props) => {
       <Popup
         {...props}
         forwardedRef={ref}
-        onClose={() => console.warn('closed')}
+        onClose={() => debug('closed')}
       />
     </Wrapper>
   );

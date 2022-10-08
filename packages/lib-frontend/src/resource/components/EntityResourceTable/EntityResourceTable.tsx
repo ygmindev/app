@@ -1,4 +1,5 @@
 import { Table } from '@lib/frontend/core/components/Table/Table';
+import { TABLE_SELECT_TYPE } from '@lib/frontend/core/components/Table/Table.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { useQueryConnection } from '@lib/frontend/core/hooks/useQueryConnection/useQueryConnection';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
@@ -6,6 +7,7 @@ import { ENTITY_RESOURCE_TABLE_LIMIT } from '@lib/frontend/resource/components/E
 import type { EntityResourceTablePropsModel } from '@lib/frontend/resource/components/EntityResourceTable/EntityResourceTable.models';
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
+import { warn } from '@lib/shared/logging/utils/logger/logger';
 import { RESOURCE, RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import type { ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
@@ -60,6 +62,10 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
           (result, page) => [...result, ...(page?.edges.map(({ node }) => node) || [])],
           [],
         )}
+        onSelect={(data) => {
+          warn(data);
+        }}
+        select={TABLE_SELECT_TYPE.SINGLE}
       />
     </Wrapper>
   );
