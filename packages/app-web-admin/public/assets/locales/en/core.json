@@ -1,0 +1,23 @@
+{
+  "labels": {
+    "cancel": "cancel",
+    "continue": "continue",
+    "email": "email",
+    "noResult": "no result",
+    "submit": "submit"
+  },
+  "messages": {
+    "incorrectLength": "TRANSLATION_MISSING",
+    "incorrectRange": "TRANSLATION_MISSING",
+    "invalidDate": "TRANSLATION_MISSING",
+    "invalidEmailAddress": "TRANSLATION_MISSING",
+    "minLength": "TRANSLATION_MISSING",
+    "noNumberOrSpecialCharacter": "TRANSLATION_MISSING",
+    "nothingChanged": "TRANSLATION_MISSING",
+    "nothingToShow": "nothing to show",
+    "required": "TRANSLATION_MISSING",
+    "unknownError": "TRANSLATION_MISSING",
+    "updated": "TRANSLATION_MISSING",
+    "zipCode": "TRANSLATION_MISSING"
+  }
+}

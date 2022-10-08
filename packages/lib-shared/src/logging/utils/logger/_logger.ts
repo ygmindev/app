@@ -1,5 +1,5 @@
-import { dateTimeFormat } from '@lib/shared/locale/utils/dateTimeFormat/dateTimeFormat';
-import { DATE_TIME_FORMAT_TYPE } from '@lib/shared/locale/utils/dateTimeFormat/dateTimeFormat.constants';
+import { dateTimeFormat } from '@lib/shared/formatting/utils/dateTimeFormat/dateTimeFormat';
+import { DATE_TIME_FORMAT_TYPE } from '@lib/shared/formatting/utils/dateTimeFormat/dateTimeFormat.constants';
 import { _toggle as _toggleFrontend } from '@lib/shared/logging/utils/logger/_logger.frontend';
 import type { _LoggerModel } from '@lib/shared/logging/utils/logger/_logger.models';
 import type { Logger } from 'winston';

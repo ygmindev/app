@@ -1,5 +1,4 @@
 import { lightThemeConfig } from '@lib/config/theme/light.config';
-import { FONT_BOLD_WEIGHT } from '@lib/frontend/styling/utils/styler/fontStyler/fontStyler.constants';
 import type { FontStylerParamsModel } from '@lib/frontend/styling/utils/styler/fontStyler/fontStyler.models';
 import type { StylerModel } from '@lib/frontend/styling/utils/styler/styler.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
@@ -24,7 +23,7 @@ export const fontStyler: StylerModel<FontStylerParamsModel> = (
 
     fontSize: theme.font.size[isTitle || isSubtitle ? 'l' : size],
 
-    fontWeight: isBold || isTitle ? `${FONT_BOLD_WEIGHT}` : undefined,
+    fontWeight: isBold || isTitle ? theme.font.boldWeight : undefined,
 
     lineHeight: isLineHeight ? theme.font.lineHeight : undefined,
 

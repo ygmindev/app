@@ -7,8 +7,8 @@ import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { FLEX_JUSTIFY } from '@lib/frontend/styling/utils/styler/flexStyler/flexStyler.constants';
 import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
-import { dateTimeFormat } from '@lib/shared/locale/utils/dateTimeFormat/dateTimeFormat';
-import { DATE_TIME_FORMAT_TYPE } from '@lib/shared/locale/utils/dateTimeFormat/dateTimeFormat.constants';
+import { dateTimeFormat } from '@lib/shared/formatting/utils/dateTimeFormat/dateTimeFormat';
+import { DATE_TIME_FORMAT_TYPE } from '@lib/shared/formatting/utils/dateTimeFormat/dateTimeFormat.constants';
 
 const REACT_APP_APP_NAME = getEnv('REACT_APP_APP_NAME');
 

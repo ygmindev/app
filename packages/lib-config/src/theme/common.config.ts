@@ -36,6 +36,8 @@ export const commonThemeConfig: PartialDeepModel<ThemeConfigModel> = {
   },
 
   font: {
+    boldWeight: '500',
+
     family: __IS_WEB__
       ? 'Lato, "Helvetica Neue", Arial, sans-serif'
       : __IS_NATIVE__

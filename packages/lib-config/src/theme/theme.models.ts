@@ -6,6 +6,7 @@ import type {
   ThemeShadeModel,
   ThemeSizeModel,
 } from '@lib/frontend/styling/utils/theme/theme.models';
+import type { TextStyle } from 'react-native';
 
 export interface ThemeConfigModel {
   animation: {
@@ -20,6 +21,7 @@ export interface ThemeConfigModel {
   };
 
   font: {
+    boldWeight: TextStyle['fontWeight'];
     family: string;
     lineHeight: number;
     size: Record<ThemeSizeModel, number>;

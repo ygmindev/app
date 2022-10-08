@@ -10,6 +10,10 @@ const persister = createAsyncStoragePersister({ storage: AsyncStorage });
 
 const queryClient = new QueryClient({
   defaultOptions: {
+    mutations: {
+      cacheTime: 0,
+      retry: false,
+    },
     queries: {
       cacheTime: 0,
       refetchOnMount: false,
@@ -21,7 +25,14 @@ const queryClient = new QueryClient({
   },
 });
 
-persistQueryClient({ persister, queryClient });
+persistQueryClient({
+  dehydrateOptions: {
+    shouldDehydrateMutation: ({ cacheTime }) => cacheTime > 0,
+    shouldDehydrateQuery: ({ cacheTime }) => cacheTime > 0,
+  },
+  persister,
+  queryClient,
+});
 
 export const _QueryProvider = composeComponent<_QueryProviderPropsModel, QueryClientProviderProps>({
   Component: QueryClientProvider,

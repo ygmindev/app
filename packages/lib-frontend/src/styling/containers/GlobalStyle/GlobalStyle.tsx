@@ -8,6 +8,7 @@ export const GlobalStyle =
   process.env.NODE_ENV === 'test' || __IS_SSR__
     ? Fragment
     : createGlobalStyle`
+
   @font-face {
     font-family: 'Ionicons';
     src: url(${Ionicons});

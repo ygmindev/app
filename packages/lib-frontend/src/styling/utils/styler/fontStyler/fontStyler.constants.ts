@@ -4,5 +4,3 @@ export enum FONT_ALIGN {
   LEFT = 'left',
   RIGHT = 'right',
 }
-
-export const FONT_BOLD_WEIGHT = 600;

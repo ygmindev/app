@@ -6,6 +6,7 @@ import type { ReactNode } from 'react';
 export interface TableColumnModel<TType, TValue> {
   field: string;
   flex?: number;
+  formatter?: TableColumnFormatterModel<TType, TValue>;
   isHidden?: boolean;
   isPinned?: boolean;
   name?: TranslationTextModel;
@@ -18,5 +19,10 @@ export type TableColumnRendererModel<TType, TValue> = (params: {
   row: TType;
   value: TValue;
 }) => ReactNode;
+
+export type TableColumnFormatterModel<TType, TValue> = (params: {
+  row: TType;
+  value: TValue;
+}) => string;
 
 export interface TablePropsModel<TType> extends _TablePropsModel<TType>, WithTestIdModel {}

@@ -23,7 +23,7 @@ export const _useQuery = <TType, TError extends Error = Error>({
   const { data, error, isError, isFetching, isStale, refetch } = useQuery<TType | null, TError>(
     [id],
     query,
-    { cacheTime, staleTime: cacheTime },
+    { cacheTime, retry: false, staleTime: cacheTime },
   );
 
   const _refetch = debounce({ callback: refetch });
