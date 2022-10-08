@@ -9,6 +9,7 @@ import { useState } from 'react';
 export const Table = <TType,>({
   columns,
   data,
+  forwardedRef,
   isFullWidth,
   onMount,
   onSelect,
@@ -30,6 +31,7 @@ export const Table = <TType,>({
         <_Table
           columns={columns}
           data={data}
+          forwardedRef={forwardedRef}
           isFullWidth={isFullWidth}
           onMount={() => {
             setIsMounted(true);

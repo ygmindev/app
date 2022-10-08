@@ -50,7 +50,7 @@ export const _Modal: FCModel<_ModalPropsModel> = ({
         {
           height: isFullSize ? deviceHeight : height,
           maxHeight: isFullSize ? deviceHeight : height,
-          width: isFullSize ? deviceHeight : isMobile ? deviceWidth : width,
+          width: width || deviceWidth,
         },
       ]}
       supportedOrientations={['portrait', 'landscape']}

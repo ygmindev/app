@@ -1,10 +1,12 @@
 import type {
   TableColumnModel,
+  TableRefModel,
   TableSelectTypeModel,
 } from '@lib/frontend/core/components/Table/Table.models';
+import type { WithForwardedRefPropsModel } from '@lib/frontend/core/decorators/withForwardRefProps/withForwardRefProps.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 
-export interface _TablePropsModel<TType> {
+export interface _TablePropsModel<TType> extends WithForwardedRefPropsModel<TableRefModel<TType>> {
   columns: Array<TableColumnModel<TType, unknown>>;
   data?: Array<TType>;
   isFullWidth?: boolean;

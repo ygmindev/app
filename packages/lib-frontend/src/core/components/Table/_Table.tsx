@@ -18,7 +18,7 @@ import AgGridStyle from 'ag-grid-community/dist/styles/ag-grid.css';
 import AgGridTheme from 'ag-grid-community/dist/styles/ag-theme-material.css';
 import { AgGridReact } from 'ag-grid-react';
 import type { ReactElement } from 'react';
-import { useState } from 'react';
+import { useImperativeHandle, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 
 const _GlobalStyle = createGlobalStyle`
@@ -46,6 +46,7 @@ const _GlobalStyle = createGlobalStyle`
 export const _Table = <TType,>({
   columns,
   data,
+  forwardedRef,
   isFullWidth,
   onMount,
   onSelect,
@@ -56,6 +57,10 @@ export const _Table = <TType,>({
   const [gridApi, setGridApi] = useState<GridApi>();
   const [columnApi, setColumnApi] = useState<ColumnApi>();
   const duration = theme.animation.duration;
+
+  useImperativeHandle(forwardedRef, () => ({
+    deselectRows: () => gridApi && gridApi.deselectAll(),
+  }));
 
   const _handleSelect = (): void => {
     const selectedRows = gridApi ? gridApi.getSelectedRows() : [];
