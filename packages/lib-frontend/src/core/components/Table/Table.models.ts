@@ -33,4 +33,4 @@ export type TableColumnFormatterModel<TType, TValue> = (params: {
   value: TValue;
 }) => string;
 
-export type TablePropsModel<TType> = _TablePropsModel<TType> & WithTestIdModel;
+export interface TablePropsModel<TType> extends _TablePropsModel<TType>, WithTestIdModel {}

@@ -7,13 +7,12 @@ import { ENTITY_RESOURCE_TABLE_LIMIT } from '@lib/frontend/resource/components/E
 import type { EntityResourceTablePropsModel } from '@lib/frontend/resource/components/EntityResourceTable/EntityResourceTable.models';
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { warn } from '@lib/shared/logging/utils/logger/logger';
 import { RESOURCE, RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import type { ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
 import { reduce } from 'lodash';
 import type { ReactElement } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
   columns,
@@ -27,6 +26,8 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
 > => {
   const { styles } = useStyles({ props });
   useTranslation([RESOURCE]);
+
+  const [selected, setSelected] = useState<Array<TType> | undefined>();
 
   const { query: getConnection } = useResourceMethod<
     RESOURCE_METHOD_TYPE.GET_CONNECTION,
@@ -62,9 +63,7 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
           (result, page) => [...result, ...(page?.edges.map(({ node }) => node) || [])],
           [],
         )}
-        onSelect={(data) => {
-          warn(data);
-        }}
+        onSelect={setSelected}
         select={TABLE_SELECT_TYPE.SINGLE}
       />
     </Wrapper>

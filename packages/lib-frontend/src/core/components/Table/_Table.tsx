@@ -1,7 +1,6 @@
 import type { ThemeConfigModel } from '@lib/config/theme/theme.models';
 import { AG_GRID_THEME } from '@lib/frontend/core/components/Table/_Table.constants';
 import type { _TablePropsModel } from '@lib/frontend/core/components/Table/_Table.models';
-import { TABLE_SELECT_TYPE } from '@lib/frontend/core/components/Table/Table.constants';
 import type { TableColumnModel } from '@lib/frontend/core/components/Table/Table.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
@@ -60,17 +59,7 @@ export const _Table = <TType,>({
 
   const _handleSelect = (): void => {
     const selectedRows = gridApi ? gridApi.getSelectedRows() : [];
-    select === TABLE_SELECT_TYPE.SINGLE;
-    onSelect &&
-      onSelect(
-        select === TABLE_SELECT_TYPE.SINGLE
-          ? selectedRows
-            ? selectedRows[0]
-            : undefined
-          : select === TABLE_SELECT_TYPE.MULTIPLE
-          ? selectedRows || []
-          : undefined,
-      );
+    onSelect && onSelect(selectedRows);
   };
 
   const _getColumnDef = <TValue,>(
