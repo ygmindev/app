@@ -96,6 +96,7 @@ export enum IONICON_ICON {
 }
 
 export enum FONTAWESOME_ICON {
+  ban = 'ban',
   bank = 'bank',
   contact = 'contact',
   copyright = 'copyright',
@@ -202,6 +203,7 @@ export const IONIC_ICONS: Record<IONICON_ICON, string> = {
 };
 
 export const FONTAWESOME_ICONS: Record<FONTAWESOME_ICON, string> = {
+  ban: 'ban',
   bank: 'bank',
   contact: 'address-book-o',
   copyright: 'copyright',

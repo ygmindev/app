@@ -49,12 +49,8 @@ export const useGraphQl = ({ onError, ...params }: UseGraphQlParamsModel = {}): 
         const error = result.errors && result.errors[0];
         if (error) {
           const e = new Error(error.message);
-          e.name = error.extensions.code;
-          if (onError) {
-            onError(e as TError);
-          } else {
-            throw e;
-          }
+          e.name = error.extensions.name;
+          onError && onError(e as TError);
         }
         return (result.data && result.data[name]) || null;
       }

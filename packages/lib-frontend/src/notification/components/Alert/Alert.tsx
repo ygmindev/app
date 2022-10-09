@@ -20,6 +20,7 @@ import {
   THEME_COLOR,
   THEME_RELATIVE_COLOR,
   THEME_SHADE,
+  THEME_SIZE,
 } from '@lib/frontend/styling/utils/theme/theme.constants';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { useCallback, useState } from 'react';
@@ -60,7 +61,6 @@ export const Alert: SFCModel<AlertPropsModel> = ({
       style={styles}>
       <Wrapper
         backgroundColor={color}
-        isOverflowHidden
         isShadow
         mBottom
         position={SHAPE_POSITION.RELATIVE}
@@ -88,9 +88,12 @@ export const Alert: SFCModel<AlertPropsModel> = ({
           <Icon
             color={THEME_RELATIVE_COLOR.CONTRAST}
             icon={icon}
+            size={THEME_SIZE.LARGE}
           />
           <Wrapper
+            basis={0}
             grow
+            isWrap
             spacing="s">
             {title && (
               <Text

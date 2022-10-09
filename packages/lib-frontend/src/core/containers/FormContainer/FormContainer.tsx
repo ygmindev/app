@@ -97,6 +97,7 @@ export const FormContainer = <TType,>({
           label={label}
           onChange={handleChange(id)}
           options={options}
+          value={get(values, id)}
         />
       ) : (
         <TextField

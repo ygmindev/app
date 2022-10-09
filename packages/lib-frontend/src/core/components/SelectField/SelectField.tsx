@@ -58,8 +58,7 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
     _handleToggle(false);
   };
 
-  const _handleChange = (value: string): void => {
-    console.warn(value);
+  const onQueryChange = (value: string): void => {
     setQuery(value);
     search(value);
   };
@@ -92,7 +91,7 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
               selectedOption && selectedOption.icon && <Icon icon={selectedOption.icon} />
             }
             onBlur={() => _handleToggle(false)}
-            onChange={_handleChange}
+            onChange={onQueryChange}
             onFocus={() => _handleToggle(true)}
             onSubmit={_handleSelect}
             rightElement={(isFocused) => (
@@ -106,12 +105,7 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
         )}
         forwardedRef={menuRef}
         isFullWidth
-        // onChange={isDisabled ? undefined : setFieldValue}
-        onChange={(value) => {
-          console.warn(value);
-          setFieldValue(value);
-          isDisabled ? undefined : setFieldValue(value);
-        }}
+        onChange={isDisabled ? undefined : setFieldValue}
         onClose={() => _handleToggle(false)}
         options={result}
         renderOption={renderOption}

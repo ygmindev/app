@@ -6,8 +6,14 @@ export const SIGN_IN = 'signIn';
 
 export const OAUTH_REDIRECT = 'oAuthRedirect';
 
-export const AUTHENTICATION_ERROR: AlertDataModel = {
+export const UNAUTHENTICATED_ERROR_ALERT: AlertDataModel = {
   color: THEME_COLOR.ERROR,
-  icon: ICON.offline,
-  message: ({ t }) => t('auth:messages.authenticationError'),
+  icon: ICON.lock,
+  message: ({ t }) => t('auth:messages.unauthenticatedError'),
+};
+
+export const UNAUTHORIZED_ERROR_ALERT: AlertDataModel = {
+  color: THEME_COLOR.ERROR,
+  icon: ICON.ban,
+  message: ({ t }) => t('auth:messages.unauthorizedError'),
 };
