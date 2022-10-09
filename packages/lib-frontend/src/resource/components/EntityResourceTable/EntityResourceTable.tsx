@@ -24,6 +24,7 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
   fields,
   name,
   testID,
+  validators,
   limit = ENTITY_RESOURCE_TABLE_LIMIT,
   ...props
 }: EntityResourceTablePropsModel<TType, TForm>): ReactElement<
@@ -96,6 +97,7 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
             ref.current?.deselectRows();
             setIsCreateModalOpen(false);
           }}
+          validators={validators}
         />
       </Content>
     </Wrapper>

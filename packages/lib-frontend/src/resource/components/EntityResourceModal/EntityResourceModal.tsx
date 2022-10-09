@@ -24,6 +24,7 @@ export const EntityResourceModal = <TType extends EntityResourceModel, TForm>({
   name,
   onClose,
   testID,
+  validators,
 }: EntityResourceModalPropsModel<TType, TForm>): ReactElement<
   EntityResourceModalPropsModel<TType, TForm>
 > => {
@@ -83,6 +84,7 @@ export const EntityResourceModal = <TType extends EntityResourceModel, TForm>({
               }),
             ),
           )}
+          validators={validators}
         />
       </Wrapper>
     </Modal>
