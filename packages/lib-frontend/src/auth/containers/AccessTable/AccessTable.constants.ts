@@ -1,13 +1,20 @@
 import { ENTITY_RESOURCE_COLUMNS } from '@lib/frontend/resource/components/EntityResourceTable/EntityResourceTable.constants';
 import type { EntityResourceTablePropsModel } from '@lib/frontend/resource/components/EntityResourceTable/EntityResourceTable.models';
-import { ACCESS_RESOURCE_NAME } from '@lib/shared/auth/resources/Access/Access.constants';
+import {
+  ACCESS_RESOURCE_NAME,
+  ACCESS_ROLE,
+} from '@lib/shared/auth/resources/Access/Access.constants';
 import type { AccessFormModel, AccessModel } from '@lib/shared/auth/resources/Access/Access.models';
 
 export const ACCESS_TABLE_PROPS: EntityResourceTablePropsModel<AccessModel, AccessFormModel> = {
   columns: [
-    ...ENTITY_RESOURCE_COLUMNS,
+    ...ENTITY_RESOURCE_COLUMNS.map((column) => ({ ...column, isHidden: true })),
     { id: '_uid', label: 'UID' },
-    { id: 'role', label: ({ t }) => t('auth:labels.role') },
+    {
+      id: 'role',
+      label: ({ t }) => t('auth:labels.role'),
+      options: Object.values(ACCESS_ROLE).map((value) => ({ id: value, label: value })),
+    },
   ],
   fields: [
     {
@@ -17,5 +24,6 @@ export const ACCESS_TABLE_PROPS: EntityResourceTablePropsModel<AccessModel, Acce
       ],
     },
   ],
+
   name: ACCESS_RESOURCE_NAME,
 };

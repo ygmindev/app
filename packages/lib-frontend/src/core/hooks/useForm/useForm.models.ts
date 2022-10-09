@@ -9,18 +9,18 @@ import type { Primitive } from 'type-fest';
 export type FormErrorModel<TType> = {
   [TKey in keyof TType]?: InferModel<TType[TKey]> extends Primitive
     ? string | boolean | undefined
-    : FormErrorModel<InferModel<TType[TKey]>>;
+    : FormErrorModel<TType[TKey]>;
 };
 
-export type FormValidatorModel<TValue = unknown, TType = unknown> = (
-  value: TValue,
-  data?: TType,
-) => TranslationTextModel | undefined;
+export type FormValidatorModel<TValue extends string = string, TType = unknown> = (params: {
+  data?: TType;
+  value: TValue;
+}) => TranslationTextModel | undefined;
 
 export type FormValidatorsModel<TType> = {
   [TKey in keyof TType]?: TType[TKey] extends object
     ? FormValidatorsModel<TType[TKey]>
-    : FormValidatorModel<TType[TKey], TType>;
+    : FormValidatorModel<TType[TKey] & string, TType>;
 };
 
 export interface UseFormParamsModel<TType>

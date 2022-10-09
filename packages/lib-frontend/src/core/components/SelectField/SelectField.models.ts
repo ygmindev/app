@@ -13,12 +13,9 @@ export interface SelectOptionModel
   color?: ThemeColorModel;
 }
 
-export interface SelectWithFieldPropsModel
+export interface SelectFieldPropsModel
   extends Pick<MenuPropsModel, 'renderOption'>,
-    Pick<
-      TextFieldPropsModel,
-      'icon' | 'label' | 'error' | 'left' | 'width' | 'isAutoFocus' | 'onSubmit'
-    >,
+    Pick<TextFieldPropsModel, 'icon' | 'label' | 'error' | 'width' | 'isAutoFocus' | 'onSubmit'>,
     WithFieldPropsModel,
     WithTestIdModel {
   options: Array<SelectOptionModel>;

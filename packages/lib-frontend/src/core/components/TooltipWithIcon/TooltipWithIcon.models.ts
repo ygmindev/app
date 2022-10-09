@@ -2,6 +2,6 @@ import type { WithChildrenPropsModel } from '@lib/frontend/core/decorators/withC
 import type { ThemeColorModel } from '@lib/frontend/styling/utils/theme/theme.models';
 import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
 
-export interface TooltipWithIconPropsModel extends WithTestIdModel, WithChildrenPropsModel {
+export interface TooltipWithIconPropsModel extends WithChildrenPropsModel, WithTestIdModel {
   color?: ThemeColorModel;
 }

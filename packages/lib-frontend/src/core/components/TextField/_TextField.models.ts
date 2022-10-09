@@ -10,11 +10,11 @@ import type { ReactElement, ReactNode } from 'react';
 import type { TextInput, TextInputProps } from 'react-native';
 
 export interface _TextFieldPropsModel
-  extends WithTestIdModel,
-    WithForwardedRefPropsModel<TextInput>,
+  extends WithForwardedRefPropsModel<TextInput>,
     WithFieldPropsModel,
     WithSubmitPropsModel<string>,
-    WithStyleParamsModel {
+    WithStyleParamsModel,
+    WithTestIdModel {
   Component?(inputProps: TextInputProps): ReactElement;
   align?: FontAlignModel;
   autoComplete?: string | false;

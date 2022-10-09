@@ -3,7 +3,7 @@ import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 
 export interface RouteHeaderPropsModel
-  extends WithTestIdModel,
-    Pick<PageModel, 'icon' | 'title' | 'paths'> {
+  extends Pick<PageModel, 'icon' | 'title' | 'paths'>,
+    WithTestIdModel {
   onBack?: CallableModel;
 }

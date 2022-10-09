@@ -1,9 +1,9 @@
 export const ACCESS_RESOURCE_NAME = 'Access';
 
 export enum ACCESS_ROLE {
-  ADMIN = 'ADMIN',
-  ANY = 'ANY',
-  USER = 'USER',
+  ADMIN = 'Admin',
+  ANY = 'Any',
+  USER = 'User',
 }
 
 export enum ACCESS_LEVEL {

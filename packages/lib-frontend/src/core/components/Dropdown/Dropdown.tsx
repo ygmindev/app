@@ -36,10 +36,9 @@ export const Dropdown: SFCModel<DropdownPropsModel> = ({
         border
         isFullWidth
         isShadow
-        mBottom={isTop}
         mLeft={isRight}
         mRight={isLeft}
-        mTop={!isTop}
+        mVertical
         round>
         <Wrapper
           grow

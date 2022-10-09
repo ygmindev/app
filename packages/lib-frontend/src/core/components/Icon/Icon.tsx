@@ -6,6 +6,7 @@ import { lazy } from '@lib/frontend/core/utils/lazy/lazy';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
 import { textStyler } from '@lib/frontend/styling/utils/styler/textStyler/textStyler';
+import { THEME_BASIC_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
 import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
 import { get } from 'lodash';
 import type { ComponentType } from 'react';
@@ -62,6 +63,7 @@ export const Icon: SFCModel<IconPropsModel> = ({
         isDisabled={isDisabled}
         isPressed={isPressed}
         onPress={onPress}
+        p={THEME_BASIC_SIZE.SMALL}
         style={inheritedStyles}
         testID={testID}
         to={{

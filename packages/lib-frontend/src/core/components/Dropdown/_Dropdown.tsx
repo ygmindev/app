@@ -3,9 +3,11 @@ import type { _DropdownPropsModel } from '@lib/frontend/core/components/Dropdown
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
+import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import Tippy from '@tippyjs/react';
 import { set } from 'lodash';
 import { View } from 'react-native';
+import type { Instance } from 'tippy.js';
 
 export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   anchor,
@@ -21,8 +23,21 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const theme = useTheme();
+
+  const _handleHide = debounce({
+    callback: (instance: Instance) => {
+      if (instance.state.isVisible) {
+        setTimeout(instance.hide, theme.animation.duration);
+        return false;
+      }
+    },
+    duration: theme.animation.duration,
+    isLeading: true,
+  });
+
   return (
     <Tippy
+      animation={false}
       appendTo={() => document.body}
       content={
         <Appear
@@ -31,18 +46,16 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
           {children}
         </Appear>
       }
-      delay={10}
-      duration={theme.animation.duration}
       ignoreAttributes
       interactive
       maxWidth={maxWidth || '100%'}
       offset={[0, 0]}
       onClickOutside={onClose}
+      onHide={_handleHide}
       placement={isLeft ? 'left' : isRight ? 'right' : isTop ? 'top' : 'bottom'}
       popperOptions={{
         modifiers: isFullWidth
           ? [
-              { enabled: false, name: 'flip' },
               {
                 enabled: true,
                 fn: ({ state }) =>
@@ -52,10 +65,10 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
                 requires: ['computeStyles'],
               },
             ]
-          : [{ enabled: false, name: 'flip' }],
+          : [],
       }}
       visible={isOpen}>
-      <View style={{ ...styles, alignSelf: 'center' }}>{anchor}</View>
+      <View style={styles}>{anchor}</View>
     </Tippy>
   );
 };

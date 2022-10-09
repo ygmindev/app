@@ -4,6 +4,7 @@ import type {
   UseFormModel,
   UseFormParamsModel,
 } from '@lib/frontend/core/hooks/useForm/useForm.models';
+import type { CallableModel } from '@lib/shared/core/core.models';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { get, isFunction, isPlainObject, isString, reduce, set, unset, values } from 'lodash';
@@ -20,19 +21,23 @@ export const useForm = <TType>({
     isCheckEmpty?: boolean,
   ): FormErrorModel<TType> =>
     reduce(
-      formValidators as unknown as Array<unknown>,
+      formValidators as Record<string, unknown>,
       (result, v, k) => {
         if (v) {
+          const _value = get(data, k);
           if (isPlainObject(v) && isPlainObject(data)) {
-            const error = _validate((data as Record<string, unknown>)[k], v);
+            const error = _validate(_value, v);
             return error && !isEmpty(error)
               ? merge<FormErrorModel<TType>>({ values: [error, result] })
               : result;
           }
           if (isFunction(v)) {
-            const value = get(data, k);
-            const error = isCheckEmpty ? isEmpty(value) : v(value);
-            error || (isString(error) && error.length) ? set(result, k, error) : unset(result, k);
+            const error = isCheckEmpty
+              ? isEmpty(_value)
+              : (v as CallableModel<Array<unknown>>)(_value);
+            error || (isString(error) && (error as string).length)
+              ? set(result, k, error)
+              : unset(result, k);
             return result;
           }
         }

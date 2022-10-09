@@ -2,11 +2,12 @@
   "labels": {
     "cancel": "TRANSLATION_MISSING",
     "continue": "TRANSLATION_MISSING",
-    "email": "TRANSLATION_MISSING",
     "noResult": "TRANSLATION_MISSING",
+    "remove": "TRANSLATION_MISSING",
     "submit": "TRANSLATION_MISSING"
   },
   "messages": {
+    "confirmRemove": "TRANSLATION_MISSING",
     "incorrectLength": "TRANSLATION_MISSING",
     "incorrectRange": "TRANSLATION_MISSING",
     "invalidDate": "TRANSLATION_MISSING",

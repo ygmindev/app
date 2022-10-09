@@ -15,7 +15,7 @@ export const Form: SFCModel<FormPropsModel> = ({
   isDisabled,
   isFullWidth,
   isLoading,
-  left,
+  leftElement: left,
   onClose,
   onReset,
   onSubmit,

@@ -9,6 +9,7 @@ import {
   THEME_COLOR,
   THEME_RELATIVE_COLOR,
 } from '@lib/frontend/styling/utils/theme/theme.constants';
+import { BOOLEAN_VALUE } from '@lib/shared/core/core.constants';
 import { Switch } from 'react-native-switch';
 
 export const _SwitchField: SFCModel<_SwitchFieldPropsModel> = ({
@@ -38,7 +39,9 @@ export const _SwitchField: SFCModel<_SwitchFieldPropsModel> = ({
         circleSize={25}
         disabled={isDisabled}
         innerCircleStyle={innerCircleStyle}
-        onValueChange={onChange}
+        onValueChange={(value) =>
+          onChange && onChange(value ? BOOLEAN_VALUE.TRUE : BOOLEAN_VALUE.FALSE)
+        }
         renderActiveText={false}
         renderInActiveText={false}
         renderInsideCircle={() => (
@@ -47,7 +50,7 @@ export const _SwitchField: SFCModel<_SwitchFieldPropsModel> = ({
             icon={value ? activeIcon : inactiveIncon}
           />
         )}
-        value={value}
+        value={value === BOOLEAN_VALUE.TRUE}
       />
     </Wrapper>
   );

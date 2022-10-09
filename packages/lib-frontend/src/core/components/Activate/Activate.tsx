@@ -17,8 +17,8 @@ export const Activate: FCModel<ActivatePropsModel> = ({
     _children && isPressable
       ? cloneElement(_children, {
           onPressIn: async () => {
-            const onPress = _children.props.onPressIn;
-            onPress && onPress();
+            const onPressIn = _children.props.onPressIn;
+            onPressIn && onPressIn();
             onActive && onActive();
             setIsActive(true);
           },

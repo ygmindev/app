@@ -5,10 +5,6 @@ import { exactLength } from '@lib/frontend/core/utils/validators/validators';
 import type { AlertDataModel } from '@lib/frontend/notification/components/Alert/Alert.models';
 import { OTP_LENGTH } from '@lib/shared/auth/resources/Otp/Otp.constants';
 
-export const OTP_FORM_INITIAL_VALUES: OtpFormModel = {
-  otp: '',
-};
-
 export const OTP_FORM_VALIDATORS: FormValidatorsModel<OtpFormModel> = {
   otp: exactLength(OTP_LENGTH),
 };

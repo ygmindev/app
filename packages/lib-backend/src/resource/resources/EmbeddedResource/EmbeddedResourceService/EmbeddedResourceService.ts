@@ -134,7 +134,7 @@ export const EmbeddedResourceService = <
             } as ProjectModel<TRoot>,
           },
         });
-        const result = rootResult && (rootResult[name] as unknown as TType[]);
+        const result = rootResult && (rootResult[name] as unknown as Array<TType>);
         const output: OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot> = {
           result: result && result[0],
           root: rootResult,
@@ -173,7 +173,7 @@ export const EmbeddedResourceService = <
                 ],
               },
         });
-        const result = rootResult && (rootResult[name] as unknown as TType[]);
+        const result = rootResult && (rootResult[name] as unknown as Array<TType>);
         const output: OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot> = {
           result:
             (skip || limit) && result?.length
@@ -240,7 +240,7 @@ export const EmbeddedResourceService = <
             {},
           ),
         });
-        const result = rootResult && (rootResult[name] as unknown as TType[]);
+        const result = rootResult && (rootResult[name] as unknown as Array<TType>);
         const output: OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot> = {
           result: result?.length ? result[0] : undefined,
           root: rootResult,
@@ -272,7 +272,7 @@ export const EmbeddedResourceService = <
     async count(input: WithRootModel<TRoot>): Promise<number> {
       if (input.root) {
         const { result: rootResult } = await this._rootService.get({ filter: input.root });
-        return (rootResult && (rootResult[name] as unknown as TType[]).length) || 0;
+        return (rootResult && (rootResult[name] as unknown as Array<TType>).length) || 0;
       }
       throw new NotFoundError(`${name} root`);
     }

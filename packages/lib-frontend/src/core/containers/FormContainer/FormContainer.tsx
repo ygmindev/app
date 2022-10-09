@@ -1,4 +1,5 @@
 import { Form } from '@lib/frontend/core/components/Form/Form';
+import { SelectField } from '@lib/frontend/core/components/SelectField/SelectField';
 import { TextField } from '@lib/frontend/core/components/TextField/TextField';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { FORM_CONTAINER_WIDTH } from '@lib/frontend/core/containers/FormContainer/FormContainer.constants';
@@ -16,20 +17,20 @@ import { flatten, get, isEqual, map, pick } from 'lodash';
 import type { ReactElement } from 'react';
 import { cloneElement, useCallback } from 'react';
 
-export const FormContainer = <TType, TKeys extends Array<string>[] = Array<string>[]>({
+export const FormContainer = <TType,>({
   closeLabel,
   initialValues,
   isAutoFocus,
   isFullWidth,
-  isLoading: isLoadingProps,
-  left,
+  isLoading,
+  leftElement,
   onClose,
   onSubmit,
   rows,
   testID,
   validators,
   ...props
-}: FormContainerPropsModel<TType, TKeys>): ReactElement<FormContainerPropsModel<TType, TKeys>> => {
+}: FormContainerPropsModel<TType>): ReactElement<FormContainerPropsModel<TType>> => {
   const { styles } = useStyles({ props });
   const { t } = useTranslation();
   const { alertAdd } = useAlert();
@@ -48,32 +49,60 @@ export const FormContainer = <TType, TKeys extends Array<string>[] = Array<strin
       : onSubmit && onSubmit(valuesPicked);
   };
 
-  const { errors, handleChange, handleSubmit, isLoading, values } = useForm<TType>({
+  const {
+    errors,
+    handleChange,
+    handleSubmit,
+    isLoading: isFormLoading,
+    values,
+  } = useForm<TType>({
     initialValues,
     onSubmit: _handleSubmit,
     validators,
   });
 
-  const _isLoading = isLoading || isLoadingProps;
+  const _isLoading = isFormLoading || isLoading || false;
 
   const _getField = useCallback(
-    <TKey extends string>({
+    ({
       autoComplete,
       icon,
       id,
       isAutoFocus,
       isDisabled,
       label,
+      options,
       render,
       type,
-    }: FormContainerFieldModel<TType, TKey>) =>
+    }: FormContainerFieldModel) =>
       render ? (
-        cloneElement(render({ errors, handleChange, handleSubmit, isLoading, values }), { key: id })
+        cloneElement(
+          render({
+            defaultValue: get(initialValues, id),
+            error: get(errors, id),
+            isAutoFocus,
+            isDisabled: _isLoading || isDisabled,
+            onChange: handleChange(id),
+            value: get(values, id),
+          }),
+          { key: id },
+        )
+      ) : options ? (
+        <SelectField
+          defaultValue={get(initialValues, id)}
+          error={get(errors, id)}
+          icon={icon}
+          isAutoFocus={isAutoFocus}
+          key={id}
+          label={label}
+          onChange={handleChange(id)}
+          options={options}
+        />
       ) : (
         <TextField
           autoComplete={autoComplete}
           defaultValue={get(initialValues, id)}
-          error={get(errors, id) || undefined}
+          error={get(errors, id)}
           icon={icon}
           isAutoFocus={isAutoFocus}
           isDisabled={_isLoading || isDisabled}
@@ -85,7 +114,7 @@ export const FormContainer = <TType, TKeys extends Array<string>[] = Array<strin
           value={get(values, id)}
         />
       ),
-    [values, errors, handleChange, handleSubmit, initialValues, _isLoading, isLoading],
+    [values, errors, handleChange, handleSubmit, initialValues, _isLoading],
   );
 
   const fieldComponents = map(rows, (row, i) => (
@@ -112,7 +141,7 @@ export const FormContainer = <TType, TKeys extends Array<string>[] = Array<strin
         closeLabel={closeLabel}
         isFullWidth={isFullWidth}
         isLoading={_isLoading}
-        left={left}
+        leftElement={leftElement}
         onClose={onClose}
         onSubmit={async () => handleSubmit()}>
         {fieldComponents}

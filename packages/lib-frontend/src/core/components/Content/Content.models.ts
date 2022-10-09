@@ -9,7 +9,7 @@ export interface ContentPropsModel
     WrapperPropsModel,
     WithChildrenPropsModel,
     WithTestIdModel {
-  header?: ReactNode;
   isFullSize?: boolean;
+  rightElement?: ReactNode;
   title?: string;
 }

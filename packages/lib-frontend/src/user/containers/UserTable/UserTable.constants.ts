@@ -5,7 +5,7 @@ import type { UserFormModel, UserModel } from '@lib/shared/user/resources/User/U
 
 export const USER_TABLE_PROPS: EntityResourceTablePropsModel<UserModel, UserFormModel> = {
   columns: [
-    ...ENTITY_RESOURCE_COLUMNS,
+    ...ENTITY_RESOURCE_COLUMNS.map((column) => ({ ...column, isHidden: true })),
     { id: 'first', label: ({ t }) => t('user:labels.first') },
     { id: 'last', label: ({ t }) => t('user:labels.last') },
     { id: 'email', label: ({ t }) => t('user:labels.email') },
@@ -18,5 +18,6 @@ export const USER_TABLE_PROPS: EntityResourceTablePropsModel<UserModel, UserForm
       ],
     },
   ],
+
   name: USER_RESOURCE_NAME,
 };

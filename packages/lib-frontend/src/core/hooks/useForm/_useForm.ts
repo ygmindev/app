@@ -24,7 +24,7 @@ export const _useForm = <TType>({
     setValues,
     values,
   } = useFormik<TType & FormikValues>({
-    initialValues: initialValues as TType & FormikValues,
+    initialValues: initialValues || ({} as TType & FormikValues),
     onSubmit: async (data) => {
       try {
         onSubmit && (await promisify(onSubmit)(data));

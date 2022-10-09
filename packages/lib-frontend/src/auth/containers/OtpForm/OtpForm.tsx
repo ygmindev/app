@@ -1,7 +1,6 @@
 import { OtpField } from '@lib/frontend/auth/components/OtpField/OtpField';
 import {
   OTP_ALERT,
-  OTP_FORM_INITIAL_VALUES,
   OTP_FORM_VALIDATORS,
 } from '@lib/frontend/auth/containers/OtpForm/OtpForm.constants';
 import type { OtpFormPropsModel } from '@lib/frontend/auth/containers/OtpForm/OtpForm.models';
@@ -26,7 +25,6 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({ onBack, onSubmit, stepsDa
   const { create } = useSignInResourceResource();
 
   const { errors, handleChange, handleReset, handleSubmit, isLoading, values } = useForm({
-    initialValues: OTP_FORM_INITIAL_VALUES,
     onSubmit: async ({ otp }) => {
       try {
         const username = stepsData && stepsData.username;

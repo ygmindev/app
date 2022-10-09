@@ -5,7 +5,6 @@ import { AuthMenu } from '@lib/frontend/auth/containers/AuthMenu/AuthMenu';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { THEME_BASIC_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
 
 export const AppHeader: SFCModel<AppHeaderPropsModel> = ({ testID, ...props }) => {
   const { styles } = useStyles({ props });
@@ -13,7 +12,7 @@ export const AppHeader: SFCModel<AppHeaderPropsModel> = ({ testID, ...props }) =
     <Wrapper
       height={APP_HEADER_HEIGHT}
       isRowAlign
-      p={THEME_BASIC_SIZE.SMALL}
+      mHorizontal
       style={styles}
       testID={testID}>
       <Wrapper

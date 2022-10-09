@@ -6,6 +6,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useField } from '@lib/frontend/core/hooks/useField/useField';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
+import type { BooleanValueModel } from '@lib/shared/core/core.models';
 
 export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
   activeIcon = ICON.check,
@@ -19,8 +20,8 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
   ...props
 }) => {
   const { styles } = useStyles({ props });
-  const { fieldValue, setFieldValue } = useField<boolean>({
-    defaultValue: defaultValue || false,
+  const { fieldValue, setFieldValue } = useField<BooleanValueModel>({
+    defaultValue,
     onChange,
     value,
   });

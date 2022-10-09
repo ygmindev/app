@@ -7,10 +7,9 @@ import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
 export interface SignInFormModel extends UsernameFormModel, OtpFormModel {}
 
 export interface SignInFormPropsModel
-  extends WithTestIdModel,
+  extends WithSubmitPropsModel<SignInFormModel>,
     WithStyleParamsModel,
-    // Pick<StepsPropsModel<SignInFormModel>, 'tracking'>,
-    WithSubmitPropsModel<SignInFormModel> {
+    WithTestIdModel {
   isActive?: boolean;
   isCheckIfNotExists?: boolean;
 }

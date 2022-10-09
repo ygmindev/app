@@ -6,16 +6,17 @@ import { _TextField } from '@lib/frontend/core/components/TextField/_TextField';
 import { TEXT_FIELD_TYPE } from '@lib/frontend/core/components/TextField/TextField.constants';
 import type { TextFieldPropsModel } from '@lib/frontend/core/components/TextField/TextField.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useField } from '@lib/frontend/core/hooks/useField/useField';
 import { useIsMounted } from '@lib/frontend/core/hooks/useIsMounted/useIsMounted';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
-import { isFunction, isString, size, toNumber, toString } from 'lodash';
+import { isFunction, isString, size, toString } from 'lodash';
 import type { ReactElement } from 'react';
 import { useCallback, useRef, useState } from 'react';
 import type { TextInput } from 'react-native';
 
-export const TextField = <TType,>({
+export const TextField: SFCModel<TextFieldPropsModel> = ({
   defaultValue,
   error,
   forwardedRef,
@@ -23,29 +24,29 @@ export const TextField = <TType,>({
   isDisabled,
   isNoClear,
   label,
-  left,
+  leftElement,
   onBlur,
   onChange,
   onFocus,
-  right,
+  rightElement,
   type,
   value,
   width,
   ...props
-}: TextFieldPropsModel<TType>): ReactElement<TextFieldPropsModel<TType>> => {
+}: TextFieldPropsModel): ReactElement<TextFieldPropsModel> => {
   const inputRef = useRef<TextInput>(null);
   const theme = useTheme();
   const transition = theme.animation.transition;
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
-  const { fieldValue, setFieldValue } = useField<TType>({ defaultValue, onChange, value });
+  const { fieldValue, setFieldValue } = useField({ defaultValue, onChange, value });
   const _value = toString(fieldValue);
 
-  const leftElement = isFunction(left) ? left(isFocused) : left;
-  let rightElement = isFunction(right) ? right(isFocused) : right;
+  const _leftElement = isFunction(leftElement) ? leftElement(isFocused) : leftElement;
+  let _rightElement = isFunction(rightElement) ? rightElement(isFocused) : rightElement;
 
   if (!isDisabled && !isNoClear) {
-    rightElement = (
+    _rightElement = (
       <Wrapper isRowAlign>
         <Appear
           isCenter
@@ -55,16 +56,16 @@ export const TextField = <TType,>({
             onPress={() => _handleChange('')}
           />
         </Appear>
-        {rightElement}
+        {_rightElement}
       </Wrapper>
     );
   }
 
   if (error && (isString(error) || isFunction(error))) {
-    rightElement = (
+    _rightElement = (
       <Wrapper isRowAlign>
         {(isFunction(error) || isString(error)) && <ErrorTooltip error={error} />}
-        {rightElement}
+        {_rightElement}
       </Wrapper>
     );
   }
@@ -100,27 +101,24 @@ export const TextField = <TType,>({
       case TEXT_FIELD_TYPE.NUMBER:
       case TEXT_FIELD_TYPE.TEL: {
         if (/^\d*$/.test(newValue)) {
-          const valueTyped = newValue === '' ? undefined : toNumber(newValue);
-          setFieldValue(valueTyped as unknown as TType);
+          setFieldValue(newValue);
         }
         break;
       }
       case TEXT_FIELD_TYPE.NUMBER_POSITIVE: {
         if (/^([1-9]+\d*)?$/.test(newValue)) {
-          const valueTyped = newValue === '' ? undefined : toNumber(newValue);
-          setFieldValue(valueTyped as unknown as TType);
+          setFieldValue(newValue);
         }
         break;
       }
       case TEXT_FIELD_TYPE.DECIMAL: {
         if (/^\d*\.?\d*$/.test(newValue)) {
-          const valueTyped = newValue === '' ? undefined : toNumber(newValue);
-          setFieldValue(valueTyped as unknown as TType);
+          setFieldValue(newValue);
         }
         break;
       }
       default: {
-        setFieldValue(newValue as unknown as TType);
+        setFieldValue(newValue);
         break;
       }
     }
@@ -134,7 +132,7 @@ export const TextField = <TType,>({
       isDisabled={isDisabled}
       isFocused={isFocused}
       label={label}
-      left={leftElement}
+      left={_leftElement}
       onBlur={async () => {
         onBlur && onBlur();
         await _setIsFocused(false);
@@ -145,7 +143,7 @@ export const TextField = <TType,>({
         onFocus && onFocus();
         await _setIsFocused(true);
       }}
-      right={rightElement}
+      right={_rightElement}
       type={type}
       value={_value}
       width={width}

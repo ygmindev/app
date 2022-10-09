@@ -17,6 +17,7 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
 import { promisify } from '@lib/shared/core/utils/promisify/promisify';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { isFunction } from 'lodash';
 import { cloneElement, useImperativeHandle, useState } from 'react';
 
@@ -42,11 +43,11 @@ export const Menu: SFCModel<MenuPropsModel> = ({
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const _handleClose = (): unknown =>
-    setTimeout(() => {
-      setIsOpen(false);
-      onClose && onClose();
-    }, theme.animation.duration);
+  const _handleClose = async (): Promise<void> => {
+    await sleep({ duration: theme.animation.duration });
+    setIsOpen(false);
+    onClose && onClose();
+  };
 
   let anchorPress = isFunction(anchor) ? anchor(isOpen) : anchor;
   const _onPress = anchorPress.props.onPress;
@@ -57,8 +58,8 @@ export const Menu: SFCModel<MenuPropsModel> = ({
     },
   });
 
-  const _handlePress = (option: SelectOptionModel): void => {
-    option.onPress ? option.onPress() : onChange && onChange(option.id);
+  const _handlePress = ({ id, onPress }: SelectOptionModel): void => {
+    (onPress && onPress()) || (onChange && onChange(id));
     _handleClose();
   };
 
@@ -83,7 +84,7 @@ export const Menu: SFCModel<MenuPropsModel> = ({
           isDisabled={isDisabled}
           isFullWidth
           isTransparent
-          key={option.id}
+          key={id}
           onPress={() => _handlePress(option as SelectOptionModel)}
           // right={
           //   value === id && (

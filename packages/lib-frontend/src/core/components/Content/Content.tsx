@@ -6,8 +6,8 @@ import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 
 export const Content: SFCModel<ContentPropsModel> = ({
   children,
-  header,
   icon,
+  rightElement,
   testID,
   title,
   ...props
@@ -19,16 +19,21 @@ export const Content: SFCModel<ContentPropsModel> = ({
       spacing
       style={styles}
       testID={testID}>
-      {(title || header) && (
+      {(title || rightElement) && (
         <Wrapper isRowAlign>
           {title && (
-            <IconText
-              icon={icon}
-              isSubtitle>
-              {title}
-            </IconText>
+            <Wrapper
+              grow
+              isRowAlign>
+              <IconText
+                icon={icon}
+                isStylish
+                isSubtitle>
+                {title}
+              </IconText>
+            </Wrapper>
           )}
-          {header}
+          {rightElement}
         </Wrapper>
       )}
       {children}

@@ -1,3 +1,6 @@
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { Content } from '@lib/frontend/core/components/Content/Content';
+import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Table } from '@lib/frontend/core/components/Table/Table';
 import { TABLE_SELECT_TYPE } from '@lib/frontend/core/components/Table/Table.constants';
 import type { TableRefModel } from '@lib/frontend/core/components/Table/Table.models';
@@ -27,9 +30,10 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
   EntityResourceTablePropsModel<TType, TForm>
 > => {
   const { styles } = useStyles({ props });
-  useTranslation([RESOURCE]);
+  const { t } = useTranslation([RESOURCE]);
 
-  const ref = useRef<TableRefModel<TType>>(null);
+  const ref = useRef<TableRefModel>(null);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>();
   const [selectedRows, setSelectedRows] = useState<Array<TType> | undefined>();
 
   const { query: getConnection } = useResourceMethod<
@@ -39,7 +43,7 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
   >({ fields, method: RESOURCE_METHOD_TYPE.GET_CONNECTION, name });
 
   const { data, queryNext } = useQueryConnection<TType>({
-    cache: 5 * 60 * 1000,
+    cache: true,
     id: `${name}${RESOURCE_METHOD_TYPE.GET_CONNECTION}`,
     limit,
     query: async (params) => {
@@ -60,27 +64,40 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
       grow
       style={styles}
       testID={testID}>
-      <Table<TType>
-        columns={columns}
-        data={reduce<ConnectionModel<TType> | null, Array<TType>>(
-          data?.pages,
-          (result, page) => [...result, ...(page?.edges.map(({ node }) => node) || [])],
-          [],
-        )}
-        forwardedRef={ref}
-        onSelect={setSelectedRows}
-        select={TABLE_SELECT_TYPE.SINGLE}
-      />
+      <Content
+        grow
+        rightElement={
+          <Button
+            icon={ICON.add}
+            onPress={() => setIsCreateModalOpen(true)}>
+            {t('resource:labels.create')}
+          </Button>
+        }
+        title={name}>
+        <Table<TType>
+          columns={columns}
+          data={reduce<ConnectionModel<TType> | null, Array<TType>>(
+            data?.pages,
+            (result, page) => [...result, ...(page?.edges.map(({ node }) => node) || [])],
+            [],
+          )}
+          forwardedRef={ref}
+          onSelect={setSelectedRows}
+          select={TABLE_SELECT_TYPE.SINGLE}
+        />
 
-      <EntityResourceModal<TType, TForm>
-        data={selectedRows ? selectedRows[0] : undefined}
-        isOpen={selectedRows && selectedRows.length === 1}
-        name={name}
-        onClose={() => {
-          setSelectedRows(undefined);
-          ref.current?.deselectRows();
-        }}
-      />
+        <EntityResourceModal<TType, TForm>
+          columns={columns}
+          data={selectedRows ? selectedRows[0] : undefined}
+          isOpen={isCreateModalOpen || (selectedRows && selectedRows.length === 1)}
+          name={name}
+          onClose={() => {
+            setSelectedRows(undefined);
+            ref.current?.deselectRows();
+            setIsCreateModalOpen(false);
+          }}
+        />
+      </Content>
     </Wrapper>
   );
 };

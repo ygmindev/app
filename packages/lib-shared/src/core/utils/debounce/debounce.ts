@@ -5,5 +5,10 @@ import { debounce as _debounce } from 'lodash';
 export const debounce = <TParams extends Array<unknown> = never, TResult = void>({
   callback,
   duration = 0,
+  isLeading = false,
 }: DebounceParamsModel<TParams, TResult>): CallableModel<TParams, TResult | undefined> =>
-  _debounce(callback, duration, { leading: false, trailing: true });
+  _debounce(
+    callback,
+    duration,
+    isLeading ? { leading: true, trailing: false } : { leading: false, trailing: true },
+  );

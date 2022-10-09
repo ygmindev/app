@@ -34,7 +34,7 @@ export type TableColumnFormatterModel<TType, TValue> = (params: {
   value: TValue;
 }) => string;
 
-export interface TableRefModel<TType> {
+export interface TableRefModel {
   deselectRows: CallableModel;
 }
 

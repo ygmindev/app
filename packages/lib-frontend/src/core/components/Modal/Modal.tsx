@@ -6,14 +6,14 @@ import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { FCModel } from '@lib/frontend/core/core.models';
-import { lazy } from '@lib/frontend/core/utils/lazy/lazy';
 import { KeyboardProvider } from '@lib/frontend/root/providers/KeyboardProvider/KeyboardProvider';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
 import { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants';
-import { THEME_RELATIVE_COLOR } from '@lib/frontend/styling/utils/theme/theme.constants';
+import {
+  THEME_RELATIVE_COLOR,
+  THEME_SIZE,
+} from '@lib/frontend/styling/utils/theme/theme.constants';
 import { isString } from 'lodash';
-
-const { Press } = lazy(() => import('@lib/frontend/core/components/Press/Press'));
 
 export const Modal: FCModel<ModalPropsModel> = ({
   children,
@@ -69,15 +69,13 @@ export const Modal: FCModel<ModalPropsModel> = ({
                   {isString(header) ? <Text isTitle>{header}</Text> : header}
                 </Wrapper>
                 {onClose && (
-                  <Press
+                  <Icon
+                    color={isDisabled ? THEME_RELATIVE_COLOR.MUTED : undefined}
+                    icon={ICON.times}
                     isDisabled={isDisabled}
-                    onPress={onClose}>
-                    <Icon
-                      color={isDisabled ? THEME_RELATIVE_COLOR.MUTED : undefined}
-                      icon={ICON.times}
-                      size="l"
-                    />
-                  </Press>
+                    onPress={onClose}
+                    size={THEME_SIZE.LARGE}
+                  />
                 )}
               </Wrapper>
               <Wrapper

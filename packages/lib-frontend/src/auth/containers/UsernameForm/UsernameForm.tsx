@@ -1,7 +1,6 @@
 import { USER_EXISTS_ALERT } from '@lib/frontend/auth/containers/OtpForm/OtpForm.constants';
 import {
   USERNAME_FORM_FIELDS,
-  USERNAME_FORM_INITIAL_VALUES,
   USERNAME_FORM_VALIDATORS,
 } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.constants';
 import type {
@@ -50,7 +49,6 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
       testID={testID}>
       <CenterLayout>
         <FormContainer
-          initialValues={USERNAME_FORM_INITIAL_VALUES}
           isFullWidth
           onSubmit={_handleSubmit}
           rows={USERNAME_FORM_FIELDS}

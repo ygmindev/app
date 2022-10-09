@@ -3,15 +3,13 @@ import type { FormErrorModel } from '@lib/frontend/core/hooks/useForm/useForm.mo
 import type { CallableModel } from '@lib/shared/core/core.models';
 
 export interface _UseFormParamsModel<TType> extends Pick<WithSubmitPropsModel<TType>, 'onSubmit'> {
-  initialValues: TType;
+  initialValues?: TType;
   onValidate?(data: TType): FormErrorModel<TType>;
 }
 
 export interface _UseFormModel<TType> {
   errors: FormErrorModel<TType>;
-  // TODO: fix autopath
-  // handleChange<TKey extends string>(key: PathModel<TType, TKey>): (value: unknown) => void;
-  handleChange<TKey extends string>(key: TKey): (value: unknown) => void;
+  handleChange(key: string): (value: string) => void;
   handleReset: CallableModel;
   handleSubmit: CallableModel;
   isLoading: boolean;

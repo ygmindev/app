@@ -18,11 +18,10 @@ export const Rotate: SFCModel<RotatePropsModel> = ({ children, testID, x, y, z, 
   });
   return (
     <Wrapper
+      animation={{ transition: ['rotateX', 'rotateY', 'rotateZ'] }}
+      isCenter
       style={styles}
-      testID={testID}
-      // TODO: fix this
-      // animation={{ transition: ['rotateX', 'rotateY', 'rotateZ'] }}
-    >
+      testID={testID}>
       {children}
     </Wrapper>
   );

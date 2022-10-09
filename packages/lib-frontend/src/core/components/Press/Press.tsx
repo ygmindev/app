@@ -65,6 +65,7 @@ export const Press: SFCModel<PressPropsModel> = ({
         {(isActive) => (
           <Wrapper
             animation={{ transition: ['backgroundColor'] }}
+            p
             {...props}
             isCenter={isCenter}
             isFullWidth={isFullWidth}
@@ -78,7 +79,6 @@ export const Press: SFCModel<PressPropsModel> = ({
             }
             onPressIn={onPressIn}
             onPressOut={onPressOut}
-            p
             round
             style={
               [styles, !isDisabled && (isActive || isPressed) ? _to : _from].filter(

@@ -84,7 +84,7 @@ export const _Table = <TType,>({
     const isSelection = select !== undefined && i === 0;
     const definition: ColDef = {
       checkboxSelection: isSelection,
-      field: id,
+      field: id as string,
       flex,
       headerCheckboxSelection: isSelection,
       headerCheckboxSelectionFilteredOnly: isSelection,

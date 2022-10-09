@@ -7,6 +7,6 @@ import type { ReactNode } from 'react';
 export interface FormPropsModel extends _FormPropsModel, WithStyleParamsModel, WithTestIdModel {
   isDisabled?: boolean;
   isFullWidth?: boolean;
-  left?: ReactNode;
+  leftElement?: ReactNode;
   onReset?: CallableModel;
 }

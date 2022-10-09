@@ -1,0 +1,4 @@
+export enum ENTITY_RESOURCE_MODAL_MODE {
+  CREATE = 'CREATE',
+  UPDATE = 'UPDATE',
+}

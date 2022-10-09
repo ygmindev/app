@@ -105,7 +105,7 @@ export enum FONTAWESOME_ICON {
 }
 
 export const IONIC_ICONS: Record<IONICON_ICON, string> = {
-  add: 'add-outline',
+  add: 'add-circle-outline',
   alarm: 'alarm-outline',
   analytics: 'analytics-outline',
   app: 'extension-puzzle-outline',

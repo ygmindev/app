@@ -130,7 +130,7 @@ export abstract class _Database implements DatabaseModel {
                 _filter,
                 options && { limit: options.take, projection: options.project, skip: options.skip },
               )
-              .toArray())) as TType[];
+              .toArray())) as Array<TType>;
         return { result: result || undefined };
       },
 

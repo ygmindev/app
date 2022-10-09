@@ -6,18 +6,18 @@ import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useField } from '@lib/frontend/core/hooks/useField/useField';
 
 export const SearchField: SFCModel<SearchFieldPropsModel> = ({
+  defaultValue,
   onChange,
   testID,
   value,
   ...props
 }) => {
-  const { fieldValue, setFieldValue } = useField({ defaultValue: '', onChange, value });
+  const { fieldValue, setFieldValue } = useField({ defaultValue, onChange, value });
   return (
     <TextField
       {...props}
-      defaultValue=""
       onChange={setFieldValue}
-      right={<Icon icon={ICON.search} />}
+      rightElement={<Icon icon={ICON.search} />}
       testID={testID}
       value={fieldValue}
     />

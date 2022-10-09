@@ -1,10 +1,9 @@
-export interface UseFieldParamsModel<TType> {
-  defaultValue: TType;
-  onChange?: (value: TType) => unknown;
-  value?: TType;
-}
+import type { WithFieldPropsModel } from '@lib/frontend/core/decorators/withFieldProps/withFieldProps.models';
 
-export interface UseFieldModel<TType> {
+export interface UseFieldParamsModel<TType extends string = string>
+  extends Pick<WithFieldPropsModel<TType>, 'defaultValue' | 'onChange' | 'value'> {}
+
+export interface UseFieldModel<TType extends string = string> {
   fieldValue: TType;
-  setFieldValue(value: TType): unknown;
+  setFieldValue(value: TType): void;
 }

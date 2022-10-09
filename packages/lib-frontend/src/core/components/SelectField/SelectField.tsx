@@ -3,7 +3,7 @@ import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Menu } from '@lib/frontend/core/components/Menu/Menu';
 import type { MenuRefModel } from '@lib/frontend/core/components/Menu/Menu.models';
 import { Rotate } from '@lib/frontend/core/components/Rotate/Rotate';
-import type { SelectWithFieldPropsModel } from '@lib/frontend/core/components/SelectField/SelectField.models';
+import type { SelectFieldPropsModel } from '@lib/frontend/core/components/SelectField/SelectField.models';
 import { TextField } from '@lib/frontend/core/components/TextField/TextField';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
@@ -13,16 +13,15 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { find } from 'lodash';
-import { useCallback, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
-export const SelectField: SFCModel<SelectWithFieldPropsModel> = ({
+export const SelectField: SFCModel<SelectFieldPropsModel> = ({
   defaultValue,
   error,
   icon,
   isAutoFocus,
   isDisabled,
   label,
-  left,
   onChange,
   onSubmit,
   options,
@@ -37,25 +36,18 @@ export const SelectField: SFCModel<SelectWithFieldPropsModel> = ({
   const menuRef = useRef<MenuRefModel>(null);
   const { t } = useTranslation();
 
-  const [query, setQuery] = useState<string>('');
-  const { fieldValue, setFieldValue } = useField({
-    defaultValue: defaultValue || '',
-    onChange,
-    value,
-  });
+  const [query, setQuery] = useState<string>();
+  const { fieldValue, setFieldValue } = useField({ defaultValue, onChange, value });
 
   const { result, search } = useSearch({ keys: ['label', 'value'], list: options });
 
-  const _handleToggle = useCallback(
-    (isOpen: boolean) => {
-      search('');
-      setQuery('');
-      menuRef && menuRef.current && menuRef.current.setIsOpen(isOpen);
-    },
-    [search, menuRef],
-  );
+  const _handleToggle = (isOpen: boolean): void => {
+    search('');
+    setQuery('');
+    menuRef && menuRef.current && menuRef.current.setIsOpen(isOpen);
+  };
 
-  const _handleSelect = useCallback(async () => {
+  const _handleSelect = async (): Promise<void> => {
     const selected = result && result[0];
     const selectedValue = selected.id;
     if (selectedValue) {
@@ -64,9 +56,10 @@ export const SelectField: SFCModel<SelectWithFieldPropsModel> = ({
     }
     await sleep();
     _handleToggle(false);
-  }, [_handleToggle, setFieldValue, onSubmit, result]);
+  };
 
   const _handleChange = (value: string): void => {
+    console.warn(value);
     setQuery(value);
     search(value);
   };
@@ -80,15 +73,6 @@ export const SelectField: SFCModel<SelectWithFieldPropsModel> = ({
       ? renderOption(selectedOption)
       : selectedOption.label
     : undefined;
-
-  const leftComponent = (left || (selectedOption && selectedOption.icon)) && (
-    <Wrapper
-      isCenter
-      isRowAlign>
-      {/* {left} */}
-      {selectedOption && selectedOption.icon && <Icon icon={selectedOption.icon} />}
-    </Wrapper>
-  );
 
   return (
     <Wrapper
@@ -104,12 +88,14 @@ export const SelectField: SFCModel<SelectWithFieldPropsModel> = ({
             isDisabled={isDisabled}
             isNoClear
             label={label}
-            left={leftComponent}
+            leftElement={
+              selectedOption && selectedOption.icon && <Icon icon={selectedOption.icon} />
+            }
             onBlur={() => _handleToggle(false)}
             onChange={_handleChange}
             onFocus={() => _handleToggle(true)}
             onSubmit={_handleSelect}
-            right={(isFocused: boolean) => (
+            rightElement={(isFocused) => (
               <Rotate z={isFocused ? -180 : 0}>
                 <Icon icon={ICON.chevronDown} />
               </Rotate>
@@ -120,7 +106,12 @@ export const SelectField: SFCModel<SelectWithFieldPropsModel> = ({
         )}
         forwardedRef={menuRef}
         isFullWidth
-        onChange={isDisabled ? undefined : setFieldValue}
+        // onChange={isDisabled ? undefined : setFieldValue}
+        onChange={(value) => {
+          console.warn(value);
+          setFieldValue(value);
+          isDisabled ? undefined : setFieldValue(value);
+        }}
         onClose={() => _handleToggle(false)}
         options={result}
         renderOption={renderOption}
