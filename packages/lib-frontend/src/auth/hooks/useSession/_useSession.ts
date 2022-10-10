@@ -68,8 +68,9 @@ export const _useSession = (): _UseSessionModel => ({
     }
   },
 
-  signInWithToken: async (token: string): Promise<unknown> =>
-    _auth && signInWithCustomToken(_auth, token),
+  signInWithToken: async (token: string): Promise<void> => {
+    _auth && (await signInWithCustomToken(_auth, token));
+  },
 
-  signOut: async (): Promise<unknown> => _auth && signOut(_auth),
+  signOut: async (): Promise<void> => _auth && signOut(_auth),
 });

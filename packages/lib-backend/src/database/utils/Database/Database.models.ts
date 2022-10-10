@@ -16,9 +16,9 @@ export interface DatabaseParamsModel {
 }
 
 export interface DatabaseModel {
-  initialize(): Promise<void>;
   close(): Promise<void>;
   getRepository<TType>(params: WithResourceNameModel): RepositoryModel<TType>;
+  initialize(): Promise<void>;
 }
 
 export interface RepositoryModel<TType> extends ResourceServiceModel<TType, TType> {

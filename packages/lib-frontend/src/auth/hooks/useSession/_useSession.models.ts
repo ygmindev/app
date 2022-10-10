@@ -4,7 +4,7 @@ export interface _UseSessionParamsModel {}
 
 export interface _UseSessionModel {
   getToken(): Promise<string | null>;
-  initialize(onAuth: (signInToken: SignInTokenModel | null) => Promise<unknown>): Promise<unknown>;
-  signInWithToken(token: string): Promise<unknown>;
-  signOut(): Promise<unknown>;
+  initialize(onAuth: (signInToken: SignInTokenModel | null) => Promise<void>): Promise<void>;
+  signInWithToken(token: string): Promise<void>;
+  signOut(): Promise<void>;
 }

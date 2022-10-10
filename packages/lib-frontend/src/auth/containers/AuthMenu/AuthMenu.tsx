@@ -4,7 +4,7 @@ import { useSignInResourceResource } from '@lib/frontend/auth/hooks/useSignInRes
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Menu } from '@lib/frontend/core/components/Menu/Menu';
-import type { SelectOptionModel } from '@lib/frontend/core/components/SelectField/SelectField.models';
+import type { SelectOptionModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useSelector } from '@lib/frontend/root/hooks/useSelector/useSelector';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';

@@ -55,7 +55,7 @@ export const EmbeddedResourceService = <
     return { ...input, form: value };
   };
 
-  const _getCondition = (value: unknown): unknown => {
+  const _getCondition = (value: FilterModel<TType>): FilterModel<object> => {
     if (isEmpty(value)) {
       return {};
     }

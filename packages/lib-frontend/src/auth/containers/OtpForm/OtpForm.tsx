@@ -9,8 +9,8 @@ import { AsyncWrapper } from '@lib/frontend/core/components/AsyncWrapper/AsyncWr
 import { Link } from '@lib/frontend/core/components/Link/Link';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useForm } from '@lib/frontend/core/hooks/useForm/useForm';
 import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayout';
+import { useForm } from '@lib/frontend/form/hooks/useForm/useForm';
 import { Trans } from '@lib/frontend/locale/components/Trans/Trans';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useAlert } from '@lib/frontend/notification/hooks/useAlert/useAlert';

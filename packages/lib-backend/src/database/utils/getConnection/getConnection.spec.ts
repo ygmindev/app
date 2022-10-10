@@ -9,6 +9,8 @@ import { filter as _filter, map } from 'lodash';
 const { displayName } = withTest({ target: () => getConnection });
 
 describe(displayName, () => {
+  const LIMIT = 3;
+
   const entities: Array<DummyEntityResourceFormModel> = [
     { stringProperty: 'stringProperty' },
     { stringProperty: 'stringProperty' },
@@ -23,7 +25,7 @@ describe(displayName, () => {
       count: entities.length,
       filter: {},
       getMany: async ({ filter }) => ({ result: _filter(entities, filter) }),
-      pagination: {},
+      pagination: { first: LIMIT },
     });
     expect(map(result?.edges, 'node')).toStrictEqual(entities);
   });
@@ -36,7 +38,7 @@ describe(displayName, () => {
       getMany: async ({ filter }) => ({
         result: _filter(entities, filter) as Array<DummyEntityResourceModel>,
       }),
-      pagination: {},
+      pagination: { first: LIMIT },
     });
     const expected = _filter(entities, filter);
     expect(map(result?.edges, 'node')).toStrictEqual(expected);

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 export const useIsMounted = (
   { onMount, onUnmount }: UseIsMountedParamsModel = {},
-  deps?: unknown[],
+  deps?: Array<unknown>,
 ): boolean => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   useEffect(() => {

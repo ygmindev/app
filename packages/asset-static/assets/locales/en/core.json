@@ -8,7 +8,7 @@
   },
   "messages": {
     "confirmRemove": "Are you sure you want to remove?",
-    "incorrectLength": "TRANSLATION_MISSING",
+    "incorrectLength": "Value must have length {{value}}",
     "incorrectRange": "TRANSLATION_MISSING",
     "invalidDate": "TRANSLATION_MISSING",
     "invalidEmailAddress": "TRANSLATION_MISSING",

@@ -2,8 +2,8 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { FormContainer } from '@lib/frontend/core/containers/FormContainer/FormContainer';
-import type { FormContainerRowModel } from '@lib/frontend/core/containers/FormContainer/FormContainer.models';
+import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
+import type { FormContainerRowModel } from '@lib/frontend/form/containers/FormContainer/FormContainer.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import type { EntityResourceModalPropsModel } from '@lib/frontend/resource/components/EntityResourceModal/EntityResourceModal.models';
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
@@ -63,7 +63,7 @@ export const EntityResourceModal = <TType extends EntityResourceModel, TForm>({
               </Button>
             )
           }
-          onClose={onClose}
+          onCancel={onClose}
           onSubmit={_handleSubmit}
           rows={withId(
             columns.map(

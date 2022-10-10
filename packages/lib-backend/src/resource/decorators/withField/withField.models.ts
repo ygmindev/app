@@ -4,7 +4,7 @@ export type FieldTypeModel = `${FIELD_TYPE}`;
 
 export interface WithFieldParamsModel<TType> {
   Resource?: TType;
-  defaultValue?(): unknown;
+  defaultValue?(): TType;
   expire?: number;
   isArray?: boolean;
   isOptional?: boolean;

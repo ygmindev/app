@@ -11,7 +11,7 @@ export const withCondition =
   (condition: boolean, ifTrue?: _WithConditionResultModel, ifFalse?: _WithConditionResultModel) =>
   (...params: Array<unknown>): void =>
     ifTrue && condition
-      ? (ifTrue as CallableModel<unknown[]>)(...params)
+      ? (ifTrue as CallableModel<Array<unknown>>)(...params)
       : ifFalse && !condition
-      ? (ifFalse as CallableModel<unknown[]>)(...params)
+      ? (ifFalse as CallableModel<Array<unknown>>)(...params)
       : undefined;

@@ -9,9 +9,9 @@ import type {
 } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.models';
 import { useOtpResource } from '@lib/frontend/auth/hooks/useOtpResource/useOtpResource';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { FormContainer } from '@lib/frontend/core/containers/FormContainer/FormContainer';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayout';
+import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
 import { useAlert } from '@lib/frontend/notification/hooks/useAlert/useAlert';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';

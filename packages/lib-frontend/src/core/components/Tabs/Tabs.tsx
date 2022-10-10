@@ -2,7 +2,7 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import type { TabsPropsModel } from '@lib/frontend/core/components/Tabs/Tabs.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useField } from '@lib/frontend/core/hooks/useField/useField';
+import { useField } from '@lib/frontend/form/hooks/useField/useField';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 
 export const Tabs: SFCModel<TabsPropsModel> = ({

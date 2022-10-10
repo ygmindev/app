@@ -1,7 +1,7 @@
 import { fireEvent } from '@testing-library/react';
 import type { ReactElement } from 'react';
 
-export const _hoverOut = (element: ReactElement): unknown => {
+export const _hoverOut = (element: ReactElement): void => {
   fireEvent.mouseUp(element as unknown as Element);
   fireEvent.mouseOut(element as unknown as Element);
   fireEvent.mouseLeave(element as unknown as Element);

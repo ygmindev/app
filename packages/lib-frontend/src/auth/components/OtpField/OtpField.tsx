@@ -1,13 +1,13 @@
 import { OTP_FIELD_WIDTH } from '@lib/frontend/auth/components/OtpField/OtpField.constants';
 import type { OtpFieldPropsModel } from '@lib/frontend/auth/components/OtpField/OtpField.models';
 import { Appear } from '@lib/frontend/core/components/Appear/Appear';
-import { ErrorTooltip } from '@lib/frontend/core/components/ErrorTooltip/ErrorTooltip';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
-import { TextField } from '@lib/frontend/core/components/TextField/TextField';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useField } from '@lib/frontend/core/hooks/useField/useField';
+import { ErrorTooltip } from '@lib/frontend/form/components/ErrorTooltip/ErrorTooltip';
+import { TextField } from '@lib/frontend/form/components/TextField/TextField';
+import { useField } from '@lib/frontend/form/hooks/useField/useField';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { FONT_ALIGN } from '@lib/frontend/styling/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants';
@@ -54,6 +54,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             width={OTP_FIELD_WIDTH}
           />
         ))}
+
         <Wrapper
           isAbsoluteFill
           opacity={0}
@@ -77,6 +78,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             left={width}
             position={SHAPE_POSITION.ABSOLUTE}>
             {(isFunction(error) || isString(error)) && <ErrorTooltip error={error} />}
+
             <Appear
               isLazy
               isVisible={fieldValue.length > 0}>

@@ -7,12 +7,12 @@ import type {
 } from '@lib/frontend/core/components/Menu/Menu.models';
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import { Press } from '@lib/frontend/core/components/Press/Press';
-import { SearchField } from '@lib/frontend/core/components/SearchField/SearchField';
-import type { SelectOptionModel } from '@lib/frontend/core/components/SelectField/SelectField.models';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
+import { SearchField } from '@lib/frontend/form/components/SearchField/SearchField';
+import type { SelectOptionModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
@@ -105,6 +105,7 @@ export const Menu: SFCModel<MenuPropsModel> = ({
   const children = (
     <Wrapper spacing="s">
       {isSearchable && <SearchField isAutoFocus />}
+
       {options.length ? (
         elements
       ) : (
@@ -118,6 +119,7 @@ export const Menu: SFCModel<MenuPropsModel> = ({
   return isMobile ? (
     <>
       {anchorPress}
+
       <Modal
         isFullSize={false}
         isOpen={isOpen}

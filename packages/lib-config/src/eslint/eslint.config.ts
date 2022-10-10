@@ -47,6 +47,8 @@ export const eslintConfig: Linter.Config = {
       { packageDir: [fromRoot(), ...packages.map((pkg) => fromPackages(pkg))] },
     ],
     'no-unused-vars': 'off',
+    'prefer-destructuring': 'error',
+    'react/jsx-newline': 'error',
     'react/jsx-sort-props': 'error',
     'simple-import-sort/exports': 'error',
     'simple-import-sort/imports': 'error',

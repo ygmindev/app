@@ -1,7 +1,7 @@
 import { fireEvent } from '@testing-library/react';
 import type { ReactElement } from 'react';
 
-export const _hoverIn = (element: ReactElement): unknown => {
+export const _hoverIn = (element: ReactElement): void => {
   fireEvent.mouseDown(element as unknown as Element);
   fireEvent.mouseOver(element as unknown as Element);
   fireEvent.mouseEnter(element as unknown as Element);

@@ -1,5 +1,5 @@
 import type { StepsPropsModel } from '@lib/frontend/core/components/Steps/Steps.models';
-import { FormContainer } from '@lib/frontend/core/containers/FormContainer/FormContainer';
+import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
 
 export interface StepsFixtureModel

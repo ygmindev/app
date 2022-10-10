@@ -10,7 +10,6 @@ export interface FCModel<TProps = object> extends _FC<TProps> {}
 export interface SFCModel<TProps = object> extends FCModel<TProps & WithStyleParamsModel> {}
 
 export interface WithOpenPropsModel {
-  closeLabel?: TranslationTextModel;
   isOpen?: boolean;
   onClose?: CallableModel;
 }

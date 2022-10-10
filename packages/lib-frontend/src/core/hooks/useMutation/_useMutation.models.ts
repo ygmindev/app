@@ -7,8 +7,8 @@ export interface _UseMutationParamsModel<
 > extends WithIdModel {
   mutate(params: TParams): Promise<TResult | null>;
   onError?(error: TError): Promise<void>;
-  onStart?(): Promise<unknown>;
-  onSuccess?(result: TResult | null): Promise<unknown>;
+  onStart?(): Promise<void>;
+  onSuccess?(result: TResult | null): Promise<void>;
 }
 
 export interface _UseMutationResultModel<

@@ -19,7 +19,7 @@ export const lint: RegisterParamsModel = {
     const results = await eslint.lintFiles(['src/**/*.{ts,tsx,js,jsx}']);
     await ESLint.outputFixes(results);
 
-    const formatter = await eslint.loadFormatter('stylish');
+    const formatter = await eslint.loadFormatter('compact');
     const formatted = formatter.format(results);
     formatted && info(formatted);
 

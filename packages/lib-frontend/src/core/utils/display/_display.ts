@@ -10,8 +10,8 @@ export const _display: _DisplayModel = {
       `height=${height}, width=${width}, menubar=no, toolbar=no`,
     );
     if (popup) {
-      popup.onload = (): unknown => onOpen && onOpen();
-      popup.onunload = (): unknown => onClose && onClose();
+      popup.onload = (): void => onOpen && onOpen();
+      popup.onunload = (): void => onClose && onClose();
     }
   },
   subscribeMessage: (cb) => (__IS_SSR__ ? null : window.addEventListener('message', cb)),

@@ -1,3 +1,4 @@
+import { validateLength } from '@lib/frontend/form/utils/validateLength/validateLength';
 import { ENTITY_RESOURCE_COLUMNS } from '@lib/frontend/resource/components/EntityResourceTable/EntityResourceTable.constants';
 import type { EntityResourceTablePropsModel } from '@lib/frontend/resource/components/EntityResourceTable/EntityResourceTable.models';
 import {
@@ -26,4 +27,6 @@ export const ACCESS_TABLE_PROPS: EntityResourceTablePropsModel<AccessModel, Acce
   ],
 
   name: ACCESS_RESOURCE_NAME,
+
+  validators: { _uid: validateLength(24) },
 };

@@ -7,5 +7,5 @@ export interface _UseSearchParamsModel<TType> {
 
 export interface _UseSearchModel<TResult> {
   result: Array<TResult>;
-  search(query: string): unknown;
+  search(query: string): void;
 }

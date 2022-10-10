@@ -3,7 +3,7 @@ import { composeComponent } from '@lib/frontend/core/utils/composeComponent/comp
 import type { TextProps } from 'react-native';
 import { Linking, Text } from 'react-native';
 
-export const _linkOpen = async (link: string, _isNewTab?: boolean): Promise<unknown> =>
+export const _linkOpen = async (link: string, _isNewTab?: boolean): Promise<void> =>
   Linking.openURL(link);
 
 export const _Link = composeComponent<_LinkPropsModel, TextProps>({

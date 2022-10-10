@@ -6,7 +6,7 @@ import { set } from 'lodash';
 export const _getContext = async ({ context, event }: _GetContextParamsModel): Promise<Context> => {
   const authorization = event.headers.Authorization;
   if (authorization) {
-    const token = authorization.split(' ')[1];
+    const [_, token] = authorization.split(' ');
     if (token && token !== 'null') {
       const { claims } = await JwtService.verifyToken(token);
       set(context, 'user', claims);

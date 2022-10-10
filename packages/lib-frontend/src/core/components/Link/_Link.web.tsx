@@ -3,8 +3,9 @@ import type { MouseEvent, ReactNode } from 'react';
 import { Component } from 'react';
 import { unstable_createElement } from 'react-native-web';
 
-export const _linkOpen = async (link: string, isNewTab?: boolean): Promise<unknown> =>
+export const _linkOpen = async (link: string, isNewTab?: boolean): Promise<void> => {
   window.open(link, isNewTab ? '_blank' : undefined);
+};
 
 export class _Link extends Component<_LinkPropsModel> {
   override render(): ReactNode {

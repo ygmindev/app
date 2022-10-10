@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 export const useMountAsync = <TResult>(
   { onMount, onSuccess }: UseMountAsyncParamsModel<TResult>,
-  deps?: unknown[],
+  deps?: Array<unknown>,
 ): void => {
   let isMounted = false;
   useEffect(() => {

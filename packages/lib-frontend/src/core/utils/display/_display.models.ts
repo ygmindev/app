@@ -7,10 +7,10 @@ export interface _DisplayModel {
   open(
     uri: string,
     options: DimensionModel & { onClose?: CallableModel; onOpen?: CallableModel },
-  ): unknown;
-  subscribeMessage(cb: (event: MessageEvent) => unknown): unknown;
-  subscribeResize(cb: () => unknown): unknown;
-  unsubscribeMessage(cb: (event: MessageEvent) => unknown): unknown;
-  unsubscribeResize(cb: () => unknown): unknown;
+  ): void;
+  subscribeMessage(cb: (event: MessageEvent) => void): void;
+  subscribeResize(cb: () => void): void;
+  unsubscribeMessage(cb: (event: MessageEvent) => void): void;
+  unsubscribeResize(cb: () => void): void;
   useLayoutEffect(effect: EffectCallback, deps?: DependencyList): void;
 }

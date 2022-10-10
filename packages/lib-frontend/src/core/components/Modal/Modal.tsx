@@ -68,6 +68,7 @@ export const Modal: FCModel<ModalPropsModel> = ({
                   isRowAlign>
                   {isString(header) ? <Text isTitle>{header}</Text> : header}
                 </Wrapper>
+
                 {onClose && (
                   <Icon
                     color={isDisabled ? THEME_RELATIVE_COLOR.MUTED : undefined}
@@ -78,6 +79,7 @@ export const Modal: FCModel<ModalPropsModel> = ({
                   />
                 )}
               </Wrapper>
+
               <Wrapper
                 grow
                 isCenter>

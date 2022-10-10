@@ -1,8 +1,8 @@
 import type { DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/Dropdown.models';
 import type { PressPropsModel } from '@lib/frontend/core/components/Press/Press.models';
-import type { SelectOptionModel } from '@lib/frontend/core/components/SelectField/SelectField.models';
 import type { WithFieldPropsModel } from '@lib/frontend/core/decorators/withFieldProps/withFieldProps.models';
 import type { WithForwardedRefPropsModel } from '@lib/frontend/core/decorators/withForwardRefProps/withForwardRefProps.models';
+import type { SelectOptionModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
 import type { TranslationTextModel } from '@lib/frontend/locale/locale.models';
 import type { WithStyleParamsModel } from '@lib/frontend/styling/decorators/withStyle/withStyle.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
@@ -15,7 +15,7 @@ export interface DividerOptionModel extends WithIdModel {
 export type MenuOptionModel = SelectOptionModel | DividerOptionModel;
 
 export interface MenuRefModel {
-  setIsOpen(isOpen: boolean): unknown;
+  setIsOpen(isOpen: boolean): void;
 }
 
 export interface MenuPropsModel
