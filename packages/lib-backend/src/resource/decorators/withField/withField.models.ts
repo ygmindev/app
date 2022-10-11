@@ -8,6 +8,8 @@ export interface WithFieldParamsModel<TType> {
   expire?: number;
   isArray?: boolean;
   isOptional?: boolean;
+  isRepository?: boolean;
+  isSchema?: boolean;
   isUnique?: boolean;
   type?: FieldTypeModel;
 }

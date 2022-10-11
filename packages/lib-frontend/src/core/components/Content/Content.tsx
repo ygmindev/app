@@ -33,9 +33,11 @@ export const Content: SFCModel<ContentPropsModel> = ({
               </IconText>
             </Wrapper>
           )}
+
           {rightElement}
         </Wrapper>
       )}
+
       {children}
     </Wrapper>
   );

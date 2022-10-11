@@ -33,6 +33,7 @@ export const AsyncWrapper: SFCModel<AsyncWrapperPropsModel> = ({
         style={computedStyles}>
         {children}
       </Appear>
+
       {error && (
         <Wrapper
           backgroundColor={isTransparent ? undefined : 'main'}
@@ -46,6 +47,7 @@ export const AsyncWrapper: SFCModel<AsyncWrapperPropsModel> = ({
           </IconText>
         </Wrapper>
       )}
+
       {isLoading && (
         <Wrapper
           backgroundColor={isTransparent ? undefined : 'main'}

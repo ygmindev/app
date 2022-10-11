@@ -20,6 +20,7 @@ export const AppHeader: SFCModel<AppHeaderPropsModel> = ({ testID, ...props }) =
         isRowAlign>
         <Logo />
       </Wrapper>
+
       <AuthMenu />
     </Wrapper>
   );

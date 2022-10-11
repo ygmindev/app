@@ -35,6 +35,7 @@ const _Story = <TProps,>({
             isRow
             key={uid()}>
             <Text isTitle>{`${k}=`}</Text>
+
             <Text
               color={THEME_COLOR.PRIMARY}
               isTitle>{`${
@@ -52,6 +53,7 @@ const _Story = <TProps,>({
         ))}
       </Wrapper>
     )}
+
     <Wrapper
       align={FLEX_ALIGN.FLEX_START}
       mLeft>
@@ -90,6 +92,7 @@ export const withStory = <TProps,>({
         <_Story name="Default">
           <Story />
         </_Story>
+
         {_variants.map((variant) => (
           <_Story
             key={variant.id}

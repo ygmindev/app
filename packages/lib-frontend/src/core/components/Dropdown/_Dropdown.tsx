@@ -27,7 +27,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   const _handleHide = debounce({
     callback: (instance: Instance) => {
       if (instance.state.isVisible) {
-        setTimeout(instance.hide, theme.animation.duration);
+        setTimeout(() => instance.state.isMounted && instance.hide(), theme.animation.duration);
         return false;
       }
     },

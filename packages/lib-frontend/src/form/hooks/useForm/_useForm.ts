@@ -28,7 +28,7 @@ export const _useForm = <TType>({
       onSubmit && (await promisify(onSubmit)(data));
     },
     validate: onValidate ? promisify(onValidate) : undefined,
-    validateOnChange: true,
+    validateOnChange: false,
   });
 
   return {

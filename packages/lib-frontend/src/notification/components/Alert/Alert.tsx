@@ -81,6 +81,7 @@ export const Alert: SFCModel<AlertPropsModel> = ({
             zIndex={1}
           />
         )}
+
         <Wrapper
           grow
           isRowAlign
@@ -90,6 +91,7 @@ export const Alert: SFCModel<AlertPropsModel> = ({
             icon={icon}
             size={THEME_SIZE.LARGE}
           />
+
           <Wrapper
             basis={0}
             grow
@@ -102,8 +104,10 @@ export const Alert: SFCModel<AlertPropsModel> = ({
                 {t(title)}
               </Text>
             )}
+
             {message && <Text color={THEME_RELATIVE_COLOR.CONTRAST}>{t(message)}</Text>}
           </Wrapper>
+
           <Icon
             color={THEME_RELATIVE_COLOR.CONTRAST}
             from={color ? { backgroundColor: theme.colors[color].main } : undefined}

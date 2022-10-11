@@ -37,6 +37,7 @@ export const IconText: SFCModel<IconTextPropsModel> = ({
           icon={icon}
         />
       )}
+
       {children && (
         <Text
           {...propsWithOutStyle}

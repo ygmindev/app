@@ -18,7 +18,7 @@ const { Default, meta } = withStory<FormContainerPropsModel<object>>({
   target: FormContainer,
   variants: [
     { props: { isFullWidth: true } },
-    { props: { cancelLabel: 'close', onClose: () => null } },
+    { props: { cancelLabel: 'cancel label', onCancel: () => null } },
   ],
 });
 

@@ -4,16 +4,18 @@ import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
 const { displayName } = withTest({ target: () => validateRange });
 
 describe(displayName, () => {
-  const VALUE_VALID = 'VALUE_VALID';
-  const VALUE_INVALID = '';
+  const MIN = 10;
+  const MAX = 20;
+  const VALUE_VALID = '15';
+  const VALUE_INVALID = '5';
 
   test('works with valid', async () => {
-    const result = validateRange()({ value: VALUE_VALID });
+    const result = validateRange(MIN, MAX)({ value: VALUE_VALID });
     expect(result).toBeFalsy();
   });
 
   test('works with invalid', async () => {
-    const result = validateRange()({ value: VALUE_INVALID });
+    const result = validateRange(MIN, MAX)({ value: VALUE_INVALID });
     expect(result).toBeTruthy();
   });
 });

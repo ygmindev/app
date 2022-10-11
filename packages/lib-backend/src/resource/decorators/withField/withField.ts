@@ -2,7 +2,6 @@ import { FIELD_TYPE } from '@lib/backend/resource/decorators/withField/withField
 import type { WithFieldParamsModel } from '@lib/backend/resource/decorators/withField/withField.models';
 import { ArrayType, Embedded, Index, PrimaryKey, Property } from '@mikro-orm/core';
 import { Field } from 'type-graphql';
-import type { ReturnTypeFuncValue } from 'type-graphql/dist/decorators/types';
 
 const _getField = <TType>({
   Resource,
@@ -10,7 +9,7 @@ const _getField = <TType>({
   type,
 }: WithFieldParamsModel<TType>): PropertyDecorator => {
   if (Resource) {
-    return Field(() => (isArray ? [Resource] : Resource) as ReturnTypeFuncValue);
+    return Field(() => (isArray ? [Resource] : Resource), { simple: true });
   }
   switch (type) {
     case FIELD_TYPE.STRING:
@@ -69,6 +68,8 @@ export const withField =
     expire,
     isArray,
     isOptional,
+    isRepository = false,
+    isSchema = true,
     isUnique,
     defaultValue,
   }: WithFieldParamsModel<TType> = {}): PropertyDecorator =>
@@ -79,7 +80,8 @@ export const withField =
         propertyKey,
       );
 
-    _getField({ Resource, isArray, isOptional, type })(target, propertyKey);
+    isSchema && _getField({ Resource, isArray, isOptional, type })(target, propertyKey);
 
-    _getColumn({ Resource, defaultValue, isArray, isOptional, type })(target, propertyKey);
+    isRepository &&
+      _getColumn({ Resource, defaultValue, isArray, isOptional, type })(target, propertyKey);
   };

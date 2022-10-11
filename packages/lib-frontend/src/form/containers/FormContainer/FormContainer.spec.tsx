@@ -6,6 +6,7 @@ const { Component, displayName, testID } = withTestComponent({
   defaultProps: {
     fields: [],
     initialValues: {},
+    rows: [],
   },
   target: FormContainer,
 });

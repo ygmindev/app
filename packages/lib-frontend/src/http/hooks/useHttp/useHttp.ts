@@ -5,6 +5,7 @@ import { NETWORK_ALERT, UNKNOWN_ALERT } from '@lib/frontend/notification/notific
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_ERROR_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 import { HttpService } from '@lib/shared/http/utils/HttpService/HttpService';
+import { error } from '@lib/shared/logging/utils/logger/logger';
 import type { GraphQLError } from 'graphql';
 import { get } from 'lodash';
 
@@ -13,12 +14,12 @@ export const useHttp: UseHttpModel = ({ onError, ...params }) => {
   return new HttpService({
     ...params,
 
-    onError: async (error) => {
+    onError: async (e) => {
       const alert = (() => {
-        if (['Network Error'].includes(error.message)) {
+        if (['Network Error'].includes(e.message)) {
           return NETWORK_ALERT;
         }
-        switch ((error as unknown as HttpError).statusCode) {
+        switch ((e as unknown as HttpError).statusCode) {
           case HTTP_ERROR_STATUS_CODE.UNAUTHORIZED:
             return UNAUTHORIZED_ERROR_ALERT;
           case HTTP_ERROR_STATUS_CODE.FORBIDDEN:
@@ -30,9 +31,9 @@ export const useHttp: UseHttpModel = ({ onError, ...params }) => {
         }
       })();
 
-      alertAdd({ ...alert, isPermanent: true, message: error.message || alert.message });
-
-      return onError && onError(error);
+      alertAdd({ ...alert, isPermanent: true, message: e.message || alert.message });
+      error(e);
+      return onError && onError(e);
     },
 
     onResponse: async (respone) => {
@@ -40,6 +41,7 @@ export const useHttp: UseHttpModel = ({ onError, ...params }) => {
       if (graphQlError) {
         throw new HttpError(graphQlError.extensions.statusCode, graphQlError.message);
       }
+      return respone;
     },
   });
 };

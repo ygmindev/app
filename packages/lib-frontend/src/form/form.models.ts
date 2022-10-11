@@ -7,13 +7,12 @@ export type FormErrorModel<TType> = {
     : FormErrorModel<TType[TKey]>;
 };
 
-export type FormValidatorModel<TValue extends string = string, TType = unknown> = (params: {
-  data?: TType;
+export type FormValidatorModel<TValue extends string = string> = (params: {
   value: TValue;
 }) => TranslationTextModel | undefined;
 
 export type FormValidatorsModel<TType> = {
   [TKey in keyof TType]?: TType[TKey] extends object
     ? FormValidatorsModel<TType[TKey]>
-    : FormValidatorModel<TType[TKey] & string, TType>;
+    : FormValidatorModel<TType[TKey] & string>;
 };

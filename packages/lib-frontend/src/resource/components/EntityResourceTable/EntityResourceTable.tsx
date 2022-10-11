@@ -8,7 +8,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { useQueryConnection } from '@lib/frontend/core/hooks/useQueryConnection/useQueryConnection';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { EntityResourceModal } from '@lib/frontend/resource/components/EntityResourceModal/EntityResourceModal';
-import { ENTITY_RESOURCE_TABLE_LIMIT } from '@lib/frontend/resource/components/EntityResourceTable/EntityResourceTable.constants';
+import { ENTITY_RESOURCE_TABLE_LIMIT_DEFAULT } from '@lib/frontend/resource/components/EntityResourceTable/EntityResourceTable.constants';
 import type { EntityResourceTablePropsModel } from '@lib/frontend/resource/components/EntityResourceTable/EntityResourceTable.models';
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
@@ -21,11 +21,12 @@ import { useEffect, useRef, useState } from 'react';
 
 export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
   columns,
-  fields,
+  getConnectionFields,
+  createFields,
   name,
   testID,
   validators,
-  limit = ENTITY_RESOURCE_TABLE_LIMIT,
+  limit = ENTITY_RESOURCE_TABLE_LIMIT_DEFAULT,
   ...props
 }: EntityResourceTablePropsModel<TType, TForm>): ReactElement<
   EntityResourceTablePropsModel<TType, TForm>
@@ -37,20 +38,25 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>();
   const [selectedRows, setSelectedRows] = useState<Array<TType> | undefined>();
 
+  const { query: create } = useResourceMethod<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>({
+    fields: createFields,
+    method: RESOURCE_METHOD_TYPE.CREATE,
+    name,
+  });
+
   const { query: getConnection } = useResourceMethod<
     RESOURCE_METHOD_TYPE.GET_CONNECTION,
     TType,
     TForm
-  >({ fields, method: RESOURCE_METHOD_TYPE.GET_CONNECTION, name });
+  >({ fields: getConnectionFields, method: RESOURCE_METHOD_TYPE.GET_CONNECTION, name });
 
   const { data, queryNext } = useQueryConnection<TType>({
-    cache: true,
     id: `${name}${RESOURCE_METHOD_TYPE.GET_CONNECTION}`,
     limit,
     query: async (params) => {
       const { result } = await getConnection({
         filter: {},
-        pagination: params || { first: limit },
+        pagination: { ...params, first: limit },
       });
       return result || null;
     },
@@ -97,6 +103,7 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
             ref.current?.deselectRows();
             setIsCreateModalOpen(false);
           }}
+          onCreate={create}
           validators={validators}
         />
       </Content>

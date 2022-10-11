@@ -1,6 +1,6 @@
-import { UserTable } from '@lib/frontend/user/containers/UserTable/UserTable';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
+import { UserTable } from '@lib/frontend/user/containers/UserTable/UserTable';
 
 const { Component, displayName, testID } = withTestComponent({ target: UserTable });
 

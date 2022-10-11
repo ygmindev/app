@@ -31,6 +31,7 @@ export const WrapperFixture: SFCModel<WrapperFixturePropsModel> = ({
       width={WRAPPER_FIXTURE_SIZE}
       {...props}>
       <Text>{text}</Text>
+
       {children}
     </Wrapper>
   );

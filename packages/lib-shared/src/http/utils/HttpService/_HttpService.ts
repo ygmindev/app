@@ -51,7 +51,7 @@ export class _HttpService implements _HttpServiceModel {
         method,
         url: path || '',
       } as AxiosRequestConfig);
-      return response.data || null;
+      return (response && response.data) || null;
     } catch (e) {
       if (onError) {
         onError(e as TError);

@@ -31,13 +31,16 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({
             title ? (
               <Fragment key={pathname}>
                 <Link onPress={() => push({ params: {}, pathname })}>{title}</Link>
+
                 {i ? <Icon icon={ICON.chevronRight} /> : null}
               </Fragment>
             ) : null,
           )}
+
           {title && <Text>{title}</Text>}
         </Wrapper>
       )}
+
       <Wrapper
         height={ROUTE_HEADER_HEIGHT}
         isRowAlign>
@@ -46,6 +49,7 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({
           isTitle
           onPress={onBack}
         />
+
         {title && (
           <IconText
             icon={icon}

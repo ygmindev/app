@@ -3,7 +3,6 @@ import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
-import type { FormContainerRowModel } from '@lib/frontend/form/containers/FormContainer/FormContainer.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import type { EntityResourceModalPropsModel } from '@lib/frontend/resource/components/EntityResourceModal/EntityResourceModal.models';
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
@@ -14,7 +13,6 @@ import { warn } from '@lib/shared/logging/utils/logger/logger';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import type { FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
-import { get } from 'lodash';
 import type { ReactElement } from 'react';
 
 export const EntityResourceModal = <TType extends EntityResourceModel, TForm>({
@@ -23,6 +21,7 @@ export const EntityResourceModal = <TType extends EntityResourceModel, TForm>({
   isOpen,
   name,
   onClose,
+  onCreate,
   testID,
   validators,
 }: EntityResourceModalPropsModel<TType, TForm>): ReactElement<
@@ -36,8 +35,9 @@ export const EntityResourceModal = <TType extends EntityResourceModel, TForm>({
     TForm
   >({ fields: [{ result: ['_id'] }], method: RESOURCE_METHOD_TYPE.REMOVE, name });
 
-  const _handleSubmit = async (values: TType): Promise<void> => {
-    warn(values);
+  const _handleSubmit = async (values: TForm): Promise<void> => {
+    const result = await onCreate({ form: values });
+    warn(result);
   };
 
   const _handleDelete = async (): Promise<void> => {
@@ -50,7 +50,7 @@ export const EntityResourceModal = <TType extends EntityResourceModel, TForm>({
       isOpen={isOpen}
       onClose={onClose}>
       <Wrapper testID={testID}>
-        <FormContainer<TType | TForm | undefined>
+        <FormContainer<TType | TForm>
           initialValues={data}
           leftElement={
             data && (
@@ -66,23 +66,9 @@ export const EntityResourceModal = <TType extends EntityResourceModel, TForm>({
           onCancel={onClose}
           onSubmit={_handleSubmit}
           rows={withId(
-            columns.map(
-              ({ autoComplete, icon, id, isDisabled, isHidden, label, options, type }) => ({
-                fields: [
-                  isHidden && !get(data, id)
-                    ? null
-                    : {
-                        autoComplete,
-                        icon,
-                        id,
-                        isDisabled: isDisabled || isHidden,
-                        label,
-                        options,
-                        type,
-                      },
-                ].filter(Boolean) as Array<FormContainerRowModel>,
-              }),
-            ),
+            columns
+              .map((column) => (data || !column.isDisabled) && { fields: [column] })
+              .filter(Boolean),
           )}
           validators={validators}
         />

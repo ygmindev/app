@@ -56,7 +56,7 @@ export const _Table = <TType,>({
   const theme = useTheme();
   const [gridApi, setGridApi] = useState<GridApi>();
   const [columnApi, setColumnApi] = useState<ColumnApi>();
-  const duration = theme.animation.duration;
+  const { duration } = theme.animation;
 
   useImperativeHandle(forwardedRef, () => ({
     deselectRows: () => gridApi && gridApi.deselectAll(),
@@ -140,6 +140,7 @@ export const _Table = <TType,>({
         rowSelection={select}
         suppressCellFocus
       />
+
       <_GlobalStyle />
     </div>
   );

@@ -66,16 +66,16 @@ interface _UpdateArgsModel<TType> {
 export type ArgsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
-> = TMethod extends typeof RESOURCE_METHOD_TYPE.CREATE
+> = TMethod extends RESOURCE_METHOD_TYPE.CREATE
   ? _CreateArgsModel<TType>
-  : TMethod extends typeof RESOURCE_METHOD_TYPE.GET
+  : TMethod extends RESOURCE_METHOD_TYPE.GET
   ? _GetArgsModel<TType>
-  : TMethod extends typeof RESOURCE_METHOD_TYPE.GET_MANY
+  : TMethod extends RESOURCE_METHOD_TYPE.GET_MANY
   ? _GetManyArgsModel<TType>
-  : TMethod extends typeof RESOURCE_METHOD_TYPE.GET_CONNECTION
+  : TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION
   ? _GetConnectionArgsModel<TType>
-  : TMethod extends typeof RESOURCE_METHOD_TYPE.REMOVE
+  : TMethod extends RESOURCE_METHOD_TYPE.REMOVE
   ? _RemoveArgsModel<TType>
-  : TMethod extends typeof RESOURCE_METHOD_TYPE.UPDATE
+  : TMethod extends RESOURCE_METHOD_TYPE.UPDATE
   ? _UpdateArgsModel<TType>
   : never;

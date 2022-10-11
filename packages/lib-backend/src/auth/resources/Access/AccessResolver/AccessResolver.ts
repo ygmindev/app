@@ -16,6 +16,7 @@ export class AccessResolver
   extends EntityResourceResolver<AccessModel, AccessFormModel>({
     Resource: Access,
     ResourceService: AccessService,
+    createAccess: ACCESS_LEVEL.PUBLIC,
     getAccess: ACCESS_LEVEL.PUBLIC,
     name: ACCESS_RESOURCE_NAME,
   })

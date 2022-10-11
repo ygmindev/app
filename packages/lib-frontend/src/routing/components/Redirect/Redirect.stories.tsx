@@ -3,7 +3,10 @@ import { Redirect } from '@lib/frontend/routing/components/Redirect/Redirect';
 import type { RedirectPropsModel } from '@lib/frontend/routing/components/Redirect/Redirect.models';
 
 const { Default, meta } = withStory<RedirectPropsModel>({
-  defaultProps: {},
+  defaultProps: {
+    params: undefined,
+    pathname: '/',
+  },
   target: Redirect,
   variants: [],
 });

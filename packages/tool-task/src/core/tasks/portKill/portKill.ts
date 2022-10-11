@@ -9,7 +9,7 @@ export const portKill: RegisterParamsModel = {
   name: 'portKill',
 
   task: async ({ root }) => {
-    const port = (await prompt([{ key: 'port' }])).port;
+    const { port } = await prompt([{ key: 'port' }]);
     !(await portIsOpen(toNumber(port))) &&
       (await command({ command: `if pids=$(lsof -ti:${port}); then kill -9 $pids; fi`, root }));
     return { status: TASK_RESULTS_STATUS_TYPE.SUCCESS };

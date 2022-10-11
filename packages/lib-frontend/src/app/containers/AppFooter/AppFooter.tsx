@@ -24,6 +24,7 @@ export const AppFooter: SFCModel<AppFooterPropsModel> = ({ testID, ...props }) =
       style={styles}
       testID={testID}>
       <Icon icon={ICON.copyright} />
+
       <Text>{`${year} ${REACT_APP_APP_NAME}`}</Text>
     </Wrapper>
   );

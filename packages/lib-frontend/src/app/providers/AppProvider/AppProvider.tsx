@@ -16,6 +16,7 @@ export const AppProvider: SFCModel<AppProviderPropsModel> = ({ children, testID,
       style={styles}
       testID={testID}>
       {isInitialized && children}
+
       <Alerts />
     </Wrapper>
   );

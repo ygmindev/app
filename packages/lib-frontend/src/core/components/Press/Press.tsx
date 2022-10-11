@@ -99,6 +99,7 @@ export const Press: SFCModel<PressPropsModel> = ({
             isCenter
             spacing>
             {confirmMessage && <Text>{confirmMessage}</Text>}
+
             <Wrapper isRowAlign>
               <Button
                 icon={ICON.chevronLeft}
@@ -107,6 +108,7 @@ export const Press: SFCModel<PressPropsModel> = ({
                 onPress={() => setConfirmModalIsOpen(false)}>
                 {t('core:labels.cancel')}
               </Button>
+
               <Button
                 icon={ICON.chevronRight}
                 isDisabled={isDisabled}

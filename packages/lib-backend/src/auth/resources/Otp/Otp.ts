@@ -15,13 +15,13 @@ export class OtpForm implements OtpFormModel {
 
 @withEntity({ isRepository: true, name: OTP_RESOURCE_NAME })
 export class Otp extends EntityResource implements OtpModel {
-  @withField({ isUnique: true })
+  @withField({ isRepository: true, isUnique: true })
   username!: string;
 
-  @withField({ expire: OTP_EXPIRATION_SECONDS })
+  @withField({ expire: OTP_EXPIRATION_SECONDS, isRepository: true })
   declare created: Date;
 
   @withAccess({ level: ACCESS_LEVEL.PROHIBITED })
-  @withField()
+  @withField({ isRepository: true })
   otp!: string;
 }

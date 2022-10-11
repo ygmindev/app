@@ -14,6 +14,7 @@ export const _StyleProvider = composeComponent<
     children: (
       <StyledComponentStyleProvider theme={theme}>
         <GlobalStyle />
+
         {children}
       </StyledComponentStyleProvider>
     ),

@@ -13,11 +13,13 @@ export const AppLayout: SFCModel<AppLayoutPropsModel> = ({ children, testID, ...
       style={styles}
       testID={testID}>
       <AppHeader />
+
       <Wrapper
         grow
         p>
         {children}
       </Wrapper>
+
       <AppFooter />
     </Wrapper>
   );

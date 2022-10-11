@@ -7,9 +7,12 @@ import type { AccessModel, AccessRoleModel } from '@lib/shared/auth/resources/Ac
 
 @withEntity({ isRepository: true, name: ACCESS_RESOURCE_NAME })
 export class Access extends EntityResource implements AccessModel {
-  @withField({ type: FIELD_TYPE.ID })
+  @withField({ isRepository: true, type: FIELD_TYPE.ID })
   _uid!: string;
 
-  @withField({ type: FIELD_TYPE.STRING })
+  @withField({ isRepository: true, type: FIELD_TYPE.STRING })
   role!: AccessRoleModel;
+
+  @withField({})
+  email?: string;
 }

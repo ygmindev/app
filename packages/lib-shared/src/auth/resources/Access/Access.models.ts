@@ -10,6 +10,7 @@ export type AccessLevelModel = `${ACCESS_LEVEL}`;
 
 export interface AccessModel extends EntityResourceModel {
   _uid: string;
+  email?: string;
   role: AccessRoleModel;
 }
 

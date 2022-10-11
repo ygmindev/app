@@ -1,6 +1,10 @@
 import type { UsernameFormModel } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.models';
 import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
-import type { FormContainerRowModel } from '@lib/frontend/form/containers/FormContainer/FormContainer.models';
+import { FORM_FIELD_TYPE } from '@lib/frontend/form/containers/FormContainer/FormContainer.constants';
+import type {
+  FormContainerFieldModel,
+  FormContainerRowModel,
+} from '@lib/frontend/form/containers/FormContainer/FormContainer.models';
 import type { FormValidatorsModel } from '@lib/frontend/form/form.models';
 import { validateEmail } from '@lib/frontend/form/utils/validateEmail/validateEmail';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
@@ -12,13 +16,14 @@ export const USERNAME_FORM_VALIDATORS: FormValidatorsModel<UsernameFormModel> = 
 
 export const USERNAME_FORM_FIELDS: Array<FormContainerRowModel> = withId([
   {
-    fields: withId([
+    fields: [
       {
         autoComplete: 'email',
+        field: FORM_FIELD_TYPE.TEXT_FIELD,
         icon: ICON.email,
         id: 'username',
         label: ({ t }) => t('user:labels.email'),
-      },
-    ]),
+      } as FormContainerFieldModel,
+    ],
   },
 ]);

@@ -31,6 +31,7 @@ export const Page: SFCModel<PageModel> = ({
   let _element = (
     <>
       {element}
+
       {children}
     </>
   );
@@ -49,6 +50,7 @@ export const Page: SFCModel<PageModel> = ({
               label: route.title,
             }))}
           />
+
           {_element}
         </Wrapper>
       );
@@ -66,6 +68,7 @@ export const Page: SFCModel<PageModel> = ({
             paths={paths}
             title={title}
           />
+
           {_element}
         </Wrapper>
       );

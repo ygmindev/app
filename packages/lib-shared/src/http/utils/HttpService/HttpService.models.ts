@@ -27,7 +27,7 @@ export interface HttpServiceParamsModel {
   baseUri: UriParamsModel;
   onError?<TError extends Error = Error>(error: TError): Promise<void>;
   onRequest?(request: HttpRequestParamsModel): Promise<HttpRequestParamsModel>;
-  onResponse?<TResult>(response: HttpReponseModel<TResult>): Promise<void>;
+  onResponse?<TResult>(response: HttpReponseModel<TResult>): Promise<HttpReponseModel<TResult>>;
   request?: HttpRequestParamsModel;
 }
 

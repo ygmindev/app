@@ -58,6 +58,7 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({ onBack, onSubmit, stepsDa
             params={{ value: stepsData.username }}
           />
         )}
+
         <OtpField
           error={errors.otp}
           isAutoFocus
@@ -65,6 +66,7 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({ onBack, onSubmit, stepsDa
           onChange={_handleChange}
           value={values.otp}
         />
+
         <Link onPress={onBack}>{t('auth:messages.verifyDidntGet')}</Link>
       </CenterLayout>
     </AsyncWrapper>

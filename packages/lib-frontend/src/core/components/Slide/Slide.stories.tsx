@@ -21,10 +21,12 @@ const Component: SFCModel<SlidePropsModel> = (props) => {
         <Appear isVisible={current > 0}>
           <Button onPress={() => setCurrent(Math.max(current - 1, 0))}>Previous</Button>
         </Appear>
+
         <Appear isVisible={current < slides.length - 1}>
           <Button onPress={() => setCurrent(Math.min(current + 1, slides.length - 1))}>Next</Button>
         </Appear>
       </Wrapper>
+
       <Wrapper
         height={500}
         width={500}>

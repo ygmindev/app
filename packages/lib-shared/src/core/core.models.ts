@@ -4,7 +4,7 @@ import type { Constructor, Get, PartialDeep, Primitive } from 'type-fest';
 
 export interface ConstructorModel<TType = object> extends Constructor<TType> {}
 
-export type PrimitiveModel = Primitive;
+export type PrimitiveModel = Primitive | Date;
 
 export type PartialModel<TType> = Partial<TType> | TType;
 

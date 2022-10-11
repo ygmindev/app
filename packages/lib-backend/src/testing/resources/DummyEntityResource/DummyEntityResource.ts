@@ -10,18 +10,23 @@ import type { DummyEntityResourceModel } from '@lib/shared/testing/resources/Dum
 
 @withEntity({ isRepository: true, name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME })
 export class DummyEntityResource extends EntityResource implements DummyEntityResourceModel {
-  @withField({ Resource: DummyEmbeddedResource, isArray: true, isOptional: true })
+  @withField({
+    Resource: DummyEmbeddedResource,
+    isArray: true,
+    isOptional: true,
+    isRepository: true,
+  })
   [DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME]?: Array<DummyEmbeddedResourceModel>;
 
-  @withField({ isOptional: true })
+  @withField({ isOptional: true, isRepository: true })
   numberProperty?: number;
 
-  @withField({ isArray: true, isOptional: true, type: FIELD_TYPE.STRING })
+  @withField({ isArray: true, isOptional: true, isRepository: true, type: FIELD_TYPE.STRING })
   stringArrayProperty?: Array<string>;
 
-  @withField()
+  @withField({ isRepository: true })
   stringProperty!: string;
 
-  @withField({ isOptional: true })
+  @withField({ isOptional: true, isRepository: true })
   stringPropertyOptional?: string;
 }

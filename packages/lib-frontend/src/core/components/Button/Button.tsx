@@ -65,6 +65,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
           />
         </Wrapper>
       )}
+
       <Wrapper
         mLeft={0}
         opacity={_isLoading ? 0 : undefined}>
