@@ -4,5 +4,6 @@ import type { ResourceMethodTypeModel } from '@lib/shared/resource/resource.mode
 export interface WithInputParamsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
+  TForm,
   TRoot = undefined,
-> extends InputParamsModel<TMethod, TType, TRoot> {}
+> extends InputParamsModel<TMethod, TType, TForm, TRoot> {}

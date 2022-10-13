@@ -61,7 +61,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
           name,
         }),
       )
-      input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TForm, TRoot>,
+      input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> {
       if (this._service.create) {
         return this._service.create(toPlainObject(input));

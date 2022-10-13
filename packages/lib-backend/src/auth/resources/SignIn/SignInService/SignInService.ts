@@ -2,11 +2,12 @@ import { OtpService } from '@lib/backend/auth/resources/Otp/OtpService/OtpServic
 import { SIGN_IN_TOKEN_CLAIM_FIELDS } from '@lib/backend/auth/resources/SignIn/SignIn.constants';
 import { JwtService } from '@lib/backend/auth/utils/JwtService/JwtService';
 import { UserService } from '@lib/backend/user/resources/User/UserService/UserService';
+import { SIGN_IN_RESOURCE_NAME } from '@lib/shared/auth/resources/SignIn/SignIn.constants';
 import type { SignInFormModel, SignInModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 import type { SignInServiceModel } from '@lib/shared/auth/resources/SignIn/SignInService/SignInService.models';
 import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { withInject } from '@lib/shared/core/decorators/withInject/withInject';
-import { BadRequestError } from '@lib/shared/core/errors/BadRequestError/BadRequestError';
+import { BadRequestError } from '@lib/shared/http/errors/BadRequestError/BadRequestError';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { ContextModel } from '@lib/shared/resource/utils/Context/Context.models';
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
@@ -23,7 +24,7 @@ const _createSignIn = async (user: UserModel | null | undefined): Promise<SignIn
   return {};
 };
 
-@withContainer()
+@withContainer({ name: `${SIGN_IN_RESOURCE_NAME}Service` })
 export class SignInService implements SignInServiceModel {
   @withInject(UserService) protected _userService!: UserService;
 
@@ -31,7 +32,7 @@ export class SignInService implements SignInServiceModel {
 
   async create({
     form,
-  }: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInFormModel>): Promise<
+  }: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel>): Promise<
     OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>
   > {
     if (form.username && form.otp) {
@@ -61,7 +62,7 @@ export class SignInService implements SignInServiceModel {
   }
 
   async usernameUpdate(
-    { form }: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInFormModel>,
+    { form }: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
     if (form.username && form.otp) {

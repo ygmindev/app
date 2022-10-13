@@ -1,0 +1,320 @@
+474c2e0d5dbfb7a195ca2370aff03d73
+"use strict";
+
+/* istanbul ignore next */
+function cov_2g44q0pl5f() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/app/providers/AppProvider/AppProvider.tsx";
+  var hash = "7761ff99a3ecd99b105d2fcf9ab51655260b905e";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/app/providers/AppProvider/AppProvider.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 29
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 22
+        },
+        end: {
+          line: 4,
+          column: 50
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 27
+        },
+        end: {
+          line: 5,
+          column: 95
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 18
+        },
+        end: {
+          line: 6,
+          column: 74
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 17
+        },
+        end: {
+          line: 7,
+          column: 79
+        }
+      },
+      "6": {
+        start: {
+          line: 8,
+          column: 20
+        },
+        end: {
+          line: 8,
+          column: 78
+        }
+      },
+      "7": {
+        start: {
+          line: 9,
+          column: 32
+        },
+        end: {
+          line: 9,
+          column: 111
+        }
+      },
+      "8": {
+        start: {
+          line: 10,
+          column: 20
+        },
+        end: {
+          line: 14,
+          column: 1
+        }
+      },
+      "9": {
+        start: {
+          line: 11,
+          column: 23
+        },
+        end: {
+          line: 11,
+          column: 60
+        }
+      },
+      "10": {
+        start: {
+          line: 12,
+          column: 26
+        },
+        end: {
+          line: 12,
+          column: 68
+        }
+      },
+      "11": {
+        start: {
+          line: 13,
+          column: 4
+        },
+        end: {
+          line: 13,
+          column: 246
+        }
+      },
+      "12": {
+        start: {
+          line: 15,
+          column: 0
+        },
+        end: {
+          line: 15,
+          column: 34
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 10,
+            column: 20
+          },
+          end: {
+            line: 10,
+            column: 21
+          }
+        },
+        loc: {
+          start: {
+            line: 10,
+            column: 56
+          },
+          end: {
+            line: 14,
+            column: 1
+          }
+        },
+        line: 10
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 13,
+            column: 170
+          },
+          end: {
+            line: 13,
+            column: 195
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 13,
+            column: 170
+          },
+          end: {
+            line: 13,
+            column: 183
+          }
+        }, {
+          start: {
+            line: 13,
+            column: 187
+          },
+          end: {
+            line: 13,
+            column: 195
+          }
+        }],
+        line: 13
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {
+      "0": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/app/providers/AppProvider/AppProvider.tsx",
+      mappings: ";;;;AAAA,gGAA6F;AAE7F,2EAAwE;AAExE,gFAA6E;AAC7E,+EAA4E;AAC5E,gHAAsG;AAE/F,MAAM,WAAW,GAAoC,CAAC,EAAE,QAAQ,EAAE,MAAM,EAAE,GAAG,KAAK,EAAE,EAAE,EAAE;IAC7F,MAAM,EAAE,MAAM,EAAE,GAAG,IAAA,qBAAS,EAAC,EAAE,KAAK,EAAE,CAAC,CAAC;IACxC,MAAM,aAAa,GAAG,IAAA,mCAAgB,GAAE,CAAC;IACzC,OAAO,CACL,wBAAC,iBAAO,IACN,IAAI,QACJ,QAAQ,EAAE,sCAAc,CAAC,QAAQ,EACjC,KAAK,EAAE,MAAM,EACb,MAAM,EAAE,MAAM,aACb,aAAa,IAAI,QAAQ,EAE1B,uBAAC,eAAM,KAAG,IACF,CACX,CAAC;AACJ,CAAC,CAAC;AAdW,QAAA,WAAW,eActB",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/app/providers/AppProvider/AppProvider.tsx"],
+      sourcesContent: ["import { useIsInitialized } from '@lib/frontend/app/hooks/useIsInitialized/useIsInitialized';\nimport type { AppProviderPropsModel } from '@lib/frontend/app/providers/AppProvider/AppProvider.models';\nimport { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';\nimport type { SFCModel } from '@lib/frontend/core/core.models';\nimport { Alerts } from '@lib/frontend/notification/containers/Alerts/Alerts';\nimport { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';\nimport { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants';\n\nexport const AppProvider: SFCModel<AppProviderPropsModel> = ({ children, testID, ...props }) => {\n  const { styles } = useStyles({ props });\n  const isInitialized = useIsInitialized();\n  return (\n    <Wrapper\n      grow\n      position={SHAPE_POSITION.RELATIVE}\n      style={styles}\n      testID={testID}>\n      {isInitialized && children}\n\n      <Alerts />\n    </Wrapper>\n  );\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "7761ff99a3ecd99b105d2fcf9ab51655260b905e"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_2g44q0pl5f = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_2g44q0pl5f();
+cov_2g44q0pl5f().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_2g44q0pl5f().s[1]++;
+exports.AppProvider = void 0;
+const jsx_runtime_1 =
+/* istanbul ignore next */
+(cov_2g44q0pl5f().s[2]++, require("react/jsx-runtime"));
+const useIsInitialized_1 =
+/* istanbul ignore next */
+(cov_2g44q0pl5f().s[3]++, require("@lib/frontend/app/hooks/useIsInitialized/useIsInitialized"));
+const Wrapper_1 =
+/* istanbul ignore next */
+(cov_2g44q0pl5f().s[4]++, require("@lib/frontend/core/components/Wrapper/Wrapper"));
+const Alerts_1 =
+/* istanbul ignore next */
+(cov_2g44q0pl5f().s[5]++, require("@lib/frontend/notification/containers/Alerts/Alerts"));
+const useStyles_1 =
+/* istanbul ignore next */
+(cov_2g44q0pl5f().s[6]++, require("@lib/frontend/styling/hooks/useStyles/useStyles"));
+const shapeStyler_constants_1 =
+/* istanbul ignore next */
+(cov_2g44q0pl5f().s[7]++, require("@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants"));
+
+/* istanbul ignore next */
+cov_2g44q0pl5f().s[8]++;
+
+const AppProvider = ({
+  children,
+  testID,
+  ...props
+}) => {
+  /* istanbul ignore next */
+  cov_2g44q0pl5f().f[0]++;
+  const {
+    styles
+  } =
+  /* istanbul ignore next */
+  (cov_2g44q0pl5f().s[9]++, (0, useStyles_1.useStyles)({
+    props
+  }));
+  const isInitialized =
+  /* istanbul ignore next */
+  (cov_2g44q0pl5f().s[10]++, (0, useIsInitialized_1.useIsInitialized)());
+
+  /* istanbul ignore next */
+  cov_2g44q0pl5f().s[11]++;
+  return (0, jsx_runtime_1.jsxs)(Wrapper_1.Wrapper, {
+    grow: true,
+    position: shapeStyler_constants_1.SHAPE_POSITION.RELATIVE,
+    style: styles,
+    testID: testID,
+    children: [
+    /* istanbul ignore next */
+    (cov_2g44q0pl5f().b[0][0]++, isInitialized) &&
+    /* istanbul ignore next */
+    (cov_2g44q0pl5f().b[0][1]++, children), (0, jsx_runtime_1.jsx)(Alerts_1.Alerts, {})]
+  });
+};
+
+/* istanbul ignore next */
+cov_2g44q0pl5f().s[12]++;
+exports.AppProvider = AppProvider;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQTtBQUFBO0FBQUE7QUFFQTtBQUFBO0FBQUE7QUFFQTtBQUFBO0FBQUE7QUFDQTtBQUFBO0FBQUE7QUFDQTtBQUFBO0FBQUE7Ozs7O0FBRU8sTUFBTUEsV0FBVyxHQUFvQyxDQUFDO0VBQUVDLFFBQUY7RUFBWUMsTUFBWjtFQUFvQixHQUFHQztBQUF2QixDQUFELEtBQW1DO0VBQUE7RUFBQTtFQUM3RixNQUFNO0lBQUVDO0VBQUY7RUFBQTtFQUFBLDBCQUFhLDJCQUFVO0lBQUVEO0VBQUYsQ0FBVixDQUFiLENBQU47RUFDQSxNQUFNRSxhQUFhO0VBQUE7RUFBQSwyQkFBRywwQ0FBSCxDQUFuQjs7RUFGNkY7RUFBQTtFQUc3RixPQUNFLHdCQUFDQyxpQkFBRCxFQUFRO0lBQ05DLElBQUksTUFERTtJQUVOQyxRQUFRLEVBQUVDLHVDQUFlQyxRQUZuQjtJQUdOQyxLQUFLLEVBQUVQLE1BSEQ7SUFJTkYsTUFBTSxFQUFFQSxNQUpGO0lBSVFEO0lBQ2I7SUFBQSwwQ0FBYTtJQUFBO0lBQUEsNkJBQUlBLFFBQUosQ0FEQSxFQUdkLHVCQUFDVyxlQUFELEVBQU8sRUFBUCxDQUhjO0VBSlIsQ0FBUixDQURGO0FBV0QsQ0FkTTs7OztBQUFNQyxzQkFBV2IsV0FBWCIsIm5hbWVzIjpbIkFwcFByb3ZpZGVyIiwiY2hpbGRyZW4iLCJ0ZXN0SUQiLCJwcm9wcyIsInN0eWxlcyIsImlzSW5pdGlhbGl6ZWQiLCJXcmFwcGVyXzEiLCJncm93IiwicG9zaXRpb24iLCJzaGFwZVN0eWxlcl9jb25zdGFudHNfMSIsIlJFTEFUSVZFIiwic3R5bGUiLCJBbGVydHNfMSIsImV4cG9ydHMiXSwic291cmNlcyI6WyIvVXNlcnMveWdtaW4vUHJvamVjdHMvbW9ub192Mi9hcHAzL2FwcC9wYWNrYWdlcy9saWItZnJvbnRlbmQvc3JjL2FwcC9wcm92aWRlcnMvQXBwUHJvdmlkZXIvQXBwUHJvdmlkZXIudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHVzZUlzSW5pdGlhbGl6ZWQgfSBmcm9tICdAbGliL2Zyb250ZW5kL2FwcC9ob29rcy91c2VJc0luaXRpYWxpemVkL3VzZUlzSW5pdGlhbGl6ZWQnO1xuaW1wb3J0IHR5cGUgeyBBcHBQcm92aWRlclByb3BzTW9kZWwgfSBmcm9tICdAbGliL2Zyb250ZW5kL2FwcC9wcm92aWRlcnMvQXBwUHJvdmlkZXIvQXBwUHJvdmlkZXIubW9kZWxzJztcbmltcG9ydCB7IFdyYXBwZXIgfSBmcm9tICdAbGliL2Zyb250ZW5kL2NvcmUvY29tcG9uZW50cy9XcmFwcGVyL1dyYXBwZXInO1xuaW1wb3J0IHR5cGUgeyBTRkNNb2RlbCB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvY29yZS9jb3JlLm1vZGVscyc7XG5pbXBvcnQgeyBBbGVydHMgfSBmcm9tICdAbGliL2Zyb250ZW5kL25vdGlmaWNhdGlvbi9jb250YWluZXJzL0FsZXJ0cy9BbGVydHMnO1xuaW1wb3J0IHsgdXNlU3R5bGVzIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9zdHlsaW5nL2hvb2tzL3VzZVN0eWxlcy91c2VTdHlsZXMnO1xuaW1wb3J0IHsgU0hBUEVfUE9TSVRJT04gfSBmcm9tICdAbGliL2Zyb250ZW5kL3N0eWxpbmcvdXRpbHMvc3R5bGVyL3NoYXBlU3R5bGVyL3NoYXBlU3R5bGVyLmNvbnN0YW50cyc7XG5cbmV4cG9ydCBjb25zdCBBcHBQcm92aWRlcjogU0ZDTW9kZWw8QXBwUHJvdmlkZXJQcm9wc01vZGVsPiA9ICh7IGNoaWxkcmVuLCB0ZXN0SUQsIC4uLnByb3BzIH0pID0+IHtcbiAgY29uc3QgeyBzdHlsZXMgfSA9IHVzZVN0eWxlcyh7IHByb3BzIH0pO1xuICBjb25zdCBpc0luaXRpYWxpemVkID0gdXNlSXNJbml0aWFsaXplZCgpO1xuICByZXR1cm4gKFxuICAgIDxXcmFwcGVyXG4gICAgICBncm93XG4gICAgICBwb3NpdGlvbj17U0hBUEVfUE9TSVRJT04uUkVMQVRJVkV9XG4gICAgICBzdHlsZT17c3R5bGVzfVxuICAgICAgdGVzdElEPXt0ZXN0SUR9PlxuICAgICAge2lzSW5pdGlhbGl6ZWQgJiYgY2hpbGRyZW59XG5cbiAgICAgIDxBbGVydHMgLz5cbiAgICA8L1dyYXBwZXI+XG4gICk7XG59O1xuIl19

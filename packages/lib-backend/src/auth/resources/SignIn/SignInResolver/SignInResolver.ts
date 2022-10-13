@@ -19,7 +19,7 @@ import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 
 @withContainer()
-@withResolver()
+@withResolver({ Resource: SignIn })
 export class SignInResolver
   extends EntityResourceResolver<SignInModel, SignInFormModel>({
     Resource: SignIn,
@@ -33,12 +33,8 @@ export class SignInResolver
 
   @withOutput({ Resource: SignIn, method: RESOURCE_METHOD_TYPE.UPDATE, name: USERNAME_UPDATE })
   async usernameUpdate(
-    @withInput({
-      Resource: SignInForm,
-      method: RESOURCE_METHOD_TYPE.UPDATE,
-      name: USERNAME_UPDATE,
-    })
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInFormModel>,
+    @withInput({ Resource: SignInForm, method: RESOURCE_METHOD_TYPE.UPDATE, name: USERNAME_UPDATE })
+    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel>,
     @withContext()
     context: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {

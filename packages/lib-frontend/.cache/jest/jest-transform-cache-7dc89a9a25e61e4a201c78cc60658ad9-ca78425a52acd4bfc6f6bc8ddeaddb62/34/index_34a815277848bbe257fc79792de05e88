@@ -1,0 +1,56 @@
+8583c7ce8219bd9b391de28756fb540e
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _typeof = require("@babel/runtime/helpers/typeof");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createAnimatableComponent = exports.View = exports.Text = exports.Image = void 0;
+Object.defineProperty(exports, "createAnimation", {
+  enumerable: true,
+  get: function get() {
+    return _createAnimation["default"];
+  }
+});
+Object.defineProperty(exports, "initializeRegistryWithDefinitions", {
+  enumerable: true,
+  get: function get() {
+    return _registry.initializeRegistryWithDefinitions;
+  }
+});
+Object.defineProperty(exports, "registerAnimation", {
+  enumerable: true,
+  get: function get() {
+    return _registry.registerAnimation;
+  }
+});
+
+var _View = _interopRequireDefault(require("react-native-web/dist/exports/View"));
+
+var _Text = _interopRequireDefault(require("react-native-web/dist/exports/Text"));
+
+var _Image = _interopRequireDefault(require("react-native-web/dist/exports/Image"));
+
+var _createAnimatableComponent = _interopRequireDefault(require("./createAnimatableComponent"));
+
+var _registry = require("./registry");
+
+var ANIMATION_DEFINITIONS = _interopRequireWildcard(require("./definitions"));
+
+var _createAnimation = _interopRequireDefault(require("./createAnimation"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+(0, _registry.initializeRegistryWithDefinitions)(ANIMATION_DEFINITIONS);
+var createAnimatableComponent = _createAnimatableComponent["default"];
+exports.createAnimatableComponent = createAnimatableComponent;
+var View = (0, _createAnimatableComponent["default"])(_View["default"]);
+exports.View = View;
+var Text = (0, _createAnimatableComponent["default"])(_Text["default"]);
+exports.Text = Text;
+var Image = (0, _createAnimatableComponent["default"])(_Image["default"]);
+exports.Image = Image;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJpbml0aWFsaXplUmVnaXN0cnlXaXRoRGVmaW5pdGlvbnMiLCJBTklNQVRJT05fREVGSU5JVElPTlMiLCJjcmVhdGVBbmltYXRhYmxlQ29tcG9uZW50IiwiY3JlYXRlQ29tcG9uZW50IiwiVmlldyIsIkNvcmVWaWV3IiwiVGV4dCIsIkNvcmVUZXh0IiwiSW1hZ2UiLCJDb3JlSW1hZ2UiXSwic291cmNlcyI6WyJpbmRleC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQge1xuICBWaWV3IGFzIENvcmVWaWV3LFxuICBUZXh0IGFzIENvcmVUZXh0LFxuICBJbWFnZSBhcyBDb3JlSW1hZ2UsXG59IGZyb20gJ3JlYWN0LW5hdGl2ZSc7XG5pbXBvcnQgY3JlYXRlQ29tcG9uZW50IGZyb20gJy4vY3JlYXRlQW5pbWF0YWJsZUNvbXBvbmVudCc7XG5pbXBvcnQgeyBpbml0aWFsaXplUmVnaXN0cnlXaXRoRGVmaW5pdGlvbnMgfSBmcm9tICcuL3JlZ2lzdHJ5JztcbmltcG9ydCAqIGFzIEFOSU1BVElPTl9ERUZJTklUSU9OUyBmcm9tICcuL2RlZmluaXRpb25zJztcblxuaW5pdGlhbGl6ZVJlZ2lzdHJ5V2l0aERlZmluaXRpb25zKEFOSU1BVElPTl9ERUZJTklUSU9OUyk7XG5cbmV4cG9ydCBjb25zdCBjcmVhdGVBbmltYXRhYmxlQ29tcG9uZW50ID0gY3JlYXRlQ29tcG9uZW50O1xuZXhwb3J0IGNvbnN0IFZpZXcgPSBjcmVhdGVDb21wb25lbnQoQ29yZVZpZXcpO1xuZXhwb3J0IGNvbnN0IFRleHQgPSBjcmVhdGVDb21wb25lbnQoQ29yZVRleHQpO1xuZXhwb3J0IGNvbnN0IEltYWdlID0gY3JlYXRlQ29tcG9uZW50KENvcmVJbWFnZSk7XG5leHBvcnQgeyBkZWZhdWx0IGFzIGNyZWF0ZUFuaW1hdGlvbiB9IGZyb20gJy4vY3JlYXRlQW5pbWF0aW9uJztcbmV4cG9ydCB7XG4gIHJlZ2lzdGVyQW5pbWF0aW9uLFxuICBpbml0aWFsaXplUmVnaXN0cnlXaXRoRGVmaW5pdGlvbnMsXG59IGZyb20gJy4vcmVnaXN0cnknO1xuIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFLQTs7QUFDQTs7QUFDQTs7QUFRQTs7Ozs7O0FBTkEsSUFBQUEsMkNBQUEsRUFBa0NDLHFCQUFsQztBQUVPLElBQU1DLHlCQUF5QixHQUFHQyxxQ0FBbEM7O0FBQ0EsSUFBTUMsSUFBSSxHQUFHLElBQUFELHFDQUFBLEVBQWdCRSxnQkFBaEIsQ0FBYjs7QUFDQSxJQUFNQyxJQUFJLEdBQUcsSUFBQUgscUNBQUEsRUFBZ0JJLGdCQUFoQixDQUFiOztBQUNBLElBQU1DLEtBQUssR0FBRyxJQUFBTCxxQ0FBQSxFQUFnQk0saUJBQWhCLENBQWQifQ==

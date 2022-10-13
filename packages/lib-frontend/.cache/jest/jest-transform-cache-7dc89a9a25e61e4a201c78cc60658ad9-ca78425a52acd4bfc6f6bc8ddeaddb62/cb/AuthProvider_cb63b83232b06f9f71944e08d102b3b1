@@ -1,0 +1,464 @@
+b84fdb308607c1b9d1d32283652a857f
+"use strict";
+
+/* istanbul ignore next */
+function cov_1zye38ebon() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/auth/providers/AuthProvider/AuthProvider.tsx";
+  var hash = "918efb138f5d9dd9e6634b2066855201becbeead";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/auth/providers/AuthProvider/AuthProvider.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 30
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 22
+        },
+        end: {
+          line: 4,
+          column: 50
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 21
+        },
+        end: {
+          line: 5,
+          column: 78
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 16
+        },
+        end: {
+          line: 6,
+          column: 64
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 26
+        },
+        end: {
+          line: 7,
+          column: 93
+        }
+      },
+      "6": {
+        start: {
+          line: 8,
+          column: 18
+        },
+        end: {
+          line: 8,
+          column: 70
+        }
+      },
+      "7": {
+        start: {
+          line: 9,
+          column: 16
+        },
+        end: {
+          line: 9,
+          column: 32
+        }
+      },
+      "8": {
+        start: {
+          line: 10,
+          column: 21
+        },
+        end: {
+          line: 23,
+          column: 1
+        }
+      },
+      "9": {
+        start: {
+          line: 11,
+          column: 20
+        },
+        end: {
+          line: 11,
+          column: 60
+        }
+      },
+      "10": {
+        start: {
+          line: 12,
+          column: 27
+        },
+        end: {
+          line: 12,
+          column: 57
+        }
+      },
+      "11": {
+        start: {
+          line: 13,
+          column: 4
+        },
+        end: {
+          line: 21,
+          column: 26
+        }
+      },
+      "12": {
+        start: {
+          line: 14,
+          column: 8
+        },
+        end: {
+          line: 20,
+          column: 11
+        }
+      },
+      "13": {
+        start: {
+          line: 15,
+          column: 12
+        },
+        end: {
+          line: 18,
+          column: 13
+        }
+      },
+      "14": {
+        start: {
+          line: 16,
+          column: 35
+        },
+        end: {
+          line: 16,
+          column: 82
+        }
+      },
+      "15": {
+        start: {
+          line: 17,
+          column: 16
+        },
+        end: {
+          line: 17,
+          column: 84
+        }
+      },
+      "16": {
+        start: {
+          line: 19,
+          column: 12
+        },
+        end: {
+          line: 19,
+          column: 78
+        }
+      },
+      "17": {
+        start: {
+          line: 22,
+          column: 4
+        },
+        end: {
+          line: 22,
+          column: 82
+        }
+      },
+      "18": {
+        start: {
+          line: 24,
+          column: 0
+        },
+        end: {
+          line: 24,
+          column: 36
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 10,
+            column: 21
+          },
+          end: {
+            line: 10,
+            column: 22
+          }
+        },
+        loc: {
+          start: {
+            line: 10,
+            column: 39
+          },
+          end: {
+            line: 23,
+            column: 1
+          }
+        },
+        line: 10
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 13,
+            column: 27
+          },
+          end: {
+            line: 13,
+            column: 28
+          }
+        },
+        loc: {
+          start: {
+            line: 13,
+            column: 33
+          },
+          end: {
+            line: 21,
+            column: 5
+          }
+        },
+        line: 13
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 14,
+            column: 19
+          },
+          end: {
+            line: 14,
+            column: 20
+          }
+        },
+        loc: {
+          start: {
+            line: 14,
+            column: 42
+          },
+          end: {
+            line: 20,
+            column: 9
+          }
+        },
+        line: 14
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 15,
+            column: 12
+          },
+          end: {
+            line: 18,
+            column: 13
+          }
+        },
+        type: "if",
+        locations: [{
+          start: {
+            line: 15,
+            column: 12
+          },
+          end: {
+            line: 18,
+            column: 13
+          }
+        }, {
+          start: {
+            line: undefined,
+            column: undefined
+          },
+          end: {
+            line: undefined,
+            column: undefined
+          }
+        }],
+        line: 15
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0
+    },
+    b: {
+      "0": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/auth/providers/AuthProvider/AuthProvider.tsx",
+      mappings: ";;;;AAAA,+EAA4E;AAG5E,iEAAiE;AACjE,8FAA2F;AAC3F,uEAAwE;AACxE,iCAAkC;AAE3B,MAAM,YAAY,GAAoC,CAAC,EAAE,QAAQ,EAAE,EAAE,EAAE;IAC5E,MAAM,EAAE,GAAG,EAAE,GAAG,IAAA,iCAAe,GAAE,CAAC;IAClC,MAAM,EAAE,UAAU,EAAE,GAAG,IAAA,uBAAU,GAAE,CAAC;IAEpC,IAAA,iBAAS,EAAC,GAAG,EAAE;QACb,UAAU,CAAC,KAAK,EAAE,WAAW,EAAE,EAAE;YAC/B,IAAI,WAAW,EAAE;gBACf,MAAM,EAAE,MAAM,EAAE,GAAG,MAAM,GAAG,CAAC,EAAE,MAAM,EAAE,EAAE,GAAG,EAAE,WAAW,CAAC,GAAG,EAAE,EAAE,CAAC,CAAC;gBACnE,IAAA,gBAAQ,EAAC,qBAAW,CAAC,cAAc,CAAC,MAAM,CAAC,CAAC,CAAC;aAC9C;YACD,IAAA,gBAAQ,EAAC,qBAAW,CAAC,cAAc,CAAC,IAAI,CAAC,CAAC,CAAC;QAC7C,CAAC,CAAC,CAAC;IACL,CAAC,EAAE,CAAC,GAAG,EAAE,UAAU,CAAC,CAAC,CAAC;IAEtB,OAAO,2DAAG,QAAQ,GAAI,CAAC;AACzB,CAAC,CAAC;AAfW,QAAA,YAAY,gBAevB",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/auth/providers/AuthProvider/AuthProvider.tsx"],
+      sourcesContent: ["import { useSession } from '@lib/frontend/auth/hooks/useSession/useSession';\nimport type { AuthProviderPropsModel } from '@lib/frontend/auth/providers/AuthProvider/AuthProvider.models';\nimport type { FCModel } from '@lib/frontend/core/core.models';\nimport { dispatch } from '@lib/frontend/root/stores/store/store';\nimport { useUserResource } from '@lib/frontend/user/hooks/useUserResource/useUserResource';\nimport { userActions } from '@lib/frontend/user/stores/reducer/reducer';\nimport { useEffect } from 'react';\n\nexport const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {\n  const { get } = useUserResource();\n  const { initialize } = useSession();\n\n  useEffect(() => {\n    initialize(async (signInToken) => {\n      if (signInToken) {\n        const { result } = await get({ filter: { _id: signInToken._id } });\n        dispatch(userActions.currentUserSet(result));\n      }\n      dispatch(userActions.currentUserSet(null));\n    });\n  }, [get, initialize]);\n\n  return <>{children}</>;\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "918efb138f5d9dd9e6634b2066855201becbeead"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_1zye38ebon = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_1zye38ebon();
+cov_1zye38ebon().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_1zye38ebon().s[1]++;
+exports.AuthProvider = void 0;
+const jsx_runtime_1 =
+/* istanbul ignore next */
+(cov_1zye38ebon().s[2]++, require("react/jsx-runtime"));
+const useSession_1 =
+/* istanbul ignore next */
+(cov_1zye38ebon().s[3]++, require("@lib/frontend/auth/hooks/useSession/useSession"));
+const store_1 =
+/* istanbul ignore next */
+(cov_1zye38ebon().s[4]++, require("@lib/frontend/root/stores/store/store"));
+const useUserResource_1 =
+/* istanbul ignore next */
+(cov_1zye38ebon().s[5]++, require("@lib/frontend/user/hooks/useUserResource/useUserResource"));
+const reducer_1 =
+/* istanbul ignore next */
+(cov_1zye38ebon().s[6]++, require("@lib/frontend/user/stores/reducer/reducer"));
+const react_1 =
+/* istanbul ignore next */
+(cov_1zye38ebon().s[7]++, require("react"));
+
+/* istanbul ignore next */
+cov_1zye38ebon().s[8]++;
+
+const AuthProvider = ({
+  children
+}) => {
+  /* istanbul ignore next */
+  cov_1zye38ebon().f[0]++;
+  const {
+    get
+  } =
+  /* istanbul ignore next */
+  (cov_1zye38ebon().s[9]++, (0, useUserResource_1.useUserResource)());
+  const {
+    initialize
+  } =
+  /* istanbul ignore next */
+  (cov_1zye38ebon().s[10]++, (0, useSession_1.useSession)());
+
+  /* istanbul ignore next */
+  cov_1zye38ebon().s[11]++;
+  (0, react_1.useEffect)(() => {
+    /* istanbul ignore next */
+    cov_1zye38ebon().f[1]++;
+    cov_1zye38ebon().s[12]++;
+    initialize(async (signInToken) => {
+      /* istanbul ignore next */
+      cov_1zye38ebon().f[2]++;
+      cov_1zye38ebon().s[13]++;
+
+      if (signInToken) {
+        /* istanbul ignore next */
+        cov_1zye38ebon().b[0][0]++;
+        const {
+          result
+        } =
+        /* istanbul ignore next */
+        (cov_1zye38ebon().s[14]++, await get({
+          filter: {
+            _id: signInToken._id
+          }
+        }));
+
+        /* istanbul ignore next */
+        cov_1zye38ebon().s[15]++;
+        (0, store_1.dispatch)(reducer_1.userActions.currentUserSet(result));
+      } else
+      /* istanbul ignore next */
+      {
+        cov_1zye38ebon().b[0][1]++;
+      }
+
+      cov_1zye38ebon().s[16]++;
+      (0, store_1.dispatch)(reducer_1.userActions.currentUserSet(null));
+    });
+  }, [get, initialize]);
+
+  /* istanbul ignore next */
+  cov_1zye38ebon().s[17]++;
+  return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
+    children: children
+  });
+};
+
+/* istanbul ignore next */
+cov_1zye38ebon().s[18]++;
+exports.AuthProvider = AuthProvider;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBO0FBQUE7QUFBQTtBQUdBO0FBQUE7QUFBQTtBQUNBO0FBQUE7QUFBQTtBQUNBO0FBQUE7QUFBQTtBQUNBO0FBQUE7QUFBQTs7Ozs7QUFFTyxNQUFNQSxZQUFZLEdBQW9DLENBQUM7RUFBRUM7QUFBRixDQUFELEtBQWlCO0VBQUE7RUFBQTtFQUM1RSxNQUFNO0lBQUVDO0VBQUY7RUFBQTtFQUFBLDBCQUFVLHdDQUFWLENBQU47RUFDQSxNQUFNO0lBQUVDO0VBQUY7RUFBQTtFQUFBLDJCQUFpQiw4QkFBakIsQ0FBTjs7RUFGNEU7RUFBQTtFQUk1RSx1QkFBVSxNQUFLO0lBQUE7SUFBQTtJQUFBO0lBQ2JBLFVBQVUsQ0FBQyxPQUFPQyxXQUFQLEtBQXNCO01BQUE7TUFBQTtNQUFBOztNQUMvQixJQUFJQSxXQUFKLEVBQWlCO1FBQUE7UUFBQTtRQUNmLE1BQU07VUFBRUM7UUFBRjtRQUFBO1FBQUEsMkJBQWEsTUFBTUgsR0FBRyxDQUFDO1VBQUVJLE1BQU0sRUFBRTtZQUFFQyxHQUFHLEVBQUVILFdBQVcsQ0FBQ0c7VUFBbkI7UUFBVixDQUFELENBQXRCLENBQU47O1FBRGU7UUFBQTtRQUVmLHNCQUFTQyxzQkFBWUMsY0FBWixDQUEyQkosTUFBM0IsQ0FBVDtNQUNELENBSEQ7TUFBQTtNQUFBO1FBQUE7TUFBQTs7TUFEK0I7TUFLL0Isc0JBQVNHLHNCQUFZQyxjQUFaLENBQTJCLElBQTNCLENBQVQ7SUFDRCxDQU5TLENBQVY7RUFPRCxDQVJELEVBUUcsQ0FBQ1AsR0FBRCxFQUFNQyxVQUFOLENBUkg7O0VBSjRFO0VBQUE7RUFjNUUsT0FBTztJQUFBRixVQUFHQTtFQUFILEVBQVA7QUFDRCxDQWZNOzs7O0FBQU1TLHVCQUFZVixZQUFaIiwibmFtZXMiOlsiQXV0aFByb3ZpZGVyIiwiY2hpbGRyZW4iLCJnZXQiLCJpbml0aWFsaXplIiwic2lnbkluVG9rZW4iLCJyZXN1bHQiLCJmaWx0ZXIiLCJfaWQiLCJyZWR1Y2VyXzEiLCJjdXJyZW50VXNlclNldCIsImV4cG9ydHMiXSwic291cmNlcyI6WyIvVXNlcnMveWdtaW4vUHJvamVjdHMvbW9ub192Mi9hcHAzL2FwcC9wYWNrYWdlcy9saWItZnJvbnRlbmQvc3JjL2F1dGgvcHJvdmlkZXJzL0F1dGhQcm92aWRlci9BdXRoUHJvdmlkZXIudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHVzZVNlc3Npb24gfSBmcm9tICdAbGliL2Zyb250ZW5kL2F1dGgvaG9va3MvdXNlU2Vzc2lvbi91c2VTZXNzaW9uJztcbmltcG9ydCB0eXBlIHsgQXV0aFByb3ZpZGVyUHJvcHNNb2RlbCB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvYXV0aC9wcm92aWRlcnMvQXV0aFByb3ZpZGVyL0F1dGhQcm92aWRlci5tb2RlbHMnO1xuaW1wb3J0IHR5cGUgeyBGQ01vZGVsIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9jb3JlL2NvcmUubW9kZWxzJztcbmltcG9ydCB7IGRpc3BhdGNoIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9yb290L3N0b3Jlcy9zdG9yZS9zdG9yZSc7XG5pbXBvcnQgeyB1c2VVc2VyUmVzb3VyY2UgfSBmcm9tICdAbGliL2Zyb250ZW5kL3VzZXIvaG9va3MvdXNlVXNlclJlc291cmNlL3VzZVVzZXJSZXNvdXJjZSc7XG5pbXBvcnQgeyB1c2VyQWN0aW9ucyB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvdXNlci9zdG9yZXMvcmVkdWNlci9yZWR1Y2VyJztcbmltcG9ydCB7IHVzZUVmZmVjdCB9IGZyb20gJ3JlYWN0JztcblxuZXhwb3J0IGNvbnN0IEF1dGhQcm92aWRlcjogRkNNb2RlbDxBdXRoUHJvdmlkZXJQcm9wc01vZGVsPiA9ICh7IGNoaWxkcmVuIH0pID0+IHtcbiAgY29uc3QgeyBnZXQgfSA9IHVzZVVzZXJSZXNvdXJjZSgpO1xuICBjb25zdCB7IGluaXRpYWxpemUgfSA9IHVzZVNlc3Npb24oKTtcblxuICB1c2VFZmZlY3QoKCkgPT4ge1xuICAgIGluaXRpYWxpemUoYXN5bmMgKHNpZ25JblRva2VuKSA9PiB7XG4gICAgICBpZiAoc2lnbkluVG9rZW4pIHtcbiAgICAgICAgY29uc3QgeyByZXN1bHQgfSA9IGF3YWl0IGdldCh7IGZpbHRlcjogeyBfaWQ6IHNpZ25JblRva2VuLl9pZCB9IH0pO1xuICAgICAgICBkaXNwYXRjaCh1c2VyQWN0aW9ucy5jdXJyZW50VXNlclNldChyZXN1bHQpKTtcbiAgICAgIH1cbiAgICAgIGRpc3BhdGNoKHVzZXJBY3Rpb25zLmN1cnJlbnRVc2VyU2V0KG51bGwpKTtcbiAgICB9KTtcbiAgfSwgW2dldCwgaW5pdGlhbGl6ZV0pO1xuXG4gIHJldHVybiA8PntjaGlsZHJlbn08Lz47XG59O1xuIl19

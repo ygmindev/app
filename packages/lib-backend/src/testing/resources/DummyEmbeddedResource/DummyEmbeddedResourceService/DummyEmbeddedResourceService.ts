@@ -12,7 +12,7 @@ import type {
   DummyEntityResourceModel,
 } from '@lib/shared/testing/resources/DummyEntityResource/DummyEntityResource.models';
 
-@withContainer()
+@withContainer({ name: `${DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME}Service` })
 export class DummyEmbeddedResourceService
   extends EmbeddedResourceService<
     DummyEmbeddedResourceModel,

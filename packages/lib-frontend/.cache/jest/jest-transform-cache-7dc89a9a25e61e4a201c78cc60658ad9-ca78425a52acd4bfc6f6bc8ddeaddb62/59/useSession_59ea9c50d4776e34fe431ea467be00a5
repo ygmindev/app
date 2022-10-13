@@ -1,0 +1,154 @@
+0277610df0a63335fed320ad346976ba
+"use strict";
+
+/* istanbul ignore next */
+function cov_1cm4ysq5ib() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/auth/hooks/useSession/useSession.ts";
+  var hash = "6632be694893c0564671ddbe190df2fdeafef479";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/auth/hooks/useSession/useSession.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 28
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 20
+        },
+        end: {
+          line: 4,
+          column: 78
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 0
+        },
+        end: {
+          line: 5,
+          column: 123
+        }
+      },
+      "4": {
+        start: {
+          line: 5,
+          column: 84
+        },
+        end: {
+          line: 5,
+          column: 117
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 5,
+            column: 70
+          },
+          end: {
+            line: 5,
+            column: 71
+          }
+        },
+        loc: {
+          start: {
+            line: 5,
+            column: 82
+          },
+          end: {
+            line: 5,
+            column: 119
+          }
+        },
+        line: 5
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/auth/hooks/useSession/useSession.ts",
+      mappings: ";;;AAAA,+EAA4F;AAAnF,yGAAA,WAAW,OAAc",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/auth/hooks/useSession/useSession.ts"],
+      sourcesContent: ["export { _useSession as useSession } from '@lib/frontend/auth/hooks/useSession/_useSession';\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "6632be694893c0564671ddbe190df2fdeafef479"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_1cm4ysq5ib = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_1cm4ysq5ib();
+cov_1cm4ysq5ib().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_1cm4ysq5ib().s[1]++;
+exports.useSession = void 0;
+
+var _useSession_1 =
+/* istanbul ignore next */
+(cov_1cm4ysq5ib().s[2]++, require("@lib/frontend/auth/hooks/useSession/_useSession"));
+
+/* istanbul ignore next */
+cov_1cm4ysq5ib().s[3]++;
+Object.defineProperty(exports, "useSession", {
+  enumerable: true,
+  get: function () {
+    /* istanbul ignore next */
+    cov_1cm4ysq5ib().f[0]++;
+    cov_1cm4ysq5ib().s[4]++;
+    return _useSession_1._useSession;
+  }
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQTtBQUFBO0FBQUE7Ozs7QUFBU0E7RUFBQUM7RUFBQUM7SUFBQTtJQUFBO0lBQUE7SUFBQTtFQUFXO0FBQVgiLCJuYW1lcyI6WyJPYmplY3QiLCJlbnVtZXJhYmxlIiwiZ2V0Il0sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy9hdXRoL2hvb2tzL3VzZVNlc3Npb24vdXNlU2Vzc2lvbi50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgeyBfdXNlU2Vzc2lvbiBhcyB1c2VTZXNzaW9uIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9hdXRoL2hvb2tzL3VzZVNlc3Npb24vX3VzZVNlc3Npb24nO1xuIl19

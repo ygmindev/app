@@ -7,7 +7,7 @@ import type {
 } from '@lib/shared/testing/resources/DummyEntityResource/DummyEntityResource.models';
 import type { DummyEntityResourceServiceModel } from '@lib/shared/testing/resources/DummyEntityResource/DummyEntityResourceService/DummyEntityResourceService.models';
 
-@withContainer()
+@withContainer({ name: `${DUMMY_ENTITY_RESOURCE_RESOURCE_NAME}Service` })
 export class DummyEntityResourceService
   extends EntityResourceService<DummyEntityResourceModel, DummyEntityResourceFormModel>({
     afterCreate: async ({ output }) => output,

@@ -17,7 +17,7 @@ import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 
 @withContainer()
-@withResolver()
+@withResolver({ Resource: Otp })
 export class OtpResolver extends EntityResourceResolver<OtpModel, OtpFormModel>({
   Resource: Otp,
   ResourceData: OtpForm,
@@ -39,7 +39,7 @@ export class OtpResolver extends EntityResourceResolver<OtpModel, OtpFormModel>(
       method: RESOURCE_METHOD_TYPE.CREATE,
       name: OTP_CREATE_IF_DOES_NOT_EXIST,
     })
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, OtpFormModel>,
+    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, OtpModel, OtpFormModel>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, OtpModel>> {
     return this._otpService.createIfNotExists(input);
   }

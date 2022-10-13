@@ -51,13 +51,7 @@ export const useResourceMethod = <
     query: async (input) => {
       const _input = before ? await before({ input }) : input;
       const output = (await query<
-        {
-          input: InputModel<
-            TMethod,
-            TMethod extends RESOURCE_METHOD_TYPE.CREATE ? TForm : TType,
-            TRoot
-          >;
-        },
+        { input: InputModel<TMethod, TType, TForm, TRoot> },
         OutputModel<TMethod, TType, TRoot>
       >({
         fields,

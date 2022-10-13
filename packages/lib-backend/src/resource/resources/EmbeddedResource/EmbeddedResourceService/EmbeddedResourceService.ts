@@ -2,7 +2,7 @@ import { getConnection } from '@lib/backend/database/utils/getConnection/getConn
 import { EmbeddedResource } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResource';
 import type { ConstructorModel, PartialModel } from '@lib/shared/core/core.models';
 import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
-import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
+import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { flattenObject } from '@lib/shared/core/utils/flattenObject/flattenObject';
@@ -47,12 +47,12 @@ export const EmbeddedResourceService = <
   EmbeddedResourceServiceModel<TType, TForm, TRoot>
 > => {
   const _beforeCreate = async (
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>,
-  ): Promise<InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> => {
+    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
+  ): Promise<InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>> => {
     const value = new EmbeddedResource() as TType;
-    forEach(input.form, (v, k) => ((value as Record<string, unknown>)[k] = v));
+    forEach(input.form as unknown as object, (v, k) => ((value as Record<string, unknown>)[k] = v));
     value.beforeCreate && (await value.beforeCreate());
-    return { ...input, form: value };
+    return { ...input, form: value as unknown as TForm };
   };
 
   const _getCondition = (value: FilterModel<TType>): FilterModel<object> => {
@@ -96,27 +96,28 @@ export const EmbeddedResourceService = <
     }
 
     async create(
-      input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TForm, TRoot>,
+      input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> {
       const _input = cleanObject(
         this.decorators.beforeCreate ? await this.decorators.beforeCreate({ input }) : input,
       );
       if (_input.root) {
         const _inputClean = await _beforeCreate(
-          _input as unknown as InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>,
+          _input as InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
         );
-        const value = _inputClean.form as TType;
+        const value = _inputClean.form as TForm;
         const { result: rootResult } = await this._rootService.update({
           filter: _inputClean.root as PartialModel<TRoot>,
-          update: { $push: { [name]: value } } as unknown as UpdateModel<TRoot>,
+          update: { $push: { [name]: value } } as UpdateModel<TRoot>,
         });
         const output: OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot> = {
-          result: value,
+          // TODO: make it better?
+          result: value as unknown as TType,
           root: rootResult,
         };
         return this.decorators.afterCreate ? await this.decorators.afterCreate({ output }) : output;
       }
-      throw new NotFoundError(`${name} root`);
+      throw new InvalidArgumentError(`${name} root`);
     }
 
     async get(
@@ -141,7 +142,7 @@ export const EmbeddedResourceService = <
         };
         return this.decorators.afterGet ? await this.decorators.afterGet({ output }) : output;
       }
-      throw new NotFoundError(`${name} root`);
+      throw new InvalidArgumentError();
     }
 
     async getMany(
@@ -185,7 +186,7 @@ export const EmbeddedResourceService = <
           ? await this.decorators.afterGetMany({ output })
           : output;
       }
-      throw new NotFoundError(`${name} root`);
+      throw new InvalidArgumentError();
     }
 
     async getConnection(
@@ -211,7 +212,7 @@ export const EmbeddedResourceService = <
           ? await this.decorators.afterGetConnection({ output })
           : output;
       }
-      throw new NotFoundError(`${name} root`);
+      throw new InvalidArgumentError();
     }
 
     async update(
@@ -247,7 +248,7 @@ export const EmbeddedResourceService = <
         };
         return this.decorators.afterUpdate ? await this.decorators.afterUpdate({ output }) : output;
       }
-      throw new NotFoundError(`${name} root`);
+      throw new InvalidArgumentError();
     }
 
     async remove(
@@ -266,7 +267,7 @@ export const EmbeddedResourceService = <
         };
         return this.decorators.afterRemove ? await this.decorators.afterRemove({ output }) : output;
       }
-      throw new NotFoundError(`${name} root`);
+      throw new InvalidArgumentError();
     }
 
     async count(input: WithRootModel<TRoot>): Promise<number> {
@@ -274,7 +275,7 @@ export const EmbeddedResourceService = <
         const { result: rootResult } = await this._rootService.get({ filter: input.root });
         return (rootResult && (rootResult[name] as unknown as Array<TType>).length) || 0;
       }
-      throw new NotFoundError(`${name} root`);
+      throw new InvalidArgumentError();
     }
   }
 

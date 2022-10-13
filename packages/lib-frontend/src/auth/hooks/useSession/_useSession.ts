@@ -1,7 +1,7 @@
 import type { _UseSessionModel } from '@lib/frontend/auth/hooks/useSession/_useSession.models';
 import type { SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
-import { NetworkError } from '@lib/shared/core/errors/NetworkError/NetworkError';
 import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
+import { NetworkError } from '@lib/shared/http/errors/NetworkError/NetworkError';
 import { getApps, initializeApp } from 'firebase/app';
 import type { Auth, AuthError, User } from 'firebase/auth';
 import {

@@ -12,7 +12,8 @@ const { Default, meta } = withStory<
 >({
   defaultProps: {
     columns: [],
-    fields: [],
+    createFields: [],
+    getConnectionFields: [],
     name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
   },
   target: EntityResourceTable,

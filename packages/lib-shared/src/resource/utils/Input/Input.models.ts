@@ -5,5 +5,6 @@ import type { ArgsModel } from '@lib/shared/resource/utils/Args/Args.models';
 export type InputModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
+  TForm,
   TRoot = undefined,
-> = WithRootModel<TRoot> & ArgsModel<TMethod, TType>;
+> = WithRootModel<TRoot> & ArgsModel<TMethod, TType, TForm>;

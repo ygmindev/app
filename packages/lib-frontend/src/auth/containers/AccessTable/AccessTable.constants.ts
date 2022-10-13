@@ -10,7 +10,13 @@ import {
 } from '@lib/shared/auth/resources/Access/Access.constants';
 import type { AccessFormModel, AccessModel } from '@lib/shared/auth/resources/Access/Access.models';
 
-const ACCESS_FIELDS: Array<GraphQlFieldModel<AccessModel>> = ['_id', 'created', '_uid', 'role'];
+const ACCESS_FIELDS: Array<GraphQlFieldModel<AccessModel>> = [
+  '_id',
+  'created',
+  '_uid',
+  'role',
+  { user: ['email'] },
+];
 
 export const ACCESS_TABLE_PROPS: EntityResourceTablePropsModel<AccessModel, AccessFormModel> = {
   columns: [

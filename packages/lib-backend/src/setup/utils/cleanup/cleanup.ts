@@ -2,7 +2,7 @@ import { DatabaseMain } from '@lib/backend/database/utils/DatabaseMain/DatabaseM
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { cleanup as cleanupBase } from '@lib/shared/setup/utils/cleanup/cleanup';
 
-let isCleanedup: boolean;
+let isCleanedup = false;
 
 export const cleanup = async (): Promise<void> => {
   if (!isCleanedup) {

@@ -6,7 +6,10 @@ import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constan
 import type { FilterCombineModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/testing/resources/DummyEntityResource/DummyEntityResource.constants';
-import type { DummyEntityResourceModel } from '@lib/shared/testing/resources/DummyEntityResource/DummyEntityResource.models';
+import type {
+  DummyEntityResourceFormModel,
+  DummyEntityResourceModel,
+} from '@lib/shared/testing/resources/DummyEntityResource/DummyEntityResource.models';
 import { filter, find, isEqual, keys, pick, some } from 'lodash';
 
 export const testResourceService = async ({
@@ -44,7 +47,11 @@ export const testResourceService = async ({
   });
 
   test('works with create', async () => {
-    const input: InputModel<RESOURCE_METHOD_TYPE.CREATE, DummyEntityResourceModel> = {
+    const input: InputModel<
+      RESOURCE_METHOD_TYPE.CREATE,
+      DummyEntityResourceModel,
+      DummyEntityResourceFormModel
+    > = {
       form: { stringProperty: 'stringProperty1', stringPropertyOptional: undefined },
     };
     const { result } = await service.create(input);
@@ -58,7 +65,11 @@ export const testResourceService = async ({
 
   test('works with get by id', async () => {
     const { result: data = [] } = await service.getMany({ filter: {} });
-    const input: InputModel<RESOURCE_METHOD_TYPE.GET, DummyEntityResourceModel> = {
+    const input: InputModel<
+      RESOURCE_METHOD_TYPE.GET,
+      DummyEntityResourceModel,
+      DummyEntityResourceFormModel
+    > = {
       filter: { _id: data[0]._id },
     };
     const { result } = await service.get(input);
@@ -71,7 +82,11 @@ export const testResourceService = async ({
 
   test('works with get by partial', async () => {
     const { result: data } = await service.getMany({ filter: {} });
-    const input: InputModel<RESOURCE_METHOD_TYPE.GET, DummyEntityResourceModel> = {
+    const input: InputModel<
+      RESOURCE_METHOD_TYPE.GET,
+      DummyEntityResourceModel,
+      DummyEntityResourceFormModel
+    > = {
       filter: { stringProperty: 'stringProperty1' },
     };
     const { result } = await service.get(input);
@@ -84,7 +99,11 @@ export const testResourceService = async ({
 
   test('works with get by and condition', async () => {
     const { result: data } = await service.getMany({ filter: {} });
-    const input: InputModel<RESOURCE_METHOD_TYPE.GET, DummyEntityResourceModel> = {
+    const input: InputModel<
+      RESOURCE_METHOD_TYPE.GET,
+      DummyEntityResourceModel,
+      DummyEntityResourceFormModel
+    > = {
       filter: {
         $and: [
           { stringProperty: 'stringProperty1' },
@@ -108,7 +127,11 @@ export const testResourceService = async ({
 
   test('works with get by or condition', async () => {
     const { result: data } = await service.getMany({ filter: {} });
-    const input: InputModel<RESOURCE_METHOD_TYPE.GET, DummyEntityResourceModel> = {
+    const input: InputModel<
+      RESOURCE_METHOD_TYPE.GET,
+      DummyEntityResourceModel,
+      DummyEntityResourceFormModel
+    > = {
       filter: {
         $or: [{ stringProperty: 'stringProperty1' }, { stringPropertyOptional: 'does not exist' }],
       },
@@ -128,7 +151,11 @@ export const testResourceService = async ({
 
   test('works with getMany by partial', async () => {
     const { result: data } = await service.getMany({ filter: {} });
-    const input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, DummyEntityResourceModel> = {
+    const input: InputModel<
+      RESOURCE_METHOD_TYPE.GET_MANY,
+      DummyEntityResourceModel,
+      DummyEntityResourceFormModel
+    > = {
       filter: { stringProperty: 'stringProperty1' },
     };
     const { result } = await service.getMany(input);
@@ -141,7 +168,11 @@ export const testResourceService = async ({
 
   test('works with getMany by and condition', async () => {
     const { result: data } = await service.getMany({ filter: {} });
-    const input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, DummyEntityResourceModel> = {
+    const input: InputModel<
+      RESOURCE_METHOD_TYPE.GET_MANY,
+      DummyEntityResourceModel,
+      DummyEntityResourceFormModel
+    > = {
       filter: {
         $and: [
           { stringProperty: 'stringProperty1' },
@@ -165,7 +196,11 @@ export const testResourceService = async ({
 
   test('works with getMany by or condition', async () => {
     const { result: data } = await service.getMany({ filter: {} });
-    const input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, DummyEntityResourceModel> = {
+    const input: InputModel<
+      RESOURCE_METHOD_TYPE.GET_MANY,
+      DummyEntityResourceModel,
+      DummyEntityResourceFormModel
+    > = {
       filter: {
         $or: [{ stringProperty: 'stringProperty1' }, { stringPropertyOptional: 'does not exist' }],
       },
@@ -188,7 +223,11 @@ export const testResourceService = async ({
     const TAKE = 1;
 
     const { result: data } = await service.getMany({ filter: {} });
-    const input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, DummyEntityResourceModel> = {
+    const input: InputModel<
+      RESOURCE_METHOD_TYPE.GET_MANY,
+      DummyEntityResourceModel,
+      DummyEntityResourceFormModel
+    > = {
       filter: { stringProperty: 'stringProperty1' },
       options: { skip: SKIP, take: TAKE },
     };
@@ -340,7 +379,11 @@ export const testResourceService = async ({
 
   test('works with update by partial', async () => {
     const { result: data = [] } = await service.getMany({ filter: {} });
-    const input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, DummyEntityResourceModel> = {
+    const input: InputModel<
+      RESOURCE_METHOD_TYPE.UPDATE,
+      DummyEntityResourceModel,
+      DummyEntityResourceFormModel
+    > = {
       filter: { _id: data[0]._id },
       update: { stringProperty: 'stringProperty2' },
     };
@@ -353,7 +396,11 @@ export const testResourceService = async ({
 
   test('works with update by push', async () => {
     const { result: data = [] } = await service.getMany({ filter: {} });
-    const input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, DummyEntityResourceModel> = {
+    const input: InputModel<
+      RESOURCE_METHOD_TYPE.UPDATE,
+      DummyEntityResourceModel,
+      DummyEntityResourceFormModel
+    > = {
       filter: { _id: data[0]._id },
       update: { $push: { stringArrayProperty: 'stringArrayPropertyElement1' } },
     };
@@ -369,7 +416,11 @@ export const testResourceService = async ({
 
   test('works with update by pull', async () => {
     const { result: data = [] } = await service.getMany({ filter: {} });
-    const input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, DummyEntityResourceModel> = {
+    const input: InputModel<
+      RESOURCE_METHOD_TYPE.UPDATE,
+      DummyEntityResourceModel,
+      DummyEntityResourceFormModel
+    > = {
       filter: { _id: data[0]._id },
       update: { $pull: { stringArrayProperty: 'stringArrayPropertyElement1' } },
     };
@@ -382,7 +433,11 @@ export const testResourceService = async ({
   });
 
   test('works with remove by id', async () => {
-    const input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, DummyEntityResourceModel> = {
+    const input: InputModel<
+      RESOURCE_METHOD_TYPE.REMOVE,
+      DummyEntityResourceModel,
+      DummyEntityResourceFormModel
+    > = {
       filter: { stringProperty: 'stringProperty1' },
     };
     await service.remove(input);

@@ -9,7 +9,7 @@ import type { OtpFormModel, OtpModel } from '@lib/shared/auth/resources/Otp/Otp.
 
 @withEntity({ name: `${OTP_RESOURCE_NAME}Form` })
 export class OtpForm implements OtpFormModel {
-  @withField({ isUnique: true })
+  @withField({ isRepository: true, isUnique: true })
   username!: string;
 }
 

@@ -1,0 +1,399 @@
+5d8408240411fd7d0325909ecddee196
+"use strict";
+
+/* istanbul ignore next */
+function cov_v2wju0raf() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/notification/containers/Alerts/Alerts.tsx";
+  var hash = "7917bfb2bd62484852c22987cd411d7fc3c5711c";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/notification/containers/Alerts/Alerts.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 24
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 22
+        },
+        end: {
+          line: 4,
+          column: 50
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 16
+        },
+        end: {
+          line: 5,
+          column: 32
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 18
+        },
+        end: {
+          line: 6,
+          column: 74
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 16
+        },
+        end: {
+          line: 7,
+          column: 76
+        }
+      },
+      "6": {
+        start: {
+          line: 8,
+          column: 27
+        },
+        end: {
+          line: 8,
+          column: 99
+        }
+      },
+      "7": {
+        start: {
+          line: 9,
+          column: 22
+        },
+        end: {
+          line: 9,
+          column: 81
+        }
+      },
+      "8": {
+        start: {
+          line: 10,
+          column: 32
+        },
+        end: {
+          line: 10,
+          column: 111
+        }
+      },
+      "9": {
+        start: {
+          line: 11,
+          column: 15
+        },
+        end: {
+          line: 14,
+          column: 1
+        }
+      },
+      "10": {
+        start: {
+          line: 12,
+          column: 19
+        },
+        end: {
+          line: 12,
+          column: 87
+        }
+      },
+      "11": {
+        start: {
+          line: 12,
+          column: 61
+        },
+        end: {
+          line: 12,
+          column: 86
+        }
+      },
+      "12": {
+        start: {
+          line: 13,
+          column: 4
+        },
+        end: {
+          line: 13,
+          column: 344
+        }
+      },
+      "13": {
+        start: {
+          line: 13,
+          column: 260
+        },
+        end: {
+          line: 13,
+          column: 330
+        }
+      },
+      "14": {
+        start: {
+          line: 15,
+          column: 0
+        },
+        end: {
+          line: 15,
+          column: 24
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 11,
+            column: 15
+          },
+          end: {
+            line: 11,
+            column: 16
+          }
+        },
+        loc: {
+          start: {
+            line: 11,
+            column: 21
+          },
+          end: {
+            line: 14,
+            column: 1
+          }
+        },
+        line: 11
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 12,
+            column: 50
+          },
+          end: {
+            line: 12,
+            column: 51
+          }
+        },
+        loc: {
+          start: {
+            line: 12,
+            column: 61
+          },
+          end: {
+            line: 12,
+            column: 86
+          }
+        },
+        line: 12
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 13,
+            column: 248
+          },
+          end: {
+            line: 13,
+            column: 249
+          }
+        },
+        loc: {
+          start: {
+            line: 13,
+            column: 260
+          },
+          end: {
+            line: 13,
+            column: 330
+          }
+        },
+        line: 13
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 13,
+            column: 11
+          },
+          end: {
+            line: 13,
+            column: 343
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 13,
+            column: 28
+          },
+          end: {
+            line: 13,
+            column: 335
+          }
+        }, {
+          start: {
+            line: 13,
+            column: 339
+          },
+          end: {
+            line: 13,
+            column: 343
+          }
+        }],
+        line: 13
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0
+    },
+    b: {
+      "0": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/notification/containers/Alerts/Alerts.tsx",
+      mappings: ";;;;;AAAA,2EAAwE;AAExE,6EAA0E;AAC1E,oGAAiG;AAEjG,kFAA+E;AAC/E,gHAAsG;AAE/F,MAAM,MAAM,GAA+B,GAAG,EAAE;IACrD,MAAM,MAAM,GAAG,IAAA,yBAAW,EAAC,CAAC,KAAK,EAAE,EAAE,CAAC,KAAK,CAAC,YAAY,CAAC,MAAM,CAAC,CAAC;IACjE,OAAO,MAAM,CAAC,MAAM,CAAC,CAAC,CAAC,CACrB,uBAAC,iBAAO,IACN,MAAM,EAAE,CAAC,EACT,IAAI,EAAE,CAAC,EACP,CAAC,EAAC,MAAM,EACR,QAAQ,EAAE,sCAAc,CAAC,QAAQ,EACjC,KAAK,EAAE,CAAC,EACR,KAAK,EAAE,mCAAgB,EACvB,MAAM,EAAE,CAAC,YACR,MAAM,CAAC,GAAG,CAAC,CAAC,KAAK,EAAE,EAAE,CAAC,CACrB,2BAAC,aAAK,OACA,KAAK,EACT,GAAG,EAAE,KAAK,CAAC,EAAE,GACb,CACH,CAAC,GACM,CACX,CAAC,CAAC,CAAC,IAAI,CAAC;AACX,CAAC,CAAC;AAnBW,QAAA,MAAM,UAmBjB",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/notification/containers/Alerts/Alerts.tsx"],
+      sourcesContent: ["import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';\nimport type { SFCModel } from '@lib/frontend/core/core.models';\nimport { Alert } from '@lib/frontend/notification/components/Alert/Alert';\nimport { ALERTS_MAX_WIDTH } from '@lib/frontend/notification/containers/Alerts/Alerts.constants';\nimport type { AlertsPropsModel } from '@lib/frontend/notification/containers/Alerts/Alerts.models';\nimport { useSelector } from '@lib/frontend/root/hooks/useSelector/useSelector';\nimport { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants';\n\nexport const Alerts: SFCModel<AlertsPropsModel> = () => {\n  const alerts = useSelector((state) => state.notification.alerts);\n  return alerts.length ? (\n    <Wrapper\n      bottom={0}\n      left={0}\n      m=\"auto\"\n      position={SHAPE_POSITION.ABSOLUTE}\n      right={0}\n      width={ALERTS_MAX_WIDTH}\n      zIndex={1}>\n      {alerts.map((alert) => (\n        <Alert\n          {...alert}\n          key={alert.id}\n        />\n      ))}\n    </Wrapper>\n  ) : null;\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "7917bfb2bd62484852c22987cd411d7fc3c5711c"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_v2wju0raf = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_v2wju0raf();
+cov_v2wju0raf().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_v2wju0raf().s[1]++;
+exports.Alerts = void 0;
+const jsx_runtime_1 =
+/* istanbul ignore next */
+(cov_v2wju0raf().s[2]++, require("react/jsx-runtime"));
+const react_1 =
+/* istanbul ignore next */
+(cov_v2wju0raf().s[3]++, require("react"));
+const Wrapper_1 =
+/* istanbul ignore next */
+(cov_v2wju0raf().s[4]++, require("@lib/frontend/core/components/Wrapper/Wrapper"));
+const Alert_1 =
+/* istanbul ignore next */
+(cov_v2wju0raf().s[5]++, require("@lib/frontend/notification/components/Alert/Alert"));
+const Alerts_constants_1 =
+/* istanbul ignore next */
+(cov_v2wju0raf().s[6]++, require("@lib/frontend/notification/containers/Alerts/Alerts.constants"));
+const useSelector_1 =
+/* istanbul ignore next */
+(cov_v2wju0raf().s[7]++, require("@lib/frontend/root/hooks/useSelector/useSelector"));
+const shapeStyler_constants_1 =
+/* istanbul ignore next */
+(cov_v2wju0raf().s[8]++, require("@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants"));
+
+/* istanbul ignore next */
+cov_v2wju0raf().s[9]++;
+
+const Alerts = () => {
+  /* istanbul ignore next */
+  cov_v2wju0raf().f[0]++;
+  const alerts =
+  /* istanbul ignore next */
+  (cov_v2wju0raf().s[10]++, (0, useSelector_1.useSelector)((state) => {
+    /* istanbul ignore next */
+    cov_v2wju0raf().f[1]++;
+    cov_v2wju0raf().s[11]++;
+    return state.notification.alerts;
+  }));
+
+  /* istanbul ignore next */
+  cov_v2wju0raf().s[12]++;
+  return alerts.length ?
+  /* istanbul ignore next */
+  (cov_v2wju0raf().b[0][0]++, (0, jsx_runtime_1.jsx)(Wrapper_1.Wrapper, {
+    bottom: 0,
+    left: 0,
+    m: "auto",
+    position: shapeStyler_constants_1.SHAPE_POSITION.ABSOLUTE,
+    right: 0,
+    width: Alerts_constants_1.ALERTS_MAX_WIDTH,
+    zIndex: 1,
+    children: alerts.map((alert) => {
+      /* istanbul ignore next */
+      cov_v2wju0raf().f[2]++;
+      cov_v2wju0raf().s[13]++;
+      return (0, react_1.createElement)(Alert_1.Alert, { ...alert,
+        key: alert.id
+      });
+    })
+  })) :
+  /* istanbul ignore next */
+  (cov_v2wju0raf().b[0][1]++, null);
+};
+
+/* istanbul ignore next */
+cov_v2wju0raf().s[14]++;
+exports.Alerts = Alerts;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQTtBQUFBO0FBQUE7QUFFQTtBQUFBO0FBQUE7QUFDQTtBQUFBO0FBQUE7QUFFQTtBQUFBO0FBQUE7QUFDQTtBQUFBO0FBQUE7Ozs7O0FBRU8sTUFBTUEsTUFBTSxHQUErQixNQUFLO0VBQUE7RUFBQTtFQUNyRCxNQUFNQyxNQUFNO0VBQUE7RUFBQSwwQkFBRywrQkFBWSxDQUFDQyxLQUFELEtBQVc7SUFBQTtJQUFBO0lBQUE7SUFBQSxZQUFLLENBQUNDLFlBQU4sQ0FBbUJGLE1BQW5CO0VBQXlCLENBQWhELENBQUgsQ0FBWjs7RUFEcUQ7RUFBQTtFQUVyRCxPQUFPQSxNQUFNLENBQUNHLE1BQVA7RUFBQTtFQUFBLDRCQUNMLHVCQUFDQyxpQkFBRCxFQUFRO0lBQ05DLE1BQU0sRUFBRSxDQURGO0lBRU5DLElBQUksRUFBRSxDQUZBO0lBR05DLENBQUMsRUFBQyxNQUhJO0lBSU5DLFFBQVEsRUFBRUMsdUNBQWVDLFFBSm5CO0lBS05DLEtBQUssRUFBRSxDQUxEO0lBTU5DLEtBQUssRUFBRUMsbUNBTkQ7SUFPTkMsTUFBTSxFQUFFLENBUEY7SUFPR0MsVUFDUmYsTUFBTSxDQUFDZ0IsR0FBUCxDQUFXLENBQUNDLEtBQUQsS0FDVjtNQUFBO01BQUE7TUFBQTtNQUFBLGtDQUFDQyxhQUFELEVBQU0sS0FDQUQsS0FEQTtRQUVKRSxHQUFHLEVBQUVGLEtBQUssQ0FBQ0c7TUFGUCxDQUFOO0lBR0UsQ0FKSDtFQVJLLENBQVIsQ0FESztFQUFBO0VBQUEsNEJBZ0JILElBaEJHLENBQVA7QUFpQkQsQ0FuQk07Ozs7QUFBTUMsaUJBQU10QixNQUFOIiwibmFtZXMiOlsiQWxlcnRzIiwiYWxlcnRzIiwic3RhdGUiLCJub3RpZmljYXRpb24iLCJsZW5ndGgiLCJXcmFwcGVyXzEiLCJib3R0b20iLCJsZWZ0IiwibSIsInBvc2l0aW9uIiwic2hhcGVTdHlsZXJfY29uc3RhbnRzXzEiLCJBQlNPTFVURSIsInJpZ2h0Iiwid2lkdGgiLCJBbGVydHNfY29uc3RhbnRzXzEiLCJ6SW5kZXgiLCJjaGlsZHJlbiIsIm1hcCIsImFsZXJ0IiwiQWxlcnRfMSIsImtleSIsImlkIiwiZXhwb3J0cyJdLCJzb3VyY2VzIjpbIi9Vc2Vycy95Z21pbi9Qcm9qZWN0cy9tb25vX3YyL2FwcDMvYXBwL3BhY2thZ2VzL2xpYi1mcm9udGVuZC9zcmMvbm90aWZpY2F0aW9uL2NvbnRhaW5lcnMvQWxlcnRzL0FsZXJ0cy50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgV3JhcHBlciB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvY29yZS9jb21wb25lbnRzL1dyYXBwZXIvV3JhcHBlcic7XG5pbXBvcnQgdHlwZSB7IFNGQ01vZGVsIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9jb3JlL2NvcmUubW9kZWxzJztcbmltcG9ydCB7IEFsZXJ0IH0gZnJvbSAnQGxpYi9mcm9udGVuZC9ub3RpZmljYXRpb24vY29tcG9uZW50cy9BbGVydC9BbGVydCc7XG5pbXBvcnQgeyBBTEVSVFNfTUFYX1dJRFRIIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9ub3RpZmljYXRpb24vY29udGFpbmVycy9BbGVydHMvQWxlcnRzLmNvbnN0YW50cyc7XG5pbXBvcnQgdHlwZSB7IEFsZXJ0c1Byb3BzTW9kZWwgfSBmcm9tICdAbGliL2Zyb250ZW5kL25vdGlmaWNhdGlvbi9jb250YWluZXJzL0FsZXJ0cy9BbGVydHMubW9kZWxzJztcbmltcG9ydCB7IHVzZVNlbGVjdG9yIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9yb290L2hvb2tzL3VzZVNlbGVjdG9yL3VzZVNlbGVjdG9yJztcbmltcG9ydCB7IFNIQVBFX1BPU0lUSU9OIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9zdHlsaW5nL3V0aWxzL3N0eWxlci9zaGFwZVN0eWxlci9zaGFwZVN0eWxlci5jb25zdGFudHMnO1xuXG5leHBvcnQgY29uc3QgQWxlcnRzOiBTRkNNb2RlbDxBbGVydHNQcm9wc01vZGVsPiA9ICgpID0+IHtcbiAgY29uc3QgYWxlcnRzID0gdXNlU2VsZWN0b3IoKHN0YXRlKSA9PiBzdGF0ZS5ub3RpZmljYXRpb24uYWxlcnRzKTtcbiAgcmV0dXJuIGFsZXJ0cy5sZW5ndGggPyAoXG4gICAgPFdyYXBwZXJcbiAgICAgIGJvdHRvbT17MH1cbiAgICAgIGxlZnQ9ezB9XG4gICAgICBtPVwiYXV0b1wiXG4gICAgICBwb3NpdGlvbj17U0hBUEVfUE9TSVRJT04uQUJTT0xVVEV9XG4gICAgICByaWdodD17MH1cbiAgICAgIHdpZHRoPXtBTEVSVFNfTUFYX1dJRFRIfVxuICAgICAgekluZGV4PXsxfT5cbiAgICAgIHthbGVydHMubWFwKChhbGVydCkgPT4gKFxuICAgICAgICA8QWxlcnRcbiAgICAgICAgICB7Li4uYWxlcnR9XG4gICAgICAgICAga2V5PXthbGVydC5pZH1cbiAgICAgICAgLz5cbiAgICAgICkpfVxuICAgIDwvV3JhcHBlcj5cbiAgKSA6IG51bGw7XG59O1xuIl19

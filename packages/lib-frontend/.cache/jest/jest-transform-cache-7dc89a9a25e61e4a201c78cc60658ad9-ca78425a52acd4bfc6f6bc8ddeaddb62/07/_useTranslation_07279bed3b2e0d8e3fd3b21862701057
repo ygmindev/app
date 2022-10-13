@@ -1,0 +1,217 @@
+76333527d068c995fe643328868e08c8
+"use strict";
+
+/* istanbul ignore next */
+function cov_2f5ghv6l4o() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/locale/hooks/useTranslation/_useTranslation.ts";
+  var hash = "c6d50268b855487ecbc4268dbb3c32c42b554061";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/locale/hooks/useTranslation/_useTranslation.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 33
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 24
+        },
+        end: {
+          line: 4,
+          column: 48
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 24
+        },
+        end: {
+          line: 8,
+          column: 1
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 25
+        },
+        end: {
+          line: 6,
+          column: 64
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 4
+        },
+        end: {
+          line: 7,
+          column: 39
+        }
+      },
+      "6": {
+        start: {
+          line: 9,
+          column: 0
+        },
+        end: {
+          line: 9,
+          column: 42
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 5,
+            column: 24
+          },
+          end: {
+            line: 5,
+            column: 25
+          }
+        },
+        loc: {
+          start: {
+            line: 5,
+            column: 37
+          },
+          end: {
+            line: 8,
+            column: 1
+          }
+        },
+        line: 5
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 5,
+            column: 25
+          },
+          end: {
+            line: 5,
+            column: 32
+          }
+        },
+        type: "default-arg",
+        locations: [{
+          start: {
+            line: 5,
+            column: 30
+          },
+          end: {
+            line: 5,
+            column: 32
+          }
+        }],
+        line: 5
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {
+      "0": [0]
+    },
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/locale/hooks/useTranslation/_useTranslation.ts",
+      mappings: ";;;AACA,iDAA+C;AAExC,MAAM,eAAe,GAAG,CAAC,KAAoB,EAAE,EAAwB,EAAE;IAC9E,MAAM,EAAE,KAAK,EAAE,CAAC,EAAE,GAAG,IAAA,8BAAc,EAAC,EAAE,CAAC,CAAC;IACxC,OAAO,EAAE,aAAa,EAAE,KAAK,EAAE,CAAC,EAAE,CAAC;AACrC,CAAC,CAAC;AAHW,QAAA,eAAe,mBAG1B",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/locale/hooks/useTranslation/_useTranslation.ts"],
+      sourcesContent: ["import type { _UseTranslationModel } from '@lib/frontend/locale/hooks/useTranslation/_useTranslation.models';\nimport { useTranslation } from 'react-i18next';\n\nexport const _useTranslation = (ns: Array<string> = []): _UseTranslationModel => {\n  const { ready, t } = useTranslation(ns);\n  return { isInitialized: ready, t };\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "c6d50268b855487ecbc4268dbb3c32c42b554061"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_2f5ghv6l4o = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_2f5ghv6l4o();
+cov_2f5ghv6l4o().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_2f5ghv6l4o().s[1]++;
+exports._useTranslation = void 0;
+const react_i18next_1 =
+/* istanbul ignore next */
+(cov_2f5ghv6l4o().s[2]++, require("react-i18next"));
+
+/* istanbul ignore next */
+cov_2f5ghv6l4o().s[3]++;
+
+const _useTranslation = (ns =
+/* istanbul ignore next */
+(cov_2f5ghv6l4o().b[0][0]++, [])) => {
+  /* istanbul ignore next */
+  cov_2f5ghv6l4o().f[0]++;
+  const {
+    ready,
+    t
+  } =
+  /* istanbul ignore next */
+  (cov_2f5ghv6l4o().s[4]++, (0, react_i18next_1.useTranslation)(ns));
+
+  /* istanbul ignore next */
+  cov_2f5ghv6l4o().s[5]++;
+  return {
+    isInitialized: ready,
+    t
+  };
+};
+
+/* istanbul ignore next */
+cov_2f5ghv6l4o().s[6]++;
+exports._useTranslation = _useTranslation;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFDQTtBQUFBO0FBQUE7Ozs7O0FBRU8sTUFBTUEsZUFBZSxHQUFHLENBQUNDO0FBQUE7QUFBQSw2QkFBb0IsRUFBcEIsQ0FBRCxLQUFpRDtFQUFBO0VBQUE7RUFDOUUsTUFBTTtJQUFFQyxLQUFGO0lBQVNDO0VBQVQ7RUFBQTtFQUFBLDBCQUFlLG9DQUFlRixFQUFmLENBQWYsQ0FBTjs7RUFEOEU7RUFBQTtFQUU5RSxPQUFPO0lBQUVHLGFBQWEsRUFBRUYsS0FBakI7SUFBd0JDO0VBQXhCLENBQVA7QUFDRCxDQUhNOzs7O0FBQU1FLDBCQUFlTCxlQUFmIiwibmFtZXMiOlsiX3VzZVRyYW5zbGF0aW9uIiwibnMiLCJyZWFkeSIsInQiLCJpc0luaXRpYWxpemVkIiwiZXhwb3J0cyJdLCJzb3VyY2VzIjpbIi9Vc2Vycy95Z21pbi9Qcm9qZWN0cy9tb25vX3YyL2FwcDMvYXBwL3BhY2thZ2VzL2xpYi1mcm9udGVuZC9zcmMvbG9jYWxlL2hvb2tzL3VzZVRyYW5zbGF0aW9uL191c2VUcmFuc2xhdGlvbi50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgdHlwZSB7IF9Vc2VUcmFuc2xhdGlvbk1vZGVsIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9sb2NhbGUvaG9va3MvdXNlVHJhbnNsYXRpb24vX3VzZVRyYW5zbGF0aW9uLm1vZGVscyc7XG5pbXBvcnQgeyB1c2VUcmFuc2xhdGlvbiB9IGZyb20gJ3JlYWN0LWkxOG5leHQnO1xuXG5leHBvcnQgY29uc3QgX3VzZVRyYW5zbGF0aW9uID0gKG5zOiBBcnJheTxzdHJpbmc+ID0gW10pOiBfVXNlVHJhbnNsYXRpb25Nb2RlbCA9PiB7XG4gIGNvbnN0IHsgcmVhZHksIHQgfSA9IHVzZVRyYW5zbGF0aW9uKG5zKTtcbiAgcmV0dXJuIHsgaXNJbml0aWFsaXplZDogcmVhZHksIHQgfTtcbn07XG4iXX0=

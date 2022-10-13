@@ -3,15 +3,21 @@ import { AccessService } from '@lib/backend/auth/resources/Access/AccessService/
 import { withResolver } from '@lib/backend/graphql/decorators/withResolver/withResolver';
 import { EntityResourceResolver } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver';
 import type { EntityResourceResolverModel } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver.models';
+import { User } from '@lib/backend/user/resources/User/User';
+import { UserService } from '@lib/backend/user/resources/User/UserService/UserService';
 import {
   ACCESS_LEVEL,
   ACCESS_RESOURCE_NAME,
 } from '@lib/shared/auth/resources/Access/Access.constants';
 import type { AccessFormModel, AccessModel } from '@lib/shared/auth/resources/Access/Access.models';
 import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
+import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
+import { Container } from '@lib/shared/core/utils/Container/Container';
+import type { UserModel } from '@lib/shared/user/resources/User/User.models';
+import { FieldResolver, Root } from 'type-graphql';
 
 @withContainer()
-@withResolver()
+@withResolver({ Resource: Access })
 export class AccessResolver
   extends EntityResourceResolver<AccessModel, AccessFormModel>({
     Resource: Access,
@@ -20,4 +26,14 @@ export class AccessResolver
     getAccess: ACCESS_LEVEL.PUBLIC,
     name: ACCESS_RESOURCE_NAME,
   })
-  implements EntityResourceResolverModel<AccessModel, AccessFormModel> {}
+  implements EntityResourceResolverModel<AccessModel, AccessFormModel>
+{
+  @FieldResolver(() => User)
+  async user(@Root() access: Access): Promise<UserModel> {
+    const { result } = await Container.get(UserService).get({ filter: { _id: access._uid } });
+    if (result) {
+      return result;
+    }
+    throw new NotFoundError(access._uid);
+  }
+}

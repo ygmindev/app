@@ -1,0 +1,217 @@
+87950011d805388cf354e84557c89043
+"use strict";
+
+/* istanbul ignore next */
+function cov_23uf38q8a0() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/utils/styler/textStyler/textStyler.ts";
+  var hash = "ee5284f4ca292d9db43fe667e34a8fd9e601fdc3";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/utils/styler/textStyler/textStyler.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 28
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 22
+        },
+        end: {
+          line: 4,
+          column: 91
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 21
+        },
+        end: {
+          line: 5,
+          column: 88
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 22
+        },
+        end: {
+          line: 6,
+          column: 91
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 24
+        },
+        end: {
+          line: 7,
+          column: 97
+        }
+      },
+      "6": {
+        start: {
+          line: 8,
+          column: 19
+        },
+        end: {
+          line: 13,
+          column: 2
+        }
+      },
+      "7": {
+        start: {
+          line: 8,
+          column: 54
+        },
+        end: {
+          line: 13,
+          column: 1
+        }
+      },
+      "8": {
+        start: {
+          line: 14,
+          column: 0
+        },
+        end: {
+          line: 14,
+          column: 32
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 8,
+            column: 19
+          },
+          end: {
+            line: 8,
+            column: 20
+          }
+        },
+        loc: {
+          start: {
+            line: 8,
+            column: 54
+          },
+          end: {
+            line: 13,
+            column: 1
+          }
+        },
+        line: 8
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/utils/styler/textStyler/textStyler.ts",
+      mappings: ";;;AAAA,4FAAyF;AACzF,yFAAsF;AACtF,4FAAyF;AACzF,kGAA+F;AAIxF,MAAM,UAAU,GAAuC,CAAC,EAAE,IAAI,EAAE,GAAG,MAAM,EAAE,EAAE,OAAO,EAAE,EAAE,CAAC,CAAC;IAC/F,GAAG,IAAA,yBAAW,EAAC,MAAM,EAAE,OAAO,CAAC;IAC/B,GAAG,IAAA,uBAAU,EAAC,EAAE,GAAG,MAAM,EAAE,IAAI,EAAE,EAAE,OAAO,CAAC;IAC3C,GAAG,IAAA,6BAAa,EAAC,MAAM,EAAE,OAAO,CAAC;IACjC,GAAG,IAAA,yBAAW,EAAC,MAAM,EAAE,OAAO,CAAC;CAChC,CAAC,CAAC;AALU,QAAA,UAAU,cAKpB",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/utils/styler/textStyler/textStyler.ts"],
+      sourcesContent: ["import { colorStyler } from '@lib/frontend/styling/utils/styler/colorStyler/colorStyler';\nimport { fontStyler } from '@lib/frontend/styling/utils/styler/fontStyler/fontStyler';\nimport { shapeStyler } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler';\nimport { spacingStyler } from '@lib/frontend/styling/utils/styler/spacingStyler/spacingStyler';\nimport type { StylerModel } from '@lib/frontend/styling/utils/styler/styler.models';\nimport type { TextStylerParamsModel } from '@lib/frontend/styling/utils/styler/textStyler/textStyler.models';\n\nexport const textStyler: StylerModel<TextStylerParamsModel> = ({ size, ...params }, context) => ({\n  ...colorStyler(params, context),\n  ...fontStyler({ ...params, size }, context),\n  ...spacingStyler(params, context),\n  ...shapeStyler(params, context),\n});\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "ee5284f4ca292d9db43fe667e34a8fd9e601fdc3"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_23uf38q8a0 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_23uf38q8a0();
+cov_23uf38q8a0().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_23uf38q8a0().s[1]++;
+exports.textStyler = void 0;
+const colorStyler_1 =
+/* istanbul ignore next */
+(cov_23uf38q8a0().s[2]++, require("@lib/frontend/styling/utils/styler/colorStyler/colorStyler"));
+const fontStyler_1 =
+/* istanbul ignore next */
+(cov_23uf38q8a0().s[3]++, require("@lib/frontend/styling/utils/styler/fontStyler/fontStyler"));
+const shapeStyler_1 =
+/* istanbul ignore next */
+(cov_23uf38q8a0().s[4]++, require("@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler"));
+const spacingStyler_1 =
+/* istanbul ignore next */
+(cov_23uf38q8a0().s[5]++, require("@lib/frontend/styling/utils/styler/spacingStyler/spacingStyler"));
+
+/* istanbul ignore next */
+cov_23uf38q8a0().s[6]++;
+
+const textStyler = ({
+  size,
+  ...params
+}, context) => {
+  /* istanbul ignore next */
+  cov_23uf38q8a0().f[0]++;
+  cov_23uf38q8a0().s[7]++;
+  return { ...(0, colorStyler_1.colorStyler)(params, context),
+    ...(0, fontStyler_1.fontStyler)({ ...params,
+      size
+    }, context),
+    ...(0, spacingStyler_1.spacingStyler)(params, context),
+    ...(0, shapeStyler_1.shapeStyler)(params, context)
+  };
+};
+
+/* istanbul ignore next */
+cov_23uf38q8a0().s[8]++;
+exports.textStyler = textStyler;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUE7QUFBQTtBQUFBO0FBQ0E7QUFBQTtBQUFBO0FBQ0E7QUFBQTtBQUFBO0FBQ0E7QUFBQTtBQUFBOzs7OztBQUlPLE1BQU1BLFVBQVUsR0FBdUMsQ0FBQztFQUFFQyxJQUFGO0VBQVEsR0FBR0M7QUFBWCxDQUFELEVBQXNCQyxPQUF0QixLQUFtQztFQUFBO0VBQUE7RUFBQTtFQUFBLFNBQy9GLEdBQUcsK0JBQVlELE1BQVosRUFBb0JDLE9BQXBCLENBRDRGO0lBRS9GLEdBQUcsNkJBQVcsRUFBRSxHQUFHRCxNQUFMO01BQWFEO0lBQWIsQ0FBWCxFQUFnQ0UsT0FBaEMsQ0FGNEY7SUFHL0YsR0FBRyxtQ0FBY0QsTUFBZCxFQUFzQkMsT0FBdEIsQ0FINEY7SUFJL0YsR0FBRywrQkFBWUQsTUFBWixFQUFvQkMsT0FBcEI7RUFKNEY7QUFLaEcsQ0FMTTs7OztBQUFNQyxxQkFBVUosVUFBViIsIm5hbWVzIjpbInRleHRTdHlsZXIiLCJzaXplIiwicGFyYW1zIiwiY29udGV4dCIsImV4cG9ydHMiXSwic291cmNlcyI6WyIvVXNlcnMveWdtaW4vUHJvamVjdHMvbW9ub192Mi9hcHAzL2FwcC9wYWNrYWdlcy9saWItZnJvbnRlbmQvc3JjL3N0eWxpbmcvdXRpbHMvc3R5bGVyL3RleHRTdHlsZXIvdGV4dFN0eWxlci50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBjb2xvclN0eWxlciB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvc3R5bGluZy91dGlscy9zdHlsZXIvY29sb3JTdHlsZXIvY29sb3JTdHlsZXInO1xuaW1wb3J0IHsgZm9udFN0eWxlciB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvc3R5bGluZy91dGlscy9zdHlsZXIvZm9udFN0eWxlci9mb250U3R5bGVyJztcbmltcG9ydCB7IHNoYXBlU3R5bGVyIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9zdHlsaW5nL3V0aWxzL3N0eWxlci9zaGFwZVN0eWxlci9zaGFwZVN0eWxlcic7XG5pbXBvcnQgeyBzcGFjaW5nU3R5bGVyIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9zdHlsaW5nL3V0aWxzL3N0eWxlci9zcGFjaW5nU3R5bGVyL3NwYWNpbmdTdHlsZXInO1xuaW1wb3J0IHR5cGUgeyBTdHlsZXJNb2RlbCB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvc3R5bGluZy91dGlscy9zdHlsZXIvc3R5bGVyLm1vZGVscyc7XG5pbXBvcnQgdHlwZSB7IFRleHRTdHlsZXJQYXJhbXNNb2RlbCB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvc3R5bGluZy91dGlscy9zdHlsZXIvdGV4dFN0eWxlci90ZXh0U3R5bGVyLm1vZGVscyc7XG5cbmV4cG9ydCBjb25zdCB0ZXh0U3R5bGVyOiBTdHlsZXJNb2RlbDxUZXh0U3R5bGVyUGFyYW1zTW9kZWw+ID0gKHsgc2l6ZSwgLi4ucGFyYW1zIH0sIGNvbnRleHQpID0+ICh7XG4gIC4uLmNvbG9yU3R5bGVyKHBhcmFtcywgY29udGV4dCksXG4gIC4uLmZvbnRTdHlsZXIoeyAuLi5wYXJhbXMsIHNpemUgfSwgY29udGV4dCksXG4gIC4uLnNwYWNpbmdTdHlsZXIocGFyYW1zLCBjb250ZXh0KSxcbiAgLi4uc2hhcGVTdHlsZXIocGFyYW1zLCBjb250ZXh0KSxcbn0pO1xuIl19

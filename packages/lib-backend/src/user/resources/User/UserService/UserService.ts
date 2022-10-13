@@ -4,7 +4,7 @@ import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constan
 import type { UserFormModel, UserModel } from '@lib/shared/user/resources/User/User.models';
 import type { UserServiceModel } from '@lib/shared/user/resources/User/UserService/UserService.models';
 
-@withContainer()
+@withContainer({ name: `${USER_RESOURCE_NAME}Service` })
 export class UserService
   extends EntityResourceService<UserModel, UserFormModel>({ name: USER_RESOURCE_NAME })
   implements UserServiceModel {}

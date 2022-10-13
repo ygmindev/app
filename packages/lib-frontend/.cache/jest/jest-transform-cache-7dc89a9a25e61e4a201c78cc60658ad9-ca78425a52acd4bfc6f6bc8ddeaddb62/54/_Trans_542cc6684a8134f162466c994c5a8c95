@@ -1,0 +1,195 @@
+438a3f5410f052577f34d8228373ee16
+"use strict";
+
+/* istanbul ignore next */
+function cov_2n44m12nfb() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/locale/components/Trans/_Trans.tsx";
+  var hash = "1e3c2189524fb1ab31d0e66c0d175381e606e2ba";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/locale/components/Trans/_Trans.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 24
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 15
+        },
+        end: {
+          line: 4,
+          column: 65
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 27
+        },
+        end: {
+          line: 5,
+          column: 96
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 24
+        },
+        end: {
+          line: 6,
+          column: 48
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 0
+        },
+        end: {
+          line: 18,
+          column: 3
+        }
+      },
+      "6": {
+        start: {
+          line: 9,
+          column: 73
+        },
+        end: {
+          line: 17,
+          column: 5
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 9,
+            column: 14
+          },
+          end: {
+            line: 9,
+            column: 15
+          }
+        },
+        loc: {
+          start: {
+            line: 9,
+            column: 73
+          },
+          end: {
+            line: 17,
+            column: 5
+          }
+        },
+        line: 9
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/locale/components/Trans/_Trans.tsx",
+      mappings: ";;;AAAA,kEAA+D;AAC/D,iGAA8F;AAI9F,iDAAsC;AAEzB,QAAA,MAAM,GAAG,IAAA,mCAAgB,EAAwD;IAC5F,SAAS,EAAE,qBAAK;IAChB,QAAQ,EAAE,CAAC,EAAE,UAAU,EAAE,OAAO,EAAE,EAAE,EAAE,MAAM,EAAE,KAAK,EAAE,GAAG,KAAK,EAAE,EAAE,EAAE,CAAC,CAAC;QACnE,GAAG,KAAK;QACR,UAAU,EAAE,UAAU;QACtB,OAAO;QACP,EAAE;QACF,MAAM,EAAE,WAAI;QACZ,KAAK,EAAE,KAAsB;QAC7B,MAAM,EAAE,MAAgB;KACzB,CAAC;CACH,CAAC,CAAC",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/locale/components/Trans/_Trans.tsx"],
+      sourcesContent: ["import { Text } from '@lib/frontend/core/components/Text/Text';\nimport { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';\nimport type { _TransPropsModel } from '@lib/frontend/locale/components/Trans/_Trans.models';\nimport type { CSSProperties } from 'react';\nimport type { TransProps } from 'react-i18next';\nimport { Trans } from 'react-i18next';\n\nexport const _Trans = composeComponent<_TransPropsModel<unknown>, TransProps<string, string>>({\n  Component: Trans,\n  getProps: ({ Components, i18nKey, ns, params, style, ...props }) => ({\n    ...props,\n    components: Components,\n    i18nKey,\n    ns,\n    parent: Text,\n    style: style as CSSProperties,\n    values: params as object,\n  }),\n});\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "1e3c2189524fb1ab31d0e66c0d175381e606e2ba"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_2n44m12nfb = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_2n44m12nfb();
+cov_2n44m12nfb().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_2n44m12nfb().s[1]++;
+exports._Trans = void 0;
+const Text_1 =
+/* istanbul ignore next */
+(cov_2n44m12nfb().s[2]++, require("@lib/frontend/core/components/Text/Text"));
+const composeComponent_1 =
+/* istanbul ignore next */
+(cov_2n44m12nfb().s[3]++, require("@lib/frontend/core/utils/composeComponent/composeComponent"));
+const react_i18next_1 =
+/* istanbul ignore next */
+(cov_2n44m12nfb().s[4]++, require("react-i18next"));
+
+/* istanbul ignore next */
+cov_2n44m12nfb().s[5]++;
+exports._Trans = (0, composeComponent_1.composeComponent)({
+  Component: react_i18next_1.Trans,
+  getProps: ({
+    Components,
+    i18nKey,
+    ns,
+    params,
+    style,
+    ...props
+  }) => {
+    /* istanbul ignore next */
+    cov_2n44m12nfb().f[0]++;
+    cov_2n44m12nfb().s[6]++;
+    return { ...props,
+      components: Components,
+      i18nKey,
+      ns,
+      parent: Text_1.Text,
+      style: style,
+      values: params
+    };
+  }
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBZ0JJOzs7Ozs7Ozs7Ozs7Ozs7OztBQWhCSjtBQUFBO0FBQUE7QUFDQTtBQUFBO0FBQUE7QUFJQTtBQUFBO0FBQUE7Ozs7QUFFYUEsaUJBQVMseUNBQXdFO0VBQzVGQyxTQUFTLEVBQUVDLHFCQURpRjtFQUU1RkMsUUFBUSxFQUFFLENBQUM7SUFBRUMsVUFBRjtJQUFjQyxPQUFkO0lBQXVCQyxFQUF2QjtJQUEyQkMsTUFBM0I7SUFBbUNDLEtBQW5DO0lBQTBDLEdBQUdDO0VBQTdDLENBQUQsS0FBMkQ7SUFBQTtJQUFBO0lBQUE7SUFBQSxTQUNuRSxHQUFHQSxLQURnRTtNQUVuRUMsVUFBVSxFQUFFTixVQUZ1RDtNQUduRUMsT0FIbUU7TUFJbkVDLEVBSm1FO01BS25FSyxNQUFNLEVBQUVDLFdBTDJEO01BTW5FSixLQUFLLEVBQUVBLEtBTjREO01BT25FSyxNQUFNLEVBQUVOO0lBUDJEO0VBUXBFO0FBVjJGLENBQXhFLENBQVQiLCJuYW1lcyI6WyJleHBvcnRzIiwiQ29tcG9uZW50IiwicmVhY3RfaTE4bmV4dF8xIiwiZ2V0UHJvcHMiLCJDb21wb25lbnRzIiwiaTE4bktleSIsIm5zIiwicGFyYW1zIiwic3R5bGUiLCJwcm9wcyIsImNvbXBvbmVudHMiLCJwYXJlbnQiLCJUZXh0XzEiLCJ2YWx1ZXMiXSwic291cmNlcyI6WyIvVXNlcnMveWdtaW4vUHJvamVjdHMvbW9ub192Mi9hcHAzL2FwcC9wYWNrYWdlcy9saWItZnJvbnRlbmQvc3JjL2xvY2FsZS9jb21wb25lbnRzL1RyYW5zL19UcmFucy50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgVGV4dCB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvY29yZS9jb21wb25lbnRzL1RleHQvVGV4dCc7XG5pbXBvcnQgeyBjb21wb3NlQ29tcG9uZW50IH0gZnJvbSAnQGxpYi9mcm9udGVuZC9jb3JlL3V0aWxzL2NvbXBvc2VDb21wb25lbnQvY29tcG9zZUNvbXBvbmVudCc7XG5pbXBvcnQgdHlwZSB7IF9UcmFuc1Byb3BzTW9kZWwgfSBmcm9tICdAbGliL2Zyb250ZW5kL2xvY2FsZS9jb21wb25lbnRzL1RyYW5zL19UcmFucy5tb2RlbHMnO1xuaW1wb3J0IHR5cGUgeyBDU1NQcm9wZXJ0aWVzIH0gZnJvbSAncmVhY3QnO1xuaW1wb3J0IHR5cGUgeyBUcmFuc1Byb3BzIH0gZnJvbSAncmVhY3QtaTE4bmV4dCc7XG5pbXBvcnQgeyBUcmFucyB9IGZyb20gJ3JlYWN0LWkxOG5leHQnO1xuXG5leHBvcnQgY29uc3QgX1RyYW5zID0gY29tcG9zZUNvbXBvbmVudDxfVHJhbnNQcm9wc01vZGVsPHVua25vd24+LCBUcmFuc1Byb3BzPHN0cmluZywgc3RyaW5nPj4oe1xuICBDb21wb25lbnQ6IFRyYW5zLFxuICBnZXRQcm9wczogKHsgQ29tcG9uZW50cywgaTE4bktleSwgbnMsIHBhcmFtcywgc3R5bGUsIC4uLnByb3BzIH0pID0+ICh7XG4gICAgLi4ucHJvcHMsXG4gICAgY29tcG9uZW50czogQ29tcG9uZW50cyxcbiAgICBpMThuS2V5LFxuICAgIG5zLFxuICAgIHBhcmVudDogVGV4dCxcbiAgICBzdHlsZTogc3R5bGUgYXMgQ1NTUHJvcGVydGllcyxcbiAgICB2YWx1ZXM6IHBhcmFtcyBhcyBvYmplY3QsXG4gIH0pLFxufSk7XG4iXX0=

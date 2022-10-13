@@ -1,0 +1,253 @@
+abba859e86691eb8198b6b426b69a32f
+"use strict";
+
+/* istanbul ignore next */
+function cov_weowqwllf() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-shared/src/core/utils/Container/_Container.ts";
+  var hash = "962066d0160d5c25faa55d3a505c1ea2ef57f1dc";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-shared/src/core/utils/Container/_Container.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 28
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 20
+        },
+        end: {
+          line: 4,
+          column: 40
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 18
+        },
+        end: {
+          line: 9,
+          column: 2
+        }
+      },
+      "4": {
+        start: {
+          line: 10,
+          column: 0
+        },
+        end: {
+          line: 15,
+          column: 2
+        }
+      },
+      "5": {
+        start: {
+          line: 11,
+          column: 19
+        },
+        end: {
+          line: 11,
+          column: 38
+        }
+      },
+      "6": {
+        start: {
+          line: 13,
+          column: 8
+        },
+        end: {
+          line: 13,
+          column: 57
+        }
+      },
+      "7": {
+        start: {
+          line: 13,
+          column: 50
+        },
+        end: {
+          line: 13,
+          column: 55
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 11,
+            column: 9
+          },
+          end: {
+            line: 11,
+            column: 10
+          }
+        },
+        loc: {
+          start: {
+            line: 11,
+            column: 19
+          },
+          end: {
+            line: 11,
+            column: 38
+          }
+        },
+        line: 11
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 12,
+            column: 9
+          },
+          end: {
+            line: 12,
+            column: 10
+          }
+        },
+        loc: {
+          start: {
+            line: 12,
+            column: 26
+          },
+          end: {
+            line: 14,
+            column: 5
+          }
+        },
+        line: 12
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 13,
+            column: 44
+          },
+          end: {
+            line: 13,
+            column: 45
+          }
+        },
+        loc: {
+          start: {
+            line: 13,
+            column: 50
+          },
+          end: {
+            line: 13,
+            column: 55
+          }
+        },
+        line: 13
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-shared/src/core/utils/Container/_Container.ts",
+      mappings: ";;;AAEA,yCAAsC;AAEtC,MAAM,SAAS,GAAG,IAAI,qBAAS,CAAC;IAC9B,kBAAkB,EAAE,IAAI;IACxB,YAAY,EAAE,WAAW;IACzB,mBAAmB,EAAE,IAAI;CAC1B,CAAC,CAAC;AAEU,QAAA,UAAU,GAAoB;IACzC,GAAG,EAAE,CAAQ,IAAsC,EAAS,EAAE,CAAC,SAAS,CAAC,GAAG,CAAC,IAAI,CAAC;IAElF,GAAG,EAAE,CAAQ,IAAsC,EAAE,KAAY,EAAQ,EAAE;QACzE,SAAS,CAAC,IAAI,CAAQ,IAAI,CAAC,CAAC,cAAc,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC;IAC1D,CAAC;CACF,CAAC",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-shared/src/core/utils/Container/_Container.ts"],
+      sourcesContent: ["import type { ConstructorModel } from '@lib/shared/core/core.models';\nimport type { _ContainerModel } from '@lib/shared/core/utils/Container/_Container.models';\nimport { Container } from 'inversify';\n\nconst container = new Container({\n  autoBindInjectable: true,\n  defaultScope: 'Singleton',\n  skipBaseClassChecks: true,\n});\n\nexport const _Container: _ContainerModel = {\n  get: <TType>(type: ConstructorModel<TType> | string): TType => container.get(type),\n\n  set: <TType>(type: ConstructorModel<TType> | string, value: TType): void => {\n    container.bind<TType>(type).toDynamicValue(() => value);\n  },\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "962066d0160d5c25faa55d3a505c1ea2ef57f1dc"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_weowqwllf = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_weowqwllf();
+cov_weowqwllf().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_weowqwllf().s[1]++;
+exports._Container = void 0;
+const inversify_1 =
+/* istanbul ignore next */
+(cov_weowqwllf().s[2]++, require("inversify"));
+const container =
+/* istanbul ignore next */
+(cov_weowqwllf().s[3]++, new inversify_1.Container({
+  autoBindInjectable: true,
+  defaultScope: 'Singleton',
+  skipBaseClassChecks: true
+}));
+
+/* istanbul ignore next */
+cov_weowqwllf().s[4]++;
+exports._Container = {
+  get: (type) => {
+    /* istanbul ignore next */
+    cov_weowqwllf().f[0]++;
+    cov_weowqwllf().s[5]++;
+    return container.get(type);
+  },
+  set: (type, value) => {
+    /* istanbul ignore next */
+    cov_weowqwllf().f[1]++;
+    cov_weowqwllf().s[6]++;
+    container.bind(type).toDynamicValue(() => {
+      /* istanbul ignore next */
+      cov_weowqwllf().f[2]++;
+      cov_weowqwllf().s[7]++;
+      return value;
+    });
+  }
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBRUE7QUFBQTtBQUFBO0FBRUEsTUFBTUEsU0FBUztBQUFBO0FBQUEseUJBQUcsSUFBSUMscUJBQUosQ0FBYztFQUM5QkMsa0JBQWtCLEVBQUUsSUFEVTtFQUU5QkMsWUFBWSxFQUFFLFdBRmdCO0VBRzlCQyxtQkFBbUIsRUFBRTtBQUhTLENBQWQsQ0FBSCxDQUFmOzs7O0FBTWFDLHFCQUE4QjtFQUN6Q0MsR0FBRyxFQUFFLENBQVFDLElBQVIsS0FBMEQ7SUFBQTtJQUFBO0lBQUE7SUFBQSxnQkFBUyxDQUFDRCxHQUFWLENBQWNDLElBQWQ7RUFBbUIsQ0FEekM7RUFHekNDLEdBQUcsRUFBRSxDQUFRRCxJQUFSLEVBQWdERSxLQUFoRCxLQUFzRTtJQUFBO0lBQUE7SUFBQTtJQUN6RVQsU0FBUyxDQUFDVSxJQUFWLENBQXNCSCxJQUF0QixFQUE0QkksY0FBNUIsQ0FBMkMsTUFBTUY7TUFBQUE7TUFBQUE7TUFBQUE7TUFBQUEsWUFBSztJQUFBLENBQXREO0VBQ0Q7QUFMd0MsQ0FBOUIiLCJuYW1lcyI6WyJjb250YWluZXIiLCJpbnZlcnNpZnlfMSIsImF1dG9CaW5kSW5qZWN0YWJsZSIsImRlZmF1bHRTY29wZSIsInNraXBCYXNlQ2xhc3NDaGVja3MiLCJleHBvcnRzIiwiZ2V0IiwidHlwZSIsInNldCIsInZhbHVlIiwiYmluZCIsInRvRHluYW1pY1ZhbHVlIl0sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLXNoYXJlZC9zcmMvY29yZS91dGlscy9Db250YWluZXIvX0NvbnRhaW5lci50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgdHlwZSB7IENvbnN0cnVjdG9yTW9kZWwgfSBmcm9tICdAbGliL3NoYXJlZC9jb3JlL2NvcmUubW9kZWxzJztcbmltcG9ydCB0eXBlIHsgX0NvbnRhaW5lck1vZGVsIH0gZnJvbSAnQGxpYi9zaGFyZWQvY29yZS91dGlscy9Db250YWluZXIvX0NvbnRhaW5lci5tb2RlbHMnO1xuaW1wb3J0IHsgQ29udGFpbmVyIH0gZnJvbSAnaW52ZXJzaWZ5JztcblxuY29uc3QgY29udGFpbmVyID0gbmV3IENvbnRhaW5lcih7XG4gIGF1dG9CaW5kSW5qZWN0YWJsZTogdHJ1ZSxcbiAgZGVmYXVsdFNjb3BlOiAnU2luZ2xldG9uJyxcbiAgc2tpcEJhc2VDbGFzc0NoZWNrczogdHJ1ZSxcbn0pO1xuXG5leHBvcnQgY29uc3QgX0NvbnRhaW5lcjogX0NvbnRhaW5lck1vZGVsID0ge1xuICBnZXQ6IDxUVHlwZT4odHlwZTogQ29uc3RydWN0b3JNb2RlbDxUVHlwZT4gfCBzdHJpbmcpOiBUVHlwZSA9PiBjb250YWluZXIuZ2V0KHR5cGUpLFxuXG4gIHNldDogPFRUeXBlPih0eXBlOiBDb25zdHJ1Y3Rvck1vZGVsPFRUeXBlPiB8IHN0cmluZywgdmFsdWU6IFRUeXBlKTogdm9pZCA9PiB7XG4gICAgY29udGFpbmVyLmJpbmQ8VFR5cGU+KHR5cGUpLnRvRHluYW1pY1ZhbHVlKCgpID0+IHZhbHVlKTtcbiAgfSxcbn07XG4iXX0=

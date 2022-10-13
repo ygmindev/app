@@ -14,7 +14,7 @@ export interface EntityResourceModalPropsModel<TType extends EntityResourceModel
     Pick<ModalPropsModel, 'isOpen' | 'onClose'>,
     WithTestIdModel {
   data?: TType;
-  onCreate(
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TForm>,
+  onCreate?(
+    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType>>;
 }

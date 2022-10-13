@@ -2,7 +2,6 @@ import type { PrimitiveModel } from '@lib/shared/core/core.models';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
 import type { FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
-import type { FormModel } from '@lib/shared/resource/utils/Form/Form.models';
 import type { PaginationModel } from '@lib/shared/resource/utils/Pagination/Pagination.models';
 import type { UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 import type { ObjectId } from 'mongodb';
@@ -24,7 +23,7 @@ interface _ProjectOptionsModel<TType> {
 }
 
 interface _CreateArgsModel<TType> {
-  form: FormModel<TType>;
+  form: TType;
 }
 
 interface _GetArgsOptionsModel<TType> extends _ProjectOptionsModel<TType> {
@@ -66,8 +65,9 @@ interface _UpdateArgsModel<TType> {
 export type ArgsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
+  TForm,
 > = TMethod extends RESOURCE_METHOD_TYPE.CREATE
-  ? _CreateArgsModel<TType>
+  ? _CreateArgsModel<TForm>
   : TMethod extends RESOURCE_METHOD_TYPE.GET
   ? _GetArgsModel<TType>
   : TMethod extends RESOURCE_METHOD_TYPE.GET_MANY

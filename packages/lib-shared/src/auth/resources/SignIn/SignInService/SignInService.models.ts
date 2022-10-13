@@ -8,7 +8,7 @@ import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.model
 export interface SignInServiceModel
   extends Pick<EntityResourceServiceModel<SignInModel, SignInFormModel>, 'create'> {
   usernameUpdate(
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInFormModel>,
+    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>>;
 }

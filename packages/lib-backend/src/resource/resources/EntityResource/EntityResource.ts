@@ -9,10 +9,10 @@ import { forEach } from 'lodash';
 
 @withEntity({ isAbstract: true })
 export class EntityResource implements EntityResourceModel {
-  @withField({ defaultValue: () => new Date(), type: FIELD_TYPE.DATE })
+  @withField({ defaultValue: () => new Date(), isRepository: true, type: FIELD_TYPE.DATE })
   created!: Date;
 
-  @withField({ type: FIELD_TYPE.PRIMARY_KEY })
+  @withField({ isRepository: true, type: FIELD_TYPE.PRIMARY_KEY })
   _id!: string;
 
   @withHook({ type: HOOK_TYPE.BEFORE_CREATE })

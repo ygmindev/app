@@ -1,0 +1,358 @@
+717352cd816d3131f1e2a449de397980
+"use strict";
+
+/* istanbul ignore next */
+function cov_71e7wog8u() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/utils/styler/colorStyler/colorStyler.ts";
+  var hash = "4ef277e0835ce17964d54a5200b1e0cfc28644b8";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/utils/styler/colorStyler/colorStyler.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 29
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 23
+        },
+        end: {
+          line: 4,
+          column: 64
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 26
+        },
+        end: {
+          line: 5,
+          column: 86
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 22
+        },
+        end: {
+          line: 6,
+          column: 79
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 20
+        },
+        end: {
+          line: 14,
+          column: 1
+        }
+      },
+      "6": {
+        start: {
+          line: 8,
+          column: 18
+        },
+        end: {
+          line: 8,
+          column: 67
+        }
+      },
+      "7": {
+        start: {
+          line: 9,
+          column: 4
+        },
+        end: {
+          line: 13,
+          column: 7
+        }
+      },
+      "8": {
+        start: {
+          line: 15,
+          column: 0
+        },
+        end: {
+          line: 15,
+          column: 34
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 7,
+            column: 20
+          },
+          end: {
+            line: 7,
+            column: 21
+          }
+        },
+        loc: {
+          start: {
+            line: 7,
+            column: 134
+          },
+          end: {
+            line: 14,
+            column: 1
+          }
+        },
+        line: 7
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 7,
+            column: 23
+          },
+          end: {
+            line: 7,
+            column: 74
+          }
+        },
+        type: "default-arg",
+        locations: [{
+          start: {
+            line: 7,
+            column: 31
+          },
+          end: {
+            line: 7,
+            column: 74
+          }
+        }],
+        line: 7
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 7,
+            column: 76
+          },
+          end: {
+            line: 7,
+            column: 118
+          }
+        },
+        type: "default-arg",
+        locations: [{
+          start: {
+            line: 7,
+            column: 84
+          },
+          end: {
+            line: 7,
+            column: 118
+          }
+        }],
+        line: 7
+      },
+      "2": {
+        loc: {
+          start: {
+            line: 8,
+            column: 18
+          },
+          end: {
+            line: 8,
+            column: 67
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 8,
+            column: 18
+          },
+          end: {
+            line: 8,
+            column: 32
+          }
+        }, {
+          start: {
+            line: 8,
+            column: 36
+          },
+          end: {
+            line: 8,
+            column: 67
+          }
+        }],
+        line: 8
+      },
+      "3": {
+        loc: {
+          start: {
+            line: 10,
+            column: 15
+          },
+          end: {
+            line: 12,
+            column: 17
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 10,
+            column: 15
+          },
+          end: {
+            line: 10,
+            column: 39
+          }
+        }, {
+          start: {
+            line: 11,
+            column: 12
+          },
+          end: {
+            line: 11,
+            column: 38
+          }
+        }, {
+          start: {
+            line: 12,
+            column: 12
+          },
+          end: {
+            line: 12,
+            column: 17
+          }
+        }],
+        line: 10
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {
+      "0": [0],
+      "1": [0],
+      "2": [0, 0],
+      "3": [0, 0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/utils/styler/colorStyler/colorStyler.ts",
+      mappings: ";;;AAAA,iEAAkE;AAGlE,uFAG2D;AAM3D,gFAA6E;AAEtE,MAAM,WAAW,GAAwC,CAC9D,EAAE,KAAK,GAAG,sCAAoB,CAAC,IAAI,EAAE,KAAK,GAAG,6BAAW,CAAC,IAAI,EAAE,EAC/D,OAAO,EACP,EAAE;IACF,MAAM,KAAK,GAAG,OAAO,EAAE,KAAK,IAAI,+BAAgB,CAAC;IACjD,OAAO,IAAA,yBAAW,EAAC;QACjB,KAAK,EACH,KAAK,CAAC,MAAM,CAAC,IAAI,CAAC,KAAgC,CAAC;YACnD,KAAK,CAAC,MAAM,CAAC,KAAwB,CAAC,CAAC,KAAwB,CAAC;YAChE,KAAK;KACR,CAAC,CAAC;AACL,CAAC,CAAC;AAXW,QAAA,WAAW,eAWtB",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/utils/styler/colorStyler/colorStyler.ts"],
+      sourcesContent: ["import { lightThemeConfig } from '@lib/config/theme/light.config';\nimport type { ColorStylerParamsModel } from '@lib/frontend/styling/utils/styler/colorStyler/colorStyler.models';\nimport type { StylerModel } from '@lib/frontend/styling/utils/styler/styler.models';\nimport {\n  THEME_RELATIVE_COLOR,\n  THEME_SHADE,\n} from '@lib/frontend/styling/utils/theme/theme.constants';\nimport type {\n  ThemeColorModel,\n  ThemeRelativeColorModel,\n  ThemeShadeModel,\n} from '@lib/frontend/styling/utils/theme/theme.models';\nimport { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';\n\nexport const colorStyler: StylerModel<ColorStylerParamsModel> = (\n  { color = THEME_RELATIVE_COLOR.MAIN, shade = THEME_SHADE.MAIN },\n  context,\n) => {\n  const theme = context?.theme || lightThemeConfig;\n  return cleanObject({\n    color:\n      theme.colors.text[color as ThemeRelativeColorModel] ||\n      theme.colors[color as ThemeColorModel][shade as ThemeShadeModel] ||\n      color,\n  });\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "4ef277e0835ce17964d54a5200b1e0cfc28644b8"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_71e7wog8u = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_71e7wog8u();
+cov_71e7wog8u().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_71e7wog8u().s[1]++;
+exports.colorStyler = void 0;
+const light_config_1 =
+/* istanbul ignore next */
+(cov_71e7wog8u().s[2]++, require("@lib/config/theme/light.config"));
+const theme_constants_1 =
+/* istanbul ignore next */
+(cov_71e7wog8u().s[3]++, require("@lib/frontend/styling/utils/theme/theme.constants"));
+const cleanObject_1 =
+/* istanbul ignore next */
+(cov_71e7wog8u().s[4]++, require("@lib/shared/core/utils/cleanObject/cleanObject"));
+
+/* istanbul ignore next */
+cov_71e7wog8u().s[5]++;
+
+const colorStyler = ({
+  color =
+  /* istanbul ignore next */
+  (cov_71e7wog8u().b[0][0]++, theme_constants_1.THEME_RELATIVE_COLOR.MAIN),
+  shade =
+  /* istanbul ignore next */
+  (cov_71e7wog8u().b[1][0]++, theme_constants_1.THEME_SHADE.MAIN)
+}, context) => {
+  /* istanbul ignore next */
+  cov_71e7wog8u().f[0]++;
+  const theme =
+  /* istanbul ignore next */
+  (cov_71e7wog8u().s[6]++,
+  /* istanbul ignore next */
+  (cov_71e7wog8u().b[2][0]++, context?.theme) ||
+  /* istanbul ignore next */
+  (cov_71e7wog8u().b[2][1]++, light_config_1.lightThemeConfig));
+
+  /* istanbul ignore next */
+  cov_71e7wog8u().s[7]++;
+  return (0, cleanObject_1.cleanObject)({
+    color:
+    /* istanbul ignore next */
+    (cov_71e7wog8u().b[3][0]++, theme.colors.text[color]) ||
+    /* istanbul ignore next */
+    (cov_71e7wog8u().b[3][1]++, theme.colors[color][shade]) ||
+    /* istanbul ignore next */
+    (cov_71e7wog8u().b[3][2]++, color)
+  });
+};
+
+/* istanbul ignore next */
+cov_71e7wog8u().s[8]++;
+exports.colorStyler = colorStyler;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUE7QUFBQTtBQUFBO0FBR0E7QUFBQTtBQUFBO0FBU0E7QUFBQTtBQUFBOzs7OztBQUVPLE1BQU1BLFdBQVcsR0FBd0MsQ0FDOUQ7RUFBRUMsS0FBSztFQUFBO0VBQUEsNEJBQUdDLHVDQUFxQkMsSUFBeEIsQ0FBUDtFQUFxQ0MsS0FBSztFQUFBO0VBQUEsNEJBQUdGLDhCQUFZQyxJQUFmO0FBQTFDLENBRDhELEVBRTlERSxPQUY4RCxLQUc1RDtFQUFBO0VBQUE7RUFDRixNQUFNQyxLQUFLO0VBQUE7RUFBQTtFQUFHO0VBQUEsbUNBQU8sRUFBRUEsS0FBVDtFQUFBO0VBQUEsNEJBQWtCQywrQkFBbEIsQ0FBSCxDQUFYOztFQURFO0VBQUE7RUFFRixPQUFPLCtCQUFZO0lBQ2pCTixLQUFLO0lBQ0g7SUFBQSxpQ0FBSyxDQUFDTyxNQUFOLENBQWFDLElBQWIsQ0FBa0JSLEtBQWxCO0lBQUE7SUFBQSw0QkFDQUssS0FBSyxDQUFDRSxNQUFOLENBQWFQLEtBQWIsRUFBdUNHLEtBQXZDLENBREE7SUFBQTtJQUFBLDRCQUVBSCxLQUZBO0VBRmUsQ0FBWixDQUFQO0FBTUQsQ0FYTTs7OztBQUFNUyxzQkFBV1YsV0FBWCIsIm5hbWVzIjpbImNvbG9yU3R5bGVyIiwiY29sb3IiLCJ0aGVtZV9jb25zdGFudHNfMSIsIk1BSU4iLCJzaGFkZSIsImNvbnRleHQiLCJ0aGVtZSIsImxpZ2h0X2NvbmZpZ18xIiwiY29sb3JzIiwidGV4dCIsImV4cG9ydHMiXSwic291cmNlcyI6WyIvVXNlcnMveWdtaW4vUHJvamVjdHMvbW9ub192Mi9hcHAzL2FwcC9wYWNrYWdlcy9saWItZnJvbnRlbmQvc3JjL3N0eWxpbmcvdXRpbHMvc3R5bGVyL2NvbG9yU3R5bGVyL2NvbG9yU3R5bGVyLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGxpZ2h0VGhlbWVDb25maWcgfSBmcm9tICdAbGliL2NvbmZpZy90aGVtZS9saWdodC5jb25maWcnO1xuaW1wb3J0IHR5cGUgeyBDb2xvclN0eWxlclBhcmFtc01vZGVsIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9zdHlsaW5nL3V0aWxzL3N0eWxlci9jb2xvclN0eWxlci9jb2xvclN0eWxlci5tb2RlbHMnO1xuaW1wb3J0IHR5cGUgeyBTdHlsZXJNb2RlbCB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvc3R5bGluZy91dGlscy9zdHlsZXIvc3R5bGVyLm1vZGVscyc7XG5pbXBvcnQge1xuICBUSEVNRV9SRUxBVElWRV9DT0xPUixcbiAgVEhFTUVfU0hBREUsXG59IGZyb20gJ0BsaWIvZnJvbnRlbmQvc3R5bGluZy91dGlscy90aGVtZS90aGVtZS5jb25zdGFudHMnO1xuaW1wb3J0IHR5cGUge1xuICBUaGVtZUNvbG9yTW9kZWwsXG4gIFRoZW1lUmVsYXRpdmVDb2xvck1vZGVsLFxuICBUaGVtZVNoYWRlTW9kZWwsXG59IGZyb20gJ0BsaWIvZnJvbnRlbmQvc3R5bGluZy91dGlscy90aGVtZS90aGVtZS5tb2RlbHMnO1xuaW1wb3J0IHsgY2xlYW5PYmplY3QgfSBmcm9tICdAbGliL3NoYXJlZC9jb3JlL3V0aWxzL2NsZWFuT2JqZWN0L2NsZWFuT2JqZWN0JztcblxuZXhwb3J0IGNvbnN0IGNvbG9yU3R5bGVyOiBTdHlsZXJNb2RlbDxDb2xvclN0eWxlclBhcmFtc01vZGVsPiA9IChcbiAgeyBjb2xvciA9IFRIRU1FX1JFTEFUSVZFX0NPTE9SLk1BSU4sIHNoYWRlID0gVEhFTUVfU0hBREUuTUFJTiB9LFxuICBjb250ZXh0LFxuKSA9PiB7XG4gIGNvbnN0IHRoZW1lID0gY29udGV4dD8udGhlbWUgfHwgbGlnaHRUaGVtZUNvbmZpZztcbiAgcmV0dXJuIGNsZWFuT2JqZWN0KHtcbiAgICBjb2xvcjpcbiAgICAgIHRoZW1lLmNvbG9ycy50ZXh0W2NvbG9yIGFzIFRoZW1lUmVsYXRpdmVDb2xvck1vZGVsXSB8fFxuICAgICAgdGhlbWUuY29sb3JzW2NvbG9yIGFzIFRoZW1lQ29sb3JNb2RlbF1bc2hhZGUgYXMgVGhlbWVTaGFkZU1vZGVsXSB8fFxuICAgICAgY29sb3IsXG4gIH0pO1xufTtcbiJdfQ==

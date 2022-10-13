@@ -1,6 +1,6 @@
 import type { WithEntityParamsModel } from '@lib/backend/resource/decorators/withEntity/withEntity.models';
 import type { ConstructorModel } from '@lib/shared/core/core.models';
-import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
+import { NotImplementedError } from '@lib/shared/core/errors/NotImplementedError/NotImplementedError';
 import { Embeddable, Entity } from '@mikro-orm/core';
 import { InputType, ObjectType } from 'type-graphql';
 
@@ -13,9 +13,9 @@ export const withEntity = ({
   name,
 }: WithEntityParamsModel): ClassDecorator => {
   if (!name && !isAbstract) {
-    throw new NotFoundError('name for non-abstract entity');
+    throw new NotImplementedError('name for non-abstract entity');
   }
-  return (<TBase>(Base: TBase) => {
+  return (<TType>(Base: TType) => {
     isSchema && ObjectType(name || '', { isAbstract })(Base as unknown as ConstructorModel);
     isSchemaInput && InputType(`${name}Input`, { isAbstract })(Base as unknown as ConstructorModel);
     return isRepository

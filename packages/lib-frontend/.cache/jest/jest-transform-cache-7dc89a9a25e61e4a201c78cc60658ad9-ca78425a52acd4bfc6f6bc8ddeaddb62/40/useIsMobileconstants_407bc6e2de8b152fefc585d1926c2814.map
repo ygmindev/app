@@ -1,0 +1,1 @@
+{"version":3,"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAaA,iCAAyB,GAAzB","names":["exports"],"sources":["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/hooks/useIsMobile/useIsMobile.constants.ts"],"sourcesContent":["export const MOBILE_WIDTH_THRESHOLD = 700;\n"]}

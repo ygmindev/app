@@ -2,6 +2,7 @@ import { FIELD_TYPE } from '@lib/backend/resource/decorators/withField/withField
 import type { WithFieldParamsModel } from '@lib/backend/resource/decorators/withField/withField.models';
 import { ArrayType, Embedded, Index, PrimaryKey, Property } from '@mikro-orm/core';
 import { Field } from 'type-graphql';
+import type { ReturnTypeFuncValue } from 'type-graphql/dist/decorators/types';
 
 const _getField = <TType>({
   Resource,
@@ -9,7 +10,7 @@ const _getField = <TType>({
   type,
 }: WithFieldParamsModel<TType>): PropertyDecorator => {
   if (Resource) {
-    return Field(() => (isArray ? [Resource] : Resource), { simple: true });
+    return Field(() => (isArray ? [Resource] : Resource) as ReturnTypeFuncValue, { simple: true });
   }
   switch (type) {
     case FIELD_TYPE.STRING:

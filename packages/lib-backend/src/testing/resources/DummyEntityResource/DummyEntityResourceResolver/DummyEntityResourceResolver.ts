@@ -12,7 +12,7 @@ import type {
 } from '@lib/shared/testing/resources/DummyEntityResource/DummyEntityResource.models';
 
 @withContainer()
-@withResolver()
+@withResolver({ Resource: DummyEntityResource })
 export class DummyEntityResourceResolver
   extends EntityResourceResolver<DummyEntityResourceModel, DummyEntityResourceFormModel>({
     Resource: DummyEntityResource,

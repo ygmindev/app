@@ -1,0 +1,190 @@
+c4676e5f5611a707b6b9d762371e47e6
+"use strict";
+
+/* istanbul ignore next */
+function cov_132k6lfheh() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/stores/reducer/reducer.ts";
+  var hash = "c6c6ecefe5a1387edee3d481688b25b6878bf233";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/stores/reducer/reducer.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 4,
+          column: 0
+        },
+        end: {
+          line: 4,
+          column: 57
+        }
+      },
+      "2": {
+        start: {
+          line: 5,
+          column: 28
+        },
+        end: {
+          line: 5,
+          column: 93
+        }
+      },
+      "3": {
+        start: {
+          line: 6,
+          column: 28
+        },
+        end: {
+          line: 6,
+          column: 76
+        }
+      },
+      "4": {
+        start: {
+          line: 7,
+          column: 18
+        },
+        end: {
+          line: 7,
+          column: 45
+        }
+      },
+      "5": {
+        start: {
+          line: 8,
+          column: 0
+        },
+        end: {
+          line: 16,
+          column: 77
+        }
+      },
+      "6": {
+        start: {
+          line: 13,
+          column: 12
+        },
+        end: {
+          line: 13,
+          column: 34
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 12,
+            column: 18
+          },
+          end: {
+            line: 12,
+            column: 19
+          }
+        },
+        loc: {
+          start: {
+            line: 12,
+            column: 42
+          },
+          end: {
+            line: 14,
+            column: 9
+          }
+        },
+        line: 12
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/stores/reducer/reducer.ts",
+      mappings: ";;;;AAAA,8FAA+F;AAE/F,6EAAgE;AAEhE,8CAA+C;AAElC,KAAuD,IAAA,qBAAW,EAG7E;IACA,YAAY,EAAE,yCAAqB;IACnC,IAAI,EAAE,2BAAO;IACb,QAAQ,EAAE;QACR,QAAQ,EAAE,CAAC,KAAK,EAAE,EAAE,OAAO,EAAyB,EAAE,EAAE;YACtD,KAAK,CAAC,KAAK,GAAG,OAAO,CAAC;QACxB,CAAC;KACF;CACF,CAAC,EAXsB,sBAAc,eAAW,sBAAc,cAW5D",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/styling/stores/reducer/reducer.ts"],
+      sourcesContent: ["import { STYLING_STATE_INITIAL } from '@lib/frontend/styling/stores/reducer/reducer.constants';\nimport type { StylingStateModel } from '@lib/frontend/styling/stores/reducer/reducer.models';\nimport { STYLING } from '@lib/shared/styling/styling.constants';\nimport type { PayloadAction, SliceCaseReducers } from '@reduxjs/toolkit';\nimport { createSlice } from '@reduxjs/toolkit';\n\nexport const { actions: stylingActions, reducer: stylingReducer } = createSlice<\n  StylingStateModel,\n  SliceCaseReducers<StylingStateModel>\n>({\n  initialState: STYLING_STATE_INITIAL,\n  name: STYLING,\n  reducers: {\n    themeSet: (state, { payload }: PayloadAction<string>) => {\n      state.theme = payload;\n    },\n  },\n});\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "c6c6ecefe5a1387edee3d481688b25b6878bf233"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_132k6lfheh = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_132k6lfheh();
+
+var _a;
+
+/* istanbul ignore next */
+cov_132k6lfheh().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_132k6lfheh().s[1]++;
+exports.stylingReducer = exports.stylingActions = void 0;
+const reducer_constants_1 =
+/* istanbul ignore next */
+(cov_132k6lfheh().s[2]++, require("@lib/frontend/styling/stores/reducer/reducer.constants"));
+const styling_constants_1 =
+/* istanbul ignore next */
+(cov_132k6lfheh().s[3]++, require("@lib/shared/styling/styling.constants"));
+const toolkit_1 =
+/* istanbul ignore next */
+(cov_132k6lfheh().s[4]++, require("@reduxjs/toolkit"));
+
+/* istanbul ignore next */
+cov_132k6lfheh().s[5]++;
+_a = (0, toolkit_1.createSlice)({
+  initialState: reducer_constants_1.STYLING_STATE_INITIAL,
+  name: styling_constants_1.STYLING,
+  reducers: {
+    themeSet: (state, {
+      payload
+    }) => {
+      /* istanbul ignore next */
+      cov_132k6lfheh().f[0]++;
+      cov_132k6lfheh().s[6]++;
+      state.theme = payload;
+    }
+  }
+}), exports.stylingActions = _a.actions, exports.stylingReducer = _a.reducer;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBTXdCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFOeEI7QUFBQTtBQUFBO0FBRUE7QUFBQTtBQUFBO0FBRUE7QUFBQTtBQUFBOzs7O0FBRWFBLEtBQXVELDJCQUdsRTtFQUNBQyxZQUFZLEVBQUVDLHlDQURkO0VBRUFDLElBQUksRUFBRUMsMkJBRk47RUFHQUMsUUFBUSxFQUFFO0lBQ1JDLFFBQVEsRUFBRSxDQUFDQyxLQUFELEVBQVE7TUFBRUM7SUFBRixDQUFSLEtBQThDO01BQUE7TUFBQTtNQUFBO01BQ3RERCxLQUFLLENBQUNFLEtBQU4sR0FBY0QsT0FBZDtJQUNEO0VBSE87QUFIVixDQUhrRSxDQUF2RCxFQUFXRSx5QkFBY1YsVUFBekIsRUFBb0NVLHlCQUFjVixVQUFsRCIsIm5hbWVzIjpbIl9hIiwiaW5pdGlhbFN0YXRlIiwicmVkdWNlcl9jb25zdGFudHNfMSIsIm5hbWUiLCJzdHlsaW5nX2NvbnN0YW50c18xIiwicmVkdWNlcnMiLCJ0aGVtZVNldCIsInN0YXRlIiwicGF5bG9hZCIsInRoZW1lIiwiZXhwb3J0cyJdLCJzb3VyY2VzIjpbIi9Vc2Vycy95Z21pbi9Qcm9qZWN0cy9tb25vX3YyL2FwcDMvYXBwL3BhY2thZ2VzL2xpYi1mcm9udGVuZC9zcmMvc3R5bGluZy9zdG9yZXMvcmVkdWNlci9yZWR1Y2VyLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IFNUWUxJTkdfU1RBVEVfSU5JVElBTCB9IGZyb20gJ0BsaWIvZnJvbnRlbmQvc3R5bGluZy9zdG9yZXMvcmVkdWNlci9yZWR1Y2VyLmNvbnN0YW50cyc7XG5pbXBvcnQgdHlwZSB7IFN0eWxpbmdTdGF0ZU1vZGVsIH0gZnJvbSAnQGxpYi9mcm9udGVuZC9zdHlsaW5nL3N0b3Jlcy9yZWR1Y2VyL3JlZHVjZXIubW9kZWxzJztcbmltcG9ydCB7IFNUWUxJTkcgfSBmcm9tICdAbGliL3NoYXJlZC9zdHlsaW5nL3N0eWxpbmcuY29uc3RhbnRzJztcbmltcG9ydCB0eXBlIHsgUGF5bG9hZEFjdGlvbiwgU2xpY2VDYXNlUmVkdWNlcnMgfSBmcm9tICdAcmVkdXhqcy90b29sa2l0JztcbmltcG9ydCB7IGNyZWF0ZVNsaWNlIH0gZnJvbSAnQHJlZHV4anMvdG9vbGtpdCc7XG5cbmV4cG9ydCBjb25zdCB7IGFjdGlvbnM6IHN0eWxpbmdBY3Rpb25zLCByZWR1Y2VyOiBzdHlsaW5nUmVkdWNlciB9ID0gY3JlYXRlU2xpY2U8XG4gIFN0eWxpbmdTdGF0ZU1vZGVsLFxuICBTbGljZUNhc2VSZWR1Y2VyczxTdHlsaW5nU3RhdGVNb2RlbD5cbj4oe1xuICBpbml0aWFsU3RhdGU6IFNUWUxJTkdfU1RBVEVfSU5JVElBTCxcbiAgbmFtZTogU1RZTElORyxcbiAgcmVkdWNlcnM6IHtcbiAgICB0aGVtZVNldDogKHN0YXRlLCB7IHBheWxvYWQgfTogUGF5bG9hZEFjdGlvbjxzdHJpbmc+KSA9PiB7XG4gICAgICBzdGF0ZS50aGVtZSA9IHBheWxvYWQ7XG4gICAgfSxcbiAgfSxcbn0pO1xuIl19

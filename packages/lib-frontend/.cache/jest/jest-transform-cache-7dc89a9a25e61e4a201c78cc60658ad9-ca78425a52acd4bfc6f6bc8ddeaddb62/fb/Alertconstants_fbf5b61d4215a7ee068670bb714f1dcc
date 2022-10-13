@@ -1,0 +1,108 @@
+4732e222ebbebdf37a8b44625911940b
+"use strict";
+
+/* istanbul ignore next */
+function cov_1a59tpbba4() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/notification/components/Alert/Alert.constants.ts";
+  var hash = "2aeebe072dbf479cac45b8ffc4aa393a6f5ec21e";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/notification/components/Alert/Alert.constants.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 54
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 0
+        },
+        end: {
+          line: 4,
+          column: 30
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 0
+        },
+        end: {
+          line: 5,
+          column: 26
+        }
+      }
+    },
+    fnMap: {},
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0
+    },
+    f: {},
+    b: {},
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/notification/components/Alert/Alert.constants.ts",
+      mappings: ";;;AAAa,QAAA,cAAc,GAAG,IAAI,CAAC;AAEtB,QAAA,WAAW,GAAG,GAAG,CAAC",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/notification/components/Alert/Alert.constants.ts"],
+      sourcesContent: ["export const ALERT_DURATION = 4000;\n\nexport const ALERT_WIDTH = 380;\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "2aeebe072dbf479cac45b8ffc4aa393a6f5ec21e"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_1a59tpbba4 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_1a59tpbba4();
+cov_1a59tpbba4().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_1a59tpbba4().s[1]++;
+exports.ALERT_WIDTH = exports.ALERT_DURATION = void 0;
+
+/* istanbul ignore next */
+cov_1a59tpbba4().s[2]++;
+exports.ALERT_DURATION = 4000;
+
+/* istanbul ignore next */
+cov_1a59tpbba4().s[3]++;
+exports.ALERT_WIDTH = 380;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBYUEseUJBQWlCLElBQWpCOzs7O0FBRUFBLHNCQUFjLEdBQWQiLCJuYW1lcyI6WyJleHBvcnRzIl0sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy9ub3RpZmljYXRpb24vY29tcG9uZW50cy9BbGVydC9BbGVydC5jb25zdGFudHMudHMiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGNvbnN0IEFMRVJUX0RVUkFUSU9OID0gNDAwMDtcblxuZXhwb3J0IGNvbnN0IEFMRVJUX1dJRFRIID0gMzgwO1xuIl19

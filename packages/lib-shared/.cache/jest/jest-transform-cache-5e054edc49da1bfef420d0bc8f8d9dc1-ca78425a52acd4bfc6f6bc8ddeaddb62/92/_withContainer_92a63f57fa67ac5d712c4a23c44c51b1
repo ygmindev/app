@@ -1,0 +1,107 @@
+f087b2e05ff97a220d5378eb17ad3bdb
+"use strict";
+
+/* istanbul ignore next */
+function cov_2dq01msoj7() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-shared/src/core/decorators/withContainer/_withContainer.ts";
+  var hash = "45528cd655aa5389cf37008058600b8bef410c88";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-shared/src/core/decorators/withContainer/_withContainer.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 32
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 20
+        },
+        end: {
+          line: 4,
+          column: 40
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 0
+        },
+        end: {
+          line: 5,
+          column: 48
+        }
+      }
+    },
+    fnMap: {},
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0
+    },
+    f: {},
+    b: {},
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-shared/src/core/decorators/withContainer/_withContainer.ts",
+      mappings: ";;;AAAA,yCAAuC;AAE1B,QAAA,cAAc,GAAyB,sBAAkC,CAAC",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-shared/src/core/decorators/withContainer/_withContainer.ts"],
+      sourcesContent: ["import { injectable } from 'inversify';\n\nexport const _withContainer: () => ClassDecorator = injectable as () => ClassDecorator;\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "45528cd655aa5389cf37008058600b8bef410c88"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_2dq01msoj7 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_2dq01msoj7();
+cov_2dq01msoj7().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_2dq01msoj7().s[1]++;
+exports._withContainer = void 0;
+const inversify_1 =
+/* istanbul ignore next */
+(cov_2dq01msoj7().s[2]++, require("inversify"));
+
+/* istanbul ignore next */
+cov_2dq01msoj7().s[3]++;
+exports._withContainer = inversify_1.injectable;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQTtBQUFBO0FBQUE7Ozs7QUFFYUEseUJBQXVDQyxzQkFBdkMiLCJuYW1lcyI6WyJleHBvcnRzIiwiaW52ZXJzaWZ5XzEiXSwic291cmNlcyI6WyIvVXNlcnMveWdtaW4vUHJvamVjdHMvbW9ub192Mi9hcHAzL2FwcC9wYWNrYWdlcy9saWItc2hhcmVkL3NyYy9jb3JlL2RlY29yYXRvcnMvd2l0aENvbnRhaW5lci9fd2l0aENvbnRhaW5lci50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBpbmplY3RhYmxlIH0gZnJvbSAnaW52ZXJzaWZ5JztcblxuZXhwb3J0IGNvbnN0IF93aXRoQ29udGFpbmVyOiAoKSA9PiBDbGFzc0RlY29yYXRvciA9IGluamVjdGFibGUgYXMgKCkgPT4gQ2xhc3NEZWNvcmF0b3I7XG4iXX0=

@@ -1,0 +1,322 @@
+d4e53a08915e052c1b12f7a038e30856
+"use strict";
+
+/* istanbul ignore next */
+function cov_2684oy3kdm() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-shared/src/core/decorators/withContainer/withContainer.ts";
+  var hash = "a0d887b65c0adf0f8035b0e54322a3fa094b5407";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-shared/src/core/decorators/withContainer/withContainer.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 31
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 25
+        },
+        end: {
+          line: 4,
+          column: 92
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 20
+        },
+        end: {
+          line: 5,
+          column: 73
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 22
+        },
+        end: {
+          line: 10,
+          column: 1
+        }
+      },
+      "5": {
+        start: {
+          line: 6,
+          column: 41
+        },
+        end: {
+          line: 10,
+          column: 1
+        }
+      },
+      "6": {
+        start: {
+          line: 7,
+          column: 4
+        },
+        end: {
+          line: 7,
+          column: 51
+        }
+      },
+      "7": {
+        start: {
+          line: 8,
+          column: 4
+        },
+        end: {
+          line: 8,
+          column: 58
+        }
+      },
+      "8": {
+        start: {
+          line: 9,
+          column: 4
+        },
+        end: {
+          line: 9,
+          column: 18
+        }
+      },
+      "9": {
+        start: {
+          line: 11,
+          column: 0
+        },
+        end: {
+          line: 11,
+          column: 38
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 6,
+            column: 22
+          },
+          end: {
+            line: 6,
+            column: 23
+          }
+        },
+        loc: {
+          start: {
+            line: 6,
+            column: 41
+          },
+          end: {
+            line: 10,
+            column: 1
+          }
+        },
+        line: 6
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 6,
+            column: 41
+          },
+          end: {
+            line: 6,
+            column: 42
+          }
+        },
+        loc: {
+          start: {
+            line: 6,
+            column: 53
+          },
+          end: {
+            line: 10,
+            column: 1
+          }
+        },
+        line: 6
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 6,
+            column: 23
+          },
+          end: {
+            line: 6,
+            column: 36
+          }
+        },
+        type: "default-arg",
+        locations: [{
+          start: {
+            line: 6,
+            column: 34
+          },
+          end: {
+            line: 6,
+            column: 36
+          }
+        }],
+        line: 6
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 8,
+            column: 4
+          },
+          end: {
+            line: 8,
+            column: 57
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 8,
+            column: 4
+          },
+          end: {
+            line: 8,
+            column: 8
+          }
+        }, {
+          start: {
+            line: 8,
+            column: 12
+          },
+          end: {
+            line: 8,
+            column: 57
+          }
+        }],
+        line: 8
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0
+    },
+    b: {
+      "0": [0],
+      "1": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-shared/src/core/decorators/withContainer/withContainer.ts",
+      mappings: ";;;AACA,6FAA0F;AAE1F,0EAAuE;AAEhE,MAAM,aAAa,GACxB,CAAC,EAAE,IAAI,KAA+B,EAAE,EAAE,EAAE,CAC5C,CAAiC,MAAa,EAAE,EAAE;IAChD,IAAA,+BAAc,GAAE,CAAC,MAAM,CAAC,CAAC;IACzB,IAAI,IAAI,qBAAS,CAAC,GAAG,CAAQ,IAAI,EAAE,IAAI,MAAM,EAAW,CAAC,CAAC;IAC1D,OAAO,MAAM,CAAC;AAChB,CAAC,CAAC;AANS,QAAA,aAAa,iBAMtB",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-shared/src/core/decorators/withContainer/withContainer.ts"],
+      sourcesContent: ["import type { ConstructorModel } from '@lib/shared/core/core.models';\nimport { _withContainer } from '@lib/shared/core/decorators/withContainer/_withContainer';\nimport type { WithContainerParamsModel } from '@lib/shared/core/decorators/withContainer/withContainer..models';\nimport { Container } from '@lib/shared/core/utils/Container/Container';\n\nexport const withContainer =\n  ({ name }: WithContainerParamsModel = {}) =>\n  <TType extends ConstructorModel>(target: TType) => {\n    _withContainer()(target);\n    name && Container.set<TType>(name, new target() as TType);\n    return target;\n  };\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "a0d887b65c0adf0f8035b0e54322a3fa094b5407"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_2684oy3kdm = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_2684oy3kdm();
+cov_2684oy3kdm().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_2684oy3kdm().s[1]++;
+exports.withContainer = void 0;
+
+const _withContainer_1 =
+/* istanbul ignore next */
+(cov_2684oy3kdm().s[2]++, require("@lib/shared/core/decorators/withContainer/_withContainer"));
+
+const Container_1 =
+/* istanbul ignore next */
+(cov_2684oy3kdm().s[3]++, require("@lib/shared/core/utils/Container/Container"));
+
+/* istanbul ignore next */
+cov_2684oy3kdm().s[4]++;
+
+const withContainer = ({
+  name
+} =
+/* istanbul ignore next */
+(cov_2684oy3kdm().b[0][0]++, {})) => {
+  /* istanbul ignore next */
+  cov_2684oy3kdm().f[0]++;
+  cov_2684oy3kdm().s[5]++;
+  return (target) => {
+    /* istanbul ignore next */
+    cov_2684oy3kdm().f[1]++;
+    cov_2684oy3kdm().s[6]++;
+    (0, _withContainer_1._withContainer)()(target);
+
+    /* istanbul ignore next */
+    cov_2684oy3kdm().s[7]++;
+
+    /* istanbul ignore next */
+    (cov_2684oy3kdm().b[1][0]++, name) &&
+    /* istanbul ignore next */
+    (cov_2684oy3kdm().b[1][1]++, Container_1.Container.set(name, new target()));
+
+    /* istanbul ignore next */
+    cov_2684oy3kdm().s[8]++;
+    return target;
+  };
+};
+
+/* istanbul ignore next */
+cov_2684oy3kdm().s[9]++;
+exports.withContainer = withContainer;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFDQTtBQUFBO0FBQUE7O0FBRUE7QUFBQTtBQUFBOzs7OztBQUVPLE1BQU1BLGFBQWEsR0FDeEIsQ0FBQztFQUFFQztBQUFGO0FBQUE7QUFBQSw2QkFBcUMsRUFBckMsQ0FBRCxLQUNBO0VBQUE7RUFBQTtFQUFBO0VBQUEsUUFBaUNDLE1BQWpDLEtBQWtEO0lBQUE7SUFBQTtJQUFBO0lBQ2hELHVDQUFpQkEsTUFBakI7O0lBRGdEO0lBQUE7O0lBRWhEO0lBQUEsaUNBQUk7SUFBQTtJQUFBLDZCQUFJQyxzQkFBVUMsR0FBVixDQUFxQkgsSUFBckIsRUFBMkIsSUFBSUMsTUFBSixFQUEzQixDQUFKLENBQUo7O0lBRmdEO0lBQUE7SUFHaEQsT0FBT0EsTUFBUDtFQUNELENBSkQ7QUFJQyxDQU5JOzs7O0FBQU1HLHdCQUFhTCxhQUFiIiwibmFtZXMiOlsid2l0aENvbnRhaW5lciIsIm5hbWUiLCJ0YXJnZXQiLCJDb250YWluZXJfMSIsInNldCIsImV4cG9ydHMiXSwic291cmNlcyI6WyIvVXNlcnMveWdtaW4vUHJvamVjdHMvbW9ub192Mi9hcHAzL2FwcC9wYWNrYWdlcy9saWItc2hhcmVkL3NyYy9jb3JlL2RlY29yYXRvcnMvd2l0aENvbnRhaW5lci93aXRoQ29udGFpbmVyLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB0eXBlIHsgQ29uc3RydWN0b3JNb2RlbCB9IGZyb20gJ0BsaWIvc2hhcmVkL2NvcmUvY29yZS5tb2RlbHMnO1xuaW1wb3J0IHsgX3dpdGhDb250YWluZXIgfSBmcm9tICdAbGliL3NoYXJlZC9jb3JlL2RlY29yYXRvcnMvd2l0aENvbnRhaW5lci9fd2l0aENvbnRhaW5lcic7XG5pbXBvcnQgdHlwZSB7IFdpdGhDb250YWluZXJQYXJhbXNNb2RlbCB9IGZyb20gJ0BsaWIvc2hhcmVkL2NvcmUvZGVjb3JhdG9ycy93aXRoQ29udGFpbmVyL3dpdGhDb250YWluZXIuLm1vZGVscyc7XG5pbXBvcnQgeyBDb250YWluZXIgfSBmcm9tICdAbGliL3NoYXJlZC9jb3JlL3V0aWxzL0NvbnRhaW5lci9Db250YWluZXInO1xuXG5leHBvcnQgY29uc3Qgd2l0aENvbnRhaW5lciA9XG4gICh7IG5hbWUgfTogV2l0aENvbnRhaW5lclBhcmFtc01vZGVsID0ge30pID0+XG4gIDxUVHlwZSBleHRlbmRzIENvbnN0cnVjdG9yTW9kZWw+KHRhcmdldDogVFR5cGUpID0+IHtcbiAgICBfd2l0aENvbnRhaW5lcigpKHRhcmdldCk7XG4gICAgbmFtZSAmJiBDb250YWluZXIuc2V0PFRUeXBlPihuYW1lLCBuZXcgdGFyZ2V0KCkgYXMgVFR5cGUpO1xuICAgIHJldHVybiB0YXJnZXQ7XG4gIH07XG4iXX0=

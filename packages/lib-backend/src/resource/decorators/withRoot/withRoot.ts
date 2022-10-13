@@ -6,7 +6,7 @@ import type { WithRootModel } from '@lib/shared/resource/decorators/withRoot/wit
 
 export const withRoot =
   <TRoot = undefined>({ Root, name }: WithRootParamsModel<TRoot>) =>
-  <TBase extends ConstructorModel>(Base: TBase): TBase & ConstructorModel<WithRootModel<TRoot>> => {
+  <TType extends ConstructorModel>(Base: TType): TType & ConstructorModel<WithRootModel<TRoot>> => {
     if (Root) {
       const _name = `${name}Root`;
 

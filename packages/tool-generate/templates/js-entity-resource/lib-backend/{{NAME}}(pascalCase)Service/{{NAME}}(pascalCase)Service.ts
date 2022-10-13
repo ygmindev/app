@@ -7,7 +7,7 @@ import type {
 } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
 import type { {{NAME}}(pascalCase)ServiceModel } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Service/{{NAME}}(pascalCase)Service.models';
 
-@withContainer()
+@withContainer({ name: `${{{NAME}}(constantCase)_RESOURCE_NAME}Service` })
 export class {{NAME}}(pascalCase)Service
   extends EntityResourceService<{{NAME}}(pascalCase)Model, {{NAME}}(pascalCase)FormModel>({
     name: {{NAME}}(constantCase)_RESOURCE_NAME,

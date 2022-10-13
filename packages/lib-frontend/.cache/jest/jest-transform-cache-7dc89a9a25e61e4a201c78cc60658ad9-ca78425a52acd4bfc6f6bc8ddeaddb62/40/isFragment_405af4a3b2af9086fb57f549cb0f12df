@@ -1,0 +1,218 @@
+9d981c261f13c2c32e1689c676564ae5
+"use strict";
+
+/* istanbul ignore next */
+function cov_2p2uzbey9c() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/utils/isFragment/isFragment.ts";
+  var hash = "c035c6cd75fa9987a812c7e4e2d3de401e8da73d";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/utils/isFragment/isFragment.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 28
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 16
+        },
+        end: {
+          line: 4,
+          column: 32
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 19
+        },
+        end: {
+          line: 6,
+          column: 67
+        }
+      },
+      "4": {
+        start: {
+          line: 5,
+          column: 30
+        },
+        end: {
+          line: 6,
+          column: 67
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 0
+        },
+        end: {
+          line: 7,
+          column: 32
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 5,
+            column: 19
+          },
+          end: {
+            line: 5,
+            column: 20
+          }
+        },
+        loc: {
+          start: {
+            line: 5,
+            column: 30
+          },
+          end: {
+            line: 6,
+            column: 67
+          }
+        },
+        line: 5
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 5,
+            column: 30
+          },
+          end: {
+            line: 6,
+            column: 67
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 5,
+            column: 30
+          },
+          end: {
+            line: 5,
+            column: 64
+          }
+        }, {
+          start: {
+            line: 6,
+            column: 5
+          },
+          end: {
+            line: 6,
+            column: 31
+          }
+        }, {
+          start: {
+            line: 6,
+            column: 35
+          },
+          end: {
+            line: 6,
+            column: 66
+          }
+        }],
+        line: 5
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {
+      "0": [0, 0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/utils/isFragment/isFragment.ts",
+      mappings: ";;;AACA,iCAAiD;AAE1C,MAAM,UAAU,GAAG,CAAC,KAAgC,EAAW,EAAE,CACtE,IAAA,sBAAc,EAAC,KAAK,CAAC;IACrB,CAAE,KAAoC,KAAK,gBAAQ,IAAK,KAAsB,CAAC,IAAI,KAAK,gBAAQ,CAAC,CAAC;AAFvF,QAAA,UAAU,cAE6E",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/core/utils/isFragment/isFragment.ts"],
+      sourcesContent: ["import type { ComponentType, ExoticComponent, ReactElement, ReactNode } from 'react';\nimport { Fragment, isValidElement } from 'react';\n\nexport const isFragment = (value: ReactNode | ComponentType): boolean =>\n  isValidElement(value) &&\n  ((value as unknown as ExoticComponent) === Fragment || (value as ReactElement).type === Fragment);\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "c035c6cd75fa9987a812c7e4e2d3de401e8da73d"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_2p2uzbey9c = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_2p2uzbey9c();
+cov_2p2uzbey9c().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_2p2uzbey9c().s[1]++;
+exports.isFragment = void 0;
+const react_1 =
+/* istanbul ignore next */
+(cov_2p2uzbey9c().s[2]++, require("react"));
+
+/* istanbul ignore next */
+cov_2p2uzbey9c().s[3]++;
+
+const isFragment = (value) => {
+  /* istanbul ignore next */
+  cov_2p2uzbey9c().f[0]++;
+  cov_2p2uzbey9c().s[4]++;
+  return (
+    /* istanbul ignore next */
+    (cov_2p2uzbey9c().b[0][0]++, (0, react_1.isValidElement)(value)) && (
+    /* istanbul ignore next */
+    (cov_2p2uzbey9c().b[0][1]++, value === react_1.Fragment) ||
+    /* istanbul ignore next */
+    (cov_2p2uzbey9c().b[0][2]++, value.type === react_1.Fragment))
+  );
+};
+
+/* istanbul ignore next */
+cov_2p2uzbey9c().s[5]++;
+exports.isFragment = isFragment;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQ0E7QUFBQTtBQUFBOzs7OztBQUVPLE1BQU1BLFVBQVUsR0FBRyxDQUFDQyxLQUFELEtBQ3hCO0VBQUE7RUFBQTtFQUFBO0VBQUE7SUFBQTtJQUFBLHlEQUFlQSxLQUFmO0lBQ0U7SUFBQSxrQ0FBb0MsS0FBS0MsZ0JBQXpDO0lBQUE7SUFBQSw2QkFBc0RELEtBQXNCLENBQUNFLElBQXZCLEtBQWdDRCxnQkFBdEYsQ0FERjtFQUFBO0FBQ2lHLENBRjVGOzs7O0FBQU1FLHFCQUFVSixVQUFWIiwibmFtZXMiOlsiaXNGcmFnbWVudCIsInZhbHVlIiwicmVhY3RfMSIsInR5cGUiLCJleHBvcnRzIl0sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy9jb3JlL3V0aWxzL2lzRnJhZ21lbnQvaXNGcmFnbWVudC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgdHlwZSB7IENvbXBvbmVudFR5cGUsIEV4b3RpY0NvbXBvbmVudCwgUmVhY3RFbGVtZW50LCBSZWFjdE5vZGUgfSBmcm9tICdyZWFjdCc7XG5pbXBvcnQgeyBGcmFnbWVudCwgaXNWYWxpZEVsZW1lbnQgfSBmcm9tICdyZWFjdCc7XG5cbmV4cG9ydCBjb25zdCBpc0ZyYWdtZW50ID0gKHZhbHVlOiBSZWFjdE5vZGUgfCBDb21wb25lbnRUeXBlKTogYm9vbGVhbiA9PlxuICBpc1ZhbGlkRWxlbWVudCh2YWx1ZSkgJiZcbiAgKCh2YWx1ZSBhcyB1bmtub3duIGFzIEV4b3RpY0NvbXBvbmVudCkgPT09IEZyYWdtZW50IHx8ICh2YWx1ZSBhcyBSZWFjdEVsZW1lbnQpLnR5cGUgPT09IEZyYWdtZW50KTtcbiJdfQ==

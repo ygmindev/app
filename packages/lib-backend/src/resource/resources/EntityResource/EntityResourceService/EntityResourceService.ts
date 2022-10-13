@@ -4,6 +4,7 @@ import type { ConstructorModel } from '@lib/shared/core/core.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import type { EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import type {
   EntityResourceServiceModel,
   EntityResourceServiceParamsModel,
@@ -62,19 +63,23 @@ export const EntityResourceService = <TType, TForm>({
     }
 
     async create(
-      input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TForm>,
+      input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType>> {
       const _input = cleanObject(
         this.decorators.beforeCreate ? await this.decorators.beforeCreate({ input }) : input,
       );
       const output = await this._repository.create(
-        _input as unknown as InputModel<RESOURCE_METHOD_TYPE.CREATE, TType>,
+        _input as unknown as InputModel<
+          RESOURCE_METHOD_TYPE.CREATE,
+          TType,
+          EntityResourceDataModel<TType>
+        >,
       );
       return this.decorators.afterCreate ? await this.decorators.afterCreate({ output }) : output;
     }
 
     async get(
-      input: InputModel<RESOURCE_METHOD_TYPE.GET, TType>,
+      input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType>> {
       const _input = cleanObject(
         this.decorators.beforeGet ? await this.decorators.beforeGet({ input }) : input,
@@ -84,7 +89,7 @@ export const EntityResourceService = <TType, TForm>({
     }
 
     async getMany(
-      input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>,
+      input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>> {
       const _input = cleanObject(
         this.decorators.beforeGetMany ? await this.decorators.beforeGetMany({ input }) : input,
@@ -94,7 +99,7 @@ export const EntityResourceService = <TType, TForm>({
     }
 
     async getConnection(
-      input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>,
+      input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>> {
       const _input = cleanObject(
         this.decorators.beforeGetConnection
@@ -108,7 +113,7 @@ export const EntityResourceService = <TType, TForm>({
     }
 
     async update(
-      input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>,
+      input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>> {
       const _input = cleanObject(
         this.decorators.beforeUpdate ? await this.decorators.beforeUpdate({ input }) : input,
@@ -118,7 +123,7 @@ export const EntityResourceService = <TType, TForm>({
     }
 
     async remove(
-      input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType>,
+      input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType>> {
       const _input = cleanObject(
         this.decorators.beforeRemove ? await this.decorators.beforeRemove({ input }) : input,

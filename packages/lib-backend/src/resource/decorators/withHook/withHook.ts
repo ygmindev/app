@@ -1,6 +1,6 @@
 import { HOOK_TYPE } from '@lib/backend/resource/decorators/withHook/withHook.constants';
 import type { WithHookParamsModel } from '@lib/backend/resource/decorators/withHook/withHook.models';
-import { BadRequestError } from '@lib/shared/core/errors/BadRequestError/BadRequestError';
+import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { BeforeCreate } from '@mikro-orm/core';
 
 const _getHook = ({ type }: WithHookParamsModel): PropertyDecorator => {
@@ -8,7 +8,7 @@ const _getHook = ({ type }: WithHookParamsModel): PropertyDecorator => {
     case HOOK_TYPE.BEFORE_CREATE:
       return BeforeCreate() as PropertyDecorator;
     default:
-      throw new BadRequestError();
+      throw new InvalidArgumentError();
   }
 };
 

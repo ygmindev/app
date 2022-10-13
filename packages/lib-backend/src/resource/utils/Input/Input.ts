@@ -6,16 +6,16 @@ import type { ConstructorModel } from '@lib/shared/core/core.models';
 import type { ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 
-export const Input = <TMethod extends ResourceMethodTypeModel, TType, TRoot = undefined>({
+export const Input = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoot = undefined>({
   Resource,
   Root,
   method,
   name,
-}: InputParamsModel<TMethod, TType, TRoot>): ConstructorModel<
-  InputModel<TMethod, TType, TRoot>
+}: InputParamsModel<TMethod, TType, TForm, TRoot>): ConstructorModel<
+  InputModel<TMethod, TType, TForm, TRoot>
 > => {
   @withEntity({ name })
   @withRoot({ Root, name })
   class _Input extends ((Args({ Resource, method, name }) as ConstructorModel) || class {}) {}
-  return _Input as ConstructorModel<InputModel<TMethod, TType, TRoot>>;
+  return _Input as ConstructorModel<InputModel<TMethod, TType, TForm, TRoot>>;
 };

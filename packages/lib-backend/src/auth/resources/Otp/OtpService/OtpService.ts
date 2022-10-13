@@ -47,7 +47,7 @@ export class OtpService
 
   async createIfNotExists({
     form,
-  }: InputModel<RESOURCE_METHOD_TYPE.CREATE, OtpFormModel>): Promise<
+  }: InputModel<RESOURCE_METHOD_TYPE.CREATE, OtpModel, OtpFormModel>): Promise<
     OutputModel<RESOURCE_METHOD_TYPE.CREATE, OtpModel>
   > {
     const { result } = await this._userService.get({

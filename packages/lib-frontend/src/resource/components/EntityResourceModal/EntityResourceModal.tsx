@@ -36,8 +36,10 @@ export const EntityResourceModal = <TType extends EntityResourceModel, TForm>({
   >({ fields: [{ result: ['_id'] }], method: RESOURCE_METHOD_TYPE.REMOVE, name });
 
   const _handleSubmit = async (values: TForm): Promise<void> => {
-    const result = await onCreate({ form: values });
-    warn(result);
+    if (onCreate) {
+      const result = await onCreate({ form: values });
+      warn(result);
+    }
   };
 
   const _handleDelete = async (): Promise<void> => {

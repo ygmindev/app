@@ -1,0 +1,550 @@
+b56ac7d9b695cc75ec4c018b9bf01d72
+"use strict";
+
+/* istanbul ignore next */
+function cov_2b40olsxkj() {
+  var path = "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/graphql/utils/graphQlQuery/graphQlQuery.ts";
+  var hash = "fcc8004a6ed1f0f24675bd5373965fb86de64718";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/graphql/utils/graphQlQuery/graphQlQuery.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 30
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 19
+        },
+        end: {
+          line: 4,
+          column: 70
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 17
+        },
+        end: {
+          line: 5,
+          column: 34
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 26
+        },
+        end: {
+          line: 12,
+          column: 2
+        }
+      },
+      "5": {
+        start: {
+          line: 6,
+          column: 38
+        },
+        end: {
+          line: 12,
+          column: 2
+        }
+      },
+      "6": {
+        start: {
+          line: 8,
+          column: 20
+        },
+        end: {
+          line: 10,
+          column: 26
+        }
+      },
+      "7": {
+        start: {
+          line: 9,
+          column: 41
+        },
+        end: {
+          line: 9,
+          column: 73
+        }
+      },
+      "8": {
+        start: {
+          line: 13,
+          column: 21
+        },
+        end: {
+          line: 24,
+          column: 1
+        }
+      },
+      "9": {
+        start: {
+          line: 14,
+          column: 37
+        },
+        end: {
+          line: 14,
+          column: 45
+        }
+      },
+      "10": {
+        start: {
+          line: 15,
+          column: 4
+        },
+        end: {
+          line: 20,
+          column: 5
+        }
+      },
+      "11": {
+        start: {
+          line: 16,
+          column: 8
+        },
+        end: {
+          line: 16,
+          column: 93
+        }
+      },
+      "12": {
+        start: {
+          line: 16,
+          column: 63
+        },
+        end: {
+          line: 16,
+          column: 77
+        }
+      },
+      "13": {
+        start: {
+          line: 17,
+          column: 8
+        },
+        end: {
+          line: 19,
+          column: 27
+        }
+      },
+      "14": {
+        start: {
+          line: 18,
+          column: 24
+        },
+        end: {
+          line: 18,
+          column: 37
+        }
+      },
+      "15": {
+        start: {
+          line: 21,
+          column: 4
+        },
+        end: {
+          line: 23,
+          column: 8
+        }
+      },
+      "16": {
+        start: {
+          line: 25,
+          column: 0
+        },
+        end: {
+          line: 25,
+          column: 36
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 6,
+            column: 26
+          },
+          end: {
+            line: 6,
+            column: 27
+          }
+        },
+        loc: {
+          start: {
+            line: 6,
+            column: 38
+          },
+          end: {
+            line: 12,
+            column: 2
+          }
+        },
+        line: 6
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 8,
+            column: 9
+          },
+          end: {
+            line: 8,
+            column: 10
+          }
+        },
+        loc: {
+          start: {
+            line: 8,
+            column: 20
+          },
+          end: {
+            line: 10,
+            column: 26
+          }
+        },
+        line: 8
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 9,
+            column: 31
+          },
+          end: {
+            line: 9,
+            column: 32
+          }
+        },
+        loc: {
+          start: {
+            line: 9,
+            column: 41
+          },
+          end: {
+            line: 9,
+            column: 73
+          }
+        },
+        line: 9
+      },
+      "3": {
+        name: "(anonymous_3)",
+        decl: {
+          start: {
+            line: 13,
+            column: 21
+          },
+          end: {
+            line: 13,
+            column: 22
+          }
+        },
+        loc: {
+          start: {
+            line: 13,
+            column: 58
+          },
+          end: {
+            line: 24,
+            column: 1
+          }
+        },
+        line: 13
+      },
+      "4": {
+        name: "(anonymous_4)",
+        decl: {
+          start: {
+            line: 16,
+            column: 53
+          },
+          end: {
+            line: 16,
+            column: 54
+          }
+        },
+        loc: {
+          start: {
+            line: 16,
+            column: 63
+          },
+          end: {
+            line: 16,
+            column: 77
+          }
+        },
+        line: 16
+      },
+      "5": {
+        name: "(anonymous_5)",
+        decl: {
+          start: {
+            line: 18,
+            column: 17
+          },
+          end: {
+            line: 18,
+            column: 18
+          }
+        },
+        loc: {
+          start: {
+            line: 18,
+            column: 24
+          },
+          end: {
+            line: 18,
+            column: 37
+          }
+        },
+        line: 18
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 8,
+            column: 20
+          },
+          end: {
+            line: 10,
+            column: 26
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 9,
+            column: 6
+          },
+          end: {
+            line: 9,
+            column: 84
+          }
+        }, {
+          start: {
+            line: 10,
+            column: 6
+          },
+          end: {
+            line: 10,
+            column: 26
+          }
+        }],
+        line: 8
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 15,
+            column: 4
+          },
+          end: {
+            line: 20,
+            column: 5
+          }
+        },
+        type: "if",
+        locations: [{
+          start: {
+            line: 15,
+            column: 4
+          },
+          end: {
+            line: 20,
+            column: 5
+          }
+        }, {
+          start: {
+            line: undefined,
+            column: undefined
+          },
+          end: {
+            line: undefined,
+            column: undefined
+          }
+        }],
+        line: 15
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/graphql/utils/graphQlQuery/graphQlQuery.ts",
+      mappings: ";;;AAIA,uEAAoE;AACpE,mCAA4C;AAE5C,MAAM,iBAAiB,GAAG,CAAQ,MAAuC,EAAU,EAAE,CAAC;IAClF,MAAM;KACL,GAAG,CAAC,CAAC,KAAK,EAAE,EAAE,CACb,IAAA,sBAAa,EAAC,KAAK,CAAC;IAClB,CAAC,CAAC,IAAA,YAAG,EAAC,KAAe,EAAE,CAAC,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC,IAAI,CAAC,IAAI,iBAAiB,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,GAAG,CAAC;IAC5E,CAAC,CAAC,IAAI,MAAM,CAAC,KAAK,CAAC,GAAG,CACzB;KACA,IAAI,CAAC,GAAG,CAAC;EACZ,CAAC;AAEI,MAAM,YAAY,GAAG,CAAyC,EACnE,MAAM,EACN,IAAI,EACJ,MAAM,EACN,IAAI,GAC6C,EAAU,EAAE;IAC7D,IAAI,CAAC,YAAY,EAAE,UAAU,CAAC,GAAG,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC;IAC1C,IAAI,MAAM,EAAE;QACV,YAAY,GAAG,IAAI,IAAA,YAAG,EAAC,MAAM,EAAE,CAAC,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC,IAAI,CAAC,KAAK,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,GAAG,CAAC;QACvE,UAAU,GAAG,IAAI,MAAM,CAAC,IAAI,CAAC,MAAM,CAAC;aACjC,GAAG,CAAC,CAAC,CAAC,EAAE,EAAE,CAAC,GAAG,CAAC,MAAM,CAAC,EAAE,CAAC;aACzB,IAAI,CAAC,IAAI,CAAC,GAAG,CAAC;KAClB;IACD,OAAO,IAAA,mBAAQ,EACb,GAAG,IAAI,IAAI,IAAI,GAAG,YAAY;QAC1B,IAAI,GAAG,UAAU,IAAI,iBAAiB,CAAU,MAAM,CAAC;MACzD,CACH,CAAC;AACJ,CAAC,CAAC;AAlBW,QAAA,YAAY,gBAkBvB",
+      names: [],
+      sources: ["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/graphql/utils/graphQlQuery/graphQlQuery.ts"],
+      sourcesContent: ["import type {\n  GraphQlFieldModel,\n  GraphQlQueryParamsModel,\n} from '@lib/frontend/graphql/utils/graphQlQuery/graphQlQuery.models';\nimport { trimDeep } from '@lib/shared/core/utils/trimDeep/trimDeep';\nimport { isPlainObject, map } from 'lodash';\n\nconst _getGraphQlFields = <TType>(fields: Array<GraphQlFieldModel<TType>>): string => `{\n  ${fields\n    .map((field) =>\n      isPlainObject(field)\n        ? map(field as object, (v, k) => ` ${k} ${_getGraphQlFields(v)} `).join(' ')\n        : ` ${String(field)} `,\n    )\n    .join(' ')}\n}`;\n\nexport const graphQlQuery = <TParams, TResult, TName extends string>({\n  fields,\n  name,\n  params,\n  type,\n}: GraphQlQueryParamsModel<TParams, TResult, TName>): string => {\n  let [paramsString, paramsKeys] = ['', ''];\n  if (params) {\n    paramsString = `(${map(params, (v, k) => `$${k}: ${v}!`).join(', ')})`;\n    paramsKeys = `(${Object.keys(params)\n      .map((k) => `${k}: $${k}`)\n      .join(', ')})`;\n  }\n  return trimDeep(\n    `${type} ${name}${paramsString} {\n      ${name}${paramsKeys} ${_getGraphQlFields<TResult>(fields)}\n    }`,\n  );\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "fcc8004a6ed1f0f24675bd5373965fb86de64718"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_2b40olsxkj = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+
+cov_2b40olsxkj();
+cov_2b40olsxkj().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+/* istanbul ignore next */
+cov_2b40olsxkj().s[1]++;
+exports.graphQlQuery = void 0;
+const trimDeep_1 =
+/* istanbul ignore next */
+(cov_2b40olsxkj().s[2]++, require("@lib/shared/core/utils/trimDeep/trimDeep"));
+const lodash_1 =
+/* istanbul ignore next */
+(cov_2b40olsxkj().s[3]++, require("lodash"));
+
+/* istanbul ignore next */
+cov_2b40olsxkj().s[4]++;
+
+const _getGraphQlFields = (fields) => {
+  /* istanbul ignore next */
+  cov_2b40olsxkj().f[0]++;
+  cov_2b40olsxkj().s[5]++;
+  return `{
+  ${fields.map((field) => {
+    /* istanbul ignore next */
+    cov_2b40olsxkj().f[1]++;
+    cov_2b40olsxkj().s[6]++;
+    return (0, lodash_1.isPlainObject)(field) ?
+    /* istanbul ignore next */
+    (cov_2b40olsxkj().b[0][0]++, (0, lodash_1.map)(field, (v, k) => {
+      /* istanbul ignore next */
+      cov_2b40olsxkj().f[2]++;
+      cov_2b40olsxkj().s[7]++;
+      return ` ${k} ${_getGraphQlFields(v)} `;
+    }).join(' ')) :
+    /* istanbul ignore next */
+    (cov_2b40olsxkj().b[0][1]++, ` ${String(field)} `);
+  }).join(' ')}
+}`;
+};
+
+/* istanbul ignore next */
+cov_2b40olsxkj().s[8]++;
+
+const graphQlQuery = ({
+  fields,
+  name,
+  params,
+  type
+}) => {
+  /* istanbul ignore next */
+  cov_2b40olsxkj().f[3]++;
+  let [paramsString, paramsKeys] =
+  /* istanbul ignore next */
+  (cov_2b40olsxkj().s[9]++, ['', '']);
+
+  /* istanbul ignore next */
+  cov_2b40olsxkj().s[10]++;
+
+  if (params) {
+    /* istanbul ignore next */
+    cov_2b40olsxkj().b[1][0]++;
+    cov_2b40olsxkj().s[11]++;
+    paramsString = `(${(0, lodash_1.map)(params, (v, k) => {
+      /* istanbul ignore next */
+      cov_2b40olsxkj().f[4]++;
+      cov_2b40olsxkj().s[12]++;
+      return `$${k}: ${v}!`;
+    }).join(', ')})`;
+
+    /* istanbul ignore next */
+    cov_2b40olsxkj().s[13]++;
+    paramsKeys = `(${Object.keys(params).map((k) => {
+      /* istanbul ignore next */
+      cov_2b40olsxkj().f[5]++;
+      cov_2b40olsxkj().s[14]++;
+      return `${k}: $${k}`;
+    }).join(', ')})`;
+  } else
+  /* istanbul ignore next */
+  {
+    cov_2b40olsxkj().b[1][1]++;
+  }
+
+  cov_2b40olsxkj().s[15]++;
+  return (0, trimDeep_1.trimDeep)(`${type} ${name}${paramsString} {
+      ${name}${paramsKeys} ${_getGraphQlFields(fields)}
+    }`);
+};
+
+/* istanbul ignore next */
+cov_2b40olsxkj().s[16]++;
+exports.graphQlQuery = graphQlQuery;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7SUF5Qkk7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBckJKO0FBQUE7QUFBQTtBQUNBO0FBQUE7QUFBQTs7Ozs7QUFFQSxNQUFNQSxpQkFBaUIsR0FBRyxDQUFRQyxNQUFSLEtBQTREO0VBQUE7RUFBQTtFQUFBO0VBQUE7SUFDbEZBLE1BQU0sQ0FDTEMsR0FERCxDQUNLLENBQUNDLEtBQUQsS0FDSDtJQUFBO0lBQUE7SUFBQTtJQUFBLG1DQUFjQSxLQUFkO0lBQUE7SUFBQSw2QkFDSSxrQkFBSUEsS0FBSixFQUFxQixDQUFDQyxDQUFELEVBQUlDLENBQUosS0FBVTtNQUFBO01BQUE7TUFBQTtNQUFBLFdBQUlBLENBQUMsSUFBSUwsaUJBQWlCLENBQUNJLENBQUQsQ0FBRyxHQUE3QjtJQUFnQyxDQUEvRCxFQUFpRUUsSUFBakUsQ0FBc0UsR0FBdEUsQ0FESjtJQUFBO0lBQUEsNkJBRUksSUFBSUMsTUFBTSxDQUFDSixLQUFELENBQU8sR0FGckI7RUFFd0IsQ0FKMUIsRUFNQ0csSUFORCxDQU1NLEdBTk4sQ0FNVTtFQVB3RTtBQVFwRixDQVJGOzs7OztBQVVPLE1BQU1FLFlBQVksR0FBRyxDQUF5QztFQUNuRVAsTUFEbUU7RUFFbkVRLElBRm1FO0VBR25FQyxNQUhtRTtFQUluRUM7QUFKbUUsQ0FBekMsS0FLbUM7RUFBQTtFQUFBO0VBQzdELElBQUksQ0FBQ0MsWUFBRCxFQUFlQyxVQUFmO0VBQUE7RUFBQSwwQkFBNkIsQ0FBQyxFQUFELEVBQUssRUFBTCxDQUE3QixDQUFKOztFQUQ2RDtFQUFBOztFQUU3RCxJQUFJSCxNQUFKLEVBQVk7SUFBQTtJQUFBO0lBQUE7SUFDVkUsWUFBWSxHQUFHLElBQUksa0JBQUlGLE1BQUosRUFBWSxDQUFDTixDQUFELEVBQUlDLENBQUosS0FBVTtNQUFBO01BQUE7TUFBQTtNQUFBLFdBQUlBLENBQUMsS0FBS0QsQ0FBQyxHQUFYO0lBQWMsQ0FBcEMsRUFBc0NFLElBQXRDLENBQTJDLElBQTNDLENBQWdELEdBQW5FOztJQURVO0lBQUE7SUFFVk8sVUFBVSxHQUFHLElBQUlDLE1BQU0sQ0FBQ0MsSUFBUCxDQUFZTCxNQUFaLEVBQ2RSLEdBRGMsQ0FDVixDQUFDRyxDQUFELEtBQU87TUFBQTtNQUFBO01BQUE7TUFBQSxVQUFHQSxDQUFDLE1BQU1BLENBQUMsRUFBWDtJQUFhLENBRFYsRUFFZEMsSUFGYyxDQUVULElBRlMsQ0FFSixHQUZiO0VBR0QsQ0FMRDtFQUFBO0VBQUE7SUFBQTtFQUFBOztFQUY2RDtFQVE3RCxPQUFPLHlCQUNMLEdBQUdLLElBQUksSUFBSUYsSUFBSSxHQUFHRyxZQUFZO1FBQzFCSCxJQUFJLEdBQUdJLFVBQVUsSUFBSWIsaUJBQWlCLENBQVVDLE1BQVYsQ0FBaUI7TUFGdEQsQ0FBUDtBQUtELENBbEJNOzs7O0FBQU1lLHVCQUFZUixZQUFaIiwibmFtZXMiOlsiX2dldEdyYXBoUWxGaWVsZHMiLCJmaWVsZHMiLCJtYXAiLCJmaWVsZCIsInYiLCJrIiwiam9pbiIsIlN0cmluZyIsImdyYXBoUWxRdWVyeSIsIm5hbWUiLCJwYXJhbXMiLCJ0eXBlIiwicGFyYW1zU3RyaW5nIiwicGFyYW1zS2V5cyIsIk9iamVjdCIsImtleXMiLCJleHBvcnRzIl0sInNvdXJjZXMiOlsiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWZyb250ZW5kL3NyYy9ncmFwaHFsL3V0aWxzL2dyYXBoUWxRdWVyeS9ncmFwaFFsUXVlcnkudHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHR5cGUge1xuICBHcmFwaFFsRmllbGRNb2RlbCxcbiAgR3JhcGhRbFF1ZXJ5UGFyYW1zTW9kZWwsXG59IGZyb20gJ0BsaWIvZnJvbnRlbmQvZ3JhcGhxbC91dGlscy9ncmFwaFFsUXVlcnkvZ3JhcGhRbFF1ZXJ5Lm1vZGVscyc7XG5pbXBvcnQgeyB0cmltRGVlcCB9IGZyb20gJ0BsaWIvc2hhcmVkL2NvcmUvdXRpbHMvdHJpbURlZXAvdHJpbURlZXAnO1xuaW1wb3J0IHsgaXNQbGFpbk9iamVjdCwgbWFwIH0gZnJvbSAnbG9kYXNoJztcblxuY29uc3QgX2dldEdyYXBoUWxGaWVsZHMgPSA8VFR5cGU+KGZpZWxkczogQXJyYXk8R3JhcGhRbEZpZWxkTW9kZWw8VFR5cGU+Pik6IHN0cmluZyA9PiBge1xuICAke2ZpZWxkc1xuICAgIC5tYXAoKGZpZWxkKSA9PlxuICAgICAgaXNQbGFpbk9iamVjdChmaWVsZClcbiAgICAgICAgPyBtYXAoZmllbGQgYXMgb2JqZWN0LCAodiwgaykgPT4gYCAke2t9ICR7X2dldEdyYXBoUWxGaWVsZHModil9IGApLmpvaW4oJyAnKVxuICAgICAgICA6IGAgJHtTdHJpbmcoZmllbGQpfSBgLFxuICAgIClcbiAgICAuam9pbignICcpfVxufWA7XG5cbmV4cG9ydCBjb25zdCBncmFwaFFsUXVlcnkgPSA8VFBhcmFtcywgVFJlc3VsdCwgVE5hbWUgZXh0ZW5kcyBzdHJpbmc+KHtcbiAgZmllbGRzLFxuICBuYW1lLFxuICBwYXJhbXMsXG4gIHR5cGUsXG59OiBHcmFwaFFsUXVlcnlQYXJhbXNNb2RlbDxUUGFyYW1zLCBUUmVzdWx0LCBUTmFtZT4pOiBzdHJpbmcgPT4ge1xuICBsZXQgW3BhcmFtc1N0cmluZywgcGFyYW1zS2V5c10gPSBbJycsICcnXTtcbiAgaWYgKHBhcmFtcykge1xuICAgIHBhcmFtc1N0cmluZyA9IGAoJHttYXAocGFyYW1zLCAodiwgaykgPT4gYCQke2t9OiAke3Z9IWApLmpvaW4oJywgJyl9KWA7XG4gICAgcGFyYW1zS2V5cyA9IGAoJHtPYmplY3Qua2V5cyhwYXJhbXMpXG4gICAgICAubWFwKChrKSA9PiBgJHtrfTogJCR7a31gKVxuICAgICAgLmpvaW4oJywgJyl9KWA7XG4gIH1cbiAgcmV0dXJuIHRyaW1EZWVwKFxuICAgIGAke3R5cGV9ICR7bmFtZX0ke3BhcmFtc1N0cmluZ30ge1xuICAgICAgJHtuYW1lfSR7cGFyYW1zS2V5c30gJHtfZ2V0R3JhcGhRbEZpZWxkczxUUmVzdWx0PihmaWVsZHMpfVxuICAgIH1gLFxuICApO1xufTtcbiJdfQ==

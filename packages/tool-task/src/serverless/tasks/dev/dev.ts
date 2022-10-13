@@ -1,3 +1,4 @@
+import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import type { DevParamsModel } from '@tool/task//serverless/tasks/dev/dev.models';
 import { command } from '@tool/task/core/utils/command/command';
 import { TASK_RESULTS_STATUS_TYPE } from '@tool/task/core/utils/register/register.constants';
@@ -5,6 +6,8 @@ import type { RegisterParamsModel } from '@tool/task/core/utils/register/registe
 
 export const dev: RegisterParamsModel<DevParamsModel> = {
   dependencies: ['database-start'],
+
+  environment: ENVIRONMENT.DEVELOPMENT,
 
   name: 'dev',
 
