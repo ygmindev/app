@@ -1,5 +1,6 @@
 import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
+import { FORM_FIELD_TYPE } from '@lib/frontend/form/containers/FormContainer/FormContainer.constants';
 import type { FormContainerPropsModel } from '@lib/frontend/form/containers/FormContainer/FormContainer.models';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
 
@@ -8,11 +9,15 @@ const { Default, meta } = withStory<FormContainerPropsModel<object>>({
     rows: withId([
       {
         fields: [
-          { id: 'stringField', label: 'stringField' },
-          { id: 'stringFieldOptional', label: 'stringFieldOptional' },
+          { field: FORM_FIELD_TYPE.TEXT_FIELD, id: 'stringField', label: 'stringField' },
+          {
+            field: FORM_FIELD_TYPE.TEXT_FIELD,
+            id: 'stringFieldOptional',
+            label: 'stringFieldOptional',
+          },
         ],
       },
-      { fields: [{ id: 'numberField', label: 'numberField' }] },
+      { fields: [{ field: FORM_FIELD_TYPE.TEXT_FIELD, id: 'numberField', label: 'numberField' }] },
     ]),
   },
   target: FormContainer,
