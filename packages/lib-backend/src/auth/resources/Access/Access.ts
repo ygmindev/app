@@ -13,11 +13,8 @@ import type { UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withEntity({ name: `${ACCESS_RESOURCE_NAME}Form` })
 export class AccessForm implements AccessFormModel {
-  @withField({ isOptional: true, isRepository: true, type: FIELD_TYPE.ID })
-  _uid?: string;
-
-  @withField({ isOptional: true, isRepository: true })
-  email?: string;
+  @withField({ isRepository: true, type: FIELD_TYPE.ID })
+  _uid!: string;
 
   @withField({ isRepository: true, type: FIELD_TYPE.STRING })
   role!: AccessRoleModel;
@@ -31,6 +28,6 @@ export class Access extends EntityResource implements AccessModel {
   @withField({ isRepository: true, type: FIELD_TYPE.STRING })
   role!: AccessRoleModel;
 
-  @withField({ Resource: User })
+  @withField({ Resource: User, isOptional: true })
   user?: UserModel;
 }

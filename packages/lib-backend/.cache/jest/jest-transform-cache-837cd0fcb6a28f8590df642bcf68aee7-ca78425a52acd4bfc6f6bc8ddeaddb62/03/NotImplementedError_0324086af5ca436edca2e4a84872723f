@@ -1,0 +1,11 @@
+640831e1c2423d1705a48f53dc705518
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NotImplementedError = void 0;
+class NotImplementedError extends Error {
+    constructor(value) {
+        super(`not implemented: ${value}`);
+    }
+}
+exports.NotImplementedError = NotImplementedError;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLXNoYXJlZC9zcmMvY29yZS9lcnJvcnMvTm90SW1wbGVtZW50ZWRFcnJvci9Ob3RJbXBsZW1lbnRlZEVycm9yLnRzIiwibWFwcGluZ3MiOiI7OztBQUFBLE1BQWEsbUJBQW9CLFNBQVEsS0FBSztJQUM1QyxZQUFZLEtBQWE7UUFDdkIsS0FBSyxDQUFDLG9CQUFvQixLQUFLLEVBQUUsQ0FBQyxDQUFDO0lBQ3JDLENBQUM7Q0FDRjtBQUpELGtEQUlDIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIi9Vc2Vycy95Z21pbi9Qcm9qZWN0cy9tb25vX3YyL2FwcDMvYXBwL3BhY2thZ2VzL2xpYi1zaGFyZWQvc3JjL2NvcmUvZXJyb3JzL05vdEltcGxlbWVudGVkRXJyb3IvTm90SW1wbGVtZW50ZWRFcnJvci50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgY2xhc3MgTm90SW1wbGVtZW50ZWRFcnJvciBleHRlbmRzIEVycm9yIHtcbiAgY29uc3RydWN0b3IodmFsdWU6IHN0cmluZykge1xuICAgIHN1cGVyKGBub3QgaW1wbGVtZW50ZWQ6ICR7dmFsdWV9YCk7XG4gIH1cbn1cbiJdLCJ2ZXJzaW9uIjozfQ==

@@ -8,6 +8,8 @@ import type { DummyEmbeddedResourceModel } from '@lib/shared/testing/resources/D
 export interface DummyEntityResourceModel extends EntityResourceModel {
   [DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME]?: Array<DummyEmbeddedResourceModel>;
 
+  dateTtlProperty?: Date;
+
   numberProperty?: number;
 
   stringArrayProperty?: Array<string>;

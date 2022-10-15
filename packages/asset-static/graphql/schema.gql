@@ -135,6 +135,7 @@ scalar DateTime
 type DummyEmbeddedResource {
   _id: String
   created: DateTime
+  dateTtlProperty: DateTime
   numberProperty: Float
   stringArrayProperty: String
   stringProperty: String
@@ -148,6 +149,7 @@ type DummyEmbeddedResourceCreate {
 input DummyEmbeddedResourceCreateFormInput {
   _id: String
   created: DateTime
+  dateTtlProperty: DateTime
   numberProperty: Float
   stringArrayProperty: String
   stringProperty: String
@@ -179,6 +181,7 @@ type DummyEmbeddedResourceGetConnectionEdge {
 input DummyEmbeddedResourceGetConnectionFilterInput {
   _id: String
   created: DateTime
+  dateTtlProperty: DateTime
   numberProperty: Float
   stringArrayProperty: String
   stringProperty: String
@@ -193,6 +196,7 @@ input DummyEmbeddedResourceGetConnectionInput {
 input DummyEmbeddedResourceGetFilterInput {
   _id: String
   created: DateTime
+  dateTtlProperty: DateTime
   numberProperty: Float
   stringArrayProperty: String
   stringProperty: String
@@ -210,6 +214,7 @@ type DummyEmbeddedResourceGetMany {
 input DummyEmbeddedResourceGetManyFilterInput {
   _id: String
   created: DateTime
+  dateTtlProperty: DateTime
   numberProperty: Float
   stringArrayProperty: String
   stringProperty: String
@@ -223,6 +228,7 @@ input DummyEmbeddedResourceGetManyInput {
 input DummyEmbeddedResourceInput {
   _id: String
   created: DateTime
+  dateTtlProperty: DateTime
   numberProperty: Float
   stringArrayProperty: String
   stringProperty: String
@@ -236,6 +242,7 @@ type DummyEmbeddedResourceRemove {
 input DummyEmbeddedResourceRemoveFilterInput {
   _id: String
   created: DateTime
+  dateTtlProperty: DateTime
   numberProperty: Float
   stringArrayProperty: String
   stringProperty: String
@@ -253,6 +260,7 @@ type DummyEmbeddedResourceUpdate {
 input DummyEmbeddedResourceUpdateFilterInput {
   _id: String
   created: DateTime
+  dateTtlProperty: DateTime
   numberProperty: Float
   stringArrayProperty: String
   stringProperty: String
@@ -267,6 +275,7 @@ input DummyEmbeddedResourceUpdateInput {
 input DummyEmbeddedResourceUpdateUpdateInput {
   _id: String
   created: DateTime
+  dateTtlProperty: DateTime
   numberProperty: Float
   stringArrayProperty: String
   stringProperty: String
@@ -277,6 +286,7 @@ type DummyEntityResource {
   DummyEmbeddedResource: [DummyEmbeddedResource]
   _id: String
   created: DateTime
+  dateTtlProperty: DateTime
   numberProperty: Float
   stringArrayProperty: String
   stringProperty: String
@@ -291,6 +301,7 @@ input DummyEntityResourceCreateFormInput {
   DummyEmbeddedResource: [DummyEmbeddedResourceInput]
   _id: String
   created: DateTime
+  dateTtlProperty: DateTime
   numberProperty: Float
   stringArrayProperty: String
   stringProperty: String
@@ -323,6 +334,7 @@ input DummyEntityResourceGetConnectionFilterInput {
   DummyEmbeddedResource: [DummyEmbeddedResourceInput]
   _id: String
   created: DateTime
+  dateTtlProperty: DateTime
   numberProperty: Float
   stringArrayProperty: String
   stringProperty: String
@@ -338,6 +350,7 @@ input DummyEntityResourceGetFilterInput {
   DummyEmbeddedResource: [DummyEmbeddedResourceInput]
   _id: String
   created: DateTime
+  dateTtlProperty: DateTime
   numberProperty: Float
   stringArrayProperty: String
   stringProperty: String
@@ -356,6 +369,7 @@ input DummyEntityResourceGetManyFilterInput {
   DummyEmbeddedResource: [DummyEmbeddedResourceInput]
   _id: String
   created: DateTime
+  dateTtlProperty: DateTime
   numberProperty: Float
   stringArrayProperty: String
   stringProperty: String
@@ -374,6 +388,7 @@ input DummyEntityResourceRemoveFilterInput {
   DummyEmbeddedResource: [DummyEmbeddedResourceInput]
   _id: String
   created: DateTime
+  dateTtlProperty: DateTime
   numberProperty: Float
   stringArrayProperty: String
   stringProperty: String
@@ -392,6 +407,7 @@ input DummyEntityResourceUpdateFilterInput {
   DummyEmbeddedResource: [DummyEmbeddedResourceInput]
   _id: String
   created: DateTime
+  dateTtlProperty: DateTime
   numberProperty: Float
   stringArrayProperty: String
   stringProperty: String
@@ -407,6 +423,7 @@ input DummyEntityResourceUpdateUpdateInput {
   DummyEmbeddedResource: [DummyEmbeddedResourceInput]
   _id: String
   created: DateTime
+  dateTtlProperty: DateTime
   numberProperty: Float
   stringArrayProperty: String
   stringProperty: String

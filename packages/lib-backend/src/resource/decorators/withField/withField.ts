@@ -55,6 +55,7 @@ const _getColumn = <TType>({
         return [Property, { type: undefined }];
     }
   })();
+
   return _Field({
     ..._options,
     nullable: isOptional,

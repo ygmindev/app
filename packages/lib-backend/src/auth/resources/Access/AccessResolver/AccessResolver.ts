@@ -5,10 +5,7 @@ import { EntityResourceResolver } from '@lib/backend/resource/resources/EntityRe
 import type { EntityResourceResolverModel } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver.models';
 import { User } from '@lib/backend/user/resources/User/User';
 import { UserService } from '@lib/backend/user/resources/User/UserService/UserService';
-import {
-  ACCESS_LEVEL,
-  ACCESS_RESOURCE_NAME,
-} from '@lib/shared/auth/resources/Access/Access.constants';
+import { ACCESS_RESOURCE_NAME } from '@lib/shared/auth/resources/Access/Access.constants';
 import type { AccessFormModel, AccessModel } from '@lib/shared/auth/resources/Access/Access.models';
 import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
@@ -22,8 +19,6 @@ export class AccessResolver
   extends EntityResourceResolver<AccessModel, AccessFormModel>({
     Resource: Access,
     ResourceService: AccessService,
-    createAccess: ACCESS_LEVEL.PUBLIC,
-    getAccess: ACCESS_LEVEL.PUBLIC,
     name: ACCESS_RESOURCE_NAME,
   })
   implements EntityResourceResolverModel<AccessModel, AccessFormModel>

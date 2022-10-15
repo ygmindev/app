@@ -4,12 +4,12 @@ import type { Context } from 'aws-lambda';
 import { set } from 'lodash';
 
 export const _getContext = async ({ context, event }: _GetContextParamsModel): Promise<Context> => {
-  const authorization = event.headers.Authorization;
+  const { authorization } = event.headers;
   if (authorization) {
     const [_, token] = authorization.split(' ');
     if (token && token !== 'null') {
-      const { claims } = await JwtService.verifyToken(token);
-      set(context, 'user', claims);
+      const user = await JwtService.verifyToken(token);
+      set(context, 'user', user);
     }
   }
   return context;

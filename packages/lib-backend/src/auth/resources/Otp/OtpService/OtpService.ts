@@ -11,6 +11,7 @@ import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/Duplicate
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { randomInt } from '@lib/shared/crypto/utils/randomInt/randomInt';
 import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
+import { warn } from '@lib/shared/logging/utils/logger/logger';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
@@ -22,13 +23,17 @@ const SERVER_EMAIL_USERNAME = getEnv('SERVER_EMAIL_USERNAME');
 export class OtpService
   extends EntityResourceService<OtpModel, OtpFormModel>({
     afterCreate: async ({ output }) => {
-      output.result &&
-        mail<{ otp: string }>({
-          from: SERVER_EMAIL_USERNAME,
-          params: { otp: output.result.otp },
-          template: 'otp',
-          to: [output.result.username],
-        });
+      if (output.result) {
+        warn(`${output.result.username}: ${output.result.otp}`);
+        output.result &&
+          mail<{ otp: string }>({
+            from: SERVER_EMAIL_USERNAME,
+            params: { otp: output.result.otp },
+            template: 'otp',
+            to: [output.result.username],
+          });
+      }
+
       return output;
     },
 
@@ -63,7 +68,7 @@ export class OtpService
   async verify(data: EntityResourceDataModel<OtpModel>): Promise<boolean> {
     const { result } = await this.get({
       filter: { username: data.username },
-      options: { project: { _id: true } },
+      options: { project: { otp: true } },
     });
     if (!result || result.otp !== data.otp) {
       throw new InvalidOtpError();

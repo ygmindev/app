@@ -2,7 +2,7 @@ import { DatabaseMain } from '@lib/backend/database/utils/DatabaseMain/DatabaseM
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { initialize as initializeBase } from '@lib/shared/setup/utils/initialize/initialize';
 
-let isInitialized: boolean;
+let isInitialized = false;
 
 export const initialize = async (): Promise<void> => {
   if (!isInitialized) {

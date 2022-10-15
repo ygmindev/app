@@ -33,7 +33,7 @@ export class OtpResolver extends EntityResourceResolver<OtpModel, OtpFormModel>(
     method: RESOURCE_METHOD_TYPE.CREATE,
     name: OTP_CREATE_IF_DOES_NOT_EXIST,
   })
-  async create(
+  async createIfNotExists(
     @withInput({
       Resource: OtpForm,
       method: RESOURCE_METHOD_TYPE.CREATE,

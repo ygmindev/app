@@ -12,6 +12,6 @@ export interface AccessModel extends EntityResourceModel {
   user?: UserModel;
 }
 
-export interface AccessFormModel extends Pick<AccessModel, 'role'>, Pick<UserModel, 'email'> {
-  _uid?: string;
+export interface AccessFormModel extends Pick<AccessModel, 'role'> {
+  _uid: string;
 }

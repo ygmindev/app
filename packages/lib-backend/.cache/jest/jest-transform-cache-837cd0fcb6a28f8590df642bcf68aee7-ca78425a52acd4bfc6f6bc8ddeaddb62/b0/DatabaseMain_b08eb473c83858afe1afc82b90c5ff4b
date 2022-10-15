@@ -1,0 +1,19 @@
+aa4d9f8337ccfea87c43bdfc449373a3
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DatabaseMain = void 0;
+const tslib_1 = require("tslib");
+const Database_1 = require("@lib/backend/database/utils/Database/Database");
+const database_main_config_1 = require("@lib/config/database/database.main.config");
+const withContainer_1 = require("@lib/shared/core/decorators/withContainer/withContainer");
+let DatabaseMain = class DatabaseMain extends Database_1.Database {
+    constructor() {
+        super((0, database_main_config_1.databaseMainParams)());
+    }
+};
+DatabaseMain = tslib_1.__decorate([
+    (0, withContainer_1.withContainer)(),
+    tslib_1.__metadata("design:paramtypes", [])
+], DatabaseMain);
+exports.DatabaseMain = DatabaseMain;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWJhY2tlbmQvc3JjL2RhdGFiYXNlL3V0aWxzL0RhdGFiYXNlTWFpbi9EYXRhYmFzZU1haW4udHMiLCJtYXBwaW5ncyI6Ijs7OztBQUFBLDRFQUF5RTtBQUV6RSxvRkFBK0U7QUFDL0UsMkZBQXdGO0FBR3hGLElBQWEsWUFBWSxHQUF6QixNQUFhLFlBQWEsU0FBUSxtQkFBUTtJQUN4QztRQUNFLEtBQUssQ0FBQyxJQUFBLHlDQUFrQixHQUFFLENBQUMsQ0FBQztJQUM5QixDQUFDO0NBQ0YsQ0FBQTtBQUpZLFlBQVk7SUFEeEIsSUFBQSw2QkFBYSxHQUFFOztHQUNILFlBQVksQ0FJeEI7QUFKWSxvQ0FBWSIsIm5hbWVzIjpbXSwic291cmNlcyI6WyIvVXNlcnMveWdtaW4vUHJvamVjdHMvbW9ub192Mi9hcHAzL2FwcC9wYWNrYWdlcy9saWItYmFja2VuZC9zcmMvZGF0YWJhc2UvdXRpbHMvRGF0YWJhc2VNYWluL0RhdGFiYXNlTWFpbi50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBEYXRhYmFzZSB9IGZyb20gJ0BsaWIvYmFja2VuZC9kYXRhYmFzZS91dGlscy9EYXRhYmFzZS9EYXRhYmFzZSc7XG5pbXBvcnQgdHlwZSB7IERhdGFiYXNlTW9kZWwgfSBmcm9tICdAbGliL2JhY2tlbmQvZGF0YWJhc2UvdXRpbHMvRGF0YWJhc2UvRGF0YWJhc2UubW9kZWxzJztcbmltcG9ydCB7IGRhdGFiYXNlTWFpblBhcmFtcyB9IGZyb20gJ0BsaWIvY29uZmlnL2RhdGFiYXNlL2RhdGFiYXNlLm1haW4uY29uZmlnJztcbmltcG9ydCB7IHdpdGhDb250YWluZXIgfSBmcm9tICdAbGliL3NoYXJlZC9jb3JlL2RlY29yYXRvcnMvd2l0aENvbnRhaW5lci93aXRoQ29udGFpbmVyJztcblxuQHdpdGhDb250YWluZXIoKVxuZXhwb3J0IGNsYXNzIERhdGFiYXNlTWFpbiBleHRlbmRzIERhdGFiYXNlIGltcGxlbWVudHMgRGF0YWJhc2VNb2RlbCB7XG4gIGNvbnN0cnVjdG9yKCkge1xuICAgIHN1cGVyKGRhdGFiYXNlTWFpblBhcmFtcygpKTtcbiAgfVxufVxuIl0sInZlcnNpb24iOjN9

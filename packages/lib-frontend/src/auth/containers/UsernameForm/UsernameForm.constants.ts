@@ -22,6 +22,7 @@ export const USERNAME_FORM_FIELDS: Array<FormContainerRowModel> = withId([
         field: FORM_FIELD_TYPE.TEXT_FIELD,
         icon: ICON.email,
         id: 'username',
+        isAutoFocus: true,
         label: ({ t }) => t('user:labels.email'),
       } as FormContainerFieldModel,
     ],

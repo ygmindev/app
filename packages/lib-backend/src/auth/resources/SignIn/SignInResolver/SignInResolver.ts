@@ -6,6 +6,7 @@ import { withInput } from '@lib/backend/resource/decorators/withInput/withInput'
 import { withOutput } from '@lib/backend/resource/decorators/withOutput/withOutput';
 import { EntityResourceResolver } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver';
 import type { EntityResourceResolverModel } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver.models';
+import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import {
   SIGN_IN_RESOURCE_NAME,
   USERNAME_UPDATE,
@@ -25,6 +26,7 @@ export class SignInResolver
     Resource: SignIn,
     ResourceData: SignInForm,
     ResourceService: SignInService,
+    createAccess: ACCESS_LEVEL.PUBLIC,
     name: SIGN_IN_RESOURCE_NAME,
   })
   implements EntityResourceResolverModel<SignInModel, SignInFormModel>

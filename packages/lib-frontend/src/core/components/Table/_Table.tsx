@@ -2,6 +2,7 @@ import type { ThemeConfigModel } from '@lib/config/theme/theme.models';
 import { AG_GRID_THEME } from '@lib/frontend/core/components/Table/_Table.constants';
 import type { _TablePropsModel } from '@lib/frontend/core/components/Table/_Table.models';
 import type { TableColumnModel } from '@lib/frontend/core/components/Table/Table.models';
+import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
@@ -120,6 +121,7 @@ export const _Table = <TType,>({
         animateRows
         columnDefs={columns.map(_getColumnDef)}
         debounceVerticalScrollbar
+        loadingOverlayComponent={Text}
         onGridReady={async ({ api, columnApi }) => {
           await sleep({ duration });
           isFullWidth ? api.sizeColumnsToFit() : columnApi.autoSizeAllColumns();
@@ -134,7 +136,7 @@ export const _Table = <TType,>({
           }
         }}
         onSelectionChanged={_handleSelect}
-        overlayNoRowsTemplate={`<span>${t('core:messages.nothingToShow')}</span>`}
+        overlayNoRowsTemplate={t('core:messages.nothingToShow')}
         rowData={data}
         rowMultiSelectWithClick={select !== undefined}
         rowSelection={select}

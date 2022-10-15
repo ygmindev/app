@@ -1,0 +1,11 @@
+a46633dac299e713d5611a43a24f2d1d
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UninitializedError = void 0;
+class UninitializedError extends Error {
+    constructor(value) {
+        super(`not initialized: ${value}`);
+    }
+}
+exports.UninitializedError = UninitializedError;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLXNoYXJlZC9zcmMvY29yZS9lcnJvcnMvVW5pbml0aWFsaXplZEVycm9yL1VuaW5pdGlhbGl6ZWRFcnJvci50cyIsIm1hcHBpbmdzIjoiOzs7QUFBQSxNQUFhLGtCQUFtQixTQUFRLEtBQUs7SUFDM0MsWUFBWSxLQUFhO1FBQ3ZCLEtBQUssQ0FBQyxvQkFBb0IsS0FBSyxFQUFFLENBQUMsQ0FBQztJQUNyQyxDQUFDO0NBQ0Y7QUFKRCxnREFJQyIsIm5hbWVzIjpbXSwic291cmNlcyI6WyIvVXNlcnMveWdtaW4vUHJvamVjdHMvbW9ub192Mi9hcHAzL2FwcC9wYWNrYWdlcy9saWItc2hhcmVkL3NyYy9jb3JlL2Vycm9ycy9VbmluaXRpYWxpemVkRXJyb3IvVW5pbml0aWFsaXplZEVycm9yLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBjbGFzcyBVbmluaXRpYWxpemVkRXJyb3IgZXh0ZW5kcyBFcnJvciB7XG4gIGNvbnN0cnVjdG9yKHZhbHVlOiBzdHJpbmcpIHtcbiAgICBzdXBlcihgbm90IGluaXRpYWxpemVkOiAke3ZhbHVlfWApO1xuICB9XG59XG4iXSwidmVyc2lvbiI6M30=

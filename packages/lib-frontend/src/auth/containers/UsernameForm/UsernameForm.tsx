@@ -49,7 +49,6 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
       testID={testID}>
       <CenterLayout>
         <FormContainer
-          isFullWidth
           onSubmit={_handleSubmit}
           rows={USERNAME_FORM_FIELDS}
           validators={USERNAME_FORM_VALIDATORS}

@@ -1,0 +1,54 @@
+b31227bb6197afdf481f76ea9d728884
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Access = exports.AccessForm = void 0;
+const tslib_1 = require("tslib");
+const withEntity_1 = require("@lib/backend/resource/decorators/withEntity/withEntity");
+const withField_1 = require("@lib/backend/resource/decorators/withField/withField");
+const withField_constants_1 = require("@lib/backend/resource/decorators/withField/withField.constants");
+const EntityResource_1 = require("@lib/backend/resource/resources/EntityResource/EntityResource");
+const User_1 = require("@lib/backend/user/resources/User/User");
+const Access_constants_1 = require("@lib/shared/auth/resources/Access/Access.constants");
+let AccessForm = class AccessForm {
+    _uid;
+    email;
+    role;
+};
+tslib_1.__decorate([
+    (0, withField_1.withField)({ isOptional: true, isRepository: true, type: withField_constants_1.FIELD_TYPE.ID }),
+    tslib_1.__metadata("design:type", String)
+], AccessForm.prototype, "_uid", void 0);
+tslib_1.__decorate([
+    (0, withField_1.withField)({ isOptional: true, isRepository: true }),
+    tslib_1.__metadata("design:type", String)
+], AccessForm.prototype, "email", void 0);
+tslib_1.__decorate([
+    (0, withField_1.withField)({ isRepository: true, type: withField_constants_1.FIELD_TYPE.STRING }),
+    tslib_1.__metadata("design:type", String)
+], AccessForm.prototype, "role", void 0);
+AccessForm = tslib_1.__decorate([
+    (0, withEntity_1.withEntity)({ name: `${Access_constants_1.ACCESS_RESOURCE_NAME}Form` })
+], AccessForm);
+exports.AccessForm = AccessForm;
+let Access = class Access extends EntityResource_1.EntityResource {
+    _uid;
+    role;
+    user;
+};
+tslib_1.__decorate([
+    (0, withField_1.withField)({ isRepository: true, type: withField_constants_1.FIELD_TYPE.ID }),
+    tslib_1.__metadata("design:type", String)
+], Access.prototype, "_uid", void 0);
+tslib_1.__decorate([
+    (0, withField_1.withField)({ isRepository: true, type: withField_constants_1.FIELD_TYPE.STRING }),
+    tslib_1.__metadata("design:type", String)
+], Access.prototype, "role", void 0);
+tslib_1.__decorate([
+    (0, withField_1.withField)({ Resource: User_1.User }),
+    tslib_1.__metadata("design:type", Object)
+], Access.prototype, "user", void 0);
+Access = tslib_1.__decorate([
+    (0, withEntity_1.withEntity)({ isRepository: true, name: Access_constants_1.ACCESS_RESOURCE_NAME })
+], Access);
+exports.Access = Access;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLWJhY2tlbmQvc3JjL2F1dGgvcmVzb3VyY2VzL0FjY2Vzcy9BY2Nlc3MudHMiLCJtYXBwaW5ncyI6Ijs7OztBQUFBLHVGQUFvRjtBQUNwRixvRkFBaUY7QUFDakYsd0dBQTRGO0FBQzVGLGtHQUErRjtBQUMvRixnRUFBNkQ7QUFDN0QseUZBQTBGO0FBUzFGLElBQWEsVUFBVSxHQUF2QixNQUFhLFVBQVU7SUFFckIsSUFBSSxDQUFVO0lBR2QsS0FBSyxDQUFVO0lBR2YsSUFBSSxDQUFtQjtDQUN4QixDQUFBO0FBUEM7SUFEQyxJQUFBLHFCQUFTLEVBQUMsRUFBRSxVQUFVLEVBQUUsSUFBSSxFQUFFLFlBQVksRUFBRSxJQUFJLEVBQUUsSUFBSSxFQUFFLGdDQUFVLENBQUMsRUFBRSxFQUFFLENBQUM7O3dDQUMzRDtBQUdkO0lBREMsSUFBQSxxQkFBUyxFQUFDLEVBQUUsVUFBVSxFQUFFLElBQUksRUFBRSxZQUFZLEVBQUUsSUFBSSxFQUFFLENBQUM7O3lDQUNyQztBQUdmO0lBREMsSUFBQSxxQkFBUyxFQUFDLEVBQUUsWUFBWSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsZ0NBQVUsQ0FBQyxNQUFNLEVBQUUsQ0FBQzs7d0NBQ3BDO0FBUlosVUFBVTtJQUR0QixJQUFBLHVCQUFVLEVBQUMsRUFBRSxJQUFJLEVBQUUsR0FBRyx1Q0FBb0IsTUFBTSxFQUFFLENBQUM7R0FDdkMsVUFBVSxDQVN0QjtBQVRZLGdDQUFVO0FBWXZCLElBQWEsTUFBTSxHQUFuQixNQUFhLE1BQU8sU0FBUSwrQkFBYztJQUV4QyxJQUFJLENBQVU7SUFHZCxJQUFJLENBQW1CO0lBR3ZCLElBQUksQ0FBYTtDQUNsQixDQUFBO0FBUEM7SUFEQyxJQUFBLHFCQUFTLEVBQUMsRUFBRSxZQUFZLEVBQUUsSUFBSSxFQUFFLElBQUksRUFBRSxnQ0FBVSxDQUFDLEVBQUUsRUFBRSxDQUFDOztvQ0FDekM7QUFHZDtJQURDLElBQUEscUJBQVMsRUFBQyxFQUFFLFlBQVksRUFBRSxJQUFJLEVBQUUsSUFBSSxFQUFFLGdDQUFVLENBQUMsTUFBTSxFQUFFLENBQUM7O29DQUNwQztBQUd2QjtJQURDLElBQUEscUJBQVMsRUFBQyxFQUFFLFFBQVEsRUFBRSxXQUFJLEVBQUUsQ0FBQzs7b0NBQ2I7QUFSTixNQUFNO0lBRGxCLElBQUEsdUJBQVUsRUFBQyxFQUFFLFlBQVksRUFBRSxJQUFJLEVBQUUsSUFBSSxFQUFFLHVDQUFvQixFQUFFLENBQUM7R0FDbEQsTUFBTSxDQVNsQjtBQVRZLHdCQUFNIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIi9Vc2Vycy95Z21pbi9Qcm9qZWN0cy9tb25vX3YyL2FwcDMvYXBwL3BhY2thZ2VzL2xpYi1iYWNrZW5kL3NyYy9hdXRoL3Jlc291cmNlcy9BY2Nlc3MvQWNjZXNzLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHdpdGhFbnRpdHkgfSBmcm9tICdAbGliL2JhY2tlbmQvcmVzb3VyY2UvZGVjb3JhdG9ycy93aXRoRW50aXR5L3dpdGhFbnRpdHknO1xuaW1wb3J0IHsgd2l0aEZpZWxkIH0gZnJvbSAnQGxpYi9iYWNrZW5kL3Jlc291cmNlL2RlY29yYXRvcnMvd2l0aEZpZWxkL3dpdGhGaWVsZCc7XG5pbXBvcnQgeyBGSUVMRF9UWVBFIH0gZnJvbSAnQGxpYi9iYWNrZW5kL3Jlc291cmNlL2RlY29yYXRvcnMvd2l0aEZpZWxkL3dpdGhGaWVsZC5jb25zdGFudHMnO1xuaW1wb3J0IHsgRW50aXR5UmVzb3VyY2UgfSBmcm9tICdAbGliL2JhY2tlbmQvcmVzb3VyY2UvcmVzb3VyY2VzL0VudGl0eVJlc291cmNlL0VudGl0eVJlc291cmNlJztcbmltcG9ydCB7IFVzZXIgfSBmcm9tICdAbGliL2JhY2tlbmQvdXNlci9yZXNvdXJjZXMvVXNlci9Vc2VyJztcbmltcG9ydCB7IEFDQ0VTU19SRVNPVVJDRV9OQU1FIH0gZnJvbSAnQGxpYi9zaGFyZWQvYXV0aC9yZXNvdXJjZXMvQWNjZXNzL0FjY2Vzcy5jb25zdGFudHMnO1xuaW1wb3J0IHR5cGUge1xuICBBY2Nlc3NGb3JtTW9kZWwsXG4gIEFjY2Vzc01vZGVsLFxuICBBY2Nlc3NSb2xlTW9kZWwsXG59IGZyb20gJ0BsaWIvc2hhcmVkL2F1dGgvcmVzb3VyY2VzL0FjY2Vzcy9BY2Nlc3MubW9kZWxzJztcbmltcG9ydCB0eXBlIHsgVXNlck1vZGVsIH0gZnJvbSAnQGxpYi9zaGFyZWQvdXNlci9yZXNvdXJjZXMvVXNlci9Vc2VyLm1vZGVscyc7XG5cbkB3aXRoRW50aXR5KHsgbmFtZTogYCR7QUNDRVNTX1JFU09VUkNFX05BTUV9Rm9ybWAgfSlcbmV4cG9ydCBjbGFzcyBBY2Nlc3NGb3JtIGltcGxlbWVudHMgQWNjZXNzRm9ybU1vZGVsIHtcbiAgQHdpdGhGaWVsZCh7IGlzT3B0aW9uYWw6IHRydWUsIGlzUmVwb3NpdG9yeTogdHJ1ZSwgdHlwZTogRklFTERfVFlQRS5JRCB9KVxuICBfdWlkPzogc3RyaW5nO1xuXG4gIEB3aXRoRmllbGQoeyBpc09wdGlvbmFsOiB0cnVlLCBpc1JlcG9zaXRvcnk6IHRydWUgfSlcbiAgZW1haWw/OiBzdHJpbmc7XG5cbiAgQHdpdGhGaWVsZCh7IGlzUmVwb3NpdG9yeTogdHJ1ZSwgdHlwZTogRklFTERfVFlQRS5TVFJJTkcgfSlcbiAgcm9sZSE6IEFjY2Vzc1JvbGVNb2RlbDtcbn1cblxuQHdpdGhFbnRpdHkoeyBpc1JlcG9zaXRvcnk6IHRydWUsIG5hbWU6IEFDQ0VTU19SRVNPVVJDRV9OQU1FIH0pXG5leHBvcnQgY2xhc3MgQWNjZXNzIGV4dGVuZHMgRW50aXR5UmVzb3VyY2UgaW1wbGVtZW50cyBBY2Nlc3NNb2RlbCB7XG4gIEB3aXRoRmllbGQoeyBpc1JlcG9zaXRvcnk6IHRydWUsIHR5cGU6IEZJRUxEX1RZUEUuSUQgfSlcbiAgX3VpZCE6IHN0cmluZztcblxuICBAd2l0aEZpZWxkKHsgaXNSZXBvc2l0b3J5OiB0cnVlLCB0eXBlOiBGSUVMRF9UWVBFLlNUUklORyB9KVxuICByb2xlITogQWNjZXNzUm9sZU1vZGVsO1xuXG4gIEB3aXRoRmllbGQoeyBSZXNvdXJjZTogVXNlciB9KVxuICB1c2VyPzogVXNlck1vZGVsO1xufVxuIl0sInZlcnNpb24iOjN9

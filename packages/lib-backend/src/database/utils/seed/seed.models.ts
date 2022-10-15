@@ -4,6 +4,6 @@ export interface SeedParamsModel {
   names?: Array<string>;
 }
 
-export interface SeedDataModel<TForm> extends WithResourceNameModel {
-  data: Array<TForm>;
+export interface SeedDataModel<TType> extends WithResourceNameModel {
+  data: Array<TType | (() => Promise<TType>)>;
 }

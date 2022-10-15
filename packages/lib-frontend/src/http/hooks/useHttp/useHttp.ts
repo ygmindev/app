@@ -31,7 +31,7 @@ export const useHttp: UseHttpModel = ({ onError, ...params }) => {
         }
       })();
 
-      alertAdd({ ...alert, isPermanent: true, message: e.message || alert.message });
+      alertAdd({ ...alert, message: e.message || alert.message });
       error(e);
       return onError && onError(e);
     },

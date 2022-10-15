@@ -1,3 +1,4 @@
+import { OTP_EXPIRATION_SECONDS } from '@lib/backend/auth/resources/Otp/Otp.constants';
 import { withEntity } from '@lib/backend/resource/decorators/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/decorators/withField/withField';
 import { FIELD_TYPE } from '@lib/backend/resource/decorators/withField/withField.constants';
@@ -18,4 +19,13 @@ export class DummyEmbeddedResource extends EmbeddedResource implements DummyEmbe
 
   @withField({ isOptional: true, isRepository: true })
   stringPropertyOptional?: string;
+
+  @withField({
+    defaultValue: () => new Date(),
+    expire: OTP_EXPIRATION_SECONDS,
+    isOptional: true,
+    isRepository: true,
+    type: FIELD_TYPE.DATE,
+  })
+  dateTtlProperty?: Date;
 }

@@ -11,9 +11,6 @@ export const webpackConfig = (params: WebpackParamsModel): Configuration =>
     values: [
       { output: { library: { type: 'commonjs2' } } },
 
-      webpackConfigBackend({
-        ...params,
-        entry: slsw.lib.entries,
-      }),
+      webpackConfigBackend({ ...params, entry: slsw.lib.entries }),
     ],
   }) as Configuration;
