@@ -14,8 +14,13 @@ export interface DatabaseParamsModel {
   entities: Array<ConstructorModel<EntityResourceModel>>;
   host: string;
   password?: string;
+  pool?: DatabaseConnectionPoolModel;
   type: DatabaseTypeModel;
   username?: string;
+}
+
+export interface DatabaseConnectionPoolModel {
+  max?: number;
 }
 
 export interface DatabaseModel {

@@ -5,13 +5,11 @@ import { TASK_RESULTS_STATUS_TYPE } from '@tool/task/core/utils/register/registe
 import type { RegisterParamsModel } from '@tool/task/core/utils/register/register.models';
 
 export const dev: RegisterParamsModel<DevParamsModel> = {
-  dependencies: ['database-start'],
+  cleanups: ['database-close'],
 
   environment: ENVIRONMENT.DEVELOPMENT,
 
   name: 'dev',
-
-  onEnd: ['database-kill'],
 
   task: async () => {
     await command({ command: 'npx sls offline start --reloadHandler' });

@@ -9,6 +9,7 @@ import type {
   AccessModel,
   AccessRoleModel,
 } from '@lib/shared/auth/resources/Access/Access.models';
+import type { ResolvedFieldModel } from '@lib/shared/resource/resource.models';
 import type { UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withEntity({ name: `${ACCESS_RESOURCE_NAME}Form` })
@@ -29,5 +30,5 @@ export class Access extends EntityResource implements AccessModel {
   role!: AccessRoleModel;
 
   @withField({ Resource: User, isOptional: true })
-  user?: UserModel;
+  user?: ResolvedFieldModel<UserModel>;
 }

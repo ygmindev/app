@@ -18,6 +18,7 @@ export const databaseMainParams = (): DatabaseParamsModel => ({
   ].filter(Boolean) as Array<ConstructorModel<EntityResourceModel>>,
   host: getEnv('MONGO_DATABASE_URL'),
   password: getEnv('MONGO_DATABASE_PASSWORD', null) || undefined,
+  pool: { max: 10 },
   type: DATABASE_TYPE.MONGO,
   username: getEnv('MONGO_DATABASE_USERNAME', null) || undefined,
 });

@@ -32,8 +32,10 @@ export abstract class _Database implements DatabaseModel {
         await MikroORM.init<MongoDriver>({
           clientUrl: this._params.host,
           dbName: this._params.database,
+          ensureIndexes: true,
           entities: this._params.entities,
           password: this._params.password || undefined,
+          pool: { max: this._params.pool?.max, min: 0 },
           type: this._params.type,
           user: this._params.username || undefined,
         })

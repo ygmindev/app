@@ -12,6 +12,7 @@ let isInitialized: boolean;
 
 const graphQlHandler = new ApolloServer({
   context: async ({ context, event }): Promise<Context> => getContext({ context, event }),
+
   formatError: (e): GraphQLFormattedError => {
     error(`GraphQL Error:\n${JSON.stringify(e, null, 2)}`);
 

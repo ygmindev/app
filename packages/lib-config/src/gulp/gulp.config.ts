@@ -11,6 +11,7 @@ import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 import { register } from '@tool/task/core/utils/register/register';
 import { registry } from '@tool/task/core/utils/registry/registry';
 import { runAll } from '@tool/task/core/utils/runAll/runAll';
+import { close } from '@tool/task/database/tasks/close/close';
 import { kill } from '@tool/task/database/tasks/kill/kill';
 import { start } from '@tool/task/database/tasks/start/start';
 import { internationalize } from '@tool/task/locale/tasks/internationalize/internationalize';
@@ -37,6 +38,7 @@ register(upgrade);
 // Database tasks
 register(start);
 register(kill);
+register(close);
 
 // Lint tasks
 register({ ...runAll, name: 'lint', options: { patterns: [/lint/] } });

@@ -45,10 +45,10 @@ const _handleResult = async (
 };
 
 export const register = <TOptions = object>({
+  cleanups,
   dependencies,
   environment,
   name,
-  onEnd,
   options,
   overrides,
   target,
@@ -79,8 +79,8 @@ export const register = <TOptions = object>({
   };
 
   const _task = async (): Promise<void> => {
-    if (onEnd) {
-      const onClosePromise = onEnd.map(_getTaskByName);
+    if (cleanups) {
+      const onClosePromise = cleanups.map(_getTaskByName);
       ['exit', 'SIGINT', 'SIGUSR1', 'SIGUSR2', 'uncaughtException', 'SIGTERM'].forEach((event) =>
         process.on(event, async () => {
           await sequence(onClosePromise);

@@ -12,8 +12,8 @@ export interface RegisterContextModel<TOptions = object>
 export interface RegisterParamsModel<TOptions = object>
   extends Omit<_RegisterParamsModel, 'task'>,
     EnvironmentOverrideParamsModel {
+  cleanups?: Array<string>;
   dependencies?: Array<string>;
-  onEnd?: Array<string>;
   options?: TOptions;
   target?: string;
   task(context: RegisterContextModel<TOptions>): Promise<TaskResultsModel>;

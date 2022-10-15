@@ -5,16 +5,8 @@ import { packageExtend } from '@tool/task/node/tasks/packageExtend/packageExtend
 import { test } from '@tool/task/node/tasks/test/test';
 import type { RegisterNodeTasksParamsModel } from '@tool/task/node/utils/registerNodeTasks/registerNodeTasks.models';
 
-export const registerNodeTasks = ({
-  isDatabaseStart,
-  name,
-}: RegisterNodeTasksParamsModel): void => {
-  const testTask = {
-    ...test,
-    dependencies: [isDatabaseStart && 'database-start'].filter(Boolean) as Array<string>,
-    onEnd: [isDatabaseStart && 'database-kill'].filter(Boolean) as Array<string>,
-    target: name,
-  };
+export const registerNodeTasks = ({ name }: RegisterNodeTasksParamsModel): void => {
+  const testTask = { ...test, target: name };
 
   register({ ...packageExtend, target: name });
   register({ ...clean, target: name });
