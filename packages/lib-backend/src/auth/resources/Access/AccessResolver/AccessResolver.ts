@@ -1,6 +1,8 @@
 import { Access } from '@lib/backend/auth/resources/Access/Access';
 import { AccessService } from '@lib/backend/auth/resources/Access/AccessService/AccessService';
+import { withFieldResolver } from '@lib/backend/graphql/decorators/withFieldResolver/withFieldResolver';
 import { withResolver } from '@lib/backend/graphql/decorators/withResolver/withResolver';
+import { withSelf } from '@lib/backend/graphql/decorators/withSelf/withSelf';
 import { EntityResourceResolver } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver';
 import type { EntityResourceResolverModel } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver.models';
 import { User } from '@lib/backend/user/resources/User/User';
@@ -11,7 +13,6 @@ import { withContainer } from '@lib/shared/core/decorators/withContainer/withCon
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import type { UserModel } from '@lib/shared/user/resources/User/User.models';
-import { FieldResolver, Root } from 'type-graphql';
 
 @withContainer()
 @withResolver({ Resource: Access })
@@ -23,8 +24,8 @@ export class AccessResolver
   })
   implements EntityResourceResolverModel<AccessModel, AccessFormModel>
 {
-  @FieldResolver(() => User)
-  async user(@Root() access: Access): Promise<UserModel> {
+  @withFieldResolver({ Resource: User })
+  async user(@withSelf() access: Access): Promise<UserModel> {
     const { result } = await Container.get(UserService).get({ filter: { _id: access._uid } });
     if (result) {
       return result;

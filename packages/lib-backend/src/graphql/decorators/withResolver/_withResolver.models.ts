@@ -4,3 +4,8 @@ export interface _WithResolverParamsModel<TType> {
   Resource?: ConstructorModel<TType>;
   isAbstract?: boolean;
 }
+
+export interface _WithResolverMethodParamsModel<TType> {
+  Resource?: ConstructorModel<TType>;
+  isAbstract?: never;
+}
