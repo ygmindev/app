@@ -1,7 +1,7 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
-import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import type { EntityResourceModalPropsModel } from '@lib/frontend/resource/components/EntityResourceModal/EntityResourceModal.models';

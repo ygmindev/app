@@ -1,11 +1,11 @@
 import { Activate } from '@lib/frontend/core/components/Activate/Activate';
-import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import type { PressPropsModel } from '@lib/frontend/core/components/Press/Press.models';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Tooltip } from '@lib/frontend/core/components/Tooltip/Tooltip';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { lazy } from '@lib/frontend/core/utils/lazy/lazy';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';

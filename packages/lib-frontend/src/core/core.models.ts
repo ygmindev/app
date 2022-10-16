@@ -1,4 +1,4 @@
-import type { WithIconModel } from '@lib/frontend/core/components/Icon/Icon.models';
+import type { WithIconPropsModel } from '@lib/frontend/core/decorators/withIconProps/withIconProps.models';
 import type { TranslationTextModel } from '@lib/frontend/locale/locale.models';
 import type { WithStyleParamsModel } from '@lib/frontend/styling/decorators/withStyle/withStyle.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
@@ -14,6 +14,6 @@ export interface WithOpenPropsModel {
   onClose?: CallableModel;
 }
 
-export interface OptionModel<TType = string> extends WithIconModel, WithIdModel<TType> {
+export interface OptionModel<TType = string> extends WithIconPropsModel, WithIdModel<TType> {
   label?: TranslationTextModel;
 }

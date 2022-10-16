@@ -1,5 +1,5 @@
 import type { UsernameFormModel } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.models';
-import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { FORM_FIELD_TYPE } from '@lib/frontend/form/containers/FormContainer/FormContainer.constants';
 import type {
   FormContainerFieldModel,

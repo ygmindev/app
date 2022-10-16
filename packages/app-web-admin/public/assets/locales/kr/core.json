@@ -4,21 +4,21 @@
     "continue": "TRANSLATION_MISSING",
     "noResult": "TRANSLATION_MISSING",
     "remove": "TRANSLATION_MISSING",
+    "retry": "TRANSLATION_MISSING",
     "submit": "TRANSLATION_MISSING"
   },
   "messages": {
     "confirmRemove": "TRANSLATION_MISSING",
-    "incorrectLength": "TRANSLATION_MISSING",
-    "incorrectRange": "TRANSLATION_MISSING",
-    "invalidDate": "TRANSLATION_MISSING",
-    "invalidEmailAddress": "TRANSLATION_MISSING",
-    "minLength": "TRANSLATION_MISSING",
-    "noNumberOrSpecialCharacter": "TRANSLATION_MISSING",
-    "nothingChanged": "TRANSLATION_MISSING",
+    "errorGeneric": "TRANSLATION_MISSING",
     "nothingToShow": "TRANSLATION_MISSING",
-    "required": "TRANSLATION_MISSING",
     "unknownError": "TRANSLATION_MISSING",
     "updated": "TRANSLATION_MISSING",
-    "zipCode": "TRANSLATION_MISSING"
+    "validateAlphaNumeric": "TRANSLATION_MISSING",
+    "validateChanged": "TRANSLATION_MISSING",
+    "validateEmail": "TRANSLATION_MISSING",
+    "validateLength": "TRANSLATION_MISSING",
+    "validateNotEmpty": "TRANSLATION_MISSING",
+    "validateRange": "TRANSLATION_MISSING",
+    "validateZipCode": "TRANSLATION_MISSING"
   }
 }

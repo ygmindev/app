@@ -1,14 +1,8 @@
-import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
+import { NotificationProvider } from '@lib/frontend/notification/providers/NotificationProvider/NotificationProvider';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent({
-  defaultProps: {
-    icon: ICON.times,
-  },
-  target: Icon,
-});
+const { Component, displayName, testID } = withTestComponent({ target: NotificationProvider });
 
 describe(displayName, () => {
   test('works', async () => {

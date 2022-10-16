@@ -1,10 +1,10 @@
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { IconText } from '@lib/frontend/core/components/IconText/IconText';
 import { Link } from '@lib/frontend/core/components/Link/Link';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { ROUTE_HEADER_HEIGHT } from '@lib/frontend/routing/components/RouteHeader/RouteHeader.constants';
 import type { RouteHeaderPropsModel } from '@lib/frontend/routing/components/RouteHeader/RouteHeader.models';
 import { useRouter } from '@lib/frontend/routing/hooks/useRouter/useRouter';

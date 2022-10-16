@@ -12,30 +12,27 @@ import { print } from 'graphql/language/printer';
 import { gql } from 'graphql-tag';
 import { useState } from 'react';
 
-export const useGraphQl = ({ onError, ...params }: UseGraphQlParamsModel = {}): UseGraphQlModel => {
+export const useGraphQl = (useApiParams: UseGraphQlParamsModel = {}): UseGraphQlModel => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { post } = useApi({ ...params, onError, path: `api/${GRAPHQL}` });
+  const { post } = useApi({ ...useApiParams, path: `api/${GRAPHQL}` });
 
   return {
     isLoading,
 
-    query: async <TParams, TResult, TName extends string = string, TError extends Error = Error>({
+    query: async <TParams, TResult, TName extends string = string>({
       fields,
       name,
-      onError,
       params,
       type,
       variables,
-    }: GraphQlQueryHttpParamsModel<TParams, TResult, TName, TError>): Promise<TResult | null> => {
+    }: GraphQlQueryHttpParamsModel<TParams, TResult, TName>): Promise<TResult | null> => {
       setIsLoading(true);
 
       const result = await post<
         GraphQlHttpParamsModel<TParams>,
-        GraphQlHttpResponseModel<TName, TResult>,
-        TError
+        GraphQlHttpResponseModel<TName, TResult>
       >({
-        onError,
         params: {
           query: print(gql`
             ${graphQlQuery<TParams, TResult, TName>({ fields, name, params, type })}
@@ -45,16 +42,7 @@ export const useGraphQl = ({ onError, ...params }: UseGraphQlParamsModel = {}): 
         path: '/',
       }).finally(async () => setIsLoading(false));
 
-      if (result) {
-        const error = result.errors && result.errors[0];
-        if (error) {
-          const e = new Error(error.message);
-          e.name = error.extensions.name;
-          onError && onError(e as TError);
-        }
-        return (result.data && result.data[name]) || null;
-      }
-      return null;
+      return (result && result.data && result.data[name]) || null;
     },
   };
 };

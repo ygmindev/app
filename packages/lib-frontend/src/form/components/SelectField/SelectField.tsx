@@ -1,10 +1,10 @@
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Menu } from '@lib/frontend/core/components/Menu/Menu';
 import type { MenuRefModel } from '@lib/frontend/core/components/Menu/Menu.models';
 import { Rotate } from '@lib/frontend/core/components/Rotate/Rotate';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { useSearch } from '@lib/frontend/core/hooks/useSearch/useSearch';
 import type { SelectFieldPropsModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
 import { TextField } from '@lib/frontend/form/components/TextField/TextField';

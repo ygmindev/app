@@ -1,4 +1,4 @@
-import type { WithIconModel } from '@lib/frontend/core/components/Icon/Icon.models';
+import type { WithIconPropsModel } from '@lib/frontend/core/decorators/withIconProps/withIconProps.models';
 import type { _LinkPropsModel } from '@lib/frontend/core/components/Link/_Link.models';
 import type { TextPropsModel } from '@lib/frontend/core/components/Text/Text.models';
 import type { WithChildrenPropsModel } from '@lib/frontend/core/decorators/withChildrenProps/withChildrenProps.models';
@@ -10,7 +10,7 @@ export interface LinkPropsModel
     Omit<TextPropsModel, 'children'>,
     WithChildrenPropsModel<TranslationTextModel | ReactElement> {}
 
-export interface LinkModel extends WithIconModel {
+export interface LinkModel extends WithIconPropsModel {
   label: string;
   pathname: string;
 }

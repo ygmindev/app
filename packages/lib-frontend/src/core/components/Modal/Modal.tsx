@@ -1,11 +1,11 @@
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { _Modal } from '@lib/frontend/core/components/Modal/_Modal';
 import type { ModalPropsModel } from '@lib/frontend/core/components/Modal/Modal.models';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { FCModel } from '@lib/frontend/core/core.models';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { KeyboardProvider } from '@lib/frontend/root/providers/KeyboardProvider/KeyboardProvider';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
 import { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants';

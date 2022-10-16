@@ -2,9 +2,9 @@ import { OTP_FIELD_WIDTH } from '@lib/frontend/auth/components/OtpField/OtpField
 import type { OtpFieldPropsModel } from '@lib/frontend/auth/components/OtpField/OtpField.models';
 import { Appear } from '@lib/frontend/core/components/Appear/Appear';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { ErrorTooltip } from '@lib/frontend/form/components/ErrorTooltip/ErrorTooltip';
 import { TextField } from '@lib/frontend/form/components/TextField/TextField';
 import { useField } from '@lib/frontend/form/hooks/useField/useField';

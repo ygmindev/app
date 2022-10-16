@@ -58,7 +58,7 @@ export const commonThemeConfig: PartialDeepModel<ThemeConfigModel> = {
   },
 
   shape: {
-    borderRadius: 12,
+    borderRadius: 18,
     height: {
       l: 50,
       m: 40,

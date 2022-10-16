@@ -1,9 +1,9 @@
 import { Appear } from '@lib/frontend/core/components/Appear/Appear';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { useMountAsync } from '@lib/frontend/core/hooks/useMountAsync/useMountAsync';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import {

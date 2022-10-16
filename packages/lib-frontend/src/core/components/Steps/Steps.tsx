@@ -1,11 +1,11 @@
 import { Appear } from '@lib/frontend/core/components/Appear/Appear';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Press } from '@lib/frontend/core/components/Press/Press';
 import { Slide } from '@lib/frontend/core/components/Slide/Slide';
 import type { StepsPropsModel } from '@lib/frontend/core/components/Steps/Steps.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { useDimension } from '@lib/frontend/platform/hooks/useDimension/useDimension';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';

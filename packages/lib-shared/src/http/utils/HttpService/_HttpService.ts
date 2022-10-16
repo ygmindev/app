@@ -14,8 +14,7 @@ import axios from 'axios';
 
 export class _HttpService implements _HttpServiceModel {
   protected _instance: AxiosInstance;
-
-  protected _onError?<TError extends Error = Error>(error: TError): Promise<void>;
+  protected _onError?<TError extends Error = Error>(error: TError): void;
 
   constructor({ baseUri, onError, onRequest, onResponse, request }: HttpServiceParamsModel) {
     this._instance = axios.create({ ...(request as AxiosRequestConfig), baseURL: uri(baseUri) });
@@ -40,9 +39,9 @@ export class _HttpService implements _HttpServiceModel {
       );
   }
 
-  _request = async <TParams, TResult, TError extends Error = Error>(
+  _request = async <TParams, TResult>(
     method: HttpMethodModel,
-    { onError, params, path, request }: _RequestParamsModel<TParams, TError>,
+    { params, path, request }: _RequestParamsModel<TParams>,
   ): Promise<TResult | null> => {
     try {
       const response = await this._instance.request({
@@ -53,54 +52,42 @@ export class _HttpService implements _HttpServiceModel {
       } as AxiosRequestConfig);
       return (response && response.data) || null;
     } catch (e) {
-      if (onError) {
-        onError(e as TError);
-      } else if (this._onError) {
-        this._onError(e as TError);
-      } else {
-        throw e;
-      }
+      this._onError && this._onError(e as Error);
       return null;
     }
   };
 
-  get = async <TParams, TResult, TError extends Error = Error>({
-    onError,
+  get = async <TParams, TResult>({
     params,
     path,
     request,
-  }: _RequestParamsModel<TParams, TError>): Promise<TResult | null> =>
-    this._request<TParams, TResult, TError>(HTTP_METHOD.GET, {
-      onError,
+  }: _RequestParamsModel<TParams>): Promise<TResult | null> =>
+    this._request<TParams, TResult>(HTTP_METHOD.GET, {
       path: uri<TParams>({ host: path, params }),
       request,
     });
 
-  delete = async <TParams, TResult, TError extends Error = Error>({
-    onError,
+  delete = async <TParams, TResult>({
     params,
     path,
     request,
-  }: _RequestParamsModel<TParams, TError>): Promise<TResult | null> =>
-    this._request<TParams, TResult, TError>(HTTP_METHOD.DELETE, {
-      onError,
+  }: _RequestParamsModel<TParams>): Promise<TResult | null> =>
+    this._request<TParams, TResult>(HTTP_METHOD.DELETE, {
       path: uri<TParams>({ host: path, params }),
       request,
     });
 
-  post = async <TParams, TResult, TError extends Error = Error>({
-    onError,
+  post = async <TParams, TResult>({
     params,
     path,
     request,
-  }: _RequestParamsModel<TParams, TError>): Promise<TResult | null> =>
-    this._request<TParams, TResult, TError>(HTTP_METHOD.POST, { onError, params, path, request });
+  }: _RequestParamsModel<TParams>): Promise<TResult | null> =>
+    this._request<TParams, TResult>(HTTP_METHOD.POST, { params, path, request });
 
-  put = async <TParams, TResult, TError extends Error = Error>({
-    onError,
+  put = async <TParams, TResult>({
     params,
     path,
     request,
-  }: _RequestParamsModel<TParams, TError>): Promise<TResult | null> =>
-    this._request<TParams, TResult, TError>(HTTP_METHOD.PUT, { onError, params, path, request });
+  }: _RequestParamsModel<TParams>): Promise<TResult | null> =>
+    this._request<TParams, TResult>(HTTP_METHOD.PUT, { params, path, request });
 }

@@ -1,9 +1,11 @@
 import { AppProvider } from '@lib/frontend/app/providers/AppProvider/AppProvider';
+import { ErrorProvider } from '@lib/frontend/app/providers/ErrorProvider/ErrorProvider';
 import { AuthProvider } from '@lib/frontend/auth/providers/AuthProvider/AuthProvider';
 import { PortalProvider } from '@lib/frontend/core/components/Portal/Portal';
 import type { FCModel } from '@lib/frontend/core/core.models';
 import { QueryProvider } from '@lib/frontend/core/providers/QueryProvider/QueryProvider';
 import { LocaleProvider } from '@lib/frontend/locale/providers/LocaleProvider/LocaleProvider';
+import { NotificationProvider } from '@lib/frontend/notification/providers/NotificationProvider/NotificationProvider';
 import type { RootPropsModel } from '@lib/frontend/root/containers/Root/Root.models';
 import { KeyboardProvider } from '@lib/frontend/root/providers/KeyboardProvider/KeyboardProvider';
 import { store } from '@lib/frontend/root/stores/store/store';
@@ -18,10 +20,12 @@ const providers = [
   AppProvider,
   TrackingProvider,
   AuthProvider,
-  PortalProvider,
   LocaleProvider,
+  ErrorProvider,
+  NotificationProvider,
   StyleProvider,
   QueryProvider,
+  PortalProvider,
   Suspense,
 ].filter(Boolean) as Array<ComponentType>;
 

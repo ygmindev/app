@@ -1,9 +1,9 @@
 import type { AppFooterPropsModel } from '@lib/frontend/app/containers/AppFooter/AppFooter.models';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { FLEX_JUSTIFY } from '@lib/frontend/styling/utils/styler/flexStyler/flexStyler.constants';
 import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';

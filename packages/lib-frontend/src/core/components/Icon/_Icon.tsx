@@ -1,5 +1,8 @@
-import { FONTAWESOME_ICONS, IONIC_ICONS } from '@lib/frontend/core/components/Icon/_Icon.constants';
 import type { _IconPropsModel } from '@lib/frontend/core/components/Icon/_Icon.models';
+import {
+  FONTAWESOME_ICONS,
+  IONIC_ICONS,
+} from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { get } from 'lodash';
 import type { ReactNode } from 'react';
 import { Component } from 'react';
@@ -10,7 +13,7 @@ export class _Icon extends Component<_IconPropsModel> {
   override render(): ReactNode {
     const { icon, testID } = this.props;
     if (icon) {
-      let _icon = get(IONIC_ICONS, icon as string);
+      let _icon = get(IONIC_ICONS, icon);
       if (_icon) {
         return (
           <Ionicons
@@ -20,7 +23,7 @@ export class _Icon extends Component<_IconPropsModel> {
           />
         );
       }
-      _icon = get(FONTAWESOME_ICONS, icon as string);
+      _icon = get(FONTAWESOME_ICONS, icon);
       if (_icon) {
         return (
           <FontAwesome

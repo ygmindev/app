@@ -1,6 +1,6 @@
 import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { TextField } from '@lib/frontend/form/components/TextField/TextField';
 import type { TextFieldPropsModel } from '@lib/frontend/form/components/TextField/TextField.models';
 

@@ -9,7 +9,6 @@ const REACT_APP_SERVER_API_PORT = getEnv('REACT_APP_SERVER_API_PORT', null) || u
 export const useApi: UseApiModel = ({
   host,
   isCredentials = true,
-  onError,
   onRequest,
   onResponse,
   path,
@@ -22,7 +21,6 @@ export const useApi: UseApiModel = ({
       path,
       port: port || REACT_APP_SERVER_API_PORT,
     },
-    onError,
     onRequest: async (config) => {
       if (isCredentials) {
         const token = await getToken();

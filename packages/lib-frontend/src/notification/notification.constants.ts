@@ -1,4 +1,4 @@
-import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import type { AlertDataModel } from '@lib/frontend/notification/components/Alert/Alert.models';
 
 export const NETWORK_ALERT: AlertDataModel = {

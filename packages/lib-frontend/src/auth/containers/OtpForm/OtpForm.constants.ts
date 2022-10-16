@@ -1,5 +1,5 @@
 import type { OtpFormModel } from '@lib/frontend/auth/containers/OtpForm/OtpForm.models';
-import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import type { FormValidatorsModel } from '@lib/frontend/form/form.models';
 import { validateLength } from '@lib/frontend/form/utils/validateLength/validateLength';
 import type { AlertDataModel } from '@lib/frontend/notification/components/Alert/Alert.models';

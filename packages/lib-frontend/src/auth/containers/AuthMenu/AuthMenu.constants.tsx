@@ -1,5 +1,5 @@
-import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import type { MenuOptionModel } from '@lib/frontend/core/components/Menu/Menu.models';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import type { SelectOptionModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
 import { THEME_COLOR } from '@lib/frontend/styling/utils/theme/theme.constants';
 import { SIGN_OUT } from '@lib/shared/auth/auth.constants';

@@ -1,10 +1,10 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Content } from '@lib/frontend/core/components/Content/Content';
-import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Table } from '@lib/frontend/core/components/Table/Table';
 import { TABLE_SELECT_TYPE } from '@lib/frontend/core/components/Table/Table.constants';
 import type { TableRefModel } from '@lib/frontend/core/components/Table/Table.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { useQueryConnection } from '@lib/frontend/core/hooks/useQueryConnection/useQueryConnection';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { EntityResourceModal } from '@lib/frontend/resource/components/EntityResourceModal/EntityResourceModal';

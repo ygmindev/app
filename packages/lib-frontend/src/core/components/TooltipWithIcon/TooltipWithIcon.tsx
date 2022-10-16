@@ -1,8 +1,8 @@
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Tooltip } from '@lib/frontend/core/components/Tooltip/Tooltip';
 import type { TooltipWithIconPropsModel } from '@lib/frontend/core/components/TooltipWithIcon/TooltipWithIcon.models';
 import type { SFCModel } from '@lib/frontend/core/core.models';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { THEME_COLOR, THEME_SHADE } from '@lib/frontend/styling/utils/theme/theme.constants';
 

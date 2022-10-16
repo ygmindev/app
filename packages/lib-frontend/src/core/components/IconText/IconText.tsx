@@ -38,13 +38,7 @@ export const IconText: SFCModel<IconTextPropsModel> = ({
         />
       )}
 
-      {children && (
-        <Text
-          {...propsWithOutStyle}
-          size={isVertical ? 's' : undefined}>
-          {children}
-        </Text>
-      )}
+      {children && <Text {...propsWithOutStyle}>{children}</Text>}
     </Wrapper>
   );
 

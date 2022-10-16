@@ -1,6 +1,6 @@
 import { withStory } from '@app/web-storybook/utils/withStory/withStory';
-import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { MENU_FIXTURE_OPTIONS } from '@lib/frontend/core/components/Menu/Menu.fixtures';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { SelectField } from '@lib/frontend/form/components/SelectField/SelectField';
 import type { SelectFieldPropsModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
 

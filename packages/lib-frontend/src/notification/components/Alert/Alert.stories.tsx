@@ -1,7 +1,7 @@
 import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Button } from '@lib/frontend/core/components/Button/Button';
-import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import type { AlertPropsModel } from '@lib/frontend/notification/components/Alert/Alert.models';
 import { useAlert } from '@lib/frontend/notification/hooks/useAlert/useAlert';
 import { THEME_COLOR } from '@lib/frontend/styling/utils/theme/theme.constants';

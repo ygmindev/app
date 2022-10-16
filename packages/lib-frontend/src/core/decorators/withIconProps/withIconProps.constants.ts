@@ -211,3 +211,8 @@ export const FONTAWESOME_ICONS: Record<FONTAWESOME_ICON, string> = {
   dollar: 'dollar',
   id: 'id-card-o',
 };
+
+export const ICON = {
+  ...IONICON_ICON,
+  ...FONTAWESOME_ICON,
+};

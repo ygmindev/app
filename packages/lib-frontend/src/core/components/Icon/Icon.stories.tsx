@@ -1,7 +1,7 @@
 import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { ICON } from '@lib/frontend/core/components/Icon/Icon.constants';
 import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
 
 const { Default, meta } = withStory<IconPropsModel>({

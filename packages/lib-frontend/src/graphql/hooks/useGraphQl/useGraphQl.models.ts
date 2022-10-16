@@ -14,19 +14,14 @@ export interface GraphQlHttpResponseModel<TName extends string, TResult> {
 
 export interface UseGraphQlParamsModel extends Omit<UseApiParamsModel, 'path'> {}
 
-export interface GraphQlQueryHttpParamsModel<
-  TParams,
-  TResult,
-  TName extends string = string,
-  TError extends Error = Error,
-> extends GraphQlQueryParamsModel<TParams, TResult, TName> {
-  onError?(error: TError): Promise<void>;
+export interface GraphQlQueryHttpParamsModel<TParams, TResult, TName extends string = string>
+  extends GraphQlQueryParamsModel<TParams, TResult, TName> {
   variables?: TParams;
 }
 
 export interface UseGraphQlModel {
   isLoading: boolean;
-  query<TParams, TResult, TName extends string = string, TError extends Error = Error>(
-    params: GraphQlQueryHttpParamsModel<TParams, TResult, TName, TError>,
+  query<TParams, TResult, TName extends string = string>(
+    params: GraphQlQueryHttpParamsModel<TParams, TResult, TName>,
   ): Promise<TResult | null>;
 }
