@@ -1,1 +1,0 @@
-{"file":"/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-shared/src/user/resources/User/User.constants.ts","mappings":";;;AAAa,QAAA,kBAAkB,GAAG,MAAM,CAAC","names":[],"sources":["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-shared/src/user/resources/User/User.constants.ts"],"sourcesContent":["export const USER_RESOURCE_NAME = 'User';\n"],"version":3}

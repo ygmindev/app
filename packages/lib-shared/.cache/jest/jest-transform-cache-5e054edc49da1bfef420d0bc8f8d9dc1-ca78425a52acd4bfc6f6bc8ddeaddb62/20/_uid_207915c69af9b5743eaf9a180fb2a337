@@ -1,8 +1,0 @@
-fffa316306192fde592c63e9b685779e
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports._uid = void 0;
-const lodash_1 = require("lodash");
-const _uid = (prefix) => `${prefix || 'uid'}-${(0, lodash_1.uniqueId)()}`;
-exports._uid = _uid;
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lnbWluL1Byb2plY3RzL21vbm9fdjIvYXBwMy9hcHAvcGFja2FnZXMvbGliLXNoYXJlZC9zcmMvY29yZS91dGlscy91aWQvX3VpZC50cyIsIm1hcHBpbmdzIjoiOzs7QUFBQSxtQ0FBa0M7QUFFM0IsTUFBTSxJQUFJLEdBQUcsQ0FBQyxNQUFlLEVBQVUsRUFBRSxDQUFDLEdBQUcsTUFBTSxJQUFJLEtBQUssSUFBSSxJQUFBLGlCQUFRLEdBQUUsRUFBRSxDQUFDO0FBQXZFLFFBQUEsSUFBSSxRQUFtRSIsIm5hbWVzIjpbXSwic291cmNlcyI6WyIvVXNlcnMveWdtaW4vUHJvamVjdHMvbW9ub192Mi9hcHAzL2FwcC9wYWNrYWdlcy9saWItc2hhcmVkL3NyYy9jb3JlL3V0aWxzL3VpZC9fdWlkLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHVuaXF1ZUlkIH0gZnJvbSAnbG9kYXNoJztcblxuZXhwb3J0IGNvbnN0IF91aWQgPSAocHJlZml4Pzogc3RyaW5nKTogc3RyaW5nID0+IGAke3ByZWZpeCB8fCAndWlkJ30tJHt1bmlxdWVJZCgpfWA7XG4iXSwidmVyc2lvbiI6M30=

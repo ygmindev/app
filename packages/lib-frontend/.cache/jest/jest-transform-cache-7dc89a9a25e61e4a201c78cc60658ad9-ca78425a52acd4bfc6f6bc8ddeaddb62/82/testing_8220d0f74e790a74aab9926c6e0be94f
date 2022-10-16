@@ -1,9 +1,0 @@
-e921a96ab2cfd8727058bdc57c7c2542
-{
-  "labels": {
-    "testing": "TRANSLATION_MISSING",
-    "testingWithElements": "testing with elements: <0>{{value1}}</0> <1>{{value2}}</1>",
-    "testingWithParams": "testing with params: {{value1}} {{value2}}",
-    "testingWithString": "testing with string"
-  }
-}

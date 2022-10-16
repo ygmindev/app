@@ -1,1 +1,0 @@
-{"version":3,"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAaA,8BAAsB,GAAtB","names":["exports"],"sources":["/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend/src/platform/hooks/useDimension/useDimension.constants.ts"],"sourcesContent":["export const USE_DIMENSION_DELAY = 500;\n"]}
