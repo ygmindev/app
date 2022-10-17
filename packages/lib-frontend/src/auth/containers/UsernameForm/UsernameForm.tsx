@@ -12,10 +12,12 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayout';
 import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useAlert } from '@lib/frontend/notification/hooks/useAlert/useAlert';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { isTypeOf } from '@lib/shared/core/utils/isTypeOf/isTypeOf';
+import { USER } from '@lib/shared/user/user.constants';
 
 export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   isCheckIfNotExists,
@@ -23,6 +25,8 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   testID,
   ...props
 }) => {
+  useTranslation([USER]);
+
   const { styles } = useStyles({ props });
   const { alertAdd } = useAlert();
 

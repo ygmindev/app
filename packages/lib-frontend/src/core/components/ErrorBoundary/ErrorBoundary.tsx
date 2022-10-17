@@ -10,7 +10,7 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
 import { CORE } from '@lib/shared/core/core.constants';
 import type { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
-import { HTTP_ERROR_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
+import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 import { useCallback } from 'react';
 
 export const ErrorBoundary: FCModel<ErrorBoundaryPropsModel> = ({
@@ -28,9 +28,9 @@ export const ErrorBoundary: FCModel<ErrorBoundaryPropsModel> = ({
         }
 
         switch ((error as HttpError).statusCode) {
-          case HTTP_ERROR_STATUS_CODE.UNAUTHORIZED:
+          case HTTP_STATUS_CODE.UNAUTHORIZED:
             return [ICON.lock, t('core:messages.errorUnauthorized')];
-          case HTTP_ERROR_STATUS_CODE.FORBIDDEN:
+          case HTTP_STATUS_CODE.FORBIDDEN:
             return [ICON.ban, t('core:messages.errorForbidden')];
           default:
             return [ICON.sad, t('core:messages.errorGeneric')];
@@ -67,7 +67,7 @@ export const ErrorBoundary: FCModel<ErrorBoundaryPropsModel> = ({
             <Button
               icon={ICON.refresh}
               onPress={handleReset}>
-              {t('core:labels.retry')}
+              {t('core:labels.tryAgain')}
             </Button>
           </Wrapper>
         ))

@@ -4,8 +4,8 @@
     "continue": "TRANSLATION_MISSING",
     "noResult": "TRANSLATION_MISSING",
     "remove": "TRANSLATION_MISSING",
-    "retry": "TRANSLATION_MISSING",
-    "submit": "TRANSLATION_MISSING"
+    "submit": "TRANSLATION_MISSING",
+    "tryAgain": "TRANSLATION_MISSING"
   },
   "messages": {
     "confirmRemove": "TRANSLATION_MISSING",

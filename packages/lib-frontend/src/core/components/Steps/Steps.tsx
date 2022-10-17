@@ -1,7 +1,6 @@
 import { Appear } from '@lib/frontend/core/components/Appear/Appear';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
-import { Press } from '@lib/frontend/core/components/Press/Press';
 import { Slide } from '@lib/frontend/core/components/Slide/Slide';
 import type { StepsPropsModel } from '@lib/frontend/core/components/Steps/Steps.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -54,16 +53,14 @@ export const Steps = <TType,>({
         spacing
         style={styles}
         testID={testID}>
-        <Wrapper isRow>
-          <Appear
-            isCenter
-            isVisible={current > 0}>
-            <Press onPress={current > 0 ? () => setCurrent(current - 1) : undefined}>
-              <Icon
-                icon={ICON.arrowLeft}
-                size={THEME_SIZE.LARGE}
-              />
-            </Press>
+        <Wrapper isRowAlign>
+          <Appear isVisible={current > 0}>
+            <Icon
+              icon={ICON.arrowLeft}
+              isDisabled={current < 0}
+              onPress={() => setCurrent(current - 1)}
+              size={THEME_SIZE.LARGE}
+            />
           </Appear>
         </Wrapper>
 

@@ -4,8 +4,8 @@
     "continue": "Continue",
     "noResult": "No result",
     "remove": "Remove",
-    "retry": "Retry",
-    "submit": "Submit"
+    "submit": "Submit",
+    "tryAgain": "Try again"
   },
   "messages": {
     "confirmRemove": "Are you sure you want to remove?",

@@ -61,6 +61,7 @@ export const Alert: SFCModel<AlertPropsModel> = ({
       style={styles}>
       <Wrapper
         backgroundColor={color}
+        isOverflowHidden
         isShadow
         mBottom
         position={SHAPE_POSITION.RELATIVE}

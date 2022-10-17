@@ -46,7 +46,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             align={FONT_ALIGN.CENTER}
             defaultValue=""
             error={error !== undefined}
-            isActive={isFocused && i === Math.min(fieldValue.length, OTP_LENGTH - 1)}
+            isActive={isFocused && i === Math.min(fieldValue.length, OTP_LENGTH - 1) && !isDisabled}
             isDisabled={isDisabled}
             isNoClear
             key={id}
@@ -84,6 +84,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
               isVisible={fieldValue.length > 0}>
               <Icon
                 icon={ICON.times}
+                isDisabled={isDisabled}
                 onPress={() => setFieldValue('')}
               />
             </Appear>

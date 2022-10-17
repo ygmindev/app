@@ -16,7 +16,7 @@ export const useHttp: UseHttpModel = (params) => {
     onResponse: async (respone) => {
       const graphQlError = get(respone, ['data', 'errors', 0]) as GraphQLError;
       if (graphQlError) {
-        throw new HttpError(graphQlError.extensions.statusCode, graphQlError.message);
+        throw new HttpError(graphQlError.extensions.exception.statusCode, graphQlError.message);
       }
       return respone;
     },

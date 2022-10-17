@@ -2,7 +2,7 @@ import { schema } from '@lib/backend/graphql/utils/schema/schema';
 import { createHandler } from '@lib/backend/lambda/utils/createHandler/createHandler';
 import { getContext } from '@lib/backend/lambda/utils/getContext/getContext';
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
-import { HTTP_ERROR_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
+import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 import { error } from '@lib/shared/logging/utils/logger/logger';
 import { ApolloServer } from 'apollo-server-lambda';
 import type { Context } from 'aws-lambda';
@@ -21,7 +21,7 @@ const graphQlHandler = new ApolloServer({
     const statusCode = (() => {
       switch (name) {
         case 'ForbiddenError':
-          return HTTP_ERROR_STATUS_CODE.FORBIDDEN;
+          return HTTP_STATUS_CODE.FORBIDDEN;
         default:
           return e.extensions.statusCode;
       }

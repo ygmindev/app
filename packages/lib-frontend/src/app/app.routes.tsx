@@ -8,8 +8,10 @@ export const appRoutes: Array<PageModel> = [
   {
     Layout: AppLayout,
     pathname: '/',
-    routes: [...authRoutes],
+    routes: [],
   },
+
+  ...authRoutes,
 
   ...devRoutes,
 

@@ -9,12 +9,15 @@ export const _ErrorBoundary = composeComponent<_ErrorBoundaryPropsModel, ErrorBo
     FallbackComponent: <TError extends Error = Error>({
       error,
       resetErrorBoundary,
-    }: FallbackProps) => (
-      <Fallback<TError>
-        error={error as TError}
-        handleReset={resetErrorBoundary}
-      />
-    ),
+    }: FallbackProps) =>
+      onError ? (
+        <>{children}</>
+      ) : Fallback ? (
+        <Fallback<TError>
+          error={error as TError}
+          handleReset={resetErrorBoundary}
+        />
+      ) : null,
     children,
     onError,
   }),

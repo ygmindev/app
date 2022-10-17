@@ -9,7 +9,7 @@ export interface _FallbackPropsModel<TError extends Error = Error> extends WithI
 }
 
 export interface _ErrorBoundaryPropsModel extends WithChildrenPropsModel {
-  Fallback<TError extends Error = Error>(
+  Fallback?<TError extends Error = Error>(
     props: _FallbackPropsModel<TError>,
   ): ReactElement<_FallbackPropsModel<TError>>;
   onError?<TError extends Error = Error>(error: TError): void;

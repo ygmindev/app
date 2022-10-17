@@ -66,6 +66,7 @@ export const FormContainer = <TType,>({
   } = useForm<TType>({ initialValues, onSubmit: _handleSubmit, validators });
 
   const _isLoading = isFormLoading || isLoading || false;
+  const _isFullWidth = isMobile || isFullWidth;
 
   const _getField = useCallback(
     ({ field, id, isDisabled, render, ...fieldProps }: FormContainerFieldModel) => {
@@ -122,8 +123,6 @@ export const FormContainer = <TType,>({
     [values, errors, handleChange, handleSubmit, initialValues, _isLoading],
   );
 
-  const _isFullWidth = isMobile || isFullWidth;
-
   return (
     <Wrapper
       isFullWidth={_isFullWidth}
@@ -154,7 +153,7 @@ export const FormContainer = <TType,>({
         {onCancel && (
           <Button
             icon={ICON.chevronLeft}
-            isDisabled={isLoading}
+            isLoading={_isLoading}
             isTransparent
             onPress={onCancel}>
             {cancelLabel || t('core:labels.cancel')}
@@ -164,7 +163,7 @@ export const FormContainer = <TType,>({
         <Button
           icon={ICON.chevronRight}
           isDisabled={isLoading}
-          isLoading={isLoading}
+          isLoading={_isLoading}
           onPress={handleSubmit}>
           {submitLabel || t('core:labels.submit')}
         </Button>

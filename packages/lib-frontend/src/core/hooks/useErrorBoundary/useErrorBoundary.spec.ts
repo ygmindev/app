@@ -6,7 +6,7 @@ const { displayName } = withTest({ target: () => useErrorBoundary });
 
 describe(displayName, () => {
   test('works', async () => {
-    const { result, unmount } = renderHook(() => useErrorBoundary({}));
+    const { result, unmount } = renderHook(() => useErrorBoundary());
 
     unmount();
   });

@@ -11,14 +11,14 @@ export const adminRoutes: Array<PageModel> = [
     Layout: AppLayout,
     pathname: '/',
     routes: [
-      ...authRoutes,
-
       {
         element: <Resource />,
         pathname: `${RESOURCE}/:name`,
       },
     ],
   },
+
+  ...authRoutes,
 
   ...devRoutes,
 
