@@ -1,36 +1,36 @@
-import type { StepsPropsModel } from '@lib/frontend/core/components/Steps/Steps.models';
+import type { FormStepsPropsModel } from '@lib/frontend/form/components/FormSteps/FormSteps.models';
 import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
 import { FORM_FIELD_TYPE } from '@lib/frontend/form/containers/FormContainer/FormContainer.constants';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
 
-export interface StepsFixtureModel
-  extends StepsFixtureStepOneModel,
-    StepsFixtureStepTwoModel,
-    StepsFixtureStepThreeModel {}
+export interface FormStepsFixtureModel
+  extends FormStepsFixtureStepOneModel,
+    FormStepsFixtureStepTwoModel,
+    FormStepsFixtureStepThreeModel {}
 
-export interface StepsFixtureStepOneModel {
+export interface FormStepsFixtureStepOneModel {
   stepOne: string;
 }
 
-export interface StepsFixtureStepTwoModel {
+export interface FormStepsFixtureStepTwoModel {
   stepTwo: string;
 }
 
-export interface StepsFixtureStepThreeModel {
+export interface FormStepsFixtureStepThreeModel {
   stepThree: string;
 }
 
-export const STEPS_FIXTURE_PROPS: StepsPropsModel<StepsFixtureModel> = {
+export const STEPS_FIXTURE_PROPS: FormStepsPropsModel<FormStepsFixtureModel> = {
   children: [
-    <FormContainer<StepsFixtureStepOneModel>
+    <FormContainer<FormStepsFixtureStepOneModel>
       initialValues={{ stepOne: '' }}
       rows={withId([{ fields: [{ field: FORM_FIELD_TYPE.TEXT_FIELD, id: 'stepOne' }] }])}
     />,
-    <FormContainer<StepsFixtureStepTwoModel>
+    <FormContainer<FormStepsFixtureStepTwoModel>
       initialValues={{ stepTwo: '' }}
       rows={withId([{ fields: [{ field: FORM_FIELD_TYPE.TEXT_FIELD, id: 'stepTwo' }] }])}
     />,
-    <FormContainer<StepsFixtureStepThreeModel>
+    <FormContainer<FormStepsFixtureStepThreeModel>
       initialValues={{ stepThree: '' }}
       rows={withId([{ fields: [{ field: FORM_FIELD_TYPE.TEXT_FIELD, id: 'stepThree' }] }])}
     />,

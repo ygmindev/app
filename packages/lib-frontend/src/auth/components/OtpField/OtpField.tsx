@@ -79,9 +79,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             position={SHAPE_POSITION.ABSOLUTE}>
             {(isFunction(error) || isString(error)) && <ErrorTooltip error={error} />}
 
-            <Appear
-              isLazy
-              isVisible={fieldValue.length > 0}>
+            <Appear isVisible={fieldValue.length > 0}>
               <Icon
                 icon={ICON.times}
                 isDisabled={isDisabled}

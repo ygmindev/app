@@ -55,7 +55,6 @@ export const Alert: SFCModel<AlertPropsModel> = ({
   return (
     <Appear
       isCenter
-      isLazy
       isScalable
       isVisible={isVisible}
       style={styles}>

@@ -26,7 +26,7 @@ const { Default, meta } = withStory<AppearPropsModel>({
   defaultProps: {},
   displayName: 'Appear',
   target: Component,
-  variants: [{ props: { isLazy: true } }],
+  variants: [{ props: { isLazy: false } }],
 });
 
 export { Default, meta as default };

@@ -41,7 +41,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
       appendTo={() => document.body}
       content={
         <Appear
-          isLazy
+          isLazy={false}
           isVisible={isOpen}>
           {children}
         </Appear>

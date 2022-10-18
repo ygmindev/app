@@ -1,5 +1,5 @@
-import { Steps } from '@lib/frontend/core/components/Steps/Steps';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
+import { FormSteps } from '@lib/frontend/form/components/FormSteps/FormSteps';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
 
@@ -10,7 +10,7 @@ const { Component, displayName, testID } = withTestComponent({
   defaultProps: {
     children: [<WrapperFixture text={FIRST_CHILDREN} />, <WrapperFixture text={SECOND_CHILDREN} />],
   },
-  target: Steps,
+  target: FormSteps,
 });
 
 describe(displayName, () => {

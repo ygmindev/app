@@ -11,7 +11,7 @@ import { useState } from 'react';
 export const Appear: SFCModel<AppearPropsModel> = ({
   children,
   duration,
-  isLazy,
+  isLazy = true,
   isScalable = true,
   isVisible,
   ...props

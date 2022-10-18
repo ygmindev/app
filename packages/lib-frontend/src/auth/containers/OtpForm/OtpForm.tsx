@@ -46,14 +46,14 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = (props) => {
   );
 };
 
-export const _OtpForm: SFCModel<OtpFormPropsModel> = ({ onBack, stepsData, ...props }) => {
+export const _OtpForm: SFCModel<OtpFormPropsModel> = ({ data, onBack, ...props }) => {
   const { styles } = useStyles({ props });
   const { t } = useTranslation([AUTH]);
   const { create } = useSignInResourceResource();
 
   const { errors, handleChange, handleReset, handleSubmit, isLoading, values } = useForm({
     onSubmit: async ({ otp }) => {
-      const username = stepsData && stepsData.username;
+      const username = data && data.username;
       username && (await create({ form: { otp, username } }));
       handleReset();
     },
@@ -69,7 +69,7 @@ export const _OtpForm: SFCModel<OtpFormPropsModel> = ({ onBack, stepsData, ...pr
 
   return (
     <CenterLayout style={styles}>
-      {stepsData && stepsData.username && (
+      {data && data.username && (
         <Trans
           Components={[
             <Text
@@ -79,7 +79,7 @@ export const _OtpForm: SFCModel<OtpFormPropsModel> = ({ onBack, stepsData, ...pr
           ]}
           i18nKey="messages.otpEnter"
           ns="auth"
-          params={{ value: stepsData.username }}
+          params={{ value: data.username }}
         />
       )}
 
@@ -102,7 +102,9 @@ export const _OtpForm: SFCModel<OtpFormPropsModel> = ({ onBack, stepsData, ...pr
         </Button>
       </Wrapper>
 
-      <Appear isVisible={isLoading}>
+      <Appear
+        isLazy={false}
+        isVisible={isLoading}>
         <Loading size={THEME_SIZE.LARGE} />
       </Appear>
     </CenterLayout>

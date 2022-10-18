@@ -50,6 +50,7 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
       <Wrapper isRowAlign>
         <Appear
           isCenter
+          isLazy={false}
           isVisible={isFocused && size(_value) > 0}>
           <Icon
             icon={ICON.times}

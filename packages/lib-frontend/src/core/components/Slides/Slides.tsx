@@ -1,5 +1,5 @@
 import { Appear } from '@lib/frontend/core/components/Appear/Appear';
-import type { SlidePropsModel } from '@lib/frontend/core/components/Slide/Slide.models';
+import type { SlidesPropsModel } from '@lib/frontend/core/components/Slides/Slides.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useChange } from '@lib/frontend/core/hooks/useChange/useChange';
@@ -9,11 +9,12 @@ import { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/s
 import { Children, useState } from 'react';
 import { View as ViewWithAnimationProps } from 'react-native-animatable';
 
-export const Slide: SFCModel<SlidePropsModel> = ({ children, current, testID, ...props }) => {
+export const Slides: SFCModel<SlidesPropsModel> = ({ children, current, testID, ...props }) => {
   const { styles } = useStyles({ props });
   const theme = useTheme();
   const [width, setWidth] = useState<number>();
   const [previous, setPrevious] = useState<number>();
+
   useChange({ onChange: setPrevious, value: current });
 
   return (
@@ -40,7 +41,6 @@ export const Slide: SFCModel<SlidePropsModel> = ({ children, current, testID, ..
                 <Appear
                   duration={theme.animation.transition}
                   grow
-                  isLazy
                   isVisible={isCurrent}>
                   {child}
                 </Appear>

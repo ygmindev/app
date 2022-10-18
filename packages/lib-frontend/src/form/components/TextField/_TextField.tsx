@@ -157,6 +157,7 @@ export const _TextField = ({
     left && label ? (
       <Appear
         isCenter
+        isLazy={false}
         isVisible={!isEmpty(value) || isFocused}
         mTop={18}>
         {left}

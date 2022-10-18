@@ -1,14 +1,14 @@
 import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Appear } from '@lib/frontend/core/components/Appear/Appear';
 import { Button } from '@lib/frontend/core/components/Button/Button';
-import { Slide } from '@lib/frontend/core/components/Slide/Slide';
-import type { SlidePropsModel } from '@lib/frontend/core/components/Slide/Slide.models';
+import { Slides } from '@lib/frontend/core/components/Slides/Slides';
+import type { SlidesPropsModel } from '@lib/frontend/core/components/Slides/Slides.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useState } from 'react';
 
-const Component: SFCModel<SlidePropsModel> = (props) => {
+const Component: SFCModel<SlidesPropsModel> = (props) => {
   const [current, setCurrent] = useState<number>(0);
   const slides = [
     <WrapperFixture text="slide 1" />,
@@ -30,19 +30,19 @@ const Component: SFCModel<SlidePropsModel> = (props) => {
       <Wrapper
         height={500}
         width={500}>
-        <Slide
+        <Slides
           current={current}
           {...props}>
           {slides}
-        </Slide>
+        </Slides>
       </Wrapper>
     </Wrapper>
   );
 };
 
-const { Default, meta } = withStory<SlidePropsModel>({
+const { Default, meta } = withStory<SlidesPropsModel>({
   defaultProps: {},
-  displayName: 'Slide',
+  displayName: 'Slides',
   target: Component,
 });
 

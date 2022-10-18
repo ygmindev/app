@@ -4,13 +4,13 @@ import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
 import type { CallableModel, PartialModel } from '@lib/shared/core/core.models';
 import type { ReactElement } from 'react';
 
-export interface StepPropsModel<TSteps, TType = PartialModel<TSteps>, TResult = void>
-  extends WithSubmitPropsModel<TType, TResult>,
+export interface FormStepPropsModel<TType, TStep = PartialModel<TType>, TResult = void>
+  extends WithSubmitPropsModel<TStep, TResult>,
     WithStyleParamsModel {
+  data?: TStep;
   onBack?: CallableModel;
-  stepsData?: TType;
 }
 
-export interface StepsPropsModel<TType> extends WithStyleParamsModel, WithTestIdModel {
-  children: Array<ReactElement<StepPropsModel<TType>>>;
+export interface FormStepsPropsModel<TType> extends WithStyleParamsModel, WithTestIdModel {
+  children: Array<ReactElement<FormStepPropsModel<TType>>>;
 }

@@ -2,7 +2,7 @@ import type { WithChildrenPropsModel } from '@lib/frontend/core/decorators/withC
 import type { WithStyleParamsModel } from '@lib/frontend/styling/decorators/withStyle/withStyle.models';
 import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
 
-export interface SlidePropsModel
+export interface SlidesPropsModel
   extends WithChildrenPropsModel,
     WithStyleParamsModel,
     WithTestIdModel {

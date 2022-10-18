@@ -1,4 +1,4 @@
-import { Slide } from '@lib/frontend/core/components/Slide/Slide';
+import { Slides } from '@lib/frontend/core/components/Slides/Slides';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
@@ -14,7 +14,7 @@ const { Component, displayName, testID } = withTestComponent({
       { Component: () => <WrapperFixture text={SECOND_CHILDREN} />, id: SECOND_CHILDREN },
     ],
   },
-  target: Slide,
+  target: Slides,
 });
 
 describe(displayName, () => {
