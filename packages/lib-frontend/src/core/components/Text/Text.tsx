@@ -13,6 +13,7 @@ import { Text as TextWithAnimationProps } from 'react-native-animatable';
 export const Text: SFCModel<TextPropsModel> = ({
   animation,
   children,
+  isEllipsis,
   onPress,
   testID,
   ...props
@@ -36,6 +37,8 @@ export const Text: SFCModel<TextPropsModel> = ({
 
   return (
     <Component
+      ellipsizeMode={isEllipsis ? 'tail' : undefined}
+      numberOfLines={isEllipsis ? 1 : undefined}
       onPress={onPress ? () => onPress() : undefined}
       style={styles}
       testID={testID}

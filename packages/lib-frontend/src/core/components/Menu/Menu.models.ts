@@ -6,7 +6,7 @@ import type { SelectOptionModel } from '@lib/frontend/form/components/SelectFiel
 import type { TranslationTextModel } from '@lib/frontend/locale/locale.models';
 import type { WithStyleParamsModel } from '@lib/frontend/styling/decorators/withStyle/withStyle.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
-import type { ReactElement } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 
 export interface DividerOptionModel extends WithIdModel {
   isDivider: true;
@@ -28,4 +28,5 @@ export interface MenuPropsModel
   isSearchable?: boolean;
   options: Array<MenuOptionModel>;
   renderOption?(option: SelectOptionModel): TranslationTextModel;
+  topElement?: ReactNode;
 }

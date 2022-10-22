@@ -1,6 +1,7 @@
 import { lightThemeConfig } from '@lib/config/theme/light.config';
 import type { FontStylerParamsModel } from '@lib/frontend/styling/utils/styler/fontStyler/fontStyler.models';
 import type { StylerModel } from '@lib/frontend/styling/utils/styler/styler.models';
+import { THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 
 export const fontStyler: StylerModel<FontStylerParamsModel> = (
@@ -13,7 +14,7 @@ export const fontStyler: StylerModel<FontStylerParamsModel> = (
     isSubtitle,
     isTitle,
     isUppercase,
-    size = 'm',
+    size = THEME_SIZE.MEDIUM,
   },
   context,
 ) => {
@@ -21,7 +22,7 @@ export const fontStyler: StylerModel<FontStylerParamsModel> = (
   return cleanObject({
     fontFamily: isStylish ? theme.font.stylish : theme.font.family,
 
-    fontSize: theme.font.size[isTitle || isSubtitle ? 'l' : size],
+    fontSize: theme.font.size[isTitle || isSubtitle ? THEME_SIZE.LARGE : size],
 
     fontWeight: isBold || isTitle ? theme.font.boldWeight : undefined,
 

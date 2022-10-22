@@ -10,5 +10,6 @@ export interface TextPropsModel
     WithChildrenPropsModel<TranslationTextModel>,
     WithTestIdModel {
   animation?: WithAnimationPropsModel;
+  isEllipsis?: boolean;
   onPress?: CallableModel;
 }

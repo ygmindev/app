@@ -2,6 +2,8 @@
   "labels": {
     "create": "Create",
     "created": "Created",
-    "id": "ID"
+    "id": "ID",
+    "remove": "Remove",
+    "update": "Update"
   }
 }

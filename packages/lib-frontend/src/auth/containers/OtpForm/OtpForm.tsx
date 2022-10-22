@@ -1,7 +1,6 @@
 import { OtpField } from '@lib/frontend/auth/components/OtpField/OtpField';
 import { OTP_FORM_VALIDATORS } from '@lib/frontend/auth/containers/OtpForm/OtpForm.constants';
 import type { OtpFormPropsModel } from '@lib/frontend/auth/containers/OtpForm/OtpForm.models';
-import { useSignInResourceResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { Appear } from '@lib/frontend/core/components/Appear/Appear';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { ErrorBoundary } from '@lib/frontend/core/components/ErrorBoundary/ErrorBoundary';
@@ -46,15 +45,13 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = (props) => {
   );
 };
 
-export const _OtpForm: SFCModel<OtpFormPropsModel> = ({ data, onBack, ...props }) => {
+export const _OtpForm: SFCModel<OtpFormPropsModel> = ({ data, onBack, onSuccess, ...props }) => {
   const { styles } = useStyles({ props });
   const { t } = useTranslation([AUTH]);
-  const { create } = useSignInResourceResource();
 
   const { errors, handleChange, handleReset, handleSubmit, isLoading, values } = useForm({
     onSubmit: async ({ otp }) => {
-      const username = data && data.username;
-      username && (await create({ form: { otp, username } }));
+      onSuccess && (await onSuccess({ otp }));
       handleReset();
     },
     validators: OTP_FORM_VALIDATORS,

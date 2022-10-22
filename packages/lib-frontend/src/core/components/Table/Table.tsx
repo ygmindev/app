@@ -11,6 +11,7 @@ export const Table = <TType,>({
   data,
   forwardedRef,
   isFullWidth,
+  isSortable,
   onMount,
   onSelect,
   select,
@@ -19,6 +20,7 @@ export const Table = <TType,>({
 }: TablePropsModel<TType>): ReactElement<TablePropsModel<TType>> => {
   const { styles } = useStyles({ props });
   const [isMounted, setIsMounted] = useState<boolean>(false);
+
   return (
     <Wrapper
       grow
@@ -27,12 +29,14 @@ export const Table = <TType,>({
       testID={testID}>
       <Appear
         grow
+        isLazy={false}
         isVisible={isMounted}>
         <_Table
           columns={columns}
           data={data}
           forwardedRef={forwardedRef}
           isFullWidth={isFullWidth}
+          isSortable={isSortable}
           onMount={() => {
             setIsMounted(true);
             onMount && onMount();

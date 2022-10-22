@@ -37,7 +37,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
       const { result } = await (isCheckIfNotExists ? createIfNotExists : create)({
         form: { username: data.username },
       });
-      result && onSuccess && (await onSuccess(result, data));
+      result && onSuccess && (await onSuccess(data, result));
     } catch (e) {
       if (isCheckIfNotExists && isTypeOf(e, DuplicateError)) {
         return alertAdd(USER_EXISTS_ALERT);

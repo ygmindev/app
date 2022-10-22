@@ -1,7 +1,12 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Content } from '@lib/frontend/core/components/Content/Content';
+import { Icon } from '@lib/frontend/core/components/Icon/Icon';
+import { Menu } from '@lib/frontend/core/components/Menu/Menu';
 import { Table } from '@lib/frontend/core/components/Table/Table';
-import { TABLE_SELECT_TYPE } from '@lib/frontend/core/components/Table/Table.constants';
+import {
+  COLUMN_PIN_TYPE,
+  TABLE_SELECT_TYPE,
+} from '@lib/frontend/core/components/Table/Table.constants';
 import type { TableRefModel } from '@lib/frontend/core/components/Table/Table.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
@@ -12,9 +17,11 @@ import { ENTITY_RESOURCE_TABLE_LIMIT_DEFAULT } from '@lib/frontend/resource/comp
 import type { EntityResourceTablePropsModel } from '@lib/frontend/resource/components/EntityResourceTable/EntityResourceTable.models';
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
 import { RESOURCE, RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import type { ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
+import type { FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { reduce } from 'lodash';
 import type { ReactElement } from 'react';
 import { useEffect, useRef, useState } from 'react';
@@ -36,6 +43,7 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
 
   const ref = useRef<TableRefModel>(null);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>();
+  const [selectRow, setSelectedRow] = useState<TType | undefined>();
   const [selectedRows, setSelectedRows] = useState<Array<TType> | undefined>();
 
   const { query: create } = useResourceMethod<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>({
@@ -62,6 +70,16 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
     },
   });
 
+  const { isLoading, query: remove } = useResourceMethod<
+    RESOURCE_METHOD_TYPE.REMOVE,
+    EntityResourceModel,
+    TForm
+  >({ fields: [{ result: ['_id'] }], method: RESOURCE_METHOD_TYPE.REMOVE, name });
+
+  const _handleRemove = async (id: string): Promise<void> => {
+    await remove({ filter: { _id: id } as FilterModel<TType> });
+  };
+
   useEffect(() => {
     queryNext();
   }, []);
@@ -82,7 +100,42 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
         }
         title={name}>
         <Table<TType>
-          columns={columns}
+          columns={[
+            ...columns.map((column) => ({ ...column, sort: true })),
+            {
+              id: 'actions',
+              pin: COLUMN_PIN_TYPE.RIGHT,
+              renderer: ({ row }) => (
+                <Wrapper isCenter>
+                  <Menu
+                    anchor={(isActive) => (
+                      <Icon
+                        icon={ICON.ellipsis}
+                        isPressed={isActive}
+                        size={THEME_SIZE.LARGE}
+                      />
+                    )}
+                    options={[
+                      {
+                        icon: ICON.edit,
+                        id: 'update',
+                        label: t('resource:labels.update'),
+                        onPress: () => setSelectedRow(row),
+                      },
+                      {
+                        color: THEME_COLOR.ERROR,
+                        confirmMessage: t('core:messages.confirmRemove'),
+                        icon: ICON.timesCircle,
+                        id: 'remove',
+                        label: t('resource:labels.remove'),
+                        onPress: () => _handleRemove(row._id),
+                      },
+                    ]}
+                  />
+                </Wrapper>
+              ),
+            },
+          ]}
           data={reduce<ConnectionModel<TType> | null, Array<TType>>(
             data?.pages,
             (result, page) => [...result, ...(page?.edges.map(({ node }) => node) || [])],
@@ -90,17 +143,15 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
           )}
           forwardedRef={ref}
           onSelect={setSelectedRows}
-          select={TABLE_SELECT_TYPE.SINGLE}
+          select={TABLE_SELECT_TYPE.MULTIPLE}
         />
 
         <EntityResourceModal<TType, TForm>
           columns={columns}
-          data={selectedRows ? selectedRows[0] : undefined}
-          isOpen={isCreateModalOpen || (selectedRows && selectedRows.length === 1)}
-          name={name}
+          data={selectRow}
+          isOpen={isCreateModalOpen || selectRow !== undefined}
           onClose={() => {
-            setSelectedRows(undefined);
-            ref.current?.deselectRows();
+            setSelectedRow(undefined);
             setIsCreateModalOpen(false);
           }}
           onCreate={create}

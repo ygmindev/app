@@ -1,7 +1,8 @@
 import type { _UseSessionModel } from '@lib/frontend/auth/hooks/useSession/_useSession.models';
 import type { SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
-import { NetworkError } from '@lib/shared/http/errors/NetworkError/NetworkError';
+import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
+import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 import { getApps, initializeApp } from 'firebase/app';
 import type { Auth, AuthError, User } from 'firebase/auth';
 import {
@@ -56,7 +57,7 @@ export const _useSession = (): _UseSessionModel => ({
               onAuth({ _id: user.uid, claims } as SignInTokenModel);
             } catch (e) {
               if ((e as AuthError).code === 'auth/network-request-failed') {
-                throw new NetworkError();
+                throw new HttpError(HTTP_STATUS_CODE.SERVICE_UNAVAILABLE, 'Network Error');
               } else {
                 throw e;
               }

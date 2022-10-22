@@ -22,6 +22,6 @@ export interface EntityResourceTablePropsModel<TType extends EntityResourceModel
 
 export type EntityResourceTableColumnModel<TType extends EntityResourceModel> = Pick<
   TableColumnModel<TType, unknown>,
-  'id' | 'label' | 'formatter' | 'renderer' | 'isHidden'
+  'id' | 'label' | 'formatter' | 'renderer' | 'isHidden' | 'sort'
 > &
   FormContainerFieldModel;

@@ -10,7 +10,7 @@ import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.model
 export type EntityResourceModalModeModel = `${ENTITY_RESOURCE_MODAL_MODE}`;
 
 export interface EntityResourceModalPropsModel<TType extends EntityResourceModel, TForm>
-  extends Pick<EntityResourceTablePropsModel<TType, TForm>, 'name' | 'columns' | 'validators'>,
+  extends Pick<EntityResourceTablePropsModel<TType, TForm>, 'columns' | 'validators'>,
     Pick<ModalPropsModel, 'isOpen' | 'onClose'>,
     WithTestIdModel {
   data?: TType;

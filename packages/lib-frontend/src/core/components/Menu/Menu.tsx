@@ -16,6 +16,7 @@ import type { SelectOptionModel } from '@lib/frontend/form/components/SelectFiel
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
+import { THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
 import { promisify } from '@lib/shared/core/utils/promisify/promisify';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { isFunction } from 'lodash';
@@ -32,6 +33,7 @@ export const Menu: SFCModel<MenuPropsModel> = ({
   onClose,
   options,
   renderOption,
+  topElement,
   value,
   ...props
 }) => {
@@ -103,7 +105,9 @@ export const Menu: SFCModel<MenuPropsModel> = ({
   );
 
   const children = (
-    <Wrapper spacing="s">
+    <Wrapper spacing={THEME_SIZE.SMALL}>
+      {topElement}
+
       {isSearchable && <SearchField isAutoFocus />}
 
       {options.length ? (

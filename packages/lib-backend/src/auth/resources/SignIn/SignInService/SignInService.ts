@@ -7,7 +7,8 @@ import type { SignInFormModel, SignInModel } from '@lib/shared/auth/resources/Si
 import type { SignInServiceModel } from '@lib/shared/auth/resources/SignIn/SignInService/SignInService.models';
 import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { withInject } from '@lib/shared/core/decorators/withInject/withInject';
-import { BadRequestError } from '@lib/shared/http/errors/BadRequestError/BadRequestError';
+import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
+import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { ContextModel } from '@lib/shared/resource/utils/Context/Context.models';
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
@@ -39,10 +40,7 @@ export class SignInService implements SignInServiceModel {
       await this._otpService.verify({ otp: form.otp, username: form.username });
       unset(form, 'otp');
 
-      let { result: user } = await this._userService.get({
-        filter: { email: form.username },
-        options: { project: { _id: true } },
-      });
+      let { result: user } = await this._userService.get({ filter: { email: form.username } });
       let isNew;
       if (!user) {
         const { result: created } = await this._userService.create({
@@ -54,7 +52,8 @@ export class SignInService implements SignInServiceModel {
       const signIn = await _createSignIn(user);
       return { result: { ...signIn, isNew } };
     }
-    throw new BadRequestError(
+    throw new HttpError(
+      HTTP_STATUS_CODE.BAD_REQUEST,
       keys(form)
         .filter((key) => !(form as Record<string, string>)[key])
         .join(', '),
@@ -75,7 +74,8 @@ export class SignInService implements SignInServiceModel {
       const signIn = await _createSignIn(user);
       return { result: signIn };
     }
-    throw new BadRequestError(
+    throw new HttpError(
+      HTTP_STATUS_CODE.BAD_REQUEST,
       keys(form)
         .filter((key) => !(form as Record<string, string>)[key])
         .join(', '),

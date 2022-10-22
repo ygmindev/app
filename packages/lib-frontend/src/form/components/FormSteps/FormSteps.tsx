@@ -10,16 +10,18 @@ import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
 import { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants';
 import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
-import type { PartialModel } from '@lib/shared/core/core.models';
+import type { MergeArrayModel, PartialModel } from '@lib/shared/core/core.models';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import type { ReactElement } from 'react';
 import { Children, cloneElement, useMemo, useState } from 'react';
 
-export const FormSteps = <TType,>({
+export const FormSteps = <TType extends MergeArrayModel<TSteps>, TSteps extends Array<unknown>>({
   children,
+  onSubmit,
+  onSuccess,
   testID,
   ...props
-}: FormStepsPropsModel<TType>): ReactElement<FormStepsPropsModel<TType>> => {
+}: FormStepsPropsModel<TType, TSteps>): ReactElement<FormStepsPropsModel<TType, TSteps>> => {
   const { styles } = useStyles({ props });
   const { width } = useDimension();
   const theme = useTheme();
@@ -72,18 +74,22 @@ export const FormSteps = <TType,>({
           {Children.map(children, (child) =>
             cloneElement(child, {
               data,
-              onBack: () => setCurrent(current - 1),
-              onSubmit: _isLastStep
-                ? async (stepData: PartialModel<TType>) => {
-                    child.props.onSubmit && (await child.props.onSubmit(stepData));
-                    await sleep({ duration: theme.animation.transition });
-                    _handleClear();
-                  }
-                : undefined,
-              onSuccess: async (result: void, stepData: PartialModel<TType>) => {
-                child.props.onSuccess && (await child.props.onSuccess(result, stepData));
-                setData({ ...data, ...stepData });
-                !_isLastStep && setCurrent(current + 1);
+              onBack: () => {
+                child.props.onBack && child.props.onBack();
+                setCurrent(current - 1);
+              },
+              onSuccess: async (stepData: PartialModel<TType>) => {
+                child.props.onSuccess && (await child.props.onSuccess(stepData));
+                const _data = { ...data, ...stepData };
+                if (_isLastStep) {
+                  const _result = onSubmit && (await onSubmit(_data as TType));
+                  onSuccess && (await onSuccess(_data as TType, _result));
+                  await sleep({ duration: theme.animation.transition });
+                  _handleClear();
+                } else {
+                  setData(_data);
+                  setCurrent(current + 1);
+                }
               },
             }),
           )}

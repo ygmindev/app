@@ -130,7 +130,7 @@ export const FormContainer = <TType,>({
       style={styles}
       testID={testID}
       width={_isFullWidth ? undefined : FORM_CONTAINER_WIDTH}>
-      <Form onSubmit={isLoading ? undefined : promisify(handleSubmit)}>
+      <Form onSubmit={_isLoading ? undefined : promisify(handleSubmit)}>
         <Wrapper spacing>
           {map(rows, ({ fields, id }) => (
             <Wrapper
@@ -162,7 +162,6 @@ export const FormContainer = <TType,>({
 
         <Button
           icon={ICON.chevronRight}
-          isDisabled={isLoading}
           isLoading={_isLoading}
           onPress={handleSubmit}>
           {submitLabel || t('core:labels.submit')}

@@ -21,3 +21,10 @@ export type PathModel<TType, TKey extends string> = Function.AutoPath<TType, TKe
 export type ValueTypeModel<TType, TKey extends string> = Get<TType, TKey, { strict: true }>;
 
 export type BooleanValueModel = `${BOOLEAN_VALUE}`;
+
+export type MergeArrayModel<TType extends Array<unknown>> = TType extends [
+  v: infer TValue,
+  ...rest: infer TResult,
+]
+  ? TValue & MergeArrayModel<TResult>
+  : object;

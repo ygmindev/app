@@ -175,7 +175,7 @@ export const _TextField = ({
 
   return (
     <Wrapper
-      animation={{ transition: ['borderColor'] }}
+      animation={{ transition: ['backgroundColor', 'borderColor'] }}
       backgroundColor={backgroundColor}
       grow
       isOverflowHidden
@@ -184,6 +184,7 @@ export const _TextField = ({
       style={[styles, borderStyles]}
       testID={testID}>
       <Wrapper
+        animation={{ transition: ['backgroundColor'] }}
         backgroundColor={backgroundColor}
         bottom={0}
         height={3}
@@ -226,6 +227,7 @@ export const _TextField = ({
         ref={forwardedRef}
         render={(inputProps) => (
           <Wrapper
+            animation={{ transition: ['backgroundColor'] }}
             backgroundColor={backgroundColor}
             grow
             isOverflowHidden

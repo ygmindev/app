@@ -5,6 +5,8 @@ import { THEME_COLOR } from '@lib/frontend/styling/utils/theme/theme.constants';
 import { SIGN_OUT } from '@lib/shared/auth/auth.constants';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
 
+export const AUTH_MENU_USERNAME_WIDTH = 150;
+
 export const AUTH_MENU_OPTIONS: Array<MenuOptionModel> = withId([
   { isDivider: true },
 

@@ -1,6 +1,10 @@
 import type { ThemeConfigModel } from '@lib/config/theme/theme.models';
 import { AG_GRID_THEME } from '@lib/frontend/core/components/Table/_Table.constants';
 import type { _TablePropsModel } from '@lib/frontend/core/components/Table/_Table.models';
+import {
+  COLUMN_SORT_TYPE,
+  TABLE_SELECT_TYPE,
+} from '@lib/frontend/core/components/Table/Table.constants';
 import type { TableColumnModel } from '@lib/frontend/core/components/Table/Table.models';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -18,6 +22,7 @@ import type {
 import AgGridStyle from 'ag-grid-community/dist/styles/ag-grid.css';
 import AgGridTheme from 'ag-grid-community/dist/styles/ag-theme-material.css';
 import { AgGridReact } from 'ag-grid-react';
+import { findIndex } from 'lodash';
 import type { ReactElement } from 'react';
 import { useImperativeHandle, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
@@ -30,15 +35,20 @@ const _GlobalStyle = createGlobalStyle`
   ${({ theme }: { theme: ThemeConfigModel }) => `
     .${AG_GRID_THEME} {
       --ag-background-color: transparent;
+      --ag-checkbox-border-radius: ${theme.shape.borderRadius};
+      --ag-checkbox-checked-color: ${theme.colors.primary.main};
+      --ag-checkbox-indeterminate-color: ${theme.colors.secondary.main};
       --ag-foreground-color: ${theme.colors.text.main};
       --ag-header-background-color: transparent;
       --ag-header-foreground-color: ${theme.colors.text.main};
-      --ag-checkbox-checked-color: ${theme.colors.primary.main};
-      --ag-checkbox-indeterminate-color: ${theme.colors.secondary.main};
-      --ag-checkbox-border-radius: ${theme.shape.borderRadius};
+      --ag-selected-row-background-color: transparent;
 
       .ag-cell, .ag-header-cell {
         font-size: ${theme.font.size.m}px;
+      }
+
+      .ag-pinned-right-header, .ag-cell-first-right-pinned {
+        border-left: none !important;
       }
     }
   `}
@@ -68,34 +78,37 @@ export const _Table = <TType,>({
     onSelect && onSelect(selectedRows);
   };
 
+  const _unhiddenColumnIndex = findIndex(columns, ({ isHidden }) => !isHidden);
   const _getColumnDef = <TValue,>(
     {
       flex,
       formatter,
       id,
       isHidden,
-      isPinned,
       label,
+      pin,
       renderer,
       sort,
       width,
     }: TableColumnModel<TType, TValue>,
     i: number,
   ): ColDef => {
-    const isSelection = select !== undefined && i === 0;
     const definition: ColDef = {
-      checkboxSelection: isSelection,
+      checkboxSelection: select !== undefined && i === _unhiddenColumnIndex,
       field: id as string,
       flex,
-      headerCheckboxSelection: isSelection,
-      headerCheckboxSelectionFilteredOnly: isSelection,
+      headerCheckboxSelection: select === TABLE_SELECT_TYPE.MULTIPLE && i === _unhiddenColumnIndex,
       headerName: t(label),
       hide: isHidden,
       maxWidth: width,
       minWidth: width,
-      pinned: isPinned ? 'left' : undefined,
-      sort,
-      sortable: !isEmpty(sort),
+      pinned: pin,
+      sort: [COLUMN_SORT_TYPE.ASCENDING, COLUMN_SORT_TYPE.DESCENDING].includes(
+        sort as COLUMN_SORT_TYPE,
+      )
+        ? (sort as COLUMN_SORT_TYPE)
+        : undefined,
+      sortable: sort === true || !isEmpty(sort),
       suppressSizeToFit: (width || 0) > 0,
       width,
     };
@@ -106,10 +119,8 @@ export const _Table = <TType,>({
       );
     }
 
-    if (formatter) {
-      definition.valueFormatter = ({ node, value }: ValueFormatterParams) =>
-        formatter({ row: node && node.data, value });
-    }
+    definition.valueFormatter = ({ node, value }: ValueFormatterParams) =>
+      formatter ? formatter({ row: node && node.data, value }) : isEmpty(value) ? '-' : value;
 
     return definition;
   };
@@ -138,9 +149,10 @@ export const _Table = <TType,>({
         onSelectionChanged={_handleSelect}
         overlayNoRowsTemplate={t('core:messages.nothingToShow')}
         rowData={data}
-        rowMultiSelectWithClick={select !== undefined}
         rowSelection={select}
         suppressCellFocus
+        suppressRowClickSelection
+        suppressRowHoverHighlight
       />
 
       <_GlobalStyle />
