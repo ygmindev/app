@@ -45,6 +45,7 @@ const _GlobalStyle = createGlobalStyle`
 
       .ag-cell, .ag-header-cell {
         font-size: ${theme.font.size.m}px;
+        padding: 0 ${theme.shape.spacing.m}px;
       }
 
       .ag-pinned-right-header, .ag-cell-first-right-pinned {
@@ -61,6 +62,7 @@ export const _Table = <TType,>({
   isFullWidth,
   onMount,
   onSelect,
+  rowHeight,
   select,
 }: _TablePropsModel<TType>): ReactElement<_TablePropsModel<TType>> => {
   const { t } = useTranslation();
@@ -138,17 +140,20 @@ export const _Table = <TType,>({
           isFullWidth ? api.sizeColumnsToFit() : columnApi.autoSizeAllColumns();
           setGridApi(api);
           setColumnApi(columnApi);
+          console.warn(columnApi.getColumnState());
           onMount && onMount();
         }}
         onRowDataUpdated={async () => {
           if (gridApi && columnApi) {
             await sleep({ duration });
             isFullWidth ? gridApi.sizeColumnsToFit() : columnApi.autoSizeAllColumns();
+            console.warn(columnApi.getColumnState());
           }
         }}
         onSelectionChanged={_handleSelect}
         overlayNoRowsTemplate={t('core:messages.nothingToShow')}
         rowData={data}
+        rowHeight={rowHeight}
         rowSelection={select}
         suppressCellFocus
         suppressRowClickSelection

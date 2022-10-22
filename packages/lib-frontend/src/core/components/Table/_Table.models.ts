@@ -12,5 +12,6 @@ export interface _TablePropsModel<TType> extends WithForwardedRefPropsModel<Tabl
   isFullWidth?: boolean;
   onMount?: CallableModel;
   onSelect?(rows?: Array<TType>): void;
+  rowHeight?: number;
   select?: TableSelectTypeModel;
 }

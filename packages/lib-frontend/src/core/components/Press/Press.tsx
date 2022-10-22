@@ -40,7 +40,9 @@ export const Press: SFCModel<PressPropsModel> = ({
   const [confirmModalIsOpen, setConfirmModalIsOpen] = useState<boolean>(false);
 
   const theme = useTheme();
-  const _from = isEmpty(from) ? { backgroundColor: theme.colors.background.main } : from;
+  const _from = isEmpty(from)
+    ? { backgroundColor: isPressed ? theme.colors.background.muted : theme.colors.background.main }
+    : from;
   const _to = isEmpty(to) ? { backgroundColor: theme.colors.background.muted } : to;
 
   // const _handlePress = tracking

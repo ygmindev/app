@@ -1,5 +1,6 @@
 import { Appear } from '@lib/frontend/core/components/Appear/Appear';
 import { _Table } from '@lib/frontend/core/components/Table/_Table';
+import { TABLE_ROW_HEIGHT } from '@lib/frontend/core/components/Table/Table.constants';
 import type { TablePropsModel } from '@lib/frontend/core/components/Table/Table.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
@@ -11,7 +12,7 @@ export const Table = <TType,>({
   data,
   forwardedRef,
   isFullWidth,
-  isSortable,
+  rowHeight = TABLE_ROW_HEIGHT,
   onMount,
   onSelect,
   select,
@@ -36,12 +37,12 @@ export const Table = <TType,>({
           data={data}
           forwardedRef={forwardedRef}
           isFullWidth={isFullWidth}
-          isSortable={isSortable}
           onMount={() => {
             setIsMounted(true);
             onMount && onMount();
           }}
           onSelect={onSelect}
+          rowHeight={rowHeight}
           select={select}
         />
       </Appear>
