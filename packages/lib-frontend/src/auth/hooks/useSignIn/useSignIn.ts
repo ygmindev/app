@@ -20,7 +20,7 @@ export const useSignIn = (): UseSignInModel => {
 
   const signIn = async (signIn: SignInModel): Promise<void> => {
     const { token, user } = signIn;
-    token && signInWithToken(token);
+    token && (await signInWithToken(token));
     dispatch(userActions.currentUserSet(user || null));
     if (user) {
       identify(user._id);

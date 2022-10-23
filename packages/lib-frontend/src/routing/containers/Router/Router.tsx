@@ -9,7 +9,14 @@ const _pageToRoute = (routes: Array<PageModel>): Array<PageModel> =>
     ...route,
     element: <Page {...route} />,
     paths: [...(route.paths || []), route],
-    routes: route.routes ? _pageToRoute(route.routes) : undefined,
+    routes: route.routes
+      ? _pageToRoute(
+          route.routes.map((subRoute) => ({
+            ...subRoute,
+            isProtected: route.isProtected || subRoute.isProtected,
+          })),
+        )
+      : undefined,
   }));
 
 export const Router: FCModel<RouterPropsModel> = ({ routes, ...props }) => (

@@ -1,17 +1,21 @@
+import { useIsInitialized } from '@lib/frontend/app/hooks/useIsInitialized/useIsInitialized';
+import { SIGN_IN } from '@lib/frontend/auth/auth.constants';
+import { useIsAuthenticated } from '@lib/frontend/auth/hooks/useIsAuthenticated/useIsAuthenticated';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { NAVIGATION_TYPE } from '@lib/frontend/routing/components/Page/Page.constants';
 import type { PageModel } from '@lib/frontend/routing/components/Page/Page.models';
+import { Redirect } from '@lib/frontend/routing/components/Redirect/Redirect';
 import { RouteHeader } from '@lib/frontend/routing/components/RouteHeader/RouteHeader';
 import { RouteTabs } from '@lib/frontend/routing/containers/RouteTabs/RouteTabs';
 import { useRouter } from '@lib/frontend/routing/hooks/useRouter/useRouter';
 import { trimPathname } from '@lib/frontend/routing/utils/trimPathname/trimPathname';
-import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
 
 export const Page: SFCModel<PageModel> = ({
   children,
   element,
   icon,
+  isProtected,
   isTrackingEnabled = true,
   navigation,
   pathname,
@@ -19,8 +23,18 @@ export const Page: SFCModel<PageModel> = ({
   routes,
   title,
 }) => {
+  const isAuthenticated = useIsAuthenticated();
+  const isInitialized = useIsInitialized();
   const { isActive, location } = useRouter();
-  const theme = useTheme();
+
+  if (isProtected && isInitialized && !isAuthenticated) {
+    return (
+      <Redirect
+        params={{}}
+        pathname={SIGN_IN}
+      />
+    );
+  }
 
   const _isActive = isActive(pathname);
   // usePageAnalytics({
@@ -59,7 +73,7 @@ export const Page: SFCModel<PageModel> = ({
 
   switch (navigation) {
     case NAVIGATION_TYPE.PATH: {
-      _element = (
+      return (
         <Wrapper
           grow
           spacing>
@@ -75,8 +89,6 @@ export const Page: SFCModel<PageModel> = ({
       break;
     }
     default:
-      break;
+      return _element;
   }
-
-  return _element;
 };

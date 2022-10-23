@@ -28,6 +28,7 @@
     "aws-lambda": "^1.0.7",
     "axios": "^0.27.2",
     "class-validator": "^0.13.2",
+    "dataloader": "^2.1.0",
     "email-templates": "^10.0.1",
     "firebase": "^9.10.0",
     "firebase-admin": "^11.0.1",

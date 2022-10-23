@@ -9,6 +9,7 @@ import { NotFound } from '@lib/frontend/routing/containers/NotFound/NotFound';
 export const adminRoutes: Array<PageModel> = [
   {
     Layout: AppLayout,
+    isProtected: true,
     pathname: '/',
     routes: [
       {
