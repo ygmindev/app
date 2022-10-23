@@ -1,6 +1,6 @@
 import type { _UseRouterModel } from '@lib/frontend/routing/hooks/useRouter/_useRouter.models';
 import type { LocationModel } from '@lib/frontend/routing/routing.models';
-import { useLocation, useMatch, useNavigate, useParams } from 'react-router-native';
+import { matchPath, useLocation, useNavigate, useParams } from 'react-router-native';
 
 export const _useRouter = <TParams>(): _UseRouterModel<TParams> => {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ export const _useRouter = <TParams>(): _UseRouterModel<TParams> => {
     back: () => navigate(-1),
 
     isActive: (pathname) => {
-      const match = useMatch(pathname);
+      const match = matchPath(pathname, location.pathname);
       return match !== null;
     },
 

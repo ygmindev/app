@@ -7,6 +7,7 @@ import { find } from 'lodash';
 export const RouteTabs: SFCModel<RouteTabsPropsModel> = ({ tabs, ...props }) => {
   const { isActive, push } = useRouter();
   const currentTab = find(tabs, (tab) => isActive(tab.id));
+
   return (
     <Tabs
       {...props}

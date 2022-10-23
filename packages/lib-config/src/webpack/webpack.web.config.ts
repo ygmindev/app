@@ -6,9 +6,11 @@ import type { WebpackParamsModel } from '@lib/config/webpack/webpack.config.mode
 import { webpackConfig as webpackConfigFrontend } from '@lib/config/webpack/webpack.frontend.config';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
+import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { WEB_EXTENSIONS } from '@lib/shared/file/file.constants';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-import type { Configuration } from 'webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import type { Configuration, WebpackPluginInstance } from 'webpack';
 import type { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 
 export const webpackConfig = (
@@ -25,7 +27,15 @@ export const webpackConfig = (
 
         module: {
           rules: [
-            { test: /\.css$/, type: 'asset/source' },
+            {
+              test: /\.css$/,
+              use: [
+                process.env.NODE_ENV === ENVIRONMENT.PRODUCTION
+                  ? MiniCssExtractPlugin.loader
+                  : 'style-loader',
+                'css-loader',
+              ],
+            },
 
             {
               include: fromRoot('node_modules/react-native-vector-icons'),
@@ -41,7 +51,10 @@ export const webpackConfig = (
               { force: true, from: fromStatic('assets'), to: fromWorking('public/assets') },
             ],
           }),
-        ],
+
+          process.env.NODE_ENV === ENVIRONMENT.PRODUCTION &&
+            new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
+        ].filter(Boolean) as Array<WebpackPluginInstance>,
 
         resolve: { alias: { 'react-native$': 'react-native-web' } },
       },

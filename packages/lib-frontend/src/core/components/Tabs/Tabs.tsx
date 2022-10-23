@@ -4,6 +4,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useField } from '@lib/frontend/form/hooks/useField/useField';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
+import { THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
 
 export const Tabs: SFCModel<TabsPropsModel> = ({
   defaultValue,
@@ -22,9 +23,10 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
   });
   return (
     <Wrapper
+      grow={0}
       isHorizontalScrollable
       isRow={!isVertical}
-      spacing="s"
+      spacing={THEME_SIZE.SMALL}
       style={styles}
       testID={testID}>
       {tabs.map((tab) => {
@@ -35,7 +37,7 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
             isTransparent={!isActive}
             key={tab.id}
             onPress={() => setFieldValue(tab.id)}>
-            {tab.label}
+            {tab.label || tab.id}
           </Button>
         );
       })}
