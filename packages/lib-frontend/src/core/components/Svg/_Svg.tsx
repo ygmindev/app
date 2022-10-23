@@ -4,6 +4,10 @@ import type { SVGProps } from 'react';
 
 export const _Svg = composeComponent<_SvgPropsModel, SVGProps<SVGSVGElement>>({
   Component: 'svg',
-  getProps: ({ children, height, width }) => ({ children, height, width }),
+  getProps: ({ children, height = 0, isFullHeight, isFullWidth, width = 0 }) => ({
+    children,
+    height: isFullHeight ? '100%' : height,
+    width: isFullWidth ? '100%' : width,
+  }),
   isWeb: true,
 });

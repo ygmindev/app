@@ -5,11 +5,19 @@ import ContentLoader from 'react-content-loader';
 
 export const _Skeleton = composeComponent<_SkeletonPropsModel, IContentLoaderProps>({
   Component: ContentLoader,
-  getProps: ({ backgroundColor, children, foregroundColor, height, width }) => ({
+  getProps: ({
     backgroundColor,
     children,
     foregroundColor,
-    height,
-    width,
+    height = 0,
+    isFullHeight,
+    isFullWidth,
+    width = 0,
+  }) => ({
+    backgroundColor,
+    children,
+    foregroundColor,
+    height: isFullHeight ? '100%' : height,
+    width: isFullWidth ? '100%' : width,
   }),
 });

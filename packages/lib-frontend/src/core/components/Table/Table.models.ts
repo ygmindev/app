@@ -41,4 +41,6 @@ export interface TableRefModel {
   deselectRows: CallableModel;
 }
 
-export interface TablePropsModel<TType> extends _TablePropsModel<TType>, WithTestIdModel {}
+export interface TablePropsModel<TType> extends _TablePropsModel<TType>, WithTestIdModel {
+  isLoading?: boolean;
+}

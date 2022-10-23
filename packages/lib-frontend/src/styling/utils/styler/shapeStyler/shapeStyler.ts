@@ -7,6 +7,7 @@ export const shapeStyler: StylerModel<ShapeStylerParamsModel> = ({
   bottom,
   height,
   isAbsoluteFill,
+  isFullHeight,
   isFullWidth,
   isHidden,
   isOverflowHidden,
@@ -26,7 +27,7 @@ export const shapeStyler: StylerModel<ShapeStylerParamsModel> = ({
   cleanObject({
     bottom: isAbsoluteFill ? 0 : bottom,
     display: isHidden ? 'none' : undefined,
-    height,
+    height: isFullHeight ? '100%' : height,
     left: isAbsoluteFill ? 0 : left,
     maxHeight,
     maxWidth,

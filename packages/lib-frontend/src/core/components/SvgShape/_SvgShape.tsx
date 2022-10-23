@@ -8,6 +8,8 @@ export const _SvgShape: SFCModel<_SvgShapePropsModel> = ({
   borderRadius,
   borderWidth,
   height,
+  isFullHeight,
+  isFullWidth,
   radius,
   shape,
   width,
@@ -30,12 +32,12 @@ export const _SvgShape: SFCModel<_SvgShapePropsModel> = ({
       return (
         <rect
           fill={backgroundColor}
-          height={height}
+          height={isFullHeight ? '100%' : height}
           rx={borderRadius}
           ry={borderRadius}
           stroke={borderColor}
           strokeWidth={borderWidth}
-          width={width}
+          width={isFullWidth ? '100%' : width}
           x={x}
           y={y}
         />

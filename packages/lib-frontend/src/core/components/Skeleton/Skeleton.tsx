@@ -3,12 +3,13 @@ import type { SkeletonPropsModel } from '@lib/frontend/core/components/Skeleton/
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
 
-export const Skeleton: SFCModel<SkeletonPropsModel> = ({ ...props }) => {
+export const Skeleton: SFCModel<SkeletonPropsModel> = ({ height, width, ...props }) => {
   const theme = useTheme();
   return (
     <_Skeleton
-      backgroundColor={theme.colors.secondary.main}
-      foregroundColor={theme.colors.secondary.light}
+      backgroundColor={theme.colors.border}
+      height={height || 0}
+      width={width || 0}
       {...props}
     />
   );

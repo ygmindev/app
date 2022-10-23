@@ -58,7 +58,11 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
     TForm
   >({ fields: getConnectionFields, method: RESOURCE_METHOD_TYPE.GET_CONNECTION, name });
 
-  const { data, queryNext } = useQueryConnection<TType>({
+  const {
+    data,
+    isLoading: _isGetConnectionLoading,
+    queryNext,
+  } = useQueryConnection<TType>({
     id: `${name}${RESOURCE_METHOD_TYPE.GET_CONNECTION}`,
     limit,
     query: async (params) => {
@@ -70,7 +74,7 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
     },
   });
 
-  const { isLoading, query: remove } = useResourceMethod<
+  const { isLoading: _isRemoveLoading, query: remove } = useResourceMethod<
     RESOURCE_METHOD_TYPE.REMOVE,
     EntityResourceModel,
     TForm
@@ -83,6 +87,8 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
   useEffect(() => {
     queryNext();
   }, []);
+
+  const _isLoading = _isGetConnectionLoading || _isRemoveLoading;
 
   return (
     <Wrapper
@@ -105,35 +111,36 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
             {
               id: 'actions',
               pin: COLUMN_PIN_TYPE.RIGHT,
-              renderer: ({ row }) => (
-                <Wrapper isCenter>
-                  <Menu
-                    anchor={(isActive) => (
-                      <Icon
-                        icon={ICON.ellipsis}
-                        isPressed={isActive}
-                        size={THEME_SIZE.LARGE}
-                      />
-                    )}
-                    options={[
-                      {
-                        icon: ICON.edit,
-                        id: 'update',
-                        label: t('resource:labels.update'),
-                        onPress: () => setSelectedRow(row),
-                      },
-                      {
-                        color: THEME_COLOR.ERROR,
-                        confirmMessage: t('core:messages.confirmRemove'),
-                        icon: ICON.timesCircle,
-                        id: 'remove',
-                        label: t('resource:labels.remove'),
-                        onPress: () => _handleRemove(row._id),
-                      },
-                    ]}
-                  />
-                </Wrapper>
-              ),
+              renderer: ({ row }) =>
+                row._id && (
+                  <Wrapper isCenter>
+                    <Menu
+                      anchor={(isActive) => (
+                        <Icon
+                          icon={ICON.ellipsis}
+                          isPressed={isActive}
+                          size={THEME_SIZE.LARGE}
+                        />
+                      )}
+                      options={[
+                        {
+                          icon: ICON.edit,
+                          id: 'update',
+                          label: t('resource:labels.update'),
+                          onPress: () => setSelectedRow(row),
+                        },
+                        {
+                          color: THEME_COLOR.ERROR,
+                          confirmMessage: t('core:messages.confirmRemove'),
+                          icon: ICON.timesCircle,
+                          id: 'remove',
+                          label: t('resource:labels.remove'),
+                          onPress: () => _handleRemove(row._id),
+                        },
+                      ]}
+                    />
+                  </Wrapper>
+                ),
             },
           ]}
           data={reduce<ConnectionModel<TType> | null, Array<TType>>(
@@ -142,6 +149,7 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
             [],
           )}
           forwardedRef={ref}
+          isLoading={_isLoading}
           onSelect={setSelectedRows}
           select={TABLE_SELECT_TYPE.MULTIPLE}
         />

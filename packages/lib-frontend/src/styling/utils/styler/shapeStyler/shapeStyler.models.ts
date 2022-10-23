@@ -7,6 +7,7 @@ export type ShapePositionModel = `${SHAPE_POSITION}`;
 export interface ShapeStylerParamsModel extends DimensionModel {
   bottom?: number;
   isAbsoluteFill?: boolean;
+  isFullHeight?: boolean;
   isFullWidth?: boolean;
   isHidden?: boolean;
   isOverflowHidden?: boolean;

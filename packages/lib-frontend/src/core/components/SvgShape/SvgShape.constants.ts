@@ -3,4 +3,4 @@ export enum SVG_SHAPE {
   RECT = 'RECT',
 }
 
-export const SVG_SHAPE_HEIGHT_DEFAULT = 20;
+export const SVG_SHAPE_RECT_HEIGHT = 20;

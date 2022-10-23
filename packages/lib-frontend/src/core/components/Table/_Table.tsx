@@ -59,6 +59,7 @@ export const _Table = <TType,>({
   columns,
   data,
   forwardedRef,
+  isDisabled,
   isFullWidth,
   onMount,
   onSelect,
@@ -105,19 +106,24 @@ export const _Table = <TType,>({
       maxWidth: width,
       minWidth: width,
       pinned: pin,
+      showDisabledCheckboxes: true,
       sort: [COLUMN_SORT_TYPE.ASCENDING, COLUMN_SORT_TYPE.DESCENDING].includes(
         sort as COLUMN_SORT_TYPE,
       )
         ? (sort as COLUMN_SORT_TYPE)
         : undefined,
-      sortable: sort === true || !isEmpty(sort),
+      sortable: !isDisabled && (sort === true || !isEmpty(sort)),
       suppressSizeToFit: (width || 0) > 0,
       width,
     };
 
     if (renderer) {
       definition.cellRenderer = ({ node, value }: ICellRendererParams) => (
-        <Wrapper isRowAlign>{renderer({ row: node && node.data, value })}</Wrapper>
+        <Wrapper
+          isCenter
+          isFullHeight>
+          {renderer({ row: node && node.data, value })}
+        </Wrapper>
       );
     }
 
@@ -134,20 +140,19 @@ export const _Table = <TType,>({
         animateRows
         columnDefs={columns.map(_getColumnDef)}
         debounceVerticalScrollbar
+        isRowSelectable={() => !isDisabled}
         loadingOverlayComponent={Text}
         onGridReady={async ({ api, columnApi }) => {
           await sleep({ duration });
           isFullWidth ? api.sizeColumnsToFit() : columnApi.autoSizeAllColumns();
           setGridApi(api);
           setColumnApi(columnApi);
-          console.warn(columnApi.getColumnState());
           onMount && onMount();
         }}
         onRowDataUpdated={async () => {
           if (gridApi && columnApi) {
             await sleep({ duration });
             isFullWidth ? gridApi.sizeColumnsToFit() : columnApi.autoSizeAllColumns();
-            console.warn(columnApi.getColumnState());
           }
         }}
         onSelectionChanged={_handleSelect}
