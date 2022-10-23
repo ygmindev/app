@@ -1,4 +1,4 @@
-import type { AlertModel } from '@lib/frontend/notification/components/Alert/Alert.models';
+import type { NotificationModel } from '@lib/frontend/notification/components/Notification/Notification.models';
 import { NOTIFICATION_STATE_INITIAL } from '@lib/frontend/notification/stores/reducer/reducer.constants';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import { NOTIFICATION } from '@lib/shared/notification/notification.constants';
@@ -14,15 +14,15 @@ export const { actions: notificationActions, reducer: notificationReducer } = cr
   initialState: NOTIFICATION_STATE_INITIAL,
   name: NOTIFICATION,
   reducers: {
-    alertAdd: {
-      prepare: (payload: Omit<AlertModel, 'id'>) => ({
+    add: {
+      prepare: (payload: Omit<NotificationModel, 'id'>) => ({
         payload: { ...payload, id: uid('alert') },
       }),
-      reducer: (state, { payload }: PayloadAction<AlertModel>) => {
+      reducer: (state, { payload }: PayloadAction<NotificationModel>) => {
         state.alerts.unshift(payload);
       },
     },
-    alertRemove: (state, { payload }: PayloadAction<string>) => {
+    remove: (state, { payload }: PayloadAction<string>) => {
       state.alerts = state.alerts.filter(({ id }) => id !== payload);
     },
   },

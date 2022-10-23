@@ -7,10 +7,10 @@ import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.
 import { useMountAsync } from '@lib/frontend/core/hooks/useMountAsync/useMountAsync';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import {
-  ALERT_DURATION,
-  ALERT_WIDTH,
-} from '@lib/frontend/notification/components/Alert/Alert.constants';
-import type { AlertPropsModel } from '@lib/frontend/notification/components/Alert/Alert.models';
+  NOTIFICATION_DURATION,
+  NOTIFICATION_WIDTH,
+} from '@lib/frontend/notification/components/Notification/Notification.constants';
+import type { NotificationPropsModel } from '@lib/frontend/notification/components/Notification/Notification.models';
 import { notificationActions } from '@lib/frontend/notification/stores/reducer/reducer';
 import { dispatch } from '@lib/frontend/root/stores/store/store';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
@@ -25,7 +25,7 @@ import {
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { useCallback, useState } from 'react';
 
-export const Alert: SFCModel<AlertPropsModel> = ({
+export const Notification: SFCModel<NotificationPropsModel> = ({
   color = THEME_COLOR.PRIMARY,
   icon,
   id,
@@ -41,12 +41,12 @@ export const Alert: SFCModel<AlertPropsModel> = ({
 
   const _handleClose = useCallback(() => {
     setIsVisible(false);
-    setTimeout(() => dispatch(notificationActions.alertRemove(id)), theme.animation.duration);
+    setTimeout(() => dispatch(notificationActions.remove(id)), theme.animation.duration);
   }, [id, setIsVisible, theme.animation.duration]);
 
   useMountAsync(
     {
-      onMount: async () => (isPermanent ? null : sleep({ duration: ALERT_DURATION })),
+      onMount: async () => (isPermanent ? null : sleep({ duration: NOTIFICATION_DURATION })),
       onSuccess: _handleClose,
     },
     [id, _handleClose, isPermanent],
@@ -65,12 +65,12 @@ export const Alert: SFCModel<AlertPropsModel> = ({
         mBottom
         position={SHAPE_POSITION.RELATIVE}
         round
-        width={ALERT_WIDTH}>
+        width={NOTIFICATION_WIDTH}>
         {isPermanent ? null : (
           <Wrapper
             animation={{
-              animation: { from: { width: 0 }, to: { width: ALERT_WIDTH } },
-              duration: ALERT_DURATION,
+              animation: { from: { width: 0 }, to: { width: NOTIFICATION_WIDTH } },
+              duration: NOTIFICATION_DURATION,
             }}
             backgroundColor={color}
             backgroundShade={THEME_SHADE.LIGHT}

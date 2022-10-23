@@ -1,4 +1,3 @@
-import { USER_EXISTS_ALERT } from '@lib/frontend/auth/containers/OtpForm/OtpForm.constants';
 import {
   USERNAME_FORM_FIELDS,
   USERNAME_FORM_VALIDATORS,
@@ -10,10 +9,11 @@ import type {
 import { useOtpResource } from '@lib/frontend/auth/hooks/useOtpResource/useOtpResource';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
+import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayout';
 import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useAlert } from '@lib/frontend/notification/hooks/useAlert/useAlert';
+import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { isTypeOf } from '@lib/shared/core/utils/isTypeOf/isTypeOf';
@@ -28,7 +28,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   useTranslation([USER]);
 
   const { styles } = useStyles({ props });
-  const { alertAdd } = useAlert();
+  const { error } = useNotification();
 
   const { create, createIfNotExists } = useOtpResource();
 
@@ -40,7 +40,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
       result && onSuccess && (await onSuccess(data, result));
     } catch (e) {
       if (isCheckIfNotExists && isTypeOf(e, DuplicateError)) {
-        return alertAdd(USER_EXISTS_ALERT);
+        return error({ icon: ICON.people, message: ({ t }) => t('auth:messages.userExistsError') });
       }
       throw e;
     }

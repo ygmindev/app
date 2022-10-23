@@ -13,7 +13,7 @@ import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayo
 import { useForm } from '@lib/frontend/form/hooks/useForm/useForm';
 import { Trans } from '@lib/frontend/locale/components/Trans/Trans';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useAlert } from '@lib/frontend/notification/hooks/useAlert/useAlert';
+import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
 import { AUTH } from '@lib/shared/auth/auth.constants';
@@ -23,12 +23,11 @@ import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.co
 
 export const OtpForm: SFCModel<OtpFormPropsModel> = (props) => {
   const { t } = useTranslation([AUTH]);
-  const { alertAdd } = useAlert();
+  const { error } = useNotification();
 
   const _handleError = (e: Error): void => {
     if ((e as HttpError).statusCode === HTTP_STATUS_CODE.FORBIDDEN) {
-      alertAdd({
-        color: THEME_COLOR.ERROR,
+      error({
         icon: ICON.ban,
         message: t('auth:messages.invalidOtp'),
         title: t('auth:labels.invalidOtp'),

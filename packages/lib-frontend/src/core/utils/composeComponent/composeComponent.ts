@@ -21,7 +21,7 @@ export const composeComponent = <TParams, TResult, TRef = unknown>({
       const create = isWeb ? unstable_createElement : createElement;
       return create(Component, {
         ...componentProps,
-        nativeID: props.nativeID,
+        nativeid: props.nativeID,
         ref,
         style: componentStyles,
       });

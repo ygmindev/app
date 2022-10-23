@@ -1,6 +1,6 @@
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { Alerts } from '@lib/frontend/notification/containers/Alerts/Alerts';
+import { Notifications } from '@lib/frontend/notification/containers/Notifications/Notifications';
 import type { NotificationProviderPropsModel } from '@lib/frontend/notification/providers/NotificationProvider/NotificationProvider.models';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants';
@@ -19,7 +19,7 @@ export const NotificationProvider: SFCModel<NotificationProviderPropsModel> = ({
       testID={testID}>
       {children}
 
-      <Alerts />
+      <Notifications />
     </Wrapper>
   );
 };

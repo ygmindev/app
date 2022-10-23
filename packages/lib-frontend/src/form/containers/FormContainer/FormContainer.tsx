@@ -18,8 +18,7 @@ import type {
 } from '@lib/frontend/form/containers/FormContainer/FormContainer.models';
 import { useForm } from '@lib/frontend/form/hooks/useForm/useForm';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useAlert } from '@lib/frontend/notification/hooks/useAlert/useAlert';
-import { UNKNOWN_ALERT } from '@lib/frontend/notification/notification.constants';
+import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { FLEX_JUSTIFY } from '@lib/frontend/styling/utils/styler/flexStyler/flexStyler.constants';
 import { THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
@@ -44,7 +43,7 @@ export const FormContainer = <TType,>({
 }: FormContainerPropsModel<TType>): ReactElement<FormContainerPropsModel<TType>> => {
   const { styles } = useStyles({ props });
   const { t } = useTranslation();
-  const { alertAdd } = useAlert();
+  const { error } = useNotification();
   const isMobile = useIsMobile();
 
   const _fieldIds = useMemo(() => map(flatten(map(rows, 'fields')), 'id'), [rows]);
@@ -53,7 +52,7 @@ export const FormContainer = <TType,>({
     const initialValuesPick = pick(initialValues, _fieldIds);
     const valuesPicked = pick(values, _fieldIds);
     return isEqual(initialValuesPick, valuesPicked)
-      ? alertAdd({ ...UNKNOWN_ALERT, message: t('core:messages.validateChanged') })
+      ? error({ message: t('core:messages.validateChanged') })
       : onSubmit && onSubmit(valuesPicked as TType);
   };
 

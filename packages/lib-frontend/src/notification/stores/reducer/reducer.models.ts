@@ -1,5 +1,5 @@
-import type { AlertModel } from '@lib/frontend/notification/components/Alert/Alert.models';
+import type { NotificationModel } from '@lib/frontend/notification/components/Notification/Notification.models';
 
 export interface NotificationStateModel {
-  alerts: Array<AlertModel>;
+  alerts: Array<NotificationModel>;
 }
