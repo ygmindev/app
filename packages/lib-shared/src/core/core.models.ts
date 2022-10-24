@@ -10,9 +10,14 @@ export type PartialModel<TType> = Partial<TType> | TType;
 
 export type PartialDeepModel<TType> = PartialDeep<TType>;
 
-export type CallableModel<TParams extends Array<unknown> = never, TResult = void> = (
+export type CallableModel<TResult = void, TParams extends Array<unknown> = never> = (
   ...args: TParams
 ) => TResult;
+
+export type PromiseModel<TResult = void, TParams extends Array<unknown> = never> = CallableModel<
+  Promise<TResult>,
+  TParams
+>;
 
 export type InferModel<TType> = TType extends Array<infer TElement> ? TElement : TType;
 

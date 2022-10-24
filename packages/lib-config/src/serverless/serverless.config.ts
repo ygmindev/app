@@ -1,4 +1,5 @@
 import { APP_NAME as APP_WEB_NAME } from '@app/web/app/app.constants';
+import { APP_NAME as APP_WEB_ADMIN_NAME } from '@app/web-admin/app/app.constants';
 import { serverlessNodeConfig } from '@lib/config/serverless/serverless.node.config';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
@@ -48,7 +49,7 @@ export const serverlessConfig = merge({
             allowedHeaders: ['*'],
             allowedOrigins: [
               ...new Set([
-                appUri({ name: 'APP_WEB_ADMIN' }),
+                appUri({ name: APP_WEB_ADMIN_NAME }),
                 appUri({ name: 'APP_SSR' }),
                 appUri({ name: APP_WEB_NAME }),
               ]),

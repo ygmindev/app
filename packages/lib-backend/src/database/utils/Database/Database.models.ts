@@ -1,5 +1,5 @@
 import type { DATABASE_TYPE } from '@lib/backend/database/utils/Database/Database.constants';
-import type { ConstructorModel } from '@lib/shared/core/core.models';
+import type { ConstructorModel, PromiseModel } from '@lib/shared/core/core.models';
 import type { WithResourceNameModel } from '@lib/shared/resource/decorators/withResourceName/withResourceName.models';
 import type {
   EntityResourceDataModel,
@@ -24,13 +24,13 @@ export interface DatabaseConnectionPoolModel {
 }
 
 export interface DatabaseModel {
-  close(): Promise<void>;
+  close: PromiseModel;
   getRepository<TType>(params: WithResourceNameModel): RepositoryModel<TType>;
-  initialize(): Promise<void>;
+  initialize: PromiseModel;
 }
 
 export interface RepositoryModel<TType>
   extends ResourceServiceModel<TType, EntityResourceDataModel<TType>> {
-  clear(): Promise<void>;
-  count(): Promise<number>;
+  clear: PromiseModel;
+  count: PromiseModel<number>;
 }

@@ -87,6 +87,7 @@ export const FormContainer = <TType,>({
               key={id}
               onChange={_onChange}
               onSubmit={_onSubmit}
+              testID={id}
               value={_value}
             />
           );
@@ -101,6 +102,7 @@ export const FormContainer = <TType,>({
               key={id}
               onChange={_onChange}
               onSubmit={_onSubmit}
+              testID={id}
               value={_value}
             />
           );
@@ -114,7 +116,7 @@ export const FormContainer = <TType,>({
               onChange: _onChange,
               value: _value,
             }),
-            { key: id },
+            { key: id, testID: id },
           );
         }
       }

@@ -4,9 +4,7 @@ import type { _RenderHookModel } from '@lib/frontend/testing/utils/renderHook/_r
 import type { CallableModel } from '@lib/shared/core/core.models';
 import { renderHook } from '@testing-library/react';
 
-export const _renderHook = <TResult,>(
-  hook: CallableModel<never, TResult>,
-): _RenderHookModel<TResult> => {
+export const _renderHook = <TResult,>(hook: CallableModel<TResult>): _RenderHookModel<TResult> => {
   const { result, unmount } = renderHook(hook, {
     wrapper: ({ children, ...props }) => (
       <Root

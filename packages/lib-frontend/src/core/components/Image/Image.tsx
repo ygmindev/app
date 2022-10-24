@@ -1,9 +1,9 @@
 import { _Image } from '@lib/frontend/core/components/Image/_Image';
 import type { ImagePropsModel } from '@lib/frontend/core/components/Image/Image.models';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import type { DimensionModel } from '@lib/frontend/platform/platform.models';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { shapeStyler } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler';
+import type { DimensionModel } from '@lib/frontend/platform/platform.models';
 import { isArray } from 'lodash';
 import { useCallback, useState } from 'react';
 import type { ImageStyle } from 'react-native';

@@ -3,6 +3,7 @@ import type {
   _UseQueryResultModel,
 } from '@lib/frontend/core/hooks/useQuery/_useQuery.models';
 import type { QueryConnectionModel } from '@lib/frontend/core/hooks/useQueryConnection/useQueryConnection.models';
+import type { PromiseModel } from '@lib/shared/core/core.models';
 import type { ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
 import type { PaginationModel } from '@lib/shared/resource/utils/Pagination/Pagination.models';
 
@@ -15,5 +16,5 @@ export interface _UseQueryConnectionParamsModel<TType>
 export interface _UseQueryConnectionResultModel<TType, TError extends Error = Error>
   extends Omit<_UseQueryResultModel<TType, TError>, 'data' | 'query'> {
   data?: QueryConnectionModel<TType>;
-  queryNext(): Promise<void>;
+  queryNext: PromiseModel;
 }

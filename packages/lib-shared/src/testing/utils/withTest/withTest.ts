@@ -9,7 +9,7 @@ import type {
 export const withTest = <TType>({
   displayName,
   target,
-}: WithTestParamsModel<CallableModel<never, TType>>): WithTestModel => {
+}: WithTestParamsModel<CallableModel<TType>>): WithTestModel => {
   const _displayName = displayName || variableName(target) || uid('display-name');
   return { displayName: _displayName };
 };

@@ -6,7 +6,7 @@ export const debounce = <TParams extends Array<unknown> = never, TResult = void>
   callback,
   duration = 0,
   isLeading = false,
-}: DebounceParamsModel<TParams, TResult>): CallableModel<TParams, TResult | undefined> =>
+}: DebounceParamsModel<TParams, TResult>): CallableModel<TResult | undefined, TParams> =>
   _debounce(
     callback,
     duration,
