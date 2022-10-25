@@ -9,6 +9,8 @@ import type { FormValidatorsModel } from '@lib/frontend/form/form.models';
 import { validateEmail } from '@lib/frontend/form/utils/validateEmail/validateEmail';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
 
+export const USERNAME_FORM_TEST_ID = 'USERNAME_FORM_TEST_ID';
+
 // TODO: phone form
 export const USERNAME_FORM_VALIDATORS: FormValidatorsModel<UsernameFormModel> = {
   username: validateEmail(),

@@ -156,7 +156,8 @@ export const FormContainer = <TType,>({
             icon={ICON.chevronLeft}
             isLoading={_isLoading}
             isTransparent
-            onPress={onCancel}>
+            onPress={onCancel}
+            testID={`${testID}-cancel`}>
             {cancelLabel || t('core:labels.cancel')}
           </Button>
         )}
@@ -164,7 +165,8 @@ export const FormContainer = <TType,>({
         <Button
           icon={ICON.chevronRight}
           isLoading={_isLoading}
-          onPress={handleSubmit}>
+          onPress={handleSubmit}
+          testID={`${testID}-submit`}>
           {submitLabel || t('core:labels.submit')}
         </Button>
       </Wrapper>

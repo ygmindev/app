@@ -41,11 +41,11 @@ export const setup = ({
     {},
   );
 
-  process.env.NODE_ENV === 'production' &&
+  environment === 'production' &&
     writes &&
     envs &&
     writeFileSync(
-      fromWorking(`.env.${process.env.NODE_ENV}`),
+      fromWorking(`.env.${environment}`),
       map(envs, (v, k) => `${k.trim()}=${toString(v).trim()}`).join('\n'),
     );
 

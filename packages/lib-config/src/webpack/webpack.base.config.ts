@@ -68,11 +68,7 @@ export const webpackConfig = ({
 
       new EnvironmentPlugin(keys(process.env)),
 
-      globals &&
-        new DefinePlugin({
-          'process.env': mapValues(process.env, JSON.stringify),
-          ...mapValues(globals, JSON.stringify),
-        }),
+      new DefinePlugin(mapValues(globals, JSON.stringify)),
 
       new CircularDependencyPlugin({
         allowAsyncCycles: true,

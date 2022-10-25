@@ -12,7 +12,6 @@ yarn-error.log
 
 # Tests
 test-results
-playwright-report
 coverage
 
 # IDEs and editors

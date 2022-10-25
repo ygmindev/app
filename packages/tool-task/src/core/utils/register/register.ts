@@ -3,8 +3,7 @@ import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { sequence } from '@lib/shared/core/utils/sequence/sequence';
-import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
-import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
+import type { EnvironmentModel } from '@lib/shared/environment/environment.models';
 import { setup } from '@lib/shared/environment/utils/setup/setup';
 import { error, info, warn } from '@lib/shared/logging/utils/logger/logger';
 import { _register } from '@tool/task/core/utils/register/_register';
@@ -89,7 +88,7 @@ export const register = <TOptions = object>({
       );
     }
 
-    setup({ environment: environment || getEnv('NODE_ENV', ENVIRONMENT.DEVELOPMENT), overrides });
+    setup({ environment: environment || (process.env.NODE_ENV as EnvironmentModel), overrides });
 
     if (dependencies) {
       const dependenciesPromise = dependencies.map(_getTaskByName);

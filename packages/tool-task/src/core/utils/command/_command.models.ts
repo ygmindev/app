@@ -3,6 +3,5 @@ export interface _CommandParamsModel {
   isNew?: boolean;
   isSilent?: boolean;
   onData?(value: string): void;
-  onError?(value: string): void;
   root?: string;
 }

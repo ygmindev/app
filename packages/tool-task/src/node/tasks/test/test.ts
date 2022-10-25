@@ -16,7 +16,7 @@ export const test: RegisterParamsModel<TestParamsModel> = {
   name: 'test',
 
   task: async ({ options, root }) => {
-    const configFilePath = options?.configFilePath || fromWorking('jest.config.ts');
+    const configFilePath = options.configFilePath || fromWorking('jest.config.ts');
     const config: Config.InitialOptions = (await import(configFilePath)).default;
     const testMatch =
       (options?.isPrompt && (await prompt([{ isOptional: true, key: 'testMatch' }])).testMatch) ||

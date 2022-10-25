@@ -10,9 +10,22 @@ export const _screen = async (): Promise<_ScreenModel> => {
   _page = _page || (await _browser.newPage());
 
   return {
+    click: async (testID) => {
+      const selector = `[data-testid="${testID}"]`;
+      await _page.waitForSelector(selector);
+      await _page.click(selector);
+    },
+
     close: async () => _browser.close(),
+
     open: async (route) => {
       await _page.goto(route);
+    },
+
+    type: async (testID, value) => {
+      const selector = `[data-testid="${testID}"] input`;
+      await _page.waitForSelector(selector);
+      await _page.type(selector, value);
     },
   };
 };

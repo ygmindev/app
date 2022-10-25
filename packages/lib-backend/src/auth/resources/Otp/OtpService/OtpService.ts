@@ -2,7 +2,11 @@ import { mail } from '@lib/backend/mail/utils/mail/mail';
 import { EntityResourceService } from '@lib/backend/resource/resources/EntityResource/EntityResourceService/EntityResourceService';
 import { UserService } from '@lib/backend/user/resources/User/UserService/UserService';
 import { InvalidOtpError } from '@lib/shared/auth/errors/InvalidOtpError/InvalidOtpError';
-import { OTP_LENGTH, OTP_RESOURCE_NAME } from '@lib/shared/auth/resources/Otp/Otp.constants';
+import {
+  OTP_LENGTH,
+  OTP_RESOURCE_NAME,
+  OTP_STATIC,
+} from '@lib/shared/auth/resources/Otp/Otp.constants';
 import type { OtpFormModel, OtpModel } from '@lib/shared/auth/resources/Otp/Otp.models';
 import type { OtpServiceModel } from '@lib/shared/auth/resources/Otp/OtpService/OtpService.models';
 import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
@@ -40,7 +44,8 @@ export class OtpService
     beforeCreate: async ({ input }) => {
       const service = Container.get(OtpService);
       await service.remove({ filter: { username: input.form.username } });
-      input.form.otp = randomInt(OTP_LENGTH).toString();
+      input.form.otp =
+        process.env.NODE_ENV === 'test' ? OTP_STATIC : randomInt(OTP_LENGTH).toString();
       return input;
     },
 
