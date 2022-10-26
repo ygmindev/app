@@ -50,6 +50,8 @@ export const jestConfig: Config.InitialOptions = {
 
   testEnvironment: 'node',
 
+  testTimeout: 30e3, // 30 seconds
+
   transform: {
     '^.+\\.(js|jsx)$': 'babel-jest',
     '^.+\\.(ts|tsx)$': [
