@@ -18,12 +18,19 @@ describe('sign in', () => {
   });
 
   test('works', async () => {
+    console.warn(1);
     await _screen.open(`${URI}${trimPathname(SIGN_IN)}`);
 
+    console.warn(2);
     await _screen.type('username', 'admin@admin.com');
 
+    console.warn(3);
     await _screen.click(`${USERNAME_FORM_TEST_ID}-submit`);
 
+    console.warn(4);
     await _screen.type(OTP_FIELD_MAIN_TEST_ID, OTP_STATIC);
+
+    console.warn(5);
+    expect(1).toStrictEqual(1);
   });
 });

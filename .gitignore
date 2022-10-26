@@ -31,6 +31,7 @@ coverage
 !.vscode/extensions.json
 
 # misc
+.cache
 .sass-cache
 connect.lock
 libpeerconnection.log

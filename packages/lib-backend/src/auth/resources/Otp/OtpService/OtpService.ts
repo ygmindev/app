@@ -22,6 +22,7 @@ import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 
 const SERVER_EMAIL_USERNAME = getEnv('SERVER_EMAIL_USERNAME');
+const IS_OTP_STATIC = getEnv('OTP_STATIC', false);
 
 @withContainer()
 export class OtpService
@@ -44,8 +45,7 @@ export class OtpService
     beforeCreate: async ({ input }) => {
       const service = Container.get(OtpService);
       await service.remove({ filter: { username: input.form.username } });
-      input.form.otp =
-        process.env.NODE_ENV === 'test' ? OTP_STATIC : randomInt(OTP_LENGTH).toString();
+      input.form.otp = IS_OTP_STATIC ? OTP_STATIC : randomInt(OTP_LENGTH).toString();
       return input;
     },
 

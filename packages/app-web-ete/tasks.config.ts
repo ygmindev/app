@@ -1,3 +1,4 @@
+import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { register } from '@tool/task/core/utils/register/register';
 import { TASK_RESULTS_STATUS_TYPE } from '@tool/task/core/utils/register/register.constants';
 import { runCommands } from '@tool/task/core/utils/runCommands/runCommands';
@@ -7,6 +8,8 @@ import { name } from './package.json';
 
 register({
   name: 'setup',
+
+  overrides: { OTP_STATIC: 'true' },
 
   target: name,
 
@@ -21,4 +24,7 @@ register({
   },
 });
 
-registerNodeTasks({ name });
+registerNodeTasks({
+  name,
+  testOverrides: { dependencies: ['awes'], environment: ENVIRONMENT.DEVELOPMENT },
+});
