@@ -33,7 +33,6 @@ export const useNotification = (): UseNotificationModel => {
 
     success: (alert) => _add({ ...alert, color: THEME_COLOR.SUCCESS, icon: ICON.checkCircle }),
 
-    warn: (alert) =>
-      _add({ ...alert, color: THEME_COLOR.WARNING, icon: ICON.exclamationCircle }),
+    warn: (alert) => _add({ ...alert, color: THEME_COLOR.WARNING, icon: ICON.exclamationCircle }),
   };
 };

@@ -2,4 +2,7 @@ import { registerNodeTasks } from '@tool/task/node/utils/registerNodeTasks/regis
 
 import { name } from './package.json';
 
-registerNodeTasks({ isDatabaseStart: true, name });
+registerNodeTasks({
+  name,
+  testOverrides: { cleanups: ['database-close'], dependencies: ['database-kill'] },
+});

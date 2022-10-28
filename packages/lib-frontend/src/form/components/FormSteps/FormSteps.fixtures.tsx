@@ -20,7 +20,10 @@ export interface FormStepsFixtureStepThreeModel {
   stepThree: string;
 }
 
-export const STEPS_FIXTURE_PROPS: FormStepsPropsModel<FormStepsFixtureModel> = {
+export const STEPS_FIXTURE_PROPS: FormStepsPropsModel<
+  FormStepsFixtureModel,
+  [FormStepsFixtureStepOneModel, FormStepsFixtureStepTwoModel, FormStepsFixtureStepThreeModel]
+> = {
   children: [
     <FormContainer<FormStepsFixtureStepOneModel>
       initialValues={{ stepOne: '' }}

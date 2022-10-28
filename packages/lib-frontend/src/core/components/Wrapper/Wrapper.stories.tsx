@@ -25,9 +25,11 @@ const { Default, meta } = withStory<WrapperPropsModel>({
         children: [
           <WrapperFixture text="1" />,
           <Fragment>
-            <WrapperFixture text="2" />,
-            <WrapperFixture text="3" />,
-            <WrapperFixture text="4" />,
+            <WrapperFixture text="2" />
+
+            <WrapperFixture text="3" />
+
+            <WrapperFixture text="4" />
           </Fragment>,
         ],
         spacing: true,

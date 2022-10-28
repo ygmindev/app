@@ -1,6 +1,6 @@
 import { AppProvider } from '@lib/frontend/app/providers/AppProvider/AppProvider';
-import { ErrorProvider } from '@lib/frontend/app/providers/ErrorProvider/ErrorProvider';
 import { AuthProvider } from '@lib/frontend/auth/providers/AuthProvider/AuthProvider';
+import { ErrorBoundary } from '@lib/frontend/core/components/ErrorBoundary/ErrorBoundary';
 import { PortalProvider } from '@lib/frontend/core/components/Portal/Portal';
 import type { FCModel } from '@lib/frontend/core/core.models';
 import { QueryProvider } from '@lib/frontend/core/providers/QueryProvider/QueryProvider';
@@ -21,7 +21,7 @@ const providers = [
   TrackingProvider,
   AuthProvider,
   LocaleProvider,
-  ErrorProvider,
+  ErrorBoundary,
   NotificationProvider,
   StyleProvider,
   QueryProvider,

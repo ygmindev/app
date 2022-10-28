@@ -19,7 +19,8 @@ export const TABLE_FIXTURE_COLUMNS: Array<TableColumnModel<TableFixtureRowModel,
     label: 'Number Column',
   },
   {
-    formatter: ({ value }) => dateTimeFormat({ format: DATE_TIME_FORMAT_TYPE.DATE, value }),
+    formatter: ({ value }) =>
+      dateTimeFormat({ format: DATE_TIME_FORMAT_TYPE.DATE, value: value as Date }),
     id: 'dateColumn',
     label: 'Date Column',
   },

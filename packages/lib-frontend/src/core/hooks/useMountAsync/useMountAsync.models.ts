@@ -1,6 +1,6 @@
-import type { PromiseModel } from '@lib/shared/core/core.models';
+import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 
 export interface UseMountAsyncParamsModel<TResult> {
-  onMount?: PromiseModel<TResult | null>;
+  onMount?: CallablePromiseModel<TResult | null>;
   onSuccess?(result: TResult): void;
 }

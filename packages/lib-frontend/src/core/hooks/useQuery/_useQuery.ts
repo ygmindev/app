@@ -22,7 +22,7 @@ export const _useQuery = <TType, TError extends Error = Error>({
 
   const { data, error, isError, isFetching, isStale, refetch } = useQuery<TType | null, TError>(
     [id],
-    query,
+    async () => query(),
     { cacheTime, retry: false, staleTime: cacheTime },
   );
 

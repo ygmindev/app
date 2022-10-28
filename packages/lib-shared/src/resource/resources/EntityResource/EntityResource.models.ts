@@ -1,8 +1,8 @@
-import type { PartialModel, PromiseModel } from '@lib/shared/core/core.models';
+import type { CallablePromiseModel, PartialModel } from '@lib/shared/core/core.models';
 
 export interface EntityResourceModel {
   _id: string;
-  beforeCreate?: PromiseModel;
+  beforeCreate?: CallablePromiseModel;
   created: Date;
 }
 

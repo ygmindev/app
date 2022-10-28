@@ -6,4 +6,6 @@ export interface OtpFormModel {
   otp: string;
 }
 
-export interface OtpFormPropsModel extends WithStyleParamsModel, FormStepPropsModel<SignInFormModel> {}
+export interface OtpFormPropsModel
+  extends WithStyleParamsModel,
+    FormStepPropsModel<SignInFormModel> {}
