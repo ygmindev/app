@@ -9,7 +9,7 @@ import type {
   HttpServiceParamsModel,
 } from '@lib/shared/http/utils/HttpService/HttpService.models';
 import { uri } from '@lib/shared/http/utils/uri/uri';
-import type { AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import axios from 'axios';
 
 export class _HttpService implements _HttpServiceModel {
@@ -34,8 +34,9 @@ export class _HttpService implements _HttpServiceModel {
       );
 
     onResponse &&
-      this._instance.interceptors.response.use(({ data, headers, status, statusText, ...params }) =>
-        onResponse({ ...params, data, headers, status, statusText }),
+      this._instance.interceptors.response.use(
+        async ({ data, headers, status, statusText, ...params }) =>
+          onResponse({ ...params, data, headers, status, statusText }) as Promise<AxiosResponse>,
       );
   }
 

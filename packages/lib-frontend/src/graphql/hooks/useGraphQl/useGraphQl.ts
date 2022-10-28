@@ -39,7 +39,7 @@ export const useGraphQl = (useApiParams: UseGraphQlParamsModel = {}): UseGraphQl
           `),
           variables,
         },
-        path: '/',
+        path: '',
       }).finally(async () => setIsLoading(false));
 
       return (result && result.data && result.data[name]) || null;

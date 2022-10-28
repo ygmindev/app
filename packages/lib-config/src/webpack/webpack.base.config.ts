@@ -40,9 +40,9 @@ export const webpackConfig = ({
       parser: { javascript: { reexportExportsPresence: false } },
 
       rules: [
-        transpile && { include: transpile, test: /\.[mtj]sx?$/i, use: [_loader] },
+        transpile && { include: transpile, test: /\.[cmtj]sx?$/i, use: [_loader] },
 
-        { exclude: [/node_modules/], test: /\.[mtj]sx?$/i, use: [_loader] },
+        { exclude: [/node_modules/], test: /\.[cmtj]sx?$/i, use: [_loader] },
       ].filter(Boolean) as Array<RuleSetRule>,
 
       strictExportPresence: false,

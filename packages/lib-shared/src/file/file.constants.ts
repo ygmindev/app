@@ -1,7 +1,7 @@
 const _permuteExtensions = (x: Array<string>, y: Array<string>): Array<string> =>
   x.flatMap((a) => y.map((b) => `${a}${b}`));
 
-export const NODE_EXTENSIONS = ['.tsx', '.ts', '.jsx', '.js', '.json'];
+export const NODE_EXTENSIONS = ['.tsx', '.ts', '.jsx', '.js', '.json', '.mjs', '.cjs'];
 
 export const BACKEND_EXTENSIONS = _permuteExtensions(['.backend'], NODE_EXTENSIONS);
 
