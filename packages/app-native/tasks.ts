@@ -1,7 +1,7 @@
 import { register } from '@tool/task/core/utils/register/register';
-import { dev } from '@tool/task/native/tasks/dev/dev';
-import { iosDev } from '@tool/task/native/tasks/iosDev/iosDev';
-import { iosPod } from '@tool/task/native/tasks/iosPod/iosPod';
+import { dev } from '@tool/task/native/templates/dev/dev';
+import { iosDev } from '@tool/task/native/templates/iosDev/iosDev';
+import { iosPod } from '@tool/task/native/templates/iosPod/iosPod';
 import { registerNodeTasks } from '@tool/task/node/utils/registerNodeTasks/registerNodeTasks';
 
 import { name } from './package.json';

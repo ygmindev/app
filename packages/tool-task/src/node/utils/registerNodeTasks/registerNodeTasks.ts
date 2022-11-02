@@ -1,8 +1,8 @@
-import { clean } from '@tool/task/core/tasks/clean/clean';
+import { clean } from '@tool/task/core/templates/clean/clean';
 import { register } from '@tool/task/core/utils/register/register';
-import { lint } from '@tool/task/node/tasks/lint/lint';
-import { packageExtend } from '@tool/task/node/tasks/packageExtend/packageExtend';
-import { test } from '@tool/task/node/tasks/test/test';
+import { lint } from '@tool/task/node/templates/lint/lint';
+import { packageExtend } from '@tool/task/node/templates/packageExtend/packageExtend';
+import { test } from '@tool/task/node/templates/test/test';
 import type { RegisterNodeTasksParamsModel } from '@tool/task/node/utils/registerNodeTasks/registerNodeTasks.models';
 
 export const registerNodeTasks = ({ name, testOverrides }: RegisterNodeTasksParamsModel): void => {

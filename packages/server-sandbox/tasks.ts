@@ -1,7 +1,7 @@
 import { register } from '@tool/task/core/utils/register/register';
-import { dev } from '@tool/task/node/tasks/dev/dev';
+import { dev } from '@tool/task/node/templates/dev/dev';
 import { registerNodeTasks } from '@tool/task/node/utils/registerNodeTasks/registerNodeTasks';
-import { make } from '@tool/task/webpack/tasks/make/make';
+import { make } from '@tool/task/webpack/templates/make/make';
 
 import { name } from './package.json';
 

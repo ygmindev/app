@@ -3,7 +3,7 @@ import type { WebpackParamsModel } from '@lib/config/webpack/webpack.config.mode
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { NODE_EXTENSIONS } from '@lib/shared/file/file.constants';
-import { ESLINT_CLI_PARAMS } from '@tool/task/node/tasks/lint/lint.constants';
+import { ESLINT_CLI_PARAMS } from '@tool/task/node/templates/lint/lint.constants';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 import type { Options } from 'eslint-webpack-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
