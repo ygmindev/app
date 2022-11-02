@@ -46,9 +46,11 @@ register({ ...runAll, name: 'lint', options: { patterns: [/lint/] } });
 // Test tasks
 register({ ...runAll, name: 'test', options: { patterns: [/test/] } });
 
+// All tasks
+
 // Package tasks
 packages.map((target) => {
-  const tasksDir = fromPackages(target, 'tasks.config.ts');
+  const tasksDir = fromPackages(target, 'tasks.ts');
   existsSync(tasksDir) && require(tasksDir);
 });
 
