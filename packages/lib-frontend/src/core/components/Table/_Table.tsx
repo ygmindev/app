@@ -7,7 +7,6 @@ import {
 } from '@lib/frontend/core/components/Table/Table.constants';
 import type { TableColumnModel } from '@lib/frontend/core/components/Table/Table.models';
 import { Text } from '@lib/frontend/core/components/Text/Text';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
@@ -120,13 +119,8 @@ export const _Table = <TType,>({
     };
 
     if (renderer) {
-      definition.cellRenderer = ({ node, value }: ICellRendererParams) => (
-        <Wrapper
-          isCenter
-          isFullHeight>
-          {renderer({ row: node && node.data, value })}
-        </Wrapper>
-      );
+      definition.cellRenderer = ({ node, value }: ICellRendererParams) =>
+        renderer({ row: node && node.data, value });
     }
 
     definition.valueFormatter = ({ node, value }: ValueFormatterParams) =>
