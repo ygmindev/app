@@ -1,6 +1,7 @@
 import type { ActivatePropsModel } from '@lib/frontend/core/components/Activate/Activate.models';
 import { Hover } from '@lib/frontend/core/components/Hover/Hover';
 import type { FCModel } from '@lib/frontend/core/core.models';
+import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import { cloneElement, useState } from 'react';
 
 export const Activate: FCModel<ActivatePropsModel> = ({
@@ -12,6 +13,8 @@ export const Activate: FCModel<ActivatePropsModel> = ({
 }) => {
   const [isActive, setIsActive] = useState<boolean>(false);
 
+  const _setIsActive = debounce({ callback: setIsActive });
+
   const _children = children && children(isActive);
   const _element =
     _children && isPressable
@@ -20,13 +23,13 @@ export const Activate: FCModel<ActivatePropsModel> = ({
             const { onPressIn } = _children.props;
             onPressIn && onPressIn();
             onActive && onActive();
-            setIsActive(true);
+            _setIsActive(true);
           },
           onPressOut: async () => {
             const { onPressOut } = _children.props;
             onPressOut && onPressOut();
             onInactive && onInactive();
-            setIsActive(false);
+            _setIsActive(false);
           },
         })
       : children;
@@ -35,11 +38,11 @@ export const Activate: FCModel<ActivatePropsModel> = ({
     <Hover
       onHoverIn={async () => {
         onActive && onActive();
-        setIsActive(true);
+        _setIsActive(true);
       }}
       onHoverOut={async () => {
         onInactive && onInactive();
-        setIsActive(false);
+        _setIsActive(false);
       }}>
       {_element}
     </Hover>

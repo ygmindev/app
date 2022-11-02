@@ -30,6 +30,7 @@ export const Press: SFCModel<PressPropsModel> = ({
   onPress,
   onPressIn,
   onPressOut,
+  testID,
   to,
   tooltip,
   ...props
@@ -40,10 +41,6 @@ export const Press: SFCModel<PressPropsModel> = ({
   const [confirmModalIsOpen, setConfirmModalIsOpen] = useState<boolean>(false);
 
   const theme = useTheme();
-  const _from = isEmpty(from)
-    ? { backgroundColor: isPressed ? theme.colors.background.muted : theme.colors.background.main }
-    : from;
-  const _to = isEmpty(to) ? { backgroundColor: theme.colors.background.muted } : to;
 
   // const _handlePress = tracking
   //   ? () => {
@@ -64,32 +61,42 @@ export const Press: SFCModel<PressPropsModel> = ({
   return (
     <>
       <Container {...containerProps}>
-        {(isActive) => (
-          <Wrapper
-            animation={{ transition: ['backgroundColor'] }}
-            p
-            {...props}
-            isCenter={isCenter}
-            isFullWidth={isFullWidth}
-            isRowAlign
-            onPress={
-              isDisabled
-                ? undefined
-                : confirmMessage
-                ? () => setConfirmModalIsOpen(true)
-                : _handlePress
-            }
-            onPressIn={onPressIn}
-            onPressOut={onPressOut}
-            round
-            style={
-              [styles, !isDisabled && (isActive || isPressed) ? _to : _from].filter(
-                Boolean,
-              ) as Array<StyleModel>
-            }>
-            {isFunction(children) ? children(isActive || isPressed) : children}
-          </Wrapper>
-        )}
+        {(isActive) => {
+          const _isActive = !isDisabled && (isActive || isPressed);
+          return (
+            <Wrapper
+              animation={{ transition: ['backgroundColor'] }}
+              p
+              {...props}
+              isCenter={isCenter}
+              isFullWidth={isFullWidth}
+              isRowAlign
+              onPress={
+                isDisabled
+                  ? undefined
+                  : confirmMessage
+                  ? () => setConfirmModalIsOpen(true)
+                  : _handlePress
+              }
+              onPressIn={onPressIn}
+              onPressOut={onPressOut}
+              round
+              style={
+                [
+                  styles,
+                  _isActive
+                    ? isEmpty(to)
+                      ? { backgroundColor: theme.colors.background.muted }
+                      : to
+                    : isEmpty(from)
+                    ? { backgroundColor: theme.colors.background.main }
+                    : from,
+                ].filter(Boolean) as Array<StyleModel>
+              }>
+              {isFunction(children) ? children(isActive || isPressed) : children}
+            </Wrapper>
+          );
+        }}
       </Container>
 
       {confirmMessage && (

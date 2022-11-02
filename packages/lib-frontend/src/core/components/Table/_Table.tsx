@@ -46,6 +46,8 @@ const _GlobalStyle = createGlobalStyle`
       .ag-cell, .ag-header-cell {
         font-size: ${theme.font.size.m}px;
         padding: 0 ${theme.shape.spacing.m}px;
+        display: flex;
+        align-items: center;
       }
 
       .ag-pinned-right-header, .ag-cell-first-right-pinned {
