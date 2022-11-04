@@ -11,7 +11,7 @@ export const useCurrentUser = (): EntityResourcePartialModel<UserModel> | null |
 
   useEffect(() => {
     if (user === null) {
-      replace({ params: {}, pathname: SIGN_IN });
+      replace({ pathname: SIGN_IN });
     }
   }, [user]);
 

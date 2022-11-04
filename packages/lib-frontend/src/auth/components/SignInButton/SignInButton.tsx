@@ -14,7 +14,7 @@ export const SignInButton: SFCModel<SignInButtonPropsModel> = ({ testID, ...prop
 
   return (
     <Button
-      onPress={() => push({ params: {}, pathname: SIGN_IN })}
+      onPress={() => push({ pathname: SIGN_IN })}
       style={styles}
       testID={testID}>
       {t('auth:labels.signIn')}

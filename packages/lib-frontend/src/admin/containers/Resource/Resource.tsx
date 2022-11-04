@@ -12,15 +12,18 @@ import { NOT_FOUND } from '@lib/frontend/routing/routing.constants';
 import { trimPathname } from '@lib/frontend/routing/utils/trimPathname/trimPathname';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { RESOURCE } from '@lib/shared/resource/resource.constants';
-import { mapKeys } from 'lodash';
+import { get, mapKeys } from 'lodash';
 
 export const Resource: SFCModel<ResourcePropsModel> = ({ testID, ...props }) => {
   const { styles } = useStyles({ props });
   const { location } = useRouter<ResourceParamsModel>();
 
-  const Table = mapKeys(RESOURCE_TABLES, (_, k) => trimPathname(k))[
-    trimPathname(location.params.name)
-  ];
+  const Table = location.params?.name
+    ? get(
+        mapKeys(RESOURCE_TABLES, (_, k) => trimPathname(k)),
+        trimPathname(location.params.name),
+      )
+    : null;
 
   return Table ? (
     <Wrapper
@@ -29,7 +32,7 @@ export const Resource: SFCModel<ResourcePropsModel> = ({ testID, ...props }) => 
       testID={testID}>
       <RouteTabs
         tabs={Object.keys(RESOURCE_TABLES).map((id) => ({
-          id: trimPathname(`${RESOURCE}/${id}`),
+          id: `${RESOURCE}/${trimPathname(id)}`,
           label: id,
         }))}
       />
@@ -37,9 +40,6 @@ export const Resource: SFCModel<ResourcePropsModel> = ({ testID, ...props }) => 
       <Table />
     </Wrapper>
   ) : (
-    <Redirect
-      params={{}}
-      pathname={NOT_FOUND}
-    />
+    <Redirect pathname={NOT_FOUND} />
   );
 };

@@ -30,7 +30,7 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({
           {paths.map(({ pathname, title }, i) =>
             title ? (
               <Fragment key={pathname}>
-                <Link onPress={() => push({ params: {}, pathname })}>{title}</Link>
+                <Link onPress={() => push({ pathname })}>{title}</Link>
 
                 {i ? <Icon icon={ICON.chevronRight} /> : null}
               </Fragment>

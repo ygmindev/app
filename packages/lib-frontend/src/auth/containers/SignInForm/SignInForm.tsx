@@ -17,12 +17,12 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({
   ...props
 }) => {
   const { styles } = useStyles({ props });
-  const { back } = useRouter();
+  const { back, replace } = useRouter();
   const { signIn } = useSignIn();
 
   const _handleSubmit = async (form: SignInFormModel): Promise<void> => {
     await signIn(form);
-    back();
+    back ? back() : replace({ pathname: '/' });
   };
 
   return (

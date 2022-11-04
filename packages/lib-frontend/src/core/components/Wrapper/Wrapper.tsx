@@ -63,10 +63,13 @@ export const Wrapper: SFCModel<WrapperPropsModel> = ({
     const _childrenLength = size(_children);
     return reduce<ReactElement, Array<ReactNode>>(
       _children as Array<ReactElement>,
-      (result, child) => [
+      (result, child, i) => [
         ...result,
         cloneElement(child, {
-          key: child.key || uid(),
+          key:
+            !child.key || (i && (result[i - i] as ReactElement).props.key === child.props.key)
+              ? uid()
+              : child.key,
           style: StyleSheet.flatten(
             [
               isDistribute && { flexBasis: 0, flexGrow: 1 },

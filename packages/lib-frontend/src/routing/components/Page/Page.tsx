@@ -25,15 +25,10 @@ export const Page: SFCModel<PageModel> = ({
 }) => {
   const isAuthenticated = useIsAuthenticated();
   const isInitialized = useIsInitialized();
-  const { isActive, location } = useRouter();
+  const { back, isActive, location } = useRouter();
 
   if (isProtected && isInitialized && !isAuthenticated) {
-    return (
-      <Redirect
-        params={{}}
-        pathname={SIGN_IN}
-      />
-    );
+    return <Redirect pathname={SIGN_IN} />;
   }
 
   const _isActive = isActive(pathname);
@@ -76,7 +71,8 @@ export const Page: SFCModel<PageModel> = ({
       return (
         <Wrapper
           grow
-          spacing>
+          spacing
+          testID="XXX">
           <RouteHeader
             icon={icon}
             paths={paths}
@@ -86,7 +82,6 @@ export const Page: SFCModel<PageModel> = ({
           {_element}
         </Wrapper>
       );
-      break;
     }
     default:
       return _element;

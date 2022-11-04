@@ -11,7 +11,7 @@ export const RouteTabs: SFCModel<RouteTabsPropsModel> = ({ tabs, ...props }) => 
   return (
     <Tabs
       {...props}
-      onChange={(value) => push({ params: {}, pathname: value })}
+      onChange={(value) => push({ pathname: value })}
       tabs={tabs}
       value={currentTab ? currentTab.id : undefined}
     />

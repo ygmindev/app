@@ -13,6 +13,9 @@ import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.
 import type { SelectOptionModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useSelector } from '@lib/frontend/root/hooks/useSelector/useSelector';
+import { useRouter } from '@lib/frontend/routing/hooks/useRouter/useRouter';
+import type { LocationModel } from '@lib/frontend/routing/routing.models';
+import { SETTINGS } from '@lib/frontend/settings/settings.constants';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { FONT_ALIGN } from '@lib/frontend/styling/utils/styler/fontStyler/fontStyler.constants';
 import { THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
@@ -22,15 +25,20 @@ import { useMemo } from 'react';
 export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
   const { styles } = useStyles({ props });
   const { signOut } = useSignIn();
+  const { push } = useRouter();
   const user = useSelector((state) => state.user.currentUser);
 
-  useTranslation([AUTH]);
+  useTranslation([AUTH, SETTINGS]);
 
   const options = useMemo(
     () =>
       AUTH_MENU_OPTIONS.map((option) => ({
         ...option,
-        onPress: (option as SelectOptionModel).id === SIGN_OUT ? signOut : undefined,
+        onPress: (option as LocationModel).pathname
+          ? () => push({ pathname: (option as LocationModel).pathname })
+          : option.id === SIGN_OUT
+          ? signOut
+          : (option as SelectOptionModel).onPress,
       })),
     [signOut],
   );

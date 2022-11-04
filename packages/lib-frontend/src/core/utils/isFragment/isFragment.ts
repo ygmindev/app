@@ -3,4 +3,4 @@ import { Fragment, isValidElement } from 'react';
 
 export const isFragment = (value: ReactNode | ComponentType): boolean =>
   isValidElement(value) &&
-  ((value as unknown as ExoticComponent) === Fragment || (value as ReactElement).type === Fragment);
+  ((value as ReactElement).type === Fragment || (value as unknown as ExoticComponent) === Fragment);
