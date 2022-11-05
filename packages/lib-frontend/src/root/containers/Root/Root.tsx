@@ -34,10 +34,3 @@ export const Root: FCModel<RootPropsModel> = ({ children, intialStore = store })
     {providers.reduce((result, Provider) => createElement(Provider, {}, result), children)}
   </ReduxProvider>
 );
-
-window.addEventListener('message', (e) => {
-  console.warn(e.data);
-  // if (e.data && typeof e.data === 'string' && e.data.includes('webpack')) {
-  //   console.log(e.data);
-  // }
-});

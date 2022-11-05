@@ -32,29 +32,3 @@ export const AnimatedRoute: SFCModel = ({ ...props }) => {
     </Wrapper>
   );
 };
-
-// import { Slides } from '@lib/frontend/core/components/Slides/Slides';
-// import type { SFCModel } from '@lib/frontend/core/core.models';
-// import { useChange } from '@lib/frontend/core/hooks/useChange/useChange';
-// import { _useCurrentRoute } from '@lib/frontend/routing/containers/AnimatedRoute/_useCurrentRoute';
-// import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-// import type { ReactElement } from 'react';
-// import { useState } from 'react';
-
-// export const AnimatedRoute: SFCModel = ({ ...props }) => {
-//   const { styles } = useStyles({ props });
-//   const route = _useCurrentRoute();
-//   const [previous, setPrevious] = useState<ReactElement | null>(route);
-
-//   useChange({ onChange: setPrevious, value: route });
-
-//   return (
-//     <Slides
-//       current={1}
-//       style={styles}>
-//       {previous}
-
-//       {route}
-//     </Slides>
-//   );
-// };
