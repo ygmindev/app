@@ -1,4 +1,4 @@
-import { Appear } from '@lib/frontend/core/components/Appear/Appear';
+import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';

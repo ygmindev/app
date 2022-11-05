@@ -8,7 +8,6 @@ const _pageToRoute = (routes: Array<PageModel>): Array<PageModel> =>
   routes.map((route) => ({
     ...route,
     element: <Page {...route} />,
-    paths: [...(route.paths || []), route],
     routes: route.routes
       ? _pageToRoute(
           route.routes.map((subRoute) => ({

@@ -1,9 +1,9 @@
+import { debug } from '@lib/shared/logging/utils/logger/logger';
 import backup from '@tool/task/core/tasks/backup/backup.task';
 import { command } from '@tool/task/core/utils/command/command';
 import { TASK_RESULTS_STATUS_TYPE } from '@tool/task/core/utils/register/register.constants';
 import type { RegisterParamsModel } from '@tool/task/core/utils/register/register.models';
 import { NODE_UPGRADE_EXCLUDES } from '@tool/task/node/tasks/upgrade/upgrade.constants';
-import { debug } from 'console';
 import { keys } from 'lodash';
 
 const upgrade: RegisterParamsModel = {

@@ -6,7 +6,7 @@ import { settingsRoutes } from '@lib/frontend/settings/settings.routes';
 export const appRoutes: Array<PageModel> = [
   {
     Layout: AppLayout,
-    pathname: '/',
+    pathname: '',
     routes: [...settingsRoutes],
   },
 

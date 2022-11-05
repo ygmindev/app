@@ -67,7 +67,7 @@ export abstract class _Database implements DatabaseModel {
           await _repository.persist(result).flush();
           return { result };
         } catch (e) {
-          switch (get(e, 'code')) {
+          switch (get(e, 'code') as unknown as number) {
             case 11000:
               throw new DuplicateError(name);
             default:

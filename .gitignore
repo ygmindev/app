@@ -9,6 +9,13 @@ node_modules
 npm-debug.log
 yarn-error.log
 *.jsbundle
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 
 # Tests
 test-results
@@ -35,8 +42,6 @@ coverage
 .sass-cache
 connect.lock
 libpeerconnection.log
-npm-debug.log
-yarn-error.log
 testem.log
 typings
 

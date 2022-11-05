@@ -1,4 +1,4 @@
-import { Appear } from '@lib/frontend/core/components/Appear/Appear';
+import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';

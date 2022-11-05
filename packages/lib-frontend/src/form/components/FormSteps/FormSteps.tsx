@@ -1,7 +1,7 @@
-import { Appear } from '@lib/frontend/core/components/Appear/Appear';
+import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
+import { Slides } from '@lib/frontend/animation/components/Slides/Slides';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
-import { Slides } from '@lib/frontend/core/components/Slides/Slides';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import type { FormStepsPropsModel } from '@lib/frontend/form/components/FormSteps/FormSteps.models';

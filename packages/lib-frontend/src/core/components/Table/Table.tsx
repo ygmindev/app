@@ -1,4 +1,4 @@
-import { Appear } from '@lib/frontend/core/components/Appear/Appear';
+import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
 import { Skeleton } from '@lib/frontend/core/components/Skeleton/Skeleton';
 import { SvgShape } from '@lib/frontend/core/components/SvgShape/SvgShape';
 import {

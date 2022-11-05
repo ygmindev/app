@@ -12,7 +12,7 @@ export const useRouter = <TParams = undefined>(): UseRouterModel<TParams> => {
   return {
     back: location.params?.prev ? () => push(location.params?.prev as LocationModel) : undefined,
 
-    isActive,
+    isActive: (pathname) => isActive(trimPathname(pathname)),
 
     location,
 
@@ -25,6 +25,7 @@ export const useRouter = <TParams = undefined>(): UseRouterModel<TParams> => {
         pathname: trimPathname(pathname),
       }),
 
-    up: paths.length > 1 ? () => push({ pathname: paths.slice(0, -1).join('/') }) : undefined,
+    up:
+      paths.length > 1 ? () => push({ pathname: paths.slice(0, -1).join('/') || '/' }) : undefined,
   };
 };

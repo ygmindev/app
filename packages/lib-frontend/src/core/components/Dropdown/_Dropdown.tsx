@@ -1,4 +1,4 @@
-import { Appear } from '@lib/frontend/core/components/Appear/Appear';
+import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
 import type { _DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/_Dropdown.models';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';

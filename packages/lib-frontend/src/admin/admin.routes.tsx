@@ -1,3 +1,4 @@
+import { AdminHome } from '@lib/frontend/admin/containers/AdminHome/AdminHome';
 import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
 import { resourceRoutes } from '@lib/frontend/resource/resource.routes';
 import type { PageModel } from '@lib/frontend/routing/components/Page/Page.models';
@@ -8,8 +9,8 @@ export const adminRoutes: Array<PageModel> = [
   {
     Layout: AppLayout,
     isProtected: true,
-    pathname: '/',
-    routes: [...resourceRoutes, ...settingsRoutes],
+    pathname: '',
+    routes: [{ element: <AdminHome />, pathname: '/' }, ...resourceRoutes, ...settingsRoutes],
   },
 
   ...commonRoutes,

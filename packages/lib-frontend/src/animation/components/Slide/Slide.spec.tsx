@@ -1,8 +1,8 @@
-import { Rotate } from '@lib/frontend/core/components/Rotate/Rotate';
+import { Slide } from '@lib/frontend/animation/components/Slide/Slide';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent({ target: Rotate });
+const { Component, displayName, testID } = withTestComponent({ target: Slide });
 
 describe(displayName, () => {
   test('works', async () => {

@@ -1,4 +1,4 @@
-import type { RotatePropsModel } from '@lib/frontend/core/components/Rotate/Rotate.models';
+import type { RotatePropsModel } from '@lib/frontend/animation/components/Rotate/Rotate.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';

@@ -1,4 +1,4 @@
-import { Appear } from '@lib/frontend/core/components/Appear/Appear';
+import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
 import { IconText } from '@lib/frontend/core/components/IconText/IconText';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { _TextFieldPropsModel } from '@lib/frontend/form/components/TextField/_TextField.models';

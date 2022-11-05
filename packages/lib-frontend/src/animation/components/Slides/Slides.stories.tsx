@@ -1,8 +1,8 @@
 import { withStory } from '@app/web-storybook/utils/withStory/withStory';
-import { Appear } from '@lib/frontend/core/components/Appear/Appear';
+import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
+import { Slides } from '@lib/frontend/animation/components/Slides/Slides';
+import type { SlidesPropsModel } from '@lib/frontend/animation/components/Slides/Slides.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
-import { Slides } from '@lib/frontend/core/components/Slides/Slides';
-import type { SlidesPropsModel } from '@lib/frontend/core/components/Slides/Slides.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import type { SFCModel } from '@lib/frontend/core/core.models';

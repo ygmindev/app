@@ -1,7 +1,7 @@
+import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
 import { OtpField } from '@lib/frontend/auth/components/OtpField/OtpField';
 import { OTP_FORM_VALIDATORS } from '@lib/frontend/auth/containers/OtpForm/OtpForm.constants';
 import type { OtpFormPropsModel } from '@lib/frontend/auth/containers/OtpForm/OtpForm.models';
-import { Appear } from '@lib/frontend/core/components/Appear/Appear';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { ErrorBoundary } from '@lib/frontend/core/components/ErrorBoundary/ErrorBoundary';
 import { Loading } from '@lib/frontend/core/components/Loading/Loading';

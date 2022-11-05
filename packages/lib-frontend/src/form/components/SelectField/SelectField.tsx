@@ -1,7 +1,7 @@
+import { Rotate } from '@lib/frontend/animation/components/Rotate/Rotate';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Menu } from '@lib/frontend/core/components/Menu/Menu';
 import type { MenuRefModel } from '@lib/frontend/core/components/Menu/Menu.models';
-import { Rotate } from '@lib/frontend/core/components/Rotate/Rotate';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';

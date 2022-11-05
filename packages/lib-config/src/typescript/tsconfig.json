@@ -22,7 +22,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "types": ["react-native", "jest"]
+    "types": ["react-native", "webpack-env", "jest"]
   },
   "ts-node": {
     "transpileOnly": true,

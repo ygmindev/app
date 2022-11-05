@@ -5,6 +5,7 @@ import type {
 } from '@lib/frontend/core/components/Hover/Hover.models';
 import type { FCModel } from '@lib/frontend/core/core.models';
 import { useUnmount } from '@lib/frontend/core/hooks/useUnmount/useUnmount';
+import type { CallableModel } from '@lib/shared/core/core.models';
 import { get, isFunction } from 'lodash';
 import { Children, cloneElement, useCallback, useState } from 'react';
 
@@ -35,12 +36,12 @@ export const Hover: FCModel<HoverPropsModel> = ({ children, onHoverIn, onHoverOu
 
   const handleGrant = useCallback(() => {
     const onPressIn = get(Children.only(child), 'props.onPressIn');
-    onPressIn ? onPressIn() : setShowHover(false);
+    onPressIn ? (onPressIn as CallableModel)() : setShowHover(false);
   }, [child]);
 
   const handleRelease = useCallback(() => {
     const onPressOut = get(Children.only(child), 'props.onPressOut');
-    onPressOut ? onPressOut() : setShowHover(true);
+    onPressOut ? (onPressOut as CallableModel)() : setShowHover(true);
   }, [child]);
 
   return child

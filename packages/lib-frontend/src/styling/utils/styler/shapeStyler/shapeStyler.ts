@@ -25,10 +25,10 @@ export const shapeStyler: StylerModel<ShapeStylerParamsModel> = ({
   zIndex,
 }) =>
   cleanObject({
-    bottom: isAbsoluteFill ? 0 : bottom,
+    bottom: isAbsoluteFill ? bottom || 0 : bottom,
     display: isHidden ? 'none' : undefined,
     height: isFullHeight ? '100%' : height,
-    left: isAbsoluteFill ? 0 : left,
+    left: isAbsoluteFill ? left || 0 : left,
     maxHeight,
     maxWidth,
     minHeight,
@@ -36,8 +36,8 @@ export const shapeStyler: StylerModel<ShapeStylerParamsModel> = ({
     opacity,
     overflow: isOverflowHidden ? 'hidden' : undefined,
     position: isAbsoluteFill ? SHAPE_POSITION.ABSOLUTE : position,
-    right: isAbsoluteFill ? 0 : right,
-    top: isAbsoluteFill ? 0 : top,
+    right: isAbsoluteFill ? right || 0 : right,
+    top: isAbsoluteFill ? top || 0 : top,
     transform: scale ? [{ scale }] : undefined,
     width: isFullWidth ? '100%' : width,
     zIndex,

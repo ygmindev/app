@@ -19,7 +19,6 @@ export const Page: SFCModel<PageModel> = ({
   isTrackingEnabled = true,
   navigation,
   pathname,
-  paths,
   routes,
   title,
 }) => {
@@ -71,11 +70,9 @@ export const Page: SFCModel<PageModel> = ({
       return (
         <Wrapper
           grow
-          spacing
-          testID="XXX">
+          spacing>
           <RouteHeader
             icon={icon}
-            paths={paths}
             title={title}
           />
 

@@ -1,5 +1,5 @@
-import { APPEAR_SCALE_FROM } from '@lib/frontend/core/components/Appear/Appear.constants';
-import type { AppearPropsModel } from '@lib/frontend/core/components/Appear/Appear.models';
+import { APPEAR_SCALE_FROM } from '@lib/frontend/animation/components/Appear/Appear.constants';
+import type { AppearPropsModel } from '@lib/frontend/animation/components/Appear/Appear.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useIsMounted } from '@lib/frontend/core/hooks/useIsMounted/useIsMounted';

@@ -1,5 +1,5 @@
-import { Appear } from '@lib/frontend/core/components/Appear/Appear';
-import type { SlidesPropsModel } from '@lib/frontend/core/components/Slides/Slides.models';
+import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
+import type { SlidesPropsModel } from '@lib/frontend/animation/components/Slides/Slides.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useChange } from '@lib/frontend/core/hooks/useChange/useChange';
@@ -41,6 +41,7 @@ export const Slides: SFCModel<SlidesPropsModel> = ({ children, current, testID, 
                 <Appear
                   duration={theme.animation.transition}
                   grow
+                  isScalable={false}
                   isVisible={isCurrent}>
                   {child}
                 </Appear>

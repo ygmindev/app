@@ -4,10 +4,9 @@ import type { RouteModel } from '@lib/frontend/routing/containers/Router/Router.
 
 export type NavigationTypeModel = `${NAVIGATION_TYPE}`;
 
-export interface PageModel extends RouteModel, WithChildrenPropsModel {
-  isProtected?: boolean;
-  isTrackingEnabled?: boolean;
-  navigation?: NavigationTypeModel;
-  paths?: Array<PageModel>;
-  routes?: Array<PageModel>;
-}
+export type PageModel = Omit<RouteModel, 'routes'> &
+  WithChildrenPropsModel & {
+    isProtected?: boolean;
+    isTrackingEnabled?: boolean;
+    navigation?: NavigationTypeModel;
+  } & ({ pathname: '/'; routes?: never } | { pathname: string; routes?: Array<PageModel> });

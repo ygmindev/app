@@ -6,6 +6,7 @@ import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
 import { spacingStyler } from '@lib/frontend/styling/utils/styler/spacingStyler/spacingStyler';
 import { viewStyler } from '@lib/frontend/styling/utils/styler/viewStyler/viewStyler';
+import { THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
 import type { PartialModel } from '@lib/shared/core/core.models';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import { isNil, reduce, size } from 'lodash';
@@ -63,13 +64,10 @@ export const Wrapper: SFCModel<WrapperPropsModel> = ({
     const _childrenLength = size(_children);
     return reduce<ReactElement, Array<ReactNode>>(
       _children as Array<ReactElement>,
-      (result, child, i) => [
+      (result, child) => [
         ...result,
         cloneElement(child, {
-          key:
-            !child.key || (i && (result[i - i] as ReactElement).props.key === child.props.key)
-              ? uid()
-              : child.key,
+          key: uid(),
           style: StyleSheet.flatten(
             [
               isDistribute && { flexBasis: 0, flexGrow: 1 },
@@ -79,7 +77,7 @@ export const Wrapper: SFCModel<WrapperPropsModel> = ({
                   spacingStyler(
                     {
                       mLeft: isNil(child.props.mLeft)
-                        ? _isRow && (props.isRowAlign ? 's' : spacing)
+                        ? _isRow && (props.isRowAlign ? THEME_SIZE.SMALL : spacing)
                         : child.props.mLeft,
                       mTop: isNil(child.props.mTop) ? !_isRow && spacing : child.props.mTop,
                     },

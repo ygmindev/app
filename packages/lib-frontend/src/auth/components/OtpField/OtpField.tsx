@@ -1,9 +1,9 @@
+import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
 import {
   OTP_FIELD_MAIN_TEST_ID,
   OTP_FIELD_WIDTH,
 } from '@lib/frontend/auth/components/OtpField/OtpField.constants';
 import type { OtpFieldPropsModel } from '@lib/frontend/auth/components/OtpField/OtpField.models';
-import { Appear } from '@lib/frontend/core/components/Appear/Appear';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
