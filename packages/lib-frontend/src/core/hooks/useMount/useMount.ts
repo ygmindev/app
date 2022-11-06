@@ -1,8 +1,8 @@
-import type { UseIsMountedParamsModel } from '@lib/frontend/core/hooks/useIsMounted/useIsMounted.models';
+import type { UseMountParamsModel } from '@lib/frontend/core/hooks/useMount/useMount.models';
 import { useEffect, useState } from 'react';
 
-export const useIsMounted = (
-  { onMount, onUnmount }: UseIsMountedParamsModel = {},
+export const useMount = (
+  { onMount, onUnmount }: UseMountParamsModel = {},
   deps?: Array<unknown>,
 ): boolean => {
   const [isMounted, setIsMounted] = useState<boolean>(false);

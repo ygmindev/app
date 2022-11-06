@@ -4,7 +4,7 @@ import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
-import { useIsMounted } from '@lib/frontend/core/hooks/useIsMounted/useIsMounted';
+import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import {
   NOTIFICATION_DURATION,
@@ -44,7 +44,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
     setTimeout(() => dispatch(notificationActions.remove(id)), theme.animation.duration);
   }, [id, setIsVisible, theme.animation.duration]);
 
-  const isMounted = useIsMounted(
+  const isMounted = useMount(
     {
       onMount: isPermanent
         ? undefined

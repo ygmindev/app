@@ -3,7 +3,7 @@ import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
-import { useIsMounted } from '@lib/frontend/core/hooks/useIsMounted/useIsMounted';
+import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import { ErrorTooltip } from '@lib/frontend/form/components/ErrorTooltip/ErrorTooltip';
 import { _TextField } from '@lib/frontend/form/components/TextField/_TextField';
 import { TEXT_FIELD_TYPE } from '@lib/frontend/form/components/TextField/TextField.constants';
@@ -73,17 +73,16 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
     );
   }
 
-  const isMounted = useIsMounted(
+  const isMounted = useMount(
     {
-      onMount: () => {
+      onMount: () =>
         isAutoFocus &&
-          sleep({ duration: transition }).then(() => {
-            if (isMounted) {
-              const ref = forwardedRef || inputRef;
-              ref.current && ref.current.focus();
-            }
-          });
-      },
+        sleep({ duration: transition }).then(() => {
+          if (isMounted) {
+            const ref = forwardedRef || inputRef;
+            ref.current && ref.current.focus();
+          }
+        }),
     },
     [forwardedRef, isAutoFocus, transition],
   );

@@ -67,7 +67,7 @@ export const Wrapper: SFCModel<WrapperPropsModel> = ({
       (result, child) => [
         ...result,
         cloneElement(child, {
-          key: uid(),
+          key: child.key || uid(),
           style: StyleSheet.flatten(
             [
               isDistribute && { flexBasis: 0, flexGrow: 1 },

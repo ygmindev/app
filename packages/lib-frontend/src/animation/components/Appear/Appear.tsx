@@ -2,7 +2,7 @@ import { APPEAR_SCALE_FROM } from '@lib/frontend/animation/components/Appear/App
 import type { AppearPropsModel } from '@lib/frontend/animation/components/Appear/Appear.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useIsMounted } from '@lib/frontend/core/hooks/useIsMounted/useIsMounted';
+import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
@@ -21,7 +21,7 @@ export const Appear: SFCModel<AppearPropsModel> = ({
   const _duration = duration || theme.animation.duration;
   const [isRender, setIsRender] = useState<boolean>(false);
 
-  const isMounted = useIsMounted(
+  const isMounted = useMount(
     {
       onMount: () =>
         isVisible

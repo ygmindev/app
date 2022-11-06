@@ -1,5 +1,6 @@
 import type { _UseRouterModel } from '@lib/frontend/routing/hooks/useRouter/_useRouter.models';
-import type { LocationModel, LocationParamsModel } from '@lib/frontend/routing/routing.models';
+import type { LocationModel } from '@lib/frontend/routing/routing.models';
+import { merge } from '@lib/shared/core/utils/merge/merge';
 import { matchPath, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 export const _useRouter = <TParams = undefined>(): _UseRouterModel<TParams> => {
@@ -8,13 +9,13 @@ export const _useRouter = <TParams = undefined>(): _UseRouterModel<TParams> => {
   const params = useParams();
 
   return {
-    isActive: (pathname) => {
-      const match = matchPath(pathname, location.pathname);
+    isActive: ({ from, isExact, to }) => {
+      const match = matchPath({ end: isExact, path: from }, to || location.pathname);
       return match !== null;
     },
 
     location: {
-      params: { ...location.state, ...params } as TParams & LocationParamsModel,
+      params: merge<TParams>({ values: [location.state, params] }),
       pathname: location.pathname,
     },
 

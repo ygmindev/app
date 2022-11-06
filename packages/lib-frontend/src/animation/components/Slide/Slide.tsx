@@ -3,12 +3,22 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import type { MeasureModel } from '@lib/frontend/core/utils/measure/measure.models';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
+import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
 import { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants';
 import { useState } from 'react';
 
-export const Slide: SFCModel<SlidePropsModel> = ({ children, isVisible, testID, ...props }) => {
+export const Slide: SFCModel<SlidePropsModel> = ({
+  children,
+  isInitial,
+  isVisible,
+  testID,
+  ...props
+}) => {
+  const theme = useTheme();
   const { styles } = useStyles({ props });
   const [measure, setMeasure] = useState<MeasureModel>();
+
+  // TODO: handle isInitial in wrapper
 
   return (
     <Wrapper
@@ -20,9 +30,14 @@ export const Slide: SFCModel<SlidePropsModel> = ({ children, isVisible, testID, 
       testID={testID}>
       {measure && (
         <Wrapper
-          animation={{ transition: ['left'] }}
+          animation={{
+            animation: isVisible
+              ? { from: { left: measure.width }, to: { left: 0 } }
+              : { from: { left: 0 }, to: { left: measure.width && -measure.width } },
+            duration: theme.animation.transition,
+          }}
           isAbsoluteFill
-          left={isVisible ? 0 : measure.width}>
+          isFullWidth>
           {children}
         </Wrapper>
       )}

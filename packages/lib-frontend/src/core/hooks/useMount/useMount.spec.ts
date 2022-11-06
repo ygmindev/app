@@ -1,12 +1,12 @@
-import { useIsMounted } from '@lib/frontend/core/hooks/useIsMounted/useIsMounted';
+import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import { renderHook } from '@lib/frontend/testing/utils/renderHook/renderHook';
 import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => useIsMounted });
+const { displayName } = withTest({ target: () => useMount });
 
 describe(displayName, () => {
   test('works', async () => {
-    const { result, unmount } = renderHook(() => useIsMounted());
+    const { result, unmount } = renderHook(() => useMount());
     expect(result.current).toStrictEqual(true);
 
     unmount();

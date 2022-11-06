@@ -4,7 +4,7 @@ import type {
   HoverPropsModel,
 } from '@lib/frontend/core/components/Hover/Hover.models';
 import type { FCModel } from '@lib/frontend/core/core.models';
-import { useUnmount } from '@lib/frontend/core/hooks/useUnmount/useUnmount';
+import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import type { CallableModel } from '@lib/shared/core/core.models';
 import { get, isFunction } from 'lodash';
 import { Children, cloneElement, useCallback, useState } from 'react';
@@ -13,9 +13,11 @@ export const Hover: FCModel<HoverPropsModel> = ({ children, onHoverIn, onHoverOu
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [showHover, setShowHover] = useState<boolean>(true);
 
-  useUnmount(() => {
-    setIsHovered(false);
-    setShowHover(false);
+  useMount({
+    onUnmount: () => {
+      setIsHovered(false);
+      setShowHover(false);
+    },
   });
 
   const handleMouseEnter = useCallback(() => {

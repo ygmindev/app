@@ -4,7 +4,7 @@ import type { PartialDeepModel } from '@lib/shared/core/core.models';
 export const commonThemeConfig: PartialDeepModel<ThemeConfigModel> = {
   animation: {
     duration: 200,
-    transition: 2000,
+    transition: 600,
   },
 
   colors: {

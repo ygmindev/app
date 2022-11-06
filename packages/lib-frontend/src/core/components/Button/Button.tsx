@@ -4,7 +4,7 @@ import { Loading } from '@lib/frontend/core/components/Loading/Loading';
 import { Press } from '@lib/frontend/core/components/Press/Press';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useIsMounted } from '@lib/frontend/core/hooks/useIsMounted/useIsMounted';
+import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
 import {
@@ -32,7 +32,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   const _isLoading = isLoading || isLoadingState;
   const _isBlocked = isDisabled || _isLoading;
   const theme = useTheme();
-  const isMounted = useIsMounted();
+  const isMounted = useMount();
   const { styles } = useStyles({ props, stylers: [{ height: theme.shape.height[size] }] });
   const { dark, light, main } = theme.colors[color];
 

@@ -1,4 +1,4 @@
 export interface UseChangeParamsModel<TType> {
-  onChange(prev?: TType): void;
+  onChange(previous?: TType): void;
   value: TType;
 }

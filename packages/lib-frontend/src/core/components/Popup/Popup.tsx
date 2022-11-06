@@ -3,7 +3,7 @@ import {
   POPUP_EVENT,
 } from '@lib/frontend/core/components/Popup/Popup.constants';
 import type { PopupPropsModel } from '@lib/frontend/core/components/Popup/Popup.models';
-import { useUnmount } from '@lib/frontend/core/hooks/useUnmount/useUnmount';
+import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import { display } from '@lib/frontend/core/utils/display/display';
 import { APP_URI } from '@lib/frontend/http/http.constants';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
@@ -35,9 +35,7 @@ export const Popup = <TParams = undefined,>({
     },
   }));
 
-  useUnmount(() => {
-    display.unsubscribeMessage(_handleMessage);
-  });
+  useMount({ onUnmount: () => display.unsubscribeMessage(_handleMessage) });
 
   return <></>;
 };
