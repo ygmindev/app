@@ -5,6 +5,7 @@ import type { UseRouterModel } from '@lib/frontend/routing/hooks/useRouter/useRo
 import type { LocationModel } from '@lib/frontend/routing/routing.models';
 import { routingActions } from '@lib/frontend/routing/stores/reducer/reducer';
 import { trimPathname } from '@lib/frontend/routing/utils/trimPathname/trimPathname';
+import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
 import { split } from 'lodash';
 
 export const useRouter = <TParams = undefined>(): UseRouterModel<TParams> => {
@@ -26,8 +27,11 @@ export const useRouter = <TParams = undefined>(): UseRouterModel<TParams> => {
     location,
 
     push: <TNextParams = undefined>({ params, pathname }: LocationModel<TNextParams>) => {
-      dispatch(routingActions.setPrevious(location));
-      push({ params, pathname: trimPathname(pathname) });
+      const locationNew = { params, pathname: trimPathname(pathname) };
+      if (!isEqual(locationNew, location)) {
+        dispatch(routingActions.setPrevious(location));
+        push({ params, pathname: trimPathname(pathname) });
+      }
     },
 
     replace: <TNextParams = undefined>({ params, pathname }: LocationModel<TNextParams>) =>

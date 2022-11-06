@@ -24,7 +24,6 @@ export const Page: SFCModel<PagePropsModel> = ({
   const isAuthenticated = useIsAuthenticated();
   const isInitialized = useIsInitialized();
   const previous = useSelector((state) => state.routing.previous);
-  console.warn(previous);
 
   const { isActive } = useRouter();
   const current = useCurrentRoute();
