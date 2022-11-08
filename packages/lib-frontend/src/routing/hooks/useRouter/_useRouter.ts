@@ -1,9 +1,5 @@
-import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
-import { dispatch } from '@lib/frontend/root/stores/store/store';
 import type { _UseRouterModel } from '@lib/frontend/routing/hooks/useRouter/_useRouter.models';
 import type { LocationModel } from '@lib/frontend/routing/routing.models';
-import { routingActions } from '@lib/frontend/routing/stores/reducer/reducer';
-import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { matchPath, useLocation, useNavigate, useParams } from 'react-router-dom';
 
@@ -11,13 +7,6 @@ export const _useRouter = <TParams = undefined>(): _UseRouterModel<TParams> => {
   const navigate = useNavigate();
   const location = useLocation();
   const params = useParams();
-
-  const _handleBack = debounce({ callback: () => dispatch(routingActions.setPrevious(location)) });
-
-  useMount({
-    onMount: () => window.addEventListener('popstate', _handleBack),
-    onUnmount: () => window.removeEventListener('popstate', _handleBack),
-  });
 
   return {
     isActive: ({ from, isExact, to }) => {

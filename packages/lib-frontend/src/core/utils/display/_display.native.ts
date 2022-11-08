@@ -3,7 +3,21 @@ import { useLayoutEffect } from 'react';
 import type { EmitterSubscription } from 'react-native';
 import { Dimensions } from 'react-native';
 
-let subscriber: EmitterSubscription;
+const _subscribers: Record<string, EmitterSubscription> = {};
+
+const subscribeEvent = <TType extends Event>(
+  eventName: string,
+  cb: (event: TType) => void,
+): void => {
+  _subscribers[eventName] = Dimensions.addEventListener('change', cb as never);
+};
+
+const unsubscribeEvent = <TType extends Event>(
+  eventName: string,
+  _cb: (event: TType) => void,
+): void => {
+  _subscribers[eventName] && _subscribers[eventName].remove();
+};
 
 export const _display: _DisplayModel = {
   getDimension: () => ({
@@ -11,16 +25,13 @@ export const _display: _DisplayModel = {
     width: Dimensions.get('window').width,
   }),
 
-  open: (uri, { height, onClose, onOpen, width }) => null,
-
   // TODO: implement
+  open: (uri, { height, onClose, onOpen, width }) => null,
+  subscribeEvent,
   subscribeMessage: (_cb) => null,
-
-  subscribeResize: (cb) => {
-    subscriber = Dimensions.addEventListener('change', cb);
-  },
-
+  subscribeResize: (cb) => subscribeEvent('change', cb),
+  unsubscribeEvent,
   unsubscribeMessage: (_cb) => null,
-  unsubscribeResize: (_cb) => subscriber && subscriber.remove(),
+  unsubscribeResize: (cb) => unsubscribeEvent('change', cb),
   useLayoutEffect,
 };

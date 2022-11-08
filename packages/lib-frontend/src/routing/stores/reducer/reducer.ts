@@ -13,6 +13,9 @@ export const { actions: routingActions, reducer: routingReducer } = createSlice<
   initialState: ROUTING_STATE_INITIAL,
   name: ROUTING,
   reducers: {
+    setCurrent: (state, { payload }: PayloadAction<LocationModel>) => {
+      state.current = payload;
+    },
     setPrevious: (state, { payload }: PayloadAction<LocationModel>) => {
       state.previous = payload;
     },

@@ -1,6 +1,20 @@
 import type { _DisplayModel } from '@lib/frontend/core/utils/display/_display.models';
 import { useEffect, useLayoutEffect } from 'react';
 
+const subscribeEvent = <TType extends Event>(
+  eventName: string,
+  cb: (event: TType) => void,
+): void => {
+  __IS_SSR__ ? null : window.addEventListener(eventName as keyof WindowEventMap, cb as never);
+};
+
+const unsubscribeEvent = <TType extends Event>(
+  eventName: string,
+  cb: (event: TType) => void,
+): void => {
+  __IS_SSR__ ? null : window.removeEventListener(eventName as keyof WindowEventMap, cb as never);
+};
+
 export const _display: _DisplayModel = {
   getDimension: () => (__IS_SSR__ ? {} : { height: window.innerHeight, width: window.innerWidth }),
   open: (uri, { height, onClose, onOpen, width }) => {
@@ -14,9 +28,11 @@ export const _display: _DisplayModel = {
       popup.onunload = (): void => onClose && onClose();
     }
   },
-  subscribeMessage: (cb) => (__IS_SSR__ ? null : window.addEventListener('message', cb)),
-  subscribeResize: (cb) => (__IS_SSR__ ? null : window.addEventListener('resize', cb)),
-  unsubscribeMessage: (cb) => (__IS_SSR__ ? null : window.removeEventListener('message', cb)),
-  unsubscribeResize: (cb) => (__IS_SSR__ ? null : window.removeEventListener('resize', cb)),
+  subscribeEvent,
+  subscribeMessage: (cb) => subscribeEvent('message', cb),
+  subscribeResize: (cb) => subscribeEvent('resize', cb),
+  unsubscribeEvent,
+  unsubscribeMessage: (cb) => unsubscribeEvent('message', cb),
+  unsubscribeResize: (cb) => unsubscribeEvent('resize', cb),
   useLayoutEffect: __IS_SSR__ ? useEffect : useLayoutEffect,
 };
