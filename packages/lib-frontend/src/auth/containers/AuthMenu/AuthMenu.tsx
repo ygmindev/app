@@ -18,7 +18,6 @@ import type { LocationModel } from '@lib/frontend/routing/routing.models';
 import { SETTINGS } from '@lib/frontend/settings/settings.constants';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { FONT_ALIGN } from '@lib/frontend/styling/utils/styler/fontStyler/fontStyler.constants';
-import { THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
 import { AUTH, SIGN_OUT } from '@lib/shared/auth/auth.constants';
 import { useMemo } from 'react';
 
@@ -49,7 +48,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
         <Icon
           icon={ICON.person}
           isPressed={isOpen}
-          size={THEME_SIZE.LARGE}
+          isTitle
         />
       )}
       isCenter={false}

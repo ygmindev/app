@@ -3,14 +3,13 @@ import { Rotate } from '@lib/frontend/animation/components/Rotate/Rotate';
 import type { RotatePropsModel } from '@lib/frontend/animation/components/Rotate/Rotate.models';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
-import { THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
 
 const { Default, meta } = withStory<RotatePropsModel>({
   defaultProps: {
     children: (
       <Icon
         icon={ICON.chevronRight}
-        size={THEME_SIZE.LARGE}
+        isTitle
       />
     ),
   },

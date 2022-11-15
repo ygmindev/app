@@ -8,11 +8,17 @@ import { spacingStyler } from '@lib/frontend/styling/utils/styler/spacingStyler/
 import { viewStyler } from '@lib/frontend/styling/utils/styler/viewStyler/viewStyler';
 import { THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
 import type { PartialModel } from '@lib/shared/core/core.models';
+import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import { isNil, reduce, size } from 'lodash';
 import type { ElementType, ReactElement, ReactNode } from 'react';
 import { Children, cloneElement, createElement, isValidElement } from 'react';
-import type { ScrollViewProps, TouchableOpacityProps, ViewProps } from 'react-native';
+import type {
+  LayoutChangeEvent,
+  ScrollViewProps,
+  TouchableOpacityProps,
+  ViewProps,
+} from 'react-native';
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import type { AnimatableComponent } from 'react-native-animatable';
 import { createAnimatableComponent, View as ViewWithAnimationProps } from 'react-native-animatable';
@@ -102,13 +108,17 @@ export const Wrapper: SFCModel<WrapperPropsModel> = ({
     ? ViewWithAnimationProps
     : View;
 
-  const componentProps: ViewProps = {
-    onLayout: onMeasure
-      ? (e) => {
+  const _onMeasure = onMeasure
+    ? debounce({
+        callback: (e: LayoutChangeEvent) => {
           const { height, width, x, y } = e.nativeEvent.layout;
           onMeasure({ height, width, x, y });
-        }
-      : undefined,
+        },
+      })
+    : undefined;
+
+  const componentProps: ViewProps = {
+    onLayout: _onMeasure,
     ...((isPressable
       ? {
           activeOpacity: 1,

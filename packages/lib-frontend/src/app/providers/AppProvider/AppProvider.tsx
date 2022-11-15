@@ -1,3 +1,4 @@
+import { useIsInitialized } from '@lib/frontend/app/hooks/useIsInitialized/useIsInitialized';
 import type { AppProviderPropsModel } from '@lib/frontend/app/providers/AppProvider/AppProvider.models';
 import { Loading } from '@lib/frontend/core/components/Loading/Loading';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -8,8 +9,7 @@ import { THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
 
 export const AppProvider: SFCModel<AppProviderPropsModel> = ({ children, testID, ...props }) => {
   const { styles } = useStyles({ props });
-  // const isInitialized = useIsInitialized();
-  const isInitialized = true;
+  const isInitialized = useIsInitialized();
 
   return (
     <Wrapper

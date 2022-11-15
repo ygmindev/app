@@ -2,7 +2,7 @@ import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
 import type { SlidesPropsModel } from '@lib/frontend/animation/components/Slides/Slides.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useChange } from '@lib/frontend/core/hooks/useChange/useChange';
+import { usePrevious } from '@lib/frontend/core/hooks/usePrevious/usePrevious';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
 import { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants';
@@ -15,7 +15,7 @@ export const Slides: SFCModel<SlidesPropsModel> = ({ children, current, testID, 
   const [width, setWidth] = useState<number>();
   const [previous, setPrevious] = useState<number>();
 
-  useChange({ onChange: setPrevious, value: current });
+  usePrevious({ onChange: setPrevious, value: current });
 
   return (
     <Wrapper

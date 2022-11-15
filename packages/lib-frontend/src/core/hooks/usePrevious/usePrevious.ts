@@ -1,15 +1,16 @@
+import { _usePrevious } from '@lib/frontend/core/hooks/usePrevious/_usePrevious';
 import type { UsePreviousParamsModel } from '@lib/frontend/core/hooks/usePrevious/usePrevious.models';
-import { isNil } from 'lodash';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
-export const usePrevious = <TType>(
-  ...[value, isNotNil]: UsePreviousParamsModel<TType>
-): TType | undefined => {
-  const ref = useRef<TType>();
+export const usePrevious = <TType>({
+  onChange,
+  value,
+}: UsePreviousParamsModel<TType>): TType | undefined => {
+  const previous = _usePrevious<TType>({ value });
+
   useEffect(() => {
-    if (!isNotNil || !isNil(value)) {
-      ref.current = value;
-    }
-  }, [value, isNotNil]);
-  return ref.current;
+    onChange && onChange(previous);
+  }, [previous]);
+
+  return previous;
 };

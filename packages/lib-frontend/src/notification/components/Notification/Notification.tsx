@@ -20,7 +20,6 @@ import {
   THEME_COLOR,
   THEME_RELATIVE_COLOR,
   THEME_SHADE,
-  THEME_SIZE,
 } from '@lib/frontend/styling/utils/theme/theme.constants';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { useCallback, useState } from 'react';
@@ -93,7 +92,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
           <Icon
             color={THEME_RELATIVE_COLOR.CONTRAST}
             icon={icon}
-            size={THEME_SIZE.LARGE}
+            isTitle
           />
 
           <Wrapper

@@ -2,6 +2,5 @@ import type { WithChildrenPropsModel } from '@lib/frontend/core/decorators/withC
 import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
 
 export interface SlidePropsModel extends WithTestIdModel, WithChildrenPropsModel {
-  isInitial?: boolean;
   isVisible?: boolean;
 }

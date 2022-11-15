@@ -1,6 +1,7 @@
 import type { SlidePropsModel } from '@lib/frontend/animation/components/Slide/Slide.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
+import { usePrevious } from '@lib/frontend/core/hooks/usePrevious/usePrevious';
 import type { MeasureModel } from '@lib/frontend/core/utils/measure/measure.models';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
@@ -9,16 +10,21 @@ import { useState } from 'react';
 
 export const Slide: SFCModel<SlidePropsModel> = ({
   children,
-  isInitial,
-  isVisible,
+  isVisible: _isVisible,
   testID,
   ...props
 }) => {
   const theme = useTheme();
   const { styles } = useStyles({ props });
+  const [isVisible, setIsVisible] = useState<boolean>(_isVisible || false);
   const [measure, setMeasure] = useState<MeasureModel>();
 
-  // TODO: handle isInitial in wrapper
+  usePrevious({
+    onChange: (value) => {
+      console.warn(value);
+    },
+    value: children,
+  });
 
   return (
     <Wrapper

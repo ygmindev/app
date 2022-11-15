@@ -43,7 +43,7 @@ export const ErrorBoundary: FCModel<ErrorBoundaryPropsModel> = ({
           spacing={THEME_SIZE.SMALL}>
           <Icon
             icon={icon || ICON.sad}
-            size={THEME_SIZE.LARGE}
+            isTitle
           />
 
           <Text>{message || t('core:messages.errorGeneric')}</Text>

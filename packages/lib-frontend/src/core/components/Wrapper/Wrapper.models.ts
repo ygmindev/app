@@ -8,11 +8,11 @@ import type { ViewStylerParamsModel } from '@lib/frontend/styling/utils/styler/v
 import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
 
 export interface WrapperPropsModel
-  extends ViewStylerParamsModel,
+  extends WithChildrenPropsModel,
+    WithTestIdModel,
+    ViewStylerParamsModel,
     WithForwardedRefPropsModel,
-    Pick<PressPropsModel, 'onPress' | 'onPressIn' | 'onPressOut'>,
-    WithChildrenPropsModel,
-    WithTestIdModel {
+    Pick<PressPropsModel, 'onPress' | 'onPressIn' | 'onPressOut'> {
   animation?: WithAnimationPropsModel;
   isCenter?: boolean;
   isDistribute?: boolean;

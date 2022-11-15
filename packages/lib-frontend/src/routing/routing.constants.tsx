@@ -5,6 +5,10 @@ import { NotFound } from '@lib/frontend/routing/containers/NotFound/NotFound';
 
 export const NOT_FOUND = 'notFound';
 
+export enum ROUTE_TRANSITION {
+  SLIDE = 'SLIDE',
+}
+
 export const commonRoutes: Array<PagePropsModel> = [
   ...authRoutes,
 

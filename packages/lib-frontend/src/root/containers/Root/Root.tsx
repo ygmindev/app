@@ -9,6 +9,7 @@ import { NotificationProvider } from '@lib/frontend/notification/providers/Notif
 import type { RootPropsModel } from '@lib/frontend/root/containers/Root/Root.models';
 import { KeyboardProvider } from '@lib/frontend/root/providers/KeyboardProvider/KeyboardProvider';
 import { store } from '@lib/frontend/root/stores/store/store';
+import { RoutingProvider } from '@lib/frontend/routing/providers/RoutingProvider/RoutingProvider';
 import { StyleProvider } from '@lib/frontend/styling/providers/StyleProvider/StyleProvider';
 import { TrackingProvider } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider';
 import type { ComponentType } from 'react';
@@ -16,6 +17,7 @@ import { createElement, Suspense } from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
 
 const providers = [
+  RoutingProvider,
   KeyboardProvider,
   AppProvider,
   TrackingProvider,

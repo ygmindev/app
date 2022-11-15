@@ -1,6 +1,6 @@
-import type { LocationModel } from '@lib/frontend/routing/routing.models';
+import type { RouteModel } from '@lib/frontend/routing/routing.models';
 
 export interface RoutingStateModel {
-  current?: LocationModel;
-  previous?: LocationModel;
+  current?: RouteModel;
+  previous?: RouteModel;
 }

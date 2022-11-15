@@ -5,6 +5,8 @@ import { SETTINGS } from '@lib/frontend/settings/settings.constants';
 export const settingsRoutes: Array<PagePropsModel> = [
   {
     element: <Settings />,
+    isHeader: true,
     pathname: SETTINGS,
+    title: SETTINGS,
   },
 ];

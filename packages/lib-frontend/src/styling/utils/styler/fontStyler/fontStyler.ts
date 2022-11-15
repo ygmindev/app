@@ -30,6 +30,6 @@ export const fontStyler: StylerModel<FontStylerParamsModel> = (
 
     textAlign: align,
 
-    textTransform: isUppercase ? 'uppercase' : isCapitalize ? 'capitalize' : undefined,
+    textTransform: isUppercase ? 'uppercase' : isCapitalize || isTitle ? 'capitalize' : undefined,
   });
 };

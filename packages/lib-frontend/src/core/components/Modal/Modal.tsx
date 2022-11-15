@@ -9,10 +9,7 @@ import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.
 import { KeyboardProvider } from '@lib/frontend/root/providers/KeyboardProvider/KeyboardProvider';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
 import { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants';
-import {
-  THEME_RELATIVE_COLOR,
-  THEME_SIZE,
-} from '@lib/frontend/styling/utils/theme/theme.constants';
+import { THEME_RELATIVE_COLOR } from '@lib/frontend/styling/utils/theme/theme.constants';
 import { isString } from 'lodash';
 
 export const Modal: FCModel<ModalPropsModel> = ({
@@ -28,15 +25,6 @@ export const Modal: FCModel<ModalPropsModel> = ({
 }) => {
   // const { track } = useTracking();
   const theme = useTheme();
-
-  // useChange(isOpen, () => {
-  //   tracking &&
-  //     track({
-  //       object: tracking.object,
-  //       action: isOpen ? ANALYTICS_ACTION_OPEN : ANALYTICS_ACTION_CLOSE,
-  //       params: tracking.params,
-  //     });
-  // });
 
   return (
     <Portal>
@@ -74,8 +62,8 @@ export const Modal: FCModel<ModalPropsModel> = ({
                     color={isDisabled ? THEME_RELATIVE_COLOR.MUTED : undefined}
                     icon={ICON.times}
                     isDisabled={isDisabled}
+                    isTitle
                     onPress={onClose}
-                    size={THEME_SIZE.LARGE}
                   />
                 )}
               </Wrapper>

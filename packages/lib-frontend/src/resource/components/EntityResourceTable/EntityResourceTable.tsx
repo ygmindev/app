@@ -17,7 +17,7 @@ import { ENTITY_RESOURCE_TABLE_LIMIT_DEFAULT } from '@lib/frontend/resource/comp
 import type { EntityResourceTablePropsModel } from '@lib/frontend/resource/components/EntityResourceTable/EntityResourceTable.models';
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
+import { THEME_COLOR } from '@lib/frontend/styling/utils/theme/theme.constants';
 import { RESOURCE, RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import type { ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
@@ -119,7 +119,7 @@ export const EntityResourceTable = <TType extends EntityResourceModel, TForm>({
                         <Icon
                           icon={ICON.ellipsis}
                           isPressed={isActive}
-                          size={THEME_SIZE.LARGE}
+                          isTitle
                         />
                       )}
                       options={[

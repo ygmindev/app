@@ -9,7 +9,7 @@ import { useDimension } from '@lib/frontend/platform/hooks/useDimension/useDimen
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
 import { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants';
-import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
+import { THEME_COLOR } from '@lib/frontend/styling/utils/theme/theme.constants';
 import type { MergeArrayModel, PartialModel } from '@lib/shared/core/core.models';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import type { ReactElement } from 'react';
@@ -64,8 +64,8 @@ export const FormSteps = <TType extends MergeArrayModel<TSteps>, TSteps extends 
             <Icon
               icon={ICON.arrowLeft}
               isDisabled={current <= 0}
+              isTitle
               onPress={() => setCurrent(current - 1)}
-              size={THEME_SIZE.LARGE}
             />
           </Appear>
         </Wrapper>
