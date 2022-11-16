@@ -1,5 +1,6 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { sequence } from '@lib/shared/core/utils/sequence/sequence';
@@ -14,7 +15,7 @@ import type {
   TaskResultsModel,
 } from '@tool/task/core/utils/register/register.models';
 import { registry } from '@tool/task/core/utils/registry/registry';
-import { kebabCase } from 'lodash';
+import { isString, kebabCase } from 'lodash';
 
 const _handleResult = async (
   name: string,
@@ -79,7 +80,9 @@ export const register = <TOptions = object>({
 
   const _task = async (): Promise<void> => {
     if (cleanups) {
-      const onClosePromise = cleanups.map(_getTaskByName);
+      const onClosePromise = cleanups.map((cleanup) =>
+        isString(cleanup) ? _getTaskByName(cleanup) : (cleanup as CallablePromiseModel),
+      );
       ['exit', 'SIGINT', 'SIGUSR1', 'SIGUSR2', 'uncaughtException', 'SIGTERM'].forEach((event) =>
         process.on(event, async () => {
           await sequence(onClosePromise);
@@ -91,7 +94,9 @@ export const register = <TOptions = object>({
     setup({ environment: environment || (process.env.NODE_ENV as EnvironmentModel), overrides });
 
     if (dependencies) {
-      const dependenciesPromise = dependencies.map(_getTaskByName);
+      const dependenciesPromise = dependencies.map((dep) =>
+        isString(dep) ? _getTaskByName(dep) : (dep as CallablePromiseModel),
+      );
       await sequence(dependenciesPromise);
     }
 

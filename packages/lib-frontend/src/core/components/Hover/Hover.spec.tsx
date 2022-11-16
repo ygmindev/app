@@ -1,4 +1,5 @@
 import { Hover } from '@lib/frontend/core/components/Hover/Hover';
+import type { HoverPropsModel } from '@lib/frontend/core/components/Hover/Hover.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import { hoverIn } from '@lib/frontend/testing/utils/hoverIn/hoverIn';
@@ -10,7 +11,7 @@ const HOVER = 'HOVER';
 const ACTIVE = 'ACTIVE';
 const INACTIVE = 'INACTIVE';
 
-const { Component, displayName } = withTestComponent({
+const { Component, displayName } = withTestComponent<HoverPropsModel>({
   defaultProps: {
     children: (isActive) => (
       <Wrapper testID={HOVER}>

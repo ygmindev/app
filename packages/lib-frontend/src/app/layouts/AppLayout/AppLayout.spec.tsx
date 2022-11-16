@@ -1,8 +1,11 @@
 import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
+import type { AppLayoutPropsModel } from '@lib/frontend/app/layouts/AppLayout/AppLayout.models';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent({ target: AppLayout });
+const { Component, displayName, testID } = withTestComponent<AppLayoutPropsModel>({
+  target: AppLayout,
+});
 
 describe(displayName, () => {
   test('works', async () => {

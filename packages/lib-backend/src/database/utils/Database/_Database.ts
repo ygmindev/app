@@ -45,7 +45,7 @@ export abstract class _Database implements DatabaseModel {
   _getEntityManager = (): EntityManager => {
     const _em = this._entityManager;
     if (_em) {
-      return _em.fork({});
+      return _em.fork();
     }
     throw new UninitializedError(`database ${this._params.host}`);
   };

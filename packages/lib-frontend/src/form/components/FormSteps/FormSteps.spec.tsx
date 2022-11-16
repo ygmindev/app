@@ -1,12 +1,13 @@
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import { FormSteps } from '@lib/frontend/form/components/FormSteps/FormSteps';
+import type { FormStepsPropsModel } from '@lib/frontend/form/components/FormSteps/FormSteps.models';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
 
 const FIRST_CHILDREN = 'FIRST_CHILDREN';
 const SECOND_CHILDREN = 'SECOND_CHILDREN';
 
-const { Component, displayName, testID } = withTestComponent({
+const { Component, displayName, testID } = withTestComponent<FormStepsPropsModel>({
   defaultProps: {
     children: [<WrapperFixture text={FIRST_CHILDREN} />, <WrapperFixture text={SECOND_CHILDREN} />],
   },

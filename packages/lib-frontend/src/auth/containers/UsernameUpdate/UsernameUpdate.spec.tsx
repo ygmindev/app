@@ -1,8 +1,11 @@
 import { UsernameUpdate } from '@lib/frontend/auth/containers/UsernameUpdate/UsernameUpdate';
+import type { UsernameUpdatePropsModel } from '@lib/frontend/auth/containers/UsernameUpdate/UsernameUpdate.models';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent({ target: UsernameUpdate });
+const { Component, displayName, testID } = withTestComponent<UsernameUpdatePropsModel>({
+  target: UsernameUpdate,
+});
 
 describe(displayName, () => {
   test('works', async () => {

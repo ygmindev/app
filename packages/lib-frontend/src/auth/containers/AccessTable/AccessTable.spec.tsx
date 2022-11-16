@@ -1,8 +1,11 @@
 import { AccessTable } from '@lib/frontend/auth/containers/AccessTable/AccessTable';
+import type { AccessTablePropsModel } from '@lib/frontend/auth/containers/AccessTable/AccessTable.models';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent({ target: AccessTable });
+const { Component, displayName, testID } = withTestComponent<AccessTablePropsModel>({
+  target: AccessTable,
+});
 
 describe(displayName, () => {
   test('works', async () => {

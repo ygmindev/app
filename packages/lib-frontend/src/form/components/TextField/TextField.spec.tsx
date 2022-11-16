@@ -1,8 +1,9 @@
 import { TextField } from '@lib/frontend/form/components/TextField/TextField';
+import type { TextFieldPropsModel } from '@lib/frontend/form/components/TextField/TextField.models';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent({
+const { Component, displayName, testID } = withTestComponent<TextFieldPropsModel>({
   defaultProps: {
     defaultValue: '',
   },

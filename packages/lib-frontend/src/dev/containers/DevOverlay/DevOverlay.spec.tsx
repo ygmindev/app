@@ -1,8 +1,11 @@
 import { DevOverlay } from '@lib/frontend/dev/containers/DevOverlay/DevOverlay';
+import type { DevOverlayPropsModel } from '@lib/frontend/dev/containers/DevOverlay/DevOverlay.models';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent({ target: DevOverlay });
+const { Component, displayName, testID } = withTestComponent<DevOverlayPropsModel>({
+  target: DevOverlay,
+});
 
 describe(displayName, () => {
   test('works', async () => {

@@ -1,4 +1,5 @@
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
+import type { ModalPropsModel } from '@lib/frontend/core/components/Modal/Modal.models';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { waitForExpect } from '@lib/frontend/testing/utils/waitForExpect/waitForExpect';
@@ -6,7 +7,7 @@ import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent
 
 const CHILDREN = 'CHILDREN';
 
-const { Component, displayName } = withTestComponent({
+const { Component, displayName } = withTestComponent<ModalPropsModel>({
   defaultProps: {
     children: <WrapperFixture text={CHILDREN} />,
     isOpen: false,

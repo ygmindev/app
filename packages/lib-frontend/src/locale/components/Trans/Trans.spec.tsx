@@ -1,11 +1,14 @@
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Trans as _Trans } from '@lib/frontend/locale/components/Trans/Trans';
+import type { TransPropsModel } from '@lib/frontend/locale/components/Trans/Trans.models';
 import { THEME_COLOR } from '@lib/frontend/styling/utils/theme/theme.constants';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { waitForExpect } from '@lib/frontend/testing/utils/waitForExpect/waitForExpect';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
 
-const { Component: Trans, displayName } = withTestComponent({ target: _Trans });
+const { Component: Trans, displayName } = withTestComponent<
+  TransPropsModel<{ value1: string; value2: string }>
+>({ target: _Trans });
 
 describe(displayName, () => {
   test('works with string', async () => {

@@ -1,4 +1,5 @@
 import { Drop } from '@lib/frontend/core/components/Drop/Drop';
+import type { DropPropsModel } from '@lib/frontend/core/components/Drop/Drop.models';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
@@ -6,7 +7,7 @@ import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent
 const ACTIVE = 'ACTIVE';
 const INACTIVE = 'INACTIVE';
 
-const { Component, displayName, testID } = withTestComponent({
+const { Component, displayName, testID } = withTestComponent<DropPropsModel>({
   defaultProps: {
     render: (isActive) => <WrapperFixture text={isActive ? ACTIVE : INACTIVE} />,
   },

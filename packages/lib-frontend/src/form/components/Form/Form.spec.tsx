@@ -1,8 +1,9 @@
 import { Form } from '@lib/frontend/form/components/Form/Form';
+import type { FormPropsModel } from '@lib/frontend/form/components/Form/Form.models';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent({ target: Form });
+const { Component, displayName, testID } = withTestComponent<FormPropsModel>({ target: Form });
 
 describe(displayName, () => {
   test('works', async () => {

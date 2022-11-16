@@ -1,5 +1,8 @@
 import { Menu } from '@lib/frontend/core/components/Menu/Menu';
-import type { MenuOptionModel } from '@lib/frontend/core/components/Menu/Menu.models';
+import type {
+  MenuOptionModel,
+  MenuPropsModel,
+} from '@lib/frontend/core/components/Menu/Menu.models';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
@@ -7,7 +10,7 @@ import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent
 const ANCHOR = 'ANCHOR';
 const OPTIONS: Array<MenuOptionModel> = [];
 
-const { Component, displayName } = withTestComponent({
+const { Component, displayName } = withTestComponent<MenuPropsModel>({
   defaultProps: {
     anchor: <WrapperFixture text={ANCHOR} />,
     options: OPTIONS,

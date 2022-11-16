@@ -1,5 +1,8 @@
 import { Popup } from '@lib/frontend/core/components/Popup/Popup';
-import type { PopupRefModel } from '@lib/frontend/core/components/Popup/Popup.models';
+import type {
+  PopupPropsModel,
+  PopupRefModel,
+} from '@lib/frontend/core/components/Popup/Popup.models';
 import { display } from '@lib/frontend/core/utils/display/display';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
@@ -8,7 +11,7 @@ import { createRef } from 'react';
 const URL = 'URL';
 const popupRef = createRef<PopupRefModel>();
 
-const { Component, displayName } = withTestComponent({
+const { Component, displayName } = withTestComponent<PopupPropsModel>({
   defaultProps: {
     forwardedRef: popupRef,
   },

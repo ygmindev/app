@@ -1,4 +1,5 @@
 import { Activate } from '@lib/frontend/core/components/Activate/Activate';
+import type { ActivatePropsModel } from '@lib/frontend/core/components/Activate/Activate.models';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import { hoverIn } from '@lib/frontend/testing/utils/hoverIn/hoverIn';
 import { hoverOut } from '@lib/frontend/testing/utils/hoverOut/hoverOut';
@@ -10,7 +11,7 @@ const ACTIVATE = 'ACTIVATE';
 const ACTIVE = 'ACTIVE';
 const INACTIVE = 'INACTIVE';
 
-const { Component, displayName } = withTestComponent({
+const { Component, displayName } = withTestComponent<ActivatePropsModel>({
   defaultProps: {
     children: (isActive) => (
       <WrapperFixture

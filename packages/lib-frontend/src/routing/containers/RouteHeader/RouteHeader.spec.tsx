@@ -1,8 +1,11 @@
-import { RouteHeader } from '@lib/frontend/routing/components/RouteHeader/RouteHeader';
+import { RouteHeader } from '@lib/frontend/routing/containers/RouteHeader/RouteHeader';
+import type { RouteHeaderPropsModel } from '@lib/frontend/routing/containers/RouteHeader/RouteHeader.models';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent({ target: RouteHeader });
+const { Component, displayName, testID } = withTestComponent<RouteHeaderPropsModel>({
+  target: RouteHeader,
+});
 
 describe(displayName, () => {
   test('works', async () => {

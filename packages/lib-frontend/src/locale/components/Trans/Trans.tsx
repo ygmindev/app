@@ -4,7 +4,7 @@ import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { textStyler } from '@lib/frontend/styling/utils/styler/textStyler/textStyler';
 import type { ReactElement } from 'react';
 
-export const Trans = <TParams,>({
+export const Trans = <TParams = undefined,>({
   Components,
   i18nKey,
   ns,

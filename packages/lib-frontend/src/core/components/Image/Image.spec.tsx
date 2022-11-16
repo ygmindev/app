@@ -1,8 +1,9 @@
 import { Image } from '@lib/frontend/core/components/Image/Image';
+import type { ImagePropsModel } from '@lib/frontend/core/components/Image/Image.models';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent({
+const { Component, displayName, testID } = withTestComponent<ImagePropsModel>({
   defaultProps: {
     src: '',
   },

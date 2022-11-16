@@ -1,4 +1,5 @@
 import { Tabs } from '@lib/frontend/core/components/Tabs/Tabs';
+import type { TabsPropsModel } from '@lib/frontend/core/components/Tabs/Tabs.models';
 import type { OptionModel } from '@lib/frontend/core/core.models';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
@@ -17,7 +18,7 @@ const TABS: Array<OptionModel> = [
   },
 ];
 
-const { Component, displayName, testID } = withTestComponent({
+const { Component, displayName, testID } = withTestComponent<TabsPropsModel>({
   defaultProps: {
     tabs: TABS,
   },

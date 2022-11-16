@@ -1,8 +1,9 @@
 import { Text } from '@lib/frontend/core/components/Text/Text';
+import type { TextPropsModel } from '@lib/frontend/core/components/Text/Text.models';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent({ target: Text });
+const { Component, displayName, testID } = withTestComponent<TextPropsModel>({ target: Text });
 
 describe(displayName, () => {
   const TEST = 'test';
