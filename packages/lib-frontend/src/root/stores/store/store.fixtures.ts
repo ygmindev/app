@@ -9,7 +9,7 @@ import { USER } from '@lib/shared/user/user.constants';
 export const STORE_FIXTURE = configureStore({
   [LOCALE]: {},
   [NOTIFICATION]: {
-    alerts: [],
+    notifications: [],
   },
   [ROUTING]: {},
   [STYLING]: {

@@ -7,8 +7,8 @@ import { useSelector } from '@lib/frontend/root/hooks/useSelector/useSelector';
 import { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const Notifications: SFCModel<NotificationsPropsModel> = () => {
-  const alerts = useSelector((state) => state.notification.alerts);
-  return alerts.length ? (
+  const notifications = useSelector((state) => state.notification.notifications);
+  return notifications.length ? (
     <Wrapper
       bottom={0}
       left={0}
@@ -17,10 +17,10 @@ export const Notifications: SFCModel<NotificationsPropsModel> = () => {
       right={0}
       width={NOTIFICATIONS_MAX_WIDTH}
       zIndex={1}>
-      {alerts.map((alert) => (
+      {notifications.map((notification) => (
         <Notification
-          {...alert}
-          key={alert.id}
+          {...notification}
+          key={notification.id}
         />
       ))}
     </Wrapper>

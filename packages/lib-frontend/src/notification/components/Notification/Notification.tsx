@@ -11,8 +11,7 @@ import {
   NOTIFICATION_WIDTH,
 } from '@lib/frontend/notification/components/Notification/Notification.constants';
 import type { NotificationPropsModel } from '@lib/frontend/notification/components/Notification/Notification.models';
-import { notificationActions } from '@lib/frontend/notification/stores/reducer/reducer';
-import { dispatch } from '@lib/frontend/root/stores/store/store';
+import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
 import { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants';
@@ -20,46 +19,42 @@ import {
   THEME_COLOR,
   THEME_RELATIVE_COLOR,
   THEME_SHADE,
+  THEME_SIZE,
 } from '@lib/frontend/styling/utils/theme/theme.constants';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
-import { useCallback, useState } from 'react';
 
 export const Notification: SFCModel<NotificationPropsModel> = ({
   color = THEME_COLOR.PRIMARY,
   icon,
   id,
-  isPermanent,
+  isInfinite,
+  isRemoving,
   message,
   title,
   ...props
 }) => {
+  const theme = useTheme();
   const { styles } = useStyles({ props });
   const { t } = useTranslation();
-  const [isVisible, setIsVisible] = useState<boolean>(true);
-  const theme = useTheme();
-
-  const _handleClose = useCallback(() => {
-    setIsVisible(false);
-    setTimeout(() => dispatch(notificationActions.remove(id)), theme.animation.duration);
-  }, [id, setIsVisible, theme.animation.duration]);
+  const { remove } = useNotification();
 
   const isMounted = useMount(
     {
-      onMount: isPermanent
+      onMount: isInfinite
         ? undefined
         : async () => {
             await sleep({ duration: NOTIFICATION_DURATION });
-            isMounted && _handleClose();
+            isMounted && remove(id);
           },
     },
-    [id, _handleClose, isPermanent],
+    [id, remove, isInfinite],
   );
 
   return (
     <Appear
       isCenter
       isScalable
-      isVisible={isVisible}
+      isVisible={!isRemoving}
       style={styles}>
       <Wrapper
         backgroundColor={color}
@@ -69,7 +64,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
         position={SHAPE_POSITION.RELATIVE}
         round
         width={NOTIFICATION_WIDTH}>
-        {isPermanent ? null : (
+        {isInfinite ? null : (
           <Wrapper
             animation={{
               animation: { from: { width: 0 }, to: { width: NOTIFICATION_WIDTH } },
@@ -99,7 +94,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
             basis={0}
             grow
             isWrap
-            spacing="s">
+            spacing={THEME_SIZE.SMALL}>
             {title && (
               <Text
                 color={THEME_RELATIVE_COLOR.CONTRAST}
@@ -115,7 +110,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
             color={THEME_RELATIVE_COLOR.CONTRAST}
             from={color ? { backgroundColor: theme.colors[color].main } : undefined}
             icon={ICON.times}
-            onPress={_handleClose}
+            onPress={() => remove(id)}
             to={color ? { backgroundColor: theme.colors[color].dark } : undefined}
           />
         </Wrapper>

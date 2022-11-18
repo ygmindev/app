@@ -1,10 +1,10 @@
-import { Animation } from '@lib/frontend/animation/components/Animation/Animation';
-import type { AnimationPropsModel } from '@lib/frontend/animation/components/Animation/Animation.models';
+import { DevTools } from '@lib/frontend/dev/containers/DevTools/DevTools';
+import type { DevToolsPropsModel } from '@lib/frontend/dev/containers/DevTools/DevTools.models';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<AnimationPropsModel>({
-  target: Animation,
+const { Component, displayName, testID } = withTestComponent<DevToolsPropsModel>({
+  target: DevTools,
 });
 
 describe(displayName, () => {

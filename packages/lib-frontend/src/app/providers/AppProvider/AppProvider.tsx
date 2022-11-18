@@ -3,7 +3,7 @@ import type { AppProviderPropsModel } from '@lib/frontend/app/providers/AppProvi
 import { Loading } from '@lib/frontend/core/components/Loading/Loading';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { DevOverlay } from '@lib/frontend/dev/containers/DevOverlay/DevOverlay';
+import { DevTools } from '@lib/frontend/dev/containers/DevTools/DevTools';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
 
@@ -26,7 +26,7 @@ export const AppProvider: SFCModel<AppProviderPropsModel> = ({ children, testID,
         </Wrapper>
       )}
 
-      {process.env.NODE_ENV === 'development' && <DevOverlay />}
+      {process.env.NODE_ENV === 'development' && <DevTools />}
     </Wrapper>
   );
 };

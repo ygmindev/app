@@ -1,6 +1,4 @@
-import type { WithChildrenPropsModel } from '@lib/frontend/core/decorators/withChildrenProps/withChildrenProps.models';
-import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
+import type { UseAnimationParamsModel } from '@lib/frontend/animation/hooks/useAnimation/useAnimation.models';
+import type { WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 
-export interface SlidePropsModel extends WithTestIdModel, WithChildrenPropsModel {
-  isVisible?: boolean;
-}
+export type SlidePropsModel = WrapperPropsModel & Omit<UseAnimationParamsModel, 'type'>;

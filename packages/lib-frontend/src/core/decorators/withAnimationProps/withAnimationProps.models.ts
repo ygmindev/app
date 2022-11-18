@@ -6,6 +6,7 @@ export interface WithAnimationPropsModel {
   animation?: { from: StyleModel; to: StyleModel };
   delay?: number;
   duration?: number;
+  isInfinite?: boolean;
   onEnd?: CallableModel;
   onStart?: CallableModel;
   transition?: Array<

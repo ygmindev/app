@@ -1,5 +1,4 @@
-import { Animation } from '@lib/frontend/animation/components/Animation/Animation';
-import { ANIMATION_TYPE } from '@lib/frontend/animation/components/Animation/Animation.constants';
+import { Slide } from '@lib/frontend/animation/components/Slide/Slide';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useSelector } from '@lib/frontend/root/hooks/useSelector/useSelector';
@@ -23,26 +22,24 @@ export const Active: SFCModel<ActivePropsModel> = ({ testID, ...props }) => {
       position={SHAPE_POSITION.RELATIVE}
       style={styles}
       testID={testID}>
-      {previousLocation && previousLocation.pathname && (
-        <Wrapper isAbsoluteFill>
-          <Animation
-            duration={theme.animation.transition}
-            isVisible={isActive({ from: previousLocation.pathname })}
-            type={ANIMATION_TYPE.SLIDE}>
-            {previous}
-          </Animation>
-        </Wrapper>
-      )}
+      <Slide
+        duration={theme.animation.transition}
+        isAbsoluteFill
+        isVisible={
+          previousLocation && previousLocation.pathname
+            ? isActive({ from: previousLocation.pathname })
+            : true
+        }>
+        {previous}
+      </Slide>
 
       {currentLocation && currentLocation.pathname && (
-        <Wrapper isAbsoluteFill>
-          <Animation
-            duration={theme.animation.transition}
-            isVisible={isActive({ from: currentLocation.pathname })}
-            type={ANIMATION_TYPE.SLIDE}>
-            {current}
-          </Animation>
-        </Wrapper>
+        <Slide
+          duration={theme.animation.transition}
+          isAbsoluteFill
+          isVisible={isActive({ from: currentLocation.pathname })}>
+          {current}
+        </Slide>
       )}
     </Wrapper>
   );

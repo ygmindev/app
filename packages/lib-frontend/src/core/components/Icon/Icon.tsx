@@ -56,6 +56,12 @@ export const Icon: SFCModel<IconPropsModel> = ({
     element = (
       <Press
         confirmMessage={confirmMessage}
+        from={{
+          ...(props.color
+            ? { backgroundColor: get(theme.colors, [props.color, 'light']) || props.color }
+            : {}),
+          ...(from || {}),
+        }}
         isDisabled={isDisabled}
         isPressed={isPressed}
         onPress={onPress}
@@ -64,10 +70,7 @@ export const Icon: SFCModel<IconPropsModel> = ({
         testID={testID}
         to={{
           ...(props.color
-            ? {
-                backgroundColor:
-                  get(theme.colors, [props.color, isPressed ? 'dark' : 'light']) || props.color,
-              }
+            ? { backgroundColor: get(theme.colors, [props.color, 'dark']) || props.color }
             : {}),
           ...(to || {}),
         }}

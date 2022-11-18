@@ -1,3 +1,3 @@
 import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
 
-export interface DevOverlayPropsModel extends WithTestIdModel {}
+export interface DevToolsPropsModel extends WithTestIdModel {}

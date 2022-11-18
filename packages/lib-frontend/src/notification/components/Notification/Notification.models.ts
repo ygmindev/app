@@ -5,12 +5,14 @@ import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.mode
 
 export interface NotificationModel extends WithIdModel, WithIconPropsModel {
   color?: ThemeColorModel;
-  isPermanent?: boolean;
+  isInfinite?: boolean;
+  isRemoving?: boolean;
   message?: string;
   title?: string;
 }
 
 export interface NotificationDataModel extends Omit<NotificationModel, 'id' | 'title' | 'message'> {
+  id?: string;
   message?: TranslationTextModel;
   title?: TranslationTextModel;
 }

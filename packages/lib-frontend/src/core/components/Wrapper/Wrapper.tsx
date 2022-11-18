@@ -149,6 +149,7 @@ export const Wrapper: SFCModel<WrapperPropsModel> = ({
           delay: animation.delay,
           duration: animation.duration || theme.animation.duration,
           easing: 'ease-in-out',
+          iterationCount: animation.isInfinite ? 'infinite' : undefined,
           onAnimationBegin: animation.animation ? animation.onStart : undefined,
           onAnimationEnd: animation.animation ? animation.onEnd : undefined,
           onTransitionBegin: animation.transition ? animation.onStart : undefined,

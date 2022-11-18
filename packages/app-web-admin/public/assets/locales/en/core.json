@@ -2,6 +2,7 @@
   "labels": {
     "cancel": "Cancel",
     "continue": "Continue",
+    "loading": "Loading",
     "noResult": "No result",
     "submit": "Submit",
     "tryAgain": "Try again"
