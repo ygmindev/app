@@ -13,7 +13,7 @@ export type ResourceResolverParamsModel<
   Resource: ConstructorModel<TType>;
   ResourceData?: ConstructorModel<TForm>;
   ResourceService: ConstructorModel<PartialModel<ResourceServiceModel<TType, TForm, TRoot>>>;
-  Root?: TRoot extends undefined ? never : ConstructorModel<TRoot>;
+  RootResource?: TRoot extends undefined ? never : ConstructorModel<TRoot>;
   createAccess?: AccessLevelModel;
   getAccess?: AccessLevelModel;
   removeAccess?: AccessLevelModel;

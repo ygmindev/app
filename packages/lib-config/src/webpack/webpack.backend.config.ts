@@ -57,6 +57,7 @@ export const webpackConfig = (params: WebpackParamsModel): Configuration =>
           values: [
             {
               globals: globalsConfig,
+
               loader: { loader: 'ts-loader', options: { transpileOnly: true } },
             },
             { ...params, entry: params.entry || { index: fromWorking('src/index') } },

@@ -1,6 +1,6 @@
 import { withEntity } from '@lib/backend/resource/decorators/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/decorators/withField/withField';
-import { FIELD_TYPE } from '@lib/backend/resource/decorators/withField/withField.constants';
+import { FIELD_TYPE } from '@lib/shared/form/form.constants';
 import type { PageInfoModel } from '@lib/shared/resource/utils/Connection/Connection.models';
 
 @withEntity({ name: 'PageInfo' })

@@ -10,11 +10,11 @@ export const withInput = <
   TRoot = undefined,
 >({
   Resource,
-  Root,
+  RootResource,
   method,
   name,
 }: WithInputParamsModel<TMethod, TType, TForm, TRoot>): ParameterDecorator => {
   const _name = `${name}${method}`;
-  const _Input = Input({ Resource, Root, method, name: _name });
+  const _Input = Input({ Resource, RootResource, method, name: _name });
   return ArgDecorator('input', () => _Input);
 };

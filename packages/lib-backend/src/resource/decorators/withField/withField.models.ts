@@ -1,6 +1,4 @@
-import type { FIELD_TYPE } from '@lib/backend/resource/decorators/withField/withField.constants';
-
-export type FieldTypeModel = `${FIELD_TYPE}`;
+import type { FieldTypeModel } from '@lib/shared/form/form.models';
 
 export interface WithFieldParamsModel<TType> {
   Resource?: TType;

@@ -1,4 +1,3 @@
-import type { BOOLEAN_VALUE } from '@lib/shared/core/core.constants';
 import type { Function } from 'ts-toolbelt';
 import type { Constructor, Get, PartialDeep, Primitive } from 'type-fest';
 
@@ -24,8 +23,6 @@ export type InferModel<TType> = TType extends Array<infer TElement> ? TElement :
 export type PathModel<TType, TKey extends string> = Function.AutoPath<TType, TKey>;
 
 export type ValueTypeModel<TType, TKey extends string> = Get<TType, TKey, { strict: true }>;
-
-export type BooleanValueModel = `${BOOLEAN_VALUE}`;
 
 export type MergeArrayModel<TType extends Array<unknown>> = TType extends [
   v: infer TValue,

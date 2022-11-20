@@ -5,6 +5,7 @@ import type { ArgsParamsModel } from '@lib/backend/resource/utils/Args/Args.mode
 import { Filter } from '@lib/backend/resource/utils/Filter/Filter';
 import { Form } from '@lib/backend/resource/utils/Form/Form';
 import { Pagination } from '@lib/backend/resource/utils/Pagination/Pagination';
+import { Root } from '@lib/backend/resource/utils/Root/Root';
 import { Update } from '@lib/backend/resource/utils/Update/Update';
 import { InvalidTypeError } from '@lib/shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
@@ -14,60 +15,72 @@ import type { FilterModel } from '@lib/shared/resource/utils/Filter/Filter.model
 import type { PaginationModel } from '@lib/shared/resource/utils/Pagination/Pagination.models';
 import type { UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 
-export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm>({
+export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoot = undefined>({
   Resource,
+  RootResource,
   method,
   name,
-}: ArgsParamsModel<TMethod, TType, TForm>): ResourceConstructorModel<
-  ArgsModel<TMethod, TType, TForm>
+}: ArgsParamsModel<TMethod, TType, TForm, TRoot>): ResourceConstructorModel<
+  ArgsModel<TMethod, TType, TForm, TRoot>
 > => {
+  const _Root = Root({ RootResource, name });
   switch (method) {
     case RESOURCE_METHOD_TYPE.GET:
     case RESOURCE_METHOD_TYPE.GET_MANY:
     case RESOURCE_METHOD_TYPE.REMOVE: {
       @withEntity({ isAbstract: true })
       class _Args
+        extends _Root
         implements
-          ArgsModel<RESOURCE_METHOD_TYPE.GET, TType, TForm>,
-          ArgsModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm>,
-          ArgsModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm>
+          ArgsModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>,
+          ArgsModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot>,
+          ArgsModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm, TRoot>
       {
         @withField({ Resource: Filter({ Resource, name }) })
         filter!: FilterModel<TType>;
       }
-      return _Args as ResourceConstructorModel<ArgsModel<TMethod, TType, TForm>>;
+      return _Args as ResourceConstructorModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
     case RESOURCE_METHOD_TYPE.CREATE: {
       const _Form = Form({ Resource, name });
 
       @withEntity({ isAbstract: true })
-      class _Args implements ArgsModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm> {
+      class _Args
+        extends _Root
+        implements ArgsModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>
+      {
         @withField({ Resource: _Form })
         form!: TForm;
       }
-      return _Args as ResourceConstructorModel<ArgsModel<TMethod, TType, TForm>>;
+      return _Args as ResourceConstructorModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
     case RESOURCE_METHOD_TYPE.UPDATE: {
       @withEntity({ isAbstract: true })
-      class _Args implements ArgsModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm> {
+      class _Args
+        extends _Root
+        implements ArgsModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot>
+      {
         @withField({ Resource: Filter({ Resource, name }) })
         filter!: FilterModel<TType>;
 
         @withField({ Resource: Update({ Resource, name }) })
         update!: UpdateModel<TType>;
       }
-      return _Args as ResourceConstructorModel<ArgsModel<TMethod, TType, TForm>>;
+      return _Args as ResourceConstructorModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
     case RESOURCE_METHOD_TYPE.GET_CONNECTION: {
       @withEntity({ isAbstract: true })
-      class _Args implements ArgsModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm> {
+      class _Args
+        extends _Root
+        implements ArgsModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm, TRoot>
+      {
         @withField({ Resource: Filter({ Resource, name }) })
         filter!: FilterModel<TType>;
 
         @withField({ Resource: Pagination })
         pagination!: PaginationModel;
       }
-      return _Args as ResourceConstructorModel<ArgsModel<TMethod, TType, TForm>>;
+      return _Args as ResourceConstructorModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
     default:
       throw new InvalidTypeError(method, RESOURCE_METHOD_TYPE);

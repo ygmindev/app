@@ -4,7 +4,7 @@ import {
   AUTH_MENU_USERNAME_WIDTH,
 } from '@lib/frontend/auth/containers/AuthMenu/AuthMenu.constants';
 import type { AuthMenuPropsModel } from '@lib/frontend/auth/containers/AuthMenu/AuthMenu.models';
-import { useSignIn } from '@lib/frontend/auth/hooks/useSignIn/useSignIn';
+import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Menu } from '@lib/frontend/core/components/Menu/Menu';
 import { Text } from '@lib/frontend/core/components/Text/Text';
@@ -23,7 +23,7 @@ import { useMemo } from 'react';
 
 export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
   const { styles } = useStyles({ props });
-  const { signOut } = useSignIn();
+  const { signOut } = useSignInResource();
   const { push } = useRouter();
   const user = useSelector((state) => state.user.currentUser);
 

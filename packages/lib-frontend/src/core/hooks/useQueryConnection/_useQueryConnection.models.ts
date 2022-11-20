@@ -9,7 +9,7 @@ import type { PaginationModel } from '@lib/shared/resource/utils/Pagination/Pagi
 
 export interface _UseQueryConnectionParamsModel<TType>
   extends Omit<_UseQueryParamsModel<TType>, 'query'> {
-  limit: number;
+  limit?: number;
   query(params: PaginationModel): Promise<ConnectionModel<TType> | null>;
 }
 

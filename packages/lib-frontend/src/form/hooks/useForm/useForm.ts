@@ -17,6 +17,10 @@ export const useForm = <TType>({
 }: UseFormParamsModel<TType>): UseFormModel<TType> => {
   const { t } = useTranslation([CORE]);
 
+  const _onSubmit = async (data: TType): Promise<void> => {
+    return onSubmit && onSubmit(data);
+  };
+
   const _validate = <TValue>(
     data?: TValue,
     formValidators?: FormValidatorsModel<TValue>,
@@ -41,5 +45,9 @@ export const useForm = <TType>({
       {},
     );
 
-  return _useForm({ initialValues, onSubmit, onValidate: (data) => _validate(data, validators) });
+  return _useForm({
+    initialValues,
+    onSubmit: _onSubmit,
+    onValidate: (data) => _validate(data, validators),
+  });
 };

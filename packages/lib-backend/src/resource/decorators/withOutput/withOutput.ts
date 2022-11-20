@@ -27,12 +27,12 @@ export const withOutput =
     name,
     method,
     Resource,
-    Root,
+    RootResource,
     level = ACCESS_LEVEL.RESTRICTED,
   }: WithOutputParamsModel<TMethod, TType, TRoot>): MethodDecorator =>
   (target, propertyKey, descriptor) => {
     const _name = `${name}${method}`;
-    const _Output = Output({ Resource, Root, method, name: _name });
+    const _Output = Output({ Resource, RootResource, method, name: _name });
 
     withAccess({ level })(target, propertyKey, descriptor);
     _getOperation(method)(() => _Output || Boolean, { name: _name })(

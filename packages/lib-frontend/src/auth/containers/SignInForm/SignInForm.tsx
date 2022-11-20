@@ -2,7 +2,7 @@ import { OtpForm } from '@lib/frontend/auth/containers/OtpForm/OtpForm';
 import type { SignInFormPropsModel } from '@lib/frontend/auth/containers/SignInForm/SignInForm.models';
 import { UsernameForm } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm';
 import type { UsernameFormModel } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.models';
-import { useSignIn } from '@lib/frontend/auth/hooks/useSignIn/useSignIn';
+import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { FormSteps } from '@lib/frontend/form/components/FormSteps/FormSteps';
@@ -18,7 +18,7 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const { back, replace } = useRouter();
-  const { signIn } = useSignIn();
+  const { signIn } = useSignInResource();
 
   const _handleSubmit = async (form: SignInFormModel): Promise<void> => {
     await signIn(form);

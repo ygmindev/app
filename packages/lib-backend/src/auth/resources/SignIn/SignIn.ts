@@ -1,6 +1,6 @@
 import { withEntity } from '@lib/backend/resource/decorators/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/decorators/withField/withField';
-import { FIELD_TYPE } from '@lib/backend/resource/decorators/withField/withField.constants';
+import { FIELD_TYPE } from '@lib/shared/form/form.constants';
 import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
 import { User } from '@lib/backend/user/resources/User/User';
 import { SIGN_IN_RESOURCE_NAME } from '@lib/shared/auth/resources/SignIn/SignIn.constants';

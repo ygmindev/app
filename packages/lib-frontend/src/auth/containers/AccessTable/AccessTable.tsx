@@ -3,7 +3,7 @@ import type { AccessTablePropsModel } from '@lib/frontend/auth/containers/Access
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { EntityResourceTable } from '@lib/frontend/resource/components/EntityResourceTable/EntityResourceTable';
+import { Resources } from '@lib/frontend/resource/components/Resources/Resources';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { AUTH } from '@lib/shared/auth/auth.constants';
 import type { AccessFormModel, AccessModel } from '@lib/shared/auth/resources/Access/Access.models';
@@ -16,7 +16,7 @@ export const AccessTable: SFCModel<AccessTablePropsModel> = ({ testID, ...props 
       grow
       style={styles}
       testID={testID}>
-      <EntityResourceTable<AccessModel, AccessFormModel> {...ACCESS_TABLE_PROPS} />
+      <Resources<AccessModel, AccessFormModel> {...ACCESS_TABLE_PROPS} />
     </Wrapper>
   );
 };

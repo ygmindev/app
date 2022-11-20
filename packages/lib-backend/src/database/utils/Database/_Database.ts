@@ -98,11 +98,11 @@ export abstract class _Database implements DatabaseModel {
       },
 
       getConnection: async ({ filter, pagination }) => {
-        const _filter = cleanDocument(filter) as object;
-        const result = await getConnection<TType>({
+        const _filter = cleanDocument(filter);
+        const result = await getConnection({
           count: await _service.count(),
-          filter: _filter,
           getMany: _service.getMany,
+          input: { filter: _filter },
           pagination,
         });
         return { result: result || undefined };

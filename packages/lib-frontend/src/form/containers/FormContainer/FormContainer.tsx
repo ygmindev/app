@@ -23,7 +23,8 @@ import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { FLEX_JUSTIFY } from '@lib/frontend/styling/utils/styler/flexStyler/flexStyler.constants';
 import { THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
 import { promisify } from '@lib/shared/core/utils/promisify/promisify';
-import { flatten, get, isEqual, map, pick } from 'lodash';
+import { FIELD_TYPE } from '@lib/shared/form/form.constants';
+import { flatten, get, isEqual, map, reduce, toNumber } from 'lodash';
 import type { ReactElement } from 'react';
 import { cloneElement, useCallback, useMemo } from 'react';
 
@@ -46,14 +47,33 @@ export const FormContainer = <TType,>({
   const { error } = useNotification();
   const isMobile = useIsMobile();
 
-  const _fieldIds = useMemo(() => map(flatten(map(rows, 'fields')), 'id'), [rows]);
+  const _fields = useMemo(() => flatten(map(rows, 'fields')), [rows]);
+
+  const _getValues = (data: TType): TType =>
+    reduce<FormContainerFieldModel | null | undefined, TType>(
+      _fields,
+      (result, field) => {
+        if (field?.id) {
+          let _value = (data as Record<string, unknown>)[field.id];
+          switch (field?.type) {
+            case FIELD_TYPE.NUMBER: {
+              _value = toNumber(_value);
+              break;
+            }
+          }
+          return { ...result, [field.id]: _value };
+        }
+        return result;
+      },
+      {} as TType,
+    );
 
   const _handleSubmit = async (): Promise<void> => {
-    const initialValuesPick = pick(initialValues, _fieldIds);
-    const valuesPicked = pick(values, _fieldIds);
-    return isEqual(initialValuesPick, valuesPicked)
+    const _initialValues = initialValues && _getValues(initialValues);
+    const _values = _getValues(values);
+    return isEqual(_initialValues, _values)
       ? error({ message: t('core:messages.validateChanged') })
-      : onSubmit && onSubmit(valuesPicked as TType);
+      : onSubmit && onSubmit(_values as TType);
   };
 
   const {

@@ -23,8 +23,8 @@ describe(displayName, () => {
   test('works', async () => {
     const result = await getConnection({
       count: entities.length,
-      filter: {},
       getMany: async ({ filter }) => ({ result: _filter(entities, filter) }),
+      input: { filter: {} },
       pagination: { first: LIMIT },
     });
     expect(map(result?.edges, 'node')).toStrictEqual(entities);
@@ -34,10 +34,10 @@ describe(displayName, () => {
     const filter = { stringProperty: 'stringProperty' };
     const result = await getConnection({
       count: entities.length,
-      filter,
       getMany: async ({ filter }) => ({
         result: _filter(entities, filter) as Array<DummyEntityResourceModel>,
       }),
+      input: { filter: {} },
       pagination: { first: LIMIT },
     });
     const expected = _filter(entities, filter);

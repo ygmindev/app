@@ -7,7 +7,6 @@ import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { flattenObject } from '@lib/shared/core/utils/flattenObject/flattenObject';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
-import type { WithRootModel } from '@lib/shared/resource/decorators/withRoot/withRoot.models';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { EmbeddedResourceModel } from '@lib/shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
 import type {
@@ -20,6 +19,7 @@ import type { FilterModel } from '@lib/shared/resource/utils/Filter/Filter.model
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 import type { ResourceServiceDecoratorModel } from '@lib/shared/resource/utils/Resource/ResourceService/ResourceService.models';
+import type { RootModel } from '@lib/shared/resource/utils/Root/Root.models';
 import type { UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 import { forEach, isArray, isPlainObject, map, reduce } from 'lodash';
 
@@ -186,6 +186,7 @@ export const EmbeddedResourceService = <
           ? await this.decorators.afterGetMany({ output })
           : output;
       }
+
       throw new InvalidArgumentError();
     }
 
@@ -200,8 +201,8 @@ export const EmbeddedResourceService = <
       if (_input.root) {
         const result = await getConnection({
           count: await this.count(_input),
-          filter: _input.filter,
           getMany: this.getMany.bind(this),
+          input: _input,
           pagination: _input.pagination,
         });
         const output: OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot> = {
@@ -270,10 +271,11 @@ export const EmbeddedResourceService = <
       throw new InvalidArgumentError();
     }
 
-    async count(input: WithRootModel<TRoot>): Promise<number> {
+    async count(input: RootModel<TRoot>): Promise<number> {
       if (input.root) {
         const { result: rootResult } = await this._rootService.get({ filter: input.root });
-        return (rootResult && (rootResult[name] as unknown as Array<TType>).length) || 0;
+        const result = rootResult && (rootResult[name] as unknown as Array<TType>);
+        return result?.length || 0;
       }
       throw new InvalidArgumentError();
     }

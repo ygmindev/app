@@ -1,5 +1,5 @@
-import { FIELD_TYPE } from '@lib/backend/resource/decorators/withField/withField.constants';
 import type { WithFieldParamsModel } from '@lib/backend/resource/decorators/withField/withField.models';
+import { FIELD_TYPE } from '@lib/shared/form/form.constants';
 import { ArrayType, Embedded, Index, PrimaryKey, Property } from '@mikro-orm/core';
 import { Field } from 'type-graphql';
 import type { ReturnTypeFuncValue } from 'type-graphql/dist/decorators/types';
@@ -65,15 +65,15 @@ const _getColumn = <TType>({
 
 export const withField =
   <TType>({
-    type = FIELD_TYPE.COLUMN,
     Resource,
+    defaultValue,
     expire,
     isArray,
     isOptional,
     isRepository = false,
     isSchema = true,
     isUnique,
-    defaultValue,
+    type,
   }: WithFieldParamsModel<TType> = {}): PropertyDecorator =>
   (target, propertyKey) => {
     (expire || isUnique) &&

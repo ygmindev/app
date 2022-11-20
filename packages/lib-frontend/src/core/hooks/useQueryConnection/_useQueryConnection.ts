@@ -3,6 +3,7 @@ import type {
   _UseQueryConnectionParamsModel,
   _UseQueryConnectionResultModel,
 } from '@lib/frontend/core/hooks/useQueryConnection/_useQueryConnection.models';
+import { USE_QUERY_CONNECTION_LIMIT_DEFAULT } from '@lib/frontend/core/hooks/useQueryConnection/useQueryConnection.constants';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import type { ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
@@ -11,7 +12,7 @@ import { toNumber } from 'lodash';
 export const _useQueryConnection = <TType, TError extends Error = Error>({
   cache,
   id,
-  limit,
+  limit = USE_QUERY_CONNECTION_LIMIT_DEFAULT,
   query,
 }: _UseQueryConnectionParamsModel<TType>): _UseQueryConnectionResultModel<TType, TError> => {
   const queryClient = useQueryClient();

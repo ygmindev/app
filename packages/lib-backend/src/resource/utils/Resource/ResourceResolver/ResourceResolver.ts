@@ -21,7 +21,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
   Resource,
   ResourceService,
   ResourceData,
-  Root,
+  RootResource,
   createAccess = ACCESS_LEVEL.RESTRICTED,
   getAccess = ACCESS_LEVEL.RESTRICTED,
   updateAccess = ACCESS_LEVEL.RESTRICTED,
@@ -45,7 +45,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
       _createExists,
       withOutput({
         Resource,
-        Root,
+        RootResource,
         level: createAccess,
         method: RESOURCE_METHOD_TYPE.CREATE,
         name,
@@ -56,7 +56,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
         _createExists,
         withInput({
           Resource: ResourceData || (Resource as unknown as ConstructorModel<TForm>),
-          Root,
+          RootResource: RootResource,
           method: RESOURCE_METHOD_TYPE.CREATE,
           name,
         }),
@@ -73,7 +73,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
       _getExists,
       withOutput({
         Resource,
-        Root,
+        RootResource,
         level: getAccess,
         method: RESOURCE_METHOD_TYPE.GET,
         name,
@@ -82,7 +82,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
     async get(
       @withCondition(
         _getExists,
-        withInput({ Resource, Root, method: RESOURCE_METHOD_TYPE.GET, name }),
+        withInput({ Resource, RootResource: RootResource, method: RESOURCE_METHOD_TYPE.GET, name }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>> {
@@ -96,7 +96,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
       _getManyExists,
       withOutput({
         Resource,
-        Root,
+        RootResource,
         level: getAccess,
         method: RESOURCE_METHOD_TYPE.GET_MANY,
         name,
@@ -105,7 +105,12 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
     async getMany(
       @withCondition(
         _getManyExists,
-        withInput({ Resource, Root, method: RESOURCE_METHOD_TYPE.GET_MANY, name }),
+        withInput({
+          Resource,
+          RootResource: RootResource,
+          method: RESOURCE_METHOD_TYPE.GET_MANY,
+          name,
+        }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> {
@@ -119,7 +124,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
       _getConnectionExists,
       withOutput({
         Resource,
-        Root,
+        RootResource,
         level: getAccess,
         method: RESOURCE_METHOD_TYPE.GET_CONNECTION,
         name,
@@ -128,7 +133,12 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
     async getConnection(
       @withCondition(
         _getConnectionExists,
-        withInput({ Resource, Root, method: RESOURCE_METHOD_TYPE.GET_CONNECTION, name }),
+        withInput({
+          Resource,
+          RootResource: RootResource,
+          method: RESOURCE_METHOD_TYPE.GET_CONNECTION,
+          name,
+        }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>> {
@@ -142,7 +152,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
       _updateExists,
       withOutput({
         Resource,
-        Root,
+        RootResource,
         level: updateAccess,
         method: RESOURCE_METHOD_TYPE.UPDATE,
         name,
@@ -151,7 +161,12 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
     async update(
       @withCondition(
         _updateExists,
-        withInput({ Resource, Root, method: RESOURCE_METHOD_TYPE.UPDATE, name }),
+        withInput({
+          Resource,
+          RootResource: RootResource,
+          method: RESOURCE_METHOD_TYPE.UPDATE,
+          name,
+        }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>> {
@@ -165,7 +180,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
       _removeExists,
       withOutput({
         Resource,
-        Root,
+        RootResource,
         level: removeAccess,
         method: RESOURCE_METHOD_TYPE.REMOVE,
         name,
@@ -174,7 +189,12 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
     async remove(
       @withCondition(
         _removeExists,
-        withInput({ Resource, Root, method: RESOURCE_METHOD_TYPE.REMOVE, name }),
+        withInput({
+          Resource,
+          RootResource: RootResource,
+          method: RESOURCE_METHOD_TYPE.REMOVE,
+          name,
+        }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>> {

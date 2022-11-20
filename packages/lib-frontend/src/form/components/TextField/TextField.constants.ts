@@ -1,4 +1,4 @@
-export enum TEXT_FIELD_TYPE {
+export enum TEXT_FIELD_KEYBOARD {
   DECIMAL = 'decimal',
   EMAIL = 'email',
   NUMBER = 'number',

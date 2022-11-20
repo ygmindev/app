@@ -2,7 +2,7 @@ import { OTP_EXPIRATION_SECONDS } from '@lib/backend/auth/resources/Otp/Otp.cons
 import { withAccess } from '@lib/backend/resource/decorators/withAccess/withAccess';
 import { withEntity } from '@lib/backend/resource/decorators/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/decorators/withField/withField';
-import { FIELD_TYPE } from '@lib/backend/resource/decorators/withField/withField.constants';
+import { FIELD_TYPE } from '@lib/shared/form/form.constants';
 import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
 import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import { OTP_RESOURCE_NAME } from '@lib/shared/auth/resources/Otp/Otp.constants';

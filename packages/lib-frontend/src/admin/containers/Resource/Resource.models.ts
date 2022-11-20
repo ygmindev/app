@@ -1,4 +1,4 @@
-import type { EntityResourceTablePropsModel } from '@lib/frontend/resource/components/EntityResourceTable/EntityResourceTable.models';
+import type { ResourcesPropsModel } from '@lib/frontend/resource/components/Resources/Resources.models';
 import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
 import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
@@ -8,5 +8,5 @@ export interface ResourceParamsModel {
   name: string;
 }
 
-export interface EntityResourceTableConfigModel<TType extends EntityResourceModel, TForm>
-  extends Omit<EntityResourceTablePropsModel<TType, TForm>, 'name'> {}
+export interface ResourcesConfigModel<TType extends EntityResourceModel, TForm>
+  extends Omit<ResourcesPropsModel<TType, TForm>, 'name'> {}

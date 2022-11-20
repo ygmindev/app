@@ -6,7 +6,7 @@ import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.
 import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import { ErrorTooltip } from '@lib/frontend/form/components/ErrorTooltip/ErrorTooltip';
 import { _TextField } from '@lib/frontend/form/components/TextField/_TextField';
-import { TEXT_FIELD_TYPE } from '@lib/frontend/form/components/TextField/TextField.constants';
+import { TEXT_FIELD_KEYBOARD } from '@lib/frontend/form/components/TextField/TextField.constants';
 import type { TextFieldPropsModel } from '@lib/frontend/form/components/TextField/TextField.models';
 import { useField } from '@lib/frontend/form/hooks/useField/useField';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
@@ -29,7 +29,7 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
   onChange,
   onFocus,
   rightElement,
-  type,
+  keyboard: type,
   value,
   width,
   ...props
@@ -100,20 +100,20 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
 
   const _handleChange = (newValue: string): void => {
     switch (type) {
-      case TEXT_FIELD_TYPE.NUMBER:
-      case TEXT_FIELD_TYPE.TEL: {
+      case TEXT_FIELD_KEYBOARD.NUMBER:
+      case TEXT_FIELD_KEYBOARD.TEL: {
         if (/^\d*$/.test(newValue)) {
           setFieldValue(newValue);
         }
         break;
       }
-      case TEXT_FIELD_TYPE.NUMBER_POSITIVE: {
+      case TEXT_FIELD_KEYBOARD.NUMBER_POSITIVE: {
         if (/^([1-9]+\d*)?$/.test(newValue)) {
           setFieldValue(newValue);
         }
         break;
       }
-      case TEXT_FIELD_TYPE.DECIMAL: {
+      case TEXT_FIELD_KEYBOARD.DECIMAL: {
         if (/^\d*\.?\d*$/.test(newValue)) {
           setFieldValue(newValue);
         }
@@ -146,7 +146,7 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
         await _setIsFocused(true);
       }}
       right={_rightElement}
-      type={type}
+      keyboard={type}
       value={_value}
       width={width}
     />

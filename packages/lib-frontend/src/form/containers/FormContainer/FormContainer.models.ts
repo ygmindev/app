@@ -8,13 +8,13 @@ import type { UseFormParamsModel } from '@lib/frontend/form/hooks/useForm/useFor
 import type { TranslationTextModel } from '@lib/frontend/locale/locale.models';
 import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
+import type { FieldTypeModel } from '@lib/shared/form/form.models';
 import type { ReactElement, ReactNode } from 'react';
 
 export type FormFieldTypeModel = `${FORM_FIELD_TYPE}`;
 
 export type FormContainerFieldModel = WithIdModel &
-  WithFieldPropsModel &
-  (
+  WithFieldPropsModel & { type?: FieldTypeModel } & (
     | ({ field: FORM_FIELD_TYPE.TEXT_FIELD; render?: never } & TextFieldPropsModel)
     | ({ field: FORM_FIELD_TYPE.SELECT_FIELD; render?: never } & SelectFieldPropsModel)
     | ({ field: FORM_FIELD_TYPE.SWITCH_FIELD; render?: never } & SwitchFieldPropsModel)

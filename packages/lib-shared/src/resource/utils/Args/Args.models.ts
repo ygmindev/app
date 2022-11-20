@@ -3,6 +3,7 @@ import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constan
 import type { ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
 import type { FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import type { PaginationModel } from '@lib/shared/resource/utils/Pagination/Pagination.models';
+import type { RootModel } from '@lib/shared/resource/utils/Root/Root.models';
 import type { UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 import type { ObjectId } from 'mongodb';
 
@@ -66,16 +67,18 @@ export type ArgsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
   TForm,
-> = TMethod extends RESOURCE_METHOD_TYPE.CREATE
-  ? _CreateArgsModel<TForm>
-  : TMethod extends RESOURCE_METHOD_TYPE.GET
-  ? _GetArgsModel<TType>
-  : TMethod extends RESOURCE_METHOD_TYPE.GET_MANY
-  ? _GetManyArgsModel<TType>
-  : TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION
-  ? _GetConnectionArgsModel<TType>
-  : TMethod extends RESOURCE_METHOD_TYPE.REMOVE
-  ? _RemoveArgsModel<TType>
-  : TMethod extends RESOURCE_METHOD_TYPE.UPDATE
-  ? _UpdateArgsModel<TType>
-  : never;
+  TRoot = undefined,
+> = RootModel<TRoot> &
+  (TMethod extends RESOURCE_METHOD_TYPE.CREATE
+    ? _CreateArgsModel<TForm>
+    : TMethod extends RESOURCE_METHOD_TYPE.GET
+    ? _GetArgsModel<TType>
+    : TMethod extends RESOURCE_METHOD_TYPE.GET_MANY
+    ? _GetManyArgsModel<TType>
+    : TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION
+    ? _GetConnectionArgsModel<TType>
+    : TMethod extends RESOURCE_METHOD_TYPE.REMOVE
+    ? _RemoveArgsModel<TType>
+    : TMethod extends RESOURCE_METHOD_TYPE.UPDATE
+    ? _UpdateArgsModel<TType>
+    : never);

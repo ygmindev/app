@@ -2,8 +2,8 @@ import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
 import { IconText } from '@lib/frontend/core/components/IconText/IconText';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { _TextFieldPropsModel } from '@lib/frontend/form/components/TextField/_TextField.models';
-import { TEXT_FIELD_TYPE } from '@lib/frontend/form/components/TextField/TextField.constants';
-import type { TextFieldTypeModel } from '@lib/frontend/form/components/TextField/TextField.models';
+import { TEXT_FIELD_KEYBOARD } from '@lib/frontend/form/components/TextField/TextField.constants';
+import type { TextFieldKeyboardModel } from '@lib/frontend/form/components/TextField/TextField.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
@@ -28,15 +28,15 @@ import type {
 import { TextInput as NativeTextInput } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
-const _getKeyboardType = (type?: TextFieldTypeModel): TextInputProps['keyboardType'] => {
+const _getKeyboardType = (type?: TextFieldKeyboardModel): TextInputProps['keyboardType'] => {
   switch (type) {
-    case TEXT_FIELD_TYPE.NUMBER:
-    case TEXT_FIELD_TYPE.NUMBER_POSITIVE:
-    case TEXT_FIELD_TYPE.DECIMAL:
+    case TEXT_FIELD_KEYBOARD.NUMBER:
+    case TEXT_FIELD_KEYBOARD.NUMBER_POSITIVE:
+    case TEXT_FIELD_KEYBOARD.DECIMAL:
       return 'numeric';
-    case TEXT_FIELD_TYPE.EMAIL:
+    case TEXT_FIELD_KEYBOARD.EMAIL:
       return 'email-address';
-    case TEXT_FIELD_TYPE.TEL:
+    case TEXT_FIELD_KEYBOARD.TEL:
       return 'phone-pad';
     default:
       return 'default';
@@ -45,13 +45,13 @@ const _getKeyboardType = (type?: TextFieldTypeModel): TextInputProps['keyboardTy
 
 const _getAutoCompleteType = (
   autoComplete?: string | boolean,
-  type?: TextFieldTypeModel,
+  type?: TextFieldKeyboardModel,
 ): TextInputProps['autoComplete'] => {
   if (autoComplete) {
     switch (type) {
-      case TEXT_FIELD_TYPE.PASSWORD:
+      case TEXT_FIELD_KEYBOARD.PASSWORD:
         return 'password';
-      case TEXT_FIELD_TYPE.EMAIL:
+      case TEXT_FIELD_KEYBOARD.EMAIL:
         return 'email';
       default:
         return 'off';
@@ -62,13 +62,13 @@ const _getAutoCompleteType = (
 
 const _getTextContentType = (
   autoComplete?: string | boolean,
-  type?: TextFieldTypeModel,
+  type?: TextFieldKeyboardModel,
 ): TextInputProps['textContentType'] => {
   if (autoComplete) {
     switch (type) {
-      case TEXT_FIELD_TYPE.PASSWORD:
+      case TEXT_FIELD_KEYBOARD.PASSWORD:
         return 'password';
-      case TEXT_FIELD_TYPE.EMAIL:
+      case TEXT_FIELD_KEYBOARD.EMAIL:
         return 'emailAddress';
       default:
         return 'none';
@@ -78,11 +78,11 @@ const _getTextContentType = (
 };
 
 const _getTextFieldProps = ({
+  keyboard: type,
   onChange,
   onEscape,
   onRemove,
   onSubmit,
-  type,
   value,
 }: _TextFieldPropsModel): PartialModel<TextInputProps> => ({
   autoCorrect: false,
@@ -112,7 +112,7 @@ export const _TextField = ({
   right,
   isFocused,
   isTransparent,
-  type,
+  keyboard,
   onFocus,
   onBlur,
   onRemove,
@@ -165,11 +165,11 @@ export const _TextField = ({
     ) : null;
 
   const textInputProps = _getTextFieldProps({
+    keyboard,
     onChange,
     onEscape,
     onRemove,
     onSubmit,
-    type,
     value,
   });
 
@@ -197,7 +197,7 @@ export const _TextField = ({
       <TextInput
         {...(textInputProps as typeof TextInput)}
         autoCapitalize="none"
-        autoComplete={_getAutoCompleteType(autoComplete, type)}
+        autoComplete={_getAutoCompleteType(autoComplete, keyboard)}
         dense
         disabled={isDisabled}
         error={isError}
@@ -242,8 +242,8 @@ export const _TextField = ({
             {right}
           </Wrapper>
         )}
-        secureTextEntry={type === 'password'}
-        textContentType={_getTextContentType(autoComplete, type)}
+        secureTextEntry={keyboard === 'password'}
+        textContentType={_getTextContentType(autoComplete, keyboard)}
         theme={{
           animation: { scale: 1 },
           colors: {

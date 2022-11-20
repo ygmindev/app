@@ -8,6 +8,12 @@ import type {
   ResourceServiceBeforeDecoratorModel,
 } from '@lib/shared/resource/utils/Resource/ResourceService/ResourceService.models';
 
+export type UseResourceMethodFieldsModel<
+  TMethod extends ResourceMethodTypeModel,
+  TType,
+  TRoot = undefined,
+> = Array<GraphQlFieldModel<OutputModel<TMethod, TType, TRoot>, false>>;
+
 export type UseResourceMethodParamsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
@@ -16,7 +22,7 @@ export type UseResourceMethodParamsModel<
 > = WithResourceNameModel<TRoot> & {
   after?: ResourceServiceAfterDecoratorModel<TMethod, TType, TRoot>;
   before?: ResourceServiceBeforeDecoratorModel<TMethod, TType, TForm, TRoot>;
-  fields: Array<GraphQlFieldModel<OutputModel<TMethod, TType, TRoot>>>;
+  fields: UseResourceMethodFieldsModel<TMethod, TType, TRoot>;
   method: TMethod;
 };
 
