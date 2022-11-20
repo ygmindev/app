@@ -1,4 +1,3 @@
-import { MaskedTextField } from '@lib/frontend/form/components/MaskedTextField/MaskedTextField';
 import { FORM_FIELD_TYPE } from '@lib/frontend/form/containers/FormContainer/FormContainer.constants';
 import { ENTITY_RESOURCE_COLUMNS } from '@lib/frontend/resource/components/Resources/Resources.constants';
 import type { ResourcesPropsModel } from '@lib/frontend/resource/components/Resources/Resources.models';
@@ -17,18 +16,20 @@ export const CARDS_PROPS: ResourcesPropsModel<CardModel, CardFormModel, UserMode
     },
 
     {
+      field: FORM_FIELD_TYPE.TEXT_FIELD,
+      id: 'number',
+      label: ({ t }) => t('billing:labels.cardNumber'),
+    },
+
+    {
+      field: FORM_FIELD_TYPE.TEXT_FIELD,
       id: 'exp',
       label: ({ t }) => t('billing:labels.expiration'),
-      render: (props) => (
-        <MaskedTextField
-          {...props}
-          mask="MM/YY"
-        />
-      ),
+      mask: 'MM/YY',
     },
   ],
 
-  fields: [{ result: ['_id', 'created'] }],
+  fields: [{ result: ['_id', 'created', 'name', 'exp'] }],
 
   name: CARD_RESOURCE_NAME,
 };

@@ -1,15 +1,13 @@
 import type { AccessLevelModel } from '@lib/shared/auth/resources/Access/Access.models';
 import type { ConstructorModel, PartialModel } from '@lib/shared/core/core.models';
-import type {
-  ResourceServiceModel,
-  ResourceServiceParamsModel,
-} from '@lib/shared/resource/utils/Resource/ResourceService/ResourceService.models';
+import type { WithResourceNameModel } from '@lib/shared/resource/decorators/withResourceName/withResourceName.models';
+import type { ResourceServiceModel } from '@lib/shared/resource/utils/Resource/ResourceService/ResourceService.models';
 
 export type ResourceResolverParamsModel<
   TType,
   TForm,
   TRoot = undefined,
-> = ResourceServiceParamsModel<TType, TForm, TRoot> & {
+> = WithResourceNameModel<TRoot> & {
   Resource: ConstructorModel<TType>;
   ResourceData?: ConstructorModel<TForm>;
   ResourceService: ConstructorModel<PartialModel<ResourceServiceModel<TType, TForm, TRoot>>>;

@@ -5,6 +5,8 @@ import type { EntityResourceDataModel } from '@lib/shared/resource/resources/Ent
 export type CardTypeModel = `${CARD_TYPE}`;
 
 export interface CardModel extends EmbeddedResourceModel {
+  exp?: string;
+
   expMonth: number;
 
   expYear: number;

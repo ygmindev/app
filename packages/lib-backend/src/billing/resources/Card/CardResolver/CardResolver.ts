@@ -1,6 +1,8 @@
 import { Card } from '@lib/backend/billing/resources/Card/Card';
 import { CardService } from '@lib/backend/billing/resources/Card/CardService/CardService';
+import { withFieldResolver } from '@lib/backend/graphql/decorators/withFieldResolver/withFieldResolver';
 import { withResolver } from '@lib/backend/graphql/decorators/withResolver/withResolver';
+import { withSelf } from '@lib/backend/graphql/decorators/withSelf/withSelf';
 import { EmbeddedResourceResolver } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResourceResolver/EmbeddedResourceResolver';
 import type { EmbeddedResourceResolverModel } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResourceResolver/EmbeddedResourceResolver.models';
 import { User } from '@lib/backend/user/resources/User/User';
@@ -21,4 +23,10 @@ export class CardResolver
     getAccess: ACCESS_LEVEL.PUBLIC,
     name: CARD_RESOURCE_NAME,
   })
-  implements EmbeddedResourceResolverModel<CardModel, CardFormModel, UserModel> {}
+  implements EmbeddedResourceResolverModel<CardModel, CardFormModel, UserModel>
+{
+  @withFieldResolver({ Resource: User })
+  async exp(@withSelf() card: Card): Promise<string | undefined> {
+    return card.expMonth && card.expYear ? `${card.expMonth}/${card.expYear}` : undefined;
+  }
+}

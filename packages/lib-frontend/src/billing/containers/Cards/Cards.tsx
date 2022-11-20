@@ -12,6 +12,7 @@ import type { UserModel } from '@lib/shared/user/resources/User/User.models';
 
 export const Cards: SFCModel<CardsPropsModel> = ({ testID, ...props }) => {
   useTranslation([BILLING]);
+
   const { styles } = useStyles({ props });
   const user = useCurrentUser();
 

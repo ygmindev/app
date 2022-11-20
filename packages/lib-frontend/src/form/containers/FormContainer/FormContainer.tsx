@@ -130,6 +130,7 @@ export const FormContainer = <TType,>({
         default: {
           return cloneElement(
             (render as (params: WithFieldPropsModel) => ReactElement)({
+              ...fieldProps,
               defaultValue: _defaultValue,
               error: _error,
               isDisabled: _isDisabled,

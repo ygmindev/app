@@ -7,5 +7,6 @@ export type TextFieldKeyboardModel = `${TEXT_FIELD_KEYBOARD}`;
 export interface TextFieldPropsModel extends _TextFieldPropsModel {
   isNoClear?: boolean;
   leftElement?: ReactNode | ((isFocused: boolean) => ReactNode);
+  mask?: string;
   rightElement?: ReactNode | ((isFocused: boolean) => ReactNode);
 }

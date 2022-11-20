@@ -5,6 +5,7 @@ import type { SFCModel } from '@lib/frontend/core/core.models';
 import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import { ErrorTooltip } from '@lib/frontend/form/components/ErrorTooltip/ErrorTooltip';
+import { MaskedTextField } from '@lib/frontend/form/components/MaskedTextField/MaskedTextField';
 import { _TextField } from '@lib/frontend/form/components/TextField/_TextField';
 import { TEXT_FIELD_KEYBOARD } from '@lib/frontend/form/components/TextField/TextField.constants';
 import type { TextFieldPropsModel } from '@lib/frontend/form/components/TextField/TextField.models';
@@ -23,13 +24,15 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
   isAutoFocus,
   isDisabled,
   isNoClear,
+  keyboard,
   label,
   leftElement,
+  mask,
   onBlur,
   onChange,
   onFocus,
+  placeholder,
   rightElement,
-  keyboard: type,
   value,
   width,
   ...props
@@ -99,7 +102,7 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
   );
 
   const _handleChange = (newValue: string): void => {
-    switch (type) {
+    switch (keyboard) {
       case TEXT_FIELD_KEYBOARD.NUMBER:
       case TEXT_FIELD_KEYBOARD.TEL: {
         if (/^\d*$/.test(newValue)) {
@@ -129,10 +132,21 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
   return (
     <_TextField
       {...props}
+      Component={
+        mask
+          ? (inputProps) => (
+              <MaskedTextField
+                {...inputProps}
+                mask={mask}
+              />
+            )
+          : undefined
+      }
       error={error}
       forwardedRef={forwardedRef || inputRef}
       isDisabled={isDisabled}
       isFocused={isFocused}
+      keyboard={keyboard}
       label={label}
       left={_leftElement}
       onBlur={async () => {
@@ -145,8 +159,8 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
         onFocus && onFocus();
         await _setIsFocused(true);
       }}
+      placeholder={mask || placeholder}
       right={_rightElement}
-      keyboard={type}
       value={_value}
       width={width}
     />

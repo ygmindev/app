@@ -130,6 +130,7 @@ input AccessUpdateUpdateInput {
 type Card {
   _id: String
   created: DateTime
+  exp: String
   expMonth: Float
   expYear: Float
   id: String
@@ -146,6 +147,7 @@ type CardCreate {
 input CardCreateFormInput {
   _id: String
   created: DateTime
+  exp: String
   expMonth: Float
   expYear: Float
   id: String
@@ -200,6 +202,7 @@ type CardGetConnectionEdge {
 input CardGetConnectionFilterInput {
   _id: String
   created: DateTime
+  exp: String
   expMonth: Float
   expYear: Float
   id: String
@@ -235,6 +238,7 @@ input CardGetConnectionRootInput {
 input CardGetFilterInput {
   _id: String
   created: DateTime
+  exp: String
   expMonth: Float
   expYear: Float
   id: String
@@ -256,6 +260,7 @@ type CardGetMany {
 input CardGetManyFilterInput {
   _id: String
   created: DateTime
+  exp: String
   expMonth: Float
   expYear: Float
   id: String
@@ -313,6 +318,7 @@ type CardRemove {
 input CardRemoveFilterInput {
   _id: String
   created: DateTime
+  exp: String
   expMonth: Float
   expYear: Float
   id: String
@@ -352,6 +358,7 @@ type CardUpdate {
 input CardUpdateFilterInput {
   _id: String
   created: DateTime
+  exp: String
   expMonth: Float
   expYear: Float
   id: String
@@ -387,6 +394,7 @@ input CardUpdateRootInput {
 input CardUpdateUpdateInput {
   _id: String
   created: DateTime
+  exp: String
   expMonth: Float
   expYear: Float
   id: String
