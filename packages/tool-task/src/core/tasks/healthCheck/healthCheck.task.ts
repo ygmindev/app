@@ -1,8 +1,8 @@
+import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import type { HealthCheckParamsModel } from '@tool/task/core/tasks/healthCheck/healthCheck.models';
 import { runAll } from '@tool/task/core/templates/runAll/runAll';
-import type { RegisterParamsModel } from '@tool/task/core/utils/register/register.models';
 
-const healthCheck: RegisterParamsModel<HealthCheckParamsModel> = {
+const healthCheck: TaskParamsModel<HealthCheckParamsModel> = {
   ...runAll,
 
   name: 'healthCheck',

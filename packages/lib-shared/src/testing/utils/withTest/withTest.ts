@@ -6,7 +6,7 @@ import type {
   WithTestParamsModel,
 } from '@lib/shared/testing/utils/withTest/withTest.models';
 
-export const withTest = <TType>({
+export const withTest = <TType extends unknown>({
   displayName,
   target,
 }: WithTestParamsModel<CallableModel<TType>>): WithTestModel => {

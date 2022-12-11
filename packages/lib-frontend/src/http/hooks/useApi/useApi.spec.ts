@@ -10,9 +10,9 @@ const { displayName } = withTest({ target: () => useApi });
 
 describe(displayName, () => {
   const URI_PARAMS: UriParamsModel = {
-    host: getEnv('REACT_APP_SERVER_API_HOST'),
+    host: getEnv('APP_SERVER_API_HOST'),
     path: 'api',
-    port: getEnv('REACT_APP_SERVER_API_PORT', null) || undefined,
+    port: getEnv('APP_SERVER_API_PORT', null) || undefined,
   };
   const SUCCESS = 'success';
 

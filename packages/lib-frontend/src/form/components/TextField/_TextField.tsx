@@ -5,16 +5,16 @@ import type { _TextFieldPropsModel } from '@lib/frontend/form/components/TextFie
 import { TEXT_FIELD_KEYBOARD } from '@lib/frontend/form/components/TextField/TextField.constants';
 import type { TextFieldKeyboardModel } from '@lib/frontend/form/components/TextField/TextField.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
-import { borderStyler } from '@lib/frontend/styling/utils/styler/borderStyler/borderStyler';
-import { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants';
-import { textStyler } from '@lib/frontend/styling/utils/styler/textStyler/textStyler';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { borderStyler } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler';
+import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
 import {
   THEME_BASIC_SIZE,
   THEME_COLOR,
   THEME_RELATIVE_COLOR,
-} from '@lib/frontend/styling/utils/theme/theme.constants';
+} from '@lib/frontend/style/utils/theme/theme.constants';
 import type { PartialModel } from '@lib/shared/core/core.models';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { isNil } from 'lodash';
@@ -155,11 +155,7 @@ export const _TextField = ({
 
   const leftElement =
     left && label ? (
-      <Appear
-        isCenter
-        isLazy={false}
-        isVisible={!isEmpty(value) || isFocused}
-        mTop={18}>
+      <Appear isCenter isLazy={false} isVisible={!isEmpty(value) || isFocused} mTop={18}>
         {left}
       </Appear>
     ) : null;
@@ -182,7 +178,8 @@ export const _TextField = ({
       position={SHAPE_POSITION.RELATIVE}
       round
       style={[styles, borderStyles]}
-      testID={testID}>
+      testID={testID}
+    >
       <Wrapper
         animation={{ transition: ['backgroundColor'] }}
         backgroundColor={backgroundColor}
@@ -206,7 +203,8 @@ export const _TextField = ({
             <IconText
               animation={{ transition: ['color'] }}
               color={activeColor || THEME_RELATIVE_COLOR.MUTED}
-              icon={icon}>
+              icon={icon}
+            >
               {label}
             </IconText>
           ) : (
@@ -234,7 +232,8 @@ export const _TextField = ({
             isRow
             pLeft={leftElement ? THEME_BASIC_SIZE.SMALL : undefined}
             pRight={right ? THEME_BASIC_SIZE.SMALL : undefined}
-            zIndex={-1}>
+            zIndex={-1}
+          >
             {leftElement}
 
             {Component({ ...inputProps, style: [...inputProps.style, textStyles, { width }] })}

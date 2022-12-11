@@ -1,4 +1,4 @@
-import type { GraphQlFieldModel } from '@lib/frontend/graphql/utils/graphQlQuery/graphQlQuery.models';
+import type { GraphQlFieldModel } from '@lib/frontend/http/utils/graphQlQuery/graphQlQuery.models';
 import type { WithResourceNameModel } from '@lib/shared/resource/decorators/withResourceName/withResourceName.models';
 import type { ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
@@ -19,7 +19,7 @@ export type UseResourceMethodParamsModel<
   TType,
   TForm,
   TRoot = undefined,
-> = WithResourceNameModel<TRoot> & {
+> = WithResourceNameModel & {
   after?: ResourceServiceAfterDecoratorModel<TMethod, TType, TRoot>;
   before?: ResourceServiceBeforeDecoratorModel<TMethod, TType, TForm, TRoot>;
   fields: UseResourceMethodFieldsModel<TMethod, TType, TRoot>;
@@ -32,7 +32,6 @@ export interface UseResourceMethodModel<
   TForm,
   TRoot = undefined,
 > {
-  isLoading: boolean;
   query(
     input: InputModel<TMethod, TType, TForm, TRoot>,
   ): Promise<OutputModel<TMethod, TType, TRoot>>;

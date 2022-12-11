@@ -5,13 +5,13 @@ import { Press } from '@lib/frontend/core/components/Press/Press';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import {
   THEME_BASIC_SIZE,
   THEME_COLOR,
   THEME_RELATIVE_COLOR,
-} from '@lib/frontend/styling/utils/theme/theme.constants';
+} from '@lib/frontend/style/utils/theme/theme.constants';
 import { promisify } from '@lib/shared/core/utils/promisify/promisify';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { useCallback, useState } from 'react';
@@ -54,25 +54,20 @@ export const Button: SFCModel<ButtonPropsModel> = ({
       isFullWidth={isFullWidth}
       onPress={_handlePress}
       style={styles}
-      to={{ backgroundColor: isTransparent || _isBlocked ? light : dark }}>
+      to={{ backgroundColor: isTransparent || _isBlocked ? light : dark }}
+    >
       {_isLoading && (
-        <Wrapper
-          isAbsoluteFill
-          isCenter>
-          <Loading
-            color={color}
-            size={THEME_BASIC_SIZE.LARGE}
-          />
+        <Wrapper isAbsoluteFill isCenter>
+          <Loading color={color} size={THEME_BASIC_SIZE.LARGE} />
         </Wrapper>
       )}
 
-      <Wrapper
-        mLeft={0}
-        opacity={_isLoading ? 0 : undefined}>
+      <Wrapper mLeft={0} opacity={_isLoading ? 0 : undefined}>
         <IconText
           color={isTransparent ? color : THEME_RELATIVE_COLOR.CONTRAST}
           icon={icon}
-          size={size}>
+          size={size}
+        >
           {children}
         </IconText>
       </Wrapper>

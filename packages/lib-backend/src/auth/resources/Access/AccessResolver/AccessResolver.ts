@@ -1,8 +1,8 @@
 import { Access } from '@lib/backend/auth/resources/Access/Access';
 import { AccessService } from '@lib/backend/auth/resources/Access/AccessService/AccessService';
-import { withFieldResolver } from '@lib/backend/graphql/decorators/withFieldResolver/withFieldResolver';
-import { withResolver } from '@lib/backend/graphql/decorators/withResolver/withResolver';
-import { withSelf } from '@lib/backend/graphql/decorators/withSelf/withSelf';
+import { withFieldResolver } from '@lib/backend/http/decorators/withFieldResolver/withFieldResolver';
+import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
+import { withSelf } from '@lib/backend/http/decorators/withSelf/withSelf';
 import { EntityResourceResolver } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver';
 import type { EntityResourceResolverModel } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver.models';
 import { User } from '@lib/backend/user/resources/User/User';

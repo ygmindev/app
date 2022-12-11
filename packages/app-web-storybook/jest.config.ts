@@ -1,1 +1,2 @@
-export { jestConfig as default } from '@lib/config/jest/jest/jest.web.config';
+export { testConfig as default } from '@lib/config/node/test/test';
+

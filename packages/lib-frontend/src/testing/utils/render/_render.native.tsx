@@ -9,9 +9,7 @@ import type { ReactElement } from 'react';
 export const _render = (element: ReactElement): _RenderModel => {
   const { queryByTestId, queryByText, unmount } = render(element, {
     wrapper: (props: RootPropsModel) => (
-      <Root
-        {...props}
-        intialStore={STORE_FIXTURE}>
+      <Root {...props} intialStore={STORE_FIXTURE}>
         <Router routes={[{ element, pathname: '/' }]} />
       </Root>
     ),

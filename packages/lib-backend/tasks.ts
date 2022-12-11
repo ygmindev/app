@@ -1,8 +1,10 @@
-import { registerNodeTasks } from '@tool/task/node/utils/registerNodeTasks/registerNodeTasks';
+import type { TaskParamsModel } from '@lib/config/core/task/task.models';
+import { nodeTasks } from '@tool/task/node/utils/nodeTasks/nodeTasks';
 
-import { name } from './package.json';
+const tasks: Array<TaskParamsModel<unknown>> = [
+  ...nodeTasks({
+    testOverrides: { onAfter: ['database-close'], onBefore: ['database-kill'] },
+  }),
+];
 
-registerNodeTasks({
-  name,
-  testOverrides: { cleanups: ['database-close'], dependencies: ['database-kill'] },
-});
+export default tasks;

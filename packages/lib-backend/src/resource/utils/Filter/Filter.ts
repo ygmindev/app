@@ -3,7 +3,7 @@ import type { FilterParamsModel } from '@lib/backend/resource/utils/Filter/Filte
 import type { ConstructorModel } from '@lib/shared/core/core.models';
 import type { FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 
-export const Filter = <TType>({
+export const Filter = <TType extends unknown>({
   Resource,
   name,
 }: FilterParamsModel<TType>): ConstructorModel<FilterModel<TType>> => {

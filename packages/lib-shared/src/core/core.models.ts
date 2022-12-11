@@ -1,5 +1,4 @@
-import type { Function } from 'ts-toolbelt';
-import type { Constructor, Get, PartialDeep, Primitive } from 'type-fest';
+import type { Constructor, PartialDeep, Primitive } from 'type-fest';
 
 export interface ConstructorModel<TType = object> extends Constructor<TType> {}
 
@@ -13,20 +12,14 @@ export type CallableModel<TResult = void, TParams extends Array<unknown> = never
   ...args: TParams
 ) => TResult;
 
-export type CallablePromiseModel<
-  TResult = void,
-  TParams extends Array<unknown> = never,
-> = CallableModel<Promise<TResult>, TParams>;
+export type CallablePromiseModel<TResult = void, TParams extends Array<unknown> = never> =
+  CallableModel<Promise<TResult>, TParams>;
 
 export type InferModel<TType> = TType extends Array<infer TElement> ? TElement : TType;
 
-export type PathModel<TType, TKey extends string> = Function.AutoPath<TType, TKey>;
-
-export type ValueTypeModel<TType, TKey extends string> = Get<TType, TKey, { strict: true }>;
-
 export type MergeArrayModel<TType extends Array<unknown>> = TType extends [
   v: infer TValue,
-  ...rest: infer TResult,
+  ...rest: infer TResult
 ]
   ? TValue & MergeArrayModel<TResult>
   : object;

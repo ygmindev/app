@@ -1,7 +1,7 @@
 import type { RotatePropsModel } from '@lib/frontend/animation/components/Rotate/Rotate.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 
 export const Rotate: SFCModel<RotatePropsModel> = ({ children, testID, x, y, z, ...props }) => {
   const { styles } = useStyles({
@@ -21,7 +21,8 @@ export const Rotate: SFCModel<RotatePropsModel> = ({ children, testID, x, y, z, 
       animation={{ transition: ['rotateX', 'rotateY', 'rotateZ'] }}
       isCenter
       style={styles}
-      testID={testID}>
+      testID={testID}
+    >
       {children}
     </Wrapper>
   );

@@ -1,10 +1,11 @@
 import { APP_NAME } from '@app/web/app/app.constants';
-import { register } from '@tool/task/core/utils/register/register';
-import { dev } from '@tool/task/cra/templates/dev/dev';
-import { registerNodeTasks } from '@tool/task/node/utils/registerNodeTasks/registerNodeTasks';
+import type { TaskParamsModel } from '@lib/config/core/task/task.models';
+import { dev } from '@tool/task/framework/web/templates/dev/dev';
+import { nodeTasks } from '@tool/task/node/utils/nodeTasks/nodeTasks';
 
-import { name } from './package.json';
+const tasks: Array<TaskParamsModel<unknown>> = [
+  ...nodeTasks(),
+  { ...dev, options: { name: APP_NAME } },
+];
 
-registerNodeTasks({ name });
-
-register({ ...dev, options: { name: APP_NAME }, target: name });
+export default tasks;

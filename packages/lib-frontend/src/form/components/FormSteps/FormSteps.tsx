@@ -6,10 +6,10 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import type { FormStepsPropsModel } from '@lib/frontend/form/components/FormSteps/FormSteps.models';
 import { useDimension } from '@lib/frontend/platform/hooks/useDimension/useDimension';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
-import { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants';
-import { THEME_COLOR } from '@lib/frontend/styling/utils/theme/theme.constants';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { THEME_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
 import type { MergeArrayModel, PartialModel } from '@lib/shared/core/core.models';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import type { ReactElement } from 'react';
@@ -52,15 +52,9 @@ export const FormSteps = <TType extends MergeArrayModel<TSteps>, TSteps extends 
         </Portal>
       )}
 
-      <Wrapper
-        grow
-        spacing
-        style={styles}
-        testID={testID}>
+      <Wrapper grow spacing style={styles} testID={testID}>
         <Wrapper isRowAlign>
-          <Appear
-            isLazy={false}
-            isVisible={current > 0}>
+          <Appear isLazy={false} isVisible={current > 0}>
             <Icon
               icon={ICON.arrowLeft}
               isDisabled={current <= 0}

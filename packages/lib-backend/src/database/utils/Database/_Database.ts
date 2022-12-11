@@ -50,7 +50,9 @@ export abstract class _Database implements DatabaseModel {
     throw new UninitializedError(`database ${this._params.host}`);
   };
 
-  getRepository = <TType>({ name }: WithResourceNameModel): RepositoryModel<TType> => {
+  getRepository = <TType extends unknown>({
+    name,
+  }: WithResourceNameModel): RepositoryModel<TType> => {
     const _service: RepositoryModel<TType> = {
       clear: async () => {
         await this._getEntityManager()

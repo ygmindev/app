@@ -1,9 +1,11 @@
-import { register } from '@tool/task/core/utils/register/register';
-import { registerNodeTasks } from '@tool/task/node/utils/registerNodeTasks/registerNodeTasks';
+import { APP_NAME } from '@app/web-admin/app/app.constants';
+import type { TaskParamsModel } from '@lib/config/core/task/task.models';
+import { nodeTasks } from '@tool/task/node/utils/nodeTasks/nodeTasks';
 import { dev } from '@tool/task/storybook/templates/dev/dev';
 
-import { name } from './package.json';
+const tasks: Array<TaskParamsModel<unknown>> = [
+  ...nodeTasks(),
+  { ...dev, options: { name: APP_NAME } },
+];
 
-registerNodeTasks({ name });
-
-register({ ...dev, target: name });
+export default tasks;

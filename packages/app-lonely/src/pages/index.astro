@@ -1,0 +1,11 @@
+---
+import { Scratchpad } from '@lib/frontend/dev/containers/Scratchpad/Scratchpad';
+import { Root } from '@lib/frontend/root/containers/Root/Root';
+import Layout from '../layouts/Layout.astro';
+---
+<Layout>
+    <Root client:load>
+        <Scratchpad client:load />
+    </Root>
+</Layout>
+

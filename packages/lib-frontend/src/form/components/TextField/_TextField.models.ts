@@ -2,8 +2,8 @@ import type { WithFieldPropsModel } from '@lib/frontend/core/decorators/withFiel
 import type { WithForwardedRefPropsModel } from '@lib/frontend/core/decorators/withForwardRefProps/withForwardRefProps.models';
 import type { TextFieldKeyboardModel } from '@lib/frontend/form/components/TextField/TextField.models';
 import type { WithSubmitPropsModel } from '@lib/frontend/form/decorators/withSubmitProps/withSubmitProps.models';
-import type { WithStyleParamsModel } from '@lib/frontend/styling/decorators/withStyle/withStyle.models';
-import type { FontAlignModel } from '@lib/frontend/styling/utils/styler/fontStyler/fontStyler.models';
+import type { WithStyleParamsModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
+import type { FontAlignModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
 import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 import type { ReactElement, ReactNode } from 'react';

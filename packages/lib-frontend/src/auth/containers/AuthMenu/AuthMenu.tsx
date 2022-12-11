@@ -12,12 +12,12 @@ import type { SFCModel } from '@lib/frontend/core/core.models';
 import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import type { SelectOptionModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useSelector } from '@lib/frontend/root/hooks/useSelector/useSelector';
 import { useRouter } from '@lib/frontend/routing/hooks/useRouter/useRouter';
 import type { LocationModel } from '@lib/frontend/routing/routing.models';
 import { SETTINGS } from '@lib/frontend/settings/settings.constants';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { FONT_ALIGN } from '@lib/frontend/styling/utils/styler/fontStyler/fontStyler.constants';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { useStore } from '@lib/frontend/user/stores/userReducer/userReducer';
 import { AUTH, SIGN_OUT } from '@lib/shared/auth/auth.constants';
 import { useMemo } from 'react';
 
@@ -25,7 +25,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
   const { styles } = useStyles({ props });
   const { signOut } = useSignInResource();
   const { push } = useRouter();
-  const user = useSelector((state) => state.user.currentUser);
+  const { currentUser } = useStore();
 
   useTranslation([AUTH, SETTINGS]);
 
@@ -44,23 +44,14 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
 
   return (
     <Menu
-      anchor={(isOpen) => (
-        <Icon
-          icon={ICON.person}
-          isPressed={isOpen}
-          isTitle
-        />
-      )}
+      anchor={(isOpen) => <Icon icon={ICON.person} isPressed={isOpen} isTitle />}
       isCenter={false}
       options={options}
       style={styles}
       topElement={
-        user ? (
-          <Text
-            align={FONT_ALIGN.CENTER}
-            isEllipsis
-            width={AUTH_MENU_USERNAME_WIDTH}>
-            {user.email}
+        currentUser ? (
+          <Text align={FONT_ALIGN.CENTER} isEllipsis width={AUTH_MENU_USERNAME_WIDTH}>
+            {currentUser.email}
           </Text>
         ) : (
           <SignInButton />

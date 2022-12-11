@@ -11,9 +11,9 @@ import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.
 import { ErrorTooltip } from '@lib/frontend/form/components/ErrorTooltip/ErrorTooltip';
 import { TextField } from '@lib/frontend/form/components/TextField/TextField';
 import { useField } from '@lib/frontend/form/hooks/useField/useField';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { FONT_ALIGN } from '@lib/frontend/styling/utils/styler/fontStyler/fontStyler.constants';
-import { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { OTP_LENGTH } from '@lib/shared/auth/resources/Otp/Otp.constants';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
 import { isFunction, isString, range } from 'lodash';
@@ -40,10 +40,9 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
       isRowAlign
       onMeasure={({ width: _width }) => setWidth(_width)}
       style={styles}
-      testID={testID}>
-      <Wrapper
-        isRowAlign
-        position={SHAPE_POSITION.RELATIVE}>
+      testID={testID}
+    >
+      <Wrapper isRowAlign position={SHAPE_POSITION.RELATIVE}>
         {OTP_FIELDS.map(({ id }, i) => (
           <TextField
             align={FONT_ALIGN.CENTER}
@@ -58,11 +57,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
           />
         ))}
 
-        <Wrapper
-          isAbsoluteFill
-          opacity={0}
-          testID={OTP_FIELD_MAIN_TEST_ID}
-          zIndex={1}>
+        <Wrapper isAbsoluteFill opacity={0} testID={OTP_FIELD_MAIN_TEST_ID} zIndex={1}>
           <TextField
             defaultValue=""
             isAutoFocus={isAutoFocus}
@@ -77,18 +72,11 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
         </Wrapper>
 
         {width && (
-          <Wrapper
-            isRowAlign
-            left={width}
-            position={SHAPE_POSITION.ABSOLUTE}>
+          <Wrapper isRowAlign left={width} position={SHAPE_POSITION.ABSOLUTE}>
             {(isFunction(error) || isString(error)) && <ErrorTooltip error={error} />}
 
             <Appear isVisible={fieldValue.length > 0}>
-              <Icon
-                icon={ICON.times}
-                isDisabled={isDisabled}
-                onPress={() => setFieldValue('')}
-              />
+              <Icon icon={ICON.times} isDisabled={isDisabled} onPress={() => setFieldValue('')} />
             </Appear>
           </Wrapper>
         )}

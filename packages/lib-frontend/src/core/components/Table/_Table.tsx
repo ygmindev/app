@@ -1,4 +1,4 @@
-import type { ThemeConfigModel } from '@lib/config/theme/theme.models';
+import type { ThemeConfigModel } from '@lib/config/style/theme/theme.models';
 import { AG_GRID_THEME } from '@lib/frontend/core/components/Table/_Table.constants';
 import type { _TablePropsModel } from '@lib/frontend/core/components/Table/_Table.models';
 import {
@@ -8,7 +8,7 @@ import {
 import type { TableColumnModel } from '@lib/frontend/core/components/Table/Table.models';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import type {
@@ -129,9 +129,7 @@ export const _Table = <TType,>({
     return definition;
   };
   return (
-    <div
-      className={AG_GRID_THEME}
-      style={{ flex: 1 }}>
+    <div className={AG_GRID_THEME} style={{ flex: 1 }}>
       <AgGridReact
         animateRows
         columnDefs={columns.map(_getColumnDef)}

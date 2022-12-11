@@ -1,6 +1,6 @@
 import type { WithIconPropsModel } from '@lib/frontend/core/decorators/withIconProps/withIconProps.models';
 import type { TranslationTextModel } from '@lib/frontend/locale/locale.models';
-import type { WithStyleParamsModel } from '@lib/frontend/styling/decorators/withStyle/withStyle.models';
+import type { WithStyleParamsModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
 import type { FC as _FC } from 'react';

@@ -4,7 +4,7 @@ import type { WithFieldPropsModel } from '@lib/frontend/core/decorators/withFiel
 import type { WithForwardedRefPropsModel } from '@lib/frontend/core/decorators/withForwardRefProps/withForwardRefProps.models';
 import type { SelectOptionModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
 import type { TranslationTextModel } from '@lib/frontend/locale/locale.models';
-import type { WithStyleParamsModel } from '@lib/frontend/styling/decorators/withStyle/withStyle.models';
+import type { WithStyleParamsModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
 import type { ReactElement, ReactNode } from 'react';
 

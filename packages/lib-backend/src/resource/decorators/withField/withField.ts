@@ -4,7 +4,7 @@ import { ArrayType, Embedded, Index, PrimaryKey, Property } from '@mikro-orm/cor
 import { Field } from 'type-graphql';
 import type { ReturnTypeFuncValue } from 'type-graphql/dist/decorators/types';
 
-const _getField = <TType>({
+const _getField = <TType extends unknown>({
   Resource,
   isArray,
   type,
@@ -24,7 +24,7 @@ const _getField = <TType>({
   }
 };
 
-const _getColumn = <TType>({
+const _getColumn = <TType extends unknown>({
   Resource,
   defaultValue,
   isArray,

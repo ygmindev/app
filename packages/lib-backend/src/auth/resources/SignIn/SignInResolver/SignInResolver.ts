@@ -1,7 +1,7 @@
 import { SignIn, SignInForm } from '@lib/backend/auth/resources/SignIn/SignIn';
 import { SignInService } from '@lib/backend/auth/resources/SignIn/SignInService/SignInService';
-import { withContext } from '@lib/backend/graphql/decorators/withContext/withContext';
-import { withResolver } from '@lib/backend/graphql/decorators/withResolver/withResolver';
+import { withContext } from '@lib/backend/http/decorators/withContext/withContext';
+import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import { withInput } from '@lib/backend/resource/decorators/withInput/withInput';
 import { withOutput } from '@lib/backend/resource/decorators/withOutput/withOutput';
 import { EntityResourceResolver } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver';

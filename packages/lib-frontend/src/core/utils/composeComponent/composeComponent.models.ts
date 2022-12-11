@@ -1,4 +1,4 @@
-import type { UseStylesParamsModel } from '@lib/frontend/styling/hooks/useStyles/useStyles.models';
+import type { UseStylesParamsModel } from '@lib/frontend/style/hooks/useStyles/useStyles.models';
 import type { ComponentClass, ForwardedRef, FunctionComponent, RefObject } from 'react';
 
 export interface ComposeComponentParamsModel<TParams, TResult, TRef = unknown>

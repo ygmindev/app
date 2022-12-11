@@ -10,8 +10,8 @@ describe(displayName, () => {
     const result = appUri({ name: 'APP_WEB_ADMIN' });
     expect(result).toStrictEqual(
       uri({
-        host: getEnv('REACT_APP_APP_WEB_ADMIN_HOST'),
-        port: getEnv('REACT_APP_APP_WEB_ADMIN_PORT'),
+        host: getEnv('APP_APP_WEB_ADMIN_HOST'),
+        port: getEnv('APP_APP_WEB_ADMIN_PORT'),
       }),
     );
   });

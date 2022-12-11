@@ -10,7 +10,7 @@ import { _TextField } from '@lib/frontend/form/components/TextField/_TextField';
 import { TEXT_FIELD_KEYBOARD } from '@lib/frontend/form/components/TextField/TextField.constants';
 import type { TextFieldPropsModel } from '@lib/frontend/form/components/TextField/TextField.models';
 import { useField } from '@lib/frontend/form/hooks/useField/useField';
-import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { isFunction, isString, size, toString } from 'lodash';
 import type { ReactElement } from 'react';
@@ -51,14 +51,8 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
   if (!isDisabled && !isNoClear) {
     _rightElement = (
       <Wrapper isRowAlign>
-        <Appear
-          isCenter
-          isLazy={false}
-          isVisible={isFocused && size(_value) > 0}>
-          <Icon
-            icon={ICON.times}
-            onPress={() => _handleChange('')}
-          />
+        <Appear isCenter isLazy={false} isVisible={isFocused && size(_value) > 0}>
+          <Icon icon={ICON.times} onPress={() => _handleChange('')} />
         </Appear>
 
         {_rightElement}
@@ -132,16 +126,7 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
   return (
     <_TextField
       {...props}
-      Component={
-        mask
-          ? (inputProps) => (
-              <MaskedTextField
-                {...inputProps}
-                mask={mask}
-              />
-            )
-          : undefined
-      }
+      Component={mask ? (inputProps) => <MaskedTextField {...inputProps} mask={mask} /> : undefined}
       error={error}
       forwardedRef={forwardedRef || inputRef}
       isDisabled={isDisabled}

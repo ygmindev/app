@@ -4,11 +4,8 @@ import type { ResourceMethodTypeModel } from '@lib/shared/resource/resource.mode
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 
-export type ResourceServiceParamsModel<
-  TType,
-  TForm,
-  TRoot = undefined,
-> = WithResourceNameModel<TRoot> & ResourceServiceDecoratorModel<TType, TForm, TRoot>;
+export type ResourceServiceParamsModel<TType, TForm, TRoot = undefined> =
+  WithResourceNameModel<TRoot> & ResourceServiceDecoratorModel<TType, TForm, TRoot>;
 
 export interface ResourceServiceModel<TType, TForm, TRoot = undefined> {
   create(

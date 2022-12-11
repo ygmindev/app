@@ -4,7 +4,7 @@ import type { SFCModel } from '@lib/frontend/core/core.models';
 import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import type { NotificationPropsModel } from '@lib/frontend/notification/components/Notification/Notification.models';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
-import { THEME_COLOR } from '@lib/frontend/styling/utils/theme/theme.constants';
+import { THEME_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
 
 const Component: SFCModel<NotificationPropsModel> = ({ id: _, ...props }) => {
   const { add, remove, success, warn } = useNotification();

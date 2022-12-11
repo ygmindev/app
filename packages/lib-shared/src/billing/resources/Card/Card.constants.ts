@@ -1,5 +1,6 @@
 export const CARD_RESOURCE_NAME = 'Card';
 
-export enum CARD_TYPE {
-  VISA = 'VISA',
+export enum CARD_FUNDING {
+  CREDIT = 'CREDIT',
+  DEBIT = 'DEBIT',
 }

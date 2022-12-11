@@ -7,7 +7,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { FormSteps } from '@lib/frontend/form/components/FormSteps/FormSteps';
 import { useRouter } from '@lib/frontend/routing/hooks/useRouter/useRouter';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import type { OtpFormModel } from '@lib/shared/auth/resources/Otp/Otp.models';
 import type { SignInFormModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 
@@ -26,10 +26,7 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({
   };
 
   return (
-    <Wrapper
-      grow
-      style={styles}
-      testID={testID}>
+    <Wrapper grow style={styles} testID={testID}>
       <FormSteps<SignInFormModel, [UsernameFormModel, OtpFormModel]> onSubmit={_handleSubmit}>
         <UsernameForm isCheckIfNotExists={isCheckIfNotExists} />
 

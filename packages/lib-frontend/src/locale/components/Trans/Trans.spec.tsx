@@ -1,7 +1,7 @@
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Trans as _Trans } from '@lib/frontend/locale/components/Trans/Trans';
 import type { TransPropsModel } from '@lib/frontend/locale/components/Trans/Trans.models';
-import { THEME_COLOR } from '@lib/frontend/styling/utils/theme/theme.constants';
+import { THEME_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
 import { render } from '@lib/frontend/testing/utils/render/render';
 import { waitForExpect } from '@lib/frontend/testing/utils/waitForExpect/waitForExpect';
 import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
@@ -12,12 +12,7 @@ const { Component: Trans, displayName } = withTestComponent<
 
 describe(displayName, () => {
   test('works with string', async () => {
-    const { queryByText } = render(
-      <Trans
-        i18nKey="labels.testingWithString"
-        ns="testing"
-      />,
-    );
+    const { queryByText } = render(<Trans i18nKey="labels.testingWithString" ns="testing" />);
     await waitForExpect(() => expect(queryByText('testing with string')).toBeTruthy());
   });
 

@@ -1,6 +1,6 @@
-let isEnabled = !__IS_SSR__ && process.env.NODE_ENV === 'test';
+let isEnabled = !import.meta.env.SSR && process.env.NODE_ENV === 'test';
 
-if (!__IS_SSR__) {
+if (!import.meta.env.SSR) {
   const HOVER_THRESHOLD_MS = 1000;
   let lastTouchTimestamp = 0;
 

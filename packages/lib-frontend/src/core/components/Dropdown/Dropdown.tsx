@@ -3,11 +3,11 @@ import { DROPDOWN_MAX_HEIGHT } from '@lib/frontend/core/components/Dropdown/Drop
 import type { DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/Dropdown.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import {
   THEME_BASIC_SIZE,
   THEME_RELATIVE_COLOR,
-} from '@lib/frontend/styling/utils/theme/theme.constants';
+} from '@lib/frontend/style/utils/theme/theme.constants';
 
 export const Dropdown: SFCModel<DropdownPropsModel> = ({
   anchor,
@@ -30,7 +30,8 @@ export const Dropdown: SFCModel<DropdownPropsModel> = ({
       isRight={isRight}
       isTop={isTop}
       onClose={onClose}
-      style={styles}>
+      style={styles}
+    >
       <Wrapper
         backgroundColor={THEME_RELATIVE_COLOR.MAIN}
         border
@@ -39,12 +40,14 @@ export const Dropdown: SFCModel<DropdownPropsModel> = ({
         mLeft={isRight}
         mRight={isLeft}
         mVertical
-        round>
+        round
+      >
         <Wrapper
           grow
           isVerticalScrollable
           maxHeight={DROPDOWN_MAX_HEIGHT}
-          p={THEME_BASIC_SIZE.SMALL}>
+          p={THEME_BASIC_SIZE.SMALL}
+        >
           {children}
         </Wrapper>
       </Wrapper>

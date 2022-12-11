@@ -1,6 +1,6 @@
 import { Otp, OtpForm } from '@lib/backend/auth/resources/Otp/Otp';
 import { OtpService } from '@lib/backend/auth/resources/Otp/OtpService/OtpService';
-import { withResolver } from '@lib/backend/graphql/decorators/withResolver/withResolver';
+import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import { withInput } from '@lib/backend/resource/decorators/withInput/withInput';
 import { withOutput } from '@lib/backend/resource/decorators/withOutput/withOutput';
 import { EntityResourceResolver } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver';

@@ -4,8 +4,8 @@ import { Image } from '@lib/frontend/core/components/Image/Image';
 import { Link } from '@lib/frontend/core/components/Link/Link';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { APP_URI } from '@lib/frontend/http/http.constants';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { THEME_BASIC_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { THEME_BASIC_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
 
 export const Logo: SFCModel<LogoPropsModel> = ({
   size = THEME_BASIC_SIZE.MEDIUM,
@@ -15,10 +15,7 @@ export const Logo: SFCModel<LogoPropsModel> = ({
   const { styles } = useStyles({ props });
   const { height, width } = LOGO_SIZES[size];
   return (
-    <Link
-      pathname="/"
-      style={styles}
-      testID={testID}>
+    <Link pathname="/" style={styles} testID={testID}>
       <Image
         height={height}
         isAutoSize

@@ -1,4 +1,4 @@
-import { i18nConfig } from '@lib/config/i18n/i18n.config';
+import { i18nConfig } from '@lib/config/locale/internationalize/internationalize';
 import { get } from 'lodash';
 import { NativeModules } from 'react-native';
 

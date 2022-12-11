@@ -2,7 +2,7 @@ import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Trans } from '@lib/frontend/locale/components/Trans/Trans';
 import type { TransPropsModel } from '@lib/frontend/locale/components/Trans/Trans.models';
-import { THEME_COLOR } from '@lib/frontend/styling/utils/theme/theme.constants';
+import { THEME_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
 import { TESTING } from '@lib/shared/testing/testing.constants';
 
 const { Default, meta } = withStory<TransPropsModel<unknown>>({

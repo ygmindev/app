@@ -1,2 +1,2 @@
 require('./packages/lib-shared/src/core/utils/nodeRegister/nodeRegister');
-require('./packages/lib-config/src/gulp/gulp.config');
+module.exports = require('./packages/lib-config/src/task/task.ts');

@@ -14,9 +14,9 @@ import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { SearchField } from '@lib/frontend/form/components/SearchField/SearchField';
 import type { SelectOptionModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
-import { THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
 import { promisify } from '@lib/shared/core/utils/promisify/promisify';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { isFunction } from 'lodash';
@@ -124,10 +124,7 @@ export const Menu: SFCModel<MenuPropsModel> = ({
     <>
       {anchorPress}
 
-      <Modal
-        isFullSize={false}
-        isOpen={isOpen}
-        onClose={_handleClose}>
+      <Modal isFullSize={false} isOpen={isOpen} onClose={_handleClose}>
         {children}
       </Modal>
     </>
@@ -137,7 +134,8 @@ export const Menu: SFCModel<MenuPropsModel> = ({
       isFullWidth={isFullWidth}
       isOpen={isOpen}
       onClose={_handleClose}
-      style={styles}>
+      style={styles}
+    >
       {children}
     </Dropdown>
   );

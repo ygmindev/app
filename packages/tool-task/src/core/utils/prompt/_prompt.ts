@@ -5,7 +5,7 @@ import { prompt, registerPrompt } from 'inquirer';
 import directory from 'inquirer-directory';
 import { startCase, toString } from 'lodash';
 
-registerPrompt('directory', directory);
+registerPrompt(PROMPT_TYPE.DIRECTORY, directory);
 
 export const _prompt = async <TType extends Record<string, string>>(
   prompts: Array<PromptParamsModel<TType>>,
@@ -34,7 +34,7 @@ export const _prompt = async <TType extends Record<string, string>>(
             }))
           : [],
 
-        message,
+        message: `${message}${isOptional ? ' (Optional)' : ''}`,
 
         name: key as string,
 

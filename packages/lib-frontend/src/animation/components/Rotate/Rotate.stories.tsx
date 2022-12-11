@@ -6,12 +6,7 @@ import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.
 
 const { Default, meta } = withStory<RotatePropsModel>({
   defaultProps: {
-    children: (
-      <Icon
-        icon={ICON.chevronRight}
-        isTitle
-      />
-    ),
+    children: <Icon icon={ICON.chevronRight} isTitle />,
   },
   target: Rotate,
   variants: [

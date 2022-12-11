@@ -2,12 +2,12 @@ import 'reflect-metadata';
 
 import { DatabaseInMemory } from '@lib/backend/database/utils/DatabaseInMemory/DatabaseInMemory';
 import { seed } from '@lib/backend/database/utils/seed/seed';
+import { TASK_STATUS } from '@lib/config/core/task/task.constants';
+import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
-import { TASK_RESULTS_STATUS_TYPE } from '@tool/task/core/utils/register/register.constants';
-import type { RegisterParamsModel } from '@tool/task/core/utils/register/register.models';
 
-const start: RegisterParamsModel = {
+const start: TaskParamsModel = {
   environment: ENVIRONMENT.DEVELOPMENT,
 
   name: 'database-start',
@@ -15,7 +15,7 @@ const start: RegisterParamsModel = {
   task: async () => {
     await Container.get(DatabaseInMemory).start();
     await seed();
-    return { status: TASK_RESULTS_STATUS_TYPE.SUCCESS };
+    return { status: TASK_STATUS.SUCCESS };
   },
 };
 

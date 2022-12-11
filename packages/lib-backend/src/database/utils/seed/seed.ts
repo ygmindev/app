@@ -1,5 +1,3 @@
-import { DatabaseMain } from '@lib/backend/database/utils/DatabaseMain/DatabaseMain';
-import { SEED_DATA } from '@lib/backend/database/utils/seed/seed.constants';
 import type { SeedParamsModel } from '@lib/backend/database/utils/seed/seed.models';
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
@@ -17,6 +15,8 @@ export const seed = async ({ names }: SeedParamsModel = {}): Promise<void> => {
     await import(service);
   }
 
+  const { DatabaseMain } = await import('@lib/backend/database/utils/DatabaseMain/DatabaseMain');
+  const { SEED_DATA } = await import('@lib/backend/database/utils/seed/seed.constants');
   const database = Container.get(DatabaseMain);
   await database.initialize();
   for (const resource of SEED_DATA) {

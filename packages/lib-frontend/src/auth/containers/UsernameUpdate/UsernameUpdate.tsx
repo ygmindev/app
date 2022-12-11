@@ -5,7 +5,7 @@ import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { USERNAME_UPDATE } from '@lib/shared/auth/resources/SignIn/SignIn.constants';
 import type { SignInFormModel, SignInModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
@@ -26,11 +26,7 @@ export const UsernameUpdate: SFCModel<UsernameUpdatePropsModel> = ({ testID, ...
   });
 
   return (
-    <Wrapper
-      grow
-      p
-      style={styles}
-      testID={testID}>
+    <Wrapper grow p style={styles} testID={testID}>
       <SignInForm
         isCheckIfNotExists
         // onSubmit={async (form) => {

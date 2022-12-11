@@ -1,15 +1,15 @@
 import { children } from '@lib/backend/file/utils/children/children';
 import { copy } from '@lib/backend/file/utils/copy/copy';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { TASK_STATUS } from '@lib/config/core/task/task.constants';
+import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { BACKUP_DIR } from '@tool/task/core/tasks/backup/backup.constants';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
-import { TASK_RESULTS_STATUS_TYPE } from '@tool/task/core/utils/register/register.constants';
-import type { RegisterParamsModel } from '@tool/task/core/utils/register/register.models';
 import { sortBy } from 'lodash';
 import { resolve } from 'path';
 
-const revert: RegisterParamsModel = {
+const revert: TaskParamsModel = {
   name: 'revert',
 
   task: async () => {
@@ -22,7 +22,7 @@ const revert: RegisterParamsModel = {
     for (const child of _children) {
       await copy({ from: child.fullPath, isOverwrite: true, to: fromRoot(child.name) });
     }
-    return { status: TASK_RESULTS_STATUS_TYPE.SUCCESS };
+    return { status: TASK_STATUS.SUCCESS };
   },
 };
 

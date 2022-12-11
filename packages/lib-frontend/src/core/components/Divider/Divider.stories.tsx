@@ -7,9 +7,7 @@ const { Default, meta } = withStory<DividerPropsModel>({
   defaultProps: {},
   displayName: 'Divider',
   target: (props) => (
-    <Wrapper
-      height={200}
-      width={200}>
+    <Wrapper height={200} width={200}>
       <Divider {...props} />
     </Wrapper>
   ),

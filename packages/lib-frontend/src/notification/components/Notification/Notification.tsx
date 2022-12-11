@@ -12,15 +12,15 @@ import {
 } from '@lib/frontend/notification/components/Notification/Notification.constants';
 import type { NotificationPropsModel } from '@lib/frontend/notification/components/Notification/Notification.models';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
-import { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import {
   THEME_COLOR,
   THEME_RELATIVE_COLOR,
   THEME_SHADE,
   THEME_SIZE,
-} from '@lib/frontend/styling/utils/theme/theme.constants';
+} from '@lib/frontend/style/utils/theme/theme.constants';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 
 export const Notification: SFCModel<NotificationPropsModel> = ({
@@ -51,11 +51,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
   );
 
   return (
-    <Appear
-      isCenter
-      isScalable
-      isVisible={!isRemoving}
-      style={styles}>
+    <Appear isCenter isScalable isVisible={!isRemoving} style={styles}>
       <Wrapper
         backgroundColor={color}
         isOverflowHidden
@@ -63,7 +59,8 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
         mBottom
         position={SHAPE_POSITION.RELATIVE}
         round
-        width={NOTIFICATION_WIDTH}>
+        width={NOTIFICATION_WIDTH}
+      >
         {isInfinite ? null : (
           <Wrapper
             animation={{
@@ -80,25 +77,12 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
           />
         )}
 
-        <Wrapper
-          grow
-          isRowAlign
-          p>
-          <Icon
-            color={THEME_RELATIVE_COLOR.CONTRAST}
-            icon={icon}
-            isTitle
-          />
+        <Wrapper grow isRowAlign p>
+          <Icon color={THEME_RELATIVE_COLOR.CONTRAST} icon={icon} isTitle />
 
-          <Wrapper
-            basis={0}
-            grow
-            isWrap
-            spacing={THEME_SIZE.SMALL}>
+          <Wrapper basis={0} grow isWrap spacing={THEME_SIZE.SMALL}>
             {title && (
-              <Text
-                color={THEME_RELATIVE_COLOR.CONTRAST}
-                isBold>
+              <Text color={THEME_RELATIVE_COLOR.CONTRAST} isBold>
                 {t(title)}
               </Text>
             )}

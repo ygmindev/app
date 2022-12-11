@@ -1,19 +1,17 @@
+import { animatable } from '@lib/frontend/animation/utils/animatable/animatable';
 import { _Icon } from '@lib/frontend/core/components/Icon/_Icon';
 import type { _IconPropsModel } from '@lib/frontend/core/components/Icon/_Icon.models';
 import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { lazy } from '@lib/frontend/core/utils/lazy/lazy';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
-import { textStyler } from '@lib/frontend/styling/utils/styler/textStyler/textStyler';
-import { THEME_BASIC_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
-import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
+import { THEME_BASIC_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
 import { get } from 'lodash';
 import type { ComponentType } from 'react';
-import type { AnimatableProperties } from 'react-native-animatable';
-import { createAnimatableComponent } from 'react-native-animatable';
 
-const _IconWithAnimationProps = createAnimatableComponent(_Icon);
+const _IconAnimatable = animatable<_IconPropsModel>({ Component: _Icon });
 
 const { Press } = lazy(() => import('@lib/frontend/core/components/Press/Press'));
 
@@ -33,23 +31,14 @@ export const Icon: SFCModel<IconPropsModel> = ({
   const { computedStyles, inheritedStyles, styles } = useStyles({ props, stylers: [textStyler] });
   const theme = useTheme();
 
-  const Component: ComponentType<_IconPropsModel> = animation ? _IconWithAnimationProps : _Icon;
-  let animationProps: WithTestIdModel = { testID };
-  if (animation) {
-    animationProps = {
-      animation: animation.animation,
-      duration: animation.duration || theme.animation.duration,
-      easing: 'ease-in-out',
-      onTransitionEnd: animation.onEnd,
-      onTransitionStart: animation.onStart,
-      transition: animation.transition,
-    } as AnimatableProperties<object> & WithTestIdModel;
-  }
+  const Component: ComponentType<_IconPropsModel> = animation ? _IconAnimatable : _Icon;
+
   let element = (
     <Component
-      {...animationProps}
+      {...(animation || {})}
       icon={icon}
       style={onPress ? computedStyles : styles}
+      testID={testID}
     />
   );
   if (onPress) {
@@ -74,7 +63,8 @@ export const Icon: SFCModel<IconPropsModel> = ({
             : {}),
           ...(to || {}),
         }}
-        tooltip={tooltip}>
+        tooltip={tooltip}
+      >
         {element}
       </Press>
     );

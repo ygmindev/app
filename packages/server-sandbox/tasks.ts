@@ -1,18 +1,14 @@
-import { register } from '@tool/task/core/utils/register/register';
+import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { dev } from '@tool/task/node/templates/dev/dev';
-import { registerNodeTasks } from '@tool/task/node/utils/registerNodeTasks/registerNodeTasks';
-import { make } from '@tool/task/webpack/templates/make/make';
+import { nodeTasks } from '@tool/task/node/utils/nodeTasks/nodeTasks';
+import { make } from '@tool/task/serverless/templates/make/make';
 
-import { name } from './package.json';
+const tasks: Array<TaskParamsModel<unknown>> = [
+  ...nodeTasks(),
 
-registerNodeTasks({ name });
+  make,
 
-const { name: buildName } = register({ ...make, target: name });
+  { ...dev, onBefore: ['ssm'], options: { script: 'dist/index.js' } },
+];
 
-register({
-  ...dev,
-  cleanups: ['database-kill'],
-  dependencies: [buildName, 'database-start'],
-  options: { script: 'dist/index.js' },
-  target: name,
-});
+export default tasks;

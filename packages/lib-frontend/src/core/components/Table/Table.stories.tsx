@@ -15,9 +15,7 @@ const { Default, meta } = withStory<TablePropsModel<TableFixtureRowModel>>({
   },
   displayName: 'Table',
   target: (props) => (
-    <Wrapper
-      height={500}
-      width={500}>
+    <Wrapper height={500} width={500}>
       <Table {...props} />
     </Wrapper>
   ),

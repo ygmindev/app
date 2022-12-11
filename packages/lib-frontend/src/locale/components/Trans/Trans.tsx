@@ -1,7 +1,7 @@
 import { _Trans } from '@lib/frontend/locale/components/Trans/_Trans';
 import type { TransPropsModel } from '@lib/frontend/locale/components/Trans/Trans.models';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { textStyler } from '@lib/frontend/styling/utils/styler/textStyler/textStyler';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
 import type { ReactElement } from 'react';
 
 export const Trans = <TParams = undefined,>({

@@ -10,7 +10,7 @@ import type { SelectFieldPropsModel } from '@lib/frontend/form/components/Select
 import { TextField } from '@lib/frontend/form/components/TextField/TextField';
 import { useField } from '@lib/frontend/form/hooks/useField/useField';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { find } from 'lodash';
 import { useRef, useState } from 'react';
@@ -74,9 +74,7 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
     : undefined;
 
   return (
-    <Wrapper
-      style={styles}
-      testID={testID}>
+    <Wrapper style={styles} testID={testID}>
       <Menu
         anchor={(isOpen) => (
           <TextField

@@ -11,9 +11,16 @@ export const adminRoutes: Array<RouteComponentModel> = [
     Layout: AppLayout,
     isProtected: true,
     routes: [
-      { element: <AdminHome />, isIndex: true, isProtected: true },
+      {
+        element: <AdminHome />,
+        isIndex: true,
+        isProtected: true,
+      },
+
       ...resourceRoutes,
+
       ...settingsRoutes,
+
       ...billingRoutes,
     ],
   },

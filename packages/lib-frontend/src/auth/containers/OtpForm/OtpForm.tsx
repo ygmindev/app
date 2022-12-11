@@ -14,8 +14,8 @@ import { useForm } from '@lib/frontend/form/hooks/useForm/useForm';
 import { Trans } from '@lib/frontend/locale/components/Trans/Trans';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
 import { AUTH } from '@lib/shared/auth/auth.constants';
 import { OTP_LENGTH } from '@lib/shared/auth/resources/Otp/Otp.constants';
 import type { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
@@ -67,12 +67,7 @@ export const _OtpForm: SFCModel<OtpFormPropsModel> = ({ data, onBack, onSuccess,
     <CenterLayout style={styles}>
       {data && data.username && (
         <Trans
-          Components={[
-            <Text
-              color={THEME_COLOR.PRIMARY}
-              isBold
-            />,
-          ]}
+          Components={[<Text color={THEME_COLOR.PRIMARY} isBold />]}
           i18nKey="messages.otpEnter"
           ns="auth"
           params={{ value: data.username }}
@@ -90,17 +85,12 @@ export const _OtpForm: SFCModel<OtpFormPropsModel> = ({ data, onBack, onSuccess,
       <Wrapper isRowAlign>
         <Text>{t('auth:messages.otpDidntGet')}</Text>
 
-        <Button
-          icon={ICON.refresh}
-          isDisabled={isLoading}
-          onPress={onBack}>
+        <Button icon={ICON.refresh} isDisabled={isLoading} onPress={onBack}>
           {t('core:labels.tryAgain')}
         </Button>
       </Wrapper>
 
-      <Appear
-        isLazy={false}
-        isVisible={isLoading}>
+      <Appear isLazy={false} isVisible={isLoading}>
         <Loading size={THEME_SIZE.LARGE} />
       </Appear>
     </CenterLayout>

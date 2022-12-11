@@ -1,13 +1,13 @@
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import { TASK_STATUS } from '@lib/config/core/task/task.constants';
+import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
-import { TASK_RESULTS_STATUS_TYPE } from '@tool/task/core/utils/register/register.constants';
-import type { RegisterParamsModel } from '@tool/task/core/utils/register/register.models';
 import { PACKAGE_EXTEND_KEYS } from '@tool/task/node/templates/packageExtend/packageExtend.constants';
 import { writeFileSync } from 'fs';
 import { pick } from 'lodash';
 
-export const packageExtend: RegisterParamsModel = {
+export const packageExtend: TaskParamsModel = {
   name: 'packageExtend',
 
   task: async () => {
@@ -17,6 +17,6 @@ export const packageExtend: RegisterParamsModel = {
       values: [localPackage, pick(parentPackage, PACKAGE_EXTEND_KEYS)],
     });
     writeFileSync(fromWorking('package.json'), JSON.stringify(finalPackage, null, 2));
-    return { status: TASK_RESULTS_STATUS_TYPE.SUCCESS };
+    return { status: TASK_STATUS.SUCCESS };
   },
 };

@@ -4,14 +4,14 @@ import type { TrackingProviderPropsModel } from '@lib/frontend/tracking/provider
 import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
 import { useEffect } from 'react';
 
-const REACT_APP_AMPLITUDE_API_KEY = getEnv('REACT_APP_AMPLITUDE_API_KEY');
+const APP_AMPLITUDE_API_KEY = getEnv('APP_AMPLITUDE_API_KEY');
 
 export const TrackingProvider: SFCModel<TrackingProviderPropsModel> = ({ children }) => {
   const { initialize } = useTracking();
 
   useEffect(() => {
-    if (!__IS_SSR__) {
-      initialize(REACT_APP_AMPLITUDE_API_KEY);
+    if (!import.meta.env.SSR) {
+      initialize(APP_AMPLITUDE_API_KEY);
     }
   }, [initialize]);
 

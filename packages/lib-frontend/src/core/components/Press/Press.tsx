@@ -8,9 +8,9 @@ import type { SFCModel } from '@lib/frontend/core/core.models';
 import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { lazy } from '@lib/frontend/core/utils/lazy/lazy';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
-import type { StyleModel } from '@lib/frontend/styling/styling.models';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import type { StyleModel } from '@lib/frontend/style/style.models';
 import { useTracking } from '@lib/frontend/tracking/hooks/useTracking/useTracking';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { isFunction } from 'lodash';
@@ -92,7 +92,8 @@ export const Press: SFCModel<PressPropsModel> = ({
                     ? { backgroundColor: theme.colors.background.main }
                     : from,
                 ].filter(Boolean) as Array<StyleModel>
-              }>
+              }
+            >
               {isFunction(children) ? children(isActive || isPressed) : children}
             </Wrapper>
           );
@@ -100,13 +101,8 @@ export const Press: SFCModel<PressPropsModel> = ({
       </Container>
 
       {confirmMessage && (
-        <Modal
-          isOpen={confirmModalIsOpen}
-          onClose={() => setConfirmModalIsOpen(false)}>
-          <Wrapper
-            grow
-            isCenter
-            spacing>
+        <Modal isOpen={confirmModalIsOpen} onClose={() => setConfirmModalIsOpen(false)}>
+          <Wrapper grow isCenter spacing>
             {confirmMessage && <Text>{confirmMessage}</Text>}
 
             <Wrapper isRowAlign>
@@ -114,7 +110,8 @@ export const Press: SFCModel<PressPropsModel> = ({
                 icon={ICON.chevronLeft}
                 isDisabled={isDisabled}
                 isTransparent
-                onPress={() => setConfirmModalIsOpen(false)}>
+                onPress={() => setConfirmModalIsOpen(false)}
+              >
                 {t('core:labels.cancel')}
               </Button>
 
@@ -124,7 +121,8 @@ export const Press: SFCModel<PressPropsModel> = ({
                 onPress={async () => {
                   onPress && onPress();
                   return setConfirmModalIsOpen(false);
-                }}>
+                }}
+              >
                 {t('core:labels.continue')}
               </Button>
             </Wrapper>

@@ -1,4 +1,4 @@
-import { i18nConfig } from '@lib/config/i18n/i18n.config';
+import { internationalizeConfig } from '@lib/config/locale/internationalize/internationalize';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import type { _LocaleProviderPropsModel } from '@lib/frontend/locale/providers/LocaleProvider/_LocaleProvider.models';
 import { _Backend, _backend } from '@lib/frontend/locale/providers/LocaleProvider/backend/_backend';
@@ -13,7 +13,7 @@ import { I18nextProvider, initReactI18next } from 'react-i18next';
 use(_Backend).use(_Detector);
 
 use(initReactI18next).init({
-  ...i18nConfig,
+  ...internationalizeConfig,
   backend: _backend,
   detection: _detection,
 });

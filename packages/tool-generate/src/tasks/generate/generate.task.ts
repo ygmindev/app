@@ -1,16 +1,16 @@
 import { children } from '@lib/backend/file/utils/children/children';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { generateConfig } from '@lib/config/generate/generate.config';
+import { generateConfig } from '@lib/config/core/generate/configs/generate';
+import { TASK_STATUS } from '@lib/config/core/task/task.constants';
+import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import type { GenerateParamsModel } from '@tool/generate/tasks/generate/generate.models';
 import { boilerplate } from '@tool/generate/utils/boilerplate/boilerplate';
 import type { BoilerplateParamsModel } from '@tool/generate/utils/boilerplate/boilerplate.models';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
-import { TASK_RESULTS_STATUS_TYPE } from '@tool/task/core/utils/register/register.constants';
-import type { RegisterParamsModel } from '@tool/task/core/utils/register/register.models';
 
-const generate: RegisterParamsModel<GenerateParamsModel> = {
+const generate: TaskParamsModel<GenerateParamsModel> = {
   name: 'generate',
 
   task: async () => {
@@ -28,7 +28,7 @@ const generate: RegisterParamsModel<GenerateParamsModel> = {
     });
     await boilerplate(params);
 
-    return { status: TASK_RESULTS_STATUS_TYPE.SUCCESS };
+    return { status: TASK_STATUS.SUCCESS };
   },
 };
 

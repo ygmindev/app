@@ -1,5 +1,0 @@
-export enum TASK_RESULTS_STATUS_TYPE {
-  ERROR = 'ERROR',
-  SUCCESS = 'SUCCESS',
-  WARNING = 'WARNING',
-}

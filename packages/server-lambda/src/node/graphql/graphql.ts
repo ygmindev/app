@@ -1,4 +1,4 @@
-import { schema } from '@lib/backend/graphql/utils/schema/schema';
+import { schema } from '@lib/backend/http/utils/schema/schema';
 import { createHandler } from '@lib/backend/lambda/utils/createHandler/createHandler';
 import { getContext } from '@lib/backend/lambda/utils/getContext/getContext';
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';

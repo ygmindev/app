@@ -1,4 +1,0 @@
-export enum RESOURCE_MODAL_MODE {
-  CREATE = 'CREATE',
-  UPDATE = 'UPDATE',
-}

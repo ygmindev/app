@@ -1,12 +1,33 @@
-import { CARDS } from '@lib/frontend/billing/billing.constants';
-import { Cards } from '@lib/frontend/billing/containers/Cards/Cards';
+import { BILLING, PAYMENT_METHODS } from '@lib/frontend/billing/billing.constants';
+import { PaymentMethods } from '@lib/frontend/billing/containers/PaymentMethods/PaymentMethods';
+import { Text } from '@lib/frontend/core/components/Text/Text';
+import { REDIRECT } from '@lib/frontend/core/core.constants';
 import type { PagePropsModel } from '@lib/frontend/routing/components/Page/Page.models';
 
 export const billingRoutes: Array<PagePropsModel> = [
   {
-    element: <Cards />,
-    isHeader: true,
-    pathname: CARDS,
-    title: CARDS,
+    pathname: BILLING,
+    routes: [
+      {
+        pathname: PAYMENT_METHODS,
+        routes: [
+          {
+            element: <PaymentMethods />,
+            isHeader: true,
+            isIndex: true,
+            title: PAYMENT_METHODS,
+          },
+
+          {
+            element: (
+              <>
+                <Text>redirect</Text>
+              </>
+            ),
+            pathname: REDIRECT,
+          },
+        ],
+      },
+    ],
   },
 ];

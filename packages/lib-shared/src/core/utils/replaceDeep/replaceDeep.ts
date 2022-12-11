@@ -1,6 +1,6 @@
 import { isArray, isPlainObject, isString, reduce } from 'lodash';
 
-export const replaceDeep = <TType>(value: TType, from: string, to: string): TType =>
+export const replaceDeep = <TType extends unknown>(value: TType, from: string, to: string): TType =>
   (isString(value)
     ? value.replaceAll(from, to)
     : isPlainObject(value)

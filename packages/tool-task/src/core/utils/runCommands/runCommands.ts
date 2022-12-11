@@ -7,7 +7,7 @@ import { every } from 'lodash';
 export const runCommands = async ({ commands }: RunCommandsParamsModel): Promise<boolean> => {
   const results = await Promise.all(
     commands.map(({ command, completeMessage, environment, overrides, root }) => {
-      (environment || overrides) && setup({ environment, overrides });
+      setup({ environment, overrides });
       info(`Starting ${command}`);
       return new Promise<boolean>((resolve, reject) => {
         const _handleSuccess = (): void => {

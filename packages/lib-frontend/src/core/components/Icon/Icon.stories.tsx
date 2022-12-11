@@ -2,7 +2,7 @@ import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
 import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
-import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
 
 const { Default, meta } = withStory<IconPropsModel>({
   defaultProps: { icon: ICON.person },

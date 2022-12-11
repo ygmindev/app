@@ -1,13 +1,14 @@
-import { register } from '@tool/task/core/utils/register/register';
+import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { dev } from '@tool/task/native/templates/dev/dev';
 import { iosDev } from '@tool/task/native/templates/iosDev/iosDev';
 import { iosPod } from '@tool/task/native/templates/iosPod/iosPod';
-import { registerNodeTasks } from '@tool/task/node/utils/registerNodeTasks/registerNodeTasks';
+import { nodeTasks } from '@tool/task/node/utils/nodeTasks/nodeTasks';
 
-import { name } from './package.json';
+const tasks: Array<TaskParamsModel<unknown>> = [
+  ...nodeTasks(),
+  { ...dev, onBefore: ['app-native-package-extend'] },
+  { ...iosDev, onBefore: ['app-native-package-extend'] },
+  { ...iosPod, onBefore: ['app-native-package-extend'] },
+];
 
-registerNodeTasks({ name });
-
-register({ ...dev, dependencies: ['app-native-package-extend'], target: name });
-register({ ...iosDev, dependencies: ['app-native-package-extend'], target: name });
-register({ ...iosPod, dependencies: ['app-native-package-extend'], target: name });
+export default tasks;

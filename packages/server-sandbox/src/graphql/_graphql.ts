@@ -1,4 +1,4 @@
-import { schema } from '@lib/backend/graphql/utils/schema/schema';
+import { schema } from '@lib/backend/http/utils/schema/schema';
 import { info } from '@lib/shared/logging/utils/logger/logger';
 import type { _GraphqlParamsModel } from '@server/sandbox/graphql/_graphql.models';
 import { ApolloServer } from 'apollo-server';

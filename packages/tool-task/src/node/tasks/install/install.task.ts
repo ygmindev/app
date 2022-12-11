@@ -1,10 +1,12 @@
+import { TASK_STATUS } from '@lib/config/core/task/task.constants';
+import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { sequence } from '@lib/shared/core/utils/sequence/sequence';
 import { command } from '@tool/task/core/utils/command/command';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
-import { TASK_RESULTS_STATUS_TYPE } from '@tool/task/core/utils/register/register.constants';
-import type { RegisterParamsModel } from '@tool/task/core/utils/register/register.models';
 
-const install: RegisterParamsModel = {
+const install: TaskParamsModel = {
+  cleanups: ['node-post-install'],
+
   name: 'node-install',
 
   task: async ({ root }) => {
@@ -28,7 +30,7 @@ const install: RegisterParamsModel = {
             command({ command: `yarn remove ${response.remove}`, root })),
       ].filter(Boolean) as Array<() => Promise<boolean>>,
     );
-    return { status: TASK_RESULTS_STATUS_TYPE.SUCCESS };
+    return { status: TASK_STATUS.SUCCESS };
   },
 };
 

@@ -1,6 +1,11 @@
+import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { runAll } from '@tool/task/core/templates/runAll/runAll';
-import type { RegisterParamsModel } from '@tool/task/core/utils/register/register.models';
+import type { RunAllParamsModel } from '@tool/task/core/templates/runAll/runAll.models';
 
-const test: RegisterParamsModel = { ...runAll, name: 'test', options: { patterns: [/test/] } };
+const test: TaskParamsModel<RunAllParamsModel> = {
+  ...runAll,
+  name: 'test',
+  options: { patterns: [/test/] },
+};
 
 export default test;

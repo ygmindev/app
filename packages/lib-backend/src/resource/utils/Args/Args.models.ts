@@ -9,7 +9,7 @@ export interface ArgsParamsModel<
   TForm,
   TRoot = undefined,
 > extends RootParamsModel<TRoot> {
-  Resource: ConstructorModel<TMethod extends RESOURCE_METHOD_TYPE.CREATE ? TForm : TType>;
+  Resource?: ConstructorModel<TMethod extends RESOURCE_METHOD_TYPE.CREATE ? TForm : TType>;
   method: TMethod;
   name: string;
 }

@@ -1,17 +1,17 @@
-import { DatabaseMain } from '@lib/backend/database/utils/DatabaseMain/DatabaseMain';
+import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
-import { info } from '@lib/shared/logging/utils/logger/logger';
 import { cleanup as cleanupBase } from '@lib/shared/setup/utils/cleanup/cleanup';
 
 let isCleanedup = false;
 
-export const cleanup = async (): Promise<void> => {
+export const cleanup: CallablePromiseModel = async () => {
   await cleanupBase();
 
   if (!isCleanedup) {
+    const { DatabaseMain } = await import('@lib/backend/database/utils/DatabaseMain/DatabaseMain');
+
     await Container.get(DatabaseMain).close();
 
-    info('cleaned up backend');
     isCleanedup = true;
   }
 };

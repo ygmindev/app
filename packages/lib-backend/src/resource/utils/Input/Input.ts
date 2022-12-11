@@ -14,8 +14,6 @@ export const Input = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRo
   InputModel<TMethod, TType, TForm, TRoot>
 > => {
   @withEntity({ name })
-  class _Input extends ((Args({ Resource, RootResource, method, name }) as ConstructorModel) ||
-    class {}) {}
-
+  class _Input extends Args({ Resource, RootResource, method, name }) {}
   return _Input as ConstructorModel<InputModel<TMethod, TType, TForm, TRoot>>;
 };

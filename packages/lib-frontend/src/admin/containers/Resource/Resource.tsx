@@ -10,7 +10,7 @@ import { RouteTabs } from '@lib/frontend/routing/containers/RouteTabs/RouteTabs'
 import { useRouter } from '@lib/frontend/routing/hooks/useRouter/useRouter';
 import { NOT_FOUND } from '@lib/frontend/routing/routing.constants';
 import { trimPathname } from '@lib/frontend/routing/utils/trimPathname/trimPathname';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { RESOURCE } from '@lib/shared/resource/resource.constants';
 import { get, mapKeys } from 'lodash';
 
@@ -26,10 +26,7 @@ export const Resource: SFCModel<ResourcePropsModel> = ({ testID, ...props }) => 
     : null;
 
   return Table ? (
-    <Wrapper
-      grow
-      style={styles}
-      testID={testID}>
+    <Wrapper grow style={styles} testID={testID}>
       <RouteTabs
         tabs={Object.keys(RESOURCE_TABLES).map((id) => ({
           id: `${RESOURCE}/${trimPathname(id)}`,

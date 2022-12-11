@@ -1,4 +1,4 @@
-import { withResolver } from '@lib/backend/graphql/decorators/withResolver/withResolver';
+import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import { EmbeddedResourceResolver } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResourceResolver/EmbeddedResourceResolver';
 import type { EmbeddedResourceResolverModel } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResourceResolver/EmbeddedResourceResolver.models';
 import { {{NAME}}(pascalCase) } from '@lib/backend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)';
@@ -22,7 +22,7 @@ export class {{NAME}}(pascalCase)Resolver
   >({
     Resource: {{NAME}}(pascalCase),
     ResourceService: {{NAME}}(pascalCase)Service,
-    Root: {{NAME_ROOT}}(pascalCase),
+    RootResource: {{NAME_ROOT}}(pascalCase),
     name: {{NAME}}(constantCase)_RESOURCE_NAME,
   })
   implements

@@ -1,10 +1,4 @@
-import type { EmbeddedResourceServiceModel } from '@lib/shared/resource/resources/EmbeddedResource/EmbeddedResourceService/EmbeddedResourceService.models';
-import type { {{NAME}}(pascalCase)FormModel, {{NAME}}(pascalCase)Model } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
-import type { {{NAME_ROOT}}(pascalCase)Model } from '@lib/shared/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase).models';
+import type { {{NAME}}(pascalCase)ServiceModel } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Service/{{NAME}}(pascalCase)Service.models';
 
 export interface Use{{NAME}}(pascalCase)ResourceModel
-  extends Pick<EmbeddedResourceServiceModel<
-    {{NAME}}(pascalCase)Model,
-    {{NAME}}(pascalCase)FormModel,
-    {{NAME_ROOT}}(pascalCase)Model,
-  >, 'get'> {}
+  extends Pick<{{NAME}}(pascalCase)ServiceModel, 'get'> {}

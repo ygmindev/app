@@ -1,12 +1,8 @@
 import type { _QueryProviderPropsModel } from '@lib/frontend/core/providers/QueryProvider/_QueryProvider.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister';
 import type { QueryClientProviderProps } from '@tanstack/react-query';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { persistQueryClient } from '@tanstack/react-query-persist-client';
-
-const persister = createAsyncStoragePersister({ storage: AsyncStorage });
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,14 +21,19 @@ const queryClient = new QueryClient({
   },
 });
 
-persistQueryClient({
-  dehydrateOptions: {
-    shouldDehydrateMutation: ({ cacheTime }) => cacheTime > 0,
-    shouldDehydrateQuery: ({ cacheTime }) => cacheTime > 0,
-  },
-  persister,
-  queryClient,
-});
+if (!import.meta.env.SSR) {
+  const AsyncStorage = (await import('@react-native-async-storage/async-storage')).default;
+  const { createAsyncStoragePersister } = await import('@tanstack/query-async-storage-persister');
+  const persister = createAsyncStoragePersister({ storage: AsyncStorage });
+  persistQueryClient({
+    dehydrateOptions: {
+      shouldDehydrateMutation: ({ cacheTime }) => cacheTime > 0,
+      shouldDehydrateQuery: ({ cacheTime }) => cacheTime > 0,
+    },
+    persister,
+    queryClient,
+  });
+}
 
 export const _QueryProvider = composeComponent<_QueryProviderPropsModel, QueryClientProviderProps>({
   Component: QueryClientProvider,

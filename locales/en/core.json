@@ -1,0 +1,25 @@
+{
+  "labels": {
+    "tryAgain": "",
+    "noResult": "",
+    "cancel": "",
+    "continue": "",
+    "loading": "",
+    "submit": ""
+  },
+  "messages": {
+    "errorOffline": "",
+    "errorUnauthorized": "",
+    "errorForbidden": "",
+    "errorGeneric": "",
+    "nothingToShow": "",
+    "validateChanged": "",
+    "validateAlphaNumeric": "",
+    "validateLength": "",
+    "validateRange": "",
+    "validateEmail": "",
+    "validateNotEmpty": "",
+    "validateZipCode": "",
+    "confirmRemove": ""
+  }
+}

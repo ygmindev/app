@@ -19,9 +19,7 @@ const { Default, meta } = withStory<
   defaultProps: STEPS_FIXTURE_PROPS,
   displayName: 'FormSteps',
   target: (props) => (
-    <Wrapper
-      height={500}
-      width={500}>
+    <Wrapper height={500} width={500}>
       <FormSteps {...props} />
     </Wrapper>
   ),

@@ -1,0 +1,5 @@
+export enum TASK_STATUS {
+  ERROR = 'ERROR',
+  SUCCESS = 'SUCCESS',
+  WARNING = 'WARNING',
+}

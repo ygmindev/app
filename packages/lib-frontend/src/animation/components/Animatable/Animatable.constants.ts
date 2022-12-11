@@ -1,0 +1,5 @@
+export enum ANIMATABLE_TYPE {
+  SCROLL_VIEW = 'SCROLL_VIEW',
+  TEXT = 'TEXT',
+  VIEW = 'VIEW',
+}

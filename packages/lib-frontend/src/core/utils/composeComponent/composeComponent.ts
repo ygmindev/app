@@ -1,6 +1,6 @@
 import type { ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
-import type { WithStyleParamsModel } from '@lib/frontend/styling/decorators/withStyle/withStyle.models';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
+import type { WithStyleParamsModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
 import type { ForwardRefExoticComponent, ReactElement, RefObject } from 'react';
 import { createElement, forwardRef } from 'react';

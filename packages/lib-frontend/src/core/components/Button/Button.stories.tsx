@@ -2,7 +2,7 @@ import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import type { ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
 import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
-import { THEME_BASIC_SIZE, THEME_COLOR } from '@lib/frontend/styling/utils/theme/theme.constants';
+import { THEME_BASIC_SIZE, THEME_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
 
 const { Default, meta } = withStory<ButtonPropsModel>({
   defaultProps: { children: 'text' },

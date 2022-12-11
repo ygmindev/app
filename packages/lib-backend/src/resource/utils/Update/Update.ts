@@ -3,7 +3,7 @@ import type { UpdateParamsModel } from '@lib/backend/resource/utils/Update/Updat
 import type { ConstructorModel } from '@lib/shared/core/core.models';
 import type { UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 
-export const Update = <TType>({
+export const Update = <TType extends unknown>({
   Resource,
   name,
 }: UpdateParamsModel<TType>): ConstructorModel<UpdateModel<TType>> => {

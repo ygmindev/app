@@ -1,7 +1,8 @@
+import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { watch } from '@tool/task/core/templates/watch/watch';
-import type { RegisterParamsModel } from '@tool/task/core/utils/register/register.models';
+import type { WatchParamsModel } from '@tool/task/core/templates/watch/watch.models';
 
-export const dev: RegisterParamsModel = {
+export const dev: TaskParamsModel<WatchParamsModel> = {
   ...watch,
 
   name: 'dev',

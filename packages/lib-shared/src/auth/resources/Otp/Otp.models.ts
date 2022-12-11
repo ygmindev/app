@@ -1,6 +1,7 @@
 import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
-export interface OtpModel extends EntityResourceModel {
+export interface OtpModel extends Omit<EntityResourceModel, 'created'> {
+  created: Date;
   otp: string;
   username: string;
 }

@@ -1,4 +1,4 @@
-import { withResolver } from '@lib/backend/graphql/decorators/withResolver/withResolver';
+import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import { EmbeddedResourceResolver } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResourceResolver/EmbeddedResourceResolver';
 import type { EmbeddedResourceResolverModel } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResourceResolver/EmbeddedResourceResolver.models';
 import { DummyEmbeddedResource } from '@lib/backend/testing/resources/DummyEmbeddedResource/DummyEmbeddedResource';

@@ -10,13 +10,7 @@ const { Default, meta } = withStory<SvgPropsModel>({
   variants: [
     {
       props: {
-        children: (
-          <SvgShape
-            shape={SVG_SHAPE.RECT}
-            x={0}
-            y={0}
-          />
-        ),
+        children: <SvgShape shape={SVG_SHAPE.RECT} x={0} y={0} />,
       },
     },
   ],

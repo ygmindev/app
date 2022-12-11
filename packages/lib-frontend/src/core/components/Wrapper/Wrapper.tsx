@@ -1,17 +1,20 @@
+import { Animatable } from '@lib/frontend/animation/components/Animatable/Animatable';
+import { ANIMATABLE_TYPE } from '@lib/frontend/animation/components/Animatable/Animatable.constants';
+import { animatable } from '@lib/frontend/animation/utils/animatable/animatable';
 import type { WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { isFragment } from '@lib/frontend/core/utils/isFragment/isFragment';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
-import { spacingStyler } from '@lib/frontend/styling/utils/styler/spacingStyler/spacingStyler';
-import { viewStyler } from '@lib/frontend/styling/utils/styler/viewStyler/viewStyler';
-import { THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
-import type { PartialModel } from '@lib/shared/core/core.models';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import type { StyleModel } from '@lib/frontend/style/style.models';
+import { spacingStyler } from '@lib/frontend/style/utils/styler/spacingStyler/spacingStyler';
+import { viewStyler } from '@lib/frontend/style/utils/styler/viewStyler/viewStyler';
+import { THEME_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import { isNil, reduce, size } from 'lodash';
-import type { ElementType, ReactElement, ReactNode } from 'react';
+import type { ComponentType, ElementType, ReactElement, ReactNode } from 'react';
 import { Children, cloneElement, createElement, isValidElement } from 'react';
 import type {
   LayoutChangeEvent,
@@ -20,10 +23,10 @@ import type {
   ViewProps,
 } from 'react-native';
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
-import type { AnimatableComponent } from 'react-native-animatable';
-import { createAnimatableComponent, View as ViewWithAnimationProps } from 'react-native-animatable';
 
-const TouchableOpacityWithAnimationProps = createAnimatableComponent(TouchableOpacity);
+const _TouchableOpacityAnimatable = animatable({
+  Component: TouchableOpacity as ComponentType<{ style?: StyleModel }>,
+});
 
 export const Wrapper: SFCModel<WrapperPropsModel> = ({
   animation,
@@ -98,14 +101,24 @@ export const Wrapper: SFCModel<WrapperPropsModel> = ({
     );
   };
 
-  const Component = isScrollable
+  // const Component = isScrollable
+  //   ? ScrollView
+  //   : isPressable
+  //   ? animation
+  //     ? _TouchableOpacityAnimatable
+  //     : TouchableOpacity
+  //   : animation
+  //   ? ViewWithAnimationProps
+  //   : View;
+
+  const Component = animation
+    ? isPressable
+      ? _TouchableOpacityAnimatable
+      : Animatable
+    : isScrollable
     ? ScrollView
     : isPressable
-    ? animation
-      ? TouchableOpacityWithAnimationProps
-      : TouchableOpacity
-    : animation
-    ? ViewWithAnimationProps
+    ? TouchableOpacity
     : View;
 
   const _onMeasure = onMeasure
@@ -143,20 +156,16 @@ export const Wrapper: SFCModel<WrapperPropsModel> = ({
           showsVerticalScrollIndicator: isVerticalScrollable,
         }
       : {}) as ScrollViewProps),
-    ...((animation
+    ...(animation
       ? {
-          animation: animation.animation,
-          delay: animation.delay,
-          duration: animation.duration || theme.animation.duration,
-          easing: 'ease-in-out',
-          iterationCount: animation.isInfinite ? 'infinite' : undefined,
-          onAnimationBegin: animation.animation ? animation.onStart : undefined,
-          onAnimationEnd: animation.animation ? animation.onEnd : undefined,
-          onTransitionBegin: animation.transition ? animation.onStart : undefined,
-          onTransitionEnd: animation.transition ? animation.onEnd : undefined,
-          transition: animation.transition,
+          ...animation,
+          type: isPressable
+            ? undefined
+            : isScrollable
+            ? ANIMATABLE_TYPE.SCROLL_VIEW
+            : ANIMATABLE_TYPE.VIEW,
         }
-      : {}) as PartialModel<AnimatableComponent<object, object>>),
+      : {}),
   };
 
   return createElement(

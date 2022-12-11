@@ -2,12 +2,12 @@ import type { _ModalPropsModel } from '@lib/frontend/core/components/Modal/_Moda
 import type { FCModel } from '@lib/frontend/core/core.models';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { useDimension } from '@lib/frontend/platform/hooks/useDimension/useDimension';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
-import { flexStyler } from '@lib/frontend/styling/utils/styler/flexStyler/flexStyler';
-import { FLEX_JUSTIFY } from '@lib/frontend/styling/utils/styler/flexStyler/flexStyler.constants';
-import { spacingStyler } from '@lib/frontend/styling/utils/styler/spacingStyler/spacingStyler';
-import type { ViewStylerParamsModel } from '@lib/frontend/styling/utils/styler/viewStyler/viewStyler.models';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { flexStyler } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler';
+import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import { spacingStyler } from '@lib/frontend/style/utils/styler/spacingStyler/spacingStyler';
+import type { ViewStylerParamsModel } from '@lib/frontend/style/utils/styler/viewStyler/viewStyler.models';
 import Modal from 'react-native-modal';
 
 export const _Modal: FCModel<_ModalPropsModel> = ({
@@ -54,7 +54,8 @@ export const _Modal: FCModel<_ModalPropsModel> = ({
         },
       ]}
       supportedOrientations={['portrait', 'landscape']}
-      swipeDirection={!isDisabled && isMobile ? 'down' : undefined}>
+      swipeDirection={!isDisabled && isMobile ? 'down' : undefined}
+    >
       {children}
     </Modal>
   );

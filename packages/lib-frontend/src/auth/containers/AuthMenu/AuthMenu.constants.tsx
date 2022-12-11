@@ -1,7 +1,7 @@
 import type { AuthMenuOptionModel } from '@lib/frontend/auth/containers/AuthMenu/AuthMenu.models';
 import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { SETTINGS } from '@lib/frontend/settings/settings.constants';
-import { THEME_COLOR } from '@lib/frontend/styling/utils/theme/theme.constants';
+import { THEME_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
 import { SIGN_OUT } from '@lib/shared/auth/auth.constants';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
 

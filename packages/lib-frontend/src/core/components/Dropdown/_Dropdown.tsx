@@ -1,8 +1,8 @@
 import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
 import type { _DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/_Dropdown.models';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import Tippy from '@tippyjs/react';
 import { set } from 'lodash';
@@ -61,7 +61,8 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
             ]
           : [],
       }}
-      visible={isOpen}>
+      visible={isOpen}
+    >
       <View style={styles}>{anchor}</View>
     </Tippy>
   );

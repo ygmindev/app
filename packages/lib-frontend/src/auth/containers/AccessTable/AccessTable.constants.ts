@@ -1,8 +1,8 @@
 import { FORM_FIELD_TYPE } from '@lib/frontend/form/containers/FormContainer/FormContainer.constants';
 import { validateLength } from '@lib/frontend/form/utils/validateLength/validateLength';
 import { validateNotEmpty } from '@lib/frontend/form/utils/validateNotEmpty/validateNotEmpty';
-import { ENTITY_RESOURCE_COLUMNS } from '@lib/frontend/resource/components/Resources/Resources.constants';
-import type { ResourcesPropsModel } from '@lib/frontend/resource/components/Resources/Resources.models';
+import { ENTITY_RESOURCE_COLUMNS } from '@lib/frontend/resource/containers/Resources/Resources.constants';
+import type { ResourcesPropsModel } from '@lib/frontend/resource/containers/Resources/Resources.models';
 import {
   ACCESS_RESOURCE_NAME,
   ACCESS_ROLE,

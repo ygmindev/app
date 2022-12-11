@@ -7,7 +7,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { FCModel } from '@lib/frontend/core/core.models';
 import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
+import { THEME_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
 import { CORE } from '@lib/shared/core/core.constants';
 import type { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
@@ -38,13 +38,8 @@ export const ErrorBoundary: FCModel<ErrorBoundaryPropsModel> = ({
       })();
 
       return (
-        <Wrapper
-          isCenter
-          spacing={THEME_SIZE.SMALL}>
-          <Icon
-            icon={icon || ICON.sad}
-            isTitle
-          />
+        <Wrapper isCenter spacing={THEME_SIZE.SMALL}>
+          <Icon icon={icon || ICON.sad} isTitle />
 
           <Text>{message || t('core:messages.errorGeneric')}</Text>
         </Wrapper>
@@ -58,21 +53,17 @@ export const ErrorBoundary: FCModel<ErrorBoundaryPropsModel> = ({
       Fallback={
         Fallback ||
         (({ error, handleReset }) => (
-          <Wrapper
-            grow
-            isCenter
-            spacing>
+          <Wrapper grow isCenter spacing>
             {_getError(error)}
 
-            <Button
-              icon={ICON.refresh}
-              onPress={handleReset}>
+            <Button icon={ICON.refresh} onPress={handleReset}>
               {t('core:labels.tryAgain')}
             </Button>
           </Wrapper>
         ))
       }
-      onError={onError}>
+      onError={onError}
+    >
       {children}
     </_ErrorBoundary>
   );

@@ -1,3 +1,3 @@
 export const BILLING = 'billing';
 
-export const CARDS = 'cards';
+export const PAYMENT_METHODS = 'paymentMethods';

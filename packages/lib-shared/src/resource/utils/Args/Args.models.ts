@@ -63,22 +63,18 @@ interface _UpdateArgsModel<TType> {
   update: UpdateModel<TType>;
 }
 
-export type ArgsModel<
-  TMethod extends ResourceMethodTypeModel,
-  TType,
-  TForm,
-  TRoot = undefined,
-> = RootModel<TRoot> &
-  (TMethod extends RESOURCE_METHOD_TYPE.CREATE
-    ? _CreateArgsModel<TForm>
-    : TMethod extends RESOURCE_METHOD_TYPE.GET
-    ? _GetArgsModel<TType>
-    : TMethod extends RESOURCE_METHOD_TYPE.GET_MANY
-    ? _GetManyArgsModel<TType>
-    : TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION
-    ? _GetConnectionArgsModel<TType>
-    : TMethod extends RESOURCE_METHOD_TYPE.REMOVE
-    ? _RemoveArgsModel<TType>
-    : TMethod extends RESOURCE_METHOD_TYPE.UPDATE
-    ? _UpdateArgsModel<TType>
-    : never);
+export type ArgsModel<TMethod extends ResourceMethodTypeModel, TType, TForm, TRoot = undefined> =
+  RootModel<TRoot> &
+    (TMethod extends RESOURCE_METHOD_TYPE.CREATE
+      ? _CreateArgsModel<TForm>
+      : TMethod extends RESOURCE_METHOD_TYPE.GET
+      ? _GetArgsModel<TType>
+      : TMethod extends RESOURCE_METHOD_TYPE.GET_MANY
+      ? _GetManyArgsModel<TType>
+      : TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION
+      ? _GetConnectionArgsModel<TType>
+      : TMethod extends RESOURCE_METHOD_TYPE.REMOVE
+      ? _RemoveArgsModel<TType>
+      : TMethod extends RESOURCE_METHOD_TYPE.UPDATE
+      ? _UpdateArgsModel<TType>
+      : never);

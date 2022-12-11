@@ -1,9 +1,3 @@
-import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
-import type { _RoutingProviderPropsModel } from '@lib/frontend/routing/providers/RoutingProvider/_RoutingProvider.models';
-import type { BrowserRouterProps } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { Fragment } from 'react';
 
-export const _RoutingProvider = composeComponent<_RoutingProviderPropsModel, BrowserRouterProps>({
-  Component: BrowserRouter,
-  getProps: ({ children }) => ({ children }),
-});
+export const _RoutingProvider = Fragment;

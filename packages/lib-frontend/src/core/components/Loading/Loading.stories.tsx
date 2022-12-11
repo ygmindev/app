@@ -1,7 +1,7 @@
 import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Loading } from '@lib/frontend/core/components/Loading/Loading';
 import type { LoadingPropsModel } from '@lib/frontend/core/components/Loading/Loading.models';
-import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
 
 const { Default, meta } = withStory<LoadingPropsModel>({
   defaultProps: {},

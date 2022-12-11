@@ -4,8 +4,8 @@ import { Press } from '@lib/frontend/core/components/Press/Press';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/styling/hooks/useTheme/useTheme';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { get } from 'lodash';
 
 export const IconText: SFCModel<IconTextPropsModel> = ({
@@ -30,13 +30,9 @@ export const IconText: SFCModel<IconTextPropsModel> = ({
       isCenter={isVertical}
       isRowAlign={!isVertical}
       style={onPress ? computedStyles : styles}
-      testID={testID}>
-      {icon && (
-        <Icon
-          {...propsWithOutStyle}
-          icon={icon}
-        />
-      )}
+      testID={testID}
+    >
+      {icon && <Icon {...propsWithOutStyle} icon={icon} />}
 
       {children && <Text {...propsWithOutStyle}>{children}</Text>}
     </Wrapper>
@@ -62,7 +58,8 @@ export const IconText: SFCModel<IconTextPropsModel> = ({
             : {}),
           ...(to || {}),
         }}
-        tooltip={tooltip}>
+        tooltip={tooltip}
+      >
         {element}
       </Press>
     );

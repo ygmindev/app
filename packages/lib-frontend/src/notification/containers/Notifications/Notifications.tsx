@@ -3,11 +3,11 @@ import type { SFCModel } from '@lib/frontend/core/core.models';
 import { Notification } from '@lib/frontend/notification/components/Notification/Notification';
 import { NOTIFICATIONS_MAX_WIDTH } from '@lib/frontend/notification/containers/Notifications/Notifications.constants';
 import type { NotificationsPropsModel } from '@lib/frontend/notification/containers/Notifications/Notifications.models';
-import { useSelector } from '@lib/frontend/root/hooks/useSelector/useSelector';
-import { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants';
+import { useStore } from '@lib/frontend/notification/stores/notificationReducer/notificationReducer';
+import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const Notifications: SFCModel<NotificationsPropsModel> = () => {
-  const notifications = useSelector((state) => state.notification.notifications);
+  const { notifications } = useStore();
   return notifications.length ? (
     <Wrapper
       bottom={0}
@@ -16,12 +16,10 @@ export const Notifications: SFCModel<NotificationsPropsModel> = () => {
       position={SHAPE_POSITION.ABSOLUTE}
       right={0}
       width={NOTIFICATIONS_MAX_WIDTH}
-      zIndex={1}>
+      zIndex={1}
+    >
       {notifications.map((notification) => (
-        <Notification
-          {...notification}
-          key={notification.id}
-        />
+        <Notification {...notification} key={notification.id} />
       ))}
     </Wrapper>
   ) : null;

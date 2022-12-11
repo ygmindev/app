@@ -1,30 +1,29 @@
+import { TASK_STATUS } from '@lib/config/core/task/task.constants';
+import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
-import { register } from '@tool/task/core/utils/register/register';
-import { TASK_RESULTS_STATUS_TYPE } from '@tool/task/core/utils/register/register.constants';
 import { runCommands } from '@tool/task/core/utils/runCommands/runCommands';
-import { registerNodeTasks } from '@tool/task/node/utils/registerNodeTasks/registerNodeTasks';
+import { nodeTasks } from '@tool/task/node/utils/nodeTasks/nodeTasks';
 
-import { name } from './package.json';
+const tasks: Array<TaskParamsModel<unknown>> = [
+  ...nodeTasks({
+    testOverrides: { environment: ENVIRONMENT.DEVELOPMENT, onBefore: ['awes'] },
+  }),
 
-register({
-  name: 'setup',
+  {
+    name: 'setup',
 
-  overrides: { OTP_STATIC: 'true' },
+    overrides: { OTP_STATIC: 'true' },
 
-  target: name,
-
-  task: async () => {
-    await runCommands({
-      commands: [
-        { command: 'run sld', completeMessage: 'Server ready' },
-        { command: 'run awd', completeMessage: 'Compiled successfully' },
-      ],
-    });
-    return { status: TASK_RESULTS_STATUS_TYPE.SUCCESS };
+    task: async () => {
+      await runCommands({
+        commands: [
+          { command: 'run sld', completeMessage: 'Server ready' },
+          { command: 'run awd', completeMessage: 'Compiled successfully' },
+        ],
+      });
+      return { status: TASK_STATUS.SUCCESS };
+    },
   },
-});
+];
 
-registerNodeTasks({
-  name,
-  testOverrides: { dependencies: ['awes'], environment: ENVIRONMENT.DEVELOPMENT },
-});
+export default tasks;

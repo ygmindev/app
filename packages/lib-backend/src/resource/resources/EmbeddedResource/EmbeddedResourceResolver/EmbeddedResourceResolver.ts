@@ -1,4 +1,4 @@
-import { withResolver } from '@lib/backend/graphql/decorators/withResolver/withResolver';
+import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import type {
   EmbeddedResourceResolverModel,
   EmbeddedResourceResolverParamsModel,

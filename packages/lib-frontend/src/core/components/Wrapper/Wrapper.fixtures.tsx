@@ -2,7 +2,7 @@ import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { THEME_COLOR } from '@lib/frontend/styling/utils/theme/theme.constants';
+import { THEME_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import { useMemo } from 'react';
 
@@ -29,7 +29,8 @@ export const WrapperFixture: SFCModel<WrapperFixturePropsModel> = ({
       key={testID}
       testID={testID}
       width={WRAPPER_FIXTURE_SIZE}
-      {...props}>
+      {...props}
+    >
       <Text>{text}</Text>
 
       {children}

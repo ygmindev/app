@@ -19,9 +19,9 @@ import type {
 import { useForm } from '@lib/frontend/form/hooks/useForm/useForm';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { FLEX_JUSTIFY } from '@lib/frontend/styling/utils/styler/flexStyler/flexStyler.constants';
-import { THEME_SIZE } from '@lib/frontend/styling/utils/theme/theme.constants';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import { THEME_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
 import { promisify } from '@lib/shared/core/utils/promisify/promisify';
 import { FIELD_TYPE } from '@lib/shared/form/form.constants';
 import { flatten, get, isEqual, map, reduce, toNumber } from 'lodash';
@@ -30,6 +30,7 @@ import { cloneElement, useCallback, useMemo } from 'react';
 
 export const FormContainer = <TType,>({
   cancelLabel,
+  children,
   initialValues,
   isFullWidth,
   isLoading,
@@ -151,14 +152,14 @@ export const FormContainer = <TType,>({
       spacing
       style={styles}
       testID={testID}
-      width={_isFullWidth ? undefined : FORM_CONTAINER_WIDTH}>
+      width={_isFullWidth ? undefined : FORM_CONTAINER_WIDTH}
+    >
       <Form onSubmit={_isLoading ? undefined : promisify(handleSubmit)}>
         <Wrapper spacing>
+          {children}
+
           {map(rows, ({ fields, id }) => (
-            <Wrapper
-              isDistribute
-              isRowAlign
-              key={id}>
+            <Wrapper isDistribute isRowAlign key={id}>
               {map(fields, _getField)}
             </Wrapper>
           ))}
@@ -169,7 +170,8 @@ export const FormContainer = <TType,>({
         isDistribute={isFullWidth}
         isRowAlign
         justify={isFullWidth ? undefined : FLEX_JUSTIFY.FLEX_END}
-        spacing={THEME_SIZE.SMALL}>
+        spacing={THEME_SIZE.SMALL}
+      >
         {leftElement}
 
         {onCancel && (
@@ -178,7 +180,8 @@ export const FormContainer = <TType,>({
             isLoading={_isLoading}
             isTransparent
             onPress={onCancel}
-            testID={`${testID}-cancel`}>
+            testID={`${testID}-cancel`}
+          >
             {cancelLabel || t('core:labels.cancel')}
           </Button>
         )}
@@ -187,7 +190,8 @@ export const FormContainer = <TType,>({
           icon={ICON.chevronRight}
           isLoading={_isLoading}
           onPress={handleSubmit}
-          testID={`${testID}-submit`}>
+          testID={`${testID}-submit`}
+        >
           {submitLabel || t('core:labels.submit')}
         </Button>
       </Wrapper>

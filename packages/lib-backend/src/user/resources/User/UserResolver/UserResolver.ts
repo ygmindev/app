@@ -1,4 +1,4 @@
-import { withResolver } from '@lib/backend/graphql/decorators/withResolver/withResolver';
+import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import { EntityResourceResolver } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver';
 import type { EntityResourceResolverModel } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver.models';
 import { User } from '@lib/backend/user/resources/User/User';

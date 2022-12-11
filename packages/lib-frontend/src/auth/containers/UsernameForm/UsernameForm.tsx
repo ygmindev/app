@@ -15,7 +15,7 @@ import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayo
 import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { isTypeOf } from '@lib/shared/core/utils/isTypeOf/isTypeOf';
 import { USER } from '@lib/shared/user/user.constants';
@@ -48,10 +48,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   };
 
   return (
-    <Wrapper
-      grow
-      style={styles}
-      testID={testID}>
+    <Wrapper grow style={styles} testID={testID}>
       <CenterLayout>
         <FormContainer
           onSubmit={_handleSubmit}

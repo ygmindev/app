@@ -7,9 +7,7 @@ import { renderHook } from '@testing-library/react';
 export const _renderHook = <TResult,>(hook: CallableModel<TResult>): _RenderHookModel<TResult> => {
   const { result, unmount } = renderHook(hook, {
     wrapper: ({ children, ...props }) => (
-      <Root
-        {...props}
-        intialStore={STORE_FIXTURE}>
+      <Root {...props} intialStore={STORE_FIXTURE}>
         {children}
       </Root>
     ),

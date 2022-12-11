@@ -1,6 +1,6 @@
+import type { AnimatablePropsModel } from '@lib/frontend/animation/components/Animatable/Animatable.models';
 import type { ANIMATION_TYPE } from '@lib/frontend/animation/hooks/useAnimation/useAnimation.constants';
-import type { WithAnimationPropsModel } from '@lib/frontend/core/decorators/withAnimationProps/withAnimationProps.models';
-import type { StyleModel } from '@lib/frontend/styling/styling.models';
+import type { StyleModel } from '@lib/frontend/style/style.models';
 
 export type AnimationTypeModel = `${ANIMATION_TYPE}`;
 
@@ -33,7 +33,7 @@ export type UseAnimationParamsModel = {
 );
 
 export interface UseAnimationModel {
-  animation: WithAnimationPropsModel;
+  animation: AnimatablePropsModel;
   isAnimating?: boolean;
   isRender?: boolean;
 }

@@ -4,8 +4,8 @@ import { ANIMATION_TYPE } from '@lib/frontend/animation/hooks/useAnimation/useAn
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import type { MeasureModel } from '@lib/frontend/core/utils/measure/measure.models';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
-import { SHAPE_POSITION } from '@lib/frontend/styling/utils/styler/shapeStyler/shapeStyler.constants';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { useState } from 'react';
 
 export const Slide: SFCModel<SlidePropsModel> = ({
@@ -28,20 +28,10 @@ export const Slide: SFCModel<SlidePropsModel> = ({
   });
 
   return isRender ? (
-    <Wrapper
-      {...props}
-      style={styles}
-      testID={testID}>
-      <Wrapper
-        grow
-        isOverflowHidden
-        onMeasure={setMeasure}
-        position={SHAPE_POSITION.RELATIVE}>
+    <Wrapper {...props} style={styles} testID={testID}>
+      <Wrapper grow isOverflowHidden onMeasure={setMeasure} position={SHAPE_POSITION.RELATIVE}>
         {measure && (
-          <Wrapper
-            animation={animation}
-            isAbsoluteFill
-            isFullWidth>
+          <Wrapper animation={animation} isAbsoluteFill isFullWidth>
             {children}
           </Wrapper>
         )}

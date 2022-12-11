@@ -4,7 +4,7 @@ import type { EdgeParamsModel } from '@lib/backend/resource/utils/Edge/Edge.mode
 import type { ConstructorModel } from '@lib/shared/core/core.models';
 import type { EdgeModel } from '@lib/shared/resource/utils/Edge/Edge.models';
 
-export const Edge = <TType>({
+export const Edge = <TType extends unknown>({
   Resource,
   name,
 }: EdgeParamsModel<TType>): ConstructorModel<EdgeModel<TType>> => {

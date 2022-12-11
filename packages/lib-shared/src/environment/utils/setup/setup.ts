@@ -6,7 +6,7 @@ import type { EnvironmentModel } from '@lib/shared/environment/environment.model
 import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
 import type { SetupParamsModel } from '@lib/shared/environment/utils/setup/setup.models';
 import { config } from 'dotenv';
-import { writeFileSync } from 'fs';
+import { existsSync, writeFileSync } from 'fs';
 import { forEach, map, reduce, toString } from 'lodash';
 
 export const setup = ({
@@ -16,27 +16,35 @@ export const setup = ({
 }: SetupParamsModel = {}): Record<string, string> => {
   overrides && forEach(overrides, (v, k) => (process.env[k] = v));
 
+  const paths = [
+    fromConfig('core/environment/configs/.env.base'),
+    fromConfig(`core/environment/configs/.env.${environment}`),
+    fromWorking('.env'),
+  ];
+
   const envs = reduce<string, Record<string, string>>(
-    ['base', environment],
-    (result, value) => {
-      const dotEnvPath = fromConfig(`environment/.env.${value}`);
-      const { error, parsed } = config({ path: dotEnvPath });
-      if (error) {
-        throw new NotFoundError(dotEnvPath);
+    paths,
+    (result, path) => {
+      if (existsSync(path)) {
+        const { error, parsed } = config({ path });
+        if (error) {
+          throw new NotFoundError(path);
+        }
+        return parsed
+          ? {
+              ...result,
+              ...reduce(
+                parsed,
+                (newResult, v, k) =>
+                  !writes || writes.some((write) => write.test(k))
+                    ? { ...newResult, [k]: v }
+                    : newResult,
+                {},
+              ),
+            }
+          : result;
       }
-      return parsed
-        ? {
-            ...result,
-            ...reduce(
-              parsed,
-              (newResult, v, k) =>
-                !writes || writes.some((write) => write.test(k))
-                  ? { ...newResult, [k]: v }
-                  : newResult,
-              {},
-            ),
-          }
-        : result;
+      return result;
     },
     {},
   );

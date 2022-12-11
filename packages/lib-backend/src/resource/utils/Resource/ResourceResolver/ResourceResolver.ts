@@ -1,4 +1,4 @@
-import { withResolver } from '@lib/backend/graphql/decorators/withResolver/withResolver';
+import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import { withInput } from '@lib/backend/resource/decorators/withInput/withInput';
 import { withOutput } from '@lib/backend/resource/decorators/withOutput/withOutput';
 import type {
@@ -56,7 +56,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
         _createExists,
         withInput({
           Resource: ResourceData || (Resource as unknown as ConstructorModel<TForm>),
-          RootResource: RootResource,
+          RootResource,
           method: RESOURCE_METHOD_TYPE.CREATE,
           name,
         }),
@@ -82,7 +82,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
     async get(
       @withCondition(
         _getExists,
-        withInput({ Resource, RootResource: RootResource, method: RESOURCE_METHOD_TYPE.GET, name }),
+        withInput({ Resource, RootResource, method: RESOURCE_METHOD_TYPE.GET, name }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>> {
@@ -107,7 +107,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
         _getManyExists,
         withInput({
           Resource,
-          RootResource: RootResource,
+          RootResource,
           method: RESOURCE_METHOD_TYPE.GET_MANY,
           name,
         }),
@@ -135,7 +135,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
         _getConnectionExists,
         withInput({
           Resource,
-          RootResource: RootResource,
+          RootResource,
           method: RESOURCE_METHOD_TYPE.GET_CONNECTION,
           name,
         }),
@@ -163,7 +163,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
         _updateExists,
         withInput({
           Resource,
-          RootResource: RootResource,
+          RootResource,
           method: RESOURCE_METHOD_TYPE.UPDATE,
           name,
         }),
@@ -191,7 +191,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
         _removeExists,
         withInput({
           Resource,
-          RootResource: RootResource,
+          RootResource,
           method: RESOURCE_METHOD_TYPE.REMOVE,
           name,
         }),

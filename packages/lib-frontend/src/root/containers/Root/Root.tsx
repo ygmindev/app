@@ -1,4 +1,4 @@
-import { AppProvider } from '@lib/frontend/app/providers/AppProvider/AppProvider';
+// import { AppProvider } from '@lib/frontend/app/providers/AppProvider/AppProvider';
 import { AuthProvider } from '@lib/frontend/auth/providers/AuthProvider/AuthProvider';
 import { ErrorBoundary } from '@lib/frontend/core/components/ErrorBoundary/ErrorBoundary';
 import { PortalProvider } from '@lib/frontend/core/components/Portal/Portal';
@@ -8,18 +8,16 @@ import { LocaleProvider } from '@lib/frontend/locale/providers/LocaleProvider/Lo
 import { NotificationProvider } from '@lib/frontend/notification/providers/NotificationProvider/NotificationProvider';
 import type { RootPropsModel } from '@lib/frontend/root/containers/Root/Root.models';
 import { KeyboardProvider } from '@lib/frontend/root/providers/KeyboardProvider/KeyboardProvider';
-import { store } from '@lib/frontend/root/stores/store/store';
 import { RoutingProvider } from '@lib/frontend/routing/providers/RoutingProvider/RoutingProvider';
-import { StyleProvider } from '@lib/frontend/styling/providers/StyleProvider/StyleProvider';
+import { StyleProvider } from '@lib/frontend/style/providers/StyleProvider/StyleProvider';
 import { TrackingProvider } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider';
 import type { ComponentType } from 'react';
 import { createElement, Suspense } from 'react';
-import { Provider as ReduxProvider } from 'react-redux';
 
 const providers = [
   RoutingProvider,
   KeyboardProvider,
-  AppProvider,
+  // AppProvider,
   TrackingProvider,
   AuthProvider,
   LocaleProvider,
@@ -31,8 +29,6 @@ const providers = [
   Suspense,
 ].filter(Boolean) as Array<ComponentType>;
 
-export const Root: FCModel<RootPropsModel> = ({ children, intialStore = store }) => (
-  <ReduxProvider store={intialStore}>
-    {providers.reduce((result, Provider) => createElement(Provider, {}, result), children)}
-  </ReduxProvider>
+export const Root: FCModel<RootPropsModel> = ({ children, intialStore = {} }) => (
+  <>{providers.reduce((result, Provider) => createElement(Provider, {}, result), children)}</>
 );

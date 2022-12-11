@@ -3,7 +3,7 @@ import type { PressPropsModel } from '@lib/frontend/core/components/Press/Press.
 import type {
   ThemeBasicSizeModel,
   ThemeColorModel,
-} from '@lib/frontend/styling/utils/theme/theme.models';
+} from '@lib/frontend/style/utils/theme/theme.models';
 
 export interface ButtonPropsModel
   extends Omit<PressPropsModel, 'children'>,

@@ -3,20 +3,15 @@ import { AppHeader } from '@lib/frontend/app/containers/AppHeader/AppHeader';
 import type { AppLayoutPropsModel } from '@lib/frontend/app/layouts/AppLayout/AppLayout.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useStyles } from '@lib/frontend/styling/hooks/useStyles/useStyles';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 
 export const AppLayout: SFCModel<AppLayoutPropsModel> = ({ children, testID, ...props }) => {
   const { styles } = useStyles({ props });
   return (
-    <Wrapper
-      grow
-      style={styles}
-      testID={testID}>
+    <Wrapper grow style={styles} testID={testID}>
       <AppHeader />
 
-      <Wrapper
-        grow
-        p>
+      <Wrapper grow p>
         {children}
       </Wrapper>
 

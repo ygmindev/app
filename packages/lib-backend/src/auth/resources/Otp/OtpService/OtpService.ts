@@ -15,7 +15,6 @@ import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/Duplicate
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { randomInt } from '@lib/shared/crypto/utils/randomInt/randomInt';
 import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
-import { warn } from '@lib/shared/logging/utils/logger/logger';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
@@ -29,7 +28,6 @@ export class OtpService
   extends EntityResourceService<OtpModel, OtpFormModel>({
     afterCreate: async ({ output }) => {
       if (output.result) {
-        warn(`${output.result.username}: ${output.result.otp}`);
         output.result &&
           mail<{ otp: string }>({
             from: SERVER_EMAIL_USERNAME,

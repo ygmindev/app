@@ -1,7 +1,7 @@
 import { FORM_FIELD_TYPE } from '@lib/frontend/form/containers/FormContainer/FormContainer.constants';
-import type { GraphQlFieldModel } from '@lib/frontend/graphql/utils/graphQlQuery/graphQlQuery.models';
-import { ENTITY_RESOURCE_COLUMNS } from '@lib/frontend/resource/components/Resources/Resources.constants';
-import type { ResourcesPropsModel } from '@lib/frontend/resource/components/Resources/Resources.models';
+import type { GraphQlFieldModel } from '@lib/frontend/http/utils/graphQlQuery/graphQlQuery.models';
+import { ENTITY_RESOURCE_COLUMNS } from '@lib/frontend/resource/containers/Resources/Resources.constants';
+import type { ResourcesPropsModel } from '@lib/frontend/resource/containers/Resources/Resources.models';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import type { UserFormModel, UserModel } from '@lib/shared/user/resources/User/User.models';
 

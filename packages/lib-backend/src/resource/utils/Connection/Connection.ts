@@ -10,7 +10,7 @@ import type {
   PageInfoModel,
 } from '@lib/shared/resource/utils/Connection/Connection.models';
 
-export const Connection = <TType>({
+export const Connection = <TType extends unknown>({
   Resource,
   name,
 }: ConnectionParamsModel<TType>): ConstructorModel<ConnectionModel<TType>> => {

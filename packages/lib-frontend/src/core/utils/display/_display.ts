@@ -5,18 +5,23 @@ const subscribeEvent = <TType extends Event>(
   eventName: string,
   cb: (event: TType) => void,
 ): void => {
-  __IS_SSR__ ? null : window.addEventListener(eventName as keyof WindowEventMap, cb as never);
+  import.meta.env.SSR
+    ? null
+    : window.addEventListener(eventName as keyof WindowEventMap, cb as never);
 };
 
 const unsubscribeEvent = <TType extends Event>(
   eventName: string,
   cb: (event: TType) => void,
 ): void => {
-  __IS_SSR__ ? null : window.removeEventListener(eventName as keyof WindowEventMap, cb as never);
+  import.meta.env.SSR
+    ? null
+    : window.removeEventListener(eventName as keyof WindowEventMap, cb as never);
 };
 
 export const _display: _DisplayModel = {
-  getDimension: () => (__IS_SSR__ ? {} : { height: window.innerHeight, width: window.innerWidth }),
+  getDimension: () =>
+    import.meta.env.SSR ? {} : { height: window.innerHeight, width: window.innerWidth },
   open: (uri, { height, onClose, onOpen, width }) => {
     const popup = window.open(
       uri,
@@ -34,5 +39,5 @@ export const _display: _DisplayModel = {
   unsubscribeEvent,
   unsubscribeMessage: (cb) => unsubscribeEvent('message', cb),
   unsubscribeResize: (cb) => unsubscribeEvent('resize', cb),
-  useLayoutEffect: __IS_SSR__ ? useEffect : useLayoutEffect,
+  useLayoutEffect: import.meta.env.SSR ? useEffect : useLayoutEffect,
 };

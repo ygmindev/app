@@ -1,4 +1,6 @@
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { TASK_STATUS } from '@lib/config/core/task/task.constants';
+import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { EXCLUDE_PATTERNS } from '@lib/shared/file/file.constants';
 import { dateTimeFormat } from '@lib/shared/formatting/utils/dateTimeFormat/dateTimeFormat';
 import { DATE_TIME_FORMAT_TYPE } from '@lib/shared/formatting/utils/dateTimeFormat/dateTimeFormat.constants';
@@ -6,12 +8,10 @@ import { BACKUP_DIR } from '@tool/task/core/tasks/backup/backup.constants';
 import type { BackupParamsModel } from '@tool/task/core/tasks/backup/backup.models';
 import { command } from '@tool/task/core/utils/command/command';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
-import { TASK_RESULTS_STATUS_TYPE } from '@tool/task/core/utils/register/register.constants';
-import type { RegisterParamsModel } from '@tool/task/core/utils/register/register.models';
 import { kebabCase } from 'lodash';
 import { join } from 'path';
 
-const backup: RegisterParamsModel<BackupParamsModel> = {
+const backup: TaskParamsModel<BackupParamsModel> = {
   name: 'backup',
 
   task: async ({ options, root }) => {
@@ -32,7 +32,7 @@ const backup: RegisterParamsModel<BackupParamsModel> = {
       root: fromRoot(),
     });
     process.chdir(root || fromRoot());
-    return { status: TASK_RESULTS_STATUS_TYPE.SUCCESS };
+    return { status: TASK_STATUS.SUCCESS };
   },
 };
 

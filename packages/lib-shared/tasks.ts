@@ -1,5 +1,6 @@
-import { registerNodeTasks } from '@tool/task/node/utils/registerNodeTasks/registerNodeTasks';
+import type { TaskParamsModel } from '@lib/config/core/task/task.models';
+import { nodeTasks } from '@tool/task/node/utils/nodeTasks/nodeTasks';
 
-import { name } from './package.json';
+const tasks: Array<TaskParamsModel<unknown>> = [...nodeTasks()];
 
-registerNodeTasks({ name });
+export default tasks;
