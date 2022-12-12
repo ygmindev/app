@@ -1,5 +1,5 @@
-import { lightConfig } from '@lib/config/style/theme/configs/light';
-import type { ThemeConfigModel } from '@lib/config/style/theme/theme.models';
+import { themeLightConfig } from '@lib/config/style/theme/configs/theme.light';
+import type { ThemeConfigParamsModel } from '@lib/config/style/theme/theme.models';
 import type {
   SpacingModel,
   SpacingStylerParamsModel,
@@ -10,7 +10,7 @@ import { isNumber } from 'lodash';
 
 const _getSpacing = (
   value: SpacingModel | 'auto' | number | undefined,
-  theme: ThemeConfigModel,
+  theme: ThemeConfigParamsModel,
 ): 'auto' | number | undefined =>
   value === undefined || value === 'auto' || isNumber(value)
     ? value
@@ -37,7 +37,7 @@ export const spacingStyler: StylerModel<SpacingStylerParamsModel> = (
   },
   context,
 ) => {
-  const theme = context?.theme || lightConfig;
+  const theme = context?.theme || themeLightConfig;
   const _m = _getSpacing(m, theme);
   const _mHorizontal = _m || _getSpacing(mHorizontal, theme);
   const _mVertical = _m || _getSpacing(mVertical, theme);

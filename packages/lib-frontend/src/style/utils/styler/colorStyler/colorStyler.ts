@@ -1,4 +1,4 @@
-import { lightConfig } from '@lib/config/style/theme/configs/light';
+import { themeLightConfig } from '@lib/config/style/theme/configs/theme.light';
 import type { ColorStylerParamsModel } from '@lib/frontend/style/utils/styler/colorStyler/colorStyler.models';
 import type { StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
 import {
@@ -16,7 +16,7 @@ export const colorStyler: StylerModel<ColorStylerParamsModel> = (
   { color = THEME_RELATIVE_COLOR.MAIN, shade = THEME_SHADE.MAIN },
   context,
 ) => {
-  const theme = context?.theme || lightConfig;
+  const theme = context?.theme || themeLightConfig;
   return cleanObject({
     color:
       theme.colors.text[color as ThemeRelativeColorModel] ||

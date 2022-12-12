@@ -1,9 +1,9 @@
-import { lightConfig } from '@lib/config/style/theme/configs/light';
-import type { ThemeConfigModel } from '@lib/config/style/theme/theme.models';
+import { themeLightConfig } from '@lib/config/style/theme/configs/theme.light';
+import type { ThemeConfigParamsModel } from '@lib/config/style/theme/theme.models';
 import { THEMES } from '@lib/frontend/style/hooks/useTheme/useTheme.constants';
 import { useStore } from '@lib/frontend/style/stores/styleReducer/styleReducer';
 
-export const useTheme = (): ThemeConfigModel => {
+export const useTheme = (): ThemeConfigParamsModel => {
   const { theme } = useStore();
-  return THEMES[theme] || lightConfig;
+  return THEMES[theme] || themeLightConfig;
 };

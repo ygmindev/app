@@ -1,4 +1,4 @@
-import { lightConfig } from '@lib/config/style/theme/configs/light';
+import { themeLightConfig } from '@lib/config/style/theme/configs/theme.light';
 import type { BackgroundStylerParamsModel } from '@lib/frontend/style/utils/styler/backgroundStyler/backgroundStyler.models';
 import type { StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
 import { THEME_SHADE } from '@lib/frontend/style/utils/theme/theme.constants';
@@ -14,7 +14,7 @@ export const backgroundStyler: StylerModel<BackgroundStylerParamsModel> = (
   { backgroundColor, backgroundShade = THEME_SHADE.MAIN },
   context,
 ) => {
-  const theme = context?.theme || lightConfig;
+  const theme = context?.theme || themeLightConfig;
   return backgroundColor
     ? cleanObject({
         backgroundColor:

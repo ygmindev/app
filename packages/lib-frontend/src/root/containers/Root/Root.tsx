@@ -1,4 +1,4 @@
-// import { AppProvider } from '@lib/frontend/app/providers/AppProvider/AppProvider';
+import { AppProvider } from '@lib/frontend/app/providers/AppProvider/AppProvider';
 import { AuthProvider } from '@lib/frontend/auth/providers/AuthProvider/AuthProvider';
 import { ErrorBoundary } from '@lib/frontend/core/components/ErrorBoundary/ErrorBoundary';
 import { PortalProvider } from '@lib/frontend/core/components/Portal/Portal';
@@ -17,7 +17,7 @@ import { createElement, Suspense } from 'react';
 const providers = [
   RoutingProvider,
   KeyboardProvider,
-  // AppProvider,
+  AppProvider,
   TrackingProvider,
   AuthProvider,
   LocaleProvider,

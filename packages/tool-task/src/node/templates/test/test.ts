@@ -16,15 +16,13 @@ export const test: TaskParamsModel<TestParamsModel> = {
   name: 'test',
 
   task: async ({ options }) => {
-    const configFilePath = options.configFilePath || fromWorking('jest.config.ts');
-    const config: Config.InitialOptions = (await import(configFilePath)).default;
+    const config: Config.InitialOptions = (await import(fromWorking('test.config.ts'))).default;
     const testMatch =
       (options.isPrompt && (await prompt([{ isOptional: true, key: 'testMatch' }])).testMatch) ||
       '*';
     const { results } = await runCLI(
       {
         ...config,
-        // collectCoverageFrom: `<rootDir>/src/**/(${testMatch}|_${testMatch}).{ts,tsx,js,jsx}`,
         reporters: [
           'default',
           [

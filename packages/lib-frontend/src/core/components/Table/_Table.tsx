@@ -1,4 +1,4 @@
-import type { ThemeConfigModel } from '@lib/config/style/theme/theme.models';
+import type { ThemeConfigParamsModel } from '@lib/config/style/theme/theme.models';
 import { AG_GRID_THEME } from '@lib/frontend/core/components/Table/_Table.constants';
 import type { _TablePropsModel } from '@lib/frontend/core/components/Table/_Table.models';
 import {
@@ -31,7 +31,7 @@ const _GlobalStyle = createGlobalStyle`
 
   ${AgGridTheme}
 
-  ${({ theme }: { theme: ThemeConfigModel }) => `
+  ${({ theme }: { theme: ThemeConfigParamsModel }) => `
     .${AG_GRID_THEME} {
       --ag-background-color: transparent;
       --ag-checkbox-border-radius: ${theme.shape.borderRadius};

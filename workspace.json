@@ -4,10 +4,9 @@
   "projects": {
     "app-native": "packages/app-native",
     "app-web": "packages/app-web",
-    "app-web-admin": "/Users/ygmin/Projects/mono_v2/app3/app/packages/app-web-admin",
+    "app-web-admin": "packages/app-web-admin",
     "app-web-ete": "packages/app-web-ete",
     "app-web-story": "packages/app-web-story",
-    "app-lonely": "packages/app-lonely",
     "lib-backend": "packages/lib-backend",
     "lib-config": "packages/lib-config",
     "lib-frontend": "packages/lib-frontend",

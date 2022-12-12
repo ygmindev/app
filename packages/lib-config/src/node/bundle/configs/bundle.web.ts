@@ -1,5 +1,8 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import { BUNDLE_TARGET } from '@lib/config/node/bundle/bundle.constants';
 import type { BundleConfigParamsModel } from '@lib/config/node/bundle/bundle.models';
 import { bundleConfig as bundleConfigFrontend } from '@lib/config/node/bundle/configs/bundle.frontend';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -19,8 +22,13 @@ export const bundleConfig: BundleConfigParamsModel = merge({
         ),
       },
 
+      copy: [{ from: fromStatic('assets'), to: fromWorking('public') }],
+
       extensions: EXTENSIONS_WEB,
+
+      target: BUNDLE_TARGET.BROWSER,
     },
+
     bundleConfigFrontend,
   ],
 });

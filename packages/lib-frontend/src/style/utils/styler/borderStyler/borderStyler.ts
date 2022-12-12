@@ -1,4 +1,4 @@
-import { lightConfig } from '@lib/config/style/theme/configs/light';
+import { themeLightConfig } from '@lib/config/style/theme/configs/theme.light';
 import {
   BORDER_DIRECTION,
   BORDER_SHADOW,
@@ -16,7 +16,7 @@ export const borderStyler: StylerModel<BorderStylerParamsModel> = (
   { border, borderColor, borderShade = THEME_SHADE.MAIN, borderWidth = 1, isShadow, round },
   context,
 ) => {
-  const theme = context?.theme || lightConfig;
+  const theme = context?.theme || themeLightConfig;
   return cleanObject({
     borderBottomWidth: border === BORDER_DIRECTION.BOTTOM ? borderWidth : undefined,
     borderColor: border

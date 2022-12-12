@@ -1,4 +1,4 @@
-import type { ThemeConfigModel } from '@lib/config/style/theme/theme.models';
+import type { ThemeConfigParamsModel } from '@lib/config/style/theme/theme.models';
 import type {
   THEME_BASIC_SIZE,
   THEME_COLOR,
@@ -19,5 +19,5 @@ export type ThemeSizeModel = `${THEME_SIZE}`;
 
 export interface ThemeContextModel {
   isMobile?: boolean;
-  theme?: ThemeConfigModel;
+  theme?: ThemeConfigParamsModel;
 }

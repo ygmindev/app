@@ -8,7 +8,7 @@ export const _internationalizeConfig = ({
 }: _InternationalizeConfigParamsModel): InitOptions => ({
   debug: false,
 
-  defaultNS: namespaceDefault,
+  defaultNS: [namespaceDefault],
 
   fallbackLng: languageDefault,
 

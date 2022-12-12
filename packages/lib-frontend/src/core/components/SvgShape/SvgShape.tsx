@@ -1,4 +1,4 @@
-import { commonConfig } from '@lib/config/style/theme/configs/common';
+import { themeCommonConfig } from '@lib/config/style/theme/configs/common';
 import { _SvgShape } from '@lib/frontend/core/components/SvgShape/_SvgShape';
 import {
   SVG_SHAPE,
@@ -12,7 +12,7 @@ export const SvgShape: FCModel<SvgShapePropsModel> = ({ x = 0, y = 0, ...props }
     {...props}
     borderRadius={
       (props.shape === SVG_SHAPE.RECT
-        ? (commonConfig.shape?.borderRadius as number) / 2
+        ? (themeCommonConfig.shape?.borderRadius as number) / 2
         : undefined) as never
     }
     height={

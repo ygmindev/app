@@ -1,4 +1,3 @@
-import { copy } from '@lib/backend/file/utils/copy/copy';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { TASK_STATUS } from '@lib/config/core/task/task.constants';
 import type { TaskParamsModel } from '@lib/config/core/task/task.models';
@@ -6,6 +5,7 @@ import { GENERATE_TEMPLATE_CASING_OPTIONS } from '@tool/generate/tasks/generateT
 import type { GenerateTemplateParamsModel } from '@tool/generate/tasks/generateTemplate/generateTemplate.models';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
+import { copy } from '@tool/task/file/utils/copy/copy';
 
 const generateTemplate: TaskParamsModel<GenerateTemplateParamsModel> = {
   name: 'generateTemplate',
@@ -20,7 +20,7 @@ const generateTemplate: TaskParamsModel<GenerateTemplateParamsModel> = {
     const overrides: Record<string, string> = {};
     while (!isComplete) {
       const { variable } = await prompt([
-        { isOptional: true, key: 'variable', message: 'Variabe ({{FROM}} to). Enter to complete.' },
+        { isOptional: true, key: 'variable', message: 'Variabe (from {{TO}}). Enter to complete.' },
       ]);
       if (variable) {
         const [from, to] = variable.split(' ');

@@ -24,6 +24,7 @@ export interface _ThemeConfigParamsModel {
     boldWeight: TextStyle['fontWeight'];
     family: string;
     lineHeight: number;
+    regularWeight: TextStyle['fontWeight'];
     size: Record<ThemeSizeModel, number>;
     stylish: string;
   };

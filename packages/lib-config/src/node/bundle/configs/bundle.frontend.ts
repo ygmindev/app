@@ -15,6 +15,7 @@ export const bundleConfig: BundleConfigParamsModel = merge({
 
       externals: fromGlobs({ globs: TRANSPILE_GLOBS, root: fromRoot('node_modules') }),
     },
+
     bundleConfigBase,
   ],
 });

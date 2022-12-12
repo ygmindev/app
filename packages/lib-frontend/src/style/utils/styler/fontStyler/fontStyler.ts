@@ -1,4 +1,4 @@
-import { lightConfig } from '@lib/config/style/theme/configs/light';
+import { themeLightConfig } from '@lib/config/style/theme/configs/theme.light';
 import type { FontStylerParamsModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
 import type { StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
 import { THEME_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
@@ -18,7 +18,7 @@ export const fontStyler: StylerModel<FontStylerParamsModel> = (
   },
   context,
 ) => {
-  const theme = context?.theme || lightConfig;
+  const theme = context?.theme || themeLightConfig;
   return cleanObject({
     fontFamily: isStylish ? theme.font.stylish : theme.font.family,
 

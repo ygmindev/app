@@ -1,7 +1,7 @@
-import type { ThemeConfigModel } from '@lib/config/style/theme/theme.models';
+import type { ThemeConfigParamsModel } from '@lib/config/style/theme/theme.models';
 import type { StripeElementsOptions } from '@stripe/stripe-js';
 
-export const STRIPE_ELEMENTS_STYLE: (theme: ThemeConfigModel) => StripeElementsOptions = (
+export const STRIPE_ELEMENTS_STYLE: (theme: ThemeConfigParamsModel) => StripeElementsOptions = (
   theme,
 ) => ({
   appearance: {
