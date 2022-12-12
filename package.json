@@ -125,6 +125,7 @@
     "@remix-run/dev": "^1.8.0",
     "@remix-run/eslint-config": "^1.8.0",
     "@storybook/addon-essentials": "^6.5.13",
+    "@storybook/builder-vite": "^0.2.5",
     "@storybook/builder-webpack5": "^6.5.13",
     "@storybook/cli": "^6.5.13",
     "@storybook/core-common": "^6.5.13",

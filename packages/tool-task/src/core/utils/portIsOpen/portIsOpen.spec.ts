@@ -6,7 +6,7 @@ import { createServer } from 'net';
 const { displayName } = withTest({ target: () => portIsOpen });
 
 describe(displayName, () => {
-  const PORT = 9999;
+  const PORT = '9999';
   let server: Server;
 
   test('works with closed', async () => {
