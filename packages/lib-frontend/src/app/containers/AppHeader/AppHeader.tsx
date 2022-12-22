@@ -4,7 +4,7 @@ import type { AppHeaderPropsModel } from '@lib/frontend/app/containers/AppHeader
 import { AuthMenu } from '@lib/frontend/auth/containers/AuthMenu/AuthMenu';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { RouteHeader } from '@lib/frontend/routing/containers/RouteHeader/RouteHeader';
+import { RouteHeader } from '@lib/frontend/route/containers/RouteHeader/RouteHeader';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 

@@ -6,7 +6,7 @@ import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/us
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { FormSteps } from '@lib/frontend/form/components/FormSteps/FormSteps';
-import { useRouter } from '@lib/frontend/routing/hooks/useRouter/useRouter';
+import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import type { OtpFormModel } from '@lib/shared/auth/resources/Otp/Otp.models';
 import type { SignInFormModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';

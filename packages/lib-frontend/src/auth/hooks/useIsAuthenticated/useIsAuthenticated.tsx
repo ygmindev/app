@@ -1,6 +1,6 @@
-import { useStore } from '@lib/frontend/user/stores/userReducer/userReducer';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 
 export const useIsAuthenticated = (): boolean => {
-  const { currentUser } = useStore();
+  const currentUser = useStore((state) => state.user.currentUser);
   return currentUser !== undefined && currentUser !== null;
 };

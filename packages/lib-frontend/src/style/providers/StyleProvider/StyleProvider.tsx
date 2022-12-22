@@ -7,5 +7,5 @@ import type { StyleProviderPropsModel } from '@lib/frontend/style/providers/Styl
 
 export const StyleProvider: SFCModel<StyleProviderPropsModel> = ({ children }) => {
   const theme = useTheme();
-  return <_StyleProvider theme={theme}>{children}</_StyleProvider>;
+  return <_StyleProvider value={theme}>{children}</_StyleProvider>;
 };

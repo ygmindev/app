@@ -38,7 +38,7 @@ export const _useForm = <TType extends unknown>({
     handleSubmit,
     isLoading: isSubmitting,
     isValid,
-    setErrors: <TError>(error: TError) =>
+    setErrors: <TError,>(error: TError) =>
       setErrors(error as unknown as FormikErrors<TType & FormikValues>),
     setValues: (data) => setValues(data as TType & FormikValues),
     values,

@@ -5,11 +5,11 @@ import type {
 } from '@lib/frontend/admin/containers/Resource/Resource.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { Redirect } from '@lib/frontend/routing/components/Redirect/Redirect';
-import { RouteTabs } from '@lib/frontend/routing/containers/RouteTabs/RouteTabs';
-import { useRouter } from '@lib/frontend/routing/hooks/useRouter/useRouter';
-import { NOT_FOUND } from '@lib/frontend/routing/routing.constants';
-import { trimPathname } from '@lib/frontend/routing/utils/trimPathname/trimPathname';
+import { Redirect } from '@lib/frontend/route/components/Redirect/Redirect';
+import { RouteTabs } from '@lib/frontend/route/containers/RouteTabs/RouteTabs';
+import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
+import { NOT_FOUND } from '@lib/frontend/route/route.constants';
+import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { RESOURCE } from '@lib/shared/resource/resource.constants';
 import { get, mapKeys } from 'lodash';

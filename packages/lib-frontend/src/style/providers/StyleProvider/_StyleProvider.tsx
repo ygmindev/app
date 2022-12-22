@@ -7,8 +7,8 @@ import { Provider } from 'react-native-paper';
 
 export const _StyleProvider = composeComponent<
   _StyleProviderPropsModel,
-  { children: ReactNode; theme: typeof DefaultTheme }
+  { children: ReactNode; theme: typeof DefaultTheme | undefined }
 >({
   Component: Provider,
-  getProps: ({ children, theme }) => ({ children, theme: themeConfig(theme) }),
+  getProps: ({ children, value }) => ({ children, theme: value ? themeConfig(value) : undefined }),
 });

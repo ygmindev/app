@@ -57,13 +57,14 @@ const _getTask = <TOptions = undefined>({
 
     setup({ environment: environment || (process.env.NODE_ENV as EnvironmentModel), overrides });
 
+    let onAfterPromise: CallablePromiseModel | undefined = undefined;
     if (onAfter) {
-      const onAfterPromise: CallablePromiseModel = async () => {
+      onAfterPromise = async () => {
         await sequence(onAfter.map((value) => (isString(value) ? _getTaskByName(value) : value)));
       };
       ['exit', 'SIGINT', 'SIGUSR1', 'SIGUSR2', 'uncaughtException', 'SIGTERM'].forEach((event) =>
         process.on(event, async () => {
-          await onAfterPromise();
+          onAfterPromise && (await onAfterPromise());
           process.exit();
         }),
       );
@@ -83,6 +84,9 @@ const _getTask = <TOptions = undefined>({
         root,
         target: _target,
       });
+
+      onAfterPromise && (await onAfterPromise());
+
       switch (result.status) {
         case TASK_STATUS.SUCCESS: {
           return info(`${_name} completed`);

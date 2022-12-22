@@ -1,4 +1,3 @@
-import type { WithChildrenPropsModel } from '@lib/frontend/core/decorators/withChildrenProps/withChildrenProps.models';
-import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
+import type { ProviderPropsModel } from '@lib/frontend/core/core.models';
 
-export interface NotificationProviderPropsModel extends WithChildrenPropsModel, WithTestIdModel {}
+export interface NotificationProviderPropsModel extends ProviderPropsModel {}

@@ -1,3 +1,3 @@
-import type { TaskStatusModel } from '@tool/task/core/utils/register/register.models';
+import type { TaskStatusModel } from '@lib/config/core/task/task.models';
 
 export type _RegistryModel = Record<string, () => Promise<TaskStatusModel>>;

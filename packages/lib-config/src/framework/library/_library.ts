@@ -2,14 +2,14 @@ import type { _LibraryConfigParamsModel } from '@lib/config/framework/library/_l
 import { bundleConfig } from '@lib/config/node/bundle/bundle';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
-import type { StorybookViteConfig } from '@storybook/builder-vite';
+import type { StorybookConfig } from '@storybook/builder-vite';
 import { reduce, trim } from 'lodash';
 
 export const _libraryConfig = ({
   inputPath,
   resolveExtensions,
   staticPath,
-}: _LibraryConfigParamsModel): StorybookViteConfig => ({
+}: _LibraryConfigParamsModel): StorybookConfig => ({
   addons: ['@storybook/addon-essentials'],
 
   core: {
@@ -28,11 +28,11 @@ export const _libraryConfig = ({
     [],
   ),
 
-  typescript: {
-    check: false,
-    checkOptions: {},
-    reactDocgen: 'react-docgen-typescript',
-  },
+  // typescript: {
+  //   check: false,
+  //   checkOptions: {},
+  //   reactDocgen: 'react-docgen-typescript',
+  // },
 
   viteFinal: async (config) =>
     merge({

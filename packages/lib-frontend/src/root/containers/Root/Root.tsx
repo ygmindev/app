@@ -8,27 +8,31 @@ import { LocaleProvider } from '@lib/frontend/locale/providers/LocaleProvider/Lo
 import { NotificationProvider } from '@lib/frontend/notification/providers/NotificationProvider/NotificationProvider';
 import type { RootPropsModel } from '@lib/frontend/root/containers/Root/Root.models';
 import { KeyboardProvider } from '@lib/frontend/root/providers/KeyboardProvider/KeyboardProvider';
-import { RoutingProvider } from '@lib/frontend/routing/providers/RoutingProvider/RoutingProvider';
+import { RouteProvider } from '@lib/frontend/route/providers/RouteProvider/RouteProvider';
+import { StateProvider } from '@lib/frontend/state/providers/StateProvider/StateProvider';
 import { StyleProvider } from '@lib/frontend/style/providers/StyleProvider/StyleProvider';
 import { TrackingProvider } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider';
-import type { ComponentType } from 'react';
-import { createElement, Suspense } from 'react';
+import { cloneElement, Suspense, useMemo } from 'react';
 
-const providers = [
-  RoutingProvider,
-  KeyboardProvider,
-  AppProvider,
-  TrackingProvider,
-  AuthProvider,
-  LocaleProvider,
-  ErrorBoundary,
-  NotificationProvider,
-  StyleProvider,
-  QueryProvider,
-  PortalProvider,
-  Suspense,
-].filter(Boolean) as Array<ComponentType>;
+export const Root: FCModel<RootPropsModel> = ({ children, initialState }) => {
+  const providers = useMemo(
+    () => [
+      <RouteProvider />,
+      <KeyboardProvider />,
+      <AppProvider />,
+      <TrackingProvider />,
+      <AuthProvider />,
+      <LocaleProvider />,
+      <ErrorBoundary />,
+      <NotificationProvider />,
+      <StyleProvider />,
+      <QueryProvider />,
+      <PortalProvider />,
+      <StateProvider value={{ initialState }} />,
+      <Suspense />,
+    ],
+    [initialState],
+  );
 
-export const Root: FCModel<RootPropsModel> = ({ children, intialStore = {} }) => (
-  <>{providers.reduce((result, Provider) => createElement(Provider, {}, result), children)}</>
-);
+  return <>{providers.reduce((result, element) => cloneElement(element, {}, result), children)}</>;
+};

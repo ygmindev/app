@@ -1,7 +1,7 @@
 import type {
   DatabaseConnectionPoolModel,
   DatabaseTypeModel,
-} from '@lib/backend/database/utils/Database/Database.models';
+} from '@lib/config/database/database.models';
 import type { ConstructorModel } from '@lib/shared/core/core.models';
 import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 

@@ -5,7 +5,7 @@ import type { LibraryConfigParamsModel } from '@lib/config/framework/library/lib
 export const libraryConfig: LibraryConfigParamsModel = {
   inputPath: fromPackages('lib-frontend/src'),
 
-  resolveExtensions: ['.library.tsx'],
+  resolveExtensions: ['.stories.tsx'],
 
   staticPath: fromWorking('public'),
 };

@@ -1,4 +1,4 @@
-import type { TaskStatusModel } from '@tool/task/core/utils/register/register.models';
+import type { TaskStatusModel } from '@lib/config/core/task/task.models';
 import { _registry } from '@tool/task/core/utils/registry/_registry';
 import { reduce } from 'lodash';
 

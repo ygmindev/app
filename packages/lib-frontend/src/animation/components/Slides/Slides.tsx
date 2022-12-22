@@ -11,9 +11,9 @@ export const Slides: SFCModel<SlidesPropsModel> = ({ children, current, testID, 
   const { styles } = useStyles({ props });
   const theme = useTheme();
   const [width, setWidth] = useState<number>();
-  const [previous, setPrevious] = useState<number>();
+  const [previous, previousSet] = useState<number>();
 
-  usePrevious({ onChange: setPrevious, value: current });
+  usePrevious({ onChange: previousSet, value: current });
 
   return (
     <Wrapper

@@ -19,7 +19,7 @@ export const Image: SFCModel<ImagePropsModel> = ({
 }) => {
   const [dimension, setDimension] = useState<DimensionModel>({ height, width });
   const { styles } = useStyles({ props: { ...props, ...dimension }, stylers: [shapeStyler] });
-  const [current, setCurrent] = useState<number>(0);
+  const [current, currentSet] = useState<number>(0);
   const _src = isArray(src) ? src[current] : src;
 
   const _handleSuccess = useCallback(
@@ -42,7 +42,7 @@ export const Image: SFCModel<ImagePropsModel> = ({
 
   return (
     <_Image
-      onError={isArray(src) && current < src.length - 1 ? () => setCurrent(current + 1) : undefined}
+      onError={isArray(src) && current < src.length - 1 ? () => currentSet(current + 1) : undefined}
       onSuccess={isAutoSize ? _handleSuccess : undefined}
       src={_src}
       style={styles as ImageStyle}

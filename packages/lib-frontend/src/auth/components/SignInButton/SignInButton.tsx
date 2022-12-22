@@ -3,7 +3,7 @@ import type { SignInButtonPropsModel } from '@lib/frontend/auth/components/SignI
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useRouter } from '@lib/frontend/routing/hooks/useRouter/useRouter';
+import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { AUTH } from '@lib/shared/auth/auth.constants';
 

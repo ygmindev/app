@@ -1,3 +1,3 @@
-import type { WithChildrenPropsModel } from '@lib/frontend/core/decorators/withChildrenProps/withChildrenProps.models';
+import type { ProviderPropsModel } from '@lib/frontend/core/core.models';
 
-export interface _QueryProviderPropsModel extends WithChildrenPropsModel {}
+export interface _QueryProviderPropsModel extends ProviderPropsModel {}

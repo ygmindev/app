@@ -7,7 +7,7 @@ import { isFunction } from 'lodash';
 export const useTranslation = (ns: Array<string> = []): UseTranslationModel => {
   const { isInitialized, t: _t } = _useTranslation([
     ...ns,
-    ...(internationalizeConfig.namespaceDefault || []),
+    ...([internationalizeConfig.namespaceDefault] || []),
   ]);
 
   const t = <TParams = undefined,>(key?: TranslationTextModel, params?: TParams): string =>

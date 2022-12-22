@@ -21,7 +21,7 @@ export const useForm = <TType extends unknown>({
     return onSubmit && onSubmit(data);
   };
 
-  const _validate = <TValue>(
+  const _validate = <TValue,>(
     data?: TValue,
     formValidators?: FormValidatorsModel<TValue>,
   ): FormErrorModel<TType> =>

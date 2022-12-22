@@ -26,13 +26,13 @@ export const FormSteps = <TType extends MergeArrayModel<TSteps>, TSteps extends 
   const { width } = useDimension();
   const theme = useTheme();
 
-  const [current, setCurrent] = useState<number>(0);
+  const [current, currentSet] = useState<number>(0);
   const [data, setData] = useState<PartialModel<TType>>();
 
   const _isLastStep = useMemo(() => current === children.length - 1, [current, children.length]);
 
   const _handleClear = (): void => {
-    setCurrent(0);
+    currentSet(0);
     setData(undefined);
   };
 
@@ -59,7 +59,7 @@ export const FormSteps = <TType extends MergeArrayModel<TSteps>, TSteps extends 
               icon={ICON.arrowLeft}
               isDisabled={current <= 0}
               isTitle
-              onPress={() => setCurrent(current - 1)}
+              onPress={() => currentSet(current - 1)}
             />
           </Appear>
         </Wrapper>
@@ -70,7 +70,7 @@ export const FormSteps = <TType extends MergeArrayModel<TSteps>, TSteps extends 
               data,
               onBack: () => {
                 child.props.onBack && child.props.onBack();
-                setCurrent(current - 1);
+                currentSet(current - 1);
               },
               onSuccess: async (stepData: PartialModel<TType>) => {
                 child.props.onSuccess && (await child.props.onSuccess(stepData));
@@ -82,7 +82,7 @@ export const FormSteps = <TType extends MergeArrayModel<TSteps>, TSteps extends 
                   _handleClear();
                 } else {
                   setData(_data);
-                  setCurrent(current + 1);
+                  currentSet(current + 1);
                 }
               },
             }),

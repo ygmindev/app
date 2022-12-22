@@ -3,7 +3,7 @@ import type { UseSignInResourceModel } from '@lib/frontend/auth/hooks/useSignInR
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { useTracking } from '@lib/frontend/tracking/hooks/useTracking/useTracking';
 import { USER_FIELDS } from '@lib/frontend/user/hooks/useUserResource/useUserResource.constants';
-import { actions } from '@lib/frontend/user/stores/userReducer/userReducer';
+import { actions } from '@lib/frontend/user/stores/userStore/userStore';
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import {
   SIGN_IN_RESOURCE_NAME,

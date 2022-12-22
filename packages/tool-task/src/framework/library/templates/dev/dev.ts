@@ -13,9 +13,7 @@ export const dev: TaskParamsModel = {
     const port = getEnv(`APP_${APP_NAME}_PORT`);
     (await portIsOpen(port)) &&
       (await command({
-        command: `${fromExecutable(
-          'start-storybook',
-        )} -c src/storybook -p ${port} --no-manager-cache`,
+        command: `${fromExecutable('sb dev')} -c src/storybook -p ${port} --no-manager-cache`,
 
         root,
       }));
