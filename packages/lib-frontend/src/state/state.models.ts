@@ -12,6 +12,6 @@ export interface ReducerModel<TType extends object, TParams extends object> {
   initialState: TType;
 }
 
-export type ActionsModel<TParams extends Record<string, object>> = {
+export type ActionsModel<TParams extends object> = {
   [TKey in keyof TParams]: (params: TParams[TKey]) => void;
 };

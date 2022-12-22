@@ -63,8 +63,7 @@ export const Icon: SFCModel<IconPropsModel> = ({
             : {}),
           ...(to || {}),
         }}
-        tooltip={tooltip}
-      >
+        tooltip={tooltip}>
         {element}
       </Press>
     );

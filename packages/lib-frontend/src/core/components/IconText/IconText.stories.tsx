@@ -14,4 +14,4 @@ const { Story, meta } = withStory<IconTextPropsModel>({
   ],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

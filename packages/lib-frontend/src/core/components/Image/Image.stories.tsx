@@ -13,4 +13,4 @@ const { Story, meta } = withStory<ImagePropsModel>({
   ],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

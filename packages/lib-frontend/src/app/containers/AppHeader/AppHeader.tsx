@@ -18,9 +18,10 @@ export const AppHeader: SFCModel<AppHeaderPropsModel> = ({ testID, ...props }) =
       mHorizontal
       position={SHAPE_POSITION.RELATIVE}
       style={styles}
-      testID={testID}
-    >
-      <Wrapper grow isRowAlign>
+      testID={testID}>
+      <Wrapper
+        grow
+        isRowAlign>
         <Logo />
       </Wrapper>
 

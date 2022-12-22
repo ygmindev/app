@@ -9,4 +9,4 @@ const { Story, meta } = withStory<TooltipPropsModel>({
   variants: [{ props: { tooltip: <WrapperFixture text="tooltip" /> } }],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

@@ -39,4 +39,4 @@ const { Story, meta } = withStory<WrapperPropsModel>({
   ],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

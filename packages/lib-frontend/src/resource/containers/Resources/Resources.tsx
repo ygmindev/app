@@ -102,16 +102,20 @@ export const Resources = <TType extends EntityResourceModel, TForm, TRoot = unde
   }, []);
 
   return (
-    <Wrapper grow style={styles} testID={testID}>
+    <Wrapper
+      grow
+      style={styles}
+      testID={testID}>
       <Content
         grow
         rightElement={
-          <Button icon={ICON.add} onPress={() => setIsCreateModalOpen(true)}>
+          <Button
+            icon={ICON.add}
+            onPress={() => setIsCreateModalOpen(true)}>
             {t('resource:labels.create')}
           </Button>
         }
-        title={name}
-      >
+        title={name}>
         <Table<TType>
           columns={[
             ...columns.map((column) => ({ ...column, sort: true })),
@@ -123,7 +127,11 @@ export const Resources = <TType extends EntityResourceModel, TForm, TRoot = unde
                   <Wrapper isCenter>
                     <Menu
                       anchor={(isActive) => (
-                        <Icon icon={ICON.ellipsis} isPressed={isActive} isTitle />
+                        <Icon
+                          icon={ICON.ellipsis}
+                          isPressed={isActive}
+                          isTitle
+                        />
                       )}
                       options={[
                         {
@@ -156,7 +164,9 @@ export const Resources = <TType extends EntityResourceModel, TForm, TRoot = unde
           select={TABLE_SELECT_TYPE.MULTIPLE}
         />
 
-        <Modal isOpen={isCreateModalOpen || selectRow !== undefined} onClose={_handleClose}>
+        <Modal
+          isOpen={isCreateModalOpen || selectRow !== undefined}
+          onClose={_handleClose}>
           {FormComponent ? (
             <FormComponent onCancel={_handleClose} />
           ) : (

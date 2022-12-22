@@ -14,7 +14,10 @@ const INACTIVE = 'INACTIVE';
 const { Component, displayName } = withTestComponent<ActivatePropsModel>({
   defaultProps: {
     children: (isActive) => (
-      <WrapperFixture testID={ACTIVATE} text={isActive ? ACTIVE : INACTIVE} />
+      <WrapperFixture
+        testID={ACTIVATE}
+        text={isActive ? ACTIVE : INACTIVE}
+      />
     ),
   },
   target: Activate,
@@ -31,7 +34,10 @@ describe(displayName, () => {
     const handleActive = jest.fn();
     const handleInactive = jest.fn();
     const { queryByTestId, queryByText } = render(
-      <Component onActive={handleActive} onInactive={handleInactive} />,
+      <Component
+        onActive={handleActive}
+        onInactive={handleInactive}
+      />,
     );
     hoverIn(queryByTestId(ACTIVATE));
     await waitForExpect(() => expect(queryByText(ACTIVE)).toBeTruthy());

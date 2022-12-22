@@ -12,7 +12,12 @@ const { Component: Trans, displayName } = withTestComponent<
 
 describe(displayName, () => {
   test('works with string', async () => {
-    const { queryByText } = render(<Trans i18nKey="labels.testingWithString" ns="testing" />);
+    const { queryByText } = render(
+      <Trans
+        i18nKey="labels.testingWithString"
+        ns="testing"
+      />,
+    );
     await waitForExpect(() => expect(queryByText('testing with string')).toBeTruthy());
   });
 

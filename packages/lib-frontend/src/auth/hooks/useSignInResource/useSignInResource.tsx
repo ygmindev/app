@@ -1,9 +1,9 @@
 import { useSession } from '@lib/frontend/auth/hooks/useSession/useSession';
 import type { UseSignInResourceModel } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource.models';
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
+import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { useTracking } from '@lib/frontend/tracking/hooks/useTracking/useTracking';
 import { USER_FIELDS } from '@lib/frontend/user/hooks/useUserResource/useUserResource.constants';
-import { actions } from '@lib/frontend/user/stores/userStore/userStore';
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import {
   SIGN_IN_RESOURCE_NAME,
@@ -14,13 +14,14 @@ import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 
 export const useSignInResource = (): UseSignInResourceModel => {
   const { identify, reset } = useTracking();
+  const actions = useActions();
 
   const { signInWithToken, signOut } = useSession();
 
   const signIn = async (signIn: SignInModel): Promise<void> => {
     const { token, user } = signIn;
     token && (await signInWithToken(token));
-    actions.currentUserSet(user || null);
+    actions?.user.currentUserSet(user || null);
     if (user) {
       identify(user._id);
     }
@@ -58,7 +59,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
 
     signOut: async () => {
       await signOut();
-      actions.currentUserSet(null);
+      actions?.user.currentUserSet(null);
       reset();
     },
 

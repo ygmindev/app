@@ -16,4 +16,4 @@ const { Story, meta } = withStory<PressPropsModel>({
   ],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

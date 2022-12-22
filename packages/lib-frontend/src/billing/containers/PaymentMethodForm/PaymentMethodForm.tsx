@@ -15,7 +15,10 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
   const { styles } = useStyles({ props });
   const ref = useRef<PaymentMethodFormRefModel>(null);
   return (
-    <FormContainer onCancel={onCancel} onSubmit={async () => ref.current?.submit()} style={styles}>
+    <FormContainer
+      onCancel={onCancel}
+      onSubmit={async () => ref.current?.submit()}
+      style={styles}>
       <_PaymentMethodForm forwardedRef={ref} />
     </FormContainer>
   );

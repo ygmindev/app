@@ -11,8 +11,7 @@ export const Tooltip: SFCModel<TooltipPropsModel> = ({ children, style, testID, 
     maxWidth={TOOLTIP_MAX_WIDTH}
     render={() => (isString(tooltip) ? <Text align={FONT_ALIGN.CENTER}>{tooltip}</Text> : tooltip)}
     style={style}
-    testID={testID}
-  >
+    testID={testID}>
     {children}
   </Drop>
 );

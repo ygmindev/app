@@ -28,8 +28,7 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
       isRow={!isVertical}
       spacing={THEME_SIZE.SMALL}
       style={styles}
-      testID={testID}
-    >
+      testID={testID}>
       {tabs.map((tab) => {
         const isActive = fieldValue === tab.id;
         return (
@@ -37,8 +36,7 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
             icon={tab.icon}
             isTransparent={!isActive}
             key={tab.id}
-            onPress={() => setFieldValue(tab.id)}
-          >
+            onPress={() => setFieldValue(tab.id)}>
             {tab.label || tab.id}
           </Button>
         );

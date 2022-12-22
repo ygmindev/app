@@ -44,13 +44,22 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
 
   return (
     <Menu
-      anchor={(isOpen) => <Icon icon={ICON.person} isPressed={isOpen} isTitle />}
+      anchor={(isOpen) => (
+        <Icon
+          icon={ICON.person}
+          isPressed={isOpen}
+          isTitle
+        />
+      )}
       isCenter={false}
       options={options}
       style={styles}
       topElement={
         currentUser ? (
-          <Text align={FONT_ALIGN.CENTER} isEllipsis width={AUTH_MENU_USERNAME_WIDTH}>
+          <Text
+            align={FONT_ALIGN.CENTER}
+            isEllipsis
+            width={AUTH_MENU_USERNAME_WIDTH}>
             {currentUser.email}
           </Text>
         ) : (

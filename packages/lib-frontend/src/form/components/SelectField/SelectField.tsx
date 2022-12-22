@@ -74,7 +74,9 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
     : undefined;
 
   return (
-    <Wrapper style={styles} testID={testID}>
+    <Wrapper
+      style={styles}
+      testID={testID}>
       <Menu
         anchor={(isOpen) => (
           <TextField

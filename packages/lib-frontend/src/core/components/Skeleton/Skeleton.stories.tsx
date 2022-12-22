@@ -10,10 +10,16 @@ const { Story, meta } = withStory<SkeletonPropsModel>({
   variants: [
     {
       props: {
-        children: <SvgShape shape={SVG_SHAPE.RECT} x={0} y={0} />,
+        children: (
+          <SvgShape
+            shape={SVG_SHAPE.RECT}
+            x={0}
+            y={0}
+          />
+        ),
       },
     },
   ],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

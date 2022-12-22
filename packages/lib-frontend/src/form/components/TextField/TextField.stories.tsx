@@ -19,4 +19,4 @@ const { Story, meta } = withStory<TextFieldPropsModel>({
   ],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

@@ -12,7 +12,10 @@ const { Story, meta } = withStory<DropdownPropsModel>({
   },
   displayName: 'Dropdown',
   target: (props) => (
-    <Wrapper height={500} isCenter width={500}>
+    <Wrapper
+      height={500}
+      isCenter
+      width={500}>
       <Dropdown {...props} />
     </Wrapper>
   ),
@@ -25,4 +28,4 @@ const { Story, meta } = withStory<DropdownPropsModel>({
   ],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

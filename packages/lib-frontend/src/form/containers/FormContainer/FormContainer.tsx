@@ -152,14 +152,16 @@ export const FormContainer = <TType,>({
       spacing
       style={styles}
       testID={testID}
-      width={_isFullWidth ? undefined : FORM_CONTAINER_WIDTH}
-    >
+      width={_isFullWidth ? undefined : FORM_CONTAINER_WIDTH}>
       <Form onSubmit={_isLoading ? undefined : promisify(handleSubmit)}>
         <Wrapper spacing>
           {children}
 
           {map(rows, ({ fields, id }) => (
-            <Wrapper isDistribute isRowAlign key={id}>
+            <Wrapper
+              isDistribute
+              isRowAlign
+              key={id}>
               {map(fields, _getField)}
             </Wrapper>
           ))}
@@ -170,8 +172,7 @@ export const FormContainer = <TType,>({
         isDistribute={isFullWidth}
         isRowAlign
         justify={isFullWidth ? undefined : FLEX_JUSTIFY.FLEX_END}
-        spacing={THEME_SIZE.SMALL}
-      >
+        spacing={THEME_SIZE.SMALL}>
         {leftElement}
 
         {onCancel && (
@@ -180,8 +181,7 @@ export const FormContainer = <TType,>({
             isLoading={_isLoading}
             isTransparent
             onPress={onCancel}
-            testID={`${testID}-cancel`}
-          >
+            testID={`${testID}-cancel`}>
             {cancelLabel || t('core:labels.cancel')}
           </Button>
         )}
@@ -190,8 +190,7 @@ export const FormContainer = <TType,>({
           icon={ICON.chevronRight}
           isLoading={_isLoading}
           onPress={handleSubmit}
-          testID={`${testID}-submit`}
-        >
+          testID={`${testID}-submit`}>
           {submitLabel || t('core:labels.submit')}
         </Button>
       </Wrapper>

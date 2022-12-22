@@ -155,7 +155,11 @@ export const _TextField = ({
 
   const leftElement =
     left && label ? (
-      <Appear isCenter isLazy={false} isVisible={!isEmpty(value) || isFocused} mTop={18}>
+      <Appear
+        isCenter
+        isLazy={false}
+        isVisible={!isEmpty(value) || isFocused}
+        mTop={18}>
         {left}
       </Appear>
     ) : null;
@@ -171,17 +175,16 @@ export const _TextField = ({
 
   return (
     <Wrapper
-      animation={{ transition: ['backgroundColor', 'borderColor'] }}
+      // animation={{ transition: ['backgroundColor', 'borderColor'] }}
       backgroundColor={backgroundColor}
       grow
       isOverflowHidden
       position={SHAPE_POSITION.RELATIVE}
       round
       style={[styles, borderStyles]}
-      testID={testID}
-    >
+      testID={testID}>
       <Wrapper
-        animation={{ transition: ['backgroundColor'] }}
+        // animation={{ transition: ['backgroundColor'] }}
         backgroundColor={backgroundColor}
         bottom={0}
         height={3}
@@ -201,10 +204,9 @@ export const _TextField = ({
         label={
           (icon ? (
             <IconText
-              animation={{ transition: ['color'] }}
+              // animation={{ transition: ['color'] }}
               color={activeColor || THEME_RELATIVE_COLOR.MUTED}
-              icon={icon}
-            >
+              icon={icon}>
               {label}
             </IconText>
           ) : (
@@ -225,15 +227,14 @@ export const _TextField = ({
         ref={forwardedRef}
         render={(inputProps) => (
           <Wrapper
-            animation={{ transition: ['backgroundColor'] }}
+            // animation={{ transition: ['backgroundColor'] }}
             backgroundColor={backgroundColor}
             grow
             isOverflowHidden
             isRow
             pLeft={leftElement ? THEME_BASIC_SIZE.SMALL : undefined}
             pRight={right ? THEME_BASIC_SIZE.SMALL : undefined}
-            zIndex={-1}
-          >
+            zIndex={-1}>
             {leftElement}
 
             {Component({ ...inputProps, style: [...inputProps.style, textStyles, { width }] })}

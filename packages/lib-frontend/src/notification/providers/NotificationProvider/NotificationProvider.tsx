@@ -12,7 +12,11 @@ export const NotificationProvider: SFCModel<NotificationProviderPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   return (
-    <Wrapper grow position={SHAPE_POSITION.RELATIVE} style={styles} testID={testID}>
+    <Wrapper
+      grow
+      position={SHAPE_POSITION.RELATIVE}
+      style={styles}
+      testID={testID}>
       {children}
 
       <Notifications />

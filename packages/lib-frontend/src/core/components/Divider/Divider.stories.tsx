@@ -7,11 +7,13 @@ const { Story, meta } = withStory<DividerPropsModel>({
   defaultProps: {},
   displayName: 'Divider',
   target: (props) => (
-    <Wrapper height={200} width={200}>
+    <Wrapper
+      height={200}
+      width={200}>
       <Divider {...props} />
     </Wrapper>
   ),
   variants: [{ props: { children: 'text' } }],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

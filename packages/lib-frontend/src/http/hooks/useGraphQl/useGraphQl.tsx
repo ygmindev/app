@@ -1,3 +1,4 @@
+import { useApi } from '@lib/frontend/http/hooks/useApi/useApi';
 import type {
   GraphQlHttpParamsModel,
   GraphQlHttpResponseModel,
@@ -6,7 +7,6 @@ import type {
   UseGraphQlParamsModel,
 } from '@lib/frontend/http/hooks/useGraphQl/useGraphQl.models';
 import { graphQlQuery } from '@lib/frontend/http/utils/graphQlQuery/graphQlQuery';
-import { useApi } from '@lib/frontend/http/hooks/useApi/useApi';
 import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
 import { print } from 'graphql/language/printer';
 import { gql } from 'graphql-tag';

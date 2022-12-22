@@ -16,10 +16,12 @@ export const Notifications: SFCModel<NotificationsPropsModel> = () => {
       position={SHAPE_POSITION.ABSOLUTE}
       right={0}
       width={NOTIFICATIONS_MAX_WIDTH}
-      zIndex={1}
-    >
+      zIndex={1}>
       {notifications.map((notification) => (
-        <Notification {...notification} key={notification.id} />
+        <Notification
+          {...notification}
+          key={notification.id}
+        />
       ))}
     </Wrapper>
   ) : null;

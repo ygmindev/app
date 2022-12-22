@@ -10,11 +10,15 @@ export const AppProvider: FCModel<AppProviderPropsModel> = ({ children, testID }
   const isInitialized = useIsInitialized();
 
   return (
-    <Wrapper grow testID={testID}>
+    <Wrapper
+      grow
+      testID={testID}>
       {isInitialized ? (
         children
       ) : (
-        <Wrapper grow isCenter>
+        <Wrapper
+          grow
+          isCenter>
           <Loading size={THEME_SIZE.XLARGE} />
         </Wrapper>
       )}

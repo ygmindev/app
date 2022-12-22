@@ -38,8 +38,13 @@ export const ErrorBoundary: FCModel<ErrorBoundaryPropsModel> = ({
       })();
 
       return (
-        <Wrapper isCenter spacing={THEME_SIZE.SMALL}>
-          <Icon icon={icon || ICON.sad} isTitle />
+        <Wrapper
+          isCenter
+          spacing={THEME_SIZE.SMALL}>
+          <Icon
+            icon={icon || ICON.sad}
+            isTitle
+          />
 
           <Text>{message || t('core:messages.errorGeneric')}</Text>
         </Wrapper>
@@ -53,17 +58,21 @@ export const ErrorBoundary: FCModel<ErrorBoundaryPropsModel> = ({
       Fallback={
         Fallback ||
         (({ error, handleReset }) => (
-          <Wrapper grow isCenter spacing>
+          <Wrapper
+            grow
+            isCenter
+            spacing>
             {_getError(error)}
 
-            <Button icon={ICON.refresh} onPress={handleReset}>
+            <Button
+              icon={ICON.refresh}
+              onPress={handleReset}>
               {t('core:labels.tryAgain')}
             </Button>
           </Wrapper>
         ))
       }
-      onError={onError}
-    >
+      onError={onError}>
       {children}
     </_ErrorBoundary>
   );

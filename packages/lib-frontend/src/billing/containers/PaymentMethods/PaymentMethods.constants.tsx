@@ -1,3 +1,4 @@
+export {};
 // import { PaymentMethodForm } from '@lib/frontend/billing/containers/PaymentMethodForm/PaymentMethodForm';
 // import { PAYMENT_METHOD_FIELDS } from '@lib/frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource.constants';
 // import { ENTITY_RESOURCE_COLUMNS } from '@lib/frontend/resource/containers/Resources/Resources.constants';

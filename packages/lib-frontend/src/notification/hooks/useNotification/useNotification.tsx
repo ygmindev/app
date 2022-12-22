@@ -2,17 +2,18 @@ import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import type { NotificationDataModel } from '@lib/frontend/notification/components/Notification/Notification.models';
 import type { UseNotificationModel } from '@lib/frontend/notification/hooks/useNotification/useNotification.models';
-import { actions } from '@lib/frontend/notification/stores/notificationReducer/notificationReducer';
+import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 
 export const useNotification = (): UseNotificationModel => {
+  const actions = useActions();
   const { t } = useTranslation();
   const theme = useTheme();
 
   const _add = (alert: NotificationDataModel): void => {
-    actions.add({
+    actions?.notification.add({
       ...alert,
       message: t(alert.message),
       title: t(alert.title),
@@ -25,9 +26,9 @@ export const useNotification = (): UseNotificationModel => {
     error: (alert) => _add({ ...alert, color: THEME_COLOR.ERROR, icon: ICON.exclamationCircle }),
 
     remove: async (id: string): Promise<void> => {
-      actions.update({ id, isRemoving: true });
+      actions?.notification.update({ id, isRemoving: true });
       await sleep({ duration: theme.animation.duration });
-      actions.remove(id);
+      actions?.notification.remove(id);
     },
 
     success: (alert) => _add({ ...alert, color: THEME_COLOR.SUCCESS, icon: ICON.checkCircle }),

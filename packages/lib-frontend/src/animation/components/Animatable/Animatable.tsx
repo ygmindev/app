@@ -5,5 +5,10 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 
 export const Animatable: SFCModel<AnimatablePropsModel> = ({ duration, ...props }) => {
   const theme = useTheme();
-  return <_Animatable {...props} duration={duration || theme.animation.duration} />;
+  return (
+    <_Animatable
+      {...props}
+      duration={duration || theme.animation.duration}
+    />
+  );
 };

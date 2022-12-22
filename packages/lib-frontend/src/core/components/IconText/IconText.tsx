@@ -30,9 +30,13 @@ export const IconText: SFCModel<IconTextPropsModel> = ({
       isCenter={isVertical}
       isRowAlign={!isVertical}
       style={onPress ? computedStyles : styles}
-      testID={testID}
-    >
-      {icon && <Icon {...propsWithOutStyle} icon={icon} />}
+      testID={testID}>
+      {icon && (
+        <Icon
+          {...propsWithOutStyle}
+          icon={icon}
+        />
+      )}
 
       {children && <Text {...propsWithOutStyle}>{children}</Text>}
     </Wrapper>
@@ -58,8 +62,7 @@ export const IconText: SFCModel<IconTextPropsModel> = ({
             : {}),
           ...(to || {}),
         }}
-        tooltip={tooltip}
-      >
+        tooltip={tooltip}>
         {element}
       </Press>
     );

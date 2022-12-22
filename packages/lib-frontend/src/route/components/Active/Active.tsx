@@ -17,7 +17,11 @@ export const Active: SFCModel<ActivePropsModel> = ({ testID, ...props }) => {
   const { current: currentLocation, previous: previousLocation } = useStore((state) => state.route);
 
   return (
-    <Wrapper grow position={SHAPE_POSITION.RELATIVE} style={styles} testID={testID}>
+    <Wrapper
+      grow
+      position={SHAPE_POSITION.RELATIVE}
+      style={styles}
+      testID={testID}>
       <Slide
         duration={theme.animation.transition}
         isAbsoluteFill
@@ -25,8 +29,7 @@ export const Active: SFCModel<ActivePropsModel> = ({ testID, ...props }) => {
           previousLocation && previousLocation.pathname
             ? isActive({ from: previousLocation.pathname })
             : true
-        }
-      >
+        }>
         {previous}
       </Slide>
 
@@ -34,8 +37,7 @@ export const Active: SFCModel<ActivePropsModel> = ({ testID, ...props }) => {
         <Slide
           duration={theme.animation.transition}
           isAbsoluteFill
-          isVisible={isActive({ from: currentLocation.pathname })}
-        >
+          isVisible={isActive({ from: currentLocation.pathname })}>
           {current}
         </Slide>
       )}

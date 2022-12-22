@@ -1,4 +1,4 @@
-import { themeCommonConfig } from '@lib/config/style/theme/configs/common';
+import { themeCommonConfig } from '@lib/config/style/theme/configs/theme.common';
 import { _SvgShape } from '@lib/frontend/core/components/SvgShape/_SvgShape';
 import {
   SVG_SHAPE,

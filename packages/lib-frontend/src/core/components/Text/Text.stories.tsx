@@ -25,4 +25,4 @@ const { Story, meta } = withStory<TextPropsModel>({
   ],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

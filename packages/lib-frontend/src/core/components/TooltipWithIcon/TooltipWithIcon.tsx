@@ -14,7 +14,9 @@ export const TooltipWithIcon: SFCModel<TooltipWithIconPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   return (
-    <Tooltip testID={testID} tooltip={children}>
+    <Tooltip
+      testID={testID}
+      tooltip={children}>
       {(isActive) => (
         <Icon
           color={color}

@@ -10,4 +10,4 @@ const { Story, meta } = withStory<ContentPropsModel>({
   variants: [{ props: { icon: ICON.person } }],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

@@ -129,7 +129,9 @@ export const _Table = <TType,>({
     return definition;
   };
   return (
-    <div className={AG_GRID_THEME} style={{ flex: 1 }}>
+    <div
+      className={AG_GRID_THEME}
+      style={{ flex: 1 }}>
       <AgGridReact
         animateRows
         columnDefs={columns.map(_getColumnDef)}

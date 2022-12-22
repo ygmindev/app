@@ -6,8 +6,8 @@ import {
 import { get } from 'lodash';
 import type { ReactNode } from 'react';
 import { Component } from 'react';
-import FontAwesome from 'react-native-vector-icons/dist/FontAwesome';
-import Ionicons from 'react-native-vector-icons/dist/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export class _Icon extends Component<_IconPropsModel> {
   override render(): ReactNode {

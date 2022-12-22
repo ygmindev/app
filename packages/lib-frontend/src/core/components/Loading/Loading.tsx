@@ -16,5 +16,12 @@ export const Loading: SFCModel<LoadingPropsModel> = ({
   const theme = useTheme();
   const fontSize = get(theme.font.size, size);
   const fontColor = get(theme.colors, [color, 'main']);
-  return <_Loading color={fontColor} size={fontSize} style={styles} testID={testID} />;
+  return (
+    <_Loading
+      color={fontColor}
+      size={fontSize}
+      style={styles}
+      testID={testID}
+    />
+  );
 };

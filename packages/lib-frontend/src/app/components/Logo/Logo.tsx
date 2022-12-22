@@ -15,7 +15,10 @@ export const Logo: SFCModel<LogoPropsModel> = ({
   const { styles } = useStyles({ props });
   const { height, width } = LOGO_SIZES[size];
   return (
-    <Link pathname="/" style={styles} testID={testID}>
+    <Link
+      pathname="/"
+      style={styles}
+      testID={testID}>
       <Image
         height={height}
         isAutoSize

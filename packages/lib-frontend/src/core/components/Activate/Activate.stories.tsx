@@ -11,4 +11,4 @@ const { Story, meta } = withStory<ActivatePropsModel>({
   variants: [{ props: { isHoverable: false } }],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

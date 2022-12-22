@@ -18,4 +18,4 @@ const { Story, meta } = withStory<SvgShapePropsModel>({
   variants: [],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

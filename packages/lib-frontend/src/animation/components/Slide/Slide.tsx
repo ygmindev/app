@@ -28,10 +28,20 @@ export const Slide: SFCModel<SlidePropsModel> = ({
   });
 
   return isRender ? (
-    <Wrapper {...props} style={styles} testID={testID}>
-      <Wrapper grow isOverflowHidden onMeasure={setMeasure} position={SHAPE_POSITION.RELATIVE}>
+    <Wrapper
+      {...props}
+      style={styles}
+      testID={testID}>
+      <Wrapper
+        grow
+        isOverflowHidden
+        onMeasure={setMeasure}
+        position={SHAPE_POSITION.RELATIVE}>
         {measure && (
-          <Wrapper animation={animation} isAbsoluteFill isFullWidth>
+          <Wrapper
+            animation={animation}
+            isAbsoluteFill
+            isFullWidth>
             {children}
           </Wrapper>
         )}

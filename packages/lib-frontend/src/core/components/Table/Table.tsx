@@ -31,16 +31,28 @@ export const Table = <TType,>({
   const [isMounted, setIsMounted] = useState<boolean>();
 
   return (
-    <Wrapper grow isOverflowHidden style={styles} testID={testID}>
-      <Appear grow isLazy={false} isVisible={isMounted}>
+    <Wrapper
+      grow
+      isOverflowHidden
+      style={styles}
+      testID={testID}>
+      <Appear
+        grow
+        isLazy={false}
+        isVisible={isMounted}>
         <_Table<TType>
           columns={columns.map((column) => ({
             ...column,
             renderer:
               isMounted && isLoading && !column.pin
                 ? () => (
-                    <Skeleton height={SVG_SHAPE_RECT_HEIGHT} isFullWidth>
-                      <SvgShape isFullWidth shape={SVG_SHAPE.RECT} />
+                    <Skeleton
+                      height={SVG_SHAPE_RECT_HEIGHT}
+                      isFullWidth>
+                      <SvgShape
+                        isFullWidth
+                        shape={SVG_SHAPE.RECT}
+                      />
                     </Skeleton>
                   )
                 : column.renderer,

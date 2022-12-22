@@ -1,5 +1,5 @@
-import type { GraphQlQueryParamsModel } from '@lib/frontend/http/utils/graphQlQuery/graphQlQuery.models';
 import type { UseApiParamsModel } from '@lib/frontend/http/hooks/useApi/useApi.models';
+import type { GraphQlQueryParamsModel } from '@lib/frontend/http/utils/graphQlQuery/graphQlQuery.models';
 import type { GraphQLError } from 'graphql';
 
 export interface GraphQlHttpParamsModel<TParams> {

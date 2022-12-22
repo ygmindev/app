@@ -9,7 +9,11 @@ export const _Form = composeComponent<_FormPropsModel, FormHTMLAttributes<HTMLFo
       <>
         {children}
 
-        <button aria-label="submit" style={{ display: 'none' }} type="submit" />
+        <button
+          aria-label="submit"
+          style={{ display: 'none' }}
+          type="submit"
+        />
       </>
     ),
     onSubmit: (e: SyntheticEvent) => {

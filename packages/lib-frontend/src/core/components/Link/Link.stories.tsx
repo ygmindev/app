@@ -9,4 +9,4 @@ const { Story, meta } = withStory<LinkPropsModel>({
   target: Link,
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

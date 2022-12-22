@@ -8,7 +8,10 @@ import { THEME_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
 export const ErrorTooltip: SFCModel<ErrorTooltipPropsModel> = ({ error, testID, ...props }) => {
   const { styles } = useStyles({ props });
   return (
-    <TooltipWithIcon color={THEME_COLOR.ERROR} style={styles} testID={testID}>
+    <TooltipWithIcon
+      color={THEME_COLOR.ERROR}
+      style={styles}
+      testID={testID}>
       <Text color={THEME_COLOR.ERROR}>{error}</Text>
     </TooltipWithIcon>
   );

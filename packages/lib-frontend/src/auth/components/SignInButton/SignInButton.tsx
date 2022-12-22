@@ -13,7 +13,10 @@ export const SignInButton: SFCModel<SignInButtonPropsModel> = ({ testID, ...prop
   const { push } = useRouter();
 
   return (
-    <Button onPress={() => push({ pathname: SIGN_IN })} style={styles} testID={testID}>
+    <Button
+      onPress={() => push({ pathname: SIGN_IN })}
+      style={styles}
+      testID={testID}>
       {t('auth:labels.signIn')}
     </Button>
   );

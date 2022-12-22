@@ -23,8 +23,7 @@ export const Slides: SFCModel<SlidesPropsModel> = ({ children, current, testID, 
       onMeasure={({ width: containerWidth }) => setWidth(containerWidth)}
       position={SHAPE_POSITION.RELATIVE}
       style={styles}
-      testID={testID}
-    >
+      testID={testID}>
       {width &&
         Children.map(children, (child, i) => {
           const isCurrent = current === i;

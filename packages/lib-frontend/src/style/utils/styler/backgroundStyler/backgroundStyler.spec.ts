@@ -1,4 +1,4 @@
-import { themeCommonConfig } from '@lib/config/style/theme/configs/common';
+import { themeCommonConfig } from '@lib/config/style/theme/configs/theme.common';
 import { themeDarkConfig } from '@lib/config/style/theme/configs/theme.dark';
 import { themeLightConfig } from '@lib/config/style/theme/configs/theme.light';
 import { backgroundStyler } from '@lib/frontend/style/utils/styler/backgroundStyler/backgroundStyler';

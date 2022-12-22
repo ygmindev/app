@@ -16,7 +16,11 @@ const Component: SFCModel<PopupPropsModel> = (props) => {
     <Wrapper spacing>
       <Button onPress={() => ref?.current?.open('https://www.google.com')}>Popup</Button>
 
-      <Popup {...props} forwardedRef={ref} onClose={() => debug('closed')} />
+      <Popup
+        {...props}
+        forwardedRef={ref}
+        onClose={() => debug('closed')}
+      />
     </Wrapper>
   );
 };
@@ -27,4 +31,4 @@ const { Story, meta } = withStory<PopupPropsModel>({
   target: Component,
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

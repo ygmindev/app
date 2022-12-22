@@ -13,7 +13,10 @@ const Component: SFCModel<ModalPropsModel> = (props) => {
     <Wrapper spacing>
       <Button onPress={() => setIsOpen(true)}>Open</Button>
 
-      <Modal {...props} isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <Modal
+        {...props}
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}>
         <WrapperFixture text="Modal" />
       </Modal>
     </Wrapper>
@@ -26,4 +29,4 @@ const { Story, meta } = withStory<ModalPropsModel>({
   target: Component,
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

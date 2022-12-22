@@ -16,6 +16,7 @@ import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormC
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { AUTH } from '@lib/shared/auth/auth.constants';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { isTypeOf } from '@lib/shared/core/utils/isTypeOf/isTypeOf';
 import { USER } from '@lib/shared/user/user.constants';
@@ -26,7 +27,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   testID,
   ...props
 }) => {
-  useTranslation([USER]);
+  const { t } = useTranslation([AUTH, USER]);
 
   const { styles } = useStyles({ props });
   const { error } = useNotification();
@@ -41,14 +42,17 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
       result && onSuccess && (await onSuccess(data, result));
     } catch (e) {
       if (isCheckIfNotExists && isTypeOf(e, DuplicateError)) {
-        return error({ icon: ICON.people, message: ({ t }) => t('auth:messages.userExistsError') });
+        return error({ icon: ICON.people, message: t('auth:messages.userExistsError') });
       }
       throw e;
     }
   };
 
   return (
-    <Wrapper grow style={styles} testID={testID}>
+    <Wrapper
+      grow
+      style={styles}
+      testID={testID}>
       <CenterLayout>
         <FormContainer
           onSubmit={_handleSubmit}

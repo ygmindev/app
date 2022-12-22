@@ -73,7 +73,9 @@ export const _StateProvider = <
         };
       },
       {
-        actions: {} as ActionsModel<TParams>,
+        actions: {} as {
+          [TKey in keyof TParams]: ActionsModel<TParams[TKey]>;
+        },
         reducers: {},
       },
     );

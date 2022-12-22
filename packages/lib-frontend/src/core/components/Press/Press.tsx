@@ -65,7 +65,7 @@ export const Press: SFCModel<PressPropsModel> = ({
           const _isActive = !isDisabled && (isActive || isPressed);
           return (
             <Wrapper
-              animation={{ transition: ['backgroundColor'] }}
+              // animation={{ transition: ['backgroundColor'] }}
               p
               {...props}
               isCenter={isCenter}
@@ -92,8 +92,7 @@ export const Press: SFCModel<PressPropsModel> = ({
                     ? { backgroundColor: theme.colors.background.main }
                     : from,
                 ].filter(Boolean) as Array<StyleModel>
-              }
-            >
+              }>
               {isFunction(children) ? children(isActive || isPressed) : children}
             </Wrapper>
           );
@@ -101,8 +100,13 @@ export const Press: SFCModel<PressPropsModel> = ({
       </Container>
 
       {confirmMessage && (
-        <Modal isOpen={confirmModalIsOpen} onClose={() => setConfirmModalIsOpen(false)}>
-          <Wrapper grow isCenter spacing>
+        <Modal
+          isOpen={confirmModalIsOpen}
+          onClose={() => setConfirmModalIsOpen(false)}>
+          <Wrapper
+            grow
+            isCenter
+            spacing>
             {confirmMessage && <Text>{confirmMessage}</Text>}
 
             <Wrapper isRowAlign>
@@ -110,8 +114,7 @@ export const Press: SFCModel<PressPropsModel> = ({
                 icon={ICON.chevronLeft}
                 isDisabled={isDisabled}
                 isTransparent
-                onPress={() => setConfirmModalIsOpen(false)}
-              >
+                onPress={() => setConfirmModalIsOpen(false)}>
                 {t('core:labels.cancel')}
               </Button>
 
@@ -121,8 +124,7 @@ export const Press: SFCModel<PressPropsModel> = ({
                 onPress={async () => {
                   onPress && onPress();
                   return setConfirmModalIsOpen(false);
-                }}
-              >
+                }}>
                 {t('core:labels.continue')}
               </Button>
             </Wrapper>

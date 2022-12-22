@@ -43,8 +43,7 @@ export const Activate: FCModel<ActivatePropsModel> = ({
       onHoverOut={async () => {
         onInactive && onInactive();
         _setIsActive(false);
-      }}
-    >
+      }}>
       {_element}
     </Hover>
   ) : (

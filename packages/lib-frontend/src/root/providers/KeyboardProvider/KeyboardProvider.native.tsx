@@ -10,8 +10,13 @@ export const KeyboardProvider: SFCModel<KeyboardProviderPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props, stylers: [{ flexGrow: 1 }] });
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={styles} testID={testID}>
-      <KeyboardAvoidingView behavior={'padding'} style={{ flexGrow: 1 }}>
+    <TouchableWithoutFeedback
+      onPress={Keyboard.dismiss}
+      style={styles}
+      testID={testID}>
+      <KeyboardAvoidingView
+        behavior={'padding'}
+        style={{ flexGrow: 1 }}>
         {children}
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>

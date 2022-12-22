@@ -17,4 +17,4 @@ const { Story, meta } = withStory<ButtonPropsModel>({
   ],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

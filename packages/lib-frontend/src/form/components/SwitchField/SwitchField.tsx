@@ -6,7 +6,6 @@ import { _SwitchField } from '@lib/frontend/form/components/SwitchField/_SwitchF
 import type { SwitchFieldPropsModel } from '@lib/frontend/form/components/SwitchField/SwitchField.models';
 import { useField } from '@lib/frontend/form/hooks/useField/useField';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import type { BooleanValueModel } from '@lib/shared/core/core.models';
 
 export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
   activeIcon = ICON.check,
@@ -20,14 +19,17 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
   ...props
 }) => {
   const { styles } = useStyles({ props });
-  const { fieldValue, setFieldValue } = useField<BooleanValueModel>({
+  const { fieldValue, setFieldValue } = useField<'true' | 'false'>({
     defaultValue,
     onChange,
     value,
   });
 
   return (
-    <Wrapper isRowAlign style={styles} testID={testID}>
+    <Wrapper
+      isRowAlign
+      style={styles}
+      testID={testID}>
       <_SwitchField
         activeIcon={activeIcon}
         inactiveIncon={inactiveIncon}

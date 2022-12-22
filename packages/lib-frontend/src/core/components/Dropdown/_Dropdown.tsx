@@ -61,8 +61,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
             ]
           : [],
       }}
-      visible={isOpen}
-    >
+      visible={isOpen}>
       <View style={styles}>{anchor}</View>
     </Tippy>
   );

@@ -15,10 +15,12 @@ const { Story, meta } = withStory<TablePropsModel<TableFixtureRowModel>>({
   },
   displayName: 'Table',
   target: (props) => (
-    <Wrapper height={500} width={500}>
+    <Wrapper
+      height={500}
+      width={500}>
       <Table {...props} />
     </Wrapper>
   ),
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

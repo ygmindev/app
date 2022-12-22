@@ -28,4 +28,4 @@ const { Story, meta } = withStory<TransPropsModel<unknown>>({
   ],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

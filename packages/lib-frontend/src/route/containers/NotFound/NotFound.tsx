@@ -10,8 +10,14 @@ export const NotFound: SFCModel<NotFoundPropsModel> = ({ testID, ...props }) => 
   const { styles } = useStyles({ props });
   const { t } = useTranslation([ROUTE]);
   return (
-    <Wrapper grow isCenter style={styles} testID={testID}>
-      <Text align="center" isTitle>
+    <Wrapper
+      grow
+      isCenter
+      style={styles}
+      testID={testID}>
+      <Text
+        align="center"
+        isTitle>
         {t('route:labels.notFound')}
       </Text>
     </Wrapper>

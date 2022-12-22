@@ -26,7 +26,11 @@ export const UsernameUpdate: SFCModel<UsernameUpdatePropsModel> = ({ testID, ...
   });
 
   return (
-    <Wrapper grow p style={styles} testID={testID}>
+    <Wrapper
+      grow
+      p
+      style={styles}
+      testID={testID}>
       <SignInForm
         isCheckIfNotExists
         // onSubmit={async (form) => {

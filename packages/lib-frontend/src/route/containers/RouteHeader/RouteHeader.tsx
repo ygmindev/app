@@ -21,9 +21,12 @@ export const RouteHeader: FCModel<RouteHeaderPropsModel> = ({ testID }) => {
       isRowAlign
       isScalable={false}
       isVisible={current.isHeader}
-      testID={testID}
-    >
-      <Icon icon={ICON.chevronLeft} isTitle onPress={up} />
+      testID={testID}>
+      <Icon
+        icon={ICON.chevronLeft}
+        isTitle
+        onPress={up}
+      />
     </Appear>
   ) : null;
 };

@@ -8,10 +8,15 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 export const AppLayout: SFCModel<AppLayoutPropsModel> = ({ children, testID, ...props }) => {
   const { styles } = useStyles({ props });
   return (
-    <Wrapper grow style={styles} testID={testID}>
+    <Wrapper
+      grow
+      style={styles}
+      testID={testID}>
       <AppHeader />
 
-      <Wrapper grow p>
+      <Wrapper
+        grow
+        p>
         {children}
       </Wrapper>
 

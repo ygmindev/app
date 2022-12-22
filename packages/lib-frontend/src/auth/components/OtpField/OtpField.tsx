@@ -40,9 +40,10 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
       isRowAlign
       onMeasure={({ width: _width }) => setWidth(_width)}
       style={styles}
-      testID={testID}
-    >
-      <Wrapper isRowAlign position={SHAPE_POSITION.RELATIVE}>
+      testID={testID}>
+      <Wrapper
+        isRowAlign
+        position={SHAPE_POSITION.RELATIVE}>
         {OTP_FIELDS.map(({ id }, i) => (
           <TextField
             align={FONT_ALIGN.CENTER}
@@ -57,7 +58,11 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
           />
         ))}
 
-        <Wrapper isAbsoluteFill opacity={0} testID={OTP_FIELD_MAIN_TEST_ID} zIndex={1}>
+        <Wrapper
+          isAbsoluteFill
+          opacity={0}
+          testID={OTP_FIELD_MAIN_TEST_ID}
+          zIndex={1}>
           <TextField
             defaultValue=""
             isAutoFocus={isAutoFocus}
@@ -72,11 +77,18 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
         </Wrapper>
 
         {width && (
-          <Wrapper isRowAlign left={width} position={SHAPE_POSITION.ABSOLUTE}>
+          <Wrapper
+            isRowAlign
+            left={width}
+            position={SHAPE_POSITION.ABSOLUTE}>
             {(isFunction(error) || isString(error)) && <ErrorTooltip error={error} />}
 
             <Appear isVisible={fieldValue.length > 0}>
-              <Icon icon={ICON.times} isDisabled={isDisabled} onPress={() => setFieldValue('')} />
+              <Icon
+                icon={ICON.times}
+                isDisabled={isDisabled}
+                onPress={() => setFieldValue('')}
+              />
             </Appear>
           </Wrapper>
         )}

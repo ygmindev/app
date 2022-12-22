@@ -5,10 +5,7 @@ import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.
 import type { _SwitchFieldPropsModel } from '@lib/frontend/form/components/SwitchField/_SwitchField.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import {
-  THEME_COLOR,
-  THEME_RELATIVE_COLOR,
-} from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_COLOR, THEME_RELATIVE_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
 import { Switch } from 'react-native-switch';
 
 export const _SwitchField: SFCModel<_SwitchFieldPropsModel> = ({

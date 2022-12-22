@@ -26,7 +26,10 @@ export const Resource: SFCModel<ResourcePropsModel> = ({ testID, ...props }) => 
     : null;
 
   return Table ? (
-    <Wrapper grow style={styles} testID={testID}>
+    <Wrapper
+      grow
+      style={styles}
+      testID={testID}>
       <RouteTabs
         tabs={Object.keys(RESOURCE_TABLES).map((id) => ({
           id: `${RESOURCE}/${trimPathname(id)}`,

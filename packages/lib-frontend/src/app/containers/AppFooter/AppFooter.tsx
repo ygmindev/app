@@ -17,7 +17,12 @@ export const AppFooter: SFCModel<AppFooterPropsModel> = ({ testID, ...props }) =
   const year = dateTimeFormat({ format: DATE_TIME_FORMAT_TYPE.YEAR });
 
   return (
-    <Wrapper isRowAlign justify={FLEX_JUSTIFY.CENTER} p style={styles} testID={testID}>
+    <Wrapper
+      isRowAlign
+      justify={FLEX_JUSTIFY.CENTER}
+      p
+      style={styles}
+      testID={testID}>
       <Icon icon={ICON.copyright} />
 
       <Text>{`${year} ${APP_APP_NAME}`}</Text>

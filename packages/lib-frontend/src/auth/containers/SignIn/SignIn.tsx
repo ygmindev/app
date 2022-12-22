@@ -7,7 +7,11 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 export const SignIn: SFCModel<SignInPropsModel> = ({ testID, ...props }) => {
   const { styles } = useStyles({ props });
   return (
-    <Wrapper grow p style={styles} testID={testID}>
+    <Wrapper
+      grow
+      p
+      style={styles}
+      testID={testID}>
       <SignInForm />
     </Wrapper>
   );

@@ -5,5 +5,9 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 
 export const AppHome: SFCModel<AppHomePropsModel> = ({ testID, ...props }) => {
   const { styles } = useStyles({ props });
-  return <Wrapper style={styles} testID={testID}></Wrapper>;
+  return (
+    <Wrapper
+      style={styles}
+      testID={testID}></Wrapper>
+  );
 };

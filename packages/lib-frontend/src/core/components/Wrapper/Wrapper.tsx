@@ -101,16 +101,6 @@ export const Wrapper: SFCModel<WrapperPropsModel> = ({
     );
   };
 
-  // const Component = isScrollable
-  //   ? ScrollView
-  //   : isPressable
-  //   ? animation
-  //     ? _TouchableOpacityAnimatable
-  //     : TouchableOpacity
-  //   : animation
-  //   ? ViewWithAnimationProps
-  //   : View;
-
   const Component = animation
     ? isPressable
       ? _TouchableOpacityAnimatable

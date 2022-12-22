@@ -12,7 +12,10 @@ export const UserTable: SFCModel<UserTablePropsModel> = ({ testID, ...props }) =
   const { styles } = useStyles({ props });
   useTranslation([USER]);
   return (
-    <Wrapper grow style={styles} testID={testID}>
+    <Wrapper
+      grow
+      style={styles}
+      testID={testID}>
       <Resources<UserModel, UserFormModel> {...USER_TABLE_PROPS} />
     </Wrapper>
   );

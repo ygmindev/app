@@ -12,7 +12,10 @@ export const AccessTable: SFCModel<AccessTablePropsModel> = ({ testID, ...props 
   const { styles } = useStyles({ props });
   useTranslation([AUTH]);
   return (
-    <Wrapper grow style={styles} testID={testID}>
+    <Wrapper
+      grow
+      style={styles}
+      testID={testID}>
       <Resources<AccessModel, AccessFormModel> {...ACCESS_TABLE_PROPS} />
     </Wrapper>
   );

@@ -12,7 +12,10 @@ export const Logo: SFCModel<LogoPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   return (
-    <Link pathname="/" style={styles} testID={testID}>
+    <Link
+      pathname="/"
+      style={styles}
+      testID={testID}>
       <Text>Logo</Text>
     </Link>
   );

@@ -12,7 +12,11 @@ const RouteWithSubRoutes = ({
   pathname,
   routes,
 }: _RouteComponentModel): ReactElement<_RouteComponentModel> => (
-  <_Route element={element} index={isIndex} key={pathname} path={pathname}>
+  <_Route
+    element={element}
+    index={isIndex}
+    key={pathname}
+    path={pathname}>
     {(routes ? routes.map(RouteWithSubRoutes) : null) as never}
   </_Route>
 );

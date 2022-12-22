@@ -9,4 +9,4 @@ const { Story, meta } = withStory<TooltipWithIconPropsModel>({
   variants: [...Object.values(THEME_COLOR).map((color) => ({ props: { color } }))],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

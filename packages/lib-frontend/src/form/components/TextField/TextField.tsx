@@ -51,8 +51,14 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
   if (!isDisabled && !isNoClear) {
     _rightElement = (
       <Wrapper isRowAlign>
-        <Appear isCenter isLazy={false} isVisible={isFocused && size(_value) > 0}>
-          <Icon icon={ICON.times} onPress={() => _handleChange('')} />
+        <Appear
+          isCenter
+          isLazy={false}
+          isVisible={isFocused && size(_value) > 0}>
+          <Icon
+            icon={ICON.times}
+            onPress={() => _handleChange('')}
+          />
         </Appear>
 
         {_rightElement}
@@ -126,7 +132,16 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
   return (
     <_TextField
       {...props}
-      Component={mask ? (inputProps) => <MaskedTextField {...inputProps} mask={mask} /> : undefined}
+      Component={
+        mask
+          ? (inputProps) => (
+              <MaskedTextField
+                {...inputProps}
+                mask={mask}
+              />
+            )
+          : undefined
+      }
       error={error}
       forwardedRef={forwardedRef || inputRef}
       isDisabled={isDisabled}

@@ -14,12 +14,21 @@ export const Content: SFCModel<ContentPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   return (
-    <Wrapper {...props} spacing style={styles} testID={testID}>
+    <Wrapper
+      {...props}
+      spacing
+      style={styles}
+      testID={testID}>
       {(title || rightElement) && (
         <Wrapper isRowAlign>
           {title && (
-            <Wrapper grow isRowAlign>
-              <IconText icon={icon} isStylish isSubtitle>
+            <Wrapper
+              grow
+              isRowAlign>
+              <IconText
+                icon={icon}
+                isStylish
+                isSubtitle>
                 {title}
               </IconText>
             </Wrapper>

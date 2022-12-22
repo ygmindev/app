@@ -20,4 +20,4 @@ const { Story, meta } = withStory<ErrorBoundaryPropsModel>({
   variants: [{ props: { children: <_ComponentThrowingError /> } }],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

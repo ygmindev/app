@@ -9,8 +9,8 @@ import { createElement } from 'react';
 
 export const _animatable = <TProps extends { style?: StyleModel }>({
   Component,
-}: _AnimatableParamsModel<TProps>): SFCModel<AnimatablePropsModel> => {
-  const _Component: SFCModel<AnimatablePropsModel> = ({
+}: _AnimatableParamsModel<TProps>): SFCModel<AnimatablePropsModel & TProps> => {
+  const _Component: SFCModel<AnimatablePropsModel & TProps> = ({
     delay,
     duration,
     from,

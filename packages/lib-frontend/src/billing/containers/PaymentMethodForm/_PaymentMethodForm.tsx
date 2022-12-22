@@ -1,7 +1,6 @@
 import { BILLING, PAYMENT_METHODS } from '@lib/frontend/billing/billing.constants';
-import { STRIPE_ELEMENTS_STYLE } from '@lib/frontend/billing/containers/PaymentMethodForm/_PaymentMethodForm.constants';
+// import { STRIPE_ELEMENTS_STYLE } from '@lib/frontend/billing/containers/PaymentMethodForm/_PaymentMethodForm.constants';
 import type { _PaymentMethodFormPropsModel } from '@lib/frontend/billing/containers/PaymentMethodForm/_PaymentMethodForm.models';
-import { usePaymentMethodResource } from '@lib/frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
 import { REDIRECT } from '@lib/frontend/core/core.constants';
 import type { FCModel, SFCModel } from '@lib/frontend/core/core.models';
 import { useQuery } from '@lib/frontend/core/hooks/useQuery/useQuery';
@@ -20,16 +19,16 @@ const stripe = loadStripe(APP_STRIPE_TOKEN);
 export const _PaymentMethodForm: SFCModel<_PaymentMethodFormPropsModel> = (props) => {
   const theme = useTheme();
   const user = useCurrentUser();
-  const { createToken } = usePaymentMethodResource();
+  // const { createToken } = usePaymentMethodResource();
   const { data, error, isLoading } = useQuery({
     id: 'cardFormCreateToken',
-    query: async () => user && createToken({ form: undefined, root: { _id: user._id } }),
+    // query: async () => user && createToken({ form: undefined, root: { _id: user._id } }),
+    query: async () => null,
   });
   return data ? (
     <Elements
-      options={{ ...STRIPE_ELEMENTS_STYLE(theme), clientSecret: data.result }}
-      stripe={stripe}
-    >
+      // options={{ ...STRIPE_ELEMENTS_STYLE(theme), clientSecret: data.result }}
+      stripe={stripe}>
       <_StripeForm {...props} />
     </Elements>
   ) : null;

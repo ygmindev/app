@@ -25,15 +25,13 @@ export const Divider: SFCModel<DividerPropsModel> = ({
       mVertical={mVertical}
       position={SHAPE_POSITION.RELATIVE}
       style={styles}
-      testID={testID}
-    >
+      testID={testID}>
       {children ? (
         <Wrapper
           backgroundColor={THEME_RELATIVE_COLOR.MAIN}
           pHorizontal
           position={SHAPE_POSITION.ABSOLUTE}
-          self={FLEX_ALIGN.CENTER}
-        >
+          self={FLEX_ALIGN.CENTER}>
           <Text color={THEME_RELATIVE_COLOR.MUTED}>{children}</Text>
         </Wrapper>
       ) : null}

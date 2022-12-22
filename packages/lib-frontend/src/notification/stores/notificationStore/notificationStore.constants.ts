@@ -4,7 +4,10 @@ import { uid } from '@lib/shared/core/utils/uid/uid';
 export const NOTIFICATION_REDUCER: NotificationReducerModel = {
   actions: {
     add: (store, value) => {
-      store.set('notifications', [{ ...value, id: uid('alert') }, ...store.get('notifications')]);
+      store.set('notifications', [
+        { ...value, id: value.id || uid('alert') },
+        ...store.get('notifications'),
+      ]);
     },
 
     remove: (store, value: string) => {

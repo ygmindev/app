@@ -6,7 +6,12 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 export const CenterLayout: SFCModel<CenterLayoutPropsModel> = ({ children, ...props }) => {
   const { styles } = useStyles({ props });
   return (
-    <Wrapper grow isCenter isFullWidth spacing style={styles}>
+    <Wrapper
+      grow
+      isCenter
+      isFullWidth
+      spacing
+      style={styles}>
       {children}
     </Wrapper>
   );

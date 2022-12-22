@@ -23,7 +23,10 @@ export const Appear: SFCModel<AppearPropsModel> = ({
   });
 
   return isRender ? (
-    <Wrapper animation={animation} style={styles} {...props}>
+    <Wrapper
+      animation={animation}
+      style={styles}
+      {...props}>
       {children}
     </Wrapper>
   ) : null;

@@ -19,5 +19,10 @@ export const PaymentMethods: SFCModel<PaymentMethodsPropsModel> = ({ testID, ...
     user && getMany({ filter: {}, root: { _id: user._id } });
   }, []);
 
-  return <Wrapper grow style={styles} testID={testID}></Wrapper>;
+  return (
+    <Wrapper
+      grow
+      style={styles}
+      testID={testID}></Wrapper>
+  );
 };

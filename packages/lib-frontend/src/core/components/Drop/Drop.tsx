@@ -17,12 +17,13 @@ export const Drop: SFCModel<DropPropsModel> = ({
   return (
     <Activate>
       {(isActive) => (
-        <Wrapper style={styles} testID={testID}>
+        <Wrapper
+          style={styles}
+          testID={testID}>
           <Dropdown
             anchor={isFunction(children) ? children(isActive) : children}
             isOpen={isActive}
-            maxWidth={maxWidth}
-          >
+            maxWidth={maxWidth}>
             {render && render(isActive)}
           </Dropdown>
         </Wrapper>

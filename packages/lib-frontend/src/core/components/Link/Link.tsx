@@ -27,16 +27,17 @@ export const Link: SFCModel<LinkPropsModel> = ({ children, testID, ...props }) =
   const theme = useTheme();
 
   return (
-    <Activate onActive={() => setIsActive(true)} onInactive={() => setIsActive(false)}>
+    <Activate
+      onActive={() => setIsActive(true)}
+      onInactive={() => setIsActive(false)}>
       {() => (
         <Wrapper testID={testID}>
           <_LinkAnimatable
             {...props}
-            animation={undefined}
+            // animation={undefined}
             duration={theme.animation.duration}
-            easing="ease-in-out"
             style={styles}
-            transition={['color'] as Array<never>}
+            // transition={['color'] as Array<never>}
           >
             {isFunction(children) || isString(children) ? t(children) : children}
           </_LinkAnimatable>

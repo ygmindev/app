@@ -8,7 +8,12 @@ export interface _StateProviderPropsModel<
   TParams extends Record<TKeys[number], object>,
   TKeys extends Array<string>,
 > extends ProviderPropsModel<{
-    ActionContext: Context<ActionsModel<TParams> | undefined>;
+    ActionContext: Context<
+      | {
+          [TKey in keyof TParams]: ActionsModel<TParams[TKey]>;
+        }
+      | undefined
+    >;
     initialState?: PartialDeepModel<TType>;
     reducers: {
       [TKey in TKeys[number]]: ReducerModel<TType[TKey], TParams[TKey]>;

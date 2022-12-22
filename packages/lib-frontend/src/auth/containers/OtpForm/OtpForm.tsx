@@ -67,7 +67,12 @@ export const _OtpForm: SFCModel<OtpFormPropsModel> = ({ data, onBack, onSuccess,
     <CenterLayout style={styles}>
       {data && data.username && (
         <Trans
-          Components={[<Text color={THEME_COLOR.PRIMARY} isBold />]}
+          Components={[
+            <Text
+              color={THEME_COLOR.PRIMARY}
+              isBold
+            />,
+          ]}
           i18nKey="messages.otpEnter"
           ns="auth"
           params={{ value: data.username }}
@@ -85,12 +90,17 @@ export const _OtpForm: SFCModel<OtpFormPropsModel> = ({ data, onBack, onSuccess,
       <Wrapper isRowAlign>
         <Text>{t('auth:messages.otpDidntGet')}</Text>
 
-        <Button icon={ICON.refresh} isDisabled={isLoading} onPress={onBack}>
+        <Button
+          icon={ICON.refresh}
+          isDisabled={isLoading}
+          onPress={onBack}>
           {t('core:labels.tryAgain')}
         </Button>
       </Wrapper>
 
-      <Appear isLazy={false} isVisible={isLoading}>
+      <Appear
+        isLazy={false}
+        isVisible={isLoading}>
         <Loading size={THEME_SIZE.LARGE} />
       </Appear>
     </CenterLayout>

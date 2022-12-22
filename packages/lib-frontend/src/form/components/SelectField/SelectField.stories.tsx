@@ -15,4 +15,4 @@ const { Story, meta } = withStory<SelectFieldPropsModel>({
   ],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

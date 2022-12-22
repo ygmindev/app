@@ -51,7 +51,11 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
   );
 
   return (
-    <Appear isCenter isScalable isVisible={!isRemoving} style={styles}>
+    <Appear
+      isCenter
+      isScalable
+      isVisible={!isRemoving}
+      style={styles}>
       <Wrapper
         backgroundColor={color}
         isOverflowHidden
@@ -59,13 +63,13 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
         mBottom
         position={SHAPE_POSITION.RELATIVE}
         round
-        width={NOTIFICATION_WIDTH}
-      >
+        width={NOTIFICATION_WIDTH}>
         {isInfinite ? null : (
           <Wrapper
             animation={{
-              animation: { from: { width: 0 }, to: { width: NOTIFICATION_WIDTH } },
               duration: NOTIFICATION_DURATION,
+              from: { width: 0 },
+              to: { width: NOTIFICATION_WIDTH },
             }}
             backgroundColor={color}
             backgroundShade={THEME_SHADE.LIGHT}
@@ -77,12 +81,25 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
           />
         )}
 
-        <Wrapper grow isRowAlign p>
-          <Icon color={THEME_RELATIVE_COLOR.CONTRAST} icon={icon} isTitle />
+        <Wrapper
+          grow
+          isRowAlign
+          p>
+          <Icon
+            color={THEME_RELATIVE_COLOR.CONTRAST}
+            icon={icon}
+            isTitle
+          />
 
-          <Wrapper basis={0} grow isWrap spacing={THEME_SIZE.SMALL}>
+          <Wrapper
+            basis={0}
+            grow
+            isWrap
+            spacing={THEME_SIZE.SMALL}>
             {title && (
-              <Text color={THEME_RELATIVE_COLOR.CONTRAST} isBold>
+              <Text
+                color={THEME_RELATIVE_COLOR.CONTRAST}
+                isBold>
                 {t(title)}
               </Text>
             )}

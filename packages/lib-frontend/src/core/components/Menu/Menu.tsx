@@ -124,7 +124,10 @@ export const Menu: SFCModel<MenuPropsModel> = ({
     <>
       {anchorPress}
 
-      <Modal isFullSize={false} isOpen={isOpen} onClose={_handleClose}>
+      <Modal
+        isFullSize={false}
+        isOpen={isOpen}
+        onClose={_handleClose}>
         {children}
       </Modal>
     </>
@@ -134,8 +137,7 @@ export const Menu: SFCModel<MenuPropsModel> = ({
       isFullWidth={isFullWidth}
       isOpen={isOpen}
       onClose={_handleClose}
-      style={styles}
-    >
+      style={styles}>
       {children}
     </Dropdown>
   );

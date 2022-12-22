@@ -26,7 +26,10 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({
   };
 
   return (
-    <Wrapper grow style={styles} testID={testID}>
+    <Wrapper
+      grow
+      style={styles}
+      testID={testID}>
       <FormSteps<SignInFormModel, [UsernameFormModel, OtpFormModel]> onSubmit={_handleSubmit}>
         <UsernameForm isCheckIfNotExists={isCheckIfNotExists} />
 

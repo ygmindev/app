@@ -26,8 +26,7 @@ export const Text: SFCModel<TextPropsModel> = ({
       onPress={onPress ? () => onPress() : undefined}
       style={styles}
       testID={testID}
-      {...(animation ? { type: ANIMATABLE_TYPE.TEXT } : {})}
-    >
+      {...(animation ? { type: ANIMATABLE_TYPE.TEXT } : {})}>
       {isString(children)
         ? translation.t(children)
         : isFunction(children)

@@ -12,4 +12,4 @@ const { Story, meta } = withStory<MenuPropsModel>({
   target: Menu,
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

@@ -1,12 +1,17 @@
-import { i18nConfig } from '@lib/config/locale/internationalize/internationalize';
+import { internationalizeConfig } from '@lib/config/locale/internationalize/configs/internationalize';
+import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
+import { PLATFORM } from '@lib/shared/platform/platform.constants';
+import type { PlatformModel } from '@lib/shared/platform/platform.models';
 import { get } from 'lodash';
 import { NativeModules } from 'react-native';
 
+const platform = getEnv<PlatformModel>('APP_PLATFORM', PLATFORM.BASE);
+
 const locale =
-  (__IS_IOS__
+  (platform === PLATFORM.IOS
     ? get(NativeModules, 'SettingsManager.settings.AppleLocale') ||
       get(NativeModules, 'SettingsManager.settings.AppleLanguages.0')
-    : get(NativeModules, 'I18nManager.localeIdentifier')) || i18nConfig.fallbackLng;
+    : get(NativeModules, 'I18nManager.localeIdentifier')) || internationalizeConfig.languageDefault;
 
 export const _Detector = {
   cacheUserLanguage: Function.prototype,

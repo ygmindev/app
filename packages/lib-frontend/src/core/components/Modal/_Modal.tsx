@@ -54,8 +54,7 @@ export const _Modal: FCModel<_ModalPropsModel> = ({
         },
       ]}
       supportedOrientations={['portrait', 'landscape']}
-      swipeDirection={!isDisabled && isMobile ? 'down' : undefined}
-    >
+      swipeDirection={!isDisabled && isMobile ? 'down' : undefined}>
       {children}
     </Modal>
   );

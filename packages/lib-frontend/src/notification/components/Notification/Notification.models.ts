@@ -10,6 +10,8 @@ export interface NotificationModel extends WithIdModel, WithIconPropsModel {
   title?: string;
 }
 
-export interface NotificationDataModel extends Omit<NotificationModel, 'id'> {}
+export interface NotificationDataModel extends Omit<NotificationModel, 'id'> {
+  id?: string;
+}
 
 export interface NotificationPropsModel extends NotificationModel {}

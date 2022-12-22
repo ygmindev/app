@@ -41,4 +41,6 @@ export type RootActionsParamsModel = {
   [USER]: UserActionsParamsModel;
 };
 
-export type RootActionsModel = ActionsModel<RootActionsParamsModel>;
+export type RootActionsModel = {
+  [TKey in keyof RootActionsParamsModel]: ActionsModel<RootActionsParamsModel[TKey]>;
+};

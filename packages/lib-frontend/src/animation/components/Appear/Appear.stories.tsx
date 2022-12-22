@@ -13,7 +13,9 @@ const Component: SFCModel<AppearPropsModel> = (props) => {
     <Wrapper spacing>
       <Button onPress={() => setIsActive(!isActive)}>{isActive ? 'Close' : 'Open'}</Button>
 
-      <Appear {...props} isVisible={isActive}>
+      <Appear
+        {...props}
+        isVisible={isActive}>
         <WrapperFixture text="Appear" />
       </Appear>
     </Wrapper>

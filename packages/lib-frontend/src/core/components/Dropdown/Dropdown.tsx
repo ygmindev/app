@@ -30,8 +30,7 @@ export const Dropdown: SFCModel<DropdownPropsModel> = ({
       isRight={isRight}
       isTop={isTop}
       onClose={onClose}
-      style={styles}
-    >
+      style={styles}>
       <Wrapper
         backgroundColor={THEME_RELATIVE_COLOR.MAIN}
         border
@@ -40,14 +39,12 @@ export const Dropdown: SFCModel<DropdownPropsModel> = ({
         mLeft={isRight}
         mRight={isLeft}
         mVertical
-        round
-      >
+        round>
         <Wrapper
           grow
           isVerticalScrollable
           maxHeight={DROPDOWN_MAX_HEIGHT}
-          p={THEME_BASIC_SIZE.SMALL}
-        >
+          p={THEME_BASIC_SIZE.SMALL}>
           {children}
         </Wrapper>
       </Wrapper>

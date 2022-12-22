@@ -26,15 +26,13 @@ export const Tag: SFCModel<TagPropsModel> = ({
       p={THEME_BASIC_SIZE.SMALL}
       round
       style={styles}
-      testID={testID}
-    >
+      testID={testID}>
       <IconText
         align={FONT_ALIGN.CENTER}
         color={THEME_RELATIVE_COLOR.CONTRAST}
         icon={icon}
         isCapitalize={isCapitalize}
-        isUppercase={isUppercase}
-      >
+        isUppercase={isUppercase}>
         {children}
       </IconText>
     </Wrapper>

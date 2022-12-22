@@ -11,4 +11,4 @@ const { Story, meta } = withStory<DropPropsModel>({
   target: Drop,
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

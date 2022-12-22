@@ -27,8 +27,12 @@ const Component: SFCModel<SlidesPropsModel> = (props) => {
         </Appear>
       </Wrapper>
 
-      <Wrapper height={500} width={500}>
-        <Slides current={current} {...props}>
+      <Wrapper
+        height={500}
+        width={500}>
+        <Slides
+          current={current}
+          {...props}>
           {slides}
         </Slides>
       </Wrapper>

@@ -41,7 +41,8 @@ export const FormSteps = <TType extends MergeArrayModel<TSteps>, TSteps extends 
       {children.length > 1 && width && width > 0 && (
         <Portal>
           <Wrapper
-            animation={{ duration: theme.animation.transition, transition: ['width'] }}
+            // animation={{ duration: theme.animation.transition, transition: ['width'] }}
+            animation={{ duration: theme.animation.transition }}
             backgroundColor={THEME_COLOR.PRIMARY}
             height={5}
             left={0}
@@ -52,9 +53,15 @@ export const FormSteps = <TType extends MergeArrayModel<TSteps>, TSteps extends 
         </Portal>
       )}
 
-      <Wrapper grow spacing style={styles} testID={testID}>
+      <Wrapper
+        grow
+        spacing
+        style={styles}
+        testID={testID}>
         <Wrapper isRowAlign>
-          <Appear isLazy={false} isVisible={current > 0}>
+          <Appear
+            isLazy={false}
+            isVisible={current > 0}>
             <Icon
               icon={ICON.arrowLeft}
               isDisabled={current <= 0}

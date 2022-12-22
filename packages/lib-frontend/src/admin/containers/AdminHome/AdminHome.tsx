@@ -7,7 +7,9 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 export const AdminHome: SFCModel<AdminHomePropsModel> = ({ testID, ...props }) => {
   const { styles } = useStyles({ props });
   return (
-    <Wrapper style={styles} testID={testID}>
+    <Wrapper
+      style={styles}
+      testID={testID}>
       <Text>admin home</Text>
     </Wrapper>
   );

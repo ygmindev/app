@@ -54,20 +54,25 @@ export const Button: SFCModel<ButtonPropsModel> = ({
       isFullWidth={isFullWidth}
       onPress={_handlePress}
       style={styles}
-      to={{ backgroundColor: isTransparent || _isBlocked ? light : dark }}
-    >
+      to={{ backgroundColor: isTransparent || _isBlocked ? light : dark }}>
       {_isLoading && (
-        <Wrapper isAbsoluteFill isCenter>
-          <Loading color={color} size={THEME_BASIC_SIZE.LARGE} />
+        <Wrapper
+          isAbsoluteFill
+          isCenter>
+          <Loading
+            color={color}
+            size={THEME_BASIC_SIZE.LARGE}
+          />
         </Wrapper>
       )}
 
-      <Wrapper mLeft={0} opacity={_isLoading ? 0 : undefined}>
+      <Wrapper
+        mLeft={0}
+        opacity={_isLoading ? 0 : undefined}>
         <IconText
           color={isTransparent ? color : THEME_RELATIVE_COLOR.CONTRAST}
           icon={icon}
-          size={size}
-        >
+          size={size}>
           {children}
         </IconText>
       </Wrapper>

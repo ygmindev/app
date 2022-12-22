@@ -15,4 +15,4 @@ const { Story, meta } = withStory<TagPropsModel>({
   ],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };
