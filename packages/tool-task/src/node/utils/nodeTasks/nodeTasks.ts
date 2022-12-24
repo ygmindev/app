@@ -16,6 +16,6 @@ export const nodeTasks = ({ testOverrides }: NodeTasksParamsModel = {}): Array<
     _test,
     { ..._test, name: `${_test.name}-watch`, options: { isWatch: true } },
     { ..._test, name: `${_test.name}-match`, options: { isPrompt: true } },
-    { ..._test, name: `${_test.name}-watch-match`, options: { isPrompt: true, isWatch: true } },
+    { ..._test, name: `${_test.name}-match-watch`, options: { isPrompt: true, isWatch: true } },
   ];
 };

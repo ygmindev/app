@@ -1,5 +1,5 @@
 import type { WithChildrenPropsModel } from '@lib/frontend/core/decorators/withChildrenProps/withChildrenProps.models';
-import type { WithStyleParamsModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
+import type { WithStyleModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
 import type { PartialModel } from '@lib/shared/core/core.models';
 import type { WithTestParamsModel } from '@lib/shared/test/utils/withTest/withTest.models';
 import type { Meta, StoryObj } from '@storybook/react';
@@ -15,7 +15,7 @@ export interface WithStoryModel<TProps> {
   meta: Meta<ComponentType<TProps>>;
 }
 
-export interface StoryParamsModel<TProps> extends WithChildrenPropsModel, WithStyleParamsModel {
+export interface StoryParamsModel<TProps> extends WithChildrenPropsModel, WithStyleModel {
   name?: string;
   props?: PartialModel<TProps>;
 }

@@ -1,6 +1,7 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import type { TestConfigParamsModel } from '@lib/config/node/test/test.models';
+import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
 import { EXTENSIONS_JS, EXTENSIONS_TEST } from '@lib/shared/file/file.constants';
 import { cleanup } from '@lib/shared/setup/utils/cleanup/cleanup';
 import { initialize } from '@lib/shared/setup/utils/initialize/initialize';
@@ -16,6 +17,8 @@ export const testConfig: TestConfigParamsModel = {
 
   extensions: EXTENSIONS_TEST,
 
+  fileExtensions: ['gif', 'jpeg', 'jpg', 'otf', 'png', 'svg', 'ttf', 'woff', 'woff2'],
+
   initialize: {
     mocks: {
       '@lib/backend/file/utils/fromRoot/fromRoot': () => ({ fromRoot: () => '/' }),
@@ -27,7 +30,9 @@ export const testConfig: TestConfigParamsModel = {
     },
   },
 
-  mockPath: fromConfig('test/configs/__mocks__'),
+  match: getEnv('TEST_MATCH', '*'),
+
+  mockPath: fromConfig('node/test/configs/__mocks__'),
 
   resolveExtensions: EXTENSIONS_JS,
 

@@ -15,9 +15,10 @@ export interface _TestConfigParamsModel {
   coverageOutputPath: string;
   extensions: Array<string>;
   externals?: Array<string>;
+  fileExtensions: Array<string>;
   initialize?: _TestInitializeParamsModel;
   isWatch?: boolean;
-  match?: string;
+  match: string;
   mockPath: string;
   resolveExtensions: Array<string>;
   root: string;

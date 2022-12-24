@@ -1,5 +1,5 @@
 import type { ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
-import type { WithStyleParamsModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
+import type { WithStyleModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import type { WithTestIdModel } from '@lib/frontend/test/test.models';
 import type { ForwardRefExoticComponent, ReactElement, RefObject } from 'react';
@@ -14,7 +14,7 @@ export const composeComponent = <TParams, TResult, TRef = unknown>({
 }: ComposeComponentParamsModel<TParams, TResult, TRef>): ForwardRefExoticComponent<
   TParams & WithTestIdModel
 > =>
-  forwardRef<RefObject<TRef>, WithStyleParamsModel & TParams & { nativeID?: string }>(
+  forwardRef<RefObject<TRef>, WithStyleModel & TParams & { nativeID?: string }>(
     (props, ref): ReactElement<TResult> => {
       const { styles: componentStyles } = useStyles<TParams>({ props, stylers });
       const componentProps = getProps ? getProps(props, ref) : (props as unknown as TResult);

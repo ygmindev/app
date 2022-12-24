@@ -1,9 +1,9 @@
-import type { WithStyleParamsModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
+import type { WithStyleModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
 import type { StyleModel } from '@lib/frontend/style/style.models';
 import type { StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
 
 export interface UseStylesParamsModel<TProps> {
-  props: WithStyleParamsModel & TProps;
+  props: WithStyleModel & TProps;
   stylers?: Array<StylerModel<TProps> | StyleModel>;
 }
 
