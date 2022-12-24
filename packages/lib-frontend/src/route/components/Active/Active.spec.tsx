@@ -1,7 +1,7 @@
 import { Active } from '@lib/frontend/route/components/Active/Active';
 import type { ActivePropsModel } from '@lib/frontend/route/components/Active/Active.models';
-import { render } from '@lib/frontend/testing/utils/render/render';
-import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<ActivePropsModel>({ target: Active });
 

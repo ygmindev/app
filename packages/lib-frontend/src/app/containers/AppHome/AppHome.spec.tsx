@@ -1,7 +1,7 @@
 import { AppHome } from '@lib/frontend/app/containers/AppHome/AppHome';
 import type { AppHomePropsModel } from '@lib/frontend/app/containers/AppHome/AppHome.models';
-import { render } from '@lib/frontend/testing/utils/render/render';
-import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<AppHomePropsModel>({
   target: AppHome,

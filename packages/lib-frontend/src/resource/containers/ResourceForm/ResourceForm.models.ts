@@ -1,7 +1,7 @@
 import type { WithSubmitPropsModel } from '@lib/frontend/form/decorators/withSubmitProps/withSubmitProps.models';
 import type { RESOURCE_FORM_MODE } from '@lib/frontend/resource/containers/ResourceForm/ResourceForm.constants';
 import type { ResourcesPropsModel } from '@lib/frontend/resource/containers/Resources/Resources.models';
-import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
+import type { WithTestIdModel } from '@lib/frontend/test/test.models';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';

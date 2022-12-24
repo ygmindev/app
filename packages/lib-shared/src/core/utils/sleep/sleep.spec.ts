@@ -1,5 +1,5 @@
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ target: () => sleep });
 

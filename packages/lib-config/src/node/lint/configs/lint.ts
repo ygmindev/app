@@ -8,6 +8,8 @@ export const lintConfig: LintConfigParamsModel = {
 
   indentWidth: 2,
 
+  isNoUnused: true,
+
   isParenthesis: true,
 
   isSameLine: true,

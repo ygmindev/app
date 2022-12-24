@@ -20,8 +20,8 @@ const { Story, meta } = withStory<TextPropsModel>({
     { props: { isUppercase: true } },
     { props: { isCapitalize: true } },
     { props: { isLineHeight: true } },
-    { props: { children: ({ t }) => t('testing:labels.testing') } },
-    { props: { children: ({ t }) => t('testing:labels.testingWithParams', { value: 'value' }) } },
+    { props: { children: ({ t }) => t('test:labels.test') } },
+    { props: { children: ({ t }) => t('test:labels.testWithParams', { value: 'value' }) } },
   ],
 });
 

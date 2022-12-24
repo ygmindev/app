@@ -1,5 +1,5 @@
 import type { UseActionsModel } from '@lib/frontend/state/hooks/useActions/useActions.models';
-import { ActionContext } from '@lib/frontend/state/providers/StateProvider/StateProvider';
+import { actionContext } from '@lib/frontend/state/providers/StateProvider/StateProvider';
 import { useContext } from 'react';
 
-export const useActions: UseActionsModel = () => useContext(ActionContext);
+export const useActions: UseActionsModel = () => useContext(actionContext);

@@ -1,11 +1,16 @@
 ---
-import { Scratchpad } from '@lib/frontend/dev/containers/Scratchpad/Scratchpad';
-import { Root } from '@lib/frontend/root/containers/Root/Root';
 import Layout from '../layouts/Layout.astro';
----
-<Layout>
-    <Root client:load>
-        <Scratchpad client:load />
-    </Root>
-</Layout>
+import { AdminHomePage } from '@lib/frontend/admin/pages/AdminHomePage/AdminHomePage';
+import { InitialStateModel } from '@lib/shared/root/root.models';
+import { USER } from '@lib/shared/user/user.constants';
 
+const initialState: InitialStateModel = {
+    [USER]: {
+        currentUser: null,
+    },
+};
+---
+
+<Layout>
+    <AdminHomePage client:load initialState={initialState} />
+</Layout>

@@ -4,7 +4,7 @@ import type { TextFieldKeyboardModel } from '@lib/frontend/form/components/TextF
 import type { WithSubmitPropsModel } from '@lib/frontend/form/decorators/withSubmitProps/withSubmitProps.models';
 import type { WithStyleParamsModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
 import type { FontAlignModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
-import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
+import type { WithTestIdModel } from '@lib/frontend/test/test.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 import type { ReactElement, ReactNode } from 'react';
 import type { TextInput, TextInputProps } from 'react-native';

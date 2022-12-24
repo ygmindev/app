@@ -1,6 +1,6 @@
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ target: () => fromRoot });
 

@@ -2,10 +2,10 @@ import { Hover } from '@lib/frontend/core/components/Hover/Hover';
 import type { HoverPropsModel } from '@lib/frontend/core/components/Hover/Hover.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
-import { hoverIn } from '@lib/frontend/testing/utils/hoverIn/hoverIn';
-import { render } from '@lib/frontend/testing/utils/render/render';
-import { waitForExpect } from '@lib/frontend/testing/utils/waitForExpect/waitForExpect';
-import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
+import { hoverIn } from '@lib/frontend/test/utils/hoverIn/hoverIn';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { waitForExpect } from '@lib/frontend/test/utils/waitForExpect/waitForExpect';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const HOVER = 'HOVER';
 const ACTIVE = 'ACTIVE';

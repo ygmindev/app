@@ -1,5 +1,5 @@
-import { render } from '@lib/frontend/testing/utils/render/render';
-import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 import { UserTable } from '@lib/frontend/user/containers/UserTable/UserTable';
 import type { UserTablePropsModel } from '@lib/frontend/user/containers/UserTable/UserTable.models';
 

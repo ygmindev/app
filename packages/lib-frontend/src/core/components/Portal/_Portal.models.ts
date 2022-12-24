@@ -1,5 +1,3 @@
-import type { ReactNode } from 'react';
+import type { WithChildrenPropsModel } from '@lib/frontend/core/decorators/withChildrenProps/withChildrenProps.models';
 
-export interface _PortalPropsModel {
-  children: ReactNode;
-}
+export interface _PortalPropsModel extends WithChildrenPropsModel {}

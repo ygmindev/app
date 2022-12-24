@@ -1,7 +1,7 @@
 import { UsernameUpdate } from '@lib/frontend/auth/containers/UsernameUpdate/UsernameUpdate';
 import type { UsernameUpdatePropsModel } from '@lib/frontend/auth/containers/UsernameUpdate/UsernameUpdate.models';
-import { render } from '@lib/frontend/testing/utils/render/render';
-import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<UsernameUpdatePropsModel>({
   target: UsernameUpdate,

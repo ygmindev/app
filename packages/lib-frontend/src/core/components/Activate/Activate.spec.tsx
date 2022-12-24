@@ -1,11 +1,11 @@
 import { Activate } from '@lib/frontend/core/components/Activate/Activate';
 import type { ActivatePropsModel } from '@lib/frontend/core/components/Activate/Activate.models';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
-import { hoverIn } from '@lib/frontend/testing/utils/hoverIn/hoverIn';
-import { hoverOut } from '@lib/frontend/testing/utils/hoverOut/hoverOut';
-import { render } from '@lib/frontend/testing/utils/render/render';
-import { waitForExpect } from '@lib/frontend/testing/utils/waitForExpect/waitForExpect';
-import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
+import { hoverIn } from '@lib/frontend/test/utils/hoverIn/hoverIn';
+import { hoverOut } from '@lib/frontend/test/utils/hoverOut/hoverOut';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { waitForExpect } from '@lib/frontend/test/utils/waitForExpect/waitForExpect';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const ACTIVATE = 'ACTIVATE';
 const ACTIVE = 'ACTIVE';

@@ -1,8 +1,8 @@
 import { Drop } from '@lib/frontend/core/components/Drop/Drop';
 import type { DropPropsModel } from '@lib/frontend/core/components/Drop/Drop.models';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
-import { render } from '@lib/frontend/testing/utils/render/render';
-import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const ACTIVE = 'ACTIVE';
 const INACTIVE = 'INACTIVE';

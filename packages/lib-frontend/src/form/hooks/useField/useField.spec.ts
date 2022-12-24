@@ -1,7 +1,7 @@
 import { useField } from '@lib/frontend/form/hooks/useField/useField';
-import { act } from '@lib/frontend/testing/utils/act/act';
-import { renderHook } from '@lib/frontend/testing/utils/renderHook/renderHook';
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { act } from '@lib/frontend/test/utils/act/act';
+import { renderHook } from '@lib/frontend/test/utils/renderHook/renderHook';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ target: () => useField });
 

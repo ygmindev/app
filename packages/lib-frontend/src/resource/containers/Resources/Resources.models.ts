@@ -3,7 +3,7 @@ import type { FormContainerFieldModel } from '@lib/frontend/form/containers/Form
 import type { WithSubmitPropsModel } from '@lib/frontend/form/decorators/withSubmitProps/withSubmitProps.models';
 import type { UseFormParamsModel } from '@lib/frontend/form/hooks/useForm/useForm.models';
 import type { UseResourceMethodFieldsModel } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
-import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
+import type { WithTestIdModel } from '@lib/frontend/test/test.models';
 import type { WithResourceNameModel } from '@lib/shared/resource/decorators/withResourceName/withResourceName.models';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';

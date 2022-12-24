@@ -1,4 +1,4 @@
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { rename } from '@tool/task/core/utils/rename/rename';
 
 const { displayName } = withTest({ target: () => rename });

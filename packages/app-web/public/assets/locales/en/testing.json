@@ -1,8 +1,8 @@
 {
   "labels": {
-    "testing": "TRANSLATION_MISSING",
-    "testingWithElements": "testing with elements: <0>{{value1}}</0> <1>{{value2}}</1>",
-    "testingWithParams": "testing with params: {{value1}} {{value2}}",
-    "testingWithString": "testing with string"
+    "test": "TRANSLATION_MISSING",
+    "testWithElements": "test with elements: <0>{{value1}}</0> <1>{{value2}}</1>",
+    "testWithParams": "test with params: {{value1}} {{value2}}",
+    "testWithString": "test with string"
   }
 }

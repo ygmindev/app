@@ -1,6 +1,6 @@
 import type { CallableModel, CallablePromiseModel } from '@lib/shared/core/core.models';
 
-export interface _TestingInitializeParamsModel {
+export interface _TestInitializeParamsModel {
   mocks?: Record<string, CallableModel | null>;
   onAfterAll?: CallablePromiseModel;
   onAfterEach?: CallablePromiseModel;
@@ -15,7 +15,7 @@ export interface _TestConfigParamsModel {
   coverageOutputPath: string;
   extensions: Array<string>;
   externals?: Array<string>;
-  initialize?: _TestingInitializeParamsModel;
+  initialize?: _TestInitializeParamsModel;
   isWatch?: boolean;
   match?: string;
   mockPath: string;

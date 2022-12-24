@@ -1,4 +1,4 @@
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { runCommands } from '@tool/task/core/utils/runCommands/runCommands';
 
 const { displayName } = withTest({ target: () => runCommands });

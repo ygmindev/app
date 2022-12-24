@@ -24,7 +24,7 @@ export const _internationalizeConfig = ({
   //   process.env.NODE_ENV === 'test'
   //     ? {
   //         [languageDefault]: reduce(
-  //           [CORE, TESTING],
+  //           [CORE, TEST],
   //           (result, ns) => ({
   //             ...result,
   //             [ns]: join(outputPath, `${languageDefault}/${ns}.json`),

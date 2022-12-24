@@ -1,5 +1,5 @@
 import { validateAlphaNumeric } from '@lib/frontend/form/utils/validateAlphaNumeric/validateAlphaNumeric';
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ target: () => validateAlphaNumeric });
 

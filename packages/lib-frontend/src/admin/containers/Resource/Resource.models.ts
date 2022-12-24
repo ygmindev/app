@@ -1,5 +1,5 @@
 import type { ResourcesPropsModel } from '@lib/frontend/resource/containers/Resources/Resources.models';
-import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
+import type { WithTestIdModel } from '@lib/frontend/test/test.models';
 import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
 export interface ResourcePropsModel extends WithTestIdModel {}

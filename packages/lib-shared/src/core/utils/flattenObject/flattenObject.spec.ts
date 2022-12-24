@@ -1,5 +1,5 @@
 import { flattenObject } from '@lib/shared/core/utils/flattenObject/flattenObject';
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ target: () => flattenObject });
 

@@ -1,4 +1,4 @@
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { copy } from '@tool/task/file/utils/copy/copy';
 
 jest.mock('fs');

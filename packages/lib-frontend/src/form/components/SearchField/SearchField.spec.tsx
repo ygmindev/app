@@ -1,7 +1,7 @@
 import { SearchField } from '@lib/frontend/form/components/SearchField/SearchField';
 import type { SearchFieldPropsModel } from '@lib/frontend/form/components/SearchField/SearchField.models';
-import { render } from '@lib/frontend/testing/utils/render/render';
-import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<SearchFieldPropsModel>({
   target: SearchField,

@@ -1,7 +1,7 @@
 import type { WithChildrenPropsModel } from '@lib/frontend/core/decorators/withChildrenProps/withChildrenProps.models';
 import type { WithStyleParamsModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
 import type { PartialModel } from '@lib/shared/core/core.models';
-import type { WithTestParamsModel } from '@lib/shared/testing/utils/withTest/withTest.models';
+import type { WithTestParamsModel } from '@lib/shared/test/utils/withTest/withTest.models';
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ComponentType } from 'react';
 

@@ -1,5 +1,5 @@
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { cloneDeep, pick } from 'lodash';
 
 const { displayName } = withTest({ target: () => cleanObject });

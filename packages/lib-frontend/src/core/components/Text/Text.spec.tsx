@@ -1,7 +1,7 @@
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import type { TextPropsModel } from '@lib/frontend/core/components/Text/Text.models';
-import { render } from '@lib/frontend/testing/utils/render/render';
-import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<TextPropsModel>({ target: Text });
 
@@ -20,8 +20,8 @@ describe(displayName, () => {
 
   test('works with function children', async () => {
     const { queryByText } = render(
-      <Component>{({ t }) => t('testing:labels.testingWithString')}</Component>,
+      <Component>{({ t }) => t('test:labels.testWithString')}</Component>,
     );
-    expect(queryByText('testing with string')).toBeTruthy();
+    expect(queryByText('test with string')).toBeTruthy();
   });
 });

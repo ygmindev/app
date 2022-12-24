@@ -1,7 +1,7 @@
 import type { ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
 import type { WithStyleParamsModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
+import type { WithTestIdModel } from '@lib/frontend/test/test.models';
 import type { ForwardRefExoticComponent, ReactElement, RefObject } from 'react';
 import { createElement, forwardRef } from 'react';
 import { unstable_createElement } from 'react-native-web';

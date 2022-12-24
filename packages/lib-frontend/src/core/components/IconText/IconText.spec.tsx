@@ -1,7 +1,7 @@
 import { IconText } from '@lib/frontend/core/components/IconText/IconText';
 import type { IconTextPropsModel } from '@lib/frontend/core/components/IconText/IconText.models';
-import { render } from '@lib/frontend/testing/utils/render/render';
-import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<IconTextPropsModel>({
   target: IconText,

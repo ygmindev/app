@@ -1,9 +1,9 @@
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import type { ModalPropsModel } from '@lib/frontend/core/components/Modal/Modal.models';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
-import { render } from '@lib/frontend/testing/utils/render/render';
-import { waitForExpect } from '@lib/frontend/testing/utils/waitForExpect/waitForExpect';
-import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { waitForExpect } from '@lib/frontend/test/utils/waitForExpect/waitForExpect';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const CHILDREN = 'CHILDREN';
 

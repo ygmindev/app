@@ -6,8 +6,8 @@ import {
 } from '@lib/shared/auth/resources/Access/Access.constants';
 import type { AccessFormModel } from '@lib/shared/auth/resources/Access/Access.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
-import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/testing/resources/DummyEntityResource/DummyEntityResource.constants';
-import type { DummyEntityResourceFormModel } from '@lib/shared/testing/resources/DummyEntityResource/DummyEntityResource.models';
+import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
+import type { DummyEntityResourceFormModel } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.models';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import type { UserFormModel } from '@lib/shared/user/resources/User/User.models';
 

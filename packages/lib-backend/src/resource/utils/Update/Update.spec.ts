@@ -1,6 +1,6 @@
 import { Update } from '@lib/backend/resource/utils/Update/Update';
-import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/testing/resources/DummyEntityResource/DummyEntityResource.constants';
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ target: () => Update });
 

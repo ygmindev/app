@@ -6,7 +6,7 @@ const { Story, meta } = withStory<ErrorTooltipPropsModel>({
   defaultProps: { error: 'error' },
   displayName: 'ErrorTooltip',
   target: ErrorTooltip,
-  variants: [{ props: { error: ({ t }) => t('testing:labels.testingWithString') } }],
+  variants: [{ props: { error: ({ t }) => t('test:labels.testWithString') } }],
 });
 
 export default meta;

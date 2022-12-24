@@ -1,11 +1,11 @@
 import { Resources } from '@lib/frontend/resource/containers/Resources/Resources';
 import type { ResourcesPropsModel } from '@lib/frontend/resource/containers/Resources/Resources.models';
-import { render } from '@lib/frontend/testing/utils/render/render';
-import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 import type {
   DummyEntityResourceFormModel,
   DummyEntityResourceModel,
-} from '@lib/shared/testing/resources/DummyEntityResource/DummyEntityResource.models';
+} from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.models';
 
 const { Component, displayName, testID } = withTestComponent<
   ResourcesPropsModel<DummyEntityResourceModel, DummyEntityResourceFormModel>

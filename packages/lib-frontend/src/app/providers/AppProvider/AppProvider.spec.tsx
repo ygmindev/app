@@ -1,7 +1,7 @@
 import { AppProvider } from '@lib/frontend/app/providers/AppProvider/AppProvider';
 import type { AppProviderPropsModel } from '@lib/frontend/app/providers/AppProvider/AppProvider.models';
-import { render } from '@lib/frontend/testing/utils/render/render';
-import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<AppProviderPropsModel>({
   target: AppProvider,

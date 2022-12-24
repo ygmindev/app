@@ -3,4 +3,4 @@ import type { RouteComponentModel } from '@lib/frontend/route/containers/Router/
 
 export type NavigationTypeModel = `${NAVIGATION_TYPE}`;
 
-export interface PagePropsModel extends RouteComponentModel {}
+export interface PageModel extends RouteComponentModel {}

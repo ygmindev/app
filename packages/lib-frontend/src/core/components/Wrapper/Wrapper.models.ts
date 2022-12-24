@@ -5,7 +5,7 @@ import type { WithForwardedRefPropsModel } from '@lib/frontend/core/decorators/w
 import type { MeasureModel, PositionModel } from '@lib/frontend/core/utils/measure/measure.models';
 import type { SpacingModel } from '@lib/frontend/style/utils/styler/spacingStyler/spacingStyler.models';
 import type { ViewStylerParamsModel } from '@lib/frontend/style/utils/styler/viewStyler/viewStyler.models';
-import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
+import type { WithTestIdModel } from '@lib/frontend/test/test.models';
 
 export interface WrapperPropsModel
   extends WithChildrenPropsModel,

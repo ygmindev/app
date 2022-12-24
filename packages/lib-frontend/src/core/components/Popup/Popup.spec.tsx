@@ -4,8 +4,8 @@ import type {
   PopupRefModel,
 } from '@lib/frontend/core/components/Popup/Popup.models';
 import { display } from '@lib/frontend/core/utils/display/display';
-import { render } from '@lib/frontend/testing/utils/render/render';
-import { withTestComponent } from '@lib/frontend/testing/utils/withTestComponent/withTestComponent';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 import { createRef } from 'react';
 
 const URL = 'URL';

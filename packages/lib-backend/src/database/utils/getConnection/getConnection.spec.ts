@@ -2,8 +2,8 @@ import { getConnection } from '@lib/backend/database/utils/getConnection/getConn
 import type {
   DummyEntityResourceFormModel,
   DummyEntityResourceModel,
-} from '@lib/shared/testing/resources/DummyEntityResource/DummyEntityResource.models';
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+} from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.models';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { filter as _filter, map } from 'lodash';
 
 const { displayName } = withTest({ target: () => getConnection });

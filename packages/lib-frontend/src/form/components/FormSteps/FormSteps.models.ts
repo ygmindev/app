@@ -1,6 +1,6 @@
 import type { WithSubmitPropsModel } from '@lib/frontend/form/decorators/withSubmitProps/withSubmitProps.models';
 import type { WithStyleParamsModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
-import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
+import type { WithTestIdModel } from '@lib/frontend/test/test.models';
 import type { CallableModel, MergeArrayModel, PartialModel } from '@lib/shared/core/core.models';
 import type { ReactElement } from 'react';
 

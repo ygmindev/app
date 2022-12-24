@@ -1,6 +1,6 @@
 import { Access } from '@lib/backend/auth/resources/Access/Access';
 import { Otp } from '@lib/backend/auth/resources/Otp/Otp';
-import { DummyEntityResource } from '@lib/backend/testing/resources/DummyEntityResource/DummyEntityResource';
+import { DummyEntityResource } from '@lib/backend/test/resources/DummyEntityResource/DummyEntityResource';
 import { User } from '@lib/backend/user/resources/User/User';
 import { DATABASE_TYPE } from '@lib/config/database/database.constants';
 import type { DatabaseConfigParamsModel } from '@lib/config/database/database.models';

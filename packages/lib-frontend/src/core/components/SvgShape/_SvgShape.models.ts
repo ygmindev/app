@@ -1,7 +1,7 @@
 import type { SVG_SHAPE } from '@lib/frontend/core/components/SvgShape/SvgShape.constants';
 import type { PositionModel } from '@lib/frontend/core/utils/measure/measure.models';
 import type { ShapeStylerParamsModel } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.models';
-import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
+import type { WithTestIdModel } from '@lib/frontend/test/test.models';
 import type { PartialModel } from '@lib/shared/core/core.models';
 
 export type _SvgShapePropsModel = WithTestIdModel &

@@ -1,6 +1,6 @@
 import { children } from '@lib/backend/file/utils/children/children';
 import { FS_FIXTURE } from '@lib/config/node/test/configs/__mocks__/fs/fs.fixtures';
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { keys } from 'lodash';
 
 jest.mock('fs');

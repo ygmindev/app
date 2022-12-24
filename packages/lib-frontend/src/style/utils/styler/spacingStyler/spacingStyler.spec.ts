@@ -1,5 +1,5 @@
 import { spacingStyler } from '@lib/frontend/style/utils/styler/spacingStyler/spacingStyler';
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ target: () => spacingStyler });
 

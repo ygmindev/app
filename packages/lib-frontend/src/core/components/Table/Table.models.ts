@@ -5,7 +5,7 @@ import type {
   TABLE_SELECT_TYPE,
 } from '@lib/frontend/core/components/Table/Table.constants';
 import type { TranslationTextModel } from '@lib/frontend/locale/locale.models';
-import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
+import type { WithTestIdModel } from '@lib/frontend/test/test.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 import type { ReactNode } from 'react';
 

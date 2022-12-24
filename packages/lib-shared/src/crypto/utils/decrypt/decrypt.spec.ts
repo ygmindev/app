@@ -1,6 +1,6 @@
 import { decrypt } from '@lib/shared/crypto/utils/decrypt/decrypt';
 import { encrypt } from '@lib/shared/crypto/utils/encrypt/encrypt';
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ target: () => encrypt });
 

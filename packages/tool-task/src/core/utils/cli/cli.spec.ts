@@ -1,4 +1,4 @@
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { cli } from '@tool/task/core/utils/cli/cli';
 
 const { displayName } = withTest({ target: () => cli });

@@ -1,5 +1,5 @@
 import { validateRange } from '@lib/frontend/form/utils/validateRange/validateRange';
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ target: () => validateRange });
 

@@ -8,7 +8,7 @@ import type { WithSubmitPropsModel } from '@lib/frontend/form/decorators/withSub
 import type { UseFormParamsModel } from '@lib/frontend/form/hooks/useForm/useForm.models';
 import type { TranslationTextModel } from '@lib/frontend/locale/locale.models';
 import type { WithStyleParamsModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
-import type { WithTestIdModel } from '@lib/frontend/testing/testing.models';
+import type { WithTestIdModel } from '@lib/frontend/test/test.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
 import type { FieldTypeModel } from '@lib/shared/form/form.models';
 import type { ReactElement, ReactNode } from 'react';

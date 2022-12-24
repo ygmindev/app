@@ -2,9 +2,9 @@ import { BILLING, PAYMENT_METHODS } from '@lib/frontend/billing/billing.constant
 import { PaymentMethods } from '@lib/frontend/billing/containers/PaymentMethods/PaymentMethods';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { REDIRECT } from '@lib/frontend/core/core.constants';
-import type { PagePropsModel } from '@lib/frontend/route/components/Page/Page.models';
+import type { PageModel } from '@lib/frontend/route/components/Page/Page.models';
 
-export const billingRoutes: Array<PagePropsModel> = [
+export const billingRoutes: Array<PageModel> = [
   {
     pathname: BILLING,
     routes: [

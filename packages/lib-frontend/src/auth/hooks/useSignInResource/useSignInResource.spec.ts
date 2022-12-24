@@ -1,6 +1,6 @@
 import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
-import { renderHook } from '@lib/frontend/testing/utils/renderHook/renderHook';
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { renderHook } from '@lib/frontend/test/utils/renderHook/renderHook';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ target: () => useSignInResource });
 

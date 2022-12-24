@@ -3,7 +3,7 @@ import { DatabaseMain } from '@lib/backend/database/utils/DatabaseMain/DatabaseM
 import { mail } from '@lib/backend/mail/utils/mail/mail';
 import { OTP_RESOURCE_NAME } from '@lib/shared/auth/resources/Otp/Otp.constants';
 import { Container } from '@lib/shared/core/utils/Container/Container';
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { USER_FIXTURE } from '@lib/shared/user/resources/User/User.fixtures';
 
 const { displayName } = withTest({ target: () => OtpService });

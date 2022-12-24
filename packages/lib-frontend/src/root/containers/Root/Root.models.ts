@@ -1,6 +1,6 @@
 import type { WithChildrenPropsModel } from '@lib/frontend/core/decorators/withChildrenProps/withChildrenProps.models';
-import type { RootStateModel } from '@lib/frontend/root/stores/rootStore.models';
+import type { InitialStateModel } from '@lib/shared/root/root.models';
 
 export interface RootPropsModel extends WithChildrenPropsModel {
-  initialState?: RootStateModel;
+  initialState?: InitialStateModel;
 }

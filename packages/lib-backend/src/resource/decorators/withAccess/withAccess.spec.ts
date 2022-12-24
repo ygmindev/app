@@ -1,6 +1,6 @@
 import { getAccessRole, withAccess } from '@lib/backend/resource/decorators/withAccess/withAccess';
 import { ACCESS_LEVEL, ACCESS_ROLE } from '@lib/shared/auth/resources/Access/Access.constants';
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ target: () => withAccess });
 

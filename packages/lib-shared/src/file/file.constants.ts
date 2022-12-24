@@ -13,7 +13,7 @@ export const EXTENSIONS_NATIVE = _permuteExtensions(['.native', '.ios', '.androi
 
 export const EXTENSIONS_TEST = _permuteExtensions(['.e2e', '.spec'], EXTENSIONS_JS);
 
-export const PACKAGE_PREFIXES: Array<string> = ['app', 'asset', 'lib', 'server', 'tool'];
+export const PACKAGE_PREFIXES: Array<string> = ['app', 'lib', 'server', 'tool'];
 
 export const CLEAN_PATTERNS = [
   '**/.cache',

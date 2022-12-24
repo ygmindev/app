@@ -1,9 +1,12 @@
+import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
+import { packages } from '@lib/backend/file/utils/packages/packages';
 import type { _LintConfigParamsModel } from '@lib/config/node/lint/_lint.models';
 import type { Linter } from 'eslint';
 
 export const _lintConfig = ({
   include,
   indentWidth,
+  isNoUnused,
   isParenthesis,
   isSameLine,
   isSingleQuote,
@@ -51,6 +54,9 @@ export const _lintConfig = ({
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     'import/no-extraneous-dependencies': ['error', { packageDir: roots }],
+    'import/no-unused-modules': isNoUnused
+      ? ['warn', { src: packages.map((pkg) => fromPackages(pkg, 'src')), unusedExports: true }]
+      : 'off',
     'no-unused-vars': 'off',
     'prefer-destructuring': 'error',
     'prettier/prettier': [

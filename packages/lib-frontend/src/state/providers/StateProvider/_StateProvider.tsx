@@ -1,29 +1,51 @@
 import type { _StateProviderPropsModel } from '@lib/frontend/state/providers/StateProvider/_StateProvider.models';
 import type { ActionsModel } from '@lib/frontend/state/state.models';
 import type {
+  CaseReducerActions,
   Draft,
   PreloadedState,
   SliceCaseReducers,
   ValidateSliceCaseReducers,
 } from '@reduxjs/toolkit';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-import { reduce } from 'lodash';
+import { mapValues, reduce } from 'lodash';
 import type { ReactElement } from 'react';
 import { useMemo } from 'react';
 import { Provider, useDispatch } from 'react-redux';
+
+const _ActionProvider = <
+  TType extends Record<TKeys[number], object>,
+  TParams extends Record<TKeys[number], object>,
+  TKeys extends Array<string>,
+>({
+  actionContext,
+  actions,
+  children,
+}: Pick<_StateProviderPropsModel<TType, TParams, TKeys>, 'actionContext' | 'children'> & {
+  actions: {
+    [TKey in TKeys[number]]: CaseReducerActions<SliceCaseReducers<TType[TKeys[number]]>, TKey>;
+  };
+}): ReactElement => {
+  const dispatch = useDispatch();
+  const _actions = mapValues(actions, (actions) =>
+    mapValues(actions, (action) => (value: unknown) => dispatch(action(value))),
+  ) as {
+    [TKey in keyof TParams]: ActionsModel<TParams[TKey]>;
+  };
+  return <actionContext.Provider value={_actions}>{children}</actionContext.Provider>;
+};
 
 export const _StateProvider = <
   TType extends Record<TKeys[number], object>,
   TParams extends Record<TKeys[number], object>,
   TKeys extends Array<string>,
 >({
+  actionContext,
   children,
   value,
 }: _StateProviderPropsModel<TType, TParams, TKeys>): ReactElement<
   _StateProviderPropsModel<TType, TParams, TKeys>
 > => {
-  const dispatch = useDispatch();
-
   const { actions, store } = useMemo(() => {
     const { actions, reducers } = reduce(
       value?.reducers,
@@ -61,20 +83,16 @@ export const _StateProvider = <
         });
         return {
           ...result,
-          actions: {
-            ...result.actions,
-            [name]: reduce(
-              slice.actions,
-              (result, v, k) => ({ ...result, [k]: (value: unknown) => dispatch(v(value)) }),
-              {},
-            ),
-          },
-          reducers: { ...result.actions, [name]: slice.reducer },
+          actions: { ...result.actions, [name]: slice.actions },
+          reducers: { ...result.reducers, [name]: slice.reducer },
         };
       },
       {
         actions: {} as {
-          [TKey in keyof TParams]: ActionsModel<TParams[TKey]>;
+          [TKey in TKeys[number]]: CaseReducerActions<
+            SliceCaseReducers<TType[TKeys[number]]>,
+            TKey
+          >;
         },
         reducers: {},
       },
@@ -91,9 +109,11 @@ export const _StateProvider = <
 
   return (
     <Provider store={store}>
-      {value && (
-        <value.ActionContext.Provider value={actions}>{children}</value.ActionContext.Provider>
-      )}
+      <_ActionProvider
+        actionContext={actionContext}
+        actions={actions}>
+        {children}
+      </_ActionProvider>
     </Provider>
   );
 };

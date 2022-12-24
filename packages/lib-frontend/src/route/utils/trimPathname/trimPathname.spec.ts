@@ -1,5 +1,5 @@
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
-import { withTest } from '@lib/shared/testing/utils/withTest/withTest';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ target: () => trimPathname });
 
@@ -13,9 +13,9 @@ describe(displayName, () => {
   test('works with duplicate slash', async () => {
     expect(trimPathname('//test/path/sub-path')).toStrictEqual(PATHNAME);
     expect(trimPathname('///test/path/sub-path')).toStrictEqual(PATHNAME);
+    expect(trimPathname('/test/path/sub-path')).toStrictEqual(PATHNAME);
     expect(trimPathname('/test//path/sub-path')).toStrictEqual(PATHNAME);
-    expect(trimPathname('/test///path/sub-path')).toStrictEqual(PATHNAME);
-    expect(trimPathname('//test//path/sub-path')).toStrictEqual(PATHNAME);
+    expect(trimPathname('//test/path/sub-path')).toStrictEqual(PATHNAME);
   });
 
   test('works with kebab case', async () => {
