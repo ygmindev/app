@@ -23,7 +23,6 @@ export const bundleConfig = _bundleConfig({
           ? {
               ...result,
               [`process.env.${k}`]: JSON.stringify(v),
-              [`import.meta.env.${k}`]: JSON.stringify(v),
             }
           : result,
       {},

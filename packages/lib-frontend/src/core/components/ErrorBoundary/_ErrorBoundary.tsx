@@ -4,7 +4,7 @@ import type { ErrorBoundaryProps, FallbackProps } from 'react-error-boundary';
 import { ErrorBoundary } from 'react-error-boundary';
 
 export const _ErrorBoundary = composeComponent<_ErrorBoundaryPropsModel, ErrorBoundaryProps>({
-  Component: ErrorBoundary,
+  getComponent: ErrorBoundary,
   getProps: ({ Fallback, children, onError }) => ({
     FallbackComponent: <TError extends Error = Error>({
       error,

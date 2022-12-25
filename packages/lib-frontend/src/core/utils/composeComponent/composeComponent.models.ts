@@ -1,9 +1,9 @@
 import type { UseStylesParamsModel } from '@lib/frontend/style/hooks/useStyles/useStyles.models';
-import type { ComponentClass, ForwardedRef, FunctionComponent, RefObject } from 'react';
+import type { ComponentType, ForwardedRef, RefObject } from 'react';
 
-export interface ComposeComponentParamsModel<TParams, TResult, TRef = unknown>
-  extends Pick<UseStylesParamsModel<TParams>, 'stylers'> {
-  Component: FunctionComponent<TResult> | ComponentClass<TResult> | string;
-  getProps?: (props: TParams, ref?: ForwardedRef<RefObject<TRef>>) => TResult;
+export interface ComposeComponentParamsModel<TProps, TResult, TRef = unknown>
+  extends Pick<UseStylesParamsModel<TProps>, 'stylers'> {
+  getComponent(props: TProps): ComponentType<TResult> | string;
+  getProps?(props: TProps, ref?: ForwardedRef<RefObject<TRef>>): TResult;
   isWeb?: boolean;
 }

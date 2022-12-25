@@ -38,9 +38,9 @@ export const themeCommonConfig: PartialDeepModel<ThemeConfigParamsModel> = {
   font: {
     boldWeight: '500',
 
-    // family: import.meta.env.APP_WEB
+    // family: process.env.APP_WEB
     //   ? 'Lato, "Helvetica Neue", Arial, sans-serif'
-    //   : import.meta.env.APP_NATIVE
+    //   : process.env.APP_NATIVE
     //   ? 'Helvetica Neue'
     //   : undefined,
     family: 'Lato, "Helvetica Neue", Arial, sans-serif',
@@ -57,7 +57,7 @@ export const themeCommonConfig: PartialDeepModel<ThemeConfigParamsModel> = {
       xs: 8,
     },
 
-    // stylish: import.meta.env.APP_WEB ? 'Merriweather, Georgia, Serif' : undefined,
+    // stylish: process.env.APP_WEB ? 'Merriweather, Georgia, Serif' : undefined,
     stylish: 'Merriweather, Georgia, Serif',
   },
 

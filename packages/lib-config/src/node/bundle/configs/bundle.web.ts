@@ -2,12 +2,12 @@ import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { BUNDLE_TARGET } from '@lib/config/node/bundle/bundle.constants';
 import type { BundleConfigParamsModel } from '@lib/config/node/bundle/bundle.models';
 import { bundleConfig as bundleConfigFrontend } from '@lib/config/node/bundle/configs/bundle.frontend';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { EXTENSIONS_WEB } from '@lib/shared/file/file.constants';
+import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
 export const bundleConfig: BundleConfigParamsModel = merge({
   strategy: MERGE_STRATEGY.DEEP_PREPEND,
@@ -26,7 +26,7 @@ export const bundleConfig: BundleConfigParamsModel = merge({
 
       extensions: EXTENSIONS_WEB,
 
-      target: BUNDLE_TARGET.BROWSER,
+      platform: PLATFORM.WEB,
     },
 
     bundleConfigFrontend,

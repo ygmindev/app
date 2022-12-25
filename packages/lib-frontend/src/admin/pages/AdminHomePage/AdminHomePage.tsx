@@ -1,4 +1,4 @@
-import { Text } from '@lib/frontend/core/components/Text/Text';
+import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { FCModel, PagePropsModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
@@ -12,7 +12,7 @@ export const AdminHomePage: FCModel<PagePropsModel> = ({ initialState, testID })
       <Wrapper
         grow
         testID={testID}>
-        <Text>{t('core:labels.submit')}</Text>
+        <Button>{t('core:labels.submit')}</Button>
       </Wrapper>
     </Root>
   );

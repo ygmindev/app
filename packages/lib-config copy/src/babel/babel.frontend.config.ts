@@ -13,6 +13,7 @@ export const babelConfig: TransformOptions = merge({
           require.resolve('react-refresh/babel'),
           { skipEnvCheck: true },
         ],
+        // 'react-native-reanimated/plugin',
       ].filter(Boolean) as unknown as Array<PluginItem>,
 
       presets: [

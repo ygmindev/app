@@ -1,16 +1,15 @@
+import type { AnimatablePropsModel } from '@lib/frontend/animation/animation.models';
 import type { _AnimatableComponentPropsModel } from '@lib/frontend/animation/components/Animatable/_Animatable.models';
-import type { AnimatablePropsModel } from '@lib/frontend/animation/components/Animatable/Animatable.models';
 import type { _AnimatableParamsModel } from '@lib/frontend/animation/utils/animatable/_animatable.models';
-import type { SFCModel } from '@lib/frontend/core/core.models';
-import type { StyleModel } from '@lib/frontend/style/style.models';
+import type { FCModel } from '@lib/frontend/core/core.models';
 import { motify } from 'moti';
 import type { ComponentType } from 'react';
 import { createElement } from 'react';
 
-export const _animatable = <TProps extends { style?: StyleModel }>({
+export const _animatable = <TProps,>({
   Component,
-}: _AnimatableParamsModel<TProps>): SFCModel<AnimatablePropsModel & TProps> => {
-  const _Component: SFCModel<AnimatablePropsModel & TProps> = ({
+}: _AnimatableParamsModel<TProps>): FCModel<TProps & AnimatablePropsModel> => {
+  const _Component: FCModel<TProps & AnimatablePropsModel> = ({
     delay,
     duration,
     from,
@@ -21,7 +20,9 @@ export const _animatable = <TProps extends { style?: StyleModel }>({
     to,
   }) =>
     createElement(
-      motify(Component) as unknown as ComponentType<_AnimatableComponentPropsModel>,
+      motify(
+        Component as ComponentType<TProps & AnimatablePropsModel>,
+      ) as unknown as ComponentType<_AnimatableComponentPropsModel>,
       {
         animate: to,
         from,

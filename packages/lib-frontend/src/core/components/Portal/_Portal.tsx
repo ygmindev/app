@@ -5,6 +5,6 @@ import type { ComponentType } from 'react';
 import { Portal } from 'react-native-paper';
 
 export const _Portal = composeComponent<_PortalPropsModel, WithChildrenPropsModel>({
-  Component: Portal as ComponentType<WithChildrenPropsModel>,
+  getComponent: Portal as ComponentType<WithChildrenPropsModel>,
   getProps: ({ children }) => ({ children }),
 });

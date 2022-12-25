@@ -1,42 +1,34 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import { bundleConfig } from '@lib/config/node/bundle/configs/bundle.base';
 import type { TestConfigParamsModel } from '@lib/config/node/test/test.models';
+import { merge } from '@lib/shared/core/utils/merge/merge';
 import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
 import { EXTENSIONS_JS, EXTENSIONS_TEST } from '@lib/shared/file/file.constants';
-import { cleanup } from '@lib/shared/setup/utils/cleanup/cleanup';
-import { initialize } from '@lib/shared/setup/utils/initialize/initialize';
+import { pick } from 'lodash';
 
-export const testConfig: TestConfigParamsModel = {
-  cachePath: fromWorking('.cache/test'),
+export const testConfig: TestConfigParamsModel = merge<TestConfigParamsModel>({
+  values: [
+    pick(bundleConfig, ['aliases', 'define', 'externals', 'platform']),
 
-  cleanup: async () => {
-    await cleanup();
-  },
+    {
+      cachePath: fromWorking('.cache/test'),
 
-  coverageOutputPath: fromWorking('coverage'),
+      coverageOutputPath: fromWorking('coverage'),
 
-  extensions: EXTENSIONS_TEST,
+      extensions: EXTENSIONS_TEST,
 
-  fileExtensions: ['gif', 'jpeg', 'jpg', 'otf', 'png', 'svg', 'ttf', 'woff', 'woff2'],
+      fileExtensions: ['gif', 'jpeg', 'jpg', 'otf', 'png', 'svg', 'ttf', 'woff', 'woff2'],
 
-  initialize: {
-    mocks: {
-      '@lib/backend/file/utils/fromRoot/fromRoot': () => ({ fromRoot: () => '/' }),
-      '@lib/backend/file/utils/fromWorking/fromWorking': () => ({ fromWorking: () => '/' }),
+      match: getEnv('TEST_MATCH', '*'),
+
+      mockPath: fromConfig('node/test/configs/__mocks__'),
+
+      resolveExtensions: EXTENSIONS_JS,
+
+      root: fromWorking(),
+
+      timeout: 30e3,
     },
-
-    onBeforeAll: async () => {
-      await initialize();
-    },
-  },
-
-  match: getEnv('TEST_MATCH', '*'),
-
-  mockPath: fromConfig('node/test/configs/__mocks__'),
-
-  resolveExtensions: EXTENSIONS_JS,
-
-  root: fromWorking(),
-
-  timeout: 30e3,
-};
+  ],
+});

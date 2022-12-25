@@ -1,4 +1,5 @@
 import type { _UseSessionModel } from '@lib/frontend/auth/hooks/useSession/_useSession.models';
+import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
 import type { SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
@@ -30,7 +31,7 @@ export const _useSession = (): _UseSessionModel => ({
   },
 
   initialize: async (onAuth): Promise<void> => {
-    if (!import.meta.env.SSR && !getApps().length) {
+    if (!isSsr && !getApps().length) {
       initializeApp({
         apiKey: APP_FIREBASE_API_KEY,
         appId: APP_FIREBASE_APP_ID,

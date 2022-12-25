@@ -4,19 +4,23 @@ import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import type { _TestConfigParamsModel } from '@lib/config/node/test/_test.models';
 import { compilerOptions } from '@lib/config/node/typescript/tsconfig.paths.json';
-import { reduce, trim, trimStart } from 'lodash';
+import { PLATFORM } from '@lib/shared/platform/platform.constants';
+import { mapValues, reduce, trim, trimStart } from 'lodash';
 import { join } from 'path';
 import { pathsToModuleNameMapper } from 'ts-jest';
 
 export const _testConfig = ({
+  aliases,
   cachePath,
   coverageOutputPath,
+  define,
   extensions,
   externals,
   fileExtensions,
   isWatch,
   match,
   mockPath,
+  platform,
   resolveExtensions,
   root,
   timeout,
@@ -29,13 +33,16 @@ export const _testConfig = ({
 
   coverageReporters: ['lcov'],
 
-  globalTeardown: fromConfig('node/test/_cleanup.ts'),
+  globalTeardown: fromConfig('node/test/configs/cleanup.js'),
+
+  globals: define,
 
   maxWorkers: -1,
 
   moduleFileExtensions: resolveExtensions.map((ext) => trimStart(ext, '.')),
 
   moduleNameMapper: {
+    ...mapValues(aliases, (v) => `^${v}$`),
     ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: fromRoot() }),
     [`\\.(${fileExtensions.join('|')})$`]: join(mockPath, 'file'),
   },
@@ -60,9 +67,9 @@ export const _testConfig = ({
 
   roots: ['<rootDir>', fromConfig('node/test')],
 
-  setupFilesAfterEnv: [fromConfig('node/test/_initialize.ts')],
+  setupFilesAfterEnv: [fromConfig(`node/test/configs/initialize.${platform}.ts`)],
 
-  testEnvironment: 'node',
+  testEnvironment: platform === PLATFORM.WEB ? 'jsdom' : 'node',
 
   testMatch: reduce(
     extensions,

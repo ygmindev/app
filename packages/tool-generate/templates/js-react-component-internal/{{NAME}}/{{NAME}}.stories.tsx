@@ -8,4 +8,4 @@ const { Story, meta } = withStory<{{NAME}}PropsModel>({
   variants: [],
 });
 
-export { Default, meta as default };
+export { Story, meta as default };

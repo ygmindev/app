@@ -1,10 +1,10 @@
 import type { _BundleConfigParamsModel } from '@lib/config/node/bundle/_bundle.models';
-import { BUNDLE_TARGET } from '@lib/config/node/bundle/bundle.constants';
+import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { esbuildCommonjs, viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
-import type { Plugin } from 'esbuild';
 import copyPlugin from 'rollup-plugin-copy';
-import type { UserConfig } from 'vite';
+import type { PluginOption, UserConfig } from 'vite';
+import type { Plugin } from 'vite/node_modules/esbuild';
 
 export const _bundleConfig = ({
   aliases,
@@ -15,7 +15,7 @@ export const _bundleConfig = ({
   extensions,
   externals,
   mode,
-  target,
+  platform,
 }: _BundleConfigParamsModel): UserConfig => ({
   build: {
     commonjsOptions: {
@@ -41,13 +41,15 @@ export const _bundleConfig = ({
 
   plugins: [
     viteCommonjs(),
-    target === BUNDLE_TARGET.BROWSER && vanillaExtractPlugin(),
+
+    platform === PLATFORM.WEB && vanillaExtractPlugin(),
+
     copy &&
       copyPlugin({
         hook: 'buildStart',
         targets: copy.map(({ from, to }) => ({ dest: to, src: from })),
       }),
-  ].filter(Boolean),
+  ].filter(Boolean) as Array<PluginOption>,
 
   resolve: {
     alias: aliases,

@@ -1,6 +1,8 @@
-let isEnabled = !import.meta.env.SSR && process.env.NODE_ENV === 'test';
+import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
 
-if (!import.meta.env.SSR) {
+let isEnabled = !isSsr && process.env.NODE_ENV === 'test';
+
+if (!isSsr) {
   const HOVER_THRESHOLD_MS = 1000;
   let lastTouchTimestamp = 0;
 

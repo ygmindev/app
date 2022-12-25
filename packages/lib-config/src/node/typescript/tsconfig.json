@@ -12,7 +12,7 @@
     "importHelpers": true,
     "incremental": true,
     "inlineSourceMap": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "jsx": "react-jsx",
     "lib": ["esnext", "esnext.asynciterable", "dom", "dom.iterable"],
     "module": "esnext",

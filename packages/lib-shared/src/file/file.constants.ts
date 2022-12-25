@@ -34,8 +34,8 @@ export const EXCLUDE_PATTERNS = [
 
 export const TRANSPILE_GLOBS = [
   '@expo',
+  '@react-native*',
   'moti',
-  'react-native',
   'react-native-!(codegen|gradle-plugin)',
-  'nanostores',
+  'react-native',
 ];

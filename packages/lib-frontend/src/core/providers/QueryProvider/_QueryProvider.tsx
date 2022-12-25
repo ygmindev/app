@@ -1,5 +1,6 @@
 import type { _QueryProviderPropsModel } from '@lib/frontend/core/providers/QueryProvider/_QueryProvider.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
+import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
 import type { QueryClientProviderProps } from '@tanstack/react-query';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { persistQueryClient } from '@tanstack/react-query-persist-client';
@@ -21,7 +22,7 @@ const queryClient = new QueryClient({
   },
 });
 
-if (!import.meta.env.SSR) {
+if (!isSsr) {
   const AsyncStorage = (await import('@react-native-async-storage/async-storage')).default;
   const { createAsyncStoragePersister } = await import('@tanstack/query-async-storage-persister');
   const persister = createAsyncStoragePersister({ storage: AsyncStorage });
@@ -36,6 +37,6 @@ if (!import.meta.env.SSR) {
 }
 
 export const _QueryProvider = composeComponent<_QueryProviderPropsModel, QueryClientProviderProps>({
-  Component: QueryClientProvider,
+  getComponent: QueryClientProvider,
   getProps: ({ children }) => ({ children, client: queryClient }),
 });

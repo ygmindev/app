@@ -6,7 +6,7 @@ import type { TransProps } from 'react-i18next';
 import { Trans } from 'react-i18next';
 
 export const _Trans = composeComponent<_TransPropsModel<unknown>, TransProps<string, string>>({
-  Component: Trans,
+  getComponent: Trans,
   getProps: ({ Components, i18nKey, ns, params, style, ...props }) => ({
     ...props,
     components: Components,

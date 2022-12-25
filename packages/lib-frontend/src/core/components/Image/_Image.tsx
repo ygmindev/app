@@ -4,7 +4,7 @@ import type { ImageProps } from 'react-native';
 import { Image as NativeImage } from 'react-native';
 
 export const _Image = composeComponent<_ImagePropsModel, ImageProps>({
-  Component: NativeImage,
+  getComponent: NativeImage,
   getProps: ({ onError, onSuccess, src, testID }) => ({
     onError: () => {
       onError && onError();

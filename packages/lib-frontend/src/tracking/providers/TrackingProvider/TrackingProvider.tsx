@@ -1,4 +1,5 @@
 import type { SFCModel } from '@lib/frontend/core/core.models';
+import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
 import { useTracking } from '@lib/frontend/tracking/hooks/useTracking/useTracking';
 import type { TrackingProviderPropsModel } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider.models';
 import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
@@ -10,7 +11,7 @@ export const TrackingProvider: SFCModel<TrackingProviderPropsModel> = ({ childre
   const { initialize } = useTracking();
 
   useEffect(() => {
-    if (!import.meta.env.SSR) {
+    if (!isSsr) {
       initialize(APP_AMPLITUDE_API_KEY);
     }
   }, [initialize]);

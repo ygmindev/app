@@ -6,24 +6,25 @@ import type { ForwardRefExoticComponent, ReactElement, RefObject } from 'react';
 import { createElement, forwardRef } from 'react';
 import { unstable_createElement } from 'react-native-web';
 
-export const composeComponent = <TParams, TResult, TRef = unknown>({
-  Component,
+export const composeComponent = <TProps, TResult, TRef = unknown>({
+  getComponent,
   getProps,
   isWeb,
   stylers,
-}: ComposeComponentParamsModel<TParams, TResult, TRef>): ForwardRefExoticComponent<
-  TParams & WithTestIdModel
+}: ComposeComponentParamsModel<TProps, TResult, TRef>): ForwardRefExoticComponent<
+  TProps & WithTestIdModel
 > =>
-  forwardRef<RefObject<TRef>, WithStyleModel & TParams & { nativeID?: string }>(
+  forwardRef<RefObject<TRef>, WithStyleModel & TProps & { nativeID?: string }>(
     (props, ref): ReactElement<TResult> => {
-      const { styles: componentStyles } = useStyles<TParams>({ props, stylers });
+      const { styles: componentStyles } = useStyles<TProps>({ props, stylers });
       const componentProps = getProps ? getProps(props, ref) : (props as unknown as TResult);
       const create = isWeb ? unstable_createElement : createElement;
-      return create(Component, {
+      const _Component = getComponent(props);
+      return create(_Component, {
         ...componentProps,
         nativeid: props.nativeID,
         ref,
         style: componentStyles,
       });
     },
-  ) as ForwardRefExoticComponent<TParams & WithTestIdModel>;
+  ) as ForwardRefExoticComponent<TProps & WithTestIdModel>;

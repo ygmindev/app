@@ -4,7 +4,7 @@ import { Flow } from 'react-native-animated-spinkit';
 import type { SpinnerProps } from 'react-native-animated-spinkit/lib/typescript/SpinnerProps';
 
 export const _Loading = composeComponent<_LoadingPropsModel, SpinnerProps>({
-  Component: Flow,
+  getComponent: Flow,
   getProps: ({ color, size, testID }) => ({
     animating: true,
     color,
