@@ -5,10 +5,10 @@ import type { PlatformModel } from '@lib/shared/platform/platform.models';
 import { get } from 'lodash';
 import { NativeModules } from 'react-native';
 
-const platform = getEnv<PlatformModel>('APP_PLATFORM', PLATFORM.BASE);
+const APP_PLATFORM = getEnv<PlatformModel>('APP_PLATFORM', PLATFORM.BASE);
 
 const locale =
-  (platform === PLATFORM.IOS
+  (APP_PLATFORM === PLATFORM.IOS
     ? get(NativeModules, 'SettingsManager.settings.AppleLocale') ||
       get(NativeModules, 'SettingsManager.settings.AppleLanguages.0')
     : get(NativeModules, 'I18nManager.localeIdentifier')) || internationalizeConfig.languageDefault;

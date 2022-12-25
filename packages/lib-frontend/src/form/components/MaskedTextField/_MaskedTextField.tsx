@@ -18,6 +18,6 @@ const _getProps = (mask: string): TextInputMaskProps => {
 };
 
 export const _MaskedTextField = composeComponent<_MaskedTextFieldPropsModel, TextInputMaskProps>({
-  getComponent: TextInputMask,
+  getComponent: () => TextInputMask,
   getProps: ({ mask, ...props }) => ({ ...props, ..._getProps(mask) }),
 });

@@ -2,7 +2,7 @@ import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { IconText } from '@lib/frontend/core/components/IconText/IconText';
 import type { IconTextPropsModel } from '@lib/frontend/core/components/IconText/IconText.models';
 import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
-import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 
 const { Story, meta } = withStory<IconTextPropsModel>({
   defaultProps: { children: 'text', icon: ICON.person },

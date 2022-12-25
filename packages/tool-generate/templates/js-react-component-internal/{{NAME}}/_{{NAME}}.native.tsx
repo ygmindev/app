@@ -4,6 +4,6 @@ import type { {{NAME}}Props } from '{{NAME}}';
 import { {{NAME}} } from '{{NAME}}';
 
 export const _{{NAME}} = composeComponent<_{{NAME}}PropsModel, {{NAME}}Props>({
-  Component: {{NAME}},
+  getComponent: () => {{NAME}},
   getProps: () => ({}),
 });

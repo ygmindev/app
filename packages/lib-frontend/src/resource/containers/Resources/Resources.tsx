@@ -18,7 +18,7 @@ import type { ResourcesPropsModel } from '@lib/frontend/resource/containers/Reso
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import type { UseResourceMethodFieldsModel } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { THEME_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { RESOURCE, RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import type { ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';

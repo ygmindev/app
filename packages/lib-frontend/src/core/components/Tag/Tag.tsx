@@ -3,12 +3,8 @@ import type { TagPropsModel } from '@lib/frontend/core/components/Tag/Tag.models
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { THEME_COLOR, THEME_RELATIVE_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import {
-  THEME_BASIC_SIZE,
-  THEME_COLOR,
-  THEME_RELATIVE_COLOR,
-} from '@lib/frontend/style/utils/theme/theme.constants';
 
 export const Tag: SFCModel<TagPropsModel> = ({
   children,
@@ -23,7 +19,7 @@ export const Tag: SFCModel<TagPropsModel> = ({
   return (
     <Wrapper
       backgroundColor={color}
-      p={THEME_BASIC_SIZE.SMALL}
+      p={THEME_SIZE.SMALL}
       round
       style={styles}
       testID={testID}>

@@ -1,5 +1,5 @@
 import type { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import type { ThemeSizeModel } from '@lib/frontend/style/utils/theme/theme.models';
+import type { ThemeSizeModel } from '@lib/frontend/style/style.models';
 
 export type FontAlignModel = `${FONT_ALIGN}`;
 

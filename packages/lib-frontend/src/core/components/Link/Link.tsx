@@ -9,7 +9,7 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
-import { THEME_COLOR, THEME_SHADE } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_COLOR, THEME_SHADE } from '@lib/frontend/style/style.constants';
 import { isFunction, isString } from 'lodash';
 import { useState } from 'react';
 

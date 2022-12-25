@@ -1,5 +1,11 @@
 import type { ThemeConfigParamsModel } from '@lib/config/style/theme/theme.models';
+import { THEME_FONT_STYLE } from '@lib/frontend/style/style.constants';
 import type { PartialDeepModel } from '@lib/shared/core/core.models';
+import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
+import { PLATFORM } from '@lib/shared/platform/platform.constants';
+import type { PlatformModel } from '@lib/shared/platform/platform.models';
+
+const APP_PLATFORM = getEnv<PlatformModel>('APP_PLATFORM', PLATFORM.BASE);
 
 export const themeCommonConfig: PartialDeepModel<ThemeConfigParamsModel> = {
   animation: {
@@ -9,45 +15,32 @@ export const themeCommonConfig: PartialDeepModel<ThemeConfigParamsModel> = {
 
   colors: {
     error: {
-      dark: '#aa2e25',
-      light: '#fbc6c2',
       main: '#F44336',
     },
     primary: {
-      dark: '#00003B',
-      light: '#BACFFF',
       main: '#5469d4',
     },
     secondary: {
-      dark: '#696969',
-      light: '#C0C0C0',
       main: '#8c8c8c',
     },
     success: {
-      dark: '#186429',
-      light: '#7ECA8F',
       main: '#28A745',
     },
     warning: {
-      dark: '#D18700',
-      light: '#FFD68A',
       main: '#FFB52E',
     },
   },
 
   font: {
-    boldWeight: '500',
-
-    // family: process.env.APP_WEB
-    //   ? 'Lato, "Helvetica Neue", Arial, sans-serif'
-    //   : process.env.APP_NATIVE
-    //   ? 'Helvetica Neue'
-    //   : undefined,
-    family: 'Lato, "Helvetica Neue", Arial, sans-serif',
+    fontFamily: {
+      [THEME_FONT_STYLE.MAIN]:
+        APP_PLATFORM === PLATFORM.IOS
+          ? 'Helvetica Neue'
+          : 'Lato, "Helvetica Neue", Arial, sans-serif',
+      [THEME_FONT_STYLE.STYLISH]: 'Merriweather, Georgia, Serif',
+    },
 
     lineHeight: 25,
-
-    regularWeight: 'normal',
 
     size: {
       l: 23,
@@ -57,8 +50,9 @@ export const themeCommonConfig: PartialDeepModel<ThemeConfigParamsModel> = {
       xs: 8,
     },
 
-    // stylish: process.env.APP_WEB ? 'Merriweather, Georgia, Serif' : undefined,
-    stylish: 'Merriweather, Georgia, Serif',
+    weight: 'normal',
+
+    weightBold: '500',
   },
 
   shape: {

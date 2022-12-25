@@ -7,14 +7,10 @@ import type { TextFieldKeyboardModel } from '@lib/frontend/form/components/TextF
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_COLOR, THEME_RELATIVE_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { borderStyler } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
-import {
-  THEME_BASIC_SIZE,
-  THEME_COLOR,
-  THEME_RELATIVE_COLOR,
-} from '@lib/frontend/style/utils/theme/theme.constants';
 import type { PartialModel } from '@lib/shared/core/core.models';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { isNil } from 'lodash';
@@ -232,8 +228,8 @@ export const _TextField = ({
             grow
             isOverflowHidden
             isRow
-            pLeft={leftElement ? THEME_BASIC_SIZE.SMALL : undefined}
-            pRight={right ? THEME_BASIC_SIZE.SMALL : undefined}
+            pLeft={leftElement ? THEME_SIZE.SMALL : undefined}
+            pRight={right ? THEME_SIZE.SMALL : undefined}
             zIndex={-1}>
             {leftElement}
 

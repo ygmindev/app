@@ -8,7 +8,7 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { spacingStyler } from '@lib/frontend/style/utils/styler/spacingStyler/spacingStyler';
 import { viewStyler } from '@lib/frontend/style/utils/styler/viewStyler/viewStyler';
-import { THEME_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import { reduce } from 'lodash';
 import type { ReactElement, ReactNode } from 'react';

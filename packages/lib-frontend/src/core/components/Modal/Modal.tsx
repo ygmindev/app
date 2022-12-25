@@ -8,7 +8,7 @@ import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.
 import { KeyboardProvider } from '@lib/frontend/root/providers/KeyboardProvider/KeyboardProvider';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { THEME_RELATIVE_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_RELATIVE_COLOR } from '@lib/frontend/style/style.constants';
 import { isString } from 'lodash';
 
 export const Modal: FCModel<ModalPropsModel> = ({

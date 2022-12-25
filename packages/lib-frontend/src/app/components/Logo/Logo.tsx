@@ -5,10 +5,10 @@ import { Link } from '@lib/frontend/core/components/Link/Link';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { APP_URI } from '@lib/frontend/http/http.constants';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { THEME_BASIC_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 
 export const Logo: SFCModel<LogoPropsModel> = ({
-  size = THEME_BASIC_SIZE.MEDIUM,
+  size = THEME_SIZE.MEDIUM,
   testID,
   ...props
 }) => {

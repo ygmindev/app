@@ -7,7 +7,7 @@ import type { FCModel } from '@lib/frontend/core/core.models';
 import { DevTools } from '@lib/frontend/dev/containers/DevTools/DevTools';
 import { Notifications } from '@lib/frontend/notification/containers/Notifications/Notifications';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { THEME_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 
 export const AppProvider: FCModel<AppProviderPropsModel> = ({ children, testID }) => {
   const isInitialized = useIsInitialized();

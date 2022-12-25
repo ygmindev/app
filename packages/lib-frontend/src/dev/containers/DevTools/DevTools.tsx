@@ -5,7 +5,7 @@ import { display } from '@lib/frontend/core/utils/display/display';
 import type { DevToolsPropsModel } from '@lib/frontend/dev/containers/DevTools/DevTools.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
-import { THEME_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { CORE } from '@lib/shared/core/core.constants';
 
 const DEV_TOOLS_NOTIFICATION = 'DEV_TOOLS_NOTIFICATION';

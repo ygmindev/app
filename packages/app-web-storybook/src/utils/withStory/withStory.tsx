@@ -7,7 +7,7 @@ import type {
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
-import { THEME_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import type { ArgTypes, Meta, StoryObj } from '@storybook/react';

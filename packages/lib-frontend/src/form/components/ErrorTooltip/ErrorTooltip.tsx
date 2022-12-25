@@ -3,7 +3,7 @@ import { TooltipWithIcon } from '@lib/frontend/core/components/TooltipWithIcon/T
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import type { ErrorTooltipPropsModel } from '@lib/frontend/form/components/ErrorTooltip/ErrorTooltip.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { THEME_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 
 export const ErrorTooltip: SFCModel<ErrorTooltipPropsModel> = ({ error, testID, ...props }) => {
   const { styles } = useStyles({ props });

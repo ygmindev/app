@@ -9,7 +9,7 @@ import { useDimension } from '@lib/frontend/platform/hooks/useDimension/useDimen
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { THEME_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import type { MergeArrayModel, PartialModel } from '@lib/shared/core/core.models';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import type { ReactElement } from 'react';

@@ -1,6 +1,6 @@
 import type { DimensionModel } from '@lib/frontend/platform/platform.models';
 import type { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import type { ThemeBasicSizeModel } from '@lib/frontend/style/utils/theme/theme.models';
+import type { ThemeSizeModel } from '@lib/frontend/style/style.models';
 
 export type ShapePositionModel = `${SHAPE_POSITION}`;
 
@@ -20,7 +20,7 @@ export interface ShapeStylerParamsModel extends DimensionModel {
   position?: ShapePositionModel;
   right?: number;
   scale?: number;
-  size?: ThemeBasicSizeModel;
+  size?: ThemeSizeModel;
   top?: number;
   zIndex?: number;
 }

@@ -4,7 +4,7 @@ import type { NotificationDataModel } from '@lib/frontend/notification/component
 import type { UseNotificationModel } from '@lib/frontend/notification/hooks/useNotification/useNotification.models';
 import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 
 export const useNotification = (): UseNotificationModel => {

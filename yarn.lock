@@ -12852,7 +12852,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vanilla-extract/integration@npm:^6.0.1":
+"@vanilla-extract/integration@npm:^6.0.0, @vanilla-extract/integration@npm:^6.0.1":
   version: 6.0.1
   resolution: "@vanilla-extract/integration@npm:6.0.1"
   dependencies:
@@ -12867,6 +12867,16 @@ __metadata:
     lodash: ^4.17.21
     outdent: ^0.8.0
   checksum: 14a613e1195aa002257bb31f5a4972e9e9a76e3a9f19b6e661e9fbf280df2dd35213083fcea28e8f9f453794450ae733984b8970c6e5c97f8c1dc165e5f9e7f2
+  languageName: node
+  linkType: hard
+
+"@vanilla-extract/jest-transform@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@vanilla-extract/jest-transform@npm:1.0.1"
+  dependencies:
+    "@vanilla-extract/integration": ^6.0.0
+    esbuild: ^0.11.16
+  checksum: cc5d440eb8e4d1cb729c8cdfe3980b9c6ac43c509ebd87d5fe9975f549167c98bc6108d7b98902f1e91c43aea041ca007073785750b8173569ed8c0312f02f0c
   languageName: node
   linkType: hard
 
@@ -14041,6 +14051,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.47.0
     "@typescript-eslint/parser": ^5.47.0
     "@vanilla-extract/css": ^1.9.2
+    "@vanilla-extract/jest-transform": ^1.0.1
     "@vanilla-extract/vite-plugin": ^3.7.0
     ag-grid-community: ^28.2.1
     ag-grid-react: ^28.2.1

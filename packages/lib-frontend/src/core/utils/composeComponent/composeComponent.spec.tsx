@@ -19,7 +19,7 @@ describe(displayName, () => {
   }
 
   const _View = composeComponent<_ViewProps, ViewProps>({
-    getComponent: View,
+    getComponent: () => View,
     getProps: ({ children, testID, width }) => ({ children, testID, width }),
     stylers: [({ height }) => ({ height })],
   });

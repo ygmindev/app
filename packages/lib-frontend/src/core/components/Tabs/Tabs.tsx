@@ -4,7 +4,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useField } from '@lib/frontend/form/hooks/useField/useField';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { THEME_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 
 export const Tabs: SFCModel<TabsPropsModel> = ({
   defaultValue,

@@ -1,5 +1,5 @@
 import type { WithIconPropsModel } from '@lib/frontend/core/decorators/withIconProps/withIconProps.models';
-import type { ThemeColorModel } from '@lib/frontend/style/utils/theme/theme.models';
+import type { ThemeColorModel } from '@lib/frontend/style/style.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
 
 export interface NotificationModel extends WithIdModel, WithIconPropsModel {

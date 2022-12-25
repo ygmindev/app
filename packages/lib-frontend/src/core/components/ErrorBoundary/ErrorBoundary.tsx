@@ -7,7 +7,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { FCModel } from '@lib/frontend/core/core.models';
 import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { THEME_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { CORE } from '@lib/shared/core/core.constants';
 import type { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';

@@ -4,6 +4,6 @@ import type { AnimatableTextProps } from 'AnimatableText';
 import { AnimatableText } from 'AnimatableText';
 
 export const _AnimatableText = composeComponent<_AnimatableTextPropsModel, AnimatableTextProps>({
-  getComponent: AnimatableText,
+  getComponent: () => AnimatableText,
   getProps: () => ({}),
 });

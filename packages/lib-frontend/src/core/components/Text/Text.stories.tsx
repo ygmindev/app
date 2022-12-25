@@ -2,7 +2,7 @@ import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import type { TextPropsModel } from '@lib/frontend/core/components/Text/Text.models';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 
 const { Story, meta } = withStory<TextPropsModel>({
   defaultProps: {

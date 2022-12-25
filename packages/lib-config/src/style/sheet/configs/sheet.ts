@@ -20,7 +20,7 @@ export const sheetConfig: SheetConfigParamsModel = {
     body: {
       display: 'flex',
       flexDirection: 'column',
-      fontFamily: themeCommonConfig.font?.family,
+      fontFamily: themeCommonConfig.font?.fontFamily,
       fontSmooth: 'antialiased',
     },
 

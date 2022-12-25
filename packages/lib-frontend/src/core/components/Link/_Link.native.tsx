@@ -7,7 +7,7 @@ export const _linkOpen = async (link: string, _isNewTab?: boolean): Promise<void
   Linking.openURL(link);
 
 export const _Link = composeComponent<_LinkPropsModel, TextProps>({
-  getComponent: Text,
+  getComponent: () => Text,
   getProps: ({ children, onPress, pathname }) => ({
     children,
     onPress: () => (pathname ? _linkOpen(pathname) : onPress && onPress()),

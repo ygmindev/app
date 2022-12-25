@@ -1,11 +1,9 @@
 import type { TranslationTextModel } from '@lib/frontend/locale/locale.models';
 import type {
-  ThemeBasicSizeModel,
   ThemeColorModel,
-  ThemeRelativeColorModel,
-  ThemeShadeModel,
+  ThemeFontStyleModel,
   ThemeSizeModel,
-} from '@lib/frontend/style/utils/theme/theme.models';
+} from '@lib/frontend/style/style.models';
 import type { TextStyle } from 'react-native';
 
 export interface _ThemeConfigParamsModel {
@@ -14,19 +12,17 @@ export interface _ThemeConfigParamsModel {
     transition: number;
   };
 
-  colors: Record<ThemeColorModel, Record<ThemeShadeModel, string>> & {
-    background: Record<ThemeRelativeColorModel, string>;
+  colors: Record<ThemeColorModel, { main: string; text: string }> & {
     border: string;
-    text: Record<ThemeRelativeColorModel, string>;
+    shadow: string;
   };
 
   font: {
-    boldWeight: TextStyle['fontWeight'];
-    family: string;
+    fontFamily: Record<ThemeFontStyleModel, string>;
     lineHeight: number;
-    regularWeight: TextStyle['fontWeight'];
     size: Record<ThemeSizeModel, number>;
-    stylish: string;
+    weight: TextStyle['fontWeight'];
+    weightBold: TextStyle['fontWeight'];
   };
 
   id: string;
@@ -37,7 +33,7 @@ export interface _ThemeConfigParamsModel {
 
   shape: {
     borderRadius: number;
-    height: Record<ThemeBasicSizeModel, number>;
-    spacing: Record<ThemeBasicSizeModel, number>;
+    height: Record<ThemeSizeModel, number>;
+    spacing: Record<ThemeSizeModel, number>;
   };
 }

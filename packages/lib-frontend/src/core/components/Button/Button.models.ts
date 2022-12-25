@@ -1,9 +1,9 @@
 import type { IconTextPropsModel } from '@lib/frontend/core/components/IconText/IconText.models';
 import type { PressPropsModel } from '@lib/frontend/core/components/Press/Press.models';
 import type {
-  ThemeBasicSizeModel,
+  ThemeSizeModel,
   ThemeColorModel,
-} from '@lib/frontend/style/utils/theme/theme.models';
+} from '@lib/frontend/style/style.models';
 
 export interface ButtonPropsModel
   extends Omit<PressPropsModel, 'children'>,
@@ -13,5 +13,5 @@ export interface ButtonPropsModel
   isFullWidth?: boolean;
   isLoading?: boolean;
   isTransparent?: boolean;
-  size?: ThemeBasicSizeModel;
+  size?: ThemeSizeModel;
 }

@@ -22,7 +22,7 @@ export const STRIPE_ELEMENTS_STYLE: (theme: ThemeConfigParamsModel) => StripeEle
       colorText: theme.colors.text.main,
       colorTextPlaceholder: theme.colors.border,
       colorWarningText: theme.colors.warning.main,
-      fontFamily: theme.font.family,
+      fontFamily: theme.font.fontFamily,
       fontSizeBase: `${theme.font.size.m}px`,
     },
   },

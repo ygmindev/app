@@ -14,17 +14,15 @@ export const composeComponent = <TProps, TResult, TRef = unknown>({
 }: ComposeComponentParamsModel<TProps, TResult, TRef>): ForwardRefExoticComponent<
   TProps & WithTestIdModel
 > =>
-  forwardRef<RefObject<TRef>, WithStyleModel & TProps & { nativeID?: string }>(
+  forwardRef<RefObject<TRef>, TProps & WithStyleModel & { nativeID?: string }>(
     (props, ref): ReactElement<TResult> => {
-      const { styles: componentStyles } = useStyles<TProps>({ props, stylers });
-      const componentProps = getProps ? getProps(props, ref) : (props as unknown as TResult);
-      const create = isWeb ? unstable_createElement : createElement;
-      const _Component = getComponent(props);
-      return create(_Component, {
-        ...componentProps,
+      const { styles } = useStyles<TProps>({ props, stylers });
+      const _props = getProps ? getProps(props, ref) : (props as unknown as TResult);
+      return (isWeb ? unstable_createElement : createElement)(getComponent(props), {
+        ..._props,
         nativeid: props.nativeID,
         ref,
-        style: componentStyles,
+        style: styles,
       });
     },
   ) as ForwardRefExoticComponent<TProps & WithTestIdModel>;

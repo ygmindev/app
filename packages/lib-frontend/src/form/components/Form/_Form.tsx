@@ -3,7 +3,7 @@ import type { _FormPropsModel } from '@lib/frontend/form/components/Form/_Form.m
 import type { FormHTMLAttributes, SyntheticEvent } from 'react';
 
 export const _Form = composeComponent<_FormPropsModel, FormHTMLAttributes<HTMLFormElement>>({
-  getComponent: 'form',
+  getComponent: () => 'form',
   getProps: ({ children, onSubmit, testID }) => ({
     children: (
       <>

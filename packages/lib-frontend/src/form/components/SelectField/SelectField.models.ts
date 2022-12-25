@@ -4,7 +4,7 @@ import type { OptionModel } from '@lib/frontend/core/core.models';
 import type { WithFieldPropsModel } from '@lib/frontend/core/decorators/withFieldProps/withFieldProps.models';
 import type { TextFieldPropsModel } from '@lib/frontend/form/components/TextField/TextField.models';
 import type { TranslationTextModel } from '@lib/frontend/locale/locale.models';
-import type { ThemeColorModel } from '@lib/frontend/style/utils/theme/theme.models';
+import type { ThemeColorModel } from '@lib/frontend/style/style.models';
 import type { WithTestIdModel } from '@lib/frontend/test/test.models';
 
 export interface SelectOptionModel

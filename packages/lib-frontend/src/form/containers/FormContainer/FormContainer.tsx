@@ -21,7 +21,7 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
-import { THEME_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { promisify } from '@lib/shared/core/utils/promisify/promisify';
 import { FIELD_TYPE } from '@lib/shared/form/form.constants';
 import { flatten, get, isEqual, map, reduce, toNumber } from 'lodash';

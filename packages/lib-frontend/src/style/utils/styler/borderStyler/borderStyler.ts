@@ -5,11 +5,11 @@ import {
 } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import type { BorderStylerParamsModel } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.models';
 import type { StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
-import { THEME_SHADE } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_SHADE } from '@lib/frontend/style/style.constants';
 import type {
   ThemeColorModel,
   ThemeShadeModel,
-} from '@lib/frontend/style/utils/theme/theme.models';
+} from '@lib/frontend/style/style.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 
 export const borderStyler: StylerModel<BorderStylerParamsModel> = (

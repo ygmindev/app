@@ -2,7 +2,7 @@ import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { THEME_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import { useMemo } from 'react';
 

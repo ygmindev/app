@@ -9,6 +9,6 @@ export const _StyleProvider = composeComponent<
   _StyleProviderPropsModel,
   { children: ReactNode; theme: typeof DefaultTheme | undefined }
 >({
-  getComponent: Provider,
+  getComponent: () => Provider,
   getProps: ({ children, value }) => ({ children, theme: value ? themeConfig(value) : undefined }),
 });

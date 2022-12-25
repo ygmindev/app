@@ -4,10 +4,7 @@ import type { DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import {
-  THEME_BASIC_SIZE,
-  THEME_RELATIVE_COLOR,
-} from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_RELATIVE_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 
 export const Dropdown: SFCModel<DropdownPropsModel> = ({
   anchor,
@@ -44,7 +41,7 @@ export const Dropdown: SFCModel<DropdownPropsModel> = ({
           grow
           isVerticalScrollable
           maxHeight={DROPDOWN_MAX_HEIGHT}
-          p={THEME_BASIC_SIZE.SMALL}>
+          p={THEME_SIZE.SMALL}>
           {children}
         </Wrapper>
       </Wrapper>

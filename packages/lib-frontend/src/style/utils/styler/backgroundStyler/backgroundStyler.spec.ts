@@ -6,7 +6,7 @@ import {
   THEME_COLOR,
   THEME_RELATIVE_COLOR,
   THEME_SHADE,
-} from '@lib/frontend/style/utils/theme/theme.constants';
+} from '@lib/frontend/style/style.constants';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ target: () => backgroundStyler });

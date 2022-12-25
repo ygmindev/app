@@ -6,7 +6,7 @@ import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.
 import type { RouteHeaderPropsModel } from '@lib/frontend/route/containers/RouteHeader/RouteHeader.models';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
-import { THEME_RELATIVE_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_RELATIVE_COLOR } from '@lib/frontend/style/style.constants';
 
 export const RouteHeader: FCModel<RouteHeaderPropsModel> = ({ testID }) => {
   const { up } = useRouter();

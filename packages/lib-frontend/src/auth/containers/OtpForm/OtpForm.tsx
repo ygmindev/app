@@ -15,7 +15,7 @@ import { Trans } from '@lib/frontend/locale/components/Trans/Trans';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { AUTH } from '@lib/shared/auth/auth.constants';
 import { OTP_LENGTH } from '@lib/shared/auth/resources/Otp/Otp.constants';
 import type { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';

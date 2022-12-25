@@ -16,7 +16,7 @@ import type { SelectOptionModel } from '@lib/frontend/form/components/SelectFiel
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { promisify } from '@lib/shared/core/utils/promisify/promisify';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { isFunction } from 'lodash';

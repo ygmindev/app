@@ -1,21 +1,11 @@
 export enum THEME_COLOR {
+  BACKGROUND = 'background',
   ERROR = 'error',
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   SUCCESS = 'success',
+  SURFACE = 'surface',
   WARNING = 'warning',
-}
-
-export enum THEME_RELATIVE_COLOR {
-  CONTRAST = 'contrast',
-  MAIN = 'main',
-  MUTED = 'muted',
-}
-
-export enum THEME_SHADE {
-  DARK = 'dark',
-  LIGHT = 'light',
-  MAIN = 'main',
 }
 
 export enum THEME_BASIC_SIZE {
@@ -30,4 +20,9 @@ export enum THEME_SIZE {
   SMALL = 's',
   XLARGE = 'xl',
   XSMALL = 'xs',
+}
+
+export enum THEME_FONT_STYLE {
+  MAIN = 'main',
+  STYLISH = 'stylish',
 }

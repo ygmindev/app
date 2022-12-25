@@ -1,27 +1,19 @@
 import { themeCommonConfig } from '@lib/config/style/theme/configs/theme.common';
 import type { ThemeConfigParamsModel } from '@lib/config/style/theme/theme.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
-import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 
 export const themeLightConfig: ThemeConfigParamsModel = merge({
-  strategy: MERGE_STRATEGY.DEEP_APPEND,
-
   values: [
     {
       colors: {
         background: {
-          contrast: '#171717',
           main: '#fff',
-          muted: '#e7e7e7',
+          text: '#404452',
         },
 
         border: '#ccd0d6',
 
-        text: {
-          contrast: '#fff',
-          main: '#404452',
-          muted: '#5f6368',
-        },
+        shadow: '',
       },
 
       id: 'light',

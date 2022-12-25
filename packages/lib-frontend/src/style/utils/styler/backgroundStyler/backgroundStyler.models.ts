@@ -2,7 +2,7 @@ import type {
   ThemeColorModel,
   ThemeRelativeColorModel,
   ThemeShadeModel,
-} from '@lib/frontend/style/utils/theme/theme.models';
+} from '@lib/frontend/style/style.models';
 
 export interface BackgroundStylerParamsModel {
   backgroundColor?: ThemeColorModel | ThemeRelativeColorModel | string;

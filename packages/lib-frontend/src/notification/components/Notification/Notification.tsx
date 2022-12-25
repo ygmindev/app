@@ -20,7 +20,7 @@ import {
   THEME_RELATIVE_COLOR,
   THEME_SHADE,
   THEME_SIZE,
-} from '@lib/frontend/style/utils/theme/theme.constants';
+} from '@lib/frontend/style/style.constants';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 
 export const Notification: SFCModel<NotificationPropsModel> = ({
@@ -66,11 +66,11 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
         width={NOTIFICATION_WIDTH}>
         {isInfinite ? null : (
           <Wrapper
-            animation={{
-              duration: NOTIFICATION_DURATION,
-              from: { width: 0 },
-              to: { width: NOTIFICATION_WIDTH },
-            }}
+            // animation={{
+            //   duration: NOTIFICATION_DURATION,
+            //   from: { width: 0 },
+            //   to: { width: NOTIFICATION_WIDTH },
+            // }}
             backgroundColor={color}
             backgroundShade={THEME_SHADE.LIGHT}
             height={5}

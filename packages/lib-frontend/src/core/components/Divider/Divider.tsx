@@ -6,7 +6,7 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { BORDER_DIRECTION } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { THEME_RELATIVE_COLOR } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_RELATIVE_COLOR } from '@lib/frontend/style/style.constants';
 
 export const Divider: SFCModel<DividerPropsModel> = ({
   children,

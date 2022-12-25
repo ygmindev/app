@@ -3,7 +3,7 @@ import type { LoadingPropsModel } from '@lib/frontend/core/components/Loading/Lo
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { get } from 'lodash';
 
 export const Loading: SFCModel<LoadingPropsModel> = ({

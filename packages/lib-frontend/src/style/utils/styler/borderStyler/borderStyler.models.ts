@@ -2,7 +2,7 @@ import type { BORDER_DIRECTION } from '@lib/frontend/style/utils/styler/borderSt
 import type {
   ThemeColorModel,
   ThemeShadeModel,
-} from '@lib/frontend/style/utils/theme/theme.models';
+} from '@lib/frontend/style/style.models';
 
 export type BorderDirectionModel = `${BORDER_DIRECTION}`;
 

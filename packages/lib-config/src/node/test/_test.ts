@@ -5,7 +5,7 @@ import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import type { _TestConfigParamsModel } from '@lib/config/node/test/_test.models';
 import { compilerOptions } from '@lib/config/node/typescript/tsconfig.paths.json';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
-import { mapValues, reduce, trim, trimStart } from 'lodash';
+import { mapKeys, reduce, trim, trimStart } from 'lodash';
 import { join } from 'path';
 import { pathsToModuleNameMapper } from 'ts-jest';
 
@@ -33,7 +33,7 @@ export const _testConfig = ({
 
   coverageReporters: ['lcov'],
 
-  globalTeardown: fromConfig('node/test/configs/cleanup.js'),
+  globalTeardown: fromConfig(`node/test/configs/cleanup.${platform}.ts`),
 
   globals: define,
 
@@ -42,7 +42,7 @@ export const _testConfig = ({
   moduleFileExtensions: resolveExtensions.map((ext) => trimStart(ext, '.')),
 
   moduleNameMapper: {
-    ...mapValues(aliases, (v) => `^${v}$`),
+    ...mapKeys(aliases, (k) => `^${k}$`),
     ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: fromRoot() }),
     [`\\.(${fileExtensions.join('|')})$`]: join(mockPath, 'file'),
   },
@@ -62,6 +62,8 @@ export const _testConfig = ({
       },
     ],
   ],
+
+  resolver: fromConfig('node/test/_resolver.js'),
 
   rootDir: root,
 
@@ -83,6 +85,7 @@ export const _testConfig = ({
   testTimeout: timeout,
 
   transform: {
+    '\\.css\\.ts$': '@vanilla-extract/jest-transform',
     '^.+\\.(js|jsx)$': 'babel-jest',
     '^.+\\.(ts|tsx)$': [
       'ts-jest',

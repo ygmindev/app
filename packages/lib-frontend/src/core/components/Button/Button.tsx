@@ -7,11 +7,7 @@ import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import {
-  THEME_BASIC_SIZE,
-  THEME_COLOR,
-  THEME_RELATIVE_COLOR,
-} from '@lib/frontend/style/utils/theme/theme.constants';
+import { THEME_COLOR, THEME_RELATIVE_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { promisify } from '@lib/shared/core/utils/promisify/promisify';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { useCallback, useState } from 'react';
@@ -25,7 +21,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   isLoading,
   isTransparent,
   onPress,
-  size = THEME_BASIC_SIZE.MEDIUM,
+  size = THEME_SIZE.MEDIUM,
   ...props
 }) => {
   const [isLoadingState, setLoadingState] = useState<boolean>(false);
@@ -61,7 +57,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
           isCenter>
           <Loading
             color={color}
-            size={THEME_BASIC_SIZE.LARGE}
+            size={THEME_SIZE.LARGE}
           />
         </Wrapper>
       )}
