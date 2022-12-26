@@ -1,81 +1,28 @@
-import { themeCommonConfig } from '@lib/config/style/theme/configs/theme.common';
-import { themeDarkConfig } from '@lib/config/style/theme/configs/theme.dark';
-import { themeLightConfig } from '@lib/config/style/theme/configs/theme.light';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_COLOR, THEME_ROLE } from '@lib/frontend/style/style.constants';
 import { backgroundStyler } from '@lib/frontend/style/utils/styler/backgroundStyler/backgroundStyler';
-import {
-  THEME_COLOR,
-  THEME_RELATIVE_COLOR,
-  THEME_SHADE,
-} from '@lib/frontend/style/style.constants';
+import { renderHook } from '@lib/frontend/test/utils/renderHook/renderHook';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ target: () => backgroundStyler });
 
 describe(displayName, () => {
-  test('works with common theme', async () => {
-    expect(backgroundStyler({})).toStrictEqual({});
-    expect(backgroundStyler({ backgroundColor: '#000000' })).toStrictEqual({
+  const { result } = renderHook(() => useTheme());
+  const theme = result.current;
+
+  test('works', async () => {
+    expect(backgroundStyler({}, theme)).toStrictEqual({});
+    expect(backgroundStyler({ backgroundColor: '#000000' }, theme)).toStrictEqual({
       backgroundColor: '#000000',
     });
-    expect(backgroundStyler({ backgroundColor: THEME_COLOR.PRIMARY })).toStrictEqual({
-      backgroundColor: themeCommonConfig?.colors?.primary?.main,
-    });
-    expect(
-      backgroundStyler({
-        backgroundColor: THEME_COLOR.PRIMARY,
-        backgroundShade: THEME_SHADE.LIGHT,
-      }),
-    ).toStrictEqual({ backgroundColor: themeCommonConfig?.colors?.primary?.light });
-    expect(
-      backgroundStyler({
-        backgroundColor: THEME_COLOR.PRIMARY,
-        backgroundShade: THEME_SHADE.DARK,
-      }),
-    ).toStrictEqual({ backgroundColor: themeCommonConfig?.colors?.primary?.dark });
-  });
-
-  test('works with light theme', async () => {
-    expect(
-      backgroundStyler({ backgroundColor: THEME_RELATIVE_COLOR.MAIN }, { theme: themeLightConfig }),
-    ).toStrictEqual({
-      backgroundColor: themeLightConfig.colors.background.main,
+    expect(backgroundStyler({ backgroundColor: THEME_COLOR.PRIMARY }, theme)).toStrictEqual({
+      backgroundColor: theme.colors.primary.main,
     });
     expect(
       backgroundStyler(
-        { backgroundColor: THEME_RELATIVE_COLOR.MUTED },
-        { theme: themeLightConfig },
+        { backgroundColor: THEME_COLOR.PRIMARY, backgroundRole: THEME_ROLE.MAIN_CONTRAST },
+        theme,
       ),
-    ).toStrictEqual({
-      backgroundColor: themeLightConfig.colors.background.muted,
-    });
-    expect(
-      backgroundStyler(
-        { backgroundColor: THEME_RELATIVE_COLOR.CONTRAST },
-        { theme: themeLightConfig },
-      ),
-    ).toStrictEqual({
-      backgroundColor: themeLightConfig.colors.background.contrast,
-    });
-  });
-
-  test('works with dark theme', async () => {
-    expect(
-      backgroundStyler({ backgroundColor: THEME_RELATIVE_COLOR.MAIN }, { theme: themeDarkConfig }),
-    ).toStrictEqual({
-      backgroundColor: themeDarkConfig.colors.background.main,
-    });
-    expect(
-      backgroundStyler({ backgroundColor: THEME_RELATIVE_COLOR.MUTED }, { theme: themeDarkConfig }),
-    ).toStrictEqual({
-      backgroundColor: themeDarkConfig.colors.background.muted,
-    });
-    expect(
-      backgroundStyler(
-        { backgroundColor: THEME_RELATIVE_COLOR.CONTRAST },
-        { theme: themeDarkConfig },
-      ),
-    ).toStrictEqual({
-      backgroundColor: themeDarkConfig.colors.background.contrast,
-    });
+    ).toStrictEqual({ backgroundColor: theme.colors.primary.mainContrast });
   });
 });

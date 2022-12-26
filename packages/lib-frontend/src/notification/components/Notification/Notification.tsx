@@ -14,13 +14,8 @@ import type { NotificationPropsModel } from '@lib/frontend/notification/componen
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import {
-  THEME_COLOR,
-  THEME_RELATIVE_COLOR,
-  THEME_SHADE,
-  THEME_SIZE,
-} from '@lib/frontend/style/style.constants';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 
 export const Notification: SFCModel<NotificationPropsModel> = ({
@@ -72,7 +67,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
             //   to: { width: NOTIFICATION_WIDTH },
             // }}
             backgroundColor={color}
-            backgroundShade={THEME_SHADE.LIGHT}
+            backgroundShade={THEME_COLOR_SHADE.LIGHT}
             height={5}
             position={SHAPE_POSITION.ABSOLUTE}
             right={0}

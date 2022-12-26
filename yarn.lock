@@ -11199,6 +11199,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/color-convert@npm:*":
+  version: 2.0.0
+  resolution: "@types/color-convert@npm:2.0.0"
+  dependencies:
+    "@types/color-name": "*"
+  checksum: 027b68665dc2278cc2d83e796ada0a05a08aa5a11297e227c48c7f9f6eac518dec98578ab0072bd211963d3e4b431da70b20ea28d6c3136d0badfd3f9913baee
+  languageName: node
+  linkType: hard
+
+"@types/color-name@npm:*":
+  version: 1.1.1
+  resolution: "@types/color-name@npm:1.1.1"
+  checksum: b71fcad728cc68abcba1d405742134410c8f8eb3c2ef18113b047afca158ad23a4f2c229bcf71a38f4a818dead375c45b20db121d0e69259c2d81e97a740daa6
+  languageName: node
+  linkType: hard
+
+"@types/color@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "@types/color@npm:3.0.3"
+  dependencies:
+    "@types/color-convert": "*"
+  checksum: 4a54a6eca687b1f19d393c6c44e292009e913fa2377b5b815d1cd04470131087d7a799718d9e66a970f43e6ba16e7056a5b40b49d2d0d1d0f1530aff23864528
+  languageName: node
+  linkType: hard
+
 "@types/connect-history-api-fallback@npm:*, @types/connect-history-api-fallback@npm:^1.3.5":
   version: 1.3.5
   resolution: "@types/connect-history-api-fallback@npm:1.3.5"
@@ -14022,6 +14047,7 @@ __metadata:
     "@types/aws-lambda": ^8.10.109
     "@types/babel__core": ^7.1.20
     "@types/circular-dependency-plugin": ^5.0.5
+    "@types/color": ^3.0.3
     "@types/craco__craco": ^6.4.0
     "@types/email-templates": ^10.0.1
     "@types/eslint": ^8.4.10
@@ -14067,11 +14093,13 @@ __metadata:
     babel-plugin-transform-typescript-metadata: ^0.3.2
     circular-dependency-plugin: ^5.2.2
     class-validator: ^0.14.0
+    color: ^4.2.3
     copy-webpack-plugin: ^11.0.0
     css-loader: ^6.7.3
     dataloader: ^2.1.0
     dotenv: ^16.0.3
     email-templates: ^10.0.1
+    env-schema: ^5.2.0
     eslint: 8.30.0
     eslint-config-next: ^13.1.0
     eslint-config-prettier: ^8.5.0
@@ -16949,7 +16977,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-string@npm:^1.6.0":
+"color-string@npm:^1.6.0, color-string@npm:^1.9.0":
   version: 1.9.1
   resolution: "color-string@npm:1.9.1"
   dependencies:
@@ -16975,6 +17003,16 @@ __metadata:
     color-convert: ^1.9.3
     color-string: ^1.6.0
   checksum: f81220e8b774d35865c2561be921f5652117638dcda7ca4029262046e37fc2444ac7bbfdd110cf1fd9c074a4ee5eda8f85944ffbdda26186b602dd9bb05f6400
+  languageName: node
+  linkType: hard
+
+"color@npm:^4.2.3":
+  version: 4.2.3
+  resolution: "color@npm:4.2.3"
+  dependencies:
+    color-convert: ^2.0.1
+    color-string: ^1.9.0
+  checksum: 0579629c02c631b426780038da929cca8e8d80a40158b09811a0112a107c62e10e4aad719843b791b1e658ab4e800558f2e87ca4522c8b32349d497ecb6adeb4
   languageName: node
   linkType: hard
 
@@ -19013,6 +19051,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dotenv-expand@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "dotenv-expand@npm:9.0.0"
+  checksum: 76f669b87da73d6980d1235cb18e9ccd94b294927784a0c06db5e9e98d1090b0605e75ade70880f0cd812af7f61e41367a80feea223d23fd3bd0b82f3409b9ed
+  languageName: node
+  linkType: hard
+
 "dotenv@npm:16.0.3, dotenv@npm:^16.0.0, dotenv@npm:^16.0.1, dotenv@npm:^16.0.3":
   version: 16.0.3
   resolution: "dotenv@npm:16.0.3"
@@ -19333,6 +19378,17 @@ __metadata:
   version: 2.2.1
   resolution: "env-paths@npm:2.2.1"
   checksum: 65b5df55a8bab92229ab2b40dad3b387fad24613263d103a97f91c9fe43ceb21965cd3392b1ccb5d77088021e525c4e0481adb309625d0cb94ade1d1fb8dc17e
+  languageName: node
+  linkType: hard
+
+"env-schema@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "env-schema@npm:5.2.0"
+  dependencies:
+    ajv: ^8.0.0
+    dotenv: ^16.0.0
+    dotenv-expand: ^9.0.0
+  checksum: 739f7bd4a2a4d5586535afa552ba1eabc1e37923c6390ae3b71368b46e2c183227317256ac4d6b2bc18fe7ac740280ee273c3c0e1ebd951c6d2a06a5960c36fe
   languageName: node
   linkType: hard
 

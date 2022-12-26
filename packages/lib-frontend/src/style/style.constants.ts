@@ -1,11 +1,17 @@
 export enum THEME_COLOR {
-  BACKGROUND = 'background',
   ERROR = 'error',
+  NEUTRAL = 'neutral',
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   SUCCESS = 'success',
-  SURFACE = 'surface',
   WARNING = 'warning',
+}
+
+export enum THEME_ROLE {
+  MAIN = 'main',
+  MAIN_CONTRAST = 'mainContrast',
+  MUTED = 'muted',
+  MUTED_CONTRAST = 'mutedContrast',
 }
 
 export enum THEME_BASIC_SIZE {
@@ -20,9 +26,4 @@ export enum THEME_SIZE {
   SMALL = 's',
   XLARGE = 'xl',
   XSMALL = 'xs',
-}
-
-export enum THEME_FONT_STYLE {
-  MAIN = 'main',
-  STYLISH = 'stylish',
 }

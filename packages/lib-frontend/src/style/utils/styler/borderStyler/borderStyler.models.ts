@@ -1,15 +1,12 @@
+import type { ThemeColorModel, ThemeRoleModel } from '@lib/frontend/style/style.models';
 import type { BORDER_DIRECTION } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
-import type {
-  ThemeColorModel,
-  ThemeShadeModel,
-} from '@lib/frontend/style/style.models';
 
 export type BorderDirectionModel = `${BORDER_DIRECTION}`;
 
 export interface BorderStylerParamsModel {
   border?: BorderDirectionModel | boolean;
   borderColor?: ThemeColorModel | string;
-  borderShade?: ThemeShadeModel;
+  borderRole?: ThemeRoleModel;
   borderWidth?: number;
   isShadow?: boolean;
   round?: boolean | number;

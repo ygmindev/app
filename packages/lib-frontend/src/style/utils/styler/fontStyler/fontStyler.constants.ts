@@ -1,3 +1,15 @@
+export enum FONT_FAMILY {
+  MAIN = 'main',
+  STYLISH = 'stylish',
+}
+
+export enum FONT_STYLE {
+  BODY = 'body',
+  HEADLINE = 'headline',
+  SUBTITLE = 'subtitle',
+  TITLE = 'title',
+}
+
 export enum FONT_ALIGN {
   CENTER = 'center',
   JUSTIFY = 'justify',

@@ -1,4 +1,4 @@
-import { internationalizeConfig } from '@lib/config/locale/internationalize/configs/internationalize';
+import { internationalizeConfig } from '@lib/config/locale/internationalize/configs/internationalize.config';
 import { _useTranslation } from '@lib/frontend/locale/hooks/useTranslation/_useTranslation';
 import type { UseTranslationModel } from '@lib/frontend/locale/hooks/useTranslation/useTranslation.models';
 import type { TranslationTextModel } from '@lib/frontend/locale/locale.models';

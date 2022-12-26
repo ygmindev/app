@@ -1,11 +1,11 @@
 import type { ReducerModel } from '@lib/frontend/state/state.models';
 
 export interface StyleStateModel {
-  theme: string;
+  isDark: boolean;
 }
 
 export interface StyleActionsParamsModel {
-  themeSet: string;
+  isDarkSet: boolean;
 }
 
 export interface StyleReducerModel extends ReducerModel<StyleStateModel, StyleActionsParamsModel> {}

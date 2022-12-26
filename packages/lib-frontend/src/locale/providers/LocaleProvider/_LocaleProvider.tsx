@@ -1,4 +1,4 @@
-import { internationalizeConfig } from '@lib/config/locale/internationalize/internationalize';
+import { internationalizeConfig } from '@lib/config/locale/internationalize/internationalize.config';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import type { _LocaleProviderPropsModel } from '@lib/frontend/locale/providers/LocaleProvider/_LocaleProvider.models';
 import { _Backend, _backend } from '@lib/frontend/locale/providers/LocaleProvider/backend/_backend';

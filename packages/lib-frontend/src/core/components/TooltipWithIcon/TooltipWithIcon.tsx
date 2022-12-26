@@ -4,7 +4,7 @@ import type { TooltipWithIconPropsModel } from '@lib/frontend/core/components/To
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { THEME_COLOR, THEME_SHADE } from '@lib/frontend/style/style.constants';
+import { THEME_COLOR, THEME_COLOR_SHADE } from '@lib/frontend/style/style.constants';
 
 export const TooltipWithIcon: SFCModel<TooltipWithIconPropsModel> = ({
   children,
@@ -21,7 +21,7 @@ export const TooltipWithIcon: SFCModel<TooltipWithIconPropsModel> = ({
         <Icon
           color={color}
           icon={ICON.info}
-          shade={isActive ? THEME_SHADE.DARK : undefined}
+          shade={isActive ? THEME_COLOR_SHADE.DARK : undefined}
           style={styles}
         />
       )}

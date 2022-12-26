@@ -1,7 +1,10 @@
-import { themeLightConfig } from '@lib/config/style/theme/configs/theme.light';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import {
+  FONT_FAMILY,
+  FONT_STYLE,
+} from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import type { FontStylerParamsModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
 import type { StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 
 export const fontStyler: StylerModel<FontStylerParamsModel> = (
@@ -10,26 +13,43 @@ export const fontStyler: StylerModel<FontStylerParamsModel> = (
     isBold,
     isCapitalize,
     isLineHeight,
-    isStylish,
-    isSubtitle,
-    isTitle,
     isUppercase,
     size = THEME_SIZE.MEDIUM,
+    style = FONT_STYLE.BODY,
+    family = FONT_FAMILY.MAIN,
   },
-  context,
-) => {
-  const theme = context?.theme || themeLightConfig;
-  return cleanObject({
-    fontFamily: isStylish ? theme.font.fontFamilyStylish : theme.font.fontFamily,
+  theme,
+) =>
+  cleanObject({
+    fontFamily:
+      family === FONT_FAMILY.STYLISH || style === FONT_STYLE.HEADLINE
+        ? theme.font.fontFamily.stylish
+        : theme.font.fontFamily.main,
 
-    fontSize: theme.font.size[isTitle || isSubtitle ? THEME_SIZE.LARGE : size],
+    fontSize:
+      theme.font.size[
+        style === FONT_STYLE.HEADLINE
+          ? THEME_SIZE.XLARGE
+          : style === FONT_STYLE.TITLE || style === FONT_STYLE.SUBTITLE
+          ? THEME_SIZE.LARGE
+          : size
+      ],
 
-    fontWeight: isBold || isTitle ? theme.font.weightBold : undefined,
+    fontWeight:
+      isBold || style === FONT_STYLE.HEADLINE || style === FONT_STYLE.TITLE
+        ? theme.font.weightBold
+        : undefined,
 
-    lineHeight: isLineHeight ? theme.font.lineHeight : undefined,
+    lineHeight:
+      isLineHeight || style === FONT_STYLE.HEADLINE || style === FONT_STYLE.TITLE
+        ? theme.font.lineHeight
+        : undefined,
 
     textAlign: align,
 
-    textTransform: isUppercase ? 'uppercase' : isCapitalize || isTitle ? 'capitalize' : undefined,
+    textTransform: isUppercase
+      ? 'uppercase'
+      : isCapitalize || style === FONT_STYLE.TITLE
+      ? 'capitalize'
+      : undefined,
   });
-};

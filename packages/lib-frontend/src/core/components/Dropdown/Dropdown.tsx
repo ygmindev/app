@@ -29,8 +29,8 @@ export const Dropdown: SFCModel<DropdownPropsModel> = ({
       onClose={onClose}
       style={styles}>
       <Wrapper
-        backgroundColor={THEME_RELATIVE_COLOR.MAIN}
         border
+        backgroundColor={THEME_RELATIVE_COLOR.MAIN}
         isFullWidth
         isShadow
         mLeft={isRight}

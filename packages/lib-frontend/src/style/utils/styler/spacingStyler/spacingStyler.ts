@@ -1,5 +1,6 @@
-import { themeLightConfig } from '@lib/config/style/theme/configs/theme.light';
-import type { ThemeConfigParamsModel } from '@lib/config/style/theme/theme.models';
+import type { ThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
+import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
+import type { ThemeBasicSizeModel } from '@lib/frontend/style/style.models';
 import type {
   SpacingModel,
   SpacingStylerParamsModel,
@@ -10,13 +11,13 @@ import { isNumber } from 'lodash';
 
 const _getSpacing = (
   value: SpacingModel | 'auto' | number | undefined,
-  theme: ThemeConfigParamsModel,
+  theme: ThemeModel,
 ): 'auto' | number | undefined =>
   value === undefined || value === 'auto' || isNumber(value)
     ? value
-    : value === false
-    ? undefined
-    : theme.shape.spacing[value === true ? 'm' : value] || undefined;
+    : theme.shape.spacing[
+        value === true ? THEME_BASIC_SIZE.MEDIUM : (value as ThemeBasicSizeModel)
+      ];
 
 export const spacingStyler: StylerModel<SpacingStylerParamsModel> = (
   {
@@ -35,9 +36,8 @@ export const spacingStyler: StylerModel<SpacingStylerParamsModel> = (
     pTop,
     pVertical,
   },
-  context,
+  theme,
 ) => {
-  const theme = context?.theme || themeLightConfig;
   const _m = _getSpacing(m, theme);
   const _mHorizontal = _m || _getSpacing(mHorizontal, theme);
   const _mVertical = _m || _getSpacing(mVertical, theme);

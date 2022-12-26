@@ -1,6 +1,6 @@
 import { children } from '@lib/backend/file/utils/children/children';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { generateConfig } from '@lib/config/core/generate/configs/generate';
+import { generateConfig } from '@lib/config/core/generate/configs/generate.config';
 import { TASK_STATUS } from '@lib/config/core/task/task.constants';
 import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';

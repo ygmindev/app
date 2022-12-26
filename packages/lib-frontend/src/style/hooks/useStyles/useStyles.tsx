@@ -19,9 +19,7 @@ export const useStyles = <TProps,>({
   const computedStyles = useMemo(
     () =>
       StyleSheet.flatten(
-        map(stylers, (styler) =>
-          isFunction(styler) ? styler(props, { isMobile, theme }) : styler,
-        ),
+        map(stylers, (styler) => (isFunction(styler) ? styler(props, theme) : styler)),
       ),
     [props, stylers, theme, isMobile],
   );

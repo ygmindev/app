@@ -9,7 +9,7 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
-import { THEME_COLOR, THEME_SHADE } from '@lib/frontend/style/style.constants';
+import { THEME_COLOR, THEME_COLOR_SHADE } from '@lib/frontend/style/style.constants';
 import { isFunction, isString } from 'lodash';
 import { useState } from 'react';
 
@@ -21,7 +21,7 @@ export const Link: SFCModel<LinkPropsModel> = ({ children, testID, ...props }) =
   const [isActive, setIsActive] = useState<boolean>(false);
   const { t } = useTranslation();
   const { styles } = useStyles({
-    props: { color: THEME_COLOR.PRIMARY, ...props, shade: isActive ? THEME_SHADE.DARK : undefined },
+    props: { color: THEME_COLOR.PRIMARY, ...props, shade: isActive ? THEME_COLOR_SHADE.DARK : undefined },
     stylers: [textStyler],
   });
   const theme = useTheme();

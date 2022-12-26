@@ -1,6 +1,6 @@
 import type { DimensionModel } from '@lib/frontend/platform/platform.models';
-import type { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import type { ThemeSizeModel } from '@lib/frontend/style/style.models';
+import type { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export type ShapePositionModel = `${SHAPE_POSITION}`;
 

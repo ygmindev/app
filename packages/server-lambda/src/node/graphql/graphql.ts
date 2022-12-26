@@ -1,7 +1,7 @@
-import { schema } from '@lib/backend/http/utils/schema/schema';
 import { createHandler } from '@lib/backend/lambda/utils/createHandler/createHandler';
 import { getContext } from '@lib/backend/lambda/utils/getContext/getContext';
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
+import { graphqlConfig } from '@lib/config/http/graphql/graphql.config';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 import { error } from '@lib/shared/logging/utils/logger/logger';
 import { ApolloServer } from 'apollo-server-lambda';
@@ -27,7 +27,7 @@ const graphQlHandler = new ApolloServer({
 
     return { ...e, extensions: { ...e.extensions, name, statusCode } };
   },
-  schema,
+  schema: graphqlConfig,
 }).createHandler();
 
 export const main = createHandler(async (event, context, callback) => {

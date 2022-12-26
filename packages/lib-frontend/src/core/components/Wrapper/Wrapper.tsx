@@ -1,14 +1,13 @@
 import { View } from '@lib/frontend/core/components/View/View';
 import type { WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { isFragment } from '@lib/frontend/core/utils/isFragment/isFragment';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { spacingStyler } from '@lib/frontend/style/utils/styler/spacingStyler/spacingStyler';
 import { viewStyler } from '@lib/frontend/style/utils/styler/viewStyler/viewStyler';
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import { reduce } from 'lodash';
 import type { ReactElement, ReactNode } from 'react';
@@ -23,8 +22,6 @@ export const Wrapper: SFCModel<WrapperPropsModel> = ({
   ...props
 }) => {
   const theme = useTheme();
-  const isMobile = useIsMobile();
-
   const { styles } = useStyles({
     props: {
       ...props,
@@ -67,7 +64,7 @@ export const Wrapper: SFCModel<WrapperPropsModel> = ({
                           : child.props.mLeft,
                       mTop: child.props.mTop === undefined ? !_isRow && spacing : child.props.mTop,
                     },
-                    { isMobile, theme },
+                    theme,
                   )),
               child.props.style,
             ].filter(Boolean),

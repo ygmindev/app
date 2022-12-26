@@ -181,8 +181,8 @@ export const _TextField = ({
       testID={testID}>
       <Wrapper
         // animation={{ transition: ['backgroundColor'] }}
-        backgroundColor={backgroundColor}
         bottom={0}
+        backgroundColor={backgroundColor}
         height={3}
         left={0}
         position={SHAPE_POSITION.ABSOLUTE}
