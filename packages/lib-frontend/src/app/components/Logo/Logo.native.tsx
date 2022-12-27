@@ -5,11 +5,7 @@ import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 
-export const Logo: SFCModel<LogoPropsModel> = ({
-  size = THEME_SIZE.MEDIUM,
-  testID,
-  ...props
-}) => {
+export const Logo: SFCModel<LogoPropsModel> = ({ size = THEME_SIZE.MEDIUM, testID, ...props }) => {
   const { styles } = useStyles({ props });
   return (
     <Link

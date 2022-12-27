@@ -6,8 +6,8 @@ import type {
 } from '@app/web-storybook/utils/withStory/withStory.models';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
+import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import type { ArgTypes, Meta, StoryObj } from '@storybook/react';
@@ -21,16 +21,22 @@ const _Component = <TProps,>({
   props,
   style,
 }: StoryParamsModel<TProps>): ReactElement<TProps> => (
-  <Wrapper spacing style={style}>
+  <Wrapper
+    spacing
+    style={style}>
     {name ? (
       <Text isTitle>{name}</Text>
     ) : (
       <Wrapper isRowAlign>
         {map(props as object, (v, k) => (
-          <Wrapper isRow key={uid()}>
+          <Wrapper
+            isRow
+            key={uid()}>
             <Text isTitle>{`${k}=`}</Text>
 
-            <Text color={THEME_COLOR.PRIMARY} isTitle>{`${
+            <Text
+              color={THEME_COLOR.PRIMARY}
+              isTitle>{`${
               isFunction(v)
                 ? 'function'
                 : isValidElement(v)
@@ -46,7 +52,9 @@ const _Component = <TProps,>({
       </Wrapper>
     )}
 
-    <Wrapper align={FLEX_ALIGN.FLEX_START} mLeft>
+    <Wrapper
+      align={FLEX_ALIGN.FLEX_START}
+      mLeft>
       {children}
     </Wrapper>
   </Wrapper>
@@ -69,13 +77,19 @@ export const withStory = <TProps,>({
     args: defaultProps,
     decorators: [
       (Component, { args }) => (
-        <Wrapper p spacing width={STORY_WIDTH_DEFAULT}>
+        <Wrapper
+          p
+          spacing
+          width={STORY_WIDTH_DEFAULT}>
           <_Component name="Story">
             <Component />
           </_Component>
 
           {_variants.map((variant) => (
-            <_Component key={variant.id} name={variant.name} props={variant.props}>
+            <_Component
+              key={variant.id}
+              name={variant.name}
+              props={variant.props}>
               {createElement<TProps & object>(
                 target as ComponentType<TProps & object>,
                 { ...defaultProps, ...args, ...variant.props } as TProps & object,

@@ -1,33 +1,23 @@
+import { AnimatableView } from '@lib/frontend/animation/components/AnimatableView/AnimatableView';
 import type { AppearPropsModel } from '@lib/frontend/animation/components/Appear/Appear.models';
 import { useAnimation } from '@lib/frontend/animation/hooks/useAnimation/useAnimation';
 import { ANIMATION_TYPE } from '@lib/frontend/animation/hooks/useAnimation/useAnimation.constants';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import type { AnimationTypeModel } from '@lib/frontend/animation/hooks/useAnimation/useAnimation.models';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 
-export const Appear: SFCModel<AppearPropsModel> = ({
-  children,
-  duration,
-  isLazy = true,
-  isScalable = true,
-  isVisible,
-  ...props
-}) => {
-  const { styles } = useStyles({ props });
+export const Appear: SFCModel<AppearPropsModel> = ({ children, isScalable = true, ...props }) => {
   const { animation, isRender } = useAnimation({
-    duration,
-    isLazy,
-    isScalable,
-    isVisible,
-    type: ANIMATION_TYPE.APPEAR,
+    ...props,
+    types: [ANIMATION_TYPE.VISIBLE, isScalable && ANIMATION_TYPE.SCALE].filter(
+      Boolean,
+    ) as Array<AnimationTypeModel>,
   });
 
   return isRender ? (
-    <Wrapper
-      // animation={animation}
-      style={styles}
+    <AnimatableView
+      {...animation}
       {...props}>
       {children}
-    </Wrapper>
+    </AnimatableView>
   ) : null;
 };

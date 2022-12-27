@@ -14,34 +14,34 @@ export const fontStyler: StylerModel<FontStylerParamsModel> = (
     isCapitalize,
     isLineHeight,
     isUppercase,
-    size = THEME_SIZE.MEDIUM,
-    style = FONT_STYLE.BODY,
+    fontSize = THEME_SIZE.MEDIUM,
+    fontStyle = FONT_STYLE.BODY,
     family = FONT_FAMILY.MAIN,
   },
   theme,
 ) =>
   cleanObject({
     fontFamily:
-      family === FONT_FAMILY.STYLISH || style === FONT_STYLE.HEADLINE
+      family === FONT_FAMILY.STYLISH || fontStyle === FONT_STYLE.HEADLINE
         ? theme.font.fontFamily.stylish
         : theme.font.fontFamily.main,
 
     fontSize:
       theme.font.size[
-        style === FONT_STYLE.HEADLINE
+        fontStyle === FONT_STYLE.HEADLINE
           ? THEME_SIZE.XLARGE
-          : style === FONT_STYLE.TITLE || style === FONT_STYLE.SUBTITLE
+          : fontStyle === FONT_STYLE.TITLE || fontStyle === FONT_STYLE.SUBTITLE
           ? THEME_SIZE.LARGE
-          : size
+          : fontSize
       ],
 
     fontWeight:
-      isBold || style === FONT_STYLE.HEADLINE || style === FONT_STYLE.TITLE
+      isBold || fontStyle === FONT_STYLE.HEADLINE || fontStyle === FONT_STYLE.TITLE
         ? theme.font.weightBold
         : undefined,
 
     lineHeight:
-      isLineHeight || style === FONT_STYLE.HEADLINE || style === FONT_STYLE.TITLE
+      isLineHeight || fontStyle === FONT_STYLE.HEADLINE || fontStyle === FONT_STYLE.TITLE
         ? theme.font.lineHeight
         : undefined,
 
@@ -49,7 +49,7 @@ export const fontStyler: StylerModel<FontStylerParamsModel> = (
 
     textTransform: isUppercase
       ? 'uppercase'
-      : isCapitalize || style === FONT_STYLE.TITLE
+      : isCapitalize || fontStyle === FONT_STYLE.TITLE
       ? 'capitalize'
       : undefined,
   });

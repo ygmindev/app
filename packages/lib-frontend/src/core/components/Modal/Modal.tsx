@@ -7,8 +7,9 @@ import type { FCModel } from '@lib/frontend/core/core.models';
 import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { KeyboardProvider } from '@lib/frontend/root/providers/KeyboardProvider/KeyboardProvider';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_COLOR } from '@lib/frontend/style/style.constants';
+import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { THEME_RELATIVE_COLOR } from '@lib/frontend/style/style.constants';
 import { isString } from 'lodash';
 
 export const Modal: FCModel<ModalPropsModel> = ({
@@ -34,7 +35,7 @@ export const Modal: FCModel<ModalPropsModel> = ({
       onClose={onClose}
       width={width}>
       <Wrapper
-        backgroundColor={THEME_RELATIVE_COLOR.MAIN}
+        backgroundColor={THEME_COLOR.NEUTRAL}
         grow={isFullSize}
         isFullWidth
         isShadow
@@ -52,15 +53,14 @@ export const Modal: FCModel<ModalPropsModel> = ({
               <Wrapper
                 grow
                 isRowAlign>
-                {isString(header) ? <Text isTitle>{header}</Text> : header}
+                {isString(header) ? <Text fontStyle={FONT_STYLE.TITLE}>{header}</Text> : header}
               </Wrapper>
 
               {onClose && (
                 <Icon
-                  color={isDisabled ? THEME_RELATIVE_COLOR.MUTED : undefined}
+                  fontStyle={FONT_STYLE.TITLE}
                   icon={ICON.times}
                   isDisabled={isDisabled}
-                  isTitle
                   onPress={onClose}
                 />
               )}

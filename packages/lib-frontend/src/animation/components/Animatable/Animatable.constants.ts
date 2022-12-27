@@ -1,6 +1,0 @@
-export enum ANIMATABLE_TYPE {
-  PRESS_VIEW = 'PRESS_VIEW',
-  SCROLL_VIEW = 'SCROLL_VIEW',
-  TEXT = 'TEXT',
-  VIEW = 'VIEW',
-}

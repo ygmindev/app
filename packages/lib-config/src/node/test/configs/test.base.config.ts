@@ -14,6 +14,8 @@ export const testConfig: TestConfigParamsModel = merge<TestConfigParamsModel>({
     {
       cachePath: fromWorking('.cache/test'),
 
+      configFile: 'test.config.ts',
+
       coverageOutputPath: fromWorking('coverage'),
 
       extensions: EXTENSIONS_TEST,

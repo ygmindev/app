@@ -14,10 +14,10 @@ export type FontStyleModel = `${FONT_STYLE}`;
 export interface FontStylerParamsModel {
   align?: FontAlignModel;
   family?: FontFamilyModel;
+  fontSize?: ThemeSizeModel;
+  fontStyle?: FontStyleModel;
   isBold?: boolean;
   isCapitalize?: boolean;
   isLineHeight?: boolean;
   isUppercase?: boolean;
-  size?: ThemeSizeModel;
-  style?: FontStyleModel;
 }

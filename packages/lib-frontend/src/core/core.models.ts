@@ -6,11 +6,13 @@ import type { WithStyleModel } from '@lib/frontend/style/decorators/withStyle/wi
 import type { WithTestIdModel } from '@lib/frontend/test/test.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
-import type { FC as _FC } from 'react';
+import type { ComponentType, FC as _FC } from 'react';
 
 export interface FCModel<TProps = object> extends _FC<TProps> {}
 
 export interface SFCModel<TProps = object> extends FCModel<TProps & WithStyleModel> {}
+
+export type PropsModel<TType> = TType extends ComponentType<infer TProps> ? TProps : never;
 
 export interface ProviderPropsModel<TType = undefined>
   extends WithTestIdModel,
@@ -19,6 +21,8 @@ export interface ProviderPropsModel<TType = undefined>
 }
 
 export interface PagePropsModel extends WithTestIdModel, Pick<RootPropsModel, 'initialState'> {}
+
+export interface LayoutPropsModel extends WithTestIdModel, WithChildrenPropsModel {}
 
 export interface WithOpenPropsModel {
   isOpen?: boolean;

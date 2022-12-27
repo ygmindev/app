@@ -24,6 +24,12 @@ export interface ThemeConfigParamsModel {
     weightBold: TextStyle['fontWeight'];
   };
 
+  layout: {
+    header: {
+      height: number;
+    };
+  };
+
   palette: {
     dark: Record<ThemeColorModel, Record<ThemeRoleModel, Omit<PaletteParamsModel, 'color'>>>;
     light: Record<ThemeColorModel, Record<ThemeRoleModel, Omit<PaletteParamsModel, 'color'>>>;

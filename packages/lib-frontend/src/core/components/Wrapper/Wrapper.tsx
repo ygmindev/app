@@ -1,3 +1,4 @@
+import { AnimatableView } from '@lib/frontend/animation/components/AnimatableView/AnimatableView';
 import { View } from '@lib/frontend/core/components/View/View';
 import type { WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import type { SFCModel } from '@lib/frontend/core/core.models';
@@ -15,6 +16,7 @@ import { Children, cloneElement, createElement, isValidElement } from 'react';
 import { StyleSheet } from 'react-native';
 
 export const Wrapper: SFCModel<WrapperPropsModel> = ({
+  animation,
   children,
   isDistribute,
   isRowAlign,
@@ -75,5 +77,9 @@ export const Wrapper: SFCModel<WrapperPropsModel> = ({
     );
   };
 
-  return createElement(View, { ...props, style: styles }, _getChildren(children));
+  return createElement(
+    animation ? AnimatableView : View,
+    { ...props, ...(animation || {}), style: styles },
+    _getChildren(children),
+  );
 };

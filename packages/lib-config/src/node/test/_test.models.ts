@@ -6,6 +6,7 @@ export interface _TestConfigParamsModel
     'aliases' | 'define' | 'extensions' | 'externals' | 'platform'
   > {
   cachePath: string;
+  configFile: string;
   coverageOutputPath: string;
   fileExtensions: Array<string>;
   isWatch?: boolean;

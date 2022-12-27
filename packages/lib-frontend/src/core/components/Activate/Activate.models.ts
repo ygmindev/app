@@ -5,7 +5,6 @@ import type { ReactElement } from 'react';
 export interface ActivatePropsModel
   extends WithChildrenPropsModel<(isActive: boolean) => ReactElement> {
   isHoverable?: boolean;
-  isPressable?: boolean;
   onActive?: CallableModel;
   onInactive?: CallableModel;
 }

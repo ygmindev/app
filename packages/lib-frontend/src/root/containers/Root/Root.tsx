@@ -1,4 +1,3 @@
-import { AppProvider } from '@lib/frontend/app/providers/AppProvider/AppProvider';
 import { AuthProvider } from '@lib/frontend/auth/providers/AuthProvider/AuthProvider';
 import type { FCModel } from '@lib/frontend/core/core.models';
 import { QueryProvider } from '@lib/frontend/core/providers/QueryProvider/QueryProvider';
@@ -16,7 +15,6 @@ export const Root: FCModel<RootPropsModel> = ({ children, initialState }) => {
     () => [
       <RouteProvider />,
       <KeyboardProvider />,
-      <AppProvider />,
       <TrackingProvider />,
       <AuthProvider />,
       <LocaleProvider />,

@@ -3,17 +3,18 @@ import type { MeasureModel, PositionModel } from '@lib/frontend/core/utils/measu
 import type { StyleModel } from '@lib/frontend/style/style.models';
 import type { WithTestIdModel } from '@lib/frontend/test/test.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
-import type { ComponentType } from 'react';
-import type { ViewProps } from 'react-native';
 
 export interface _ViewPropsModel extends WithChildrenPropsModel, WithTestIdModel {
-  Component?: ComponentType<ViewProps>;
   isHorizontalScrollable?: boolean;
   isVerticalScrollable?: boolean;
   onMeasure?(measure: MeasureModel): void;
+  onMouseEnter?: CallableModel;
+  onMouseLeave?: CallableModel;
   onPress?: CallableModel;
   onPressIn?: CallableModel;
   onPressOut?: CallableModel;
+  onResponderGrant?: CallableModel;
+  onResponderRelease?: CallableModel;
   onScroll?(position: PositionModel): void;
   style?: StyleModel;
 }

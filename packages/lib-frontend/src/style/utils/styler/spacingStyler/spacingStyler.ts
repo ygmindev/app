@@ -1,4 +1,4 @@
-import type { ThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
+import type { UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
 import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
 import type { ThemeBasicSizeModel } from '@lib/frontend/style/style.models';
 import type {
@@ -11,7 +11,7 @@ import { isNumber } from 'lodash';
 
 const _getSpacing = (
   value: SpacingModel | 'auto' | number | undefined,
-  theme: ThemeModel,
+  theme: UseThemeModel,
 ): 'auto' | number | undefined =>
   value === undefined || value === 'auto' || isNumber(value)
     ? value

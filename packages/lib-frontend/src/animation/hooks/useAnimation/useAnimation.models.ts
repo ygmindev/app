@@ -1,36 +1,19 @@
-import type { AnimatablePropsModel } from '@lib/frontend/animation/components/Animatable/Animatable.models';
+import type { AnimatablePropsModel } from '@lib/frontend/animation/animation.models';
 import type { ANIMATION_TYPE } from '@lib/frontend/animation/hooks/useAnimation/useAnimation.constants';
+import type { MeasureModel } from '@lib/frontend/core/utils/measure/measure.models';
 import type { StyleModel } from '@lib/frontend/style/style.models';
 
 export type AnimationTypeModel = `${ANIMATION_TYPE}`;
 
 export type UseAnimationParamsModel = {
   duration?: number;
+  from?: StyleModel;
   isLazy?: boolean;
   isVisible?: boolean;
-} & (
-  | {
-      from?: StyleModel;
-      isScalable?: never;
-      to?: StyleModel;
-      type?: never;
-      width?: never;
-    }
-  | {
-      from?: never;
-      isScalable?: boolean;
-      to?: never;
-      type?: typeof ANIMATION_TYPE.APPEAR;
-      width?: never;
-    }
-  | {
-      from?: never;
-      isScalable?: never;
-      to?: never;
-      type?: typeof ANIMATION_TYPE.SLIDE;
-      width?: number;
-    }
-);
+  measure?: MeasureModel;
+  to?: StyleModel;
+  types?: Array<AnimationTypeModel>;
+};
 
 export interface UseAnimationModel {
   animation: AnimatablePropsModel;

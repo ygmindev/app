@@ -6,13 +6,6 @@ export interface IconPropsModel
   extends _IconPropsModel,
     Pick<
       PressPropsModel,
-      | 'onPress'
-      | 'confirmMessage'
-      | 'isDisabled'
-      | 'isPressed'
-      | 'from'
-      | 'to'
-      | 'tooltip'
-      | 'isCenter'
+      'onPress' | 'confirmMessage' | 'isDisabled' | 'isPressed' | 'from' | 'to' | 'isCenter'
     >,
     TextPropsModel {}

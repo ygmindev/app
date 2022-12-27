@@ -1,37 +1,38 @@
-import type { AnimatablePropsModel } from '@lib/frontend/animation/animation.models';
-import type { _AnimatableComponentPropsModel } from '@lib/frontend/animation/components/Animatable/_Animatable.models';
+import type {
+  AnimatablePropsModel,
+  AnimationModel,
+} from '@lib/frontend/animation/animation.models';
 import type { _AnimatableParamsModel } from '@lib/frontend/animation/utils/animatable/_animatable.models';
-import type { FCModel } from '@lib/frontend/core/core.models';
+import type { PropsModel, SFCModel } from '@lib/frontend/core/core.models';
+import type { WithStyleModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
+import type { MotiProps } from 'moti';
 import { motify } from 'moti';
-import type { ComponentType } from 'react';
 import { createElement } from 'react';
 
-export const _animatable = <TProps,>({
-  Component,
-}: _AnimatableParamsModel<TProps>): FCModel<TProps & AnimatablePropsModel> => {
-  const _Component: FCModel<TProps & AnimatablePropsModel> = ({
-    delay,
-    duration,
+export const _getAnimatableProps = ({
+  delay,
+  duration,
+  from,
+  isInfinite,
+  onEnd,
+  to,
+}: AnimationModel): MotiProps =>
+  ({
+    animate: to,
     from,
-    isInfinite,
-    onEnd,
-    style,
-    testID,
-    to,
-  }) =>
-    createElement(
-      motify(
-        Component as ComponentType<TProps & AnimatablePropsModel>,
-      ) as unknown as ComponentType<_AnimatableComponentPropsModel>,
-      {
-        animate: to,
-        from,
-        onDidAnimate: onEnd,
-        style,
-        testID,
-        transition: { delay, duration, type: 'timing' },
-      } as _AnimatableComponentPropsModel,
-    );
+    loop: isInfinite,
+    onDidAnimate: onEnd,
+    transition: { delay, duration, type: 'timing' },
+  } as MotiProps);
 
-  return _Component;
+export const _animatable = <TProps extends WithStyleModel>({
+  Component,
+}: _AnimatableParamsModel<TProps>): SFCModel<TProps & AnimatablePropsModel> => {
+  const _Component = motify(Component)();
+  const _Animatable: SFCModel<TProps & AnimatablePropsModel> = ({ animation, ...props }) =>
+    createElement(_Component, {
+      ...props,
+      ...(animation ? _getAnimatableProps(animation) : {}),
+    } as PropsModel<typeof _Component>);
+  return _Animatable;
 };

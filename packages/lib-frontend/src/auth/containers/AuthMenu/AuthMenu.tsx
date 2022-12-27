@@ -48,7 +48,6 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
         <Icon
           icon={ICON.person}
           isPressed={isOpen}
-          isTitle
         />
       )}
       isCenter={false}

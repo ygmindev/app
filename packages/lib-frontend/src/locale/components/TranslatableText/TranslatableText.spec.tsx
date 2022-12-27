@@ -1,11 +1,8 @@
-import { Resource } from '@lib/frontend/admin/containers/Resource/Resource';
-import type { ResourcePropsModel } from '@lib/frontend/admin/containers/Resource/Resource.models';
+import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<ResourcePropsModel>({
-  target: Resource,
-});
+const { Component, displayName, testID } = withTestComponent({ target: TranslatableText });
 
 describe(displayName, () => {
   test('works', async () => {

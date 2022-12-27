@@ -5,9 +5,9 @@ import { spacingStyler } from '@lib/frontend/style/utils/styler/spacingStyler/sp
 import type { StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
 import type { TextStylerParamsModel } from '@lib/frontend/style/utils/styler/textStyler/textStyler.models';
 
-export const textStyler: StylerModel<TextStylerParamsModel> = ({ size, ...params }, context) => ({
-  ...colorStyler(params, context),
-  ...fontStyler({ ...params, size }, context),
-  ...spacingStyler(params, context),
-  ...shapeStyler(params, context),
+export const textStyler: StylerModel<TextStylerParamsModel> = (params, theme) => ({
+  ...colorStyler(params, theme),
+  ...fontStyler(params, theme),
+  ...spacingStyler(params, theme),
+  ...shapeStyler(params, theme),
 });

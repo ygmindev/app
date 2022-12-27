@@ -5,5 +5,5 @@ import type { SpacingStylerParamsModel } from '@lib/frontend/style/utils/styler/
 
 export type TextStylerParamsModel = ColorStylerParamsModel &
   FontStylerParamsModel &
-  Omit<ShapeStylerParamsModel, 'size'> &
+  ShapeStylerParamsModel &
   SpacingStylerParamsModel;

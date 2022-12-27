@@ -11,7 +11,6 @@ export const SignInButton: SFCModel<SignInButtonPropsModel> = ({ testID, ...prop
   const { styles } = useStyles({ props });
   const { t } = useTranslation([AUTH]);
   const { push } = useRouter();
-
   return (
     <Button
       onPress={() => push({ pathname: SIGN_IN })}

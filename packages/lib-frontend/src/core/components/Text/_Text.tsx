@@ -1,26 +1,18 @@
 import type { _TextPropsModel } from '@lib/frontend/core/components/Text/_Text.models';
-import type { FCModel } from '@lib/frontend/core/core.models';
+import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
+import type { ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
+import type { TextProps } from 'react-native';
 import { Text } from 'react-native';
 
-export const _Text: FCModel<_TextPropsModel> = ({
-  Component,
-  children,
-  isEllipsis,
-  onPress,
-  style,
-  testID,
-  ...props
-}) => {
-  const _Component = Component || Text;
-  return (
-    <_Component
-      ellipsizeMode={isEllipsis ? 'tail' : undefined}
-      numberOfLines={isEllipsis ? 1 : undefined}
-      onPress={onPress ? () => onPress() : undefined}
-      style={style}
-      testID={testID}
-      {...props}>
-      {children}
-    </_Component>
-  );
+export const _textParams: ComposeComponentParamsModel<_TextPropsModel, TextProps> = {
+  getComponent: () => Text,
+
+  getProps: ({ children, isEllipsis, onPress }: _TextPropsModel): TextProps => ({
+    children,
+    ellipsizeMode: isEllipsis ? 'tail' : undefined,
+    numberOfLines: isEllipsis ? 1 : undefined,
+    onPress: onPress ? () => onPress() : undefined,
+  }),
 };
+
+export const _Text = composeComponent<_TextPropsModel, TextProps>(_textParams);
