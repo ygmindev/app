@@ -6,7 +6,7 @@ import type {
   MenuPropsModel,
 } from '@lib/frontend/core/components/Menu/Menu.models';
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
-import { Press } from '@lib/frontend/core/components/Press/Press';
+import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
@@ -92,7 +92,7 @@ export const Menu: SFCModel<MenuPropsModel> = ({
           //   value === id && (
           //     <Icon
           //       color={color}
-          //       icon={ICON.check}
+          //       icon={ICONS.check}
           //     />
           //   )
           // }
@@ -113,9 +113,9 @@ export const Menu: SFCModel<MenuPropsModel> = ({
       {options.length ? (
         elements
       ) : (
-        <Press isDisabled>
+        <Pressable isDisabled>
           <Text color="muted">{t('core:labels.noResult')}</Text>
-        </Press>
+        </Pressable>
       )}
     </Wrapper>
   );

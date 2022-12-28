@@ -12,15 +12,15 @@ export type WithTestComponentParamsModel<
   TDefault extends PartialModel<TProps> = PartialModel<TProps>,
 > = WithTestParamsModel<ComponentType<TProps>> & {
   defaultProps?: TDefault & WithForwardedRefPropsModel;
-  displayName?: string;
-} & (TProps extends WithTestIdModel ? WithTestIdModel : object);
+};
 
 export type WithTestComponentModel<
   TProps,
   TDefault extends PartialModel<TProps> = PartialModel<TProps>,
-> = WithTestModel & {
-  Component: TestComponentModel<TProps, TDefault>;
-} & (TProps extends WithTestIdModel ? { testID: string } : object);
+> = Required<WithTestIdModel> &
+  WithTestModel & {
+    Component: TestComponentModel<TProps, TDefault>;
+  };
 
 export type TestComponentModel<
   TProps,

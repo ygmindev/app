@@ -1,6 +1,5 @@
-import type { TranslationTextModel } from '@lib/frontend/locale/locale.models';
-import type { WithTestIdModel } from '@lib/frontend/test/test.models';
+import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 
-export interface ErrorTooltipPropsModel extends WithTestIdModel {
-  error: TranslationTextModel;
+export interface ErrorTooltipPropsModel {
+  error: TranslatableTextModel;
 }

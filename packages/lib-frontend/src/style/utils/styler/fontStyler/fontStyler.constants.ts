@@ -3,7 +3,7 @@ export enum FONT_FAMILY {
   STYLISH = 'stylish',
 }
 
-export enum FONT_STYLE {
+export enum FONT_TYPE {
   BODY = 'body',
   HEADLINE = 'headline',
   SUBTITLE = 'subtitle',

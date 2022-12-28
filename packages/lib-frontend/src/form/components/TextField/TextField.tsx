@@ -1,8 +1,8 @@
-import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
+import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
+import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import { ErrorTooltip } from '@lib/frontend/form/components/ErrorTooltip/ErrorTooltip';
 import { MaskedTextField } from '@lib/frontend/form/components/MaskedTextField/MaskedTextField';
@@ -51,15 +51,15 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
   if (!isDisabled && !isNoClear) {
     _rightElement = (
       <Wrapper isRowAlign>
-        <Appear
+        <Appearable
           isCenter
           isLazy={false}
           isVisible={isFocused && size(_value) > 0}>
           <Icon
-            icon={ICON.times}
+            icon={ICONS.times}
             onPress={() => _handleChange('')}
           />
-        </Appear>
+        </Appearable>
 
         {_rightElement}
       </Wrapper>

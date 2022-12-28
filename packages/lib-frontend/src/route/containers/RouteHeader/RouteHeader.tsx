@@ -1,8 +1,8 @@
-import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
+import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { APP_HEADER_HEIGHT } from '@lib/frontend/app/containers/AppHeader/AppHeader.constants';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
+import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import type { FCModel } from '@lib/frontend/core/core.models';
-import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import type { RouteHeaderPropsModel } from '@lib/frontend/route/containers/RouteHeader/RouteHeader.models';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
@@ -13,7 +13,7 @@ export const RouteHeader: FCModel<RouteHeaderPropsModel> = ({ testID }) => {
   const current = useStore((state) => state.route.current);
 
   return current ? (
-    <Appear
+    <Appearable
       backgroundColor={THEME_RELATIVE_COLOR.MAIN}
       height={APP_HEADER_HEIGHT}
       isAbsoluteFill
@@ -23,10 +23,10 @@ export const RouteHeader: FCModel<RouteHeaderPropsModel> = ({ testID }) => {
       isVisible={current.isHeader}
       testID={testID}>
       <Icon
-        icon={ICON.chevronLeft}
+        icon={ICONS.chevronLeft}
         isTitle
         onPress={up}
       />
-    </Appear>
+    </Appearable>
   ) : null;
 };

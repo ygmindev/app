@@ -3,8 +3,10 @@ import type { ViewPropsModel } from '@lib/frontend/core/components/View/View.mod
 import type { SpacingModel } from '@lib/frontend/style/utils/styler/spacingStyler/spacingStyler.models';
 import type { ViewStylerParamsModel } from '@lib/frontend/style/utils/styler/viewStyler/viewStyler.models';
 
-export interface WrapperPropsModel extends ViewPropsModel, ViewStylerParamsModel {
-  animation?: AnimatablePropsModel;
+export interface WrapperPropsModel
+  extends ViewPropsModel,
+    ViewStylerParamsModel,
+    AnimatablePropsModel {
   isCenter?: boolean;
   isDistribute?: boolean;
   isRowAlign?: boolean;

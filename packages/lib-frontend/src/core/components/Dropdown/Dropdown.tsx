@@ -4,7 +4,7 @@ import type { DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { THEME_RELATIVE_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 
 export const Dropdown: SFCModel<DropdownPropsModel> = ({
   anchor,
@@ -29,8 +29,8 @@ export const Dropdown: SFCModel<DropdownPropsModel> = ({
       onClose={onClose}
       style={styles}>
       <Wrapper
+        backgroundColor={THEME_COLOR.NEUTRAL}
         border
-        backgroundColor={THEME_RELATIVE_COLOR.MAIN}
         isFullWidth
         isShadow
         mLeft={isRight}

@@ -1,15 +1,15 @@
-import type { TranslationTextModel } from '@lib/frontend/locale/locale.models';
+import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 import type { InferModel, PrimitiveModel } from '@lib/shared/core/core.models';
 
 export type FormErrorModel<TType> = {
   [TKey in keyof TType]?: InferModel<TType[TKey]> extends PrimitiveModel
-    ? TranslationTextModel | boolean | undefined
+    ? TranslatableTextModel | boolean | undefined
     : FormErrorModel<TType[TKey]>;
 };
 
 export type FormValidatorModel<TValue extends string = string> = (params: {
   value: TValue;
-}) => TranslationTextModel | undefined;
+}) => TranslatableTextModel | undefined;
 
 export type FormValidatorsModel<TType> = {
   [TKey in keyof TType]?: TType[TKey] extends object

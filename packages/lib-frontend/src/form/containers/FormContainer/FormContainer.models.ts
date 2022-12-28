@@ -6,7 +6,7 @@ import type { TextFieldPropsModel } from '@lib/frontend/form/components/TextFiel
 import type { FORM_FIELD_TYPE } from '@lib/frontend/form/containers/FormContainer/FormContainer.constants';
 import type { WithSubmitPropsModel } from '@lib/frontend/form/decorators/withSubmitProps/withSubmitProps.models';
 import type { UseFormParamsModel } from '@lib/frontend/form/hooks/useForm/useForm.models';
-import type { TranslationTextModel } from '@lib/frontend/locale/locale.models';
+import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 import type { WithStyleModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
 import type { WithTestIdModel } from '@lib/frontend/test/test.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
@@ -33,9 +33,9 @@ export interface FormContainerPropsModel<TType>
     UseFormParamsModel<TType>,
     WithSubmitPropsModel<TType>,
     WithTestIdModel {
-  cancelLabel?: TranslationTextModel;
+  cancelLabel?: TranslatableTextModel;
   isFullWidth?: boolean;
   leftElement?: ReactNode;
   rows?: Array<FormContainerRowModel>;
-  submitLabel?: TranslationTextModel;
+  submitLabel?: TranslatableTextModel;
 }

@@ -1,7 +1,6 @@
-import type { DropPropsModel } from '@lib/frontend/core/components/Drop/Drop.models';
-import type { WithTestIdModel } from '@lib/frontend/test/test.models';
+import type { DroppablePropsModel } from '@lib/frontend/core/components/Droppable/Droppable.models';
 import type { ReactNode } from 'react';
 
-export interface TooltipPropsModel extends Pick<DropPropsModel, 'children'>, WithTestIdModel {
+export interface TooltipPropsModel extends Pick<DroppablePropsModel, 'children'> {
   tooltip?: ReactNode | string;
 }

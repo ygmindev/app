@@ -2,10 +2,10 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { _ErrorBoundary } from '@lib/frontend/core/components/ErrorBoundary/_ErrorBoundary';
 import type { ErrorBoundaryPropsModel } from '@lib/frontend/core/components/ErrorBoundary/ErrorBoundary.models';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
+import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { FCModel } from '@lib/frontend/core/core.models';
-import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { CORE } from '@lib/shared/core/core.constants';
@@ -24,16 +24,16 @@ export const ErrorBoundary: FCModel<ErrorBoundaryPropsModel> = ({
     if (error) {
       const [icon, message] = (() => {
         if (['Network Error'].includes(error.message)) {
-          return [ICON.offline, t('core:messages.errorOffline')];
+          return [ICONS.offline, t('core:messages.errorOffline')];
         }
 
         switch ((error as HttpError).statusCode) {
           case HTTP_STATUS_CODE.UNAUTHORIZED:
-            return [ICON.lock, t('core:messages.errorUnauthorized')];
+            return [ICONS.lock, t('core:messages.errorUnauthorized')];
           case HTTP_STATUS_CODE.FORBIDDEN:
-            return [ICON.ban, t('core:messages.errorForbidden')];
+            return [ICONS.ban, t('core:messages.errorForbidden')];
           default:
-            return [ICON.sad, t('core:messages.errorGeneric')];
+            return [ICONS.sad, t('core:messages.errorGeneric')];
         }
       })();
 
@@ -42,7 +42,7 @@ export const ErrorBoundary: FCModel<ErrorBoundaryPropsModel> = ({
           isCenter
           spacing={THEME_SIZE.SMALL}>
           <Icon
-            icon={icon || ICON.sad}
+            icon={icon || ICONS.sad}
             isTitle
           />
 
@@ -65,7 +65,7 @@ export const ErrorBoundary: FCModel<ErrorBoundaryPropsModel> = ({
             {_getError(error)}
 
             <Button
-              icon={ICON.refresh}
+              icon={ICONS.refresh}
               onPress={handleReset}>
               {t('core:labels.tryAgain')}
             </Button>

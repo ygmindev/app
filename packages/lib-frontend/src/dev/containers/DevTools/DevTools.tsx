@@ -1,5 +1,5 @@
+import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import type { FCModel } from '@lib/frontend/core/core.models';
-import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import { display } from '@lib/frontend/core/utils/display/display';
 import type { DevToolsPropsModel } from '@lib/frontend/dev/containers/DevTools/DevTools.models';
@@ -19,7 +19,7 @@ export const DevTools: FCModel<DevToolsPropsModel> = () => {
       case 'webpackInvalid': {
         return add({
           color: THEME_COLOR.PRIMARY,
-          icon: ICON.code,
+          icon: ICONS.code,
           id: DEV_TOOLS_NOTIFICATION,
           isInfinite: true,
           message: t('core:labels.loading'),

@@ -1,6 +1,6 @@
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import type { IconTextPropsModel } from '@lib/frontend/core/components/IconText/IconText.models';
-import { Press } from '@lib/frontend/core/components/Press/Press';
+import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
@@ -44,7 +44,7 @@ export const IconText: SFCModel<IconTextPropsModel> = ({
 
   if (onPress) {
     element = (
-      <Press
+      <Pressable
         confirmMessage={confirmMessage}
         from={{
           ...(props.color ? { backgroundColor: theme.colors.background.main } : {}),
@@ -64,7 +64,7 @@ export const IconText: SFCModel<IconTextPropsModel> = ({
         }}
         tooltip={tooltip}>
         {element}
-      </Press>
+      </Pressable>
     );
   }
 

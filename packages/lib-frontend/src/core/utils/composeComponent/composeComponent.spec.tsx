@@ -2,7 +2,6 @@ import type { WithChildrenPropsModel } from '@lib/frontend/core/decorators/withC
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import type { WithStyleModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
 import type { StyleModel } from '@lib/frontend/style/style.models';
-import type { WithTestIdModel } from '@lib/frontend/test/test.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
@@ -13,14 +12,14 @@ import { View } from 'react-native';
 const { displayName } = withTest({ target: () => composeComponent });
 
 describe(displayName, () => {
-  interface _ViewProps extends WithChildrenPropsModel, WithTestIdModel, WithStyleModel {
+  interface _ViewProps extends WithChildrenPropsModel, WithStyleModel {
     height: number;
     width: number;
   }
 
   const _View = composeComponent<_ViewProps, ViewProps>({
     getComponent: () => View,
-    getProps: ({ children, testID, width }) => ({ children, testID, width }),
+    getProps: ({ children, width }) => ({ children, width }),
     stylers: [({ height }) => ({ height })],
   });
 

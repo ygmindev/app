@@ -1,7 +1,7 @@
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
+import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import type { _SwitchFieldPropsModel } from '@lib/frontend/form/components/SwitchField/_SwitchField.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
@@ -9,8 +9,8 @@ import { THEME_COLOR, THEME_RELATIVE_COLOR } from '@lib/frontend/style/style.con
 import { Switch } from 'react-native-switch';
 
 export const _SwitchField: SFCModel<_SwitchFieldPropsModel> = ({
-  activeIcon = ICON.check,
-  inactiveIncon = ICON.times,
+  activeIcon = ICONS.check,
+  inactiveIncon = ICONS.times,
   isDisabled,
   onChange,
   value,

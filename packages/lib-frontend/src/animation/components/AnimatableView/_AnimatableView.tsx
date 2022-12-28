@@ -1,4 +1,5 @@
 import type { _AnimatableViewPropsModel } from '@lib/frontend/animation/components/AnimatableView/_AnimatableView.models';
+import { _getAnimatableProps } from '@lib/frontend/animation/utils/animatable/_animatable';
 import { animatable } from '@lib/frontend/animation/utils/animatable/animatable';
 import { _viewParams } from '@lib/frontend/core/components/View/_View';
 import type { PropsModel } from '@lib/frontend/core/core.models';
@@ -30,4 +31,10 @@ export const _AnimatableView = composeComponent<
       : isHorizontalScrollable || isVerticalScrollable || onScroll
       ? MotiScrollView
       : MotiView,
+
+  getProps: ({ animation, ...props }, theme) =>
+    ({
+      ...(_viewParams.getProps ? _viewParams.getProps(props, theme) : {}),
+      ...(animation ? _getAnimatableProps(animation, theme) : {}),
+    } as PropsModel<typeof MotiView>),
 });

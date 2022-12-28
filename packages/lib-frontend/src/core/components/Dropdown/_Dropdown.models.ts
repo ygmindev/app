@@ -1,16 +1,14 @@
-import type { WithOpenPropsModel } from '@lib/frontend/core/core.models';
 import type { WithChildrenPropsModel } from '@lib/frontend/core/decorators/withChildrenProps/withChildrenProps.models';
-import type { WithStyleModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
+import type { CallableModel } from '@lib/shared/core/core.models';
 import type { ReactNode } from 'react';
 
-export interface _DropdownPropsModel
-  extends WithStyleModel,
-    WithOpenPropsModel,
-    WithChildrenPropsModel {
+export interface _DropdownPropsModel extends WithChildrenPropsModel {
   anchor: ReactNode;
   isFullWidth?: boolean;
   isLeft?: boolean;
+  isOpen?: boolean;
   isRight?: boolean;
   isTop?: boolean;
   maxWidth?: number;
+  onClose?: CallableModel;
 }

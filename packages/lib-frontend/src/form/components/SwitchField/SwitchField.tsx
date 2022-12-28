@@ -1,16 +1,16 @@
+import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { _SwitchField } from '@lib/frontend/form/components/SwitchField/_SwitchField';
 import type { SwitchFieldPropsModel } from '@lib/frontend/form/components/SwitchField/SwitchField.models';
 import { useField } from '@lib/frontend/form/hooks/useField/useField';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 
 export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
-  activeIcon = ICON.check,
+  activeIcon = ICONS.check,
   defaultValue,
-  inactiveIncon = ICON.times,
+  inactiveIncon = ICONS.times,
   isDisabled,
   label,
   onChange,

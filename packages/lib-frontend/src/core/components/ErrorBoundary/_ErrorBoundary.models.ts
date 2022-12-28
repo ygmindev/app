@@ -1,9 +1,10 @@
+import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
 import type { WithChildrenPropsModel } from '@lib/frontend/core/decorators/withChildrenProps/withChildrenProps.models';
-import type { WithIconPropsModel } from '@lib/frontend/core/decorators/withIconProps/withIconProps.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 import type { ReactElement } from 'react';
 
-export interface _FallbackPropsModel<TError extends Error = Error> extends WithIconPropsModel {
+export interface _FallbackPropsModel<TError extends Error = Error>
+  extends Pick<IconPropsModel, 'icon'> {
   error?: TError;
   handleReset: CallableModel;
 }

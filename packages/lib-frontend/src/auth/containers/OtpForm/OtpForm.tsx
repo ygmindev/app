@@ -1,14 +1,14 @@
-import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
+import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { OtpField } from '@lib/frontend/auth/components/OtpField/OtpField';
 import { OTP_FORM_VALIDATORS } from '@lib/frontend/auth/containers/OtpForm/OtpForm.constants';
 import type { OtpFormPropsModel } from '@lib/frontend/auth/containers/OtpForm/OtpForm.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { ErrorBoundary } from '@lib/frontend/core/components/ErrorBoundary/ErrorBoundary';
+import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Loading } from '@lib/frontend/core/components/Loading/Loading';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayout';
 import { useForm } from '@lib/frontend/form/hooks/useForm/useForm';
 import { Trans } from '@lib/frontend/locale/components/Trans/Trans';
@@ -28,7 +28,7 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = (props) => {
   const _handleError = (e: Error): void => {
     if ((e as HttpError).statusCode === HTTP_STATUS_CODE.FORBIDDEN) {
       error({
-        icon: ICON.ban,
+        icon: ICONS.ban,
         message: t('auth:messages.invalidOtp'),
         title: t('auth:labels.invalidOtp'),
       });
@@ -91,18 +91,18 @@ export const _OtpForm: SFCModel<OtpFormPropsModel> = ({ data, onBack, onSuccess,
         <Text>{t('auth:messages.otpDidntGet')}</Text>
 
         <Button
-          icon={ICON.refresh}
+          icon={ICONS.refresh}
           isDisabled={isLoading}
           onPress={onBack}>
           {t('core:labels.tryAgain')}
         </Button>
       </Wrapper>
 
-      <Appear
+      <Appearable
         isLazy={false}
         isVisible={isLoading}>
         <Loading size={THEME_SIZE.LARGE} />
-      </Appear>
+      </Appearable>
     </CenterLayout>
   );
 };

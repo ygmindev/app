@@ -79,7 +79,7 @@ export const Wrapper: SFCModel<WrapperPropsModel> = ({
 
   return createElement(
     animation ? AnimatableView : View,
-    { ...props, ...(animation || {}), style: styles },
+    { ...props, ...(animation ? { animation } : {}), style: styles },
     _getChildren(children),
   );
 };

@@ -1,9 +1,9 @@
-import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
+import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Slides } from '@lib/frontend/animation/components/Slides/Slides';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
+import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import type { FormStepsPropsModel } from '@lib/frontend/form/components/FormSteps/FormSteps.models';
 import { useDimension } from '@lib/frontend/platform/hooks/useDimension/useDimension';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
@@ -59,16 +59,16 @@ export const FormSteps = <TType extends MergeArrayModel<TSteps>, TSteps extends 
         style={styles}
         testID={testID}>
         <Wrapper isRowAlign>
-          <Appear
+          <Appearable
             isLazy={false}
             isVisible={current > 0}>
             <Icon
-              icon={ICON.arrowLeft}
+              icon={ICONS.arrowLeft}
               isDisabled={current <= 0}
               isTitle
               onPress={() => currentSet(current - 1)}
             />
-          </Appear>
+          </Appearable>
         </Wrapper>
 
         <Slides current={current}>

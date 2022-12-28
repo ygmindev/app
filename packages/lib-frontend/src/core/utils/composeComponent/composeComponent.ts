@@ -3,6 +3,7 @@ import type {
   ComposeComponentPropsModel,
 } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import type { ForwardRefExoticComponent, ReactElement, RefObject } from 'react';
 import { createElement, forwardRef } from 'react';
 import { unstable_createElement } from 'react-native-web';
@@ -18,7 +19,8 @@ export const composeComponent = <TProps, TResult, TRef = unknown>({
   forwardRef<RefObject<TRef>, ComposeComponentPropsModel<TProps>>(
     (props, ref): ReactElement<TResult> => {
       const { styles } = useStyles<TProps>({ props, stylers });
-      const _props = getProps ? getProps(props, ref) : (props as unknown as TResult);
+      const theme = useTheme();
+      const _props = getProps ? getProps(props, theme, ref) : (props as unknown as TResult);
       return (isWeb ? unstable_createElement : createElement)(getComponent(props), {
         ..._props,
         nativeid: props.nativeID,

@@ -1,5 +1,5 @@
 import { animatable } from '@lib/frontend/animation/utils/animatable/animatable';
-import { Activate } from '@lib/frontend/core/components/Activate/Activate';
+import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
 import { _Link } from '@lib/frontend/core/components/Link/_Link';
 import type { _LinkPropsModel } from '@lib/frontend/core/components/Link/_Link.models';
 import type { LinkPropsModel } from '@lib/frontend/core/components/Link/Link.models';
@@ -27,7 +27,7 @@ export const Link: SFCModel<LinkPropsModel> = ({ children, testID, ...props }) =
   const theme = useTheme();
 
   return (
-    <Activate
+    <Activatable
       onActive={() => setIsActive(true)}
       onInactive={() => setIsActive(false)}>
       {() => (
@@ -43,6 +43,6 @@ export const Link: SFCModel<LinkPropsModel> = ({ children, testID, ...props }) =
           </_LinkAnimatable>
         </Wrapper>
       )}
-    </Activate>
+    </Activatable>
   );
 };

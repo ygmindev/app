@@ -4,8 +4,7 @@ import type {
   COLUMN_SORT_TYPE,
   TABLE_SELECT_TYPE,
 } from '@lib/frontend/core/components/Table/Table.constants';
-import type { TranslationTextModel } from '@lib/frontend/locale/locale.models';
-import type { WithTestIdModel } from '@lib/frontend/test/test.models';
+import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 import type { ReactNode } from 'react';
 
@@ -20,7 +19,7 @@ export interface TableColumnModel<TType, TValue> {
   formatter?: TableColumnFormatterModel<TType, TValue>;
   id: string;
   isHidden?: boolean;
-  label?: TranslationTextModel;
+  label?: TranslatableTextModel;
   pin?: ColumnPinTypeModel;
   renderer?: TableColumnRendererModel<TType, TValue>;
   sort?: ColumnSortTypeModel | boolean;
@@ -41,6 +40,6 @@ export interface TableRefModel {
   deselectRows: CallableModel;
 }
 
-export interface TablePropsModel<TType> extends _TablePropsModel<TType>, WithTestIdModel {
+export interface TablePropsModel<TType> extends _TablePropsModel<TType> {
   isLoading?: boolean;
 }

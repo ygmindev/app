@@ -1,110 +1,66 @@
-import { Activate } from '@lib/frontend/core/components/Activate/Activate';
+import type { AnimationModel } from '@lib/frontend/animation/animation.models';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import type { ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
-import { Modal } from '@lib/frontend/core/components/Modal/Modal';
+import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
 import { Text } from '@lib/frontend/core/components/Text/Text';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
-import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
-import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_BASIC_SIZE, THEME_COLOR } from '@lib/frontend/style/style.constants';
-import { promisify } from '@lib/shared/core/utils/promisify/promisify';
-import { useState } from 'react';
+import { THEME_BASIC_SIZE, THEME_COLOR, THEME_ROLE } from '@lib/frontend/style/style.constants';
+import { palette } from '@lib/frontend/style/utils/palette/palette';
+import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 export const Button: SFCModel<ButtonPropsModel> = ({
   children,
   color = THEME_COLOR.PRIMARY,
+  type = BUTTON_TYPE.FILLED,
   icon,
-  isDisabled,
-  isLoading,
-  isPressed,
-  confirmMessage,
-  onPress,
   size = THEME_BASIC_SIZE.MEDIUM,
   ...props
 }) => {
-  const { t } = useTranslation();
-  const [confirmModalIsOpen, setConfirmModalIsOpen] = useState<boolean>(false);
-  const [isLoadingState, setLoadingState] = useState<boolean>(false);
-
-  const { styles } = useStyles({ props });
   const theme = useTheme();
-  const isMounted = useMount();
 
-  const _isLoading = isLoading || isLoadingState;
-  const _isBlocked = isDisabled || _isLoading;
-
-  const _handlePress = async (): Promise<void> => {
-    isMounted && setLoadingState(true);
-    onPress && (await promisify(onPress)());
-    isMounted && setLoadingState(false);
+  const _pressableAnimation = (isActive?: boolean): AnimationModel => {
+    switch (type) {
+      case BUTTON_TYPE.FILLED: {
+        const _color = theme.colors[color].main;
+        return {
+          from: { backgroundColor: _color },
+          to: isActive
+            ? { backgroundColor: palette({ color: _color, lightness: 55 }) }
+            : { backgroundColor: _color },
+        };
+      }
+      case BUTTON_TYPE.TRANSPARENT: {
+        const from = { backgroundColor: theme.colors.neutral.main };
+        return {
+          from,
+          to: isActive ? { backgroundColor: theme.colors[color].muted } : from,
+        };
+      }
+      default:
+        return {};
+    }
   };
 
   return (
-    <>
-      <Activate>
-        {(isActive) => {
-          const _isActive = !isDisabled && (isActive || isPressed);
-          const _from = { backgroundColor: theme.colors.neutral.main };
-          return (
-            <Wrapper
-              animation={{
-                from: _from,
-                to: _isActive ? { backgroundColor: theme.colors.neutral.muted } : _from,
-              }}
-              height={theme.shape.height[size]}
-              isCenter
-              isRowAlign
-              onPress={() =>
-                _isBlocked
-                  ? undefined
-                  : confirmMessage
-                  ? setConfirmModalIsOpen(true)
-                  : _handlePress()
-              }
-              p
-              round
-              style={styles}>
-              {children && <Text>{children}</Text>}
-            </Wrapper>
-          );
-        }}
-      </Activate>
-
-      {confirmMessage && (
-        <Modal
-          isOpen={confirmModalIsOpen}
-          onClose={() => setConfirmModalIsOpen(false)}>
-          <Wrapper
-            grow
-            isCenter
-            spacing>
-            {confirmMessage && <Text>{confirmMessage}</Text>}
-
-            <Wrapper isRowAlign>
-              <Button
-                icon={ICON.chevronLeft}
-                isDisabled={isDisabled}
-                isTransparent
-                onPress={() => setConfirmModalIsOpen(false)}>
-                {t('core:labels.cancel')}
-              </Button>
-
-              <Button
-                icon={ICON.chevronRight}
-                isDisabled={isDisabled}
-                onPress={async () => {
-                  onPress && onPress();
-                  return setConfirmModalIsOpen(false);
-                }}>
-                {t('core:labels.continue')}
-              </Button>
-            </Wrapper>
-          </Wrapper>
-        </Modal>
+    <Pressable
+      {...props}
+      animation={_pressableAnimation}
+      height={theme.shape.height[size]}
+      isCenter>
+      {() => (
+        <Text
+          align={FONT_ALIGN.CENTER}
+          color={
+            theme.colors[color][
+              type == BUTTON_TYPE.TRANSPARENT ? THEME_ROLE.MAIN : THEME_ROLE.MAIN_CONTRAST
+            ]
+          }
+          isBold
+          isCapitalize>
+          {children}
+        </Text>
       )}
-    </>
+    </Pressable>
   );
 };

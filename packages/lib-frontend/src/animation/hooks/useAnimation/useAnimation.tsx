@@ -1,4 +1,4 @@
-import type { AnimatablePropsModel } from '@lib/frontend/animation/animation.models';
+import type { AnimationModel } from '@lib/frontend/animation/animation.models';
 import { ANIMATIONS } from '@lib/frontend/animation/hooks/useAnimation/useAnimation.constants';
 import type {
   UseAnimationModel,
@@ -34,9 +34,9 @@ export const useAnimation = ({
     ? types.reduce((result, type) => ({ ...result, ...ANIMATIONS[type](measure) }), {
         from,
         to,
-      } as AnimatablePropsModel)
+      } as AnimationModel)
     : { from, to };
-  const _animation: AnimatablePropsModel = {
+  const _animation: AnimationModel = {
     duration: duration || theme.animation.duration,
     ..._animationProps,
     from: isVisible ? _animationProps.from : _animationProps.to,

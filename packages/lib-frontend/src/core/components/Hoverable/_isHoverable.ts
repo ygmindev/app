@@ -1,0 +1,28 @@
+import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
+
+let isEnabled: boolean;
+
+if (!isSsr) {
+  isEnabled = true;
+  let lastTouchTimestamp = 0;
+
+  const enableHover = (): void => {
+    if (isEnabled || Date.now() - lastTouchTimestamp < 1000) {
+      return;
+    }
+    isEnabled = true;
+  };
+
+  const disableHover = (): void => {
+    lastTouchTimestamp = Date.now();
+    if (isEnabled) {
+      isEnabled = false;
+    }
+  };
+
+  document.addEventListener('touchstart', disableHover, true);
+  document.addEventListener('touchmove', disableHover, true);
+  document.addEventListener('mousemove', enableHover, true);
+}
+
+export const isHoverable = (): boolean => isEnabled;

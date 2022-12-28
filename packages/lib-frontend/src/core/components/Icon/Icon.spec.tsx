@@ -1,12 +1,12 @@
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
+import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
-import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<IconPropsModel>({
   defaultProps: {
-    icon: ICON.times,
+    icon: ICONS.times,
   },
   target: Icon,
 });

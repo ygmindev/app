@@ -1,9 +1,8 @@
-import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
+import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import {
@@ -46,7 +45,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
   );
 
   return (
-    <Appear
+    <Appearable
       isCenter
       isScalable
       isVisible={!isRemoving}
@@ -105,12 +104,12 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
           <Icon
             color={THEME_RELATIVE_COLOR.CONTRAST}
             from={color ? { backgroundColor: theme.colors[color].main } : undefined}
-            icon={ICON.times}
+            icon={ICONS.times}
             onPress={() => remove(id)}
             to={color ? { backgroundColor: theme.colors[color].dark } : undefined}
           />
         </Wrapper>
       </Wrapper>
-    </Appear>
+    </Appearable>
   );
 };

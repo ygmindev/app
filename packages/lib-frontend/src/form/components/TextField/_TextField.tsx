@@ -1,4 +1,4 @@
-import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
+import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { IconText } from '@lib/frontend/core/components/IconText/IconText';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { _TextFieldPropsModel } from '@lib/frontend/form/components/TextField/_TextField.models';
@@ -151,13 +151,13 @@ export const _TextField = ({
 
   const leftElement =
     left && label ? (
-      <Appear
+      <Appearable
         isCenter
         isLazy={false}
         isVisible={!isEmpty(value) || isFocused}
         mTop={18}>
         {left}
-      </Appear>
+      </Appearable>
     ) : null;
 
   const textInputProps = _getTextFieldProps({

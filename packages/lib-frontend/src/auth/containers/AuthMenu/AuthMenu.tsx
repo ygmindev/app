@@ -6,10 +6,10 @@ import {
 import type { AuthMenuPropsModel } from '@lib/frontend/auth/containers/AuthMenu/AuthMenu.models';
 import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
+import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Menu } from '@lib/frontend/core/components/Menu/Menu';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import type { SelectOptionModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
@@ -46,7 +46,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
     <Menu
       anchor={(isOpen) => (
         <Icon
-          icon={ICON.person}
+          icon={ICONS.person}
           isPressed={isOpen}
         />
       )}

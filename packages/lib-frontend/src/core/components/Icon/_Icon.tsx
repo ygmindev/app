@@ -1,39 +1,16 @@
 import type { _IconPropsModel } from '@lib/frontend/core/components/Icon/_Icon.models';
-import {
-  FONTAWESOME_ICONS,
-  IONIC_ICONS,
-} from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
-import { get } from 'lodash';
-import type { ReactNode } from 'react';
-import { Component } from 'react';
+import { FONTAWESOME_ICONS, IONIC_ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
+import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
+import { Fragment } from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import type { IconProps } from 'react-native-vector-icons/Icon';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-export class _Icon extends Component<_IconPropsModel> {
-  override render(): ReactNode {
-    const { icon, testID } = this.props;
-    if (icon) {
-      let _icon = get(IONIC_ICONS, icon);
-      if (_icon) {
-        return (
-          <Ionicons
-            {...this.props}
-            name={_icon}
-            testID={testID}
-          />
-        );
-      }
-      _icon = get(FONTAWESOME_ICONS, icon);
-      if (_icon) {
-        return (
-          <FontAwesome
-            {...this.props}
-            name={_icon}
-            testID={testID}
-          />
-        );
-      }
-    }
-    return null;
-  }
-}
+export const _Icon = composeComponent<_IconPropsModel, IconProps>({
+  getComponent: ({ icon }) =>
+    IONIC_ICONS[icon] ? Ionicons : FONTAWESOME_ICONS[icon] ? FontAwesome : Fragment,
+
+  getProps: ({ icon }: _IconPropsModel): IconProps => ({
+    name: IONIC_ICONS[icon] || FONTAWESOME_ICONS[icon] || '',
+  }),
+});

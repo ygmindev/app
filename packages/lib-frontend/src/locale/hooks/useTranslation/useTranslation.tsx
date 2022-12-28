@@ -1,7 +1,7 @@
 import { internationalizeConfig } from '@lib/config/locale/internationalize/configs/internationalize.config';
 import { _useTranslation } from '@lib/frontend/locale/hooks/useTranslation/_useTranslation';
 import type { UseTranslationModel } from '@lib/frontend/locale/hooks/useTranslation/useTranslation.models';
-import type { TranslationTextModel } from '@lib/frontend/locale/locale.models';
+import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 import { isFunction } from 'lodash';
 
 export const useTranslation = (ns: Array<string> = []): UseTranslationModel => {
@@ -10,7 +10,7 @@ export const useTranslation = (ns: Array<string> = []): UseTranslationModel => {
     ...([internationalizeConfig.namespaceDefault] || []),
   ]);
 
-  const t = <TParams = undefined,>(key?: TranslationTextModel, params?: TParams): string =>
+  const t = <TParams = undefined,>(key?: TranslatableTextModel, params?: TParams): string =>
     key && isInitialized ? (isFunction(key) ? key({ isInitialized, t }) : _t(key, params)) : '';
 
   return { isInitialized, t };

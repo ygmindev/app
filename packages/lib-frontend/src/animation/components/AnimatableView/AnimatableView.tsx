@@ -9,5 +9,9 @@ export const AnimatableView = composeComponent<AnimatableViewPropsModel, _Animat
     ...viewParams,
 
     getComponent: () => _AnimatableView,
+
+    getProps: (props, theme) => ({
+      ...(viewParams.getProps ? viewParams.getProps(props, theme) : {}),
+    }),
   },
 );

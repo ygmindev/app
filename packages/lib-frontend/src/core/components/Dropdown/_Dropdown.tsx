@@ -1,12 +1,11 @@
-import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
+import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import type { _DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/_Dropdown.models';
+import { View } from '@lib/frontend/core/components/View/View';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import Tippy from '@tippyjs/react';
-import { set } from 'lodash';
-import { View } from 'react-native';
 import type { Instance } from 'tippy.js';
 
 export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
@@ -39,7 +38,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
     <Tippy
       animation={false}
       appendTo={() => document.body}
-      content={<Appear isVisible={isOpen}>{children}</Appear>}
+      content={<Appearable isVisible={isOpen}>{children}</Appearable>}
       ignoreAttributes
       interactive
       maxWidth={maxWidth || '100%'}
@@ -52,9 +51,9 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
           ? [
               {
                 enabled: true,
-                fn: ({ state }) =>
-                  set(state, 'styles.popper.width', `${state.rects.reference.width}px`),
-                name: '',
+                fn: ({ state }) => {
+                  state.styles.popper.width = `${state.rects.reference.width}px`;
+                },
                 phase: 'beforeWrite',
                 requires: ['computeStyles'],
               },

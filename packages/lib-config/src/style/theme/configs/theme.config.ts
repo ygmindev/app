@@ -9,7 +9,7 @@ const APP_PLATFORM = getEnv<PlatformModel>('APP_PLATFORM');
 
 export const themeConfig: ThemeConfigParamsModel = {
   animation: {
-    duration: 200,
+    duration: 150,
     transition: 500,
   },
 
@@ -35,7 +35,7 @@ export const themeConfig: ThemeConfigParamsModel = {
 
     size: {
       l: 23,
-      m: 15,
+      m: 14,
       s: 11,
       xl: 34,
       xs: 8,
@@ -93,25 +93,25 @@ export const themeConfig: ThemeConfigParamsModel = {
     },
     light: {
       [THEME_COLOR.ERROR]: {
-        main: { lightness: 40 },
+        main: { lightness: 50 },
         mainContrast: { lightness: 100 },
         muted: { lightness: 90 },
         mutedContrast: { lightness: 100 },
       },
       [THEME_COLOR.PRIMARY]: {
-        main: { lightness: 40 },
+        main: { lightness: 50 },
         mainContrast: { lightness: 100 },
         muted: { lightness: 90 },
         mutedContrast: { lightness: 100 },
       },
       [THEME_COLOR.SECONDARY]: {
-        main: { lightness: 40 },
+        main: { lightness: 50 },
         mainContrast: { lightness: 100 },
         muted: { lightness: 90 },
         mutedContrast: { lightness: 100 },
       },
       [THEME_COLOR.SUCCESS]: {
-        main: { lightness: 40 },
+        main: { lightness: 50 },
         mainContrast: { lightness: 100 },
         muted: { lightness: 90 },
         mutedContrast: { lightness: 100 },
@@ -123,7 +123,7 @@ export const themeConfig: ThemeConfigParamsModel = {
         mutedContrast: { lightness: 10 },
       },
       [THEME_COLOR.WARNING]: {
-        main: { lightness: 40 },
+        main: { lightness: 50 },
         mainContrast: { lightness: 100 },
         muted: { lightness: 90 },
         mutedContrast: { lightness: 100 },
@@ -133,11 +133,13 @@ export const themeConfig: ThemeConfigParamsModel = {
 
   shape: {
     borderRadius: 18,
+
     height: {
       l: 50,
       m: 40,
       s: 32,
     },
+
     spacing: {
       l: 28,
       m: 16,

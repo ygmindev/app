@@ -1,7 +1,7 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
+import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { WithFieldPropsModel } from '@lib/frontend/core/decorators/withFieldProps/withFieldProps.models';
-import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { Form } from '@lib/frontend/form/components/Form/Form';
 import { SelectField } from '@lib/frontend/form/components/SelectField/SelectField';
@@ -20,8 +20,8 @@ import { useForm } from '@lib/frontend/form/hooks/useForm/useForm';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { promisify } from '@lib/shared/core/utils/promisify/promisify';
 import { FIELD_TYPE } from '@lib/shared/form/form.constants';
 import { flatten, get, isEqual, map, reduce, toNumber } from 'lodash';
@@ -177,7 +177,7 @@ export const FormContainer = <TType,>({
 
         {onCancel && (
           <Button
-            icon={ICON.chevronLeft}
+            icon={ICONS.chevronLeft}
             isLoading={_isLoading}
             isTransparent
             onPress={onCancel}
@@ -187,7 +187,7 @@ export const FormContainer = <TType,>({
         )}
 
         <Button
-          icon={ICON.chevronRight}
+          icon={ICONS.chevronRight}
           isLoading={_isLoading}
           onPress={handleSubmit}
           testID={`${testID}-submit`}>

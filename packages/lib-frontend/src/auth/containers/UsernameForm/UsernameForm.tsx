@@ -8,9 +8,9 @@ import type {
   UsernameFormPropsModel,
 } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.models';
 import { useOtpResource } from '@lib/frontend/auth/hooks/useOtpResource/useOtpResource';
+import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayout';
 import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
@@ -42,7 +42,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
       result && onSuccess && (await onSuccess(data, result));
     } catch (e) {
       if (isCheckIfNotExists && isTypeOf(e, DuplicateError)) {
-        return error({ icon: ICON.people, message: t('auth:messages.userExistsError') });
+        return error({ icon: ICONS.people, message: t('auth:messages.userExistsError') });
       }
       throw e;
     }

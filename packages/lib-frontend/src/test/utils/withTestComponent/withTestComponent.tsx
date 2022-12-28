@@ -18,13 +18,11 @@ export const withTestComponent = <
   target,
 }: WithTestComponentParamsModel<TProps, TDefault>): WithTestComponentModel<TProps, TDefault> => {
   const testID = uid('withTestComponent');
-  const _displayName = displayName || target.displayName || target.name || uid('display-name');
-  const Component: TestComponentModel<TProps, TDefault> = (props) => {
-    const componentProps = { testID, ...defaultProps, ...props } as unknown as TProps & object;
-    return createElement<TProps & object>(target as ComponentType<TProps & object>, componentProps);
-  };
-  return { Component, displayName: trim(_displayName, '_'), testID } as WithTestComponentModel<
-    TProps,
-    TDefault
-  >;
+  const _displayName = displayName || target.displayName || target.name || uid('displayName');
+  const Component: TestComponentModel<TProps, TDefault> = (props) =>
+    createElement(
+      target as ComponentType<TProps & object>,
+      { testID, ...defaultProps, ...props } as unknown as TProps & object,
+    );
+  return { Component, displayName: trim(_displayName, '_'), testID };
 };

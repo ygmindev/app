@@ -1,5 +1,5 @@
 import { withStory } from '@app/web-storybook/utils/withStory/withStory';
-import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
+import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import type { _SwitchFieldPropsModel } from '@lib/frontend/form/components/SwitchField/_SwitchField.models';
 import { SwitchField } from '@lib/frontend/form/components/SwitchField/SwitchField';
 
@@ -8,7 +8,7 @@ const { Story, meta } = withStory<_SwitchFieldPropsModel>({
   target: SwitchField,
   variants: [
     { props: { isDisabled: true } },
-    { props: { activeIcon: ICON.happy, inactiveIncon: ICON.sad } },
+    { props: { activeIcon: ICONS.happy, inactiveIncon: ICONS.sad } },
   ],
 });
 

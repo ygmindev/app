@@ -1,13 +1,13 @@
-import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
+import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import {
   OTP_FIELD_MAIN_TEST_ID,
   OTP_FIELD_WIDTH,
 } from '@lib/frontend/auth/components/OtpField/OtpField.constants';
 import type { OtpFieldPropsModel } from '@lib/frontend/auth/components/OtpField/OtpField.models';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
+import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { ICON } from '@lib/frontend/core/decorators/withIconProps/withIconProps.constants';
 import { ErrorTooltip } from '@lib/frontend/form/components/ErrorTooltip/ErrorTooltip';
 import { TextField } from '@lib/frontend/form/components/TextField/TextField';
 import { useField } from '@lib/frontend/form/hooks/useField/useField';
@@ -83,13 +83,13 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             position={SHAPE_POSITION.ABSOLUTE}>
             {(isFunction(error) || isString(error)) && <ErrorTooltip error={error} />}
 
-            <Appear isVisible={fieldValue.length > 0}>
+            <Appearable isVisible={fieldValue.length > 0}>
               <Icon
-                icon={ICON.times}
+                icon={ICONS.times}
                 isDisabled={isDisabled}
                 onPress={() => setFieldValue('')}
               />
-            </Appear>
+            </Appearable>
           </Wrapper>
         )}
       </Wrapper>

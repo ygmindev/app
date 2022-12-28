@@ -1,4 +1,4 @@
-import { Appear } from '@lib/frontend/animation/components/Appear/Appear';
+import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Skeleton } from '@lib/frontend/core/components/Skeleton/Skeleton';
 import { SvgShape } from '@lib/frontend/core/components/SvgShape/SvgShape';
 import {
@@ -36,7 +36,7 @@ export const Table = <TType,>({
       isOverflowHidden
       style={styles}
       testID={testID}>
-      <Appear
+      <Appearable
         grow
         isLazy={false}
         isVisible={isMounted}>
@@ -69,7 +69,7 @@ export const Table = <TType,>({
           rowHeight={rowHeight}
           select={select}
         />
-      </Appear>
+      </Appearable>
     </Wrapper>
   );
 };
