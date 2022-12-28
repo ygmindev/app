@@ -1,4 +1,4 @@
-export const IONIC_ICONS: Record<string, string> = {
+export const IONIC_ICONS = {
   add: 'add-circle-outline',
   alarm: 'alarm-outline',
   analytics: 'analytics-outline',
@@ -96,7 +96,7 @@ export const IONIC_ICONS: Record<string, string> = {
   wallet: 'wallet-outline',
 };
 
-export const FONTAWESOME_ICONS: Record<string, string> = {
+export const FONTAWESOME_ICONS = {
   ban: 'ban',
   bank: 'bank',
   contact: 'address-book-o',
@@ -110,3 +110,5 @@ export const ICONS = {
   ...IONIC_ICONS,
   ...FONTAWESOME_ICONS,
 };
+
+export const ICON_FONT_SIZE_OFFSET = 4;

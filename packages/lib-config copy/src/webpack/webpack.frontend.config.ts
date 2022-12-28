@@ -1,5 +1,5 @@
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
-import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { webpackConfig as webpackConfigBase } from '@lib/config/webpack/webpack.base';
 import type { WebpackParamsModel } from '@lib/config/webpack/webpack.config.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -28,7 +28,7 @@ export const webpackConfig = (params: WebpackParamsModel): Configuration =>
               transpile: fromGlobs({
                 globs: TRANSPILE_GLOBS,
                 isAbsolute: true,
-                root: fromRoot('node_modules'),
+                root: fromModules(),
               }),
             },
             params,

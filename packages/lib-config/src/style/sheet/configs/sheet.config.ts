@@ -3,8 +3,8 @@ import { themeConfig } from '@lib/config/style/theme/configs/theme.config';
 
 export const sheetConfig: SheetConfigParamsModel = {
   fonts: {
-    FontAwesome: 'url("react-native-vector-icons/dist/Fonts/FontAwesome.ttf") format("truetype")',
-    Ionicons: 'url("react-native-vector-icons/dist/Fonts/Ionicons.ttf") format("truetype")',
+    FontAwesome: 'url("fonts/FontAwesome.ttf") format("truetype")',
+    Ionicons: 'url("fonts/Ionicons.ttf") format("truetype")',
   },
 
   styles: {
@@ -20,7 +20,7 @@ export const sheetConfig: SheetConfigParamsModel = {
     body: {
       display: 'flex',
       flexDirection: 'column',
-      fontFamily: themeConfig.font?.fontFamily,
+      fontFamily: themeConfig.font?.fontFamily.main,
       fontSmooth: 'antialiased',
     },
 

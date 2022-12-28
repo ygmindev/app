@@ -21,7 +21,8 @@ export const _SwitchField: SFCModel<_SwitchFieldPropsModel> = ({
     stylers: [
       {
         alignItems: 'center',
-        borderColor: value === 'true' ? theme.colors.primary.main : theme.colors.secondary.main,
+        borderColor:
+          value === 'true' ? theme.colors.tone.primary.main : theme.colors.tone.secondary.main,
         justifyContent: 'center',
       },
     ],
@@ -30,8 +31,8 @@ export const _SwitchField: SFCModel<_SwitchFieldPropsModel> = ({
   return (
     <Wrapper opacity={isDisabled ? 0.5 : 1}>
       <Switch
-        backgroundActive={theme.colors.primary.main}
-        backgroundInactive={theme.colors.secondary.main}
+        backgroundActive={theme.colors.tone.primary.main}
+        backgroundInactive={theme.colors.tone.secondary.main}
         circleSize={25}
         disabled={isDisabled}
         innerCircleStyle={innerCircleStyle}

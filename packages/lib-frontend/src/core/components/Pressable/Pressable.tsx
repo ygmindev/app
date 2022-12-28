@@ -1,5 +1,4 @@
 import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
-import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import type { PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -68,11 +67,11 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
                 animation
                   ? animation(_isActive)
                   : {
-                      from: { backgroundColor: theme.colors.neutral.main },
+                      from: { backgroundColor: theme.colors.tone.neutral.main },
                       to: {
                         backgroundColor: _isActive
-                          ? theme.colors.neutral.muted
-                          : theme.colors.neutral.main,
+                          ? theme.colors.tone.neutral.muted
+                          : theme.colors.tone.neutral.main,
                       },
                     }
               }
@@ -97,14 +96,14 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
 
             <Wrapper isRowAlign>
               <Button
-                icon={ICONS.chevronLeft}
+                icon="chevronLeft"
                 isDisabled={_isDisabled}
                 onPress={async () => setConfirmModalIsOpen(false)}>
                 {t('core:labels.cancel')}
               </Button>
 
               <Button
-                icon={ICONS.chevronRight}
+                icon="chevronRight"
                 isDisabled={_isDisabled}
                 onPress={async () => {
                   await _handlePress();

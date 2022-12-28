@@ -1,7 +1,6 @@
 import type { _ViewPropsModel } from '@lib/frontend/core/components/View/_View.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import type { ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
-import type { DOMAttributes } from 'react';
 import type { ScrollViewProps, TouchableOpacityProps, ViewProps } from 'react-native';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
 
@@ -34,7 +33,7 @@ export const _viewParams: ComposeComponentParamsModel<_ViewPropsModel, ViewProps
     onResponderRelease,
     onScroll,
     style,
-  }: _ViewPropsModel): ViewProps & Pick<DOMAttributes<'div'>, 'onMouseEnter' | 'onMouseLeave'> => ({
+  }) => ({
     children,
 
     onLayout: onMeasure

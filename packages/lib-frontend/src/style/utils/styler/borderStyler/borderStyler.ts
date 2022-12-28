@@ -9,7 +9,7 @@ export const borderStyler: StylerModel<BorderStylerParamsModel> = (
   { border, borderColor, borderRole = THEME_ROLE.MAIN, borderWidth = 1, isShadow, round },
   theme,
 ) => {
-  const _color = theme.colors[borderColor as ThemeColorModel];
+  const _color = theme.colors.tone[borderColor as ThemeColorModel];
   const _borderColor = _color ? _color[borderRole] : borderColor;
   return cleanObject({
     borderBottomWidth: border === BORDER_DIRECTION.BOTTOM ? borderWidth : undefined,

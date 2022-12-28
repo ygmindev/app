@@ -1,4 +1,3 @@
-import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 
-export const fromExecutable = (...paths: Array<string>): string =>
-  fromRoot('node_modules/.bin', ...paths);
+export const fromExecutable = (...paths: Array<string>): string => fromModules('.bin', ...paths);

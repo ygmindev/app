@@ -35,11 +35,11 @@ const _GlobalStyle = createGlobalStyle`
     .${AG_GRID_THEME} {
       --ag-background-color: transparent;
       --ag-checkbox-border-radius: ${theme.shape.borderRadius};
-      --ag-checkbox-checked-color: ${theme.colors.primary.main};
-      --ag-checkbox-indeterminate-color: ${theme.colors.secondary.main};
-      --ag-foreground-color: ${theme.colors.text.main};
+      --ag-checkbox-checked-color: ${theme.colors.tone.primary.main};
+      --ag-checkbox-indeterminate-color: ${theme.colors.tone.secondary.main};
+      --ag-foreground-color: ${theme.colors.tone.text.main};
       --ag-header-background-color: transparent;
-      --ag-header-foreground-color: ${theme.colors.text.main};
+      --ag-header-foreground-color: ${theme.colors.tone.text.main};
       --ag-selected-row-background-color: transparent;
 
       .ag-cell, .ag-header-cell {

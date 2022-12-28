@@ -14,7 +14,16 @@ export interface ThemeConfigParamsModel {
     transition: number;
   };
 
-  colors: Record<ThemeColorModel, string>;
+  colors: {
+    activeLightness: number;
+
+    palette: {
+      dark: Record<ThemeColorModel, Record<ThemeRoleModel, Omit<PaletteParamsModel, 'color'>>>;
+      light: Record<ThemeColorModel, Record<ThemeRoleModel, Omit<PaletteParamsModel, 'color'>>>;
+    };
+
+    tone: Record<ThemeColorModel, string>;
+  };
 
   font: {
     fontFamily: Record<FontFamilyModel, string>;
@@ -28,11 +37,6 @@ export interface ThemeConfigParamsModel {
     header: {
       height: number;
     };
-  };
-
-  palette: {
-    dark: Record<ThemeColorModel, Record<ThemeRoleModel, Omit<PaletteParamsModel, 'color'>>>;
-    light: Record<ThemeColorModel, Record<ThemeRoleModel, Omit<PaletteParamsModel, 'color'>>>;
   };
 
   shape: {

@@ -1,4 +1,4 @@
-import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { globalsConfig } from '@lib/config/globals/globals.web';
@@ -38,7 +38,7 @@ export const webpackConfig = (
             },
 
             {
-              include: fromRoot('node_modules/react-native-vector-icons'),
+              include: fromModules('react-native-vector-icons'),
               test: /\.ttf$/,
               type: 'asset/resource',
             },

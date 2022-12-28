@@ -8,6 +8,6 @@ export const colorStyler: StylerModel<ColorStylerParamsModel> = (
   { color = THEME_COLOR.NEUTRAL, colorRole = THEME_ROLE.MAIN_CONTRAST },
   theme,
 ) => {
-  const _color = theme.colors[color as ThemeColorModel];
+  const _color = theme.colors.tone[color as ThemeColorModel];
   return cleanObject({ color: _color ? _color[colorRole] : color });
 };

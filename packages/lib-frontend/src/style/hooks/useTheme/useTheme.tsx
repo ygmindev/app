@@ -11,19 +11,23 @@ export const useTheme = (): UseThemeModel => {
   return useMemo<UseThemeModel>(
     () => ({
       ...themeConfig,
-      colors: (keys(themeConfig.colors) as Array<ThemeColorModel>).reduce((result, key) => {
-        const color = themeConfig.colors[key] as ThemeColorModel;
-        const _palette = themeConfig.palette[isDark ? 'dark' : 'light'][key];
-        return {
-          ...result,
-          [key]: {
-            main: palette({ color, ..._palette.main }),
-            mainContrast: palette({ color, ..._palette.mainContrast }),
-            muted: palette({ color, ..._palette.muted }),
-            mutedContrast: palette({ color, ..._palette.mutedContrast }),
-          },
-        };
-      }, {} as UseThemeModel['colors']),
+      colors: {
+        activeLightness: themeConfig.colors.activeLightness,
+
+        tone: (keys(themeConfig.colors.tone) as Array<ThemeColorModel>).reduce((result, key) => {
+          const color = themeConfig.colors.tone[key] as ThemeColorModel;
+          const _palette = themeConfig.colors.palette[isDark ? 'dark' : 'light'][key];
+          return {
+            ...result,
+            [key]: {
+              main: palette({ color, ..._palette.main }),
+              mainContrast: palette({ color, ..._palette.mainContrast }),
+              muted: palette({ color, ..._palette.muted }),
+              mutedContrast: palette({ color, ..._palette.mutedContrast }),
+            },
+          };
+        }, {} as UseThemeModel['colors']['tone']),
+      },
       isDark,
     }),
     [themeConfig, isDark],

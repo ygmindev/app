@@ -15,7 +15,7 @@ export const Loading: SFCModel<LoadingPropsModel> = ({
   const { styles } = useStyles({ props });
   const theme = useTheme();
   const fontSize = get(theme.font.size, size);
-  const fontColor = get(theme.colors, [color, 'main']);
+  const fontColor = get(theme.colors.tone, [color, 'main']);
   return (
     <_Loading
       color={fontColor}

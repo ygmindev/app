@@ -1,4 +1,4 @@
-import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { globalsConfig } from '@lib/config/globals/globals.backend';
 import { webpackConfig as webpackConfigBase } from '@lib/config/webpack/webpack.base';
@@ -18,7 +18,7 @@ export const webpackConfig = (params: WebpackParamsModel): Configuration =>
         externals: [
           nodeExternals({
             allowlist: PACKAGE_PREFIXES.map((prefix) => RegExp(`^@${prefix}`)),
-            modulesDir: fromRoot('node_modules'),
+            modulesDir: fromModules(),
           }),
         ],
 

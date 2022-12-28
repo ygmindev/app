@@ -1,47 +1,34 @@
-import { animatable } from '@lib/frontend/animation/utils/animatable/animatable';
 import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
 import { _Link } from '@lib/frontend/core/components/Link/_Link';
-import type { _LinkPropsModel } from '@lib/frontend/core/components/Link/_Link.models';
 import type { LinkPropsModel } from '@lib/frontend/core/components/Link/Link.models';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { View } from '@lib/frontend/core/components/View/View';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { palette } from '@lib/frontend/style/utils/palette/palette';
 import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
-import { THEME_COLOR, THEME_COLOR_SHADE } from '@lib/frontend/style/style.constants';
-import { isFunction, isString } from 'lodash';
-import { useState } from 'react';
-
-export { _linkOpen as linkOpen } from '@lib/frontend/core/components/Link/_Link';
-
-const _LinkAnimatable = animatable<_LinkPropsModel>({ Component: _Link });
 
 export const Link: SFCModel<LinkPropsModel> = ({ children, testID, ...props }) => {
-  const [isActive, setIsActive] = useState<boolean>(false);
-  const { t } = useTranslation();
-  const { styles } = useStyles({
-    props: { color: THEME_COLOR.PRIMARY, ...props, shade: isActive ? THEME_COLOR_SHADE.DARK : undefined },
-    stylers: [textStyler],
-  });
+  const { styles } = useStyles({ props, stylers: [textStyler] });
   const theme = useTheme();
-
   return (
-    <Activatable
-      onActive={() => setIsActive(true)}
-      onInactive={() => setIsActive(false)}>
-      {() => (
-        <Wrapper testID={testID}>
-          <_LinkAnimatable
-            {...props}
-            // animation={undefined}
-            duration={theme.animation.duration}
-            style={styles}
-            // transition={['color'] as Array<never>}
-          >
-            {isFunction(children) || isString(children) ? t(children) : children}
-          </_LinkAnimatable>
-        </Wrapper>
+    <Activatable>
+      {(isActive) => (
+        <View>
+          <_Link
+            style={{
+              ...styles,
+              color: isActive
+                ? palette({
+                    color: theme.colors.tone.primary.main,
+                    lightness: theme.colors.activeLightness,
+                  })
+                : theme.colors.tone.primary.main,
+            }}
+            testID={testID}>
+            {children}
+          </_Link>
+        </View>
       )}
     </Activatable>
   );

@@ -181,8 +181,8 @@ export const _TextField = ({
       testID={testID}>
       <Wrapper
         // animation={{ transition: ['backgroundColor'] }}
-        bottom={0}
         backgroundColor={backgroundColor}
+        bottom={0}
         height={3}
         left={0}
         position={SHAPE_POSITION.ABSOLUTE}
@@ -244,8 +244,8 @@ export const _TextField = ({
           animation: { scale: 1 },
           colors: {
             background: 'transparent',
-            placeholder: theme.colors.border,
-            primary: theme.colors.primary.main,
+            placeholder: theme.colors.tone.border,
+            primary: theme.colors.tone.primary.main,
           },
         }}
         value={value}

@@ -1,9 +1,11 @@
+import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import type { _BundleConfigParamsModel } from '@lib/config/node/bundle/_bundle.models';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { esbuildCommonjs, viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import copyPlugin from 'rollup-plugin-copy';
 import type { PluginOption, UserConfig } from 'vite';
+import type { Plugin } from 'vite/node_modules/esbuild/lib/main';
 
 export const _bundleConfig = ({
   aliases,
@@ -32,7 +34,7 @@ export const _bundleConfig = ({
   optimizeDeps: {
     esbuildOptions: {
       loader: { '.js': 'tsx' },
-      plugins: [externals && esbuildCommonjs(externals)].filter(Boolean),
+      plugins: [externals && esbuildCommonjs(externals)].filter(Boolean) as Array<Plugin>,
       resolveExtensions: extensions,
     },
     include: externals,
@@ -54,6 +56,12 @@ export const _bundleConfig = ({
     alias: aliases,
 
     extensions,
+  },
+
+  server: {
+    fs: {
+      allow: [fromModules()],
+    },
   },
 
   ssr: {

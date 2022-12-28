@@ -1,5 +1,5 @@
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
-import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import type { BundleConfigParamsModel } from '@lib/config/node/bundle/bundle.models';
 import { bundleConfig as bundleConfigBase } from '@lib/config/node/bundle/configs/bundle.base.config';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -13,7 +13,7 @@ export const bundleConfig: BundleConfigParamsModel = merge({
     {
       extensions: EXTENSIONS_FRONTEND,
 
-      externals: fromGlobs({ globs: TRANSPILE_GLOBS, root: fromRoot('node_modules') }),
+      externals: fromGlobs({ globs: TRANSPILE_GLOBS, root: fromModules() }),
     },
 
     bundleConfigBase,

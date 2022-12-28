@@ -103,10 +103,10 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
 
           <Icon
             color={THEME_RELATIVE_COLOR.CONTRAST}
-            from={color ? { backgroundColor: theme.colors[color].main } : undefined}
+            from={color ? { backgroundColor: theme.colors.tone[color].main } : undefined}
             icon={ICONS.times}
             onPress={() => remove(id)}
-            to={color ? { backgroundColor: theme.colors[color].dark } : undefined}
+            to={color ? { backgroundColor: theme.colors.tone[color].dark } : undefined}
           />
         </Wrapper>
       </Wrapper>

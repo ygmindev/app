@@ -7,7 +7,7 @@ export const Skeleton: SFCModel<SkeletonPropsModel> = ({ height, width, ...props
   const theme = useTheme();
   return (
     <_Skeleton
-      backgroundColor={theme.colors.border}
+      backgroundColor={theme.colors.tone.border}
       height={height || 0}
       width={width || 0}
       {...props}

@@ -1,4 +1,5 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
+import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
@@ -22,7 +23,17 @@ export const bundleConfig: BundleConfigParamsModel = merge({
         ),
       },
 
-      copy: [{ from: fromStatic('assets'), to: fromWorking('public') }],
+      copy: [
+        { from: fromStatic('assets'), to: fromWorking('public') },
+        {
+          from: fromModules('react-native-vector-icons/Fonts/Ionicons.ttf'),
+          to: fromWorking('public/fonts'),
+        },
+        {
+          from: fromModules('react-native-vector-icons/Fonts/FontAwesome.ttf'),
+          to: fromWorking('public/fonts'),
+        },
+      ],
 
       extensions: EXTENSIONS_WEB,
 
