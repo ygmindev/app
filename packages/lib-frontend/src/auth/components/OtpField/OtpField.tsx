@@ -10,7 +10,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { ErrorTooltip } from '@lib/frontend/form/components/ErrorTooltip/ErrorTooltip';
 import { TextField } from '@lib/frontend/form/components/TextField/TextField';
-import { useField } from '@lib/frontend/form/hooks/useField/useField';
+import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
@@ -31,7 +31,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
   ...props
 }) => {
   const { styles } = useStyles({ props });
-  const { fieldValue, setFieldValue } = useField({ defaultValue: '', onChange, value });
+  const { fieldValue, setFieldValue } = useFieldValue({ defaultValue: '', onChange, value });
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [width, setWidth] = useState<number>();
   return (

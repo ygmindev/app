@@ -1,4 +1,4 @@
-import { isHoverable } from '@lib/frontend/core/components/Hoverable/_isHoverable';
+import { _isHoverable } from '@lib/frontend/core/components/Hoverable/_isHoverable';
 import type {
   HoverableChildPropsModel,
   HoverablePropsModel,
@@ -21,7 +21,7 @@ export const Hoverable: FCModel<HoverablePropsModel> = ({ children, onHoverIn, o
   });
 
   const handleMouseEnter = useCallback(() => {
-    if (isHoverable() && !isHovered) {
+    if (_isHoverable() && !isHovered) {
       onHoverIn && onHoverIn();
       setIsHovered(true);
     }

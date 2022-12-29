@@ -1,26 +1,27 @@
 import type { SVG_SHAPE } from '@lib/frontend/core/components/SvgShape/SvgShape.constants';
 import type { PositionModel } from '@lib/frontend/core/utils/measure/measure.models';
 import type { ShapeStylerParamsModel } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.models';
-import type { WithTestIdModel } from '@lib/frontend/test/test.models';
 import type { PartialModel } from '@lib/shared/core/core.models';
 
-export type _SvgShapePropsModel = WithTestIdModel &
-  PartialModel<PositionModel> & {
-    backgroundColor?: string;
-    borderColor?: string;
-    borderWidth?: number;
-  } & (
-    | {
-        borderRadius?: never;
-        height?: never;
-        isFullHeight?: never;
-        isFullWidth?: never;
-        radius?: number;
-        shape: SVG_SHAPE.CIRCLE;
-        width?: never;
-      }
-    | ({ borderRadius?: number; radius?: never; shape: SVG_SHAPE.RECT } & Pick<
-        ShapeStylerParamsModel,
-        'width' | 'height' | 'isFullWidth' | 'isFullHeight'
-      >)
-  );
+interface _CircleProps {
+  borderRadius?: never;
+  height?: never;
+  isFullHeight?: never;
+  isFullWidth?: never;
+  radius?: number;
+  shape: SVG_SHAPE.CIRCLE;
+  width?: never;
+}
+
+interface _RectProps
+  extends Pick<ShapeStylerParamsModel, 'width' | 'height' | 'isFullWidth' | 'isFullHeight'> {
+  borderRadius?: number;
+  radius?: never;
+  shape: SVG_SHAPE.RECT;
+}
+
+export type _SvgShapePropsModel = PartialModel<PositionModel> & {
+  backgroundColor?: string;
+  borderColor?: string;
+  borderWidth?: number;
+} & (_CircleProps | _RectProps);

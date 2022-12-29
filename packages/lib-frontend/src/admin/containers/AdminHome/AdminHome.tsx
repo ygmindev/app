@@ -1,17 +1,17 @@
 import type { AdminHomePropsModel } from '@lib/frontend/admin/containers/AdminHome/AdminHome.models';
-import { Logo } from '@lib/frontend/app/components/Logo/Logo';
+import { MENU_FIXTURE_OPTIONS } from '@lib/frontend/core/components/Menu/Menu.fixtures';
+import { Tabs } from '@lib/frontend/core/components/Tabs/Tabs';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { useState } from 'react';
 
 export const AdminHome: SFCModel<AdminHomePropsModel> = ({ testID, ...props }) => {
-  const { styles } = useStyles({ props });
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <Wrapper
       p
-      style={styles}
-      testID={testID}>
-      <Logo size="m" />
+      spacing>
+      <Tabs tabs={MENU_FIXTURE_OPTIONS} />
     </Wrapper>
   );
 };

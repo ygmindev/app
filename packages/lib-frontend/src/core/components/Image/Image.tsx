@@ -6,7 +6,6 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { shapeStyler } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler';
 import { isArray } from 'lodash';
 import { useCallback, useState } from 'react';
-import type { ImageStyle } from 'react-native';
 import { Image as ImageBase } from 'react-native';
 
 export const Image: SFCModel<ImagePropsModel> = ({
@@ -45,7 +44,7 @@ export const Image: SFCModel<ImagePropsModel> = ({
       onError={isArray(src) && current < src.length - 1 ? () => currentSet(current + 1) : undefined}
       onSuccess={isAutoSize ? _handleSuccess : undefined}
       src={_src}
-      style={styles as ImageStyle}
+      style={styles}
       testID={testID}
     />
   );

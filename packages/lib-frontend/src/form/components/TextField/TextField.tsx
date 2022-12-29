@@ -9,7 +9,7 @@ import { MaskedTextField } from '@lib/frontend/form/components/MaskedTextField/M
 import { _TextField } from '@lib/frontend/form/components/TextField/_TextField';
 import { TEXT_FIELD_KEYBOARD } from '@lib/frontend/form/components/TextField/TextField.constants';
 import type { TextFieldPropsModel } from '@lib/frontend/form/components/TextField/TextField.models';
-import { useField } from '@lib/frontend/form/hooks/useField/useField';
+import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { isFunction, isString, size, toString } from 'lodash';
@@ -42,7 +42,7 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
   const { transition } = theme.animation;
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
-  const { fieldValue, setFieldValue } = useField({ defaultValue, onChange, value });
+  const { fieldValue, setFieldValue } = useFieldValue({ defaultValue, onChange, value });
   const _value = toString(fieldValue);
 
   const _leftElement = isFunction(leftElement) ? leftElement(isFocused) : leftElement;

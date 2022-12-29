@@ -1,6 +1,5 @@
-import type { WithChildrenPropsModel } from '@lib/frontend/core/decorators/withChildrenProps/withChildrenProps.models';
+import type { ChildrenPropsModel, StylePropsModel } from '@lib/frontend/core/core.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
-import type { WithStyleModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
 import type { StyleModel } from '@lib/frontend/style/style.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
@@ -12,7 +11,7 @@ import { View } from 'react-native';
 const { displayName } = withTest({ target: () => composeComponent });
 
 describe(displayName, () => {
-  interface _ViewProps extends WithChildrenPropsModel, WithStyleModel {
+  interface _ViewProps extends ChildrenPropsModel, StylePropsModel {
     height: number;
     width: number;
   }

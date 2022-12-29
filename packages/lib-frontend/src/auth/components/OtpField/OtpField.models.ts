@@ -1,3 +1,3 @@
-import type { WithFieldPropsModel } from '@lib/frontend/core/decorators/withFieldProps/withFieldProps.models';
+import type { FieldPropsModel } from '@lib/frontend/core/core.models';
 
-export interface OtpFieldPropsModel extends WithFieldPropsModel {}
+export interface OtpFieldPropsModel extends FieldPropsModel {}

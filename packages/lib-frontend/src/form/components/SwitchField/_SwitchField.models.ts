@@ -1,10 +1,10 @@
-import type { WithFieldPropsModel } from '@lib/frontend/core/decorators/withFieldProps/withFieldProps.models';
+import type { FieldPropsModel } from '@lib/frontend/core/core.models';
 import type { IconTypeModel } from '@lib/frontend/core/decorators/withIconProps/withIconProps.models';
-import type { WithTestIdModel } from '@lib/frontend/test/test.models';
+import type { TestIdPropsModel } from '@lib/frontend/test/test.models';
 
 export interface _SwitchFieldPropsModel
-  extends WithFieldPropsModel<'true' | 'false'>,
-    WithTestIdModel {
+  extends FieldPropsModel<'true' | 'false'>,
+    TestIdPropsModel {
   activeIcon?: IconTypeModel;
   inactiveIncon?: IconTypeModel;
 }

@@ -1,9 +1,9 @@
 import type { DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/Dropdown.models';
-import type { WithChildrenPropsModel } from '@lib/frontend/core/decorators/withChildrenProps/withChildrenProps.models';
+import type { ChildrenPropsModel } from '@lib/frontend/core/core.models';
 import type { ReactNode } from 'react';
 
 export interface DroppablePropsModel
   extends Pick<DropdownPropsModel, 'maxWidth'>,
-    WithChildrenPropsModel {
+    ChildrenPropsModel {
   anchor(isActive?: boolean): ReactNode;
 }

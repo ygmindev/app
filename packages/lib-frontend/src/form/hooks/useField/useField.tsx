@@ -4,7 +4,7 @@ import type {
 } from '@lib/frontend/form/hooks/useField/useField.models';
 import { useState } from 'react';
 
-export const useField = <TType extends string = string>({
+export const useFieldValue = <TType extends string = string>({
   defaultValue,
   onChange,
   value,

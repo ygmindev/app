@@ -1,3 +1,3 @@
-export interface WithTestIdModel {
+export interface TestIdPropsModel {
   testID?: string;
 }

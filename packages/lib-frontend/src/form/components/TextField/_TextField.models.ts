@@ -1,20 +1,22 @@
-import type { WithFieldPropsModel } from '@lib/frontend/core/decorators/withFieldProps/withFieldProps.models';
-import type { WithForwardedRefPropsModel } from '@lib/frontend/core/decorators/withForwardRefProps/withForwardRefProps.models';
+import type {
+  FieldPropsModel,
+  ForwardedRefPropsModel,
+  StylePropsModel,
+} from '@lib/frontend/core/core.models';
 import type { TextFieldKeyboardModel } from '@lib/frontend/form/components/TextField/TextField.models';
 import type { WithSubmitPropsModel } from '@lib/frontend/form/decorators/withSubmitProps/withSubmitProps.models';
-import type { WithStyleModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
 import type { FontAlignModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
-import type { WithTestIdModel } from '@lib/frontend/test/test.models';
+import type { TestIdPropsModel } from '@lib/frontend/test/test.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 import type { ReactElement, ReactNode } from 'react';
 import type { TextInput, TextInputProps } from 'react-native';
 
 export interface _TextFieldPropsModel
-  extends WithForwardedRefPropsModel<TextInput>,
-    WithFieldPropsModel,
+  extends ForwardedRefPropsModel<TextInput>,
+    FieldPropsModel,
     WithSubmitPropsModel<string>,
-    WithStyleModel,
-    WithTestIdModel {
+    StylePropsModel,
+    TestIdPropsModel {
   Component?(inputProps: TextInputProps): ReactElement;
   align?: FontAlignModel;
   autoComplete?: string | false;

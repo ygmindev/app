@@ -1,33 +1,20 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Divider } from '@lib/frontend/core/components/Divider/Divider';
 import { Dropdown } from '@lib/frontend/core/components/Dropdown/Dropdown';
-import type {
-  DividerOptionModel,
-  MenuPropsModel,
-} from '@lib/frontend/core/components/Menu/Menu.models';
+import type { MenuPropsModel } from '@lib/frontend/core/components/Menu/Menu.models';
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
-import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
-import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import type { SFCModel } from '@lib/frontend/core/core.models';
+import type { OptionModel, SFCModel } from '@lib/frontend/core/core.models';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
-import { SearchField } from '@lib/frontend/form/components/SearchField/SearchField';
-import type { SelectOptionModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
-import { promisify } from '@lib/shared/core/utils/promisify/promisify';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
-import { isFunction } from 'lodash';
 import { cloneElement, useImperativeHandle, useState } from 'react';
 
 export const Menu: SFCModel<MenuPropsModel> = ({
   anchor,
   forwardedRef,
-  // TODO: add search
-  isCenter = true,
-  isFullWidth,
   isSearchable,
   onChange,
   onClose,
@@ -38,107 +25,94 @@ export const Menu: SFCModel<MenuPropsModel> = ({
   ...props
 }) => {
   const { t } = useTranslation();
-
   const { styles } = useStyles({ props });
   const isMobile = useIsMobile();
-  const theme = useTheme();
-
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const _handleClose = async (): Promise<void> => {
-    await sleep({ duration: theme.animation.duration });
-    setIsOpen(false);
+  useImperativeHandle(forwardedRef, () => ({
+    isOpen: () => isOpen,
+    setIsOpen: (value) => setIsOpen(value || false),
+  }));
+
+  const _handleClose = (): void => {
     onClose && onClose();
+    setIsOpen(false);
   };
 
-  let anchorPress = isFunction(anchor) ? anchor(isOpen) : anchor;
-  const _onPress = anchorPress.props.onPress;
-  anchorPress = cloneElement(anchorPress, {
+  const _handlePress = async ({ id, onPress }: OptionModel): Promise<void> => {
+    (onPress && (await onPress())) || (onChange && (await onChange(id)));
+    _handleClose();
+  };
+
+  let _anchor = anchor(isOpen);
+  const _onPress = _anchor.props.onPress;
+  _anchor = cloneElement(_anchor, {
     onPress: async () => {
-      _onPress && (await promisify(_onPress)());
+      _onPress && (await _onPress());
       setIsOpen(!isOpen);
     },
   });
 
-  const _handlePress = ({ id, onPress }: SelectOptionModel): void => {
-    (onPress && onPress()) || (onChange && onChange(id));
-    _handleClose();
-  };
-
-  useImperativeHandle(forwardedRef, () => ({
-    isOpen: () => isOpen,
-    setIsOpen,
-  }));
-
-  const elements = options.map(
-    (option) => {
-      if ((option as DividerOptionModel).isDivider) {
-        return <Divider key={option.id} />;
-      }
-
-      const { color, confirmMessage, icon, id, isDisabled, label } = option as SelectOptionModel;
-      return (
-        <Button
-          color={color}
-          confirmMessage={confirmMessage}
-          icon={icon}
-          isCenter={isCenter}
-          isDisabled={isDisabled}
-          isFullWidth
-          isTransparent
-          key={id}
-          onPress={() => _handlePress(option as SelectOptionModel)}
-          // right={
-          //   value === id && (
-          //     <Icon
-          //       color={color}
-          //       icon={ICONS.check}
-          //     />
-          //   )
-          // }
-        >
-          {renderOption ? renderOption(option as SelectOptionModel) : label}
-        </Button>
-      );
-    },
-    [value],
-  );
-
-  const children = (
+  const _children = (
     <Wrapper spacing={THEME_SIZE.SMALL}>
       {topElement}
 
-      {isSearchable && <SearchField isAutoFocus />}
+      {/* {isSearchable && <SearchField isAutoFocus />} */}
+
+      {/* TODO: searchable */}
 
       {options.length ? (
-        elements
+        options.map(
+          (option) => {
+            if (option.isDivider) {
+              return <Divider key={option.id} />;
+            }
+
+            const { color, confirmMessage, icon, id, isDisabled, label } = option;
+            return (
+              <Button
+                color={color}
+                confirmMessage={confirmMessage}
+                icon={icon}
+                isDisabled={isDisabled}
+                isFullWidth
+                key={id}
+                onPress={async () => await _handlePress(option)}
+                type={BUTTON_TYPE.TRANSPARENT}>
+                {t(renderOption ? renderOption(option) : label)}
+              </Button>
+            );
+          },
+          [value],
+        )
       ) : (
-        <Pressable isDisabled>
-          <Text color="muted">{t('core:labels.noResult')}</Text>
-        </Pressable>
+        <Button
+          isDisabled
+          type={BUTTON_TYPE.TRANSPARENT}>
+          {t('core:labels.noResult')}
+        </Button>
       )}
     </Wrapper>
   );
 
   return isMobile ? (
     <>
-      {anchorPress}
+      {_anchor}
 
       <Modal
         isFullSize={false}
         isOpen={isOpen}
         onClose={_handleClose}>
-        {children}
+        {_children}
       </Modal>
     </>
   ) : (
     <Dropdown
-      anchor={anchorPress}
-      isFullWidth={isFullWidth}
+      anchor={_anchor}
       isOpen={isOpen}
       onClose={_handleClose}
       style={styles}>
-      {children}
+      {_children}
     </Dropdown>
   );
 };

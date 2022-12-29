@@ -1,10 +1,10 @@
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { _Modal } from '@lib/frontend/core/components/Modal/_Modal';
 import type { ModalPropsModel } from '@lib/frontend/core/components/Modal/Modal.models';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { FCModel } from '@lib/frontend/core/core.models';
+import { useDimension } from '@lib/frontend/platform/hooks/useDimension/useDimension';
 import { KeyboardProvider } from '@lib/frontend/root/providers/KeyboardProvider/KeyboardProvider';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
@@ -21,18 +21,19 @@ export const Modal: FCModel<ModalPropsModel> = ({
   isOpen,
   onClose,
   width,
-  // tracking,
 }) => {
-  // const { track } = useTracking();
   const theme = useTheme();
-
+  const { height: deviceHeight, width: deviceWidth } = useDimension();
   return (
     <_Modal
+      deviceHeight={deviceHeight}
+      deviceWidth={deviceWidth}
       height={height}
       isDisabled={isDisabled}
       isFullSize={isFullSize}
       isOpen={isOpen}
       onClose={onClose}
+      style={{ justifyContent: 'flex-end', margin: 'auto' }}
       width={width}>
       <Wrapper
         backgroundColor={THEME_COLOR.NEUTRAL}
@@ -57,10 +58,10 @@ export const Modal: FCModel<ModalPropsModel> = ({
               </Wrapper>
 
               {onClose && (
+                // TODO:to button
                 <Icon
-                  icon={ICONS.times}
-                  isDisabled={isDisabled}
-                  onPress={onClose}
+                  icon="times"
+                  // onPress={onClose}
                   type={FONT_TYPE.TITLE}
                 />
               )}

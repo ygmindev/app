@@ -1,4 +1,5 @@
 import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
+import type { CallableModel } from '@lib/shared/core/core.models';
 
 let isEnabled: boolean;
 
@@ -25,4 +26,4 @@ if (!isSsr) {
   document.addEventListener('mousemove', enableHover, true);
 }
 
-export const isHoverable = (): boolean => isEnabled;
+export const _isHoverable: CallableModel<boolean> = () => isEnabled;

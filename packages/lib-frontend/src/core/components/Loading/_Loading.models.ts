@@ -1,6 +1,4 @@
-import type { WithStyleModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
-
-export interface _LoadingPropsModel extends WithStyleModel {
+export interface _LoadingPropsModel {
   color: string;
   size: number;
 }

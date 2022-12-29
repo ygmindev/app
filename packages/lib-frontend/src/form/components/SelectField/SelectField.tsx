@@ -8,7 +8,7 @@ import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useSearch } from '@lib/frontend/core/hooks/useSearch/useSearch';
 import type { SelectFieldPropsModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
 import { TextField } from '@lib/frontend/form/components/TextField/TextField';
-import { useField } from '@lib/frontend/form/hooks/useField/useField';
+import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
@@ -37,7 +37,7 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
   const { t } = useTranslation();
 
   const [query, setQuery] = useState<string>();
-  const { fieldValue, setFieldValue } = useField({ defaultValue, onChange, value });
+  const { fieldValue, setFieldValue } = useFieldValue({ defaultValue, onChange, value });
 
   const { result, search } = useSearch({ keys: ['label', 'value'], list: options });
 

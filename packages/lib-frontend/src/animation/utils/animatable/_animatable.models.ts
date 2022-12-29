@@ -1,6 +1,6 @@
-import type { WithStyleModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
+import type { StylePropsModel } from '@lib/frontend/core/core.models';
 import type { ComponentType } from 'react';
 
-export interface _AnimatableParamsModel<TProps extends WithStyleModel> {
+export interface _AnimatableParamsModel<TProps extends StylePropsModel> {
   Component: ComponentType<TProps>;
 }

@@ -1,16 +1,16 @@
 import { _Skeleton } from '@lib/frontend/core/components/Skeleton/_Skeleton';
+import type { _SkeletonPropsModel } from '@lib/frontend/core/components/Skeleton/_Skeleton.models';
 import type { SkeletonPropsModel } from '@lib/frontend/core/components/Skeleton/Skeleton.models';
-import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 
-export const Skeleton: SFCModel<SkeletonPropsModel> = ({ height, width, ...props }) => {
-  const theme = useTheme();
-  return (
-    <_Skeleton
-      backgroundColor={theme.colors.tone.border}
-      height={height || 0}
-      width={width || 0}
-      {...props}
-    />
-  );
-};
+// TODO: fix error logs
+export const Skeleton = composeComponent<SkeletonPropsModel, _SkeletonPropsModel>({
+  getComponent: () => _Skeleton,
+
+  getProps: ({ height, width, ...props }, theme) => ({
+    backgroundColor: theme.colors.tone.neutral.muted,
+    height: height || 0,
+    width: width || 0,
+    ...props,
+  }),
+});

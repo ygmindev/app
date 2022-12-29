@@ -3,8 +3,7 @@ import type {
   AnimationModel,
 } from '@lib/frontend/animation/animation.models';
 import type { _AnimatableParamsModel } from '@lib/frontend/animation/utils/animatable/_animatable.models';
-import type { PropsModel, SFCModel } from '@lib/frontend/core/core.models';
-import type { WithStyleModel } from '@lib/frontend/style/decorators/withStyle/withStyle.models';
+import type { PropsModel, SFCModel, StylePropsModel } from '@lib/frontend/core/core.models';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import type { UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
 import type { MotiProps } from 'moti';
@@ -23,7 +22,7 @@ export const _getAnimatableProps = (
     transition: { delay, duration: duration || theme.animation.duration, type: 'timing' },
   } as MotiProps);
 
-export const _animatable = <TProps extends WithStyleModel>({
+export const _animatable = <TProps extends StylePropsModel>({
   Component,
 }: _AnimatableParamsModel<TProps>): SFCModel<TProps & AnimatablePropsModel> => {
   const _Component = motify(Component)();

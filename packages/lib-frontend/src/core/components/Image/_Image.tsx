@@ -5,7 +5,8 @@ import { Image as NativeImage } from 'react-native';
 
 export const _Image = composeComponent<_ImagePropsModel, ImageProps>({
   getComponent: () => NativeImage,
-  getProps: ({ onError, onSuccess, src, testID }) => ({
+
+  getProps: ({ onError, onSuccess, src }) => ({
     onError: () => {
       onError && onError();
     },
@@ -14,6 +15,5 @@ export const _Image = composeComponent<_ImagePropsModel, ImageProps>({
     },
     resizeMode: 'contain',
     source: { uri: src },
-    testID,
   }),
 });

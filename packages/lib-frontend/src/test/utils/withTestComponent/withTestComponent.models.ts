@@ -1,5 +1,5 @@
-import type { WithForwardedRefPropsModel } from '@lib/frontend/core/decorators/withForwardRefProps/withForwardRefProps.models';
-import type { WithTestIdModel } from '@lib/frontend/test/test.models';
+import type { ForwardedRefPropsModel } from '@lib/frontend/core/core.models';
+import type { TestIdPropsModel } from '@lib/frontend/test/test.models';
 import type { PartialModel } from '@lib/shared/core/core.models';
 import type {
   WithTestModel,
@@ -11,13 +11,13 @@ export type WithTestComponentParamsModel<
   TProps,
   TDefault extends PartialModel<TProps> = PartialModel<TProps>,
 > = WithTestParamsModel<ComponentType<TProps>> & {
-  defaultProps?: TDefault & WithForwardedRefPropsModel;
+  defaultProps?: TDefault & ForwardedRefPropsModel;
 };
 
 export type WithTestComponentModel<
   TProps,
   TDefault extends PartialModel<TProps> = PartialModel<TProps>,
-> = Required<WithTestIdModel> &
+> = Required<TestIdPropsModel> &
   WithTestModel & {
     Component: TestComponentModel<TProps, TDefault>;
   };
@@ -25,4 +25,4 @@ export type WithTestComponentModel<
 export type TestComponentModel<
   TProps,
   TDefault extends PartialModel<TProps> = PartialModel<TProps>,
-> = ComponentType<Omit<TProps, keyof TDefault> & PartialModel<TDefault> & WithTestIdModel>;
+> = ComponentType<Omit<TProps, keyof TDefault> & PartialModel<TDefault> & TestIdPropsModel>;

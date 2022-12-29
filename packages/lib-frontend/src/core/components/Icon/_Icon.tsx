@@ -12,13 +12,15 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export const _Icon = composeComponent<_IconPropsModel, IconProps>({
   getComponent: ({ icon }) =>
-    (IONIC_ICONS as Record<string, string>)[icon]
-      ? Ionicons
-      : (FONTAWESOME_ICONS as Record<string, string>)[icon]
-      ? FontAwesome
+    icon
+      ? (IONIC_ICONS as Record<string, string>)[icon]
+        ? Ionicons
+        : (FONTAWESOME_ICONS as Record<string, string>)[icon]
+        ? FontAwesome
+        : Fragment
       : Fragment,
 
   getProps: ({ icon }: _IconPropsModel): IconProps => ({
-    name: (ICONS as Record<string, string>)[icon] || '',
+    name: icon ? (ICONS as Record<string, string>)[icon] || '' : '',
   }),
 });

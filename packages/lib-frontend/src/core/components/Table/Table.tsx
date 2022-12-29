@@ -1,3 +1,4 @@
+// TODO: fix
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Skeleton } from '@lib/frontend/core/components/Skeleton/Skeleton';
 import { SvgShape } from '@lib/frontend/core/components/SvgShape/SvgShape';

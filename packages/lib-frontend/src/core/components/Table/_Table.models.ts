@@ -3,9 +3,9 @@ import type {
   TableRefModel,
   TableSelectTypeModel,
 } from '@lib/frontend/core/components/Table/Table.models';
-import type { WithForwardedRefPropsModel } from '@lib/frontend/core/decorators/withForwardRefProps/withForwardRefProps.models';
+import type { ForwardedRefPropsModel } from '@lib/frontend/core/core.models';
 
-export interface _TablePropsModel<TType> extends WithForwardedRefPropsModel<TableRefModel> {
+export interface _TablePropsModel<TType> extends ForwardedRefPropsModel<TableRefModel> {
   columns: Array<TableColumnModel<TType, unknown>>;
   data?: Array<TType>;
   isDisabled?: boolean;

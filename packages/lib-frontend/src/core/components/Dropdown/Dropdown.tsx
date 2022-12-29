@@ -1,33 +1,17 @@
 import { _Dropdown } from '@lib/frontend/core/components/Dropdown/_Dropdown';
+import type { _DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/_Dropdown.models';
 import { DROPDOWN_MAX_HEIGHT } from '@lib/frontend/core/components/Dropdown/Dropdown.constants';
 import type { DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/Dropdown.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 
-export const Dropdown: SFCModel<DropdownPropsModel> = ({
-  anchor,
-  children,
-  isFullWidth,
-  isLeft,
-  isOpen,
-  isRight,
-  isTop,
-  onClose,
-  ...props
-}) => {
-  const { styles } = useStyles({ props });
-  return (
-    <_Dropdown
-      anchor={anchor}
-      isFullWidth={isFullWidth}
-      isLeft={isLeft}
-      isOpen={isOpen}
-      isRight={isRight}
-      isTop={isTop}
-      onClose={onClose}
-      style={styles}>
+export const Dropdown = composeComponent<DropdownPropsModel, _DropdownPropsModel>({
+  getComponent: () => _Dropdown,
+
+  getProps: ({ anchor, children, isFullWidth, isLeft, isOpen, isRight, isTop, onClose }) => ({
+    anchor,
+    children: (
       <Wrapper
         backgroundColor={THEME_COLOR.NEUTRAL}
         border
@@ -45,6 +29,12 @@ export const Dropdown: SFCModel<DropdownPropsModel> = ({
           {children}
         </Wrapper>
       </Wrapper>
-    </_Dropdown>
-  );
-};
+    ),
+    isFullWidth,
+    isLeft,
+    isOpen,
+    isRight,
+    isTop,
+    onClose,
+  }),
+});

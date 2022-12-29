@@ -5,6 +5,7 @@ import FastImage from 'react-native-fast-image';
 
 export const _Image = composeComponent<_ImagePropsModel, FastImageProps>({
   getComponent: () => FastImage,
+
   getProps: ({ onError, onSuccess, src }) => ({
     onError,
     onLoad: onSuccess,

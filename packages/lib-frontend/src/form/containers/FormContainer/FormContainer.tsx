@@ -1,7 +1,7 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import type { WithFieldPropsModel } from '@lib/frontend/core/decorators/withFieldProps/withFieldProps.models';
+import type { FieldPropsModel } from '@lib/frontend/core/core.models';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { Form } from '@lib/frontend/form/components/Form/Form';
 import { SelectField } from '@lib/frontend/form/components/SelectField/SelectField';
@@ -130,7 +130,7 @@ export const FormContainer = <TType,>({
         }
         default: {
           return cloneElement(
-            (render as (params: WithFieldPropsModel) => ReactElement)({
+            (render as (params: FieldPropsModel) => ReactElement)({
               ...fieldProps,
               defaultValue: _defaultValue,
               error: _error,

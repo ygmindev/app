@@ -13,6 +13,8 @@ import type { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 import { useCallback } from 'react';
 
+// TODO: fixthis
+
 export const ErrorBoundary: FCModel<ErrorBoundaryPropsModel> = ({
   Fallback,
   children,

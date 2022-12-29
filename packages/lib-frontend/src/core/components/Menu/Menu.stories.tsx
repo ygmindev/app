@@ -6,7 +6,7 @@ import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fi
 
 const { Story, meta } = withStory<MenuPropsModel>({
   defaultProps: {
-    anchor: <WrapperFixture />,
+    anchor: () => <WrapperFixture />,
     options: MENU_FIXTURE_OPTIONS,
   },
   target: Menu,

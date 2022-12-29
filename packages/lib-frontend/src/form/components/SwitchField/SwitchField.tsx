@@ -4,7 +4,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { _SwitchField } from '@lib/frontend/form/components/SwitchField/_SwitchField';
 import type { SwitchFieldPropsModel } from '@lib/frontend/form/components/SwitchField/SwitchField.models';
-import { useField } from '@lib/frontend/form/hooks/useField/useField';
+import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 
 export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
@@ -19,7 +19,7 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
   ...props
 }) => {
   const { styles } = useStyles({ props });
-  const { fieldValue, setFieldValue } = useField<'true' | 'false'>({
+  const { fieldValue, setFieldValue } = useFieldValue<'true' | 'false'>({
     defaultValue,
     onChange,
     value,

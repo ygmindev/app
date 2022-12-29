@@ -1,24 +1,18 @@
-import { themeCommonConfig } from '@lib/config/style/theme/configs/theme.common';
 import { _SvgShape } from '@lib/frontend/core/components/SvgShape/_SvgShape';
-import {
-  SVG_SHAPE,
-  SVG_SHAPE_RECT_HEIGHT,
-} from '@lib/frontend/core/components/SvgShape/SvgShape.constants';
+import type { _SvgShapePropsModel } from '@lib/frontend/core/components/SvgShape/_SvgShape.models';
+import { SVG_SHAPE } from '@lib/frontend/core/components/SvgShape/SvgShape.constants';
 import type { SvgShapePropsModel } from '@lib/frontend/core/components/SvgShape/SvgShape.models';
-import type { FCModel } from '@lib/frontend/core/core.models';
+import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 
-export const SvgShape: FCModel<SvgShapePropsModel> = ({ x = 0, y = 0, ...props }) => (
-  <_SvgShape
-    {...props}
-    borderRadius={
-      (props.shape === SVG_SHAPE.RECT
-        ? (themeCommonConfig.shape?.borderRadius as number) / 2
-        : undefined) as never
-    }
-    height={
-      (props.shape === SVG_SHAPE.RECT ? props.height || SVG_SHAPE_RECT_HEIGHT : undefined) as never
-    }
-    x={x}
-    y={y}
-  />
-);
+export const SvgShape = composeComponent<SvgShapePropsModel, _SvgShapePropsModel>({
+  getComponent: () => _SvgShape,
+
+  getProps: ({ x = 0, y = 0, ...props }, theme) => ({
+    ...props,
+    borderRadius: (props.shape === SVG_SHAPE.RECT
+      ? theme.shape.borderRadius / 2
+      : undefined) as never,
+    x,
+    y,
+  }),
+});

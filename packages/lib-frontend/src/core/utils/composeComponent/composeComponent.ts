@@ -20,7 +20,9 @@ export const composeComponent = <TProps, TResult, TRef = unknown>({
     (props, ref): ReactElement<TResult> => {
       const { styles } = useStyles<TProps>({ props, stylers });
       const theme = useTheme();
-      const _props = getProps ? getProps(props, theme, ref) : (props as unknown as TResult);
+      const _props = getProps
+        ? getProps({ ...props, style: styles }, theme, ref)
+        : (props as unknown as TResult);
       return (isWeb ? unstable_createElement : createElement)(getComponent(props), {
         ..._props,
         nativeid: props.nativeID,

@@ -1,7 +1,6 @@
-import type { OptionModel } from '@lib/frontend/core/core.models';
-import type { WithFieldPropsModel } from '@lib/frontend/core/decorators/withFieldProps/withFieldProps.models';
+import type { FieldPropsModel, OptionModel } from '@lib/frontend/core/core.models';
 
-export interface TabsPropsModel extends WithFieldPropsModel {
+export interface TabsPropsModel extends FieldPropsModel {
   isVertical?: boolean;
   tabs: Array<OptionModel>;
 }

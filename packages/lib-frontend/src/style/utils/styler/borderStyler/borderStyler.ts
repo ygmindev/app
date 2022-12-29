@@ -1,4 +1,4 @@
-import { THEME_ROLE } from '@lib/frontend/style/style.constants';
+import { THEME_COLOR, THEME_ROLE } from '@lib/frontend/style/style.constants';
 import type { ThemeColorModel } from '@lib/frontend/style/style.models';
 import { BORDER_DIRECTION } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import type { BorderStylerParamsModel } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.models';
@@ -6,7 +6,14 @@ import type { StylerModel } from '@lib/frontend/style/utils/styler/styler.models
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 
 export const borderStyler: StylerModel<BorderStylerParamsModel> = (
-  { border, borderColor, borderRole = THEME_ROLE.MAIN, borderWidth = 1, isShadow, round },
+  {
+    border,
+    borderColor = THEME_COLOR.NEUTRAL,
+    borderRole = THEME_ROLE.MUTED,
+    borderWidth = 1,
+    isShadow,
+    round,
+  },
   theme,
 ) => {
   const _color = theme.colors.tone[borderColor as ThemeColorModel];

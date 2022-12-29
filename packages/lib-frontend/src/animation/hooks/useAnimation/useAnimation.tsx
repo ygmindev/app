@@ -6,6 +6,7 @@ import type {
 } from '@lib/frontend/animation/hooks/useAnimation/useAnimation.models';
 import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { merge } from '@lib/shared/core/utils/merge/merge';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { useState } from 'react';
 
@@ -31,7 +32,7 @@ export const useAnimation = ({
     [_duration, isVisible],
   );
   const _animationProps = types
-    ? types.reduce((result, type) => ({ ...result, ...ANIMATIONS[type](measure) }), {
+    ? types.reduce((result, type) => merge({ values: [result, ANIMATIONS[type](measure)] }), {
         from,
         to,
       } as AnimationModel)

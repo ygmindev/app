@@ -1,7 +1,7 @@
-import type { MenuOptionModel } from '@lib/frontend/core/components/Menu/Menu.models';
+import type { OptionModel } from '@lib/frontend/core/core.models';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
 
-export const MENU_FIXTURE_OPTIONS: Array<MenuOptionModel> = withId([
+export const MENU_FIXTURE_OPTIONS: Array<OptionModel> = withId([
   { label: 'option 1' },
   { label: 'option 2' },
   { isDivider: true },
