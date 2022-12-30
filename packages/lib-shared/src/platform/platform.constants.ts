@@ -1,7 +1,8 @@
 export enum PLATFORM {
   ANDROID = 'android',
-  BACKEND = 'backend',
   BASE = 'base',
   IOS = 'ios',
+  NODE = 'node',
+  PYTHON = 'python',
   WEB = 'web',
 }

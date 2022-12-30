@@ -6,6 +6,6 @@ import type { PlatformModel } from '@lib/shared/platform/platform.models';
 
 const APP_PLATFORM = getEnv<PlatformModel>('APP_PLATFORM', PLATFORM.BASE);
 const config: ServerlessConfigParamsModel =
-  require(`@lib/config/node/serverless/configs/serverless.${APP_PLATFORM}.config`).serverlessConfig;
+  require(`@lib/config/server/serverless/configs/serverless.${APP_PLATFORM}.config`).serverlessConfig;
 
 export const serverlessConfig = _serverlessConfig(config);
