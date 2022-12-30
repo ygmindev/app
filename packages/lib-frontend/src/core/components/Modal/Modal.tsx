@@ -4,8 +4,8 @@ import type { ModalPropsModel } from '@lib/frontend/core/components/Modal/Modal.
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { FCModel } from '@lib/frontend/core/core.models';
+import { KeyboardContainer } from '@lib/frontend/platform/components/KeyboardContainer/KeyboardContainer';
 import { useDimension } from '@lib/frontend/platform/hooks/useDimension/useDimension';
-import { KeyboardProvider } from '@lib/frontend/root/providers/KeyboardProvider/KeyboardProvider';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { FONT_TYPE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
@@ -44,7 +44,7 @@ export const Modal: FCModel<ModalPropsModel> = ({
           borderTopLeftRadius: theme.shape.borderRadius,
           borderTopRightRadius: theme.shape.borderRadius,
         }}>
-        <KeyboardProvider>
+        <KeyboardContainer>
           <Wrapper
             grow
             p
@@ -73,7 +73,7 @@ export const Modal: FCModel<ModalPropsModel> = ({
               {children}
             </Wrapper>
           </Wrapper>
-        </KeyboardProvider>
+        </KeyboardContainer>
       </Wrapper>
     </_Modal>
   );
