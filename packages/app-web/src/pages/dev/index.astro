@@ -1,0 +1,16 @@
+---
+import Layout from '@app/web/layouts/Layout.astro';
+import { DevPage } from '@lib/frontend/dev/pages/DevPage/DevPage';
+import { InitialStateModel } from '@lib/shared/root/root.models';
+import { USER } from '@lib/shared/user/user.constants';
+
+const initialState: InitialStateModel = {
+    [USER]: {
+        currentUser: null,
+    },
+};
+---
+
+<Layout>
+    <DevPage client:load initialState={initialState} />
+</Layout>

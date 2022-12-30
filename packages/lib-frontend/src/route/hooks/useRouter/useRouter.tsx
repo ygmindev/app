@@ -5,7 +5,7 @@ import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathnam
 import { split } from 'lodash';
 
 export const useRouter = <TParams = undefined,>(): UseRouterModel<TParams> => {
-  const { back, isActive, location, push, replace } = _useRouter<TParams>();
+  const { back, location, push, replace } = _useRouter<TParams>();
   const paths = split(location.pathname, '/');
 
   const _push = <TNextParams = undefined,>({
@@ -15,13 +15,6 @@ export const useRouter = <TParams = undefined,>(): UseRouterModel<TParams> => {
 
   return {
     back,
-
-    isActive: (params) =>
-      isActive({
-        ...params,
-        from: trimPathname(params.from),
-        to: params.to ? trimPathname(params.to) : undefined,
-      }),
 
     location,
 

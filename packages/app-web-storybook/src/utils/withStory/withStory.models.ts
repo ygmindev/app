@@ -1,4 +1,5 @@
-import type { ChildrenPropsModel, StylePropsModel } from '@lib/frontend/core/core.models';
+import type { ChildrenPropsModel } from '@lib/frontend/core/core.models';
+import type { StylePropsModel } from '@lib/frontend/style/style.models';
 import type { PartialModel } from '@lib/shared/core/core.models';
 import type { WithTestParamsModel } from '@lib/shared/test/utils/withTest/withTest.models';
 import type { Meta, StoryObj } from '@storybook/react';

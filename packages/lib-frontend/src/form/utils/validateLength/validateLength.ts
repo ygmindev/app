@@ -4,5 +4,5 @@ export const validateLength: (length: number) => FormValidatorModel =
   (length) =>
   ({ value }) =>
     value && value.length === length
-      ? undefined
+      ? null
       : ({ t }) => t('core:messages.validateLength', { value: length });

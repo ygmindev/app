@@ -1,5 +1,10 @@
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import type { SFCModel } from '@lib/frontend/core/core.models';
+import { View } from '@lib/frontend/core/components/View/View';
+import type { ViewPropsModel } from '@lib/frontend/core/components/View/View.models';
+import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import type { _FormPropsModel } from '@lib/frontend/form/components/Form/_Form.models';
 
-export const _Form: SFCModel<_FormPropsModel> = Wrapper;
+export const _Form = composeComponent<_FormPropsModel, ViewPropsModel>({
+  getComponent: () => View,
+
+  getProps: ({ children, testID }) => ({ children, testID }),
+});

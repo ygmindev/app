@@ -4,7 +4,7 @@ export interface _UseMutationParamsModel<TParams = undefined, TResult = void> ex
   mutate(params: TParams): Promise<TResult | null>;
 }
 
-export interface _UseMutationResultModel<TParams = undefined, TResult = void> extends WithIdModel {
+export interface _UseMutationModel<TParams = undefined, TResult = void> extends WithIdModel {
   data?: TResult | null;
   isError: boolean;
   isLoading: boolean;

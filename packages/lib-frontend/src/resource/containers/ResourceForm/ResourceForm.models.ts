@@ -1,4 +1,4 @@
-import type { WithSubmitPropsModel } from '@lib/frontend/form/decorators/withSubmitProps/withSubmitProps.models';
+import type { SubmittablePropsModel } from '@lib/frontend/form/form.models';
 import type { RESOURCE_FORM_MODE } from '@lib/frontend/resource/containers/ResourceForm/ResourceForm.constants';
 import type { ResourcesPropsModel } from '@lib/frontend/resource/containers/Resources/Resources.models';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
@@ -9,7 +9,7 @@ import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.model
 export type ResourceFormModeModel = `${RESOURCE_FORM_MODE}`;
 
 export interface ResourceFormPropsModel<TType extends EntityResourceModel, TForm, TRoot = undefined>
-  extends WithSubmitPropsModel,
+  extends SubmittablePropsModel,
     Pick<ResourcesPropsModel<TType, TForm, TRoot>, 'columns' | 'root' | 'validators'> {
   data?: TType;
   onCreate?(

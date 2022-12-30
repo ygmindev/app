@@ -1,6 +1,6 @@
+import type { _PressModel, _PressParamsModel } from '@lib/frontend/test/utils/press/_press.models';
 import { fireEvent } from '@testing-library/react';
-import type { ReactElement } from 'react';
 
-export const _press = (element: ReactElement): void => {
+export const _press = (element: _PressParamsModel): _PressModel => {
   fireEvent.click(element as unknown as Element);
 };

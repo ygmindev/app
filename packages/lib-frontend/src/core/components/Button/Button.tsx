@@ -1,8 +1,10 @@
 import type { AnimationModel } from '@lib/frontend/animation/animation.models';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import type { ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
+import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
 import { Text } from '@lib/frontend/core/components/Text/Text';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_BASIC_SIZE, THEME_COLOR, THEME_ROLE } from '@lib/frontend/style/style.constants';
@@ -35,6 +37,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
             : { backgroundColor: _color },
         };
       }
+      case BUTTON_TYPE.ICON:
       case BUTTON_TYPE.TRANSPARENT: {
         const from = { backgroundColor: theme.colors.tone.neutral.main };
         return {
@@ -47,25 +50,46 @@ export const Button: SFCModel<ButtonPropsModel> = ({
     }
   };
 
+  const _textColor =
+    theme.colors.tone[color][
+      type == BUTTON_TYPE.TRANSPARENT || type == BUTTON_TYPE.ICON
+        ? THEME_ROLE.MAIN
+        : THEME_ROLE.MAIN_CONTRAST
+    ];
+
+  const _height = theme.shape.height[size];
+
   return (
     <Pressable
       {...props}
       animation={_pressableAnimation}
-      height={theme.shape.height[size]}
-      isCenter>
-      {() => (
-        <Text
-          align={FONT_ALIGN.CENTER}
-          color={
-            theme.colors.tone[color][
-              type == BUTTON_TYPE.TRANSPARENT ? THEME_ROLE.MAIN : THEME_ROLE.MAIN_CONTRAST
-            ]
-          }
-          isBold
-          isCapitalize>
-          {children}
-        </Text>
-      )}
+      height={_height}
+      isCenter
+      width={type === BUTTON_TYPE.ICON ? _height : undefined}>
+      {() => {
+        let _children = children && (
+          <Text
+            align={FONT_ALIGN.CENTER}
+            color={_textColor}
+            isBold
+            isCapitalize>
+            {children}
+          </Text>
+        );
+        if (icon) {
+          _children = (
+            <Wrapper isRowAlign>
+              <Icon
+                color={_textColor}
+                icon={icon}
+              />
+
+              {_children}
+            </Wrapper>
+          );
+        }
+        return _children;
+      }}
     </Pressable>
   );
 };

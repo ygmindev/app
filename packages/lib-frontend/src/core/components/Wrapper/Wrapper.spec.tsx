@@ -1,7 +1,7 @@
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import type { WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
-import type { PositionModel } from '@lib/frontend/core/utils/measure/measure.models';
+import type { PositionModel } from '@lib/frontend/core/core.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { scroll } from '@lib/frontend/test/utils/scroll/scroll';
 import { waitForExpect } from '@lib/frontend/test/utils/waitForExpect/waitForExpect';

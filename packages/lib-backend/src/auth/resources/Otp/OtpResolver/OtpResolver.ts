@@ -6,7 +6,7 @@ import { withOutput } from '@lib/backend/resource/decorators/withOutput/withOutp
 import { EntityResourceResolver } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver';
 import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import {
-  OTP_CREATE_IF_DOES_NOT_EXIST,
+  OTP_IF_DOES_NOT_EXIST,
   OTP_RESOURCE_NAME,
 } from '@lib/shared/auth/resources/Otp/Otp.constants';
 import type { OtpFormModel, OtpModel } from '@lib/shared/auth/resources/Otp/Otp.models';
@@ -31,13 +31,13 @@ export class OtpResolver extends EntityResourceResolver<OtpModel, OtpFormModel>(
     Resource: Otp,
     level: ACCESS_LEVEL.PUBLIC,
     method: RESOURCE_METHOD_TYPE.CREATE,
-    name: OTP_CREATE_IF_DOES_NOT_EXIST,
+    name: OTP_IF_DOES_NOT_EXIST,
   })
   async createIfNotExists(
     @withInput({
       Resource: OtpForm,
       method: RESOURCE_METHOD_TYPE.CREATE,
-      name: OTP_CREATE_IF_DOES_NOT_EXIST,
+      name: OTP_IF_DOES_NOT_EXIST,
     })
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, OtpModel, OtpFormModel>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, OtpModel>> {

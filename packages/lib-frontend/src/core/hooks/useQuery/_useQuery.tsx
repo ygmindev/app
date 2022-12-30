@@ -1,6 +1,6 @@
 import type {
+  _UseQueryModel,
   _UseQueryParamsModel,
-  _UseQueryResultModel,
 } from '@lib/frontend/core/hooks/useQuery/_useQuery.models';
 import { QUERY_EXPIRATION_MILLISECONDS_DEFAULT } from '@lib/frontend/core/hooks/useQuery/useQuery.constants';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
@@ -11,7 +11,7 @@ export const _useQuery = <TType, TError extends Error = Error>({
   cache,
   id,
   query,
-}: _UseQueryParamsModel<TType>): _UseQueryResultModel<TType, TError> => {
+}: _UseQueryParamsModel<TType>): _UseQueryModel<TType, TError> => {
   const queryClient = useQueryClient();
 
   const cacheTime = cache

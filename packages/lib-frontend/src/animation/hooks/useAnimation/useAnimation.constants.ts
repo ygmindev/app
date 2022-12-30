@@ -1,6 +1,6 @@
 import type { AnimationModel } from '@lib/frontend/animation/animation.models';
 import type { AnimationTypeModel } from '@lib/frontend/animation/hooks/useAnimation/useAnimation.models';
-import type { MeasureModel } from '@lib/frontend/core/utils/measure/measure.models';
+import type { MeasureModel } from '@lib/frontend/core/core.models';
 
 export enum ANIMATION_TYPE {
   SCALE = 'SCALE',

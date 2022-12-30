@@ -22,15 +22,13 @@ export const useAnimation = ({
   const theme = useTheme();
   const _duration = duration || theme.animation.duration;
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
-  const isMounted = useMount(
-    {
-      onMount: () =>
-        isVisible
-          ? setIsAnimating(true)
-          : sleep({ duration: _duration }).then(() => isMounted && setIsAnimating(false)),
-    },
-    [_duration, isVisible],
-  );
+  const isMounted = useMount({
+    deps: [_duration, isVisible],
+    onMount: () =>
+      isVisible
+        ? setIsAnimating(true)
+        : sleep({ duration: _duration }).then(() => isMounted && setIsAnimating(false)),
+  });
   const _animationProps = types
     ? types.reduce((result, type) => merge({ values: [result, ANIMATIONS[type](measure)] }), {
         from,
@@ -38,8 +36,8 @@ export const useAnimation = ({
       } as AnimationModel)
     : { from, to };
   const _animation: AnimationModel = {
-    duration: duration || theme.animation.duration,
     ..._animationProps,
+    duration: duration || theme.animation.duration,
     from: isVisible ? _animationProps.from : _animationProps.to,
     to: isVisible ? _animationProps.to : _animationProps.from,
   };

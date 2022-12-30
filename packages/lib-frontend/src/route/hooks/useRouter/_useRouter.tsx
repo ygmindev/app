@@ -1,30 +1,24 @@
 import type { _UseRouterModel } from '@lib/frontend/route/hooks/useRouter/_useRouter.models';
 import type { LocationModel } from '@lib/frontend/route/route.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
-import { matchPath, useLocation, useNavigate, useParams } from 'react-router-dom';
+import history from 'history/browser';
 
-export const _useRouter = <TParams = undefined,>(): _UseRouterModel<TParams> => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const params = useParams();
+export const _useRouter = <TParams = undefined,>(): _UseRouterModel<TParams> => ({
+  back: () => history.back(),
 
-  return {
-    back: () => navigate(-1),
+  location: {
+    params: merge<TParams>({
+      values: [
+        history.location.state as TParams,
+        new URLSearchParams(window.location.search) as TParams,
+      ],
+    }),
+    pathname: history.location.pathname,
+  },
 
-    isActive: ({ from, isExact, to }) => {
-      const match = matchPath({ end: isExact, path: from }, to || location.pathname);
-      return match !== null;
-    },
+  push: <TNextParams = undefined,>({ params, pathname }: LocationModel<TNextParams>) =>
+    history.push(pathname, params),
 
-    location: {
-      params: merge<TParams>({ values: [location.state, params] }),
-      pathname: location.pathname,
-    },
-
-    push: <TNextParams = undefined,>({ params, pathname }: LocationModel<TNextParams>) =>
-      navigate(pathname, { state: params }),
-
-    replace: <TNextParams = undefined,>({ params, pathname }: LocationModel<TNextParams>) =>
-      navigate(pathname, { replace: true, state: params }),
-  };
-};
+  replace: <TNextParams = undefined,>({ params, pathname }: LocationModel<TNextParams>) =>
+    history.replace(pathname, params),
+});

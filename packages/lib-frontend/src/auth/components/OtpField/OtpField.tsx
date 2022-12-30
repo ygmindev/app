@@ -1,22 +1,19 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
-import {
-  OTP_FIELD_MAIN_TEST_ID,
-  OTP_FIELD_WIDTH,
-} from '@lib/frontend/auth/components/OtpField/OtpField.constants';
 import type { OtpFieldPropsModel } from '@lib/frontend/auth/components/OtpField/OtpField.models';
-import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { Tooltip } from '@lib/frontend/core/components/Tooltip/Tooltip';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { ErrorTooltip } from '@lib/frontend/form/components/ErrorTooltip/ErrorTooltip';
 import { TextField } from '@lib/frontend/form/components/TextField/TextField';
 import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { OTP_LENGTH } from '@lib/shared/auth/resources/Otp/Otp.constants';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
-import { isFunction, isString, range } from 'lodash';
+import { isString, range } from 'lodash';
 import { useState } from 'react';
 
 const OTP_FIELDS = withId(range(OTP_LENGTH));
@@ -31,6 +28,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
   ...props
 }) => {
   const { styles } = useStyles({ props });
+  const theme = useTheme();
   const { fieldValue, setFieldValue } = useFieldValue({ defaultValue: '', onChange, value });
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [width, setWidth] = useState<number>();
@@ -46,22 +44,21 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
         position={SHAPE_POSITION.RELATIVE}>
         {OTP_FIELDS.map(({ id }, i) => (
           <TextField
-            align={FONT_ALIGN.CENTER}
             defaultValue=""
             error={error !== undefined}
             isActive={isFocused && i === Math.min(fieldValue.length, OTP_LENGTH - 1) && !isDisabled}
+            isCenter
             isDisabled={isDisabled}
             isNoClear
             key={id}
             value={fieldValue[i] || ''}
-            width={OTP_FIELD_WIDTH}
+            width={theme.shape.height.m}
           />
         ))}
 
         <Wrapper
           isAbsoluteFill
           opacity={0}
-          testID={OTP_FIELD_MAIN_TEST_ID}
           zIndex={1}>
           <TextField
             defaultValue=""
@@ -81,15 +78,20 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             isRowAlign
             left={width}
             position={SHAPE_POSITION.ABSOLUTE}>
-            {(isFunction(error) || isString(error)) && <ErrorTooltip error={error} />}
+            {error && isString(error) && <Tooltip color={THEME_COLOR.ERROR}>{error}</Tooltip>}
 
-            <Appearable isVisible={fieldValue.length > 0}>
-              <Icon
-                icon={ICONS.times}
-                isDisabled={isDisabled}
-                onPress={() => setFieldValue('')}
-              />
-            </Appearable>
+            {fieldValue && !isDisabled && (
+              <Appearable
+                isCenter
+                isLazy={false}
+                isVisible={fieldValue.length > 0}>
+                <Button
+                  icon="times"
+                  onPress={() => setFieldValue('')}
+                  type={BUTTON_TYPE.ICON}
+                />
+              </Appearable>
+            )}
           </Wrapper>
         )}
       </Wrapper>

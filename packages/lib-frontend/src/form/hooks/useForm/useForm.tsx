@@ -17,10 +17,6 @@ export const useForm = <TType extends unknown>({
 }: UseFormParamsModel<TType>): UseFormModel<TType> => {
   const { t } = useTranslation([CORE]);
 
-  const _onSubmit = async (data: TType): Promise<void> => {
-    return onSubmit && onSubmit(data);
-  };
-
   const _validate = <TValue,>(
     data?: TValue,
     formValidators?: FormValidatorsModel<TValue>,
@@ -32,7 +28,7 @@ export const useForm = <TType extends unknown>({
           const _value = get(data, k);
           if (isPlainObject(v) && isPlainObject(data)) {
             const error = _validate(_value, v as FormValidatorsModel<typeof _value>);
-            return merge({ values: [error, result] });
+            return merge<FormErrorModel<TType>>({ values: [error, result] });
           }
           if (isFunction(v)) {
             const error = v({ value: _value });
@@ -42,12 +38,12 @@ export const useForm = <TType extends unknown>({
         }
         return result;
       },
-      {},
+      {} as FormErrorModel<TType>,
     );
 
   return _useForm({
     initialValues,
-    onSubmit: _onSubmit,
-    onValidate: (data) => _validate(data, validators),
+    onSubmit,
+    onValidate: async (data) => _validate(data, validators),
   });
 };

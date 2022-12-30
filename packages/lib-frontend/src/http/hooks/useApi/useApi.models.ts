@@ -8,4 +8,4 @@ import type { UriParamsModel } from '@lib/shared/http/utils/uri/uri.models';
 export type UseApiParamsModel = Pick<HttpServiceParamsModel, 'onRequest' | 'onResponse'> &
   PartialModel<UriParamsModel> & { isCredentials?: boolean };
 
-export type UseApiModel = (params: UseApiParamsModel) => HttpServiceModel;
+export type UseApiModel = HttpServiceModel;

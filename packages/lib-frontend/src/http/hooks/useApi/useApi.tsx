@@ -1,19 +1,19 @@
 import { useSession } from '@lib/frontend/auth/hooks/useSession/useSession';
-import type { UseApiModel } from '@lib/frontend/http/hooks/useApi/useApi.models';
+import type { UseApiModel, UseApiParamsModel } from '@lib/frontend/http/hooks/useApi/useApi.models';
 import { useHttp } from '@lib/frontend/http/hooks/useHttp/useHttp';
 import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
 
 const APP_SERVER_API_HOST = getEnv('APP_SERVER_API_HOST');
 const APP_SERVER_API_PORT = getEnv('APP_SERVER_API_PORT', null) || undefined;
 
-export const useApi: UseApiModel = ({
+export const useApi = ({
   host,
   isCredentials = true,
   onRequest,
   onResponse,
   path,
   port,
-}) => {
+}: UseApiParamsModel): UseApiModel => {
   const { getToken } = useSession();
   return useHttp({
     baseUri: {

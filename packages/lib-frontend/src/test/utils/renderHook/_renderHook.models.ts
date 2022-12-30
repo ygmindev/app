@@ -1,6 +1,8 @@
 import type { CallableModel } from '@lib/shared/core/core.models';
 
-export interface _RenderHookModel<TResult> {
-  result: { current: TResult };
+export type _RenderHookParamsModel<TType> = CallableModel<TType>;
+
+export interface _RenderHookModel<TType> {
+  result: { current: TType };
   unmount: CallableModel;
 }

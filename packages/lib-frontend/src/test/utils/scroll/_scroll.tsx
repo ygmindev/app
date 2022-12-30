@@ -1,9 +1,11 @@
-import type { PositionModel } from '@lib/frontend/core/utils/measure/measure.models';
+import type {
+  _ScrollModel,
+  _ScrollParamsModel,
+} from '@lib/frontend/test/utils/scroll/_scroll.models';
 import { fireEvent } from '@testing-library/react';
-import type { ReactElement } from 'react';
 
-export const _scroll = (element: ReactElement, { x, y }: PositionModel): void => {
+export const _scroll = ({ element, position }: _ScrollParamsModel): _ScrollModel => {
   fireEvent.scroll(element as unknown as Element, {
-    target: { scrollLeft: x, scrollTop: y },
+    target: { scrollLeft: position.x, scrollTop: position.y },
   });
 };

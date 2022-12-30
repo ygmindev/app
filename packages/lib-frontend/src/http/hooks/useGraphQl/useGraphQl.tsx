@@ -1,3 +1,4 @@
+import { graphqlConfig } from '@lib/config/http/graphql/configs/graphql.config';
 import { useApi } from '@lib/frontend/http/hooks/useApi/useApi';
 import type {
   GraphQlHttpParamsModel,
@@ -7,18 +8,16 @@ import type {
   UseGraphQlParamsModel,
 } from '@lib/frontend/http/hooks/useGraphQl/useGraphQl.models';
 import { graphQlQuery } from '@lib/frontend/http/utils/graphQlQuery/graphQlQuery';
-import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
 import { print } from 'graphql/language/printer';
 import { gql } from 'graphql-tag';
 
-export const useGraphQl = (useApiParams: UseGraphQlParamsModel = {}): UseGraphQlModel => {
-  const { post } = useApi({ ...useApiParams, path: `api/${GRAPHQL}` });
-
+export const useGraphQl = (params: UseGraphQlParamsModel = {}): UseGraphQlModel => {
+  const { post } = useApi({ ...params, path: graphqlConfig.pathname });
   return {
     query: async <TParams, TResult, TName extends string = string>({
       fields,
       name,
-      params,
+      params: queryParams,
       type,
       variables,
     }: GraphQlQueryHttpParamsModel<TParams, TResult, TName>): Promise<TResult | null> => {
@@ -28,7 +27,7 @@ export const useGraphQl = (useApiParams: UseGraphQlParamsModel = {}): UseGraphQl
       >({
         params: {
           query: print(gql`
-            ${graphQlQuery<TParams, TResult, TName>({ fields, name, params, type })}
+            ${graphQlQuery<TParams, TResult, TName>({ fields, name, params: queryParams, type })}
           `),
           variables,
         },

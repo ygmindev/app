@@ -1,6 +1,6 @@
 import type {
+  _UseQueryModel,
   _UseQueryParamsModel,
-  _UseQueryResultModel,
 } from '@lib/frontend/core/hooks/useQuery/_useQuery.models';
 import type { QueryConnectionModel } from '@lib/frontend/core/hooks/useQueryConnection/useQueryConnection.models';
 import type { CallablePromiseModel } from '@lib/shared/core/core.models';
@@ -13,8 +13,8 @@ export interface _UseQueryConnectionParamsModel<TType>
   query(params: PaginationModel): Promise<ConnectionModel<TType> | null>;
 }
 
-export interface _UseQueryConnectionResultModel<TType, TError extends Error = Error>
-  extends Omit<_UseQueryResultModel<TType, TError>, 'data' | 'query'> {
+export interface _UseQueryConnectionModel<TType, TError extends Error = Error>
+  extends Omit<_UseQueryModel<TType, TError>, 'data' | 'query'> {
   data?: QueryConnectionModel<TType>;
   queryNext: CallablePromiseModel;
 }

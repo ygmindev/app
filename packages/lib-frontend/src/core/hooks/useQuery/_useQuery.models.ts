@@ -6,7 +6,7 @@ export interface _UseQueryParamsModel<TType> extends WithIdModel {
   query: CallablePromiseModel<TType | null>;
 }
 
-export interface _UseQueryResultModel<TType, TError extends Error = Error> extends WithIdModel {
+export interface _UseQueryModel<TType, TError extends Error = Error> extends WithIdModel {
   data?: TType | null;
   error?: TError | null;
   isError: boolean;

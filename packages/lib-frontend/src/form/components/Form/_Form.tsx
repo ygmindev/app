@@ -4,6 +4,7 @@ import type { FormHTMLAttributes, SyntheticEvent } from 'react';
 
 export const _Form = composeComponent<_FormPropsModel, FormHTMLAttributes<HTMLFormElement>>({
   getComponent: () => 'form',
+
   getProps: ({ children, onSubmit, testID }) => ({
     children: (
       <>
@@ -22,5 +23,6 @@ export const _Form = composeComponent<_FormPropsModel, FormHTMLAttributes<HTMLFo
     },
     testID,
   }),
+
   isWeb: true,
 });

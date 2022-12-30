@@ -1,5 +1,10 @@
-import type { _UsePreviousParamsModel } from '@lib/frontend/core/hooks/usePrevious/_usePrevious.models';
+import type {
+  _UsePreviousModel,
+  _UsePreviousParamsModel,
+} from '@lib/frontend/core/hooks/usePrevious/_usePrevious.models';
 
 export interface UsePreviousParamsModel<TType> extends _UsePreviousParamsModel<TType> {
   onChange?(value?: TType): void;
 }
+
+export type UsePreviousModel<TType> = _UsePreviousModel<TType>;

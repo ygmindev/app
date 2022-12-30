@@ -1,4 +1,3 @@
-import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
@@ -8,9 +7,9 @@ import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 
 export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
-  activeIcon = ICONS.check,
   defaultValue,
-  inactiveIncon = ICONS.times,
+  iconActive = 'check',
+  iconInactive = 'time',
   isDisabled,
   label,
   onChange,
@@ -31,8 +30,8 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
       style={styles}
       testID={testID}>
       <_SwitchField
-        activeIcon={activeIcon}
-        inactiveIncon={inactiveIncon}
+        iconActive={iconActive}
+        iconInactive={iconInactive}
         isDisabled={isDisabled}
         onChange={setFieldValue}
         value={fieldValue}

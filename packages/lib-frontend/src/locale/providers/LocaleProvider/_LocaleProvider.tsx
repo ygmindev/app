@@ -20,5 +20,6 @@ use(initReactI18next).init({
 
 export const _LocaleProvider = composeComponent<_LocaleProviderPropsModel, I18nextProviderProps>({
   getComponent: () => I18nextProvider,
+
   getProps: ({ children }) => ({ children, i18n: i18next }),
 });

@@ -1,7 +1,7 @@
 import { QUERY_EXPIRATION_MILLISECONDS_DEFAULT } from '@lib/frontend/core/hooks/useQuery/useQuery.constants';
 import type {
+  _UseQueryConnectionModel,
   _UseQueryConnectionParamsModel,
-  _UseQueryConnectionResultModel,
 } from '@lib/frontend/core/hooks/useQueryConnection/_useQueryConnection.models';
 import { USE_QUERY_CONNECTION_LIMIT_DEFAULT } from '@lib/frontend/core/hooks/useQueryConnection/useQueryConnection.constants';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
@@ -14,7 +14,7 @@ export const _useQueryConnection = <TType, TError extends Error = Error>({
   id,
   limit = USE_QUERY_CONNECTION_LIMIT_DEFAULT,
   query,
-}: _UseQueryConnectionParamsModel<TType>): _UseQueryConnectionResultModel<TType, TError> => {
+}: _UseQueryConnectionParamsModel<TType>): _UseQueryConnectionModel<TType, TError> => {
   const queryClient = useQueryClient();
 
   const cacheTime = cache

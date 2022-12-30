@@ -1,7 +1,7 @@
+import type { _HoverOutModel } from '@lib/frontend/test/utils/hoverOut/_hoverOut.models';
 import { fireEvent } from '@testing-library/react';
-import type { ReactElement } from 'react';
 
-export const _hoverOut = (element: ReactElement): void => {
+export const _hoverOut: _HoverOutModel = (element) => {
   fireEvent.mouseUp(element as unknown as Element);
   fireEvent.mouseOut(element as unknown as Element);
   fireEvent.mouseLeave(element as unknown as Element);

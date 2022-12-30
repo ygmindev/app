@@ -1,5 +1,6 @@
 import type {
   GraphQlFieldModel,
+  GraphQlQueryModel,
   GraphQlQueryParamsModel,
 } from '@lib/frontend/http/utils/graphQlQuery/graphQlQuery.models';
 import { trimDeep } from '@lib/shared/core/utils/trimDeep/trimDeep';
@@ -22,7 +23,7 @@ export const graphQlQuery = <TParams, TResult, TName extends string>({
   name,
   params,
   type,
-}: GraphQlQueryParamsModel<TParams, TResult, TName>): string => {
+}: GraphQlQueryParamsModel<TParams, TResult, TName>): GraphQlQueryModel => {
   let [paramsString, paramsKeys] = ['', ''];
   if (params) {
     paramsString = `(${map(params, (v, k) => `$${k}: ${v}!`).join(', ')})`;

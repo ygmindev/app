@@ -1,4 +1,3 @@
-import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import type { NotificationDataModel } from '@lib/frontend/notification/components/Notification/Notification.models';
 import type { UseNotificationModel } from '@lib/frontend/notification/hooks/useNotification/useNotification.models';
@@ -23,7 +22,7 @@ export const useNotification = (): UseNotificationModel => {
   return {
     add: _add,
 
-    error: (alert) => _add({ ...alert, color: THEME_COLOR.ERROR, icon: ICONS.exclamationCircle }),
+    error: (alert) => _add({ ...alert, color: THEME_COLOR.ERROR, icon: 'exclamationCircle' }),
 
     remove: async (id: string): Promise<void> => {
       actions?.notification.update({ id, isRemoving: true });
@@ -31,8 +30,8 @@ export const useNotification = (): UseNotificationModel => {
       actions?.notification.remove(id);
     },
 
-    success: (alert) => _add({ ...alert, color: THEME_COLOR.SUCCESS, icon: ICONS.checkCircle }),
+    success: (alert) => _add({ ...alert, color: THEME_COLOR.SUCCESS, icon: 'checkCircle' }),
 
-    warn: (alert) => _add({ ...alert, color: THEME_COLOR.WARNING, icon: ICONS.exclamationCircle }),
+    warn: (alert) => _add({ ...alert, color: THEME_COLOR.WARNING, icon: 'exclamationCircle' }),
   };
 };

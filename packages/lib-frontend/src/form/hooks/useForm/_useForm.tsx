@@ -3,7 +3,6 @@ import type {
   _UseFormModel,
   _UseFormParamsModel,
 } from '@lib/frontend/form/hooks/useForm/_useForm.models';
-import { promisify } from '@lib/shared/core/utils/promisify/promisify';
 import type { FormikErrors, FormikValues } from 'formik';
 import { useFormik } from 'formik';
 
@@ -25,9 +24,9 @@ export const _useForm = <TType extends unknown>({
   } = useFormik<TType & FormikValues>({
     initialValues: initialValues || ({} as TType & FormikValues),
     onSubmit: async (data) => {
-      onSubmit && (await promisify(onSubmit)(data));
+      onSubmit && (await onSubmit(data));
     },
-    validate: onValidate ? promisify(onValidate) : undefined,
+    validate: onValidate,
     validateOnChange: false,
   });
 

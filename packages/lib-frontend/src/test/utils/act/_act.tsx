@@ -1,4 +1,4 @@
-import type { CallableModel } from '@lib/shared/core/core.models';
+import type { _ActModel, _ActParamsModel } from '@lib/frontend/test/utils/act/_act.models';
 import { act } from '@testing-library/react';
 
-export const _act = async (callback: CallableModel): Promise<void> => act(callback);
+export const _act = async (callback: _ActParamsModel): Promise<_ActModel> => act(callback);

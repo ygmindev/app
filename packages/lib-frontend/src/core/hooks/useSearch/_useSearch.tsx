@@ -12,12 +12,12 @@ import Fuse from 'fuse.js';
 import { map } from 'lodash';
 import { useCallback, useMemo, useState } from 'react';
 
-export const _useSearch = <TResult,>({
+export const _useSearch = <TType,>({
   list,
   keys,
   delay = SEARCH_DELAY,
   limit = SEARCH_LIMIT,
-}: _UseSearchParamsModel<TResult>): _UseSearchModel<TResult> => {
+}: _UseSearchParamsModel<TType>): _UseSearchModel<TType> => {
   const [query, setQuery] = useState<string>('');
 
   const _setQuery = useCallback(debounce({ callback: setQuery, duration: delay }), [

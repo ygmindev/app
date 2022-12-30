@@ -37,4 +37,10 @@ export const NODE_POST_INSTALL_RENAMES: Array<RenameParamsModel> = [
     path: fromModules('react-native-vector-icons/lib'),
     to: 'icon-button.jsx',
   },
+
+  {
+    from: 'Switch.js',
+    path: fromModules('react-native-switch/lib'),
+    to: 'Switch.jsx',
+  },
 ];

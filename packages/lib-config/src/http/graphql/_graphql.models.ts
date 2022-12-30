@@ -4,6 +4,7 @@ import type { _ContainerModel } from '@lib/shared/core/utils/Container/_Containe
 export interface _GraphqlConfigParamsModel {
   authorize: (params: AuthorizeParamsModel) => Promise<boolean>;
   container: _ContainerModel;
+  pathname: string;
   resolverExtension: string;
   schemaPath: string;
 }

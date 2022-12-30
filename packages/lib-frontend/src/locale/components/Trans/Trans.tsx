@@ -1,26 +1,18 @@
+import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { _Trans } from '@lib/frontend/locale/components/Trans/_Trans';
+import type { _TransPropsModel } from '@lib/frontend/locale/components/Trans/_Trans.models';
 import type { TransPropsModel } from '@lib/frontend/locale/components/Trans/Trans.models';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
-import type { ReactElement } from 'react';
 
-export const Trans = <TParams = undefined,>({
-  Components,
-  i18nKey,
-  ns,
-  params,
-  testID,
-  ...props
-}: TransPropsModel<TParams>): ReactElement<TransPropsModel<TParams>> => {
-  const { styles } = useStyles({ props, stylers: [textStyler] });
-  return (
-    <_Trans
-      Components={Components}
-      i18nKey={i18nKey}
-      ns={ns}
-      params={params}
-      style={styles}
-      testID={testID}
-    />
-  );
-};
+export const Trans = composeComponent<TransPropsModel<unknown>, _TransPropsModel<unknown>>({
+  getComponent: () => _Trans,
+
+  getProps: ({ Components, i18nKey, ns, params }) => ({
+    Components,
+    i18nKey,
+    ns,
+    params,
+  }),
+
+  stylers: [textStyler],
+});

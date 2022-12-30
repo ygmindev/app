@@ -76,7 +76,8 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
                     }
               }
               onPress={_handleButtonPress}
-              p={THEME_BASIC_SIZE.SMALL}
+              pHorizontal
+              pVertical={THEME_BASIC_SIZE.SMALL}
               round>
               {children && children({ isActive: _isActive, isLoading: _isLoading })}
             </Wrapper>

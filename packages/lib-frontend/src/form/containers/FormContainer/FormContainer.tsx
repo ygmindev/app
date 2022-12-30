@@ -1,17 +1,14 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
-import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import type { FieldPropsModel } from '@lib/frontend/core/core.models';
+import type { FieldPropsModel, PropsModel, SFCModel } from '@lib/frontend/core/core.models';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { Form } from '@lib/frontend/form/components/Form/Form';
 import { SelectField } from '@lib/frontend/form/components/SelectField/SelectField';
 import type { SelectFieldPropsModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
 import { TextField } from '@lib/frontend/form/components/TextField/TextField';
 import type { TextFieldPropsModel } from '@lib/frontend/form/components/TextField/TextField.models';
-import {
-  FORM_CONTAINER_WIDTH,
-  FORM_FIELD_TYPE,
-} from '@lib/frontend/form/containers/FormContainer/FormContainer.constants';
+import { FORM_FIELD_TYPE } from '@lib/frontend/form/containers/FormContainer/FormContainer.constants';
 import type {
   FormContainerFieldModel,
   FormContainerPropsModel,
@@ -20,9 +17,9 @@ import { useForm } from '@lib/frontend/form/hooks/useForm/useForm';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
-import { promisify } from '@lib/shared/core/utils/promisify/promisify';
 import { FIELD_TYPE } from '@lib/shared/form/form.constants';
 import { flatten, get, isEqual, map, reduce, toNumber } from 'lodash';
 import type { ReactElement } from 'react';
@@ -30,28 +27,30 @@ import { cloneElement, useCallback, useMemo } from 'react';
 
 export const FormContainer = <TType,>({
   cancelLabel,
-  children,
   initialValues,
   isFullWidth,
-  isLoading,
+  isLoading: isLoadingProps,
   leftElement,
   onCancel,
   onSubmit,
   rows,
   submitLabel,
   testID,
+  topElement,
   validators,
   ...props
-}: FormContainerPropsModel<TType>): ReactElement<FormContainerPropsModel<TType>> => {
+}: PropsModel<SFCModel<FormContainerPropsModel<TType>>>): ReactElement<
+  FormContainerPropsModel<TType>
+> => {
   const { styles } = useStyles({ props });
+  const theme = useTheme();
   const { t } = useTranslation();
   const { error } = useNotification();
   const isMobile = useIsMobile();
 
   const _fields = useMemo(() => flatten(map(rows, 'fields')), [rows]);
-
   const _getValues = (data: TType): TType =>
-    reduce<FormContainerFieldModel | null | undefined, TType>(
+    reduce(
       _fields,
       (result, field) => {
         if (field?.id) {
@@ -74,18 +73,16 @@ export const FormContainer = <TType,>({
     const _values = _getValues(values);
     return isEqual(_initialValues, _values)
       ? error({ message: t('core:messages.validateChanged') })
-      : onSubmit && onSubmit(_values as TType);
+      : onSubmit && (await onSubmit(_values as TType));
   };
 
-  const {
-    errors,
-    handleChange,
-    handleSubmit,
-    isLoading: isFormLoading,
-    values,
-  } = useForm<TType>({ initialValues, onSubmit: _handleSubmit, validators });
+  const { errors, handleChange, handleSubmit, isLoading, values } = useForm<TType>({
+    initialValues,
+    onSubmit: _handleSubmit,
+    validators,
+  });
 
-  const _isLoading = isFormLoading || isLoading || false;
+  const _isLoading = isLoadingProps || isLoading || false;
   const _isFullWidth = isMobile || isFullWidth;
 
   const _getField = useCallback(
@@ -94,7 +91,7 @@ export const FormContainer = <TType,>({
       const _error = get(errors, id);
       const _isDisabled = _isLoading || isDisabled;
       const _onChange = handleChange(id);
-      const _onSubmit = promisify(handleSubmit);
+      const _onSubmit = async (): Promise<void> => handleSubmit();
       const _value = get(values, id);
 
       switch (field) {
@@ -107,7 +104,7 @@ export const FormContainer = <TType,>({
               isDisabled={_isDisabled}
               key={id}
               onChange={_onChange}
-              onSubmit={_onSubmit}
+              onSubmit={async () => handleSubmit()}
               testID={id}
               value={_value}
             />
@@ -152,10 +149,10 @@ export const FormContainer = <TType,>({
       spacing
       style={styles}
       testID={testID}
-      width={_isFullWidth ? undefined : FORM_CONTAINER_WIDTH}>
-      <Form onSubmit={_isLoading ? undefined : promisify(handleSubmit)}>
+      width={_isFullWidth ? undefined : theme.layout.narrow.width}>
+      <Form onSubmit={_isLoading ? undefined : async () => handleSubmit()}>
         <Wrapper spacing>
-          {children}
+          {topElement}
 
           {map(rows, ({ fields, id }) => (
             <Wrapper
@@ -172,26 +169,24 @@ export const FormContainer = <TType,>({
         isDistribute={isFullWidth}
         isRowAlign
         justify={isFullWidth ? undefined : FLEX_JUSTIFY.FLEX_END}
-        spacing={THEME_SIZE.SMALL}>
+        spacing={THEME_BASIC_SIZE.SMALL}>
         {leftElement}
 
         {onCancel && (
           <Button
-            icon={ICONS.chevronLeft}
+            icon="chevronLeft"
             isLoading={_isLoading}
-            isTransparent
             onPress={onCancel}
-            testID={`${testID}-cancel`}>
-            {cancelLabel || t('core:labels.cancel')}
+            type={BUTTON_TYPE.TRANSPARENT}>
+            {t(cancelLabel || 'core:labels.cancel')}
           </Button>
         )}
 
         <Button
-          icon={ICONS.chevronRight}
+          icon="chevronRight"
           isLoading={_isLoading}
-          onPress={handleSubmit}
-          testID={`${testID}-submit`}>
-          {submitLabel || t('core:labels.submit')}
+          onPress={handleSubmit}>
+          {t(submitLabel || 'core:labels.submit')}
         </Button>
       </Wrapper>
     </Wrapper>

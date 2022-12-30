@@ -8,4 +8,4 @@ const { Story, meta } = withStory<AdminHomePagePropsModel>({
   variants: [],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

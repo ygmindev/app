@@ -5,5 +5,4 @@ import { NativeRouter } from 'react-router-native';
 
 export const _RouteProvider = composeComponent<_RouteProviderPropsModel, NativeRouterProps>({
   getComponent: () => NativeRouter,
-  getProps: ({ children }) => ({ children }),
 });

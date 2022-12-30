@@ -2,7 +2,7 @@ import { OTP_FIELDS } from '@lib/frontend/auth/hooks/useOtpResource/useOtpResour
 import type { UseOtpResourceModel } from '@lib/frontend/auth/hooks/useOtpResource/useOtpResource.models';
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import {
-  OTP_CREATE_IF_DOES_NOT_EXIST,
+  OTP_IF_DOES_NOT_EXIST,
   OTP_RESOURCE_NAME,
 } from '@lib/shared/auth/resources/Otp/Otp.constants';
 import type { OtpFormModel, OtpModel } from '@lib/shared/auth/resources/Otp/Otp.models';
@@ -21,7 +21,7 @@ export const useOtpResource = (): UseOtpResourceModel => {
   >({
     fields: [{ result: OTP_FIELDS }],
     method: RESOURCE_METHOD_TYPE.CREATE,
-    name: OTP_CREATE_IF_DOES_NOT_EXIST,
+    name: OTP_IF_DOES_NOT_EXIST,
   });
 
   return { create, createIfNotExists };

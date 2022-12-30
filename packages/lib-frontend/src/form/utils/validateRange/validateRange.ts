@@ -5,5 +5,5 @@ export const validateRange: (min: number, max: number) => FormValidatorModel =
   (min, max) =>
   ({ value }) =>
     toNumber(value) >= min && toNumber(value) <= max
-      ? undefined
+      ? null
       : ({ t }) => t('core:messages.validateRange');

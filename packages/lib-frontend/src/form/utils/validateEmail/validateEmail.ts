@@ -4,5 +4,5 @@ export const validateEmail: () => FormValidatorModel =
   () =>
   ({ value }) =>
     value && /\S+@\S+\.\S+/.test(value.toLowerCase())
-      ? undefined
+      ? null
       : ({ t }) => t('core:messages.validateEmail');

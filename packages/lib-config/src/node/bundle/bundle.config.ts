@@ -2,10 +2,11 @@ import { _bundleConfig } from '@lib/config/node/bundle/_bundle.config';
 import { BUNDLE_MODE } from '@lib/config/node/bundle/bundle.constants';
 import type { BundleConfigParamsModel } from '@lib/config/node/bundle/bundle.models';
 import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
+import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import type { PlatformModel } from '@lib/shared/platform/platform.models';
 import { reduce } from 'lodash';
 
-const APP_PLATFORM = getEnv<PlatformModel>('APP_PLATFORM');
+const APP_PLATFORM = getEnv<PlatformModel>('APP_PLATFORM', PLATFORM.BASE);
 const config: BundleConfigParamsModel =
   require(`@lib/config/node/bundle/configs/bundle.${APP_PLATFORM}.config`).bundleConfig;
 

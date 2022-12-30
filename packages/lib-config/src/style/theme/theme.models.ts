@@ -37,6 +37,9 @@ export interface ThemeConfigParamsModel {
     header: {
       height: number;
     };
+    narrow: {
+      width: number;
+    };
   };
 
   shape: {

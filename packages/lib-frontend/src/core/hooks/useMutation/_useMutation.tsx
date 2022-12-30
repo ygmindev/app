@@ -1,13 +1,13 @@
 import type {
   _UseMutationParamsModel,
-  _UseMutationResultModel,
+  _UseMutationModel,
 } from '@lib/frontend/core/hooks/useMutation/_useMutation.models';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const _useMutation = <TParams = undefined, TResult = void>({
   id,
   mutate: mutateParams,
-}: _UseMutationParamsModel<TParams, TResult>): _UseMutationResultModel<TParams, TResult> => {
+}: _UseMutationParamsModel<TParams, TResult>): _UseMutationModel<TParams, TResult> => {
   const queryClient = useQueryClient();
 
   const { data, isError, isLoading, mutate } = useMutation([id], mutateParams, {

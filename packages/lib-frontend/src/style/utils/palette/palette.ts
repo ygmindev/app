@@ -1,4 +1,7 @@
 import { _palette } from '@lib/frontend/style/utils/palette/_palette';
-import type { PaletteParamsModel } from '@lib/frontend/style/utils/palette/palette.models';
+import type {
+  PaletteModel,
+  PaletteParamsModel,
+} from '@lib/frontend/style/utils/palette/palette.models';
 
-export const palette = (params: PaletteParamsModel): string => _palette({ ...params });
+export const palette = (params: PaletteParamsModel): PaletteModel => _palette({ ...params });

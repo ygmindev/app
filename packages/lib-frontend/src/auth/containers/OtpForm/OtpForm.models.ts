@@ -1,5 +1,5 @@
 import type { SignInFormModel } from '@lib/frontend/auth/containers/SignInForm/SignInForm.models';
-import type { StylePropsModel } from '@lib/frontend/core/core.models';
+import type { StylePropsModel } from '@lib/frontend/style/style.models';
 import type { FormStepPropsModel } from '@lib/frontend/form/components/FormSteps/FormSteps.models';
 
 export interface OtpFormModel {

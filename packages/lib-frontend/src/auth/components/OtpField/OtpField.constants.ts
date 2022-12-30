@@ -1,3 +1,0 @@
-export const OTP_FIELD_WIDTH = 40;
-
-export const OTP_FIELD_MAIN_TEST_ID = 'OTP_FIELD_MAIN_TEST_ID';

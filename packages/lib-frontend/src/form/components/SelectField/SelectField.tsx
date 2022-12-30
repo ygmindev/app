@@ -1,9 +1,8 @@
-import { Rotate } from '@lib/frontend/animation/components/Rotate/Rotate';
+import { AnimatableView } from '@lib/frontend/animation/components/AnimatableView/AnimatableView';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Menu } from '@lib/frontend/core/components/Menu/Menu';
 import type { MenuRefModel } from '@lib/frontend/core/components/Menu/Menu.models';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { View } from '@lib/frontend/core/components/View/View';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useSearch } from '@lib/frontend/core/hooks/useSearch/useSearch';
 import type { SelectFieldPropsModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
@@ -11,7 +10,6 @@ import { TextField } from '@lib/frontend/form/components/TextField/TextField';
 import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { find } from 'lodash';
 import { useRef, useState } from 'react';
 
@@ -35,13 +33,12 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
   const { styles } = useStyles({ props });
   const menuRef = useRef<MenuRefModel>(null);
   const { t } = useTranslation();
-
   const [query, setQuery] = useState<string>();
   const { fieldValue, setFieldValue } = useFieldValue({ defaultValue, onChange, value });
 
   const { result, search } = useSearch({ keys: ['label', 'value'], list: options });
 
-  const _handleToggle = (isOpen: boolean): void => {
+  const _handleToggle = (isOpen?: boolean): void => {
     search('');
     setQuery('');
     menuRef && menuRef.current && menuRef.current.setIsOpen(isOpen);
@@ -52,9 +49,8 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
     const selectedValue = selected.id;
     if (selectedValue) {
       setFieldValue(selectedValue);
-      onSubmit && onSubmit(selectedValue);
+      onSubmit && (await onSubmit(selectedValue));
     }
-    await sleep();
     _handleToggle(false);
   };
 
@@ -63,18 +59,17 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
     search(value);
   };
 
-  const selectedOption = find(options, { id: fieldValue });
-
-  const selectedLabel = selectedOption
+  const _selectedOption = find(options, { id: fieldValue });
+  const _selectedLabel = _selectedOption
     ? renderValue
-      ? renderValue(selectedOption)
+      ? renderValue(_selectedOption)
       : renderOption
-      ? renderOption(selectedOption)
-      : selectedOption.label
+      ? renderOption(_selectedOption)
+      : _selectedOption.label
     : undefined;
 
   return (
-    <Wrapper
+    <View
       style={styles}
       testID={testID}>
       <Menu
@@ -88,18 +83,27 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
             isNoClear
             label={label}
             leftElement={
-              selectedOption && selectedOption.icon && <Icon icon={selectedOption.icon} />
+              _selectedOption &&
+              _selectedOption.icon &&
+              (() => <Icon icon={_selectedOption.icon} />)
             }
             onBlur={() => _handleToggle(false)}
             onChange={onQueryChange}
             onFocus={() => _handleToggle(true)}
             onSubmit={_handleSelect}
-            rightElement={(isFocused) => (
-              <Rotate z={isFocused ? -180 : 0}>
-                <Icon icon={ICONS.chevronDown} />
-              </Rotate>
-            )}
-            value={isOpen ? query : t(selectedLabel)}
+            rightElement={(isFocused) => {
+              const from = { transform: [{ rotateZ: '0deg' }] };
+              return (
+                <AnimatableView
+                  animation={{
+                    from,
+                    to: isFocused ? { transform: [{ rotateZ: '-180deg' }] } : from,
+                  }}>
+                  <Icon icon="chevronDown" />
+                </AnimatableView>
+              );
+            }}
+            value={isOpen ? query : t(_selectedLabel)}
             width={width}
           />
         )}
@@ -109,8 +113,10 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
         onClose={() => _handleToggle(false)}
         options={result}
         renderOption={renderOption}
+        style={styles}
+        testID={testID}
         value={fieldValue}
       />
-    </Wrapper>
+    </View>
   );
 };

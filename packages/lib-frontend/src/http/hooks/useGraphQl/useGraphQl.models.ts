@@ -12,12 +12,12 @@ export interface GraphQlHttpResponseModel<TName extends string, TResult> {
   errors?: Array<GraphQLError>;
 }
 
-export interface UseGraphQlParamsModel extends Omit<UseApiParamsModel, 'path'> {}
-
 export interface GraphQlQueryHttpParamsModel<TParams, TResult, TName extends string = string>
   extends GraphQlQueryParamsModel<TParams, TResult, TName> {
   variables?: TParams;
 }
+
+export interface UseGraphQlParamsModel extends Omit<UseApiParamsModel, 'path'> {}
 
 export interface UseGraphQlModel {
   query<TParams, TResult, TName extends string = string>(

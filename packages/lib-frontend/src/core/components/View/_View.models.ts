@@ -1,5 +1,8 @@
-import type { ChildrenPropsModel } from '@lib/frontend/core/core.models';
-import type { MeasureModel, PositionModel } from '@lib/frontend/core/utils/measure/measure.models';
+import type {
+  ChildrenPropsModel,
+  MeasureModel,
+  PositionModel,
+} from '@lib/frontend/core/core.models';
 import type { StyleModel } from '@lib/frontend/style/style.models';
 import type { CallableModel, CallablePromiseModel } from '@lib/shared/core/core.models';
 

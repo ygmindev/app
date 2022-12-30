@@ -5,7 +5,7 @@ import type { PlatformModel } from '@lib/shared/platform/platform.models';
 import { get } from 'lodash';
 import { NativeModules } from 'react-native';
 
-const APP_PLATFORM = getEnv<PlatformModel>('APP_PLATFORM');
+const APP_PLATFORM = getEnv<PlatformModel>('APP_PLATFORM', PLATFORM.BASE);
 
 const locale =
   (APP_PLATFORM === PLATFORM.IOS

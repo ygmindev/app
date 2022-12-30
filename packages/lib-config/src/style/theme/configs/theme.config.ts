@@ -5,7 +5,7 @@ import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import type { PlatformModel } from '@lib/shared/platform/platform.models';
 
-const APP_PLATFORM = getEnv<PlatformModel>('APP_PLATFORM');
+const APP_PLATFORM = getEnv<PlatformModel>('APP_PLATFORM', PLATFORM.BASE);
 
 export const themeConfig: ThemeConfigParamsModel = {
   animation: {
@@ -132,6 +132,10 @@ export const themeConfig: ThemeConfigParamsModel = {
   layout: {
     header: {
       height: 60,
+    },
+
+    narrow: {
+      width: 500,
     },
   },
 

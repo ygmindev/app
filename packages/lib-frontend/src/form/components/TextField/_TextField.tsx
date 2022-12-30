@@ -1,27 +1,23 @@
+import { AnimatableText } from '@lib/frontend/animation/components/AnimatableText/AnimatableText';
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
-import { IconText } from '@lib/frontend/core/components/IconText/IconText';
+import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import type { SFCModel } from '@lib/frontend/core/core.models';
 import type { _TextFieldPropsModel } from '@lib/frontend/form/components/TextField/_TextField.models';
 import { TEXT_FIELD_KEYBOARD } from '@lib/frontend/form/components/TextField/TextField.constants';
 import type { TextFieldKeyboardModel } from '@lib/frontend/form/components/TextField/TextField.models';
-import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR, THEME_RELATIVE_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
-import { borderStyler } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
-import type { PartialModel } from '@lib/shared/core/core.models';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { isNil } from 'lodash';
-import type { ReactElement } from 'react';
-import { useMemo } from 'react';
 import type {
   NativeSyntheticEvent,
   TextInputKeyPressEventData,
   TextInputProps,
 } from 'react-native';
-import { TextInput as NativeTextInput } from 'react-native';
+import { StyleSheet, TextInput as NativeTextInput } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
 const _getKeyboardType = (type?: TextFieldKeyboardModel): TextInputProps['keyboardType'] => {
@@ -72,116 +68,80 @@ const _getTextContentType = (
   }
   return 'none';
 };
-
-const _getTextFieldProps = ({
-  keyboard: type,
-  onChange,
-  onEscape,
-  onRemove,
-  onSubmit,
-  value,
-}: _TextFieldPropsModel): PartialModel<TextInputProps> => ({
-  autoCorrect: false,
-  keyboardType: _getKeyboardType(type),
-  onChangeText: onChange,
-  onKeyPress: (e: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
-    switch (e.nativeEvent.key) {
-      case 'Backspace':
-        return onRemove && onRemove();
-      case 'Escape':
-        return onEscape && onEscape();
-      default:
-        return null;
-    }
-  },
-  onSubmitEditing: () => onSubmit && onSubmit(value || ''),
-  spellCheck: false,
-});
-
-export const _TextField = ({
+export const _TextField: SFCModel<_TextFieldPropsModel> = ({
   autoComplete,
-  align,
+  Component = (inputProps) => <NativeTextInput {...inputProps} />,
+  error,
+  forwardedRef,
+  icon,
+  isActive,
+  isCenter,
+  isDisabled,
+  isFocused,
+  keyboard,
+  label,
+  leftElement,
   maxLength,
   numberOfLines,
-  placeholder,
-  left,
-  right,
-  isFocused,
-  isTransparent,
-  keyboard,
-  onFocus,
   onBlur,
-  onRemove,
-  onEscape,
-  icon,
-  onSubmit,
-  value,
   onChange,
-  isDisabled,
-  error,
-  width,
-  label,
-  forwardedRef,
-  isActive,
-  Component = (inputProps) => <NativeTextInput {...inputProps} />,
+  onEscape,
+  onFocus,
+  onRemove,
+  onSubmit,
+  placeholder,
+  rightElement,
   testID,
+  value,
+  width,
   ...props
-}: _TextFieldPropsModel): ReactElement<_TextFieldPropsModel> => {
+}) => {
   const theme = useTheme();
-  const { t } = useTranslation();
   const { styles } = useStyles({ props });
 
-  const isError = !isNil(error) && error !== false;
-  const backgroundColor = isDisabled
-    ? THEME_RELATIVE_COLOR.MUTED
-    : isTransparent
-    ? 'transparent'
-    : THEME_RELATIVE_COLOR.MAIN;
+  const _isError = !isNil(error) && error !== false;
+  const _isActive = isFocused || isActive;
 
-  const activeColor = useMemo(
-    () => (isError ? THEME_COLOR.ERROR : isFocused || isActive ? THEME_COLOR.PRIMARY : undefined),
-    [isError, isFocused, isActive],
+  const _backgroundColor = isDisabled
+    ? theme.colors.tone.neutral.muted
+    : theme.colors.tone.neutral.main;
+
+  const _activeColor = _isError
+    ? theme.colors.tone.error.main
+    : _isActive
+    ? theme.colors.tone.primary.main
+    : theme.colors.tone.neutral.muted;
+
+  const _colors = {
+    from: theme.colors.tone.neutral.muted,
+    to: _isActive ? _activeColor : theme.colors.tone.neutral.muted,
+  };
+
+  const _leftElement = leftElement && (
+    <Appearable
+      isCenter
+      isLazy={false}
+      isVisible={!isEmpty(value) || isFocused || !label}
+      mTop={18}>
+      {leftElement(_isActive)}
+    </Appearable>
   );
 
-  const { styles: textStyles } = useStyles({ props: { align }, stylers: [textStyler] });
-  const { computedStyles: borderStyles } = useStyles({
-    props: isTransparent ? {} : { border: true, borderColor: activeColor },
-    stylers: [borderStyler],
-  });
-
-  const leftElement =
-    left && label ? (
-      <Appearable
-        isCenter
-        isLazy={false}
-        isVisible={!isEmpty(value) || isFocused}
-        mTop={18}>
-        {left}
-      </Appearable>
-    ) : null;
-
-  const textInputProps = _getTextFieldProps({
-    keyboard,
-    onChange,
-    onEscape,
-    onRemove,
-    onSubmit,
-    value,
-  });
+  const _rightElement = rightElement && rightElement(_isActive);
 
   return (
     <Wrapper
-      // animation={{ transition: ['backgroundColor', 'borderColor'] }}
-      backgroundColor={backgroundColor}
+      animation={{ from: { borderColor: _colors.from }, to: { borderColor: _colors.to } }}
+      backgroundColor={_backgroundColor}
+      border
       grow
       isOverflowHidden
       position={SHAPE_POSITION.RELATIVE}
       round
-      style={[styles, borderStyles]}
+      style={styles}
       testID={testID}>
       <Wrapper
-        // animation={{ transition: ['backgroundColor'] }}
-        backgroundColor={backgroundColor}
+        backgroundColor={_backgroundColor}
         bottom={0}
         height={3}
         left={0}
@@ -191,64 +151,96 @@ export const _TextField = ({
       />
 
       <TextInput
-        {...(textInputProps as typeof TextInput)}
         autoCapitalize="none"
         autoComplete={_getAutoCompleteType(autoComplete, keyboard)}
+        autoCorrect={false}
         dense
         disabled={isDisabled}
-        error={isError}
+        error={_isError}
+        keyboardType={_getKeyboardType(keyboard)}
         label={
-          (icon ? (
-            <IconText
-              // animation={{ transition: ['color'] }}
-              color={activeColor || THEME_RELATIVE_COLOR.MUTED}
-              icon={icon}>
-              {label}
-            </IconText>
-          ) : (
-            t(label)
-          )) as unknown as string
+          (icon || label) && (
+            <Wrapper isRowAlign>
+              {icon && (
+                <Icon
+                  animation={{
+                    from: { borderColor: _colors.from },
+                    to: { borderColor: _colors.to },
+                  }}
+                  icon={icon}
+                />
+              )}
+
+              {label && (
+                <AnimatableText
+                  animation={{ from: { color: _colors.from }, to: { color: _colors.to } }}
+                  size={THEME_SIZE.SMALL}>
+                  {label}
+                </AnimatableText>
+              )}
+            </Wrapper>
+          )
         }
         maxLength={maxLength}
         mode="flat"
         multiline={(numberOfLines as number) > 1}
         numberOfLines={numberOfLines}
-        onBlur={async () => {
+        onBlur={() => {
           onBlur && onBlur();
         }}
-        onFocus={async () => {
+        onChangeText={onChange}
+        onFocus={() => {
           onFocus && onFocus();
         }}
+        onKeyPress={(e: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
+          switch (e.nativeEvent.key) {
+            case 'Backspace':
+              return onRemove && onRemove();
+            case 'Escape':
+              return onEscape && onEscape();
+            default:
+              return null;
+          }
+        }}
+        onSubmitEditing={() => onSubmit && onSubmit(value || '')}
         placeholder={placeholder}
         ref={forwardedRef}
         render={(inputProps) => (
           <Wrapper
-            // animation={{ transition: ['backgroundColor'] }}
-            backgroundColor={backgroundColor}
+            backgroundColor={_backgroundColor}
             grow
             isOverflowHidden
             isRow
-            pLeft={leftElement ? THEME_SIZE.SMALL : undefined}
-            pRight={right ? THEME_SIZE.SMALL : undefined}
+            pLeft={_leftElement ? THEME_SIZE.SMALL : undefined}
+            pRight={_rightElement ? THEME_SIZE.SMALL : undefined}
             zIndex={-1}>
-            {leftElement}
+            {_leftElement}
 
-            {Component({ ...inputProps, style: [...inputProps.style, textStyles, { width }] })}
+            {Component({
+              ...inputProps,
+              style: StyleSheet.flatten([
+                ...inputProps.style,
+                isCenter && { textAlign: 'center' },
+                { width: '100%' },
+              ]),
+            })}
 
-            {right}
+            {_rightElement}
           </Wrapper>
         )}
-        secureTextEntry={keyboard === 'password'}
+        secureTextEntry={keyboard === TEXT_FIELD_KEYBOARD.PASSWORD}
+        spellCheck={false}
         textContentType={_getTextContentType(autoComplete, keyboard)}
         theme={{
           animation: { scale: 1 },
           colors: {
             background: 'transparent',
-            placeholder: theme.colors.tone.border,
+            placeholder: theme.colors.tone.neutral.muted,
             primary: theme.colors.tone.primary.main,
           },
         }}
         value={value}
+        width={width}
       />
     </Wrapper>
   );

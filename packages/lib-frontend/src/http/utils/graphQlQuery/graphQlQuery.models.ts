@@ -29,3 +29,5 @@ export interface GraphQlQueryParamsModel<TParams, TResult, TName extends string 
   params?: { [TKey in keyof TParams]?: string };
   type: GraphQlOperationTypeModel;
 }
+
+export type GraphQlQueryModel = string;

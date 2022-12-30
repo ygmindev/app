@@ -3,3 +3,5 @@ export interface _PaletteParamsModel {
   color: string;
   lightness?: number;
 }
+
+export type _PaletteModel = string;

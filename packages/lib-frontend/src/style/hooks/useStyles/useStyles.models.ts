@@ -1,5 +1,4 @@
-import type { StylePropsModel } from '@lib/frontend/core/core.models';
-import type { StyleModel } from '@lib/frontend/style/style.models';
+import type { StyleModel, StylePropsModel } from '@lib/frontend/style/style.models';
 import type { StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
 
 export interface UseStylesParamsModel<TProps> {

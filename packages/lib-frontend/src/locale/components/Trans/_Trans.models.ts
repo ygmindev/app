@@ -1,7 +1,6 @@
-import type { StylePropsModel } from '@lib/frontend/core/core.models';
 import type { ReactElement } from 'react';
 
-export interface _TransPropsModel<TParams> extends StylePropsModel {
+export interface _TransPropsModel<TParams> {
   Components?: Array<ReactElement>;
   i18nKey: string;
   ns: string;

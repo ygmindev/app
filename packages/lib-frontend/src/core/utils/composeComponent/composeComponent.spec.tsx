@@ -1,6 +1,6 @@
-import type { ChildrenPropsModel, StylePropsModel } from '@lib/frontend/core/core.models';
+import type { ChildrenPropsModel } from '@lib/frontend/core/core.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
-import type { StyleModel } from '@lib/frontend/style/style.models';
+import type { StyleModel, StylePropsModel } from '@lib/frontend/style/style.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
