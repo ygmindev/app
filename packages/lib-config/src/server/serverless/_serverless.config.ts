@@ -1,4 +1,7 @@
+import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import type { _ServerlessConfigParamsModel } from '@lib/config/server/serverless/_serverless.models';
+import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
+import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import type { AWS } from '@serverless/typescript';
 import { reduce } from 'lodash';
 
@@ -9,21 +12,35 @@ export const _serverlessConfig = ({
   functions,
   name,
   offline,
+  platform,
   provider,
   server,
 }: _ServerlessConfigParamsModel): AWS => ({
   custom: {
     dotenv: { dotenvParser: dotenv, logging: false },
 
-    ...(offline
+    'serverless-offline': {
+      allowCache: false,
+      host: offline.host.split('://')[1],
+      httpPort: offline.port,
+      ignoreJWTSignature: true,
+      lambdaPort: offline.lambdaPort,
+      noPrependStageInUrl: true,
+    },
+
+    ...(platform === PLATFORM.NODE
       ? {
-          'serverless-offline': {
-            allowCache: false,
-            host: offline.host.split('://')[1],
-            httpPort: offline.port,
-            ignoreJWTSignature: true,
-            lambdaPort: offline.lambdaPort,
-            noPrependStageInUrl: true,
+          esbuild: {
+            bundle: true,
+            define: bundle.define,
+            external: bundle.externals,
+            format: 'cjs',
+            keepOutputDirectory: true,
+            minify: environment === ENVIRONMENT.PRODUCTION,
+            packagePath: fromRoot('package.json'),
+            packager: 'yarn',
+            resolveExtensions: bundle.extensions,
+            sourcemap: environment === ENVIRONMENT.PRODUCTION ? undefined : 'inline',
           },
         }
       : {}),
@@ -36,8 +53,6 @@ export const _serverlessConfig = ({
       [k]: {
         events: [{ httpApi: { method: v.method, path: v.pathname } }],
         handler: v.handler,
-        package: { patterns: bundle.include },
-        runtime: 'nodejs14.x',
       },
     }),
     {},
@@ -46,13 +61,12 @@ export const _serverlessConfig = ({
   package: {
     excludeDevDependencies: true,
     individually: true,
-    patterns: bundle.exclude?.map((pattern) => `!${pattern}`),
   },
 
   plugins: [
-    dotenv && 'serverless-dotenv-plugin',
-    // 'serverless-webpack',
-    offline && 'serverless-offline',
+    'serverless-dotenv-plugin',
+    platform === PLATFORM.NODE && 'serverless-esbuild',
+    'serverless-offline',
   ].filter(Boolean) as Array<string>,
 
   provider: {
@@ -65,6 +79,7 @@ export const _serverlessConfig = ({
     memorySize: server.memory,
     name: provider,
     region: server.region as AWS['provider']['region'],
+    runtime: 'nodejs18.x',
     stage: environment,
     timeout: server.timeout,
     versionFunctions: false,

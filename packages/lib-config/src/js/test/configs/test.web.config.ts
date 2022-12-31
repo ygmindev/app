@@ -3,16 +3,16 @@ import { testConfig as testConfigFrontend } from '@lib/config/js/test/configs/te
 import type { TestConfigParamsModel } from '@lib/config/js/test/test.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
-import { EXTENSIONS_WEB } from '@lib/shared/file/file.constants';
-import { pick } from 'lodash';
 
-export const testConfig: TestConfigParamsModel = merge<TestConfigParamsModel>({
+export const testConfig: TestConfigParamsModel = merge({
   strategy: MERGE_STRATEGY.DEEP_PREPEND,
 
   values: [
-    pick(bundleConfig, ['aliases', 'define', 'externals', 'platform']),
-
-    { resolveExtensions: EXTENSIONS_WEB },
+    {
+      bundle: merge({
+        values: [{}, bundleConfig],
+      }),
+    },
 
     testConfigFrontend,
   ],

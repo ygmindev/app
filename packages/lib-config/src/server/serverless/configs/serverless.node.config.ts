@@ -1,19 +1,18 @@
+import { bundleConfig } from '@lib/config/js/bundle/configs/bundle.node.config';
 import { serverlessConfig as serverlessConfigBase } from '@lib/config/server/serverless/configs/serverless.base.config';
 import type { ServerlessConfigParamsModel } from '@lib/config/server/serverless/serverless.models';
-import { guid } from '@lib/shared/core/utils/guid/guid';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
 import { HTTP_METHOD, PING } from '@lib/shared/http/http.constants';
+import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
 export const serverlessConfig: ServerlessConfigParamsModel = merge({
   strategy: MERGE_STRATEGY.DEEP_APPEND,
 
   values: [
     {
-      bundle: {
-        include: ['src/**/*.ts'],
-      },
+      bundle: bundleConfig,
 
       functions: {
         [GRAPHQL]: {
@@ -25,9 +24,11 @@ export const serverlessConfig: ServerlessConfigParamsModel = merge({
         [PING]: {
           handler: 'src/core/ping/ping.main',
           method: HTTP_METHOD.GET,
-          pathname: `/api/${PING}/${guid()}`,
+          pathname: `/api/${PING}`,
         },
       },
+
+      platform: PLATFORM.NODE,
     },
 
     serverlessConfigBase,

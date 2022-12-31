@@ -3,25 +3,20 @@ import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import type { _TestConfigParamsModel } from '@lib/config/js/test/_test.models';
-import { compilerOptions } from '@lib/config/node/typescript/tsconfig.paths.json';
+import { compilerOptions } from '@lib/config/js/typescript/tsconfig.paths.json';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { mapKeys, reduce, trim, trimStart } from 'lodash';
 import { join } from 'path';
 import { pathsToModuleNameMapper } from 'ts-jest';
 
 export const _testConfig = ({
-  aliases,
+  bundle,
   cachePath,
   coverageOutputPath,
-  define,
-  extensions,
-  externals,
   fileExtensions,
   isWatch,
   match,
   mockPath,
-  platform,
-  resolveExtensions,
   root,
   timeout,
 }: _TestConfigParamsModel): Config.InitialOptions => ({
@@ -33,16 +28,16 @@ export const _testConfig = ({
 
   coverageReporters: ['lcov'],
 
-  globalTeardown: fromConfig(`node/test/configs/cleanup.${platform}.config.ts`),
+  globalTeardown: fromConfig(`node/test/configs/cleanup.${bundle.platform}.config.ts`),
 
-  globals: define,
+  globals: bundle.define,
 
   maxWorkers: -1,
 
-  moduleFileExtensions: resolveExtensions.map((ext) => trimStart(ext, '.')),
+  moduleFileExtensions: bundle.extensions.map((ext) => trimStart(ext, '.')),
 
   moduleNameMapper: {
-    ...mapKeys(aliases, (k) => `^${k}$`),
+    ...mapKeys(bundle.aliases, (k) => `^${k}$`),
     ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: fromRoot() }),
     [`\\.(${fileExtensions.join('|')})$`]: join(mockPath, 'file'),
   },
@@ -69,12 +64,12 @@ export const _testConfig = ({
 
   roots: ['<rootDir>', fromConfig('node/test')],
 
-  setupFilesAfterEnv: [fromConfig(`node/test/configs/initialize.${platform}.config.ts`)],
+  setupFilesAfterEnv: [fromConfig(`node/test/configs/initialize.${bundle.platform}.config.ts`)],
 
-  testEnvironment: platform === PLATFORM.WEB ? 'jsdom' : 'node',
+  testEnvironment: bundle.platform === PLATFORM.WEB ? 'jsdom' : 'node',
 
   testMatch: reduce(
-    extensions,
+    bundle.extensions,
     (result, ext) => {
       const _ext = trim(ext, '.');
       return [...result, `<rootDir>/src/**/${match}.${_ext}`, `<rootDir>/src/**/_${match}.${_ext}`];
@@ -93,7 +88,9 @@ export const _testConfig = ({
     ],
   },
 
-  transformIgnorePatterns: externals ? [`node_modules/(?!(${externals.join('|')})/)`] : [],
+  transformIgnorePatterns: bundle.externals
+    ? [`node_modules/(?!(${bundle.externals.join('|')})/)`]
+    : [],
 
   watch: isWatch,
 });

@@ -1,10 +1,7 @@
 import type { BundleConfigParamsModel } from '@lib/config/js/bundle/bundle.models';
 
-export interface _TestConfigParamsModel
-  extends Pick<
-    BundleConfigParamsModel,
-    'aliases' | 'define' | 'extensions' | 'externals' | 'platform'
-  > {
+export interface _TestConfigParamsModel {
+  bundle: BundleConfigParamsModel;
   cachePath: string;
   configFile: string;
   coverageOutputPath: string;
@@ -12,7 +9,7 @@ export interface _TestConfigParamsModel
   isWatch?: boolean;
   match: string;
   mockPath: string;
-  resolveExtensions: Array<string>;
   root: string;
+  testExtensions: Array<string>;
   timeout: number;
 }

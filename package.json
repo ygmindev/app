@@ -92,6 +92,7 @@
     "react-router-native": "^6.6.1",
     "react-use": "^17.4.0",
     "redux": "^4.2.0",
+    "serverless": "^3.26.0",
     "stripe": "^11.5.0",
     "styled-components": "^5.3.6",
     "tslib": "^2.4.1",

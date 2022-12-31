@@ -1,4 +1,6 @@
+import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
 import { cleanup } from '@lib/backend/setup/utils/cleanup/cleanup';
+import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { TASK_STATUS } from '@lib/config/core/task/task.constants';
 import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
@@ -17,8 +19,15 @@ export const dev: TaskParamsModel<DevParamsModel> = {
     },
   ],
 
+  onBefore: [
+    async () => {
+      await initialize();
+      return TASK_STATUS.SUCCESS;
+    },
+  ],
+
   task: async () => {
-    await command({ command: 'npx sls offline start --reloadHandler' });
+    await command({ command: `${fromExecutable('sls')} offline start --reloadHandler` });
     return { status: TASK_STATUS.SUCCESS };
   },
 };

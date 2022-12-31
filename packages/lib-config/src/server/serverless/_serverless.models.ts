@@ -1,16 +1,15 @@
+import type { BundleConfigParamsModel } from '@lib/config/js/bundle/bundle.models';
 import type { ServerlessProviderModel } from '@lib/config/server/serverless/serverless.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 import type { EnvironmentModel } from '@lib/shared/environment/environment.models';
 import type { HttpMethodModel } from '@lib/shared/http/http.models';
 import type { UriParamsModel } from '@lib/shared/http/utils/uri/uri.models';
+import type { PlatformModel } from '@lib/shared/platform/platform.models';
 
 export interface _ServerlessConfigParamsModel {
-  bundle: {
-    exclude?: Array<string>;
-    include?: Array<string>;
-  };
+  bundle: BundleConfigParamsModel;
 
-  dotenv?: CallableModel;
+  dotenv: CallableModel;
 
   environment: EnvironmentModel;
 
@@ -25,9 +24,11 @@ export interface _ServerlessConfigParamsModel {
 
   name: string;
 
-  offline?: {
+  offline: {
     lambdaPort: number;
   } & Pick<UriParamsModel, 'host' | 'port'>;
+
+  platform: PlatformModel;
 
   provider: ServerlessProviderModel;
 
