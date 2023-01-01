@@ -2,7 +2,7 @@ import type { BundleConfigParamsModel } from '@lib/config/js/bundle/bundle.model
 import { bundleConfig as bundleConfigBase } from '@lib/config/js/bundle/configs/bundle.base.config';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
-import { EXTENSIONS_BACKEND } from '@lib/shared/file/file.constants';
+import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
 export const bundleConfig: BundleConfigParamsModel = merge({
@@ -10,9 +10,9 @@ export const bundleConfig: BundleConfigParamsModel = merge({
 
   values: [
     {
-      extensions: EXTENSIONS_BACKEND,
+      extensions: permuteString(['.node'], bundleConfigBase.extensions),
 
-      platform: PLATFORM.BACKEND,
+      platform: PLATFORM.NODE,
     },
 
     bundleConfigBase,

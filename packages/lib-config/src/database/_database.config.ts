@@ -17,6 +17,6 @@ export const _databaseConfig = ({
   entities,
   password: password || undefined,
   pool: { max: pool.max, min: 0 },
-  type: type,
+  type,
   user: username || undefined,
 });

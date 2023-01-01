@@ -10,5 +10,6 @@ export interface _BundleConfigParamsModel {
   extensions: Array<string>;
   externals?: Array<string>;
   mode: BundleModeModel;
+  modulePaths: Array<string>;
   platform: PlatformModel;
 }

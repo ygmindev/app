@@ -4,10 +4,11 @@ import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import type { BundleConfigParamsModel } from '@lib/config/js/bundle/bundle.models';
+import { bundleConfig as bundleConfigBase } from '@lib/config/js/bundle/configs/bundle.base.config';
 import { bundleConfig as bundleConfigFrontend } from '@lib/config/js/bundle/configs/bundle.frontend.config';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
-import { EXTENSIONS_WEB } from '@lib/shared/file/file.constants';
+import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
 export const bundleConfig: BundleConfigParamsModel = merge({
@@ -35,7 +36,7 @@ export const bundleConfig: BundleConfigParamsModel = merge({
         },
       ],
 
-      extensions: EXTENSIONS_WEB,
+      extensions: permuteString(['.web'], bundleConfigBase.extensions),
 
       platform: PLATFORM.WEB,
     },

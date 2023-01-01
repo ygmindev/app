@@ -1,5 +1,5 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { PACKAGE_PREFIXES } from '@lib/shared/file/file.constants';
+import { PACKAGE_PREFIXES } from '@lib/backend/file/utils/packages/packages.constants';
 import { readdirSync } from 'fs';
 import { some } from 'lodash';
 

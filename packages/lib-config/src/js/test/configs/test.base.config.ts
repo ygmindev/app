@@ -2,8 +2,8 @@ import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { bundleConfig } from '@lib/config/js/bundle/configs/bundle.base.config';
 import type { TestConfigParamsModel } from '@lib/config/js/test/test.models';
+import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
-import { EXTENSIONS_TEST } from '@lib/shared/file/file.constants';
 
 export const testConfig: TestConfigParamsModel = {
   bundle: bundleConfig,
@@ -22,7 +22,7 @@ export const testConfig: TestConfigParamsModel = {
 
   root: fromWorking(),
 
-  testExtensions: EXTENSIONS_TEST,
+  testExtensions: permuteString(['.e2e', '.spec'], bundleConfig.extensions),
 
   timeout: 30e3,
 };

@@ -7,7 +7,7 @@ const { displayName } = withTest({ target: () => toRelative });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = toRelative(fromPackages(), fromRoot());
+    const result = toRelative({ from: fromPackages(), to: fromRoot() });
     expect(result).toStrictEqual('..');
   });
 });

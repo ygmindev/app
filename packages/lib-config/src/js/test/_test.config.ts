@@ -28,11 +28,13 @@ export const _testConfig = ({
 
   coverageReporters: ['lcov'],
 
-  globalTeardown: fromConfig(`node/test/configs/cleanup.${bundle.platform}.config.ts`),
+  globalTeardown: fromConfig(`node/test/_cleanup.${bundle.platform}.config.ts`),
 
   globals: bundle.define,
 
   maxWorkers: -1,
+
+  moduleDirectories: bundle.modulePaths,
 
   moduleFileExtensions: bundle.extensions.map((ext) => trimStart(ext, '.')),
 
@@ -64,7 +66,7 @@ export const _testConfig = ({
 
   roots: ['<rootDir>', fromConfig('node/test')],
 
-  setupFilesAfterEnv: [fromConfig(`node/test/configs/initialize.${bundle.platform}.config.ts`)],
+  setupFilesAfterEnv: [fromConfig(`node/test/_initialize.${bundle.platform}.config.ts`)],
 
   testEnvironment: bundle.platform === PLATFORM.WEB ? 'jsdom' : 'node',
 
