@@ -1,5 +1,5 @@
 import { packages } from '@lib/backend/file/utils/packages/packages';
-import { FS_FIXTURE } from '@lib/config/node/test/configs/__mocks__/fs/fs.fixtures';
+import { FS_FIXTURE } from '@lib/config/js/test/configs/__mocks__/fs/fs.fixtures';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { keys } from 'lodash';
 

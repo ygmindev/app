@@ -8,7 +8,6 @@ import type {
   UsernameFormPropsModel,
 } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.models';
 import { useOtpResource } from '@lib/frontend/auth/hooks/useOtpResource/useOtpResource';
-import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayout';
@@ -42,7 +41,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
       result && onSuccess && (await onSuccess(data, result));
     } catch (e) {
       if (isCheckIfNotExists && isTypeOf(e, DuplicateError)) {
-        return error({ icon: ICONS.people, message: t('auth:messages.userExistsError') });
+        return error({ icon: 'people', message: t('auth:messages.userExistsError') });
       }
       throw e;
     }

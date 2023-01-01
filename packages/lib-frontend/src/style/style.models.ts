@@ -6,7 +6,7 @@ import type {
 } from '@lib/frontend/style/style.constants';
 import type { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
-export type StyleModel = ViewStyle | TextStyle | ImageStyle;
+export type StyleModel = ViewStyle & TextStyle & ImageStyle;
 
 export type ThemeBasicSizeModel = `${THEME_BASIC_SIZE}`;
 

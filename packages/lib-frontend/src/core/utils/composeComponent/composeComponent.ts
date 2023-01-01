@@ -3,6 +3,7 @@ import type {
   ComposeComponentModel,
   ComposeComponentParamsModel,
 } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
+import { isFragment } from '@lib/frontend/core/utils/isFragment/isFragment';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import type { ReactElement, RefObject } from 'react';
@@ -25,10 +26,9 @@ export const composeComponent = <TProps, TResult, TRef = unknown>({
         : (props as unknown as TResult);
       return (isWeb ? unstable_createElement : createElement)(_Component, {
         ..._props,
-        nativeid: props.nativeID,
-        ref,
-        style: styles,
-        testID: props.testID,
+        ...(isFragment(_Component)
+          ? {}
+          : { nativeid: props.nativeID, ref, style: styles, testID: props.testID }),
       });
     },
   ) as ComposeComponentModel<TProps>;

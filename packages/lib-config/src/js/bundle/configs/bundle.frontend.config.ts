@@ -17,6 +17,7 @@ export const bundleConfig: BundleConfigParamsModel = merge({
         globs: [
           '@expo',
           '@react-native*',
+          'history',
           'moti',
           'react-native-!(codegen|gradle-plugin)',
           'react-native',

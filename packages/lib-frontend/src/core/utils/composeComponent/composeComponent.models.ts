@@ -14,7 +14,7 @@ export interface ComposeComponentParamsModel<TProps, TResult, TRef = unknown>
   extends Pick<UseStylesParamsModel<TProps>, 'stylers'> {
   getComponent(
     props: TProps,
-  ): ComponentType<TResult & StylePropsModel> | Component<TResult> | string;
+  ): ComponentType<TResult & StylePropsModel> | Component<TResult & StylePropsModel> | string;
   getProps?(
     props: TProps & TestIdPropsModel & StylePropsModel,
     theme: UseThemeModel,

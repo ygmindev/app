@@ -8,7 +8,7 @@ import { reduce } from 'lodash';
 
 const APP_PLATFORM = getEnv<PlatformModel>('APP_PLATFORM', PLATFORM.BASE);
 const config: BundleConfigParamsModel =
-  require(`@lib/config/node/bundle/configs/bundle.${APP_PLATFORM}.config`).bundleConfig;
+  require(`@lib/config/js/bundle/configs/bundle.${APP_PLATFORM}.config`).bundleConfig;
 
 export const bundleConfig = _bundleConfig({
   ...config,
