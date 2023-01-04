@@ -1,5 +1,3 @@
-import '@lib/config/style/sheet/sheet.css';
-
 import type { FCModel } from '@lib/frontend/core/core.models';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { _StyleProvider } from '@lib/frontend/style/providers/StyleProvider/_StyleProvider';

@@ -7,6 +7,7 @@ import type { MD3Type } from 'react-native-paper/lib/typescript/types';
 
 export const _StyleProvider = composeComponent<_StyleProviderPropsModel, ProviderProps>({
   getComponent: () => Provider,
+
   getProps: ({ children, value }) => {
     if (value) {
       const fontStyle: MD3Type = {

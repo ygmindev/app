@@ -1,4 +1,5 @@
 import type { SignInFormPropsModel } from '@lib/frontend/auth/containers/SignInForm/SignInForm.models';
+import { UsernameForm } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm';
 import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
@@ -31,7 +32,7 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({
         <OtpForm />
       </FormSteps> */}
 
-      {/* <UsernameForm isCheckIfNotExists={isCheckIfNotExists} /> */}
+      <UsernameForm isCheckIfNotExists={isCheckIfNotExists} />
     </Wrapper>
   );
 };

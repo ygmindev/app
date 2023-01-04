@@ -1,6 +1,5 @@
 import {
   USERNAME_FORM_FIELDS,
-  USERNAME_FORM_TEST_ID,
   USERNAME_FORM_VALIDATORS,
 } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.constants';
 import type {
@@ -56,7 +55,6 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
         <FormContainer
           onSubmit={_handleSubmit}
           rows={USERNAME_FORM_FIELDS}
-          testID={USERNAME_FORM_TEST_ID}
           validators={USERNAME_FORM_VALIDATORS}
         />
       </CenterLayout>

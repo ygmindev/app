@@ -1,9 +1,9 @@
-import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { _SwitchField } from '@lib/frontend/form/components/SwitchField/_SwitchField';
 import type { SwitchFieldPropsModel } from '@lib/frontend/form/components/SwitchField/SwitchField.models';
 import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
+import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 
 export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
@@ -37,7 +37,7 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
         value={fieldValue}
       />
 
-      {label && <Text>{label}</Text>}
+      {label && <TranslatableText>{label}</TranslatableText>}
     </Wrapper>
   );
 };

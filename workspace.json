@@ -9,6 +9,7 @@
     "app-web-story": "packages/app-web-story",
     "lib-backend": "packages/lib-backend",
     "lib-config": "packages/lib-config",
+    "lib-framework": "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-framework",
     "lib-frontend": "packages/lib-frontend",
     "lib-shared": "packages/lib-shared",
     "server-lambda": "packages/server-lambda",

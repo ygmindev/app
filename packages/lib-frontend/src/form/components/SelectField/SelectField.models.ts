@@ -6,6 +6,6 @@ import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 export interface SelectFieldPropsModel
   extends Pick<MenuPropsModel, 'options' | 'renderOption'>,
     Pick<TextFieldPropsModel, 'icon' | 'label' | 'error' | 'width' | 'isAutoFocus' | 'onSubmit'>,
-    FieldPropsModel {
+    Omit<FieldPropsModel, 'label'> {
   renderValue?(option: OptionModel): TranslatableTextModel;
 }

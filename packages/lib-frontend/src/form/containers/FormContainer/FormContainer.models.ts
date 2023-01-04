@@ -6,23 +6,25 @@ import type { FORM_FIELD_TYPE } from '@lib/frontend/form/containers/FormContaine
 import type { SubmittablePropsModel } from '@lib/frontend/form/form.models';
 import type { UseFormParamsModel } from '@lib/frontend/form/hooks/useForm/useForm.models';
 import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
+import type { PartialModel } from '@lib/shared/core/core.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
 import type { FieldTypeModel } from '@lib/shared/form/form.models';
 import type { ReactElement, ReactNode } from 'react';
 
 export type FormFieldTypeModel = `${FORM_FIELD_TYPE}`;
 
-export type FormContainerFieldModel = WithIdModel &
-  FieldPropsModel & { type?: FieldTypeModel } & (
-    | ({ field: FORM_FIELD_TYPE.TEXT_FIELD; render?: never } & TextFieldPropsModel)
-    | ({ field: FORM_FIELD_TYPE.SELECT_FIELD; render?: never } & SelectFieldPropsModel)
-    | ({ field: FORM_FIELD_TYPE.SWITCH_FIELD; render?: never } & SwitchFieldPropsModel)
-    | ({ field?: never } & { render(params: FieldPropsModel): ReactElement })
+export type FormContainerFieldModel = WithIdModel & {
+  type?: FieldTypeModel;
+} & (
+    | { field: FORM_FIELD_TYPE.TEXT_FIELD; fieldProps?: TextFieldPropsModel; render?: never }
+    | { field: FORM_FIELD_TYPE.SELECT_FIELD; fieldProps?: SelectFieldPropsModel; render?: never }
+    | { field: FORM_FIELD_TYPE.SWITCH_FIELD; fieldProps?: SwitchFieldPropsModel; render?: never }
+    | { field?: never; fieldProps?: never; render(params: FieldPropsModel): ReactElement }
   );
 
-export interface FormContainerRowModel extends WithIdModel {
+export type FormContainerRowModel = PartialModel<WithIdModel> & {
   fields?: Array<FormContainerFieldModel>;
-}
+};
 
 export interface FormContainerPropsModel<TType>
   extends UseFormParamsModel<TType>,

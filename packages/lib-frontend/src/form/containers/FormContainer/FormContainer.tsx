@@ -86,10 +86,10 @@ export const FormContainer = <TType,>({
   const _isFullWidth = isMobile || isFullWidth;
 
   const _getField = useCallback(
-    ({ field, id, isDisabled, render, ...fieldProps }: FormContainerFieldModel) => {
+    ({ field, fieldProps, id, render }: FormContainerFieldModel) => {
       const _defaultValue = get(initialValues, id);
       const _error = get(errors, id);
-      const _isDisabled = _isLoading || isDisabled;
+      const _isDisabled = _isLoading || fieldProps?.isDisabled;
       const _onChange = handleChange(id);
       const _onSubmit = async (): Promise<void> => handleSubmit();
       const _value = get(values, id);

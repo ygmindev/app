@@ -14,7 +14,7 @@ export const jsPackage: GeneratorParamsModel = {
 
     if (root && target) {
       // typescript paths
-      let dir = fromConfig('node/typescript/tsconfig.paths.json');
+      let dir = fromConfig('js/typescript/tsconfig.paths.json');
       let content = JSON.parse(readFileSync(dir).toString());
       content.compilerOptions.paths[`${target}/*`] = [`packages/${root}/src/*`];
       content.compilerOptions.paths = sortKeys(content.compilerOptions.paths);

@@ -28,6 +28,9 @@
       "@lib/config/*": [
         "packages/lib-config/src/*"
       ],
+      "@lib/framework/*": [
+        "packages/lib-framework/src/*"
+      ],
       "@lib/frontend/*": [
         "packages/lib-frontend/src/*"
       ],

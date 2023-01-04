@@ -10,6 +10,7 @@ import { _TextField } from '@lib/frontend/form/components/TextField/_TextField';
 import { TEXT_FIELD_KEYBOARD } from '@lib/frontend/form/components/TextField/TextField.constants';
 import type { TextFieldPropsModel } from '@lib/frontend/form/components/TextField/TextField.models';
 import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_BASIC_SIZE, THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
@@ -39,6 +40,7 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
   ...props
 }: TextFieldPropsModel): ReactElement<TextFieldPropsModel> => {
   const inputRef = useRef<TextInput>(null);
+  const { t } = useTranslation();
   const theme = useTheme();
   const { fieldValue, setFieldValue } = useFieldValue({ defaultValue, onChange, value });
   const [isFocused, setIsFocused] = useState<boolean>(false);
@@ -136,7 +138,7 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
       isDisabled={isDisabled}
       isFocused={isFocused}
       keyboard={keyboard}
-      label={label}
+      label={t(label)}
       leftElement={leftElement}
       onBlur={async () => {
         onBlur && onBlur();

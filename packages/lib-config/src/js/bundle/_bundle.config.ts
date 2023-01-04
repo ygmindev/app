@@ -1,13 +1,13 @@
 import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import type { _BundleConfigParamsModel } from '@lib/config/js/bundle/_bundle.models';
-import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { esbuildCommonjs, viteCommonjs } from '@originjs/vite-plugin-commonjs';
-import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import copyPlugin from 'rollup-plugin-copy';
 import type { PluginOption, UserConfig } from 'vite';
 import { searchForWorkspaceRoot } from 'vite';
 import type { Plugin } from 'vite/node_modules/esbuild/lib/main';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export const _bundleConfig = ({
   aliases,
@@ -18,7 +18,6 @@ export const _bundleConfig = ({
   extensions,
   externals,
   mode,
-  platform,
 }: _BundleConfigParamsModel): UserConfig => ({
   build: {
     commonjsOptions: {
@@ -45,7 +44,7 @@ export const _bundleConfig = ({
   plugins: [
     viteCommonjs(),
 
-    platform === PLATFORM.WEB && vanillaExtractPlugin(),
+    tsconfigPaths({ projects: [fromRoot('tsconfig.json')] }),
 
     copy &&
       copyPlugin({
@@ -59,6 +58,8 @@ export const _bundleConfig = ({
 
     extensions,
   },
+
+  root: fromWorking(),
 
   server: {
     fs: {

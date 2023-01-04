@@ -2,30 +2,36 @@ import type { _LibraryConfigParamsModel } from '@lib/config/framework/library/_l
 import { bundleConfig } from '@lib/config/js/bundle/bundle.config';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
-import type { StorybookConfig } from '@storybook/builder-vite';
+import type { StorybookViteConfig } from '@storybook/builder-vite';
 import { reduce, trim } from 'lodash';
 
 export const _libraryConfig = ({
   inputPath,
   resolveExtensions,
   staticPath,
-}: _LibraryConfigParamsModel): StorybookConfig => ({
-  addons: ['@storybook/addon-essentials'],
+}: _LibraryConfigParamsModel): StorybookViteConfig => ({
+  // addons: ['@storybook/addon-essentials'],
 
-  core: {
-    builder: '@storybook/builder-vite',
-    disableTelemetry: true,
+  // core: {
+  //   builder: '@storybook/builder-vite',
+  //   disableTelemetry: true,
+  // },
+
+  features: {
+    storyStoreV7: false,
   },
+
+  framework: '@storybook/react-vite',
 
   staticDirs: [staticPath],
 
-  stories: reduce<string, Array<string>>(
+  stories: reduce(
     resolveExtensions,
     (result, ext) => {
       const _ext = trim(ext, '.');
       return [...result, `${inputPath}/**/*.${_ext}`];
     },
-    [],
+    [] as Array<string>,
   ),
 
   // typescript: {

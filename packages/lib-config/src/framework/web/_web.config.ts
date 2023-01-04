@@ -1,15 +1,20 @@
-import node from '@astrojs/node';
-import react from '@astrojs/react';
 import type { _WebConfigParamsModel } from '@lib/config/framework/web/_web.models';
 import { bundleConfig } from '@lib/config/js/bundle/bundle.config';
-import type { AstroUserConfig } from 'astro/config';
+import { merge } from '@lib/shared/core/utils/merge/merge';
+import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
+import react from '@vitejs/plugin-react';
+import type { UserConfig } from 'vite';
+import ssr from 'vite-plugin-ssr/plugin';
 
-export const _webConfig = ({ isReact, isSsr }: _WebConfigParamsModel): AstroUserConfig => ({
-  adapter: isSsr ? node({ mode: 'standalone' }) : undefined,
+export const _webConfig = ({ isReact, isSsr }: _WebConfigParamsModel): UserConfig =>
+  merge({
+    strategy: MERGE_STRATEGY.DEEP_APPEND,
 
-  integrations: [isReact && react()].filter(Boolean),
+    values: [
+      {
+        plugins: [isReact && react(), isSsr && ssr({ prerender: true })].filter(Boolean),
+      },
 
-  output: isSsr ? 'server' : 'static',
-
-  vite: bundleConfig as AstroUserConfig['vite'],
-});
+      bundleConfig,
+    ],
+  });

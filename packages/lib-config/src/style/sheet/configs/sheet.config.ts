@@ -3,8 +3,8 @@ import { themeConfig } from '@lib/config/style/theme/configs/theme.config';
 
 export const sheetConfig: SheetConfigParamsModel = {
   fonts: {
-    FontAwesome: 'url("fonts/FontAwesome.ttf") format("truetype")',
-    Ionicons: 'url("fonts/Ionicons.ttf") format("truetype")',
+    FontAwesome: 'url("/fonts/FontAwesome.ttf") format("truetype")',
+    Ionicons: 'url("/fonts/Ionicons.ttf") format("truetype")',
   },
 
   styles: {

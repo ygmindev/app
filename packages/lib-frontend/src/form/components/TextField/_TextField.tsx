@@ -139,7 +139,8 @@ export const _TextField: SFCModel<_TextFieldPropsModel> = ({
       position={SHAPE_POSITION.RELATIVE}
       round
       style={styles}
-      testID={testID}>
+      testID={testID}
+      width={width}>
       <Wrapper
         backgroundColor={_backgroundColor}
         bottom={0}
@@ -163,10 +164,7 @@ export const _TextField: SFCModel<_TextFieldPropsModel> = ({
             <Wrapper isRowAlign>
               {icon && (
                 <Icon
-                  animation={{
-                    from: { borderColor: _colors.from },
-                    to: { borderColor: _colors.to },
-                  }}
+                  animation={{ from: { color: _colors.from }, to: { color: _colors.to } }}
                   icon={icon}
                 />
               )}
@@ -240,7 +238,6 @@ export const _TextField: SFCModel<_TextFieldPropsModel> = ({
           },
         }}
         value={value}
-        width={width}
       />
     </Wrapper>
   );
