@@ -1,4 +1,0 @@
-{
-  "extends": "../lib-config/src/js/typescript/tsconfig.json",
-  "include": ["../lib-config/src/js/typescript/types/*", "src/**/*", "*.ts", "*.js"]
-}

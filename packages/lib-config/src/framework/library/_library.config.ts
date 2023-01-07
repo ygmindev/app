@@ -1,5 +1,5 @@
 import type { _LibraryConfigParamsModel } from '@lib/config/framework/library/_library.models';
-import { bundleConfig } from '@lib/config/js/bundle/bundle.config';
+import { bundleConfig } from '@lib/config/javascript/bundle/bundle.config';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import type { StorybookViteConfig } from '@storybook/builder-vite';

@@ -1,5 +1,5 @@
 import type { _WebConfigParamsModel } from '@lib/config/framework/web/_web.models';
-import { bundleConfig } from '@lib/config/js/bundle/bundle.config';
+import { bundleConfig } from '@lib/config/javascript/bundle/bundle.config';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import react from '@vitejs/plugin-react';

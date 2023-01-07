@@ -1,1 +1,1 @@
-export { testConfig as default } from '@lib/config/js/test/test.config';
+export { testConfig as default } from '@lib/config/javascript/test/test.config';

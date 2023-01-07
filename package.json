@@ -259,7 +259,6 @@
   "bundledDependencies": [
     "@app/native",
     "@app/web",
-    "@app/web-admin",
     "@app/web-ete",
     "@app/web-storybook",
     "@asset/static",

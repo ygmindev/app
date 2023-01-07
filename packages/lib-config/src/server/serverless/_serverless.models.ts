@@ -1,4 +1,4 @@
-import type { BundleConfigParamsModel } from '@lib/config/js/bundle/bundle.models';
+import type { BundleConfigParamsModel } from '@lib/config/javascript/bundle/bundle.models';
 import type { ServerlessProviderModel } from '@lib/config/server/serverless/serverless.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 import type { EnvironmentModel } from '@lib/shared/environment/environment.models';

@@ -1,4 +1,4 @@
-import { bundleConfig } from '@lib/config/js/bundle/configs/bundle.node.config';
+import { bundleConfig } from '@lib/config/javascript/bundle/configs/bundle.node.config';
 import { serverlessConfig as serverlessConfigBase } from '@lib/config/server/serverless/configs/serverless.base.config';
 import type { ServerlessConfigParamsModel } from '@lib/config/server/serverless/serverless.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';

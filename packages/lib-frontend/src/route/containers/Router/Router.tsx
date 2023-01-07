@@ -13,7 +13,7 @@ import { useMemo } from 'react';
 const _getRoute = (routes?: Array<RouteModel>): Array<RouteModel> =>
   reduce(
     routes,
-    (result, { pathname = '/', ...route }) => {
+    (result, { pathname, ...route }) => {
       const _pathname = trimPathname(pathname);
       const _route: RouteModel = { ...route, pathname: _pathname };
       return [

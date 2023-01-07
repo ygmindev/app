@@ -1,4 +1,4 @@
-import { bundleConfig } from '@lib/config/js/bundle/configs/bundle.base.config';
+import { bundleConfig } from '@lib/config/javascript/bundle/configs/bundle.base.config';
 import { SERVERLESS_PROVIDER } from '@lib/config/server/serverless/serverless.constants';
 import type { ServerlessConfigParamsModel } from '@lib/config/server/serverless/serverless.models';
 import type { EnvironmentModel } from '@lib/shared/environment/environment.models';
