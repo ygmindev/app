@@ -16,17 +16,8 @@ const _getRoute = (routes?: Array<RouteModel>): Array<RouteModel> =>
     (result, { pathname = '/', ...route }) => {
       const _pathname = trimPathname(pathname);
       const _route: RouteModel = { ...route, pathname: _pathname };
-      return [
-        ...result,
-        {
-          ..._route,
-          element: (
-            <Route route={_route}>
-              {_route.routes && <_Router routes={_getRoute(route.routes)} />}
-            </Route>
-          ),
-        },
-      ];
+      _route.routes && (_route.routes = _getRoute(route.routes));
+      return [...result, { ..._route, element: <Route route={_route} /> }];
     },
     [] as Array<RouteModel>,
   );
@@ -41,7 +32,10 @@ export const Router: SFCModel<RouterPropsModel> = ({ routes, testID, ...props })
       position={SHAPE_POSITION.RELATIVE}
       style={styles}
       testID={testID}>
-      <_Router routes={_routes} />
+      <_Router
+        {...props}
+        routes={_routes}
+      />
     </Wrapper>
   );
 };

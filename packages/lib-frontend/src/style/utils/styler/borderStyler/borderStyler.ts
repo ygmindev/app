@@ -20,7 +20,7 @@ export const borderStyler: StylerModel<BorderStylerParamsModel> = (
   const _borderColor = _color ? _color[borderRole] : borderColor;
   return cleanObject({
     borderBottomWidth: border === BORDER_DIRECTION.BOTTOM ? borderWidth : undefined,
-    borderColor: _borderColor,
+    borderColor: border ? _borderColor : undefined,
     borderLeftWidth: border === BORDER_DIRECTION.LEFT ? borderWidth : undefined,
     borderRadius: round === true ? theme.shape.borderRadius : round === false ? undefined : round,
     borderRightWidth: border === BORDER_DIRECTION.RIGHT ? borderWidth : undefined,

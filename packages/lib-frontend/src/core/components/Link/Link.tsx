@@ -4,11 +4,9 @@ import { _Link } from '@lib/frontend/core/components/Link/_Link';
 import type { LinkPropsModel } from '@lib/frontend/core/components/Link/Link.models';
 import { View } from '@lib/frontend/core/components/View/View';
 import type { PropsModel, SFCModel } from '@lib/frontend/core/core.models';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import type { TextStyleModel } from '@lib/frontend/style/style.models';
 import { palette } from '@lib/frontend/style/utils/palette/palette';
-import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
 import { isString } from 'lodash';
 
 const _AnimatableLink = animatable<PropsModel<typeof _Link>, TextStyleModel>({
@@ -16,7 +14,6 @@ const _AnimatableLink = animatable<PropsModel<typeof _Link>, TextStyleModel>({
 });
 
 export const Link: SFCModel<LinkPropsModel> = ({ children, ...props }) => {
-  const { inheritedStyles, styles } = useStyles({ props, stylers: [textStyler] });
   const theme = useTheme();
   return isString(children) ? (
     <Activatable>
@@ -33,14 +30,13 @@ export const Link: SFCModel<LinkPropsModel> = ({ children, ...props }) => {
                   lightness: theme.colors.activeLightness,
                 }),
               },
-            }}
-            style={styles}>
+            }}>
             {children}
           </_AnimatableLink>
         </View>
       )}
     </Activatable>
   ) : (
-    <_Link style={inheritedStyles}>{children}</_Link>
+    <_Link {...props}>{children}</_Link>
   );
 };

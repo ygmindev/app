@@ -14,7 +14,7 @@ export interface RouteModel {
   isHeader?: boolean;
   isIndex?: boolean;
   isProtected?: boolean;
-  pathname?: string;
+  pathname: string;
   routes?: Array<RouteModel>;
   title?: TranslatableTextModel;
   transition?: RouteTransitionModel;

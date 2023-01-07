@@ -5,6 +5,4 @@ import { AnimatePresence } from 'moti';
 
 export const _Exitable = composeComponent<_ExitablePropsModel, ChildrenPropsModel>({
   getComponent: () => AnimatePresence,
-
-  getProps: ({ children }) => ({ children, exitBeforeEnter: true }),
 });
