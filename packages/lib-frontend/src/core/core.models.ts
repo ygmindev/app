@@ -2,14 +2,15 @@ import type { ButtonPropsModel } from '@lib/frontend/core/components/Button/Butt
 import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
 import type { DimensionModel } from '@lib/frontend/platform/platform.models';
 import type { RootPropsModel } from '@lib/frontend/root/containers/Root/Root.models';
-import type { StylePropsModel } from '@lib/frontend/style/style.models';
+import type { StyleModel, StylePropsModel, ViewStyleModel } from '@lib/frontend/style/style.models';
 import type { TestIdPropsModel } from '@lib/frontend/test/test.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
 import type { ComponentType, FC as _FC, ReactNode, RefObject } from 'react';
 
 export interface FCModel<TProps = object> extends _FC<TProps & TestIdPropsModel> {}
 
-export interface SFCModel<TProps = object> extends FCModel<TProps & StylePropsModel> {}
+export interface SFCModel<TProps = object, TStyle extends StyleModel = ViewStyleModel>
+  extends FCModel<TProps & StylePropsModel<TStyle>> {}
 
 export type PropsModel<TType> = TType extends ComponentType<infer TProps> ? TProps : never;
 

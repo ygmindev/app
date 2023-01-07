@@ -5,12 +5,13 @@ import {
   IONIC_ICONS,
 } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
+import type { TextStyleModel } from '@lib/frontend/style/style.models';
 import { Fragment } from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import type { IconProps } from 'react-native-vector-icons/Icon';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-export const _Icon = composeComponent<_IconPropsModel, IconProps>({
+export const _Icon = composeComponent<_IconPropsModel, IconProps, TextStyleModel>({
   getComponent: ({ icon }) =>
     icon
       ? (IONIC_ICONS as Record<string, string>)[icon]

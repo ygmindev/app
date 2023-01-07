@@ -4,14 +4,15 @@ import type {
   UseStylesParamsModel,
 } from '@lib/frontend/style/hooks/useStyles/useStyles.models';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import type { StyleModel, ViewStyleModel } from '@lib/frontend/style/style.models';
 import { isFunction, map } from 'lodash';
 import { useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
-export const useStyles = <TProps,>({
+export const useStyles = <TProps, TStyle extends StyleModel = ViewStyleModel>({
   props,
   stylers,
-}: UseStylesParamsModel<TProps>): UseStylesModel<TProps> => {
+}: UseStylesParamsModel<TProps, TStyle>): UseStylesModel<TProps, TStyle> => {
   const theme = useTheme();
   const isMobile = useIsMobile();
 
@@ -29,9 +30,9 @@ export const useStyles = <TProps,>({
   );
 
   return {
-    computedStyles,
-    inheritedStyles,
+    computedStyles: computedStyles as TStyle,
+    inheritedStyles: inheritedStyles as TStyle,
     propsWithOutStyle: (({ style: _, ...rest }) => rest)(props),
-    styles,
+    styles: styles as TStyle,
   };
 };

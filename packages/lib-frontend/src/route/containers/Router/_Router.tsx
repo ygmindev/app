@@ -1,9 +1,7 @@
 import type { FCModel } from '@lib/frontend/core/core.models';
-import type {
-  _RouteComponentModel,
-  _RouterPropsModel,
-} from '@lib/frontend/route/containers/Router/_Router.models';
+import type { _RouterPropsModel } from '@lib/frontend/route/containers/Router/_Router.models';
 import { _Route, _Routes } from '@lib/frontend/route/containers/Router/_RouterBase';
+import type { RouteModel } from '@lib/frontend/route/route.models';
 import type { ReactElement } from 'react';
 
 const RouteWithSubRoutes = ({
@@ -11,7 +9,7 @@ const RouteWithSubRoutes = ({
   isIndex,
   pathname,
   routes,
-}: _RouteComponentModel): ReactElement<_RouteComponentModel> => (
+}: RouteModel): ReactElement<RouteModel> => (
   <_Route
     element={element}
     index={isIndex}

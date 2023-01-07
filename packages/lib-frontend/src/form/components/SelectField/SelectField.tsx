@@ -91,18 +91,16 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
             onChange={onQueryChange}
             onFocus={() => _handleToggle(true)}
             onSubmit={_handleSelect}
-            rightElement={(isFocused) => {
-              const from = { transform: [{ rotateZ: '0deg' }] };
-              return (
-                <AnimatableView
-                  animation={{
-                    from,
-                    to: isFocused ? { transform: [{ rotateZ: '-180deg' }] } : from,
-                  }}>
-                  <Icon icon="chevronDown" />
-                </AnimatableView>
-              );
-            }}
+            rightElement={(isFocused) => (
+              <AnimatableView
+                animation={{
+                  from: { transform: [{ rotateZ: '0deg' }] },
+                  isActive: isFocused,
+                  to: { transform: [{ rotateZ: '-180deg' }] },
+                }}>
+                <Icon icon="chevronDown" />
+              </AnimatableView>
+            )}
             value={isOpen ? query : t(_selectedLabel)}
             width={width}
           />

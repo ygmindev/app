@@ -23,11 +23,16 @@ export const _server = async ({
 
   app.get('*', async (req, res, next) => {
     const pageContext = await renderPage({ urlOriginal: req.originalUrl });
-    const { httpResponse } = pageContext;
+    const { errorWhileRendering, httpResponse } = pageContext;
+
     if (httpResponse) {
-      const { body, contentType, earlyHints, statusCode } = httpResponse;
+      const { contentType, earlyHints, pipe, statusCode } = httpResponse;
       res.writeEarlyHints && res.writeEarlyHints({ link: earlyHints.map((e) => e.earlyHintLink) });
-      res.status(statusCode).type(contentType).send(body);
+      res.status(statusCode).type(contentType);
+      pipe(res);
+    } else if (errorWhileRendering) {
+      // TODO: better error handling
+      res.status(500).send(errorWhileRendering);
     }
     return next();
   });

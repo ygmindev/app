@@ -1,3 +1,5 @@
+import '@lib/frontend/core/utils/polyfill/polyfill';
+
 import { AuthProvider } from '@lib/frontend/auth/providers/AuthProvider/AuthProvider';
 import { ErrorBoundary } from '@lib/frontend/core/components/ErrorBoundary/ErrorBoundary';
 import type { FCModel } from '@lib/frontend/core/core.models';
@@ -7,20 +9,20 @@ import type { RootPropsModel } from '@lib/frontend/root/containers/Root/Root.mod
 import { RouteProvider } from '@lib/frontend/route/providers/RouteProvider/RouteProvider';
 import { StateProvider } from '@lib/frontend/state/providers/StateProvider/StateProvider';
 import { StyleProvider } from '@lib/frontend/style/providers/StyleProvider/StyleProvider';
-import { TrackingProvider } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider';
-import { cloneElement, useMemo } from 'react';
+import { cloneElement, Suspense, useMemo } from 'react';
 
-export const Root: FCModel<RootPropsModel> = ({ children, initialState }) => {
+export const Root: FCModel<RootPropsModel> = ({ children, initialState, location }) => {
   const providers = useMemo(
     () => [
-      <RouteProvider />,
-      <TrackingProvider />,
+      <RouteProvider value={location} />,
+      // <TrackingProvider />,
       <AuthProvider />,
       <LocaleProvider />,
       <StyleProvider />,
       <QueryProvider />,
       <ErrorBoundary />,
-      <StateProvider value={{ initialState }} />,
+      <StateProvider value={initialState} />,
+      <Suspense />, // TODO: to provider?
     ],
     [initialState],
   );

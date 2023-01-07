@@ -3,9 +3,14 @@ import type { _TextPropsModel } from '@lib/frontend/core/components/Text/_Text.m
 import type { TextPropsModel } from '@lib/frontend/core/components/Text/Text.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import type { ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
+import type { TextStyleModel } from '@lib/frontend/style/style.models';
 import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
 
-export const textParams: ComposeComponentParamsModel<TextPropsModel, _TextPropsModel> = {
+export const textParams: ComposeComponentParamsModel<
+  TextPropsModel,
+  _TextPropsModel,
+  TextStyleModel
+> = {
   getComponent: () => _Text,
 
   stylers: [textStyler],

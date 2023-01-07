@@ -1,27 +1,24 @@
-import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
 import type { _UseRouterModel } from '@lib/frontend/route/hooks/useRouter/_useRouter.models';
 import type { LocationModel } from '@lib/frontend/route/route.models';
-import { merge } from '@lib/shared/core/utils/merge/merge';
-import { createBrowserHistory, createMemoryHistory } from 'history';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-const _history = isSsr ? createMemoryHistory() : createBrowserHistory();
+export const _useRouter = <TParams = undefined,>(): _UseRouterModel<TParams> => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const params = useParams();
 
-export const _useRouter = <TParams = undefined,>(): _UseRouterModel<TParams> => ({
-  back: () => _history.back(),
+  return {
+    back: () => navigate(-1),
 
-  location: {
-    params: merge<TParams>({
-      values: [
-        _history.location.state,
-        !isSsr && new URLSearchParams(window.location.search),
-      ].filter(Boolean) as Array<TParams>,
-    }),
-    pathname: _history.location.pathname,
-  },
+    location: {
+      params: { ...location.state, ...params } as TParams,
+      pathname: location.pathname,
+    },
 
-  push: <TNextParams = undefined,>({ params, pathname }: LocationModel<TNextParams>) =>
-    _history.push(pathname, params),
+    push: <TParams = undefined,>({ params, pathname }: LocationModel<TParams>) =>
+      navigate(pathname, { state: params }),
 
-  replace: <TNextParams = undefined,>({ params, pathname }: LocationModel<TNextParams>) =>
-    _history.replace(pathname, params),
-});
+    replace: <TParams = undefined,>({ params, pathname }: LocationModel<TParams>) =>
+      navigate(pathname, { replace: true, state: params }),
+  };
+};

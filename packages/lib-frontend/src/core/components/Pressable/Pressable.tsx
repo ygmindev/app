@@ -8,7 +8,6 @@ import { lazy } from '@lib/frontend/core/utils/lazy/lazy';
 import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
 import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import { isPromise } from '@lib/shared/core/utils/isPromise/isPromise';
 import { useState } from 'react';
@@ -68,16 +67,12 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
                   ? animation(_isActive)
                   : {
                       from: { backgroundColor: theme.colors.tone.neutral.main },
-                      to: {
-                        backgroundColor: _isActive
-                          ? theme.colors.tone.neutral.muted
-                          : theme.colors.tone.neutral.main,
-                      },
+                      isActive: _isActive,
+                      to: { backgroundColor: theme.colors.tone.neutral.muted },
                     }
               }
               onPress={_handleButtonPress}
               pHorizontal
-              pVertical={THEME_BASIC_SIZE.SMALL}
               round>
               {children && children({ isActive: _isActive, isLoading: _isLoading })}
             </Wrapper>

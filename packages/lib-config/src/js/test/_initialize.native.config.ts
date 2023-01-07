@@ -1,4 +1,4 @@
-import '@lib/config/js/test/configs/initialize.frontend.config';
+import '@lib/config/js/test/_initialize.frontend.config';
 
 import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock';
 

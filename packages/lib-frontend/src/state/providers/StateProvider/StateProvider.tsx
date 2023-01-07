@@ -10,7 +10,7 @@ export const actionContext = createContext<RootActionsModel | undefined>(undefin
 export const StateProvider: FCModel<StateProviderPropsModel> = ({ children, value }) => (
   <_StateProvider
     actionContext={actionContext}
-    value={{ initialState: value?.initialState, reducers: ROOT_REDUCERS }}>
+    value={{ initialState: value, reducers: ROOT_REDUCERS }}>
     {children}
   </_StateProvider>
 );

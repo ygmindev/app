@@ -1,38 +1,46 @@
+import { animatable } from '@lib/frontend/animation/utils/animatable/animatable';
 import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
 import { _Link } from '@lib/frontend/core/components/Link/_Link';
-import type { _LinkPropsModel } from '@lib/frontend/core/components/Link/_Link.models';
 import type { LinkPropsModel } from '@lib/frontend/core/components/Link/Link.models';
 import { View } from '@lib/frontend/core/components/View/View';
-import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
+import type { PropsModel, SFCModel } from '@lib/frontend/core/core.models';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import type { TextStyleModel } from '@lib/frontend/style/style.models';
 import { palette } from '@lib/frontend/style/utils/palette/palette';
 import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
+import { isString } from 'lodash';
 
-export const Link = composeComponent<LinkPropsModel, _LinkPropsModel>({
-  getComponent: () => _Link,
-
-  getProps: ({ children, style, testID }, theme) => ({
-    children: (
-      <Activatable>
-        {(isActive) => (
-          <View>
-            <_Link
-              style={{
-                ...style,
-                color: isActive
-                  ? palette({
-                      color: theme.colors.tone.primary.main,
-                      lightness: theme.colors.activeLightness,
-                    })
-                  : theme.colors.tone.primary.main,
-              }}
-              testID={testID}>
-              {children}
-            </_Link>
-          </View>
-        )}
-      </Activatable>
-    ),
-  }),
-
-  stylers: [textStyler],
+const _AnimatableLink = animatable<PropsModel<typeof _Link>, TextStyleModel>({
+  Component: _Link,
 });
+
+export const Link: SFCModel<LinkPropsModel> = ({ children, ...props }) => {
+  const { inheritedStyles, styles } = useStyles({ props, stylers: [textStyler] });
+  const theme = useTheme();
+  return isString(children) ? (
+    <Activatable>
+      {(isActive) => (
+        <View>
+          <_AnimatableLink
+            {...props}
+            animation={{
+              from: { color: theme.colors.tone.primary.main },
+              isActive,
+              to: {
+                color: palette({
+                  color: theme.colors.tone.primary.main,
+                  lightness: theme.colors.activeLightness,
+                }),
+              },
+            }}
+            style={styles}>
+            {children}
+          </_AnimatableLink>
+        </View>
+      )}
+    </Activatable>
+  ) : (
+    <_Link style={inheritedStyles}>{children}</_Link>
+  );
+};

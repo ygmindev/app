@@ -1,4 +1,5 @@
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import type { TextStyleModel } from '@lib/frontend/style/style.models';
 import {
   FONT_FAMILY,
   FONT_TYPE,
@@ -7,7 +8,7 @@ import type { FontStylerParamsModel } from '@lib/frontend/style/utils/styler/fon
 import type { StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 
-export const fontStyler: StylerModel<FontStylerParamsModel> = (
+export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
   {
     align,
     isBold,

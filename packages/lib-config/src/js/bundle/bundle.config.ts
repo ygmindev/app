@@ -20,10 +20,7 @@ export const bundleConfig = _bundleConfig({
       process.env,
       (result, v, k) =>
         k.startsWith(config.envPrefix)
-          ? {
-              ...result,
-              [`process.env.${k}`]: JSON.stringify(v),
-            }
+          ? { ...result, [`process.env.${k}`]: JSON.stringify(v) }
           : result,
       {},
     ),

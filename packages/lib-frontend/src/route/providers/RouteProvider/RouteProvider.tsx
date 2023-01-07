@@ -5,6 +5,4 @@ import type { RouteProviderPropsModel } from '@lib/frontend/route/providers/Rout
 
 export const RouteProvider = composeComponent<RouteProviderPropsModel, _RouteProviderPropsModel>({
   getComponent: () => _RouteProvider,
-
-  getProps: ({ children }) => ({ children }),
 });

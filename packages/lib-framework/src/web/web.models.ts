@@ -7,9 +7,9 @@ export interface PageParamsModel {
   title?: string;
 }
 
-export interface PageContextModel {
+export interface PageContextModel<TType> {
   Component: ComponentType;
   pageParams: PageParamsModel;
+  pageProps?: TType;
   pathname: string;
-  routeParams: Record<string, string>;
 }

@@ -6,11 +6,12 @@ import type {
 } from '@lib/frontend/animation/hooks/useAnimation/useAnimation.models';
 import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import type { StyleModel, ViewStyleModel } from '@lib/frontend/style/style.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { useState } from 'react';
 
-export const useAnimation = ({
+export const useAnimation = <TStyle extends StyleModel = ViewStyleModel>({
   duration,
   from,
   isLazy = true,
@@ -18,7 +19,7 @@ export const useAnimation = ({
   measure,
   to,
   types,
-}: UseAnimationParamsModel): UseAnimationModel => {
+}: UseAnimationParamsModel<TStyle>): UseAnimationModel<TStyle> => {
   const theme = useTheme();
   const _duration = duration || theme.animation.duration;
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
@@ -33,9 +34,9 @@ export const useAnimation = ({
     ? types.reduce((result, type) => merge({ values: [result, ANIMATIONS[type](measure)] }), {
         from,
         to,
-      } as AnimationModel)
+      } as AnimationModel<TStyle>)
     : { from, to };
-  const _animation: AnimationModel = {
+  const _animation: AnimationModel<TStyle> = {
     ..._animationProps,
     duration: duration || theme.animation.duration,
     from: isVisible ? _animationProps.from : _animationProps.to,

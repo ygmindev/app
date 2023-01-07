@@ -3,7 +3,9 @@ import type { ActivePropsModel } from '@lib/frontend/route/components/Active/Act
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<ActivePropsModel>({ target: Active });
+const { Component, displayName, testID } = withTestComponent<ActivePropsModel>({
+  target: Active,
+});
 
 describe(displayName, () => {
   test('works', async () => {

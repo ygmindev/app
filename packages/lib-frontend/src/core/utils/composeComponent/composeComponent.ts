@@ -6,17 +6,26 @@ import type {
 import { isFragment } from '@lib/frontend/core/utils/isFragment/isFragment';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import type { StyleModel, ViewStyleModel } from '@lib/frontend/style/style.models';
 import type { ReactElement, RefObject } from 'react';
 import { createElement, forwardRef } from 'react';
 import { unstable_createElement } from 'react-native-web';
 
-export const composeComponent = <TProps, TResult, TRef = unknown>({
+export const composeComponent = <
+  TProps,
+  TResult,
+  TStyle extends StyleModel = ViewStyleModel,
+  TRef = unknown,
+>({
   getComponent,
   getProps,
   isWeb,
   stylers,
-}: ComposeComponentParamsModel<TProps, TResult, TRef>): ComposeComponentModel<TProps> =>
-  forwardRef<RefObject<TRef>, PropsModel<ComposeComponentModel<TProps>>>(
+}: ComposeComponentParamsModel<TProps, TResult, TStyle, TRef>): ComposeComponentModel<
+  TProps,
+  TStyle
+> =>
+  forwardRef<RefObject<TRef>, PropsModel<ComposeComponentModel<TProps, TStyle>>>(
     (props, ref): ReactElement<TResult> => {
       const { styles } = useStyles({ props, stylers });
       const theme = useTheme();
@@ -31,4 +40,4 @@ export const composeComponent = <TProps, TResult, TRef = unknown>({
           : { nativeid: props.nativeID, ref, style: styles, testID: props.testID }),
       });
     },
-  ) as ComposeComponentModel<TProps>;
+  ) as ComposeComponentModel<TProps, TStyle>;

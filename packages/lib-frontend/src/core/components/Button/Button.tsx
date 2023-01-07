@@ -22,29 +22,26 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   const theme = useTheme();
 
   const _pressableAnimation = (isActive?: boolean): AnimationModel => {
+    const _color = theme.colors.tone[color];
     switch (type) {
-      case BUTTON_TYPE.FILLED: {
-        const _color = theme.colors.tone[color].main;
+      case BUTTON_TYPE.FILLED:
         return {
-          from: { backgroundColor: _color },
-          to: isActive
-            ? {
-                backgroundColor: palette({
-                  color: _color,
-                  lightness: theme.colors.activeLightness,
-                }),
-              }
-            : { backgroundColor: _color },
+          from: { backgroundColor: _color.main },
+          isActive,
+          to: {
+            backgroundColor: palette({
+              color: _color.main,
+              lightness: theme.colors.activeLightness,
+            }),
+          },
         };
-      }
       case BUTTON_TYPE.ICON:
-      case BUTTON_TYPE.TRANSPARENT: {
-        const from = { backgroundColor: theme.colors.tone.neutral.main };
+      case BUTTON_TYPE.TRANSPARENT:
         return {
-          from,
-          to: isActive ? { backgroundColor: theme.colors.tone[color].muted } : from,
+          from: { backgroundColor: theme.colors.tone.neutral.main },
+          isActive,
+          to: { backgroundColor: _color.muted },
         };
-      }
       default:
         return {};
     }

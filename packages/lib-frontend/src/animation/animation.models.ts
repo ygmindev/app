@@ -1,15 +1,17 @@
-import type { StyleModel } from '@lib/frontend/style/style.models';
+import type { StyleModel, ViewStyleModel } from '@lib/frontend/style/style.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 
-export interface AnimationModel {
+export interface AnimationModel<TStyle extends StyleModel = ViewStyleModel> {
   delay?: number;
   duration?: number;
-  from?: StyleModel;
+  exit?: TStyle;
+  from?: TStyle;
+  isActive?: boolean;
   isInfinite?: boolean;
   onEnd?: CallableModel;
-  to?: StyleModel;
+  to?: TStyle;
 }
 
-export interface AnimatablePropsModel {
-  animation?: AnimationModel;
+export interface AnimatablePropsModel<TStyle extends StyleModel = ViewStyleModel> {
+  animation?: AnimationModel<TStyle>;
 }

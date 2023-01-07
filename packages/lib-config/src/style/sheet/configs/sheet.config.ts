@@ -1,3 +1,4 @@
+import { webConfig } from '@lib/config/framework/web/configs/web.config';
 import type { SheetConfigParamsModel } from '@lib/config/style/sheet/sheet.models';
 import { themeConfig } from '@lib/config/style/theme/configs/theme.config';
 
@@ -18,16 +19,22 @@ export const sheetConfig: SheetConfigParamsModel = {
     },
 
     body: {
-      display: 'flex',
-      flexDirection: 'column',
       fontFamily: themeConfig.font?.fontFamily.main,
       fontSmooth: 'antialiased',
     },
 
-    'html, body': {
+    html: {
+      display: 'flex',
+      flexDirection: 'column',
       height: '100%',
       margin: 0,
       padding: 0,
+    },
+
+    [`body, #${webConfig.rootId}`]: {
+      display: 'flex',
+      flex: 1,
+      flexDirection: 'column',
     },
 
     img: {

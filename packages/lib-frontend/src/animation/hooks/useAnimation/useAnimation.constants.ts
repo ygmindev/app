@@ -1,13 +1,17 @@
 import type { AnimationModel } from '@lib/frontend/animation/animation.models';
 import type { AnimationTypeModel } from '@lib/frontend/animation/hooks/useAnimation/useAnimation.models';
 import type { MeasureModel } from '@lib/frontend/core/core.models';
+import type { StyleModel } from '@lib/frontend/style/style.models';
 
 export enum ANIMATION_TYPE {
   SCALE = 'SCALE',
   VISIBLE = 'APPEAR',
 }
 
-export const ANIMATIONS: Record<AnimationTypeModel, (measure?: MeasureModel) => AnimationModel> = {
+export const ANIMATIONS: Record<
+  AnimationTypeModel,
+  (measure?: MeasureModel) => AnimationModel<StyleModel>
+> = {
   [ANIMATION_TYPE.VISIBLE]: () => ({
     from: { opacity: 0 },
     to: { opacity: 1 },
