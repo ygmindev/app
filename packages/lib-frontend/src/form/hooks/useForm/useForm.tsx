@@ -5,6 +5,7 @@ import type {
   UseFormParamsModel,
 } from '@lib/frontend/form/hooks/useForm/useForm.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 import { CORE } from '@lib/shared/core/core.constants';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -32,7 +33,7 @@ export const useForm = <TType extends unknown>({
           }
           if (isFunction(v)) {
             const error = v({ value: _value });
-            isEmpty(error) ? unset(result, k) : set(result, k, t(error));
+            isEmpty(error) ? unset(result, k) : set(result, k, t(error as TranslatableTextModel));
             return result;
           }
         }

@@ -3,7 +3,6 @@ import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { bundleConfig } from '@lib/config/javascript/bundle/configs/bundle.base.config';
 import type { TestConfigParamsModel } from '@lib/config/javascript/test/test.models';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
-import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
 
 export const testConfig: TestConfigParamsModel = {
   bundle: bundleConfig,
@@ -16,7 +15,7 @@ export const testConfig: TestConfigParamsModel = {
 
   fileExtensions: ['gif', 'jpeg', 'jpg', 'otf', 'png', 'svg', 'ttf', 'woff', 'woff2'],
 
-  match: getEnv('TEST_MATCH', '*'),
+  match: process.env.TEST_MATCH || '*',
 
   mockPath: fromConfig('node/test/configs/__mocks__'),
 

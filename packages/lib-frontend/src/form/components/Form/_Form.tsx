@@ -17,10 +17,12 @@ export const _Form = composeComponent<_FormPropsModel, FormHTMLAttributes<HTMLFo
         />
       </>
     ),
+
     onSubmit: (e: SyntheticEvent) => {
       e.preventDefault();
       onSubmit && onSubmit();
     },
+
     testID,
   }),
 

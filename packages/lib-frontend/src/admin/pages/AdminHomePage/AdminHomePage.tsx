@@ -1,11 +1,7 @@
-import { AdminHome } from '@lib/frontend/admin/containers/AdminHome/AdminHome';
-import type { FCModel, PagePropsModel } from '@lib/frontend/core/core.models';
-import { Root } from '@lib/frontend/root/containers/Root/Root';
+import type { AdminHomePagePropsModel } from '@lib/frontend/admin/pages/AdminHomePage/AdminHomePage.models';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import type { FCModel } from '@lib/frontend/core/core.models';
 
-export const AdminHomePage: FCModel<PagePropsModel> = ({ initialState, testID }) => {
-  return (
-    <Root initialState={initialState}>
-      <AdminHome testID={testID} />
-    </Root>
-  );
+export const AdminHomePage: FCModel<AdminHomePagePropsModel> = ({ testID }) => {
+  return <Wrapper testID={testID}></Wrapper>;
 };

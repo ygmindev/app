@@ -1,15 +1,14 @@
-import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
 import type { CipherCCMTypes } from 'crypto';
 import { createCipheriv, randomBytes, scryptSync } from 'crypto';
 import { toNumber } from 'lodash';
 
-const SERVER_IV_LENGTH = toNumber(getEnv('SERVER_IV_LENGTH'));
-const SERVER_SALT_LENGTH = toNumber(getEnv('SERVER_SALT_LENGTH'));
-const SERVER_KEY_LENGTH = toNumber(getEnv('SERVER_KEY_LENGTH'));
-const SERVER_ENCRYPTION_ALGORITHM = getEnv<CipherCCMTypes>('SERVER_ENCRYPTION_ALGORITHM');
+const SERVER_IV_LENGTH = toNumber(process.env.SERVER_IV_LENGTH);
+const SERVER_SALT_LENGTH = toNumber(process.env.SERVER_SALT_LENGTH);
+const SERVER_KEY_LENGTH = toNumber(process.env.SERVER_KEY_LENGTH);
+const SERVER_ENCRYPTION_ALGORITHM = process.env.SERVER_ENCRYPTION_ALGORITHM as CipherCCMTypes;
 
 export const SERVER_KEY = scryptSync(
-  Buffer.from(getEnv('SERVER_APP_SECRET')),
+  Buffer.from(process.env.SERVER_APP_SECRET),
   randomBytes(SERVER_IV_LENGTH),
   SERVER_KEY_LENGTH,
 );

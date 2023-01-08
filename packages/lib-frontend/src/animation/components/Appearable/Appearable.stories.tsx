@@ -15,7 +15,7 @@ const Component: SFCModel<AppearablePropsModel> = (props) => {
 
       <Appearable
         {...props}
-        isVisible={isActive}>
+        isActive={isActive}>
         <WrapperFixture text="Appear" />
       </Appearable>
     </Wrapper>

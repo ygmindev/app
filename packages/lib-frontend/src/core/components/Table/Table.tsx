@@ -39,8 +39,8 @@ export const Table = <TType,>({
       testID={testID}>
       <Appearable
         grow
-        isLazy={false}
-        isVisible={isMounted}>
+        isActive={isMounted}
+        isLazy={false}>
         <_Table<TType>
           columns={columns.map((column) => ({
             ...column,

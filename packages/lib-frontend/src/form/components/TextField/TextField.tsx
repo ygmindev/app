@@ -11,12 +11,13 @@ import { TEXT_FIELD_KEYBOARD } from '@lib/frontend/form/components/TextField/Tex
 import type { TextFieldPropsModel } from '@lib/frontend/form/components/TextField/TextField.models';
 import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { isTranslatableText } from '@lib/frontend/locale/utils/isTranslatableText/isTranslatableText';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_BASIC_SIZE, THEME_COLOR } from '@lib/frontend/style/style.constants';
+import type { ViewStyleModel } from '@lib/frontend/style/style.models';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
-import { isString } from 'lodash';
 import type { ReactElement } from 'react';
-import { useCallback, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import type { TextInput } from 'react-native';
 
 export const TextField: SFCModel<TextFieldPropsModel> = ({
@@ -24,6 +25,7 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
   error,
   forwardedRef,
   isAutoFocus,
+  isCenter,
   isDisabled,
   isNoClear,
   keyboard,
@@ -48,12 +50,12 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
   const _rightElement = (isActive?: boolean): ReactElement => (
     <Wrapper
       isRowAlign
-      pRight={THEME_BASIC_SIZE.SMALL}>
+      pRight={isCenter ? undefined : THEME_BASIC_SIZE.SMALL}>
       {fieldValue && !isDisabled && !isNoClear && (
         <Appearable
+          isActive={isActive && fieldValue.length > 0}
           isCenter
-          isLazy={false}
-          isVisible={isActive && fieldValue.length > 0}>
+          isLazy={false}>
           <Button
             icon="times"
             onPress={() => _handleChange('')}
@@ -62,7 +64,7 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
         </Appearable>
       )}
 
-      {error && isString(error) && <Tooltip color={THEME_COLOR.ERROR}>{error}</Tooltip>}
+      {isTranslatableText(error) && <Tooltip color={THEME_COLOR.ERROR}>{error}</Tooltip>}
 
       {rightElement && rightElement(isActive)}
     </Wrapper>
@@ -81,16 +83,10 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
       }),
   });
 
-  const _setIsFocused = useCallback(
-    async (value: boolean) => {
-      await sleep();
-      if (isMounted) {
-        setIsFocused(value);
-        value ? onFocus && onFocus() : onBlur && onBlur();
-      }
-    },
-    [isMounted, setIsFocused, onBlur, onFocus],
-  );
+  const _setIsFocused = (value: boolean): void => {
+    setIsFocused(value);
+    value ? onFocus && onFocus() : onBlur && onBlur();
+  };
 
   const _handleChange = (newValue: string): void => {
     switch (keyboard) {
@@ -119,36 +115,38 @@ export const TextField: SFCModel<TextFieldPropsModel> = ({
       }
     }
   };
-
   return (
     <_TextField
       {...props}
       Component={
         mask
-          ? (inputProps) => (
+          ? ({ style, ...inputProps }) => (
               <MaskedTextField
                 {...inputProps}
                 mask={mask}
+                style={style as ViewStyleModel}
               />
             )
           : undefined
       }
-      error={error}
+      error={isTranslatableText(error) && t(error)}
       forwardedRef={forwardedRef || inputRef}
+      height={label ? theme.shape.height.l : theme.shape.height.m}
+      isCenter={isCenter}
       isDisabled={isDisabled}
       isFocused={isFocused}
       keyboard={keyboard}
-      label={t(label)}
+      label={label && t(label)}
       leftElement={leftElement}
       onBlur={async () => {
         onBlur && onBlur();
-        await _setIsFocused(false);
+        _setIsFocused(false);
       }}
       onChange={_handleChange}
       onEscape={isNoClear ? undefined : () => _handleChange('')}
       onFocus={async () => {
         onFocus && onFocus();
-        await _setIsFocused(true);
+        _setIsFocused(true);
       }}
       placeholder={mask || placeholder}
       rightElement={_rightElement}

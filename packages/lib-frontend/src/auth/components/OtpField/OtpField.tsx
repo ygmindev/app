@@ -7,16 +7,17 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { TextField } from '@lib/frontend/form/components/TextField/TextField';
 import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
+import { isTranslatableText } from '@lib/frontend/locale/utils/isTranslatableText/isTranslatableText';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { OTP_LENGTH } from '@lib/shared/auth/resources/Otp/Otp.constants';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
-import { isString, range } from 'lodash';
+import { range } from 'lodash';
 import { useState } from 'react';
 
-const OTP_FIELDS = withId(range(OTP_LENGTH));
+const IDS = withId(range(OTP_LENGTH));
 
 export const OtpField: SFCModel<OtpFieldPropsModel> = ({
   error,
@@ -31,18 +32,15 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
   const theme = useTheme();
   const { fieldValue, setFieldValue } = useFieldValue({ defaultValue: '', onChange, value });
   const [isFocused, setIsFocused] = useState<boolean>(false);
-  const [width, setWidth] = useState<number>();
   return (
     <Wrapper
       isCenter
-      isRowAlign
-      onMeasure={({ width: _width }) => setWidth(_width)}
       style={styles}
       testID={testID}>
       <Wrapper
         isRowAlign
         position={SHAPE_POSITION.RELATIVE}>
-        {OTP_FIELDS.map(({ id }, i) => (
+        {IDS.map(({ id }, i) => (
           <TextField
             defaultValue=""
             error={error !== undefined}
@@ -73,27 +71,25 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
           />
         </Wrapper>
 
-        {width && (
-          <Wrapper
-            isRowAlign
-            left={width}
-            position={SHAPE_POSITION.ABSOLUTE}>
-            {error && isString(error) && <Tooltip color={THEME_COLOR.ERROR}>{error}</Tooltip>}
+        <Wrapper
+          isRowAlign
+          position={SHAPE_POSITION.ABSOLUTE}
+          right={-(theme.shape.height.m + theme.shape.spacing.s)}>
+          {isTranslatableText(error) && <Tooltip color={THEME_COLOR.ERROR}>{error}</Tooltip>}
 
-            {fieldValue && !isDisabled && (
-              <Appearable
-                isCenter
-                isLazy={false}
-                isVisible={fieldValue.length > 0}>
-                <Button
-                  icon="times"
-                  onPress={() => setFieldValue('')}
-                  type={BUTTON_TYPE.ICON}
-                />
-              </Appearable>
-            )}
-          </Wrapper>
-        )}
+          {fieldValue && !isDisabled && (
+            <Appearable
+              isActive={fieldValue.length > 0}
+              isCenter
+              isLazy>
+              <Button
+                icon="times"
+                onPress={() => setFieldValue('')}
+                type={BUTTON_TYPE.ICON}
+              />
+            </Appearable>
+          )}
+        </Wrapper>
       </Wrapper>
     </Wrapper>
   );

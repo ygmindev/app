@@ -1,27 +1,22 @@
+import { useAnimation } from '@lib/frontend/animation/hooks/useAnimation/useAnimation';
+import { ANIMATION_TYPE } from '@lib/frontend/animation/hooks/useAnimation/useAnimation.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { MeasureModel, SFCModel } from '@lib/frontend/core/core.models';
 import type { RoutePropsModel } from '@lib/frontend/route/components/Route/Route.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { useState } from 'react';
 
 export const Route: SFCModel<RoutePropsModel> = ({ children, route, ...props }) => {
   const { styles } = useStyles({ props });
   const [measure, setMeasure] = useState<MeasureModel>();
-  const theme = useTheme();
+  const { animation } = useAnimation({
+    isActive: true,
+    measure,
+    types: [ANIMATION_TYPE.VISIBLE, ANIMATION_TYPE.SLIDE],
+  });
   return (
     <Wrapper
-      animation={
-        measure && measure.width
-          ? {
-              duration: theme.animation.transition,
-              exit: { left: -measure.width, opacity: 0 },
-              from: { left: measure.width, opacity: 0 },
-              isActive: true,
-              to: { left: 0, opacity: 1 },
-            }
-          : undefined
-      }
+      animation={animation}
       isAbsoluteFill
       isFullWidth
       onMeasure={setMeasure}

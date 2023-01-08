@@ -11,6 +11,8 @@ export const bundleConfig: BundleConfigParamsModel = merge({
 
   values: [
     {
+      envPrefix: ['APP_'],
+
       extensions: permuteString(['.frontend'], bundleConfigBase.extensions),
 
       externals: fromGlobs({

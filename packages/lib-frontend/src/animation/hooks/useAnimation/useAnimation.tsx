@@ -14,8 +14,8 @@ import { useState } from 'react';
 export const useAnimation = <TStyle extends StyleModel = ViewStyleModel>({
   duration,
   from,
+  isActive,
   isLazy = true,
-  isVisible,
   measure,
   to,
   types,
@@ -24,23 +24,22 @@ export const useAnimation = <TStyle extends StyleModel = ViewStyleModel>({
   const _duration = duration || theme.animation.duration;
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
   const isMounted = useMount({
-    deps: [_duration, isVisible],
+    deps: [_duration, isActive],
     onMount: () =>
-      isVisible
+      isActive
         ? setIsAnimating(true)
         : sleep({ duration: _duration }).then(() => isMounted && setIsAnimating(false)),
   });
   const _animationProps = types
     ? types.reduce((result, type) => merge({ values: [result, ANIMATIONS[type](measure)] }), {
         from,
+        isActive,
         to,
       } as AnimationModel<TStyle>)
-    : { from, to };
+    : { from, isActive, to };
   const _animation: AnimationModel<TStyle> = {
     ..._animationProps,
     duration: duration || theme.animation.duration,
-    from: isVisible ? _animationProps.from : _animationProps.to,
-    to: isVisible ? _animationProps.to : _animationProps.from,
   };
-  return { animation: _animation, isAnimating, isRender: !isLazy || isAnimating || isVisible };
+  return { animation: _animation, isAnimating, isRender: !isLazy || isAnimating || isActive };
 };

@@ -6,16 +6,19 @@ import type { FCModel } from '@lib/frontend/core/core.models';
 import { QueryProvider } from '@lib/frontend/core/providers/QueryProvider/QueryProvider';
 import { LocaleProvider } from '@lib/frontend/locale/providers/LocaleProvider/LocaleProvider';
 import type { RootPropsModel } from '@lib/frontend/root/containers/Root/Root.models';
+import { RootLayout } from '@lib/frontend/root/layouts/RootLayout/RootLayout';
 import { RouteProvider } from '@lib/frontend/route/providers/RouteProvider/RouteProvider';
 import { StateProvider } from '@lib/frontend/state/providers/StateProvider/StateProvider';
 import { StyleProvider } from '@lib/frontend/style/providers/StyleProvider/StyleProvider';
+import { TrackingProvider } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider';
 import { cloneElement, Suspense, useMemo } from 'react';
 
 export const Root: FCModel<RootPropsModel> = ({ children, initialState, location }) => {
   const providers = useMemo(
     () => [
+      <RootLayout />,
       <RouteProvider value={location} />,
-      // <TrackingProvider />,
+      <TrackingProvider />,
       <AuthProvider />,
       <LocaleProvider />,
       <StyleProvider />,

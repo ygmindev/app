@@ -1,7 +1,6 @@
 import type { ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
 import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
 import type { DimensionModel } from '@lib/frontend/platform/platform.models';
-import type { RootPropsModel } from '@lib/frontend/root/containers/Root/Root.models';
 import type { StyleModel, StylePropsModel, ViewStyleModel } from '@lib/frontend/style/style.models';
 import type { TestIdPropsModel } from '@lib/frontend/test/test.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
@@ -22,14 +21,14 @@ export interface ProviderPropsModel<TType = undefined> extends ChildrenPropsMode
   value?: TType;
 }
 
-export interface PagePropsModel extends Pick<RootPropsModel, 'initialState'> {}
+export interface PagePropsModel {}
 
 export interface LayoutPropsModel extends ChildrenPropsModel {}
 
 export interface FieldPropsModel<TType extends string = string>
   extends Pick<IconPropsModel, 'icon'> {
   defaultValue?: TType;
-  error?: boolean | string;
+  error?: string | boolean;
   isAutoFocus?: boolean;
   isDisabled?: boolean;
   label?: string;

@@ -1,1 +1,1 @@
-export const APP_NAME = 'APP_STORYBOOK';
+export const ENV_NAME = 'APP_STORYBOOK';

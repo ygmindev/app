@@ -1,14 +1,11 @@
 import { STRIPE_ADMIN_SERVICE_API_VERSION } from '@lib/backend/billing/utils/StripeAdminService/StripeAdminService.constants';
 import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { ExternalError } from '@lib/shared/core/errors/ExternalError/ExternalError';
-import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
 import Stripe from 'stripe';
-
-const SERVER_STRIPE_TOKEN = getEnv('SERVER_STRIPE_TOKEN');
 
 @withContainer()
 export class StripeAdminService {
-  stripe: Stripe = new Stripe(SERVER_STRIPE_TOKEN, {
+  stripe: Stripe = new Stripe(process.env.SERVER_STRIPE_TOKEN, {
     apiVersion: STRIPE_ADMIN_SERVICE_API_VERSION,
   });
 

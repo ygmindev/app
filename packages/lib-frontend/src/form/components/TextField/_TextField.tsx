@@ -74,6 +74,7 @@ export const _TextField: SFCModel<_TextFieldPropsModel> = ({
   error,
   forwardedRef,
   icon,
+  height,
   isActive,
   isCenter,
   isDisabled,
@@ -119,9 +120,9 @@ export const _TextField: SFCModel<_TextFieldPropsModel> = ({
 
   const _leftElement = leftElement && (
     <Appearable
+      isActive={!isEmpty(value) || isFocused || !label}
       isCenter
       isLazy={false}
-      isVisible={!isEmpty(value) || isFocused || !label}
       mTop={18}>
       {leftElement(_isActive)}
     </Appearable>
@@ -131,10 +132,15 @@ export const _TextField: SFCModel<_TextFieldPropsModel> = ({
 
   return (
     <Wrapper
-      animation={{ from: { borderColor: _colors.from }, to: { borderColor: _colors.to } }}
+      animation={{
+        from: { borderColor: _colors.from },
+        isActive: _isActive,
+        to: { borderColor: _colors.to },
+      }}
       backgroundColor={_backgroundColor}
       border
       grow
+      height={height}
       isOverflowHidden
       position={SHAPE_POSITION.RELATIVE}
       round
@@ -164,14 +170,22 @@ export const _TextField: SFCModel<_TextFieldPropsModel> = ({
             <Wrapper isRowAlign>
               {icon && (
                 <Icon
-                  animation={{ from: { color: _colors.from }, to: { color: _colors.to } }}
+                  animation={{
+                    from: { color: _colors.from },
+                    isActive: _isActive,
+                    to: { color: _colors.to },
+                  }}
                   icon={icon}
                 />
               )}
 
               {label && (
                 <AnimatableText
-                  animation={{ from: { color: _colors.from }, to: { color: _colors.to } }}
+                  animation={{
+                    from: { color: _colors.from },
+                    isActive: _isActive,
+                    to: { color: _colors.to },
+                  }}
                   size={THEME_SIZE.SMALL}>
                   {label}
                 </AnimatableText>
@@ -207,10 +221,9 @@ export const _TextField: SFCModel<_TextFieldPropsModel> = ({
           <Wrapper
             backgroundColor={_backgroundColor}
             grow
+            isCenter={isCenter}
             isOverflowHidden
             isRow
-            pLeft={_leftElement ? THEME_SIZE.SMALL : undefined}
-            pRight={_rightElement ? THEME_SIZE.SMALL : undefined}
             zIndex={-1}>
             {_leftElement}
 
@@ -218,8 +231,8 @@ export const _TextField: SFCModel<_TextFieldPropsModel> = ({
               ...inputProps,
               style: StyleSheet.flatten([
                 ...inputProps.style,
-                isCenter && { textAlign: 'center' },
                 { width: '100%' },
+                isCenter && { padding: 0, textAlign: 'center' },
               ]),
             })}
 

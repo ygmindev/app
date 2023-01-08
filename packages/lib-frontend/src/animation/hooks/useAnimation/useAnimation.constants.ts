@@ -5,12 +5,13 @@ import type { StyleModel } from '@lib/frontend/style/style.models';
 
 export enum ANIMATION_TYPE {
   SCALE = 'SCALE',
+  SLIDE = 'SLIDE',
   VISIBLE = 'APPEAR',
 }
 
 export const ANIMATIONS: Record<
   AnimationTypeModel,
-  (measure?: MeasureModel) => AnimationModel<StyleModel>
+  (measure?: MeasureModel) => AnimationModel<StyleModel> | undefined
 > = {
   [ANIMATION_TYPE.VISIBLE]: () => ({
     from: { opacity: 0 },
@@ -20,4 +21,8 @@ export const ANIMATIONS: Record<
     from: { transform: [{ scale: 0.9 }] },
     to: { transform: [{ scale: 1.0 }] },
   }),
+  [ANIMATION_TYPE.SLIDE]: (measure) =>
+    measure && measure.width
+      ? { exit: { left: -measure.width }, from: { left: measure.width }, to: { left: 0 } }
+      : undefined,
 };

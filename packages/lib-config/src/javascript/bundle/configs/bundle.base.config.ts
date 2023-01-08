@@ -7,7 +7,7 @@ export const bundleConfig: BundleConfigParamsModel = {
     __DEV__: process.env.NODE_ENV === 'development',
   },
 
-  envPrefix: 'APP_',
+  envPrefix: ['ENV_', 'NODE_'],
 
   extensions: ['.tsx', '.ts', '.jsx', '.js', '.json', '.mjs', '.cjs'],
 

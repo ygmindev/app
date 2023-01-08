@@ -44,9 +44,9 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
 
   return (
     <Appearable
+      isActive={!isRemoving}
       isCenter
       isScalable
-      isVisible={!isRemoving}
       style={styles}>
       <Wrapper
         backgroundColor={color}
@@ -64,7 +64,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
             //   to: { width: NOTIFICATION_WIDTH },
             // }}
             backgroundColor={color}
-            backgroundShade={THEME_COLOR_SHADE.LIGHT}
+            // backgroundShade={THEME_COLOR_SHADE.LIGHT}
             height={5}
             position={SHAPE_POSITION.ABSOLUTE}
             right={0}
@@ -78,9 +78,9 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
           isRowAlign
           p>
           <Icon
-            color={THEME_RELATIVE_COLOR.CONTRAST}
+            // color={THEME_RELATIVE_COLOR.CONTRAST}
             icon={icon}
-            isTitle
+            // isTitle
           />
 
           <Wrapper
@@ -90,22 +90,22 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
             spacing={THEME_SIZE.SMALL}>
             {title && (
               <Text
-                color={THEME_RELATIVE_COLOR.CONTRAST}
+                // color={THEME_RELATIVE_COLOR.CONTRAST}
                 isBold>
                 {t(title)}
               </Text>
             )}
 
-            {message && <Text color={THEME_RELATIVE_COLOR.CONTRAST}>{t(message)}</Text>}
+            {/* {message && <Text color={THEME_RELATIVE_COLOR.CONTRAST}>{t(message)}</Text>} */}
           </Wrapper>
 
-          <Icon
+          {/* <Icon
             color={THEME_RELATIVE_COLOR.CONTRAST}
             from={color ? { backgroundColor: theme.colors.tone[color].main } : undefined}
             icon={ICONS.times}
             onPress={() => remove(id)}
             to={color ? { backgroundColor: theme.colors.tone[color].dark } : undefined}
-          />
+          /> */}
         </Wrapper>
       </Wrapper>
     </Appearable>

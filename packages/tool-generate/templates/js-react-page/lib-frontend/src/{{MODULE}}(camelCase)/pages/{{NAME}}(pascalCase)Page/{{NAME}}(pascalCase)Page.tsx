@@ -1,14 +1,16 @@
 import { Text } from '@lib/frontend/core/components/Text/Text';
-import { {{NAME}}(pascalCase) } from '@lib/frontend/{{MODULE}}(camelCase)/containers/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)';
-import type { FCModel, PagePropsModel } from '@lib/frontend/core/core.models';
-import { Root } from '@lib/frontend/root/containers/Root/Root';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import type { {{NAME}}(pascalCase)PagePropsModel } from '@lib/frontend/{{MODULE}}(camelCase)/pages/{{NAME}}(pascalCase)Page/{{NAME}}(pascalCase)Page.models';
+import type { SFCModel } from '@lib/frontend/core/core.models';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 
-export const {{NAME}}(pascalCase)Page: FCModel<PagePropsModel> = ({ initialState, testID }) => {
+export const {{NAME}}(pascalCase)Page: SFCModel<{{NAME}}(pascalCase)PagePropsModel> = ({ testID, ...props }) => {
+  const { styles } = useStyles({ props });
   return (
-    <Root initialState={initialState}>
-      <Wrapper testID={testID}>
-        <Text>{{NAME}}(pascalCase)Page</Text>
-      </Wrapper>
-    </Root>
+    <Wrapper
+      style={styles}
+      testID={testID}>
+      <Text>{{NAME}}(pascalCase)Page</Text>
+    </Wrapper>
   );
 };

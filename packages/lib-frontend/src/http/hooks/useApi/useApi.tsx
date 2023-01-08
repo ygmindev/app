@@ -1,10 +1,7 @@
 import { useSession } from '@lib/frontend/auth/hooks/useSession/useSession';
 import type { UseApiModel, UseApiParamsModel } from '@lib/frontend/http/hooks/useApi/useApi.models';
 import { useHttp } from '@lib/frontend/http/hooks/useHttp/useHttp';
-import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
-
-const APP_SERVER_API_HOST = getEnv('APP_SERVER_API_HOST');
-const APP_SERVER_API_PORT = getEnv('APP_SERVER_API_PORT', null) || undefined;
+import { toNumber } from 'lodash';
 
 export const useApi = ({
   host,
@@ -17,9 +14,12 @@ export const useApi = ({
   const { getToken } = useSession();
   return useHttp({
     baseUri: {
-      host: host || APP_SERVER_API_HOST,
+      host: host || process.env.APP_SERVER_API_HOST,
       path,
-      port: port || APP_SERVER_API_PORT,
+      port:
+        port || process.env.APP_SERVER_API_PORT
+          ? toNumber(process.env.APP_SERVER_API_PORT)
+          : undefined,
     },
     onRequest: async (config) => {
       if (isCredentials) {

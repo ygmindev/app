@@ -16,8 +16,6 @@ export const _exportRendererServer = ({
   passToClient: ['pageProps'],
 
   render: async ({ Page, pageProps, urlPathname, ...ctx }) => {
-    // console.warn(ctx);
-
     const App: FCModel = () =>
       render({
         children: <Page {...pageProps} />,
@@ -42,7 +40,7 @@ export const _exportRendererServer = ({
           <meta name="description" content="${''}" />
           <link rel="icon" type="image/svg+xml" href="${favicoPath}" />
           <title>${''}</title>
-          <style>${sheetConfig} ${dangerouslySkipEscape(styleSheet)}</style>
+          <style>${dangerouslySkipEscape(sheetConfig)} ${dangerouslySkipEscape(styleSheet)}</style>
       </head>
       <body><div id="${rootId}">${html}</div></body>
       </html>      

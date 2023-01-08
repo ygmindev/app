@@ -4,7 +4,6 @@ import { OTP_FORM_VALIDATORS } from '@lib/frontend/auth/containers/OtpForm/OtpFo
 import type { OtpFormPropsModel } from '@lib/frontend/auth/containers/OtpForm/OtpForm.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { ErrorBoundary } from '@lib/frontend/core/components/ErrorBoundary/ErrorBoundary';
-import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { Loading } from '@lib/frontend/core/components/Loading/Loading';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -28,7 +27,7 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = (props) => {
   const _handleError = (e: Error): void => {
     if ((e as HttpError).statusCode === HTTP_STATUS_CODE.FORBIDDEN) {
       error({
-        icon: ICONS.ban,
+        icon: 'ban',
         message: t('auth:messages.invalidOtp'),
         title: t('auth:labels.invalidOtp'),
       });
@@ -91,7 +90,7 @@ export const _OtpForm: SFCModel<OtpFormPropsModel> = ({ data, onBack, onSuccess,
         <Text>{t('auth:messages.otpDidntGet')}</Text>
 
         <Button
-          icon={ICONS.refresh}
+          icon="refresh"
           isDisabled={isLoading}
           onPress={onBack}>
           {t('core:labels.tryAgain')}
@@ -99,8 +98,8 @@ export const _OtpForm: SFCModel<OtpFormPropsModel> = ({ data, onBack, onSuccess,
       </Wrapper>
 
       <Appearable
-        isLazy={false}
-        isVisible={isLoading}>
+        isActive={isLoading}
+        isLazy={false}>
         <Loading size={THEME_SIZE.LARGE} />
       </Appearable>
     </CenterLayout>

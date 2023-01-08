@@ -1,17 +1,17 @@
-import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
 import { appUri } from '@lib/shared/http/utils/appUri/appUri';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { toNumber } from 'lodash';
 
 const { displayName } = withTest({ target: () => appUri });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = appUri({ name: 'APP_WEB_ADMIN' });
+    const result = appUri({ name: 'WEB_ADMIN' });
     expect(result).toStrictEqual(
       uri({
-        host: getEnv('APP_APP_WEB_ADMIN_HOST'),
-        port: getEnv('APP_APP_WEB_ADMIN_PORT'),
+        host: process.env.APP_WEB_ADMIN_HOST,
+        port: toNumber(process.env.APP_WEB_ADMIN_PORT),
       }),
     );
   });

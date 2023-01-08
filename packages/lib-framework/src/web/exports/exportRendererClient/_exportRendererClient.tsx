@@ -11,7 +11,6 @@ export const _exportRendererClient = ({
   rootId,
 }: _ExportRendererClientParamsModel): _ExportRendererClientModel => ({
   render: async ({ Page, pageProps, ...args }) => {
-    // console.warn(args);
     const root = document.getElementById(rootId);
 
     const App: FCModel = () => render({ children: <Page {...pageProps} /> });

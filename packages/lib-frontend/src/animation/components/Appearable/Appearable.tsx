@@ -16,7 +16,6 @@ export const Appearable: SFCModel<AppearablePropsModel> = ({
       Boolean,
     ) as Array<AnimationTypeModel>,
   });
-
   return isRender ? (
     <Wrapper
       animation={animation}

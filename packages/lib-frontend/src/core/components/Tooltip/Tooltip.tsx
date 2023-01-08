@@ -1,9 +1,9 @@
 import { Droppable } from '@lib/frontend/core/components/Droppable/Droppable';
 import type { DroppablePropsModel } from '@lib/frontend/core/components/Droppable/Droppable.models';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { Text } from '@lib/frontend/core/components/Text/Text';
 import type { TooltipPropsModel } from '@lib/frontend/core/components/Tooltip/Tooltip.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
+import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
 import { THEME_COLOR, THEME_ROLE } from '@lib/frontend/style/style.constants';
 import { palette } from '@lib/frontend/style/utils/palette/palette';
 
@@ -25,7 +25,7 @@ export const Tooltip = composeComponent<TooltipPropsModel, DroppablePropsModel>(
         />
       ),
 
-      children: children && <Text>{children}</Text>,
+      children: <TranslatableText>{children}</TranslatableText>,
     };
   },
 });

@@ -14,14 +14,10 @@ import { withInject } from '@lib/shared/core/decorators/withInject/withInject';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { randomInt } from '@lib/shared/crypto/utils/randomInt/randomInt';
-import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
-
-const SERVER_EMAIL_USERNAME = getEnv('SERVER_EMAIL_USERNAME');
-const IS_OTP_STATIC = getEnv('OTP_STATIC', false);
 
 @withContainer()
 export class OtpService
@@ -30,7 +26,7 @@ export class OtpService
       if (output.result) {
         output.result &&
           mail<{ otp: string }>({
-            from: SERVER_EMAIL_USERNAME,
+            from: process.env.SERVER_EMAIL_USERNAME,
             params: { otp: output.result.otp },
             template: 'otp',
             to: [output.result.username],
@@ -43,7 +39,9 @@ export class OtpService
     beforeCreate: async ({ input }) => {
       const service = Container.get(OtpService);
       await service.remove({ filter: { username: input.form.username } });
-      input.form.otp = IS_OTP_STATIC ? OTP_STATIC : randomInt(OTP_LENGTH).toString();
+      input.form.otp = process.env.SERVER_IS_OTP_STATIC
+        ? OTP_STATIC
+        : randomInt(OTP_LENGTH).toString();
       return input;
     },
 

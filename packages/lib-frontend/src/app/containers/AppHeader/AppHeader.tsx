@@ -3,7 +3,6 @@ import type { AppHeaderPropsModel } from '@lib/frontend/app/containers/AppHeader
 import { AuthMenu } from '@lib/frontend/auth/containers/AuthMenu/AuthMenu';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { RouteHeader } from '@lib/frontend/route/containers/RouteHeader/RouteHeader';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
@@ -11,12 +10,11 @@ import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/sha
 export const AppHeader: SFCModel<AppHeaderPropsModel> = ({ testID, ...props }) => {
   const { styles } = useStyles({ props });
   const theme = useTheme();
-
   return (
     <Wrapper
       height={theme.layout.header.height}
       isRowAlign
-      mHorizontal
+      pHorizontal
       position={SHAPE_POSITION.RELATIVE}
       style={styles}
       testID={testID}>
@@ -27,8 +25,6 @@ export const AppHeader: SFCModel<AppHeaderPropsModel> = ({ testID, ...props }) =
       </Wrapper>
 
       <AuthMenu />
-
-      <RouteHeader />
     </Wrapper>
   );
 };

@@ -1,4 +1,4 @@
-import type { Constructor, PartialDeep, Primitive } from 'type-fest';
+import type { Constructor, Merge, PartialDeep, Primitive } from 'type-fest';
 
 export interface ConstructorModel<TType = object> extends Constructor<TType> {}
 
@@ -25,3 +25,5 @@ export type MergeArrayModel<TType extends Array<unknown>> = TType extends [
 ]
   ? TValue & MergeArrayModel<TResult>
   : object;
+
+export type OverrideModel<TType, TOverride> = Merge<TType, TOverride>;

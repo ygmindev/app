@@ -1,26 +1,24 @@
-import type { AuthMenuOptionModel } from '@lib/frontend/auth/containers/AuthMenu/AuthMenu.models';
-import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
-import { SETTINGS } from '@lib/frontend/settings/settings.constants';
+import type { TranslatableOptionModel } from '@lib/frontend/locale/locale.models';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { SIGN_OUT } from '@lib/shared/auth/auth.constants';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
+import { SETTINGS } from '@lib/shared/settings/settings.constants';
 
 export const AUTH_MENU_USERNAME_WIDTH = 150;
 
-export const AUTH_MENU_OPTIONS: Array<AuthMenuOptionModel> = withId([
+export const AUTH_MENU_OPTIONS: Array<TranslatableOptionModel> = withId([
   { isDivider: true },
 
   {
-    icon: ICONS.settings,
+    icon: 'settings',
     id: SETTINGS,
     label: ({ t }) => t('settings:labels.settings'),
-    pathname: SETTINGS,
-  } as AuthMenuOptionModel,
+  },
 
   {
     color: THEME_COLOR.ERROR,
-    icon: ICONS.signout,
+    icon: 'signout',
     id: SIGN_OUT,
     label: ({ t }) => t('auth:labels.signOut'),
-  } as AuthMenuOptionModel,
-]);
+  },
+] as Array<TranslatableOptionModel>);

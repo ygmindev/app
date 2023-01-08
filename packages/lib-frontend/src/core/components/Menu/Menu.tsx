@@ -5,9 +5,10 @@ import { Dropdown } from '@lib/frontend/core/components/Dropdown/Dropdown';
 import type { MenuPropsModel } from '@lib/frontend/core/components/Menu/Menu.models';
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import type { OptionModel, SFCModel } from '@lib/frontend/core/core.models';
+import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import type { TranslatableOptionModel } from '@lib/frontend/locale/locale.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { cloneElement, useImperativeHandle, useState } from 'react';
@@ -39,7 +40,7 @@ export const Menu: SFCModel<MenuPropsModel> = ({
     setIsOpen(false);
   };
 
-  const _handlePress = async ({ id, onPress }: OptionModel): Promise<void> => {
+  const _handlePress = async ({ id, onPress }: TranslatableOptionModel): Promise<void> => {
     (onPress && (await onPress())) || (onChange && (await onChange(id)));
     _handleClose();
   };
@@ -79,7 +80,7 @@ export const Menu: SFCModel<MenuPropsModel> = ({
                 key={id}
                 onPress={async () => await _handlePress(option)}
                 type={BUTTON_TYPE.TRANSPARENT}>
-                {t(renderOption ? renderOption(option) : label)}
+                {renderOption ? renderOption(option) : label}
               </Button>
             );
           },

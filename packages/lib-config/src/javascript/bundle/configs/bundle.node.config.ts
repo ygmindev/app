@@ -10,6 +10,8 @@ export const bundleConfig: BundleConfigParamsModel = merge({
 
   values: [
     {
+      envPrefix: ['SERVER_'],
+
       extensions: permuteString(['.node'], bundleConfigBase.extensions),
 
       platform: PLATFORM.NODE,

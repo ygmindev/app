@@ -6,7 +6,7 @@ export interface _BundleConfigParamsModel {
   copy?: Array<{ from: string; to: string }>;
   define?: Record<string, unknown>;
   entry?: string;
-  envPrefix: string;
+  envPrefix: Array<string>;
   extensions: Array<string>;
   externals?: Array<string>;
   mode: BundleModeModel;

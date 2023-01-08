@@ -87,56 +87,43 @@ export const FormContainer = <TType,>({
 
   const _getField = useCallback(
     ({ field, fieldProps, id, render }: FormContainerFieldModel) => {
-      const _defaultValue = get(initialValues, id);
-      const _error = get(errors, id);
-      const _isDisabled = _isLoading || fieldProps?.isDisabled;
-      const _onChange = handleChange(id);
+      const _fieldProps: FieldPropsModel = {
+        ...fieldProps,
+        defaultValue: get(initialValues, id),
+        error: get(errors, id),
+        isDisabled: _isLoading || fieldProps?.isDisabled,
+        label: fieldProps?.label ? t(fieldProps.label) : undefined,
+        onChange: handleChange(id),
+        value: get(values, id),
+      };
       const _onSubmit = async (): Promise<void> => handleSubmit();
-      const _value = get(values, id);
 
       switch (field) {
         case FORM_FIELD_TYPE.TEXT_FIELD: {
           return (
             <TextField
-              {...(fieldProps as TextFieldPropsModel)}
-              defaultValue={_defaultValue}
-              error={_error}
-              isDisabled={_isDisabled}
+              {...(_fieldProps as TextFieldPropsModel)}
               key={id}
-              onChange={_onChange}
               onSubmit={async () => handleSubmit()}
               testID={id}
-              value={_value}
             />
           );
         }
         case FORM_FIELD_TYPE.SELECT_FIELD: {
           return (
             <SelectField
-              {...(fieldProps as SelectFieldPropsModel)}
-              defaultValue={_defaultValue}
-              error={_error}
-              isDisabled={_isDisabled}
+              {...(_fieldProps as SelectFieldPropsModel)}
               key={id}
-              onChange={_onChange}
               onSubmit={_onSubmit}
               testID={id}
-              value={_value}
             />
           );
         }
         default: {
-          return cloneElement(
-            (render as (params: FieldPropsModel) => ReactElement)({
-              ...fieldProps,
-              defaultValue: _defaultValue,
-              error: _error,
-              isDisabled: _isDisabled,
-              onChange: _onChange,
-              value: _value,
-            }),
-            { key: id, testID: id },
-          );
+          return cloneElement((render as (params: FieldPropsModel) => ReactElement)(_fieldProps), {
+            key: id,
+            testID: id,
+          });
         }
       }
     },

@@ -3,10 +3,12 @@ import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import type { _BundleConfigParamsModel } from '@lib/config/javascript/bundle/_bundle.models';
 import { esbuildCommonjs, viteCommonjs } from '@originjs/vite-plugin-commonjs';
+import { LINT_COMMAND } from '@tool/task/node/templates/lint/lint';
 import copyPlugin from 'rollup-plugin-copy';
 import type { PluginOption, UserConfig } from 'vite';
 import { searchForWorkspaceRoot } from 'vite';
 import type { Plugin } from 'vite/node_modules/esbuild/lib/main';
+import checker from 'vite-plugin-checker';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export const _bundleConfig = ({
@@ -42,9 +44,14 @@ export const _bundleConfig = ({
   },
 
   plugins: [
-    viteCommonjs(),
-
     tsconfigPaths({ projects: [fromRoot('tsconfig.json')] }),
+
+    checker({
+      eslint: { lintCommand: LINT_COMMAND },
+      typescript: { tsconfigPath: fromWorking('tsconfig.json') },
+    }),
+
+    viteCommonjs(),
 
     copy &&
       copyPlugin({

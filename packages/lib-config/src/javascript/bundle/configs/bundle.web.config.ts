@@ -17,7 +17,7 @@ export const bundleConfig: BundleConfigParamsModel = merge({
   values: [
     {
       aliases: {
-        'react-native': fromConfig('js/bundle/aliases/react-native-web/index.js'),
+        'react-native': fromConfig('javascript/bundle/aliases/react-native-web/index.js'),
         'react-native-linear-gradient': 'react-native-web-linear-gradient',
         'react-native-svg': fromRoot(
           'node_modules/react-native-svg/lib/module/ReactNativeSVG.web.js',

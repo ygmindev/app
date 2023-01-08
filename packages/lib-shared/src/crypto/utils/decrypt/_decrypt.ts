@@ -1,12 +1,11 @@
 import { SERVER_KEY } from '@lib/shared/crypto/utils/encrypt/_encrypt';
-import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
 import type { CipherCCMTypes } from 'crypto';
 import { createDecipheriv } from 'crypto';
 import { toNumber } from 'lodash';
 
-const SERVER_IV_LENGTH = toNumber(getEnv('SERVER_IV_LENGTH'));
-const SERVER_SALT_LENGTH = toNumber(getEnv('SERVER_SALT_LENGTH'));
-const SERVER_ENCRYPTION_ALGORITHM = getEnv<CipherCCMTypes>('SERVER_ENCRYPTION_ALGORITHM');
+const SERVER_IV_LENGTH = toNumber(process.env.SERVER_IV_LENGTH);
+const SERVER_SALT_LENGTH = toNumber(process.env.SERVER_SALT_LENGTH);
+const SERVER_ENCRYPTION_ALGORITHM = process.env.SERVER_ENCRYPTION_ALGORITHM as CipherCCMTypes;
 
 export const _decrypt = (value: string): string => {
   const buffer = Buffer.from(value, 'hex');

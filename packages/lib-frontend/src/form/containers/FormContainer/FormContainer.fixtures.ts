@@ -14,13 +14,13 @@ export const FORM_CONTAINER_PROPS_FIXTURE: FormContainerPropsModel<FormContainer
     {
       fields: [
         { field: FORM_FIELD_TYPE.TEXT_FIELD, id: 'stringField', label: 'stringField' },
-        {
-          field: FORM_FIELD_TYPE.TEXT_FIELD,
-          id: 'stringFieldOptional',
-          label: 'stringFieldOptional',
-        },
+        // {
+        //   field: FORM_FIELD_TYPE.TEXT_FIELD,
+        //   id: 'stringFieldOptional',
+        //   label: 'stringFieldOptional',
+        // },
       ],
     },
-    { fields: [{ field: FORM_FIELD_TYPE.TEXT_FIELD, id: 'numberField', label: 'numberField' }] },
+    // { fields: [{ field: FORM_FIELD_TYPE.TEXT_FIELD, id: 'numberField', label: 'numberField' }] },
   ]),
 };

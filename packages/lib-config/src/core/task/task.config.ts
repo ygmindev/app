@@ -104,6 +104,7 @@ const _getTask = <TOptions = undefined>({
       error(`${name} failed with error: ${(e as Error).stack}`);
     }
   };
+
   return [
     { name: _alias, task: _task },
     { name: _name, task: _task },

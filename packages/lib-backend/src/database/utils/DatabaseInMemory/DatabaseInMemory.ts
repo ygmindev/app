@@ -1,5 +1,4 @@
 import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
-import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
 import { debug } from '@lib/shared/logging/utils/logger/logger';
 import { includes, toNumber } from 'lodash';
 import { MongoMemoryServer } from 'mongodb-memory-server';
@@ -14,9 +13,9 @@ export class DatabaseInMemory {
   start = async (): Promise<void> => {
     if (!this._isActive()) {
       debug('Starting database');
-      const MONGO_DATABASE_URL = getEnv('MONGO_DATABASE_URL').replace('mongodb://', '').split(':');
-      const port = toNumber(MONGO_DATABASE_URL.pop());
-      const ip = MONGO_DATABASE_URL.join(':');
+      const url = process.env.SERVER_MONGO_DATABASE_URL.replace('mongodb://', '').split(':');
+      const port = toNumber(url.pop());
+      const ip = url.join(':');
       this._server = await MongoMemoryServer.create({ instance: { ip, port } });
     }
   };

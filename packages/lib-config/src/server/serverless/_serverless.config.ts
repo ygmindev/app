@@ -2,6 +2,7 @@ import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
+import { bundleConfig } from '@lib/config/javascript/bundle/bundle.config';
 import type { _ServerlessConfigParamsModel } from '@lib/config/server/serverless/_serverless.models';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
@@ -34,8 +35,9 @@ export const _serverlessConfig = ({
     ...(platform === PLATFORM.NODE
       ? {
           esbuild: {
+            ...bundleConfig.optimizeDeps?.esbuildOptions,
             bundle: true,
-            define: mapValues(bundle.define, JSON.stringify),
+            define: mapValues(bundleConfig.define, JSON.stringify),
             external: bundle.externals,
             format: 'cjs',
             keepOutputDirectory: true,
@@ -43,12 +45,16 @@ export const _serverlessConfig = ({
             nodePaths: bundle.modulePaths,
             packagePath: fromRoot('package.json'),
             packager: 'yarn',
+            packagerOptions: {
+              noInstall: true,
+            },
             plugins: toRelative({
               from: fromWorking(),
               to: fromConfig('server/serverless/_plugins.config.js'),
             }),
             resolveExtensions: bundle.extensions,
             sourcemap: environment === ENVIRONMENT.PRODUCTION ? undefined : 'inline',
+            target: 'node18',
           },
         }
       : {}),

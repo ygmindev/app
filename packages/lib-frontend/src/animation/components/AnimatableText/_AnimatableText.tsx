@@ -1,5 +1,5 @@
 import type { _AnimatableTextPropsModel } from '@lib/frontend/animation/components/AnimatableText/_AnimatableText.models';
-import { _getAnimatableProps } from '@lib/frontend/animation/utils/animatable/_animatable';
+import { getAnimatableProps } from '@lib/frontend/animation/utils/getAnimatableProps/getAnimatableProps';
 import { _textParams } from '@lib/frontend/core/components/Text/_Text';
 import type { PropsModel } from '@lib/frontend/core/core.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
@@ -18,6 +18,6 @@ export const _AnimatableText = composeComponent<
   getProps: ({ animation, ...props }, theme) =>
     ({
       ...(_textParams.getProps ? _textParams.getProps(props, theme) : {}),
-      ...(animation ? _getAnimatableProps(animation, theme) : {}),
+      ...(animation ? getAnimatableProps<TextStyleModel>(animation, theme) : {}),
     } as PropsModel<typeof MotiText>),
 });

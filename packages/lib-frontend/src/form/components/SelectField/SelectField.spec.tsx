@@ -1,12 +1,10 @@
+import type { OptionModel } from '@lib/frontend/core/core.models';
 import { SelectField } from '@lib/frontend/form/components/SelectField/SelectField';
-import type {
-  SelectFieldPropsModel,
-  SelectOptionModel,
-} from '@lib/frontend/form/components/SelectField/SelectField.models';
+import type { SelectFieldPropsModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const OPTIONS: Array<SelectOptionModel> = [];
+const OPTIONS: Array<OptionModel> = [];
 
 const { Component, displayName, testID } = withTestComponent<SelectFieldPropsModel>({
   defaultProps: {

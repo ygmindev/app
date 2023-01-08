@@ -1,4 +1,5 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
+import { Slides } from '@lib/frontend/animation/components/Slides/Slides';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
@@ -11,13 +12,14 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import type { MergeArrayModel, PartialModel } from '@lib/shared/core/core.models';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import type { ReactElement } from 'react';
-import { useMemo, useState } from 'react';
+import { cloneElement, useMemo, useState } from 'react';
 
 export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends Array<unknown>>({
-  children,
   onSubmit,
   onSuccess,
+  steps,
   testID,
   ...props
 }: PropsModel<SFCModel<StepFormPropsModel<TType, TSteps>>>): ReactElement<
@@ -30,7 +32,7 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
   const [current, currentSet] = useState<number>(0);
   const [data, setData] = useState<PartialModel<TType>>();
 
-  const _isLastStep = useMemo(() => current === children.length - 1, [current, children.length]);
+  const _isLastStep = useMemo(() => current === steps.length - 1, [current, steps.length]);
 
   const _handleClear = (): void => {
     currentSet(0);
@@ -39,13 +41,14 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
 
   return (
     <>
-      {children.length > 1 && width && width > 0 && (
+      {steps.length > 1 && width && width > 0 && (
         <Portal>
           <Wrapper
             animation={{
               duration: theme.animation.transition,
               from: { width: 0 },
-              to: { width: (width / (children.length + 1)) * (current + 1) },
+              isActive: true,
+              to: { width: (width / (steps.length + 1)) * (current + 1) },
             }}
             backgroundColor={THEME_COLOR.PRIMARY}
             height={5}
@@ -63,8 +66,8 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
         testID={testID}>
         <Wrapper isRowAlign>
           <Appearable
-            isLazy={false}
-            isVisible={current > 0}>
+            isActive={current > 0}
+            isLazy={false}>
             <Button
               icon="arrowLeft"
               isDisabled={current <= 0}
@@ -74,17 +77,17 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
           </Appearable>
         </Wrapper>
 
-        {/* <Slides current={current}>
-          {Children.map(children, (child) =>
-            cloneElement(child, {
-              data,
+        <Slides current={current}>
+          {steps.map(({ element, id }) =>
+            cloneElement(element, {
+              key: id,
               onBack: () => {
-                child.props.onBack && child.props.onBack();
+                element.props.onBack && element.props.onBack();
                 currentSet(current - 1);
               },
-              onSuccess: async (stepData: PartialModel<TType>) => {
-                child.props.onSuccess && (await child.props.onSuccess(stepData));
-                const _data = { ...data, ...stepData };
+              onSuccess: async (stepData: TSteps[number]) => {
+                element.props.onSuccess && (await element.props.onSuccess(stepData));
+                const _data = { ...data, ...(stepData as object) };
                 if (_isLastStep) {
                   const _result = onSubmit && (await onSubmit(_data as TType));
                   onSuccess && (await onSuccess(_data as TType, _result));
@@ -97,7 +100,7 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
               },
             }),
           )}
-        </Slides> */}
+        </Slides>
       </Wrapper>
     </>
   );

@@ -8,8 +8,8 @@ export type AnimationTypeModel = `${ANIMATION_TYPE}`;
 export interface UseAnimationParamsModel<TStyle extends StyleModel = ViewStyleModel> {
   duration?: number;
   from?: TStyle;
+  isActive?: boolean;
   isLazy?: boolean;
-  isVisible?: boolean;
   measure?: MeasureModel;
   to?: TStyle;
   types?: Array<AnimationTypeModel>;

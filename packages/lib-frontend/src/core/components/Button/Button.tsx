@@ -3,9 +3,9 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import type { ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
-import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
+import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_BASIC_SIZE, THEME_COLOR, THEME_ROLE } from '@lib/frontend/style/style.constants';
 import { palette } from '@lib/frontend/style/utils/palette/palette';
@@ -65,13 +65,13 @@ export const Button: SFCModel<ButtonPropsModel> = ({
       width={type === BUTTON_TYPE.ICON ? _height : undefined}>
       {() => {
         let _children = children && (
-          <Text
+          <TranslatableText
             align={FONT_ALIGN.CENTER}
             color={_textColor}
             isBold
             isCapitalize>
             {children}
-          </Text>
+          </TranslatableText>
         );
         if (icon) {
           _children = (

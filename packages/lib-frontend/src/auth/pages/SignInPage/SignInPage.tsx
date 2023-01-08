@@ -1,17 +1,16 @@
 import { SignInForm } from '@lib/frontend/auth/containers/SignInForm/SignInForm';
+import type { SignInPagePropsModel } from '@lib/frontend/auth/pages/SignInPage/SignInPage.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import type { FCModel, PagePropsModel } from '@lib/frontend/core/core.models';
-import { Root } from '@lib/frontend/root/containers/Root/Root';
+import type { SFCModel } from '@lib/frontend/core/core.models';
 
-export const SignInPage: FCModel<PagePropsModel> = ({ initialState, testID }) => {
+export const SignInPage: SFCModel<SignInPagePropsModel> = ({ testID }) => {
   return (
-    <Root initialState={initialState}>
-      <Wrapper
-        p
-        spacing
-        testID={testID}>
-        <SignInForm />
-      </Wrapper>
-    </Root>
+    <Wrapper
+      grow
+      p
+      spacing
+      testID={testID}>
+      <SignInForm />
+    </Wrapper>
   );
 };

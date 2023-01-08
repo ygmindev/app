@@ -10,7 +10,7 @@ export const TranslatableText: SFCModel<TranslatableTextPropsModel> = ({
   ...props
 }) => {
   const translation = useTranslation(ns);
-  return (
+  return children ? (
     <Text {...props}>
       {isString(children)
         ? translation.t(children)
@@ -18,5 +18,5 @@ export const TranslatableText: SFCModel<TranslatableTextPropsModel> = ({
         ? children(translation)
         : (children as unknown as string)}
     </Text>
-  );
+  ) : null;
 };

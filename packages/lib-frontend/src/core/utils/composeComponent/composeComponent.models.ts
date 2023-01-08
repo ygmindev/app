@@ -11,11 +11,13 @@ export interface ComposeComponentParamsModel<
   TRef = unknown,
 > extends Pick<UseStylesParamsModel<TProps, TStyle>, 'stylers'> {
   getComponent(props: TProps): ComponentType<TResult & StylePropsModel<TStyle>> | string;
+
   getProps?(
     props: TProps & TestIdPropsModel & StylePropsModel<TStyle>,
     theme: UseThemeModel,
     ref?: ForwardedRef<RefObject<TRef>>,
   ): TResult;
+
   isWeb?: boolean;
 }
 

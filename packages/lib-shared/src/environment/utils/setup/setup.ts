@@ -2,15 +2,13 @@ import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
-import type { EnvironmentModel } from '@lib/shared/environment/environment.models';
-import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
 import type { SetupParamsModel } from '@lib/shared/environment/utils/setup/setup.models';
 import { config } from 'dotenv';
 import { existsSync, writeFileSync } from 'fs';
 import { forEach, map, reduce, toString } from 'lodash';
 
 export const setup = ({
-  environment = getEnv<EnvironmentModel>('NODE_ENV', ENVIRONMENT.DEVELOPMENT),
+  environment = process.env.NODE_ENV || ENVIRONMENT.DEVELOPMENT,
   overrides,
   writes,
 }: SetupParamsModel = {}): Record<string, string> => {
@@ -22,7 +20,7 @@ export const setup = ({
     fromWorking('.env'),
   ];
 
-  const envs = reduce<string, Record<string, string>>(
+  const envs = reduce(
     paths,
     (result, path) => {
       if (existsSync(path)) {
@@ -46,7 +44,7 @@ export const setup = ({
       }
       return result;
     },
-    {},
+    {} as Record<string, string>,
   );
 
   environment === 'production' &&

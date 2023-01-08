@@ -1,11 +1,7 @@
 import type { ThemeConfigParamsModel } from '@lib/config/style/theme/theme.models';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { FONT_FAMILY } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { getEnv } from '@lib/shared/environment/utils/getEnv/getEnv';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
-import type { PlatformModel } from '@lib/shared/platform/platform.models';
-
-const APP_PLATFORM = getEnv<PlatformModel>('APP_PLATFORM', PLATFORM.BASE);
 
 export const themeConfig: ThemeConfigParamsModel = {
   animation: {
@@ -108,7 +104,7 @@ export const themeConfig: ThemeConfigParamsModel = {
   font: {
     fontFamily: {
       [FONT_FAMILY.MAIN]:
-        APP_PLATFORM === PLATFORM.IOS
+        process.env.ENV_PLATFORM === PLATFORM.IOS
           ? 'Helvetica Neue'
           : 'Lato, "Helvetica Neue", Arial, sans-serif',
       [FONT_FAMILY.STYLISH]: 'Merriweather, Georgia, Serif',
@@ -143,7 +139,7 @@ export const themeConfig: ThemeConfigParamsModel = {
     borderRadius: 18,
 
     height: {
-      l: 50,
+      l: 52,
       m: 40,
       s: 32,
     },
