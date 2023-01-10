@@ -1,3 +1,4 @@
+declare module 'esbuild-plugin-fileloc';
 declare module 'i18next-parser';
 declare module 'inquirer-directory';
 declare module 'react-native-web';
@@ -17,8 +18,6 @@ declare namespace NodeJS {
     APP_FIREBASE_USE_EMULATOR: 'true' | 'false';
     APP_SERVER_API_HOST: string;
     APP_SERVER_API_PORT: string;
-    APP_SERVER_LAMBDA_HOST: string;
-    APP_SERVER_LAMBDA_PORT: string;
     APP_STRIPE_TOKEN: string;
     APP_USERNAME: string;
     APP_WEB_ADMIN_HOST: string;
@@ -40,6 +39,8 @@ declare namespace NodeJS {
     SERVER_IS_OTP_STATIC?: 'true' | 'false';
     SERVER_IV_LENGTH: string;
     SERVER_KEY_LENGTH: string;
+    SERVER_LAMBDA_HOST: string;
+    SERVER_LAMBDA_PORT: string;
     SERVER_MONGO_DATABASE_NAME: string;
     SERVER_MONGO_DATABASE_PASSWORD: string;
     SERVER_MONGO_DATABASE_URL: string;

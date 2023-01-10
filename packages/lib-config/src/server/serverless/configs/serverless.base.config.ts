@@ -18,7 +18,7 @@ export const serverlessConfig: ServerlessConfigParamsModel = {
 
   offline: {
     host: process.env.APP_SERVER_API_HOST,
-    lambdaPort: toNumber(process.env.APP_SERVER_LAMBDA_PORT),
+    lambdaPort: toNumber(process.env.SERVER_LAMBDA_PORT),
     port: toNumber(process.env.APP_SERVER_API_PORT),
   },
 

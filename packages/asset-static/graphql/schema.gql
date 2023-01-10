@@ -12,7 +12,15 @@ type Access {
 }
 
 type AccessCreate {
-  result: Access
+  form: AccessCreateForm
+}
+
+type AccessCreateForm {
+  _id: String
+  _uid: String
+  created: DateTime
+  role: String
+  user: User
 }
 
 input AccessCreateFormInput {
@@ -27,22 +35,39 @@ input AccessCreateInput {
   form: AccessCreateFormInput
 }
 
-type AccessGet {
+type AccessCreateOutput {
   result: Access
 }
 
+input AccessCreateOutputInput {
+  result: AccessInput
+}
+
+type AccessForm {
+  _uid: String
+  role: String
+}
+
+input AccessFormInput {
+  _uid: String
+  role: String
+}
+
+type AccessGet {
+  filter: AccessGetFilter
+}
+
 type AccessGetConnection {
-  result: AccessGetConnectionConnection
+  filter: AccessGetConnectionFilter
+  pagination: Pagination
 }
 
-type AccessGetConnectionConnection {
-  edges: [AccessGetConnectionEdge]
-  pageInfo: PageInfo
-}
-
-type AccessGetConnectionEdge {
-  cursor: String
-  node: Access
+type AccessGetConnectionFilter {
+  _id: String
+  _uid: String
+  created: DateTime
+  role: String
+  user: User
 }
 
 input AccessGetConnectionFilterInput {
@@ -58,6 +83,42 @@ input AccessGetConnectionInput {
   pagination: PaginationInput
 }
 
+type AccessGetConnectionOutput {
+  result: AccessGetConnectionOutputConnection
+}
+
+type AccessGetConnectionOutputConnection {
+  edges: [AccessGetConnectionOutputEdge]
+  pageInfo: PageInfo
+}
+
+input AccessGetConnectionOutputConnectionInput {
+  edges: [AccessGetConnectionOutputEdgeInput]
+  pageInfo: PageInfoInput
+}
+
+type AccessGetConnectionOutputEdge {
+  cursor: String
+  node: Access
+}
+
+input AccessGetConnectionOutputEdgeInput {
+  cursor: String
+  node: AccessInput
+}
+
+input AccessGetConnectionOutputInput {
+  result: AccessGetConnectionOutputConnectionInput
+}
+
+type AccessGetFilter {
+  _id: String
+  _uid: String
+  created: DateTime
+  role: String
+  user: User
+}
+
 input AccessGetFilterInput {
   _id: String
   _uid: String
@@ -71,7 +132,15 @@ input AccessGetInput {
 }
 
 type AccessGetMany {
-  result: [Access]
+  filter: AccessGetManyFilter
+}
+
+type AccessGetManyFilter {
+  _id: String
+  _uid: String
+  created: DateTime
+  role: String
+  user: User
 }
 
 input AccessGetManyFilterInput {
@@ -86,8 +155,40 @@ input AccessGetManyInput {
   filter: AccessGetManyFilterInput
 }
 
-type AccessRemove {
+type AccessGetManyOutput {
+  result: [Access]
+}
+
+input AccessGetManyOutputInput {
+  result: [AccessInput]
+}
+
+type AccessGetOutput {
   result: Access
+}
+
+input AccessGetOutputInput {
+  result: AccessInput
+}
+
+input AccessInput {
+  _id: String
+  _uid: String
+  created: DateTime
+  role: String
+  user: UserInput
+}
+
+type AccessRemove {
+  filter: AccessRemoveFilter
+}
+
+type AccessRemoveFilter {
+  _id: String
+  _uid: String
+  created: DateTime
+  role: String
+  user: User
 }
 
 input AccessRemoveFilterInput {
@@ -102,8 +203,25 @@ input AccessRemoveInput {
   filter: AccessRemoveFilterInput
 }
 
-type AccessUpdate {
+type AccessRemoveOutput {
   result: Access
+}
+
+input AccessRemoveOutputInput {
+  result: AccessInput
+}
+
+type AccessUpdate {
+  filter: AccessUpdateFilter
+  update: AccessUpdateUpdate
+}
+
+type AccessUpdateFilter {
+  _id: String
+  _uid: String
+  created: DateTime
+  role: String
+  user: User
 }
 
 input AccessUpdateFilterInput {
@@ -117,6 +235,22 @@ input AccessUpdateFilterInput {
 input AccessUpdateInput {
   filter: AccessUpdateFilterInput
   update: AccessUpdateUpdateInput
+}
+
+type AccessUpdateOutput {
+  result: Access
+}
+
+input AccessUpdateOutputInput {
+  result: AccessInput
+}
+
+type AccessUpdateUpdate {
+  _id: String
+  _uid: String
+  created: DateTime
+  role: String
+  user: User
 }
 
 input AccessUpdateUpdateInput {
@@ -139,326 +273,7 @@ type Card {
   last4: Float
 }
 
-type CardCreate {
-  result: Card
-  root: CardCreateRoot
-}
-
-input CardCreateFormInput {
-  _id: String
-  brand: String
-  country: String
-  created: DateTime
-  expMonth: Float
-  expYear: Float
-  funding: String
-  id: String
-  last4: Float
-}
-
-input CardCreateInput {
-  form: CardCreateFormInput
-  root: CardCreateRootInput
-}
-
-type CardCreateRoot {
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  phone: String
-}
-
-input CardCreateRootInput {
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  phone: String
-}
-
-type CardGet {
-  result: Card
-  root: CardGetRoot
-}
-
-type CardGetConnection {
-  result: CardGetConnectionConnection
-  root: CardGetConnectionRoot
-}
-
-type CardGetConnectionConnection {
-  edges: [CardGetConnectionEdge]
-  pageInfo: PageInfo
-}
-
-type CardGetConnectionEdge {
-  cursor: String
-  node: Card
-}
-
-input CardGetConnectionFilterInput {
-  _id: String
-  brand: String
-  country: String
-  created: DateTime
-  expMonth: Float
-  expYear: Float
-  funding: String
-  id: String
-  last4: Float
-}
-
-input CardGetConnectionInput {
-  filter: CardGetConnectionFilterInput
-  pagination: PaginationInput
-  root: CardGetConnectionRootInput
-}
-
-type CardGetConnectionRoot {
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  phone: String
-}
-
-input CardGetConnectionRootInput {
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  phone: String
-}
-
-input CardGetFilterInput {
-  _id: String
-  brand: String
-  country: String
-  created: DateTime
-  expMonth: Float
-  expYear: Float
-  funding: String
-  id: String
-  last4: Float
-}
-
-input CardGetInput {
-  filter: CardGetFilterInput
-  root: CardGetRootInput
-}
-
-type CardGetMany {
-  result: [Card]
-  root: CardGetManyRoot
-}
-
-input CardGetManyFilterInput {
-  _id: String
-  brand: String
-  country: String
-  created: DateTime
-  expMonth: Float
-  expYear: Float
-  funding: String
-  id: String
-  last4: Float
-}
-
-input CardGetManyInput {
-  filter: CardGetManyFilterInput
-  root: CardGetManyRootInput
-}
-
-type CardGetManyRoot {
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  phone: String
-}
-
-input CardGetManyRootInput {
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  phone: String
-}
-
-type CardGetRoot {
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  phone: String
-}
-
-input CardGetRootInput {
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  phone: String
-}
-
 input CardInput {
-  _id: String
-  brand: String
-  country: String
-  created: DateTime
-  expMonth: Float
-  expYear: Float
-  funding: String
-  id: String
-  last4: Float
-}
-
-type CardRemove {
-  result: Card
-  root: CardRemoveRoot
-}
-
-input CardRemoveFilterInput {
-  _id: String
-  brand: String
-  country: String
-  created: DateTime
-  expMonth: Float
-  expYear: Float
-  funding: String
-  id: String
-  last4: Float
-}
-
-input CardRemoveInput {
-  filter: CardRemoveFilterInput
-  root: CardRemoveRootInput
-}
-
-type CardRemoveRoot {
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  phone: String
-}
-
-input CardRemoveRootInput {
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  phone: String
-}
-
-type CardTokenCreate {
-  result: String
-  root: CardTokenCreateRoot
-}
-
-input CardTokenCreateInput {
-  root: CardTokenCreateRootInput
-}
-
-type CardTokenCreateRoot {
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  phone: String
-}
-
-input CardTokenCreateRootInput {
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  phone: String
-}
-
-type CardUpdate {
-  result: Card
-  root: CardUpdateRoot
-}
-
-input CardUpdateFilterInput {
-  _id: String
-  brand: String
-  country: String
-  created: DateTime
-  expMonth: Float
-  expYear: Float
-  funding: String
-  id: String
-  last4: Float
-}
-
-input CardUpdateInput {
-  filter: CardUpdateFilterInput
-  root: CardUpdateRootInput
-  update: CardUpdateUpdateInput
-}
-
-type CardUpdateRoot {
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  phone: String
-}
-
-input CardUpdateRootInput {
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  phone: String
-}
-
-input CardUpdateUpdateInput {
   _id: String
   brand: String
   country: String
@@ -485,137 +300,7 @@ type DummyEmbeddedResource {
   stringPropertyOptional: String
 }
 
-type DummyEmbeddedResourceCreate {
-  result: DummyEmbeddedResource
-}
-
-input DummyEmbeddedResourceCreateFormInput {
-  _id: String
-  created: DateTime
-  dateTtlProperty: DateTime
-  numberProperty: Float
-  stringArrayProperty: String
-  stringProperty: String
-  stringPropertyOptional: String
-}
-
-input DummyEmbeddedResourceCreateInput {
-  form: DummyEmbeddedResourceCreateFormInput
-}
-
-type DummyEmbeddedResourceGet {
-  result: DummyEmbeddedResource
-}
-
-type DummyEmbeddedResourceGetConnection {
-  result: DummyEmbeddedResourceGetConnectionConnection
-}
-
-type DummyEmbeddedResourceGetConnectionConnection {
-  edges: [DummyEmbeddedResourceGetConnectionEdge]
-  pageInfo: PageInfo
-}
-
-type DummyEmbeddedResourceGetConnectionEdge {
-  cursor: String
-  node: DummyEmbeddedResource
-}
-
-input DummyEmbeddedResourceGetConnectionFilterInput {
-  _id: String
-  created: DateTime
-  dateTtlProperty: DateTime
-  numberProperty: Float
-  stringArrayProperty: String
-  stringProperty: String
-  stringPropertyOptional: String
-}
-
-input DummyEmbeddedResourceGetConnectionInput {
-  filter: DummyEmbeddedResourceGetConnectionFilterInput
-  pagination: PaginationInput
-}
-
-input DummyEmbeddedResourceGetFilterInput {
-  _id: String
-  created: DateTime
-  dateTtlProperty: DateTime
-  numberProperty: Float
-  stringArrayProperty: String
-  stringProperty: String
-  stringPropertyOptional: String
-}
-
-input DummyEmbeddedResourceGetInput {
-  filter: DummyEmbeddedResourceGetFilterInput
-}
-
-type DummyEmbeddedResourceGetMany {
-  result: [DummyEmbeddedResource]
-}
-
-input DummyEmbeddedResourceGetManyFilterInput {
-  _id: String
-  created: DateTime
-  dateTtlProperty: DateTime
-  numberProperty: Float
-  stringArrayProperty: String
-  stringProperty: String
-  stringPropertyOptional: String
-}
-
-input DummyEmbeddedResourceGetManyInput {
-  filter: DummyEmbeddedResourceGetManyFilterInput
-}
-
 input DummyEmbeddedResourceInput {
-  _id: String
-  created: DateTime
-  dateTtlProperty: DateTime
-  numberProperty: Float
-  stringArrayProperty: String
-  stringProperty: String
-  stringPropertyOptional: String
-}
-
-type DummyEmbeddedResourceRemove {
-  result: DummyEmbeddedResource
-}
-
-input DummyEmbeddedResourceRemoveFilterInput {
-  _id: String
-  created: DateTime
-  dateTtlProperty: DateTime
-  numberProperty: Float
-  stringArrayProperty: String
-  stringProperty: String
-  stringPropertyOptional: String
-}
-
-input DummyEmbeddedResourceRemoveInput {
-  filter: DummyEmbeddedResourceRemoveFilterInput
-}
-
-type DummyEmbeddedResourceUpdate {
-  result: DummyEmbeddedResource
-}
-
-input DummyEmbeddedResourceUpdateFilterInput {
-  _id: String
-  created: DateTime
-  dateTtlProperty: DateTime
-  numberProperty: Float
-  stringArrayProperty: String
-  stringProperty: String
-  stringPropertyOptional: String
-}
-
-input DummyEmbeddedResourceUpdateInput {
-  filter: DummyEmbeddedResourceUpdateFilterInput
-  update: DummyEmbeddedResourceUpdateUpdateInput
-}
-
-input DummyEmbeddedResourceUpdateUpdateInput {
   _id: String
   created: DateTime
   dateTtlProperty: DateTime
@@ -636,133 +321,7 @@ type DummyEntityResource {
   stringPropertyOptional: String
 }
 
-type DummyEntityResourceCreate {
-  result: DummyEntityResource
-}
-
-input DummyEntityResourceCreateFormInput {
-  DummyEmbeddedResource: [DummyEmbeddedResourceInput]
-  _id: String
-  created: DateTime
-  dateTtlProperty: DateTime
-  numberProperty: Float
-  stringArrayProperty: String
-  stringProperty: String
-  stringPropertyOptional: String
-}
-
-input DummyEntityResourceCreateInput {
-  form: DummyEntityResourceCreateFormInput
-}
-
-type DummyEntityResourceGet {
-  result: DummyEntityResource
-}
-
-type DummyEntityResourceGetConnection {
-  result: DummyEntityResourceGetConnectionConnection
-}
-
-type DummyEntityResourceGetConnectionConnection {
-  edges: [DummyEntityResourceGetConnectionEdge]
-  pageInfo: PageInfo
-}
-
-type DummyEntityResourceGetConnectionEdge {
-  cursor: String
-  node: DummyEntityResource
-}
-
-input DummyEntityResourceGetConnectionFilterInput {
-  DummyEmbeddedResource: [DummyEmbeddedResourceInput]
-  _id: String
-  created: DateTime
-  dateTtlProperty: DateTime
-  numberProperty: Float
-  stringArrayProperty: String
-  stringProperty: String
-  stringPropertyOptional: String
-}
-
-input DummyEntityResourceGetConnectionInput {
-  filter: DummyEntityResourceGetConnectionFilterInput
-  pagination: PaginationInput
-}
-
-input DummyEntityResourceGetFilterInput {
-  DummyEmbeddedResource: [DummyEmbeddedResourceInput]
-  _id: String
-  created: DateTime
-  dateTtlProperty: DateTime
-  numberProperty: Float
-  stringArrayProperty: String
-  stringProperty: String
-  stringPropertyOptional: String
-}
-
-input DummyEntityResourceGetInput {
-  filter: DummyEntityResourceGetFilterInput
-}
-
-type DummyEntityResourceGetMany {
-  result: [DummyEntityResource]
-}
-
-input DummyEntityResourceGetManyFilterInput {
-  DummyEmbeddedResource: [DummyEmbeddedResourceInput]
-  _id: String
-  created: DateTime
-  dateTtlProperty: DateTime
-  numberProperty: Float
-  stringArrayProperty: String
-  stringProperty: String
-  stringPropertyOptional: String
-}
-
-input DummyEntityResourceGetManyInput {
-  filter: DummyEntityResourceGetManyFilterInput
-}
-
-type DummyEntityResourceRemove {
-  result: DummyEntityResource
-}
-
-input DummyEntityResourceRemoveFilterInput {
-  DummyEmbeddedResource: [DummyEmbeddedResourceInput]
-  _id: String
-  created: DateTime
-  dateTtlProperty: DateTime
-  numberProperty: Float
-  stringArrayProperty: String
-  stringProperty: String
-  stringPropertyOptional: String
-}
-
-input DummyEntityResourceRemoveInput {
-  filter: DummyEntityResourceRemoveFilterInput
-}
-
-type DummyEntityResourceUpdate {
-  result: DummyEntityResource
-}
-
-input DummyEntityResourceUpdateFilterInput {
-  DummyEmbeddedResource: [DummyEmbeddedResourceInput]
-  _id: String
-  created: DateTime
-  dateTtlProperty: DateTime
-  numberProperty: Float
-  stringArrayProperty: String
-  stringProperty: String
-  stringPropertyOptional: String
-}
-
-input DummyEntityResourceUpdateInput {
-  filter: DummyEntityResourceUpdateFilterInput
-  update: DummyEntityResourceUpdateUpdateInput
-}
-
-input DummyEntityResourceUpdateUpdateInput {
+input DummyEntityResourceInput {
   DummyEmbeddedResource: [DummyEmbeddedResourceInput]
   _id: String
   created: DateTime
@@ -781,8 +340,15 @@ type LinkedUser {
 }
 
 type LinkedUserCreate {
-  result: LinkedUser
+  form: LinkedUserCreateForm
   root: LinkedUserCreateRoot
+}
+
+type LinkedUserCreateForm {
+  _id: String
+  created: DateTime
+  id: String
+  type: String
 }
 
 input LinkedUserCreateFormInput {
@@ -795,6 +361,38 @@ input LinkedUserCreateFormInput {
 input LinkedUserCreateInput {
   form: LinkedUserCreateFormInput
   root: LinkedUserCreateRootInput
+}
+
+type LinkedUserCreateOutput {
+  result: LinkedUser
+  root: LinkedUserCreateOutputRoot
+}
+
+input LinkedUserCreateOutputInput {
+  result: LinkedUserInput
+  root: LinkedUserCreateOutputRootInput
+}
+
+type LinkedUserCreateOutputRoot {
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input LinkedUserCreateOutputRootInput {
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
 }
 
 type LinkedUserCreateRoot {
@@ -820,23 +418,21 @@ input LinkedUserCreateRootInput {
 }
 
 type LinkedUserGet {
-  result: LinkedUser
+  filter: LinkedUserGetFilter
   root: LinkedUserGetRoot
 }
 
 type LinkedUserGetConnection {
-  result: LinkedUserGetConnectionConnection
+  filter: LinkedUserGetConnectionFilter
+  pagination: Pagination
   root: LinkedUserGetConnectionRoot
 }
 
-type LinkedUserGetConnectionConnection {
-  edges: [LinkedUserGetConnectionEdge]
-  pageInfo: PageInfo
-}
-
-type LinkedUserGetConnectionEdge {
-  cursor: String
-  node: LinkedUser
+type LinkedUserGetConnectionFilter {
+  _id: String
+  created: DateTime
+  id: String
+  type: String
 }
 
 input LinkedUserGetConnectionFilterInput {
@@ -850,6 +446,58 @@ input LinkedUserGetConnectionInput {
   filter: LinkedUserGetConnectionFilterInput
   pagination: PaginationInput
   root: LinkedUserGetConnectionRootInput
+}
+
+type LinkedUserGetConnectionOutput {
+  result: LinkedUserGetConnectionOutputConnection
+  root: LinkedUserGetConnectionOutputRoot
+}
+
+type LinkedUserGetConnectionOutputConnection {
+  edges: [LinkedUserGetConnectionOutputEdge]
+  pageInfo: PageInfo
+}
+
+input LinkedUserGetConnectionOutputConnectionInput {
+  edges: [LinkedUserGetConnectionOutputEdgeInput]
+  pageInfo: PageInfoInput
+}
+
+type LinkedUserGetConnectionOutputEdge {
+  cursor: String
+  node: LinkedUser
+}
+
+input LinkedUserGetConnectionOutputEdgeInput {
+  cursor: String
+  node: LinkedUserInput
+}
+
+input LinkedUserGetConnectionOutputInput {
+  result: LinkedUserGetConnectionOutputConnectionInput
+  root: LinkedUserGetConnectionOutputRootInput
+}
+
+type LinkedUserGetConnectionOutputRoot {
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input LinkedUserGetConnectionOutputRootInput {
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
 }
 
 type LinkedUserGetConnectionRoot {
@@ -874,6 +522,13 @@ input LinkedUserGetConnectionRootInput {
   phone: String
 }
 
+type LinkedUserGetFilter {
+  _id: String
+  created: DateTime
+  id: String
+  type: String
+}
+
 input LinkedUserGetFilterInput {
   _id: String
   created: DateTime
@@ -887,8 +542,15 @@ input LinkedUserGetInput {
 }
 
 type LinkedUserGetMany {
-  result: [LinkedUser]
+  filter: LinkedUserGetManyFilter
   root: LinkedUserGetManyRoot
+}
+
+type LinkedUserGetManyFilter {
+  _id: String
+  created: DateTime
+  id: String
+  type: String
 }
 
 input LinkedUserGetManyFilterInput {
@@ -903,6 +565,38 @@ input LinkedUserGetManyInput {
   root: LinkedUserGetManyRootInput
 }
 
+type LinkedUserGetManyOutput {
+  result: [LinkedUser]
+  root: LinkedUserGetManyOutputRoot
+}
+
+input LinkedUserGetManyOutputInput {
+  result: [LinkedUserInput]
+  root: LinkedUserGetManyOutputRootInput
+}
+
+type LinkedUserGetManyOutputRoot {
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input LinkedUserGetManyOutputRootInput {
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
 type LinkedUserGetManyRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
@@ -915,6 +609,38 @@ type LinkedUserGetManyRoot {
 }
 
 input LinkedUserGetManyRootInput {
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+type LinkedUserGetOutput {
+  result: LinkedUser
+  root: LinkedUserGetOutputRoot
+}
+
+input LinkedUserGetOutputInput {
+  result: LinkedUserInput
+  root: LinkedUserGetOutputRootInput
+}
+
+type LinkedUserGetOutputRoot {
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input LinkedUserGetOutputRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
@@ -955,8 +681,15 @@ input LinkedUserInput {
 }
 
 type LinkedUserRemove {
-  result: LinkedUser
+  filter: LinkedUserRemoveFilter
   root: LinkedUserRemoveRoot
+}
+
+type LinkedUserRemoveFilter {
+  _id: String
+  created: DateTime
+  id: String
+  type: String
 }
 
 input LinkedUserRemoveFilterInput {
@@ -969,6 +702,38 @@ input LinkedUserRemoveFilterInput {
 input LinkedUserRemoveInput {
   filter: LinkedUserRemoveFilterInput
   root: LinkedUserRemoveRootInput
+}
+
+type LinkedUserRemoveOutput {
+  result: LinkedUser
+  root: LinkedUserRemoveOutputRoot
+}
+
+input LinkedUserRemoveOutputInput {
+  result: LinkedUserInput
+  root: LinkedUserRemoveOutputRootInput
+}
+
+type LinkedUserRemoveOutputRoot {
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input LinkedUserRemoveOutputRootInput {
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
 }
 
 type LinkedUserRemoveRoot {
@@ -994,8 +759,16 @@ input LinkedUserRemoveRootInput {
 }
 
 type LinkedUserUpdate {
-  result: LinkedUser
+  filter: LinkedUserUpdateFilter
   root: LinkedUserUpdateRoot
+  update: LinkedUserUpdateUpdate
+}
+
+type LinkedUserUpdateFilter {
+  _id: String
+  created: DateTime
+  id: String
+  type: String
 }
 
 input LinkedUserUpdateFilterInput {
@@ -1009,6 +782,38 @@ input LinkedUserUpdateInput {
   filter: LinkedUserUpdateFilterInput
   root: LinkedUserUpdateRootInput
   update: LinkedUserUpdateUpdateInput
+}
+
+type LinkedUserUpdateOutput {
+  result: LinkedUser
+  root: LinkedUserUpdateOutputRoot
+}
+
+input LinkedUserUpdateOutputInput {
+  result: LinkedUserInput
+  root: LinkedUserUpdateOutputRootInput
+}
+
+type LinkedUserUpdateOutputRoot {
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input LinkedUserUpdateOutputRootInput {
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
 }
 
 type LinkedUserUpdateRoot {
@@ -1033,6 +838,13 @@ input LinkedUserUpdateRootInput {
   phone: String
 }
 
+type LinkedUserUpdateUpdate {
+  _id: String
+  created: DateTime
+  id: String
+  type: String
+}
+
 input LinkedUserUpdateUpdateInput {
   _id: String
   created: DateTime
@@ -1041,31 +853,21 @@ input LinkedUserUpdateUpdateInput {
 }
 
 type Mutation {
-  AccessCreate(input: AccessCreateInput): AccessCreate
-  AccessRemove(input: AccessRemoveInput): AccessRemove
-  AccessUpdate(input: AccessUpdateInput): AccessUpdate
-  CardCreate(input: CardCreateInput): CardCreate
-  CardRemove(input: CardRemoveInput): CardRemove
-  CardTokenCreate(input: CardTokenCreateInput): CardTokenCreate
-  CardUpdate(input: CardUpdateInput): CardUpdate
-  DummyEmbeddedResourceCreate(input: DummyEmbeddedResourceCreateInput): DummyEmbeddedResourceCreate
-  DummyEmbeddedResourceRemove(input: DummyEmbeddedResourceRemoveInput): DummyEmbeddedResourceRemove
-  DummyEmbeddedResourceUpdate(input: DummyEmbeddedResourceUpdateInput): DummyEmbeddedResourceUpdate
-  DummyEntityResourceCreate(input: DummyEntityResourceCreateInput): DummyEntityResourceCreate
-  DummyEntityResourceRemove(input: DummyEntityResourceRemoveInput): DummyEntityResourceRemove
-  DummyEntityResourceUpdate(input: DummyEntityResourceUpdateInput): DummyEntityResourceUpdate
-  LinkedUserCreate(input: LinkedUserCreateInput): LinkedUserCreate
-  LinkedUserRemove(input: LinkedUserRemoveInput): LinkedUserRemove
-  LinkedUserUpdate(input: LinkedUserUpdateInput): LinkedUserUpdate
-  OtpCreate(input: OtpCreateInput): OtpCreate
-  OtpCreateIfDoesNotExistCreate(input: OtpCreateIfDoesNotExistCreateInput): OtpCreateIfDoesNotExistCreate
-  OtpRemove(input: OtpRemoveInput): OtpRemove
-  OtpUpdate(input: OtpUpdateInput): OtpUpdate
-  SignInCreate(input: SignInCreateInput): SignInCreate
-  UserCreate(input: UserCreateInput): UserCreate
-  UserRemove(input: UserRemoveInput): UserRemove
-  UserUpdate(input: UserUpdateInput): UserUpdate
-  UserenameUpdateUpdate(input: UserenameUpdateUpdateInput): UserenameUpdateUpdate
+  AccessCreate(input: AccessCreateInput): AccessCreateOutput
+  AccessRemove(input: AccessRemoveInput): AccessRemoveOutput
+  AccessUpdate(input: AccessUpdateInput): AccessUpdateOutput
+  LinkedUserCreate(input: LinkedUserCreateInput): LinkedUserCreateOutput
+  LinkedUserRemove(input: LinkedUserRemoveInput): LinkedUserRemoveOutput
+  LinkedUserUpdate(input: LinkedUserUpdateInput): LinkedUserUpdateOutput
+  OtpCreate(input: OtpCreateInput): OtpCreateOutput
+  OtpIfDoesNotExistCreate(input: OtpIfDoesNotExistCreateInput): OtpIfDoesNotExistCreateOutput
+  OtpRemove(input: OtpRemoveInput): OtpRemoveOutput
+  OtpUpdate(input: OtpUpdateInput): OtpUpdateOutput
+  SignInCreate(input: SignInCreateInput): SignInCreateOutput
+  UserCreate(input: UserCreateInput): UserCreateOutput
+  UserRemove(input: UserRemoveInput): UserRemoveOutput
+  UserUpdate(input: UserUpdateInput): UserUpdateOutput
+  UserenameUpdateUpdate(input: UserenameUpdateUpdateInput): UserenameUpdateUpdateOutput
 }
 
 type Otp {
@@ -1076,45 +878,51 @@ type Otp {
 }
 
 type OtpCreate {
-  result: Otp
+  form: OtpCreateForm
+}
+
+type OtpCreateForm {
+  username: String
 }
 
 input OtpCreateFormInput {
   username: String
 }
 
-type OtpCreateIfDoesNotExistCreate {
-  result: Otp
-}
-
-input OtpCreateIfDoesNotExistCreateFormInput {
-  username: String
-}
-
-input OtpCreateIfDoesNotExistCreateInput {
-  form: OtpCreateIfDoesNotExistCreateFormInput
-}
-
 input OtpCreateInput {
   form: OtpCreateFormInput
 }
 
-type OtpGet {
+type OtpCreateOutput {
   result: Otp
 }
 
+input OtpCreateOutputInput {
+  result: OtpInput
+}
+
+type OtpForm {
+  username: String
+}
+
+input OtpFormInput {
+  username: String
+}
+
+type OtpGet {
+  filter: OtpGetFilter
+}
+
 type OtpGetConnection {
-  result: OtpGetConnectionConnection
+  filter: OtpGetConnectionFilter
+  pagination: Pagination
 }
 
-type OtpGetConnectionConnection {
-  edges: [OtpGetConnectionEdge]
-  pageInfo: PageInfo
-}
-
-type OtpGetConnectionEdge {
-  cursor: String
-  node: Otp
+type OtpGetConnectionFilter {
+  _id: String
+  created: DateTime
+  otp: String
+  username: String
 }
 
 input OtpGetConnectionFilterInput {
@@ -1129,6 +937,41 @@ input OtpGetConnectionInput {
   pagination: PaginationInput
 }
 
+type OtpGetConnectionOutput {
+  result: OtpGetConnectionOutputConnection
+}
+
+type OtpGetConnectionOutputConnection {
+  edges: [OtpGetConnectionOutputEdge]
+  pageInfo: PageInfo
+}
+
+input OtpGetConnectionOutputConnectionInput {
+  edges: [OtpGetConnectionOutputEdgeInput]
+  pageInfo: PageInfoInput
+}
+
+type OtpGetConnectionOutputEdge {
+  cursor: String
+  node: Otp
+}
+
+input OtpGetConnectionOutputEdgeInput {
+  cursor: String
+  node: OtpInput
+}
+
+input OtpGetConnectionOutputInput {
+  result: OtpGetConnectionOutputConnectionInput
+}
+
+type OtpGetFilter {
+  _id: String
+  created: DateTime
+  otp: String
+  username: String
+}
+
 input OtpGetFilterInput {
   _id: String
   created: DateTime
@@ -1141,7 +984,14 @@ input OtpGetInput {
 }
 
 type OtpGetMany {
-  result: [Otp]
+  filter: OtpGetManyFilter
+}
+
+type OtpGetManyFilter {
+  _id: String
+  created: DateTime
+  otp: String
+  username: String
 }
 
 input OtpGetManyFilterInput {
@@ -1155,8 +1005,62 @@ input OtpGetManyInput {
   filter: OtpGetManyFilterInput
 }
 
-type OtpRemove {
+type OtpGetManyOutput {
+  result: [Otp]
+}
+
+input OtpGetManyOutputInput {
+  result: [OtpInput]
+}
+
+type OtpGetOutput {
   result: Otp
+}
+
+input OtpGetOutputInput {
+  result: OtpInput
+}
+
+type OtpIfDoesNotExistCreate {
+  form: OtpIfDoesNotExistCreateForm
+}
+
+type OtpIfDoesNotExistCreateForm {
+  username: String
+}
+
+input OtpIfDoesNotExistCreateFormInput {
+  username: String
+}
+
+input OtpIfDoesNotExistCreateInput {
+  form: OtpIfDoesNotExistCreateFormInput
+}
+
+type OtpIfDoesNotExistCreateOutput {
+  result: Otp
+}
+
+input OtpIfDoesNotExistCreateOutputInput {
+  result: OtpInput
+}
+
+input OtpInput {
+  _id: String
+  created: DateTime
+  otp: String
+  username: String
+}
+
+type OtpRemove {
+  filter: OtpRemoveFilter
+}
+
+type OtpRemoveFilter {
+  _id: String
+  created: DateTime
+  otp: String
+  username: String
 }
 
 input OtpRemoveFilterInput {
@@ -1170,8 +1074,24 @@ input OtpRemoveInput {
   filter: OtpRemoveFilterInput
 }
 
-type OtpUpdate {
+type OtpRemoveOutput {
   result: Otp
+}
+
+input OtpRemoveOutputInput {
+  result: OtpInput
+}
+
+type OtpUpdate {
+  filter: OtpUpdateFilter
+  update: OtpUpdateUpdate
+}
+
+type OtpUpdateFilter {
+  _id: String
+  created: DateTime
+  otp: String
+  username: String
 }
 
 input OtpUpdateFilterInput {
@@ -1184,6 +1104,21 @@ input OtpUpdateFilterInput {
 input OtpUpdateInput {
   filter: OtpUpdateFilterInput
   update: OtpUpdateUpdateInput
+}
+
+type OtpUpdateOutput {
+  result: Otp
+}
+
+input OtpUpdateOutputInput {
+  result: OtpInput
+}
+
+type OtpUpdateUpdate {
+  _id: String
+  created: DateTime
+  otp: String
+  username: String
 }
 
 input OtpUpdateUpdateInput {
@@ -1200,6 +1135,20 @@ type PageInfo {
   startCursor: String
 }
 
+input PageInfoInput {
+  endCursor: String
+  hasNextPage: Boolean
+  hasPreviousPage: Boolean
+  startCursor: String
+}
+
+type Pagination {
+  after: String
+  before: String
+  first: Float
+  last: Float
+}
+
 input PaginationInput {
   after: String
   before: String
@@ -1208,27 +1157,18 @@ input PaginationInput {
 }
 
 type Query {
-  AccessGet(input: AccessGetInput): AccessGet
-  AccessGetConnection(input: AccessGetConnectionInput): AccessGetConnection
-  AccessGetMany(input: AccessGetManyInput): AccessGetMany
-  CardGet(input: CardGetInput): CardGet
-  CardGetConnection(input: CardGetConnectionInput): CardGetConnection
-  CardGetMany(input: CardGetManyInput): CardGetMany
-  DummyEmbeddedResourceGet(input: DummyEmbeddedResourceGetInput): DummyEmbeddedResourceGet
-  DummyEmbeddedResourceGetConnection(input: DummyEmbeddedResourceGetConnectionInput): DummyEmbeddedResourceGetConnection
-  DummyEmbeddedResourceGetMany(input: DummyEmbeddedResourceGetManyInput): DummyEmbeddedResourceGetMany
-  DummyEntityResourceGet(input: DummyEntityResourceGetInput): DummyEntityResourceGet
-  DummyEntityResourceGetConnection(input: DummyEntityResourceGetConnectionInput): DummyEntityResourceGetConnection
-  DummyEntityResourceGetMany(input: DummyEntityResourceGetManyInput): DummyEntityResourceGetMany
-  LinkedUserGet(input: LinkedUserGetInput): LinkedUserGet
-  LinkedUserGetConnection(input: LinkedUserGetConnectionInput): LinkedUserGetConnection
-  LinkedUserGetMany(input: LinkedUserGetManyInput): LinkedUserGetMany
-  OtpGet(input: OtpGetInput): OtpGet
-  OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnection
-  OtpGetMany(input: OtpGetManyInput): OtpGetMany
-  UserGet(input: UserGetInput): UserGet
-  UserGetConnection(input: UserGetConnectionInput): UserGetConnection
-  UserGetMany(input: UserGetManyInput): UserGetMany
+  AccessGet(input: AccessGetInput): AccessGetOutput
+  AccessGetConnection(input: AccessGetConnectionInput): AccessGetConnectionOutput
+  AccessGetMany(input: AccessGetManyInput): AccessGetManyOutput
+  LinkedUserGet(input: LinkedUserGetInput): LinkedUserGetOutput
+  LinkedUserGetConnection(input: LinkedUserGetConnectionInput): LinkedUserGetConnectionOutput
+  LinkedUserGetMany(input: LinkedUserGetManyInput): LinkedUserGetManyOutput
+  OtpGet(input: OtpGetInput): OtpGetOutput
+  OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
+  OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput
+  UserGet(input: UserGetInput): UserGetOutput
+  UserGetConnection(input: UserGetConnectionInput): UserGetConnectionOutput
+  UserGetMany(input: UserGetManyInput): UserGetManyOutput
 }
 
 type SignIn {
@@ -1240,7 +1180,12 @@ type SignIn {
 }
 
 type SignInCreate {
-  result: SignIn
+  form: SignInCreateForm
+}
+
+type SignInCreateForm {
+  otp: String
+  username: String
 }
 
 input SignInCreateFormInput {
@@ -1250,6 +1195,172 @@ input SignInCreateFormInput {
 
 input SignInCreateInput {
   form: SignInCreateFormInput
+}
+
+type SignInCreateOutput {
+  result: SignIn
+}
+
+input SignInCreateOutputInput {
+  result: SignInInput
+}
+
+type SignInForm {
+  otp: String
+  username: String
+}
+
+input SignInFormInput {
+  otp: String
+  username: String
+}
+
+type SignInGet {
+  filter: SignInGetFilter
+}
+
+type SignInGetConnection {
+  filter: SignInGetConnectionFilter
+  pagination: Pagination
+}
+
+type SignInGetConnectionFilter {
+  _id: String
+  created: DateTime
+  isNew: Boolean
+  token: String
+  user: User
+}
+
+input SignInGetConnectionFilterInput {
+  _id: String
+  created: DateTime
+  isNew: Boolean
+  token: String
+  user: UserInput
+}
+
+input SignInGetConnectionInput {
+  filter: SignInGetConnectionFilterInput
+  pagination: PaginationInput
+}
+
+type SignInGetFilter {
+  _id: String
+  created: DateTime
+  isNew: Boolean
+  token: String
+  user: User
+}
+
+input SignInGetFilterInput {
+  _id: String
+  created: DateTime
+  isNew: Boolean
+  token: String
+  user: UserInput
+}
+
+input SignInGetInput {
+  filter: SignInGetFilterInput
+}
+
+type SignInGetMany {
+  filter: SignInGetManyFilter
+}
+
+type SignInGetManyFilter {
+  _id: String
+  created: DateTime
+  isNew: Boolean
+  token: String
+  user: User
+}
+
+input SignInGetManyFilterInput {
+  _id: String
+  created: DateTime
+  isNew: Boolean
+  token: String
+  user: UserInput
+}
+
+input SignInGetManyInput {
+  filter: SignInGetManyFilterInput
+}
+
+input SignInInput {
+  _id: String
+  created: DateTime
+  isNew: Boolean
+  token: String
+  user: UserInput
+}
+
+type SignInRemove {
+  filter: SignInRemoveFilter
+}
+
+type SignInRemoveFilter {
+  _id: String
+  created: DateTime
+  isNew: Boolean
+  token: String
+  user: User
+}
+
+input SignInRemoveFilterInput {
+  _id: String
+  created: DateTime
+  isNew: Boolean
+  token: String
+  user: UserInput
+}
+
+input SignInRemoveInput {
+  filter: SignInRemoveFilterInput
+}
+
+type SignInUpdate {
+  filter: SignInUpdateFilter
+  update: SignInUpdateUpdate
+}
+
+type SignInUpdateFilter {
+  _id: String
+  created: DateTime
+  isNew: Boolean
+  token: String
+  user: User
+}
+
+input SignInUpdateFilterInput {
+  _id: String
+  created: DateTime
+  isNew: Boolean
+  token: String
+  user: UserInput
+}
+
+input SignInUpdateInput {
+  filter: SignInUpdateFilterInput
+  update: SignInUpdateUpdateInput
+}
+
+type SignInUpdateUpdate {
+  _id: String
+  created: DateTime
+  isNew: Boolean
+  token: String
+  user: User
+}
+
+input SignInUpdateUpdateInput {
+  _id: String
+  created: DateTime
+  isNew: Boolean
+  token: String
+  user: UserInput
 }
 
 type User {
@@ -1264,7 +1375,18 @@ type User {
 }
 
 type UserCreate {
-  result: User
+  form: UserCreateForm
+}
+
+type UserCreateForm {
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
 }
 
 input UserCreateFormInput {
@@ -1282,22 +1404,32 @@ input UserCreateInput {
   form: UserCreateFormInput
 }
 
-type UserGet {
+type UserCreateOutput {
   result: User
 }
 
+input UserCreateOutputInput {
+  result: UserInput
+}
+
+type UserGet {
+  filter: UserGetFilter
+}
+
 type UserGetConnection {
-  result: UserGetConnectionConnection
+  filter: UserGetConnectionFilter
+  pagination: Pagination
 }
 
-type UserGetConnectionConnection {
-  edges: [UserGetConnectionEdge]
-  pageInfo: PageInfo
-}
-
-type UserGetConnectionEdge {
-  cursor: String
-  node: User
+type UserGetConnectionFilter {
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
 }
 
 input UserGetConnectionFilterInput {
@@ -1316,6 +1448,45 @@ input UserGetConnectionInput {
   pagination: PaginationInput
 }
 
+type UserGetConnectionOutput {
+  result: UserGetConnectionOutputConnection
+}
+
+type UserGetConnectionOutputConnection {
+  edges: [UserGetConnectionOutputEdge]
+  pageInfo: PageInfo
+}
+
+input UserGetConnectionOutputConnectionInput {
+  edges: [UserGetConnectionOutputEdgeInput]
+  pageInfo: PageInfoInput
+}
+
+type UserGetConnectionOutputEdge {
+  cursor: String
+  node: User
+}
+
+input UserGetConnectionOutputEdgeInput {
+  cursor: String
+  node: UserInput
+}
+
+input UserGetConnectionOutputInput {
+  result: UserGetConnectionOutputConnectionInput
+}
+
+type UserGetFilter {
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
 input UserGetFilterInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
@@ -1332,7 +1503,18 @@ input UserGetInput {
 }
 
 type UserGetMany {
-  result: [User]
+  filter: UserGetManyFilter
+}
+
+type UserGetManyFilter {
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
 }
 
 input UserGetManyFilterInput {
@@ -1350,6 +1532,22 @@ input UserGetManyInput {
   filter: UserGetManyFilterInput
 }
 
+type UserGetManyOutput {
+  result: [User]
+}
+
+input UserGetManyOutputInput {
+  result: [UserInput]
+}
+
+type UserGetOutput {
+  result: User
+}
+
+input UserGetOutputInput {
+  result: UserInput
+}
+
 input UserInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
@@ -1362,7 +1560,18 @@ input UserInput {
 }
 
 type UserRemove {
-  result: User
+  filter: UserRemoveFilter
+}
+
+type UserRemoveFilter {
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
 }
 
 input UserRemoveFilterInput {
@@ -1380,8 +1589,28 @@ input UserRemoveInput {
   filter: UserRemoveFilterInput
 }
 
-type UserUpdate {
+type UserRemoveOutput {
   result: User
+}
+
+input UserRemoveOutputInput {
+  result: UserInput
+}
+
+type UserUpdate {
+  filter: UserUpdateFilter
+  update: UserUpdateUpdate
+}
+
+type UserUpdateFilter {
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
 }
 
 input UserUpdateFilterInput {
@@ -1400,6 +1629,25 @@ input UserUpdateInput {
   update: UserUpdateUpdateInput
 }
 
+type UserUpdateOutput {
+  result: User
+}
+
+input UserUpdateOutputInput {
+  result: UserInput
+}
+
+type UserUpdateUpdate {
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
 input UserUpdateUpdateInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
@@ -1412,7 +1660,13 @@ input UserUpdateUpdateInput {
 }
 
 type UserenameUpdateUpdate {
-  result: SignIn
+  filter: UserenameUpdateUpdateFilter
+  update: UserenameUpdateUpdateUpdate
+}
+
+type UserenameUpdateUpdateFilter {
+  otp: String
+  username: String
 }
 
 input UserenameUpdateUpdateFilterInput {
@@ -1423,6 +1677,19 @@ input UserenameUpdateUpdateFilterInput {
 input UserenameUpdateUpdateInput {
   filter: UserenameUpdateUpdateFilterInput
   update: UserenameUpdateUpdateUpdateInput
+}
+
+type UserenameUpdateUpdateOutput {
+  result: SignIn
+}
+
+input UserenameUpdateUpdateOutputInput {
+  result: SignInInput
+}
+
+type UserenameUpdateUpdateUpdate {
+  otp: String
+  username: String
 }
 
 input UserenameUpdateUpdateUpdateInput {

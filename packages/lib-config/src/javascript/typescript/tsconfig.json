@@ -26,6 +26,7 @@
     "types": ["react-native", "jest", "vite/client"]
   },
   "ts-node": {
+    "swc": true,
     "transpileOnly": true,
     "require": ["tsconfig-paths/register"],
     "compilerOptions": {

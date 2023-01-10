@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 import { cleanDocument } from '@lib/backend/database/utils/cleanDocument/cleanDocument';
 import type {
   DatabaseModel,
@@ -5,6 +7,7 @@ import type {
   RepositoryModel,
 } from '@lib/backend/database/utils/Database/Database.models';
 import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
+import { _databaseConfig } from '@lib/config/database/_database.config';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { UninitializedError } from '@lib/shared/core/errors/UninitializedError/UninitializedError';
 import { debug } from '@lib/shared/logging/utils/logger/logger';
@@ -27,19 +30,7 @@ export abstract class _Database implements DatabaseModel {
 
   async initialize(): Promise<void> {
     this._entityManager =
-      this._entityManager ||
-      (
-        await MikroORM.init<MongoDriver>({
-          clientUrl: this._params.host,
-          dbName: this._params.database,
-          ensureIndexes: true,
-          entities: this._params.entities,
-          password: this._params.password || undefined,
-          pool: { max: this._params.pool?.max, min: 0 },
-          type: this._params.type,
-          user: this._params.username || undefined,
-        })
-      ).em;
+      this._entityManager || (await MikroORM.init<MongoDriver>(_databaseConfig(this._params))).em;
   }
 
   _getEntityManager = (): EntityManager => {

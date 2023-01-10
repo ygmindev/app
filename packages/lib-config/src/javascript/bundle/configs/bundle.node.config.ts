@@ -1,3 +1,4 @@
+import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import type { BundleConfigParamsModel } from '@lib/config/javascript/bundle/bundle.models';
 import { bundleConfig as bundleConfigBase } from '@lib/config/javascript/bundle/configs/bundle.base.config';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -15,6 +16,8 @@ export const bundleConfig: BundleConfigParamsModel = merge({
       extensions: permuteString(['.node'], bundleConfigBase.extensions),
 
       platform: PLATFORM.NODE,
+
+      watch: [fromPackages('lib-backend/src/**/*')],
     },
 
     bundleConfigBase,

@@ -15,4 +15,7 @@ export const _graphqlConfig = ({
     emitSchemaFile: schemaPath,
     nullableByDefault: true,
     resolvers: [fromPackages(`*/src/**/*.${resolverExtension}`)],
+    validate: {
+      forbidUnknownValues: false,
+    },
   });

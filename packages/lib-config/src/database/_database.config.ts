@@ -1,4 +1,5 @@
 import type { _DatabaseConfigParamsModel } from '@lib/config/database/_database.models';
+import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import type { Options } from '@mikro-orm/core/utils';
 import type { MongoDriver } from '@mikro-orm/mongodb';
 
@@ -13,6 +14,7 @@ export const _databaseConfig = ({
 }: _DatabaseConfigParamsModel): Options<MongoDriver> => ({
   clientUrl: host,
   dbName: database,
+  debug: process.env.NODE_ENV !== ENVIRONMENT.PRODUCTION,
   ensureIndexes: true,
   entities,
   password: password || undefined,

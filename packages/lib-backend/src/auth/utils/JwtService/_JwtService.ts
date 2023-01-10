@@ -10,7 +10,7 @@ admin.apps.length ||
   admin.initializeApp({
     credential: admin.credential.cert({
       clientEmail: process.env.SERVER_FIREBASE_ADMIN_EMAIL,
-      privateKey: process.env.SERVER_FIREBASE_ADMIN_SECRET.replace(/\\n/g, '\n'),
+      privateKey: process.env.SERVER_FIREBASE_ADMIN_SECRET.replace(/\\n/gm, '\n'),
       projectId: process.env.SERVER_FIREBASE_ADMIN_PROJECT_ID,
     }),
   });

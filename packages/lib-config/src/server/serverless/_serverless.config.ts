@@ -7,7 +7,7 @@ import type { _ServerlessConfigParamsModel } from '@lib/config/server/serverless
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import type { AWS } from '@serverless/typescript';
-import { mapValues, reduce } from 'lodash';
+import { reduce } from 'lodash';
 
 export const _serverlessConfig = ({
   bundle,
@@ -37,7 +37,7 @@ export const _serverlessConfig = ({
           esbuild: {
             ...bundleConfig.optimizeDeps?.esbuildOptions,
             bundle: true,
-            define: mapValues(bundleConfig.define, JSON.stringify),
+            define: bundleConfig.define,
             external: bundle.externals,
             format: 'cjs',
             keepOutputDirectory: true,
@@ -55,6 +55,7 @@ export const _serverlessConfig = ({
             resolveExtensions: bundle.extensions,
             sourcemap: environment === ENVIRONMENT.PRODUCTION ? undefined : 'inline',
             target: 'node18',
+            watch: { pattern: bundle.watch },
           },
         }
       : {}),

@@ -1,5 +1,6 @@
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
+import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import type { BundleConfigParamsModel } from '@lib/config/javascript/bundle/bundle.models';
 import { bundleConfig as bundleConfigBase } from '@lib/config/javascript/bundle/configs/bundle.base.config';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -26,6 +27,8 @@ export const bundleConfig: BundleConfigParamsModel = merge({
         ],
         root: fromModules(),
       }),
+
+      watch: [fromPackages('lib-frontend/src/**/*')],
     },
 
     bundleConfigBase,
