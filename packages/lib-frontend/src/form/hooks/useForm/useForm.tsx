@@ -1,3 +1,4 @@
+import { useErrorBoundary } from '@lib/frontend/core/hooks/useErrorBoundary/useErrorBoundary';
 import type { FormErrorModel, FormValidatorsModel } from '@lib/frontend/form/form.models';
 import { _useForm } from '@lib/frontend/form/hooks/useForm/_useForm';
 import type {
@@ -13,10 +14,12 @@ import { get, isFunction, isPlainObject, reduce, set, unset } from 'lodash';
 
 export const useForm = <TType extends unknown>({
   initialValues,
+  onError,
   onSubmit,
   validators,
 }: UseFormParamsModel<TType>): UseFormModel<TType> => {
   const { t } = useTranslation([CORE]);
+  const { handleError } = useErrorBoundary();
 
   const _validate = <TValue,>(
     data?: TValue,
@@ -42,9 +45,18 @@ export const useForm = <TType extends unknown>({
       {} as FormErrorModel<TType>,
     );
 
+  const _handleSubmit = async (data: TType): Promise<void> => {
+    try {
+      onSubmit && (await onSubmit(data));
+    } catch (e) {
+      console.warn(e);
+      onError ? onError(e as Error) : handleError(e as Error);
+    }
+  };
+
   return _useForm({
     initialValues,
-    onSubmit,
+    onSubmit: _handleSubmit,
     onValidate: async (data) => _validate(data, validators),
   });
 };

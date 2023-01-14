@@ -1,7 +1,7 @@
 import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
 import { TASK_STATUS } from '@lib/config/core/task/task.constants';
 import type { TaskParamsModel } from '@lib/config/core/task/task.models';
-import { bundleConfig } from '@lib/config/javascript/bundle/configs/bundle.base.config';
+import { bundleConfig } from '@lib/config/javascript/bundle/configs/bundle.config.base';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import type { WatchParamsModel } from '@tool/task/core/templates/watch/watch.models';
 import { command } from '@tool/task/core/utils/command/command';

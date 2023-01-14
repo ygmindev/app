@@ -6,8 +6,14 @@ import type { ReactNode } from 'react';
 
 export interface PressablePropsModel
   extends Omit<WrapperPropsModel, 'animation' | 'children'>,
-    ChildrenPropsModel<(params: { isActive?: boolean; isLoading?: boolean }) => ReactNode> {
-  animation?(isActive?: boolean): AnimationModel;
+    ChildrenPropsModel<
+      (params: { isActive?: boolean; isDisabled?: boolean; isLoading?: boolean }) => ReactNode
+    > {
+  animation?(params: {
+    isActive?: boolean;
+    isDisabled?: boolean;
+    isLoading?: boolean;
+  }): AnimationModel;
   confirmMessage?: TranslatableTextModel;
   isDisabled?: boolean;
   isLoading?: boolean;

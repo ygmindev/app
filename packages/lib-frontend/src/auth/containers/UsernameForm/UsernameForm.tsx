@@ -26,10 +26,8 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   ...props
 }) => {
   const { t } = useTranslation([AUTH, USER]);
-
   const { styles } = useStyles({ props });
   const { error } = useNotification();
-
   const { create, createIfNotExists } = useOtpResource();
 
   const _handleSubmit = async (data: UsernameFormModel): Promise<void> => {

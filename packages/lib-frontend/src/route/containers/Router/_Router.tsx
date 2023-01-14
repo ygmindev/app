@@ -11,12 +11,12 @@ export const _Router: FCModel<_RouterPropsModel> = ({ routes }) => {
       <_Routes
         key={location.key}
         location={location}>
-        {routes.map(({ element, isIndex, pathname, routes }) => (
+        {routes.map(({ element, isIndex, pathname }) => (
           <_Route
             element={element}
             index={isIndex}
             key={pathname}
-            path={routes ? `${pathname}/*` : pathname}
+            path={pathname}
           />
         ))}
       </_Routes>

@@ -64,7 +64,11 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
               {...props}
               animation={
                 animation
-                  ? animation(_isActive)
+                  ? animation({
+                      isActive: _isActive,
+                      isDisabled: _isDisabled,
+                      isLoading: _isLoading,
+                    })
                   : {
                       from: { backgroundColor: theme.colors.tone.neutral.main },
                       isActive: _isActive,
@@ -74,7 +78,8 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
               onPress={_handleButtonPress}
               pHorizontal
               round>
-              {children && children({ isActive: _isActive, isLoading: _isLoading })}
+              {children &&
+                children({ isActive: _isActive, isDisabled: _isDisabled, isLoading: _isLoading })}
             </Wrapper>
           );
         }}

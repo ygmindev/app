@@ -1,4 +1,4 @@
-import { default as cleanupBase } from '@lib/config/javascript/test/_cleanup.base.config';
+import { default as cleanupBase } from '@lib/config/javascript/test/_cleanup.config.base';
 import { cleanup } from '@lib/frontend/setup/utils/cleanup/cleanup';
 
 const _cleanup = async (): Promise<void> => {

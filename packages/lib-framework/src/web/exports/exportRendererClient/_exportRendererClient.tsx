@@ -3,20 +3,20 @@ import type {
   _ExportRendererClientParamsModel,
 } from '@lib/framework/web/exports/exportRendererClient/_exportRendererClient.models';
 import type { FCModel } from '@lib/frontend/core/core.models';
-import { hydrateRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import { AppRegistry } from 'react-native-web';
 
 export const _exportRendererClient = ({
   render,
   rootId,
 }: _ExportRendererClientParamsModel): _ExportRendererClientModel => ({
-  render: async ({ Page, pageProps, ...args }) => {
+  render: async ({ Page, isHydration, locale, pageProps }) => {
     const root = document.getElementById(rootId);
 
-    const App: FCModel = () => render({ children: <Page {...pageProps} /> });
+    const App: FCModel = () => render({ children: <Page {...pageProps} />, locale });
     AppRegistry.registerComponent('App', () => App);
     const { element } = AppRegistry.getApplication('App', {});
 
-    root && hydrateRoot(root, element);
+    root && (isHydration ? hydrateRoot(root, element) : createRoot(root).render(element));
   },
 });

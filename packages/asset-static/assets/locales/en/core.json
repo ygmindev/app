@@ -21,5 +21,7 @@
     "validateNotEmpty": "TRANSLATION_MISSING",
     "validateRange": "TRANSLATION_MISSING",
     "validateZipCode": "TRANSLATION_MISSING"
-  }
+  },
+  "Submit": "Submit",
+  "Email address": "Email address"
 }

@@ -77,9 +77,11 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
           </Appearable>
         </Wrapper>
 
-        <Slides current={current}>
-          {steps.map(({ element, id }) =>
-            cloneElement(element, {
+        <Slides
+          current={current}
+          slides={steps.map(({ element, id }) => ({
+            element: cloneElement(element, {
+              data,
               key: id,
               onBack: () => {
                 element.props.onBack && element.props.onBack();
@@ -99,8 +101,9 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
                 }
               },
             }),
-          )}
-        </Slides>
+            id,
+          }))}
+        />
       </Wrapper>
     </>
   );

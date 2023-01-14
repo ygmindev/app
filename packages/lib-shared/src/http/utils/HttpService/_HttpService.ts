@@ -1,6 +1,6 @@
 import type {
+  _HttpRequestParamsModel,
   _HttpServiceModel,
-  _RequestParamsModel,
 } from '@lib/shared/http/utils/HttpService/_HttpService.models';
 import { HTTP_METHOD } from '@lib/shared/http/utils/HttpService/HttpService.constants';
 import type {
@@ -42,7 +42,7 @@ export class _HttpService implements _HttpServiceModel {
 
   _request = async <TParams, TResult>(
     method: HttpMethodModel,
-    { params, path, request }: _RequestParamsModel<TParams>,
+    { params, path, request }: _HttpRequestParamsModel<TParams>,
   ): Promise<TResult | null> => {
     try {
       const response = await this._instance.request({
@@ -62,7 +62,7 @@ export class _HttpService implements _HttpServiceModel {
     params,
     path,
     request,
-  }: _RequestParamsModel<TParams>): Promise<TResult | null> =>
+  }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
     this._request<TParams, TResult>(HTTP_METHOD.GET, {
       path: uri<TParams>({ host: path, params }),
       request,
@@ -72,7 +72,7 @@ export class _HttpService implements _HttpServiceModel {
     params,
     path,
     request,
-  }: _RequestParamsModel<TParams>): Promise<TResult | null> =>
+  }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
     this._request<TParams, TResult>(HTTP_METHOD.DELETE, {
       path: uri<TParams>({ host: path, params }),
       request,
@@ -82,13 +82,13 @@ export class _HttpService implements _HttpServiceModel {
     params,
     path,
     request,
-  }: _RequestParamsModel<TParams>): Promise<TResult | null> =>
+  }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
     this._request<TParams, TResult>(HTTP_METHOD.POST, { params, path, request });
 
   put = async <TParams, TResult>({
     params,
     path,
     request,
-  }: _RequestParamsModel<TParams>): Promise<TResult | null> =>
+  }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
     this._request<TParams, TResult>(HTTP_METHOD.PUT, { params, path, request });
 }

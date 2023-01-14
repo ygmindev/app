@@ -1,4 +1,4 @@
-import '@lib/config/javascript/test/_initialize.base.config';
+import '@lib/config/javascript/test/_initialize.config.base';
 
 window.open = jest.fn();
 window.addEventListener = jest.fn();

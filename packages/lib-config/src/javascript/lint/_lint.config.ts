@@ -52,20 +52,6 @@ export const _lintConfig = ({
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     'import/no-extraneous-dependencies': ['error', { packageDir: roots }],
-    // 'import/no-unused-modules': isNoUnused
-    //   ? [
-    //       'warn',
-    //       {
-    //         ignoreExports: fromGlobs({
-    //           globs: ['**/*.backend.ts', '**/*.frontend.ts', '**/*.native.ts', '**/*.web.ts'],
-    //           isAbsolute: true,
-    //           root: fromPackages(),
-    //         }),
-    //         src: packages.map((pkg) => fromPackages(pkg, 'src')),
-    //         unusedExports: true,
-    //       },
-    //     ]
-    //   : 'off',
     'no-unused-vars': 'off',
     'prefer-destructuring': 'error',
     'prettier/prettier': [

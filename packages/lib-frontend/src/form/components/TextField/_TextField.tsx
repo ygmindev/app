@@ -9,6 +9,7 @@ import type { TextFieldKeyboardModel } from '@lib/frontend/form/components/TextF
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { palette } from '@lib/frontend/style/utils/palette/palette';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { isNil } from 'lodash';
@@ -104,7 +105,7 @@ export const _TextField: SFCModel<_TextFieldPropsModel> = ({
   const _isActive = isFocused || isActive;
 
   const _backgroundColor = isDisabled
-    ? theme.colors.tone.neutral.muted
+    ? palette({ color: theme.colors.tone.neutral.main, lightness: theme.colors.activeLightness })
     : theme.colors.tone.neutral.main;
 
   const _activeColor = _isError

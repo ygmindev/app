@@ -77,11 +77,10 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
           right={-(theme.shape.height.m + theme.shape.spacing.s)}>
           {isTranslatableText(error) && <Tooltip color={THEME_COLOR.ERROR}>{error}</Tooltip>}
 
-          {fieldValue && !isDisabled && (
+          {!isDisabled && (
             <Appearable
               isActive={fieldValue.length > 0}
-              isCenter
-              isLazy>
+              isCenter>
               <Button
                 icon="times"
                 onPress={() => setFieldValue('')}

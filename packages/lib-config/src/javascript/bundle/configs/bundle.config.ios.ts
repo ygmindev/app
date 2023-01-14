@@ -1,6 +1,6 @@
 import type { BundleConfigParamsModel } from '@lib/config/javascript/bundle/bundle.models';
-import { bundleConfig as bundleConfigBase } from '@lib/config/javascript/bundle/configs/bundle.base.config';
-import { bundleConfig as bundleConfigFrontend } from '@lib/config/javascript/bundle/configs/bundle.frontend.config';
+import { bundleConfig as bundleConfigBase } from '@lib/config/javascript/bundle/configs/bundle.config.base';
+import { bundleConfig as bundleConfigFrontend } from '@lib/config/javascript/bundle/configs/bundle.config.frontend';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
@@ -11,9 +11,9 @@ export const bundleConfig: BundleConfigParamsModel = merge({
 
   values: [
     {
-      extensions: permuteString(['.android', '.native'], bundleConfigBase.extensions),
+      extensions: permuteString(['.ios', '.native'], bundleConfigBase.extensions),
 
-      platform: PLATFORM.ANDROID,
+      platform: PLATFORM.IOS,
     },
 
     bundleConfigFrontend,

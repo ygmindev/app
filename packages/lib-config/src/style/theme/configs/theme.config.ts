@@ -39,9 +39,9 @@ export const themeConfig: ThemeConfigParamsModel = {
           mutedContrast: { lightness: 90 },
         },
         [THEME_COLOR.NEUTRAL]: {
-          main: { lightness: 100 },
+          main: { lightness: 10 },
           mainContrast: { lightness: 90 },
-          muted: { lightness: 30 },
+          muted: { lightness: 10 },
           mutedContrast: { lightness: 90 },
         },
         [THEME_COLOR.WARNING]: {
@@ -136,7 +136,7 @@ export const themeConfig: ThemeConfigParamsModel = {
   },
 
   shape: {
-    borderRadius: 18,
+    borderRadius: 20,
 
     height: {
       l: 52,

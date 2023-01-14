@@ -4,7 +4,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { MeasureModel, SFCModel } from '@lib/frontend/core/core.models';
 import type { RoutePropsModel } from '@lib/frontend/route/components/Route/Route.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { useState } from 'react';
+import { cloneElement, Fragment, useState } from 'react';
 
 export const Route: SFCModel<RoutePropsModel> = ({ children, route, ...props }) => {
   const { styles } = useStyles({ props });
@@ -16,14 +16,20 @@ export const Route: SFCModel<RoutePropsModel> = ({ children, route, ...props }) 
   });
   return (
     <Wrapper
-      animation={animation}
+      animation={route.transition && animation}
       isAbsoluteFill
       isFullWidth
       onMeasure={setMeasure}
       style={styles}>
-      {route.element}
+      {cloneElement(
+        route.layout || <Fragment />,
+        {},
+        <>
+          {route.element}
 
-      {children}
+          {children}
+        </>,
+      )}
     </Wrapper>
   );
 };

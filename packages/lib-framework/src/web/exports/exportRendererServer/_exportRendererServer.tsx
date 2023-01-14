@@ -1,4 +1,5 @@
 import { sheetConfig } from '@lib/config/style/sheet/sheet.config';
+import { getLocaleStoreFromI18n } from '@lib/framework/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
 import type {
   _ExportRendererServerModel,
   _ExportRendererServerParamsModel,
@@ -13,27 +14,33 @@ export const _exportRendererServer = ({
   render,
   rootId,
 }: _ExportRendererServerParamsModel): _ExportRendererServerModel => ({
-  passToClient: ['pageProps'],
+  onBeforeRender: async () => {
+    return {
+      pageContext: {},
+    };
+  },
 
-  render: async ({ Page, pageProps, urlPathname, ...ctx }) => {
+  passToClient: ['initialState', 'locale', 'pageProps'],
+
+  render: async ({ Page, locale, pageProps, urlPathname }) => {
     const App: FCModel = () =>
       render({
         children: <Page {...pageProps} />,
+        locale,
         location: urlPathname ? { pathname: urlPathname } : undefined,
       });
 
     AppRegistry.registerComponent('App', () => App);
     const { element, getStyleElement } = AppRegistry.getApplication('App', {});
     const styleSheet = renderToStaticMarkup(getStyleElement());
-
     const { pipe } = renderToPipeableStream(element);
     stampPipe(pipe, 'node-stream');
-    const html = pipe;
 
+    // TODO: fill in description and title
     const documentHtml = escapeInject`
       <!DOCTYPE html>
-      <html lang="${'en'}">
-      <head>
+      <html>
+        <head>
           <script>const global = globalThis;</script>
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width" />
@@ -41,16 +48,20 @@ export const _exportRendererServer = ({
           <link rel="icon" type="image/svg+xml" href="${favicoPath}" />
           <title>${''}</title>
           <style>${dangerouslySkipEscape(sheetConfig)} ${dangerouslySkipEscape(styleSheet)}</style>
-      </head>
-      <body><div id="${rootId}">${html}</div></body>
-      </html>      
+        </head>
+        <body><div id="${rootId}">${pipe}</div></body>
+      </html>
     `;
 
     return {
       documentHtml,
-      pageContext: {
-        // redirectTo: '',
-      },
+      pageContext: async () => ({
+        locale: {
+          lang: locale?.lang,
+          store: locale?.i18n && getLocaleStoreFromI18n({ i18n: locale?.i18n }),
+        },
+      }),
+      // redirectTo: '',
     };
   },
 });

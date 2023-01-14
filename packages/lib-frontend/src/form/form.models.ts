@@ -20,6 +20,7 @@ export type FormValidatorsModel<TType> = {
 export interface SubmittablePropsModel<TType = void, TResult = void> {
   isLoading?: boolean;
   onCancel?: CallableModel;
+  onError?(error: Error): void;
   onSubmit?(data: TType): Promise<TResult>;
   onSuccess?(data: TType, result: TResult): Promise<void>;
 }

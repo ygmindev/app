@@ -1,6 +1,6 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import type { BundleConfigParamsModel } from '@lib/config/javascript/bundle/bundle.models';
-import { bundleConfig as bundleConfigBase } from '@lib/config/javascript/bundle/configs/bundle.base.config';
+import { bundleConfig as bundleConfigBase } from '@lib/config/javascript/bundle/configs/bundle.config.base';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';

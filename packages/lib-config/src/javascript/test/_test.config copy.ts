@@ -69,16 +69,24 @@ export const _testConfig = ({
 
   setupFilesAfterEnv: [fromConfig(`javascript/test/_initialize.config.${bundle.platform}.ts`)],
 
-  testEnvironment: bundle.platform === PLATFORM.WEB ? 'jsdom' : 'node',
+  // ----
+  test: {
+    include: reduce(
+      testExtensions,
+      (result, ext) => {
+        const _ext = trim(ext, '.');
+        return [
+          ...result,
+          `<rootDir>/src/**/${match}.${_ext}`,
+          `<rootDir>/src/**/_${match}.${_ext}`,
+        ];
+      },
+      [] as Array<string>,
+    ),
+  },
+  // ----
 
-  testMatch: reduce(
-    testExtensions,
-    (result, ext) => {
-      const _ext = trim(ext, '.');
-      return [...result, `<rootDir>/src/**/${match}.${_ext}`, `<rootDir>/src/**/_${match}.${_ext}`];
-    },
-    [] as Array<string>,
-  ),
+  testEnvironment: bundle.platform === PLATFORM.WEB ? 'jsdom' : 'node',
 
   testTimeout: timeout,
 

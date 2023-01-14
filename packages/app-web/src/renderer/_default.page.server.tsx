@@ -1,5 +1,5 @@
 import { exportRendererServer } from '@lib/framework/web/exports/exportRendererServer/exportRendererServer';
 
-const { passToClient, render } = exportRendererServer();
+const { onBeforeRender, passToClient, render } = exportRendererServer();
 
-export { passToClient, render };
+export { onBeforeRender, passToClient, render };

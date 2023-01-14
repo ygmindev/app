@@ -1,5 +1,5 @@
-import { bundleConfig } from '@lib/config/javascript/bundle/configs/bundle.web.config';
-import { testConfig as testConfigFrontend } from '@lib/config/javascript/test/configs/test.frontend.config';
+import { bundleConfig } from '@lib/config/javascript/bundle/configs/bundle.config.frontend';
+import { testConfig as testConfigBase } from '@lib/config/javascript/test/configs/test.config.base';
 import type { TestConfigParamsModel } from '@lib/config/javascript/test/test.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
@@ -10,10 +10,10 @@ export const testConfig: TestConfigParamsModel = merge({
   values: [
     {
       bundle: merge({
-        values: [{}, bundleConfig],
+        values: [{ aliases: { '\\.(css|sass)$': 'identity-obj-proxy' } }, bundleConfig],
       }),
     },
 
-    testConfigFrontend,
+    testConfigBase,
   ],
 });

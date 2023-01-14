@@ -6,10 +6,9 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { MeasureModel, SFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { uid } from '@lib/shared/core/utils/uid/uid';
-import { Children, useMemo, useState } from 'react';
+import { useState } from 'react';
 
-export const Slides: SFCModel<SlidesPropsModel> = ({ children, current, testID, ...props }) => {
+export const Slides: SFCModel<SlidesPropsModel> = ({ current, slides, testID, ...props }) => {
   const { styles } = useStyles({ props });
   const [measure, setMeasure] = useState<MeasureModel>();
   const { animation } = useAnimation({
@@ -17,10 +16,6 @@ export const Slides: SFCModel<SlidesPropsModel> = ({ children, current, testID, 
     measure,
     types: [ANIMATION_TYPE.VISIBLE, ANIMATION_TYPE.SLIDE],
   });
-  const _children = useMemo(
-    () => Children.toArray(children).map((child) => ({ element: child, key: uid() })),
-    [children],
-  );
   return (
     <Wrapper
       grow
@@ -29,18 +24,19 @@ export const Slides: SFCModel<SlidesPropsModel> = ({ children, current, testID, 
       style={styles}
       testID={testID}>
       <Exitable>
-        {_children.map(
-          ({ element, key }, i) =>
-            i === current && (
-              <Wrapper
-                animation={animation}
-                isAbsoluteFill
-                isFullWidth
-                key={key}>
-                {element}
-              </Wrapper>
-            ),
-        )}
+        {slides &&
+          slides.map(
+            ({ element, id }, i) =>
+              i === current && (
+                <Wrapper
+                  animation={animation}
+                  isAbsoluteFill
+                  isFullWidth
+                  key={id}>
+                  {element}
+                </Wrapper>
+              ),
+          )}
       </Exitable>
     </Wrapper>
   );

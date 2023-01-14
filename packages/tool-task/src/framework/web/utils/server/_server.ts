@@ -1,17 +1,28 @@
+import compress from '@fastify/compress';
+import middie from '@fastify/middie';
+import { _internationalizeConfig } from '@lib/config/locale/internationalize/_internationalize.config.node';
+import { internationalizeConfig } from '@lib/config/locale/internationalize/configs/internationalize.config';
 import type {
   _ServerModel,
   _ServerParamsModel,
 } from '@tool/task/framework/web/utils/server/_server.models';
-import express from 'express';
+import type { FastifyPluginCallback, FastifyRegisterOptions } from 'fastify';
+import { fastify } from 'fastify';
+import i18nextMiddleware from 'i18next-http-middleware';
+import { toNumber } from 'lodash';
 import { createServer } from 'vite';
 import { renderPage } from 'vite-plugin-ssr';
+
+const _i18n = _internationalizeConfig(internationalizeConfig);
 
 export const _server = async ({
   configFile,
   port,
   root,
 }: _ServerParamsModel): Promise<_ServerModel> => {
-  const app = express();
+  const app = fastify();
+  await app.register(middie);
+  await app.register(compress);
 
   const { middlewares } = await createServer({
     configFile,
@@ -21,21 +32,27 @@ export const _server = async ({
 
   app.use(middlewares);
 
-  app.get('*', async (req, res, next) => {
-    const pageContext = await renderPage({ urlOriginal: req.originalUrl });
+  app.register(
+    i18nextMiddleware.plugin as unknown as FastifyPluginCallback,
+    { i18next: _i18n } as FastifyRegisterOptions<Record<never, never>>,
+  );
+
+  app.get('*', async (req, res) => {
+    const pageContext = await renderPage({
+      locale: { i18n: req.i18n, lang: req.language },
+      urlOriginal: req.url,
+    });
     const { errorWhileRendering, httpResponse } = pageContext;
 
     if (httpResponse) {
-      const { contentType, earlyHints, pipe, statusCode } = httpResponse;
-      res.writeEarlyHints && res.writeEarlyHints({ link: earlyHints.map((e) => e.earlyHintLink) });
+      const { contentType, pipe, statusCode } = httpResponse;
       res.status(statusCode).type(contentType);
-      pipe(res);
+      pipe(res.raw);
     } else if (errorWhileRendering) {
       // TODO: better error handling
       res.status(500).send(errorWhileRendering);
     }
-    return next();
   });
 
-  app.listen(port);
+  app.listen({ port: toNumber(port) });
 };

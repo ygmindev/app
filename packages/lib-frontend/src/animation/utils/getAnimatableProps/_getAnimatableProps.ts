@@ -14,6 +14,10 @@ export const _getAnimatableProps = <TStyle extends StyleModel = ViewStyleModel>(
     from,
     loop: isInfinite,
     onDidAnimate: onEnd,
-    transition: { delay, duration: duration || theme.animation.duration, type: 'timing' },
+    transition: {
+      delay,
+      duration: duration || theme.animation.duration,
+      type: 'timing',
+    },
   } as _GetAnimatablePropsModel;
 };

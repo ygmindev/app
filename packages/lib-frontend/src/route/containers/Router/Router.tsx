@@ -14,7 +14,7 @@ const _getRoute = (routes?: Array<RouteModel>): Array<RouteModel> =>
   reduce(
     routes,
     (result, { pathname, ...route }) => {
-      const _pathname = trimPathname(pathname);
+      const _pathname = trimPathname(route.routes ? `${pathname}/*` : pathname);
       const _route: RouteModel = { ...route, pathname: _pathname };
       return [
         ...result,
@@ -22,7 +22,7 @@ const _getRoute = (routes?: Array<RouteModel>): Array<RouteModel> =>
           ..._route,
           element: (
             <Route route={_route}>
-              {_route.routes && <_Router routes={_getRoute(route.routes)} />}
+              {_route.routes && <Router routes={_getRoute(route.routes)} />}
             </Route>
           ),
         },

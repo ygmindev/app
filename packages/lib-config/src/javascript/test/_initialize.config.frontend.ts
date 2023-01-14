@@ -1,4 +1,4 @@
-import '@lib/config/javascript/test/_initialize.base.config';
+import '@lib/config/javascript/test/_initialize.config.base';
 
 import { initialize } from '@lib/frontend/setup/utils/initialize/initialize';
 import type { CallableModel } from '@lib/shared/core/core.models';

@@ -1,6 +1,6 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { bundleConfig } from '@lib/config/javascript/bundle/configs/bundle.base.config';
+import { bundleConfig } from '@lib/config/javascript/bundle/configs/bundle.config.base';
 import type { TestConfigParamsModel } from '@lib/config/javascript/test/test.models';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 
@@ -17,7 +17,7 @@ export const testConfig: TestConfigParamsModel = {
 
   match: process.env.TEST_MATCH || '*',
 
-  mockPath: fromConfig('node/test/configs/__mocks__'),
+  mockPath: fromConfig('javascript/test/configs/__mocks__'),
 
   root: fromWorking(),
 
