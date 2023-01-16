@@ -14,7 +14,7 @@ describe(displayName, () => {
   });
 
   test('press', async () => {
-    const handlePress = jest.fn();
+    const handlePress = vi.fn();
     const { queryByTestId } = render(<Component onPress={handlePress} />);
     press(queryByTestId(testID));
     await waitForExpect(() => expect(handlePress).toHaveBeenCalled());

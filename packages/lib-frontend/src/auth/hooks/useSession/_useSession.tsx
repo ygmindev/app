@@ -1,4 +1,7 @@
-import type { _UseSessionModel } from '@lib/frontend/auth/hooks/useSession/_useSession.models';
+import type {
+  _UseSessionModel,
+  _UseSessionParamsModel,
+} from '@lib/frontend/auth/hooks/useSession/_useSession.models';
 import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
 import type { SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
@@ -15,7 +18,7 @@ import {
 
 let _auth: Auth;
 
-export const _useSession = (): _UseSessionModel => ({
+export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionModel => ({
   getToken: async (): Promise<string | null> => {
     const currentUser = _auth && _auth.currentUser;
     return currentUser ? currentUser.getIdToken() : null;
@@ -48,11 +51,11 @@ export const _useSession = (): _UseSessionModel => ({
               const { claims } = await user.getIdTokenResult();
               onAuth({ _id: user.uid, claims } as SignInTokenModel);
             } catch (e) {
-              if ((e as AuthError).code === 'auth/network-request-failed') {
-                throw new HttpError(HTTP_STATUS_CODE.SERVICE_UNAVAILABLE, 'Network Error');
-              } else {
-                throw e;
-              }
+              const _error =
+                (e as AuthError).code === 'auth/network-request-failed'
+                  ? new HttpError(HTTP_STATUS_CODE.SERVICE_UNAVAILABLE, 'Network Error')
+                  : e;
+              onError && onError(_error as Error);
             }
           } else {
             onAuth(null);

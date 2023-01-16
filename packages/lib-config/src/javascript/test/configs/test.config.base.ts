@@ -9,7 +9,7 @@ export const testConfig: TestConfigParamsModel = {
 
   cachePath: fromWorking('.cache/test'),
 
-  configFile: 'test.config.ts',
+  configFile: 'test.config.js',
 
   coverageOutputPath: fromWorking('coverage'),
 

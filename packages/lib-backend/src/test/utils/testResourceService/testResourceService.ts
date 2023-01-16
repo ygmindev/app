@@ -17,33 +17,32 @@ export const testResourceService = async ({
   service,
 }: TestResourceServiceParamsModel): Promise<void> => {
   const afterCreate =
-    service.decorators?.afterCreate && jest.spyOn(service.decorators, 'afterCreate');
-  const afterGet = service.decorators?.afterGet && jest.spyOn(service.decorators, 'afterGet');
+    service.decorators?.afterCreate && vi.spyOn(service.decorators, 'afterCreate');
+  const afterGet = service.decorators?.afterGet && vi.spyOn(service.decorators, 'afterGet');
   const afterGetConnection =
-    service.decorators?.afterGetConnection && jest.spyOn(service.decorators, 'afterGetConnection');
+    service.decorators?.afterGetConnection && vi.spyOn(service.decorators, 'afterGetConnection');
   const afterGetMany =
-    service.decorators?.afterGetMany && jest.spyOn(service.decorators, 'afterGetMany');
+    service.decorators?.afterGetMany && vi.spyOn(service.decorators, 'afterGetMany');
   const afterRemove =
-    service.decorators?.afterRemove && jest.spyOn(service.decorators, 'afterRemove');
+    service.decorators?.afterRemove && vi.spyOn(service.decorators, 'afterRemove');
   const afterUpdate =
-    service.decorators?.afterUpdate && jest.spyOn(service.decorators, 'afterUpdate');
+    service.decorators?.afterUpdate && vi.spyOn(service.decorators, 'afterUpdate');
   const beforeCreate =
-    service.decorators?.beforeCreate && jest.spyOn(service.decorators, 'beforeCreate');
-  const beforeGet = service.decorators?.beforeGet && jest.spyOn(service.decorators, 'beforeGet');
+    service.decorators?.beforeCreate && vi.spyOn(service.decorators, 'beforeCreate');
+  const beforeGet = service.decorators?.beforeGet && vi.spyOn(service.decorators, 'beforeGet');
   const beforeGetConnection =
-    service.decorators?.beforeGetConnection &&
-    jest.spyOn(service.decorators, 'beforeGetConnection');
+    service.decorators?.beforeGetConnection && vi.spyOn(service.decorators, 'beforeGetConnection');
   const beforeGetMany =
-    service.decorators?.beforeGetMany && jest.spyOn(service.decorators, 'beforeGetMany');
+    service.decorators?.beforeGetMany && vi.spyOn(service.decorators, 'beforeGetMany');
   const beforeRemove =
-    service.decorators?.beforeRemove && jest.spyOn(service.decorators, 'beforeRemove');
+    service.decorators?.beforeRemove && vi.spyOn(service.decorators, 'beforeRemove');
   const beforeUpdate =
-    service.decorators?.beforeUpdate && jest.spyOn(service.decorators, 'beforeUpdate');
+    service.decorators?.beforeUpdate && vi.spyOn(service.decorators, 'beforeUpdate');
 
   beforeEach(async () => {
     await seed({ names: [DUMMY_ENTITY_RESOURCE_RESOURCE_NAME] });
     before && (await before());
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   test('works with create', async () => {

@@ -3,13 +3,13 @@ import { FS_FIXTURE } from '@lib/config/javascript/test/configs/__mocks__/fs/fs.
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { keys } from 'lodash';
 
-jest.mock('fs');
+vi.mock('fs');
 
 const { displayName } = withTest({ target: () => children });
 
 describe(displayName, () => {
   afterAll(async () => {
-    jest.resetAllMocks();
+    vi.clearAllMocks();
   });
 
   test('works', async () => {

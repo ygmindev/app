@@ -4,20 +4,20 @@ import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 const { displayName } = withTest({ target: () => debounce });
 
 describe(displayName, () => {
-  jest.useFakeTimers();
+  vi.useFakeTimers();
 
-  const fn = jest.fn();
+  const fn = vi.fn();
   const TIMES = 10;
 
   afterEach(async () => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   test('works with no duration', async () => {
     const DURATION = 0;
     const debounced = debounce({ callback: fn, duration: DURATION });
     Array.from(Array(TIMES)).forEach(() => debounced());
-    jest.advanceTimersByTime(DURATION);
+    vi.advanceTimersByTime(DURATION);
     expect(fn).toBeCalledTimes(1);
   });
 
@@ -25,7 +25,7 @@ describe(displayName, () => {
     const DURATION = 1000;
     const debounced = debounce({ callback: fn, duration: DURATION });
     Array.from(Array(TIMES)).forEach(() => debounced());
-    jest.advanceTimersByTime(DURATION);
+    vi.advanceTimersByTime(DURATION);
     expect(fn).toBeCalledTimes(1);
   });
 });

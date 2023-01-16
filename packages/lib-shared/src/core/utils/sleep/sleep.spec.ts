@@ -4,8 +4,8 @@ import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 const { displayName } = withTest({ target: () => sleep });
 
 describe(displayName, () => {
-  jest.useFakeTimers();
-  jest.spyOn(global, 'setTimeout');
+  vi.useFakeTimers();
+  vi.spyOn(global, 'setTimeout');
   const SLEEP_DURATION_MILLISECONDS = 5000;
 
   test('works', async () => {

@@ -1,4 +1,5 @@
 import type { _UseSessionModel } from '@lib/frontend/auth/hooks/useSession/_useSession.models';
+import type { _UseSearchParamsModel } from '@lib/frontend/core/hooks/useSearch/_useSearch.models';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 import type { FirebaseAuthTypes } from '@react-native-firebase/auth';
@@ -7,7 +8,7 @@ import type { AuthError } from 'firebase/auth';
 
 let _auth: FirebaseAuthTypes.Module;
 
-export const _useSession = (): _UseSessionModel => ({
+export const _useSession = ({ onError }: _UseSearchParamsModel): _UseSessionModel => ({
   getToken: async (): Promise<string | null> => {
     const { currentUser } = _auth;
     return currentUser && currentUser.getIdToken(true);
@@ -24,11 +25,11 @@ export const _useSession = (): _UseSessionModel => ({
             const { claims } = await user.getIdTokenResult();
             onAuth({ _id: user.uid, claims });
           } catch (e) {
-            if ((e as AuthError).code === 'auth/network-request-failed') {
-              throw new HttpError(HTTP_STATUS_CODE.SERVICE_UNAVAILABLE, 'Network Error');
-            } else {
-              throw e;
-            }
+            const _error =
+              (e as AuthError).code === 'auth/network-request-failed'
+                ? new HttpError(HTTP_STATUS_CODE.SERVICE_UNAVAILABLE, 'Network Error')
+                : e;
+            onError && onError(_error as Error);
           }
         } else {
           onAuth(null);

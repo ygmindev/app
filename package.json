@@ -180,6 +180,7 @@
     "@typescript-eslint/parser": "^5.48.0",
     "@vanilla-extract/jest-transform": "^1.0.1",
     "@vanilla-extract/vite-plugin": "^3.7.0",
+    "@vitest/coverage-istanbul": "^0.27.1",
     "apollo-server": "^3.10.3",
     "babel-jest": "^29.3.1",
     "babel-loader": "^9.1.2",
@@ -245,7 +246,8 @@
     "typescript": "latest",
     "vite": "^4.0.4",
     "vite-plugin-checker": "^0.5.3",
-    "vite-tsconfig-paths": "^4.0.3"
+    "vite-tsconfig-paths": "^4.0.3",
+    "vitest": "^0.27.1"
   },
   "bin": {
     "run": "./packages/tool-task/src/index.js"

@@ -31,8 +31,8 @@ describe(displayName, () => {
   });
 
   test('activate controlled', async () => {
-    const handleActive = jest.fn();
-    const handleInactive = jest.fn();
+    const handleActive = vi.fn();
+    const handleInactive = vi.fn();
     const { queryByTestId, queryByText } = render(
       <Component
         onActive={handleActive}

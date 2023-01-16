@@ -6,7 +6,7 @@ import type { CallableModel } from '@lib/shared/core/core.models';
 // global.__reanimatedWorkletInit = (worklet) => {
 //   worklet.__worklet = true;
 // };
-// jest.mock('react-native-reanimated', () => jest.requireActual('react-native-reanimated/mock'));
+// vi.mock('react-native-reanimated', () => jest.requireActual('react-native-reanimated/mock'));
 
 global.requestAnimationFrame = (cb: CallableModel) => {
   cb();
