@@ -24,13 +24,5 @@
     "strict": true,
     "target": "esnext",
     "types": ["react-native", "vite/client", "vitest/globals"]
-  },
-  "ts-node": {
-    "swc": true,
-    "transpileOnly": true,
-    "require": ["tsconfig-paths/register"],
-    "compilerOptions": {
-      "module": "commonjs"
-    }
   }
 }

@@ -11,6 +11,6 @@ describe(displayName, () => {
 
   test('works if false', async () => {
     const result = isPromise((() => null)());
-    expect(result).toStrictEqual(true);
+    expect(result).toStrictEqual(false);
   });
 });

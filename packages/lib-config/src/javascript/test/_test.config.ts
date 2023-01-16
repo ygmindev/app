@@ -31,22 +31,19 @@ export const _testConfig = ({
           },
 
           coverage: {
+            all: true,
+
+            allowExternal: true,
+
             enabled: true,
 
-            include: reduce(
-              bundle.extensions,
-              (result, ext) => {
-                const _ext = trim(ext, '.');
-                return [
-                  ...result,
-                  fromWorking(`src/**/${match}.${_ext}`),
-                  fromWorking(`src/**/${match}.${_ext}`),
-                ];
-              },
-              [] as Array<string>,
-            ),
+            extension: bundle.extensions,
+
+            include: [`src/**/${match}`, `src/**/_${match}`],
 
             provider: 'istanbul',
+
+            reporter: ['text', 'html'],
 
             reportsDirectory: coverageOutputPath,
           },
@@ -66,7 +63,7 @@ export const _testConfig = ({
               return [
                 ...result,
                 fromWorking(`src/**/${match}.${_ext}`),
-                fromWorking(`src/**/${match}.${_ext}`),
+                fromWorking(`src/**/_${match}.${_ext}`),
               ];
             },
             [] as Array<string>,
@@ -75,8 +72,6 @@ export const _testConfig = ({
           outputFile: coverageOutputPath,
 
           passWithNoTests: true,
-
-          // reporters: ['html'],
 
           root,
 

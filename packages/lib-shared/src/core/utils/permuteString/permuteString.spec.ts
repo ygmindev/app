@@ -5,7 +5,7 @@ const { displayName } = withTest({ target: () => permuteString });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await permuteString({});
-    expect(result).toStrictEqual({});
+    const result = permuteString(['a', 'b'], ['1', '2']);
+    expect(result).toStrictEqual(['a1', 'a2', 'b1', 'b2']);
   });
 });
