@@ -6,7 +6,8 @@ import type { TestIdPropsModel } from '@lib/frontend/test/test.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
 import type { ComponentType, FC as _FC, ReactNode, RefObject } from 'react';
 
-export interface FCModel<TProps = object> extends _FC<TProps & TestIdPropsModel> {}
+export interface FCModel<TProps = object>
+  extends _FC<TProps & TestIdPropsModel & { nativeID?: string }> {}
 
 export interface SFCModel<TProps = object, TStyle extends StyleModel = ViewStyleModel>
   extends FCModel<TProps & StylePropsModel<TStyle>> {}

@@ -21,3 +21,13 @@ export interface RouteModel {
   title?: TranslatableTextModel;
   transition?: RouteTransitionModel;
 }
+
+export interface RouteContextModel {
+  redirect?: string;
+  status?: number;
+}
+
+export interface RouteParamsModel {
+  context?: RouteContextModel;
+  location?: LocationModel;
+}

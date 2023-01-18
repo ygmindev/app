@@ -7,9 +7,20 @@ import type { StyleModel, ViewStyleModel } from '@lib/frontend/style/style.model
 export const _getAnimatableProps = <TStyle extends StyleModel = ViewStyleModel>(
   ...[animation, theme]: _GetAnimatablePropsParamsModel<TStyle>
 ): _GetAnimatablePropsModel => {
-  const { delay, duration, exit, from, isActive, isInfinite, onEnd, to } = animation;
+  const {
+    delay,
+    duration,
+    exit,
+    from,
+    isActive,
+    isInfinite,
+    isInitial = true,
+    onEnd,
+    to,
+  } = animation;
   return {
     animate: isActive ? to : from,
+    animateInitialState: isInitial,
     exit: exit || from,
     from,
     loop: isInfinite,

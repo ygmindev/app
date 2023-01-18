@@ -8,6 +8,7 @@ export interface AnimationModel<TStyle extends StyleModel = ViewStyleModel> {
   from?: TStyle;
   isActive?: boolean;
   isInfinite?: boolean;
+  isInitial?: boolean;
   onEnd?: CallableModel;
   to?: TStyle;
 }

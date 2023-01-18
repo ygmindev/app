@@ -5,13 +5,10 @@ import type { StyleModel, ViewStyleModel } from '@lib/frontend/style/style.model
 
 export type AnimationTypeModel = `${ANIMATION_TYPE}`;
 
-export interface UseAnimationParamsModel<TStyle extends StyleModel = ViewStyleModel> {
-  duration?: number;
-  from?: TStyle;
-  isActive?: boolean;
+export interface UseAnimationParamsModel<TStyle extends StyleModel = ViewStyleModel>
+  extends AnimationModel<TStyle> {
   isLazy?: boolean;
   measure?: MeasureModel;
-  to?: TStyle;
   types?: Array<AnimationTypeModel>;
 }
 

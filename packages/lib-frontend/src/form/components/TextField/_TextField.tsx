@@ -69,21 +69,24 @@ const _getTextContentType = (
   }
   return 'none';
 };
+
 export const _TextField: SFCModel<_TextFieldPropsModel> = ({
   autoComplete,
   Component = (inputProps) => <NativeTextInput {...inputProps} />,
   error,
   forwardedRef,
-  icon,
   height,
+  icon,
   isActive,
   isCenter,
   isDisabled,
   isFocused,
   keyboard,
   label,
+  language,
   leftElement,
   maxLength,
+  nativeID,
   numberOfLines,
   onBlur,
   onChange,
@@ -159,6 +162,8 @@ export const _TextField: SFCModel<_TextFieldPropsModel> = ({
       />
 
       <TextInput
+        accessibilityLabelledBy={nativeID}
+        accessibilityLanguage={language}
         autoCapitalize="none"
         autoComplete={_getAutoCompleteType(autoComplete, keyboard)}
         autoCorrect={false}
@@ -168,7 +173,9 @@ export const _TextField: SFCModel<_TextFieldPropsModel> = ({
         keyboardType={_getKeyboardType(keyboard)}
         label={
           (icon || label) && (
-            <Wrapper isRowAlign>
+            <Wrapper
+              isRowAlign
+              nativeID={nativeID}>
               {icon && (
                 <Icon
                   animation={{

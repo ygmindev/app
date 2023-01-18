@@ -17,6 +17,7 @@ export interface _TextFieldPropsModel
   isCenter?: boolean;
   isFocused?: boolean;
   keyboard?: TextFieldKeyboardModel;
+  language?: string;
   leftElement?(isActive?: boolean): ReactNode;
   maxLength?: number;
   numberOfLines?: number;

@@ -1,4 +1,4 @@
-import type { InferModel, PrimitiveModel } from '@lib/shared/core/core.models';
+import type { InferModel, PrimitiveModel, RequiredModel } from '@lib/shared/core/core.models';
 import type { GraphQlOperationTypeModel } from '@lib/shared/graphql/graphql.models';
 import type { ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
 import type { GraphQLError } from 'graphql';
@@ -11,7 +11,7 @@ export interface GraphQlHttpResponseModel<TResult, TName extends string = string
 export type GraphQlFieldModel<
   TType,
   TStrict extends boolean = true,
-  TInfer = Required<InferModel<TType>>,
+  TInfer = RequiredModel<InferModel<TType>>,
 > =
   | {
       [TKey in keyof TInfer]?: TInfer[TKey] extends PrimitiveModel

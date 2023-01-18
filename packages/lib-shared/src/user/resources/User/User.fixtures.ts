@@ -1,8 +1,9 @@
 import { CARD_RESOURCE_NAME } from '@lib/shared/billing/resources/Card/Card.constants';
+import type { RequiredModel } from '@lib/shared/core/core.models';
 import { LINKED_USER_RESOURCE_NAME } from '@lib/shared/user/resources/LinkedUser/LinkedUser.constants';
 import type { UserModel } from '@lib/shared/user/resources/User/User.models';
 
-export const USER_FIXTURE: Required<UserModel> = {
+export const USER_FIXTURE: RequiredModel<UserModel> = {
   [CARD_RESOURCE_NAME]: [],
   [LINKED_USER_RESOURCE_NAME]: [],
   _id: 'uid',

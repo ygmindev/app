@@ -5,6 +5,7 @@ import type {
   _ExportRendererServerParamsModel,
 } from '@lib/framework/web/exports/exportRendererServer/_exportRendererServer.models';
 import type { FCModel } from '@lib/frontend/core/core.models';
+import type { RouteContextModel } from '@lib/frontend/route/route.models';
 import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
 import { AppRegistry } from 'react-native-web';
 import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vite-plugin-ssr';
@@ -23,11 +24,12 @@ export const _exportRendererServer = ({
   passToClient: ['initialState', 'locale', 'pageProps'],
 
   render: async ({ Page, locale, pageProps, urlPathname }) => {
+    const context: RouteContextModel = {};
     const App: FCModel = () =>
       render({
         children: <Page {...pageProps} />,
         locale,
-        location: urlPathname ? { pathname: urlPathname } : undefined,
+        route: urlPathname ? { context, location: { pathname: urlPathname } } : undefined,
       });
 
     AppRegistry.registerComponent('App', () => App);
@@ -55,13 +57,15 @@ export const _exportRendererServer = ({
 
     return {
       documentHtml,
+
       pageContext: async () => ({
+        enableEagerStreaming: true,
         locale: {
           lang: locale?.lang,
           store: locale?.i18n && getLocaleStoreFromI18n({ i18n: locale?.i18n }),
         },
+        redirectTo: context.redirect,
       }),
-      // redirectTo: '',
     };
   },
 });

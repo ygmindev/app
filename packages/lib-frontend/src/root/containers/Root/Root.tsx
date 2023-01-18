@@ -13,11 +13,11 @@ import { StyleProvider } from '@lib/frontend/style/providers/StyleProvider/Style
 import { TrackingProvider } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider';
 import { cloneElement, Suspense, useMemo } from 'react';
 
-export const Root: FCModel<RootPropsModel> = ({ children, initialState, locale, location }) => {
+export const Root: FCModel<RootPropsModel> = ({ children, initialState, locale, route }) => {
   const providers = useMemo(
     () => [
       <RootLayout />,
-      <RouteProvider value={location} />,
+      <RouteProvider value={route} />,
       <TrackingProvider />,
       <AuthProvider />,
       <StyleProvider />,

@@ -8,13 +8,18 @@ import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 import { isFunction } from 'lodash';
 
 export const useTranslation = (ns: UseTranslationParamsModel = []): UseTranslationModel => {
-  const { isInitialized, t: _t } = _useTranslation([
-    ...ns,
-    ...([internationalizeConfig.namespaceDefault] || []),
-  ]);
+  const {
+    currentLanguage,
+    isInitialized,
+    t: _t,
+  } = _useTranslation([...ns, ...([internationalizeConfig.namespaceDefault] || [])]);
 
   const t = <TParams = undefined,>(key?: TranslatableTextModel, params?: TParams): string =>
-    key && isInitialized ? (isFunction(key) ? key({ isInitialized, t }) : _t(key, params)) : '';
+    key && isInitialized
+      ? isFunction(key)
+        ? key({ currentLanguage, isInitialized, t })
+        : _t(key, params)
+      : '';
 
-  return { isInitialized, t };
+  return { currentLanguage, isInitialized, t };
 };

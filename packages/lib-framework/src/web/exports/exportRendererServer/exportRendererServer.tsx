@@ -6,11 +6,11 @@ import { Root } from '@lib/frontend/root/containers/Root/Root';
 export const exportRendererServer = (): ExportRendererServerModel =>
   _exportRendererServer({
     favicoPath: webConfig.favicoPath,
-    render: ({ children, initialState, locale, location }) => (
+    render: ({ children, initialState, locale, route }) => (
       <Root
         initialState={initialState}
         locale={locale}
-        location={location}>
+        route={route}>
         {children}
       </Root>
     ),

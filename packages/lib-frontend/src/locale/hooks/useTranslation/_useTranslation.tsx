@@ -5,6 +5,6 @@ import type {
 import { useTranslation } from 'react-i18next';
 
 export const _useTranslation = (ns: _UseTranslationParamsModel = []): _UseTranslationModel => {
-  const { ready, t } = useTranslation(ns);
-  return { isInitialized: ready, t };
+  const { i18n, ready, t } = useTranslation(ns);
+  return { currentLanguage: i18n.resolvedLanguage, isInitialized: ready, t };
 };

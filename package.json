@@ -191,7 +191,7 @@
     "css-loader": "^6.7.3",
     "dotenv": "^16.0.3",
     "env-schema": "^5.2.0",
-    "esbuild": "^0.17.1",
+    "esbuild": "^0.16.15",
     "esbuild-node-externals": "^1.6.0",
     "esbuild-plugin-fileloc": "^0.0.6",
     "eslint": "8.32.0",

@@ -14,6 +14,7 @@ export const routes: Array<RouteModel> = [
     routes: [
       {
         element: <SettingsPage />,
+        isProtected: true,
         pathname: SETTINGS,
       },
 

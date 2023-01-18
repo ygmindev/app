@@ -8,6 +8,8 @@ export type PartialModel<TType> = Partial<TType> | TType;
 
 export type PartialDeepModel<TType> = PartialDeep<TType>;
 
+export type RequiredModel<TType> = Required<TType>;
+
 export type CallableModel<TResult = void, TParams extends Array<unknown> = never> = (
   ...args: TParams
 ) => TResult;

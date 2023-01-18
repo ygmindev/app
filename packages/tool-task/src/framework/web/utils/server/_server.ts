@@ -40,11 +40,14 @@ export const _server = async ({
   app.get('*', async (req, res) => {
     const pageContext = await renderPage({
       locale: { i18n: req.i18n, lang: req.language },
+      redirectTo: undefined,
       urlOriginal: req.url,
     });
-    const { errorWhileRendering, httpResponse } = pageContext;
+    const { errorWhileRendering, httpResponse, redirectTo } = pageContext;
 
-    if (httpResponse) {
+    if (redirectTo) {
+      res.redirect(302, redirectTo);
+    } else if (httpResponse) {
       const { contentType, pipe, statusCode } = httpResponse;
       res.status(statusCode).type(contentType);
       pipe(res.raw);
