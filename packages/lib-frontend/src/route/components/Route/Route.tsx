@@ -12,6 +12,7 @@ export const Route: SFCModel<RoutePropsModel> = ({ children, route, ...props }) 
   const [measure, setMeasure] = useState<MeasureModel>();
   const { animation } = useAnimation({
     isActive: true,
+    isInitial: false,
     measure,
     types: [ANIMATION_TYPE.VISIBLE, ANIMATION_TYPE.SLIDE],
   });
