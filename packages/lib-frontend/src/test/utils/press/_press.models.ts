@@ -1,5 +1,5 @@
-import type { CallableModel } from '@lib/shared/core/core.models';
+import type { ReactElement } from 'react';
 
-export type _PressParamsModel = CallableModel;
+export type _PressParamsModel = ReactElement;
 
 export type _PressModel = void;

@@ -21,12 +21,12 @@ describe(displayName, () => {
   test('works with close', async () => {
     const { queryByText } = render(<Component />);
     expect(queryByText(ANCHOR)).toBeTruthy();
-    await waitForExpect(() => expect(queryByText(CHILDREN)).toBeFalsy());
+    await waitForExpect({ callback: () => expect(queryByText(CHILDREN)).toBeFalsy() });
   });
 
   test('works with open', async () => {
     const { queryByText } = render(<Component isOpen />);
     expect(queryByText(ANCHOR)).toBeTruthy();
-    await waitForExpect(() => expect(queryByText(CHILDREN)).toBeTruthy());
+    await waitForExpect({ callback: () => expect(queryByText(CHILDREN)).toBeTruthy() });
   });
 });

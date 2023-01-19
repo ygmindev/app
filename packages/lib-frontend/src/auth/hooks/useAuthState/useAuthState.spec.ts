@@ -6,6 +6,6 @@ const { displayName } = withTest({ target: () => useAuthState });
 
 describe(displayName, () => {
   test('works', async () => {
-    const { result } = renderHook(() => useAuthState({}));
+    const { result } = renderHook(() => useAuthState());
   });
 });

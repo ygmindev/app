@@ -23,6 +23,6 @@ describe(displayName, () => {
 
   test('is open', async () => {
     const { queryByText } = render(<Component isOpen />);
-    await waitForExpect(() => expect(queryByText(CHILDREN)).toBeTruthy());
+    await waitForExpect({ callback: () => expect(queryByText(CHILDREN)).toBeTruthy() });
   });
 });

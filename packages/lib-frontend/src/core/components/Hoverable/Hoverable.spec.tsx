@@ -26,6 +26,6 @@ describe(displayName, () => {
   test('activate', async () => {
     const { queryByTestId, queryByText } = render(<Component />);
     hoverIn(queryByTestId(HOVER));
-    await waitForExpect(() => expect(queryByText(ACTIVE)).toBeTruthy());
+    await waitForExpect({ callback: () => expect(queryByText(ACTIVE)).toBeTruthy() });
   });
 });

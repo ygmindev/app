@@ -2,14 +2,12 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Skeleton } from '@lib/frontend/core/components/Skeleton/Skeleton';
 import { SvgShape } from '@lib/frontend/core/components/SvgShape/SvgShape';
-import {
-  SVG_SHAPE,
-  SVG_SHAPE_RECT_HEIGHT,
-} from '@lib/frontend/core/components/SvgShape/SvgShape.constants';
+import { SVG_SHAPE } from '@lib/frontend/core/components/SvgShape/SvgShape.constants';
 import { _Table } from '@lib/frontend/core/components/Table/_Table';
 import { TABLE_ROW_HEIGHT } from '@lib/frontend/core/components/Table/Table.constants';
 import type { TablePropsModel } from '@lib/frontend/core/components/Table/Table.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import type { SFCPropsModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import type { ReactElement } from 'react';
 import { useState } from 'react';
@@ -27,7 +25,7 @@ export const Table = <TType,>({
   select,
   testID,
   ...props
-}: TablePropsModel<TType>): ReactElement<TablePropsModel<TType>> => {
+}: SFCPropsModel<TablePropsModel<TType>>): ReactElement<SFCPropsModel<TablePropsModel<TType>>> => {
   const { styles } = useStyles({ props });
   const [isMounted, setIsMounted] = useState<boolean>();
 
@@ -48,11 +46,11 @@ export const Table = <TType,>({
               isMounted && isLoading && !column.pin
                 ? () => (
                     <Skeleton
-                      height={SVG_SHAPE_RECT_HEIGHT}
+                      height={30}
                       isFullWidth>
                       <SvgShape
-                        isFullWidth
                         shape={SVG_SHAPE.RECT}
+                        shapeProps={{ isFullWidth: true }}
                       />
                     </Skeleton>
                   )

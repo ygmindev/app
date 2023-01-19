@@ -1,5 +1,5 @@
-import type { CallableModel } from '@lib/shared/core/core.models';
+import type { ReactElement } from 'react';
 
-export type _HoverInParamsModel = CallableModel;
+export type _HoverInParamsModel = ReactElement;
 
 export type _HoverInModel = void;

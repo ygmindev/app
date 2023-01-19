@@ -4,7 +4,7 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import type { PropsModel, SFCModel } from '@lib/frontend/core/core.models';
+import type { SFCPropsModel } from '@lib/frontend/core/core.models';
 import type { StepFormPropsModel } from '@lib/frontend/form/components/StepForm/StepForm.models';
 import { useDimension } from '@lib/frontend/platform/hooks/useDimension/useDimension';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
@@ -22,8 +22,8 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
   steps,
   testID,
   ...props
-}: PropsModel<SFCModel<StepFormPropsModel<TType, TSteps>>>): ReactElement<
-  StepFormPropsModel<TType, TSteps>
+}: SFCPropsModel<StepFormPropsModel<TType, TSteps>>): ReactElement<
+  SFCPropsModel<StepFormPropsModel<TType, TSteps>>
 > => {
   const { styles } = useStyles({ props });
   const { width } = useDimension();

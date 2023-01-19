@@ -20,7 +20,7 @@ const { Story, meta } = withStory<TransPropsModel<unknown>>({
     },
     {
       props: {
-        Components: [<Text color={THEME_COLOR.PRIMARY} />, <Text color={THEME_COLOR.SECONDARY} />],
+        components: [<Text color={THEME_COLOR.PRIMARY} />, <Text color={THEME_COLOR.SECONDARY} />],
         i18nKey: 'labels.testWithElements',
         params: { value1: 'value1', value2: 'value2' },
       },

@@ -8,4 +8,4 @@ const { Story, meta } = withStory<StepFormPropsModel>({
   variants: [],
 });
 
-export { Story, meta as default };
+export { meta as default, Story };

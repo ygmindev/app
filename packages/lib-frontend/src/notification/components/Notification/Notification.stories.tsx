@@ -1,6 +1,5 @@
 import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Button } from '@lib/frontend/core/components/Button/Button';
-import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import type { NotificationPropsModel } from '@lib/frontend/notification/components/Notification/Notification.models';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
@@ -17,9 +16,9 @@ const { Story, meta } = withStory<NotificationPropsModel>({
   target: Component,
   variants: [
     ...Object.values(THEME_COLOR).map((color) => ({ props: { color } })),
-    { props: { icon: ICONS.person } },
+    { props: { icon: 'person' } },
     { props: { title: 'title' } },
-    { props: { icon: ICONS.person, title: 'title' } },
+    { props: { icon: 'person', title: 'title' } },
   ],
 });
 

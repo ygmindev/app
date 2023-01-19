@@ -12,6 +12,10 @@ export interface FCModel<TProps = object>
 export interface SFCModel<TProps = object, TStyle extends StyleModel = ViewStyleModel>
   extends FCModel<TProps & StylePropsModel<TStyle>> {}
 
+export type SFCPropsModel<TProps = object, TStyle extends StyleModel = ViewStyleModel> = PropsModel<
+  SFCModel<TProps, TStyle>
+>;
+
 export type PropsModel<TType> = TType extends ComponentType<infer TProps> ? TProps : never;
 
 export interface ChildrenPropsModel<TType = ReactNode | Array<ReactNode>> {

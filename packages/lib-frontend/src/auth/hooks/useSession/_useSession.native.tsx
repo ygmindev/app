@@ -1,5 +1,7 @@
-import type { _UseSessionModel } from '@lib/frontend/auth/hooks/useSession/_useSession.models';
-import type { _UseSearchParamsModel } from '@lib/frontend/core/hooks/useSearch/_useSearch.models';
+import type {
+  _UseSessionModel,
+  _UseSessionParamsModel,
+} from '@lib/frontend/auth/hooks/useSession/_useSession.models';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 import type { FirebaseAuthTypes } from '@react-native-firebase/auth';
@@ -8,7 +10,7 @@ import type { AuthError } from 'firebase/auth';
 
 let _auth: FirebaseAuthTypes.Module;
 
-export const _useSession = ({ onError }: _UseSearchParamsModel): _UseSessionModel => ({
+export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionModel => ({
   getToken: async (): Promise<string | null> => {
     const { currentUser } = _auth;
     return currentUser && currentUser.getIdToken(true);

@@ -61,7 +61,7 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
       testID={testID}>
       {data && data.username && (
         <Trans
-          Components={[<Text isBold />]}
+          components={[<Text isBold />]}
           i18nKey="messages.otpEnter"
           ns="auth"
           params={{ value: data.username }}

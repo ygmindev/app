@@ -1,7 +1,7 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import type { FieldPropsModel, PropsModel, SFCModel } from '@lib/frontend/core/core.models';
+import type { FieldPropsModel, SFCPropsModel } from '@lib/frontend/core/core.models';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { Form } from '@lib/frontend/form/components/Form/Form';
 import { SelectField } from '@lib/frontend/form/components/SelectField/SelectField';
@@ -39,8 +39,8 @@ export const FormContainer = <TType,>({
   topElement,
   validators,
   ...props
-}: PropsModel<SFCModel<FormContainerPropsModel<TType>>>): ReactElement<
-  FormContainerPropsModel<TType>
+}: SFCPropsModel<FormContainerPropsModel<TType>>): ReactElement<
+  SFCPropsModel<FormContainerPropsModel<TType>>
 > => {
   const { styles } = useStyles({ props });
   const theme = useTheme();

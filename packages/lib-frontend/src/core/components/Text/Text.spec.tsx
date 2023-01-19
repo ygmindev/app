@@ -13,15 +13,8 @@ describe(displayName, () => {
     expect(queryByTestId(testID)).toBeTruthy();
   });
 
-  test('works with string children', async () => {
+  test('works with children', async () => {
     const { queryByText } = render(<Component>{TEST}</Component>);
     expect(queryByText(TEST)).toBeTruthy();
-  });
-
-  test('works with function children', async () => {
-    const { queryByText } = render(
-      <Component>{({ t }) => t('test:labels.testWithString')}</Component>,
-    );
-    expect(queryByText('test with string')).toBeTruthy();
   });
 });

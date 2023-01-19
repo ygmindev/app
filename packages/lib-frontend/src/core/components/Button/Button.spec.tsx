@@ -17,6 +17,6 @@ describe(displayName, () => {
     const handlePress = vi.fn();
     const { queryByTestId } = render(<Component onPress={handlePress} />);
     press(queryByTestId(testID));
-    await waitForExpect(() => expect(handlePress).toHaveBeenCalled());
+    await waitForExpect({ callback: () => expect(handlePress).toHaveBeenCalled() });
   });
 });

@@ -13,8 +13,7 @@ const { Story, meta } = withStory<SvgPropsModel>({
         children: (
           <SvgShape
             shape={SVG_SHAPE.RECT}
-            x={0}
-            y={0}
+            shapeProps={{ height: 100, width: 100 }}
           />
         ),
       },

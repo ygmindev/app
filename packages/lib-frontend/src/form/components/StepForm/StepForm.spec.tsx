@@ -3,7 +3,9 @@ import type { StepFormPropsModel } from '@lib/frontend/form/components/StepForm/
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<StepFormPropsModel>({ target: StepForm });
+const { Component, displayName, testID } = withTestComponent<StepFormPropsModel>({
+  target: StepForm,
+});
 
 describe(displayName, () => {
   test('works', async () => {

@@ -1,4 +1,3 @@
-import type { ThemeConfigParamsModel } from '@lib/config/style/theme/theme.models';
 import { AG_GRID_THEME } from '@lib/frontend/core/components/Table/_Table.constants';
 import type { _TablePropsModel } from '@lib/frontend/core/components/Table/_Table.models';
 import {
@@ -9,6 +8,7 @@ import type { TableColumnModel } from '@lib/frontend/core/components/Table/Table
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import type { UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import type {
@@ -31,15 +31,15 @@ const _GlobalStyle = createGlobalStyle`
 
   ${AgGridTheme}
 
-  ${({ theme }: { theme: ThemeConfigParamsModel }) => `
+  ${({ theme }: { theme: UseThemeModel }) => `
     .${AG_GRID_THEME} {
       --ag-background-color: transparent;
       --ag-checkbox-border-radius: ${theme.shape.borderRadius};
       --ag-checkbox-checked-color: ${theme.colors.tone.primary.main};
       --ag-checkbox-indeterminate-color: ${theme.colors.tone.secondary.main};
-      --ag-foreground-color: ${theme.colors.tone.text.main};
+      --ag-foreground-color: ${theme.colors.tone.neutral.mainContrast};
       --ag-header-background-color: transparent;
-      --ag-header-foreground-color: ${theme.colors.tone.text.main};
+      --ag-header-foreground-color: ${theme.colors.tone.neutral.mainContrast};
       --ag-selected-row-background-color: transparent;
 
       .ag-cell, .ag-header-cell {

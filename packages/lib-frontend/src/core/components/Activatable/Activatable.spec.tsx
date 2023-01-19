@@ -27,7 +27,7 @@ describe(displayName, () => {
   test('activate', async () => {
     const { queryByTestId, queryByText } = render(<Component />);
     hoverIn(queryByTestId(ACTIVATE));
-    await waitForExpect(() => expect(queryByText(ACTIVE)).toBeTruthy());
+    await waitForExpect({ callback: () => expect(queryByText(ACTIVE)).toBeTruthy() });
   });
 
   test('activate controlled', async () => {
@@ -40,8 +40,8 @@ describe(displayName, () => {
       />,
     );
     hoverIn(queryByTestId(ACTIVATE));
-    await waitForExpect(() => expect(queryByText(ACTIVE)).toBeTruthy());
+    await waitForExpect({ callback: () => expect(queryByText(ACTIVE)).toBeTruthy() });
     hoverOut(queryByTestId(ACTIVATE));
-    await waitForExpect(() => expect(handleInactive).toHaveBeenCalled());
+    await waitForExpect({ callback: () => expect(handleInactive).toHaveBeenCalled() });
   });
 });
