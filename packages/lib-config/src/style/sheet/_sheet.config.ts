@@ -1,5 +1,5 @@
 import type { _SheetConfigParamsModel } from '@lib/config/style/sheet/_sheet.models';
-import { forEach } from 'lodash';
+import forEach from 'lodash/forEach';
 import { cssRule, fontFace, getStyles } from 'typestyle';
 import type { NestedCSSProperties } from 'typestyle/lib/types';
 

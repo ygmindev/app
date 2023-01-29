@@ -5,6 +5,7 @@ import type { DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const Dropdown = composeComponent<DropdownPropsModel, _DropdownPropsModel>({
   getComponent: () => _Dropdown,
@@ -38,3 +39,5 @@ export const Dropdown = composeComponent<DropdownPropsModel, _DropdownPropsModel
     onClose,
   }),
 });
+
+process.env.APP_DEBUG && (Dropdown.displayName = variableName(() => Dropdown));

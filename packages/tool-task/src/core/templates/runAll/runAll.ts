@@ -3,7 +3,8 @@ import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { sequence } from '@lib/shared/core/utils/sequence/sequence';
 import type { RunAllParamsModel } from '@tool/task/core/templates/runAll/runAll.models';
 import { registry } from '@tool/task/core/utils/registry/registry';
-import { filter, isString } from 'lodash';
+import filter from 'lodash/filter';
+import isString from 'lodash/isString';
 
 export const runAll: TaskParamsModel<RunAllParamsModel> = {
   name: 'runAll',

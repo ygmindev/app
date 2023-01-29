@@ -1,7 +1,7 @@
 import { JwtService } from '@lib/backend/auth/utils/JwtService/JwtService';
 import type { _GetContextParamsModel } from '@lib/backend/lambda/utils/getContext/_getContext.models';
+import type { SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 import type { Context } from 'aws-lambda';
-import { set } from 'lodash';
 
 export const _getContext = async ({ context, event }: _GetContextParamsModel): Promise<Context> => {
   const { authorization } = event.headers;
@@ -9,7 +9,7 @@ export const _getContext = async ({ context, event }: _GetContextParamsModel): P
     const [_, token] = authorization.split(' ');
     if (token && token !== 'null') {
       const user = await JwtService.verifyToken(token);
-      set(context, 'user', user);
+      (context as unknown as { user: SignInTokenModel }).user = user;
     }
   }
   return context;

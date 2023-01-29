@@ -1,4 +1,5 @@
-import { kebabCase, trim } from 'lodash';
+import kebabCase from 'lodash/kebabCase';
+import trim from 'lodash/trim';
 
 export const trimPathname = (value: string): string =>
   `/${value

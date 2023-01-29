@@ -10,6 +10,6 @@ export const withTest = <TType extends unknown>({
   displayName,
   target,
 }: WithTestParamsModel<CallableModel<TType>>): WithTestModel => {
-  const _displayName = displayName || variableName(target) || uid('display-name');
+  const _displayName = displayName || variableName(target) || uid('test');
   return { displayName: _displayName };
 };

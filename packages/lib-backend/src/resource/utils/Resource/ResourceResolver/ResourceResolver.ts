@@ -14,7 +14,7 @@ import { Container } from '@lib/shared/core/utils/Container/Container';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
-import { toPlainObject } from 'lodash';
+import toPlainObject from 'lodash/toPlainObject';
 
 export const ResourceResolver = <TType, TForm, TRoot = undefined>({
   name,

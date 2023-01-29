@@ -3,7 +3,7 @@ import type {
   WithIdResultModel,
 } from '@lib/shared/core/decorators/withId/withId.models';
 import { uid } from '@lib/shared/core/utils/uid/uid';
-import { isArray } from 'lodash';
+import isArray from 'lodash/isArray';
 
 const _withId = <TType>(value: TType): WithIdModel & TType =>
   ({ ...(value || {}), id: (value as unknown as WithIdModel).id || uid() } as TType & WithIdModel);

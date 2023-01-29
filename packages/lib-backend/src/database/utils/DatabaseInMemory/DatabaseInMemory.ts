@@ -1,6 +1,6 @@
 import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { debug } from '@lib/shared/logging/utils/logger/logger';
-import { includes, toNumber } from 'lodash';
+import toNumber from 'lodash/toNumber';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 
 @withContainer()
@@ -8,7 +8,7 @@ export class DatabaseInMemory {
   _server?: MongoMemoryServer;
 
   _isActive = (): boolean =>
-    this._server ? includes(['starting', 'running'], this._server.state) : false;
+    this._server ? ['starting', 'running'].includes(this._server.state) : false;
 
   start = async (): Promise<void> => {
     if (!this._isActive()) {

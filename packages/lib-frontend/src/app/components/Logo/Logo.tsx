@@ -6,6 +6,7 @@ import type { LinkPropsModel } from '@lib/frontend/core/components/Link/Link.mod
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { APP_URI } from '@lib/frontend/http/http.constants';
 import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const Logo = composeComponent<LogoPropsModel, LinkPropsModel>({
   getComponent: () => Link,
@@ -25,3 +26,5 @@ export const Logo = composeComponent<LogoPropsModel, LinkPropsModel>({
     };
   },
 });
+
+process.env.APP_DEBUG && (Logo.displayName = variableName(() => Logo));

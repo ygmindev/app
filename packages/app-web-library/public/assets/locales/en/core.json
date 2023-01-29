@@ -1,0 +1,31 @@
+{
+  "labels": {
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "loading": "Loading",
+    "noResult": "No result",
+    "submit": "Submit",
+    "tryAgain": "Try again"
+  },
+  "messages": {
+    "confirmRemove": "Are you sure you want to remove?",
+    "errorForbidden": "TRANSLATION_MISSING",
+    "errorGeneric": "Something went wrong",
+    "errorOffline": "You are offline",
+    "errorUnauthorized": "TRANSLATION_MISSING",
+    "nothingToShow": "Nothing to show",
+    "validateAlphaNumeric": "TRANSLATION_MISSING",
+    "validateChanged": "TRANSLATION_MISSING",
+    "validateEmail": "TRANSLATION_MISSING",
+    "validateLength": "TRANSLATION_MISSING",
+    "validateNotEmpty": "TRANSLATION_MISSING",
+    "validateRange": "TRANSLATION_MISSING",
+    "validateZipCode": "TRANSLATION_MISSING"
+  },
+  "Submit": "Submit",
+  "Email address": "Email address",
+  "Button": "Button",
+  "Text": "Text",
+  "Test": "Test",
+  "Click": "Click"
+}

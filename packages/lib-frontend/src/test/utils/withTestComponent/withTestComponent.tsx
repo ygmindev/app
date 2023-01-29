@@ -1,3 +1,4 @@
+import { getComponentDisplayName } from '@lib/frontend/core/utils/getComponentDisplayName/getComponentDisplayName';
 import type {
   TestComponentModel,
   WithTestComponentModel,
@@ -5,7 +6,7 @@ import type {
 } from '@lib/frontend/test/utils/withTestComponent/withTestComponent.models';
 import type { PartialModel } from '@lib/shared/core/core.models';
 import { uid } from '@lib/shared/core/utils/uid/uid';
-import { trim } from 'lodash';
+import trim from 'lodash/trim';
 import type { ComponentType } from 'react';
 import { createElement } from 'react';
 
@@ -18,7 +19,7 @@ export const withTestComponent = <
   target,
 }: WithTestComponentParamsModel<TProps, TDefault>): WithTestComponentModel<TProps, TDefault> => {
   const testID = uid('withTestComponent');
-  const _displayName = displayName || target.displayName || target.name || uid('displayName');
+  const _displayName = displayName || getComponentDisplayName(target as ComponentType);
   const Component: TestComponentModel<TProps, TDefault> = (props) =>
     createElement(
       target as ComponentType<TProps & object>,

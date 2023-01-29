@@ -21,7 +21,11 @@ import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.model
 import type { ResourceServiceDecoratorModel } from '@lib/shared/resource/utils/Resource/ResourceService/ResourceService.models';
 import type { RootModel } from '@lib/shared/resource/utils/Root/Root.models';
 import type { UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
-import { forEach, isArray, isPlainObject, map, reduce } from 'lodash';
+import forEach from 'lodash/forEach';
+import isArray from 'lodash/isArray';
+import isPlainObject from 'lodash/isPlainObject';
+import map from 'lodash/map';
+import reduce from 'lodash/reduce';
 
 export const EmbeddedResourceService = <
   TType extends EmbeddedResourceModel,

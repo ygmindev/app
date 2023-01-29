@@ -7,7 +7,7 @@ import { USE_QUERY_CONNECTION_LIMIT_DEFAULT } from '@lib/frontend/core/hooks/use
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import type { ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
-import { toNumber } from 'lodash';
+import toNumber from 'lodash/toNumber';
 
 export const _useQueryConnection = <TType, TError extends Error = Error>({
   cache,

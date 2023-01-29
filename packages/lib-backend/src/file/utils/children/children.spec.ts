@@ -1,7 +1,6 @@
 import { children } from '@lib/backend/file/utils/children/children';
 import { FS_FIXTURE } from '@lib/config/javascript/test/configs/__mocks__/fs/fs.fixtures';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
-import { keys } from 'lodash';
 
 vi.mock('fs');
 
@@ -14,6 +13,6 @@ describe(displayName, () => {
 
   test('works', async () => {
     const result = children({ from: 'packages', isDirectory: true }).map(({ name }) => name);
-    expect(result).toStrictEqual(keys(FS_FIXTURE.packages));
+    expect(result).toStrictEqual(Object.keys(FS_FIXTURE.packages));
   });
 });

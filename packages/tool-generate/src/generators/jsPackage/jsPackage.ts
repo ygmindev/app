@@ -5,7 +5,7 @@ import { sortKeys } from '@lib/shared/core/utils/sortKeys/sortKeys';
 import type { GeneratorParamsModel } from '@tool/generate/tasks/generate/generate.models';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { readFileSync, writeFileSync } from 'fs';
-import { uniq } from 'lodash';
+import uniq from 'lodash/uniq';
 
 export const jsPackage: GeneratorParamsModel = {
   onSuccess: async ({ variables }) => {
@@ -14,7 +14,7 @@ export const jsPackage: GeneratorParamsModel = {
 
     if (root && target) {
       // typescript paths
-      let dir = fromConfig('js/typescript/tsconfig.paths.json');
+      let dir = fromConfig('javascript/typescript/tsconfig.paths.json');
       let content = JSON.parse(readFileSync(dir).toString());
       content.compilerOptions.paths[`${target}/*`] = [`packages/${root}/src/*`];
       content.compilerOptions.paths = sortKeys(content.compilerOptions.paths);

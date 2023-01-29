@@ -18,7 +18,9 @@ import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 import { registry } from '@tool/task/core/utils/registry/registry';
 import { existsSync } from 'fs';
-import { flattenDeep, isString, kebabCase, keys } from 'lodash';
+import flattenDeep from 'lodash/flattenDeep';
+import isString from 'lodash/isString';
+import kebabCase from 'lodash/kebabCase';
 
 const _getTaskByName = (name: string): CallablePromiseModel<TaskStatusModel> => {
   const _registry = registry();
@@ -142,7 +144,7 @@ tasks = [
     task: async () => {
       const _registry = registry();
       const { name } = await prompt([
-        { key: 'name', options: keys(_registry), type: PROMPT_TYPE.LIST },
+        { key: 'name', options: Object.keys(_registry), type: PROMPT_TYPE.LIST },
       ]);
       return _registry[name]();
     },

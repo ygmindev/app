@@ -3,16 +3,21 @@ import { Appearable } from '@lib/frontend/animation/components/Appearable/Appear
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import type { ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { Loading } from '@lib/frontend/core/components/Loading/Loading';
+// import { Loading } from '@lib/frontend/core/components/Loading/Loading';
 import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import type { SFCModel } from '@lib/frontend/core/core.models';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import type { ElementStateModel, SFCModel } from '@lib/frontend/core/core.models';
+import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
 import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_BASIC_SIZE, THEME_COLOR, THEME_ROLE } from '@lib/frontend/style/style.constants';
+import { THEME_BASIC_SIZE, THEME_COLOR } from '@lib/frontend/style/style.constants';
+import type { TextStyleModel } from '@lib/frontend/style/style.models';
 import { palette } from '@lib/frontend/style/utils/palette/palette';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { useMemo } from 'react';
 
 export const Button: SFCModel<ButtonPropsModel> = ({
   children,
@@ -20,101 +25,121 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   type = BUTTON_TYPE.FILLED,
   icon,
   size = THEME_BASIC_SIZE.MEDIUM,
+  elementState,
+  onElementStateChange,
   ...props
 }) => {
   const theme = useTheme();
+  const { styles } = useStyles({ props });
 
-  const _pressableAnimation = ({
-    isActive,
-    isDisabled,
-    isLoading,
-  }: {
-    isActive?: boolean;
-    isDisabled?: boolean;
-    isLoading?: boolean;
-  }): AnimationModel => {
+  const { fieldValue, setFieldValue } = useFieldValue<ElementStateModel>({
+    defaultValue: ELEMENT_STATE.INACTIVE,
+    onChange: onElementStateChange,
+    value: elementState,
+  });
+
+  const { childrenAnimation, containerAnimation } = useMemo<{
+    childrenAnimation?: AnimationModel<TextStyleModel>;
+    containerAnimation?: AnimationModel;
+  }>(() => {
     const _color = theme.colors.tone[color];
+    const _activeColor = palette({ color: _color.main, lightness: theme.colors.activeLightness });
+    const _disabledColor = palette({
+      color: _color.main,
+      lightness: theme.colors.disabledLightness,
+    });
     switch (type) {
-      case BUTTON_TYPE.FILLED:
+      case BUTTON_TYPE.FILLED: {
         return {
-          from: { backgroundColor: _color.main },
-          isActive: isActive || isDisabled || isLoading,
-          to: {
-            backgroundColor: palette({
-              color: _color.main,
-              lightness: theme.colors.activeLightness,
-            }),
+          childrenAnimation: {
+            states: {
+              [ELEMENT_STATE.INACTIVE]: { color: _color.mainContrast },
+            },
+          },
+          containerAnimation: {
+            states: {
+              [ELEMENT_STATE.ACTIVE]: { backgroundColor: _activeColor },
+              [ELEMENT_STATE.DISABLED]: { backgroundColor: _disabledColor },
+              [ELEMENT_STATE.INACTIVE]: { backgroundColor: _color.main },
+            },
           },
         };
+      }
       case BUTTON_TYPE.ICON:
       case BUTTON_TYPE.TRANSPARENT:
         return {
-          from: { backgroundColor: theme.colors.tone.neutral.main },
-          isActive: isActive || isDisabled || isLoading,
-          to: { backgroundColor: _color.muted },
+          childrenAnimation: {
+            states: {
+              [ELEMENT_STATE.DISABLED]: { color: theme.colors.tone.neutral.mutedContrast },
+              [ELEMENT_STATE.INACTIVE]: { color: _color.main },
+              [ELEMENT_STATE.ACTIVE]: { color: _color.main },
+            },
+          },
+          containerAnimation: {
+            states: {
+              [ELEMENT_STATE.ACTIVE]: { backgroundColor: _color.muted },
+              [ELEMENT_STATE.DISABLED]: { backgroundColor: _disabledColor },
+              [ELEMENT_STATE.INACTIVE]: { backgroundColor: theme.colors.tone.neutral.main },
+            },
+          },
         };
       default:
         return {};
     }
-  };
+  }, [color, theme, type]);
 
-  const _textColor =
-    theme.colors.tone[color][
-      type == BUTTON_TYPE.TRANSPARENT || type == BUTTON_TYPE.ICON
-        ? THEME_ROLE.MAIN
-        : THEME_ROLE.MAIN_CONTRAST
-    ];
+  let _children = children && (
+    <TranslatableText
+      align={FONT_ALIGN.CENTER}
+      animation={childrenAnimation}
+      elementState={elementState}
+      isBold
+      isCapitalize>
+      {children}
+    </TranslatableText>
+  );
+  if (icon) {
+    _children = (
+      <Wrapper isRowAlign>
+        <Icon
+          animation={childrenAnimation}
+          elementState={elementState}
+          icon={icon}
+        />
+
+        {_children}
+      </Wrapper>
+    );
+  }
 
   const _height = theme.shape.height[size];
+  const _isLoading = fieldValue === ELEMENT_STATE.LOADING;
 
   return (
     <Pressable
       {...props}
-      animation={_pressableAnimation}
+      animation={containerAnimation}
+      elementState={fieldValue}
       height={_height}
       isCenter
+      onElementStateChange={setFieldValue}
       position={SHAPE_POSITION.RELATIVE}
+      style={styles}
       width={type === BUTTON_TYPE.ICON ? _height : undefined}>
-      {({ isLoading }) => {
-        let _children = children && (
-          <TranslatableText
-            align={FONT_ALIGN.CENTER}
-            color={_textColor}
-            isBold
-            isCapitalize>
-            {children}
-          </TranslatableText>
-        );
-        if (icon) {
-          _children = (
-            <Wrapper isRowAlign>
-              <Icon
-                color={_textColor}
-                icon={icon}
-              />
+      <>
+        <Appearable
+          isCenter
+          isVisible={!_isLoading}>
+          {_children}
+        </Appearable>
 
-              {_children}
-            </Wrapper>
-          );
-        }
-        return (
-          <>
-            <Appearable
-              isActive={!isLoading}
-              isCenter
-              isLazy={false}>
-              {_children}
-            </Appearable>
-
-            <Appearable
-              isAbsoluteFill
-              isActive={isLoading}
-              isCenter>
-              <Loading color={_textColor} />
-            </Appearable>
-          </>
-        );
-      }}
+        {/* <Appearable
+          isAbsoluteFill
+          isCenter
+          isVisible={_isLoading}>
+          <Loading animation={childrenAnimation} />
+        </Appearable> */}
+      </>
     </Pressable>
   );
 };

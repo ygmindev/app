@@ -4,6 +4,7 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCPropsModel } from '@lib/frontend/core/core.models';
 import type { StepFormPropsModel } from '@lib/frontend/form/components/StepForm/StepForm.models';
 import { useDimension } from '@lib/frontend/platform/hooks/useDimension/useDimension';
@@ -44,12 +45,14 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
       {steps.length > 1 && width && width > 0 && (
         <Portal>
           <Wrapper
-            animation={{
-              duration: theme.animation.transition,
-              from: { width: 0 },
-              isActive: true,
-              to: { width: (width / (steps.length + 1)) * (current + 1) },
-            }}
+            animation={
+              {
+                // duration: theme.animation.transition,
+                // from: { width: 0 },
+                // isActive: true,
+                // to: { width: (width / (steps.length + 1)) * (current + 1) },
+              }
+            }
             backgroundColor={THEME_COLOR.PRIMARY}
             height={5}
             left={0}
@@ -65,12 +68,10 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
         style={styles}
         testID={testID}>
         <Wrapper isRowAlign>
-          <Appearable
-            isActive={current > 0}
-            isLazy={false}>
+          <Appearable isVisible={current > 0}>
             <Button
+              elementState={current <= 0 ? ELEMENT_STATE.DISABLED : undefined}
               icon="arrowLeft"
-              isDisabled={current <= 0}
               onPress={() => currentSet(current - 1)}
               type={BUTTON_TYPE.ICON}
             />

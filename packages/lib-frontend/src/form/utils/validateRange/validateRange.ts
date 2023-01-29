@@ -1,5 +1,5 @@
 import type { FormValidatorModel } from '@lib/frontend/form/form.models';
-import { toNumber } from 'lodash';
+import toNumber from 'lodash/toNumber';
 
 export const validateRange: (min: number, max: number) => FormValidatorModel =
   (min, max) =>

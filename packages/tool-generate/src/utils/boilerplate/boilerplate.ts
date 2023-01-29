@@ -7,7 +7,9 @@ import type { BoilerplateParamsModel } from '@tool/generate/utils/boilerplate/bo
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 import { readFileSync } from 'fs';
-import { flatten, keys, pullAll, trim, uniq } from 'lodash';
+import pullAll from 'lodash/pullAll';
+import trim from 'lodash/trim';
+import uniq from 'lodash/uniq';
 import { basename, join } from 'path';
 
 const _getTemplateVariables = async (from: string): Promise<Array<string>> => {
@@ -16,7 +18,7 @@ const _getTemplateVariables = async (from: string): Promise<Array<string>> => {
 
   for (const child of children({ from })) {
     if (child.isDirectory) {
-      variables = variables.concat(flatten(await _getTemplateVariables(child.fullPath)));
+      variables = variables.concat((await _getTemplateVariables(child.fullPath)).flat());
     } else {
       const content = readFileSync(child.fullPath, 'utf8');
       variables = variables.concat(content.match(BOILERPLATE_TEMPLATE_VARIABLE_PATTERN) || []);
@@ -35,11 +37,12 @@ export const boilerplate = async ({
   const templateDir = fromPackages('tool-generate/templates', template);
   let templateVariables = await _getTemplateVariables(templateDir);
   templateVariables = uniq(templateVariables).sort();
-  templateVariables = pullAll(templateVariables, keys(variables));
+  templateVariables = variables
+    ? pullAll(templateVariables, Object.keys(variables))
+    : templateVariables;
 
   let _output = output;
   const _variables: Record<string, string> = variables || {};
-
   const _resolveVariable = async (variable: string): Promise<string> => {
     if (_variables[variable]) {
       return _variables[variable];

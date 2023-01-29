@@ -3,6 +3,7 @@ import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Menu } from '@lib/frontend/core/components/Menu/Menu';
 import type { MenuRefModel } from '@lib/frontend/core/components/Menu/Menu.models';
 import { View } from '@lib/frontend/core/components/View/View';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useSearch } from '@lib/frontend/core/hooks/useSearch/useSearch';
 import type { SelectFieldPropsModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
@@ -10,15 +11,14 @@ import { TextField } from '@lib/frontend/form/components/TextField/TextField';
 import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { find } from 'lodash';
 import { useRef, useState } from 'react';
 
 export const SelectField: SFCModel<SelectFieldPropsModel> = ({
   defaultValue,
+  elementState,
   error,
   icon,
   isAutoFocus,
-  isDisabled,
   label,
   onChange,
   onSubmit,
@@ -59,7 +59,7 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
     search(value);
   };
 
-  const _selectedOption = find(options, { id: fieldValue });
+  const _selectedOption = options.find(({ id }) => id === fieldValue);
   const _selectedLabel = _selectedOption
     ? renderValue
       ? renderValue(_selectedOption)
@@ -76,10 +76,10 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
         anchor={(isOpen) => (
           <TextField
             defaultValue={defaultValue}
+            elementState={elementState}
             error={error}
             icon={icon}
             isAutoFocus={isAutoFocus}
-            isDisabled={isDisabled}
             isNoClear
             label={label}
             leftElement={
@@ -91,13 +91,15 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
             onChange={onQueryChange}
             onFocus={() => _handleToggle(true)}
             onSubmit={_handleSelect}
-            rightElement={(isFocused) => (
+            rightElement={(elementState) => (
               <AnimatableView
                 animation={{
-                  from: { transform: [{ rotateZ: '0deg' }] },
-                  isActive: isFocused,
-                  to: { transform: [{ rotateZ: '-180deg' }] },
-                }}>
+                  states: {
+                    [ELEMENT_STATE.INACTIVE]: { transform: [{ rotateZ: '0deg' }] },
+                    [ELEMENT_STATE.ACTIVE]: { transform: [{ rotateZ: '-180deg' }] },
+                  },
+                }}
+                elementState={elementState}>
                 <Icon icon="chevronDown" />
               </AnimatableView>
             )}
@@ -105,11 +107,11 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
             width={width}
           />
         )}
-        forwardedRef={menuRef}
         isFullWidth
-        onChange={isDisabled ? undefined : setFieldValue}
+        onChange={setFieldValue}
         onClose={() => _handleToggle(false)}
         options={result}
+        ref={menuRef}
         renderOption={renderOption}
         style={styles}
         testID={testID}

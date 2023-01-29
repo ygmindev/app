@@ -8,17 +8,20 @@ import type {
 } from '@lib/backend/database/utils/Database/Database.models';
 import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
 import { _databaseConfig } from '@lib/config/database/_database.config';
+import type { PartialDeepModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { UninitializedError } from '@lib/shared/core/errors/UninitializedError/UninitializedError';
 import { debug } from '@lib/shared/logging/utils/logger/logger';
 import type { WithResourceNameModel } from '@lib/shared/resource/decorators/withResourceName/withResourceName.models';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import type { EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 import type { ResultModel } from '@lib/shared/resource/utils/Result/Result.models';
+import type { UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 import type { FilterQuery } from '@mikro-orm/core';
 import { MikroORM } from '@mikro-orm/core';
 import type { EntityManager, MongoDriver } from '@mikro-orm/mongodb';
-import { get, keys, set, unset } from 'lodash';
+import type { Filter, MongoError, UpdateFilter } from 'mongodb';
 
 export abstract class _Database implements DatabaseModel {
   protected _params: DatabaseParamsModel;
@@ -60,7 +63,7 @@ export abstract class _Database implements DatabaseModel {
           await _repository.persist(result).flush();
           return { result };
         } catch (e) {
-          switch (get(e, 'code') as unknown as number) {
+          switch ((e as MongoError).code as unknown as number) {
             case 11000:
               throw new DuplicateError(name);
             default:
@@ -138,18 +141,23 @@ export abstract class _Database implements DatabaseModel {
       update: async ({ filter, options, update }) => {
         const _em = this._entityManager;
         if (_em) {
-          const _filter = cleanDocument(filter) as object;
-          const _update = cleanDocument(update) as object;
-          keys(_update).forEach((key) => {
-            const _value = (_update as Record<string, unknown>)[key];
-            key.startsWith('$') || (unset(_update, key) && set(_update, '$set', { [key]: _value }));
+          const _filter = cleanDocument(filter) as Filter<TType & object>;
+          const _update = cleanDocument(update);
+          Object.keys(_update).forEach((key) => {
+            const _key = key as string & keyof UpdateModel<TType>;
+            if (!_key.startsWith('$')) {
+              delete _update[_key];
+              _update['$set'] = { [_key]: _update[_key] } as PartialDeepModel<
+                EntityResourceDataModel<TType>
+              >;
+            }
           });
           const result = (
             await _em
               .fork({})
               .getConnection()
               .getCollection<TType & object>(name)
-              .findOneAndUpdate(_filter, _update, {
+              .findOneAndUpdate(_filter, _update as UpdateFilter<TType & object>, {
                 projection: options?.project,
                 returnDocument: 'after',
               })

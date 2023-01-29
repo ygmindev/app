@@ -2,9 +2,9 @@ import type { ChildrenPropsModel } from '@lib/frontend/core/core.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 import type { ReactElement } from 'react';
 
-export interface ActivatablePropsModel
-  extends ChildrenPropsModel<(isActive?: boolean) => ReactElement> {
+export interface ActivatablePropsModel extends ChildrenPropsModel<ReactElement> {
   isHoverable?: boolean;
+  isPressable?: boolean;
   onActive?: CallableModel;
   onInactive?: CallableModel;
 }

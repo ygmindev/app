@@ -6,6 +6,7 @@ import { composeComponent } from '@lib/frontend/core/utils/composeComponent/comp
 import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
 import { THEME_COLOR, THEME_ROLE } from '@lib/frontend/style/style.constants';
 import { palette } from '@lib/frontend/style/utils/palette/palette';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const Tooltip = composeComponent<TooltipPropsModel, DroppablePropsModel>({
   getComponent: () => Droppable,
@@ -29,3 +30,5 @@ export const Tooltip = composeComponent<TooltipPropsModel, DroppablePropsModel>(
     };
   },
 });
+
+process.env.APP_DEBUG && (Tooltip.displayName = variableName(() => Tooltip));

@@ -9,11 +9,10 @@ import { useState } from 'react';
 export const useDimension = (): UseDimensionModel => {
   const [dimension, setDimension] = useState<DimensionModel>(display.getDimension());
   display.useLayoutEffect(() => {
-    const update = (): CallableModel =>
-      debounce({
-        callback: () => setDimension(display.getDimension()),
-        duration: USE_DIMENSION_DELAY,
-      });
+    const update: CallableModel = debounce({
+      callback: () => setDimension(display.getDimension()),
+      duration: USE_DIMENSION_DELAY,
+    });
     display.subscribeResize(update);
     update();
     return () => {

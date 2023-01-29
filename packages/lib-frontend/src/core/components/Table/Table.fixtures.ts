@@ -1,7 +1,7 @@
 import type { TableColumnModel } from '@lib/frontend/core/components/Table/Table.models';
 import { dateTimeFormat } from '@lib/shared/formatting/utils/dateTimeFormat/dateTimeFormat';
 import { DATE_TIME_FORMAT_TYPE } from '@lib/shared/formatting/utils/dateTimeFormat/dateTimeFormat.constants';
-import { range } from 'lodash';
+import range from 'lodash/range';
 
 export interface TableFixtureRowModel {
   dateColumn: Date;

@@ -4,6 +4,7 @@ import type { OtpFormPropsModel } from '@lib/frontend/auth/containers/OtpForm/Ot
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayout';
 import { useForm } from '@lib/frontend/form/hooks/useForm/useForm';
@@ -69,9 +70,9 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
       )}
 
       <OtpField
+        elementState={isLoading ? ELEMENT_STATE.LOADING : undefined}
         error={errors.otp}
         isAutoFocus
-        isDisabled={isLoading}
         onChange={_handleChange}
         value={values.otp}
       />
@@ -80,8 +81,8 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
         <Text>{t('auth:messages.otpDidntGet')}</Text>
 
         <Button
+          elementState={isLoading ? ELEMENT_STATE.LOADING : undefined}
           icon="refresh"
-          isLoading={isLoading}
           onPress={onBack}>
           {t('core:labels.tryAgain')}
         </Button>

@@ -1,5 +1,3 @@
-import '@lib/frontend/core/utils/polyfill/polyfill';
-
 import { AuthProvider } from '@lib/frontend/auth/providers/AuthProvider/AuthProvider';
 import { ErrorBoundary } from '@lib/frontend/core/components/ErrorBoundary/ErrorBoundary';
 import type { FCModel } from '@lib/frontend/core/core.models';
@@ -8,10 +6,13 @@ import { LocaleProvider } from '@lib/frontend/locale/providers/LocaleProvider/Lo
 import type { RootPropsModel } from '@lib/frontend/root/containers/Root/Root.models';
 import { RootLayout } from '@lib/frontend/root/layouts/RootLayout/RootLayout';
 import { RouteProvider } from '@lib/frontend/route/providers/RouteProvider/RouteProvider';
+import { initialize } from '@lib/frontend/setup/utils/initialize/initialize';
 import { StateProvider } from '@lib/frontend/state/providers/StateProvider/StateProvider';
 import { StyleProvider } from '@lib/frontend/style/providers/StyleProvider/StyleProvider';
 import { TrackingProvider } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider';
 import { cloneElement, Suspense, useMemo } from 'react';
+
+await initialize();
 
 export const Root: FCModel<RootPropsModel> = ({ children, initialState, locale, route }) => {
   const providers = useMemo(

@@ -8,9 +8,9 @@ import type { ThemeBasicSizeModel, ThemeColorModel } from '@lib/frontend/style/s
 export type ButtonTypeModel = `${BUTTON_TYPE}`;
 
 export interface ButtonPropsModel
-  extends Omit<PressablePropsModel, 'children'>,
+  extends Pick<IconPropsModel, 'icon'>,
     ChildrenPropsModel<TranslatableTextModel>,
-    Pick<IconPropsModel, 'icon'> {
+    Omit<PressablePropsModel, 'children'> {
   color?: ThemeColorModel;
   size?: ThemeBasicSizeModel;
   type?: ButtonTypeModel;

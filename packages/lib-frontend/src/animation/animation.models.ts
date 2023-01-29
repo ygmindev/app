@@ -1,18 +1,30 @@
-import type { StyleModel, ViewStyleModel } from '@lib/frontend/style/style.models';
+import type { ElementStateModel, ElementStatePropsModel } from '@lib/frontend/core/core.models';
+import type { StyleModel, StylePropsModel, ViewStyleModel } from '@lib/frontend/style/style.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 
-export interface AnimationModel<TStyle extends StyleModel = ViewStyleModel> {
+export interface AnimationModel<
+  TStyle extends StyleModel = ViewStyleModel,
+  TStates extends AnimationStatesModel<TStyle> = AnimationStatesModel<TStyle>,
+> {
   delay?: number;
   duration?: number;
-  exit?: TStyle;
-  from?: TStyle;
-  isActive?: boolean;
   isInfinite?: boolean;
   isInitial?: boolean;
+  isLazy?: boolean;
   onEnd?: CallableModel;
-  to?: TStyle;
+  states?: TStates;
 }
 
-export interface AnimatablePropsModel<TStyle extends StyleModel = ViewStyleModel> {
+export interface AnimatableRefModel {
+  to(params: ElementStateModel): Promise<void>;
+}
+
+export type AnimationStatesModel<TStyle extends StyleModel = ViewStyleModel> = {
+  [TKey in ElementStateModel]?: TStyle;
+};
+
+export interface AnimatablePropsModel<TStyle extends StyleModel = ViewStyleModel>
+  extends ElementStatePropsModel,
+    StylePropsModel<TStyle> {
   animation?: AnimationModel<TStyle>;
 }

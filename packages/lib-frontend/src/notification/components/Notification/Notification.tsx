@@ -32,21 +32,22 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
   const { t } = useTranslation();
   const { remove } = useNotification();
 
-  const isMounted = useMount({
-    deps: [id, remove, isInfinite],
-    onMount: isInfinite
-      ? undefined
-      : async () => {
-          await sleep({ duration: NOTIFICATION_DURATION });
-          isMounted && remove(id);
-        },
-  });
+  const isMounted = useMount(
+    {
+      onMount: isInfinite
+        ? undefined
+        : async () => {
+            await sleep({ duration: NOTIFICATION_DURATION });
+            isMounted && remove(id);
+          },
+    },
+    [id, remove, isInfinite],
+  );
 
   return (
     <Appearable
-      isActive={!isRemoving}
       isCenter
-      isScalable
+      isVisible={!isRemoving}
       style={styles}>
       <Wrapper
         backgroundColor={color}

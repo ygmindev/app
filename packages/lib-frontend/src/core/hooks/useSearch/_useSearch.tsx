@@ -9,7 +9,6 @@ import type {
 } from '@lib/frontend/core/hooks/useSearch/_useSearch.models';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import Fuse from 'fuse.js';
-import { map } from 'lodash';
 import { useCallback, useMemo, useState } from 'react';
 
 export const _useSearch = <TType,>({
@@ -28,7 +27,7 @@ export const _useSearch = <TType,>({
   const fuse = useMemo(() => new Fuse(list, { keys, threshold: SEARCH_THRESHOLD }), [list]);
 
   const result = useMemo(
-    () => (query ? map(fuse.search(query, { limit }), 'item') : list),
+    () => (query ? fuse.search(query, { limit }).map(({ item }) => item) : list),
     [fuse, limit, query],
   );
 

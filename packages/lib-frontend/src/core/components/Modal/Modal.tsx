@@ -10,13 +10,13 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { FONT_TYPE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { isString } from 'lodash';
+import isString from 'lodash/isString';
 
 export const Modal: FCModel<ModalPropsModel> = ({
   children,
+  elementState,
   header,
   height,
-  isDisabled,
   isFullSize,
   isOpen,
   onClose,
@@ -28,8 +28,8 @@ export const Modal: FCModel<ModalPropsModel> = ({
     <_Modal
       deviceHeight={deviceHeight}
       deviceWidth={deviceWidth}
+      elementState={elementState}
       height={height}
-      isDisabled={isDisabled}
       isFullSize={isFullSize}
       isOpen={isOpen}
       onClose={onClose}

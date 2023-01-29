@@ -7,7 +7,7 @@ import type {
 } from '@lib/frontend/style/utils/styler/spacingStyler/spacingStyler.models';
 import type { StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
-import { isNumber } from 'lodash';
+import isNumber from 'lodash/isNumber';
 
 const _getSpacing = (
   value: SpacingModel | 'auto' | number | undefined,

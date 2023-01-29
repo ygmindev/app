@@ -1,0 +1,14 @@
+import type {
+  GetComponentDisplayNameModel,
+  GetComponentDisplayNameParamsModel,
+} from '@lib/frontend/core/utils/getComponentDisplayName/getComponentDisplayName.models';
+import { uid } from '@lib/shared/core/utils/uid/uid';
+import isString from 'lodash/isString';
+import type { ComponentType } from 'react';
+
+export const getComponentDisplayName = (
+  params: GetComponentDisplayNameParamsModel,
+): GetComponentDisplayNameModel =>
+  isString(params)
+    ? params
+    : (params as ComponentType).displayName || (params as ComponentType).name || uid('library');

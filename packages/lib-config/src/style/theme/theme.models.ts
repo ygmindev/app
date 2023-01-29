@@ -17,6 +17,8 @@ export interface ThemeConfigParamsModel {
   colors: {
     activeLightness: number;
 
+    disabledLightness: number;
+
     palette: {
       dark: Record<ThemeColorModel, Record<ThemeRoleModel, Omit<PaletteParamsModel, 'color'>>>;
       light: Record<ThemeColorModel, Record<ThemeRoleModel, Omit<PaletteParamsModel, 'color'>>>;

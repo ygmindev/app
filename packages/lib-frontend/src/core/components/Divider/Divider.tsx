@@ -6,6 +6,7 @@ import { TranslatableText } from '@lib/frontend/locale/components/TranslatableTe
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { BORDER_DIRECTION } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const Divider = composeComponent<DividerPropsModel, WrapperPropsModel>({
   getComponent: () => Wrapper,
@@ -27,3 +28,5 @@ export const Divider = composeComponent<DividerPropsModel, WrapperPropsModel>({
     position: SHAPE_POSITION.RELATIVE,
   }),
 });
+
+process.env.APP_DEBUG && (Divider.displayName = variableName(() => Divider));

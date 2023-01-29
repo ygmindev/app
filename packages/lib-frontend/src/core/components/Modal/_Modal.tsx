@@ -1,4 +1,5 @@
 import type { _ModalPropsModel } from '@lib/frontend/core/components/Modal/_Modal.models';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import type { PartialModel } from '@lib/shared/core/core.models';
 import type { ComponentType } from 'react';
@@ -12,31 +13,35 @@ export const _Modal = composeComponent<_ModalPropsModel, PartialModel<typeof Mod
     deviceHeight,
     deviceWidth,
     duration,
-    isDisabled,
+    elementState,
     isFullSize,
     isOpen,
     onClose,
-  }) => ({
-    animationIn: 'slideInUp',
-    animationInTiming: duration,
-    animationOut: 'slideOutDown',
-    animationOutTiming: duration,
-    backdropOpacity: 0.5,
-    backdropTransitionInTiming: duration,
-    backdropTransitionOutTiming: duration,
-    children,
-    coverScreen: isFullSize,
-    deviceHeight: deviceHeight,
-    deviceWidth: deviceWidth,
-    hasBackdrop: true,
-    hideModalContentWhileAnimating: true,
-    isVisible: isOpen,
-    onBackdropPress: isDisabled ? undefined : onClose,
-    onSwipeComplete: isDisabled ? undefined : () => onClose && onClose(),
-    presentationStyle: 'formSheet',
-    supportedOrientations: ['portrait', 'landscape'],
-    swipeDirection: isDisabled ? undefined : 'down',
-  }),
+  }) => {
+    const _isDisabled =
+      elementState === ELEMENT_STATE.DISABLED || elementState === ELEMENT_STATE.LOADING;
+    return {
+      animationIn: 'slideInUp',
+      animationInTiming: duration,
+      animationOut: 'slideOutDown',
+      animationOutTiming: duration,
+      backdropOpacity: 0.5,
+      backdropTransitionInTiming: duration,
+      backdropTransitionOutTiming: duration,
+      children,
+      coverScreen: isFullSize,
+      deviceHeight: deviceHeight,
+      deviceWidth: deviceWidth,
+      hasBackdrop: true,
+      hideModalContentWhileAnimating: true,
+      isVisible: isOpen,
+      onBackdropPress: _isDisabled ? undefined : onClose,
+      onSwipeComplete: _isDisabled ? undefined : () => onClose && onClose(),
+      presentationStyle: 'formSheet',
+      supportedOrientations: ['portrait', 'landscape'],
+      swipeDirection: _isDisabled ? undefined : 'down',
+    };
+  },
 
   stylers: [
     ({ deviceHeight, deviceWidth, height, isFullSize, width }) => ({

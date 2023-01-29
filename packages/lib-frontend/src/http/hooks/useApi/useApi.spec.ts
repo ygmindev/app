@@ -3,7 +3,7 @@ import { renderHook } from '@lib/frontend/test/utils/renderHook/renderHook';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 import type { UriParamsModel } from '@lib/shared/http/utils/uri/uri.models';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
-import { toNumber } from 'lodash';
+import toNumber from 'lodash/toNumber';
 import nock from 'nock';
 
 const { displayName } = withTest({ target: () => useApi });

@@ -1,12 +1,14 @@
 import { useApi } from '@lib/frontend/http/hooks/useApi/useApi';
 import type {
-  GraphQlHttpParamsModel,
-  GraphQlHttpResponseModel,
-  GraphQlQueryHttpParamsModel,
   UseGraphQlModel,
   UseGraphQlParamsModel,
 } from '@lib/frontend/http/hooks/useGraphQl/useGraphQl.models';
 import { graphQlQuery } from '@lib/frontend/http/utils/graphQlQuery/graphQlQuery';
+import type {
+  GraphQlHttpParamsModel,
+  GraphQlHttpResponseModel,
+  GraphQlQueryHttpParamsModel,
+} from '@lib/frontend/http/utils/graphQlQuery/graphQlQuery.models';
 import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
 import { print } from 'graphql/language/printer';
 import { gql } from 'graphql-tag';
@@ -23,7 +25,7 @@ export const useGraphQl = (params: UseGraphQlParamsModel = {}): UseGraphQlModel 
     }: GraphQlQueryHttpParamsModel<TParams, TResult, TName>): Promise<TResult | null> => {
       const result = await post<
         GraphQlHttpParamsModel<TParams>,
-        GraphQlHttpResponseModel<TName, TResult>
+        GraphQlHttpResponseModel<TResult, TName>
       >({
         params: {
           query: print(gql`

@@ -38,7 +38,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
     <Tippy
       animation={false}
       appendTo={() => document.body}
-      content={<Appearable isActive={isOpen}>{children}</Appearable>}
+      content={<Appearable isVisible={isOpen}>{children}</Appearable>}
       ignoreAttributes
       interactive
       maxWidth={maxWidth || '100%'}

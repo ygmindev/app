@@ -1,24 +1,21 @@
-import type { FieldPropsModel, ForwardedRefPropsModel } from '@lib/frontend/core/core.models';
+import type { ElementStateModel, FieldPropsModel } from '@lib/frontend/core/core.models';
 import type { TextFieldKeyboardModel } from '@lib/frontend/form/components/TextField/TextField.models';
 import type { SubmittablePropsModel } from '@lib/frontend/form/form.models';
 import type { DimensionModel } from '@lib/frontend/platform/platform.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 import type { ReactElement, ReactNode } from 'react';
-import type { TextInput, TextInputProps } from 'react-native';
+import type { TextInputProps } from 'react-native';
 
 export interface _TextFieldPropsModel
-  extends ForwardedRefPropsModel<TextInput>,
-    FieldPropsModel,
+  extends FieldPropsModel,
     SubmittablePropsModel<string>,
     DimensionModel {
   Component?(inputProps: TextInputProps): ReactElement;
   autoComplete?: string | false;
-  isActive?: boolean;
   isCenter?: boolean;
-  isFocused?: boolean;
   keyboard?: TextFieldKeyboardModel;
   language?: string;
-  leftElement?(isActive?: boolean): ReactNode;
+  leftElement?(elementState?: ElementStateModel): ReactNode;
   maxLength?: number;
   numberOfLines?: number;
   onBlur?: CallableModel;
@@ -26,5 +23,5 @@ export interface _TextFieldPropsModel
   onFocus?: CallableModel;
   onRemove?: CallableModel;
   placeholder?: string;
-  rightElement?(isActive?: boolean): ReactNode;
+  rightElement?(elementState?: ElementStateModel): ReactNode;
 }

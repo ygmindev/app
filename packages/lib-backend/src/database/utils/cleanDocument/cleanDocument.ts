@@ -1,9 +1,11 @@
-import { isPlainObject, isString, keys, toPlainObject } from 'lodash';
+import isPlainObject from 'lodash/isPlainObject';
+import isString from 'lodash/isString';
+import toPlainObject from 'lodash/toPlainObject';
 import { ObjectId } from 'mongodb';
 
 export const cleanDocument = <TType extends unknown>(value: TType): TType => {
   const _value = toPlainObject(value);
-  keys(_value).forEach((k) => {
+  Object.keys(_value).forEach((k) => {
     const v = (_value as Record<string, unknown>)[k];
     isPlainObject(v) && ((_value as Record<string, unknown>)[k] = cleanDocument(v));
     isString(k) &&

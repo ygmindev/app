@@ -12,5 +12,6 @@ export interface _BundleConfigParamsModel {
   mode: BundleModeModel;
   modulePaths: Array<string>;
   platform: PlatformModel;
+  provide?: Record<string, string>;
   watch?: Array<string>;
 }

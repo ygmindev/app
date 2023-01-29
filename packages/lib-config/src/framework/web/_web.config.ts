@@ -11,7 +11,11 @@ export const _webConfig = ({ isReact, isSsr }: _WebConfigParamsModel): UserConfi
     strategy: MERGE_STRATEGY.DEEP_APPEND,
 
     values: [
-      { plugins: [isReact && react(), isSsr && ssr({ prerender: true })].filter(Boolean) },
+      {
+        plugins: [isReact && react(), isSsr && ssr({ prerender: { partial: true } })].filter(
+          Boolean,
+        ),
+      },
 
       bundleConfig,
     ],

@@ -9,7 +9,8 @@ import {
   statSync,
   writeFileSync,
 } from 'fs';
-import { every, forEach } from 'lodash';
+import every from 'lodash/every';
+import forEach from 'lodash/forEach';
 import minimatch from 'minimatch';
 import { join } from 'path';
 

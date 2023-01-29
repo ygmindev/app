@@ -4,6 +4,7 @@ import type { ViewPropsModel } from '@lib/frontend/core/components/View/View.mod
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import type { ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const viewParams: ComposeComponentParamsModel<ViewPropsModel, _ViewPropsModel> = {
   getComponent: () => _View,
@@ -15,3 +16,5 @@ export const viewParams: ComposeComponentParamsModel<ViewPropsModel, _ViewPropsM
 };
 
 export const View = composeComponent<ViewPropsModel, _ViewPropsModel>(viewParams);
+
+process.env.APP_DEBUG && (View.displayName = variableName(() => View));

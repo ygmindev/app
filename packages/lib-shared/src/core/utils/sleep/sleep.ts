@@ -1,10 +1,7 @@
 import type { SleepParamsModel } from '@lib/shared/core/utils/sleep/sleep.models';
 import { debug } from '@lib/shared/logging/utils/logger/logger';
 
-export const sleep = ({
-  duration = 0,
-  isVerbose = false,
-}: SleepParamsModel = {}): Promise<void> => {
+export const sleep = ({ duration = 0, isVerbose = true }: SleepParamsModel = {}): Promise<void> => {
   const _duration = duration || 0;
   const _isVerbose = isVerbose || false;
 

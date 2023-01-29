@@ -1,9 +1,9 @@
-import type { SFCPropsModel } from '@lib/frontend/core/core.models';
+import type { RSFCModel } from '@lib/frontend/core/core.models';
 import type { UseStylesParamsModel } from '@lib/frontend/style/hooks/useStyles/useStyles.models';
 import type { UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
 import type { StyleModel, StylePropsModel, ViewStyleModel } from '@lib/frontend/style/style.models';
 import type { TestIdPropsModel } from '@lib/frontend/test/test.models';
-import type { ComponentType, ForwardedRef, ForwardRefExoticComponent, RefObject } from 'react';
+import type { ComponentType, ForwardedRef } from 'react';
 
 export interface ComposeComponentParamsModel<
   TProps,
@@ -16,7 +16,7 @@ export interface ComposeComponentParamsModel<
   getProps?(
     props: TProps & TestIdPropsModel & StylePropsModel<TStyle>,
     theme: UseThemeModel,
-    ref?: ForwardedRef<RefObject<TRef>>,
+    ref?: ForwardedRef<TRef>,
   ): TResult;
 
   isWeb?: boolean;
@@ -25,4 +25,5 @@ export interface ComposeComponentParamsModel<
 export type ComposeComponentModel<
   TProps,
   TStyle extends StyleModel = ViewStyleModel,
-> = ForwardRefExoticComponent<SFCPropsModel<TProps, TStyle>>;
+  TRef = unknown,
+> = RSFCModel<TRef, TProps, TStyle>;

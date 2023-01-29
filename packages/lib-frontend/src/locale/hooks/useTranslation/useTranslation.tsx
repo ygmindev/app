@@ -5,7 +5,7 @@ import type {
   UseTranslationParamsModel,
 } from '@lib/frontend/locale/hooks/useTranslation/useTranslation.models';
 import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
-import { isFunction } from 'lodash';
+import isFunction from 'lodash/isFunction';
 
 export const useTranslation = (ns: UseTranslationParamsModel = []): UseTranslationModel => {
   const {

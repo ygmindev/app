@@ -6,7 +6,7 @@ import { BACKUP_DIR } from '@tool/task/core/tasks/backup/backup.constants';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 import { copy } from '@tool/task/file/utils/copy/copy';
-import { sortBy } from 'lodash';
+import sortBy from 'lodash/sortBy';
 import { resolve } from 'path';
 
 const revert: TaskParamsModel = {

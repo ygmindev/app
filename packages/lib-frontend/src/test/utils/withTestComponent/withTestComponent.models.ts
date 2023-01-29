@@ -1,4 +1,4 @@
-import type { ForwardedRefPropsModel } from '@lib/frontend/core/core.models';
+import type { RefPropsModel } from '@lib/frontend/core/core.models';
 import type { TestIdPropsModel } from '@lib/frontend/test/test.models';
 import type { PartialModel, RequiredModel } from '@lib/shared/core/core.models';
 import type {
@@ -11,7 +11,7 @@ export type WithTestComponentParamsModel<
   TProps,
   TDefault extends PartialModel<TProps> = PartialModel<TProps>,
 > = WithTestParamsModel<ComponentType<TProps>> & {
-  defaultProps?: TDefault & ForwardedRefPropsModel;
+  defaultProps?: TDefault & RefPropsModel;
 };
 
 export type WithTestComponentModel<

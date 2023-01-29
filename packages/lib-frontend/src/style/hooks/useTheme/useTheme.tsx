@@ -3,7 +3,6 @@ import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import type { UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
 import type { ThemeColorModel } from '@lib/frontend/style/style.models';
 import { palette } from '@lib/frontend/style/utils/palette/palette';
-import { keys } from 'lodash';
 import { useMemo } from 'react';
 
 export const useTheme = (): UseThemeModel => {
@@ -14,19 +13,24 @@ export const useTheme = (): UseThemeModel => {
       colors: {
         activeLightness: themeConfig.colors.activeLightness,
 
-        tone: (keys(themeConfig.colors.tone) as Array<ThemeColorModel>).reduce((result, key) => {
-          const color = themeConfig.colors.tone[key] as ThemeColorModel;
-          const _palette = themeConfig.colors.palette[isDark ? 'dark' : 'light'][key];
-          return {
-            ...result,
-            [key]: {
-              main: palette({ color, ..._palette.main }),
-              mainContrast: palette({ color, ..._palette.mainContrast }),
-              muted: palette({ color, ..._palette.muted }),
-              mutedContrast: palette({ color, ..._palette.mutedContrast }),
-            },
-          };
-        }, {} as UseThemeModel['colors']['tone']),
+        disabledLightness: themeConfig.colors.disabledLightness,
+
+        tone: (Object.keys(themeConfig.colors.tone) as Array<ThemeColorModel>).reduce(
+          (result, key) => {
+            const color = themeConfig.colors.tone[key] as ThemeColorModel;
+            const _palette = themeConfig.colors.palette[isDark ? 'dark' : 'light'][key];
+            return {
+              ...result,
+              [key]: {
+                main: palette({ color, ..._palette.main }),
+                mainContrast: palette({ color, ..._palette.mainContrast }),
+                muted: palette({ color, ..._palette.muted }),
+                mutedContrast: palette({ color, ..._palette.mutedContrast }),
+              },
+            };
+          },
+          {} as UseThemeModel['colors']['tone'],
+        ),
       },
       isDark,
     }),

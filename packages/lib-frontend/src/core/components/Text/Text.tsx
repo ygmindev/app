@@ -5,6 +5,7 @@ import { composeComponent } from '@lib/frontend/core/utils/composeComponent/comp
 import type { ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
 import type { TextStyleModel } from '@lib/frontend/style/style.models';
 import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const textParams: ComposeComponentParamsModel<
   TextPropsModel,
@@ -17,3 +18,5 @@ export const textParams: ComposeComponentParamsModel<
 };
 
 export const Text = composeComponent<TextPropsModel, _TextPropsModel>(textParams);
+
+process.env.APP_DEBUG && (Text.displayName = variableName(() => Text));

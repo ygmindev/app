@@ -4,7 +4,7 @@ import type {
   DummyEntityResourceModel,
 } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.models';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
-import { filter as _filter, map } from 'lodash';
+import _filter from 'lodash/filter';
 
 const { displayName } = withTest({ target: () => getConnection });
 
@@ -27,7 +27,7 @@ describe(displayName, () => {
       input: { filter: {} },
       pagination: { first: LIMIT },
     });
-    expect(map(result?.edges, 'node')).toStrictEqual(entities);
+    expect(result?.edges.map(({ node }) => node)).toStrictEqual(entities);
   });
 
   test('works with filter', async () => {
@@ -41,6 +41,6 @@ describe(displayName, () => {
       pagination: { first: LIMIT },
     });
     const expected = _filter(entities, filter);
-    expect(map(result?.edges, 'node')).toStrictEqual(expected);
+    expect(result?.edges.map(({ node }) => node)).toStrictEqual(expected);
   });
 });

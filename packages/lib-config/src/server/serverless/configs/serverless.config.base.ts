@@ -5,7 +5,7 @@ import type { EnvironmentModel } from '@lib/shared/environment/environment.model
 import { setup } from '@lib/shared/environment/utils/setup/setup';
 import { appUri } from '@lib/shared/http/utils/appUri/appUri';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
-import { toNumber } from 'lodash';
+import toNumber from 'lodash/toNumber';
 
 export const serverlessConfig: ServerlessConfigParamsModel = {
   bundle: bundleConfig,

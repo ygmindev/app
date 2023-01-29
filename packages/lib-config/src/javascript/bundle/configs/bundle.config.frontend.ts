@@ -18,6 +18,7 @@ export const bundleConfig: BundleConfigParamsModel = merge({
 
       externals: fromGlobs({
         globs: [
+          // 'inline-style-prefixer',
           '@expo',
           '@react-native*',
           'history',

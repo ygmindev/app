@@ -23,5 +23,10 @@
     "validateZipCode": "TRANSLATION_MISSING"
   },
   "Submit": "Submit",
-  "Email address": "Email address"
+  "Email address": "Email address",
+  "Button": "Button",
+  "Text": "Text",
+  "Test": "Test",
+  "Click": "Click",
+  "text": "text"
 }

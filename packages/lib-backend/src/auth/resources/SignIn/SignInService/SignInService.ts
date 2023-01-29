@@ -14,7 +14,7 @@ import type { ContextModel } from '@lib/shared/resource/utils/Context/Context.mo
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 import type { UserModel } from '@lib/shared/user/resources/User/User.models';
-import { keys, pick, unset } from 'lodash';
+import pick from 'lodash/pick';
 
 const _createSignIn = async (user: UserModel | null | undefined): Promise<SignInModel> => {
   if (user) {
@@ -38,7 +38,7 @@ export class SignInService implements SignInServiceModel {
   > {
     if (form.username && form.otp) {
       await this._otpService.verify({ otp: form.otp, username: form.username });
-      unset(form, 'otp');
+      delete (form as Partial<SignInFormModel>).otp;
 
       let { result: user } = await this._userService.get({ filter: { email: form.username } });
       let isNew;
@@ -54,7 +54,7 @@ export class SignInService implements SignInServiceModel {
     }
     throw new HttpError(
       HTTP_STATUS_CODE.BAD_REQUEST,
-      keys(form)
+      Object.keys(form)
         .filter((key) => !(form as Record<string, string>)[key])
         .join(', '),
     );
@@ -76,7 +76,7 @@ export class SignInService implements SignInServiceModel {
     }
     throw new HttpError(
       HTTP_STATUS_CODE.BAD_REQUEST,
-      keys(form)
+      Object.keys(form)
         .filter((key) => !(form as Record<string, string>)[key])
         .join(', '),
     );

@@ -39,6 +39,12 @@ export const bundleConfig: BundleConfigParamsModel = merge({
       extensions: permuteString(['.web'], bundleConfigBase.extensions),
 
       platform: PLATFORM.WEB,
+
+      provide: {
+        requestAnimationFrame: fromConfig(
+          'javascript/bundle/aliases/requestAnimationFrame/index.js',
+        ),
+      },
     },
 
     bundleConfigFrontend,

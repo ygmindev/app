@@ -1,6 +1,7 @@
 import type { IsTranslatableTextParamsModel } from '@lib/frontend/locale/utils/isTranslatableText/isTranslatableText.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
-import { isFunction, isString } from 'lodash';
+import isFunction from 'lodash/isFunction';
+import isString from 'lodash/isString';
 
 export const isTranslatableText = (
   params: IsTranslatableTextParamsModel,

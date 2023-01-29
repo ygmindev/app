@@ -10,7 +10,9 @@ import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 import { CORE } from '@lib/shared/core/core.constants';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { merge } from '@lib/shared/core/utils/merge/merge';
-import { get, isFunction, isPlainObject, reduce, set, unset } from 'lodash';
+import isFunction from 'lodash/isFunction';
+import isPlainObject from 'lodash/isPlainObject';
+import reduce from 'lodash/reduce';
 
 export const useForm = <TType extends unknown>({
   initialValues,
@@ -29,14 +31,18 @@ export const useForm = <TType extends unknown>({
       formValidators,
       (result, v, k) => {
         if (v) {
-          const _value = get(data, k);
+          const _value = (data as Record<string, TValue[keyof TValue]>)[k];
           if (isPlainObject(v) && isPlainObject(data)) {
             const error = _validate(_value, v as FormValidatorsModel<typeof _value>);
             return merge<FormErrorModel<TType>>({ values: [error, result] });
           }
           if (isFunction(v)) {
             const error = v({ value: _value });
-            isEmpty(error) ? unset(result, k) : set(result, k, t(error as TranslatableTextModel));
+            if (isEmpty(error)) {
+              delete (result as Record<string, unknown>)[k];
+            } else {
+              (result as Record<string, unknown>)[k] = t(error as TranslatableTextModel);
+            }
             return result;
           }
         }

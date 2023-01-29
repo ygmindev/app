@@ -5,7 +5,8 @@ import type { _TestConfigParamsModel } from '@lib/config/javascript/test/_test.m
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
-import { reduce, trim } from 'lodash';
+import reduce from 'lodash/reduce';
+import trim from 'lodash/trim';
 import type { UserConfig } from 'vitest/config';
 
 export const _testConfig = ({

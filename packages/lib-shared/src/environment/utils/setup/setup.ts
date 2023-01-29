@@ -5,7 +5,10 @@ import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import type { SetupParamsModel } from '@lib/shared/environment/utils/setup/setup.models';
 import { config } from 'dotenv';
 import { existsSync, writeFileSync } from 'fs';
-import { forEach, map, reduce, toString } from 'lodash';
+import forEach from 'lodash/forEach';
+import map from 'lodash/map';
+import reduce from 'lodash/reduce';
+import toString from 'lodash/toString';
 
 export const setup = ({
   environment = process.env.NODE_ENV || ENVIRONMENT.DEVELOPMENT,
@@ -20,32 +23,28 @@ export const setup = ({
     fromWorking('.env'),
   ];
 
-  const envs = reduce(
-    paths,
-    (result, path) => {
-      if (existsSync(path)) {
-        const { error, parsed } = config({ path });
-        if (error) {
-          throw new NotFoundError(path);
-        }
-        return parsed
-          ? {
-              ...result,
-              ...reduce(
-                parsed,
-                (newResult, v, k) =>
-                  !writes || writes.some((write) => write.test(k))
-                    ? { ...newResult, [k]: v }
-                    : newResult,
-                {},
-              ),
-            }
-          : result;
+  const envs = paths.reduce((result, path) => {
+    if (existsSync(path)) {
+      const { error, parsed } = config({ path });
+      if (error) {
+        throw new NotFoundError(path);
       }
-      return result;
-    },
-    {} as Record<string, string>,
-  );
+      return parsed
+        ? {
+            ...result,
+            ...reduce(
+              parsed,
+              (newResult, v, k) =>
+                !writes || writes.some((write) => write.test(k))
+                  ? { ...newResult, [k]: v }
+                  : newResult,
+              {},
+            ),
+          }
+        : result;
+    }
+    return result;
+  }, {} as Record<string, string>);
 
   environment === 'production' &&
     writes &&

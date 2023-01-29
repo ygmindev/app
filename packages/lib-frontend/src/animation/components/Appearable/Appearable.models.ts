@@ -1,8 +1,6 @@
-import type { UseAnimationParamsModel } from '@lib/frontend/animation/hooks/useAnimation/useAnimation.models';
+import type { AnimatablePropsModel } from '@lib/frontend/animation/animation.models';
 import type { WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 
-export interface AppearablePropsModel
-  extends WrapperPropsModel,
-    Omit<UseAnimationParamsModel, 'types'> {
-  isScalable?: boolean;
+export interface AppearablePropsModel extends WrapperPropsModel, AnimatablePropsModel {
+  isVisible?: boolean;
 }

@@ -1,6 +1,6 @@
 import type { _LinkPropsModel } from '@lib/frontend/core/components/Link/_Link.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
-import { isString } from 'lodash';
+import isString from 'lodash/isString';
 import type { TextProps, ViewProps } from 'react-native';
 import { Text, View } from 'react-native';
 

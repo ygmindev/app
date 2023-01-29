@@ -2,7 +2,7 @@ import { TASK_STATUS } from '@lib/config/core/task/task.constants';
 import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { command } from '@tool/task/core/utils/command/command';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
-import { trim } from 'lodash';
+import trim from 'lodash/trim';
 
 const renameExtension: TaskParamsModel = {
   name: 'renameExtension',

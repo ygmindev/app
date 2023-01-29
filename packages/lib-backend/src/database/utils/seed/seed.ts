@@ -3,7 +3,7 @@ import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import type { EntityResourceServiceModel } from '@lib/shared/resource/resources/EntityResource/EntityResourceService/EntityResourceService.models';
-import { isFunction } from 'lodash';
+import isFunction from 'lodash/isFunction';
 
 export const seed = async ({ names }: SeedParamsModel = {}): Promise<void> => {
   const services = fromGlobs({

@@ -1,7 +1,7 @@
 import { useSession } from '@lib/frontend/auth/hooks/useSession/useSession';
 import type { UseApiModel, UseApiParamsModel } from '@lib/frontend/http/hooks/useApi/useApi.models';
 import { useHttp } from '@lib/frontend/http/hooks/useHttp/useHttp';
-import { toNumber } from 'lodash';
+import toNumber from 'lodash/toNumber';
 
 export const useApi = ({
   host,

@@ -1,3 +1,5 @@
+import 'source-map-support/register';
+
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { initialize as initializeBase } from '@lib/shared/setup/utils/initialize/initialize';
 

@@ -5,7 +5,10 @@ import type { StylerModel } from '@lib/frontend/style/utils/styler/styler.models
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 
 export const colorStyler: StylerModel<ColorStylerParamsModel, TextStyleModel> = (
-  { color = THEME_COLOR.NEUTRAL, colorRole = THEME_ROLE.MAIN_CONTRAST },
+  {
+    color = THEME_COLOR.NEUTRAL,
+    colorRole = color === THEME_COLOR.NEUTRAL ? THEME_ROLE.MAIN_CONTRAST : THEME_ROLE.MAIN,
+  },
   theme,
 ) => {
   const _color = theme.colors.tone[color as ThemeColorModel];

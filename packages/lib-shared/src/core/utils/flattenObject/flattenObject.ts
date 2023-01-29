@@ -1,5 +1,7 @@
 import type { FlattenObjectParams } from '@lib/shared/core/utils/flattenObject/flattenObject.models';
-import { isPlainObject, reduce, some } from 'lodash';
+import isPlainObject from 'lodash/isPlainObject';
+import reduce from 'lodash/reduce';
+import some from 'lodash/some';
 
 export const flattenObject = ({
   value,

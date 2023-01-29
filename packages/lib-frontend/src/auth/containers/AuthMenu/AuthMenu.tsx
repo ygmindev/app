@@ -47,7 +47,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
       anchor={(isOpen) => (
         <Button
           icon="person"
-          isPressed={isOpen}
+          isActive={isOpen}
           type={BUTTON_TYPE.ICON}
         />
       )}

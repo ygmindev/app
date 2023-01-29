@@ -1,6 +1,7 @@
 import { seed } from '@lib/backend/database/utils/seed/seed';
 import type { TestResourceServiceParamsModel } from '@lib/backend/test/utils/testResourceService/testResourceService.models';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
+import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { FilterCombineModel } from '@lib/shared/resource/utils/Filter/Filter.models';
@@ -10,7 +11,10 @@ import type {
   DummyEntityResourceFormModel,
   DummyEntityResourceModel,
 } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.models';
-import { filter, find, isEqual, keys, pick, some } from 'lodash';
+import filter from 'lodash/filter';
+import find from 'lodash/find';
+import pick from 'lodash/pick';
+import some from 'lodash/some';
 
 export const testResourceService = async ({
   before,
@@ -59,7 +63,7 @@ export const testResourceService = async ({
     expect(result?._id).toBeDefined();
     expect(result?.created && new Date().getTime() - result?.created.getTime()).toBeLessThan(1000);
     expect(result?.stringProperty).toStrictEqual(input.form.stringProperty);
-    expect(keys(result)).not.toContainEqual('stringPropertyOptional');
+    expect(Object.keys(result as object)).not.toContainEqual('stringPropertyOptional');
   });
 
   test('works with get by id', async () => {
@@ -138,7 +142,7 @@ export const testResourceService = async ({
     const { result } = await service.get(input);
     const expected = find(data, (row) =>
       some((input.filter as FilterCombineModel<DummyEntityResourceModel>).$or, (condition) => {
-        const _row = pick(row, keys(condition));
+        const _row = pick(row, Object.keys(condition));
         return !isEmpty(_row) && isEqual(_row, condition);
       }),
     ) as DummyEntityResourceModel;
@@ -207,7 +211,7 @@ export const testResourceService = async ({
     const { result } = await service.getMany(input);
     const expected = filter(data, (row) =>
       some((input.filter as FilterCombineModel<DummyEntityResourceModel>).$or, (condition) => {
-        const _row = pick(row, keys(condition));
+        const _row = pick(row, Object.keys(condition));
         return !isEmpty(_row) && isEqual(_row, condition);
       }),
     );

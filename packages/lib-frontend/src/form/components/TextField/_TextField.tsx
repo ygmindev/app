@@ -1,18 +1,26 @@
+import type { AnimatableRefModel, AnimationModel } from '@lib/frontend/animation/animation.models';
 import { AnimatableText } from '@lib/frontend/animation/components/AnimatableText/AnimatableText';
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import type { SFCModel } from '@lib/frontend/core/core.models';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import type { RSFCModel } from '@lib/frontend/core/core.models';
 import type { _TextFieldPropsModel } from '@lib/frontend/form/components/TextField/_TextField.models';
 import { TEXT_FIELD_KEYBOARD } from '@lib/frontend/form/components/TextField/TextField.constants';
-import type { TextFieldKeyboardModel } from '@lib/frontend/form/components/TextField/TextField.models';
+import type {
+  TextFieldKeyboardModel,
+  TextFieldRefModel,
+} from '@lib/frontend/form/components/TextField/TextField.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import type { TextStyleModel } from '@lib/frontend/style/style.models';
 import { palette } from '@lib/frontend/style/utils/palette/palette';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
-import { isNil } from 'lodash';
+import isString from 'lodash/isString';
+import type { RefObject } from 'react';
+import { forwardRef, useRef, useState } from 'react';
 import type {
   NativeSyntheticEvent,
   TextInputKeyPressEventData,
@@ -70,196 +78,212 @@ const _getTextContentType = (
   return 'none';
 };
 
-export const _TextField: SFCModel<_TextFieldPropsModel> = ({
-  autoComplete,
-  Component = (inputProps) => <NativeTextInput {...inputProps} />,
-  error,
-  forwardedRef,
-  height,
-  icon,
-  isActive,
-  isCenter,
-  isDisabled,
-  isFocused,
-  keyboard,
-  label,
-  language,
-  leftElement,
-  maxLength,
-  nativeID,
-  numberOfLines,
-  onBlur,
-  onChange,
-  onEscape,
-  onFocus,
-  onRemove,
-  onSubmit,
-  placeholder,
-  rightElement,
-  testID,
-  value,
-  width,
-  ...props
-}) => {
-  const theme = useTheme();
-  const { styles } = useStyles({ props });
+export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = forwardRef(
+  (
+    {
+      autoComplete,
+      Component = (inputProps: TextInputProps) => <NativeTextInput {...inputProps} />,
+      error,
+      height,
+      icon,
+      isCenter,
+      elementState,
+      keyboard,
+      label,
+      language,
+      leftElement,
+      maxLength,
+      nativeID,
+      numberOfLines,
+      onBlur,
+      onChange,
+      onEscape,
+      onFocus,
+      onRemove,
+      onSubmit,
+      placeholder,
+      rightElement,
+      testID,
+      value,
+      width,
+      ...props
+    },
+    ref,
+  ) => {
+    const theme = useTheme();
+    const { styles } = useStyles({ props });
+    const [isActive, setIsActive] = useState<boolean>(false);
 
-  const _isError = !isNil(error) && error !== false;
-  const _isActive = isFocused || isActive;
+    const containerRef = useRef<AnimatableRefModel>(null);
+    const iconRef = useRef<AnimatableRefModel>(null);
+    const labelRef = useRef<AnimatableRefModel>(null);
 
-  const _backgroundColor = isDisabled
-    ? palette({ color: theme.colors.tone.neutral.main, lightness: theme.colors.activeLightness })
-    : theme.colors.tone.neutral.main;
+    const _isError = error === true || (isString(error) && error.length > 0);
+    const _isDisabled = elementState === ELEMENT_STATE.DISABLED;
 
-  const _activeColor = _isError
-    ? theme.colors.tone.error.main
-    : _isActive
-    ? theme.colors.tone.primary.main
-    : theme.colors.tone.neutral.muted;
+    const _activeBackgroundColor = theme.colors.tone.neutral.main;
+    const _disabledBackgroundColor = palette({
+      color: theme.colors.tone.neutral.main,
+      lightness: theme.colors.disabledLightness,
+    });
+    const _activeColor = _isError ? theme.colors.tone.error.main : theme.colors.tone.primary.main;
+    const _inactiveColor = theme.colors.tone.neutral.muted;
 
-  const _colors = {
-    from: theme.colors.tone.neutral.muted,
-    to: _isActive ? _activeColor : theme.colors.tone.neutral.muted,
-  };
+    const _containerAnimation: AnimationModel = {
+      // animatableRefs: [containerRef],
+      states: {
+        [ELEMENT_STATE.DISABLED]: { backgroundColor: _disabledBackgroundColor },
+        [ELEMENT_STATE.INACTIVE]: {
+          backgroundColor: _activeBackgroundColor,
+          borderColor: _inactiveColor,
+        },
+        [ELEMENT_STATE.ACTIVE]: {
+          backgroundColor: _activeBackgroundColor,
+          borderColor: _activeColor,
+        },
+      },
+    };
 
-  const _leftElement = leftElement && (
-    <Appearable
-      isActive={!isEmpty(value) || isFocused || !label}
-      isCenter
-      isLazy={false}
-      mTop={18}>
-      {leftElement(_isActive)}
-    </Appearable>
-  );
+    const _childrenAnimation: AnimationModel<TextStyleModel> = {
+      // animatableRefs: [iconRef, labelRef],
+      states: {
+        [ELEMENT_STATE.DISABLED]: { color: _inactiveColor },
+        [ELEMENT_STATE.INACTIVE]: { color: _inactiveColor },
+        [ELEMENT_STATE.ACTIVE]: { color: _activeColor },
+      },
+    };
 
-  const _rightElement = rightElement && rightElement(_isActive);
+    const _leftElement = leftElement && (
+      <Appearable
+        isCenter
+        isVisible={!isEmpty(value) || isActive || !label}
+        mTop={18}>
+        {leftElement(elementState)}
+      </Appearable>
+    );
 
-  return (
-    <Wrapper
-      animation={{
-        from: { borderColor: _colors.from },
-        isActive: _isActive,
-        to: { borderColor: _colors.to },
-      }}
-      backgroundColor={_backgroundColor}
-      border
-      grow
-      height={height}
-      isOverflowHidden
-      position={SHAPE_POSITION.RELATIVE}
-      round
-      style={styles}
-      testID={testID}
-      width={width}>
+    const _rightElement = rightElement && rightElement(elementState);
+
+    return (
       <Wrapper
-        backgroundColor={_backgroundColor}
-        bottom={0}
-        height={3}
-        left={0}
-        position={SHAPE_POSITION.ABSOLUTE}
-        right={0}
-        zIndex={1}
-      />
+        animation={_containerAnimation}
+        backgroundColor={_activeBackgroundColor}
+        border
+        grow
+        height={height}
+        isOverflowHidden
+        position={SHAPE_POSITION.RELATIVE}
+        ref={containerRef}
+        round
+        style={styles}
+        testID={testID}
+        width={width}>
+        <Wrapper
+          backgroundColor={_activeBackgroundColor}
+          bottom={0}
+          height={3}
+          left={0}
+          position={SHAPE_POSITION.ABSOLUTE}
+          right={0}
+          zIndex={1}
+        />
 
-      <TextInput
-        accessibilityLabelledBy={nativeID}
-        accessibilityLanguage={language}
-        autoCapitalize="none"
-        autoComplete={_getAutoCompleteType(autoComplete, keyboard)}
-        autoCorrect={false}
-        dense
-        disabled={isDisabled}
-        error={_isError}
-        keyboardType={_getKeyboardType(keyboard)}
-        label={
-          (icon || label) && (
-            <Wrapper
-              isRowAlign
-              nativeID={nativeID}>
-              {icon && (
-                <Icon
-                  animation={{
-                    from: { color: _colors.from },
-                    isActive: _isActive,
-                    to: { color: _colors.to },
-                  }}
-                  icon={icon}
-                />
-              )}
+        <TextInput
+          accessibilityLabelledBy={nativeID}
+          accessibilityLanguage={language}
+          autoCapitalize="none"
+          autoComplete={_getAutoCompleteType(autoComplete, keyboard)}
+          autoCorrect={false}
+          dense
+          disabled={_isDisabled}
+          error={_isError}
+          keyboardType={_getKeyboardType(keyboard)}
+          label={
+            (icon || label) && (
+              <Wrapper
+                isRowAlign
+                nativeID={nativeID}>
+                {icon && (
+                  <Icon
+                    animation={_childrenAnimation}
+                    icon={icon}
+                    ref={iconRef}
+                  />
+                )}
 
-              {label && (
-                <AnimatableText
-                  animation={{
-                    from: { color: _colors.from },
-                    isActive: _isActive,
-                    to: { color: _colors.to },
-                  }}
-                  size={THEME_SIZE.SMALL}>
-                  {label}
-                </AnimatableText>
-              )}
-            </Wrapper>
-          )
-        }
-        maxLength={maxLength}
-        mode="flat"
-        multiline={(numberOfLines as number) > 1}
-        numberOfLines={numberOfLines}
-        onBlur={() => {
-          onBlur && onBlur();
-        }}
-        onChangeText={onChange}
-        onFocus={() => {
-          onFocus && onFocus();
-        }}
-        onKeyPress={(e: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
-          switch (e.nativeEvent.key) {
-            case 'Backspace':
-              return onRemove && onRemove();
-            case 'Escape':
-              return onEscape && onEscape();
-            default:
-              return null;
+                {label && (
+                  <AnimatableText
+                    animation={_childrenAnimation}
+                    ref={labelRef}
+                    size={THEME_SIZE.SMALL}>
+                    {label}
+                  </AnimatableText>
+                )}
+              </Wrapper>
+            )
           }
-        }}
-        onSubmitEditing={() => onSubmit && onSubmit(value || '')}
-        placeholder={placeholder}
-        ref={forwardedRef}
-        render={(inputProps) => (
-          <Wrapper
-            backgroundColor={_backgroundColor}
-            grow
-            isCenter={isCenter}
-            isOverflowHidden
-            isRow
-            zIndex={-1}>
-            {_leftElement}
+          maxLength={maxLength}
+          mode="flat"
+          multiline={(numberOfLines as number) > 1}
+          numberOfLines={numberOfLines}
+          onBlur={() => {
+            onBlur && onBlur();
+            setIsActive(false);
+          }}
+          onChangeText={onChange}
+          onFocus={() => {
+            onFocus && onFocus();
+            setIsActive(true);
+          }}
+          onKeyPress={(e: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
+            switch (e.nativeEvent.key) {
+              case 'Backspace':
+                return onRemove && onRemove();
+              case 'Escape':
+                return onEscape && onEscape();
+              default:
+                return null;
+            }
+          }}
+          onSubmitEditing={() => onSubmit && onSubmit(value || '')}
+          placeholder={placeholder}
+          ref={ref as RefObject<NativeTextInput>}
+          render={(inputProps) => (
+            <Wrapper
+              backgroundColor={_activeBackgroundColor}
+              grow
+              isCenter={isCenter}
+              isOverflowHidden
+              isRow
+              zIndex={-1}>
+              {_leftElement}
 
-            {Component({
-              ...inputProps,
-              style: StyleSheet.flatten([
-                ...inputProps.style,
-                { width: '100%' },
-                isCenter && { padding: 0, textAlign: 'center' },
-              ]),
-            })}
+              {Component({
+                ...inputProps,
+                style: StyleSheet.flatten([
+                  ...inputProps.style,
+                  { width: '100%' },
+                  isCenter && { padding: 0, textAlign: 'center' },
+                ]),
+              })}
 
-            {_rightElement}
-          </Wrapper>
-        )}
-        secureTextEntry={keyboard === TEXT_FIELD_KEYBOARD.PASSWORD}
-        spellCheck={false}
-        textContentType={_getTextContentType(autoComplete, keyboard)}
-        theme={{
-          animation: { scale: 1 },
-          colors: {
-            background: 'transparent',
-            placeholder: theme.colors.tone.neutral.muted,
-            primary: theme.colors.tone.primary.main,
-          },
-        }}
-        value={value}
-      />
-    </Wrapper>
-  );
-};
+              {_rightElement}
+            </Wrapper>
+          )}
+          secureTextEntry={keyboard === TEXT_FIELD_KEYBOARD.PASSWORD}
+          spellCheck={false}
+          textContentType={_getTextContentType(autoComplete, keyboard)}
+          theme={{
+            animation: { scale: 1 },
+            colors: {
+              background: 'transparent',
+              placeholder: theme.colors.tone.neutral.muted,
+              primary: theme.colors.tone.primary.main,
+            },
+          }}
+          value={value}
+        />
+      </Wrapper>
+    );
+  },
+);

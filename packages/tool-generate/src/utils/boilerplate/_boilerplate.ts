@@ -1,7 +1,7 @@
 import type { _BoilerplateParamsModel } from '@tool/generate/utils/boilerplate/_boilerplate.models';
 import type { IConfigItem } from 'generate-template-files';
 import { CaseConverterEnum, generateTemplateFilesBatch } from 'generate-template-files';
-import { map } from 'lodash';
+import map from 'lodash/map';
 
 export const _boilerplate = async ({
   input,

@@ -1,6 +1,6 @@
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
-import { uniq } from 'lodash';
+import uniq from 'lodash/uniq';
 
 const { displayName } = withTest({ target: () => uid });
 

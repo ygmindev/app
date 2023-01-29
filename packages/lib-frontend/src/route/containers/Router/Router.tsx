@@ -7,7 +7,7 @@ import type { RouteModel } from '@lib/frontend/route/route.models';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { reduce } from 'lodash';
+import reduce from 'lodash/reduce';
 import { useMemo } from 'react';
 
 const _getRoute = (routes?: Array<RouteModel>): Array<RouteModel> =>

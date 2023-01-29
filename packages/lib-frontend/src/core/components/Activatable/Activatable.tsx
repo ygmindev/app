@@ -1,47 +1,41 @@
+import { _isHoverable } from '@lib/frontend/core/components/Activatable/_isHoverable';
 import type { ActivatablePropsModel } from '@lib/frontend/core/components/Activatable/Activatable.models';
-import { Hoverable } from '@lib/frontend/core/components/Hoverable/Hoverable';
 import type { FCModel } from '@lib/frontend/core/core.models';
-import { debounce } from '@lib/shared/core/utils/debounce/debounce';
-import { cloneElement, useState } from 'react';
+import type { CallableModel } from '@lib/shared/core/core.models';
+import { cloneElement } from 'react';
 
 export const Activatable: FCModel<ActivatablePropsModel> = ({
   children,
   isHoverable = true,
+  isPressable = true,
   onActive,
   onInactive,
 }) => {
-  const [isActive, setIsActive] = useState<boolean>(false);
+  const _handleToggle = (isActive?: boolean): void =>
+    isActive ? onActive && onActive() : onInactive && onInactive();
 
-  const _setIsActive = debounce({
-    callback: (value: boolean) => {
-      value ? onActive && onActive() : onInactive && onInactive();
-      setIsActive(value);
-    },
-  });
+  const _handleGrant = (): void => {
+    const onPressIn = children?.props.onPressIn as CallableModel;
+    onPressIn && onPressIn();
+    _handleToggle(true);
+  };
 
-  const _children = children && children(isActive);
-  const _element =
-    _children &&
-    cloneElement(_children, {
-      onPressIn: async () => {
-        const { onPressIn } = _children.props;
-        onPressIn && onPressIn();
-        _setIsActive(true);
-      },
-      onPressOut: async () => {
-        const { onPressOut } = _children.props;
-        onPressOut && onPressOut();
-        _setIsActive(false);
-      },
-    });
+  const _handleRelease = (): void => {
+    const onPressOut = children?.props.onPressOut as CallableModel;
+    onPressOut && onPressOut();
+    _handleToggle(false);
+  };
 
-  return isHoverable ? (
-    <Hoverable
-      onHoverIn={() => _setIsActive(true)}
-      onHoverOut={() => _setIsActive(false)}>
-      {_element}
-    </Hoverable>
-  ) : (
-    <>{_element}</>
-  );
+  return children
+    ? cloneElement(children, {
+        onMouseEnter: isHoverable
+          ? () => (_isHoverable() ? _handleToggle(true) : undefined)
+          : undefined,
+        onMouseLeave: isHoverable ? () => _handleToggle(false) : undefined,
+        onPressIn: isPressable ? _handleGrant : undefined,
+        onPressOut: isPressable ? _handleRelease : undefined,
+        onResponderGrant: isPressable ? _handleGrant : undefined,
+        onResponderRelease: isPressable ? _handleRelease : undefined,
+      })
+    : null;
 };

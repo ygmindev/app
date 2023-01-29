@@ -3,7 +3,8 @@ import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 import type { PromptParamsModel } from '@tool/task/core/utils/prompt/prompt.models';
 import { prompt, registerPrompt } from 'inquirer';
 import directory from 'inquirer-directory';
-import { startCase, toString } from 'lodash';
+import startCase from 'lodash/startCase';
+import toString from 'lodash/toString';
 
 registerPrompt(PROMPT_TYPE.DIRECTORY, directory);
 

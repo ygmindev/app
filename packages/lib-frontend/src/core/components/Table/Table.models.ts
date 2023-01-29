@@ -4,6 +4,7 @@ import type {
   COLUMN_SORT_TYPE,
   TABLE_SELECT_TYPE,
 } from '@lib/frontend/core/components/Table/Table.constants';
+import type { ElementStatePropsModel } from '@lib/frontend/core/core.models';
 import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 import type { ReactNode } from 'react';
@@ -40,6 +41,4 @@ export interface TableRefModel {
   deselectRows: CallableModel;
 }
 
-export interface TablePropsModel<TType> extends _TablePropsModel<TType> {
-  isLoading?: boolean;
-}
+export interface TablePropsModel<TType> extends _TablePropsModel<TType>, ElementStatePropsModel {}

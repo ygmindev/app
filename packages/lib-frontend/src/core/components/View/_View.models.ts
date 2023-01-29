@@ -3,10 +3,10 @@ import type {
   MeasureModel,
   PositionModel,
 } from '@lib/frontend/core/core.models';
-import type { StyleModel } from '@lib/frontend/style/style.models';
+import type { StylePropsModel, ViewStyleModel } from '@lib/frontend/style/style.models';
 import type { CallableModel, CallablePromiseModel } from '@lib/shared/core/core.models';
 
-export interface _ViewPropsModel extends ChildrenPropsModel {
+export interface _ViewPropsModel extends ChildrenPropsModel, StylePropsModel<ViewStyleModel> {
   isHorizontalScrollable?: boolean;
   isVerticalScrollable?: boolean;
   onMeasure?(measure: MeasureModel): void;
@@ -18,5 +18,4 @@ export interface _ViewPropsModel extends ChildrenPropsModel {
   onResponderGrant?: CallableModel;
   onResponderRelease?: CallableModel;
   onScroll?(position: PositionModel): void;
-  style?: StyleModel;
 }

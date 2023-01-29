@@ -8,9 +8,9 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 
 export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
   defaultValue,
+  elementState,
   iconActive = 'check',
   iconInactive = 'time',
-  isDisabled,
   label,
   onChange,
   testID,
@@ -30,9 +30,9 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
       style={styles}
       testID={testID}>
       <_SwitchField
+        elementState={elementState}
         iconActive={iconActive}
         iconInactive={iconInactive}
-        isDisabled={isDisabled}
         onChange={setFieldValue}
         value={fieldValue}
       />

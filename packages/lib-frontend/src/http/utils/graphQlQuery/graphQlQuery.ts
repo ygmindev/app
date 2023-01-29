@@ -4,7 +4,8 @@ import type {
   GraphQlQueryParamsModel,
 } from '@lib/frontend/http/utils/graphQlQuery/graphQlQuery.models';
 import { trimDeep } from '@lib/shared/core/utils/trimDeep/trimDeep';
-import { isPlainObject, map } from 'lodash';
+import isPlainObject from 'lodash/isPlainObject';
+import map from 'lodash/map';
 
 const _getGraphQlFields = <TType extends unknown>(
   fields: Array<GraphQlFieldModel<TType>>,

@@ -10,7 +10,9 @@ export const themeConfig: ThemeConfigParamsModel = {
   },
 
   colors: {
-    activeLightness: 60,
+    activeLightness: 40,
+
+    disabledLightness: 60,
 
     palette: {
       dark: {
@@ -113,7 +115,7 @@ export const themeConfig: ThemeConfigParamsModel = {
     lineHeight: 25,
 
     size: {
-      l: 23,
+      l: 20,
       m: 14,
       s: 11,
       xl: 34,

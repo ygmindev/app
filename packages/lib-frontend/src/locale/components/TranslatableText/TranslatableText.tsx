@@ -1,8 +1,9 @@
-import { Text } from '@lib/frontend/core/components/Text/Text';
+import { AnimatableText } from '@lib/frontend/animation/components/AnimatableText/AnimatableText';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import type { TranslatableTextPropsModel } from '@lib/frontend/locale/components/TranslatableText/TranslatableText.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { isFunction, isString } from 'lodash';
+import isFunction from 'lodash/isFunction';
+import isString from 'lodash/isString';
 
 export const TranslatableText: SFCModel<TranslatableTextPropsModel> = ({
   children,
@@ -11,12 +12,12 @@ export const TranslatableText: SFCModel<TranslatableTextPropsModel> = ({
 }) => {
   const translation = useTranslation(ns);
   return children ? (
-    <Text {...props}>
+    <AnimatableText {...props}>
       {isString(children)
         ? translation.t(children)
         : isFunction(children)
         ? children(translation)
         : (children as unknown as string)}
-    </Text>
+    </AnimatableText>
   ) : null;
 };

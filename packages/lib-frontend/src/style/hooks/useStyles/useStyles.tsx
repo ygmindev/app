@@ -5,7 +5,7 @@ import type {
 } from '@lib/frontend/style/hooks/useStyles/useStyles.models';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import type { StyleModel, ViewStyleModel } from '@lib/frontend/style/style.models';
-import { isFunction, map } from 'lodash';
+import isFunction from 'lodash/isFunction';
 import { useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
@@ -20,7 +20,7 @@ export const useStyles = <TProps, TStyle extends StyleModel = ViewStyleModel>({
   const computedStyles = useMemo(
     () =>
       StyleSheet.flatten(
-        map(stylers, (styler) => (isFunction(styler) ? styler(props, theme) : styler)),
+        stylers?.map((styler) => (isFunction(styler) ? styler(props, theme) : styler)),
       ),
     [props, stylers, theme, isMobile],
   );

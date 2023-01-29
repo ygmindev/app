@@ -1,4 +1,5 @@
-import { get, intersection } from 'lodash';
+import get from 'lodash/get';
+import intersection from 'lodash/intersection';
 
 export const isTypeOf = (x: unknown, y: unknown): boolean =>
   intersection(

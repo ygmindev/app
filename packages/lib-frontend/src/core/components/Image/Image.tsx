@@ -4,7 +4,7 @@ import type { SFCModel } from '@lib/frontend/core/core.models';
 import type { DimensionModel } from '@lib/frontend/platform/platform.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { shapeStyler } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler';
-import { isArray } from 'lodash';
+import isArray from 'lodash/isArray';
 import { useCallback, useState } from 'react';
 import { Image as ImageBase } from 'react-native';
 

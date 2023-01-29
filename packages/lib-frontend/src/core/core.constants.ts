@@ -1,1 +1,9 @@
 export const REDIRECT = 'redirect';
+
+export enum ELEMENT_STATE {
+  ACTIVE = 'active',
+  DISABLED = 'disabled',
+  INACTIVE = 'inactive',
+  INVISIBLE = 'invisible',
+  LOADING = 'loading',
+}

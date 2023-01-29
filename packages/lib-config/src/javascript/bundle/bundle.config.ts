@@ -1,7 +1,8 @@
 import { _bundleConfig } from '@lib/config/javascript/bundle/_bundle.config';
 import { BUNDLE_MODE } from '@lib/config/javascript/bundle/bundle.constants';
 import type { BundleConfigParamsModel } from '@lib/config/javascript/bundle/bundle.models';
-import { reduce, some } from 'lodash';
+import reduce from 'lodash/reduce';
+import some from 'lodash/some';
 
 const config: BundleConfigParamsModel =
   require(`@lib/config/javascript/bundle/configs/bundle.config.${process.env.ENV_PLATFORM}`).bundleConfig;

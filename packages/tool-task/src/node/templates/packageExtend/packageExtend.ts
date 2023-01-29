@@ -5,7 +5,7 @@ import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { PACKAGE_EXTEND_KEYS } from '@tool/task/node/templates/packageExtend/packageExtend.constants';
 import { writeFileSync } from 'fs';
-import { pick } from 'lodash';
+import pick from 'lodash/pick';
 
 export const packageExtend: TaskParamsModel = {
   name: 'packageExtend',

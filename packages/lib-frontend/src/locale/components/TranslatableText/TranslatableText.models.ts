@@ -1,9 +1,9 @@
-import type { TextPropsModel } from '@lib/frontend/core/components/Text/Text.models';
+import type { AnimatableTextPropsModel } from '@lib/frontend/animation/components/AnimatableText/AnimatableText.models';
 import type { ChildrenPropsModel } from '@lib/frontend/core/core.models';
 import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 
 export interface TranslatableTextPropsModel
-  extends Omit<TextPropsModel, 'children'>,
+  extends Omit<AnimatableTextPropsModel, 'children'>,
     ChildrenPropsModel<TranslatableTextModel> {
   ns?: Array<string>;
 }

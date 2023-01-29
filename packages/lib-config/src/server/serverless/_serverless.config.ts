@@ -7,7 +7,7 @@ import type { _ServerlessConfigParamsModel } from '@lib/config/server/serverless
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import type { AWS } from '@serverless/typescript';
-import { reduce } from 'lodash';
+import reduce from 'lodash/reduce';
 
 export const _serverlessConfig = ({
   bundle,

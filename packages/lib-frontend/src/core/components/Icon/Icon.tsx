@@ -6,6 +6,7 @@ import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.mod
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import type { TextStyleModel } from '@lib/frontend/style/style.models';
 import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 const _AnimatableIcon = animatable({ Component: _Icon });
 
@@ -30,3 +31,5 @@ export const Icon = composeComponent<IconPropsModel, _IconPropsModel, TextStyleM
     },
   ],
 });
+
+process.env.APP_DEBUG && (Icon.displayName = variableName(() => Icon));

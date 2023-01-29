@@ -3,10 +3,10 @@ import type {
   UseHttpModel,
   UseHttpParamsModel,
 } from '@lib/frontend/http/hooks/useHttp/useHttp.models';
+import type { GraphQlHttpResponseModel } from '@lib/frontend/http/utils/graphQlQuery/graphQlQuery.models';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HttpService } from '@lib/shared/http/utils/HttpService/HttpService';
-import type { GraphQLError } from 'graphql';
-import { get } from 'lodash';
+import type { HttpReponseModel } from '@lib/shared/http/utils/HttpService/HttpService.models';
 
 export const useHttp = (params: UseHttpParamsModel): UseHttpModel => {
   const { handleError } = useErrorBoundary();
@@ -15,14 +15,16 @@ export const useHttp = (params: UseHttpParamsModel): UseHttpModel => {
 
     onError: handleError,
 
-    onResponse: async (respone) => {
-      const graphQlError = get(respone, ['data', 'errors', 0]) as GraphQLError;
+    onResponse: async (response) => {
+      const graphQlError = (
+        response as HttpReponseModel<GraphQlHttpResponseModel<unknown>>
+      ).data?.errors?.at(0);
       if (graphQlError) {
         handleError(
           new HttpError(graphQlError.extensions.exception.statusCode, graphQlError.message),
         );
       }
-      return respone;
+      return response;
     },
   });
 };

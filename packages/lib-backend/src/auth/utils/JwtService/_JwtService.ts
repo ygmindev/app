@@ -4,7 +4,8 @@ import type { SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.
 import type { EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import type { UserModel } from '@lib/shared/user/resources/User/User.models';
 import admin from 'firebase-admin';
-import { pick, toString } from 'lodash';
+import pick from 'lodash/pick';
+import toString from 'lodash/toString';
 
 admin.apps.length ||
   admin.initializeApp({

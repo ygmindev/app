@@ -1,7 +1,7 @@
 import { SERVER_KEY } from '@lib/shared/crypto/utils/encrypt/_encrypt';
 import type { CipherCCMTypes } from 'crypto';
 import { createDecipheriv } from 'crypto';
-import { toNumber } from 'lodash';
+import toNumber from 'lodash/toNumber';
 
 const SERVER_IV_LENGTH = toNumber(process.env.SERVER_IV_LENGTH);
 const SERVER_SALT_LENGTH = toNumber(process.env.SERVER_SALT_LENGTH);

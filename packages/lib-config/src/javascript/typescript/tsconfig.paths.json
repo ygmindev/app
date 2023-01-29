@@ -10,8 +10,8 @@
       "@app/web-ete/*": [
         "packages/app-web-ete/src/*"
       ],
-      "@app/web-storybook/*": [
-        "packages/app-web-storybook/src/*"
+      "@app/web-library/*": [
+        "packages/app-web-library/src/*"
       ],
       "@app/web/*": [
         "packages/app-web/src/*"
@@ -30,6 +30,9 @@
       ],
       "@lib/frontend/*": [
         "packages/lib-frontend/src/*"
+      ],
+      "@lib/library/*": [
+        "packages/lib-library/src/*"
       ],
       "@lib/shared/*": [
         "packages/lib-shared/src/*"

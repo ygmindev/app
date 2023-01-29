@@ -1,3 +1,3 @@
-import type { ChildrenPropsModel } from '@lib/frontend/core/core.models';
+import type { LayoutPropsModel } from '@lib/frontend/core/core.models';
 
-export interface CenterLayoutPropsModel extends ChildrenPropsModel {}
+export interface CenterLayoutPropsModel extends LayoutPropsModel {}

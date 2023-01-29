@@ -5,6 +5,7 @@ let isInitialized = false;
 export const initialize = async (): Promise<void> => {
   if (!isInitialized) {
     await initializeBase();
+
     isInitialized = true;
   }
 };

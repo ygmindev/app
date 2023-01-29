@@ -1,6 +1,7 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { FieldPropsModel, SFCPropsModel } from '@lib/frontend/core/core.models';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { Form } from '@lib/frontend/form/components/Form/Form';
@@ -20,16 +21,17 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
 import { FIELD_TYPE } from '@lib/shared/form/form.constants';
-import { flatten, get, isEqual, map, reduce, toNumber } from 'lodash';
+import toNumber from 'lodash/toNumber';
 import type { ReactElement } from 'react';
 import { cloneElement, useCallback, useMemo } from 'react';
 
 export const FormContainer = <TType,>({
   cancelLabel,
+  elementState,
   initialValues,
   isFullWidth,
-  isLoading: isLoadingProps,
   leftElement,
   onCancel,
   onSubmit,
@@ -48,25 +50,23 @@ export const FormContainer = <TType,>({
   const { error } = useNotification();
   const isMobile = useIsMobile();
 
-  const _fields = useMemo(() => flatten(map(rows, 'fields')), [rows]);
+  const _fields = useMemo(() => rows?.map(({ fields }) => fields).flat(), [rows]);
   const _getValues = (data: TType): TType =>
-    reduce(
-      _fields,
-      (result, field) => {
-        if (field?.id) {
-          let _value = (data as Record<string, unknown>)[field.id];
-          switch (field?.type) {
-            case FIELD_TYPE.NUMBER: {
-              _value = toNumber(_value);
-              break;
+    _fields
+      ? _fields.reduce((result, field) => {
+          if (field?.id) {
+            let _value = (data as Record<string, unknown>)[field.id];
+            switch (field?.type) {
+              case FIELD_TYPE.NUMBER: {
+                _value = toNumber(_value);
+                break;
+              }
             }
+            return { ...result, [field.id]: _value };
           }
-          return { ...result, [field.id]: _value };
-        }
-        return result;
-      },
-      {} as TType,
-    );
+          return result;
+        }, {} as TType)
+      : data;
 
   const _handleSubmit = async (): Promise<void> => {
     const _initialValues = initialValues && _getValues(initialValues);
@@ -82,19 +82,21 @@ export const FormContainer = <TType,>({
     validators,
   });
 
-  const _isLoading = isLoadingProps || isLoading || false;
+  const _isLoading = elementState == ELEMENT_STATE.LOADING || isLoading || false;
+  const _isDisabled =
+    elementState === ELEMENT_STATE.DISABLED || elementState === ELEMENT_STATE.LOADING;
   const _isFullWidth = isMobile || isFullWidth;
 
   const _getField = useCallback(
     ({ field, fieldProps, id, render }: FormContainerFieldModel) => {
       const _fieldProps: FieldPropsModel = {
         ...fieldProps,
-        defaultValue: get(initialValues, id),
-        error: get(errors, id),
-        isDisabled: _isLoading || fieldProps?.isDisabled,
+        defaultValue: initialValues ? (initialValues as Record<string, undefined>)[id] : undefined,
+        elementState: elementState || fieldProps?.elementState,
+        error: errors ? (errors as Record<string, undefined>)[id] : undefined,
         label: fieldProps?.label ? t(fieldProps.label) : undefined,
         onChange: handleChange(id),
-        value: get(values, id),
+        value: values ? (values as Record<string, undefined>)[id] : undefined,
       };
       const _onSubmit = async (): Promise<void> => handleSubmit();
 
@@ -127,7 +129,7 @@ export const FormContainer = <TType,>({
         }
       }
     },
-    [values, errors, handleChange, handleSubmit, initialValues, _isLoading],
+    [values, errors, handleChange, handleSubmit, initialValues, elementState],
   );
 
   return (
@@ -141,12 +143,12 @@ export const FormContainer = <TType,>({
         <Wrapper spacing>
           {topElement}
 
-          {map(rows, ({ fields, id }) => (
+          {rows?.map(({ fields, id }) => (
             <Wrapper
               isDistribute
               isRowAlign
               key={id}>
-              {map(fields, _getField)}
+              {fields?.map(_getField)}
             </Wrapper>
           ))}
         </Wrapper>
@@ -161,8 +163,8 @@ export const FormContainer = <TType,>({
 
         {onCancel && (
           <Button
+            elementState={elementState}
             icon="chevronLeft"
-            isLoading={_isLoading}
             onPress={onCancel}
             type={BUTTON_TYPE.TRANSPARENT}>
             {t(cancelLabel || 'core:labels.cancel')}
@@ -170,8 +172,8 @@ export const FormContainer = <TType,>({
         )}
 
         <Button
+          elementState={elementState}
           icon="chevronRight"
-          isLoading={_isLoading}
           onPress={handleSubmit}>
           {t(submitLabel || 'core:labels.submit')}
         </Button>

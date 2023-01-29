@@ -4,7 +4,12 @@ import type {
 } from '@lib/frontend/core/hooks/useMount/useMount.models';
 import { useEffect, useState } from 'react';
 
-export const useMount = ({ deps, onMount, onUnmount }: UseMountParamsModel = {}): UseMountModel => {
+export const useMount = (
+  ...[
+    { onMount, onUnmount } = { onMount: undefined, onUnmount: undefined },
+    deps = [],
+  ]: UseMountParamsModel
+): UseMountModel => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   useEffect(() => {
     setIsMounted(true);
@@ -13,6 +18,6 @@ export const useMount = ({ deps, onMount, onUnmount }: UseMountParamsModel = {})
       setIsMounted(false);
       onUnmount && onUnmount();
     };
-  }, [isMounted, setIsMounted, ...(deps || [])]);
+  }, [isMounted, setIsMounted, ...deps]);
   return isMounted;
 };

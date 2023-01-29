@@ -3,6 +3,16 @@ import type { GraphQlOperationTypeModel } from '@lib/shared/graphql/graphql.mode
 import type { ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
 import type { GraphQLError } from 'graphql';
 
+export interface GraphQlHttpParamsModel<TParams> {
+  query: string;
+  variables?: TParams;
+}
+
+export interface GraphQlQueryHttpParamsModel<TParams, TResult, TName extends string = string>
+  extends GraphQlQueryParamsModel<TParams, TResult, TName> {
+  variables?: TParams;
+}
+
 export interface GraphQlHttpResponseModel<TResult, TName extends string = string> {
   data?: Record<TName, TResult>;
   errors?: Array<GraphQLError>;

@@ -2,7 +2,7 @@ import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import type { _MailParamsModel } from '@lib/backend/mail/utils/mail/_mail.models';
 import { debug } from '@lib/shared/logging/utils/logger/logger';
 import Email from 'email-templates';
-import { toNumber } from 'lodash';
+import toNumber from 'lodash/toNumber';
 import { createTransport } from 'nodemailer';
 
 const transport = createTransport({

@@ -5,7 +5,7 @@ import type {
 import { QUERY_EXPIRATION_MILLISECONDS_DEFAULT } from '@lib/frontend/core/hooks/useQuery/useQuery.constants';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { toNumber } from 'lodash';
+import toNumber from 'lodash/toNumber';
 
 export const _useQuery = <TType, TError extends Error = Error>({
   cache,

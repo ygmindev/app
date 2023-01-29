@@ -3,6 +3,7 @@ import type { _SvgShapePropsModel } from '@lib/frontend/core/components/SvgShape
 import { SVG_SHAPE } from '@lib/frontend/core/components/SvgShape/SvgShape.constants';
 import type { SvgShapePropsModel } from '@lib/frontend/core/components/SvgShape/SvgShape.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const SvgShape = composeComponent<SvgShapePropsModel, _SvgShapePropsModel>({
   getComponent: () => _SvgShape,
@@ -16,3 +17,5 @@ export const SvgShape = composeComponent<SvgShapePropsModel, _SvgShapePropsModel
     y,
   }),
 });
+
+process.env.APP_DEBUG && (SvgShape.displayName = variableName(() => SvgShape));

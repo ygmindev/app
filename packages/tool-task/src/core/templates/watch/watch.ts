@@ -5,7 +5,7 @@ import { bundleConfig } from '@lib/config/javascript/bundle/configs/bundle.confi
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import type { WatchParamsModel } from '@tool/task/core/templates/watch/watch.models';
 import { command } from '@tool/task/core/utils/command/command';
-import { trimStart } from 'lodash';
+import trimStart from 'lodash/trimStart';
 
 export const watch: TaskParamsModel<WatchParamsModel> = {
   environment: ENVIRONMENT.DEVELOPMENT,

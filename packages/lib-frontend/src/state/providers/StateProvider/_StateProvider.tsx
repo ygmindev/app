@@ -7,11 +7,17 @@ import type {
   SliceCaseReducers,
   ValidateSliceCaseReducers,
 } from '@reduxjs/toolkit';
-import { configureStore, createSlice } from '@reduxjs/toolkit';
-import { mapValues, reduce } from 'lodash';
+import * as toolkit from '@reduxjs/toolkit';
+import mapValues from 'lodash/mapValues';
+import reduce from 'lodash/reduce';
 import type { ReactElement } from 'react';
 import { useMemo } from 'react';
 import { Provider, useDispatch } from 'react-redux';
+
+// TODO: fix when upgrade https://github.com/reduxjs/redux-toolkit/issues/1960
+// import { configureStore, createSlice } from '@reduxjs/toolkit';
+const { configureStore, createSlice } = ((toolkit as unknown as { default: unknown }).default ??
+  toolkit) as typeof toolkit;
 
 const _ActionProvider = <
   TType extends Record<TKeys[number], object>,

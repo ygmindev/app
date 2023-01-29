@@ -3,11 +3,10 @@ import type { UseRouterModel } from '@lib/frontend/route/hooks/useRouter/useRout
 import type { LocationModel } from '@lib/frontend/route/route.models';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
-import { split } from 'lodash';
 
 export const useRouter = <TParams = undefined,>(): UseRouterModel<TParams> => {
   const { back, isActive, location, push, replace } = _useRouter<TParams>();
-  const paths = split(location.pathname, '/');
+  const paths = location.pathname.split('/');
   const actions = useActions();
 
   const _push = <TNextParams = undefined,>({
