@@ -45,6 +45,8 @@ export const bundleConfig: BundleConfigParamsModel = merge({
           'javascript/bundle/aliases/requestAnimationFrame/index.js',
         ),
       },
+
+      watch: [fromStatic('assets')],
     },
 
     bundleConfigFrontend,

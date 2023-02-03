@@ -11,6 +11,7 @@ import type { FastifyPluginCallback, FastifyRegisterOptions } from 'fastify';
 import { fastify } from 'fastify';
 import i18nextMiddleware from 'i18next-http-middleware';
 import toNumber from 'lodash/toNumber';
+import { join } from 'path';
 import { createServer } from 'vite';
 
 const _i18n = _internationalizeConfig(internationalizeConfig);
@@ -25,7 +26,7 @@ export const _server = async ({
   await app.register(compress);
 
   const { middlewares } = await createServer({
-    configFile,
+    configFile: join(root, configFile),
     root,
     server: { middlewareMode: true },
   });

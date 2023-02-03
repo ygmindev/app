@@ -17,6 +17,6 @@ export const textParams: ComposeComponentParamsModel<
   stylers: [textStyler],
 };
 
-export const Text = composeComponent<TextPropsModel, _TextPropsModel>(textParams);
+export const Text = composeComponent<TextPropsModel, _TextPropsModel, TextStyleModel>(textParams);
 
 process.env.APP_DEBUG && (Text.displayName = variableName(() => Text));

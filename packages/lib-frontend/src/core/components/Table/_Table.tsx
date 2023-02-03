@@ -1,4 +1,7 @@
-import { AG_GRID_THEME } from '@lib/frontend/core/components/Table/_Table.constants';
+import 'ag-grid-community/styles/ag-grid.min.css';
+import 'ag-grid-community/styles/ag-theme-material.min.css';
+
+import { AG_GRID_THEME } from '@lib/config/style/sheet/configs/sheet.config.ag-grid';
 import type { _TablePropsModel } from '@lib/frontend/core/components/Table/_Table.models';
 import {
   COLUMN_SORT_TYPE,
@@ -11,7 +14,6 @@ import type {
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import type { UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import type {
@@ -21,48 +23,22 @@ import type {
   ICellRendererParams,
   ValueFormatterParams,
 } from 'ag-grid-community';
-import AgGridStyle from 'ag-grid-community/dist/styles/ag-grid.css';
-import AgGridTheme from 'ag-grid-community/dist/styles/ag-theme-material.css';
 import { AgGridReact } from 'ag-grid-react';
 import type { ForwardedRef } from 'react';
 import { forwardRef, useImperativeHandle, useState } from 'react';
-import { createGlobalStyle } from 'styled-components';
-
-const _GlobalStyle = createGlobalStyle`
-  ${AgGridStyle}
-
-  ${AgGridTheme}
-
-  ${({ theme }: { theme: UseThemeModel }) => `
-    .${AG_GRID_THEME} {
-      --ag-background-color: transparent;
-      --ag-checkbox-border-radius: ${theme.shape.borderRadius};
-      --ag-checkbox-checked-color: ${theme.colors.tone.primary.main};
-      --ag-checkbox-indeterminate-color: ${theme.colors.tone.secondary.main};
-      --ag-foreground-color: ${theme.colors.tone.neutral.mainContrast};
-      --ag-header-background-color: transparent;
-      --ag-header-foreground-color: ${theme.colors.tone.neutral.mainContrast};
-      --ag-selected-row-background-color: transparent;
-
-      .ag-cell, .ag-header-cell {
-        font-size: ${theme.font.size.m}px;
-        padding: 0 ${theme.shape.spacing.m}px;
-        display: flex;
-        align-items: center;
-      }
-
-      .ag-pinned-right-header, .ag-cell-first-right-pinned {
-        border-left: none !important;
-      }
-    }
-  `}
-`;
-
-// ReactElement<_TablePropsModel<TType>>
 
 export const _Table = forwardRef(
   <TType,>(
-    { columns, data, isFullWidth, onMount, onSelect, rowHeight, select }: _TablePropsModel<TType>,
+    {
+      columns,
+      data,
+      isFullWidth,
+      isVirtualized = true,
+      onMount,
+      onSelect,
+      rowHeight,
+      select,
+    }: _TablePropsModel<TType>,
     ref: ForwardedRef<TableRefModel>,
   ) => {
     const { t } = useTranslation();
@@ -101,7 +77,7 @@ export const _Table = forwardRef(
         flex,
         headerCheckboxSelection:
           select === TABLE_SELECT_TYPE.MULTIPLE && i === _unhiddenColumnIndex,
-        headerName: t(label),
+        headerName: label ? t(label) : undefined,
         hide: isHidden,
         maxWidth: width,
         minWidth: width,
@@ -157,9 +133,8 @@ export const _Table = forwardRef(
           suppressCellFocus
           suppressRowClickSelection
           suppressRowHoverHighlight
+          suppressRowVirtualisation={!isVirtualized}
         />
-
-        <_GlobalStyle />
       </div>
     );
   },

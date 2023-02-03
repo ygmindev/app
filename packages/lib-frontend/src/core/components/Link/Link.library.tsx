@@ -4,7 +4,7 @@ import type { LinkPropsModel } from '@lib/frontend/core/components/Link/Link.mod
 
 const { Story, meta } = withStory<LinkPropsModel>({
   defaultProps: {
-    children: 'text',
+    children: 'children',
   },
   target: Link,
 });

@@ -2,7 +2,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { _SwitchField } from '@lib/frontend/form/components/SwitchField/_SwitchField';
 import type { SwitchFieldPropsModel } from '@lib/frontend/form/components/SwitchField/SwitchField.models';
-import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
+import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/useControlledValue';
 import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 
@@ -18,7 +18,7 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
   ...props
 }) => {
   const { styles } = useStyles({ props });
-  const { fieldValue, setFieldValue } = useFieldValue<'true' | 'false'>({
+  const { setValueControlled, valueControlled } = useControlledValue<'true' | 'false'>({
     defaultValue,
     onChange,
     value,
@@ -33,8 +33,8 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
         elementState={elementState}
         iconActive={iconActive}
         iconInactive={iconInactive}
-        onChange={setFieldValue}
-        value={fieldValue}
+        onChange={setValueControlled}
+        value={valueControlled}
       />
 
       {label && <TranslatableText>{label}</TranslatableText>}

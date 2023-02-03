@@ -12,9 +12,10 @@ export const _webConfig = ({ isReact, isSsr }: _WebConfigParamsModel): UserConfi
 
     values: [
       {
-        plugins: [isReact && react(), isSsr && ssr({ prerender: { partial: true } })].filter(
-          Boolean,
-        ),
+        plugins: [
+          isReact && react(),
+          isSsr && ssr({ includeAssetsImportedByServer: true, prerender: { partial: true } }),
+        ].filter(Boolean),
       },
 
       bundleConfig,

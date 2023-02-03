@@ -8,7 +8,7 @@ import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useSearch } from '@lib/frontend/core/hooks/useSearch/useSearch';
 import type { SelectFieldPropsModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
 import { TextField } from '@lib/frontend/form/components/TextField/TextField';
-import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
+import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/useControlledValue';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useRef, useState } from 'react';
@@ -34,7 +34,11 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
   const menuRef = useRef<MenuRefModel>(null);
   const { t } = useTranslation();
   const [query, setQuery] = useState<string>();
-  const { fieldValue, setFieldValue } = useFieldValue({ defaultValue, onChange, value });
+  const { setValueControlled, valueControlled } = useControlledValue({
+    defaultValue,
+    onChange,
+    value,
+  });
 
   const { result, search } = useSearch({ keys: ['label', 'value'], list: options });
 
@@ -48,7 +52,7 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
     const selected = result && result[0];
     const selectedValue = selected.id;
     if (selectedValue) {
-      setFieldValue(selectedValue);
+      setValueControlled(selectedValue);
       onSubmit && (await onSubmit(selectedValue));
     }
     _handleToggle(false);
@@ -59,7 +63,7 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
     search(value);
   };
 
-  const _selectedOption = options.find(({ id }) => id === fieldValue);
+  const _selectedOption = options.find(({ id }) => id === valueControlled);
   const _selectedLabel = _selectedOption
     ? renderValue
       ? renderValue(_selectedOption)
@@ -108,14 +112,14 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
           />
         )}
         isFullWidth
-        onChange={setFieldValue}
+        onChange={setValueControlled}
         onClose={() => _handleToggle(false)}
         options={result}
         ref={menuRef}
         renderOption={renderOption}
         style={styles}
         testID={testID}
-        value={fieldValue}
+        value={valueControlled}
       />
     </View>
   );

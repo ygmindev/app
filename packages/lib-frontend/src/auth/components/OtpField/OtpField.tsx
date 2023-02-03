@@ -7,7 +7,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { TextField } from '@lib/frontend/form/components/TextField/TextField';
-import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
+import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/useControlledValue';
 import { isTranslatableText } from '@lib/frontend/locale/utils/isTranslatableText/isTranslatableText';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
@@ -31,7 +31,11 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const theme = useTheme();
-  const { fieldValue, setFieldValue } = useFieldValue({ defaultValue: '', onChange, value });
+  const { setValueControlled, valueControlled } = useControlledValue({
+    defaultValue: '',
+    onChange,
+    value,
+  });
   const [isFocused, setIsFocused] = useState<boolean>(false);
   return (
     <Wrapper
@@ -46,7 +50,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             defaultValue=""
             elementState={
               isFocused &&
-              i === Math.min(fieldValue.length, OTP_LENGTH - 1) &&
+              i === Math.min(valueControlled.length, OTP_LENGTH - 1) &&
               elementState !== ELEMENT_STATE.DISABLED
                 ? ELEMENT_STATE.ACTIVE
                 : elementState
@@ -55,7 +59,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             isCenter
             isNoClear
             key={id}
-            value={fieldValue[i] || ''}
+            value={valueControlled[i] || ''}
             width={theme.shape.height.m}
           />
         ))}
@@ -71,9 +75,9 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             isNoClear
             maxLength={OTP_LENGTH}
             onBlur={() => setIsFocused(false)}
-            onChange={setFieldValue}
+            onChange={setValueControlled}
             onFocus={() => setIsFocused(true)}
-            value={fieldValue}
+            value={valueControlled}
           />
         </Wrapper>
 
@@ -86,10 +90,10 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
           {elementState !== ELEMENT_STATE.DISABLED && (
             <Appearable
               isCenter
-              isVisible={fieldValue.length > 0}>
+              isVisible={valueControlled.length > 0}>
               <Button
                 icon="times"
-                onPress={() => setFieldValue('')}
+                onPress={() => setValueControlled('')}
                 type={BUTTON_TYPE.ICON}
               />
             </Appearable>

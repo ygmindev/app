@@ -23,9 +23,7 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
 ) =>
   cleanObject({
     fontFamily:
-      family === FONT_FAMILY.STYLISH || type === FONT_TYPE.HEADLINE
-        ? theme.font.fontFamily.stylish
-        : theme.font.fontFamily.main,
+      type === FONT_TYPE.HEADLINE ? theme.font.fontFamily.stylish : theme.font.fontFamily[family],
 
     fontSize:
       theme.font.size[

@@ -1,14 +1,12 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
 import type { ActivatablePropsModel } from '@lib/frontend/core/components/Activatable/Activatable.models';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<ActivatablePropsModel>({
+export const props: LibraryPropsModel<ActivatablePropsModel> = {
   defaultProps: {
     children: (isActive) => <WrapperFixture text={`${isActive}`} />,
   },
   target: Activatable,
   variants: [{ props: { isHoverable: false } }],
-});
-
-export { meta as default, Story };
+};

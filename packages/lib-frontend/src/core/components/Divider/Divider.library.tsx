@@ -1,19 +1,18 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Divider } from '@lib/frontend/core/components/Divider/Divider';
 import type { DividerPropsModel } from '@lib/frontend/core/components/Divider/Divider.models';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
+import { THEME_COLOR } from '@lib/frontend/style/style.constants';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<DividerPropsModel>({
-  defaultProps: {},
-  displayName: 'Divider',
-  target: (props) => (
-    <Wrapper
-      height={200}
-      width={200}>
-      <Divider {...props} />
-    </Wrapper>
+export const props: LibraryPropsModel<DividerPropsModel> = {
+  Component: Divider,
+  Renderer: ({ children }) => (
+    <WrapperFixture
+      backgroundColor={THEME_COLOR.NEUTRAL}
+      text="">
+      {children}
+    </WrapperFixture>
   ),
-  variants: [{ props: { children: 'text' } }],
-});
-
-export { meta as default, Story };
+  defaultProps: {},
+  variants: [{ props: { children: 'children' } }],
+};

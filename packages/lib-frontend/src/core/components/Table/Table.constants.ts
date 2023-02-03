@@ -12,5 +12,3 @@ export enum COLUMN_PIN_TYPE {
   LEFT = 'left',
   RIGHT = 'right',
 }
-
-export const TABLE_ROW_HEIGHT = 50;

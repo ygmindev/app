@@ -1,4 +1,3 @@
-import { sheetConfig } from '@lib/config/style/sheet/sheet.config';
 import { getLocaleStoreFromI18n } from '@lib/framework/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
 import type {
   _ExportRendererServerModel,
@@ -49,7 +48,7 @@ export const _exportRendererServer = ({
           <meta name="description" content="${''}" />
           <link rel="icon" type="image/svg+xml" href="${favicoPath}" />
           <title>${''}</title>
-          <style>${dangerouslySkipEscape(sheetConfig)} ${dangerouslySkipEscape(styleSheet)}</style>
+          <style>${dangerouslySkipEscape(styleSheet)}</style>
         </head>
         <body><div id="${rootId}">${pipe}</div></body>
       </html>

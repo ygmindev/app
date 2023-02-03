@@ -24,11 +24,12 @@ import kebabCase from 'lodash/kebabCase';
 
 const _getTaskByName = (name: string): CallablePromiseModel<TaskStatusModel> => {
   const _registry = registry();
-  const task = _registry[name];
+  const _name = kebabCase(name);
+  const task = _registry[_name];
   if (task) {
     return task as unknown as CallablePromiseModel<TaskStatusModel>;
   }
-  throw new NotFoundError(name);
+  throw new NotFoundError(_name);
 };
 
 const _getTask = <TOptions = undefined>({

@@ -28,10 +28,11 @@ export const _AnimatableView: RSFCModel<AnimatableRefModel, _AnimatableViewProps
 
     return (
       <_Component
-        state={animationState}
-        style={styles}
         {...(_viewParams.getProps ? _viewParams.getProps(props, theme) : {})}
-        {...animationProps}>
+        {...animationProps}
+        ref={ref}
+        state={animationState}
+        style={styles}>
         {children}
       </_Component>
     );

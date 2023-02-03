@@ -74,9 +74,8 @@ export const Wrapper: RSFCModel<AnimatableRefModel, WrapperPropsModel> = forward
     };
 
     const _children = useMemo(() => _getChildren(children), [children]);
-    const { ref: _, ..._propsWithoutRef } = props;
     return animation
-      ? createElement(AnimatableView, { ...props, animation, style: styles }, _children)
-      : createElement(View, { ..._propsWithoutRef, style: styles }, _children);
+      ? createElement(AnimatableView, { ...props, animation, ref, style: styles }, _children)
+      : createElement(View, { ...props, style: styles }, _children);
   },
 );

@@ -1,4 +1,4 @@
-import type { AnimatableRefModel, AnimationModel } from '@lib/frontend/animation/animation.models';
+import type { AnimationModel } from '@lib/frontend/animation/animation.models';
 import { AnimatableText } from '@lib/frontend/animation/components/AnimatableText/AnimatableText';
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
@@ -20,7 +20,7 @@ import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/sha
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import isString from 'lodash/isString';
 import type { RefObject } from 'react';
-import { forwardRef, useRef, useState } from 'react';
+import { forwardRef } from 'react';
 import type {
   NativeSyntheticEvent,
   TextInputKeyPressEventData,
@@ -88,6 +88,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
       icon,
       isCenter,
       elementState,
+      onElementStateChange,
       keyboard,
       label,
       language,
@@ -112,11 +113,6 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
   ) => {
     const theme = useTheme();
     const { styles } = useStyles({ props });
-    const [isActive, setIsActive] = useState<boolean>(false);
-
-    const containerRef = useRef<AnimatableRefModel>(null);
-    const iconRef = useRef<AnimatableRefModel>(null);
-    const labelRef = useRef<AnimatableRefModel>(null);
 
     const _isError = error === true || (isString(error) && error.length > 0);
     const _isDisabled = elementState === ELEMENT_STATE.DISABLED;
@@ -128,9 +124,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
     });
     const _activeColor = _isError ? theme.colors.tone.error.main : theme.colors.tone.primary.main;
     const _inactiveColor = theme.colors.tone.neutral.muted;
-
     const _containerAnimation: AnimationModel = {
-      // animatableRefs: [containerRef],
       states: {
         [ELEMENT_STATE.DISABLED]: { backgroundColor: _disabledBackgroundColor },
         [ELEMENT_STATE.INACTIVE]: {
@@ -143,9 +137,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
         },
       },
     };
-
     const _childrenAnimation: AnimationModel<TextStyleModel> = {
-      // animatableRefs: [iconRef, labelRef],
       states: {
         [ELEMENT_STATE.DISABLED]: { color: _inactiveColor },
         [ELEMENT_STATE.INACTIVE]: { color: _inactiveColor },
@@ -156,7 +148,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
     const _leftElement = leftElement && (
       <Appearable
         isCenter
-        isVisible={!isEmpty(value) || isActive || !label}
+        isVisible={!isEmpty(value) || elementState === ELEMENT_STATE.ACTIVE || !label}
         mTop={18}>
         {leftElement(elementState)}
       </Appearable>
@@ -169,11 +161,11 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
         animation={_containerAnimation}
         backgroundColor={_activeBackgroundColor}
         border
+        elementState={elementState}
         grow
         height={height}
         isOverflowHidden
         position={SHAPE_POSITION.RELATIVE}
-        ref={containerRef}
         round
         style={styles}
         testID={testID}
@@ -206,16 +198,16 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
                 {icon && (
                   <Icon
                     animation={_childrenAnimation}
+                    elementState={elementState}
                     icon={icon}
-                    ref={iconRef}
                   />
                 )}
 
                 {label && (
                   <AnimatableText
                     animation={_childrenAnimation}
-                    ref={labelRef}
-                    size={THEME_SIZE.SMALL}>
+                    elementState={elementState}
+                    fontSize={THEME_SIZE.SMALL}>
                     {label}
                   </AnimatableText>
                 )}
@@ -228,12 +220,12 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
           numberOfLines={numberOfLines}
           onBlur={() => {
             onBlur && onBlur();
-            setIsActive(false);
+            onElementStateChange && onElementStateChange(ELEMENT_STATE.INACTIVE);
           }}
           onChangeText={onChange}
           onFocus={() => {
             onFocus && onFocus();
-            setIsActive(true);
+            onElementStateChange && onElementStateChange(ELEMENT_STATE.ACTIVE);
           }}
           onKeyPress={(e: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
             switch (e.nativeEvent.key) {
@@ -278,7 +270,6 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
             colors: {
               background: 'transparent',
               placeholder: theme.colors.tone.neutral.muted,
-              primary: theme.colors.tone.primary.main,
             },
           }}
           value={value}

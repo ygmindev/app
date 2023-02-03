@@ -1,5 +1,5 @@
 import type { ThemeConfigParamsModel } from '@lib/config/style/theme/theme.models';
-import { THEME_COLOR } from '@lib/frontend/style/style.constants';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_FAMILY } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
@@ -109,17 +109,20 @@ export const themeConfig: ThemeConfigParamsModel = {
         process.env.ENV_PLATFORM === PLATFORM.IOS
           ? 'Helvetica Neue'
           : 'Lato, "Helvetica Neue", Arial, sans-serif',
+
       [FONT_FAMILY.STYLISH]: 'Merriweather, Georgia, Serif',
+
+      [FONT_FAMILY.CODE]: '"Menlo", "Consolas", monospace',
     },
 
     lineHeight: 25,
 
     size: {
-      l: 20,
-      m: 14,
-      s: 11,
-      xl: 34,
-      xs: 8,
+      [THEME_SIZE.LARGE]: 20,
+      [THEME_SIZE.MEDIUM]: 14,
+      [THEME_SIZE.SMALL]: 12,
+      [THEME_SIZE.XLARGE]: 34,
+      [THEME_SIZE.XSMALL]: 10,
     },
 
     weight: 'normal',

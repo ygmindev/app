@@ -8,7 +8,7 @@ import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { ElementStateModel, SFCModel } from '@lib/frontend/core/core.models';
-import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
+import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/useControlledValue';
 import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
@@ -32,7 +32,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   const theme = useTheme();
   const { styles } = useStyles({ props });
 
-  const { fieldValue, setFieldValue } = useFieldValue<ElementStateModel>({
+  const { setValueControlled, valueControlled } = useControlledValue<ElementStateModel>({
     defaultValue: ELEMENT_STATE.INACTIVE,
     onChange: onElementStateChange,
     value: elementState,
@@ -88,7 +88,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
     }
   }, [color, theme, type]);
 
-  let _children = children && (
+  let _children = children && type !== BUTTON_TYPE.ICON && (
     <TranslatableText
       align={FONT_ALIGN.CENTER}
       animation={childrenAnimation}
@@ -113,16 +113,15 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   }
 
   const _height = theme.shape.height[size];
-  const _isLoading = fieldValue === ELEMENT_STATE.LOADING;
-
+  const _isLoading = valueControlled === ELEMENT_STATE.LOADING;
   return (
     <Pressable
       {...props}
       animation={containerAnimation}
-      elementState={fieldValue}
+      elementState={valueControlled}
       height={_height}
       isCenter
-      onElementStateChange={setFieldValue}
+      onElementStateChange={setValueControlled}
       position={SHAPE_POSITION.RELATIVE}
       style={styles}
       width={type === BUTTON_TYPE.ICON ? _height : undefined}>

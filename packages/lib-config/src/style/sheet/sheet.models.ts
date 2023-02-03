@@ -1,3 +1,3 @@
-import type { _SheetConfigParamsModel } from '@lib/config/style/sheet/_sheet.models';
+import type { UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
 
-export interface SheetConfigParamsModel extends _SheetConfigParamsModel {}
+export type SheetConfigParamsModel = (theme?: UseThemeModel) => string;

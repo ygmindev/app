@@ -13,13 +13,14 @@ import type {
   TextFieldPropsModel,
   TextFieldRefModel,
 } from '@lib/frontend/form/components/TextField/TextField.models';
-import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
+import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/useControlledValue';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { isTranslatableText } from '@lib/frontend/locale/utils/isTranslatableText/isTranslatableText';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_BASIC_SIZE, THEME_COLOR } from '@lib/frontend/style/style.constants';
 import type { ViewStyleModel } from '@lib/frontend/style/style.models';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import type { ReactElement, RefObject } from 'react';
 import { forwardRef, useRef } from 'react';
 
@@ -38,6 +39,7 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       mask,
       onBlur,
       onChange,
+      onElementStateChange,
       onFocus,
       placeholder,
       rightElement,
@@ -50,16 +52,28 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
     const _ref = useRef<TextFieldRefModel>(null);
     const { t } = useTranslation();
     const theme = useTheme();
-    const { fieldValue, setFieldValue } = useFieldValue({ defaultValue, onChange, value });
+    const { setValueControlled, valueControlled } = useControlledValue({
+      defaultValue,
+      onChange,
+      value,
+    });
+    const {
+      setValueControlled: setElementStateControlled,
+      valueControlled: elementStateControlled,
+    } = useControlledValue<ElementStateModel>({
+      defaultValue: ELEMENT_STATE.INACTIVE,
+      onChange: onElementStateChange,
+      value: elementState,
+    });
 
-    const _rightElement = (elementState?: ElementStateModel): ReactElement => (
+    const _rightElement = (_elementState: ElementStateModel): ReactElement => (
       <Wrapper
         isRowAlign
         pRight={isCenter ? undefined : THEME_BASIC_SIZE.SMALL}>
-        {fieldValue && !isNoClear && elementState !== ELEMENT_STATE.DISABLED && (
+        {valueControlled && !isNoClear && _elementState !== ELEMENT_STATE.DISABLED && (
           <Appearable
             isCenter
-            isVisible={elementState === ELEMENT_STATE.ACTIVE && fieldValue.length > 0}>
+            isVisible={_elementState === ELEMENT_STATE.ACTIVE && valueControlled.length > 0}>
             <Button
               icon="times"
               onPress={() => _handleChange('')}
@@ -70,7 +84,7 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
 
         {isTranslatableText(error) && <Tooltip color={THEME_COLOR.ERROR}>{error}</Tooltip>}
 
-        {rightElement && rightElement(elementState)}
+        {rightElement && rightElement(_elementState)}
       </Wrapper>
     );
 
@@ -93,24 +107,24 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         case TEXT_FIELD_KEYBOARD.NUMBER:
         case TEXT_FIELD_KEYBOARD.TEL: {
           if (/^\d*$/.test(newValue)) {
-            setFieldValue(newValue);
+            setValueControlled(newValue);
           }
           break;
         }
         case TEXT_FIELD_KEYBOARD.NUMBER_POSITIVE: {
           if (/^([1-9]+\d*)?$/.test(newValue)) {
-            setFieldValue(newValue);
+            setValueControlled(newValue);
           }
           break;
         }
         case TEXT_FIELD_KEYBOARD.DECIMAL: {
           if (/^\d*\.?\d*$/.test(newValue)) {
-            setFieldValue(newValue);
+            setValueControlled(newValue);
           }
           break;
         }
         default: {
-          setFieldValue(newValue);
+          setValueControlled(newValue);
           break;
         }
       }
@@ -129,7 +143,7 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
               )
             : undefined
         }
-        elementState={elementState}
+        elementState={elementStateControlled}
         error={isTranslatableText(error) && t(error)}
         height={label ? theme.shape.height.l : theme.shape.height.m}
         isCenter={isCenter}
@@ -138,14 +152,17 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         leftElement={leftElement}
         onBlur={onBlur}
         onChange={_handleChange}
+        onElementStateChange={setElementStateControlled}
         onEscape={isNoClear ? undefined : () => _handleChange('')}
         onFocus={onFocus}
         placeholder={mask || placeholder}
         ref={ref || _ref}
         rightElement={_rightElement}
-        value={fieldValue}
+        value={valueControlled}
         width={width}
       />
     );
   },
 );
+
+process.env.APP_DEBUG && (TextField.displayName = variableName(() => TextField));

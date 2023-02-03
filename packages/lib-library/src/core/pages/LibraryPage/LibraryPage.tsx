@@ -1,29 +1,44 @@
-import { props as buttonProps } from '@lib/frontend/core/components/Button/Button.library';
-import { props as textProps } from '@lib/frontend/core/components/Text/Text.library';
 import type { OptionModel, SFCModel } from '@lib/frontend/core/core.models';
+import { useQuery } from '@lib/frontend/core/hooks/useQuery/useQuery';
 import { NavigationLayout } from '@lib/frontend/core/layouts/NavigationLayout/NavigationLayout';
 import { getComponentDisplayName } from '@lib/frontend/core/utils/getComponentDisplayName/getComponentDisplayName';
+import { useHttp } from '@lib/frontend/http/hooks/useHttp/useHttp';
 import { NotFound } from '@lib/frontend/route/containers/NotFound/NotFound';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { Library } from '@lib/library/core/components/Library/Library';
 import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
+import { LIBRARY_PROPS } from '@lib/library/core/pages/LibraryPage/LibraryPage.constants';
 import type { LibraryPagePropsModel } from '@lib/library/core/pages/LibraryPage/LibraryPage.models';
-import { find } from 'lodash';
+import type { DocgenMetaDataModel } from '@lib/library/docgen/utils/docgen/docgen.models';
+import find from 'lodash/find';
+import mapKeys from 'lodash/mapKeys';
 
-const LIBRARIES = [buttonProps, textProps].map(({ name, ...props }) => {
+// TODO: get from glob
+const LIBRARIES = LIBRARY_PROPS.map(({ name, ...props }) => {
   const id = name || getComponentDisplayName(props.Component);
-  return { id, pathname: trimPathname(id), ...props };
+  return { id, name: id, pathname: trimPathname(id), ...props };
 });
 
 export const LibraryPage: SFCModel<LibraryPagePropsModel> = ({ testID, ...props }) => {
   const { styles } = useStyles({ props });
   const { location, push } = useRouter<{ id: string }>();
   const value = location.params?.id;
+  const _value = value && trimPathname(value);
 
-  // TODO: get from glob
-  const options: Array<OptionModel> = LIBRARIES.map((params) => {
+  const { get } = useHttp({ baseUri: { host: '/' } });
+  const { data } = useQuery<Record<string, DocgenMetaDataModel>>({
+    id: 'components',
+    query: async () => {
+      const result = await get<void, Record<string, DocgenMetaDataModel>>({
+        path: 'assets/library/components.json',
+      });
+      return mapKeys(result, (_, k) => trimPathname(k));
+    },
+  });
+
+  const _options: Array<OptionModel> = LIBRARIES.map((params) => {
     return {
       ...params,
       label: params.id,
@@ -31,16 +46,23 @@ export const LibraryPage: SFCModel<LibraryPagePropsModel> = ({ testID, ...props 
     } as OptionModel;
   });
 
-  const _library = value && find(LIBRARIES, { pathname: trimPathname(value) });
-  console.warn(_library);
+  const _library = _value && find(LIBRARIES, { pathname: _value });
+  const _propTypes = (_value && data && data[_value].propTypes) || undefined;
 
   return (
     <NavigationLayout
-      options={options}
+      options={_options}
       style={styles}
       testID={testID}
       value={value}>
-      {_library ? <Library<unknown> {...(_library as LibraryPropsModel<unknown>)} /> : <NotFound />}
+      {_library ? (
+        <Library<unknown>
+          {...(_library as LibraryPropsModel<unknown>)}
+          propTypes={_propTypes}
+        />
+      ) : (
+        <NotFound />
+      )}
     </NavigationLayout>
   );
 };

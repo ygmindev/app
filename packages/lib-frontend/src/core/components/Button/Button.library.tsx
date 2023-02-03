@@ -1,4 +1,5 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import type { ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { THEME_BASIC_SIZE, THEME_COLOR } from '@lib/frontend/style/style.constants';
@@ -7,7 +8,7 @@ import type { LibraryPropsModel } from '@lib/library/core/components/Library/Lib
 export const props: LibraryPropsModel<ButtonPropsModel> = {
   Component: Button,
   defaultProps: {
-    children: 'text',
+    children: 'children',
   },
   variants: [
     { props: { elementState: ELEMENT_STATE.LOADING } },
@@ -15,6 +16,9 @@ export const props: LibraryPropsModel<ButtonPropsModel> = {
     { props: { icon: 'person' } },
     ...Object.values(THEME_BASIC_SIZE).map((size) => ({ props: { size } })),
     ...Object.values(THEME_COLOR).map((color) => ({ props: { color } })),
-    ...Object.values(THEME_COLOR).map((color) => ({ props: { color, isTransparent: true } })),
+    ...Object.values(THEME_COLOR).map((color) => ({
+      props: { color, type: BUTTON_TYPE.TRANSPARENT },
+    })),
+    { props: { icon: 'person', type: BUTTON_TYPE.ICON } },
   ],
 };

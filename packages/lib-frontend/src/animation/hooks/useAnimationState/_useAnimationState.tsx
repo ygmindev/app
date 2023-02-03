@@ -33,7 +33,7 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
       if (!isAnimating && states && states[elementState]) {
         setIsAnimating(true);
         animationState.transitionTo(params as keyof TStyle);
-        await sleep({ duration: duration });
+        await sleep({ duration });
         setIsAnimating(false);
       }
     },
@@ -47,11 +47,11 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
       animate: ref ? undefined : states && (states[elementState] as never),
       animateInitialState: isInitial,
       exit: states?.invisible || states?.inactive,
-      from: isInitial ? (states?.inactive as never) : undefined,
+      from: ref ? undefined : (states?.inactive as never),
       onDidAnimate: () => (ref ? setIsAnimating(false) : undefined),
       transition: {
-        delay: delay,
-        duration: duration,
+        delay,
+        duration,
         loop: isInfinite,
         type: 'timing',
       },

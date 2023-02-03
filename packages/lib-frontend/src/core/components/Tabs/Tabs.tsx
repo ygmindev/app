@@ -3,7 +3,7 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import type { TabsPropsModel } from '@lib/frontend/core/components/Tabs/Tabs.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
+import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/useControlledValue';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
@@ -19,7 +19,7 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const { t } = useTranslation();
-  const { fieldValue, setFieldValue } = useFieldValue({
+  const { setValueControlled, valueControlled } = useControlledValue({
     defaultValue: defaultValue || (tabs && tabs.length ? tabs[0].id : ''),
     onChange,
     value,
@@ -34,12 +34,12 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
       style={styles}
       testID={testID}>
       {tabs.map((tab) => {
-        const isActive = fieldValue === tab.id;
+        const isActive = valueControlled === tab.id;
         return (
           <Button
             icon={tab.icon}
             key={tab.id}
-            onPress={() => setFieldValue(tab.id)}
+            onPress={() => setValueControlled(tab.id)}
             type={isActive ? undefined : BUTTON_TYPE.TRANSPARENT}>
             {t(tab.label)}
           </Button>

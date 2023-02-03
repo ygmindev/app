@@ -17,6 +17,7 @@ export const bundleConfig: BundleConfigParamsModel = {
 
   platform: PLATFORM.BASE,
 
+  // TODO: watch is not really working
   watch: [
     fromPackages('asset-static/src/**/*'),
     fromPackages('lib-config/src/**/*'),

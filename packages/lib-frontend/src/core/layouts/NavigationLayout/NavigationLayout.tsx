@@ -18,6 +18,7 @@ export const NavigationLayout = <TOption extends OptionModel>({
   const isMobile = useIsMobile();
   return (
     <Wrapper
+      basis={0}
       grow
       isRow={!isMobile}
       spacing
@@ -27,7 +28,12 @@ export const NavigationLayout = <TOption extends OptionModel>({
         value={value}
       />
 
-      <Wrapper grow>{children}</Wrapper>
+      <Wrapper
+        basis={0}
+        grow
+        isVerticalScrollable>
+        {children}
+      </Wrapper>
     </Wrapper>
   );
 };

@@ -13,10 +13,8 @@ const _AnimatableIcon = animatable({ Component: _Icon });
 export const Icon = composeComponent<IconPropsModel, _IconPropsModel, TextStyleModel>({
   getComponent: ({ animation }) => (animation ? _AnimatableIcon : _Icon),
 
-  getProps: ({ height, width, ...props }, theme) => ({
+  getProps: ({ ...props }, theme) => ({
     backgroundColor: theme.colors.tone.neutral.muted,
-    height: height || 0,
-    width: width || 0,
     ...props,
   }),
 

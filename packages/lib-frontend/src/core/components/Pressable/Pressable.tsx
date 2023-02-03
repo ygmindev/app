@@ -1,4 +1,3 @@
-import type { AnimatableRefModel } from '@lib/frontend/animation/animation.models';
 import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import type { PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
@@ -7,7 +6,7 @@ import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { ElementStateModel, SFCModel } from '@lib/frontend/core/core.models';
 import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import { lazy } from '@lib/frontend/core/utils/lazy/lazy';
-import { useFieldValue } from '@lib/frontend/form/hooks/useField/useField';
+import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/useControlledValue';
 import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
@@ -15,7 +14,7 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
 import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import { isPromise } from '@lib/shared/core/utils/isPromise/isPromise';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 const { Button } = lazy(() => import('@lib/frontend/core/components/Button/Button'));
 
@@ -32,16 +31,16 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
   const { t } = useTranslation();
   const [confirmModalIsOpen, setConfirmModalIsOpen] = useState<boolean>(false);
   const isMounted = useMount();
-  const ref = useRef<AnimatableRefModel>(null);
   const { styles } = useStyles({ props });
 
-  const { fieldValue, setFieldValue } = useFieldValue<ElementStateModel>({
+  const { setValueControlled, valueControlled } = useControlledValue<ElementStateModel>({
     defaultValue: ELEMENT_STATE.INACTIVE,
     onChange: onElementStateChange,
     value: elementState,
   });
 
-  const _isDisabled = fieldValue === ELEMENT_STATE.DISABLED || fieldValue === ELEMENT_STATE.LOADING;
+  const _isDisabled =
+    valueControlled === ELEMENT_STATE.DISABLED || valueControlled === ELEMENT_STATE.LOADING;
 
   const _handleButtonPress: CallablePromiseModel = async () => {
     if (!_isDisabled) {
@@ -57,9 +56,9 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
     if (!_isDisabled) {
       const result = onPress && onPress();
       if (isPromise(result)) {
-        isMounted && setFieldValue(ELEMENT_STATE.LOADING);
+        isMounted && setValueControlled(ELEMENT_STATE.LOADING);
         await result;
-        isMounted && setFieldValue(ELEMENT_STATE.INACTIVE);
+        isMounted && setValueControlled(ELEMENT_STATE.INACTIVE);
       }
     }
   };
@@ -67,8 +66,8 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
   return (
     <>
       <Activatable
-        onActive={() => setFieldValue(ELEMENT_STATE.ACTIVE)}
-        onInactive={() => setFieldValue(ELEMENT_STATE.INACTIVE)}>
+        onActive={() => setValueControlled(ELEMENT_STATE.ACTIVE)}
+        onInactive={() => setValueControlled(ELEMENT_STATE.INACTIVE)}>
         <Wrapper
           {...props}
           animation={{
@@ -83,11 +82,11 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
               },
             },
           }}
-          elementState={fieldValue}
+          elementState={valueControlled}
           onPress={_handleButtonPress}
           pHorizontal
           pVertical={THEME_BASIC_SIZE.SMALL}
-          ref={ref}
+          // ref={ref}
           round
           style={styles}>
           {children}
@@ -106,14 +105,14 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
 
             <Wrapper isRowAlign>
               <Button
-                elementState={fieldValue}
+                elementState={valueControlled}
                 icon="chevronLeft"
                 onPress={async () => setConfirmModalIsOpen(false)}>
                 {t('core:labels.cancel')}
               </Button>
 
               <Button
-                elementState={fieldValue}
+                elementState={valueControlled}
                 icon="chevronRight"
                 onPress={async () => {
                   await _handlePress();

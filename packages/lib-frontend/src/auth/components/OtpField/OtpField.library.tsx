@@ -1,18 +1,16 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { OtpField } from '@lib/frontend/auth/components/OtpField/OtpField';
 import type { OtpFieldPropsModel } from '@lib/frontend/auth/components/OtpField/OtpField.models';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<OtpFieldPropsModel>({
+export const props: LibraryPropsModel<OtpFieldPropsModel> = {
+  Component: OtpField,
   defaultProps: {},
-  target: OtpField,
   variants: [
-    { props: { isAutoFocus: true } },
-    { props: { isDisabled: true } },
-    { props: { error: true } },
-    { props: { error: 'error' } },
+    ...Object.values(ELEMENT_STATE).map((elementState) => ({ props: { elementState } })),
+    // { props: { isAutoFocus: true } },
+    // { props: { isDisabled: true } },
+    // { props: { error: true } },
+    // { props: { error: 'error' } },
   ],
-});
-
-export default meta;
-
-export { Story };
+};

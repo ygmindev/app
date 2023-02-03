@@ -17,6 +17,7 @@ export const _AnimatableText: RSFCModel<AnimatableRefModel, _AnimatableTextProps
       <MotiText
         {...(_textParams.getProps ? _textParams.getProps(props, theme) : {})}
         {...(animationProps as PropsModel<typeof MotiText>)}
+        ref={ref}
         state={animationState}
         style={styles}>
         {children}

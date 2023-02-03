@@ -2,13 +2,10 @@
   "labels": {
     "cancel": "TRANSLATION_MISSING",
     "continue": "TRANSLATION_MISSING",
-    "loading": "TRANSLATION_MISSING",
     "noResult": "TRANSLATION_MISSING",
-    "submit": "TRANSLATION_MISSING",
     "tryAgain": "TRANSLATION_MISSING"
   },
   "messages": {
-    "confirmRemove": "TRANSLATION_MISSING",
     "errorForbidden": "TRANSLATION_MISSING",
     "errorGeneric": "TRANSLATION_MISSING",
     "errorOffline": "TRANSLATION_MISSING",

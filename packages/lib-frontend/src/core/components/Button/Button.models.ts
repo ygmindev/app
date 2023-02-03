@@ -1,3 +1,4 @@
+import type { AnimatablePropsModel } from '@lib/frontend/animation/animation.models';
 import type { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
 import type { PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
@@ -10,7 +11,8 @@ export type ButtonTypeModel = `${BUTTON_TYPE}`;
 export interface ButtonPropsModel
   extends Pick<IconPropsModel, 'icon'>,
     ChildrenPropsModel<TranslatableTextModel>,
-    Omit<PressablePropsModel, 'children'> {
+    Pick<PressablePropsModel, 'onPress' | 'confirmMessage' | 'isFullWidth'>,
+    AnimatablePropsModel {
   color?: ThemeColorModel;
   size?: ThemeBasicSizeModel;
   type?: ButtonTypeModel;

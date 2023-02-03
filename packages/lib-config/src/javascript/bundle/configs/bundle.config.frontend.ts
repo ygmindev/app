@@ -12,6 +12,10 @@ export const bundleConfig: BundleConfigParamsModel = merge({
 
   values: [
     {
+      babelConfig: {
+        plugins: ['@emotion', ['transform-react-remove-prop-types', { removeImport: true }]],
+      },
+
       envPrefix: ['APP_'],
 
       extensions: permuteString(['.frontend'], bundleConfigBase.extensions),

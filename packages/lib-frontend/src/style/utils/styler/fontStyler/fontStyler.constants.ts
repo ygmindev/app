@@ -1,4 +1,5 @@
 export enum FONT_FAMILY {
+  CODE = 'code',
   MAIN = 'main',
   STYLISH = 'stylish',
 }

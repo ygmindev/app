@@ -1,19 +1,16 @@
 {
   "labels": {
-    "cancel": "Cancel",
-    "continue": "Continue",
-    "loading": "Loading",
-    "noResult": "No result",
-    "submit": "Submit",
-    "tryAgain": "Try again"
+    "cancel": "TRANSLATION_MISSING",
+    "continue": "TRANSLATION_MISSING",
+    "noResult": "TRANSLATION_MISSING",
+    "tryAgain": "TRANSLATION_MISSING"
   },
   "messages": {
-    "confirmRemove": "Are you sure you want to remove?",
     "errorForbidden": "TRANSLATION_MISSING",
-    "errorGeneric": "Something went wrong",
-    "errorOffline": "You are offline",
+    "errorGeneric": "TRANSLATION_MISSING",
+    "errorOffline": "TRANSLATION_MISSING",
     "errorUnauthorized": "TRANSLATION_MISSING",
-    "nothingToShow": "Nothing to show",
+    "nothingToShow": "TRANSLATION_MISSING",
     "validateAlphaNumeric": "TRANSLATION_MISSING",
     "validateChanged": "TRANSLATION_MISSING",
     "validateEmail": "TRANSLATION_MISSING",
@@ -22,10 +19,7 @@
     "validateRange": "TRANSLATION_MISSING",
     "validateZipCode": "TRANSLATION_MISSING"
   },
-  "Submit": "Submit",
-  "Email address": "Email address",
   "Button": "Button",
   "Text": "Text",
-  "Test": "Test",
-  "Click": "Click"
+  "children": "children"
 }
