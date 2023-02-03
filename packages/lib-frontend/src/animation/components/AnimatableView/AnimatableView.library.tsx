@@ -1,11 +1,9 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { AnimatableView } from '@lib/frontend/animation/components/AnimatableView/AnimatableView';
 import type { AnimatableViewPropsModel } from '@lib/frontend/animation/components/AnimatableView/AnimatableView.models';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<AnimatableViewPropsModel>({
+export const props: LibraryPropsModel<AnimatableViewPropsModel> = {
+  Component: AnimatableView,
   defaultProps: {},
-  target: AnimatableView,
   variants: [],
-});
-
-export { meta as default, Story };
+};

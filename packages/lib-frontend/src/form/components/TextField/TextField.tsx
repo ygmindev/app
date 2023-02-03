@@ -144,7 +144,7 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
             : undefined
         }
         elementState={elementStateControlled}
-        error={isTranslatableText(error) && t(error)}
+        error={isTranslatableText(error) ? t(error) : error}
         height={label ? theme.shape.height.l : theme.shape.height.m}
         isCenter={isCenter}
         keyboard={keyboard}

@@ -1,12 +1,12 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Svg } from '@lib/frontend/core/components/Svg/Svg';
 import type { SvgPropsModel } from '@lib/frontend/core/components/Svg/Svg.models';
 import { SvgShape } from '@lib/frontend/core/components/SvgShape/SvgShape';
 import { SVG_SHAPE } from '@lib/frontend/core/components/SvgShape/SvgShape.constants';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<SvgPropsModel>({
+export const props: LibraryPropsModel<SvgPropsModel> = {
+  Component: Svg,
   defaultProps: {},
-  target: Svg,
   variants: [
     {
       props: {
@@ -19,6 +19,4 @@ const { Story, meta } = withStory<SvgPropsModel>({
       },
     },
   ],
-});
-
-export { meta as default, Story };
+};

@@ -1,18 +1,10 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Logo } from '@lib/frontend/app/components/Logo/Logo';
 import type { LogoPropsModel } from '@lib/frontend/app/components/Logo/Logo.models';
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<LogoPropsModel>({
+export const props: LibraryPropsModel<LogoPropsModel> = {
+  Component: Logo,
   defaultProps: {},
-  target: Logo,
-  variants: [
-    { props: { size: THEME_SIZE.SMALL } },
-    { props: { size: THEME_SIZE.MEDIUM } },
-    { props: { size: THEME_SIZE.LARGE } },
-  ],
-});
-
-export default meta;
-
-export { Story };
+  variants: [...Object.values(THEME_BASIC_SIZE).map((size) => ({ props: { size } }))],
+};

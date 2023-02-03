@@ -1,16 +1,16 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Trans } from '@lib/frontend/locale/components/Trans/Trans';
 import type { TransPropsModel } from '@lib/frontend/locale/components/Trans/Trans.models';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 import { TEST } from '@lib/shared/test/test.constants';
 
-const { Story, meta } = withStory<TransPropsModel<unknown>>({
+export const props: LibraryPropsModel<TransPropsModel<unknown>> = {
+  Component: Trans,
   defaultProps: {
     i18nKey: 'labels.testWithString',
     ns: TEST,
   },
-  target: Trans,
   variants: [
     {
       props: {
@@ -26,6 +26,4 @@ const { Story, meta } = withStory<TransPropsModel<unknown>>({
       },
     },
   ],
-});
-
-export { meta as default, Story };
+};

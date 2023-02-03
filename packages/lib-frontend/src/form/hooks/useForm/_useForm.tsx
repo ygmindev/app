@@ -18,7 +18,7 @@ export const _useForm = <TType extends unknown>({
     isSubmitting,
     isValid,
     setErrors,
-    setValueControlled,
+    setFieldValue,
     setValues,
     values,
   } = useFormik<TType & FormikValues>({
@@ -32,7 +32,7 @@ export const _useForm = <TType extends unknown>({
 
   return {
     errors: errors as FormErrorModel<TType>,
-    handleChange: (id) => (value) => setValueControlled(id, value),
+    handleChange: (id) => (value) => setFieldValue(id, value),
     handleReset: () => handleReset(null),
     handleSubmit,
     isLoading: isSubmitting,

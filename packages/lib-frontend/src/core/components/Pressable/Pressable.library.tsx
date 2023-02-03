@@ -1,18 +1,16 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
 import type { PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
 import { Text } from '@lib/frontend/core/components/Text/Text';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<PressablePropsModel>({
+export const props: LibraryPropsModel<PressablePropsModel> = {
+  Component: Pressable,
   defaultProps: {
-    children: (params) => <Text>{`${params}`}</Text>,
+    children: <Text>children</Text>,
   },
-  target: Pressable,
   variants: [
-    { props: { isPressed: true } },
-    { props: { isDisabled: true } },
-    { props: { confirmMessage: 'confirm' } },
+    ...Object.values(ELEMENT_STATE).map((elementState) => ({ props: { elementState } })),
+    { props: { confirmMessage: 'confirmMessage' } },
   ],
-});
-
-export { meta as default, Story };
+};

@@ -1,11 +1,10 @@
-import type { ChildrenPropsModel } from '@lib/frontend/core/core.models';
 import type { DocgenMetaDataPropsModel } from '@lib/library/docgen/utils/docgen/docgen.models';
 import type { PartialModel } from '@lib/shared/core/core.models';
-import type { ComponentType, ReactElement } from 'react';
+import type { ComponentType } from 'react';
 
 export interface LibraryPropsModel<TProps> {
   Component: ComponentType<TProps>;
-  Renderer?: ComponentType<ChildrenPropsModel<ReactElement<TProps>>>;
+  Renderer?: ComponentType<TProps>;
   category?: string;
   defaultProps: TProps;
   name?: string;

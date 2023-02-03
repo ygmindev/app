@@ -1,11 +1,11 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { RouteLink } from '@lib/frontend/route/components/RouteLink/RouteLink';
 import type { RouteLinkPropsModel } from '@lib/frontend/route/components/RouteLink/RouteLink.models';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<RouteLinkPropsModel>({
-  defaultProps: {},
-  target: RouteLink,
+export const props: LibraryPropsModel<RouteLinkPropsModel> = {
+  Component: RouteLink,
+  defaultProps: {
+    pathname: '',
+  },
   variants: [],
-});
-
-export { Story, meta as default };
+};

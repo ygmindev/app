@@ -116,14 +116,15 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
 
     const _isError = error === true || (isString(error) && error.length > 0);
     const _isDisabled = elementState === ELEMENT_STATE.DISABLED;
-
     const _activeBackgroundColor = theme.colors.tone.neutral.main;
     const _disabledBackgroundColor = palette({
       color: theme.colors.tone.neutral.main,
       lightness: theme.colors.disabledLightness,
     });
     const _activeColor = _isError ? theme.colors.tone.error.main : theme.colors.tone.primary.main;
-    const _inactiveColor = theme.colors.tone.neutral.muted;
+    const _inactiveColor = _isError
+      ? theme.colors.tone.error.main
+      : theme.colors.tone.neutral.muted;
     const _containerAnimation: AnimationModel = {
       states: {
         [ELEMENT_STATE.DISABLED]: { backgroundColor: _disabledBackgroundColor },

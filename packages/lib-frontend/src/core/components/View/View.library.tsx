@@ -1,11 +1,9 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { View } from '@lib/frontend/core/components/View/View';
 import type { ViewPropsModel } from '@lib/frontend/core/components/View/View.models';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<ViewPropsModel>({
+export const props: LibraryPropsModel<ViewPropsModel> = {
+  Component: View,
   defaultProps: {},
-  target: View,
   variants: [],
-});
-
-export { Story, meta as default };
+};

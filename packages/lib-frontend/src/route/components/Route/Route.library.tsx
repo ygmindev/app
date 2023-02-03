@@ -1,11 +1,11 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Route } from '@lib/frontend/route/components/Route/Route';
 import type { RoutePropsModel } from '@lib/frontend/route/components/Route/Route.models';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<RoutePropsModel>({
-  defaultProps: {},
-  target: Route,
+export const props: LibraryPropsModel<RoutePropsModel> = {
+  Component: Route,
+  defaultProps: {
+    route: { pathname: '' },
+  },
   variants: [],
-});
-
-export { meta as default, Story };
+};

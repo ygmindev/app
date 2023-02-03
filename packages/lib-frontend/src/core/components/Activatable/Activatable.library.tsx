@@ -7,6 +7,6 @@ export const props: LibraryPropsModel<ActivatablePropsModel> = {
   defaultProps: {
     children: (isActive) => <WrapperFixture text={`${isActive}`} />,
   },
-  target: Activatable,
+  Component: Activatable,
   variants: [{ props: { isHoverable: false } }],
 };

@@ -97,40 +97,38 @@ export const Library = <TProps,>({
           <Wrapper
             isHorizontalScrollable
             isRow
+            pBottom
             spacing>
-            {v?.map(({ id, name: variantName, props: variantProps }) => {
-              const _element = createElement(
-                Component as ComponentType,
-                { ...defaultProps, ...variantProps } as Attributes,
-              );
-              return (
+            {v?.map(({ id, name: variantName, props: variantProps }) => (
+              <Wrapper
+                key={id}
+                spacing={THEME_BASIC_SIZE.SMALL}>
                 <Wrapper
-                  key={id}
+                  border
+                  p
+                  round
                   spacing={THEME_BASIC_SIZE.SMALL}>
-                  <Wrapper
-                    border
-                    p
-                    round
-                    spacing={THEME_BASIC_SIZE.SMALL}>
-                    {name && <Text>{variantName}</Text>}
+                  {name && <Text>{variantName}</Text>}
 
-                    {Renderer ? createElement(Renderer, {}, _element) : _element}
-                  </Wrapper>
-
-                  {map(variantProps as object, (v, k) => (
-                    <Wrapper key={k}>
-                      <Text fontSize={THEME_SIZE.SMALL}>{k}</Text>
-
-                      <Text
-                        colorRole={THEME_ROLE.MUTED}
-                        fontSize={THEME_SIZE.SMALL}>
-                        {toString(v)}
-                      </Text>
-                    </Wrapper>
-                  ))}
+                  {createElement(
+                    (Renderer || Component) as ComponentType,
+                    { ...defaultProps, ...variantProps } as Attributes,
+                  )}
                 </Wrapper>
-              );
-            })}
+
+                {map(variantProps as object, (v, k) => (
+                  <Wrapper key={k}>
+                    <Text fontSize={THEME_SIZE.SMALL}>{k}</Text>
+
+                    <Text
+                      colorRole={THEME_ROLE.MUTED}
+                      fontSize={THEME_SIZE.SMALL}>
+                      {toString(v)}
+                    </Text>
+                  </Wrapper>
+                ))}
+              </Wrapper>
+            ))}
           </Wrapper>
         </Wrapper>
       ))}

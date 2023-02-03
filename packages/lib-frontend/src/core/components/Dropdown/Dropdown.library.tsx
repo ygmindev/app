@@ -1,24 +1,22 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Dropdown } from '@lib/frontend/core/components/Dropdown/Dropdown';
 import type { DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/Dropdown.models';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<DropdownPropsModel>({
+export const props: LibraryPropsModel<DropdownPropsModel> = {
+  Component: Dropdown,
+
+  Renderer: ({ ...props }) => (
+    <WrapperFixture>
+      <Dropdown {...props} />
+    </WrapperFixture>
+  ),
+
   defaultProps: {
     anchor: <WrapperFixture width={150} />,
     children: <WrapperFixture />,
     isOpen: true,
   },
-  displayName: 'Dropdown',
-  target: (props) => (
-    <Wrapper
-      height={500}
-      isCenter
-      width={500}>
-      <Dropdown {...props} />
-    </Wrapper>
-  ),
 
   variants: [
     { props: { isLeft: true } },
@@ -26,6 +24,4 @@ const { Story, meta } = withStory<DropdownPropsModel>({
     { props: { isTop: true } },
     { props: { isFullWidth: true } },
   ],
-});
-
-export { meta as default, Story };
+};

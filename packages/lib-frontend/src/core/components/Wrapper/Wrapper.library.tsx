@@ -1,12 +1,14 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import type { WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
+import { THEME_COLOR } from '@lib/frontend/style/style.constants';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 import { Fragment } from 'react';
 
-const { Story, meta } = withStory<WrapperPropsModel>({
+export const props: LibraryPropsModel<WrapperPropsModel> = {
+  Component: Wrapper,
   defaultProps: {
-    backgroundColor: 'secondary',
+    backgroundColor: THEME_COLOR.SECONDARY,
     children: [
       <WrapperFixture text="1" />,
       <WrapperFixture text="2" />,
@@ -14,7 +16,6 @@ const { Story, meta } = withStory<WrapperPropsModel>({
     ],
     width: 300,
   },
-  target: Wrapper,
   variants: [
     { props: { isFullWidth: true } },
     { props: { spacing: true } },
@@ -35,8 +36,5 @@ const { Story, meta } = withStory<WrapperPropsModel>({
         spacing: true,
       },
     },
-    { props: { isReverse: true } },
   ],
-});
-
-export { meta as default, Story };
+};

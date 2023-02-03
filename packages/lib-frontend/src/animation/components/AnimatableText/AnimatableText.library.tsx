@@ -1,11 +1,9 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { AnimatableText } from '@lib/frontend/animation/components/AnimatableText/AnimatableText';
 import type { AnimatableTextPropsModel } from '@lib/frontend/animation/components/AnimatableText/AnimatableText.models';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<AnimatableTextPropsModel>({
+export const props: LibraryPropsModel<AnimatableTextPropsModel> = {
+  Component: AnimatableText,
   defaultProps: {},
-  target: AnimatableText,
   variants: [],
-});
-
-export { meta as default, Story };
+};

@@ -1,11 +1,9 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Tooltip } from '@lib/frontend/core/components/Tooltip/Tooltip';
 import type { TooltipPropsModel } from '@lib/frontend/core/components/Tooltip/Tooltip.models';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<TooltipPropsModel>({
+export const props: LibraryPropsModel<TooltipPropsModel> = {
+  Component: Tooltip,
   defaultProps: {},
-  target: Tooltip,
   variants: [],
-});
-
-export { Story, meta as default };
+};

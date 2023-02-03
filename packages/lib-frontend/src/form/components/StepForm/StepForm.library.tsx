@@ -1,11 +1,9 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { StepForm } from '@lib/frontend/form/components/StepForm/StepForm';
 import type { StepFormPropsModel } from '@lib/frontend/form/components/StepForm/StepForm.models';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<StepFormPropsModel>({
+export const props: LibraryPropsModel<StepFormPropsModel> = {
+  Component: StepForm,
   defaultProps: {},
-  target: StepForm,
   variants: [],
-});
-
-export { meta as default, Story };
+};

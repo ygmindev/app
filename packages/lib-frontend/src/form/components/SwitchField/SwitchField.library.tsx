@@ -1,14 +1,13 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
-import type { _SwitchFieldPropsModel } from '@lib/frontend/form/components/SwitchField/_SwitchField.models';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { SwitchField } from '@lib/frontend/form/components/SwitchField/SwitchField';
+import type { SwitchFieldPropsModel } from '@lib/frontend/form/components/SwitchField/SwitchField.models';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<_SwitchFieldPropsModel>({
+export const props: LibraryPropsModel<SwitchFieldPropsModel> = {
+  Component: SwitchField,
   defaultProps: {},
-  target: SwitchField,
   variants: [
-    { props: { isDisabled: true } },
     { props: { iconActive: 'happy', iconInactive: 'sad' } },
+    ...Object.values(ELEMENT_STATE).map((elementState) => ({ props: { elementState } })),
   ],
-});
-
-export { meta as default, Story };
+};

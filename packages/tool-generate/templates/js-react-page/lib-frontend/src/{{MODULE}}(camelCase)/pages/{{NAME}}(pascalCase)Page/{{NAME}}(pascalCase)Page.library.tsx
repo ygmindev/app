@@ -1,11 +1,9 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 import { {{NAME}}(pascalCase)Page } from '@lib/frontend/{{MODULE}}(camelCase)/pages/{{NAME}}(pascalCase)Page/{{NAME}}(pascalCase)Page';
 import type { {{NAME}}(pascalCase)PagePropsModel } from '@lib/frontend/{{MODULE}}(camelCase)/pages/{{NAME}}(pascalCase)Page/{{NAME}}(pascalCase)Page.models';
 
-const { Story, meta } = withStory<{{NAME}}(pascalCase)PagePropsModel>({
+export const props: LibraryPropsModel<{{NAME}}(pascalCase)PagePropsModel> = {
   defaultProps: {},
-  target: {{NAME}}(pascalCase)Page,
+  Component: {{NAME}}(pascalCase)Page,
   variants: [],
-});
-
-export { meta as default, Story };
+};

@@ -5,11 +5,11 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
-import { cloneElement, useState } from 'react';
+import { useState } from 'react';
 
 export const props: LibraryPropsModel<AppearablePropsModel> = {
   Component: Appearable,
-  Renderer: ({ children }) => {
+  Renderer: ({ ...props }) => {
     const [isVisible, setIsVisible] = useState<boolean>(false);
     return (
       <Wrapper spacing>
@@ -19,7 +19,10 @@ export const props: LibraryPropsModel<AppearablePropsModel> = {
           {isVisible ? 'Close' : 'Open'}
         </Button>
 
-        {children && cloneElement(children, { isVisible })}
+        <Appearable
+          {...props}
+          isVisible={isVisible}
+        />
       </Wrapper>
     );
   },

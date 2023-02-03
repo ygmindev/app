@@ -1,17 +1,14 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { ICONS } from '@lib/frontend/core/components/Icon/Icon.constants';
 import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
 import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<IconPropsModel>({
-  defaultProps: { icon: ICONS.person },
-  target: Icon,
+export const props: LibraryPropsModel<IconPropsModel> = {
+  Component: Icon,
+  defaultProps: { icon: 'person' },
   variants: [
-    ...Object.values(THEME_SIZE).map((size) => ({ props: { size } })),
+    ...Object.values(THEME_SIZE).map((fontSize) => ({ props: { fontSize } })),
     ...Object.values(THEME_COLOR).map((color) => ({ props: { color } })),
     { props: { onPress: () => null } },
   ],
-});
-
-export { meta as default, Story };
+};

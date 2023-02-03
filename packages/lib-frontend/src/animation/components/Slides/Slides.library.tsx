@@ -1,11 +1,9 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Slides } from '@lib/frontend/animation/components/Slides/Slides';
 import type { SlidesPropsModel } from '@lib/frontend/animation/components/Slides/Slides.models';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<SlidesPropsModel>({
+export const props: LibraryPropsModel<SlidesPropsModel> = {
+  Component: Slides,
   defaultProps: {},
-  target: Slides,
   variants: [],
-});
-
-export { Story, meta as default };
+};

@@ -1,12 +1,10 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Link } from '@lib/frontend/core/components/Link/Link';
 import type { LinkPropsModel } from '@lib/frontend/core/components/Link/Link.models';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<LinkPropsModel>({
+export const props: LibraryPropsModel<LinkPropsModel> = {
+  Component: Link,
   defaultProps: {
     children: 'children',
   },
-  target: Link,
-});
-
-export { meta as default, Story };
+};

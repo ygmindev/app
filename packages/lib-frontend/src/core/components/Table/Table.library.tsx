@@ -1,26 +1,21 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Table } from '@lib/frontend/core/components/Table/Table';
-import type { TableFixtureRowModel } from '@lib/frontend/core/components/Table/Table.fixtures';
 import {
   TABLE_FIXTURE_COLUMNS,
   TABLE_FIXTURE_DATA,
 } from '@lib/frontend/core/components/Table/Table.fixtures';
 import type { TablePropsModel } from '@lib/frontend/core/components/Table/Table.models';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<TablePropsModel<TableFixtureRowModel>>({
+export const props: LibraryPropsModel<TablePropsModel<unknown>> = {
+  Component: Table,
+  Renderer: (props) => (
+    <WrapperFixture>
+      <Table {...props} />
+    </WrapperFixture>
+  ),
   defaultProps: {
     columns: TABLE_FIXTURE_COLUMNS,
     data: TABLE_FIXTURE_DATA,
-  },
-  displayName: 'Table',
-  target: (props) => (
-    <Wrapper
-      height={500}
-      width={500}>
-      <Table {...props} />
-    </Wrapper>
-  ),
-});
-
-export { meta as default, Story };
+  } as TablePropsModel<unknown>,
+};

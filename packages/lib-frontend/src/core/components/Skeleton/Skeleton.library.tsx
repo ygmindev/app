@@ -1,25 +1,22 @@
-import { withStory } from '@app/web-storybook/utils/withStory/withStory';
 import { Skeleton } from '@lib/frontend/core/components/Skeleton/Skeleton';
 import type { SkeletonPropsModel } from '@lib/frontend/core/components/Skeleton/Skeleton.models';
 import { SvgShape } from '@lib/frontend/core/components/SvgShape/SvgShape';
 import { SVG_SHAPE } from '@lib/frontend/core/components/SvgShape/SvgShape.constants';
+import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Story, meta } = withStory<SkeletonPropsModel>({
+export const props: LibraryPropsModel<SkeletonPropsModel> = {
+  Component: Skeleton,
   defaultProps: {},
-  target: Skeleton,
   variants: [
     {
       props: {
         children: (
           <SvgShape
             shape={SVG_SHAPE.RECT}
-            x={0}
-            y={0}
+            shapeProps={{ height: 100, width: 100 }}
           />
         ),
       },
     },
   ],
-});
-
-export { meta as default, Story };
+};
