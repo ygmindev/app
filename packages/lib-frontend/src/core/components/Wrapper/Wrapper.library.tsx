@@ -10,9 +10,9 @@ export const props: LibraryPropsModel<WrapperPropsModel> = {
   defaultProps: {
     backgroundColor: THEME_COLOR.SECONDARY,
     children: [
-      <WrapperFixture text="1" />,
-      <WrapperFixture text="2" />,
-      <WrapperFixture text="3" />,
+      <WrapperFixture>1</WrapperFixture>,
+      <WrapperFixture>2</WrapperFixture>,
+      <WrapperFixture>3</WrapperFixture>,
     ],
     width: 300,
   },
@@ -24,13 +24,13 @@ export const props: LibraryPropsModel<WrapperPropsModel> = {
       name: 'with fragment',
       props: {
         children: [
-          <WrapperFixture text="1" />,
+          <WrapperFixture>1</WrapperFixture>,
           <Fragment>
-            <WrapperFixture text="2" />
+            <WrapperFixture>2</WrapperFixture>
 
-            <WrapperFixture text="3" />
+            <WrapperFixture>3</WrapperFixture>
 
-            <WrapperFixture text="4" />
+            <WrapperFixture>4</WrapperFixture>
           </Fragment>,
         ],
         spacing: true,

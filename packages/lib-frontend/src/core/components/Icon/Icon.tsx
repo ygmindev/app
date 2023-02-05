@@ -1,33 +1,42 @@
+import type { AnimatableRefModel } from '@lib/frontend/animation/animation.models';
 import { animatable } from '@lib/frontend/animation/utils/animatable/animatable';
 import { _Icon } from '@lib/frontend/core/components/Icon/_Icon';
-import type { _IconPropsModel } from '@lib/frontend/core/components/Icon/_Icon.models';
 import { ICON_FONT_SIZE_OFFSET } from '@lib/frontend/core/components/Icon/Icon.constants';
 import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
-import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
+import type { RSFCModel } from '@lib/frontend/core/core.models';
+import { toComponentClass } from '@lib/frontend/core/utils/toComponentClass/toComponentClass';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import type { TextStyleModel } from '@lib/frontend/style/style.models';
 import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
+import { forwardRef } from 'react';
 
-const _AnimatableIcon = animatable({ Component: _Icon });
+const _AnimatableIcon = animatable({ Component: toComponentClass(_Icon) });
 
-export const Icon = composeComponent<IconPropsModel, _IconPropsModel, TextStyleModel>({
-  getComponent: ({ animation }) => (animation ? _AnimatableIcon : _Icon),
-
-  getProps: ({ ...props }, theme) => ({
-    backgroundColor: theme.colors.tone.neutral.muted,
-    ...props,
-  }),
-
-  stylers: [
-    textStyler,
-    (props, theme) => {
-      const style = textStyler(props, theme);
-      return {
-        ...style,
-        fontSize: style.fontSize ? style.fontSize + ICON_FONT_SIZE_OFFSET : style.fontSize,
-      };
-    },
-  ],
-});
+export const Icon: RSFCModel<AnimatableRefModel, IconPropsModel, TextStyleModel> = forwardRef(
+  ({ ...props }, ref) => {
+    const { styles } = useStyles({
+      props,
+      stylers: [
+        textStyler,
+        (props, theme) => {
+          const style = textStyler(props, theme);
+          return {
+            ...style,
+            fontSize: style.fontSize ? style.fontSize + ICON_FONT_SIZE_OFFSET : style.fontSize,
+          };
+        },
+      ],
+    });
+    const _Component = props.animation ? _AnimatableIcon : _Icon;
+    return (
+      <_Component
+        {...props}
+        ref={ref}
+        style={styles}
+      />
+    );
+  },
+);
 
 process.env.APP_DEBUG && (Icon.displayName = variableName(() => Icon));

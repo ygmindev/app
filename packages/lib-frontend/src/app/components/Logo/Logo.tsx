@@ -9,7 +9,7 @@ import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const Logo = composeComponent<LogoPropsModel, LinkPropsModel>({
-  getComponent: () => Link,
+  Component: Link,
 
   getProps: ({ size = THEME_BASIC_SIZE.MEDIUM }) => {
     const { height, width } = LOGO_SIZES[size];

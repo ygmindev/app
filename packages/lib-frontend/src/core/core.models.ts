@@ -48,15 +48,19 @@ export interface ElementStatePropsModel {
   onElementStateChange?(value?: ElementStateModel): void;
 }
 
+export interface ValuePropsModel<TType> {
+  defaultValue?: TType;
+  onChange?(value: TType): void;
+  value?: TType;
+}
+
 export interface FieldPropsModel<TType extends string = string>
   extends Pick<IconPropsModel, 'icon'>,
-    ElementStatePropsModel {
-  defaultValue?: TType;
+    ElementStatePropsModel,
+    ValuePropsModel<TType> {
   error?: string | boolean;
   isAutoFocus?: boolean;
   label?: string;
-  onChange?(value: TType): void;
-  value?: TType;
 }
 
 export interface OptionModel

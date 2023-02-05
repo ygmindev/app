@@ -6,9 +6,9 @@ import {
 import type { AuthMenuPropsModel } from '@lib/frontend/auth/containers/AuthMenu/AuthMenu.models';
 import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { Button } from '@lib/frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Menu } from '@lib/frontend/core/components/Menu/Menu';
 import { Text } from '@lib/frontend/core/components/Text/Text';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
@@ -46,9 +46,8 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
     <Menu
       anchor={(isOpen) => (
         <Button
+          elementState={isOpen ? ELEMENT_STATE.ACTIVE : undefined}
           icon="person"
-          isActive={isOpen}
-          type={BUTTON_TYPE.ICON}
         />
       )}
       options={options}

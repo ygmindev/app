@@ -5,7 +5,7 @@ import type { TextProps } from 'react-native';
 import { Linking, Text } from 'react-native';
 
 export const _Link = composeComponent<_LinkPropsModel, TextProps, TextStyleModel>({
-  getComponent: () => Text,
+  Component: Text,
 
   getProps: ({ children, onPress, pathname }) => ({
     children,

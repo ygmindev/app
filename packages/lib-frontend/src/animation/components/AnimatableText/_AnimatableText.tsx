@@ -12,8 +12,12 @@ export const _AnimatableText: RSFCModel<AnimatableRefModel, _AnimatableTextProps
   ({ animation, children, elementState, ...props }, ref) => {
     const theme = useTheme();
     const { styles } = useStyles({ props });
-    const { animationProps, animationState } = useAnimationState({ animation, elementState, ref });
-    return (
+    const { animationProps, animationState, isRender } = useAnimationState({
+      animation,
+      elementState,
+      ref,
+    });
+    return isRender ? (
       <MotiText
         {...(_textParams.getProps ? _textParams.getProps(props, theme) : {})}
         {...(animationProps as PropsModel<typeof MotiText>)}
@@ -22,6 +26,6 @@ export const _AnimatableText: RSFCModel<AnimatableRefModel, _AnimatableTextProps
         style={styles}>
         {children}
       </MotiText>
-    );
+    ) : null;
   },
 );

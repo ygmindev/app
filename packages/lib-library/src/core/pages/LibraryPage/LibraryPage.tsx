@@ -1,8 +1,6 @@
 import type { OptionModel, SFCModel } from '@lib/frontend/core/core.models';
-import { useQuery } from '@lib/frontend/core/hooks/useQuery/useQuery';
 import { NavigationLayout } from '@lib/frontend/core/layouts/NavigationLayout/NavigationLayout';
 import { getComponentDisplayName } from '@lib/frontend/core/utils/getComponentDisplayName/getComponentDisplayName';
-import { useHttp } from '@lib/frontend/http/hooks/useHttp/useHttp';
 import { NotFound } from '@lib/frontend/route/containers/NotFound/NotFound';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
@@ -11,13 +9,12 @@ import { Library } from '@lib/library/core/components/Library/Library';
 import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 import { LIBRARY_PROPS } from '@lib/library/core/pages/LibraryPage/LibraryPage.constants';
 import type { LibraryPagePropsModel } from '@lib/library/core/pages/LibraryPage/LibraryPage.models';
-import type { DocgenMetaDataModel } from '@lib/library/docgen/utils/docgen/docgen.models';
 import find from 'lodash/find';
-import mapKeys from 'lodash/mapKeys';
+import type { ComponentType } from 'react';
 
 // TODO: get from glob
 const LIBRARIES = LIBRARY_PROPS.map(({ name, ...props }) => {
-  const id = name || getComponentDisplayName(props.Component);
+  const id = name || getComponentDisplayName(props.Component as ComponentType);
   return { id, name: id, pathname: trimPathname(id), ...props };
 });
 
@@ -27,16 +24,16 @@ export const LibraryPage: SFCModel<LibraryPagePropsModel> = ({ testID, ...props 
   const value = location.params?.id;
   const _value = value && trimPathname(value);
 
-  const { get } = useHttp({ baseUri: { host: '/' } });
-  const { data } = useQuery<Record<string, DocgenMetaDataModel>>({
-    id: 'components',
-    query: async () => {
-      const result = await get<void, Record<string, DocgenMetaDataModel>>({
-        path: 'assets/library/components.json',
-      });
-      return mapKeys(result, (_, k) => trimPathname(k));
-    },
-  });
+  // const { get } = useHttp({ baseUri: { host: '/' } });
+  // const { data } = useQuery<Record<string, DocgenMetaDataModel>>({
+  //   id: 'components',
+  //   query: async () => {
+  //     const result = await get<void, Record<string, DocgenMetaDataModel>>({
+  //       path: 'assets/library/components.json',
+  //     });
+  //     return mapKeys(result, (_, k) => trimPathname(k));
+  //   },
+  // });
 
   const _options: Array<OptionModel> = LIBRARIES.map((params) => {
     return {
@@ -47,7 +44,7 @@ export const LibraryPage: SFCModel<LibraryPagePropsModel> = ({ testID, ...props 
   });
 
   const _library = _value && find(LIBRARIES, { pathname: _value });
-  const _propTypes = (_value && data && data[_value].propTypes) || undefined;
+  // const _propTypes = (_value && data && data[_value] && data[_value].propTypes) || undefined;
 
   return (
     <NavigationLayout
@@ -58,7 +55,7 @@ export const LibraryPage: SFCModel<LibraryPagePropsModel> = ({ testID, ...props 
       {_library ? (
         <Library<unknown>
           {...(_library as LibraryPropsModel<unknown>)}
-          propTypes={_propTypes}
+          // propTypes={_propTypes}
         />
       ) : (
         <NotFound />

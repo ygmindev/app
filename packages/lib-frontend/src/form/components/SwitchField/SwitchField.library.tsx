@@ -5,6 +5,7 @@ import type { LibraryPropsModel } from '@lib/library/core/components/Library/Lib
 
 export const props: LibraryPropsModel<SwitchFieldPropsModel> = {
   Component: SwitchField,
+  category: 'form',
   defaultProps: {},
   variants: [
     { props: { iconActive: 'happy', iconInactive: 'sad' } },

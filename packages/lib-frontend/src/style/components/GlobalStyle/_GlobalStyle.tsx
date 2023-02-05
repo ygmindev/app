@@ -4,7 +4,7 @@ import { composeComponent } from '@lib/frontend/core/utils/composeComponent/comp
 import type { _GlobalStylePropsModel } from '@lib/frontend/style/components/GlobalStyle/_GlobalStyle.models';
 
 export const _GlobalStyle = composeComponent<_GlobalStylePropsModel, GlobalProps>({
-  getComponent: () => Global,
+  Component: Global,
 
   getProps: ({ sheet }) => ({
     styles: css`

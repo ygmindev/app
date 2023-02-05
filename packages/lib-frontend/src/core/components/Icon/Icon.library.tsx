@@ -9,6 +9,5 @@ export const props: LibraryPropsModel<IconPropsModel> = {
   variants: [
     ...Object.values(THEME_SIZE).map((fontSize) => ({ props: { fontSize } })),
     ...Object.values(THEME_COLOR).map((color) => ({ props: { color } })),
-    { props: { onPress: () => null } },
   ],
 };

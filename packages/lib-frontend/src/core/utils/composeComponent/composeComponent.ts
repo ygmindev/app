@@ -16,7 +16,7 @@ export const composeComponent = <
   TStyle extends StyleModel = ViewStyleModel,
   TRef = unknown,
 >({
-  getComponent,
+  Component,
   getProps,
   isWeb,
   stylers,
@@ -26,21 +26,14 @@ export const composeComponent = <
   TRef
 > =>
   forwardRef((props, ref): ReactElement<TResult> => {
-    const { styles } = useStyles({ props, stylers });
     const theme = useTheme();
-    const _propsWithStyle = { ...props, style: styles };
-    const _Component = useMemo(
-      () => getComponent(_propsWithStyle),
-      [getComponent, _propsWithStyle],
-    );
+    const { styles } = useStyles({ props, stylers });
     const _props = useMemo(
-      () => (getProps ? getProps(_propsWithStyle, theme, ref) : _propsWithStyle),
-      [getProps, _propsWithStyle, styles, theme, ref],
+      () => (getProps ? getProps(props, theme, ref) : props),
+      [getProps, props, theme, ref],
     );
-    return (isWeb ? unstable_createElement : createElement)(_Component, {
+    return (isWeb ? unstable_createElement : createElement)(Component, {
       ..._props,
-      ...(isFragment(_Component)
-        ? {}
-        : { nativeid: props.nativeID, ref, style: styles, testID: props.testID }),
+      ...(isFragment(Component) ? {} : { nativeid: props.nativeID, ref, style: styles }),
     });
   }) as ComposeComponentModel<TProps, TStyle, TRef>;

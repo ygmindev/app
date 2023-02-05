@@ -1,23 +1,15 @@
-import type { AnimatableRefModel } from '@lib/frontend/animation/animation.models';
 import { _AnimatableText } from '@lib/frontend/animation/components/AnimatableText/_AnimatableText';
+import type { _AnimatableTextPropsModel } from '@lib/frontend/animation/components/AnimatableText/_AnimatableText.models';
 import type { AnimatableTextPropsModel } from '@lib/frontend/animation/components/AnimatableText/AnimatableText.models';
 import { textParams } from '@lib/frontend/core/components/Text/Text';
-import type { RSFCModel } from '@lib/frontend/core/core.models';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { forwardRef } from 'react';
+import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
-export const AnimatableText: RSFCModel<AnimatableRefModel, AnimatableTextPropsModel> = forwardRef(
-  ({ ...props }, ref) => {
-    const theme = useTheme();
-    const { styles } = useStyles({ props, stylers: textParams.stylers });
-    return (
-      <_AnimatableText
-        {...props}
-        {...(textParams.getProps ? textParams.getProps(props, theme) : {})}
-        ref={ref}
-        style={styles}
-      />
-    );
+export const AnimatableText = composeComponent<AnimatableTextPropsModel, _AnimatableTextPropsModel>(
+  {
+    Component: _AnimatableText,
+    stylers: textParams.stylers,
   },
 );
+
+process.env.APP_DEBUG && (AnimatableText.displayName = variableName(() => AnimatableText));

@@ -3,7 +3,8 @@
     "cancel": "TRANSLATION_MISSING",
     "continue": "TRANSLATION_MISSING",
     "noResult": "TRANSLATION_MISSING",
-    "tryAgain": "TRANSLATION_MISSING"
+    "tryAgain": "TRANSLATION_MISSING",
+    "submit": "labels.submit"
   },
   "messages": {
     "errorForbidden": "TRANSLATION_MISSING",
@@ -31,5 +32,26 @@
   "TextField": "TextField",
   "label": "label",
   "error": "error",
-  "XXX": "XXX"
+  "XXX": "XXX",
+  "Accordion": "Accordion",
+  "Modal": "Modal",
+  "Loading": "Loading",
+  "SelectField": "SelectField",
+  "SwitchField": "SwitchField",
+  "Notification": "Notification",
+  "title": "title",
+  "Icon": "Icon",
+  "Link": "Link",
+  "Chip": "Chip",
+  "library-12": "library-12",
+  "library-23": "library-23",
+  "library-93": "library-93",
+  "library-149": "library-149",
+  "library-205": "library-205",
+  "library-261": "library-261",
+  "Notifications": "Notifications",
+  "Slides": "Slides",
+  "Previous": "Previous",
+  "Next": "Next",
+  "delete": "delete"
 }

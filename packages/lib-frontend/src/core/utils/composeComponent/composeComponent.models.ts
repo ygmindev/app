@@ -11,7 +11,7 @@ export interface ComposeComponentParamsModel<
   TStyle extends StyleModel = ViewStyleModel,
   TRef = unknown,
 > extends Pick<UseStylesParamsModel<TProps, TStyle>, 'stylers'> {
-  getComponent(props: TProps): ComponentType<TResult & StylePropsModel<TStyle>> | string;
+  Component: ComponentType<TResult & StylePropsModel<TStyle>> | string;
 
   getProps?(
     props: TProps & TestIdPropsModel & StylePropsModel<TStyle>,

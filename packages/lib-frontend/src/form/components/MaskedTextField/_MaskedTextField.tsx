@@ -4,7 +4,7 @@ import type { TextInputMaskProps } from 'react-native-masked-text';
 import { TextInputMask } from 'react-native-masked-text';
 
 export const _MaskedTextField = composeComponent<_MaskedTextFieldPropsModel, TextInputMaskProps>({
-  getComponent: () => TextInputMask,
+  Component: TextInputMask,
 
   getProps: ({ mask, ...props }) => {
     const _props: TextInputMaskProps = (() => {

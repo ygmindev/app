@@ -7,7 +7,7 @@ export const _KeyboardContainer = composeComponent<
   _KeyboardContainerPropsModel,
   KeyboardAvoidingViewProps
 >({
-  getComponent: () => TouchableWithoutFeedback,
+  Component: TouchableWithoutFeedback,
 
   getProps: ({ children }) => ({
     children: (

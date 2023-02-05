@@ -5,7 +5,7 @@ import { composeComponent } from '@lib/frontend/core/utils/composeComponent/comp
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const Svg = composeComponent<SvgPropsModel, _SvgPropsModel>({
-  getComponent: () => _Svg,
+  Component: _Svg,
 });
 
 process.env.APP_DEBUG && (Svg.displayName = variableName(() => Svg));

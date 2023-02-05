@@ -6,7 +6,7 @@ import { composeComponent } from '@lib/frontend/core/utils/composeComponent/comp
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const SvgShape = composeComponent<SvgShapePropsModel, _SvgShapePropsModel>({
-  getComponent: () => _SvgShape,
+  Component: _SvgShape,
 
   getProps: ({ x = 0, y = 0, ...props }, theme) => ({
     ...props,

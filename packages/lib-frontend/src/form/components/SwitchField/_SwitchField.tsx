@@ -7,7 +7,7 @@ import type { _SwitchFieldPropsModel } from '@lib/frontend/form/components/Switc
 import { Switch } from 'react-native-switch';
 
 export const _SwitchField = composeComponent<_SwitchFieldPropsModel, WrapperPropsModel>({
-  getComponent: () => Wrapper,
+  Component: Wrapper,
 
   getProps: ({ elementState, iconActive, iconInactive, onChange, value }, theme) => {
     const _value = value === 'true';

@@ -19,6 +19,6 @@ export const props: LibraryPropsModel<ButtonPropsModel> = {
     ...Object.values(THEME_COLOR).map((color) => ({
       props: { color, type: BUTTON_TYPE.TRANSPARENT },
     })),
-    { props: { icon: 'person', type: BUTTON_TYPE.ICON } },
+    { props: { children: undefined, icon: 'person' } },
   ],
 };

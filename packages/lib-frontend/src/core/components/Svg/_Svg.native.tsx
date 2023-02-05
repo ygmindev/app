@@ -4,7 +4,7 @@ import type { SvgProps } from 'react-native-svg';
 import { Svg } from 'react-native-svg';
 
 export const _Svg = composeComponent<_SvgPropsModel, SvgProps>({
-  getComponent: () => Svg,
+  Component: Svg,
 
   getProps: ({ children, height = 0, isFullHeight, isFullWidth, width = 0 }) => ({
     children,

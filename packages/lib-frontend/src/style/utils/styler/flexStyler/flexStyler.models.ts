@@ -9,12 +9,12 @@ type FlexJustifyModel = `${FLEX_JUSTIFY}`;
 
 export interface FlexStylerParamsModel {
   align?: FlexAlignModel;
+  alignSelf?: FlexAlignModel;
   basis?: number | 'auto';
   grow?: boolean | number;
   isReverse?: boolean;
   isRow?: boolean;
   isWrap?: boolean;
   justify?: FlexJustifyModel;
-  self?: FlexAlignModel;
   shrink?: boolean | number;
 }

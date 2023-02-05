@@ -15,17 +15,19 @@ export const _animatable = <TProps, TStyle extends StyleModel = ViewStyleModel>(
   const _Component = motify(Component)();
   const _Animatable = forwardRef<AnimatableRefModel, PropsModel<_AnimatableModel<TProps, TStyle>>>(
     ({ animation, elementState, ...props }, ref) => {
-      const { animationProps, animationState } = useAnimationState({
+      const { animationProps, animationState, isRender } = useAnimationState({
         animation,
         elementState,
         ref,
       });
-      return createElement(_Component, {
-        ...animationProps,
-        ...props,
-        ref,
-        state: animationState,
-      } as unknown as PropsModel<typeof _Component>);
+      return isRender
+        ? createElement(_Component, {
+            ...animationProps,
+            ...props,
+            ref,
+            state: animationState,
+          } as unknown as PropsModel<typeof _Component>)
+        : null;
     },
   );
   return _Animatable as _AnimatableModel<TProps, TStyle>;

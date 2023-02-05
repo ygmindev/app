@@ -8,7 +8,7 @@ export const KeyboardContainer = composeComponent<
   KeyboardContainerPropsModel,
   _KeyboardContainerPropsModel
 >({
-  getComponent: () => _KeyboardContainer,
+  Component: _KeyboardContainer,
 });
 
 process.env.APP_DEBUG && (KeyboardContainer.displayName = variableName(() => KeyboardContainer));

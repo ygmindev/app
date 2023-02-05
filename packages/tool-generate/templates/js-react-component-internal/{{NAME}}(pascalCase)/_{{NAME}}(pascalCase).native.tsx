@@ -4,7 +4,7 @@ import { {{NAME}} } from '{{NAME}}';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 
 export const _{{NAME}}(pascalCase) = composeComponent<_{{NAME}}(pascalCase)PropsModel, {{NAME}}Props>({
-  getComponent: () => {{NAME}},
+  Component: {{NAME}},
 
   getProps: ({ children }) => ({
     children,

@@ -5,7 +5,6 @@ import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.mode
 export interface NotificationModel extends WithIdModel, Pick<IconPropsModel, 'icon'> {
   color?: ThemeColorModel;
   isInfinite?: boolean;
-  isRemoving?: boolean;
   message?: string;
   title?: string;
 }

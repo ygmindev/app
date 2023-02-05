@@ -4,18 +4,18 @@ import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 
 export const flexStyler: StylerModel<FlexStylerParamsModel> = ({
   align,
+  alignSelf,
   basis,
   grow,
   isReverse,
   isRow,
   isWrap,
   justify,
-  self,
   shrink,
 }) =>
   cleanObject({
     alignItems: align,
-    alignSelf: self,
+    alignSelf,
     display: 'flex',
     flexBasis: basis,
     flexDirection: isRow

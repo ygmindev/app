@@ -5,7 +5,7 @@ import type { I18nextProviderProps } from 'react-i18next';
 import { I18nextProvider } from 'react-i18next';
 
 export const _LocaleProvider = composeComponent<_LocaleProviderPropsModel, I18nextProviderProps>({
-  getComponent: () => I18nextProvider,
+  Component: I18nextProvider,
 
   getProps: ({ children, value }) => ({ children, i18n: value?.i18n || internationalizeConfig }),
 });

@@ -1,0 +1,19 @@
+import type {
+  ToComponentClassModel,
+  ToComponentClassParamsModel,
+} from '@lib/frontend/core/utils/toComponentClass/toComponentClass.models';
+import type { ReactElement } from 'react';
+import { Component, createElement } from 'react';
+
+export const toComponentClass = <TProps,>(
+  params: ToComponentClassParamsModel<TProps>,
+): ToComponentClassModel<TProps> =>
+  class extends Component<TProps> {
+    constructor(props: TProps) {
+      super(props);
+    }
+
+    render(): ReactElement<TProps> {
+      return createElement(params, this.props);
+    }
+  };

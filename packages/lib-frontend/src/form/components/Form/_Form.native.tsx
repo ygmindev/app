@@ -4,7 +4,7 @@ import { composeComponent } from '@lib/frontend/core/utils/composeComponent/comp
 import type { _FormPropsModel } from '@lib/frontend/form/components/Form/_Form.models';
 
 export const _Form = composeComponent<_FormPropsModel, ViewPropsModel>({
-  getComponent: () => View,
+  Component: View,
 
   getProps: ({ children, testID }) => ({ children, testID }),
 });

@@ -6,7 +6,7 @@ import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 // TODO: fix error logs
 export const Skeleton = composeComponent<SkeletonPropsModel, _SkeletonPropsModel>({
-  getComponent: () => _Skeleton,
+  Component: _Skeleton,
 
   getProps: ({ height, width, ...props }, theme) => ({
     backgroundColor: theme.colors.tone.neutral.muted,

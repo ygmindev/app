@@ -6,6 +6,7 @@ import type { LibraryPropsModel } from '@lib/library/core/components/Library/Lib
 
 export const props: LibraryPropsModel<TextFieldPropsModel> = {
   Component: TextField,
+  category: 'form',
   defaultProps: {},
   variants: [
     { props: { isAutoFocus: true } },

@@ -9,7 +9,7 @@ import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/sha
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const Divider = composeComponent<DividerPropsModel, WrapperPropsModel>({
-  getComponent: () => Wrapper,
+  Component: Wrapper,
 
   getProps: ({ children }, theme) => ({
     border: BORDER_DIRECTION.TOP,

@@ -8,7 +8,7 @@ import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const Dropdown = composeComponent<DropdownPropsModel, _DropdownPropsModel>({
-  getComponent: () => _Dropdown,
+  Component: _Dropdown,
 
   getProps: ({ anchor, children, isFullWidth, isLeft, isOpen, isRight, isTop, onClose }) => ({
     anchor,

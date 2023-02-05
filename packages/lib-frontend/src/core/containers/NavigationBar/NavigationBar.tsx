@@ -1,3 +1,4 @@
+import { Accordion } from '@lib/frontend/core/components/Accordion/Accordion';
 import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
@@ -11,7 +12,11 @@ import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathnam
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
 import { BORDER_DIRECTION } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
+import groupBy from 'lodash/groupBy';
+import map from 'lodash/map';
+import toString from 'lodash/toString';
 import type { ReactElement } from 'react';
+import { useMemo } from 'react';
 
 export const NavigationBar = ({
   options,
@@ -23,6 +28,9 @@ export const NavigationBar = ({
 > => {
   const { styles } = useStyles({ props });
   const isMobile = useIsMobile();
+
+  const _categories = useMemo(() => groupBy(options, 'category'), [options]);
+
   return (
     <Activatable
       isPressable={false}
@@ -36,26 +44,42 @@ export const NavigationBar = ({
         isRow={isMobile}
         isVerticalScrollable={!isMobile}
         p
-        spacing={THEME_BASIC_SIZE.SMALL}
         style={styles}
         testID={testID}
         width={isMobile ? undefined : NAVIGATION_BAR_WIDTH}>
-        {options &&
-          options.map(({ id, label, onPress }) => {
-            const _pathname = trimPathname(id);
-            return (
-              <Button
-                elementState={
-                  value && _pathname === trimPathname(value) ? ELEMENT_STATE.ACTIVE : undefined
-                }
-                key={id}
-                onPress={onPress}
-                testID={label}
-                type={BUTTON_TYPE.TRANSPARENT}>
-                {label}
-              </Button>
-            );
-          })}
+        {map(_categories, (v, k) => {
+          const _options = (
+            <Wrapper
+              key={toString(k)}
+              spacing={THEME_BASIC_SIZE.SMALL}>
+              {v.map(({ id, label, onPress }) => {
+                const _pathname = trimPathname(id);
+                return (
+                  <Button
+                    elementState={
+                      value && _pathname === trimPathname(value) ? ELEMENT_STATE.ACTIVE : undefined
+                    }
+                    key={id}
+                    onPress={onPress}
+                    testID={label}
+                    type={BUTTON_TYPE.TRANSPARENT}>
+                    {label}
+                  </Button>
+                );
+              })}
+            </Wrapper>
+          );
+          return k === 'undefined' ? (
+            _options
+          ) : (
+            <Accordion
+              defaultValue
+              key={toString(k)}
+              label={k}>
+              {_options}
+            </Accordion>
+          );
+        })}
       </Wrapper>
     </Activatable>
   );

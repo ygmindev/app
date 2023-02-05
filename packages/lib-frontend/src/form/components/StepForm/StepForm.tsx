@@ -1,7 +1,6 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Slides } from '@lib/frontend/animation/components/Slides/Slides';
 import { Button } from '@lib/frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
@@ -73,7 +72,6 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
               elementState={current <= 0 ? ELEMENT_STATE.DISABLED : undefined}
               icon="arrowLeft"
               onPress={() => currentSet(current - 1)}
-              type={BUTTON_TYPE.ICON}
             />
           </Appearable>
         </Wrapper>

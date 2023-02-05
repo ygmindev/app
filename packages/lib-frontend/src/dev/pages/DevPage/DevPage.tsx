@@ -1,19 +1,31 @@
-import { OtpField } from '@lib/frontend/auth/components/OtpField/OtpField';
+import { ANIMATION_STATES_APPEAR } from '@lib/frontend/animation/animation.constants';
+import { Exitable } from '@lib/frontend/animation/components/Exitable/Exitable';
+import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { FCModel } from '@lib/frontend/core/core.models';
 import type { DevPagePropsModel } from '@lib/frontend/dev/pages/DevPage/DevPage.models';
-import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
-import { FORM_CONTAINER_PROPS_FIXTURE } from '@lib/frontend/form/containers/FormContainer/FormContainer.fixtures';
+import { useState } from 'react';
 
 export const DevPage: FCModel<DevPagePropsModel> = ({ testID }) => {
+  const [isVisible, setIsVisible] = useState(true);
+
   return (
     <Wrapper
       p
       spacing
       testID={testID}>
-      <FormContainer {...FORM_CONTAINER_PROPS_FIXTURE} />
+      <Button onPress={() => setIsVisible(!isVisible)}>delete</Button>
 
-      <OtpField />
+      <Exitable>
+        {isVisible && (
+          <Wrapper
+            animation={{ states: ANIMATION_STATES_APPEAR }}
+            backgroundColor="red"
+            height={100}
+            width={100}
+          />
+        )}
+      </Exitable>
     </Wrapper>
   );
 };

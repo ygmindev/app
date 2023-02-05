@@ -8,7 +8,7 @@ export const _Exitable = composeComponent<
   _ExitablePropsModel,
   AnimatePresenceProps & ChildrenPropsModel
 >({
-  getComponent: () => AnimatePresence,
+  Component: AnimatePresence,
 
   getProps: ({ children }) => ({ children, initial: false }),
 });

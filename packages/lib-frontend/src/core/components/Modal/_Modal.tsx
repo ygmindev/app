@@ -6,7 +6,7 @@ import type { ComponentType } from 'react';
 import Modal from 'react-native-modal';
 
 export const _Modal = composeComponent<_ModalPropsModel, PartialModel<typeof Modal.defaultProps>>({
-  getComponent: () => Modal as unknown as ComponentType<PartialModel<typeof Modal.defaultProps>>,
+  Component: Modal as unknown as ComponentType<PartialModel<typeof Modal.defaultProps>>,
 
   getProps: ({
     children,

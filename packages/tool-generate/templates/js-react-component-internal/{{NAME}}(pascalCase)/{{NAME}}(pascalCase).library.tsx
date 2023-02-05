@@ -3,7 +3,7 @@ import { {{NAME}}(pascalCase) } from '{{PATH}}/{{NAME}}(pascalCase)/{{NAME}}(pas
 import type { {{NAME}}(pascalCase)PropsModel } from '{{PATH}}/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
 
 export const props: LibraryPropsModel<{{NAME}}(pascalCase)PropsModel> = {
-  defaultProps: {},
   Component: {{NAME}}(pascalCase),
+  defaultProps: {},
   variants: [],
 };

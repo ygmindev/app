@@ -5,7 +5,7 @@ import type { FormPropsModel } from '@lib/frontend/form/components/Form/Form.mod
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const Form = composeComponent<FormPropsModel, _FormPropsModel>({
-  getComponent: () => _Form,
+  Component: _Form,
 });
 
 process.env.APP_DEBUG && (Form.displayName = variableName(() => Form));

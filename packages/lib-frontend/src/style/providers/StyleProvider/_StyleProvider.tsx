@@ -6,7 +6,7 @@ import { DefaultTheme, Provider } from 'react-native-paper';
 import type { MD3Type } from 'react-native-paper/lib/typescript/types';
 
 export const _StyleProvider = composeComponent<_StyleProviderPropsModel, ProviderProps>({
-  getComponent: () => Provider,
+  Component: Provider,
 
   getProps: ({ children, value }) => {
     if (value) {

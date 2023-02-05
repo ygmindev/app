@@ -1,20 +1,24 @@
+import type { AnimatableRefModel } from '@lib/frontend/animation/animation.models';
 import { _View } from '@lib/frontend/core/components/View/_View';
-import type { _ViewPropsModel } from '@lib/frontend/core/components/View/_View.models';
+import { _View as _ViewPressable } from '@lib/frontend/core/components/View/_View.pressable';
+import { _View as _ViewScrollable } from '@lib/frontend/core/components/View/_View.scrollable';
 import type { ViewPropsModel } from '@lib/frontend/core/components/View/View.models';
-import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
-import type { ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
-import { debounce } from '@lib/shared/core/utils/debounce/debounce';
-import { variableName } from '@lib/shared/core/utils/variableName/variableName';
+import type { RSFCModel } from '@lib/frontend/core/core.models';
+import { forwardRef } from 'react';
 
-export const viewParams: ComposeComponentParamsModel<ViewPropsModel, _ViewPropsModel> = {
-  getComponent: () => _View,
-
-  getProps: ({ onMeasure, ...props }: ViewPropsModel): _ViewPropsModel => ({
-    ...props,
-    onMeasure: onMeasure ? debounce({ callback: onMeasure }) : undefined,
-  }),
-};
-
-export const View = composeComponent<ViewPropsModel, _ViewPropsModel>(viewParams);
-
-process.env.APP_DEBUG && (View.displayName = variableName(() => View));
+export const View: RSFCModel<AnimatableRefModel, ViewPropsModel> = forwardRef(
+  ({ ...props }, ref) => {
+    const _Component =
+      props.isHorizontalScrollable || props.isVerticalScrollable || props.onScroll
+        ? _ViewScrollable
+        : props.onPress || props.onPressIn || props.onPressOut
+        ? _ViewPressable
+        : _View;
+    return (
+      <_Component
+        {...props}
+        ref={ref}
+      />
+    );
+  },
+);

@@ -37,7 +37,7 @@ if (!isSsr) {
 }
 
 export const _QueryProvider = composeComponent<_QueryProviderPropsModel, QueryClientProviderProps>({
-  getComponent: () => QueryClientProvider,
+  Component: QueryClientProvider,
 
   getProps: ({ children }) => ({ children, client: queryClient }),
 });

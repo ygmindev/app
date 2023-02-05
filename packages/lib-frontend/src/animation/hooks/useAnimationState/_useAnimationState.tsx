@@ -16,14 +16,7 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
   elementState = ELEMENT_STATE.INACTIVE,
   ref = null,
 }: _UseAnimationStateParamsModel<TStyle>): _UseAnimationStateModel<TStyle> => {
-  const {
-    delay,
-    duration,
-    isInfinite,
-    isInitial = false,
-    isLazy = false,
-    states,
-  } = animation || {};
+  const { delay, duration, isInfinite, isInitial = false, isLazy = true, states } = animation || {};
 
   const animationState = useAnimationState((states || {}) as Variants<TStyle>);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
@@ -47,7 +40,7 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
       animate: ref ? undefined : states && (states[elementState] as never),
       animateInitialState: isInitial,
       exit: states?.invisible || states?.inactive,
-      from: ref ? undefined : (states?.inactive as never),
+      from: states?.inactive as never,
       onDidAnimate: () => (ref ? setIsAnimating(false) : undefined),
       transition: {
         delay,
@@ -57,7 +50,6 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
       },
     },
     animationState,
-    isAnimating,
-    isRender: !isLazy || isAnimating || elementState !== ELEMENT_STATE.INVISIBLE,
+    isRender: isLazy || elementState !== ELEMENT_STATE.INVISIBLE,
   };
 };

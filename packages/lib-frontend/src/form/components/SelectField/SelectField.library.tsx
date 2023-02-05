@@ -6,6 +6,7 @@ import type { LibraryPropsModel } from '@lib/library/core/components/Library/Lib
 
 export const props: LibraryPropsModel<SelectFieldPropsModel> = {
   Component: SelectField,
+  category: 'form',
   defaultProps: { options: MENU_FIXTURE_OPTIONS },
   variants: [
     { props: { icon: 'person' } },

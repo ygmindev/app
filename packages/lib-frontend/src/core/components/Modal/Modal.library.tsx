@@ -18,7 +18,7 @@ export const props: LibraryPropsModel<ModalPropsModel> = {
           {...props}
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}>
-          <WrapperFixture text="Modal" />
+          <WrapperFixture>Modal</WrapperFixture>
         </Modal>
       </Wrapper>
     );

@@ -1,7 +1,6 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import type { OtpFieldPropsModel } from '@lib/frontend/auth/components/OtpField/OtpField.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Tooltip } from '@lib/frontend/core/components/Tooltip/Tooltip';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
@@ -94,7 +93,6 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
               <Button
                 icon="times"
                 onPress={() => setValueControlled('')}
-                type={BUTTON_TYPE.ICON}
               />
             </Appearable>
           )}

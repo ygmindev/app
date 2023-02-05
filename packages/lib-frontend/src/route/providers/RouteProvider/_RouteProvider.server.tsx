@@ -10,7 +10,7 @@ export const _RouteProvider = composeComponent<
   _RouteProviderPropsModel,
   RequiredModel<ProviderPropsModel<RouteContextModel>>
 >({
-  getComponent: () => RouteContext.Provider,
+  Component: RouteContext.Provider,
 
   getProps: ({ children, value }) => ({
     children: <StaticRouter location={value?.location || ''}>{children}</StaticRouter>,

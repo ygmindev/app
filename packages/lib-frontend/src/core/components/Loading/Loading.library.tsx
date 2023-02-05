@@ -7,7 +7,7 @@ export const props: LibraryPropsModel<LoadingPropsModel> = {
   Component: Loading,
   defaultProps: {},
   variants: [
-    ...Object.values(THEME_SIZE).map((size) => ({ props: { size } })),
+    ...Object.values(THEME_SIZE).map((fontSize) => ({ props: { fontSize } })),
     ...Object.values(THEME_COLOR).map((color) => ({ props: { color } })),
   ],
 };

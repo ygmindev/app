@@ -7,7 +7,7 @@ import { Text } from 'react-native';
 
 export const _textParams: ComposeComponentParamsModel<_TextPropsModel, TextProps, TextStyleModel> =
   {
-    getComponent: () => Text,
+    Component: Text,
 
     getProps: ({ children, isEllipsis, onPress }: _TextPropsModel): TextProps => ({
       children,

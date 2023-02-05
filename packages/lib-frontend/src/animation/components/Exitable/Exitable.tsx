@@ -5,7 +5,7 @@ import { composeComponent } from '@lib/frontend/core/utils/composeComponent/comp
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const Exitable = composeComponent<ExitablePropsModel, _ExitablePropsModel>({
-  getComponent: () => _Exitable,
+  Component: _Exitable,
 });
 
 process.env.APP_DEBUG && (Exitable.displayName = variableName(() => Exitable));

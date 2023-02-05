@@ -9,7 +9,7 @@ import { palette } from '@lib/frontend/style/utils/palette/palette';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const Tooltip = composeComponent<TooltipPropsModel, DroppablePropsModel>({
-  getComponent: () => Droppable,
+  Component: Droppable,
 
   getProps: ({ children, color = THEME_COLOR.NEUTRAL }, theme) => {
     const _color =

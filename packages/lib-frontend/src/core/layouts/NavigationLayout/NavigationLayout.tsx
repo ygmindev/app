@@ -31,7 +31,8 @@ export const NavigationLayout = <TOption extends OptionModel>({
       <Wrapper
         basis={0}
         grow
-        isVerticalScrollable>
+        isVerticalScrollable
+        testID="XXX">
         {children}
       </Wrapper>
     </Wrapper>

@@ -3,6 +3,8 @@ import type { _AnimatableViewPropsModel } from '@lib/frontend/animation/componen
 import { useAnimationState } from '@lib/frontend/animation/hooks/useAnimationState/useAnimationState';
 import { animatable } from '@lib/frontend/animation/utils/animatable/animatable';
 import { _viewParams } from '@lib/frontend/core/components/View/_View';
+import { _viewParams as _viewParamsPressable } from '@lib/frontend/core/components/View/_View.pressable';
+import { _viewParams as _viewParamsScrollable } from '@lib/frontend/core/components/View/_View.scrollable';
 import type { RSFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
@@ -17,7 +19,11 @@ export const _AnimatableView: RSFCModel<AnimatableRefModel, _AnimatableViewProps
   ({ animation, children, elementState, ...props }, ref) => {
     const theme = useTheme();
     const { styles } = useStyles({ props });
-    const { animationProps, animationState } = useAnimationState({ animation, elementState, ref });
+    const { animationProps, animationState, isRender } = useAnimationState({
+      animation,
+      elementState,
+      ref,
+    });
 
     const _Component =
       props.onPress || props.onPressIn || props.onPressOut
@@ -26,15 +32,17 @@ export const _AnimatableView: RSFCModel<AnimatableRefModel, _AnimatableViewProps
         ? MotiScrollView
         : MotiView;
 
-    return (
+    return isRender ? (
       <_Component
-        {...(_viewParams.getProps ? _viewParams.getProps(props, theme) : {})}
+        {...(_viewParams.getProps && _viewParams.getProps(props, theme))}
+        {...(_viewParamsPressable.getProps && _viewParamsPressable.getProps(props, theme))}
+        {...(_viewParamsScrollable.getProps && _viewParamsScrollable.getProps(props, theme))}
         {...animationProps}
         ref={ref}
         state={animationState}
         style={styles}>
         {children}
       </_Component>
-    );
+    ) : null;
   },
 );

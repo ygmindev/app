@@ -17,7 +17,7 @@ const { _RouteProvider: _RouteProviderServer } = lazy(
 export const RouteContext = createContext<RouteContextModel>({});
 
 export const RouteProvider = composeComponent<RouteProviderPropsModel, _RouteProviderPropsModel>({
-  getComponent: () => (isSsr ? _RouteProviderServer : _RouteProviderClient),
+  Component: (isSsr ? _RouteProviderServer : _RouteProviderClient),
 });
 
 process.env.APP_DEBUG && (RouteProvider.displayName = variableName(() => RouteProvider));

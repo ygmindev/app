@@ -127,7 +127,10 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
       : theme.colors.tone.neutral.muted;
     const _containerAnimation: AnimationModel = {
       states: {
-        [ELEMENT_STATE.DISABLED]: { backgroundColor: _disabledBackgroundColor },
+        [ELEMENT_STATE.DISABLED]: {
+          backgroundColor: _disabledBackgroundColor,
+          borderColor: _inactiveColor,
+        },
         [ELEMENT_STATE.INACTIVE]: {
           backgroundColor: _activeBackgroundColor,
           borderColor: _inactiveColor,
@@ -160,7 +163,6 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
     return (
       <Wrapper
         animation={_containerAnimation}
-        backgroundColor={_activeBackgroundColor}
         border
         elementState={elementState}
         grow
@@ -172,8 +174,9 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
         testID={testID}
         width={width}>
         <Wrapper
-          backgroundColor={_activeBackgroundColor}
+          animation={_containerAnimation}
           bottom={0}
+          elementState={elementState}
           height={3}
           left={0}
           position={SHAPE_POSITION.ABSOLUTE}
@@ -243,7 +246,8 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
           ref={ref as RefObject<NativeTextInput>}
           render={(inputProps) => (
             <Wrapper
-              backgroundColor={_activeBackgroundColor}
+              animation={_containerAnimation}
+              elementState={elementState}
               grow
               isCenter={isCenter}
               isOverflowHidden

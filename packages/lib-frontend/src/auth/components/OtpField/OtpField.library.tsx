@@ -5,6 +5,7 @@ import type { LibraryPropsModel } from '@lib/library/core/components/Library/Lib
 
 export const props: LibraryPropsModel<OtpFieldPropsModel> = {
   Component: OtpField,
+  category: 'form',
   defaultProps: {},
   variants: [
     ...Object.values(ELEMENT_STATE).map((elementState) => ({ props: { elementState } })),

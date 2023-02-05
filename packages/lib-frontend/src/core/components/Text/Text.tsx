@@ -12,7 +12,7 @@ export const textParams: ComposeComponentParamsModel<
   _TextPropsModel,
   TextStyleModel
 > = {
-  getComponent: () => _Text,
+  Component: _Text,
 
   stylers: [textStyler],
 };

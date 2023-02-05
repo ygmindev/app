@@ -6,5 +6,5 @@ import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
 import type { I18nextProviderProps } from 'react-i18next';
 
 export const _LocaleProvider = composeComponent<_LocaleProviderPropsModel, I18nextProviderProps>({
-  getComponent: () => (isSsr ? _LocaleProviderServer : _LocaleProviderClient),
+  Component: (isSsr ? _LocaleProviderServer : _LocaleProviderClient),
 });

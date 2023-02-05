@@ -5,7 +5,7 @@ import { composeComponent } from '@lib/frontend/core/utils/composeComponent/comp
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const {{NAME}}(pascalCase) = composeComponent<{{NAME}}(pascalCase)PropsModel, _{{NAME}}(pascalCase)PropsModel>({
-  getComponent: () => _{{NAME}}(pascalCase),
+  Component: _{{NAME}}(pascalCase),
 
   getProps: ({ children }) => ({
     children,

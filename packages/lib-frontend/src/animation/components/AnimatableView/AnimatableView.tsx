@@ -1,23 +1,13 @@
-import type { AnimatableRefModel } from '@lib/frontend/animation/animation.models';
 import { _AnimatableView } from '@lib/frontend/animation/components/AnimatableView/_AnimatableView';
+import type { _AnimatableViewPropsModel } from '@lib/frontend/animation/components/AnimatableView/_AnimatableView.models';
 import type { AnimatableViewPropsModel } from '@lib/frontend/animation/components/AnimatableView/AnimatableView.models';
-import { viewParams } from '@lib/frontend/core/components/View/View';
-import type { RSFCModel } from '@lib/frontend/core/core.models';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { forwardRef } from 'react';
+import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
-export const AnimatableView: RSFCModel<AnimatableRefModel, AnimatableViewPropsModel> = forwardRef(
-  ({ ...props }, ref) => {
-    const theme = useTheme();
-    const { styles } = useStyles({ props, stylers: viewParams.stylers });
-    return (
-      <_AnimatableView
-        {...props}
-        {...(viewParams.getProps ? viewParams.getProps(props, theme) : {})}
-        ref={ref}
-        style={styles}
-      />
-    );
+export const AnimatableView = composeComponent<AnimatableViewPropsModel, _AnimatableViewPropsModel>(
+  {
+    Component: _AnimatableView,
   },
 );
+
+process.env.APP_DEBUG && (AnimatableView.displayName = variableName(() => AnimatableView));

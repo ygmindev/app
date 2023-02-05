@@ -5,7 +5,7 @@ import { composeComponent } from '@lib/frontend/core/utils/composeComponent/comp
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const Portal = composeComponent<PortalPropsModel, _PortalPropsModel>({
-  getComponent: () => _Portal,
+  Component: _Portal,
 });
 
 process.env.APP_DEBUG && (Portal.displayName = variableName(() => Portal));

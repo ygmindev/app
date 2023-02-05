@@ -4,7 +4,7 @@ import type { BrowserRouterProps } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 
 export const _RouteProvider = composeComponent<_RouteProviderPropsModel, BrowserRouterProps>({
-  getComponent: () => BrowserRouter,
+  Component: BrowserRouter,
 
   getProps: ({ children, value }) => ({ children, location: value?.location || '' }),
 });

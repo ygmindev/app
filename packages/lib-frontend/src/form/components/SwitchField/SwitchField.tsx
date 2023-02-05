@@ -10,7 +10,7 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
   defaultValue,
   elementState,
   iconActive = 'check',
-  iconInactive = 'time',
+  iconInactive = 'times',
   label,
   onChange,
   testID,

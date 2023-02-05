@@ -5,7 +5,7 @@ import type { IContentLoaderProps } from 'react-content-loader';
 import ContentLoader from 'react-content-loader';
 
 export const _Skeleton = composeComponent<_SkeletonPropsModel, IContentLoaderProps>({
-  getComponent: () => ContentLoader as SFCModel<IContentLoaderProps>,
+  Component: ContentLoader as SFCModel<IContentLoaderProps>,
 
   getProps: ({
     backgroundColor,

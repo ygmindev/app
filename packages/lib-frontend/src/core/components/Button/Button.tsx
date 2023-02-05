@@ -3,17 +3,16 @@ import { Appearable } from '@lib/frontend/animation/components/Appearable/Appear
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import type { ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-// import { Loading } from '@lib/frontend/core/components/Loading/Loading';
+import { Loading } from '@lib/frontend/core/components/Loading/Loading';
 import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { ElementStateModel, SFCModel } from '@lib/frontend/core/core.models';
 import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/useControlledValue';
 import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_BASIC_SIZE, THEME_COLOR } from '@lib/frontend/style/style.constants';
-import type { TextStyleModel } from '@lib/frontend/style/style.models';
+import { THEME_BASIC_SIZE, THEME_COLOR, THEME_ROLE } from '@lib/frontend/style/style.constants';
+import type { ThemeRoleModel } from '@lib/frontend/style/style.models';
 import { palette } from '@lib/frontend/style/utils/palette/palette';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
@@ -30,7 +29,6 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   ...props
 }) => {
   const theme = useTheme();
-  const { styles } = useStyles({ props });
 
   const { setValueControlled, valueControlled } = useControlledValue<ElementStateModel>({
     defaultValue: ELEMENT_STATE.INACTIVE,
@@ -38,9 +36,9 @@ export const Button: SFCModel<ButtonPropsModel> = ({
     value: elementState,
   });
 
-  const { childrenAnimation, containerAnimation } = useMemo<{
-    childrenAnimation?: AnimationModel<TextStyleModel>;
-    containerAnimation?: AnimationModel;
+  const { animation, childColorRole } = useMemo<{
+    animation?: AnimationModel;
+    childColorRole?: ThemeRoleModel;
   }>(() => {
     const _color = theme.colors.tone[color];
     const _activeColor = palette({ color: _color.main, lightness: theme.colors.activeLightness });
@@ -51,64 +49,58 @@ export const Button: SFCModel<ButtonPropsModel> = ({
     switch (type) {
       case BUTTON_TYPE.FILLED: {
         return {
-          childrenAnimation: {
-            states: {
-              [ELEMENT_STATE.INACTIVE]: { color: _color.mainContrast },
-            },
-          },
-          containerAnimation: {
+          animation: {
             states: {
               [ELEMENT_STATE.ACTIVE]: { backgroundColor: _activeColor },
               [ELEMENT_STATE.DISABLED]: { backgroundColor: _disabledColor },
               [ELEMENT_STATE.INACTIVE]: { backgroundColor: _color.main },
             },
           },
+          childColorRole: THEME_ROLE.MAIN_CONTRAST,
         };
       }
-      case BUTTON_TYPE.ICON:
       case BUTTON_TYPE.TRANSPARENT:
         return {
-          childrenAnimation: {
-            states: {
-              [ELEMENT_STATE.DISABLED]: { color: theme.colors.tone.neutral.mutedContrast },
-              [ELEMENT_STATE.INACTIVE]: { color: _color.main },
-              [ELEMENT_STATE.ACTIVE]: { color: _color.main },
-            },
-          },
-          containerAnimation: {
+          animation: {
             states: {
               [ELEMENT_STATE.ACTIVE]: { backgroundColor: _color.muted },
               [ELEMENT_STATE.DISABLED]: { backgroundColor: _disabledColor },
               [ELEMENT_STATE.INACTIVE]: { backgroundColor: theme.colors.tone.neutral.main },
             },
           },
+          childColorRole: THEME_ROLE.MAIN,
         };
       default:
         return {};
     }
   }, [color, theme, type]);
 
-  let _children = children && type !== BUTTON_TYPE.ICON && (
+  let _children = children && (
     <TranslatableText
       align={FONT_ALIGN.CENTER}
-      animation={childrenAnimation}
-      elementState={elementState}
+      color={color}
+      colorRole={childColorRole}
       isBold
       isCapitalize>
       {children}
     </TranslatableText>
   );
   if (icon) {
-    _children = (
+    const _icon = (
+      <Icon
+        color={color}
+        colorRole={childColorRole}
+        icon={icon}
+      />
+    );
+    _children = _children ? (
       <Wrapper isRowAlign>
-        <Icon
-          animation={childrenAnimation}
-          elementState={elementState}
-          icon={icon}
-        />
+        {_icon}
 
         {_children}
       </Wrapper>
+    ) : (
+      _icon
     );
   }
 
@@ -117,14 +109,13 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   return (
     <Pressable
       {...props}
-      animation={containerAnimation}
+      animation={animation}
       elementState={valueControlled}
       height={_height}
       isCenter
       onElementStateChange={setValueControlled}
       position={SHAPE_POSITION.RELATIVE}
-      style={styles}
-      width={type === BUTTON_TYPE.ICON ? _height : undefined}>
+      width={children ? undefined : _height}>
       <>
         <Appearable
           isCenter
@@ -132,12 +123,15 @@ export const Button: SFCModel<ButtonPropsModel> = ({
           {_children}
         </Appearable>
 
-        {/* <Appearable
+        <Appearable
           isAbsoluteFill
           isCenter
           isVisible={_isLoading}>
-          <Loading animation={childrenAnimation} />
-        </Appearable> */}
+          <Loading
+            color={color}
+            colorRole={childColorRole}
+          />
+        </Appearable>
       </>
     </Pressable>
   );

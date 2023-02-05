@@ -6,7 +6,7 @@ import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const LocaleProvider = composeComponent<LocaleProviderPropsModel, _LocaleProviderPropsModel>(
   {
-    getComponent: () => _LocaleProvider,
+    Component: _LocaleProvider,
   },
 );
 

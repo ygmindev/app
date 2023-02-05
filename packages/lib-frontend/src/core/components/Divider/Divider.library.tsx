@@ -6,11 +6,9 @@ import type { LibraryPropsModel } from '@lib/library/core/components/Library/Lib
 
 export const props: LibraryPropsModel<DividerPropsModel> = {
   Component: Divider,
-  Renderer: ({ children }) => (
-    <WrapperFixture
-      backgroundColor={THEME_COLOR.NEUTRAL}
-      text="">
-      {children}
+  Renderer: ({ ...props }) => (
+    <WrapperFixture backgroundColor={THEME_COLOR.NEUTRAL}>
+      <Divider {...props} />
     </WrapperFixture>
   ),
   defaultProps: {},

@@ -12,6 +12,6 @@ export const useChange = <TType extends unknown>({
   const previous = _useChange<TType>({ value });
   useEffect(() => {
     onChange && onChange(previous);
-  }, [previous]);
+  }, [onChange, previous]);
   return previous;
 };

@@ -4,5 +4,5 @@ import type { NativeRouterProps } from 'react-router-native';
 import { NativeRouter } from 'react-router-native';
 
 export const _RouteProvider = composeComponent<_RouteProviderPropsModel, NativeRouterProps>({
-  getComponent: () => NativeRouter,
+  Component: NativeRouter,
 });

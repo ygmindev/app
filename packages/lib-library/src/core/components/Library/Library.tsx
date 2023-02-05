@@ -1,14 +1,10 @@
-import { Table } from '@lib/frontend/core/components/Table/Table';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCPropsModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { THEME_BASIC_SIZE, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
-import {
-  FONT_FAMILY,
-  FONT_TYPE,
-} from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { THEME_BASIC_SIZE, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FONT_TYPE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 import { LIBRARY } from '@lib/library/core/core.constants';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
@@ -34,11 +30,11 @@ export const Library = <TProps,>({
   const { styles } = useStyles({ props });
   const { t } = useTranslation([LIBRARY]);
 
-  const _groups = useMemo(
+  const _categories = useMemo(
     () =>
       groupBy(
-        withId([{ group: 'default', props: defaultProps }, ...(variants || [])]),
-        ({ group, props }) => group || keys(props).join(', '),
+        withId([{ category: 'default', props: defaultProps }, ...(variants || [])]),
+        ({ category, props }) => category || keys(props).join(', '),
       ),
     [variants],
   );
@@ -54,10 +50,10 @@ export const Library = <TProps,>({
       {name && <Text type={FONT_TYPE.HEADLINE}>{name}</Text>}
 
       {propTypes && (
-        <Wrapper height={300}>
+        <Wrapper>
           <Text type={FONT_TYPE.TITLE}>{t('library:labels.propTypes')}</Text>
 
-          <Table
+          {/* <Table
             columns={[
               {
                 id: 'name',
@@ -83,11 +79,11 @@ export const Library = <TProps,>({
             ]}
             data={propTypes}
             isVirtualized={false}
-          />
+          /> */}
         </Wrapper>
       )}
 
-      {map(_groups, (v, k) => (
+      {map(_categories, (v, k) => (
         <Wrapper
           key={toString(k)}
           p
@@ -116,17 +112,19 @@ export const Library = <TProps,>({
                   )}
                 </Wrapper>
 
-                {map(variantProps as object, (v, k) => (
-                  <Wrapper key={k}>
-                    <Text fontSize={THEME_SIZE.SMALL}>{k}</Text>
+                <Wrapper isRowAlign>
+                  {map(variantProps as object, (v, k) => (
+                    <Wrapper key={k}>
+                      <Text
+                        fontSize={THEME_SIZE.SMALL}
+                        isBold>
+                        {k}
+                      </Text>
 
-                    <Text
-                      colorRole={THEME_ROLE.MUTED}
-                      fontSize={THEME_SIZE.SMALL}>
-                      {toString(v)}
-                    </Text>
-                  </Wrapper>
-                ))}
+                      <Text fontSize={THEME_SIZE.SMALL}>{toString(v)}</Text>
+                    </Wrapper>
+                  ))}
+                </Wrapper>
               </Wrapper>
             ))}
           </Wrapper>
