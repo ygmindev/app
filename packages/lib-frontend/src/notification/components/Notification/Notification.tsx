@@ -1,8 +1,9 @@
-import { ANIMATION_STATES_APPEAR } from '@lib/frontend/animation/animation.constants';
+import { ANIMATION_STATES_APPEARABLE } from '@lib/frontend/animation/animation.constants';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { NOTIFICATION_WIDTH } from '@lib/frontend/notification/components/Notification/Notification.constants';
@@ -33,8 +34,9 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
 
   return (
     <Wrapper
-      animation={{ states: ANIMATION_STATES_APPEAR }}
+      animation={{ states: ANIMATION_STATES_APPEARABLE }}
       backgroundColor={color}
+      elementState={ELEMENT_STATE.ACTIVE}
       isOverflowHidden
       isShadow
       mTop={THEME_BASIC_SIZE.SMALL}

@@ -53,5 +53,7 @@
   "Slides": "Slides",
   "Previous": "Previous",
   "Next": "Next",
-  "delete": "delete"
+  "delete": "delete",
+  "test": "test",
+  "Notify": "Notify"
 }

@@ -5,6 +5,7 @@ import type { LibraryPropsModel } from '@lib/library/core/components/Library/Lib
 
 export const props: LibraryPropsModel<NotificationPropsModel> = {
   Component: Notification,
+  category: 'notification',
   defaultProps: { id: '', message: 'message' },
   variants: [
     ...Object.values(THEME_COLOR).map((color) => ({ props: { color } })),

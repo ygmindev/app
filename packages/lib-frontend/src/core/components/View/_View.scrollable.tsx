@@ -33,8 +33,8 @@ export const _viewParams: ComposeComponentParamsModel<_ViewPropsModel, ViewProps
             }
             scrollEnabled
             scrollEventThrottle={16}
-            showsHorizontalScrollIndicator={isHorizontalScrollable}
-            showsVerticalScrollIndicator={isVerticalScrollable}
+            showsHorizontalScrollIndicator={isHorizontalScrollable || undefined}
+            showsVerticalScrollIndicator={isVerticalScrollable || undefined}
           />
         </View>
       ),

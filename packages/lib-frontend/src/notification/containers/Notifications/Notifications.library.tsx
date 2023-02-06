@@ -23,6 +23,7 @@ export const props: LibraryPropsModel<NotificationsPropsModel> = {
       </Wrapper>
     );
   },
+  category: 'notification',
   defaultProps: {},
   variants: [],
 };

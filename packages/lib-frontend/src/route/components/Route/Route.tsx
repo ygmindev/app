@@ -1,6 +1,6 @@
 import {
-  ANIMATION_STATES_APPEAR,
-  ANIMATION_STATES_SLIDE_RIGHT,
+  ANIMATION_STATES_APPEARABLE,
+  ANIMATION_STATES_SLIDABLE_RIGHT,
 } from '@lib/frontend/animation/animation.constants';
 import { Protected } from '@lib/frontend/auth/components/Protected/Protected';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -32,7 +32,7 @@ export const Route: SFCModel<RoutePropsModel> = ({ children, route, ...props }) 
           route.transition && {
             duration: theme.animation.transition,
             states: merge({
-              values: [ANIMATION_STATES_APPEAR, ANIMATION_STATES_SLIDE_RIGHT(measure)],
+              values: [ANIMATION_STATES_APPEARABLE, ANIMATION_STATES_SLIDABLE_RIGHT(measure)],
             }),
           }
         }

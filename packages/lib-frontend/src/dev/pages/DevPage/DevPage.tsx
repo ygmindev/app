@@ -1,9 +1,9 @@
-import { ANIMATION_STATES_APPEAR } from '@lib/frontend/animation/animation.constants';
 import { Exitable } from '@lib/frontend/animation/components/Exitable/Exitable';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { FCModel } from '@lib/frontend/core/core.models';
 import type { DevPagePropsModel } from '@lib/frontend/dev/pages/DevPage/DevPage.models';
+import { Notification } from '@lib/frontend/notification/components/Notification/Notification';
 import { useState } from 'react';
 
 export const DevPage: FCModel<DevPagePropsModel> = ({ testID }) => {
@@ -16,13 +16,11 @@ export const DevPage: FCModel<DevPagePropsModel> = ({ testID }) => {
       testID={testID}>
       <Button onPress={() => setIsVisible(!isVisible)}>delete</Button>
 
-      <Exitable>
+      <Exitable isInitial>
         {isVisible && (
-          <Wrapper
-            animation={{ states: ANIMATION_STATES_APPEAR }}
-            backgroundColor="red"
-            height={100}
-            width={100}
+          <Notification
+            id="test"
+            message="Notification"
           />
         )}
       </Exitable>

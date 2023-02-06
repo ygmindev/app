@@ -32,7 +32,7 @@ export const props: LibraryPropsModel<SlidesPropsModel> = {
           </Button>
         </Wrapper>
 
-        <WrapperFixture backgroundColor="treansparent">
+        <WrapperFixture backgroundColor="transparent">
           <Slides
             {...props}
             current={current}
@@ -41,6 +41,7 @@ export const props: LibraryPropsModel<SlidesPropsModel> = {
       </Wrapper>
     );
   },
+  category: 'animation',
   defaultProps: {
     slides: withId([
       {

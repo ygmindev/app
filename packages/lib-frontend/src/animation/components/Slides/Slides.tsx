@@ -1,10 +1,11 @@
 import {
-  ANIMATION_STATES_APPEAR,
-  ANIMATION_STATES_SLIDE_RIGHT,
+  ANIMATION_STATES_APPEARABLE,
+  ANIMATION_STATES_SLIDABLE_RIGHT,
 } from '@lib/frontend/animation/animation.constants';
 import { Exitable } from '@lib/frontend/animation/components/Exitable/Exitable';
 import type { SlidesPropsModel } from '@lib/frontend/animation/components/Slides/Slides.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { MeasureModel, SFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
@@ -19,6 +20,7 @@ export const Slides: SFCModel<SlidesPropsModel> = ({ current, slides, testID, ..
   return (
     <Wrapper
       grow
+      isFullWidth
       onMeasure={setMeasure}
       position={SHAPE_POSITION.RELATIVE}
       style={styles}
@@ -32,9 +34,13 @@ export const Slides: SFCModel<SlidesPropsModel> = ({ current, slides, testID, ..
                   animation={{
                     duration: theme.animation.transition,
                     states: merge({
-                      values: [ANIMATION_STATES_APPEAR, ANIMATION_STATES_SLIDE_RIGHT(measure)],
+                      values: [
+                        ANIMATION_STATES_APPEARABLE,
+                        ANIMATION_STATES_SLIDABLE_RIGHT(measure),
+                      ],
                     }),
                   }}
+                  elementState={ELEMENT_STATE.ACTIVE}
                   isAbsoluteFill
                   isFullWidth
                   key={id}>

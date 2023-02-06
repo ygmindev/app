@@ -1,4 +1,3 @@
-import { ANIMATION_STATES_APPEAR } from '@lib/frontend/animation/animation.constants';
 import { Exitable } from '@lib/frontend/animation/components/Exitable/Exitable';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -24,14 +23,10 @@ export const Notifications: SFCModel<NotificationsPropsModel> = () => {
         zIndex={1}>
         <Exitable>
           {notifications.map((notification) => (
-            <Wrapper
-              animation={{ states: ANIMATION_STATES_APPEAR }}
-              key={notification.id}>
-              <Notification
-                {...notification}
-                key={notification.id}
-              />
-            </Wrapper>
+            <Notification
+              key={notification.id}
+              {...notification}
+            />
           ))}
         </Exitable>
       </Wrapper>
