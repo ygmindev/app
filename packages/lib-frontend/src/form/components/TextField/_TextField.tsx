@@ -13,9 +13,8 @@ import type {
 } from '@lib/frontend/form/components/TextField/TextField.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_BASIC_SIZE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import type { TextStyleModel } from '@lib/frontend/style/style.models';
-import { palette } from '@lib/frontend/style/utils/palette/palette';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import isString from 'lodash/isString';
@@ -117,10 +116,6 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
     const _isError = error === true || (isString(error) && error.length > 0);
     const _isDisabled = elementState === ELEMENT_STATE.DISABLED;
     const _activeBackgroundColor = theme.colors.tone.neutral.main;
-    const _disabledBackgroundColor = palette({
-      color: theme.colors.tone.neutral.main,
-      lightness: theme.colors.disabledLightness,
-    });
     const _activeColor = _isError ? theme.colors.tone.error.main : theme.colors.tone.primary.main;
     const _inactiveColor = _isError
       ? theme.colors.tone.error.main
@@ -128,16 +123,18 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
     const _containerAnimation: AnimationModel = {
       states: {
         [ELEMENT_STATE.DISABLED]: {
-          backgroundColor: _disabledBackgroundColor,
           borderColor: _inactiveColor,
+          opacity: theme.colors.disabledOpacity,
         },
         [ELEMENT_STATE.INACTIVE]: {
           backgroundColor: _activeBackgroundColor,
           borderColor: _inactiveColor,
+          opacity: 1,
         },
         [ELEMENT_STATE.ACTIVE]: {
           backgroundColor: _activeBackgroundColor,
           borderColor: _activeColor,
+          opacity: 1,
         },
       },
     };
@@ -153,7 +150,8 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
       <Appearable
         isCenter
         isVisible={!isEmpty(value) || elementState === ELEMENT_STATE.ACTIVE || !label}
-        mTop={18}>
+        mLeft={label ? true : THEME_BASIC_SIZE.SMALL}
+        mTop={label ? 18 : undefined}>
         {leftElement(elementState)}
       </Appearable>
     );

@@ -4,6 +4,7 @@ import type { OptionModel, SFCPropsModel } from '@lib/frontend/core/core.models'
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import type { NavigationLayoutPropsModel } from '@lib/frontend/core/layouts/NavigationLayout/NavigationLayout.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import type { ReactElement } from 'react';
 
 export const NavigationLayout = <TOption extends OptionModel>({
@@ -18,6 +19,7 @@ export const NavigationLayout = <TOption extends OptionModel>({
   const isMobile = useIsMobile();
   return (
     <Wrapper
+      backgroundColor={THEME_COLOR.NEUTRAL}
       basis={0}
       grow
       isRow={!isMobile}

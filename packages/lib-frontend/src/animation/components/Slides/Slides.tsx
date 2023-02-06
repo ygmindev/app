@@ -1,6 +1,6 @@
 import {
   ANIMATION_STATES_APPEARABLE,
-  ANIMATION_STATES_SLIDABLE_RIGHT,
+  ANIMATION_STATES_SLIDABLE,
 } from '@lib/frontend/animation/animation.constants';
 import { Exitable } from '@lib/frontend/animation/components/Exitable/Exitable';
 import type { SlidesPropsModel } from '@lib/frontend/animation/components/Slides/Slides.models';
@@ -17,6 +17,7 @@ export const Slides: SFCModel<SlidesPropsModel> = ({ current, slides, testID, ..
   const { styles } = useStyles({ props });
   const [measure, setMeasure] = useState<MeasureModel>();
   const theme = useTheme();
+
   return (
     <Wrapper
       grow
@@ -34,16 +35,15 @@ export const Slides: SFCModel<SlidesPropsModel> = ({ current, slides, testID, ..
                   animation={{
                     duration: theme.animation.transition,
                     states: merge({
-                      values: [
-                        ANIMATION_STATES_APPEARABLE,
-                        ANIMATION_STATES_SLIDABLE_RIGHT(measure),
-                      ],
+                      values: [ANIMATION_STATES_APPEARABLE, ANIMATION_STATES_SLIDABLE(measure)],
                     }),
                   }}
+                  bottom={0}
                   elementState={ELEMENT_STATE.ACTIVE}
-                  isAbsoluteFill
                   isFullWidth
-                  key={id}>
+                  key={id}
+                  position={SHAPE_POSITION.ABSOLUTE}
+                  top={0}>
                   {element}
                 </Wrapper>
               ),

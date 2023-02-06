@@ -24,4 +24,9 @@ export const props: LibraryPropsModel<ModalPropsModel> = {
     );
   },
   defaultProps: {},
+  variants: [
+    { props: { height: 300, width: 300 } },
+    { props: { header: 'header' } },
+    { props: { header: <WrapperFixture>header</WrapperFixture> } },
+  ],
 };

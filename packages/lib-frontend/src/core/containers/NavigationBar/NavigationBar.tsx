@@ -12,7 +12,7 @@ import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathnam
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
 import { BORDER_DIRECTION } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
-import groupBy from 'lodash/groupBy';
+import { groupBy } from '@lib/shared/core/utils/groupBy/groupBy';
 import map from 'lodash/map';
 import toString from 'lodash/toString';
 import type { ReactElement } from 'react';
@@ -29,7 +29,10 @@ export const NavigationBar = ({
   const { styles } = useStyles({ props });
   const isMobile = useIsMobile();
 
-  const _categories = useMemo(() => groupBy(options, 'category'), [options]);
+  const _categories = useMemo(
+    () => groupBy({ by: ({ category }) => toString(category), value: options }),
+    [options],
+  );
 
   return (
     <Activatable
@@ -44,6 +47,7 @@ export const NavigationBar = ({
         isRow={isMobile}
         isVerticalScrollable={!isMobile}
         p
+        spacing
         style={styles}
         testID={testID}
         width={isMobile ? undefined : NAVIGATION_BAR_WIDTH}>
@@ -69,15 +73,15 @@ export const NavigationBar = ({
               })}
             </Wrapper>
           );
-          return k === 'undefined' ? (
-            _options
-          ) : (
+          return k ? (
             <Accordion
               defaultValue
               key={toString(k)}
               label={k}>
               {_options}
             </Accordion>
+          ) : (
+            _options
           );
         })}
       </Wrapper>

@@ -42,18 +42,17 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   }>(() => {
     const _color = theme.colors.tone[color];
     const _activeColor = palette({ color: _color.main, lightness: theme.colors.activeLightness });
-    const _disabledColor = palette({
-      color: _color.main,
-      lightness: theme.colors.disabledLightness,
-    });
     switch (type) {
       case BUTTON_TYPE.FILLED: {
         return {
           animation: {
             states: {
-              [ELEMENT_STATE.ACTIVE]: { backgroundColor: _activeColor },
-              [ELEMENT_STATE.DISABLED]: { backgroundColor: _disabledColor },
-              [ELEMENT_STATE.INACTIVE]: { backgroundColor: _color.main },
+              [ELEMENT_STATE.ACTIVE]: { backgroundColor: _activeColor, opacity: 1 },
+              [ELEMENT_STATE.DISABLED]: {
+                backgroundColor: _activeColor,
+                opacity: theme.colors.disabledOpacity,
+              },
+              [ELEMENT_STATE.INACTIVE]: { backgroundColor: _color.main, opacity: 1 },
             },
           },
           childColorRole: THEME_ROLE.MAIN_CONTRAST,
@@ -63,9 +62,15 @@ export const Button: SFCModel<ButtonPropsModel> = ({
         return {
           animation: {
             states: {
-              [ELEMENT_STATE.ACTIVE]: { backgroundColor: _color.muted },
-              [ELEMENT_STATE.DISABLED]: { backgroundColor: _disabledColor },
-              [ELEMENT_STATE.INACTIVE]: { backgroundColor: theme.colors.tone.neutral.main },
+              [ELEMENT_STATE.ACTIVE]: { backgroundColor: _color.muted, opacity: 1 },
+              [ELEMENT_STATE.DISABLED]: {
+                backgroundColor: _color.muted,
+                opacity: theme.colors.disabledOpacity,
+              },
+              [ELEMENT_STATE.INACTIVE]: {
+                backgroundColor: theme.colors.tone.neutral.main,
+                opacity: 1,
+              },
             },
           },
           childColorRole: THEME_ROLE.MAIN,

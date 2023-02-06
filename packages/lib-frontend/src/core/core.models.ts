@@ -67,6 +67,7 @@ export interface OptionModel
   extends WithIdModel,
     Pick<IconPropsModel, 'icon'>,
     Pick<ButtonPropsModel, 'color' | 'onPress' | 'elementState' | 'confirmMessage'> {
+  category?: string;
   isDivider?: boolean;
   label?: string;
 }

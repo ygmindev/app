@@ -2,7 +2,7 @@ import type { ThemeConfigParamsModel } from '@lib/config/style/theme/theme.model
 import type { ThemeColorModel, ThemeRoleModel } from '@lib/frontend/style/style.models';
 
 export interface UseThemeModel extends Omit<ThemeConfigParamsModel, 'colors'> {
-  colors: Pick<ThemeConfigParamsModel['colors'], 'activeLightness' | 'disabledLightness'> & {
+  colors: Pick<ThemeConfigParamsModel['colors'], 'activeLightness' | 'disabledOpacity'> & {
     tone: Record<ThemeColorModel, Record<ThemeRoleModel, string>>;
   };
   isDark: boolean;

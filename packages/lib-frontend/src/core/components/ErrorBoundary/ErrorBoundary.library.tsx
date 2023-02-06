@@ -9,13 +9,19 @@ import { useEffect } from 'react';
 export const _ComponentThrowingError: FCModel = () => {
   const { handleError } = useErrorBoundary();
   useEffect(() => {
-    handleError(new Error());
+    handleError(new Error('error'));
   }, []);
   return null;
 };
 
 export const props: LibraryPropsModel<ErrorBoundaryPropsModel> = {
   Component: ErrorBoundary,
-  defaultProps: { children: <WrapperFixture /> },
-  variants: [{ props: { children: <_ComponentThrowingError /> } }],
+  defaultProps: { children: <_ComponentThrowingError /> },
+  variants: [
+    {
+      props: {
+        Fallback: ({ error }) => <WrapperFixture>{error?.message}</WrapperFixture>,
+      },
+    },
+  ],
 };

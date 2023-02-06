@@ -12,7 +12,7 @@ export const themeConfig: ThemeConfigParamsModel = {
   colors: {
     activeLightness: 40,
 
-    disabledLightness: 60,
+    disabledOpacity: 0.7,
 
     palette: {
       dark: {

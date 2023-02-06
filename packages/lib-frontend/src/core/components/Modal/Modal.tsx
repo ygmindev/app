@@ -1,4 +1,5 @@
-import { Icon } from '@lib/frontend/core/components/Icon/Icon';
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { _Modal } from '@lib/frontend/core/components/Modal/_Modal';
 import type { ModalPropsModel } from '@lib/frontend/core/components/Modal/Modal.models';
 import { Text } from '@lib/frontend/core/components/Text/Text';
@@ -33,7 +34,13 @@ export const Modal: FCModel<ModalPropsModel> = ({
       isFullSize={isFullSize}
       isOpen={isOpen}
       onClose={onClose}
-      style={{ justifyContent: 'flex-end', margin: 'auto' }}
+      style={{
+        justifyContent: 'flex-end',
+        margin: 0,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        marginTop: 'auto',
+      }}
       width={width}>
       <Wrapper
         backgroundColor={THEME_COLOR.NEUTRAL}
@@ -58,11 +65,10 @@ export const Modal: FCModel<ModalPropsModel> = ({
               </Wrapper>
 
               {onClose && (
-                // TODO:to button
-                <Icon
+                <Button
                   icon="times"
-                  // onPress={onClose}
-                  type={FONT_TYPE.TITLE}
+                  onPress={onClose}
+                  type={BUTTON_TYPE.TRANSPARENT}
                 />
               )}
             </Wrapper>

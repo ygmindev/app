@@ -13,7 +13,7 @@ export const useTheme = (): UseThemeModel => {
       colors: {
         activeLightness: themeConfig.colors.activeLightness,
 
-        disabledLightness: themeConfig.colors.disabledLightness,
+        disabledOpacity: themeConfig.colors.disabledOpacity,
 
         tone: (Object.keys(themeConfig.colors.tone) as Array<ThemeColorModel>).reduce(
           (result, key) => {

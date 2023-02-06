@@ -5,6 +5,7 @@ import { props as accordionProps } from '@lib/frontend/core/components/Accordion
 import { props as buttonProps } from '@lib/frontend/core/components/Button/Button.library';
 import { props as chilProps } from '@lib/frontend/core/components/Chip/Chip.library';
 import { props as dividerProps } from '@lib/frontend/core/components/Divider/Divider.library';
+import { props as errorBoundaryProps } from '@lib/frontend/core/components/ErrorBoundary/ErrorBoundary.library';
 import { props as iconProps } from '@lib/frontend/core/components/Icon/Icon.library';
 import { props as linkProps } from '@lib/frontend/core/components/Link/Link.library';
 import { props as loadingProps } from '@lib/frontend/core/components/Loading/Loading.library';
@@ -22,6 +23,7 @@ export const LIBRARY_PROPS = [
   buttonProps,
   chilProps,
   dividerProps,
+  errorBoundaryProps,
   iconProps,
   linkProps,
   loadingProps,

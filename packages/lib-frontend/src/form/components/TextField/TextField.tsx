@@ -1,5 +1,6 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Tooltip } from '@lib/frontend/core/components/Tooltip/Tooltip';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
@@ -69,13 +70,19 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       <Wrapper
         isRowAlign
         pRight={isCenter ? undefined : THEME_BASIC_SIZE.SMALL}>
-        {valueControlled && !isNoClear && _elementState !== ELEMENT_STATE.DISABLED && (
+        {!isNoClear && _elementState !== ELEMENT_STATE.DISABLED && (
           <Appearable
+            animation={{ isLazy: false }}
             isCenter
-            isVisible={_elementState === ELEMENT_STATE.ACTIVE && valueControlled.length > 0}>
+            isVisible={
+              !!valueControlled &&
+              _elementState === ELEMENT_STATE.ACTIVE &&
+              valueControlled.length > 0
+            }>
             <Button
               icon="times"
               onPress={() => _handleChange('')}
+              type={BUTTON_TYPE.TRANSPARENT}
             />
           </Appearable>
         )}

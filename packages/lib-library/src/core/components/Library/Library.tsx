@@ -8,12 +8,13 @@ import { FONT_TYPE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyle
 import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 import { LIBRARY } from '@lib/library/core/core.constants';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
-import groupBy from 'lodash/groupBy';
+import { groupBy } from '@lib/shared/core/utils/groupBy/groupBy';
+import isFunction from 'lodash/isFunction';
 import keys from 'lodash/keys';
 import map from 'lodash/map';
 import toString from 'lodash/toString';
 import type { Attributes, ComponentType, ReactElement } from 'react';
-import { createElement, useMemo } from 'react';
+import { createElement, isValidElement, useMemo } from 'react';
 
 export const Library = <TProps,>({
   Component,
@@ -32,12 +33,22 @@ export const Library = <TProps,>({
 
   const _categories = useMemo(
     () =>
-      groupBy(
-        withId([{ category: 'default', props: defaultProps }, ...(variants || [])]),
-        ({ category, props }) => category || keys(props).join(', '),
-      ),
+      groupBy({
+        by: ({ category, props }) => category || keys(props).join(', '),
+        isSort: false,
+        value: withId([{ category: 'default', props: defaultProps }, ...(variants || [])]),
+      }),
     [variants],
   );
+
+  const _typeToString = (value: unknown): string =>
+    isValidElement(value)
+      ? 'ReactElement'
+      : isFunction(value)
+      ? value?.prototype?.isReactComponent || toString(value).includes('return React.createElement')
+        ? 'ReactComponent'
+        : 'function'
+      : toString(value);
 
   return (
     <Wrapper
@@ -121,7 +132,7 @@ export const Library = <TProps,>({
                         {k}
                       </Text>
 
-                      <Text fontSize={THEME_SIZE.SMALL}>{toString(v)}</Text>
+                      <Text fontSize={THEME_SIZE.SMALL}>{_typeToString(v)}</Text>
                     </Wrapper>
                   ))}
                 </Wrapper>

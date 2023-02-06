@@ -38,7 +38,7 @@ export const _SwitchField = composeComponent<_SwitchFieldPropsModel, WrapperProp
           value={_value}
         />
       ),
-      opacity: _isDisabled ? 0.5 : 1,
+      opacity: _isDisabled ? theme.colors.disabledOpacity : 1,
     };
   },
 });

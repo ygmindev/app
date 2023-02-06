@@ -15,6 +15,8 @@ export const props: LibraryPropsModel<TextFieldPropsModel> = {
     { props: { value: 'value' } },
     { props: { leftElement: () => <Icon icon="person" /> } },
     { props: { rightElement: () => <Icon icon="person" /> } },
+    { props: { label: 'label', leftElement: () => <Icon icon="person" /> } },
+    { props: { label: 'label', rightElement: () => <Icon icon="person" /> } },
     { props: { error: true } },
     { props: { error: 'error' } },
     ...Object.values(ELEMENT_STATE).map((elementState) => ({ props: { elementState } })),

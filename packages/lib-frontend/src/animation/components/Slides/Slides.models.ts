@@ -3,5 +3,6 @@ import type { ReactElement } from 'react';
 
 export interface SlidesPropsModel {
   current?: number;
+  previous?: number;
   slides?: Array<{ element: ReactElement } & WithIdModel>;
 }

@@ -4,4 +4,4 @@ import type {
   {{NAME}}(pascalCase)ParamsModel,
 } from '{{PATH}}/{{NAME}}(camelCase)/{{NAME}}(camelCase).models';
 
-export const {{NAME}}(camelCase) = async ({ ...params }: {{NAME}}(pascalCase)ParamsModel): Promise<{{NAME}}(pascalCase)Model> => _{{NAME}}(camelCase)({ ...params });
+export const {{NAME}}(camelCase) = ({ ...params }: {{NAME}}(pascalCase)ParamsModel): {{NAME}}(pascalCase)Model => _{{NAME}}(camelCase)({ ...params });

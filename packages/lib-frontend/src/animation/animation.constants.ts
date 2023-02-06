@@ -15,13 +15,21 @@ export const ANIMATION_STATES_SCALABLE: AnimationStatesModel<StyleModel> = {
   [ELEMENT_STATE.INVISIBLE]: { transform: [{ scale: 0.9 }] },
 };
 
-export const ANIMATION_STATES_SLIDABLE_RIGHT = (
+export const ANIMATION_STATES_SLIDABLE = (
   measure?: MeasureModel,
+  isLeft = false,
 ): AnimationStatesModel<StyleModel> =>
   measure && measure.width
     ? {
-        [ELEMENT_STATE.ACTIVE]: { left: 0 },
-        [ELEMENT_STATE.INACTIVE]: { left: measure.width },
-        [ELEMENT_STATE.INVISIBLE]: { left: -measure.width },
+        // [ELEMENT_STATE.ACTIVE]: { left: 0 },
+        // [ELEMENT_STATE.INACTIVE]: { left: measure.width },
+        // [ELEMENT_STATE.INVISIBLE]: { left: -measure.width },
+        [ELEMENT_STATE.ACTIVE]: isLeft ? { left: 'auto', right: 0 } : { left: 0, right: 'auto' },
+        [ELEMENT_STATE.INACTIVE]: isLeft
+          ? { left: 'auto', right: measure.width }
+          : { left: measure.width, right: 'auto' },
+        [ELEMENT_STATE.INVISIBLE]: isLeft
+          ? { left: 'auto', right: -measure.width }
+          : { left: -measure.width, right: 'auto' },
       }
     : {};

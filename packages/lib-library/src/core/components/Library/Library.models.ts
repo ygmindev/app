@@ -9,5 +9,11 @@ export interface LibraryPropsModel<TProps> {
   defaultProps: TProps;
   name?: string;
   propTypes?: Array<DocgenMetaDataPropsModel>;
-  variants?: Array<{ category?: string; name?: string; props?: PartialModel<TProps> }>;
+  variants?: Array<LibraryVariantModel<TProps>>;
+}
+
+export interface LibraryVariantModel<TProps> {
+  category?: string;
+  name?: string;
+  props?: PartialModel<TProps>;
 }
