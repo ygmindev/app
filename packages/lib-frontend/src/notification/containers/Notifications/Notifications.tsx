@@ -10,7 +10,7 @@ import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/sha
 
 export const Notifications: SFCModel<NotificationsPropsModel> = () => {
   const notifications = useStore((state) => state.notification.notifications);
-  return notifications.length ? (
+  return (
     <Portal>
       <Wrapper
         bottom={0}
@@ -31,5 +31,5 @@ export const Notifications: SFCModel<NotificationsPropsModel> = () => {
         </Exitable>
       </Wrapper>
     </Portal>
-  ) : null;
+  );
 };

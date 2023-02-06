@@ -1,12 +1,17 @@
 import { ANIMATION_STATES_APPEARABLE } from '@lib/frontend/animation/animation.constants';
+import type { AnimatableRefModel } from '@lib/frontend/animation/animation.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
+import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { NOTIFICATION_WIDTH } from '@lib/frontend/notification/components/Notification/Notification.constants';
+import {
+  NOTIFICATION_DURATION,
+  NOTIFICATION_WIDTH,
+} from '@lib/frontend/notification/components/Notification/Notification.constants';
 import type { NotificationPropsModel } from '@lib/frontend/notification/components/Notification/Notification.models';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
@@ -17,6 +22,8 @@ import {
   THEME_SIZE,
 } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
+import { useRef } from 'react';
 
 export const Notification: SFCModel<NotificationPropsModel> = ({
   color = THEME_COLOR.PRIMARY,
@@ -31,6 +38,20 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
   const { styles } = useStyles({ props });
   const { t } = useTranslation();
   const { remove } = useNotification();
+  const barRef = useRef<AnimatableRefModel>(null);
+
+  const isMounted = useMount(
+    {
+      onMount: async () => {
+        if (!isInfinite) {
+          barRef.current?.to(ELEMENT_STATE.ACTIVE);
+          await sleep({ duration: NOTIFICATION_DURATION });
+          isMounted && remove(id);
+        }
+      },
+    },
+    [isInfinite, remove, id],
+  );
 
   return (
     <Wrapper
@@ -45,12 +66,21 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
       style={styles}
       testID={testID}
       width={NOTIFICATION_WIDTH}>
-      {isInfinite ? null : (
+      {!isInfinite && (
         <Wrapper
+          animation={{
+            duration: NOTIFICATION_DURATION,
+            states: {
+              [ELEMENT_STATE.ACTIVE]: { width: NOTIFICATION_WIDTH },
+              [ELEMENT_STATE.INACTIVE]: { width: 0 },
+            },
+          }}
           backgroundColor={color}
           backgroundRole={THEME_ROLE.MUTED}
-          height={5}
+          elementState={ELEMENT_STATE.INACTIVE}
+          height={6}
           position={SHAPE_POSITION.ABSOLUTE}
+          ref={barRef}
           right={0}
           top={0}
           zIndex={1}

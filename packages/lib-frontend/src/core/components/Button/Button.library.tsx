@@ -11,9 +11,8 @@ export const props: LibraryPropsModel<ButtonPropsModel> = {
     children: 'children',
   },
   variants: [
-    { props: { elementState: ELEMENT_STATE.LOADING } },
-    { props: { elementState: ELEMENT_STATE.DISABLED } },
     { props: { icon: 'person' } },
+    ...Object.values(ELEMENT_STATE).map((elementState) => ({ props: { elementState } })),
     ...Object.values(THEME_BASIC_SIZE).map((size) => ({ props: { size } })),
     ...Object.values(THEME_COLOR).map((color) => ({ props: { color } })),
     ...Object.values(THEME_COLOR).map((color) => ({
