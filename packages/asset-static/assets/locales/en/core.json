@@ -38,5 +38,11 @@
   "Notification": "Notification",
   "Notifications": "Notifications",
   "Previous": "Previous",
-  "Next": "Next"
+  "Next": "Next",
+  "SearchField": "SearchField",
+  "Logo": "Logo",
+  "Activatable": "Activatable",
+  "Dropdown": "Dropdown",
+  "Droppable": "Droppable",
+  "Open": "Open"
 }

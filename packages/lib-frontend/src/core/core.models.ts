@@ -1,6 +1,6 @@
 import type { ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
 import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
-import type { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import type { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { DimensionModel } from '@lib/frontend/platform/platform.models';
 import type { StyleModel, StylePropsModel, ViewStyleModel } from '@lib/frontend/style/style.models';
 import type { TestIdPropsModel } from '@lib/frontend/test/test.models';
@@ -42,6 +42,8 @@ export interface PagePropsModel {}
 export interface LayoutPropsModel extends ChildrenPropsModel {}
 
 export type ElementStateModel = `${ELEMENT_STATE}`;
+
+export type DirectionModel = `${DIRECTION}`;
 
 export interface ElementStatePropsModel {
   elementState?: ElementStateModel;

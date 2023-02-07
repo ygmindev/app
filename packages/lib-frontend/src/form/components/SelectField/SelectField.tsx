@@ -5,7 +5,7 @@ import type { MenuRefModel } from '@lib/frontend/core/components/Menu/Menu.model
 import { View } from '@lib/frontend/core/components/View/View';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useSearch } from '@lib/frontend/core/hooks/useSearch/useSearch';
+import { useSearch } from '@lib/frontend/search/hooks/useSearch/useSearch';
 import type { SelectFieldPropsModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
 import { TextField } from '@lib/frontend/form/components/TextField/TextField';
 import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/useControlledValue';

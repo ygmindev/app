@@ -2,11 +2,11 @@ import {
   SEARCH_DELAY,
   SEARCH_LIMIT,
   SEARCH_THRESHOLD,
-} from '@lib/frontend/core/hooks/useSearch/_useSearch.constants';
+} from '@lib/frontend/search/hooks/useSearch/_useSearch.constants';
 import type {
   _UseSearchModel,
   _UseSearchParamsModel,
-} from '@lib/frontend/core/hooks/useSearch/_useSearch.models';
+} from '@lib/frontend/search/hooks/useSearch/_useSearch.models';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import Fuse from 'fuse.js';
 import { useCallback, useMemo, useState } from 'react';

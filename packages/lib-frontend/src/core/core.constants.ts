@@ -7,3 +7,10 @@ export enum ELEMENT_STATE {
   INVISIBLE = 'invisible',
   LOADING = 'loading',
 }
+
+export enum DIRECTION {
+  BOTTOM = 'bottom',
+  LEFT = 'left',
+  RIGHT = 'right',
+  TOP = 'top',
+}

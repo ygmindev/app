@@ -3,6 +3,7 @@ import type { _DropdownPropsModel } from '@lib/frontend/core/components/Dropdown
 import { DROPDOWN_MAX_HEIGHT } from '@lib/frontend/core/components/Dropdown/Dropdown.constants';
 import type { DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/Dropdown.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { DIRECTION } from '@lib/frontend/core/core.constants';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
@@ -10,7 +11,7 @@ import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 export const Dropdown = composeComponent<DropdownPropsModel, _DropdownPropsModel>({
   Component: _Dropdown,
 
-  getProps: ({ anchor, children, isFullWidth, isLeft, isOpen, isRight, isTop, onClose }) => ({
+  getProps: ({ anchor, children, direction, isFullWidth, isOpen, onClose }) => ({
     anchor,
     children: (
       <Wrapper
@@ -18,8 +19,8 @@ export const Dropdown = composeComponent<DropdownPropsModel, _DropdownPropsModel
         border
         isFullWidth
         isShadow
-        mLeft={isRight}
-        mRight={isLeft}
+        mLeft={direction === DIRECTION.RIGHT}
+        mRight={direction === DIRECTION.LEFT}
         mVertical
         round>
         <Wrapper
@@ -31,11 +32,9 @@ export const Dropdown = composeComponent<DropdownPropsModel, _DropdownPropsModel
         </Wrapper>
       </Wrapper>
     ),
+    direction,
     isFullWidth,
-    isLeft,
     isOpen,
-    isRight,
-    isTop,
     onClose,
   }),
 });
