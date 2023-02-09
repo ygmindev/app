@@ -11,6 +11,7 @@ import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyl
 import { spacingStyler } from '@lib/frontend/style/utils/styler/spacingStyler/spacingStyler';
 import { viewStyler } from '@lib/frontend/style/utils/styler/viewStyler/viewStyler';
 import { uid } from '@lib/shared/core/utils/uid/uid';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import reduce from 'lodash/reduce';
 import type { ReactElement, ReactNode } from 'react';
 import { Children, cloneElement, createElement, forwardRef, isValidElement, useMemo } from 'react';
@@ -79,3 +80,5 @@ export const Wrapper: RSFCModel<AnimatableRefModel, WrapperPropsModel> = forward
       : createElement(View, { ...props, style: styles }, _children);
   },
 );
+
+process.env.APP_DEBUG && (Wrapper.displayName = variableName(() => Wrapper));

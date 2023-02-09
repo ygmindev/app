@@ -14,6 +14,8 @@ import { props as linkProps } from '@lib/frontend/core/components/Link/Link.libr
 import { props as loadingProps } from '@lib/frontend/core/components/Loading/Loading.library';
 import { props as modalProps } from '@lib/frontend/core/components/Modal/Modal.library';
 import { props as textProps } from '@lib/frontend/core/components/Text/Text.library';
+import { props as tooltipProps } from '@lib/frontend/core/components/Tooltip/Tooltip.library';
+import { props as wrapperProps } from '@lib/frontend/core/components/Wrapper/Wrapper.library';
 import { props as selectFieldProps } from '@lib/frontend/form/components/SelectField/SelectField.library';
 import { props as switchFieldProps } from '@lib/frontend/form/components/SwitchField/SwitchField.library';
 import { props as textFieldProps } from '@lib/frontend/form/components/TextField/TextField.library';
@@ -44,4 +46,6 @@ export const LIBRARY_PROPS = [
   switchFieldProps,
   textFieldProps,
   textProps,
+  tooltipProps,
+  wrapperProps,
 ];

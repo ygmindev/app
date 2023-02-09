@@ -15,13 +15,16 @@ export interface WrapperFixturePropsModel extends WrapperPropsModel {
 
 export const WrapperFixture: SFCModel<WrapperFixturePropsModel> = ({
   children,
+  backgroundColor = THEME_COLOR.PRIMARY,
+  backgroundRole = THEME_ROLE.MUTED,
   testID,
   ...props
 }) => {
   const _testID = useMemo(() => testID || 'wrapper-fixture', [testID]);
   return (
     <Wrapper
-      backgroundColor={THEME_COLOR.PRIMARY}
+      backgroundColor={backgroundColor}
+      backgroundRole={backgroundRole}
       height={WRAPPER_FIXTURE_SIZE}
       isCenter
       key={_testID}
@@ -32,7 +35,7 @@ export const WrapperFixture: SFCModel<WrapperFixturePropsModel> = ({
       {isString(children) ? (
         <Text
           align={FONT_ALIGN.CENTER}
-          colorRole={THEME_ROLE.MAIN}>
+          colorRole={THEME_ROLE.MUTED_CONTRAST}>
           {children}
         </Text>
       ) : (

@@ -44,5 +44,9 @@
   "Activatable": "Activatable",
   "Dropdown": "Dropdown",
   "Droppable": "Droppable",
-  "Open": "Open"
+  "Open": "Open",
+  "Tooltip": "Tooltip",
+  "Wrapper": "Wrapper",
+  "label": "label",
+  "error": "error"
 }

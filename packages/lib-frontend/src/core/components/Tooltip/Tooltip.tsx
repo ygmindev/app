@@ -7,26 +7,29 @@ import { TranslatableText } from '@lib/frontend/locale/components/TranslatableTe
 import { THEME_COLOR, THEME_ROLE } from '@lib/frontend/style/style.constants';
 import { palette } from '@lib/frontend/style/utils/palette/palette';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
+import isString from 'lodash/isString';
+import type { ReactNode } from 'react';
 
 export const Tooltip = composeComponent<TooltipPropsModel, DroppablePropsModel>({
   Component: Droppable,
 
-  getProps: ({ children, color = THEME_COLOR.NEUTRAL }, theme) => {
-    const _color =
-      theme.colors.tone[color][
-        color === THEME_COLOR.NEUTRAL ? THEME_ROLE.MAIN_CONTRAST : THEME_ROLE.MAIN
-      ];
+  getProps: ({ children, color = THEME_COLOR.PRIMARY, icon = 'info' }, theme) => {
+    const _color = theme.colors.tone[color][THEME_ROLE.MAIN];
     return {
       anchor: (isActive) => (
         <Icon
           color={
             isActive ? palette({ color: _color, lightness: theme.colors.activeLightness }) : _color
           }
-          icon="info"
+          icon={icon}
         />
       ),
 
-      children: <TranslatableText>{children}</TranslatableText>,
+      children: isString(children) ? (
+        <TranslatableText>{children}</TranslatableText>
+      ) : (
+        (children as ReactNode)
+      ),
     };
   },
 });
