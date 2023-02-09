@@ -21,7 +21,7 @@ export const _testConfig = ({
   testExtensions,
   timeout,
 }: _TestConfigParamsModel): UserConfig =>
-  merge({
+  merge<UserConfig, UserConfig>({
     strategy: MERGE_STRATEGY.DEEP_PREPEND,
 
     values: [
@@ -79,6 +79,12 @@ export const _testConfig = ({
           setupFiles: [fromConfig(`javascript/test/_initialize.config.${bundle.platform}.ts`)],
 
           testTimeout: timeout,
+
+          typecheck: {
+            ignoreSourceErrors: true,
+
+            tsconfig: fromConfig('javascript/typescript/tsconfig.json'),
+          },
 
           watch: isWatch,
         },
