@@ -11943,7 +11943,7 @@ __metadata:
     dotenv: ^16.0.3
     email-templates: ^10.0.1
     env-schema: ^5.2.0
-    esbuild: ^0.17.6
+    esbuild: ^0.16.17
     esbuild-node-externals: ^1.6.0
     esbuild-plugin-fileloc: ^0.0.6
     eslint: 8.33.0
@@ -12059,8 +12059,8 @@ __metadata:
     uuid: ^9.0.0
     vite: ^4.1.1
     vite-plugin-checker: ^0.5.5
+    vite-plugin-full-reload: ^1.0.5
     vite-plugin-ssr: ^0.4.77
-    vite-plugin-static-copy: ^0.13.0
     vite-tsconfig-paths: ^4.0.5
     vitest: ^0.28.4
     winston: ^3.8.2
@@ -17135,7 +17135,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.16.14":
+"esbuild@npm:^0.16.14, esbuild@npm:^0.16.17":
   version: 0.16.17
   resolution: "esbuild@npm:0.16.17"
   dependencies:
@@ -17289,7 +17289,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.17.0, esbuild@npm:^0.17.6":
+"esbuild@npm:^0.17.0":
   version: 0.17.6
   resolution: "esbuild@npm:0.17.6"
   dependencies:
@@ -36581,6 +36581,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"vite-plugin-full-reload@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "vite-plugin-full-reload@npm:1.0.5"
+  dependencies:
+    picocolors: ^1.0.0
+    picomatch: ^2.3.1
+  peerDependencies:
+    vite: ^2 || ^3 || ^4
+  checksum: 250d50a2ce4b4de0f6855aaf191d3c37838da6795a113b1de28b390be71a0bb23351072fa8f4ab8ad4a07026ecb56b3d0358a1341288de9a736f99ae5a47d7ce
+  languageName: node
+  linkType: hard
+
 "vite-plugin-ssr@npm:^0.4.77":
   version: 0.4.77
   resolution: "vite-plugin-ssr@npm:0.4.77"
@@ -36602,20 +36614,6 @@ __metadata:
   bin:
     vite-plugin-ssr: node/bin/vite-plugin-ssr.js
   checksum: 09136fa1ec0a632a40131c94370b5f5c8529b4d558e458dba4b31ef712f332da6002b50a086c1eea8f3e5fe14f53e0252bcf9f73aefac3f4de8ee779885fe2a9
-  languageName: node
-  linkType: hard
-
-"vite-plugin-static-copy@npm:^0.13.0":
-  version: 0.13.0
-  resolution: "vite-plugin-static-copy@npm:0.13.0"
-  dependencies:
-    chokidar: ^3.5.3
-    fast-glob: ^3.2.11
-    fs-extra: ^11.1.0
-    picocolors: ^1.0.0
-  peerDependencies:
-    vite: ^3.0.0 || ^4.0.0
-  checksum: c57c6fc445709f66e8c2b69171f10a9f52f9b3e4a92974b20c82dfd21028f46669f01d191b7371cec0c8652d3ca5ac84ba9d8582748a9a0c6cc3a90561f8dc1a
   languageName: node
   linkType: hard
 

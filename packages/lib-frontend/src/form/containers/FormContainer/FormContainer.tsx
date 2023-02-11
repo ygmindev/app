@@ -82,9 +82,9 @@ export const FormContainer = <TType,>({
     validators,
   });
 
-  const _isLoading = elementState == ELEMENT_STATE.LOADING || isLoading || false;
+  const _elementState = isLoading ? ELEMENT_STATE.LOADING : elementState;
   const _isDisabled =
-    elementState === ELEMENT_STATE.DISABLED || elementState === ELEMENT_STATE.LOADING;
+    _elementState === ELEMENT_STATE.DISABLED || _elementState === ELEMENT_STATE.LOADING;
   const _isFullWidth = isMobile || isFullWidth;
 
   const _getField = useCallback(
@@ -92,7 +92,9 @@ export const FormContainer = <TType,>({
       const _fieldProps: FieldPropsModel = {
         ...fieldProps,
         defaultValue: initialValues ? (initialValues as Record<string, undefined>)[id] : undefined,
-        elementState: elementState || fieldProps?.elementState,
+        elementState: _isDisabled
+          ? ELEMENT_STATE.DISABLED
+          : _elementState || fieldProps?.elementState,
         error: errors ? (errors as Record<string, undefined>)[id] : undefined,
         label: fieldProps?.label ? t(fieldProps.label) : undefined,
         onChange: handleChange(id),
@@ -129,7 +131,7 @@ export const FormContainer = <TType,>({
         }
       }
     },
-    [values, errors, handleChange, handleSubmit, initialValues, elementState],
+    [values, errors, handleChange, handleSubmit, initialValues, _elementState],
   );
 
   return (
@@ -139,7 +141,7 @@ export const FormContainer = <TType,>({
       style={styles}
       testID={testID}
       width={_isFullWidth ? undefined : theme.layout.narrow.width}>
-      <Form onSubmit={_isLoading ? undefined : async () => handleSubmit()}>
+      <Form onSubmit={_isDisabled ? undefined : async () => handleSubmit()}>
         <Wrapper spacing>
           {topElement}
 
@@ -163,7 +165,7 @@ export const FormContainer = <TType,>({
 
         {onCancel && (
           <Button
-            elementState={elementState}
+            elementState={_elementState}
             icon="chevronLeft"
             onPress={onCancel}
             type={BUTTON_TYPE.TRANSPARENT}>
@@ -172,7 +174,7 @@ export const FormContainer = <TType,>({
         )}
 
         <Button
-          elementState={elementState}
+          elementState={_elementState}
           icon="chevronRight"
           onPress={handleSubmit}>
           {t(submitLabel || 'core:labels.submit')}

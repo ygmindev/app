@@ -6,6 +6,6 @@ import { withContainer } from '@lib/shared/core/decorators/withContainer/withCon
 @withContainer()
 export class DatabaseMain extends Database implements DatabaseModel {
   constructor() {
-    super(databaseConfig);
+    super(databaseConfig());
   }
 }

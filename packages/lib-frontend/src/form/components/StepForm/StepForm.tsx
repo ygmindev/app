@@ -1,3 +1,4 @@
+import type { AnimatableRefModel } from '@lib/frontend/animation/animation.models';
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Slides } from '@lib/frontend/animation/components/Slides/Slides';
 import { Button } from '@lib/frontend/core/components/Button/Button';
@@ -5,6 +6,7 @@ import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCPropsModel } from '@lib/frontend/core/core.models';
+import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import type { StepFormPropsModel } from '@lib/frontend/form/components/StepForm/StepForm.models';
 import { useDimension } from '@lib/frontend/platform/hooks/useDimension/useDimension';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
@@ -14,7 +16,7 @@ import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/sha
 import type { MergeArrayModel, PartialModel } from '@lib/shared/core/core.models';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import type { ReactElement } from 'react';
-import { cloneElement, useMemo, useState } from 'react';
+import { cloneElement, useMemo, useRef, useState } from 'react';
 
 export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends Array<unknown>>({
   onSubmit,
@@ -34,9 +36,18 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
 
   const _isLastStep = useMemo(() => current === steps.length - 1, [current, steps.length]);
 
+  const barRef = useRef<AnimatableRefModel>(null);
+
   const _handleClear = (): void => {
-    setCurrent(0);
+    _setCurrent(0);
     setData(undefined);
+  };
+
+  useMount({ onMount: () => _setCurrent(0) });
+
+  const _setCurrent = (value: number): void => {
+    setCurrent(value);
+    width && barRef.current?.to({ width: (width / (steps.length + 1)) * (value + 1) });
   };
 
   return (
@@ -44,18 +55,15 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
       {steps.length > 1 && width && width > 0 && (
         <Portal>
           <Wrapper
-            animation={
-              {
-                // duration: theme.animation.transition,
-                // from: { width: 0 },
-                // isActive: true,
-                // to: { width: (width / (steps.length + 1)) * (current + 1) },
-              }
-            }
+            animation={{
+              duration: theme.animation.transition,
+              states: { [ELEMENT_STATE.INACTIVE]: { width: 0 } },
+            }}
             backgroundColor={THEME_COLOR.PRIMARY}
             height={5}
             left={0}
             position={SHAPE_POSITION.ABSOLUTE}
+            ref={barRef}
             top={0}
           />
         </Portal>
@@ -67,11 +75,13 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
         style={styles}
         testID={testID}>
         <Wrapper isRowAlign>
-          <Appearable isVisible={current > 0}>
+          <Appearable
+            animation={{ isLazy: false }}
+            isVisible={current > 0}>
             <Button
               elementState={current <= 0 ? ELEMENT_STATE.DISABLED : undefined}
               icon="arrowLeft"
-              onPress={() => setCurrent(current - 1)}
+              onPress={() => _setCurrent(current - 1)}
             />
           </Appearable>
         </Wrapper>
@@ -84,7 +94,7 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
               key: id,
               onBack: () => {
                 element.props.onBack && element.props.onBack();
-                setCurrent(current - 1);
+                _setCurrent(current - 1);
               },
               onSuccess: async (stepData: TSteps[number]) => {
                 element.props.onSuccess && (await element.props.onSuccess(stepData));
@@ -96,7 +106,7 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
                   _handleClear();
                 } else {
                   setData(_data);
-                  setCurrent(current + 1);
+                  _setCurrent(current + 1);
                 }
               },
             }),

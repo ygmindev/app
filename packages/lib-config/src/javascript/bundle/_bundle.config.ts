@@ -10,19 +10,17 @@ import type { RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { babel } from '@rollup/plugin-babel';
 import inject from '@rollup/plugin-inject';
 import { LINT_COMMAND } from '@tool/task/node/templates/lint/lint';
+import type { Plugin } from 'esbuild';
 import { filelocPlugin } from 'esbuild-plugin-fileloc';
 import { visualizer } from 'rollup-plugin-visualizer';
 import type { PluginOption, UserConfig } from 'vite';
 import { searchForWorkspaceRoot } from 'vite';
-import type { Plugin } from 'vite/node_modules/esbuild/lib/main';
 import { checker } from 'vite-plugin-checker';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export const _bundleConfig = ({
   aliases,
   babelConfig,
-  copy,
   define,
   entry,
   envPrefix,
@@ -78,12 +76,6 @@ export const _bundleConfig = ({
     }),
 
     viteCommonjs(),
-
-    copy &&
-      viteStaticCopy({
-        targets: copy.map(({ from, to }) => ({ dest: to, src: from })),
-        watch: { reloadPageOnChange: true },
-      }),
 
     provide && inject(provide),
 

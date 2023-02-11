@@ -90,6 +90,6 @@ export const _testConfig = ({
         },
       },
 
-      bundleConfig,
+      bundleConfig as UserConfig,
     ],
   });

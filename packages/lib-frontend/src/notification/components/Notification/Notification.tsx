@@ -1,6 +1,7 @@
 import { ANIMATION_STATES_APPEARABLE } from '@lib/frontend/animation/animation.constants';
 import type { AnimatableRefModel } from '@lib/frontend/animation/animation.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -44,7 +45,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
     {
       onMount: async () => {
         if (!isInfinite) {
-          barRef.current?.to(ELEMENT_STATE.ACTIVE);
+          barRef.current?.toState(ELEMENT_STATE.ACTIVE);
           await sleep({ duration: NOTIFICATION_DURATION });
           isMounted && remove(id);
         }
@@ -125,6 +126,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
           color={color}
           icon="times"
           onPress={() => remove(id)}
+          type={BUTTON_TYPE.FILLED}
         />
       </Wrapper>
     </Wrapper>

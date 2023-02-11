@@ -4,12 +4,12 @@ import type { SheetConfigParamsModel } from '@lib/config/style/sheet/sheet.model
 export const sheetConfig: SheetConfigParamsModel = (theme) => `
   @font-face {
     font-family: 'Ionicons';
-    src: url("/assets/fonts/Ionicons.ttf") format("truetype");
+    src: url("/fonts/Ionicons.ttf") format("truetype");
   }
 
   @font-face {
     font-family: 'FontAwesome';
-    src: url("/assets/fonts/FontAwesome.ttf") format("truetype");
+    src: url("/fonts/FontAwesome.ttf") format("truetype");
   }
 
   html {

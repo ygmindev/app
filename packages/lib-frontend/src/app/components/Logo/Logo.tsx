@@ -18,7 +18,7 @@ export const Logo = composeComponent<LogoPropsModel, LinkPropsModel>({
         <Image
           height={height}
           isAutoSize
-          src={`${APP_URI}/assets/images/logos/logo.png`}
+          src={`${APP_URI}/images/logos/logo.png`}
           width={width}
         />
       ),

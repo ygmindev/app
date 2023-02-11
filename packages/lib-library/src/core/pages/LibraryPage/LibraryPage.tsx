@@ -29,7 +29,7 @@ export const LibraryPage: SFCModel<LibraryPagePropsModel> = ({ testID, ...props 
   //   id: 'components',
   //   query: async () => {
   //     const result = await get<void, Record<string, DocgenMetaDataModel>>({
-  //       path: 'assets/library/components.json',
+  //       path: '/library/components.json',
   //     });
   //     return mapKeys(result, (_, k) => trimPathname(k));
   //   },

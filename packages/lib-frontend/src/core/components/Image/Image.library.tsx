@@ -5,7 +5,7 @@ import type { LibraryPropsModel } from '@lib/library/core/components/Library/Lib
 
 export const props: LibraryPropsModel<ImagePropsModel> = {
   Component: Image,
-  defaultProps: { src: `${APP_URI}/assets/images/logos/logo.png` },
+  defaultProps: { src: `${APP_URI}/images/logos/logo.png` },
   variants: [
     { props: { height: 50, width: 50 } },
     { props: { isAutoSize: true, width: 100 } },

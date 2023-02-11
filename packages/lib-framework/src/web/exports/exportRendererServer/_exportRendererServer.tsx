@@ -10,7 +10,7 @@ import { AppRegistry } from 'react-native-web';
 import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vite-plugin-ssr';
 
 export const _exportRendererServer = ({
-  favicoPath,
+  publicDir,
   render,
   rootId,
 }: _ExportRendererServerParamsModel): _ExportRendererServerModel => ({
@@ -46,7 +46,7 @@ export const _exportRendererServer = ({
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width" />
           <meta name="description" content="${''}" />
-          <link rel="icon" type="image/svg+xml" href="${favicoPath}" />
+          <link rel="icon" type="image/svg+xml" href="${publicDir}/favico/favico.svg" />
           <title>${''}</title>
           <style>${dangerouslySkipEscape(styleSheet)}</style>
         </head>

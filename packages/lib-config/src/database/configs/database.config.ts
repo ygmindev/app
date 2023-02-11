@@ -7,17 +7,23 @@ import type { DatabaseConfigParamsModel } from '@lib/config/database/database.mo
 import type { ConstructorModel } from '@lib/shared/core/core.models';
 import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
-export const databaseConfig: DatabaseConfigParamsModel = {
+export const databaseConfig = (): DatabaseConfigParamsModel => ({
   database: process.env.SERVER_MONGO_DATABASE_NAME,
+
   entities: [
     Access,
     Otp,
     User,
     process.env.NODE_ENV !== 'production' && DummyEntityResource,
   ].filter(Boolean) as Array<ConstructorModel<EntityResourceModel>>,
+
   host: process.env.SERVER_MONGO_DATABASE_URL,
+
   password: process.env.SERVER_MONGO_DATABASE_PASSWORD,
+
   pool: { max: 10 },
+
   type: DATABASE_TYPE.MONGO,
+
   username: process.env.SERVER_MONGO_DATABASE_USERNAME,
-};
+});

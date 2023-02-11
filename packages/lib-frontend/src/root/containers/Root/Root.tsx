@@ -1,5 +1,5 @@
 import { AuthProvider } from '@lib/frontend/auth/providers/AuthProvider/AuthProvider';
-import { ErrorBoundary } from '@lib/frontend/core/components/ErrorBoundary/ErrorBoundary';
+import { ErrorContainer } from '@lib/frontend/core/containers/ErrorContainer/ErrorContainer';
 import type { FCModel } from '@lib/frontend/core/core.models';
 import { QueryProvider } from '@lib/frontend/core/providers/QueryProvider/QueryProvider';
 import { LocaleProvider } from '@lib/frontend/locale/providers/LocaleProvider/LocaleProvider';
@@ -23,7 +23,7 @@ export const Root: FCModel<RootPropsModel> = ({ children, initialState, locale, 
       <AuthProvider />,
       <StyleProvider />,
       <QueryProvider />,
-      <ErrorBoundary />,
+      <ErrorContainer />,
       <LocaleProvider value={locale} />,
       <StateProvider value={initialState} />,
       <Suspense />, // to provider?

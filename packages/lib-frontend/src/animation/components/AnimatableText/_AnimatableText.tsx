@@ -5,27 +5,29 @@ import { _textParams } from '@lib/frontend/core/components/Text/_Text';
 import type { PropsModel, RSFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import type { TextStyleModel } from '@lib/frontend/style/style.models';
 import { MotiText } from 'moti';
 import { forwardRef } from 'react';
 
-export const _AnimatableText: RSFCModel<AnimatableRefModel, _AnimatableTextPropsModel> = forwardRef(
-  ({ animation, children, elementState, ...props }, ref) => {
-    const theme = useTheme();
-    const { styles } = useStyles({ props });
-    const { animationProps, animationState, isRender } = useAnimationState({
-      animation,
-      elementState,
-      ref,
-    });
-    return isRender ? (
-      <MotiText
-        {...(_textParams.getProps ? _textParams.getProps(props, theme) : {})}
-        {...(animationProps as PropsModel<typeof MotiText>)}
-        ref={ref}
-        state={animationState}
-        style={styles}>
-        {children}
-      </MotiText>
-    ) : null;
-  },
-);
+export const _AnimatableText: RSFCModel<
+  AnimatableRefModel<TextStyleModel>,
+  _AnimatableTextPropsModel
+> = forwardRef(({ animation, children, elementState, ...props }, ref) => {
+  const theme = useTheme();
+  const { styles } = useStyles({ props });
+  const { animationProps, animationState, isRender } = useAnimationState({
+    animation,
+    elementState,
+    ref,
+  });
+  return isRender ? (
+    <MotiText
+      {...(_textParams.getProps ? _textParams.getProps(props, theme) : {})}
+      {...(animationProps as PropsModel<typeof MotiText>)}
+      ref={ref}
+      state={animationState}
+      style={styles}>
+      {children}
+    </MotiText>
+  ) : null;
+});

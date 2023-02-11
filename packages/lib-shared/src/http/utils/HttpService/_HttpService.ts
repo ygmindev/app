@@ -9,7 +9,12 @@ import type {
   HttpServiceParamsModel,
 } from '@lib/shared/http/utils/HttpService/HttpService.models';
 import { uri } from '@lib/shared/http/utils/uri/uri';
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import type {
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from 'axios';
 import axios from 'axios';
 
 export class _HttpService implements _HttpServiceModel {
@@ -30,7 +35,7 @@ export class _HttpService implements _HttpServiceModel {
             responseType: responseType as HttpResponseTypeModel,
             timeout,
             withCredentials,
-          }),
+          }) as unknown as InternalAxiosRequestConfig,
       );
 
     onResponse &&

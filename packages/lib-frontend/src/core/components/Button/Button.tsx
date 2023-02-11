@@ -21,8 +21,8 @@ import { useMemo } from 'react';
 export const Button: SFCModel<ButtonPropsModel> = ({
   children,
   color = THEME_COLOR.PRIMARY,
-  type = BUTTON_TYPE.FILLED,
   icon,
+  type = !children && icon ? BUTTON_TYPE.TRANSPARENT : BUTTON_TYPE.FILLED,
   size = THEME_BASIC_SIZE.MEDIUM,
   elementState,
   onElementStateChange,

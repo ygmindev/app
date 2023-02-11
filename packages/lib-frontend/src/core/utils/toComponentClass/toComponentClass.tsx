@@ -9,10 +9,6 @@ export const toComponentClass = <TProps,>(
   params: ToComponentClassParamsModel<TProps>,
 ): ToComponentClassModel<TProps> =>
   class extends Component<TProps> {
-    constructor(props: TProps) {
-      super(props);
-    }
-
     render(): ReactElement<TProps> {
       return createElement(params, this.props);
     }

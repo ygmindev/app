@@ -1,8 +1,6 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
-import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
-import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import type { BundleConfigParamsModel } from '@lib/config/javascript/bundle/bundle.models';
 import { bundleConfig as bundleConfigBase } from '@lib/config/javascript/bundle/configs/bundle.config.base';
 import { bundleConfig as bundleConfigFrontend } from '@lib/config/javascript/bundle/configs/bundle.config.frontend';
@@ -24,18 +22,6 @@ export const bundleConfig: BundleConfigParamsModel = merge({
         ),
       },
 
-      copy: [
-        { from: fromStatic('assets'), to: fromWorking('public') },
-        {
-          from: fromModules('react-native-vector-icons/Fonts/Ionicons.ttf'),
-          to: fromWorking('public/fonts'),
-        },
-        {
-          from: fromModules('react-native-vector-icons/Fonts/FontAwesome.ttf'),
-          to: fromWorking('public/fonts'),
-        },
-      ],
-
       extensions: permuteString(['.web'], bundleConfigBase.extensions),
 
       platform: PLATFORM.WEB,
@@ -46,7 +32,7 @@ export const bundleConfig: BundleConfigParamsModel = merge({
         ),
       },
 
-      watch: [fromStatic('assets')],
+      watch: [fromStatic('assets/**/*')],
     },
 
     bundleConfigFrontend,

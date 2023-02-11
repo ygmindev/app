@@ -11,6 +11,6 @@ export interface _AnimatableParamsModel<TProps, TStyle extends StyleModel = View
 }
 
 export type _AnimatableModel<TProps, TStyle extends StyleModel = ViewStyleModel> = RSFCModel<
-  AnimatableRefModel,
+  AnimatableRefModel<TStyle>,
   TProps & AnimatablePropsModel<TStyle>
 >;

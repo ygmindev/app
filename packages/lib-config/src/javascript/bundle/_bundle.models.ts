@@ -5,7 +5,6 @@ import type { BabelOptions } from '@vitejs/plugin-react';
 export interface _BundleConfigParamsModel {
   aliases?: Record<string, string>;
   babelConfig?: BabelOptions;
-  copy?: Array<{ from: string; to: string }>;
   define?: Record<string, unknown>;
   entry?: string;
   envPrefix: Array<string>;

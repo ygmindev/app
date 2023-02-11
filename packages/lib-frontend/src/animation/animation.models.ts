@@ -15,8 +15,9 @@ export interface AnimationModel<
   states?: TStates;
 }
 
-export interface AnimatableRefModel {
-  to(params: ElementStateModel): Promise<void>;
+export interface AnimatableRefModel<TStyle extends StyleModel = ViewStyleModel> {
+  to(params: TStyle): Promise<void>;
+  toState(params: ElementStateModel): Promise<void>;
 }
 
 export type AnimationStatesModel<TStyle extends StyleModel = ViewStyleModel> = {

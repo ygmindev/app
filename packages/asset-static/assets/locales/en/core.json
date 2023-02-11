@@ -1,9 +1,10 @@
 {
   "labels": {
-    "cancel": "Cancel",
-    "continue": "Continue",
-    "noResult": "No result",
-    "tryAgain": "Try again"
+    "cancel": "cancel",
+    "continue": "continue",
+    "noResult": "no result",
+    "tryAgain": "try again",
+    "submit": "submit"
   },
   "messages": {
     "errorForbidden": "TRANSLATION_MISSING",
@@ -19,34 +20,6 @@
     "validateRange": "TRANSLATION_MISSING",
     "validateZipCode": "TRANSLATION_MISSING"
   },
-  "Accordion": "Accordion",
-  "Appearable": "Appearable",
-  "Button": "Button",
-  "Chip": "Chip",
-  "Divider": "Divider",
-  "ErrorBoundary": "ErrorBoundary",
-  "Icon": "Icon",
-  "Link": "Link",
-  "Loading": "Loading",
-  "Modal": "Modal",
-  "Text": "Text",
-  "Slides": "Slides",
-  "OtpField": "OtpField",
-  "SelectField": "SelectField",
-  "SwitchField": "SwitchField",
-  "TextField": "TextField",
-  "Notification": "Notification",
-  "Notifications": "Notifications",
-  "Previous": "Previous",
-  "Next": "Next",
-  "SearchField": "SearchField",
-  "Logo": "Logo",
-  "Activatable": "Activatable",
-  "Dropdown": "Dropdown",
-  "Droppable": "Droppable",
-  "Open": "Open",
-  "Tooltip": "Tooltip",
-  "Wrapper": "Wrapper",
-  "label": "label",
-  "error": "error"
+  "Email": "Email",
+  "submit": "submit"
 }

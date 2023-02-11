@@ -3,13 +3,12 @@ import type { ChildrenPropsModel } from '@lib/frontend/core/core.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 import type { ComponentType } from 'react';
 
-export interface _FallbackPropsModel<TError extends Error = Error>
-  extends Pick<IconPropsModel, 'icon'> {
-  error?: TError;
+export interface _FallbackPropsModel extends Pick<IconPropsModel, 'icon'> {
+  error?: Error;
   handleReset: CallableModel;
 }
 
-export interface _ErrorBoundaryPropsModel<TError extends Error = Error> extends ChildrenPropsModel {
-  Fallback?: ComponentType<_FallbackPropsModel<TError>>;
-  onError?(error: TError): void;
+export interface _ErrorBoundaryPropsModel extends ChildrenPropsModel {
+  Fallback?: ComponentType<_FallbackPropsModel>;
+  onError?(error: Error): void;
 }

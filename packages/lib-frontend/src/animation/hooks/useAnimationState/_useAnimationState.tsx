@@ -3,13 +3,11 @@ import type {
   _UseAnimationStateParamsModel,
 } from '@lib/frontend/animation/hooks/useAnimationState/_useAnimationState.models';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import type { ElementStateModel } from '@lib/frontend/core/core.models';
 import type { StyleModel, ViewStyleModel } from '@lib/frontend/style/style.models';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
-import type { Variants } from 'moti';
-import { useAnimationState } from 'moti';
-import { useImperativeHandle, useState } from 'react';
+import type { DynamicStyleProp } from 'moti';
+import { useDynamicAnimation } from 'moti';
+import { useImperativeHandle } from 'react';
 
 export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
   animation,
@@ -18,22 +16,20 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
 }: _UseAnimationStateParamsModel<TStyle>): _UseAnimationStateModel<TStyle> => {
   const { delay, duration, isInfinite, isInitial = true, isLazy = true, states } = animation || {};
 
-  const animationState = useAnimationState((states || {}) as Variants<TStyle>);
-  const [isAnimating, setIsAnimating] = useState<boolean>(false);
+  const animationState = useDynamicAnimation();
 
-  const _animate = debounce({
-    callback: async (params: ElementStateModel): Promise<void> => {
-      if (!isAnimating && states && states[elementState]) {
-        setIsAnimating(true);
-        animationState.transitionTo(params as keyof TStyle);
-        await sleep({ duration });
-        setIsAnimating(false);
-      }
-    },
-    isLeading: true,
-  });
-
-  useImperativeHandle(ref, () => ({ to: _animate }));
+  useImperativeHandle(ref, () => ({
+    to: debounce({
+      callback: async (params) => animationState.animateTo(params as DynamicStyleProp),
+      isLeading: true,
+    }),
+    toState: debounce({
+      callback: async (params) => {
+        states && states[params] && animationState.animateTo(states[params] as DynamicStyleProp);
+      },
+      isLeading: true,
+    }),
+  }));
 
   return {
     animationProps: {
@@ -41,7 +37,6 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
       animateInitialState: isInitial,
       exit: states?.invisible || states?.inactive,
       from: states?.inactive as never,
-      onDidAnimate: () => (ref ? setIsAnimating(false) : undefined),
       transition: {
         delay,
         duration,

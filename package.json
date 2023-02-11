@@ -187,7 +187,7 @@
     "css-loader": "^6.7.3",
     "dotenv": "^16.0.3",
     "env-schema": "^5.2.0",
-    "esbuild": "^0.17.6",
+    "esbuild": "^0.16.17",
     "esbuild-node-externals": "^1.6.0",
     "esbuild-plugin-fileloc": "^0.0.6",
     "eslint": "8.33.0",
@@ -244,7 +244,7 @@
     "typescript": "latest",
     "vite": "^4.1.1",
     "vite-plugin-checker": "^0.5.5",
-    "vite-plugin-static-copy": "^0.13.0",
+    "vite-plugin-full-reload": "^1.0.5",
     "vite-tsconfig-paths": "^4.0.5",
     "vitest": "^0.28.4"
   },

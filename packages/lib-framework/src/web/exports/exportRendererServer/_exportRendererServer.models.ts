@@ -7,7 +7,7 @@ import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import type { ComponentType } from 'react';
 
 export interface _ExportRendererServerParamsModel
-  extends Pick<WebConfigParamsModel, 'favicoPath' | 'rootId'> {
+  extends Pick<WebConfigParamsModel, 'publicDir' | 'rootId'> {
   render: FCModel<
     ChildrenPropsModel & ExportRenderServerParamsModel & { route?: RouteParamsModel }
   >;

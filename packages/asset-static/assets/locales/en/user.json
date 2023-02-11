@@ -1,7 +1,7 @@
 {
   "labels": {
-    "email": "TRANSLATION_MISSING",
-    "first": "TRANSLATION_MISSING",
-    "last": "TRANSLATION_MISSING"
+    "email": "Email",
+    "first": "first name",
+    "last": "last name"
   }
 }
