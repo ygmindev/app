@@ -85,7 +85,6 @@ export const Button: SFCModel<ButtonPropsModel> = ({
       align={FONT_ALIGN.CENTER}
       color={color}
       colorRole={childColorRole}
-      isBold
       isCapitalize>
       {children}
     </TranslatableText>

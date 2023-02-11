@@ -100,6 +100,7 @@ export const FormContainer = <TType,>({
         onChange: handleChange(id),
         value: values ? (values as Record<string, undefined>)[id] : undefined,
       };
+
       const _onSubmit = async (): Promise<void> => handleSubmit();
 
       switch (field) {

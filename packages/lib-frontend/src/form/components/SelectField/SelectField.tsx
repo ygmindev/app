@@ -45,7 +45,7 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
   const _handleToggle = (isOpen?: boolean): void => {
     search('');
     setQuery('');
-    menuRef && menuRef.current && menuRef.current.setIsOpen(isOpen);
+    menuRef && menuRef.current && menuRef.current.toggle(isOpen);
   };
 
   const _handleSelect = async (): Promise<void> => {

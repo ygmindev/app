@@ -10,5 +10,5 @@ export const internationalizeConfig: InternationalizeConfigParamsModel = {
 
   namespaceDefault: CORE,
 
-  path: '/assets/locales/{{lng}}/{{ns}}.json',
+  path: '/locales/{{lng}}/{{ns}}.json',
 };

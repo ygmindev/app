@@ -8,8 +8,10 @@ import type {
 import type { ReactElement, ReactNode } from 'react';
 
 export interface MenuRefModel {
-  setIsOpen(isOpen?: boolean): void;
+  toggle(isOpen?: boolean): void;
 }
+
+export interface MenuOptionModel extends TranslatableOptionModel {}
 
 export interface MenuPropsModel
   extends Pick<DropdownPropsModel, 'isFullWidth' | 'onClose'>,
@@ -17,7 +19,7 @@ export interface MenuPropsModel
     RefPropsModel<MenuRefModel> {
   anchor(isOpen?: boolean): ReactElement<PressablePropsModel>;
   isSearchable?: boolean;
-  options: Array<TranslatableOptionModel>;
+  options: Array<MenuOptionModel>;
   renderOption?(option: TranslatableOptionModel): TranslatableTextModel;
   topElement?: ReactNode;
 }

@@ -1,9 +1,11 @@
-import { Protected } from '@lib/frontend/auth/components/Protected/Protected';
-import type { ProtectedPropsModel } from '@lib/frontend/auth/components/Protected/Protected.models';
+import { Protectable } from '@lib/frontend/auth/components/Protectable/Protectable';
+import type { ProtectablePropsModel } from '@lib/frontend/auth/components/Protectable/Protectable.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<ProtectedPropsModel>({ target: Protected });
+const { Component, displayName, testID } = withTestComponent<ProtectablePropsModel>({
+  target: Protectable,
+});
 
 describe(displayName, () => {
   test('works', async () => {

@@ -70,7 +70,7 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
       )}
 
       <OtpField
-        elementState={isLoading ? ELEMENT_STATE.LOADING : undefined}
+        elementState={isLoading ? ELEMENT_STATE.DISABLED : undefined}
         error={errors.otp}
         isAutoFocus
         onChange={_handleChange}

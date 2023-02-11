@@ -2,7 +2,7 @@ import {
   ANIMATION_STATES_APPEARABLE,
   ANIMATION_STATES_SLIDABLE,
 } from '@lib/frontend/animation/animation.constants';
-import { Protected } from '@lib/frontend/auth/components/Protected/Protected';
+import { Protectable } from '@lib/frontend/auth/components/Protectable/Protectable';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { MeasureModel, SFCModel } from '@lib/frontend/core/core.models';
 import type { RoutePropsModel } from '@lib/frontend/route/components/Route/Route.models';
@@ -16,7 +16,7 @@ export const Route: SFCModel<RoutePropsModel> = ({ children, route, ...props }) 
   const theme = useTheme();
   const [measure, setMeasure] = useState<MeasureModel>();
 
-  const Container = route.isProtected ? Protected : Fragment;
+  const Container = route.isProtectable ? Protectable : Fragment;
   const _children = (
     <>
       {route.element}

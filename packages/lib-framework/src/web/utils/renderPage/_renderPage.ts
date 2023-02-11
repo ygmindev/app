@@ -1,3 +1,5 @@
+import type { WritableStream } from 'node:stream/web';
+
 import type {
   _RenderPageModel,
   _RenderPageParamsModel,

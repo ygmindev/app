@@ -12059,7 +12059,6 @@ __metadata:
     uuid: ^9.0.0
     vite: ^4.1.1
     vite-plugin-checker: ^0.5.5
-    vite-plugin-full-reload: ^1.0.5
     vite-plugin-ssr: ^0.4.77
     vite-tsconfig-paths: ^4.0.5
     vitest: ^0.28.4
@@ -36578,18 +36577,6 @@ __metadata:
     vue-tsc:
       optional: true
   checksum: 632b8402de6b35184a8d762540f1a2b97842b6abdb9dfd2000048bd34fb6e310d51cc5f4c9744b3b63f86b8678f50392627e77ad0a6696c6308f513747b294f6
-  languageName: node
-  linkType: hard
-
-"vite-plugin-full-reload@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "vite-plugin-full-reload@npm:1.0.5"
-  dependencies:
-    picocolors: ^1.0.0
-    picomatch: ^2.3.1
-  peerDependencies:
-    vite: ^2 || ^3 || ^4
-  checksum: 250d50a2ce4b4de0f6855aaf191d3c37838da6795a113b1de28b390be71a0bb23351072fa8f4ab8ad4a07026ecb56b3d0358a1341288de9a736f99ae5a47d7ce
   languageName: node
   linkType: hard
 

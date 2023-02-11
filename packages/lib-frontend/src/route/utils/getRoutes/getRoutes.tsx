@@ -21,7 +21,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
 
         {
           element: <SettingsPage />,
-          isProtected: true,
+          isProtectable: true,
           pathname: SETTINGS,
         },
 

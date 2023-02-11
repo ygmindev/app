@@ -1,3 +1,4 @@
+import { AppHeader } from '@lib/frontend/app/containers/AppHeader/AppHeader';
 import { useIsInitialized } from '@lib/frontend/app/hooks/useIsInitialized/useIsInitialized';
 import type { AppLayoutPropsModel } from '@lib/frontend/app/layouts/AppLayout/AppLayout.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -12,7 +13,7 @@ export const AppLayout: SFCModel<AppLayoutPropsModel> = ({ children, testID, ...
       grow
       style={styles}
       testID={testID}>
-      {/* <AppHeader /> */}
+      <AppHeader />
 
       {/* {isInitialized ? (
         children

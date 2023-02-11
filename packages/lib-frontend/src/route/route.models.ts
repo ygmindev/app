@@ -14,7 +14,7 @@ export interface RouteModel {
   element?: ReactElement;
   isHeader?: boolean;
   isIndex?: boolean;
-  isProtected?: boolean;
+  isProtectable?: boolean;
   layout?: ReactElement<LayoutPropsModel>;
   pathname: string;
   routes?: Array<RouteModel>;

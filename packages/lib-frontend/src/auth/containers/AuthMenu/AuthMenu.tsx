@@ -25,13 +25,12 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
   const { push } = useRouter();
   const currentUser = useStore((state) => state.user.currentUser);
 
-  const { t } = useTranslation([AUTH, SETTINGS]);
+  useTranslation([AUTH, SETTINGS]);
 
-  const options = useMemo(
+  const _options = useMemo(
     () =>
       AUTH_MENU_OPTIONS.map((option) => ({
         ...option,
-        label: t(option.label),
         onPress:
           option.id === SETTINGS
             ? () => push({ pathname: SETTINGS })
@@ -50,7 +49,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
           icon="person"
         />
       )}
-      options={options}
+      options={_options}
       style={styles}
       topElement={
         currentUser ? (

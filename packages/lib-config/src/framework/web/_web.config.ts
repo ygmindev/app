@@ -7,7 +7,6 @@ import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import react from '@vitejs/plugin-react';
 import type { UserConfig, WatchOptions } from 'vite';
-import FullReload from 'vite-plugin-full-reload';
 import ssr from 'vite-plugin-ssr/plugin';
 
 export const _webConfig = ({ isReact, isSsr, publicDir }: _WebConfigParamsModel): UserConfig =>
@@ -19,8 +18,6 @@ export const _webConfig = ({ isReact, isSsr, publicDir }: _WebConfigParamsModel)
         plugins: [
           isReact && react(),
           isSsr && ssr({ includeAssetsImportedByServer: true, prerender: { partial: true } }),
-          bundleConfig.build?.watch?.include &&
-            FullReload(bundleConfig.build?.watch.include as Array<string>),
         ].filter(Boolean),
 
         publicDir: toRelative({ from: fromWorking(), to: fromStatic(publicDir) }),
