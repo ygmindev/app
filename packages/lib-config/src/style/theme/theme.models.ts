@@ -1,3 +1,4 @@
+import type { STYLE_BRIGHTNESS } from '@lib/frontend/style/style.constants';
 import type {
   ThemeBasicSizeModel,
   ThemeColorModel,
@@ -20,8 +21,14 @@ export interface ThemeConfigParamsModel {
     disabledOpacity: number;
 
     palette: {
-      dark: Record<ThemeColorModel, Record<ThemeRoleModel, Omit<PaletteParamsModel, 'color'>>>;
-      light: Record<ThemeColorModel, Record<ThemeRoleModel, Omit<PaletteParamsModel, 'color'>>>;
+      [STYLE_BRIGHTNESS.DARK]: Record<
+        ThemeColorModel,
+        Record<ThemeRoleModel, Omit<PaletteParamsModel, 'color'>>
+      >;
+      [STYLE_BRIGHTNESS.LIGHT]: Record<
+        ThemeColorModel,
+        Record<ThemeRoleModel, Omit<PaletteParamsModel, 'color'>>
+      >;
     };
 
     tone: Record<ThemeColorModel, string>;

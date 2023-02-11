@@ -1,11 +1,12 @@
 import type { ReducerModel } from '@lib/frontend/state/state.models';
+import type { StyleBrightnessModel } from '@lib/frontend/style/style.models';
 
 export interface StyleStateModel {
-  isDark: boolean;
+  brightness?: StyleBrightnessModel;
 }
 
 export interface StyleActionsParamsModel {
-  isDarkSet: boolean;
+  brightnessSet: StyleBrightnessModel;
 }
 
 export interface StyleReducerModel extends ReducerModel<StyleStateModel, StyleActionsParamsModel> {}

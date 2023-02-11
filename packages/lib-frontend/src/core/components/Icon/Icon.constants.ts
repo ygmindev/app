@@ -33,7 +33,7 @@ export const IONIC_ICONS = {
   chip: 'hardware-chip-outline',
   cloud: 'cloud-outline',
   code: 'code-slash-outline',
-  contrast: 'contrast',
+  contrast: 'contrast-outline',
   cube: 'cube-outline',
   dark: 'moon',
   dashboard: 'grid-outline',
@@ -106,9 +106,15 @@ export const FONTAWESOME_ICONS = {
   id: 'id-card-o',
 };
 
+export const MATERIAL_ICONS = {
+  brightness: 'brightness-4',
+  device: 'devices-other',
+};
+
 export const ICONS = {
   ...IONIC_ICONS,
   ...FONTAWESOME_ICONS,
+  ...MATERIAL_ICONS,
 };
 
 export const ICON_FONT_SIZE_OFFSET = 4;

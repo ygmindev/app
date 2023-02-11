@@ -13,5 +13,5 @@ export interface ReducerModel<TType extends object, TParams extends object> {
 }
 
 export type ActionsModel<TParams extends object> = {
-  [TKey in keyof TParams]: (params: TParams[TKey]) => void;
+  [TKey in keyof TParams]: (params?: TParams[TKey]) => void;
 };

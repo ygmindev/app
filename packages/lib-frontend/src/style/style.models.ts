@@ -1,4 +1,5 @@
 import type {
+  STYLE_BRIGHTNESS,
   THEME_BASIC_SIZE,
   THEME_COLOR,
   THEME_ROLE,
@@ -22,3 +23,5 @@ export type ThemeSizeModel = `${THEME_SIZE}`;
 export interface StylePropsModel<TType extends StyleModel = ViewStyleModel> {
   style?: TType | Array<TType> | null;
 }
+
+export type StyleBrightnessModel = `${STYLE_BRIGHTNESS}`;

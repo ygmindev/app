@@ -3,8 +3,7 @@
     "cancel": "cancel",
     "continue": "continue",
     "noResult": "no result",
-    "tryAgain": "try again",
-    "submit": "submit"
+    "tryAgain": "try again"
   },
   "messages": {
     "errorForbidden": "TRANSLATION_MISSING",
@@ -19,7 +18,5 @@
     "validateNotEmpty": "TRANSLATION_MISSING",
     "validateRange": "TRANSLATION_MISSING",
     "validateZipCode": "TRANSLATION_MISSING"
-  },
-  "Email": "Email",
-  "submit": "submit"
+  }
 }

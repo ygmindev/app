@@ -35,7 +35,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
       ignoreAttributes
       interactive
       maxWidth={maxWidth || '100%'}
-      offset={[0, 0]}
+      offset={[theme.shape.spacing.m, theme.shape.spacing.m]}
       onClickOutside={onClose}
       placement={direction}
       popperOptions={{

@@ -12,6 +12,11 @@ export const sheetConfig: SheetConfigParamsModel = (theme) => `
     src: url("/fonts/FontAwesome.ttf") format("truetype");
   }
 
+  @font-face {
+    font-family: 'MaterialIcons';
+    src: url("/fonts/MaterialIcons.ttf") format("truetype");
+  }
+
   html {
     display: flex;
     flex-direction: column;

@@ -1,5 +1,5 @@
 import type { ThemeConfigParamsModel } from '@lib/config/style/theme/theme.models';
-import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { STYLE_BRIGHTNESS, THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_FAMILY } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
@@ -16,7 +16,7 @@ export const themeConfig: ThemeConfigParamsModel = {
     disabledOpacity: 0.7,
 
     palette: {
-      dark: {
+      [STYLE_BRIGHTNESS.DARK]: {
         [THEME_COLOR.ERROR]: {
           main: { lightness: 80 },
           mainContrast: { lightness: 20 },
@@ -54,7 +54,8 @@ export const themeConfig: ThemeConfigParamsModel = {
           mutedContrast: { lightness: 90 },
         },
       },
-      light: {
+
+      [STYLE_BRIGHTNESS.LIGHT]: {
         [THEME_COLOR.ERROR]: {
           main: { lightness: 50 },
           mainContrast: { lightness: 100 },

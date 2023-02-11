@@ -2,12 +2,12 @@ import type { StyleReducerModel } from '@lib/frontend/style/stores/styleStore/st
 
 export const STYLE_REDUCER: StyleReducerModel = {
   actions: {
-    isDarkSet: (store, value) => {
-      store.set('isDark', value);
+    brightnessSet: (store, value) => {
+      store.set('brightness', value);
     },
   },
 
   initialState: {
-    isDark: false,
+    brightness: undefined,
   },
 };

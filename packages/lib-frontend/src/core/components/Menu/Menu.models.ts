@@ -5,16 +5,20 @@ import type {
   TranslatableOptionModel,
   TranslatableTextModel,
 } from '@lib/frontend/locale/locale.models';
+import type { CallableModel } from '@lib/shared/core/core.models';
 import type { ReactElement, ReactNode } from 'react';
 
 export interface MenuRefModel {
+  isOpen: CallableModel<boolean>;
   toggle(isOpen?: boolean): void;
 }
 
-export interface MenuOptionModel extends TranslatableOptionModel {}
+export interface MenuOptionModel extends TranslatableOptionModel {
+  subOptions?: Array<MenuOptionModel>;
+}
 
 export interface MenuPropsModel
-  extends Pick<DropdownPropsModel, 'isFullWidth' | 'onClose'>,
+  extends Pick<DropdownPropsModel, 'isFullWidth' | 'onClose' | 'direction'>,
     Omit<FieldPropsModel, 'id'>,
     RefPropsModel<MenuRefModel> {
   anchor(isOpen?: boolean): ReactElement<PressablePropsModel>;

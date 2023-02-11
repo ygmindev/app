@@ -27,3 +27,8 @@ export enum THEME_SIZE {
   XLARGE = 'xl',
   XSMALL = 'xs',
 }
+
+export enum STYLE_BRIGHTNESS {
+  DARK = 'dark',
+  LIGHT = 'light',
+}

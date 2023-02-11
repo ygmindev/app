@@ -5,5 +5,4 @@ export interface UseThemeModel extends Omit<ThemeConfigParamsModel, 'colors'> {
   colors: Pick<ThemeConfigParamsModel['colors'], 'activeLightness' | 'disabledOpacity'> & {
     tone: Record<ThemeColorModel, Record<ThemeRoleModel, string>>;
   };
-  isDark: boolean;
 }

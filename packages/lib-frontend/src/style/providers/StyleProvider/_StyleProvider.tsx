@@ -1,5 +1,6 @@
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import type { _StyleProviderPropsModel } from '@lib/frontend/style/providers/StyleProvider/_StyleProvider.models';
+import { STYLE_BRIGHTNESS } from '@lib/frontend/style/style.constants';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import type { ProviderProps } from 'react-native-paper';
 import { DefaultTheme, Provider } from 'react-native-paper';
@@ -10,12 +11,13 @@ export const _StyleProvider = composeComponent<_StyleProviderPropsModel, Provide
 
   getProps: ({ children, value }) => {
     if (value) {
+      const { brightness, theme } = value || {};
       const fontStyle: MD3Type = {
-        fontFamily: value.font.fontFamily.main,
-        fontSize: value.font.size.m,
-        fontWeight: value.font.weight,
+        fontFamily: theme.font.fontFamily.main,
+        fontSize: theme.font.size.m,
+        fontWeight: theme.font.weight,
         letterSpacing: 0,
-        lineHeight: value.font.lineHeight,
+        lineHeight: theme.font.lineHeight,
       };
 
       return {
@@ -28,36 +30,36 @@ export const _StyleProvider = composeComponent<_StyleProviderPropsModel, Provide
               },
 
               colors: {
-                background: value.colors.tone.neutral.main,
-                error: value.colors.tone.error.main,
-                errorContainer: value.colors.tone.error.muted,
-                onBackground: value.colors.tone.neutral.mainContrast,
-                onError: value.colors.tone.error.mainContrast,
-                onErrorContainer: value.colors.tone.error.mutedContrast,
-                onPrimary: value.colors.tone.primary.mainContrast,
-                onPrimaryContainer: value.colors.tone.primary.mutedContrast,
-                onSecondary: value.colors.tone.secondary.mainContrast,
-                onSecondaryContainer: value.colors.tone.secondary.mutedContrast,
-                outline: value.colors.tone.neutral.muted,
-                primary: value.colors.tone.primary.main,
-                primaryContainer: value.colors.tone.primary.muted,
-                secondary: value.colors.tone.secondary.main,
-                secondaryContainer: value.colors.tone.secondary.muted,
-                shadow: value.colors.tone.neutral.muted,
+                background: theme.colors.tone.neutral.main,
+                error: theme.colors.tone.error.main,
+                errorContainer: theme.colors.tone.error.muted,
+                onBackground: theme.colors.tone.neutral.mainContrast,
+                onError: theme.colors.tone.error.mainContrast,
+                onErrorContainer: theme.colors.tone.error.mutedContrast,
+                onPrimary: theme.colors.tone.primary.mainContrast,
+                onPrimaryContainer: theme.colors.tone.primary.mutedContrast,
+                onSecondary: theme.colors.tone.secondary.mainContrast,
+                onSecondaryContainer: theme.colors.tone.secondary.mutedContrast,
+                outline: theme.colors.tone.neutral.muted,
+                primary: theme.colors.tone.primary.main,
+                primaryContainer: theme.colors.tone.primary.muted,
+                secondary: theme.colors.tone.secondary.main,
+                secondaryContainer: theme.colors.tone.secondary.muted,
+                shadow: theme.colors.tone.neutral.muted,
               },
 
-              dark: value.isDark,
+              dark: brightness === STYLE_BRIGHTNESS.DARK,
 
               fonts: {
-                bodyLarge: { ...fontStyle, fontSize: value.font.size.l },
+                bodyLarge: { ...fontStyle, fontSize: theme.font.size.l },
                 bodyMedium: fontStyle,
-                bodySmall: { ...fontStyle, fontSize: value.font.size.s },
-                labelLarge: { ...fontStyle, fontSize: value.font.size.l },
+                bodySmall: { ...fontStyle, fontSize: theme.font.size.s },
+                labelLarge: { ...fontStyle, fontSize: theme.font.size.l },
                 labelMedium: fontStyle,
-                labelSmall: { ...fontStyle, fontSize: value.font.size.s },
+                labelSmall: { ...fontStyle, fontSize: theme.font.size.s },
               },
 
-              roundness: value.shape.borderRadius,
+              roundness: theme.shape.borderRadius,
             },
 
             DefaultTheme,
