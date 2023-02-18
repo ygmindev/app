@@ -17,7 +17,7 @@ const tasks: Array<TaskParamsModel<unknown>> = [
     task: async () => {
       await runCommands({
         commands: [
-          { command: 'run sld', completeMessage: 'Server ready' },
+          { command: 'run bld', completeMessage: 'Server ready' },
           { command: 'run awd', completeMessage: 'Compiled successfully' },
         ],
       });
