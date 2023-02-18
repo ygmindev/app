@@ -8,7 +8,6 @@ import type { NavigationBarPropsModel } from '@lib/frontend/core/containers/Navi
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCPropsModel } from '@lib/frontend/core/core.models';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
-import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
 import { BORDER_DIRECTION } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
@@ -21,6 +20,7 @@ import { useMemo } from 'react';
 
 export const NavigationBar = ({
   children,
+  onChange,
   options,
   testID,
   value,
@@ -62,22 +62,20 @@ export const NavigationBar = ({
               isFullWidth
               key={toString(k)}
               spacing={THEME_BASIC_SIZE.SMALL}>
-              {v.map(({ icon, id, label, onPress }) => {
-                const _pathname = trimPathname(id);
-                return (
-                  <Button
-                    elementState={
-                      value && _pathname === trimPathname(value) ? ELEMENT_STATE.ACTIVE : undefined
-                    }
-                    icon={icon}
-                    key={id}
-                    onPress={onPress}
-                    testID={id}
-                    type={BUTTON_TYPE.TRANSPARENT}>
-                    {label}
-                  </Button>
-                );
-              })}
+              {v.map(({ icon, id, label, onPress }) => (
+                <Button
+                  elementState={value && id === value ? ELEMENT_STATE.ACTIVE : undefined}
+                  icon={icon}
+                  key={id}
+                  onPress={async () => {
+                    onPress && (await onPress());
+                    onChange && onChange(id);
+                  }}
+                  testID={id}
+                  type={BUTTON_TYPE.TRANSPARENT}>
+                  {label}
+                </Button>
+              ))}
             </Wrapper>
           );
           return k ? (

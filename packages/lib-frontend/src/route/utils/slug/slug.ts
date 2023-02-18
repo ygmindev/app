@@ -3,6 +3,7 @@ import type { SlugModel, SlugParamsModel } from '@lib/frontend/route/utils/slug/
 export const slug = (params: SlugParamsModel): SlugModel =>
   params
     .normalize('NFKD')
+    .replace(/([A-Z])/g, '-$1')
     .toLowerCase()
     .trim()
     .replace(/\s+/g, '-')

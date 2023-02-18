@@ -16,5 +16,6 @@ export class UserResolver
     ResourceService: UserService,
     getAccess: ACCESS_LEVEL.PUBLIC,
     name: USER_RESOURCE_NAME,
+    updateAccess: ACCESS_LEVEL.PROTECTED,
   })
   implements EntityResourceResolverModel<UserModel, UserFormModel> {}

@@ -1,12 +1,12 @@
-import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import type { _GraphqlConfigParamsModel } from '@lib/config/http/graphql/_graphql.models';
 import type { GraphQLSchema } from 'graphql';
+import type { BuildSchemaOptions } from 'type-graphql';
 import { buildSchemaSync } from 'type-graphql';
 
 export const _graphqlConfig = ({
   authorize,
   container,
-  resolverExtension,
+  resolvers,
   schemaPath,
 }: _GraphqlConfigParamsModel): GraphQLSchema =>
   buildSchemaSync({
@@ -14,7 +14,7 @@ export const _graphqlConfig = ({
     container,
     emitSchemaFile: schemaPath,
     nullableByDefault: true,
-    resolvers: [fromPackages(`*/src/**/*.${resolverExtension}`)],
+    resolvers: resolvers as unknown as BuildSchemaOptions['resolvers'],
     validate: {
       forbidUnknownValues: false,
     },

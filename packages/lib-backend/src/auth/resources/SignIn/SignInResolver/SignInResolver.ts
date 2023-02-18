@@ -33,9 +33,14 @@ export class SignInResolver
 {
   @withInject(SignInService) protected _signInService!: SignInService;
 
-  @withOutput({ Resource: SignIn, method: RESOURCE_METHOD_TYPE.UPDATE, name: USERNAME_UPDATE })
+  @withOutput({
+    Resource: SignIn,
+    level: ACCESS_LEVEL.PROTECTED,
+    method: RESOURCE_METHOD_TYPE.CREATE,
+    name: USERNAME_UPDATE,
+  })
   async usernameUpdate(
-    @withInput({ Resource: SignInForm, method: RESOURCE_METHOD_TYPE.UPDATE, name: USERNAME_UPDATE })
+    @withInput({ Resource: SignInForm, method: RESOURCE_METHOD_TYPE.CREATE, name: USERNAME_UPDATE })
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel>,
     @withContext()
     context: ContextModel,

@@ -23,5 +23,6 @@
     "validateRange": "TRANSLATION_MISSING",
     "validateZipCode": "TRANSLATION_MISSING"
   },
-  "submit": "submit"
+  "submit": "submit",
+  "email": "email"
 }

@@ -15,17 +15,28 @@ const _getRoute = (routes?: Array<RouteModel>, root = ''): Array<RouteModel> =>
   reduce(
     routes,
     (result, { pathname, ...route }) => {
+      const _isLeaf = !route.routes;
       const _root = trimEnd(pathname, '/*');
-      const _pathname = trimPathname(route.routes ? `${_root}/*` : pathname);
-      const _route: RouteModel = { ...route, pathname: _pathname, root };
+      const _pathname = trimPathname(_isLeaf ? pathname : `${_root}/*`);
+      const _route: RouteModel = {
+        ...route,
+        header: _isLeaf ? route.header : undefined,
+        pathname: _pathname,
+        root,
+      };
       return [
         ...result,
         {
           ..._route,
           element: (
             <Route route={_route}>
-              {_route.routes && (
-                <Router routes={_getRoute(route.routes, trimPathname(`${root}/${_root}`))} />
+              {_isLeaf ? null : (
+                <Router
+                  routes={_getRoute(
+                    route.routes?.map((child) => ({ ...child, header: _route.header })),
+                    trimPathname(`${root}/${_root}`),
+                  )}
+                />
               )}
             </Route>
           ),

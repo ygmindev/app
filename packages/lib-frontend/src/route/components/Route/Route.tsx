@@ -8,7 +8,6 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import type { RoutePropsModel } from '@lib/frontend/route/components/Route/Route.models';
 import { RouteHeader } from '@lib/frontend/route/containers/RouteHeader/RouteHeader';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
-import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { cloneElement, Fragment, useMemo } from 'react';
@@ -21,7 +20,7 @@ export const Route: SFCModel<RoutePropsModel> = ({ children, route, ...props }) 
   const theme = useTheme();
 
   const _isActive = useMemo(
-    () => isActive({ pathname: trimPathname(`${route.root}/${route.pathname}`) }),
+    () => isActive({ pathname: `${route.root}/${route.pathname}` }),
     [isActive, route],
   );
 

@@ -11,6 +11,7 @@ import type { ReactElement } from 'react';
 export const NavigationLayout = <TOption extends TranslatableOptionModel>({
   barElement,
   children,
+  onChange,
   options,
   value,
   ...props
@@ -28,6 +29,7 @@ export const NavigationLayout = <TOption extends TranslatableOptionModel>({
       spacing
       style={styles}>
       <NavigationBar
+        onChange={onChange}
         options={options}
         value={value}>
         {barElement}

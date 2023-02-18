@@ -9,6 +9,7 @@ export const _viewParams: ComposeComponentParamsModel<_ViewPropsModel, ViewProps
 
   getProps: ({
     children,
+    isFocusable = false,
     onMeasure,
     onMouseEnter,
     onMouseLeave,
@@ -16,6 +17,8 @@ export const _viewParams: ComposeComponentParamsModel<_ViewPropsModel, ViewProps
     onResponderRelease,
   }) => ({
     children,
+
+    focusable: isFocusable,
 
     onLayout: onMeasure
       ? (e) => {

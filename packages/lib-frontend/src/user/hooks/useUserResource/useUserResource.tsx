@@ -12,7 +12,18 @@ export const useUserResource = (): UseUserResourceModel => {
     name: USER_RESOURCE_NAME,
   });
 
+  const { query: update } = useResourceMethod<
+    RESOURCE_METHOD_TYPE.UPDATE,
+    UserModel,
+    UserFormModel
+  >({
+    fields: [{ result: USER_FIELDS }],
+    method: RESOURCE_METHOD_TYPE.UPDATE,
+    name: USER_RESOURCE_NAME,
+  });
+
   return {
     get,
+    update,
   };
 };

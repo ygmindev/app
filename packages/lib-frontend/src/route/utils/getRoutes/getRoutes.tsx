@@ -1,5 +1,6 @@
 import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
 import { SIGN_IN } from '@lib/frontend/auth/auth.constants';
+import { SIGN_IN_FORM_MODE } from '@lib/frontend/auth/containers/SignInForm/SignInForm.constants';
 import { SignInPage } from '@lib/frontend/auth/pages/SignInPage/SignInPage';
 import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayout';
 import { DEV } from '@lib/frontend/dev/dev.constants';
@@ -14,7 +15,7 @@ import type {
 import { SettingsPage } from '@lib/frontend/settings/pages/SettingsPage/SettingsPage';
 import { AccountPage } from '@lib/frontend/user/pages/AccountPage/AccountPage';
 import { NameFormPage } from '@lib/frontend/user/pages/NameFormPage/NameFormPage';
-import { ACCOUNT, NAME } from '@lib/frontend/user/user.constants';
+import { ACCOUNT, EMAIL, NAME } from '@lib/frontend/user/user.constants';
 import { AUTH } from '@lib/shared/auth/auth.constants';
 import { CORE } from '@lib/shared/core/core.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
@@ -60,13 +61,21 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                   pathname: NAME,
                   title: ({ t }) => t('user:labels.name'),
                 },
+
+                {
+                  element: <SignInPage mode={SIGN_IN_FORM_MODE.UPDATE} />,
+                  layout: <CenterLayout />,
+                  ns: [AUTH, USER],
+                  pathname: EMAIL,
+                  title: ({ t }) => t('user:labels.name'),
+                },
               ],
             },
           ],
         },
 
         {
-          element: <SignInPage />,
+          element: <SignInPage mode={SIGN_IN_FORM_MODE.CREATE} />,
           ns: [AUTH],
           pathname: SIGN_IN,
         },

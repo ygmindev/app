@@ -146,10 +146,11 @@ export abstract class _Database implements DatabaseModel {
           Object.keys(_update).forEach((key) => {
             const _key = key as string & keyof UpdateModel<TType>;
             if (!_key.startsWith('$')) {
+              _update['$set'] = {
+                ...(_update['$set'] || {}),
+                [_key]: _update[_key],
+              } as PartialDeepModel<EntityResourceDataModel<TType>>;
               delete _update[_key];
-              _update['$set'] = { [_key]: _update[_key] } as PartialDeepModel<
-                EntityResourceDataModel<TType>
-              >;
             }
           });
           const result = (

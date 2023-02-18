@@ -1,5 +1,6 @@
 import { OtpForm } from '@lib/frontend/auth/containers/OtpForm/OtpForm';
 import type { OtpFormModel } from '@lib/frontend/auth/containers/OtpForm/OtpForm.models';
+import { SIGN_IN_FORM_MODE } from '@lib/frontend/auth/containers/SignInForm/SignInForm.constants';
 import type { SignInFormPropsModel } from '@lib/frontend/auth/containers/SignInForm/SignInForm.models';
 import { UsernameForm } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm';
 import type { UsernameFormModel } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.models';
@@ -11,17 +12,13 @@ import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import type { SignInFormModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 
-export const SignInForm: SFCModel<SignInFormPropsModel> = ({
-  isCheckIfNotExists,
-  testID,
-  ...props
-}) => {
+export const SignInForm: SFCModel<SignInFormPropsModel> = ({ mode, testID, ...props }) => {
   const { styles } = useStyles({ props });
   const { replace } = useRouter();
-  const { signIn } = useSignInResource();
+  const { signIn, usernameUpdate } = useSignInResource();
 
   const _handleSubmit = async (form: SignInFormModel): Promise<void> => {
-    await signIn(form);
+    await (mode === SIGN_IN_FORM_MODE.CREATE ? signIn(form) : usernameUpdate(form));
     replace({ pathname: '/' });
   };
 
@@ -33,7 +30,10 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({
       <StepForm<SignInFormModel, [UsernameFormModel, OtpFormModel]>
         onSubmit={_handleSubmit}
         steps={[
-          { element: <UsernameForm isCheckIfNotExists={isCheckIfNotExists} />, id: 'username' },
+          {
+            element: <UsernameForm isCheckIfNotExists={mode === SIGN_IN_FORM_MODE.UPDATE} />,
+            id: 'username',
+          },
           { element: <OtpForm />, id: 'otp' },
         ]}
       />

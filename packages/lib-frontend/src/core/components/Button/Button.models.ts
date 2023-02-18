@@ -11,7 +11,10 @@ export type ButtonTypeModel = `${BUTTON_TYPE}`;
 export interface ButtonPropsModel
   extends ChildrenPropsModel<TranslatableTextModel>,
     Pick<IconPropsModel, 'icon'>,
-    Pick<PressablePropsModel, 'onPress' | 'confirmMessage' | 'isFullWidth' | 'align'>,
+    Pick<
+      PressablePropsModel,
+      'onPress' | 'confirmMessage' | 'isFocusable' | 'isFullWidth' | 'align'
+    >,
     AnimatablePropsModel {
   color?: ThemeColorModel;
   size?: ThemeBasicSizeModel;

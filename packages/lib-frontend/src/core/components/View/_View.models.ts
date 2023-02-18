@@ -7,6 +7,7 @@ import type { StylePropsModel, ViewStyleModel } from '@lib/frontend/style/style.
 import type { CallableModel, CallablePromiseModel } from '@lib/shared/core/core.models';
 
 export interface _ViewPropsModel extends ChildrenPropsModel, StylePropsModel<ViewStyleModel> {
+  isFocusable?: boolean;
   isHorizontalScrollable?: boolean;
   isVerticalScrollable?: boolean;
   onMeasure?(measure: MeasureModel): void;

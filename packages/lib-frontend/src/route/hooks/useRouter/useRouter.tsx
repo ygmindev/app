@@ -19,7 +19,12 @@ export const useRouter = <TParams = undefined,>(): UseRouterModel<TParams> => {
   return {
     back,
 
-    isActive,
+    isActive: ({ from, pathname, ...params }) =>
+      isActive({
+        from: from ? trimPathname(from) : undefined,
+        pathname: trimPathname(pathname),
+        ...params,
+      }),
 
     location,
 
