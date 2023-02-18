@@ -6,11 +6,10 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { USER_TABLE_PROPS } from '@lib/frontend/user/containers/UserTable/UserTable.constants';
 import type { UserTablePropsModel } from '@lib/frontend/user/containers/UserTable/UserTable.models';
 import type { UserFormModel, UserModel } from '@lib/shared/user/resources/User/User.models';
-import { USER } from '@lib/shared/user/user.constants';
 
 export const UserTable: SFCModel<UserTablePropsModel> = ({ testID, ...props }) => {
   const { styles } = useStyles({ props });
-  useTranslation([USER]);
+  useTranslation([]);
   return (
     <Wrapper
       grow

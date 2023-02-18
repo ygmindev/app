@@ -21,7 +21,7 @@ export const Appearable: SFCModel<AppearablePropsModel> = ({
       states: merge({ values: [ANIMATION_STATES_APPEARABLE, ANIMATION_STATES_SCALABLE] }),
       ...animation,
     }}
-    elementState={isVisible ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INVISIBLE}>
+    elementState={isVisible ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.EXIT}>
     {children}
   </Wrapper>
 );

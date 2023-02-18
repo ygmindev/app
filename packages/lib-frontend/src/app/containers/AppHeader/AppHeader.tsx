@@ -5,6 +5,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { BORDER_DIRECTION } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const AppHeader: SFCModel<AppHeaderPropsModel> = ({ testID, ...props }) => {
@@ -12,7 +13,9 @@ export const AppHeader: SFCModel<AppHeaderPropsModel> = ({ testID, ...props }) =
   const theme = useTheme();
   return (
     <Wrapper
+      border={BORDER_DIRECTION.BOTTOM}
       height={theme.layout.header.height}
+      isFullWidth
       isRowAlign
       pHorizontal
       position={SHAPE_POSITION.RELATIVE}

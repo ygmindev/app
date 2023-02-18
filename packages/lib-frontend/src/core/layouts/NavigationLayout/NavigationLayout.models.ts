@@ -1,10 +1,14 @@
-import type { LayoutPropsModel, OptionModel } from '@lib/frontend/core/core.models';
+import type { LayoutPropsModel } from '@lib/frontend/core/core.models';
+import type { TranslatableOptionModel } from '@lib/frontend/locale/locale.models';
+import type { ReactNode } from 'react';
 
-export interface NavigationLayoutPropsModel<TType extends OptionModel>
+export interface NavigationLayoutPropsModel<TType extends TranslatableOptionModel>
   extends LayoutPropsModel,
-    NavigationPropsModel<TType> {}
+    NavigationPropsModel<TType> {
+  barElement?: ReactNode;
+}
 
-export interface NavigationPropsModel<TType extends OptionModel> {
+export interface NavigationPropsModel<TType extends TranslatableOptionModel> {
   options?: Array<TType>;
   value?: string;
 }

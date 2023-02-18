@@ -1,5 +1,4 @@
 import type { _UseRouterModel } from '@lib/frontend/route/hooks/useRouter/_useRouter.models';
-import type { CallableModel } from '@lib/shared/core/core.models';
 
 export interface PathMatchParamsModel {
   from: string;
@@ -7,6 +6,4 @@ export interface PathMatchParamsModel {
   to?: string;
 }
 
-export interface UseRouterModel<TParams = undefined> extends _UseRouterModel<TParams> {
-  up?: CallableModel;
-}
+export interface UseRouterModel<TParams = undefined> extends _UseRouterModel<TParams> {}

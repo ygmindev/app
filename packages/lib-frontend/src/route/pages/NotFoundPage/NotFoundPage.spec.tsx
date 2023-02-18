@@ -1,10 +1,10 @@
-import { NotFound } from '@lib/frontend/route/containers/NotFound/NotFound';
-import type { NotFoundPropsModel } from '@lib/frontend/route/containers/NotFound/NotFound.models';
+import { NotFoundPage } from '@lib/frontend/route/pages/NotFoundPage/NotFoundPage';
+import type { NotFoundPagePropsModel } from '@lib/frontend/route/pages/NotFoundPage/NotFoundPage.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<NotFoundPropsModel>({
-  target: NotFound,
+const { Component, displayName, testID } = withTestComponent<NotFoundPagePropsModel>({
+  target: NotFoundPage,
 });
 
 describe(displayName, () => {

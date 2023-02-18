@@ -10,8 +10,11 @@ export const _useRouter = <TParams = undefined,>(): _UseRouterModel<TParams> => 
   return {
     back: () => navigate(-1),
 
-    isActive: ({ from, isExact, pathname }) => {
-      const match = matchPath({ end: isExact, path: pathname }, from || location.pathname);
+    isActive: ({ from, isExact = false, pathname }) => {
+      const match = matchPath(
+        { end: isExact, path: pathname.replaceAll('*', '') },
+        from || location.pathname,
+      );
       return match !== null;
     },
 

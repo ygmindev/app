@@ -170,7 +170,7 @@ export const FormContainer = <TType,>({
             icon="chevronLeft"
             onPress={onCancel}
             type={BUTTON_TYPE.TRANSPARENT}>
-            {t(cancelLabel || 'core:labels.cancel')}
+            {cancelLabel || t('core:labels.cancel')}
           </Button>
         )}
 
@@ -178,7 +178,7 @@ export const FormContainer = <TType,>({
           elementState={_elementState}
           icon="chevronRight"
           onPress={handleSubmit}>
-          {t(submitLabel || 'core:labels.submit')}
+          {submitLabel || t('core:labels.submit')}
         </Button>
       </Wrapper>
     </Wrapper>

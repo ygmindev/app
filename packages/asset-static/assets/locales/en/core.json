@@ -1,9 +1,13 @@
 {
   "labels": {
     "cancel": "cancel",
+    "change": "change",
     "continue": "continue",
     "noResult": "no result",
-    "tryAgain": "try again"
+    "submit": "submit",
+    "tryAgain": "try again",
+    "first": "labels.first",
+    "last": "labels.last"
   },
   "messages": {
     "errorForbidden": "TRANSLATION_MISSING",
@@ -18,5 +22,6 @@
     "validateNotEmpty": "TRANSLATION_MISSING",
     "validateRange": "TRANSLATION_MISSING",
     "validateZipCode": "TRANSLATION_MISSING"
-  }
+  },
+  "submit": "submit"
 }

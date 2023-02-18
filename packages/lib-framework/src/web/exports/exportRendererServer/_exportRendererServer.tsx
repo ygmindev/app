@@ -61,10 +61,7 @@ export const _exportRendererServer = ({
         enableEagerStreaming: true,
         locale: {
           lang: locale?.lang,
-          store:
-            process.env.NODE_ENV === 'development'
-              ? undefined
-              : locale?.i18n && getLocaleStoreFromI18n({ i18n: locale?.i18n }),
+          store: locale?.i18n && getLocaleStoreFromI18n({ i18n: locale?.i18n }),
         },
         redirectTo: context.redirect,
       }),

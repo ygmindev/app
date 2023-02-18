@@ -1,8 +1,8 @@
 import type { OptionModel, SFCModel } from '@lib/frontend/core/core.models';
 import { NavigationLayout } from '@lib/frontend/core/layouts/NavigationLayout/NavigationLayout';
 import { getComponentDisplayName } from '@lib/frontend/core/utils/getComponentDisplayName/getComponentDisplayName';
-import { NotFound } from '@lib/frontend/route/containers/NotFound/NotFound';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
+import { NotFoundPage } from '@lib/frontend/route/pages/NotFoundPage/NotFoundPage';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { Library } from '@lib/library/core/components/Library/Library';
@@ -58,7 +58,7 @@ export const LibraryPage: SFCModel<LibraryPagePropsModel> = ({ testID, ...props 
           // propTypes={_propTypes}
         />
       ) : (
-        <NotFound />
+        <NotFoundPage />
       )}
     </NavigationLayout>
   );

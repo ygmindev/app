@@ -7,7 +7,6 @@ import type {
 } from '@lib/frontend/form/hooks/useForm/useForm.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
-import { CORE } from '@lib/shared/core/core.constants';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import isFunction from 'lodash/isFunction';
@@ -20,7 +19,7 @@ export const useForm = <TType extends unknown>({
   onSubmit,
   validators,
 }: UseFormParamsModel<TType>): UseFormModel<TType> => {
-  const { t } = useTranslation([CORE]);
+  const { t } = useTranslation();
   const { handleError } = useErrorBoundary();
 
   const _validate = <TValue,>(

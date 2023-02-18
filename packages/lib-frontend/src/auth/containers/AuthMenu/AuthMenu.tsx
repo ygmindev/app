@@ -20,14 +20,16 @@ import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import type { StyleBrightnessModel } from '@lib/frontend/style/style.models';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { AUTH, SIGN_OUT } from '@lib/shared/auth/auth.constants';
+import { SIGN_OUT } from '@lib/shared/auth/auth.constants';
 import type { PartialModel } from '@lib/shared/core/core.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
-import { SETTINGS } from '@lib/shared/settings/settings.constants';
-import { BRIGHTNESS, STYLE } from '@lib/shared/style/style.constants';
+import { DEVICE, SETTINGS } from '@lib/shared/settings/settings.constants';
+import { BRIGHTNESS } from '@lib/shared/style/style.constants';
 import { useMemo } from 'react';
 
 export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
+  useTranslation();
+
   const { styles } = useStyles({ props });
   const { signOut } = useSignInResource();
   const { push } = useRouter();
@@ -36,8 +38,6 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
   const currentUser = useStore((state) => state.user.currentUser);
   const brightness = useStore((state) => state.style.brightness);
 
-  const { t } = useTranslation([AUTH, SETTINGS, STYLE]);
-
   const _optionsOverrides = useMemo<Record<string, PartialModel<AuthMenuOptionModel>>>(
     () => ({
       [BRIGHTNESS]: {
@@ -45,10 +45,10 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
           (subOption) => ({
             ...subOption,
             elementState:
-              subOption.id === (brightness || 'device') ? ELEMENT_STATE.ACTIVE : undefined,
+              subOption.id === (brightness || DEVICE) ? ELEMENT_STATE.ACTIVE : undefined,
             onPress: () =>
               actions?.style.brightnessSet(
-                subOption.id === 'device' ? undefined : (subOption.id as StyleBrightnessModel),
+                subOption.id === DEVICE ? undefined : (subOption.id as StyleBrightnessModel),
               ),
           }),
         ),

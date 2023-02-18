@@ -12,6 +12,7 @@ import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathnam
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
 import { BORDER_DIRECTION } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
+import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { groupBy } from '@lib/shared/core/utils/groupBy/groupBy';
 import map from 'lodash/map';
 import toString from 'lodash/toString';
@@ -19,6 +20,7 @@ import type { ReactElement } from 'react';
 import { useMemo } from 'react';
 
 export const NavigationBar = ({
+  children,
   options,
   testID,
   value,
@@ -41,6 +43,7 @@ export const NavigationBar = ({
       // onInactive={() => console.warn('inactive')}
     >
       <Wrapper
+        align={FLEX_ALIGN.CENTER}
         border={BORDER_DIRECTION.RIGHT}
         isFullWidth={isMobile}
         isHorizontalScrollable={isMobile}
@@ -51,21 +54,25 @@ export const NavigationBar = ({
         style={styles}
         testID={testID}
         width={isMobile ? undefined : NAVIGATION_BAR_WIDTH}>
+        {children}
+
         {map(_categories, (v, k) => {
           const _options = (
             <Wrapper
+              isFullWidth
               key={toString(k)}
               spacing={THEME_BASIC_SIZE.SMALL}>
-              {v.map(({ id, label, onPress }) => {
+              {v.map(({ icon, id, label, onPress }) => {
                 const _pathname = trimPathname(id);
                 return (
                   <Button
                     elementState={
                       value && _pathname === trimPathname(value) ? ELEMENT_STATE.ACTIVE : undefined
                     }
+                    icon={icon}
                     key={id}
                     onPress={onPress}
-                    testID={label}
+                    testID={id}
                     type={BUTTON_TYPE.TRANSPARENT}>
                     {label}
                   </Button>

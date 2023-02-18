@@ -14,11 +14,19 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_BASIC_SIZE, THEME_COLOR, THEME_ROLE } from '@lib/frontend/style/style.constants';
 import type { ThemeRoleModel } from '@lib/frontend/style/style.models';
 import { palette } from '@lib/frontend/style/utils/palette/palette';
-import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import {
+  FLEX_ALIGN,
+  FLEX_JUSTIFY,
+} from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import {
+  FONT_ALIGN,
+  FONT_CASING,
+} from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { useMemo } from 'react';
 
 export const Button: SFCModel<ButtonPropsModel> = ({
+  align = FLEX_ALIGN.CENTER,
   children,
   color = THEME_COLOR.PRIMARY,
   icon,
@@ -83,9 +91,9 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   let _children = children && (
     <TranslatableText
       align={FONT_ALIGN.CENTER}
+      casing={FONT_CASING.CAPITALIZE}
       color={color}
-      colorRole={childColorRole}
-      isCapitalize>
+      colorRole={childColorRole}>
       {children}
     </TranslatableText>
   );
@@ -113,10 +121,11 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   return (
     <Pressable
       {...props}
+      align={align}
       animation={animation}
       elementState={valueControlled}
       height={_height}
-      isCenter
+      justify={FLEX_JUSTIFY.CENTER}
       onElementStateChange={setValueControlled}
       position={SHAPE_POSITION.RELATIVE}
       width={children ? undefined : _height}>

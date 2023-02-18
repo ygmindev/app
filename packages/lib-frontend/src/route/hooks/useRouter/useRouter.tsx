@@ -6,7 +6,6 @@ import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 
 export const useRouter = <TParams = undefined,>(): UseRouterModel<TParams> => {
   const { back, isActive, location, push, replace } = _useRouter<TParams>();
-  const paths = location.pathname.split('/');
   const actions = useActions();
 
   const _push = <TNextParams = undefined,>({
@@ -28,8 +27,5 @@ export const useRouter = <TParams = undefined,>(): UseRouterModel<TParams> => {
 
     replace: <TNextParams = undefined,>({ params, pathname }: LocationModel<TNextParams>) =>
       replace({ params, pathname: trimPathname(pathname) }),
-
-    up:
-      paths.length > 1 ? () => _push({ pathname: paths.slice(0, -1).join('/') || '/' }) : undefined,
   };
 };

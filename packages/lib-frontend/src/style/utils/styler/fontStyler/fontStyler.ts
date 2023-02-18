@@ -1,6 +1,7 @@
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import type { TextStyleModel } from '@lib/frontend/style/style.models';
 import {
+  FONT_CASING,
   FONT_FAMILY,
   FONT_TYPE,
 } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
@@ -12,9 +13,8 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
   {
     align,
     isBold,
-    isCapitalize,
     isLineHeight,
-    isUppercase,
+    casing,
     fontSize = THEME_SIZE.MEDIUM,
     type = FONT_TYPE.BODY,
     family = FONT_FAMILY.MAIN,
@@ -46,9 +46,6 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
 
     textAlign: align,
 
-    textTransform: isUppercase
-      ? 'uppercase'
-      : isCapitalize || type === FONT_TYPE.TITLE
-      ? 'capitalize'
-      : undefined,
+    textTransform:
+      type === FONT_TYPE.HEADLINE || type === FONT_TYPE.TITLE ? FONT_CASING.CAPITALIZE : casing,
   });

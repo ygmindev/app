@@ -6,7 +6,6 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_BASIC_SIZE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_TYPE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
-import { LIBRARY } from '@lib/library/core/core.constants';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
 import { groupBy } from '@lib/shared/core/utils/groupBy/groupBy';
 import isFunction from 'lodash/isFunction';
@@ -29,7 +28,7 @@ export const Library = <TProps,>({
   SFCPropsModel<LibraryPropsModel<TProps>>
 > => {
   const { styles } = useStyles({ props });
-  const { t } = useTranslation([LIBRARY]);
+  const { t } = useTranslation();
 
   const _categories = useMemo(
     () =>
@@ -53,8 +52,6 @@ export const Library = <TProps,>({
   return (
     <Wrapper
       grow
-      isVerticalScrollable
-      p
       spacing
       style={styles}
       testID={testID}>

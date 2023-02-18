@@ -1,7 +1,9 @@
 {
   "labels": {
-    "email": "Email",
+    "account": "account",
+    "email": "email",
     "first": "first name",
-    "last": "last name"
+    "last": "last name",
+    "name": "name"
   }
 }

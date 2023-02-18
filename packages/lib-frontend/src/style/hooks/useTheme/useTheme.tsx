@@ -36,6 +36,6 @@ export const useTheme = (): UseThemeModel => {
         ),
       },
     }),
-    [themeConfig],
+    [brightness, themeConfig],
   );
 };

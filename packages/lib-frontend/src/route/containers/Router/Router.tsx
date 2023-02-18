@@ -8,21 +8,25 @@ import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathnam
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import reduce from 'lodash/reduce';
+import trimEnd from 'lodash/trimEnd';
 import { useMemo } from 'react';
 
-const _getRoute = (routes?: Array<RouteModel>): Array<RouteModel> =>
+const _getRoute = (routes?: Array<RouteModel>, root = ''): Array<RouteModel> =>
   reduce(
     routes,
     (result, { pathname, ...route }) => {
-      const _pathname = trimPathname(route.routes ? `${pathname}/*` : pathname);
-      const _route: RouteModel = { ...route, pathname: _pathname };
+      const _root = trimEnd(pathname, '/*');
+      const _pathname = trimPathname(route.routes ? `${_root}/*` : pathname);
+      const _route: RouteModel = { ...route, pathname: _pathname, root };
       return [
         ...result,
         {
           ..._route,
           element: (
             <Route route={_route}>
-              {_route.routes && <Router routes={_getRoute(route.routes)} />}
+              {_route.routes && (
+                <Router routes={_getRoute(route.routes, trimPathname(`${root}/${_root}`))} />
+              )}
             </Route>
           ),
         },

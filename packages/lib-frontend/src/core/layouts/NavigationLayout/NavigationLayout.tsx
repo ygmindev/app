@@ -1,13 +1,15 @@
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { NavigationBar } from '@lib/frontend/core/containers/NavigationBar/NavigationBar';
-import type { OptionModel, SFCPropsModel } from '@lib/frontend/core/core.models';
+import type { SFCPropsModel } from '@lib/frontend/core/core.models';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import type { NavigationLayoutPropsModel } from '@lib/frontend/core/layouts/NavigationLayout/NavigationLayout.models';
+import type { TranslatableOptionModel } from '@lib/frontend/locale/locale.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import type { ReactElement } from 'react';
 
-export const NavigationLayout = <TOption extends OptionModel>({
+export const NavigationLayout = <TOption extends TranslatableOptionModel>({
+  barElement,
   children,
   options,
   value,
@@ -27,14 +29,15 @@ export const NavigationLayout = <TOption extends OptionModel>({
       style={styles}>
       <NavigationBar
         options={options}
-        value={value}
-      />
+        value={value}>
+        {barElement}
+      </NavigationBar>
 
       <Wrapper
         basis={0}
         grow
         isVerticalScrollable
-        testID="XXX">
+        p>
         {children}
       </Wrapper>
     </Wrapper>

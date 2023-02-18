@@ -14,16 +14,15 @@ export const _viewParams: ComposeComponentParamsModel<_ViewPropsModel, ViewProps
     { isHorizontalScrollable, isVerticalScrollable, onScroll, style, ...props },
     ...params
   ) => {
-    const { flex, flexBasis, flexGrow, flexShrink, height, width, ...containerStyle } =
-      StyleSheet.flatten(style);
+    const { height, width, ...containerStyle } = StyleSheet.flatten(style);
     return {
       children: (
-        <View style={{ flex, flexBasis, flexGrow, flexShrink, height, width }}>
+        <View style={{ display: 'flex', flex: width || height ? undefined : 1, height, width }}>
           <ScrollView
             {...(_viewParamsBase.getProps && _viewParamsBase.getProps(props, ...params))}
             alwaysBounceHorizontal={false}
             alwaysBounceVertical={false}
-            contentContainerStyle={containerStyle}
+            contentContainerStyle={{ ...containerStyle, flexGrow: 1 }}
             horizontal={isHorizontalScrollable}
             onScroll={
               onScroll

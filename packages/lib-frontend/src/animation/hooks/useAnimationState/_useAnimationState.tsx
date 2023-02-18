@@ -35,7 +35,7 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
     animationProps: {
       animate: ref ? undefined : states && (states[elementState] as never),
       animateInitialState: isInitial,
-      exit: states?.invisible || states?.inactive,
+      exit: states?.exit || states?.inactive,
       from: states?.inactive as never,
       transition: {
         delay,
@@ -45,6 +45,6 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
       },
     },
     animationState,
-    isRender: elementState !== ELEMENT_STATE.INVISIBLE || !isLazy,
+    isRender: elementState !== ELEMENT_STATE.EXIT || !isLazy,
   };
 };

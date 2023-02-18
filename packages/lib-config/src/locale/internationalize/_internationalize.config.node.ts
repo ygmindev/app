@@ -13,8 +13,8 @@ export const _internationalizeConfig = (params: _InternationalizeConfigParamsMod
     ...params,
 
     backend: {
-      addPath: fromStatic(params.path),
-      loadPath: fromStatic(params.path),
+      addPath: fromStatic('assets', params.path),
+      loadPath: fromStatic('assets', params.path),
     },
 
     initImmediate: false,

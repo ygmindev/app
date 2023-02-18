@@ -37,7 +37,7 @@ export interface ProviderPropsModel<TType = undefined> extends ChildrenPropsMode
   value?: TType;
 }
 
-export interface PagePropsModel {}
+export interface PagePropsModel extends ChildrenPropsModel {}
 
 export interface LayoutPropsModel extends ChildrenPropsModel {}
 

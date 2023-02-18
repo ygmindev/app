@@ -40,13 +40,7 @@ export const Accordion: SFCModel<AccordionPropsModel> = ({
         isRowAlign
         justify={FLEX_JUSTIFY.SPACE_BETWEEN}
         onPress={_handleToggle}>
-        {label && (
-          <Text
-            fontSize={THEME_SIZE.LARGE}
-            isCapitalize>
-            {label}
-          </Text>
-        )}
+        {label && <Text fontSize={THEME_SIZE.LARGE}>{label}</Text>}
 
         <Wrapper
           animation={{

@@ -9,9 +9,9 @@ import type { ThemeBasicSizeModel, ThemeColorModel } from '@lib/frontend/style/s
 export type ButtonTypeModel = `${BUTTON_TYPE}`;
 
 export interface ButtonPropsModel
-  extends Pick<IconPropsModel, 'icon'>,
-    ChildrenPropsModel<TranslatableTextModel>,
-    Pick<PressablePropsModel, 'onPress' | 'confirmMessage' | 'isFullWidth'>,
+  extends ChildrenPropsModel<TranslatableTextModel>,
+    Pick<IconPropsModel, 'icon'>,
+    Pick<PressablePropsModel, 'onPress' | 'confirmMessage' | 'isFullWidth' | 'align'>,
     AnimatablePropsModel {
   color?: ThemeColorModel;
   size?: ThemeBasicSizeModel;

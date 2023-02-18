@@ -1,6 +1,10 @@
 import type { LocationModel } from '@lib/frontend/route/route.models';
 import type { ReducerModel } from '@lib/frontend/state/state.models';
 
+export interface RouteHeaderModel {
+  title?: string;
+}
+
 export interface RouteStateModel {
   previous?: LocationModel;
 }

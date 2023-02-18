@@ -1,3 +1,0 @@
-export enum ROUTE_TRANSITION {
-  SLIDE_RIGHT = 'SLIDE_RIGHT',
-}

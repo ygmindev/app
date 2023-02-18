@@ -16,8 +16,8 @@ export const Link: SFCModel<LinkPropsModel> = ({ children, ...props }) => {
   const ref = useRef<AnimatableRefModel>(null);
   return isString(children) ? (
     <Activatable
-      onActive={() => ref?.current?.to(ELEMENT_STATE.ACTIVE)}
-      onInactive={() => ref?.current?.to(ELEMENT_STATE.INACTIVE)}>
+      onActive={() => ref?.current?.toState(ELEMENT_STATE.ACTIVE)}
+      onInactive={() => ref?.current?.toState(ELEMENT_STATE.INACTIVE)}>
       <View>
         <AnimatableText
           {...props}

@@ -6,7 +6,6 @@ import { PLATFORM } from '@lib/shared/platform/platform.constants';
 export const themeConfig: ThemeConfigParamsModel = {
   animation: {
     duration: 150,
-    // transition: 400,
     transition: 400,
   },
 

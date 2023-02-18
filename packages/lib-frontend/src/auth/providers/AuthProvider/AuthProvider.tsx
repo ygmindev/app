@@ -14,7 +14,7 @@ export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
         signInToken ? { ...signInToken.claims, _id: signInToken._id } : null,
       );
     });
-  }, [initialize]);
+  }, []);
 
   return <>{children}</>;
 };

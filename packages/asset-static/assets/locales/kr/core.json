@@ -1,8 +1,10 @@
 {
   "labels": {
     "cancel": "TRANSLATION_MISSING",
+    "change": "TRANSLATION_MISSING",
     "continue": "TRANSLATION_MISSING",
     "noResult": "TRANSLATION_MISSING",
+    "submit": "TRANSLATION_MISSING",
     "tryAgain": "TRANSLATION_MISSING"
   },
   "messages": {

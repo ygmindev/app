@@ -14,10 +14,8 @@ import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormC
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { AUTH } from '@lib/shared/auth/auth.constants';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { isTypeOf } from '@lib/shared/core/utils/isTypeOf/isTypeOf';
-import { USER } from '@lib/shared/user/user.constants';
 
 export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   isCheckIfNotExists,
@@ -25,7 +23,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   testID,
   ...props
 }) => {
-  const { t } = useTranslation([AUTH, USER]);
+  const { t } = useTranslation();
   const { styles } = useStyles({ props });
   const { error } = useNotification();
   const { create, createIfNotExists } = useOtpResource();

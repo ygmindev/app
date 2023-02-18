@@ -1,7 +1,7 @@
 {
   "labels": {
+    "brightness": "Brightness",
     "dark": "Dark",
-    "light": "Light",
-    "theme": "Theme"
+    "light": "Light"
   }
 }
