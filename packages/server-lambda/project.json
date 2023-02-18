@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/server-lambda/src",
+  "sourceRoot": "packages/backend-lambda/src",
   "projectType": "app",
   "tags": []
 }

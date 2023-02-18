@@ -37,11 +37,11 @@
       "@lib/shared/*": [
         "packages/lib-shared/src/*"
       ],
-      "@server/lambda/*": [
-        "packages/server-lambda/src/*"
+      "@backend/lambda/*": [
+        "packages/backend-lambda/src/*"
       ],
-      "@server/sandbox/*": [
-        "packages/server-sandbox/src/*"
+      "@backend/sandbox/*": [
+        "packages/backend-sandbox/src/*"
       ],
       "@tool/generate/*": [
         "packages/tool-generate/src/*"

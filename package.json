@@ -262,8 +262,8 @@
     "@lib/frontend",
     "@lib/library",
     "@lib/shared",
-    "@server/lambda",
-    "@server/sandbox",
+    "@backend/lambda",
+    "@backend/sandbox",
     "@tool/generate",
     "@tool/task"
   ]

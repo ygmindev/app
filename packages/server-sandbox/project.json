@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/server-sandbox/src",
+  "sourceRoot": "packages/backend-sandbox/src",
   "projectType": "library",
   "tags": []
 }

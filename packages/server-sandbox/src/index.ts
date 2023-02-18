@@ -1,3 +1,3 @@
-import { graphql } from '@server/sandbox/graphql/graphql';
+import { graphql } from '@backend/sandbox/graphql/graphql';
 
 graphql();
