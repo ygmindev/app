@@ -24,5 +24,8 @@
     "validateZipCode": "TRANSLATION_MISSING"
   },
   "submit": "submit",
-  "email": "email"
+  "email": "email",
+  "deleteme": "deleteme",
+  "delete": "delete",
+  "test": "test"
 }

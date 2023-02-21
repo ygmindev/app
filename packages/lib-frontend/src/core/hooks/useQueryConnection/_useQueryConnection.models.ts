@@ -13,8 +13,8 @@ export interface _UseQueryConnectionParamsModel<TType>
   query(params: PaginationModel): Promise<ConnectionModel<TType> | null>;
 }
 
-export interface _UseQueryConnectionModel<TType, TError extends Error = Error>
-  extends Omit<_UseQueryModel<TType, TError>, 'data' | 'query'> {
+export interface _UseQueryConnectionModel<TType>
+  extends Omit<_UseQueryModel<TType>, 'data' | 'query'> {
   data?: QueryConnectionModel<TType>;
   queryNext: CallablePromiseModel;
 }

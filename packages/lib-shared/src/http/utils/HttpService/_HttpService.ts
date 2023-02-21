@@ -19,7 +19,7 @@ import axios from 'axios';
 
 export class _HttpService implements _HttpServiceModel {
   protected _instance: AxiosInstance;
-  protected _onError?<TError extends Error = Error>(error: TError): void;
+  protected _onError?(error: Error): void;
 
   constructor({ baseUri, onError, onRequest, onResponse, request }: HttpServiceParamsModel) {
     this._instance = axios.create({ ...(request as AxiosRequestConfig), baseURL: uri(baseUri) });

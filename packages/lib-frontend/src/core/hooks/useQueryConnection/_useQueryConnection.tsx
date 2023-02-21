@@ -9,12 +9,12 @@ import type { ConnectionModel } from '@lib/shared/resource/utils/Connection/Conn
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import toNumber from 'lodash/toNumber';
 
-export const _useQueryConnection = <TType, TError extends Error = Error>({
+export const _useQueryConnection = <TType,>({
   cache,
   id,
   limit = USE_QUERY_CONNECTION_LIMIT_DEFAULT,
   query,
-}: _UseQueryConnectionParamsModel<TType>): _UseQueryConnectionModel<TType, TError> => {
+}: _UseQueryConnectionParamsModel<TType>): _UseQueryConnectionModel<TType> => {
   const queryClient = useQueryClient();
 
   const cacheTime = cache
@@ -25,7 +25,7 @@ export const _useQueryConnection = <TType, TError extends Error = Error>({
 
   const { data, error, fetchNextPage, isError, isFetching } = useInfiniteQuery<
     ConnectionModel<TType> | null,
-    TError
+    Error
   >([id], async ({ pageParam }) => query(pageParam), {
     cacheTime,
     getNextPageParam: (params) =>

@@ -4,6 +4,5 @@ import type {
   UseQueryParamsModel,
 } from '@lib/frontend/core/hooks/useQuery/useQuery.models';
 
-export const useQuery = <TType, TError extends Error = Error>(
-  params: UseQueryParamsModel<TType>,
-): UseQueryModel<TType, TError> => _useQuery(params);
+export const useQuery = <TType,>(params: UseQueryParamsModel<TType>): UseQueryModel<TType> =>
+  _useQuery(params);

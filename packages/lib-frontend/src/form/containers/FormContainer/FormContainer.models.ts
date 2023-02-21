@@ -1,3 +1,4 @@
+import type { ErrorContainerPropsModel } from '@lib/frontend/core/containers/ErrorContainer/ErrorContainer.models';
 import type { FieldPropsModel } from '@lib/frontend/core/core.models';
 import type { SelectFieldPropsModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
 import type { SwitchFieldPropsModel } from '@lib/frontend/form/components/SwitchField/SwitchField.models';
@@ -28,11 +29,13 @@ export type FormContainerRowModel = PartialModel<WithIdModel> & {
 
 export interface FormContainerPropsModel<TType>
   extends UseFormParamsModel<TType>,
-    SubmittablePropsModel<TType> {
+    SubmittablePropsModel<TType>,
+    Pick<ErrorContainerPropsModel, 'getError'> {
   cancelLabel?: TranslatableTextModel;
   isFullWidth?: boolean;
   leftElement?: ReactNode;
   rows?: Array<FormContainerRowModel>;
   submitLabel?: TranslatableTextModel;
+  successMessage?: TranslatableTextModel;
   topElement?: ReactNode;
 }

@@ -4,6 +4,6 @@ import type {
   UseQueryConnectionParamsModel,
 } from '@lib/frontend/core/hooks/useQueryConnection/useQueryConnection.models';
 
-export const useQueryConnection = <TType, TError extends Error = Error>(
+export const useQueryConnection = <TType,>(
   params: UseQueryConnectionParamsModel<TType>,
-): UseQueryConnectionModel<TType, TError> => _useQueryConnection(params);
+): UseQueryConnectionModel<TType> => _useQueryConnection(params);

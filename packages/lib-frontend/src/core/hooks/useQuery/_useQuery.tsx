@@ -7,11 +7,11 @@ import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import toNumber from 'lodash/toNumber';
 
-export const _useQuery = <TType, TError extends Error = Error>({
+export const _useQuery = <TType,>({
   cache,
   id,
   query,
-}: _UseQueryParamsModel<TType>): _UseQueryModel<TType, TError> => {
+}: _UseQueryParamsModel<TType>): _UseQueryModel<TType> => {
   const queryClient = useQueryClient();
 
   const cacheTime = cache
@@ -20,7 +20,7 @@ export const _useQuery = <TType, TError extends Error = Error>({
       : toNumber(cache)
     : 0;
 
-  const { data, error, isError, isFetching, isStale, refetch } = useQuery<TType | null, TError>(
+  const { data, error, isError, isFetching, isStale, refetch } = useQuery<TType | null, Error>(
     [id],
     async () => query(),
     { cacheTime, retry: false, staleTime: cacheTime },

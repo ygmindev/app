@@ -11,5 +11,4 @@ export interface QueryConnectionModel<TType> {
 export interface UseQueryConnectionParamsModel<TType>
   extends _UseQueryConnectionParamsModel<TType> {}
 
-export interface UseQueryConnectionModel<TType, TError extends Error = Error>
-  extends _UseQueryConnectionModel<TType, TError> {}
+export interface UseQueryConnectionModel<TType> extends _UseQueryConnectionModel<TType> {}

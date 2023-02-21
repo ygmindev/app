@@ -14,30 +14,25 @@ import { cloneElement, Fragment, useMemo } from 'react';
 
 export const Route: SFCModel<RoutePropsModel> = ({ children, route, ...props }) => {
   useTranslation(route.ns);
-  const { isActive } = useRouter();
-
   const { styles } = useStyles({ props });
   const theme = useTheme();
-
-  const _isActive = useMemo(
-    () => isActive({ pathname: `${route.root}/${route.pathname}` }),
-    [isActive, route],
-  );
+  const { isActive } = useRouter();
+  const _isLeaf = !route.routes;
 
   const _Container = route.isProtectable ? Protectable : Fragment;
   const _element = cloneElement(route.element || <Wrapper grow />, { children });
-  const _children = route.layout ? cloneElement(route.layout, { children: _element }) : _element;
+  const _isActive = useMemo(
+    () => isActive({ isExact: true, pathname: `${route.root || ''}/${route.pathname}` }),
+    [isActive, route],
+  );
 
   return (
     <>
-      <Portal>
-        {route.header && (
-          <RouteHeader
-            isVisible={_isActive}
-            route={route}
-          />
-        )}
-      </Portal>
+      {_isLeaf && route.header && _isActive && (
+        <Portal>
+          <RouteHeader route={route} />
+        </Portal>
+      )}
 
       <Wrapper
         animation={{ duration: theme.animation.transition, states: ANIMATION_STATES_APPEARABLE }}
@@ -45,7 +40,7 @@ export const Route: SFCModel<RoutePropsModel> = ({ children, route, ...props }) 
         grow
         isAbsoluteFill
         style={styles}>
-        <_Container>{_children}</_Container>
+        <_Container>{_element}</_Container>
       </Wrapper>
     </>
   );

@@ -1,4 +1,3 @@
-import type { LayoutPropsModel } from '@lib/frontend/core/core.models';
 import type { TranslatableTextPropsModel } from '@lib/frontend/locale/components/TranslatableText/TranslatableText.models';
 import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
@@ -13,10 +12,9 @@ export interface RouteIdParamsModel extends WithIdModel {}
 
 export interface RouteModel extends Pick<TranslatableTextPropsModel, 'ns'> {
   element?: ReactElement;
-  header?: { previous?: string; title?: string };
+  header?: { previous?: string };
   isIndex?: boolean;
   isProtectable?: boolean;
-  layout?: ReactElement<LayoutPropsModel>;
   pathname: string;
   root?: string;
   routes?: Array<RouteModel>;

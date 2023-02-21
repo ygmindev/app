@@ -10,6 +10,7 @@ export const CenterLayout: SFCModel<CenterLayoutPropsModel> = ({ children, ...pr
       grow
       isCenter
       isFullWidth
+      p
       spacing
       style={styles}>
       {children}

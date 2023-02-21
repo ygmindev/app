@@ -28,7 +28,6 @@ export const Accordion: SFCModel<AccordionPropsModel> = ({
   });
 
   const _handleToggle = (): void => setValueControlled(!valueControlled);
-
   const _elementState = valueControlled ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE;
 
   return (

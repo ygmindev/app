@@ -2,7 +2,6 @@ import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
 import { SIGN_IN } from '@lib/frontend/auth/auth.constants';
 import { SIGN_IN_FORM_MODE } from '@lib/frontend/auth/containers/SignInForm/SignInForm.constants';
 import { SignInPage } from '@lib/frontend/auth/pages/SignInPage/SignInPage';
-import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayout';
 import { DEV } from '@lib/frontend/dev/dev.constants';
 import { DevPage } from '@lib/frontend/dev/pages/DevPage/DevPage';
 import { FORM } from '@lib/frontend/form/form.constants';
@@ -56,7 +55,6 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
               routes: [
                 {
                   element: <NameFormPage />,
-                  layout: <CenterLayout />,
                   ns: [USER],
                   pathname: NAME,
                   title: ({ t }) => t('user:labels.name'),
@@ -64,10 +62,9 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
 
                 {
                   element: <SignInPage mode={SIGN_IN_FORM_MODE.UPDATE} />,
-                  layout: <CenterLayout />,
                   ns: [AUTH, USER],
                   pathname: EMAIL,
-                  title: ({ t }) => t('user:labels.name'),
+                  title: ({ t }) => t('user:labels.email'),
                 },
               ],
             },

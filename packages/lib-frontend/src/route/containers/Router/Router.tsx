@@ -7,48 +7,42 @@ import type { RouteModel } from '@lib/frontend/route/route.models';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import reduce from 'lodash/reduce';
 import trimEnd from 'lodash/trimEnd';
 import { useMemo } from 'react';
 
-const _getRoute = (routes?: Array<RouteModel>, root = ''): Array<RouteModel> =>
-  reduce(
-    routes,
-    (result, { pathname, ...route }) => {
-      const _isLeaf = !route.routes;
-      const _root = trimEnd(pathname, '/*');
-      const _pathname = trimPathname(_isLeaf ? pathname : `${_root}/*`);
-      const _route: RouteModel = {
-        ...route,
-        header: _isLeaf ? route.header : undefined,
-        pathname: _pathname,
-        root,
-      };
-      return [
-        ...result,
-        {
-          ..._route,
-          element: (
-            <Route route={_route}>
-              {_isLeaf ? null : (
-                <Router
-                  routes={_getRoute(
-                    route.routes?.map((child) => ({ ...child, header: _route.header })),
-                    trimPathname(`${root}/${_root}`),
-                  )}
-                />
+const _getRoute = ({ pathname, ...route }: RouteModel): RouteModel => {
+  const _isLeaf = !route.routes;
+  const _root = trimEnd(pathname, '/*');
+  const _pathname = trimPathname(_isLeaf ? pathname : `${_root}/*`);
+  const _route: RouteModel = { ...route, pathname: _pathname };
+  return {
+    ..._route,
+    element: (
+      <Route route={_route}>
+        {_route.routes && (
+          <Wrapper
+            grow
+            isOverflowHidden
+            position={SHAPE_POSITION.RELATIVE}>
+            <_Router
+              routes={_route.routes.map((child) =>
+                _getRoute({
+                  ...child,
+                  header: child.header || _route.header,
+                  root: trimPathname(`${route.root || ''}/${_root}`),
+                }),
               )}
-            </Route>
-          ),
-        },
-      ];
-    },
-    [] as Array<RouteModel>,
-  );
+            />
+          </Wrapper>
+        )}
+      </Route>
+    ),
+  };
+};
 
 export const Router: SFCModel<RouterPropsModel> = ({ routes, testID, ...props }) => {
   const { styles } = useStyles({ props });
-  const _routes = useMemo(() => _getRoute(routes), [routes]);
+  const _routes = useMemo(() => routes.map(_getRoute), [routes]);
   return (
     <Wrapper
       grow

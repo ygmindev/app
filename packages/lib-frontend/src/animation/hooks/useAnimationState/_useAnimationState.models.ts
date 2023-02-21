@@ -13,5 +13,6 @@ export interface _UseAnimationStateParamsModel<TStyle extends StyleModel = ViewS
 export interface _UseAnimationStateModel<TStyle extends StyleModel = ViewStyleModel> {
   animationProps: MotiProps<TStyle>;
   animationState: UseDynamicAnimationState;
+  current?: TStyle;
   isRender: boolean;
 }

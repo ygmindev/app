@@ -5,5 +5,4 @@ import type {
 
 export interface UseQueryParamsModel<TType> extends _UseQueryParamsModel<TType> {}
 
-export interface UseQueryModel<TType, TError extends Error = Error>
-  extends _UseQueryModel<TType, TError> {}
+export interface UseQueryModel<TType> extends _UseQueryModel<TType> {}

@@ -4,5 +4,5 @@ import { useErrorBoundary } from '@lib/frontend/core/hooks/useErrorBoundary/useE
 
 export const useSession = (): UseSessionModel => {
   const { handleError } = useErrorBoundary();
-  return _useSession({ onError: undefined });
+  return _useSession({ onError: handleError });
 };

@@ -1,4 +1,5 @@
 import { ANIMATION_STATES_APPEARABLE } from '@lib/frontend/animation/animation.constants';
+import type { AnimatableRefModel } from '@lib/frontend/animation/animation.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -11,41 +12,53 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { BORDER_DIRECTION } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
-import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import {
+  FONT_CASING,
+  FONT_TYPE,
+} from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { useRef } from 'react';
 
-export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({
-  isVisible,
-  route,
-  testID,
-  ...props
-}) => {
+export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ...props }) => {
   const { styles } = useStyles({ props });
   const theme = useTheme();
-  const { back, push } = useRouter();
+  const { push } = useRouter();
+  const _previous = route.header?.previous;
+  const ref = useRef<AnimatableRefModel>(null);
+
   return (
     <Wrapper
       animation={{ duration: theme.animation.transition, states: ANIMATION_STATES_APPEARABLE }}
       backgroundColor={THEME_COLOR.NEUTRAL}
       border={BORDER_DIRECTION.BOTTOM}
-      elementState={isVisible ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE}
+      elementState={ELEMENT_STATE.ACTIVE}
       height={theme.layout.header.height}
       isFullWidth
       isRowAlign
-      justify={FLEX_JUSTIFY.SPACE_BETWEEN}
       pHorizontal
       position={SHAPE_POSITION.RELATIVE}
+      ref={ref}
+      spacing
       style={styles}
       testID={testID}>
-      <Button
-        icon="chevronLeft"
-        onPress={() =>
-          route.header?.previous ? push({ pathname: route.header?.previous }) : back()
-        }
-        type={BUTTON_TYPE.TRANSPARENT}
-      />
+      {_previous && (
+        <Button
+          icon="chevronLeft"
+          onPress={() => {
+            ref.current?.toState(ELEMENT_STATE.INACTIVE);
+            push({ pathname: _previous });
+          }}
+          type={BUTTON_TYPE.TRANSPARENT}
+        />
+      )}
 
-      {route.title && <TranslatableText>{route.title}</TranslatableText>}
+      {route.title && (
+        <TranslatableText
+          casing={FONT_CASING.CAPITALIZE}
+          type={FONT_TYPE.SUBTITLE}>
+          {route.title}
+        </TranslatableText>
+      )}
     </Wrapper>
   );
 };

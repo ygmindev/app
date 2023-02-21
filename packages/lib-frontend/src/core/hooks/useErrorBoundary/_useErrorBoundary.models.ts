@@ -1,3 +1,3 @@
-export interface _UseErrorBoundaryModel<TError extends Error = Error> {
-  handleError(error: TError): void;
+export interface _UseErrorBoundaryModel {
+  handleError(error: Error): void;
 }

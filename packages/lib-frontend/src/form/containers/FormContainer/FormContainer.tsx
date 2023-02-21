@@ -1,8 +1,11 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ErrorContainer } from '@lib/frontend/core/containers/ErrorContainer/ErrorContainer';
+import { ERROR_CONTAINER_MODE } from '@lib/frontend/core/containers/ErrorContainer/ErrorContainer.constants';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { FieldPropsModel, SFCPropsModel } from '@lib/frontend/core/core.models';
+import { useErrorBoundary } from '@lib/frontend/core/hooks/useErrorBoundary/useErrorBoundary';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { Form } from '@lib/frontend/form/components/Form/Form';
 import { SelectField } from '@lib/frontend/form/components/SelectField/SelectField';
@@ -28,6 +31,19 @@ import type { ReactElement } from 'react';
 import { cloneElement, useCallback, useMemo } from 'react';
 
 export const FormContainer = <TType,>({
+  getError,
+  ...props
+}: SFCPropsModel<FormContainerPropsModel<TType>>): ReactElement<
+  SFCPropsModel<FormContainerPropsModel<TType>>
+> => (
+  <ErrorContainer
+    getError={getError}
+    mode={ERROR_CONTAINER_MODE.NOTIFICATION}>
+    <_FormContainer<TType> {...props} />
+  </ErrorContainer>
+);
+
+const _FormContainer = <TType,>({
   cancelLabel,
   elementState,
   initialValues,
@@ -37,6 +53,7 @@ export const FormContainer = <TType,>({
   onSubmit,
   rows,
   submitLabel,
+  successMessage,
   testID,
   topElement,
   validators,
@@ -47,8 +64,9 @@ export const FormContainer = <TType,>({
   const { styles } = useStyles({ props });
   const theme = useTheme();
   const { t } = useTranslation();
-  const { error } = useNotification();
+  const { error, success } = useNotification();
   const isMobile = useIsMobile();
+  const { handleError } = useErrorBoundary();
 
   const _fields = useMemo(() => rows?.map(({ fields }) => fields).flat(), [rows]);
   const _getValues = (data: TType): TType =>
@@ -71,9 +89,16 @@ export const FormContainer = <TType,>({
   const _handleSubmit = async (): Promise<void> => {
     const _initialValues = initialValues && _getValues(initialValues);
     const _values = _getValues(values);
-    return isEqual(_initialValues, _values)
-      ? error({ message: t('core:messages.validateChanged') })
-      : onSubmit && (await onSubmit(_values as TType));
+    if (isEqual(_initialValues, _values)) {
+      error({ message: t('core:messages.validateChanged') });
+    } else {
+      try {
+        onSubmit && (await onSubmit(_values as TType));
+        success({ message: t(successMessage) || t('core:messages.submitSuccess') });
+      } catch (e) {
+        handleError(e as Error);
+      }
+    }
   };
 
   const { errors, handleChange, handleSubmit, isLoading, values } = useForm<TType>({

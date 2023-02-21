@@ -14,7 +14,7 @@ export interface _UseFormModel<TType> {
   handleSubmit: CallableModel;
   isLoading: boolean;
   isValid: boolean;
-  setErrors<TError>(errors?: TError): void;
+  setErrors(errors?: Error): void;
   setValues(data: TType): void;
   values: TType;
 }
