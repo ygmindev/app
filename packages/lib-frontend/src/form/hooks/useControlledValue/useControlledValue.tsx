@@ -4,7 +4,7 @@ import type {
 } from '@lib/frontend/form/hooks/useControlledValue/useControlledValue.models';
 import { useState } from 'react';
 
-export const useControlledValue = <TType = string,>({
+export const useControlledValue = <TType extends string = string>({
   defaultValue,
   onChange,
   value,

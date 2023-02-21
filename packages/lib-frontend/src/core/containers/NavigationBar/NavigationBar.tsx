@@ -80,7 +80,7 @@ export const NavigationBar = ({
           );
           return k ? (
             <Accordion
-              defaultValue
+              defaultValue={ELEMENT_STATE.ACTIVE}
               key={toString(k)}
               label={k}>
               {_options}

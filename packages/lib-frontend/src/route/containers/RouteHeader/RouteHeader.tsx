@@ -25,7 +25,6 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ..
   const { push } = useRouter();
   const _previous = route.header?.previous;
   const ref = useRef<AnimatableRefModel>(null);
-
   return (
     <Wrapper
       animation={{ duration: theme.animation.transition, states: ANIMATION_STATES_APPEARABLE }}
