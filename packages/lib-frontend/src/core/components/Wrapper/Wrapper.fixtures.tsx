@@ -7,7 +7,7 @@ import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyl
 import isString from 'lodash/isString';
 import { useMemo } from 'react';
 
-const WRAPPER_FIXTURE_SIZE = 100;
+const WRAPPER_FIXTURE_SIZE = 200;
 
 export interface WrapperFixturePropsModel extends WrapperPropsModel {
   testID?: string;

@@ -52,5 +52,7 @@
   "Notification": "Notification",
   "Notifications": "Notifications",
   "SearchField": "SearchField",
-  "children": "children"
+  "children": "children",
+  "Previous": "Previous",
+  "Next": "Next"
 }

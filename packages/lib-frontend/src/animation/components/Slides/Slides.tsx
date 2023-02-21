@@ -7,6 +7,7 @@ import type { SlidesPropsModel } from '@lib/frontend/animation/components/Slides
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { MeasureModel, SFCModel } from '@lib/frontend/core/core.models';
+import { useChange } from '@lib/frontend/core/hooks/useChange/useChange';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
@@ -18,10 +19,17 @@ export const Slides: SFCModel<SlidesPropsModel> = ({ current, slides, testID, ..
   const [measure, setMeasure] = useState<MeasureModel>();
   const theme = useTheme();
 
+  const [_current, setCurrent] = useState(current);
+
+  const previous = useChange({ onChange: () => setCurrent(current), value: current });
+
+  const _isLeft = (previous || 0) > (current || 0);
+
   return (
     <Wrapper
       grow
       isFullWidth
+      isOverflowHidden
       onMeasure={setMeasure}
       position={SHAPE_POSITION.RELATIVE}
       style={styles}
@@ -30,12 +38,15 @@ export const Slides: SFCModel<SlidesPropsModel> = ({ current, slides, testID, ..
         {slides &&
           slides.map(
             ({ element, id }, i) =>
-              i === current && (
+              i === _current && (
                 <Wrapper
                   animation={{
                     duration: theme.animation.transition,
                     states: merge({
-                      values: [ANIMATION_STATES_APPEARABLE, ANIMATION_STATES_SLIDABLE(measure)],
+                      values: [
+                        ANIMATION_STATES_APPEARABLE,
+                        ANIMATION_STATES_SLIDABLE({ isLeft: _isLeft, measure }),
+                      ],
                     }),
                   }}
                   bottom={0}
