@@ -5,8 +5,8 @@ import type { SignInFormPropsModel } from '@lib/frontend/auth/containers/SignInF
 import { UsernameForm } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm';
 import type { UsernameFormModel } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.models';
 import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
+import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayout';
 import { StepForm } from '@lib/frontend/form/components/StepForm/StepForm';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
@@ -23,20 +23,28 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({ mode, testID, ...pr
   };
 
   return (
-    <Wrapper
-      grow
+    <StepForm<SignInFormModel, [UsernameFormModel, OtpFormModel]>
+      onSubmit={_handleSubmit}
+      steps={[
+        {
+          element: (
+            <CenterLayout>
+              <UsernameForm isCheckIfNotExists={mode === SIGN_IN_FORM_MODE.UPDATE} />
+            </CenterLayout>
+          ),
+          id: 'username',
+        },
+        {
+          element: (
+            <CenterLayout>
+              <OtpForm />
+            </CenterLayout>
+          ),
+          id: 'otp',
+        },
+      ]}
       style={styles}
-      testID={testID}>
-      <StepForm<SignInFormModel, [UsernameFormModel, OtpFormModel]>
-        onSubmit={_handleSubmit}
-        steps={[
-          {
-            element: <UsernameForm isCheckIfNotExists={mode === SIGN_IN_FORM_MODE.UPDATE} />,
-            id: 'username',
-          },
-          { element: <OtpForm />, id: 'otp' },
-        ]}
-      />
-    </Wrapper>
+      testID={testID}
+    />
   );
 };

@@ -1,5 +1,10 @@
 import type { ThemeConfigParamsModel } from '@lib/config/style/theme/theme.models';
-import { STYLE_BRIGHTNESS, THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import {
+  STYLE_BRIGHTNESS,
+  THEME_BASIC_SIZE,
+  THEME_COLOR,
+  THEME_SIZE,
+} from '@lib/frontend/style/style.constants';
 import { FONT_FAMILY } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
@@ -136,8 +141,10 @@ export const themeConfig: ThemeConfigParamsModel = {
       height: 60,
     },
 
-    narrow: {
-      width: 500,
+    width: {
+      [THEME_BASIC_SIZE.SMALL]: 350,
+      [THEME_BASIC_SIZE.MEDIUM]: 500,
+      [THEME_BASIC_SIZE.LARGE]: 700,
     },
   },
 

@@ -6,7 +6,7 @@ import { ERROR_CONTAINER_MODE } from '@lib/frontend/core/containers/ErrorContain
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { FieldPropsModel, SFCPropsModel } from '@lib/frontend/core/core.models';
 import { useErrorBoundary } from '@lib/frontend/core/hooks/useErrorBoundary/useErrorBoundary';
-import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
+import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { Form } from '@lib/frontend/form/components/Form/Form';
 import { SelectField } from '@lib/frontend/form/components/SelectField/SelectField';
 import type { SelectFieldPropsModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
@@ -21,7 +21,6 @@ import { useForm } from '@lib/frontend/form/hooks/useForm/useForm';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
@@ -62,10 +61,8 @@ const _FormContainer = <TType,>({
   SFCPropsModel<FormContainerPropsModel<TType>>
 > => {
   const { styles } = useStyles({ props });
-  const theme = useTheme();
   const { t } = useTranslation();
   const { error, success } = useNotification();
-  const isMobile = useIsMobile();
   const { handleError } = useErrorBoundary();
 
   const _fields = useMemo(() => rows?.map(({ fields }) => fields).flat(), [rows]);
@@ -110,7 +107,6 @@ const _FormContainer = <TType,>({
   const _elementState = isLoading ? ELEMENT_STATE.LOADING : elementState;
   const _isDisabled =
     _elementState === ELEMENT_STATE.DISABLED || _elementState === ELEMENT_STATE.LOADING;
-  const _isFullWidth = isMobile || isFullWidth;
 
   const _getField = useCallback(
     ({ field, fieldProps, id, render }: FormContainerFieldModel) => {
@@ -161,12 +157,11 @@ const _FormContainer = <TType,>({
   );
 
   return (
-    <Wrapper
-      isFullWidth={_isFullWidth}
-      spacing
+    <MainLayout
+      isCenter
+      isFullWidth={isFullWidth}
       style={styles}
-      testID={testID}
-      width={_isFullWidth ? undefined : theme.layout.narrow.width}>
+      testID={testID}>
       <Form onSubmit={_isDisabled ? undefined : async () => handleSubmit()}>
         <Wrapper spacing>
           {topElement}
@@ -184,6 +179,7 @@ const _FormContainer = <TType,>({
 
       <Wrapper
         isDistribute={isFullWidth}
+        isFullWidth
         isRowAlign
         justify={isFullWidth ? undefined : FLEX_JUSTIFY.FLEX_END}
         spacing={THEME_BASIC_SIZE.SMALL}>
@@ -206,6 +202,6 @@ const _FormContainer = <TType,>({
           {submitLabel || t('core:labels.submit')}
         </Button>
       </Wrapper>
-    </Wrapper>
+    </MainLayout>
   );
 };

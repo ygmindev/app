@@ -71,6 +71,7 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
 
       <Wrapper
         grow
+        isFullWidth
         spacing
         style={styles}
         testID={testID}>

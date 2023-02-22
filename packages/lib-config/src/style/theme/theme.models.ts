@@ -46,9 +46,7 @@ export interface ThemeConfigParamsModel {
     header: {
       height: number;
     };
-    narrow: {
-      width: number;
-    };
+    width: Record<ThemeBasicSizeModel, number>;
   };
 
   shape: {

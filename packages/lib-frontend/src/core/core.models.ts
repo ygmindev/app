@@ -1,5 +1,6 @@
 import type { ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
 import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
+import type { WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import type { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { DimensionModel } from '@lib/frontend/platform/platform.models';
 import type { StyleModel, StylePropsModel, ViewStyleModel } from '@lib/frontend/style/style.models';
@@ -39,7 +40,8 @@ export interface ProviderPropsModel<TType = undefined> extends ChildrenPropsMode
 
 export interface PagePropsModel extends ChildrenPropsModel {}
 
-export interface LayoutPropsModel extends ChildrenPropsModel {}
+export interface LayoutPropsModel
+  extends Pick<WrapperPropsModel, 'children' | 'isFullWidth' | 'isCenter'> {}
 
 export type ElementStateModel = `${ELEMENT_STATE}`;
 
