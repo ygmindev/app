@@ -12,19 +12,21 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { merge } from '@lib/shared/core/utils/merge/merge';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
-export const Slides: SFCModel<SlidesPropsModel> = ({ current, slides, testID, ...props }) => {
+export const Slides: SFCModel<SlidesPropsModel> = ({
+  current,
+  isLeft,
+  slides,
+  testID,
+  ...props
+}) => {
   const { styles } = useStyles({ props });
   const [measure, setMeasure] = useState<MeasureModel>();
   const theme = useTheme();
-
   const [_current, setCurrent] = useState(current);
-
   const previous = useChange({ onChange: () => setCurrent(current), value: current });
-
-  const _isLeft = (previous || 0) > (current || 0);
-
+  const _isLeft = useMemo(() => (previous || 0) > (current || 0), [previous, current]);
   return (
     <Wrapper
       grow
@@ -45,7 +47,7 @@ export const Slides: SFCModel<SlidesPropsModel> = ({ current, slides, testID, ..
                     states: merge({
                       values: [
                         ANIMATION_STATES_APPEARABLE,
-                        ANIMATION_STATES_SLIDABLE({ isLeft: _isLeft, measure }),
+                        ANIMATION_STATES_SLIDABLE({ isLeft: isLeft || _isLeft, measure }),
                       ],
                     }),
                   }}
