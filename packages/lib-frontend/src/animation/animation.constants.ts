@@ -1,5 +1,5 @@
 import type { AnimationStatesModel } from '@lib/frontend/animation/animation.models';
-import type { SlidesPropsModel } from '@lib/frontend/animation/components/Slides/Slides.models';
+import type { SlidePropsModel } from '@lib/frontend/animation/components/Slide/Slide.models';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { MeasureModel } from '@lib/frontend/core/core.models';
 import type { StyleModel } from '@lib/frontend/style/style.models';
@@ -17,16 +17,16 @@ export const ANIMATION_STATES_SCALABLE: AnimationStatesModel<StyleModel> = {
 };
 
 export const ANIMATION_STATES_SLIDABLE = ({
-  isLeft = false,
+  isBack = false,
   measure,
 }: { measure?: MeasureModel } & Pick<
-  SlidesPropsModel,
-  'isLeft'
+  SlidePropsModel,
+  'isBack'
 >): AnimationStatesModel<StyleModel> =>
   measure && measure.width
     ? {
         [ELEMENT_STATE.ACTIVE]: { left: 0 },
-        [ELEMENT_STATE.INACTIVE]: isLeft ? { left: -measure.width } : { left: measure.width },
-        [ELEMENT_STATE.EXIT]: isLeft ? { left: measure.width } : { left: -measure.width },
+        [ELEMENT_STATE.INACTIVE]: isBack ? { left: -measure.width } : { left: measure.width },
+        [ELEMENT_STATE.EXIT]: isBack ? { left: measure.width } : { left: -measure.width },
       }
     : {};

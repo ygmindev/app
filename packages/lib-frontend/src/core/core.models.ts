@@ -75,8 +75,8 @@ export interface OptionModel
 }
 
 export interface PositionModel {
-  x: number;
-  y: number;
+  x?: number;
+  y?: number;
 }
 
 export interface MeasureModel extends PositionModel, DimensionModel {}

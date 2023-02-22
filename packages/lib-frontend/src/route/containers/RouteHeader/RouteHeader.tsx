@@ -45,7 +45,7 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ..
           icon="chevronLeft"
           onPress={() => {
             ref.current?.toState(ELEMENT_STATE.INACTIVE);
-            push({ pathname: _previous });
+            push({ isBack: true, pathname: _previous });
           }}
           type={BUTTON_TYPE.TRANSPARENT}
         />

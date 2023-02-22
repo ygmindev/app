@@ -6,10 +6,12 @@ export interface RouteHeaderModel {
 }
 
 export interface RouteStateModel {
+  isBack?: boolean;
   previous?: LocationModel;
 }
 
 export interface RouteActionsParamsModel {
+  isBackSet: boolean;
   previousSet: LocationModel;
 }
 

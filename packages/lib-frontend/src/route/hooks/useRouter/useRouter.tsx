@@ -1,23 +1,42 @@
 import { _useRouter } from '@lib/frontend/route/hooks/useRouter/_useRouter';
-import type { UseRouterModel } from '@lib/frontend/route/hooks/useRouter/useRouter.models';
-import type { LocationModel } from '@lib/frontend/route/route.models';
+import type {
+  PathUpdateParamsModel,
+  UseRouterModel,
+} from '@lib/frontend/route/hooks/useRouter/useRouter.models';
+import type { LocationParamsModel } from '@lib/frontend/route/route.models';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import type { CallableModel } from '@lib/shared/core/core.models';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 
-export const useRouter = <TParams = undefined,>(): UseRouterModel<TParams> => {
+export const useRouter = <
+  TParams extends LocationParamsModel = LocationParamsModel,
+>(): UseRouterModel<TParams> => {
   const { back, isActive, location, push, replace } = _useRouter<TParams>();
   const actions = useActions();
+  const theme = useTheme();
 
-  const _push = <TNextParams = undefined,>({
-    params,
-    pathname,
-  }: LocationModel<TNextParams>): void => {
+  const _update = async <TNextParams extends LocationParamsModel = LocationParamsModel>({
+    callback,
+    isBack,
+  }: Pick<PathUpdateParamsModel<TNextParams>, 'isBack'> & {
+    callback: CallableModel;
+  }): Promise<void> => {
     actions?.route.previousSet({ pathname: location.pathname });
-    push({ params, pathname: trimPathname(pathname) });
+    if (isBack) {
+      actions?.route.isBackSet(true);
+      await sleep();
+    }
+    callback();
+    if (isBack) {
+      await sleep({ duration: theme.animation.transition });
+      actions?.route.isBackSet(false);
+    }
   };
 
   return {
-    back,
+    back: async () => _update({ callback: back, isBack: true }),
 
     isActive: ({ from, pathname, ...params }) =>
       isActive({
@@ -28,9 +47,18 @@ export const useRouter = <TParams = undefined,>(): UseRouterModel<TParams> => {
 
     location,
 
-    push: <TNextParams = undefined,>(params: LocationModel<TNextParams>) => _push(params),
+    push: async <TNextParams extends LocationParamsModel = LocationParamsModel>({
+      isBack,
+      params,
+      pathname,
+    }: PathUpdateParamsModel<TNextParams>) =>
+      _update({ callback: () => push({ params, pathname: trimPathname(pathname) }), isBack }),
 
-    replace: <TNextParams = undefined,>({ params, pathname }: LocationModel<TNextParams>) =>
-      replace({ params, pathname: trimPathname(pathname) }),
+    replace: async <TNextParams extends LocationParamsModel = LocationParamsModel>({
+      isBack,
+      params,
+      pathname,
+    }: PathUpdateParamsModel<TNextParams>) =>
+      _update({ callback: () => replace({ params, pathname: trimPathname(pathname) }), isBack }),
   };
 };

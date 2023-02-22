@@ -3,10 +3,12 @@ import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
 import type { ReactElement } from 'react';
 
-export interface LocationModel<TParams = undefined> {
+export interface LocationModel<TParams extends LocationParamsModel = LocationParamsModel> {
   params?: TParams;
   pathname: string;
 }
+
+export interface LocationParamsModel {}
 
 export interface RouteIdParamsModel extends WithIdModel {}
 
