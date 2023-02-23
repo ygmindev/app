@@ -3,7 +3,7 @@ import { NavigationBar } from '@lib/frontend/core/containers/NavigationBar/Navig
 import type { SFCPropsModel } from '@lib/frontend/core/core.models';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import type { NavigationLayoutPropsModel } from '@lib/frontend/core/layouts/NavigationLayout/NavigationLayout.models';
-import type { TranslatableOptionModel } from '@lib/frontend/locale/locale.models';
+import type { TranslatableOptionModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import type { ReactElement } from 'react';

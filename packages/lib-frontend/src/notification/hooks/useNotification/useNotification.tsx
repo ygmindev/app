@@ -1,5 +1,5 @@
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import type { NotificationDataModel } from '@lib/frontend/notification/components/Notification/Notification.models';
+import type { NotificationDataModel } from '@lib/frontend/notification/notification.models';
 import type { UseNotificationModel } from '@lib/frontend/notification/hooks/useNotification/useNotification.models';
 import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';

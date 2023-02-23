@@ -1,6 +1,21 @@
-import type { ElementStatePropsModel } from '@lib/frontend/core/core.models';
-import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
-import type { CallableModel, InferModel, PrimitiveModel } from '@lib/shared/core/core.models';
+import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
+import type { ElementStatePropsModel, ValuePropsModel } from '@lib/frontend/core/core.models';
+import type { TranslatableModel, TranslatableTextModel } from '@lib/frontend/locale/locale.models';
+import type {
+  CallableModel,
+  InferModel,
+  OverrideModel,
+  PrimitiveModel,
+} from '@lib/shared/core/core.models';
+
+export interface FieldPropsModel<TType extends string = string>
+  extends Pick<IconPropsModel, 'icon'>,
+    ElementStatePropsModel,
+    ValuePropsModel<TType> {
+  error?: string | boolean;
+  isAutoFocus?: boolean;
+  label?: string;
+}
 
 export type FormErrorModel<TType> = {
   [TKey in keyof TType]?: InferModel<TType[TKey]> extends PrimitiveModel
@@ -26,3 +41,8 @@ export interface SubmittablePropsModel<TType = void, TResult = void>
   onSubmit?(data: TType): Promise<TResult | null>;
   onSuccess?(data: TType, result?: TResult | null): Promise<void>;
 }
+
+export type TranslatableFieldPropsModel<TType extends FieldPropsModel> = OverrideModel<
+  TranslatableModel<TType, 'label'>,
+  { error?: TranslatableTextModel | boolean }
+>;

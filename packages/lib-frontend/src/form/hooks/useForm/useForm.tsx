@@ -7,6 +7,7 @@ import type {
 } from '@lib/frontend/form/hooks/useForm/useForm.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
+import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import isFunction from 'lodash/isFunction';
@@ -15,6 +16,7 @@ import reduce from 'lodash/reduce';
 
 export const useForm = <TType = void, TResult = void>({
   initialValues,
+  isBlocking = true,
   onComplete,
   onError,
   onSubmit,
@@ -23,6 +25,7 @@ export const useForm = <TType = void, TResult = void>({
 }: UseFormParamsModel<TType, TResult>): UseFormModel<TType, TResult> => {
   const { t } = useTranslation();
   const { handleError } = useErrorBoundary();
+  const actions = useActions();
 
   const _validate = <TValue,>(
     data?: TValue,
@@ -54,12 +57,14 @@ export const useForm = <TType = void, TResult = void>({
 
   const _handleSubmit = async (values: TType): Promise<TResult | null> => {
     try {
+      isBlocking && actions?.app.isLoadingSet(true);
       const data = onSubmit && (await onSubmit(values));
       onSuccess && (await onSuccess(values, data));
       return data || null;
     } catch (e) {
       onError ? onError(e as Error) : handleError(e as Error);
     } finally {
+      isBlocking && actions?.app.isLoadingSet(false);
       onComplete && onComplete();
     }
     return null;

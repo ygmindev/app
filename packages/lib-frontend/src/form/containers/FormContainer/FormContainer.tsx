@@ -4,7 +4,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ErrorContainer } from '@lib/frontend/core/containers/ErrorContainer/ErrorContainer';
 import { ERROR_CONTAINER_MODE } from '@lib/frontend/core/containers/ErrorContainer/ErrorContainer.constants';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import type { FieldPropsModel, SFCPropsModel } from '@lib/frontend/core/core.models';
+import type { SFCPropsModel } from '@lib/frontend/core/core.models';
 import { useErrorBoundary } from '@lib/frontend/core/hooks/useErrorBoundary/useErrorBoundary';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { Form } from '@lib/frontend/form/components/Form/Form';
@@ -17,6 +17,7 @@ import type {
   FormContainerFieldModel,
   FormContainerPropsModel,
 } from '@lib/frontend/form/containers/FormContainer/FormContainer.models';
+import type { FieldPropsModel } from '@lib/frontend/form/form.models';
 import { useForm } from '@lib/frontend/form/hooks/useForm/useForm';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
@@ -29,28 +30,30 @@ import toNumber from 'lodash/toNumber';
 import type { ReactElement } from 'react';
 import { cloneElement, useCallback, useMemo } from 'react';
 
-export const FormContainer = <TType,>({
+export const FormContainer = <TType = void, TResult = void>({
   getError,
   ...props
-}: SFCPropsModel<FormContainerPropsModel<TType>>): ReactElement<
-  SFCPropsModel<FormContainerPropsModel<TType>>
+}: SFCPropsModel<FormContainerPropsModel<TType, TResult>>): ReactElement<
+  SFCPropsModel<FormContainerPropsModel<TType, TResult>>
 > => (
   <ErrorContainer
     getError={getError}
     mode={ERROR_CONTAINER_MODE.NOTIFICATION}>
-    <_FormContainer<TType> {...props} />
+    <_FormContainer<TType, TResult> {...props} />
   </ErrorContainer>
 );
 
-const _FormContainer = <TType,>({
+const _FormContainer = <TType = void, TResult = void>({
   cancelLabel,
   elementState,
   initialValues,
+  isBlocking,
   isFullWidth,
   leftElement,
   onCancel,
   onComplete,
   onSubmit,
+  onSuccess,
   rows,
   submitLabel,
   successMessage,
@@ -58,8 +61,8 @@ const _FormContainer = <TType,>({
   topElement,
   validators,
   ...props
-}: SFCPropsModel<FormContainerPropsModel<TType>>): ReactElement<
-  SFCPropsModel<FormContainerPropsModel<TType>>
+}: SFCPropsModel<FormContainerPropsModel<TType, TResult>>): ReactElement<
+  SFCPropsModel<FormContainerPropsModel<TType, TResult>>
 > => {
   const { styles } = useStyles({ props });
   const { t } = useTranslation();
@@ -84,23 +87,27 @@ const _FormContainer = <TType,>({
         }, {} as TType)
       : data;
 
-  const _handleSubmit = async (): Promise<void> => {
+  const _handleSubmit = async (): Promise<TResult | null> => {
     const _initialValues = initialValues && _getValues(initialValues);
     const _values = _getValues(values);
     if (isEqual(_initialValues, _values)) {
       error({ message: t('core:messages.validateChanged') });
+      return null;
     } else {
-      onSubmit && (await onSubmit(_values as TType));
+      return (onSubmit && (await onSubmit(_values as TType))) || null;
     }
   };
 
-  const { errors, handleChange, handleSubmit, isLoading, values } = useForm<TType>({
+  const { errors, handleChange, handleSubmit, isLoading, values } = useForm<TType, TResult>({
     initialValues,
+    isBlocking,
     onComplete,
     onError: handleError,
     onSubmit: _handleSubmit,
-    onSuccess: async () =>
-      success({ message: t(successMessage) || t('core:messages.submitSuccess') }),
+    onSuccess: async (data, result) => {
+      onSuccess && (await onSuccess(data, result));
+      successMessage ? async () => success({ message: t(successMessage) }) : undefined;
+    },
     validators,
   });
 

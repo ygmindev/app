@@ -2,5 +2,8 @@
   "labels": {
     "device": "TRANSLATION_MISSING",
     "settings": "TRANSLATION_MISSING"
+  },
+  "messages": {
+    "updateSuccess": "TRANSLATION_MISSING"
   }
 }

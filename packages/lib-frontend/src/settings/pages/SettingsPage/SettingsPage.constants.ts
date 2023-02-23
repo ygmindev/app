@@ -1,4 +1,4 @@
-import type { TranslatableOptionModel } from '@lib/frontend/locale/locale.models';
+import type { TranslatableOptionModel } from '@lib/frontend/core/core.models';
 import { ACCOUNT } from '@lib/frontend/user/user.constants';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
 

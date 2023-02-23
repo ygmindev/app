@@ -4,20 +4,37 @@ import type { OtpFormPropsModel } from '@lib/frontend/auth/containers/OtpForm/Ot
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ErrorContainer } from '@lib/frontend/core/containers/ErrorContainer/ErrorContainer';
+import { ERROR_CONTAINER_MODE } from '@lib/frontend/core/containers/ErrorContainer/ErrorContainer.constants';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayout';
 import { useForm } from '@lib/frontend/form/hooks/useForm/useForm';
 import { Trans } from '@lib/frontend/locale/components/Trans/Trans';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { OTP_LENGTH } from '@lib/shared/auth/resources/Otp/Otp.constants';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import type { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 
-export const OtpForm: SFCModel<OtpFormPropsModel> = ({
+export const OtpForm: SFCModel<OtpFormPropsModel> = ({ ...props }) => (
+  <ErrorContainer
+    getError={(e) =>
+      (e as HttpError).statusCode === HTTP_STATUS_CODE.FORBIDDEN
+        ? {
+            icon: 'ban',
+            message: ({ t }) => t('auth:messages.incorrectOtp'),
+            title: ({ t }) => t('auth:labels.incorrectOtp'),
+          }
+        : undefined
+    }
+    mode={ERROR_CONTAINER_MODE.NOTIFICATION}>
+    <_OtpForm {...props} />
+  </ErrorContainer>
+);
+
+const _OtpForm: SFCModel<OtpFormPropsModel> = ({
   data,
   onBack,
   onComplete,
@@ -27,27 +44,13 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const { t } = useTranslation();
-  const { error } = useNotification();
-
-  const _handleError = (e: Error): void => {
-    if ((e as HttpError).statusCode === HTTP_STATUS_CODE.FORBIDDEN) {
-      error({
-        icon: 'ban',
-        message: t('auth:messages.invalidOtp'),
-        title: t('auth:labels.invalidOtp'),
-      });
-    } else {
-      throw e;
-    }
-  };
 
   const { errors, handleChange, handleReset, handleSubmit, isLoading, values } = useForm({
-    onComplete,
-    onError: _handleError,
-    onSubmit: async ({ otp }) => {
-      onSuccess && (await onSuccess({ otp }));
+    onComplete: () => {
+      onComplete && onComplete();
       handleReset();
     },
+    onSuccess,
     validators: OTP_FORM_VALIDATORS,
   });
 

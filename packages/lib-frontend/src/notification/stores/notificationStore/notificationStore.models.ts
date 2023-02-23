@@ -1,7 +1,7 @@
 import type {
   NotificationDataModel,
   NotificationModel,
-} from '@lib/frontend/notification/components/Notification/Notification.models';
+} from '@lib/frontend/notification/notification.models';
 import type { ReducerModel } from '@lib/frontend/state/state.models';
 import type { PartialModel } from '@lib/shared/core/core.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';

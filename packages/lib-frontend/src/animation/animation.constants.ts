@@ -22,11 +22,18 @@ export const ANIMATION_STATES_SLIDABLE = ({
 }: { measure?: MeasureModel } & Pick<
   SlidePropsModel,
   'isBack'
->): AnimationStatesModel<StyleModel> =>
-  measure && measure.width
-    ? {
-        [ELEMENT_STATE.ACTIVE]: { left: 0 },
-        [ELEMENT_STATE.INACTIVE]: isBack ? { left: -measure.width } : { left: measure.width },
-        [ELEMENT_STATE.EXIT]: isBack ? { left: measure.width } : { left: -measure.width },
-      }
-    : {};
+>): AnimationStatesModel<StyleModel> => ({
+  [ELEMENT_STATE.ACTIVE]: { left: 0 },
+  [ELEMENT_STATE.INACTIVE]:
+    measure && measure.width
+      ? isBack
+        ? { left: -measure.width }
+        : { left: measure.width }
+      : { left: 0 },
+  [ELEMENT_STATE.EXIT]:
+    measure && measure.width
+      ? isBack
+        ? { left: measure.width }
+        : { left: -measure.width }
+      : { left: 0 },
+});

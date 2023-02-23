@@ -30,7 +30,7 @@ export const Slide: SFCModel<SlidePropsModel> = ({
     }),
     [measure, theme, isBack],
   );
-  return measure ? (
+  return (
     <Wrapper
       animation={_animation}
       bottom={0}
@@ -42,5 +42,5 @@ export const Slide: SFCModel<SlidePropsModel> = ({
       top={0}>
       {children}
     </Wrapper>
-  ) : null;
+  );
 };

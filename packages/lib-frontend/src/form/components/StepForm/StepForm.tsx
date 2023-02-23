@@ -19,6 +19,7 @@ import type { ReactElement } from 'react';
 import { cloneElement, useMemo, useRef, useState } from 'react';
 
 export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends Array<unknown>>({
+  onError,
   onSubmit,
   onSuccess,
   steps,
@@ -102,18 +103,23 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
                 isLoadingSet(false);
                 element.props.onComplete && element.props.onComplete();
               },
+              onError,
               onSubmit: async (data: TSteps[number]) => {
                 isLoadingSet(true);
-                element.props.onSubmit && (await element.props.onSubmit(data));
+                return element.props.onSubmit && (await element.props.onSubmit(data));
               },
               onSuccess: async (stepData: TSteps[number]) => {
                 element.props.onSuccess && (await element.props.onSuccess(stepData));
                 const _data = { ...data, ...(stepData as object) };
                 if (_isLastStep) {
-                  const _result = onSubmit && (await onSubmit(_data as TType));
-                  onSuccess && (await onSuccess(_data as TType, _result));
-                  await sleep({ duration: theme.animation.transition });
-                  _handleClear();
+                  try {
+                    const _result = onSubmit && (await onSubmit(_data as TType));
+                    onSuccess && (await onSuccess(_data as TType, _result));
+                    await sleep({ duration: theme.animation.transition });
+                    _handleClear();
+                  } catch (e) {
+                    onError && onError(e as Error);
+                  }
                 } else {
                   dataSet(_data);
                   _currentSet(current + 1);
