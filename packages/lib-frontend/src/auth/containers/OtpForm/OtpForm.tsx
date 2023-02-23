@@ -13,12 +13,14 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { OTP_LENGTH } from '@lib/shared/auth/resources/Otp/Otp.constants';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import type { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 
 export const OtpForm: SFCModel<OtpFormPropsModel> = ({
   data,
   onBack,
+  onComplete,
   onSuccess,
   testID,
   ...props
@@ -40,6 +42,7 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
   };
 
   const { errors, handleChange, handleReset, handleSubmit, isLoading, values } = useForm({
+    onComplete,
     onError: _handleError,
     onSubmit: async ({ otp }) => {
       onSuccess && (await onSuccess({ otp }));
@@ -48,10 +51,11 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
     validators: OTP_FORM_VALIDATORS,
   });
 
-  const _handleChange = (value: string): void => {
+  const _handleChange = async (value: string): Promise<void> => {
     handleChange('otp')(value);
     if (value.length === OTP_LENGTH) {
-      setTimeout(handleSubmit);
+      await sleep();
+      handleSubmit && handleSubmit();
     }
   };
 

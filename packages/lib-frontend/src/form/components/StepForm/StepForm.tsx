@@ -31,22 +31,23 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
   const { width } = useDimension();
   const theme = useTheme();
 
-  const [current, setCurrent] = useState<number>(0);
-  const [data, setData] = useState<PartialModel<TType>>();
+  const [current, currentSet] = useState<number>(0);
+  const [isLoading, isLoadingSet] = useState<boolean>(false);
+  const [data, dataSet] = useState<PartialModel<TType>>();
 
   const _isLastStep = useMemo(() => current === steps.length - 1, [current, steps.length]);
 
   const barRef = useRef<AnimatableRefModel>(null);
 
   const _handleClear = (): void => {
-    _setCurrent(0);
-    setData(undefined);
+    _currentSet(0);
+    dataSet(undefined);
   };
 
-  useMount({ onMount: () => _setCurrent(0) });
+  useMount({ onMount: () => _currentSet(0) });
 
-  const _setCurrent = (value: number): void => {
-    setCurrent(value);
+  const _currentSet = (value: number): void => {
+    currentSet(value);
     width && barRef.current?.to({ width: (width / (steps.length + 1)) * (value + 1) });
   };
 
@@ -80,9 +81,9 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
             animation={{ isLazy: false }}
             isVisible={current > 0}>
             <Button
-              elementState={current <= 0 ? ELEMENT_STATE.DISABLED : undefined}
+              elementState={current <= 0 || isLoading ? ELEMENT_STATE.DISABLED : undefined}
               icon="arrowLeft"
-              onPress={() => _setCurrent(current - 1)}
+              onPress={() => _currentSet(current - 1)}
             />
           </Appearable>
         </Wrapper>
@@ -95,7 +96,15 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
               key: id,
               onBack: () => {
                 element.props.onBack && element.props.onBack();
-                _setCurrent(current - 1);
+                _currentSet(current - 1);
+              },
+              onComplete: () => {
+                isLoadingSet(false);
+                element.props.onComplete && element.props.onComplete();
+              },
+              onSubmit: async (data: TSteps[number]) => {
+                isLoadingSet(true);
+                element.props.onSubmit && (await element.props.onSubmit(data));
               },
               onSuccess: async (stepData: TSteps[number]) => {
                 element.props.onSuccess && (await element.props.onSuccess(stepData));
@@ -106,8 +115,8 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
                   await sleep({ duration: theme.animation.transition });
                   _handleClear();
                 } else {
-                  setData(_data);
-                  _setCurrent(current + 1);
+                  dataSet(_data);
+                  _currentSet(current + 1);
                 }
               },
             }),

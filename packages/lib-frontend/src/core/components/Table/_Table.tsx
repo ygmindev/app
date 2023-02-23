@@ -43,8 +43,8 @@ export const _Table = forwardRef(
   ) => {
     const { t } = useTranslation();
     const theme = useTheme();
-    const [gridApi, setGridApi] = useState<GridApi>();
-    const [columnApi, setColumnApi] = useState<ColumnApi>();
+    const [gridApi, gridApiSet] = useState<GridApi>();
+    const [columnApi, columnApiSet] = useState<ColumnApi>();
     const { duration } = theme.animation;
 
     useImperativeHandle(ref, () => ({
@@ -115,8 +115,8 @@ export const _Table = forwardRef(
           onGridReady={async ({ api, columnApi }) => {
             await sleep({ duration });
             isFullWidth ? api.sizeColumnsToFit() : columnApi.autoSizeAllColumns();
-            setGridApi(api);
-            setColumnApi(columnApi);
+            gridApiSet(api);
+            columnApiSet(columnApi);
             onMount && onMount();
           }}
           onRowDataUpdated={async () => {

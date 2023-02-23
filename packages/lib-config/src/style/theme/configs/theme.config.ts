@@ -143,7 +143,7 @@ export const themeConfig: ThemeConfigParamsModel = {
 
     width: {
       [THEME_BASIC_SIZE.SMALL]: 350,
-      [THEME_BASIC_SIZE.MEDIUM]: 500,
+      [THEME_BASIC_SIZE.MEDIUM]: 450,
       [THEME_BASIC_SIZE.LARGE]: 700,
     },
   },

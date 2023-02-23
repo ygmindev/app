@@ -10,14 +10,14 @@ export const useMount = (
     deps = [],
   ]: UseMountParamsModel
 ): UseMountModel => {
-  const [isMounted, setIsMounted] = useState<boolean>(false);
+  const [isMounted, isMountedSet] = useState<boolean>(false);
   useEffect(() => {
-    setIsMounted(true);
+    isMountedSet(true);
     onMount && onMount();
     return () => {
-      setIsMounted(false);
+      isMountedSet(false);
       onUnmount && onUnmount();
     };
-  }, [isMounted, setIsMounted, ...deps]);
+  }, [isMounted, isMountedSet, ...deps]);
   return isMounted;
 };

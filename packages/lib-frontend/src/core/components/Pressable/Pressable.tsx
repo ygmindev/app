@@ -29,7 +29,7 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
 }) => {
   const theme = useTheme();
   const { t } = useTranslation();
-  const [confirmModalIsOpen, setConfirmModalIsOpen] = useState<boolean>(false);
+  const [confirmModalIsOpen, confirmModalIsOpenSet] = useState<boolean>(false);
   const isMounted = useMount();
   const { styles } = useStyles({ props });
 
@@ -45,7 +45,7 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
   const _handleButtonPress: CallablePromiseModel = async () => {
     if (!_isDisabled) {
       if (confirmMessage) {
-        setConfirmModalIsOpen(true);
+        confirmModalIsOpenSet(true);
       } else {
         await _handlePress();
       }
@@ -95,7 +95,7 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
       {confirmMessage && (
         <Modal
           isOpen={confirmModalIsOpen}
-          onClose={() => setConfirmModalIsOpen(false)}>
+          onClose={() => confirmModalIsOpenSet(false)}>
           <Wrapper
             grow
             isCenter
@@ -106,7 +106,7 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
               <Button
                 elementState={valueControlled}
                 icon="chevronLeft"
-                onPress={async () => setConfirmModalIsOpen(false)}>
+                onPress={async () => confirmModalIsOpenSet(false)}>
                 {t('core:labels.cancel')}
               </Button>
 
@@ -115,7 +115,7 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
                 icon="chevronRight"
                 onPress={async () => {
                   await _handlePress();
-                  setConfirmModalIsOpen(false);
+                  confirmModalIsOpenSet(false);
                 }}>
                 {t('core:labels.continue')}
               </Button>

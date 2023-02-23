@@ -1,13 +1,17 @@
 import type { FormErrorModel, SubmittablePropsModel } from '@lib/frontend/form/form.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 
-export interface _UseFormParamsModel<TType>
-  extends Pick<SubmittablePropsModel<TType>, 'onSubmit' | 'onError'> {
+export interface _UseFormParamsModel<TType = void, TResult = void>
+  extends Pick<
+    SubmittablePropsModel<TType, TResult>,
+    'onSubmit' | 'onSuccess' | 'onComplete' | 'onError'
+  > {
   initialValues?: TType;
   onValidate?(data: TType): Promise<FormErrorModel<TType>>;
 }
 
-export interface _UseFormModel<TType> {
+export interface _UseFormModel<TType = void, TResult = void> {
+  data?: TResult | null;
   errors: FormErrorModel<TType>;
   handleChange(key: string): (value: string) => void;
   handleReset: CallableModel;

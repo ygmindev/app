@@ -7,10 +7,10 @@ import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import { useState } from 'react';
 
 export const useDimension = (): UseDimensionModel => {
-  const [dimension, setDimension] = useState<DimensionModel>(display.getDimension());
+  const [dimension, dimensionSet] = useState<DimensionModel>(display.getDimension());
   display.useLayoutEffect(() => {
     const update: CallableModel = debounce({
-      callback: () => setDimension(display.getDimension()),
+      callback: () => dimensionSet(display.getDimension()),
       duration: USE_DIMENSION_DELAY,
     });
     display.subscribeResize(update);

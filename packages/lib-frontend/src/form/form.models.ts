@@ -21,7 +21,8 @@ export type FormValidatorsModel<TType> = {
 export interface SubmittablePropsModel<TType = void, TResult = void>
   extends ElementStatePropsModel {
   onCancel?: CallableModel;
+  onComplete?: CallableModel;
   onError?(error: Error): void;
-  onSubmit?(data: TType): Promise<TResult>;
-  onSuccess?(data: TType, result: TResult): Promise<void>;
+  onSubmit?(data: TType): Promise<TResult | null>;
+  onSuccess?(data: TType, result?: TResult | null): Promise<void>;
 }

@@ -35,7 +35,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
     onChange,
     value,
   });
-  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [isFocused, isFocusedSet] = useState<boolean>(false);
   return (
     <Wrapper
       isCenter
@@ -73,9 +73,9 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             isAutoFocus={isAutoFocus}
             isNoClear
             maxLength={OTP_LENGTH}
-            onBlur={() => setIsFocused(false)}
+            onBlur={() => isFocusedSet(false)}
             onChange={setValueControlled}
-            onFocus={() => setIsFocused(true)}
+            onFocus={() => isFocusedSet(true)}
             value={valueControlled}
           />
         </Wrapper>

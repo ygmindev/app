@@ -11,11 +11,11 @@ export const Droppable: SFCModel<DroppablePropsModel> = ({
   testID,
   ...props
 }) => {
-  const [isActive, setIsActive] = useState<boolean>(false);
+  const [isActive, isActiveSet] = useState<boolean>(false);
   return (
     <Activatable
-      onActive={() => setIsActive(true)}
-      onInactive={() => setIsActive(false)}>
+      onActive={() => isActiveSet(true)}
+      onInactive={() => isActiveSet(false)}>
       <View testID={testID}>
         <Dropdown
           {...props}

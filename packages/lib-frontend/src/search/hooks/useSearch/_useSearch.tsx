@@ -17,10 +17,10 @@ export const _useSearch = <TType,>({
   delay = SEARCH_DELAY,
   limit = SEARCH_LIMIT,
 }: _UseSearchParamsModel<TType>): _UseSearchModel<TType> => {
-  const [query, setQuery] = useState<string>('');
+  const [query, querySet] = useState<string>('');
 
-  const _setQuery = useCallback(debounce({ callback: setQuery, duration: delay }), [
-    setQuery,
+  const _setQuery = useCallback(debounce({ callback: querySet, duration: delay }), [
+    querySet,
     delay,
   ]);
 

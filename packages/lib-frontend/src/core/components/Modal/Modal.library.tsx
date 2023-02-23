@@ -9,15 +9,15 @@ import { useState } from 'react';
 export const props: LibraryPropsModel<ModalPropsModel> = {
   Component: Modal,
   Renderer: ({ ...props }) => {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [isOpen, isOpenSet] = useState<boolean>(false);
     return (
       <Wrapper spacing>
-        <Button onPress={() => setIsOpen(true)}>Open</Button>
+        <Button onPress={() => isOpenSet(true)}>Open</Button>
 
         <Modal
           {...props}
           isOpen={isOpen}
-          onClose={() => setIsOpen(false)}>
+          onClose={() => isOpenSet(false)}>
           <WrapperFixture>Modal</WrapperFixture>
         </Modal>
       </Wrapper>

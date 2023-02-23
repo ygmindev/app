@@ -38,7 +38,7 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
     const { t } = useTranslation();
     const { styles } = useStyles({ props });
     const isMobile = useIsMobile();
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [isOpen, isOpenSet] = useState<boolean>(false);
 
     const subMenuRefs = useMemo(
       () =>
@@ -58,7 +58,7 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
     const _handleToggle = (value?: boolean): void => {
       Object.values(subMenuRefs).forEach((v) => v.current?.toggle(false));
       !value && onClose && onClose();
-      setIsOpen(!!value);
+      isOpenSet(!!value);
     };
 
     const _handlePress = async ({ id, onPress, subOptions }: MenuOptionModel): Promise<void> => {

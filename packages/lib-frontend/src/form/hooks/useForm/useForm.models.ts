@@ -4,9 +4,12 @@ import type {
   _UseFormParamsModel,
 } from '@lib/frontend/form/hooks/useForm/_useForm.models';
 
-export interface UseFormParamsModel<TType>
-  extends Pick<_UseFormParamsModel<TType>, 'onSubmit' | 'onError' | 'initialValues'> {
+export interface UseFormParamsModel<TType = void, TResult = void>
+  extends Pick<
+    _UseFormParamsModel<TType, TResult>,
+    'onSubmit' | 'onSuccess' | 'onComplete' | 'onError' | 'initialValues'
+  > {
   validators?: FormValidatorsModel<TType>;
 }
 
-export interface UseFormModel<TType> extends _UseFormModel<TType> {}
+export interface UseFormModel<TType = void, TResult = void> extends _UseFormModel<TType, TResult> {}

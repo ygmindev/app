@@ -49,6 +49,7 @@ const _FormContainer = <TType,>({
   isFullWidth,
   leftElement,
   onCancel,
+  onComplete,
   onSubmit,
   rows,
   submitLabel,
@@ -89,18 +90,17 @@ const _FormContainer = <TType,>({
     if (isEqual(_initialValues, _values)) {
       error({ message: t('core:messages.validateChanged') });
     } else {
-      try {
-        onSubmit && (await onSubmit(_values as TType));
-        success({ message: t(successMessage) || t('core:messages.submitSuccess') });
-      } catch (e) {
-        handleError(e as Error);
-      }
+      onSubmit && (await onSubmit(_values as TType));
     }
   };
 
   const { errors, handleChange, handleSubmit, isLoading, values } = useForm<TType>({
     initialValues,
+    onComplete,
+    onError: handleError,
     onSubmit: _handleSubmit,
+    onSuccess: async () =>
+      success({ message: t(successMessage) || t('core:messages.submitSuccess') }),
     validators,
   });
 

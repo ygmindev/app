@@ -10,16 +10,16 @@ import { useMemo, useState } from 'react';
 
 export const Slides: SFCModel<SlidesPropsModel> = ({ current, slides, testID, ...props }) => {
   const { styles } = useStyles({ props });
-  const [measure, setMeasure] = useState<MeasureModel>();
-  const [_current, setCurrent] = useState(current);
-  const previous = useChange({ onChange: () => setCurrent(current), value: current });
+  const [measure, measureSet] = useState<MeasureModel>();
+  const [_current, currentSet] = useState(current);
+  const previous = useChange({ onChange: () => currentSet(current), value: current });
   const _isBack = useMemo(() => (previous || 0) > (current || 0), [previous, current]);
   return (
     <Wrapper
       grow
       isFullWidth
       isOverflowHidden
-      onMeasure={setMeasure}
+      onMeasure={measureSet}
       position={SHAPE_POSITION.RELATIVE}
       style={styles}
       testID={testID}>

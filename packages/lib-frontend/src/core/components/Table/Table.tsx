@@ -37,7 +37,7 @@ export const Table = forwardRef(
   ) => {
     const { styles } = useStyles({ props });
     const theme = useTheme();
-    const [isMounted, setIsMounted] = useState<boolean>();
+    const [isMounted, isMountedSet] = useState<boolean>();
     const _isLoading = elementState === ELEMENT_STATE.LOADING;
 
     return (
@@ -74,7 +74,7 @@ export const Table = forwardRef(
             isFullWidth={isFullWidth}
             isVirtualized={isVirtualized}
             onMount={() => {
-              setIsMounted(true);
+              isMountedSet(true);
               onMount && onMount();
             }}
             onSelect={onSelect}

@@ -11,7 +11,7 @@ import { useState } from 'react';
 export const props: LibraryPropsModel<SlidesPropsModel> = {
   Component: Slides,
   Renderer: ({ ...props }) => {
-    const [current, setCurrent] = useState<number>(0);
+    const [current, currentSet] = useState<number>(0);
     const _length = props.slides?.length || 1;
 
     return (
@@ -21,13 +21,13 @@ export const props: LibraryPropsModel<SlidesPropsModel> = {
         <Wrapper isRowAlign>
           <Button
             elementState={current <= 0 ? ELEMENT_STATE.DISABLED : undefined}
-            onPress={() => setCurrent(Math.max(0, current - 1))}>
+            onPress={() => currentSet(Math.max(0, current - 1))}>
             Previous
           </Button>
 
           <Button
             elementState={current >= _length - 1 ? ELEMENT_STATE.DISABLED : undefined}
-            onPress={() => setCurrent(Math.min(_length - 1, current + 1))}>
+            onPress={() => currentSet(Math.min(_length - 1, current + 1))}>
             Next
           </Button>
         </Wrapper>

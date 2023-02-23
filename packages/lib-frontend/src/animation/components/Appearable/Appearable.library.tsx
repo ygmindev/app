@@ -10,11 +10,11 @@ import { useState } from 'react';
 export const props: LibraryPropsModel<AppearablePropsModel> = {
   Component: Appearable,
   Renderer: ({ ...props }) => {
-    const [isVisible, setIsVisible] = useState<boolean>(false);
+    const [isVisible, isVisibleSet] = useState<boolean>(false);
     return (
       <Wrapper spacing>
         <Button
-          onPress={() => setIsVisible(!isVisible)}
+          onPress={() => isVisibleSet(!isVisible)}
           type={BUTTON_TYPE.TRANSPARENT}>
           {isVisible ? 'Close' : 'Open'}
         </Button>

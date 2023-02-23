@@ -7,12 +7,12 @@ import { useState } from 'react';
 export const props: LibraryPropsModel<ActivatablePropsModel> = {
   Component: Activatable,
   Renderer: ({ ...props }) => {
-    const [isActive, setIsActive] = useState<boolean>(false);
+    const [isActive, isActiveSet] = useState<boolean>(false);
     return (
       <Activatable
         {...props}
-        onActive={() => setIsActive(true)}
-        onInactive={() => setIsActive(false)}>
+        onActive={() => isActiveSet(true)}
+        onInactive={() => isActiveSet(false)}>
         <WrapperFixture>{`isActive: ${isActive}`}</WrapperFixture>
       </Activatable>
     );

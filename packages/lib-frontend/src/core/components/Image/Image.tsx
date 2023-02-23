@@ -16,7 +16,7 @@ export const Image: SFCModel<ImagePropsModel> = ({
   width,
   ...props
 }) => {
-  const [dimension, setDimension] = useState<DimensionModel>({ height, width });
+  const [dimension, dimensionSet] = useState<DimensionModel>({ height, width });
   const { styles } = useStyles({ props: { ...props, ...dimension }, stylers: [shapeStyler] });
   const [current, currentSet] = useState<number>(0);
   const _src = isArray(src) ? src[current] : src;
@@ -34,7 +34,7 @@ export const Image: SFCModel<ImagePropsModel> = ({
         } else {
           ratio = 1;
         }
-        setDimension({ height: srcHeight * ratio, width: srcWidth * ratio });
+        dimensionSet({ height: srcHeight * ratio, width: srcWidth * ratio });
       }),
     [],
   );

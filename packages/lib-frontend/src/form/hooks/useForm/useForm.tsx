@@ -13,12 +13,14 @@ import isFunction from 'lodash/isFunction';
 import isPlainObject from 'lodash/isPlainObject';
 import reduce from 'lodash/reduce';
 
-export const useForm = <TType extends unknown>({
+export const useForm = <TType = void, TResult = void>({
   initialValues,
+  onComplete,
   onError,
   onSubmit,
+  onSuccess,
   validators,
-}: UseFormParamsModel<TType>): UseFormModel<TType> => {
+}: UseFormParamsModel<TType, TResult>): UseFormModel<TType, TResult> => {
   const { t } = useTranslation();
   const { handleError } = useErrorBoundary();
 
@@ -50,16 +52,20 @@ export const useForm = <TType extends unknown>({
       {} as FormErrorModel<TType>,
     );
 
-  const _handleSubmit = async (data: TType): Promise<void> => {
+  const _handleSubmit = async (values: TType): Promise<TResult | null> => {
     try {
-      onSubmit && (await onSubmit(data));
+      const data = onSubmit && (await onSubmit(values));
+      onSuccess && (await onSuccess(values, data));
+      return data || null;
     } catch (e) {
-      console.warn(e);
       onError ? onError(e as Error) : handleError(e as Error);
+    } finally {
+      onComplete && onComplete();
     }
+    return null;
   };
 
-  return _useForm({
+  return _useForm<TType, TResult>({
     initialValues,
     onSubmit: _handleSubmit,
     onValidate: async (data) => _validate(data, validators),

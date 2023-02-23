@@ -14,7 +14,7 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
   ref = null,
 }: _UseAnimationStateParamsModel<TStyle>): _UseAnimationStateModel<TStyle> => {
   const { delay, duration, isInfinite, isInitial = true, isLazy = true, states } = animation || {};
-  const [current, setCurrent] = useState<TStyle | undefined>(
+  const [current, currentSet] = useState<TStyle | undefined>(
     states ? states[elementState] : undefined,
   );
 
@@ -23,11 +23,11 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
   useImperativeHandle(ref, () => ({
     to: (params) => {
       animationState.animateTo(params as DynamicStyleProp);
-      setCurrent(params as TStyle);
+      currentSet(params as TStyle);
     },
     toState: (params) => {
       states && states[params] && animationState.animateTo(states[params] as DynamicStyleProp);
-      setCurrent(states ? (states[params] as TStyle) : undefined);
+      currentSet(states ? (states[params] as TStyle) : undefined);
     },
   }));
 

@@ -5,12 +5,15 @@ import type {
 } from '@lib/frontend/form/hooks/useForm/_useForm.models';
 import type { FormikErrors, FormikValues } from 'formik';
 import { useFormik } from 'formik';
+import { useState } from 'react';
 
-export const _useForm = <TType extends unknown>({
+export const _useForm = <TType = void, TResult = void>({
   initialValues,
   onSubmit,
   onValidate,
-}: _UseFormParamsModel<TType>): _UseFormModel<TType> => {
+}: _UseFormParamsModel<TType, TResult>): _UseFormModel<TType, TResult> => {
+  const [data, dataSet] = useState<TResult | null>();
+
   const {
     errors,
     handleReset,
@@ -24,13 +27,14 @@ export const _useForm = <TType extends unknown>({
   } = useFormik<TType & FormikValues>({
     initialValues: initialValues || ({} as TType & FormikValues),
     onSubmit: async (data) => {
-      onSubmit && (await onSubmit(data));
+      dataSet((onSubmit && (await onSubmit(data))) || null);
     },
     validate: onValidate,
     validateOnChange: false,
   });
 
   return {
+    data,
     errors: errors as FormErrorModel<TType>,
     handleChange: (id) => (value) => setFieldValue(id, value),
     handleReset: () => handleReset(null),

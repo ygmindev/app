@@ -8,6 +8,7 @@ import type { SFCModel } from '@lib/frontend/core/core.models';
 import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
 import type { RouteHeaderPropsModel } from '@lib/frontend/route/containers/RouteHeader/RouteHeader.models';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
@@ -25,6 +26,7 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ..
   const { push } = useRouter();
   const _previous = route.header?.previous;
   const ref = useRef<AnimatableRefModel>(null);
+  const isLoading = useStore((state) => state.app.isLoading);
   return (
     <Wrapper
       animation={{ duration: theme.animation.transition, states: ANIMATION_STATES_APPEARABLE }}
@@ -42,6 +44,7 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ..
       testID={testID}>
       {_previous && (
         <Button
+          elementState={isLoading ? ELEMENT_STATE.DISABLED : undefined}
           icon="chevronLeft"
           onPress={() => {
             ref.current?.toState(ELEMENT_STATE.INACTIVE);

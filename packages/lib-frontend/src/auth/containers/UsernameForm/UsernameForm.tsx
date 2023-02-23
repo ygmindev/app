@@ -17,6 +17,7 @@ import { isTypeOf } from '@lib/shared/core/utils/isTypeOf/isTypeOf';
 
 export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   isCheckIfNotExists,
+  onComplete,
   onSuccess,
   testID,
   ...props
@@ -42,6 +43,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
 
   return (
     <FormContainer
+      onComplete={onComplete}
       onSubmit={_handleSubmit}
       rows={USERNAME_FORM_FIELDS}
       style={styles}

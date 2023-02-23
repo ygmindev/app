@@ -21,7 +21,7 @@ export const Accordion: SFCModel<AccordionPropsModel> = ({
   ...props
 }) => {
   const { styles } = useStyles({ props });
-  const [measure, setMeasure] = useState<MeasureModel>();
+  const [measure, measureSet] = useState<MeasureModel>();
   const { setValueControlled, valueControlled } = useControlledValue<ElementStateModel>({
     defaultValue,
     onChange,
@@ -75,7 +75,7 @@ export const Accordion: SFCModel<AccordionPropsModel> = ({
         }
         elementState={valueControlled}
         isOverflowHidden>
-        <Wrapper onMeasure={setMeasure}>{children}</Wrapper>
+        <Wrapper onMeasure={measureSet}>{children}</Wrapper>
       </Wrapper>
     </Wrapper>
   );

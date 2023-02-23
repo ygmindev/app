@@ -33,7 +33,7 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
   const { styles } = useStyles({ props });
   const menuRef = useRef<MenuRefModel>(null);
   const { t } = useTranslation();
-  const [query, setQuery] = useState<string>();
+  const [query, querySet] = useState<string>();
   const { setValueControlled, valueControlled } = useControlledValue({
     defaultValue,
     onChange,
@@ -44,7 +44,7 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
 
   const _handleToggle = (isOpen?: boolean): void => {
     search('');
-    setQuery('');
+    querySet('');
     menuRef && menuRef.current && menuRef.current.toggle(isOpen);
   };
 
@@ -59,7 +59,7 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
   };
 
   const onQueryChange = (value: string): void => {
-    setQuery(value);
+    querySet(value);
     search(value);
   };
 
