@@ -3,6 +3,8 @@ import { EMAIL, NAME } from '@lib/frontend/user/user.constants';
 
 export const PERSONAL_PAGE_FIELDS: Array<PersonalPageItemModel> = [
   {
+    icon: 'id',
+
     id: NAME,
 
     label: ({ t }) => t('user:labels.name'),
@@ -11,6 +13,8 @@ export const PERSONAL_PAGE_FIELDS: Array<PersonalPageItemModel> = [
   },
 
   {
+    icon: 'email',
+
     id: EMAIL,
 
     label: ({ t }) => t('user:labels.email'),
