@@ -36,6 +36,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
   const actions = useActions();
   const currentUser = useStore((state) => state.user.currentUser);
   const brightness = useStore((state) => state.style.brightness);
+  const _brightness = brightness || DEVICE;
 
   const _optionsOverrides = useMemo<Record<string, PartialModel<AuthMenuOptionModel>>>(
     () => ({
@@ -43,8 +44,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
         subOptions: AUTH_MENU_OPTIONS.find(({ id }) => id === BRIGHTNESS)?.subOptions?.map(
           (subOption) => ({
             ...subOption,
-            elementState:
-              subOption.id === (brightness || DEVICE) ? ELEMENT_STATE.ACTIVE : undefined,
+            elementState: subOption.id === _brightness ? ELEMENT_STATE.ACTIVE : undefined,
             onPress: () =>
               actions?.style.brightnessSet(
                 subOption.id === DEVICE ? undefined : (subOption.id as StyleBrightnessModel),

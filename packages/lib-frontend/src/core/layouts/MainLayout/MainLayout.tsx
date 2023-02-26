@@ -21,7 +21,6 @@ export const MainLayout: SFCModel<MainLayoutPropsModel> = ({
       grow
       isCenter={isCenter}
       isFullWidth={_isFullWidth}
-      m="auto"
       spacing
       style={styles}
       width={_isFullWidth ? undefined : theme.layout.width[THEME_BASIC_SIZE.MEDIUM]}>

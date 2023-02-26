@@ -5,9 +5,13 @@ import { STYLE_BRIGHTNESS } from '@lib/frontend/style/style.constants';
 import type { ThemeColorModel } from '@lib/frontend/style/style.models';
 import { palette } from '@lib/frontend/style/utils/palette/palette';
 import { useMemo } from 'react';
+import { useColorScheme } from 'react-native';
 
 export const useTheme = (): UseThemeModel => {
   const brightness = useStore((state) => state.style.brightness);
+  const device = useColorScheme();
+  // const _brightness = brightness || device || STYLE_BRIGHTNESS.LIGHT;
+  const _brightness = brightness || STYLE_BRIGHTNESS.LIGHT;
   return useMemo<UseThemeModel>(
     () => ({
       ...themeConfig,
@@ -18,8 +22,6 @@ export const useTheme = (): UseThemeModel => {
 
         tone: (Object.keys(themeConfig.colors.tone) as Array<ThemeColorModel>).reduce(
           (result, key) => {
-            // TODO: get device theme for default
-            const _brightness = brightness || STYLE_BRIGHTNESS.LIGHT;
             const color = themeConfig.colors.tone[key] as ThemeColorModel;
             const _palette = themeConfig.colors.palette[_brightness][key];
             return {
@@ -36,6 +38,6 @@ export const useTheme = (): UseThemeModel => {
         ),
       },
     }),
-    [brightness, themeConfig],
+    [_brightness, themeConfig],
   );
 };
