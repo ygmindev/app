@@ -19,7 +19,6 @@ import type { ReactElement } from 'react';
 import { cloneElement, useMemo, useRef, useState } from 'react';
 
 export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends Array<unknown>>({
-  onError,
   onSubmit,
   onSuccess,
   steps,
@@ -103,24 +102,21 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
                 isLoadingSet(false);
                 element.props.onComplete && element.props.onComplete();
               },
-              onError,
-              onSubmit: async (data: TSteps[number]) => {
+              onSubmit: async (stepData: TSteps[number]) => {
                 isLoadingSet(true);
-                return element.props.onSubmit && (await element.props.onSubmit(data));
+                element.props.onSubmit && (await element.props.onSubmit(data));
+                if (_isLastStep) {
+                  const _data = { ...data, ...(stepData as object) };
+                  const _result = onSubmit && (await onSubmit(_data as TType));
+                  onSuccess && (await onSuccess(_data as TType, _result));
+                  await sleep({ duration: theme.animation.transition });
+                  _handleClear();
+                }
               },
               onSuccess: async (stepData: TSteps[number]) => {
                 element.props.onSuccess && (await element.props.onSuccess(stepData));
                 const _data = { ...data, ...(stepData as object) };
-                if (_isLastStep) {
-                  try {
-                    const _result = onSubmit && (await onSubmit(_data as TType));
-                    onSuccess && (await onSuccess(_data as TType, _result));
-                    await sleep({ duration: theme.animation.transition });
-                    _handleClear();
-                  } catch (e) {
-                    onError && onError(e as Error);
-                  }
-                } else {
+                if (!_isLastStep) {
                   dataSet(_data);
                   _currentSet(current + 1);
                 }

@@ -5,8 +5,6 @@ import { withId } from '@lib/shared/core/decorators/withId/withId';
 import { DEVICE, SETTINGS } from '@lib/shared/settings/settings.constants';
 import { BRIGHTNESS } from '@lib/shared/style/style.constants';
 
-export const AUTH_MENU_USERNAME_WIDTH = 150;
-
 export interface AuthMenuOptionModel extends MenuOptionModel {
   isProtected?: boolean;
 }
@@ -25,7 +23,7 @@ export const AUTH_MENU_OPTIONS: Array<AuthMenuOptionModel> = withId([
     ]) as Array<AuthMenuOptionModel>,
   },
 
-  { isDivider: true },
+  { isDivider: true, isProtected: true },
 
   {
     icon: 'settings',

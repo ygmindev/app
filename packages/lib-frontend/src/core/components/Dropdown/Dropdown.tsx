@@ -11,15 +11,16 @@ import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 export const Dropdown = composeComponent<DropdownPropsModel, _DropdownPropsModel>({
   Component: _Dropdown,
 
-  getProps: ({ anchor, children, direction, isFullWidth, isOpen, onClose }) => ({
+  getProps: ({ anchor, children, direction, isFullWidth, isOpen, onClose, width }) => ({
     anchor,
     children: (
       <Wrapper
         backgroundColor={THEME_COLOR.NEUTRAL}
         border
-        isFullWidth
+        isFullWidth={width ? undefined : true}
         isShadow
-        round>
+        round
+        width={width}>
         <Wrapper
           grow
           isVerticalScrollable

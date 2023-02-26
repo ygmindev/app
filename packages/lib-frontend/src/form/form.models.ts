@@ -23,7 +23,7 @@ export type FormErrorModel<TType> = {
     : FormErrorModel<TType[TKey]>;
 };
 
-export type FormValidatorModel<TType = string> = (params: {
+export type FormValidatorModel<TType = string | undefined> = (params: {
   value: TType;
 }) => TranslatableTextModel | null;
 

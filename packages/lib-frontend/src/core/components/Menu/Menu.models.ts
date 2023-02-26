@@ -16,7 +16,7 @@ export interface MenuOptionModel extends TranslatableOptionModel {
 }
 
 export interface MenuPropsModel
-  extends Pick<DropdownPropsModel, 'isFullWidth' | 'onClose' | 'direction'>,
+  extends Pick<DropdownPropsModel, 'width' | 'maxWidth' | 'isFullWidth' | 'onClose' | 'direction'>,
     Omit<FieldPropsModel, 'id'>,
     RefPropsModel<MenuRefModel> {
   anchor(isOpen?: boolean): ReactElement<PressablePropsModel>;

@@ -1,7 +1,7 @@
 import { AuthProvider } from '@lib/frontend/auth/providers/AuthProvider/AuthProvider';
-import { ErrorContainer } from '@lib/frontend/core/containers/ErrorContainer/ErrorContainer';
-import { ERROR_CONTAINER_MODE } from '@lib/frontend/core/containers/ErrorContainer/ErrorContainer.constants';
 import type { FCModel } from '@lib/frontend/core/core.models';
+import { ErrorProvider } from '@lib/frontend/core/providers/ErrorProvider/ErrorProvider';
+import { ERROR_MODE } from '@lib/frontend/core/providers/ErrorProvider/ErrorProvider.constants';
 import { QueryProvider } from '@lib/frontend/core/providers/QueryProvider/QueryProvider';
 import { LocaleProvider } from '@lib/frontend/locale/providers/LocaleProvider/LocaleProvider';
 import type { RootPropsModel } from '@lib/frontend/root/containers/Root/Root.models';
@@ -21,10 +21,10 @@ export const Root: FCModel<RootPropsModel> = ({ children, initialState, locale, 
       <RootLayout />,
       <RouteProvider value={route} />,
       <TrackingProvider />,
-      <AuthProvider />,
-      <StyleProvider />,
       <QueryProvider />,
-      <ErrorContainer mode={ERROR_CONTAINER_MODE.NOTIFICATION} />,
+      <AuthProvider />,
+      <ErrorProvider value={{ mode: ERROR_MODE.NOTIFICATION }} />,
+      <StyleProvider />,
       <LocaleProvider value={locale} />,
       <StateProvider value={initialState} />,
       <Suspense />, // to provider?

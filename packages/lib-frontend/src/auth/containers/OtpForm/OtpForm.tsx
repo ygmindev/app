@@ -1,98 +1,89 @@
-import { OtpField } from '@lib/frontend/auth/components/OtpField/OtpField';
-import { OTP_FORM_VALIDATORS } from '@lib/frontend/auth/containers/OtpForm/OtpForm.constants';
-import type { OtpFormPropsModel } from '@lib/frontend/auth/containers/OtpForm/OtpForm.models';
+import {
+  OTP_FORM_FIELDS,
+  OTP_FORM_VALIDATORS,
+} from '@lib/frontend/auth/containers/OtpForm/OtpForm.constants';
+import type {
+  OtpFormModel,
+  OtpFormPropsModel,
+} from '@lib/frontend/auth/containers/OtpForm/OtpForm.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { ErrorContainer } from '@lib/frontend/core/containers/ErrorContainer/ErrorContainer';
-import { ERROR_CONTAINER_MODE } from '@lib/frontend/core/containers/ErrorContainer/ErrorContainer.constants';
-import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayout';
-import { useForm } from '@lib/frontend/form/hooks/useForm/useForm';
+import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
+import type { FormContainerRefModel } from '@lib/frontend/form/containers/FormContainer/FormContainer.models';
 import { Trans } from '@lib/frontend/locale/components/Trans/Trans';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { OTP_LENGTH } from '@lib/shared/auth/resources/Otp/Otp.constants';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import type { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
+import { useRef } from 'react';
 
-export const OtpForm: SFCModel<OtpFormPropsModel> = ({ ...props }) => (
-  <ErrorContainer
-    getError={(e) =>
-      (e as HttpError).statusCode === HTTP_STATUS_CODE.FORBIDDEN
-        ? {
-            icon: 'ban',
-            message: ({ t }) => t('auth:messages.incorrectOtp'),
-            title: ({ t }) => t('auth:labels.incorrectOtp'),
-          }
-        : undefined
-    }
-    mode={ERROR_CONTAINER_MODE.NOTIFICATION}>
-    <_OtpForm {...props} />
-  </ErrorContainer>
-);
-
-const _OtpForm: SFCModel<OtpFormPropsModel> = ({
+export const OtpForm: SFCModel<OtpFormPropsModel> = ({
   data,
   onBack,
   onComplete,
+  onError,
+  onSubmit,
   onSuccess,
   testID,
   ...props
 }) => {
   const { styles } = useStyles({ props });
   const { t } = useTranslation();
-
-  const { errors, handleChange, handleReset, handleSubmit, isLoading, values } = useForm({
-    onComplete: () => {
-      onComplete && onComplete();
-      handleReset();
-    },
-    onSuccess,
-    validators: OTP_FORM_VALIDATORS,
-  });
-
-  const _handleChange = async (value: string): Promise<void> => {
-    handleChange('otp')(value);
-    if (value.length === OTP_LENGTH) {
-      await sleep();
-      handleSubmit && handleSubmit();
-    }
-  };
+  const ref = useRef<FormContainerRefModel<OtpFormModel>>(null);
 
   return (
-    <CenterLayout
-      style={styles}
-      testID={testID}>
-      {data && data.username && (
-        <Trans
-          components={[<Text isBold />]}
-          i18nKey="messages.otpEnter"
-          ns="auth"
-          params={{ value: data.username }}
-        />
+    <FormContainer
+      bottomElement={({ elementState }) => (
+        <Wrapper
+          isCenter
+          isRowAlign>
+          <Text>{t('auth:messages.otpDidntGet')}</Text>
+
+          <Button
+            elementState={elementState}
+            icon="refresh"
+            onPress={onBack}>
+            {t('core:labels.tryAgain')}
+          </Button>
+        </Wrapper>
       )}
-
-      <OtpField
-        elementState={isLoading ? ELEMENT_STATE.DISABLED : undefined}
-        error={errors.otp}
-        isAutoFocus
-        onChange={_handleChange}
-        value={values.otp}
-      />
-
-      <Wrapper isRowAlign>
-        <Text>{t('auth:messages.otpDidntGet')}</Text>
-
-        <Button
-          elementState={isLoading ? ELEMENT_STATE.LOADING : undefined}
-          icon="refresh"
-          onPress={onBack}>
-          {t('core:labels.tryAgain')}
-        </Button>
-      </Wrapper>
-    </CenterLayout>
+      errorContextGet={(e) =>
+        (e as HttpError).statusCode === HTTP_STATUS_CODE.UNAUTHORIZED
+          ? {
+              icon: 'ban',
+              message: ({ t }) => t('auth:messages.wrongOtp'),
+              title: ({ t }) => t('auth:labels.wrongOtp'),
+            }
+          : undefined
+      }
+      isButton={false}
+      onComplete={() => {
+        onComplete && onComplete();
+        ref.current?.reset();
+      }}
+      onError={onError}
+      onSubmit={onSubmit}
+      onSuccess={onSuccess}
+      ref={ref}
+      rows={OTP_FORM_FIELDS}
+      style={styles}
+      testID={testID}
+      topElement={() =>
+        data &&
+        data.username && (
+          <Wrapper isCenter>
+            <Trans
+              components={[<Text isBold />]}
+              i18nKey="messages.otpEnter"
+              ns="auth"
+              params={{ value: data.username }}
+            />
+          </Wrapper>
+        )
+      }
+      validators={OTP_FORM_VALIDATORS}
+    />
   );
 };

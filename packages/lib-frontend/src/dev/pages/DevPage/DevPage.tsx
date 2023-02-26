@@ -1,34 +1,34 @@
-import { ANIMATION_STATES_APPEARABLE } from '@lib/frontend/animation/animation.constants';
 import type { AnimatableRefModel } from '@lib/frontend/animation/animation.models';
-import { Button } from '@lib/frontend/core/components/Button/Button';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { FCModel } from '@lib/frontend/core/core.models';
 import type { DevPagePropsModel } from '@lib/frontend/dev/pages/DevPage/DevPage.models';
-import { useRef } from 'react';
+import { createContext, useContext, useRef } from 'react';
+
+export const AnalyticsContext = createContext({
+  category: 'Page',
+});
+
+const ButtonInCtx = () => {
+  const { category } = useContext(AnalyticsContext);
+  return <button type="button">Context: {category}</button>;
+};
 
 export const DevPage: FCModel<DevPagePropsModel> = ({ testID }) => {
   const ref = useRef<AnimatableRefModel>(null);
   return (
-    <Wrapper
-      p
-      spacing
-      testID={testID}>
-      <Button
-        onPress={() => {
-          ref?.current?.toState('inactive');
-        }}>
-        delete
-      </Button>
+    <AnalyticsContext.Provider value={{ category: 'Page' }}>
+      <AnalyticsContext.Provider value={{ category: 'Header' }}>
+        <ButtonInCtx />
+      </AnalyticsContext.Provider>
 
-      <Wrapper
-        animation={{ states: ANIMATION_STATES_APPEARABLE }}
-        backgroundColor="red"
-        elementState={ELEMENT_STATE.ACTIVE}
-        height={100}
-        ref={ref}
-        width={100}
-      />
-    </Wrapper>
+      <AnalyticsContext.Provider value={{ category: 'Body' }}>
+        <ButtonInCtx />
+      </AnalyticsContext.Provider>
+
+      <ButtonInCtx />
+
+      <AnalyticsContext.Provider value={{ category: 'Footer' }}>
+        <ButtonInCtx />
+      </AnalyticsContext.Provider>
+    </AnalyticsContext.Provider>
   );
 };

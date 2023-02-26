@@ -1,4 +1,4 @@
-export enum ERROR_CONTAINER_MODE {
+export enum ERROR_MODE {
   FALLBACK = 'fallback',
   NOTIFICATION = 'notification',
 }

@@ -13,8 +13,8 @@ import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormC
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import type { OtpModel } from '@lib/shared/auth/resources/Otp/Otp.models';
-import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
-import { isTypeOf } from '@lib/shared/core/utils/isTypeOf/isTypeOf';
+import type { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
+import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 
 export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   isCheckIfNotExists,
@@ -41,8 +41,8 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
       style={styles}
       testID={testID}>
       <FormContainer
-        getError={(e) =>
-          isCheckIfNotExists && isTypeOf(e, DuplicateError)
+        errorContextGet={(e) =>
+          isCheckIfNotExists && (e as HttpError).statusCode === HTTP_STATUS_CODE.CONFLICT
             ? { icon: 'people', message: t('auth:messages.userExistsError') }
             : undefined
         }

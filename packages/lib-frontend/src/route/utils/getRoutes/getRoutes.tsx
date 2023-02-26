@@ -19,13 +19,14 @@ import { AUTH } from '@lib/shared/auth/auth.constants';
 import { CORE } from '@lib/shared/core/core.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
 import { SETTINGS } from '@lib/shared/settings/settings.constants';
+import { STYLE } from '@lib/shared/style/style.constants';
 import { USER } from '@lib/shared/user/user.constants';
 
 export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesModel =>
   [
     {
       element: <AppLayout />,
-      ns: [CORE],
+      ns: [AUTH, CORE, STYLE, SETTINGS],
       pathname: '/',
       routes: [
         ...appRoutes,

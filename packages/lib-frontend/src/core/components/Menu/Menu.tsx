@@ -24,13 +24,16 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
     {
       anchor,
       direction,
+      isFullWidth,
       isSearchable,
+      maxWidth,
       onChange,
       onClose,
       options,
       renderOption,
       topElement,
       value,
+      width,
       ...props
     },
     ref,
@@ -147,9 +150,11 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
       <Dropdown
         anchor={_anchor}
         direction={direction}
+        isFullWidth={isFullWidth}
         isOpen={isOpen}
         onClose={() => _handleToggle(false)}
-        style={styles}>
+        style={styles}
+        width={width}>
         {_children}
       </Dropdown>
     );

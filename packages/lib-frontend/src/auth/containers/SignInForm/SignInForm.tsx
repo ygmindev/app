@@ -16,14 +16,13 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({ mode, testID, ...pr
   const { replace } = useRouter();
   const { signIn, usernameUpdate } = useSignInResource();
 
-  const _handleSubmit = async (form: SignInFormModel): Promise<void> => {
-    await (mode === SIGN_IN_FORM_MODE.CREATE ? signIn(form) : usernameUpdate(form));
-    replace({ pathname: '/' });
-  };
+  const _handleSubmit = async (form: SignInFormModel): Promise<void> =>
+    mode === SIGN_IN_FORM_MODE.CREATE ? signIn(form) : usernameUpdate(form);
 
   return (
     <StepForm<SignInFormModel, [UsernameFormModel, OtpFormModel]>
       onSubmit={_handleSubmit}
+      onSuccess={async () => replace({ pathname: '/' })}
       steps={[
         {
           element: <UsernameForm isCheckIfNotExists={mode === SIGN_IN_FORM_MODE.UPDATE} />,

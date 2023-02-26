@@ -1,9 +1,6 @@
 import { SignInButton } from '@lib/frontend/auth/components/SignInButton/SignInButton';
 import type { AuthMenuOptionModel } from '@lib/frontend/auth/containers/AuthMenu/AuthMenu.constants';
-import {
-  AUTH_MENU_OPTIONS,
-  AUTH_MENU_USERNAME_WIDTH,
-} from '@lib/frontend/auth/containers/AuthMenu/AuthMenu.constants';
+import { AUTH_MENU_OPTIONS } from '@lib/frontend/auth/containers/AuthMenu/AuthMenu.constants';
 import type { AuthMenuPropsModel } from '@lib/frontend/auth/containers/AuthMenu/AuthMenu.models';
 import { useAuthState } from '@lib/frontend/auth/hooks/useAuthState/useAuthState';
 import { AUTH_STATE } from '@lib/frontend/auth/hooks/useAuthState/useAuthState.constants';
@@ -18,6 +15,8 @@ import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
 import type { StyleBrightnessModel } from '@lib/frontend/style/style.models';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SIGN_OUT } from '@lib/shared/auth/auth.constants';
@@ -29,8 +28,8 @@ import { useMemo } from 'react';
 
 export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
   useTranslation();
-
   const { styles } = useStyles({ props });
+  const theme = useTheme();
   const { signOut } = useSignInResource();
   const { push } = useRouter();
   const authState = useAuthState();
@@ -91,13 +90,15 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
           <Text
             align={FONT_ALIGN.CENTER}
             isEllipsis
-            width={AUTH_MENU_USERNAME_WIDTH}>
+            isFullWidth
+            p={THEME_BASIC_SIZE.SMALL}>
             {currentUser.email}
           </Text>
         ) : (
           <SignInButton />
         )
       }
+      width={theme.layout.width[THEME_BASIC_SIZE.SMALL]}
     />
   );
 };

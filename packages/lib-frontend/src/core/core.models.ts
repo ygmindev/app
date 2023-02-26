@@ -25,6 +25,12 @@ export type SFCPropsModel<TProps = object, TStyle extends StyleModel = ViewStyle
   SFCModel<TProps, TStyle>
 >;
 
+export type RSFCPropsModel<
+  TType = undefined,
+  TProps = object,
+  TStyle extends StyleModel = ViewStyleModel,
+> = PropsModel<RSFCModel<TType, TProps, TStyle>>;
+
 export type PropsModel<TType> = TType extends ComponentType<infer TProps> ? TProps : never;
 
 export interface RefPropsModel<TType = unknown> {
@@ -35,7 +41,8 @@ export interface ChildrenPropsModel<TType = ReactNode | Array<ReactNode>> {
   children?: TType;
 }
 
-export interface ProviderPropsModel<TType = undefined> extends ChildrenPropsModel {
+export interface ProviderPropsModel<TType = undefined, TChildren = ReactNode | Array<ReactNode>>
+  extends ChildrenPropsModel<TChildren> {
   value?: TType;
 }
 

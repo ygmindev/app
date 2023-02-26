@@ -48,7 +48,7 @@ export const themeConfig: ThemeConfigParamsModel = {
         [THEME_COLOR.NEUTRAL]: {
           main: { lightness: 10 },
           mainContrast: { lightness: 90 },
-          muted: { lightness: 10 },
+          muted: { lightness: 90 },
           mutedContrast: { lightness: 90 },
         },
         [THEME_COLOR.WARNING]: {
@@ -142,7 +142,7 @@ export const themeConfig: ThemeConfigParamsModel = {
     },
 
     width: {
-      [THEME_BASIC_SIZE.SMALL]: 350,
+      [THEME_BASIC_SIZE.SMALL]: 200,
       [THEME_BASIC_SIZE.MEDIUM]: 450,
       [THEME_BASIC_SIZE.LARGE]: 700,
     },

@@ -3,7 +3,7 @@ import type { FormStepPropsModel } from '@lib/frontend/form/components/StepForm/
 import type { StylePropsModel } from '@lib/frontend/style/style.models';
 
 export interface OtpFormModel {
-  otp: string;
+  otp?: string;
 }
 
 export interface OtpFormPropsModel extends StylePropsModel, FormStepPropsModel<SignInFormModel> {}

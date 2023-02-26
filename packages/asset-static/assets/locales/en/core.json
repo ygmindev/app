@@ -5,7 +5,8 @@
     "continue": "continue",
     "noResult": "no result",
     "submit": "submit",
-    "tryAgain": "try again"
+    "tryAgain": "try again",
+    "email": "labels.email"
   },
   "messages": {
     "errorForbidden": "Forbidden",

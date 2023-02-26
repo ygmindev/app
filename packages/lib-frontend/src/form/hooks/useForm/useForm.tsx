@@ -1,4 +1,4 @@
-import { useErrorBoundary } from '@lib/frontend/core/hooks/useErrorBoundary/useErrorBoundary';
+import { useErrorContext } from '@lib/frontend/core/hooks/useErrorContext/useErrorContext';
 import type { FormErrorModel, FormValidatorsModel } from '@lib/frontend/form/form.models';
 import { _useForm } from '@lib/frontend/form/hooks/useForm/_useForm';
 import type {
@@ -24,7 +24,7 @@ export const useForm = <TType = void, TResult = void>({
   validators,
 }: UseFormParamsModel<TType, TResult>): UseFormModel<TType, TResult> => {
   const { t } = useTranslation();
-  const { handleError } = useErrorBoundary();
+  const { handleError } = useErrorContext();
   const actions = useActions();
 
   const _validate = <TValue,>(

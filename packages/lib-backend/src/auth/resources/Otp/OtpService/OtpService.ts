@@ -1,7 +1,6 @@
 import { mail } from '@lib/backend/mail/utils/mail/mail';
 import { EntityResourceService } from '@lib/backend/resource/resources/EntityResource/EntityResourceService/EntityResourceService';
 import { UserService } from '@lib/backend/user/resources/User/UserService/UserService';
-import { InvalidOtpError } from '@lib/shared/auth/errors/InvalidOtpError/InvalidOtpError';
 import {
   OTP_LENGTH,
   OTP_RESOURCE_NAME,
@@ -18,6 +17,7 @@ import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constan
 import type { EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { UnauthorizedError } from 'type-graphql';
 
 @withContainer()
 export class OtpService
@@ -72,7 +72,7 @@ export class OtpService
       options: { project: { otp: true } },
     });
     if (!result || result.otp !== data.otp) {
-      throw new InvalidOtpError();
+      throw new UnauthorizedError();
     }
     await this.remove({ filter: { username: data.username } });
     return true;
