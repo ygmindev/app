@@ -1,5 +1,5 @@
+import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
@@ -32,29 +32,29 @@ export const PersonalPage: SFCModel<PersonalPagePropsModel> = ({ testID, ...prop
 
       {currentUser &&
         map(PERSONAL_PAGE_FIELDS, ({ icon, id, label, value }) => (
-          <Pressable
+          <Wrapper
             key={id}
-            onPress={() => push({ pathname: `${FORM}/${PERSONAL}/${id}` })}>
-            <Wrapper spacing={THEME_BASIC_SIZE.SMALL}>
-              <Wrapper isRowAlign>
-                {icon && <Icon icon={icon} />}
+            spacing={THEME_BASIC_SIZE.SMALL}>
+            <Wrapper isRowAlign>
+              {icon && <Icon icon={icon} />}
 
-                <TranslatableText type={FONT_TYPE.TITLE}>{label}</TranslatableText>
-              </Wrapper>
-
-              <Wrapper
-                isRowAlign
-                justify={FLEX_JUSTIFY.SPACE_BETWEEN}>
-                <Text
-                  fontSize={THEME_SIZE.LARGE}
-                  isEllipsis>
-                  {value(currentUser)}
-                </Text>
-
-                <Icon icon="chevronRight" />
-              </Wrapper>
+              <TranslatableText type={FONT_TYPE.TITLE}>{label}</TranslatableText>
             </Wrapper>
-          </Pressable>
+
+            <Wrapper
+              isRowAlign
+              justify={FLEX_JUSTIFY.SPACE_BETWEEN}>
+              <Text
+                fontSize={THEME_SIZE.LARGE}
+                isEllipsis>
+                {value(currentUser)}
+              </Text>
+
+              <Button onPress={() => push({ pathname: `${FORM}/${PERSONAL}/${id}` })}>
+                {t('core:labels.change')}
+              </Button>
+            </Wrapper>
+          </Wrapper>
         ))}
     </MainLayout>
   );
