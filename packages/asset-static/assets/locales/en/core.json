@@ -5,8 +5,7 @@
     "continue": "continue",
     "noResult": "no result",
     "submit": "submit",
-    "tryAgain": "try again",
-    "email": "labels.email"
+    "tryAgain": "try again"
   },
   "messages": {
     "errorForbidden": "Forbidden",
@@ -21,7 +20,5 @@
     "validateNotEmpty": "TRANSLATION_MISSING",
     "validateRange": "TRANSLATION_MISSING",
     "validateZipCode": "TRANSLATION_MISSING"
-  },
-  "email": "email",
-  "submit": "submit"
+  }
 }

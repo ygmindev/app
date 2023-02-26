@@ -1,0 +1,10 @@
+{
+  "labels": {
+    "account": "acount",
+    "device": "device",
+    "personal": "personal"
+  },
+  "messages": {
+    "updateSuccess": "successfully updated"
+  }
+}

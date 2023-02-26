@@ -11,36 +11,34 @@ import type {
   GetRoutesModel,
   GetRoutesParamsModel,
 } from '@lib/frontend/route/utils/getRoutes/getRoutes.models';
-import { SettingsPage } from '@lib/frontend/settings/pages/SettingsPage/SettingsPage';
 import { AccountPage } from '@lib/frontend/user/pages/AccountPage/AccountPage';
 import { NameFormPage } from '@lib/frontend/user/pages/NameFormPage/NameFormPage';
-import { ACCOUNT, EMAIL, NAME } from '@lib/frontend/user/user.constants';
+import { PersonalPage } from '@lib/frontend/user/pages/PersonalPage/PersonalPage';
+import { EMAIL, NAME, PERSONAL } from '@lib/frontend/user/user.constants';
 import { AUTH } from '@lib/shared/auth/auth.constants';
 import { CORE } from '@lib/shared/core/core.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
-import { SETTINGS } from '@lib/shared/settings/settings.constants';
 import { STYLE } from '@lib/shared/style/style.constants';
-import { USER } from '@lib/shared/user/user.constants';
+import { ACCOUNT, USER } from '@lib/shared/user/user.constants';
 
 export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesModel =>
   [
     {
       element: <AppLayout />,
-      ns: [AUTH, CORE, STYLE, SETTINGS],
+      ns: [AUTH, CORE, STYLE, ACCOUNT],
       pathname: '/',
       routes: [
         ...appRoutes,
 
         {
-          element: <SettingsPage />,
+          element: <AccountPage />,
           isProtectable: true,
-          ns: [SETTINGS],
-          pathname: SETTINGS,
+          ns: [ACCOUNT, USER],
+          pathname: ACCOUNT,
           routes: [
             {
-              element: <AccountPage />,
-              ns: [USER],
-              pathname: ACCOUNT,
+              element: <PersonalPage />,
+              pathname: PERSONAL,
             },
           ],
         },
@@ -50,9 +48,9 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
           pathname: FORM,
           routes: [
             {
-              header: { previous: `/${SETTINGS}/${ACCOUNT}` },
+              header: { previous: `/${ACCOUNT}/${PERSONAL}` },
               ns: [USER],
-              pathname: ACCOUNT,
+              pathname: PERSONAL,
               routes: [
                 {
                   element: <NameFormPage />,

@@ -1,7 +1,7 @@
-import type { AccountPageItemModel } from '@lib/frontend/user/pages/AccountPage/AccountPage.models';
+import type { PersonalPageItemModel } from '@lib/frontend/user/pages/PersonalPage/PersonalPage.models';
 import { EMAIL, NAME } from '@lib/frontend/user/user.constants';
 
-export const ACCOUNT_PAGE_FIELDS: Array<AccountPageItemModel> = [
+export const PERSONAL_PAGE_FIELDS: Array<PersonalPageItemModel> = [
   {
     id: NAME,
 
@@ -17,4 +17,4 @@ export const ACCOUNT_PAGE_FIELDS: Array<AccountPageItemModel> = [
 
     value: ({ email }) => email,
   },
-] as Array<AccountPageItemModel>;
+] as Array<PersonalPageItemModel>;

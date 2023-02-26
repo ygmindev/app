@@ -22,7 +22,7 @@ import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyl
 import { SIGN_OUT } from '@lib/shared/auth/auth.constants';
 import type { PartialModel } from '@lib/shared/core/core.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
-import { DEVICE, SETTINGS } from '@lib/shared/settings/settings.constants';
+import { DEVICE, ACCOUNT } from '@lib/shared/user/user.constants';
 import { BRIGHTNESS } from '@lib/shared/style/style.constants';
 import { useMemo } from 'react';
 
@@ -52,7 +52,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
           }),
         ),
       },
-      [SETTINGS]: { onPress: () => push({ pathname: SETTINGS }) },
+      [ACCOUNT]: { onPress: () => push({ pathname: ACCOUNT }) },
       [SIGN_OUT]: { onPress: signOut },
     }),
     [push, signOut],
