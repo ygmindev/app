@@ -52,8 +52,3 @@ export interface FormContainerPropsModel<TType = void, TResult = void>
   successMessage?: TranslatableTextModel;
   topElement?(props: FormContainerRenderPropsModel): ReactNode;
 }
-
-export interface FormContainerRefModel<TType = void> {
-  reset(): void;
-  submit(data: TType): void;
-}

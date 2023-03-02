@@ -50,7 +50,9 @@ export const PersonalPage: SFCModel<PersonalPagePropsModel> = ({ testID, ...prop
                 {value(currentUser)}
               </Text>
 
-              <Button onPress={() => push({ pathname: `${FORM}/${PERSONAL}/${id}` })}>
+              <Button
+                icon="edit"
+                onPress={() => push({ pathname: `${FORM}/${PERSONAL}/${id}` })}>
                 {t('core:labels.change')}
               </Button>
             </Wrapper>

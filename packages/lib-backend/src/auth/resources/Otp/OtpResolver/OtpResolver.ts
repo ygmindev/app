@@ -10,6 +10,7 @@ import {
   OTP_RESOURCE_NAME,
 } from '@lib/shared/auth/resources/Otp/Otp.constants';
 import type { OtpFormModel, OtpModel } from '@lib/shared/auth/resources/Otp/Otp.models';
+import type { OtpServiceModel } from '@lib/shared/auth/resources/Otp/OtpService/OtpService.models';
 import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { withInject } from '@lib/shared/core/decorators/withInject/withInject';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
@@ -18,13 +19,16 @@ import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.model
 
 @withContainer()
 @withResolver({ Resource: Otp })
-export class OtpResolver extends EntityResourceResolver<OtpModel, OtpFormModel>({
-  Resource: Otp,
-  ResourceData: OtpForm,
-  ResourceService: OtpService,
-  createAccess: ACCESS_LEVEL.PUBLIC,
-  name: OTP_RESOURCE_NAME,
-}) {
+export class OtpResolver
+  extends EntityResourceResolver<OtpModel, OtpFormModel>({
+    Resource: Otp,
+    ResourceData: OtpForm,
+    ResourceService: OtpService,
+    createAccess: ACCESS_LEVEL.PUBLIC,
+    name: OTP_RESOURCE_NAME,
+  })
+  implements OtpServiceModel
+{
   @withInject(OtpService) protected _otpService!: OtpService;
 
   @withOutput({

@@ -16,21 +16,24 @@ export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...prop
   const { t } = useTranslation();
   const { styles } = useStyles({ props });
   const actions = useActions();
-  const { replace } = useRouter();
   const currentUser = useCurrentUser();
+  const { replace } = useRouter();
   const { update } = useUserResource();
+
+  const _handleBack = async (): Promise<void> => replace({ pathname: `/${ACCOUNT}/${PERSONAL}` });
 
   return currentUser ? (
     <CenterLayout>
       <FormContainer
         initialValues={{ first: currentUser.first, last: currentUser.last }}
+        onCancel={_handleBack}
         onSubmit={async ({ first, last }) => {
           const { result } = await update({
             filter: { _id: currentUser._id },
             update: { first, last },
           });
           actions?.user.currentUserUpdate(result);
-          replace({ pathname: `/${ACCOUNT}/${PERSONAL}` });
+          _handleBack();
         }}
         style={styles}
         successMessage={t('account:messages.updateSuccess', { value: t('user:labels.name') })}

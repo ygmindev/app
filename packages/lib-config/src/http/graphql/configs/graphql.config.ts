@@ -2,6 +2,7 @@ import { AccessResolver } from '@lib/backend/auth/resources/Access/AccessResolve
 import { OtpResolver } from '@lib/backend/auth/resources/Otp/OtpResolver/OtpResolver';
 import { SignInResolver } from '@lib/backend/auth/resources/SignIn/SignInResolver/SignInResolver';
 import { authorize } from '@lib/backend/auth/utils/authorize/authorize';
+import { PaymentMethodResolver } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethodResolver/PaymentMethodResolver';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { LinkedUserResolver } from '@lib/backend/user/resources/LinkedUser/LinkedUserResolver/LinkedUserResolver';
 import { UserResolver } from '@lib/backend/user/resources/User/UserResolver/UserResolver';
@@ -13,7 +14,14 @@ export const graphqlConfig: GraphqlConfigParamsModel = {
 
   container: Container,
 
-  resolvers: [AccessResolver, OtpResolver, LinkedUserResolver, SignInResolver, UserResolver],
+  resolvers: [
+    AccessResolver,
+    OtpResolver,
+    PaymentMethodResolver,
+    LinkedUserResolver,
+    SignInResolver,
+    UserResolver,
+  ],
 
   schemaPath: fromStatic('graphql/schema.gql'),
 };

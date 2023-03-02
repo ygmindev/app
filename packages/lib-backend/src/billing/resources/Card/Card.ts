@@ -27,8 +27,4 @@ export class Card extends EmbeddedResource implements CardModel {
 
   @withField({ isRepository: true })
   last4!: number;
-
-  description(): string {
-    return `${this.brand} ending in `;
-  }
 }

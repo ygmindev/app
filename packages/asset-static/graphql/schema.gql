@@ -183,6 +183,7 @@ type LinkedUserCreateOutput {
 type LinkedUserCreateOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
+  PaymentMethod: [PaymentMethod]
   _id: String
   created: DateTime
   email: String
@@ -194,6 +195,7 @@ type LinkedUserCreateOutputRoot {
 input LinkedUserCreateRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
+  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -233,6 +235,7 @@ type LinkedUserGetConnectionOutputEdge {
 type LinkedUserGetConnectionOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
+  PaymentMethod: [PaymentMethod]
   _id: String
   created: DateTime
   email: String
@@ -244,6 +247,7 @@ type LinkedUserGetConnectionOutputRoot {
 input LinkedUserGetConnectionRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
+  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -284,6 +288,7 @@ type LinkedUserGetManyOutput {
 type LinkedUserGetManyOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
+  PaymentMethod: [PaymentMethod]
   _id: String
   created: DateTime
   email: String
@@ -295,6 +300,7 @@ type LinkedUserGetManyOutputRoot {
 input LinkedUserGetManyRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
+  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -311,6 +317,7 @@ type LinkedUserGetOutput {
 type LinkedUserGetOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
+  PaymentMethod: [PaymentMethod]
   _id: String
   created: DateTime
   email: String
@@ -322,6 +329,7 @@ type LinkedUserGetOutputRoot {
 input LinkedUserGetRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
+  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -357,6 +365,7 @@ type LinkedUserRemoveOutput {
 type LinkedUserRemoveOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
+  PaymentMethod: [PaymentMethod]
   _id: String
   created: DateTime
   email: String
@@ -368,6 +377,7 @@ type LinkedUserRemoveOutputRoot {
 input LinkedUserRemoveRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
+  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -397,6 +407,7 @@ type LinkedUserUpdateOutput {
 type LinkedUserUpdateOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
+  PaymentMethod: [PaymentMethod]
   _id: String
   created: DateTime
   email: String
@@ -408,6 +419,7 @@ type LinkedUserUpdateOutputRoot {
 input LinkedUserUpdateRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
+  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -434,6 +446,7 @@ type Mutation {
   OtpIfDoesNotExistCreate(input: OtpIfDoesNotExistCreateInput): OtpIfDoesNotExistCreateOutput
   OtpRemove(input: OtpRemoveInput): OtpRemoveOutput
   OtpUpdate(input: OtpUpdateInput): OtpUpdateOutput
+  PaymentMethodTokenCreate(input: PaymentMethodTokenCreateInput): PaymentMethodTokenCreateOutput
   SignInCreate(input: SignInCreateInput): SignInCreateOutput
   UserCreate(input: UserCreateInput): UserCreateOutput
   UserRemove(input: UserRemoveInput): UserRemoveOutput
@@ -580,6 +593,88 @@ input PaginationInput {
   last: Float
 }
 
+type PaymentMethod {
+  _id: String
+  created: DateTime
+}
+
+input PaymentMethodGetManyFilterInput {
+  _id: String
+  created: DateTime
+}
+
+input PaymentMethodGetManyInput {
+  filter: PaymentMethodGetManyFilterInput
+  root: PaymentMethodGetManyRootInput
+}
+
+type PaymentMethodGetManyOutput {
+  result: [PaymentMethod]
+  root: PaymentMethodGetManyOutputRoot
+}
+
+type PaymentMethodGetManyOutputRoot {
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  PaymentMethod: [PaymentMethod]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input PaymentMethodGetManyRootInput {
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  PaymentMethod: [PaymentMethodInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input PaymentMethodInput {
+  _id: String
+  created: DateTime
+}
+
+input PaymentMethodTokenCreateInput {
+  root: PaymentMethodTokenCreateRootInput
+}
+
+type PaymentMethodTokenCreateOutput {
+  result: String
+  root: PaymentMethodTokenCreateOutputRoot
+}
+
+type PaymentMethodTokenCreateOutputRoot {
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  PaymentMethod: [PaymentMethod]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input PaymentMethodTokenCreateRootInput {
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  PaymentMethod: [PaymentMethodInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
 type Query {
   AccessGet(input: AccessGetInput): AccessGetOutput
   AccessGetConnection(input: AccessGetConnectionInput): AccessGetConnectionOutput
@@ -590,6 +685,7 @@ type Query {
   OtpGet(input: OtpGetInput): OtpGetOutput
   OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
   OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput
+  PaymentMethodGetMany(input: PaymentMethodGetManyInput): PaymentMethodGetManyOutput
   UserGet(input: UserGetInput): UserGetOutput
   UserGetConnection(input: UserGetConnectionInput): UserGetConnectionOutput
   UserGetMany(input: UserGetManyInput): UserGetManyOutput
@@ -619,6 +715,7 @@ type SignInCreateOutput {
 type User {
   Card: [Card]
   LinkedUser: [LinkedUser]
+  PaymentMethod: [PaymentMethod]
   _id: String
   created: DateTime
   email: String
@@ -630,6 +727,7 @@ type User {
 input UserCreateFormInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
+  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -649,6 +747,7 @@ type UserCreateOutput {
 input UserGetConnectionFilterInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
+  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -679,6 +778,7 @@ type UserGetConnectionOutputEdge {
 input UserGetFilterInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
+  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -694,6 +794,7 @@ input UserGetInput {
 input UserGetManyFilterInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
+  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -717,6 +818,7 @@ type UserGetOutput {
 input UserInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
+  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -728,6 +830,7 @@ input UserInput {
 input UserRemoveFilterInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
+  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -747,6 +850,7 @@ type UserRemoveOutput {
 input UserUpdateFilterInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
+  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -767,6 +871,7 @@ type UserUpdateOutput {
 input UserUpdateUpdateInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
+  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String

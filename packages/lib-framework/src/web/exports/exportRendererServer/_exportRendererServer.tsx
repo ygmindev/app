@@ -27,6 +27,7 @@ export const _exportRendererServer = ({
     const App: FCModel = () =>
       render({
         children: <Page {...pageProps} />,
+        initialState: {},
         locale,
         route: urlPathname ? { context, location: { pathname: urlPathname } } : undefined,
       });

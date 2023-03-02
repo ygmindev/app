@@ -18,6 +18,6 @@ export const useMount = (
       isMountedSet(false);
       onUnmount && onUnmount();
     };
-  }, [isMounted, isMountedSet, ...deps]);
+  }, [isMountedSet, ...deps]);
   return isMounted;
 };

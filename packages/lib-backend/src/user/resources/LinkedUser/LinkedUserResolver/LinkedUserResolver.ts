@@ -1,6 +1,5 @@
 import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import { EmbeddedResourceResolver } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResourceResolver/EmbeddedResourceResolver';
-import type { EmbeddedResourceResolverModel } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResourceResolver/EmbeddedResourceResolver.models';
 import { LinkedUser } from '@lib/backend/user/resources/LinkedUser/LinkedUser';
 import { LinkedUserService } from '@lib/backend/user/resources/LinkedUser/LinkedUserService/LinkedUserService';
 import { User } from '@lib/backend/user/resources/User/User';
@@ -10,6 +9,7 @@ import type {
   LinkedUserFormModel,
   LinkedUserModel,
 } from '@lib/shared/user/resources/LinkedUser/LinkedUser.models';
+import type { LinkedUserServiceModel } from '@lib/shared/user/resources/LinkedUser/LinkedUserService/LinkedUserService.models';
 import type { UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withContainer()
@@ -21,4 +21,4 @@ export class LinkedUserResolver
     RootResource: User,
     name: LINKED_USER_RESOURCE_NAME,
   })
-  implements EmbeddedResourceResolverModel<LinkedUserModel, LinkedUserFormModel, UserModel> {}
+  implements LinkedUserServiceModel {}

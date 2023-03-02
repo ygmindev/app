@@ -5,13 +5,13 @@ import { withResolver } from '@lib/backend/http/decorators/withResolver/withReso
 import { withInput } from '@lib/backend/resource/decorators/withInput/withInput';
 import { withOutput } from '@lib/backend/resource/decorators/withOutput/withOutput';
 import { EntityResourceResolver } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver';
-import type { EntityResourceResolverModel } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver.models';
 import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import {
   SIGN_IN_RESOURCE_NAME,
   USERNAME_UPDATE,
 } from '@lib/shared/auth/resources/SignIn/SignIn.constants';
 import type { SignInFormModel, SignInModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
+import type { SignInServiceModel } from '@lib/shared/auth/resources/SignIn/SignInService/SignInService.models';
 import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { withInject } from '@lib/shared/core/decorators/withInject/withInject';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
@@ -29,7 +29,7 @@ export class SignInResolver
     createAccess: ACCESS_LEVEL.PUBLIC,
     name: SIGN_IN_RESOURCE_NAME,
   })
-  implements EntityResourceResolverModel<SignInModel, SignInFormModel>
+  implements SignInServiceModel
 {
   @withInject(SignInService) protected _signInService!: SignInService;
 

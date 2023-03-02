@@ -11,7 +11,7 @@ import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
-import type { FormContainerRefModel } from '@lib/frontend/form/containers/FormContainer/FormContainer.models';
+import type { FormRefModel } from '@lib/frontend/form/form.models';
 import { Trans } from '@lib/frontend/locale/components/Trans/Trans';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
@@ -31,7 +31,7 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const { t } = useTranslation();
-  const ref = useRef<FormContainerRefModel<OtpFormModel>>(null);
+  const ref = useRef<FormRefModel<OtpFormModel>>(null);
 
   return (
     <FormContainer

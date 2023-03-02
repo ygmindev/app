@@ -46,3 +46,8 @@ export type TranslatableFieldPropsModel<TType extends FieldPropsModel> = Overrid
   TranslatableModel<TType, 'label'>,
   { error?: TranslatableTextModel | boolean }
 >;
+
+export interface FormRefModel<TType = void> {
+  reset(): void;
+  submit(data?: TType): void;
+}

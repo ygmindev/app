@@ -46,6 +46,7 @@ export const useResourceMethod = <
         throw new InvalidTypeError(method, RESOURCE_METHOD_TYPE);
     }
   })();
+
   const _fields = (
     method === RESOURCE_METHOD_TYPE.GET_CONNECTION
       ? fields.map((field) => {
@@ -57,9 +58,7 @@ export const useResourceMethod = <
                 ..._field,
                 result: [
                   { edges: ['cursor', { node: _field.result }] },
-                  {
-                    pageInfo: ['endCursor', 'hasNextPage', 'hasPreviousPage', 'startCursor'],
-                  },
+                  { pageInfo: ['endCursor', 'hasNextPage', 'hasPreviousPage', 'startCursor'] },
                 ],
               }
             : field;

@@ -4,7 +4,6 @@ import { withFieldResolver } from '@lib/backend/http/decorators/withFieldResolve
 import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import { withSelf } from '@lib/backend/http/decorators/withSelf/withSelf';
 import { EntityResourceResolver } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver';
-import type { EntityResourceResolverModel } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver.models';
 import { User } from '@lib/backend/user/resources/User/User';
 import { UserService } from '@lib/backend/user/resources/User/UserService/UserService';
 import {
@@ -12,6 +11,7 @@ import {
   ACCESS_RESOURCE_NAME,
 } from '@lib/shared/auth/resources/Access/Access.constants';
 import type { AccessFormModel, AccessModel } from '@lib/shared/auth/resources/Access/Access.models';
+import type { AccessServiceModel } from '@lib/shared/auth/resources/Access/AccessService/AccessService.models';
 import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
@@ -26,7 +26,7 @@ export class AccessResolver
     createAccess: ACCESS_LEVEL.PUBLIC,
     name: ACCESS_RESOURCE_NAME,
   })
-  implements EntityResourceResolverModel<AccessModel, AccessFormModel>
+  implements AccessServiceModel
 {
   @withFieldResolver({ Resource: User })
   async user(@withSelf() access: Access): Promise<UserModel> {

@@ -2,6 +2,12 @@ import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
 import { SIGN_IN } from '@lib/frontend/auth/auth.constants';
 import { SIGN_IN_FORM_MODE } from '@lib/frontend/auth/containers/SignInForm/SignInForm.constants';
 import { SignInPage } from '@lib/frontend/auth/pages/SignInPage/SignInPage';
+import { BILLING, PAYMENT, PAYMENT_METHOD } from '@lib/frontend/billing/billing.constants';
+import { PaymentMethodFormPage } from '@lib/frontend/billing/pages/PaymentMethodFormPage/PaymentMethodFormPage';
+import { PaymentPage } from '@lib/frontend/billing/pages/PaymentPage/PaymentPage';
+import { Text } from '@lib/frontend/core/components/Text/Text';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { REDIRECT } from '@lib/frontend/core/core.constants';
 import { DEV } from '@lib/frontend/dev/dev.constants';
 import { DevPage } from '@lib/frontend/dev/pages/DevPage/DevPage';
 import { FORM } from '@lib/frontend/form/form.constants';
@@ -25,7 +31,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
   [
     {
       element: <AppLayout />,
-      ns: [AUTH, CORE, STYLE, ACCOUNT],
+      ns: [AUTH, CORE, STYLE],
       pathname: '/',
       routes: [
         ...appRoutes,
@@ -33,12 +39,16 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
         {
           element: <AccountPage />,
           isProtectable: true,
-          ns: [ACCOUNT, USER],
+          ns: [ACCOUNT, BILLING, USER],
           pathname: ACCOUNT,
           routes: [
             {
               element: <PersonalPage />,
               pathname: PERSONAL,
+            },
+            {
+              element: <PaymentPage />,
+              pathname: PAYMENT,
             },
           ],
         },
@@ -67,6 +77,13 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                 },
               ],
             },
+
+            {
+              element: <PaymentMethodFormPage />,
+              header: { previous: `/${ACCOUNT}/${PAYMENT_METHOD}` },
+              ns: [BILLING],
+              pathname: PAYMENT,
+            },
           ],
         },
 
@@ -74,6 +91,15 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
           element: <SignInPage mode={SIGN_IN_FORM_MODE.CREATE} />,
           ns: [AUTH],
           pathname: SIGN_IN,
+        },
+
+        {
+          element: (
+            <Wrapper>
+              <Text>redirect</Text>
+            </Wrapper>
+          ),
+          pathname: REDIRECT,
         },
 
         {

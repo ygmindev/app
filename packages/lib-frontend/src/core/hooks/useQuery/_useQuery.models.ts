@@ -2,7 +2,7 @@ import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
 
 export interface _UseQueryParamsModel<TType> extends WithIdModel {
-  cache?: number | boolean;
+  cache?: number;
   query: CallablePromiseModel<TType | null>;
 }
 

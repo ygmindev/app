@@ -15,10 +15,9 @@ import { FORM_FIELD_TYPE } from '@lib/frontend/form/containers/FormContainer/For
 import type {
   FormContainerFieldModel,
   FormContainerPropsModel,
-  FormContainerRefModel,
   FormContainerRenderPropsModel,
 } from '@lib/frontend/form/containers/FormContainer/FormContainer.models';
-import type { FieldPropsModel } from '@lib/frontend/form/form.models';
+import type { FieldPropsModel, FormRefModel } from '@lib/frontend/form/form.models';
 import { useForm } from '@lib/frontend/form/hooks/useForm/useForm';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
@@ -34,10 +33,8 @@ import { cloneElement, forwardRef, useCallback, useImperativeHandle, useMemo } f
 export const FormContainer = forwardRef(
   <TType = void, TResult = void>(
     { errorContextGet, ...props }: SFCPropsModel<FormContainerPropsModel<TType, TResult>>,
-    ref: ForwardedRef<FormContainerRefModel<TType>>,
-  ): ReactElement<
-    RSFCPropsModel<FormContainerRefModel<TType>, FormContainerPropsModel<TType, TResult>>
-  > => (
+    ref: ForwardedRef<FormRefModel<TType>>,
+  ): ReactElement<RSFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>> => (
     <ErrorProvider value={{ errorContextGet, mode: ERROR_MODE.NOTIFICATION }}>
       <_FormContainer
         {...props}
@@ -70,10 +67,8 @@ const _FormContainer = forwardRef(
       validators,
       ...props
     }: SFCPropsModel<FormContainerPropsModel<TType, TResult>>,
-    ref: ForwardedRef<FormContainerRefModel<TType>>,
-  ): ReactElement<
-    RSFCPropsModel<FormContainerRefModel<TType>, FormContainerPropsModel<TType, TResult>>
-  > => {
+    ref: ForwardedRef<FormRefModel<TType>>,
+  ): ReactElement<RSFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>> => {
     const { styles } = useStyles({ props });
     const { t } = useTranslation();
     const { error, success } = useNotification();

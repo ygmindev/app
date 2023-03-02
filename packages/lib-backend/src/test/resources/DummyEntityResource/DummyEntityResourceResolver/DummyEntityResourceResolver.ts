@@ -1,6 +1,5 @@
 import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import { EntityResourceResolver } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver';
-import type { EntityResourceResolverModel } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver.models';
 import { DummyEntityResource } from '@lib/backend/test/resources/DummyEntityResource/DummyEntityResource';
 import { DummyEntityResourceService } from '@lib/backend/test/resources/DummyEntityResource/DummyEntityResourceService/DummyEntityResourceService';
 import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
@@ -10,6 +9,7 @@ import type {
   DummyEntityResourceFormModel,
   DummyEntityResourceModel,
 } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.models';
+import type { DummyEntityResourceServiceModel } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResourceService/DummyEntityResourceService.models';
 
 @withContainer()
 @withResolver({ Resource: DummyEntityResource })
@@ -23,4 +23,4 @@ export class DummyEntityResourceResolver
     removeAccess: ACCESS_LEVEL.PUBLIC,
     updateAccess: ACCESS_LEVEL.PUBLIC,
   })
-  implements EntityResourceResolverModel<DummyEntityResourceModel, DummyEntityResourceFormModel> {}
+  implements DummyEntityResourceServiceModel {}
