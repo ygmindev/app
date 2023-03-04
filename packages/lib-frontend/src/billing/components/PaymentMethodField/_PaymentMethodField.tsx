@@ -5,6 +5,8 @@ import type { RSFCModel } from '@lib/frontend/core/core.models';
 import { useErrorContext } from '@lib/frontend/core/hooks/useErrorContext/useErrorContext';
 import type { FormRefModel } from '@lib/frontend/form/form.models';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import type { PaymentMethodFormModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { InvalidTypeError } from '@lib/shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { appUri } from '@lib/shared/http/utils/appUri/appUri';
 import { Elements, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import type { PaymentMethod, StripePaymentElementOptions } from '@stripe/stripe-js';
@@ -39,6 +41,21 @@ const _StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forw
       submit: _handleSubmit,
     }));
 
+    const _getForm = (data: PaymentMethod): PaymentMethodFormModel => {
+      const { card, id, type, us_bank_account } = data;
+      // const _type = (() => {
+      //   switch (type) {
+      //     case 'us_bank_account':
+      //       return PAYMENT_METHOD_TYPE.BANK;
+      //     case 'card':
+      //       return PAYMENT_METHOD_TYPE.CARD;
+      //     default:
+      //       return undefined;
+      //   }
+      // })();
+      throw new InvalidTypeError(type, 'payment method type');
+    };
+
     const _handleSubmit = async (): Promise<void> => {
       if (stripeClient && elements) {
         const { error, setupIntent } = await stripeClient.confirmSetup({
@@ -54,9 +71,7 @@ const _StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forw
         } else if (setupIntent) {
           const { payment_method, status } = setupIntent;
           if (status === 'succeeded') {
-            // const { id, type } = payment_method as PaymentMethod;
-            const x = payment_method as PaymentMethod;
-            console.warn(x);
+            const _data = _getForm(payment_method as PaymentMethod);
           }
         }
       }

@@ -13,6 +13,7 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { CREATE_TOKEN } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import type { PaymentMethodFormModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { useRef } from 'react';
 
 export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
@@ -29,7 +30,7 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
       currentUser && createToken({ form: undefined, root: { _id: currentUser._id } }),
   });
 
-  const ref = useRef<FormRefModel>(null);
+  const ref = useRef<FormRefModel<PaymentMethodFormModel>>(null);
 
   useMount({ onMount: mutate });
 
@@ -38,7 +39,7 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
   ) : (
     <FormContainer
       onCancel={onCancel}
-      onSubmit={async () => ref.current?.submit()}
+      onSubmit={async (values: PaymentMethodFormModel) => ref.current?.submit()}
       rows={[
         {
           fields: [

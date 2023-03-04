@@ -1,12 +1,12 @@
 import { renderHook } from '@lib/frontend/test/utils/renderHook/renderHook';
-import { useCardResource } from '@lib/frontend/billing/hooks/useCardResource/useCardResource';
+import { useBankResource } from '@lib/frontend/billing/hooks/useBankResource/useBankResource';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => useCardResource });
+const { displayName } = withTest({ target: () => useBankResource });
 
 describe(displayName, () => {
   test('works', async () => {
-    const { result, unmount } = renderHook(() => useCardResource());
+    const { result, unmount } = renderHook(() => useBankResource());
 
     unmount();
   });

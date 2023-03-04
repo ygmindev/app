@@ -2,7 +2,7 @@ import { withResolver } from '@lib/backend/http/decorators/withResolver/withReso
 import { EmbeddedResourceResolver } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResourceResolver/EmbeddedResourceResolver';
 import { {{NAME}}(pascalCase) } from '@lib/backend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)';
 import { {{NAME}}(pascalCase)Service } from '@lib/backend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Service/{{NAME}}(pascalCase)Service';
-import type { {{NAME}}(pascalCase)ResolverModel } from '@lib/backend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Resolver/{{NAME}}(pascalCase)Resolver.models';
+import type { {{NAME}}(pascalCase)ServiceModel } from '@lib/backend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Service/{{NAME}}(pascalCase)Service.models';
 import { {{NAME_ROOT}}(pascalCase) } from '@lib/backend/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase)';
 import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { {{NAME}}(constantCase)_RESOURCE_NAME } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).constants';
@@ -25,4 +25,4 @@ export class {{NAME}}(pascalCase)Resolver
     RootResource: {{NAME_ROOT}}(pascalCase),
     name: {{NAME}}(constantCase)_RESOURCE_NAME,
   })
-  implements {{NAME}}(pascalCase)ResolverModel {}
+  implements {{NAME}}(pascalCase)ServiceModel {}

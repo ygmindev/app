@@ -18,14 +18,14 @@ import { Children, cloneElement, createElement, forwardRef, isValidElement, useM
 import { StyleSheet } from 'react-native';
 
 export const Wrapper: RSFCModel<AnimatableRefModel, WrapperPropsModel> = forwardRef(
-  ({ animation, children, isDistribute, isRowAlign, spacing, ...props }, ref) => {
+  ({ animation, children, isCenter, isDistribute, isRowAlign, spacing, ...props }, ref) => {
     const theme = useTheme();
     const { styles } = useStyles({
       props: {
         ...props,
-        align: props.isCenter || isRowAlign ? FLEX_ALIGN.CENTER : props.align,
+        align: isCenter || isRowAlign ? FLEX_ALIGN.CENTER : props.align,
         isRow: props.isRow || isRowAlign,
-        justify: props.isCenter ? FLEX_ALIGN.CENTER : props.justify,
+        justify: isCenter ? FLEX_ALIGN.CENTER : props.justify,
       },
       stylers: [viewStyler],
     });
