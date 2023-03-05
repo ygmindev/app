@@ -40,19 +40,19 @@ const _getColumn = <TType extends unknown>({
   }
   const [_Field, _options] = (() => {
     if (isArray) {
-      return [Property, { type: ArrayType }];
+      return [Property, { defaultValue, type: ArrayType }];
     }
     switch (type) {
       case FIELD_TYPE.PRIMARY_KEY:
-        return [PrimaryKey, { type: 'ObjectId' }];
+        return [PrimaryKey, { defaultValue, type: 'ObjectId' }];
       case FIELD_TYPE.ID:
-        return [Property, { type: 'ObjectId' }];
+        return [Property, { defaultValue, type: 'ObjectId' }];
       case FIELD_TYPE.STRING:
-        return [Property, { type: 'string' }];
+        return [Property, { defaultValue, type: 'string' }];
       case FIELD_TYPE.DATE:
-        return [Property, { type: Date }];
+        return [Property, { defaultValue, type: Date }];
       default:
-        return [Property, { type: undefined }];
+        return [Property, { defaultValue, type: undefined }];
     }
   })();
 

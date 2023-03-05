@@ -1,7 +1,12 @@
+import { BankService } from '@lib/backend/billing/resources/Bank/BankService/BankService';
+import { CardService } from '@lib/backend/billing/resources/Card/CardService/CardService';
 import { StripeAdminService } from '@lib/backend/billing/utils/StripeAdminService/StripeAdminService';
 import { LinkedUserService } from '@lib/backend/user/resources/LinkedUser/LinkedUserService/LinkedUserService';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
-import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import {
+  PAYMENT_METHOD_RESOURCE_NAME,
+  PAYMENT_METHOD_TYPE,
+} from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import type {
   PaymentMethodFormModel,
   PaymentMethodModel,
@@ -20,17 +25,39 @@ import type { UserModel } from '@lib/shared/user/resources/User/User.models';
 export class PaymentMethodService implements PaymentMethodServiceModel {
   @withInject(LinkedUserService) protected _linkedUserService!: LinkedUserService;
 
+  @withInject(CardService) protected _cardService!: CardService;
+
+  @withInject(BankService) protected _bankService!: BankService;
+
   @withInject(StripeAdminService) protected _stripeAdminService!: StripeAdminService;
 
-  async getMany(
-    _input: InputModel<
-      RESOURCE_METHOD_TYPE.GET_MANY,
-      PaymentMethodModel,
-      PaymentMethodFormModel,
-      UserModel
-    >,
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>> {
-    return { result: [] };
+  async getMany({
+    root,
+  }: InputModel<
+    RESOURCE_METHOD_TYPE.GET_MANY,
+    PaymentMethodModel,
+    PaymentMethodFormModel,
+    UserModel
+  >): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>> {
+    if (root) {
+      const { result: banks } = await this._bankService.getMany({
+        filter: {},
+        options: { project: { _id: true, id: true, last4: true } },
+        root: { _id: root._id },
+      });
+      const { result: cards } = await this._cardService.getMany({
+        filter: {},
+        options: { project: { _id: true, id: true, last4: true } },
+        root: { _id: root._id },
+      });
+      return {
+        result: [
+          ...(banks ? banks.map((value) => ({ ...value, type: PAYMENT_METHOD_TYPE.BANK })) : []),
+          ...(cards ? cards.map((value) => ({ ...value, type: PAYMENT_METHOD_TYPE.CARD })) : []),
+        ],
+      };
+    }
+    throw new UnauthenticatedError();
   }
 
   async createToken({

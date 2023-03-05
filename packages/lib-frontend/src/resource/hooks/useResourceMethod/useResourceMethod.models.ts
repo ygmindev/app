@@ -7,6 +7,7 @@ import type {
   ResourceServiceAfterDecoratorModel,
   ResourceServiceBeforeDecoratorModel,
 } from '@lib/shared/resource/utils/Resource/ResourceService/ResourceService.models';
+import type { RootModel } from '@lib/shared/resource/utils/Root/Root.models';
 
 export type UseResourceMethodFieldsModel<
   TMethod extends ResourceMethodTypeModel,
@@ -19,12 +20,13 @@ export type UseResourceMethodParamsModel<
   TType,
   TForm,
   TRoot = undefined,
-> = WithResourceNameModel & {
-  after?: ResourceServiceAfterDecoratorModel<TMethod, TType, TRoot>;
-  before?: ResourceServiceBeforeDecoratorModel<TMethod, TType, TForm, TRoot>;
-  fields: UseResourceMethodFieldsModel<TMethod, TType, TRoot>;
-  method: TMethod;
-};
+> = WithResourceNameModel &
+  RootModel<TRoot> & {
+    after?: ResourceServiceAfterDecoratorModel<TMethod, TType, TRoot>;
+    before?: ResourceServiceBeforeDecoratorModel<TMethod, TType, TForm, TRoot>;
+    fields: UseResourceMethodFieldsModel<TMethod, TType, TRoot>;
+    method: TMethod;
+  };
 
 export interface UseResourceMethodModel<
   TMethod extends ResourceMethodTypeModel,
@@ -36,3 +38,5 @@ export interface UseResourceMethodModel<
     input: InputModel<TMethod, TType, TForm, TRoot>,
   ): Promise<OutputModel<TMethod, TType, TRoot>>;
 }
+
+export type UseResourceMethodHookParamsModel<TRoot = undefined> = RootModel<TRoot>;

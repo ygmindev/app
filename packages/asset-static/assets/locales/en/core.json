@@ -23,5 +23,6 @@
     "validateZipCode": "TRANSLATION_MISSING"
   },
   "submit": "submit",
-  "cancel": "cancel"
+  "cancel": "cancel",
+  "add payment method": "add payment method"
 }

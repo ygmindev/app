@@ -127,28 +127,599 @@ input AccessUpdateUpdateInput {
   user: UserInput
 }
 
+type Bank {
+  _id: String
+  bank: String
+  created: DateTime
+  id: String
+  last4: String
+}
+
+input BankCreateFormInput {
+  _id: String
+  bank: String
+  created: DateTime
+  id: String
+  last4: String
+}
+
+input BankCreateInput {
+  form: BankCreateFormInput
+  root: BankCreateRootInput
+}
+
+type BankCreateOutput {
+  result: Bank
+  root: BankCreateOutputRoot
+}
+
+type BankCreateOutputRoot {
+  Bank: [Card]
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input BankCreateRootInput {
+  Bank: [CardInput]
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input BankGetConnectionFilterInput {
+  _id: String
+  bank: String
+  created: DateTime
+  id: String
+  last4: String
+}
+
+input BankGetConnectionInput {
+  filter: BankGetConnectionFilterInput
+  pagination: PaginationInput
+  root: BankGetConnectionRootInput
+}
+
+type BankGetConnectionOutput {
+  result: BankGetConnectionOutputConnection
+  root: BankGetConnectionOutputRoot
+}
+
+type BankGetConnectionOutputConnection {
+  edges: [BankGetConnectionOutputEdge]
+  pageInfo: PageInfo
+}
+
+type BankGetConnectionOutputEdge {
+  cursor: String
+  node: Bank
+}
+
+type BankGetConnectionOutputRoot {
+  Bank: [Card]
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input BankGetConnectionRootInput {
+  Bank: [CardInput]
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input BankGetFilterInput {
+  _id: String
+  bank: String
+  created: DateTime
+  id: String
+  last4: String
+}
+
+input BankGetInput {
+  filter: BankGetFilterInput
+  root: BankGetRootInput
+}
+
+input BankGetManyFilterInput {
+  _id: String
+  bank: String
+  created: DateTime
+  id: String
+  last4: String
+}
+
+input BankGetManyInput {
+  filter: BankGetManyFilterInput
+  root: BankGetManyRootInput
+}
+
+type BankGetManyOutput {
+  result: [Bank]
+  root: BankGetManyOutputRoot
+}
+
+type BankGetManyOutputRoot {
+  Bank: [Card]
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input BankGetManyRootInput {
+  Bank: [CardInput]
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+type BankGetOutput {
+  result: Bank
+  root: BankGetOutputRoot
+}
+
+type BankGetOutputRoot {
+  Bank: [Card]
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input BankGetRootInput {
+  Bank: [CardInput]
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input BankRemoveFilterInput {
+  _id: String
+  bank: String
+  created: DateTime
+  id: String
+  last4: String
+}
+
+input BankRemoveInput {
+  filter: BankRemoveFilterInput
+  root: BankRemoveRootInput
+}
+
+type BankRemoveOutput {
+  result: Bank
+  root: BankRemoveOutputRoot
+}
+
+type BankRemoveOutputRoot {
+  Bank: [Card]
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input BankRemoveRootInput {
+  Bank: [CardInput]
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input BankUpdateFilterInput {
+  _id: String
+  bank: String
+  created: DateTime
+  id: String
+  last4: String
+}
+
+input BankUpdateInput {
+  filter: BankUpdateFilterInput
+  root: BankUpdateRootInput
+  update: BankUpdateUpdateInput
+}
+
+type BankUpdateOutput {
+  result: Bank
+  root: BankUpdateOutputRoot
+}
+
+type BankUpdateOutputRoot {
+  Bank: [Card]
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input BankUpdateRootInput {
+  Bank: [CardInput]
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input BankUpdateUpdateInput {
+  _id: String
+  bank: String
+  created: DateTime
+  id: String
+  last4: String
+}
+
 type Card {
   _id: String
   brand: String
-  country: String
   created: DateTime
   expMonth: Float
   expYear: Float
   funding: String
   id: String
-  last4: Float
+  last4: String
+}
+
+input CardCreateFormInput {
+  _id: String
+  brand: String
+  created: DateTime
+  expMonth: Float
+  expYear: Float
+  funding: String
+  id: String
+  last4: String
+}
+
+input CardCreateInput {
+  form: CardCreateFormInput
+  root: CardCreateRootInput
+}
+
+type CardCreateOutput {
+  result: Card
+  root: CardCreateOutputRoot
+}
+
+type CardCreateOutputRoot {
+  Bank: [Card]
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input CardCreateRootInput {
+  Bank: [CardInput]
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input CardGetConnectionFilterInput {
+  _id: String
+  brand: String
+  created: DateTime
+  expMonth: Float
+  expYear: Float
+  funding: String
+  id: String
+  last4: String
+}
+
+input CardGetConnectionInput {
+  filter: CardGetConnectionFilterInput
+  pagination: PaginationInput
+  root: CardGetConnectionRootInput
+}
+
+type CardGetConnectionOutput {
+  result: CardGetConnectionOutputConnection
+  root: CardGetConnectionOutputRoot
+}
+
+type CardGetConnectionOutputConnection {
+  edges: [CardGetConnectionOutputEdge]
+  pageInfo: PageInfo
+}
+
+type CardGetConnectionOutputEdge {
+  cursor: String
+  node: Card
+}
+
+type CardGetConnectionOutputRoot {
+  Bank: [Card]
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input CardGetConnectionRootInput {
+  Bank: [CardInput]
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input CardGetFilterInput {
+  _id: String
+  brand: String
+  created: DateTime
+  expMonth: Float
+  expYear: Float
+  funding: String
+  id: String
+  last4: String
+}
+
+input CardGetInput {
+  filter: CardGetFilterInput
+  root: CardGetRootInput
+}
+
+input CardGetManyFilterInput {
+  _id: String
+  brand: String
+  created: DateTime
+  expMonth: Float
+  expYear: Float
+  funding: String
+  id: String
+  last4: String
+}
+
+input CardGetManyInput {
+  filter: CardGetManyFilterInput
+  root: CardGetManyRootInput
+}
+
+type CardGetManyOutput {
+  result: [Card]
+  root: CardGetManyOutputRoot
+}
+
+type CardGetManyOutputRoot {
+  Bank: [Card]
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input CardGetManyRootInput {
+  Bank: [CardInput]
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+type CardGetOutput {
+  result: Card
+  root: CardGetOutputRoot
+}
+
+type CardGetOutputRoot {
+  Bank: [Card]
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input CardGetRootInput {
+  Bank: [CardInput]
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
 }
 
 input CardInput {
   _id: String
   brand: String
-  country: String
   created: DateTime
   expMonth: Float
   expYear: Float
   funding: String
   id: String
-  last4: Float
+  last4: String
+}
+
+input CardRemoveFilterInput {
+  _id: String
+  brand: String
+  created: DateTime
+  expMonth: Float
+  expYear: Float
+  funding: String
+  id: String
+  last4: String
+}
+
+input CardRemoveInput {
+  filter: CardRemoveFilterInput
+  root: CardRemoveRootInput
+}
+
+type CardRemoveOutput {
+  result: Card
+  root: CardRemoveOutputRoot
+}
+
+type CardRemoveOutputRoot {
+  Bank: [Card]
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input CardRemoveRootInput {
+  Bank: [CardInput]
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input CardUpdateFilterInput {
+  _id: String
+  brand: String
+  created: DateTime
+  expMonth: Float
+  expYear: Float
+  funding: String
+  id: String
+  last4: String
+}
+
+input CardUpdateInput {
+  filter: CardUpdateFilterInput
+  root: CardUpdateRootInput
+  update: CardUpdateUpdateInput
+}
+
+type CardUpdateOutput {
+  result: Card
+  root: CardUpdateOutputRoot
+}
+
+type CardUpdateOutputRoot {
+  Bank: [Card]
+  Card: [Card]
+  LinkedUser: [LinkedUser]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input CardUpdateRootInput {
+  Bank: [CardInput]
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  phone: String
+}
+
+input CardUpdateUpdateInput {
+  _id: String
+  brand: String
+  created: DateTime
+  expMonth: Float
+  expYear: Float
+  funding: String
+  id: String
+  last4: String
 }
 
 """
@@ -181,9 +752,9 @@ type LinkedUserCreateOutput {
 }
 
 type LinkedUserCreateOutputRoot {
+  Bank: [Card]
   Card: [Card]
   LinkedUser: [LinkedUser]
-  PaymentMethod: [PaymentMethod]
   _id: String
   created: DateTime
   email: String
@@ -193,9 +764,9 @@ type LinkedUserCreateOutputRoot {
 }
 
 input LinkedUserCreateRootInput {
+  Bank: [CardInput]
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
-  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -233,9 +804,9 @@ type LinkedUserGetConnectionOutputEdge {
 }
 
 type LinkedUserGetConnectionOutputRoot {
+  Bank: [Card]
   Card: [Card]
   LinkedUser: [LinkedUser]
-  PaymentMethod: [PaymentMethod]
   _id: String
   created: DateTime
   email: String
@@ -245,9 +816,9 @@ type LinkedUserGetConnectionOutputRoot {
 }
 
 input LinkedUserGetConnectionRootInput {
+  Bank: [CardInput]
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
-  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -286,9 +857,9 @@ type LinkedUserGetManyOutput {
 }
 
 type LinkedUserGetManyOutputRoot {
+  Bank: [Card]
   Card: [Card]
   LinkedUser: [LinkedUser]
-  PaymentMethod: [PaymentMethod]
   _id: String
   created: DateTime
   email: String
@@ -298,9 +869,9 @@ type LinkedUserGetManyOutputRoot {
 }
 
 input LinkedUserGetManyRootInput {
+  Bank: [CardInput]
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
-  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -315,9 +886,9 @@ type LinkedUserGetOutput {
 }
 
 type LinkedUserGetOutputRoot {
+  Bank: [Card]
   Card: [Card]
   LinkedUser: [LinkedUser]
-  PaymentMethod: [PaymentMethod]
   _id: String
   created: DateTime
   email: String
@@ -327,9 +898,9 @@ type LinkedUserGetOutputRoot {
 }
 
 input LinkedUserGetRootInput {
+  Bank: [CardInput]
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
-  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -363,9 +934,9 @@ type LinkedUserRemoveOutput {
 }
 
 type LinkedUserRemoveOutputRoot {
+  Bank: [Card]
   Card: [Card]
   LinkedUser: [LinkedUser]
-  PaymentMethod: [PaymentMethod]
   _id: String
   created: DateTime
   email: String
@@ -375,9 +946,9 @@ type LinkedUserRemoveOutputRoot {
 }
 
 input LinkedUserRemoveRootInput {
+  Bank: [CardInput]
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
-  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -405,9 +976,9 @@ type LinkedUserUpdateOutput {
 }
 
 type LinkedUserUpdateOutputRoot {
+  Bank: [Card]
   Card: [Card]
   LinkedUser: [LinkedUser]
-  PaymentMethod: [PaymentMethod]
   _id: String
   created: DateTime
   email: String
@@ -417,9 +988,9 @@ type LinkedUserUpdateOutputRoot {
 }
 
 input LinkedUserUpdateRootInput {
+  Bank: [CardInput]
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
-  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -439,6 +1010,12 @@ type Mutation {
   AccessCreate(input: AccessCreateInput): AccessCreateOutput
   AccessRemove(input: AccessRemoveInput): AccessRemoveOutput
   AccessUpdate(input: AccessUpdateInput): AccessUpdateOutput
+  BankCreate(input: BankCreateInput): BankCreateOutput
+  BankRemove(input: BankRemoveInput): BankRemoveOutput
+  BankUpdate(input: BankUpdateInput): BankUpdateOutput
+  CardCreate(input: CardCreateInput): CardCreateOutput
+  CardRemove(input: CardRemoveInput): CardRemoveOutput
+  CardUpdate(input: CardUpdateInput): CardUpdateOutput
   LinkedUserCreate(input: LinkedUserCreateInput): LinkedUserCreateOutput
   LinkedUserRemove(input: LinkedUserRemoveInput): LinkedUserRemoveOutput
   LinkedUserUpdate(input: LinkedUserUpdateInput): LinkedUserUpdateOutput
@@ -596,11 +1173,17 @@ input PaginationInput {
 type PaymentMethod {
   _id: String
   created: DateTime
+  id: String
+  last4: String
+  type: String
 }
 
 input PaymentMethodGetManyFilterInput {
   _id: String
   created: DateTime
+  id: String
+  last4: String
+  type: String
 }
 
 input PaymentMethodGetManyInput {
@@ -614,9 +1197,9 @@ type PaymentMethodGetManyOutput {
 }
 
 type PaymentMethodGetManyOutputRoot {
+  Bank: [Card]
   Card: [Card]
   LinkedUser: [LinkedUser]
-  PaymentMethod: [PaymentMethod]
   _id: String
   created: DateTime
   email: String
@@ -626,20 +1209,15 @@ type PaymentMethodGetManyOutputRoot {
 }
 
 input PaymentMethodGetManyRootInput {
+  Bank: [CardInput]
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
-  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
   first: String
   last: String
   phone: String
-}
-
-input PaymentMethodInput {
-  _id: String
-  created: DateTime
 }
 
 input PaymentMethodTokenCreateInput {
@@ -652,9 +1230,9 @@ type PaymentMethodTokenCreateOutput {
 }
 
 type PaymentMethodTokenCreateOutputRoot {
+  Bank: [Card]
   Card: [Card]
   LinkedUser: [LinkedUser]
-  PaymentMethod: [PaymentMethod]
   _id: String
   created: DateTime
   email: String
@@ -664,9 +1242,9 @@ type PaymentMethodTokenCreateOutputRoot {
 }
 
 input PaymentMethodTokenCreateRootInput {
+  Bank: [CardInput]
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
-  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -679,6 +1257,12 @@ type Query {
   AccessGet(input: AccessGetInput): AccessGetOutput
   AccessGetConnection(input: AccessGetConnectionInput): AccessGetConnectionOutput
   AccessGetMany(input: AccessGetManyInput): AccessGetManyOutput
+  BankGet(input: BankGetInput): BankGetOutput
+  BankGetConnection(input: BankGetConnectionInput): BankGetConnectionOutput
+  BankGetMany(input: BankGetManyInput): BankGetManyOutput
+  CardGet(input: CardGetInput): CardGetOutput
+  CardGetConnection(input: CardGetConnectionInput): CardGetConnectionOutput
+  CardGetMany(input: CardGetManyInput): CardGetManyOutput
   LinkedUserGet(input: LinkedUserGetInput): LinkedUserGetOutput
   LinkedUserGetConnection(input: LinkedUserGetConnectionInput): LinkedUserGetConnectionOutput
   LinkedUserGetMany(input: LinkedUserGetManyInput): LinkedUserGetManyOutput
@@ -713,9 +1297,9 @@ type SignInCreateOutput {
 }
 
 type User {
+  Bank: [Card]
   Card: [Card]
   LinkedUser: [LinkedUser]
-  PaymentMethod: [PaymentMethod]
   _id: String
   created: DateTime
   email: String
@@ -725,9 +1309,9 @@ type User {
 }
 
 input UserCreateFormInput {
+  Bank: [CardInput]
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
-  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -745,9 +1329,9 @@ type UserCreateOutput {
 }
 
 input UserGetConnectionFilterInput {
+  Bank: [CardInput]
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
-  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -776,9 +1360,9 @@ type UserGetConnectionOutputEdge {
 }
 
 input UserGetFilterInput {
+  Bank: [CardInput]
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
-  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -792,9 +1376,9 @@ input UserGetInput {
 }
 
 input UserGetManyFilterInput {
+  Bank: [CardInput]
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
-  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -816,9 +1400,9 @@ type UserGetOutput {
 }
 
 input UserInput {
+  Bank: [CardInput]
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
-  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -828,9 +1412,9 @@ input UserInput {
 }
 
 input UserRemoveFilterInput {
+  Bank: [CardInput]
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
-  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -848,9 +1432,9 @@ type UserRemoveOutput {
 }
 
 input UserUpdateFilterInput {
+  Bank: [CardInput]
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
-  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String
@@ -869,9 +1453,9 @@ type UserUpdateOutput {
 }
 
 input UserUpdateUpdateInput {
+  Bank: [CardInput]
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
-  PaymentMethod: [PaymentMethodInput]
   _id: String
   created: DateTime
   email: String

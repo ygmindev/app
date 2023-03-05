@@ -23,6 +23,7 @@ export const useResourceMethod = <
   fields,
   method,
   name,
+  root,
 }: UseResourceMethodParamsModel<TMethod, TType, TForm, TRoot>): UseResourceMethodModel<
   TMethod,
   TType,
@@ -69,6 +70,7 @@ export const useResourceMethod = <
   return {
     query: async (input) => {
       const _input = before ? await before({ input }) : input;
+      const _root = _input.root || root;
       const output = (await query<
         { input: InputModel<TMethod, TType, TForm, TRoot> },
         OutputModel<TMethod, TType, TRoot>
@@ -77,8 +79,8 @@ export const useResourceMethod = <
         name: _name,
         params: { input: `${_name}Input` },
         type: _type,
-        variables: { input: _input },
-      })) || { result: undefined, root: _input.root };
+        variables: { input: { ..._input, root: _root } },
+      })) || { result: undefined, root: _root };
       return after ? await after({ output }) : output;
     },
   };

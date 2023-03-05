@@ -7,10 +7,12 @@ import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { RouteContext } from '@lib/frontend/route/providers/RouteProvider/RouteProvider';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useContext } from 'react';
 
 export const Protectable: SFCModel<ProtectablePropsModel> = ({ children }) => {
   const authState = useAuthState();
+  const currentUser = useStore((state) => state.user.currentUser);
   const { replace } = useRouter();
   const context = useContext(RouteContext);
 
@@ -23,5 +25,5 @@ export const Protectable: SFCModel<ProtectablePropsModel> = ({ children }) => {
     }
   }
 
-  return <>{children}</>;
+  return <>{currentUser && children}</>;
 };

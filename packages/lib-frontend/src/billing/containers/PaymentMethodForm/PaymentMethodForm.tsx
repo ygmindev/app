@@ -10,7 +10,8 @@ import { useMutation } from '@lib/frontend/core/hooks/useMutation/useMutation';
 import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
 import type { FormRefModel } from '@lib/frontend/form/form.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_BASIC_SIZE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { CREATE_TOKEN } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import type { PaymentMethodFormModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
@@ -22,6 +23,7 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
   ...props
 }) => {
   const { styles } = useStyles({ props });
+  const theme = useTheme();
   const currentUser = useCurrentUser();
   const { createToken } = usePaymentMethodResource();
   const { data, isLoading, mutate } = useMutation({
@@ -46,7 +48,7 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
             {
               id: 'payment',
               render: ({ elementState, error, handleSubmit, onChange, value }) => (
-                <Wrapper isCenter>
+                <Wrapper width={theme.layout.width[THEME_BASIC_SIZE.MEDIUM]}>
                   <PaymentMethodField
                     elementState={elementState}
                     error={error}

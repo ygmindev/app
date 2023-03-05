@@ -106,12 +106,12 @@ export const EmbeddedResourceService = <
         this.decorators.beforeCreate ? await this.decorators.beforeCreate({ input }) : input,
       );
       if (_input.root) {
-        const _inputClean = await _beforeCreate(
+        const _inputFinal = await _beforeCreate(
           _input as InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
         );
-        const value = _inputClean.form as TForm;
+        const value = _inputFinal.form as TForm;
         const { result: rootResult } = await this._rootService.update({
-          filter: _inputClean.root as PartialModel<TRoot>,
+          filter: _inputFinal.root as PartialModel<TRoot>,
           update: { $push: { [name]: value } } as UpdateModel<TRoot>,
         });
         const output: OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot> = {

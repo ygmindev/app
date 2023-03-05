@@ -2,6 +2,8 @@ import { AccessResolver } from '@lib/backend/auth/resources/Access/AccessResolve
 import { OtpResolver } from '@lib/backend/auth/resources/Otp/OtpResolver/OtpResolver';
 import { SignInResolver } from '@lib/backend/auth/resources/SignIn/SignInResolver/SignInResolver';
 import { authorize } from '@lib/backend/auth/utils/authorize/authorize';
+import { BankResolver } from '@lib/backend/billing/resources/Bank/BankResolver/BankResolver';
+import { CardResolver } from '@lib/backend/billing/resources/Card/CardResolver/CardResolver';
 import { PaymentMethodResolver } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethodResolver/PaymentMethodResolver';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { LinkedUserResolver } from '@lib/backend/user/resources/LinkedUser/LinkedUserResolver/LinkedUserResolver';
@@ -16,9 +18,11 @@ export const graphqlConfig: GraphqlConfigParamsModel = {
 
   resolvers: [
     AccessResolver,
+    BankResolver,
+    CardResolver,
+    LinkedUserResolver,
     OtpResolver,
     PaymentMethodResolver,
-    LinkedUserResolver,
     SignInResolver,
     UserResolver,
   ],

@@ -24,12 +24,12 @@
             "outputCapture": "std"
         },
         {
-            "name": "ald",
+            "name": "bld",
             "type": "node",
             "request": "launch",
             "stopOnEntry": false,
             "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
-            "args": ["ald"],
+            "args": ["bld"],
             "outputCapture": "std"
         },
         {
@@ -87,12 +87,12 @@
             "outputCapture": "std"
         },
         {
-            "name": "sld",
+            "name": "bld",
             "type": "node",
             "request": "launch",
             "stopOnEntry": false,
             "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
-            "args": ["sld"],
+            "args": ["bld"],
             "outputCapture": "std"
         },
         {

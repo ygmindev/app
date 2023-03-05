@@ -11,10 +11,10 @@ import { withCondition } from '@lib/shared/core/decorators/withCondition/withCon
 import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { NotImplementedError } from '@lib/shared/core/errors/NotImplementedError/NotImplementedError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
+import { toPlainObject } from '@lib/shared/core/utils/toPlainObject/toPlainObject';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
-import toPlainObject from 'lodash/toPlainObject';
 
 export const ResourceResolver = <TType, TForm, TRoot = undefined>({
   name,

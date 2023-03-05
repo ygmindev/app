@@ -26,6 +26,7 @@ export class PaymentMethodResolver
     Resource: PaymentMethod,
     ResourceService: PaymentMethodService,
     RootResource: User,
+    getAccess: ACCESS_LEVEL.PUBLIC,
     name: PAYMENT_METHOD_RESOURCE_NAME,
   })
   implements PaymentMethodServiceModel
