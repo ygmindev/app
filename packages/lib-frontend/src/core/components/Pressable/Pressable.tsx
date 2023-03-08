@@ -1,4 +1,5 @@
 import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import type { PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -106,7 +107,8 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
               <Button
                 elementState={valueControlled}
                 icon="chevronLeft"
-                onPress={async () => confirmModalIsOpenSet(false)}>
+                onPress={async () => confirmModalIsOpenSet(false)}
+                type={BUTTON_TYPE.TRANSPARENT}>
                 {t('core:labels.cancel')}
               </Button>
 

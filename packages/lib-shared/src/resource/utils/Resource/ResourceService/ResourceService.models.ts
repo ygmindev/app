@@ -1,6 +1,7 @@
 import type { WithResourceNameModel } from '@lib/shared/resource/decorators/withResourceName/withResourceName.models';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
+import type { ContextModel } from '@lib/shared/resource/utils/Context/Context.models';
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 
@@ -13,28 +14,34 @@ export type ResourceServiceParamsModel<
 export interface ResourceServiceModel<TType, TForm, TRoot = undefined> {
   create(
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
+    context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>>;
 
   decorators?: ResourceServiceDecoratorModel<TType, TForm, TRoot>;
 
   get(
     input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>,
+    context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>>;
 
   getConnection(
     input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm, TRoot>,
+    context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>>;
 
   getMany(
     input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot>,
+    context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>>;
 
   remove(
     input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm, TRoot>,
+    context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>>;
 
   update(
     input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot>,
+    context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>>;
 }
 

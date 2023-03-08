@@ -1,3 +1,4 @@
+import { selfAuthorizer } from '@lib/backend/auth/utils/selfAuthorizer/selfAuthorizer';
 import { Card } from '@lib/backend/billing/resources/Card/Card';
 import { CardService } from '@lib/backend/billing/resources/Card/CardService/CardService';
 import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
@@ -17,7 +18,8 @@ export class CardResolver
     Resource: Card,
     ResourceService: CardService,
     RootResource: User,
-    createAccess: ACCESS_LEVEL.PROTECTED,
+    authorizer: selfAuthorizer,
     name: CARD_RESOURCE_NAME,
+    writeAccess: ACCESS_LEVEL.PROTECTED,
   })
   implements CardServiceModel {}

@@ -80,7 +80,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
 
             {
               element: <PaymentMethodFormPage />,
-              header: { previous: `/${ACCOUNT}/${PAYMENT_METHOD}` },
+              header: { previous: `/${ACCOUNT}/${PAYMENT}` },
               ns: [BILLING],
               pathname: PAYMENT_METHOD,
             },

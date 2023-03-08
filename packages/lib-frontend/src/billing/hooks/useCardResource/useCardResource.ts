@@ -36,9 +36,23 @@ export const useCardResource = ({
     root,
   });
 
+  const { query: remove } = useResourceMethod<
+    RESOURCE_METHOD_TYPE.REMOVE,
+    CardModel,
+    CardFormModel,
+    UserModel
+  >({
+    fields: [{ result: CARD_FIELDS }],
+    method: RESOURCE_METHOD_TYPE.REMOVE,
+    name: CARD_RESOURCE_NAME,
+    root,
+  });
+
   return {
     create,
 
     get,
+
+    remove,
   };
 };

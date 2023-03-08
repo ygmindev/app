@@ -1,4 +1,5 @@
 import { PAYMENT_METHOD } from '@lib/frontend/billing/billing.constants';
+import { PaymentMethod } from '@lib/frontend/billing/components/PaymentMethod/PaymentMethod';
 import { usePaymentMethodResource } from '@lib/frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
 import type { PaymentPagePropsModel } from '@lib/frontend/billing/pages/PaymentPage/PaymentPage.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
@@ -22,17 +23,26 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
     id: 'paymentMethods',
     query: async () => getMany({ filter: {} }),
   });
-  console.warn(data);
+
+  const _tPaymentMethod = t('billing:labels.paymentMethod');
 
   return (
     <MainLayout
       style={styles}
       testID={testID}>
+      {data &&
+        data.result?.map((value) => (
+          <PaymentMethod
+            key={value._id}
+            value={value}
+          />
+        ))}
+
       <Wrapper isRowAlign>
         <Button
           icon="add"
           onPress={() => push({ pathname: `/${FORM}/${PAYMENT_METHOD}` })}>
-          {t('core:labels.add', { value: t('billing:labels.paymentMethod') })}
+          {t('core:labels.add', { value: _tPaymentMethod })}
         </Button>
       </Wrapper>
     </MainLayout>

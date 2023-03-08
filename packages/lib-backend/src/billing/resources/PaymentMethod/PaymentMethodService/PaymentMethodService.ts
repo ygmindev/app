@@ -31,24 +31,24 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
 
   @withInject(StripeAdminService) protected _stripeAdminService!: StripeAdminService;
 
-  async getMany({
-    root,
-  }: InputModel<
-    RESOURCE_METHOD_TYPE.GET_MANY,
-    PaymentMethodModel,
-    PaymentMethodFormModel,
-    UserModel
-  >): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>> {
-    if (root) {
+  async getMany(
+    input: InputModel<
+      RESOURCE_METHOD_TYPE.GET_MANY,
+      PaymentMethodModel,
+      PaymentMethodFormModel,
+      UserModel
+    >,
+  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>> {
+    if (input.root) {
       const { result: banks } = await this._bankService.getMany({
         filter: {},
         options: { project: { _id: true, id: true, last4: true } },
-        root: { _id: root._id },
+        root: { _id: input.root._id },
       });
       const { result: cards } = await this._cardService.getMany({
         filter: {},
         options: { project: { _id: true, id: true, last4: true } },
-        root: { _id: root._id },
+        root: { _id: input.root._id },
       });
       return {
         result: [
@@ -60,13 +60,11 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
     throw new UnauthenticatedError();
   }
 
-  async createToken({
-    root,
-  }: InputModel<RESOURCE_METHOD_TYPE.CREATE, string, undefined, UserModel>): Promise<
-    OutputModel<RESOURCE_METHOD_TYPE.CREATE, string, UserModel>
-  > {
-    if (root) {
-      const _uid = root._id;
+  async createToken(
+    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, string, undefined, UserModel>,
+  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, string, UserModel>> {
+    if (input.root) {
+      const _uid = input.root._id;
       let { result: linkedUser } = await this._linkedUserService.get({
         filter: { type: LINKED_USER_TYPE.STRIPE },
         options: { project: { _id: true } },

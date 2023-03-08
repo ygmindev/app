@@ -53,7 +53,7 @@ export const PersonalPage: SFCModel<PersonalPagePropsModel> = ({ testID, ...prop
               <Button
                 icon="edit"
                 onPress={() => push({ pathname: `${FORM}/${PERSONAL}/${id}` })}>
-                {t('core:labels.change')}
+                {t('core:labels.edit')}
               </Button>
             </Wrapper>
           </Wrapper>

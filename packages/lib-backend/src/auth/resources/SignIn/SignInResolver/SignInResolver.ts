@@ -26,8 +26,8 @@ export class SignInResolver
     Resource: SignIn,
     ResourceData: SignInForm,
     ResourceService: SignInService,
-    createAccess: ACCESS_LEVEL.PUBLIC,
     name: SIGN_IN_RESOURCE_NAME,
+    writeAccess: ACCESS_LEVEL.PUBLIC,
   })
   implements SignInServiceModel
 {
@@ -43,7 +43,7 @@ export class SignInResolver
     @withInput({ Resource: SignInForm, method: RESOURCE_METHOD_TYPE.CREATE, name: USERNAME_UPDATE })
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel>,
     @withContext()
-    context: ContextModel,
+    context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
     return this._signInService.usernameUpdate(input, context);
   }

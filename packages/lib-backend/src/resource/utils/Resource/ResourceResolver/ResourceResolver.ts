@@ -1,3 +1,4 @@
+import { withContext } from '@lib/backend/http/decorators/withContext/withContext';
 import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import { withInput } from '@lib/backend/resource/decorators/withInput/withInput';
 import { withOutput } from '@lib/backend/resource/decorators/withOutput/withOutput';
@@ -5,6 +6,7 @@ import type {
   ResourceResolverModel,
   ResourceResolverParamsModel,
 } from '@lib/backend/resource/utils/Resource/ResourceResolver/ResourceResolver.models';
+import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import type { ConstructorModel } from '@lib/shared/core/core.models';
 import { withCondition } from '@lib/shared/core/decorators/withCondition/withCondition';
@@ -13,19 +15,42 @@ import { NotImplementedError } from '@lib/shared/core/errors/NotImplementedError
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { toPlainObject } from '@lib/shared/core/utils/toPlainObject/toPlainObject';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import type { ContextModel } from '@lib/shared/resource/utils/Context/Context.models';
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+
+export const authorize = <TType, TForm, TRoot = undefined>({
+  authorizer,
+  context,
+  input,
+}: Pick<ResourceResolverParamsModel<TType, TForm, TRoot>, 'authorizer'> & {
+  context?: ContextModel;
+  input: InputModel<
+    | RESOURCE_METHOD_TYPE.CREATE
+    | RESOURCE_METHOD_TYPE.GET
+    | RESOURCE_METHOD_TYPE.GET_CONNECTION
+    | RESOURCE_METHOD_TYPE.GET_MANY
+    | RESOURCE_METHOD_TYPE.REMOVE
+    | RESOURCE_METHOD_TYPE.UPDATE,
+    TType,
+    TForm,
+    TRoot
+  >;
+}): void => {
+  if (authorizer && !authorizer({ context, input })) {
+    throw new UnauthorizedError();
+  }
+};
 
 export const ResourceResolver = <TType, TForm, TRoot = undefined>({
   name,
   Resource,
   ResourceService,
+  authorizer,
   ResourceData,
   RootResource,
-  createAccess = ACCESS_LEVEL.RESTRICTED,
-  getAccess = ACCESS_LEVEL.RESTRICTED,
-  updateAccess = ACCESS_LEVEL.RESTRICTED,
-  removeAccess = ACCESS_LEVEL.RESTRICTED,
+  writeAccess = ACCESS_LEVEL.RESTRICTED,
+  readAccess = ACCESS_LEVEL.RESTRICTED,
 }: ResourceResolverParamsModel<TType, TForm, TRoot>): ConstructorModel<
   ResourceResolverModel<TType, TForm, TRoot>
 > => {
@@ -46,7 +71,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
       withOutput({
         Resource,
         RootResource,
-        level: createAccess,
+        level: writeAccess,
         method: RESOURCE_METHOD_TYPE.CREATE,
         name,
       }),
@@ -62,9 +87,12 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
         }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
+      @withContext()
+      context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> {
       if (this._service.create) {
-        return this._service.create(toPlainObject(input));
+        authorize({ authorizer, context, input });
+        return this._service.create(toPlainObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.CREATE);
     }
@@ -74,7 +102,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
       withOutput({
         Resource,
         RootResource,
-        level: getAccess,
+        level: readAccess,
         method: RESOURCE_METHOD_TYPE.GET,
         name,
       }),
@@ -82,12 +110,20 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
     async get(
       @withCondition(
         _getExists,
-        withInput({ Resource, RootResource, method: RESOURCE_METHOD_TYPE.GET, name }),
+        withInput({
+          Resource,
+          RootResource,
+          method: RESOURCE_METHOD_TYPE.GET,
+          name,
+        }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>,
+      @withContext()
+      context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>> {
       if (this._service.get) {
-        return this._service.get(toPlainObject(input));
+        authorize({ authorizer, context, input });
+        return this._service.get(toPlainObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.GET);
     }
@@ -97,7 +133,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
       withOutput({
         Resource,
         RootResource,
-        level: getAccess,
+        level: readAccess,
         method: RESOURCE_METHOD_TYPE.GET_MANY,
         name,
       }),
@@ -113,9 +149,12 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
         }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>,
+      @withContext()
+      context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> {
       if (this._service.getMany) {
-        return this._service.getMany(toPlainObject(input));
+        authorize({ authorizer, context, input });
+        return this._service.getMany(toPlainObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.GET_MANY);
     }
@@ -125,7 +164,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
       withOutput({
         Resource,
         RootResource,
-        level: getAccess,
+        level: readAccess,
         method: RESOURCE_METHOD_TYPE.GET_CONNECTION,
         name,
       }),
@@ -141,9 +180,12 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
         }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>,
+      @withContext()
+      context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>> {
       if (this._service.getConnection) {
-        return this._service.getConnection(toPlainObject(input));
+        authorize({ authorizer, context, input });
+        return this._service.getConnection(toPlainObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.GET_CONNECTION);
     }
@@ -153,7 +195,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
       withOutput({
         Resource,
         RootResource,
-        level: updateAccess,
+        level: writeAccess,
         method: RESOURCE_METHOD_TYPE.UPDATE,
         name,
       }),
@@ -169,9 +211,12 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
         }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>,
+      @withContext()
+      context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>> {
       if (this._service.update) {
-        return this._service.update(toPlainObject(input));
+        authorize({ authorizer, context, input });
+        return this._service.update(toPlainObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.UPDATE);
     }
@@ -181,7 +226,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
       withOutput({
         Resource,
         RootResource,
-        level: removeAccess,
+        level: writeAccess,
         method: RESOURCE_METHOD_TYPE.REMOVE,
         name,
       }),
@@ -197,9 +242,12 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
         }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>,
+      @withContext()
+      context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>> {
       if (this._service.remove) {
-        return this._service.remove(toPlainObject(input));
+        authorize({ authorizer, context, input });
+        return this._service.remove(toPlainObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.REMOVE);
     }

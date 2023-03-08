@@ -1,5 +1,8 @@
 {
   "labels": {
+    "bank": "bank",
+    "card": "card",
+    "endingIn": "{{type}} ending in {{value}}",
     "payment": "payment",
     "paymentMethod": "payment method"
   }

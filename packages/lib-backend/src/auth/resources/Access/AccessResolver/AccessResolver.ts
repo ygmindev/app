@@ -23,8 +23,8 @@ export class AccessResolver
   extends EntityResourceResolver<AccessModel, AccessFormModel>({
     Resource: Access,
     ResourceService: AccessService,
-    createAccess: ACCESS_LEVEL.PUBLIC,
     name: ACCESS_RESOURCE_NAME,
+    writeAccess: ACCESS_LEVEL.PUBLIC,
   })
   implements AccessServiceModel
 {

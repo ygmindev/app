@@ -17,10 +17,8 @@ export class DummyEntityResourceResolver
   extends EntityResourceResolver<DummyEntityResourceModel, DummyEntityResourceFormModel>({
     Resource: DummyEntityResource,
     ResourceService: DummyEntityResourceService,
-    createAccess: ACCESS_LEVEL.PUBLIC,
-    getAccess: ACCESS_LEVEL.PUBLIC,
+    readAccess: ACCESS_LEVEL.PUBLIC,
     name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
-    removeAccess: ACCESS_LEVEL.PUBLIC,
-    updateAccess: ACCESS_LEVEL.PUBLIC,
+    writeAccess: ACCESS_LEVEL.PUBLIC,
   })
   implements DummyEntityResourceServiceModel {}

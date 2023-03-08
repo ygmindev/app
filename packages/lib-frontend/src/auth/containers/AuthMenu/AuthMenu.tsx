@@ -22,8 +22,8 @@ import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyl
 import { SIGN_OUT } from '@lib/shared/auth/auth.constants';
 import type { PartialModel } from '@lib/shared/core/core.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
-import { DEVICE, ACCOUNT } from '@lib/shared/user/user.constants';
 import { BRIGHTNESS } from '@lib/shared/style/style.constants';
+import { ACCOUNT, DEVICE } from '@lib/shared/user/user.constants';
 import { useMemo } from 'react';
 
 export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
@@ -40,6 +40,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
 
   const _optionsOverrides = useMemo<Record<string, PartialModel<AuthMenuOptionModel>>>(
     () => ({
+      [ACCOUNT]: { onPress: () => push({ pathname: ACCOUNT }) },
       [BRIGHTNESS]: {
         subOptions: AUTH_MENU_OPTIONS.find(({ id }) => id === BRIGHTNESS)?.subOptions?.map(
           (subOption) => ({
@@ -52,7 +53,6 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
           }),
         ),
       },
-      [ACCOUNT]: { onPress: () => push({ pathname: ACCOUNT }) },
       [SIGN_OUT]: { onPress: signOut },
     }),
     [push, signOut],

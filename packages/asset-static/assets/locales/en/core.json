@@ -2,9 +2,11 @@
   "labels": {
     "add": "add {{value}}",
     "cancel": "cancel",
-    "change": "change",
     "continue": "continue",
+    "edit": "edit",
     "noResult": "no result",
+    "remove": "remove",
+    "setAsDefault": "set as default",
     "submit": "submit",
     "tryAgain": "try again"
   },
@@ -21,8 +23,5 @@
     "validateNotEmpty": "TRANSLATION_MISSING",
     "validateRange": "TRANSLATION_MISSING",
     "validateZipCode": "TRANSLATION_MISSING"
-  },
-  "submit": "submit",
-  "cancel": "cancel",
-  "add payment method": "add payment method"
+  }
 }

@@ -1,3 +1,4 @@
+import { selfAuthorizer } from '@lib/backend/auth/utils/selfAuthorizer/selfAuthorizer';
 import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import { EmbeddedResourceResolver } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResourceResolver/EmbeddedResourceResolver';
 import { LinkedUser } from '@lib/backend/user/resources/LinkedUser/LinkedUser';
@@ -19,6 +20,7 @@ export class LinkedUserResolver
     Resource: LinkedUser,
     ResourceService: LinkedUserService,
     RootResource: User,
+    authorizer: selfAuthorizer,
     name: LINKED_USER_RESOURCE_NAME,
   })
   implements LinkedUserServiceModel {}

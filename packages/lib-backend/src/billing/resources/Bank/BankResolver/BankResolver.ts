@@ -1,3 +1,4 @@
+import { selfAuthorizer } from '@lib/backend/auth/utils/selfAuthorizer/selfAuthorizer';
 import { Bank } from '@lib/backend/billing/resources/Bank/Bank';
 import { BankService } from '@lib/backend/billing/resources/Bank/BankService/BankService';
 import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
@@ -17,7 +18,8 @@ export class BankResolver
     Resource: Bank,
     ResourceService: BankService,
     RootResource: User,
-    createAccess: ACCESS_LEVEL.PROTECTED,
+    authorizer: selfAuthorizer,
     name: BANK_RESOURCE_NAME,
+    writeAccess: ACCESS_LEVEL.PROTECTED,
   })
   implements BankServiceModel {}

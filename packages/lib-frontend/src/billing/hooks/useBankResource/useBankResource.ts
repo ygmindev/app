@@ -36,9 +36,23 @@ export const useBankResource = ({
     root,
   });
 
+  const { query: remove } = useResourceMethod<
+    RESOURCE_METHOD_TYPE.REMOVE,
+    BankModel,
+    BankFormModel,
+    UserModel
+  >({
+    fields: [{ result: BANK_FIELDS }],
+    method: RESOURCE_METHOD_TYPE.REMOVE,
+    name: BANK_RESOURCE_NAME,
+    root,
+  });
+
   return {
     create,
 
     get,
+
+    remove,
   };
 };

@@ -115,15 +115,9 @@ export const EntityResourceService = <TType, TForm>({
     async update(
       input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>> {
-      console.warn('@@@before\n');
-      console.warn(JSON.stringify(input, null, '  '));
-      console.warn('\n');
       const _input = cleanObject(
         this.decorators.beforeUpdate ? await this.decorators.beforeUpdate({ input }) : input,
       );
-      console.warn('@@@after\n');
-      console.warn(JSON.stringify(_input, null, '  '));
-      console.warn('\n');
       const output = await this._repository.update(_input);
       return this.decorators.afterUpdate ? await this.decorators.afterUpdate({ output }) : output;
     }

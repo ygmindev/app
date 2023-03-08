@@ -6,15 +6,7 @@ export const _parserConfig = ({
   missingValue,
   namespaceDefault,
   outputPath,
-}: _ParserConfigParamsModel): {
-  createOldCatalogs: boolean;
-  defaultNamespace: string;
-  defaultValue?: string;
-  locales: Array<string>;
-  output: string;
-  sort: boolean;
-  verbose: boolean;
-} => ({
+}: _ParserConfigParamsModel): object => ({
   createOldCatalogs: false,
 
   defaultNamespace: namespaceDefault,
