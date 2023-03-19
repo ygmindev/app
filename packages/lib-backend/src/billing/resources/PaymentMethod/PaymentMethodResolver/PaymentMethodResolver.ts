@@ -30,9 +30,8 @@ export class PaymentMethodResolver
     Resource: PaymentMethod,
     ResourceService: PaymentMethodService,
     RootResource: User,
-    authorizer: selfAuthorizer,
+    authorizer: { default: selfAuthorizer },
     name: PAYMENT_METHOD_RESOURCE_NAME,
-    readAccess: ACCESS_LEVEL.PROTECTED,
   })
   implements PaymentMethodServiceModel
 {

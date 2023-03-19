@@ -29,7 +29,7 @@ export const composeComponent = <
     const theme = useTheme();
     const { styles } = useStyles({ props, stylers });
     const _props = useMemo(
-      () => (getProps ? getProps(props, theme, ref) : props),
+      () => (getProps ? getProps({ ...props, style: styles }, theme, ref) : props),
       [getProps, props, theme, ref],
     );
     return (isWeb ? unstable_createElement : createElement)(Component, {

@@ -34,9 +34,11 @@ export const _AnimatableView: RSFCModel<AnimatableRefModel, _AnimatableViewProps
 
     return isRender ? (
       <_Component
-        {...(_viewParams.getProps && _viewParams.getProps(props, theme))}
-        {...(_viewParamsPressable.getProps && _viewParamsPressable.getProps(props, theme))}
-        {...(_viewParamsScrollable.getProps && _viewParamsScrollable.getProps(props, theme))}
+        {...(_viewParams.getProps && _viewParams.getProps({ ...props, style: styles }, theme))}
+        {...(_viewParamsPressable.getProps &&
+          _viewParamsPressable.getProps({ ...props, style: styles }, theme))}
+        {...(_viewParamsScrollable.getProps &&
+          _viewParamsScrollable.getProps({ ...props, style: styles }, theme))}
         {...animationProps}
         ref={ref}
         state={animationState}

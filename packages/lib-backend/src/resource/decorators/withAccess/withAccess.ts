@@ -21,6 +21,6 @@ export const getAccessRole = (level: AccessLevelModel): Array<AccessRoleModel> =
 };
 
 export const withAccess = ({
-  level = ACCESS_LEVEL.RESTRICTED,
+  level = ACCESS_LEVEL.PUBLIC,
 }: WithAccessParamsModel): PropertyDecorator & MethodDecorator =>
   withCondition(level !== ACCESS_LEVEL.PUBLIC, Authorized(getAccessRole(level)));

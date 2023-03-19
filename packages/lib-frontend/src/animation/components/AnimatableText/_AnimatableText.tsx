@@ -22,7 +22,7 @@ export const _AnimatableText: RSFCModel<
   });
   return isRender ? (
     <MotiText
-      {...(_textParams.getProps ? _textParams.getProps(props, theme) : {})}
+      {...(_textParams.getProps ? _textParams.getProps({ ...props, style: styles }, theme) : {})}
       {...(animationProps as PropsModel<typeof MotiText>)}
       ref={ref}
       state={animationState}

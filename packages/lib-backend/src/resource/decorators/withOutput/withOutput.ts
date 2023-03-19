@@ -28,7 +28,7 @@ export const withOutput =
     method,
     Resource,
     RootResource,
-    level = ACCESS_LEVEL.RESTRICTED,
+    level = ACCESS_LEVEL.PUBLIC,
   }: WithOutputParamsModel<TMethod, TType, TRoot>): MethodDecorator =>
   (target, propertyKey, descriptor) => {
     const _name = `${name}${method}`;

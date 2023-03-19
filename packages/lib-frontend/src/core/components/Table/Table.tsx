@@ -1,6 +1,6 @@
 import { sheetConfig } from '@lib/config/style/sheet/configs/sheet.config.ag-grid';
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
-import { Skeleton } from '@lib/frontend/core/components/Skeleton/Skeleton';
+import { Skeleton } from '@lib/frontend/animation/components/Skeleton/Skeleton';
 import { SvgShape } from '@lib/frontend/core/components/SvgShape/SvgShape';
 import { SVG_SHAPE } from '@lib/frontend/core/components/SvgShape/SvgShape.constants';
 import { _Table } from '@lib/frontend/core/components/Table/_Table';

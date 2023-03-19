@@ -1,4 +1,6 @@
 import { APP_REDUCER } from '@lib/frontend/app/stores/appStore/appStore.constants';
+import { BILLING } from '@lib/frontend/billing/billing.constants';
+import { BILLING_REDUCER } from '@lib/frontend/billing/stores/billingStore/billingStore.constants';
 import { LOCALE_REDUCER } from '@lib/frontend/locale/stores/localeStore/localeStore.constants';
 import { NOTIFICATION_REDUCER } from '@lib/frontend/notification/stores/notificationStore/notificationStore.constants';
 import type { RootStateModel } from '@lib/frontend/root/stores/rootStore.models';
@@ -15,6 +17,7 @@ import { USER } from '@lib/shared/user/user.constants';
 
 export const ROOT_REDUCERS: Record<keyof RootStateModel, ReducerModel<object, object>> = {
   [APP]: APP_REDUCER,
+  [BILLING]: BILLING_REDUCER,
   [LOCALE]: LOCALE_REDUCER,
   [NOTIFICATION]: NOTIFICATION_REDUCER,
   [ROUTE]: ROUTE_REDUCER,

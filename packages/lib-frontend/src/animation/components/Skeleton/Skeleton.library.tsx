@@ -1,5 +1,5 @@
-import { Skeleton } from '@lib/frontend/core/components/Skeleton/Skeleton';
-import type { SkeletonPropsModel } from '@lib/frontend/core/components/Skeleton/Skeleton.models';
+import { Skeleton } from '@lib/frontend/animation/components/Skeleton/Skeleton';
+import type { SkeletonPropsModel } from '@lib/frontend/animation/components/Skeleton/Skeleton.models';
 import { SvgShape } from '@lib/frontend/core/components/SvgShape/SvgShape';
 import { SVG_SHAPE } from '@lib/frontend/core/components/SvgShape/SvgShape.constants';
 import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';

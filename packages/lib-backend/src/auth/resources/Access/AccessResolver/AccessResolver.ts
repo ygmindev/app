@@ -6,10 +6,7 @@ import { withSelf } from '@lib/backend/http/decorators/withSelf/withSelf';
 import { EntityResourceResolver } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver';
 import { User } from '@lib/backend/user/resources/User/User';
 import { UserService } from '@lib/backend/user/resources/User/UserService/UserService';
-import {
-  ACCESS_LEVEL,
-  ACCESS_RESOURCE_NAME,
-} from '@lib/shared/auth/resources/Access/Access.constants';
+import { ACCESS_RESOURCE_NAME } from '@lib/shared/auth/resources/Access/Access.constants';
 import type { AccessFormModel, AccessModel } from '@lib/shared/auth/resources/Access/Access.models';
 import type { AccessServiceModel } from '@lib/shared/auth/resources/Access/AccessService/AccessService.models';
 import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
@@ -24,7 +21,6 @@ export class AccessResolver
     Resource: Access,
     ResourceService: AccessService,
     name: ACCESS_RESOURCE_NAME,
-    writeAccess: ACCESS_LEVEL.PUBLIC,
   })
   implements AccessServiceModel
 {

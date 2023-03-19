@@ -23,14 +23,14 @@ export const AUTH_MENU_OPTIONS: Array<AuthMenuOptionModel> = withId([
     ]) as Array<AuthMenuOptionModel>,
   },
 
-  { isDivider: true, isProtected: true },
-
   {
     icon: 'person',
     id: ACCOUNT,
     isProtected: true,
     label: ({ t }) => t('account:labels.account'),
   },
+
+  { isDivider: true, isProtected: true },
 
   {
     color: THEME_COLOR.ERROR,

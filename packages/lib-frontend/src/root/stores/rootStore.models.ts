@@ -2,6 +2,11 @@ import type {
   AppActionsParamsModel,
   AppStateModel,
 } from '@lib/frontend/app/stores/appStore/appStore.models';
+import type { BILLING } from '@lib/frontend/billing/billing.constants';
+import type {
+  BillingActionsParamsModel,
+  BillingStateModel,
+} from '@lib/frontend/billing/stores/billingStore/billingStore.models';
 import type {
   LocaleActionsParamsModel,
   LocaleStateModel,
@@ -32,6 +37,7 @@ import type { USER } from '@lib/shared/user/user.constants';
 
 export type RootStateModel = {
   [APP]: AppStateModel;
+  [BILLING]: BillingStateModel;
   [LOCALE]: LocaleStateModel;
   [NOTIFICATION]: NotificationStateModel;
   [ROUTE]: RouteStateModel;
@@ -41,6 +47,7 @@ export type RootStateModel = {
 
 export type RootActionsParamsModel = {
   [APP]: AppActionsParamsModel;
+  [BILLING]: BillingActionsParamsModel;
   [LOCALE]: LocaleActionsParamsModel;
   [NOTIFICATION]: NotificationActionsParamsModel;
   [ROUTE]: RouteActionsParamsModel;

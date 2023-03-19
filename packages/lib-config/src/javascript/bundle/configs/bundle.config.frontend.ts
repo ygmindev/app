@@ -25,6 +25,7 @@ export const bundleConfig: BundleConfigParamsModel = merge({
           // 'inline-style-prefixer',
           '@expo',
           '@react-native*',
+          'expo-',
           'history',
           'moti',
           'react-native-!(codegen|gradle-plugin)',

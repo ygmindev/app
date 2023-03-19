@@ -25,7 +25,6 @@ export class OtpResolver
     ResourceData: OtpForm,
     ResourceService: OtpService,
     name: OTP_RESOURCE_NAME,
-    writeAccess: ACCESS_LEVEL.PUBLIC,
   })
   implements OtpServiceModel
 {

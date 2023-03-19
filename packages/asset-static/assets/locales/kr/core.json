@@ -2,8 +2,8 @@
   "labels": {
     "add": "TRANSLATION_MISSING",
     "cancel": "TRANSLATION_MISSING",
-    "change": "TRANSLATION_MISSING",
     "continue": "TRANSLATION_MISSING",
+    "default": "TRANSLATION_MISSING",
     "edit": "TRANSLATION_MISSING",
     "noResult": "TRANSLATION_MISSING",
     "remove": "TRANSLATION_MISSING",
@@ -12,6 +12,7 @@
     "tryAgain": "TRANSLATION_MISSING"
   },
   "messages": {
+    "confirmRemove": "TRANSLATION_MISSING",
     "errorForbidden": "TRANSLATION_MISSING",
     "errorGeneric": "TRANSLATION_MISSING",
     "errorOffline": "TRANSLATION_MISSING",

@@ -3,6 +3,7 @@
     "add": "add {{value}}",
     "cancel": "cancel",
     "continue": "continue",
+    "default": "TRANSLATION_MISSING",
     "edit": "edit",
     "noResult": "no result",
     "remove": "remove",
@@ -11,6 +12,7 @@
     "tryAgain": "try again"
   },
   "messages": {
+    "confirmRemove": "TRANSLATION_MISSING",
     "errorForbidden": "Forbidden",
     "errorGeneric": "Something went wrong",
     "errorOffline": "You are offline",

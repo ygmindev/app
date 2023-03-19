@@ -1,5 +1,5 @@
-import { Skeleton } from '@lib/frontend/core/components/Skeleton/Skeleton';
-import type { SkeletonPropsModel } from '@lib/frontend/core/components/Skeleton/Skeleton.models';
+import { Skeleton } from '@lib/frontend/animation/components/Skeleton/Skeleton';
+import type { SkeletonPropsModel } from '@lib/frontend/animation/components/Skeleton/Skeleton.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 

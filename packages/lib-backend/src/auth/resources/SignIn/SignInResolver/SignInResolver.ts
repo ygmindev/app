@@ -27,7 +27,6 @@ export class SignInResolver
     ResourceData: SignInForm,
     ResourceService: SignInService,
     name: SIGN_IN_RESOURCE_NAME,
-    writeAccess: ACCESS_LEVEL.PUBLIC,
   })
   implements SignInServiceModel
 {

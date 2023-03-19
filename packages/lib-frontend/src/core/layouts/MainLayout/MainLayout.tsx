@@ -19,12 +19,14 @@ export const MainLayout: SFCModel<MainLayoutPropsModel> = ({
   return (
     <Wrapper
       grow
-      isCenter={isCenter}
       isFullWidth={_isFullWidth}
-      spacing
-      style={styles}
-      width={_isFullWidth ? undefined : theme.layout.width[THEME_BASIC_SIZE.MEDIUM]}>
-      {children}
+      style={styles}>
+      <Wrapper
+        m={isCenter ? 'auto' : undefined}
+        spacing
+        width={_isFullWidth ? undefined : theme.layout.width[THEME_BASIC_SIZE.MEDIUM]}>
+        {children}
+      </Wrapper>
     </Wrapper>
   );
 };

@@ -17,11 +17,12 @@ export interface FilterCombineModel<TType> {
   $or?: Array<FilterModel<TType>>;
 }
 
-export type FilterModel<TType> =
-  | FilterCombineModel<TType>
-  | PartialModel<TType>
-  | {
-      [TKey in keyof TType]?:
-        | FilterConditionModel<InferModel<TType[TKey]>>
-        | InferModel<TType[TKey]>;
-    };
+export type FilterModel<TType> = FilterCombineModel<TType> &
+  (
+    | PartialModel<TType>
+    | {
+        [TKey in keyof TType]?:
+          | FilterConditionModel<InferModel<TType[TKey]>>
+          | InferModel<TType[TKey]>;
+      }
+  );

@@ -26,6 +26,9 @@ export class User extends EntityResource implements UserModel {
   @withField({ isOptional: true, isRepository: true, isUnique: true })
   email?: string;
 
+  @withField({ isOptional: true, isRepository: true })
+  paymentMethodDefault?: string;
+
   @withField({ isOptional: true, isRepository: true, isUnique: true })
   phone?: string;
 

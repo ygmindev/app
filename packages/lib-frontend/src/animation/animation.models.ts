@@ -1,3 +1,4 @@
+import type { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { ElementStateModel, ElementStatePropsModel } from '@lib/frontend/core/core.models';
 import type { StyleModel, StylePropsModel, ViewStyleModel } from '@lib/frontend/style/style.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
@@ -21,7 +22,7 @@ export interface AnimatableRefModel<TStyle extends StyleModel = ViewStyleModel> 
 }
 
 export type AnimationStatesModel<TStyle extends StyleModel = ViewStyleModel> = {
-  [TKey in ElementStateModel]?: TStyle;
+  [TKey in ELEMENT_STATE]?: TStyle;
 };
 
 export interface AnimatablePropsModel<TStyle extends StyleModel = ViewStyleModel>

@@ -13,27 +13,56 @@ export type ResourceResolverParamsModel<
   TRoot = undefined,
 > = WithResourceNameModel<TRoot> & {
   Resource: ConstructorModel<TType>;
-  ResourceData?: ConstructorModel<TForm>;
-  ResourceService: ConstructorModel<PartialModel<ResourceServiceModel<TType, TForm, TRoot>>>;
-  RootResource?: TRoot extends undefined ? never : ConstructorModel<TRoot>;
-  authorizer?: ResourceResolverAuthorizerModel<
-    | RESOURCE_METHOD_TYPE.CREATE
-    | RESOURCE_METHOD_TYPE.GET
-    | RESOURCE_METHOD_TYPE.GET_CONNECTION
-    | RESOURCE_METHOD_TYPE.GET_MANY
-    | RESOURCE_METHOD_TYPE.REMOVE
-    | RESOURCE_METHOD_TYPE.UPDATE,
-    TType,
-    TForm,
-    TRoot
-  >;
-  readAccess?: AccessLevelModel;
 
-  writeAccess?: AccessLevelModel;
+  ResourceData?: ConstructorModel<TForm>;
+
+  ResourceService: ConstructorModel<PartialModel<ResourceServiceModel<TType, TForm, TRoot>>>;
+
+  RootResource?: TRoot extends undefined ? never : ConstructorModel<TRoot>;
+
+  access?: Record<ResourceResolverAccessTypeModel, AccessLevelModel>;
+
+  authorizer?: {
+    default?: ResourceResolverAuthorizerModel<
+      | RESOURCE_METHOD_TYPE.CREATE
+      | RESOURCE_METHOD_TYPE.GET
+      | RESOURCE_METHOD_TYPE.GET_CONNECTION
+      | RESOURCE_METHOD_TYPE.GET_MANY
+      | RESOURCE_METHOD_TYPE.REMOVE
+      | RESOURCE_METHOD_TYPE.UPDATE,
+      TType,
+      TForm,
+      TRoot
+    >;
+
+    read?: ResourceResolverAuthorizerModel<
+      | RESOURCE_METHOD_TYPE.GET
+      | RESOURCE_METHOD_TYPE.GET_CONNECTION
+      | RESOURCE_METHOD_TYPE.GET_MANY,
+      TType,
+      TForm,
+      TRoot
+    >;
+
+    write?: ResourceResolverAuthorizerModel<
+      RESOURCE_METHOD_TYPE.CREATE | RESOURCE_METHOD_TYPE.REMOVE | RESOURCE_METHOD_TYPE.UPDATE,
+      TType,
+      TForm,
+      TRoot
+    >;
+  } & {
+    [TKey in RESOURCE_METHOD_TYPE]?: ResourceResolverAuthorizerModel<TKey, TType, TForm, TRoot>;
+  };
 };
 
 export interface ResourceResolverModel<TType, TForm, TRoot = undefined>
   extends ResourceServiceModel<TType, TForm, TRoot> {}
+
+export type ResourceResolverAccessTypeModel =
+  | 'default'
+  | 'read'
+  | 'write'
+  | ResourceMethodTypeModel;
 
 export interface ResourceResolverAuthorizerParamsModel<
   TMethod extends ResourceMethodTypeModel,
