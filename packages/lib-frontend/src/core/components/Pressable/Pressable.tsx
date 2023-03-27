@@ -26,6 +26,8 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
   elementState,
   onElementStateChange,
   onPress,
+  onPressIn,
+  onPressOut,
   ...props
 }) => {
   const theme = useTheme();
@@ -85,6 +87,8 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
           }}
           elementState={valueControlled}
           onPress={_handleButtonPress}
+          onPressIn={onPressIn}
+          onPressOut={onPressOut}
           pHorizontal
           pVertical={THEME_BASIC_SIZE.SMALL}
           round

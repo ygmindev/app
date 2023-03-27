@@ -16,6 +16,7 @@ import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import type { ReactElement, RefObject } from 'react';
 import { cloneElement, createRef, forwardRef, useImperativeHandle, useMemo, useState } from 'react';
 
@@ -64,13 +65,17 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
       isOpenSet(!!value);
     };
 
-    const _handlePress = async ({ id, onPress, subOptions }: MenuOptionModel): Promise<void> => {
+    const _handlePressOption = async ({
+      id,
+      onPress,
+      subOptions,
+    }: MenuOptionModel): Promise<void> => {
       if (subOptions) {
         subMenuRefs[id].current?.toggle(true);
       } else {
         (onPress && (await onPress())) || (onChange && onChange(id));
-        _handleToggle(false);
       }
+      _handleToggle(false);
     };
 
     let _anchor: ReactElement<PressablePropsModel> = anchor(isOpen);
@@ -100,13 +105,15 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
               const { color, confirmMessage, elementState, icon, id, label, subOptions } = option;
               const _option = (value?: boolean): ReactElement => (
                 <Button
+                  align={FLEX_ALIGN.FLEX_START}
                   color={color}
                   confirmMessage={confirmMessage}
                   elementState={value ? ELEMENT_STATE.ACTIVE : elementState}
                   icon={icon}
                   isFullWidth
                   key={id}
-                  onPress={() => _handlePress(option)}
+                  onPress={async () => await _handlePressOption(option)}
+                  onPressOut={() => confirmMessage && _handleToggle(false)}
                   type={BUTTON_TYPE.TRANSPARENT}>
                   {renderOption ? renderOption(option) : label}
                 </Button>

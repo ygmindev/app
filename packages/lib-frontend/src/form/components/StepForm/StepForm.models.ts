@@ -1,5 +1,5 @@
 import type { SubmittablePropsModel } from '@lib/frontend/form/form.models';
-import type { CallableModel, MergeArrayModel, PartialModel } from '@lib/shared/core/core.models';
+import type { CallableModel, IntersectionModel, PartialModel } from '@lib/shared/core/core.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
 import type { ReactElement } from 'react';
 
@@ -14,7 +14,7 @@ export interface FormStepModel<TType, TStep = PartialModel<TType>> extends WithI
 }
 
 export interface StepFormPropsModel<
-  TType extends MergeArrayModel<TSteps>,
+  TType extends IntersectionModel<TSteps>,
   TSteps extends Array<unknown>,
 > extends SubmittablePropsModel<TType> {
   steps: Array<FormStepModel<TType, TSteps[number]>>;

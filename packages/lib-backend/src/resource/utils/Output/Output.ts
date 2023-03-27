@@ -17,7 +17,6 @@ export const Output = <TMethod extends ResourceMethodTypeModel, TType, TRoot = u
   OutputModel<TMethod, TType, TRoot>
 > => {
   const _name = `${name}Output`;
-
   const _Root = Root({ RootResource, name: _name });
 
   @withEntity({ name: _name })

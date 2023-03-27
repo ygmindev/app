@@ -1,5 +1,5 @@
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
-import { {{NAME}}(constantCase)_FIELDS } from '@lib/frontend/{{MODULE}}(camelCase)/hooks/use{{NAME}}(pascalCase)Resource/use{{NAME}}(pascalCase)Resource.constants';
+import { {{NAME}}(constantCase)_OUTPUT_FIELDS } from '@lib/frontend/{{MODULE}}(camelCase)/hooks/use{{NAME}}(pascalCase)Resource/use{{NAME}}(pascalCase)Resource.constants';
 import type {
   Use{{NAME}}(pascalCase)ResourceModel,
   Use{{NAME}}(pascalCase)ResourceParamsModel,
@@ -18,7 +18,7 @@ export const use{{NAME}}(pascalCase)Resource = ({
     {{NAME}}(pascalCase)FormModel,
     {{NAME_ROOT}}(pascalCase)Model,
   >({
-    fields: [{ result: {{NAME}}(constantCase)_FIELDS }],
+    fields: {{NAME}}(constantCase)_OUTPUT_FIELDS,
     method: RESOURCE_METHOD_TYPE.GET,
     name: {{NAME}}(constantCase)_RESOURCE_NAME,
   });

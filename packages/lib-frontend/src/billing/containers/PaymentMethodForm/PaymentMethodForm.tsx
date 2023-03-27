@@ -14,11 +14,11 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_BASIC_SIZE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { CREATE_TOKEN } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import type { PaymentMethodFormModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { useRef } from 'react';
 
 export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
   onCancel,
+  onSuccess,
   testID,
   ...props
 }) => {
@@ -26,13 +26,14 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
   const theme = useTheme();
   const currentUser = useCurrentUser();
   const { createToken } = usePaymentMethodResource();
+
   const { data, isLoading, mutate } = useMutation({
     id: `${CREATE_TOKEN}${PAYMENT_METHOD}`,
     mutate: async () =>
       currentUser && createToken({ form: undefined, root: { _id: currentUser._id } }),
   });
 
-  const ref = useRef<FormRefModel<PaymentMethodFormModel>>(null);
+  const ref = useRef<FormRefModel>(null);
 
   useMount({ onMount: mutate });
 
@@ -41,13 +42,14 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
   ) : (
     <FormContainer
       onCancel={onCancel}
-      onSubmit={async (values: PaymentMethodFormModel) => ref.current?.submit()}
+      onSubmit={async () => ref.current?.submit()}
+      onSuccess={onSuccess}
       rows={[
         {
           fields: [
             {
-              id: 'payment',
-              render: ({ elementState, error, handleSubmit, onChange, value }) => (
+              id: PAYMENT_METHOD,
+              render: ({ elementState, error, onChange, value }) => (
                 <Wrapper width={theme.layout.width[THEME_BASIC_SIZE.MEDIUM]}>
                   <PaymentMethodField
                     elementState={elementState}
@@ -63,7 +65,7 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
               ),
             },
           ],
-          id: 'payment',
+          id: PAYMENT_METHOD,
         },
       ]}
       style={styles}

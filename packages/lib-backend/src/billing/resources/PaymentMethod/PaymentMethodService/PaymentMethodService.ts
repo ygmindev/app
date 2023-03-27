@@ -7,10 +7,7 @@ import {
   PAYMENT_METHOD_RESOURCE_NAME,
   PAYMENT_METHOD_TYPE,
 } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import type {
-  PaymentMethodFormModel,
-  PaymentMethodModel,
-} from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import type { PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import type { PaymentMethodServiceModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethodService/PaymentMethodService.models';
 import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { withInject } from '@lib/shared/core/decorators/withInject/withInject';
@@ -32,12 +29,7 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
   @withInject(StripeAdminService) protected _stripeAdminService!: StripeAdminService;
 
   async getMany(
-    input: InputModel<
-      RESOURCE_METHOD_TYPE.GET_MANY,
-      PaymentMethodModel,
-      PaymentMethodFormModel,
-      UserModel
-    >,
+    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, unknown, UserModel>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>> {
     if (input.root) {
       const { result: banks } = await this._bankService.getMany({
@@ -50,6 +42,7 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
         options: { project: { _id: true, id: true, last4: true } },
         root: { _id: input.root._id },
       });
+
       return {
         result: [
           ...(banks ? banks.map((value) => ({ ...value, type: PAYMENT_METHOD_TYPE.BANK })) : []),

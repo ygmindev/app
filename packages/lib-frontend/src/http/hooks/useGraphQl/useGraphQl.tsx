@@ -29,7 +29,12 @@ export const useGraphQl = (params: UseGraphQlParamsModel = {}): UseGraphQlModel 
       >({
         params: {
           query: print(gql`
-            ${graphQlQuery<TParams, TResult, TName>({ fields, name, params: queryParams, type })}
+            ${graphQlQuery<TParams, TResult, TName>({
+              fields,
+              name,
+              params: queryParams,
+              type,
+            })}
           `),
           variables,
         },

@@ -1,5 +1,6 @@
+import { SkeletonGroup } from '@lib/frontend/animation/components/SkeletonGroup/SkeletonGroup';
 import { PAYMENT_METHOD } from '@lib/frontend/billing/billing.constants';
-import { PaymentMethod } from '@lib/frontend/billing/components/PaymentMethod/PaymentMethod';
+import { PaymentMethodItem } from '@lib/frontend/billing/components/PaymentMethodItem/PaymentMethodItem';
 import { usePaymentMethodResource } from '@lib/frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
 import type { PaymentPagePropsModel } from '@lib/frontend/billing/pages/PaymentPage/PaymentPage.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
@@ -25,6 +26,7 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
   const { styles } = useStyles({ props });
   const { push } = useRouter();
   const { getMany } = usePaymentMethodResource({ root: { _id: currentUser?._id } });
+
   const { data, isLoading } = useQuery({
     id: 'paymentMethods',
     query: async () => {
@@ -43,23 +45,23 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
     <MainLayout
       style={styles}
       testID={testID}>
-      <Wrapper>
+      <SkeletonGroup isVisible={isLoading}>
         {isLoading
           ? range(3).map((i) => (
-              <PaymentMethod
+              <PaymentMethodItem
                 elementState={ELEMENT_STATE.LOADING}
                 key={i}
               />
             ))
           : data?.map((value) => (
-              <PaymentMethod
+              <PaymentMethodItem
                 key={value._id}
                 value={value}
               />
             ))}
-      </Wrapper>
+      </SkeletonGroup>
 
-      <Wrapper isRowAlign>
+      <Wrapper isRow>
         <Button
           icon="add"
           onPress={() => push({ pathname: `/${FORM}/${PAYMENT_METHOD}` })}>

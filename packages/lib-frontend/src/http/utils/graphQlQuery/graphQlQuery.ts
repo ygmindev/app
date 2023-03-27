@@ -1,6 +1,7 @@
 import type {
-  GraphQlFieldModel,
+  GraphQlFragmentFieldModel,
   GraphQlQueryModel,
+  GraphQlQueryParamsFieldsModel,
   GraphQlQueryParamsModel,
 } from '@lib/frontend/http/utils/graphQlQuery/graphQlQuery.models';
 import { trimDeep } from '@lib/shared/core/utils/trimDeep/trimDeep';
@@ -8,15 +9,22 @@ import isPlainObject from 'lodash/isPlainObject';
 import map from 'lodash/map';
 
 const _getGraphQlFields = <TType extends unknown>(
-  fields: Array<GraphQlFieldModel<TType>>,
+  fields: GraphQlQueryParamsFieldsModel<TType> | GraphQlFragmentFieldModel<TType>,
 ): string => `{
-  ${fields
-    .map((field) =>
-      isPlainObject(field)
-        ? map(field as object, (v, k) => ` ${k} ${_getGraphQlFields(v)} `).join(' ')
-        : ` ${String(field)} `,
-    )
-    .join(' ')}
+  ${
+    isPlainObject(fields)
+      ? map(
+          fields as GraphQlFragmentFieldModel<TType>,
+          (v, k) => `... on ${k} ${_getGraphQlFields(v)}`,
+        ).join('\n')
+      : (fields as GraphQlQueryParamsFieldsModel<TType>)
+          .map((field) =>
+            isPlainObject(field)
+              ? map(field as object, (v, k) => ` ${k} ${_getGraphQlFields(v)} `).join(' ')
+              : ` ${String(field)} `,
+          )
+          .join(' ')
+  }
 }`;
 
 export const graphQlQuery = <TParams, TResult, TName extends string>({

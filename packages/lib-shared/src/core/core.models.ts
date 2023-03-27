@@ -5,6 +5,8 @@ import type {
   PartialDeep,
   Primitive,
   RequiredKeysOf,
+  TupleToUnion,
+  UnionToIntersection,
 } from 'type-fest';
 
 export interface ConstructorModel<TType = object> extends Constructor<TType> {}
@@ -28,12 +30,16 @@ export type CallablePromiseModel<
 
 export type InferModel<TType> = TType extends Array<infer TElement> ? TElement : TType;
 
-export type MergeArrayModel<TType extends Array<unknown>> = TType extends [
+export type IntersectionModel<TType extends Array<unknown>> = TType extends [
   v: infer TValue,
   ...rest: infer TResult,
 ]
-  ? TValue & MergeArrayModel<TResult>
+  ? TValue & IntersectionModel<TResult>
   : object;
+
+export type UnionModel<TType extends Array<unknown>> = TupleToUnion<TType>;
+
+export type UnionToIntersectionModel<TType> = UnionToIntersection<TType>;
 
 export type OverrideModel<TType, TOverride> = Merge<TType, TOverride>;
 

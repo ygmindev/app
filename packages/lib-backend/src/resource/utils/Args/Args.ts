@@ -37,7 +37,9 @@ export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoo
           ArgsModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot>,
           ArgsModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm, TRoot>
       {
-        @withCondition(Resource !== undefined, withField({ Resource: Filter({ Resource, name }) }))
+        @withCondition(Resource !== undefined, () =>
+          withField({ Resource: Filter({ Resource, name }) }),
+        )
         filter!: FilterModel<TType>;
       }
       return _Args as ResourceConstructorModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
@@ -48,7 +50,9 @@ export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoo
         extends _Root
         implements ArgsModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>
       {
-        @withCondition(Resource !== undefined, withField({ Resource: Form({ Resource, name }) }))
+        @withCondition(Resource !== undefined, () =>
+          withField({ Resource: Form({ Resource, name }) }),
+        )
         form!: TForm;
       }
       return _Args as ResourceConstructorModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
@@ -59,10 +63,14 @@ export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoo
         extends _Root
         implements ArgsModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot>
       {
-        @withCondition(Resource !== undefined, withField({ Resource: Filter({ Resource, name }) }))
+        @withCondition(Resource !== undefined, () =>
+          withField({ Resource: Filter({ Resource, name }) }),
+        )
         filter!: FilterModel<TType>;
 
-        @withCondition(Resource !== undefined, withField({ Resource: Update({ Resource, name }) }))
+        @withCondition(Resource !== undefined, () =>
+          withField({ Resource: Update({ Resource, name }) }),
+        )
         update!: UpdateModel<TType>;
       }
       return _Args as ResourceConstructorModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
@@ -73,10 +81,12 @@ export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoo
         extends _Root
         implements ArgsModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm, TRoot>
       {
-        @withCondition(Resource !== undefined, withField({ Resource: Filter({ Resource, name }) }))
+        @withCondition(Resource !== undefined, () =>
+          withField({ Resource: Filter({ Resource, name }) }),
+        )
         filter!: FilterModel<TType>;
 
-        @withCondition(Resource !== undefined, withField({ Resource: Pagination }))
+        @withCondition(Resource !== undefined, () => withField({ Resource: Pagination }))
         pagination!: PaginationModel;
       }
       return _Args as ResourceConstructorModel<ArgsModel<TMethod, TType, TForm, TRoot>>;

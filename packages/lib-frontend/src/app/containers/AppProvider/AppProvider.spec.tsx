@@ -1,9 +1,9 @@
-import { PaymentMethod } from '@lib/frontend/billing/components/PaymentMethod/PaymentMethod';
-import type { PaymentMethodPropsModel } from '@lib/frontend/billing/components/PaymentMethod/PaymentMethod.models';
+import { AppProvider } from '@lib/frontend/app/containers/AppProvider/AppProvider';
+import type { AppProviderPropsModel } from '@lib/frontend/app/containers/AppProvider/AppProvider.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<PaymentMethodPropsModel>({ target: PaymentMethod });
+const { Component, displayName, testID } = withTestComponent<AppProviderPropsModel>({ target: AppProvider });
 
 describe(displayName, () => {
   test('works', async () => {

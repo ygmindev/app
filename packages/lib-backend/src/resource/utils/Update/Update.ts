@@ -1,13 +1,20 @@
 import { withEntity } from '@lib/backend/resource/decorators/withEntity/withEntity';
+import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
 import type { UpdateParamsModel } from '@lib/backend/resource/utils/Update/Update.models';
 import type { ConstructorModel } from '@lib/shared/core/core.models';
 import type { UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
+import isFunction from 'lodash/isFunction';
 
 export const Update = <TType extends unknown>({
   Resource,
   name,
 }: UpdateParamsModel<TType>): ConstructorModel<UpdateModel<TType>> => {
-  @withEntity({ name: `${name}Update` })
-  class _Update extends (Resource as unknown as ConstructorModel) {}
+  const _name = `${name}Update`;
+  const _isResource = Resource && isFunction(Resource);
+
+  @withEntity({ name: _name })
+  class _Update extends (_isResource
+    ? (Resource as unknown as ConstructorModel)
+    : EntityResource) {}
   return _Update;
 };

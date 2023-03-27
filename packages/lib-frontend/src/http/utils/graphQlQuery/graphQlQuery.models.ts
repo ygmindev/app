@@ -1,4 +1,9 @@
-import type { InferModel, PrimitiveModel, RequiredModel } from '@lib/shared/core/core.models';
+import type {
+  InferModel,
+  PrimitiveModel,
+  RequiredModel,
+  UnionToIntersectionModel,
+} from '@lib/shared/core/core.models';
 import type { GraphQlOperationTypeModel } from '@lib/shared/graphql/graphql.models';
 import type { ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
 import type { GraphQLError } from 'graphql';
@@ -18,6 +23,11 @@ export interface GraphQlHttpResponseModel<TResult, TName extends string = string
   errors?: Array<GraphQLError>;
 }
 
+export type GraphQlFragmentFieldModel<TType, TStrict extends boolean = true> = Record<
+  string,
+  Array<GraphQlFieldModel<UnionToIntersectionModel<InferModel<TType>>, TStrict>>
+>;
+
 export type GraphQlFieldModel<
   TType,
   TStrict extends boolean = true,
@@ -29,12 +39,22 @@ export type GraphQlFieldModel<
         : TStrict extends true
         ? Record<TKey, Array<GraphQlFieldModel<TInfer[TKey], TStrict>>>
         : TInfer[TKey] extends ConnectionModel<infer TResource>
-        ? Record<TKey, Array<GraphQlFieldModel<TResource, TStrict>>>
-        : Record<TKey, Array<GraphQlFieldModel<TInfer[TKey], TStrict>>>;
+        ? Record<
+            TKey,
+            Array<GraphQlFieldModel<TResource, TStrict>> | GraphQlFragmentFieldModel<TResource>
+          >
+        : Record<
+            TKey,
+            Array<GraphQlFieldModel<TInfer[TKey]>> | GraphQlFragmentFieldModel<TInfer[TKey]>
+          >;
     }[keyof TInfer];
 
+export type GraphQlQueryParamsFieldsModel<TType, TStrict extends boolean = true> = Array<
+  GraphQlFieldModel<TType, TStrict>
+>;
+
 export interface GraphQlQueryParamsModel<TParams, TResult, TName extends string = string> {
-  fields: Array<GraphQlFieldModel<TResult>>;
+  fields: GraphQlQueryParamsFieldsModel<TResult>;
   name: TName;
   params?: { [TKey in keyof TParams]?: string };
   type: GraphQlOperationTypeModel;

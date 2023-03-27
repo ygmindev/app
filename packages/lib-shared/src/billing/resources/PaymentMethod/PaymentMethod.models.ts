@@ -1,13 +1,7 @@
+import type { BankModel } from '@lib/shared/billing/resources/Bank/Bank.models';
+import type { CardModel } from '@lib/shared/billing/resources/Card/Card.models';
 import type { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import type { EmbeddedResourceModel } from '@lib/shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
-import type { EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
-export interface PaymentMethodModel extends EmbeddedResourceModel {
-  id: string;
-  last4: string;
-  type: PaymentMethodType;
-}
+export type PaymentMethodModel = CardModel | BankModel;
 
-export interface PaymentMethodFormModel extends EntityResourceDataModel<PaymentMethodModel> {}
-
-export type PaymentMethodType = `${PAYMENT_METHOD_TYPE}`;
+export type PaymentMethodTypeModel = `${PAYMENT_METHOD_TYPE}`;

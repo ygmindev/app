@@ -1,4 +1,4 @@
-import type { GraphQlFieldModel } from '@lib/frontend/http/utils/graphQlQuery/graphQlQuery.models';
+import type { GraphQlQueryParamsFieldsModel } from '@lib/frontend/http/utils/graphQlQuery/graphQlQuery.models';
 import type { WithResourceNameModel } from '@lib/shared/resource/decorators/withResourceName/withResourceName.models';
 import type { ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
@@ -9,11 +9,11 @@ import type {
 } from '@lib/shared/resource/utils/Resource/ResourceService/ResourceService.models';
 import type { RootModel } from '@lib/shared/resource/utils/Root/Root.models';
 
-export type UseResourceMethodFieldsModel<
+export type UseResourceMethodParamsFieldsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
   TRoot = undefined,
-> = Array<GraphQlFieldModel<OutputModel<TMethod, TType, TRoot>, false>>;
+> = GraphQlQueryParamsFieldsModel<OutputModel<TMethod, TType, TRoot>, false>;
 
 export type UseResourceMethodParamsModel<
   TMethod extends ResourceMethodTypeModel,
@@ -24,7 +24,7 @@ export type UseResourceMethodParamsModel<
   RootModel<TRoot> & {
     after?: ResourceServiceAfterDecoratorModel<TMethod, TType, TRoot>;
     before?: ResourceServiceBeforeDecoratorModel<TMethod, TType, TForm, TRoot>;
-    fields: UseResourceMethodFieldsModel<TMethod, TType, TRoot>;
+    fields: UseResourceMethodParamsFieldsModel<TMethod, TType, TRoot>;
     method: TMethod;
   };
 

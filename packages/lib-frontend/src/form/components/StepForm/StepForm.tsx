@@ -8,17 +8,17 @@ import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCPropsModel } from '@lib/frontend/core/core.models';
 import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import type { StepFormPropsModel } from '@lib/frontend/form/components/StepForm/StepForm.models';
-import { useDimension } from '@lib/frontend/platform/hooks/useDimension/useDimension';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import type { MergeArrayModel, PartialModel } from '@lib/shared/core/core.models';
+import type { IntersectionModel, PartialModel } from '@lib/shared/core/core.models';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import type { ReactElement } from 'react';
 import { cloneElement, useMemo, useRef, useState } from 'react';
 
-export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends Array<unknown>>({
+export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends Array<unknown>>({
   onSubmit,
   onSuccess,
   steps,
@@ -28,7 +28,7 @@ export const StepForm = <TType extends MergeArrayModel<TSteps>, TSteps extends A
   SFCPropsModel<StepFormPropsModel<TType, TSteps>>
 > => {
   const { styles } = useStyles({ props });
-  const { width } = useDimension();
+  const { width } = useStore((state) => state.app.dimension);
   const theme = useTheme();
 
   const [current, currentSet] = useState<number>(0);

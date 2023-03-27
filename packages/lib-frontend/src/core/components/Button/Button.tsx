@@ -132,6 +132,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
       <>
         <Appearable
           animation={{ isLazy: false }}
+          isScalable={false}
           isVisible={!_isLoading}>
           {_children}
         </Appearable>

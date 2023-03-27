@@ -1,5 +1,8 @@
 import { useGraphQl } from '@lib/frontend/http/hooks/useGraphQl/useGraphQl';
-import type { GraphQlFieldModel } from '@lib/frontend/http/utils/graphQlQuery/graphQlQuery.models';
+import type {
+  GraphQlFieldModel,
+  GraphQlQueryParamsFieldsModel,
+} from '@lib/frontend/http/utils/graphQlQuery/graphQlQuery.models';
 import type {
   UseResourceMethodModel,
   UseResourceMethodParamsModel,
@@ -10,7 +13,24 @@ import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
-import type { ResultModel } from '@lib/shared/resource/utils/Result/Result.models';
+
+const _getConnectionFields = <TType, TRoot = undefined>(
+  fields: GraphQlQueryParamsFieldsModel<TType, false>,
+): Array<GraphQlFieldModel<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>>> =>
+  fields.map((field) => {
+    const _field = field as GraphQlFieldModel<
+      Pick<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>, 'result'>
+    >;
+    return _field?.result
+      ? {
+          ..._field,
+          result: [
+            { edges: ['cursor', { node: _field.result }] },
+            { pageInfo: ['endCursor', 'hasNextPage', 'hasPreviousPage', 'startCursor'] },
+          ],
+        }
+      : field;
+  }) as Array<GraphQlFieldModel<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>>>;
 
 export const useResourceMethod = <
   TMethod extends ResourceMethodTypeModel,
@@ -48,24 +68,10 @@ export const useResourceMethod = <
     }
   })();
 
-  const _fields = (
+  const _fields =
     method === RESOURCE_METHOD_TYPE.GET_CONNECTION
-      ? fields.map((field) => {
-          const _field = field as GraphQlFieldModel<
-            Record<'result', ResultModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>>
-          >;
-          return _field?.result
-            ? {
-                ..._field,
-                result: [
-                  { edges: ['cursor', { node: _field.result }] },
-                  { pageInfo: ['endCursor', 'hasNextPage', 'hasPreviousPage', 'startCursor'] },
-                ],
-              }
-            : field;
-        })
-      : fields
-  ) as Array<GraphQlFieldModel<OutputModel<TMethod, TType, TRoot>>>;
+      ? _getConnectionFields(fields as GraphQlQueryParamsFieldsModel<TType, false>)
+      : fields;
 
   return {
     query: async (input) => {
@@ -75,7 +81,7 @@ export const useResourceMethod = <
         { input: InputModel<TMethod, TType, TForm, TRoot> },
         OutputModel<TMethod, TType, TRoot>
       >({
-        fields: _fields,
+        fields: _fields as GraphQlQueryParamsFieldsModel<OutputModel<TMethod, TType, TRoot>>,
         name: _name,
         params: { input: `${_name}Input` },
         type: _type,

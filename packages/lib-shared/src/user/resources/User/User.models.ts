@@ -26,7 +26,7 @@ export interface UserModel extends EntityResourceModel {
 
   last?: string;
 
-  paymentMethodDefault?: string;
+  paymentMethodPrimary?: string;
 
   phone?: string;
 }

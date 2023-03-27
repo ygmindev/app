@@ -133,6 +133,7 @@ type Bank {
   created: DateTime
   id: String
   last4: String
+  type: String
 }
 
 input BankCreateFormInput {
@@ -141,6 +142,7 @@ input BankCreateFormInput {
   created: DateTime
   id: String
   last4: String
+  type: String
 }
 
 input BankCreateInput {
@@ -162,7 +164,7 @@ type BankCreateOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -175,7 +177,7 @@ input BankCreateRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -185,6 +187,7 @@ input BankGetConnectionFilterInput {
   created: DateTime
   id: String
   last4: String
+  type: String
 }
 
 input BankGetConnectionInput {
@@ -217,7 +220,7 @@ type BankGetConnectionOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -230,7 +233,7 @@ input BankGetConnectionRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -240,6 +243,7 @@ input BankGetFilterInput {
   created: DateTime
   id: String
   last4: String
+  type: String
 }
 
 input BankGetInput {
@@ -253,6 +257,7 @@ input BankGetManyFilterInput {
   created: DateTime
   id: String
   last4: String
+  type: String
 }
 
 input BankGetManyInput {
@@ -274,7 +279,7 @@ type BankGetManyOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -287,7 +292,7 @@ input BankGetManyRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -305,7 +310,7 @@ type BankGetOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -318,7 +323,7 @@ input BankGetRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -328,6 +333,7 @@ input BankRemoveFilterInput {
   created: DateTime
   id: String
   last4: String
+  type: String
 }
 
 input BankRemoveInput {
@@ -349,7 +355,7 @@ type BankRemoveOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -362,7 +368,7 @@ input BankRemoveRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -372,6 +378,7 @@ input BankUpdateFilterInput {
   created: DateTime
   id: String
   last4: String
+  type: String
 }
 
 input BankUpdateInput {
@@ -394,7 +401,7 @@ type BankUpdateOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -407,7 +414,7 @@ input BankUpdateRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -417,6 +424,7 @@ input BankUpdateUpdateInput {
   created: DateTime
   id: String
   last4: String
+  type: String
 }
 
 type Card {
@@ -428,6 +436,7 @@ type Card {
   funding: String
   id: String
   last4: String
+  type: String
 }
 
 input CardCreateFormInput {
@@ -439,6 +448,7 @@ input CardCreateFormInput {
   funding: String
   id: String
   last4: String
+  type: String
 }
 
 input CardCreateInput {
@@ -460,7 +470,7 @@ type CardCreateOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -473,7 +483,7 @@ input CardCreateRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -486,6 +496,7 @@ input CardGetConnectionFilterInput {
   funding: String
   id: String
   last4: String
+  type: String
 }
 
 input CardGetConnectionInput {
@@ -518,7 +529,7 @@ type CardGetConnectionOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -531,7 +542,7 @@ input CardGetConnectionRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -544,6 +555,7 @@ input CardGetFilterInput {
   funding: String
   id: String
   last4: String
+  type: String
 }
 
 input CardGetInput {
@@ -560,6 +572,7 @@ input CardGetManyFilterInput {
   funding: String
   id: String
   last4: String
+  type: String
 }
 
 input CardGetManyInput {
@@ -581,7 +594,7 @@ type CardGetManyOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -594,7 +607,7 @@ input CardGetManyRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -612,7 +625,7 @@ type CardGetOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -625,7 +638,7 @@ input CardGetRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -638,6 +651,7 @@ input CardInput {
   funding: String
   id: String
   last4: String
+  type: String
 }
 
 input CardRemoveFilterInput {
@@ -649,6 +663,7 @@ input CardRemoveFilterInput {
   funding: String
   id: String
   last4: String
+  type: String
 }
 
 input CardRemoveInput {
@@ -670,7 +685,7 @@ type CardRemoveOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -683,7 +698,7 @@ input CardRemoveRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -696,6 +711,7 @@ input CardUpdateFilterInput {
   funding: String
   id: String
   last4: String
+  type: String
 }
 
 input CardUpdateInput {
@@ -718,7 +734,7 @@ type CardUpdateOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -731,7 +747,7 @@ input CardUpdateRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -744,6 +760,7 @@ input CardUpdateUpdateInput {
   funding: String
   id: String
   last4: String
+  type: String
 }
 
 """
@@ -784,7 +801,7 @@ type LinkedUserCreateOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -797,7 +814,7 @@ input LinkedUserCreateRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -838,7 +855,7 @@ type LinkedUserGetConnectionOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -851,7 +868,7 @@ input LinkedUserGetConnectionRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -893,7 +910,7 @@ type LinkedUserGetManyOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -906,7 +923,7 @@ input LinkedUserGetManyRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -924,7 +941,7 @@ type LinkedUserGetOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -937,7 +954,7 @@ input LinkedUserGetRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -974,7 +991,7 @@ type LinkedUserRemoveOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -987,7 +1004,7 @@ input LinkedUserRemoveRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -1018,7 +1035,7 @@ type LinkedUserUpdateOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -1031,7 +1048,7 @@ input LinkedUserUpdateRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -1206,20 +1223,11 @@ input PaginationInput {
   last: Float
 }
 
-type PaymentMethod {
-  _id: String
-  created: DateTime
-  id: String
-  last4: String
-  type: String
-}
+union PaymentMethod = Bank | Card
 
 input PaymentMethodGetManyFilterInput {
   _id: String
   created: DateTime
-  id: String
-  last4: String
-  type: String
 }
 
 input PaymentMethodGetManyInput {
@@ -1241,7 +1249,7 @@ type PaymentMethodGetManyOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -1254,7 +1262,7 @@ input PaymentMethodGetManyRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -1276,7 +1284,7 @@ type PaymentMethodTokenCreateOutputRoot {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -1289,7 +1297,7 @@ input PaymentMethodTokenCreateRootInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -1345,7 +1353,7 @@ type User {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -1358,7 +1366,7 @@ input UserCreateFormInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -1379,7 +1387,7 @@ input UserGetConnectionFilterInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -1411,7 +1419,7 @@ input UserGetFilterInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -1428,7 +1436,7 @@ input UserGetManyFilterInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -1453,7 +1461,7 @@ input UserInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -1466,7 +1474,7 @@ input UserRemoveFilterInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -1487,7 +1495,7 @@ input UserUpdateFilterInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 
@@ -1509,7 +1517,7 @@ input UserUpdateUpdateInput {
   email: String
   first: String
   last: String
-  paymentMethodDefault: String
+  paymentMethodPrimary: String
   phone: String
 }
 

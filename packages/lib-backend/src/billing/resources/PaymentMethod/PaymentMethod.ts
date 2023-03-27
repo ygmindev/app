@@ -1,21 +1,23 @@
-import { withEntity } from '@lib/backend/resource/decorators/withEntity/withEntity';
-import { withField } from '@lib/backend/resource/decorators/withField/withField';
-import { EmbeddedResource } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResource';
-import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import type {
-  PaymentMethodModel,
-  PaymentMethodType,
-} from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
-import { FIELD_TYPE } from '@lib/shared/form/form.constants';
+import { Bank } from '@lib/backend/billing/resources/Bank/Bank';
+import { Card } from '@lib/backend/billing/resources/Card/Card';
+import { Union } from '@lib/backend/resource/utils/Union/Union';
+import {
+  PAYMENT_METHOD_RESOURCE_NAME,
+  PAYMENT_METHOD_TYPE,
+} from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import type { PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 
-@withEntity({ isEmbedded: true, name: PAYMENT_METHOD_RESOURCE_NAME })
-export class PaymentMethod extends EmbeddedResource implements PaymentMethodModel {
-  @withField()
-  id!: string;
-
-  @withField()
-  last4!: string;
-
-  @withField({ type: FIELD_TYPE.STRING })
-  type!: PaymentMethodType;
-}
+export const PaymentMethod = Union<PaymentMethodModel>({
+  Resource: [Bank, Card],
+  name: PAYMENT_METHOD_RESOURCE_NAME,
+  resolve: (value) => {
+    switch (value.type) {
+      case PAYMENT_METHOD_TYPE.BANK:
+        return Bank;
+      case PAYMENT_METHOD_TYPE.CARD:
+        return Card;
+      default:
+        return undefined;
+    }
+  },
+});

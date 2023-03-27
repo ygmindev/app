@@ -10,7 +10,7 @@ import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/sha
 import trimEnd from 'lodash/trimEnd';
 import { useMemo } from 'react';
 
-const _getRoute = ({ pathname, ...route }: RouteModel): RouteModel => {
+const _getRoute = ({ pathname, ...route }: RouteModel, depth = 1): RouteModel => {
   const _isLeaf = !route.routes;
   const _root = trimEnd(pathname, '/*');
   const _pathname = trimPathname(_isLeaf ? pathname : `${_root}/*`);
@@ -25,12 +25,16 @@ const _getRoute = ({ pathname, ...route }: RouteModel): RouteModel => {
             isOverflowHidden
             position={SHAPE_POSITION.RELATIVE}>
             <_Router
+              depth={depth + 1}
               routes={_route.routes.map((child) =>
-                _getRoute({
-                  ...child,
-                  header: child.header || _route.header,
-                  root: trimPathname(`${route.root || ''}/${_root}`),
-                }),
+                _getRoute(
+                  {
+                    ...child,
+                    header: child.header || _route.header,
+                    root: trimPathname(`${route.root || ''}/${_root}`),
+                  },
+                  depth + 1,
+                ),
               )}
             />
           </Wrapper>

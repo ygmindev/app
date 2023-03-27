@@ -13,7 +13,13 @@ export interface ButtonPropsModel
     Pick<IconPropsModel, 'icon'>,
     Pick<
       PressablePropsModel,
-      'onPress' | 'confirmMessage' | 'isFocusable' | 'isFullWidth' | 'align'
+      | 'onPress'
+      | 'onPressIn'
+      | 'onPressOut'
+      | 'confirmMessage'
+      | 'isFocusable'
+      | 'isFullWidth'
+      | 'align'
     >,
     AnimatablePropsModel {
   color?: ThemeColorModel;

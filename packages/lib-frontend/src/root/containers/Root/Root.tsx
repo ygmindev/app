@@ -1,3 +1,4 @@
+import { AppProvider } from '@lib/frontend/app/containers/AppProvider/AppProvider';
 import { AuthProvider } from '@lib/frontend/auth/providers/AuthProvider/AuthProvider';
 import type { FCModel } from '@lib/frontend/core/core.models';
 import { ErrorProvider } from '@lib/frontend/core/providers/ErrorProvider/ErrorProvider';
@@ -26,6 +27,7 @@ export const Root: FCModel<RootPropsModel> = ({ children, initialState, locale, 
       <ErrorProvider value={{ mode: ERROR_MODE.NOTIFICATION }} />,
       <StyleProvider />,
       <LocaleProvider value={locale} />,
+      <AppProvider />,
       <StateProvider value={initialState} />,
       <Suspense />, // to provider?
     ],
