@@ -1,11 +1,8 @@
 import type { _UseRouterModel } from '@lib/frontend/route/hooks/useRouter/_useRouter.models';
 import type { PathUpdateParamsModel } from '@lib/frontend/route/hooks/useRouter/useRouter.models';
-import type { LocationParamsModel } from '@lib/frontend/route/route.models';
 import { matchPath, useLocation, useNavigate, useParams } from 'react-router-native';
 
-export const _useRouter = <
-  TParams extends LocationParamsModel = LocationParamsModel,
->(): _UseRouterModel<TParams> => {
+export const _useRouter = <TParams = void,>(): _UseRouterModel<TParams> => {
   const navigate = useNavigate();
   const location = useLocation();
   const params = useParams();
@@ -23,12 +20,10 @@ export const _useRouter = <
       pathname: location.pathname,
     },
 
-    push: async <TNextParams extends LocationParamsModel = LocationParamsModel>({
-      params,
-      pathname,
-    }: PathUpdateParamsModel<TNextParams>) => navigate(pathname, { state: params }),
+    push: async <TNextParams = void,>({ params, pathname }: PathUpdateParamsModel<TNextParams>) =>
+      navigate(pathname, { state: params }),
 
-    replace: async <TNextParams extends LocationParamsModel = LocationParamsModel>({
+    replace: async <TNextParams = void,>({
       params,
       pathname,
     }: PathUpdateParamsModel<TNextParams>) => navigate(pathname, { replace: true, state: params }),

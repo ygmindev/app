@@ -8,7 +8,7 @@ import type {
   PrimitiveModel,
 } from '@lib/shared/core/core.models';
 
-export interface FieldPropsModel<TType extends string = string>
+export interface FieldPropsModel<TType>
   extends Pick<IconPropsModel, 'icon'>,
     ElementStatePropsModel,
     ValuePropsModel<TType> {
@@ -16,6 +16,9 @@ export interface FieldPropsModel<TType extends string = string>
   isAutoFocus?: boolean;
   label?: string;
 }
+
+export interface StringFieldPropsModel<TType extends string = string>
+  extends FieldPropsModel<TType> {}
 
 export type FormErrorModel<TType> = {
   [TKey in keyof TType]?: InferModel<TType[TKey]> extends PrimitiveModel
@@ -42,7 +45,7 @@ export interface SubmittablePropsModel<TType = void, TResult = void>
   onSuccess?(data: TType, result?: TResult | null): Promise<void>;
 }
 
-export type TranslatableFieldPropsModel<TType extends FieldPropsModel> = OverrideModel<
+export type TranslatableFieldPropsModel<TType extends StringFieldPropsModel> = OverrideModel<
   TranslatableModel<TType, 'label'>,
   { error?: TranslatableTextModel | boolean }
 >;

@@ -7,6 +7,7 @@ import type { UserModel } from '@lib/shared/user/resources/User/User.models';
 export const BANK_FIELDS: GraphQlQueryParamsFieldsModel<BankModel> = [
   '_id',
   'bank',
+  'id',
   'last4',
   'type',
 ];

@@ -10,6 +10,7 @@ export const CARD_FIELDS: GraphQlQueryParamsFieldsModel<CardModel> = [
   'expMonth',
   'expYear',
   'funding',
+  'id',
   'last4',
   'type',
 ];

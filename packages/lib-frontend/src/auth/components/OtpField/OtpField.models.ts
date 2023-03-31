@@ -1,3 +1,3 @@
-import type { FieldPropsModel, TranslatableFieldPropsModel } from '@lib/frontend/form/form.models';
+import type { StringFieldPropsModel, TranslatableFieldPropsModel } from '@lib/frontend/form/form.models';
 
-export interface OtpFieldPropsModel extends TranslatableFieldPropsModel<FieldPropsModel> {}
+export interface OtpFieldPropsModel extends TranslatableFieldPropsModel<StringFieldPropsModel> {}

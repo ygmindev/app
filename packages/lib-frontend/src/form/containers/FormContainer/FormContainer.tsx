@@ -17,7 +17,7 @@ import type {
   FormContainerPropsModel,
   FormContainerRenderPropsModel,
 } from '@lib/frontend/form/containers/FormContainer/FormContainer.models';
-import type { FieldPropsModel, FormRefModel } from '@lib/frontend/form/form.models';
+import type { StringFieldPropsModel, FormRefModel } from '@lib/frontend/form/form.models';
 import { useForm } from '@lib/frontend/form/hooks/useForm/useForm';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
@@ -126,7 +126,7 @@ const _FormContainer = forwardRef(
 
     const _getField = useCallback(
       ({ field, fieldProps, id, render }: FormContainerFieldModel) => {
-        const _fieldProps: FieldPropsModel = {
+        const _fieldProps: StringFieldPropsModel = {
           ...fieldProps,
           defaultValue: initialValues
             ? (initialValues as Record<string, undefined>)[id]
@@ -163,7 +163,7 @@ const _FormContainer = forwardRef(
           }
           default: {
             return cloneElement(
-              (render as (params: FieldPropsModel & FormContainerRenderPropsModel) => ReactElement)(
+              (render as (params: StringFieldPropsModel & FormContainerRenderPropsModel) => ReactElement)(
                 { ..._fieldProps, handleReset, handleSubmit },
               ),
               { key: id, testID: id },

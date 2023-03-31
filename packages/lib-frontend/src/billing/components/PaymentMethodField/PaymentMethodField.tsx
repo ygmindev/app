@@ -6,7 +6,13 @@ import type { RSFCModel } from '@lib/frontend/core/core.models';
 import type { FormRefModel } from '@lib/frontend/form/form.models';
 import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
+import type { BankFormModel } from '@lib/shared/billing/resources/Bank/Bank.models';
+import type { CardFormModel } from '@lib/shared/billing/resources/Card/Card.models';
 import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import type { PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import type { UserModel } from '@lib/shared/user/resources/User/User.models';
 import { forwardRef } from 'react';
 
 export const PaymentMethodField: RSFCModel<FormRefModel, PaymentMethodFieldPropsModel> = forwardRef(
@@ -18,23 +24,21 @@ export const PaymentMethodField: RSFCModel<FormRefModel, PaymentMethodFieldProps
     return currentUser ? (
       <_PaymentMethodField
         {...props}
-        onBankCreate={async (form) => {
-          const { result } = await createBank({ form });
-          result &&
-            actions?.billing.paymentMethodAdd({
-              _id: result._id,
-              last4: result.last4,
-              type: PAYMENT_METHOD_TYPE.BANK,
-            });
-        }}
-        onCardCreate={async (form) => {
-          const { result } = await createCard({ form });
-          result &&
-            actions?.billing.paymentMethodAdd({
-              _id: result._id,
-              last4: result.last4,
-              type: PAYMENT_METHOD_TYPE.CARD,
-            });
+        onSubmit={async (form) => {
+          const _onSubmit = (): Promise<
+            OutputModel<RESOURCE_METHOD_TYPE.CREATE, PaymentMethodModel, UserModel>
+          > | void => {
+            switch (form.type) {
+              case PAYMENT_METHOD_TYPE.BANK:
+                return createBank({ form: form as BankFormModel });
+              case PAYMENT_METHOD_TYPE.CARD:
+                return createCard({ form: form as CardFormModel });
+              default:
+                return undefined;
+            }
+          };
+          const result = await _onSubmit();
+          result && actions?.billing.paymentMethodAdd(result.result);
         }}
         ref={ref}
       />

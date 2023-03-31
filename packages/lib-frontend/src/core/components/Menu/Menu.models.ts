@@ -1,7 +1,7 @@
 import type { DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/Dropdown.models';
 import type { PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
 import type { RefPropsModel, TranslatableOptionModel } from '@lib/frontend/core/core.models';
-import type { FieldPropsModel } from '@lib/frontend/form/form.models';
+import type { StringFieldPropsModel } from '@lib/frontend/form/form.models';
 import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 import type { ReactElement, ReactNode } from 'react';
@@ -17,7 +17,7 @@ export interface MenuOptionModel extends TranslatableOptionModel {
 
 export interface MenuPropsModel
   extends Pick<DropdownPropsModel, 'width' | 'maxWidth' | 'isFullWidth' | 'onClose' | 'direction'>,
-    Omit<FieldPropsModel, 'id'>,
+    Omit<StringFieldPropsModel, 'id'>,
     RefPropsModel<MenuRefModel> {
   anchor(isOpen?: boolean): ReactElement<PressablePropsModel>;
   isSearchable?: boolean;

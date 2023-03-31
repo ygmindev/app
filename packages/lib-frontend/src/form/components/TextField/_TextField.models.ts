@@ -1,13 +1,13 @@
 import type { ElementStateModel } from '@lib/frontend/core/core.models';
 import type { TextFieldKeyboardModel } from '@lib/frontend/form/components/TextField/TextField.models';
-import type { FieldPropsModel, SubmittablePropsModel } from '@lib/frontend/form/form.models';
+import type { StringFieldPropsModel, SubmittablePropsModel } from '@lib/frontend/form/form.models';
 import type { DimensionModel } from '@lib/frontend/platform/platform.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 import type { ReactElement, ReactNode } from 'react';
 import type { TextInputProps } from 'react-native';
 
 export interface _TextFieldPropsModel
-  extends FieldPropsModel,
+  extends StringFieldPropsModel,
     SubmittablePropsModel<string>,
     DimensionModel {
   Component?(inputProps: TextInputProps): ReactElement;

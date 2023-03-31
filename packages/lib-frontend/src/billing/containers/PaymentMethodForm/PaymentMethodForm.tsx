@@ -17,6 +17,7 @@ import { CREATE_TOKEN } from '@lib/shared/billing/resources/PaymentMethod/Paymen
 import { useRef } from 'react';
 
 export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
+  defaultValue,
   onCancel,
   onSuccess,
   testID,
@@ -49,15 +50,14 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
           fields: [
             {
               id: PAYMENT_METHOD,
-              render: ({ elementState, error, onChange, value }) => (
+              render: ({ elementState, error }) => (
                 <Wrapper width={theme.layout.width[THEME_BASIC_SIZE.MEDIUM]}>
                   <PaymentMethodField
+                    defaultValue={defaultValue}
                     elementState={elementState}
                     error={error}
-                    onChange={onChange}
                     ref={ref}
                     token={data?.result}
-                    value={value}
                     // error={error}
                     // isAutoFocus
                   />

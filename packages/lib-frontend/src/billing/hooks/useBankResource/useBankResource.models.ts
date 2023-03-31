@@ -4,4 +4,5 @@ import type { UserModel } from '@lib/shared/user/resources/User/User.models';
 
 export interface UseBankResourceParamsModel extends UseResourceMethodHookParamsModel<UserModel> {}
 
-export interface UseBankResourceModel extends Pick<BankServiceModel, 'create' | 'get' | 'remove'> {}
+export interface UseBankResourceModel
+  extends Pick<BankServiceModel, 'create' | 'get' | 'update' | 'remove'> {}

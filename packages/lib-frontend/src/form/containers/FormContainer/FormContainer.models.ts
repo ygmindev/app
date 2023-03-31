@@ -4,7 +4,7 @@ import type { SelectFieldPropsModel } from '@lib/frontend/form/components/Select
 import type { SwitchFieldPropsModel } from '@lib/frontend/form/components/SwitchField/SwitchField.models';
 import type { TextFieldPropsModel } from '@lib/frontend/form/components/TextField/TextField.models';
 import type { FORM_FIELD_TYPE } from '@lib/frontend/form/containers/FormContainer/FormContainer.constants';
-import type { FieldPropsModel, SubmittablePropsModel } from '@lib/frontend/form/form.models';
+import type { StringFieldPropsModel, SubmittablePropsModel } from '@lib/frontend/form/form.models';
 import type {
   UseFormModel,
   UseFormParamsModel,
@@ -30,7 +30,7 @@ export type FormContainerFieldModel = WithIdModel & {
     | {
         field?: never;
         fieldProps?: never;
-        render(params: FieldPropsModel & FormContainerRenderPropsModel): ReactElement;
+        render(params: StringFieldPropsModel & FormContainerRenderPropsModel): ReactElement;
       }
   );
 

@@ -32,7 +32,7 @@ export const _PaymentMethodField: RSFCModel<FormRefModel, _PaymentMethodFieldPro
   });
 
 const _StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forwardRef(
-  ({ defaultValue, onBankCreate, onCardCreate, value, ...props }, ref) => {
+  ({ defaultValue, onSubmit }, ref) => {
     const stripeClient = useStripe();
     const elements = useElements();
     const { handleError } = useErrorContext();
@@ -47,16 +47,19 @@ const _StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forw
       switch (type) {
         case 'us_bank_account': {
           us_bank_account &&
-            (await onBankCreate({
+            onSubmit &&
+            (await onSubmit({
               bank: get(us_bank_account, 'bank_name') || '',
               id,
               last4: get(us_bank_account, 'last4') || '',
             }));
+
           break;
         }
         case 'card': {
           card &&
-            (await onCardCreate({
+            onSubmit &&
+            (await onSubmit({
               brand: card.brand,
               expMonth: card.exp_month,
               expYear: card.exp_year,
@@ -94,9 +97,8 @@ const _StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forw
 
     return (
       <PaymentElement
-        options={
-          { defaultValues: undefined, layout: { type: 'tabs' } } as StripePaymentElementOptions
-        }
+        id={defaultValue?.id}
+        options={{ layout: { type: 'tabs' } } as StripePaymentElementOptions}
       />
     );
   },

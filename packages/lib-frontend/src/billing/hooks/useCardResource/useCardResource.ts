@@ -36,6 +36,18 @@ export const useCardResource = ({
     root,
   });
 
+  const { query: update } = useResourceMethod<
+    RESOURCE_METHOD_TYPE.UPDATE,
+    CardModel,
+    CardFormModel,
+    UserModel
+  >({
+    fields: CARD_OUTPUT_FIELDS,
+    method: RESOURCE_METHOD_TYPE.UPDATE,
+    name: CARD_RESOURCE_NAME,
+    root,
+  });
+
   const { query: remove } = useResourceMethod<
     RESOURCE_METHOD_TYPE.REMOVE,
     CardModel,
@@ -54,5 +66,7 @@ export const useCardResource = ({
     get,
 
     remove,
+
+    update,
   };
 };
