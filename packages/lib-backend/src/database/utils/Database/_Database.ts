@@ -16,12 +16,12 @@ import type { WithResourceNameModel } from '@lib/shared/resource/decorators/with
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
-import type { ResultModel } from '@lib/shared/resource/utils/Result/Result.models';
 import type { UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 import type { FilterQuery } from '@mikro-orm/core';
 import { MikroORM } from '@mikro-orm/core';
 import type { EntityManager, MongoDriver } from '@mikro-orm/mongodb';
-import type { Filter, MongoError, UpdateFilter } from 'mongodb';
+import type { Filter, UpdateFilter } from '@mikro-orm/mongodb/node_modules/mongodb';
+import type { MongoError } from 'mongodb';
 
 export abstract class _Database implements DatabaseModel {
   protected _params: DatabaseParamsModel;
@@ -138,6 +138,7 @@ export abstract class _Database implements DatabaseModel {
         await this._getEntityManager().getRepository<TType & object>(name).nativeDelete(_filter);
         return entity as unknown as OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType>;
       },
+
       update: async ({ filter, options, update }) => {
         const _em = this._entityManager;
         if (_em) {
@@ -153,18 +154,19 @@ export abstract class _Database implements DatabaseModel {
               delete _update[_key];
             }
           });
-          const result = (
-            await _em
-              .fork({})
-              .getConnection()
-              .getCollection<TType & object>(name)
-              .findOneAndUpdate(_filter, _update as UpdateFilter<TType & object>, {
-                projection: options?.project,
+          const { value: result } = await _em
+            .fork({})
+            .getConnection()
+            .getCollection<TType & object>(name)
+            .findOneAndUpdate(
+              _filter as Filter<TType & object>,
+              _update as UpdateFilter<TType & object>,
+              {
+                projection: options?.project ? cleanDocument(options.project) : undefined,
                 returnDocument: 'after',
-              })
-          ).value as ResultModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
-
-          return { result };
+              },
+            );
+          return { result } as OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
         }
         throw new UninitializedError(`database ${this._params.host}`);
       },

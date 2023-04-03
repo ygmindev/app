@@ -1,13 +1,17 @@
 import type { NotificationReducerModel } from '@lib/frontend/notification/stores/notificationStore/notificationStore.models';
 import { uid } from '@lib/shared/core/utils/uid/uid';
+import uniqBy from 'lodash/uniqBy';
 
 export const NOTIFICATION_REDUCER: NotificationReducerModel = {
   actions: {
     add: (store, value) => {
-      store.set('notifications', [
-        { ...value, id: value.id || uid('alert') },
-        ...store.get('notifications'),
-      ]);
+      store.set(
+        'notifications',
+        uniqBy(
+          [{ ...value, id: value.id || uid('alert') }, ...store.get('notifications')],
+          'message',
+        ),
+      );
     },
 
     remove: (store, value: string) => {

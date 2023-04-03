@@ -1,4 +1,4 @@
-export interface UriParamsModel<TParams = void> {
+export interface UriParamsModel<TParams = undefined> {
   host: string;
   params?: TParams;
   path?: string;

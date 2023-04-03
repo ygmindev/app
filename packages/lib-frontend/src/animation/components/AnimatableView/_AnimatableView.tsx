@@ -40,6 +40,7 @@ export const _AnimatableView: RSFCModel<AnimatableRefModel, _AnimatableViewProps
         {...(_viewParamsScrollable.getProps &&
           _viewParamsScrollable.getProps({ ...props, style: styles }, theme))}
         {...animationProps}
+        hitSlop={undefined}
         ref={ref}
         state={animationState}
         style={styles}>

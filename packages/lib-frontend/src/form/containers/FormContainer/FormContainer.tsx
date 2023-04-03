@@ -17,7 +17,7 @@ import type {
   FormContainerPropsModel,
   FormContainerRenderPropsModel,
 } from '@lib/frontend/form/containers/FormContainer/FormContainer.models';
-import type { StringFieldPropsModel, FormRefModel } from '@lib/frontend/form/form.models';
+import type { FormRefModel, StringFieldPropsModel } from '@lib/frontend/form/form.models';
 import { useForm } from '@lib/frontend/form/hooks/useForm/useForm';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
@@ -26,6 +26,7 @@ import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
 import { FIELD_TYPE } from '@lib/shared/form/form.constants';
+import map from 'lodash/map';
 import toNumber from 'lodash/toNumber';
 import type { ForwardedRef, ReactElement } from 'react';
 import { cloneElement, forwardRef, useCallback, useImperativeHandle, useMemo } from 'react';
@@ -51,6 +52,7 @@ const _FormContainer = forwardRef(
       cancelLabel,
       elementState,
       initialValues,
+      isAutoFocus = true,
       isBlocking,
       isButton = true,
       isFullWidth,
@@ -125,7 +127,7 @@ const _FormContainer = forwardRef(
     const _onSubmit = async (): Promise<void> => handleSubmit();
 
     const _getField = useCallback(
-      ({ field, fieldProps, id, render }: FormContainerFieldModel) => {
+      ({ field, fieldProps, id, render }: FormContainerFieldModel, isInitial?: boolean) => {
         const _fieldProps: StringFieldPropsModel = {
           ...fieldProps,
           defaultValue: initialValues
@@ -135,6 +137,7 @@ const _FormContainer = forwardRef(
             ? ELEMENT_STATE.DISABLED
             : _elementState || fieldProps?.elementState,
           error: errors ? (errors as Record<string, undefined>)[id] : undefined,
+          isAutoFocus: (isInitial && isAutoFocus) || fieldProps?.isAutoFocus,
           label: fieldProps?.label ? t(fieldProps.label) : undefined,
           onChange: handleChange(id),
           value: values ? (values as Record<string, undefined>)[id] : undefined,
@@ -163,9 +166,11 @@ const _FormContainer = forwardRef(
           }
           default: {
             return cloneElement(
-              (render as (params: StringFieldPropsModel & FormContainerRenderPropsModel) => ReactElement)(
-                { ..._fieldProps, handleReset, handleSubmit },
-              ),
+              (
+                render as (
+                  params: StringFieldPropsModel & FormContainerRenderPropsModel,
+                ) => ReactElement
+              )({ ..._fieldProps, handleReset, handleSubmit }),
               { key: id, testID: id },
             );
           }
@@ -184,12 +189,12 @@ const _FormContainer = forwardRef(
           <Wrapper spacing>
             {topElement && topElement({ elementState: _elementState, handleReset, handleSubmit })}
 
-            {rows?.map(({ fields, id }) => (
+            {map(rows, ({ fields, id }, i) => (
               <Wrapper
                 isDistribute
                 isRowAlign
                 key={id}>
-                {fields?.map(_getField)}
+                {map(fields, (field, j) => _getField(field, !i && !j))}
               </Wrapper>
             ))}
 

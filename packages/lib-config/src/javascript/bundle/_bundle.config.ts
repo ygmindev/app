@@ -10,7 +10,6 @@ import type { RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { babel } from '@rollup/plugin-babel';
 import inject from '@rollup/plugin-inject';
 import { LINT_COMMAND } from '@tool/task/node/templates/lint/lint';
-import type { Plugin } from 'esbuild';
 import { filelocPlugin } from 'esbuild-plugin-fileloc';
 import { visualizer } from 'rollup-plugin-visualizer';
 import type { PluginOption, UserConfig } from 'vite';
@@ -60,7 +59,7 @@ export const _bundleConfig = ({
         externals && esbuildCommonjs(externals),
 
         platform === PLATFORM.NODE && filelocPlugin(),
-      ].filter(Boolean) as Array<Plugin>,
+      ].filter(Boolean),
 
       resolveExtensions: extensions,
     },

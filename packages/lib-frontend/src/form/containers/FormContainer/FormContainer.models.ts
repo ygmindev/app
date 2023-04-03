@@ -44,6 +44,7 @@ export interface FormContainerPropsModel<TType = void, TResult = void>
     Pick<ErrorProviderContextModel, 'errorContextGet'> {
   bottomElement?(props: FormContainerRenderPropsModel): ReactNode;
   cancelLabel?: TranslatableTextModel;
+  isAutoFocus?: boolean;
   isButton?: boolean;
   isFullWidth?: boolean;
   leftElement?(props: FormContainerRenderPropsModel): ReactNode;

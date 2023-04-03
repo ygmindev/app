@@ -10,6 +10,16 @@ export const BILLING_REDUCER: BillingReducerModel = {
     paymentMethodRemove: (store, value) => {
       store.set('paymentMethods', filter(store.get('paymentMethods') || [], { _id: value }));
     },
+
+    paymentMethodUpdate: (store, value) => {
+      store.set(
+        'paymentMethods',
+        (store.get('paymentMethods') || []).map((paymentMethod) =>
+          paymentMethod._id === value._id ? value : paymentMethod,
+        ),
+      );
+    },
+
     paymentMethodsSet: (store, value) => {
       store.set('paymentMethods', value);
     },

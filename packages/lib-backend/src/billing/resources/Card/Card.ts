@@ -9,9 +9,6 @@ import { FIELD_TYPE } from '@lib/shared/form/form.constants';
 @withEntity({ isEmbedded: true, isRepository: true, name: CARD_RESOURCE_NAME })
 export class Card extends EmbeddedResource implements CardModel {
   @withField({ isRepository: true })
-  id!: string;
-
-  @withField({ isRepository: true })
   brand!: string;
 
   @withField({ isRepository: true })
@@ -22,6 +19,9 @@ export class Card extends EmbeddedResource implements CardModel {
 
   @withField({ isRepository: true, type: FIELD_TYPE.STRING })
   funding!: CardFundingModel;
+
+  @withField({ isRepository: true })
+  id!: string;
 
   @withField({ isRepository: true })
   last4!: string;

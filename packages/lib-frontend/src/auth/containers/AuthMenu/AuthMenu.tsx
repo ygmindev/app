@@ -15,7 +15,6 @@ import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
 import type { StyleBrightnessModel } from '@lib/frontend/style/style.models';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
@@ -29,7 +28,6 @@ import { useMemo } from 'react';
 export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
   useTranslation();
   const { styles } = useStyles({ props });
-  const theme = useTheme();
   const { signOut } = useSignInResource();
   const { push } = useRouter();
   const authState = useAuthState();
@@ -98,7 +96,6 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
           <SignInButton />
         )
       }
-      width={theme.layout.width[THEME_BASIC_SIZE.SMALL]}
     />
   );
 };

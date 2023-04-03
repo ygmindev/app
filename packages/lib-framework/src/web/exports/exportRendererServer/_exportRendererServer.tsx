@@ -7,7 +7,7 @@ import type { FCModel } from '@lib/frontend/core/core.models';
 import type { RouteContextModel } from '@lib/frontend/route/route.models';
 import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
 import { AppRegistry } from 'react-native-web';
-import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vite-plugin-ssr';
+import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vite-plugin-ssr/server';
 
 export const _exportRendererServer = ({
   publicDir,

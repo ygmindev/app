@@ -16,7 +16,9 @@ import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
+import { sort } from '@lib/shared/core/utils/sort/sort';
 import range from 'lodash/range';
+import { useMemo } from 'react';
 
 export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props }) => {
   const { t } = useTranslation();
@@ -39,7 +41,18 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
     },
   });
 
+  const _paymentMethods = useMemo(
+    () =>
+      data &&
+      sort({
+        by: [(x) => currentUser?.paymentMethodPrimary !== x._id, ['created', false]],
+        value: data,
+      }),
+    [currentUser?.paymentMethodPrimary, data],
+  );
+
   const _tPaymentMethod = t('billing:labels.paymentMethod');
+  const _tPaymentMethodAdd = t('core:labels.add', { value: _tPaymentMethod });
 
   return (
     <MainLayout
@@ -47,13 +60,13 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
       testID={testID}>
       <SkeletonGroup isVisible={isLoading}>
         {isLoading
-          ? range(3).map((i) => (
+          ? range(5).map((i) => (
               <PaymentMethodItem
                 elementState={ELEMENT_STATE.LOADING}
                 key={i}
               />
             ))
-          : data?.map((value) => (
+          : _paymentMethods?.map((value) => (
               <PaymentMethodItem
                 key={value._id}
                 value={value}
@@ -65,7 +78,7 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
         <Button
           icon="add"
           onPress={() => push({ pathname: `/${FORM}/${PAYMENT_METHOD}` })}>
-          {t('core:labels.add', { value: _tPaymentMethod })}
+          {_tPaymentMethodAdd}
         </Button>
       </Wrapper>
     </MainLayout>

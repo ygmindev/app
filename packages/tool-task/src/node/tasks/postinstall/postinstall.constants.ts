@@ -3,27 +3,15 @@ import type { RenameParamsModel } from '@tool/task/core/utils/rename/rename.mode
 
 export const NODE_POST_INSTALL_RENAMES: Array<RenameParamsModel> = [
   {
-    from: 'Transitioning.js',
-    path: fromModules('react-native-reanimated/lib/reanimated1'),
-    to: 'Transitioning.jsx',
+    from: 'createAnimatableComponent.js',
+    path: fromModules('react-native-animatable'),
+    to: 'createAnimatableComponent.jsx',
   },
 
   {
     from: 'createAnimatedComponent.js',
     path: fromModules('react-native-reanimated/lib'),
     to: 'createAnimatedComponent.jsx',
-  },
-
-  {
-    from: 'FlatList.js',
-    path: fromModules('react-native-reanimated/lib/reanimated2/component'),
-    to: 'FlatList.jsx',
-  },
-
-  {
-    from: 'createAnimatableComponent.js',
-    path: fromModules('react-native-animatable'),
-    to: 'createAnimatableComponent.jsx',
   },
 
   {

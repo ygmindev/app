@@ -1,3 +1,4 @@
+import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
 import { TASK_STATUS } from '@lib/config/core/task/task.constants';
 import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { debug } from '@lib/shared/logging/utils/logger/logger';
@@ -11,7 +12,9 @@ const upgrade: TaskParamsModel = {
   task: async (context) => {
     debug(`Excluded packages: ${JSON.stringify(NODE_UPGRADE_EXCLUDES, null, '  ')}`);
     const upgrade = await command({
-      command: `npx ncu -i -p yarn -x ${Object.keys(NODE_UPGRADE_EXCLUDES).join(',')}`,
+      command: `${fromExecutable('ncu')} -i -p yarn -x ${Object.keys(NODE_UPGRADE_EXCLUDES).join(
+        ',',
+      )}`,
     });
     upgrade && (await backup.task({ ...context, options: { name: 'node-upgrade' } }));
     return { status: TASK_STATUS.SUCCESS };

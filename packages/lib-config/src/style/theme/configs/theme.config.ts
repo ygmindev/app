@@ -87,7 +87,7 @@ export const themeConfig: ThemeConfigParamsModel = {
         [THEME_COLOR.NEUTRAL]: {
           main: { lightness: 99 },
           mainContrast: { lightness: 10 },
-          muted: { lightness: 90 },
+          muted: { lightness: 75 },
           mutedContrast: { lightness: 10 },
         },
         [THEME_COLOR.WARNING]: {

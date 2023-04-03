@@ -4,7 +4,7 @@ import type {
   _RenderPageModel,
   _RenderPageParamsModel,
 } from '@lib/framework/web/utils/renderPage/_renderPage.models';
-import { renderPage } from 'vite-plugin-ssr';
+import { renderPage } from 'vite-plugin-ssr/server';
 
 export const _renderPage = async ({
   locale,

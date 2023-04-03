@@ -7,10 +7,13 @@ import type {
 
 export type ErrorModeModel = `${ERROR_MODE}`;
 
-export interface ErrorContextModel extends Pick<NotificationModel, 'icon' | 'title' | 'message'> {}
+export interface ErrorContextModel extends Pick<NotificationModel, 'icon' | 'title' | 'message'> {
+  mode?: ErrorModeModel;
+}
 
 export interface TranslatableErrorContextModel
-  extends Pick<TranslatableNotificationModel, 'icon' | 'title' | 'message'> {}
+  extends Pick<TranslatableNotificationModel, 'icon' | 'title' | 'message'>,
+    Pick<ErrorContextModel, 'mode'> {}
 
 export interface ErrorProviderContextModel {
   errorContextGet?(error: Error): TranslatableErrorContextModel | undefined;

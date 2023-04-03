@@ -5,7 +5,6 @@ import { Tooltip } from '@lib/frontend/core/components/Tooltip/Tooltip';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { ElementStateModel, RSFCModel } from '@lib/frontend/core/core.models';
-import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import { MaskedTextField } from '@lib/frontend/form/components/MaskedTextField/MaskedTextField';
 import { _TextField } from '@lib/frontend/form/components/TextField/_TextField';
 import { TEXT_FIELD_KEYBOARD } from '@lib/frontend/form/components/TextField/TextField.constants';
@@ -22,7 +21,7 @@ import type { ViewStyleModel } from '@lib/frontend/style/style.models';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import type { ReactElement, RefObject } from 'react';
-import { forwardRef, useRef } from 'react';
+import { forwardRef, useEffect, useRef } from 'react';
 
 export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forwardRef(
   (
@@ -93,19 +92,13 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       </Wrapper>
     );
 
-    const isMounted = useMount(
-      {
-        onMount: () =>
-          isAutoFocus &&
-          sleep({ duration: theme.animation.transition }).then(() => {
-            if (isMounted) {
-              const inputRef = (ref || _ref) as RefObject<TextFieldRefModel>;
-              inputRef.current && inputRef.current.focus();
-            }
-          }),
-      },
-      [ref, isAutoFocus, theme.animation.transition],
-    );
+    useEffect(() => {
+      isAutoFocus &&
+        sleep({ duration: theme.animation.transition }).then(() => {
+          const inputRef = (ref || _ref) as RefObject<TextFieldRefModel>;
+          inputRef.current && inputRef.current.focus();
+        });
+    }, [ref, _ref, isAutoFocus, theme.animation.transition]);
 
     const _handleChange = (newValue: string): void => {
       switch (keyboard) {

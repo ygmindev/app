@@ -1,3 +1,5 @@
+import 'setimmediate';
+
 import { polyfill } from 'raf';
 
 const _polyfill = {};

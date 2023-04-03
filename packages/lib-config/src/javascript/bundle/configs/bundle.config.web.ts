@@ -1,5 +1,4 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
-import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import type { BundleConfigParamsModel } from '@lib/config/javascript/bundle/bundle.models';
 import { bundleConfig as bundleConfigBase } from '@lib/config/javascript/bundle/configs/bundle.config.base';
@@ -16,10 +15,6 @@ export const bundleConfig: BundleConfigParamsModel = merge({
     {
       aliases: {
         'react-native': fromConfig('javascript/bundle/aliases/react-native-web/index.js'),
-        'react-native-linear-gradient': 'react-native-web-linear-gradient',
-        'react-native-svg': fromRoot(
-          'node_modules/react-native-svg/lib/module/ReactNativeSVG.web.js',
-        ),
       },
 
       extensions: permuteString(['.web'], bundleConfigBase.extensions),

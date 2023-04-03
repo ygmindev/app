@@ -1,8 +1,10 @@
 import type { UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
-import type { StripeElementsOptions } from '@stripe/stripe-js';
+import type { BaseStripeElementsOptions } from '@stripe/stripe-js';
 
-export const STRIPE_ELEMENTS_STYLE: (theme: UseThemeModel) => StripeElementsOptions = (theme) => ({
+export const STRIPE_ELEMENTS_STYLE: (theme: UseThemeModel) => BaseStripeElementsOptions = (
+  theme,
+) => ({
   appearance: {
     labels: 'floating',
     rules: {

@@ -42,7 +42,6 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
         options: { project: { _id: true, id: true, last4: true } },
         root: { _id: input.root._id },
       });
-
       return {
         result: [
           ...(banks ? banks.map((value) => ({ ...value, type: PAYMENT_METHOD_TYPE.BANK })) : []),

@@ -3,6 +3,6 @@ import { ErrorContext } from '@lib/frontend/core/providers/ErrorProvider/ErrorPr
 import { useContext } from 'react';
 
 export const _useErrorContext = (): _UseErrorContextModel => {
-  const { handleError } = useContext(ErrorContext);
-  return { handleError };
+  const { errorContextSet } = useContext(ErrorContext);
+  return { handleError: errorContextSet };
 };

@@ -6,6 +6,7 @@ import { useErrorContext } from '@lib/frontend/core/hooks/useErrorContext/useErr
 import type { FormRefModel } from '@lib/frontend/form/form.models';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import type { CardFundingModel } from '@lib/shared/billing/resources/Card/Card.models';
+import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { InvalidTypeError } from '@lib/shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { appUri } from '@lib/shared/http/utils/appUri/appUri';
 import { Elements, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
@@ -42,7 +43,7 @@ const _StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forw
       submit: _handleSubmit,
     }));
 
-    const _handleCreate = async (data: PaymentMethod): Promise<void> => {
+    const _onSubmit = async (data: PaymentMethod): Promise<void> => {
       const { card, id, type, us_bank_account } = data;
       switch (type) {
         case 'us_bank_account': {
@@ -52,6 +53,7 @@ const _StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forw
               bank: get(us_bank_account, 'bank_name') || '',
               id,
               last4: get(us_bank_account, 'last4') || '',
+              type: PAYMENT_METHOD_TYPE.BANK,
             }));
 
           break;
@@ -66,6 +68,7 @@ const _StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forw
               funding: card.funding as CardFundingModel,
               id,
               last4: card.last4,
+              type: PAYMENT_METHOD_TYPE.CARD,
             }));
           break;
         }
@@ -89,7 +92,7 @@ const _StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forw
         } else if (setupIntent) {
           const { payment_method, status } = setupIntent;
           if (status === 'succeeded') {
-            await _handleCreate(payment_method as PaymentMethod);
+            await _onSubmit(payment_method as PaymentMethod);
           }
         }
       }

@@ -11,6 +11,8 @@ export interface BillingActionsParamsModel {
 
   paymentMethodRemove: string;
 
+  paymentMethodUpdate: EntityResourcePartialModel<PaymentMethodModel>;
+
   paymentMethodsSet: Array<EntityResourcePartialModel<PaymentMethodModel>>;
 }
 

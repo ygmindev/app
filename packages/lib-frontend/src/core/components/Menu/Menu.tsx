@@ -112,7 +112,7 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
                   icon={icon}
                   isFullWidth
                   key={id}
-                  onPress={async () => await _handlePressOption(option)}
+                  onPress={subOptions ? undefined : async () => await _handlePressOption(option)}
                   onPressOut={() => confirmMessage && _handleToggle(false)}
                   type={BUTTON_TYPE.TRANSPARENT}>
                   {renderOption ? renderOption(option) : label}

@@ -1,11 +1,13 @@
 import { ANIMATION_STATES_APPEARABLE } from '@lib/frontend/animation/animation.constants';
 import type { AnimatableRefModel } from '@lib/frontend/animation/animation.models';
+import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import type { RouteHeaderPropsModel } from '@lib/frontend/route/containers/RouteHeader/RouteHeader.models';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
@@ -21,9 +23,10 @@ import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/sha
 import { useRef } from 'react';
 
 export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ...props }) => {
+  const { t } = useTranslation();
   const { styles } = useStyles({ props });
   const theme = useTheme();
-  const { push } = useRouter();
+  const { location, push } = useRouter();
   const _previous = route.header?.previous;
   const ref = useRef<AnimatableRefModel>(null);
   const isLoading = useStore((state) => state.app.isLoading);
@@ -54,13 +57,13 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ..
         />
       )}
 
-      {route.title && (
-        <TranslatableText
+      <Appearable isVisible={!!(location.params?.title || route.title)}>
+        <Text
           casing={FONT_CASING.CAPITALIZE}
           type={FONT_TYPE.SUBTITLE}>
-          {route.title}
-        </TranslatableText>
-      )}
+          {t(location.params?.title || route.title)}
+        </Text>
+      </Appearable>
     </Wrapper>
   );
 };

@@ -27,7 +27,7 @@ export const PaymentMethodFormPage: SFCModel<PaymentMethodFormPagePropsModel> = 
       testID={testID}>
       {currentUser && (
         <PaymentMethodForm
-          defaultValue={location.params}
+          defaultValue={location.params?.value}
           onCancel={_handleBack}
           onSuccess={_handleBack}
         />

@@ -16,29 +16,45 @@ import type { UserModel } from '@lib/shared/user/resources/User/User.models';
 import { forwardRef } from 'react';
 
 export const PaymentMethodField: RSFCModel<FormRefModel, PaymentMethodFieldPropsModel> = forwardRef(
-  ({ ...props }, ref) => {
+  ({ defaultValue, ...props }, ref) => {
     const actions = useActions();
     const currentUser = useCurrentUser();
-    const { create: createBank } = useBankResource({ root: { _id: currentUser?._id } });
-    const { create: createCard } = useCardResource({ root: { _id: currentUser?._id } });
+    const { create: createBank, update: updateBank } = useBankResource({
+      root: { _id: currentUser?._id },
+    });
+    const { create: createCard, update: updateCard } = useCardResource({
+      root: { _id: currentUser?._id },
+    });
     return currentUser ? (
       <_PaymentMethodField
         {...props}
+        defaultValue={defaultValue}
         onSubmit={async (form) => {
           const _onSubmit = (): Promise<
-            OutputModel<RESOURCE_METHOD_TYPE.CREATE, PaymentMethodModel, UserModel>
+            OutputModel<
+              RESOURCE_METHOD_TYPE.CREATE | RESOURCE_METHOD_TYPE.UPDATE,
+              PaymentMethodModel,
+              UserModel
+            >
           > | void => {
             switch (form.type) {
               case PAYMENT_METHOD_TYPE.BANK:
-                return createBank({ form: form as BankFormModel });
+                return defaultValue
+                  ? updateBank({ filter: { _id: defaultValue._id }, update: form as BankFormModel })
+                  : createBank({ form: form as BankFormModel });
               case PAYMENT_METHOD_TYPE.CARD:
-                return createCard({ form: form as CardFormModel });
+                return defaultValue
+                  ? updateCard({ filter: { _id: defaultValue._id }, update: form as CardFormModel })
+                  : createCard({ form: form as CardFormModel });
               default:
                 return undefined;
             }
           };
           const result = await _onSubmit();
-          result && actions?.billing.paymentMethodAdd(result.result);
+          result &&
+            (defaultValue
+              ? actions?.billing.paymentMethodUpdate(result.result)
+              : actions?.billing.paymentMethodAdd(result.result));
         }}
         ref={ref}
       />

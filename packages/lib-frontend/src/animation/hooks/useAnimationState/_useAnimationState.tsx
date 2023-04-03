@@ -4,7 +4,7 @@ import type {
 } from '@lib/frontend/animation/hooks/useAnimationState/_useAnimationState.models';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { StyleModel, ViewStyleModel } from '@lib/frontend/style/style.models';
-import type { DynamicStyleProp } from 'moti';
+import type { DynamicStyleProp, MotiTranformProps, UseDynamicAnimationState } from 'moti';
 import { useDynamicAnimation } from 'moti';
 import { useImperativeHandle, useState } from 'react';
 
@@ -22,11 +22,13 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
 
   useImperativeHandle(ref, () => ({
     to: (params) => {
-      animationState.animateTo(params as DynamicStyleProp);
+      animationState.animateTo(params as DynamicStyleProp<MotiTranformProps>);
       currentSet(params as TStyle);
     },
     toState: (params) => {
-      states && states[params] && animationState.animateTo(states[params] as DynamicStyleProp);
+      states &&
+        states[params] &&
+        animationState.animateTo(states[params] as DynamicStyleProp<MotiTranformProps>);
       currentSet(states ? (states[params] as TStyle) : undefined);
     },
   }));
@@ -44,7 +46,7 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
         type: 'timing',
       },
     },
-    animationState,
+    animationState: animationState as UseDynamicAnimationState,
     current,
     isRender: elementState !== ELEMENT_STATE.EXIT || !isLazy,
   };

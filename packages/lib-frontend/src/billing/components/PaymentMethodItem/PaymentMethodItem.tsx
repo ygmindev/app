@@ -53,7 +53,7 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
     }
   };
 
-  const _title = getPaymentMethodTitle(value);
+  const _title = t(getPaymentMethodTitle(value));
   const _isPrimary = currentUser?.paymentMethodPrimary === value?._id;
 
   return (
@@ -92,11 +92,13 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
                   icon: 'edit',
                   id: 'edit',
                   label: t('core:labels.edit'),
-                  onPress: () =>
-                    push<PaymentMethodFormPageParamsModel>({
-                      params: value,
-                      pathname: `/${FORM}/${PAYMENT_METHOD}`,
-                    }),
+                  onPress: value
+                    ? () =>
+                        push<PaymentMethodFormPageParamsModel>({
+                          params: { title: t('core:labels.edit', { value: _title }), value },
+                          pathname: `/${FORM}/${PAYMENT_METHOD}`,
+                        })
+                    : undefined,
                 },
                 {
                   color: THEME_COLOR.ERROR,

@@ -18,7 +18,7 @@ export const useTranslation = (ns: UseTranslationParamsModel = []): UseTranslati
     key && isInitialized
       ? isFunction(key)
         ? key({ currentLanguage, isInitialized, t })
-        : _t(key, params)
+        : _t(key, params ? params : { value: '' })
       : '';
 
   return { currentLanguage, isInitialized, t };

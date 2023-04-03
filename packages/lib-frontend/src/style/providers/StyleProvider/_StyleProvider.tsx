@@ -4,7 +4,6 @@ import { STYLE_BRIGHTNESS } from '@lib/frontend/style/style.constants';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import type { ProviderProps } from 'react-native-paper';
 import { DefaultTheme, Provider } from 'react-native-paper';
-import type { MD3Type } from 'react-native-paper/lib/typescript/types';
 
 export const _StyleProvider = composeComponent<_StyleProviderPropsModel, ProviderProps>({
   Component: Provider,
@@ -12,7 +11,7 @@ export const _StyleProvider = composeComponent<_StyleProviderPropsModel, Provide
   getProps: ({ children, value }) => {
     if (value) {
       const { brightness, theme } = value || {};
-      const fontStyle: MD3Type = {
+      const fontStyle = {
         fontFamily: theme.font.fontFamily.main,
         fontSize: theme.font.size.m,
         fontWeight: theme.font.weight,

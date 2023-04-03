@@ -9,6 +9,7 @@ import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import { useMutation } from '@lib/frontend/core/hooks/useMutation/useMutation';
 import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
 import type { FormRefModel } from '@lib/frontend/form/form.models';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_BASIC_SIZE, THEME_SIZE } from '@lib/frontend/style/style.constants';
@@ -23,6 +24,7 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
   testID,
   ...props
 }) => {
+  const { t } = useTranslation();
   const { styles } = useStyles({ props });
   const theme = useTheme();
   const currentUser = useCurrentUser();
@@ -69,6 +71,7 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
         },
       ]}
       style={styles}
+      submitLabel={defaultValue ? t('core:labels.edit') : t('core:labels.add')}
       testID={testID}
     />
   );

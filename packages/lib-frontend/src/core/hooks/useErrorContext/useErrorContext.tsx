@@ -17,33 +17,38 @@ export const useErrorContext = (): UseErrorContextModel => {
     let _errorContext = errorContextGet && errorContextGet(error);
     if (!_errorContext) {
       if (['Network Error'].includes(error.message)) {
-        _errorContext = { icon: 'offline', message: ({ t }) => t('core:messages.errorOffline') };
-      }
-      switch ((error as HttpError).statusCode) {
-        case HTTP_STATUS_CODE.UNAUTHORIZED: {
-          _errorContext = {
-            icon: 'lock',
-            message: ({ t }) => t('core:messages.errorUnauthorized'),
-          };
-          break;
-        }
-        case HTTP_STATUS_CODE.FORBIDDEN: {
-          _errorContext = { icon: 'ban', message: ({ t }) => t('core:messages.errorForbidden') };
-          break;
-        }
-        default: {
-          _errorContext = { icon: 'sad', message: ({ t }) => t('core:messages.errorGeneric') };
-          break;
+        _errorContext = {
+          icon: 'offline',
+          message: ({ t }) => t('core:messages.errorOffline'),
+          mode: ERROR_MODE.FALLBACK,
+        };
+      } else {
+        switch ((error as HttpError).statusCode) {
+          case HTTP_STATUS_CODE.UNAUTHORIZED: {
+            _errorContext = {
+              icon: 'lock',
+              message: ({ t }) => t('core:messages.errorUnauthorized'),
+            };
+            break;
+          }
+          case HTTP_STATUS_CODE.FORBIDDEN: {
+            _errorContext = { icon: 'ban', message: ({ t }) => t('core:messages.errorForbidden') };
+            break;
+          }
+          default: {
+            _errorContext = { icon: 'sad', message: ({ t }) => t('core:messages.errorGeneric') };
+            break;
+          }
         }
       }
     }
-    const { icon, message, title } = _errorContext;
-    return { icon, message: message && t(message), title: title && t(title) };
+    const { icon, message, mode, title } = _errorContext;
+    return { icon, message: message && t(message), mode, title: title && t(title) };
   };
 
   const _handleError = (error: Error): void => {
     const _errorContext = _errorContextGet(error);
-    mode === ERROR_MODE.FALLBACK
+    [mode, _errorContext.mode].includes(ERROR_MODE.FALLBACK)
       ? errorContextSet(_errorContext)
       : notify({
           icon: _errorContext.icon,

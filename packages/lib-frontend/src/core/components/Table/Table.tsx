@@ -1,8 +1,6 @@
 import { sheetConfig } from '@lib/config/style/sheet/configs/sheet.config.ag-grid';
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Skeleton } from '@lib/frontend/animation/components/Skeleton/Skeleton';
-import { SvgShape } from '@lib/frontend/core/components/SvgShape/SvgShape';
-import { SVG_SHAPE } from '@lib/frontend/core/components/SvgShape/SvgShape.constants';
 import { _Table } from '@lib/frontend/core/components/Table/_Table';
 import type {
   TableColumnModel,
@@ -57,16 +55,7 @@ export const Table = forwardRef(
                 ...column,
                 renderer:
                   isMounted && _isLoading && !column.pin
-                    ? () => (
-                        <Skeleton
-                          height={30}
-                          isFullWidth>
-                          <SvgShape
-                            shape={SVG_SHAPE.RECT}
-                            shapeProps={{ isFullWidth: true }}
-                          />
-                        </Skeleton>
-                      )
+                    ? () => <Skeleton height={30} />
                     : column.renderer,
               })) as Array<TableColumnModel<unknown, unknown>>
             }
