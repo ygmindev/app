@@ -1,3 +1,4 @@
+import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import type { _StateProviderPropsModel } from '@lib/frontend/state/providers/StateProvider/_StateProvider.models';
 import type { ActionsModel } from '@lib/frontend/state/state.models';
 import type {
@@ -27,7 +28,8 @@ const _ActionProvider = <
   actionContext,
   actions,
   children,
-}: Pick<_StateProviderPropsModel<TType, TParams, TKeys>, 'actionContext' | 'children'> & {
+  value,
+}: Pick<_StateProviderPropsModel<TType, TParams, TKeys>, 'actionContext' | 'children' | 'value'> & {
   actions: {
     [TKey in TKeys[number]]: CaseReducerActions<SliceCaseReducers<TType[TKeys[number]]>, TKey>;
   };
@@ -38,6 +40,20 @@ const _ActionProvider = <
   ) as {
     [TKey in keyof TParams]: ActionsModel<TParams[TKey]>;
   };
+
+  useMount({
+    onMount: async (isMounted) => {
+      reduce(
+        value?.reducers,
+        (result, v, k) => {
+          console.warn(v.loaders);
+          return result;
+        },
+        [],
+      );
+    },
+  });
+
   return <actionContext.Provider value={_actions}>{children}</actionContext.Provider>;
 };
 
@@ -103,7 +119,6 @@ export const _StateProvider = <
         reducers: {},
       },
     );
-
     return {
       actions,
       store: configureStore({
@@ -117,7 +132,8 @@ export const _StateProvider = <
     <Provider store={store}>
       <_ActionProvider
         actionContext={actionContext}
-        actions={actions}>
+        actions={actions}
+        value={value}>
         {children}
       </_ActionProvider>
     </Provider>

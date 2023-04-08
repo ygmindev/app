@@ -9,7 +9,7 @@ import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCPropsModel } from '@lib/frontend/core/core.models';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { BORDER_DIRECTION } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { groupBy } from '@lib/shared/core/utils/groupBy/groupBy';
@@ -19,7 +19,7 @@ import type { ReactElement } from 'react';
 import { useMemo } from 'react';
 
 export const NavigationBar = ({
-  children,
+  isHorizontal,
   onChange,
   options,
   testID,
@@ -36,32 +36,33 @@ export const NavigationBar = ({
     [options],
   );
 
+  const _isHorizontal = isHorizontal || isMobile;
+
   return (
     <Activatable
       isPressable={false}
+      style={styles}
       // onActive={() => console.warn('active')}
       // onInactive={() => console.warn('inactive')}
     >
       <Wrapper
         align={FLEX_ALIGN.CENTER}
         border={BORDER_DIRECTION.RIGHT}
-        isFullWidth={isMobile}
-        isHorizontalScrollable={isMobile}
-        isRow={isMobile}
-        isVerticalScrollable={!isMobile}
-        p
+        isFullWidth={_isHorizontal}
+        isHorizontalScrollable={_isHorizontal}
+        isRowAlign={_isHorizontal}
+        isVerticalScrollable={!_isHorizontal}
+        p={_isHorizontal ? THEME_SIZE.SMALL : true}
         spacing
-        style={styles}
         testID={testID}
-        width={isMobile ? undefined : NAVIGATION_BAR_WIDTH}>
-        {children}
-
+        width={_isHorizontal ? undefined : NAVIGATION_BAR_WIDTH}>
         {map(_categories, (v, k) => {
           const _options = (
             <Wrapper
               isFullWidth
+              isRowAlign={_isHorizontal}
               key={toString(k)}
-              spacing={THEME_BASIC_SIZE.SMALL}>
+              spacing={THEME_SIZE.SMALL}>
               {v.map(({ icon, id, label, onPress }) => (
                 <Button
                   elementState={value && id === value ? ELEMENT_STATE.ACTIVE : undefined}

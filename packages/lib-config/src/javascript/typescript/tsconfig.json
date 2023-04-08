@@ -21,6 +21,7 @@
     "resolveJsonModule": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
+    "sourceMap": false,
     "strict": true,
     "target": "esnext",
     "types": ["react-native", "vite/client", "vitest/globals"]

@@ -1,0 +1,1 @@
+export const PAYMENT_METHOD_ITEM_ICON_WIDTH = 35;

@@ -12,7 +12,7 @@ import type { FormRefModel } from '@lib/frontend/form/form.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_BASIC_SIZE, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { CREATE_TOKEN } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { useRef } from 'react';
@@ -38,10 +38,10 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
 
   const ref = useRef<FormRefModel>(null);
 
-  useMount({ onMount: mutate });
+  useMount({ onMount: async () => mutate() });
 
   return isLoading ? (
-    <Loading fontSize={THEME_SIZE.XLARGE} />
+    <Loading fontSize={THEME_SIZE_MORE.XLARGE} />
   ) : (
     <FormContainer
       onCancel={onCancel}
@@ -53,7 +53,7 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
             {
               id: PAYMENT_METHOD,
               render: ({ elementState, error }) => (
-                <Wrapper width={theme.layout.width[THEME_BASIC_SIZE.MEDIUM]}>
+                <Wrapper width={theme.layout.width[THEME_SIZE.MEDIUM]}>
                   <PaymentMethodField
                     defaultValue={defaultValue}
                     elementState={elementState}

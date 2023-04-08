@@ -25,5 +25,6 @@
     "validateNotEmpty": "TRANSLATION_MISSING",
     "validateRange": "TRANSLATION_MISSING",
     "validateZipCode": "TRANSLATION_MISSING"
-  }
+  },
+  "hi": "hi"
 }

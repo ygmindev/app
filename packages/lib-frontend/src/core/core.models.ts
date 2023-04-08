@@ -2,7 +2,7 @@ import type { ButtonPropsModel } from '@lib/frontend/core/components/Button/Butt
 import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
 import type { WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import type { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import type { TranslatableModel } from '@lib/frontend/locale/locale.models';
+import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 import type { DimensionModel } from '@lib/frontend/platform/platform.models';
 import type { StyleModel, StylePropsModel, ViewStyleModel } from '@lib/frontend/style/style.models';
 import type { TestIdPropsModel } from '@lib/frontend/test/test.models';
@@ -49,7 +49,10 @@ export interface ProviderPropsModel<TType = undefined, TChildren = ReactNode | A
 export interface PagePropsModel extends ChildrenPropsModel {}
 
 export interface LayoutPropsModel
-  extends Pick<WrapperPropsModel, 'children' | 'isFullWidth' | 'isCenter'> {}
+  extends Pick<WrapperPropsModel, 'children' | 'isFullWidth' | 'isCenter'> {
+  isHorizontalCenter?: boolean;
+  isVerticalCenter?: boolean;
+}
 
 export type ElementStateModel = `${ELEMENT_STATE}`;
 
@@ -66,8 +69,8 @@ export interface ValuePropsModel<TType> {
   value?: TType;
 }
 
-export interface OptionModel
-  extends WithIdModel,
+export interface OptionModel<TType extends string = string>
+  extends WithIdModel<TType>,
     Pick<IconPropsModel, 'icon'>,
     Pick<ButtonPropsModel, 'color' | 'onPress' | 'elementState' | 'confirmMessage'> {
   category?: string;
@@ -75,7 +78,10 @@ export interface OptionModel
   label?: string;
 }
 
-export type TranslatableOptionModel = TranslatableModel<OptionModel, 'label'>;
+export interface TranslatableOptionModel<TType extends string = string>
+  extends Omit<OptionModel<TType>, 'label'> {
+  label?: TranslatableTextModel;
+}
 
 export interface PositionModel {
   x?: number;

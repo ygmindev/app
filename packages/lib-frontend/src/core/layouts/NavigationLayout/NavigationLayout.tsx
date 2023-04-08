@@ -8,10 +8,11 @@ import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import type { ReactElement } from 'react';
 
 export const NavigationLayout = <TOption extends TranslatableOptionModel>({
-  barElement,
   children,
+  isHorizontal,
   onChange,
   options,
+  title,
   value,
   ...props
 }: SFCPropsModel<NavigationLayoutPropsModel<TOption>>): ReactElement<
@@ -19,20 +20,21 @@ export const NavigationLayout = <TOption extends TranslatableOptionModel>({
 > => {
   const { styles } = useStyles({ props });
   const isMobile = useIsMobile();
+  const _isHorizontal = isHorizontal || isMobile;
   return (
     <Wrapper
       backgroundColor={THEME_COLOR.NEUTRAL}
       basis={0}
       grow
-      isRow={!isMobile}
-      spacing
+      isRow={!_isHorizontal}
       style={styles}>
       <NavigationBar
+        isHorizontal={_isHorizontal}
         onChange={onChange}
         options={options}
-        value={value}>
-        {barElement}
-      </NavigationBar>
+        title={title}
+        value={value}
+      />
 
       <Wrapper
         basis={0}

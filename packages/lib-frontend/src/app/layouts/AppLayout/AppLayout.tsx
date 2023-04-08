@@ -21,7 +21,7 @@ export const AppLayout: SFCModel<AppLayoutPropsModel> = ({ children, testID, ...
         <Wrapper
           grow
           p>
-          <Loading size={THEME_SIZE.XLARGE} />
+          <Loading size={THEME_SIZE_MORE.XLARGE} />
         </Wrapper>
       )} */}
 

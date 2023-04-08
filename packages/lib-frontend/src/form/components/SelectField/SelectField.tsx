@@ -4,16 +4,17 @@ import { Menu } from '@lib/frontend/core/components/Menu/Menu';
 import type { MenuRefModel } from '@lib/frontend/core/components/Menu/Menu.models';
 import { View } from '@lib/frontend/core/components/View/View';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import type { SFCModel } from '@lib/frontend/core/core.models';
+import type { SFCPropsModel } from '@lib/frontend/core/core.models';
 import type { SelectFieldPropsModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
 import { TextField } from '@lib/frontend/form/components/TextField/TextField';
 import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/useControlledValue';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useSearch } from '@lib/frontend/search/hooks/useSearch/useSearch';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import type { ReactElement } from 'react';
 import { useRef, useState } from 'react';
 
-export const SelectField: SFCModel<SelectFieldPropsModel> = ({
+export const SelectField = <TType extends string = string>({
   defaultValue,
   elementState,
   error,
@@ -29,7 +30,9 @@ export const SelectField: SFCModel<SelectFieldPropsModel> = ({
   value,
   width,
   ...props
-}) => {
+}: SFCPropsModel<SelectFieldPropsModel<TType>>): ReactElement<
+  SFCPropsModel<SelectFieldPropsModel<TType>>
+> => {
   const { styles } = useStyles({ props });
   const menuRef = useRef<MenuRefModel>(null);
   const { t } = useTranslation();

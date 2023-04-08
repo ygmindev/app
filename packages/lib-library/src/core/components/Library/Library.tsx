@@ -3,7 +3,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCPropsModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { THEME_BASIC_SIZE, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import { FONT_TYPE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
@@ -68,7 +68,7 @@ export const Library = <TProps,>({
                 renderer: ({ value }) => (
                   <Text
                     family={FONT_FAMILY.CODE}
-                    fontSize={THEME_SIZE.SMALL}>
+                    fontSize={THEME_SIZE_MORE.SMALL}>
                     {value as string}
                   </Text>
                 ),
@@ -78,7 +78,7 @@ export const Library = <TProps,>({
                 renderer: ({ value }) => (
                   <Text
                     family={FONT_FAMILY.CODE}
-                    fontSize={THEME_SIZE.SMALL}>
+                    fontSize={THEME_SIZE_MORE.SMALL}>
                     {value as string}
                   </Text>
                 ),
@@ -106,12 +106,12 @@ export const Library = <TProps,>({
             {v?.map(({ id, name: variantName, props: variantProps }) => (
               <Wrapper
                 key={id}
-                spacing={THEME_BASIC_SIZE.SMALL}>
+                spacing={THEME_SIZE.SMALL}>
                 <Wrapper
                   border
                   p
                   round
-                  spacing={THEME_BASIC_SIZE.SMALL}>
+                  spacing={THEME_SIZE.SMALL}>
                   {name && <Text>{variantName}</Text>}
 
                   {createElement(
@@ -124,12 +124,12 @@ export const Library = <TProps,>({
                   {map(variantProps as object, (v, k) => (
                     <Wrapper key={k}>
                       <Text
-                        fontSize={THEME_SIZE.SMALL}
+                        fontSize={THEME_SIZE_MORE.SMALL}
                         isBold>
                         {k}
                       </Text>
 
-                      <Text fontSize={THEME_SIZE.SMALL}>{_typeToString(v)}</Text>
+                      <Text fontSize={THEME_SIZE_MORE.SMALL}>{_typeToString(v)}</Text>
                     </Wrapper>
                   ))}
                 </Wrapper>

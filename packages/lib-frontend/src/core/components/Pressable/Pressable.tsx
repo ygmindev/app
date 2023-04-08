@@ -5,14 +5,13 @@ import type { PressablePropsModel } from '@lib/frontend/core/components/Pressabl
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { ElementStateModel, SFCModel } from '@lib/frontend/core/core.models';
-import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
 import { lazy } from '@lib/frontend/core/utils/lazy/lazy';
 import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/useControlledValue';
 import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import { isPromise } from '@lib/shared/core/utils/isPromise/isPromise';
 import { useState } from 'react';
@@ -33,7 +32,6 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
   const theme = useTheme();
   const { t } = useTranslation();
   const [confirmModalIsOpen, confirmModalIsOpenSet] = useState<boolean>(false);
-  const isMounted = useMount();
   const { styles } = useStyles({ props });
 
   const { setValueControlled, valueControlled } = useControlledValue<ElementStateModel>({
@@ -59,9 +57,9 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
     if (!_isDisabled) {
       const result = onPress && onPress();
       if (isPromise(result)) {
-        isMounted && setValueControlled(ELEMENT_STATE.LOADING);
+        setValueControlled(ELEMENT_STATE.LOADING);
         await result;
-        isMounted && setValueControlled(ELEMENT_STATE.INACTIVE);
+        setValueControlled(ELEMENT_STATE.INACTIVE);
       }
     }
   };
@@ -70,7 +68,8 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
     <>
       <Activatable
         onActive={() => setValueControlled(ELEMENT_STATE.ACTIVE)}
-        onInactive={() => setValueControlled(ELEMENT_STATE.INACTIVE)}>
+        onInactive={() => setValueControlled(ELEMENT_STATE.INACTIVE)}
+        style={styles}>
         <Wrapper
           {...props}
           animation={{
@@ -90,9 +89,8 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
           onPressIn={onPressIn}
           onPressOut={onPressOut}
           pHorizontal
-          pVertical={THEME_BASIC_SIZE.SMALL}
-          round
-          style={styles}>
+          pVertical={THEME_SIZE.SMALL}
+          round>
           {children}
         </Wrapper>
       </Activatable>

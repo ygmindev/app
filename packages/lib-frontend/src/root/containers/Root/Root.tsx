@@ -12,27 +12,24 @@ import { initialize } from '@lib/frontend/setup/utils/initialize/initialize';
 import { StateProvider } from '@lib/frontend/state/providers/StateProvider/StateProvider';
 import { StyleProvider } from '@lib/frontend/style/providers/StyleProvider/StyleProvider';
 import { TrackingProvider } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider';
-import { cloneElement, Suspense, useMemo } from 'react';
+import { cloneElement, Suspense } from 'react';
 
 await initialize();
 
 export const Root: FCModel<RootPropsModel> = ({ children, initialState, locale, route }) => {
-  const providers = useMemo(
-    () => [
-      <RootLayout />,
-      <RouteProvider value={route} />,
-      <TrackingProvider />,
-      <QueryProvider />,
-      <AuthProvider />,
-      <ErrorProvider value={{ mode: ERROR_MODE.NOTIFICATION }} />,
-      <StyleProvider />,
-      <LocaleProvider value={locale} />,
-      <AppProvider />,
-      <StateProvider value={initialState} />,
-      <Suspense />, // to provider?
-    ],
-    [initialState],
-  );
+  const providers = [
+    <RootLayout />,
+    <RouteProvider value={route} />,
+    <TrackingProvider />,
+    <QueryProvider />,
+    <AuthProvider />,
+    <ErrorProvider value={{ mode: ERROR_MODE.NOTIFICATION }} />,
+    <StyleProvider />,
+    <LocaleProvider value={locale} />,
+    <AppProvider />,
+    <StateProvider value={initialState} />,
+    <Suspense />, // to provider?
+  ];
 
   return <>{providers.reduce((result, element) => cloneElement(element, {}, result), children)}</>;
 };

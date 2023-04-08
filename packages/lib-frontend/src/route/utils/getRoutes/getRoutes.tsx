@@ -17,6 +17,8 @@ import type {
   GetRoutesModel,
   GetRoutesParamsModel,
 } from '@lib/frontend/route/utils/getRoutes/getRoutes.models';
+import { SettingsPage } from '@lib/frontend/settings/pages/SettingsPage/SettingsPage';
+import { SETTINGS } from '@lib/frontend/settings/settings.constants';
 import { AccountPage } from '@lib/frontend/user/pages/AccountPage/AccountPage';
 import { NameFormPage } from '@lib/frontend/user/pages/NameFormPage/NameFormPage';
 import { PersonalPage } from '@lib/frontend/user/pages/PersonalPage/PersonalPage';
@@ -39,7 +41,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
         {
           element: <AccountPage />,
           isProtectable: true,
-          ns: [ACCOUNT, BILLING, USER],
+          ns: [ACCOUNT, BILLING, SETTINGS, USER],
           pathname: ACCOUNT,
           routes: [
             {
@@ -49,6 +51,10 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
             {
               element: <PaymentPage />,
               pathname: PAYMENT,
+            },
+            {
+              element: <SettingsPage />,
+              pathname: SETTINGS,
             },
           ],
         },

@@ -5,5 +5,5 @@ import type { SpacingStylerParamsModel } from '@lib/frontend/style/utils/styler/
 
 export type TextStylerParamsModel = ColorStylerParamsModel &
   FontStylerParamsModel &
-  Pick<ShapeStylerParamsModel, 'width' | 'height' | 'isFullWidth'> &
+  Pick<ShapeStylerParamsModel, 'width' | 'height' | 'isFullWidth' | 'isAbsoluteFill'> &
   Pick<SpacingStylerParamsModel, 'p' | 'm'>;

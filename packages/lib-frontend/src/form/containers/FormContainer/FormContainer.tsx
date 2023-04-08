@@ -22,7 +22,7 @@ import { useForm } from '@lib/frontend/form/hooks/useForm/useForm';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
 import { FIELD_TYPE } from '@lib/shared/form/form.constants';
@@ -209,7 +209,7 @@ const _FormContainer = forwardRef(
             isFullWidth
             isRowAlign
             justify={isFullWidth ? undefined : FLEX_JUSTIFY.FLEX_END}
-            spacing={THEME_BASIC_SIZE.SMALL}>
+            spacing={THEME_SIZE.SMALL}>
             {leftElement && leftElement({ elementState: _elementState, handleReset, handleSubmit })}
 
             {onCancel && (

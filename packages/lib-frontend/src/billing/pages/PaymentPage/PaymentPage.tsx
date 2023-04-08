@@ -4,6 +4,7 @@ import { PaymentMethodItem } from '@lib/frontend/billing/components/PaymentMetho
 import { usePaymentMethodResource } from '@lib/frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
 import type { PaymentPagePropsModel } from '@lib/frontend/billing/pages/PaymentPage/PaymentPage.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
+import { LineGroup } from '@lib/frontend/core/components/LineGroup/LineGroup';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
@@ -56,22 +57,25 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
 
   return (
     <MainLayout
+      isHorizontalCenter
       style={styles}
       testID={testID}>
       <SkeletonGroup isVisible={isLoading}>
-        {isLoading
-          ? range(5).map((i) => (
-              <PaymentMethodItem
-                elementState={ELEMENT_STATE.LOADING}
-                key={i}
-              />
-            ))
-          : _paymentMethods?.map((value) => (
-              <PaymentMethodItem
-                key={value._id}
-                value={value}
-              />
-            ))}
+        <LineGroup title={t('billing:labels.paymentMethod_plural')}>
+          {isLoading
+            ? range(5).map((i) => (
+                <PaymentMethodItem
+                  elementState={ELEMENT_STATE.LOADING}
+                  key={i}
+                />
+              ))
+            : _paymentMethods?.map((value) => (
+                <PaymentMethodItem
+                  key={value._id}
+                  value={value}
+                />
+              ))}
+        </LineGroup>
       </SkeletonGroup>
 
       <Wrapper isRow>

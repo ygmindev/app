@@ -1,11 +1,9 @@
-import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { NavigationLayout } from '@lib/frontend/core/layouts/NavigationLayout/NavigationLayout';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { FONT_TYPE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { ACCOUNT_NAVBAR_OPTIONS } from '@lib/frontend/user/pages/AccountPage/AccountPage.constants';
 import type { AccountPagePropsModel } from '@lib/frontend/user/pages/AccountPage/AccountPage.models';
 import { ACCOUNT } from '@lib/shared/user/user.constants';
@@ -20,6 +18,7 @@ export const AccountPage: SFCModel<AccountPagePropsModel> = ({ children, testID,
     () => ACCOUNT_NAVBAR_OPTIONS.find(({ id }) => isActive({ pathname: `/${ACCOUNT}/${id}` })),
     [isActive],
   );
+
   useEffect(() => {
     !_value && replace({ pathname: `${ACCOUNT}/${ACCOUNT_NAVBAR_OPTIONS[0].id}` });
   }, [_value]);
@@ -30,9 +29,10 @@ export const AccountPage: SFCModel<AccountPagePropsModel> = ({ children, testID,
       style={styles}
       testID={testID}>
       <NavigationLayout
-        barElement={<Text type={FONT_TYPE.HEADLINE}>{t('account:labels.account')}</Text>}
+        isHorizontal
         onChange={(value) => push({ pathname: `/${ACCOUNT}/${value}` })}
         options={ACCOUNT_NAVBAR_OPTIONS}
+        title={t('account:labels.account')}
         value={_value?.id}>
         <Wrapper
           grow

@@ -38,6 +38,7 @@ export const useUserResource = (): UseUserResourceModel => {
 
   return {
     get,
+
     update,
   };
 };

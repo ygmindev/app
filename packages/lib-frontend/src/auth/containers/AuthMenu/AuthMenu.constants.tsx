@@ -15,7 +15,7 @@ export const AUTH_MENU_OPTIONS: Array<AuthMenuOptionModel> = withId([
   {
     icon: 'brightness',
     id: BRIGHTNESS,
-    label: ({ t }) => t('style:labels.brightness'),
+    label: ({ t }) => t('settings:labels.brightness'),
     subOptions: withId([
       { icon: 'device', id: DEVICE, label: ({ t }) => t('account:labels.device') },
       { icon: 'light', id: 'light', label: ({ t }) => t('style:labels.light') },
@@ -24,7 +24,7 @@ export const AUTH_MENU_OPTIONS: Array<AuthMenuOptionModel> = withId([
   },
 
   {
-    icon: 'person',
+    icon: 'personCircle',
     id: ACCOUNT,
     isProtected: true,
     label: ({ t }) => t('account:labels.account'),

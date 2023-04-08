@@ -10,7 +10,7 @@ export const props: LibraryPropsModel<TooltipPropsModel> = {
     children: 'tooltip',
   },
   variants: [
-    { props: { icon: 'person' } },
+    { props: { icon: 'personCircle' } },
     { props: { children: <WrapperFixture /> } },
     ...Object.values(THEME_COLOR).map((color) => ({ props: { color } })),
   ],

@@ -10,10 +10,10 @@ import Tippy from '@tippyjs/react';
 export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   anchor,
   children,
-  isFullWidth,
   direction = DIRECTION.BOTTOM,
-  maxWidth,
+  isFullWidth,
   isOpen,
+  maxWidth,
   onClose,
   ...props
 }) => {

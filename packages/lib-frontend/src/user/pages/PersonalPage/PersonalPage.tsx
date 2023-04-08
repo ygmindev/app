@@ -1,7 +1,11 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
+import { LineGroup } from '@lib/frontend/core/components/LineGroup/LineGroup';
+import { LineItem } from '@lib/frontend/core/components/LineItem/LineItem';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { FORM } from '@lib/frontend/form/form.constants';
@@ -9,8 +13,7 @@ import { TranslatableText } from '@lib/frontend/locale/components/TranslatableTe
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { THEME_BASIC_SIZE, THEME_SIZE } from '@lib/frontend/style/style.constants';
-import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import { THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import { FONT_TYPE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { PERSONAL_PAGE_FIELDS } from '@lib/frontend/user/pages/PersonalPage/PersonalPage.constants';
@@ -23,41 +26,40 @@ export const PersonalPage: SFCModel<PersonalPagePropsModel> = ({ testID, ...prop
   const { styles } = useStyles({ props });
   const { push } = useRouter();
   const currentUser = useCurrentUser();
-
   return (
     <MainLayout
+      isHorizontalCenter
       style={styles}
       testID={testID}>
-      <Text type={FONT_TYPE.HEADLINE}>{t('account:labels.personal')}</Text>
+      <LineGroup title={t('account:labels.personal')}>
+        {currentUser &&
+          map(PERSONAL_PAGE_FIELDS, ({ icon, id, label, value }) => (
+            <LineItem
+              key={id}
+              onPress={() => push({ pathname: `${FORM}/${PERSONAL}/${id}` })}
+              rightElement={(isActive) => (
+                <Button
+                  elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
+                  icon="chevronRight"
+                  type={BUTTON_TYPE.TRANSPARENT}
+                />
+              )}>
+              <Wrapper spacing={THEME_SIZE.SMALL}>
+                <Wrapper isRowAlign>
+                  {icon && <Icon icon={icon} />}
 
-      {currentUser &&
-        map(PERSONAL_PAGE_FIELDS, ({ icon, id, label, value }) => (
-          <Wrapper
-            key={id}
-            spacing={THEME_BASIC_SIZE.SMALL}>
-            <Wrapper isRowAlign>
-              {icon && <Icon icon={icon} />}
+                  <TranslatableText type={FONT_TYPE.TITLE}>{label}</TranslatableText>
+                </Wrapper>
 
-              <TranslatableText type={FONT_TYPE.TITLE}>{label}</TranslatableText>
-            </Wrapper>
-
-            <Wrapper
-              isRowAlign
-              justify={FLEX_JUSTIFY.SPACE_BETWEEN}>
-              <Text
-                fontSize={THEME_SIZE.LARGE}
-                isEllipsis>
-                {value(currentUser)}
-              </Text>
-
-              <Button
-                icon="edit"
-                onPress={() => push({ pathname: `${FORM}/${PERSONAL}/${id}` })}>
-                {t('core:labels.edit')}
-              </Button>
-            </Wrapper>
-          </Wrapper>
-        ))}
+                <Text
+                  fontSize={THEME_SIZE_MORE.LARGE}
+                  isEllipsis>
+                  {value(currentUser)}
+                </Text>
+              </Wrapper>
+            </LineItem>
+          ))}
+      </LineGroup>
     </MainLayout>
   );
 };

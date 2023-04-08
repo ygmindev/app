@@ -13,9 +13,8 @@ import type {
 } from '@lib/frontend/form/components/TextField/TextField.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_BASIC_SIZE, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import type { TextStyleModel } from '@lib/frontend/style/style.models';
-import { FONT_CASING } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import isString from 'lodash/isString';
@@ -151,7 +150,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
       <Appearable
         isCenter
         isVisible={!isEmpty(value) || elementState === ELEMENT_STATE.ACTIVE || !label}
-        mLeft={label ? true : THEME_BASIC_SIZE.SMALL}
+        mLeft={label ? true : THEME_SIZE.SMALL}
         mTop={label ? 18 : undefined}>
         {leftElement(elementState)}
       </Appearable>
@@ -209,9 +208,8 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
                 {label && (
                   <AnimatableText
                     animation={_childrenAnimation}
-                    casing={FONT_CASING.CAPITALIZE}
                     elementState={elementState}
-                    fontSize={THEME_SIZE.SMALL}>
+                    fontSize={THEME_SIZE_MORE.SMALL}>
                     {label}
                   </AnimatableText>
                 )}

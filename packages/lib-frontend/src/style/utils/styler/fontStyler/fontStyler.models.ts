@@ -1,4 +1,4 @@
-import type { ThemeSizeModel } from '@lib/frontend/style/style.models';
+import type { ThemeSizeMoreModel } from '@lib/frontend/style/style.models';
 import type {
   FONT_ALIGN,
   FONT_CASING,
@@ -18,7 +18,7 @@ export interface FontStylerParamsModel {
   align?: FontAlignModel;
   casing?: FontCasingModel;
   family?: FontFamilyModel;
-  fontSize?: ThemeSizeModel;
+  fontSize?: ThemeSizeMoreModel | number;
   isBold?: boolean;
   isLineHeight?: boolean;
   type?: FontTypeModel;

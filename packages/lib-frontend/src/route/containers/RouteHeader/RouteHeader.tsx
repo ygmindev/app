@@ -15,10 +15,7 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { BORDER_DIRECTION } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
-import {
-  FONT_CASING,
-  FONT_TYPE,
-} from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { FONT_TYPE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { useRef } from 'react';
 
@@ -58,11 +55,7 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ..
       )}
 
       <Appearable isVisible={!!(location.params?.title || route.title)}>
-        <Text
-          casing={FONT_CASING.CAPITALIZE}
-          type={FONT_TYPE.SUBTITLE}>
-          {t(location.params?.title || route.title)}
-        </Text>
+        <Text type={FONT_TYPE.SUBTITLE}>{t(location.params?.title || route.title)}</Text>
       </Appearable>
     </Wrapper>
   );

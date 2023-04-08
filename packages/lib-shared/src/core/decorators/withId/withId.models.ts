@@ -1,4 +1,4 @@
-export interface WithIdModel<TType = string> {
+export interface WithIdModel<TType extends string = string> {
   id: TType;
 }
 

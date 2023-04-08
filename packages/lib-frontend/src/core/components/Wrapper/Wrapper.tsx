@@ -39,7 +39,6 @@ export const Wrapper: RSFCModel<AnimatableRefModel, WrapperPropsModel> = forward
             : result,
         [] as Array<ReactNode>,
       );
-
       const _isRow = props.isRow || isRowAlign;
       const _length = _children.length;
       return reduce(

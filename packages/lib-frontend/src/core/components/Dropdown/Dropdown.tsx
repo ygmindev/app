@@ -4,7 +4,7 @@ import { DROPDOWN_MAX_HEIGHT } from '@lib/frontend/core/components/Dropdown/Drop
 import type { DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/Dropdown.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
-import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_COLOR, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
@@ -25,7 +25,7 @@ export const Dropdown = composeComponent<DropdownPropsModel, _DropdownPropsModel
           grow
           isVerticalScrollable
           maxHeight={DROPDOWN_MAX_HEIGHT}
-          p={THEME_SIZE.SMALL}>
+          p={THEME_SIZE_MORE.SMALL}>
           {children}
         </Wrapper>
       </Wrapper>

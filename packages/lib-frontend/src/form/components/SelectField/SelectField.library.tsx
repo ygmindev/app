@@ -9,7 +9,7 @@ export const props: LibraryPropsModel<SelectFieldPropsModel> = {
   category: 'form',
   defaultProps: { options: MENU_FIXTURE_OPTIONS },
   variants: [
-    { props: { icon: 'person' } },
+    { props: { icon: 'personCircle' } },
     { props: { isAutoFocus: true } },
     { props: { label: 'label' } },
     ...Object.values(ELEMENT_STATE).map((elementState) => ({ props: { elementState } })),

@@ -9,8 +9,8 @@ export const props: LibraryPropsModel<NotificationPropsModel> = {
   defaultProps: { id: 'id', isInfinite: true, message: 'message' },
   variants: [
     ...Object.values(THEME_COLOR).map((color) => ({ props: { color } })),
-    { props: { icon: 'person' } },
+    { props: { icon: 'personCircle' } },
     { props: { title: 'title' } },
-    { props: { icon: 'person', title: 'title' } },
+    { props: { icon: 'personCircle', title: 'title' } },
   ],
 };

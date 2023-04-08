@@ -5,7 +5,10 @@ import type { RSFCModel } from '@lib/frontend/core/core.models';
 import { useErrorContext } from '@lib/frontend/core/hooks/useErrorContext/useErrorContext';
 import type { FormRefModel } from '@lib/frontend/form/form.models';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import type { CardFundingModel } from '@lib/shared/billing/resources/Card/Card.models';
+import type {
+  CardBrandModel,
+  CardFundingModel,
+} from '@lib/shared/billing/resources/Card/Card.models';
 import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { InvalidTypeError } from '@lib/shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { appUri } from '@lib/shared/http/utils/appUri/appUri';
@@ -62,7 +65,7 @@ const _StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forw
           card &&
             onSubmit &&
             (await onSubmit({
-              brand: card.brand,
+              brand: card.brand as CardBrandModel,
               expMonth: card.exp_month,
               expYear: card.exp_year,
               funding: card.funding as CardFundingModel,

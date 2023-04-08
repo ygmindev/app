@@ -6,7 +6,7 @@ import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/useControlledValue';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 
 export const Tabs: SFCModel<TabsPropsModel> = ({
   defaultValue,
@@ -30,7 +30,7 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
       isHorizontalScrollable={!isVertical}
       isRow={!isVertical}
       isVerticalScrollable={isVertical}
-      spacing={THEME_BASIC_SIZE.SMALL}
+      spacing={THEME_SIZE.SMALL}
       style={styles}
       testID={testID}>
       {tabs.map((tab) => {

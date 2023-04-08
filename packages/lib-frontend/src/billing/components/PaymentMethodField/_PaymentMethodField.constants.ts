@@ -1,5 +1,5 @@
 import type { UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import type { BaseStripeElementsOptions } from '@stripe/stripe-js';
 
 export const STRIPE_ELEMENTS_STYLE: (theme: UseThemeModel) => BaseStripeElementsOptions = (
@@ -27,7 +27,7 @@ export const STRIPE_ELEMENTS_STYLE: (theme: UseThemeModel) => BaseStripeElements
       colorTextPlaceholder: theme.colors.tone.neutral.muted,
       colorWarningText: theme.colors.tone.warning.main,
       fontFamily: theme.font.fontFamily.main,
-      fontSizeBase: `${theme.font.size[THEME_SIZE.MEDIUM]}px`,
+      fontSizeBase: `${theme.font.size[THEME_SIZE_MORE.MEDIUM]}px`,
     },
   },
 });

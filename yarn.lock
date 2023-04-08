@@ -11384,6 +11384,7 @@ __metadata:
     redux: ^4.2.1
     reflect-metadata: ^0.1.13
     regenerator-runtime: ^0.13.11
+    rollup: ^3.20.2
     rollup-plugin-visualizer: ^5.9.0
     serverless: ^3.29.0
     serverless-dotenv-plugin: ^6.0.0
@@ -28992,7 +28993,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup@npm:^3.18.0":
+"rollup@npm:^3.18.0, rollup@npm:^3.20.2":
   version: 3.20.2
   resolution: "rollup@npm:3.20.2"
   dependencies:

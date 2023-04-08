@@ -6,9 +6,8 @@ import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { ElementStateModel, MeasureModel, SFCModel } from '@lib/frontend/core/core.models';
 import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/useControlledValue';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { THEME_BASIC_SIZE, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
-import { FONT_CASING } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { useState } from 'react';
 
 export const Accordion: SFCModel<AccordionPropsModel> = ({
@@ -35,20 +34,14 @@ export const Accordion: SFCModel<AccordionPropsModel> = ({
 
   return (
     <Wrapper
-      spacing={THEME_BASIC_SIZE.SMALL}
+      spacing={THEME_SIZE.SMALL}
       style={styles}
       testID={testID}>
       <Wrapper
         isRowAlign
         justify={FLEX_JUSTIFY.SPACE_BETWEEN}
         onPress={_handleToggle}>
-        {label && (
-          <Text
-            casing={FONT_CASING.CAPITALIZE}
-            fontSize={THEME_SIZE.LARGE}>
-            {label}
-          </Text>
-        )}
+        {label && <Text fontSize={THEME_SIZE_MORE.LARGE}>{label}</Text>}
 
         <Wrapper
           animation={{

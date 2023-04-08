@@ -1,4 +1,4 @@
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import type { TextStyleModel } from '@lib/frontend/style/style.models';
 import {
   FONT_CASING,
@@ -8,16 +8,17 @@ import {
 import type { FontStylerParamsModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
 import type { StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
+import isNumber from 'lodash/isNumber';
 
 export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
   {
     align,
+    casing = FONT_CASING.CAPITALIZE,
+    family = FONT_FAMILY.MAIN,
+    fontSize = THEME_SIZE_MORE.MEDIUM,
     isBold,
     isLineHeight,
-    casing,
-    fontSize = THEME_SIZE.MEDIUM,
     type = FONT_TYPE.BODY,
-    family = FONT_FAMILY.MAIN,
   },
   theme,
 ) =>
@@ -25,14 +26,15 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
     fontFamily:
       type === FONT_TYPE.HEADLINE ? theme.font.fontFamily.stylish : theme.font.fontFamily[family],
 
-    fontSize:
-      theme.font.size[
-        type === FONT_TYPE.HEADLINE
-          ? THEME_SIZE.XLARGE
-          : type === FONT_TYPE.TITLE || type === FONT_TYPE.SUBTITLE
-          ? THEME_SIZE.LARGE
-          : fontSize
-      ],
+    fontSize: isNumber(fontSize)
+      ? fontSize
+      : theme.font.size[
+          type === FONT_TYPE.HEADLINE
+            ? THEME_SIZE_MORE.XLARGE
+            : type === FONT_TYPE.TITLE || type === FONT_TYPE.SUBTITLE
+            ? THEME_SIZE_MORE.LARGE
+            : fontSize
+        ],
 
     fontWeight:
       isBold || type === FONT_TYPE.HEADLINE || type === FONT_TYPE.TITLE

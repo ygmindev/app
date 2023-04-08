@@ -35,7 +35,7 @@ import type { ROUTE } from '@lib/shared/route/route.constants';
 import type { STYLE } from '@lib/shared/style/style.constants';
 import type { USER } from '@lib/shared/user/user.constants';
 
-export type RootStateModel = {
+export interface RootStateModel {
   [APP]: AppStateModel;
   [BILLING]: BillingStateModel;
   [LOCALE]: LocaleStateModel;
@@ -43,9 +43,9 @@ export type RootStateModel = {
   [ROUTE]: RouteStateModel;
   [STYLE]: StyleStateModel;
   [USER]: UserStateModel;
-};
+}
 
-export type RootActionsParamsModel = {
+export interface RootActionsParamsModel {
   [APP]: AppActionsParamsModel;
   [BILLING]: BillingActionsParamsModel;
   [LOCALE]: LocaleActionsParamsModel;
@@ -53,7 +53,7 @@ export type RootActionsParamsModel = {
   [ROUTE]: RouteActionsParamsModel;
   [STYLE]: StyleActionsParamsModel;
   [USER]: UserActionsParamsModel;
-};
+}
 
 export type RootActionsModel = {
   [TKey in keyof RootActionsParamsModel]: ActionsModel<RootActionsParamsModel[TKey]>;

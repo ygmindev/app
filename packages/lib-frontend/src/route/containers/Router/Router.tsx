@@ -19,6 +19,8 @@ const _getRoute = ({ pathname, ...route }: RouteModel, depth = 1): RouteModel =>
     ..._route,
     element: (
       <Route route={_route}>
+        {_route.element?.props.children}
+
         {_route.routes && (
           <Wrapper
             grow

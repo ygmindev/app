@@ -15,7 +15,9 @@ import { ROUTE } from '@lib/shared/route/route.constants';
 import { STYLE } from '@lib/shared/style/style.constants';
 import { USER } from '@lib/shared/user/user.constants';
 
-export const ROOT_REDUCERS: Record<keyof RootStateModel, ReducerModel<object, object>> = {
+export const ROOT_REDUCERS: {
+  [TKey in keyof RootStateModel]: ReducerModel<RootStateModel[TKey], object>;
+} = {
   [APP]: APP_REDUCER,
   [BILLING]: BILLING_REDUCER,
   [LOCALE]: LOCALE_REDUCER,

@@ -2,22 +2,17 @@ import type {
   UseMountModel,
   UseMountParamsModel,
 } from '@lib/frontend/core/hooks/useMount/useMount.models';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 export const useMount = (
-  ...[
-    { onMount, onUnmount } = { onMount: undefined, onUnmount: undefined },
-    deps = [],
-  ]: UseMountParamsModel
+  ...[{ onMount, onUnmount }, deps = []]: UseMountParamsModel
 ): UseMountModel => {
-  const [isMounted, isMountedSet] = useState<boolean>(false);
   useEffect(() => {
-    isMountedSet(true);
-    onMount && onMount();
+    let isMounted = true;
+    onMount && onMount(() => isMounted);
     return () => {
-      isMountedSet(false);
+      isMounted = false;
       onUnmount && onUnmount();
     };
-  }, [isMountedSet, ...deps]);
-  return isMounted;
+  }, [...deps]);
 };

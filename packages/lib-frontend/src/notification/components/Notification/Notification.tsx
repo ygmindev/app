@@ -17,10 +17,10 @@ import type { NotificationPropsModel } from '@lib/frontend/notification/componen
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import {
-  THEME_BASIC_SIZE,
   THEME_COLOR,
   THEME_ROLE,
   THEME_SIZE,
+  THEME_SIZE_MORE,
 } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
@@ -31,8 +31,8 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
   icon,
   id,
   isInfinite,
-  testID,
   message,
+  testID,
   title,
   ...props
 }) => {
@@ -41,13 +41,13 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
   const { remove } = useNotification();
   const barRef = useRef<AnimatableRefModel>(null);
 
-  const isMounted = useMount(
+  useMount(
     {
-      onMount: async () => {
+      onMount: async (isMounted) => {
         if (!isInfinite) {
           barRef.current?.toState(ELEMENT_STATE.ACTIVE);
           await sleep({ duration: NOTIFICATION_DURATION });
-          isMounted && remove(id);
+          isMounted() && remove(id);
         }
       },
     },
@@ -61,7 +61,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
       elementState={ELEMENT_STATE.ACTIVE}
       isOverflowHidden
       isShadow
-      mTop={THEME_BASIC_SIZE.SMALL}
+      mTop={THEME_SIZE.SMALL}
       position={SHAPE_POSITION.RELATIVE}
       round
       style={styles}
@@ -95,7 +95,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
         <Icon
           color={color}
           colorRole={THEME_ROLE.MAIN_CONTRAST}
-          fontSize={THEME_SIZE.LARGE}
+          fontSize={THEME_SIZE_MORE.LARGE}
           icon={icon}
         />
 
@@ -103,7 +103,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
           basis={0}
           grow
           isWrap
-          spacing={THEME_SIZE.SMALL}>
+          spacing={THEME_SIZE_MORE.SMALL}>
           {title && (
             <Text
               color={color}

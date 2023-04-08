@@ -14,13 +14,13 @@ export enum THEME_ROLE {
   MUTED_CONTRAST = 'mutedContrast',
 }
 
-export enum THEME_BASIC_SIZE {
+export enum THEME_SIZE {
   LARGE = 'l',
   MEDIUM = 'm',
   SMALL = 's',
 }
 
-export enum THEME_SIZE {
+export enum THEME_SIZE_MORE {
   LARGE = 'l',
   MEDIUM = 'm',
   SMALL = 's',

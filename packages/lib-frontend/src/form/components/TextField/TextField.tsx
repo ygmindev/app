@@ -16,7 +16,7 @@ import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { isTranslatableText } from '@lib/frontend/locale/utils/isTranslatableText/isTranslatableText';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_BASIC_SIZE, THEME_COLOR } from '@lib/frontend/style/style.constants';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import type { ViewStyleModel } from '@lib/frontend/style/style.models';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
@@ -68,7 +68,7 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
     const _rightElement = (_elementState: ElementStateModel): ReactElement => (
       <Wrapper
         isRowAlign
-        pRight={isCenter ? undefined : THEME_BASIC_SIZE.SMALL}>
+        pRight={isCenter ? undefined : THEME_SIZE.SMALL}>
         {!isNoClear && _elementState !== ELEMENT_STATE.DISABLED && (
           <Appearable
             animation={{ isLazy: false }}
@@ -98,7 +98,7 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
           const inputRef = (ref || _ref) as RefObject<TextFieldRefModel>;
           inputRef.current && inputRef.current.focus();
         });
-    }, [ref, _ref, isAutoFocus, theme.animation.transition]);
+    }, [isAutoFocus, theme.animation.transition]);
 
     const _handleChange = (newValue: string): void => {
       switch (keyboard) {

@@ -1,6 +1,6 @@
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import type { TextPropsModel } from '@lib/frontend/core/components/Text/Text.models';
-import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_COLOR, THEME_ROLE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import {
   FONT_ALIGN,
   FONT_CASING,
@@ -14,7 +14,7 @@ export const props: LibraryPropsModel<TextPropsModel> = {
     children: 'children',
   },
   variants: [
-    ...Object.values(THEME_SIZE).map((fontSize) => ({ props: { fontSize } })),
+    ...Object.values(THEME_SIZE_MORE).map((fontSize) => ({ props: { fontSize } })),
     ...Object.values(THEME_COLOR).map((color) => ({ props: { color } })),
     ...Object.values(THEME_COLOR)
       .map((color) =>

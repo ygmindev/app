@@ -11,17 +11,14 @@ import type { ElementStateModel, SFCModel } from '@lib/frontend/core/core.models
 import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/useControlledValue';
 import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_BASIC_SIZE, THEME_COLOR, THEME_ROLE } from '@lib/frontend/style/style.constants';
+import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import type { ThemeRoleModel } from '@lib/frontend/style/style.models';
 import { palette } from '@lib/frontend/style/utils/palette/palette';
 import {
   FLEX_ALIGN,
   FLEX_JUSTIFY,
 } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
-import {
-  FONT_ALIGN,
-  FONT_CASING,
-} from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { useMemo } from 'react';
 
@@ -31,7 +28,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   color = THEME_COLOR.PRIMARY,
   icon,
   type = !children && icon ? BUTTON_TYPE.TRANSPARENT : BUTTON_TYPE.FILLED,
-  size = THEME_BASIC_SIZE.MEDIUM,
+  size = THEME_SIZE.MEDIUM,
   elementState,
   onElementStateChange,
   ...props
@@ -91,7 +88,6 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   let _children = children && (
     <TranslatableText
       align={FONT_ALIGN.CENTER}
-      casing={FONT_CASING.CAPITALIZE}
       color={color}
       colorRole={childColorRole}>
       {children}

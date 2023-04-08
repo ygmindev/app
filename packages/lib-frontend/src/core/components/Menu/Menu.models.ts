@@ -11,17 +11,17 @@ export interface MenuRefModel {
   toggle(isOpen?: boolean): void;
 }
 
-export interface MenuOptionModel extends TranslatableOptionModel {
+export type MenuOptionModel<TType extends string = string> = TranslatableOptionModel<TType> & {
   subOptions?: Array<MenuOptionModel>;
-}
+};
 
-export interface MenuPropsModel
+export interface MenuPropsModel<TType extends string = string>
   extends Pick<DropdownPropsModel, 'width' | 'maxWidth' | 'isFullWidth' | 'onClose' | 'direction'>,
     Omit<StringFieldPropsModel, 'id'>,
     RefPropsModel<MenuRefModel> {
   anchor(isOpen?: boolean): ReactElement<PressablePropsModel>;
   isSearchable?: boolean;
-  options: Array<MenuOptionModel>;
+  options: Array<MenuOptionModel<TType>>;
   renderOption?(option: TranslatableOptionModel): TranslatableTextModel;
   topElement?: ReactNode;
 }

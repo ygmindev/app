@@ -5,3 +5,7 @@ export enum TRACKING_EVENT_ACTION {
   OPEN = 'open',
   PRESS = 'press',
 }
+
+export enum TRACKING_EVENT_OBJECT {
+  PAGE = 'page',
+}

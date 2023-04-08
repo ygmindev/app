@@ -4,5 +4,5 @@ export interface _UseTrackingModel {
   identify(uid: string): void;
   initialize(apiKey: string): Promise<void>;
   reset(): void;
-  track<TParams>(event: TrackingEventModel<TParams>): void;
+  track<TParams = undefined>(event: TrackingEventModel<TParams>): void;
 }

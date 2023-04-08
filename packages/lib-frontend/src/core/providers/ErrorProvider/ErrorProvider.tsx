@@ -11,7 +11,7 @@ import type {
 } from '@lib/frontend/core/providers/ErrorProvider/ErrorProvider.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import { FONT_TYPE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import noop from 'lodash/noop';
 import { createContext, useState } from 'react';
@@ -45,7 +45,7 @@ export const ErrorProvider: SFCModel<ErrorProviderPropsModel> = ({
           style={styles}
           testID={testID}>
           <Icon
-            fontSize={THEME_SIZE.XLARGE}
+            fontSize={THEME_SIZE_MORE.XLARGE}
             icon={errorContext.icon || 'sad'}
           />
 

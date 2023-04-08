@@ -1,6 +1,6 @@
 import type { UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
-import { THEME_BASIC_SIZE } from '@lib/frontend/style/style.constants';
-import type { ThemeBasicSizeModel } from '@lib/frontend/style/style.models';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import type { ThemeSizeModel } from '@lib/frontend/style/style.models';
 import type {
   SpacingModel,
   SpacingStylerParamsModel,
@@ -15,9 +15,7 @@ const _getSpacing = (
 ): 'auto' | number | undefined =>
   value === undefined || value === 'auto' || isNumber(value)
     ? value
-    : theme.shape.spacing[
-        value === true ? THEME_BASIC_SIZE.MEDIUM : (value as ThemeBasicSizeModel)
-      ];
+    : theme.shape.spacing[value === true ? THEME_SIZE.MEDIUM : (value as ThemeSizeModel)];
 
 export const spacingStyler: StylerModel<SpacingStylerParamsModel> = (
   {
