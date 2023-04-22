@@ -7,29 +7,50 @@ import { QueryProvider } from '@lib/frontend/core/providers/QueryProvider/QueryP
 import { LocaleProvider } from '@lib/frontend/locale/providers/LocaleProvider/LocaleProvider';
 import type { RootPropsModel } from '@lib/frontend/root/containers/Root/Root.models';
 import { RootLayout } from '@lib/frontend/root/layouts/RootLayout/RootLayout';
+import { ROOT_REDUCERS } from '@lib/frontend/root/stores/rootStore.constants';
+import type {
+  RootActionsModel,
+  RootActionsParamsModel,
+  RootStateModel,
+} from '@lib/frontend/root/stores/rootStore.models';
 import { RouteProvider } from '@lib/frontend/route/providers/RouteProvider/RouteProvider';
 import { initialize } from '@lib/frontend/setup/utils/initialize/initialize';
-import { StateProvider } from '@lib/frontend/state/providers/StateProvider/StateProvider';
+import { Store } from '@lib/frontend/state/utils/Store/Store';
 import { StyleProvider } from '@lib/frontend/style/providers/StyleProvider/StyleProvider';
 import { TrackingProvider } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider';
-import { cloneElement, Suspense } from 'react';
+import type { ReactElement } from 'react';
+import { cloneElement, createContext, Suspense, useMemo } from 'react';
 
 await initialize();
 
-export const Root: FCModel<RootPropsModel> = ({ children, initialState, locale, route }) => {
-  const providers = [
+export const actionContext = createContext<RootActionsModel | undefined>(undefined);
+
+export const Root: FCModel<RootPropsModel> = ({ children, context }) => {
+  const _store = useMemo(
+    () =>
+      new Store<Array<keyof RootStateModel>, RootStateModel, RootActionsParamsModel>({
+        cookies: context?.state?.cookies,
+        initialState: context?.state?.initialState,
+        reducers: ROOT_REDUCERS,
+      }),
+    [context?.state?.cookies, context?.state?.initialState],
+  );
+
+  const _providers = [
     <RootLayout />,
-    <RouteProvider value={route} />,
+    <RouteProvider value={context?.route} />,
     <TrackingProvider />,
     <QueryProvider />,
     <AuthProvider />,
     <ErrorProvider value={{ mode: ERROR_MODE.NOTIFICATION }} />,
     <StyleProvider />,
-    <LocaleProvider value={locale} />,
+    <LocaleProvider value={context?.locale} />,
     <AppProvider />,
-    <StateProvider value={initialState} />,
+    context?.state && (
+      <_store.Provider value={{ ...context?.state, actionContext, store: _store }} />
+    ),
     <Suspense />, // to provider?
-  ];
+  ].filter(Boolean) as Array<ReactElement>;
 
-  return <>{providers.reduce((result, element) => cloneElement(element, {}, result), children)}</>;
+  return <>{_providers.reduce((result, element) => cloneElement(element, {}, result), children)}</>;
 };

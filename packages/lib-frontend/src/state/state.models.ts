@@ -1,25 +1,60 @@
-import type { STATE_LOADER } from '@lib/frontend/state/state.constants';
-
-export type StateLoaderModel = `${STATE_LOADER}`;
+import type { StorageBackendModel } from '@lib/frontend/state/utils/Storage/_Storage.models';
 
 export interface ReducerModel<TType extends object, TParams extends object> {
   actions: {
-    [TKey in keyof TParams]: (
-      store: {
-        get<TKey extends keyof TType>(key: TKey): TType[TKey];
-        set<TKey extends keyof TType>(key: TKey, value: TType[TKey]): void;
-      },
-      value: TParams[TKey],
-    ) => void;
+    [TKeyParam in keyof TParams]: ActionModel<TType, TParams[TKeyParam]>;
   };
 
   initialState: TType;
 
-  loaders?: {
-    [TKey in keyof TType]?: StateLoaderModel;
-  };
+  storage?: Array<StorageBackendModel>;
 }
 
 export type ActionsModel<TParams extends object> = {
-  [TKey in keyof TParams]: (params?: TParams[TKey]) => void;
+  [TKeyParam in keyof TParams]: (params?: TParams[TKeyParam]) => void;
 };
+
+export type NestedReducerModel<
+  TKeys extends Array<string>,
+  TType extends Record<TKeys[number], object>,
+  TParams extends Record<TKeys[number], object>,
+> = {
+  [TKey in TKeys[number]]: ReducerModel<TType[TKey], TParams[TKey]>;
+};
+
+export type NestedActionsModel<
+  TKeys extends Array<string>,
+  TParams extends Record<TKeys[number], object>,
+> = {
+  [TKey in TKeys[number]]: ActionsModel<TParams[TKey]>;
+};
+
+export type NestedInitialStateModel<
+  TKeys extends Array<string>,
+  TType extends Record<TKeys[number], object>,
+> = {
+  [TKey in TKeys[number]]: TType[TKey];
+};
+
+export type ActionModel<TType extends object, TParam> = (
+  store: {
+    get<TKey extends keyof TType>(key: TKey): TType[TKey];
+    set<TKey extends keyof TType>(key: TKey, value: TType[TKey]): void;
+  },
+  value: TParam,
+) => void;
+
+export interface CookieOptionModel {
+  domain?: string;
+  expires?: Date;
+  path?: string;
+  secure?: boolean;
+}
+
+export interface CookiesModel {
+  expire(key: string, options?: CookieOptionModel): void;
+
+  get<TType extends string = string>(key: string): TType | null;
+
+  set<TType extends string = string>(key: string, value: TType, options?: CookieOptionModel): void;
+}

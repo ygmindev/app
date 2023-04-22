@@ -49,5 +49,9 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
     textAlign: align,
 
     textTransform:
-      type === FONT_TYPE.HEADLINE || type === FONT_TYPE.TITLE ? FONT_CASING.CAPITALIZE : casing,
+      casing === FONT_CASING.ORIGINAL
+        ? undefined
+        : type === FONT_TYPE.HEADLINE || type === FONT_TYPE.TITLE
+        ? FONT_CASING.CAPITALIZE
+        : casing,
   });

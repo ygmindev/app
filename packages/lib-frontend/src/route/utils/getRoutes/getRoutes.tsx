@@ -22,8 +22,8 @@ import { SETTINGS } from '@lib/frontend/settings/settings.constants';
 import { AccountPage } from '@lib/frontend/user/pages/AccountPage/AccountPage';
 import { NameFormPage } from '@lib/frontend/user/pages/NameFormPage/NameFormPage';
 import { PersonalPage } from '@lib/frontend/user/pages/PersonalPage/PersonalPage';
-import { EMAIL, NAME, PERSONAL } from '@lib/frontend/user/user.constants';
-import { AUTH } from '@lib/shared/auth/auth.constants';
+import { EMAIL, NAME, PERSONAL, PHONE } from '@lib/frontend/user/user.constants';
+import { AUTH, USERNAME_METHOD } from '@lib/shared/auth/auth.constants';
 import { CORE } from '@lib/shared/core/core.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
 import { STYLE } from '@lib/shared/style/style.constants';
@@ -39,22 +39,31 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
         ...appRoutes,
 
         {
-          element: <AccountPage />,
           isProtectable: true,
           ns: [ACCOUNT, BILLING, SETTINGS, USER],
           pathname: ACCOUNT,
           routes: [
             {
+              element: <AccountPage />,
+              pathname: '/',
+            },
+            {
               element: <PersonalPage />,
+              header: { previous: ACCOUNT },
               pathname: PERSONAL,
+              title: ({ t }) => t('account:labels.personal'),
             },
             {
               element: <PaymentPage />,
+              header: { previous: ACCOUNT },
               pathname: PAYMENT,
+              title: ({ t }) => t('billing:labels.payment'),
             },
             {
               element: <SettingsPage />,
+              header: { previous: ACCOUNT },
               pathname: SETTINGS,
+              title: ({ t }) => t('settings:labels.settings'),
             },
           ],
         },
@@ -76,9 +85,26 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                 },
 
                 {
-                  element: <SignInPage mode={SIGN_IN_FORM_MODE.UPDATE} />,
+                  element: (
+                    <SignInPage
+                      method={USERNAME_METHOD.EMAIL}
+                      mode={SIGN_IN_FORM_MODE.UPDATE}
+                    />
+                  ),
                   ns: [AUTH, USER],
                   pathname: EMAIL,
+                  title: ({ t }) => t('core:labels.edit', { value: t('user:labels.email') }),
+                },
+
+                {
+                  element: (
+                    <SignInPage
+                      method={USERNAME_METHOD.PHONE}
+                      mode={SIGN_IN_FORM_MODE.UPDATE}
+                    />
+                  ),
+                  ns: [AUTH, USER],
+                  pathname: PHONE,
                   title: ({ t }) => t('core:labels.edit', { value: t('user:labels.email') }),
                 },
               ],

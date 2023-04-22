@@ -1,3 +1,4 @@
+import type { UsernameMethodModel } from '@lib/shared/auth/auth.models';
 import type { OtpModel } from '@lib/shared/auth/resources/Otp/Otp.models';
 import type {
   EntityResourceDataModel,
@@ -11,7 +12,9 @@ export interface SignInModel {
   user?: EntityResourcePartialModel<UserModel>;
 }
 
-export interface SignInFormModel extends EntityResourceDataModel<OtpModel> {}
+export interface SignInFormModel extends EntityResourceDataModel<OtpModel> {
+  method: UsernameMethodModel;
+}
 
 export interface SignInTokenModel {
   _id: string;

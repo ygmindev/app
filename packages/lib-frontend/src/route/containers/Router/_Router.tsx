@@ -16,10 +16,10 @@ export const _Router: FCModel<_RouterPropsModel> = ({ depth = 1, routes }) => {
       <_Routes
         key={key}
         location={location}>
-        {routes.map(({ element, isIndex, pathname }) => (
+        {routes.map(({ element, pathname }) => (
           <_Route
             element={element}
-            index={isIndex}
+            index={pathname === '/'}
             key={pathname}
             path={pathname}
           />

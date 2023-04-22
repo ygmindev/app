@@ -1,5 +1,6 @@
 import type {
   Constructor,
+  Get,
   Merge,
   OptionalKeysOf,
   PartialDeep,
@@ -7,6 +8,7 @@ import type {
   RequiredKeysOf,
   TupleToUnion,
   UnionToIntersection,
+  ValueOf,
 } from 'type-fest';
 
 export interface ConstructorModel<TType = object> extends Constructor<TType> {}
@@ -46,3 +48,14 @@ export type OverrideModel<TType, TOverride> = Merge<TType, TOverride>;
 export type RequiredKeysModel<TType> = RequiredKeysOf<TType & object>;
 
 export type OptionalKeysModel<TType> = OptionalKeysOf<TType & object>;
+
+export type ValuesModel<TType> = ValueOf<TType>;
+
+export type GetModel<TType extends object, TKey extends DeepKeyModel<TType>> = Get<TType, TKey>;
+
+export type DeepKeyModel<TType extends object> = {
+  [TKey in keyof RequiredModel<TType> &
+    (string | number)]: RequiredModel<TType>[TKey] extends object
+    ? `${TKey}` | `${TKey}.${DeepKeyModel<RequiredModel<TType>[TKey]>}`
+    : `${TKey}`;
+}[keyof RequiredModel<TType> & (string | number)];

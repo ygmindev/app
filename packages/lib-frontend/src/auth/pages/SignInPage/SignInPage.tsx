@@ -3,8 +3,11 @@ import type { SignInPagePropsModel } from '@lib/frontend/auth/pages/SignInPage/S
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayout';
 
-export const SignInPage: SFCModel<SignInPagePropsModel> = ({ mode, testID }) => (
+export const SignInPage: SFCModel<SignInPagePropsModel> = ({ method, mode, testID }) => (
   <CenterLayout testID={testID}>
-    <SignInForm mode={mode} />
+    <SignInForm
+      method={method}
+      mode={mode}
+    />
   </CenterLayout>
 );

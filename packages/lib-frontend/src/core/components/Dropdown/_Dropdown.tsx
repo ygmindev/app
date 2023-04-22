@@ -46,6 +46,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
                 fn: ({ state }) => {
                   state.styles.popper.width = `${state.rects.reference.width}px`;
                 },
+                name: 'computeWidth',
                 phase: 'beforeWrite',
                 requires: ['computeStyles'],
               },

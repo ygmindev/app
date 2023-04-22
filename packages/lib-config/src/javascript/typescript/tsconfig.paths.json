@@ -4,6 +4,9 @@
     "baseUrl": "../../../../../",
     "outDir": "../../../../../dist/out-tsc",
     "paths": {
+      "redux-persist/integration/*": [
+        "node_modules/redux-persist/types/integration/*"
+      ],
       "@app/native/*": [
         "packages/app-native/src/*"
       ],

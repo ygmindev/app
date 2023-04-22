@@ -1,12 +1,12 @@
 import { themeConfig } from '@lib/config/style/theme/configs/theme.config';
-import { useBrightness } from '@lib/frontend/style/hooks/useBrightness/useBrightness';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import type { UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
 import type { ThemeColorModel } from '@lib/frontend/style/style.models';
 import { palette } from '@lib/frontend/style/utils/palette/palette';
 import { useMemo } from 'react';
 
 export const useTheme = (): UseThemeModel => {
-  const [brightness, _] = useBrightness();
+  const brightness = useStore((state) => state.style.brightness);
   return useMemo<UseThemeModel>(
     () => ({
       ...themeConfig,

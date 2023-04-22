@@ -25,7 +25,7 @@ export const _JwtService: _JwtServiceModel = {
     return {
       _id: decoded.uid,
       claims: {
-        ...(decoded.additionalClaims || {}),
+        ...(decoded.additionalClaims ?? {}),
         ...pick(decoded, SIGN_IN_TOKEN_CLAIM_FIELDS),
       },
     };

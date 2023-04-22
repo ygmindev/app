@@ -26,7 +26,7 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
       anchor,
       direction,
       isFullWidth,
-      isSearchable,
+      maxHeight,
       maxWidth,
       onChange,
       onClose,
@@ -61,9 +61,9 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
 
     const _handleToggle = (value?: boolean): void => {
       Object.values(subMenuRefs).forEach((v) => v.current?.toggle(false));
-      const _value = value === undefined ? !isOpen : value;
-      !_value && onClose && onClose();
-      isOpenSet(!!_value);
+      const _isOpen = value === undefined ? !isOpen : value;
+      !_isOpen && onClose && onClose();
+      isOpenSet(!!_isOpen);
     };
 
     const _handlePressOption = async ({
@@ -91,10 +91,6 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
     const _children = (
       <Wrapper spacing={THEME_SIZE_MORE.SMALL}>
         {topElement}
-
-        {/* {isSearchable && <SearchField isAutoFocus />} */}
-
-        {/* TODO: searchable */}
 
         {options.length ? (
           options.map(
@@ -160,6 +156,7 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
         direction={direction}
         isFullWidth={isFullWidth}
         isOpen={isOpen}
+        maxHeight={maxHeight}
         onClose={() => _handleToggle(false)}
         style={styles}
         width={width}>

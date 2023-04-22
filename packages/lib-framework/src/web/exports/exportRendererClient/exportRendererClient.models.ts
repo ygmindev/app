@@ -1,10 +1,8 @@
 import type { _ExportRendererClientModel } from '@lib/framework/web/exports/exportRendererClient/_exportRendererClient.models';
-import type { LocaleParamsModel } from '@lib/frontend/locale/locale.models';
-import type { InitialStateModel } from '@lib/shared/root/root.models';
+import type { RootContextModel } from '@lib/frontend/root/root.models';
 
 export interface ExportRenderClientParamsModel {
-  initialState?: InitialStateModel;
-  locale?: LocaleParamsModel;
+  context?: RootContextModel;
   pageProps?: object;
 }
 

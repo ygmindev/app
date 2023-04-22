@@ -5,9 +5,7 @@ import type { LocaleProviderPropsModel } from '@lib/frontend/locale/providers/Lo
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const LocaleProvider = composeComponent<LocaleProviderPropsModel, _LocaleProviderPropsModel>(
-  {
-    Component: _LocaleProvider,
-  },
+  { Component: _LocaleProvider },
 );
 
 process.env.APP_DEBUG && (LocaleProvider.displayName = variableName(() => LocaleProvider));

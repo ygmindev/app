@@ -1,1 +1,1 @@
-export const DROPDOWN_MAX_HEIGHT = 400;
+export const DROPDOWN_MAX_HEIGHT = 250;

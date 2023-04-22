@@ -6,13 +6,7 @@ import { Root } from '@lib/frontend/root/containers/Root/Root';
 export const exportRendererServer = (): ExportRendererServerModel =>
   _exportRendererServer({
     publicDir: webConfig.publicDir,
-    render: ({ children, initialState, locale, route }) => (
-      <Root
-        initialState={initialState}
-        locale={locale}
-        route={route}>
-        {children}
-      </Root>
-    ),
+    render: ({ children, context }) => <Root context={context}>{children}</Root>,
     rootId: webConfig.rootId,
+    ssrContextKeys: webConfig.ssrContextKeys,
   });

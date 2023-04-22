@@ -7,24 +7,32 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_TYPE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { interleave } from '@lib/shared/core/utils/interleave/interleave';
-import type { ReactNode } from 'react';
-import { Children } from 'react';
+import { uid } from '@lib/shared/core/utils/uid/uid';
+import type { ReactElement } from 'react';
+import { Children, cloneElement } from 'react';
 
 export const LineGroup: SFCModel<LineGroupPropsModel> = ({ children, testID, title, ...props }) => {
   const { styles } = useStyles({ props });
   return (
     <Wrapper
-      spacing
+      border
+      pHorizontal={THEME_SIZE.SMALL}
+      round
       style={styles}
       testID={testID}>
-      {title && <Text type={FONT_TYPE.HEADLINE}>{title}</Text>}
-
-      <Wrapper
-        border
-        pHorizontal={THEME_SIZE.SMALL}
-        round>
-        {interleave<ReactNode>({ element: <Divider />, values: Children.toArray(children) || [] })}
-      </Wrapper>
+      {interleave<ReactElement>({
+        element: <Divider />,
+        values: [
+          title && (
+            <Text
+              p
+              type={FONT_TYPE.HEADLINE}>
+              {title}
+            </Text>
+          ),
+          ...((Children.toArray(children) as Array<ReactElement>) || []),
+        ].filter(Boolean) as Array<ReactElement>,
+      }).map((child) => cloneElement(child, { key: uid() }))}
     </Wrapper>
   );
 };

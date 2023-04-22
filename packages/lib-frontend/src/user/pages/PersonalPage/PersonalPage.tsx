@@ -13,10 +13,9 @@ import { TranslatableText } from '@lib/frontend/locale/components/TranslatableTe
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
-import { FONT_TYPE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
-import { PERSONAL_PAGE_FIELDS } from '@lib/frontend/user/pages/PersonalPage/PersonalPage.constants';
+import { PERSONAL_FIELDS } from '@lib/frontend/user/pages/PersonalPage/PersonalPage.constants';
 import type { PersonalPagePropsModel } from '@lib/frontend/user/pages/PersonalPage/PersonalPage.models';
 import { PERSONAL } from '@lib/frontend/user/user.constants';
 import map from 'lodash/map';
@@ -33,32 +32,35 @@ export const PersonalPage: SFCModel<PersonalPagePropsModel> = ({ testID, ...prop
       testID={testID}>
       <LineGroup title={t('account:labels.personal')}>
         {currentUser &&
-          map(PERSONAL_PAGE_FIELDS, ({ icon, id, label, value }) => (
-            <LineItem
-              key={id}
-              onPress={() => push({ pathname: `${FORM}/${PERSONAL}/${id}` })}
-              rightElement={(isActive) => (
-                <Button
-                  elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
-                  icon="chevronRight"
-                  type={BUTTON_TYPE.TRANSPARENT}
-                />
-              )}>
-              <Wrapper spacing={THEME_SIZE.SMALL}>
-                <Wrapper isRowAlign>
-                  {icon && <Icon icon={icon} />}
+          map(PERSONAL_FIELDS, ({ icon, id, label, value }) => {
+            const _value = value(currentUser);
+            return (
+              <LineItem
+                key={id}
+                onPress={() => push({ pathname: `${FORM}/${PERSONAL}/${id}` })}
+                rightElement={(isActive) => (
+                  <Button
+                    elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
+                    icon="chevronRight"
+                    type={BUTTON_TYPE.TRANSPARENT}
+                  />
+                )}>
+                <Wrapper spacing={THEME_SIZE.SMALL}>
+                  <Wrapper isRowAlign>
+                    {icon && <Icon icon={icon} />}
 
-                  <TranslatableText type={FONT_TYPE.TITLE}>{label}</TranslatableText>
+                    <TranslatableText isBold>{label}</TranslatableText>
+                  </Wrapper>
+
+                  <Text
+                    colorRole={_value ? undefined : THEME_ROLE.MUTED}
+                    isEllipsis>
+                    {_value || t('core:labels.notSet')}
+                  </Text>
                 </Wrapper>
-
-                <Text
-                  fontSize={THEME_SIZE_MORE.LARGE}
-                  isEllipsis>
-                  {value(currentUser)}
-                </Text>
-              </Wrapper>
-            </LineItem>
-          ))}
+              </LineItem>
+            );
+          })}
       </LineGroup>
     </MainLayout>
   );

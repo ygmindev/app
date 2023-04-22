@@ -1,4 +1,3 @@
-import type { FCModel } from '@lib/frontend/core/core.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { lazy } from '@lib/frontend/core/utils/lazy/lazy';
 import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
@@ -21,8 +20,8 @@ export const _RouteProvider = composeComponent<RouteProviderPropsModel, _RoutePr
   Component: isSsr ? _RouteProviderServer : _RouteProviderClient,
 });
 
-export const RouteProvider: FCModel<RouteProviderPropsModel> = ({ children, value }) => (
-  <_RouteProvider value={value}>{children}</_RouteProvider>
-);
+export const RouteProvider = composeComponent<RouteProviderPropsModel, _RouteProviderPropsModel>({
+  Component: _RouteProvider,
+});
 
 process.env.APP_DEBUG && (RouteProvider.displayName = variableName(() => RouteProvider));

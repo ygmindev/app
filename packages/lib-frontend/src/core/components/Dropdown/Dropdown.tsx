@@ -11,7 +11,16 @@ import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 export const Dropdown = composeComponent<DropdownPropsModel, _DropdownPropsModel>({
   Component: _Dropdown,
 
-  getProps: ({ anchor, children, direction, isFullWidth, isOpen, onClose, width }) => ({
+  getProps: ({
+    anchor,
+    children,
+    direction,
+    isFullWidth,
+    isOpen,
+    maxHeight = DROPDOWN_MAX_HEIGHT,
+    onClose,
+    width,
+  }) => ({
     anchor,
     children: (
       <Wrapper
@@ -24,7 +33,7 @@ export const Dropdown = composeComponent<DropdownPropsModel, _DropdownPropsModel
         <Wrapper
           grow
           isVerticalScrollable
-          maxHeight={DROPDOWN_MAX_HEIGHT}
+          maxHeight={maxHeight}
           p={THEME_SIZE_MORE.SMALL}>
           {children}
         </Wrapper>

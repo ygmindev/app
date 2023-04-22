@@ -59,7 +59,6 @@ export const useSignInResource = (): UseSignInResourceModel => {
 
     signOut: async () => {
       await signOut();
-      actions?.user.currentUserSet(null);
       reset();
     },
 

@@ -10,4 +10,6 @@ export const webConfig: WebConfigParamsModel = {
   publicDir: 'assets',
 
   rootId: 'root',
+
+  ssrContextKeys: ['state.initialState'],
 };

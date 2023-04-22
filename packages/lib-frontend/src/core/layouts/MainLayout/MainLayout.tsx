@@ -22,6 +22,7 @@ export const MainLayout: SFCModel<MainLayoutPropsModel> = ({
     <Wrapper
       grow
       isFullWidth={_isFullWidth}
+      p
       style={styles}>
       <Wrapper
         m={isCenter ? 'auto' : undefined}

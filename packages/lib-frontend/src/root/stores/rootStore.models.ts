@@ -19,7 +19,8 @@ import type {
   RouteActionsParamsModel,
   RouteStateModel,
 } from '@lib/frontend/route/stores/routeStore/routeStore.models';
-import type { ActionsModel } from '@lib/frontend/state/state.models';
+import type { NestedActionsModel } from '@lib/frontend/state/state.models';
+import type { StoreParamsModel } from '@lib/frontend/state/utils/Store/Store.models';
 import type {
   StyleActionsParamsModel,
   StyleStateModel,
@@ -55,6 +56,11 @@ export interface RootActionsParamsModel {
   [USER]: UserActionsParamsModel;
 }
 
-export type RootActionsModel = {
-  [TKey in keyof RootActionsParamsModel]: ActionsModel<RootActionsParamsModel[TKey]>;
-};
+export interface RootActionsModel
+  extends NestedActionsModel<Array<keyof RootActionsParamsModel>, RootActionsParamsModel> {}
+
+export interface RootStateContextModel
+  extends Omit<
+    StoreParamsModel<Array<keyof RootStateModel>, RootStateModel, RootActionsParamsModel>,
+    'reducers'
+  > {}

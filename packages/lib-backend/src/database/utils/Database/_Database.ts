@@ -33,7 +33,7 @@ export abstract class _Database implements DatabaseModel {
 
   async initialize(): Promise<void> {
     this._entityManager =
-      this._entityManager || (await MikroORM.init<MongoDriver>(_databaseConfig(this._params))).em;
+      this._entityManager ?? (await MikroORM.init<MongoDriver>(_databaseConfig(this._params))).em;
   }
 
   _getEntityManager = (): EntityManager => {
@@ -83,14 +83,14 @@ export abstract class _Database implements DatabaseModel {
                   ...(options
                     ? [
                         options.project && { $project: options.project },
-                        ...(options.aggregate || []),
+                        ...(options.aggregate ?? []),
                       ]
                     : []),
                 ].filter(Boolean) as unknown as Document[],
               )
               .next()
           : collection.findOne(_filter, options && { projection: options.project }))) as TType;
-        return { result: result || undefined };
+        return { result: result ?? undefined };
       },
 
       getConnection: async ({ filter, pagination }) => {
@@ -101,7 +101,7 @@ export abstract class _Database implements DatabaseModel {
           input: { filter: _filter },
           pagination,
         });
-        return { result: result || undefined };
+        return { result: result ?? undefined };
       },
 
       getMany: async ({ filter, options }) => {
@@ -115,9 +115,9 @@ export abstract class _Database implements DatabaseModel {
                   ...(options
                     ? [
                         options.project && { $project: options.project },
-                        options.take && { $limit: options.take + (options.skip || 0) },
+                        options.take && { $limit: options.take + (options.skip ?? 0) },
                         options.skip && { $skip: options.skip },
-                        ...(options.aggregate || []),
+                        ...(options.aggregate ?? []),
                       ]
                     : []),
                 ].filter(Boolean) as unknown as Document[],
@@ -129,7 +129,7 @@ export abstract class _Database implements DatabaseModel {
                 options && { limit: options.take, projection: options.project, skip: options.skip },
               )
               .toArray())) as Array<TType>;
-        return { result: result || undefined };
+        return { result: result ?? undefined };
       },
 
       remove: async ({ filter }) => {
@@ -148,7 +148,7 @@ export abstract class _Database implements DatabaseModel {
             const _key = key as string & keyof UpdateModel<TType>;
             if (!_key.startsWith('$')) {
               _update['$set'] = {
-                ...(_update['$set'] || {}),
+                ...(_update['$set'] ?? {}),
                 [_key]: _update[_key],
               } as PartialDeepModel<EntityResourceDataModel<TType>>;
               delete _update[_key];

@@ -7,13 +7,12 @@ import type {
 import { renderPage } from 'vite-plugin-ssr/server';
 
 export const _renderPage = async ({
-  locale,
-  url,
+  context,
 }: _RenderPageParamsModel): Promise<_RenderPageModel> => {
   const { errorWhileRendering, httpResponse, redirectTo } = await renderPage({
-    locale: { i18n: locale?.i18n, lang: locale?.language },
+    context,
     redirectTo: undefined,
-    urlOriginal: url,
+    urlOriginal: context?.route?.location?.pathname,
   });
   return {
     error: errorWhileRendering as Error,

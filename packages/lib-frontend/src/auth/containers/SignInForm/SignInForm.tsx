@@ -11,7 +11,7 @@ import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import type { SignInFormModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 
-export const SignInForm: SFCModel<SignInFormPropsModel> = ({ mode, testID, ...props }) => {
+export const SignInForm: SFCModel<SignInFormPropsModel> = ({ method, mode, testID, ...props }) => {
   const { styles } = useStyles({ props });
   const { replace } = useRouter();
   const { signIn, usernameUpdate } = useSignInResource();
@@ -25,7 +25,12 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({ mode, testID, ...pr
       onSuccess={async () => replace({ pathname: '/' })}
       steps={[
         {
-          element: <UsernameForm isCheckIfNotExists={mode === SIGN_IN_FORM_MODE.UPDATE} />,
+          element: (
+            <UsernameForm
+              isCheckIfNotExists={mode === SIGN_IN_FORM_MODE.UPDATE}
+              method={method}
+            />
+          ),
           id: 'username',
         },
         {

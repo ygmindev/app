@@ -1,45 +1,47 @@
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { LineGroup } from '@lib/frontend/core/components/LineGroup/LineGroup';
+import { LineItem } from '@lib/frontend/core/components/LineItem/LineItem';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { NavigationLayout } from '@lib/frontend/core/layouts/NavigationLayout/NavigationLayout';
+import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
+import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { ACCOUNT_NAVBAR_OPTIONS } from '@lib/frontend/user/pages/AccountPage/AccountPage.constants';
+import { ACCOUNT_OPTIONS } from '@lib/frontend/user/pages/AccountPage/AccountPage.constants';
 import type { AccountPagePropsModel } from '@lib/frontend/user/pages/AccountPage/AccountPage.models';
 import { ACCOUNT } from '@lib/shared/user/user.constants';
-import { useEffect, useMemo } from 'react';
 
-export const AccountPage: SFCModel<AccountPagePropsModel> = ({ children, testID, ...props }) => {
+export const AccountPage: SFCModel<AccountPagePropsModel> = ({ testID, ...props }) => {
   const { t } = useTranslation();
   const { styles } = useStyles({ props });
-  const { isActive, push, replace } = useRouter();
-
-  const _value = useMemo(
-    () => ACCOUNT_NAVBAR_OPTIONS.find(({ id }) => isActive({ pathname: `/${ACCOUNT}/${id}` })),
-    [isActive],
-  );
-
-  useEffect(() => {
-    !_value && replace({ pathname: `${ACCOUNT}/${ACCOUNT_NAVBAR_OPTIONS[0].id}` });
-  }, [_value]);
-
+  const { push } = useRouter();
   return (
-    <Wrapper
-      grow
+    <MainLayout
+      isHorizontalCenter
       style={styles}
       testID={testID}>
-      <NavigationLayout
-        isHorizontal
-        onChange={(value) => push({ pathname: `/${ACCOUNT}/${value}` })}
-        options={ACCOUNT_NAVBAR_OPTIONS}
-        title={t('account:labels.account')}
-        value={_value?.id}>
-        <Wrapper
-          grow
-          spacing>
-          {children}
-        </Wrapper>
-      </NavigationLayout>
-    </Wrapper>
+      <LineGroup
+        style={styles}
+        testID={testID}
+        title={t('account:labels.account')}>
+        {ACCOUNT_OPTIONS.map(({ icon, id, label }) => (
+          <LineItem
+            icon={icon}
+            key={id}
+            onPress={() => push({ pathname: `${ACCOUNT}/${id}` })}
+            rightElement={(isActive) => (
+              <Button
+                elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
+                icon="chevronRight"
+                type={BUTTON_TYPE.TRANSPARENT}
+              />
+            )}>
+            {label && <TranslatableText>{label}</TranslatableText>}
+          </LineItem>
+        ))}
+      </LineGroup>
+    </MainLayout>
   );
 };

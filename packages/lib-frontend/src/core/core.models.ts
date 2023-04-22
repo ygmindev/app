@@ -25,6 +25,8 @@ export type SFCPropsModel<TProps = object, TStyle extends StyleModel = ViewStyle
   SFCModel<TProps, TStyle>
 >;
 
+export type FCPropsModel<TProps = object> = PropsModel<FCModel<TProps>>;
+
 export type RSFCPropsModel<
   TType = undefined,
   TProps = object,

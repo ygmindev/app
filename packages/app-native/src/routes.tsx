@@ -8,7 +8,6 @@ export const routes: Array<RouteModel> = [
     routes: [
       {
         element: <Button>test 2</Button>,
-        isIndex: true,
         pathname: '/test',
       },
     ],

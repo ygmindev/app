@@ -13,6 +13,7 @@ export const bundleConfig: BundleConfigParamsModel = merge({
   values: [
     {
       babelConfig: {
+        compact: process.env.NODE_ENV === 'production',
         plugins: ['@emotion', ['transform-react-remove-prop-types', { removeImport: true }]],
       },
 
@@ -29,6 +30,7 @@ export const bundleConfig: BundleConfigParamsModel = merge({
           'moti',
           'react-native-!(codegen|gradle-plugin)',
           'react-native',
+          'redux-persist',
         ],
         root: fromModules(),
       }),

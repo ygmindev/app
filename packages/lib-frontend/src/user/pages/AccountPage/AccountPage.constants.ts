@@ -4,7 +4,7 @@ import { SETTINGS } from '@lib/frontend/settings/settings.constants';
 import { PERSONAL } from '@lib/frontend/user/user.constants';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
 
-export const ACCOUNT_NAVBAR_OPTIONS: Array<TranslatableOptionModel> = withId([
+export const ACCOUNT_OPTIONS: Array<TranslatableOptionModel> = withId([
   {
     icon: 'person',
     id: PERSONAL,

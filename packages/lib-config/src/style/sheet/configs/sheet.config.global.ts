@@ -1,20 +1,23 @@
 import { webConfig } from '@lib/config/framework/web/configs/web.config';
 import type { SheetConfigParamsModel } from '@lib/config/style/sheet/sheet.models';
+import FontAwesome from 'react-native-vector-icons/Fonts/FontAwesome.ttf';
+import Ionicons from 'react-native-vector-icons/Fonts/Ionicons.ttf';
+import MaterialIcons from 'react-native-vector-icons/Fonts/MaterialIcons.ttf';
 
 export const sheetConfig: SheetConfigParamsModel = (theme) => `
   @font-face {
     font-family: 'Ionicons';
-    src: url("/fonts/Ionicons.ttf") format("truetype");
+    src: url(${Ionicons}) format("truetype");
   }
 
   @font-face {
     font-family: 'FontAwesome';
-    src: url("/fonts/FontAwesome.ttf") format("truetype");
+    src: url("${FontAwesome}") format("truetype");
   }
 
   @font-face {
     font-family: 'MaterialIcons';
-    src: url("/fonts/MaterialIcons.ttf") format("truetype");
+    src: url("${MaterialIcons}") format("truetype");
   }
 
   html {
@@ -46,8 +49,8 @@ export const sheetConfig: SheetConfigParamsModel = (theme) => `
   }
 
   input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none v;
-    margin: 0 !important!important
+    -webkit-appearance: none;
+    margin: 0 !important;
   }
 
   input:-webkit-autofill {

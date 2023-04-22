@@ -15,6 +15,7 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import type { PluginOption, UserConfig } from 'vite';
 import { searchForWorkspaceRoot } from 'vite';
 import { checker } from 'vite-plugin-checker';
+import circleDependency from 'vite-plugin-circular-dependency';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export const _bundleConfig = ({
@@ -52,7 +53,7 @@ export const _bundleConfig = ({
   optimizeDeps: {
     esbuildOptions: {
       keepNames: true,
-      loader: { '.js': 'tsx' },
+
       plugins: [
         esbuildDecorators({ tsconfig: fromWorking('tsconfig.json') }),
 
@@ -81,6 +82,8 @@ export const _bundleConfig = ({
     babelConfig && babel(babelConfig as RollupBabelInputPluginOptions),
 
     process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && visualizer(),
+
+    circleDependency({}),
   ].filter(Boolean) as Array<PluginOption>,
 
   resolve: {

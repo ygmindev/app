@@ -6,7 +6,6 @@ export const routes: Array<RouteModel> = getRoutes({
   appRoutes: [
     {
       element: <LibraryPage />,
-      isIndex: true,
       pathname: '/:id',
     },
   ],

@@ -4,7 +4,13 @@ import type {
   _ExportRendererServerParamsModel,
 } from '@lib/framework/web/exports/exportRendererServer/_exportRendererServer.models';
 import type { FCModel } from '@lib/frontend/core/core.models';
-import type { RouteContextModel } from '@lib/frontend/route/route.models';
+import type { RootContextModel } from '@lib/frontend/root/root.models';
+import { ROOT_REDUCERS } from '@lib/frontend/root/stores/rootStore.constants';
+import type { RootStateContextModel } from '@lib/frontend/root/stores/rootStore.models';
+import { Store } from '@lib/frontend/state/utils/Store/Store';
+import { pick } from '@lib/shared/core/utils/pick/pick';
+import { LOCALE } from '@lib/shared/locale/locale.constants';
+import { STATE } from '@lib/shared/state/state.constants';
 import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
 import { AppRegistry } from 'react-native-web';
 import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vite-plugin-ssr/server';
@@ -13,6 +19,7 @@ export const _exportRendererServer = ({
   publicDir,
   render,
   rootId,
+  ssrContextKeys,
 }: _ExportRendererServerParamsModel): _ExportRendererServerModel => ({
   onBeforeRender: async () => {
     return {
@@ -20,17 +27,16 @@ export const _exportRendererServer = ({
     };
   },
 
-  passToClient: ['initialState', 'locale', 'pageProps'],
+  passToClient: ['pageProps', 'context'],
 
-  render: async ({ Page, locale, pageProps, urlPathname }) => {
-    const context: RouteContextModel = {};
-    const App: FCModel = () =>
-      render({
-        children: <Page {...pageProps} />,
-        initialState: {},
-        locale,
-        route: urlPathname ? { context, location: { pathname: urlPathname } } : undefined,
-      });
+  render: async ({ Page, context, pageProps }) => {
+    const _store = new Store({ cookies: context?.state?.cookies, reducers: ROOT_REDUCERS });
+    const _context: RootContextModel = {
+      ...context,
+      [STATE]: { initialState: await _store.getState() } as RootStateContextModel,
+    };
+
+    const App: FCModel = () => render({ children: <Page {...pageProps} />, context: _context });
 
     AppRegistry.registerComponent('App', () => App);
     const { element, getStyleElement } = AppRegistry.getApplication('App', {});
@@ -47,7 +53,7 @@ export const _exportRendererServer = ({
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width" />
           <meta name="description" content="${''}" />
-          <link rel="icon" type="image/svg+xml" href="${publicDir}/favico/favico.svg" />
+          <link rel="icon" type="image/svg+xml" href="/${publicDir}/favico/favico.svg" />
           <title>${''}</title>
           <style>${dangerouslySkipEscape(styleSheet)}</style>
         </head>
@@ -58,14 +64,19 @@ export const _exportRendererServer = ({
     return {
       documentHtml,
 
-      pageContext: async () => ({
-        enableEagerStreaming: true,
-        locale: {
-          lang: locale?.lang,
-          store: locale?.i18n && getLocaleStoreFromI18n({ i18n: locale?.i18n }),
-        },
-        redirectTo: context.redirect,
-      }),
+      pageContext: async () => {
+        const _pageContext: RootContextModel = {
+          ...context,
+          [LOCALE]: {
+            store: context?.locale?.i18n && getLocaleStoreFromI18n({ i18n: context.locale.i18n }),
+          },
+        };
+        return {
+          context: ssrContextKeys && pick({ keys: ssrContextKeys, value: _pageContext }),
+          enableEagerStreaming: true,
+          redirectTo: _pageContext.route?.redirect,
+        };
+      },
     };
   },
 });

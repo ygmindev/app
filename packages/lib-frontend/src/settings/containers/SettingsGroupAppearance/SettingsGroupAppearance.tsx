@@ -6,11 +6,11 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import type { SettingsGroupAppearancePropsModel } from '@lib/frontend/settings/containers/SettingsGroupAppearance/SettingsGroupAppearance.models';
-import { useBrightness } from '@lib/frontend/style/hooks/useBrightness/useBrightness';
+import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import type { StyleBrightnessStateModel } from '@lib/frontend/style/stores/styleStore/styleStore.models';
 import { STYLE_BRIGHTNESS, THEME_SIZE } from '@lib/frontend/style/style.constants';
-import { DEVICE } from '@lib/shared/user/user.constants';
 
 export const SettingsGroupAppearance: SFCModel<SettingsGroupAppearancePropsModel> = ({
   testID,
@@ -18,7 +18,8 @@ export const SettingsGroupAppearance: SFCModel<SettingsGroupAppearancePropsModel
 }) => {
   const { t } = useTranslation();
   const { styles } = useStyles({ props });
-  const [brightness, brightnessSet] = useBrightness();
+  const actions = useActions();
+  const brightness = useStore((state) => state.style.brightness);
   return (
     <LineGroup
       style={styles}
@@ -28,7 +29,7 @@ export const SettingsGroupAppearance: SFCModel<SettingsGroupAppearancePropsModel
         rightElement={() => (
           <Wrapper spacing={THEME_SIZE.SMALL}>
             <RadioField<StyleBrightnessStateModel>
-              onChange={brightnessSet}
+              onChange={(value) => actions?.style.brightnessSet(value)}
               options={[
                 {
                   icon: 'light',
@@ -40,7 +41,6 @@ export const SettingsGroupAppearance: SFCModel<SettingsGroupAppearancePropsModel
                   id: STYLE_BRIGHTNESS.DARK,
                   label: ({ t }) => t('style:labels.dark'),
                 },
-                { icon: 'device', id: DEVICE, label: ({ t }) => t('account:labels.device') },
               ]}
               value={brightness}
             />

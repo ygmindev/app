@@ -9,8 +9,8 @@ import { ObjectId } from '@mikro-orm/mongodb';
 export class EmbeddedResource extends EntityResource implements EmbeddedResourceModel {
   @withHook({ type: HOOK_TYPE.BEFORE_CREATE })
   async beforeCreate(): Promise<void> {
-    this._id = this._id || (new ObjectId() as unknown as string);
-    this.created = this.created || new Date();
+    this._id = this._id ?? (new ObjectId() as unknown as string);
+    this.created = this.created ?? new Date();
     return super.beforeCreate();
   }
 }

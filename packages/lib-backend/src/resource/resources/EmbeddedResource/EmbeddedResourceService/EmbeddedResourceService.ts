@@ -156,7 +156,8 @@ export const EmbeddedResourceService = <
         this.decorators.beforeGetMany ? await this.decorators.beforeGetMany({ input }) : input,
       );
       if (_input.root) {
-        const skip = _input.options?.skip || 0;
+        // TODO: || to ?? for all
+        const skip = _input.options?.skip ?? 0;
         const limit = _input.options?.take;
         const { result: rootResult } = await this._rootService.get({
           filter: _input.root,

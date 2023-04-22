@@ -16,11 +16,13 @@ export type MenuOptionModel<TType extends string = string> = TranslatableOptionM
 };
 
 export interface MenuPropsModel<TType extends string = string>
-  extends Pick<DropdownPropsModel, 'width' | 'maxWidth' | 'isFullWidth' | 'onClose' | 'direction'>,
+  extends Pick<
+      DropdownPropsModel,
+      'width' | 'maxWidth' | 'maxHeight' | 'isFullWidth' | 'onClose' | 'direction'
+    >,
     Omit<StringFieldPropsModel, 'id'>,
     RefPropsModel<MenuRefModel> {
   anchor(isOpen?: boolean): ReactElement<PressablePropsModel>;
-  isSearchable?: boolean;
   options: Array<MenuOptionModel<TType>>;
   renderOption?(option: TranslatableOptionModel): TranslatableTextModel;
   topElement?: ReactNode;

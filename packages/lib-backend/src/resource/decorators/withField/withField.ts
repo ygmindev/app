@@ -59,7 +59,7 @@ const _getColumn = <TType extends unknown>({
   return _Field({
     ..._options,
     nullable: isOptional,
-    onCreate: defaultValue || undefined,
+    onCreate: defaultValue ?? undefined,
   }) as PropertyDecorator;
 };
 

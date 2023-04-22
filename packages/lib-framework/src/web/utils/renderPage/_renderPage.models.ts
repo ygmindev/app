@@ -1,9 +1,6 @@
-import type { i18n } from 'i18next';
+import type { ExportRenderServerParamsModel } from '@lib/framework/web/exports/exportRendererServer/exportRendererServer.models';
 
-export interface _RenderPageParamsModel {
-  locale?: { i18n: i18n; language: string };
-  url: string;
-}
+export interface _RenderPageParamsModel extends ExportRenderServerParamsModel {}
 
 export interface _RenderPageModel {
   error?: Error;
