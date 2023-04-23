@@ -1,4 +1,5 @@
-export interface WithEntityParamsModel {
+export interface WithEntityParamsModel<TType> {
+  indices?: Array<Array<keyof TType>>;
   isAbstract?: boolean;
   isEmbedded?: boolean;
   isRepository?: boolean;

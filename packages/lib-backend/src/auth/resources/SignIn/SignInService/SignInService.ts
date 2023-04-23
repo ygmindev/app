@@ -7,6 +7,7 @@ import type { SignInFormModel, SignInModel } from '@lib/shared/auth/resources/Si
 import type { SignInServiceModel } from '@lib/shared/auth/resources/SignIn/SignInService/SignInService.models';
 import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { withInject } from '@lib/shared/core/decorators/withInject/withInject';
+import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
@@ -36,16 +37,15 @@ export class SignInService implements SignInServiceModel {
   }: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel>): Promise<
     OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>
   > {
-    if (form.username && form.otp) {
-      await this._otpService.verify({ otp: form.otp, username: form.username });
+    if (form.otp) {
+      const _form = cleanObject(form);
+      await this._otpService.verify(_form);
       delete (form as Partial<SignInFormModel>).otp;
 
-      let { result: user } = await this._userService.get({ filter: { email: form.username } });
+      let { result: user } = await this._userService.get({ filter: _form });
       let isNew;
       if (!user) {
-        const { result: created } = await this._userService.create({
-          form: { email: form.username },
-        });
+        const { result: created } = await this._userService.create({ form: _form });
         user = created;
         isNew = true;
       }
@@ -64,12 +64,13 @@ export class SignInService implements SignInServiceModel {
     { form }: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
-    if (form.username && form.otp) {
-      await this._otpService.verify({ otp: form.otp, username: form.username });
+    if (form.otp) {
+      const _form = cleanObject(form);
+      await this._otpService.verify(_form);
       const _id = context?.user?._id;
       const { result: user } = await this._userService.update({
         filter: { _id },
-        update: { email: form.username },
+        update: _form,
       });
       const signIn = await _createSignIn(user);
       return { result: signIn };

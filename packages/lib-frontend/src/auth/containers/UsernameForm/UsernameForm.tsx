@@ -9,11 +9,14 @@ import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayo
 import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
 import { FORM_FIELD_TYPE } from '@lib/frontend/form/containers/FormContainer/FormContainer.constants';
 import type { FormContainerFieldModel } from '@lib/frontend/form/containers/FormContainer/FormContainer.models';
+import { CountryField } from '@lib/frontend/locale/components/CountryField/CountryField';
+import { COUNTRY_FIELD_MIN_WIDTH } from '@lib/frontend/locale/components/CountryField/CountryField.constants';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { PhoneField } from '@lib/frontend/user/components/PhoneField/PhoneField';
 import { USERNAME_METHOD } from '@lib/shared/auth/auth.constants';
 import type { OtpModel } from '@lib/shared/auth/resources/Otp/Otp.models';
+import { pick } from '@lib/shared/core/utils/pick/pick';
 import type { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 
@@ -33,29 +36,33 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   const _handleSubmit = async (data: UsernameFormModel): Promise<OtpModel | null> => {
     onSubmit && (await onSubmit(data));
     const { result } = await (isCheckIfNotExists ? createIfNotExists : create)({
-      form: { username: data.username },
+      form: pick({ keys: ['countryCode', 'phone', 'email'], value: data }),
     });
     return result || null;
   };
 
-  const _field: Omit<FormContainerFieldModel, 'id'> | undefined = (() => {
+  const _fields: Array<FormContainerFieldModel> = (() => {
     switch (method) {
       case USERNAME_METHOD.EMAIL:
-        return {
-          field: FORM_FIELD_TYPE.TEXT_FIELD,
-          fieldProps: {
-            autoComplete: 'email',
-            icon: 'email',
-            isAutoFocus: true,
-            label: ({ t }) => t('user:labels.email'),
+        return [
+          {
+            field: FORM_FIELD_TYPE.TEXT_FIELD,
+            fieldProps: {
+              autoComplete: 'email',
+              icon: 'email',
+              isAutoFocus: true,
+              label: ({ t }) => t('user:labels.email'),
+            },
+            id: 'email',
           },
-        };
+        ];
       case USERNAME_METHOD.PHONE:
-        return {
-          render: (props) => <PhoneField {...props} />,
-        };
+        return [
+          { Component: CountryField, id: 'countryCode', width: COUNTRY_FIELD_MIN_WIDTH },
+          { Component: PhoneField, id: 'phone' },
+        ];
       default:
-        return undefined;
+        return [];
     }
   })();
 
@@ -72,12 +79,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
         onComplete={onComplete}
         onSubmit={_handleSubmit}
         onSuccess={onSuccess}
-        rows={[
-          {
-            fields: _field && [{ ..._field, id: 'username' } as FormContainerFieldModel],
-            id: 'username',
-          },
-        ]}
+        rows={[{ fields: _fields, id: 'username' }]}
         validators={USERNAME_FORM_VALIDATORS}
       />
     </CenterLayout>

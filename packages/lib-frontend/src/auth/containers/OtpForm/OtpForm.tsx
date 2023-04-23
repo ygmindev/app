@@ -71,14 +71,15 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
       style={styles}
       testID={testID}
       topElement={() =>
+        // TODO: handle phone
         data &&
-        data.username && (
+        data.email && (
           <Wrapper isCenter>
             <Trans
               components={[<Text isBold />]}
               i18nKey="messages.otpEnter"
               ns="auth"
-              params={{ value: data.username }}
+              params={{ value: data.email }}
             />
           </Wrapper>
         )

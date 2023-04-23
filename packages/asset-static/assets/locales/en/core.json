@@ -12,7 +12,8 @@
     "remove": "remove",
     "setAsPrimary": "set as primary",
     "submit": "submit",
-    "tryAgain": "try again"
+    "tryAgain": "try again",
+    "email": "labels.email"
   },
   "messages": {
     "confirmRemove": "Are you sure you want to remove {{value}}?",

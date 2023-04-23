@@ -12,6 +12,7 @@ import type { OtpServiceModel } from '@lib/shared/auth/resources/Otp/OtpService/
 import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { withInject } from '@lib/shared/core/decorators/withInject/withInject';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
+import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { randomInt } from '@lib/shared/crypto/utils/randomInt/randomInt';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
@@ -24,12 +25,13 @@ export class OtpService
   extends EntityResourceService<OtpModel, OtpFormModel>({
     afterCreate: async ({ output }) => {
       if (output.result) {
-        output.result &&
+        // email verification
+        output.result.email &&
           mail<{ otp: string }>({
             from: process.env.SERVER_EMAIL_USERNAME,
             params: { otp: output.result.otp },
             template: 'otp',
-            to: [output.result.username],
+            to: [output.result.email],
           });
       }
 
@@ -38,7 +40,7 @@ export class OtpService
 
     beforeCreate: async ({ input }) => {
       const service = Container.get(OtpService);
-      await service.remove({ filter: { username: input.form.username } });
+      await service.remove({ filter: cleanObject(input.form) });
       input.form.otp = process.env.SERVER_IS_OTP_STATIC
         ? OTP_STATIC
         : randomInt(OTP_LENGTH).toString();
@@ -57,7 +59,7 @@ export class OtpService
     OutputModel<RESOURCE_METHOD_TYPE.CREATE, OtpModel>
   > {
     const { result } = await this._userService.get({
-      filter: { email: form.username },
+      filter: form,
       options: { project: { _id: true } },
     });
     if (result) {
@@ -68,13 +70,13 @@ export class OtpService
 
   async verify(data: EntityResourceDataModel<OtpModel>): Promise<boolean> {
     const { result } = await this.get({
-      filter: { username: data.username },
+      filter: data,
       options: { project: { otp: true } },
     });
     if (!result || result.otp !== data.otp) {
       throw new UnauthorizedError();
     }
-    await this.remove({ filter: { username: data.username } });
+    await this.remove({ filter: data });
     return true;
   }
 }

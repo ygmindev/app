@@ -34,7 +34,7 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
   const [confirmModalIsOpen, confirmModalIsOpenSet] = useState<boolean>(false);
   const { styles } = useStyles({ props });
 
-  const { valueControlledSet, valueControlled } = useControlledValue<ElementStateModel>({
+  const { valueControlled, valueControlledSet } = useControlledValue<ElementStateModel>({
     defaultValue: ELEMENT_STATE.INACTIVE,
     onChange: onElementStateChange,
     value: elementState,

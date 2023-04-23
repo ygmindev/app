@@ -15,8 +15,7 @@ export const OTP_FORM_FIELDS: Array<FormContainerRowModel> = withId([
   {
     fields: [
       {
-        id: 'otp',
-        render: ({ elementState, error, handleSubmit, onChange, value }) => (
+        Component: ({ elementState, error, onChange, onSubmit, value }) => (
           <OtpField
             elementState={elementState}
             error={error}
@@ -25,12 +24,13 @@ export const OTP_FORM_FIELDS: Array<FormContainerRowModel> = withId([
               onChange && onChange(value);
               if (value.length === OTP_LENGTH) {
                 await sleep();
-                handleSubmit();
+                onSubmit && onSubmit(value);
               }
             }}
             value={value}
           />
         ),
+        id: 'otp',
       },
     ],
   },

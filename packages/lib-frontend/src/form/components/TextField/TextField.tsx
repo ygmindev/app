@@ -51,7 +51,7 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
     const _ref = useRef<TextFieldRefModel>(null);
     const { t } = useTranslation();
     const theme = useTheme();
-    const { valueControlledSet, valueControlled } = useControlledValue({
+    const { valueControlled, valueControlledSet } = useControlledValue({
       defaultValue,
       onChange,
       value,

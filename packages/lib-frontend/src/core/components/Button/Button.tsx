@@ -35,7 +35,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
 }) => {
   const theme = useTheme();
 
-  const { valueControlledSet, valueControlled } = useControlledValue<ElementStateModel>({
+  const { valueControlled, valueControlledSet } = useControlledValue<ElementStateModel>({
     defaultValue: ELEMENT_STATE.INACTIVE,
     onChange: onElementStateChange,
     value: elementState,

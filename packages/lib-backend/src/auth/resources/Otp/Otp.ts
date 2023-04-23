@@ -10,15 +10,22 @@ import { FIELD_TYPE } from '@lib/shared/form/form.constants';
 
 @withEntity({ name: `${OTP_RESOURCE_NAME}Form` })
 export class OtpForm implements OtpFormModel {
+  @withField({ isRepository: true })
+  countryCode?: string;
+
   @withField({ isRepository: true, isUnique: true })
-  username!: string;
+  phone?: string;
+
+  @withField({ isRepository: true, isUnique: true })
+  email?: string;
 }
 
-@withEntity({ isRepository: true, name: OTP_RESOURCE_NAME })
+@withEntity({
+  indices: [['email'], ['countryCode', 'phone']],
+  isRepository: true,
+  name: OTP_RESOURCE_NAME,
+})
 export class Otp extends EntityResource implements OtpModel {
-  @withField({ isRepository: true, isUnique: true })
-  username!: string;
-
   @withField({
     defaultValue: () => new Date(),
     expire: OTP_EXPIRATION_SECONDS,
@@ -27,7 +34,16 @@ export class Otp extends EntityResource implements OtpModel {
   })
   declare created: Date;
 
+  @withField({ isOptional: true, isRepository: true })
+  countryCode?: string;
+
+  @withField({ isOptional: true, isRepository: true })
+  email?: string;
+
   @withAccess({ level: ACCESS_LEVEL.PROHIBITED })
   @withField({ isRepository: true })
   otp!: string;
+
+  @withField({ isOptional: true, isRepository: true })
+  phone?: string;
 }

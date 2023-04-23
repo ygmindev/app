@@ -1,11 +1,3 @@
-import type { _TextFieldPropsModel } from '@lib/frontend/form/components/TextField/_TextField.models';
-import type { StringFieldPropsModel } from '@lib/frontend/form/form.models';
+import type { TextFieldPropsModel } from '@lib/frontend/form/components/TextField/TextField.models';
 
-export interface PhoneFieldPropsModel
-  extends StringFieldPropsModel,
-    Pick<_TextFieldPropsModel, 'autoComplete' | 'placeholder'> {
-  countryCode?: string;
-  countryCodeDefaultValue?: string;
-  countryCodeOnChange?(value: string): void;
-  isDisabled?: boolean;
-}
+export interface PhoneFieldPropsModel extends TextFieldPropsModel {}

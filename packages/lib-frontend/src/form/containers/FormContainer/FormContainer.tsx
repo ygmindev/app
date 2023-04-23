@@ -2,7 +2,7 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import type { RSFCPropsModel, SFCPropsModel } from '@lib/frontend/core/core.models';
+import type { RSFCPropsModel, SFCModel, SFCPropsModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { ErrorProvider } from '@lib/frontend/core/providers/ErrorProvider/ErrorProvider';
 import { ERROR_MODE } from '@lib/frontend/core/providers/ErrorProvider/ErrorProvider.constants';
@@ -15,7 +15,6 @@ import { FORM_FIELD_TYPE } from '@lib/frontend/form/containers/FormContainer/For
 import type {
   FormContainerFieldModel,
   FormContainerPropsModel,
-  FormContainerRenderPropsModel,
 } from '@lib/frontend/form/containers/FormContainer/FormContainer.models';
 import type { FormRefModel, StringFieldPropsModel } from '@lib/frontend/form/form.models';
 import { useForm } from '@lib/frontend/form/hooks/useForm/useForm';
@@ -29,7 +28,7 @@ import { FIELD_TYPE } from '@lib/shared/form/form.constants';
 import map from 'lodash/map';
 import toNumber from 'lodash/toNumber';
 import type { ForwardedRef, ReactElement } from 'react';
-import { cloneElement, forwardRef, useCallback, useImperativeHandle, useMemo } from 'react';
+import { createElement, forwardRef, useCallback, useImperativeHandle, useMemo } from 'react';
 
 export const FormContainer = forwardRef(
   <TType = void, TResult = void>(
@@ -127,7 +126,7 @@ const _FormContainer = forwardRef(
     const _onSubmit = async (): Promise<void> => handleSubmit();
 
     const _getField = useCallback(
-      ({ field, fieldProps, id, render }: FormContainerFieldModel, isInitial?: boolean) => {
+      ({ Component, field, fieldProps, id }: FormContainerFieldModel, isInitial?: boolean) => {
         const _fieldProps: StringFieldPropsModel = {
           ...fieldProps,
           defaultValue: initialValues
@@ -165,14 +164,12 @@ const _FormContainer = forwardRef(
             );
           }
           default: {
-            return cloneElement(
-              (
-                render as (
-                  params: StringFieldPropsModel & FormContainerRenderPropsModel,
-                ) => ReactElement
-              )({ ..._fieldProps, handleReset, handleSubmit }),
-              { key: id, testID: id },
-            );
+            return createElement(Component as SFCModel<TextFieldPropsModel>, {
+              ..._fieldProps,
+              key: id,
+              onSubmit: _onSubmit,
+              testID: id,
+            });
           }
         }
       },
@@ -191,10 +188,23 @@ const _FormContainer = forwardRef(
 
             {map(rows, ({ fields, id }, i) => (
               <Wrapper
-                isDistribute
                 isRowAlign
                 key={id}>
-                {map(fields, (field, j) => _getField(field, !i && !j))}
+                {/* {map(fields, (field, j) => _getField(field, !i && !j))} */}
+                {map(fields, (field, j) => {
+                  const _field = _getField(field, !i && !j);
+                  return field.width ? (
+                    <Wrapper
+                      basis={0}
+                      grow
+                      key={field.id}
+                      width={field.width}>
+                      {_field}
+                    </Wrapper>
+                  ) : (
+                    _field
+                  );
+                })}
               </Wrapper>
             ))}
 

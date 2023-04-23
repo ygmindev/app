@@ -30,7 +30,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const theme = useTheme();
-  const { valueControlledSet, valueControlled } = useControlledValue({
+  const { valueControlled, valueControlledSet } = useControlledValue({
     defaultValue: '',
     onChange,
     value,
@@ -39,6 +39,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
   return (
     <Wrapper
       isCenter
+      isFullWidth
       style={styles}
       testID={testID}>
       <Wrapper

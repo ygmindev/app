@@ -52,7 +52,7 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
           fields: [
             {
               id: PAYMENT_METHOD,
-              render: ({ elementState, error }) => (
+              Component: ({ elementState, error }) => (
                 <Wrapper width={theme.layout.width[THEME_SIZE.MEDIUM]}>
                   <PaymentMethodField
                     defaultValue={defaultValue}

@@ -25,7 +25,7 @@ export const RadioField = <TType extends string = string>({
 > => {
   const { styles } = useStyles({ props });
   const theme = useTheme();
-  const { valueControlledSet, valueControlled } = useControlledValue({
+  const { valueControlled, valueControlledSet } = useControlledValue({
     defaultValue,
     onChange,
     value,

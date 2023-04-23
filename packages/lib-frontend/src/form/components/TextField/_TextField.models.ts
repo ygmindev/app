@@ -7,13 +7,15 @@ import type { ReactElement, ReactNode } from 'react';
 import type { TextInputProps } from 'react-native';
 
 export interface _TextFieldPropsModel
-  extends StringFieldPropsModel,
+  extends Omit<StringFieldPropsModel, 'error' | 'label'>,
     SubmittablePropsModel<string>,
     DimensionModel {
   Component?(inputProps: TextInputProps): ReactElement;
   autoComplete?: string | false;
+  error?: string | boolean;
   isCenter?: boolean;
   keyboard?: TextFieldKeyboardModel;
+  label?: string;
   language?: string;
   leftElement?(elementState?: ElementStateModel): ReactNode;
   maxLength?: number;

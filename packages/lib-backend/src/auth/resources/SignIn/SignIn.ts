@@ -9,11 +9,17 @@ import type { UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withEntity({ name: `${SIGN_IN_RESOURCE_NAME}Form` })
 export class SignInForm implements SignInFormModel {
-  @withField()
-  username!: string;
+  @withField({ isOptional: true })
+  countryCode?: string;
+
+  @withField({ isOptional: true })
+  email?: string;
 
   @withField()
   otp!: string;
+
+  @withField({ isOptional: true })
+  phone?: string;
 }
 
 @withEntity({ isRepository: true, name: SIGN_IN_RESOURCE_NAME })

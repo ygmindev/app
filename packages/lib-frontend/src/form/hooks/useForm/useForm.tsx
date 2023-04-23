@@ -41,7 +41,7 @@ export const useForm = <TType = void, TResult = void>({
             return merge<FormErrorModel<TType>>({ values: [error, result] });
           }
           if (isFunction(v)) {
-            const error = v({ value: _value });
+            const error = v({ data, value: _value });
             if (isEmpty(error)) {
               delete (result as Record<string, unknown>)[k];
             } else {

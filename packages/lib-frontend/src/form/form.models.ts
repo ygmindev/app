@@ -7,9 +7,9 @@ export interface FieldPropsModel<TType>
   extends Pick<IconPropsModel, 'icon'>,
     ElementStatePropsModel,
     ValuePropsModel<TType> {
-  error?: string | boolean;
+  error?: TranslatableTextModel | boolean;
   isAutoFocus?: boolean;
-  label?: string;
+  label?: TranslatableTextModel;
 }
 
 export interface StringFieldPropsModel<TType extends string = string>
@@ -21,14 +21,15 @@ export type FormErrorModel<TType> = {
     : FormErrorModel<TType[TKey]>;
 };
 
-export type FormValidatorModel<TType = string | undefined> = (params: {
+export type FormValidatorModel<TType = string | undefined, TForm = unknown> = (params: {
+  data?: TForm;
   value: TType;
 }) => TranslatableTextModel | null;
 
 export type FormValidatorsModel<TType> = {
   [TKey in keyof TType]?: TType[TKey] extends object
     ? FormValidatorsModel<TType[TKey]>
-    : FormValidatorModel<TType[TKey]>;
+    : FormValidatorModel<TType[TKey], TType>;
 };
 
 export interface SubmittablePropsModel<TType = void, TResult = void>

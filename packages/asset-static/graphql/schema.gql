@@ -1122,13 +1122,17 @@ type Mutation {
 
 type Otp {
   _id: String
+  countryCode: String
   created: DateTime
+  email: String
   otp: String
-  username: String
+  phone: String
 }
 
 input OtpCreateFormInput {
-  username: String
+  countryCode: String
+  email: String
+  phone: String
 }
 
 input OtpCreateInput {
@@ -1141,9 +1145,11 @@ type OtpCreateOutput {
 
 input OtpGetConnectionFilterInput {
   _id: String
+  countryCode: String
   created: DateTime
+  email: String
   otp: String
-  username: String
+  phone: String
 }
 
 input OtpGetConnectionInput {
@@ -1167,9 +1173,11 @@ type OtpGetConnectionOutputEdge {
 
 input OtpGetFilterInput {
   _id: String
+  countryCode: String
   created: DateTime
+  email: String
   otp: String
-  username: String
+  phone: String
 }
 
 input OtpGetInput {
@@ -1178,9 +1186,11 @@ input OtpGetInput {
 
 input OtpGetManyFilterInput {
   _id: String
+  countryCode: String
   created: DateTime
+  email: String
   otp: String
-  username: String
+  phone: String
 }
 
 input OtpGetManyInput {
@@ -1196,7 +1206,9 @@ type OtpGetOutput {
 }
 
 input OtpIfDoesNotExistCreateFormInput {
-  username: String
+  countryCode: String
+  email: String
+  phone: String
 }
 
 input OtpIfDoesNotExistCreateInput {
@@ -1209,9 +1221,11 @@ type OtpIfDoesNotExistCreateOutput {
 
 input OtpRemoveFilterInput {
   _id: String
+  countryCode: String
   created: DateTime
+  email: String
   otp: String
-  username: String
+  phone: String
 }
 
 input OtpRemoveInput {
@@ -1224,9 +1238,11 @@ type OtpRemoveOutput {
 
 input OtpUpdateFilterInput {
   _id: String
+  countryCode: String
   created: DateTime
+  email: String
   otp: String
-  username: String
+  phone: String
 }
 
 input OtpUpdateInput {
@@ -1240,9 +1256,11 @@ type OtpUpdateOutput {
 
 input OtpUpdateUpdateInput {
   _id: String
+  countryCode: String
   created: DateTime
+  email: String
   otp: String
-  username: String
+  phone: String
 }
 
 type PageInfo {
@@ -1372,8 +1390,10 @@ type SignIn {
 }
 
 input SignInCreateFormInput {
+  countryCode: String
+  email: String
   otp: String
-  username: String
+  phone: String
 }
 
 input SignInCreateInput {
@@ -1571,8 +1591,10 @@ input UserUpdateUpdateInput {
 }
 
 input UserenameUpdateCreateFormInput {
+  countryCode: String
+  email: String
   otp: String
-  username: String
+  phone: String
 }
 
 input UserenameUpdateCreateInput {

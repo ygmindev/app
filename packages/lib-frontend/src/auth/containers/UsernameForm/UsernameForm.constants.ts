@@ -4,5 +4,5 @@ import { validateEmail } from '@lib/frontend/form/utils/validateEmail/validateEm
 
 // TODO: phone form
 export const USERNAME_FORM_VALIDATORS: FormValidatorsModel<UsernameFormModel> = {
-  username: validateEmail(),
+  email: (params) => (params.data?.phone ? null : validateEmail()(params)),
 };

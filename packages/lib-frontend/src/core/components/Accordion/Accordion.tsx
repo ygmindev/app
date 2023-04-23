@@ -21,7 +21,7 @@ export const Accordion: SFCModel<AccordionPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const [measure, measureSet] = useState<MeasureModel>();
-  const { valueControlledSet, valueControlled } = useControlledValue<ElementStateModel>({
+  const { valueControlled, valueControlledSet } = useControlledValue<ElementStateModel>({
     defaultValue,
     onChange,
     value,

@@ -20,20 +20,20 @@ describe(displayName, () => {
     await repository.clear();
   });
 
-  test('create', async () => {
+  test('create by email', async () => {
     const sendSpy = vi.spyOn(mailer, 'mail');
-    await otpService.create({ form: { username: USER_FIXTURE.email } });
-    const { result } = await otpService.getMany({ filter: { username: USER_FIXTURE.email } });
+    await otpService.create({ form: { email: USER_FIXTURE.email } });
+    const { result } = await otpService.getMany({ filter: { email: USER_FIXTURE.email } });
     expect(sendSpy).toBeCalledTimes(1);
     expect(result && result.length).toEqual(1);
     expect(result && result[0].otp).toBeTruthy();
   });
 
-  test('verify', async () => {
-    const { result: created } = await otpService.create({ form: { username: USER_FIXTURE.email } });
+  test('verify by email', async () => {
+    const { result: created } = await otpService.create({ form: { email: USER_FIXTURE.email } });
     const verified =
-      created && (await otpService.verify({ otp: created.otp, username: created.username }));
-    const { result } = await otpService.getMany({ filter: { username: USER_FIXTURE.email } });
+      created && (await otpService.verify({ email: created.email, otp: created.otp }));
+    const { result } = await otpService.getMany({ filter: { email: USER_FIXTURE.email } });
     expect(verified).toStrictEqual(true);
     expect(result && result.length).toEqual(0);
   });

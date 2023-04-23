@@ -6,13 +6,12 @@ export const PAYMENT_METHOD_FORM_FIELDS: Array<FormContainerRowModel> = withId([
   {
     fields: [
       {
-        id: 'payment',
-        render: ({ elementState, error, handleSubmit, onChange, value }) => (
+        Component: ({ elementState, error }) => (
           <PaymentMethodField
             elementState={elementState}
             error={error}
-            onChange={onChange}
-            value={value}
+            // onChange={onChange}
+            // value={value}
             // elementState={elementState}
             // error={error}
             // isAutoFocus
@@ -25,6 +24,7 @@ export const PAYMENT_METHOD_FORM_FIELDS: Array<FormContainerRowModel> = withId([
             // }}
           />
         ),
+        id: 'payment',
       },
     ],
   },

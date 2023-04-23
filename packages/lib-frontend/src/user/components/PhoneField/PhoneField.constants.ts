@@ -1,1 +1,0 @@
-export const PHONE_FIELD_COUNTRY_FIELD_WIDTH = 150;

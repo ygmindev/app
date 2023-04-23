@@ -19,7 +19,7 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const { t } = useTranslation();
-  const { valueControlledSet, valueControlled } = useControlledValue({
+  const { valueControlled, valueControlledSet } = useControlledValue({
     defaultValue: defaultValue || (tabs && tabs.length ? tabs[0].id : ''),
     onChange,
     value,
