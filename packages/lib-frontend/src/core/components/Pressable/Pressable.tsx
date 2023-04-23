@@ -34,7 +34,7 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
   const [confirmModalIsOpen, confirmModalIsOpenSet] = useState<boolean>(false);
   const { styles } = useStyles({ props });
 
-  const { setValueControlled, valueControlled } = useControlledValue<ElementStateModel>({
+  const { valueControlledSet, valueControlled } = useControlledValue<ElementStateModel>({
     defaultValue: ELEMENT_STATE.INACTIVE,
     onChange: onElementStateChange,
     value: elementState,
@@ -57,9 +57,9 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
     if (!_isDisabled) {
       const result = onPress && onPress();
       if (isPromise(result)) {
-        setValueControlled(ELEMENT_STATE.LOADING);
+        valueControlledSet(ELEMENT_STATE.LOADING);
         await result;
-        setValueControlled(ELEMENT_STATE.INACTIVE);
+        valueControlledSet(ELEMENT_STATE.INACTIVE);
       }
     }
   };
@@ -67,8 +67,8 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
   return (
     <>
       <Activatable
-        onActive={() => setValueControlled(ELEMENT_STATE.ACTIVE)}
-        onInactive={() => setValueControlled(ELEMENT_STATE.INACTIVE)}
+        onActive={() => valueControlledSet(ELEMENT_STATE.ACTIVE)}
+        onInactive={() => valueControlledSet(ELEMENT_STATE.INACTIVE)}
         style={styles}>
         <Wrapper
           {...props}

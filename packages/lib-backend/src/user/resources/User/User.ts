@@ -23,6 +23,9 @@ export class User extends EntityResource implements UserModel {
   @withField({ Resource: LinkedUser, isArray: true, isOptional: true, isRepository: true })
   [LINKED_USER_RESOURCE_NAME]?: Array<LinkedUserModel>;
 
+  @withField({ isOptional: true, isRepository: true })
+  countryCode?: string;
+
   @withField({ isOptional: true, isRepository: true, isUnique: true })
   email?: string;
 

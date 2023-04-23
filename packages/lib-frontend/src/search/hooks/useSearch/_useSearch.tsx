@@ -1,21 +1,21 @@
-import {
-  SEARCH_DELAY,
-  SEARCH_LIMIT,
-  SEARCH_THRESHOLD,
-} from '@lib/frontend/search/hooks/useSearch/_useSearch.constants';
 import type {
   _UseSearchModel,
   _UseSearchParamsModel,
 } from '@lib/frontend/search/hooks/useSearch/_useSearch.models';
+import {
+  SEARCH_DELAY,
+  SEARCH_LIMIT,
+  SEARCH_THRESHOLD,
+} from '@lib/frontend/search/hooks/useSearch/useSearch.constants';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import Fuse from 'fuse.js';
 import { useCallback, useMemo, useState } from 'react';
 
 export const _useSearch = <TType,>({
-  list,
-  keys,
   delay = SEARCH_DELAY,
+  keys,
   limit = SEARCH_LIMIT,
+  list,
 }: _UseSearchParamsModel<TType>): _UseSearchModel<TType> => {
   const [query, querySet] = useState<string>('');
 

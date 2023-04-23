@@ -11,6 +11,7 @@ import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useSearch } from '@lib/frontend/search/hooks/useSearch/useSearch';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import type { ReactElement } from 'react';
 import { useRef, useState } from 'react';
 
@@ -37,7 +38,7 @@ export const SelectField = <TType extends string = string>({
   const menuRef = useRef<MenuRefModel>(null);
   const { t } = useTranslation();
   const [query, querySet] = useState<string>();
-  const { setValueControlled, valueControlled } = useControlledValue({
+  const { valueControlled, valueControlledSet } = useControlledValue({
     defaultValue,
     onChange,
     value,
@@ -45,17 +46,18 @@ export const SelectField = <TType extends string = string>({
 
   const { result, search } = useSearch({ keys: ['label', 'value'], list: options });
 
-  const _handleToggle = (isOpen?: boolean): void => {
+  const _handleToggle = async (isOpen?: boolean): Promise<void> => {
+    await sleep();
+    menuRef && menuRef.current && menuRef.current.toggle(isOpen);
     search('');
     querySet('');
-    menuRef && menuRef.current && menuRef.current.toggle(isOpen);
   };
 
   const _handleSelect = async (): Promise<void> => {
     const selected = result && result[0];
     const selectedValue = selected.id;
     if (selectedValue) {
-      setValueControlled(selectedValue);
+      valueControlledSet(selectedValue);
       onSubmit && (await onSubmit(selectedValue));
     }
     _handleToggle(false);
@@ -115,13 +117,10 @@ export const SelectField = <TType extends string = string>({
           />
         )}
         isFullWidth
-        onChange={setValueControlled}
-        onClose={() => _handleToggle(false)}
+        onChange={valueControlledSet}
         options={result}
         ref={menuRef}
         renderOption={renderOption}
-        style={styles}
-        testID={testID}
         value={valueControlled}
       />
     </View>

@@ -12,6 +12,9 @@ import type { PhoneFieldPropsModel } from '@lib/frontend/user/components/PhoneFi
 import { useMemo } from 'react';
 
 export const PhoneField: SFCModel<PhoneFieldPropsModel> = ({
+  countryCode,
+  countryCodeDefaultValue,
+  countryCodeOnChange,
   defaultValue,
   onChange,
   testID,
@@ -20,13 +23,22 @@ export const PhoneField: SFCModel<PhoneFieldPropsModel> = ({
 }) => {
   const { t } = useTranslation();
   const { styles } = useStyles({ props });
-  const { setValueControlled, valueControlled } = useControlledValue({
+  const { valueControlled: _countryCode, valueControlledSet: _countryCodeOnChange } =
+    useControlledValue({
+      defaultValue: countryCodeDefaultValue || 'US',
+      onChange: countryCodeOnChange,
+      value: countryCode,
+    });
+  const { valueControlled, valueControlledSet } = useControlledValue({
     defaultValue,
     onChange,
     value,
   });
 
-  const _countries = useMemo(getCountries, []);
+  const _countries = useMemo(
+    () => getCountries().map((country) => ({ id: country, label: country })),
+    [],
+  );
 
   return (
     <Wrapper
@@ -36,16 +48,17 @@ export const PhoneField: SFCModel<PhoneFieldPropsModel> = ({
       <SelectField
         icon="globe"
         label={t('core:labels.country')}
-        options={_countries.map((country) => ({ id: country, label: country }))}
-        renderValue={({ id }) => `${id} +${getCallingCode(id)}`}
-        value="US"
+        onChange={_countryCodeOnChange}
+        options={_countries}
+        renderOption={({ id }) => `${id} +${getCallingCode(id)}`}
+        value={_countryCode}
         width={PHONE_FIELD_COUNTRY_FIELD_WIDTH}
       />
 
       <TextField
         icon="phone"
         label={t('core:labels.phone')}
-        onChange={setValueControlled}
+        onChange={valueControlledSet}
         value={valueControlled}
       />
     </Wrapper>

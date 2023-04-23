@@ -21,14 +21,14 @@ export const Accordion: SFCModel<AccordionPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const [measure, measureSet] = useState<MeasureModel>();
-  const { setValueControlled, valueControlled } = useControlledValue<ElementStateModel>({
+  const { valueControlledSet, valueControlled } = useControlledValue<ElementStateModel>({
     defaultValue,
     onChange,
     value,
   });
 
   const _handleToggle = (): void =>
-    setValueControlled(
+    valueControlledSet(
       valueControlled === ELEMENT_STATE.ACTIVE ? ELEMENT_STATE.INACTIVE : ELEMENT_STATE.ACTIVE,
     );
 

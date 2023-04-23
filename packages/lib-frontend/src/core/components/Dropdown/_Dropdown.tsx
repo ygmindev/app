@@ -10,7 +10,7 @@ import Tippy from '@tippyjs/react';
 export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   anchor,
   children,
-  direction = DIRECTION.BOTTOM,
+  direction,
   isFullWidth,
   isOpen,
   maxWidth,
@@ -26,18 +26,18 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
       appendTo={() => document.body}
       content={
         <Appearable
-          animation={{ isLazy: false }}
+          grow
           isVisible={isOpen}>
           {children}
         </Appearable>
       }
-      delay={[0, theme.animation.duration]}
+      delay={0}
       ignoreAttributes
       interactive
-      maxWidth={maxWidth || '100%'}
-      offset={[theme.shape.spacing.m, theme.shape.spacing.m]}
+      maxWidth={maxWidth ?? '100%'}
+      offset={direction ? [0, theme.shape.spacing.m] : undefined}
       onClickOutside={onClose}
-      placement={direction}
+      placement={direction ?? DIRECTION.BOTTOM}
       popperOptions={{
         modifiers: isFullWidth
           ? [

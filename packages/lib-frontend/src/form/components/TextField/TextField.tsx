@@ -51,13 +51,13 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
     const _ref = useRef<TextFieldRefModel>(null);
     const { t } = useTranslation();
     const theme = useTheme();
-    const { setValueControlled, valueControlled } = useControlledValue({
+    const { valueControlledSet, valueControlled } = useControlledValue({
       defaultValue,
       onChange,
       value,
     });
     const {
-      setValueControlled: setElementStateControlled,
+      valueControlledSet: setElementStateControlled,
       valueControlled: elementStateControlled,
     } = useControlledValue<ElementStateModel>({
       defaultValue: ELEMENT_STATE.INACTIVE,
@@ -105,24 +105,24 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         case TEXT_FIELD_KEYBOARD.NUMBER:
         case TEXT_FIELD_KEYBOARD.TEL: {
           if (/^\d*$/.test(newValue)) {
-            setValueControlled(newValue);
+            valueControlledSet(newValue);
           }
           break;
         }
         case TEXT_FIELD_KEYBOARD.NUMBER_POSITIVE: {
           if (/^([1-9]+\d*)?$/.test(newValue)) {
-            setValueControlled(newValue);
+            valueControlledSet(newValue);
           }
           break;
         }
         case TEXT_FIELD_KEYBOARD.DECIMAL: {
           if (/^\d*\.?\d*$/.test(newValue)) {
-            setValueControlled(newValue);
+            valueControlledSet(newValue);
           }
           break;
         }
         default: {
-          setValueControlled(newValue);
+          valueControlledSet(newValue);
           break;
         }
       }

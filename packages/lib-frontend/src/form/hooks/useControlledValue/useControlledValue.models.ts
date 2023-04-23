@@ -4,6 +4,6 @@ export interface UseControlledValueParamsModel<TType extends string = string>
   extends ValuePropsModel<TType> {}
 
 export interface UseControlledValueModel<TType extends string = string> {
-  setValueControlled(value: TType): void;
+  valueControlledSet(value: TType): void;
   valueControlled: TType;
 }

@@ -25,7 +25,7 @@ export const RadioField = <TType extends string = string>({
 > => {
   const { styles } = useStyles({ props });
   const theme = useTheme();
-  const { setValueControlled, valueControlled } = useControlledValue({
+  const { valueControlledSet, valueControlled } = useControlledValue({
     defaultValue,
     onChange,
     value,
@@ -50,7 +50,7 @@ export const RadioField = <TType extends string = string>({
             {(isActive) => (
               <Wrapper
                 isRowAlign
-                onPress={() => setValueControlled(id)}>
+                onPress={() => valueControlledSet(id)}>
                 <Wrapper
                   border
                   borderColor={_color}

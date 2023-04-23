@@ -35,7 +35,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
 }) => {
   const theme = useTheme();
 
-  const { setValueControlled, valueControlled } = useControlledValue<ElementStateModel>({
+  const { valueControlledSet, valueControlled } = useControlledValue<ElementStateModel>({
     defaultValue: ELEMENT_STATE.INACTIVE,
     onChange: onElementStateChange,
     value: elementState,
@@ -122,7 +122,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
       elementState={valueControlled}
       height={_height}
       justify={FLEX_JUSTIFY.CENTER}
-      onElementStateChange={setValueControlled}
+      onElementStateChange={valueControlledSet}
       position={SHAPE_POSITION.RELATIVE}
       width={children ? undefined : _height}>
       <>

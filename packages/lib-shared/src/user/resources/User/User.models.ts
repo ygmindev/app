@@ -20,6 +20,8 @@ export interface UserModel extends EntityResourceModel {
 
   [PAYMENT_METHOD_RESOURCE_NAME]?: Array<PaymentMethodModel>;
 
+  countryCode?: string;
+
   email?: string;
 
   first?: string;

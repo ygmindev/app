@@ -30,7 +30,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const theme = useTheme();
-  const { setValueControlled, valueControlled } = useControlledValue({
+  const { valueControlledSet, valueControlled } = useControlledValue({
     defaultValue: '',
     onChange,
     value,
@@ -74,7 +74,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             isNoClear
             maxLength={OTP_LENGTH}
             onBlur={() => isFocusedSet(false)}
-            onChange={setValueControlled}
+            onChange={valueControlledSet}
             onFocus={() => isFocusedSet(true)}
             value={valueControlled}
           />
@@ -92,7 +92,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
               isVisible={valueControlled.length > 0}>
               <Button
                 icon="times"
-                onPress={() => setValueControlled('')}
+                onPress={() => valueControlledSet('')}
               />
             </Appearable>
           )}

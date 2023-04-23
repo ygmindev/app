@@ -19,7 +19,7 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const { t } = useTranslation();
-  const { setValueControlled, valueControlled } = useControlledValue({
+  const { valueControlledSet, valueControlled } = useControlledValue({
     defaultValue: defaultValue || (tabs && tabs.length ? tabs[0].id : ''),
     onChange,
     value,
@@ -39,7 +39,7 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
           <Button
             icon={tab.icon}
             key={tab.id}
-            onPress={() => setValueControlled(tab.id)}
+            onPress={() => valueControlledSet(tab.id)}
             type={isActive ? undefined : BUTTON_TYPE.TRANSPARENT}>
             {t(tab.label)}
           </Button>

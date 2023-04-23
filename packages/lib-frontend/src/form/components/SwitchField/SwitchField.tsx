@@ -18,7 +18,7 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
   ...props
 }) => {
   const { styles } = useStyles({ props });
-  const { setValueControlled, valueControlled } = useControlledValue<'true' | 'false'>({
+  const { valueControlledSet, valueControlled } = useControlledValue<'true' | 'false'>({
     defaultValue,
     onChange,
     value,
@@ -33,7 +33,7 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
         elementState={elementState}
         iconActive={iconActive}
         iconInactive={iconInactive}
-        onChange={setValueControlled}
+        onChange={valueControlledSet}
         value={valueControlled}
       />
 
