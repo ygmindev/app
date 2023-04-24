@@ -9,7 +9,7 @@ import type { StylerModel } from '@lib/frontend/style/utils/styler/styler.models
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import isNumber from 'lodash/isNumber';
 
-const _getSpacing = (
+export const getSpacing = (
   value: SpacingModel | 'auto' | number | undefined,
   theme: UseThemeModel,
 ): 'auto' | number | undefined =>
@@ -36,21 +36,21 @@ export const spacingStyler: StylerModel<SpacingStylerParamsModel> = (
   },
   theme,
 ) => {
-  const _m = _getSpacing(m, theme);
-  const _mHorizontal = _m || _getSpacing(mHorizontal, theme);
-  const _mVertical = _m || _getSpacing(mVertical, theme);
-  const _p = _getSpacing(p, theme);
-  const _pHorizontal = _p || _getSpacing(pHorizontal, theme);
-  const _pVertical = _p || _getSpacing(pVertical, theme);
+  const _m = getSpacing(m, theme);
+  const _mHorizontal = _m || getSpacing(mHorizontal, theme);
+  const _mVertical = _m || getSpacing(mVertical, theme);
+  const _p = getSpacing(p, theme);
+  const _pHorizontal = _p || getSpacing(pHorizontal, theme);
+  const _pVertical = _p || getSpacing(pVertical, theme);
   return cleanObject({
     margin: _m,
-    marginBottom: _mVertical || _getSpacing(mBottom, theme),
-    marginLeft: _mHorizontal || _getSpacing(mLeft, theme),
-    marginRight: _mHorizontal || _getSpacing(mRight, theme),
-    marginTop: _mVertical || _getSpacing(mTop, theme),
-    paddingBottom: _pVertical || _getSpacing(pBottom, theme),
-    paddingLeft: _pHorizontal || _getSpacing(pLeft, theme),
-    paddingRight: _pHorizontal || _getSpacing(pRight, theme),
-    paddingTop: _pVertical || _getSpacing(pTop, theme),
+    marginBottom: _mVertical || getSpacing(mBottom, theme),
+    marginLeft: _mHorizontal || getSpacing(mLeft, theme),
+    marginRight: _mHorizontal || getSpacing(mRight, theme),
+    marginTop: _mVertical || getSpacing(mTop, theme),
+    paddingBottom: _pVertical || getSpacing(pBottom, theme),
+    paddingLeft: _pHorizontal || getSpacing(pLeft, theme),
+    paddingRight: _pHorizontal || getSpacing(pRight, theme),
+    paddingTop: _pVertical || getSpacing(pTop, theme),
   });
 };

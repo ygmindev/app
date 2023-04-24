@@ -12,6 +12,7 @@ import type { FormContainerFieldModel } from '@lib/frontend/form/containers/Form
 import { CountryField } from '@lib/frontend/locale/components/CountryField/CountryField';
 import { COUNTRY_FIELD_MIN_WIDTH } from '@lib/frontend/locale/components/CountryField/CountryField.constants';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { callingCode } from '@lib/frontend/locale/utils/callingCode/callingCode';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { PhoneField } from '@lib/frontend/user/components/PhoneField/PhoneField';
 import { USERNAME_METHOD } from '@lib/shared/auth/auth.constants';
@@ -34,6 +35,9 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   const { create, createIfNotExists } = useOtpResource();
 
   const _handleSubmit = async (data: UsernameFormModel): Promise<OtpModel | null> => {
+    if (data.countryCode) {
+      data.countryCode = callingCode(data.countryCode);
+    }
     onSubmit && (await onSubmit(data));
     const { result } = await (isCheckIfNotExists ? createIfNotExists : create)({
       form: pick({ keys: ['countryCode', 'phone', 'email'], value: data }),
@@ -58,7 +62,16 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
         ];
       case USERNAME_METHOD.PHONE:
         return [
-          { Component: CountryField, id: 'countryCode', width: COUNTRY_FIELD_MIN_WIDTH },
+          {
+            Component: ({ ...props }) => (
+              <CountryField
+                {...props}
+                renderOption={({ id }) => `${id} +${callingCode(id)}`}
+              />
+            ),
+            id: 'countryCode',
+            width: COUNTRY_FIELD_MIN_WIDTH,
+          },
           { Component: PhoneField, id: 'phone' },
         ];
       default:

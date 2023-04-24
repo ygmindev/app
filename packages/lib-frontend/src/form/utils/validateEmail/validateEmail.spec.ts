@@ -8,12 +8,12 @@ describe(displayName, () => {
   const VALUE_INVALID = '';
 
   test('works with valid', async () => {
-    const result = validateEmail()({ value: VALUE_VALID });
+    const result = validateEmail({ value: VALUE_VALID });
     expect(result).toBeFalsy();
   });
 
   test('works with invalid', async () => {
-    const result = validateEmail()({ value: VALUE_INVALID });
+    const result = validateEmail({ value: VALUE_INVALID });
     expect(result).toBeTruthy();
   });
 });

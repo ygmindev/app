@@ -29,11 +29,7 @@ export type FormContainerFieldModel = WithIdModel & {
     | { Component?: never; field: FORM_FIELD_TYPE.TEXT_FIELD; fieldProps?: TextFieldPropsModel }
     | { Component?: never; field: FORM_FIELD_TYPE.SELECT_FIELD; fieldProps?: SelectFieldPropsModel }
     | { Component?: never; field: FORM_FIELD_TYPE.SWITCH_FIELD; fieldProps?: SwitchFieldPropsModel }
-    | {
-        Component: SFCModel<TextFieldPropsModel>;
-        field?: never;
-        fieldProps?: never;
-      }
+    | { Component: SFCModel<TextFieldPropsModel>; field?: never; fieldProps?: never }
   );
 
 export type FormContainerRowModel = PartialModel<WithIdModel> & {

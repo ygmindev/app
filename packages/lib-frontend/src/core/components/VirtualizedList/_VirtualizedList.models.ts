@@ -2,6 +2,7 @@ import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.mode
 import type { ReactElement } from 'react';
 
 export interface _VirtualizedListPropsModel<TType extends WithIdModel> {
+  divider?: ReactElement;
   items: Array<TType>;
   render(item: TType): ReactElement;
 }

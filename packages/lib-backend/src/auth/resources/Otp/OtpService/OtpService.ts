@@ -1,4 +1,6 @@
-import { mail } from '@lib/backend/mail/utils/mail/mail';
+import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
+import { mail } from '@lib/backend/notification/utils/mail/mail';
+import { sms } from '@lib/backend/notification/utils/sms/sms';
 import { EntityResourceService } from '@lib/backend/resource/resources/EntityResource/EntityResourceService/EntityResourceService';
 import { UserService } from '@lib/backend/user/resources/User/UserService/UserService';
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
@@ -25,14 +27,24 @@ export class OtpService
   extends EntityResourceService<OtpModel, OtpFormModel>({
     afterCreate: async ({ output }) => {
       if (output.result) {
+        // phone verification
+        if (output.result.phone) {
+          await sms<{ otp: string }>({
+            from: process.env.SERVER_TWILIO_FROM,
+            params: { otp: output.result.otp },
+            pathname: fromStatic('templates/otp/sms.ejs'),
+            to: `+${output.result.countryCode}${output.result.phone}`,
+          });
+        }
         // email verification
-        output.result.email &&
-          mail<{ otp: string }>({
+        if (output.result.email) {
+          await mail<{ otp: string }>({
             from: process.env.SERVER_EMAIL_USERNAME,
             params: { otp: output.result.otp },
             template: 'otp',
             to: [output.result.email],
           });
+        }
       }
 
       return output;

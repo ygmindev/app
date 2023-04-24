@@ -21,7 +21,7 @@ export type FormErrorModel<TType> = {
     : FormErrorModel<TType[TKey]>;
 };
 
-export type FormValidatorModel<TType = string | undefined, TForm = unknown> = (params: {
+export type FormValidatorModel<TForm = unknown, TType = string | undefined> = (params: {
   data?: TForm;
   value: TType;
 }) => TranslatableTextModel | null;
@@ -29,7 +29,7 @@ export type FormValidatorModel<TType = string | undefined, TForm = unknown> = (p
 export type FormValidatorsModel<TType> = {
   [TKey in keyof TType]?: TType[TKey] extends object
     ? FormValidatorsModel<TType[TKey]>
-    : FormValidatorModel<TType[TKey], TType>;
+    : FormValidatorModel<TType, TType[TKey]>;
 };
 
 export interface SubmittablePropsModel<TType = void, TResult = void>

@@ -1,6 +1,8 @@
 export interface _MailParamsModel<TParams> {
   from: string;
-  params: TParams;
+  params?: TParams;
   template: string;
   to: Array<string>;
 }
+
+export type _MailModel = boolean;

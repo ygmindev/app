@@ -1,6 +1,6 @@
 import { OtpService } from '@lib/backend/auth/resources/Otp/OtpService/OtpService';
 import { DatabaseMain } from '@lib/backend/database/utils/DatabaseMain/DatabaseMain';
-import { mail } from '@lib/backend/mail/utils/mail/mail';
+import { mail } from '@lib/backend/notification/utils/mail/mail';
 import { OTP_RESOURCE_NAME } from '@lib/shared/auth/resources/Otp/Otp.constants';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';

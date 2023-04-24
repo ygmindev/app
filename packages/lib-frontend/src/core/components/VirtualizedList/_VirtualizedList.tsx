@@ -8,6 +8,7 @@ import type { ListRenderItem } from 'react-native';
 import { FlatList } from 'react-native';
 
 export const _VirtualizedList = <TType extends WithIdModel>({
+  divider,
   items,
   render,
   testID,
@@ -21,6 +22,7 @@ export const _VirtualizedList = <TType extends WithIdModel>({
   const _renderItem = useCallback<ListRenderItem<TType>>(({ item }) => render(item), [items]);
   return (
     <FlatList<TType>
+      ItemSeparatorComponent={divider ? () => divider : undefined}
       contentContainerStyle={{ flex: 1 }}
       data={items}
       keyExtractor={({ id }) => id}

@@ -57,5 +57,8 @@ declare namespace NodeJS {
     SERVER_SALT_LENGTH: string;
     SERVER_STRIPE_TOKEN: string;
     SERVER_TEST_MATCH?: string;
+    SERVER_TWILIO_FROM: string;
+    SERVER_TWILIO_SID: string;
+    SERVER_TWILIO_TOKEN: string;
   }
 }

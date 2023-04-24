@@ -1,6 +1,8 @@
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
-import type { _MailParamsModel } from '@lib/backend/mail/utils/mail/_mail.models';
-import { debug } from '@lib/shared/logging/utils/logger/logger';
+import type {
+  _MailModel,
+  _MailParamsModel,
+} from '@lib/backend/notification/utils/mail/_mail.models';
 import Email from 'email-templates';
 import toNumber from 'lodash/toNumber';
 import { createTransport } from 'nodemailer';
@@ -17,13 +19,15 @@ export const _mail = async <TParams>({
   params,
   template,
   to,
-}: _MailParamsModel<TParams>): Promise<boolean> => {
-  process.env.NODE_ENV === 'production'
-    ? await new Email({
-        send: true,
-        transport,
-        views: { root: fromStatic('mail/templates') },
-      }).send({ locals: params, message: { from, to }, template })
-    : debug(`from: ${from}; to: ${to}; template: ${template}; params: ${JSON.stringify(params)}`);
+}: _MailParamsModel<TParams>): Promise<_MailModel> => {
+  try {
+    await new Email({
+      send: true,
+      transport,
+      views: { options: { extension: 'ejs' }, root: fromStatic('templates') },
+    }).send({ locals: params, message: { from, to }, template });
+  } catch (e) {
+    return false;
+  }
   return true;
 };

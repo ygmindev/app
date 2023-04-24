@@ -1,7 +1,7 @@
 import type { CountryFormatModel } from '@lib/frontend/locale/locale.models';
 
-export interface _GetCountriesParamsModel {
+export interface _CountriesParamsModel {
   format?: CountryFormatModel;
 }
 
-export type _GetCountriesModel = Array<string>;
+export type _CountriesModel = Array<string>;
