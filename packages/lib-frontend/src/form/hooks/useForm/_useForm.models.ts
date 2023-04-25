@@ -4,7 +4,7 @@ import type { CallableModel } from '@lib/shared/core/core.models';
 export interface _UseFormParamsModel<TType = void, TResult = void>
   extends Pick<
     SubmittablePropsModel<TType, TResult>,
-    'onSubmit' | 'onSuccess' | 'onComplete' | 'onError'
+    'beforeSubmit' | 'onSubmit' | 'onSuccess' | 'onComplete' | 'onError'
   > {
   initialValues?: TType;
   onValidate?(data: TType): Promise<FormErrorModel<TType>>;

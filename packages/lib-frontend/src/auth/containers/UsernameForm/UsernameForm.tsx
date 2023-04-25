@@ -35,9 +35,6 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   const { create, createIfNotExists } = useOtpResource();
 
   const _handleSubmit = async (data: UsernameFormModel): Promise<OtpModel | null> => {
-    if (data.countryCode) {
-      data.countryCode = callingCode(data.countryCode);
-    }
     onSubmit && (await onSubmit(data));
     const { result } = await (isCheckIfNotExists ? createIfNotExists : create)({
       form: pick({ keys: ['countryCode', 'phone', 'email'], value: data }),
@@ -85,6 +82,10 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
       testID={testID}>
       <FormContainer
         autoFocus={method}
+        beforeSubmit={async (data: UsernameFormModel) => ({
+          ...data,
+          countryCode: data.countryCode ? callingCode(data.countryCode) : undefined,
+        })}
         errorContextGet={(e) =>
           isCheckIfNotExists && (e as HttpError).statusCode === HTTP_STATUS_CODE.CONFLICT
             ? { icon: 'people', message: t('auth:messages.userExistsError') }

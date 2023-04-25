@@ -48,6 +48,7 @@ const _FormContainer = forwardRef(
   <TType = void, TResult = void>(
     {
       autoFocus = true,
+      beforeSubmit,
       bottomElement,
       cancelLabel,
       elementState,
@@ -109,6 +110,7 @@ const _FormContainer = forwardRef(
       TType,
       TResult
     >({
+      beforeSubmit,
       initialValues,
       isBlocking,
       onComplete,

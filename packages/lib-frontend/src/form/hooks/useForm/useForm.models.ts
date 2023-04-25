@@ -7,7 +7,7 @@ import type {
 export interface UseFormParamsModel<TType = void, TResult = void>
   extends Pick<
     _UseFormParamsModel<TType, TResult>,
-    'initialValues' | 'onSubmit' | 'onSuccess' | 'onComplete' | 'onError'
+    'beforeSubmit' | 'initialValues' | 'onSubmit' | 'onSuccess' | 'onComplete' | 'onError'
   > {
   isBlocking?: boolean;
   validators?: FormValidatorsModel<TType>;

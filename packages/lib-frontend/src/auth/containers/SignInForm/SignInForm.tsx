@@ -7,6 +7,7 @@ import type { UsernameFormModel } from '@lib/frontend/auth/containers/UsernameFo
 import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { StepForm } from '@lib/frontend/form/components/StepForm/StepForm';
+import { callingCode } from '@lib/frontend/locale/utils/callingCode/callingCode';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import type { SignInFormModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
@@ -21,6 +22,10 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({ method, mode, testI
 
   return (
     <StepForm<SignInFormModel, [UsernameFormModel, OtpFormModel]>
+      beforeSubmit={async (data: SignInFormModel) => ({
+        ...data,
+        countryCode: data.countryCode ? callingCode(data.countryCode) : undefined,
+      })}
       onSubmit={_handleSubmit}
       onSuccess={async () => replace({ pathname: '/' })}
       steps={[

@@ -15,6 +15,7 @@ import isPlainObject from 'lodash/isPlainObject';
 import reduce from 'lodash/reduce';
 
 export const useForm = <TType = void, TResult = void>({
+  beforeSubmit,
   initialValues,
   isBlocking = true,
   onComplete,
@@ -58,8 +59,9 @@ export const useForm = <TType = void, TResult = void>({
   const _handleSubmit = async (values: TType): Promise<TResult | null> => {
     try {
       isBlocking && actions?.app.isLoadingSet(true);
-      const data = onSubmit && (await onSubmit(values));
-      onSuccess && (await onSuccess(values, data));
+      const _values = beforeSubmit ? await beforeSubmit(values) : values;
+      const data = onSubmit && (await onSubmit(_values));
+      onSuccess && (await onSuccess(_values, data));
       return data || null;
     } catch (e) {
       onError ? onError(e as Error) : handleError(e as Error);
