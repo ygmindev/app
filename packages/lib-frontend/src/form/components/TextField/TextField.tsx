@@ -57,8 +57,8 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       value,
     });
     const {
-      valueControlledSet: setElementStateControlled,
       valueControlled: elementStateControlled,
+      valueControlledSet: setElementStateControlled,
     } = useControlledValue<ElementStateModel>({
       defaultValue: ELEMENT_STATE.INACTIVE,
       onChange: onElementStateChange,
@@ -69,9 +69,10 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       <Wrapper
         isRowAlign
         pRight={isCenter ? undefined : THEME_SIZE.SMALL}>
-        {!isNoClear && _elementState !== ELEMENT_STATE.DISABLED && (
+        {!isNoClear && (
           <Appearable
             animation={{ isLazy: false }}
+            elementState={_elementState}
             isCenter
             isVisible={
               !!valueControlled &&

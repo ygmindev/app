@@ -9,7 +9,7 @@ export interface AuthMenuOptionModel extends MenuOptionModel {
 }
 
 export const AUTH_MENU_OPTIONS: Array<AuthMenuOptionModel> = withId([
-  { isDivider: true },
+  { isDivider: true, isProtected: true },
 
   {
     icon: 'personCircle',

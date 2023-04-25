@@ -57,6 +57,10 @@ export const Button: SFCModel<ButtonPropsModel> = ({
                 backgroundColor: _activeColor,
                 opacity: theme.colors.disabledOpacity,
               },
+              [ELEMENT_STATE.LOADING]: {
+                backgroundColor: _activeColor,
+                opacity: theme.colors.disabledOpacity,
+              },
               [ELEMENT_STATE.INACTIVE]: { backgroundColor: _color.main, opacity: 1 },
             },
           },
@@ -69,6 +73,10 @@ export const Button: SFCModel<ButtonPropsModel> = ({
             states: {
               [ELEMENT_STATE.ACTIVE]: { backgroundColor: _color.muted, opacity: 1 },
               [ELEMENT_STATE.DISABLED]: {
+                backgroundColor: theme.colors.tone.neutral.main,
+                opacity: theme.colors.disabledOpacity,
+              },
+              [ELEMENT_STATE.LOADING]: {
                 backgroundColor: theme.colors.tone.neutral.main,
                 opacity: theme.colors.disabledOpacity,
               },

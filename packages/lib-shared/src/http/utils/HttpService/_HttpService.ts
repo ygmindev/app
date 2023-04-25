@@ -21,8 +21,11 @@ export class _HttpService implements _HttpServiceModel {
   protected _instance: AxiosInstance;
   protected _onError?(error: Error): void;
 
-  constructor({ baseUri, onError, onRequest, onResponse, request }: HttpServiceParamsModel) {
-    this._instance = axios.create({ ...(request as AxiosRequestConfig), baseURL: uri(baseUri) });
+  constructor({ baseUri, onError, onRequest, onResponse, request }: HttpServiceParamsModel = {}) {
+    this._instance = axios.create({
+      ...(request as AxiosRequestConfig),
+      baseURL: baseUri ? uri(baseUri) : '',
+    });
 
     this._onError = onError;
 

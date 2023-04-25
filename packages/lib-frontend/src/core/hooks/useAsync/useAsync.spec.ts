@@ -1,12 +1,12 @@
-import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
+import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
 import { renderHook } from '@lib/frontend/test/utils/renderHook/renderHook';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => useMount });
+const { displayName } = withTest({ target: () => useAsync });
 
 describe(displayName, () => {
   test('works', async () => {
-    const { result, unmount } = renderHook(() => useMount({}));
+    const { result, unmount } = renderHook(() => useAsync({}));
     expect(result.current).toStrictEqual(true);
 
     unmount();

@@ -1,12 +1,12 @@
 import type {
-  UseMountModel,
-  UseMountParamsModel,
-} from '@lib/frontend/core/hooks/useMount/useMount.models';
+  UseAsyncModel,
+  UseAsyncParamsModel,
+} from '@lib/frontend/core/hooks/useAsync/useAsync.models';
 import { useEffect } from 'react';
 
-export const useMount = (
-  ...[{ onMount, onUnmount }, deps = []]: UseMountParamsModel
-): UseMountModel => {
+export const useAsync = (
+  ...[{ onMount, onUnmount }, deps = []]: UseAsyncParamsModel
+): UseAsyncModel => {
   useEffect(() => {
     let isMounted = true;
     onMount && onMount(() => isMounted);

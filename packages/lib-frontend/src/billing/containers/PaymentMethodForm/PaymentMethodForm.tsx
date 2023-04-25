@@ -5,7 +5,7 @@ import { usePaymentMethodResource } from '@lib/frontend/billing/hooks/usePayment
 import { Loading } from '@lib/frontend/core/components/Loading/Loading';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
+import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
 import { useMutation } from '@lib/frontend/core/hooks/useMutation/useMutation';
 import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
 import type { FormRefModel } from '@lib/frontend/form/form.models';
@@ -38,7 +38,7 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
 
   const ref = useRef<FormRefModel>(null);
 
-  useMount({ onMount: async () => mutate() });
+  useAsync({ onMount: async () => mutate() });
 
   return isLoading ? (
     <Loading fontSize={THEME_SIZE_MORE.XLARGE} />

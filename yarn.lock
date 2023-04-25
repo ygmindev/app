@@ -11166,6 +11166,7 @@ __metadata:
     framer-motion: ^10.12.2
     fuse.js: ^6.6.2
     generate-template-files: ^3.2.1
+    geolocator: ^2.1.5
     glob: ^10.1.0
     graphql: ^15.3.0
     graphql-relay: ^0.10.0
@@ -18333,6 +18334,13 @@ __metadata:
   version: 1.0.0-beta.2
   resolution: "gensync@npm:1.0.0-beta.2"
   checksum: a7437e58c6be12aa6c90f7730eac7fa9833dc78872b4ad2963d2031b00a3367a93f98aec75f9aaac7220848e4026d67a8655e870b24f20a543d103c0d65952ec
+  languageName: node
+  linkType: hard
+
+"geolocator@npm:^2.1.5":
+  version: 2.1.5
+  resolution: "geolocator@npm:2.1.5"
+  checksum: 35800225395c8ebd687199d9d3d5885f544b1cdc04f5454237c8bf4e89b8f08846d64dc881c5a50ee914069875bf44d160773040b87273aafeb7d1cd49dce317
   languageName: node
   linkType: hard
 

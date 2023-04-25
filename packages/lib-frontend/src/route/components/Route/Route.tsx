@@ -3,7 +3,7 @@ import { Protectable } from '@lib/frontend/auth/components/Protectable/Protectab
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
+import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import type { RoutePropsModel } from '@lib/frontend/route/components/Route/Route.models';
 import { RouteHeader } from '@lib/frontend/route/containers/RouteHeader/RouteHeader';
@@ -28,7 +28,7 @@ export const Route: SFCModel<RoutePropsModel> = ({ children, route, testID, ...p
   const isBack = useStore((state) => state.route.isBack);
   const _isLeaf = !route.routes;
 
-  useMount(
+  useAsync(
     {
       onMount: async () => {
         _isLeaf &&

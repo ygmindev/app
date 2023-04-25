@@ -40,9 +40,9 @@ export interface FormContainerPropsModel<TType = void, TResult = void>
   extends UseFormParamsModel<TType, TResult>,
     SubmittablePropsModel<TType, TResult>,
     Pick<ErrorProviderContextModel, 'errorContextGet'> {
+  autoFocus?: string | boolean;
   bottomElement?(props: FormContainerFieldPropsModel): ReactNode;
   cancelLabel?: TranslatableTextModel;
-  isAutoFocus?: boolean;
   isButton?: boolean;
   isFullWidth?: boolean;
   leftElement?(props: FormContainerFieldPropsModel): ReactNode;

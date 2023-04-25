@@ -7,7 +7,7 @@ import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
+import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import {
   NOTIFICATION_DURATION,
@@ -41,7 +41,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
   const { remove } = useNotification();
   const barRef = useRef<AnimatableRefModel>(null);
 
-  useMount(
+  useAsync(
     {
       onMount: async (isMounted) => {
         if (!isInfinite) {

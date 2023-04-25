@@ -63,9 +63,9 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
       case USERNAME_METHOD.PHONE:
         return [
           {
-            Component: ({ ...props }) => (
+            Component: (fieldProps) => (
               <CountryField
-                {...props}
+                {...fieldProps}
                 renderOption={({ id }) => `${id} +${callingCode(id)}`}
               />
             ),
@@ -84,6 +84,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
       style={styles}
       testID={testID}>
       <FormContainer
+        autoFocus={method}
         errorContextGet={(e) =>
           isCheckIfNotExists && (e as HttpError).statusCode === HTTP_STATUS_CODE.CONFLICT
             ? { icon: 'people', message: t('auth:messages.userExistsError') }

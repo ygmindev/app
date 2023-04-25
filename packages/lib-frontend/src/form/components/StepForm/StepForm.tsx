@@ -6,7 +6,7 @@ import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCPropsModel } from '@lib/frontend/core/core.models';
-import { useMount } from '@lib/frontend/core/hooks/useMount/useMount';
+import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
 import type { StepFormPropsModel } from '@lib/frontend/form/components/StepForm/StepForm.models';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
@@ -44,7 +44,7 @@ export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends
     dataSet(undefined);
   };
 
-  useMount({ onMount: async () => _currentSet(0) });
+  useAsync({ onMount: async () => _currentSet(0) });
 
   const _currentSet = (value: number): void => {
     currentSet(value);

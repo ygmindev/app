@@ -47,11 +47,11 @@ export const FormContainer = forwardRef(
 const _FormContainer = forwardRef(
   <TType = void, TResult = void>(
     {
+      autoFocus = true,
       bottomElement,
       cancelLabel,
       elementState,
       initialValues,
-      isAutoFocus = true,
       isBlocking,
       isButton = true,
       isFullWidth,
@@ -136,7 +136,8 @@ const _FormContainer = forwardRef(
             ? ELEMENT_STATE.DISABLED
             : _elementState || fieldProps?.elementState,
           error: errors ? (errors as Record<string, undefined>)[id] : undefined,
-          isAutoFocus: (isInitial && isAutoFocus) || fieldProps?.isAutoFocus,
+          isAutoFocus:
+            autoFocus === id || (isInitial && autoFocus === true) || fieldProps?.isAutoFocus,
           label: fieldProps?.label ? t(fieldProps.label) : undefined,
           onChange: handleChange(id),
           value: values ? (values as Record<string, undefined>)[id] : undefined,

@@ -8,7 +8,7 @@ import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HttpService } from '@lib/shared/http/utils/HttpService/HttpService';
 import type { HttpReponseModel } from '@lib/shared/http/utils/HttpService/HttpService.models';
 
-export const useHttp = (params: UseHttpParamsModel): UseHttpModel => {
+export const useHttp = (params: UseHttpParamsModel = {}): UseHttpModel => {
   const { handleError } = useErrorContext();
   return new HttpService({
     ...params,
