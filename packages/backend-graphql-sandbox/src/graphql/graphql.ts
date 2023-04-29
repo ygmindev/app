@@ -1,5 +1,5 @@
+import { _graphql } from 'packages/backend-graphql-sandbox/src/graphql/_graphql';
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
-import { _graphql } from '@backend/sandbox/graphql/_graphql';
 import toNumber from 'lodash/toNumber';
 
 export const graphql = async (): Promise<void> => {

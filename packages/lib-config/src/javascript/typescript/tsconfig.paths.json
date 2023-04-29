@@ -43,8 +43,8 @@
       "@backend/lambda/*": [
         "packages/backend-lambda/src/*"
       ],
-      "@backend/sandbox/*": [
-        "packages/backend-sandbox/src/*"
+      "@backend/graphql-sandbox/*": [
+        "packages/backend-graphql-sandbox/src/*"
       ],
       "@tool/generate/*": [
         "packages/tool-generate/src/*"
