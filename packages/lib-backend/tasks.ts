@@ -3,7 +3,7 @@ import { nodeTasks } from '@tool/task/node/utils/nodeTasks/nodeTasks';
 
 const tasks: Array<TaskParamsModel<unknown>> = [
   ...nodeTasks({
-    testOverrides: { onAfter: ['database-close'], onBefore: ['database-kill'] },
+    testOverrides: { onAfter: ['database-kill'], onBefore: ['database-start'] },
   }),
 ];
 

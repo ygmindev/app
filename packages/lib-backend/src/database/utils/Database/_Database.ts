@@ -1,5 +1,3 @@
-import 'reflect-metadata';
-
 import { cleanDocument } from '@lib/backend/database/utils/cleanDocument/cleanDocument';
 import type {
   DatabaseModel,

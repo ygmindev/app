@@ -1,7 +1,10 @@
+import { SIGN_IN_TOKEN_CLAIM_FIELDS } from '@lib/backend/auth/resources/SignIn/SignIn.constants';
 import { BANK_RESOURCE_NAME } from '@lib/shared/billing/resources/Bank/Bank.constants';
 import { CARD_RESOURCE_NAME } from '@lib/shared/billing/resources/Card/Card.constants';
 import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import type { RequiredModel } from '@lib/shared/core/core.models';
+import { pick } from '@lib/shared/core/utils/pick/pick';
+import type { EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { LINKED_USER_RESOURCE_NAME } from '@lib/shared/user/resources/LinkedUser/LinkedUser.constants';
 import type { UserModel } from '@lib/shared/user/resources/User/User.models';
 
@@ -14,10 +17,16 @@ export const USER_FIXTURE: RequiredModel<UserModel> = {
   beforeCreate: async (): Promise<void> => {
     return;
   },
+  countryCode: '1',
   created: new Date(2000, 1, 1),
   email: 'user@email.com',
   first: 'fist',
   last: 'last',
   paymentMethodPrimary: '',
-  phone: '',
+  phone: '9171234567',
 };
+
+export const USER_DATA_FIXTURE: EntityResourceDataModel<UserModel> = pick({
+  keys: SIGN_IN_TOKEN_CLAIM_FIELDS,
+  value: USER_FIXTURE,
+});

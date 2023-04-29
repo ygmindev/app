@@ -5,6 +5,6 @@ import type {
 
 export const interleave = <TType>({
   element,
-  values = [],
+  value = [],
 }: InterleaveParamsModel<TType>): InterleaveModel<TType> =>
-  values.flatMap((x) => [x, element]).slice(0, -1);
+  value.flatMap((x) => [x, element]).slice(0, -1);

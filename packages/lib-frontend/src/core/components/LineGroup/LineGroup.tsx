@@ -22,7 +22,7 @@ export const LineGroup: SFCModel<LineGroupPropsModel> = ({ children, testID, tit
       testID={testID}>
       {interleave<ReactElement>({
         element: <Divider />,
-        values: [
+        value: [
           title && (
             <Text
               p

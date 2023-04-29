@@ -5,7 +5,10 @@ const { displayName } = withTest({ target: () => isPrimitive });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await isPrimitive({});
-    expect(result).toStrictEqual({});
+    expect(isPrimitive(1)).toStrictEqual(true);
+    expect(isPrimitive('a')).toStrictEqual(true);
+    expect(isPrimitive(true)).toStrictEqual(true);
+    expect(isPrimitive({})).toStrictEqual(false);
+    expect(isPrimitive(new Object())).toStrictEqual(false);
   });
 });
