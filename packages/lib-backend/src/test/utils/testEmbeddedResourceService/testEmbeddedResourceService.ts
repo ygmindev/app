@@ -1,6 +1,7 @@
 import { DatabaseMain } from '@lib/backend/database/utils/DatabaseMain/DatabaseMain';
 import type { TestEmbeddedResourceServiceParamsModel } from '@lib/backend/test/utils/testEmbeddedResourceService/testEmbeddedResourceService.models';
 import { testResourceService } from '@lib/backend/test/utils/testResourceService/testResourceService';
+import type { PartialModel } from '@lib/shared/core/core.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
 import type { DummyEntityResourceModel } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.models';
@@ -12,7 +13,7 @@ export const testEmbeddedResourceService = async ({
     name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
   });
 
-  let _root: DummyEntityResourceModel | undefined;
+  let _root: PartialModel<DummyEntityResourceModel> | undefined;
 
   service.decorators = {
     beforeCreate: async ({ input }) => ({ ...input, root: _root }),
@@ -25,7 +26,10 @@ export const testEmbeddedResourceService = async ({
 
   testResourceService({
     before: async () => {
-      _root = (await _rootRepository.create({ form: { stringProperty: 'stringProperty' } })).result;
+      const { result } = await _rootRepository.create({
+        form: { stringProperty: 'stringProperty' },
+      });
+      _root = result && { _id: result._id };
     },
     service,
   });

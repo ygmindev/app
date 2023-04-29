@@ -164,8 +164,8 @@ export const testResourceService = async ({
     const { result } = await service.getMany(input);
     const expected = filter(data, input.filter) as Array<DummyEntityResourceModel>;
 
-    beforeGetMany && expect(beforeGetMany).toHaveBeenCalledTimes(1);
-    afterGetMany && expect(afterGetMany).toHaveBeenCalledTimes(1);
+    beforeGetMany && expect(beforeGetMany).toHaveBeenCalledTimes(2);
+    afterGetMany && expect(afterGetMany).toHaveBeenCalledTimes(2);
     expect(result).toStrictEqual(expected);
   });
 
@@ -192,8 +192,8 @@ export const testResourceService = async ({
       }),
     ) as Array<DummyEntityResourceModel>;
 
-    beforeGetMany && expect(beforeGetMany).toHaveBeenCalledTimes(1);
-    afterGetMany && expect(afterGetMany).toHaveBeenCalledTimes(1);
+    beforeGetMany && expect(beforeGetMany).toHaveBeenCalledTimes(2);
+    afterGetMany && expect(afterGetMany).toHaveBeenCalledTimes(2);
     expect(result).toStrictEqual(expected);
   });
 
@@ -216,8 +216,8 @@ export const testResourceService = async ({
       }),
     );
 
-    beforeGetMany && expect(beforeGetMany).toHaveBeenCalledTimes(1);
-    afterGetMany && expect(afterGetMany).toHaveBeenCalledTimes(1);
+    beforeGetMany && expect(beforeGetMany).toHaveBeenCalledTimes(2);
+    afterGetMany && expect(afterGetMany).toHaveBeenCalledTimes(2);
     expect(result).toStrictEqual(expected);
   });
 
@@ -238,8 +238,8 @@ export const testResourceService = async ({
     let expected = filter(data, input.filter) as Array<DummyEntityResourceModel>;
     expected = expected.slice(SKIP, SKIP + TAKE);
 
-    beforeGetMany && expect(beforeGetMany).toHaveBeenCalledTimes(1);
-    afterGetMany && expect(afterGetMany).toHaveBeenCalledTimes(1);
+    beforeGetMany && expect(beforeGetMany).toHaveBeenCalledTimes(2);
+    afterGetMany && expect(afterGetMany).toHaveBeenCalledTimes(2);
     expect(result).toStrictEqual(expected);
   });
 

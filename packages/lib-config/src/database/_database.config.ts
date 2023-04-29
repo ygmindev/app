@@ -1,5 +1,4 @@
 import type { _DatabaseConfigParamsModel } from '@lib/config/database/_database.models';
-import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import type { Options } from '@mikro-orm/core/utils';
 import type { MongoDriver } from '@mikro-orm/mongodb';
 import { TsMorphMetadataProvider } from '@mikro-orm/reflection';
@@ -16,7 +15,7 @@ export const _databaseConfig = ({
   const _config: Options<MongoDriver> = {
     clientUrl: host,
     dbName: database,
-    debug: process.env.NODE_ENV !== ENVIRONMENT.PRODUCTION,
+    debug: false,
     ensureIndexes: true,
     entities,
     metadataProvider: TsMorphMetadataProvider,
