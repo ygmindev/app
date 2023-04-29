@@ -7,7 +7,7 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import type { TextStyleModel } from '@lib/frontend/style/style.models';
 import { MotiText } from 'moti';
-import { forwardRef } from 'react';
+import { forwardRef, useImperativeHandle } from 'react';
 
 export const _AnimatableText: RSFCModel<
   AnimatableRefModel<TextStyleModel>,
@@ -15,11 +15,14 @@ export const _AnimatableText: RSFCModel<
 > = forwardRef(({ animation, children, elementState, ...props }, ref) => {
   const theme = useTheme();
   const { styles } = useStyles({ props });
-  const { animationProps, animationState, isRender } = useAnimationState({
+  const { animationProps, animationState, isRender, to, toState } = useAnimationState({
     animation,
     elementState,
     ref,
   });
+
+  useImperativeHandle(ref, () => ({ to, toState }));
+
   return isRender ? (
     <MotiText
       {...(_textParams.getProps ? _textParams.getProps({ ...props, style: styles }, theme) : {})}

@@ -61,7 +61,7 @@ export const useForm = <TType = void, TResult = void>({
       isBlocking && actions?.app.isLoadingSet(true);
       const _values = beforeSubmit ? await beforeSubmit(values) : values;
       const data = onSubmit && (await onSubmit(_values));
-      onSuccess && (await onSuccess(_values, data));
+      onSuccess && (await onSuccess(values, data));
       return data || null;
     } catch (e) {
       onError ? onError(e as Error) : handleError(e as Error);

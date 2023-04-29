@@ -11244,6 +11244,7 @@ __metadata:
     serverless-offline: ^12.0.4
     setimmediate: ^1.0.5
     source-map-support: ^0.5.21
+    spacetime: ^7.4.3
     stripe: ^12.1.1
     style-loader: ^3.3.2
     supertest: ^6.3.3
@@ -29877,6 +29878,13 @@ __metadata:
   version: 1.4.8
   resolution: "sourcemap-codec@npm:1.4.8"
   checksum: b57981c05611afef31605732b598ccf65124a9fcb03b833532659ac4d29ac0f7bfacbc0d6c5a28a03e84c7510e7e556d758d0bb57786e214660016fb94279316
+  languageName: node
+  linkType: hard
+
+"spacetime@npm:^7.4.3":
+  version: 7.4.3
+  resolution: "spacetime@npm:7.4.3"
+  checksum: 44349923c96f35e5310733e1b48ffc2c9fc7dc05e67dd43d7a7e3bdebb38aae4874cf2c2e479abd720c0d7d2347b7814e32ef16bfbc331966c7414cdde2ea4b7
   languageName: node
   linkType: hard
 

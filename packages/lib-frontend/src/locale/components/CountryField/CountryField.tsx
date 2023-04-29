@@ -5,7 +5,6 @@ import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/
 import type { CountryFieldPropsModel } from '@lib/frontend/locale/components/CountryField/CountryField.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { countries } from '@lib/frontend/locale/utils/countries/countries';
-import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useMemo } from 'react';
 
@@ -23,16 +22,14 @@ export const CountryField: SFCModel<CountryFieldPropsModel> = ({
     onChange,
     value,
   });
-  const _countryCode = useStore((state) => state.locale.countryCode);
 
-  useAsync(
-    {
-      onMount: async () => {
-        _countryCode && valueControlledSet(_countryCode);
-      },
+  useAsync({
+    onMount: async (isMounted) => {
+      const { currentCountry: country } = await import('@lib/frontend/locale/utils/currentCountry/currentCountry');
+      const _country = isMounted() && (await country());
+      isMounted() && _country && valueControlledSet(_country);
     },
-    [_countryCode],
-  );
+  });
 
   const _options = useMemo(
     () => countries().map((country) => ({ id: country, label: country })),

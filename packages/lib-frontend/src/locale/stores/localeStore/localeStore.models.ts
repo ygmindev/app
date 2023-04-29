@@ -1,11 +1,14 @@
+import type { TimezoneModel } from '@lib/frontend/locale/locale.models';
 import type { ReducerModel } from '@lib/frontend/state/state.models';
 
 export interface LocaleStateModel {
-  countryCode?: string;
+  timezone?: TimezoneModel;
+  timezoneIsAutomatic?: boolean;
 }
 
 export interface LocaleActionsParamsModel {
-  countryCodeSet: string;
+  timezoneIsAutomaticSet: boolean;
+  timezoneSet: TimezoneModel;
 }
 
 export interface LocaleReducerModel

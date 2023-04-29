@@ -5,6 +5,7 @@ import type { SwitchFieldPropsModel } from '@lib/frontend/form/components/Switch
 import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/useControlledValue';
 import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
   defaultValue,
@@ -19,21 +20,26 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const { valueControlled, valueControlledSet } = useControlledValue<'true' | 'false'>({
-    defaultValue,
+    defaultValue: defaultValue || 'false',
     onChange,
     value,
   });
-
   return (
     <Wrapper
       isRowAlign
+      onPress={() => valueControlledSet(valueControlled === 'true' ? 'false' : 'true')}
+      position={SHAPE_POSITION.RELATIVE}
       style={styles}
       testID={testID}>
+      <Wrapper
+        isAbsoluteFill
+        zIndex={1}
+      />
+
       <_SwitchField
         elementState={elementState}
         iconActive={iconActive}
         iconInactive={iconInactive}
-        onChange={valueControlledSet}
         value={valueControlled}
       />
 

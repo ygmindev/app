@@ -8,7 +8,7 @@ import type { PropsModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import type { StyleModel, ViewStyleModel } from '@lib/frontend/style/style.models';
 import { motify } from 'moti';
-import { createElement, forwardRef } from 'react';
+import { createElement, forwardRef, useImperativeHandle } from 'react';
 
 export const _animatable = <TProps, TStyle extends StyleModel = ViewStyleModel>({
   Component,
@@ -19,11 +19,11 @@ export const _animatable = <TProps, TStyle extends StyleModel = ViewStyleModel>(
     PropsModel<_AnimatableModel<TProps, TStyle>>
   >(({ animation, elementState, ...props }, ref) => {
     const { styles } = useStyles({ props });
-    const { animationProps, animationState, isRender } = useAnimationState({
+    const { animationProps, animationState, isRender, to, toState } = useAnimationState({
       animation,
       elementState,
-      ref,
     });
+    useImperativeHandle(ref, () => ({ to, toState }));
     return isRender
       ? createElement(_Component, {
           ...animationProps,

@@ -26,7 +26,7 @@ export const LineGroup: SFCModel<LineGroupPropsModel> = ({ children, testID, tit
           title && (
             <Text
               p
-              type={FONT_TYPE.HEADLINE}>
+              type={FONT_TYPE.TITLE}>
               {title}
             </Text>
           ),

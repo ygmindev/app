@@ -1,19 +1,16 @@
 {
-  "1": "1",
   "labels": {
     "add": "add {{value}}",
     "cancel": "cancel",
     "continue": "continue",
     "country": "country",
     "edit": "edit {{value}}",
-    "noResult": "no result",
     "notSet": "not set",
     "phone": "phone",
     "remove": "remove",
     "setAsPrimary": "set as primary",
     "submit": "submit",
-    "tryAgain": "try again",
-    "email": "labels.email"
+    "tryAgain": "try again"
   },
   "messages": {
     "confirmRemove": "Are you sure you want to remove {{value}}?",
@@ -28,12 +25,8 @@
     "validateEmail": "TRANSLATION_MISSING",
     "validateLength": "TRANSLATION_MISSING",
     "validateNotEmpty": "TRANSLATION_MISSING",
+    "validatePhone": "TRANSLATION_MISSING",
     "validateRange": "TRANSLATION_MISSING",
     "validateZipCode": "TRANSLATION_MISSING"
-  },
-  "country": "country",
-  "phone": "phone",
-  "submit": "submit",
-  "US": "US",
-  "US +1": "US +1"
+  }
 }

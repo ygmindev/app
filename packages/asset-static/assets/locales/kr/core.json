@@ -5,7 +5,6 @@
     "continue": "TRANSLATION_MISSING",
     "country": "TRANSLATION_MISSING",
     "edit": "TRANSLATION_MISSING",
-    "noResult": "TRANSLATION_MISSING",
     "notSet": "TRANSLATION_MISSING",
     "phone": "TRANSLATION_MISSING",
     "remove": "TRANSLATION_MISSING",
@@ -26,6 +25,7 @@
     "validateEmail": "TRANSLATION_MISSING",
     "validateLength": "TRANSLATION_MISSING",
     "validateNotEmpty": "TRANSLATION_MISSING",
+    "validatePhone": "TRANSLATION_MISSING",
     "validateRange": "TRANSLATION_MISSING",
     "validateZipCode": "TRANSLATION_MISSING"
   }

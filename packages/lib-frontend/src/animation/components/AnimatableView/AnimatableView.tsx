@@ -5,9 +5,7 @@ import { composeComponent } from '@lib/frontend/core/utils/composeComponent/comp
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const AnimatableView = composeComponent<AnimatableViewPropsModel, _AnimatableViewPropsModel>(
-  {
-    Component: _AnimatableView,
-  },
+  { Component: _AnimatableView },
 );
 
 process.env.APP_DEBUG && (AnimatableView.displayName = variableName(() => AnimatableView));

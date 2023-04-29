@@ -95,14 +95,14 @@ const _FormContainer = forwardRef(
           }, {} as TType)
         : data;
 
-    const _handleSubmit = async (): Promise<TResult | null> => {
+    const _handleSubmit = async (data: TType): Promise<TResult | null> => {
       const _initialValues = initialValues && _getValues(initialValues);
-      const _values = _getValues(values);
-      if (isEqual(_initialValues, _values)) {
+      const _data = _getValues(data);
+      if (isEqual(_initialValues, _data)) {
         error({ message: t('core:messages.validateChanged') });
         return null;
       } else {
-        return (onSubmit && (await onSubmit(_values as TType))) || null;
+        return (onSubmit && (await onSubmit(_data as TType))) || null;
       }
     };
 

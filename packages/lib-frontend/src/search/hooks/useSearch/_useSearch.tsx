@@ -16,13 +16,20 @@ export const _useSearch = <TType,>({
   keys,
   limit = SEARCH_LIMIT,
   list,
+  onChange,
 }: _UseSearchParamsModel<TType>): _UseSearchModel<TType> => {
   const [query, querySet] = useState<string>('');
 
-  const _setQuery = useCallback(debounce({ callback: querySet, duration: delay }), [
-    querySet,
-    delay,
-  ]);
+  const _querySet = useCallback(
+    debounce({
+      callback: (value) => {
+        querySet(value);
+        onChange && onChange(value);
+      },
+      duration: delay,
+    }),
+    [querySet, delay],
+  );
 
   const fuse = useMemo(() => new Fuse(list, { keys, threshold: SEARCH_THRESHOLD }), [list]);
 
@@ -31,7 +38,7 @@ export const _useSearch = <TType,>({
     [fuse, limit, query],
   );
 
-  const search = useCallback(_setQuery, []);
+  const search = useCallback(_querySet, []);
 
   return { result, search };
 };

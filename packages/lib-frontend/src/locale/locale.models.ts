@@ -13,3 +13,8 @@ export interface LocaleContextModel {
 }
 
 export type CountryFormatModel = `${COUNTRY_FORMAT}`;
+
+export interface TimezoneModel {
+  name: string;
+  offset: number;
+}

@@ -20,7 +20,8 @@ export const Droppable: SFCModel<DroppablePropsModel> = ({
         <Dropdown
           {...props}
           anchor={anchor(isActive)}
-          isOpen={isActive}>
+          isOpen={isActive}
+          onToggle={(value) => isActiveSet(value || false)}>
           {children}
         </Dropdown>
       </View>

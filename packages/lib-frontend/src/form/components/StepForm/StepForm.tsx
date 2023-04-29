@@ -1,9 +1,9 @@
-import type { AnimatableRefModel } from '@lib/frontend/animation/animation.models';
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Slides } from '@lib/frontend/animation/components/Slides/Slides';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import type { WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCPropsModel } from '@lib/frontend/core/core.models';
 import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
@@ -19,6 +19,7 @@ import type { ReactElement } from 'react';
 import { cloneElement, useMemo, useRef, useState } from 'react';
 
 export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends Array<unknown>>({
+  beforeSubmit,
   onSubmit,
   onSuccess,
   steps,
@@ -37,7 +38,7 @@ export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends
 
   const _isLastStep = useMemo(() => current === steps.length - 1, [current, steps.length]);
 
-  const barRef = useRef<AnimatableRefModel>(null);
+  const barRef = useRef<WrapperRefModel>(null);
 
   const _handleClear = (): void => {
     _currentSet(0);
@@ -106,8 +107,9 @@ export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends
                 isLoadingSet(true);
                 element.props.onSubmit && (await element.props.onSubmit(data));
                 if (_isLastStep) {
-                  const _data = { ...data, ...(stepData as object) };
-                  const _result = onSubmit && (await onSubmit(_data as TType));
+                  let _data = { ...data, ...(stepData as object) } as TType;
+                  _data = beforeSubmit ? await beforeSubmit(_data) : _data;
+                  const _result = onSubmit && (await onSubmit(_data));
                   onSuccess && (await onSuccess(_data as TType, _result));
                   await sleep({ duration: theme.animation.transition });
                   _handleClear();

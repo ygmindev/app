@@ -11,6 +11,8 @@ import { REDIRECT } from '@lib/frontend/core/core.constants';
 import { DEV } from '@lib/frontend/dev/dev.constants';
 import { DevPage } from '@lib/frontend/dev/pages/DevPage/DevPage';
 import { FORM } from '@lib/frontend/form/form.constants';
+import { TIMEZONE } from '@lib/frontend/locale/locale.constants';
+import { TimezoneFormPage } from '@lib/frontend/locale/pages/TimezoneFormPage/TimezoneFormPage';
 import { NotFoundPage } from '@lib/frontend/route/pages/NotFoundPage/NotFoundPage';
 import type { RouteModel } from '@lib/frontend/route/route.models';
 import type {
@@ -19,14 +21,16 @@ import type {
 } from '@lib/frontend/route/utils/getRoutes/getRoutes.models';
 import { SettingsPage } from '@lib/frontend/settings/pages/SettingsPage/SettingsPage';
 import { SETTINGS } from '@lib/frontend/settings/settings.constants';
+import { BrightnessFormPage } from '@lib/frontend/style/pages/BrightnessFormPage/BrightnessFormPage';
 import { AccountPage } from '@lib/frontend/user/pages/AccountPage/AccountPage';
 import { NameFormPage } from '@lib/frontend/user/pages/NameFormPage/NameFormPage';
 import { PersonalPage } from '@lib/frontend/user/pages/PersonalPage/PersonalPage';
 import { EMAIL, NAME, PERSONAL, PHONE } from '@lib/frontend/user/user.constants';
 import { AUTH, USERNAME_METHOD } from '@lib/shared/auth/auth.constants';
 import { CORE } from '@lib/shared/core/core.constants';
+import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
-import { STYLE } from '@lib/shared/style/style.constants';
+import { BRIGHTNESS, STYLE } from '@lib/shared/style/style.constants';
 import { ACCOUNT, USER } from '@lib/shared/user/user.constants';
 
 export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesModel =>
@@ -50,6 +54,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
             {
               element: <PersonalPage />,
               header: { previous: ACCOUNT },
+              isRootsVisible: true,
               pathname: PERSONAL,
               title: ({ t }) => t('account:labels.personal'),
             },
@@ -62,10 +67,12 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
             {
               element: <SettingsPage />,
               header: { previous: ACCOUNT },
+              ns: [SETTINGS, LOCALE],
               pathname: SETTINGS,
               title: ({ t }) => t('settings:labels.settings'),
             },
           ],
+          title: ({ t }) => t('account:labels.account'),
         },
 
         {
@@ -75,11 +82,10 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
             {
               header: { previous: `/${ACCOUNT}/${PERSONAL}` },
               ns: [USER],
-              pathname: PERSONAL,
+              pathname: `/${ACCOUNT}/${PERSONAL}`,
               routes: [
                 {
                   element: <NameFormPage />,
-                  ns: [USER],
                   pathname: NAME,
                   title: ({ t }) => t('core:labels.edit', { value: t('user:labels.name') }),
                 },
@@ -91,7 +97,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                       mode={SIGN_IN_FORM_MODE.UPDATE}
                     />
                   ),
-                  ns: [AUTH, USER],
+                  ns: [AUTH],
                   pathname: EMAIL,
                   title: ({ t }) => t('core:labels.edit', { value: t('user:labels.email') }),
                 },
@@ -106,6 +112,24 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                   ns: [AUTH, USER],
                   pathname: PHONE,
                   title: ({ t }) => t('core:labels.edit', { value: t('user:labels.email') }),
+                },
+              ],
+            },
+
+            {
+              header: { previous: `/${ACCOUNT}/${SETTINGS}` },
+              ns: [USER, SETTINGS],
+              pathname: `/${ACCOUNT}/${SETTINGS}`,
+              routes: [
+                {
+                  element: <BrightnessFormPage />,
+                  pathname: BRIGHTNESS,
+                  title: ({ t }) => t('settings:labels.brightness'),
+                },
+                {
+                  element: <TimezoneFormPage />,
+                  pathname: TIMEZONE,
+                  title: ({ t }) => t('locale:labels.timezone'),
                 },
               ],
             },

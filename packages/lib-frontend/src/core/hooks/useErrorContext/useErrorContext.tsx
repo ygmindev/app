@@ -6,6 +6,7 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import type { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
+import { error } from '@lib/shared/logging/utils/logger/logger';
 import { useContext } from 'react';
 
 export const useErrorContext = (): UseErrorContextModel => {
@@ -13,17 +14,18 @@ export const useErrorContext = (): UseErrorContextModel => {
   const { error: notify } = useNotification();
   const { errorContextGet, errorContextSet, mode } = useContext(ErrorContext);
 
-  const _errorContextGet = (error: Error): ErrorContextModel => {
-    let _errorContext = errorContextGet && errorContextGet(error);
+  const _errorContextGet = (e: Error): ErrorContextModel => {
+    let _errorContext = errorContextGet && errorContextGet(e);
     if (!_errorContext) {
-      if (['Network Error'].includes(error.message)) {
+      if (['Network Error'].includes(e.message)) {
         _errorContext = {
           icon: 'offline',
           message: ({ t }) => t('core:messages.errorOffline'),
           mode: ERROR_MODE.FALLBACK,
         };
       } else {
-        switch ((error as HttpError).statusCode) {
+        error(e);
+        switch ((e as HttpError).statusCode) {
           case HTTP_STATUS_CODE.UNAUTHORIZED: {
             _errorContext = {
               icon: 'lock',

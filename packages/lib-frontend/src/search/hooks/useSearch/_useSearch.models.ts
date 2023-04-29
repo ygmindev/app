@@ -3,6 +3,7 @@ export interface _UseSearchParamsModel<TType> {
   keys: Array<string>;
   limit?: number;
   list: Array<TType>;
+  onChange?(value: string): void;
 }
 
 export interface _UseSearchModel<TResult> {

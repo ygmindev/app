@@ -3,6 +3,7 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import { Divider } from '@lib/frontend/core/components/Divider/Divider';
 import { Dropdown } from '@lib/frontend/core/components/Dropdown/Dropdown';
 import { DROPDOWN_MAX_HEIGHT } from '@lib/frontend/core/components/Dropdown/Dropdown.constants';
+import type { DropdownRefModel } from '@lib/frontend/core/components/Dropdown/Dropdown.models';
 import type {
   MenuOptionModel,
   MenuPropsModel,
@@ -11,6 +12,7 @@ import type {
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import type { PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
 import { VirtualizedList } from '@lib/frontend/core/components/VirtualizedList/VirtualizedList';
+import type { VirtualizedListRefModel } from '@lib/frontend/core/components/VirtualizedList/VirtualizedList.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { RSFCModel } from '@lib/frontend/core/core.models';
@@ -19,7 +21,15 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import type { ReactElement, RefObject } from 'react';
-import { cloneElement, createRef, forwardRef, useImperativeHandle, useMemo, useState } from 'react';
+import {
+  cloneElement,
+  createRef,
+  forwardRef,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
   (
@@ -30,7 +40,6 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
       maxHeight = DROPDOWN_MAX_HEIGHT,
       maxWidth,
       onChange,
-      onClose,
       options,
       renderOption,
       topElement,
@@ -42,6 +51,14 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
     const { styles } = useStyles({ props });
     const isMobile = useIsMobile();
     const [isOpen, isOpenSet] = useState<boolean>(false);
+    const _dropdownRef = useRef<DropdownRefModel>(null);
+    const _virtualizedListRef = useRef<VirtualizedListRefModel>(null);
+
+    useImperativeHandle(ref, () => ({
+      isOpen: () => _dropdownRef.current?.isOpen() || false,
+      scrollTo: (params) => _virtualizedListRef.current?.getScrollableNode().scrollTo(params),
+      toggle: (params) => _dropdownRef.current?.toggle(params),
+    }));
 
     const subMenuRefs = useMemo(
       () =>
@@ -53,16 +70,9 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
       [options],
     );
 
-    useImperativeHandle(ref, () => ({
-      isOpen: () => isOpen,
-      toggle: _handleToggle,
-    }));
-
     const _handleToggle = (value?: boolean): void => {
       Object.values(subMenuRefs).forEach((v) => v.current?.toggle(false));
-      const _isOpen = value === undefined ? !isOpen : value;
-      !_isOpen && onClose && onClose();
-      isOpenSet(!!_isOpen);
+      isOpenSet(!!value);
     };
 
     const _handlePressOption = async ({
@@ -96,7 +106,8 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
 
         <VirtualizedList
           items={options}
-          render={(option) => {
+          ref={_virtualizedListRef}
+          render={(option: MenuOptionModel) => {
             if (option.isDivider) {
               return <Divider key={option.id} />;
             }
@@ -151,7 +162,8 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
         isOpen={isOpen}
         maxHeight={maxHeight}
         maxWidth={maxWidth}
-        onClose={() => _handleToggle(false)}
+        onToggle={_handleToggle}
+        ref={_dropdownRef}
         style={styles}
         width={width}>
         {_children}

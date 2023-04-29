@@ -51,10 +51,11 @@ export const Route: SFCModel<RoutePropsModel> = ({ children, route, testID, ...p
   _element = <_Container>{_element}</_Container>;
   const _pathname = useMemo(() => trimPathname(`${route.root || ''}/${route.pathname}`), [route]);
   const _isActive = useMemo(() => isActive({ isExact: true, pathname: _pathname }), [_pathname]);
+  const _isLeafActive = _isLeaf && _isActive;
 
   return (
     <>
-      {route.header && _isLeaf && _isActive && (
+      {_isLeafActive && route.header && (
         <Portal>
           <RouteHeader route={route} />
         </Portal>

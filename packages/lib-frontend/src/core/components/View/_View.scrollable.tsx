@@ -1,25 +1,35 @@
 import { _viewParams as _viewParamsBase } from '@lib/frontend/core/components/View/_View';
-import type { _ViewPropsModel } from '@lib/frontend/core/components/View/_View.models';
+import type {
+  _ViewPropsModel,
+  _ViewRefModel,
+} from '@lib/frontend/core/components/View/_View.models';
 import { View } from '@lib/frontend/core/components/View/View';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import type { ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
+import type { ViewStyleModel } from '@lib/frontend/style/style.models';
 import { Fragment } from 'react';
 import type { ViewProps } from 'react-native';
 import { ScrollView, StyleSheet } from 'react-native';
 
-export const _viewParams: ComposeComponentParamsModel<_ViewPropsModel, ViewProps> = {
+export const _viewParams: ComposeComponentParamsModel<
+  _ViewPropsModel,
+  ViewProps,
+  ViewStyleModel,
+  _ViewRefModel
+> = {
   Component: Fragment,
 
   getProps: (
     { isHorizontalScrollable, isVerticalScrollable, onScroll, style, ...props },
-    ...params
+    theme,
+    ref,
   ) => {
     const { height, width, ...containerStyle } = StyleSheet.flatten(style);
     return {
       children: (
         <View style={{ display: 'flex', flex: width || height ? undefined : 1, height, width }}>
           <ScrollView
-            {...(_viewParamsBase.getProps && _viewParamsBase.getProps(props, ...params))}
+            {...(_viewParamsBase.getProps && _viewParamsBase.getProps(props, theme, ref))}
             alwaysBounceHorizontal={false}
             alwaysBounceVertical={false}
             contentContainerStyle={{ ...containerStyle, flexGrow: 1 }}
@@ -30,8 +40,10 @@ export const _viewParams: ComposeComponentParamsModel<_ViewPropsModel, ViewProps
                     onScroll({ x: nativeEvent.contentOffset.x, y: nativeEvent.contentOffset.y })
                 : undefined
             }
+            ref={ref}
             scrollEnabled
             scrollEventThrottle={16}
+            scrollToOverflowEnabled
             showsHorizontalScrollIndicator={isHorizontalScrollable || undefined}
             showsVerticalScrollIndicator={isVerticalScrollable || undefined}
           />
@@ -41,4 +53,6 @@ export const _viewParams: ComposeComponentParamsModel<_ViewPropsModel, ViewProps
   },
 };
 
-export const _View = composeComponent<_ViewPropsModel, ViewProps>(_viewParams);
+export const _View = composeComponent<_ViewPropsModel, ViewProps, ViewStyleModel, _ViewRefModel>(
+  _viewParams,
+);

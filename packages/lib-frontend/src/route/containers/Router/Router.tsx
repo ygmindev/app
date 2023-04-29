@@ -33,7 +33,7 @@ const _getRoute = ({ pathname, ...route }: RouteModel, depth = 1): RouteModel =>
                   {
                     ...child,
                     header: child.header || _route.header,
-                    root: trimPathname(`${route.root || ''}/${_root}`),
+                    root: trimPathname(`${route.root ?? ''}/${_root}`),
                   },
                   depth + 1,
                 ),
@@ -48,7 +48,7 @@ const _getRoute = ({ pathname, ...route }: RouteModel, depth = 1): RouteModel =>
 
 export const Router: SFCModel<RouterPropsModel> = ({ routes, testID, ...props }) => {
   const { styles } = useStyles({ props });
-  const _routes = useMemo(() => routes.map(_getRoute), [routes]);
+  const _routes = useMemo(() => routes.map((route) => _getRoute(route)), [routes]);
   return (
     <Wrapper
       grow

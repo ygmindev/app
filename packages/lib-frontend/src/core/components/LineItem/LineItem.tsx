@@ -1,50 +1,69 @@
 import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import type { LineItemPropsModel } from '@lib/frontend/core/components/LineItem/LineItem.models';
+import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
+import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import { THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import isString from 'lodash/isString';
 import { useState } from 'react';
 
 export const LineItem: SFCModel<LineItemPropsModel> = ({
   children,
   icon,
+  label,
   onPress,
   rightElement,
   testID,
+  value,
   ...props
 }) => {
   const { styles } = useStyles({ props });
   const theme = useTheme();
+  const state = useStore((state) => state);
+  const { t } = useTranslation();
   const [isActive, isActiveSet] = useState<boolean>();
+  const _isValue = value !== undefined;
   return (
     <Activatable
       onActive={() => isActiveSet(true)}
       onInactive={() => isActiveSet(false)}
       style={styles}>
       <Wrapper
-        isRowAlign
+        isRow
         onPress={onPress}
         p
         testID={testID}>
-        {icon && (
-          <Wrapper
-            isCenter
-            width={theme.shape.height.s}>
-            <Icon icon={icon} />
-          </Wrapper>
-        )}
+        <Wrapper
+          grow
+          isRowAlign>
+          {icon && (
+            <Wrapper width={theme.shape.height.s}>
+              <Icon icon={icon} />
+            </Wrapper>
+          )}
 
-        {children && (
-          <Wrapper
-            grow
-            isRowAlign
-            justify={FLEX_JUSTIFY.SPACE_BETWEEN}>
-            {children}
-          </Wrapper>
-        )}
+          {label || _isValue ? (
+            <Wrapper spacing={THEME_SIZE.SMALL}>
+              <TranslatableText isBold={_isValue}>{label}</TranslatableText>
+
+              {_isValue && (
+                <Text
+                  colorRole={value ? undefined : THEME_ROLE.MUTED}
+                  isEllipsis>
+                  {isString(value) ? value : (value && value(state)) || t('core:labels.notSet')}
+                </Text>
+              )}
+            </Wrapper>
+          ) : null}
+
+          {children}
+        </Wrapper>
 
         {rightElement && rightElement(isActive)}
       </Wrapper>

@@ -10,7 +10,8 @@ export interface _UseAnimationStateParamsModel<TStyle extends StyleModel = ViewS
   extends RefPropsModel<AnimatableRefModel>,
     AnimatablePropsModel<TStyle> {}
 
-export interface _UseAnimationStateModel<TStyle extends StyleModel = ViewStyleModel> {
+export interface _UseAnimationStateModel<TStyle extends StyleModel = ViewStyleModel>
+  extends AnimatableRefModel<TStyle> {
   animationProps: MotiProps<TStyle>;
   animationState: UseDynamicAnimationState;
   current?: TStyle;

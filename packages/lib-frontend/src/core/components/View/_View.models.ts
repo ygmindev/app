@@ -5,6 +5,7 @@ import type {
 } from '@lib/frontend/core/core.models';
 import type { StylePropsModel, ViewStyleModel } from '@lib/frontend/style/style.models';
 import type { CallableModel, CallablePromiseModel } from '@lib/shared/core/core.models';
+import type { ScrollView } from 'react-native';
 
 export interface _ViewPropsModel extends ChildrenPropsModel, StylePropsModel<ViewStyleModel> {
   isFocusable?: boolean;
@@ -20,3 +21,5 @@ export interface _ViewPropsModel extends ChildrenPropsModel, StylePropsModel<Vie
   onResponderRelease?: CallableModel;
   onScroll?(position: PositionModel): void;
 }
+
+export interface _ViewRefModel extends ScrollView {}

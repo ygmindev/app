@@ -35,7 +35,6 @@ export const SelectField = <TType extends string = string>({
   SFCPropsModel<SelectFieldPropsModel<TType>>
 > => {
   const { styles } = useStyles({ props });
-  const menuRef = useRef<MenuRefModel>(null);
   const { t } = useTranslation();
   const [query, querySet] = useState<string>();
   const { valueControlled, valueControlledSet } = useControlledValue({
@@ -44,11 +43,17 @@ export const SelectField = <TType extends string = string>({
     value,
   });
 
-  const { result, search } = useSearch({ keys: ['label', 'value'], list: options });
+  const _menuRef = useRef<MenuRefModel>(null);
+
+  const { result, search } = useSearch({
+    keys: ['label', 'value'],
+    list: options,
+    onChange: () => _menuRef?.current?.scrollTo({ x: 0, y: 0 }),
+  });
 
   const _handleToggle = async (isOpen?: boolean): Promise<void> => {
     await sleep();
-    menuRef && menuRef.current && menuRef.current.toggle(isOpen);
+    _menuRef && _menuRef.current && _menuRef.current.toggle(isOpen);
     search('');
     querySet('');
   };
@@ -119,7 +124,7 @@ export const SelectField = <TType extends string = string>({
         isFullWidth
         onChange={valueControlledSet}
         options={result}
-        ref={menuRef}
+        ref={_menuRef}
         renderOption={renderOption}
         value={valueControlled}
       />

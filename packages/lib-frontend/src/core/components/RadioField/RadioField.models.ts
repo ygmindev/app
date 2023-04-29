@@ -5,5 +5,6 @@ import type { ThemeColorModel } from '@lib/frontend/style/style.models';
 export interface RadioFieldPropsModel<TType extends string = string>
   extends StringFieldPropsModel<TType> {
   color?: ThemeColorModel;
+  isHorizontal?: boolean;
   options: Array<TranslatableOptionModel<TType>>;
 }

@@ -1,10 +1,10 @@
 import { ANIMATION_STATES_APPEARABLE } from '@lib/frontend/animation/animation.constants';
-import type { AnimatableRefModel } from '@lib/frontend/animation/animation.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import type { WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
@@ -39,7 +39,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
   const { styles } = useStyles({ props });
   const { t } = useTranslation();
   const { remove } = useNotification();
-  const barRef = useRef<AnimatableRefModel>(null);
+  const barRef = useRef<WrapperRefModel>(null);
 
   useAsync(
     {

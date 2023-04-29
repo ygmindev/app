@@ -1,7 +1,7 @@
-import type { _CountryModel } from '@lib/frontend/locale/utils/country/_country.models';
+import type { _CurrentCountryModel } from '@lib/frontend/locale/utils/currentCountry/_currentCountry.models';
 import geolocator from 'geolocator';
 
-export const _country = async (): Promise<_CountryModel> => {
+export const _currentCountry = async (): Promise<_CurrentCountryModel> => {
   geolocator.config({ language: 'en' });
   return new Promise((resovle, reject) =>
     geolocator.locate(

@@ -1,11 +1,11 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import type { _DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/_Dropdown.models';
-import { View } from '@lib/frontend/core/components/View/View';
 import { DIRECTION } from '@lib/frontend/core/core.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import Tippy from '@tippyjs/react';
+import { View } from 'react-native';
 
 export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   anchor,
@@ -14,18 +14,18 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   isFullWidth,
   isOpen,
   maxWidth,
-  onClose,
+  onToggle,
   ...props
 }) => {
   const { styles } = useStyles({ props });
   const theme = useTheme();
-
   return (
     <Tippy
       animation
       appendTo={() => document.body}
       content={
         <Appearable
+          animation={{ isLazy: false }}
           grow
           isVisible={isOpen}>
           {children}
@@ -36,7 +36,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
       interactive
       maxWidth={maxWidth ?? '100%'}
       offset={direction ? [0, theme.shape.spacing.m] : undefined}
-      onClickOutside={onClose}
+      onClickOutside={() => onToggle(false)}
       placement={direction ?? DIRECTION.BOTTOM}
       popperOptions={{
         modifiers: isFullWidth

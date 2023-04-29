@@ -1,15 +1,14 @@
-import type { DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/Dropdown.models';
+import type {
+  DropdownPropsModel,
+  DropdownRefModel,
+} from '@lib/frontend/core/components/Dropdown/Dropdown.models';
 import type { PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
-import type { RefPropsModel, TranslatableOptionModel } from '@lib/frontend/core/core.models';
+import type { TranslatableOptionModel } from '@lib/frontend/core/core.models';
 import type { StringFieldPropsModel } from '@lib/frontend/form/form.models';
 import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
-import type { CallableModel } from '@lib/shared/core/core.models';
 import type { ReactElement, ReactNode } from 'react';
 
-export interface MenuRefModel {
-  isOpen: CallableModel<boolean>;
-  toggle(isOpen?: boolean): void;
-}
+export interface MenuRefModel extends DropdownRefModel {}
 
 export type MenuOptionModel<TType extends string = string> = TranslatableOptionModel<TType> & {
   subOptions?: Array<MenuOptionModel>;
@@ -18,10 +17,9 @@ export type MenuOptionModel<TType extends string = string> = TranslatableOptionM
 export interface MenuPropsModel<TType extends string = string>
   extends Pick<
       DropdownPropsModel,
-      'width' | 'maxWidth' | 'maxHeight' | 'isFullWidth' | 'onClose' | 'direction'
+      'width' | 'maxWidth' | 'maxHeight' | 'isFullWidth' | 'direction'
     >,
-    Omit<StringFieldPropsModel, 'id'>,
-    RefPropsModel<MenuRefModel> {
+    Omit<StringFieldPropsModel, 'id'> {
   anchor(isOpen?: boolean): ReactElement<PressablePropsModel>;
   options: Array<MenuOptionModel<TType>>;
   renderOption?(option: TranslatableOptionModel): TranslatableTextModel;

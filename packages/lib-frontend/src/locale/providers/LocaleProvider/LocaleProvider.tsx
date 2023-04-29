@@ -2,21 +2,22 @@ import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
 import { _LocaleProvider } from '@lib/frontend/locale/providers/LocaleProvider/_LocaleProvider';
 import type { LocaleProviderPropsModel } from '@lib/frontend/locale/providers/LocaleProvider/LocaleProvider.models';
-import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
+import { currentTimezone } from '@lib/frontend/locale/utils/currentTimezone/currentTimezone';
 import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 
 export const LocaleProvider: SFCModel<LocaleProviderPropsModel> = ({ children }) => {
   const actions = useActions();
+  const _timezoneIsAutomatic = useStore((state) => state.locale.timezoneIsAutomatic);
 
-  useAsync({
-    onMount: async (isMounted) => {
-      if (!isSsr) {
-        const { country } = await import('@lib/frontend/locale/utils/country/country');
-        const _country = isMounted() && (await country());
-        isMounted() && _country && actions?.locale.countryCodeSet(_country);
-      }
+  useAsync(
+    {
+      onMount: async (isMounted) => {
+        _timezoneIsAutomatic && isMounted() && actions?.locale.timezoneSet(currentTimezone());
+      },
     },
-  });
+    [_timezoneIsAutomatic],
+  );
 
   return <_LocaleProvider>{children}</_LocaleProvider>;
 };

@@ -5,10 +5,12 @@ import type { UserModel } from '@lib/shared/user/resources/User/User.models';
 
 export const USER_FIELDS: GraphQlQueryParamsFieldsModel<UserModel> = [
   '_id',
+  'countryCode',
+  'email',
   'first',
   'last',
-  'email',
   'paymentMethodPrimary',
+  'phone',
 ];
 
 export const USER_OUTPUT_FIELDS: UseResourceMethodParamsFieldsModel<

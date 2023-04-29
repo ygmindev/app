@@ -2,10 +2,16 @@ import type { LocaleReducerModel } from '@lib/frontend/locale/stores/localeStore
 
 export const LOCALE_REDUCER: LocaleReducerModel = {
   actions: {
-    countryCodeSet: (store, value) => {
-      store.set('countryCode', value);
+    timezoneIsAutomaticSet: (store, value) => {
+      store.set('timezoneIsAutomatic', value);
+    },
+
+    timezoneSet: (store, value) => {
+      store.set('timezone', value);
     },
   },
 
-  initialState: {},
+  initialState: {
+    timezoneIsAutomatic: true,
+  },
 };

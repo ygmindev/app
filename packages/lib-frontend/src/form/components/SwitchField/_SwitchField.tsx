@@ -9,7 +9,7 @@ import { Switch } from 'react-native-switch';
 export const _SwitchField = composeComponent<_SwitchFieldPropsModel, WrapperPropsModel>({
   Component: Wrapper,
 
-  getProps: ({ elementState, iconActive, iconInactive, onChange, value }, theme) => {
+  getProps: ({ elementState, iconActive, iconInactive, value }, theme) => {
     const _value = value === 'true';
     const _isDisabled =
       elementState === ELEMENT_STATE.DISABLED || elementState === ELEMENT_STATE.LOADING;
@@ -26,7 +26,6 @@ export const _SwitchField = composeComponent<_SwitchFieldPropsModel, WrapperProp
             borderColor: _value ? theme.colors.tone.primary.main : theme.colors.tone.secondary.main,
             justifyContent: 'center',
           }}
-          onValueChange={(value) => onChange && onChange(value ? 'true' : 'false')}
           renderActiveText={false}
           renderInActiveText={false}
           renderInsideCircle={() => (

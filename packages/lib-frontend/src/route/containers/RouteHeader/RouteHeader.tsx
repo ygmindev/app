@@ -1,10 +1,10 @@
 import { ANIMATION_STATES_APPEARABLE } from '@lib/frontend/animation/animation.constants';
-import type { AnimatableRefModel } from '@lib/frontend/animation/animation.models';
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import type { WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
@@ -25,7 +25,7 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ..
   const theme = useTheme();
   const { location, push } = useRouter();
   const _previous = route.header?.previous;
-  const ref = useRef<AnimatableRefModel>(null);
+  const ref = useRef<WrapperRefModel>(null);
   const isLoading = useStore((state) => state.app.isLoading);
   return (
     <Wrapper

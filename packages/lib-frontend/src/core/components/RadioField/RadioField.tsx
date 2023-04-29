@@ -10,12 +10,14 @@ import { TranslatableText } from '@lib/frontend/locale/components/TranslatableTe
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import type { ReactElement } from 'react';
 
 export const RadioField = <TType extends string = string>({
   color = THEME_COLOR.PRIMARY,
   defaultValue,
   elementState,
+  isHorizontal,
   onChange,
   options,
   value,
@@ -36,6 +38,7 @@ export const RadioField = <TType extends string = string>({
 
   return (
     <Wrapper
+      isRow={isHorizontal}
       spacing={THEME_SIZE.SMALL}
       style={styles}>
       {options.map(({ icon, id, label }) => {
@@ -44,13 +47,18 @@ export const RadioField = <TType extends string = string>({
           theme.colors.tone[_isActive ? color : THEME_COLOR.NEUTRAL][
             _isDisabled || !_isActive ? THEME_ROLE.MUTED : THEME_ROLE.MAIN
           ];
-
         return (
           <Activatable key={id}>
             {(isActive) => (
               <Wrapper
                 isRowAlign
-                onPress={() => valueControlledSet(id)}>
+                onPress={() => valueControlledSet(id)}
+                position={SHAPE_POSITION.RELATIVE}>
+                <Wrapper
+                  isAbsoluteFill
+                  zIndex={1}
+                />
+
                 <Wrapper
                   border
                   borderColor={_color}
