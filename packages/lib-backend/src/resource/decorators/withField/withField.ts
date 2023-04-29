@@ -20,7 +20,7 @@ const _getField = <TType extends unknown>({
     case FIELD_TYPE.DATE:
       return Field(() => Date);
     default:
-      return Field();
+      return Field(() => String);
   }
 };
 

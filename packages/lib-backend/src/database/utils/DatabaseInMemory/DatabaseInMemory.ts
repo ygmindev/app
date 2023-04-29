@@ -11,8 +11,6 @@ export class DatabaseInMemory {
     this._server ? ['starting', 'running'].includes(this._server.state) : false;
 
   start = async (): Promise<void> => {
-    const x = await MongoMemoryServer.create();
-    console.warn(`@@@ ${x.getUri()}`);
     if (!this._isActive()) {
       debug('Starting database');
       const url = process.env.SERVER_MONGO_DATABASE_URL.replace('mongodb://', '').split(':');
