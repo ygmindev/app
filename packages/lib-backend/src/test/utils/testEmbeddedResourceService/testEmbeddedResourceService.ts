@@ -1,4 +1,6 @@
 import { DatabaseMain } from '@lib/backend/database/utils/DatabaseMain/DatabaseMain';
+import { DUMMY_ENTITY_RESOURCE_SEED_DATA } from '@lib/backend/database/utils/seed/seed.constants';
+import { DummyEmbeddedResourceService } from '@lib/backend/test/resources/DummyEmbeddedResource/DummyEmbeddedResourceService/DummyEmbeddedResourceService';
 import type { TestEmbeddedResourceServiceParamsModel } from '@lib/backend/test/utils/testEmbeddedResourceService/testEmbeddedResourceService.models';
 import { testResourceService } from '@lib/backend/test/utils/testResourceService/testResourceService';
 import type { PartialModel } from '@lib/shared/core/core.models';
@@ -12,6 +14,7 @@ export const testEmbeddedResourceService = async ({
   const _rootRepository = Container.get(DatabaseMain).getRepository<DummyEntityResourceModel>({
     name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
   });
+  const _service = Container.get(DummyEmbeddedResourceService);
 
   let _root: PartialModel<DummyEntityResourceModel> | undefined;
 
@@ -30,6 +33,9 @@ export const testEmbeddedResourceService = async ({
         form: { stringProperty: 'stringProperty' },
       });
       _root = result && { _id: result._id };
+      for (const form of DUMMY_ENTITY_RESOURCE_SEED_DATA) {
+        await _service.create({ form, root: _root });
+      }
     },
     service,
   });

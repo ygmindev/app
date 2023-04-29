@@ -44,7 +44,7 @@ export const _testConfig = ({
 
             provider: 'istanbul',
 
-            reporter: ['text', 'html'],
+            reporter: ['html'],
 
             reportsDirectory: coverageOutputPath,
           },

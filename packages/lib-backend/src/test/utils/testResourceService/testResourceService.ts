@@ -152,6 +152,28 @@ export const testResourceService = async ({
     expect(result?._id).toStrictEqual(expected._id);
   });
 
+  test('works with get with project', async () => {
+    const { result: data = [] } = await service.getMany({ filter: {} });
+    const PROJECT_FIELDS: Array<keyof DummyEntityResourceModel> = ['_id', 'stringPropertyOptional'];
+    const input: InputModel<
+      RESOURCE_METHOD_TYPE.GET,
+      DummyEntityResourceModel,
+      DummyEntityResourceFormModel
+    > = {
+      filter: { _id: data[0]._id },
+      options: {
+        project: PROJECT_FIELDS.reduce((result, field) => ({ ...result, [field]: true }), {}),
+      },
+    };
+    const { result } = await service.get(input);
+    const expected = find(data, input.filter) as DummyEntityResourceModel;
+
+    beforeGet && expect(beforeGet).toHaveBeenCalledTimes(1);
+    afterGet && expect(afterGet).toHaveBeenCalledTimes(1);
+    expect(result?._id).toStrictEqual(expected._id);
+    expect(result && Object.keys(result)).toStrictEqual(PROJECT_FIELDS);
+  });
+
   test('works with getMany by partial', async () => {
     const { result: data } = await service.getMany({ filter: {} });
     const input: InputModel<

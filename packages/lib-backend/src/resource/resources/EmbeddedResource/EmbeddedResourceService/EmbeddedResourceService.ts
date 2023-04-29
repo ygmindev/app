@@ -156,8 +156,6 @@ export const EmbeddedResourceService = <
         this.decorators.beforeGetMany ? await this.decorators.beforeGetMany({ input }) : input,
       );
       if (_input.root) {
-        console.warn(`@@@ filter: ${JSON.stringify(_input)}`);
-
         // TODO: || to ?? for all
         const skip = _input.options?.skip ?? 0;
         const limit = _input.options?.take;
