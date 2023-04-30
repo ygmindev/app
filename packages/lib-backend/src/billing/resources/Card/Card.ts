@@ -15,19 +15,19 @@ export class Card extends EmbeddedResource implements CardModel {
   @withField({ isRepository: true, type: FIELD_TYPE.STRING })
   brand!: CardBrandModel;
 
-  @withField({ isRepository: true })
+  @withField({ isRepository: true, type: FIELD_TYPE.NUMBER })
   expMonth!: number;
 
-  @withField({ isRepository: true })
+  @withField({ isRepository: true, type: FIELD_TYPE.NUMBER })
   expYear!: number;
 
   @withField({ isRepository: true, type: FIELD_TYPE.STRING })
   funding!: CardFundingModel;
 
-  @withField({ isRepository: true })
+  @withField({ isRepository: true, type: FIELD_TYPE.STRING })
   id!: string;
 
-  @withField({ isRepository: true })
+  @withField({ isRepository: true, type: FIELD_TYPE.STRING })
   last4!: string;
 
   @withField({ isOptional: true, type: FIELD_TYPE.STRING })

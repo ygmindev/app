@@ -49,6 +49,8 @@ const _getColumn = <TType extends unknown>({
         return [Property, { defaultValue, type: 'ObjectId' }];
       case FIELD_TYPE.STRING:
         return [Property, { defaultValue, type: 'string' }];
+      case FIELD_TYPE.NUMBER:
+        return [Property, { defaultValue, type: 'number' }];
       case FIELD_TYPE.DATE:
         return [Property, { defaultValue, type: Date }];
       default:

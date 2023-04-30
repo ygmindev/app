@@ -1,7 +1,7 @@
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { copy } from '@tool/task/file/utils/copy/copy';
 
-vi.mock('fs');
+jest.mock('fs');
 
 const { displayName } = withTest({ target: () => copy });
 

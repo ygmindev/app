@@ -2,13 +2,13 @@ import { children } from '@lib/backend/file/utils/children/children';
 import { FS_FIXTURE } from '@lib/config/javascript/test/configs/__mocks__/fs/fs.fixtures';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-vi.mock('fs');
+jest.mock('fs');
 
 const { displayName } = withTest({ target: () => children });
 
 describe(displayName, () => {
   afterAll(async () => {
-    vi.clearAllMocks();
+    jest.clearAllMocks();
   });
 
   test('works', async () => {

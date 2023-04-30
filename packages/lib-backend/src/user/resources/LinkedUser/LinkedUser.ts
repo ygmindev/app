@@ -10,7 +10,7 @@ import type {
 
 @withEntity({ isEmbedded: true, isRepository: true, name: LINKED_USER_RESOURCE_NAME })
 export class LinkedUser extends EmbeddedResource implements LinkedUserModel {
-  @withField({ isRepository: true })
+  @withField({ isRepository: true, type: FIELD_TYPE.STRING })
   id!: string;
 
   @withField({ isRepository: true, type: FIELD_TYPE.STRING })

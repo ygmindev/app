@@ -8,13 +8,13 @@ import { FIELD_TYPE } from '@lib/shared/form/form.constants';
 
 @withEntity({ isEmbedded: true, isRepository: true, name: BANK_RESOURCE_NAME })
 export class Bank extends EmbeddedResource implements BankModel {
-  @withField({ isRepository: true })
+  @withField({ isRepository: true, type: FIELD_TYPE.STRING })
   bank!: string;
 
-  @withField({ isRepository: true })
+  @withField({ isRepository: true, type: FIELD_TYPE.STRING })
   id!: string;
 
-  @withField({ isRepository: true })
+  @withField({ isRepository: true, type: FIELD_TYPE.STRING })
   last4!: string;
 
   @withField({ isOptional: true, type: FIELD_TYPE.STRING })

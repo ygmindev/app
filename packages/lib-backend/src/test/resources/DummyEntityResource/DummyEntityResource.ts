@@ -19,16 +19,16 @@ export class DummyEntityResource extends EntityResource implements DummyEntityRe
   })
   [DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME]?: Array<DummyEmbeddedResourceModel>;
 
-  @withField({ isOptional: true, isRepository: true })
+  @withField({ isOptional: true, isRepository: true, type: FIELD_TYPE.NUMBER })
   numberProperty?: number;
 
   @withField({ isArray: true, isOptional: true, isRepository: true, type: FIELD_TYPE.STRING })
   stringArrayProperty?: Array<string>;
 
-  @withField({ isRepository: true })
+  @withField({ isRepository: true, type: FIELD_TYPE.STRING })
   stringProperty!: string;
 
-  @withField({ isOptional: true, isRepository: true })
+  @withField({ isOptional: true, isRepository: true, type: FIELD_TYPE.STRING })
   stringPropertyOptional?: string;
 
   @withField({

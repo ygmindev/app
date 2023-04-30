@@ -5,11 +5,13 @@ import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import type { _BundleConfigParamsModel } from '@lib/config/javascript/bundle/_bundle.models';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
+import type { PlatformModel } from '@lib/shared/platform/platform.models';
 import { esbuildCommonjs, viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import type { RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { babel } from '@rollup/plugin-babel';
 import inject from '@rollup/plugin-inject';
 import { LINT_COMMAND } from '@tool/task/node/templates/lint/lint';
+import react from '@vitejs/plugin-react';
 import { filelocPlugin } from 'esbuild-plugin-fileloc';
 import { visualizer } from 'rollup-plugin-visualizer';
 import type { PluginOption, UserConfig } from 'vite';
@@ -26,6 +28,7 @@ export const _bundleConfig = ({
   envPrefix,
   extensions,
   externals,
+  mainFields,
   mode,
   platform,
   provide,
@@ -33,6 +36,7 @@ export const _bundleConfig = ({
 }: _BundleConfigParamsModel): UserConfig => ({
   build: {
     commonjsOptions: {
+      include: externals,
       requireReturnsDefault: 'auto',
       transformMixedEsModules: true,
     },
@@ -45,7 +49,7 @@ export const _bundleConfig = ({
   envPrefix,
 
   esbuild: {
-    sourcemap: process.env.NODE_ENV === ENVIRONMENT.DEVELOPMENT ? 'inline' : undefined,
+    sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : 'inline',
   },
 
   mode,
@@ -53,6 +57,8 @@ export const _bundleConfig = ({
   optimizeDeps: {
     esbuildOptions: {
       keepNames: true,
+
+      mainFields,
 
       plugins: [
         esbuildDecorators({ tsconfig: fromWorking('tsconfig.json') }),
@@ -63,6 +69,8 @@ export const _bundleConfig = ({
       ].filter(Boolean),
 
       resolveExtensions: extensions,
+
+      tsconfig: fromWorking('tsconfig.json'),
     },
     include: externals,
   },
@@ -75,9 +83,12 @@ export const _bundleConfig = ({
       typescript: { tsconfigPath: fromWorking('tsconfig.json') },
     }),
 
-    viteCommonjs(),
+    ([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>).includes(platform) &&
+      react(),
 
     provide && inject(provide),
+
+    viteCommonjs(),
 
     babelConfig && babel(babelConfig as RollupBabelInputPluginOptions),
 

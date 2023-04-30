@@ -5,7 +5,7 @@ import { OTP_RESOURCE_NAME } from '@lib/shared/auth/resources/Otp/Otp.constants'
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { USER_FIXTURE } from '@lib/shared/user/resources/User/User.fixtures';
-import { vi } from 'vitest';
+
 
 const { displayName } = withTest({ target: () => OtpService });
 
@@ -21,7 +21,7 @@ describe(displayName, () => {
   });
 
   test('create by email', async () => {
-    const sendSpy = vi.spyOn(mailer, 'mail');
+    const sendSpy = jest.spyOn(mailer, 'mail');
     await otpService.create({ form: { email: USER_FIXTURE.email } });
     const { result } = await otpService.getMany({ filter: { email: USER_FIXTURE.email } });
     expect(sendSpy).toBeCalledTimes(1);

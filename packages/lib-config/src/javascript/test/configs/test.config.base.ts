@@ -9,7 +9,9 @@ export const testConfig: TestConfigParamsModel = {
 
   cachePath: fromWorking('.cache/test'),
 
-  configFile: 'test.config.js',
+  command: 'jest --runInBand',
+
+  configFile: 'test.config.ts',
 
   coverageOutputPath: fromWorking('coverage'),
 

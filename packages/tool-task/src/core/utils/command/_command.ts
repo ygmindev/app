@@ -1,4 +1,4 @@
-import { error } from '@lib/shared/logging/utils/logger/logger';
+import { error, info } from '@lib/shared/logging/utils/logger/logger';
 import type { _CommandParamsModel } from '@tool/task/core/utils/command/_command.models';
 import { spawn } from 'child_process';
 
@@ -9,6 +9,7 @@ export const _command = async ({
   root,
 }: _CommandParamsModel): Promise<boolean> => {
   try {
+    info(command);
     const cp = spawn(command, {
       cwd: root,
       env: process.env,

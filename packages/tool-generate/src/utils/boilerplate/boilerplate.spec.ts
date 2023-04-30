@@ -10,7 +10,7 @@ const { displayName } = withTest({ target: () => boilerplate });
 
 describe(displayName, () => {
   afterEach(() => {
-    vi.clearAllMocks();
+    jest.clearAllMocks();
   });
 
   test('works', async () => {
@@ -23,7 +23,7 @@ describe(displayName, () => {
       values: [{ onSuccess, output, template }, prepare ? await prepare() : {}],
     });
 
-    vi.mock('fs');
+    jest.mock('fs');
     await boilerplate(params);
     const result = false;
     expect(result).toBeFalsy();

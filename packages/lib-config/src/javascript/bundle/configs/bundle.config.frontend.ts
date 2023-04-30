@@ -14,7 +14,16 @@ export const bundleConfig: BundleConfigParamsModel = merge({
     {
       babelConfig: {
         compact: process.env.NODE_ENV === 'production',
-        plugins: ['@emotion', ['transform-react-remove-prop-types', { removeImport: true }]],
+        plugins: [
+          '@emotion',
+          ['transform-react-remove-prop-types', { removeImport: true }],
+          'react-native-web',
+        ],
+        presets: [
+          ['@babel/preset-react', { runtime: 'automatic' }],
+          '@babel/preset-flow',
+          'module:metro-react-native-babel-preset',
+        ],
       },
 
       envPrefix: ['APP_'],
@@ -29,7 +38,6 @@ export const bundleConfig: BundleConfigParamsModel = merge({
           'history',
           'moti',
           'react-native-!(codegen|gradle-plugin)',
-          'react-native',
           'redux-persist',
         ],
         root: fromModules(),

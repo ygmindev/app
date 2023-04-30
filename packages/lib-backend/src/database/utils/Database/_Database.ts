@@ -18,8 +18,7 @@ import type { UpdateModel } from '@lib/shared/resource/utils/Update/Update.model
 import type { FilterQuery } from '@mikro-orm/core';
 import { MikroORM } from '@mikro-orm/core';
 import type { EntityManager, MongoDriver } from '@mikro-orm/mongodb';
-import type { Filter, UpdateFilter } from '@mikro-orm/mongodb/node_modules/mongodb';
-import type { MongoError } from 'mongodb';
+import type { Filter, MongoError, UpdateFilter } from 'mongodb';
 
 export abstract class _Database implements DatabaseModel {
   protected _params: DatabaseParamsModel;

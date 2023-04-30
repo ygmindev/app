@@ -18,7 +18,7 @@ export const test: TaskParamsModel<TestParamsModel> = {
     testMatch && (process.env.TEST_MATCH = testMatch);
 
     await command({
-      command: `${fromExecutable('vitest')} --config=${testConfig.configFile}`,
+      command: `${fromExecutable(testConfig.command)} --config=${testConfig.configFile}`,
       root,
     });
     return { status: TASK_STATUS.SUCCESS };

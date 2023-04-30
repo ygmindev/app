@@ -14,7 +14,8 @@ export const bundleConfig: BundleConfigParamsModel = merge({
   values: [
     {
       aliases: {
-        'react-native': fromConfig('javascript/bundle/aliases/react-native-web/index.js'),
+        // 'react-native': fromConfig('javascript/bundle/aliases/react-native-web/index.js'),
+        'react-native': 'react-native-web',
       },
 
       extensions: permuteString(['.web'], bundleConfigBase.extensions),

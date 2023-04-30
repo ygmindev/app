@@ -12,7 +12,7 @@ export const make: TaskParamsModel = {
 
   task: async ({ root }) => {
     await command({
-      command: `${fromExecutable('vite')} build --config ${webConfig.configFile}`,
+      command: `${fromExecutable(webConfig.command)} build --config ${webConfig.configFile}`,
       root,
     });
     return { status: TASK_STATUS.SUCCESS };

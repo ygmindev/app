@@ -10,6 +10,7 @@ import type { TaskParamsModel, TaskStatusModel } from '@lib/config/core/task/tas
 import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
+import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import { sequence } from '@lib/shared/core/utils/sequence/sequence';
 import type { EnvironmentModel } from '@lib/shared/environment/environment.models';
 import { setup } from '@lib/shared/environment/utils/setup/setup';
@@ -62,9 +63,11 @@ const _getTask = <TOptions = undefined>({
 
     let onAfterPromise: CallablePromiseModel | undefined = undefined;
     if (onAfter) {
-      onAfterPromise = async () => {
-        await sequence(onAfter.map((value) => (isString(value) ? _getTaskByName(value) : value)));
-      };
+      onAfterPromise = debounce({
+        callback: async () => {
+          await sequence(onAfter.map((value) => (isString(value) ? _getTaskByName(value) : value)));
+        },
+      });
       ['exit', 'SIGINT', 'SIGUSR1', 'SIGUSR2', 'uncaughtException', 'SIGTERM'].forEach((event) =>
         process.on(event, async () => {
           onAfterPromise && (await onAfterPromise());

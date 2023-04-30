@@ -4,7 +4,7 @@ import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 const { displayName } = withTest({ target: () => withCondition });
 
 describe(displayName, () => {
-  const fn = vi.fn();
+  const fn = jest.fn();
 
   class A {
     test(): void {

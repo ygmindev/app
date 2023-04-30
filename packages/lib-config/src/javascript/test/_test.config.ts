@@ -1,13 +1,13 @@
+import type { Config } from '@jest/types';
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
+import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { bundleConfig } from '@lib/config/javascript/bundle/bundle.config';
 import type { _TestConfigParamsModel } from '@lib/config/javascript/test/_test.models';
-import { merge } from '@lib/shared/core/utils/merge/merge';
-import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
+import { compilerOptions } from '@lib/config/javascript/typescript/tsconfig.paths.json';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
-import reduce from 'lodash/reduce';
-import trim from 'lodash/trim';
-import type { UserConfig } from 'vitest/config';
+import { mapKeys, reduce, trim, trimStart } from 'lodash';
+import { join } from 'path';
+import { pathsToModuleNameMapper } from 'ts-jest';
 
 export const _testConfig = ({
   bundle,
@@ -20,76 +20,75 @@ export const _testConfig = ({
   root,
   testExtensions,
   timeout,
-}: _TestConfigParamsModel): UserConfig =>
-  merge<UserConfig, UserConfig>({
-    strategy: MERGE_STRATEGY.DEEP_PREPEND,
+}: _TestConfigParamsModel): Config.InitialOptions => ({
+  cacheDirectory: cachePath,
 
-    values: [
+  collectCoverage: true,
+
+  coverageDirectory: coverageOutputPath,
+
+  coverageReporters: ['lcov'],
+
+  globals: bundle.define,
+
+  maxWorkers: -1,
+
+  moduleFileExtensions: bundle.extensions.map((ext) => trimStart(ext, '.')),
+
+  moduleNameMapper: {
+    ...mapKeys(bundle.aliases, (k) => `^${k}$`),
+    ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: fromRoot() }),
+    [`\\.(${fileExtensions.join('|')})$`]: join(mockPath, 'file'),
+  },
+
+  passWithNoTests: true,
+
+  preset: 'ts-jest',
+
+  reporters: [
+    'default',
+    [
+      'jest-stare',
       {
-        test: {
-          cache: {
-            dir: cachePath,
-          },
-
-          coverage: {
-            all: true,
-
-            allowExternal: true,
-
-            enabled: true,
-
-            extension: bundle.extensions,
-
-            include: [`src/**/${match}`, `src/**/_${match}`],
-
-            provider: 'istanbul',
-
-            reporter: ['html'],
-
-            reportsDirectory: coverageOutputPath,
-          },
-
-          deps: {
-            interopDefault: true,
-          },
-
-          environment: bundle.platform === PLATFORM.WEB ? 'jsdom' : 'node',
-
-          globals: true,
-
-          include: reduce(
-            testExtensions,
-            (result, ext) => {
-              const _ext = trim(ext, '.');
-              return [
-                ...result,
-                fromWorking(`src/**/${match}.${_ext}`),
-                fromWorking(`src/**/_${match}.${_ext}`),
-              ];
-            },
-            [] as Array<string>,
-          ),
-
-          outputFile: coverageOutputPath,
-
-          passWithNoTests: true,
-
-          root,
-
-          setupFiles: [fromConfig(`javascript/test/_initialize.config.${bundle.platform}.ts`)],
-
-          testTimeout: timeout,
-
-          typecheck: {
-            ignoreSourceErrors: true,
-
-            tsconfig: fromConfig('javascript/typescript/tsconfig.json'),
-          },
-
-          watch: isWatch,
-        },
+        coverageLink: join(coverageOutputPath, 'lcov-report/index.html'),
+        reportSummary: true,
+        resultDir: join(coverageOutputPath, 'js-stare'),
       },
-
-      bundleConfig as UserConfig,
     ],
-  });
+  ],
+
+  resolver: fromConfig('javascript/test/_resolver.js'),
+
+  rootDir: root,
+
+  roots: ['<rootDir>', fromConfig('javascript/test')],
+
+  setupFilesAfterEnv: [fromConfig(`javascript/test/_initialize.config.${bundle.platform}.ts`)],
+
+  testEnvironment: bundle.platform === PLATFORM.WEB ? 'jsdom' : 'node',
+
+  testMatch: reduce(
+    testExtensions,
+    (result, ext) => {
+      const _ext = trim(ext, '.');
+      return [...result, `<rootDir>/src/**/${match}.${_ext}`, `<rootDir>/src/**/_${match}.${_ext}`];
+    },
+    [] as Array<string>,
+  ),
+
+  testTimeout: timeout,
+
+  transform: {
+    '^.+\\.(js|jsx)$': 'babel-jest',
+    '^.+\\.(ts|tsx)$': [
+      'ts-jest',
+      { babelConfig: bundle.babelConfig, tsconfig: fromWorking('tsconfig.json') },
+    ],
+  },
+
+  transformIgnorePatterns: bundle.externals
+    ? [`node_modules/(?!(${bundle.externals.join('|')})/)`]
+    : [],
+
+  watch: isWatch,
+});

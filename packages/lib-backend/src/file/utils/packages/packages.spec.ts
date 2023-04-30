@@ -2,13 +2,13 @@ import { packages } from '@lib/backend/file/utils/packages/packages';
 import { FS_FIXTURE } from '@lib/config/javascript/test/configs/__mocks__/fs/fs.fixtures';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-vi.mock('fs');
+jest.mock('fs');
 
 const { displayName } = withTest({ target: () => packages });
 
 describe(displayName, () => {
   afterAll(async () => {
-    vi.clearAllMocks();
+    jest.clearAllMocks();
   });
 
   test('works', async () => {

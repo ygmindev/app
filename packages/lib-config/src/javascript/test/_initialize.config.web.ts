@@ -1,7 +1,7 @@
 import '@lib/config/javascript/test/_initialize.config.base';
 
-window.open = vi.fn();
-window.addEventListener = vi.fn();
-window.removeEventListener = vi.fn();
+window.open = jest.fn();
+window.addEventListener = jest.fn();
+window.removeEventListener = jest.fn();
 
 beforeAll(async () => {});

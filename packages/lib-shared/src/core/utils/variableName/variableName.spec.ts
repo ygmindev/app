@@ -4,7 +4,7 @@ import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 const { displayName } = withTest({ target: () => variableName });
 
 describe(displayName, () => {
-  const NAME = vi.fn();
+  const NAME = jest.fn();
   test('works', async () => {
     const result = variableName(() => NAME);
     expect(result).toStrictEqual('NAME');

@@ -20,33 +20,35 @@ export const testResourceService = async ({
   before,
   service,
 }: TestResourceServiceParamsModel): Promise<void> => {
-  const afterCreate =
-    service.decorators?.afterCreate && vi.spyOn(service.decorators, 'afterCreate');
-  const afterGet = service.decorators?.afterGet && vi.spyOn(service.decorators, 'afterGet');
-  const afterGetConnection =
-    service.decorators?.afterGetConnection && vi.spyOn(service.decorators, 'afterGetConnection');
-  const afterGetMany =
-    service.decorators?.afterGetMany && vi.spyOn(service.decorators, 'afterGetMany');
-  const afterRemove =
-    service.decorators?.afterRemove && vi.spyOn(service.decorators, 'afterRemove');
-  const afterUpdate =
-    service.decorators?.afterUpdate && vi.spyOn(service.decorators, 'afterUpdate');
-  const beforeCreate =
-    service.decorators?.beforeCreate && vi.spyOn(service.decorators, 'beforeCreate');
-  const beforeGet = service.decorators?.beforeGet && vi.spyOn(service.decorators, 'beforeGet');
-  const beforeGetConnection =
-    service.decorators?.beforeGetConnection && vi.spyOn(service.decorators, 'beforeGetConnection');
-  const beforeGetMany =
-    service.decorators?.beforeGetMany && vi.spyOn(service.decorators, 'beforeGetMany');
-  const beforeRemove =
-    service.decorators?.beforeRemove && vi.spyOn(service.decorators, 'beforeRemove');
-  const beforeUpdate =
-    service.decorators?.beforeUpdate && vi.spyOn(service.decorators, 'beforeUpdate');
+  const _afterCreate =
+    service.decorators?.afterCreate && jest.spyOn(service.decorators, 'afterCreate');
+  const _afterGet = service.decorators?.afterGet && jest.spyOn(service.decorators, 'afterGet');
+  const _afterGetConnection =
+    service.decorators?.afterGetConnection && jest.spyOn(service.decorators, 'afterGetConnection');
+  const _afterGetMany =
+    service.decorators?.afterGetMany && jest.spyOn(service.decorators, 'afterGetMany');
+  const _afterRemove =
+    service.decorators?.afterRemove && jest.spyOn(service.decorators, 'afterRemove');
+  const _afterUpdate =
+    service.decorators?.afterUpdate && jest.spyOn(service.decorators, 'afterUpdate');
+  const _beforeCreate =
+    service.decorators?.beforeCreate && jest.spyOn(service.decorators, 'beforeCreate');
+  const _beforeGet = service.decorators?.beforeGet && jest.spyOn(service.decorators, 'beforeGet');
+  const _beforeGetConnection =
+    service.decorators?.beforeGetConnection && jest.spyOn(service.decorators, 'beforeGetConnection');
+  const _beforeGetMany =
+    service.decorators?.beforeGetMany && jest.spyOn(service.decorators, 'beforeGetMany');
+  const _beforeRemove =
+    service.decorators?.beforeRemove && jest.spyOn(service.decorators, 'beforeRemove');
+  const _beforeUpdate =
+    service.decorators?.beforeUpdate && jest.spyOn(service.decorators, 'beforeUpdate');
+
+  const PROJECT_FIELDS: Array<keyof DummyEntityResourceModel> = ['_id', 'stringPropertyOptional'];
 
   beforeEach(async () => {
     await seed({ names: [DUMMY_ENTITY_RESOURCE_RESOURCE_NAME] });
     before && (await before());
-    vi.clearAllMocks();
+    jest.clearAllMocks();
   });
 
   test('works with create', async () => {
@@ -58,8 +60,8 @@ export const testResourceService = async ({
       form: { stringProperty: 'stringProperty1', stringPropertyOptional: undefined },
     };
     const { result } = await service.create(input);
-    beforeCreate && expect(beforeCreate).toHaveBeenCalledTimes(1);
-    afterCreate && expect(afterCreate).toHaveBeenCalledTimes(1);
+    _beforeCreate && expect(_beforeCreate).toHaveBeenCalledTimes(1);
+    _afterCreate && expect(_afterCreate).toHaveBeenCalledTimes(1);
     expect(result?._id).toBeDefined();
     expect(result?.created && new Date().getTime() - result?.created.getTime()).toBeLessThan(1000);
     expect(result?.stringProperty).toStrictEqual(input.form.stringProperty);
@@ -78,8 +80,8 @@ export const testResourceService = async ({
     const { result } = await service.get(input);
     const expected = find(data, input.filter) as DummyEntityResourceModel;
 
-    beforeGet && expect(beforeGet).toHaveBeenCalledTimes(1);
-    afterGet && expect(afterGet).toHaveBeenCalledTimes(1);
+    _beforeGet && expect(_beforeGet).toHaveBeenCalledTimes(1);
+    _afterGet && expect(_afterGet).toHaveBeenCalledTimes(1);
     expect(result?._id).toStrictEqual(expected._id);
   });
 
@@ -95,8 +97,8 @@ export const testResourceService = async ({
     const { result } = await service.get(input);
     const expected = find(data, input.filter) as DummyEntityResourceModel;
 
-    beforeGet && expect(beforeGet).toHaveBeenCalledTimes(1);
-    afterGet && expect(afterGet).toHaveBeenCalledTimes(1);
+    _beforeGet && expect(_beforeGet).toHaveBeenCalledTimes(1);
+    _afterGet && expect(_afterGet).toHaveBeenCalledTimes(1);
     expect(result?._id).toStrictEqual(expected._id);
   });
 
@@ -123,8 +125,8 @@ export const testResourceService = async ({
       }),
     ) as DummyEntityResourceModel;
 
-    beforeGet && expect(beforeGet).toHaveBeenCalledTimes(1);
-    afterGet && expect(afterGet).toHaveBeenCalledTimes(1);
+    _beforeGet && expect(_beforeGet).toHaveBeenCalledTimes(1);
+    _afterGet && expect(_afterGet).toHaveBeenCalledTimes(1);
     expect(result?._id).toStrictEqual(expected._id);
   });
 
@@ -147,14 +149,13 @@ export const testResourceService = async ({
       }),
     ) as DummyEntityResourceModel;
 
-    beforeGet && expect(beforeGet).toHaveBeenCalledTimes(1);
-    afterGet && expect(afterGet).toHaveBeenCalledTimes(1);
+    _beforeGet && expect(_beforeGet).toHaveBeenCalledTimes(1);
+    _afterGet && expect(_afterGet).toHaveBeenCalledTimes(1);
     expect(result?._id).toStrictEqual(expected._id);
   });
 
   test('works with get with project', async () => {
     const { result: data = [] } = await service.getMany({ filter: {} });
-    const PROJECT_FIELDS: Array<keyof DummyEntityResourceModel> = ['_id', 'stringPropertyOptional'];
     const input: InputModel<
       RESOURCE_METHOD_TYPE.GET,
       DummyEntityResourceModel,
@@ -168,8 +169,8 @@ export const testResourceService = async ({
     const { result } = await service.get(input);
     const expected = find(data, input.filter) as DummyEntityResourceModel;
 
-    beforeGet && expect(beforeGet).toHaveBeenCalledTimes(1);
-    afterGet && expect(afterGet).toHaveBeenCalledTimes(1);
+    _beforeGet && expect(_beforeGet).toHaveBeenCalledTimes(1);
+    _afterGet && expect(_afterGet).toHaveBeenCalledTimes(1);
     expect(result?._id).toStrictEqual(expected._id);
     expect(result && Object.keys(result)).toStrictEqual(PROJECT_FIELDS);
   });
@@ -186,8 +187,8 @@ export const testResourceService = async ({
     const { result } = await service.getMany(input);
     const expected = filter(data, input.filter) as Array<DummyEntityResourceModel>;
 
-    beforeGetMany && expect(beforeGetMany).toHaveBeenCalledTimes(2);
-    afterGetMany && expect(afterGetMany).toHaveBeenCalledTimes(2);
+    _beforeGetMany && expect(_beforeGetMany).toHaveBeenCalledTimes(2);
+    _afterGetMany && expect(_afterGetMany).toHaveBeenCalledTimes(2);
     expect(result).toStrictEqual(expected);
   });
 
@@ -214,8 +215,8 @@ export const testResourceService = async ({
       }),
     ) as Array<DummyEntityResourceModel>;
 
-    beforeGetMany && expect(beforeGetMany).toHaveBeenCalledTimes(2);
-    afterGetMany && expect(afterGetMany).toHaveBeenCalledTimes(2);
+    _beforeGetMany && expect(_beforeGetMany).toHaveBeenCalledTimes(2);
+    _afterGetMany && expect(_afterGetMany).toHaveBeenCalledTimes(2);
     expect(result).toStrictEqual(expected);
   });
 
@@ -238,8 +239,8 @@ export const testResourceService = async ({
       }),
     );
 
-    beforeGetMany && expect(beforeGetMany).toHaveBeenCalledTimes(2);
-    afterGetMany && expect(afterGetMany).toHaveBeenCalledTimes(2);
+    _beforeGetMany && expect(_beforeGetMany).toHaveBeenCalledTimes(2);
+    _afterGetMany && expect(_afterGetMany).toHaveBeenCalledTimes(2);
     expect(result).toStrictEqual(expected);
   });
 
@@ -260,8 +261,8 @@ export const testResourceService = async ({
     let expected = filter(data, input.filter) as Array<DummyEntityResourceModel>;
     expected = expected.slice(SKIP, SKIP + TAKE);
 
-    beforeGetMany && expect(beforeGetMany).toHaveBeenCalledTimes(2);
-    afterGetMany && expect(afterGetMany).toHaveBeenCalledTimes(2);
+    _beforeGetMany && expect(_beforeGetMany).toHaveBeenCalledTimes(2);
+    _afterGetMany && expect(_afterGetMany).toHaveBeenCalledTimes(2);
     expect(result).toStrictEqual(expected);
   });
 
@@ -269,8 +270,8 @@ export const testResourceService = async ({
     const { result: data = [] } = await service.getMany({ filter: {} });
     const { result } = await service.getConnection({ filter: {}, pagination: {} });
 
-    beforeGetConnection && expect(beforeGetConnection).toHaveBeenCalledTimes(1);
-    afterGetConnection && expect(afterGetConnection).toHaveBeenCalledTimes(1);
+    _beforeGetConnection && expect(_beforeGetConnection).toHaveBeenCalledTimes(1);
+    _afterGetConnection && expect(_afterGetConnection).toHaveBeenCalledTimes(1);
     expect(result?.edges.length).toStrictEqual(data.length);
     expect(result?.edges[0].node._id).toStrictEqual(data[0]._id);
     expect(result?.edges[data.length - 1].node._id).toStrictEqual(data[data.length - 1]._id);
@@ -293,8 +294,8 @@ export const testResourceService = async ({
     const { result } = await service.getConnection(input);
     const expected = filter(data, input.filter) as Array<DummyEntityResourceModel>;
 
-    beforeGetConnection && expect(beforeGetConnection).toHaveBeenCalledTimes(1);
-    afterGetConnection && expect(afterGetConnection).toHaveBeenCalledTimes(1);
+    _beforeGetConnection && expect(_beforeGetConnection).toHaveBeenCalledTimes(1);
+    _afterGetConnection && expect(_afterGetConnection).toHaveBeenCalledTimes(1);
     expect(result?.edges.length).toStrictEqual(expected.length);
     expect(result?.edges[0].node._id).toStrictEqual(expected[0]._id);
     expect(result?.edges[expected.length - 1].node._id).toStrictEqual(
@@ -318,8 +319,8 @@ export const testResourceService = async ({
     > = { filter: {}, pagination: { first: size } };
     const { result } = await service.getConnection(input);
 
-    beforeGetConnection && expect(beforeGetConnection).toHaveBeenCalledTimes(1);
-    afterGetConnection && expect(afterGetConnection).toHaveBeenCalledTimes(1);
+    _beforeGetConnection && expect(_beforeGetConnection).toHaveBeenCalledTimes(1);
+    _afterGetConnection && expect(_afterGetConnection).toHaveBeenCalledTimes(1);
     expect(result?.edges.length).toStrictEqual(size);
     expect(result?.edges[0].node._id).toStrictEqual(data[0]._id);
     expect(result?.edges[size - 1].node._id).toStrictEqual(data[size - 1]._id);
@@ -342,8 +343,8 @@ export const testResourceService = async ({
     > = { filter: {}, pagination: { after: allResult?.edges[size - 1].cursor, first: size } };
     const { result } = await service.getConnection(input);
 
-    beforeGetConnection && expect(beforeGetConnection).toHaveBeenCalledTimes(2);
-    afterGetConnection && expect(afterGetConnection).toHaveBeenCalledTimes(2);
+    _beforeGetConnection && expect(_beforeGetConnection).toHaveBeenCalledTimes(2);
+    _afterGetConnection && expect(_afterGetConnection).toHaveBeenCalledTimes(2);
     expect(result?.edges.length).toStrictEqual(size);
     expect(result?.edges[0].node._id).toStrictEqual(data[size]._id);
     expect(result?.edges[size - 1].node._id).toStrictEqual(data[size + 1]._id);
@@ -365,8 +366,8 @@ export const testResourceService = async ({
     > = { filter: {}, pagination: { last: size } };
     const { result } = await service.getConnection(input);
 
-    beforeGetConnection && expect(beforeGetConnection).toHaveBeenCalledTimes(1);
-    afterGetConnection && expect(afterGetConnection).toHaveBeenCalledTimes(1);
+    _beforeGetConnection && expect(_beforeGetConnection).toHaveBeenCalledTimes(1);
+    _afterGetConnection && expect(_afterGetConnection).toHaveBeenCalledTimes(1);
     expect(result?.edges.length).toStrictEqual(size);
     expect(result?.edges[0].node._id).toStrictEqual(data[data.length - 2]._id);
     expect(result?.edges[1].node._id).toStrictEqual(data[data.length - 1]._id);
@@ -389,8 +390,8 @@ export const testResourceService = async ({
     > = { filter: {}, pagination: { before: allResult?.edges[size].cursor, last: size } };
     const { result } = await service.getConnection(input);
 
-    beforeGetConnection && expect(beforeGetConnection).toHaveBeenCalledTimes(2);
-    afterGetConnection && expect(afterGetConnection).toHaveBeenCalledTimes(2);
+    _beforeGetConnection && expect(_beforeGetConnection).toHaveBeenCalledTimes(2);
+    _afterGetConnection && expect(_afterGetConnection).toHaveBeenCalledTimes(2);
     expect(result?.edges.length).toStrictEqual(size);
     expect(result?.edges[0].node._id).toStrictEqual(data[size - 2]._id);
     expect(result?.edges[1].node._id).toStrictEqual(data[size - 1]._id);
@@ -414,8 +415,8 @@ export const testResourceService = async ({
     };
     const { result } = await service.update(input);
 
-    beforeUpdate && expect(beforeUpdate).toHaveBeenCalledTimes(1);
-    afterUpdate && expect(afterUpdate).toHaveBeenCalledTimes(1);
+    _beforeUpdate && expect(_beforeUpdate).toHaveBeenCalledTimes(1);
+    _afterUpdate && expect(_afterUpdate).toHaveBeenCalledTimes(1);
     expect(result?.stringProperty).toStrictEqual('stringProperty2');
   });
 
@@ -431,8 +432,8 @@ export const testResourceService = async ({
     };
     const { result } = await service.update(input);
 
-    beforeUpdate && expect(beforeUpdate).toHaveBeenCalledTimes(1);
-    afterUpdate && expect(afterUpdate).toHaveBeenCalledTimes(1);
+    _beforeUpdate && expect(_beforeUpdate).toHaveBeenCalledTimes(1);
+    _afterUpdate && expect(_afterUpdate).toHaveBeenCalledTimes(1);
     expect(result?.stringArrayProperty).toStrictEqual([
       ...(data[0].stringArrayProperty || []),
       'stringArrayPropertyElement1',
@@ -452,9 +453,29 @@ export const testResourceService = async ({
     const { result } = await service.update(input);
     const expected = filter(data[0].stringArrayProperty, input.update.$pull);
 
-    beforeUpdate && expect(beforeUpdate).toHaveBeenCalledTimes(1);
-    afterUpdate && expect(afterUpdate).toHaveBeenCalledTimes(1);
+    _beforeUpdate && expect(_beforeUpdate).toHaveBeenCalledTimes(1);
+    _afterUpdate && expect(_afterUpdate).toHaveBeenCalledTimes(1);
     expect(result?.stringArrayProperty || []).toStrictEqual(expected);
+  });
+
+  test('works with update with project', async () => {
+    const { result: data = [] } = await service.getMany({ filter: {} });
+    const input: InputModel<
+      RESOURCE_METHOD_TYPE.UPDATE,
+      DummyEntityResourceModel,
+      DummyEntityResourceFormModel
+    > = {
+      filter: { _id: data[0]._id },
+      options: {
+        project: PROJECT_FIELDS.reduce((result, field) => ({ ...result, [field]: true }), {}),
+      },
+      update: { stringProperty: 'stringProperty2' },
+    };
+    const { result } = await service.update(input);
+
+    _beforeUpdate && expect(_beforeUpdate).toHaveBeenCalledTimes(1);
+    _afterUpdate && expect(_afterUpdate).toHaveBeenCalledTimes(1);
+    expect(result && Object.keys(result)).toStrictEqual(PROJECT_FIELDS);
   });
 
   test('works with remove by id', async () => {
@@ -468,8 +489,8 @@ export const testResourceService = async ({
     await service.remove(input);
     const { result } = await service.get(input);
 
-    beforeRemove && expect(beforeRemove).toHaveBeenCalledTimes(1);
-    afterRemove && expect(afterRemove).toHaveBeenCalledTimes(1);
+    _beforeRemove && expect(_beforeRemove).toHaveBeenCalledTimes(1);
+    _afterRemove && expect(_afterRemove).toHaveBeenCalledTimes(1);
     expect(result).toBeFalsy();
   });
 };

@@ -1,5 +1,4 @@
 import 'reflect-metadata';
-import 'source-map-support/register';
 
 import { DatabaseMain } from '@lib/backend/database/utils/DatabaseMain/DatabaseMain';
 import { Container } from '@lib/shared/core/utils/Container/Container';

@@ -10,13 +10,13 @@ import { FIELD_TYPE } from '@lib/shared/form/form.constants';
 
 @withEntity({ name: `${OTP_RESOURCE_NAME}Form` })
 export class OtpForm implements OtpFormModel {
-  @withField({ isRepository: true })
+  @withField({ isRepository: true, type: FIELD_TYPE.STRING })
   countryCode?: string;
 
-  @withField({ isRepository: true, isUnique: true })
+  @withField({ isRepository: true, isUnique: true, type: FIELD_TYPE.STRING })
   phone?: string;
 
-  @withField({ isRepository: true, isUnique: true })
+  @withField({ isRepository: true, isUnique: true, type: FIELD_TYPE.STRING })
   email?: string;
 }
 
@@ -34,16 +34,16 @@ export class Otp extends EntityResource implements OtpModel {
   })
   declare created: Date;
 
-  @withField({ isOptional: true, isRepository: true })
+  @withField({ isOptional: true, isRepository: true, type: FIELD_TYPE.STRING })
   countryCode?: string;
 
-  @withField({ isOptional: true, isRepository: true })
+  @withField({ isOptional: true, isRepository: true, type: FIELD_TYPE.STRING })
   email?: string;
 
   @withAccess({ level: ACCESS_LEVEL.PROHIBITED })
-  @withField({ isRepository: true })
+  @withField({ isRepository: true, type: FIELD_TYPE.STRING })
   otp!: string;
 
-  @withField({ isOptional: true, isRepository: true })
+  @withField({ isOptional: true, isRepository: true, type: FIELD_TYPE.STRING })
   phone?: string;
 }

@@ -1,9 +1,9 @@
 import type { WebConfigParamsModel } from '@lib/config/framework/web/web.models';
 
 export const webConfig: WebConfigParamsModel = {
-  configFile: 'web.config.ts',
+  command: 'vite',
 
-  isReact: true,
+  configFile: 'web.config.ts',
 
   isSsr: true,
 
