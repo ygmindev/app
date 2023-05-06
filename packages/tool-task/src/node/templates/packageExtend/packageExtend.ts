@@ -1,8 +1,8 @@
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { TASK_STATUS } from '@lib/config/core/task/task.constants';
-import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
+import { TASK_STATUS } from '@tool/task/core/core.constants';
+import type { TaskParamsModel } from '@tool/task/core/core.models';
 import { PACKAGE_EXTEND_KEYS } from '@tool/task/node/templates/packageExtend/packageExtend.constants';
 import { writeFileSync } from 'fs';
 import pick from 'lodash/pick';

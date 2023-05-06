@@ -1,3 +1,5 @@
+import type { UserConfig } from 'i18next-parser';
+
 export interface _ParserConfigParamsModel {
   languages: Array<string>;
 
@@ -7,3 +9,5 @@ export interface _ParserConfigParamsModel {
 
   outputPath: string;
 }
+
+export type _ParserConfigModel = UserConfig;

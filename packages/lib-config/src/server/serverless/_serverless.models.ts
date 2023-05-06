@@ -1,10 +1,11 @@
+import type { ServerlessProviderModel } from '@lib/backend/serverless/serverless.models';
 import type { BundleConfigParamsModel } from '@lib/config/javascript/bundle/bundle.models';
-import type { ServerlessProviderModel } from '@lib/config/server/serverless/serverless.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 import type { EnvironmentModel } from '@lib/shared/environment/environment.models';
 import type { HttpMethodModel } from '@lib/shared/http/http.models';
 import type { UriParamsModel } from '@lib/shared/http/utils/uri/uri.models';
 import type { PlatformModel } from '@lib/shared/platform/platform.models';
+import type { AWS } from '@serverless/typescript';
 
 export interface _ServerlessConfigParamsModel {
   bundle: BundleConfigParamsModel;
@@ -45,3 +46,5 @@ export interface _ServerlessConfigParamsModel {
     timeout: number;
   };
 }
+
+export interface _ServerlessConfigModel extends AWS {}

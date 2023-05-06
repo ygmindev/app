@@ -1,7 +1,7 @@
 import { children } from '@lib/backend/file/utils/children/children';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import { TASK_STATUS } from '@lib/config/core/task/task.constants';
-import type { TaskParamsModel } from '@lib/config/core/task/task.models';
+import { TASK_STATUS } from '@tool/task/core/core.constants';
+import type { TaskParamsModel } from '@tool/task/core/core.models';
 import { BACKUP_DIR } from '@tool/task/core/tasks/backup/backup.constants';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';

@@ -1,13 +1,5 @@
-import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
-import { internationalizeConfig } from '@lib/config/locale/internationalize/configs/internationalize.config';
-import type { ParserConfigParamsModel } from '@lib/config/locale/parser/parser.models';
+import { _parserConfig } from '@lib/config/locale/parser/_parser.config';
+import type { _ParserConfigModel } from '@lib/config/locale/parser/_parser.models';
+import { parserConfigParams } from '@lib/config/locale/parser/params/parser.params';
 
-export const parserConfig: ParserConfigParamsModel = {
-  languages: internationalizeConfig.languages,
-
-  missingValue: 'TRANSLATION_MISSING',
-
-  namespaceDefault: internationalizeConfig.namespaceDefault,
-
-  outputPath: fromStatic('assets/locales'),
-};
+export const parserConfig: _ParserConfigModel = _parserConfig(parserConfigParams);

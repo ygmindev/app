@@ -1,5 +1,5 @@
-import type { SkeletonGroupPropsModel } from '@lib/frontend/animation/components/SkeletonGroup/SkeletonGroup.models';
 import { SkeletonGroup } from '@lib/frontend/animation/components/SkeletonGroup/SkeletonGroup';
+import type { SkeletonGroupPropsModel } from '@lib/frontend/animation/components/SkeletonGroup/SkeletonGroup.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
@@ -9,7 +9,7 @@ const { Component, displayName, testID } = withTestComponent<SkeletonGroupPropsM
 
 describe(displayName, () => {
   test('works', async () => {
-    const { queryByTestId } = render(<Component />);
-    expect(queryByTestId(testID)).toBeTruthy();
+    const { findByTestId } = render({ element: <Component /> });
+    expect(await findByTestId(testID)).toBeTruthy();
   });
 });

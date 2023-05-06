@@ -30,6 +30,8 @@ export const composeComponent = <
     const { styles } = useStyles({ props, stylers });
     return (isWeb ? unstable_createElement : createElement)(Component, {
       ...(getProps ? getProps({ ...props, style: styles }, theme, ref) : props),
-      ...(isFragment(Component) ? {} : { nativeid: props.nativeID, ref, style: styles }),
+      ...(isFragment(Component)
+        ? {}
+        : { nativeid: props.nativeID, ref, style: styles, testID: props.testID }),
     });
   }) as ComposeComponentModel<TProps, TStyle, TRef>;

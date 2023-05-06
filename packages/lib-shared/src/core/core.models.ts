@@ -21,14 +21,21 @@ export type PartialDeepModel<TType> = PartialDeep<TType>;
 
 export type RequiredModel<TType> = Required<TType>;
 
-export type CallableModel<TResult = void, TParams extends Array<unknown> = never> = (
+export type CallableModel<TResult = void, TParams = void> = (args?: TParams) => TResult;
+
+export type CallablePromiseModel<TResult = void, TParams = void> = CallableModel<
+  Promise<TResult>,
+  TParams
+>;
+
+export type CallableArgsModel<TResult = void, TParams extends Array<unknown> = never> = (
   ...args: TParams
 ) => TResult;
 
-export type CallablePromiseModel<
+export type CallableArgsPromiseModel<
   TResult = void,
   TParams extends Array<unknown> = never,
-> = CallableModel<Promise<TResult>, TParams>;
+> = CallableArgsModel<Promise<TResult>, TParams>;
 
 export type InferModel<TType> = TType extends Array<infer TElement> ? TElement : TType;
 

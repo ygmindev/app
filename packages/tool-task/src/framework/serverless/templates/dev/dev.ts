@@ -1,9 +1,9 @@
 import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
 import { cleanup } from '@lib/backend/setup/utils/cleanup/cleanup';
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
-import { TASK_STATUS } from '@lib/config/core/task/task.constants';
-import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
+import { TASK_STATUS } from '@tool/task/core/core.constants';
+import type { TaskParamsModel } from '@tool/task/core/core.models';
 import { command } from '@tool/task/core/utils/command/command';
 import type { DevParamsModel } from '@tool/task/framework/serverless/templates/dev/dev.models';
 

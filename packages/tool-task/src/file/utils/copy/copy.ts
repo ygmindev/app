@@ -11,14 +11,14 @@ import {
 } from 'fs';
 import every from 'lodash/every';
 import forEach from 'lodash/forEach';
-import minimatch from 'minimatch';
+import { minimatch } from 'minimatch';
 import { join } from 'path';
 
 export const copy = async ({
+  excludes = EXCLUDE_PATTERNS,
   from,
   isOverwrite,
   overrides,
-  excludes = EXCLUDE_PATTERNS,
   to,
 }: CopyParamsModel): Promise<void> => {
   let _to = to;

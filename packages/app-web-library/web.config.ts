@@ -1,5 +1,5 @@
 import '../lib-shared/src/core/utils/nodeRegister/nodeRegister';
 
-import { webConfig } from '../lib-config/src/framework/web/web.config';
+import { webConfig } from '../lib-config/src/framework/web/configs/web.config';
 
 export default webConfig;

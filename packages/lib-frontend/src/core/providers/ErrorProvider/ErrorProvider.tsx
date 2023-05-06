@@ -30,6 +30,9 @@ export const ErrorProvider: SFCModel<ErrorProviderPropsModel> = ({
   const { t } = useTranslation();
   const { styles } = useStyles({ props });
   const [errorContext, errorContextSet] = useState<ErrorContextModel | undefined>();
+  // console.warn(errorContext);
+  console.warn(children);
+
   return (
     <ErrorContext.Provider
       value={{

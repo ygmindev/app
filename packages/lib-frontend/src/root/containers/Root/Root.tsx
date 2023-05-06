@@ -14,14 +14,11 @@ import type {
   RootStateModel,
 } from '@lib/frontend/root/stores/rootStore.models';
 import { RouteProvider } from '@lib/frontend/route/providers/RouteProvider/RouteProvider';
-import { initialize } from '@lib/frontend/setup/utils/initialize/initialize';
 import { Store } from '@lib/frontend/state/utils/Store/Store';
 import { StyleProvider } from '@lib/frontend/style/providers/StyleProvider/StyleProvider';
 import { TrackingProvider } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider';
 import type { ReactElement } from 'react';
 import { cloneElement, createContext, Suspense, useMemo } from 'react';
-
-await initialize();
 
 export const actionContext = createContext<RootActionsModel | undefined>(undefined);
 
@@ -46,9 +43,7 @@ export const Root: FCModel<RootPropsModel> = ({ children, context }) => {
     <StyleProvider />,
     <LocaleProvider value={context?.locale} />,
     <AppProvider />,
-    context?.state && (
-      <_store.Provider value={{ ...context?.state, actionContext, store: _store }} />
-    ),
+    <_store.Provider value={{ ...context?.state, actionContext, store: _store }} />,
     <Suspense />, // to provider?
   ].filter(Boolean) as Array<ReactElement>;
 

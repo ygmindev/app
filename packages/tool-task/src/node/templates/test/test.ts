@@ -1,8 +1,8 @@
 import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
-import { TASK_STATUS } from '@lib/config/core/task/task.constants';
-import type { TaskParamsModel } from '@lib/config/core/task/task.models';
-import { testConfig } from '@lib/config/javascript/test/configs/test.config.base';
+import { testConfigParams } from '@lib/config/javascript/test/params/test.params.base';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
+import { TASK_STATUS } from '@tool/task/core/core.constants';
+import type { TaskParamsModel } from '@tool/task/core/core.models';
 import { command } from '@tool/task/core/utils/command/command';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import type { TestParamsModel } from '@tool/task/node/templates/test/test.models';
@@ -18,7 +18,7 @@ export const test: TaskParamsModel<TestParamsModel> = {
     testMatch && (process.env.TEST_MATCH = testMatch);
 
     await command({
-      command: `${fromExecutable(testConfig.command)} --config=${testConfig.configFile}`,
+      command: `${fromExecutable(testConfigParams.command)} --config=${testConfigParams.configFile}`,
       root,
     });
     return { status: TASK_STATUS.SUCCESS };

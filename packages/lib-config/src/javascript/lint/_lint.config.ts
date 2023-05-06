@@ -4,7 +4,6 @@ import type { Linter } from 'eslint';
 export const _lintConfig = ({
   include,
   indentWidth,
-  isNoUnused,
   isParenthesis,
   isSameLine,
   isSingleQuote,
@@ -12,6 +11,7 @@ export const _lintConfig = ({
   isTrailingComma,
   printWidth,
   roots,
+  unusedIgnore,
 }: _LintConfigParamsModel): Linter.Config => ({
   env: {
     browser: true,
@@ -79,9 +79,9 @@ export const _lintConfig = ({
       'warn',
       {
         args: 'after-used',
-        argsIgnorePattern: '^_',
+        argsIgnorePattern: unusedIgnore,
         vars: 'all',
-        varsIgnorePattern: '^_',
+        varsIgnorePattern: unusedIgnore,
       },
     ],
   },

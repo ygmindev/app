@@ -25,23 +25,25 @@ const { Component, displayName } = withTestComponent<ActivatablePropsModel>({
 
 describe(displayName, () => {
   test('activate', async () => {
-    const { queryByTestId, queryByText } = render(<Component />);
-    hoverIn(queryByTestId(ACTIVATE));
-    await waitForExpect({ callback: () => expect(queryByText(ACTIVE)).toBeTruthy() });
+    const { findByTestId, findByText } = render({ element: <Component /> });
+    hoverIn(await findByTestId(ACTIVATE));
+    await waitForExpect({ callback: () => expect(await findByText(ACTIVE)).toBeTruthy() });
   });
 
   test('activate controlled', async () => {
     const handleActive = jest.fn();
     const handleInactive = jest.fn();
-    const { queryByTestId, queryByText } = render(
-      <Component
-        onActive={handleActive}
-        onInactive={handleInactive}
-      />,
-    );
-    hoverIn(queryByTestId(ACTIVATE));
-    await waitForExpect({ callback: () => expect(queryByText(ACTIVE)).toBeTruthy() });
-    hoverOut(queryByTestId(ACTIVATE));
+    const { findByTestId, findByText } = render({
+      element: (
+        <Component
+          onActive={handleActive}
+          onInactive={handleInactive}
+        />
+      ),
+    });
+    hoverIn(await findByTestId(ACTIVATE));
+    await waitForExpect({ callback: () => expect(await findByText(ACTIVE)).toBeTruthy() });
+    hoverOut(await findByTestId(ACTIVATE));
     await waitForExpect({ callback: () => expect(handleInactive).toHaveBeenCalled() });
   });
 });

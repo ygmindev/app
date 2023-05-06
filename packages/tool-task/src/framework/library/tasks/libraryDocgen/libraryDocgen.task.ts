@@ -1,10 +1,10 @@
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
-import { TASK_STATUS } from '@lib/config/core/task/task.constants';
-import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { libraryConfig } from '@lib/config/framework/library/configs/library.config';
 import { docgen } from '@lib/library/docgen/utils/docgen/docgen';
 import type { DocgenMetaDataModel } from '@lib/library/docgen/utils/docgen/docgen.models';
+import { TASK_STATUS } from '@tool/task/core/core.constants';
+import type { TaskParamsModel } from '@tool/task/core/core.models';
 import { progress } from '@tool/task/core/utils/progress/progress';
 import { existsSync, writeFileSync } from 'fs';
 

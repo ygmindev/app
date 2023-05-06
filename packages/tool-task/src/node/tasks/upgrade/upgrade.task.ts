@@ -1,7 +1,7 @@
 import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
-import { TASK_STATUS } from '@lib/config/core/task/task.constants';
-import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { debug } from '@lib/shared/logging/utils/logger/logger';
+import { TASK_STATUS } from '@tool/task/core/core.constants';
+import type { TaskParamsModel } from '@tool/task/core/core.models';
 import backup from '@tool/task/core/tasks/backup/backup.task';
 import { command } from '@tool/task/core/utils/command/command';
 import { NODE_UPGRADE_EXCLUDES } from '@tool/task/node/tasks/upgrade/upgrade.constants';

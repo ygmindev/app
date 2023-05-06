@@ -4,8 +4,7 @@ import { fastifyCookie } from '@fastify/cookie';
 import { fastifyMiddie } from '@fastify/middie';
 import { fastifyStatic } from '@fastify/static';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
-import { webConfig } from '@lib/config/framework/web/configs/web.config';
-import { _internationalizeConfig } from '@lib/config/locale/internationalize/_internationalize.config.node';
+import { webConfigParams } from '@lib/config/framework/web/params/web.params';
 import { internationalizeConfig } from '@lib/config/locale/internationalize/configs/internationalize.config';
 import { renderPage } from '@lib/framework/web/utils/renderPage/renderPage';
 import type {
@@ -23,19 +22,18 @@ import toNumber from 'lodash/toNumber';
 import { join } from 'path';
 import { createServer } from 'vite';
 
-const _i18n = _internationalizeConfig(internationalizeConfig);
-
 export const _server = async ({
   configFile,
   port,
   root,
 }: _ServerParamsModel): Promise<_ServerModel> => {
+  const _i18n = internationalizeConfig;
   const app = fastify();
   await app.register(fastifyMiddie);
   await app.register(fastifyCompress);
   await app.register(fastifyStatic, {
-    prefix: `/${webConfig.publicDir}/`,
-    root: fromStatic(webConfig.publicDir),
+    prefix: `/${webConfigParams.publicDir}/`,
+    root: fromStatic(webConfigParams.publicDir),
   });
   await app.register(fastifyCookie, {
     secret: process.env.SERVER_APP_SECRET,

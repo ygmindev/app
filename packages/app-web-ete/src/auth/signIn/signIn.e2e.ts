@@ -1,4 +1,3 @@
-import { ENV_NAME } from '@app/web/app/app.constants';
 import { SIGN_IN } from '@lib/frontend/auth/auth.constants';
 import { OTP_FIELD_MAIN_TEST_ID } from '@lib/frontend/auth/components/OtpField/OtpField.constants';
 import { USERNAME_FORM_TEST_ID } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.constants';
@@ -8,7 +7,7 @@ import type { ScreenModel } from '@lib/frontend/test/utils/screen/screen.models'
 import { OTP_STATIC } from '@lib/shared/auth/resources/Otp/Otp.constants';
 import { appUri } from '@lib/shared/http/utils/appUri/appUri';
 
-const URI = appUri({ name: ENV_NAME });
+const URI = appUri();
 
 describe('sign in', () => {
   let _screen: ScreenModel;

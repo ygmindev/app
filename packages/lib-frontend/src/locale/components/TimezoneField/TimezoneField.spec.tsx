@@ -3,11 +3,13 @@ import type { TimezoneFieldPropsModel } from '@lib/frontend/locale/components/Ti
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<TimezoneFieldPropsModel>({ target: TimezoneField });
+const { Component, displayName, testID } = withTestComponent<TimezoneFieldPropsModel>({
+  target: TimezoneField,
+});
 
 describe(displayName, () => {
   test('works', async () => {
-    const { queryByTestId } = render(<Component />);
-    expect(queryByTestId(testID)).toBeTruthy();
+    const { findByTestId } = render({ element: <Component /> });
+    expect(await findByTestId(testID)).toBeTruthy();
   });
 });

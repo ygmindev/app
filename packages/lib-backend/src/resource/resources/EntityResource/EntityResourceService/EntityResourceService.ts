@@ -1,5 +1,5 @@
 import type { RepositoryModel } from '@lib/backend/database/utils/Database/Database.models';
-import { DatabaseMain } from '@lib/backend/database/utils/DatabaseMain/DatabaseMain';
+import { DatabaseMongo } from '@lib/backend/database/utils/DatabaseMongo/DatabaseMongo';
 import type { ConstructorModel } from '@lib/shared/core/core.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { Container } from '@lib/shared/core/utils/Container/Container';
@@ -32,7 +32,7 @@ export const EntityResourceService = <TType, TForm>({
 > => {
   class _EntityResourceService implements EntityResourceServiceModel<TType, TForm> {
     protected _repository: RepositoryModel<TType> = Container.get(
-      DatabaseMain,
+      DatabaseMongo,
     ).getRepository<TType>({ name });
 
     protected _decorators: ResourceServiceDecoratorModel<TType, TForm> = {

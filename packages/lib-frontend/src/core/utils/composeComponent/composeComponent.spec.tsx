@@ -29,14 +29,16 @@ describe(displayName, () => {
     const REF = createRef();
 
     const { Component, testID } = withTestComponent({ target: _View });
-    const { queryByTestId } = render(
-      <Component
-        height={HEIGHT}
-        style={STYLE}
-        width={WIDTH}
-      />,
-    );
+    const { findByTestId } = render({
+      element: (
+        <Component
+          height={HEIGHT}
+          style={STYLE}
+          width={WIDTH}
+        />
+      ),
+    });
 
-    expect(queryByTestId(testID)).toBeTruthy();
+    expect(await findByTestId(testID)).toBeTruthy();
   });
 });

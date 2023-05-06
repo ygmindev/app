@@ -1,15 +1,5 @@
-import type { WebConfigParamsModel } from '@lib/config/framework/web/web.models';
+import { _webConfig } from '@lib/config/framework/web/_web.config';
+import type { _WebConfigModel } from '@lib/config/framework/web/_web.models';
+import { webConfigParams } from '@lib/config/framework/web/params/web.params';
 
-export const webConfig: WebConfigParamsModel = {
-  command: 'vite',
-
-  configFile: 'web.config.ts',
-
-  isSsr: true,
-
-  publicDir: 'assets',
-
-  rootId: 'root',
-
-  ssrContextKeys: ['state.initialState'],
-};
+export const webConfig: _WebConfigModel = _webConfig(webConfigParams);

@@ -1,5 +1,5 @@
-import { TASK_STATUS } from '@lib/config/core/task/task.constants';
-import type { TaskParamsModel } from '@lib/config/core/task/task.models';
+import { TASK_STATUS } from '@tool/task/core/core.constants';
+import type { TaskParamsModel } from '@tool/task/core/core.models';
 import { command } from '@tool/task/core/utils/command/command';
 
 export const make: TaskParamsModel = {

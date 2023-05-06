@@ -1,12 +1,12 @@
 import { children } from '@lib/backend/file/utils/children/children';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { generateConfig } from '@lib/config/core/generate/configs/generate.config';
-import { TASK_STATUS } from '@lib/config/core/task/task.constants';
-import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import type { GenerateParamsModel } from '@tool/generate/tasks/generate/generate.models';
 import { boilerplate } from '@tool/generate/utils/boilerplate/boilerplate';
 import type { BoilerplateParamsModel } from '@tool/generate/utils/boilerplate/boilerplate.models';
+import { TASK_STATUS } from '@tool/task/core/core.constants';
+import type { TaskParamsModel } from '@tool/task/core/core.models';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 

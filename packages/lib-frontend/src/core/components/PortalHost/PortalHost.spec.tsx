@@ -16,7 +16,7 @@ const { Component, displayName } = withTestComponent<PortalHostPropsModel>({
 
 describe(displayName, () => {
   test('works', async () => {
-    const { queryByText } = render(<Component />);
-    await waitForExpect({ callback: () => expect(queryByText(CHILDREN)).toBeTruthy() });
+    const { findByText } = render({ element: <Component /> });
+    await waitForExpect({ callback: () => expect(await findByText(CHILDREN)).toBeTruthy() });
   });
 });

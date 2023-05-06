@@ -7,17 +7,17 @@ import type { RouteContextModel } from '@lib/frontend/route/route.models';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { createContext } from 'react';
 
-const { _RouteProvider: _RouteProviderClient } = lazy(
+const { _RouteProvider: _RouteProviderFrontend } = lazy(
   () => import('@lib/frontend/route/providers/RouteProvider/_RouteProvider'),
 );
-const { _RouteProvider: _RouteProviderServer } = lazy(
-  () => import('@lib/frontend/route/providers/RouteProvider/_RouteProvider.server'),
+const { _RouteProvider: _RouteProviderBackend } = lazy(
+  () => import('@lib/frontend/route/providers/RouteProvider/_RouteProvider.node'),
 );
 
 export const RouteContext = createContext<RouteContextModel>({});
 
 export const _RouteProvider = composeComponent<RouteProviderPropsModel, _RouteProviderPropsModel>({
-  Component: isSsr ? _RouteProviderServer : _RouteProviderClient,
+  Component: isSsr ? _RouteProviderBackend : _RouteProviderFrontend,
 });
 
 export const RouteProvider = composeComponent<RouteProviderPropsModel, _RouteProviderPropsModel>({

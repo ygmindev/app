@@ -1,5 +1,5 @@
 import { OtpService } from '@lib/backend/auth/resources/Otp/OtpService/OtpService';
-import { DatabaseMain } from '@lib/backend/database/utils/DatabaseMain/DatabaseMain';
+import { DatabaseMongo } from '@lib/backend/database/utils/DatabaseMongo/DatabaseMongo';
 import { mail } from '@lib/backend/notification/utils/mail/mail';
 import { OTP_RESOURCE_NAME } from '@lib/shared/auth/resources/Otp/Otp.constants';
 import { Container } from '@lib/shared/core/utils/Container/Container';
@@ -12,7 +12,7 @@ const { displayName } = withTest({ target: () => OtpService });
 const mailer = { mail };
 
 describe(displayName, () => {
-  const database = Container.get(DatabaseMain);
+  const database = Container.get(DatabaseMongo);
   const otpService = Container.get(OtpService);
 
   afterEach(async () => {

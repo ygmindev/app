@@ -1,7 +1,7 @@
-import { createHandler } from '@lib/backend/lambda/utils/createHandler/createHandler';
-import { getContext } from '@lib/backend/lambda/utils/getContext/getContext';
+import { createHandler } from '@lib/backend/serverless/utils/createHandler/createHandler';
+import { getContext } from '@lib/backend/serverless/utils/getContext/getContext';
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
-import { graphqlConfig } from '@lib/config/http/graphql/graphql.config';
+import { graphqlConfig } from '@lib/config/http/graphql/configs/graphql.config';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 import { error } from '@lib/shared/logging/utils/logger/logger';
 import { ApolloServer } from 'apollo-server-lambda';

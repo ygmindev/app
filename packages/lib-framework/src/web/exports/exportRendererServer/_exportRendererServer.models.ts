@@ -1,4 +1,4 @@
-import type { WebConfigParamsModel } from '@lib/config/framework/web/web.models';
+import type { _WebConfigParamsModel } from '@lib/config/framework/web/_web.models';
 import type { ExportRenderClientParamsModel } from '@lib/framework/web/exports/exportRendererClient/exportRendererClient.models';
 import type { ExportRenderServerParamsModel } from '@lib/framework/web/exports/exportRendererServer/exportRendererServer.models';
 import type { ChildrenPropsModel, FCModel } from '@lib/frontend/core/core.models';
@@ -6,7 +6,7 @@ import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import type { ComponentType } from 'react';
 
 export interface _ExportRendererServerParamsModel
-  extends Pick<WebConfigParamsModel, 'publicDir' | 'rootId' | 'ssrContextKeys'> {
+  extends Pick<_WebConfigParamsModel, 'publicDir' | 'rootId' | 'ssrContextKeys'> {
   render: FCModel<ChildrenPropsModel & ExportRenderServerParamsModel>;
 }
 

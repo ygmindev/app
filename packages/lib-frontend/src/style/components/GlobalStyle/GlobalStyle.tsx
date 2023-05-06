@@ -4,7 +4,7 @@ import type { GlobalStylePropsModel } from '@lib/frontend/style/components/Globa
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { memo } from 'react';
 
-export const GlobalStyle: FCModel<GlobalStylePropsModel> = memo(({ sheet }) => {
+export const GlobalStyle: FCModel<GlobalStylePropsModel> = memo(({ config }) => {
   const theme = useTheme();
-  return <_GlobalStyle sheet={sheet(theme)} />;
+  return <_GlobalStyle sheet={config(theme)} />;
 });

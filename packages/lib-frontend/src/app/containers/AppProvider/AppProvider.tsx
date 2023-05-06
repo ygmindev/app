@@ -21,5 +21,6 @@ export const AppProvider: SFCModel<AppProviderPropsModel> = ({ children }) => {
       display.unsubscribeResize(update);
     };
   }, []);
+
   return <>{children}</>;
 };

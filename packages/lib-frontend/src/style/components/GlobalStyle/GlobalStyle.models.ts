@@ -1,5 +1,5 @@
-import type { SheetConfigParamsModel } from '@lib/config/style/sheet/sheet.models';
+import type { _CssConfigModel } from '@lib/config/style/css/_css.models';
 
 export interface GlobalStylePropsModel {
-  sheet: SheetConfigParamsModel;
+  config: _CssConfigModel;
 }

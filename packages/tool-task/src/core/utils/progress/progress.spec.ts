@@ -5,7 +5,7 @@ const { displayName } = withTest({ target: () => progress });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await progress({});
+    const result = await progress();
     expect(result).toStrictEqual({});
   });
 });

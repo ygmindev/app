@@ -1,7 +1,7 @@
 import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
-import { TASK_STATUS } from '@lib/config/core/task/task.constants';
-import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
+import { TASK_STATUS } from '@tool/task/core/core.constants';
+import type { TaskParamsModel } from '@tool/task/core/core.models';
 import { command } from '@tool/task/core/utils/command/command';
 
 export const dev: TaskParamsModel = {

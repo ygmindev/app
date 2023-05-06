@@ -1,5 +1,5 @@
-import { TASK_STATUS } from '@lib/config/core/task/task.constants';
-import type { TaskParamsModel } from '@lib/config/core/task/task.models';
+import { TASK_STATUS } from '@tool/task/core/core.constants';
+import type { TaskParamsModel } from '@tool/task/core/core.models';
 import { rename } from '@tool/task/core/utils/rename/rename';
 import { NODE_POST_INSTALL_RENAMES } from '@tool/task/node/tasks/postinstall/postinstall.constants';
 import type { PostinstallParamsModel } from '@tool/task/node/tasks/postinstall/postinstall.models';

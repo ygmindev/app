@@ -12,42 +12,51 @@ const { Component: Trans, displayName } = withTestComponent<
 
 describe(displayName, () => {
   test('works with string', async () => {
-    const { queryByText } = render(
-      <Trans
-        i18nKey="labels.testWithString"
-        ns="test"
-      />,
-    );
-    await waitForExpect({ callback: () => expect(queryByText('test with string')).toBeTruthy() });
+    const { findByText } = render({
+      element: (
+        <Trans
+          i18nKey="labels.testWithString"
+          ns="test"
+        />
+      ),
+    });
+    await waitForExpect({ callback: () => expect(await findByText('test with string')).toBeTruthy() });
   });
 
   test('works with params', async () => {
-    const { queryByText } = render(
-      <Trans
-        i18nKey="labels.testWithParams"
-        ns="test"
-        params={{ value1: 'value1', value2: 'value2' }}
-      />,
-    );
+    const { findByText } = render({
+      element: (
+        <Trans
+          i18nKey="labels.testWithParams"
+          ns="test"
+          params={{ value1: 'value1', value2: 'value2' }}
+        />
+      ),
+    });
     await waitForExpect({
-      callback: () => expect(queryByText('test with params: value1 value2')).toBeTruthy(),
+      callback: () => expect(await findByText('test with params: value1 value2')).toBeTruthy(),
     });
   });
 
   test('works with elements', async () => {
-    const { queryByText } = render(
-      <Trans
-        components={[<Text color={THEME_COLOR.PRIMARY} />, <Text color={THEME_COLOR.SECONDARY} />]}
-        i18nKey="labels.testWithElements"
-        ns="test"
-        params={{ value1: 'value1', value2: 'value2' }}
-      />,
-    );
+    const { findByText } = render({
+      element: (
+        <Trans
+          components={[
+            <Text color={THEME_COLOR.PRIMARY} />,
+            <Text color={THEME_COLOR.SECONDARY} />,
+          ]}
+          i18nKey="labels.testWithElements"
+          ns="test"
+          params={{ value1: 'value1', value2: 'value2' }}
+        />
+      ),
+    });
     await waitForExpect({
       callback: () => {
-        expect(queryByText('test with elements:')).toBeTruthy();
-        expect(queryByText('value1')).toBeTruthy();
-        expect(queryByText('value2')).toBeTruthy();
+        expect(await findByText('test with elements:')).toBeTruthy();
+        expect(await findByText('value1')).toBeTruthy();
+        expect(await findByText('value2')).toBeTruthy();
       },
     });
   });

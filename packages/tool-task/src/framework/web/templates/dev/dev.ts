@@ -1,8 +1,8 @@
-import { TASK_STATUS } from '@lib/config/core/task/task.constants';
-import type { TaskParamsModel } from '@lib/config/core/task/task.models';
-import { webConfig } from '@lib/config/framework/web/configs/web.config';
+import { webConfigParams } from '@lib/config/framework/web/params/web.params';
 import { server } from '@lib/framework/web/utils/server/server';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
+import { TASK_STATUS } from '@tool/task/core/core.constants';
+import type { TaskParamsModel } from '@tool/task/core/core.models';
 
 export const dev: TaskParamsModel = {
   environment: ENVIRONMENT.DEVELOPMENT,
@@ -11,7 +11,7 @@ export const dev: TaskParamsModel = {
 
   task: async ({ root }) => {
     const port = process.env[`APP_${process.env.ENV_NAME}_PORT`] || '';
-    await server({ configFile: webConfig.configFile, port, root });
+    await server({ configFile: webConfigParams.configFile, port, root });
     return { status: TASK_STATUS.SUCCESS };
   },
 };

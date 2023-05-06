@@ -1,4 +1,4 @@
-import type { TaskParamsModel } from '@lib/config/core/task/task.models';
+import type { TaskParamsModel } from '@tool/task/core/core.models';
 import { dev } from '@tool/task/framework/native/templates/dev/dev';
 import { iosDev } from '@tool/task/framework/native/templates/iosDev/iosDev';
 import { iosPod } from '@tool/task/framework/native/templates/iosPod/iosPod';

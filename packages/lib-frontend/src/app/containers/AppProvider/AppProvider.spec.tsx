@@ -3,11 +3,13 @@ import type { AppProviderPropsModel } from '@lib/frontend/app/containers/AppProv
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<AppProviderPropsModel>({ target: AppProvider });
+const { Component, displayName, testID } = withTestComponent<AppProviderPropsModel>({
+  target: AppProvider,
+});
 
 describe(displayName, () => {
   test('works', async () => {
-    const { queryByTestId } = render(<Component />);
-    expect(queryByTestId(testID)).toBeTruthy();
+    const { findByTestId } = render({ element: <Component /> });
+    expect(await findByTestId(testID)).toBeTruthy();
   });
 });

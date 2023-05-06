@@ -1,9 +1,13 @@
-import type { ReactElement } from 'react';
+import type { ChildrenPropsModel } from '@lib/frontend/core/core.models';
+import type { ComponentType, ReactElement } from 'react';
 
-export type _RenderParamsModel = ReactElement;
+export interface _RenderParamsModel {
+  Wrapper?: ComponentType<ChildrenPropsModel<ReactElement>>;
+  element: ReactElement;
+}
 
 export interface _RenderModel {
-  queryByTestId(testId: string): ReactElement;
-  queryByText(testId: string): ReactElement;
+  findByTestId(testId: string): Promise<ReactElement>;
+  findByText(testId: string): Promise<ReactElement>;
   unmount(): void;
 }

@@ -4,7 +4,7 @@ import { globSync } from 'glob';
 
 export const _fromGlobs = ({
   globs,
-  root = fromWorking(),
   isAbsolute,
+  root = fromWorking(),
 }: _FromGlobsParamsModel): Array<string> =>
   globs.map((glob) => globSync(glob, { absolute: isAbsolute, cwd: root })).flat(1);

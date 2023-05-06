@@ -1,11 +1,10 @@
 import { cleanDocument } from '@lib/backend/database/utils/cleanDocument/cleanDocument';
 import type {
   DatabaseModel,
-  DatabaseParamsModel,
   RepositoryModel,
 } from '@lib/backend/database/utils/Database/Database.models';
 import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
-import { _databaseConfig } from '@lib/config/database/_database.config';
+import type { _DatabaseConfigModel } from '@lib/config/database/_database.models';
 import type { PartialDeepModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { UninitializedError } from '@lib/shared/core/errors/UninitializedError/UninitializedError';
@@ -21,16 +20,16 @@ import type { EntityManager, MongoDriver } from '@mikro-orm/mongodb';
 import type { Filter, MongoError, UpdateFilter } from 'mongodb';
 
 export abstract class _Database implements DatabaseModel {
-  protected _params: DatabaseParamsModel;
+  protected _config: _DatabaseConfigModel;
   protected _entityManager?: EntityManager;
 
-  constructor(params: DatabaseParamsModel) {
-    this._params = params;
+  constructor(config: _DatabaseConfigModel) {
+    this._config = config;
   }
 
   async initialize(): Promise<void> {
     this._entityManager =
-      this._entityManager ?? (await MikroORM.init<MongoDriver>(_databaseConfig(this._params))).em;
+      this._entityManager ?? (await MikroORM.init<MongoDriver>(this._config)).em;
   }
 
   _getEntityManager = (): EntityManager => {
@@ -38,7 +37,7 @@ export abstract class _Database implements DatabaseModel {
     if (_em) {
       return _em.fork();
     }
-    throw new UninitializedError(`database ${this._params.host}`);
+    throw new UninitializedError(`database ${this._config.host}`);
   };
 
   getRepository = <TType extends unknown>({

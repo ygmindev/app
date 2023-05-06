@@ -1,3 +1,4 @@
+import type { _ThemeConfigParamsModel } from '@lib/config/style/theme/_theme.models';
 import type {
   STYLE_BRIGHTNESS,
   THEME_COLOR,
@@ -8,8 +9,11 @@ import type {
 import type { ImageStyle, TextStyle, ViewStyle } from 'react-native';
 
 export type ViewStyleModel = ViewStyle;
+
 export type TextStyleModel = TextStyle;
+
 export type ImageStyleModel = ImageStyle;
+
 export type StyleModel = ViewStyleModel | TextStyleModel | ImageStyleModel;
 
 export type ThemeSizeModel = `${THEME_SIZE}`;
@@ -24,4 +28,10 @@ export interface StylePropsModel<TType extends StyleModel = ViewStyleModel> {
   style?: TType | Array<TType> | null;
 }
 
-export type StyleBrightnessModel = `${STYLE_BRIGHTNESS}`;
+export type BrightnessModel = `${STYLE_BRIGHTNESS}`;
+
+export interface ThemeModel extends Omit<_ThemeConfigParamsModel, 'colors'> {
+  colors: Pick<_ThemeConfigParamsModel['colors'], 'activeLightness' | 'disabledOpacity'> & {
+    tone: Record<ThemeColorModel, Record<ThemeRoleModel, string>>;
+  };
+}

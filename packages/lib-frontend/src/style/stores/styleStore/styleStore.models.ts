@@ -1,7 +1,7 @@
 import type { ReducerModel } from '@lib/frontend/state/state.models';
-import type { StyleBrightnessModel } from '@lib/frontend/style/style.models';
+import type { BrightnessModel } from '@lib/frontend/style/style.models';
 
-export type StyleBrightnessStateModel = StyleBrightnessModel;
+export type StyleBrightnessStateModel = BrightnessModel;
 
 export interface StyleStateModel {
   brightness: StyleBrightnessStateModel;

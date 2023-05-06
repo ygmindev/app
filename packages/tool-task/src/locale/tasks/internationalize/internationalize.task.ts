@@ -1,8 +1,8 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { TASK_STATUS } from '@lib/config/core/task/task.constants';
-import type { TaskParamsModel } from '@lib/config/core/task/task.models';
-import { parserConfig } from '@lib/config/locale/parser/parser.config';
+import { parserConfig } from '@lib/config/locale/parser/configs/parser.config';
 import { importDynamic } from '@lib/shared/core/utils/importDynamic/importDynamic';
+import { TASK_STATUS } from '@tool/task/core/core.constants';
+import type { TaskParamsModel } from '@tool/task/core/core.models';
 import { dest, src } from 'gulp';
 
 const internationalize: TaskParamsModel = {

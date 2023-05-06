@@ -1,6 +1,6 @@
-import type { WebConfigParamsModel } from '@lib/config/framework/web/web.models';
+import type { _WebConfigParamsModel } from '@lib/config/framework/web/_web.models';
 
-export interface _ServerParamsModel extends Pick<WebConfigParamsModel, 'configFile'> {
+export interface _ServerParamsModel extends Pick<_WebConfigParamsModel, 'configFile'> {
   port: string;
   root: string;
 }

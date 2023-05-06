@@ -18,22 +18,24 @@ const { Component, displayName, testID } = withTestComponent<WrapperPropsModel>(
 
 describe(displayName, () => {
   test('works', async () => {
-    const { queryByTestId } = render(<Component />);
-    expect(queryByTestId(testID)).toBeTruthy();
+    const { findByTestId } = render({ element: <Component /> });
+    expect(await findByTestId(testID)).toBeTruthy();
   });
 
   test('is vertical scrollable', async () => {
     const POSITION: PositionModel = { x: 0, y: 50 };
     let position: PositionModel = { x: 0, y: 0 };
-    const { queryByTestId } = render(
-      <Component
-        isVerticalScrollable
-        onScroll={({ x, y }) => {
-          position = { x, y };
-        }}
-      />,
-    );
-    const element = queryByTestId(testID);
+    const { findByTestId } = render({
+      element: (
+        <Component
+          isVerticalScrollable
+          onScroll={({ x, y }) => {
+            position = { x, y };
+          }}
+        />
+      ),
+    });
+    const element = await findByTestId(testID);
     scroll({ element, position: POSITION });
     await waitForExpect({ callback: () => expect(position.y).toBe(POSITION.y) });
   });
@@ -41,15 +43,17 @@ describe(displayName, () => {
   test('is horizontal scrollable', async () => {
     const POSITION: PositionModel = { x: 50, y: 0 };
     let position: PositionModel = { x: 0, y: 0 };
-    const { queryByTestId } = render(
-      <Component
-        isHorizontalScrollable
-        onScroll={({ x, y }) => {
-          position = { x, y };
-        }}
-      />,
-    );
-    const element = queryByTestId(testID);
+    const { findByTestId } = render({
+      element: (
+        <Component
+          isHorizontalScrollable
+          onScroll={({ x, y }) => {
+            position = { x, y };
+          }}
+        />
+      ),
+    });
+    const element = await findByTestId(testID);
     scroll({ element, position: POSITION });
     await waitForExpect({ callback: () => expect(position.x).toBe(POSITION.x) });
   });

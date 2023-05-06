@@ -1,7 +1,7 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import type { LibraryConfigParamsModel } from '@lib/config/framework/library/library.models';
+import type { _LibraryConfigModel } from '@lib/config/framework/library/_library.models';
 
-export const libraryConfig: LibraryConfigParamsModel = {
+export const libraryConfig: _LibraryConfigModel = {
   extension: 'library',
 
   path: 'assets/library/components.json',

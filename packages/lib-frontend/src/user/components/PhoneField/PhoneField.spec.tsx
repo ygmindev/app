@@ -1,7 +1,7 @@
-import type { PhoneFieldPropsModel } from '@lib/frontend/user/components/PhoneField/PhoneField.models';
-import { PhoneField } from '@lib/frontend/user/components/PhoneField/PhoneField';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
+import { PhoneField } from '@lib/frontend/user/components/PhoneField/PhoneField';
+import type { PhoneFieldPropsModel } from '@lib/frontend/user/components/PhoneField/PhoneField.models';
 
 const { Component, displayName, testID } = withTestComponent<PhoneFieldPropsModel>({
   target: PhoneField,
@@ -9,7 +9,7 @@ const { Component, displayName, testID } = withTestComponent<PhoneFieldPropsMode
 
 describe(displayName, () => {
   test('works', async () => {
-    const { queryByTestId } = render(<Component />);
-    expect(queryByTestId(testID)).toBeTruthy();
+    const { findByTestId } = render({ element: <Component /> });
+    expect(await findByTestId(testID)).toBeTruthy();
   });
 });

@@ -1,4 +1,4 @@
-import type { TaskParamsModel } from '@lib/config/core/task/task.models';
+import type { TaskParamsModel } from '@tool/task/core/core.models';
 import { clean } from '@tool/task/core/templates/clean/clean';
 import { lint } from '@tool/task/node/templates/lint/lint';
 import { packageExtend } from '@tool/task/node/templates/packageExtend/packageExtend';

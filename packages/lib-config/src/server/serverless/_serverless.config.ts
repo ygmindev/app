@@ -2,7 +2,7 @@ import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
-import { bundleConfig } from '@lib/config/javascript/bundle/bundle.config';
+import { bundleConfig } from '@lib/config/javascript/bundle/configs/bundle.config';
 import type { _ServerlessConfigParamsModel } from '@lib/config/server/serverless/_serverless.models';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
@@ -21,7 +21,10 @@ export const _serverlessConfig = ({
   server,
 }: _ServerlessConfigParamsModel): AWS => ({
   custom: {
-    dotenv: { dotenvParser: dotenv, logging: false },
+    dotenv: {
+      dotenvParser: dotenv,
+      logging: false,
+    },
 
     'serverless-offline': {
       allowCache: false,
@@ -50,7 +53,7 @@ export const _serverlessConfig = ({
             },
             plugins: toRelative({
               from: fromWorking(),
-              to: fromConfig('server/serverless/_plugins.config.js'),
+              to: fromConfig('server/serverless/_plugins.js'),
             }),
             resolveExtensions: bundle.extensions,
             sourcemap: environment === ENVIRONMENT.PRODUCTION ? undefined : 'inline',

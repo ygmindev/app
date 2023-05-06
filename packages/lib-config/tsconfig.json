@@ -1,4 +1,4 @@
 {
-  "extends": "../lib-config/src/javascript/typescript/tsconfig.json",
-  "include": ["src/javascript/typescript/types/*", "src/**/*", "*.ts", "*.js"]
+  "extends": "../lib-config/src/javascript/typescript/configs/tsconfig.json",
+  "include": ["../lib-config/src/javascript/typescript/types/*", "src/**/*", "*.ts", "*.js"]
 }

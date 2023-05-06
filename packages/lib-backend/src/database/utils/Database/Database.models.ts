@@ -1,10 +1,7 @@
-import type { DatabaseConfigParamsModel } from '@lib/config/database/database.models';
 import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import type { WithResourceNameModel } from '@lib/shared/resource/decorators/withResourceName/withResourceName.models';
 import type { EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import type { ResourceServiceModel } from '@lib/shared/resource/utils/Resource/ResourceService/ResourceService.models';
-
-export interface DatabaseParamsModel extends DatabaseConfigParamsModel {}
 
 export interface DatabaseModel {
   close: CallablePromiseModel;

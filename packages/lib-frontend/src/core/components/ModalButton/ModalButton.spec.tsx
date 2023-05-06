@@ -3,11 +3,13 @@ import type { ModalButtonPropsModel } from '@lib/frontend/core/components/ModalB
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<ModalButtonPropsModel>({ target: ModalButton });
+const { Component, displayName, testID } = withTestComponent<ModalButtonPropsModel>({
+  target: ModalButton,
+});
 
 describe(displayName, () => {
   test('works', async () => {
-    const { queryByTestId } = render(<Component />);
-    expect(queryByTestId(testID)).toBeTruthy();
+    const { findByTestId } = render({ element: <Component /> });
+    expect(await findByTestId(testID)).toBeTruthy();
   });
 });

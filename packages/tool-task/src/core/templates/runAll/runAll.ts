@@ -1,6 +1,6 @@
-import { TASK_STATUS } from '@lib/config/core/task/task.constants';
-import type { TaskParamsModel } from '@lib/config/core/task/task.models';
 import { sequence } from '@lib/shared/core/utils/sequence/sequence';
+import { TASK_STATUS } from '@tool/task/core/core.constants';
+import type { TaskParamsModel } from '@tool/task/core/core.models';
 import type { RunAllParamsModel } from '@tool/task/core/templates/runAll/runAll.models';
 import { registry } from '@tool/task/core/utils/registry/registry';
 import filter from 'lodash/filter';

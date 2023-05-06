@@ -1,4 +1,7 @@
-import type { _ParserConfigParamsModel } from '@lib/config/locale/parser/_parser.models';
+import type {
+  _ParserConfigModel,
+  _ParserConfigParamsModel,
+} from '@lib/config/locale/parser/_parser.models';
 import { join } from 'path';
 
 export const _parserConfig = ({
@@ -6,7 +9,7 @@ export const _parserConfig = ({
   missingValue,
   namespaceDefault,
   outputPath,
-}: _ParserConfigParamsModel): object => ({
+}: _ParserConfigParamsModel): _ParserConfigModel => ({
   createOldCatalogs: false,
 
   defaultNamespace: namespaceDefault,

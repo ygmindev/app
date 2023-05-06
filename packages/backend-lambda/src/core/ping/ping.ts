@@ -1,4 +1,4 @@
-import { createHandler } from '@lib/backend/lambda/utils/createHandler/createHandler';
+import { createHandler } from '@lib/backend/serverless/utils/createHandler/createHandler';
 
 export const main = createHandler(async () => ({
   body: JSON.stringify('success'),
