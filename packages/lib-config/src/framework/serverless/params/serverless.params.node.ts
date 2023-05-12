@@ -7,10 +7,8 @@ import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
 import { HTTP_METHOD, PING } from '@lib/shared/http/http.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
-export const serverlessConfigParamsNode: _ServerlessConfigParamsModel = merge({
-  strategy: MERGE_STRATEGY.DEEP_APPEND,
-
-  values: [
+export const serverlessConfigParamsNode: _ServerlessConfigParamsModel = merge(
+  [
     {
       bundle: bundleConfigParams,
 
@@ -33,4 +31,5 @@ export const serverlessConfigParamsNode: _ServerlessConfigParamsModel = merge({
 
     serverlessConfigParamsBase,
   ],
-});
+  MERGE_STRATEGY.DEEP_APPEND,
+);

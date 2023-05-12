@@ -4,10 +4,8 @@ import type { CallableModel } from '@lib/shared/core/core.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 
-export const testConfigParams: _TestConfigParamsModel = merge({
-  strategy: MERGE_STRATEGY.DEEP_PREPEND,
-
-  values: [
+export const testConfigParams: _TestConfigParamsModel = merge(
+  [
     {
       onBeforeAll: async () => {
         global.requestAnimationFrame = ((cb: CallableModel) => {
@@ -18,4 +16,5 @@ export const testConfigParams: _TestConfigParamsModel = merge({
     },
     testConfigParamsBase,
   ],
-});
+  MERGE_STRATEGY.DEEP_PREPEND,
+);

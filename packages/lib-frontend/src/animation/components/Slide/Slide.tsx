@@ -24,9 +24,7 @@ export const Slide: SFCModel<SlidePropsModel> = ({
   const _animation = useMemo(
     () => ({
       duration: theme.animation.transition,
-      states: merge({
-        values: [ANIMATION_STATES_APPEARABLE, ANIMATION_STATES_SLIDABLE({ isBack, measure })],
-      }),
+      states: merge([ANIMATION_STATES_APPEARABLE, ANIMATION_STATES_SLIDABLE({ isBack, measure })]),
     }),
     [measure, theme, isBack],
   );

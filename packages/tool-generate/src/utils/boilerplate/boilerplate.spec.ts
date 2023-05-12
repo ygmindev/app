@@ -19,9 +19,10 @@ describe(displayName, () => {
 
     const template = 'js-function';
     const { onSuccess, output, prepare } = generateConfig[template] || {};
-    const params = merge<BoilerplateParamsModel>({
-      values: [{ onSuccess, output, template }, prepare ? await prepare() : {}],
-    });
+    const params = merge<BoilerplateParamsModel>([
+      { onSuccess, output, template },
+      prepare ? await prepare() : {},
+    ]);
 
     jest.mock('fs');
     await boilerplate(params);

@@ -97,10 +97,10 @@ export const testResourceService = async ({
     const { result } = await _service.get(input);
     const expected = find(
       data,
-      merge({
-        values: ((input.filter as FilterCombineModel<DummyEntityResourceModel>).$and ||
+      merge(
+        ((input.filter as FilterCombineModel<DummyEntityResourceModel>).$and ||
           []) as Array<DummyEntityResourceModel>,
-      }),
+      ),
     ) as DummyEntityResourceModel;
 
     expect(result?._id).toStrictEqual(expected._id);
@@ -179,10 +179,10 @@ export const testResourceService = async ({
     const { result } = await _service.getMany(input);
     const expected = filter(
       data,
-      merge({
-        values: ((input.filter as FilterCombineModel<DummyEntityResourceModel>).$and ||
+      merge(
+        ((input.filter as FilterCombineModel<DummyEntityResourceModel>).$and ||
           []) as Array<DummyEntityResourceModel>,
-      }),
+      ),
     ) as Array<DummyEntityResourceModel>;
 
     expect(result).toStrictEqual(expected);

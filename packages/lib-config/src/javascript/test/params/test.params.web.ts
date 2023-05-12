@@ -3,10 +3,8 @@ import { testConfigParams as testConfigParamsFrontend } from '@lib/config/javasc
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 
-export const testConfigParams: _TestConfigParamsModel = merge({
-  strategy: MERGE_STRATEGY.DEEP_PREPEND,
-
-  values: [
+export const testConfigParams: _TestConfigParamsModel = merge(
+  [
     {
       onBeforeAll: async () => {
         window.open = jest.fn();
@@ -16,4 +14,5 @@ export const testConfigParams: _TestConfigParamsModel = merge({
     },
     testConfigParamsFrontend,
   ],
-});
+  MERGE_STRATEGY.DEEP_PREPEND,
+);

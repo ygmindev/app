@@ -20,11 +20,11 @@ export const Appearable: SFCModel<AppearablePropsModel> = ({
     {...props}
     animation={{
       isInitial: true,
-      states: merge({
-        values: [ANIMATION_STATES_APPEARABLE, isScalable && ANIMATION_STATES_SCALABLE].filter(
+      states: merge(
+        [ANIMATION_STATES_APPEARABLE, isScalable && ANIMATION_STATES_SCALABLE].filter(
           Boolean,
         ) as Array<AnimationStatesModel>,
-      }),
+      ),
       ...animation,
     }}
     elementState={isVisible ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.EXIT}>

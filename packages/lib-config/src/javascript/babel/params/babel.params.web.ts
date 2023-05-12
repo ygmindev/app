@@ -3,10 +3,8 @@ import { babelParamsConfig as babelParamsConfigBase } from '@lib/config/javascri
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 
-export const babelParamsConfig: _BabelConfigParamsModel = merge({
-  strategy: MERGE_STRATEGY.DEEP_PREPEND,
-
-  values: [
+export const babelParamsConfig: _BabelConfigParamsModel = merge(
+  [
     {
       plugins: ['@emotion', 'react-native-web'],
 
@@ -15,4 +13,5 @@ export const babelParamsConfig: _BabelConfigParamsModel = merge({
 
     babelParamsConfigBase,
   ],
-});
+  MERGE_STRATEGY.DEEP_PREPEND,
+);

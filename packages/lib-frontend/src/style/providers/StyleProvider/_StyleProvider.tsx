@@ -21,8 +21,8 @@ export const _StyleProvider = composeComponent<_StyleProviderPropsModel, Provide
 
       return {
         children,
-        theme: merge<typeof DefaultTheme>({
-          values: [
+        theme: merge<typeof DefaultTheme>(
+          [
             value && {
               animation: {
                 scale: 0,
@@ -63,7 +63,7 @@ export const _StyleProvider = composeComponent<_StyleProviderPropsModel, Provide
 
             DefaultTheme,
           ].filter(Boolean),
-        }),
+        ),
       };
     }
     return { children, theme: DefaultTheme };

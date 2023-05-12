@@ -6,10 +6,8 @@ import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
-export const bundleConfigParams: _BundleConfigParamsModel = merge({
-  strategy: MERGE_STRATEGY.DEEP_PREPEND,
-
-  values: [
+export const bundleConfigParams: _BundleConfigParamsModel = merge(
+  [
     {
       envPrefix: ['SERVER_'],
 
@@ -22,4 +20,5 @@ export const bundleConfigParams: _BundleConfigParamsModel = merge({
 
     bundleConfigBase,
   ],
-});
+  MERGE_STRATEGY.DEEP_PREPEND,
+);

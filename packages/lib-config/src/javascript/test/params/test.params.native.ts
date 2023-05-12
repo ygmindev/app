@@ -8,10 +8,8 @@ jest.mock('@react-native-async-storage/async-storage');
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
 jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter');
 
-export const testConfigParams: _TestConfigParamsModel = merge({
-  strategy: MERGE_STRATEGY.DEEP_PREPEND,
-
-  values: [
+export const testConfigParams: _TestConfigParamsModel = merge(
+  [
     {
       mocks: [
         ['@react-native-async-storage/async-storage', () => mockAsyncStorage],
@@ -21,4 +19,5 @@ export const testConfigParams: _TestConfigParamsModel = merge({
     },
     testConfigParamsFrontend,
   ],
-});
+  MERGE_STRATEGY.DEEP_PREPEND,
+);

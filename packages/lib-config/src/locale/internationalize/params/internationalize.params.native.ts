@@ -7,29 +7,27 @@ import type { Module } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { NativeModules } from 'react-native';
 
-export const internationalizeConfigParams: _InternationalizeConfigParamsModel = merge({
-  values: [
-    {
-      loadPath: APP_URI,
+export const internationalizeConfigParams: _InternationalizeConfigParamsModel = merge([
+  {
+    loadPath: APP_URI,
 
-      modules: [
-        {
-          // cacheUserLanguage: Function.prototype,
-          detect: () =>
-            (
-              (process.env.ENV_PLATFORM === PLATFORM.IOS
-                ? NativeModules.SettingsManager.settings.AppleLocale ||
-                  NativeModules.SettingsManager.settings.AppleLanguages[0]
-                : NativeModules.I18nManager.localeIdentifier) || 'en-US'
-            ).replace('/_/', '-'),
+    modules: [
+      {
+        // cacheUserLanguage: Function.prototype,
+        detect: () =>
+          (
+            (process.env.ENV_PLATFORM === PLATFORM.IOS
+              ? NativeModules.SettingsManager.settings.AppleLocale ||
+                NativeModules.SettingsManager.settings.AppleLanguages[0]
+              : NativeModules.I18nManager.localeIdentifier) || 'en-US'
+          ).replace('/_/', '-'),
 
-          initReactI18next,
-          // init: Function.prototype,
-          type: 'languageDetector',
-        } as Module,
-      ],
-    },
+        initReactI18next,
+        // init: Function.prototype,
+        type: 'languageDetector',
+      } as Module,
+    ],
+  },
 
-    internationalizeConfigParamsBase,
-  ],
-});
+  internationalizeConfigParamsBase,
+]);

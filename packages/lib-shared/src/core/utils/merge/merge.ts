@@ -5,15 +5,14 @@ import isPlainObject from 'lodash/isPlainObject';
 import mergeWith from 'lodash/mergeWith';
 import uniq from 'lodash/uniq';
 
-export const merge = <TType, TResult = TType>({
-  strategy = MERGE_STRATEGY.DEEP,
-  values,
-}: MergeParamsModel<TType>): TResult =>
+export const merge = <TType, TResult = TType>(
+  ...[values, strategy = MERGE_STRATEGY.DEEP]: MergeParamsModel<TType>
+): TResult =>
   mergeWith({}, ...values, (x: unknown, y: unknown) => {
     switch (strategy) {
       case MERGE_STRATEGY.DEEP:
         return isPlainObject(x) && isPlainObject(y)
-          ? merge({ strategy, values: [x, y] })
+          ? merge([x, y], strategy)
           : x === undefined
           ? y
           : x;
@@ -22,7 +21,7 @@ export const merge = <TType, TResult = TType>({
         return isArray(x) && isArray(y)
           ? uniq(strategy === MERGE_STRATEGY.DEEP_APPEND ? [...y, ...x] : [...x, ...y])
           : isPlainObject(x) && isPlainObject(y)
-          ? merge({ strategy, values: [x, y] })
+          ? merge([x, y], strategy)
           : x === undefined
           ? y
           : x;

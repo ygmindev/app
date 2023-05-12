@@ -39,7 +39,7 @@ export const useForm = <TType = void, TResult = void>({
           const _value = (data as Record<string, TValue[keyof TValue]>)[k];
           if (isPlainObject(v) && isPlainObject(data)) {
             const error = _validate(_value, v as FormValidatorsModel<typeof _value>);
-            return merge<FormErrorModel<TType>>({ values: [error, result] });
+            return merge<FormErrorModel<TType>>([error, result]);
           }
           if (isFunction(v)) {
             const error = v({ data, value: _value });

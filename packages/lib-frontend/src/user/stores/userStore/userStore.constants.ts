@@ -9,7 +9,7 @@ export const USER_REDUCER: UserReducerModel = {
 
     currentUserUpdate: (store, value) => {
       const currentUser = store.get('currentUser');
-      store.set('currentUser', currentUser ? merge({ values: [value, currentUser] }) : currentUser);
+      store.set('currentUser', currentUser ? merge([value, currentUser]) : currentUser);
     },
   },
 

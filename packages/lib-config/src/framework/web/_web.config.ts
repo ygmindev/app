@@ -12,10 +12,8 @@ export const _webConfig =
   ({ isSsr, publicDir }: _WebConfigParamsModel): _WebConfigModel =>
   async () => {
     const _bundleConfig = await bundleConfig();
-    return merge({
-      strategy: MERGE_STRATEGY.DEEP_APPEND,
-
-      values: [
+    return merge(
+      [
         {
           plugins: [
             isSsr && ssr({ includeAssetsImportedByServer: true, prerender: { partial: true } }),
@@ -30,5 +28,6 @@ export const _webConfig =
 
         _bundleConfig,
       ],
-    });
+      MERGE_STRATEGY.DEEP_APPEND,
+    );
   };
