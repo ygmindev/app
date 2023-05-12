@@ -5,7 +5,7 @@ import type {
 } from '@lib/backend/database/utils/Database/Database.models';
 import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
 import type { _DatabaseConfigModel } from '@lib/config/database/_database.models';
-import type { PartialDeepModel } from '@lib/shared/core/core.models';
+import type { PartialDeepModel, ReturnTypeModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { UninitializedError } from '@lib/shared/core/errors/UninitializedError/UninitializedError';
 import { debug } from '@lib/shared/logging/utils/logger/logger';
@@ -20,14 +20,14 @@ import type { EntityManager, MongoDriver } from '@mikro-orm/mongodb';
 import type { Filter, MongoError, UpdateFilter } from 'mongodb';
 
 export abstract class _Database implements DatabaseModel {
-  protected _config: _DatabaseConfigModel;
+  protected _config: ReturnTypeModel<_DatabaseConfigModel>;
   protected _entityManager?: EntityManager;
 
-  constructor(config: _DatabaseConfigModel) {
+  constructor(config: ReturnTypeModel<_DatabaseConfigModel>) {
     this._config = config;
   }
 
-  async initialize(): Promise<void> {
+  async connect(): Promise<void> {
     this._entityManager =
       this._entityManager ?? (await MikroORM.init<MongoDriver>(this._config)).em;
   }

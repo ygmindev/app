@@ -6,7 +6,7 @@ import type {
 import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEnv';
 
 export const testConfig: _TestConfigModel = async () => {
-  const { testConfigParams } = await importFromEnv<{ testConfigParams: _TestConfigParamsModel }>(
+  const { testConfigParams } = await importFromEnv<_TestConfigParamsModel, 'testConfigParams'>(
     '@lib/config/javascript/test/params/test.params',
   );
   return _testConfig(testConfigParams)();

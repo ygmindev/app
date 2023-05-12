@@ -1,4 +1,5 @@
-import { DatabaseMongo } from '@lib/backend/database/utils/DatabaseMongo/DatabaseMongo';
+import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
+import { Database } from '@lib/backend/database/utils/Database/Database';
 import { DUMMY_ENTITY_RESOURCE_SEED_DATA } from '@lib/backend/database/utils/seed/seed.constants';
 import { DummyEmbeddedResourceService } from '@lib/backend/test/resources/DummyEmbeddedResource/DummyEmbeddedResourceService/DummyEmbeddedResourceService';
 import type { TestEmbeddedResourceServiceParamsModel } from '@lib/backend/test/utils/testEmbeddedResourceService/testEmbeddedResourceService.models';
@@ -11,7 +12,8 @@ import type { DummyEntityResourceModel } from '@lib/shared/test/resources/DummyE
 export const testEmbeddedResourceService = async ({
   service,
 }: TestEmbeddedResourceServiceParamsModel): Promise<void> => {
-  const _rootRepository = Container.get(DatabaseMongo).getRepository<DummyEntityResourceModel>({
+  const _database = Container.get(Database, DATABASE_TYPE.MONGO);
+  const _rootRepository = _database.getRepository<DummyEntityResourceModel>({
     name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
   });
   const _service = Container.get(DummyEmbeddedResourceService);

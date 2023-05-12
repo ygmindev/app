@@ -1,8 +1,6 @@
 import 'reflect-metadata';
 
 import { DatabaseInMemory } from '@lib/backend/database/utils/DatabaseInMemory/DatabaseInMemory';
-// import { seed } from '@lib/backend/database/utils/seed/seed';
-import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
 import type { TaskParamsModel } from '@tool/task/core/core.models';
@@ -12,8 +10,6 @@ const start: TaskParamsModel = {
 
   task: async () => {
     await Container.get(DatabaseInMemory).start();
-    await initialize();
-    // await seed();
     return { status: TASK_STATUS.SUCCESS };
   },
 };

@@ -18,10 +18,6 @@ export const bundleConfigParams: _BundleConfigParamsModel = merge({
         ...(process.env.NODE_ENV === 'test' ? { '\\.(css|sass)$': 'identity-obj-proxy' } : {}),
       },
 
-      babelConfig: {
-        plugins: ['react-native-web'],
-      },
-
       extensions: permuteString(['.web'], bundleConfigBase.extensions),
 
       platform: PLATFORM.WEB,

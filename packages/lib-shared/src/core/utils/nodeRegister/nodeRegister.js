@@ -1,6 +1,6 @@
 require('tsconfig-paths').register({ addMatchAll: false });
 require('ts-node').register({
-  compilerOptions: { module: 'nodenext', types: [] },
+  compilerOptions: { module: 'commonjs', types: [] },
   esm: true,
   files: false,
   swc: true,

@@ -1,4 +1,6 @@
-import { DatabaseMongo } from '@lib/backend/database/utils/DatabaseMongo/DatabaseMongo';
+import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
+import { Database } from '@lib/backend/database/utils/Database/Database';
+import { SEED_DATA } from '@lib/backend/database/utils/seed/seed.constants';
 import type { SeedParamsModel } from '@lib/backend/database/utils/seed/seed.models';
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
@@ -16,13 +18,12 @@ export const seed = async ({ names }: SeedParamsModel = {}): Promise<void> => {
     await import(service);
   }
 
-  const { SEED_DATA } = await import('@lib/backend/database/utils/seed/seed.constants');
-  const database = Container.get(DatabaseMongo);
-  await database.initialize();
+  const _database = Container.get(Database, DATABASE_TYPE.MONGO);
+  await _database.connect();
   for (const resource of SEED_DATA) {
     const { data, name } = resource;
     if (!names || names.includes(name)) {
-      const repository = database.getRepository({ name });
+      const repository = _database.getRepository({ name });
       await repository.clear();
       const service = Container.get<EntityResourceServiceModel<unknown, unknown>>(`${name}Service`);
       for (const form of data) {

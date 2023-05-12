@@ -10,7 +10,7 @@ import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundErr
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import { sequence } from '@lib/shared/core/utils/sequence/sequence';
 import type { EnvironmentModel } from '@lib/shared/environment/environment.models';
-import { setup } from '@lib/shared/environment/utils/setup/setup';
+import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
 import { error, info, warn } from '@lib/shared/logging/utils/logger/logger';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
 import type { TaskParamsModel, TaskStatusModel } from '@tool/task/core/core.models';
@@ -60,7 +60,10 @@ const _getTask = <TOptions = undefined>({
     const root = _target ? fromPackages(_target) : fromRoot();
     process.chdir(root);
 
-    setup({ environment: environment || (process.env.NODE_ENV as EnvironmentModel), overrides });
+    setEnvironment({
+      environment: environment || (process.env.NODE_ENV as EnvironmentModel),
+      overrides,
+    });
 
     let onAfterPromise: CallablePromiseModel | undefined = undefined;
     if (onAfter) {

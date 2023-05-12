@@ -1,5 +1,5 @@
 import type { DatabaseTypeModel } from '@lib/backend/database/database.models';
-import type { ConstructorModel } from '@lib/shared/core/core.models';
+import type { CallablePromiseModel, ConstructorModel } from '@lib/shared/core/core.models';
 import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import type { Options } from '@mikro-orm/core/utils';
 import type { MongoDriver } from '@mikro-orm/mongodb';
@@ -16,4 +16,4 @@ export interface _DatabaseConfigParamsModel {
   username?: string;
 }
 
-export interface _DatabaseConfigModel extends Options<MongoDriver> {}
+export type _DatabaseConfigModel = CallablePromiseModel<Options<MongoDriver>>;

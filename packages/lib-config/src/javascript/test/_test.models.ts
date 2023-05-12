@@ -20,19 +20,15 @@ export interface _TestConfigParamsModel {
 
   mocks?: Array<string | [string, CallableModel<unknown>]>;
 
+  onAfterAll?: CallablePromiseModel;
+
+  onAfterEach?: CallablePromiseModel;
+
+  onBeforeAll?: CallablePromiseModel;
+
+  onBeforeEach?: CallablePromiseModel;
+
   root: string;
-
-  setup?: {
-    onAfterAll?: CallablePromiseModel;
-
-    onAfterEach?: CallablePromiseModel;
-
-    onBeforeAll?: CallablePromiseModel;
-
-    onBeforeEach?: CallablePromiseModel;
-
-    onLoad?: CallablePromiseModel;
-  };
 
   testExtensions: Array<string>;
 

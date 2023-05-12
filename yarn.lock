@@ -11329,7 +11329,6 @@ __metadata:
     serverless-esbuild: ^1.43.1
     serverless-offline: ^12.0.4
     setimmediate: ^1.0.5
-    source-map-support: ^0.5.21
     spacetime: ^7.4.3
     stripe: ^12.3.0
     style-loader: ^3.3.2

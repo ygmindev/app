@@ -35,7 +35,8 @@ export const testResourceService = async ({
     service.decorators?.beforeCreate && jest.spyOn(service.decorators, 'beforeCreate');
   const _beforeGet = service.decorators?.beforeGet && jest.spyOn(service.decorators, 'beforeGet');
   const _beforeGetConnection =
-    service.decorators?.beforeGetConnection && jest.spyOn(service.decorators, 'beforeGetConnection');
+    service.decorators?.beforeGetConnection &&
+    jest.spyOn(service.decorators, 'beforeGetConnection');
   const _beforeGetMany =
     service.decorators?.beforeGetMany && jest.spyOn(service.decorators, 'beforeGetMany');
   const _beforeRemove =
@@ -46,6 +47,7 @@ export const testResourceService = async ({
   const PROJECT_FIELDS: Array<keyof DummyEntityResourceModel> = ['_id', 'stringPropertyOptional'];
 
   beforeEach(async () => {
+    console.warn('@@@testResourceService beforeEach');
     await seed({ names: [DUMMY_ENTITY_RESOURCE_RESOURCE_NAME] });
     before && (await before());
     jest.clearAllMocks();

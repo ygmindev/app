@@ -23,7 +23,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "types": ["react-native", "jest", "vite/client"]
+    "types": ["react-native", "reflect-metadata", "jest", "vite/client"]
   },
   "ts-node": {
     "swc": true,

@@ -9,13 +9,11 @@ export const testConfigParams: _TestConfigParamsModel = merge({
 
   values: [
     {
-      setup: {
-        onLoad: async () => {
-          global.requestAnimationFrame = ((cb: CallableModel) => {
-            cb();
-            return -1;
-          }) as unknown as typeof global.requestAnimationFrame;
-        },
+      onBeforeAll: async () => {
+        global.requestAnimationFrame = ((cb: CallableModel) => {
+          cb();
+          return -1;
+        }) as unknown as typeof global.requestAnimationFrame;
       },
     },
     testConfigParamsBase,

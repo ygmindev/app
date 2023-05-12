@@ -7,6 +7,6 @@ import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 const { displayName } = withTest({ target: () => EntityResourceService });
 
 describe(displayName, () => {
-  const service = Container.get(DummyEntityResourceService);
-  testResourceService({ service });
+  const _service = Container.get(DummyEntityResourceService);
+  testResourceService({ service: _service });
 });

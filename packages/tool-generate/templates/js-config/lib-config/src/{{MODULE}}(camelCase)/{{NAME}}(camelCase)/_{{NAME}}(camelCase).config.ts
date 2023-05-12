@@ -1,4 +1,6 @@
-import type { _{{NAME}}(pascalCase)ConfigParamsModel } from '@lib/config/{{MODULE}}(camelCase)/{{NAME}}(camelCase)/_{{NAME}}(camelCase).models';
-import type { {{NAME}}(pascalCase)er } from 'es{{NAME}}(camelCase)';
+import type {
+  _{{NAME}}(pascalCase)ConfigModel,
+  _{{NAME}}(pascalCase)ConfigParamsModel,
+} from '@lib/config/javascript/{{NAME}}(camelCase)/_{{NAME}}(camelCase).models';
 
-export const _{{NAME}}(camelCase)Config = ({}: _{{NAME}}(pascalCase)ConfigParamsModel): {{NAME}}(pascalCase)er.Config => ({});
+export const _{{NAME}}(camelCase)Config = ({}: _{{NAME}}(pascalCase)ConfigParamsModel): _{{NAME}}(pascalCase)ConfigModel => ({});

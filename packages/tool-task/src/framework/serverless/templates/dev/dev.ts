@@ -1,6 +1,5 @@
 import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
-import { cleanup } from '@lib/backend/setup/utils/cleanup/cleanup';
-import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
+import { setupConfig } from '@lib/config/core/setup/configs/setup.config';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
 import type { TaskParamsModel } from '@tool/task/core/core.models';
@@ -14,14 +13,14 @@ export const dev: TaskParamsModel<DevParamsModel> = {
 
   onAfter: [
     async () => {
-      await cleanup();
+      await setupConfig.onTerminate();
       return TASK_STATUS.SUCCESS;
     },
   ],
 
   onBefore: [
     async () => {
-      await initialize();
+      await setupConfig.onInitialize();
       return TASK_STATUS.SUCCESS;
     },
   ],

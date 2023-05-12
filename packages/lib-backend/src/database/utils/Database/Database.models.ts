@@ -5,8 +5,8 @@ import type { ResourceServiceModel } from '@lib/shared/resource/utils/Resource/R
 
 export interface DatabaseModel {
   close: CallablePromiseModel;
+  connect(): Promise<void>;
   getRepository<TType>(params: WithResourceNameModel): RepositoryModel<TType>;
-  initialize: CallablePromiseModel;
 }
 
 export interface RepositoryModel<TType>

@@ -12,14 +12,6 @@ export const bundleConfigParams: _BundleConfigParamsModel = merge({
 
   values: [
     {
-      babelConfig: {
-        plugins: ['@emotion', ['transform-react-remove-prop-types', { removeImport: true }]],
-        presets: [
-          'module:metro-react-native-babel-preset',
-          ['@babel/preset-react', { runtime: 'automatic' }],
-        ],
-      },
-
       envPrefix: ['APP_'],
 
       extensions: permuteString(['.frontend'], bundleConfigBase.extensions),

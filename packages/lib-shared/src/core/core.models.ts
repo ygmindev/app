@@ -37,6 +37,15 @@ export type CallableArgsPromiseModel<
   TParams extends Array<unknown> = never,
 > = CallableArgsModel<Promise<TResult>, TParams>;
 
+export type ReturnTypeModel<TType> = TType extends CallablePromiseModel<infer TReturn>
+  ? Awaited<TReturn>
+  : TType extends
+      | CallableModel<infer TReturn>
+      | CallableArgsModel<infer TReturn>
+      | CallableArgsPromiseModel<infer TReturn>
+  ? TReturn
+  : void;
+
 export type InferModel<TType> = TType extends Array<infer TElement> ? TElement : TType;
 
 export type IntersectionModel<TType extends Array<unknown>> = TType extends [

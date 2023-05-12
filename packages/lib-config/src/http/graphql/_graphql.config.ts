@@ -1,5 +1,7 @@
-import type { _GraphqlConfigParamsModel } from '@lib/config/http/graphql/_graphql.models';
-import type { GraphQLSchema } from 'graphql';
+import type {
+  _GraphqlConfigModel,
+  _GraphqlConfigParamsModel,
+} from '@lib/config/http/graphql/_graphql.models';
 import type { BuildSchemaOptions } from 'type-graphql';
 import { buildSchemaSync } from 'type-graphql';
 
@@ -8,7 +10,7 @@ export const _graphqlConfig = ({
   container,
   resolvers,
   schemaPath,
-}: _GraphqlConfigParamsModel): GraphQLSchema =>
+}: _GraphqlConfigParamsModel): _GraphqlConfigModel =>
   buildSchemaSync({
     authChecker: ({ context }, roles) => authorize({ context, roles }),
     container,

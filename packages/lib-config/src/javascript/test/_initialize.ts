@@ -1,24 +1,30 @@
 import type { _TestConfigParamsModel } from '@lib/config/javascript/test/_test.models';
 import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEnv';
 
-const { testConfigParams } = await importFromEnv<{ testConfigParams: _TestConfigParamsModel }>(
-  '@lib/config/javascript/test/params/test.params',
-);
-
-testConfigParams.setup?.onLoad && (await testConfigParams.setup?.onLoad());
+const _getTestConfigParams = async (): Promise<_TestConfigParamsModel> => {
+  const { testConfigParams } = await importFromEnv<_TestConfigParamsModel, 'testConfigParams'>(
+    '@lib/config/javascript/test/params/test.params',
+  );
+  return testConfigParams;
+};
 
 beforeAll(async () => {
-  testConfigParams.setup?.onBeforeAll && (await testConfigParams.setup.onBeforeAll());
+  console.warn('@@@_initialize BEFOREALL');
+  const _testConfigParams = await _getTestConfigParams();
+  _testConfigParams.onBeforeAll && (await _testConfigParams.onBeforeAll());
 });
 
 beforeEach(async () => {
-  testConfigParams.setup?.onBeforeEach && (await testConfigParams.setup.onBeforeEach());
+  const _testConfigParams = await _getTestConfigParams();
+  _testConfigParams.onBeforeEach && (await _testConfigParams.onBeforeEach());
 });
 
 afterAll(async () => {
-  testConfigParams.setup?.onBeforeAll && (await testConfigParams.setup.onBeforeAll());
+  const _testConfigParams = await _getTestConfigParams();
+  _testConfigParams.onBeforeAll && (await _testConfigParams.onBeforeAll());
 });
 
 afterEach(async () => {
-  testConfigParams.setup?.onBeforeAll && (await testConfigParams.setup.onBeforeAll());
+  const _testConfigParams = await _getTestConfigParams();
+  _testConfigParams.onBeforeAll && (await _testConfigParams.onBeforeAll());
 });

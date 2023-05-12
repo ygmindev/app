@@ -1,12 +1,9 @@
 import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import type { PlatformModel } from '@lib/shared/platform/platform.models';
-import type { BabelOptions } from '@vitejs/plugin-react';
 import type { UserConfig } from 'vite';
 
 export interface _BundleConfigParamsModel {
   aliases?: Record<string, string>;
-
-  babelConfig?: BabelOptions;
 
   define?: Record<string, unknown>;
 

@@ -1,12 +1,14 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import type { _BabelConfigModel } from '@lib/config/javascript/babel/_babel.models';
 import { bundleConfigParams } from '@lib/config/javascript/bundle/params/bundle.params';
 import type {
   _TestConfigModel,
   _TestConfigParamsModel,
 } from '@lib/config/javascript/test/_test.models';
 import { compilerOptions } from '@lib/config/javascript/typescript/configs/tsconfig.paths.json';
+import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEnv';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { mapKeys, reduce, trim, trimStart } from 'lodash';
 import { join } from 'path';
@@ -24,79 +26,81 @@ export const _testConfig =
     testExtensions,
     timeout,
   }: _TestConfigParamsModel): _TestConfigModel =>
-  async () => ({
-    cacheDirectory: cachePath,
+  async () => {
+    const { babelConfig } = await importFromEnv<_BabelConfigModel, 'babelConfig'>(
+      '@lib/config/javascript/babel/configs/babel.config',
+    );
+    return {
+      cacheDirectory: cachePath,
 
-    collectCoverage: true,
+      collectCoverage: true,
 
-    coverageDirectory: coverageOutputPath,
+      coverageDirectory: coverageOutputPath,
 
-    coverageReporters: ['lcov'],
+      coverageReporters: ['lcov'],
 
-    globals: bundleConfigParams.define,
+      globals: bundleConfigParams.define,
 
-    maxWorkers: -1,
+      maxWorkers: -1,
 
-    moduleFileExtensions: bundleConfigParams.extensions.map((ext) => trimStart(ext, '.')),
+      moduleFileExtensions: bundleConfigParams.extensions.map((ext) => trimStart(ext, '.')),
 
-    moduleNameMapper: {
-      ...mapKeys(bundleConfigParams.aliases, (k) => `^${k}$`),
-      ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: fromRoot() }),
-      [`\\.(${fileExtensions.join('|')})$`]: join(mockPath, 'file'),
-    },
-
-    passWithNoTests: true,
-
-    preset: 'ts-jest',
-
-    reporters: [
-      'default',
-      [
-        'jest-stare',
-        {
-          coverageLink: join(coverageOutputPath, 'lcov-report/index.html'),
-          reportSummary: true,
-          resultDir: join(coverageOutputPath, 'js-stare'),
-        },
-      ],
-    ],
-
-    resolver: fromConfig('javascript/test/_resolver.js'),
-
-    rootDir: root,
-
-    roots: ['<rootDir>', fromConfig('javascript/test')],
-
-    setupFilesAfterEnv: [fromConfig('javascript/test/_initialize.ts')],
-
-    testEnvironment: bundleConfigParams.platform === PLATFORM.WEB ? 'jsdom' : 'node',
-
-    testMatch: reduce(
-      testExtensions,
-      (result, ext) => {
-        const _ext = trim(ext, '.');
-        return [
-          ...result,
-          `<rootDir>/src/**/${match}.${_ext}`,
-          `<rootDir>/src/**/_${match}.${_ext}`,
-        ];
+      moduleNameMapper: {
+        ...mapKeys(bundleConfigParams.aliases, (k) => `^${k}$`),
+        ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: fromRoot() }),
+        [`\\.(${fileExtensions.join('|')})$`]: join(mockPath, 'file'),
       },
-      [] as Array<string>,
-    ),
 
-    testTimeout: timeout,
+      passWithNoTests: true,
 
-    transform: {
-      '^.+\\.(js|jsx)$': 'babel-jest',
-      '^.+\\.(ts|tsx)$': [
-        'ts-jest',
-        { babelConfig: fromWorking('babel.config.js'), tsconfig: fromWorking('tsconfig.json') },
+      preset: 'ts-jest',
+
+      reporters: [
+        'default',
+        [
+          'jest-stare',
+          {
+            coverageLink: join(coverageOutputPath, 'lcov-report/index.html'),
+            reportSummary: true,
+            resultDir: join(coverageOutputPath, 'js-stare'),
+          },
+        ],
       ],
-    },
 
-    transformIgnorePatterns: bundleConfigParams.externals
-      ? [`node_modules/(?!(${bundleConfigParams.externals.join('|')})/)`]
-      : [],
+      resolver: fromConfig('javascript/test/_resolver.js'),
 
-    watch: isWatch,
-  });
+      rootDir: root,
+
+      roots: ['<rootDir>', fromConfig('javascript/test')],
+
+      setupFilesAfterEnv: [fromConfig('javascript/test/_initialize.ts')],
+
+      testEnvironment: bundleConfigParams.platform === PLATFORM.WEB ? 'jsdom' : 'node',
+
+      testMatch: reduce(
+        testExtensions,
+        (result, ext) => {
+          const _ext = trim(ext, '.');
+          return [
+            ...result,
+            `<rootDir>/src/**/${match}.${_ext}`,
+            `<rootDir>/src/**/_${match}.${_ext}`,
+          ];
+        },
+        [] as Array<string>,
+      ),
+
+      testTimeout: timeout,
+
+      transform: {
+        '^.+\\.(js|jsx)$': 'babel-jest',
+        '^.+\\.(ts|tsx)$': ['ts-jest', { babelConfig, tsconfig: fromWorking('tsconfig.json') }],
+      },
+
+      transformIgnorePatterns: bundleConfigParams.externals
+        ? [`node_modules/(?!(${bundleConfigParams.externals.join('|')})/)`]
+        : [],
+
+      watch: isWatch,
+    };
+  };

@@ -222,7 +222,6 @@
     "serverless-dotenv-plugin": "^6.0.0",
     "serverless-esbuild": "^1.43.1",
     "serverless-offline": "^12.0.4",
-    "source-map-support": "^0.5.21",
     "style-loader": "^3.3.2",
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.0",

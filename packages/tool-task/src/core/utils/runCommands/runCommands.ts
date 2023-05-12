@@ -1,13 +1,13 @@
-import { setup } from '@lib/shared/environment/utils/setup/setup';
+import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
 import { error, info } from '@lib/shared/logging/utils/logger/logger';
 import { command as _command } from '@tool/task/core/utils/command/command';
 import type { RunCommandsParamsModel } from '@tool/task/core/utils/runCommands/runCommands.models';
 import every from 'lodash/every';
 
 export const runCommands = async ({ commands }: RunCommandsParamsModel): Promise<boolean> => {
-  const results = await Promise.all(
+  const _results = await Promise.all(
     commands.map(({ command, completeMessage, environment, overrides, root }) => {
-      setup({ environment, overrides });
+      setEnvironment({ environment, overrides });
       info(`Starting ${command}`);
       return new Promise<boolean>((resolve, reject) => {
         const _handleSuccess = (): void => {
@@ -30,5 +30,5 @@ export const runCommands = async ({ commands }: RunCommandsParamsModel): Promise
       });
     }),
   );
-  return every(results);
+  return every(_results);
 };

@@ -9,9 +9,10 @@ import reduce from 'lodash/reduce';
 import some from 'lodash/some';
 
 export const bundleConfig: _BundleConfigModel = async () => {
-  const { bundleConfigParams } = await importFromEnv<{
-    bundleConfigParams: _BundleConfigParamsModel;
-  }>('@lib/config/javascript/bundle/params/bundle.params');
+  const { bundleConfigParams } = await importFromEnv<
+    _BundleConfigParamsModel,
+    'bundleConfigParams'
+  >('@lib/config/javascript/bundle/params/bundle.params');
   return _bundleConfig({
     ...bundleConfigParams,
 
