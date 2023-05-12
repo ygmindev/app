@@ -9,7 +9,6 @@ const _getTestConfigParams = async (): Promise<_TestConfigParamsModel> => {
 };
 
 beforeAll(async () => {
-  console.warn('@@@_initialize BEFOREALL');
   const _testConfigParams = await _getTestConfigParams();
   _testConfigParams.onBeforeAll && (await _testConfigParams.onBeforeAll());
 });

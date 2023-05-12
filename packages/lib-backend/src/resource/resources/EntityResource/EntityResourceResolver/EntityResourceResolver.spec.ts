@@ -25,7 +25,5 @@ describe(displayName, () => {
     name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
   }) {}
 
-  const _service = Container.get(Resolver);
-
-  testResourceService({ service: _service });
+  testResourceService({ getService: async () => Container.get(Resolver) });
 });

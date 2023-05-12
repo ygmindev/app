@@ -7,6 +7,7 @@ import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 const { displayName } = withTest({ target: () => EmbeddedResourceService });
 
 describe(displayName, () => {
-  const service = Container.get(DummyEmbeddedResourceService);
-  testEmbeddedResourceService({ service });
+  testEmbeddedResourceService({
+    getService: async () => Container.get(DummyEmbeddedResourceService),
+  });
 });

@@ -153,6 +153,7 @@ export abstract class _Database implements DatabaseModel {
             delete _update[_key];
           }
         });
+
         const { value: result } = await _em
           .getConnection()
           .getCollection<TType & object>(name)

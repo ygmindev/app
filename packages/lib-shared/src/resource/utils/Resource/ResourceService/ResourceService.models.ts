@@ -4,6 +4,7 @@ import type { ResourceMethodTypeModel } from '@lib/shared/resource/resource.mode
 import type { ContextModel } from '@lib/shared/resource/utils/Context/Context.models';
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import type { RootModel } from '@lib/shared/resource/utils/Root/Root.models';
 
 export type ResourceServiceParamsModel<
   TType,
@@ -62,7 +63,7 @@ export type ResourceServiceAfterDecoratorModel<
   output: OutputModel<TMethod, TType, TRoot>;
 }) => Promise<OutputModel<TMethod, TType, TRoot>>;
 
-export type ResourceServiceDecoratorModel<TType, TForm, TRoot = undefined> = {
+export type ResourceServiceDecoratorModel<TType, TForm, TRoot = undefined> = RootModel<TRoot> & {
   afterCreate?: ResourceServiceAfterDecoratorModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>;
   afterGet?: ResourceServiceAfterDecoratorModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>;
   afterGetConnection?: ResourceServiceAfterDecoratorModel<

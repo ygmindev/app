@@ -3,6 +3,10 @@ import type { DummyEmbeddedResourceServiceModel } from '@lib/shared/test/resourc
 import type { DummyEntityResourceServiceModel } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResourceService/DummyEntityResourceService.models';
 
 export interface TestResourceServiceParamsModel {
-  before?: CallablePromiseModel;
-  service: DummyEntityResourceServiceModel | DummyEmbeddedResourceServiceModel;
+  before?(params: TestableResourceServiceModel): Promise<void>;
+  getService: CallablePromiseModel<TestableResourceServiceModel>;
 }
+
+export type TestableResourceServiceModel =
+  | DummyEntityResourceServiceModel
+  | DummyEmbeddedResourceServiceModel;

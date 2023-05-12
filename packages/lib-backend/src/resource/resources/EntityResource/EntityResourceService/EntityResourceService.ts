@@ -31,9 +31,11 @@ export const EntityResourceService = <TType, TForm>({
 }: EntityResourceServiceParamsModel<TType, TForm>): ConstructorModel<
   EntityResourceServiceModel<TType, TForm>
 > => {
-  const _database = Container.get(Database, DATABASE_TYPE.MONGO);
   class _EntityResourceService implements EntityResourceServiceModel<TType, TForm> {
-    protected _repository: RepositoryModel<TType> = _database.getRepository<TType>({ name });
+    protected _repository: RepositoryModel<TType> = Container.get(
+      Database,
+      DATABASE_TYPE.MONGO,
+    ).getRepository<TType>({ name });
 
     protected _decorators: ResourceServiceDecoratorModel<TType, TForm> = {
       afterCreate,

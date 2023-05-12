@@ -7,7 +7,7 @@ import { permuteString } from '@lib/shared/core/utils/permuteString/permuteStrin
 export const testConfigParams: _TestConfigParamsModel = {
   cachePath: fromWorking('.cache/test'),
 
-  command: 'jest --runInBand',
+  command: 'jest --runInBand --detectOpenHandles',
 
   configFile: 'test.config.ts',
 

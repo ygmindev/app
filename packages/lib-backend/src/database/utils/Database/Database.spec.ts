@@ -9,12 +9,10 @@ import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 const { displayName } = withTest({ target: () => Database });
 
 describe(displayName, () => {
-  test('test', async () => {
-    console.warn('@@@Database test');
-    const _database = Container.get(Database, DATABASE_TYPE.MONGO);
-    const _service = _database.getRepository<DummyEntityResourceModel>({
-      name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
-    });
-    testResourceService({ service: _service });
+  testResourceService({
+    getService: async () =>
+      Container.get(Database, DATABASE_TYPE.MONGO).getRepository<DummyEntityResourceModel>({
+        name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
+      }),
   });
 });

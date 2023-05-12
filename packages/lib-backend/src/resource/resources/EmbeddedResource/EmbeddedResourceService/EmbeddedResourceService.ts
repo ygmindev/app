@@ -1,12 +1,13 @@
 import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
 import { EmbeddedResource } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResource';
-import type { ConstructorModel, PartialModel } from '@lib/shared/core/core.models';
+import type { ConstructorModel, DeepKeyModel, PartialModel } from '@lib/shared/core/core.models';
 import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { flattenObject } from '@lib/shared/core/utils/flattenObject/flattenObject';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
+import { pick } from '@lib/shared/core/utils/pick/pick';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { EmbeddedResourceModel } from '@lib/shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
 import type {
@@ -47,6 +48,7 @@ export const EmbeddedResourceService = <
   beforeRemove,
   beforeUpdate,
   name,
+  root,
 }: EmbeddedResourceServiceParamsModel<TType, TForm, TRoot, TRootForm>): ConstructorModel<
   EmbeddedResourceServiceModel<TType, TForm, TRoot>
 > => {
@@ -57,6 +59,20 @@ export const EmbeddedResourceService = <
     forEach(input.form as unknown as object, (v, k) => ((value as Record<string, unknown>)[k] = v));
     value.beforeCreate && (await value.beforeCreate());
     return { ...input, form: value as unknown as TForm };
+  };
+
+  const _getAggregation = (
+    input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>,
+  ): Array<object> => {
+    const _name = `$${name}`;
+    return [
+      { $unwind: _name },
+      { $match: flattenObject({ [name]: input.filter }) },
+      input.options?.project && {
+        $project: flattenObject({ [name]: input.options.project }),
+      },
+      { $group: { _id: '$_id', [name]: { $push: _name } } },
+    ].filter(Boolean) as Array<object>;
   };
 
   const _getCondition = (value: FilterModel<TType>): FilterModel<object> => {
@@ -89,6 +105,7 @@ export const EmbeddedResourceService = <
       beforeGetMany,
       beforeRemove,
       beforeUpdate,
+      root,
     };
 
     public get decorators(): ResourceServiceDecoratorModel<TType, TForm, TRoot> {
@@ -105,6 +122,7 @@ export const EmbeddedResourceService = <
       const _input = cleanObject(
         this.decorators.beforeCreate ? await this.decorators.beforeCreate({ input }) : input,
       );
+      _input.root = _input.root ?? this._decorators.root;
       if (_input.root) {
         const _inputFinal = await _beforeCreate(
           _input as InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
@@ -130,14 +148,11 @@ export const EmbeddedResourceService = <
       const _input = cleanObject(
         this.decorators.beforeGet ? await this.decorators.beforeGet({ input }) : input,
       );
+      _input.root = _input.root ?? this._decorators.root;
       if (_input.root) {
         const { result: rootResult } = await this._rootService.get({
           filter: _input.root,
-          options: {
-            project: {
-              [name]: isEmpty(_input.filter) ? true : { $elemMatch: _input.filter },
-            } as ProjectModel<TRoot>,
-          },
+          options: { aggregate: _getAggregation(_input) },
         });
         const result = rootResult && (rootResult[name] as unknown as Array<TType>);
         const output: OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot> = {
@@ -155,29 +170,14 @@ export const EmbeddedResourceService = <
       const _input = cleanObject(
         this.decorators.beforeGetMany ? await this.decorators.beforeGetMany({ input }) : input,
       );
+      _input.root = _input.root ?? this._decorators.root;
       if (_input.root) {
         // TODO: || to ?? for all
         const skip = _input.options?.skip ?? 0;
         const limit = _input.options?.take;
         const { result: rootResult } = await this._rootService.get({
           filter: _input.root,
-          options: isEmpty(_input.filter)
-            ? {}
-            : {
-                aggregate: [
-                  {
-                    $addFields: {
-                      [name]: {
-                        $filter: {
-                          as: 'value',
-                          cond: _getCondition(_input.filter),
-                          input: `$${name}`,
-                        },
-                      },
-                    },
-                  },
-                ],
-              },
+          options: isEmpty(_input.filter) ? {} : { aggregate: _getAggregation(_input) },
         });
         const result = rootResult && (rootResult[name] as unknown as Array<TType>);
         const output: OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot> = {
@@ -203,6 +203,7 @@ export const EmbeddedResourceService = <
           ? await this.decorators.beforeGetConnection({ input })
           : input,
       );
+      _input.root = _input.root ?? this._decorators.root;
       if (_input.root) {
         const result = await getConnection({
           count: await this.count(_input),
@@ -227,11 +228,12 @@ export const EmbeddedResourceService = <
       const _input = cleanObject(
         this.decorators.beforeUpdate ? await this.decorators.beforeUpdate({ input }) : input,
       );
+      _input.root = _input.root ?? this._decorators.root;
       if (_input.root) {
         const { result: rootResult } = await this._rootService.update({
           filter: {
             ..._input.root,
-            ...flattenObject({ value: { [name]: _input.filter } }),
+            ...flattenObject({ [name]: _input.filter }),
           } as FilterModel<TRoot>,
           options: {
             project: { [name]: { $elemMatch: _input.filter } } as unknown as ProjectModel<TRoot>,
@@ -241,15 +243,22 @@ export const EmbeddedResourceService = <
             (result, v, k) => ({
               ...result,
               ...(k.startsWith('$')
-                ? { [k]: flattenObject({ value: { [`${name}.$`]: v } }) }
-                : flattenObject({ value: { [`${name}.$`]: { [k]: v } } })),
+                ? { [k]: flattenObject({ [`${name}.$`]: v }) }
+                : flattenObject({ [`${name}.$`]: { [k]: v } })),
             }),
             {},
           ),
         });
         const result = rootResult && (rootResult[name] as unknown as Array<TType>);
+        let _result = result?.length ? result[0] : undefined;
+        if (_input.options?.project) {
+          _result = pick({
+            keys: Object.keys(_input.options?.project) as Array<DeepKeyModel<TType>>,
+            value: _result as TType,
+          }) as TType;
+        }
         const output: OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot> = {
-          result: result?.length ? result[0] : undefined,
+          result: _result,
           root: rootResult,
         };
         return this.decorators.afterUpdate ? await this.decorators.afterUpdate({ output }) : output;
@@ -263,6 +272,7 @@ export const EmbeddedResourceService = <
       const _input = cleanObject(
         this.decorators.beforeRemove ? await this.decorators.beforeRemove({ input }) : input,
       );
+      _input.root = _input.root ?? this._decorators.root;
       if (_input.root) {
         const { result: rootResult } = await this._rootService.update({
           filter: _input.root,
@@ -277,6 +287,7 @@ export const EmbeddedResourceService = <
     }
 
     async count(input: RootModel<TRoot>): Promise<number> {
+      input.root = input.root ?? this._decorators.root;
       if (input.root) {
         const { result: rootResult } = await this._rootService.get({ filter: input.root });
         const result = rootResult && (rootResult[name] as unknown as Array<TType>);

@@ -5,24 +5,43 @@ const { displayName } = withTest({ target: () => flattenObject });
 
 describe(displayName, () => {
   const VALUE = {
-    $c: { c: 'c' },
-    '%d': { d: 'd' },
-    a: 'a',
-    b: { b: 'b' },
+    $c: { ck: 'cv' },
+    '%d': { dk: 'dv' },
+    a: 'av',
+    b: { bk: 'bv' },
+    e: [{ ek1: 'ev1' }, { ek2: { ek2k: 'ek2v' } }],
   };
 
   test('works', async () => {
-    const result = flattenObject({ value: VALUE });
-    expect(result).toEqual({ $c: { c: 'c' }, '%d.d': 'd', a: 'a', 'b.b': 'b' });
+    const result = flattenObject(VALUE);
+    expect(result).toEqual({
+      $c: { ck: 'cv' },
+      '%d.dk': 'dv',
+      a: 'av',
+      'b.bk': 'bv',
+      e: [{ ek1: 'ev1' }, { 'ek2.ek2k': 'ek2v' }],
+    });
   });
 
   test('works with delimiter', async () => {
-    const result = flattenObject({ delimiter: '/', value: VALUE });
-    expect(result).toEqual({ $c: { c: 'c' }, '%d/d': 'd', a: 'a', 'b/b': 'b' });
+    const result = flattenObject(VALUE, { delimiter: '/' });
+    expect(result).toEqual({
+      $c: { ck: 'cv' },
+      '%d/dk': 'dv',
+      a: 'av',
+      'b/bk': 'bv',
+      e: [{ ek1: 'ev1' }, { 'ek2/ek2k': 'ek2v' }],
+    });
   });
 
   test('works with prefix', async () => {
-    const result = flattenObject({ prefixes: ['%'], value: VALUE });
-    expect(result).toEqual({ '$c.c': 'c', '%d': { d: 'd' }, a: 'a', 'b.b': 'b' });
+    const result = flattenObject(VALUE, { prefixes: ['%'] });
+    expect(result).toEqual({
+      '$c.ck': 'cv',
+      '%d': { dk: 'dv' },
+      a: 'av',
+      'b.bk': 'bv',
+      e: [{ ek1: 'ev1' }, { 'ek2.ek2k': 'ek2v' }],
+    });
   });
 });

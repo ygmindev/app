@@ -1,6 +1,4 @@
-export interface FlattenObjectParams {
-  delimiter?: string;
-  path?: Array<string>;
-  prefixes?: Array<string>;
-  value: object;
-}
+export type FlattenObjectParams = [
+  value: object,
+  options?: { delimiter?: string; path?: Array<string>; prefixes?: Array<string> },
+];

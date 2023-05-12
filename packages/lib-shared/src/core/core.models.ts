@@ -21,7 +21,7 @@ export type PartialDeepModel<TType> = PartialDeep<TType>;
 
 export type RequiredModel<TType> = Required<TType>;
 
-export type CallableModel<TResult = void, TParams = void> = (args?: TParams) => TResult;
+export type CallableModel<TResult = void, TParams = void> = (args?: TParams | undefined) => TResult;
 
 export type CallablePromiseModel<TResult = void, TParams = void> = CallableModel<
   Promise<TResult>,
