@@ -3,7 +3,7 @@ import { shapeStyler } from '@lib/frontend/style/utils/styler/shapeStyler/shapeS
 import { renderHook } from '@lib/frontend/test/utils/renderHook/renderHook';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => shapeStyler });
+const { displayName } = withTest({ shapeStyler });
 
 describe(displayName, () => {
   const { result } = renderHook(() => useTheme());

@@ -47,24 +47,16 @@ export const _serverlessConfig =
               esbuild: {
                 ..._bundleConfig.optimizeDeps?.esbuildOptions,
                 bundle: true,
-                define: _bundleConfig.define,
                 external: bundle.externals,
                 format: 'cjs',
                 keepOutputDirectory: true,
-                minify: environment === ENVIRONMENT.PRODUCTION,
-                nodePaths: bundle.modulePaths,
                 packagePath: fromRoot('package.json'),
                 packager: 'yarn',
-                packagerOptions: {
-                  noInstall: true,
-                },
+                packagerOptions: { noInstall: true },
                 plugins: toRelative({
                   from: fromWorking(),
                   to: fromConfig('framework/serverless/_plugins.js'),
                 }),
-                resolveExtensions: bundle.extensions,
-                sourcemap: environment === ENVIRONMENT.PRODUCTION ? undefined : 'inline',
-                target: 'node18',
                 watch: { pattern: bundle.watch },
               },
             }

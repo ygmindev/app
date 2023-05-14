@@ -1,7 +1,7 @@
 import { resolveFirst } from '@lib/shared/core/utils/resolveFirst/resolveFirst';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => resolveFirst });
+const { displayName } = withTest({ resolveFirst });
 
 describe(displayName, () => {
   test('works', async () => {

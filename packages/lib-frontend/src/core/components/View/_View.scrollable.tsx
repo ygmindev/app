@@ -20,14 +20,16 @@ export const _viewParams: ComposeComponentParamsModel<
   Component: Fragment,
 
   getProps: (
-    { isHorizontalScrollable, isVerticalScrollable, onScroll, style, ...props },
+    { isHorizontalScrollable, isVerticalScrollable, onScroll, style, testID, ...props },
     theme,
     ref,
   ) => {
     const { height, width, ...containerStyle } = StyleSheet.flatten(style);
     return {
       children: (
-        <View style={{ display: 'flex', flex: width || height ? undefined : 1, height, width }}>
+        <View
+          style={{ display: 'flex', flex: width || height ? undefined : 1, height, width }}
+          testID={testID}>
           <ScrollView
             {...(_viewParamsBase.getProps && _viewParamsBase.getProps(props, theme, ref))}
             alwaysBounceHorizontal={false}

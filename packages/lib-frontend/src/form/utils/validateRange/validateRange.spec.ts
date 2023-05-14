@@ -1,7 +1,7 @@
 import { validateRange } from '@lib/frontend/form/utils/validateRange/validateRange';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => validateRange });
+const { displayName } = withTest({ validateRange });
 
 describe(displayName, () => {
   const MIN = 10;

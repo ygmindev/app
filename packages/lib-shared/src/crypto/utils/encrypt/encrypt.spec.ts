@@ -1,7 +1,7 @@
 import { encrypt } from '@lib/shared/crypto/utils/encrypt/encrypt';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => encrypt });
+const { displayName } = withTest({ encrypt });
 
 describe(displayName, () => {
   test('works', async () => {

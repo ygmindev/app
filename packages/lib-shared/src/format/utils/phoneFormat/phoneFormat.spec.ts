@@ -1,7 +1,7 @@
 import { phoneFormat } from '@lib/shared/format/utils/phoneFormat/phoneFormat';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => phoneFormat });
+const { displayName } = withTest({ phoneFormat });
 
 describe(displayName, () => {
   test('works', async () => {

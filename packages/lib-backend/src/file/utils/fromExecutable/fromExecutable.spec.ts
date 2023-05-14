@@ -2,7 +2,7 @@ import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecu
 import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => fromExecutable });
+const { displayName } = withTest({ fromExecutable });
 
 describe(displayName, () => {
   test('works', async () => {

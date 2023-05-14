@@ -1,13 +1,15 @@
-import { Container } from '@lib/shared/core/utils/Container/Container';
+import 'reflect-metadata';
+
+import { Container } from '@lib/backend/core/utils/Container/Container';
 import {
   WITH_CONTAINER_PROPERTY,
   WithContainerChildFixture,
   WithContainerFixture,
   WithoutContainerFixture,
-} from '@lib/shared/core/utils/Container/Container.fixtures';
+} from '@lib/backend/core/utils/Container/Container.fixtures';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => Container });
+const { displayName } = withTest({ Container });
 
 describe(displayName, () => {
   test('works', async () => {

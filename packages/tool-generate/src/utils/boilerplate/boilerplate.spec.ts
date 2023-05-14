@@ -6,7 +6,7 @@ import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { boilerplate } from '@tool/generate/utils/boilerplate/boilerplate';
 import type { BoilerplateParamsModel } from '@tool/generate/utils/boilerplate/boilerplate.models';
 
-const { displayName } = withTest({ target: () => boilerplate });
+const { displayName } = withTest({ boilerplate });
 
 describe(displayName, () => {
   afterEach(() => {

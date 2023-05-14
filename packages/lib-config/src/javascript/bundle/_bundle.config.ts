@@ -17,6 +17,7 @@ import { babel } from '@rollup/plugin-babel';
 import inject from '@rollup/plugin-inject';
 import { LINT_COMMAND } from '@tool/task/node/templates/lint/lint';
 import react from '@vitejs/plugin-react';
+import { nodeExternalsPlugin } from 'esbuild-node-externals';
 import { filelocPlugin } from 'esbuild-plugin-fileloc';
 import { visualizer } from 'rollup-plugin-visualizer';
 import type { PluginOption } from 'vite';
@@ -34,6 +35,7 @@ export const _bundleConfig =
     extensions,
     externals,
     mainFields,
+    modulePaths,
     platform,
     provide,
     watch,
@@ -65,22 +67,35 @@ export const _bundleConfig =
 
       optimizeDeps: {
         esbuildOptions: {
+          define,
+
           keepNames: true,
 
           mainFields,
+
+          target: process.env.PLATFORM === PLATFORM.NODE ? 'node18' : 'esnext',
+
+          minify: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION,
+
+          nodePaths: modulePaths,
 
           plugins: [
             esbuildDecorators({ tsconfig: fromWorking('tsconfig.json') }),
 
             externals && esbuildCommonjs(externals),
 
+            externals && nodeExternalsPlugin({ packagePath: fromRoot('package.json') }),
+
             platform === PLATFORM.NODE && filelocPlugin(),
           ].filter(Boolean),
 
           resolveExtensions: extensions,
 
+          sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : 'inline',
+
           tsconfig: fromWorking('tsconfig.json'),
         },
+
         include: externals,
       },
 

@@ -1,5 +1,5 @@
+import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
 import { EntityResourceService } from '@lib/backend/resource/resources/EntityResource/EntityResourceService/EntityResourceService';
-import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
 import type {
   DummyEntityResourceFormModel,

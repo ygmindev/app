@@ -1,3 +1,4 @@
+import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import type {
   EntityResourceResolverModel,
@@ -5,7 +6,6 @@ import type {
 } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver.models';
 import { ResourceResolver } from '@lib/backend/resource/utils/Resource/ResourceResolver/ResourceResolver';
 import type { ConstructorModel } from '@lib/shared/core/core.models';
-import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 
 export const EntityResourceResolver = <TType, TForm>(
   params: EntityResourceResolverParamsModel<TType, TForm>,

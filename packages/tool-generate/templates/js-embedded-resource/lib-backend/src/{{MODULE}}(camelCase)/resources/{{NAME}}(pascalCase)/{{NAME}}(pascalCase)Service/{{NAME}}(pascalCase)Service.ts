@@ -1,6 +1,6 @@
 import { EmbeddedResourceService } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResourceService/EmbeddedResourceService';
 import { {{NAME_ROOT}}(pascalCase)Service } from '@lib/backend/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase)Service/{{NAME_ROOT}}(pascalCase)Service';
-import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
+import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
 import { {{NAME}}(constantCase)_RESOURCE_NAME } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).constants';
 import type {
   {{NAME}}(pascalCase)FormModel,

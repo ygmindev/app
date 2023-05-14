@@ -9,7 +9,7 @@ import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { LinkedUserResolver } from '@lib/backend/user/resources/LinkedUser/LinkedUserResolver/LinkedUserResolver';
 import { UserResolver } from '@lib/backend/user/resources/User/UserResolver/UserResolver';
 import type { _GraphqlConfigParamsModel } from '@lib/config/http/graphql/_graphql.models';
-import { Container } from '@lib/shared/core/utils/Container/Container';
+import { Container } from '@lib/backend/core/utils/Container/Container';
 
 export const graphqlParamsConfig: _GraphqlConfigParamsModel = {
   authorize,

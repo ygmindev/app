@@ -2,7 +2,7 @@ import { useCardResource } from '@lib/frontend/billing/hooks/useCardResource/use
 import { renderHook } from '@lib/frontend/test/utils/renderHook/renderHook';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => useCardResource });
+const { displayName } = withTest({ useCardResource });
 
 describe(displayName, () => {
   test('works', async () => {

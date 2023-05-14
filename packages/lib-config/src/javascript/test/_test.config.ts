@@ -2,7 +2,7 @@ import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import type { _BabelConfigModel } from '@lib/config/javascript/babel/_babel.models';
-import { bundleConfigParams } from '@lib/config/javascript/bundle/params/bundle.params';
+import type { _BundleConfigParamsModel } from '@lib/config/javascript/bundle/_bundle.models';
 import type {
   _TestConfigModel,
   _TestConfigParamsModel,
@@ -30,6 +30,11 @@ export const _testConfig =
     const { babelConfig } = await importFromEnv<_BabelConfigModel, 'babelConfig'>(
       '@lib/config/javascript/babel/configs/babel.config',
     );
+    const { bundleConfigParams } = await importFromEnv<
+      _BundleConfigParamsModel,
+      'bundleConfigParams'
+    >('@lib/config/javascript/bundle/params/bundle.params');
+
     return {
       cacheDirectory: cachePath,
 

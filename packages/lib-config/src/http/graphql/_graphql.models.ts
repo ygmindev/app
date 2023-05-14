@@ -1,6 +1,6 @@
 import type { AuthorizeParamsModel } from '@lib/backend/auth/utils/authorize/authorize.models';
 import type { ConstructorModel } from '@lib/shared/core/core.models';
-import type { _ContainerModel } from '@lib/shared/core/utils/Container/_Container.models';
+import type { _ContainerModel } from '@lib/backend/core/utils/Container/_Container.models';
 import type { GraphQLSchema } from 'graphql';
 
 export interface _GraphqlConfigParamsModel {

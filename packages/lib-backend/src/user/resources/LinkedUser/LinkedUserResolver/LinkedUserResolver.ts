@@ -1,10 +1,10 @@
 import { selfAuthorizer } from '@lib/backend/auth/utils/selfAuthorizer/selfAuthorizer';
+import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import { EmbeddedResourceResolver } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResourceResolver/EmbeddedResourceResolver';
 import { LinkedUser } from '@lib/backend/user/resources/LinkedUser/LinkedUser';
 import { LinkedUserService } from '@lib/backend/user/resources/LinkedUser/LinkedUserService/LinkedUserService';
 import { User } from '@lib/backend/user/resources/User/User';
-import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { LINKED_USER_RESOURCE_NAME } from '@lib/shared/user/resources/LinkedUser/LinkedUser.constants';
 import type {
   LinkedUserFormModel,

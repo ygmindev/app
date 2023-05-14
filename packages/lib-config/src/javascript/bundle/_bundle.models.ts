@@ -5,7 +5,7 @@ import type { UserConfig } from 'vite';
 export interface _BundleConfigParamsModel {
   aliases?: Record<string, string>;
 
-  define?: Record<string, unknown>;
+  define?: Record<string, string>;
 
   entry?: string;
 

@@ -29,6 +29,9 @@ export const bundleConfig: _BundleConfigModel = async () => {
       ),
     },
 
-    extensions: permuteString([`.${process.env.NODE_ENV}`], bundleConfigParams.extensions),
+    extensions: [
+      ...bundleConfigParams.extensions,
+      ...permuteString([`.${process.env.NODE_ENV}`], bundleConfigParams.extensions)
+    ],
   })();
 };

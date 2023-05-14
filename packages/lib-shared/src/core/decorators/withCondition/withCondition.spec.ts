@@ -1,7 +1,7 @@
 import { withCondition } from '@lib/shared/core/decorators/withCondition/withCondition';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => withCondition });
+const { displayName } = withTest({ withCondition });
 
 describe(displayName, () => {
   const fn = jest.fn();

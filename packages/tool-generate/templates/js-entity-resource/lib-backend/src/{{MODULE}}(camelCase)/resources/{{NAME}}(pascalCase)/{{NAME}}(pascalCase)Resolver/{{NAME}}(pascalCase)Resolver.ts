@@ -3,7 +3,7 @@ import { EntityResourceResolver } from '@lib/backend/resource/resources/EntityRe
 import { {{NAME}}(pascalCase) } from '@lib/backend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)';
 import { {{NAME}}(pascalCase)Service } from '@lib/backend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Service/{{NAME}}(pascalCase)Service';
 import type { {{NAME}}(pascalCase)ServiceModel } from '@lib/backend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Service/{{NAME}}(pascalCase)Service.models';
-import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
+import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
 import { {{NAME}}(constantCase)_RESOURCE_NAME } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).constants';
 import type {
   {{NAME}}(pascalCase)FormModel,

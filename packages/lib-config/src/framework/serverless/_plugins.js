@@ -1,11 +1,11 @@
-const { nodeExternalsPlugin } = require('esbuild-node-externals');
-const { join } = require('path');
-const { bundleConfig } = require('../../javascript/bundle/configs/bundle.config');
+import sp from 'synchronized-promise';
 
-module.exports = [
-  ...bundleConfig.optimizeDeps.esbuildOptions.plugins,
+import { nodeRegister } from '../../../../lib-shared/src/core/utils/nodeRegister/nodeRegister';
+import { plugins } from './_plugins.ts';
 
-  nodeExternalsPlugin({
-    packagePath: join(__dirname, '../../../../../package.json'),
-  }),
-];
+nodeRegister({ module: 'esnext' });
+
+module.exports = (async function () {
+    return [];
+})();
+    

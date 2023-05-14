@@ -4,7 +4,7 @@ import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 jest.mock('fs');
 
-const { displayName } = withTest({ target: () => children });
+const { displayName } = withTest({ children });
 
 describe(displayName, () => {
   afterAll(async () => {

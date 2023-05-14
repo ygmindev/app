@@ -5,7 +5,7 @@ import {
 } from '@lib/shared/core/utils/waitFor/waitFor.constants';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => waitFor });
+const { displayName } = withTest({ waitFor });
 
 describe(displayName, () => {
   jest.useFakeTimers();

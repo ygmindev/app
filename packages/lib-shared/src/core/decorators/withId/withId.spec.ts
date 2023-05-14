@@ -1,7 +1,7 @@
 import { withId } from '@lib/shared/core/decorators/withId/withId';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => withId });
+const { displayName } = withTest({ withId });
 
 describe(displayName, () => {
   test('works', async () => {

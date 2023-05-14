@@ -1,8 +1,8 @@
-import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
-import { Container } from '@lib/shared/core/utils/Container/Container';
+import { Container } from '@lib/backend/core/utils/Container/Container';
+import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => withContainer });
+const { displayName } = withTest({ withContainer });
 
 describe(displayName, () => {
   test('works', async () => {

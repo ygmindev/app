@@ -1,7 +1,7 @@
 import { objectDepth } from '@lib/shared/core/utils/objectDepth/objectDepth';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => objectDepth });
+const { displayName } = withTest({ objectDepth });
 
 describe(displayName, () => {
   test('works', async () => {

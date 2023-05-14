@@ -1,11 +1,11 @@
 import { OtpService } from '@lib/backend/auth/resources/Otp/OtpService/OtpService';
 import { SIGN_IN_TOKEN_CLAIM_FIELDS } from '@lib/backend/auth/resources/SignIn/SignIn.constants';
 import { JwtService } from '@lib/backend/auth/utils/JwtService/JwtService';
+import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
 import { UserService } from '@lib/backend/user/resources/User/UserService/UserService';
 import { SIGN_IN_RESOURCE_NAME } from '@lib/shared/auth/resources/SignIn/SignIn.constants';
 import type { SignInFormModel, SignInModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 import type { SignInServiceModel } from '@lib/shared/auth/resources/SignIn/SignInService/SignInService.models';
-import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { withInject } from '@lib/shared/core/decorators/withInject/withInject';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';

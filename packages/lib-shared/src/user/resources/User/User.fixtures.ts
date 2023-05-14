@@ -13,7 +13,7 @@ export const USER_FIXTURE: RequiredModel<UserModel> = {
   [CARD_RESOURCE_NAME]: [],
   [LINKED_USER_RESOURCE_NAME]: [],
   [PAYMENT_METHOD_RESOURCE_NAME]: [],
-  _id: 'uid',
+  _id: '6448881dd34cb0fcb6734acf',
   beforeCreate: async (): Promise<void> => {
     return;
   },

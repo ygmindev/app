@@ -1,7 +1,7 @@
 import { sms } from '@lib/backend/notification/utils/sms/sms';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => sms });
+const { displayName } = withTest({ sms });
 
 describe(displayName, () => {
   test('works', async () => {

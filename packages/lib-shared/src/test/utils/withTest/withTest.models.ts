@@ -1,7 +1,4 @@
-export interface WithTestParamsModel<TType> {
-  displayName?: string;
-  target: TType;
-}
+export type WithTestParamsModel = object | string;
 
 export interface WithTestModel {
   displayName: string;

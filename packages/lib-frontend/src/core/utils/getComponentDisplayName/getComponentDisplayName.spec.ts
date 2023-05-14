@@ -1,7 +1,7 @@
 import { getComponentDisplayName } from '@lib/frontend/core/utils/getComponentDisplayName/getComponentDisplayName';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => getComponentDisplayName });
+const { displayName } = withTest({ getComponentDisplayName });
 
 describe(displayName, () => {
   test('works', async () => {

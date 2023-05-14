@@ -1,13 +1,12 @@
-import 'reflect-metadata';
-
+import { Container } from '@lib/backend/core/utils/Container/Container';
 import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
 import { Database } from '@lib/backend/database/utils/Database/Database';
 import type { _SetupConfigModel } from '@lib/config/core/setup/_setup.models';
 import { setupConfig as setupConfigBase } from '@lib/config/core/setup/configs/setup.config.base';
-import { Container } from '@lib/shared/core/utils/Container/Container';
 
 export const setupConfig: _SetupConfigModel = {
   onInitialize: async () => {
+    await import('reflect-metadata');
     const { databaseConfigMongo } = await import(
       '@lib/config/database/configs/database.config.mongo'
     );

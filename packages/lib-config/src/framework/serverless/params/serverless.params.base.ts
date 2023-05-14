@@ -10,7 +10,7 @@ import toNumber from 'lodash/toNumber';
 export const serverlessConfigParamsBase: _ServerlessConfigParamsModel = {
   bundle: bundleConfigParams,
 
-  dotenv: setEnvironment,
+  dotenv: () => setEnvironment(),
 
   environment: process.env.NODE_ENV as EnvironmentModel,
 

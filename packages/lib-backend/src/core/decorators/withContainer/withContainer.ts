@@ -1,7 +1,7 @@
+import { Container } from '@lib/backend/core/utils/Container/Container';
+import { _withContainer } from '@lib/backend/core/decorators/withContainer/_withContainer';
+import type { WithContainerParamsModel } from '@lib/backend/core/decorators/withContainer/withContainer..models';
 import type { ConstructorModel } from '@lib/shared/core/core.models';
-import { _withContainer } from '@lib/shared/core/decorators/withContainer/_withContainer';
-import type { WithContainerParamsModel } from '@lib/shared/core/decorators/withContainer/withContainer..models';
-import { Container } from '@lib/shared/core/utils/Container/Container';
 
 export const withContainer =
   ({ name }: WithContainerParamsModel = {}) =>

@@ -7,7 +7,7 @@ import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import isArray from 'lodash/isArray';
 
-const { displayName } = withTest({ target: () => Result });
+const { displayName } = withTest({ Result });
 
 describe(displayName, () => {
   test('throws with unsupported method', async () => {

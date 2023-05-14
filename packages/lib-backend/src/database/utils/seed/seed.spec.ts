@@ -1,7 +1,7 @@
 import { seed } from '@lib/backend/database/utils/seed/seed';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => seed });
+const { displayName } = withTest({ seed });
 
 describe(displayName, () => {
   test('works', async () => {

@@ -1,7 +1,7 @@
 import { sortKeys } from '@lib/shared/core/utils/sortKeys/sortKeys';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => sortKeys });
+const { displayName } = withTest({ sortKeys });
 
 describe(displayName, () => {
   test('works', async () => {

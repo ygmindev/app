@@ -3,7 +3,7 @@ import { portIsOpen } from '@tool/task/core/utils/portIsOpen/portIsOpen';
 import type { Server } from 'net';
 import { createServer } from 'net';
 
-const { displayName } = withTest({ target: () => portIsOpen });
+const { displayName } = withTest({ portIsOpen });
 
 describe(displayName, () => {
   const PORT = '9999';

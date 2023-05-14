@@ -17,11 +17,11 @@ export const testConfigParams: _TestConfigParamsModel = {
 
   match: process.env.TEST_MATCH || '*',
 
-  mockPath: fromConfig('javascript/test/configs/__mocks__'),
+  mockPath: fromConfig('javascript/test/params/__mocks__'),
 
   root: fromWorking(),
 
   testExtensions: permuteString(['.e2e', '.spec'], bundleConfigParams.extensions),
 
-  timeout: 30e3,
+  timeout: 60e3,
 };

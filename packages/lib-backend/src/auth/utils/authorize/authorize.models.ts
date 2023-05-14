@@ -4,3 +4,5 @@ export interface AuthorizeParamsModel {
   context: ContextModel;
   roles?: Array<string>;
 }
+
+export type AuthorizeModel = boolean;

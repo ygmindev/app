@@ -8,7 +8,7 @@ import { createRef } from 'react';
 import type { ViewProps } from 'react-native';
 import { View } from 'react-native';
 
-const { displayName } = withTest({ target: () => composeComponent });
+const { displayName } = withTest({ composeComponent });
 
 describe(displayName, () => {
   interface _ViewProps extends ChildrenPropsModel, StylePropsModel {

@@ -1,11 +1,32 @@
-import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEnv';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+jest.mock('fs');
 
-const { displayName } = withTest({ target: () => importFromEnv });
+import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEnv';
+import { PLATFORM } from '@lib/shared/platform/platform.constants';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { writeFileSync } from 'fs';
+
+const { displayName } = withTest({ importFromEnv });
 
 describe(displayName, () => {
+  const PROCESS_ENV = process.env;
+  const FILENAME = 'test';
+  const CONTENT = 'TEST';
+
+  beforeEach(() => {
+    jest.resetModules();
+    process.env = { ...PROCESS_ENV };
+  });
+
   test('works', async () => {
-    const result = await importFromEnv('test');
-    expect(result).toStrictEqual({});
+    const _platforms = Object.keys(PLATFORM);
+    _platforms.forEach((platform) =>
+      writeFileSync(fromRoot(`${FILENAME}.${platform}.ts`), `${CONTENT}.${platform}`),
+    );
+
+    for (const platform of _platforms) {
+      const result = await importFromEnv(fromRoot(`${FILENAME}.${platform}.ts`));
+      expect(result).toStrictEqual(`${CONTENT}.${platform}`);
+    }
   });
 });

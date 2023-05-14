@@ -2,7 +2,7 @@ import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages'
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => fromPackages });
+const { displayName } = withTest({ fromPackages });
 
 describe(displayName, () => {
   test('works', async () => {

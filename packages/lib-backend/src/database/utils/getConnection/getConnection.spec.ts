@@ -6,7 +6,7 @@ import type {
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import _filter from 'lodash/filter';
 
-const { displayName } = withTest({ target: () => getConnection });
+const { displayName } = withTest({ getConnection });
 
 describe(displayName, () => {
   const LIMIT = 3;

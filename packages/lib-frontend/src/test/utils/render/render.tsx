@@ -1,4 +1,4 @@
-import { internationalizeConfig } from '@lib/config/locale/internationalize/internationalize.config';
+import { internationalizeConfig } from '@lib/config/locale/internationalize/configs/internationalize.config';
 import { Root } from '@lib/frontend/root/containers/Root/Root';
 import { Router } from '@lib/frontend/route/containers/Router/Router';
 import { _render } from '@lib/frontend/test/utils/render/_render';

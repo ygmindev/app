@@ -1,5 +1,6 @@
-import '@lib/shared/core/utils/nodeRegister/nodeRegister';
+import { nodeRegister } from './packages/lib-shared/src/core/utils/nodeRegister/nodeRegister';
+import { taskConfig } from './packages/lib-config/src/core/task/configs/task.config';
 
-import { taskConfig } from '@lib/config/core/task/configs/task.config';
+nodeRegister();
 
 export default taskConfig;

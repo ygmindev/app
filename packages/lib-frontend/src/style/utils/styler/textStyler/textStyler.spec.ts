@@ -3,7 +3,7 @@ import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyl
 import { renderHook } from '@lib/frontend/test/utils/renderHook/renderHook';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => textStyler });
+const { displayName } = withTest({ textStyler });
 
 describe(displayName, () => {
   const { result } = renderHook(() => useTheme());

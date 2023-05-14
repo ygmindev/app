@@ -1,7 +1,7 @@
 import { getLocaleStoreFromI18n } from '@lib/framework/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => getLocaleStoreFromI18n });
+const { displayName } = withTest({ getLocaleStoreFromI18n });
 
 describe(displayName, () => {
   test('works', async () => {

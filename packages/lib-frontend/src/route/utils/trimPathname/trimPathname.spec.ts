@@ -1,7 +1,7 @@
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => trimPathname });
+const { displayName } = withTest({ trimPathname });
 
 describe(displayName, () => {
   const PATHNAME = '/test/path/sub-path';

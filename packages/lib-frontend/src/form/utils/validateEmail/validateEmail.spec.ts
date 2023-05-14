@@ -1,7 +1,7 @@
 import { validateEmail } from '@lib/frontend/form/utils/validateEmail/validateEmail';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => validateEmail });
+const { displayName } = withTest({ validateEmail });
 
 describe(displayName, () => {
   const VALUE_VALID = 'VALUE_VALID';

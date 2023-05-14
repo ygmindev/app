@@ -4,7 +4,7 @@ import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import pick from 'lodash/pick';
 import { ObjectId } from 'mongodb';
 
-const { displayName } = withTest({ target: () => cleanDocument });
+const { displayName } = withTest({ cleanDocument });
 
 describe(displayName, () => {
   const VALUE: Record<string, unknown> = {
