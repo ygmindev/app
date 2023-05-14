@@ -1,6 +1,6 @@
-import type { _WebConfigParamsModel } from '@lib/config/framework/web/_web.models';
+import type { TaskCliParamsModel } from '@tool/task/core/core.models';
 
-export interface _ServerParamsModel extends Pick<_WebConfigParamsModel, 'configFile'> {
+export interface _ServerParamsModel extends Pick<TaskCliParamsModel, 'configFile'> {
   port: string;
   root: string;
 }

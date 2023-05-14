@@ -15,3 +15,8 @@ export interface TaskParamsModel<TOptions = undefined> extends EnvironmentOverri
     status: TaskStatusModel;
   }>;
 }
+
+export interface TaskCliParamsModel {
+  command: string;
+  configFile: string;
+}

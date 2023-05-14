@@ -1,5 +1,5 @@
 import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
-import { bundleConfigParams } from '@lib/config/javascript/bundle/params/bundle.params';
+import { bundleConfigParams } from '@lib/config/node/bundle/params/bundle.params';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
 import type { TaskParamsModel } from '@tool/task/core/core.models';

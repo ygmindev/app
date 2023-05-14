@@ -1,5 +1,6 @@
-export interface TaskConfigParamsModel {
-  configFile: string;
+import { TaskCliParamsModel } from "@tool/task/core/core.models";
+
+export interface TaskConfigParamsModel extends TaskCliParamsModel {
   taskExtension: string;
 }
 

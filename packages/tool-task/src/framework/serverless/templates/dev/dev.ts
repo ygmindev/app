@@ -5,6 +5,7 @@ import { TASK_STATUS } from '@tool/task/core/core.constants';
 import type { TaskParamsModel } from '@tool/task/core/core.models';
 import { command } from '@tool/task/core/utils/command/command';
 import type { DevParamsModel } from '@tool/task/framework/serverless/templates/dev/dev.models';
+import { make } from '@tool/task/node/templates/make/make';
 
 export const dev: TaskParamsModel<DevParamsModel> = {
   environment: ENVIRONMENT.DEVELOPMENT,

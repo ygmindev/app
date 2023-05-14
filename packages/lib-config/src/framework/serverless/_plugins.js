@@ -5,7 +5,8 @@ import { plugins } from './_plugins.ts';
 
 nodeRegister({ module: 'esnext' });
 
-module.exports = (async function () {
-    return [];
-})();
+const x = plugins();
+console.warn(x);
+
+module.exports = x;
     

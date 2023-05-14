@@ -1,5 +1,5 @@
 import type { ServerlessProviderModel } from '@lib/backend/serverless/serverless.models';
-import type { _BundleConfigParamsModel } from '@lib/config/javascript/bundle/_bundle.models';
+import type { _BundleConfigParamsModel } from '@lib/config/node/bundle/_bundle.models';
 import type { CallableModel, CallablePromiseModel } from '@lib/shared/core/core.models';
 import type { EnvironmentModel } from '@lib/shared/environment/environment.models';
 import type { HttpMethodModel } from '@lib/shared/http/http.models';

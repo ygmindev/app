@@ -1,6 +1,6 @@
 import type { _ServerlessConfigParamsModel } from '@lib/config/framework/serverless/_serverless.models';
 import { serverlessConfigParamsBase } from '@lib/config/framework/serverless/params/serverless.params.base';
-import { bundleConfigParams } from '@lib/config/javascript/bundle/params/bundle.params.node';
+import { bundleConfigParams } from '@lib/config/node/bundle/params/bundle.params.node';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';

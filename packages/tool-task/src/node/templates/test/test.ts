@@ -1,5 +1,5 @@
 import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
-import { testConfigParams } from '@lib/config/javascript/test/params/test.params.base';
+import { testConfigParams } from '@lib/config/node/test/params/test.params.base';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
 import type { TaskParamsModel } from '@tool/task/core/core.models';

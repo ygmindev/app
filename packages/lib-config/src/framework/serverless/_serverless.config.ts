@@ -6,7 +6,7 @@ import type {
   _ServerlessConfigModel,
   _ServerlessConfigParamsModel,
 } from '@lib/config/framework/serverless/_serverless.models';
-import { bundleConfig } from '@lib/config/javascript/bundle/configs/bundle.config';
+import { bundleConfig } from '@lib/config/node/bundle/configs/bundle.config';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import type { AWS } from '@serverless/typescript';

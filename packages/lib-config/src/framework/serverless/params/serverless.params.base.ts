@@ -1,6 +1,6 @@
 import { SERVERLESS_PROVIDER } from '@lib/backend/serverless/serverless.constants';
 import type { _ServerlessConfigParamsModel } from '@lib/config/framework/serverless/_serverless.models';
-import { bundleConfigParams } from '@lib/config/javascript/bundle/params/bundle.params.base';
+import { bundleConfigParams } from '@lib/config/node/bundle/params/bundle.params.base';
 import type { EnvironmentModel } from '@lib/shared/environment/environment.models';
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
 import { appUri } from '@lib/shared/http/utils/appUri/appUri';
