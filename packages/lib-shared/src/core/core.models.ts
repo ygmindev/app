@@ -44,7 +44,7 @@ export type ReturnTypeModel<TType> = TType extends CallablePromiseModel<infer TR
       | CallableArgsModel<infer TReturn>
       | CallableArgsPromiseModel<infer TReturn>
   ? TReturn
-  : void;
+  : TType;
 
 export type InferModel<TType> = TType extends Array<infer TElement> ? TElement : TType;
 

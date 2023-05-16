@@ -1,6 +1,6 @@
 import type { _BabelConfigParamsModel } from '@lib/config/node/babel/_babel.models';
 
-export const babelParamsConfig: _BabelConfigParamsModel = {
+const babelParamsConfig: _BabelConfigParamsModel = {
   plugins: [
     '@babel/plugin-transform-runtime',
     ['@babel/plugin-proposal-decorators', { legacy: true }],
@@ -12,3 +12,5 @@ export const babelParamsConfig: _BabelConfigParamsModel = {
 
   presets: ['@babel/preset-env', '@babel/preset-typescript'],
 };
+
+export default babelParamsConfig;

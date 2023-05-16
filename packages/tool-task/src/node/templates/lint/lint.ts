@@ -1,11 +1,9 @@
 import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
+import lintConfigParams from '@lib/config/node/lint/params/lint.params';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
 import type { TaskParamsModel } from '@tool/task/core/core.models';
 import { command } from '@tool/task/core/utils/command/command';
-
-export const LINT_COMMAND = `${fromExecutable(
-  'eslint',
-)} --no-error-on-unmatched-pattern --fix src/**/*.{ts,tsx,js,jsx}`;
+import { runWithConfig } from '@tool/task/core/utils/runWithConfig/runWithConfig';
 
 export const lint: TaskParamsModel = {
   name: 'lint',
@@ -18,10 +16,10 @@ export const lint: TaskParamsModel = {
     if (!typescriptResult) {
       return { status: TASK_STATUS.ERROR };
     }
-    const eslintResult = await command({ command: LINT_COMMAND, root });
-    if (!eslintResult) {
-      return { status: TASK_STATUS.ERROR };
-    }
-    return { status: TASK_STATUS.SUCCESS };
+    return await runWithConfig({
+      command: lintConfigParams.command,
+      config: lintConfigParams.config,
+      root,
+    });
   },
 };

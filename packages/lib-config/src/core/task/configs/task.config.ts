@@ -3,7 +3,7 @@ import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages'
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { packages } from '@lib/backend/file/utils/packages/packages';
 import { _taskConfig } from '@lib/config/core/task/_task';
-import { taskConfigParams } from '@lib/config/core/task/params/task.params';
+import taskConfigParams from '@lib/config/core/task/params/task.params';
 import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
@@ -22,7 +22,7 @@ import flattenDeep from 'lodash/flattenDeep';
 import isString from 'lodash/isString';
 import kebabCase from 'lodash/kebabCase';
 
-const { configFile, taskExtension } = taskConfigParams;
+const { config, taskExtension } = taskConfigParams;
 
 const _getTaskByName = (name: string): CallablePromiseModel<TaskStatusModel> => {
   const _registry = registry();
@@ -133,14 +133,16 @@ const _tasks: Array<{ name: string; task: CallablePromiseModel }> = [
   }),
 
   // Package tasks
-  ...packages.map((target) => {
-    const path = fromPackages(target, configFile);
-    if (existsSync(path)) {
-      const tasks: Array<TaskParamsModel<unknown>> = require(path).default;
-      return tasks && tasks.map((task) => _getTask({ ...task, target } as TaskParamsModel));
-    }
-    return null;
-  }),
+  ...(config
+    ? packages.map((target) => {
+        const path = fromPackages(target, config);
+        if (existsSync(path)) {
+          const tasks: Array<TaskParamsModel<unknown>> = require(path).default;
+          return tasks && tasks.map((task) => _getTask({ ...task, target } as TaskParamsModel));
+        }
+        return null;
+      })
+    : []),
 
   // All tasks
   {
@@ -156,4 +158,6 @@ const _tasks: Array<{ name: string; task: CallablePromiseModel }> = [
   },
 ];
 
-export const taskConfig = _taskConfig({ tasks: flattenDeep(_tasks) });
+const taskConfig = _taskConfig({ tasks: flattenDeep(_tasks) });
+
+export default taskConfig;

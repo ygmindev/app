@@ -1,9 +1,19 @@
+import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
+import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
 import type { _WebConfigParamsModel } from '@lib/config/framework/web/_web.models';
 
-export const webConfigParams: _WebConfigParamsModel = {
-  command: 'vite',
+const webConfigParams: _WebConfigParamsModel = {
+  build: {
+    command: fromExecutable('vite build'),
 
-  configFile: 'web.config.ts',
+    config: fromConfig('framework/web/configs/web.config.ts'),
+  },
+
+  dev: {
+    command: 'vite',
+
+    config: fromConfig('framework/web/configs/web.config.ts'),
+  },
 
   isSsr: true,
 
@@ -13,3 +23,5 @@ export const webConfigParams: _WebConfigParamsModel = {
 
   ssrContextKeys: ['state.initialState'],
 };
+
+export default webConfigParams;

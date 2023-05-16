@@ -11,7 +11,7 @@ import { UserResolver } from '@lib/backend/user/resources/User/UserResolver/User
 import type { _GraphqlConfigParamsModel } from '@lib/config/http/graphql/_graphql.models';
 import { Container } from '@lib/backend/core/utils/Container/Container';
 
-export const graphqlParamsConfig: _GraphqlConfigParamsModel = {
+const graphqlParamsConfig: _GraphqlConfigParamsModel = {
   authorize,
 
   container: Container,
@@ -29,3 +29,5 @@ export const graphqlParamsConfig: _GraphqlConfigParamsModel = {
 
   schemaPath: fromStatic('graphql/schema.gql'),
 };
+
+export default graphqlParamsConfig;

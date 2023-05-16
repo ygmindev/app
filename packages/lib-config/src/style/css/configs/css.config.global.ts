@@ -1,10 +1,10 @@
-import { webConfigParams } from '@lib/config/framework/web/params/web.params';
+import webConfigParams from '@lib/config/framework/web/params/web.params';
 import type { _CssConfigModel } from '@lib/config/style/css/_css.models';
 import FontAwesome from 'react-native-vector-icons/Fonts/FontAwesome.ttf';
 import Ionicons from 'react-native-vector-icons/Fonts/Ionicons.ttf';
 import MaterialIcons from 'react-native-vector-icons/Fonts/MaterialIcons.ttf';
 
-export const cssConfigGlobal: _CssConfigModel = (theme) => `
+const cssConfig: _CssConfigModel = (theme) => `
   @font-face {
     font-family: 'Ionicons';
     src: url(${Ionicons}) format("truetype");
@@ -68,3 +68,5 @@ export const cssConfigGlobal: _CssConfigModel = (theme) => `
     background-repeat: no-repeat;
   }
 `;
+
+export default cssConfig;

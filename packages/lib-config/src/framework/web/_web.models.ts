@@ -1,9 +1,13 @@
 import type { RootContextModel } from '@lib/frontend/root/root.models';
 import type { CallablePromiseModel, DeepKeyModel } from '@lib/shared/core/core.models';
-import { TaskCliParamsModel } from '@tool/task/core/core.models';
+import type { RunWithConfigParamsModel } from '@tool/task/core/utils/runWithConfig/runWithConfig.models';
 import type { UserConfig } from 'vite';
 
-export interface _WebConfigParamsModel extends TaskCliParamsModel {
+export type _WebConfigParamsModel = {
+  build: RunWithConfigParamsModel<_WebConfigModel>;
+
+  dev: RunWithConfigParamsModel<_WebConfigModel>;
+
   isSsr?: boolean;
 
   publicDir: string;
@@ -11,6 +15,6 @@ export interface _WebConfigParamsModel extends TaskCliParamsModel {
   rootId: string;
 
   ssrContextKeys?: Array<DeepKeyModel<RootContextModel>>;
-}
+};
 
 export type _WebConfigModel = CallablePromiseModel<UserConfig>;

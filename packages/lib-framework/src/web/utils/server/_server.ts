@@ -4,8 +4,8 @@ import { fastifyCookie } from '@fastify/cookie';
 import { fastifyMiddie } from '@fastify/middie';
 import { fastifyStatic } from '@fastify/static';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
-import { webConfigParams } from '@lib/config/framework/web/params/web.params';
-import { internationalizeConfig } from '@lib/config/locale/internationalize/configs/internationalize.config';
+import webConfigParams from '@lib/config/framework/web/params/web.params';
+import internationalizeConfig from '@lib/config/locale/internationalize/configs/internationalize.config';
 import { renderPage } from '@lib/framework/web/utils/renderPage/renderPage';
 import type {
   _ServerModel,
@@ -23,7 +23,7 @@ import { join } from 'path';
 import { createServer } from 'vite';
 
 export const _server = async ({
-  configFile,
+  config,
   port,
   root,
 }: _ServerParamsModel): Promise<_ServerModel> => {
@@ -39,13 +39,15 @@ export const _server = async ({
     secret: process.env.SERVER_APP_SECRET,
   } as FastifyCookieOptions);
 
-  const { middlewares } = await createServer({
-    configFile: join(root, configFile),
-    root,
-    server: { middlewareMode: true },
-  });
-
-  app.use(middlewares);
+  if (config) {
+    const { middlewares } = await createServer({
+      configFile: join(root, config as string),
+      root,
+      server: { middlewareMode: true },
+    });
+  
+    app.use(middlewares);
+  }
 
   app.register(
     i18nextMiddleware.plugin as unknown as FastifyPluginCallback,

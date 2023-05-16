@@ -1,5 +1,5 @@
 import type { _InternationalizeConfigParamsModel } from '@lib/config/locale/internationalize/_internationalize.models';
-import { internationalizeConfigParams as internationalizeConfigParamsBase } from '@lib/config/locale/internationalize/params/internationalize.params.base';
+import { default as internationalizeConfigParamsBase } from '@lib/config/locale/internationalize/params/internationalize.params.base';
 import { APP_URI } from '@lib/frontend/http/http.constants';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
@@ -7,7 +7,7 @@ import type { Module } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { NativeModules } from 'react-native';
 
-export const internationalizeConfigParams: _InternationalizeConfigParamsModel = merge([
+const internationalizeConfigParams: _InternationalizeConfigParamsModel = merge([
   {
     loadPath: APP_URI,
 
@@ -31,3 +31,6 @@ export const internationalizeConfigParams: _InternationalizeConfigParamsModel = 
 
   internationalizeConfigParamsBase,
 ]);
+
+export default internationalizeConfigParams;
+

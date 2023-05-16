@@ -27,12 +27,11 @@ export const _testConfig =
     timeout,
   }: _TestConfigParamsModel): _TestConfigModel =>
   async () => {
-    const { babelConfig } = await importFromEnv<_BabelConfigModel, 'babelConfig'>(
+    const babelConfig = await importFromEnv<_BabelConfigModel>(
       '@lib/config/node/babel/configs/babel.config',
     );
-    const { bundleConfigParams } = await importFromEnv<
-      _BundleConfigParamsModel,
-      'bundleConfigParams'
+    const bundleConfigParams = await importFromEnv<
+      _BundleConfigParamsModel
     >('@lib/config/node/bundle/params/bundle.params');
 
     return {

@@ -1,6 +1,6 @@
 import type { _SetupConfigModel } from '@lib/config/core/setup/_setup.models';
 
-export const setupConfig: _SetupConfigModel = {
+const setupConfig: _SetupConfigModel = {
   onInitialize: async () => {
     return;
   },
@@ -9,3 +9,5 @@ export const setupConfig: _SetupConfigModel = {
     return;
   },
 };
+
+export default setupConfig;

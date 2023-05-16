@@ -8,7 +8,7 @@ import {
 import { FONT_FAMILY } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
-export const themeConfigParams: _ThemeConfigParamsModel = {
+const themeConfigParams: _ThemeConfigParamsModel = {
   animation: {
     duration: 150,
     transition: 400,
@@ -118,3 +118,5 @@ export const themeConfigParams: _ThemeConfigParamsModel = {
     },
   },
 };
+
+export default themeConfigParams;

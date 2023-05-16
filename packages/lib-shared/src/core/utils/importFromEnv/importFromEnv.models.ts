@@ -1,5 +1,5 @@
+import { ImportDynamicModel } from "@lib/shared/core/utils/importDynamic/importDynamic.models";
+
 export type ImportFromEnvParamsModel = [name: string, extensions?: Array<string>];
 
-export type ImportFromEnvModel<TType, TKey = undefined> = Promise<
-  TKey extends string ? Record<TKey, TType> : TType
->;
+export type ImportFromEnvModel<TType> = ImportDynamicModel<TType>;

@@ -9,7 +9,7 @@ import type { _DatabaseConfigParamsModel } from '@lib/config/database/_database.
 import type { ConstructorModel } from '@lib/shared/core/core.models';
 import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
-export const databaseConfigParamsMongo: _DatabaseConfigParamsModel = {
+const databaseConfigParams: _DatabaseConfigParamsModel = {
   database: process.env.SERVER_MONGO_DATABASE_NAME,
 
   entities: [
@@ -31,3 +31,5 @@ export const databaseConfigParamsMongo: _DatabaseConfigParamsModel = {
 
   username: process.env.SERVER_MONGO_DATABASE_USERNAME,
 };
+
+export default databaseConfigParams;

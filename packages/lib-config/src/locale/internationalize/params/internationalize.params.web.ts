@@ -1,11 +1,11 @@
 import type { _InternationalizeConfigParamsModel } from '@lib/config/locale/internationalize/_internationalize.models';
-import { internationalizeConfigParams as internationalizeConfigParamsBase } from '@lib/config/locale/internationalize/params/internationalize.params.base';
+import { default as internationalizeConfigParamsBase } from '@lib/config/locale/internationalize/params/internationalize.params.base';
 import { APP_URI } from '@lib/frontend/http/http.constants';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import I18nextBrowserLanguageDetector from 'i18next-browser-languagedetector';
 import I18NextHttpBackend from 'i18next-http-backend';
 
-export const internationalizeConfigParams: _InternationalizeConfigParamsModel = merge([
+const internationalizeConfigParams: _InternationalizeConfigParamsModel = merge([
   {
     loadPath: APP_URI,
 
@@ -14,3 +14,5 @@ export const internationalizeConfigParams: _InternationalizeConfigParamsModel = 
 
   internationalizeConfigParamsBase,
 ]);
+
+export default internationalizeConfigParams;

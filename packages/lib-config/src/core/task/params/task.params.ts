@@ -1,9 +1,13 @@
+import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
 import type { TaskConfigParamsModel } from '@lib/config/core/task/task.models';
 
-export const taskConfigParams: TaskConfigParamsModel = {
-  configFile: 'tasks.ts',
+const taskConfigParams: TaskConfigParamsModel = {
+  command: fromExecutable('gulp'),
 
-  command: 'gulp',
+  // TODO: rewrite
+  config: 'tasks.ts',
 
   taskExtension: 'task.ts',
 };
+
+export default taskConfigParams;

@@ -1,9 +1,9 @@
 import type { _BabelConfigParamsModel } from '@lib/config/node/babel/_babel.models';
-import { babelParamsConfig as babelParamsConfigFrontend } from '@lib/config/node/babel/params/babel.params.frontend';
+import { default as babelParamsConfigFrontend } from '@lib/config/node/babel/params/babel.params.frontend';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 
-export const babelParamsConfig: _BabelConfigParamsModel = merge(
+const babelParamsConfig: _BabelConfigParamsModel = merge(
   [
     {
       plugins: [['transform-react-remove-prop-types', { removeImport: true }]],
@@ -18,3 +18,5 @@ export const babelParamsConfig: _BabelConfigParamsModel = merge(
   ],
   MERGE_STRATEGY.DEEP_PREPEND,
 );
+
+export default babelParamsConfig;

@@ -1,11 +1,11 @@
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import type { _InternationalizeConfigParamsModel } from '@lib/config/locale/internationalize/_internationalize.models';
-import { internationalizeConfigParams as internationalizeConfigParamsBase } from '@lib/config/locale/internationalize/params/internationalize.params.base';
+import { default as internationalizeConfigParamsBase } from '@lib/config/locale/internationalize/params/internationalize.params.base';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import I18NexFsBackend from 'i18next-fs-backend';
 import i18nextMiddleware from 'i18next-http-middleware';
 
-export const internationalizeConfigParams: _InternationalizeConfigParamsModel = merge([
+const internationalizeConfigParams: _InternationalizeConfigParamsModel = merge([
   {
     addPath: fromStatic('assets'),
 
@@ -16,3 +16,5 @@ export const internationalizeConfigParams: _InternationalizeConfigParamsModel = 
 
   internationalizeConfigParamsBase,
 ]);
+
+export default internationalizeConfigParams;

@@ -1,13 +1,13 @@
 import type { _ServerlessConfigParamsModel } from '@lib/config/framework/serverless/_serverless.models';
-import { serverlessConfigParamsBase } from '@lib/config/framework/serverless/params/serverless.params.base';
-import { bundleConfigParams } from '@lib/config/node/bundle/params/bundle.params.node';
+import { default as serverlessConfigParamsBase } from '@lib/config/framework/serverless/params/serverless.params.base';
+import bundleConfigParams from '@lib/config/node/bundle/params/bundle.params.node';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
 import { HTTP_METHOD, PING } from '@lib/shared/http/http.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
-export const serverlessConfigParamsNode: _ServerlessConfigParamsModel = merge(
+const serverlessConfigParams: _ServerlessConfigParamsModel = merge(
   [
     {
       bundle: bundleConfigParams,
@@ -33,3 +33,6 @@ export const serverlessConfigParamsNode: _ServerlessConfigParamsModel = merge(
   ],
   MERGE_STRATEGY.DEEP_APPEND,
 );
+
+export default serverlessConfigParams;
+

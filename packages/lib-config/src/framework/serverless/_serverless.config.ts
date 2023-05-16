@@ -6,8 +6,7 @@ import type {
   _ServerlessConfigModel,
   _ServerlessConfigParamsModel,
 } from '@lib/config/framework/serverless/_serverless.models';
-import { bundleConfig } from '@lib/config/node/bundle/configs/bundle.config';
-import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
+import bundleConfig from '@lib/config/node/bundle/configs/bundle.config';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import type { AWS } from '@serverless/typescript';
 import reduce from 'lodash/reduce';
@@ -15,11 +14,11 @@ import reduce from 'lodash/reduce';
 export const _serverlessConfig =
   ({
     bundle,
+    dev,
     dotenv,
     environment,
     functions,
     name,
-    offline,
     platform,
     provider,
     server,
@@ -35,10 +34,10 @@ export const _serverlessConfig =
 
         'serverless-offline': {
           allowCache: false,
-          host: offline.host.split('://')[1],
-          httpPort: offline.port,
+          host: dev.host.split('://')[1],
+          httpPort: dev.port,
           ignoreJWTSignature: true,
-          lambdaPort: offline.lambdaPort,
+          lambdaPort: dev.lambdaPort,
           noPrependStageInUrl: true,
         },
 

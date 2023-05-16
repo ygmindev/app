@@ -1,6 +1,7 @@
+import type { RunWithConfigStringParamsModel } from '@tool/task/core/utils/runWithConfig/runWithConfig.models';
 import type { Linter } from 'eslint';
 
-export interface _LintConfigParamsModel {
+export type _LintConfigParamsModel = RunWithConfigStringParamsModel & {
   include: Array<string>;
 
   indentWidth: number;
@@ -20,6 +21,6 @@ export interface _LintConfigParamsModel {
   roots: Array<string>;
 
   unusedIgnore?: string;
-}
+};
 
 export interface _LintConfigModel extends Linter.Config {}

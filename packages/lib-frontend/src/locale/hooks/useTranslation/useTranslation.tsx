@@ -1,4 +1,4 @@
-import { internationalizeConfigParams } from '@lib/config/locale/internationalize/params/internationalize.params';
+import internationalizeConfigParams from '@lib/config/locale/internationalize/params/internationalize.params';
 import { _useTranslation } from '@lib/frontend/locale/hooks/useTranslation/_useTranslation';
 import type {
   UseTranslationModel,

@@ -1,11 +1,11 @@
-import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
 import { setupConfig } from '@lib/config/core/setup/configs/setup.config';
+import type { _ServerlessConfigParamsModel } from '@lib/config/framework/serverless/_serverless.models';
+import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEnv';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
 import type { TaskParamsModel } from '@tool/task/core/core.models';
-import { command } from '@tool/task/core/utils/command/command';
+import { runWithConfig } from '@tool/task/core/utils/runWithConfig/runWithConfig';
 import type { DevParamsModel } from '@tool/task/framework/serverless/templates/dev/dev.models';
-import { make } from '@tool/task/node/templates/make/make';
 
 export const dev: TaskParamsModel<DevParamsModel> = {
   environment: ENVIRONMENT.DEVELOPMENT,
@@ -26,8 +26,11 @@ export const dev: TaskParamsModel<DevParamsModel> = {
     },
   ],
 
-  task: async () => {
-    await command({ command: `${fromExecutable('sls')} offline start --reloadHandler` });
-    return { status: TASK_STATUS.SUCCESS };
+  task: async ({ root }) => {
+    const serverlessConfigParams = await importFromEnv<
+      _ServerlessConfigParamsModel
+    >('@lib/config/framework/serverless/params/serverless.params');
+
+    return await runWithConfig({ ...serverlessConfigParams.dev, root });
   },
 };

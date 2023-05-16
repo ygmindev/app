@@ -1,4 +1,3 @@
-import { esbuildDecorators } from '@anatine/esbuild-decorators';
 import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
@@ -7,18 +6,17 @@ import type {
   _BundleConfigModel,
   _BundleConfigParamsModel,
 } from '@lib/config/node/bundle/_bundle.models';
+import { _plugins } from '@lib/config/node/bundle/_plugins';
+import lintConfigParams from '@lib/config/node/lint/params/lint.params';
 import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEnv';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import type { PlatformModel } from '@lib/shared/platform/platform.models';
-import { esbuildCommonjs, viteCommonjs } from '@originjs/vite-plugin-commonjs';
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import type { RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { babel } from '@rollup/plugin-babel';
 import inject from '@rollup/plugin-inject';
-import { LINT_COMMAND } from '@tool/task/node/templates/lint/lint';
 import react from '@vitejs/plugin-react';
-import { nodeExternalsPlugin } from 'esbuild-node-externals';
-import { filelocPlugin } from 'esbuild-plugin-fileloc';
 import { visualizer } from 'rollup-plugin-visualizer';
 import type { PluginOption } from 'vite';
 import { searchForWorkspaceRoot } from 'vite';
@@ -36,12 +34,13 @@ export const _bundleConfig =
     externals,
     mainFields,
     modulePaths,
+    outDir,
     platform,
     provide,
     watch,
   }: _BundleConfigParamsModel): _BundleConfigModel =>
   async () => {
-    const { babelConfig } = await importFromEnv<_BabelConfigModel, 'babelConfig'>(
+    const babelConfig = await importFromEnv<_BabelConfigModel>(
       '@lib/config/node/babel/configs/babel.config',
     );
     return {
@@ -51,7 +50,11 @@ export const _bundleConfig =
           requireReturnsDefault: 'auto',
           transformMixedEsModules: true,
         },
-        watch: watch ? { include: watch } : undefined,
+        outDir,
+        watch:
+          process.env.NODE_ENV === ENVIRONMENT.DEVELOPMENT && watch
+            ? { include: watch }
+            : undefined,
         ...(entry ? { rollupOptions: { input: entry } } : {}),
       },
 
@@ -73,25 +76,17 @@ export const _bundleConfig =
 
           mainFields,
 
-          target: process.env.PLATFORM === PLATFORM.NODE ? 'node18' : 'esnext',
-
           minify: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION,
 
           nodePaths: modulePaths,
 
-          plugins: [
-            esbuildDecorators({ tsconfig: fromWorking('tsconfig.json') }),
-
-            externals && esbuildCommonjs(externals),
-
-            externals && nodeExternalsPlugin({ packagePath: fromRoot('package.json') }),
-
-            platform === PLATFORM.NODE && filelocPlugin(),
-          ].filter(Boolean),
+          plugins: _plugins({ externals, platform }),
 
           resolveExtensions: extensions,
 
           sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : 'inline',
+
+          target: process.env.PLATFORM === PLATFORM.NODE ? 'node18' : 'esnext',
 
           tsconfig: fromWorking('tsconfig.json'),
         },
@@ -103,7 +98,7 @@ export const _bundleConfig =
         tsconfigPaths({ projects: [fromRoot('tsconfig.json')] }),
 
         checker({
-          eslint: { lintCommand: LINT_COMMAND },
+          eslint: { lintCommand: lintConfigParams.command },
           typescript: { tsconfigPath: fromWorking('tsconfig.json') },
         }),
 
@@ -115,7 +110,12 @@ export const _bundleConfig =
 
         viteCommonjs(),
 
-        babelConfig && babel(babelConfig as RollupBabelInputPluginOptions),
+        babelConfig &&
+          babel({
+            ...babelConfig,
+            babelHelpers: 'runtime',
+            skipPreflightCheck: true,
+          } as RollupBabelInputPluginOptions),
 
         process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && visualizer(),
 

@@ -1,8 +1,8 @@
 import type { Config } from '@jest/types';
 import type { CallableModel, CallablePromiseModel } from '@lib/shared/core/core.models';
-import { TaskCliParamsModel } from '@tool/task/core/core.models';
+import type { RunWithConfigStringParamsModel } from '@tool/task/core/utils/runWithConfig/runWithConfig.models';
 
-export interface _TestConfigParamsModel extends TaskCliParamsModel {
+export type _TestConfigParamsModel = RunWithConfigStringParamsModel & {
   cachePath: string;
 
   coverageOutputPath: string;
@@ -30,6 +30,6 @@ export interface _TestConfigParamsModel extends TaskCliParamsModel {
   testExtensions: Array<string>;
 
   timeout: number;
-}
+};
 
 export type _TestConfigModel = CallablePromiseModel<Config.InitialOptions>;

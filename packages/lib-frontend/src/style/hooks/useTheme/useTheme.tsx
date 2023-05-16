@@ -1,4 +1,4 @@
-import { themeConfig } from '@lib/config/style/theme/configs/theme.config';
+import themeConfig from '@lib/config/style/theme/configs/theme.config';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import type { UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
 import { useMemo } from 'react';

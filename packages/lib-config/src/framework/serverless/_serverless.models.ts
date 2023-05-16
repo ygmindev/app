@@ -6,9 +6,17 @@ import type { HttpMethodModel } from '@lib/shared/http/http.models';
 import type { UriParamsModel } from '@lib/shared/http/utils/uri/uri.models';
 import type { PlatformModel } from '@lib/shared/platform/platform.models';
 import type { AWS } from '@serverless/typescript';
+import type { RunWithConfigStringParamsModel } from '@tool/task/core/utils/runWithConfig/runWithConfig.models';
 
 export interface _ServerlessConfigParamsModel {
+  build: RunWithConfigStringParamsModel;
+
   bundle: _BundleConfigParamsModel;
+
+  dev: {
+    lambdaPort: number;
+  } & Pick<UriParamsModel, 'host' | 'port'> &
+    RunWithConfigStringParamsModel;
 
   dotenv: CallableModel;
 
@@ -24,10 +32,6 @@ export interface _ServerlessConfigParamsModel {
   >;
 
   name: string;
-
-  offline: {
-    lambdaPort: number;
-  } & Pick<UriParamsModel, 'host' | 'port'>;
 
   platform: PlatformModel;
 

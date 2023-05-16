@@ -1,7 +1,7 @@
-import { TaskCliParamsModel } from "@tool/task/core/core.models";
+import type { RunWithConfigStringParamsModel } from '@tool/task/core/utils/runWithConfig/runWithConfig.models';
 
-export interface TaskConfigParamsModel extends TaskCliParamsModel {
+export type TaskConfigParamsModel = RunWithConfigStringParamsModel & {
   taskExtension: string;
-}
+};
 
 export type TaskConfigModel = void;

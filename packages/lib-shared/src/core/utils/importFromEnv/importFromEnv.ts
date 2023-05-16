@@ -1,4 +1,5 @@
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
+import { importDynamic } from '@lib/shared/core/utils/importDynamic/importDynamic';
 import type {
   ImportFromEnvModel,
   ImportFromEnvParamsModel,
@@ -6,7 +7,7 @@ import type {
 import { resolveFirst } from '@lib/shared/core/utils/resolveFirst/resolveFirst';
 import trim from 'lodash/trim';
 
-export const importFromEnv = async <TType, TKey = undefined>(
+export const importFromEnv = async <TType>(
   ...[
     name,
     extensions = [
@@ -16,14 +17,14 @@ export const importFromEnv = async <TType, TKey = undefined>(
       '',
     ],
   ]: ImportFromEnvParamsModel
-): ImportFromEnvModel<TType, TKey> => {
+): ImportFromEnvModel<TType> => {
   const _result: Array<string> = [];
   try {
     return await resolveFirst(
       extensions.map((ext) => async () => {
         const _path = `${name}${ext ? `.${trim(ext, '.')}` : ''}`;
         try {
-          return await import(_path);
+          return await importDynamic(_path);
         } catch (e) {
           _result.push(_path);
           throw new Error();

@@ -1,15 +1,16 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
+import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { bundleConfigParams } from '@lib/config/node/bundle/params/bundle.params.base';
+import bundleConfigParams from '@lib/config/node/bundle/params/bundle.params.base';
 import type { _TestConfigParamsModel } from '@lib/config/node/test/_test.models';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 
-export const testConfigParams: _TestConfigParamsModel = {
+const testConfigParams: _TestConfigParamsModel = {
   cachePath: fromWorking('.cache/test'),
 
-  command: 'jest --runInBand --detectOpenHandles',
+  command: fromExecutable('jest --runInBand --detectOpenHandles'),
 
-  configFile: 'test.config.ts',
+  config: fromConfig('node/test/configs/test.config'),
 
   coverageOutputPath: fromWorking('coverage'),
 
@@ -25,3 +26,5 @@ export const testConfigParams: _TestConfigParamsModel = {
 
   timeout: 60e3,
 };
+
+export default testConfigParams;

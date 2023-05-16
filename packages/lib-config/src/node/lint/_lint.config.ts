@@ -28,9 +28,7 @@ export const _lintConfig = ({
     'plugin:typescript-sort-keys/recommended',
   ],
 
-  ignorePatterns: `!(${include.join('|')})`,
-
-  parser: '@typescript-eslint/parser',
+  ignorePatterns: [`!(${include.join('|')})`],
 
   plugins: [
     '@nrwl/nx',

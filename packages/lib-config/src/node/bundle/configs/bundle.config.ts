@@ -8,11 +8,10 @@ import { permuteString } from '@lib/shared/core/utils/permuteString/permuteStrin
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
 
-export const bundleConfig: _BundleConfigModel = async () => {
-  const { bundleConfigParams } = await importFromEnv<
-    _BundleConfigParamsModel,
-    'bundleConfigParams'
-  >('@lib/config/node/bundle/params/bundle.params');
+const bundleConfig: _BundleConfigModel = async () => {
+  const bundleConfigParams = await importFromEnv<_BundleConfigParamsModel>(
+    '@lib/config/node/bundle/params/bundle.params',
+  );
   return _bundleConfig({
     ...bundleConfigParams,
 
@@ -31,7 +30,9 @@ export const bundleConfig: _BundleConfigModel = async () => {
 
     extensions: [
       ...bundleConfigParams.extensions,
-      ...permuteString([`.${process.env.NODE_ENV}`], bundleConfigParams.extensions)
+      ...permuteString([`.${process.env.NODE_ENV}`], bundleConfigParams.extensions),
     ],
   })();
 };
+
+export default bundleConfig;

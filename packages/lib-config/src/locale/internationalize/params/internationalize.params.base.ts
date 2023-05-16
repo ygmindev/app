@@ -1,7 +1,7 @@
 import type { _InternationalizeConfigParamsModel } from '@lib/config/locale/internationalize/_internationalize.models';
 import { CORE } from '@lib/shared/core/core.constants';
 
-export const internationalizeConfigParams: _InternationalizeConfigParamsModel = {
+const internationalizeConfigParams: _InternationalizeConfigParamsModel = {
   filename: '/locales/{{lng}}/{{ns}}.json',
 
   key: 'lng',
@@ -12,3 +12,5 @@ export const internationalizeConfigParams: _InternationalizeConfigParamsModel = 
 
   namespaceDefault: CORE,
 };
+
+export default internationalizeConfigParams;

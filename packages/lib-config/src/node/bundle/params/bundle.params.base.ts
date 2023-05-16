@@ -3,10 +3,14 @@ import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages'
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import type { _BundleConfigParamsModel } from '@lib/config/node/bundle/_bundle.models';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
+import { build } from 'vite';
 
-export const bundleConfigParams: _BundleConfigParamsModel = {
-  define: {
-    __DEV__: `${process.env.NODE_ENV === 'development'}`,
+const bundleConfigParams: _BundleConfigParamsModel = {
+  build: {
+    command: async (config) => {
+      const result = await build(config);
+      console.warn(result);
+    },
   },
 
   envPrefix: ['ENV_', 'NODE_'],
@@ -16,6 +20,8 @@ export const bundleConfigParams: _BundleConfigParamsModel = {
   mainFields: ['module', 'main'],
 
   modulePaths: [fromModules()],
+
+  outDir: fromWorking('dist'),
 
   platform: PLATFORM.BASE,
 
@@ -27,3 +33,5 @@ export const bundleConfigParams: _BundleConfigParamsModel = {
     fromWorking('src/**/*'),
   ],
 };
+
+export default bundleConfigParams;

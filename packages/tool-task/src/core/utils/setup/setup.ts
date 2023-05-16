@@ -9,7 +9,7 @@ let _isTerminated = false;
 export const setup: SetupModel = {
   initialize: async () => {
     if (!_isInitialized) {
-      const { setupConfig } = await importFromEnv<_SetupConfigModel, 'setupConfig'>(
+      const setupConfig = await importFromEnv<_SetupConfigModel>(
         '@lib/config/core/setup/configs/setup.config',
       );
       await setupConfig.onInitialize();
@@ -23,7 +23,7 @@ export const setup: SetupModel = {
 
   terminate: async () => {
     if (!_isTerminated) {
-      const { setupConfig } = await importFromEnv<_SetupConfigModel, 'setupConfig'>(
+      const setupConfig = await importFromEnv<_SetupConfigModel>(
         '@lib/config/core/setup/configs/setup.config',
       );
       await setupConfig.onTerminate();

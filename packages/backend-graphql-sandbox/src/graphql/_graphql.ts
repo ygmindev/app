@@ -1,4 +1,4 @@
-import { graphqlConfig } from '@lib/config/http/graphql/configs/graphql.config';
+import graphqlConfig from '@lib/config/http/graphql/configs/graphql.config';
 import { info } from '@lib/shared/logging/utils/logger/logger';
 import { ApolloServer } from 'apollo-server';
 import type { _GraphqlParamsModel } from 'packages/backend-graphql-sandbox/src/graphql/_graphql.models';

@@ -1,6 +1,6 @@
 import { createHandler } from '@lib/backend/serverless/utils/createHandler/createHandler';
 import { getContext } from '@lib/backend/serverless/utils/getContext/getContext';
-import { graphqlConfig } from '@lib/config/http/graphql/configs/graphql.config';
+import graphqlConfig from '@lib/config/http/graphql/configs/graphql.config';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 import { error } from '@lib/shared/logging/utils/logger/logger';
 import { setup } from '@tool/task/core/utils/setup/setup';

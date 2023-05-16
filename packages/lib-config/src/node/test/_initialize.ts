@@ -1,12 +1,9 @@
 import type { _TestConfigParamsModel } from '@lib/config/node/test/_test.models';
 import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEnv';
 
-const _getTestConfigParams = async (): Promise<_TestConfigParamsModel> => {
-  const { testConfigParams } = await importFromEnv<_TestConfigParamsModel, 'testConfigParams'>(
-    '@lib/config/node/test/params/test.params',
-  );
-  return testConfigParams;
-};
+const _getTestConfigParams = async (): Promise<_TestConfigParamsModel> => await importFromEnv<_TestConfigParamsModel>(
+  '@lib/config/node/test/params/test.params',
+);
 
 beforeAll(async () => {
   const _testConfigParams = await _getTestConfigParams();

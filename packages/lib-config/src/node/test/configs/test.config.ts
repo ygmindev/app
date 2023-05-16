@@ -5,9 +5,11 @@ import type {
 } from '@lib/config/node/test/_test.models';
 import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEnv';
 
-export const testConfig: _TestConfigModel = async () => {
-  const { testConfigParams } = await importFromEnv<_TestConfigParamsModel, 'testConfigParams'>(
+const testConfig: _TestConfigModel = async () => {
+  const testConfigParams = await importFromEnv<_TestConfigParamsModel>(
     '@lib/config/node/test/params/test.params',
   );
   return _testConfig(testConfigParams)();
 };
+
+export default testConfig;

@@ -1,4 +1,4 @@
-import { internationalizeConfig } from '@lib/config/locale/internationalize/configs/internationalize.config';
+import internationalizeConfig from '@lib/config/locale/internationalize/configs/internationalize.config';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import type { _LocaleProviderPropsModel } from '@lib/frontend/locale/providers/LocaleProvider/_LocaleProvider.models';
 import type { I18nextProviderProps } from 'react-i18next';

@@ -1,14 +1,14 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import type { _BundleConfigParamsModel } from '@lib/config/node/bundle/_bundle.models';
-import { bundleConfigParams as bundleConfigBase } from '@lib/config/node/bundle/params/bundle.params.base';
-import { bundleConfigParams as bundleConfigFrontend } from '@lib/config/node/bundle/params/bundle.params.frontend';
+import { default as bundleConfigBase } from '@lib/config/node/bundle/params/bundle.params.base';
+import { default as bundleConfigFrontend } from '@lib/config/node/bundle/params/bundle.params.frontend';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
-export const bundleConfigParams: _BundleConfigParamsModel = merge(
+const bundleConfigParams: _BundleConfigParamsModel = merge(
   [
     {
       aliases: {
@@ -33,3 +33,5 @@ export const bundleConfigParams: _BundleConfigParamsModel = merge(
   ],
   MERGE_STRATEGY.DEEP_PREPEND,
 );
+
+export default bundleConfigParams;
