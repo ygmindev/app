@@ -1,4 +1,4 @@
-import testConfigParams from '@lib/config/node/test/params/test.params.base';
+import testConfig from '@lib/config/node/test/test.base';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import type { TaskParamsModel } from '@tool/task/core/core.models';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
@@ -15,8 +15,8 @@ export const test: TaskParamsModel<TestParamsModel> = {
       options.isPrompt && (await prompt([{ isOptional: true, key: 'testMatch' }])).testMatch;
     testMatch && (process.env.TEST_MATCH = testMatch);
     return await runWithConfig({
-      command: testConfigParams.command,
-      config: testConfigParams.config,
+      command: testConfig.command,
+      config: testConfig.config,
       root,
     });
   },

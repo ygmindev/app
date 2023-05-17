@@ -1,7 +1,9 @@
+import { ConfigStaticModel } from '@lib/config/core/core.models';
+import { CallablePromiseModel } from '@lib/shared/core/core.models';
 import type { RunWithConfigStringParamsModel } from '@tool/task/core/utils/runWithConfig/runWithConfig.models';
 import type { Linter } from 'eslint';
 
-export type _LintConfigParamsModel = RunWithConfigStringParamsModel & {
+export type LintConfigModel = ConfigStaticModel<RunWithConfigStringParamsModel & {
   include: Array<string>;
 
   indentWidth: number;
@@ -21,6 +23,6 @@ export type _LintConfigParamsModel = RunWithConfigStringParamsModel & {
   roots: Array<string>;
 
   unusedIgnore?: string;
-};
+}>;
 
-export interface _LintConfigModel extends Linter.Config {}
+export type _LintConfigModel = ConfigStaticModel<Linter.Config>;

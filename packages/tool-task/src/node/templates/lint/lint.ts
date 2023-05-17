@@ -1,5 +1,5 @@
 import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
-import lintConfigParams from '@lib/config/node/lint/params/lint.params';
+import lintConfig from '@lib/config/node/lint/lint';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
 import type { TaskParamsModel } from '@tool/task/core/core.models';
 import { command } from '@tool/task/core/utils/command/command';
@@ -17,8 +17,8 @@ export const lint: TaskParamsModel = {
       return { status: TASK_STATUS.ERROR };
     }
     return await runWithConfig({
-      command: lintConfigParams.command,
-      config: lintConfigParams.config,
+      command: lintConfig.command,
+      config: lintConfig.config,
       root,
     });
   },

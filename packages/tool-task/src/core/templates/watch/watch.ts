@@ -1,5 +1,5 @@
 import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
-import bundleConfigParams from '@lib/config/node/bundle/params/bundle.params';
+import bundleConfig from '@lib/config/node/bundle/bundle.base';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
 import type { TaskParamsModel } from '@tool/task/core/core.models';
@@ -13,8 +13,8 @@ export const watch: TaskParamsModel<WatchParamsModel> = {
   name: 'watch',
 
   task: async ({ options, root }) => {
-    const { executable, extensions, patterns, script } = options;
-    const _extensions = extensions || bundleConfigParams.extensions;
+    const { executable, extensions, patterns, script } = options || {};
+    const _extensions = extensions || bundleConfig.extensions;
     const params = [
       patterns && patterns.map((pattern) => `--watch "${pattern}"`).join(' '),
       `--ext ${_extensions.map((ext) => trimStart(ext, '.')).join(',')}`,

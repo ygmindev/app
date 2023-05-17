@@ -1,6 +1,6 @@
 import { children } from '@lib/backend/file/utils/children/children';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { generateConfig } from '@lib/config/core/generate/configs/generate.config';
+import { _generateConfig } from '@lib/config/core/generate/_generate';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { boilerplate } from '@tool/generate/utils/boilerplate/boilerplate';
@@ -14,6 +14,7 @@ describe(displayName, () => {
   });
 
   test('works', async () => {
+    const generateConfig = await _generateConfig();
     const templatesDir = fromPackages('tool-generate/templates');
     children({ from: templatesDir, isDirectory: true }).map(({ name }) => name);
 

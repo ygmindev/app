@@ -1,4 +1,4 @@
-import { setupConfig } from '@lib/config/core/setup/configs/setup.config';
+import { _setupConfig } from '@lib/config/core/setup/_setup';
 import type { _ServerlessConfigParamsModel } from '@lib/config/framework/serverless/_serverless.models';
 import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEnv';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
@@ -14,15 +14,17 @@ export const dev: TaskParamsModel<DevParamsModel> = {
 
   onAfter: [
     async () => {
+      const setupConfig = await _setupConfig();
       await setupConfig.onTerminate();
-      return TASK_STATUS.SUCCESS;
+      return { status: TASK_STATUS.SUCCESS };
     },
   ],
 
   onBefore: [
     async () => {
+      const setupConfig = await _setupConfig();
       await setupConfig.onInitialize();
-      return TASK_STATUS.SUCCESS;
+      return { status: TASK_STATUS.SUCCESS };
     },
   ],
 

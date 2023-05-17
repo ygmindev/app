@@ -1,6 +1,6 @@
 import type { _SetupConfigModel } from '@lib/config/core/setup/_setup.models';
-import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEnv';
 import type { SetupModel } from '@tool/task/core/utils/setup/setup.models';
+import { _setupConfig } from '@lib/config/core/setup/_setup';
 
 let _isInitialized = false;
 
@@ -9,9 +9,7 @@ let _isTerminated = false;
 export const setup: SetupModel = {
   initialize: async () => {
     if (!_isInitialized) {
-      const setupConfig = await importFromEnv<_SetupConfigModel>(
-        '@lib/config/core/setup/configs/setup.config',
-      );
+      const setupConfig = await _setupConfig();
       await setupConfig.onInitialize();
       _isInitialized = true;
     }
@@ -23,9 +21,7 @@ export const setup: SetupModel = {
 
   terminate: async () => {
     if (!_isTerminated) {
-      const setupConfig = await importFromEnv<_SetupConfigModel>(
-        '@lib/config/core/setup/configs/setup.config',
-      );
+      const setupConfig = await _setupConfig();
       await setupConfig.onTerminate();
       _isTerminated = true;
     }

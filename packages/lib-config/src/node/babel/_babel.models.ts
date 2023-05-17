@@ -1,9 +1,10 @@
 import type { TransformOptions } from '@babel/core';
+import { ConfigDynamicModel, ConfigStaticModel } from '@lib/config/core/core.models';
 
-export interface _BabelConfigParamsModel {
+export type BabelConfigModel = ConfigStaticModel<{
   plugins?: Array<string | [string, object]>;
 
   presets?: Array<string | [string, object]>;
-}
+}>;
 
-export interface _BabelConfigModel extends TransformOptions {}
+export type _BabelConfigModel = ConfigDynamicModel<TransformOptions>;

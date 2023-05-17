@@ -39,7 +39,7 @@ export const _useQueryConnection = <TType,>({
     staleTime: cacheTime,
   });
 
-  const _fetchNextPage = debounce({ callback: fetchNextPage });
+  const _fetchNextPage = debounce(fetchNextPage);
 
   return {
     data,

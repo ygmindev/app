@@ -1,9 +1,9 @@
-import type { CallablePromiseModel } from '@lib/shared/core/core.models';
+import { ConfigDynamicModel, ConfigStaticModel } from '@lib/config/core/core.models';
 import type { PlatformModel } from '@lib/shared/platform/platform.models';
 import type { RunWithConfigCallableParamsModel } from '@tool/task/core/utils/runWithConfig/runWithConfig.models';
 import type { UserConfig } from 'vite';
 
-export interface _BundleConfigParamsModel {
+export type BundleConfigModel = ConfigStaticModel<{
   aliases?: Record<string, string>;
 
   build: RunWithConfigCallableParamsModel<_BundleConfigModel>;
@@ -29,6 +29,6 @@ export interface _BundleConfigParamsModel {
   provide?: Record<string, string>;
 
   watch?: Array<string>;
-}
+}>
 
-export type _BundleConfigModel = CallablePromiseModel<UserConfig>;
+export type _BundleConfigModel = ConfigDynamicModel<UserConfig>;

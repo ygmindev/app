@@ -3,15 +3,17 @@ import type { FastifyCookieOptions } from '@fastify/cookie';
 import { fastifyCookie } from '@fastify/cookie';
 import { fastifyMiddie } from '@fastify/middie';
 import { fastifyStatic } from '@fastify/static';
+import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
-import webConfigParams from '@lib/config/framework/web/params/web.params';
-import internationalizeConfig from '@lib/config/locale/internationalize/configs/internationalize.config';
+import { _WebConfigModel } from '@lib/config/framework/web/_web.models';
+import webConfig from '@lib/config/framework/web/web';
 import { renderPage } from '@lib/framework/web/utils/renderPage/renderPage';
 import type {
   _ServerModel,
   _ServerParamsModel,
 } from '@lib/framework/web/utils/server/_server.models';
 import type { CookieOptionModel } from '@lib/frontend/state/state.models';
+import { importDynamic } from '@lib/shared/core/utils/importDynamic/importDynamic';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
 import { STATE } from '@lib/shared/state/state.constants';
@@ -19,7 +21,7 @@ import type { FastifyPluginCallback, FastifyRegisterOptions } from 'fastify';
 import { fastify } from 'fastify';
 import i18nextMiddleware from 'i18next-http-middleware';
 import toNumber from 'lodash/toNumber';
-import { join } from 'path';
+import { _internationalizeConfig } from '@lib/config/locale/internationalize/_internationalize';
 import { createServer } from 'vite';
 
 export const _server = async ({
@@ -27,25 +29,26 @@ export const _server = async ({
   port,
   root,
 }: _ServerParamsModel): Promise<_ServerModel> => {
-  const _i18n = internationalizeConfig;
+  const _i18n = await _internationalizeConfig();
   const app = fastify();
   await app.register(fastifyMiddie);
   await app.register(fastifyCompress);
   await app.register(fastifyStatic, {
-    prefix: `/${webConfigParams.publicDir}/`,
-    root: fromStatic(webConfigParams.publicDir),
+    prefix: `/${webConfig.publicDir}/`,
+    root: fromStatic(webConfig.publicDir),
   });
   await app.register(fastifyCookie, {
     secret: process.env.SERVER_APP_SECRET,
   } as FastifyCookieOptions);
 
   if (config) {
+    const _config = await importDynamic<_WebConfigModel>(fromConfig(config));
     const { middlewares } = await createServer({
-      configFile: join(root, config as string),
+      ...(await _config()) || {},
       root,
       server: { middlewareMode: true },
     });
-  
+
     app.use(middlewares);
   }
 

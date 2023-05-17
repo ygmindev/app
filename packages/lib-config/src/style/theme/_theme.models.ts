@@ -1,8 +1,7 @@
+import { ConfigStaticModel } from '@lib/config/core/core.models';
 import type { STYLE_BRIGHTNESS } from '@lib/frontend/style/style.constants';
 import type {
-  BrightnessModel,
   ThemeColorModel,
-  ThemeModel,
   ThemeRoleModel,
   ThemeSizeModel,
   ThemeSizeMoreModel,
@@ -11,7 +10,7 @@ import type { PaletteParamsModel } from '@lib/frontend/style/utils/palette/palet
 import type { FontFamilyModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
 import type { TextStyle } from 'react-native';
 
-export interface _ThemeConfigParamsModel {
+export type _ThemeConfigModel = ConfigStaticModel<{
   animation: {
     duration: number;
     transition: number;
@@ -56,6 +55,4 @@ export interface _ThemeConfigParamsModel {
     height: Record<ThemeSizeMoreModel, number>;
     spacing: Record<ThemeSizeModel, number>;
   };
-}
-
-export type _ThemeConfigModel = (brightness: BrightnessModel) => ThemeModel;
+}>;

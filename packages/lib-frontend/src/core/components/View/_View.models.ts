@@ -4,7 +4,7 @@ import type {
   PositionModel,
 } from '@lib/frontend/core/core.models';
 import type { StylePropsModel, ViewStyleModel } from '@lib/frontend/style/style.models';
-import type { CallableModel, CallablePromiseModel } from '@lib/shared/core/core.models';
+import type { CallableArgsModel, CallableArgsPromiseModel, CallableModel, CallablePromiseModel } from '@lib/shared/core/core.models';
 import type { ScrollView } from 'react-native';
 
 export interface _ViewPropsModel extends ChildrenPropsModel, StylePropsModel<ViewStyleModel> {
@@ -14,7 +14,7 @@ export interface _ViewPropsModel extends ChildrenPropsModel, StylePropsModel<Vie
   onMeasure?(measure: MeasureModel): void;
   onMouseEnter?: CallableModel;
   onMouseLeave?: CallableModel;
-  onPress?: CallablePromiseModel | CallableModel;
+  onPress?: CallableArgsPromiseModel | CallableArgsModel;
   onPressIn?: CallableModel;
   onPressOut?: CallableModel;
   onResponderGrant?: CallableModel;

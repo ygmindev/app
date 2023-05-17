@@ -1,4 +1,4 @@
-import webConfigParams from '@lib/config/framework/web/params/web.params';
+import webConfig from '@lib/config/framework/web/web';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import type { TaskParamsModel } from '@tool/task/core/core.models';
 import { runWithConfig } from '@tool/task/core/utils/runWithConfig/runWithConfig';
@@ -8,5 +8,5 @@ export const make: TaskParamsModel = {
 
   name: 'make',
 
-  task: async ({ root }) => runWithConfig({ ...webConfigParams.build, root }),
+  task: async ({ root }) => runWithConfig({ ...webConfig.build, root }),
 };

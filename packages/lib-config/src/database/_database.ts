@@ -1,6 +1,6 @@
 import type {
   _DatabaseConfigModel,
-  _DatabaseConfigParamsModel,
+  DatabaseConfigModel,
 } from '@lib/config/database/_database.models';
 import type { ReturnTypeModel } from '@lib/shared/core/core.models';
 
@@ -13,7 +13,7 @@ export const _databaseConfig =
     pool,
     type,
     username,
-  }: _DatabaseConfigParamsModel): _DatabaseConfigModel =>
+  }: ReturnTypeModel<DatabaseConfigModel>): _DatabaseConfigModel =>
   async () => {
     {
       const _config: ReturnTypeModel<_DatabaseConfigModel> = {

@@ -1,12 +1,13 @@
+import { ConfigDynamicModel, ConfigStaticModel } from '@lib/config/core/core.models';
 import type { RootContextModel } from '@lib/frontend/root/root.models';
-import type { CallablePromiseModel, DeepKeyModel } from '@lib/shared/core/core.models';
-import type { RunWithConfigParamsModel } from '@tool/task/core/utils/runWithConfig/runWithConfig.models';
+import type { DeepKeyModel } from '@lib/shared/core/core.models';
+import type { RunWithConfigStringParamsModel } from '@tool/task/core/utils/runWithConfig/runWithConfig.models';
 import type { UserConfig } from 'vite';
 
-export type _WebConfigParamsModel = {
-  build: RunWithConfigParamsModel<_WebConfigModel>;
+export type WebConfigModel = ConfigStaticModel<{
+  build: RunWithConfigStringParamsModel;
 
-  dev: RunWithConfigParamsModel<_WebConfigModel>;
+  dev: RunWithConfigStringParamsModel;
 
   isSsr?: boolean;
 
@@ -15,6 +16,6 @@ export type _WebConfigParamsModel = {
   rootId: string;
 
   ssrContextKeys?: Array<DeepKeyModel<RootContextModel>>;
-};
+}>;
 
-export type _WebConfigModel = CallablePromiseModel<UserConfig>;
+export type _WebConfigModel = ConfigDynamicModel<UserConfig>;

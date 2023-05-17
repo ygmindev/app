@@ -9,16 +9,15 @@ export interface TaskResultModel {
   status: TaskStatusModel;
 }
 
-export interface TaskParamsModel<TOptions = undefined> extends EnvironmentOverrideParamsModel {
+export interface TaskParamsModel<TType = undefined> extends EnvironmentOverrideParamsModel {
   name: string;
-  onAfter?: Array<string | CallablePromiseModel<TaskStatusModel>>;
-  onBefore?: Array<string | CallablePromiseModel<TaskStatusModel>>;
-  options?: TOptions;
+  onAfter?: Array<string | CallablePromiseModel<TaskResultModel>>;
+  onBefore?: Array<string | CallablePromiseModel<TaskResultModel>>;
+  options?: TType;
+  root?: string;
   target?: string;
-  task(context: {
-    name: string;
-    options: TOptions;
-    root: string;
-    target?: string;
-  }): Promise<TaskResultModel>;
+  task(params: TaskContextModel<TType>): Promise<TaskResultModel>;
 }
+
+export interface TaskContextModel<TType = undefined>
+  extends Pick<TaskParamsModel<TType>, 'name' | 'options' | 'root' | 'target'> {}

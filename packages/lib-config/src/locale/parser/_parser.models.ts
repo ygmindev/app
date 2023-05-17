@@ -1,6 +1,7 @@
+import { ConfigStaticModel } from '@lib/config/core/core.models';
 import type { UserConfig } from 'i18next-parser';
 
-export interface _ParserConfigParamsModel {
+export type ParserConfigParamsModel = ConfigStaticModel<{
   languages: Array<string>;
 
   missingValue: string;
@@ -8,6 +9,6 @@ export interface _ParserConfigParamsModel {
   namespaceDefault: string;
 
   outputPath: string;
-}
+}>;
 
-export type _ParserConfigModel = UserConfig;
+export type _ParserConfigModel = ConfigStaticModel<UserConfig>;

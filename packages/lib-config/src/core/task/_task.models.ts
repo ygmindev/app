@@ -1,5 +1,8 @@
-import type { CallablePromiseModel } from '@lib/shared/core/core.models';
+import { ConfigDynamicModel, ConfigStaticModel } from '@lib/config/core/core.models';
+import type { RunWithConfigStringParamsModel } from '@tool/task/core/utils/runWithConfig/runWithConfig.models';
 
-export interface _TaskConfigParamsModel {
-  tasks: Array<{ name: string; task: CallablePromiseModel }>;
-}
+export type TaskConfigModel = ConfigStaticModel<RunWithConfigStringParamsModel & {
+  taskExtension: string;
+}>;
+
+export type _TaskConfigModel = ConfigDynamicModel<void>;

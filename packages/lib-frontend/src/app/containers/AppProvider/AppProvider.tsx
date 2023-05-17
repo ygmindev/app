@@ -10,8 +10,8 @@ export const AppProvider: SFCModel<AppProviderPropsModel> = ({ children }) => {
   const actions = useActions();
 
   display.useLayoutEffect(() => {
-    const update: CallableModel = debounce({
-      callback: () => actions?.app.dimensionSet(display.getDimension()),
+    const update: CallableModel = debounce(() => actions?.app.dimensionSet(display.getDimension()),
+    {
       duration: USE_DIMENSION_DELAY,
       isLeading: true,
     });

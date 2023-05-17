@@ -1,26 +1,30 @@
-import type { _TestConfigParamsModel } from '@lib/config/node/test/_test.models';
-import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEnv';
-
-const _getTestConfigParams = async (): Promise<_TestConfigParamsModel> => await importFromEnv<_TestConfigParamsModel>(
-  '@lib/config/node/test/params/test.params',
-);
+import { importConfig } from '@lib/config/core/utils/importConfig/importConfig';
+import type { TestConfigModel } from '@lib/config/node/test/_test.models';
 
 beforeAll(async () => {
-  const _testConfigParams = await _getTestConfigParams();
-  _testConfigParams.onBeforeAll && (await _testConfigParams.onBeforeAll());
+  const { onBeforeAll } = await importConfig<TestConfigModel>(
+    '@lib/config/node/test/test',
+  );
+  onBeforeAll && (await onBeforeAll());
 });
 
 beforeEach(async () => {
-  const _testConfigParams = await _getTestConfigParams();
-  _testConfigParams.onBeforeEach && (await _testConfigParams.onBeforeEach());
+  const { onBeforeEach } = await importConfig<TestConfigModel>(
+    '@lib/config/node/test/test',
+  );
+  onBeforeEach && (await onBeforeEach());
 });
 
 afterAll(async () => {
-  const _testConfigParams = await _getTestConfigParams();
-  _testConfigParams.onBeforeAll && (await _testConfigParams.onBeforeAll());
+  const { onAfterAll } = await importConfig<TestConfigModel>(
+    '@lib/config/node/test/test',
+  );
+  onAfterAll && (await onAfterAll());
 });
 
 afterEach(async () => {
-  const _testConfigParams = await _getTestConfigParams();
-  _testConfigParams.onBeforeAll && (await _testConfigParams.onBeforeAll());
+  const { onAfterEach } = await importConfig<TestConfigModel>(
+    '@lib/config/node/test/test',
+  );
+  onAfterEach && (await onAfterEach());
 });

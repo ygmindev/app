@@ -1,3 +1,5 @@
+import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
+import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
 import type { CallablePromiseModel, ReturnTypeModel } from '@lib/shared/core/core.models';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
 import { command as _command } from '@tool/task/core/utils/command/command';
@@ -14,7 +16,7 @@ export const runWithConfig = async <TType = undefined>({
 }: RunWithConfigParamsModel<TType>): Promise<RunWithConfigModel> => {
   try {
     isString(command)
-      ? await _command({ ...params, command: `${command} ${config ? `--config=${config}` : ''}` })
+      ? await _command({ ...params, command: fromExecutable(`${command} ${config ? `--config=${fromConfig(config as string)}` : ''}`) })
       : await (command as CallablePromiseModel<void, ReturnTypeModel<TType>>)(
           config as unknown as ReturnTypeModel<TType>,
         );

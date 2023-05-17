@@ -11,9 +11,8 @@ export const importFromEnv = async <TType>(
   ...[
     name,
     extensions = [
-      `.${process.env.ENV_PLATFORM}.${process.env.NODE_ENV}`,
-      `.${process.env.ENV_PLATFORM}`,
-      `.${process.env.NODE_ENV}`,
+      process.env.ENV_PLATFORM,
+      process.env.NODE_ENV,
       '',
     ],
   ]: ImportFromEnvParamsModel
@@ -23,6 +22,13 @@ export const importFromEnv = async <TType>(
     return await resolveFirst(
       extensions.map((ext) => async () => {
         const _path = `${name}${ext ? `.${trim(ext, '.')}` : ''}`;
+        try {
+          console.warn(await import('@lib/config/node/lint/lint'));
+        }
+        catch(ee) {
+          console.warn(ee);
+        }
+        
         try {
           return await importDynamic(_path);
         } catch (e) {

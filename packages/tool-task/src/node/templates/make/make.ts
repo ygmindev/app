@@ -1,7 +1,7 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import type {
   _BundleConfigModel,
-  _BundleConfigParamsModel,
+  BundleConfigModel,
 } from '@lib/config/node/bundle/_bundle.models';
 import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEnv';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -16,7 +16,7 @@ export const make: TaskParamsModel<MakeParamsModel> = {
   environment: ENVIRONMENT.PRODUCTION,
 
   task: async ({ options, root }) => {
-    const bundleConfigParams = await importFromEnv<_BundleConfigParamsModel>(
+    const bundleConfigParams = await importFromEnv<BundleConfigModel>(
       '@lib/config/node/bundle/params/bundle.params',
     );
     const bundleConfig = await importFromEnv<_BundleConfigModel>(

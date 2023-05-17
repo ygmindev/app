@@ -19,7 +19,8 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "GitHub Dark",
+  "workbench.colorTheme": "Solarized Light",
   "workbench.iconTheme": "vs-minimal",
-  "workbench.sideBar.location": "right"
+  "workbench.sideBar.location": "right",
+  "editor.minimap.enabled": false
 }

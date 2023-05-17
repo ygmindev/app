@@ -1,7 +1,8 @@
+import { ConfigDynamicModel, ConfigStaticModel } from '@lib/config/core/core.models';
 import type { InternationalizationDetectionModel } from '@lib/frontend/locale/locale.models';
 import type { i18n, Module } from 'i18next';
 
-export type _InternationalizeConfigParamsModel = {
+export type InternationalizeConfigModel = ConfigStaticModel<{
   addPath?: string;
 
   caches?: Array<InternationalizationDetectionModel>;
@@ -23,6 +24,6 @@ export type _InternationalizeConfigParamsModel = {
   modules?: Array<Module>;
 
   namespaceDefault: string;
-};
+}>;
 
-export type _InternationalizeConfigModel = i18n;
+export type _InternationalizeConfigModel = ConfigDynamicModel<i18n>;

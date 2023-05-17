@@ -1,4 +1,4 @@
-import type { _ThemeConfigParamsModel } from '@lib/config/style/theme/_theme.models';
+import type { ThemeConfigModel } from '@lib/config/style/theme/_theme.models';
 import type {
   STYLE_BRIGHTNESS,
   THEME_COLOR,
@@ -30,8 +30,8 @@ export interface StylePropsModel<TType extends StyleModel = ViewStyleModel> {
 
 export type BrightnessModel = `${STYLE_BRIGHTNESS}`;
 
-export interface ThemeModel extends Omit<_ThemeConfigParamsModel, 'colors'> {
-  colors: Pick<_ThemeConfigParamsModel['colors'], 'activeLightness' | 'disabledOpacity'> & {
+export interface ThemeModel extends Omit<ThemeConfigModel, 'colors'> {
+  colors: Pick<ThemeConfigModel['colors'], 'activeLightness' | 'disabledOpacity'> & {
     tone: Record<ThemeColorModel, Record<ThemeRoleModel, string>>;
   };
 }
