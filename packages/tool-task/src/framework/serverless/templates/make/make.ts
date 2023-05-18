@@ -4,5 +4,5 @@ import type { TaskParamsModel } from '@tool/task/core/core.models';
 export const make: TaskParamsModel = {
   name: 'make',
 
-  task: async ({ root }) => await serverlessConfig.build.run({ root }),
+  task: async ({ root }) => await serverlessConfig.build.task({ root }),
 };

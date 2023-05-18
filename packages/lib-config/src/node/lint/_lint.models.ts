@@ -1,8 +1,9 @@
-import type { ConfigStaticModel, RunWithConfigParamsModel } from '@lib/config/core/core.models';
+import type { ConfigStaticModel } from '@lib/config/core/core.models';
+import { TaskParamsModel } from '@tool/task/core/core.models';
 import type { Linter } from 'eslint';
 
 export type LintConfigModel = ConfigStaticModel<
-  RunWithConfigParamsModel & {
+  Pick<TaskParamsModel, 'task'> & {
     include: Array<string>;
 
     indentWidth: number;

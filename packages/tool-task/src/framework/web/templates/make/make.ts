@@ -7,5 +7,5 @@ export const make: TaskParamsModel = {
 
   name: 'make',
 
-  task: async ({ root }) => await webConfig.build.run({ root }),
+  task: async ({ root }) => await webConfig.build.task({ root }),
 };

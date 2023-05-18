@@ -6,7 +6,7 @@ import { build } from 'vite';
 
 const webConfig: WebConfigModel = {
   build: {
-    run: async () => {
+    task: async () => {
       const webConfig = await _webConfig();
       await build(webConfig);
       return { status: TASK_STATUS.SUCCESS };
@@ -14,7 +14,7 @@ const webConfig: WebConfigModel = {
   },
 
   dev: {
-    run: async ({ root }) => {
+    task: async ({ root }) => {
       const port = process.env[`APP_${process.env.ENV_NAME}_PORT`] || '';
       const webConfig = await _webConfig();
       await server({ config: webConfig, port, root });

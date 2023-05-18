@@ -1,4 +1,4 @@
-import { ConfigDynamicModel, ConfigStaticModel, RunWithConfigParamsModel } from '@lib/config/core/core.models';
+import type { ConfigDynamicModel, ConfigStaticModel } from '@lib/config/core/core.models';
 import type { PlatformModel } from '@lib/shared/platform/platform.models';
 import type { UserConfig } from 'vite';
 
@@ -8,8 +8,6 @@ export type BundleConfigModel = ConfigStaticModel<{
   define?: Record<string, string>;
 
   entry?: string;
-
-  outDir?: string;
 
   envPrefix: Array<string>;
 
@@ -21,11 +19,13 @@ export type BundleConfigModel = ConfigStaticModel<{
 
   modulePaths: Array<string>;
 
+  outDir?: string;
+
   platform: PlatformModel;
 
   provide?: Record<string, string>;
 
   watch?: Array<string>;
-}>
+}>;
 
 export type _BundleConfigModel = ConfigDynamicModel<UserConfig>;

@@ -14,6 +14,6 @@ export const lint: TaskParamsModel = {
     if (typescriptResult.status === TASK_STATUS.ERROR) {
       return typescriptResult;
     }
-    return await lintConfig.run({ config: lintConfig.config, root });
+    return await lintConfig.task({ root });
   },
 };

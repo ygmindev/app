@@ -7,5 +7,5 @@ export const dev: TaskParamsModel = {
 
   name: 'dev',
 
-  task: async ({ root }) => await webConfig.dev.run({ root }),
+  task: async ({ root }) => await webConfig.dev.task({ root }),
 };
