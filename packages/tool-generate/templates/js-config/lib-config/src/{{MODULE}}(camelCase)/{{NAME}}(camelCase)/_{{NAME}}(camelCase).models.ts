@@ -1,5 +1,6 @@
-import type { {{NAME}}(pascalCase) } from '{{NAME}}(camelCase)';
+import { ConfigDynamicModel, ConfigStaticModel } from '@lib/config/core/core.models';
 
-export interface _{{NAME}}(pascalCase)ConfigParamsModel {}
+export type {{NAME}}(pascalCase)ConfigModel = ConfigStaticModel<{
+}>;
 
-export interface _{{NAME}}(pascalCase)ConfigModel extends {{NAME}}(pascalCase) {}
+export type _{{NAME}}(pascalCase)ConfigModel = ConfigDynamicModel<Config>;

@@ -20,7 +20,9 @@ describe(displayName, () => {
         />
       ),
     });
-    await waitForExpect({ callback: () => expect(await findByText('test with string')).toBeTruthy() });
+    await waitForExpect({
+      callback: () => expect(await findByText('test with string')).toBeTruthy(),
+    });
   });
 
   test('works with params', async () => {
