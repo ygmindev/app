@@ -1,6 +1,4 @@
-import type {
-  _GraphqlConfigModel,
-} from '@lib/config/graphql/_graphql.models';
+import type { _GraphqlConfigModel } from '@lib/config/graphql/_graphql.models';
 import graphqlConfig from '@lib/config/graphql/graphql';
 import type { BuildSchemaOptions, ContainerType } from 'type-graphql';
 import { buildSchemaSync } from 'type-graphql';

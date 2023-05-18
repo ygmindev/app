@@ -18,7 +18,7 @@ const { Component, displayName } = withTestComponent<MenuPropsModel>({
 
 describe(displayName, () => {
   test('works', async () => {
-    const { findByText } = render({ element: <Component /> });
+    const { findByText } = await render({ element: <Component /> });
     expect(await findByText(ANCHOR)).toBeTruthy();
   });
 });

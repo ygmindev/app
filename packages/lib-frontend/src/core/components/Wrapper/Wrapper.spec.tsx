@@ -15,14 +15,14 @@ const { Component, displayName, testID } = withTestComponent<WrapperPropsModel>(
 
 describe(displayName, () => {
   test('works', async () => {
-    const { findByTestId } = render({ element: <Component /> });
+    const { findByTestId } = await render({ element: <Component /> });
     expect(await findByTestId(testID)).toBeTruthy();
   });
 
   // test('is vertical scrollable', async () => {
   //   const POSITION: PositionModel = { x: 0, y: 50 };
   //   let position: PositionModel = { x: 0, y: 0 };
-  //   const { findByTestId } = render({
+  //   const { findByTestId } = await render({
   //     element: (
   //       <Component
   //         isVerticalScrollable
@@ -40,7 +40,7 @@ describe(displayName, () => {
   // test('is horizontal scrollable', async () => {
   //   const POSITION: PositionModel = { x: 50, y: 0 };
   //   let position: PositionModel = { x: 0, y: 0 };
-  //   const { findByTestId } = render({
+  //   const { findByTestId } = await render({
   //     element: (
   //       <Component
   //         isHorizontalScrollable

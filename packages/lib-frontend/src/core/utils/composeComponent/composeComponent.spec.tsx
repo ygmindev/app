@@ -29,7 +29,7 @@ describe(displayName, () => {
     const REF = createRef();
 
     const { Component, testID } = withTestComponent({ target: _View });
-    const { findByTestId } = render({
+    const { findByTestId } = await render({
       element: (
         <Component
           height={HEIGHT}

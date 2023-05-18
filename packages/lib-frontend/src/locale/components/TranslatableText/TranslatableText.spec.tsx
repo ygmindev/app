@@ -8,17 +8,17 @@ describe(displayName, () => {
   const TEST = 'test:labels.testWithString';
 
   test('works', async () => {
-    const { findByTestId } = render({ element: <Component /> });
+    const { findByTestId } = await render({ element: <Component /> });
     expect(await findByTestId(testID)).toBeTruthy();
   });
 
   test('works with children', async () => {
-    const { findByText } = render({ element: <Component>{TEST}</Component> });
+    const { findByText } = await render({ element: <Component>{TEST}</Component> });
     expect(await findByText('test with string')).toBeTruthy();
   });
 
   test('works with function children', async () => {
-    const { findByText } = render({ element: <Component>{({ t }) => t(TEST)}</Component> });
+    const { findByText } = await render({ element: <Component>{({ t }) => t(TEST)}</Component> });
     expect(await findByText('test with string')).toBeTruthy();
   });
 });

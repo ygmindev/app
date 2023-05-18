@@ -19,13 +19,13 @@ const { Component, displayName } = withTestComponent<DropdownPropsModel>({
 
 describe(displayName, () => {
   test('works with close', async () => {
-    const { findByText } = render({ element: <Component /> });
+    const { findByText } = await render({ element: <Component /> });
     expect(await findByText(ANCHOR)).toBeTruthy();
     await waitForExpect({ callback: () => expect(await findByText(CHILDREN)).toBeFalsy() });
   });
 
   test('works with open', async () => {
-    const { findByText } = render({ element: <Component isOpen /> });
+    const { findByText } = await render({ element: <Component isOpen /> });
     expect(await findByText(ANCHOR)).toBeTruthy();
     await waitForExpect({ callback: () => expect(await findByText(CHILDREN)).toBeTruthy() });
   });

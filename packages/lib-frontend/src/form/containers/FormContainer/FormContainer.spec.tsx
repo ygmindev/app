@@ -13,7 +13,7 @@ const { Component, displayName, testID } = withTestComponent<FormContainerPropsM
 
 describe(displayName, () => {
   test('works', async () => {
-    const { findByTestId } = render({ element: <Component /> });
+    const { findByTestId } = await render({ element: <Component /> });
     expect(await findByTestId(testID)).toBeTruthy();
   });
 });

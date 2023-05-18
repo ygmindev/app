@@ -16,7 +16,7 @@ const { Component, displayName } = withTestComponent<PortalPropsModel>({
 
 describe(displayName, () => {
   test('works', async () => {
-    const { findByText } = render({ element: <Component /> });
+    const { findByText } = await render({ element: <Component /> });
     await waitForExpect({ callback: () => expect(await findByText(CHILDREN)).toBeTruthy() });
   });
 });

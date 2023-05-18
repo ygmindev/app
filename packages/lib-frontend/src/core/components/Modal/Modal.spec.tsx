@@ -17,12 +17,12 @@ const { Component, displayName } = withTestComponent<ModalPropsModel>({
 
 describe(displayName, () => {
   test('is not open', async () => {
-    const { findByText } = render({ element: <Component /> });
+    const { findByText } = await render({ element: <Component /> });
     expect(await findByText(CHILDREN)).toBeFalsy();
   });
 
   test('is open', async () => {
-    const { findByText } = render({ element: <Component isOpen /> });
+    const { findByText } = await render({ element: <Component isOpen /> });
     await waitForExpect({ callback: () => expect(await findByText(CHILDREN)).toBeTruthy() });
   });
 });

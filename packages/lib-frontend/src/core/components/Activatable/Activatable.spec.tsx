@@ -25,7 +25,7 @@ const { Component, displayName } = withTestComponent<ActivatablePropsModel>({
 
 describe(displayName, () => {
   test('activate', async () => {
-    const { findByTestId, findByText } = render({ element: <Component /> });
+    const { findByTestId, findByText } = await render({ element: <Component /> });
     hoverIn(await findByTestId(ACTIVATE));
     await waitForExpect({ callback: () => expect(await findByText(ACTIVE)).toBeTruthy() });
   });
@@ -33,7 +33,7 @@ describe(displayName, () => {
   test('activate controlled', async () => {
     const handleActive = jest.fn();
     const handleInactive = jest.fn();
-    const { findByTestId, findByText } = render({
+    const { findByTestId, findByText } = await render({
       element: (
         <Component
           onActive={handleActive}

@@ -9,13 +9,13 @@ const { Component, displayName, testID } = withTestComponent<ButtonPropsModel>({
 
 describe(displayName, () => {
   test('works', async () => {
-    const { findByTestId } = render({ element: <Component /> });
+    const { findByTestId } = await render({ element: <Component /> });
     expect(await findByTestId(testID)).toBeTruthy();
   });
 
   test('press', async () => {
     const handlePress = jest.fn();
-    const { findByTestId } = render({ element: <Component onPress={handlePress} /> });
+    const { findByTestId } = await render({ element: <Component onPress={handlePress} /> });
     press(await findByTestId(testID));
     await waitForExpect({ callback: () => expect(handlePress).toHaveBeenCalled() });
   });
