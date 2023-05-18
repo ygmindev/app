@@ -251,7 +251,7 @@
     "@asset/static",
     "@lib/backend",
     "@lib/config",
-    "@lib/framework",
+    "@lib/platform",
     "@lib/frontend",
     "@lib/library",
     "@lib/shared",

@@ -1,4 +1,4 @@
-import webConfig from '@lib/config/framework/web/web';
+import webConfig from '@lib/config/platform/web/web';
 import type { _CssConfigModel } from '@lib/config/style/css/_css.models';
 import FontAwesome from 'react-native-vector-icons/Fonts/FontAwesome.ttf';
 import Ionicons from 'react-native-vector-icons/Fonts/Ionicons.ttf';

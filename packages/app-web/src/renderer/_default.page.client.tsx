@@ -1,4 +1,4 @@
-import { exportRendererClient } from '@lib/framework/web/exports/exportRendererClient/exportRendererClient';
+import { exportRendererClient } from '@lib/platform/web/exports/exportRendererClient/exportRendererClient';
 
 const { render } = exportRendererClient();
 

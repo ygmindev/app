@@ -23,14 +23,14 @@ const _taskConfig: _TaskConfigModel = () => {
     }).map((path) => require(path).default as TaskParamsModel),
 
     // Package tasks
-    ...packages.map((target) => {
+    ...packages.reduce((result, target) => {
       const _path = fromPackages(target, taskConfig.packageConfig as string);
       if (existsSync(_path)) {
-        const _tasks = require(_path).default as Array<TaskParamsModel<unknown>>;
-        _tasks.map((task) => ({ ...task, target }));
+        const _tasks = require(_path).default as Array<TaskParamsModel>;
+        return [...result, ..._tasks.map((task) => ({ ...task, target }))];
       }
-      return null;
-    }),
+      return result;
+    }, [] as Array<TaskParamsModel>),
 
     // All tasks
     {

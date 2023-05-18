@@ -28,8 +28,8 @@
       "@lib/config/*": [
         "packages/lib-config/src/*"
       ],
-      "@lib/framework/*": [
-        "packages/lib-framework/src/*"
+      "@lib/platform/*": [
+        "packages/lib-platform/src/*"
       ],
       "@lib/frontend/*": [
         "packages/lib-frontend/src/*"
