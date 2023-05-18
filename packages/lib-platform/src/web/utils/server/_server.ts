@@ -10,7 +10,7 @@ import { renderPage } from 'packages/lib-platform/src/web/utils/renderPage/rende
 import type {
   _ServerModel,
   _ServerParamsModel,
-} from '@lib/platformlatform/src/web/utils/server/_server.models';
+} from '@lib/platform/web/utils/server/_server.models';
 import type { CookieOptionModel } from '@lib/frontend/state/state.models';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';

@@ -12,7 +12,6 @@
     "overrideConfigFile": "packages/lib-config/src/node/lint/_lint.js",
     "useEslintrc": false
   },
-  "eslint.run": "onSave",
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -28,7 +27,7 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "GitHub Dark",
+  "workbench.colorTheme": "Quiet Light",
   "workbench.iconTheme": "vs-minimal",
   "workbench.sideBar.location": "right"
 }

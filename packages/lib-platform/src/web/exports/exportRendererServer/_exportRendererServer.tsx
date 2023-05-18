@@ -2,7 +2,7 @@ import { getLocaleStoreFromI18n } from 'packages/lib-platform/src/locale/utils/g
 import type {
   _ExportRendererServerModel,
   _ExportRendererServerParamsModel,
-} from '@lib/platformlatform/src/web/exports/exportRendererServer/_exportRendererServer.models';
+} from '@lib/platform/web/exports/exportRendererServer/_exportRendererServer.models';
 import type { FCModel } from '@lib/frontend/core/core.models';
 import type { RootContextModel } from '@lib/frontend/root/root.models';
 import { ROOT_REDUCERS } from '@lib/frontend/root/stores/rootStore.constants';

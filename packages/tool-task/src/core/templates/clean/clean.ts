@@ -7,7 +7,7 @@ export const clean: TaskParamsModel<CleanParamsModel> = {
   name: 'clean',
 
   task: async ({ options, root }) => {
-    await runClean({ patterns: options.patterns, root });
+    await runClean({ patterns: options?.patterns, root });
     return { status: TASK_STATUS.SUCCESS };
   },
 };

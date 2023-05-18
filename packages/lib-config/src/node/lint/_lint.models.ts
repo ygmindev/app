@@ -3,7 +3,7 @@ import { TaskParamsModel } from '@tool/task/core/core.models';
 import type { Linter } from 'eslint';
 
 export type LintConfigModel = ConfigStaticModel<
-  Pick<TaskParamsModel, 'task'> & {
+  Pick<TaskParamsModel<{ fix?: boolean }>, 'task'> & {
     include: Array<string>;
 
     indentWidth: number;

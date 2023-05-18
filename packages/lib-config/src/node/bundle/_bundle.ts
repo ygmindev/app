@@ -4,7 +4,7 @@ import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import _babelConfig from '@lib/config/node/babel/_babel';
 import type { _BundleConfigModel, BundleConfigModel } from '@lib/config/node/bundle/_bundle.models';
 import { _plugins } from '@lib/config/node/bundle/_plugins';
-import lintConfig from '@lib/config/node/lint/lint';
+import lintConfig, { lintCommand } from '@lib/config/node/lint/lint';
 import type { ReturnTypeModel } from '@lib/shared/core/core.models';
 import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEnv';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
@@ -94,7 +94,7 @@ const _bundleConfig: _BundleConfigModel = async () => {
       tsconfigPaths({ projects: [fromRoot('tsconfig.json')] }),
 
       checker({
-        eslint: { lintCommand: lintConfig.command.replace('--fix', '') },
+        eslint: { lintCommand: lintCommand() },
         typescript: { tsconfigPath: fromWorking('tsconfig.json') },
       }),
 
