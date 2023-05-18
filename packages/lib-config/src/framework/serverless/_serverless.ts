@@ -12,7 +12,7 @@ import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import type { AWS } from '@serverless/typescript';
 import reduce from 'lodash/reduce';
 
-export const _serverlessConfig: _ServerlessConfigModel = async () => {
+const _serverlessConfig: _ServerlessConfigModel = async () => {
   const { dev, dotenv, environment, functions, name, platform, provider, server } =
     await importConfig<ServerlessConfigModel>('framework/serverless/serverless');
   const { optimizeDeps } = await importConfig<_BundleConfigModel>('node/bundle/_bundle');
@@ -93,3 +93,5 @@ export const _serverlessConfig: _ServerlessConfigModel = async () => {
     service: name,
   };
 };
+
+export default _serverlessConfig;

@@ -1,6 +1,6 @@
 import { nodeRegister } from '../lib-shared/src/core/utils/nodeRegister/nodeRegister';
-import serverlessConfig from '../lib-config/src/framework/serverless/configs/serverless.config.node';
+import _serverlessConfig from '../lib-config/src/framework/serverless/_serverless';
 
 nodeRegister();
 
-module.exports = serverlessConfig();
+module.exports = _serverlessConfig();

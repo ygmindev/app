@@ -3,11 +3,12 @@ import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import bundleConfig from '@lib/config/node/bundle/bundle.node';
 import type { TestConfigModel } from '@lib/config/node/test/_test.models';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
+import { runCLI } from 'jest';
 
 const testConfig: TestConfigModel = {
     cachePath: fromWorking('.cache/test'),
   
-    command: 'jest --runInBand --detectOpenHandles',
+    command: async (params) => await runCLI({ ...params, runInBand: true }),
   
     config: 'node/test/configs/test.config',
   

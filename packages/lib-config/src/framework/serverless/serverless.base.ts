@@ -4,15 +4,16 @@ import type { EnvironmentModel } from '@lib/shared/environment/environment.model
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
 import { appUri } from '@lib/shared/http/utils/appUri/appUri';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
+import { command } from '@tool/task/core/utils/command/command';
 import toNumber from 'lodash/toNumber';
 
 const serverlessConfig: ServerlessConfigModel = {
   build: {
-    command: 'sls package',
+    run: async () => await command('sls package'),
   },
 
   dev: {
-    command: 'sls offline start --reloadHandler',
+    run: async () => await command('sls offline start --reloadHandler'),
 
     host: process.env.APP_SERVER_API_HOST,
 

@@ -1,7 +1,7 @@
 import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import { sequence } from '@lib/shared/core/utils/sequence/sequence';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
-import type { TaskParamsModel } from '@tool/task/core/core.models';
+import type { TaskParamsModel, TaskResultModel } from '@tool/task/core/core.models';
 import { command } from '@tool/task/core/utils/command/command';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 
@@ -19,17 +19,17 @@ const install: TaskParamsModel = {
     await sequence(
       [
         response.install &&
-          (async (): Promise<boolean> =>
-            command({ command: `yarn add ${response.install}`, root })),
+          (async () =>
+            command(`yarn add ${response.install}`, { root })),
 
         response.installDev &&
-          (async (): Promise<boolean> =>
-            command({ command: `yarn add ${response.installDev} --dev`, root })),
+          (async () =>
+            command(`yarn add ${response.installDev} --dev`, { root })),
 
         response.remove &&
-          (async (): Promise<boolean> =>
-            command({ command: `yarn remove ${response.remove}`, root })),
-      ].filter(Boolean) as Array<CallablePromiseModel<boolean>>,
+          (async () =>
+            command(`yarn remove ${response.remove}`, { root })),
+      ].filter(Boolean) as Array<CallablePromiseModel<TaskResultModel>>,
     );
     return { status: TASK_STATUS.SUCCESS };
   },

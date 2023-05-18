@@ -18,8 +18,7 @@ export const runCommands = async ({ commands }: RunCommandsParamsModel): Promise
           error(`Error: ${command}`);
           reject(false);
         };
-        _command({
-          command,
+        _command(command, {
           isSilent: true,
           onData: (message) =>
             completeMessage && message.includes(completeMessage) && _handleSuccess(),

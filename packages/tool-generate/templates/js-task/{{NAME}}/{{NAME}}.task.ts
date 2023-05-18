@@ -6,10 +6,7 @@ import type { {{NAME}}(pascalCase)ParamsModel } from '{{PATH}}/{{NAME}}/{{NAME}}
 const {{NAME}}: TaskParamsModel<{{NAME}}(pascalCase)ParamsModel> = {
   name: '{{NAME}}',
 
-  task: async ({ options, root }) => {
-    await command({ command: '', root });
-    return { status: TASK_STATUS.SUCCESS };
-  },
+  task: async ({ options, root }) => await command('', { root }),
 };
 
 export default {{NAME}}; 

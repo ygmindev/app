@@ -3,7 +3,7 @@ import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
 import { Database } from '@lib/backend/database/utils/Database/Database';
 import type { SetupConfigModel } from '@lib/config/core/setup/_setup.models';
 import { default as setupConfigBase } from '@lib/config/core/setup/setup.base';
-import { _databaseConfigMongo } from '@lib/config/database/_database.mongo';
+import _databaseConfigMongo from '@lib/config/database/_database.mongo';
 
 const setupConfig: SetupConfigModel = {
   onInitialize: async () => {

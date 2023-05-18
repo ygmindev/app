@@ -5,4 +5,4 @@ import type {
 
 export interface ServerParamsModel extends _ServerParamsModel {}
 
-export type ServerModel = _ServerModel;
+export type ServerModel = Promise<_ServerModel>;

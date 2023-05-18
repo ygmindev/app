@@ -5,7 +5,7 @@ import graphqlConfig from '@lib/config/graphql/graphql';
 import type { BuildSchemaOptions, ContainerType } from 'type-graphql';
 import { buildSchemaSync } from 'type-graphql';
 
-export const _graphqlConfig: _GraphqlConfigModel = buildSchemaSync({
+const _graphqlConfig: _GraphqlConfigModel = buildSchemaSync({
   authChecker: ({ context }, roles) => graphqlConfig.authorize({ context, roles }),
   container: graphqlConfig as unknown as ContainerType,
   emitSchemaFile: graphqlConfig.schemaPath,
@@ -15,3 +15,5 @@ export const _graphqlConfig: _GraphqlConfigModel = buildSchemaSync({
     forbidUnknownValues: false,
   },
 });
+
+export default _graphqlConfig;

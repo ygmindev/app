@@ -3,7 +3,6 @@ import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages'
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import type { BundleConfigModel } from '@lib/config/node/bundle/_bundle.models';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
-import { build } from 'vite';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
@@ -12,13 +11,6 @@ const ENV_PREFIX = ['ENV_', 'NODE_'];
 const EXTENSIONS = ['.tsx', '.ts', '.jsx', '.js', '.json', '.mjs', '.cjs'];
 
 const bundleConfig: BundleConfigModel = {
-  build: {
-    command: async (config) => {
-      const result = await build(config);
-      console.warn(result);
-    },
-  },
-
   define: {
     ...reduce(
       process.env,

@@ -1,7 +1,8 @@
-import { ConfigDynamicModel, ConfigStaticModel } from '@lib/config/core/core.models';
-import type { RunWithConfigStringParamsModel } from '@tool/task/core/utils/runWithConfig/runWithConfig.models';
+import { ConfigDynamicModel, ConfigStaticModel, RunWithConfigParamsModel } from '@lib/config/core/core.models';
 
-export type TaskConfigModel = ConfigStaticModel<RunWithConfigStringParamsModel & {
+export type TaskConfigModel = ConfigStaticModel<RunWithConfigParamsModel<{ task?: string }> & {
+  packageConfig: string;
+
   taskExtension: string;
 }>;
 

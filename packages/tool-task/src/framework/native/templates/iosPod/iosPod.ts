@@ -9,7 +9,7 @@ export const iosPod: TaskParamsModel = {
 
   task: async () => {
     await runClean({ patterns: ['Pods'], root: fromWorking('ios') });
-    await command({ command: 'pod install --repo-update', root: fromWorking('ios') });
+    await command('pod install --repo-update', { root: fromWorking('ios') });
     return { status: TASK_STATUS.SUCCESS };
   },
 };

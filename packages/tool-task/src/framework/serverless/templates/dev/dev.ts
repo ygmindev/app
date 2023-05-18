@@ -1,11 +1,10 @@
-import { _setupConfig } from '@lib/config/core/setup/_setup';
-import type { _ServerlessConfigParamsModel } from '@lib/config/framework/serverless/_serverless.models';
-import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEnv';
+import _setupConfig from '@lib/config/core/setup/_setup';
+import type { _ServerlessConfigModel } from '@lib/config/framework/serverless/_serverless.models';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
 import type { TaskParamsModel } from '@tool/task/core/core.models';
-import { runWithConfig } from '@tool/task/core/utils/runWithConfig/runWithConfig';
 import type { DevParamsModel } from '@tool/task/framework/serverless/templates/dev/dev.models';
+import serverlessConfig from '@lib/config/framework/serverless/serverless.base';
 
 export const dev: TaskParamsModel<DevParamsModel> = {
   environment: ENVIRONMENT.DEVELOPMENT,
@@ -28,11 +27,5 @@ export const dev: TaskParamsModel<DevParamsModel> = {
     },
   ],
 
-  task: async ({ root }) => {
-    const serverlessConfigParams = await importFromEnv<
-      _ServerlessConfigParamsModel
-    >('@lib/config/framework/serverless/params/serverless.params');
-
-    return await runWithConfig({ ...serverlessConfigParams.dev, root });
-  },
+  task: async ({ root }) => await serverlessConfig.dev.run({ root }),
 };

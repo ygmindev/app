@@ -4,7 +4,7 @@ import type {
 import parserConfig from '@lib/config/locale/parser/parser';
 import { join } from 'path';
 
-export const _parserConfig: _ParserConfigModel = {
+const _parserConfig: _ParserConfigModel = {
   createOldCatalogs: false,
 
   defaultNamespace: parserConfig.namespaceDefault,
@@ -19,3 +19,5 @@ export const _parserConfig: _ParserConfigModel = {
 
   verbose: true,
 };
+
+export default _parserConfig;

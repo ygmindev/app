@@ -1,7 +1,7 @@
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { packages } from '@lib/backend/file/utils/packages/packages';
-import type { _TaskConfigModel, TaskConfigModel } from '@lib/config/core/task/_task.models';
+import type { _TaskConfigModel } from '@lib/config/core/task/_task.models';
 import taskConfig from '@lib/config/core/task/task';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import type { TaskParamsModel } from '@tool/task/core/core.models';
@@ -13,7 +13,7 @@ import { existsSync } from 'fs';
 import { task as register } from 'gulp';
 import kebabCase from 'lodash/kebabCase';
 
-export const _taskConfig: _TaskConfigModel = () => {
+const _taskConfig: _TaskConfigModel = () => {
   const _tasks = [
     // Task files
     ...fromGlobs({
@@ -66,3 +66,5 @@ export const _taskConfig: _TaskConfigModel = () => {
     );
   });
 };
+
+export default _taskConfig;

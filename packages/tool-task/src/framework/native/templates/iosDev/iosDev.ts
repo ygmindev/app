@@ -10,7 +10,7 @@ export const iosDev: TaskParamsModel = {
   name: 'iosDev',
 
   task: async ({ root }) => {
-    await command({ command: fromExecutable('react-native run-ios'), root });
+    await command(fromExecutable('react-native run-ios'), { root });
     return { status: TASK_STATUS.SUCCESS };
   },
 };

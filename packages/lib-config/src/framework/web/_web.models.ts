@@ -1,13 +1,12 @@
-import { ConfigDynamicModel, ConfigStaticModel } from '@lib/config/core/core.models';
+import { ConfigDynamicModel, ConfigStaticModel, RunWithConfigParamsModel } from '@lib/config/core/core.models';
 import type { RootContextModel } from '@lib/frontend/root/root.models';
 import type { DeepKeyModel } from '@lib/shared/core/core.models';
-import type { RunWithConfigStringParamsModel } from '@tool/task/core/utils/runWithConfig/runWithConfig.models';
 import type { UserConfig } from 'vite';
 
 export type WebConfigModel = ConfigStaticModel<{
-  build: RunWithConfigStringParamsModel;
+  build: RunWithConfigParamsModel;
 
-  dev: RunWithConfigStringParamsModel;
+  dev: RunWithConfigParamsModel;
 
   isSsr?: boolean;
 

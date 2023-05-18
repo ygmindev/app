@@ -12,7 +12,7 @@ const test: TaskParamsModel<RunAllParamsModel> = {
   onAfter: [
     async () => {
       await setup.terminate();
-      return TASK_STATUS.SUCCESS;
+      return { status: TASK_STATUS.SUCCESS };
     },
   ],
 

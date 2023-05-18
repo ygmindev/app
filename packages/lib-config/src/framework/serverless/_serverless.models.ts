@@ -1,20 +1,19 @@
 import type { ServerlessProviderModel } from '@lib/backend/serverless/serverless.models';
-import { ConfigDynamicModel, ConfigStaticModel } from '@lib/config/core/core.models';
+import { ConfigDynamicModel, ConfigStaticModel, RunWithConfigParamsModel } from '@lib/config/core/core.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
 import type { EnvironmentModel } from '@lib/shared/environment/environment.models';
 import type { HttpMethodModel } from '@lib/shared/http/http.models';
 import type { UriParamsModel } from '@lib/shared/http/utils/uri/uri.models';
 import type { PlatformModel } from '@lib/shared/platform/platform.models';
 import type { AWS } from '@serverless/typescript';
-import type { RunWithConfigStringParamsModel } from '@tool/task/core/utils/runWithConfig/runWithConfig.models';
 
 export type ServerlessConfigModel = ConfigStaticModel<{
-  build: RunWithConfigStringParamsModel;
+  build: RunWithConfigParamsModel;
 
   dev: {
     lambdaPort: number;
   } & Pick<UriParamsModel, 'host' | 'port'> &
-    RunWithConfigStringParamsModel;
+    RunWithConfigParamsModel;
 
   dotenv: CallableModel;
 

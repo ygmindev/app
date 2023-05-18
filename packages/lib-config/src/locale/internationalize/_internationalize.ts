@@ -5,7 +5,7 @@ import type {
 } from '@lib/config/locale/internationalize/_internationalize.models';
 import i18next, { init, use } from 'i18next';
 
-export const _internationalizeConfig: _InternationalizeConfigModel = async () => {
+const _internationalizeConfig: _InternationalizeConfigModel = async () => {
   const {
     addPath,
     caches,
@@ -60,3 +60,5 @@ export const _internationalizeConfig: _InternationalizeConfigModel = async () =>
 
   return i18next;
 };
+
+export default _internationalizeConfig;

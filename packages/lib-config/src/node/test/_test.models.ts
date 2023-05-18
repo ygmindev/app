@@ -1,9 +1,8 @@
 import type { Config } from '@jest/types';
-import { ConfigStaticModel } from '@lib/config/core/core.models';
+import { ConfigStaticModel, RunWithConfigParamsModel } from '@lib/config/core/core.models';
 import type { CallableModel, CallablePromiseModel } from '@lib/shared/core/core.models';
-import type { RunWithConfigStringParamsModel } from '@tool/task/core/utils/runWithConfig/runWithConfig.models';
 
-export type TestConfigModel = ConfigStaticModel<RunWithConfigStringParamsModel & {
+export type TestConfigModel = ConfigStaticModel<RunWithConfigParamsModel & {
   cachePath: string;
 
   coverageOutputPath: string;

@@ -4,7 +4,7 @@ import type {
 } from '@lib/config/database/_database.models';
 import type { ReturnTypeModel } from '@lib/shared/core/core.models';
 
-export const _databaseConfig =
+const _databaseConfig =
   ({
     database,
     entities,
@@ -32,3 +32,5 @@ export const _databaseConfig =
       return _config;
     }
   };
+
+export default _databaseConfig;

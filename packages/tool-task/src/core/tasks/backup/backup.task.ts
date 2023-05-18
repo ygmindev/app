@@ -15,7 +15,7 @@ const backup: TaskParamsModel<BackupParamsModel> = {
   name: 'backup',
 
   task: async ({ options, root }) => {
-    const { excludes, includes, name } = options;
+    const { excludes, includes, name } = options || {};
     const _name = name || (await prompt([{ key: 'name' }])).name;
     const _includes = includes || [fromRoot('*')];
     const _excludes = excludes || EXCLUDE_PATTERNS;
@@ -25,12 +25,11 @@ const backup: TaskParamsModel<BackupParamsModel> = {
         dateTimeFormat({ format: DATE_TIME_FORMAT_TYPE.DATE_TIME_MINUTES }),
       )}`,
     );
-    await command({
-      command: `mkdir -p backups && mkdir -p ${dest} && rsync -r ${_includes.join(' ')}  ${_excludes
+    await command(
+      `mkdir -p backups && mkdir -p ${dest} && rsync -r ${_includes.join(' ')}  ${_excludes
         .map((pattern) => `--exclude '${pattern.replace('**/', '')}'`)
         .join(' ')} ${dest}`,
-      root: fromRoot(),
-    });
+    );
     process.chdir(root || fromRoot());
     return { status: TASK_STATUS.SUCCESS };
   },

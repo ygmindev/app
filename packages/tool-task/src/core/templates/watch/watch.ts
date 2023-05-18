@@ -24,7 +24,7 @@ export const watch: TaskParamsModel<WatchParamsModel> = {
       .filter(Boolean)
       .join(' ');
 
-    await command({ command: `${fromExecutable('nodemon')} ${params}`, root });
+    await command(`${fromExecutable('nodemon')} ${params}`, { root });
     return { status: TASK_STATUS.SUCCESS };
   },
 };

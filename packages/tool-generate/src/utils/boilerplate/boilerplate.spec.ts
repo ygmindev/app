@@ -1,6 +1,6 @@
 import { children } from '@lib/backend/file/utils/children/children';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { _generateConfig } from '@lib/config/core/generate/_generate';
+import _generateConfig from '@lib/config/core/generate/_generate';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { boilerplate } from '@tool/generate/utils/boilerplate/boilerplate';
@@ -14,12 +14,11 @@ describe(displayName, () => {
   });
 
   test('works', async () => {
-    const generateConfig = await _generateConfig();
     const templatesDir = fromPackages('tool-generate/templates');
     children({ from: templatesDir, isDirectory: true }).map(({ name }) => name);
 
     const template = 'js-function';
-    const { onSuccess, output, prepare } = generateConfig[template] || {};
+    const { onSuccess, output, prepare } = _generateConfig[template] || {};
     const params = merge<BoilerplateParamsModel>([
       { onSuccess, output, template },
       prepare ? await prepare() : {},

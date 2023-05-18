@@ -10,7 +10,7 @@ export const dev: TaskParamsModel = {
   name: 'dev',
 
   task: async ({ root }) => {
-    await command({ command: fromExecutable('react-native webpack-start'), root });
+    await command(fromExecutable('react-native webpack-start'), { root });
     return { status: TASK_STATUS.SUCCESS };
   },
 };

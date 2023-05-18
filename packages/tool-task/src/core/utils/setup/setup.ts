@@ -1,6 +1,6 @@
 import type { _SetupConfigModel } from '@lib/config/core/setup/_setup.models';
 import type { SetupModel } from '@tool/task/core/utils/setup/setup.models';
-import { _setupConfig } from '@lib/config/core/setup/_setup';
+import _setupConfig from '@lib/config/core/setup/_setup';
 
 let _isInitialized = false;
 

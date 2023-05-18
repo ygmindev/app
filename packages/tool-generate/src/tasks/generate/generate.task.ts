@@ -1,6 +1,6 @@
 import { children } from '@lib/backend/file/utils/children/children';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { _generateConfig } from '@lib/config/core/generate/_generate';
+import _generateConfig from '@lib/config/core/generate/_generate';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import type { GenerateParamsModel } from '@tool/generate/tasks/generate/generate.models';
 import { boilerplate } from '@tool/generate/utils/boilerplate/boilerplate';

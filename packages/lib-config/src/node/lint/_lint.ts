@@ -1,7 +1,7 @@
 import type { _LintConfigModel } from '@lib/config/node/lint/_lint.models';
 import lintConfig from '@lib/config/node/lint/lint';
 
-export const _lintConfig: _LintConfigModel = {
+const _lintConfig: _LintConfigModel = {
   env: {
     browser: true,
     es6: true,
@@ -79,3 +79,5 @@ export const _lintConfig: _LintConfigModel = {
     },
   },
 };
+
+export default _lintConfig;

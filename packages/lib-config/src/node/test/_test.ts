@@ -2,20 +2,20 @@ import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { importConfig } from '@lib/config/core/utils/importConfig/importConfig';
-import { _babelConfig } from '@lib/config/node/babel/_babel';
+import _babelConfig from '@lib/config/node/babel/_babel';
 import type { _BabelConfigModel } from '@lib/config/node/babel/_babel.models';
 import type { BundleConfigModel } from '@lib/config/node/bundle/_bundle.models';
 import type {
   _TestConfigModel,
   TestConfigModel,
 } from '@lib/config/node/test/_test.models';
-import { compilerOptions } from '@lib/config/node/typescript/configs/tsconfig.paths.json';
+import { compilerOptions } from '@lib/config/node/typescript/tsconfig.paths.json';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { mapKeys, reduce, trim, trimStart } from 'lodash';
 import { join } from 'path';
 import { pathsToModuleNameMapper } from 'ts-jest';
 
-export const _testConfig: _TestConfigModel =
+const _testConfig: _TestConfigModel =
   async () => {
     const {
       cachePath,
@@ -104,3 +104,5 @@ export const _testConfig: _TestConfigModel =
       watch: isWatch,
     };
   };
+
+export default _testConfig;
