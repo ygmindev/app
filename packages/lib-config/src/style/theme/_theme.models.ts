@@ -10,7 +10,7 @@ import type { PaletteParamsModel } from '@lib/frontend/style/utils/palette/palet
 import type { FontFamilyModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
 import type { TextStyle } from 'react-native';
 
-export type _ThemeConfigModel = ConfigStaticModel<{
+export type ThemeConfigModel = ConfigStaticModel<{
   animation: {
     duration: number;
     transition: number;
@@ -56,3 +56,5 @@ export type _ThemeConfigModel = ConfigStaticModel<{
     spacing: Record<ThemeSizeModel, number>;
   };
 }>;
+
+export type _ThemeConfigModel = ThemeConfigModel;

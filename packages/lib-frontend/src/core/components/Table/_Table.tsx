@@ -1,7 +1,7 @@
 import 'ag-grid-community/styles/ag-grid.min.css';
 import 'ag-grid-community/styles/ag-theme-material.min.css';
 
-import { AG_GRID_THEME } from '@lib/config/style/sheet/configs/sheet.config.ag-grid';
+import { AG_GRID_THEME } from '@lib/config/style/css/css.ag-grid';
 import type { _TablePropsModel } from '@lib/frontend/core/components/Table/_Table.models';
 import {
   COLUMN_SORT_TYPE,

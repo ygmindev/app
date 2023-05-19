@@ -59,6 +59,7 @@ export const runTask = async <TType = undefined>({
 
   try {
     const { status, message } = await task({
+      name,
       options: (options || {}) as TType,
       root: _root,
       target: target,
@@ -81,7 +82,7 @@ export const runTask = async <TType = undefined>({
       }
     }
   } catch (e) {
-    error(`$[{name}] failed: ${(e as Error).stack}`);
+    error(`[${name}] failed: ${(e as Error).stack}`);
     return false;
   }
 };

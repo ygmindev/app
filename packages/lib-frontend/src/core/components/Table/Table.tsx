@@ -1,4 +1,4 @@
-import cssConfig from '@lib/config/style/css/configs/css.config.ag-grid';
+import cssConfig from '@lib/config/style/css/css.ag-grid';
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Skeleton } from '@lib/frontend/animation/components/Skeleton/Skeleton';
 import { _Table } from '@lib/frontend/core/components/Table/_Table';

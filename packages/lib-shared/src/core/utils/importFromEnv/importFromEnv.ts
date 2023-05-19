@@ -23,13 +23,6 @@ export const importFromEnv = async <TType>(
       extensions.map((ext) => async () => {
         const _path = `${name}${ext ? `.${trim(ext, '.')}` : ''}`;
         try {
-          console.warn(await import('@lib/config/node/lint/lint'));
-        }
-        catch(ee) {
-          console.warn(ee);
-        }
-        
-        try {
           return await importDynamic(_path);
         } catch (e) {
           _result.push(_path);

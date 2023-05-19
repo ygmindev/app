@@ -39,7 +39,10 @@ export interface RefPropsModel<TType = unknown> {
   ref?: Ref<TType>;
 }
 
-export interface ChildrenPropsModel<TType = ReactNode | Array<ReactNode>> {
+export interface ChildrenPropsModel<TType = ReactNode | Array<ReactNode>>
+  extends ChildPropsModel<TType> {}
+
+export interface ChildPropsModel<TType = ReactNode> {
   children?: TType;
 }
 

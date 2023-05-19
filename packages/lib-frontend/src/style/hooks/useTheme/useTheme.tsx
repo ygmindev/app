@@ -1,4 +1,4 @@
-import { _themeConfig } from '@lib/config/style/theme/_theme';
+import _themeConfig from '@lib/config/style/theme/_theme';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import type { UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
 import type { ThemeColorModel, ThemeModel } from '@lib/frontend/style/style.models';
@@ -7,20 +7,19 @@ import { useMemo } from 'react';
 
 export const useTheme = (): UseThemeModel => {
   const brightness = useStore((state) => state.style.brightness);
-  const themeConfig = await _themeConfig();
   return useMemo<UseThemeModel>(
     () => ({
-      ...themeConfig,
+      ..._themeConfig,
       colors: {
-        activeLightness: themeConfig.colors.activeLightness,
+        activeLightness: _themeConfig.colors.activeLightness,
 
-        disabledOpacity: themeConfig.colors.disabledOpacity,
+        disabledOpacity: _themeConfig.colors.disabledOpacity,
 
-        tone: (Object.keys(themeConfig.colors.tone) as Array<ThemeColorModel>).reduce(
+        tone: (Object.keys(_themeConfig.colors.tone) as Array<ThemeColorModel>).reduce(
           (result, key) => {
-            const color = themeConfig.colors.tone[key] as ThemeColorModel;
+            const color = _themeConfig.colors.tone[key] as ThemeColorModel;
             const _palette =
-              themeConfig.colors.palette[brightness][key === 'neutral' ? 'neutral' : 'theme'];
+              _themeConfig.colors.palette[brightness][key === 'neutral' ? 'neutral' : 'theme'];
             return {
               ...result,
               [key]: {
@@ -35,6 +34,6 @@ export const useTheme = (): UseThemeModel => {
         ),
       },
     }),
-    [themeConfig, brightness],
+    [_themeConfig, brightness],
   );
 };

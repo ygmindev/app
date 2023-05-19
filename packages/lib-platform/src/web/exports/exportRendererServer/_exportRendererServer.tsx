@@ -14,6 +14,7 @@ import { STATE } from '@lib/shared/state/state.constants';
 import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
 import { AppRegistry } from 'react-native-web';
 import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vite-plugin-ssr/server';
+import _internationalizeConfig from '@lib/config/locale/internationalize/_internationalize';
 
 export const _exportRendererServer = ({
   publicDir,
@@ -65,10 +66,12 @@ export const _exportRendererServer = ({
       documentHtml,
 
       pageContext: async () => {
+        const _i18n = context?.locale?.i18n || await _internationalizeConfig();
         const _pageContext: RootContextModel = {
           ...context,
           [LOCALE]: {
-            store: context?.locale?.i18n && getLocaleStoreFromI18n({ i18n: context.locale.i18n }),
+            i18n: _i18n,
+            store: getLocaleStoreFromI18n({ i18n: _i18n }),
           },
         };
         return {

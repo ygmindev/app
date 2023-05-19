@@ -17,6 +17,6 @@ describe(displayName, () => {
     const handlePress = jest.fn();
     const { findByTestId } = await render({ element: <Component onPress={handlePress} /> });
     press(await findByTestId(testID));
-    await waitForExpect({ callback: () => expect(handlePress).toHaveBeenCalled() });
+    await waitForExpect(async () => expect(handlePress).toHaveBeenCalled());
   });
 });

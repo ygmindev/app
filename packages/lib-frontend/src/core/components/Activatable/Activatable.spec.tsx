@@ -14,10 +14,7 @@ const INACTIVE = 'INACTIVE';
 const { Component, displayName } = withTestComponent<ActivatablePropsModel>({
   defaultProps: {
     children: (isActive) => (
-      <WrapperFixture
-        testID={ACTIVATE}
-        text={isActive ? ACTIVE : INACTIVE}
-      />
+      <WrapperFixture testID={ACTIVATE}>{isActive ? ACTIVE : INACTIVE}</WrapperFixture>
     ),
   },
   target: Activatable,
@@ -27,7 +24,7 @@ describe(displayName, () => {
   test('activate', async () => {
     const { findByTestId, findByText } = await render({ element: <Component /> });
     hoverIn(await findByTestId(ACTIVATE));
-    await waitForExpect({ callback: () => expect(await findByText(ACTIVE)).toBeTruthy() });
+    await waitForExpect(async () => expect(await findByText(ACTIVE)).toBeTruthy());
   });
 
   test('activate controlled', async () => {
@@ -42,8 +39,8 @@ describe(displayName, () => {
       ),
     });
     hoverIn(await findByTestId(ACTIVATE));
-    await waitForExpect({ callback: () => expect(await findByText(ACTIVE)).toBeTruthy() });
+    await waitForExpect(async () => expect(await findByText(ACTIVE)).toBeTruthy());
     hoverOut(await findByTestId(ACTIVATE));
-    await waitForExpect({ callback: () => expect(handleInactive).toHaveBeenCalled() });
+    await waitForExpect(async () => expect(handleInactive).toHaveBeenCalled());
   });
 });

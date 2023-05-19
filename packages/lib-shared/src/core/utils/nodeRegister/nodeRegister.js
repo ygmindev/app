@@ -1,6 +1,6 @@
 require('tsconfig-paths').register({ addMatchAll: false });
 
-module.exports.nodeRegister = ({ module = 'nodenext' } = {}) => {
+module.exports.nodeRegister = ({ module = 'commonjs' } = {}) => {
   require('ts-node').register({
     compilerOptions: { module, types: [] },
     esm: true,

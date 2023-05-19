@@ -33,8 +33,8 @@ import {
   PURGE,
   REGISTER,
   REHYDRATE,
+  getStoredState,
 } from 'redux-persist';
-import getStoredState from 'redux-persist/es/getStoredState';
 
 // TODO: fix when upgrade https://github.com/reduxjs/redux-toolkit/issues/1960
 // import { configureStore, createSlice } from '@reduxjs/toolkit';

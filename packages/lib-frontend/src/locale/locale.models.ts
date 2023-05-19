@@ -10,7 +10,7 @@ export type TranslatableTextModel = string | ((params: UseTranslationModel) => s
 export type LocaleStoreModel = Record<string, Record<string, object>>;
 
 export interface LocaleContextModel {
-  i18n?: i18n;
+  i18n: i18n;
   lang?: string;
   store?: LocaleStoreModel;
 }

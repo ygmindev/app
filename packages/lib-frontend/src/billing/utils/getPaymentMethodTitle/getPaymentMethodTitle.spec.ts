@@ -5,7 +5,7 @@ const { displayName } = withTest({ getPaymentMethodTitle });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await getPaymentMethodTitle({});
+    const result = getPaymentMethodTitle({});
     expect(result).toStrictEqual({});
   });
 });

@@ -13,7 +13,7 @@ export const LocaleProvider: SFCModel<LocaleProviderPropsModel> = ({ children })
   useAsync(
     {
       onMount: async (isMounted) => {
-        _timezoneIsAutomatic && isMounted() && actions?.locale.timezoneSet(currentTimezone());
+        isMounted() && _timezoneIsAutomatic && actions?.locale.timezoneSet(currentTimezone());
       },
     },
     [_timezoneIsAutomatic],

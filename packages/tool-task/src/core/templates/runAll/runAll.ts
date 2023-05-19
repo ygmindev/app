@@ -9,14 +9,14 @@ import isString from 'lodash/isString';
 export const runAll: TaskParamsModel<RunAllParamsModel> = {
   name: 'runAll',
 
-  task: async ({ name, options }) => {
+  task: async ({ name, options = {} }) => {
     const _registry = taskRegistry();
     const { isParallel, patterns } = options;
     const tasks = filter(
       _registry,
       (_v, k) =>
         k !== name &&
-        patterns.some((pattern) =>
+        patterns?.some((pattern) =>
           isString(pattern) ? pattern === k : (pattern as RegExp).test(k),
         ),
     );

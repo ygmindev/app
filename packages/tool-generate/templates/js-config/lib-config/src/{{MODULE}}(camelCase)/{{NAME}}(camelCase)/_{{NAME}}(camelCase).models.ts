@@ -1,4 +1,4 @@
-import { ConfigDynamicModel, ConfigStaticModel } from '@lib/config/core/core.models';
+import type { ConfigDynamicModel, ConfigStaticModel } from '@lib/config/core/core.models';
 
 export type {{NAME}}(pascalCase)ConfigModel = ConfigStaticModel<{
 }>;

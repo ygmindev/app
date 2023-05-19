@@ -4,6 +4,8 @@ import type { LibraryPropsModel } from '@lib/library/core/components/Library/Lib
 
 export const props: LibraryPropsModel<RadioFieldPropsModel> = {
   Component: RadioField,
-  defaultProps: {},
+  defaultProps: {
+    options: [],
+  },
   variants: [],
 };

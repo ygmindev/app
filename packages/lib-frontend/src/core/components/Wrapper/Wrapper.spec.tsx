@@ -34,7 +34,7 @@ describe(displayName, () => {
   //   });
   //   const element = await findByTestId(testID);
   //   scroll({ element, position: POSITION });
-  //   await waitForExpect({ callback: () => expect(position.y).toBe(POSITION.y) });
+  //   await waitForExpect(async () => expect(position.y).toBe(POSITION.y) );
   // });
 
   // test('is horizontal scrollable', async () => {
@@ -52,6 +52,6 @@ describe(displayName, () => {
   //   });
   //   const element = await findByTestId(testID);
   //   scroll({ element, position: POSITION });
-  //   await waitForExpect({ callback: () => expect(position.x).toBe(POSITION.x) });
+  //   await waitForExpect(async () => expect(position.x).toBe(POSITION.x) );
   // });
 });

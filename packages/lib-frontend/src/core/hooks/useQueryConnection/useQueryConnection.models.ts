@@ -9,6 +9,8 @@ export interface QueryConnectionModel<TType> {
 }
 
 export interface UseQueryConnectionParamsModel<TType>
-  extends _UseQueryConnectionParamsModel<TType> {}
+  extends Omit<_UseQueryConnectionParamsModel<TType>, 'cache'> {
+  cache?: number | boolean;
+}
 
 export interface UseQueryConnectionModel<TType> extends _UseQueryConnectionModel<TType> {}

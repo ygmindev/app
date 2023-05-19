@@ -10,8 +10,8 @@ const CHILDREN = 'CHILDREN';
 
 const { Component, displayName } = withTestComponent<DropdownPropsModel>({
   defaultProps: {
-    anchor: <WrapperFixture text={ANCHOR} />,
-    children: <WrapperFixture text={CHILDREN} />,
+    anchor: <WrapperFixture>{ANCHOR}</WrapperFixture>,
+    children: <WrapperFixture>{CHILDREN}</WrapperFixture>,
     isOpen: false,
   },
   target: Dropdown,
@@ -21,12 +21,12 @@ describe(displayName, () => {
   test('works with close', async () => {
     const { findByText } = await render({ element: <Component /> });
     expect(await findByText(ANCHOR)).toBeTruthy();
-    await waitForExpect({ callback: () => expect(await findByText(CHILDREN)).toBeFalsy() });
+    await waitForExpect(async () => expect(await findByText(CHILDREN)).toBeFalsy());
   });
 
   test('works with open', async () => {
     const { findByText } = await render({ element: <Component isOpen /> });
     expect(await findByText(ANCHOR)).toBeTruthy();
-    await waitForExpect({ callback: () => expect(await findByText(CHILDREN)).toBeTruthy() });
+    await waitForExpect(async () => expect(await findByText(CHILDREN)).toBeTruthy());
   });
 });

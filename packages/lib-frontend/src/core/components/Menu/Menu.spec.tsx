@@ -10,7 +10,7 @@ const OPTIONS: Array<OptionModel> = [];
 
 const { Component, displayName } = withTestComponent<MenuPropsModel>({
   defaultProps: {
-    anchor: () => <WrapperFixture text={ANCHOR} />,
+    anchor: () => <WrapperFixture>{ANCHOR}</WrapperFixture>,
     options: OPTIONS,
   },
   target: Menu,

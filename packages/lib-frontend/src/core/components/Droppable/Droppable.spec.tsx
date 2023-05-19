@@ -9,7 +9,7 @@ const INACTIVE = 'INACTIVE';
 
 const { Component, displayName, testID } = withTestComponent<DroppablePropsModel>({
   defaultProps: {
-    anchor: (isActive) => <WrapperFixture text={isActive ? ACTIVE : INACTIVE} />,
+    anchor: (isActive) => <WrapperFixture>{isActive ? ACTIVE : INACTIVE}</WrapperFixture>,
   },
   target: Droppable,
 });

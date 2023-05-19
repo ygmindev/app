@@ -9,7 +9,7 @@ const CHILDREN = 'CHILDREN';
 
 const { Component, displayName } = withTestComponent<ModalPropsModel>({
   defaultProps: {
-    children: <WrapperFixture text={CHILDREN} />,
+    children: <WrapperFixture>{CHILDREN}</WrapperFixture>,
     isOpen: false,
   },
   target: Modal,
@@ -23,6 +23,6 @@ describe(displayName, () => {
 
   test('is open', async () => {
     const { findByText } = await render({ element: <Component isOpen /> });
-    await waitForExpect({ callback: () => expect(await findByText(CHILDREN)).toBeTruthy() });
+    await waitForExpect(async () => expect(await findByText(CHILDREN)).toBeTruthy());
   });
 });
