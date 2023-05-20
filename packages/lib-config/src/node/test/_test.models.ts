@@ -1,9 +1,9 @@
 import type { Config } from '@jest/types';
-import { ConfigStaticModel } from '@lib/config/core/core.models';
+import { ConfigDynamicModel, ConfigStaticModel } from '@lib/config/core/core.models';
 import type { CallableModel, CallablePromiseModel } from '@lib/shared/core/core.models';
 import { TaskParamsModel } from '@tool/task/core/core.models';
 
-export type TestConfigModel = ConfigStaticModel<Pick<TaskParamsModel, 'task'> & {
+export type TestConfigModel = ConfigDynamicModel<Pick<TaskParamsModel, 'task'> & {
   cachePath: string;
 
   coverageOutputPath: string;
@@ -33,4 +33,4 @@ export type TestConfigModel = ConfigStaticModel<Pick<TaskParamsModel, 'task'> & 
   timeout: number;
 }>;
 
-export type _TestConfigModel = CallablePromiseModel<Config.InitialOptions>;
+export type _TestConfigModel = ConfigDynamicModel<Config.InitialOptions>;

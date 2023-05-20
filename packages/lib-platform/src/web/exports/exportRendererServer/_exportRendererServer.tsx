@@ -1,20 +1,20 @@
-import { getLocaleStoreFromI18n } from 'packages/lib-platform/src/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
-import type {
-  _ExportRendererServerModel,
-  _ExportRendererServerParamsModel,
-} from '@lib/platform/web/exports/exportRendererServer/_exportRendererServer.models';
+import _internationalizeConfig from '@lib/config/locale/internationalize/_internationalize';
 import type { FCModel } from '@lib/frontend/core/core.models';
 import type { RootContextModel } from '@lib/frontend/root/root.models';
 import { ROOT_REDUCERS } from '@lib/frontend/root/stores/rootStore.constants';
 import type { RootStateContextModel } from '@lib/frontend/root/stores/rootStore.models';
 import { Store } from '@lib/frontend/state/utils/Store/Store';
+import type {
+  _ExportRendererServerModel,
+  _ExportRendererServerParamsModel,
+} from '@lib/platform/web/exports/exportRendererServer/_exportRendererServer.models';
 import { pick } from '@lib/shared/core/utils/pick/pick';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { STATE } from '@lib/shared/state/state.constants';
+import { getLocaleStoreFromI18n } from 'packages/lib-platform/src/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
 import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
 import { AppRegistry } from 'react-native-web';
 import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vite-plugin-ssr/server';
-import _internationalizeConfig from '@lib/config/locale/internationalize/_internationalize';
 
 export const _exportRendererServer = ({
   publicDir,
@@ -66,7 +66,7 @@ export const _exportRendererServer = ({
       documentHtml,
 
       pageContext: async () => {
-        const _i18n = context?.locale?.i18n || await _internationalizeConfig();
+        const _i18n = context?.locale?.i18n || (await _internationalizeConfig());
         const _pageContext: RootContextModel = {
           ...context,
           [LOCALE]: {

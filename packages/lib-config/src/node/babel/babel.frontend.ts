@@ -9,7 +9,7 @@ const babelConfig: BabelConfigModel = merge(
       plugins: [['transform-react-remove-prop-types', { removeImport: true }]],
 
       presets: [
-        'module:metro-react-native-babel-preset',
+        // 'module:metro-react-native-babel-preset',
         ['@babel/preset-react', { runtime: 'automatic' }],
       ],
     },

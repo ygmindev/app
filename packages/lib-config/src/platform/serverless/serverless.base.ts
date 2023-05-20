@@ -9,7 +9,7 @@ import toNumber from 'lodash/toNumber';
 
 const serverlessConfig: ServerlessConfigModel = {
   build: {
-    task: async () => await command('sls package'),
+    task: async ({ root }) => await command('sls package', { root }),
   },
 
   dev: {
@@ -19,7 +19,7 @@ const serverlessConfig: ServerlessConfigModel = {
 
     port: toNumber(process.env.APP_SERVER_API_PORT),
 
-    task: async () => await command('sls offline start --reloadHandler'),
+    task: async ({ root }) => await command('sls offline start --reloadHandler', { root }),
   },
 
   dotenv: () => setEnvironment(),

@@ -1,28 +1,10 @@
 import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
-import type { RenameParamsModel } from '@tool/task/core/utils/rename/rename.models';
 
-export const NODE_POST_INSTALL_RENAMES: Array<RenameParamsModel> = [
-  {
-    from: 'createAnimatableComponent.js',
-    path: fromModules('react-native-animatable'),
-    to: 'createAnimatableComponent.jsx',
-  },
-
-  {
-    from: 'createAnimatedComponent.js',
-    path: fromModules('react-native-reanimated/lib'),
-    to: 'createAnimatedComponent.jsx',
-  },
-
-  {
-    from: 'create-icon-set.js',
-    path: fromModules('react-native-vector-icons/lib'),
-    to: 'create-icon-set.jsx',
-  },
-
-  {
-    from: 'icon-button.js',
-    path: fromModules('react-native-vector-icons/lib'),
-    to: 'icon-button.jsx',
-  },
+export const NODE_POST_INSTALL_JS_TO_JSX: Array<string> = [
+  fromModules('react-native-animatable/createAnimatableComponent.js'),
+  fromModules('react-native-reanimated/lib/createAnimatedComponent.js'),
+  fromModules('react-native-vector-icons/lib/create-icon-set.js'),
+  fromModules('react-native-vector-icons/lib/icon-button.js'),
+  fromModules('moti/build/core/use-motify.js'),
+  fromModules('moti/src/core/use-motify.ts'),
 ];

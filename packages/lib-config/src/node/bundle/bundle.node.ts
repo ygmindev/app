@@ -6,21 +6,24 @@ import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
-const bundleConfig: BundleConfigModel = merge(
-  [
-    {
-      envPrefix: ['SERVER_'],
-
-      extensions: permuteString(['.node'], bundleConfigBase.extensions),
-
-      platform: PLATFORM.NODE,
-
-      watch: [fromPackages('lib-backend/src/**/*')],
-    },
-
-    bundleConfigBase,
-  ],
-  MERGE_STRATEGY.DEEP_PREPEND,
-);
+const bundleConfig: BundleConfigModel = async () => {
+  const _bundleConfigBase = await bundleConfigBase();
+  return merge(
+    [
+      {
+        envPrefix: ['SERVER_'],
+  
+        extensions: permuteString(['.node'], _bundleConfigBase.extensions),
+  
+        platform: PLATFORM.NODE,
+  
+        watch: [fromPackages('lib-backend/src/**/*')],
+      },
+  
+      _bundleConfigBase,
+    ],
+    MERGE_STRATEGY.DEEP_PREPEND,
+  );
+};
 
 export default bundleConfig;

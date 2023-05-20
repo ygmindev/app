@@ -58,7 +58,6 @@ const _taskConfig: _TaskConfigModel = () => {
     if (_taskRegistry[_alias]) {
       throw new DuplicateError(`${_alias} exists`);
     }
-
     [_alias, _name].forEach((name) =>
       register(name, async () => runTask({ ...task, name, target: _target })),
     );

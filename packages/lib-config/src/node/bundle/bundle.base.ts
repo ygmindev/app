@@ -5,12 +5,11 @@ import type { BundleConfigModel } from '@lib/config/node/bundle/_bundle.models';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
-import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 
 const ENV_PREFIX = ['ENV_', 'NODE_'];
-const EXTENSIONS = ['.tsx', '.ts', '.jsx', '.js', '.json', '.mjs', '.cjs'];
+const EXTENSIONS = ['.tsx', '.ts', '.jsx', '.js'];
 
-const bundleConfig: BundleConfigModel = {
+const bundleConfig: BundleConfigModel = async () => ({
   define: {
     ...reduce(
       process.env,
@@ -24,7 +23,7 @@ const bundleConfig: BundleConfigModel = {
 
   envPrefix: ENV_PREFIX,
 
-  extensions: [...EXTENSIONS, ...permuteString([`.${process.env.NODE_ENV}`], EXTENSIONS)],
+  extensions: EXTENSIONS,
 
   mainFields: ['module', 'main'],
 
@@ -41,6 +40,6 @@ const bundleConfig: BundleConfigModel = {
     fromPackages('lib-shared/src/**/*'),
     fromWorking('src/**/*'),
   ],
-};
+});
 
 export default bundleConfig;

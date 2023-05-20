@@ -22,8 +22,8 @@ const _testConfig: _TestConfigModel = async () => {
     testExtensions,
     timeout,
   } = await importConfig<TestConfigModel>('node/test/test');
-  const babelConfig = await importConfig<TestConfigModel>('node/babel/babel');
-  const bundleConfig = await importConfig<BundleConfigModel>('node/bundle/bundle');
+  const _babelConfig = await importConfig<TestConfigModel>('node/babel/babel');
+  const _bundleConfig = await importConfig<BundleConfigModel>('node/bundle/bundle');
   return {
     cacheDirectory: cachePath,
 
@@ -33,14 +33,14 @@ const _testConfig: _TestConfigModel = async () => {
 
     coverageReporters: ['lcov'],
 
-    globals: bundleConfig.define,
+    globals: _bundleConfig.define,
 
     maxWorkers: -1,
 
-    moduleFileExtensions: bundleConfig.extensions.map((ext) => trimStart(ext, '.')),
+    moduleFileExtensions: _bundleConfig.extensions.map((ext) => trimStart(ext, '.')),
 
     moduleNameMapper: {
-      ...mapKeys(bundleConfig.aliases, (k) => `^${k}$`),
+      ...mapKeys(_bundleConfig.aliases, (k) => `^${k}$`),
       ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: fromRoot() }),
       [`\\.(${fileExtensions.join('|')})$`]: join(mockPath, 'file'),
     },
@@ -69,7 +69,7 @@ const _testConfig: _TestConfigModel = async () => {
 
     setupFilesAfterEnv: [fromConfig('node/test/_initialize.ts')],
 
-    testEnvironment: bundleConfig.platform === PLATFORM.WEB ? 'jsdom' : 'node',
+    testEnvironment: _bundleConfig.platform === PLATFORM.WEB ? 'jsdom' : 'node',
 
     testMatch: reduce(
       testExtensions,
@@ -88,11 +88,11 @@ const _testConfig: _TestConfigModel = async () => {
 
     transform: {
       '^.+\\.(js|jsx)$': 'babel-jest',
-      '^.+\\.(ts|tsx)$': ['ts-jest', { babelConfig, tsconfig: fromWorking('tsconfig.json') }],
+      '^.+\\.(ts|tsx)$': ['ts-jest', { babelConfig: _babelConfig, tsconfig: fromWorking('tsconfig.json') }],
     },
 
-    transformIgnorePatterns: bundleConfig.externals
-      ? [`node_modules/(?!(${bundleConfig.externals.join('|')})/)`]
+    transformIgnorePatterns: _bundleConfig.externals
+      ? [`node_modules/(?!(${_bundleConfig.externals.join('|')})/)`]
       : [],
 
     watch: isWatch,

@@ -34,9 +34,10 @@ export const runTask = async <TType = undefined>({
   options,
   overrides,
   target,
+  root,
   task,
 }: RunTaskParamsModel<TType>): RunTaskModel => {
-  const _root = target ? fromPackages(target) : fromRoot();
+  const _root = root || (target ? fromPackages(target) : fromRoot());
   process.chdir(_root);
 
   setEnvironment({ environment, overrides });
@@ -58,7 +59,7 @@ export const runTask = async <TType = undefined>({
     (await sequence(onBefore.map((value) => (isString(value) ? _getTaskByName(value) : value))));
 
   try {
-    const { status, message } = await task({
+    const { message, status } = await task({
       name,
       options: (options || {}) as TType,
       root: _root,

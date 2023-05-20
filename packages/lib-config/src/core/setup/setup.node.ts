@@ -8,7 +8,7 @@ import _databaseConfigMongo from '@lib/config/database/_database.mongo';
 const setupConfig: SetupConfigModel = {
   onInitialize: async () => {
     await import('reflect-metadata');
-    const _database = new Database(_databaseConfigMongo);
+    const _database = new Database(_databaseConfigMongo());
     await _database.connect();
     Container.set(Database, _database, DATABASE_TYPE.MONGO);
     await setupConfigBase.onInitialize();

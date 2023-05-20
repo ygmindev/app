@@ -14,7 +14,7 @@ const _databaseConfig =
     type,
     username,
   }: ReturnTypeModel<DatabaseConfigModel>): _DatabaseConfigModel =>
-  async () => {
+  () => {
     {
       const _config: ReturnTypeModel<_DatabaseConfigModel> = {
         clientUrl: host,

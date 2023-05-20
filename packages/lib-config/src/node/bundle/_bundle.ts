@@ -4,7 +4,7 @@ import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import _babelConfig from '@lib/config/node/babel/_babel';
 import type { _BundleConfigModel, BundleConfigModel } from '@lib/config/node/bundle/_bundle.models';
 import { _plugins } from '@lib/config/node/bundle/_plugins';
-import lintConfig, { lintCommand } from '@lib/config/node/lint/lint';
+import { lintCommand } from '@lib/config/node/lint/lint';
 import type { ReturnTypeModel } from '@lib/shared/core/core.models';
 import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEnv';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
@@ -41,6 +41,8 @@ const _bundleConfig: _BundleConfigModel = async () => {
   const _isReact = (
     [PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>
   ).includes(platform);
+  console.warn(externals);
+  console.warn(define);
   return {
     build: {
       commonjsOptions: {
@@ -59,7 +61,7 @@ const _bundleConfig: _BundleConfigModel = async () => {
     envPrefix,
 
     esbuild: {
-      sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : 'inline',
+      sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : true,
     },
 
     mode: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? 'production' : 'development',

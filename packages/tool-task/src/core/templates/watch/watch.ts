@@ -13,8 +13,9 @@ export const watch: TaskParamsModel<WatchParamsModel> = {
   name: 'watch',
 
   task: async ({ options, root }) => {
+    const _bundleConfig = await bundleConfig();
     const { executable, extensions, patterns, script } = options || {};
-    const _extensions = extensions || bundleConfig.extensions;
+    const _extensions = extensions || _bundleConfig.extensions;
     const params = [
       patterns && patterns.map((pattern) => `--watch "${pattern}"`).join(' '),
       `--ext ${_extensions.map((ext) => trimStart(ext, '.')).join(',')}`,

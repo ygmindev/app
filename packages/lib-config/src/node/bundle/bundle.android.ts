@@ -6,17 +6,21 @@ import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
-const bundleConfig: BundleConfigModel = merge(
-  [
-    {
-      extensions: permuteString(['.android', '.native'], bundleConfigBase.extensions),
-
-      platform: PLATFORM.ANDROID,
-    },
-
-    bundleConfigFrontend,
-  ],
-  MERGE_STRATEGY.DEEP_PREPEND,
-);
+const bundleConfig: BundleConfigModel = async () => {
+  const _bundleConfigBase = await bundleConfigBase();
+  const _bundleConfigFrontend = await bundleConfigFrontend();
+  return merge(
+    [
+      {
+        extensions: permuteString(['.android', '.native'], _bundleConfigBase.extensions),
+  
+        platform: PLATFORM.ANDROID,
+      },
+  
+      _bundleConfigFrontend,
+    ],
+    MERGE_STRATEGY.DEEP_PREPEND,
+  )
+};
 
 export default bundleConfig;

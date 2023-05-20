@@ -44,7 +44,7 @@ const _serverlessConfig: _ServerlessConfigModel = async () => {
               packagerOptions: { noInstall: true },
               plugins: toRelative({
                 from: fromWorking(),
-                to: fromConfig('framework/serverless/_plugins.js'),
+                to: fromConfig('platform/serverless/_plugins.js'),
               }),
             },
           }

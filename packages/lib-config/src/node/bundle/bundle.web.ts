@@ -8,28 +8,32 @@ import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
-const bundleConfig: BundleConfigModel = merge(
-  [
-    {
-      aliases: {
-        'react-native': 'react-native-web',
-        ...(process.env.NODE_ENV === 'test' ? { '\\.(css|sass)$': 'identity-obj-proxy' } : {}),
+const bundleConfig: BundleConfigModel = async () => {
+  const _bundleConfigBase = await bundleConfigBase();
+  const _bundleConfigFrontend = await bundleConfigFrontend();
+  return merge(
+    [
+      {
+        aliases: {
+          'react-native': 'react-native-web',
+          ...(process.env.NODE_ENV === 'test' ? { '\\.(css|sass)$': 'identity-obj-proxy' } : {}),
+        },
+  
+        extensions: permuteString(['.web'], _bundleConfigBase.extensions),
+  
+        platform: PLATFORM.WEB,
+  
+        provide: {
+          requestAnimationFrame: fromConfig('node/bundle/aliases/requestAnimationFrame/index.js'),
+        },
+  
+        watch: [fromStatic('assets/**/*')],
       },
-
-      extensions: permuteString(['.web'], bundleConfigBase.extensions),
-
-      platform: PLATFORM.WEB,
-
-      provide: {
-        requestAnimationFrame: fromConfig('node/bundle/aliases/requestAnimationFrame/index.js'),
-      },
-
-      watch: [fromStatic('assets/**/*')],
-    },
-
-    bundleConfigFrontend,
-  ],
-  MERGE_STRATEGY.DEEP_PREPEND,
-);
+  
+      _bundleConfigFrontend,
+    ],
+    MERGE_STRATEGY.DEEP_PREPEND,
+  );
+};
 
 export default bundleConfig;

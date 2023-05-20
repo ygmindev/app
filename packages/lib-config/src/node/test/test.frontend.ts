@@ -3,7 +3,9 @@ import { default as testConfigBase } from '@lib/config/node/test/test.base';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 
-const testConfig: TestConfigModel = merge(
+const testConfig: TestConfigModel = async () => {
+  const _testConfigBase = await testConfigBase();
+  return merge(
     [
       {
         mocks: [
@@ -11,10 +13,11 @@ const testConfig: TestConfigModel = merge(
         ],
       },
   
-      testConfigBase,
+      _testConfigBase,
     ],
     MERGE_STRATEGY.DEEP_PREPEND,
   );
+};
 
 export default testConfig;
 

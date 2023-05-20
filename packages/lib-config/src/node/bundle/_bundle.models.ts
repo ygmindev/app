@@ -1,8 +1,8 @@
-import type { ConfigDynamicModel, ConfigStaticModel } from '@lib/config/core/core.models';
+import type { ConfigDynamicModel } from '@lib/config/core/core.models';
 import type { PlatformModel } from '@lib/shared/platform/platform.models';
 import type { UserConfig } from 'vite';
 
-export type BundleConfigModel = ConfigStaticModel<{
+export type BundleConfigModel = ConfigDynamicModel<{
   aliases?: Record<string, string>;
 
   define?: Record<string, string>;
