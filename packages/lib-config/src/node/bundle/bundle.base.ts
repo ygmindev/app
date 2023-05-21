@@ -3,27 +3,11 @@ import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages'
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import type { BundleConfigModel } from '@lib/config/node/bundle/_bundle.models';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
-import reduce from 'lodash/reduce';
-import some from 'lodash/some';
-
-const ENV_PREFIX = ['ENV_', 'NODE_'];
-const EXTENSIONS = ['.tsx', '.ts', '.jsx', '.js'];
 
 const bundleConfig: BundleConfigModel = async () => ({
-  define: {
-    ...reduce(
-      process.env,
-      (result, v, k) =>
-        some(ENV_PREFIX, (prefix) => k.startsWith(prefix))
-          ? { ...result, [`process.env.${k}`]: JSON.stringify(v) }
-          : result,
-      {},
-    ),
-  },
+  envPrefix: ['ENV_', 'NODE_ENV'],
 
-  envPrefix: ENV_PREFIX,
-
-  extensions: EXTENSIONS,
+  extensions: ['.tsx', '.ts', '.jsx', '.js'],
 
   mainFields: ['module', 'main'],
 

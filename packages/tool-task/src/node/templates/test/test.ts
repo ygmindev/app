@@ -10,9 +10,11 @@ export const test: TaskParamsModel<TestParamsModel> = {
   name: 'test',
 
   task: async ({ options, root }) => {
+    // TODO: move away from cfg
+    const _testConfig = await testConfig();
     const testMatch =
       options?.isPrompt && (await prompt([{ isOptional: true, key: 'testMatch' }])).testMatch;
     testMatch && (process.env.TEST_MATCH = testMatch);
-    return await testConfig.task({ root });
+    return await _testConfig.task({ root });
   },
 };

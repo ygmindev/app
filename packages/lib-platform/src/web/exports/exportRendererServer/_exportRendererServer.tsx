@@ -36,9 +36,7 @@ export const _exportRendererServer = ({
       ...context,
       [STATE]: { initialState: await _store.getState() } as RootStateContextModel,
     };
-
     const App: FCModel = () => render({ children: <Page {...pageProps} />, context: _context });
-
     AppRegistry.registerComponent('App', () => App);
     const { element, getStyleElement } = AppRegistry.getApplication('App', {});
     const styleSheet = renderToStaticMarkup(getStyleElement());
@@ -69,10 +67,7 @@ export const _exportRendererServer = ({
         const _i18n = context?.locale?.i18n || (await _internationalizeConfig());
         const _pageContext: RootContextModel = {
           ...context,
-          [LOCALE]: {
-            i18n: _i18n,
-            store: getLocaleStoreFromI18n({ i18n: _i18n }),
-          },
+          [LOCALE]: { i18n: _i18n, store: getLocaleStoreFromI18n({ i18n: _i18n }) },
         };
         return {
           context: ssrContextKeys && pick({ keys: ssrContextKeys, value: _pageContext }),

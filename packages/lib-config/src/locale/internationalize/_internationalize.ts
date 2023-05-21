@@ -3,6 +3,7 @@ import type {
   _InternationalizeConfigModel,
   InternationalizeConfigModel,
 } from '@lib/config/locale/internationalize/_internationalize.models';
+import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
 import i18next, { init, use } from 'i18next';
 
 const _internationalizeConfig: _InternationalizeConfigModel = async () => {

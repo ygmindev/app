@@ -32,7 +32,6 @@ export const Root: FCModel<RootPropsModel> = ({ children, context }) => {
       }),
     [context?.state?.cookies, context?.state?.initialState],
   );
-
   const _providers = [
     <RootLayout />,
     <RouteProvider value={context?.route} />,

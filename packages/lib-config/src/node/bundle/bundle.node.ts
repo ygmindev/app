@@ -12,14 +12,14 @@ const bundleConfig: BundleConfigModel = async () => {
     [
       {
         envPrefix: ['SERVER_'],
-  
+
         extensions: permuteString(['.node'], _bundleConfigBase.extensions),
-  
+
         platform: PLATFORM.NODE,
-  
+
         watch: [fromPackages('lib-backend/src/**/*')],
       },
-  
+
       _bundleConfigBase,
     ],
     MERGE_STRATEGY.DEEP_PREPEND,

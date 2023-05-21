@@ -4,14 +4,13 @@ import { fastifyCookie } from '@fastify/cookie';
 import { fastifyMiddie } from '@fastify/middie';
 import { fastifyStatic } from '@fastify/static';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
-import webConfig from '@lib/config/platform/web/web';
 import _internationalizeConfig from '@lib/config/locale/internationalize/_internationalize';
-import { renderPage } from 'packages/lib-platform/src/web/utils/renderPage/renderPage';
+import webConfig from '@lib/config/platform/web/web';
+import type { CookieOptionModel } from '@lib/frontend/state/state.models';
 import type {
   _ServerModel,
   _ServerParamsModel,
 } from '@lib/platform/web/utils/server/_server.models';
-import type { CookieOptionModel } from '@lib/frontend/state/state.models';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
 import { STATE } from '@lib/shared/state/state.constants';
@@ -19,6 +18,7 @@ import type { FastifyPluginCallback, FastifyRegisterOptions } from 'fastify';
 import { fastify } from 'fastify';
 import i18nextMiddleware from 'i18next-http-middleware';
 import toNumber from 'lodash/toNumber';
+import { renderPage } from 'packages/lib-platform/src/web/utils/renderPage/renderPage';
 import { createServer } from 'vite';
 
 export const _server = async ({
@@ -38,15 +38,13 @@ export const _server = async ({
     secret: process.env.SERVER_APP_SECRET,
   } as FastifyCookieOptions);
 
-  if (config) {
-    const { middlewares } = await createServer({
-      ...config,
-      root,
-      server: { middlewareMode: true },
-    });
+  const { middlewares } = await createServer({
+    ...config,
+    root,
+    server: { middlewareMode: true },
+  });
 
-    app.use(middlewares);
-  }
+  app.use(middlewares);
 
   app.register(
     i18nextMiddleware.plugin as unknown as FastifyPluginCallback,

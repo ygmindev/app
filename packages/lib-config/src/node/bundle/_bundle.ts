@@ -1,12 +1,12 @@
 import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import { importConfig } from '@lib/config/core/utils/importConfig/importConfig';
 import _babelConfig from '@lib/config/node/babel/_babel';
 import type { _BundleConfigModel, BundleConfigModel } from '@lib/config/node/bundle/_bundle.models';
 import { _plugins } from '@lib/config/node/bundle/_plugins';
 import { lintCommand } from '@lib/config/node/lint/lint';
 import type { ReturnTypeModel } from '@lib/shared/core/core.models';
-import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEnv';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import type { PlatformModel } from '@lib/shared/platform/platform.models';
@@ -21,6 +21,9 @@ import { searchForWorkspaceRoot } from 'vite';
 import { checker } from 'vite-plugin-checker';
 import circleDependency from 'vite-plugin-circular-dependency';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import reduce from 'lodash/reduce';
+import some from 'lodash/some';
+import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
 
 const _bundleConfig: _BundleConfigModel = async () => {
   const {
@@ -36,14 +39,13 @@ const _bundleConfig: _BundleConfigModel = async () => {
     platform,
     provide,
     watch,
-  } = await importFromEnv<ReturnTypeModel<BundleConfigModel>>('@lib/config/node/bundle/bundle');
+  } = await importConfig<BundleConfigModel>('node/bundle/bundle');
   const babelConfig = await _babelConfig();
   const _isReact = (
     [PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>
   ).includes(platform);
-  console.warn(externals);
-  console.warn(define);
-  return {
+
+  const _result: ReturnTypeModel<_BundleConfigModel> = {
     build: {
       commonjsOptions: {
         include: externals,
@@ -136,6 +138,23 @@ const _bundleConfig: _BundleConfigModel = async () => {
       noExternal: externals,
     },
   };
+
+  const _define = {
+    ..._result.define,
+    ...reduce(
+      process.env,
+      (result, v, k) =>
+        some(_result.envPrefix, (prefix) => k.startsWith(prefix))
+          ? { ...result, [`process.env.${k}`]: JSON.stringify(v) }
+          : result,
+      {},
+    ),
+  };
+``
+  _result.define = _define;
+  _result.optimizeDeps?.esbuildOptions && (_result.optimizeDeps.esbuildOptions.define = _define);
+
+  return _result;
 };
 
 export default _bundleConfig;
