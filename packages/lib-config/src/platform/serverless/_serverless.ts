@@ -12,7 +12,9 @@ import reduce from 'lodash/reduce';
 
 export const _serverless = ({
   bundleConfig,
-  dev,
+  lambdaPort,
+  port,
+  host,
   dotenv,
   environment,
   functions,
@@ -29,10 +31,10 @@ export const _serverless = ({
 
     'serverless-offline': {
       allowCache: false,
-      host: dev.host.split('://')[1],
-      httpPort: dev.port,
+      host: host.split('://')[1],
+      httpPort: port,
       ignoreJWTSignature: true,
-      lambdaPort: dev.lambdaPort,
+      lambdaPort,
       noPrependStageInUrl: true,
     },
 

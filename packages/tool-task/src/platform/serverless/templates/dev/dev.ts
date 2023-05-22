@@ -1,8 +1,8 @@
-import _setupConfig from '@lib/config/core/setup/_setup';
-import serverlessConfig from '@lib/config/platform/serverless/serverless.base';
+import { config } from '@lib/config/core/setup/setup.node';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
 import type { TaskParamsModel } from '@tool/task/core/core.models';
+import { command } from '@tool/task/core/utils/command/command';
 import type { DevParamsModel } from '@tool/task/platform/serverless/templates/dev/dev.models';
 
 export const dev: TaskParamsModel<DevParamsModel> = {
@@ -12,19 +12,17 @@ export const dev: TaskParamsModel<DevParamsModel> = {
 
   onAfter: [
     async () => {
-      const setupConfig = await _setupConfig();
-      await setupConfig.onTerminate();
+      await config.onTerminate();
       return { status: TASK_STATUS.SUCCESS };
     },
   ],
 
   onBefore: [
     async () => {
-      const setupConfig = await _setupConfig();
-      await setupConfig.onInitialize();
+      await config.onInitialize();
       return { status: TASK_STATUS.SUCCESS };
     },
   ],
 
-  task: async ({ root }) => await serverlessConfig.dev.task({ root }),
+  task: async ({ root }) => await command('sls offline start --reloadHandler', { root }),
 };

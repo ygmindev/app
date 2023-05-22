@@ -1,38 +1,32 @@
 import { SERVERLESS_PROVIDER } from '@lib/backend/serverless/serverless.constants';
-import type { ServerlessConfigModel, _ServerlessConfigModel } from '@lib/config/platform/serverless/serverless.models';
+import { _config as _bundleConfig } from '@lib/config/node/bundle/bundle.base';
+import { _serverless } from '@lib/config/platform/serverless/_serverless';
+import type {
+  _ServerlessConfigModel,
+  ServerlessConfigModel,
+} from '@lib/config/platform/serverless/serverless.models';
+import { PLATFORM } from '@lib/platform/core/core.constants';
 import type { EnvironmentModel } from '@lib/shared/environment/environment.models';
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
 import { appUri } from '@lib/shared/http/utils/appUri/appUri';
-import { PLATFORM } from '@lib/platform/core/core.constants';
-import { command } from '@tool/task/core/utils/command/command';
 import toNumber from 'lodash/toNumber';
-import { _serverless } from '@lib/config/platform/serverless/_serverless';
-import { _config as _bundleConfig } from '@lib/config/node/bundle/bundle.base';
 
 export const config: ServerlessConfigModel = () => ({
-  build: {
-    task: async ({ root }) => await command('sls package', { root }),
-  },
-
   bundleConfig: _bundleConfig(),
-
-  dev: {
-    host: process.env.APP_SERVER_API_HOST,
-
-    lambdaPort: toNumber(process.env.SERVER_LAMBDA_PORT),
-
-    port: toNumber(process.env.APP_SERVER_API_PORT),
-
-    task: async ({ root }) => await command('sls offline start --reloadHandler', { root }),
-  },
 
   dotenv: () => setEnvironment(),
 
   environment: process.env.NODE_ENV as EnvironmentModel,
 
+  host: process.env.APP_SERVER_API_HOST,
+
+  lambdaPort: toNumber(process.env.SERVER_LAMBDA_PORT),
+
   name: 'serverless',
 
   platform: PLATFORM.BASE,
+
+  port: toNumber(process.env.APP_SERVER_API_PORT),
 
   provider: SERVERLESS_PROVIDER.AWS,
 
