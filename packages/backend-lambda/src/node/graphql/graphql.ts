@@ -1,9 +1,9 @@
 import { createHandler } from '@lib/backend/serverless/utils/createHandler/createHandler';
 import { getContext } from '@lib/backend/serverless/utils/getContext/getContext';
+import { config } from '@lib/config/core/setup/setup.node';
 import { _config } from '@lib/config/graphql/graphql';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 import { error } from '@lib/shared/logging/utils/logger/logger';
-import { config } from '@lib/config/core/setup/setup.node';
 import { ApolloServer } from 'apollo-server-lambda';
 import type { Context, Handler } from 'aws-lambda';
 import type { GraphQLFormattedError } from 'graphql';

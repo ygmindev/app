@@ -9,7 +9,7 @@
   "editor.formatOnSave": false,
   "editor.minimap.enabled": false,
   "eslint.options": {
-    "overrideConfigFile": "packages/lib-config/src/node/lint/lint.js",
+    "overrideConfigFile": "packages/lib-config/src/node/lint/lint.config.js",
     "useEslintrc": false
   },
   "eslint.validate": [

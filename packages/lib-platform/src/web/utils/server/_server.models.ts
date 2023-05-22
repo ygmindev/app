@@ -1,4 +1,4 @@
-import { _WebConfigModel } from '@lib/config/platform/web/_web.models';
+import { _WebConfigModel } from '@lib/config/platform/web/web.models';
 import { ReturnTypeModel } from '@lib/shared/core/core.models';
 
 export interface _ServerParamsModel {

@@ -4,4 +4,4 @@ import type { _CliModel, _CliParamsModel } from '@tool/task/core/utils/cli/_cli.
 import { command } from '@tool/task/core/utils/command/command';
 
 export const _cli = async ({ task }: _CliParamsModel): _CliModel =>
-  await command(`gulp --cwd ${fromRoot()} --gulpfile ${fromConfig('core/task/task.js')} ${task || ''}`);
+  await command(`gulp --cwd ${fromRoot()} --gulpfile ${fromConfig('core/task/task.config.js')} ${task || ''}`);

@@ -3,7 +3,7 @@ import { _config as _bundleConfig } from '@lib/config/node/bundle/bundle.web';
 import { _web } from '@lib/config/platform/web/_web';
 
 export const config: WebConfigModel = {
-  bundleConfig: _bundleConfig,
+  bundleConfig: _bundleConfig(),
 
   isSsr: true,
 

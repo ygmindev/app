@@ -8,7 +8,7 @@ import type { LintConfigModel, _LintConfigModel } from '@lib/config/node/lint/li
 
 export const lintCommand = (fix?: boolean): string =>
   fromExecutable(
-    `eslint --config ${fromConfig('node/lint/lint.js')} ${
+    `eslint --config ${fromConfig('node/lint/lint.config.js')} ${
       fix ? '--fix' : ''
     } --no-error-on-unmatched-pattern src/**/*.{ts,tsx,js,jsx}`,
   );

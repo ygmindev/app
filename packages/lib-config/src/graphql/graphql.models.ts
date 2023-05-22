@@ -8,6 +8,6 @@ export interface GraphqlConfigModel {
   container: _ContainerModel;
   resolvers: Array<ConstructorModel>;
   schemaPath: string;
-};
+}
 
 export type _GraphqlConfigModel = GraphQLSchema;
