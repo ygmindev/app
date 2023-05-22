@@ -2,12 +2,13 @@ import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import type { BundleConfigModel } from '@lib/config/node/bundle/_bundle.models';
-import { PLATFORM } from '@lib/shared/platform/platform.constants';
+import { extensions } from '@lib/platform/core/utils/extensions/extensions';
+import { PLATFORM } from '@lib/platform/core/core.constants';
 
 const bundleConfig: BundleConfigModel = async () => ({
   envPrefix: ['ENV_', 'NODE_ENV'],
 
-  extensions: ['.tsx', '.ts', '.jsx', '.js'],
+  extensions: extensions(),
 
   mainFields: ['module', 'main'],
 

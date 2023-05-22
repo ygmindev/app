@@ -13,6 +13,8 @@ export type InternationalizeConfigModel = ConfigStaticModel<{
 
   isReact?: boolean;
 
+  isSuspense?: boolean;
+
   key: string;
 
   languageDefault: string;

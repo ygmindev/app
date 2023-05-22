@@ -17,6 +17,5 @@ export const LocaleProvider: SFCModel<LocaleProviderPropsModel> = ({ children, v
     },
     [_timezoneIsAutomatic],
   );
-
   return <_LocaleProvider value={value}>{children}</_LocaleProvider>;
 };

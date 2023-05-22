@@ -1,4 +1,4 @@
-import type { ExportRenderServerParamsModel } from 'packages/lib-platform/src/web/exports/exportRendererServer/exportRendererServer.models';
+import type { ExportRenderServerParamsModel } from '@lib/platform/web/exports/exportRendererServer/exportRendererServer.models';
 
 export interface _RenderPageParamsModel extends ExportRenderServerParamsModel {}
 

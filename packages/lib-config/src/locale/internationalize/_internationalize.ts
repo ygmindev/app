@@ -3,7 +3,6 @@ import type {
   _InternationalizeConfigModel,
   InternationalizeConfigModel,
 } from '@lib/config/locale/internationalize/_internationalize.models';
-import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
 import i18next, { init, use } from 'i18next';
 
 const _internationalizeConfig: _InternationalizeConfigModel = async () => {
@@ -13,6 +12,7 @@ const _internationalizeConfig: _InternationalizeConfigModel = async () => {
     filename,
     isPreload,
     isReact,
+    isSuspense,
     key,
     languageDefault,
     languages,
@@ -52,7 +52,7 @@ const _internationalizeConfig: _InternationalizeConfigModel = async () => {
 
       supportedLngs: languages,
 
-      ...(isReact ? { react: { defaultTransParent: 'div', useSuspense: true } } : {}),
+      ...(isReact ? { react: { defaultTransParent: 'div', useSuspense: isSuspense } } : {}),
 
       ...(addPath ? { backend: { addPath: `${addPath}/${filename}` } } : {}),
 

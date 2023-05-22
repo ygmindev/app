@@ -1,7 +1,7 @@
 import type {
   _ServerModel,
   _ServerParamsModel,
-} from 'packages/lib-platform/src/web/utils/server/_server.models';
+} from '@lib/platform/web/utils/server/_server.models';
 
 export interface ServerParamsModel extends _ServerParamsModel {}
 

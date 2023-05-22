@@ -1,6 +1,6 @@
 import type { _QueryProviderPropsModel } from '@lib/frontend/core/providers/QueryProvider/_QueryProvider.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
-import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
+import { isSsr } from '@lib/platform/core/utils/isSsr/isSsr';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister';
 import type { QueryClientProviderProps } from '@tanstack/react-query';

@@ -1,3 +1,4 @@
+import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
@@ -6,24 +7,23 @@ import _babelConfig from '@lib/config/node/babel/_babel';
 import type { _BundleConfigModel, BundleConfigModel } from '@lib/config/node/bundle/_bundle.models';
 import { _plugins } from '@lib/config/node/bundle/_plugins';
 import { lintCommand } from '@lib/config/node/lint/lint';
+import { PLATFORM } from '@lib/platform/core/core.constants';
+import type { PlatformModel } from '@lib/platform/core/core.models';
 import type { ReturnTypeModel } from '@lib/shared/core/core.models';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
-import { PLATFORM } from '@lib/shared/platform/platform.constants';
-import type { PlatformModel } from '@lib/shared/platform/platform.models';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import type { RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { babel } from '@rollup/plugin-babel';
 import inject from '@rollup/plugin-inject';
 import react from '@vitejs/plugin-react';
+import reduce from 'lodash/reduce';
+import some from 'lodash/some';
 import { visualizer } from 'rollup-plugin-visualizer';
 import type { PluginOption } from 'vite';
 import { searchForWorkspaceRoot } from 'vite';
 import { checker } from 'vite-plugin-checker';
 import circleDependency from 'vite-plugin-circular-dependency';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import reduce from 'lodash/reduce';
-import some from 'lodash/some';
-import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
 
 const _bundleConfig: _BundleConfigModel = async () => {
   const {
@@ -44,7 +44,6 @@ const _bundleConfig: _BundleConfigModel = async () => {
   const _isReact = (
     [PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>
   ).includes(platform);
-
   const _result: ReturnTypeModel<_BundleConfigModel> = {
     build: {
       commonjsOptions: {
@@ -106,6 +105,10 @@ const _bundleConfig: _BundleConfigModel = async () => {
 
       provide && inject(provide),
 
+      // dynamicImport(),
+
+      // process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && dynamicImportVars(),
+
       viteCommonjs(),
 
       babelConfig &&
@@ -150,7 +153,7 @@ const _bundleConfig: _BundleConfigModel = async () => {
       {},
     ),
   };
-``
+  ('');
   _result.define = _define;
   _result.optimizeDeps?.esbuildOptions && (_result.optimizeDeps.esbuildOptions.define = _define);
 

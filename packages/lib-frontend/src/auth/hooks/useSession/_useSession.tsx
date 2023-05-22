@@ -2,7 +2,7 @@ import type {
   _UseSessionModel,
   _UseSessionParamsModel,
 } from '@lib/frontend/auth/hooks/useSession/_useSession.models';
-import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
+import { isSsr } from '@lib/platform/core/utils/isSsr/isSsr';
 import type { SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';

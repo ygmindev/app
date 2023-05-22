@@ -3,7 +3,7 @@ import type { WritableStream } from 'node:stream/web';
 import type {
   _RenderPageModel,
   _RenderPageParamsModel,
-} from 'packages/lib-platform/src/web/utils/renderPage/_renderPage.models';
+} from '@lib/platform/web/utils/renderPage/_renderPage.models';
 import { renderPage } from 'vite-plugin-ssr/server';
 
 export const _renderPage = async ({

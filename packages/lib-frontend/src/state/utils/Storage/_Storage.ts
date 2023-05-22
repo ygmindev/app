@@ -1,4 +1,4 @@
-import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
+import { isSsr } from '@lib/platform/core/utils/isSsr/isSsr';
 import { _Storage as _StorageBase } from '@lib/frontend/state/utils/Storage/_Storage.base';
 import type { _StorageParamsModel } from '@lib/frontend/state/utils/Storage/_Storage.models';
 import { STORAGE_BACKEND } from '@lib/frontend/state/utils/Storage/Storage.constants';

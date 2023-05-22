@@ -6,7 +6,7 @@ import {
   THEME_SIZE_MORE,
 } from '@lib/frontend/style/style.constants';
 import { FONT_FAMILY } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { PLATFORM } from '@lib/shared/platform/platform.constants';
+import { PLATFORM } from '@lib/platform/core/core.constants';
 
 const themeConfig: ThemeConfigModel = {
   animation: {

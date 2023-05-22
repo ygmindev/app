@@ -8,7 +8,7 @@ import type {
   _ServerlessConfigModel,
   ServerlessConfigModel,
 } from '@lib/config/platform/serverless/_serverless.models';
-import { PLATFORM } from '@lib/shared/platform/platform.constants';
+import { PLATFORM } from '@lib/platform/core/core.constants';
 import type { AWS } from '@serverless/typescript';
 import reduce from 'lodash/reduce';
 
@@ -42,10 +42,7 @@ const _serverlessConfig: _ServerlessConfigModel = async () => {
               packagePath: fromRoot('package.json'),
               packager: 'yarn',
               packagerOptions: { noInstall: true },
-              plugins: toRelative({
-                from: fromWorking(),
-                to: fromConfig('platform/serverless/_plugins.js'),
-              }),
+              plugins: toRelative({ to: fromConfig('platform/serverless/_plugins.js') }),
             },
           }
         : {}),

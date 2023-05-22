@@ -5,7 +5,7 @@ import { importConfig } from '@lib/config/core/utils/importConfig/importConfig';
 import type { BundleConfigModel } from '@lib/config/node/bundle/_bundle.models';
 import type { _TestConfigModel, TestConfigModel } from '@lib/config/node/test/_test.models';
 import { compilerOptions } from '@lib/config/node/typescript/tsconfig.paths.json';
-import { PLATFORM } from '@lib/shared/platform/platform.constants';
+import { PLATFORM } from '@lib/platform/core/core.constants';
 import { mapKeys, reduce, trim, trimStart } from 'lodash';
 import { join } from 'path';
 import { pathsToModuleNameMapper } from 'ts-jest';

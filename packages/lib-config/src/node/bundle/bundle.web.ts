@@ -1,16 +1,12 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import type { BundleConfigModel } from '@lib/config/node/bundle/_bundle.models';
-import { default as bundleConfigBase } from '@lib/config/node/bundle/bundle.base';
 import { default as bundleConfigFrontend } from '@lib/config/node/bundle/bundle.frontend';
-import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
+import { PLATFORM } from '@lib/platform/core/core.constants';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
-import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
-import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
 const bundleConfig: BundleConfigModel = async () => {
-  const _bundleConfigBase = await bundleConfigBase();
   const _bundleConfigFrontend = await bundleConfigFrontend();
   return merge(
     [
@@ -19,11 +15,6 @@ const bundleConfig: BundleConfigModel = async () => {
           'react-native': 'react-native-web',
           ...(process.env.NODE_ENV === 'test' ? { '\\.(css|sass)$': 'identity-obj-proxy' } : {}),
         },
-
-        extensions: permuteString(
-          [isSsr && '.ssr', '.web'].filter(Boolean) as Array<string>,
-          _bundleConfigBase.extensions,
-        ),
 
         platform: PLATFORM.WEB,
 

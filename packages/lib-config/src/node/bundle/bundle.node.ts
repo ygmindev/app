@@ -3,8 +3,7 @@ import type { BundleConfigModel } from '@lib/config/node/bundle/_bundle.models';
 import { default as bundleConfigBase } from '@lib/config/node/bundle/bundle.base';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
-import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
-import { PLATFORM } from '@lib/shared/platform/platform.constants';
+import { PLATFORM } from '@lib/platform/core/core.constants';
 
 const bundleConfig: BundleConfigModel = async () => {
   const _bundleConfigBase = await bundleConfigBase();
@@ -12,8 +11,6 @@ const bundleConfig: BundleConfigModel = async () => {
     [
       {
         envPrefix: ['SERVER_'],
-
-        extensions: permuteString(['.node'], _bundleConfigBase.extensions),
 
         platform: PLATFORM.NODE,
 

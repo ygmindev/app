@@ -3,7 +3,7 @@ import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import type { BundleConfigModel } from '@lib/config/node/bundle/_bundle.models';
 import type { ReturnTypeModel } from '@lib/shared/core/core.models';
-import { PLATFORM } from '@lib/shared/platform/platform.constants';
+import { PLATFORM } from '@lib/platform/core/core.constants';
 import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 import type { Plugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';

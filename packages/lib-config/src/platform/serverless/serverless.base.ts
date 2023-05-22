@@ -3,7 +3,7 @@ import type { ServerlessConfigModel } from '@lib/config/platform/serverless/_ser
 import type { EnvironmentModel } from '@lib/shared/environment/environment.models';
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
 import { appUri } from '@lib/shared/http/utils/appUri/appUri';
-import { PLATFORM } from '@lib/shared/platform/platform.constants';
+import { PLATFORM } from '@lib/platform/core/core.constants';
 import { command } from '@tool/task/core/utils/command/command';
 import toNumber from 'lodash/toNumber';
 

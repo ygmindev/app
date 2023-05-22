@@ -1,4 +1,4 @@
-import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
+import { isSsr } from '@lib/platform/core/utils/isSsr/isSsr';
 import type { ActionModel, NestedActionsModel } from '@lib/frontend/state/state.models';
 import { Storage } from '@lib/frontend/state/utils/Storage/Storage';
 import type {

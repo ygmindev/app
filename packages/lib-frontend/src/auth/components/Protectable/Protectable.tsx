@@ -3,7 +3,7 @@ import type { ProtectablePropsModel } from '@lib/frontend/auth/components/Protec
 import { useAuthState } from '@lib/frontend/auth/hooks/useAuthState/useAuthState';
 import { AUTH_STATE } from '@lib/frontend/auth/hooks/useAuthState/useAuthState.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
+import { isSsr } from '@lib/platform/core/utils/isSsr/isSsr';
 import { RootContext } from '@lib/frontend/root/providers/ContextProvider/ContextProvider';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';

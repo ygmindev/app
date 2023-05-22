@@ -18,7 +18,7 @@ import type { FastifyPluginCallback, FastifyRegisterOptions } from 'fastify';
 import { fastify } from 'fastify';
 import i18nextMiddleware from 'i18next-http-middleware';
 import toNumber from 'lodash/toNumber';
-import { renderPage } from 'packages/lib-platform/src/web/utils/renderPage/renderPage';
+import { renderPage } from '@lib/platform/web/utils/renderPage/renderPage';
 import { createServer } from 'vite';
 
 export const _server = async ({

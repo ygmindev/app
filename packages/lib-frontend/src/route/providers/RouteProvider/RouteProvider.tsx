@@ -1,6 +1,6 @@
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { lazy } from '@lib/frontend/core/utils/lazy/lazy';
-import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
+import { isSsr } from '@lib/platform/core/utils/isSsr/isSsr';
 import type { _RouteProviderPropsModel } from '@lib/frontend/route/providers/RouteProvider/_RouteProvider.models';
 import type { RouteProviderPropsModel } from '@lib/frontend/route/providers/RouteProvider/RouteProvider.models';
 import type { RouteContextModel } from '@lib/frontend/route/route.models';

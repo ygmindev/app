@@ -1,5 +1,5 @@
 import type { ConfigDynamicModel } from '@lib/config/core/core.models';
-import type { PlatformModel } from '@lib/shared/platform/platform.models';
+import type { PlatformModel } from '@lib/platform/core/core.models';
 import type { UserConfig } from 'vite';
 
 export type BundleConfigModel = ConfigDynamicModel<{
