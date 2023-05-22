@@ -24,4 +24,4 @@ export const config: InternationalizeConfigModel = merge(
   MERGE_STRATEGY.DEEP_APPEND,
 );
 
-export const _config: _InternationalizeConfigModel = _internationalize(config);
+export const _config: _InternationalizeConfigModel = () => _internationalize(config);

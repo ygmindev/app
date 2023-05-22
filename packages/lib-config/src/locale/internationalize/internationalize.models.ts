@@ -1,4 +1,4 @@
-import { ConfigDynamicModel } from '@lib/config/core/core.models';
+import type { ConfigDynamicModel } from '@lib/config/core/core.models';
 import type { InternationalizationDetectionModel } from '@lib/frontend/locale/locale.models';
 import type { i18n, Module } from 'i18next';
 
@@ -26,6 +26,6 @@ export interface InternationalizeConfigModel {
   modules?: Array<Module>;
 
   namespaceDefault: string;
-};
+}
 
 export type _InternationalizeConfigModel = ConfigDynamicModel<i18n>;

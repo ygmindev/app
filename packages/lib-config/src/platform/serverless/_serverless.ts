@@ -22,7 +22,7 @@ export const _serverless = ({
   platform,
   provider,
   server,
-}: ReturnTypeModel<ServerlessConfigModel>): _ServerlessConfigModel => () => ({
+}: ReturnTypeModel<ServerlessConfigModel>): ReturnTypeModel<_ServerlessConfigModel> => ({
   custom: {
     dotenv: {
       dotenvParser: dotenv,

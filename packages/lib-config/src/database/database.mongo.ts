@@ -36,4 +36,4 @@ export const config: DatabaseConfigModel = () => ({
   username: process.env.SERVER_MONGO_DATABASE_USERNAME,
 });
 
-export const _config: _DatabaseConfigModel = _database(config());
+export const _config: _DatabaseConfigModel = () => _database(config());

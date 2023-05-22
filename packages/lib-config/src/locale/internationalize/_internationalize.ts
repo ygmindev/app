@@ -2,6 +2,7 @@ import type {
   _InternationalizeConfigModel,
   InternationalizeConfigModel,
 } from '@lib/config/locale/internationalize/internationalize.models';
+import type { ReturnTypeModel } from '@lib/shared/core/core.models';
 import i18next, { init, use } from 'i18next';
 
 export const _internationalize = ({
@@ -17,7 +18,7 @@ export const _internationalize = ({
   loadPath,
   modules,
   namespaceDefault,
-}: InternationalizeConfigModel): _InternationalizeConfigModel => () => {
+}: InternationalizeConfigModel): ReturnTypeModel<_InternationalizeConfigModel> => {
   modules?.forEach(use);
 
   !i18next.isInitialized &&

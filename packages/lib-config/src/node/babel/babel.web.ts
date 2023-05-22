@@ -17,4 +17,4 @@ export const config: BabelConfigModel = merge(
   MERGE_STRATEGY.DEEP_PREPEND,
 );
 
-export const _config: _BabelConfigModel = _babel(config);
+export const _config: _BabelConfigModel = () => _babel(config);

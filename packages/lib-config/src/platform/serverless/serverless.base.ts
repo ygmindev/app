@@ -45,4 +45,4 @@ export const config: ServerlessConfigModel = () => ({
   },
 });
 
-export const _config: _ServerlessConfigModel = _serverless(config());
+export const _config: _ServerlessConfigModel = () => _serverless(config());

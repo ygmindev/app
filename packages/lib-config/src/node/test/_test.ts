@@ -20,7 +20,7 @@ export const _test = ({
   root,
   testExtensions,
   timeout,
-}: ReturnTypeModel<TestConfigModel>): _TestConfigModel => () => ({
+}: ReturnTypeModel<TestConfigModel>): ReturnTypeModel<_TestConfigModel> => ({
     cacheDirectory: cachePath,
 
     collectCoverage: true,

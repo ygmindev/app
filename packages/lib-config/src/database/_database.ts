@@ -4,31 +4,27 @@ import type {
 } from '@lib/config/database/database.models';
 import type { ReturnTypeModel } from '@lib/shared/core/core.models';
 
-export const _database =
-  ({
-    database,
+export const _database = ({
+  database,
+  entities,
+  host,
+  password,
+  pool,
+  type,
+  username,
+}: ReturnTypeModel<DatabaseConfigModel>): ReturnTypeModel<_DatabaseConfigModel> => {
+  const _config: ReturnTypeModel<_DatabaseConfigModel> = {
+    clientUrl: host,
+    dbName: database,
+    debug: false,
+    ensureIndexes: true,
     entities,
-    host,
-    password,
-    pool,
+    pool: { max: pool.max, min: 0 },
     type,
-    username,
-  }: ReturnTypeModel<DatabaseConfigModel>): _DatabaseConfigModel =>
-  () => {
-    {
-      const _config: ReturnTypeModel<_DatabaseConfigModel> = {
-        clientUrl: host,
-        dbName: database,
-        debug: false,
-        ensureIndexes: true,
-        entities,
-        pool: { max: pool.max, min: 0 },
-        type,
-      };
-      if (username && password) {
-        _config.user = username;
-        _config.password = password;
-      }
-      return _config;
-    }
   };
+  if (username && password) {
+    _config.user = username;
+    _config.password = password;
+  }
+  return _config;
+};

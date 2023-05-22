@@ -1,5 +1,8 @@
 import { _internationalize } from '@lib/config/locale/internationalize/_internationalize';
-import type { InternationalizeConfigModel, _InternationalizeConfigModel } from '@lib/config/locale/internationalize/internationalize.models';
+import type {
+  _InternationalizeConfigModel,
+  InternationalizeConfigModel,
+} from '@lib/config/locale/internationalize/internationalize.models';
 import { CORE } from '@lib/shared/core/core.constants';
 import { initReactI18next } from 'react-i18next';
 
@@ -14,9 +17,9 @@ export const config: InternationalizeConfigModel = {
 
   languages: ['en', 'kr'],
 
-  namespaceDefault: CORE,
-
   modules: [initReactI18next],
+
+  namespaceDefault: CORE,
 };
 
-export const _config: _InternationalizeConfigModel = _internationalize(config);
+export const _config: _InternationalizeConfigModel = () => _internationalize(config);

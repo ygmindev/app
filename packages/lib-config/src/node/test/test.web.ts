@@ -16,4 +16,4 @@ export const config: TestConfigModel = () =>
     MERGE_STRATEGY.DEEP_PREPEND,
   );
 
-export const _config: _TestConfigModel = _test(config());
+export const _config: _TestConfigModel = () => _test(config());

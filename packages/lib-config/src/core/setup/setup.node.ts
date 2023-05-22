@@ -1,13 +1,13 @@
 import { Container } from '@lib/backend/core/utils/Container/Container';
 import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
 import { Database } from '@lib/backend/database/utils/Database/Database';
-import type { SetupConfigModel } from '@lib/config/core/setup/setup.models';
 import { config as configBase } from '@lib/config/core/setup/setup.base';
+import type { SetupConfigModel } from '@lib/config/core/setup/setup.models';
 import { _config } from '@lib/config/database/database.mongo';
 
-let _isInitialized = false;
+const _isInitialized = false;
 
-let _isTerminated = false;
+const _isTerminated = false;
 
 export const config: SetupConfigModel = {
   onInitialize: async () => {

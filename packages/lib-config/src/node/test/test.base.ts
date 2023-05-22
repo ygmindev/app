@@ -26,4 +26,4 @@ export const config: TestConfigModel = () => ({
   timeout: 60e3,
 });
 
-export const _config: _TestConfigModel = _test(config());
+export const _config: _TestConfigModel = () => _test(config());

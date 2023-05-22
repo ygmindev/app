@@ -32,4 +32,4 @@ export const config: ServerlessConfigModel = () => merge(
   MERGE_STRATEGY.DEEP_APPEND,
 );
 
-export const _config: _ServerlessConfigModel = _serverless(config());
+export const _config: _ServerlessConfigModel = () => _serverless(config());

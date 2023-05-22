@@ -14,4 +14,4 @@ export const config: BabelConfigModel = {
   presets: [['@babel/preset-env', { targets: { esmodules: true } }], '@babel/preset-typescript'],
 };
 
-export const _config: _BabelConfigModel = _babel(config);
+export const _config: _BabelConfigModel = () => _babel(config);
