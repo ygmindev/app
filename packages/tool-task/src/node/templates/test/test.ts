@@ -1,8 +1,13 @@
-import testConfig from '@lib/config/node/test/test.base';
+import type { Config } from '@jest/types';
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import { importConfig } from '@lib/config/core/utils/importConfig/importConfig';
+import type { _TestConfigModel, TestConfigModel } from '@lib/config/node/test/test.models';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
+import { TASK_STATUS } from '@tool/task/core/core.constants';
 import type { TaskParamsModel } from '@tool/task/core/core.models';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import type { TestParamsModel } from '@tool/task/node/templates/test/test.models';
+import { runCLI } from 'jest';
 
 export const test: TaskParamsModel<TestParamsModel> = {
   environment: ENVIRONMENT.TEST,
@@ -10,11 +15,14 @@ export const test: TaskParamsModel<TestParamsModel> = {
   name: 'test',
 
   task: async ({ options, root }) => {
-    // TODO: move away from cfg
-    const _testConfig = await testConfig();
     const testMatch =
       options?.isPrompt && (await prompt([{ isOptional: true, key: 'testMatch' }])).testMatch;
     testMatch && (process.env.TEST_MATCH = testMatch);
-    return await _testConfig.task({ root });
+    const { _config } = await importConfig<TestConfigModel, _TestConfigModel>('node/test/test');
+    if (_config) {
+      await runCLI({ ..._config, runInBand: true } as Config.Argv, [root || fromWorking()]);
+      return { status: TASK_STATUS.SUCCESS };
+    }
+    return { status: TASK_STATUS.ERROR };
   },
 };

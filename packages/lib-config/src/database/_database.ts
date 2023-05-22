@@ -1,10 +1,10 @@
 import type {
   _DatabaseConfigModel,
   DatabaseConfigModel,
-} from '@lib/config/database/_database.models';
+} from '@lib/config/database/database.models';
 import type { ReturnTypeModel } from '@lib/shared/core/core.models';
 
-const _databaseConfig =
+export const _database =
   ({
     database,
     entities,
@@ -32,5 +32,3 @@ const _databaseConfig =
       return _config;
     }
   };
-
-export default _databaseConfig;

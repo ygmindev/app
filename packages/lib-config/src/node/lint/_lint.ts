@@ -1,7 +1,17 @@
-import type { _LintConfigModel } from '@lib/config/node/lint/_lint.models';
-import lintConfig from '@lib/config/node/lint/lint';
+import type { LintConfigModel, _LintConfigModel } from '@lib/config/node/lint/lint.models';
 
-const _lintConfig: _LintConfigModel = {
+export const _lint = ({
+  include,
+  indentWidth,
+  isParenthesis,
+  isSameLine,
+  isSingleQuote,
+  isSpacing,
+  isTrailingComma,
+  printWidth,
+  roots,
+  unusedIgnore,
+}: LintConfigModel): _LintConfigModel => ({
   env: {
     browser: true,
     es6: true,
@@ -17,7 +27,7 @@ const _lintConfig: _LintConfigModel = {
     'plugin:typescript-sort-keys/recommended',
   ],
 
-  ignorePatterns: [`!(${lintConfig.include.join('|')})`],
+  ignorePatterns: [`!(${include.join('|')})`],
 
   plugins: [
     '@nrwl/nx',
@@ -38,23 +48,23 @@ const _lintConfig: _LintConfigModel = {
     '@typescript-eslint/no-unnecessary-type-constraint': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-var-requires': 'off',
-    'import/no-extraneous-dependencies': ['error', { packageDir: lintConfig.roots }],
+    'import/no-extraneous-dependencies': ['error', { packageDir: roots }],
     'no-unused-vars': 'off',
     'prefer-destructuring': 'error',
     'prettier/prettier': [
       'error',
       {
-        arrowParens: lintConfig.isParenthesis ? 'always' : 'never',
-        bracketSameLine: lintConfig.isSameLine,
-        bracketSpacing: lintConfig.isSpacing,
-        indentWidth: lintConfig.indentWidth,
-        printWidth: lintConfig.printWidth,
-        singleAttributePerLine: lintConfig.isSameLine,
-        singleQuote: lintConfig.isSingleQuote,
-        trailingComma: lintConfig.isTrailingComma ? 'all' : 'none',
+        arrowParens: isParenthesis ? 'always' : 'never',
+        bracketSameLine: isSameLine,
+        bracketSpacing: isSpacing,
+        indentWidth: indentWidth,
+        printWidth: printWidth,
+        singleAttributePerLine: isSameLine,
+        singleQuote: isSingleQuote,
+        trailingComma: isTrailingComma ? 'all' : 'none',
       },
     ],
-    quotes: ['error', lintConfig.isSingleQuote ? 'single' : 'double'],
+    quotes: ['error', isSingleQuote ? 'single' : 'double'],
     'react/jsx-newline': 'error',
     'react/jsx-sort-props': 'error',
     'simple-import-sort/exports': 'error',
@@ -66,9 +76,9 @@ const _lintConfig: _LintConfigModel = {
       'warn',
       {
         args: 'after-used',
-        argsIgnorePattern: lintConfig.unusedIgnore,
+        argsIgnorePattern: unusedIgnore,
         vars: 'all',
-        varsIgnorePattern: lintConfig.unusedIgnore,
+        varsIgnorePattern: unusedIgnore,
       },
     ],
   },
@@ -78,6 +88,4 @@ const _lintConfig: _LintConfigModel = {
       typescript: { alwaysTryTypes: true },
     },
   },
-};
-
-export default _lintConfig;
+});

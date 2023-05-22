@@ -1,21 +1,17 @@
-import type { BundleConfigModel } from '@lib/config/node/bundle/_bundle.models';
-import { default as bundleConfigFrontend } from '@lib/config/node/bundle/bundle.frontend';
+import { config as configFrontend } from '@lib/config/node/bundle/bundle.frontend';
+import type { BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
+import { PLATFORM } from '@lib/platform/core/core.constants';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
-import { PLATFORM } from '@lib/platform/core/core.constants';
 
-const bundleConfig: BundleConfigModel = async () => {
-  const _bundleConfigFrontend = await bundleConfigFrontend();
-  return merge(
+export const config: BundleConfigModel = () =>
+  merge(
     [
       {
         platform: PLATFORM.ANDROID,
       },
-  
-      _bundleConfigFrontend,
+
+      configFrontend(),
     ],
     MERGE_STRATEGY.DEEP_PREPEND,
-  )
-};
-
-export default bundleConfig;
+  );

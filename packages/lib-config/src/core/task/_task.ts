@@ -1,8 +1,7 @@
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { packages } from '@lib/backend/file/utils/packages/packages';
-import type { _TaskConfigModel } from '@lib/config/core/task/_task.models';
-import taskConfig from '@lib/config/core/task/task';
+import type { _TaskConfigModel, TaskConfigModel } from '@lib/config/core/task/task.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import type { TaskParamsModel } from '@tool/task/core/core.models';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
@@ -13,18 +12,18 @@ import { existsSync } from 'fs';
 import { task as register } from 'gulp';
 import kebabCase from 'lodash/kebabCase';
 
-const _taskConfig: _TaskConfigModel = () => {
+export const _task = ({ packageConfig, taskExtension }: TaskConfigModel): _TaskConfigModel => {
   const _tasks = [
     // Task files
     ...fromGlobs({
-      globs: [`*/src/**/*.${taskConfig.taskExtension}`],
+      globs: [`*/src/**/*.${taskExtension}`],
       isAbsolute: true,
       root: fromPackages(),
     }).map((path) => require(path).default as TaskParamsModel),
 
     // Package tasks
     ...packages.reduce((result, target) => {
-      const _path = fromPackages(target, taskConfig.packageConfig as string);
+      const _path = fromPackages(target, packageConfig as string);
       if (existsSync(_path)) {
         const _tasks = require(_path).default as Array<TaskParamsModel>;
         return [...result, ..._tasks.map((task) => ({ ...task, target }))];
@@ -63,5 +62,3 @@ const _taskConfig: _TaskConfigModel = () => {
     );
   });
 };
-
-export default _taskConfig;

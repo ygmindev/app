@@ -1,23 +1,26 @@
 import type {
   _ParserConfigModel,
-} from '@lib/config/locale/parser/_parser.models';
-import parserConfig from '@lib/config/locale/parser/parser';
+  ParserConfigModel,
+} from '@lib/config/locale/parser/parser.models';
 import { join } from 'path';
 
-const _parserConfig: _ParserConfigModel = {
+export const _parser = ({
+  languages,
+  missingValue,
+  namespaceDefault,
+  outputPath,
+}: ParserConfigModel): _ParserConfigModel => ({
   createOldCatalogs: false,
 
-  defaultNamespace: parserConfig.namespaceDefault,
+  defaultNamespace: namespaceDefault,
 
-  defaultValue: parserConfig.missingValue,
+  defaultValue: missingValue,
 
-  locales: parserConfig.languages,
+  locales: languages,
 
-  output: join(parserConfig.outputPath, '$LOCALE/$NAMESPACE.json'),
+  output: join(outputPath, '$LOCALE/$NAMESPACE.json'),
 
   sort: true,
 
   verbose: true,
-};
-
-export default _parserConfig;
+});

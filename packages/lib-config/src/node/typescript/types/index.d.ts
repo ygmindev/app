@@ -8,6 +8,6 @@ declare module '*.css';
 declare module '*.ttf';
 
 declare namespace NodeJS {
-  import type { _EnvironmentConfigModel } from '@lib/config/core/environment/_environment.models';
-  declare type ProcessEnv = _EnvironmentConfigModel;
+  import type { EnvironmentConfigModel } from '@lib/config/core/environment/environment.models';
+  declare type ProcessEnv = EnvironmentConfigModel;
 }

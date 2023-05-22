@@ -3,17 +3,17 @@ import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecu
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { packages } from '@lib/backend/file/utils/packages/packages';
-import type { LintConfigModel } from '@lib/config/node/lint/_lint.models';
-import { command } from '@tool/task/core/utils/command/command';
+import { _lint } from '@lib/config/node/lint/_lint';
+import type { LintConfigModel, _LintConfigModel } from '@lib/config/node/lint/lint.models';
 
 export const lintCommand = (fix?: boolean): string =>
   fromExecutable(
-    `eslint --config ${fromConfig('node/lint/_lint.js')} ${
+    `eslint --config ${fromConfig('node/lint/lint.js')} ${
       fix ? '--fix' : ''
     } --no-error-on-unmatched-pattern src/**/*.{ts,tsx,js,jsx}`,
   );
 
-const lintConfig: LintConfigModel = {
+export const config: LintConfigModel = {
   include: ['src/**/*', 'tasks.ts'],
 
   indentWidth: 2,
@@ -32,9 +32,7 @@ const lintConfig: LintConfigModel = {
 
   roots: [fromRoot(), ...packages.map((pkg) => fromPackages(pkg))],
 
-  task: async ({ options, root }) => await command(lintCommand(options?.fix), { root }),
-
   unusedIgnore: '^_',
 };
 
-export default lintConfig;
+export const _config: _LintConfigModel = _lint(config);

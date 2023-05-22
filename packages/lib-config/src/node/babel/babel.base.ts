@@ -1,6 +1,7 @@
-import type { BabelConfigModel } from '@lib/config/node/babel/_babel.models';
+import { _babel } from '@lib/config/node/babel/_babel';
+import type { BabelConfigModel, _BabelConfigModel } from '@lib/config/node/babel/babel.models';
 
-const babelConfig: BabelConfigModel = {
+export const config: BabelConfigModel = {
   plugins: [
     '@babel/plugin-transform-runtime',
     ['@babel/plugin-proposal-decorators', { legacy: true }],
@@ -13,4 +14,4 @@ const babelConfig: BabelConfigModel = {
   presets: [['@babel/preset-env', { targets: { esmodules: true } }], '@babel/preset-typescript'],
 };
 
-export default babelConfig;
+export const _config: _BabelConfigModel = _babel(config);

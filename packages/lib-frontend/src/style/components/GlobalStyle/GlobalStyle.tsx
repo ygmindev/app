@@ -1,10 +1,11 @@
-import type { FCModel } from '@lib/frontend/core/core.models';
+import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { _GlobalStyle } from '@lib/frontend/style/components/GlobalStyle/_GlobalStyle';
+import type { _GlobalStylePropsModel } from '@lib/frontend/style/components/GlobalStyle/_GlobalStyle.models';
 import type { GlobalStylePropsModel } from '@lib/frontend/style/components/GlobalStyle/GlobalStyle.models';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { memo } from 'react';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
-export const GlobalStyle: FCModel<GlobalStylePropsModel> = memo(({ config }) => {
-  const theme = useTheme();
-  return <_GlobalStyle sheet={config(theme)} />;
+export const GlobalStyle = composeComponent<GlobalStylePropsModel, _GlobalStylePropsModel>({
+  Component: _GlobalStyle,
 });
+
+process.env.APP_DEBUG && (GlobalStyle.displayName = variableName(() => GlobalStyle));

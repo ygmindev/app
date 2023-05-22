@@ -1,8 +1,9 @@
-import type { InternationalizeConfigModel } from '@lib/config/locale/internationalize/_internationalize.models';
+import { _internationalize } from '@lib/config/locale/internationalize/_internationalize';
+import type { InternationalizeConfigModel, _InternationalizeConfigModel } from '@lib/config/locale/internationalize/internationalize.models';
 import { CORE } from '@lib/shared/core/core.constants';
 import { initReactI18next } from 'react-i18next';
 
-const internationalizeConfig: InternationalizeConfigModel = {
+export const config: InternationalizeConfigModel = {
   filename: '/locales/{{lng}}/{{ns}}.json',
 
   isSuspense: true,
@@ -18,4 +19,4 @@ const internationalizeConfig: InternationalizeConfigModel = {
   modules: [initReactI18next],
 };
 
-export default internationalizeConfig;
+export const _config: _InternationalizeConfigModel = _internationalize(config);

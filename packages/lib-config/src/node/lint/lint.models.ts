@@ -1,9 +1,6 @@
-import type { ConfigStaticModel } from '@lib/config/core/core.models';
-import { TaskParamsModel } from '@tool/task/core/core.models';
 import type { Linter } from 'eslint';
 
-export type LintConfigModel = ConfigStaticModel<
-  Pick<TaskParamsModel<{ fix?: boolean }>, 'task'> & {
+export interface LintConfigModel {
     include: Array<string>;
 
     indentWidth: number;
@@ -23,7 +20,6 @@ export type LintConfigModel = ConfigStaticModel<
     roots: Array<string>;
 
     unusedIgnore?: string;
-  }
->;
+  };
 
-export type _LintConfigModel = ConfigStaticModel<Linter.Config>;
+export interface _LintConfigModel extends Linter.Config {}

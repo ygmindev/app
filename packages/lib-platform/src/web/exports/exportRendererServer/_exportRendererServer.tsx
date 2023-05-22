@@ -1,4 +1,4 @@
-import _internationalizeConfig from '@lib/config/locale/internationalize/_internationalize';
+import { _config } from '@lib/config/locale/internationalize/internationalize.ssr';
 import type { FCModel } from '@lib/frontend/core/core.models';
 import type { RootContextModel } from '@lib/frontend/root/root.models';
 import { ROOT_REDUCERS } from '@lib/frontend/root/stores/rootStore.constants';
@@ -64,7 +64,7 @@ export const _exportRendererServer = ({
       documentHtml,
 
       pageContext: async () => {
-        const _i18n = context?.locale?.i18n || (await _internationalizeConfig());
+        const _i18n = context?.locale?.i18n || _config();
         const _pageContext: RootContextModel = {
           ...context,
           [LOCALE]: { i18n: _i18n, store: getLocaleStoreFromI18n({ i18n: _i18n }) },

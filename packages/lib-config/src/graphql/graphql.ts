@@ -9,9 +9,10 @@ import { Container } from '@lib/backend/core/utils/Container/Container';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { LinkedUserResolver } from '@lib/backend/user/resources/LinkedUser/LinkedUserResolver/LinkedUserResolver';
 import { UserResolver } from '@lib/backend/user/resources/User/UserResolver/UserResolver';
-import type { GraphqlConfigModel } from '@lib/config/graphql/_graphql.models';
+import { _graphql } from '@lib/config/graphql/_graphql';
+import type { GraphqlConfigModel, _GraphqlConfigModel } from '@lib/config/graphql/graphql.models';
 
-const graphqlConfig: GraphqlConfigModel = {
+export const config: GraphqlConfigModel = {
   authorize,
 
   container: Container,
@@ -30,4 +31,5 @@ const graphqlConfig: GraphqlConfigModel = {
   schemaPath: fromStatic('graphql/schema.gql'),
 };
 
-export default graphqlConfig;
+export const _config: _GraphqlConfigModel = _graphql(config);
+

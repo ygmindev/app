@@ -5,11 +5,15 @@ import { Card } from '@lib/backend/billing/resources/Card/Card';
 import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
 import { DummyEntityResource } from '@lib/backend/test/resources/DummyEntityResource/DummyEntityResource';
 import { User } from '@lib/backend/user/resources/User/User';
-import type { DatabaseConfigModel } from '@lib/config/database/_database.models';
+import { _database } from '@lib/config/database/_database';
+import type {
+  _DatabaseConfigModel,
+  DatabaseConfigModel,
+} from '@lib/config/database/database.models';
 import type { ConstructorModel } from '@lib/shared/core/core.models';
 import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
-const databaseConfigMongo: DatabaseConfigModel = {
+export const config: DatabaseConfigModel = () => ({
   database: process.env.SERVER_MONGO_DATABASE_NAME,
 
   entities: [
@@ -30,6 +34,6 @@ const databaseConfigMongo: DatabaseConfigModel = {
   type: DATABASE_TYPE.MONGO,
 
   username: process.env.SERVER_MONGO_DATABASE_USERNAME,
-};
+});
 
-export default databaseConfigMongo;
+export const _config: _DatabaseConfigModel = _database(config());

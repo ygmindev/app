@@ -1,21 +1,23 @@
-import type { TestConfigModel } from '@lib/config/node/test/_test.models';
-import { default as testConfigBase } from '@lib/config/node/test/test.base';
+import { config as setupConfig } from '@lib/config/core/setup/setup.node';
+import { config as bundleConfig } from '@lib/config/node/bundle/bundle.node';
+import { _test } from '@lib/config/node/test/_test';
+import { config as configBase } from '@lib/config/node/test/test.base';
+import type { _TestConfigModel, TestConfigModel } from '@lib/config/node/test/test.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
-import { setup } from '@tool/task/core/utils/setup/setup';
 
-const testConfig: TestConfigModel = async () => {
-  const _testConfigBase = await testConfigBase();
-  return merge(
+export const config: TestConfigModel = () =>
+  merge(
     [
       {
-        onBeforeAll: setup.initialize,
+        bundleConfig: bundleConfig(),
+
+        onBeforeAll: setupConfig.onInitialize,
       },
-  
-      _testConfigBase,
+
+      configBase(),
     ],
     MERGE_STRATEGY.DEEP_PREPEND,
-  )
-};
+  );
 
-export default testConfig;
+export const _config: _TestConfigModel = _test(config());

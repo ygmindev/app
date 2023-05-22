@@ -1,30 +1,26 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { importConfig } from '@lib/config/core/utils/importConfig/importConfig';
-import type { BundleConfigModel } from '@lib/config/node/bundle/_bundle.models';
-import type { _TestConfigModel, TestConfigModel } from '@lib/config/node/test/_test.models';
+import type { _TestConfigModel, TestConfigModel } from '@lib/config/node/test/test.models';
 import { compilerOptions } from '@lib/config/node/typescript/tsconfig.paths.json';
 import { PLATFORM } from '@lib/platform/core/core.constants';
+import { ReturnTypeModel } from '@lib/shared/core/core.models';
 import { mapKeys, reduce, trim, trimStart } from 'lodash';
 import { join } from 'path';
 import { pathsToModuleNameMapper } from 'ts-jest';
 
-const _testConfig: _TestConfigModel = async () => {
-  const {
-    cachePath,
-    coverageOutputPath,
-    fileExtensions,
-    isWatch,
-    match,
-    mockPath,
-    root,
-    testExtensions,
-    timeout,
-  } = await importConfig<TestConfigModel>('node/test/test');
-  const _babelConfig = await importConfig<TestConfigModel>('node/babel/babel');
-  const _bundleConfig = await importConfig<BundleConfigModel>('node/bundle/bundle');
-  return {
+export const _test = ({
+  bundleConfig,
+  cachePath,
+  coverageOutputPath,
+  fileExtensions,
+  isWatch,
+  match,
+  mockPath,
+  root,
+  testExtensions,
+  timeout,
+}: ReturnTypeModel<TestConfigModel>): _TestConfigModel => () => ({
     cacheDirectory: cachePath,
 
     collectCoverage: true,
@@ -33,14 +29,14 @@ const _testConfig: _TestConfigModel = async () => {
 
     coverageReporters: ['lcov'],
 
-    globals: _bundleConfig.define,
+    globals: bundleConfig.define,
 
     maxWorkers: -1,
 
-    moduleFileExtensions: _bundleConfig.extensions.map((ext) => trimStart(ext, '.')),
+    moduleFileExtensions: bundleConfig.extensions.map((ext) => trimStart(ext, '.')),
 
     moduleNameMapper: {
-      ...mapKeys(_bundleConfig.aliases, (k) => `^${k}$`),
+      ...mapKeys(bundleConfig.aliases, (k) => `^${k}$`),
       ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: fromRoot() }),
       [`\\.(${fileExtensions.join('|')})$`]: join(mockPath, 'file'),
     },
@@ -69,7 +65,7 @@ const _testConfig: _TestConfigModel = async () => {
 
     setupFilesAfterEnv: [fromConfig('node/test/_initialize.ts')],
 
-    testEnvironment: _bundleConfig.platform === PLATFORM.WEB ? 'jsdom' : 'node',
+    testEnvironment: bundleConfig.platform === PLATFORM.WEB ? 'jsdom' : 'node',
 
     testMatch: reduce(
       testExtensions,
@@ -88,15 +84,12 @@ const _testConfig: _TestConfigModel = async () => {
 
     transform: {
       '^.+\\.(js|jsx)$': 'babel-jest',
-      '^.+\\.(ts|tsx)$': ['ts-jest', { babelConfig: _babelConfig, tsconfig: fromWorking('tsconfig.json') }],
+      '^.+\\.(ts|tsx)$': ['ts-jest', { babelConfig: bundleConfig.babelConfig, tsconfig: fromWorking('tsconfig.json') }],
     },
 
-    transformIgnorePatterns: _bundleConfig.externals
-      ? [`node_modules/(?!(${_bundleConfig.externals.join('|')})/)`]
+    transformIgnorePatterns: bundleConfig.externals
+      ? [`node_modules/(?!(${bundleConfig.externals.join('|')})/)`]
       : [],
 
     watch: isWatch,
-  };
-};
-
-export default _testConfig;
+  });

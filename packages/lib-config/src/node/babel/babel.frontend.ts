@@ -1,9 +1,10 @@
-import type { BabelConfigModel } from '@lib/config/node/babel/_babel.models';
-import { default as babelConfigBase } from '@lib/config/node/babel/babel.base';
+import type { BabelConfigModel, _BabelConfigModel } from '@lib/config/node/babel/babel.models';
+import { config as configBase } from '@lib/config/node/babel/babel.base';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
+import { _babel } from '@lib/config/node/babel/_babel';
 
-const babelConfig: BabelConfigModel = merge(
+export const config: BabelConfigModel = merge(
   [
     {
       plugins: [['transform-react-remove-prop-types', { removeImport: true }]],
@@ -14,9 +15,9 @@ const babelConfig: BabelConfigModel = merge(
       ],
     },
 
-    babelConfigBase,
+    configBase,
   ],
   MERGE_STRATEGY.DEEP_PREPEND,
 );
 
-export default babelConfig;
+export const _config: _BabelConfigModel = _babel(config);

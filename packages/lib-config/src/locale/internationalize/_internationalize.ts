@@ -1,26 +1,23 @@
-import { importConfig } from '@lib/config/core/utils/importConfig/importConfig';
 import type {
   _InternationalizeConfigModel,
   InternationalizeConfigModel,
-} from '@lib/config/locale/internationalize/_internationalize.models';
+} from '@lib/config/locale/internationalize/internationalize.models';
 import i18next, { init, use } from 'i18next';
 
-const _internationalizeConfig: _InternationalizeConfigModel = async () => {
-  const {
-    addPath,
-    caches,
-    filename,
-    isPreload,
-    isReact,
-    isSuspense,
-    key,
-    languageDefault,
-    languages,
-    loadPath,
-    modules,
-    namespaceDefault,
-  } = await importConfig<InternationalizeConfigModel>('locale/internationalize/internationalize');
-
+export const _internationalize = ({
+  addPath,
+  caches,
+  filename,
+  isPreload,
+  isReact,
+  isSuspense,
+  key,
+  languageDefault,
+  languages,
+  loadPath,
+  modules,
+  namespaceDefault,
+}: InternationalizeConfigModel): _InternationalizeConfigModel => () => {
   modules?.forEach(use);
 
   !i18next.isInitialized &&
@@ -61,5 +58,3 @@ const _internationalizeConfig: _InternationalizeConfigModel = async () => {
 
   return i18next;
 };
-
-export default _internationalizeConfig;

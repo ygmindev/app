@@ -1,16 +1,19 @@
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import type { BundleConfigModel } from '@lib/config/node/bundle/_bundle.models';
-import { default as bundleConfigBase } from '@lib/config/node/bundle/bundle.base';
+import { _config as _babelConfig } from '@lib/config/node/babel/babel.frontend';
+import { _bundle } from '@lib/config/node/bundle/_bundle';
+import { config as configBase } from '@lib/config/node/bundle/bundle.base';
+import type { _BundleConfigModel, BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 
-const bundleConfig: BundleConfigModel = async () => {
-  const _bundleConfigBase = await bundleConfigBase();
-  return merge(
+export const config: BundleConfigModel = () =>
+  merge(
     [
       {
+        babelConfig: _babelConfig(),
+
         define: {
           __DEV__: `${process.env.NODE_ENV === 'development'}`,
         },
@@ -32,10 +35,9 @@ const bundleConfig: BundleConfigModel = async () => {
         watch: [fromPackages('lib-frontend/src/**/*')],
       },
 
-      _bundleConfigBase,
+      configBase(),
     ],
     MERGE_STRATEGY.DEEP_PREPEND,
   );
-};
 
-export default bundleConfig;
+export const _config: _BundleConfigModel = _bundle(config());

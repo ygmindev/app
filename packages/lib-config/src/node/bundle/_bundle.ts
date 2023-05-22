@@ -1,11 +1,8 @@
-import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { importConfig } from '@lib/config/core/utils/importConfig/importConfig';
-import _babelConfig from '@lib/config/node/babel/_babel';
-import type { _BundleConfigModel, BundleConfigModel } from '@lib/config/node/bundle/_bundle.models';
 import { _plugins } from '@lib/config/node/bundle/_plugins';
+import type { _BundleConfigModel, BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 import { lintCommand } from '@lib/config/node/lint/lint';
 import { PLATFORM } from '@lib/platform/core/core.constants';
 import type { PlatformModel } from '@lib/platform/core/core.models';
@@ -25,9 +22,10 @@ import { checker } from 'vite-plugin-checker';
 import circleDependency from 'vite-plugin-circular-dependency';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
-const _bundleConfig: _BundleConfigModel = async () => {
-  const {
+export const _bundle =
+  ({
     aliases,
+    babelConfig,
     define,
     entry,
     envPrefix,
@@ -39,125 +37,125 @@ const _bundleConfig: _BundleConfigModel = async () => {
     platform,
     provide,
     watch,
-  } = await importConfig<BundleConfigModel>('node/bundle/bundle');
-  const babelConfig = await _babelConfig();
-  const _isReact = (
-    [PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>
-  ).includes(platform);
-  const _result: ReturnTypeModel<_BundleConfigModel> = {
-    build: {
-      commonjsOptions: {
+  }: ReturnTypeModel<BundleConfigModel>): _BundleConfigModel =>
+  () => {
+    const _isReact = (
+      [PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>
+    ).includes(platform);
+    const _result: ReturnTypeModel<_BundleConfigModel> = {
+      build: {
+        commonjsOptions: {
+          include: externals,
+          requireReturnsDefault: 'auto',
+          transformMixedEsModules: true,
+        },
+        outDir,
+        watch:
+          process.env.NODE_ENV === ENVIRONMENT.DEVELOPMENT && watch
+            ? { include: watch }
+            : undefined,
+        ...(entry ? { rollupOptions: { input: entry } } : {}),
+      },
+
+      define,
+
+      envPrefix,
+
+      esbuild: {
+        sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : true,
+      },
+
+      mode: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? 'production' : 'development',
+
+      optimizeDeps: {
+        esbuildOptions: {
+          define,
+
+          keepNames: true,
+
+          mainFields,
+
+          minify: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION,
+
+          nodePaths: modulePaths,
+
+          plugins: _plugins({ externals, platform }),
+
+          resolveExtensions: extensions,
+
+          sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : 'inline',
+
+          target: process.env.PLATFORM === PLATFORM.NODE ? 'node18' : 'esnext',
+
+          tsconfig: fromWorking('tsconfig.json'),
+        },
+
         include: externals,
-        requireReturnsDefault: 'auto',
-        transformMixedEsModules: true,
-      },
-      outDir,
-      watch:
-        process.env.NODE_ENV === ENVIRONMENT.DEVELOPMENT && watch ? { include: watch } : undefined,
-      ...(entry ? { rollupOptions: { input: entry } } : {}),
-    },
-
-    define,
-
-    envPrefix,
-
-    esbuild: {
-      sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : true,
-    },
-
-    mode: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? 'production' : 'development',
-
-    optimizeDeps: {
-      esbuildOptions: {
-        define,
-
-        keepNames: true,
-
-        mainFields,
-
-        minify: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION,
-
-        nodePaths: modulePaths,
-
-        plugins: _plugins({ externals, platform }),
-
-        resolveExtensions: extensions,
-
-        sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : 'inline',
-
-        target: process.env.PLATFORM === PLATFORM.NODE ? 'node18' : 'esnext',
-
-        tsconfig: fromWorking('tsconfig.json'),
       },
 
-      include: externals,
-    },
+      plugins: [
+        tsconfigPaths({ projects: [fromRoot('tsconfig.json')] }),
 
-    plugins: [
-      tsconfigPaths({ projects: [fromRoot('tsconfig.json')] }),
+        checker({
+          eslint: { lintCommand: lintCommand() },
+          typescript: { tsconfigPath: fromWorking('tsconfig.json') },
+        }),
 
-      checker({
-        eslint: { lintCommand: lintCommand() },
-        typescript: { tsconfigPath: fromWorking('tsconfig.json') },
-      }),
+        _isReact && react(),
 
-      _isReact && react(),
+        provide && inject(provide),
 
-      provide && inject(provide),
+        // dynamicImport(),
 
-      // dynamicImport(),
+        // process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && dynamicImportVars(),
 
-      // process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && dynamicImportVars(),
+        viteCommonjs(),
 
-      viteCommonjs(),
+        babelConfig &&
+          babel({
+            ...babelConfig,
+            babelHelpers: 'runtime',
+            skipPreflightCheck: true,
+          } as RollupBabelInputPluginOptions),
 
-      babelConfig &&
-        babel({
-          ...babelConfig,
-          babelHelpers: 'runtime',
-          skipPreflightCheck: true,
-        } as RollupBabelInputPluginOptions),
+        process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && visualizer(),
 
-      process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && visualizer(),
+        circleDependency({}),
+      ].filter(Boolean) as Array<PluginOption>,
 
-      circleDependency({}),
-    ].filter(Boolean) as Array<PluginOption>,
+      resolve: {
+        alias: aliases,
 
-    resolve: {
-      alias: aliases,
-
-      extensions,
-    },
-
-    root: fromWorking(),
-
-    server: {
-      fs: {
-        allow: [searchForWorkspaceRoot(fromRoot()), fromModules()],
+        extensions,
       },
-    },
 
-    ssr: {
-      noExternal: externals,
-    },
+      root: fromWorking(),
+
+      server: {
+        fs: {
+          allow: [searchForWorkspaceRoot(fromRoot()), fromModules()],
+        },
+      },
+
+      ssr: {
+        noExternal: externals,
+      },
+    };
+
+    const _define = {
+      ..._result.define,
+      ...reduce(
+        process.env,
+        (result, v, k) =>
+          some(_result.envPrefix, (prefix) => k.startsWith(prefix))
+            ? { ...result, [`process.env.${k}`]: JSON.stringify(v) }
+            : result,
+        {},
+      ),
+    };
+    ('');
+    _result.define = _define;
+    _result.optimizeDeps?.esbuildOptions && (_result.optimizeDeps.esbuildOptions.define = _define);
+
+    return _result;
   };
-
-  const _define = {
-    ..._result.define,
-    ...reduce(
-      process.env,
-      (result, v, k) =>
-        some(_result.envPrefix, (prefix) => k.startsWith(prefix))
-          ? { ...result, [`process.env.${k}`]: JSON.stringify(v) }
-          : result,
-      {},
-    ),
-  };
-  ('');
-  _result.define = _define;
-  _result.optimizeDeps?.esbuildOptions && (_result.optimizeDeps.esbuildOptions.define = _define);
-
-  return _result;
-};
-
-export default _bundleConfig;

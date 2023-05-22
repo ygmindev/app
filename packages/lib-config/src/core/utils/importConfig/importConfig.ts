@@ -7,11 +7,17 @@ import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEn
 import { isPromise } from '@lib/shared/core/utils/isPromise/isPromise';
 import isFunction from 'lodash/isFunction';
 
-export const importConfig = async <TType>(
+const _loadConfig = async <TType>(params: unknown): Promise<ReturnTypeModel<TType>> => {
+  const _result = isFunction(params) ? params() : params;
+  return isPromise(_result) ? await _result : _result;
+}
+
+export const importConfig = async <TParams, TResult = undefined>(
   params: ImportConfigParamsModel,
-): ImportConfigModel<TType> => {
-  let _config = await importFromEnv(`@lib/config/${params}`);
-  _config = isFunction(_config) ? _config() : _config;
-  _config = isPromise(_config) ? await _config : _config;
-  return _config as ReturnTypeModel<TType>;
+): ImportConfigModel<TParams, TResult> => {
+  const { config, _config } = await importFromEnv<{ config: TParams, _config?: TResult }>(`@lib/config/${params}`);
+  return {
+    config: await _loadConfig(config) as ReturnTypeModel<TParams>,
+    _config: _config && await _loadConfig(_config) as ReturnTypeModel<TResult>,
+  };
 };

@@ -1,4 +1,4 @@
-import internationalizeConfig from '@lib/config/locale/internationalize/internationalize.base';
+import { config } from '@lib/config/locale/internationalize/internationalize.base';
 import { _useTranslation } from '@lib/frontend/locale/hooks/useTranslation/_useTranslation';
 import type {
   UseTranslationModel,
@@ -12,7 +12,7 @@ export const useTranslation = (ns: UseTranslationParamsModel = []): UseTranslati
     currentLanguage,
     isInitialized,
     t: _t,
-  } = _useTranslation([...ns, ...([internationalizeConfig.namespaceDefault] || [])]);
+  } = _useTranslation([...ns, ...([config.namespaceDefault] || [])]);
 
   const t = <TParams = undefined,>(key?: TranslatableTextModel, params?: TParams): string =>
     key && isInitialized

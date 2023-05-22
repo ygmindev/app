@@ -1,12 +1,13 @@
-import type { ServerlessConfigModel } from '@lib/config/platform/serverless/_serverless.models';
-import { default as serverlessCenfigBase } from '@lib/config/platform/serverless/serverless.base';
+import type { ServerlessConfigModel, _ServerlessConfigModel } from '@lib/config/platform/serverless/serverless.models';
+import { config as configBase } from '@lib/config/platform/serverless/serverless.base';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
 import { HTTP_METHOD, PING } from '@lib/shared/http/http.constants';
 import { PLATFORM } from '@lib/platform/core/core.constants';
+import { _serverless } from '@lib/config/platform/serverless/_serverless';
 
-const serverlessConfig: ServerlessConfigModel = merge(
+export const config: ServerlessConfigModel = () => merge(
   [
     {
       functions: {
@@ -26,9 +27,9 @@ const serverlessConfig: ServerlessConfigModel = merge(
       platform: PLATFORM.NODE,
     },
 
-    serverlessCenfigBase,
+    configBase(),
   ],
   MERGE_STRATEGY.DEEP_APPEND,
 );
 
-export default serverlessConfig;
+export const _config: _ServerlessConfigModel = _serverless(config());

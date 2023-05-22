@@ -1,5 +1,5 @@
-import type { InternationalizeConfigModel } from '@lib/config/locale/internationalize/_internationalize.models';
-import { default as internationalizeConfigBase } from '@lib/config/locale/internationalize/internationalize.base';
+import type { InternationalizeConfigModel, _InternationalizeConfigModel } from '@lib/config/locale/internationalize/internationalize.models';
+import { config as configBase } from '@lib/config/locale/internationalize/internationalize.base';
 import { APP_URI } from '@lib/frontend/http/http.constants';
 import { PLATFORM } from '@lib/platform/core/core.constants';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -7,8 +7,9 @@ import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import type { Module } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { NativeModules } from 'react-native';
+import { _internationalize } from '@lib/config/locale/internationalize/_internationalize';
 
-const internationalizeConfig: InternationalizeConfigModel = merge(
+export const config: InternationalizeConfigModel = merge(
   [
     {
       loadPath: APP_URI,
@@ -31,9 +32,9 @@ const internationalizeConfig: InternationalizeConfigModel = merge(
       ],
     },
 
-    internationalizeConfigBase,
+    configBase,
   ],
   MERGE_STRATEGY.DEEP_APPEND,
 );
 
-export default internationalizeConfig;
+export const _config: _InternationalizeConfigModel = _internationalize(config);

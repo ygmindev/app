@@ -4,7 +4,7 @@ import { fastifyCookie } from '@fastify/cookie';
 import { fastifyMiddie } from '@fastify/middie';
 import { fastifyStatic } from '@fastify/static';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
-import _internationalizeConfig from '@lib/config/locale/internationalize/_internationalize';
+import { _config } from '@lib/config/locale/internationalize/internationalize.ssr';
 import webConfig from '@lib/config/platform/web/web';
 import type { CookieOptionModel } from '@lib/frontend/state/state.models';
 import type {
@@ -26,7 +26,7 @@ export const _server = async ({
   port,
   root,
 }: _ServerParamsModel): Promise<_ServerModel> => {
-  const _i18n = await _internationalizeConfig();
+  const _i18n = _config();
   const app = fastify();
   await app.register(fastifyMiddie);
   await app.register(fastifyCompress);

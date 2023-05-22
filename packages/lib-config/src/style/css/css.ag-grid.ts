@@ -1,8 +1,8 @@
-import type { _CssConfigModel } from '@lib/config/style/css/_css.models';
+import type { CssConfigModel } from '@lib/config/style/css/css.models';
 
 export const AG_GRID_THEME = 'ag-theme-material';
 
-const cssConfig: _CssConfigModel = (theme) => `
+export const config: CssConfigModel = (theme) => `
   .${AG_GRID_THEME} {
     --ag-background-color: transparent;
     --ag-border-color: ${theme?.colors.tone.neutral.mutedContrast};
@@ -26,5 +26,3 @@ const cssConfig: _CssConfigModel = (theme) => `
     }
   }
 `;
-
-export default cssConfig;

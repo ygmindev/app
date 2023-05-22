@@ -1,15 +1,10 @@
-import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
-import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import type { TaskConfigModel } from '@lib/config/core/task/_task.models';
-import { command } from '@tool/task/core/utils/command/command';
+import { _task } from '@lib/config/core/task/_task';
+import type { TaskConfigModel, _TaskConfigModel } from '@lib/config/core/task/task.models';
 
-const taskConfig: TaskConfigModel = {
+export const config: TaskConfigModel = {
   packageConfig: 'tasks.ts',
-
-  task: async ({ options }) =>
-    await command(`gulp --cwd ${fromRoot()} --gulpfile ${fromConfig('core/task/_task.js')} ${options?.task || ''}`),
 
   taskExtension: 'task.ts',
 };
 
-export default taskConfig;
+export const _config: _TaskConfigModel = _task(config);

@@ -1,9 +1,11 @@
 import type { Config } from '@jest/types';
-import { ConfigDynamicModel, ConfigStaticModel } from '@lib/config/core/core.models';
-import type { CallableModel, CallablePromiseModel } from '@lib/shared/core/core.models';
-import { TaskParamsModel } from '@tool/task/core/core.models';
+import { ConfigDynamicModel } from '@lib/config/core/core.models';
+import { BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
+import type { CallableModel, CallablePromiseModel, ReturnTypeModel } from '@lib/shared/core/core.models';
 
-export type TestConfigModel = ConfigDynamicModel<Pick<TaskParamsModel, 'task'> & {
+export type TestConfigModel = ConfigDynamicModel<{
+  bundleConfig: ReturnTypeModel<BundleConfigModel>;
+
   cachePath: string;
 
   coverageOutputPath: string;

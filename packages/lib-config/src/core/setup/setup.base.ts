@@ -1,13 +1,19 @@
-import type { SetupConfigModel, _SetupConfigModel } from '@lib/config/core/setup/_setup.models';
+import type { SetupConfigModel } from '@lib/config/core/setup/setup.models';
 
-const setupConfig: SetupConfigModel = {
+let _isInitialized = false;
+
+let _isTerminated = false;
+
+export const config: SetupConfigModel = {
   onInitialize: async () => {
-    return;
+    if (!_isInitialized) {
+      return;
+    }
   },
 
   onTerminate: async () => {
-    return;
+    if (!_isTerminated) {
+      return;
+    }
   },
 };
-
-export default setupConfig;

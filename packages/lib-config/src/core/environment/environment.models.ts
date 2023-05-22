@@ -1,4 +1,4 @@
-export interface _EnvironmentConfigModel {
+export interface EnvironmentConfigModel {
   APP_AMPLITUDE_API_KEY: string;
   APP_FIREBASE_API_KEY: string;
   APP_FIREBASE_APP_ID: string;

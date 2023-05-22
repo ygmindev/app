@@ -1,8 +1,6 @@
-import type { GenerateConfigModel, _GenerateConfigModel } from '@lib/config/core/generate/_generate.models';
+import type { GenerateConfigModel } from '@lib/config/core/generate/generate.models';
 import { jsPackage } from '@tool/generate/generators/jsPackage/jsPackage';
 
-const generateConfig: GenerateConfigModel = ({
+export const config: GenerateConfigModel = ({
   'js-package': jsPackage,
 });
-
-export default generateConfig;

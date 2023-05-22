@@ -1,4 +1,4 @@
-import type { _ThemeConfigModel } from '@lib/config/style/theme/_theme.models';
+import type { _ThemeConfigModel } from '@lib/config/style/theme/theme.models';
 import type {
   STYLE_BRIGHTNESS,
   THEME_COLOR,

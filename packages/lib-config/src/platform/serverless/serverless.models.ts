@@ -1,15 +1,18 @@
 import type { ServerlessProviderModel } from '@lib/backend/serverless/serverless.models';
-import type { ConfigDynamicModel, ConfigStaticModel } from '@lib/config/core/core.models';
-import type { CallableModel } from '@lib/shared/core/core.models';
+import { ConfigDynamicModel } from '@lib/config/core/core.models';
+import type { _BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
+import type { PlatformModel } from '@lib/platform/core/core.models';
+import type { CallableModel, ReturnTypeModel } from '@lib/shared/core/core.models';
 import type { EnvironmentModel } from '@lib/shared/environment/environment.models';
 import type { HttpMethodModel } from '@lib/shared/http/http.models';
 import type { UriParamsModel } from '@lib/shared/http/utils/uri/uri.models';
-import type { PlatformModel } from '@lib/platform/core/core.models';
 import type { AWS } from '@serverless/typescript';
 import type { TaskParamsModel } from '@tool/task/core/core.models';
 
-export type ServerlessConfigModel = ConfigStaticModel<{
+export type ServerlessConfigModel = ConfigDynamicModel<{
   build: Pick<TaskParamsModel, 'task'>;
+
+  bundleConfig: ReturnTypeModel<_BundleConfigModel>;
 
   dev: {
     lambdaPort: number;

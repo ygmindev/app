@@ -1,4 +1,4 @@
-import type { ThemeConfigModel } from '@lib/config/style/theme/_theme.models';
+import type { ThemeConfigModel } from '@lib/config/style/theme/theme.models';
 import {
   STYLE_BRIGHTNESS,
   THEME_COLOR,
@@ -8,7 +8,7 @@ import {
 import { FONT_FAMILY } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { PLATFORM } from '@lib/platform/core/core.constants';
 
-const themeConfig: ThemeConfigModel = {
+export const config: ThemeConfigModel = {
   animation: {
     duration: 150,
     transition: 400,
@@ -118,5 +118,3 @@ const themeConfig: ThemeConfigModel = {
     },
   },
 };
-
-export default themeConfig;
