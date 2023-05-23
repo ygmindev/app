@@ -12,7 +12,7 @@ export const config: BundleConfigModel = () =>
   merge(
     [
       {
-        babelConfig: _babelConfig(),
+        babelConfig: _babelConfig,
 
         define: {
           __DEV__: `${process.env.NODE_ENV === 'development'}`,
@@ -40,4 +40,4 @@ export const config: BundleConfigModel = () =>
     MERGE_STRATEGY.DEEP_PREPEND,
   );
 
-export const _config: _BundleConfigModel = _bundle(config());
+export const _config: _BundleConfigModel = () => _bundle(config());

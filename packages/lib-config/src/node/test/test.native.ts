@@ -7,7 +7,7 @@ import { _test } from '@lib/config/node/test/_test';
 
 export const config: TestConfigModel = () => merge(
     [{
-      // bundleConfig: bundleConfig(),
+      // bundleConfig,
 
       mocks: [
         ['@react-native-async-storage/async-storage', () => mockAsyncStorage],

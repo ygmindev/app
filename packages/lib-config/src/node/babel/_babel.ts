@@ -2,7 +2,8 @@ import type { _BabelConfigModel, BabelConfigModel } from '@lib/config/node/babel
 import { ReturnTypeModel } from '@lib/shared/core/core.models';
 
 export const _babel = ({
-  plugins, presets
+  plugins,
+  presets,
 }: BabelConfigModel): ReturnTypeModel<_BabelConfigModel> => ({
   compact: process.env.NODE_ENV === 'production',
 

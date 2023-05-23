@@ -11,7 +11,7 @@ export const config: BundleConfigModel = () =>
   merge(
     [
       {
-        babelConfig: _babelConfig(),
+        babelConfig: _babelConfig,
 
         envPrefix: ['SERVER_'],
 
@@ -25,4 +25,4 @@ export const config: BundleConfigModel = () =>
     MERGE_STRATEGY.DEEP_PREPEND,
   );
 
-export const _config: _BundleConfigModel = _bundle(config());
+export const _config: _BundleConfigModel = () => _bundle(config());

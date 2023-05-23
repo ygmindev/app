@@ -3,7 +3,7 @@ import { _config as _bundleConfig } from '@lib/config/node/bundle/bundle.web';
 import { _web } from '@lib/config/platform/web/_web';
 
 export const config: WebConfigModel = {
-  bundleConfig: _bundleConfig(),
+  bundleConfig: _bundleConfig,
 
   isSsr: true,
 
@@ -14,4 +14,4 @@ export const config: WebConfigModel = {
   ssrContextKeys: ['locale.store', 'state.initialState'],
 };
 
-export const _config: _WebConfigModel = _web(config);
+export const _config: _WebConfigModel = () => _web(config);

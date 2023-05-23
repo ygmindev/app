@@ -4,16 +4,11 @@ import type { ExtensionsModel } from '@lib/platform/core/utils/extensions/extens
 import { isSsr } from '@lib/platform/core/utils/isSsr/isSsr';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 
-let _result: ExtensionsModel;
-
 export const extensions = (): ExtensionsModel => {
-  if (_result) {
-    return _result;
-  }
   const _isWeb = process.env.ENV_PLATFORM === 'web';
   const _isNative = [PLATFORM.ANDROID, PLATFORM.IOS].includes(process.env.ENV_PLATFORM);
   const _isFrontend = _isNative || _isWeb;
-  _result = [
+  return [
     ...permuteString(
       [
         _isWeb && isSsr && '.ssr',
@@ -25,5 +20,4 @@ export const extensions = (): ExtensionsModel => {
     ),
     ...EXTENSIONS_BASE,
   ];
-  return _result;
 };

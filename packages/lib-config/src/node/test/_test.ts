@@ -20,7 +20,9 @@ export const _test = ({
   root,
   testExtensions,
   timeout,
-}: ReturnTypeModel<TestConfigModel>): ReturnTypeModel<_TestConfigModel> => ({
+}: ReturnTypeModel<TestConfigModel>): ReturnTypeModel<_TestConfigModel> => {
+  const _bundleConfig = bundleConfig();
+  return {
     cacheDirectory: cachePath,
 
     collectCoverage: true,
@@ -29,14 +31,14 @@ export const _test = ({
 
     coverageReporters: ['lcov'],
 
-    globals: bundleConfig.define,
+    globals: _bundleConfig.define,
 
     maxWorkers: -1,
 
-    moduleFileExtensions: bundleConfig.extensions.map((ext) => trimStart(ext, '.')),
+    moduleFileExtensions: _bundleConfig.extensions.map((ext) => trimStart(ext, '.')),
 
     moduleNameMapper: {
-      ...mapKeys(bundleConfig.aliases, (k) => `^${k}$`),
+      ...mapKeys(_bundleConfig.aliases, (k) => `^${k}$`),
       ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: fromRoot() }),
       [`\\.(${fileExtensions.join('|')})$`]: join(mockPath, 'file'),
     },
@@ -65,7 +67,7 @@ export const _test = ({
 
     setupFilesAfterEnv: [fromConfig('node/test/_initialize.ts')],
 
-    testEnvironment: bundleConfig.platform === PLATFORM.WEB ? 'jsdom' : 'node',
+    testEnvironment: _bundleConfig.platform === PLATFORM.WEB ? 'jsdom' : 'node',
 
     testMatch: reduce(
       testExtensions,
@@ -84,12 +86,13 @@ export const _test = ({
 
     transform: {
       '^.+\\.(js|jsx)$': 'babel-jest',
-      '^.+\\.(ts|tsx)$': ['ts-jest', { babelConfig: bundleConfig.babelConfig, tsconfig: fromWorking('tsconfig.json') }],
+      '^.+\\.(ts|tsx)$': ['ts-jest', { babelConfig: _bundleConfig.babelConfig, tsconfig: fromWorking('tsconfig.json') }],
     },
 
-    transformIgnorePatterns: bundleConfig.externals
-      ? [`node_modules/(?!(${bundleConfig.externals.join('|')})/)`]
+    transformIgnorePatterns: _bundleConfig.externals
+      ? [`node_modules/(?!(${_bundleConfig.externals.join('|')})/)`]
       : [],
 
     watch: isWatch,
-  });
+  };
+};

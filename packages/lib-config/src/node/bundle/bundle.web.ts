@@ -17,7 +17,7 @@ export const config: BundleConfigModel = () =>
           ...(process.env.NODE_ENV === 'test' ? { '\\.(css|sass)$': 'identity-obj-proxy' } : {}),
         },
 
-        babelConfig: _babelConfig(),
+        babelConfig: _babelConfig,
 
         platform: PLATFORM.WEB,
 
@@ -33,4 +33,4 @@ export const config: BundleConfigModel = () =>
     MERGE_STRATEGY.DEEP_PREPEND,
   );
 
-export const _config: _BundleConfigModel = _bundle(config());
+export const _config: _BundleConfigModel = () => _bundle(config());

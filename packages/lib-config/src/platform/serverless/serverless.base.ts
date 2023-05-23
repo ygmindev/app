@@ -12,7 +12,7 @@ import { appUri } from '@lib/shared/http/utils/appUri/appUri';
 import toNumber from 'lodash/toNumber';
 
 export const config: ServerlessConfigModel = () => ({
-  bundleConfig: _bundleConfig(),
+  bundleConfig: _bundleConfig,
 
   dotenv: () => setEnvironment(),
 

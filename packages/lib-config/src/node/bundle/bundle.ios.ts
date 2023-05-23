@@ -10,7 +10,7 @@ export const config: BundleConfigModel = () =>
   merge(
     [
       {
-        babelConfig: _babelConfig(),
+        babelConfig: _babelConfig,
 
         platform: PLATFORM.IOS,
       },
@@ -20,4 +20,4 @@ export const config: BundleConfigModel = () =>
     MERGE_STRATEGY.DEEP_PREPEND,
   );
 
-export const _config: _BundleConfigModel = _bundle(config());
+export const _config: _BundleConfigModel = () => _bundle(config());

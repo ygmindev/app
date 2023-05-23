@@ -7,6 +7,7 @@ import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { _config } from '@lib/config/locale/internationalize/internationalize.ssr';
 import { config as webConfig } from '@lib/config/platform/web/web';
 import type { CookieOptionModel } from '@lib/frontend/state/state.models';
+import { renderPage } from '@lib/platform/web/utils/renderPage/renderPage';
 import type {
   _ServerModel,
   _ServerParamsModel,
@@ -18,7 +19,6 @@ import type { FastifyPluginCallback, FastifyRegisterOptions } from 'fastify';
 import { fastify } from 'fastify';
 import i18nextMiddleware from 'i18next-http-middleware';
 import toNumber from 'lodash/toNumber';
-import { renderPage } from '@lib/platform/web/utils/renderPage/renderPage';
 import { createServer } from 'vite';
 
 export const _server = async ({

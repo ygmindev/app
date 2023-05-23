@@ -7,7 +7,7 @@ import { extensions } from '@lib/platform/core/utils/extensions/extensions';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 
 export const config: TestConfigModel = () => ({
-  bundleConfig: bundleConfig(),
+  bundleConfig,
 
   cachePath: fromWorking('.cache/test'),
 

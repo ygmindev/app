@@ -9,7 +9,7 @@ export const config: TestConfigModel = () =>
   merge(
     [
       {
-        bundleConfig: bundleConfig(),
+        bundleConfig,
       },
       configFrontend(),
     ],

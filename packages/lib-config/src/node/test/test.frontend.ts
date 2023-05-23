@@ -9,7 +9,7 @@ export const config: TestConfigModel = () =>
   merge(
     [
       {
-        bundleConfig: bundleConfig(),
+        bundleConfig,
 
         mocks: [
           ['react-native-reanimated', () => jest.requireActual('react-native-reanimated/mock')],

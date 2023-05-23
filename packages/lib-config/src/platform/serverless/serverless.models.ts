@@ -2,7 +2,7 @@ import type { ServerlessProviderModel } from '@lib/backend/serverless/serverless
 import type { ConfigDynamicModel } from '@lib/config/core/core.models';
 import type { _BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 import type { PlatformModel } from '@lib/platform/core/core.models';
-import type { CallableModel, ReturnTypeModel } from '@lib/shared/core/core.models';
+import type { CallableModel } from '@lib/shared/core/core.models';
 import type { EnvironmentModel } from '@lib/shared/environment/environment.models';
 import type { HttpMethodModel } from '@lib/shared/http/http.models';
 import type { UriParamsModel } from '@lib/shared/http/utils/uri/uri.models';
@@ -10,7 +10,7 @@ import type { AWS } from '@serverless/typescript';
 
 export type ServerlessConfigModel = ConfigDynamicModel<
   Pick<UriParamsModel, 'host' | 'port'> & {
-    bundleConfig: ReturnTypeModel<_BundleConfigModel>;
+    bundleConfig: _BundleConfigModel;
 
     dotenv: CallableModel;
 

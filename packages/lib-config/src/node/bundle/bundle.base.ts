@@ -8,7 +8,7 @@ import { PLATFORM } from '@lib/platform/core/core.constants';
 import { extensions } from '@lib/platform/core/utils/extensions/extensions';
 
 export const config: BundleConfigModel = () => ({
-  babelConfig: _babelConfig(),
+  babelConfig: _babelConfig,
 
   envPrefix: ['ENV_', 'NODE_ENV'],
 
@@ -31,4 +31,4 @@ export const config: BundleConfigModel = () => ({
   ],
 });
 
-export const _config: _BundleConfigModel = _bundle(config());
+export const _config: _BundleConfigModel = () => _bundle(config());
