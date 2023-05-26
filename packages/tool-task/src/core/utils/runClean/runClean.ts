@@ -8,6 +8,7 @@ import type {
 import { join } from 'path';
 
 export const runClean = async ({
+  excludes,
   patterns,
   root = fromWorking(),
 }: RunCleanParamsModel): RunCleanModel =>
@@ -15,7 +16,9 @@ export const runClean = async ({
     `npx rimraf ${(
       patterns || [
         ...config.cleanPatterns,
-        ...config.cleanPatterns.map((pattern) => join('**/', pattern)),
+        ...config.cleanPatterns.map((pattern) =>
+          join(`${excludes ? `!(${excludes.join('|')})` : ''}**/`, pattern),
+        ),
       ]
     ).join(' ')}`,
     { root },

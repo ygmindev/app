@@ -1,3 +1,4 @@
+import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import type { FileConfigModel } from '@lib/config/core/file/file.models';
 
 const CLEAN_PATTERNS = [
@@ -13,7 +14,9 @@ const CLEAN_PATTERNS = [
 ];
 
 export const config: FileConfigModel = {
+  backupDir: fromRoot('../backups'),
+
   cleanPatterns: CLEAN_PATTERNS,
 
-  excludePatterns: [...CLEAN_PATTERNS, '.git', 'backups', 'ios/Pods', 'node_modules'],
+  excludePatterns: [...CLEAN_PATTERNS, '.git', '.backups', 'ios/Pods', 'node_modules'],
 };

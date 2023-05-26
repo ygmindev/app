@@ -4,7 +4,6 @@ import { dateTimeFormat } from '@lib/shared/format/utils/dateTimeFormat/dateTime
 import { DATE_TIME_FORMAT_TYPE } from '@lib/shared/format/utils/dateTimeFormat/dateTimeFormat.constants';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
 import type { TaskParamsModel } from '@tool/task/core/core.models';
-import { BACKUP_DIR } from '@tool/task/core/tasks/backup/backup.constants';
 import type { BackupParamsModel } from '@tool/task/core/tasks/backup/backup.models';
 import { command } from '@tool/task/core/utils/command/command';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
@@ -20,7 +19,7 @@ const backup: TaskParamsModel<BackupParamsModel> = {
     const _includes = includes || [fromRoot('*')];
     const _excludes = excludes || config.excludePatterns;
     const dest = join(
-      BACKUP_DIR,
+      config.backupDir,
       `${kebabCase(_name)}-${kebabCase(
         dateTimeFormat({ format: DATE_TIME_FORMAT_TYPE.DATE_TIME_MINUTES }),
       )}`,
