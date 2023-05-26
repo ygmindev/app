@@ -1,5 +1,5 @@
 import { _task } from '@lib/config/core/task/_task';
-import type { TaskConfigModel, _TaskConfigModel } from '@lib/config/core/task/task.models';
+import type { _TaskConfigModel, TaskConfigModel } from '@lib/config/core/task/task.models';
 
 export const config: TaskConfigModel = {
   packageConfig: 'tasks.ts',

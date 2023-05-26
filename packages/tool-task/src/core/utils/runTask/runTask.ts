@@ -59,7 +59,7 @@ export const runTask = async <TType = undefined>({
     (await sequence(onBefore.map((value) => (isString(value) ? _getTaskByName(value) : value))));
 
   try {
-    const { message, status } = await task({
+    const { error: _error, message, status } = await task({
       name,
       options: (options || {}) as TType,
       root: _root,
@@ -78,7 +78,7 @@ export const runTask = async <TType = undefined>({
         return true;
       }
       default: {
-        error(`[${name}] ${message || 'failed'}`);
+        error(`[${name}] ${_error?.message || message || 'failed'}`);
         return false;
       }
     }

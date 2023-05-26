@@ -1,5 +1,4 @@
 import type { TaskParamsModel } from '@tool/task/core/core.models';
-import { clean } from '@tool/task/core/templates/clean/clean';
 import { lint } from '@tool/task/node/templates/lint/lint';
 import { packageExtend } from '@tool/task/node/templates/packageExtend/packageExtend';
 import { test } from '@tool/task/node/templates/test/test';
@@ -11,7 +10,6 @@ export const nodeTasks = ({ testOverrides }: NodeTasksParamsModel = {}): Array<
   const _test = { ...test, ...testOverrides };
   return [
     packageExtend,
-    clean,
     lint,
     _test,
     { ..._test, name: `${_test.name}-watch`, options: { isWatch: true } },

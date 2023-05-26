@@ -5,6 +5,7 @@ import type { TASK_STATUS } from '@tool/task/core/core.constants';
 export type TaskStatusModel = `${TASK_STATUS}`;
 
 export interface TaskResultModel {
+  error?: Error;
   message?: string;
   status: TaskStatusModel;
 }

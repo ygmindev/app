@@ -33,6 +33,6 @@ export const _command = async (
     return { status: TASK_STATUS.SUCCESS };
   } catch (e) {
     error(e);
-    return { message: (e as Error).message, status: TASK_STATUS.ERROR };
+    return { error: e as Error, status: TASK_STATUS.ERROR };
   }
 };

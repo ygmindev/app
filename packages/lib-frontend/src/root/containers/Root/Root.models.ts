@@ -8,6 +8,5 @@ export interface RootPropsModel
   extends ChildrenPropsModel,
     ExportRenderServerParamsModel,
     ExportRenderClientParamsModel {
-      context?: RootContextModel;
       additionalProviders?: Array<(context?: RootContextModel) => ReactElement<ProviderPropsModel<unknown>>>;
     }
