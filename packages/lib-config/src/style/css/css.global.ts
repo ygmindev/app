@@ -1,5 +1,5 @@
-import { config as webConfig } from '@lib/config/platform/web/web';
 import type { CssConfigModel } from '@lib/config/style/css/css.models';
+import { ROOT } from '@lib/frontend/root/root.constants';
 import FontAwesome from 'react-native-vector-icons/Fonts/FontAwesome.ttf';
 import Ionicons from 'react-native-vector-icons/Fonts/Ionicons.ttf';
 import MaterialIcons from 'react-native-vector-icons/Fonts/MaterialIcons.ttf';
@@ -33,7 +33,7 @@ export const config: CssConfigModel = (theme) => `
     font-smoothing: antialiased;
   }
 
-  body, #${webConfig.rootId} {
+  body, #${ROOT} {
     display: flex;
     flex: 1;
     flex-direction: column;

@@ -19,10 +19,7 @@ export const test: TaskParamsModel<TestParamsModel> = {
       options?.isPrompt && (await prompt([{ isOptional: true, key: 'testMatch' }])).testMatch;
     testMatch && (process.env.TEST_MATCH = testMatch);
     const { _config } = await importConfig<TestConfigModel, _TestConfigModel>('node/test/test');
-    if (_config) {
-      await runCLI({ ..._config, runInBand: true } as Config.Argv, [root || fromWorking()]);
-      return { status: TASK_STATUS.SUCCESS };
-    }
-    return { status: TASK_STATUS.ERROR };
+    await runCLI({ ..._config, runInBand: true } as Config.Argv, [root || fromWorking()]);
+    return { status: TASK_STATUS.SUCCESS };
   },
 };

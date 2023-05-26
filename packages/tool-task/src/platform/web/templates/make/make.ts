@@ -10,7 +10,7 @@ export const make: TaskParamsModel = {
   name: 'make',
 
   task: async () => {
-    await build(_config);
+    await build(_config());
     return { status: TASK_STATUS.SUCCESS };
   },
 };

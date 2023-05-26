@@ -6,7 +6,7 @@ import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import type { ComponentType } from 'react';
 
 export interface _ExportRendererServerParamsModel
-  extends Pick<WebConfigModel, 'publicDir' | 'rootId' | 'ssrContextKeys'> {
+  extends Pick<WebConfigModel, 'publicDir' | 'ssrContextKeys'> {
   render: FCModel<ChildrenPropsModel & ExportRenderServerParamsModel>;
 }
 

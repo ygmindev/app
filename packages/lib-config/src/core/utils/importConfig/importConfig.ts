@@ -15,9 +15,9 @@ const _loadConfig = async <TType>(params: unknown): Promise<ReturnTypeModel<TTyp
 export const importConfig = async <TParams, TResult = undefined>(
   params: ImportConfigParamsModel,
 ): ImportConfigModel<TParams, TResult> => {
-  const { config, _config } = await importFromEnv<{ config: TParams, _config?: TResult }>(`@lib/config/${params}`);
+  const { config, _config } = await importFromEnv<{ config: TParams, _config: TResult }>(`@lib/config/${params}`);
   return {
     config: await _loadConfig(config) as ReturnTypeModel<TParams>,
-    _config: _config && await _loadConfig(_config) as ReturnTypeModel<TResult>,
+    _config: await _loadConfig(_config) as ReturnTypeModel<TResult>,
   };
 };

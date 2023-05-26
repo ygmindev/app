@@ -21,13 +21,16 @@ export const config: BundleConfigModel = () =>
         envPrefix: ['APP_'],
 
         externals: [
-          'history',
+          // 'history',
           'moti',
           'react/jsx-runtime',
+          'react-dom',
           'react-native',
           'redux-persist',
           ...fromGlobs({
-            globs: ['@expo', '@react-native*', 'expo-*', 'react-native-!(codegen|gradle-plugin)'],
+            globs: ['@expo', 
+            // '@react-native*', 
+            'expo-*', 'react-native-!(codegen|gradle-plugin)'],
             root: fromModules(),
           }),
         ],

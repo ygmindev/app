@@ -11,7 +11,7 @@ export const dev: TaskParamsModel = {
 
   task: async ({ root }) => {
     const port = process.env[`APP_${process.env.ENV_NAME}_PORT`] || '';
-    await server({ config: _config, port, root });
+    await server({ config: _config(), port, root });
     return { status: TASK_STATUS.SUCCESS };
   },
 };

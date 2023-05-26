@@ -9,10 +9,8 @@ import type { PlatformModel } from '@lib/platform/core/core.models';
 import type { ReturnTypeModel } from '@lib/shared/core/core.models';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
-import type { RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
-import { babel } from '@rollup/plugin-babel';
 import inject from '@rollup/plugin-inject';
-import react from '@vitejs/plugin-react';
+import react from '@vitejs/plugin-react-swc';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
 import { visualizer } from 'rollup-plugin-visualizer';
@@ -40,6 +38,7 @@ export const _bundle = ({
   const _isReact = (
     [PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>
   ).includes(platform);
+  const _babelConfig = babelConfig && babelConfig();
   const _result: ReturnTypeModel<_BundleConfigModel> = {
     build: {
       commonjsOptions: {
@@ -81,7 +80,7 @@ export const _bundle = ({
 
         sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : 'inline',
 
-        target: process.env.PLATFORM === PLATFORM.NODE ? 'node18' : 'esnext',
+        target: process.env.PLATFORM === PLATFORM.NODE ? 'node18' : undefined,
 
         tsconfig: fromWorking('tsconfig.json'),
       },
@@ -107,12 +106,12 @@ export const _bundle = ({
 
       viteCommonjs(),
 
-      babelConfig &&
-        babel({
-          ...babelConfig(),
-          babelHelpers: 'runtime',
-          skipPreflightCheck: true,
-        } as RollupBabelInputPluginOptions),
+      // _babelConfig &&
+      //   babel({
+      //     ..._babelConfig,
+      //     babelHelpers: 'runtime',
+      //     skipPreflightCheck: true,
+      //   } as RollupBabelInputPluginOptions),
 
       process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && visualizer(),
 
