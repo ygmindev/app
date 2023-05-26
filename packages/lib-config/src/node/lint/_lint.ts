@@ -1,4 +1,4 @@
-import type { LintConfigModel, _LintConfigModel } from '@lib/config/node/lint/lint.models';
+import type { _LintConfigModel, LintConfigModel } from '@lib/config/node/lint/lint.models';
 
 export const _lint = ({
   include,
@@ -20,7 +20,7 @@ export const _lint = ({
   },
 
   extends: [
-    'plugin:@nrwl/nx/typescript',
+    'plugin:@nx/react-typescript',
     'plugin:@typescript-eslint/recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',
@@ -30,7 +30,6 @@ export const _lint = ({
   ignorePatterns: [`!(${include.join('|')})`],
 
   plugins: [
-    '@nrwl/nx',
     '@typescript-eslint',
     'import',
     'prettier',

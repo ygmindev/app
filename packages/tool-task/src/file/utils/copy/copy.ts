@@ -1,4 +1,4 @@
-import { EXCLUDE_PATTERNS } from '@lib/shared/file/file.constants';
+import { config } from '@lib/config/core/file/file';
 import type { CopyParamsModel } from '@tool/task/file/utils/copy/copy.models';
 import {
   existsSync,
@@ -15,7 +15,7 @@ import { minimatch } from 'minimatch';
 import { join } from 'path';
 
 export const copy = async ({
-  excludes = EXCLUDE_PATTERNS,
+  excludes = config.excludePatterns,
   from,
   isOverwrite,
   overrides,

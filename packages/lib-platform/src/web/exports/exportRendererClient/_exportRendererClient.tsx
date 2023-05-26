@@ -1,4 +1,4 @@
-import { _config } from '@lib/config/locale/internationalize/internationalize.web';
+import { _config } from '@lib/config/locale/internationalize/internationalize';
 import type { FCModel } from '@lib/frontend/core/core.models';
 import { ROOT } from '@lib/frontend/root/root.constants';
 import type { RootContextModel } from '@lib/frontend/root/root.models';

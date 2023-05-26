@@ -6,7 +6,6 @@ import { ERROR_MODE } from '@lib/frontend/core/providers/ErrorProvider/ErrorProv
 import { QueryProvider } from '@lib/frontend/core/providers/QueryProvider/QueryProvider';
 import { LocaleProvider } from '@lib/frontend/locale/providers/LocaleProvider/LocaleProvider';
 import type { RootPropsModel } from '@lib/frontend/root/containers/Root/Root.models';
-import { RootLayout } from '@lib/frontend/root/layouts/RootLayout/RootLayout';
 import { ROOT_REDUCERS } from '@lib/frontend/root/stores/rootStore.constants';
 import type {
   RootActionsModel,
@@ -22,7 +21,7 @@ import { cloneElement, createContext, Suspense, useMemo } from 'react';
 
 export const actionContext = createContext<RootActionsModel | undefined>(undefined);
 
-export const Root: FCModel<RootPropsModel> = ({ children, context }) => {
+export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, context }) => {
   const _store = useMemo(
     () =>
       new Store<Array<keyof RootStateModel>, RootStateModel, RootActionsParamsModel>({
@@ -32,9 +31,8 @@ export const Root: FCModel<RootPropsModel> = ({ children, context }) => {
       }),
     [context?.state?.cookies, context?.state?.initialState],
   );
-  const _providers = [
-    <RootLayout />,
-    <RouteProvider value={context?.route} />,
+  const _providers = useMemo<Array<ReactElement>>(() => [
+    ...(additionalProviders || []).map((provider) => provider(context)),
     <TrackingProvider />,
     <QueryProvider />,
     <AuthProvider />,
@@ -44,7 +42,7 @@ export const Root: FCModel<RootPropsModel> = ({ children, context }) => {
     <AppProvider />,
     <_store.Provider value={{ ...context?.state, actionContext, store: _store }} />,
     <Suspense />, // to provider?
-  ].filter(Boolean) as Array<ReactElement>;
+  ].filter(Boolean), [additionalProviders, context]);
 
   return <>{_providers.reduce((result, element) => cloneElement(element, {}, result), children)}</>;
 };

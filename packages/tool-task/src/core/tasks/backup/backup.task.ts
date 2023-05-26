@@ -1,5 +1,5 @@
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import { EXCLUDE_PATTERNS } from '@lib/shared/file/file.constants';
+import { config } from '@lib/config/core/file/file';
 import { dateTimeFormat } from '@lib/shared/format/utils/dateTimeFormat/dateTimeFormat';
 import { DATE_TIME_FORMAT_TYPE } from '@lib/shared/format/utils/dateTimeFormat/dateTimeFormat.constants';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
@@ -18,7 +18,7 @@ const backup: TaskParamsModel<BackupParamsModel> = {
     const { excludes, includes, name } = options || {};
     const _name = name || (await prompt([{ key: 'name' }])).name;
     const _includes = includes || [fromRoot('*')];
-    const _excludes = excludes || EXCLUDE_PATTERNS;
+    const _excludes = excludes || config.excludePatterns;
     const dest = join(
       BACKUP_DIR,
       `${kebabCase(_name)}-${kebabCase(
