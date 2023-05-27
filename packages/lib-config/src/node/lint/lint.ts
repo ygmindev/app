@@ -4,7 +4,7 @@ import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages'
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { packages } from '@lib/backend/file/utils/packages/packages';
 import { _lint } from '@lib/config/node/lint/_lint';
-import type { LintConfigModel, _LintConfigModel } from '@lib/config/node/lint/lint.models';
+import type { _LintConfigModel, LintConfigModel } from '@lib/config/node/lint/lint.models';
 
 export const lintCommand = (fix?: boolean): string =>
   fromExecutable(
@@ -14,7 +14,7 @@ export const lintCommand = (fix?: boolean): string =>
   );
 
 export const config: LintConfigModel = {
-  include: ['src/**/*', 'tasks.ts'],
+  include: ['src/**/*', '*.ts'],
 
   indentWidth: 2,
 

@@ -1,14 +1,15 @@
 import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
-import type { TaskResultModel } from '@tool/task/core/core.models';
+import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
+import { TaskResultModel } from '@tool/task/core/core.models';
 import type { _TaskRegistryModel } from '@tool/task/core/utils/TaskRegistry/_TaskRegistry.models';
 import { registry, series, task as register } from 'gulp';
 import reduce from 'lodash/reduce';
 
 export class _TaskRegistry implements _TaskRegistryModel {
-  register = (name: string, task: CallablePromiseModel<TaskResultModel>): void => {
+  _register = (name: string, task: CallablePromiseModel): void => {
     if (registry().tasks()[name]) {
-      throw new DuplicateError(`${name} exists`);
+      throw new DuplicateError(`task ${name} exists`);
     }
     register(name, async () => await task());
   };
@@ -22,5 +23,13 @@ export class _TaskRegistry implements _TaskRegistryModel {
       }),
       {},
     );
+  }
+
+  get = (name: string): CallablePromiseModel<TaskResultModel> => {
+    const _task = this.registry[name];
+    if (_task) {
+      return _task;
+    }
+    throw new NotFoundError(name);
   }
 }

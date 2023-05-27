@@ -1,5 +1,3 @@
-import 'reflect-metadata';
-
 import { Container } from '@lib/backend/core/utils/Container/Container';
 import {
   WITH_CONTAINER_PROPERTY,

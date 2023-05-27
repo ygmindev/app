@@ -13,17 +13,24 @@ export const config: SetupConfigModel = {
   onInitialize: async () => {
     if (!_isInitialized) {
       await import('reflect-metadata');
-      const _database = new Database(_config());
-      await _database.connect();
-      Container.set(Database, _database, DATABASE_TYPE.MONGO);
+
+      if (process.env.USE_DATABASE) {
+        const _database = new Database(_config());
+        await _database.connect();
+        Container.set(Database, _database, DATABASE_TYPE.MONGO);
+      }
+
       await configBase.onInitialize();
     }
   },
 
   onTerminate: async () => {
     if (!_isTerminated) {
-      const _database = Container.get(Database, DATABASE_TYPE.MONGO);
-      await _database.close();
+      if (process.env.USE_DATABASE) {
+        const _database = Container.get(Database, DATABASE_TYPE.MONGO);
+        await _database.close();
+      }
+
       await configBase.onInitialize();
     }
   },

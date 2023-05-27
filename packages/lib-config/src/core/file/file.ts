@@ -1,7 +1,10 @@
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import type { FileConfigModel } from '@lib/config/core/file/file.models';
 
+const BUILD_DIR = '.build';
+
 const CLEAN_PATTERNS = [
+  BUILD_DIR,
   '.cache',
   '.esbuild',
   '.eslintcache',
@@ -15,6 +18,8 @@ const CLEAN_PATTERNS = [
 
 export const config: FileConfigModel = {
   backupDir: fromRoot('../backups'),
+
+  buildDir: fromRoot(BUILD_DIR),
 
   cleanPatterns: CLEAN_PATTERNS,
 
