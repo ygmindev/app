@@ -12,7 +12,7 @@ import type {
   RunTaskModel,
   RunTaskParamsModel,
 } from '@tool/task/core/utils/runTask/runTask.models';
-import { taskRegistry } from '@tool/task/core/utils/taskRegistry/taskRegistry';
+import { taskRegistry } from '@tool/task/core/utils/TaskRegistry/TaskRegistry';
 import isString from 'lodash/isString';
 import kebabCase from 'lodash/kebabCase';
 
@@ -33,8 +33,8 @@ export const runTask = async <TType = undefined>({
   onBefore,
   options,
   overrides,
-  target,
   root,
+  target,
   task,
 }: RunTaskParamsModel<TType>): RunTaskModel => {
   const _root = root || (target ? fromPackages(target) : fromRoot());
@@ -59,7 +59,11 @@ export const runTask = async <TType = undefined>({
     (await sequence(onBefore.map((value) => (isString(value) ? _getTaskByName(value) : value))));
 
   try {
-    const { error: _error, message, status } = await task({
+    const {
+      error: _error,
+      message,
+      status,
+    } = await task({
       name,
       options: (options || {}) as TType,
       root: _root,

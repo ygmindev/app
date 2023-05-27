@@ -1,3 +1,3 @@
-import { _TaskRegistryModel } from "@tool/task/core/utils/taskRegistry/_taskRegistry.models";
+import type { _TaskRegistryModel } from '@tool/task/core/utils/TaskRegistry/_TaskRegistry.models';
 
-export type TaskRegistryModel = _TaskRegistryModel;
+export interface TaskRegistryModel extends _TaskRegistryModel {}

@@ -12,6 +12,8 @@ import { existsSync } from 'fs';
 import { task as register } from 'gulp';
 import kebabCase from 'lodash/kebabCase';
 
+const _aliasMap: Record<string, string> = {};
+
 export const _task = ({ packageConfig, taskExtension }: TaskConfigModel): _TaskConfigModel => {
   const _tasks = [
     // Task files
@@ -53,10 +55,10 @@ export const _task = ({ packageConfig, taskExtension }: TaskConfigModel): _TaskC
       .split('-')
       .map((p) => p.charAt(0))
       .join('');
-
-    if (_taskRegistry[_alias]) {
-      throw new DuplicateError(`${_alias} exists`);
+    if (_aliasMap[_alias] || _taskRegistry[_name]) {
+      throw new DuplicateError(`${_name} (${_alias}) exists`);
     }
+    _aliasMap[_alias] = _name;
     [_alias, _name].forEach((name) =>
       register(name, async () => runTask({ ...task, name, target: _target })),
     );

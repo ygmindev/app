@@ -2,7 +2,7 @@ import { sequence } from '@lib/shared/core/utils/sequence/sequence';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
 import type { TaskParamsModel } from '@tool/task/core/core.models';
 import type { RunAllParamsModel } from '@tool/task/core/templates/runAll/runAll.models';
-import { taskRegistry } from '@tool/task/core/utils/taskRegistry/taskRegistry';
+import { taskRegistry } from '@tool/task/core/utils/TaskRegistry/TaskRegistry';
 import filter from 'lodash/filter';
 import isString from 'lodash/isString';
 
