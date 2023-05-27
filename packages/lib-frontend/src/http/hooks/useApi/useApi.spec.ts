@@ -6,7 +6,7 @@ import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import toNumber from 'lodash/toNumber';
 import nock from 'nock';
 
-const { displayName } = withTest({ target: () => useApi });
+const { displayName } = withTest({ useApi });
 
 describe(displayName, () => {
   const URI_PARAMS: UriParamsModel = {

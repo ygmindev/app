@@ -1,3 +1,5 @@
+import { Container } from '@lib/backend/core/utils/Container/Container';
+import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
 import { withContext } from '@lib/backend/http/decorators/withContext/withContext';
 import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import { withInput } from '@lib/backend/resource/decorators/withInput/withInput';
@@ -10,9 +12,7 @@ import type {
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import type { ConstructorModel } from '@lib/shared/core/core.models';
 import { withCondition } from '@lib/shared/core/decorators/withCondition/withCondition';
-import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { NotImplementedError } from '@lib/shared/core/errors/NotImplementedError/NotImplementedError';
-import { Container } from '@lib/shared/core/utils/Container/Container';
 import { toPlainObject } from '@lib/shared/core/utils/toPlainObject/toPlainObject';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';

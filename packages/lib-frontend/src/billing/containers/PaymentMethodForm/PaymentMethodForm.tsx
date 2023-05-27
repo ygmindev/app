@@ -51,7 +51,6 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
         {
           fields: [
             {
-              id: PAYMENT_METHOD,
               Component: ({ elementState, error }) => (
                 <Wrapper width={theme.layout.width[THEME_SIZE.MEDIUM]}>
                   <PaymentMethodField
@@ -65,6 +64,7 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
                   />
                 </Wrapper>
               ),
+              id: PAYMENT_METHOD,
             },
           ],
           id: PAYMENT_METHOD,

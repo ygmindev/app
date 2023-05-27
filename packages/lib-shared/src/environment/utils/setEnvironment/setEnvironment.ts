@@ -18,8 +18,8 @@ export const setEnvironment = ({
   overrides && forEach(overrides, (v, k) => (process.env[k] = v));
 
   const paths = [
-    fromConfig('core/environment/configs/.env.base'),
-    fromConfig(`core/environment/configs/.env.${environment}`),
+    fromConfig('core/environment/.env.base'),
+    fromConfig(`core/environment/.env.${environment}`),
     fromWorking('.env'),
   ];
 

@@ -1,7 +1,7 @@
 import { promisify } from '@lib/shared/core/utils/promisify/promisify';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => promisify });
+const { displayName } = withTest({ promisify });
 
 describe(displayName, () => {
   test('works', async () => {

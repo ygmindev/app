@@ -3,7 +3,6 @@ import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.mod
 import type { WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import type { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
-import type { DimensionModel } from '@lib/frontend/platform/platform.models';
 import type { StyleModel, StylePropsModel, ViewStyleModel } from '@lib/frontend/style/style.models';
 import type { TestIdPropsModel } from '@lib/frontend/test/test.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
@@ -39,7 +38,10 @@ export interface RefPropsModel<TType = unknown> {
   ref?: Ref<TType>;
 }
 
-export interface ChildrenPropsModel<TType = ReactNode | Array<ReactNode>> {
+export interface ChildrenPropsModel<TType = ReactNode | Array<ReactNode>>
+  extends ChildPropsModel<TType> {}
+
+export interface ChildPropsModel<TType = ReactNode> {
   children?: TType;
 }
 
@@ -88,6 +90,11 @@ export interface TranslatableOptionModel<TType extends string = string>
 export interface PositionModel {
   x?: number;
   y?: number;
+}
+
+export interface DimensionModel {
+  height?: number;
+  width?: number;
 }
 
 export interface MeasureModel extends PositionModel, DimensionModel {}

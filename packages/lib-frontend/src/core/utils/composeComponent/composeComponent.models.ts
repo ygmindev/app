@@ -17,7 +17,7 @@ export interface ComposeComponentParamsModel<
     props: TProps & TestIdPropsModel & { style?: TStyle },
     theme: UseThemeModel,
     ref?: ForwardedRef<TRef>,
-  ): TResult;
+  ): TResult | null;
 
   isWeb?: boolean;
 }

@@ -1,6 +1,15 @@
-import { command } from '@tool/task/core/utils/command/command';
-import { CLEAN_PATTERNS } from '@tool/task/core/utils/runClean/runClean.constants';
-import type { RunCleanParamsModel } from '@tool/task/core/utils/runClean/runClean.models';
+import { TASK_STATUS } from '@tool/task/core/core.constants';
+import { _runClean } from '@tool/task/core/utils/runClean/_runClean';
+import type {
+  RunCleanModel,
+  RunCleanParamsModel,
+} from '@tool/task/core/utils/runClean/runClean.models';
 
-export const runClean = async ({ patterns, root }: RunCleanParamsModel): Promise<boolean> =>
-  command({ command: `npx rimraf ${(patterns || CLEAN_PATTERNS).join(' ')}`, root });
+export const runClean = async (params: RunCleanParamsModel): RunCleanModel => {
+  try {
+    await _runClean(params);
+    return { status: TASK_STATUS.SUCCESS };
+  } catch (e) {
+    return { error: e as Error, status: TASK_STATUS.ERROR };
+  }
+};

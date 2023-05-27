@@ -2,7 +2,7 @@ import type { EmbeddedResourceServiceModel } from '@lib/shared/resource/resource
 import type {
   {{NAME}}(pascalCase)FormModel,
   {{NAME}}(pascalCase)Model,
-} from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
+} from '@lib/shared/{{MODULE}}(pathCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
 import type { {{NAME_ROOT}}(pascalCase)Model } from '@lib/shared/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase).models';
 
 export interface {{NAME}}(pascalCase)ServiceModel

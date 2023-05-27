@@ -3,7 +3,7 @@ import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import cloneDeep from 'lodash/cloneDeep';
 
-const { displayName } = withTest({ target: () => merge });
+const { displayName } = withTest({ merge });
 
 describe(displayName, () => {
   test('works', async () => {

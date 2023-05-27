@@ -3,7 +3,7 @@ import { CONTEXT_FIXTURE } from '@lib/shared/resource/utils/Context/Context.fixt
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { USER_FIXTURE } from '@lib/shared/user/resources/User/User.fixtures';
 
-const { displayName } = withTest({ target: () => selfAuthorizer });
+const { displayName } = withTest({ selfAuthorizer });
 
 describe(displayName, () => {
   test('works with authorized', async () => {

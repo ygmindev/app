@@ -3,7 +3,7 @@ import { copy } from '@tool/task/file/utils/copy/copy';
 
 jest.mock('fs');
 
-const { displayName } = withTest({ target: () => copy });
+const { displayName } = withTest({ copy });
 
 describe(displayName, () => {
   test('works', async () => {

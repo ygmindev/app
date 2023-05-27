@@ -14,9 +14,9 @@ export interface WrapperFixturePropsModel extends WrapperPropsModel {
 }
 
 export const WrapperFixture: SFCModel<WrapperFixturePropsModel> = ({
-  children,
   backgroundColor = THEME_COLOR.PRIMARY,
   backgroundRole = THEME_ROLE.MUTED,
+  children,
   testID,
   ...props
 }) => {

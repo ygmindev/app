@@ -1,7 +1,7 @@
 import { uri } from '@lib/shared/http/utils/uri/uri';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => uri });
+const { displayName } = withTest({ uri });
 
 describe(displayName, () => {
   const HOST = 'https://www.test.com';

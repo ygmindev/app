@@ -3,7 +3,7 @@ import { colorStyler } from '@lib/frontend/style/utils/styler/colorStyler/colorS
 import { renderHook } from '@lib/frontend/test/utils/renderHook/renderHook';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => colorStyler });
+const { displayName } = withTest({ colorStyler });
 
 describe(displayName, () => {
   const { result } = renderHook(() => useTheme());

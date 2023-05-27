@@ -2,7 +2,7 @@ import { getAccessRole, withAccess } from '@lib/backend/resource/decorators/with
 import { ACCESS_LEVEL, ACCESS_ROLE } from '@lib/shared/auth/resources/Access/Access.constants';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => withAccess });
+const { displayName } = withTest({ withAccess });
 
 describe(displayName, () => {
   test('works with public', async () => {

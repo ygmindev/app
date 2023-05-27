@@ -9,14 +9,14 @@ const INACTIVE = 'INACTIVE';
 
 const { Component, displayName, testID } = withTestComponent<DroppablePropsModel>({
   defaultProps: {
-    anchor: (isActive) => <WrapperFixture text={isActive ? ACTIVE : INACTIVE} />,
+    anchor: (isActive) => <WrapperFixture>{isActive ? ACTIVE : INACTIVE}</WrapperFixture>,
   },
   target: Droppable,
 });
 
 describe(displayName, () => {
   test('works', async () => {
-    const { findByTestId } = render({ element: <Component /> });
+    const { findByTestId } = await render({ element: <Component /> });
     expect(await findByTestId(testID)).toBeTruthy();
   });
 });

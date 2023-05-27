@@ -1,7 +1,7 @@
 import { groupBy } from '@lib/shared/core/utils/groupBy/groupBy';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => groupBy });
+const { displayName } = withTest({ groupBy });
 
 describe(displayName, () => {
   test('works', async () => {

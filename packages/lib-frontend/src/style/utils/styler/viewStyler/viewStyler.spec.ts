@@ -3,7 +3,7 @@ import { viewStyler } from '@lib/frontend/style/utils/styler/viewStyler/viewStyl
 import { renderHook } from '@lib/frontend/test/utils/renderHook/renderHook';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => viewStyler });
+const { displayName } = withTest({ viewStyler });
 
 describe(displayName, () => {
   const { result } = renderHook(() => useTheme());

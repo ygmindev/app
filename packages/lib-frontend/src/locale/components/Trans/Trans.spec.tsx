@@ -12,7 +12,7 @@ const { Component: Trans, displayName } = withTestComponent<
 
 describe(displayName, () => {
   test('works with string', async () => {
-    const { findByText } = render({
+    const { findByText } = await render({
       element: (
         <Trans
           i18nKey="labels.testWithString"
@@ -20,11 +20,13 @@ describe(displayName, () => {
         />
       ),
     });
-    await waitForExpect({ callback: () => expect(await findByText('test with string')).toBeTruthy() });
+    await waitForExpect({
+      callback: () => expect(await findByText('test with string')).toBeTruthy(),
+    });
   });
 
   test('works with params', async () => {
-    const { findByText } = render({
+    const { findByText } = await render({
       element: (
         <Trans
           i18nKey="labels.testWithParams"
@@ -39,7 +41,7 @@ describe(displayName, () => {
   });
 
   test('works with elements', async () => {
-    const { findByText } = render({
+    const { findByText } = await render({
       element: (
         <Trans
           components={[

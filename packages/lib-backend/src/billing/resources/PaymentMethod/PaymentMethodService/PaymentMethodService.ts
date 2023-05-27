@@ -1,6 +1,7 @@
 import { BankService } from '@lib/backend/billing/resources/Bank/BankService/BankService';
 import { CardService } from '@lib/backend/billing/resources/Card/CardService/CardService';
 import { StripeAdminService } from '@lib/backend/billing/utils/StripeAdminService/StripeAdminService';
+import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
 import { LinkedUserService } from '@lib/backend/user/resources/LinkedUser/LinkedUserService/LinkedUserService';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
 import {
@@ -9,7 +10,6 @@ import {
 } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import type { PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import type { PaymentMethodServiceModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethodService/PaymentMethodService.models';
-import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { withInject } from '@lib/shared/core/decorators/withInject/withInject';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';

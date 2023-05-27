@@ -1,5 +1,7 @@
 import { Access } from '@lib/backend/auth/resources/Access/Access';
 import { AccessService } from '@lib/backend/auth/resources/Access/AccessService/AccessService';
+import { Container } from '@lib/backend/core/utils/Container/Container';
+import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
 import { withFieldResolver } from '@lib/backend/http/decorators/withFieldResolver/withFieldResolver';
 import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import { withSelf } from '@lib/backend/http/decorators/withSelf/withSelf';
@@ -9,9 +11,7 @@ import { UserService } from '@lib/backend/user/resources/User/UserService/UserSe
 import { ACCESS_RESOURCE_NAME } from '@lib/shared/auth/resources/Access/Access.constants';
 import type { AccessFormModel, AccessModel } from '@lib/shared/auth/resources/Access/Access.models';
 import type { AccessServiceModel } from '@lib/shared/auth/resources/Access/AccessService/AccessService.models';
-import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
-import { Container } from '@lib/shared/core/utils/Container/Container';
 import type { UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withContainer()

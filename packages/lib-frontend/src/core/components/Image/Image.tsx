@@ -1,7 +1,7 @@
 import { _Image } from '@lib/frontend/core/components/Image/_Image';
 import type { ImagePropsModel } from '@lib/frontend/core/components/Image/Image.models';
 import type { SFCModel } from '@lib/frontend/core/core.models';
-import type { DimensionModel } from '@lib/frontend/platform/platform.models';
+import type { DimensionModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { shapeStyler } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';

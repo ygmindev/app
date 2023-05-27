@@ -1,1 +1,1 @@
-export interface PostinstallParamsModel {}
+export interface PostInstallParamsModel {}

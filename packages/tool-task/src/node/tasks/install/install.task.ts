@@ -1,35 +1,38 @@
+import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import { sequence } from '@lib/shared/core/utils/sequence/sequence';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
-import type { TaskParamsModel } from '@tool/task/core/core.models';
+import type { TaskParamsModel, TaskResultModel } from '@tool/task/core/core.models';
 import { command } from '@tool/task/core/utils/command/command';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
+import type { PromptParamsModel } from '@tool/task/core/utils/prompt/prompt.models';
+import type { InstallParamsModel } from '@tool/task/node/tasks/install/install.models';
 
-const install: TaskParamsModel = {
+const install: TaskParamsModel<InstallParamsModel> = {
   name: 'node-install',
 
   onAfter: ['node-post-install'],
 
-  task: async ({ root }) => {
-    const response = await prompt([
-      { isOptional: true, key: 'install' },
-      { isOptional: true, key: 'installDev' },
-      { isOptional: true, key: 'remove' },
-    ]);
+  task: async ({ options }) => {
+    const _root = fromRoot();
+    const _prompts = [
+      options?.install ?? { isOptional: true, key: 'install' },
+      options?.installDev ?? { isOptional: true, key: 'installDev' },
+      options?.remove ?? { isOptional: true, key: 'remove' },
+    ].filter(Boolean) as Array<PromptParamsModel<Record<string, string>>>;
+    const response = _prompts ? await prompt(_prompts) : {};
+    const _install = options?.install || response.install;
+    const _installDev = options?.installDev || response.installDev;
+    const _remove = options?.remove || response.remove;
     await sequence(
       [
-        response.install &&
-          (async (): Promise<boolean> =>
-            command({ command: `yarn add ${response.install}`, root })),
+        _install &&
+          (async () => command(_install === '*' ? 'yarn' : `yarn add ${_install}`, { root: _root })),
 
-        response.installDev &&
-          (async (): Promise<boolean> =>
-            command({ command: `yarn add ${response.installDev} --dev`, root })),
+        _installDev && (async () => command(`yarn add ${_installDev} --dev`, { root: _root })),
 
-        response.remove &&
-          (async (): Promise<boolean> =>
-            command({ command: `yarn remove ${response.remove}`, root })),
-      ].filter(Boolean) as Array<CallablePromiseModel<boolean>>,
+        _remove && (async () => command(`yarn remove ${_remove}`, { root: _root })),
+      ].filter(Boolean) as Array<CallablePromiseModel<TaskResultModel>>,
     );
     return { status: TASK_STATUS.SUCCESS };
   },

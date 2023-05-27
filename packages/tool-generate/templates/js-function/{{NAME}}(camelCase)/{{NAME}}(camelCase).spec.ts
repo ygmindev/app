@@ -1,7 +1,7 @@
 import { {{NAME}}(camelCase) } from '{{PATH}}/{{NAME}}(camelCase)/{{NAME}}(camelCase)';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => {{NAME}}(camelCase) });
+const { displayName } = withTest({ {{NAME}}(camelCase) });
 
 describe(displayName, () => {
   test('works', async () => {

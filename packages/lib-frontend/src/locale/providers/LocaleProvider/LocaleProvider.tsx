@@ -6,18 +6,16 @@ import { currentTimezone } from '@lib/frontend/locale/utils/currentTimezone/curr
 import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 
-export const LocaleProvider: SFCModel<LocaleProviderPropsModel> = ({ children }) => {
+export const LocaleProvider: SFCModel<LocaleProviderPropsModel> = ({ children, value }) => {
   const actions = useActions();
   const _timezoneIsAutomatic = useStore((state) => state.locale.timezoneIsAutomatic);
-
   useAsync(
     {
       onMount: async (isMounted) => {
-        _timezoneIsAutomatic && isMounted() && actions?.locale.timezoneSet(currentTimezone());
+        isMounted() && _timezoneIsAutomatic && actions?.locale.timezoneSet(currentTimezone());
       },
     },
     [_timezoneIsAutomatic],
   );
-
-  return <_LocaleProvider>{children}</_LocaleProvider>;
+  return <_LocaleProvider value={value}>{children}</_LocaleProvider>;
 };

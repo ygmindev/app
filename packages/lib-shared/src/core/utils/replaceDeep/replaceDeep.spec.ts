@@ -1,7 +1,7 @@
 import { replaceDeep } from '@lib/shared/core/utils/replaceDeep/replaceDeep';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => replaceDeep });
+const { displayName } = withTest({ replaceDeep });
 
 describe(displayName, () => {
   const FROM = 'from';

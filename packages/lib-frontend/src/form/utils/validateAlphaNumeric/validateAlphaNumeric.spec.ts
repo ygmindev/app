@@ -1,7 +1,7 @@
 import { validateAlphaNumeric } from '@lib/frontend/form/utils/validateAlphaNumeric/validateAlphaNumeric';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => validateAlphaNumeric });
+const { displayName } = withTest({ validateAlphaNumeric });
 
 describe(displayName, () => {
   const VALUE_VALID = 'VALUE_VALID';

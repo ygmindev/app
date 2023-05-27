@@ -2,7 +2,7 @@ import { useAnimationState } from '@lib/frontend/animation/hooks/useAnimationSta
 import { renderHook } from '@lib/frontend/test/utils/renderHook/renderHook';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => useAnimationState });
+const { displayName } = withTest({ useAnimationState });
 
 describe(displayName, () => {
   test('works', async () => {

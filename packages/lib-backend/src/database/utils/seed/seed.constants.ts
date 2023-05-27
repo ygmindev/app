@@ -1,3 +1,4 @@
+import { Container } from '@lib/backend/core/utils/Container/Container';
 import type { SeedDataModel } from '@lib/backend/database/utils/seed/seed.models';
 import { UserService } from '@lib/backend/user/resources/User/UserService/UserService';
 import {
@@ -5,7 +6,6 @@ import {
   ACCESS_ROLE,
 } from '@lib/shared/auth/resources/Access/Access.constants';
 import type { AccessFormModel } from '@lib/shared/auth/resources/Access/Access.models';
-import { Container } from '@lib/shared/core/utils/Container/Container';
 import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
 import type { DummyEntityResourceFormModel } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.models';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';

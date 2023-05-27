@@ -1,4 +1,4 @@
-import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
+import { isSsr } from '@lib/platform/core/utils/isSsr/isSsr';
 import type { ActionModel, NestedActionsModel } from '@lib/frontend/state/state.models';
 import { Storage } from '@lib/frontend/state/utils/Storage/Storage';
 import type {
@@ -33,8 +33,8 @@ import {
   PURGE,
   REGISTER,
   REHYDRATE,
+  getStoredState,
 } from 'redux-persist';
-import getStoredState from 'redux-persist/es/getStoredState';
 
 // TODO: fix when upgrade https://github.com/reduxjs/redux-toolkit/issues/1960
 // import { configureStore, createSlice } from '@reduxjs/toolkit';

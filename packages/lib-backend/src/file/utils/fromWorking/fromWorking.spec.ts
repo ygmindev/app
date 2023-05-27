@@ -2,7 +2,7 @@ import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { resolve } from 'path';
 
-const { displayName } = withTest({ target: () => fromWorking });
+const { displayName } = withTest({ fromWorking });
 
 describe(displayName, () => {
   test('works', async () => {

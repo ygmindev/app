@@ -1,13 +1,29 @@
+import { config } from '@lib/config/locale/internationalize/internationalize.base';
+import type { SFCModel } from '@lib/frontend/core/core.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
-import { _LocaleProvider as _LocaleProviderFrontend } from '@lib/frontend/locale/providers/LocaleProvider/_LocaleProvider.frontend';
 import type { _LocaleProviderPropsModel } from '@lib/frontend/locale/providers/LocaleProvider/_LocaleProvider.models';
-import { _LocaleProvider as _LocaleProviderBackend } from '@lib/frontend/locale/providers/LocaleProvider/_LocaleProvider.node';
-import { isSsr } from '@lib/frontend/platform/utils/isSsr/isSsr';
+import { isSsr } from '@lib/platform/core/utils/isSsr/isSsr';
 import type { I18nextProviderProps } from 'react-i18next';
+import { I18nextProvider, useSSR } from 'react-i18next';
+
+export const _LocaleProviderSsr: SFCModel<_LocaleProviderPropsModel> = ({ children, value }) => {
+  useSSR(value?.store || {}, value?.lang || config.languageDefault);
+  return <>{children}</>;
+};
 
 export const _LocaleProvider = composeComponent<
   _LocaleProviderPropsModel,
   Omit<I18nextProviderProps, 'children'>
 >({
-  Component: isSsr ? _LocaleProviderBackend : _LocaleProviderFrontend,
+  Component: I18nextProvider,
+
+  getProps: ({ children, value }) =>
+    value
+      ? {
+          children: isSsr ? children : (
+            <_LocaleProviderSsr value={value}>{children}</_LocaleProviderSsr>
+          ),
+          i18n: value?.i18n,
+        }
+      : null,
 });

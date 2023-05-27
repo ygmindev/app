@@ -5,7 +5,7 @@ import type { ResourceMethodTypeModel } from '@lib/shared/resource/resource.mode
 import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => Args });
+const { displayName } = withTest({ Args });
 
 describe(displayName, () => {
   const RESOURCE_PROPERTY = 'RESOURCE_PROPERTY';

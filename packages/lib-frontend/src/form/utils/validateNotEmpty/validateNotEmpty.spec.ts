@@ -1,7 +1,7 @@
 import { validateNotEmpty } from '@lib/frontend/form/utils/validateNotEmpty/validateNotEmpty';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => validateNotEmpty });
+const { displayName } = withTest({ validateNotEmpty });
 
 describe(displayName, () => {
   const VALUE_VALID = 'VALUE_VALID';

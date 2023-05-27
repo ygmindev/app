@@ -1,5 +1,6 @@
 import { Otp, OtpForm } from '@lib/backend/auth/resources/Otp/Otp';
 import { OtpService } from '@lib/backend/auth/resources/Otp/OtpService/OtpService';
+import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import { withInput } from '@lib/backend/resource/decorators/withInput/withInput';
 import { withOutput } from '@lib/backend/resource/decorators/withOutput/withOutput';
@@ -11,7 +12,6 @@ import {
 } from '@lib/shared/auth/resources/Otp/Otp.constants';
 import type { OtpFormModel, OtpModel } from '@lib/shared/auth/resources/Otp/Otp.models';
 import type { OtpServiceModel } from '@lib/shared/auth/resources/Otp/OtpService/OtpService.models';
-import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { withInject } from '@lib/shared/core/decorators/withInject/withInject';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';

@@ -1,7 +1,7 @@
 import { isPromise } from '@lib/shared/core/utils/isPromise/isPromise';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => isPromise });
+const { displayName } = withTest({ isPromise });
 
 describe(displayName, () => {
   test('works if true', async () => {

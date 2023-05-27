@@ -5,9 +5,8 @@ import type {
 import { WAIT_FOR_EXPECT_DURATION_DEFAULT_MILLISECONDS } from '@lib/frontend/test/utils/waitForExpect/waitForExpect.constants';
 import { waitFor } from '@testing-library/react';
 
-export const _waitForExpect = async ({
-  callback,
-  timeout = WAIT_FOR_EXPECT_DURATION_DEFAULT_MILLISECONDS,
-}: _WaitForExpectParamsModel): Promise<_WaitForExpectModel> => {
+export const _waitForExpect = async (
+  ...[callback, timeout = WAIT_FOR_EXPECT_DURATION_DEFAULT_MILLISECONDS]: _WaitForExpectParamsModel
+): _WaitForExpectModel => {
   await waitFor(callback, { timeout });
 };

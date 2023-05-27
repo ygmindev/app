@@ -1,7 +1,7 @@
 import { isTypeOf } from '@lib/shared/core/utils/isTypeOf/isTypeOf';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => isTypeOf });
+const { displayName } = withTest({ isTypeOf });
 
 describe(displayName, () => {
   class X {}

@@ -4,14 +4,23 @@ import type { TASK_STATUS } from '@tool/task/core/core.constants';
 
 export type TaskStatusModel = `${TASK_STATUS}`;
 
-export interface TaskParamsModel<TOptions = undefined> extends EnvironmentOverrideParamsModel {
-  name: string;
-  onAfter?: Array<string | CallablePromiseModel<TaskStatusModel>>;
-  onBefore?: Array<string | CallablePromiseModel<TaskStatusModel>>;
-  options?: TOptions;
-  target?: string;
-  task(context: { name: string; options: TOptions; root: string; target?: string }): Promise<{
-    message?: string;
-    status: TaskStatusModel;
-  }>;
+export interface TaskResultModel {
+  error?: Error;
+  message?: string;
+  status: TaskStatusModel;
 }
+
+export interface TaskParamsModel<TType = undefined> extends EnvironmentOverrideParamsModel {
+  name: string;
+  onAfter?: Array<string | CallablePromiseModel<TaskResultModel>>;
+  onBefore?: Array<string | CallablePromiseModel<TaskResultModel>>;
+  options?: TType;
+  root?: string;
+  target?: string;
+  task(params: TaskContextModel<TType>): Promise<TaskResultModel>;
+}
+
+export interface TaskContextModel<TType = undefined>
+  extends Pick<TaskParamsModel<TType>, 'options' | 'root' | 'target'> {
+    name?: string;
+  }

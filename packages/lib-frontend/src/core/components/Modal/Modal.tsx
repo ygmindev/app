@@ -5,7 +5,7 @@ import type { ModalPropsModel } from '@lib/frontend/core/components/Modal/Modal.
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { FCModel } from '@lib/frontend/core/core.models';
-import { KeyboardContainer } from '@lib/frontend/platform/components/KeyboardContainer/KeyboardContainer';
+import { KeyboardContainer } from '@lib/frontend/core/components/KeyboardContainer/KeyboardContainer';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';

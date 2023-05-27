@@ -14,15 +14,8 @@ yarn-error.log*
 *.jsbundle
 .pnp.*
 .yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
-.next/
-.vercel
+.swc/
 *.tsbuildinfo
-next-env.d.ts
 
 # Tests
 test-results

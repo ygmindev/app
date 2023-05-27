@@ -1,6 +1,6 @@
+import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
 import { EmbeddedResourceService } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResourceService/EmbeddedResourceService';
 import { UserService } from '@lib/backend/user/resources/User/UserService/UserService';
-import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { LINKED_USER_RESOURCE_NAME } from '@lib/shared/user/resources/LinkedUser/LinkedUser.constants';
 import type {
   LinkedUserFormModel,

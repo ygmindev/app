@@ -1,6 +1,7 @@
+import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import type { _CliParamsModel } from '@tool/task/core/utils/cli/_cli.models';
+import type { _CliModel, _CliParamsModel } from '@tool/task/core/utils/cli/_cli.models';
 import { command } from '@tool/task/core/utils/command/command';
 
-export const _cli = async ({ task }: _CliParamsModel): Promise<boolean> =>
-  await command({ command: `gulp ${task}`, root: fromRoot() });
+export const _cli = async ({ task }: _CliParamsModel): _CliModel =>
+  await command(`gulp --cwd ${fromRoot()} --gulpfile ${fromConfig('core/task/task.config.js')} ${task || ''}`);

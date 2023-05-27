@@ -1,9 +1,9 @@
+import { Container } from '@lib/backend/core/utils/Container/Container';
 import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
 import { Database } from '@lib/backend/database/utils/Database/Database';
 import type { RepositoryModel } from '@lib/backend/database/utils/Database/Database.models';
 import type { ConstructorModel } from '@lib/shared/core/core.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
-import { Container } from '@lib/shared/core/utils/Container/Container';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import type {

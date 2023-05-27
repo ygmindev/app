@@ -25,7 +25,9 @@ export const CountryField: SFCModel<CountryFieldPropsModel> = ({
 
   useAsync({
     onMount: async (isMounted) => {
-      const { currentCountry: country } = await import('@lib/frontend/locale/utils/currentCountry/currentCountry');
+      const { currentCountry: country } = await import(
+        '@lib/frontend/locale/utils/currentCountry/currentCountry'
+      );
       const _country = isMounted() && (await country());
       isMounted() && _country && valueControlledSet(_country);
     },

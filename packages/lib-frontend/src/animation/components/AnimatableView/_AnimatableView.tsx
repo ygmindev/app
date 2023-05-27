@@ -8,15 +8,16 @@ import { _viewParams as _viewParamsScrollable } from '@lib/frontend/core/compone
 import type { RSFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import type { MotiProps } from 'moti';
 import { MotiScrollView, MotiView } from 'moti';
 import type { ComponentType, RefObject } from 'react';
 import { forwardRef, useImperativeHandle } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { Pressable } from 'react-native';
 
-const _TouchableOpacityAnimatable = animatable({ Component: TouchableOpacity as ComponentType });
+const _PressableAnimatable = animatable({ Component: Pressable as ComponentType });
 
 export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewPropsModel> =
-  forwardRef(({ animation, children, elementState, ...props }, ref) => {
+  forwardRef(({ animation, children, elementState, testID, ...props }, ref) => {
     const theme = useTheme();
     const { styles } = useStyles({ props });
 
@@ -35,7 +36,7 @@ export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewP
 
     const _Component =
       props.onPress || props.onPressIn || props.onPressOut
-        ? (_TouchableOpacityAnimatable as ComponentType)
+        ? (_PressableAnimatable as ComponentType)
         : props.isHorizontalScrollable || props.isVerticalScrollable || props.onScroll
         ? MotiScrollView
         : MotiView;
@@ -47,11 +48,12 @@ export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewP
           _viewParamsPressable.getProps({ ...props, style: styles }, theme))}
         {...(_viewParamsScrollable.getProps &&
           _viewParamsScrollable.getProps({ ...props, style: styles }, theme))}
-        {...animationProps}
+        {...(animationProps as MotiProps['animate'])}
         hitSlop={undefined}
         ref={ref}
         state={animationState}
-        style={styles}>
+        style={styles}
+        testID={testID}>
         {children}
       </_Component>
     ) : null;

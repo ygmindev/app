@@ -1,6 +1,6 @@
+import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
 import { EmbeddedResourceService } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResourceService/EmbeddedResourceService';
 import { DummyEntityResourceService } from '@lib/backend/test/resources/DummyEntityResource/DummyEntityResourceService/DummyEntityResourceService';
-import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.constants';
 import type {
   DummyEmbeddedResourceFormModel,

@@ -1,7 +1,7 @@
 import { flattenObject } from '@lib/shared/core/utils/flattenObject/flattenObject';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => flattenObject });
+const { displayName } = withTest({ flattenObject });
 
 describe(displayName, () => {
   const VALUE = {

@@ -2,7 +2,7 @@ import { dateTimeFormat } from '@lib/shared/format/utils/dateTimeFormat/dateTime
 import { DATE_TIME_FORMAT_TYPE } from '@lib/shared/format/utils/dateTimeFormat/dateTimeFormat.constants';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => dateTimeFormat });
+const { displayName } = withTest({ dateTimeFormat });
 
 describe(displayName, () => {
   const VALUE = new Date(2000, 0, 15, 5, 10, 30);

@@ -1,4 +1,4 @@
-import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
+import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
 import { debug } from '@lib/shared/logging/utils/logger/logger';
 import toNumber from 'lodash/toNumber';
 import { MongoMemoryServer } from 'mongodb-memory-server';

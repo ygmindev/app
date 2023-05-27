@@ -1,11 +1,11 @@
 import { getPaymentMethodTitle } from '@lib/frontend/billing/utils/getPaymentMethodTitle/getPaymentMethodTitle';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => getPaymentMethodTitle });
+const { displayName } = withTest({ getPaymentMethodTitle });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await getPaymentMethodTitle({});
+    const result = getPaymentMethodTitle({});
     expect(result).toStrictEqual({});
   });
 });

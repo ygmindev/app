@@ -1,13 +1,18 @@
+import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { error, info } from '@lib/shared/logging/utils/logger/logger';
-import type { _CommandParamsModel } from '@tool/task/core/utils/command/_command.models';
+import { TASK_STATUS } from '@tool/task/core/core.constants';
+import type {
+  _CommandModel,
+  _CommandParamsModel,
+} from '@tool/task/core/utils/command/_command.models';
 import { spawn } from 'child_process';
 
-export const _command = async ({
-  command,
-  isSilent,
-  onData,
-  root,
-}: _CommandParamsModel): Promise<boolean> => {
+export const _command = async (
+  ...[
+    command,
+    { isSilent = false, onData = undefined, root = fromRoot() } = {},
+  ]: _CommandParamsModel
+): _CommandModel => {
   try {
     info(command);
     const cp = spawn(command, {
@@ -22,11 +27,12 @@ export const _command = async ({
     cp.stderr?.on('data', (data) => {
       onData && onData(data.toString());
     });
-    return new Promise((resolve) => {
+    await new Promise((resolve) => {
       ['exit', 'close'].forEach((event) => cp.on(event, (code) => resolve(code === 0)));
     });
+    return { status: TASK_STATUS.SUCCESS };
   } catch (e) {
     error(e);
-    return false;
+    return { error: e as Error, status: TASK_STATUS.ERROR };
   }
 };

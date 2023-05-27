@@ -6,16 +6,16 @@ import type {
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import type { ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
 import type { ViewStyleModel } from '@lib/frontend/style/style.models';
-import type { TouchableOpacityProps } from 'react-native';
-import { TouchableOpacity } from 'react-native';
+import type { PressableProps } from 'react-native';
+import { Pressable } from 'react-native';
 
 export const _viewParams: ComposeComponentParamsModel<
   _ViewPropsModel,
-  TouchableOpacityProps,
+  PressableProps,
   ViewStyleModel,
   _ViewRefModel
 > = {
-  Component: TouchableOpacity,
+  Component: Pressable,
 
   getProps: ({ onPress, onPressIn, onPressOut, ...props }, ...params) => ({
     ...(_viewParamsBase.getProps && _viewParamsBase.getProps(props, ...params)),
@@ -32,7 +32,7 @@ export const _viewParams: ComposeComponentParamsModel<
 
 export const _View = composeComponent<
   _ViewPropsModel,
-  TouchableOpacityProps,
+  PressableProps,
   ViewStyleModel,
   _ViewRefModel
 >(_viewParams);

@@ -1,6 +1,6 @@
 import { children } from '@lib/backend/file/utils/children/children';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { generateConfig } from '@lib/config/core/generate/configs/generate.config';
+import { config } from '@lib/config/core/generate/generate';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import type { GenerateParamsModel } from '@tool/generate/tasks/generate/generate.models';
 import { boilerplate } from '@tool/generate/utils/boilerplate/boilerplate';
@@ -22,7 +22,7 @@ const generate: TaskParamsModel<GenerateParamsModel> = {
         type: PROMPT_TYPE.LIST,
       },
     ]);
-    const { onSuccess, output, prepare } = generateConfig[template] || {};
+    const { onSuccess, output, prepare } = config[template] || {};
     const params = merge<BoilerplateParamsModel>([
       { onSuccess, output, template },
       prepare ? await prepare() : {},

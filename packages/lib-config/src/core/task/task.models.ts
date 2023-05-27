@@ -1,6 +1,7 @@
-export interface TaskConfigParamsModel {
-  configFile: string;
+export interface TaskConfigModel {
+  packageConfig: string;
+
   taskExtension: string;
 }
 
-export type TaskConfigModel = void;
+export type _TaskConfigModel = void;

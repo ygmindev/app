@@ -1,5 +1,3 @@
-import type { _CssConfigModel } from '@lib/config/style/css/_css.models';
+import { _GlobalStylePropsModel } from '@lib/frontend/style/components/GlobalStyle/_GlobalStyle.models';
 
-export interface GlobalStylePropsModel {
-  config: _CssConfigModel;
-}
+export interface GlobalStylePropsModel extends _GlobalStylePropsModel {}

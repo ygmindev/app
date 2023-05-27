@@ -10,7 +10,7 @@ const portKill: TaskParamsModel = {
   task: async ({ root }) => {
     const { port } = await prompt([{ key: 'port' }]);
     !(await portIsOpen(port)) &&
-      (await command({ command: `if pids=$(lsof -ti:${port}); then kill -9 $pids; fi`, root }));
+      (await command(`if pids=$(lsof -ti:${port}); then kill -9 $pids; fi`, { root }));
     return { status: TASK_STATUS.SUCCESS };
   },
 };

@@ -1,4 +1,4 @@
-import type { DimensionModel } from '@lib/frontend/platform/platform.models';
+import type { DimensionModel } from '@lib/frontend/core/core.models';
 import type { ReducerModel } from '@lib/frontend/state/state.models';
 
 export interface AppStateModel {

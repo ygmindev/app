@@ -1,7 +1,7 @@
 import { validateZipCode } from '@lib/frontend/form/utils/validateZipCode/validateZipCode';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => validateZipCode });
+const { displayName } = withTest({ validateZipCode });
 
 describe(displayName, () => {
   const VALUE_VALID = 'VALUE_VALID';

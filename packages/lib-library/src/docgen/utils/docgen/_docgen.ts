@@ -23,7 +23,7 @@ import {
 const _fileCache = new Map();
 
 export const _docgen = (params: _DocgenParamsModel): _DocgenModel => {
-  const _tsconfigFile = fromConfig('javascript/typescript/configs/tsconfig.json');
+  const _tsconfigFile = fromConfig('node/typescript/configs/tsconfig.json');
   const _parser = withCustomConfig(_tsconfigFile, {
     savePropValueAsString: true,
     shouldRemoveUndefinedFromOptional: true,

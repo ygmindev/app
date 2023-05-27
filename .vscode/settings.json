@@ -1,17 +1,16 @@
 {
-  "files.exclude": {
-    ".vscode": true,
-    "**/.DS_Store": true,
-    "**/.git": true,
-    "**/.hg": true,
-    "**/.svn": true,
-    "**/android": true,
-    "**/CVS": true,
-    "**/dist": true,
-    "**/ios": true,
-    "**/node_modules": true,
-    "**/Thumbs.db": true,
-    "backups": true
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.formatOnSave": false,
+  "editor.minimap.enabled": false,
+  "eslint.options": {
+    "overrideConfigFile": "packages/lib-config/src/node/lint/lint.config.js",
+    "useEslintrc": false
   },
   "eslint.validate": [
     "javascript",
@@ -19,18 +18,16 @@
     "typescript",
     "typescriptreact"
   ],
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
+  "explorer.compactFolders": false,
+  "explorer.expandSingleFolderWorkspaces": false,
   "files.associations": {
     "**/packages/tool-generate/templates/**/*": "plaintext"
   },
-  "explorer.compactFolders": false,
-  "explorer.expandSingleFolderWorkspaces": false,
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "typescript.suggest.includeCompletionsForImportStatements": true,
-  "typescript.updateImportsOnFileMove.enabled": "always",
   "javascript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.updateImportsOnFileMove.enabled": "always",
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "editor.formatOnSave": false
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "workbench.colorTheme": "GitHub Dark",
+  "workbench.iconTheme": "vs-minimal",
+  "workbench.sideBar.location": "right"
 }

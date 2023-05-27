@@ -5,7 +5,7 @@ import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 import type { DummyEntityResourceModel } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.models';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => graphQlQuery });
+const { displayName } = withTest({ graphQlQuery });
 
 describe(displayName, () => {
   test('works without params', async () => {

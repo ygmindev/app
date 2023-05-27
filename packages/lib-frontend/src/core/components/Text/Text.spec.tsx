@@ -9,12 +9,12 @@ describe(displayName, () => {
   const TEST = 'test';
 
   test('works', async () => {
-    const { findByTestId } = render({ element: <Component /> });
+    const { findByTestId } = await render({ element: <Component /> });
     expect(await findByTestId(testID)).toBeTruthy();
   });
 
   test('works with children', async () => {
-    const { findByText } = render({ element: <Component>{TEST}</Component> });
+    const { findByText } = await render({ element: <Component>{TEST}</Component> });
     expect(await findByText(TEST)).toBeTruthy();
   });
 });

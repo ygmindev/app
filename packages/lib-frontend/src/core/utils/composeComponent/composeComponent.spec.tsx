@@ -8,7 +8,7 @@ import { createRef } from 'react';
 import type { ViewProps } from 'react-native';
 import { View } from 'react-native';
 
-const { displayName } = withTest({ target: () => composeComponent });
+const { displayName } = withTest({ composeComponent });
 
 describe(displayName, () => {
   interface _ViewProps extends ChildrenPropsModel, StylePropsModel {
@@ -29,7 +29,7 @@ describe(displayName, () => {
     const REF = createRef();
 
     const { Component, testID } = withTestComponent({ target: _View });
-    const { findByTestId } = render({
+    const { findByTestId } = await render({
       element: (
         <Component
           height={HEIGHT}

@@ -1,8 +1,8 @@
+import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import { EntityResourceResolver } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver';
 import { User } from '@lib/backend/user/resources/User/User';
 import { UserService } from '@lib/backend/user/resources/User/UserService/UserService';
-import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import type { UserFormModel, UserModel } from '@lib/shared/user/resources/User/User.models';

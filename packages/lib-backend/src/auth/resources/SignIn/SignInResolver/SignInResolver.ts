@@ -1,5 +1,6 @@
 import { SignIn, SignInForm } from '@lib/backend/auth/resources/SignIn/SignIn';
 import { SignInService } from '@lib/backend/auth/resources/SignIn/SignInService/SignInService';
+import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
 import { withContext } from '@lib/backend/http/decorators/withContext/withContext';
 import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import { withInput } from '@lib/backend/resource/decorators/withInput/withInput';
@@ -12,7 +13,6 @@ import {
 } from '@lib/shared/auth/resources/SignIn/SignIn.constants';
 import type { SignInFormModel, SignInModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 import type { SignInServiceModel } from '@lib/shared/auth/resources/SignIn/SignInService/SignInService.models';
-import { withContainer } from '@lib/shared/core/decorators/withContainer/withContainer';
 import { withInject } from '@lib/shared/core/decorators/withInject/withInject';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { ContextModel } from '@lib/shared/resource/utils/Context/Context.models';

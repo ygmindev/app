@@ -1,7 +1,7 @@
 import { template } from '@lib/backend/core/utils/template/template';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => template });
+const { displayName } = withTest({ template });
 
 describe(displayName, () => {
   test('works', async () => {

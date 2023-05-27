@@ -1,7 +1,7 @@
 import { randomString } from '@lib/shared/crypto/utils/randomString/randomString';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => randomString });
+const { displayName } = withTest({ randomString });
 
 describe(displayName, () => {
   const RANDOM_LENGTH = 7;

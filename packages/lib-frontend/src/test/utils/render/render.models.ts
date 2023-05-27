@@ -5,4 +5,4 @@ import type {
 
 export interface RenderParamsModel extends Omit<_RenderParamsModel, 'Wrapper'> {}
 
-export type RenderModel = _RenderModel;
+export type RenderModel = Promise<_RenderModel>;

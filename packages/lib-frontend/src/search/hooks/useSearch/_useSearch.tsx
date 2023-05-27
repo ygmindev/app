@@ -21,13 +21,13 @@ export const _useSearch = <TType,>({
   const [query, querySet] = useState<string>('');
 
   const _querySet = useCallback(
-    debounce({
-      callback: (value) => {
+    debounce(
+      (value) => {
         querySet(value);
         onChange && onChange(value);
       },
-      duration: delay,
-    }),
+      { duration: delay },
+    ),
     [querySet, delay],
   );
 

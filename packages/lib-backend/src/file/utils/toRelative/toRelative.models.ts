@@ -1,5 +1,5 @@
 export interface ToRelativeParamsModel {
-  from: string;
+  from?: string;
   to: string;
 }
 

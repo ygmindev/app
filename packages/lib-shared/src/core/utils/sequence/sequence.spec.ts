@@ -2,7 +2,7 @@ import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import { sequence } from '@lib/shared/core/utils/sequence/sequence';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => sequence });
+const { displayName } = withTest({ sequence });
 
 describe(displayName, () => {
   test('works', async () => {

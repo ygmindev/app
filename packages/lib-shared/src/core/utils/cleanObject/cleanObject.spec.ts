@@ -3,7 +3,7 @@ import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import cloneDeep from 'lodash/cloneDeep';
 import pick from 'lodash/pick';
 
-const { displayName } = withTest({ target: () => cleanObject });
+const { displayName } = withTest({ cleanObject });
 
 describe(displayName, () => {
   const VALUE: Record<string, unknown> = {

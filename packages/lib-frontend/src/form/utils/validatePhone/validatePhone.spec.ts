@@ -1,7 +1,7 @@
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { validatePhone } from '@lib/frontend/form/utils/validatePhone/validatePhone';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => validatePhone });
+const { displayName } = withTest({ validatePhone });
 
 describe(displayName, () => {
   test('works', async () => {

@@ -4,7 +4,7 @@ import type {
   RepositoryModel,
 } from '@lib/backend/database/utils/Database/Database.models';
 import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
-import type { _DatabaseConfigModel } from '@lib/config/database/_database.models';
+import type { _DatabaseConfigModel } from '@lib/config/database/database.models';
 import type { PartialDeepModel, ReturnTypeModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { UninitializedError } from '@lib/shared/core/errors/UninitializedError/UninitializedError';

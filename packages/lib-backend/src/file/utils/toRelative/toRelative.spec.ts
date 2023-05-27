@@ -3,7 +3,7 @@ import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => toRelative });
+const { displayName } = withTest({ toRelative });
 
 describe(displayName, () => {
   test('works', async () => {

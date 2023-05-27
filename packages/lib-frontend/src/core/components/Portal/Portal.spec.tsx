@@ -9,14 +9,14 @@ const CHILDREN = 'CHILDREN';
 
 const { Component, displayName } = withTestComponent<PortalPropsModel>({
   defaultProps: {
-    children: <WrapperFixture text={CHILDREN} />,
+    children: <WrapperFixture>{CHILDREN}</WrapperFixture>,
   },
   target: Portal,
 });
 
 describe(displayName, () => {
   test('works', async () => {
-    const { findByText } = render({ element: <Component /> });
-    await waitForExpect({ callback: () => expect(await findByText(CHILDREN)).toBeTruthy() });
+    const { findByText } = await render({ element: <Component /> });
+    await waitForExpect(async () => expect(await findByText(CHILDREN)).toBeTruthy());
   });
 });

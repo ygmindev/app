@@ -3,7 +3,7 @@ import { spacingStyler } from '@lib/frontend/style/utils/styler/spacingStyler/sp
 import { renderHook } from '@lib/frontend/test/utils/renderHook/renderHook';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => spacingStyler });
+const { displayName } = withTest({ spacingStyler });
 
 describe(displayName, () => {
   const { result } = renderHook(() => useTheme());

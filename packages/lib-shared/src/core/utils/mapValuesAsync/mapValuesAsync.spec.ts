@@ -1,7 +1,7 @@
 import { mapValuesAsync } from '@lib/shared/core/utils/mapValuesAsync/mapValuesAsync';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => mapValuesAsync });
+const { displayName } = withTest({ mapValuesAsync });
 
 describe(displayName, () => {
   test('works', async () => {

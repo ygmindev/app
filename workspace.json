@@ -8,7 +8,7 @@
     "app-web-story": "packages/app-web-story",
     "lib-backend": "packages/lib-backend",
     "lib-config": "packages/lib-config",
-    "lib-framework": "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-framework",
+    "lib-platform": "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-platform",
     "lib-frontend": "packages/lib-frontend",
     "lib-library": "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-library",
     "lib-shared": "packages/lib-shared",

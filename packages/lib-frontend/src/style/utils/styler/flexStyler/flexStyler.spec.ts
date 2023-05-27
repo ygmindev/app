@@ -3,7 +3,7 @@ import { flexStyler } from '@lib/frontend/style/utils/styler/flexStyler/flexStyl
 import { renderHook } from '@lib/frontend/test/utils/renderHook/renderHook';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ target: () => flexStyler });
+const { displayName } = withTest({ flexStyler });
 
 describe(displayName, () => {
   const { result } = renderHook(() => useTheme());
