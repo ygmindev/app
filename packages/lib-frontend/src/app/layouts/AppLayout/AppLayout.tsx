@@ -18,13 +18,11 @@ export const AppLayout: SFCModel<AppLayoutPropsModel> = ({ children, testID, ...
         testID={testID}>
         <Wrapper
           grow
-          position={SHAPE_POSITION.RELATIVE}
-          testID={testID}>
+          position={SHAPE_POSITION.RELATIVE}>
           <Wrapper
             backgroundColor={THEME_COLOR.NEUTRAL}
             grow
-            style={styles}
-            testID={testID}>
+            style={styles}>
             <AppHeader />
             {children}
           </Wrapper>

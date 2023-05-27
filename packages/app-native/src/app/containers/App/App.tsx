@@ -5,7 +5,7 @@ import { Router } from '@lib/frontend/route/containers/Router/Router';
 import { RouteProvider } from '@lib/frontend/route/providers/RouteProvider/RouteProvider';
 
 export const App: FCModel = () => (
-  <Root additionalProviders={[(context) => <RouteProvider value={context?.route} />]}>
+  <Root additionalProviders={[<RouteProvider />]}>
     <Router routes={routes} />
   </Root>
 );

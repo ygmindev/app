@@ -8,7 +8,7 @@ import { renderPage } from 'vite-plugin-ssr/server';
 
 export const _renderPage = async ({
   context,
-}: _RenderPageParamsModel): Promise<_RenderPageModel> => {
+}: _RenderPageParamsModel): _RenderPageModel => {
   const { errorWhileRendering, httpResponse, redirectTo } = await renderPage({
     context,
     redirectTo: undefined,

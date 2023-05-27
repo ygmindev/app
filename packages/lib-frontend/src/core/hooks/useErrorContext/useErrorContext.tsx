@@ -17,30 +17,29 @@ export const useErrorContext = (): UseErrorContextModel => {
   const _errorContextGet = (e: Error): ErrorContextModel => {
     let _errorContext = errorContextGet && errorContextGet(e);
     if (!_errorContext) {
-      if (['Network Error'].includes(e.message)) {
-        _errorContext = {
-          icon: 'offline',
-          message: ({ t }) => t('core:messages.errorOffline'),
-          mode: ERROR_MODE.FALLBACK,
-        };
-      } else {
-        error(e);
-        switch ((e as HttpError).statusCode) {
-          case HTTP_STATUS_CODE.UNAUTHORIZED: {
-            _errorContext = {
-              icon: 'lock',
-              message: ({ t }) => t('core:messages.errorUnauthorized'),
-            };
-            break;
-          }
-          case HTTP_STATUS_CODE.FORBIDDEN: {
-            _errorContext = { icon: 'ban', message: ({ t }) => t('core:messages.errorForbidden') };
-            break;
-          }
-          default: {
-            _errorContext = { icon: 'sad', message: ({ t }) => t('core:messages.errorGeneric') };
-            break;
-          }
+      error(e);
+      switch ((e as HttpError).statusCode) {
+        case HTTP_STATUS_CODE.FORBIDDEN: {
+          _errorContext = { icon: 'ban', message: ({ t }) => t('core:messages.errorForbidden') };
+          break;
+        }
+        case HTTP_STATUS_CODE.NETWORK_CONNECT_TIMEOUT: {
+          _errorContext = {
+            icon: 'offline',
+            message: ({ t }) => t('core:messages.errorOffline'),
+            mode: ERROR_MODE.FALLBACK,
+          };
+        }
+        case HTTP_STATUS_CODE.UNAUTHORIZED: {
+          _errorContext = {
+            icon: 'lock',
+            message: ({ t }) => t('core:messages.errorUnauthorized'),
+          };
+          break;
+        }
+        default: {
+          _errorContext = { icon: 'sad', message: ({ t }) => t('core:messages.errorGeneric') };
+          break;
         }
       }
     }

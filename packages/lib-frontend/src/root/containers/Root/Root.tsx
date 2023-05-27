@@ -6,13 +6,13 @@ import { ERROR_MODE } from '@lib/frontend/core/providers/ErrorProvider/ErrorProv
 import { QueryProvider } from '@lib/frontend/core/providers/QueryProvider/QueryProvider';
 import { LocaleProvider } from '@lib/frontend/locale/providers/LocaleProvider/LocaleProvider';
 import type { RootPropsModel } from '@lib/frontend/root/containers/Root/Root.models';
+import { ContextProvider } from '@lib/frontend/root/providers/ContextProvider/ContextProvider';
 import { ROOT_REDUCERS } from '@lib/frontend/root/stores/rootStore.constants';
 import type {
   RootActionsModel,
   RootActionsParamsModel,
   RootStateModel,
 } from '@lib/frontend/root/stores/rootStore.models';
-import { RouteProvider } from '@lib/frontend/route/providers/RouteProvider/RouteProvider';
 import { Store } from '@lib/frontend/state/utils/Store/Store';
 import { StyleProvider } from '@lib/frontend/style/providers/StyleProvider/StyleProvider';
 import { TrackingProvider } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider';
@@ -31,18 +31,23 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
       }),
     [context?.state?.cookies, context?.state?.initialState],
   );
-  const _providers = useMemo<Array<ReactElement>>(() => [
-    ...(additionalProviders || []).map((provider) => provider(context)),
-    <TrackingProvider />,
-    <QueryProvider />,
-    <AuthProvider />,
-    <ErrorProvider value={{ mode: ERROR_MODE.NOTIFICATION }} />,
-    <StyleProvider />,
-    <LocaleProvider value={context?.locale} />,
-    <AppProvider />,
-    <_store.Provider value={{ ...context?.state, actionContext, store: _store }} />,
-    <Suspense />, // to provider?
-  ].filter(Boolean), [additionalProviders, context]);
+  const _providers = useMemo<Array<ReactElement>>(
+    () =>
+      [
+        ...(additionalProviders || []),
+        <ContextProvider value={context} />,
+        <TrackingProvider />,
+        <QueryProvider />,
+        <AuthProvider />,
+        <ErrorProvider value={{ mode: ERROR_MODE.NOTIFICATION }} />,
+        <StyleProvider />,
+        <LocaleProvider value={context?.locale} />,
+        <AppProvider />,
+        <_store.Provider value={{ ...context?.state, actionContext, store: _store }} />,
+        <Suspense />, // to provider?
+      ].filter(Boolean),
+    [additionalProviders, context],
+  );
 
   return <>{_providers.reduce((result, element) => cloneElement(element, {}, result), children)}</>;
 };

@@ -1,7 +1,6 @@
 import { PLATFORM } from '@lib/platform/core/core.constants';
 import { EXTENSIONS_BASE } from '@lib/platform/core/utils/extensions/extensions.constants';
 import type { ExtensionsModel } from '@lib/platform/core/utils/extensions/extensions.models';
-import { isSsr } from '@lib/platform/core/utils/isSsr/isSsr';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 
 export const extensions = (): ExtensionsModel => {
@@ -11,7 +10,6 @@ export const extensions = (): ExtensionsModel => {
   return [
     ...permuteString(
       [
-        _isWeb && isSsr && '.ssr',
         `.${process.env.ENV_PLATFORM}`,
         _isNative && '.native',
         _isFrontend && '.frontend'

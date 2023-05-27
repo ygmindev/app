@@ -2,11 +2,7 @@ import { composeComponent } from '@lib/frontend/core/utils/composeComponent/comp
 import { _RouteProvider } from '@lib/frontend/route/providers/RouteProvider/_RouteProvider';
 import type { _RouteProviderPropsModel } from '@lib/frontend/route/providers/RouteProvider/_RouteProvider.models';
 import type { RouteProviderPropsModel } from '@lib/frontend/route/providers/RouteProvider/RouteProvider.models';
-import type { RouteContextModel } from '@lib/frontend/route/route.models';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
-import { createContext } from 'react';
-
-export const RouteContext = createContext<RouteContextModel>({});
 
 export const RouteProvider = composeComponent<RouteProviderPropsModel, _RouteProviderPropsModel>({
   Component: _RouteProvider,

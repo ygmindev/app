@@ -2,7 +2,7 @@ import type { ExportRenderServerParamsModel } from '@lib/platform/web/exports/ex
 
 export interface _RenderPageParamsModel extends ExportRenderServerParamsModel {}
 
-export interface _RenderPageModel {
+export type _RenderPageModel = Promise<{
   error?: Error;
   redirect?: string;
   response?: {
@@ -10,4 +10,4 @@ export interface _RenderPageModel {
     pipeStream(writable: NodeJS.WritableStream): void;
     statusCode: number;
   };
-}
+}>;
