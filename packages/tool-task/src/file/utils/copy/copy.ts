@@ -7,12 +7,12 @@ import {
   readFileSync,
   rmSync,
   statSync,
-  writeFileSync,
 } from 'fs';
 import every from 'lodash/every';
 import forEach from 'lodash/forEach';
 import { minimatch } from 'minimatch';
 import { resolve } from 'path';
+import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 
 export const copy = async ({
   excludes = config.excludePatterns,
@@ -34,7 +34,7 @@ export const copy = async ({
     } else if (isOverwrite || !existsSync(_to)) {
       let _file = readFileSync(from, 'utf8');
       overrides && forEach(overrides, (v, k) => (_file = _file.replaceAll(k, v)));
-      writeFileSync(_to, _file);
+      writeFile({ filename: _to, value: _file });
     }
   }
 };

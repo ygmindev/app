@@ -4,10 +4,11 @@ import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundErr
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import type { SetEnvironmentParamsModel } from '@lib/shared/environment/utils/setEnvironment/setEnvironment.models';
 import { config } from 'dotenv';
-import { existsSync, writeFileSync } from 'fs';
+import { existsSync } from 'fs';
 import forEach from 'lodash/forEach';
 import map from 'lodash/map';
 import reduce from 'lodash/reduce';
+import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 import toString from 'lodash/toString';
 
 export const setEnvironment = ({
@@ -49,10 +50,10 @@ export const setEnvironment = ({
   environment === 'production' &&
     writes &&
     envs &&
-    writeFileSync(
-      fromWorking(`.env.${environment}`),
-      map(envs, (v, k) => `${k.trim()}=${toString(v).trim()}`).join('\n'),
-    );
+    writeFile({
+      filename: fromWorking(`.env.${environment}`),
+      value: map(envs, (v, k) => `${k.trim()}=${toString(v).trim()}`).join('\n'),
+    });
 
   return envs;
 };

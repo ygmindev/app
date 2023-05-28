@@ -4,7 +4,7 @@ import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEnv';
 import { PLATFORM } from '@lib/platform/core/core.constants';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
-import { writeFileSync } from 'fs';
+import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 
 const { displayName } = withTest({ importFromEnv });
 
@@ -21,7 +21,10 @@ describe(displayName, () => {
   test('works', async () => {
     const _platforms = Object.keys(PLATFORM);
     _platforms.forEach((platform) =>
-      writeFileSync(fromRoot(`${FILENAME}.${platform}.ts`), `${CONTENT}.${platform}`),
+      writeFile({
+        filename: fromRoot(`${FILENAME}.${platform}.ts`),
+        value: `${CONTENT}.${platform}`,
+      }),
     );
 
     for (const platform of _platforms) {

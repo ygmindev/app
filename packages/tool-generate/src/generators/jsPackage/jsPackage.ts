@@ -4,7 +4,8 @@ import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { sortKeys } from '@lib/shared/core/utils/sortKeys/sortKeys';
 import type { GeneratorParamsModel } from '@tool/generate/tasks/generate/generate.models';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync } from 'fs';
+import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 import uniq from 'lodash/uniq';
 
 export const jsPackage: GeneratorParamsModel = {
@@ -14,25 +15,25 @@ export const jsPackage: GeneratorParamsModel = {
 
     if (root && target) {
       // typescript paths
-      let dir = fromConfig('node/typescript/tsconfig.paths.json');
-      let content = JSON.parse(readFileSync(dir).toString());
+      let _filename = fromConfig('node/typescript/tsconfig.paths.json');
+      let content = JSON.parse(readFileSync(_filename).toString());
       content.compilerOptions.paths[`${target}/*`] = [`packages/${root}/src/*`];
       content.compilerOptions.paths = sortKeys(content.compilerOptions.paths);
-      writeFileSync(dir, JSON.stringify(content, null, 2));
+      writeFile({ filename: _filename, value: JSON.stringify(content, null, 2) });
 
       // bundled dependencies
-      dir = fromRoot('package.json');
-      content = JSON.parse(readFileSync(dir).toString());
+      _filename = fromRoot('package.json');
+      content = JSON.parse(readFileSync(_filename).toString());
       content.bundledDependencies = [...(content.bundledDependencies || []), target];
       content.bundledDependencies = uniq(content.bundledDependencies).sort();
-      writeFileSync(dir, JSON.stringify(content, null, 2));
+      writeFile({ filename: _filename, value: JSON.stringify(content, null, 2) });
 
       // workspace
-      dir = fromRoot('workspace.json');
-      content = JSON.parse(readFileSync(dir).toString());
+      _filename = fromRoot('workspace.json');
+      content = JSON.parse(readFileSync(_filename).toString());
       content.projects[root] = fromPackages(root);
       content.projects = sortKeys(content.projects);
-      writeFileSync(dir, JSON.stringify(content, null, 2));
+      writeFile({ filename: _filename, value: JSON.stringify(content, null, 2) });
     }
   },
 

@@ -4,7 +4,11 @@ import type { RunAllParamsModel } from '@tool/task/core/templates/runAll/runAll.
 
 const lint: TaskParamsModel<RunAllParamsModel> = {
   ...runAll,
+
   name: 'lint',
+
+  onBefore: ['make-json-lint'],
+
   options: { patterns: [/lint/] },
 };
 

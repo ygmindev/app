@@ -1,4 +1,4 @@
-import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
+import { fromBuild } from '@lib/backend/file/utils/fromBuild/fromBuild';
 import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
@@ -8,15 +8,13 @@ import type { _LintConfigModel, LintConfigModel } from '@lib/config/node/lint/li
 
 export const lintCommand = (fix?: boolean): string =>
   fromExecutable(
-    `eslint --config ${config.configFileOutput} ${
+    `eslint --config ${config.configFile} ${
       fix ? '--fix' : ''
     } --no-error-on-unmatched-pattern src/**/*.{ts,tsx,js,jsx}`,
   );
 
 export const config: LintConfigModel = {
-  configFileInput: fromConfig('node/lint/lint.ts'),
-
-  configFileOutput: fromConfig('node/lint/lint.json'),
+  configFile: fromBuild('lint.json'),
 
   include: ['src/**/*', '*.ts'],
 

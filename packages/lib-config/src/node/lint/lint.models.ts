@@ -1,9 +1,7 @@
 import type { Linter } from 'eslint';
 
 export interface LintConfigModel {
-    configFileInput: string;
-
-    configFileOutput: string;
+    configFile: string;
 
     include: Array<string>;
 

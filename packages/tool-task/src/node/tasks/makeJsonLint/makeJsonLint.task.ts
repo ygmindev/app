@@ -1,19 +1,18 @@
-import { command } from '@tool/task/core/utils/command/command';
+import { _config, config } from '@lib/config/node/lint/lint';
 import type { TaskParamsModel } from '@tool/task/core/core.models';
-import { TASK_STATUS } from '@tool/task/core/core.constants';
-import type { MakeJsonLintParamsModel } from '@tool/task/node/tasks/makeJsonLint/makeJsonLint.models';
 import makeJson from '@tool/task/core/templates/makeJson/makeJson';
+import type { MakeJsonLintParamsModel } from '@tool/task/node/tasks/makeJsonLint/makeJsonLint.models';
 
 const makeJsonLint: TaskParamsModel<MakeJsonLintParamsModel> = {
   ...makeJson,
 
-  name: 'makeJsonLint',
+  name: 'make-json-lint',
 
   options: {
-    value: async () => ({}),
+    filename: config.configFile,
 
-    filename: 'eslintrc.json'
+    value: async () => _config,
   },
 };
 
-export default makeJsonLint; 
+export default makeJsonLint;

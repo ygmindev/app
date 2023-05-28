@@ -79,12 +79,15 @@ export class TaskRegistry extends _TaskRegistry implements TaskRegistryModel {
         switch (status) {
           case TASK_STATUS.SUCCESS: {
             info(`[${_name}] ${message || 'completed'}`);
+            break;
           }
           case TASK_STATUS.WARNING: {
             warn(`[${_name}] ${message || 'completed with warnings'}`);
+            break;
           }
           default: {
             error(`[${_name}] ${_error?.message || message || 'failed'}`);
+            break;
           }
         }
       } catch (e) {
