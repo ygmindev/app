@@ -21,4 +21,6 @@ export interface TaskParamsModel<TType = undefined> extends EnvironmentOverrideP
 }
 
 export interface TaskContextModel<TType = undefined>
-  extends Pick<TaskParamsModel<TType>, 'name' | 'options' | 'root' | 'target'> {}
+  extends Pick<TaskParamsModel<TType>, 'options' | 'root' | 'target'> {
+  name?: string;
+}

@@ -1,5 +1,6 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import type { SetEnvironmentParamsModel } from '@lib/shared/environment/utils/setEnvironment/setEnvironment.models';
@@ -8,7 +9,6 @@ import { existsSync } from 'fs';
 import forEach from 'lodash/forEach';
 import map from 'lodash/map';
 import reduce from 'lodash/reduce';
-import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 import toString from 'lodash/toString';
 
 export const setEnvironment = ({

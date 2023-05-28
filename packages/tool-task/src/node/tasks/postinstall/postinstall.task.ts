@@ -11,11 +11,12 @@ const postInstall: TaskParamsModel<PostInstallParamsModel> = {
     for (const renames of NODE_POST_INSTALL_JS_TO_JSX) {
       const paths = renames.split('/');
       const filename = paths.pop();
-      filename && await rename({
-        from: filename,
-        path: paths.join('/'),
-        to: filename?.replace('.js', '.jsx').replace('.ts', '.tsx'),
-      });
+      filename &&
+        (await rename({
+          from: filename,
+          path: paths.join('/'),
+          to: filename?.replace('.js', '.jsx').replace('.ts', '.tsx'),
+        }));
     }
     return { status: TASK_STATUS.SUCCESS };
   },

@@ -25,9 +25,9 @@ const backup: TaskParamsModel<BackupParamsModel> = {
       )}`,
     );
     await command(
-      `mkdir -p backups && mkdir -p ${dest} && rsync -r ${_includes.resolve(' ')}  ${_excludes
+      `mkdir -p backups && mkdir -p ${dest} && rsync -r ${_includes.join(' ')}  ${_excludes
         .map((pattern) => `--exclude '${pattern.replace('**/', '')}'`)
-        .resolve(' ')} ${dest}`,
+        .join(' ')} ${dest}`,
     );
     process.chdir(root || fromRoot());
     return { status: TASK_STATUS.SUCCESS };

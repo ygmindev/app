@@ -5,7 +5,7 @@ const { displayName } = withTest({ rename });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await rename({});
+    const result = await rename({ from: '', path: '', to: '' });
     expect(result).toStrictEqual({});
   });
 });
