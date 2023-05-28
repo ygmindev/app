@@ -5,7 +5,7 @@ const { displayName } = withTest({ writeFile });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await writeFile({});
+    const result = await writeFile({ filename: '', value: '' });
     expect(result).toStrictEqual({});
   });
 });
