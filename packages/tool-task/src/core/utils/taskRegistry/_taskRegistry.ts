@@ -1,7 +1,7 @@
 import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
-import { TaskResultModel } from '@tool/task/core/core.models';
+import type { TaskResultModel } from '@tool/task/core/core.models';
 import type { _TaskRegistryModel } from '@tool/task/core/utils/TaskRegistry/_TaskRegistry.models';
 import { registry, series, task as _task } from 'gulp';
 import reduce from 'lodash/reduce';
@@ -31,5 +31,5 @@ export class _TaskRegistry implements _TaskRegistryModel {
       return _task;
     }
     throw new NotFoundError(name);
-  }
+  };
 }

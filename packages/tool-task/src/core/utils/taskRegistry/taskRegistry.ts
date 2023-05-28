@@ -5,6 +5,7 @@ import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { sequence } from '@lib/shared/core/utils/sequence/sequence';
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
+import { _info } from '@lib/shared/logging/utils/logger/_logger';
 import { error, info, warn } from '@lib/shared/logging/utils/logger/logger';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
 import type { TaskParamsModel, TaskResultModel } from '@tool/task/core/core.models';
@@ -47,52 +48,55 @@ export class TaskRegistry extends _TaskRegistry implements TaskRegistryModel {
       this._register(value, async () => {
         const _root = root ?? (target ? fromPackages(target) : fromRoot());
         process.chdir(_root);
-        
+
         setEnvironment({ environment, overrides });
-  
+
         const _onAfter =
-        onAfter &&
-        debounce(async () => {
-          await sequence(onAfter.map((value) => (isString(value) ? this.get(value) : value)));
-        });
-  
-      _onAfter &&
-        ['exit', 'SIGINT', 'SIGUSR1', 'SIGUSR2', 'uncaughtException', 'SIGTERM'].forEach((event) =>
-          process.on(event, async () => {
-            _onAfter && (await _onAfter());
-            process.exit();
-          }),
-        );
-  
+          onAfter &&
+          debounce(async () => {
+            await sequence(onAfter.map((value) => (isString(value) ? this.get(value) : value)));
+          });
+
+        _onAfter &&
+          ['exit', 'SIGINT', 'SIGUSR1', 'SIGUSR2', 'uncaughtException', 'SIGTERM'].forEach(
+            (event) =>
+              process.on(event, async () => {
+                _onAfter && (await _onAfter());
+                process.exit();
+              }),
+          );
+
         onBefore &&
-      (await sequence(onBefore.map((value) => (isString(value) ? this.get(value) : value))));
-  
-      try {
-        const {
-          error: _error,
-          message,
-          status,
-        } = await task({ name: _name, options, root: _root, target: _target });
-    
-        _onAfter && (await _onAfter());
-    
-        switch (status) {
-          case TASK_STATUS.SUCCESS: {
-            info(`[${_name}] ${message || 'completed'}`);
-            break;
+          (await sequence(onBefore.map((value) => (isString(value) ? this.get(value) : value))));
+
+        try {
+          _info(`running ${_name}`);
+
+          const {
+            error: _error,
+            message,
+            status,
+          } = await task({ name: _name, options, root: _root, target: _target });
+
+          _onAfter && (await _onAfter());
+
+          switch (status) {
+            case TASK_STATUS.SUCCESS: {
+              info(`[${_name}] ${message || 'completed'}`);
+              break;
+            }
+            case TASK_STATUS.WARNING: {
+              warn(`[${_name}] ${message || 'completed with warnings'}`);
+              break;
+            }
+            default: {
+              error(`[${_name}] ${_error?.message || message || 'failed'}`);
+              break;
+            }
           }
-          case TASK_STATUS.WARNING: {
-            warn(`[${_name}] ${message || 'completed with warnings'}`);
-            break;
-          }
-          default: {
-            error(`[${_name}] ${_error?.message || message || 'failed'}`);
-            break;
-          }
+        } catch (e) {
+          error(`[${_name}] failed: ${(e as Error).stack}`);
         }
-      } catch (e) {
-        error(`[${_name}] failed: ${(e as Error).stack}`);
-      }
       });
     });
   };
