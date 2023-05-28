@@ -1,5 +1,5 @@
 import { _babel } from '@lib/config/node/babel/_babel';
-import type { BabelConfigModel, _BabelConfigModel } from '@lib/config/node/babel/babel.models';
+import type { _BabelConfigModel, BabelConfigModel } from '@lib/config/node/babel/babel.models';
 
 export const config: BabelConfigModel = {
   plugins: [

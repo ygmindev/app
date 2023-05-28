@@ -1,6 +1,6 @@
-import { CallablePromiseModel } from "@lib/shared/core/core.models";
+import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 
 export interface MakeJsonParamsModel {
-    value: CallablePromiseModel<object>;
-    filename: string;
+  filename: string;
+  value: CallablePromiseModel<object>;
 }

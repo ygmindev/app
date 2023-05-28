@@ -14,7 +14,7 @@ export const lintCommand = (fix?: boolean): string =>
   );
 
 export const config: LintConfigModel = {
-  configFile: fromBuild('lint.json'),
+  configFile: fromBuild('.eslintrc.json'),
 
   include: ['src/**/*', '*.ts'],
 

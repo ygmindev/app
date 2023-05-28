@@ -24,4 +24,6 @@ export const config: FileConfigModel = {
   cleanPatterns: CLEAN_PATTERNS,
 
   excludePatterns: [...CLEAN_PATTERNS, '.git', '.backups', 'ios/Pods', 'node_modules'],
+
+  packagePrefixes: ['app', 'build', 'backend', 'lib', 'tool'],
 };

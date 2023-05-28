@@ -1,4 +1,5 @@
 import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { lintCommand } from '@lib/config/node/lint/lint';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
 import type { TaskParamsModel } from '@tool/task/core/core.models';
@@ -8,7 +9,7 @@ export const lint: TaskParamsModel = {
   name: 'lint',
 
   task: async ({ root }) => {
-    const typescriptResult = await command(`${fromExecutable('tsc')} --project tsconfig.json`, {
+    const typescriptResult = await command(`${fromExecutable('tsc')} --project ${fromWorking('tsconfig.json')}`, {
       root,
     });
     if (typescriptResult.status === TASK_STATUS.ERROR) {

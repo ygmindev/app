@@ -1,9 +1,9 @@
-import { PACKAGE_PREFIXES } from '@lib/backend/file/utils/packages/packages.constants';
+import { config } from '@lib/config/core/file/file';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 
 export const FS_FIXTURE = {
   file: '...',
-  packages: PACKAGE_PREFIXES.reduce(
+  packages: config.packagePrefixes.reduce(
     (result, prefix) => ({ ...result, [uid(prefix)]: { [`file-${prefix}`]: '...' } }),
     {},
   ),

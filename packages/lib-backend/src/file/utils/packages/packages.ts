@@ -1,8 +1,8 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { PACKAGE_PREFIXES } from '@lib/backend/file/utils/packages/packages.constants';
+import { config } from '@lib/config/core/file/file';
 import { readdirSync } from 'fs';
 import some from 'lodash/some';
 
 export const packages = readdirSync(fromPackages()).filter((pkg) =>
-  some(PACKAGE_PREFIXES.map((prefix) => pkg.startsWith(prefix))),
+  some(config.packagePrefixes.map((prefix) => pkg.startsWith(prefix))),
 );

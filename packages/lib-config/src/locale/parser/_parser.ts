@@ -2,7 +2,7 @@ import type {
   _ParserConfigModel,
   ParserConfigModel,
 } from '@lib/config/locale/parser/parser.models';
-import { resolve } from 'path';
+import { join } from 'path';
 
 export const _parser = ({
   languages,
@@ -18,7 +18,7 @@ export const _parser = ({
 
   locales: languages,
 
-  output: resolve(outputPath, '$LOCALE/$NAMESPACE.json'),
+  output: join(outputPath, '$LOCALE/$NAMESPACE.json'),
 
   sort: true,
 

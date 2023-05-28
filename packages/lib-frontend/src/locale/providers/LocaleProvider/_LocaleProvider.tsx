@@ -20,7 +20,9 @@ export const _LocaleProvider = composeComponent<
   getProps: ({ children, value }) =>
     value
       ? {
-          children: isSsr ? children : (
+          children: isSsr ? (
+            children
+          ) : (
             <_LocaleProviderSsr value={value}>{children}</_LocaleProviderSsr>
           ),
           i18n: value?.i18n,

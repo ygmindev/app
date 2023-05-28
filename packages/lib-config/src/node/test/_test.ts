@@ -2,12 +2,13 @@ import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import type { _TestConfigModel, TestConfigModel } from '@lib/config/node/test/test.models';
-import { compilerOptions } from '@lib/config/node/typescript/tsconfig.paths.json';
 import { PLATFORM } from '@lib/platform/core/core.constants';
-import { ReturnTypeModel } from '@lib/shared/core/core.models';
+import type { ReturnTypeModel } from '@lib/shared/core/core.models';
 import { mapKeys, reduce, trim, trimStart } from 'lodash';
-import { resolve } from 'path';
+import { join } from 'path';
 import { pathsToModuleNameMapper } from 'ts-jest';
+
+import { compilerOptions } from '../../../../../.build/tsconfig.json';
 
 export const _test = ({
   bundleConfig,
@@ -40,7 +41,7 @@ export const _test = ({
     moduleNameMapper: {
       ...mapKeys(_bundleConfig.aliases, (k) => `^${k}$`),
       ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: fromRoot() }),
-      [`\\.(${fileExtensions.resolve('|')})$`]: resolve(mockPath, 'file'),
+      [`\\.(${fileExtensions.join('|')})$`]: join(mockPath, 'file'),
     },
 
     passWithNoTests: true,
@@ -52,9 +53,9 @@ export const _test = ({
       [
         'jest-stare',
         {
-          coverageLink: resolve(coverageOutputPath, 'lcov-report/index.html'),
+          coverageLink: join(coverageOutputPath, 'lcov-report/index.html'),
           reportSummary: true,
-          resultDir: resolve(coverageOutputPath, 'js-stare'),
+          resultDir: join(coverageOutputPath, 'js-stare'),
         },
       ],
     ],
@@ -86,11 +87,14 @@ export const _test = ({
 
     transform: {
       '^.+\\.(js|jsx)$': 'babel-jest',
-      '^.+\\.(ts|tsx)$': ['ts-jest', { babelConfig: _bundleConfig.babelConfig, tsconfig: fromWorking('tsconfig.json') }],
+      '^.+\\.(ts|tsx)$': [
+        'ts-jest',
+        { babelConfig: _bundleConfig.babelConfig, tsconfig: fromWorking('tsconfig.json') },
+      ],
     },
 
     transformIgnorePatterns: _bundleConfig.externals
-      ? [`node_modules/(?!(${_bundleConfig.externals.resolve('|')})/)`]
+      ? [`node_modules/(?!(${_bundleConfig.externals.join('|')})/)`]
       : [],
 
     watch: isWatch,

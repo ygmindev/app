@@ -5,7 +5,6 @@ import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { sequence } from '@lib/shared/core/utils/sequence/sequence';
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
-import { _info } from '@lib/shared/logging/utils/logger/_logger';
 import { error, info, warn } from '@lib/shared/logging/utils/logger/logger';
 import { TASK_STATUS } from '@tool/task/core/core.constants';
 import type { TaskParamsModel, TaskResultModel } from '@tool/task/core/core.models';
@@ -70,7 +69,7 @@ export class TaskRegistry extends _TaskRegistry implements TaskRegistryModel {
           (await sequence(onBefore.map((value) => (isString(value) ? this.get(value) : value))));
 
         try {
-          _info(`running ${_name}`);
+          info(`running ${_name}`);
 
           const {
             error: _error,
@@ -107,5 +106,9 @@ export class TaskRegistry extends _TaskRegistry implements TaskRegistryModel {
       (result, v, k) => (k === 'default' ? result : { ...result, [k]: v }),
       {},
     );
+  }
+
+  get aliases(): Record<string, string> {
+    return this._aliases;
   }
 }

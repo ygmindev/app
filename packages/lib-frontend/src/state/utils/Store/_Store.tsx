@@ -1,4 +1,3 @@
-import { isSsr } from '@lib/platform/core/utils/isSsr/isSsr';
 import type { ActionModel, NestedActionsModel } from '@lib/frontend/state/state.models';
 import { Storage } from '@lib/frontend/state/utils/Storage/Storage';
 import type {
@@ -7,6 +6,7 @@ import type {
   _StoreParamsModel,
 } from '@lib/frontend/state/utils/Store/_Store.models';
 import type { StateProviderPropsModel } from '@lib/frontend/state/utils/Store/Store.models';
+import { isSsr } from '@lib/platform/core/utils/isSsr/isSsr';
 import { mapValuesAsync } from '@lib/shared/core/utils/mapValuesAsync/mapValuesAsync';
 import type {
   CaseReducer,
@@ -26,6 +26,7 @@ import { Provider as _Provider, useDispatch } from 'react-redux';
 import type { PersistConfig, Persistor } from 'redux-persist';
 import {
   FLUSH,
+  getStoredState,
   PAUSE,
   PERSIST,
   persistReducer,
@@ -33,7 +34,6 @@ import {
   PURGE,
   REGISTER,
   REHYDRATE,
-  getStoredState,
 } from 'redux-persist';
 
 // TODO: fix when upgrade https://github.com/reduxjs/redux-toolkit/issues/1960

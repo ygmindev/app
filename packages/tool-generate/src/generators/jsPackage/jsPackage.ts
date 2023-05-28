@@ -1,11 +1,11 @@
-import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
+import { fromBuild } from '@lib/backend/file/utils/fromBuild/fromBuild';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 import { sortKeys } from '@lib/shared/core/utils/sortKeys/sortKeys';
 import type { GeneratorParamsModel } from '@tool/generate/tasks/generate/generate.models';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { readFileSync } from 'fs';
-import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 import uniq from 'lodash/uniq';
 
 export const jsPackage: GeneratorParamsModel = {
@@ -14,8 +14,7 @@ export const jsPackage: GeneratorParamsModel = {
     const target = variables && variables['{{TARGET}}'];
 
     if (root && target) {
-      // typescript paths
-      let _filename = fromConfig('node/typescript/tsconfig.paths.json');
+      let _filename = fromBuild('node/typescript/tsconfig.paths.json');
       let content = JSON.parse(readFileSync(_filename).toString());
       content.compilerOptions.paths[`${target}/*`] = [`packages/${root}/src/*`];
       content.compilerOptions.paths = sortKeys(content.compilerOptions.paths);

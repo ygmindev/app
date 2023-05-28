@@ -1,18 +1,11 @@
+import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 import { config } from '@lib/config/core/file/file';
 import type { CopyParamsModel } from '@tool/task/file/utils/copy/copy.models';
-import {
-  existsSync,
-  mkdirSync,
-  readdirSync,
-  readFileSync,
-  rmSync,
-  statSync,
-} from 'fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync } from 'fs';
 import every from 'lodash/every';
 import forEach from 'lodash/forEach';
 import { minimatch } from 'minimatch';
-import { resolve } from 'path';
-import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
+import { join } from 'path';
 
 export const copy = async ({
   excludes = config.excludePatterns,
@@ -29,7 +22,7 @@ export const copy = async ({
         ? isOverwrite && rmSync(_to, { force: true, recursive: true })
         : mkdirSync(_to);
       for (const child of readdirSync(from)) {
-        await copy({ from: resolve(from, child), isOverwrite, overrides, to: resolve(_to, child) });
+        await copy({ from: join(from, child), isOverwrite, overrides, to: join(_to, child) });
       }
     } else if (isOverwrite || !existsSync(_to)) {
       let _file = readFileSync(from, 'utf8');

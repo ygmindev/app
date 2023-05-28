@@ -1,5 +1,5 @@
 import type { _BabelConfigModel, BabelConfigModel } from '@lib/config/node/babel/babel.models';
-import { ReturnTypeModel } from '@lib/shared/core/core.models';
+import type { ReturnTypeModel } from '@lib/shared/core/core.models';
 
 export const _babel = ({
   plugins,

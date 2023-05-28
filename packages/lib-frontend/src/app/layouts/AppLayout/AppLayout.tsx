@@ -24,8 +24,10 @@ export const AppLayout: SFCModel<AppLayoutPropsModel> = ({ children, testID, ...
             grow
             style={styles}>
             <AppHeader />
+
             {children}
           </Wrapper>
+
           <Notifications />
         </Wrapper>
       </KeyboardContainer>

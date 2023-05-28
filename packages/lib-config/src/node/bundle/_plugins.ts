@@ -8,6 +8,7 @@ import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 import type { Plugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
 import { filelocPlugin } from 'esbuild-plugin-fileloc';
+import { config } from '@lib/config/node/typescript/typescript';
 
 export const _plugins = ({
   externals = [],

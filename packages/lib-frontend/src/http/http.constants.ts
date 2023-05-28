@@ -9,7 +9,7 @@ export enum CONNECTIVITY {
 
   OFFLINE = 'offline',
 
-  WIFI = 'wifi',
-
   UNKNOWN = 'unknown',
+
+  WIFI = 'wifi',
 }

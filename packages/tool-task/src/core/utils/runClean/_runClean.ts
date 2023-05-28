@@ -14,7 +14,10 @@ export const _runClean = async ({
   root = fromWorking(),
 }: _RunCleanParamsModel): _RunCleanModel => {
   await rimraf(
-    patterns || config.cleanPatterns.map((pattern) => [resolve(root, pattern), join(root, '**', pattern)]).flat(),
+    patterns ||
+      config.cleanPatterns
+        .map((pattern) => [resolve(root, pattern), join(root, '**', pattern)])
+        .flat(),
     {
       filter: excludes ? (path) => some(excludes, (exc) => !path.includes(exc)) : undefined,
       glob: true,
