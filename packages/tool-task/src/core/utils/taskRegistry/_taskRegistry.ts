@@ -3,7 +3,7 @@ import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/Duplicate
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { TaskResultModel } from '@tool/task/core/core.models';
 import type { _TaskRegistryModel } from '@tool/task/core/utils/TaskRegistry/_TaskRegistry.models';
-import { registry, series, task as register } from 'gulp';
+import { registry, series, task as _task } from 'gulp';
 import reduce from 'lodash/reduce';
 
 export class _TaskRegistry implements _TaskRegistryModel {
@@ -11,7 +11,7 @@ export class _TaskRegistry implements _TaskRegistryModel {
     if (registry().tasks()[name]) {
       throw new DuplicateError(`task ${name} exists`);
     }
-    register(name, async () => await task());
+    _task(name, async () => await task());
   };
 
   get registry(): Record<string, CallablePromiseModel<TaskResultModel>> {

@@ -12,8 +12,6 @@ const _isTerminated = false;
 export const config: SetupConfigModel = {
   onInitialize: async () => {
     if (!_isInitialized) {
-      await import('reflect-metadata');
-
       if (process.env.USE_DATABASE) {
         const _database = new Database(_config());
         await _database.connect();

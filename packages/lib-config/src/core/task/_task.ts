@@ -35,12 +35,14 @@ export const _task = ({ packageConfig, taskExtension }: TaskConfigModel): _TaskC
 
       task: async () => {
         const { name } = await prompt([
-          { key: 'name', options: Object.keys(_taskRegistry), type: PROMPT_TYPE.LIST },
+          { key: 'name', options: [
+            ...Object.keys(_taskRegistry.aliases),
+            ...Object.keys(_taskRegistry.registry),
+          ], type: PROMPT_TYPE.LIST },
         ]);
         return _taskRegistry.get(name)();
       },
     },
   ].filter(Boolean) as Array<TaskParamsModel>;
-
   _tasks.forEach(_taskRegistry.register);
 };

@@ -19,10 +19,6 @@ import reduce from 'lodash/reduce';
 export class TaskRegistry extends _TaskRegistry implements TaskRegistryModel {
   protected _aliases: Record<string, string> = {};
 
-  get aliases(): Record<string, string> {
-    return this._aliases;
-  }
-
   register = <TType = undefined>({
     environment,
     name,
@@ -35,7 +31,7 @@ export class TaskRegistry extends _TaskRegistry implements TaskRegistryModel {
     task,
   }: TaskParamsModel<TType>): void => {
     const _target = target && kebabCase(target);
-    const _name = [_target, kebabCase(name)].join('-');
+    const _name = [_target, kebabCase(name)].filter(Boolean).join('-');
     const _alias = kebabCase(_name)
       .split('-')
       .map((p) => p.charAt(0))
@@ -47,52 +43,54 @@ export class TaskRegistry extends _TaskRegistry implements TaskRegistryModel {
 
     this._aliases[_alias] = _name;
 
-    return super._register(_name, async () => {
-      const _root = root ?? (target ? fromPackages(target) : fromRoot());
-      process.chdir(_root);
-      
-      setEnvironment({ environment, overrides });
-
-      const _onAfter =
-      onAfter &&
-      debounce(async () => {
-        await sequence(onAfter.map((value) => (isString(value) ? this.get(value) : value)));
-      });
-
-    _onAfter &&
-      ['exit', 'SIGINT', 'SIGUSR1', 'SIGUSR2', 'uncaughtException', 'SIGTERM'].forEach((event) =>
-        process.on(event, async () => {
-          _onAfter && (await _onAfter());
-          process.exit();
-        }),
-      );
-
-      onBefore &&
-    (await sequence(onBefore.map((value) => (isString(value) ? this.get(value) : value))));
-
-    try {
-      const {
-        error: _error,
-        message,
-        status,
-      } = await task({ name: _name, options, root: _root, target: _target });
+    [_name, _alias].forEach((value) => {
+      this._register(value, async () => {
+        const _root = root ?? (target ? fromPackages(target) : fromRoot());
+        process.chdir(_root);
+        
+        setEnvironment({ environment, overrides });
   
-      _onAfter && (await _onAfter());
+        const _onAfter =
+        onAfter &&
+        debounce(async () => {
+          await sequence(onAfter.map((value) => (isString(value) ? this.get(value) : value)));
+        });
   
-      switch (status) {
-        case TASK_STATUS.SUCCESS: {
-          info(`[${name}] ${message || 'completed'}`);
+      _onAfter &&
+        ['exit', 'SIGINT', 'SIGUSR1', 'SIGUSR2', 'uncaughtException', 'SIGTERM'].forEach((event) =>
+          process.on(event, async () => {
+            _onAfter && (await _onAfter());
+            process.exit();
+          }),
+        );
+  
+        onBefore &&
+      (await sequence(onBefore.map((value) => (isString(value) ? this.get(value) : value))));
+  
+      try {
+        const {
+          error: _error,
+          message,
+          status,
+        } = await task({ name: _name, options, root: _root, target: _target });
+    
+        _onAfter && (await _onAfter());
+    
+        switch (status) {
+          case TASK_STATUS.SUCCESS: {
+            info(`[${_name}] ${message || 'completed'}`);
+          }
+          case TASK_STATUS.WARNING: {
+            warn(`[${_name}] ${message || 'completed with warnings'}`);
+          }
+          default: {
+            error(`[${_name}] ${_error?.message || message || 'failed'}`);
+          }
         }
-        case TASK_STATUS.WARNING: {
-          warn(`[${name}] ${message || 'completed with warnings'}`);
-        }
-        default: {
-          error(`[${name}] ${_error?.message || message || 'failed'}`);
-        }
+      } catch (e) {
+        error(`[${_name}] failed: ${(e as Error).stack}`);
       }
-    } catch (e) {
-      error(`[${name}] failed: ${(e as Error).stack}`);
-    }
+      });
     });
   };
 
