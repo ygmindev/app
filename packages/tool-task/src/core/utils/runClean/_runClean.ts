@@ -5,7 +5,7 @@ import type {
   _RunCleanParamsModel,
 } from '@tool/task/core/utils/runClean/_runClean.models';
 import some from 'lodash/some';
-import { join } from 'path';
+import { join, resolve } from 'path';
 import { rimraf } from 'rimraf';
 
 export const _runClean = async ({
@@ -14,10 +14,7 @@ export const _runClean = async ({
   root = fromWorking(),
 }: _RunCleanParamsModel): _RunCleanModel => {
   await rimraf(
-    patterns || [
-      ...config.cleanPatterns,
-      ...config.cleanPatterns.map((pattern) => join('**/', pattern)),
-    ],
+    patterns || config.cleanPatterns.map((pattern) => [resolve(root, pattern), join(root, '**', pattern)]).flat(),
     {
       filter: excludes ? (path) => some(excludes, (exc) => !path.includes(exc)) : undefined,
       glob: true,

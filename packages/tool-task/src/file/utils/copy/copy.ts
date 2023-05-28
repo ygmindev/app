@@ -12,7 +12,7 @@ import {
 import every from 'lodash/every';
 import forEach from 'lodash/forEach';
 import { minimatch } from 'minimatch';
-import { join } from 'path';
+import { resolve } from 'path';
 
 export const copy = async ({
   excludes = config.excludePatterns,
@@ -29,7 +29,7 @@ export const copy = async ({
         ? isOverwrite && rmSync(_to, { force: true, recursive: true })
         : mkdirSync(_to);
       for (const child of readdirSync(from)) {
-        await copy({ from: join(from, child), isOverwrite, overrides, to: join(_to, child) });
+        await copy({ from: resolve(from, child), isOverwrite, overrides, to: resolve(_to, child) });
       }
     } else if (isOverwrite || !existsSync(_to)) {
       let _file = readFileSync(from, 'utf8');

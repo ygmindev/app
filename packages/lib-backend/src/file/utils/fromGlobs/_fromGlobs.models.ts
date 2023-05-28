@@ -3,3 +3,5 @@ export interface _FromGlobsParamsModel {
   isAbsolute?: boolean;
   root?: string;
 }
+
+export type _FromGlobsModel = Array<string>;

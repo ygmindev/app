@@ -8,12 +8,16 @@ import type { _LintConfigModel, LintConfigModel } from '@lib/config/node/lint/li
 
 export const lintCommand = (fix?: boolean): string =>
   fromExecutable(
-    `eslint --config ${fromConfig('node/lint/lint.config.js')} ${
+    `eslint --config ${config.configFileOutput} ${
       fix ? '--fix' : ''
     } --no-error-on-unmatched-pattern src/**/*.{ts,tsx,js,jsx}`,
   );
 
 export const config: LintConfigModel = {
+  configFileInput: fromConfig('node/lint/lint.ts'),
+
+  configFileOutput: fromConfig('node/lint/lint.json'),
+
   include: ['src/**/*', '*.ts'],
 
   indentWidth: 2,

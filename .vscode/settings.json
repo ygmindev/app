@@ -10,7 +10,7 @@
   },
   "editor.minimap.enabled": false,
   "eslint.options": {
-    "overrideConfigFile": ".build/eslintrc.json",
+    "overrideConfigFile": ".build/lint.json",
     "useEslintrc": false
   },
   "eslint.validate": [

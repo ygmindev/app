@@ -6,7 +6,7 @@ import { compilerOptions } from '@lib/config/node/typescript/tsconfig.paths.json
 import { PLATFORM } from '@lib/platform/core/core.constants';
 import { ReturnTypeModel } from '@lib/shared/core/core.models';
 import { mapKeys, reduce, trim, trimStart } from 'lodash';
-import { join } from 'path';
+import { resolve } from 'path';
 import { pathsToModuleNameMapper } from 'ts-jest';
 
 export const _test = ({
@@ -40,7 +40,7 @@ export const _test = ({
     moduleNameMapper: {
       ...mapKeys(_bundleConfig.aliases, (k) => `^${k}$`),
       ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: fromRoot() }),
-      [`\\.(${fileExtensions.join('|')})$`]: join(mockPath, 'file'),
+      [`\\.(${fileExtensions.resolve('|')})$`]: resolve(mockPath, 'file'),
     },
 
     passWithNoTests: true,
@@ -52,9 +52,9 @@ export const _test = ({
       [
         'jest-stare',
         {
-          coverageLink: join(coverageOutputPath, 'lcov-report/index.html'),
+          coverageLink: resolve(coverageOutputPath, 'lcov-report/index.html'),
           reportSummary: true,
-          resultDir: join(coverageOutputPath, 'js-stare'),
+          resultDir: resolve(coverageOutputPath, 'js-stare'),
         },
       ],
     ],
@@ -90,7 +90,7 @@ export const _test = ({
     },
 
     transformIgnorePatterns: _bundleConfig.externals
-      ? [`node_modules/(?!(${_bundleConfig.externals.join('|')})/)`]
+      ? [`node_modules/(?!(${_bundleConfig.externals.resolve('|')})/)`]
       : [],
 
     watch: isWatch,

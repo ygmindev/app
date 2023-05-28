@@ -1,4 +1,5 @@
+import { FromConfigModel, FromConfigParamsModel } from '@lib/backend/file/utils/fromConfig/fromConfig.models';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 
-export const fromConfig = (...paths: Array<string>): string =>
+export const fromConfig = (...paths: FromConfigParamsModel): FromConfigModel =>
   fromPackages('lib-config/src', ...paths);
