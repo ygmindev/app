@@ -48,5 +48,6 @@ export const _task = ({ packageConfig, taskExtension }: TaskConfigModel): _TaskC
       },
     },
   ].filter(Boolean) as Array<TaskParamsModel>;
+
   _tasks.forEach(_taskRegistry.register);
 };

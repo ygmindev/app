@@ -1,2 +1,3 @@
 require('../../../../lib-shared/src/core/utils/nodeRegister/nodeRegister').nodeRegister();
-module.exports = require('./task')._config;
+// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+require('./task')._config;
