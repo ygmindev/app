@@ -3,6 +3,7 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { RSFCPropsModel, SFCModel, SFCPropsModel } from '@lib/frontend/core/core.models';
+import { useDividers } from '@lib/frontend/core/hooks/useDividers/useDividers';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { ErrorProvider } from '@lib/frontend/core/providers/ErrorProvider/ErrorProvider';
 import { ERROR_MODE } from '@lib/frontend/core/providers/ErrorProvider/ErrorProvider.constants';
@@ -141,6 +142,7 @@ const _FormContainer = forwardRef(
           error: errors ? (errors as Record<string, undefined>)[id] : undefined,
           isAutoFocus:
             autoFocus === id || (isInitial && autoFocus === true) || fieldProps?.isAutoFocus,
+          isTransparent: isGrouped,
           label: fieldProps?.label ? t(fieldProps.label) : undefined,
           onChange: handleChange(id),
           value: values ? (values as Record<string, undefined>)[id] : undefined,
@@ -180,6 +182,28 @@ const _FormContainer = forwardRef(
       [values, errors, handleChange, initialValues, _onSubmit, _elementState],
     );
 
+    const _rows = map(rows, ({ fields, id }, i) => (
+      <Wrapper
+        isRowAlign
+        key={id}>
+        {map(fields, (field, j) => {
+          const _field = _getField(field, !i && !j);
+          return field.width ? (
+            <Wrapper
+              basis={0}
+              grow
+              key={field.id}
+              width={field.width}>
+              {_field}
+            </Wrapper>
+          ) : (
+            _field
+          );
+        })}
+      </Wrapper>
+    ));
+    const _rowsGrouped = useDividers(_rows);
+
     return (
       <MainLayout
         isCenter
@@ -187,30 +211,13 @@ const _FormContainer = forwardRef(
         style={styles}
         testID={testID}>
         <Form onSubmit={_isDisabled ? undefined : async () => handleSubmit()}>
-          <Wrapper spacing>
+          <Wrapper
+            border={isGrouped}
+            round
+            spacing={!isGrouped}>
             {topElement && topElement({ elementState: _elementState, handleReset, handleSubmit })}
 
-            {map(rows, ({ fields, id }, i) => (
-              <Wrapper
-                isRowAlign
-                key={id}>
-                {/* {map(fields, (field, j) => _getField(field, !i && !j))} */}
-                {map(fields, (field, j) => {
-                  const _field = _getField(field, !i && !j);
-                  return field.width ? (
-                    <Wrapper
-                      basis={0}
-                      grow
-                      key={field.id}
-                      width={field.width}>
-                      {_field}
-                    </Wrapper>
-                  ) : (
-                    _field
-                  );
-                })}
-              </Wrapper>
-            ))}
+            {isGrouped ? _rowsGrouped : _rows}
 
             {bottomElement &&
               bottomElement({ elementState: _elementState, handleReset, handleSubmit })}

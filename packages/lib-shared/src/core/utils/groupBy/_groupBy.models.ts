@@ -1,7 +1,7 @@
-export interface _GroupByParamsModel<TType> {
-  by(value: TType): string;
-  isSort?: boolean;
-  value?: Array<TType>;
-}
+export type _GroupByParamsModel<TType> = [
+  value: Array<TType>,
+  by: keyof TType | ((value: TType) => string),
+  options?: { isSort?: boolean },
+];
 
 export type _GroupByModel<TType> = Record<string, Array<TType>>;

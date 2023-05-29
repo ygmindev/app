@@ -2,7 +2,7 @@ import { AnimatableView } from '@lib/frontend/animation/components/AnimatableVie
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Menu } from '@lib/frontend/core/components/Menu/Menu';
 import type { MenuRefModel } from '@lib/frontend/core/components/Menu/Menu.models';
-import { View } from '@lib/frontend/core/components/View/View';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCPropsModel } from '@lib/frontend/core/core.models';
 import type { SelectFieldPropsModel } from '@lib/frontend/form/components/SelectField/SelectField.models';
@@ -21,6 +21,7 @@ export const SelectField = <TType extends string = string>({
   error,
   icon,
   isAutoFocus,
+  isTransparent,
   label,
   onChange,
   onSubmit,
@@ -83,9 +84,9 @@ export const SelectField = <TType extends string = string>({
     : undefined;
 
   return (
-    <View
-      style={styles}
-      testID={testID}>
+    <Wrapper
+      isFullWidth
+      style={styles}>
       <Menu
         anchor={(isOpen) => (
           <TextField
@@ -95,6 +96,7 @@ export const SelectField = <TType extends string = string>({
             icon={icon}
             isAutoFocus={isAutoFocus}
             isNoClear
+            isTransparent={isTransparent}
             label={label}
             leftElement={
               _selectedOption &&
@@ -128,6 +130,6 @@ export const SelectField = <TType extends string = string>({
         renderOption={renderOption}
         value={valueControlled}
       />
-    </View>
+    </Wrapper>
   );
 };

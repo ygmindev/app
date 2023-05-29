@@ -5,15 +5,15 @@ const { displayName } = withTest({ groupBy });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = groupBy({
-      by: ({ a }) => a,
-      value: [
+    const result = groupBy(
+      [
         { a: 'a', b: 'b1' },
         { a: 'a', b: 'b2' },
         { a: 'b', b: 'b3' },
         { a: 'b', b: 'b4' },
       ],
-    });
+      ({ a }) => a,
+    );
     expect(result).toStrictEqual({
       a: [
         { a: 'a', b: 'b1' },

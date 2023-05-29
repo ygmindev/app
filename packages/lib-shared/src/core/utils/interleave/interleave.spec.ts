@@ -5,7 +5,7 @@ const { displayName } = withTest({ interleave });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = interleave({ element: '1', value: ['a', 'b', 'c'] });
+    const result = interleave(['a', 'b', 'c'], '1');
     expect(result).toStrictEqual(['a', '1', 'b', '1', 'c']);
   });
 });

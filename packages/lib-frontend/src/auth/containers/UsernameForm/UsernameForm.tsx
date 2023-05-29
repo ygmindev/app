@@ -8,16 +8,18 @@ import type { SFCModel } from '@lib/frontend/core/core.models';
 import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayout';
 import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
 import { FORM_FIELD_TYPE } from '@lib/frontend/form/containers/FormContainer/FormContainer.constants';
-import type { FormContainerFieldModel } from '@lib/frontend/form/containers/FormContainer/FormContainer.models';
+import type { FormContainerRowModel } from '@lib/frontend/form/containers/FormContainer/FormContainer.models';
 import { CountryField } from '@lib/frontend/locale/components/CountryField/CountryField';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { PhoneField } from '@lib/frontend/user/components/PhoneField/PhoneField';
 import { USERNAME_METHOD } from '@lib/shared/auth/auth.constants';
 import type { OtpModel } from '@lib/shared/auth/resources/Otp/Otp.models';
+import { withId } from '@lib/shared/core/decorators/withId/withId';
 import type { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 import pick from 'lodash/pick';
+import { useMemo } from 'react';
 
 export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   isCheckIfNotExists,
@@ -40,33 +42,34 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
     return result || null;
   };
 
-  const _fields: Array<FormContainerFieldModel> = (() => {
+  const _rows: Array<FormContainerRowModel> = useMemo(() => {
     switch (method) {
       case USERNAME_METHOD.EMAIL:
-        return [
+        return withId([
           {
-            field: FORM_FIELD_TYPE.TEXT_FIELD,
-            fieldProps: {
-              autoComplete: 'email',
-              icon: 'email',
-              isAutoFocus: true,
-              label: ({ t }) => t('user:labels.email'),
-            },
-            id: 'email',
+            fields: [
+              {
+                field: FORM_FIELD_TYPE.TEXT_FIELD,
+                fieldProps: {
+                  autoComplete: 'email',
+                  icon: 'email',
+                  isAutoFocus: true,
+                  label: ({ t }) => t('user:labels.email'),
+                },
+                id: 'email',
+              },
+            ],
           },
-        ];
+        ]) as Array<FormContainerRowModel>;
       case USERNAME_METHOD.PHONE:
-        return [
-          {
-            Component: CountryField,
-            id: 'countryCode',
-          },
-          { Component: PhoneField, id: 'phone' },
-        ];
+        return withId([
+          { fields: [{ Component: CountryField, id: 'countryCode' }] },
+          { fields: [{ Component: PhoneField, id: 'phone' }] },
+        ]);
       default:
         return [];
     }
-  })();
+  }, [method]);
 
   return (
     <CenterLayout
@@ -79,10 +82,11 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
             ? { icon: 'people', message: t('auth:messages.userExistsError') }
             : undefined
         }
+        isGrouped
         onComplete={onComplete}
         onSubmit={_handleSubmit}
         onSuccess={onSuccess}
-        rows={[{ fields: _fields, id: 'username' }]}
+        rows={_rows}
         validators={USERNAME_FORM_VALIDATORS}
       />
     </CenterLayout>

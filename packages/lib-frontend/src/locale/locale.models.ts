@@ -26,5 +26,6 @@ export type InternationalizationDetectionModel = `${INTERNATIONALIZATION_DETECTI
 
 export interface CountryModel {
   callingCode: string;
+  code: string;
   name: string;
 }

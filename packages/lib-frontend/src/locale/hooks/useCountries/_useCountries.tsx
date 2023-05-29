@@ -7,6 +7,6 @@ import reduce from 'lodash/reduce';
 export const _useCountries = (): _UseCountriesModel =>
   reduce(
     pick(countries, config.supportedCountries),
-    (result, v) => [...result, { callingCode: v.phone, name: v.name }],
+    (result, v, k) => [...result, { callingCode: v.phone, code: k, name: v.name }],
     [] as _UseCountriesModel,
   );

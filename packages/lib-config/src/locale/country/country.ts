@@ -2,7 +2,8 @@ import type { CountryConfigModel } from '@lib/config/locale/country/country.mode
 
 export const config: CountryConfigModel = {
   supportedCountries: [
-    'AG',
+    'US',
+    'AR',
     'AU',
     'BE',
     'BR',
@@ -11,7 +12,7 @@ export const config: CountryConfigModel = {
     'ES',
     'FR',
     'GB',
-    'GM',
+    'DE',
     'ID',
     'IE',
     'IL',
@@ -20,7 +21,7 @@ export const config: CountryConfigModel = {
     'JP',
     'KR',
     'MX',
-    'NE',
+    'NZ',
     'NO',
     'PL',
     'RU',
@@ -31,6 +32,5 @@ export const config: CountryConfigModel = {
     'TH',
     'TR',
     'TW',
-    'US',
   ],
 };

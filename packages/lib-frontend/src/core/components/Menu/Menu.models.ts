@@ -22,6 +22,6 @@ export interface MenuPropsModel<TType extends string = string>
     Omit<StringFieldPropsModel, 'id'> {
   anchor(isOpen?: boolean): ReactElement<PressablePropsModel>;
   options: Array<MenuOptionModel<TType>>;
-  renderOption?(option: TranslatableOptionModel): TranslatableTextModel;
+  renderOption?(option: MenuOptionModel<TType>): TranslatableTextModel;
   topElement?: ReactNode;
 }

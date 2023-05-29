@@ -5,7 +5,9 @@ import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/
 import type { CountryFieldPropsModel } from '@lib/frontend/locale/components/CountryField/CountryField.models';
 import { useCountries } from '@lib/frontend/locale/hooks/useCountries/useCountries';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { currentCountry } from '@lib/frontend/locale/utils/currentCountry/currentCountry';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { find } from 'lodash';
 import { useMemo } from 'react';
 
 export const CountryField: SFCModel<CountryFieldPropsModel> = ({
@@ -23,20 +25,26 @@ export const CountryField: SFCModel<CountryFieldPropsModel> = ({
     value,
   });
 
-  useAsync({
-    onMount: async (isMounted) => {
-      // const { currentCountry: country } = await import(
-      //   '@lib/frontend/locale/utils/currentCountry/currentCountry'
-      // );
-      // const _country = isMounted() && (await country());
-      // isMounted() && _country && valueControlledSet(_country);
-    },
-  });
-
   const _countries = useCountries();
   const _options = useMemo(
-    () => _countries.map(({ callingCode, name }) => ({ id: callingCode, label: name })),
+    () =>
+      _countries.map(({ callingCode, code, name }) => ({
+        code,
+        id: callingCode,
+        label: `${name} +${callingCode}`,
+      })),
     [_countries],
+  );
+
+  useAsync(
+    {
+      onMount: async (isMounted) => {
+        const _country = isMounted() && (await currentCountry());
+        const _value = _country && find(_options, ({ code }) => code.includes(_country));
+        isMounted() && _value && valueControlledSet(_value.id);
+      },
+    },
+    [_options],
   );
 
   return (

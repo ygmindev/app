@@ -87,6 +87,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
       height,
       icon,
       isCenter,
+      isTransparent,
       keyboard,
       label,
       language,
@@ -123,17 +124,17 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
     const _containerAnimation: AnimationModel = {
       states: {
         [ELEMENT_STATE.DISABLED]: {
-          borderColor: _inactiveColor,
+          borderColor: isTransparent ? undefined : _inactiveColor,
           opacity: theme.colors.disabledOpacity,
         },
         [ELEMENT_STATE.INACTIVE]: {
           backgroundColor: _activeBackgroundColor,
-          borderColor: _inactiveColor,
+          borderColor: isTransparent ? undefined : _inactiveColor,
           opacity: 1,
         },
         [ELEMENT_STATE.ACTIVE]: {
           backgroundColor: _activeBackgroundColor,
-          borderColor: _activeColor,
+          borderColor: isTransparent ? undefined : _activeColor,
           opacity: 1,
         },
       },
@@ -161,7 +162,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
     return (
       <Wrapper
         animation={_containerAnimation}
-        border
+        border={!isTransparent}
         elementState={elementState}
         grow
         height={height}

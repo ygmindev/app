@@ -1,6 +1,3 @@
-export interface InterleaveParamsModel<TType> {
-  element: TType;
-  value?: Array<TType>;
-}
+export type InterleaveParamsModel<TType> = [value: Array<TType>, element: TType];
 
 export type InterleaveModel<TType> = Array<TType>;

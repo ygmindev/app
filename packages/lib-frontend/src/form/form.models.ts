@@ -9,6 +9,7 @@ export interface FieldPropsModel<TType>
     ValuePropsModel<TType> {
   error?: TranslatableTextModel | boolean;
   isAutoFocus?: boolean;
+  isTransparent?: boolean;
   label?: TranslatableTextModel;
 }
 
