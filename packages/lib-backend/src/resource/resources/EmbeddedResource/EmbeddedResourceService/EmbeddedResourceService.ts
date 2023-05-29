@@ -2,12 +2,11 @@ import { withContainer } from '@lib/backend/core/decorators/withContainer/withCo
 import { Container } from '@lib/backend/core/utils/Container/Container';
 import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
 import { EmbeddedResource } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResource';
-import type { ConstructorModel, DeepKeyModel, PartialModel } from '@lib/shared/core/core.models';
+import type { ConstructorModel, PartialModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { flattenObject } from '@lib/shared/core/utils/flattenObject/flattenObject';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
-import { pick } from '@lib/shared/core/utils/pick/pick';
 import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { EmbeddedResourceModel } from '@lib/shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
 import type {
@@ -26,6 +25,7 @@ import forEach from 'lodash/forEach';
 import isArray from 'lodash/isArray';
 import isPlainObject from 'lodash/isPlainObject';
 import map from 'lodash/map';
+import pick from 'lodash/pick';
 import reduce from 'lodash/reduce';
 
 export const EmbeddedResourceService = <
@@ -252,10 +252,7 @@ export const EmbeddedResourceService = <
         const result = rootResult && (rootResult[name] as unknown as Array<TType>);
         let _result = result?.length ? result[0] : undefined;
         if (_input.options?.project) {
-          _result = pick({
-            keys: Object.keys(_input.options?.project) as Array<DeepKeyModel<TType>>,
-            value: _result as TType,
-          }) as TType;
+          _result = pick(_result, Object.keys(_input.options?.project)) as TType;
         }
         const output: OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot> = {
           result: _result,

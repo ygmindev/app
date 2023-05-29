@@ -45,6 +45,7 @@ export interface FormContainerPropsModel<TType = void, TResult = void>
   cancelLabel?: TranslatableTextModel;
   isButton?: boolean;
   isFullWidth?: boolean;
+  isGrouped?: boolean;
   leftElement?(props: FormContainerFieldPropsModel): ReactNode;
   rows?: Array<FormContainerRowModel>;
   submitLabel?: TranslatableTextModel;

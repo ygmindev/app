@@ -10,16 +10,14 @@ import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormC
 import { FORM_FIELD_TYPE } from '@lib/frontend/form/containers/FormContainer/FormContainer.constants';
 import type { FormContainerFieldModel } from '@lib/frontend/form/containers/FormContainer/FormContainer.models';
 import { CountryField } from '@lib/frontend/locale/components/CountryField/CountryField';
-import { COUNTRY_FIELD_MIN_WIDTH } from '@lib/frontend/locale/components/CountryField/CountryField.constants';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { callingCode } from '@lib/frontend/locale/utils/callingCode/callingCode';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { PhoneField } from '@lib/frontend/user/components/PhoneField/PhoneField';
 import { USERNAME_METHOD } from '@lib/shared/auth/auth.constants';
 import type { OtpModel } from '@lib/shared/auth/resources/Otp/Otp.models';
-import { pick } from '@lib/shared/core/utils/pick/pick';
 import type { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
+import pick from 'lodash/pick';
 
 export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   isCheckIfNotExists,
@@ -37,7 +35,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   const _handleSubmit = async (data: UsernameFormModel): Promise<OtpModel | null> => {
     onSubmit && (await onSubmit(data));
     const { result } = await (isCheckIfNotExists ? createIfNotExists : create)({
-      form: pick({ keys: ['countryCode', 'phone', 'email'], value: data }),
+      form: pick(data, ['countryCode', 'phone', 'email']),
     });
     return result || null;
   };
@@ -60,14 +58,8 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
       case USERNAME_METHOD.PHONE:
         return [
           {
-            Component: (fieldProps) => (
-              <CountryField
-                {...fieldProps}
-                renderOption={({ id }) => `${id} +${callingCode(id)}`}
-              />
-            ),
+            Component: CountryField,
             id: 'countryCode',
-            width: COUNTRY_FIELD_MIN_WIDTH,
           },
           { Component: PhoneField, id: 'phone' },
         ];
@@ -82,10 +74,6 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
       testID={testID}>
       <FormContainer
         autoFocus={method}
-        beforeSubmit={async (data: UsernameFormModel) => ({
-          ...data,
-          countryCode: data.countryCode ? callingCode(data.countryCode) : undefined,
-        })}
         errorContextGet={(e) =>
           isCheckIfNotExists && (e as HttpError).statusCode === HTTP_STATUS_CODE.CONFLICT
             ? { icon: 'people', message: t('auth:messages.userExistsError') }

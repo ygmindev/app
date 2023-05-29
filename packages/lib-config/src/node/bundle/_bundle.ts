@@ -89,7 +89,7 @@ export const _bundle = ({
     },
 
     plugins: [
-      tsconfigPaths({ projects: [fromWorking('tsconfig.json')] }),
+      tsconfigPaths({ projects: [fromRoot('tsconfig.json')] }),
 
       checker({
         eslint: { lintCommand: lintCommand() },

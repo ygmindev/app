@@ -56,6 +56,7 @@ const _FormContainer = forwardRef(
       isBlocking,
       isButton = true,
       isFullWidth,
+      isGrouped,
       leftElement,
       onCancel,
       onComplete,
@@ -117,7 +118,7 @@ const _FormContainer = forwardRef(
       onSubmit: _handleSubmit,
       onSuccess: async (data, result) => {
         onSuccess && (await onSuccess(data, result));
-        successMessage ? async () => success({ message: t(successMessage) }) : undefined;
+        return successMessage ? success({ message: t(successMessage) }) : undefined;
       },
       validators,
     });

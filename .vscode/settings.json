@@ -2,13 +2,12 @@
   "[python]": {
     "editor.formatOnType": true
   },
-  "[typescript]": {
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
-    },
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
   },
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.minimap.enabled": false,
+  "eslint.debug": true,
   "eslint.options": {
     "overrideConfigFile": ".build/.eslintrc.json",
     "useEslintrc": false
@@ -30,6 +29,5 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "workbench.colorTheme": "GitHub Dark",
   "workbench.iconTheme": "vs-minimal",
-  "workbench.sideBar.location": "right",
-  "eslint.debug": true
+  "workbench.sideBar.location": "right"
 }

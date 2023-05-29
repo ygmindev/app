@@ -23,3 +23,8 @@ export interface TimezoneModel {
 }
 
 export type InternationalizationDetectionModel = `${INTERNATIONALIZATION_DETECTION}`;
+
+export interface CountryModel {
+  callingCode: string;
+  name: string;
+}

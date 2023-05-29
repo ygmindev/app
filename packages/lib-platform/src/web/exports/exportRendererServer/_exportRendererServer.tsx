@@ -4,14 +4,14 @@ import type { RootContextModel } from '@lib/frontend/root/root.models';
 import { ROOT_REDUCERS } from '@lib/frontend/root/stores/rootStore.constants';
 import type { RootStateContextModel } from '@lib/frontend/root/stores/rootStore.models';
 import { Store } from '@lib/frontend/state/utils/Store/Store';
+import { getLocaleStoreFromI18n } from '@lib/platform/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
 import type {
   _ExportRendererServerModel,
   _ExportRendererServerParamsModel,
 } from '@lib/platform/web/exports/exportRendererServer/_exportRendererServer.models';
-import { pick } from '@lib/shared/core/utils/pick/pick';
-import { LOCALE } from '@lib/shared/locale/locale.constants'; 
+import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { STATE } from '@lib/shared/state/state.constants';
-import { getLocaleStoreFromI18n } from '@lib/platform/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
+import pick from 'lodash/pick';
 import ReactDOMServer from 'react-dom/server';
 import { AppRegistry } from 'react-native-web';
 import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vite-plugin-ssr/server';
@@ -66,10 +66,12 @@ export const _exportRendererServer = ({
         const _i18n = context?.locale?.i18n;
         const _pageContext: RootContextModel = {
           ...context,
-          [LOCALE]: _i18n ? { i18n: _i18n, store: getLocaleStoreFromI18n({ i18n: _i18n }) } : undefined,
+          [LOCALE]: _i18n
+            ? { i18n: _i18n, store: getLocaleStoreFromI18n({ i18n: _i18n }) }
+            : undefined,
         };
         return {
-          context: ssrContextKeys && pick({ keys: ssrContextKeys, value: _pageContext }),
+          context: ssrContextKeys && pick(_pageContext, ssrContextKeys),
           enableEagerStreaming: true,
           redirectTo: _pageContext.route?.redirect,
         };
