@@ -23,11 +23,14 @@ export const SelectField = <TType extends string = string>({
   isAutoFocus,
   isTransparent,
   label,
+  onBlur,
   onChange,
+  onFocus,
   onSubmit,
   options,
   renderOption,
   renderValue,
+  round,
   testID,
   value,
   width,
@@ -103,9 +106,15 @@ export const SelectField = <TType extends string = string>({
               _selectedOption.icon &&
               (() => <Icon icon={_selectedOption.icon} />)
             }
-            onBlur={() => _handleToggle(false)}
+            onBlur={() => {
+              onBlur && onBlur();
+              _handleToggle(false);
+            }}
             onChange={onQueryChange}
-            onFocus={() => _handleToggle(true)}
+            onFocus={() => {
+              onFocus && onFocus();
+              _handleToggle(true);
+            }}
             onSubmit={_handleSelect}
             rightElement={(elementState) => (
               <AnimatableView
@@ -119,6 +128,8 @@ export const SelectField = <TType extends string = string>({
                 <Icon icon="chevronDown" />
               </AnimatableView>
             )}
+            round={round}
+            testID={testID}
             value={isOpen ? query : t(_selectedLabel)}
             width={width}
           />

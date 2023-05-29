@@ -3,7 +3,6 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { RSFCPropsModel, SFCModel, SFCPropsModel } from '@lib/frontend/core/core.models';
-import { useDividers } from '@lib/frontend/core/hooks/useDividers/useDividers';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { ErrorProvider } from '@lib/frontend/core/providers/ErrorProvider/ErrorProvider';
 import { ERROR_MODE } from '@lib/frontend/core/providers/ErrorProvider/ErrorProvider.constants';
@@ -23,13 +22,22 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { BORDER_RADIUS_DIRECTION } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
 import { FIELD_TYPE } from '@lib/shared/form/form.constants';
+import findIndex from 'lodash/findIndex';
 import map from 'lodash/map';
 import toNumber from 'lodash/toNumber';
 import type { ForwardedRef, ReactElement } from 'react';
-import { createElement, forwardRef, useCallback, useImperativeHandle, useMemo } from 'react';
+import {
+  createElement,
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useState,
+} from 'react';
 
 export const FormContainer = forwardRef(
   <TType = void, TResult = void>(
@@ -76,6 +84,7 @@ const _FormContainer = forwardRef(
     const { styles } = useStyles({ props });
     const { t } = useTranslation();
     const { error, success } = useNotification();
+    const [focused, focusedSet] = useState<string>();
 
     useImperativeHandle(ref, () => ({ reset: handleReset, submit: handleSubmit }));
 
@@ -128,9 +137,14 @@ const _FormContainer = forwardRef(
     const _isDisabled =
       _elementState === ELEMENT_STATE.DISABLED || _elementState === ELEMENT_STATE.LOADING;
     const _onSubmit = async (): Promise<void> => handleSubmit();
-
     const _getField = useCallback(
-      ({ Component, field, fieldProps, id }: FormContainerFieldModel, isInitial?: boolean) => {
+      (
+        { Component, field, fieldProps, id }: FormContainerFieldModel,
+        isFirstRow = false,
+        isFirstField = false,
+        isLastRow = false,
+        isLastField = false,
+      ) => {
         const _fieldProps: StringFieldPropsModel = {
           ...fieldProps,
           defaultValue: initialValues
@@ -141,11 +155,23 @@ const _FormContainer = forwardRef(
             : _elementState || fieldProps?.elementState,
           error: errors ? (errors as Record<string, undefined>)[id] : undefined,
           isAutoFocus:
-            autoFocus === id || (isInitial && autoFocus === true) || fieldProps?.isAutoFocus,
-          isTransparent: isGrouped,
+            autoFocus === id ||
+            (!isFirstRow && !isFirstField && autoFocus === true) ||
+            fieldProps?.isAutoFocus,
           label: fieldProps?.label ? t(fieldProps.label) : undefined,
+          onBlur: () => focusedSet(undefined),
           onChange: handleChange(id),
+          onFocus: () => focusedSet(id),
+          round: isGrouped
+            ? {
+                [BORDER_RADIUS_DIRECTION.TOP_LEFT]: (isFirstRow && isFirstField) || 0,
+                [BORDER_RADIUS_DIRECTION.TOP_RIGHT]: (isFirstRow && isLastField) || 0,
+                [BORDER_RADIUS_DIRECTION.BOTTOM_LEFT]: (isLastRow && isFirstField) || 0,
+                [BORDER_RADIUS_DIRECTION.BOTTOM_RIGHT]: (isLastRow && isLastField) || 0,
+              }
+            : 0,
           value: values ? (values as Record<string, undefined>)[id] : undefined,
+          zIndex: focused && focused === id ? 1 : 0,
         };
 
         switch (field) {
@@ -185,24 +211,22 @@ const _FormContainer = forwardRef(
     const _rows = map(rows, ({ fields, id }, i) => (
       <Wrapper
         isRowAlign
-        key={id}>
-        {map(fields, (field, j) => {
-          const _field = _getField(field, !i && !j);
-          return field.width ? (
-            <Wrapper
-              basis={0}
-              grow
-              key={field.id}
-              width={field.width}>
-              {_field}
-            </Wrapper>
-          ) : (
-            _field
-          );
-        })}
+        key={id}
+        spacing={isGrouped ? -1 : undefined}
+        zIndex={
+          focused ? (findIndex(fields, (field) => field.id === focused) >= 0 ? 1 : 0) : undefined
+        }>
+        {map(fields, (field, j) =>
+          _getField(
+            field,
+            i === 0,
+            j === 0,
+            i === (rows?.length || 0) - 1,
+            j === (fields?.length || 0) - 1,
+          ),
+        )}
       </Wrapper>
     ));
-    const _rowsGrouped = useDividers(_rows);
 
     return (
       <MainLayout
@@ -211,13 +235,10 @@ const _FormContainer = forwardRef(
         style={styles}
         testID={testID}>
         <Form onSubmit={_isDisabled ? undefined : async () => handleSubmit()}>
-          <Wrapper
-            border={isGrouped}
-            round
-            spacing={!isGrouped}>
+          <Wrapper spacing={isGrouped ? -1 : undefined}>
             {topElement && topElement({ elementState: _elementState, handleReset, handleSubmit })}
 
-            {isGrouped ? _rowsGrouped : _rows}
+            {_rows}
 
             {bottomElement &&
               bottomElement({ elementState: _elementState, handleReset, handleSubmit })}
@@ -230,7 +251,7 @@ const _FormContainer = forwardRef(
             isFullWidth
             isRowAlign
             justify={isFullWidth ? undefined : FLEX_JUSTIFY.FLEX_END}
-            spacing={THEME_SIZE.SMALL}>
+            spacing={isGrouped ? THEME_SIZE.SMALL : undefined}>
             {leftElement && leftElement({ elementState: _elementState, handleReset, handleSubmit })}
 
             {onCancel && (

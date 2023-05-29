@@ -1,9 +1,17 @@
 import { THEME_COLOR, THEME_ROLE } from '@lib/frontend/style/style.constants';
 import type { ThemeColorModel } from '@lib/frontend/style/style.models';
-import { BORDER_DIRECTION } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
-import type { BorderStylerParamsModel } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.models';
+import {
+  BORDER_DIRECTION,
+  BORDER_RADIUS_DIRECTION,
+} from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
+import type {
+  BorderRadiusDirection,
+  BorderStylerParamsModel,
+} from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.models';
 import type { StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
+import isNumber from 'lodash/isNumber';
+import isPlainObject from 'lodash/isPlainObject';
 
 export const borderStyler: StylerModel<BorderStylerParamsModel> = (
   {
@@ -16,15 +24,31 @@ export const borderStyler: StylerModel<BorderStylerParamsModel> = (
   },
   theme,
 ) => {
+  const _getBorderRadius = (
+    value?: typeof round,
+    key?: BorderRadiusDirection,
+  ): number | undefined =>
+    value === true
+      ? theme.shape.borderRadius
+      : isNumber(value)
+      ? value
+      : value && isPlainObject(value) && key
+      ? _getBorderRadius(value[key])
+      : undefined;
+
   const _color = theme.colors.tone[borderColor as ThemeColorModel];
   const _borderColor = _color ? _color[borderRole] : borderColor;
   return cleanObject({
+    borderBottomLeftRadius: _getBorderRadius(round, BORDER_RADIUS_DIRECTION.BOTTOM_LEFT),
+    borderBottomRightRadius: _getBorderRadius(round, BORDER_RADIUS_DIRECTION.BOTTOM_RIGHT),
     borderBottomWidth: border === BORDER_DIRECTION.BOTTOM ? borderWidth : undefined,
     borderColor: border ? _borderColor : undefined,
     borderLeftWidth: border === BORDER_DIRECTION.LEFT ? borderWidth : undefined,
-    borderRadius: round === true ? theme.shape.borderRadius : round === false ? undefined : round,
+    borderRadius: _getBorderRadius(round),
     borderRightWidth: border === BORDER_DIRECTION.RIGHT ? borderWidth : undefined,
     borderStyle: border ? 'solid' : undefined,
+    borderTopLeftRadius: _getBorderRadius(round, BORDER_RADIUS_DIRECTION.TOP_LEFT),
+    borderTopRightRadius: _getBorderRadius(round, BORDER_RADIUS_DIRECTION.TOP_RIGHT),
     borderTopWidth: border === BORDER_DIRECTION.TOP ? borderWidth : undefined,
     borderWidth: border === true ? borderWidth : undefined,
     ...(isShadow

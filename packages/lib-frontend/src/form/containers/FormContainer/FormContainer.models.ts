@@ -24,7 +24,6 @@ export interface FormContainerFieldPropsModel<TType = void, TResult = void>
 
 export type FormContainerFieldModel = WithIdModel & {
   type?: FieldTypeModel;
-  width?: number;
 } & (
     | { Component?: never; field: FORM_FIELD_TYPE.TEXT_FIELD; fieldProps?: TextFieldPropsModel }
     | { Component?: never; field: FORM_FIELD_TYPE.SELECT_FIELD; fieldProps?: SelectFieldPropsModel }

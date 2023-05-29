@@ -104,9 +104,11 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
       onSubmit,
       placeholder,
       rightElement,
+      round,
       testID,
       value,
       width,
+      zIndex,
       ...props
     },
     ref,
@@ -158,7 +160,6 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
     );
 
     const _rightElement = rightElement && rightElement(elementState);
-
     return (
       <Wrapper
         animation={_containerAnimation}
@@ -168,10 +169,11 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
         height={height}
         isOverflowHidden
         position={SHAPE_POSITION.RELATIVE}
-        round
+        round={round ?? true}
         style={styles}
         testID={testID}
-        width={width}>
+        width={width}
+        zIndex={zIndex}>
         <Wrapper
           animation={_containerAnimation}
           bottom={0}

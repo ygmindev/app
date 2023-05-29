@@ -19,9 +19,7 @@ export interface _TextFieldPropsModel
   leftElement?(elementState?: ElementStateModel): ReactNode;
   maxLength?: number;
   numberOfLines?: number;
-  onBlur?: CallableModel;
   onEscape?: CallableModel;
-  onFocus?: CallableModel;
   onRemove?: CallableModel;
   placeholder?: string;
   rightElement?(elementState?: ElementStateModel): ReactNode;

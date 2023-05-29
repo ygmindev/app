@@ -53,7 +53,6 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
                 fieldProps: {
                   autoComplete: 'email',
                   icon: 'email',
-                  isAutoFocus: true,
                   label: ({ t }) => t('user:labels.email'),
                 },
                 id: 'email',

@@ -19,7 +19,6 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import type { ViewStyleModel } from '@lib/frontend/style/style.models';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
-import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import type { ReactElement, RefObject } from 'react';
 import { forwardRef, useEffect, useRef } from 'react';
 
@@ -163,5 +162,3 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
     );
   },
 );
-
-process.env.APP_DEBUG && (TextField.displayName = variableName(() => TextField));
