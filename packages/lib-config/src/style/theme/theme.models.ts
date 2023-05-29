@@ -54,4 +54,4 @@ export interface ThemeConfigModel {
     height: Record<ThemeSizeMoreModel, number>;
     spacing: Record<ThemeSizeModel, number>;
   };
-};
+}

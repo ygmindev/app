@@ -9,11 +9,9 @@ export const extensions = (): ExtensionsModel => {
   const _isFrontend = _isNative || _isWeb;
   return [
     ...permuteString(
-      [
-        `.${process.env.ENV_PLATFORM}`,
-        _isNative && '.native',
-        _isFrontend && '.frontend'
-      ].filter(Boolean) as Array<string>,
+      [`.${process.env.ENV_PLATFORM}`, _isNative && '.native', _isFrontend && '.frontend'].filter(
+        Boolean,
+      ) as Array<string>,
       EXTENSIONS_BASE,
     ),
     ...EXTENSIONS_BASE,

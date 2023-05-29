@@ -4,4 +4,4 @@ export interface SetupConfigModel {
   onInitialize: CallablePromiseModel;
 
   onTerminate: CallablePromiseModel;
-};
+}

@@ -8,6 +8,6 @@ export interface ParserConfigModel {
   namespaceDefault: string;
 
   outputPath: string;
-};
+}
 
 export type _ParserConfigModel = UserConfig;

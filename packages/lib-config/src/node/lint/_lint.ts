@@ -1,4 +1,5 @@
 import type { _LintConfigModel, LintConfigModel } from '@lib/config/node/lint/lint.models';
+import type { ReturnTypeModel } from '@lib/shared/core/core.models';
 
 export const _lint = ({
   include,
@@ -11,7 +12,7 @@ export const _lint = ({
   printWidth,
   roots,
   unusedIgnore,
-}: LintConfigModel): _LintConfigModel => ({
+}: ReturnTypeModel<LintConfigModel>): ReturnTypeModel<_LintConfigModel> => ({
   env: {
     browser: true,
     es6: true,

@@ -6,20 +6,20 @@ import type {
   ServerlessConfigModel,
 } from '@lib/config/platform/serverless/serverless.models';
 import { PLATFORM } from '@lib/platform/core/core.constants';
-import { ReturnTypeModel } from '@lib/shared/core/core.models';
+import type { ReturnTypeModel } from '@lib/shared/core/core.models';
 import type { AWS } from '@serverless/typescript';
 import reduce from 'lodash/reduce';
 
 export const _serverless = ({
   bundleConfig,
-  lambdaPort,
-  port,
-  host,
   dotenv,
   environment,
   functions,
+  host,
+  lambdaPort,
   name,
   platform,
+  port,
   provider,
   server,
 }: ReturnTypeModel<ServerlessConfigModel>): ReturnTypeModel<_ServerlessConfigModel> => {
@@ -30,7 +30,7 @@ export const _serverless = ({
         dotenvParser: dotenv,
         logging: false,
       },
-  
+
       'serverless-offline': {
         allowCache: false,
         host: host.split('://')[1],
@@ -39,7 +39,7 @@ export const _serverless = ({
         lambdaPort,
         noPrependStageInUrl: true,
       },
-  
+
       ...(platform === PLATFORM.NODE
         ? {
             esbuild: {
@@ -55,7 +55,7 @@ export const _serverless = ({
           }
         : {}),
     },
-  
+
     functions: reduce(
       functions,
       (result, v, k) => ({
@@ -67,18 +67,18 @@ export const _serverless = ({
       }),
       {},
     ),
-  
+
     package: {
       excludeDevDependencies: true,
       individually: true,
     },
-  
+
     plugins: [
       'serverless-dotenv-plugin',
       platform === PLATFORM.NODE && 'serverless-esbuild',
       'serverless-offline',
     ].filter(Boolean) as Array<string>,
-  
+
     provider: {
       httpApi: {
         cors: {
@@ -94,7 +94,7 @@ export const _serverless = ({
       timeout: server.timeout,
       versionFunctions: false,
     },
-  
+
     service: name,
   };
 };

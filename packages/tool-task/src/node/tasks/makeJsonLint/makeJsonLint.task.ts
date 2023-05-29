@@ -9,7 +9,7 @@ const makeJsonLint: TaskParamsModel<MakeJsonLintParamsModel> = {
   name: 'make-json-lint',
 
   options: {
-    filename: config.configFile,
+    filename: config().configFile,
 
     value: async () => _config,
   },

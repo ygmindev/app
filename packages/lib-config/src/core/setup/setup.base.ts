@@ -1,8 +1,8 @@
 import type { SetupConfigModel } from '@lib/config/core/setup/setup.models';
 
-let _isInitialized = false;
+const _isInitialized = false;
 
-let _isTerminated = false;
+const _isTerminated = false;
 
 export const config: SetupConfigModel = {
   onInitialize: async () => {

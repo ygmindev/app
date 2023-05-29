@@ -148,7 +148,7 @@ export const _bundle = ({
       {},
     ),
   };
-  ('');
+
   _result.define = _define;
   _result.optimizeDeps?.esbuildOptions && (_result.optimizeDeps.esbuildOptions.define = _define);
 

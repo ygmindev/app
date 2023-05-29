@@ -9,9 +9,10 @@ export const lint: TaskParamsModel = {
   name: 'lint',
 
   task: async ({ root }) => {
-    const typescriptResult = await command(`${fromExecutable('tsc')} --project ${fromWorking('tsconfig.json')}`, {
-      root,
-    });
+    const typescriptResult = await command(
+      `${fromExecutable('tsc')} --project ${fromWorking('tsconfig.json')}`,
+      { root },
+    );
     if (typescriptResult.status === TASK_STATUS.ERROR) {
       return typescriptResult;
     }

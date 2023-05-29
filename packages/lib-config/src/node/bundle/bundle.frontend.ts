@@ -28,9 +28,12 @@ export const config: BundleConfigModel = () =>
           'react-native',
           'redux-persist',
           ...fromGlobs({
-            globs: ['@expo', 
-            // '@react-native*', 
-            'expo-*', 'react-native-!(codegen|gradle-plugin)'],
+            globs: [
+              '@expo',
+              // '@react-native*',
+              'expo-*',
+              'react-native-!(codegen|gradle-plugin)',
+            ],
             root: fromModules(),
           }),
         ],

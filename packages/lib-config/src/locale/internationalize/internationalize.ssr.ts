@@ -9,7 +9,7 @@ import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import type { Module } from 'i18next';
 import I18NexFsBackend from 'i18next-fs-backend';
-import i18nextMiddleware from 'i18next-http-middleware';
+import { LanguageDetector } from 'i18next-http-middleware';
 
 export const config: InternationalizeConfigModel = merge(
   [
@@ -22,7 +22,7 @@ export const config: InternationalizeConfigModel = merge(
 
       loadPath: fromStatic('assets'),
 
-      modules: [I18NexFsBackend, i18nextMiddleware.LanguageDetector] as Array<Module>,
+      modules: [I18NexFsBackend, LanguageDetector] as Array<Module>,
     },
 
     configBase,
