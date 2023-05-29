@@ -11,9 +11,11 @@ const upgrade: TaskParamsModel = {
 
   task: async (context) => {
     info(`Excluded packages: ${JSON.stringify(NODE_UPGRADE_EXCLUDES, null, '  ')}`);
-    const upgrade = await command(`${fromExecutable('ncu')} --verbose -i -p yarn -x ${Object.keys(NODE_UPGRADE_EXCLUDES).join(
-      ',',
-    )}`);
+    const upgrade = await command(
+      `${fromExecutable('ncu')} --verbose -i -p yarn -x ${Object.keys(NODE_UPGRADE_EXCLUDES).join(
+        ',',
+      )}`,
+    );
     upgrade && (await backup.task({ ...context, options: { name: 'node-upgrade' } }));
     return { status: TASK_STATUS.SUCCESS };
   },

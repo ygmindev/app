@@ -1,3 +1,6 @@
+import { CONNECTIVITY } from '@lib/frontend/http/http.constants';
+import { getConnectivity } from '@lib/frontend/http/utils/getConnectivity/getConnectivity';
+import { OfflineError } from '@lib/shared/http/errors/OfflineError/OfflineError';
 import type {
   _HttpRequestParamsModel,
   _HttpServiceModel,
@@ -16,9 +19,6 @@ import type {
   InternalAxiosRequestConfig,
 } from 'axios';
 import axios from 'axios';
-import { getConnectivity } from '@lib/frontend/http/utils/getConnectivity/getConnectivity';
-import { CONNECTIVITY } from '@lib/frontend/http/http.constants';
-import { OfflineError } from '@lib/shared/http/errors/OfflineError/OfflineError';
 
 export class _HttpService implements _HttpServiceModel {
   protected _instance: AxiosInstance;
@@ -64,7 +64,8 @@ export class _HttpService implements _HttpServiceModel {
       } as AxiosRequestConfig);
       return (response && response.data) || null;
     } catch (e) {
-      const _e = await getConnectivity() === CONNECTIVITY.OFFLINE ? new OfflineError() : e as Error;
+      const _e =
+        (await getConnectivity()) === CONNECTIVITY.OFFLINE ? new OfflineError() : (e as Error);
       this._onError && this._onError(_e);
       return null;
     }

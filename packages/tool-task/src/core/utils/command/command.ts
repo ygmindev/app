@@ -1,4 +1,7 @@
 import { _command } from '@tool/task/core/utils/command/_command';
-import { CommandModel, CommandParamsModel } from '@tool/task/core/utils/command/command.models';
+import type {
+  CommandModel,
+  CommandParamsModel,
+} from '@tool/task/core/utils/command/command.models';
 
 export const command = async (...params: CommandParamsModel): CommandModel => _command(...params);

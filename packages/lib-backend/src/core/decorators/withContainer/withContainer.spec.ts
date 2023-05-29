@@ -1,5 +1,5 @@
-import { Container } from '@lib/backend/core/utils/Container/Container';
 import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
+import { Container } from '@lib/backend/core/utils/Container/Container';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ withContainer });

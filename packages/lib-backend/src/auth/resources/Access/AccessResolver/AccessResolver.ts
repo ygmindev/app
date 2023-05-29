@@ -1,7 +1,7 @@
 import { Access } from '@lib/backend/auth/resources/Access/Access';
 import { AccessService } from '@lib/backend/auth/resources/Access/AccessService/AccessService';
-import { Container } from '@lib/backend/core/utils/Container/Container';
 import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
+import { Container } from '@lib/backend/core/utils/Container/Container';
 import { withFieldResolver } from '@lib/backend/http/decorators/withFieldResolver/withFieldResolver';
 import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import { withSelf } from '@lib/backend/http/decorators/withSelf/withSelf';

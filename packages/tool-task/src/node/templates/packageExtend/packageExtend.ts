@@ -14,7 +14,10 @@ export const packageExtend: TaskParamsModel = {
     const { default: _1, ...parentPackage } = await import(fromRoot('package.json'));
     const { default: _2, ...localPackage } = await import(fromWorking('package.json'));
     const finalPackage = merge([localPackage, pick(parentPackage, PACKAGE_EXTEND_KEYS)]);
-    writeFile({ filename: fromWorking('package.json'), value: JSON.stringify(finalPackage, null, 2) });
+    writeFile({
+      filename: fromWorking('package.json'),
+      value: JSON.stringify(finalPackage, null, 2),
+    });
     return { status: TASK_STATUS.SUCCESS };
   },
 };

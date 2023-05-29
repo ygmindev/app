@@ -1,5 +1,5 @@
-import { Container } from '@lib/backend/core/utils/Container/Container';
 import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
+import { Container } from '@lib/backend/core/utils/Container/Container';
 import { EntityResourceResolver } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver';
 import { EntityResourceService } from '@lib/backend/resource/resources/EntityResource/EntityResourceService/EntityResourceService';
 import { DummyEntityResource } from '@lib/backend/test/resources/DummyEntityResource/DummyEntityResource';

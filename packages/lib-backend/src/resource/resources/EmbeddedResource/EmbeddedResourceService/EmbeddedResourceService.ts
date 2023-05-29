@@ -1,5 +1,5 @@
-import { Container } from '@lib/backend/core/utils/Container/Container';
 import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
+import { Container } from '@lib/backend/core/utils/Container/Container';
 import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
 import { EmbeddedResource } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResource';
 import type { ConstructorModel, DeepKeyModel, PartialModel } from '@lib/shared/core/core.models';

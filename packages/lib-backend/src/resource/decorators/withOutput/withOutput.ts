@@ -24,11 +24,11 @@ const _getOperation = (method: ResourceMethodTypeModel): typeof Mutation | typeo
 
 export const withOutput =
   <TMethod extends ResourceMethodTypeModel, TType, TRoot = undefined>({
-    name,
-    method,
     Resource,
     RootResource,
     level = ACCESS_LEVEL.PUBLIC,
+    method,
+    name,
   }: WithOutputParamsModel<TMethod, TType, TRoot>): MethodDecorator =>
   (target, propertyKey, descriptor) => {
     const _name = `${name}${method}`;

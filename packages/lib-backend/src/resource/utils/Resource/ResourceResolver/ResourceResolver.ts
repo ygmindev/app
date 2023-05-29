@@ -1,5 +1,5 @@
-import { Container } from '@lib/backend/core/utils/Container/Container';
 import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
+import { Container } from '@lib/backend/core/utils/Container/Container';
 import { withContext } from '@lib/backend/http/decorators/withContext/withContext';
 import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
 import { withInput } from '@lib/backend/resource/decorators/withInput/withInput';

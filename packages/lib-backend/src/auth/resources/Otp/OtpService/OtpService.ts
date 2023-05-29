@@ -1,5 +1,5 @@
-import { Container } from '@lib/backend/core/utils/Container/Container';
 import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
+import { Container } from '@lib/backend/core/utils/Container/Container';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { mail } from '@lib/backend/notification/utils/mail/mail';
 import { sms } from '@lib/backend/notification/utils/sms/sms';

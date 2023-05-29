@@ -27,7 +27,8 @@ const install: TaskParamsModel<InstallParamsModel> = {
     await sequence(
       [
         _install &&
-          (async () => command(_install === '*' ? 'yarn' : `yarn add ${_install}`, { root: _root })),
+          (async () =>
+            command(_install === '*' ? 'yarn' : `yarn add ${_install}`, { root: _root })),
 
         _installDev && (async () => command(`yarn add ${_installDev} --dev`, { root: _root })),
 
