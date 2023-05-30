@@ -10,7 +10,7 @@ import type { UserModel } from '@lib/shared/user/resources/User/User.models';
 @withEntity({ name: `${SIGN_IN_RESOURCE_NAME}Form` })
 export class SignInForm implements SignInFormModel {
   @withField({ isOptional: true })
-  countryCode?: string;
+  callingCode?: string;
 
   @withField({ isOptional: true })
   email?: string;

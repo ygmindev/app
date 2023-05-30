@@ -1,5 +1,5 @@
 import { SERVERLESS_PROVIDER } from '@lib/backend/serverless/serverless.constants';
-import { _config as _bundleConfig } from '@lib/config/node/bundle/bundle.base';
+import { _config as _bundleConfig } from '@lib/config/node/bundle/bundle.node';
 import { _serverless } from '@lib/config/platform/serverless/_serverless';
 import type {
   _ServerlessConfigModel,

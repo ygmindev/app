@@ -21,7 +21,6 @@ import { useForm } from '@lib/frontend/form/hooks/useForm/useForm';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { BORDER_RADIUS_DIRECTION } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
@@ -212,7 +211,7 @@ const _FormContainer = forwardRef(
       <Wrapper
         isRowAlign
         key={id}
-        spacing={isGrouped ? -1 : undefined}
+        spacing={isGrouped ? -1 : true}
         zIndex={
           focused ? (findIndex(fields, (field) => field.id === focused) >= 0 ? 1 : 0) : undefined
         }>
@@ -235,7 +234,7 @@ const _FormContainer = forwardRef(
         style={styles}
         testID={testID}>
         <Form onSubmit={_isDisabled ? undefined : async () => handleSubmit()}>
-          <Wrapper spacing={isGrouped ? -1 : undefined}>
+          <Wrapper spacing={isGrouped ? -1 : true}>
             {topElement && topElement({ elementState: _elementState, handleReset, handleSubmit })}
 
             {_rows}
@@ -250,8 +249,7 @@ const _FormContainer = forwardRef(
             isDistribute={isFullWidth}
             isFullWidth
             isRowAlign
-            justify={isFullWidth ? undefined : FLEX_JUSTIFY.FLEX_END}
-            spacing={isGrouped ? THEME_SIZE.SMALL : undefined}>
+            justify={isFullWidth ? undefined : FLEX_JUSTIFY.FLEX_END}>
             {leftElement && leftElement({ elementState: _elementState, handleReset, handleSubmit })}
 
             {onCancel && (
@@ -268,7 +266,7 @@ const _FormContainer = forwardRef(
               elementState={_elementState}
               icon="chevronRight"
               onPress={handleSubmit}>
-              {submitLabel || t('core:labels.submit')}
+              {submitLabel || t('core:labels.continue')}
             </Button>
           </Wrapper>
         )}

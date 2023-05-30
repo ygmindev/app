@@ -5,7 +5,7 @@ import type { UserModel } from '@lib/shared/user/resources/User/User.models';
 
 export const USER_FIELDS: GraphQlQueryParamsFieldsModel<UserModel> = [
   '_id',
-  'countryCode',
+  'callingCode',
   'email',
   'first',
   'last',

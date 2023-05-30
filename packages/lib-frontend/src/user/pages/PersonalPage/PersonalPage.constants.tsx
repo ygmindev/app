@@ -25,8 +25,8 @@ export const PERSONAL_GROUPS: Array<RouteGroupModel> = withId([
         label: ({ t }) => t('core:labels.phone'),
         value: (state) => {
           const _currentUser = state.user.currentUser;
-          return _currentUser && _currentUser.countryCode && _currentUser.phone
-            ? phoneFormat(`+${_currentUser.countryCode}${_currentUser.phone}`)
+          return _currentUser && _currentUser.callingCode && _currentUser.phone
+            ? phoneFormat(`+${_currentUser.callingCode}${_currentUser.phone}`)
             : null;
         },
       },

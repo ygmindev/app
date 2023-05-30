@@ -17,7 +17,7 @@ export const USER_FIXTURE: RequiredModel<UserModel> = {
   beforeCreate: async (): Promise<void> => {
     return;
   },
-  countryCode: '1',
+  callingCode: '1',
   created: new Date(2000, 1, 1),
   email: 'user@email.com',
   first: 'fist',

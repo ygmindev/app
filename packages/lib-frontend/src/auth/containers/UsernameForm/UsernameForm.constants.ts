@@ -6,7 +6,7 @@ import { validatePhone } from '@lib/frontend/form/utils/validatePhone/validatePh
 
 // TODO: phone form
 export const USERNAME_FORM_VALIDATORS: FormValidatorsModel<UsernameFormModel> = {
-  countryCode: (params) => (params.data?.email ? null : validateNotEmpty(params)),
+  callingCode: (params) => (params.data?.email ? null : validateNotEmpty(params)),
   email: (params) => (params.data?.phone ? null : validateEmail(params)),
   phone: (params) => (params.data?.email ? null : validatePhone(params)),
 };

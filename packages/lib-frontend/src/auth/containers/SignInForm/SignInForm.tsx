@@ -5,13 +5,17 @@ import type { SignInFormPropsModel } from '@lib/frontend/auth/containers/SignInF
 import { UsernameForm } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm';
 import type { UsernameFormModel } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.models';
 import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
+import { Text } from '@lib/frontend/core/components/Text/Text';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { StepForm } from '@lib/frontend/form/components/StepForm/StepForm';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { FONT_TYPE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import type { SignInFormModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 
 export const SignInForm: SFCModel<SignInFormPropsModel> = ({ method, mode, testID, ...props }) => {
+  const { t } = useTranslation();
   const { styles } = useStyles({ props });
   const { replace } = useRouter();
   const { signIn, usernameUpdate } = useSignInResource();
@@ -39,7 +43,10 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({ method, mode, testI
         },
       ]}
       style={styles}
-      testID={testID}
-    />
+      testID={testID}>
+      <Text type={FONT_TYPE.HEADLINE}>
+        {t('core:labels.welcome', { value: process.env.APP_NAME })}
+      </Text>
+    </StepForm>
   );
 };

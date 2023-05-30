@@ -20,6 +20,7 @@ import { cloneElement, useMemo, useRef, useState } from 'react';
 
 export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends Array<unknown>>({
   beforeSubmit,
+  children,
   onSubmit,
   onSuccess,
   steps,
@@ -88,6 +89,8 @@ export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends
             />
           </Appearable>
         </Wrapper>
+
+        <Wrapper isCenter>{children}</Wrapper>
 
         <Slides
           current={current}

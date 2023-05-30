@@ -23,7 +23,7 @@ import { useMemo } from 'react';
 
 export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   isCheckIfNotExists,
-  method = USERNAME_METHOD.PHONE,
+  method = USERNAME_METHOD.EMAIL,
   onComplete,
   onSubmit,
   onSuccess,
@@ -37,7 +37,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   const _handleSubmit = async (data: UsernameFormModel): Promise<OtpModel | null> => {
     onSubmit && (await onSubmit(data));
     const { result } = await (isCheckIfNotExists ? createIfNotExists : create)({
-      form: pick(data, ['countryCode', 'phone', 'email']),
+      form: pick(data, ['callingCode', 'phone', 'email']),
     });
     return result || null;
   };
@@ -62,7 +62,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
         ]) as Array<FormContainerRowModel>;
       case USERNAME_METHOD.PHONE:
         return withId([
-          { fields: [{ Component: CountryField, id: 'countryCode' }] },
+          { fields: [{ Component: CountryField, id: 'callingCode' }] },
           { fields: [{ Component: PhoneField, id: 'phone' }] },
         ]);
       default:

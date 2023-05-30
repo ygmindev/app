@@ -9,8 +9,8 @@
     "phone": "phone",
     "remove": "remove",
     "setAsPrimary": "set as primary",
-    "submit": "submit",
-    "tryAgain": "try again"
+    "tryAgain": "try again",
+    "welcome": "welcome to {{value}}"
   },
   "messages": {
     "confirmRemove": "Are you sure you want to remove {{value}}?",

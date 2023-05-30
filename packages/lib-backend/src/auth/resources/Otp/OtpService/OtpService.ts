@@ -33,7 +33,7 @@ export class OtpService
             from: process.env.SERVER_TWILIO_FROM,
             params: { otp: output.result.otp },
             pathname: fromStatic('templates/otp/sms.ejs'),
-            to: `+${output.result.countryCode}${output.result.phone}`,
+            to: `+${output.result.callingCode}${output.result.phone}`,
           });
         }
         // email verification

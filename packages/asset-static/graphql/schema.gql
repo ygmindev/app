@@ -160,7 +160,7 @@ type BankCreateOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -174,7 +174,7 @@ input BankCreateRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -218,7 +218,7 @@ type BankGetConnectionOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -232,7 +232,7 @@ input BankGetConnectionRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -279,7 +279,7 @@ type BankGetManyOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -293,7 +293,7 @@ input BankGetManyRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -312,7 +312,7 @@ type BankGetOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -326,7 +326,7 @@ input BankGetRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -359,7 +359,7 @@ type BankRemoveOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -373,7 +373,7 @@ input BankRemoveRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -407,7 +407,7 @@ type BankUpdateOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -421,7 +421,7 @@ input BankUpdateRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -478,7 +478,7 @@ type CardCreateOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -492,7 +492,7 @@ input CardCreateRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -539,7 +539,7 @@ type CardGetConnectionOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -553,7 +553,7 @@ input CardGetConnectionRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -606,7 +606,7 @@ type CardGetManyOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -620,7 +620,7 @@ input CardGetManyRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -639,7 +639,7 @@ type CardGetOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -653,7 +653,7 @@ input CardGetRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -701,7 +701,7 @@ type CardRemoveOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -715,7 +715,7 @@ input CardRemoveRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -752,7 +752,7 @@ type CardUpdateOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -766,7 +766,7 @@ input CardUpdateRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -821,7 +821,7 @@ type LinkedUserCreateOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -835,7 +835,7 @@ input LinkedUserCreateRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -877,7 +877,7 @@ type LinkedUserGetConnectionOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -891,7 +891,7 @@ input LinkedUserGetConnectionRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -934,7 +934,7 @@ type LinkedUserGetManyOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -948,7 +948,7 @@ input LinkedUserGetManyRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -967,7 +967,7 @@ type LinkedUserGetOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -981,7 +981,7 @@ input LinkedUserGetRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -1019,7 +1019,7 @@ type LinkedUserRemoveOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -1033,7 +1033,7 @@ input LinkedUserRemoveRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -1065,7 +1065,7 @@ type LinkedUserUpdateOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -1079,7 +1079,7 @@ input LinkedUserUpdateRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -1122,7 +1122,7 @@ type Mutation {
 
 type Otp {
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   otp: String
@@ -1130,7 +1130,7 @@ type Otp {
 }
 
 input OtpCreateFormInput {
-  countryCode: String
+  callingCode: String
   email: String
   phone: String
 }
@@ -1145,7 +1145,7 @@ type OtpCreateOutput {
 
 input OtpGetConnectionFilterInput {
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   otp: String
@@ -1173,7 +1173,7 @@ type OtpGetConnectionOutputEdge {
 
 input OtpGetFilterInput {
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   otp: String
@@ -1186,7 +1186,7 @@ input OtpGetInput {
 
 input OtpGetManyFilterInput {
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   otp: String
@@ -1206,7 +1206,7 @@ type OtpGetOutput {
 }
 
 input OtpIfDoesNotExistCreateFormInput {
-  countryCode: String
+  callingCode: String
   email: String
   phone: String
 }
@@ -1221,7 +1221,7 @@ type OtpIfDoesNotExistCreateOutput {
 
 input OtpRemoveFilterInput {
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   otp: String
@@ -1238,7 +1238,7 @@ type OtpRemoveOutput {
 
 input OtpUpdateFilterInput {
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   otp: String
@@ -1256,7 +1256,7 @@ type OtpUpdateOutput {
 
 input OtpUpdateUpdateInput {
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   otp: String
@@ -1299,7 +1299,7 @@ type PaymentMethodGetManyOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -1313,7 +1313,7 @@ input PaymentMethodGetManyRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -1336,7 +1336,7 @@ type PaymentMethodTokenCreateOutputRoot {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -1350,7 +1350,7 @@ input PaymentMethodTokenCreateRootInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -1390,7 +1390,7 @@ type SignIn {
 }
 
 input SignInCreateFormInput {
-  countryCode: String
+  callingCode: String
   email: String
   otp: String
   phone: String
@@ -1409,7 +1409,7 @@ type User {
   Card: [Card]
   LinkedUser: [LinkedUser]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -1423,7 +1423,7 @@ input UserCreateFormInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -1445,7 +1445,7 @@ input UserGetConnectionFilterInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -1478,7 +1478,7 @@ input UserGetFilterInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -1496,7 +1496,7 @@ input UserGetManyFilterInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -1522,7 +1522,7 @@ input UserInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -1536,7 +1536,7 @@ input UserRemoveFilterInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -1558,7 +1558,7 @@ input UserUpdateFilterInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -1581,7 +1581,7 @@ input UserUpdateUpdateInput {
   Card: [CardInput]
   LinkedUser: [LinkedUserInput]
   _id: String
-  countryCode: String
+  callingCode: String
   created: DateTime
   email: String
   first: String
@@ -1591,7 +1591,7 @@ input UserUpdateUpdateInput {
 }
 
 input UserenameUpdateCreateFormInput {
-  countryCode: String
+  callingCode: String
   email: String
   otp: String
   phone: String

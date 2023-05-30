@@ -1,3 +1,4 @@
+import type { ChildrenPropsModel } from '@lib/frontend/core/core.models';
 import type { SubmittablePropsModel } from '@lib/frontend/form/form.models';
 import type { CallableModel, IntersectionModel, PartialModel } from '@lib/shared/core/core.models';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
@@ -16,6 +17,7 @@ export interface FormStepModel<TType, TStep = PartialModel<TType>> extends WithI
 export interface StepFormPropsModel<
   TType extends IntersectionModel<TSteps>,
   TSteps extends Array<unknown>,
-> extends SubmittablePropsModel<TType> {
+> extends SubmittablePropsModel<TType>,
+    ChildrenPropsModel {
   steps: Array<FormStepModel<TType, TSteps[number]>>;
 }
