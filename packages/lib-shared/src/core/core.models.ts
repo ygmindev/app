@@ -28,7 +28,7 @@ export type CallablePromiseModel<TResult = void, TParams = void> = CallableModel
   TParams
 >;
 
-export type CallableArgsModel<TResult = void, TParams extends Array<unknown> = Array<unknown>> = (
+export type CallableArgsModel<TResult = void, TParams extends Array<unknown> = never> = (
   ...args: TParams
 ) => TResult;
 

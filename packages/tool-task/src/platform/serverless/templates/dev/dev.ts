@@ -24,5 +24,5 @@ export const dev: TaskParamsModel<DevParamsModel> = {
     },
   ],
 
-  task: async ({ root }) => await command('sls offline start --reloadHandler', { root }),
+  task: async ({ root }) => await command('sls offline start --reloadHandler --verbose', { root }),
 };
