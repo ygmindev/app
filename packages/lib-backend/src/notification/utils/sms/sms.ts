@@ -12,6 +12,6 @@ export const sms = async <TParams>({
   if (process.env.NODE_ENV === 'production') {
     return _sms({ body: await template({ params, pathname }), from, to });
   }
-  debug(`[sms] ${JSON.stringify(params)}`);
+  debug('[sms]', params);
   return true;
 };

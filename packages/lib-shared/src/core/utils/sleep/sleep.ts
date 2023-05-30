@@ -10,7 +10,7 @@ export const sleep = ({ duration = 0, isVerbose = true }: SleepParamsModel = {})
   const timer =
     _isVerbose &&
     setInterval(() => {
-      debug(`sleep: ${countdown}s`);
+      debug(sleep, `${countdown}s`);
       countdown--;
       if (countdown <= 0) {
         clearInterval(timer as NodeJS.Timer);

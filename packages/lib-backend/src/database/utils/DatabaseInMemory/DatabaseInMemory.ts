@@ -1,33 +1,6 @@
 import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
-import { debug } from '@lib/shared/logging/utils/logger/logger';
-import toNumber from 'lodash/toNumber';
-import { MongoMemoryServer } from 'mongodb-memory-server';
+import { _DatabaseInMemory } from '@lib/backend/database/utils/DatabaseInMemory/_DatabaseInMemory';
+import type { DatabaseInMemoryModel } from '@lib/backend/database/utils/DatabaseInMemory/DatabaseInMemory.models';
 
 @withContainer()
-export class DatabaseInMemory {
-  _server?: MongoMemoryServer;
-
-  _isActive = (): boolean =>
-    this._server ? ['starting', 'running'].includes(this._server.state) : false;
-
-  start = async (): Promise<void> => {
-    if (!this._isActive()) {
-      debug('Starting database');
-      const url = process.env.SERVER_MONGO_DATABASE_URL.replace('mongodb://', '').split(':');
-      const port = toNumber(url.pop());
-      const ip = url.join(':');
-      this._server = await MongoMemoryServer.create({ instance: { ip, port } });
-    }
-  };
-
-  stop = async (): Promise<void> => {
-    if (this._isActive()) {
-      debug('Stopping database');
-      try {
-        this._server && (await this._server.stop());
-      } catch (e) {
-        debug('Not stopping database');
-      }
-    }
-  };
-}
+export class DatabaseInMemory extends _DatabaseInMemory implements DatabaseInMemoryModel {}

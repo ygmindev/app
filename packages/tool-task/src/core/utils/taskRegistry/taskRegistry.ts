@@ -69,7 +69,7 @@ export class TaskRegistry extends _TaskRegistry implements TaskRegistryModel {
           (await sequence(onBefore.map((value) => (isString(value) ? this.get(value) : value))));
 
         try {
-          info(`running ${_name}`);
+          info('running', _name);
 
           const {
             error: _error,
@@ -81,20 +81,20 @@ export class TaskRegistry extends _TaskRegistry implements TaskRegistryModel {
 
           switch (status) {
             case TASK_STATUS.SUCCESS: {
-              info(`[${_name}] ${message || 'completed'}`);
+              info(`[${_name}]`, message || 'completed');
               break;
             }
             case TASK_STATUS.WARNING: {
-              warn(`[${_name}] ${message || 'completed with warnings'}`);
+              warn(`[${_name}]`, message || 'completed with warnings');
               break;
             }
             default: {
-              error(`[${_name}] ${_error?.message || message || 'failed'}`);
+              error(`[${_name}]`, _error?.message || message || 'failed');
               break;
             }
           }
         } catch (e) {
-          error(`[${_name}] failed: ${(e as Error).stack}`);
+          error(`[${_name}] failed`, (e as Error).stack);
         }
       });
     });

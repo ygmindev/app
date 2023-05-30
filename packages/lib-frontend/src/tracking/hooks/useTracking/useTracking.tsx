@@ -9,16 +9,16 @@ export const useTracking = (): UseTrackingModel => {
     identify: (uid) =>
       process.env.NODE_ENV === 'production'
         ? identify(uid)
-        : debug(`[Tracking] identify user: ${uid}`),
+        : debug('[tracking] identify user', uid),
 
     initialize: async (apiKey) =>
-      process.env.NODE_ENV === 'production' ? initialize(apiKey) : debug('[Tracking] initialize'),
+      process.env.NODE_ENV === 'production' ? initialize(apiKey) : debug('[tracking] initialize'),
 
-    reset: () => (process.env.NODE_ENV === 'production' ? reset() : debug('[Tracking] reset')),
+    reset: () => (process.env.NODE_ENV === 'production' ? reset() : debug('[tracking] reset')),
 
     track: <TParams,>({ action, object, params }: TrackingEventModel<TParams>) =>
       process.env.NODE_ENV === 'production'
         ? track<TParams>({ action, object, params })
-        : debug(`[Tracking] track: ${object} ${action} ${params ? JSON.stringify(params) : ''}`),
+        : debug('[tracking] track', object, action, params),
   };
 };

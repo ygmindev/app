@@ -28,13 +28,13 @@ export type CallablePromiseModel<TResult = void, TParams = void> = CallableModel
   TParams
 >;
 
-export type CallableArgsModel<TResult = void, TParams extends Array<unknown> = never> = (
+export type CallableArgsModel<TResult = void, TParams extends Array<unknown> = Array<unknown>> = (
   ...args: TParams
 ) => TResult;
 
 export type CallableArgsPromiseModel<
   TResult = void,
-  TParams extends Array<unknown> = never,
+  TParams extends Array<unknown> = Array<unknown>,
 > = CallableArgsModel<Promise<TResult>, TParams>;
 
 export type ReturnTypeModel<TType> = TType extends CallablePromiseModel<infer TReturn>

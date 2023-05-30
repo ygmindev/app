@@ -10,7 +10,7 @@ const upgrade: TaskParamsModel = {
   name: 'node-upgrade',
 
   task: async (context) => {
-    info(`Excluded packages: ${JSON.stringify(NODE_UPGRADE_EXCLUDES, null, '  ')}`);
+    info('excluded', NODE_UPGRADE_EXCLUDES);
     const upgrade = await command(
       `${fromExecutable('ncu')} --verbose -i -p yarn -x ${Object.keys(NODE_UPGRADE_EXCLUDES).join(
         ',',

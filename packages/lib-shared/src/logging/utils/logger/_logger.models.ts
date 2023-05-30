@@ -1,6 +1,8 @@
+import type { LogModel } from '@lib/shared/logging/utils/logger/logger.models';
+
 export interface _LoggerModel {
-  _debug(...params: Array<unknown>): void;
-  _error(...params: Array<unknown>): void;
-  _info(...params: Array<unknown>): void;
-  _warn(...params: Array<unknown>): void;
+  _debug: LogModel;
+  _error: LogModel;
+  _info: LogModel;
+  _warn: LogModel;
 }

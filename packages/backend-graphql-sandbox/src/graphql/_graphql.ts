@@ -6,5 +6,5 @@ import type { _GraphqlParamsModel } from 'packages/backend-graphql-sandbox/src/g
 export const _graphql = async ({ port }: _GraphqlParamsModel): Promise<void> => {
   const server = new ApolloServer({ schema: _config });
   const { url } = await server.listen(port);
-  info(`[graphql] sandbox running on: ${url}`);
+  info('[graphql] sandbox running on:', url);
 };

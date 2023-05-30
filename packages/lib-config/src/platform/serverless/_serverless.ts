@@ -51,6 +51,7 @@ export const _serverless = ({
               packager: 'yarn',
               packagerOptions: { noInstall: true },
               plugins: toRelative({ to: fromConfig('platform/serverless/_plugins.js') }),
+              watch: { pattern: _bundleConfig.build?.watch?.include },
             },
           }
         : {}),

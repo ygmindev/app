@@ -22,7 +22,7 @@ export class _Storage implements _StorageModel {
           const _result = await storage.getItem<TType>(key);
           if (_result) {
             process.env.NODE_ENV === 'development' &&
-              debug(`[Storage]: get ${key}=${_result} for (${this._backends[i]})`);
+              debug('[Storage] get', key, _result, this._backends[i]);
             return _result;
           }
         } catch {
@@ -39,7 +39,7 @@ export class _Storage implements _StorageModel {
       if (storage) {
         try {
           process.env.NODE_ENV === 'development' &&
-            debug(`[Storage]: remove ${key} for (${this._backends[i]})`);
+            debug('[Storage] remove', key, this._backends[i]);
           await storage.removeItem(key);
           break;
         } catch {
@@ -54,7 +54,7 @@ export class _Storage implements _StorageModel {
       const storage = this._storages[i];
       if (storage) {
         process.env.NODE_ENV === 'development' &&
-          debug(`[Storage]: set ${key}=${value} (${this._backends[i]})`);
+          debug('[Storage] set', key, value, this._backends[i]);
         try {
           await storage.setItem<TType>(key, value);
           break;

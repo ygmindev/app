@@ -2,6 +2,7 @@ import { createHandler } from '@lib/backend/serverless/utils/createHandler/creat
 import { getContext } from '@lib/backend/serverless/utils/getContext/getContext';
 import { config } from '@lib/config/core/setup/setup.node';
 import { _config } from '@lib/config/graphql/graphql';
+import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 import { error } from '@lib/shared/logging/utils/logger/logger';
 import { ApolloServer } from 'apollo-server-lambda';
@@ -21,7 +22,7 @@ export const main = createHandler(async (event, context, callback) => {
     _handler = new ApolloServer({
       context: async ({ context, event }): Promise<Context> => getContext({ context, event }),
       formatError: (e): GraphQLFormattedError => {
-        error(`GraphQL Error:\n${JSON.stringify(e, null, 2)}`);
+        error('[graphql]', stringify(e));
 
         const name = (e.originalError as Error)?.constructor?.name;
         const statusCode = (() => {

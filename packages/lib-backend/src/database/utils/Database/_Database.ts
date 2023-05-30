@@ -172,7 +172,7 @@ export abstract class _Database implements DatabaseModel {
   };
 
   close = async (): Promise<void> => {
-    debug('Closing database connections');
+    debug('closing database connections');
     await this._getEntityManager().getConnection().close();
   };
 }
