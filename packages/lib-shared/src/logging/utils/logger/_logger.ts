@@ -23,7 +23,7 @@ const logger: Logger = createLogger({
         })}] ${level}: ${message}`,
     ),
   ),
-  level: 'info',
+  level: process.env.NODE_ENV === 'development' ? 'debug' : 'info',
   transports: [new transports.Console({ stderrLevels: ['error'] })],
 });
 

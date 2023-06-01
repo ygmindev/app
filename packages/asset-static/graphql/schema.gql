@@ -1131,7 +1131,9 @@ type Otp {
 
 input OtpCreateFormInput {
   callingCode: String
+  checkExists: Boolean
   email: String
+  emailOrPhone: String
   phone: String
 }
 
@@ -1207,7 +1209,9 @@ type OtpGetOutput {
 
 input OtpIfDoesNotExistCreateFormInput {
   callingCode: String
+  checkExists: Boolean
   email: String
+  emailOrPhone: String
   phone: String
 }
 

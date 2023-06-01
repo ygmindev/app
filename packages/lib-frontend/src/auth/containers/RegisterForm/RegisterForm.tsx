@@ -1,6 +1,6 @@
 import { OtpForm } from '@lib/frontend/auth/containers/OtpForm/OtpForm';
 import type { OtpFormModel } from '@lib/frontend/auth/containers/OtpForm/OtpForm.models';
-import type { SignInFormPropsModel } from '@lib/frontend/auth/containers/SignInForm/SignInForm.models';
+import type { RegisterFormPropsModel } from '@lib/frontend/auth/containers/RegisterForm/RegisterForm.models';
 import { UsernameForm } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm';
 import type { UsernameFormModel } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.models';
 import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
@@ -14,27 +14,18 @@ import { FONT_TYPE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyle
 import { SIGN_IN_MODE } from '@lib/shared/auth/auth.constants';
 import type { SignInFormModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 
-export const SignInForm: SFCModel<SignInFormPropsModel> = ({ method, mode, testID, ...props }) => {
+export const RegisterForm: SFCModel<RegisterFormPropsModel> = ({ testID, ...props }) => {
   const { t } = useTranslation();
   const { styles } = useStyles({ props });
   const { replace } = useRouter();
-  const { signIn, usernameUpdate } = useSignInResource();
-
-  const _handleSubmit = async (form: SignInFormModel): Promise<void> =>
-    mode === SIGN_IN_MODE.REGISTER ? signIn(form) : usernameUpdate(form);
-
+  const { signIn } = useSignInResource();
   return (
     <StepForm<SignInFormModel, [UsernameFormModel, OtpFormModel]>
-      onSubmit={_handleSubmit}
+      onSubmit={signIn}
       onSuccess={async () => replace({ pathname: '/' })}
       steps={[
         {
-          element: (
-            <UsernameForm
-              method={method}
-              mode={mode}
-            />
-          ),
+          element: <UsernameForm mode={SIGN_IN_MODE.REGISTER} />,
           id: 'username',
         },
         {

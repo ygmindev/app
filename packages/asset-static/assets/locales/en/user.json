@@ -3,6 +3,7 @@
     "email": "email",
     "first": "first name",
     "last": "last name",
-    "name": "name"
+    "name": "name",
+    "phone": "phone"
   }
 }

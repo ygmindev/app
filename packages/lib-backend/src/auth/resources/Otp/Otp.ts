@@ -13,6 +13,12 @@ export class OtpForm implements OtpFormModel {
   @withField({ isRepository: true, type: FIELD_TYPE.STRING })
   callingCode?: string;
 
+  @withField({ type: FIELD_TYPE.BOOLEAN })
+  checkExists?: boolean;
+
+  @withField({ type: FIELD_TYPE.STRING })
+  emailOrPhone?: string;
+
   @withField({ isRepository: true, isUnique: true, type: FIELD_TYPE.STRING })
   phone?: string;
 
@@ -21,7 +27,7 @@ export class OtpForm implements OtpFormModel {
 }
 
 @withEntity({
-  indices: [['email'], ['callingCode', 'phone']],
+  indices: [['email'], ['phone']],
   isRepository: true,
   name: OTP_RESOURCE_NAME,
 })

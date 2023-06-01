@@ -71,7 +71,10 @@ export const Button: SFCModel<ButtonPropsModel> = ({
         return {
           animation: {
             states: {
-              [ELEMENT_STATE.ACTIVE]: { backgroundColor: _color.muted, opacity: 1 },
+              [ELEMENT_STATE.ACTIVE]: {
+                backgroundColor: _color.muted,
+                opacity: 1,
+              },
               [ELEMENT_STATE.DISABLED]: {
                 backgroundColor: theme.colors.tone.neutral.main,
                 opacity: theme.colors.disabledOpacity,
@@ -127,6 +130,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
       {...props}
       align={align}
       animation={animation}
+      border={type === BUTTON_TYPE.TRANSPARENT}
       elementState={valueControlled}
       height={_height}
       justify={FLEX_JUSTIFY.CENTER}

@@ -52,12 +52,7 @@ export class SignInService implements SignInServiceModel {
       const signIn = await _createSignIn(user);
       return { result: { ...signIn, isNew } };
     }
-    throw new HttpError(
-      HTTP_STATUS_CODE.BAD_REQUEST,
-      Object.keys(form)
-        .filter((key) => !(form as Record<string, string>)[key])
-        .join(', '),
-    );
+    throw new HttpError(HTTP_STATUS_CODE.BAD_REQUEST, 'otp');
   }
 
   async usernameUpdate(
@@ -75,11 +70,6 @@ export class SignInService implements SignInServiceModel {
       const signIn = await _createSignIn(user);
       return { result: signIn };
     }
-    throw new HttpError(
-      HTTP_STATUS_CODE.BAD_REQUEST,
-      Object.keys(form)
-        .filter((key) => !(form as Record<string, string>)[key])
-        .join(', '),
-    );
+    throw new HttpError(HTTP_STATUS_CODE.BAD_REQUEST, 'otp');
   }
 }

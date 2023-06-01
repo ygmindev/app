@@ -2,7 +2,14 @@ export const AUTH = 'auth';
 
 export const SIGN_OUT = 'signOut';
 
-export enum USERNAME_METHOD {
+export enum SIGN_IN_METHOD {
   EMAIL = 'email',
+  EMAIL_OR_PHONE = 'emailOrPhone',
   PHONE = 'phone',
+}
+
+export enum SIGN_IN_MODE {
+  REGISTER = 'register',
+  SIGN_IN = 'signIn',
+  UPDATE = 'update',
 }

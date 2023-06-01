@@ -22,7 +22,6 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { BORDER_RADIUS_DIRECTION } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
-import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
 import { FIELD_TYPE } from '@lib/shared/form/form.constants';
 import findIndex from 'lodash/findIndex';
@@ -238,18 +237,14 @@ const _FormContainer = forwardRef(
             {topElement && topElement({ elementState: _elementState, handleReset, handleSubmit })}
 
             {_rows}
-
-            {bottomElement &&
-              bottomElement({ elementState: _elementState, handleReset, handleSubmit })}
           </Wrapper>
         </Form>
 
         {isButton && (
           <Wrapper
-            isDistribute={isFullWidth}
+            isDistribute
             isFullWidth
-            isRowAlign
-            justify={isFullWidth ? undefined : FLEX_JUSTIFY.FLEX_END}>
+            isRowAlign>
             {leftElement && leftElement({ elementState: _elementState, handleReset, handleSubmit })}
 
             {onCancel && (
@@ -270,6 +265,8 @@ const _FormContainer = forwardRef(
             </Button>
           </Wrapper>
         )}
+
+        {bottomElement && bottomElement({ elementState: _elementState, handleReset, handleSubmit })}
       </MainLayout>
     );
   },

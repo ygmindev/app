@@ -1,3 +1,5 @@
-import type { USERNAME_METHOD } from '@lib/shared/auth/auth.constants';
+import type { SIGN_IN_METHOD, SIGN_IN_MODE } from '@lib/shared/auth/auth.constants';
 
-export type UsernameMethodModel = `${USERNAME_METHOD}`;
+export type SignInMethodModel = `${SIGN_IN_METHOD}`;
+
+export type SignInModeModel = `${SIGN_IN_MODE}`;

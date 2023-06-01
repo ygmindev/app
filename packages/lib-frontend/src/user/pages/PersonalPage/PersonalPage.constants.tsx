@@ -22,7 +22,7 @@ export const PERSONAL_GROUPS: Array<RouteGroupModel> = withId([
       {
         icon: 'phone',
         id: PHONE,
-        label: ({ t }) => t('core:labels.phone'),
+        label: ({ t }) => t('user:labels.phone'),
         value: (state) => {
           const _currentUser = state.user.currentUser;
           return _currentUser && _currentUser.callingCode && _currentUser.phone

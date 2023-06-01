@@ -1,6 +1,7 @@
 import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
-import { SIGN_IN } from '@lib/frontend/auth/auth.constants';
-import { SIGN_IN_FORM_MODE } from '@lib/frontend/auth/containers/SignInForm/SignInForm.constants';
+import { LOG_IN, REGISTER } from '@lib/frontend/auth/auth.constants';
+import { LogInPage } from '@lib/frontend/auth/pages/LogInPage/LogInPage';
+import { RegisterPage } from '@lib/frontend/auth/pages/RegisterPage/RegisterPage';
 import { SignInPage } from '@lib/frontend/auth/pages/SignInPage/SignInPage';
 import { BILLING, PAYMENT, PAYMENT_METHOD } from '@lib/frontend/billing/billing.constants';
 import { PaymentMethodFormPage } from '@lib/frontend/billing/pages/PaymentMethodFormPage/PaymentMethodFormPage';
@@ -26,7 +27,7 @@ import { AccountPage } from '@lib/frontend/user/pages/AccountPage/AccountPage';
 import { NameFormPage } from '@lib/frontend/user/pages/NameFormPage/NameFormPage';
 import { PersonalPage } from '@lib/frontend/user/pages/PersonalPage/PersonalPage';
 import { EMAIL, NAME, PERSONAL, PHONE } from '@lib/frontend/user/user.constants';
-import { AUTH, USERNAME_METHOD } from '@lib/shared/auth/auth.constants';
+import { AUTH, SIGN_IN_METHOD, SIGN_IN_MODE } from '@lib/shared/auth/auth.constants';
 import { CORE } from '@lib/shared/core/core.constants';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
@@ -37,7 +38,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
   [
     {
       element: <AppLayout />,
-      ns: [AUTH, CORE, STYLE],
+      ns: [AUTH, CORE, STYLE, USER],
       pathname: '/',
       routes: [
         ...appRoutes,
@@ -93,8 +94,8 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                 {
                   element: (
                     <SignInPage
-                      method={USERNAME_METHOD.EMAIL}
-                      mode={SIGN_IN_FORM_MODE.UPDATE}
+                      method={SIGN_IN_METHOD.EMAIL}
+                      mode={SIGN_IN_MODE.UPDATE}
                     />
                   ),
                   ns: [AUTH],
@@ -105,8 +106,8 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                 {
                   element: (
                     <SignInPage
-                      method={USERNAME_METHOD.PHONE}
-                      mode={SIGN_IN_FORM_MODE.UPDATE}
+                      method={SIGN_IN_METHOD.PHONE}
+                      mode={SIGN_IN_MODE.UPDATE}
                     />
                   ),
                   ns: [AUTH, USER],
@@ -145,9 +146,17 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
         },
 
         {
-          element: <SignInPage mode={SIGN_IN_FORM_MODE.CREATE} />,
+          // element: <SignInPage mode={SIGN_IN_MODE.SIGN_IN} />,
+          element: <LogInPage />,
           ns: [AUTH],
-          pathname: SIGN_IN,
+          pathname: LOG_IN,
+        },
+
+        {
+          // element: <SignInPage mode={SIGN_IN_MODE.REGISTER} />,
+          element: <RegisterPage />,
+          ns: [AUTH],
+          pathname: REGISTER,
         },
 
         {

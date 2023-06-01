@@ -65,19 +65,21 @@ export class OtpService
 {
   @withInject(UserService) protected _userService!: UserService;
 
-  async createIfNotExists({
+  async create({
     form,
   }: InputModel<RESOURCE_METHOD_TYPE.CREATE, OtpModel, OtpFormModel>): Promise<
     OutputModel<RESOURCE_METHOD_TYPE.CREATE, OtpModel>
   > {
-    const { result } = await this._userService.get({
-      filter: form,
-      options: { project: { _id: true } },
-    });
-    if (result) {
-      throw new DuplicateError(result._id);
+    if (form.checkExists) {
+      const { result } = await this._userService.get({
+        filter: form,
+        options: { project: { _id: true } },
+      });
+      if (result) {
+        throw new DuplicateError(result._id);
+      }
     }
-    return this.create({ form });
+    return super.create({ form });
   }
 
   async verify(data: EntityResourceDataModel<OtpModel>): Promise<boolean> {
@@ -88,7 +90,7 @@ export class OtpService
     if (!result || result.otp !== data.otp) {
       throw new UnauthorizedError();
     }
-    await this.remove({ filter: data });
+    await super.remove({ filter: data });
     return true;
   }
 }
