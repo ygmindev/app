@@ -33,7 +33,7 @@ export const RouteGroup: SFCModel<RouteGroupPropsModel> = ({ groups, root, testI
                 <Button
                   elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
                   icon="chevronRight"
-                  type={BUTTON_TYPE.TRANSPARENT}
+                  type={BUTTON_TYPE.INVISIBLE}
                 />
               )}
               value={value}

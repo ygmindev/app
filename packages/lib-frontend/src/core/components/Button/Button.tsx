@@ -27,7 +27,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   children,
   color = THEME_COLOR.PRIMARY,
   icon,
-  type = !children && icon ? BUTTON_TYPE.TRANSPARENT : BUTTON_TYPE.FILLED,
+  type = !children && icon ? BUTTON_TYPE.INVISIBLE : BUTTON_TYPE.FILLED,
   size = THEME_SIZE.MEDIUM,
   elementState,
   onElementStateChange,
@@ -67,6 +67,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
           childColorRole: THEME_ROLE.MAIN_CONTRAST,
         };
       }
+      case BUTTON_TYPE.INVISIBLE:
       case BUTTON_TYPE.TRANSPARENT:
         return {
           animation: {
@@ -131,6 +132,8 @@ export const Button: SFCModel<ButtonPropsModel> = ({
       align={align}
       animation={animation}
       border={type === BUTTON_TYPE.TRANSPARENT}
+      borderColor={type === BUTTON_TYPE.TRANSPARENT ? color : undefined}
+      borderRole={THEME_ROLE.MAIN}
       elementState={valueControlled}
       height={_height}
       justify={FLEX_JUSTIFY.CENTER}

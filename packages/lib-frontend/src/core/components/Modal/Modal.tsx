@@ -68,7 +68,7 @@ export const Modal: FCModel<ModalPropsModel> = ({
                 <Button
                   icon="times"
                   onPress={onClose}
-                  type={BUTTON_TYPE.TRANSPARENT}
+                  type={BUTTON_TYPE.INVISIBLE}
                 />
               )}
             </Wrapper>

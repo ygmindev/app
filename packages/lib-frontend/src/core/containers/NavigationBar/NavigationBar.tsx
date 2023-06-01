@@ -32,7 +32,7 @@ export const NavigationBar = ({
   const isMobile = useIsMobile();
 
   const _categories = useMemo(
-    () => groupBy({ by: ({ category }) => toString(category), value: options }),
+    () => groupBy(options, ({ category }) => toString(category)),
     [options],
   );
 

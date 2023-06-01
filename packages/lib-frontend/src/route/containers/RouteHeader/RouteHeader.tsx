@@ -50,7 +50,7 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ..
             ref.current?.toState(ELEMENT_STATE.INACTIVE);
             push({ isBack: true, pathname: _previous });
           }}
-          type={BUTTON_TYPE.TRANSPARENT}
+          type={BUTTON_TYPE.INVISIBLE}
         />
       )}
 

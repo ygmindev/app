@@ -112,12 +112,13 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
       testID={testID}>
       <FormContainer
         autoFocus={valueControlled}
-        bottomElement={() => (
+        bottomElement={({ elementState }) => (
           <Wrapper spacing>
             <Divider>{t('core:labels.or')}</Divider>
 
             {valueControlled === SIGN_IN_METHOD.EMAIL && (
               <Button
+                elementState={elementState}
                 icon="phone"
                 onPress={() => valueControlledSet(SIGN_IN_METHOD.PHONE)}
                 type={BUTTON_TYPE.TRANSPARENT}>
@@ -127,6 +128,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
 
             {valueControlled === SIGN_IN_METHOD.PHONE && (
               <Button
+                elementState={elementState}
                 icon="email"
                 onPress={() => valueControlledSet(SIGN_IN_METHOD.EMAIL)}
                 type={BUTTON_TYPE.TRANSPARENT}>

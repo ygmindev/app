@@ -81,7 +81,7 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
             <Button
               icon="times"
               onPress={() => _handleChange('')}
-              type={BUTTON_TYPE.TRANSPARENT}
+              type={BUTTON_TYPE.INVISIBLE}
             />
           </Appearable>
         )}
