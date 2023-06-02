@@ -57,6 +57,7 @@ export class OtpService
         : randomInt(OTP_LENGTH).toString();
 
       if (input.form.username && !input.form.email && !input.form.phone) {
+        const phone = 
       }
 
       return input;
