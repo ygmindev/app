@@ -4,7 +4,10 @@ import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import type { _TestConfigModel, TestConfigModel } from '@lib/config/node/test/test.models';
 import { PLATFORM } from '@lib/platform/core/core.constants';
 import type { ReturnTypeModel } from '@lib/shared/core/core.models';
-import { mapKeys, reduce, trim, trimStart } from 'lodash';
+import mapKeys from 'lodash/mapKeys';
+import reduce from 'lodash/reduce';
+import trim from 'lodash/trim';
+import trimStart from 'lodash/trimStart';
 import { join } from 'path';
 import { pathsToModuleNameMapper } from 'ts-jest';
 
@@ -86,10 +89,14 @@ export const _test = ({
     testTimeout: timeout,
 
     transform: {
-      '^.+\\.(js|jsx)$': 'babel-jest',
-      '^.+\\.(ts|tsx)$': [
+      // '^.+\\.(js|jsx)$': 'babel-jest',
+      // '^.+\\.(ts|tsx)$': [
+      //   'ts-jest',
+      //   { babelConfig: _bundleConfig.babelConfig, tsconfig: fromWorking('tsconfig.json') },
+      // ],
+      '^.+\\.(t|j)sx?$': [
         'ts-jest',
-        { babelConfig: _bundleConfig.babelConfig, tsconfig: fromWorking('tsconfig.json') },
+        { isolatedModules: true, tsconfig: fromWorking('tsconfig.json') },
       ],
     },
 

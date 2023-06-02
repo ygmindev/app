@@ -16,14 +16,14 @@ export class OtpForm implements OtpFormModel {
   @withField({ type: FIELD_TYPE.BOOLEAN })
   checkExists?: boolean;
 
-  @withField({ type: FIELD_TYPE.STRING })
-  emailOrPhone?: string;
+  @withField({ isRepository: true, isUnique: true, type: FIELD_TYPE.STRING })
+  email?: string;
 
   @withField({ isRepository: true, isUnique: true, type: FIELD_TYPE.STRING })
   phone?: string;
 
-  @withField({ isRepository: true, isUnique: true, type: FIELD_TYPE.STRING })
-  email?: string;
+  @withField({ type: FIELD_TYPE.STRING })
+  username?: string;
 }
 
 @withEntity({
@@ -52,4 +52,7 @@ export class Otp extends EntityResource implements OtpModel {
 
   @withField({ isOptional: true, isRepository: true, type: FIELD_TYPE.STRING })
   phone?: string;
+
+  @withField({ type: FIELD_TYPE.STRING })
+  username?: string;
 }

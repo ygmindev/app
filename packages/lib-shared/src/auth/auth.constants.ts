@@ -4,8 +4,8 @@ export const SIGN_OUT = 'signOut';
 
 export enum SIGN_IN_METHOD {
   EMAIL = 'email',
-  EMAIL_OR_PHONE = 'emailOrPhone',
   PHONE = 'phone',
+  USERNAME = 'username',
 }
 
 export enum SIGN_IN_MODE {

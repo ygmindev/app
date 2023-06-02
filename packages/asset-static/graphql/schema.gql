@@ -1127,14 +1127,15 @@ type Otp {
   email: String
   otp: String
   phone: String
+  username: String
 }
 
 input OtpCreateFormInput {
   callingCode: String
   checkExists: Boolean
   email: String
-  emailOrPhone: String
   phone: String
+  username: String
 }
 
 input OtpCreateInput {
@@ -1152,6 +1153,7 @@ input OtpGetConnectionFilterInput {
   email: String
   otp: String
   phone: String
+  username: String
 }
 
 input OtpGetConnectionInput {
@@ -1180,6 +1182,7 @@ input OtpGetFilterInput {
   email: String
   otp: String
   phone: String
+  username: String
 }
 
 input OtpGetInput {
@@ -1193,6 +1196,7 @@ input OtpGetManyFilterInput {
   email: String
   otp: String
   phone: String
+  username: String
 }
 
 input OtpGetManyInput {
@@ -1211,8 +1215,8 @@ input OtpIfDoesNotExistCreateFormInput {
   callingCode: String
   checkExists: Boolean
   email: String
-  emailOrPhone: String
   phone: String
+  username: String
 }
 
 input OtpIfDoesNotExistCreateInput {
@@ -1230,6 +1234,7 @@ input OtpRemoveFilterInput {
   email: String
   otp: String
   phone: String
+  username: String
 }
 
 input OtpRemoveInput {
@@ -1247,6 +1252,7 @@ input OtpUpdateFilterInput {
   email: String
   otp: String
   phone: String
+  username: String
 }
 
 input OtpUpdateInput {
@@ -1265,6 +1271,7 @@ input OtpUpdateUpdateInput {
   email: String
   otp: String
   phone: String
+  username: String
 }
 
 type PageInfo {

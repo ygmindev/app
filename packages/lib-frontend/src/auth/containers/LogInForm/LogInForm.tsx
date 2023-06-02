@@ -27,7 +27,7 @@ export const LogInForm: SFCModel<LogInFormPropsModel> = ({ testID, ...props }) =
         {
           element: (
             <UsernameForm
-              method={SIGN_IN_METHOD.EMAIL_OR_PHONE}
+              method={SIGN_IN_METHOD.USERNAME}
               mode={SIGN_IN_MODE.SIGN_IN}
             />
           ),

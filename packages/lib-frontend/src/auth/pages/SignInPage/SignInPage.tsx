@@ -6,7 +6,7 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { SIGN_IN_METHOD } from '@lib/shared/auth/auth.constants';
 
 export const SignInPage: SFCModel<SignInPagePropsModel> = ({
-  method = SIGN_IN_METHOD.EMAIL_OR_PHONE,
+  method = SIGN_IN_METHOD.USERNAME,
   mode,
   testID,
   ...props

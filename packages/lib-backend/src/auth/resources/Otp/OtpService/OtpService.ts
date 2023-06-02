@@ -46,7 +46,6 @@ export class OtpService
           });
         }
       }
-
       return output;
     },
 
@@ -56,6 +55,10 @@ export class OtpService
       input.form.otp = process.env.SERVER_IS_OTP_STATIC
         ? OTP_STATIC
         : randomInt(OTP_LENGTH).toString();
+
+      if (input.form.username && !input.form.email && !input.form.phone) {
+      }
+
       return input;
     },
 

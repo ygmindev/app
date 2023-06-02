@@ -60,9 +60,7 @@ export const _typescript = ({
       types,
     },
     'ts-node': {
-      compilerOptions: {
-        module: 'commonjs',
-      },
+      compilerOptions: { module: 'commonjs' },
       require: ['tsconfig-paths/register'],
       swc: true,
       transpileOnly: true,
