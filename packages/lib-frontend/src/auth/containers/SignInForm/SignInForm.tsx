@@ -22,12 +22,12 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({ method, mode, testI
   const { replace } = useRouter();
   const { signIn, usernameUpdate } = useSignInResource();
 
-  const _handleSubmit = async (form: SignInFormModel): Promise<void> =>
+  const handleSubmit = async (form: SignInFormModel): Promise<void> =>
     mode === SIGN_IN_MODE.SIGN_IN ? signIn(form) : usernameUpdate(form);
 
   return (
     <StepForm<SignInFormModel, [UsernameFormModel, OtpFormModel]>
-      onSubmit={_handleSubmit}
+      onSubmit={handleSubmit}
       onSuccess={async () => replace({ pathname: '/' })}
       steps={[
         {

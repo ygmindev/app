@@ -2,7 +2,7 @@ import 'setimmediate';
 
 import { polyfill } from 'raf';
 
-const _polyfill = {};
-polyfill(_polyfill);
+const result = {};
+polyfill(result);
 
-export default _polyfill.requestAnimationFrame;
+export default result.requestAnimationFrame;

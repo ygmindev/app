@@ -22,7 +22,6 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 export const _bundle = ({
   aliases,
-  babelConfig,
   define,
   entry,
   envPrefix,
@@ -35,11 +34,10 @@ export const _bundle = ({
   provide,
   watch,
 }: ReturnTypeModel<BundleConfigModel>): ReturnTypeModel<_BundleConfigModel> => {
-  const _isReact = (
-    [PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>
-  ).includes(platform);
-  const _babelConfig = babelConfig && babelConfig();
-  const _result: ReturnTypeModel<_BundleConfigModel> = {
+  const isReact = ([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>).includes(
+    platform,
+  );
+  const config: ReturnTypeModel<_BundleConfigModel> = {
     build: {
       commonjsOptions: {
         include: externals,
@@ -96,7 +94,7 @@ export const _bundle = ({
         typescript: { tsconfigPath: fromWorking('tsconfig.json') },
       }),
 
-      _isReact && react(),
+      isReact && react(),
 
       provide && inject(provide),
 
@@ -137,20 +135,20 @@ export const _bundle = ({
     },
   };
 
-  const _define = {
-    ..._result.define,
+  const defineF = {
+    ...config.define,
     ...reduce(
       process.env,
       (result, v, k) =>
-        some(_result.envPrefix, (prefix) => k.startsWith(prefix))
+        some(config.envPrefix, (prefix) => k.startsWith(prefix))
           ? { ...result, [`process.env.${k}`]: JSON.stringify(v) }
           : result,
       {},
     ),
   };
 
-  _result.define = _define;
-  _result.optimizeDeps?.esbuildOptions && (_result.optimizeDeps.esbuildOptions.define = _define);
+  config.define = defineF;
+  config.optimizeDeps?.esbuildOptions && (config.optimizeDeps.esbuildOptions.define = defineF);
 
-  return _result;
+  return config;
 };

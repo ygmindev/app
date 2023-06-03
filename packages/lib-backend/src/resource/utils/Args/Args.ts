@@ -24,14 +24,14 @@ export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoo
 }: ArgsParamsModel<TMethod, TType, TForm, TRoot>): ResourceConstructorModel<
   ArgsModel<TMethod, TType, TForm, TRoot>
 > => {
-  const _Root = Root({ RootResource, name });
+  const RootF = Root({ RootResource, name });
   switch (method) {
     case RESOURCE_METHOD_TYPE.GET:
     case RESOURCE_METHOD_TYPE.GET_MANY:
     case RESOURCE_METHOD_TYPE.REMOVE: {
       @withEntity({ isAbstract: true })
       class _Args
-        extends _Root
+        extends RootF
         implements
           ArgsModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>,
           ArgsModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot>,
@@ -47,7 +47,7 @@ export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoo
     case RESOURCE_METHOD_TYPE.CREATE: {
       @withEntity({ isAbstract: true })
       class _Args
-        extends _Root
+        extends RootF
         implements ArgsModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>
       {
         @withCondition(Resource !== undefined, () =>
@@ -60,7 +60,7 @@ export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoo
     case RESOURCE_METHOD_TYPE.UPDATE: {
       @withEntity({ isAbstract: true })
       class _Args
-        extends _Root
+        extends RootF
         implements ArgsModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot>
       {
         @withCondition(Resource !== undefined, () =>
@@ -78,7 +78,7 @@ export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoo
     case RESOURCE_METHOD_TYPE.GET_CONNECTION: {
       @withEntity({ isAbstract: true })
       class _Args
-        extends _Root
+        extends RootF
         implements ArgsModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm, TRoot>
       {
         @withCondition(Resource !== undefined, () =>

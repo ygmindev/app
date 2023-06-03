@@ -14,10 +14,10 @@ export const watch: TaskParamsModel<WatchParamsModel> = {
 
   task: async ({ options, root }) => {
     const { executable, patterns, script } = options || {};
-    const _extensions = options?.extensions || extensions();
+    const extensionsF = options?.extensions || extensions();
     const params = [
       patterns && patterns.map((pattern) => `--watch "${pattern}"`).join(' '),
-      `--ext ${_extensions.map((ext) => trimStart(ext, '.')).join(',')}`,
+      `--ext ${extensionsF.map((ext) => trimStart(ext, '.')).join(',')}`,
       executable && `--exec "${executable}"`,
       script,
     ]

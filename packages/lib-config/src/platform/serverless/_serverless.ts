@@ -23,7 +23,7 @@ export const _serverless = ({
   provider,
   server,
 }: ReturnTypeModel<ServerlessConfigModel>): ReturnTypeModel<_ServerlessConfigModel> => {
-  const _bundleConfig = bundleConfig();
+  const bundleConfigF = bundleConfig();
   return {
     custom: {
       dotenv: {
@@ -43,7 +43,7 @@ export const _serverless = ({
       ...(platform === PLATFORM.NODE
         ? {
             esbuild: {
-              ..._bundleConfig.optimizeDeps?.esbuildOptions,
+              ...bundleConfigF.optimizeDeps?.esbuildOptions,
               bundle: true,
               format: 'cjs',
               keepOutputDirectory: true,
@@ -51,7 +51,7 @@ export const _serverless = ({
               packager: 'yarn',
               packagerOptions: { noInstall: true },
               plugins: toRelative({ to: fromConfig('platform/serverless/_plugins.js') }),
-              watch: { pattern: _bundleConfig.build?.watch?.include },
+              watch: { pattern: bundleConfigF.build?.watch?.include },
             },
           }
         : {}),

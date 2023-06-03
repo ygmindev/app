@@ -16,11 +16,11 @@ import {
   signOut,
 } from 'firebase/auth';
 
-let _auth: Auth;
+let auth: Auth;
 
 export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionModel => ({
   getToken: async (): Promise<string | null> => {
-    const currentUser = _auth && _auth.currentUser;
+    const currentUser = auth && auth.currentUser;
     return currentUser ? currentUser.getIdToken() : null;
   },
 
@@ -35,27 +35,27 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
         storageBucket: process.env.APP_FIREBASE_STORAGE_BUCKET,
       });
 
-      _auth = getAuth();
+      auth = getAuth();
 
-      _auth &&
+      auth &&
         process.env.APP_FIREBASE_USE_EMULATOR &&
-        connectAuthEmulator(_auth, 'http://localhost:9099', { disableWarnings: true });
+        connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
 
       // TODO: from locale
       // _auth && useDeviceLanguage(_auth);
 
-      _auth &&
-        onAuthStateChanged(_auth, async (user: User | null) => {
+      auth &&
+        onAuthStateChanged(auth, async (user: User | null) => {
           if (user) {
             try {
               const { claims } = await user.getIdTokenResult();
               onAuth({ _id: user.uid, claims } as SignInTokenModel);
             } catch (e) {
-              const _error =
+              const error =
                 (e as AuthError).code === 'auth/network-request-failed'
                   ? new HttpError(HTTP_STATUS_CODE.SERVICE_UNAVAILABLE, 'Network Error')
                   : e;
-              onError && onError(_error as Error);
+              onError && onError(error as Error);
             }
           } else {
             onAuth(null);
@@ -65,8 +65,8 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
   },
 
   signInWithToken: async (token: string): Promise<void> => {
-    _auth && (await signInWithCustomToken(_auth, token));
+    auth && (await signInWithCustomToken(auth, token));
   },
 
-  signOut: async (): Promise<void> => _auth && signOut(_auth),
+  signOut: async (): Promise<void> => auth && signOut(auth),
 });

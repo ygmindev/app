@@ -19,10 +19,10 @@ export const Image: SFCModel<ImagePropsModel> = ({
   const [dimension, dimensionSet] = useState<DimensionModel>({ height, width });
   const { styles } = useStyles({ props: { ...props, ...dimension }, stylers: [shapeStyler] });
   const [current, currentSet] = useState<number>(0);
-  const _src = isArray(src) ? src[current] : src;
+  const srcF = isArray(src) ? src[current] : src;
 
-  const _handleSuccess = (): void =>
-    ImageBase.getSize(_src, (srcWidth, srcHeight) => {
+  const handleSuccess = (): void =>
+    ImageBase.getSize(srcF, (srcWidth, srcHeight) => {
       let ratio;
       if (width && height) {
         ratio = Math.min(width / srcWidth, height / srcHeight);
@@ -33,15 +33,15 @@ export const Image: SFCModel<ImagePropsModel> = ({
       } else {
         ratio = 1;
       }
-      const _dimension = { height: srcHeight * ratio, width: srcWidth * ratio };
-      !isEqual(_dimension, dimension) && dimensionSet(_dimension);
+      const dimensionF = { height: srcHeight * ratio, width: srcWidth * ratio };
+      !isEqual(dimensionF, dimension) && dimensionSet(dimensionF);
     });
 
   return (
     <_Image
       onError={isArray(src) && current < src.length - 1 ? () => currentSet(current + 1) : undefined}
-      onSuccess={isAutoSize ? _handleSuccess : undefined}
-      src={_src}
+      onSuccess={isAutoSize ? handleSuccess : undefined}
+      src={srcF}
       style={styles}
       testID={testID}
     />

@@ -6,9 +6,9 @@ import { useMemo } from 'react';
 
 export const useCountries = (): UseCountriesModel =>
   useMemo(() => {
-    const _countries = _useCountries();
+    const countries = _useCountries();
     return reduce(
-      groupBy(_countries, 'callingCode'),
+      groupBy(countries, 'callingCode'),
       (result, v, k) => [
         ...result,
         {

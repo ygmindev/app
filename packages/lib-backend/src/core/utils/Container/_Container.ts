@@ -20,9 +20,9 @@ export const _Container: _ContainerModel = {
     value: TType | ConstructorModel<TType>,
     name?: string,
   ): void => {
-    const _value = isFunction(value)
+    const valueF = isFunction(value)
       ? container.bind<TType>(type).to(value as ConstructorModel<TType>)
       : container.bind<TType>(type).toDynamicValue(() => value as TType);
-    name && _value.whenTargetNamed(name);
+    name && valueF.whenTargetNamed(name);
   },
 };

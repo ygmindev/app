@@ -7,13 +7,13 @@ import type { NodeTasksParamsModel } from '@tool/task/node/utils/nodeTasks/nodeT
 export const nodeTasks = ({ testOverrides }: NodeTasksParamsModel = {}): Array<
   TaskParamsModel<unknown>
 > => {
-  const _test = { ...test, ...testOverrides };
+  const testF = { ...test, ...testOverrides };
   return [
     packageExtend,
     lint,
-    _test,
-    { ..._test, name: `${_test.name}-watch`, options: { isWatch: true } },
-    { ..._test, name: `${_test.name}-match`, options: { isPrompt: true } },
-    { ..._test, name: `${_test.name}-match-watch`, options: { isPrompt: true, isWatch: true } },
+    testF,
+    { ...testF, name: `${testF.name}-watch`, options: { isWatch: true } },
+    { ...testF, name: `${testF.name}-match`, options: { isPrompt: true } },
+    { ...testF, name: `${testF.name}-match-watch`, options: { isPrompt: true, isWatch: true } },
   ];
 };

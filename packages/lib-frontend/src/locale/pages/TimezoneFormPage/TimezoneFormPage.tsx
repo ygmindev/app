@@ -13,7 +13,7 @@ export const TimezoneFormPage: SFCModel<TimezoneFormPagePropsModel> = ({ testID,
   const { t } = useTranslation();
   const { styles } = useStyles({ props });
   const actions = useActions();
-  const _timezoneIsAutomatic = useStore((state) => state.locale.timezoneIsAutomatic);
+  const isTimezoneAutomatic = useStore((state) => state.locale.isTimezoneAutomatic);
 
   return (
     <MainLayout
@@ -23,12 +23,12 @@ export const TimezoneFormPage: SFCModel<TimezoneFormPagePropsModel> = ({ testID,
       <SwitchField
         label={t('settings:labels.setAutomatically')}
         onChange={(value) =>
-          actions?.locale.timezoneIsAutomaticSet(value === 'true' ? true : false)
+          actions?.locale.isTimezoneAutomaticSet(value === 'true' ? true : false)
         }
-        value={_timezoneIsAutomatic ? 'true' : 'false'}
+        value={isTimezoneAutomatic ? 'true' : 'false'}
       />
 
-      <TimezoneField elementState={_timezoneIsAutomatic ? ELEMENT_STATE.DISABLED : undefined} />
+      <TimezoneField elementState={isTimezoneAutomatic ? ELEMENT_STATE.DISABLED : undefined} />
     </MainLayout>
   );
 };

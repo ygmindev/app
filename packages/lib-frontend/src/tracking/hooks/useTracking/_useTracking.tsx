@@ -4,18 +4,18 @@ import type { AmplitudeClient } from 'amplitude-js';
 // import { getInstance } from 'amplitude-js';
 import { default as amplitude } from 'amplitude-js';
 
-let _analyticsClient: AmplitudeClient | null;
+let client: AmplitudeClient | null;
 
 export const _useTracking = (): _UseTrackingModel => ({
-  identify: (uid) => _analyticsClient && _analyticsClient.setUserId(uid),
+  identify: (uid) => client && client.setUserId(uid),
 
   initialize: async (apiKey) => {
-    _analyticsClient = amplitude.getInstance();
-    _analyticsClient.init(apiKey);
+    client = amplitude.getInstance();
+    client.init(apiKey);
   },
 
-  reset: () => _analyticsClient && _analyticsClient.setUserId(null),
+  reset: () => client && client.setUserId(null),
 
   track: <TParams,>({ action, object, params }: TrackingEventModel<TParams>) =>
-    _analyticsClient && _analyticsClient.logEvent(`${object} ${action}`, params),
+    client && client.logEvent(`${object} ${action}`, params),
 });

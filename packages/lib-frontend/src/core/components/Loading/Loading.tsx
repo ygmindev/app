@@ -8,7 +8,7 @@ import { THEME_COLOR, THEME_ROLE, THEME_SIZE_MORE } from '@lib/frontend/style/st
 import type { TextStyleModel, ThemeColorModel } from '@lib/frontend/style/style.models';
 import isNumber from 'lodash/isNumber';
 
-const _AnimatableLoading = animatable<_LoadingPropsModel, TextStyleModel>({ Component: _Loading });
+const AnimatableLoading = animatable<_LoadingPropsModel, TextStyleModel>({ Component: _Loading });
 
 export const Loading: SFCModel<LoadingPropsModel> = ({
   animation,
@@ -17,11 +17,11 @@ export const Loading: SFCModel<LoadingPropsModel> = ({
   fontSize = THEME_SIZE_MORE.LARGE,
 }) => {
   const theme = useTheme();
-  const _color = theme.colors.tone[color as ThemeColorModel];
+  const colorF = theme.colors.tone[color as ThemeColorModel];
   return (
-    <_AnimatableLoading
+    <AnimatableLoading
       animation={animation}
-      color={_color ? _color[colorRole] : color}
+      color={colorF ? colorF[colorRole] : color}
       size={isNumber(fontSize) ? fontSize : theme.font.size[fontSize]}
     />
   );

@@ -28,7 +28,7 @@ export const useForm = <TType = void, TResult = void>({
   const { handleError } = useErrorContext();
   const actions = useActions();
 
-  const _validate = <TValue,>(
+  const validate = <TValue,>(
     data?: TValue,
     formValidators?: FormValidatorsModel<TValue>,
   ): FormErrorModel<TType> =>
@@ -36,13 +36,13 @@ export const useForm = <TType = void, TResult = void>({
       formValidators,
       (result, v, k) => {
         if (v) {
-          const _value = (data as Record<string, TValue[keyof TValue]>)[k];
+          const value = (data as Record<string, TValue[keyof TValue]>)[k];
           if (isPlainObject(v) && isPlainObject(data)) {
-            const error = _validate(_value, v as FormValidatorsModel<typeof _value>);
+            const error = validate(value, v as FormValidatorsModel<typeof value>);
             return merge<FormErrorModel<TType>>([error, result]);
           }
           if (isFunction(v)) {
-            const error = v({ data, value: _value });
+            const error = v({ data, value: value });
             if (isEmpty(error)) {
               delete (result as Record<string, unknown>)[k];
             } else {
@@ -56,11 +56,11 @@ export const useForm = <TType = void, TResult = void>({
       {} as FormErrorModel<TType>,
     );
 
-  const _handleSubmit = async (values: TType): Promise<TResult | null> => {
+  const handleSubmit = async (values: TType): Promise<TResult | null> => {
     try {
       isBlocking && actions?.app.isLoadingSet(true);
-      const _values = beforeSubmit ? await beforeSubmit(values) : values;
-      const data = onSubmit && (await onSubmit(_values));
+      const valuesF = beforeSubmit ? await beforeSubmit(values) : values;
+      const data = onSubmit && (await onSubmit(valuesF));
       onSuccess && (await onSuccess(values, data));
       return data || null;
     } catch (e) {
@@ -74,7 +74,7 @@ export const useForm = <TType = void, TResult = void>({
 
   return _useForm<TType, TResult>({
     initialValues,
-    onSubmit: _handleSubmit,
-    onValidate: async (data) => _validate(data, validators),
+    onSubmit: handleSubmit,
+    onValidate: async (data) => validate(data, validators),
   });
 };

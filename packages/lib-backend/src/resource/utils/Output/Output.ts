@@ -16,12 +16,12 @@ export const Output = <TMethod extends ResourceMethodTypeModel, TType, TRoot = u
 }: OutputParamsModel<TMethod, TType, TRoot>): ConstructorModel<
   OutputModel<TMethod, TType, TRoot>
 > => {
-  const _name = `${name}Output`;
-  const _Root = Root({ RootResource, name: _name });
+  const nameF = `${name}Output`;
+  const RootF = Root({ RootResource, name: nameF });
 
-  @withEntity({ name: _name })
-  class _Output extends _Root implements OutputModel<TMethod, TType, TRoot> {
-    @withField({ Resource: Result({ Resource, method, name: _name }) || Boolean })
+  @withEntity({ name: nameF })
+  class _Output extends RootF implements OutputModel<TMethod, TType, TRoot> {
+    @withField({ Resource: Result({ Resource, method, name: nameF }) || Boolean })
     result?: ResultModel<TMethod, TType>;
   }
   return _Output;

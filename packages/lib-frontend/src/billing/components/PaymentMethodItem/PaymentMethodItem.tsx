@@ -47,7 +47,7 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
   const { remove: bankRemove } = useBankResource({ root: { _id: currentUser?._id } });
   const { remove: cardRemove } = useCardResource({ root: { _id: currentUser?._id } });
 
-  const _handleRemove = async (): Promise<void> => {
+  const handleRemove = async (): Promise<void> => {
     switch (value?.type) {
       case PAYMENT_METHOD_TYPE.BANK: {
         await bankRemove({ filter: { _id: value._id } });
@@ -60,16 +60,16 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
     }
   };
 
-  const _title = t(getPaymentMethodTitle(value));
-  const _isPrimary = currentUser?.paymentMethodPrimary === value?._id;
+  const title = t(getPaymentMethodTitle(value));
+  const isPrimary = currentUser?.paymentMethodPrimary === value?._id;
 
-  const _getIcon = useCallback((): ReactElement | null => {
+  const getIcon = useCallback((): ReactElement | null => {
     switch (value?.type) {
       case PAYMENT_METHOD_TYPE.BANK:
         return <Icon icon="bank" />;
       case PAYMENT_METHOD_TYPE.CARD: {
-        const _brand = (value as CardModel)?.brand;
-        switch (_brand) {
+        const brand = (value as CardModel)?.brand;
+        switch (brand) {
           case CARD_BRAND.AMEX:
           case CARD_BRAND.DINERS:
           case CARD_BRAND.DISCOVER:
@@ -79,7 +79,7 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
             return (
               <Image
                 isAutoSize
-                src={`${APP_URI}/images/brands/${_brand}.png`}
+                src={`${APP_URI}/images/brands/${brand}.png`}
                 width={PAYMENT_METHOD_ITEM_ICON_WIDTH}
               />
             );
@@ -118,12 +118,12 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
                   onPress: value
                     ? () =>
                         push<PaymentMethodFormPageParamsModel>({
-                          params: { title: t('core:labels.edit', { value: _title }), value },
+                          params: { title: t('core:labels.edit', { value: title }), value },
                           pathname: `/${FORM}/${PAYMENT_METHOD}`,
                         })
                     : undefined,
                 },
-                !_isPrimary && {
+                !isPrimary && {
                   icon: 'checkCircle',
                   id: 'setAsPrimary',
                   label: t('core:labels.setAsPrimary'),
@@ -136,11 +136,11 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
                 { id: 'div', isDivider: true },
                 {
                   color: THEME_COLOR.ERROR,
-                  confirmMessage: t('core:messages.confirmRemove', { value: _title }),
+                  confirmMessage: t('core:messages.confirmRemove', { value: title }),
                   icon: 'trash',
                   id: 'delete',
                   label: t('core:labels.remove'),
-                  onPress: _handleRemove,
+                  onPress: handleRemove,
                 },
               ].filter(Boolean) as Array<MenuOptionModel>
             }
@@ -155,12 +155,12 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
           <Wrapper
             isCenter
             width={PAYMENT_METHOD_ITEM_ICON_WIDTH}>
-            {_getIcon()}
+            {getIcon()}
           </Wrapper>
 
           <Text type={FONT_TYPE.SUBTITLE}>{`•••• ${value?.last4}`}</Text>
 
-          {_isPrimary && (
+          {isPrimary && (
             <Icon
               icon="checkCircle"
               type={FONT_TYPE.SUBTITLE}

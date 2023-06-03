@@ -13,9 +13,9 @@ export const PERSONAL_GROUPS: Array<RouteGroupModel> = withId([
         id: NAME,
         label: ({ t }) => t('user:labels.name'),
         value: (state) => {
-          const _currentUser = state.user.currentUser;
-          return _currentUser && (_currentUser.first || _currentUser.last)
-            ? `${_currentUser.first || ''} ${_currentUser.last || ''}`
+          const { currentUser } = state.user;
+          return currentUser && (currentUser.first || currentUser.last)
+            ? `${currentUser.first || ''} ${currentUser.last || ''}`
             : null;
         },
       },
@@ -24,9 +24,9 @@ export const PERSONAL_GROUPS: Array<RouteGroupModel> = withId([
         id: PHONE,
         label: ({ t }) => t('user:labels.phone'),
         value: (state) => {
-          const _currentUser = state.user.currentUser;
-          return _currentUser && _currentUser.callingCode && _currentUser.phone
-            ? phoneFormat(`+${_currentUser.callingCode}${_currentUser.phone}`)
+          const { currentUser } = state.user;
+          return currentUser && currentUser.callingCode && currentUser.phone
+            ? phoneFormat(`+${currentUser.callingCode}${currentUser.phone}`)
             : null;
         },
       },
@@ -35,8 +35,8 @@ export const PERSONAL_GROUPS: Array<RouteGroupModel> = withId([
         id: EMAIL,
         label: ({ t }) => t('user:labels.email'),
         value: (state) => {
-          const _currentUser = state.user.currentUser;
-          return _currentUser?.email ?? null;
+          const { currentUser } = state.user;
+          return currentUser?.email ?? null;
         },
       },
     ],

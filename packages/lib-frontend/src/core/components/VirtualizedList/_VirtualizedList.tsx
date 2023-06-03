@@ -23,7 +23,7 @@ export const _VirtualizedList = forwardRef(
     ref: ForwardedRef<_VirtualizedListRefModel>,
   ): ReactElement<RSFCPropsModel<_VirtualizedListPropsModel<TType>>> => {
     const { styles } = useStyles({ props });
-    const _renderItem = useCallback<ListRenderItem<TType>>(({ item }) => render(item), [items]);
+    const renderItem = useCallback<ListRenderItem<TType>>(({ item }) => render(item), [items]);
     return (
       <FlatList<TType>
         ItemSeparatorComponent={divider ? () => divider : undefined}
@@ -32,7 +32,7 @@ export const _VirtualizedList = forwardRef(
         horizontal={isHorizontal}
         keyExtractor={({ id }) => id}
         ref={ref}
-        renderItem={_renderItem}
+        renderItem={renderItem}
         scrollEnabled
         style={styles}
         testID={testID}

@@ -46,19 +46,19 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
     value: method,
   });
 
-  const _checkExists = mode === SIGN_IN_MODE.UPDATE;
+  const checkExists = mode === SIGN_IN_MODE.UPDATE;
 
-  const _handleSubmit = async (data: UsernameFormModel): Promise<OtpModel | null> => {
+  const handleSubmit = async (data: UsernameFormModel): Promise<OtpModel | null> => {
     onSubmit && (await onSubmit(data));
-    const _form: OtpFormModel = pick(data, ['callingCode', 'phone', 'email']);
-    if (_checkExists) {
-      _form.checkExists = true;
+    const form: OtpFormModel = pick(data, ['callingCode', 'phone', 'email']);
+    if (checkExists) {
+      form.checkExists = true;
     }
-    const { result } = await create({ form: _form });
+    const { result } = await create({ form });
     return result || null;
   };
 
-  const _rows: Array<FormContainerRowModel> = useMemo(() => {
+  const rows: Array<FormContainerRowModel> = useMemo(() => {
     switch (valueControlled) {
       case SIGN_IN_METHOD.EMAIL:
         return withId([
@@ -118,15 +118,15 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
           </Wrapper>
         )}
         errorContextGet={(e) =>
-          _checkExists && (e as HttpError).statusCode === HTTP_STATUS_CODE.CONFLICT
+          checkExists && (e as HttpError).statusCode === HTTP_STATUS_CODE.CONFLICT
             ? { icon: 'people', message: t('auth:messages.userExistsError') }
             : undefined
         }
         isGrouped
         onComplete={onComplete}
-        onSubmit={_handleSubmit}
+        onSubmit={handleSubmit}
         onSuccess={onSuccess}
-        rows={_rows}
+        rows={rows}
         validators={USERNAME_FORM_VALIDATORS}></FormContainer>
     </CenterLayout>
   );

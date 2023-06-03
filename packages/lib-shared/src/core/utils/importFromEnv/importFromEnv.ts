@@ -10,21 +10,21 @@ import trim from 'lodash/trim';
 export const importFromEnv = async <TType>(
   params: ImportFromEnvParamsModel,
 ): ImportFromEnvModel<TType> => {
-  const _result: Array<string> = [];
+  const value: Array<string> = [];
   try {
     return await resolveFirst(
       extensions().map((ext) => async () => {
-        const _path = `${params}${ext ? `.${trim(ext, '.')}` : ''}`;
+        const path = `${params}${ext ? `.${trim(ext, '.')}` : ''}`;
         try {
-          const _module = await import(_path);
-          return _module.default ?? _module;
+          const imported = await import(path);
+          return imported.default ?? imported;
         } catch (e) {
-          _result.push(_path);
+          value.push(path);
           throw new Error();
         }
       }),
     );
   } catch (e) {
-    throw new NotFoundError(_result.join('\n'));
+    throw new NotFoundError(value.join('\n'));
   }
 };

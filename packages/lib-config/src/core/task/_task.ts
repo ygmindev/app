@@ -10,8 +10,8 @@ import { TaskRegistry } from '@tool/task/core/utils/TaskRegistry/TaskRegistry';
 import { existsSync } from 'fs';
 
 export const _task = ({ packageConfig, taskExtension }: TaskConfigModel): _TaskConfigModel => {
-  const _taskRegistry = Container.get(TaskRegistry);
-  const _tasks = [
+  const taskRegistry = Container.get(TaskRegistry);
+  const tasks = [
     // Task files
     ...fromGlobs({
       globs: [`*/src/**/*.${taskExtension}`],
@@ -21,10 +21,10 @@ export const _task = ({ packageConfig, taskExtension }: TaskConfigModel): _TaskC
 
     // Package tasks
     ...packages.reduce((result, target) => {
-      const _path = fromPackages(target, packageConfig as string);
-      if (existsSync(_path)) {
-        const _tasks = require(_path).default as Array<TaskParamsModel>;
-        return [...result, ..._tasks.map((task) => ({ ...task, target }))];
+      const path = fromPackages(target, packageConfig as string);
+      if (existsSync(path)) {
+        const tasks = require(path).default as Array<TaskParamsModel>;
+        return [...result, ...tasks.map((task) => ({ ...task, target }))];
       }
       return result;
     }, [] as Array<TaskParamsModel>),
@@ -37,17 +37,14 @@ export const _task = ({ packageConfig, taskExtension }: TaskConfigModel): _TaskC
         const { name } = await prompt([
           {
             key: 'name',
-            options: [
-              ...Object.keys(_taskRegistry.aliases),
-              ...Object.keys(_taskRegistry.registry),
-            ],
+            options: [...Object.keys(taskRegistry.aliases), ...Object.keys(taskRegistry.registry)],
             type: PROMPT_TYPE.LIST,
           },
         ]);
-        return _taskRegistry.get(name)();
+        return taskRegistry.get(name)();
       },
     },
   ].filter(Boolean) as Array<TaskParamsModel>;
 
-  _tasks.forEach(_taskRegistry.register);
+  tasks.forEach(taskRegistry.register);
 };

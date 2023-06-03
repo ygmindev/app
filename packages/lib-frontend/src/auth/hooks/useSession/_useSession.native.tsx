@@ -5,33 +5,33 @@ import type {
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
 import type { FirebaseAuthTypes } from '@react-native-firebase/auth';
-import auth from '@react-native-firebase/auth';
+import firebaseAuth from '@react-native-firebase/auth';
 import type { AuthError } from 'firebase/auth';
 
-let _auth: FirebaseAuthTypes.Module;
+let auth: FirebaseAuthTypes.Module;
 
 export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionModel => ({
   getToken: async (): Promise<string | null> => {
-    const { currentUser } = _auth;
+    const { currentUser } = auth;
     return currentUser && currentUser.getIdToken(true);
   },
 
   initialize: async (onAuth): Promise<void> => {
     if (process.env.NODE_ENV !== 'test') {
-      _auth = auth();
-      process.env.APP_FIREBASE_USE_EMULATOR && _auth.useEmulator('http://localhost:9099');
+      auth = firebaseAuth();
+      process.env.APP_FIREBASE_USE_EMULATOR && auth.useEmulator('http://localhost:9099');
 
-      _auth.onAuthStateChanged(async (user: FirebaseAuthTypes.User | null) => {
+      auth.onAuthStateChanged(async (user: FirebaseAuthTypes.User | null) => {
         if (user) {
           try {
             const { claims } = await user.getIdTokenResult();
             onAuth({ _id: user.uid, claims });
           } catch (e) {
-            const _error =
+            const error =
               (e as AuthError).code === 'auth/network-request-failed'
                 ? new HttpError(HTTP_STATUS_CODE.SERVICE_UNAVAILABLE, 'Network Error')
                 : e;
-            onError && onError(_error as Error);
+            onError && onError(error as Error);
           }
         } else {
           onAuth(null);
@@ -41,8 +41,8 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
   },
 
   signInWithToken: async (token: string): Promise<void> => {
-    await _auth.signInWithCustomToken(token);
+    await auth.signInWithCustomToken(token);
   },
 
-  signOut: async (): Promise<void> => _auth.signOut(),
+  signOut: async (): Promise<void> => auth.signOut(),
 });

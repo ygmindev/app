@@ -3,11 +3,11 @@ import type { ReducerModel } from '@lib/frontend/state/state.models';
 
 export interface LocaleStateModel {
   timezone?: TimezoneModel;
-  timezoneIsAutomatic?: boolean;
+  isTimezoneAutomatic?: boolean;
 }
 
 export interface LocaleActionsParamsModel {
-  timezoneIsAutomaticSet: boolean;
+  isTimezoneAutomaticSet: boolean;
   timezoneSet: TimezoneModel;
 }
 

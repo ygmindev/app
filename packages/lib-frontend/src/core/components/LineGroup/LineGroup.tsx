@@ -11,7 +11,7 @@ import { Children } from 'react';
 
 export const LineGroup: SFCModel<LineGroupPropsModel> = ({ children, testID, title, ...props }) => {
   const { styles } = useStyles({ props });
-  const _children = useDividers(
+  const childrenF = useDividers(
     [
       title && (
         <Text
@@ -30,7 +30,7 @@ export const LineGroup: SFCModel<LineGroupPropsModel> = ({ children, testID, tit
       round
       style={styles}
       testID={testID}>
-      {_children}
+      {childrenF}
     </Wrapper>
   );
 };

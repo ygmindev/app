@@ -30,7 +30,7 @@ export const _useQueryConnection = <TType,>({
     staleTime: cache,
   });
 
-  const _fetchNextPage = debounce(fetchNextPage);
+  const fetchNextPageF = debounce(fetchNextPage);
 
   return {
     data,
@@ -39,7 +39,7 @@ export const _useQueryConnection = <TType,>({
     isError,
     isLoading: isFetching,
     queryNext: async () => {
-      await _fetchNextPage();
+      await fetchNextPageF();
     },
     resetQuery: (id) => queryClient.invalidateQueries([id]),
     setQueryData: (id, data) => queryClient.setQueryData([id], data),

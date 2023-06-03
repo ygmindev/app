@@ -24,31 +24,28 @@ export const borderStyler: StylerModel<BorderStylerParamsModel> = (
   },
   theme,
 ) => {
-  const _getBorderRadius = (
-    value?: typeof round,
-    key?: BorderRadiusDirection,
-  ): number | undefined =>
+  const getBorderRadius = (value?: typeof round, key?: BorderRadiusDirection): number | undefined =>
     value === true
       ? theme.shape.borderRadius
       : isNumber(value)
       ? value
       : value && isPlainObject(value) && key
-      ? _getBorderRadius(value[key])
+      ? getBorderRadius(value[key])
       : undefined;
 
-  const _color = theme.colors.tone[borderColor as ThemeColorModel];
-  const _borderColor = _color ? _color[borderRole] : borderColor;
+  const color = theme.colors.tone[borderColor as ThemeColorModel];
+  const borderColorF = color ? color[borderRole] : borderColor;
   return cleanObject({
-    borderBottomLeftRadius: _getBorderRadius(round, BORDER_RADIUS_DIRECTION.BOTTOM_LEFT),
-    borderBottomRightRadius: _getBorderRadius(round, BORDER_RADIUS_DIRECTION.BOTTOM_RIGHT),
+    borderBottomLeftRadius: getBorderRadius(round, BORDER_RADIUS_DIRECTION.BOTTOM_LEFT),
+    borderBottomRightRadius: getBorderRadius(round, BORDER_RADIUS_DIRECTION.BOTTOM_RIGHT),
     borderBottomWidth: border === BORDER_DIRECTION.BOTTOM ? borderWidth : undefined,
-    borderColor: border ? _borderColor : undefined,
+    borderColor: border ? borderColorF : undefined,
     borderLeftWidth: border === BORDER_DIRECTION.LEFT ? borderWidth : undefined,
-    borderRadius: _getBorderRadius(round),
+    borderRadius: getBorderRadius(round),
     borderRightWidth: border === BORDER_DIRECTION.RIGHT ? borderWidth : undefined,
     borderStyle: border ? 'solid' : undefined,
-    borderTopLeftRadius: _getBorderRadius(round, BORDER_RADIUS_DIRECTION.TOP_LEFT),
-    borderTopRightRadius: _getBorderRadius(round, BORDER_RADIUS_DIRECTION.TOP_RIGHT),
+    borderTopLeftRadius: getBorderRadius(round, BORDER_RADIUS_DIRECTION.TOP_LEFT),
+    borderTopRightRadius: getBorderRadius(round, BORDER_RADIUS_DIRECTION.TOP_RIGHT),
     borderTopWidth: border === BORDER_DIRECTION.TOP ? borderWidth : undefined,
     borderWidth: border === true ? borderWidth : undefined,
     ...(isShadow

@@ -15,17 +15,17 @@ const backup: TaskParamsModel<BackupParamsModel> = {
 
   task: async ({ options, root }) => {
     const { excludes, includes, name } = options || {};
-    const _name = name || (await prompt([{ key: 'name' }])).name;
-    const _includes = includes || [fromRoot('*')];
-    const _excludes = excludes || config.excludePatterns;
+    const nameF = name || (await prompt([{ key: 'name' }])).name;
+    const includesF = includes || [fromRoot('*')];
+    const excludesF = excludes || config.excludePatterns;
     const dest = join(
       config.backupDir,
-      `${kebabCase(_name)}-${kebabCase(
+      `${kebabCase(nameF)}-${kebabCase(
         dateTimeFormat({ format: DATE_TIME_FORMAT_TYPE.DATE_TIME_MINUTES }),
       )}`,
     );
     await command(
-      `mkdir -p backups && mkdir -p ${dest} && rsync -r ${_includes.join(' ')}  ${_excludes
+      `mkdir -p backups && mkdir -p ${dest} && rsync -r ${includesF.join(' ')}  ${excludesF
         .map((pattern) => `--exclude '${pattern.replace('**/', '')}'`)
         .join(' ')} ${dest}`,
     );

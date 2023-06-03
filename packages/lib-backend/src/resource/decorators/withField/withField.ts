@@ -4,7 +4,7 @@ import { ArrayType, Embedded, Index, PrimaryKey, Property } from '@mikro-orm/cor
 import { Field } from 'type-graphql';
 import type { ReturnTypeFuncValue } from 'type-graphql/dist/decorators/types';
 
-const _getField = <TType extends unknown>({
+const getField = <TType extends unknown>({
   Resource,
   isArray,
   type,
@@ -24,7 +24,7 @@ const _getField = <TType extends unknown>({
   }
 };
 
-const _getColumn = <TType extends unknown>({
+const getColumn = <TType extends unknown>({
   Resource,
   defaultValue,
   isArray,
@@ -38,7 +38,7 @@ const _getColumn = <TType extends unknown>({
         : Property({ nullable: isOptional, type: () => Resource })
     ) as PropertyDecorator;
   }
-  const [_Field, _options] = (() => {
+  const [Field, _options] = (() => {
     if (isArray) {
       return [Property, { defaultValue, type: ArrayType }];
     }
@@ -58,7 +58,7 @@ const _getColumn = <TType extends unknown>({
     }
   })();
 
-  return _Field({
+  return Field({
     ..._options,
     nullable: isOptional,
     onCreate: defaultValue ?? undefined,
@@ -84,8 +84,8 @@ export const withField =
         propertyKey,
       );
 
-    isSchema && _getField({ Resource, isArray, isOptional, type })(target, propertyKey);
+    isSchema && getField({ Resource, isArray, isOptional, type })(target, propertyKey);
 
     isRepository &&
-      _getColumn({ Resource, defaultValue, isArray, isOptional, type })(target, propertyKey);
+      getColumn({ Resource, defaultValue, isArray, isOptional, type })(target, propertyKey);
   };

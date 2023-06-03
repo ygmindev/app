@@ -7,6 +7,6 @@ import type {
 import isString from 'lodash/isString';
 
 export const withTest = (params: WithTestParamsModel): WithTestModel => {
-  const _displayName = isString(params) ? params : params ? variableName(params) : uid('test');
-  return { displayName: _displayName };
+  const displayName = isString(params) ? params : params ? variableName(params) : uid('test');
+  return { displayName };
 };

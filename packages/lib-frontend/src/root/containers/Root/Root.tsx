@@ -22,7 +22,7 @@ import { cloneElement, createContext, Suspense, useMemo } from 'react';
 export const actionContext = createContext<RootActionsModel | undefined>(undefined);
 
 export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, context }) => {
-  const _store = useMemo(
+  const store = useMemo(
     () =>
       new Store<Array<keyof RootStateModel>, RootStateModel, RootActionsParamsModel>({
         cookies: context?.state?.cookies,
@@ -31,7 +31,7 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
       }),
     [context?.state?.cookies, context?.state?.initialState],
   );
-  const _providers = useMemo<Array<ReactElement>>(
+  const providers = useMemo<Array<ReactElement>>(
     () =>
       [
         ...(additionalProviders || []),
@@ -43,11 +43,11 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
         <StyleProvider />,
         <LocaleProvider value={context?.locale} />,
         <AppProvider />,
-        <_store.Provider value={{ ...context?.state, actionContext, store: _store }} />,
+        <store.Provider value={{ ...context?.state, actionContext, store: store }} />,
         <Suspense />, // to provider?
       ].filter(Boolean),
     [additionalProviders, context],
   );
 
-  return <>{_providers.reduce((result, element) => cloneElement(element, {}, result), children)}</>;
+  return <>{providers.reduce((result, element) => cloneElement(element, {}, result), children)}</>;
 };

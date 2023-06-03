@@ -2,30 +2,30 @@ import type { _ScreenModel } from '@lib/frontend/test/utils/screen/_screen.model
 import type { Browser, Page } from 'puppeteer';
 import { launch } from 'puppeteer';
 
-let _browser: Browser;
-let _page: Page;
+let browser: Browser;
+let page: Page;
 
 export const _screen = async (): Promise<_ScreenModel> => {
-  _browser = _browser || (await launch({ headless: true }));
-  _page = _page || (await _browser.newPage());
+  browser = browser || (await launch({ headless: true }));
+  page = page || (await browser.newPage());
 
   return {
     click: async (testID) => {
       const selector = `[data-testid="${testID}"]`;
-      await _page.waitForSelector(selector);
-      await _page.click(selector);
+      await page.waitForSelector(selector);
+      await page.click(selector);
     },
 
-    close: async () => _browser.close(),
+    close: async () => browser.close(),
 
     open: async (route) => {
-      await _page.goto(route);
+      await page.goto(route);
     },
 
     type: async (testID, value) => {
       const selector = `[data-testid="${testID}"] input`;
-      await _page.waitForSelector(selector);
-      await _page.type(selector, value);
+      await page.waitForSelector(selector);
+      await page.type(selector, value);
     },
   };
 };

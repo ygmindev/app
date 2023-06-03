@@ -7,7 +7,7 @@ export const _MaskedTextField = composeComponent<_MaskedTextFieldPropsModel, Tex
   Component: TextInputMask,
 
   getProps: ({ mask, ...props }) => {
-    const _props: TextInputMaskProps = (() => {
+    const propsF: TextInputMaskProps = (() => {
       switch (mask) {
         case '$': {
           return { options: { delimiter: ',', precision: 0, unit: '$' }, type: 'money' };
@@ -20,6 +20,6 @@ export const _MaskedTextField = composeComponent<_MaskedTextFieldPropsModel, Tex
         }
       }
     })();
-    return { ...props, ..._props };
+    return { ...props, ...propsF };
   },
 });

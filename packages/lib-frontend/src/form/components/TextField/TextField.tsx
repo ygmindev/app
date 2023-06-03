@@ -48,7 +48,7 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
     },
     ref,
   ) => {
-    const refFinal = useRef<TextFieldRefModel>(null);
+    const refF = useRef<TextFieldRefModel>(null);
     const { t } = useTranslation();
     const theme = useTheme();
     const { valueControlled, valueControlledSet } = useControlledValue({
@@ -65,7 +65,7 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       value: elementState,
     });
 
-    const rightElementFinal = (
+    const rightElementF = (
       <Wrapper
         isRowAlign
         pRight={isCenter ? undefined : THEME_SIZE.SMALL}>
@@ -96,7 +96,7 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
     useEffect(() => {
       isAutoFocus &&
         sleep({ duration: theme.animation.transition }).then(() => {
-          const inputRef = (ref || refFinal) as RefObject<TextFieldRefModel>;
+          const inputRef = (ref || refF) as RefObject<TextFieldRefModel>;
           inputRef.current && inputRef.current.focus();
         });
     }, [isAutoFocus, theme.animation.transition]);
@@ -155,8 +155,8 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         onEscape={isNoClear ? undefined : () => handleChange('')}
         onFocus={onFocus}
         placeholder={mask || placeholder}
-        ref={ref || refFinal}
-        rightElement={rightElementFinal}
+        ref={ref || refF}
+        rightElement={rightElementF}
         value={valueControlled}
         width={width}
       />

@@ -31,13 +31,13 @@ export const NavigationBar = ({
   const { styles } = useStyles({ props });
   const isMobile = useIsMobile();
 
-  const _categories = useMemo(
+  const categories = useMemo(
     () => groupBy(options, ({ category }) => toString(category)),
     [options],
   );
-  const _value = value && trimPathname(value);
+  const valueF = value && trimPathname(value);
 
-  const _isHorizontal = isHorizontal || isMobile;
+  const isHorizontalF = isHorizontal || isMobile;
   return (
     <Activatable
       isPressable={false}
@@ -47,23 +47,23 @@ export const NavigationBar = ({
     >
       <Wrapper
         border={BORDER_DIRECTION.RIGHT}
-        isFullWidth={_isHorizontal}
-        isHorizontalScrollable={_isHorizontal}
-        isRowAlign={_isHorizontal}
-        isVerticalScrollable={!_isHorizontal}
-        p={_isHorizontal ? THEME_SIZE.SMALL : true}
+        isFullWidth={isHorizontalF}
+        isHorizontalScrollable={isHorizontalF}
+        isRowAlign={isHorizontalF}
+        isVerticalScrollable={!isHorizontalF}
+        p={isHorizontalF ? THEME_SIZE.SMALL : true}
         spacing
         testID={testID}
-        width={_isHorizontal ? undefined : NAVIGATION_BAR_WIDTH}>
-        {map(_categories, (v, k) => {
-          const _options = (
+        width={isHorizontalF ? undefined : NAVIGATION_BAR_WIDTH}>
+        {map(categories, (v, k) => {
+          const optionsF = (
             <Wrapper
-              isRowAlign={_isHorizontal}
+              isRowAlign={isHorizontalF}
               key={toString(k)}
               spacing={THEME_SIZE.SMALL}>
               {v.map(({ icon, id, label, onPress }) => (
                 <Button
-                  elementState={trimPathname(id) === _value ? ELEMENT_STATE.ACTIVE : undefined}
+                  elementState={trimPathname(id) === valueF ? ELEMENT_STATE.ACTIVE : undefined}
                   icon={icon}
                   key={id}
                   onPress={async () => {
@@ -82,10 +82,10 @@ export const NavigationBar = ({
               defaultValue={ELEMENT_STATE.ACTIVE}
               key={toString(k)}
               label={k}>
-              {_options}
+              {optionsF}
             </Accordion>
           ) : (
-            _options
+            optionsF
           );
         })}
       </Wrapper>

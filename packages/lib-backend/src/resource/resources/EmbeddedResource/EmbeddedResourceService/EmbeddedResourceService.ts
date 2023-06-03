@@ -22,9 +22,6 @@ import type { ResourceServiceDecoratorModel } from '@lib/shared/resource/utils/R
 import type { RootModel } from '@lib/shared/resource/utils/Root/Root.models';
 import type { UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 import forEach from 'lodash/forEach';
-import isArray from 'lodash/isArray';
-import isPlainObject from 'lodash/isPlainObject';
-import map from 'lodash/map';
 import pick from 'lodash/pick';
 import reduce from 'lodash/reduce';
 
@@ -52,7 +49,7 @@ export const EmbeddedResourceService = <
 }: EmbeddedResourceServiceParamsModel<TType, TForm, TRoot, TRootForm>): ConstructorModel<
   EmbeddedResourceServiceModel<TType, TForm, TRoot>
 > => {
-  const _beforeCreate = async (
+  const beforeCreateF = async (
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
   ): Promise<InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>> => {
     const value = new EmbeddedResource() as TType;
@@ -61,31 +58,18 @@ export const EmbeddedResourceService = <
     return { ...input, form: value as unknown as TForm };
   };
 
-  const _getAggregation = (
+  const getAggregation = (
     input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>,
   ): Array<object> => {
-    const _name = `$${name}`;
+    const nameF = `$${name}`;
     return [
-      { $unwind: _name },
+      { $unwind: nameF },
       { $match: flattenObject({ [name]: input.filter }) },
       input.options?.project && {
         $project: flattenObject({ [name]: input.options.project }),
       },
-      { $group: { _id: '$_id', [name]: { $push: _name } } },
+      { $group: { _id: '$_id', [name]: { $push: nameF } } },
     ].filter(Boolean) as Array<object>;
-  };
-
-  const _getCondition = (value: FilterModel<TType>): FilterModel<object> => {
-    if (isEmpty(value)) {
-      return {};
-    }
-    if (isPlainObject(value)) {
-      const cond = map(value as object, (v, k) =>
-        v === Object(v) ? { [k]: _getCondition(v) } : { $eq: [`$$value.${k}`, v] },
-      );
-      return cond.length > 1 ? { $and: cond } : cond[0];
-    }
-    return isArray(value) ? value.map(_getCondition) : value;
   };
 
   @withContainer()
@@ -119,17 +103,17 @@ export const EmbeddedResourceService = <
     async create(
       input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> {
-      const _input = cleanObject(
+      const inputF = cleanObject(
         this.decorators.beforeCreate ? await this.decorators.beforeCreate({ input }) : input,
       );
-      _input.root = _input.root ?? this._decorators.root;
-      if (_input.root) {
-        const _inputFinal = await _beforeCreate(
-          _input as InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
+      inputF.root = inputF.root ?? this._decorators.root;
+      if (inputF.root) {
+        const inputFF = await beforeCreateF(
+          inputF as InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
         );
-        const value = _inputFinal.form as TForm;
+        const value = inputFF.form as TForm;
         const { result: rootResult } = await this._rootService.update({
-          filter: _inputFinal.root as PartialModel<TRoot>,
+          filter: inputFF.root as PartialModel<TRoot>,
           update: { $push: { [name]: value } } as UpdateModel<TRoot>,
         });
         const output: OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot> = {
@@ -145,14 +129,14 @@ export const EmbeddedResourceService = <
     async get(
       input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>> {
-      const _input = cleanObject(
+      const inputF = cleanObject(
         this.decorators.beforeGet ? await this.decorators.beforeGet({ input }) : input,
       );
-      _input.root = _input.root ?? this._decorators.root;
-      if (_input.root) {
+      inputF.root = inputF.root ?? this._decorators.root;
+      if (inputF.root) {
         const { result: rootResult } = await this._rootService.get({
-          filter: _input.root,
-          options: { aggregate: _getAggregation(_input) },
+          filter: inputF.root,
+          options: { aggregate: getAggregation(inputF) },
         });
         const result = rootResult && (rootResult[name] as unknown as Array<TType>);
         const output: OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot> = {
@@ -167,17 +151,17 @@ export const EmbeddedResourceService = <
     async getMany(
       input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> {
-      const _input = cleanObject(
+      const inputF = cleanObject(
         this.decorators.beforeGetMany ? await this.decorators.beforeGetMany({ input }) : input,
       );
-      _input.root = _input.root ?? this._decorators.root;
-      if (_input.root) {
+      inputF.root = inputF.root ?? this._decorators.root;
+      if (inputF.root) {
         // TODO: || to ?? for all
-        const skip = _input.options?.skip ?? 0;
-        const limit = _input.options?.take;
+        const skip = inputF.options?.skip ?? 0;
+        const limit = inputF.options?.take;
         const { result: rootResult } = await this._rootService.get({
-          filter: _input.root,
-          options: isEmpty(_input.filter) ? {} : { aggregate: _getAggregation(_input) },
+          filter: inputF.root,
+          options: isEmpty(inputF.filter) ? {} : { aggregate: getAggregation(inputF) },
         });
         const result = rootResult && (rootResult[name] as unknown as Array<TType>);
         const output: OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot> = {
@@ -198,22 +182,22 @@ export const EmbeddedResourceService = <
     async getConnection(
       input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>> {
-      const _input = cleanObject(
+      const inputF = cleanObject(
         this.decorators.beforeGetConnection
           ? await this.decorators.beforeGetConnection({ input })
           : input,
       );
-      _input.root = _input.root ?? this._decorators.root;
-      if (_input.root) {
+      inputF.root = inputF.root ?? this._decorators.root;
+      if (inputF.root) {
         const result = await getConnection({
-          count: await this.count(_input),
+          count: await this.count(inputF),
           getMany: this.getMany.bind(this),
-          input: _input,
-          pagination: _input.pagination,
+          input: inputF,
+          pagination: inputF.pagination,
         });
         const output: OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot> = {
           result,
-          root: _input.root,
+          root: inputF.root,
         };
         return this.decorators.afterGetConnection
           ? await this.decorators.afterGetConnection({ output })
@@ -225,21 +209,21 @@ export const EmbeddedResourceService = <
     async update(
       input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>> {
-      const _input = cleanObject(
+      const inputF = cleanObject(
         this.decorators.beforeUpdate ? await this.decorators.beforeUpdate({ input }) : input,
       );
-      _input.root = _input.root ?? this._decorators.root;
-      if (_input.root) {
+      inputF.root = inputF.root ?? this._decorators.root;
+      if (inputF.root) {
         const { result: rootResult } = await this._rootService.update({
           filter: {
-            ..._input.root,
-            ...flattenObject({ [name]: _input.filter }),
+            ...inputF.root,
+            ...flattenObject({ [name]: inputF.filter }),
           } as FilterModel<TRoot>,
           options: {
-            project: { [name]: { $elemMatch: _input.filter } } as unknown as ProjectModel<TRoot>,
+            project: { [name]: { $elemMatch: inputF.filter } } as unknown as ProjectModel<TRoot>,
           },
           update: reduce(
-            _input.update as object,
+            inputF.update as object,
             (result, v, k) => ({
               ...result,
               ...(k.startsWith('$')
@@ -250,12 +234,12 @@ export const EmbeddedResourceService = <
           ),
         });
         const result = rootResult && (rootResult[name] as unknown as Array<TType>);
-        let _result = result?.length ? result[0] : undefined;
-        if (_input.options?.project) {
-          _result = pick(_result, Object.keys(_input.options?.project)) as TType;
+        let resultF = result?.length ? result[0] : undefined;
+        if (inputF.options?.project) {
+          resultF = pick(resultF, Object.keys(inputF.options?.project)) as TType;
         }
         const output: OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot> = {
-          result: _result,
+          result: resultF,
           root: rootResult,
         };
         return this.decorators.afterUpdate ? await this.decorators.afterUpdate({ output }) : output;
@@ -266,14 +250,14 @@ export const EmbeddedResourceService = <
     async remove(
       input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>> {
-      const _input = cleanObject(
+      const inputF = cleanObject(
         this.decorators.beforeRemove ? await this.decorators.beforeRemove({ input }) : input,
       );
-      _input.root = _input.root ?? this._decorators.root;
-      if (_input.root) {
+      inputF.root = inputF.root ?? this._decorators.root;
+      if (inputF.root) {
         const { result: rootResult } = await this._rootService.update({
-          filter: _input.root,
-          update: { $pull: { [name]: _input.filter } } as UpdateModel<TRoot>,
+          filter: inputF.root,
+          update: { $pull: { [name]: inputF.filter } } as UpdateModel<TRoot>,
         });
         const output: OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot> = {
           root: rootResult,

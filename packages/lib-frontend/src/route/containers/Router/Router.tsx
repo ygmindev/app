@@ -10,31 +10,31 @@ import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/sha
 import trimEnd from 'lodash/trimEnd';
 import { useMemo } from 'react';
 
-const _getRoute = ({ pathname, ...route }: RouteModel, depth = 1): RouteModel => {
-  const _isLeaf = !route.routes;
-  const _root = trimEnd(pathname, '/*');
-  const _pathname = trimPathname(_isLeaf ? pathname : `${_root}/*`);
-  const _route: RouteModel = { ...route, pathname: _pathname };
+const getRoute = ({ pathname, ...route }: RouteModel, depth = 1): RouteModel => {
+  const isLeaf = !route.routes;
+  const root = trimEnd(pathname, '/*');
+  const pathnameF = trimPathname(isLeaf ? pathname : `${root}/*`);
+  const routeF: RouteModel = { ...route, pathname: pathnameF };
   return {
-    ..._route,
+    ...routeF,
     element: (
-      <Route route={_route}>
-        {_route.element?.props.children}
+      <Route route={routeF}>
+        {routeF.element?.props.children}
 
-        {_route.routes && (
+        {routeF.routes && (
           <Wrapper
             grow
             isOverflowHidden
             position={SHAPE_POSITION.RELATIVE}>
             <_Router
               depth={depth + 1}
-              routes={_route.routes.map((child) =>
-                _getRoute(
+              routes={routeF.routes.map((child) =>
+                getRoute(
                   {
                     ...child,
-                    header: child.header || _route.header,
-                    root: trimPathname(`${route.root ?? ''}/${_root}`),
-                    transition: child.transition || _route.transition,
+                    header: child.header || routeF.header,
+                    root: trimPathname(`${route.root ?? ''}/${root}`),
+                    transition: child.transition || routeF.transition,
                   },
                   depth + 1,
                 ),
@@ -49,7 +49,7 @@ const _getRoute = ({ pathname, ...route }: RouteModel, depth = 1): RouteModel =>
 
 export const Router: SFCModel<RouterPropsModel> = ({ routes, testID, ...props }) => {
   const { styles } = useStyles({ props });
-  const _routes = useMemo(() => routes.map((route) => _getRoute(route)), [routes]);
+  const routesF = useMemo(() => routes.map((route) => getRoute(route)), [routes]);
   return (
     <Wrapper
       grow
@@ -57,7 +57,7 @@ export const Router: SFCModel<RouterPropsModel> = ({ routes, testID, ...props })
       position={SHAPE_POSITION.RELATIVE}
       style={styles}
       testID={testID}>
-      <_Router routes={_routes} />
+      <_Router routes={routesF} />
     </Wrapper>
   );
 };

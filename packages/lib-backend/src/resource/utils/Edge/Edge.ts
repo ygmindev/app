@@ -8,9 +8,9 @@ export const Edge = <TType extends unknown>({
   Resource,
   name,
 }: EdgeParamsModel<TType>): ConstructorModel<EdgeModel<TType>> => {
-  const _name = `${name}Edge`;
+  const nameF = `${name}Edge`;
 
-  @withEntity({ name: _name })
+  @withEntity({ name: nameF })
   class _Edge implements EdgeModel<TType> {
     @withField({ Resource })
     node!: TType;

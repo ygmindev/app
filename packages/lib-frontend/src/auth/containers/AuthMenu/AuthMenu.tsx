@@ -29,15 +29,15 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
   const { push } = useRouter();
   const authState = useAuthState();
   const currentUser = useStore((state) => state.user.currentUser);
-  const _optionsOverrides: Record<string, PartialModel<AuthMenuOptionModel>> = {
+  const optionsOverrides: Record<string, PartialModel<AuthMenuOptionModel>> = {
     [ACCOUNT]: { onPress: () => push({ pathname: ACCOUNT }) },
     [SIGN_OUT]: { onPress: signOut },
   };
-  const _options = AUTH_MENU_OPTIONS.reduce(
+  const optionsF = AUTH_MENU_OPTIONS.reduce(
     (result, option) =>
       option.isProtected && authState !== AUTH_STATE.AUTHENTICATED
         ? result
-        : [...result, merge<AuthMenuOptionModel>([_optionsOverrides[option.id] || {}, option])],
+        : [...result, merge<AuthMenuOptionModel>([optionsOverrides[option.id] || {}, option])],
     [] as Array<AuthMenuOptionModel>,
   );
 
@@ -49,7 +49,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
           icon="personCircle"
         />
       )}
-      options={_options}
+      options={optionsF}
       style={styles}
       topElement={
         currentUser ? (

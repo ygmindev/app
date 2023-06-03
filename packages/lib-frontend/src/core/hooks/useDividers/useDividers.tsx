@@ -10,14 +10,14 @@ export const useDividers = (params: UseDividersParamsModel): UseDividersModel =>
   useMemo(
     () =>
       Children.map(params, (child, i) => {
-        const _key = child.key || uid();
+        const key = child.key || uid();
         return i === params.length - 1 ? (
           child
         ) : (
-          <Fragment key={_key}>
+          <Fragment key={key}>
             {child}
 
-            <Divider key={`divider-${_key}`} />
+            <Divider key={`divider-${key}`} />
           </Fragment>
         );
       }),

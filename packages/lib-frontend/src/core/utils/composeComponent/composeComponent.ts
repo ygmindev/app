@@ -28,11 +28,14 @@ export const composeComponent = <
   forwardRef((props, ref): ReactElement<TResult> => {
     const theme = useTheme();
     const { styles } = useStyles({ props, stylers });
-    const _props = getProps ? getProps({ ...props, style: styles }, theme, ref) : props;
-    return _props && (isWeb ? unstable_createElement : createElement)(Component, {
-      ..._props,
-      ...(isFragment(Component)
-        ? {}
-        : { nativeid: props.nativeID, ref, style: styles, testID: props.testID }),
-    });
+    const propsF = getProps ? getProps({ ...props, style: styles }, theme, ref) : props;
+    return (
+      propsF &&
+      (isWeb ? unstable_createElement : createElement)(Component, {
+        ...propsF,
+        ...(isFragment(Component)
+          ? {}
+          : { nativeid: props.nativeID, ref, style: styles, testID: props.testID }),
+      })
+    );
   }) as ComposeComponentModel<TProps, TStyle, TRef>;

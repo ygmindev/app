@@ -47,29 +47,29 @@ export const SelectField = <TType extends string = string>({
     value,
   });
 
-  const _menuRef = useRef<MenuRefModel>(null);
+  const menuRef = useRef<MenuRefModel>(null);
 
   const { result, search } = useSearch({
     keys: ['label', 'value'],
     list: options,
-    onChange: () => _menuRef?.current?.scrollTo({ x: 0, y: 0 }),
+    onChange: () => menuRef?.current?.scrollTo({ x: 0, y: 0 }),
   });
 
-  const _handleToggle = async (isOpen?: boolean): Promise<void> => {
+  const handleToggle = async (isOpen?: boolean): Promise<void> => {
     await sleep();
-    _menuRef && _menuRef.current && _menuRef.current.toggle(isOpen);
+    menuRef && menuRef.current && menuRef.current.toggle(isOpen);
     search('');
     querySet('');
   };
 
-  const _handleSelect = async (): Promise<void> => {
+  const handleSelect = async (): Promise<void> => {
     const selected = result && result[0];
     const selectedValue = selected.id;
     if (selectedValue) {
       valueControlledSet(selectedValue);
       onSubmit && (await onSubmit(selectedValue));
     }
-    _handleToggle(false);
+    handleToggle(false);
   };
 
   const onQueryChange = (value: string): void => {
@@ -77,13 +77,13 @@ export const SelectField = <TType extends string = string>({
     search(value);
   };
 
-  const _selectedOption = options.find(({ id }) => id === valueControlled);
-  const _selectedLabel = _selectedOption
+  const selectedOption = options.find(({ id }) => id === valueControlled);
+  const selectedLabel = selectedOption
     ? renderValue
-      ? renderValue(_selectedOption)
+      ? renderValue(selectedOption)
       : renderOption
-      ? renderOption(_selectedOption)
-      : _selectedOption.label
+      ? renderOption(selectedOption)
+      : selectedOption.label
     : undefined;
 
   return (
@@ -102,18 +102,18 @@ export const SelectField = <TType extends string = string>({
             isTransparent={isTransparent}
             label={label}
             leftElement={
-              _selectedOption && _selectedOption.icon && <Icon icon={_selectedOption.icon} />
+              selectedOption && selectedOption.icon && <Icon icon={selectedOption.icon} />
             }
             onBlur={() => {
               onBlur && onBlur();
-              _handleToggle(false);
+              handleToggle(false);
             }}
             onChange={onQueryChange}
             onFocus={() => {
               onFocus && onFocus();
-              _handleToggle(true);
+              handleToggle(true);
             }}
-            onSubmit={_handleSelect}
+            onSubmit={handleSelect}
             rightElement={
               <AnimatableView
                 animation={{
@@ -128,14 +128,14 @@ export const SelectField = <TType extends string = string>({
             }
             round={round}
             testID={testID}
-            value={isOpen ? query : t(_selectedLabel)}
+            value={isOpen ? query : t(selectedLabel)}
             width={width}
           />
         )}
         isFullWidth
         onChange={valueControlledSet}
         options={result}
-        ref={_menuRef}
+        ref={menuRef}
         renderOption={renderOption}
         value={valueControlled}
       />

@@ -4,7 +4,7 @@ import type { _LoggerModel } from '@lib/shared/logging/utils/logger/_logger.mode
 import type { Logger } from 'winston';
 import { createLogger, format, transports } from 'winston';
 
-const _enumerateErrorFormat = format((info) => {
+const enumerateErrorFormat = format((info) => {
   if (info instanceof Error) {
     Object.assign(info, { message: info.stack });
   }
@@ -13,7 +13,7 @@ const _enumerateErrorFormat = format((info) => {
 
 const logger: Logger = createLogger({
   format: format.combine(
-    _enumerateErrorFormat(),
+    enumerateErrorFormat(),
     format.colorize(),
     format.splat(),
     format.printf(

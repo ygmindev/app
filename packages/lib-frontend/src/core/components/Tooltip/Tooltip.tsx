@@ -14,12 +14,12 @@ export const Tooltip = composeComponent<TooltipPropsModel, DroppablePropsModel>(
   Component: Droppable,
 
   getProps: ({ children, color = THEME_COLOR.PRIMARY, icon = 'info' }, theme) => {
-    const _color = theme.colors.tone[color][THEME_ROLE.MAIN];
+    const colorF = theme.colors.tone[color][THEME_ROLE.MAIN];
     return {
       anchor: (isActive) => (
         <Icon
           color={
-            isActive ? palette({ color: _color, lightness: theme.colors.activeLightness }) : _color
+            isActive ? palette({ color: colorF, lightness: theme.colors.activeLightness }) : colorF
           }
           icon={icon}
         />

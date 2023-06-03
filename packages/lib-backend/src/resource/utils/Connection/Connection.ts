@@ -14,9 +14,9 @@ export const Connection = <TType extends unknown>({
   Resource,
   name,
 }: ConnectionParamsModel<TType>): ConstructorModel<ConnectionModel<TType>> => {
-  const _name = `${name}Connection`;
+  const nameF = `${name}Connection`;
 
-  @withEntity({ name: _name })
+  @withEntity({ name: nameF })
   class _Connection implements ConnectionModel<TType> {
     @withField({ Resource: Edge({ Resource, name }), isArray: true })
     edges!: Array<EdgeModel<TType>>;

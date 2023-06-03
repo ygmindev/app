@@ -18,7 +18,7 @@ export const _Icon: SFCModel<_IconPropsModel, TextStyleModel> = forwardRef(
   ({ icon, ...props }, ref) => {
     const { styles } = useStyles<_IconPropsModel, TextStyleModel>({ props });
     if (icon) {
-      const _Component = (IONIC_ICONS as Record<string, string>)[icon]
+      const Component = (IONIC_ICONS as Record<string, string>)[icon]
         ? Ionicons
         : (FONTAWESOME_ICONS as Record<string, string>)[icon]
         ? FontAwesome
@@ -26,8 +26,8 @@ export const _Icon: SFCModel<_IconPropsModel, TextStyleModel> = forwardRef(
         ? MaterialIcons
         : null;
       return (
-        _Component && (
-          <_Component
+        Component && (
+          <Component
             {...props}
             name={(ICONS as Record<string, string>)[icon] || ''}
             ref={ref as null}

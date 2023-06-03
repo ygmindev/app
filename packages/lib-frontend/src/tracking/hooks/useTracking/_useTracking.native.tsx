@@ -2,19 +2,18 @@ import { Amplitude } from '@amplitude/react-native';
 import type { _UseTrackingModel } from '@lib/frontend/tracking/hooks/useTracking/_useTracking.models';
 import type { TrackingEventModel } from '@lib/shared/tracking/resources/TrackingEvent/TrackingEvent.models';
 
-let _analyticsClient: Amplitude | null;
+let client: Amplitude | null;
 
 export const _useTracking = (): _UseTrackingModel => ({
-  identify: (uid) => _analyticsClient && _analyticsClient.setUserId(uid),
+  identify: (uid) => client && client.setUserId(uid),
 
   initialize: async (apiKey) => {
-    _analyticsClient = Amplitude.getInstance();
-    await _analyticsClient.init(apiKey);
+    client = Amplitude.getInstance();
+    await client.init(apiKey);
   },
 
-  reset: () => _analyticsClient && _analyticsClient.setUserId(null),
+  reset: () => client && client.setUserId(null),
 
   track: <TParams,>({ action, object, params }: TrackingEventModel<TParams>) =>
-    _analyticsClient &&
-    _analyticsClient.logEvent(`${object} ${action}`, params as Record<string, unknown>),
+    client && client.logEvent(`${object} ${action}`, params as Record<string, unknown>),
 });

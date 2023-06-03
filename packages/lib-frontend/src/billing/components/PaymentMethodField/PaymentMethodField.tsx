@@ -30,7 +30,7 @@ export const PaymentMethodField: RSFCModel<FormRefModel, PaymentMethodFieldProps
         {...props}
         defaultValue={defaultValue}
         onSubmit={async (form) => {
-          const _onSubmit = (): Promise<
+          const onSubmit = (): Promise<
             OutputModel<
               RESOURCE_METHOD_TYPE.CREATE | RESOURCE_METHOD_TYPE.UPDATE,
               PaymentMethodModel,
@@ -50,7 +50,7 @@ export const PaymentMethodField: RSFCModel<FormRefModel, PaymentMethodFieldProps
                 return undefined;
             }
           };
-          const result = await _onSubmit();
+          const result = await onSubmit();
           result &&
             (defaultValue
               ? actions?.billing.paymentMethodUpdate(result.result)

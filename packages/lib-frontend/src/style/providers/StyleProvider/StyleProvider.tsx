@@ -10,10 +10,10 @@ import { useMemo } from 'react';
 export const StyleProvider: FCModel<StyleProviderPropsModel> = ({ children }) => {
   const theme = useTheme();
   const brightness = useStore((state) => state.style.brightness);
-  const _sheet = useMemo(() => config(theme), [config, theme]);
+  const sheet = useMemo(() => config(theme), [config, theme]);
   return (
     <_StyleProvider value={{ brightness, theme }}>
-      <GlobalStyle sheet={_sheet} />
+      <GlobalStyle sheet={sheet} />
 
       {children}
     </_StyleProvider>

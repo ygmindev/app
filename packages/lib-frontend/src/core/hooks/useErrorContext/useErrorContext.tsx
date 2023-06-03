@@ -14,49 +14,49 @@ export const useErrorContext = (): UseErrorContextModel => {
   const { error: notify } = useNotification();
   const { errorContextGet, errorContextSet, mode } = useContext(ErrorContext);
 
-  const _errorContextGet = (e: Error): ErrorContextModel => {
-    let _errorContext = errorContextGet && errorContextGet(e);
-    if (!_errorContext) {
+  const errorContextGetF = (e: Error): ErrorContextModel => {
+    let errorContext = errorContextGet && errorContextGet(e);
+    if (!errorContext) {
       error(e);
       switch ((e as HttpError).statusCode) {
         case HTTP_STATUS_CODE.FORBIDDEN: {
-          _errorContext = { icon: 'ban', message: ({ t }) => t('core:messages.errorForbidden') };
+          errorContext = { icon: 'ban', message: ({ t }) => t('core:messages.errorForbidden') };
           break;
         }
         case HTTP_STATUS_CODE.NETWORK_CONNECT_TIMEOUT: {
-          _errorContext = {
+          errorContext = {
             icon: 'offline',
             message: ({ t }) => t('core:messages.errorOffline'),
             mode: ERROR_MODE.FALLBACK,
           };
         }
         case HTTP_STATUS_CODE.UNAUTHORIZED: {
-          _errorContext = {
+          errorContext = {
             icon: 'lock',
             message: ({ t }) => t('core:messages.errorUnauthorized'),
           };
           break;
         }
         default: {
-          _errorContext = { icon: 'sad', message: ({ t }) => t('core:messages.errorGeneric') };
+          errorContext = { icon: 'sad', message: ({ t }) => t('core:messages.errorGeneric') };
           break;
         }
       }
     }
-    const { icon, message, mode, title } = _errorContext;
+    const { icon, message, mode, title } = errorContext;
     return { icon, message: message && t(message), mode, title: title && t(title) };
   };
 
-  const _handleError = (error: Error): void => {
-    const _errorContext = _errorContextGet(error);
-    [mode, _errorContext.mode].includes(ERROR_MODE.FALLBACK)
-      ? errorContextSet(_errorContext)
+  const handleError = (error: Error): void => {
+    const errorContext = errorContextGetF(error);
+    [mode, errorContext.mode].includes(ERROR_MODE.FALLBACK)
+      ? errorContextSet(errorContext)
       : notify({
-          icon: _errorContext.icon,
-          message: _errorContext.message ? t(_errorContext.message) : undefined,
-          title: _errorContext.title ? t(_errorContext.title) : undefined,
+          icon: errorContext.icon,
+          message: errorContext.message ? t(errorContext.message) : undefined,
+          title: errorContext.title ? t(errorContext.title) : undefined,
         });
   };
 
-  return { handleError: _handleError };
+  return { handleError: handleError };
 };

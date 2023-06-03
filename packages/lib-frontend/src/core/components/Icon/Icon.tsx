@@ -10,7 +10,7 @@ import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyl
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { forwardRef } from 'react';
 
-const _AnimatableIcon = animatable({ Component: _Icon });
+const AnimatableIcon = animatable({ Component: _Icon });
 
 export const Icon: RSFCModel<
   AnimatableRefModel<TextStyleModel>,
@@ -30,9 +30,9 @@ export const Icon: RSFCModel<
       },
     ],
   });
-  const _Component = props.animation ? _AnimatableIcon : _Icon;
+  const Component = props.animation ? AnimatableIcon : _Icon;
   return (
-    <_Component
+    <Component
       {...props}
       ref={ref}
       style={styles}

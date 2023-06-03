@@ -28,7 +28,7 @@ export const LineItem: SFCModel<LineItemPropsModel> = ({
   const state = useStore((state) => state);
   const { t } = useTranslation();
   const [isActive, isActiveSet] = useState<boolean>();
-  const _isValue = value !== undefined;
+  const isValue = value !== undefined;
   return (
     <Activatable
       onActive={() => isActiveSet(true)}
@@ -48,11 +48,11 @@ export const LineItem: SFCModel<LineItemPropsModel> = ({
             </Wrapper>
           )}
 
-          {label || _isValue ? (
+          {label || isValue ? (
             <Wrapper spacing={THEME_SIZE.SMALL}>
-              <TranslatableText isBold={_isValue}>{label}</TranslatableText>
+              <TranslatableText isBold={isValue}>{label}</TranslatableText>
 
-              {_isValue && (
+              {isValue && (
                 <Text
                   colorRole={value ? undefined : THEME_ROLE.MUTED}
                   isEllipsis>

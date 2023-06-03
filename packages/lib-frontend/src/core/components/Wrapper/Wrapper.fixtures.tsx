@@ -20,16 +20,16 @@ export const WrapperFixture: SFCModel<WrapperFixturePropsModel> = ({
   testID,
   ...props
 }) => {
-  const _testID = useMemo(() => testID || 'wrapper-fixture', [testID]);
+  const testIDF = useMemo(() => testID || 'wrapper-fixture', [testID]);
   return (
     <Wrapper
       backgroundColor={backgroundColor}
       backgroundRole={backgroundRole}
       height={WRAPPER_FIXTURE_SIZE}
       isCenter
-      key={_testID}
+      key={testIDF}
       round
-      testID={_testID}
+      testID={testIDF}
       width={WRAPPER_FIXTURE_SIZE}
       {...props}>
       {isString(children) ? (

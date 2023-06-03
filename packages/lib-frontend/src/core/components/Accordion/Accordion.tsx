@@ -27,7 +27,7 @@ export const Accordion: SFCModel<AccordionPropsModel> = ({
     value,
   });
 
-  const _handleToggle = (): void =>
+  const handleToggle = (): void =>
     valueControlledSet(
       valueControlled === ELEMENT_STATE.ACTIVE ? ELEMENT_STATE.INACTIVE : ELEMENT_STATE.ACTIVE,
     );
@@ -40,7 +40,7 @@ export const Accordion: SFCModel<AccordionPropsModel> = ({
       <Wrapper
         isRowAlign
         justify={FLEX_JUSTIFY.SPACE_BETWEEN}
-        onPress={_handleToggle}>
+        onPress={handleToggle}>
         {label && <Text fontSize={THEME_SIZE_MORE.LARGE}>{label}</Text>}
 
         <Wrapper

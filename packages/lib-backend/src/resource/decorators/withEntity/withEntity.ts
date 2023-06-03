@@ -19,14 +19,14 @@ export const withEntity = <TType>({
   return ((Base: TType) => {
     isSchema && ObjectType(name ?? '', { isAbstract })(Base as unknown as ConstructorModel);
     isSchemaInput && InputType(`${name}Input`, { isAbstract })(Base as unknown as ConstructorModel);
-    let _Base = isRepository
+    let BaseF = isRepository
       ? (isEmbedded ? Embeddable : Entity)({ abstract: isAbstract, collection: name })(
           Base as unknown as ConstructorModel,
         )
       : Base;
     for (const index of indices) {
-      _Base = Index({ properties: index })(_Base as unknown as ConstructorModel);
+      BaseF = Index({ properties: index })(BaseF as unknown as ConstructorModel);
     }
-    return _Base;
+    return BaseF;
   }) as ClassDecorator;
 };

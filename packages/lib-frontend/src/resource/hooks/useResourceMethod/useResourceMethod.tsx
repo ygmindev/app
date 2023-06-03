@@ -14,18 +14,18 @@ import type { ResourceMethodTypeModel } from '@lib/shared/resource/resource.mode
 import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 
-const _getConnectionFields = <TType, TRoot = undefined>(
+const getConnectionFields = <TType, TRoot = undefined>(
   fields: GraphQlQueryParamsFieldsModel<TType, false>,
 ): Array<GraphQlFieldModel<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>>> =>
   fields.map((field) => {
-    const _field = field as GraphQlFieldModel<
+    const fieldF = field as GraphQlFieldModel<
       Pick<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>, 'result'>
     >;
-    return _field?.result
+    return fieldF?.result
       ? {
-          ..._field,
+          ...fieldF,
           result: [
-            { edges: ['cursor', { node: _field.result }] },
+            { edges: ['cursor', { node: fieldF.result }] },
             { pageInfo: ['endCursor', 'hasNextPage', 'hasPreviousPage', 'startCursor'] },
           ],
         }
@@ -52,8 +52,8 @@ export const useResourceMethod = <
 > => {
   const { query } = useGraphQl();
 
-  const _name = `${name}${method}`;
-  const _type = (() => {
+  const nameF = `${name}${method}`;
+  const type = (() => {
     switch (method) {
       case RESOURCE_METHOD_TYPE.GET:
       case RESOURCE_METHOD_TYPE.GET_MANY:
@@ -68,25 +68,25 @@ export const useResourceMethod = <
     }
   })();
 
-  const _fields =
+  const fieldsF =
     method === RESOURCE_METHOD_TYPE.GET_CONNECTION
-      ? _getConnectionFields(fields as GraphQlQueryParamsFieldsModel<TType, false>)
+      ? getConnectionFields(fields as GraphQlQueryParamsFieldsModel<TType, false>)
       : fields;
 
   return {
     query: async (input) => {
-      const _input = before ? await before({ input }) : input;
-      const _root = _input.root || root;
+      const inputF = before ? await before({ input }) : input;
+      const rootF = inputF.root || root;
       const output = (await query<
         { input: InputModel<TMethod, TType, TForm, TRoot> },
         OutputModel<TMethod, TType, TRoot>
       >({
-        fields: _fields as GraphQlQueryParamsFieldsModel<OutputModel<TMethod, TType, TRoot>>,
-        name: _name,
-        params: { input: `${_name}Input` },
-        type: _type,
-        variables: { input: { ..._input, root: _root } },
-      })) || { result: undefined, root: _root };
+        fields: fieldsF as GraphQlQueryParamsFieldsModel<OutputModel<TMethod, TType, TRoot>>,
+        name: nameF,
+        params: { input: `${nameF}Input` },
+        type,
+        variables: { input: { ...inputF, root: rootF } },
+      })) || { result: undefined, root: rootF };
       return after ? await after({ output }) : output;
     },
   };

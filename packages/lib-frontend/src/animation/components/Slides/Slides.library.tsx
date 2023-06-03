@@ -12,7 +12,7 @@ export const props: LibraryPropsModel<SlidesPropsModel> = {
   Component: Slides,
   Renderer: ({ ...props }) => {
     const [current, currentSet] = useState<number>(0);
-    const _length = props.slides?.length || 1;
+    const length = props.slides?.length || 1;
     return (
       <Wrapper
         isCenter
@@ -25,8 +25,8 @@ export const props: LibraryPropsModel<SlidesPropsModel> = {
           </Button>
 
           <Button
-            elementState={current >= _length - 1 ? ELEMENT_STATE.DISABLED : undefined}
-            onPress={() => currentSet(Math.min(_length - 1, current + 1))}>
+            elementState={current >= length - 1 ? ELEMENT_STATE.DISABLED : undefined}
+            onPress={() => currentSet(Math.min(length - 1, current + 1))}>
             Next
           </Button>
         </Wrapper>

@@ -14,25 +14,25 @@ export const jsPackage: GeneratorParamsModel = {
     const target = variables && variables['{{TARGET}}'];
 
     if (root && target) {
-      let _filename = fromBuild('node/typescript/tsconfig.paths.json');
-      let content = JSON.parse(readFileSync(_filename).toString());
+      let filename = fromBuild('node/typescript/tsconfig.paths.json');
+      let content = JSON.parse(readFileSync(filename).toString());
       content.compilerOptions.paths[`${target}/*`] = [`packages/${root}/src/*`];
       content.compilerOptions.paths = sortKeys(content.compilerOptions.paths);
-      writeFile({ filename: _filename, value: JSON.stringify(content, null, 2) });
+      writeFile({ filename, value: JSON.stringify(content, null, 2) });
 
       // bundled dependencies
-      _filename = fromRoot('package.json');
-      content = JSON.parse(readFileSync(_filename).toString());
+      filename = fromRoot('package.json');
+      content = JSON.parse(readFileSync(filename).toString());
       content.bundledDependencies = [...(content.bundledDependencies || []), target];
       content.bundledDependencies = uniq(content.bundledDependencies).sort();
-      writeFile({ filename: _filename, value: JSON.stringify(content, null, 2) });
+      writeFile({ filename, value: JSON.stringify(content, null, 2) });
 
       // workspace
-      _filename = fromRoot('workspace.json');
-      content = JSON.parse(readFileSync(_filename).toString());
+      filename = fromRoot('workspace.json');
+      content = JSON.parse(readFileSync(filename).toString());
       content.projects[root] = fromPackages(root);
       content.projects = sortKeys(content.projects);
-      writeFile({ filename: _filename, value: JSON.stringify(content, null, 2) });
+      writeFile({ filename, value: JSON.stringify(content, null, 2) });
     }
   },
 

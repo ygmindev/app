@@ -7,22 +7,22 @@ import type { RSFCModel } from '@lib/frontend/core/core.models';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 export const View: RSFCModel<ViewRefModel, ViewPropsModel> = forwardRef(({ ...props }, ref) => {
-  const _Component =
+  const Component =
     props.isHorizontalScrollable || props.isVerticalScrollable || props.onScroll
       ? _ViewScrollable
       : props.onPress || props.onPressIn || props.onPressOut
       ? _ViewPressable
       : _View;
 
-  const _ref = useRef<_ViewRefModel>(null);
+  const refF = useRef<_ViewRefModel>(null);
   useImperativeHandle(ref, () => ({
-    scrollTo: (position) => _ref.current?.scrollTo(position),
+    scrollTo: (position) => refF.current?.scrollTo(position),
   }));
 
   return (
-    <_Component
+    <Component
       {...props}
-      ref={_ref}
+      ref={refF}
     />
   );
 });

@@ -11,11 +11,11 @@ export const Root = <TRoot = undefined>({
   name,
 }: RootParamsModel<TRoot>): ConstructorModel<RootModel<TRoot>> => {
   if (RootResource) {
-    const _name = `${name}Root`;
-    const _isResource = RootResource && isFunction(RootResource);
+    const nameF = `${name}Root`;
+    const isResource = RootResource && isFunction(RootResource);
 
-    @withEntity({ name: _name })
-    class _Resource extends (_isResource
+    @withEntity({ name: nameF })
+    class _Resource extends (isResource
       ? (RootResource as unknown as ConstructorModel)
       : EntityResource) {}
 

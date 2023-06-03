@@ -5,17 +5,17 @@ import { config as configBase } from '@lib/config/core/setup/setup.base';
 import type { SetupConfigModel } from '@lib/config/core/setup/setup.models';
 import { _config } from '@lib/config/database/database.mongo';
 
-const _isInitialized = false;
+const isInitialized = false;
 
-const _isTerminated = false;
+const isTerminated = false;
 
 export const config: SetupConfigModel = {
   onInitialize: async () => {
-    if (!_isInitialized) {
+    if (!isInitialized) {
       if (process.env.USE_DATABASE) {
-        const _database = new Database(_config());
-        await _database.connect();
-        Container.set(Database, _database, DATABASE_TYPE.MONGO);
+        const database = new Database(_config());
+        await database.connect();
+        Container.set(Database, database, DATABASE_TYPE.MONGO);
       }
 
       await configBase.onInitialize();
@@ -23,10 +23,10 @@ export const config: SetupConfigModel = {
   },
 
   onTerminate: async () => {
-    if (!_isTerminated) {
+    if (!isTerminated) {
       if (process.env.USE_DATABASE) {
-        const _database = Container.get(Database, DATABASE_TYPE.MONGO);
-        await _database.close();
+        const database = Container.get(Database, DATABASE_TYPE.MONGO);
+        await database.close();
       }
 
       await configBase.onInitialize();

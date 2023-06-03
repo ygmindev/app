@@ -40,21 +40,21 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
     value: elementState,
   });
 
-  const _isDisabled =
+  const isDisabled =
     valueControlled === ELEMENT_STATE.DISABLED || valueControlled === ELEMENT_STATE.LOADING;
 
-  const _handleButtonPress: CallablePromiseModel = async () => {
-    if (!_isDisabled) {
+  const handleButtonPress: CallablePromiseModel = async () => {
+    if (!isDisabled) {
       if (confirmMessage) {
         confirmModalIsOpenSet(true);
       } else {
-        await _handlePress();
+        await handlePress();
       }
     }
   };
 
-  const _handlePress: CallablePromiseModel = async () => {
-    if (!_isDisabled) {
+  const handlePress: CallablePromiseModel = async () => {
+    if (!isDisabled) {
       const result = onPress && onPress();
       if (isPromise(result)) {
         valueControlledSet(ELEMENT_STATE.LOADING);
@@ -85,7 +85,7 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
             },
           }}
           elementState={valueControlled}
-          onPress={_handleButtonPress}
+          onPress={handleButtonPress}
           onPressIn={onPressIn}
           onPressOut={onPressOut}
           pHorizontal
@@ -118,7 +118,7 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
                 elementState={valueControlled}
                 icon="chevronRight"
                 onPress={async () => {
-                  await _handlePress();
+                  await handlePress();
                   confirmModalIsOpenSet(false);
                 }}>
                 {t('core:labels.continue')}

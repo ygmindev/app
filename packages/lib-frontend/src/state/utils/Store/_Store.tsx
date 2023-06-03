@@ -41,7 +41,7 @@ import {
 const { configureStore, createSlice } = ((toolkit as unknown as { default: unknown }).default ??
   toolkit) as typeof toolkit;
 
-const _ActionProvider = <
+const ActionProvider = <
   TKeys extends Array<string>,
   TType extends Record<TKeys[number], object>,
   TParams extends Record<TKeys[number], object>,
@@ -53,13 +53,13 @@ const _ActionProvider = <
   _ActionProviderPropsModel<TKeys, TType, TParams>
 > => {
   const dispatch = useDispatch();
-  const _actions = mapValues(actions, (actions) =>
+  const actionsF = mapValues(actions, (actions) =>
     mapValues(actions, (action) => (value: unknown) => dispatch(action(value))),
   ) as NestedActionsModel<TKeys, TParams>;
   return (
     <>
       {value?.actionContext ? (
-        <value.actionContext.Provider value={_actions}>{children}</value.actionContext.Provider>
+        <value.actionContext.Provider value={actionsF}>{children}</value.actionContext.Provider>
       ) : (
         children
       )}
@@ -117,7 +117,7 @@ export class _Store<
           ),
         });
 
-        const _persistConfig: PersistConfig<StateModel> | undefined = reducer.storage
+        const persistConfig: PersistConfig<StateModel> | undefined = reducer.storage
           ? {
               key: name,
               stateReconciler: isSsr ? (_, original) => original : undefined,
@@ -128,12 +128,12 @@ export class _Store<
         return {
           ...result,
           actions: { ...result.actions, [name]: actions },
-          persistors: _persistConfig
-            ? { ...result.persistors, [name]: _persistConfig }
+          persistors: persistConfig
+            ? { ...result.persistors, [name]: persistConfig }
             : result.persistors,
           reducers: {
             ...result.reducers,
-            [name]: _persistConfig ? persistReducer(_persistConfig, _reducer) : _reducer,
+            [name]: persistConfig ? persistReducer(persistConfig, _reducer) : _reducer,
           } as Reducer<TType>,
         };
       },
@@ -175,11 +175,11 @@ export class _Store<
   get Provider(): ComponentType<StateProviderPropsModel<TKeys, TType, TParams>> {
     return ({ children, value }) => (
       <_Provider store={this._store}>
-        <_ActionProvider
+        <ActionProvider
           actions={this._actions}
           value={value}>
           {children}
-        </_ActionProvider>
+        </ActionProvider>
       </_Provider>
     );
   }

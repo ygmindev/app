@@ -51,13 +51,13 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
     const { styles } = useStyles({ props });
     const isMobile = useIsMobile();
     const [isOpen, isOpenSet] = useState<boolean>(false);
-    const _dropdownRef = useRef<DropdownRefModel>(null);
-    const _virtualizedListRef = useRef<VirtualizedListRefModel>(null);
+    const dropdownRef = useRef<DropdownRefModel>(null);
+    const virtualizedListRef = useRef<VirtualizedListRefModel>(null);
 
     useImperativeHandle(ref, () => ({
-      isOpen: () => _dropdownRef.current?.isOpen() || false,
-      scrollTo: (params) => _virtualizedListRef.current?.getScrollableNode().scrollTo(params),
-      toggle: (params) => _dropdownRef.current?.toggle(params),
+      isOpen: () => dropdownRef.current?.isOpen() || false,
+      scrollTo: (params) => virtualizedListRef.current?.getScrollableNode().scrollTo(params),
+      toggle: (params) => dropdownRef.current?.toggle(params),
     }));
 
     const subMenuRefs = useMemo(
@@ -70,12 +70,12 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
       [options],
     );
 
-    const _handleToggle = (value?: boolean): void => {
+    const handleToggle = (value?: boolean): void => {
       Object.values(subMenuRefs).forEach((v) => v.current?.toggle(false));
       isOpenSet(!!value);
     };
 
-    const _handlePressOption = async ({
+    const handlePressOption = async ({
       id,
       onPress,
       subOptions,
@@ -85,19 +85,19 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
       } else {
         (onPress && (await onPress())) || (onChange && onChange(id));
       }
-      _handleToggle(false);
+      handleToggle(false);
     };
 
-    let _anchor: ReactElement<PressablePropsModel> = anchor(isOpen);
-    const _onPress = _anchor.props.onPress;
-    _anchor = cloneElement(_anchor, {
+    let anchorF: ReactElement<PressablePropsModel> = anchor(isOpen);
+    const { onPress } = anchorF.props;
+    anchorF = cloneElement(anchorF, {
       onPress: async () => {
-        _onPress && (await _onPress());
-        _handleToggle(!isOpen);
+        onPress && (await onPress());
+        handleToggle(!isOpen);
       },
     });
 
-    const _children = (
+    const children = (
       <Wrapper
         grow
         shrink
@@ -107,13 +107,13 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
         {options.length && (
           <VirtualizedList
             items={options}
-            ref={_virtualizedListRef}
+            ref={virtualizedListRef}
             render={(option: MenuOptionModel) => {
               if (option.isDivider) {
                 return <Divider key={option.id} />;
               }
               const { color, confirmMessage, elementState, icon, id, label, subOptions } = option;
-              const _option = (value?: boolean): ReactElement => (
+              const optionF = (value?: boolean): ReactElement => (
                 <Button
                   align={FLEX_ALIGN.FLEX_START}
                   color={color}
@@ -122,22 +122,22 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
                   icon={icon}
                   isFullWidth
                   key={id}
-                  onPress={subOptions ? undefined : async () => await _handlePressOption(option)}
-                  onPressOut={() => confirmMessage && _handleToggle(false)}
+                  onPress={subOptions ? undefined : async () => await handlePressOption(option)}
+                  onPressOut={() => confirmMessage && handleToggle(false)}
                   type={BUTTON_TYPE.INVISIBLE}>
                   {renderOption ? renderOption(option) : label}
                 </Button>
               );
               return subOptions ? (
                 <Menu
-                  anchor={_option}
+                  anchor={optionF}
                   direction={DIRECTION.LEFT}
                   key={id}
                   options={subOptions}
                   ref={subMenuRefs[id]}
                 />
               ) : (
-                _option()
+                optionF()
               );
             }}
           />
@@ -147,28 +147,28 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
 
     return isMobile ? (
       <>
-        {_anchor}
+        {anchorF}
 
         <Modal
           isFullSize={false}
           isOpen={isOpen}
-          onClose={() => _handleToggle(false)}>
-          {_children}
+          onClose={() => handleToggle(false)}>
+          {children}
         </Modal>
       </>
     ) : (
       <Dropdown
-        anchor={_anchor}
+        anchor={anchorF}
         direction={direction}
         isFullWidth={isFullWidth}
         isOpen={isOpen}
         maxHeight={maxHeight}
         maxWidth={maxWidth}
-        onToggle={_handleToggle}
-        ref={_dropdownRef}
+        onToggle={handleToggle}
+        ref={dropdownRef}
         style={styles}
         width={width}>
-        {_children}
+        {children}
       </Dropdown>
     );
   },

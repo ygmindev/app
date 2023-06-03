@@ -9,12 +9,10 @@ export const Filter = <TType extends unknown>({
   Resource,
   name,
 }: FilterParamsModel<TType>): ConstructorModel<FilterModel<TType>> => {
-  const _name = `${name}Filter`;
-  const _isResource = Resource && isFunction(Resource);
+  const nameF = `${name}Filter`;
+  const isResource = Resource && isFunction(Resource);
 
-  @withEntity({ name: _name })
-  class _Filter extends (_isResource
-    ? (Resource as unknown as ConstructorModel)
-    : EntityResource) {}
+  @withEntity({ name: nameF })
+  class _Filter extends (isResource ? (Resource as unknown as ConstructorModel) : EntityResource) {}
   return _Filter;
 };

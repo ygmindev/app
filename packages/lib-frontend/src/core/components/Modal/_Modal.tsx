@@ -18,7 +18,7 @@ export const _Modal = composeComponent<_ModalPropsModel, PartialModel<typeof Mod
     isOpen,
     onClose,
   }) => {
-    const _isDisabled =
+    const isDisabled =
       elementState === ELEMENT_STATE.DISABLED || elementState === ELEMENT_STATE.LOADING;
     return {
       animationIn: 'slideInUp',
@@ -35,11 +35,11 @@ export const _Modal = composeComponent<_ModalPropsModel, PartialModel<typeof Mod
       hasBackdrop: true,
       hideModalContentWhileAnimating: true,
       isVisible: isOpen,
-      onBackdropPress: _isDisabled ? undefined : onClose,
-      onSwipeComplete: _isDisabled ? undefined : () => onClose && onClose(),
+      onBackdropPress: isDisabled ? undefined : onClose,
+      onSwipeComplete: isDisabled ? undefined : () => onClose && onClose(),
       presentationStyle: 'formSheet',
       supportedOrientations: ['portrait', 'landscape'],
-      swipeDirection: _isDisabled ? undefined : 'down',
+      swipeDirection: isDisabled ? undefined : 'down',
     };
   },
 

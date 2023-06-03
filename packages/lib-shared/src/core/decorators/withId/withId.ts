@@ -5,8 +5,8 @@ import type {
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import isArray from 'lodash/isArray';
 
-const _withId = <TType>(value: TType): WithIdModel & TType =>
+const withIdF = <TType>(value: TType): WithIdModel & TType =>
   ({ ...(value || {}), id: (value as unknown as WithIdModel).id || uid() } as TType & WithIdModel);
 
 export const withId = <TType>(value: TType): WithIdResultModel<TType> =>
-  (isArray(value) ? value.map(_withId) : _withId(value)) as WithIdResultModel<TType>;
+  (isArray(value) ? value.map(withIdF) : withIdF(value)) as WithIdResultModel<TType>;

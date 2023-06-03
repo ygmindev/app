@@ -10,17 +10,17 @@ import { appUri } from '@lib/shared/http/utils/appUri/appUri';
 const URI = appUri();
 
 describe('sign in', () => {
-  let _screen: ScreenModel;
+  let screenF: ScreenModel;
 
   beforeAll(async () => {
-    _screen = await screen();
+    screenF = await screen();
   });
 
   test('works', async () => {
-    await _screen.open(`${URI}${trimPathname(SIGN_IN)}`);
-    await _screen.type('username', 'admin@admin.com');
-    await _screen.click(`${USERNAME_FORM_TEST_ID}-submit`);
-    await _screen.type(OTP_FIELD_MAIN_TEST_ID, OTP_STATIC);
+    await screenF.open(`${URI}${trimPathname(SIGN_IN)}`);
+    await screenF.type('username', 'admin@admin.com');
+    await screenF.click(`${USERNAME_FORM_TEST_ID}-submit`);
+    await screenF.type(OTP_FIELD_MAIN_TEST_ID, OTP_STATIC);
     expect(1).toStrictEqual(1);
   });
 });

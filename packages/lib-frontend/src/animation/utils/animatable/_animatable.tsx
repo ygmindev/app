@@ -13,8 +13,8 @@ import { createElement, forwardRef, useImperativeHandle } from 'react';
 export const _animatable = <TProps, TStyle extends StyleModel = ViewStyleModel>({
   Component,
 }: _AnimatableParamsModel<TProps, TStyle>): _AnimatableModel<TProps, TStyle> => {
-  const _Component = motify(Component)();
-  const _Animatable = forwardRef<
+  const ComponentF = motify(Component)();
+  const Animatable = forwardRef<
     AnimatableRefModel<TStyle>,
     PropsModel<_AnimatableModel<TProps, TStyle>>
   >(({ animation, elementState, ...props }, ref) => {
@@ -25,14 +25,14 @@ export const _animatable = <TProps, TStyle extends StyleModel = ViewStyleModel>(
     });
     useImperativeHandle(ref, () => ({ to, toState }));
     return isRender
-      ? createElement(_Component, {
+      ? createElement(ComponentF, {
           ...animationProps,
           ...props,
           ref,
           state: animationState,
           style: styles,
-        } as unknown as PropsModel<typeof _Component>)
+        } as unknown as PropsModel<typeof ComponentF>)
       : null;
   });
-  return _Animatable as _AnimatableModel<TProps, TStyle>;
+  return Animatable as _AnimatableModel<TProps, TStyle>;
 };

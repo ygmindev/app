@@ -24,15 +24,15 @@ export const TimezoneField: SFCModel<TimezoneFieldPropsModel> = ({
     onChange,
     value,
   });
-  const _timezone = useStore((state) => state.locale.timezone);
+  const timezone = useStore((state) => state.locale.timezone);
 
   useAsync({
     onMount: async () => {
-      _timezone && valueControlledSet(_timezone.name);
+      timezone && valueControlledSet(timezone.name);
     },
   });
 
-  const _options = useMemo(
+  const options = useMemo(
     () =>
       timezones().map(({ name, offset }) => ({
         id: timezoneFormat(name),
@@ -47,7 +47,7 @@ export const TimezoneField: SFCModel<TimezoneFieldPropsModel> = ({
       icon="time"
       label={t('locale:labels.timezone')}
       onChange={valueControlledSet}
-      options={_options}
+      options={options}
       style={styles}
       testID={testID}
       value={valueControlled}

@@ -17,7 +17,7 @@ import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.model
 import type { UserModel } from '@lib/shared/user/resources/User/User.models';
 import pick from 'lodash/pick';
 
-const _createSignIn = async (user: UserModel | null | undefined): Promise<SignInModel> => {
+const createSignIn = async (user: UserModel | null | undefined): Promise<SignInModel> => {
   if (user) {
     const claims = pick(user, SIGN_IN_TOKEN_CLAIM_FIELDS);
     const token = await JwtService.createToken(user._id, claims);
@@ -38,18 +38,18 @@ export class SignInService implements SignInServiceModel {
     OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>
   > {
     if (form.otp) {
-      const _form = cleanObject(form);
-      await this._otpService.verify(_form);
+      const formF = cleanObject(form);
+      await this._otpService.verify(formF);
       delete (form as Partial<SignInFormModel>).otp;
 
-      let { result: user } = await this._userService.get({ filter: _form });
+      let { result: user } = await this._userService.get({ filter: formF });
       let isNew;
       if (!user) {
-        const { result: created } = await this._userService.create({ form: _form });
+        const { result: created } = await this._userService.create({ form: formF });
         user = created;
         isNew = true;
       }
-      const signIn = await _createSignIn(user);
+      const signIn = await createSignIn(user);
       return { result: { ...signIn, isNew } };
     }
     throw new HttpError(HTTP_STATUS_CODE.BAD_REQUEST, 'otp');
@@ -60,14 +60,14 @@ export class SignInService implements SignInServiceModel {
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
     if (form.otp) {
-      const _form = cleanObject(form);
-      await this._otpService.verify(_form);
-      const _id = context?.user?._id;
+      const formF = cleanObject(form);
+      await this._otpService.verify(formF);
+      const id = context?.user?._id;
       const { result: user } = await this._userService.update({
-        filter: { _id },
-        update: _form,
+        filter: { _id: id },
+        update: formF,
       });
-      const signIn = await _createSignIn(user);
+      const signIn = await createSignIn(user);
       return { result: signIn };
     }
     throw new HttpError(HTTP_STATUS_CODE.BAD_REQUEST, 'otp');

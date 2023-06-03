@@ -19,7 +19,7 @@ export const _exportRendererClient = ({
 }: _ExportRendererClientParamsModel): _ExportRendererClientModel => ({
   render: async ({ Page, context, isHydration, pageProps }) => {
     const root = document.getElementById(ROOT);
-    const _context: RootContextModel = merge([
+    const contextF: RootContextModel = merge([
       {
         [LOCALE]: { i18n: context?.locale?.i18n ?? _config() },
         [STATE]: { cookies: Cookies as unknown as CookiesModel },
@@ -27,7 +27,7 @@ export const _exportRendererClient = ({
       context,
     ]);
 
-    const App: FCModel = () => render({ children: <Page {...pageProps} />, context: _context });
+    const App: FCModel = () => render({ children: <Page {...pageProps} />, context: contextF });
     AppRegistry.registerComponent('App', () => App);
     const { element } = AppRegistry.getApplication('App', {});
 

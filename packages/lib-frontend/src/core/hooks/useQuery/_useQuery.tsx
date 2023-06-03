@@ -17,7 +17,7 @@ export const _useQuery = <TType,>({
     { cacheTime: cache, retry: false, staleTime: cache },
   );
 
-  const _refetch = debounce(refetch);
+  const refetchF = debounce(refetch);
 
   return {
     data,
@@ -27,7 +27,7 @@ export const _useQuery = <TType,>({
     isLoading: isFetching,
     query: async () => {
       if (isStale) {
-        const result = await _refetch();
+        const result = await refetchF();
         return result?.data || null;
       }
       return data || null;

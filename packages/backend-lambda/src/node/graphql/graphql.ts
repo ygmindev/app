@@ -11,15 +11,15 @@ import type { GraphQLFormattedError } from 'graphql';
 
 let isInitialized: boolean;
 
-let _handler: Handler;
+let handler: Handler;
 
 export const main = createHandler(async (event, context, callback) => {
   if (!isInitialized) {
     await config.onInitialize();
     isInitialized = true;
   }
-  if (!_handler) {
-    _handler = new ApolloServer({
+  if (!handler) {
+    handler = new ApolloServer({
       context: async ({ context, event }): Promise<Context> => getContext({ context, event }),
       formatError: (e): GraphQLFormattedError => {
         error('[graphql]', stringify(e));
@@ -39,5 +39,5 @@ export const main = createHandler(async (event, context, callback) => {
       schema: _config,
     }).createHandler();
   }
-  return _handler(event, context, callback);
+  return handler(event, context, callback);
 });

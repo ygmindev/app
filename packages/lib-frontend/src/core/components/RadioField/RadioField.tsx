@@ -32,9 +32,9 @@ export const RadioField = <TType extends string = string>({
     onChange,
     value,
   });
-  const _isDisabled = elementState === ELEMENT_STATE.DISABLED;
-  const _outerCircleSize = theme.shape.height.s;
-  const _innerCircleSize = _outerCircleSize - theme.shape.spacing.s;
+  const isDisabled = elementState === ELEMENT_STATE.DISABLED;
+  const outerCircleSize = theme.shape.height.s;
+  const innerCircleSize = outerCircleSize - theme.shape.spacing.s;
 
   return (
     <Wrapper
@@ -42,10 +42,10 @@ export const RadioField = <TType extends string = string>({
       spacing={THEME_SIZE.SMALL}
       style={styles}>
       {options.map(({ icon, id, label }) => {
-        const _isActive = id === valueControlled;
-        const _color =
-          theme.colors.tone[_isActive ? color : THEME_COLOR.NEUTRAL][
-            _isDisabled || !_isActive ? THEME_ROLE.MUTED : THEME_ROLE.MAIN
+        const isActive = id === valueControlled;
+        const colorF =
+          theme.colors.tone[isActive ? color : THEME_COLOR.NEUTRAL][
+            isDisabled || !isActive ? THEME_ROLE.MUTED : THEME_ROLE.MAIN
           ];
         return (
           <Activatable key={id}>
@@ -61,17 +61,17 @@ export const RadioField = <TType extends string = string>({
 
                 <Wrapper
                   border
-                  borderColor={_color}
-                  height={_outerCircleSize}
+                  borderColor={colorF}
+                  height={outerCircleSize}
                   isCenter
-                  round={_outerCircleSize / 2}
-                  width={_outerCircleSize}>
-                  <Appearable isVisible={_isActive || isActive}>
+                  round={outerCircleSize / 2}
+                  width={outerCircleSize}>
+                  <Appearable isVisible={isActive || isActive}>
                     <Wrapper
-                      backgroundColor={_color}
-                      height={_innerCircleSize}
-                      round={_innerCircleSize / 2}
-                      width={_innerCircleSize}
+                      backgroundColor={colorF}
+                      height={innerCircleSize}
+                      round={innerCircleSize / 2}
+                      width={innerCircleSize}
                     />
                   </Appearable>
                 </Wrapper>

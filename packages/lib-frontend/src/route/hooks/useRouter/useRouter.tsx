@@ -19,7 +19,7 @@ export const useRouter = <
   const isLoading = useStore((state) => state.app.isLoading);
   const theme = useTheme();
 
-  const _update = async <TNextParams extends LocationParamsModel = LocationParamsModel>({
+  const update = async <TNextParams extends LocationParamsModel = LocationParamsModel>({
     callback,
     isBack,
   }: Pick<PathUpdateParamsModel<TNextParams>, 'isBack'> & {
@@ -40,7 +40,7 @@ export const useRouter = <
   };
 
   return {
-    back: async () => _update({ callback: back, isBack: true }),
+    back: async () => update({ callback: back, isBack: true }),
 
     isActive: ({ from, pathname, ...params }) =>
       isActive({
@@ -56,13 +56,13 @@ export const useRouter = <
       params,
       pathname,
     }: PathUpdateParamsModel<TNextParams>) =>
-      _update({ callback: () => push({ params, pathname: trimPathname(pathname) }), isBack }),
+      update({ callback: () => push({ params, pathname: trimPathname(pathname) }), isBack }),
 
     replace: async <TNextParams extends LocationParamsModel = LocationParamsModel>({
       isBack,
       params,
       pathname,
     }: PathUpdateParamsModel<TNextParams>) =>
-      _update({ callback: () => replace({ params, pathname: trimPathname(pathname) }), isBack }),
+      update({ callback: () => replace({ params, pathname: trimPathname(pathname) }), isBack }),
   };
 };

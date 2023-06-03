@@ -20,16 +20,16 @@ export const NavigationLayout = <TOption extends TranslatableOptionModel>({
 > => {
   const { styles } = useStyles({ props });
   const isMobile = useIsMobile();
-  const _isHorizontal = isHorizontal || isMobile;
+  const isHorizontalF = isHorizontal || isMobile;
   return (
     <Wrapper
       backgroundColor={THEME_COLOR.NEUTRAL}
       basis={0}
       grow
-      isRow={!_isHorizontal}
+      isRow={!isHorizontalF}
       style={styles}>
       <NavigationBar
-        isHorizontal={_isHorizontal}
+        isHorizontal={isHorizontalF}
         onChange={onChange}
         options={options}
         title={title}

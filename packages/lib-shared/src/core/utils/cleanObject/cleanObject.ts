@@ -9,16 +9,16 @@ export const cleanObject = <TType extends unknown>(value: TType): TType => {
   if (isTypeOf(value, Date) || isTypeOf(value, 'ObjectId')) {
     return value;
   }
-  const _value = isPlainObject(value) ? value : toPlainObject(value);
-  Object.keys(_value as object).forEach((k) => {
-    const v = (_value as Record<string, unknown>)[k];
+  const valueF = isPlainObject(value) ? value : toPlainObject(value);
+  Object.keys(valueF as object).forEach((k) => {
+    const v = (valueF as Record<string, unknown>)[k];
     CLEAN_OBJECT_KEYS.includes(k)
-      ? delete (_value as Record<string, unknown>)[k]
+      ? delete (valueF as Record<string, unknown>)[k]
       : isArray(v)
       ? v.map(cleanObject)
       : isPrimitive(v)
-      ? v === undefined && delete (_value as Record<string, unknown>)[k]
-      : ((_value as Record<string, unknown>)[k] = cleanObject(v));
+      ? v === undefined && delete (valueF as Record<string, unknown>)[k]
+      : ((valueF as Record<string, unknown>)[k] = cleanObject(v));
   });
-  return _value;
+  return valueF;
 };

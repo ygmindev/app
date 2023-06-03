@@ -26,7 +26,7 @@ export const _server = async ({
   port,
   root,
 }: _ServerParamsModel): Promise<_ServerModel> => {
-  const _i18n = _config();
+  const i18n = _config();
   const app = fastify();
   await app.register(fastifyMiddie);
   await app.register(fastifyCompress);
@@ -48,7 +48,7 @@ export const _server = async ({
 
   app.register(
     i18nextMiddleware.plugin as unknown as FastifyPluginCallback,
-    { i18next: _i18n } as FastifyRegisterOptions<Record<never, never>>,
+    { i18next: i18n } as FastifyRegisterOptions<Record<never, never>>,
   );
 
   app.get('*', async (req, res) => {

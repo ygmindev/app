@@ -7,10 +7,10 @@ import groupBy from 'lodash/groupBy';
 export const _groupBy = <TType>(
   ...[value, by, { isSort } = { isSort: true }]: _GroupByParamsModel<TType>
 ): _GroupByModel<TType> => {
-  const _result = groupBy(value, by);
+  const valueF = groupBy(value, by);
   return isSort
-    ? Object.keys(_result)
+    ? Object.keys(valueF)
         .sort()
-        .reduce((result, k) => ({ ...result, [k]: _result[k] }), {} as _GroupByModel<TType>)
-    : _result;
+        .reduce((result, k) => ({ ...result, [k]: valueF[k] }), {} as _GroupByModel<TType>)
+    : valueF;
 };

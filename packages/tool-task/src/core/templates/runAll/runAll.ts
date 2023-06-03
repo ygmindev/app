@@ -11,10 +11,10 @@ export const runAll: TaskParamsModel<RunAllParamsModel> = {
   name: 'runAll',
 
   task: async ({ name, options = {} }) => {
-    const _taskRegistry = Container.get(TaskRegistry);
+    const taskRegistry = Container.get(TaskRegistry);
     const { isParallel, patterns } = options;
     const tasks = filter(
-      _taskRegistry.registry,
+      taskRegistry.registry,
       (_v, k) =>
         k !== name &&
         patterns?.some((pattern) =>

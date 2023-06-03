@@ -14,10 +14,10 @@ describe(displayName, () => {
 
   test('works', async () => {
     const decorator: ClassDecorator = (Base) => {
-      const _test = Base.prototype.test;
+      const { test } = Base.prototype;
       Base.prototype.test = () => {
         fn();
-        return _test.apply(this);
+        return test.apply(this);
       };
     };
 

@@ -2,13 +2,13 @@ import type { SleepParamsModel } from '@lib/shared/core/utils/sleep/sleep.models
 import { debug } from '@lib/shared/logging/utils/logger/logger';
 
 export const sleep = ({ duration = 0, isVerbose = true }: SleepParamsModel = {}): Promise<void> => {
-  const _duration = duration || 0;
-  const _isVerbose = isVerbose || false;
+  const durationF = duration || 0;
+  const isVerboseF = isVerbose || false;
 
-  let countdown = _duration / 1000;
+  let countdown = durationF / 1000;
 
   const timer =
-    _isVerbose &&
+    isVerboseF &&
     setInterval(() => {
       debug(sleep, `${countdown}s`);
       countdown--;
@@ -19,8 +19,8 @@ export const sleep = ({ duration = 0, isVerbose = true }: SleepParamsModel = {})
 
   return new Promise((resolve) => {
     setTimeout(() => {
-      _isVerbose && clearInterval(timer as NodeJS.Timer);
+      isVerboseF && clearInterval(timer as NodeJS.Timer);
       return resolve();
-    }, _duration);
+    }, durationF);
   });
 };

@@ -42,7 +42,7 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
     },
   });
 
-  const _paymentMethods = useMemo(
+  const paymentMethodsF = useMemo(
     () =>
       data &&
       sort({
@@ -52,8 +52,8 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
     [currentUser?.paymentMethodPrimary, data],
   );
 
-  const _tPaymentMethod = t('billing:labels.paymentMethod');
-  const _tPaymentMethodAdd = t('core:labels.add', { value: _tPaymentMethod });
+  const tPaymentMethod = t('billing:labels.paymentMethod');
+  const tPaymentMethodAdd = t('core:labels.add', { value: tPaymentMethod });
 
   return (
     <MainLayout
@@ -69,7 +69,7 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
                   key={i}
                 />
               ))
-            : _paymentMethods?.map((value) => (
+            : paymentMethodsF?.map((value) => (
                 <PaymentMethodItem
                   key={value._id}
                   value={value}
@@ -82,7 +82,7 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
         <Button
           icon="add"
           onPress={() => push({ pathname: `/${FORM}/${PAYMENT_METHOD}` })}>
-          {_tPaymentMethodAdd}
+          {tPaymentMethodAdd}
         </Button>
       </Wrapper>
     </MainLayout>

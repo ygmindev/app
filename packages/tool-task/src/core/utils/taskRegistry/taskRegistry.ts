@@ -30,37 +30,37 @@ export class TaskRegistry extends _TaskRegistry implements TaskRegistryModel {
     target,
     task,
   }: TaskParamsModel<TType>): void => {
-    const _target = target && kebabCase(target);
-    const _name = [_target, kebabCase(name)].filter(Boolean).join('-');
-    const _alias = kebabCase(_name)
+    const targetF = target && kebabCase(target);
+    const nameF = [targetF, kebabCase(name)].filter(Boolean).join('-');
+    const alias = kebabCase(nameF)
       .split('-')
       .map((p) => p.charAt(0))
       .join('');
 
-    if (this._aliases[_alias]) {
-      throw new DuplicateError(`alias ${_alias} (${_name}) exists`);
+    if (this._aliases[alias]) {
+      throw new DuplicateError(`alias ${alias} (${nameF}) exists`);
     }
 
-    this._aliases[_alias] = _name;
+    this._aliases[alias] = nameF;
 
-    [_name, _alias].forEach((value) => {
+    [nameF, alias].forEach((value) => {
       this._register(value, async () => {
-        const _root = root ?? (target ? fromPackages(target) : fromRoot());
-        process.chdir(_root);
+        const rootF = root ?? (target ? fromPackages(target) : fromRoot());
+        process.chdir(rootF);
 
         setEnvironment({ environment, overrides });
 
-        const _onAfter =
+        const onAfterF =
           onAfter &&
           debounce(async () => {
             await sequence(onAfter.map((value) => (isString(value) ? this.get(value) : value)));
           });
 
-        _onAfter &&
+        onAfterF &&
           ['exit', 'SIGINT', 'SIGUSR1', 'SIGUSR2', 'uncaughtException', 'SIGTERM'].forEach(
             (event) =>
               process.on(event, async () => {
-                _onAfter && (await _onAfter());
+                onAfterF && (await onAfterF());
                 process.exit();
               }),
           );
@@ -69,32 +69,32 @@ export class TaskRegistry extends _TaskRegistry implements TaskRegistryModel {
           (await sequence(onBefore.map((value) => (isString(value) ? this.get(value) : value))));
 
         try {
-          info('running', _name);
+          info('running', nameF);
 
           const {
             error: _error,
             message,
             status,
-          } = await task({ name: _name, options, root: _root, target: _target });
+          } = await task({ name: nameF, options, root: rootF, target: targetF });
 
-          _onAfter && (await _onAfter());
+          onAfterF && (await onAfterF());
 
           switch (status) {
             case TASK_STATUS.SUCCESS: {
-              info(`[${_name}]`, message || 'completed');
+              info(`[${nameF}]`, message || 'completed');
               break;
             }
             case TASK_STATUS.WARNING: {
-              warn(`[${_name}]`, message || 'completed with warnings');
+              warn(`[${nameF}]`, message || 'completed with warnings');
               break;
             }
             default: {
-              error(`[${_name}]`, _error?.message || message || 'failed');
+              error(`[${nameF}]`, _error?.message || message || 'failed');
               break;
             }
           }
         } catch (e) {
-          error(`[${_name}] failed`, (e as Error).stack);
+          error(`[${nameF}] failed`, (e as Error).stack);
         }
       });
     });

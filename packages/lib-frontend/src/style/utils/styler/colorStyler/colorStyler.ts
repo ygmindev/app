@@ -11,6 +11,6 @@ export const colorStyler: StylerModel<ColorStylerParamsModel, TextStyleModel> = 
   },
   theme,
 ) => {
-  const _color = theme.colors.tone[color as ThemeColorModel];
-  return cleanObject({ color: _color ? _color[colorRole] : color });
+  const colorF = theme.colors.tone[color as ThemeColorModel];
+  return cleanObject({ color: colorF ? colorF[colorRole] : color });
 };

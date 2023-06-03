@@ -2,8 +2,8 @@ import type { LocaleReducerModel } from '@lib/frontend/locale/stores/localeStore
 
 export const LOCALE_REDUCER: LocaleReducerModel = {
   actions: {
-    timezoneIsAutomaticSet: (store, value) => {
-      store.set('timezoneIsAutomatic', value);
+    isTimezoneAutomaticSet: (store, value) => {
+      store.set('isTimezoneAutomatic', value);
     },
 
     timezoneSet: (store, value) => {
@@ -12,6 +12,6 @@ export const LOCALE_REDUCER: LocaleReducerModel = {
   },
 
   initialState: {
-    timezoneIsAutomatic: true,
+    isTimezoneAutomatic: true,
   },
 };

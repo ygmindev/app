@@ -30,12 +30,12 @@ export const _exportRendererServer = ({
   passToClient: ['pageProps', 'context'],
 
   render: async ({ Page, context, pageProps }) => {
-    const _store = new Store({ cookies: context?.state?.cookies, reducers: ROOT_REDUCERS });
-    const _context: RootContextModel = {
+    const store = new Store({ cookies: context?.state?.cookies, reducers: ROOT_REDUCERS });
+    const contextF: RootContextModel = {
       ...context,
-      [STATE]: { initialState: await _store.getState() } as RootStateContextModel,
+      [STATE]: { initialState: await store.getState() } as RootStateContextModel,
     };
-    const App: FCModel = () => render({ children: <Page {...pageProps} />, context: _context });
+    const App: FCModel = () => render({ children: <Page {...pageProps} />, context: contextF });
     AppRegistry.registerComponent('App', () => App);
     const { element, getStyleElement } = AppRegistry.getApplication('App', {});
     const styleSheet = ReactDOMServer.renderToStaticMarkup(getStyleElement());
@@ -63,17 +63,15 @@ export const _exportRendererServer = ({
       documentHtml,
 
       pageContext: async () => {
-        const _i18n = context?.locale?.i18n;
-        const _pageContext: RootContextModel = {
+        const i18n = context?.locale?.i18n;
+        const pageContext: RootContextModel = {
           ...context,
-          [LOCALE]: _i18n
-            ? { i18n: _i18n, store: getLocaleStoreFromI18n({ i18n: _i18n }) }
-            : undefined,
+          [LOCALE]: i18n ? { i18n, store: getLocaleStoreFromI18n({ i18n }) } : undefined,
         };
         return {
-          context: ssrContextKeys && pick(_pageContext, ssrContextKeys),
+          context: ssrContextKeys && pick(pageContext, ssrContextKeys),
           enableEagerStreaming: true,
-          redirectTo: _pageContext.route?.redirect,
+          redirectTo: pageContext.route?.redirect,
         };
       },
     };

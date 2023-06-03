@@ -19,11 +19,11 @@ export class _Storage implements _StorageModel {
       const storage = this._storages[i];
       if (storage) {
         try {
-          const _result = await storage.getItem<TType>(key);
-          if (_result) {
+          const result = await storage.getItem<TType>(key);
+          if (result) {
             process.env.NODE_ENV === 'development' &&
-              debug('[Storage] get', key, _result, this._backends[i]);
-            return _result;
+              debug('[Storage] get', key, result, this._backends[i]);
+            return result;
           }
         } catch {
           continue;

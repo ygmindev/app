@@ -36,21 +36,21 @@ export const spacingStyler: StylerModel<SpacingStylerParamsModel> = (
   },
   theme,
 ) => {
-  const _m = getSpacing(m, theme);
-  const _mHorizontal = _m || getSpacing(mHorizontal, theme);
-  const _mVertical = _m || getSpacing(mVertical, theme);
-  const _p = getSpacing(p, theme);
-  const _pHorizontal = _p || getSpacing(pHorizontal, theme);
-  const _pVertical = _p || getSpacing(pVertical, theme);
+  const mF = getSpacing(m, theme);
+  const mHorizontalF = mF || getSpacing(mHorizontal, theme);
+  const mVerticalF = mF || getSpacing(mVertical, theme);
+  const pF = getSpacing(p, theme);
+  const pHorizontalF = pF || getSpacing(pHorizontal, theme);
+  const pVerticalF = pF || getSpacing(pVertical, theme);
   return cleanObject({
-    margin: _m,
-    marginBottom: _mVertical || getSpacing(mBottom, theme),
-    marginLeft: _mHorizontal || getSpacing(mLeft, theme),
-    marginRight: _mHorizontal || getSpacing(mRight, theme),
-    marginTop: _mVertical || getSpacing(mTop, theme),
-    paddingBottom: _pVertical || getSpacing(pBottom, theme),
-    paddingLeft: _pHorizontal || getSpacing(pLeft, theme),
-    paddingRight: _pHorizontal || getSpacing(pRight, theme),
-    paddingTop: _pVertical || getSpacing(pTop, theme),
+    margin: mF,
+    marginBottom: mVerticalF || getSpacing(mBottom, theme),
+    marginLeft: mHorizontalF || getSpacing(mLeft, theme),
+    marginRight: mHorizontalF || getSpacing(mRight, theme),
+    marginTop: mVerticalF || getSpacing(mTop, theme),
+    paddingBottom: pVerticalF || getSpacing(pBottom, theme),
+    paddingLeft: pHorizontalF || getSpacing(pLeft, theme),
+    paddingRight: pHorizontalF || getSpacing(pRight, theme),
+    paddingTop: pVerticalF || getSpacing(pTop, theme),
   });
 };

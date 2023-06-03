@@ -13,7 +13,7 @@ export const _web = ({
   isSsr,
   publicDir,
 }: ReturnTypeModel<WebConfigModel>): ReturnTypeModel<_WebConfigModel> => {
-  const _bundleConfig = bundleConfig();
+  const bundleConfigF = bundleConfig();
   return merge(
     [
       {
@@ -24,11 +24,11 @@ export const _web = ({
         publicDir: toRelative({ from: fromWorking(), to: fromStatic(publicDir) }),
 
         server: {
-          watch: (_bundleConfig.build?.watch as WatchOptions) || undefined,
+          watch: (bundleConfigF.build?.watch as WatchOptions) || undefined,
         },
       },
 
-      _bundleConfig,
+      bundleConfigF,
     ],
     MERGE_STRATEGY.DEEP_APPEND,
   );

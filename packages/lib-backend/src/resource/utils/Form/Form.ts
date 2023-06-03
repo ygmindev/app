@@ -8,11 +8,11 @@ export const Form = <TType extends unknown>({
   Resource,
   name,
 }: FormParamsModel<TType>): ConstructorModel<TType> => {
-  const _name = `${name}Form`;
-  const _isResource = Resource && isFunction(Resource);
+  const nameF = `${name}Form`;
+  const isResource = Resource && isFunction(Resource);
 
-  @withEntity({ name: _name })
-  class _Form extends (_isResource ? (Resource as unknown as ConstructorModel) : EntityResource) {}
+  @withEntity({ name: nameF })
+  class _Form extends (isResource ? (Resource as unknown as ConstructorModel) : EntityResource) {}
 
   return _Form as ConstructorModel<TType>;
 };

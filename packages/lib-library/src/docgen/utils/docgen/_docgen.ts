@@ -19,43 +19,43 @@ import {
   sys,
 } from 'typescript';
 
-const _fileCache = new Map();
+const fileCache = new Map();
 
 export const _docgen = (params: _DocgenParamsModel): _DocgenModel => {
-  const _tsconfigFile = fromWorking('tsconfig.json');
-  const _parser = withCustomConfig(_tsconfigFile, {
+  const tsconfigFile = fromWorking('tsconfig.json');
+  const parser = withCustomConfig(tsconfigFile, {
     savePropValueAsString: true,
     shouldRemoveUndefinedFromOptional: true,
   });
 
-  const _service: LanguageService = createLanguageService(
+  const service: LanguageService = createLanguageService(
     {
       fileExists: sys.fileExists,
       getCompilationSettings: () =>
         parseJsonConfigFileContent(
-          readConfigFile(_tsconfigFile, (filename) => readFileSync(filename, 'utf8')).config,
+          readConfigFile(tsconfigFile, (filename) => readFileSync(filename, 'utf8')).config,
           sys,
-          dirname(_tsconfigFile),
+          dirname(tsconfigFile),
           {},
-          _tsconfigFile,
+          tsconfigFile,
         ).options,
       getCurrentDirectory: fromWorking,
       getDefaultLibFileName: getDefaultLibFilePath,
-      getScriptFileNames: () => [..._fileCache.keys()],
+      getScriptFileNames: () => [...fileCache.keys()],
       getScriptSnapshot: (key) => {
         if (existsSync(key)) {
-          let _file = _fileCache.get(key);
-          if (_file === undefined) {
-            _file = { text: readFileSync(key, 'utf-8'), version: 0 };
-            _fileCache.set(key, _file);
+          let file = fileCache.get(key);
+          if (file === undefined) {
+            file = { text: readFileSync(key, 'utf-8'), version: 0 };
+            fileCache.set(key, file);
           }
-          return ScriptSnapshot.fromString(_file.text);
+          return ScriptSnapshot.fromString(file.text);
         }
         return undefined;
       },
       getScriptVersion: (key) => {
-        const _file = _fileCache.get(key);
-        return (_file && _file.version.toString()) || '';
+        const file = fileCache.get(key);
+        return (file && file.version.toString()) || '';
       },
       readDirectory: sys.readDirectory,
       readFile: sys.readFile,
@@ -63,13 +63,13 @@ export const _docgen = (params: _DocgenParamsModel): _DocgenModel => {
     createDocumentRegistry(),
   );
 
-  _fileCache.set(params, { text: readFileSync(params, 'utf-8'), version: 0 });
-  const _parsed = _parser.parseWithProgramProvider(params, () => _service.getProgram() as Program);
-  if (_parsed && _parsed[0]) {
+  fileCache.set(params, { text: readFileSync(params, 'utf-8'), version: 0 });
+  const parsed = parser.parseWithProgramProvider(params, () => service.getProgram() as Program);
+  if (parsed && parsed[0]) {
     return {
-      name: _parsed[0].displayName,
+      name: parsed[0].displayName,
       propTypes: sortBy(
-        map(_parsed[0].props, (v, k) => ({
+        map(parsed[0].props, (v, k) => ({
           isOptional: v.required ? false : true,
           name: k,
           type: v.type.name,

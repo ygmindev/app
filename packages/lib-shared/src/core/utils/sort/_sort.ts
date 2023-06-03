@@ -9,10 +9,10 @@ export const _sort = <TType>({ by, value }: _SortParamsModel<TType>): _SortModel
       ? reduce(
           by,
           (result, v, k) => {
-            const [_key, _params] = isArray(v) ? [v[0], v[1] ? 1 : -1] : [v, undefined];
+            const [key, _params] = isArray(v) ? [v[0], v[1] ? 1 : -1] : [v, undefined];
             return k
-              ? result.thenBy(_key as keyof TType, _params as SortOrder)
-              : firstBy(_key as keyof TType, _params as SortOrder);
+              ? result.thenBy(key as keyof TType, _params as SortOrder)
+              : firstBy(key as keyof TType, _params as SortOrder);
           },
           undefined as unknown as IThenBy<TType>,
         )

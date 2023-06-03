@@ -25,7 +25,7 @@ export const _test = ({
   testExtensions,
   timeout,
 }: ReturnTypeModel<TestConfigModel>): ReturnTypeModel<_TestConfigModel> => {
-  const _bundleConfig = bundleConfig();
+  const bundleConfigF = bundleConfig();
   return {
     cacheDirectory: cachePath,
 
@@ -35,14 +35,14 @@ export const _test = ({
 
     coverageReporters: ['lcov'],
 
-    globals: _bundleConfig.define,
+    globals: bundleConfigF.define,
 
     maxWorkers: -1,
 
-    moduleFileExtensions: _bundleConfig.extensions.map((ext) => trimStart(ext, '.')),
+    moduleFileExtensions: bundleConfigF.extensions.map((ext) => trimStart(ext, '.')),
 
     moduleNameMapper: {
-      ...mapKeys(_bundleConfig.aliases, (k) => `^${k}$`),
+      ...mapKeys(bundleConfigF.aliases, (k) => `^${k}$`),
       ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: fromRoot() }),
       [`\\.(${fileExtensions.join('|')})$`]: join(mockPath, 'file'),
     },
@@ -71,16 +71,16 @@ export const _test = ({
 
     setupFilesAfterEnv: [fromConfig('node/test/_initialize.ts')],
 
-    testEnvironment: _bundleConfig.platform === PLATFORM.WEB ? 'jsdom' : 'node',
+    testEnvironment: bundleConfigF.platform === PLATFORM.WEB ? 'jsdom' : 'node',
 
     testMatch: reduce(
       testExtensions,
       (result, ext) => {
-        const _ext = trim(ext, '.');
+        const extF = trim(ext, '.');
         return [
           ...result,
-          `<rootDir>/src/**/${match}.${_ext}`,
-          `<rootDir>/src/**/_${match}.${_ext}`,
+          `<rootDir>/src/**/${match}.${extF}`,
+          `<rootDir>/src/**/_${match}.${extF}`,
         ];
       },
       [] as Array<string>,
@@ -100,8 +100,8 @@ export const _test = ({
       ],
     },
 
-    transformIgnorePatterns: _bundleConfig.externals
-      ? [`node_modules/(?!(${_bundleConfig.externals.join('|')})/)`]
+    transformIgnorePatterns: bundleConfigF.externals
+      ? [`node_modules/(?!(${bundleConfigF.externals.join('|')})/)`]
       : [],
 
     watch: isWatch,

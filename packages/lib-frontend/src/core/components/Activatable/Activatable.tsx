@@ -16,36 +16,36 @@ export const Activatable: SFCModel<ActivatablePropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const [isActive, isActiveSet] = useState<boolean>();
-  const _children = isFunction(children) ? children(isActive) : children;
+  const childrenF = isFunction(children) ? children(isActive) : children;
 
-  const _handleToggle = (value?: boolean): void => {
+  const handleToggle = (value?: boolean): void => {
     isFunction(children) && isActiveSet(value || false);
     value ? onActive && onActive() : onInactive && onInactive();
   };
 
-  const _handleGrant = (): void => {
-    const onPressIn = _children?.props.onPressIn as CallableModel;
+  const handleGrant = (): void => {
+    const onPressIn = childrenF?.props.onPressIn as CallableModel;
     onPressIn && onPressIn();
-    _handleToggle(true);
+    handleToggle(true);
   };
 
-  const _handleRelease = (): void => {
-    const onPressOut = _children?.props.onPressOut as CallableModel;
+  const handleRelease = (): void => {
+    const onPressOut = childrenF?.props.onPressOut as CallableModel;
     onPressOut && onPressOut();
-    _handleToggle(false);
+    handleToggle(false);
   };
 
-  return _children
-    ? cloneElement(_children, {
+  return childrenF
+    ? cloneElement(childrenF, {
         onMouseEnter: isHoverable
-          ? () => (_isHoverable() ? _handleToggle(true) : undefined)
+          ? () => (_isHoverable() ? handleToggle(true) : undefined)
           : undefined,
-        onMouseLeave: isHoverable ? () => _handleToggle(false) : undefined,
-        onPressIn: isPressable ? _handleGrant : undefined,
-        onPressOut: isPressable ? _handleRelease : undefined,
-        onResponderGrant: isPressable ? _handleGrant : undefined,
-        onResponderRelease: isPressable ? _handleRelease : undefined,
-        style: { ..._children.props.style, ...styles },
+        onMouseLeave: isHoverable ? () => handleToggle(false) : undefined,
+        onPressIn: isPressable ? handleGrant : undefined,
+        onPressOut: isPressable ? handleRelease : undefined,
+        onResponderGrant: isPressable ? handleGrant : undefined,
+        onResponderRelease: isPressable ? handleRelease : undefined,
+        style: { ...childrenF.props.style, ...styles },
       })
     : null;
 };

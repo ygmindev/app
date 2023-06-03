@@ -14,7 +14,7 @@ export const withInput = <
   method,
   name,
 }: WithInputParamsModel<TMethod, TType, TForm, TRoot>): ParameterDecorator => {
-  const _name = `${name}${method}`;
-  const _Input = Input({ Resource, RootResource, method, name: _name });
-  return ArgDecorator('input', () => _Input);
+  const nameF = `${name}${method}`;
+  const InputF = Input({ Resource, RootResource, method, name: nameF });
+  return ArgDecorator('input', () => InputF);
 };

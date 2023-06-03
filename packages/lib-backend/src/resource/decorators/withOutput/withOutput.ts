@@ -7,7 +7,7 @@ import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import type { ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
 import { Mutation, Query } from 'type-graphql';
 
-const _getOperation = (method: ResourceMethodTypeModel): typeof Mutation | typeof Query => {
+const getOperation = (method: ResourceMethodTypeModel): typeof Mutation | typeof Query => {
   switch (method) {
     case RESOURCE_METHOD_TYPE.GET:
     case RESOURCE_METHOD_TYPE.GET_MANY:
@@ -31,11 +31,11 @@ export const withOutput =
     name,
   }: WithOutputParamsModel<TMethod, TType, TRoot>): MethodDecorator =>
   (target, propertyKey, descriptor) => {
-    const _name = `${name}${method}`;
-    const _Output = Output({ Resource, RootResource, method, name: _name });
+    const nameF = `${name}${method}`;
+    const OutputF = Output({ Resource, RootResource, method, name: nameF });
 
     withAccess({ level })(target, propertyKey, descriptor);
-    _getOperation(method)(() => _Output || Boolean, { name: _name })(
+    getOperation(method)(() => OutputF || Boolean, { name: nameF })(
       target,
       propertyKey,
       descriptor,

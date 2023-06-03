@@ -10,8 +10,8 @@ export const _useRouter = <
   const location = useLocation();
   const params = useParams();
 
-  const _params = { ...location.state, ...params };
-  delete _params['*'];
+  const paramsF = { ...location.state, ...params };
+  delete paramsF['*'];
 
   return {
     back: async () => navigate(-1),
@@ -25,7 +25,7 @@ export const _useRouter = <
     },
 
     location: {
-      params: _params,
+      params: paramsF,
       pathname: location.pathname,
     },
 

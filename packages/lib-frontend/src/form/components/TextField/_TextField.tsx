@@ -149,7 +149,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
       },
     };
 
-    const leftElementFinal = (
+    const leftElementF = (
       <Appearable
         isCenter
         isVisible={!isEmpty(value) || elementState === ELEMENT_STATE.ACTIVE || !label}
@@ -243,7 +243,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
               isOverflowHidden
               isRow
               zIndex={-1}>
-              {leftElementFinal}
+              {leftElementF}
 
               {Component({
                 ...inputProps,

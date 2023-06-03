@@ -8,8 +8,8 @@ export const _SwitchField = composeComponent<_SwitchFieldPropsModel, WrapperProp
   Component: Wrapper,
 
   getProps: ({ elementState, iconActive, iconInactive, value }, theme) => {
-    const _value = value === 'true';
-    const _isDisabled =
+    const valueF = value === 'true';
+    const isDisabled =
       elementState === ELEMENT_STATE.DISABLED || elementState === ELEMENT_STATE.LOADING;
 
     return {
@@ -35,7 +35,7 @@ export const _SwitchField = composeComponent<_SwitchFieldPropsModel, WrapperProp
       //     value={_value}
       //   />
       // ),
-      opacity: _isDisabled ? theme.colors.disabledOpacity : 1,
+      opacity: isDisabled ? theme.colors.disabledOpacity : 1,
     };
   },
 });

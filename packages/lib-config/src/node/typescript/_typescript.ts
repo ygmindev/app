@@ -17,13 +17,13 @@ export const _typescript = ({
   rootDir,
   types,
 }: TypescriptConfigModel): ReturnTypeModel<_TypescriptConfigModel> => {
-  const _root = toRelative({ from: fromBuild(), to: rootDir });
+  const root = toRelative({ from: fromBuild(), to: rootDir });
   return {
     compilerOptions: {
       allowJs: true,
       allowSyntheticDefaultImports: true,
       alwaysStrict: true,
-      baseUrl: _root,
+      baseUrl: root,
       emitDecoratorMetadata: true,
       esModuleInterop: true,
       experimentalDecorators: true,
@@ -52,7 +52,7 @@ export const _typescript = ({
         ),
       },
       resolveJsonModule: true,
-      rootDir: _root,
+      rootDir: root,
       skipDefaultLibCheck: true,
       skipLibCheck: true,
       strict: true,

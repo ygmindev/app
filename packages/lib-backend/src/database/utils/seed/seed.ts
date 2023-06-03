@@ -18,17 +18,17 @@ export const seed = async ({ names }: SeedParamsModel = {}): Promise<void> => {
     await import(service);
   }
 
-  const _database = Container.get(Database, DATABASE_TYPE.MONGO);
-  await _database.connect();
+  const database = Container.get(Database, DATABASE_TYPE.MONGO);
+  await database.connect();
   for (const resource of SEED_DATA) {
     const { data, name } = resource;
     if (!names || names.includes(name)) {
-      const repository = _database.getRepository({ name });
+      const repository = database.getRepository({ name });
       await repository.clear();
       const service = Container.get<EntityResourceServiceModel<unknown, unknown>>(`${name}Service`);
       for (const form of data) {
-        const _form = isFunction(form) ? await form() : form;
-        service.create && (await service.create({ form: _form }));
+        const formF = isFunction(form) ? await form() : form;
+        service.create && (await service.create({ form: formF }));
       }
     }
   }

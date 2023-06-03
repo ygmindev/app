@@ -14,7 +14,7 @@ import type { ComponentType, RefObject } from 'react';
 import { forwardRef, useImperativeHandle } from 'react';
 import { Pressable } from 'react-native';
 
-const _PressableAnimatable = animatable({ Component: Pressable as ComponentType });
+const PressableAnimatable = animatable({ Component: Pressable as ComponentType });
 
 export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewPropsModel> =
   forwardRef(({ animation, children, elementState, testID, ...props }, ref) => {
@@ -34,15 +34,15 @@ export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewP
       toState,
     }));
 
-    const _Component =
+    const Component =
       props.onPress || props.onPressIn || props.onPressOut
-        ? (_PressableAnimatable as ComponentType)
+        ? (PressableAnimatable as ComponentType)
         : props.isHorizontalScrollable || props.isVerticalScrollable || props.onScroll
         ? MotiScrollView
         : MotiView;
 
     return isRender ? (
-      <_Component
+      <Component
         {...(_viewParams.getProps && _viewParams.getProps({ ...props, style: styles }, theme))}
         {...(_viewParamsPressable.getProps &&
           _viewParamsPressable.getProps({ ...props, style: styles }, theme))}
@@ -55,6 +55,6 @@ export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewP
         style={styles}
         testID={testID}>
         {children}
-      </_Component>
+      </Component>
     ) : null;
   });

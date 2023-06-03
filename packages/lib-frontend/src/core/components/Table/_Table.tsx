@@ -51,13 +51,13 @@ export const _Table = forwardRef(
       deselectRows: () => gridApi && gridApi.deselectAll(),
     }));
 
-    const _handleSelect = (): void => {
+    const handleSelect = (): void => {
       const selectedRows = gridApi ? gridApi.getSelectedRows() : [];
       onSelect && onSelect(selectedRows);
     };
 
-    const _unhiddenColumnIndex = columns.findIndex(({ isHidden }) => !isHidden);
-    const _getColumnDef = <TValue,>(
+    const unhiddenColumnIndex = columns.findIndex(({ isHidden }) => !isHidden);
+    const getColumnDef = <TValue,>(
       {
         flex,
         formatter,
@@ -72,11 +72,10 @@ export const _Table = forwardRef(
       i: number,
     ): ColDef => {
       const definition: ColDef = {
-        checkboxSelection: select !== undefined && i === _unhiddenColumnIndex,
+        checkboxSelection: select !== undefined && i === unhiddenColumnIndex,
         field: id as string,
         flex,
-        headerCheckboxSelection:
-          select === TABLE_SELECT_TYPE.MULTIPLE && i === _unhiddenColumnIndex,
+        headerCheckboxSelection: select === TABLE_SELECT_TYPE.MULTIPLE && i === unhiddenColumnIndex,
         headerName: label ? t(label) : undefined,
         hide: isHidden,
         maxWidth: width,
@@ -109,7 +108,7 @@ export const _Table = forwardRef(
         style={{ flex: 1 }}>
         <AgGridReact
           animateRows
-          columnDefs={columns.map(_getColumnDef)}
+          columnDefs={columns.map(getColumnDef)}
           debounceVerticalScrollbar
           loadingOverlayComponent={Text}
           onGridReady={async ({ api, columnApi }) => {
@@ -125,7 +124,7 @@ export const _Table = forwardRef(
               isFullWidth ? gridApi.sizeColumnsToFit() : columnApi.autoSizeAllColumns();
             }
           }}
-          onSelectionChanged={_handleSelect}
+          onSelectionChanged={handleSelect}
           overlayNoRowsTemplate={t('core:messages.nothingToShow')}
           rowData={data}
           rowHeight={rowHeight}

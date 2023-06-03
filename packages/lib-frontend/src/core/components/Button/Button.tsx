@@ -45,23 +45,23 @@ export const Button: SFCModel<ButtonPropsModel> = ({
     animation?: AnimationModel;
     childColorRole?: ThemeRoleModel;
   }>(() => {
-    const _color = theme.colors.tone[color];
-    const _activeColor = palette({ color: _color.main, lightness: theme.colors.activeLightness });
+    const colorF = theme.colors.tone[color];
+    const activeColor = palette({ color: colorF.main, lightness: theme.colors.activeLightness });
     switch (type) {
       case BUTTON_TYPE.FILLED: {
         return {
           animation: {
             states: {
-              [ELEMENT_STATE.ACTIVE]: { backgroundColor: _activeColor, opacity: 1 },
+              [ELEMENT_STATE.ACTIVE]: { backgroundColor: activeColor, opacity: 1 },
               [ELEMENT_STATE.DISABLED]: {
-                backgroundColor: _activeColor,
+                backgroundColor: activeColor,
                 opacity: theme.colors.disabledOpacity,
               },
               [ELEMENT_STATE.LOADING]: {
-                backgroundColor: _activeColor,
+                backgroundColor: activeColor,
                 opacity: theme.colors.disabledOpacity,
               },
-              [ELEMENT_STATE.INACTIVE]: { backgroundColor: _color.main, opacity: 1 },
+              [ELEMENT_STATE.INACTIVE]: { backgroundColor: colorF.main, opacity: 1 },
             },
           },
           childColorRole: THEME_ROLE.MAIN_CONTRAST,
@@ -73,7 +73,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
           animation: {
             states: {
               [ELEMENT_STATE.ACTIVE]: {
-                backgroundColor: _color.muted,
+                backgroundColor: colorF.muted,
                 opacity: 1,
               },
               [ELEMENT_STATE.DISABLED]: {
@@ -97,7 +97,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
     }
   }, [color, theme, type]);
 
-  let _children = children && (
+  let childrenF = children && (
     <TranslatableText
       align={FONT_ALIGN.CENTER}
       color={color}
@@ -106,26 +106,26 @@ export const Button: SFCModel<ButtonPropsModel> = ({
     </TranslatableText>
   );
   if (icon) {
-    const _icon = (
+    const iconF = (
       <Icon
         color={color}
         colorRole={childColorRole}
         icon={icon}
       />
     );
-    _children = _children ? (
+    childrenF = childrenF ? (
       <Wrapper isRowAlign>
-        {_icon}
+        {iconF}
 
-        {_children}
+        {childrenF}
       </Wrapper>
     ) : (
-      _icon
+      iconF
     );
   }
 
-  const _height = theme.shape.height[size];
-  const _isLoading = valueControlled === ELEMENT_STATE.LOADING;
+  const height = theme.shape.height[size];
+  const isLoading = valueControlled === ELEMENT_STATE.LOADING;
   return (
     <Pressable
       {...props}
@@ -135,23 +135,23 @@ export const Button: SFCModel<ButtonPropsModel> = ({
       borderColor={type === BUTTON_TYPE.TRANSPARENT ? color : undefined}
       borderRole={THEME_ROLE.MAIN}
       elementState={valueControlled}
-      height={_height}
+      height={height}
       justify={FLEX_JUSTIFY.CENTER}
       onElementStateChange={valueControlledSet}
       position={SHAPE_POSITION.RELATIVE}
-      width={children ? undefined : _height}>
+      width={children ? undefined : height}>
       <>
         <Appearable
           animation={{ isLazy: false }}
           isScalable={false}
-          isVisible={!_isLoading}>
-          {_children}
+          isVisible={!isLoading}>
+          {childrenF}
         </Appearable>
 
         <Appearable
           isAbsoluteFill
           isCenter
-          isVisible={_isLoading}>
+          isVisible={isLoading}>
           <Loading
             color={color}
             colorRole={childColorRole}

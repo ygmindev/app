@@ -25,26 +25,26 @@ export const CountryField: SFCModel<CountryFieldPropsModel> = ({
     value,
   });
 
-  const _countries = useCountries();
-  const _options = useMemo(
+  const countries = useCountries();
+  const options = useMemo(
     () =>
-      _countries.map(({ callingCode, code, name }) => ({
+      countries.map(({ callingCode, code, name }) => ({
         code,
         id: callingCode,
         label: `${name} +${callingCode}`,
       })),
-    [_countries],
+    [countries],
   );
 
   useAsync(
     {
       onMount: async (isMounted) => {
-        const _country = isMounted() && (await currentCountry());
-        const _value = _country && find(_options, ({ code }) => code.includes(_country));
-        isMounted() && _value && valueControlledSet(_value.id);
+        const country = isMounted() && (await currentCountry());
+        const value = country && find(options, ({ code }) => code.includes(country));
+        isMounted() && value && valueControlledSet(value.id);
       },
     },
-    [_options],
+    [options],
   );
 
   return (
@@ -53,7 +53,7 @@ export const CountryField: SFCModel<CountryFieldPropsModel> = ({
       icon="globe"
       label={t('core:labels.country')}
       onChange={valueControlledSet}
-      options={_options}
+      options={options}
       style={styles}
       testID={testID}
       value={valueControlled}

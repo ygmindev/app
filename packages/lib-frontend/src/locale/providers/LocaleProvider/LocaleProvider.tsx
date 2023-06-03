@@ -8,14 +8,14 @@ import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 
 export const LocaleProvider: SFCModel<LocaleProviderPropsModel> = ({ children, value }) => {
   const actions = useActions();
-  const _timezoneIsAutomatic = useStore((state) => state.locale.timezoneIsAutomatic);
+  const isTimezoneAutomatic = useStore((state) => state.locale.isTimezoneAutomatic);
   useAsync(
     {
       onMount: async (isMounted) => {
-        isMounted() && _timezoneIsAutomatic && actions?.locale.timezoneSet(currentTimezone());
+        isMounted() && isTimezoneAutomatic && actions?.locale.timezoneSet(currentTimezone());
       },
     },
-    [_timezoneIsAutomatic],
+    [isTimezoneAutomatic],
   );
   return <_LocaleProvider value={value}>{children}</_LocaleProvider>;
 };

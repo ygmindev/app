@@ -9,12 +9,12 @@ export const _palette = ({
   color,
   lightness = 0.5,
 }: _PaletteParamsModel): _PaletteModel => {
-  let _color = Color(color);
+  let colorF = Color(color);
   if (alpha < 1.0) {
-    _color = _color.alpha(alpha);
+    colorF = colorF.alpha(alpha);
   }
   if (lightness !== 0.5) {
-    _color = _color.lightness(lightness);
+    colorF = colorF.lightness(lightness);
   }
-  return _color.hexa();
+  return colorF.hexa();
 };

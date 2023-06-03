@@ -24,7 +24,7 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ..
   const { styles } = useStyles({ props });
   const theme = useTheme();
   const { location, push } = useRouter();
-  const _previous = route.header?.previous;
+  const previous = route.header?.previous;
   const ref = useRef<WrapperRefModel>(null);
   const isLoading = useStore((state) => state.app.isLoading);
   return (
@@ -42,13 +42,13 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ..
       spacing
       style={styles}
       testID={testID}>
-      {_previous && (
+      {previous && (
         <Button
           elementState={isLoading ? ELEMENT_STATE.DISABLED : undefined}
           icon="chevronLeft"
           onPress={() => {
             ref.current?.toState(ELEMENT_STATE.INACTIVE);
-            push({ isBack: true, pathname: _previous });
+            push({ isBack: true, pathname: previous });
           }}
           type={BUTTON_TYPE.INVISIBLE}
         />

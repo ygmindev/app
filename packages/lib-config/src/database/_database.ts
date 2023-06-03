@@ -13,7 +13,7 @@ export const _database = ({
   type,
   username,
 }: ReturnTypeModel<DatabaseConfigModel>): ReturnTypeModel<_DatabaseConfigModel> => {
-  const _config: ReturnTypeModel<_DatabaseConfigModel> = {
+  const config: ReturnTypeModel<_DatabaseConfigModel> = {
     clientUrl: host,
     dbName: database,
     debug: false,
@@ -23,8 +23,8 @@ export const _database = ({
     type,
   };
   if (username && password) {
-    _config.user = username;
-    _config.password = password;
+    config.user = username;
+    config.password = password;
   }
-  return _config;
+  return config;
 };

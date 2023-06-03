@@ -3,6 +3,6 @@ import { timezoneFormat } from '@lib/shared/format/utils/timezoneFormat/timezone
 import spacetime from 'spacetime';
 
 export const _currentTimezone = (): _CurrentTimezoneModel => {
-  const _current = spacetime().timezone();
-  return { name: timezoneFormat(_current.name), offset: _current.current.offset };
+  const current = spacetime().timezone();
+  return { name: timezoneFormat(current.name), offset: current.current.offset };
 };

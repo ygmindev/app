@@ -6,18 +6,18 @@ import type { WaitForParamsModel } from '@lib/shared/core/utils/waitFor/waitFor.
 
 export const waitFor = ({ condition, interval, timeout }: WaitForParamsModel): Promise<boolean> =>
   new Promise((resolve) => {
-    const _interval = interval || WAIT_FOR_INTERVAL_DEFAULT_MILLISECONDS;
-    const _timeout = timeout || WAIT_FOR_TIMEOUT_DEFAULT_MILLISECONDS;
+    const intervalF = interval || WAIT_FOR_INTERVAL_DEFAULT_MILLISECONDS;
+    const timeoutF = timeout || WAIT_FOR_TIMEOUT_DEFAULT_MILLISECONDS;
     let timer = 0;
     const loop = setInterval(() => {
-      timer += _interval;
+      timer += intervalF;
       if (condition()) {
         clearInterval(loop);
         resolve(true);
       }
-      if (timer >= _timeout) {
+      if (timer >= timeoutF) {
         clearInterval(loop);
         resolve(false);
       }
-    }, _interval);
+    }, intervalF);
   });

@@ -25,10 +25,10 @@ export const Dropdown: RSFCModel<DropdownRefModel, DropdownPropsModel> = forward
     },
     ref,
   ) => {
-    const _wrapperRef = useRef<WrapperRefModel>(null);
+    const wrapperRef = useRef<WrapperRefModel>(null);
     useImperativeHandle(ref, () => ({
       isOpen: () => isOpen || false,
-      scrollTo: (params) => _wrapperRef?.current?.scrollTo(params),
+      scrollTo: (params) => wrapperRef?.current?.scrollTo(params),
       toggle: onToggle,
     }));
     return (
@@ -53,7 +53,7 @@ export const Dropdown: RSFCModel<DropdownRefModel, DropdownPropsModel> = forward
             isVerticalScrollable
             maxHeight={maxHeight}
             p={THEME_SIZE_MORE.SMALL}
-            ref={_wrapperRef}>
+            ref={wrapperRef}>
             {children}
           </Wrapper>
         </Wrapper>

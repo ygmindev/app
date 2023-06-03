@@ -37,18 +37,18 @@ export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends
   const [isLoading, isLoadingSet] = useState<boolean>(false);
   const [data, dataSet] = useState<PartialModel<TType>>();
 
-  const _isLastStep = useMemo(() => current === steps.length - 1, [current, steps.length]);
+  const isLastStep = useMemo(() => current === steps.length - 1, [current, steps.length]);
 
   const barRef = useRef<WrapperRefModel>(null);
 
-  const _handleClear = (): void => {
-    _currentSet(0);
+  const handleClear = (): void => {
+    currentSetF(0);
     dataSet(undefined);
   };
 
-  useAsync({ onMount: async () => _currentSet(0) });
+  useAsync({ onMount: async () => currentSetF(0) });
 
-  const _currentSet = (value: number): void => {
+  const currentSetF = (value: number): void => {
     currentSet(value);
     width && barRef.current?.to({ width: (width / (steps.length + 1)) * (value + 1) });
   };
@@ -85,7 +85,7 @@ export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends
             <Button
               elementState={current <= 0 || isLoading ? ELEMENT_STATE.DISABLED : undefined}
               icon="arrowLeft"
-              onPress={() => _currentSet(current - 1)}
+              onPress={() => currentSetF(current - 1)}
             />
           </Appearable>
         </Wrapper>
@@ -100,7 +100,7 @@ export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends
               key: id,
               onBack: () => {
                 element.props.onBack && element.props.onBack();
-                _currentSet(current - 1);
+                currentSetF(current - 1);
               },
               onComplete: () => {
                 isLoadingSet(false);
@@ -109,21 +109,21 @@ export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends
               onSubmit: async (stepData: TSteps[number]) => {
                 isLoadingSet(true);
                 element.props.onSubmit && (await element.props.onSubmit(data));
-                if (_isLastStep) {
-                  let _data = { ...data, ...(stepData as object) } as TType;
-                  _data = beforeSubmit ? await beforeSubmit(_data) : _data;
-                  const _result = onSubmit && (await onSubmit(_data));
-                  onSuccess && (await onSuccess(_data as TType, _result));
+                if (isLastStep) {
+                  let dataF = { ...data, ...(stepData as object) } as TType;
+                  dataF = beforeSubmit ? await beforeSubmit(dataF) : dataF;
+                  const result = onSubmit && (await onSubmit(dataF));
+                  onSuccess && (await onSuccess(dataF as TType, result));
                   await sleep({ duration: theme.animation.transition });
-                  _handleClear();
+                  handleClear();
                 }
               },
               onSuccess: async (stepData: TSteps[number]) => {
                 element.props.onSuccess && (await element.props.onSuccess(stepData));
-                const _data = { ...data, ...(stepData as object) };
-                if (!_isLastStep) {
-                  dataSet(_data);
-                  _currentSet(current + 1);
+                const dataF = { ...data, ...(stepData as object) };
+                if (!isLastStep) {
+                  dataSet(dataF);
+                  currentSetF(current + 1);
                 }
               },
             }),

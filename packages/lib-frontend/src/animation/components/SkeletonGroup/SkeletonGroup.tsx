@@ -8,7 +8,7 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 export const SkeletonGroup: SFCModel<SkeletonGroupPropsModel> = ({ children, ...props }) => {
   const theme = useTheme();
   const { styles } = useStyles({ props });
-  const _element = <_SkeletonGroup {...props}>{children}</_SkeletonGroup>;
+  const element = <_SkeletonGroup {...props}>{children}</_SkeletonGroup>;
   return styles.marginTop || styles.marginLeft ? (
     <>
       <View
@@ -19,9 +19,9 @@ export const SkeletonGroup: SFCModel<SkeletonGroupPropsModel> = ({ children, ...
         }}
       />
 
-      {_element}
+      {element}
     </>
   ) : (
-    _element
+    element
   );
 };

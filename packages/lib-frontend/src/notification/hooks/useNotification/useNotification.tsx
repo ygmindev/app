@@ -8,7 +8,7 @@ export const useNotification = (): UseNotificationModel => {
   const actions = useActions();
   const { t } = useTranslation();
 
-  const _notify = (alert: NotificationDataModel): void =>
+  const notify = (alert: NotificationDataModel): void =>
     actions?.notification.add({
       ...alert,
       message: t(alert.message),
@@ -16,17 +16,17 @@ export const useNotification = (): UseNotificationModel => {
     });
 
   return {
-    add: _notify,
+    add: notify,
 
     error: (alert) =>
-      _notify({ ...alert, color: THEME_COLOR.ERROR, icon: alert.icon || 'exclamationCircle' }),
+      notify({ ...alert, color: THEME_COLOR.ERROR, icon: alert.icon || 'exclamationCircle' }),
 
     remove: async (id: string): Promise<void> => actions?.notification.remove(id),
 
     success: (alert) =>
-      _notify({ ...alert, color: THEME_COLOR.SUCCESS, icon: alert.icon || 'checkCircle' }),
+      notify({ ...alert, color: THEME_COLOR.SUCCESS, icon: alert.icon || 'checkCircle' }),
 
     warn: (alert) =>
-      _notify({ ...alert, color: THEME_COLOR.WARNING, icon: alert.icon || 'exclamationCircle' }),
+      notify({ ...alert, color: THEME_COLOR.WARNING, icon: alert.icon || 'exclamationCircle' }),
   };
 };

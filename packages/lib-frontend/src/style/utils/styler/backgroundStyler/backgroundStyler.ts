@@ -8,6 +8,6 @@ export const backgroundStyler: StylerModel<BackgroundStylerParamsModel> = (
   { backgroundColor, backgroundRole = THEME_ROLE.MAIN },
   theme,
 ) => {
-  const _color = theme.colors.tone[backgroundColor as ThemeColorModel];
-  return cleanObject({ backgroundColor: _color ? _color[backgroundRole] : backgroundColor });
+  const color = theme.colors.tone[backgroundColor as ThemeColorModel];
+  return cleanObject({ backgroundColor: color ? color[backgroundRole] : backgroundColor });
 };

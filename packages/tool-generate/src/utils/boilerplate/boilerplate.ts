@@ -12,13 +12,13 @@ import trim from 'lodash/trim';
 import uniq from 'lodash/uniq';
 import { basename, join } from 'path';
 
-const _getTemplateVariables = async (from: string): Promise<Array<string>> => {
+const getTemplateVariables = async (from: string): Promise<Array<string>> => {
   const base = basename(from);
   let variables: Array<string> = base.match(BOILERPLATE_TEMPLATE_VARIABLE_PATTERN) || [];
 
   for (const child of children({ from })) {
     if (child.isDirectory) {
-      variables = variables.concat((await _getTemplateVariables(child.fullPath)).flat());
+      variables = variables.concat((await getTemplateVariables(child.fullPath)).flat());
     } else {
       const content = readFileSync(child.fullPath, 'utf8');
       variables = variables.concat(content.match(BOILERPLATE_TEMPLATE_VARIABLE_PATTERN) || []);
@@ -35,27 +35,27 @@ export const boilerplate = async ({
   variables,
 }: BoilerplateParamsModel): Promise<void> => {
   const templateDir = fromPackages('tool-generate/templates', template);
-  let templateVariables = await _getTemplateVariables(templateDir);
+  let templateVariables = await getTemplateVariables(templateDir);
   templateVariables = uniq(templateVariables).sort();
   templateVariables = variables
     ? pullAll(templateVariables, Object.keys(variables))
     : templateVariables;
 
-  let _output = output;
-  const _variables: Record<string, string> = variables || {};
-  const _resolveVariable = async (variable: string): Promise<string> => {
-    if (_variables[variable]) {
-      return _variables[variable];
+  let outputF = output;
+  const variablesF: Record<string, string> = variables || {};
+  const resolveVariable = async (variable: string): Promise<string> => {
+    if (variablesF[variable]) {
+      return variablesF[variable];
     }
     let value: string;
     switch (variable) {
       case '{{PATH}}': {
-        const root = await _resolveVariable('{{ROOT}}');
-        const target = await _resolveVariable('{{TARGET}}');
+        const root = await resolveVariable('{{ROOT}}');
+        const target = await resolveVariable('{{TARGET}}');
         const { path } = await prompt([
           { basePath: fromPackages(root, 'src'), key: 'path', type: PROMPT_TYPE.DIRECTORY },
         ]);
-        _output = fromPackages(root, trim(`src/${path}`), '/');
+        outputF = fromPackages(root, trim(`src/${path}`), '/');
         value = trim(join(target, path), '/');
         break;
       }
@@ -64,7 +64,7 @@ export const boilerplate = async ({
         break;
       }
       case '{{TARGET}}': {
-        const root = await _resolveVariable('{{ROOT}}');
+        const root = await resolveVariable('{{ROOT}}');
         value = `@${root.replace('-', '/')}`;
         break;
       }
@@ -73,15 +73,15 @@ export const boilerplate = async ({
         break;
       }
     }
-    _variables[variable] = value;
+    variablesF[variable] = value;
     return value;
   };
 
   for (const k of templateVariables) {
-    _variables[k] = await _resolveVariable(k);
+    variablesF[k] = await resolveVariable(k);
   }
 
-  _output = _output || fromPackages();
-  await _boilerplate({ input: templateDir, output: _output, template, variables: _variables });
-  onSuccess && (await onSuccess({ output: _output, template, variables: _variables }));
+  outputF = outputF || fromPackages();
+  await _boilerplate({ input: templateDir, output: outputF, template, variables: variablesF });
+  onSuccess && (await onSuccess({ output: outputF, template, variables: variablesF }));
 };

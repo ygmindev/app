@@ -9,12 +9,10 @@ export const Update = <TType extends unknown>({
   Resource,
   name,
 }: UpdateParamsModel<TType>): ConstructorModel<UpdateModel<TType>> => {
-  const _name = `${name}Update`;
-  const _isResource = Resource && isFunction(Resource);
+  const nameF = `${name}Update`;
+  const isResource = Resource && isFunction(Resource);
 
-  @withEntity({ name: _name })
-  class _Update extends (_isResource
-    ? (Resource as unknown as ConstructorModel)
-    : EntityResource) {}
+  @withEntity({ name: nameF })
+  class _Update extends (isResource ? (Resource as unknown as ConstructorModel) : EntityResource) {}
   return _Update;
 };

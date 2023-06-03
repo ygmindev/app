@@ -17,15 +17,15 @@ export const useTheme = (): UseThemeModel => {
 
         tone: (Object.keys(config.colors.tone) as Array<ThemeColorModel>).reduce((result, key) => {
           const color = config.colors.tone[key] as ThemeColorModel;
-          const _palette =
+          const paletteF =
             config.colors.palette[brightness][key === 'neutral' ? 'neutral' : 'theme'];
           return {
             ...result,
             [key]: {
-              main: palette({ color, ..._palette.main }),
-              mainContrast: palette({ color, ..._palette.mainContrast }),
-              muted: palette({ color, ..._palette.muted }),
-              mutedContrast: palette({ color, ..._palette.mutedContrast }),
+              main: palette({ color, ...paletteF.main }),
+              mainContrast: palette({ color, ...paletteF.mainContrast }),
+              muted: palette({ color, ...paletteF.muted }),
+              mutedContrast: palette({ color, ...paletteF.mutedContrast }),
             },
           };
         }, {} as ThemeModel['colors']['tone']),

@@ -20,7 +20,7 @@ export const _useSearch = <TType,>({
 }: _UseSearchParamsModel<TType>): _UseSearchModel<TType> => {
   const [query, querySet] = useState<string>('');
 
-  const _querySet = useCallback(
+  const querySetF = useCallback(
     debounce(
       (value) => {
         querySet(value);
@@ -38,7 +38,7 @@ export const _useSearch = <TType,>({
     [fuse, limit, query],
   );
 
-  const search = useCallback(_querySet, []);
+  const search = useCallback(querySetF, []);
 
   return { result, search };
 };

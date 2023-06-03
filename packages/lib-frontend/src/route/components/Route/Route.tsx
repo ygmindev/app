@@ -27,20 +27,19 @@ export const Route: SFCModel<RoutePropsModel> = ({ children, route, testID, ...p
   const { track } = useTracking();
   const dimension = useStore((state) => state.app.dimension);
   const isBack = useStore((state) => state.route.isBack);
-  const _isLeaf = !route.routes;
+  const isLeaf = !route.routes;
 
   useAsync(
     {
       onMount: async () => {
-        _isLeaf &&
-          track({ action: TRACKING_EVENT_ACTION.OPEN, object: TRACKING_EVENT_OBJECT.PAGE });
+        isLeaf && track({ action: TRACKING_EVENT_ACTION.OPEN, object: TRACKING_EVENT_OBJECT.PAGE });
       },
     },
-    [_isLeaf],
+    [isLeaf],
   );
 
-  const _Container = route.isProtectable ? Protectable : Fragment;
-  let _element = cloneElement(
+  const Container = route.isProtectable ? Protectable : Fragment;
+  let element = cloneElement(
     route.element || (
       <Wrapper
         grow
@@ -49,29 +48,29 @@ export const Route: SFCModel<RoutePropsModel> = ({ children, route, testID, ...p
     ),
     { children },
   );
-  _element = <_Container>{_element}</_Container>;
-  const _pathname = useMemo(() => trimPathname(`${route.root || ''}/${route.pathname}`), [route]);
-  const _isActive = useMemo(() => isActive({ isExact: true, pathname: _pathname }), [_pathname]);
-  const _isLeafActive = _isLeaf && _isActive;
+  element = <Container>{element}</Container>;
+  const pathname = useMemo(() => trimPathname(`${route.root || ''}/${route.pathname}`), [route]);
+  const isActiveF = useMemo(() => isActive({ isExact: true, pathname: pathname }), [pathname]);
+  const isLeafActive = isLeaf && isActiveF;
 
-  const _children = useMemo(() => {
+  const childrenF = useMemo(() => {
     switch (route.transition) {
       case ROUTE_TRANSITION.SLIDE:
         return (
           <Slide
             isBack={isBack}
             measure={dimension}>
-            {_element}
+            {element}
           </Slide>
         );
       default:
-        return _element;
+        return element;
     }
-  }, [_element, isBack, dimension, route.transition]);
+  }, [element, isBack, dimension, route.transition]);
 
   return (
     <>
-      {_isLeafActive && route.header && (
+      {isLeafActive && route.header && (
         <Portal>
           <RouteHeader route={route} />
         </Portal>
@@ -81,7 +80,7 @@ export const Route: SFCModel<RoutePropsModel> = ({ children, route, testID, ...p
         grow
         style={styles}
         testID={testID}>
-        {_children}
+        {childrenF}
       </Wrapper>
     </>
   );

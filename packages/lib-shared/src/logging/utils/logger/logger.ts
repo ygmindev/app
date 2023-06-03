@@ -3,14 +3,14 @@ import { _debug, _error, _info, _warn } from '@lib/shared/logging/utils/logger/_
 import type { LoggerModel } from '@lib/shared/logging/utils/logger/logger.models';
 import isPlainObject from 'lodash/isPlainObject';
 
-const _stringify = (params: Array<unknown>): string =>
+const stringifyF = (params: Array<unknown>): string =>
   params.map((value) => (isPlainObject(value) ? stringify(value as object) : value)).join(' ');
 
 const { debug, error, info, warn }: LoggerModel = {
-  debug: (...params) => _debug(_stringify(params)),
-  error: (...params) => _error(_stringify(params)),
-  info: (...params) => _info(_stringify(params)),
-  warn: (...params) => _warn(_stringify(params)),
+  debug: (...params) => _debug(stringifyF(params)),
+  error: (...params) => _error(stringifyF(params)),
+  info: (...params) => _info(stringifyF(params)),
+  warn: (...params) => _warn(stringifyF(params)),
 };
 
 export { debug, error, info, warn };

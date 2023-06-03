@@ -36,7 +36,7 @@ export const Table = forwardRef(
     const { styles } = useStyles({ props });
     const theme = useTheme();
     const [isMounted, isMountedSet] = useState<boolean>();
-    const _isLoading = elementState === ELEMENT_STATE.LOADING;
+    const isLoading = elementState === ELEMENT_STATE.LOADING;
 
     return (
       <Wrapper
@@ -44,7 +44,7 @@ export const Table = forwardRef(
         isOverflowHidden
         style={styles}
         testID={testID}>
-        <GlobalStyle config={config} />
+        <GlobalStyle sheet={config(theme)} />
 
         <Appearable
           grow
@@ -54,12 +54,12 @@ export const Table = forwardRef(
               columns.map((column) => ({
                 ...column,
                 renderer:
-                  isMounted && _isLoading && !column.pin
+                  isMounted && isLoading && !column.pin
                     ? () => <Skeleton height={30} />
                     : column.renderer,
               })) as Array<TableColumnModel<unknown, unknown>>
             }
-            data={_isLoading ? ([{}] as Array<TType>) : data}
+            data={isLoading ? ([{}] as Array<TType>) : data}
             isFullWidth={isFullWidth}
             isVirtualized={isVirtualized}
             onMount={() => {

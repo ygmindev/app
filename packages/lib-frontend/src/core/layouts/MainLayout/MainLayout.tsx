@@ -16,12 +16,12 @@ export const MainLayout: SFCModel<MainLayoutPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const isMobile = useIsMobile();
-  const _isFullWidth = isFullWidth || isMobile;
+  const isFullWidthF = isFullWidth || isMobile;
   const theme = useTheme();
   return (
     <Wrapper
       grow
-      isFullWidth={_isFullWidth}
+      isFullWidth={isFullWidthF}
       p
       style={styles}>
       <Wrapper
@@ -29,7 +29,7 @@ export const MainLayout: SFCModel<MainLayoutPropsModel> = ({
         mHorizontal={isCenter || isHorizontalCenter ? 'auto' : undefined}
         mVertical={isCenter || isVerticalCenter ? 'auto' : undefined}
         spacing
-        width={_isFullWidth ? undefined : theme.layout.width[THEME_SIZE.MEDIUM]}>
+        width={isFullWidthF ? undefined : theme.layout.width[THEME_SIZE.MEDIUM]}>
         {children}
       </Wrapper>
     </Wrapper>

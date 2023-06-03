@@ -21,7 +21,7 @@ export const Slide: SFCModel<SlidePropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const theme = useTheme();
-  const _animation = useMemo(
+  const animation = useMemo(
     () => ({
       duration: theme.animation.transition,
       states: merge([ANIMATION_STATES_APPEARABLE, ANIMATION_STATES_SLIDABLE({ isBack, measure })]),
@@ -30,7 +30,7 @@ export const Slide: SFCModel<SlidePropsModel> = ({
   );
   return (
     <Wrapper
-      animation={_animation}
+      animation={animation}
       bottom={0}
       elementState={ELEMENT_STATE.ACTIVE}
       isFullWidth

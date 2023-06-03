@@ -14,20 +14,20 @@ export const copy = async ({
   overrides,
   to,
 }: CopyParamsModel): Promise<void> => {
-  let _to = to;
-  if (!excludes || every(excludes.map((pattern) => !minimatch(_to, pattern)))) {
-    overrides && forEach(overrides, (v, k) => (_to = _to.replaceAll(k, v)));
+  let toF = to;
+  if (!excludes || every(excludes.map((pattern) => !minimatch(toF, pattern)))) {
+    overrides && forEach(overrides, (v, k) => (toF = toF.replaceAll(k, v)));
     if (statSync(from).isDirectory()) {
-      existsSync(_to)
-        ? isOverwrite && rmSync(_to, { force: true, recursive: true })
-        : mkdirSync(_to);
+      existsSync(toF)
+        ? isOverwrite && rmSync(toF, { force: true, recursive: true })
+        : mkdirSync(toF);
       for (const child of readdirSync(from)) {
-        await copy({ from: join(from, child), isOverwrite, overrides, to: join(_to, child) });
+        await copy({ from: join(from, child), isOverwrite, overrides, to: join(toF, child) });
       }
-    } else if (isOverwrite || !existsSync(_to)) {
+    } else if (isOverwrite || !existsSync(toF)) {
       let _file = readFileSync(from, 'utf8');
       overrides && forEach(overrides, (v, k) => (_file = _file.replaceAll(k, v)));
-      writeFile({ filename: _to, value: _file });
+      writeFile({ filename: toF, value: _file });
     }
   }
 };

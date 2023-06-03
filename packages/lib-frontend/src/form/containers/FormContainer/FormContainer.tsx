@@ -43,7 +43,7 @@ export const FormContainer = forwardRef(
     ref: ForwardedRef<FormRefModel<TType>>,
   ): ReactElement<RSFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>> => (
     <ErrorProvider value={{ errorContextGet, mode: ERROR_MODE.NOTIFICATION }}>
-      <_FormContainer
+      <FormContainerF
         {...props}
         ref={ref}
       />
@@ -51,7 +51,7 @@ export const FormContainer = forwardRef(
   ),
 );
 
-const _FormContainer = forwardRef(
+const FormContainerF = forwardRef(
   <TType = void, TResult = void>(
     {
       autoFocus = true,
@@ -86,32 +86,32 @@ const _FormContainer = forwardRef(
 
     useImperativeHandle(ref, () => ({ reset: handleReset, submit: handleSubmit }));
 
-    const _fields = useMemo(() => rows?.map(({ fields }) => fields).flat(), [rows]);
-    const _getValues = (data: TType): TType =>
-      _fields
-        ? _fields.reduce((result, field) => {
+    const fieldsF = useMemo(() => rows?.map(({ fields }) => fields).flat(), [rows]);
+    const getValues = (data: TType): TType =>
+      fieldsF
+        ? fieldsF.reduce((result, field) => {
             if (field?.id) {
-              let _value = (data as Record<string, unknown>)[field.id];
+              let value = (data as Record<string, unknown>)[field.id];
               switch (field?.type) {
                 case FIELD_TYPE.NUMBER: {
-                  _value = toNumber(_value);
+                  value = toNumber(value);
                   break;
                 }
               }
-              return { ...result, [field.id]: _value };
+              return { ...result, [field.id]: value };
             }
             return result;
           }, {} as TType)
         : data;
 
-    const _handleSubmit = async (data: TType): Promise<TResult | null> => {
-      const _initialValues = initialValues && _getValues(initialValues);
-      const _data = _getValues(data);
-      if (isEqual(_initialValues, _data)) {
+    const handleSubmitF = async (data: TType): Promise<TResult | null> => {
+      const initialValuesF = initialValues && getValues(initialValues);
+      const dataF = getValues(data);
+      if (isEqual(initialValuesF, dataF)) {
         error({ message: t('core:messages.validateChanged') });
         return null;
       } else {
-        return (onSubmit && (await onSubmit(_data as TType))) || null;
+        return (onSubmit && (await onSubmit(dataF as TType))) || null;
       }
     };
 
@@ -123,7 +123,7 @@ const _FormContainer = forwardRef(
       initialValues,
       isBlocking,
       onComplete,
-      onSubmit: _handleSubmit,
+      onSubmit: handleSubmitF,
       onSuccess: async (data, result) => {
         onSuccess && (await onSuccess(data, result));
         return successMessage ? success({ message: t(successMessage) }) : undefined;
@@ -131,11 +131,11 @@ const _FormContainer = forwardRef(
       validators,
     });
 
-    const _elementState = isLoading ? ELEMENT_STATE.LOADING : elementState;
-    const _isDisabled =
-      _elementState === ELEMENT_STATE.DISABLED || _elementState === ELEMENT_STATE.LOADING;
-    const _onSubmit = async (): Promise<void> => handleSubmit();
-    const _getField = useCallback(
+    const elementStateF = isLoading ? ELEMENT_STATE.LOADING : elementState;
+    const isDisabled =
+      elementStateF === ELEMENT_STATE.DISABLED || elementStateF === ELEMENT_STATE.LOADING;
+    const onSubmitF = async (): Promise<void> => handleSubmit();
+    const getField = useCallback(
       (
         { Component, field, fieldProps, id }: FormContainerFieldModel,
         isFirstRow = false,
@@ -143,14 +143,14 @@ const _FormContainer = forwardRef(
         isLastRow = false,
         isLastField = false,
       ) => {
-        const _fieldProps: StringFieldPropsModel = {
+        const fieldPropsF: StringFieldPropsModel = {
           ...fieldProps,
           defaultValue: initialValues
             ? (initialValues as Record<string, undefined>)[id]
             : undefined,
-          elementState: _isDisabled
+          elementState: isDisabled
             ? ELEMENT_STATE.DISABLED
-            : _elementState || fieldProps?.elementState,
+            : elementStateF || fieldProps?.elementState,
           error: errors ? (errors as Record<string, undefined>)[id] : undefined,
           isAutoFocus:
             autoFocus === id ||
@@ -176,9 +176,9 @@ const _FormContainer = forwardRef(
           case FORM_FIELD_TYPE.TEXT_FIELD: {
             return (
               <TextField
-                {...(_fieldProps as TextFieldPropsModel)}
+                {...(fieldPropsF as TextFieldPropsModel)}
                 key={id}
-                onSubmit={_onSubmit}
+                onSubmit={onSubmitF}
                 testID={id}
               />
             );
@@ -186,27 +186,27 @@ const _FormContainer = forwardRef(
           case FORM_FIELD_TYPE.SELECT_FIELD: {
             return (
               <SelectField
-                {...(_fieldProps as SelectFieldPropsModel)}
+                {...(fieldPropsF as SelectFieldPropsModel)}
                 key={id}
-                onSubmit={_onSubmit}
+                onSubmit={onSubmitF}
                 testID={id}
               />
             );
           }
           default: {
             return createElement(Component as SFCModel<TextFieldPropsModel>, {
-              ..._fieldProps,
+              ...fieldPropsF,
               key: id,
-              onSubmit: _onSubmit,
+              onSubmit: onSubmitF,
               testID: id,
             });
           }
         }
       },
-      [values, errors, handleChange, initialValues, _onSubmit, _elementState],
+      [values, errors, handleChange, initialValues, onSubmitF, elementStateF],
     );
 
-    const _rows = map(rows, ({ fields, id }, i) => (
+    const rowsF = map(rows, ({ fields, id }, i) => (
       <Wrapper
         isRowAlign
         key={id}
@@ -215,7 +215,7 @@ const _FormContainer = forwardRef(
           focused ? (findIndex(fields, (field) => field.id === focused) >= 0 ? 1 : 0) : undefined
         }>
         {map(fields, (field, j) =>
-          _getField(
+          getField(
             field,
             i === 0,
             j === 0,
@@ -232,11 +232,11 @@ const _FormContainer = forwardRef(
         isFullWidth={isFullWidth}
         style={styles}
         testID={testID}>
-        <Form onSubmit={_isDisabled ? undefined : async () => handleSubmit()}>
+        <Form onSubmit={isDisabled ? undefined : async () => handleSubmit()}>
           <Wrapper spacing={isGrouped ? -1 : true}>
-            {topElement && topElement({ elementState: _elementState, handleReset, handleSubmit })}
+            {topElement && topElement({ elementState: elementStateF, handleReset, handleSubmit })}
 
-            {_rows}
+            {rowsF}
           </Wrapper>
         </Form>
 
@@ -245,11 +245,11 @@ const _FormContainer = forwardRef(
             isDistribute
             isFullWidth
             isRowAlign>
-            {leftElement && leftElement({ elementState: _elementState, handleReset, handleSubmit })}
+            {leftElement && leftElement({ elementState: elementStateF, handleReset, handleSubmit })}
 
             {onCancel && (
               <Button
-                elementState={_elementState}
+                elementState={elementStateF}
                 icon="chevronLeft"
                 onPress={onCancel}
                 type={BUTTON_TYPE.TRANSPARENT}>
@@ -258,7 +258,7 @@ const _FormContainer = forwardRef(
             )}
 
             <Button
-              elementState={_elementState}
+              elementState={elementStateF}
               icon="chevronRightCircle"
               onPress={handleSubmit}>
               {submitLabel || t('core:labels.continue')}
@@ -266,7 +266,7 @@ const _FormContainer = forwardRef(
           </Wrapper>
         )}
 
-        {bottomElement && bottomElement({ elementState: _elementState, handleReset, handleSubmit })}
+        {bottomElement && bottomElement({ elementState: elementStateF, handleReset, handleSubmit })}
       </MainLayout>
     );
   },

@@ -6,15 +6,15 @@ import type {
 export const resolveFirst = async <TType>(
   params: ResolveFirstParamsModel<TType>,
 ): ResolveFirstModel<TType> => {
-  const _errors = [];
+  const errors = [];
   for (const promise of params || []) {
     try {
-      const _result = await promise();
-      if (_result) {
-        return _result;
+      const result = await promise();
+      if (result) {
+        return result;
       }
     } catch (error) {
-      _errors.push(error);
+      errors.push(error);
     }
   }
   throw new Error();

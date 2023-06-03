@@ -14,25 +14,24 @@ const install: TaskParamsModel<InstallParamsModel> = {
   onAfter: ['node-post-install'],
 
   task: async ({ options }) => {
-    const _root = fromRoot();
-    const _prompts = [
+    const root = fromRoot();
+    const prompts = [
       options?.install ?? { isOptional: true, key: 'install' },
       options?.installDev ?? { isOptional: true, key: 'installDev' },
       options?.remove ?? { isOptional: true, key: 'remove' },
     ].filter(Boolean) as Array<PromptParamsModel<Record<string, string>>>;
-    const response = _prompts ? await prompt(_prompts) : {};
-    const _install = options?.install || response.install;
-    const _installDev = options?.installDev || response.installDev;
-    const _remove = options?.remove || response.remove;
+    const response = prompts ? await prompt(prompts) : {};
+    const install = options?.install || response.install;
+    const installDev = options?.installDev || response.installDev;
+    const remove = options?.remove || response.remove;
     await sequence(
       [
-        _install &&
-          (async () =>
-            command(_install === '*' ? 'yarn' : `yarn add ${_install}`, { root: _root })),
+        install &&
+          (async () => command(install === '*' ? 'yarn' : `yarn add ${install}`, { root })),
 
-        _installDev && (async () => command(`yarn add ${_installDev} --dev`, { root: _root })),
+        installDev && (async () => command(`yarn add ${installDev} --dev`, { root })),
 
-        _remove && (async () => command(`yarn remove ${_remove}`, { root: _root })),
+        remove && (async () => command(`yarn remove ${remove}`, { root })),
       ].filter(Boolean) as Array<CallablePromiseModel<TaskResultModel>>,
     );
     return { status: TASK_STATUS.SUCCESS };

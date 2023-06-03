@@ -13,8 +13,8 @@ describe(displayName, () => {
   }
 
   test('works', async () => {
-    const _Root = Root({ RootResource: RootEntity, name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME });
-    const result = new _Root();
+    const RootF = Root({ RootResource: RootEntity, name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME });
+    const result = new RootF();
     expect(result).toHaveProperty('root');
   });
 });

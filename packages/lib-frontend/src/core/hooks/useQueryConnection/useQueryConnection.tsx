@@ -9,6 +9,6 @@ export const useQueryConnection = <TType,>({
   cache,
   ...params
 }: UseQueryConnectionParamsModel<TType>): UseQueryConnectionModel<TType> => {
-  const _cache = cache ? (cache === true ? QUERY_EXPIRATION_MILLISECONDS_DEFAULT : cache) : 0;
-  return _useQueryConnection({ ...params, cache: _cache });
+  const cacheF = cache ? (cache === true ? QUERY_EXPIRATION_MILLISECONDS_DEFAULT : cache) : 0;
+  return _useQueryConnection({ ...params, cache: cacheF });
 };

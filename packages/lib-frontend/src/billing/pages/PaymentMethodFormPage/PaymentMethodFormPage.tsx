@@ -19,7 +19,7 @@ export const PaymentMethodFormPage: SFCModel<PaymentMethodFormPagePropsModel> = 
   const { styles } = useStyles({ props });
   const { location, replace } = useRouter<PaymentMethodFormPageParamsModel>();
 
-  const _handleBack = async (): Promise<void> => replace({ pathname: `/${ACCOUNT}/${PAYMENT}` });
+  const handleBack = async (): Promise<void> => replace({ pathname: `/${ACCOUNT}/${PAYMENT}` });
 
   return (
     <CenterLayout
@@ -28,8 +28,8 @@ export const PaymentMethodFormPage: SFCModel<PaymentMethodFormPagePropsModel> = 
       {currentUser && (
         <PaymentMethodForm
           defaultValue={location.params?.value}
-          onCancel={_handleBack}
-          onSuccess={_handleBack}
+          onCancel={handleBack}
+          onSuccess={handleBack}
         />
       )}
     </CenterLayout>

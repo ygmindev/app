@@ -20,25 +20,25 @@ export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...prop
   const { replace } = useRouter();
   const { update } = useUserResource();
 
-  const _handleBack = async (): Promise<void> => replace({ pathname: `/${ACCOUNT}/${PERSONAL}` });
+  const handleBack = async (): Promise<void> => replace({ pathname: `/${ACCOUNT}/${PERSONAL}` });
 
-  const _tName = t('user:labels.name');
+  const tName = t('user:labels.name');
 
   return currentUser ? (
     <CenterLayout>
       <FormContainer
         initialValues={{ first: currentUser.first, last: currentUser.last }}
-        onCancel={_handleBack}
+        onCancel={handleBack}
         onSubmit={async ({ first, last }) => {
           const { result } = await update({
             filter: { _id: currentUser._id },
             update: { first, last },
           });
           actions?.user.currentUserUpdate(result);
-          _handleBack();
+          handleBack();
         }}
         style={styles}
-        successMessage={t('core:messages.updateSuccess', { value: _tName })}
+        successMessage={t('core:messages.updateSuccess', { value: tName })}
         testID={testID}
         {...NAME_FORM_CONTAINER_PROPS}
       />

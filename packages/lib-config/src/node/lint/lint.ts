@@ -8,11 +8,11 @@ import { _lint } from '@lib/config/node/lint/_lint';
 import type { _LintConfigModel, LintConfigModel } from '@lib/config/node/lint/lint.models';
 
 export const lintCommand = (fix?: boolean): string => {
-  const _config = config();
+  const configF = config();
   return fromExecutable(
-    `eslint --config ${_config.configFile} ${
+    `eslint --config ${configF.configFile} ${
       fix ? '--fix' : ''
-    } --no-error-on-unmatched-pattern ${_config.include.join(' ')}`,
+    } --no-error-on-unmatched-pattern ${configF.include.join(' ')}`,
   );
 };
 

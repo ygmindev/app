@@ -9,7 +9,7 @@ import { palette } from '@lib/frontend/style/utils/palette/palette';
 export const Skeleton: SFCModel<SkeletonPropsModel> = ({ children, ...props }) => {
   const theme = useTheme();
   const { styles } = useStyles({ props });
-  const _element = (
+  const element = (
     <_Skeleton
       {...props}
       backgroundColor={theme.colors.tone.neutral.muted}
@@ -32,9 +32,9 @@ export const Skeleton: SFCModel<SkeletonPropsModel> = ({ children, ...props }) =
         }}
       />
 
-      {_element}
+      {element}
     </>
   ) : (
-    _element
+    element
   );
 };

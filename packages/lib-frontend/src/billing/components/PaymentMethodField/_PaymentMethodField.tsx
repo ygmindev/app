@@ -18,7 +18,7 @@ import { loadStripe } from '@stripe/stripe-js/pure';
 import get from 'lodash/get';
 import { forwardRef, useImperativeHandle } from 'react';
 
-const _stripe = loadStripe(process.env.APP_STRIPE_TOKEN);
+const stripe = loadStripe(process.env.APP_STRIPE_TOKEN);
 
 export const _PaymentMethodField: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> =
   forwardRef(({ token, ...props }, ref) => {
@@ -26,8 +26,8 @@ export const _PaymentMethodField: RSFCModel<FormRefModel, _PaymentMethodFieldPro
     return token ? (
       <Elements
         options={{ ...STRIPE_ELEMENTS_STYLE(theme), clientSecret: token }}
-        stripe={_stripe}>
-        <_StripeForm
+        stripe={stripe}>
+        <StripeForm
           {...props}
           ref={ref}
         />
@@ -35,7 +35,7 @@ export const _PaymentMethodField: RSFCModel<FormRefModel, _PaymentMethodFieldPro
     ) : null;
   });
 
-const _StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forwardRef(
+const StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forwardRef(
   ({ defaultValue, onSubmit }, ref) => {
     const stripeClient = useStripe();
     const elements = useElements();
@@ -43,10 +43,10 @@ const _StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forw
 
     useImperativeHandle(ref, () => ({
       reset: () => null,
-      submit: _handleSubmit,
+      submit: handleSubmit,
     }));
 
-    const _onSubmit = async (data: PaymentMethod): Promise<void> => {
+    const onSubmitF = async (data: PaymentMethod): Promise<void> => {
       const { card, id, type, us_bank_account } = data;
       switch (type) {
         case 'us_bank_account': {
@@ -80,7 +80,7 @@ const _StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forw
       }
     };
 
-    const _handleSubmit = async (): Promise<void> => {
+    const handleSubmit = async (): Promise<void> => {
       if (stripeClient && elements) {
         const { error, setupIntent } = await stripeClient.confirmSetup({
           confirmParams: {
@@ -95,7 +95,7 @@ const _StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forw
         } else if (setupIntent) {
           const { payment_method, status } = setupIntent;
           if (status === 'succeeded') {
-            await _onSubmit(payment_method as PaymentMethod);
+            await onSubmitF(payment_method as PaymentMethod);
           }
         }
       }

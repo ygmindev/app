@@ -21,11 +21,11 @@ export const testEmbeddedResourceService = async ({
           .create({ form: { stringProperty: 'stringProperty' } });
 
         if (result) {
-          const _root = { _id: result._id };
+          const root = { _id: result._id };
           for (const form of DUMMY_ENTITY_RESOURCE_SEED_DATA) {
-            await service.create({ form, root: _root });
+            await service.create({ form, root });
           }
-          service.decorators = { ...service.decorators, root: _root };
+          service.decorators = { ...service.decorators, root };
         }
       }
     },

@@ -7,9 +7,9 @@ const makeJson: TaskParamsModel<MakeJsonParamsModel> = {
   name: 'makeJson',
 
   task: async ({ options }) => {
-    const _value = options?.value && (await options?.value());
-    if (_value) {
-      writeFile({ filename: options.filename, value: JSON.stringify(_value, null, '  ') });
+    const value = options?.value && (await options?.value());
+    if (value) {
+      writeFile({ filename: options.filename, value: JSON.stringify(value, null, '  ') });
       return { status: TASK_STATUS.SUCCESS };
     } else {
       return { status: TASK_STATUS.ERROR };

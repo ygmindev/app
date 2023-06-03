@@ -9,7 +9,7 @@ export const ModalButton: SFCModel<ModalButtonPropsModel> = ({
   ...props
 }) => {
   const [modalIsOpen, modalIsOpenSet] = useState<boolean>();
-  const _modalElement = useMemo(() => {
+  const modalElementF = useMemo(() => {
     cloneElement(modalElement, { isOpen: modalIsOpen, onClose: () => modalIsOpenSet(false) });
   }, [modalIsOpen]);
   return (
@@ -22,7 +22,7 @@ export const ModalButton: SFCModel<ModalButtonPropsModel> = ({
         }}
       />
 
-      {_modalElement}
+      {modalElementF}
     </>
   );
 };

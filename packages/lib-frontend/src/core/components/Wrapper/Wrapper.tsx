@@ -32,40 +32,39 @@ export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
       stylers: [viewStyler],
     });
 
-    const _getChildren = (children: ReactNode | Array<ReactNode>): Array<ReactNode> => {
-      const _children = reduce(
+    const getChildren = (children: ReactNode | Array<ReactNode>): Array<ReactNode> => {
+      const childrenF = reduce(
         Children.toArray(children),
         (result, child) =>
           isValidElement(child)
-            ? [...result, ...(isFragment(child) ? _getChildren(child.props.children) : [child])]
+            ? [...result, ...(isFragment(child) ? getChildren(child.props.children) : [child])]
             : result,
         [] as Array<ReactNode>,
       );
-      const _isRow = props.isRow || isRowAlign;
-      const _length = _children.length;
+      const isRow = props.isRow || isRowAlign;
+      const { length } = childrenF;
       return reduce(
-        _children as Array<ReactElement>,
+        childrenF as Array<ReactElement>,
         (result, child, i) => [
           ...result,
           cloneElement(child, {
             key:
-              !child.key || (i && (_children[i - 0] as ReactElement)?.key === child.key)
+              !child.key || (i && (childrenF[i - 0] as ReactElement)?.key === child.key)
                 ? uid()
                 : child.key,
             style: StyleSheet.flatten(
               [
                 isDistribute && { flexBasis: 0, flexGrow: 1 },
-                (props.isReverse && result.length !== _length - 1) ||
+                (props.isReverse && result.length !== length - 1) ||
                   (!props.isReverse &&
                     result.length &&
                     spacingStyler(
                       {
                         mLeft:
                           child.props.mLeft === undefined
-                            ? _isRow && (isRowAlign ? THEME_SIZE.SMALL : spacing)
+                            ? isRow && (isRowAlign ? THEME_SIZE.SMALL : spacing)
                             : child.props.mLeft,
-                        mTop:
-                          child.props.mTop === undefined ? !_isRow && spacing : child.props.mTop,
+                        mTop: child.props.mTop === undefined ? !isRow && spacing : child.props.mTop,
                       },
                       theme,
                     )),
@@ -78,10 +77,10 @@ export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
       );
     };
 
-    const _children = useMemo(() => _getChildren(children), [children]);
+    const childrenF = useMemo(() => getChildren(children), [children]);
     return animation
-      ? createElement(AnimatableView, { ...props, animation, ref, style: styles }, _children)
-      : createElement(View, { ...props, ref, style: styles }, _children);
+      ? createElement(AnimatableView, { ...props, animation, ref, style: styles }, childrenF)
+      : createElement(View, { ...props, ref, style: styles }, childrenF);
   },
 );
 

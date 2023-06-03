@@ -11,9 +11,9 @@ import { useMemo, useState } from 'react';
 export const Slides: SFCModel<SlidesPropsModel> = ({ current, slides, testID, ...props }) => {
   const { styles } = useStyles({ props });
   const [measure, measureSet] = useState<MeasureModel>();
-  const [_current, currentSet] = useState(current);
-  const _previous = useChange({ onChange: () => currentSet(current), value: current });
-  const _isBack = useMemo(() => (_previous || 0) > (current || 0), [_previous, current]);
+  const [currentF, currentSet] = useState(current);
+  const previous = useChange({ onChange: () => currentSet(current), value: current });
+  const isBack = useMemo(() => (previous || 0) > (current || 0), [previous, current]);
   return (
     <Wrapper
       grow
@@ -27,9 +27,9 @@ export const Slides: SFCModel<SlidesPropsModel> = ({ current, slides, testID, ..
         {slides &&
           slides.map(
             ({ element, id }, i) =>
-              i === _current && (
+              i === currentF && (
                 <Slide
-                  isBack={_isBack}
+                  isBack={isBack}
                   key={id}
                   measure={measure}>
                   {element}

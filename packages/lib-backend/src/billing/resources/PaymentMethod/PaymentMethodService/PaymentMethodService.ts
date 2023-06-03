@@ -56,17 +56,17 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, string, undefined, UserModel>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, string, UserModel>> {
     if (input.root) {
-      const _uid = input.root._id;
+      const uid = input.root._id;
       let { result: linkedUser } = await this._linkedUserService.get({
         filter: { type: LINKED_USER_TYPE.STRIPE },
         options: { project: { _id: true } },
-        root: { _id: _uid },
+        root: { _id: uid },
       });
       if (!linkedUser) {
         const id = await this._stripeAdminService.createCustomer();
         const { result: createdLinkedUser } = await this._linkedUserService.create({
           form: { id, type: LINKED_USER_TYPE.STRIPE },
-          root: { _id: _uid },
+          root: { _id: uid },
         });
         if (createdLinkedUser) {
           linkedUser = createdLinkedUser;

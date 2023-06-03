@@ -19,15 +19,15 @@ describe(displayName, () => {
   });
 
   test('works', async () => {
-    const _platforms = Object.keys(PLATFORM);
-    _platforms.forEach((platform) =>
+    const platforms = Object.keys(PLATFORM);
+    platforms.forEach((platform) =>
       writeFile({
         filename: fromRoot(`${FILENAME}.${platform}.ts`),
         value: `${CONTENT}.${platform}`,
       }),
     );
 
-    for (const platform of _platforms) {
+    for (const platform of platforms) {
       const result = await importFromEnv(fromRoot(`${FILENAME}.${platform}.ts`));
       expect(result).toStrictEqual(`${CONTENT}.${platform}`);
     }
