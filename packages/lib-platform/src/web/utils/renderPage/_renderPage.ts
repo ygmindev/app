@@ -6,9 +6,7 @@ import type {
 } from '@lib/platform/web/utils/renderPage/_renderPage.models';
 import { renderPage } from 'vite-plugin-ssr/server';
 
-export const _renderPage = async ({
-  context,
-}: _RenderPageParamsModel): _RenderPageModel => {
+export const _renderPage = async ({ context }: _RenderPageParamsModel): _RenderPageModel => {
   const { errorWhileRendering, httpResponse, redirectTo } = await renderPage({
     context,
     redirectTo: undefined,

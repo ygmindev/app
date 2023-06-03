@@ -1,7 +1,7 @@
 import type { WebConfigModel } from '@lib/config/platform/web/web.models';
+import type { ChildrenPropsModel, FCModel } from '@lib/frontend/core/core.models';
 import type { ExportRenderClientParamsModel } from '@lib/platform/web/exports/exportRendererClient/exportRendererClient.models';
 import type { ExportRenderServerParamsModel } from '@lib/platform/web/exports/exportRendererServer/exportRendererServer.models';
-import type { ChildrenPropsModel, FCModel } from '@lib/frontend/core/core.models';
 import type { CallablePromiseModel } from '@lib/shared/core/core.models';
 import type { ComponentType } from 'react';
 

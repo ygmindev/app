@@ -5,7 +5,7 @@ const { displayName } = withTest({ extensions });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await extensions({});
+    const result = extensions();
     expect(result).toStrictEqual({});
   });
 });

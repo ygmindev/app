@@ -1,5 +1,5 @@
-import { getLocaleStoreFromI18n } from 'packages/lib-platform/src/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { getLocaleStoreFromI18n } from 'packages/lib-platform/src/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
 
 const { displayName } = withTest({ getLocaleStoreFromI18n });
 
