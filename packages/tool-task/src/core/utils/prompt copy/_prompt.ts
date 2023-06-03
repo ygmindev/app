@@ -1,7 +1,6 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import type { _PromptModel, _PromptParamsModel } from '@tool/task/core/utils/prompt/_prompt.models';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
-import type { PromptArgsModel } from '@tool/task/core/utils/prompt/prompt.models';
 import { prompt, registerPrompt } from 'inquirer';
 import directory from 'inquirer-directory';
 import startCase from 'lodash/startCase';
@@ -9,9 +8,9 @@ import toString from 'lodash/toString';
 
 registerPrompt(PROMPT_TYPE.DIRECTORY, directory);
 
-export const _prompt = async <TParams extends Array<PromptArgsModel>>(
-  prompts: _PromptParamsModel<TParams>,
-): _PromptModel<TParams> =>
+export const _prompt = async <TType extends Record<string, string>>(
+  prompts: _PromptParamsModel<TType>,
+): _PromptModel<TType> =>
   prompt(
     prompts.map(
       ({
@@ -27,7 +26,7 @@ export const _prompt = async <TParams extends Array<PromptArgsModel>>(
 
         choices: options
           ? options.map((option) => ({
-              checked:
+              enabled:
                 type === PROMPT_TYPE.CHECKBOX &&
                 options &&
                 defaultValue &&
@@ -39,8 +38,6 @@ export const _prompt = async <TParams extends Array<PromptArgsModel>>(
         message: `${message}${isOptional ? ' (Optional)' : ''}`,
 
         name: key as string,
-
-        pageSize: options ? options.length : undefined,
 
         type,
 
