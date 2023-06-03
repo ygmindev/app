@@ -8,32 +8,32 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { Library } from '@lib/library/core/components/Library/Library';
 import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 import { LIBRARY_PROPS } from '@lib/library/core/pages/LibraryPage/LibraryPage.constants';
-import type { LibraryPagePropsModel } from '@lib/library/core/pages/LibraryPage/LibraryPage.models';
+import type {
+  LibraryPageParamsModel,
+  LibraryPagePropsModel,
+} from '@lib/library/core/pages/LibraryPage/LibraryPage.models';
 import find from 'lodash/find';
 import type { ComponentType } from 'react';
 
 // TODO: get from glob
-const LIBRARIES = LIBRARY_PROPS.map(({ name, ...props }) => {
+const _libraries = LIBRARY_PROPS.map(({ name, ...props }) => {
   const id = name || getComponentDisplayName(props.Component as ComponentType);
   return { id, name: id, pathname: trimPathname(id), ...props };
 });
 
 export const LibraryPage: SFCModel<LibraryPagePropsModel> = ({ testID, ...props }) => {
   const { styles } = useStyles({ props });
-  const { location, push } = useRouter<{ id: string }>();
+  const { location, push } = useRouter<LibraryPageParamsModel>();
   const value = location.params?.id;
   const _value = value && trimPathname(value);
 
-  const _options: Array<OptionModel> = LIBRARIES.map((params) => {
-    return {
-      ...params,
-      label: params.id,
-      onPress: () => push({ pathname: params.id }),
-    } as OptionModel;
-  });
+  const _options: Array<OptionModel> = _libraries.map((params) => ({
+    ...params,
+    label: params.id,
+    onPress: () => push({ pathname: params.id }),
+  }));
 
-  const _library = _value && find(LIBRARIES, { pathname: _value });
-
+  const _library = _value && find(_libraries, { pathname: _value });
   return (
     <NavigationLayout
       options={_options}

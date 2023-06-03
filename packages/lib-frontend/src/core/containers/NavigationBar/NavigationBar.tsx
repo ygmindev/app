@@ -8,6 +8,7 @@ import type { NavigationBarPropsModel } from '@lib/frontend/core/containers/Navi
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCPropsModel } from '@lib/frontend/core/core.models';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
+import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { BORDER_DIRECTION } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
@@ -35,9 +36,9 @@ export const NavigationBar = ({
     () => groupBy(options, ({ category }) => toString(category)),
     [options],
   );
+  const _value = value && trimPathname(value);
 
   const _isHorizontal = isHorizontal || isMobile;
-
   return (
     <Activatable
       isPressable={false}
@@ -65,7 +66,7 @@ export const NavigationBar = ({
               spacing={THEME_SIZE.SMALL}>
               {v.map(({ icon, id, label, onPress }) => (
                 <Button
-                  elementState={value && id === value ? ELEMENT_STATE.ACTIVE : undefined}
+                  elementState={trimPathname(id) === _value ? ELEMENT_STATE.ACTIVE : undefined}
                   icon={icon}
                   key={id}
                   onPress={async () => {
@@ -73,7 +74,7 @@ export const NavigationBar = ({
                     onChange && onChange(id);
                   }}
                   testID={id}
-                  type={BUTTON_TYPE.TRANSPARENT}>
+                  type={BUTTON_TYPE.INVISIBLE}>
                   {label}
                 </Button>
               ))}

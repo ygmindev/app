@@ -40,4 +40,4 @@ export const Icon: RSFCModel<
   );
 });
 
-process.env.APP_DEBUG && (Icon.displayName = variableName(() => Icon));
+process.env.APP_DEBUG && (Icon.displayName = variableName({ Icon }));
