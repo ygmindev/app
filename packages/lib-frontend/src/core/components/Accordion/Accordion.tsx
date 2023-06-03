@@ -68,7 +68,7 @@ export const Accordion: SFCModel<AccordionPropsModel> = ({
         }
         elementState={valueControlled}
         isOverflowHidden>
-        <Wrapper onMeasure={measureSet}>{children}</Wrapper>
+        <Wrapper onMeasure={measure ? undefined : measureSet}>{children}</Wrapper>
       </Wrapper>
     </Wrapper>
   );

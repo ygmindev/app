@@ -8,6 +8,7 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import type { RoutePropsModel } from '@lib/frontend/route/components/Route/Route.models';
 import { RouteHeader } from '@lib/frontend/route/containers/RouteHeader/RouteHeader';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
+import { ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
@@ -53,6 +54,21 @@ export const Route: SFCModel<RoutePropsModel> = ({ children, route, testID, ...p
   const _isActive = useMemo(() => isActive({ isExact: true, pathname: _pathname }), [_pathname]);
   const _isLeafActive = _isLeaf && _isActive;
 
+  const _children = useMemo(() => {
+    switch (route.transition) {
+      case ROUTE_TRANSITION.SLIDE:
+        return (
+          <Slide
+            isBack={isBack}
+            measure={dimension}>
+            {_element}
+          </Slide>
+        );
+      default:
+        return _element;
+    }
+  }, [_element, isBack, dimension, route.transition]);
+
   return (
     <>
       {_isLeafActive && route.header && (
@@ -61,13 +77,12 @@ export const Route: SFCModel<RoutePropsModel> = ({ children, route, testID, ...p
         </Portal>
       )}
 
-      <Slide
-        isBack={isBack}
-        measure={dimension}
+      <Wrapper
+        grow
         style={styles}
         testID={testID}>
-        {_element}
-      </Slide>
+        {_children}
+      </Wrapper>
     </>
   );
 };
