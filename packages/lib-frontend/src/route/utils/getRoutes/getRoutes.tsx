@@ -13,6 +13,7 @@ import { FORM } from '@lib/frontend/form/form.constants';
 import { TIMEZONE } from '@lib/frontend/locale/locale.constants';
 import { TimezoneFormPage } from '@lib/frontend/locale/pages/TimezoneFormPage/TimezoneFormPage';
 import { NotFoundPage } from '@lib/frontend/route/pages/NotFoundPage/NotFoundPage';
+import { ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
 import type { RouteModel } from '@lib/frontend/route/route.models';
 import type {
   GetRoutesModel,
@@ -45,6 +46,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
           isProtectable: true,
           ns: [ACCOUNT, BILLING, SETTINGS, USER],
           pathname: ACCOUNT,
+          route: ROUTE_TRANSITION.SLIDE,
           routes: [
             {
               element: <AccountPage />,

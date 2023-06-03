@@ -8,4 +8,4 @@ export const Exitable = composeComponent<ExitablePropsModel, _ExitablePropsModel
   Component: _Exitable,
 });
 
-process.env.APP_DEBUG && (Exitable.displayName = variableName(() => Exitable));
+process.env.APP_DEBUG && (Exitable.displayName = variableName({ Exitable }));

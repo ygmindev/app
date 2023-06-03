@@ -11,4 +11,4 @@ export const MaskedTextField = composeComponent<
   Component: _MaskedTextField,
 });
 
-process.env.APP_DEBUG && (MaskedTextField.displayName = variableName(() => MaskedTextField));
+process.env.APP_DEBUG && (MaskedTextField.displayName = variableName({ MaskedTextField }));

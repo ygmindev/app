@@ -34,6 +34,7 @@ const _getRoute = ({ pathname, ...route }: RouteModel, depth = 1): RouteModel =>
                     ...child,
                     header: child.header || _route.header,
                     root: trimPathname(`${route.root ?? ''}/${_root}`),
+                    transition: child.transition || _route.transition,
                   },
                   depth + 1,
                 ),

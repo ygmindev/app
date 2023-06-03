@@ -85,4 +85,4 @@ export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
   },
 );
 
-process.env.APP_DEBUG && (Wrapper.displayName = variableName(() => Wrapper));
+process.env.APP_DEBUG && (Wrapper.displayName = variableName({ Wrapper }));

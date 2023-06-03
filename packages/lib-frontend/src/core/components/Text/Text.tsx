@@ -19,4 +19,4 @@ export const textParams: ComposeComponentParamsModel<
 
 export const Text = composeComponent<TextPropsModel, _TextPropsModel, TextStyleModel>(textParams);
 
-process.env.APP_DEBUG && (Text.displayName = variableName(() => Text));
+process.env.APP_DEBUG && (Text.displayName = variableName({ Text }));

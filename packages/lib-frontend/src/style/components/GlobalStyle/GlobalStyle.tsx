@@ -8,4 +8,4 @@ export const GlobalStyle = composeComponent<GlobalStylePropsModel, _GlobalStyleP
   Component: _GlobalStyle,
 });
 
-process.env.APP_DEBUG && (GlobalStyle.displayName = variableName(() => GlobalStyle));
+process.env.APP_DEBUG && (GlobalStyle.displayName = variableName({ GlobalStyle }));

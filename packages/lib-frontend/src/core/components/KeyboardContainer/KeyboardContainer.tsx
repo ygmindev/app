@@ -11,4 +11,4 @@ export const KeyboardContainer = composeComponent<
   Component: _KeyboardContainer,
 });
 
-process.env.APP_DEBUG && (KeyboardContainer.displayName = variableName(() => KeyboardContainer));
+process.env.APP_DEBUG && (KeyboardContainer.displayName = variableName({ KeyboardContainer }));

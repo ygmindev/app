@@ -10,4 +10,4 @@ export const Form = composeComponent<FormPropsModel, _FormPropsModel>({
   stylers: [{ width: '100%' }],
 });
 
-process.env.APP_DEBUG && (Form.displayName = variableName(() => Form));
+process.env.APP_DEBUG && (Form.displayName = variableName({ Form }));

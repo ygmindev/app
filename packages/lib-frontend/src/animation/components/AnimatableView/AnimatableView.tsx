@@ -8,4 +8,4 @@ export const AnimatableView = composeComponent<AnimatableViewPropsModel, _Animat
   { Component: _AnimatableView },
 );
 
-process.env.APP_DEBUG && (AnimatableView.displayName = variableName(() => AnimatableView));
+process.env.APP_DEBUG && (AnimatableView.displayName = variableName({ AnimatableView }));

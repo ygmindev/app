@@ -8,4 +8,4 @@ export const RouteProvider = composeComponent<RouteProviderPropsModel, _RoutePro
   Component: _RouteProvider,
 });
 
-process.env.APP_DEBUG && (RouteProvider.displayName = variableName(() => RouteProvider));
+process.env.APP_DEBUG && (RouteProvider.displayName = variableName({ RouteProvider }));

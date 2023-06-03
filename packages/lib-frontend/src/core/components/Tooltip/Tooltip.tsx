@@ -34,4 +34,4 @@ export const Tooltip = composeComponent<TooltipPropsModel, DroppablePropsModel>(
   },
 });
 
-process.env.APP_DEBUG && (Tooltip.displayName = variableName(() => Tooltip));
+process.env.APP_DEBUG && (Tooltip.displayName = variableName({ Tooltip }));

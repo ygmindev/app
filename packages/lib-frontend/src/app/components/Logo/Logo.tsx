@@ -27,4 +27,4 @@ export const Logo = composeComponent<LogoPropsModel, LinkPropsModel>({
   },
 });
 
-process.env.APP_DEBUG && (Logo.displayName = variableName(() => Logo));
+process.env.APP_DEBUG && (Logo.displayName = variableName({ Logo }));
