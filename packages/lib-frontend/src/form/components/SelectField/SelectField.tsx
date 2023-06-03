@@ -102,9 +102,7 @@ export const SelectField = <TType extends string = string>({
             isTransparent={isTransparent}
             label={label}
             leftElement={
-              _selectedOption &&
-              _selectedOption.icon &&
-              (() => <Icon icon={_selectedOption.icon} />)
+              _selectedOption && _selectedOption.icon && <Icon icon={_selectedOption.icon} />
             }
             onBlur={() => {
               onBlur && onBlur();
@@ -116,7 +114,7 @@ export const SelectField = <TType extends string = string>({
               _handleToggle(true);
             }}
             onSubmit={_handleSelect}
-            rightElement={(elementState) => (
+            rightElement={
               <AnimatableView
                 animation={{
                   states: {
@@ -127,7 +125,7 @@ export const SelectField = <TType extends string = string>({
                 elementState={elementState}>
                 <Icon icon="chevronDown" />
               </AnimatableView>
-            )}
+            }
             round={round}
             testID={testID}
             value={isOpen ? query : t(_selectedLabel)}

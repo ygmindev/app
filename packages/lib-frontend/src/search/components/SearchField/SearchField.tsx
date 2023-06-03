@@ -7,7 +7,7 @@ export const SearchField: SFCModel<SearchFieldPropsModel> = ({ ...props }) => {
   return (
     <TextField
       {...props}
-      rightElement={() => <Icon icon="search" />}
+      rightElement={<Icon icon="search" />}
     />
   );
 };

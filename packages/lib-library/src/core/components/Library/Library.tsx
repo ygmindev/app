@@ -13,8 +13,11 @@ import type {
 import { withId } from '@lib/shared/core/decorators/withId/withId';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
 import { groupBy } from '@lib/shared/core/utils/groupBy/groupBy';
+import { stringify } from '@lib/shared/core/utils/stringify/stringify';
+import { mapValues } from 'lodash';
 import isArray from 'lodash/isArray';
 import isFunction from 'lodash/isFunction';
+import isPlainObject from 'lodash/isPlainObject';
 import keys from 'lodash/keys';
 import map from 'lodash/map';
 import toString from 'lodash/toString';
@@ -55,6 +58,8 @@ export const Library = <TProps,>({
       ? value?.prototype?.isReactComponent || toString(value).includes('return React.createElement')
         ? 'Element'
         : 'function'
+      : isPlainObject(value)
+      ? stringify(mapValues(value as object, _typeToString))
       : toString(value);
 
   return (

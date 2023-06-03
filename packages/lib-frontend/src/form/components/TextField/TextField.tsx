@@ -20,7 +20,7 @@ import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import type { ViewStyleModel } from '@lib/frontend/style/style.models';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
-import type { ReactElement, RefObject } from 'react';
+import type { RefObject } from 'react';
 import { forwardRef, useEffect, useRef } from 'react';
 
 export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forwardRef(
@@ -48,7 +48,7 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
     },
     ref,
   ) => {
-    const _ref = useRef<TextFieldRefModel>(null);
+    const refFinal = useRef<TextFieldRefModel>(null);
     const { t } = useTranslation();
     const theme = useTheme();
     const { valueControlled, valueControlledSet } = useControlledValue({
@@ -65,23 +65,23 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       value: elementState,
     });
 
-    const _rightElement = (_elementState: ElementStateModel): ReactElement => (
+    const rightElementFinal = (
       <Wrapper
         isRowAlign
         pRight={isCenter ? undefined : THEME_SIZE.SMALL}>
         {!isNoClear && (
           <Appearable
             animation={{ isLazy: false }}
-            elementState={_elementState}
+            elementState={elementStateControlled}
             isCenter
             isVisible={
               !!valueControlled &&
-              _elementState === ELEMENT_STATE.ACTIVE &&
+              elementStateControlled === ELEMENT_STATE.ACTIVE &&
               valueControlled.length > 0
             }>
             <Button
               icon="times"
-              onPress={() => _handleChange('')}
+              onPress={() => handleChange('')}
               type={BUTTON_TYPE.INVISIBLE}
             />
           </Appearable>
@@ -89,19 +89,19 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
 
         {isTranslatableText(error) && <Tooltip color={THEME_COLOR.ERROR}>{error}</Tooltip>}
 
-        {rightElement && rightElement(_elementState)}
+        {rightElement}
       </Wrapper>
     );
 
     useEffect(() => {
       isAutoFocus &&
         sleep({ duration: theme.animation.transition }).then(() => {
-          const inputRef = (ref || _ref) as RefObject<TextFieldRefModel>;
+          const inputRef = (ref || refFinal) as RefObject<TextFieldRefModel>;
           inputRef.current && inputRef.current.focus();
         });
     }, [isAutoFocus, theme.animation.transition]);
 
-    const _handleChange = (newValue: string): void => {
+    const handleChange = (newValue: string): void => {
       switch (keyboard) {
         case TEXT_FIELD_KEYBOARD.NUMBER:
         case TEXT_FIELD_KEYBOARD.TEL: {
@@ -150,13 +150,13 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         label={label && t(label)}
         leftElement={leftElement}
         onBlur={onBlur}
-        onChange={_handleChange}
+        onChange={handleChange}
         onElementStateChange={setElementStateControlled}
-        onEscape={isNoClear ? undefined : () => _handleChange('')}
+        onEscape={isNoClear ? undefined : () => handleChange('')}
         onFocus={onFocus}
         placeholder={mask || placeholder}
-        ref={ref || _ref}
-        rightElement={_rightElement}
+        ref={ref || refFinal}
+        rightElement={rightElementFinal}
         value={valueControlled}
         width={width}
       />

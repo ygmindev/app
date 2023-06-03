@@ -1,4 +1,4 @@
-import type { DimensionModel, ElementStateModel } from '@lib/frontend/core/core.models';
+import type { DimensionModel } from '@lib/frontend/core/core.models';
 import type { TextFieldKeyboardModel } from '@lib/frontend/form/components/TextField/TextField.models';
 import type { StringFieldPropsModel, SubmittablePropsModel } from '@lib/frontend/form/form.models';
 import type { CallableModel } from '@lib/shared/core/core.models';
@@ -16,11 +16,11 @@ export interface _TextFieldPropsModel
   keyboard?: TextFieldKeyboardModel;
   label?: string;
   language?: string;
-  leftElement?(elementState?: ElementStateModel): ReactNode;
+  leftElement?: ReactNode;
   maxLength?: number;
   numberOfLines?: number;
   onEscape?: CallableModel;
   onRemove?: CallableModel;
   placeholder?: string;
-  rightElement?(elementState?: ElementStateModel): ReactNode;
+  rightElement?: ReactNode;
 }

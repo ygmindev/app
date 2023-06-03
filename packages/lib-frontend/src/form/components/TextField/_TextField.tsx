@@ -28,7 +28,7 @@ import type {
 import { StyleSheet, TextInput as NativeTextInput } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
-const _getKeyboardType = (type?: TextFieldKeyboardModel): TextInputProps['keyboardType'] => {
+const getKeyboardType = (type?: TextFieldKeyboardModel): TextInputProps['keyboardType'] => {
   switch (type) {
     case TEXT_FIELD_KEYBOARD.NUMBER:
     case TEXT_FIELD_KEYBOARD.NUMBER_POSITIVE:
@@ -43,7 +43,7 @@ const _getKeyboardType = (type?: TextFieldKeyboardModel): TextInputProps['keyboa
   }
 };
 
-const _getAutoCompleteType = (
+const getAutoCompleteType = (
   autoComplete?: string | boolean,
   type?: TextFieldKeyboardModel,
 ): TextInputProps['autoComplete'] => {
@@ -60,7 +60,7 @@ const _getAutoCompleteType = (
   return 'off';
 };
 
-const _getTextContentType = (
+const getTextContentType = (
   autoComplete?: string | boolean,
   type?: TextFieldKeyboardModel,
 ): TextInputProps['textContentType'] => {
@@ -116,53 +116,52 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
     const theme = useTheme();
     const { styles } = useStyles({ props });
 
-    const _isError = error === true || (isString(error) && error.length > 0);
-    const _isDisabled = elementState === ELEMENT_STATE.DISABLED;
-    const _activeBackgroundColor = theme.colors.tone.neutral.main;
-    const _activeColor = _isError ? theme.colors.tone.error.main : theme.colors.tone.primary.main;
-    const _inactiveColor = _isError
-      ? theme.colors.tone.error.main
-      : theme.colors.tone.neutral.muted;
-    const _containerAnimation: AnimationModel = {
+    const isError = error === true || (isString(error) && error.length > 0);
+    const isDisabled = elementState === ELEMENT_STATE.DISABLED;
+    const activeBackgroundColor = theme.colors.tone.neutral.main;
+    const activeColor = isError ? theme.colors.tone.error.main : theme.colors.tone.primary.main;
+    const inactiveColor = isError ? theme.colors.tone.error.main : theme.colors.tone.neutral.muted;
+
+    const containerAnimation: AnimationModel = {
       states: {
         [ELEMENT_STATE.DISABLED]: {
-          borderColor: isTransparent ? undefined : _inactiveColor,
+          borderColor: isTransparent ? undefined : inactiveColor,
           opacity: theme.colors.disabledOpacity,
         },
         [ELEMENT_STATE.INACTIVE]: {
-          backgroundColor: _activeBackgroundColor,
-          borderColor: isTransparent ? undefined : _inactiveColor,
+          backgroundColor: activeBackgroundColor,
+          borderColor: isTransparent ? undefined : inactiveColor,
           opacity: 1,
         },
         [ELEMENT_STATE.ACTIVE]: {
-          backgroundColor: _activeBackgroundColor,
-          borderColor: isTransparent ? undefined : _activeColor,
+          backgroundColor: activeBackgroundColor,
+          borderColor: isTransparent ? undefined : activeColor,
           opacity: 1,
         },
       },
     };
-    const _childrenAnimation: AnimationModel<TextStyleModel> = {
+
+    const childrenAnimation: AnimationModel<TextStyleModel> = {
       states: {
-        [ELEMENT_STATE.DISABLED]: { color: _inactiveColor },
-        [ELEMENT_STATE.INACTIVE]: { color: _inactiveColor },
-        [ELEMENT_STATE.ACTIVE]: { color: _activeColor },
+        [ELEMENT_STATE.DISABLED]: { color: inactiveColor },
+        [ELEMENT_STATE.INACTIVE]: { color: inactiveColor },
+        [ELEMENT_STATE.ACTIVE]: { color: activeColor },
       },
     };
 
-    const _leftElement = leftElement && (
+    const leftElementFinal = (
       <Appearable
         isCenter
         isVisible={!isEmpty(value) || elementState === ELEMENT_STATE.ACTIVE || !label}
         mLeft={label ? true : THEME_SIZE.SMALL}
         mTop={label ? 18 : undefined}>
-        {leftElement(elementState)}
+        {leftElement}
       </Appearable>
     );
 
-    const _rightElement = rightElement && rightElement(elementState);
     return (
       <Wrapper
-        animation={_containerAnimation}
+        animation={containerAnimation}
         border={!isTransparent}
         elementState={elementState}
         grow
@@ -174,27 +173,17 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
         testID={testID}
         width={width}
         zIndex={zIndex}>
-        <Wrapper
-          animation={_containerAnimation}
-          bottom={0}
-          elementState={elementState}
-          height={3}
-          left={0}
-          position={SHAPE_POSITION.ABSOLUTE}
-          right={0}
-          zIndex={1}
-        />
-
         <TextInput
           accessibilityLabelledBy={nativeID}
           accessibilityLanguage={language}
+          activeUnderlineColor="transparent"
           autoCapitalize="none"
-          autoComplete={_getAutoCompleteType(autoComplete, keyboard)}
+          autoComplete={getAutoCompleteType(autoComplete, keyboard)}
           autoCorrect={false}
           dense
-          disabled={_isDisabled}
-          error={_isError}
-          keyboardType={_getKeyboardType(keyboard)}
+          disabled={isDisabled}
+          error={isError}
+          keyboardType={getKeyboardType(keyboard)}
           label={
             (icon || label) && (
               <Wrapper
@@ -202,7 +191,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
                 nativeID={nativeID}>
                 {icon && (
                   <Icon
-                    animation={_childrenAnimation}
+                    animation={childrenAnimation}
                     elementState={elementState}
                     icon={icon}
                   />
@@ -210,7 +199,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
 
                 {label && (
                   <AnimatableText
-                    animation={_childrenAnimation}
+                    animation={childrenAnimation}
                     elementState={elementState}
                     fontSize={THEME_SIZE_MORE.SMALL}>
                     {label}
@@ -247,14 +236,14 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
           ref={ref as RefObject<NativeTextInput>}
           render={(inputProps) => (
             <Wrapper
-              animation={_containerAnimation}
+              animation={containerAnimation}
               elementState={elementState}
               grow
               isCenter={isCenter}
               isOverflowHidden
               isRow
               zIndex={-1}>
-              {_leftElement}
+              {leftElementFinal}
 
               {Component({
                 ...inputProps,
@@ -265,12 +254,12 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
                 ]),
               })}
 
-              {_rightElement}
+              {rightElement}
             </Wrapper>
           )}
           secureTextEntry={keyboard === TEXT_FIELD_KEYBOARD.PASSWORD}
           spellCheck={false}
-          textContentType={_getTextContentType(autoComplete, keyboard)}
+          textContentType={getTextContentType(autoComplete, keyboard)}
           theme={{
             animation: { scale: 1 },
             colors: {
@@ -278,6 +267,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
               placeholder: theme.colors.tone.neutral.muted,
             },
           }}
+          underlineColor="transparent"
           value={value}
         />
       </Wrapper>
