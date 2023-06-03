@@ -6,6 +6,7 @@ import { useAuthState } from '@lib/frontend/auth/hooks/useAuthState/useAuthState
 import { AUTH_STATE } from '@lib/frontend/auth/hooks/useAuthState/useAuthState.constants';
 import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { Button } from '@lib/frontend/core/components/Button/Button';
+import { Divider } from '@lib/frontend/core/components/Divider/Divider';
 import { Menu } from '@lib/frontend/core/components/Menu/Menu';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
@@ -52,13 +53,17 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
       style={styles}
       topElement={
         currentUser ? (
-          <Text
-            align={FONT_ALIGN.CENTER}
-            isEllipsis
-            isFullWidth
-            p={THEME_SIZE.SMALL}>
-            {currentUser.email}
-          </Text>
+          <>
+            <Text
+              align={FONT_ALIGN.CENTER}
+              isEllipsis
+              isFullWidth
+              p={THEME_SIZE.SMALL}>
+              {currentUser.email}
+            </Text>
+
+            <Divider />
+          </>
         ) : (
           <SignInButton />
         )

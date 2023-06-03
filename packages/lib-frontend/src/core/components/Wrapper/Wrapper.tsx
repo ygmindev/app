@@ -45,10 +45,13 @@ export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
       const _length = _children.length;
       return reduce(
         _children as Array<ReactElement>,
-        (result, child) => [
+        (result, child, i) => [
           ...result,
           cloneElement(child, {
-            key: child.key || uid(),
+            key:
+              !child.key || (i && (_children[i - 0] as ReactElement)?.key === child.key)
+                ? uid()
+                : child.key,
             style: StyleSheet.flatten(
               [
                 isDistribute && { flexBasis: 0, flexGrow: 1 },
