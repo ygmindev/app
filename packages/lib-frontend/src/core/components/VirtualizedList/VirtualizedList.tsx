@@ -15,7 +15,11 @@ import { View } from 'react-native';
 
 export const VirtualizedList = forwardRef(
   <TType extends WithIdModel>(
-    { spacing = THEME_SIZE.SMALL, ...props }: SFCPropsModel<VirtualizedListPropsModel<TType>>,
+    {
+      isHorizontal,
+      spacing = THEME_SIZE.SMALL,
+      ...props
+    }: SFCPropsModel<VirtualizedListPropsModel<TType>>,
     ref: ForwardedRef<VirtualizedListRefModel>,
   ): ReactElement<RSFCPropsModel<VirtualizedListPropsModel<TType>>> => {
     const { styles } = useStyles({ props });
@@ -23,7 +27,18 @@ export const VirtualizedList = forwardRef(
     return (
       <_VirtualizedList
         {...props}
-        divider={spacing ? <View style={{ height: getSpacing(spacing, theme) }} /> : undefined}
+        divider={
+          spacing ? (
+            <View
+              style={
+                isHorizontal
+                  ? { width: getSpacing(spacing, theme) }
+                  : { height: getSpacing(spacing, theme) }
+              }
+            />
+          ) : undefined
+        }
+        isHorizontal={isHorizontal}
         ref={ref}
         style={styles}
       />

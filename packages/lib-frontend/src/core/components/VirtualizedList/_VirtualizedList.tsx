@@ -12,7 +12,14 @@ import { FlatList } from 'react-native';
 
 export const _VirtualizedList = forwardRef(
   <TType extends WithIdModel>(
-    { divider, items, render, testID, ...props }: SFCPropsModel<_VirtualizedListPropsModel<TType>>,
+    {
+      divider,
+      isHorizontal,
+      items,
+      render,
+      testID,
+      ...props
+    }: SFCPropsModel<_VirtualizedListPropsModel<TType>>,
     ref: ForwardedRef<_VirtualizedListRefModel>,
   ): ReactElement<RSFCPropsModel<_VirtualizedListPropsModel<TType>>> => {
     const { styles } = useStyles({ props });
@@ -22,6 +29,7 @@ export const _VirtualizedList = forwardRef(
         ItemSeparatorComponent={divider ? () => divider : undefined}
         contentContainerStyle={{ flex: 1 }}
         data={items}
+        horizontal={isHorizontal}
         keyExtractor={({ id }) => id}
         ref={ref}
         renderItem={_renderItem}

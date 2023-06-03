@@ -2,7 +2,6 @@ export const IONIC_ICONS = {
   add: 'add-circle-outline',
   alarm: 'alarm-outline',
   analytics: 'analytics-outline',
-  app: 'extension-puzzle-outline',
   arrowIn: 'return-down-back-outline',
   arrowLeft: 'arrow-back-outline',
   arrowOut: 'return-up-forward-outline',

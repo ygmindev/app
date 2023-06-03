@@ -12,7 +12,6 @@ import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathnam
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { BORDER_DIRECTION } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
-import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { groupBy } from '@lib/shared/core/utils/groupBy/groupBy';
 import map from 'lodash/map';
 import toString from 'lodash/toString';
@@ -47,7 +46,6 @@ export const NavigationBar = ({
       // onInactive={() => console.warn('inactive')}
     >
       <Wrapper
-        align={FLEX_ALIGN.CENTER}
         border={BORDER_DIRECTION.RIGHT}
         isFullWidth={_isHorizontal}
         isHorizontalScrollable={_isHorizontal}
@@ -60,7 +58,6 @@ export const NavigationBar = ({
         {map(_categories, (v, k) => {
           const _options = (
             <Wrapper
-              isFullWidth
               isRowAlign={_isHorizontal}
               key={toString(k)}
               spacing={THEME_SIZE.SMALL}>
