@@ -13,7 +13,6 @@ export const props: LibraryPropsModel<SlidesPropsModel> = {
   Renderer: ({ ...props }) => {
     const [current, currentSet] = useState<number>(0);
     const _length = props.slides?.length || 1;
-
     return (
       <Wrapper
         isCenter

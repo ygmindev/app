@@ -13,6 +13,7 @@ import type {
 import { withId } from '@lib/shared/core/decorators/withId/withId';
 import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
 import { groupBy } from '@lib/shared/core/utils/groupBy/groupBy';
+import isArray from 'lodash/isArray';
 import isFunction from 'lodash/isFunction';
 import keys from 'lodash/keys';
 import map from 'lodash/map';
@@ -46,11 +47,13 @@ export const Library = <TProps,>({
   );
 
   const _typeToString = (value: unknown): string =>
-    isValidElement(value)
-      ? 'ReactElement'
+    isArray(value)
+      ? `[${value.map(_typeToString).join(', ')}]`
+      : isValidElement(value)
+      ? 'Element'
       : isFunction(value)
       ? value?.prototype?.isReactComponent || toString(value).includes('return React.createElement')
-        ? 'ReactComponent'
+        ? 'Element'
         : 'function'
       : toString(value);
 
