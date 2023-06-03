@@ -1,9 +1,0 @@
-{
-  "labels": {
-    "account": "account",
-    "personal": "personal"
-  },
-  "messages": {
-    "updateSuccess": "successfully updated"
-  }
-}

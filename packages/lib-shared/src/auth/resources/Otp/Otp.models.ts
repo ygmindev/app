@@ -6,11 +6,9 @@ export interface OtpModel extends Omit<EntityResourceModel, 'created'> {
   email?: string;
   otp: string;
   phone?: string;
-  username?: string;
 }
 
 export interface OtpFormModel extends Pick<OtpModel, 'email' | 'phone' | 'callingCode'> {
   checkExists?: boolean;
   otp?: string;
-  username?: string;
 }

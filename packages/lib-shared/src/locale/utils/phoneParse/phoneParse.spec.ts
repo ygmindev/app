@@ -1,8 +1,8 @@
 import type { PhoneNumberModel } from '@lib/shared/locale/locale.models';
-import { parsePhoneNumber } from '@lib/shared/locale/utils/parsePhoneNumber/parsePhoneNumber';
+import { phoneParse } from '@lib/shared/locale/utils/phoneParse/phoneParse';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ parsePhoneNumber });
+const { displayName } = withTest({ phoneParse });
 
 describe(displayName, () => {
   const TEST_VALUE: PhoneNumberModel = {
@@ -12,19 +12,25 @@ describe(displayName, () => {
   };
 
   test('works', async () => {
-    let result = parsePhoneNumber('+19171234567');
+    let result = phoneParse('+19171234567');
     expect(result).toStrictEqual(TEST_VALUE);
 
-    result = parsePhoneNumber('+1 917 123 4567');
+    result = phoneParse('+1 917 123 4567');
     expect(result).toStrictEqual(TEST_VALUE);
 
-    result = parsePhoneNumber('+1 (917) 123 4567');
+    result = phoneParse('+1 (917) 123 4567');
     expect(result).toStrictEqual(TEST_VALUE);
 
-    result = parsePhoneNumber('+1 917-123-4567');
+    result = phoneParse('+1 917-123-4567');
     expect(result).toStrictEqual(TEST_VALUE);
 
-    result = parsePhoneNumber('19171234567');
+    result = phoneParse('19171234567');
     expect(result).toStrictEqual(TEST_VALUE);
+
+    result = phoneParse('12345');
+    expect(result).toStrictEqual(null);
+
+    result = phoneParse('abcde');
+    expect(result).toStrictEqual(null);
   });
 });

@@ -1,7 +1,6 @@
 import { THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import type { TextStyleModel } from '@lib/frontend/style/style.models';
 import {
-  FONT_CASING,
   FONT_FAMILY,
   FONT_TYPE,
 } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
@@ -13,7 +12,7 @@ import isNumber from 'lodash/isNumber';
 export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
   {
     align,
-    casing = FONT_CASING.CAPITALIZE,
+    casing,
     family = FONT_FAMILY.MAIN,
     fontSize = THEME_SIZE_MORE.MEDIUM,
     isBold,
@@ -48,10 +47,5 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
 
     textAlign: align,
 
-    textTransform:
-      casing === FONT_CASING.ORIGINAL
-        ? undefined
-        : type === FONT_TYPE.HEADLINE || type === FONT_TYPE.TITLE
-        ? FONT_CASING.CAPITALIZE
-        : casing,
+    textTransform: casing,
   });

@@ -3,14 +3,8 @@ import type { SignInPagePropsModel } from '@lib/frontend/auth/pages/SignInPage/S
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayout';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { SIGN_IN_METHOD } from '@lib/shared/auth/auth.constants';
 
-export const SignInPage: SFCModel<SignInPagePropsModel> = ({
-  method = SIGN_IN_METHOD.USERNAME,
-  mode,
-  testID,
-  ...props
-}) => {
+export const SignInPage: SFCModel<SignInPagePropsModel> = ({ method, mode, testID, ...props }) => {
   const { styles } = useStyles({ props });
   return (
     <CenterLayout

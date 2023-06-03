@@ -15,10 +15,7 @@ import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
-import {
-  FONT_ALIGN,
-  FONT_CASING,
-} from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SIGN_OUT } from '@lib/shared/auth/auth.constants';
 import type { PartialModel } from '@lib/shared/core/core.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -57,7 +54,6 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
         currentUser ? (
           <Text
             align={FONT_ALIGN.CENTER}
-            casing={FONT_CASING.ORIGINAL}
             isEllipsis
             isFullWidth
             p={THEME_SIZE.SMALL}>

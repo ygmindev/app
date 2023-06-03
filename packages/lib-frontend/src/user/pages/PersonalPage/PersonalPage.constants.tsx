@@ -1,12 +1,12 @@
 import type { RouteGroupModel } from '@lib/frontend/route/components/RouteGroup/RouteGroup.models';
 import { EMAIL, NAME, PERSONAL, PHONE } from '@lib/frontend/user/user.constants';
 import { withId } from '@lib/shared/core/decorators/withId/withId';
-import { phoneFormat } from '@lib/shared/format/utils/phoneFormat/phoneFormat';
+import { phoneFormat } from '@lib/shared/locale/utils/phoneFormat/phoneFormat';
 
 export const PERSONAL_GROUPS: Array<RouteGroupModel> = withId([
   {
     id: PERSONAL,
-    label: ({ t }) => t('account:labels.personal'),
+    label: ({ t }) => t('user:labels.personal'),
     options: [
       {
         icon: 'id',

@@ -38,7 +38,7 @@ export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...prop
           _handleBack();
         }}
         style={styles}
-        successMessage={t('account:messages.updateSuccess', { value: _tName })}
+        successMessage={t('core:messages.updateSuccess', { value: _tName })}
         testID={testID}
         {...NAME_FORM_CONTAINER_PROPS}
       />

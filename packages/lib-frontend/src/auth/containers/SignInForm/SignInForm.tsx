@@ -5,11 +5,13 @@ import { UsernameForm } from '@lib/frontend/auth/containers/UsernameForm/Usernam
 import type { UsernameFormModel } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.models';
 import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { Text } from '@lib/frontend/core/components/Text/Text';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { StepForm } from '@lib/frontend/form/components/StepForm/StepForm';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_TYPE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SIGN_IN_MODE } from '@lib/shared/auth/auth.constants';
 import type { SignInFormModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
@@ -21,7 +23,7 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({ method, mode, testI
   const { signIn, usernameUpdate } = useSignInResource();
 
   const _handleSubmit = async (form: SignInFormModel): Promise<void> =>
-    mode === SIGN_IN_MODE.REGISTER ? signIn(form) : usernameUpdate(form);
+    mode === SIGN_IN_MODE.SIGN_IN ? signIn(form) : usernameUpdate(form);
 
   return (
     <StepForm<SignInFormModel, [UsernameFormModel, OtpFormModel]>
@@ -44,9 +46,17 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({ method, mode, testI
       ]}
       style={styles}
       testID={testID}>
-      <Text type={FONT_TYPE.HEADLINE}>
-        {t('core:labels.welcome', { value: process.env.APP_NAME })}
-      </Text>
+      <Wrapper
+        isCenter
+        spacing>
+        <Text type={FONT_TYPE.HEADLINE}>
+          {t('core:labels.welcome', { value: process.env.APP_NAME })}
+        </Text>
+
+        <Text fontSize={THEME_SIZE.LARGE}>
+          {`${t('auth:labels.signIn')} ${t('core:labels.or')} ${t('auth:labels.register')}`}
+        </Text>
+      </Wrapper>
     </StepForm>
   );
 };

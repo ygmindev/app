@@ -8,12 +8,12 @@ import { ACCOUNT } from '@lib/shared/user/user.constants';
 export const ACCOUNT_GROUPS: Array<RouteGroupModel> = withId([
   {
     id: ACCOUNT,
-    label: ({ t }) => t('account:labels.account'),
+    label: ({ t }) => t('user:labels.account'),
     options: [
       {
         icon: 'person',
         id: PERSONAL,
-        label: ({ t }) => t('account:labels.personal'),
+        label: ({ t }) => t('user:labels.personal'),
       },
 
       {

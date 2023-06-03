@@ -21,6 +21,5 @@ export enum FONT_ALIGN {
 export enum FONT_CASING {
   CAPITALIZE = 'capitalize',
   LOWERCASE = 'lowercase',
-  ORIGINAL = 'original',
   UPPERCASE = 'uppercase',
 }

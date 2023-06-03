@@ -1,7 +1,5 @@
 import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
-import { LOG_IN, REGISTER } from '@lib/frontend/auth/auth.constants';
-import { LogInPage } from '@lib/frontend/auth/pages/LogInPage/LogInPage';
-import { RegisterPage } from '@lib/frontend/auth/pages/RegisterPage/RegisterPage';
+import { SIGN_IN } from '@lib/frontend/auth/auth.constants';
 import { SignInPage } from '@lib/frontend/auth/pages/SignInPage/SignInPage';
 import { BILLING, PAYMENT, PAYMENT_METHOD } from '@lib/frontend/billing/billing.constants';
 import { PaymentMethodFormPage } from '@lib/frontend/billing/pages/PaymentMethodFormPage/PaymentMethodFormPage';
@@ -57,7 +55,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
               header: { previous: ACCOUNT },
               isRootsVisible: true,
               pathname: PERSONAL,
-              title: ({ t }) => t('account:labels.personal'),
+              title: ({ t }) => t('user:labels.personal'),
             },
             {
               element: <PaymentPage />,
@@ -73,7 +71,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
               title: ({ t }) => t('settings:labels.settings'),
             },
           ],
-          title: ({ t }) => t('account:labels.account'),
+          title: ({ t }) => t('user:labels.account'),
         },
 
         {
@@ -146,17 +144,9 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
         },
 
         {
-          // element: <SignInPage mode={SIGN_IN_MODE.SIGN_IN} />,
-          element: <LogInPage />,
+          element: <SignInPage mode={SIGN_IN_MODE.SIGN_IN} />,
           ns: [AUTH],
-          pathname: LOG_IN,
-        },
-
-        {
-          // element: <SignInPage mode={SIGN_IN_MODE.REGISTER} />,
-          element: <RegisterPage />,
-          ns: [AUTH],
-          pathname: REGISTER,
+          pathname: SIGN_IN,
         },
 
         {

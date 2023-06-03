@@ -1,4 +1,4 @@
-import { phoneFormat } from '@lib/shared/format/utils/phoneFormat/phoneFormat';
+import { phoneFormat } from '@lib/shared/locale/utils/phoneFormat/phoneFormat';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ phoneFormat });

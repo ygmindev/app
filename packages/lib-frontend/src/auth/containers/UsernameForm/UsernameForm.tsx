@@ -81,26 +81,6 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
           { fields: [{ Component: CountryField, id: 'callingCode' }] },
           { fields: [{ Component: PhoneField, id: SIGN_IN_METHOD.PHONE }] },
         ]);
-      case SIGN_IN_METHOD.USERNAME:
-        return withId([
-          {
-            fields: [
-              {
-                field: FORM_FIELD_TYPE.TEXT_FIELD,
-                fieldProps: {
-                  autoComplete: 'email',
-                  icon: 'personCircle',
-                  label: ({ t }) =>
-                    t('core:labels.or', {
-                      value1: t('user:labels.email'),
-                      value2: t('user:labels.phone'),
-                    }),
-                },
-                id: SIGN_IN_METHOD.USERNAME,
-              },
-            ],
-          },
-        ]);
       default:
         return [];
     }
@@ -112,35 +92,31 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
       testID={testID}>
       <FormContainer
         autoFocus={valueControlled}
-        bottomElement={
-          valueControlled !== SIGN_IN_METHOD.USERNAME
-            ? ({ elementState }) => (
-                <Wrapper spacing>
-                  <Divider>{t('core:labels.or')}</Divider>
+        bottomElement={({ elementState }) => (
+          <Wrapper spacing>
+            <Divider>{t('core:labels.or')}</Divider>
 
-                  {valueControlled === SIGN_IN_METHOD.EMAIL && (
-                    <Button
-                      elementState={elementState}
-                      icon="phone"
-                      onPress={() => valueControlledSet(SIGN_IN_METHOD.PHONE)}
-                      type={BUTTON_TYPE.TRANSPARENT}>
-                      {t('core:labels.continueWith', { value: t('user:labels.phone') })}
-                    </Button>
-                  )}
+            {valueControlled === SIGN_IN_METHOD.EMAIL && (
+              <Button
+                elementState={elementState}
+                icon="phone"
+                onPress={() => valueControlledSet(SIGN_IN_METHOD.PHONE)}
+                type={BUTTON_TYPE.TRANSPARENT}>
+                {t('core:labels.continueWith', { value: t('user:labels.phone') })}
+              </Button>
+            )}
 
-                  {valueControlled === SIGN_IN_METHOD.PHONE && (
-                    <Button
-                      elementState={elementState}
-                      icon="email"
-                      onPress={() => valueControlledSet(SIGN_IN_METHOD.EMAIL)}
-                      type={BUTTON_TYPE.TRANSPARENT}>
-                      {t('core:labels.continueWith', { value: t('user:labels.email') })}
-                    </Button>
-                  )}
-                </Wrapper>
-              )
-            : undefined
-        }
+            {valueControlled === SIGN_IN_METHOD.PHONE && (
+              <Button
+                elementState={elementState}
+                icon="email"
+                onPress={() => valueControlledSet(SIGN_IN_METHOD.EMAIL)}
+                type={BUTTON_TYPE.TRANSPARENT}>
+                {t('core:labels.continueWith', { value: t('user:labels.email') })}
+              </Button>
+            )}
+          </Wrapper>
+        )}
         errorContextGet={(e) =>
           _checkExists && (e as HttpError).statusCode === HTTP_STATUS_CODE.CONFLICT
             ? { icon: 'people', message: t('auth:messages.userExistsError') }

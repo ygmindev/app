@@ -21,9 +21,6 @@ export class OtpForm implements OtpFormModel {
 
   @withField({ isRepository: true, isUnique: true, type: FIELD_TYPE.STRING })
   phone?: string;
-
-  @withField({ type: FIELD_TYPE.STRING })
-  username?: string;
 }
 
 @withEntity({
@@ -52,7 +49,4 @@ export class Otp extends EntityResource implements OtpModel {
 
   @withField({ isOptional: true, isRepository: true, type: FIELD_TYPE.STRING })
   phone?: string;
-
-  @withField({ type: FIELD_TYPE.STRING })
-  username?: string;
 }

@@ -20,7 +20,7 @@
     "errorOffline": "You are offline",
     "errorUnauthorized": "Unauthorized",
     "nothingToShow": "Nothing to show",
-    "successUpdate": "Updated",
+    "updateSuccess": "Successfully update {{value}}",
     "validateAlphaNumeric": "TRANSLATION_MISSING",
     "validateChanged": "TRANSLATION_MISSING",
     "validateEmail": "TRANSLATION_MISSING",

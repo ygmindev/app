@@ -9,13 +9,11 @@ export interface AuthMenuOptionModel extends MenuOptionModel {
 }
 
 export const AUTH_MENU_OPTIONS: Array<AuthMenuOptionModel> = withId([
-  { isDivider: true, isProtected: true },
-
   {
     icon: 'personCircle',
     id: ACCOUNT,
     isProtected: true,
-    label: ({ t }) => t('account:labels.account'),
+    label: ({ t }) => t('user:labels.account'),
   },
 
   { isDivider: true, isProtected: true },

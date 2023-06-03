@@ -104,42 +104,44 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
         spacing={THEME_SIZE.SMALL}>
         {topElement}
 
-        <VirtualizedList
-          items={options}
-          ref={_virtualizedListRef}
-          render={(option: MenuOptionModel) => {
-            if (option.isDivider) {
-              return <Divider key={option.id} />;
-            }
-            const { color, confirmMessage, elementState, icon, id, label, subOptions } = option;
-            const _option = (value?: boolean): ReactElement => (
-              <Button
-                align={FLEX_ALIGN.FLEX_START}
-                color={color}
-                confirmMessage={confirmMessage}
-                elementState={value ? ELEMENT_STATE.ACTIVE : elementState}
-                icon={icon}
-                isFullWidth
-                key={id}
-                onPress={subOptions ? undefined : async () => await _handlePressOption(option)}
-                onPressOut={() => confirmMessage && _handleToggle(false)}
-                type={BUTTON_TYPE.INVISIBLE}>
-                {renderOption ? renderOption(option) : label}
-              </Button>
-            );
-            return subOptions ? (
-              <Menu
-                anchor={_option}
-                direction={DIRECTION.LEFT}
-                key={id}
-                options={subOptions}
-                ref={subMenuRefs[id]}
-              />
-            ) : (
-              _option()
-            );
-          }}
-        />
+        {options.length && (
+          <VirtualizedList
+            items={options}
+            ref={_virtualizedListRef}
+            render={(option: MenuOptionModel) => {
+              if (option.isDivider) {
+                return <Divider key={option.id} />;
+              }
+              const { color, confirmMessage, elementState, icon, id, label, subOptions } = option;
+              const _option = (value?: boolean): ReactElement => (
+                <Button
+                  align={FLEX_ALIGN.FLEX_START}
+                  color={color}
+                  confirmMessage={confirmMessage}
+                  elementState={value ? ELEMENT_STATE.ACTIVE : elementState}
+                  icon={icon}
+                  isFullWidth
+                  key={id}
+                  onPress={subOptions ? undefined : async () => await _handlePressOption(option)}
+                  onPressOut={() => confirmMessage && _handleToggle(false)}
+                  type={BUTTON_TYPE.INVISIBLE}>
+                  {renderOption ? renderOption(option) : label}
+                </Button>
+              );
+              return subOptions ? (
+                <Menu
+                  anchor={_option}
+                  direction={DIRECTION.LEFT}
+                  key={id}
+                  options={subOptions}
+                  ref={subMenuRefs[id]}
+                />
+              ) : (
+                _option()
+              );
+            }}
+          />
+        )}
       </Wrapper>
     );
 
