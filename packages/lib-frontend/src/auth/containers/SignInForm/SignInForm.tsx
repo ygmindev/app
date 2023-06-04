@@ -49,13 +49,17 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({ method, mode, testI
       <Wrapper
         isCenter
         spacing>
-        <Text type={FONT_TYPE.HEADLINE}>
-          {t('core:labels.welcome', { value: process.env.APP_NAME })}
-        </Text>
+        {mode !== SIGN_IN_MODE.UPDATE && (
+          <Wrapper spacing>
+            <Text type={FONT_TYPE.HEADLINE}>
+              {t('core:labels.welcome', { value: process.env.APP_NAME })}
+            </Text>
 
-        <Text fontSize={THEME_SIZE.LARGE}>
-          {`${t('auth:labels.signIn')} ${t('core:labels.or')} ${t('auth:labels.register')}`}
-        </Text>
+            <Text fontSize={THEME_SIZE.LARGE}>
+              {`${t('auth:labels.signIn')} ${t('core:labels.or')} ${t('auth:labels.register')}`}
+            </Text>
+          </Wrapper>
+        )}
       </Wrapper>
     </StepForm>
   );
