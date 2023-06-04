@@ -1,5 +1,11 @@
-import type { _SwitchFieldPropsModel } from '@lib/frontend/form/components/SwitchField/_SwitchField.models';
-import type { TranslatableFieldPropsModel } from '@lib/frontend/form/form.models';
+import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
+import type {
+  StringFieldPropsModel,
+  TranslatableFieldPropsModel,
+} from '@lib/frontend/form/form.models';
 
 export interface SwitchFieldPropsModel
-  extends TranslatableFieldPropsModel<_SwitchFieldPropsModel> {}
+  extends TranslatableFieldPropsModel<StringFieldPropsModel<'true' | 'false'>> {
+  iconActive?: IconPropsModel['icon'];
+  iconInactive?: IconPropsModel['icon'];
+}
