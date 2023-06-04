@@ -149,7 +149,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
       },
     };
 
-    const leftElementF = (
+    const leftElementF = leftElement && (
       <Appearable
         isCenter
         isVisible={!isEmpty(value) || elementState === ELEMENT_STATE.ACTIVE || !label}

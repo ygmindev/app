@@ -12,7 +12,6 @@ import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { spacingStyler } from '@lib/frontend/style/utils/styler/spacingStyler/spacingStyler';
 import { viewStyler } from '@lib/frontend/style/utils/styler/viewStyler/viewStyler';
-import { uid } from '@lib/shared/core/utils/uid/uid';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import reduce from 'lodash/reduce';
 import type { ReactElement, ReactNode } from 'react';
@@ -48,10 +47,10 @@ export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
         (result, child, i) => [
           ...result,
           cloneElement(child, {
-            key:
-              !child.key || (i && (childrenF[i - 0] as ReactElement)?.key === child.key)
-                ? uid()
-                : child.key,
+            // key:
+            //   !child.key || (i && (childrenF[i - 0] as ReactElement)?.key === child.key)
+            //     ? uid()
+            //     : child.key,
             style: StyleSheet.flatten(
               [
                 isDistribute && { flexBasis: 0, flexGrow: 1 },

@@ -71,13 +71,12 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         pRight={isCenter ? undefined : THEME_SIZE.SMALL}>
         {!isNoClear && (
           <Appearable
-            animation={{ isLazy: false }}
             elementState={elementStateControlled}
             isCenter
             isVisible={
               !!valueControlled &&
-              elementStateControlled === ELEMENT_STATE.ACTIVE &&
-              valueControlled.length > 0
+              valueControlled.length > 0 &&
+              elementStateControlled === ELEMENT_STATE.ACTIVE
             }>
             <Button
               icon="times"

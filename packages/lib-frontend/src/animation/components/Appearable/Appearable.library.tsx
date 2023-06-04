@@ -28,7 +28,6 @@ export const props: LibraryPropsModel<AppearablePropsModel> = {
   },
   category: 'animation',
   defaultProps: {
-    animation: { isLazy: false },
     children: <WrapperFixture />,
   },
 };
