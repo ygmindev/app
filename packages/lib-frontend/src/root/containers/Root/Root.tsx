@@ -43,7 +43,7 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
         <StyleProvider />,
         <LocaleProvider value={context?.locale} />,
         <AppProvider />,
-        <store.Provider value={{ ...context?.state, actionContext, store: store }} />,
+        <store.Provider value={{ ...context?.state, actionContext, store }} />,
         <Suspense />, // to provider?
       ].filter(Boolean),
     [additionalProviders, context],

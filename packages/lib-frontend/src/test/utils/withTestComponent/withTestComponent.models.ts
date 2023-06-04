@@ -1,9 +1,7 @@
 import type { RefPropsModel } from '@lib/frontend/core/core.models';
 import type { TestIdPropsModel } from '@lib/frontend/test/test.models';
 import type { PartialModel, RequiredModel } from '@lib/shared/core/core.models';
-import type {
-  WithTestModel,
-} from '@lib/shared/test/utils/withTest/withTest.models';
+import type { WithTestModel } from '@lib/shared/test/utils/withTest/withTest.models';
 import type { ComponentType } from 'react';
 
 export interface WithTestComponentParamsModel<
@@ -13,7 +11,7 @@ export interface WithTestComponentParamsModel<
   defaultProps?: TDefault & RefPropsModel;
   displayName?: string;
   target: ComponentType<TProps>;
-};
+}
 
 export type WithTestComponentModel<
   TProps,

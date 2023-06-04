@@ -58,5 +58,5 @@ export const useErrorContext = (): UseErrorContextModel => {
         });
   };
 
-  return { handleError: handleError };
+  return { handleError };
 };

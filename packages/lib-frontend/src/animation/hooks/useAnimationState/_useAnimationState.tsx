@@ -13,7 +13,14 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
   elementState = ELEMENT_STATE.INACTIVE,
   ref = null,
 }: _UseAnimationStateParamsModel<TStyle>): _UseAnimationStateModel<TStyle> => {
-  const { delay, duration, isInfinite, isInitial = false, isLazy = true, states } = animation || {};
+  const {
+    delay,
+    duration,
+    isInfinite,
+    isInitial = false,
+    isLazy = false,
+    states,
+  } = animation || {};
   const [current, currentSet] = useState<TStyle | undefined>(
     states ? states[elementState] : undefined,
   );

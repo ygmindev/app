@@ -1,4 +1,3 @@
-import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Slide } from '@lib/frontend/animation/components/Slide/Slide';
 import { Protectable } from '@lib/frontend/auth/components/Protectable/Protectable';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
@@ -68,14 +67,23 @@ export const Route: SFCModel<RoutePropsModel> = ({ children, route, testID, ...p
         );
       default:
         return (
-          <Appearable
+          <Wrapper
             isAbsoluteFill
-            isVisible={isActiveF}
             style={styles}
-            testID={testID}>
+            testID={testID}
+            zIndex={isLeafActiveF ? 1 : 0}>
             {element}
-          </Appearable>
+          </Wrapper>
         );
+      // return (
+      //   <Appearable
+      //     isAbsoluteFill
+      //     isVisible={isActiveF}
+      //     style={styles}
+      //     testID={testID}>
+      //     {element}
+      //   </Appearable>
+      // );
     }
   }, [element, isBack, isLeaf, isActiveF, dimension, route.transition]);
 

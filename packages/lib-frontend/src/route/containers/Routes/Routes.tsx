@@ -1,8 +1,8 @@
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { Route } from '@lib/frontend/route/components/Route/Route';
-import { _Router } from '@lib/frontend/route/containers/Router/_Router';
-import type { RouterPropsModel } from '@lib/frontend/route/containers/Router/Router.models';
+import { _Routes } from '@lib/frontend/route/containers/Routes/_Routes';
+import type { RoutesPropsModel } from '@lib/frontend/route/containers/Routes/Routes.models';
 import type { RouteModel } from '@lib/frontend/route/route.models';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
@@ -26,7 +26,7 @@ const getRoute = ({ pathname, ...route }: RouteModel, depth = 1): RouteModel => 
             grow
             isOverflowHidden
             position={SHAPE_POSITION.RELATIVE}>
-            <_Router
+            <_Routes
               depth={depth + 1}
               routes={routeF.routes.map((child) =>
                 getRoute(
@@ -47,7 +47,7 @@ const getRoute = ({ pathname, ...route }: RouteModel, depth = 1): RouteModel => 
   };
 };
 
-export const Router: SFCModel<RouterPropsModel> = ({ routes, testID, ...props }) => {
+export const Routes: SFCModel<RoutesPropsModel> = ({ routes, testID, ...props }) => {
   const { styles } = useStyles({ props });
   const routesF = useMemo(() => routes.map((route) => getRoute(route)), [routes]);
   return (
@@ -57,7 +57,7 @@ export const Router: SFCModel<RouterPropsModel> = ({ routes, testID, ...props })
       position={SHAPE_POSITION.RELATIVE}
       style={styles}
       testID={testID}>
-      <_Router routes={routesF} />
+      <_Routes routes={routesF} />
     </Wrapper>
   );
 };

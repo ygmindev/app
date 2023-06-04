@@ -19,7 +19,6 @@ export const Appearable: SFCModel<AppearablePropsModel> = ({
   <Wrapper
     {...props}
     animation={{
-      isInitial: true,
       isLazy: false,
       states: merge(
         [ANIMATION_STATES_APPEARABLE, isScalable && ANIMATION_STATES_SCALABLE].filter(

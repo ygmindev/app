@@ -4,7 +4,11 @@ import type {
   PositionModel,
 } from '@lib/frontend/core/core.models';
 import type { StylePropsModel, ViewStyleModel } from '@lib/frontend/style/style.models';
-import type { CallableArgsModel, CallableArgsPromiseModel, CallableModel, CallablePromiseModel } from '@lib/shared/core/core.models';
+import type {
+  CallableArgsModel,
+  CallableArgsPromiseModel,
+  CallableModel,
+} from '@lib/shared/core/core.models';
 import type { ScrollView } from 'react-native';
 
 export interface _ViewPropsModel extends ChildrenPropsModel, StylePropsModel<ViewStyleModel> {

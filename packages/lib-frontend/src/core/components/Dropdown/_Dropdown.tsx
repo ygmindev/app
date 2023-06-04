@@ -21,12 +21,13 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   const theme = useTheme();
   return (
     <Tippy
-      animation
+      animation={false}
       appendTo={() => document.body}
       content={
         <Appearable
           grow
-          isVisible={isOpen}>
+          isVisible={isOpen}
+          testID="XXX">
           {children}
         </Appearable>
       }
@@ -52,7 +53,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
             ]
           : [],
       }}
-      visible={isOpen}>
+      visible>
       <View style={styles}>{anchor}</View>
     </Tippy>
   );

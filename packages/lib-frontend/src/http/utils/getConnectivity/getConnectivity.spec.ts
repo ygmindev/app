@@ -1,5 +1,5 @@
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { getConnectivity } from '@lib/frontend/http/utils/getConnectivity/getConnectivity';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ getConnectivity });
 
