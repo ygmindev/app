@@ -10,11 +10,15 @@ import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/sha
 import trimEnd from 'lodash/trimEnd';
 import { useMemo } from 'react';
 
-const getRoute = ({ pathname, ...route }: RouteModel, depth = 1): RouteModel => {
+const getRoute = ({ pathname, ...route }: RouteModel, depth = 0): RouteModel => {
   const isLeaf = !route.routes;
   const root = trimEnd(pathname, '/*');
   const pathnameF = trimPathname(isLeaf ? pathname : `${root}/*`);
   const routeF: RouteModel = { ...route, pathname: pathnameF };
+  const depthChildren = pathnameF !== '/' ? depth + 1 : depth;
+
+  // console.warn(`${pathnameF} (${pathname}): ${depth} -> splice ${depth + 1}`);
+
   return {
     ...routeF,
     element: (
@@ -27,7 +31,7 @@ const getRoute = ({ pathname, ...route }: RouteModel, depth = 1): RouteModel => 
             isOverflowHidden
             position={SHAPE_POSITION.RELATIVE}>
             <_Routes
-              depth={depth + 1}
+              depth={depthChildren}
               routes={routeF.routes.map((child) =>
                 getRoute(
                   {
@@ -36,7 +40,7 @@ const getRoute = ({ pathname, ...route }: RouteModel, depth = 1): RouteModel => 
                     root: trimPathname(`${route.root ?? ''}/${root}`),
                     transition: child.transition || routeF.transition,
                   },
-                  depth + 1,
+                  depthChildren,
                 ),
               )}
             />

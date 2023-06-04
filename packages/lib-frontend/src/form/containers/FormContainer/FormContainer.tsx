@@ -261,7 +261,7 @@ const FormContainerF = forwardRef(
 
             <Button
               elementState={elementStateF}
-              icon="chevronRightCircle"
+              icon="chevronRight"
               onPress={handleSubmit}>
               {submitLabel || t('core:labels.continue')}
             </Button>

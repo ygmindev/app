@@ -46,7 +46,6 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
           isProtectable: true,
           ns: [ACCOUNT, BILLING, SETTINGS, USER],
           pathname: ACCOUNT,
-          route: ROUTE_TRANSITION.SLIDE,
           routes: [
             {
               element: <AccountPage />,
@@ -74,6 +73,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
             },
           ],
           title: ({ t }) => t('user:labels.account'),
+          transition: ROUTE_TRANSITION.SLIDE,
         },
 
         {

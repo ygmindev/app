@@ -58,7 +58,6 @@ export const config: CssConfigModel = (theme) => `
   }
 
   input {
-    min-width: 0 !important;
     border: none !important;
     outline: inherit !important;
     cursor: inherit !important;

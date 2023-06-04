@@ -168,7 +168,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
         height={height}
         isOverflowHidden
         position={SHAPE_POSITION.RELATIVE}
-        round={round ?? true}
+        round={round || true}
         style={styles}
         testID={testID}
         width={width}
@@ -245,14 +245,16 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
               zIndex={-1}>
               {leftElementF}
 
-              {Component({
-                ...inputProps,
-                style: StyleSheet.flatten([
-                  ...inputProps.style,
-                  { width: '100%' },
-                  isCenter && { padding: 0, textAlign: 'center' },
-                ]),
-              })}
+              <Wrapper grow>
+                {Component({
+                  ...inputProps,
+                  style: StyleSheet.flatten([
+                    ...inputProps.style,
+                    { minWidth: '100%', width: 0 },
+                    isCenter && { padding: 0, textAlign: 'center' },
+                  ]),
+                })}
+              </Wrapper>
 
               {rightElement}
             </Wrapper>
