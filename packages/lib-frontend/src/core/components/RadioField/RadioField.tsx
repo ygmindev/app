@@ -42,10 +42,10 @@ export const RadioField = <TType extends string = string>({
       spacing={THEME_SIZE.SMALL}
       style={styles}>
       {options.map(({ icon, id, label }) => {
-        const isActive = id === valueControlled;
+        const isActiveF = id === valueControlled;
         const colorF =
-          theme.colors.tone[isActive ? color : THEME_COLOR.NEUTRAL][
-            isDisabled || !isActive ? THEME_ROLE.MUTED : THEME_ROLE.MAIN
+          theme.colors.tone[isActiveF ? color : THEME_COLOR.NEUTRAL][
+            isDisabled || !isActiveF ? THEME_ROLE.MUTED : THEME_ROLE.MAIN
           ];
         return (
           <Activatable key={id}>
@@ -66,7 +66,7 @@ export const RadioField = <TType extends string = string>({
                   isCenter
                   round={outerCircleSize / 2}
                   width={outerCircleSize}>
-                  <Appearable isVisible={isActive || isActive}>
+                  <Appearable isVisible={isActive || isActiveF}>
                     <Wrapper
                       backgroundColor={colorF}
                       height={innerCircleSize}
