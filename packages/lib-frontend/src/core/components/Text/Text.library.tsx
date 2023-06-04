@@ -12,6 +12,7 @@ export const props: LibraryPropsModel<TextPropsModel> = {
   Component: Text,
   defaultProps: {
     children: 'children',
+    width: 100,
   },
   variants: [
     ...Object.values(THEME_SIZE_MORE).map((fontSize) => ({ props: { fontSize } })),
@@ -23,7 +24,7 @@ export const props: LibraryPropsModel<TextPropsModel> = {
       .flat(),
     ...Object.values(FONT_ALIGN).map((align) => ({ props: { align } })),
     { props: { isBold: true } },
-    { props: { isEllipsis: true } },
+    { props: { children: 'children too long', isEllipsis: true } },
     { props: { type: FONT_TYPE.HEADLINE } },
     { props: { type: FONT_TYPE.TITLE } },
     { props: { type: FONT_TYPE.SUBTITLE } },

@@ -18,6 +18,9 @@ export const props: LibraryPropsModel<ButtonPropsModel> = {
     ...Object.values(THEME_COLOR).map((color) => ({
       props: { color, type: BUTTON_TYPE.TRANSPARENT },
     })),
+    ...Object.values(THEME_COLOR).map((color) => ({
+      props: { color, type: BUTTON_TYPE.INVISIBLE },
+    })),
     { props: { children: undefined, icon: 'personCircle' } },
   ],
 };

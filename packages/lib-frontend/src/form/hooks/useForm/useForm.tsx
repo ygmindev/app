@@ -42,7 +42,7 @@ export const useForm = <TType = void, TResult = void>({
             return merge<FormErrorModel<TType>>([error, result]);
           }
           if (isFunction(v)) {
-            const error = v({ data, value: value });
+            const error = v({ data, value });
             if (isEmpty(error)) {
               delete (result as Record<string, unknown>)[k];
             } else {
@@ -61,9 +61,10 @@ export const useForm = <TType = void, TResult = void>({
       isBlocking && actions?.app.isLoadingSet(true);
       const valuesF = beforeSubmit ? await beforeSubmit(values) : values;
       const data = onSubmit && (await onSubmit(valuesF));
-      onSuccess && (await onSuccess(values, data));
+      data && onSuccess && (await onSuccess(values, data));
       return data || null;
     } catch (e) {
+      console.warn(e);
       onError ? onError(e as Error) : handleError(e as Error);
     } finally {
       isBlocking && actions?.app.isLoadingSet(false);

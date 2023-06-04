@@ -67,6 +67,7 @@ const FormContainerF = forwardRef(
       leftElement,
       onCancel,
       onComplete,
+      onError,
       onSubmit,
       onSuccess,
       rows,
@@ -123,6 +124,7 @@ const FormContainerF = forwardRef(
       initialValues,
       isBlocking,
       onComplete,
+      onError,
       onSubmit: handleSubmitF,
       onSuccess: async (data, result) => {
         onSuccess && (await onSuccess(data, result));

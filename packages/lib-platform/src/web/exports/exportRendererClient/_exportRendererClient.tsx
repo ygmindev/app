@@ -26,11 +26,9 @@ export const _exportRendererClient = ({
       },
       context,
     ]);
-
     const App: FCModel = () => render({ children: <Page {...pageProps} />, context: contextF });
     AppRegistry.registerComponent('App', () => App);
     const { element } = AppRegistry.getApplication('App', {});
-
     root && (isHydration ? hydrateRoot(root, element) : createRoot(root).render(element));
   },
 });

@@ -1,3 +1,4 @@
+import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Slide } from '@lib/frontend/animation/components/Slide/Slide';
 import { Protectable } from '@lib/frontend/auth/components/Protectable/Protectable';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
@@ -50,38 +51,43 @@ export const Route: SFCModel<RoutePropsModel> = ({ children, route, testID, ...p
   );
   element = <Container>{element}</Container>;
   const pathname = useMemo(() => trimPathname(`${route.root || ''}/${route.pathname}`), [route]);
-  const isActiveF = useMemo(() => isActive({ isExact: true, pathname: pathname }), [pathname]);
-  const isLeafActive = isLeaf && isActiveF;
-
+  const isLeafActive = useMemo(() => isActive({ isExact: true, pathname }), [pathname]);
+  const isActiveF = useMemo(() => isActive({ pathname }), [pathname]);
+  const isLeafActiveF = isLeaf && isLeafActive;
   const childrenF = useMemo(() => {
     switch (route.transition) {
       case ROUTE_TRANSITION.SLIDE:
         return (
           <Slide
             isBack={isBack}
-            measure={dimension}>
+            measure={dimension}
+            style={styles}
+            testID={testID}>
             {element}
           </Slide>
         );
       default:
-        return element;
+        return (
+          <Appearable
+            isAbsoluteFill
+            isVisible={isActiveF}
+            style={styles}
+            testID={testID}>
+            {element}
+          </Appearable>
+        );
     }
-  }, [element, isBack, dimension, route.transition]);
+  }, [element, isBack, isLeaf, isActiveF, dimension, route.transition]);
 
   return (
     <>
-      {isLeafActive && route.header && (
+      {isLeafActiveF && route.header && (
         <Portal>
           <RouteHeader route={route} />
         </Portal>
       )}
 
-      <Wrapper
-        grow
-        style={styles}
-        testID={testID}>
-        {childrenF}
-      </Wrapper>
+      {childrenF}
     </>
   );
 };

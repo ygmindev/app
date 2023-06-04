@@ -34,7 +34,7 @@ export const config: ServerlessConfigModel = () => ({
     cors: {
       allowedHeaders: ['*'],
 
-      allowedOrigins: ['WEB'].map((name) => appUri({ name })),
+      allowedOrigins: ['WEB', 'WEB_LIBRARY'].map((name) => appUri({ name })),
     },
 
     memory: 128,

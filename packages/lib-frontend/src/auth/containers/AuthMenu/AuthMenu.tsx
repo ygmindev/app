@@ -9,6 +9,7 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Divider } from '@lib/frontend/core/components/Divider/Divider';
 import { Menu } from '@lib/frontend/core/components/Menu/Menu';
 import { Text } from '@lib/frontend/core/components/Text/Text';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
@@ -53,7 +54,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
       style={styles}
       topElement={
         currentUser ? (
-          <>
+          <Wrapper spacing={THEME_SIZE.SMALL}>
             <Text
               align={FONT_ALIGN.CENTER}
               isEllipsis
@@ -63,7 +64,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
             </Text>
 
             <Divider />
-          </>
+          </Wrapper>
         ) : (
           <SignInButton />
         )

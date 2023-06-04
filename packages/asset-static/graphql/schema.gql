@@ -1109,7 +1109,6 @@ type Mutation {
   LinkedUserRemove(input: LinkedUserRemoveInput): LinkedUserRemoveOutput
   LinkedUserUpdate(input: LinkedUserUpdateInput): LinkedUserUpdateOutput
   OtpCreate(input: OtpCreateInput): OtpCreateOutput
-  OtpIfDoesNotExistCreate(input: OtpIfDoesNotExistCreateInput): OtpIfDoesNotExistCreateOutput
   OtpRemove(input: OtpRemoveInput): OtpRemoveOutput
   OtpUpdate(input: OtpUpdateInput): OtpUpdateOutput
   PaymentMethodTokenCreate(input: PaymentMethodTokenCreateInput): PaymentMethodTokenCreateOutput
@@ -1203,21 +1202,6 @@ type OtpGetManyOutput {
 }
 
 type OtpGetOutput {
-  result: Otp
-}
-
-input OtpIfDoesNotExistCreateFormInput {
-  callingCode: String
-  checkExists: Boolean
-  email: String
-  phone: String
-}
-
-input OtpIfDoesNotExistCreateInput {
-  form: OtpIfDoesNotExistCreateFormInput
-}
-
-type OtpIfDoesNotExistCreateOutput {
   result: Otp
 }
 
