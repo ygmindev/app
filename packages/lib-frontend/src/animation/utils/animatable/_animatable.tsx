@@ -19,22 +19,20 @@ export const _animatable = <TProps, TStyle extends StyleModel = ViewStyleModel>(
     PropsModel<_AnimatableModel<TProps, TStyle>>
   >(({ animation, elementState, ...props }, ref) => {
     const { styles } = useStyles({ props });
-    const { animationProps, animationState, isRender, to, toState } = useAnimationState({
+    const { animationProps, animationState, to, toState } = useAnimationState({
       animation,
       elementState,
       onElementStateChange: props.onElementStateChange,
       testID: props.testID,
     });
     useImperativeHandle(ref, () => ({ to, toState }));
-    return isRender
-      ? createElement(ComponentF, {
-          ...animationProps,
-          ...props,
-          ref,
-          state: animationState,
-          style: styles,
-        } as unknown as PropsModel<typeof ComponentF>)
-      : null;
+    return createElement(ComponentF, {
+      ...animationProps,
+      ...props,
+      ref,
+      state: animationState,
+      style: styles,
+    } as unknown as PropsModel<typeof ComponentF>);
   });
   return Animatable as _AnimatableModel<TProps, TStyle>;
 };

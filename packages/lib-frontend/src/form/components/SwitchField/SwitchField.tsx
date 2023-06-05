@@ -97,7 +97,6 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
           width={childSize}>
           {iconActive && (
             <Appearable
-              animation={{ isLazy: true }}
               isAbsoluteFill
               isVisible={valueControlled === 'true'}>
               <Icon
@@ -110,7 +109,6 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
 
           {iconInactive && (
             <Appearable
-              animation={{ isLazy: true }}
               isAbsoluteFill
               isVisible={valueControlled === 'false'}>
               <Icon

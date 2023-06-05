@@ -19,7 +19,6 @@ export const Appearable: SFCModel<AppearablePropsModel> = ({
   <Wrapper
     {...props}
     animation={{
-      isLazy: false,
       states: merge(
         [ANIMATION_STATES_APPEARABLE, isScalable && ANIMATION_STATES_SCALABLE].filter(
           Boolean,
@@ -27,7 +26,8 @@ export const Appearable: SFCModel<AppearablePropsModel> = ({
       ),
       ...animation,
     }}
-    elementState={isVisible ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.EXIT}>
+    elementState={isVisible ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.EXIT}
+    isHidden={!isVisible}>
     {children}
   </Wrapper>
 );

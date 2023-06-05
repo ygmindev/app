@@ -25,10 +25,8 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
       appendTo={() => document.body}
       content={
         <Appearable
-          animation={{ isLazy: true }}
           grow
-          isVisible={isOpen}
-          testID="xxx">
+          isVisible={isOpen}>
           {children}
         </Appearable>
       }

@@ -13,6 +13,7 @@ import type { ScrollView } from 'react-native';
 
 export interface _ViewPropsModel extends ChildrenPropsModel, StylePropsModel<ViewStyleModel> {
   isFocusable?: boolean;
+  isHidden?: boolean;
   isHorizontalScrollable?: boolean;
   isVerticalScrollable?: boolean;
   onMeasure?(measure: MeasureModel): void;

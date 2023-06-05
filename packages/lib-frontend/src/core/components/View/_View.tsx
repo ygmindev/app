@@ -19,6 +19,7 @@ export const _viewParams: ComposeComponentParamsModel<
   getProps: ({
     children,
     isFocusable = false,
+    isHidden,
     onMeasure,
     onMouseEnter,
     onMouseLeave,
@@ -43,6 +44,8 @@ export const _viewParams: ComposeComponentParamsModel<
     onResponderGrant: () => onResponderGrant && onResponderGrant(),
 
     onResponderRelease: () => onResponderRelease && onResponderRelease(),
+
+    pointerEvents: isHidden ? 'none' : undefined,
   }),
 };
 

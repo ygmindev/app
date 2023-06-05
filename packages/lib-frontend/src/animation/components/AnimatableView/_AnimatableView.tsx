@@ -21,7 +21,7 @@ export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewP
     const theme = useTheme();
     const { styles } = useStyles({ props });
 
-    const { animationProps, animationState, isRender, to, toState } = useAnimationState({
+    const { animationProps, animationState, to, toState } = useAnimationState({
       animation,
       elementState,
       onElementStateChange: props.onElementStateChange,
@@ -43,7 +43,11 @@ export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewP
         ? MotiScrollView
         : MotiView;
 
-    return isRender ? (
+    if (testID === 'xxx') {
+      console.warn(elementState);
+    }
+
+    return (
       <Component
         {...(_viewParams.getProps && _viewParams.getProps({ ...props, style: styles }, theme))}
         {...(_viewParamsPressable.getProps &&
@@ -58,5 +62,5 @@ export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewP
         testID={testID}>
         {children}
       </Component>
-    ) : null;
+    );
   });

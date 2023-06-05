@@ -11,7 +11,6 @@ export interface AnimationModel<
   duration?: number;
   isInfinite?: boolean;
   isInitial?: boolean;
-  isLazy?: boolean;
   onEnd?: CallableModel;
   states?: TStates;
 }
