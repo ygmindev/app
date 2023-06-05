@@ -30,14 +30,9 @@ export const Route: SFCModel<RoutePropsModel> = ({ children, route, testID, ...p
   const isBack = useStore((state) => state.route.isBack);
   const isLeaf = !route.routes;
 
-  useAsync(
-    {
-      onMount: async () => {
-        isLeaf && track({ action: TRACKING_EVENT_ACTION.OPEN, object: TRACKING_EVENT_OBJECT.PAGE });
-      },
-    },
-    [isLeaf],
-  );
+  useAsync(async () => {
+    isLeaf && track({ action: TRACKING_EVENT_ACTION.OPEN, object: TRACKING_EVENT_OBJECT.PAGE });
+  }, [isLeaf]);
 
   const Container = route.isProtectable ? Protectable : Fragment;
   let element = cloneElement(

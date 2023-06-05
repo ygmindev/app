@@ -24,6 +24,7 @@ export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewP
     const { animationProps, animationState, isRender, to, toState } = useAnimationState({
       animation,
       elementState,
+      onElementStateChange: props.onElementStateChange,
       ref,
       testID,
     });

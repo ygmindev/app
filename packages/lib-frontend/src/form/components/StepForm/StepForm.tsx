@@ -46,7 +46,7 @@ export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends
     dataSet(undefined);
   };
 
-  useAsync({ onMount: async () => currentSetF(0) });
+  useAsync(async () => currentSetF(0));
 
   const currentSetF = (value: number): void => {
     currentSet(value);

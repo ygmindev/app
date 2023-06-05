@@ -22,6 +22,7 @@ export const _animatable = <TProps, TStyle extends StyleModel = ViewStyleModel>(
     const { animationProps, animationState, isRender, to, toState } = useAnimationState({
       animation,
       elementState,
+      onElementStateChange: props.onElementStateChange,
       testID: props.testID,
     });
     useImperativeHandle(ref, () => ({ to, toState }));

@@ -8,7 +8,6 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import type { RSFCModel } from '@lib/frontend/core/core.models';
 import { THEME_COLOR, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 export const Dropdown: RSFCModel<DropdownRefModel, DropdownPropsModel> = forwardRef(
@@ -37,10 +36,7 @@ export const Dropdown: RSFCModel<DropdownRefModel, DropdownPropsModel> = forward
         direction={direction}
         isFullWidth={isFullWidth}
         isOpen={isOpen}
-        onToggle={async (value) => {
-          await sleep({ duration: 100 });
-          onToggle(value);
-        }}>
+        onToggle={onToggle}>
         <Wrapper
           backgroundColor={THEME_COLOR.NEUTRAL}
           border

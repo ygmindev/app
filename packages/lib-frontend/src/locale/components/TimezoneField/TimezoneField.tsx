@@ -26,10 +26,8 @@ export const TimezoneField: SFCModel<TimezoneFieldPropsModel> = ({
   });
   const timezone = useStore((state) => state.locale.timezone);
 
-  useAsync({
-    onMount: async () => {
-      timezone && valueControlledSet(timezone.name);
-    },
+  useAsync(async () => {
+    timezone && valueControlledSet(timezone.name);
   });
 
   const options = useMemo(

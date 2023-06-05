@@ -112,7 +112,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                   ),
                   ns: [AUTH, USER],
                   pathname: PHONE,
-                  title: ({ t }) => t('core:labels.edit', { value: t('user:labels.email') }),
+                  title: ({ t }) => t('core:labels.edit', { value: t('user:labels.phone') }),
                 },
               ],
             },

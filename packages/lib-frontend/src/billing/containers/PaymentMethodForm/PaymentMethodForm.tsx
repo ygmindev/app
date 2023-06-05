@@ -38,7 +38,7 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
 
   const ref = useRef<FormRefModel>(null);
 
-  useAsync({ onMount: async () => mutate() });
+  useAsync(async () => mutate());
 
   return isLoading ? (
     <Loading fontSize={THEME_SIZE_MORE.XLARGE} />

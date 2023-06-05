@@ -37,12 +37,10 @@ export const CountryField: SFCModel<CountryFieldPropsModel> = ({
   );
 
   useAsync(
-    {
-      onMount: async (isMounted) => {
-        const country = isMounted() && (await currentCountry());
-        const value = country && find(options, ({ code }) => code.includes(country));
-        isMounted() && value && valueControlledSet(value.id);
-      },
+    async (isMounted) => {
+      const country = isMounted() && (await currentCountry());
+      const value = country && find(options, ({ code }) => code.includes(country));
+      isMounted() && value && valueControlledSet(value.id);
     },
     [options],
   );

@@ -18,6 +18,7 @@ export const _AnimatableText: RSFCModel<
   const { animationProps, animationState, isRender, to, toState } = useAnimationState({
     animation,
     elementState,
+    onElementStateChange: props.onElementStateChange,
     ref,
     testID: props.testID,
   });

@@ -42,14 +42,12 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
   const barRef = useRef<WrapperRefModel>(null);
 
   useAsync(
-    {
-      onMount: async (isMounted) => {
-        if (!isInfinite) {
-          barRef.current?.toState(ELEMENT_STATE.ACTIVE);
-          await sleep({ duration: NOTIFICATION_DURATION });
-          isMounted() && remove(id);
-        }
-      },
+    async (isMounted) => {
+      if (!isInfinite) {
+        barRef.current?.toState(ELEMENT_STATE.ACTIVE);
+        await sleep({ duration: NOTIFICATION_DURATION });
+        isMounted() && remove(id);
+      }
     },
     [isInfinite, remove, id],
   );

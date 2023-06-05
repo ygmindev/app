@@ -4,8 +4,8 @@ import type {
 } from '@lib/frontend/animation/hooks/useAnimationState/_useAnimationState.models';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { useChange } from '@lib/frontend/core/hooks/useChange/useChange';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import type { StyleModel, ViewStyleModel } from '@lib/frontend/style/style.models';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import type { DynamicStyleProp, MotiTranformProps, UseDynamicAnimationState } from 'moti';
 import { useDynamicAnimation } from 'moti';
 import { useState } from 'react';
@@ -13,7 +13,9 @@ import { useState } from 'react';
 export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
   animation,
   elementState = ELEMENT_STATE.INACTIVE,
+  onElementStateChange,
   ref = null,
+  testID,
 }: _UseAnimationStateParamsModel<TStyle>): _UseAnimationStateModel<TStyle> => {
   const {
     delay,
@@ -28,10 +30,13 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
   );
   const [isAnimating, isAnimatingSet] = useState<boolean>(false);
 
+  const theme = useTheme();
   useChange(elementState, () => {
-    if (isLazy && elementState === ELEMENT_STATE.EXIT) {
+    if (testID === 'xxx') {
       isAnimatingSet(true);
-      sleep({ duration }).then(() => isAnimatingSet(false));
+      // sleep({ duration }).then(() => isAnimatingSet(false));
+      console.warn(theme.animation.transition);
+      setTimeout(() => isAnimatingSet(false), theme.animation.transition);
     }
   });
 
@@ -52,9 +57,10 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
       currentSet(params as TStyle);
     },
     toState: (params) => {
-      states &&
-        states[params] &&
+      if (states && states[params]) {
         animationState.animateTo(states[params] as DynamicStyleProp<MotiTranformProps>);
+        onElementStateChange && onElementStateChange(params);
+      }
       currentSet(states ? (states[params] as TStyle) : undefined);
     },
   };

@@ -10,10 +10,8 @@ export const LocaleProvider: SFCModel<LocaleProviderPropsModel> = ({ children, v
   const actions = useActions();
   const isTimezoneAutomatic = useStore((state) => state.locale.isTimezoneAutomatic);
   useAsync(
-    {
-      onMount: async (isMounted) => {
-        isMounted() && isTimezoneAutomatic && actions?.locale.timezoneSet(currentTimezone());
-      },
+    async (isMounted) => {
+      isMounted() && isTimezoneAutomatic && actions?.locale.timezoneSet(currentTimezone());
     },
     [isTimezoneAutomatic],
   );

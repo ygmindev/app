@@ -27,7 +27,8 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
         <Appearable
           animation={{ isLazy: true }}
           grow
-          isVisible={isOpen}>
+          isVisible={isOpen}
+          testID="xxx">
           {children}
         </Appearable>
       }
@@ -36,7 +37,9 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
       interactive
       maxWidth={maxWidth ?? '100%'}
       offset={direction ? [0, theme.shape.spacing.m] : undefined}
-      onClickOutside={() => onToggle(false)}
+      onClickOutside={() => {
+        onToggle(false);
+      }}
       placement={direction ?? DIRECTION.BOTTOM}
       popperOptions={{
         modifiers: isFullWidth
