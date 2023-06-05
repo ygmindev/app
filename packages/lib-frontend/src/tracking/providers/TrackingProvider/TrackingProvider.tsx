@@ -16,10 +16,7 @@ export const TrackingProvider: SFCModel<TrackingProviderPropsModel> = ({ childre
     }
   }, [initialize]);
 
-  useChange({
-    onChange: () => currentUser && identify(currentUser._id),
-    value: currentUser?._id,
-  });
+  useChange(currentUser?._id, () => currentUser && identify(currentUser._id));
 
   return <>{children}</>;
 };

@@ -19,6 +19,7 @@ export const _AnimatableText: RSFCModel<
     animation,
     elementState,
     ref,
+    testID: props.testID,
   });
 
   useImperativeHandle(ref, () => ({ to, toState }));

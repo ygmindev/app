@@ -5,13 +5,12 @@ import type {
 } from '@lib/frontend/core/hooks/useChange/useChange.models';
 import { useEffect } from 'react';
 
-export const useChange = <TType extends unknown>({
-  onChange,
-  value,
-}: UseChangeParamsModel<TType>): UseChangeModel<TType> => {
-  const previous = _useChange<TType>({ value });
+export const useChange = <TType extends unknown>(
+  ...[value, onChange]: UseChangeParamsModel<TType>
+): UseChangeModel<TType> => {
+  const previous = _useChange<TType>(value);
   useEffect(() => {
     onChange && onChange(previous);
-  }, [onChange, previous]);
+  }, [previous]);
   return previous;
 };

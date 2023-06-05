@@ -5,7 +5,5 @@ import type {
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
 import { usePreviousDistinct } from 'react-use';
 
-export const _useChange = <TType,>({
-  value,
-}: _UseChangeParamsModel<TType>): _UseChangeModel<TType> =>
-  usePreviousDistinct<TType>(value, isEqual);
+export const _useChange = <TType,>(params: _UseChangeParamsModel<TType>): _UseChangeModel<TType> =>
+  usePreviousDistinct<TType>(params, isEqual);

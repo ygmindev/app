@@ -25,6 +25,7 @@ export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewP
       animation,
       elementState,
       ref,
+      testID,
     });
 
     useImperativeHandle(ref, () => ({

@@ -12,7 +12,7 @@ export const Slides: SFCModel<SlidesPropsModel> = ({ current, slides, testID, ..
   const { styles } = useStyles({ props });
   const [measure, measureSet] = useState<MeasureModel>();
   const [currentF, currentSet] = useState(current);
-  const previous = useChange({ onChange: () => currentSet(current), value: current });
+  const previous = useChange(current, () => currentSet(current));
   const isBack = useMemo(() => (previous || 0) > (current || 0), [previous, current]);
   return (
     <Wrapper

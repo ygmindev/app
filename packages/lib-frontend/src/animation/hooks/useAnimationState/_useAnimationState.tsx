@@ -3,7 +3,9 @@ import type {
   _UseAnimationStateParamsModel,
 } from '@lib/frontend/animation/hooks/useAnimationState/_useAnimationState.models';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { useChange } from '@lib/frontend/core/hooks/useChange/useChange';
 import type { StyleModel, ViewStyleModel } from '@lib/frontend/style/style.models';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import type { DynamicStyleProp, MotiTranformProps, UseDynamicAnimationState } from 'moti';
 import { useDynamicAnimation } from 'moti';
 import { useState } from 'react';
@@ -24,6 +26,15 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
   const [current, currentSet] = useState<TStyle | undefined>(
     states ? states[elementState] : undefined,
   );
+  const [isAnimating, isAnimatingSet] = useState<boolean>(false);
+
+  useChange(elementState, () => {
+    if (isLazy && elementState === ELEMENT_STATE.EXIT) {
+      isAnimatingSet(true);
+      sleep({ duration }).then(() => isAnimatingSet(false));
+    }
+  });
+
   const animationState = useDynamicAnimation();
   return {
     animationProps: {
@@ -31,16 +42,11 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
       animateInitialState: isInitial,
       exit: states?.exit || states?.inactive,
       from: ref ? states && (states[elementState] as never) : (states?.inactive as never),
-      transition: {
-        delay,
-        duration,
-        loop: isInfinite,
-        type: 'timing',
-      },
+      transition: { delay, duration, loop: isInfinite, type: 'timing' },
     },
     animationState: animationState as UseDynamicAnimationState,
     current,
-    isRender: elementState !== ELEMENT_STATE.EXIT || !isLazy,
+    isRender: elementState !== ELEMENT_STATE.EXIT || !isLazy || isAnimating,
     to: (params) => {
       animationState.animateTo(params as DynamicStyleProp<MotiTranformProps>);
       currentSet(params as TStyle);
