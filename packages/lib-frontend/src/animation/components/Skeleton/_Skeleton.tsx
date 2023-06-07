@@ -12,6 +12,7 @@ export const _Skeleton = composeComponent<_SkeletonPropsModel, PropsModel<typeof
     colorMode: 'light',
     height,
     radius,
+    transition: { type: 'timing' },
     width,
   }),
 });

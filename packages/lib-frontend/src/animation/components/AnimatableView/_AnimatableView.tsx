@@ -4,7 +4,6 @@ import { useAnimationState } from '@lib/frontend/animation/hooks/useAnimationSta
 import { animatable } from '@lib/frontend/animation/utils/animatable/animatable';
 import { _viewParams } from '@lib/frontend/core/components/View/_View';
 import { _viewParams as _viewParamsPressable } from '@lib/frontend/core/components/View/_View.pressable';
-import { _viewParams as _viewParamsScrollable } from '@lib/frontend/core/components/View/_View.scrollable';
 import type { RSFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
@@ -43,17 +42,11 @@ export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewP
         ? MotiScrollView
         : MotiView;
 
-    if (testID === 'xxx') {
-      console.warn(elementState);
-    }
-
     return (
       <Component
         {...(_viewParams.getProps && _viewParams.getProps({ ...props, style: styles }, theme))}
         {...(_viewParamsPressable.getProps &&
           _viewParamsPressable.getProps({ ...props, style: styles }, theme))}
-        {...(_viewParamsScrollable.getProps &&
-          _viewParamsScrollable.getProps({ ...props, style: styles }, theme))}
         {...(animationProps as MotiProps['animate'])}
         hitSlop={undefined}
         ref={ref}

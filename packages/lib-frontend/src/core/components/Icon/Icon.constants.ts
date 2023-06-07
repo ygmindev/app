@@ -43,6 +43,7 @@ export const IONIC_ICONS = {
   ellipsis: 'ellipsis-horizontal',
   ellipsisVertical: 'ellipsis-vertical',
   email: 'mail-outline',
+  empty: 'file-tray-outline',
   exclamationCircle: 'alert-circle-outline',
   eye: 'eye-outline',
   eyeOff: 'eye-off-outline',
