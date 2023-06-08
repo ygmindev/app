@@ -124,11 +124,7 @@ export const _bundle = ({
 
     root: fromWorking(),
 
-    server: {
-      fs: {
-        allow: [searchForWorkspaceRoot(fromRoot()), fromModules()],
-      },
-    },
+    server: { fs: { allow: [searchForWorkspaceRoot(fromRoot()), fromModules()] } },
 
     ssr: {
       noExternal: externals,

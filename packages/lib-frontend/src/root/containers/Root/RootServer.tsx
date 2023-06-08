@@ -18,10 +18,12 @@ import { StyleProvider } from '@lib/frontend/style/providers/StyleProvider/Style
 import { TrackingProvider } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider';
 import type { ReactElement } from 'react';
 import { cloneElement, createContext, Suspense, useMemo } from 'react';
+import { Route, Routes } from 'react-router';
+import { StaticRouter } from 'react-router-dom/server';
 
 export const actionContext = createContext<RootActionsModel | undefined>(undefined);
 
-export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, context }) => {
+export const RootServer: FCModel<RootPropsModel> = ({ additionalProviders, children, context }) => {
   const store = useMemo(
     () =>
       new Store<Array<keyof RootStateModel>, RootStateModel, RootActionsParamsModel>({
@@ -48,5 +50,19 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
     [additionalProviders, context],
   );
 
-  return <>{providers.reduce((result, element) => cloneElement(element, {}, result), children)}</>;
+  return (
+    <>
+      {providers.reduce(
+        (result, element) => cloneElement(element, {}, result),
+        <StaticRouter location={context?.route?.location || '/'}>
+          <Routes>
+            <Route
+              element={<div>test?</div>}
+              path="/"
+            />
+          </Routes>
+        </StaticRouter>,
+      )}
+    </>
+  );
 };

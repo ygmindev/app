@@ -31,7 +31,6 @@ export const Modal: FCModel<ModalPropsModel> = ({
       deviceWidth={deviceWidth}
       elementState={elementState}
       height={height}
-      isFullSize={isFullSize}
       isOpen={isOpen}
       onClose={onClose}
       style={{

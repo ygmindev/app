@@ -8,16 +8,7 @@ import Modal from 'react-native-modal';
 export const _Modal = composeComponent<_ModalPropsModel, PartialModel<typeof Modal.defaultProps>>({
   Component: Modal as unknown as ComponentType<PartialModel<typeof Modal.defaultProps>>,
 
-  getProps: ({
-    children,
-    deviceHeight,
-    deviceWidth,
-    duration,
-    elementState,
-    isFullSize,
-    isOpen,
-    onClose,
-  }) => {
+  getProps: ({ children, deviceHeight, deviceWidth, duration, elementState, isOpen, onClose }) => {
     const isDisabled =
       elementState === ELEMENT_STATE.DISABLED || elementState === ELEMENT_STATE.LOADING;
     return {
@@ -29,7 +20,7 @@ export const _Modal = composeComponent<_ModalPropsModel, PartialModel<typeof Mod
       backdropTransitionInTiming: duration,
       backdropTransitionOutTiming: duration,
       children,
-      coverScreen: isFullSize,
+      coverScreen: true,
       deviceHeight,
       deviceWidth,
       hasBackdrop: true,

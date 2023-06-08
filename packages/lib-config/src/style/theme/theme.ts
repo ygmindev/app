@@ -105,7 +105,7 @@ export const config: ThemeConfigModel = {
 
     height: {
       l: 52,
-      m: 40,
+      m: 45,
       s: 32,
       xl: 60,
       xs: 28,

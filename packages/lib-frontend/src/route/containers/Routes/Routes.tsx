@@ -16,9 +16,6 @@ const getRoute = ({ pathname, ...route }: RouteModel, depth = 0): RouteModel => 
   const pathnameF = trimPathname(isLeaf ? pathname : `${root}/*`);
   const routeF: RouteModel = { ...route, pathname: pathnameF };
   const depthChildren = pathnameF !== '/' ? depth + 1 : depth;
-
-  // console.warn(`${pathnameF} (${pathname}): ${depth} -> splice ${depth + 1}`);
-
   return {
     ...routeF,
     element: (

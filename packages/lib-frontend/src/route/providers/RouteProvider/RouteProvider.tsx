@@ -9,16 +9,3 @@ export const RouteProvider = composeComponent<RouteProviderPropsModel, _RoutePro
 });
 
 process.env.APP_DEBUG && (RouteProvider.displayName = variableName({ RouteProvider }));
-
-// import type { FCModel } from '@lib/frontend/core/core.models';
-// import { _RouteProvider } from '@lib/frontend/route/providers/RouteProvider/_RouteProvider';
-// import type { _RouteProviderPropsModel } from '@lib/frontend/route/providers/RouteProvider/_RouteProvider.models';
-// import type { RouteProviderPropsModel } from '@lib/frontend/route/providers/RouteProvider/RouteProvider.models';
-// import { useEffect } from 'react';
-
-// export const RouteProvider: FCModel<RouteProviderPropsModel> = (props) => {
-//   useEffect(() => {
-//     console.warn('RouteProvider');
-//   }, []);
-//   return <_RouteProvider {...(props as _RouteProviderPropsModel)} />;
-// };

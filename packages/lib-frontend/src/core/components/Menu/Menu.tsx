@@ -100,6 +100,7 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
     const children = (
       <Wrapper
         grow
+        isFullWidth
         shrink
         spacing={THEME_SIZE.SMALL}>
         {topElement}

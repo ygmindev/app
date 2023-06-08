@@ -5,7 +5,6 @@ import { usePaymentMethodResource } from '@lib/frontend/billing/hooks/usePayment
 import type { PaymentPagePropsModel } from '@lib/frontend/billing/pages/PaymentPage/PaymentPage.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { LineGroup } from '@lib/frontend/core/components/LineGroup/LineGroup';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import type { SFCModel } from '@lib/frontend/core/core.models';
 import { useQuery } from '@lib/frontend/core/hooks/useQuery/useQuery';
@@ -78,13 +77,11 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
         </LineGroup>
       </SkeletonGroup>
 
-      <Wrapper isRow>
-        <Button
-          icon="add"
-          onPress={() => push({ pathname: `/${FORM}/${PAYMENT_METHOD}` })}>
-          {tPaymentMethodAdd}
-        </Button>
-      </Wrapper>
+      <Button
+        icon="add"
+        onPress={() => push({ pathname: `/${FORM}/${PAYMENT_METHOD}` })}>
+        {tPaymentMethodAdd}
+      </Button>
     </MainLayout>
   );
 };
