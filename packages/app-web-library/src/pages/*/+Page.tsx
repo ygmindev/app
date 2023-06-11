@@ -7,4 +7,4 @@ const Component: FCModel = () => <Routes routes={routes} />;
 
 const { Page } = exportPage({ Component });
 
-export { Page };
+export default Page;

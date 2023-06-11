@@ -93,6 +93,12 @@ export const config: ThemeConfigModel = {
       height: 60,
     },
 
+    height: {
+      [THEME_SIZE.SMALL]: 250,
+      [THEME_SIZE.MEDIUM]: 500,
+      [THEME_SIZE.LARGE]: 750,
+    },
+
     width: {
       [THEME_SIZE.SMALL]: 250,
       [THEME_SIZE.MEDIUM]: 500,

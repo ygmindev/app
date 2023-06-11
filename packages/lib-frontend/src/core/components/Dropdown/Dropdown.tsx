@@ -1,5 +1,4 @@
 import { _Dropdown } from '@lib/frontend/core/components/Dropdown/_Dropdown';
-import { DROPDOWN_MAX_HEIGHT } from '@lib/frontend/core/components/Dropdown/Dropdown.constants';
 import type {
   DropdownPropsModel,
   DropdownRefModel,
@@ -7,23 +6,16 @@ import type {
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import type { WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import type { RSFCModel } from '@lib/frontend/core/core.models';
-import { THEME_COLOR, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_COLOR, THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 export const Dropdown: RSFCModel<DropdownRefModel, DropdownPropsModel> = forwardRef(
   (
-    {
-      anchor,
-      children,
-      direction,
-      isFullWidth,
-      isOpen,
-      maxHeight = DROPDOWN_MAX_HEIGHT,
-      onToggle,
-      width,
-    },
+    { anchor, children, direction, isFullWidth, isOpen, maxHeight, maxWidth, onToggle, width },
     ref,
   ) => {
+    const theme = useTheme();
     const wrapperRef = useRef<WrapperRefModel>(null);
     useImperativeHandle(ref, () => ({
       isOpen: () => isOpen || false,
@@ -47,7 +39,8 @@ export const Dropdown: RSFCModel<DropdownRefModel, DropdownPropsModel> = forward
           <Wrapper
             grow
             isVerticalScrollable
-            maxHeight={maxHeight}
+            maxHeight={maxHeight || theme.layout.height[THEME_SIZE.MEDIUM]}
+            maxWidth={maxWidth || theme.layout.width[THEME_SIZE.SMALL]}
             p={THEME_SIZE_MORE.SMALL}
             ref={wrapperRef}>
             {children}

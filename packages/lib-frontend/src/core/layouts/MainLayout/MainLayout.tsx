@@ -25,6 +25,7 @@ export const MainLayout: SFCModel<MainLayoutPropsModel> = ({
       p
       style={styles}>
       <Wrapper
+        isFullWidth={isFullWidthF}
         m={isCenter ? 'auto' : undefined}
         mHorizontal={isCenter || isHorizontalCenter ? 'auto' : undefined}
         mVertical={isCenter || isVerticalCenter ? 'auto' : undefined}

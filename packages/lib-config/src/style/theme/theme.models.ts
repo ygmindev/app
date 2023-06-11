@@ -46,6 +46,7 @@ export interface ThemeConfigModel {
     header: {
       height: number;
     };
+    height: Record<ThemeSizeModel, number>;
     width: Record<ThemeSizeModel, number>;
   };
 

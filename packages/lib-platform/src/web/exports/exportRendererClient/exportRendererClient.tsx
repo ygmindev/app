@@ -1,24 +1,10 @@
-// import { RootClient } from '@lib/frontend/root/containers/Root/RootClient';
-// import { _exportRendererClient } from '@lib/platform/web/exports/exportRendererClient/_exportRendererClient';
-// import type { ExportRendererClientModel } from '@lib/platform/web/exports/exportRendererClient/exportRendererClient.models';
-
-// export const exportRendererClient = (): ExportRendererClientModel =>
-//   _exportRendererClient({
-//     render: ({ children, context }) => <RootClient context={context}>{children}</RootClient>,
-//   });
-
-import { Root } from '@lib/frontend/root/containers/Root/Root';
+import { WEB_CONFIG_STATIC } from '@lib/config/platform/web/web.constants';
 import { RouteProvider } from '@lib/frontend/route/providers/RouteProvider/RouteProvider';
 import { _exportRendererClient } from '@lib/platform/web/exports/exportRendererClient/_exportRendererClient';
 import type { ExportRendererClientModel } from '@lib/platform/web/exports/exportRendererClient/exportRendererClient.models';
 
 export const exportRendererClient = (): ExportRendererClientModel =>
   _exportRendererClient({
-    render: ({ children, context }) => (
-      <Root
-        additionalProviders={[<RouteProvider value={context?.route} />]}
-        context={context}>
-        {children}
-      </Root>
-    ),
+    additionalProviders: (context) => [<RouteProvider value={context?.route} />],
+    rootId: WEB_CONFIG_STATIC.rootId,
   });

@@ -11,6 +11,8 @@ export interface WebConfigModel {
 
   publicDir: string;
 
+  rootId: string;
+
   ssrContextKeys?: Array<DeepKeyModel<RootContextModel>>;
 }
 

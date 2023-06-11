@@ -9,6 +9,7 @@ import type { PlatformModel } from '@lib/platform/core/core.models';
 import type { ReturnTypeModel } from '@lib/shared/core/core.models';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
+// import commonjs from '@rollup/plugin-commonjs';
 import inject from '@rollup/plugin-inject';
 import react from '@vitejs/plugin-react-swc';
 import reduce from 'lodash/reduce';
@@ -45,9 +46,13 @@ export const _bundle = ({
         transformMixedEsModules: true,
       },
       outDir,
+      rollupOptions: {
+        ...(entry ? { input: entry } : {}),
+
+        // plugins: [commonjs()],
+      },
       watch:
         process.env.NODE_ENV === ENVIRONMENT.DEVELOPMENT && watch ? { include: watch } : undefined,
-      ...(entry ? { rollupOptions: { input: entry } } : {}),
     },
 
     define,

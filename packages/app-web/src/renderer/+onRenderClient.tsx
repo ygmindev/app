@@ -2,4 +2,4 @@ import { exportRendererClient } from '@lib/platform/web/exports/exportRendererCl
 
 const { render } = exportRendererClient();
 
-export { render };
+export default render;

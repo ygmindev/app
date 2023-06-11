@@ -2,7 +2,6 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Divider } from '@lib/frontend/core/components/Divider/Divider';
 import { Dropdown } from '@lib/frontend/core/components/Dropdown/Dropdown';
-import { DROPDOWN_MAX_HEIGHT } from '@lib/frontend/core/components/Dropdown/Dropdown.constants';
 import type { DropdownRefModel } from '@lib/frontend/core/components/Dropdown/Dropdown.models';
 import type {
   MenuOptionModel,
@@ -37,7 +36,7 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
       anchor,
       direction,
       isFullWidth,
-      maxHeight = DROPDOWN_MAX_HEIGHT,
+      maxHeight,
       maxWidth,
       onChange,
       options,
