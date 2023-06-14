@@ -1,3 +1,6 @@
+import type { ReactElement } from 'react';
+import { Children } from 'react';
+
 import type { LineGroupPropsModel } from '#lib-frontend/core/components/LineGroup/LineGroup.models';
 import { LineItem } from '#lib-frontend/core/components/LineItem/LineItem';
 import { Text } from '#lib-frontend/core/components/Text/Text';
@@ -8,8 +11,6 @@ import { TranslatableText } from '#lib-frontend/locale/components/TranslatableTe
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import type { ReactElement } from 'react';
-import { Children } from 'react';
 
 export const LineGroup: SFCModel<LineGroupPropsModel> = ({
   children,

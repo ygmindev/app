@@ -1,3 +1,5 @@
+import { useMemo, useState } from 'react';
+
 import { Exitable } from '#lib-frontend/animation/components/Exitable/Exitable';
 import { Slide } from '#lib-frontend/animation/components/Slide/Slide';
 import type { SlidesPropsModel } from '#lib-frontend/animation/components/Slides/Slides.models';
@@ -6,7 +8,6 @@ import type { MeasureModel, SFCModel } from '#lib-frontend/core/core.models';
 import { useChange } from '#lib-frontend/core/hooks/useChange/useChange';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { useMemo, useState } from 'react';
 
 export const Slides: SFCModel<SlidesPropsModel> = ({ current, slides, testID, ...props }) => {
   const { styles } = useStyles({ props });

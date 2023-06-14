@@ -1,8 +1,8 @@
-import { portIsOpen } from '#tool-task/core/utils/portIsOpen/portIsOpen';
 import type { Server } from 'net';
 import { createServer } from 'net';
 
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { portIsOpen } from '#tool-task/core/utils/portIsOpen/portIsOpen';
 
 const { displayName } = withTest({ portIsOpen });
 

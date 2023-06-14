@@ -1,3 +1,11 @@
+import type {
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from 'axios';
+import axios from 'axios';
+
 import { CONNECTIVITY } from '#lib-frontend/http/http.constants';
 import { getConnectivity } from '#lib-frontend/http/utils/getConnectivity/getConnectivity';
 import { OfflineError } from '#lib-shared/http/errors/OfflineError/OfflineError';
@@ -12,13 +20,6 @@ import type {
   HttpServiceParamsModel,
 } from '#lib-shared/http/utils/HttpService/HttpService.models';
 import { uri } from '#lib-shared/http/utils/uri/uri';
-import type {
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
-  InternalAxiosRequestConfig,
-} from 'axios';
-import axios from 'axios';
 
 export class _HttpService implements _HttpServiceModel {
   protected _instance: AxiosInstance;

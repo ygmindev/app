@@ -1,3 +1,7 @@
+import type { ReactElement } from 'react';
+import { createElement, forwardRef } from 'react';
+import { unstable_createElement } from 'react-native-web';
+
 import type {
   ComposeComponentModel,
   ComposeComponentParamsModel,
@@ -6,9 +10,6 @@ import { isFragment } from '#lib-frontend/core/utils/isFragment/isFragment';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import type { StyleModel, ViewStyleModel } from '#lib-frontend/style/style.models';
-import type { ReactElement } from 'react';
-import { createElement, forwardRef } from 'react';
-import { unstable_createElement } from 'react-native-web';
 
 export const composeComponent = <
   TProps,

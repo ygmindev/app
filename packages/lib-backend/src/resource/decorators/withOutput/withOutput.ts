@@ -1,3 +1,5 @@
+import { Mutation, Query } from 'type-graphql';
+
 import { withAccess } from '#lib-backend/resource/decorators/withAccess/withAccess';
 import type { WithOutputParamsModel } from '#lib-backend/resource/decorators/withOutput/withOutput.models';
 import { Output } from '#lib-backend/resource/utils/Output/Output';
@@ -5,7 +7,6 @@ import { ACCESS_LEVEL } from '#lib-shared/auth/resources/Access/Access.constants
 import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import type { ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
-import { Mutation, Query } from 'type-graphql';
 
 const getOperation = (method: ResourceMethodTypeModel): typeof Mutation | typeof Query => {
   switch (method) {

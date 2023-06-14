@@ -1,9 +1,10 @@
+import type { Data } from 'ejs';
+import { renderFile } from 'ejs';
+
 import type {
   _TemplateModel,
   _TemplateParamsModel,
 } from '#lib-backend/core/utils/template/_template.models';
-import type { Data } from 'ejs';
-import { renderFile } from 'ejs';
 
 export const _template = async <TParams>({
   params,

@@ -3,9 +3,6 @@ import type { FastifyCookieOptions } from '@fastify/cookie';
 import { fastifyCookie } from '@fastify/cookie';
 import { fastifyMiddie } from '@fastify/middie';
 import { fastifyStatic } from '@fastify/static';
-import { LOCALE } from '#lib-shared/locale/locale.constants';
-import { ROUTE } from '#lib-shared/route/route.constants';
-import { STATE } from '#lib-shared/state/state.constants';
 import type { FastifyPluginCallback, FastifyRegisterOptions } from 'fastify';
 import { fastify } from 'fastify';
 import i18nextMiddleware from 'i18next-http-middleware';
@@ -21,6 +18,9 @@ import type {
   _ServerModel,
   _ServerParamsModel,
 } from '#lib-platform/web/utils/server/_server.models';
+import { LOCALE } from '#lib-shared/locale/locale.constants';
+import { ROUTE } from '#lib-shared/route/route.constants';
+import { STATE } from '#lib-shared/state/state.constants';
 
 export const _server = async ({
   config,

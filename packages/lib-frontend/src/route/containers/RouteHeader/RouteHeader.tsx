@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import { ANIMATION_STATES_APPEARABLE } from '#lib-frontend/animation/animation.constants';
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 import { Button } from '#lib-frontend/core/components/Button/Button';
@@ -17,7 +19,6 @@ import { THEME_COLOR } from '#lib-frontend/style/style.constants';
 import { BORDER_DIRECTION } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { useRef } from 'react';
 
 export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ...props }) => {
   const { t } = useTranslation();

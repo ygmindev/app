@@ -1,3 +1,6 @@
+import type { ReactElement } from 'react';
+import { useCallback, useRef } from 'react';
+
 import { Skeleton } from '#lib-frontend/animation/components/Skeleton/Skeleton';
 import { PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants';
 import { PAYMENT_METHOD_ITEM_ICON_WIDTH } from '#lib-frontend/billing/components/PaymentMethodItem/PaymentMethodItem.constants';
@@ -28,8 +31,6 @@ import { useUserResource } from '#lib-frontend/user/hooks/useUserResource/useUse
 import { CARD_BRAND } from '#lib-shared/billing/resources/Card/Card.constants';
 import type { CardModel } from '#lib-shared/billing/resources/Card/Card.models';
 import { PAYMENT_METHOD_TYPE } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import type { ReactElement } from 'react';
-import { useCallback, useRef } from 'react';
 
 export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
   elementState,

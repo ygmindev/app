@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import {
   OTP_FORM_FIELDS,
   OTP_FORM_VALIDATORS,
@@ -17,7 +19,6 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import type { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
-import { useRef } from 'react';
 
 export const OtpForm: SFCModel<OtpFormPropsModel> = ({
   data,

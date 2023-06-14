@@ -1,3 +1,7 @@
+import isFunction from 'lodash/isFunction';
+import isPlainObject from 'lodash/isPlainObject';
+import reduce from 'lodash/reduce';
+
 import { useErrorContext } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext';
 import type { FormErrorModel, FormValidatorsModel } from '#lib-frontend/form/form.models';
 import { _useForm } from '#lib-frontend/form/hooks/useForm/_useForm';
@@ -10,9 +14,6 @@ import type { TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import { merge } from '#lib-shared/core/utils/merge/merge';
-import isFunction from 'lodash/isFunction';
-import isPlainObject from 'lodash/isPlainObject';
-import reduce from 'lodash/reduce';
 
 export const useForm = <TType = void, TResult = void>({
   beforeSubmit,

@@ -1,7 +1,8 @@
+import trim from 'lodash/trim';
+
 import type { TaskParamsModel } from '#tool-task/core/core.models';
 import { command } from '#tool-task/core/utils/command/command';
 import { prompt } from '#tool-task/core/utils/prompt/prompt';
-import trim from 'lodash/trim';
 
 const renameExtension: TaskParamsModel = {
   name: 'renameExtension',

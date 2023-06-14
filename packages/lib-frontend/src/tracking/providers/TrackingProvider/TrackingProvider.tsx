@@ -1,10 +1,10 @@
+import { useEffect } from 'react';
+
 import type { SFCModel } from '#lib-frontend/core/core.models';
 import { useChange } from '#lib-frontend/core/hooks/useChange/useChange';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useTracking } from '#lib-frontend/tracking/hooks/useTracking/useTracking';
 import type { TrackingProviderPropsModel } from '#lib-frontend/tracking/providers/TrackingProvider/TrackingProvider.models';
-import { useEffect } from 'react';
-
 import { isSsr } from '#lib-platform/core/utils/isSsr/isSsr';
 
 export const TrackingProvider: SFCModel<TrackingProviderPropsModel> = ({ children }) => {

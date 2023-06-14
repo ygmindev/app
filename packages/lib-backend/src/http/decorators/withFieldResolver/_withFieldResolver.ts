@@ -1,5 +1,6 @@
-import type { _WithFieldResolverParamsModel } from '#lib-backend/http/decorators/withFieldResolver/_withFieldResolver.models';
 import { FieldResolver } from 'type-graphql';
+
+import type { _WithFieldResolverParamsModel } from '#lib-backend/http/decorators/withFieldResolver/_withFieldResolver.models';
 
 export const _withFieldResolver =
   <TType>({ Resource }: _WithFieldResolverParamsModel<TType>): MethodDecorator =>

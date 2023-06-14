@@ -1,3 +1,9 @@
+import { Elements, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import type { PaymentMethod, StripePaymentElementOptions } from '@stripe/stripe-js';
+import { loadStripe } from '@stripe/stripe-js/pure';
+import get from 'lodash/get';
+import { forwardRef, useImperativeHandle } from 'react';
+
 import { STRIPE_ELEMENTS_STYLE } from '#lib-frontend/billing/components/PaymentMethodField/_PaymentMethodField.constants';
 import type { _PaymentMethodFieldPropsModel } from '#lib-frontend/billing/components/PaymentMethodField/_PaymentMethodField.models';
 import { REDIRECT } from '#lib-frontend/core/core.constants';
@@ -12,11 +18,6 @@ import type {
 import { PAYMENT_METHOD_TYPE } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { appUri } from '#lib-shared/http/utils/appUri/appUri';
-import { Elements, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import type { PaymentMethod, StripePaymentElementOptions } from '@stripe/stripe-js';
-import { loadStripe } from '@stripe/stripe-js/pure';
-import get from 'lodash/get';
-import { forwardRef, useImperativeHandle } from 'react';
 
 const stripe = loadStripe(process.env.APP_STRIPE_TOKEN);
 

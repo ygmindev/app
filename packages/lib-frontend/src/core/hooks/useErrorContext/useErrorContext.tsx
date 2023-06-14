@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import type { UseErrorContextModel } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext.models';
 import { ErrorContext } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider';
 import { ERROR_MODE } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider.constants';
@@ -7,7 +9,6 @@ import { useNotification } from '#lib-frontend/notification/hooks/useNotificatio
 import type { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
 import { error } from '#lib-shared/logging/utils/logger/logger';
-import { useContext } from 'react';
 
 export const useErrorContext = (): UseErrorContextModel => {
   const { t } = useTranslation();

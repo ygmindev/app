@@ -1,7 +1,8 @@
-import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
-import type { _MaskedTextFieldPropsModel } from '#lib-frontend/form/components/MaskedTextField/_MaskedTextField.models';
 import type { TextInputMaskProps } from 'react-native-masked-text';
 import { TextInputMask } from 'react-native-masked-text';
+
+import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
+import type { _MaskedTextFieldPropsModel } from '#lib-frontend/form/components/MaskedTextField/_MaskedTextField.models';
 
 export const _MaskedTextField = composeComponent<_MaskedTextFieldPropsModel, TextInputMaskProps>({
   Component: TextInputMask,

@@ -1,3 +1,5 @@
+import pick from 'lodash/pick';
+
 import { OtpService } from '#lib-backend/auth/resources/Otp/OtpService/OtpService';
 import { SIGN_IN_TOKEN_CLAIM_FIELDS } from '#lib-backend/auth/resources/SignIn/SignIn.constants';
 import { JwtService } from '#lib-backend/auth/utils/JwtService/JwtService';
@@ -15,7 +17,6 @@ import type { ContextModel } from '#lib-shared/resource/utils/Context/Context.mo
 import type { InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import type { OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import type { UserModel } from '#lib-shared/user/resources/User/User.models';
-import pick from 'lodash/pick';
 
 const createSignIn = async (user: UserModel | null | undefined): Promise<SignInModel> => {
   if (user) {

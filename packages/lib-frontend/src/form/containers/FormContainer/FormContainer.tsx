@@ -1,3 +1,16 @@
+import findIndex from 'lodash/findIndex';
+import map from 'lodash/map';
+import toNumber from 'lodash/toNumber';
+import type { ForwardedRef, ReactElement } from 'react';
+import {
+  createElement,
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useState,
+} from 'react';
+
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
@@ -24,18 +37,6 @@ import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { BORDER_RADIUS_DIRECTION } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 import { FIELD_TYPE } from '#lib-shared/form/form.constants';
-import findIndex from 'lodash/findIndex';
-import map from 'lodash/map';
-import toNumber from 'lodash/toNumber';
-import type { ForwardedRef, ReactElement } from 'react';
-import {
-  createElement,
-  forwardRef,
-  useCallback,
-  useImperativeHandle,
-  useMemo,
-  useState,
-} from 'react';
 
 export const FormContainer = forwardRef(
   <TType = void, TResult = void>(

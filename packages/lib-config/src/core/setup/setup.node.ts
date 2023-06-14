@@ -1,10 +1,9 @@
-import { config as configBase } from '#lib-config/core/setup/setup.base';
-import type { SetupConfigModel } from '#lib-config/core/setup/setup.models';
-import { _config } from '#lib-config/database/database.mongo';
-
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { DATABASE_TYPE } from '#lib-backend/database/database.constants';
 import { Database } from '#lib-backend/database/utils/Database/Database';
+import { config as configBase } from '#lib-config/core/setup/setup.base';
+import type { SetupConfigModel } from '#lib-config/core/setup/setup.models';
+import { _config } from '#lib-config/database/database.mongo';
 
 const isInitialized = false;
 

@@ -1,6 +1,7 @@
-import type { _GraphqlConfigModel, GraphqlConfigModel } from '#lib-config/graphql/graphql.models';
 import type { BuildSchemaOptions, ContainerType } from 'type-graphql';
 import { buildSchemaSync } from 'type-graphql';
+
+import type { _GraphqlConfigModel, GraphqlConfigModel } from '#lib-config/graphql/graphql.models';
 
 export const _graphql = ({
   authorize,

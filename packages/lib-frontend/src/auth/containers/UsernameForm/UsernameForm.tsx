@@ -1,3 +1,6 @@
+import pick from 'lodash/pick';
+import { useMemo } from 'react';
+
 import { USERNAME_FORM_VALIDATORS } from '#lib-frontend/auth/containers/UsernameForm/UsernameForm.constants';
 import type {
   UsernameFormModel,
@@ -24,8 +27,6 @@ import type { OtpFormModel, OtpModel } from '#lib-shared/auth/resources/Otp/Otp.
 import { withId } from '#lib-shared/core/decorators/withId/withId';
 import type { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
-import pick from 'lodash/pick';
-import { useMemo } from 'react';
 
 export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   method,

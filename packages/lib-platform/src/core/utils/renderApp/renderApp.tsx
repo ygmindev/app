@@ -1,6 +1,6 @@
-import type { FCModel } from '#lib-frontend/core/core.models';
 import { AppRegistry } from 'react-native-web';
 
+import type { FCModel } from '#lib-frontend/core/core.models';
 import type {
   RenderAppModel,
   RenderAppParamsModel,

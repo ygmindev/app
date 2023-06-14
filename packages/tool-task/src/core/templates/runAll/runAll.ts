@@ -1,3 +1,6 @@
+import isString from 'lodash/isString';
+import reduce from 'lodash/reduce';
+
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import type { CallablePromiseModel } from '#lib-shared/core/core.models';
 import { sequence } from '#lib-shared/core/utils/sequence/sequence';
@@ -7,8 +10,6 @@ import type { RunAllParamsModel } from '#tool-task/core/templates/runAll/runAll.
 import { prompt } from '#tool-task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '#tool-task/core/utils/prompt/prompt.constants';
 import { TaskRegistry } from '#tool-task/core/utils/TaskRegistry/TaskRegistry';
-import isString from 'lodash/isString';
-import reduce from 'lodash/reduce';
 
 export const runAll: TaskParamsModel<RunAllParamsModel> = {
   name: 'runAll',

@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
@@ -14,7 +16,6 @@ import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_ROLE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { useMemo } from 'react';
 
 export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
   defaultValue,

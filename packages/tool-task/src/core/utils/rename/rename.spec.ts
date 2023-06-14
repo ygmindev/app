@@ -1,6 +1,5 @@
-import { rename } from '#tool-task/core/utils/rename/rename';
-
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { rename } from '#tool-task/core/utils/rename/rename';
 
 const { displayName } = withTest({ rename });
 

@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import type { AnimationModel } from '#lib-frontend/animation/animation.models';
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
@@ -20,7 +22,6 @@ import {
 } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { FONT_ALIGN } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { useMemo } from 'react';
 
 export const Button: SFCModel<ButtonPropsModel> = ({
   align = FLEX_ALIGN.CENTER,

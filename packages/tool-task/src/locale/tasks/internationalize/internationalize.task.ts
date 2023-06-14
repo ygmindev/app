@@ -1,10 +1,10 @@
-import { TASK_STATUS } from '#tool-task/core/core.constants';
-import type { TaskParamsModel } from '#tool-task/core/core.models';
 import { dest, src } from 'gulp';
 
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { _config } from '#lib-config/locale/parser/parser';
 import type { ConstructorModel } from '#lib-shared/core/core.models';
+import { TASK_STATUS } from '#tool-task/core/core.constants';
+import type { TaskParamsModel } from '#tool-task/core/core.models';
 
 const internationalize: TaskParamsModel = {
   name: 'internationalize',

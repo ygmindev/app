@@ -1,3 +1,6 @@
+import { find } from 'lodash';
+import { useMemo } from 'react';
+
 import type { SFCModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { SelectField } from '#lib-frontend/form/components/SelectField/SelectField';
@@ -7,8 +10,6 @@ import { useCountries } from '#lib-frontend/locale/hooks/useCountries/useCountri
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { currentCountry } from '#lib-frontend/locale/utils/currentCountry/currentCountry';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { find } from 'lodash';
-import { useMemo } from 'react';
 
 export const CountryField: SFCModel<CountryFieldPropsModel> = ({
   defaultValue,

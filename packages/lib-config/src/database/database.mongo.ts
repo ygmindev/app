@@ -1,6 +1,3 @@
-import type { ConstructorModel } from '#lib-shared/core/core.models';
-import type { EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
-
 import { Access } from '#lib-backend/auth/resources/Access/Access';
 import { Otp } from '#lib-backend/auth/resources/Otp/Otp';
 import { Bank } from '#lib-backend/billing/resources/Bank/Bank';
@@ -13,6 +10,8 @@ import type {
   _DatabaseConfigModel,
   DatabaseConfigModel,
 } from '#lib-config/database/database.models';
+import type { ConstructorModel } from '#lib-shared/core/core.models';
+import type { EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export const config: DatabaseConfigModel = () => ({
   database: process.env.SERVER_MONGO_DATABASE_NAME,

@@ -1,3 +1,5 @@
+import isFunction from 'lodash/isFunction';
+
 import type {
   ImportConfigModel,
   ImportConfigParamsModel,
@@ -5,7 +7,6 @@ import type {
 import type { ReturnTypeModel } from '#lib-shared/core/core.models';
 import { importFromEnv } from '#lib-shared/core/utils/importFromEnv/importFromEnv';
 import { isPromise } from '#lib-shared/core/utils/isPromise/isPromise';
-import isFunction from 'lodash/isFunction';
 
 const loadConfig = async <TType>(params: unknown): Promise<ReturnTypeModel<TType>> => {
   const result = isFunction(params) ? params() : params;

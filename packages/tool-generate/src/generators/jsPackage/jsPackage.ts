@@ -1,3 +1,6 @@
+import { readFileSync } from 'fs';
+import uniq from 'lodash/uniq';
+
 import { fromBuild } from '#lib-backend/file/utils/fromBuild/fromBuild';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
@@ -5,8 +8,6 @@ import { writeFile } from '#lib-backend/file/utils/writeFile/writeFile';
 import { sortKeys } from '#lib-shared/core/utils/sortKeys/sortKeys';
 import type { GeneratorParamsModel } from '#tool-generate/tasks/generate/generate.models';
 import { prompt } from '#tool-task/core/utils/prompt/prompt';
-import { readFileSync } from 'fs';
-import uniq from 'lodash/uniq';
 
 export const jsPackage: GeneratorParamsModel = {
   onSuccess: async ({ variables }) => {

@@ -1,9 +1,10 @@
+import isArray from 'lodash/isArray';
+import isPlainObject from 'lodash/isPlainObject';
+
 import { CLEAN_OBJECT_KEYS } from '#lib-shared/core/utils/cleanObject/cleanObject.constants';
 import { isPrimitive } from '#lib-shared/core/utils/isPrimitive/isPrimitive';
 import { isTypeOf } from '#lib-shared/core/utils/isTypeOf/isTypeOf';
 import { toPlainObject } from '#lib-shared/core/utils/toPlainObject/toPlainObject';
-import isArray from 'lodash/isArray';
-import isPlainObject from 'lodash/isPlainObject';
 
 export const cleanObject = <TType extends unknown>(value: TType): TType => {
   if (isTypeOf(value, Date) || isTypeOf(value, 'ObjectId')) {

@@ -1,3 +1,8 @@
+import filter from 'lodash/filter';
+import find from 'lodash/find';
+import pick from 'lodash/pick';
+import some from 'lodash/some';
+
 import { seed } from '#lib-backend/database/utils/seed/seed';
 import type {
   TestableResourceServiceModel,
@@ -14,10 +19,6 @@ import type {
   DummyEntityResourceFormModel,
   DummyEntityResourceModel,
 } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
-import filter from 'lodash/filter';
-import find from 'lodash/find';
-import pick from 'lodash/pick';
-import some from 'lodash/some';
 
 export const testResourceService = async ({
   before,

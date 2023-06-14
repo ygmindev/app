@@ -1,3 +1,6 @@
+import isString from 'lodash/isString';
+import { useState } from 'react';
+
 import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import type { LineItemPropsModel } from '#lib-frontend/core/components/LineItem/LineItem.models';
@@ -10,8 +13,6 @@ import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
-import isString from 'lodash/isString';
-import { useState } from 'react';
 
 export const LineItem: SFCModel<LineItemPropsModel> = ({
   children,

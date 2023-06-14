@@ -1,3 +1,5 @@
+import isString from 'lodash/isString';
+
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { KeyboardContainer } from '#lib-frontend/core/components/KeyboardContainer/KeyboardContainer';
@@ -11,7 +13,6 @@ import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR } from '#lib-frontend/style/style.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import isString from 'lodash/isString';
 
 export const Modal: FCModel<ModalPropsModel> = ({
   children,

@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 import type { ElementStatePropsModel, SFCModel } from '#lib-frontend/core/core.models';
 import type { ErrorProviderContextModel } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider.models';
 import type { SelectFieldPropsModel } from '#lib-frontend/form/components/SelectField/SelectField.models';
@@ -13,7 +15,6 @@ import type { TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import type { PartialModel } from '#lib-shared/core/core.models';
 import type { WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
 import type { FieldTypeModel } from '#lib-shared/form/form.models';
-import type { ReactNode } from 'react';
 
 export type FormFieldTypeModel = `${FORM_FIELD_TYPE}`;
 

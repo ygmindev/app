@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import { PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants';
 import { PaymentMethodField } from '#lib-frontend/billing/components/PaymentMethodField/PaymentMethodField';
 import type { PaymentMethodFormPropsModel } from '#lib-frontend/billing/containers/PaymentMethodForm/PaymentMethodForm.models';
@@ -15,7 +17,6 @@ import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { CREATE_TOKEN } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import { useRef } from 'react';
 
 export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
   defaultValue,

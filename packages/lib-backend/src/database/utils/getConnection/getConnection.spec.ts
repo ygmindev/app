@@ -1,10 +1,11 @@
+import _filter from 'lodash/filter';
+
 import { getConnection } from '#lib-backend/database/utils/getConnection/getConnection';
 import type {
   DummyEntityResourceFormModel,
   DummyEntityResourceModel,
 } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
-import _filter from 'lodash/filter';
 
 const { displayName } = withTest({ getConnection });
 

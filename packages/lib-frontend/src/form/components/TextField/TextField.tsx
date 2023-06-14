@@ -1,3 +1,6 @@
+import type { RefObject } from 'react';
+import { forwardRef, useEffect, useRef } from 'react';
+
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
@@ -20,8 +23,6 @@ import { THEME_COLOR, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import type { ViewStyleModel } from '#lib-frontend/style/style.models';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 import { variableName } from '#lib-shared/core/utils/variableName/variableName';
-import type { RefObject } from 'react';
-import { forwardRef, useEffect, useRef } from 'react';
 
 export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forwardRef(
   (

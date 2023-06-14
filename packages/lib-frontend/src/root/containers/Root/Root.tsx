@@ -1,3 +1,6 @@
+import type { ReactElement } from 'react';
+import { cloneElement, createContext, Suspense, useMemo } from 'react';
+
 import { AppProvider } from '#lib-frontend/app/containers/AppProvider/AppProvider';
 import { AuthProvider } from '#lib-frontend/auth/providers/AuthProvider/AuthProvider';
 import type { FCModel } from '#lib-frontend/core/core.models';
@@ -16,8 +19,6 @@ import type {
 import { Store } from '#lib-frontend/state/utils/Store/Store';
 import { StyleProvider } from '#lib-frontend/style/providers/StyleProvider/StyleProvider';
 import { TrackingProvider } from '#lib-frontend/tracking/providers/TrackingProvider/TrackingProvider';
-import type { ReactElement } from 'react';
-import { cloneElement, createContext, Suspense, useMemo } from 'react';
 
 export const actionContext = createContext<RootActionsModel | undefined>(undefined);
 

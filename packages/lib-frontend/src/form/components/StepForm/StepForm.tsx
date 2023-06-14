@@ -1,3 +1,6 @@
+import type { ReactElement } from 'react';
+import { cloneElement, useMemo, useRef, useState } from 'react';
+
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 import { Slides } from '#lib-frontend/animation/components/Slides/Slides';
 import { Button } from '#lib-frontend/core/components/Button/Button';
@@ -15,8 +18,6 @@ import { THEME_COLOR } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import type { IntersectionModel, PartialModel } from '#lib-shared/core/core.models';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
-import type { ReactElement } from 'react';
-import { cloneElement, useMemo, useRef, useState } from 'react';
 
 export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends Array<unknown>>({
   beforeSubmit,

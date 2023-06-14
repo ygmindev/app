@@ -1,6 +1,5 @@
-import { command } from '#tool-task/core/utils/command/command';
-
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
+import { command } from '#tool-task/core/utils/command/command';
 
 export const portIsOpen = async (port: string): Promise<boolean> => {
   const pids = await new Promise((resolve) =>

@@ -1,8 +1,3 @@
-import { merge } from '#lib-shared/core/utils/merge/merge';
-import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
-import { GRAPHQL } from '#lib-shared/graphql/graphql.constants';
-import { HTTP_METHOD, PING } from '#lib-shared/http/http.constants';
-
 import { _serverless } from '#lib-config/platform/serverless/_serverless';
 import { config as configBase } from '#lib-config/platform/serverless/serverless.base';
 import type {
@@ -10,6 +5,10 @@ import type {
   ServerlessConfigModel,
 } from '#lib-config/platform/serverless/serverless.models';
 import { PLATFORM } from '#lib-platform/core/core.constants';
+import { merge } from '#lib-shared/core/utils/merge/merge';
+import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
+import { GRAPHQL } from '#lib-shared/graphql/graphql.constants';
+import { HTTP_METHOD, PING } from '#lib-shared/http/http.constants';
 
 export const config: ServerlessConfigModel = () =>
   merge(

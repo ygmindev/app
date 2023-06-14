@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { Modal } from '#lib-frontend/core/components/Modal/Modal';
@@ -14,7 +16,6 @@ import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import type { CallablePromiseModel } from '#lib-shared/core/core.models';
 import { isPromise } from '#lib-shared/core/utils/isPromise/isPromise';
-import { useState } from 'react';
 
 const { Button } = lazy(() => import('#lib-frontend/core/components/Button/Button'));
 

@@ -1,3 +1,8 @@
+import debounce from 'lodash/debounce';
+import isString from 'lodash/isString';
+import kebabCase from 'lodash/kebabCase';
+import reduce from 'lodash/reduce';
+
 import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
@@ -10,10 +15,6 @@ import { TASK_STATUS } from '#tool-task/core/core.constants';
 import type { TaskParamsModel, TaskResultModel } from '#tool-task/core/core.models';
 import { _TaskRegistry } from '#tool-task/core/utils/TaskRegistry/_TaskRegistry';
 import type { TaskRegistryModel } from '#tool-task/core/utils/TaskRegistry/TaskRegistry.models';
-import debounce from 'lodash/debounce';
-import isString from 'lodash/isString';
-import kebabCase from 'lodash/kebabCase';
-import reduce from 'lodash/reduce';
 
 @withContainer()
 export class TaskRegistry extends _TaskRegistry implements TaskRegistryModel {

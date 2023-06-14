@@ -1,3 +1,4 @@
+import type { ThemeConfigModel } from '#lib-config/style/theme/theme.models';
 import {
   STYLE_BRIGHTNESS,
   THEME_COLOR,
@@ -5,8 +6,6 @@ import {
   THEME_SIZE_MORE,
 } from '#lib-frontend/style/style.constants';
 import { FONT_FAMILY } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
-
-import type { ThemeConfigModel } from '#lib-config/style/theme/theme.models';
 import { PLATFORM } from '#lib-platform/core/core.constants';
 
 export const config: ThemeConfigModel = {

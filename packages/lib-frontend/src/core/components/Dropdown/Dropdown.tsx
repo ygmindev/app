@@ -1,3 +1,5 @@
+import { forwardRef, useImperativeHandle, useRef } from 'react';
+
 import { _Dropdown } from '#lib-frontend/core/components/Dropdown/_Dropdown';
 import type {
   DropdownPropsModel,
@@ -8,7 +10,6 @@ import type { WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrap
 import type { RSFCModel } from '#lib-frontend/core/core.models';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
-import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 export const Dropdown: RSFCModel<DropdownRefModel, DropdownPropsModel> = forwardRef(
   (

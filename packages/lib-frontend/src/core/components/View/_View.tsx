@@ -1,3 +1,6 @@
+import type { ViewProps } from 'react-native';
+import { View } from 'react-native';
+
 import type {
   _ViewPropsModel,
   _ViewRefModel,
@@ -5,8 +8,6 @@ import type {
 import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
 import type { ComposeComponentParamsModel } from '#lib-frontend/core/utils/composeComponent/composeComponent.models';
 import type { ViewStyleModel } from '#lib-frontend/style/style.models';
-import type { ViewProps } from 'react-native';
-import { View } from 'react-native';
 
 export const _viewParams: ComposeComponentParamsModel<
   _ViewPropsModel,

@@ -1,3 +1,7 @@
+import forEach from 'lodash/forEach';
+import pick from 'lodash/pick';
+import reduce from 'lodash/reduce';
+
 import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { getConnection } from '#lib-backend/database/utils/getConnection/getConnection';
@@ -21,9 +25,6 @@ import type { OutputModel } from '#lib-shared/resource/utils/Output/Output.model
 import type { ResourceServiceDecoratorModel } from '#lib-shared/resource/utils/Resource/ResourceService/ResourceService.models';
 import type { RootModel } from '#lib-shared/resource/utils/Root/Root.models';
 import type { UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
-import forEach from 'lodash/forEach';
-import pick from 'lodash/pick';
-import reduce from 'lodash/reduce';
 
 export const EmbeddedResourceService = <
   TType extends EmbeddedResourceModel,

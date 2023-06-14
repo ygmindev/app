@@ -1,5 +1,3 @@
-import type { ReturnTypeModel } from '#lib-shared/core/core.models';
-import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import commonjs from '@rollup/plugin-commonjs';
 import inject from '@rollup/plugin-inject';
@@ -22,6 +20,8 @@ import type { _BundleConfigModel, BundleConfigModel } from '#lib-config/node/bun
 import { lintCommand } from '#lib-config/node/lint/lint';
 import { PLATFORM } from '#lib-platform/core/core.constants';
 import type { PlatformModel } from '#lib-platform/core/core.models';
+import type { ReturnTypeModel } from '#lib-shared/core/core.models';
+import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 
 export const _bundle = ({
   aliases,

@@ -1,9 +1,10 @@
+import isFunction from 'lodash/isFunction';
+
 import { withEntity } from '#lib-backend/resource/decorators/withEntity/withEntity';
 import { EntityResource } from '#lib-backend/resource/resources/EntityResource/EntityResource';
 import type { FilterParamsModel } from '#lib-backend/resource/utils/Filter/Filter.models';
 import type { ConstructorModel } from '#lib-shared/core/core.models';
 import type { FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
-import isFunction from 'lodash/isFunction';
 
 export const Filter = <TType extends unknown>({
   Resource,

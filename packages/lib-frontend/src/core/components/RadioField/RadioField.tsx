@@ -1,3 +1,5 @@
+import type { ReactElement } from 'react';
+
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
@@ -11,7 +13,6 @@ import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import type { ReactElement } from 'react';
 
 export const RadioField = <TType extends string = string>({
   color = THEME_COLOR.PRIMARY,

@@ -1,3 +1,5 @@
+import isArray from 'lodash/isArray';
+
 import { Result } from '#lib-backend/resource/utils/Result/Result';
 import { DummyEntityResource } from '#lib-backend/test/resources/DummyEntityResource/DummyEntityResource';
 import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
@@ -5,7 +7,6 @@ import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import type { ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
 import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
-import isArray from 'lodash/isArray';
 
 const { displayName } = withTest({ Result });
 

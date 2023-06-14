@@ -1,3 +1,7 @@
+import isFunction from 'lodash/isFunction';
+import { useMemo } from 'react';
+import { StyleSheet } from 'react-native';
+
 import { useIsMobile } from '#lib-frontend/core/hooks/useIsMobile/useIsMobile';
 import type {
   UseStylesModel,
@@ -5,9 +9,6 @@ import type {
 } from '#lib-frontend/style/hooks/useStyles/useStyles.models';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import type { StyleModel, ViewStyleModel } from '#lib-frontend/style/style.models';
-import isFunction from 'lodash/isFunction';
-import { useMemo } from 'react';
-import { StyleSheet } from 'react-native';
 
 export const useStyles = <TProps, TStyle extends StyleModel = ViewStyleModel>({
   props,

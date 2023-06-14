@@ -1,6 +1,7 @@
+import type { FormHTMLAttributes, SyntheticEvent } from 'react';
+
 import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
 import type { _FormPropsModel } from '#lib-frontend/form/components/Form/_Form.models';
-import type { FormHTMLAttributes, SyntheticEvent } from 'react';
 
 export const _Form = composeComponent<_FormPropsModel, FormHTMLAttributes<HTMLFormElement>>({
   Component: 'form',

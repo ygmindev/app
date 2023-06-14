@@ -1,6 +1,3 @@
-import type { SignInTokenModel } from '#lib-shared/auth/resources/SignIn/SignIn.models';
-import { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
-import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
 import { getApps, initializeApp } from 'firebase/app';
 import type { Auth, AuthError, User } from 'firebase/auth';
 import {
@@ -16,6 +13,9 @@ import type {
   _UseSessionParamsModel,
 } from '#lib-frontend/auth/hooks/useSession/_useSession.models';
 import { isSsr } from '#lib-platform/core/utils/isSsr/isSsr';
+import type { SignInTokenModel } from '#lib-shared/auth/resources/SignIn/SignIn.models';
+import { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
+import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
 
 let auth: Auth;
 

@@ -1,3 +1,5 @@
+import { forwardRef } from 'react';
+
 import { _PaymentMethodField } from '#lib-frontend/billing/components/PaymentMethodField/_PaymentMethodField';
 import type { PaymentMethodFieldPropsModel } from '#lib-frontend/billing/components/PaymentMethodField/PaymentMethodField.models';
 import { useBankResource } from '#lib-frontend/billing/hooks/useBankResource/useBankResource';
@@ -13,7 +15,6 @@ import type { PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMe
 import type { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import type { OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import type { UserModel } from '#lib-shared/user/resources/User/User.models';
-import { forwardRef } from 'react';
 
 export const PaymentMethodField: RSFCModel<FormRefModel, PaymentMethodFieldPropsModel> = forwardRef(
   ({ defaultValue, ...props }, ref) => {

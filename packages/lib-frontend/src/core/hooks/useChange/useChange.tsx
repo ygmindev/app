@@ -1,9 +1,10 @@
+import { useEffect } from 'react';
+
 import { _useChange } from '#lib-frontend/core/hooks/useChange/_useChange';
 import type {
   UseChangeModel,
   UseChangeParamsModel,
 } from '#lib-frontend/core/hooks/useChange/useChange.models';
-import { useEffect } from 'react';
 
 export const useChange = <TType extends unknown>(
   ...[value, onChange]: UseChangeParamsModel<TType>

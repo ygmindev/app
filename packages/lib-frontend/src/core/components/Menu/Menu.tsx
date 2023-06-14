@@ -1,3 +1,14 @@
+import type { ReactElement, RefObject } from 'react';
+import {
+  cloneElement,
+  createRef,
+  forwardRef,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { Divider } from '#lib-frontend/core/components/Divider/Divider';
@@ -19,16 +30,6 @@ import { useIsMobile } from '#lib-frontend/core/hooks/useIsMobile/useIsMobile';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FLEX_ALIGN } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
-import type { ReactElement, RefObject } from 'react';
-import {
-  cloneElement,
-  createRef,
-  forwardRef,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
 
 export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
   (

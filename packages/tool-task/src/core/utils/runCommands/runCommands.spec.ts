@@ -1,6 +1,5 @@
-import { runCommands } from '#tool-task/core/utils/runCommands/runCommands';
-
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { runCommands } from '#tool-task/core/utils/runCommands/runCommands';
 
 const { displayName } = withTest({ runCommands });
 

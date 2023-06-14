@@ -1,3 +1,7 @@
+import trim from 'lodash/trim';
+import type { ComponentType } from 'react';
+import { createElement } from 'react';
+
 import { getComponentDisplayName } from '#lib-frontend/core/utils/getComponentDisplayName/getComponentDisplayName';
 import type {
   TestComponentModel,
@@ -6,9 +10,6 @@ import type {
 } from '#lib-frontend/test/utils/withTestComponent/withTestComponent.models';
 import type { PartialModel } from '#lib-shared/core/core.models';
 import { uid } from '#lib-shared/core/utils/uid/uid';
-import trim from 'lodash/trim';
-import type { ComponentType } from 'react';
-import { createElement } from 'react';
 
 export const withTestComponent = <
   TProps,

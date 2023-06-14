@@ -1,3 +1,6 @@
+import type { ForwardedRef } from 'react';
+import { forwardRef, useState } from 'react';
+
 import { config } from '#lib-config/style/css/css.ag-grid';
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 import { Skeleton } from '#lib-frontend/animation/components/Skeleton/Skeleton';
@@ -13,8 +16,6 @@ import type { SFCPropsModel } from '#lib-frontend/core/core.models';
 import { GlobalStyle } from '#lib-frontend/style/components/GlobalStyle/GlobalStyle';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import type { ForwardedRef } from 'react';
-import { forwardRef, useState } from 'react';
 
 export const Table = forwardRef(
   <TType,>(

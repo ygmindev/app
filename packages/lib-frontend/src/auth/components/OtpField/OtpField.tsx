@@ -1,3 +1,6 @@
+import range from 'lodash/range';
+import { useState } from 'react';
+
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 import type { OtpFieldPropsModel } from '#lib-frontend/auth/components/OtpField/OtpField.models';
 import { Button } from '#lib-frontend/core/components/Button/Button';
@@ -14,8 +17,6 @@ import { THEME_COLOR } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { OTP_LENGTH } from '#lib-shared/auth/resources/Otp/Otp.constants';
 import { withId } from '#lib-shared/core/decorators/withId/withId';
-import range from 'lodash/range';
-import { useState } from 'react';
 
 const IDS = withId(range(OTP_LENGTH));
 

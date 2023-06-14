@@ -1,12 +1,13 @@
+import type { DynamicStyleProp, MotiTranformProps, UseDynamicAnimationState } from 'moti';
+import { useDynamicAnimation } from 'moti';
+import { useState } from 'react';
+
 import type {
   _UseAnimationStateModel,
   _UseAnimationStateParamsModel,
 } from '#lib-frontend/animation/hooks/useAnimationState/_useAnimationState.models';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import type { StyleModel, ViewStyleModel } from '#lib-frontend/style/style.models';
-import type { DynamicStyleProp, MotiTranformProps, UseDynamicAnimationState } from 'moti';
-import { useDynamicAnimation } from 'moti';
-import { useState } from 'react';
 
 export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
   animation,

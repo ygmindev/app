@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import type { AccordionPropsModel } from '#lib-frontend/core/components/Accordion/Accordion.models';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { Text } from '#lib-frontend/core/components/Text/Text';
@@ -8,7 +10,6 @@ import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
-import { useState } from 'react';
 
 export const Accordion: SFCModel<AccordionPropsModel> = ({
   children,

@@ -1,7 +1,3 @@
-import { withId } from '#lib-shared/core/decorators/withId/withId';
-import type { WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
-import { groupBy } from '#lib-shared/core/utils/groupBy/groupBy';
-import { stringify } from '#lib-shared/core/utils/stringify/stringify';
 import { mapValues } from 'lodash';
 import isArray from 'lodash/isArray';
 import isFunction from 'lodash/isFunction';
@@ -24,6 +20,10 @@ import type {
   LibraryPropsModel,
   LibraryVariantModel,
 } from '#lib-library/core/components/Library/Library.models';
+import { withId } from '#lib-shared/core/decorators/withId/withId';
+import type { WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
+import { groupBy } from '#lib-shared/core/utils/groupBy/groupBy';
+import { stringify } from '#lib-shared/core/utils/stringify/stringify';
 
 export const Library = <TProps,>({
   Component,

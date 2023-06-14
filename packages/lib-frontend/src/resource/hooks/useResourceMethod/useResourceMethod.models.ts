@@ -1,3 +1,4 @@
+import type { GraphQlQueryParamsFieldsModel } from '#lib-frontend/http/utils/graphQlQuery/graphQlQuery.models';
 import type { WithResourceNameModel } from '#lib-shared/resource/decorators/withResourceName/withResourceName.models';
 import type { ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
 import type { InputModel } from '#lib-shared/resource/utils/Input/Input.models';
@@ -7,8 +8,6 @@ import type {
   ResourceServiceBeforeDecoratorModel,
 } from '#lib-shared/resource/utils/Resource/ResourceService/ResourceService.models';
 import type { RootModel } from '#lib-shared/resource/utils/Root/Root.models';
-
-import type { GraphQlQueryParamsFieldsModel } from '#lib-frontend/http/utils/graphQlQuery/graphQlQuery.models';
 
 export type UseResourceMethodParamsFieldsModel<
   TMethod extends ResourceMethodTypeModel,

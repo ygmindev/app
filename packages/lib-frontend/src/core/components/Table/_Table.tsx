@@ -1,6 +1,17 @@
 import 'ag-grid-community/styles/ag-grid.min.css';
 import 'ag-grid-community/styles/ag-theme-material.min.css';
 
+import type {
+  ColDef,
+  ColumnApi,
+  GridApi,
+  ICellRendererParams,
+  ValueFormatterParams,
+} from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
+import type { ForwardedRef } from 'react';
+import { forwardRef, useImperativeHandle, useState } from 'react';
+
 import { AG_GRID_THEME } from '#lib-config/style/css/css.ag-grid';
 import type { _TablePropsModel } from '#lib-frontend/core/components/Table/_Table.models';
 import {
@@ -16,16 +27,6 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
-import type {
-  ColDef,
-  ColumnApi,
-  GridApi,
-  ICellRendererParams,
-  ValueFormatterParams,
-} from 'ag-grid-community';
-import { AgGridReact } from 'ag-grid-react';
-import type { ForwardedRef } from 'react';
-import { forwardRef, useImperativeHandle, useState } from 'react';
 
 export const _Table = forwardRef(
   <TType,>(

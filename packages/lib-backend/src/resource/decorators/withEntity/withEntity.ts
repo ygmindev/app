@@ -1,8 +1,9 @@
+import { Embeddable, Entity, Index } from '@mikro-orm/core';
+import { InputType, ObjectType } from 'type-graphql';
+
 import type { WithEntityParamsModel } from '#lib-backend/resource/decorators/withEntity/withEntity.models';
 import type { ConstructorModel } from '#lib-shared/core/core.models';
 import { NotImplementedError } from '#lib-shared/core/errors/NotImplementedError/NotImplementedError';
-import { Embeddable, Entity, Index } from '@mikro-orm/core';
-import { InputType, ObjectType } from 'type-graphql';
 
 export const withEntity = <TType>({
   indices = [],

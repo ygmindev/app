@@ -1,3 +1,6 @@
+import isString from 'lodash/isString';
+import { useRef } from 'react';
+
 import type { AnimatableRefModel } from '#lib-frontend/animation/animation.models';
 import { AnimatableText } from '#lib-frontend/animation/components/AnimatableText/AnimatableText';
 import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
@@ -9,8 +12,6 @@ import type { SFCModel } from '#lib-frontend/core/core.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { palette } from '#lib-frontend/style/utils/palette/palette';
-import isString from 'lodash/isString';
-import { useRef } from 'react';
 
 export const Link: SFCModel<LinkPropsModel> = ({ children, ...props }) => {
   const { styles } = useStyles({ props });

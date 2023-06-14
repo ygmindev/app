@@ -1,11 +1,12 @@
+import Email from 'email-templates';
+import toNumber from 'lodash/toNumber';
+import { createTransport } from 'nodemailer';
+
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
 import type {
   _MailModel,
   _MailParamsModel,
 } from '#lib-backend/notification/utils/mail/_mail.models';
-import Email from 'email-templates';
-import toNumber from 'lodash/toNumber';
-import { createTransport } from 'nodemailer';
 
 const transport = createTransport({
   auth: { pass: process.env.SERVER_EMAIL_PASSWORD, user: process.env.SERVER_EMAIL_USERNAME },

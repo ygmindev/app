@@ -1,3 +1,5 @@
+import type { ReactElement } from 'react';
+
 import { Link } from '#lib-frontend/core/components/Link/Link';
 import type { SFCModel, SFCPropsModel } from '#lib-frontend/core/core.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -5,7 +7,6 @@ import type { RouteLinkPropsModel } from '#lib-frontend/route/components/RouteLi
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import type { LocationParamsModel } from '#lib-frontend/route/route.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import type { ReactElement } from 'react';
 
 export const RouteLink = <TParams extends LocationParamsModel = LocationParamsModel>({
   children,

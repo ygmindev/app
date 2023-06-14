@@ -1,3 +1,7 @@
+import { Fragment } from 'react';
+import type { ViewProps } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
+
 import { _viewParams as _viewParamsBase } from '#lib-frontend/core/components/View/_View';
 import type {
   _ViewPropsModel,
@@ -7,9 +11,6 @@ import { View } from '#lib-frontend/core/components/View/View';
 import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
 import type { ComposeComponentParamsModel } from '#lib-frontend/core/utils/composeComponent/composeComponent.models';
 import type { ViewStyleModel } from '#lib-frontend/style/style.models';
-import { Fragment } from 'react';
-import type { ViewProps } from 'react-native';
-import { ScrollView, StyleSheet } from 'react-native';
 
 export const _viewParams: ComposeComponentParamsModel<
   _ViewPropsModel,

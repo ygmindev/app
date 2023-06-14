@@ -1,5 +1,3 @@
-import { merge } from '#lib-shared/core/utils/merge/merge';
-import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
 import type { Module } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { NativeModules } from 'react-native';
@@ -12,6 +10,8 @@ import type {
 } from '#lib-config/locale/internationalize/internationalize.models';
 import { APP_URI } from '#lib-frontend/http/http.constants';
 import { PLATFORM } from '#lib-platform/core/core.constants';
+import { merge } from '#lib-shared/core/utils/merge/merge';
+import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
 
 export const config: InternationalizeConfigModel = merge(
   [
