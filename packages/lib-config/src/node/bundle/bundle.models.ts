@@ -28,6 +28,8 @@ export type BundleConfigModel = ConfigDynamicModel<{
 
   provide?: Record<string, string>;
 
+  tsconfigPath?: string;
+
   watch?: Array<string>;
 }>;
 

@@ -1,19 +1,20 @@
 import type { WebConfigModel } from '@lib/config/platform/web/web.models';
-import type { _ExportRendererClientParamsModel } from '@lib/platform/web/exports/exportRendererClient/_exportRendererClient.models';
+import type { ChildrenPropsModel } from '@lib/frontend/core/core.models';
+import type { RootContextModel } from '@lib/frontend/root/root.models';
 import type { ExportRenderClientParamsModel } from '@lib/platform/web/exports/exportRendererClient/exportRendererClient.models';
-import type { ExportRenderServerParamsModel } from '@lib/platform/web/exports/exportRendererServer/exportRendererServer.models';
-import type { CallablePromiseModel } from '@lib/shared/core/core.models';
+import type { CallableModel, CallablePromiseModel } from '@lib/shared/core/core.models';
+import type { ReactElement } from 'react';
 import type { PageContextBuiltInClientWithServerRouting } from 'vite-plugin-ssr/types';
 
 export interface _ExportRendererServerParamsModel
-  extends Pick<WebConfigModel, 'publicDir' | 'rootId' | 'ssrContextKeys'>,
-    Pick<_ExportRendererClientParamsModel, 'additionalProviders'> {}
+  extends Pick<WebConfigModel, 'publicDir' | 'rootId' | 'ssrContextKeys'> {
+  render(params: { context?: RootContextModel } & ChildrenPropsModel): {
+    element: ReactElement;
+    getCss: CallableModel<ReactElement>;
+  };
+}
 
 export interface _ExportRendererServerModel {
-  onBeforeRender?(
-    params: ExportRenderServerParamsModel,
-  ): Promise<{ pageContext: ExportRenderClientParamsModel }>;
-
   render(
     params: PageContextBuiltInClientWithServerRouting & ExportRenderClientParamsModel,
   ): Promise<{

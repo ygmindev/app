@@ -7,7 +7,7 @@ const lint: TaskParamsModel<RunAllParamsModel> = {
 
   name: 'lint',
 
-  onBefore: ['make-json-typescript', 'make-json-lint'],
+  onBefore: ['build-json-typescript', 'build-json-lint'],
 
   options: { patterns: [/lint/] },
 };

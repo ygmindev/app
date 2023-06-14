@@ -1,7 +1,6 @@
 import { _config } from '@lib/config/locale/internationalize/internationalize';
 import type { RootContextModel } from '@lib/frontend/root/root.models';
 import type { CookiesModel } from '@lib/frontend/state/state.models';
-import { renderApp } from '@lib/platform/core/utils/renderApp/renderApp';
 import type {
   _ExportRendererClientModel,
   _ExportRendererClientParamsModel,
@@ -13,7 +12,7 @@ import Cookies from 'cookies-js';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 
 export const _exportRendererClient = ({
-  additionalProviders,
+  render,
   rootId,
 }: _ExportRendererClientParamsModel): _ExportRendererClientModel => ({
   render: async ({ Page, context, isHydration, pageProps }) => {
@@ -24,11 +23,7 @@ export const _exportRendererClient = ({
       },
       context,
     ]);
-    const { element } = renderApp({
-      additionalProviders: additionalProviders ? additionalProviders(contextF) : undefined,
-      children: <Page {...pageProps} />,
-      context: contextF,
-    });
+    const { element } = render({ children: <Page {...pageProps} />, context: contextF });
     const root = document.getElementById(rootId);
     root && (isHydration ? hydrateRoot(root, element) : createRoot(root).render(element));
   },

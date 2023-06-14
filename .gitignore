@@ -2,7 +2,6 @@
 dist
 tmp
 out-tsc
-build
 out
 
 # Node

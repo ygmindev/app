@@ -2,7 +2,6 @@ import type { RootContextModel } from '@lib/frontend/root/root.models';
 import { ROOT_REDUCERS } from '@lib/frontend/root/stores/rootStore.constants';
 import type { RootStateContextModel } from '@lib/frontend/root/stores/rootStore.models';
 import { Store } from '@lib/frontend/state/utils/Store/Store';
-import { renderApp } from '@lib/platform/core/utils/renderApp/renderApp';
 import { getLocaleStoreFromI18n } from '@lib/platform/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
 import type {
   _ExportRendererServerModel,
@@ -15,28 +14,18 @@ import ReactDOMServer from 'react-dom/server';
 import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vite-plugin-ssr/server';
 
 export const _exportRendererServer = ({
-  additionalProviders,
   publicDir,
+  render,
   rootId,
   ssrContextKeys,
 }: _ExportRendererServerParamsModel): _ExportRendererServerModel => ({
-  onBeforeRender: async () => {
-    return {
-      pageContext: {},
-    };
-  },
-
   render: async ({ Page, context, pageProps }) => {
     const store = new Store({ cookies: context?.state?.cookies, reducers: ROOT_REDUCERS });
     const contextF: RootContextModel = {
       ...context,
       [STATE]: { initialState: await store.getState() } as RootStateContextModel,
     };
-    const { element, getCss } = renderApp({
-      additionalProviders: additionalProviders ? additionalProviders(contextF) : undefined,
-      children: <Page {...pageProps} />,
-      context: contextF,
-    });
+    const { element, getCss } = render({ children: <Page {...pageProps} />, context: contextF });
     const styleSheet = ReactDOMServer.renderToStaticMarkup(getCss());
     const { pipe } = ReactDOMServer.renderToPipeableStream(element);
     stampPipe(pipe, 'node-stream');

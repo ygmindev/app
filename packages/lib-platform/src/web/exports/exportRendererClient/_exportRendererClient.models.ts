@@ -1,15 +1,12 @@
 import type { WebConfigModel } from '@lib/config/platform/web/web.models';
+import type { ChildrenPropsModel } from '@lib/frontend/core/core.models';
 import type { RootContextModel } from '@lib/frontend/root/root.models';
-import type { RenderAppParamsModel } from '@lib/platform/core/utils/renderApp/renderApp.models';
 import type { ExportRenderClientParamsModel } from '@lib/platform/web/exports/exportRendererClient/exportRendererClient.models';
-import type { CallableModel } from '@lib/shared/core/core.models';
+import type { ReactElement } from 'react';
 import type { PageContextBuiltInClientWithClientRouting } from 'vite-plugin-ssr/types';
 
 export interface _ExportRendererClientParamsModel extends Pick<WebConfigModel, 'rootId'> {
-  additionalProviders?: CallableModel<
-    RenderAppParamsModel['additionalProviders'],
-    RootContextModel
-  >;
+  render(params: { context?: RootContextModel } & ChildrenPropsModel): { element: ReactElement };
 }
 
 export interface _ExportRendererClientModel {

@@ -1,0 +1,4 @@
+{
+    "extends": "../../.build/tsconfig.json",
+    "include": ["../lib-config/src/node/typescript/types/*", "src/**/*", "*.ts", "*.js"]
+}

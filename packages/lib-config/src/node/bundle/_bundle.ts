@@ -9,9 +9,10 @@ import type { PlatformModel } from '@lib/platform/core/core.models';
 import type { ReturnTypeModel } from '@lib/shared/core/core.models';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
-// import commonjs from '@rollup/plugin-commonjs';
+import commonjs from '@rollup/plugin-commonjs';
 import inject from '@rollup/plugin-inject';
 import react from '@vitejs/plugin-react-swc';
+import { getTsconfig } from 'get-tsconfig';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
 import { visualizer } from 'rollup-plugin-visualizer';
@@ -33,6 +34,7 @@ export const _bundle = ({
   outDir,
   platform,
   provide,
+  tsconfigPath,
   watch,
 }: ReturnTypeModel<BundleConfigModel>): ReturnTypeModel<_BundleConfigModel> => {
   const isReact = ([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>).includes(
@@ -49,7 +51,7 @@ export const _bundle = ({
       rollupOptions: {
         ...(entry ? { input: entry } : {}),
 
-        // plugins: [commonjs()],
+        plugins: [commonjs()],
       },
       watch:
         process.env.NODE_ENV === ENVIRONMENT.DEVELOPMENT && watch ? { include: watch } : undefined,
@@ -85,18 +87,18 @@ export const _bundle = ({
 
         target: process.env.PLATFORM === PLATFORM.NODE ? 'node18' : undefined,
 
-        tsconfig: fromWorking('tsconfig.json'),
+        tsconfig: tsconfigPath,
       },
 
       include: externals,
     },
 
     plugins: [
-      tsconfigPaths({ projects: [fromRoot('tsconfig.json')] }),
+      tsconfigPath && tsconfigPaths({ projects: [tsconfigPath] }),
 
       checker({
         eslint: { lintCommand: lintCommand() },
-        typescript: { tsconfigPath: fromWorking('tsconfig.json') },
+        typescript: { tsconfigPath },
       }),
 
       isReact && react(),
@@ -122,7 +124,19 @@ export const _bundle = ({
     ].filter(Boolean) as Array<PluginOption>,
 
     resolve: {
-      alias: aliases,
+      alias: {
+        ...aliases,
+        ...(tsconfigPath
+          ? reduce(
+              getTsconfig(tsconfigPath)?.config?.compilerOptions?.paths,
+              (result, v, k) => ({
+                ...result,
+                [k.replaceAll('*', '')]: fromRoot(v[0].replaceAll('*', '')),
+              }),
+              {},
+            )
+          : {}),
+      },
 
       extensions,
     },

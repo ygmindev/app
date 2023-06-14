@@ -22,6 +22,8 @@ export const config: BundleConfigModel = () => ({
 
   platform: PLATFORM.BASE,
 
+  tsconfigPath: fromWorking('tsconfig.json'),
+
   // TODO: watch is not really working
   watch: [
     fromPackages('asset-static/src/**/*'),
