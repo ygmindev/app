@@ -1,5 +1,5 @@
-import type { FormErrorModel, SubmittablePropsModel } from '@lib/frontend/form/form.models';
-import type { CallableArgsModel, CallableModel } from '@lib/shared/core/core.models';
+import type { FormErrorModel, SubmittablePropsModel } from '#lib-frontend/form/form.models';
+import type { CallableArgsModel, CallableModel } from '#lib-shared/core/core.models';
 
 export interface _UseFormParamsModel<TType = void, TResult = void>
   extends Pick<

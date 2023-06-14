@@ -1,6 +1,7 @@
-import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { join } from 'path';
+
+import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ fromWorking });
 

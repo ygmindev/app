@@ -1,7 +1,7 @@
-import { selfAuthorizer } from '@lib/backend/auth/utils/selfAuthorizer/selfAuthorizer';
-import { CONTEXT_FIXTURE } from '@lib/shared/resource/utils/Context/Context.fixtures';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
-import { USER_FIXTURE } from '@lib/shared/user/resources/User/User.fixtures';
+import { selfAuthorizer } from '#lib-backend/auth/utils/selfAuthorizer/selfAuthorizer';
+import { CONTEXT_FIXTURE } from '#lib-shared/resource/utils/Context/Context.fixtures';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { USER_FIXTURE } from '#lib-shared/user/resources/User/User.fixtures';
 
 const { displayName } = withTest({ selfAuthorizer });
 

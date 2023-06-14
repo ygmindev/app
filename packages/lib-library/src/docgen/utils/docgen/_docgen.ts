@@ -1,8 +1,3 @@
-import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import type {
-  _DocgenModel,
-  _DocgenParamsModel,
-} from '@lib/library/docgen/utils/docgen/_docgen.models';
 import { existsSync, readFileSync } from 'fs';
 import map from 'lodash/map';
 import sortBy from 'lodash/sortBy';
@@ -18,6 +13,12 @@ import {
   ScriptSnapshot,
   sys,
 } from 'typescript';
+
+import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
+import type {
+  _DocgenModel,
+  _DocgenParamsModel,
+} from '#lib-library/docgen/utils/docgen/_docgen.models';
 
 const fileCache = new Map();
 

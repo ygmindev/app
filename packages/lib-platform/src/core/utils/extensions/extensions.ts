@@ -1,7 +1,7 @@
-import { PLATFORM } from '@lib/platform/core/core.constants';
-import { EXTENSIONS_BASE } from '@lib/platform/core/utils/extensions/extensions.constants';
-import type { ExtensionsModel } from '@lib/platform/core/utils/extensions/extensions.models';
-import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
+import { PLATFORM } from '#lib-platform/core/core.constants';
+import { EXTENSIONS_BASE } from '#lib-platform/core/utils/extensions/extensions.constants';
+import type { ExtensionsModel } from '#lib-platform/core/utils/extensions/extensions.models';
+import { permuteString } from '#lib-shared/core/utils/permuteString/permuteString';
 
 export const extensions = (): ExtensionsModel => {
   const isWeb = process.env.ENV_PLATFORM === 'web';

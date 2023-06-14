@@ -1,25 +1,26 @@
-import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
-import { Slide } from '@lib/frontend/animation/components/Slide/Slide';
-import { Protectable } from '@lib/frontend/auth/components/Protectable/Protectable';
-import { Portal } from '@lib/frontend/core/components/Portal/Portal';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
-import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import type { RoutePropsModel } from '@lib/frontend/route/components/Route/Route.models';
-import { RouteHeader } from '@lib/frontend/route/containers/RouteHeader/RouteHeader';
-import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
-import { ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
-import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
-import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { useTracking } from '@lib/frontend/tracking/hooks/useTracking/useTracking';
+import { cloneElement, Fragment, useMemo } from 'react';
+
+import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
+import { Slide } from '#lib-frontend/animation/components/Slide/Slide';
+import { Protectable } from '#lib-frontend/auth/components/Protectable/Protectable';
+import { Portal } from '#lib-frontend/core/components/Portal/Portal';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import type { SFCModel } from '#lib-frontend/core/core.models';
+import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
+import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import type { RoutePropsModel } from '#lib-frontend/route/components/Route/Route.models';
+import { RouteHeader } from '#lib-frontend/route/containers/RouteHeader/RouteHeader';
+import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
+import { ROUTE_TRANSITION } from '#lib-frontend/route/route.constants';
+import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
+import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
+import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { useTracking } from '#lib-frontend/tracking/hooks/useTracking/useTracking';
 import {
   TRACKING_EVENT_ACTION,
   TRACKING_EVENT_OBJECT,
-} from '@lib/shared/tracking/resources/TrackingEvent/TrackingEvent.constants';
-import { cloneElement, Fragment, useMemo } from 'react';
+} from '#lib-shared/tracking/resources/TrackingEvent/TrackingEvent.constants';
 
 export const Route: SFCModel<RoutePropsModel> = ({ children, route, testID, ...props }) => {
   useTranslation(route.ns);

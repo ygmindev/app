@@ -1,5 +1,5 @@
-import { getPaymentMethodTitle } from '@lib/frontend/billing/utils/getPaymentMethodTitle/getPaymentMethodTitle';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { getPaymentMethodTitle } from '#lib-frontend/billing/utils/getPaymentMethodTitle/getPaymentMethodTitle';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ getPaymentMethodTitle });
 

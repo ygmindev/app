@@ -1,8 +1,8 @@
-import type { TaskParamsModel } from '@tool/task/core/core.models';
-import { dev } from '@tool/task/platform/native/templates/dev/dev';
-import { iosDev } from '@tool/task/platform/native/templates/iosDev/iosDev';
-import { iosPod } from '@tool/task/platform/native/templates/iosPod/iosPod';
-import { nodeTasks } from '@tool/task/node/utils/nodeTasks/nodeTasks';
+import type { TaskParamsModel } from '#tool-task/core/core.models';
+import { dev } from '#tool-task/platform/native/templates/dev/dev';
+import { iosDev } from '#tool-task/platform/native/templates/iosDev/iosDev';
+import { iosPod } from '#tool-task/platform/native/templates/iosPod/iosPod';
+import { nodeTasks } from '#tool-task/node/utils/nodeTasks/nodeTasks';
 
 const tasks: Array<TaskParamsModel<unknown>> = [
   ...nodeTasks(),

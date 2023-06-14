@@ -2,7 +2,7 @@ import type {
   ChildrenPropsModel,
   ElementStateModel,
   ValuePropsModel,
-} from '@lib/frontend/core/core.models';
+} from '#lib-frontend/core/core.models';
 
 export interface AccordionPropsModel
   extends ChildrenPropsModel,

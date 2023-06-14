@@ -1,4 +1,4 @@
-import type { _WithFieldResolverParamsModel } from '@lib/backend/http/decorators/withFieldResolver/_withFieldResolver.models';
+import type { _WithFieldResolverParamsModel } from '#lib-backend/http/decorators/withFieldResolver/_withFieldResolver.models';
 import { FieldResolver } from 'type-graphql';
 
 export const _withFieldResolver =

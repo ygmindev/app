@@ -1,8 +1,9 @@
-import type { FlattenObjectParams } from '@lib/shared/core/utils/flattenObject/flattenObject.models';
 import isArray from 'lodash/isArray';
 import isPlainObject from 'lodash/isPlainObject';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
+
+import type { FlattenObjectParams } from '#lib-shared/core/utils/flattenObject/flattenObject.models';
 
 export const flattenObject = (
   ...[value, { delimiter = '.', path = [], prefixes = ['$'] } = {}]: FlattenObjectParams

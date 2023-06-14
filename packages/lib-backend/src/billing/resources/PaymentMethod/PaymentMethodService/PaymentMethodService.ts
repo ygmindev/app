@@ -1,22 +1,22 @@
-import { BankService } from '@lib/backend/billing/resources/Bank/BankService/BankService';
-import { CardService } from '@lib/backend/billing/resources/Card/CardService/CardService';
-import { StripeAdminService } from '@lib/backend/billing/utils/StripeAdminService/StripeAdminService';
-import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
-import { LinkedUserService } from '@lib/backend/user/resources/LinkedUser/LinkedUserService/LinkedUserService';
-import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
+import { BankService } from '#lib-backend/billing/resources/Bank/BankService/BankService';
+import { CardService } from '#lib-backend/billing/resources/Card/CardService/CardService';
+import { StripeAdminService } from '#lib-backend/billing/utils/StripeAdminService/StripeAdminService';
+import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
+import { LinkedUserService } from '#lib-backend/user/resources/LinkedUser/LinkedUserService/LinkedUserService';
+import { UnauthenticatedError } from '#lib-shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
 import {
   PAYMENT_METHOD_RESOURCE_NAME,
   PAYMENT_METHOD_TYPE,
-} from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import type { PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
-import type { PaymentMethodServiceModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethodService/PaymentMethodService.models';
-import { withInject } from '@lib/shared/core/decorators/withInject/withInject';
-import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
-import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
-import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
-import { LINKED_USER_TYPE } from '@lib/shared/user/resources/LinkedUser/LinkedUser.constants';
-import type { UserModel } from '@lib/shared/user/resources/User/User.models';
+} from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import type { PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import type { PaymentMethodServiceModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethodService/PaymentMethodService.models';
+import { withInject } from '#lib-shared/core/decorators/withInject/withInject';
+import { NotFoundError } from '#lib-shared/core/errors/NotFoundError/NotFoundError';
+import type { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
+import type { InputModel } from '#lib-shared/resource/utils/Input/Input.models';
+import type { OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
+import { LINKED_USER_TYPE } from '#lib-shared/user/resources/LinkedUser/LinkedUser.constants';
+import type { UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withContainer({ name: `${PAYMENT_METHOD_RESOURCE_NAME}Service` })
 export class PaymentMethodService implements PaymentMethodServiceModel {

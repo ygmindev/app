@@ -1,10 +1,10 @@
 import type {
   _UseQueryConnectionModel,
   _UseQueryConnectionParamsModel,
-} from '@lib/frontend/core/hooks/useQueryConnection/_useQueryConnection.models';
-import { USE_QUERY_CONNECTION_LIMIT_DEFAULT } from '@lib/frontend/core/hooks/useQueryConnection/useQueryConnection.constants';
-import { debounce } from '@lib/shared/core/utils/debounce/debounce';
-import type { ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
+} from '#lib-frontend/core/hooks/useQueryConnection/_useQueryConnection.models';
+import { USE_QUERY_CONNECTION_LIMIT_DEFAULT } from '#lib-frontend/core/hooks/useQueryConnection/useQueryConnection.constants';
+import { debounce } from '#lib-shared/core/utils/debounce/debounce';
+import type { ConnectionModel } from '#lib-shared/resource/utils/Connection/Connection.models';
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 
 export const _useQueryConnection = <TType,>({

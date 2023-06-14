@@ -1,7 +1,7 @@
 import type {
   _UseSearchModel,
   _UseSearchParamsModel,
-} from '@lib/frontend/search/hooks/useSearch/_useSearch.models';
+} from '#lib-frontend/search/hooks/useSearch/_useSearch.models';
 
 export interface UseSearchParamsModel<TType> extends _UseSearchParamsModel<TType> {}
 

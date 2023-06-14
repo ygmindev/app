@@ -1,4 +1,4 @@
-import type { ContextModel } from '@lib/shared/resource/utils/Context/Context.models';
+import type { ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
 
 export interface AuthorizeParamsModel {
   context: ContextModel;

@@ -1,4 +1,4 @@
-import type { DocgenMetaDataModel } from '@lib/library/docgen/utils/docgen/docgen.models';
+import type { DocgenMetaDataModel } from '#lib-library/docgen/utils/docgen/docgen.models';
 
 export type _DocgenParamsModel = string;
 

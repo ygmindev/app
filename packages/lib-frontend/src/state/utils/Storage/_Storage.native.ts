@@ -1,7 +1,7 @@
-import { _Storage as _StorageBase } from '@lib/frontend/state/utils/Storage/_Storage.base';
-import type { _StorageParamsModel } from '@lib/frontend/state/utils/Storage/_Storage.models';
-import { STORAGE_BACKEND } from '@lib/frontend/state/utils/Storage/Storage.constants';
-import type { StorageModel } from '@lib/frontend/state/utils/Storage/Storage.models';
+import { _Storage as _StorageBase } from '#lib-frontend/state/utils/Storage/_Storage.base';
+import type { _StorageParamsModel } from '#lib-frontend/state/utils/Storage/_Storage.models';
+import { STORAGE_BACKEND } from '#lib-frontend/state/utils/Storage/Storage.constants';
+import type { StorageModel } from '#lib-frontend/state/utils/Storage/Storage.models';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export class _Storage extends _StorageBase {

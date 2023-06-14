@@ -1,5 +1,5 @@
-import type { TaskParamsModel } from '@tool/task/core/core.models';
-import { command } from '@tool/task/core/utils/command/command';
+import type { TaskParamsModel } from '#tool-task/core/core.models';
+import { command } from '#tool-task/core/utils/command/command';
 
 const manager: TaskParamsModel = {
   name: 'node-manager',

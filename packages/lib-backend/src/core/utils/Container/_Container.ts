@@ -1,9 +1,10 @@
 import 'reflect-metadata';
 
-import type { _ContainerModel } from '@lib/backend/core/utils/Container/_Container.models';
-import type { ConstructorModel } from '@lib/shared/core/core.models';
 import { Container } from 'inversify';
 import isFunction from 'lodash/isFunction';
+
+import type { _ContainerModel } from '#lib-backend/core/utils/Container/_Container.models';
+import type { ConstructorModel } from '#lib-shared/core/core.models';
 
 const container = new Container({
   autoBindInjectable: true,

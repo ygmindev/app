@@ -1,4 +1,4 @@
-import type { ReturnTypeModel } from '@lib/shared/core/core.models';
+import type { ReturnTypeModel } from '#lib-shared/core/core.models';
 
 export type ImportConfigParamsModel = string;
 

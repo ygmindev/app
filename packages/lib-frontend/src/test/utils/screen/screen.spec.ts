@@ -1,6 +1,6 @@
-import { screen } from '@lib/frontend/test/utils/screen/screen';
-import type { ScreenModel } from '@lib/frontend/test/utils/screen/screen.models';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { screen } from '#lib-frontend/test/utils/screen/screen';
+import type { ScreenModel } from '#lib-frontend/test/utils/screen/screen.models';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ screen });
 

@@ -1,7 +1,7 @@
-import { SettingsLocale } from '@lib/frontend/settings/containers/SettingsLocale/SettingsLocale';
-import type { SettingsLocalePropsModel } from '@lib/frontend/settings/containers/SettingsLocale/SettingsLocale.models';
-import { render } from '@lib/frontend/test/utils/render/render';
-import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
+import { SettingsLocale } from '#lib-frontend/settings/containers/SettingsLocale/SettingsLocale';
+import type { SettingsLocalePropsModel } from '#lib-frontend/settings/containers/SettingsLocale/SettingsLocale.models';
+import { render } from '#lib-frontend/test/utils/render/render';
+import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<SettingsLocalePropsModel>({
   target: SettingsLocale,

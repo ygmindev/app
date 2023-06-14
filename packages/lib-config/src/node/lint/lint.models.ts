@@ -1,4 +1,4 @@
-import type { ConfigDynamicModel } from '@lib/config/core/core.models';
+import type { ConfigDynamicModel } from '#lib-config/core/core.models';
 import type { Linter } from 'eslint';
 
 export interface LintConfigModel

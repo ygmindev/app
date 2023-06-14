@@ -1,6 +1,6 @@
-import { Filter } from '@lib/backend/resource/utils/Filter/Filter';
-import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { Filter } from '#lib-backend/resource/utils/Filter/Filter';
+import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ Filter });
 

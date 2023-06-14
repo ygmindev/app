@@ -1,14 +1,15 @@
-import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
-import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
+import type { AWS } from '@serverless/typescript';
+import reduce from 'lodash/reduce';
+
+import { fromConfig } from '#lib-backend/file/utils/fromConfig/fromConfig';
+import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
+import { toRelative } from '#lib-backend/file/utils/toRelative/toRelative';
 import type {
   _ServerlessConfigModel,
   ServerlessConfigModel,
-} from '@lib/config/platform/serverless/serverless.models';
-import { PLATFORM } from '@lib/platform/core/core.constants';
-import type { ReturnTypeModel } from '@lib/shared/core/core.models';
-import type { AWS } from '@serverless/typescript';
-import reduce from 'lodash/reduce';
+} from '#lib-config/platform/serverless/serverless.models';
+import { PLATFORM } from '#lib-platform/core/core.constants';
+import type { ReturnTypeModel } from '#lib-shared/core/core.models';
 
 export const _serverless = ({
   bundleConfig,

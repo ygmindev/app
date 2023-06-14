@@ -1,6 +1,7 @@
-import type { DocgenMetaDataPropsModel } from '@lib/library/docgen/utils/docgen/docgen.models';
-import type { PartialModel } from '@lib/shared/core/core.models';
 import type { ComponentType } from 'react';
+
+import type { DocgenMetaDataPropsModel } from '#lib-library/docgen/utils/docgen/docgen.models';
+import type { PartialModel } from '#lib-shared/core/core.models';
 
 export interface LibraryPropsModel<TProps> {
   Component: ComponentType<TProps>;

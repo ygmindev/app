@@ -1,4 +1,4 @@
-import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 
 export const SIGN_IN_RESOURCE_NAME = 'SignIn';
 

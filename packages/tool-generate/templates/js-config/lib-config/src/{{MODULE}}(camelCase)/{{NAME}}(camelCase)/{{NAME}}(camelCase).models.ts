@@ -1,4 +1,4 @@
-import type { ConfigDynamicModel } from '@lib/config/core/core.models';
+import type { ConfigDynamicModel } from '#lib-config/core/core.models';
 
 export interface {{NAME}}(pascalCase)ConfigModel {
 }

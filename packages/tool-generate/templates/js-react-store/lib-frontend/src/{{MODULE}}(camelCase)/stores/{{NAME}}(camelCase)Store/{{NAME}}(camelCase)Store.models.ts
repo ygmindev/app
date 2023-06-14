@@ -1,4 +1,4 @@
-import type { ReducerModel } from '@lib/frontend/state/state.models';
+import type { ReducerModel } from '#lib-frontend/state/state.models';
 
 export interface {{NAME}}(pascalCase)StateModel {
   value: null;

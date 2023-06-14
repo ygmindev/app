@@ -1,10 +1,10 @@
-import { config } from '@lib/config/locale/internationalize/internationalize.base';
-import { _useTranslation } from '@lib/frontend/locale/hooks/useTranslation/_useTranslation';
+import { config } from '#lib-config/locale/internationalize/internationalize.base';
+import { _useTranslation } from '#lib-frontend/locale/hooks/useTranslation/_useTranslation';
 import type {
   UseTranslationModel,
   UseTranslationParamsModel,
-} from '@lib/frontend/locale/hooks/useTranslation/useTranslation.models';
-import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
+} from '#lib-frontend/locale/hooks/useTranslation/useTranslation.models';
+import type { TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import isFunction from 'lodash/isFunction';
 
 export const useTranslation = (ns: UseTranslationParamsModel = []): UseTranslationModel => {

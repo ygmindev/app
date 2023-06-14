@@ -1,7 +1,7 @@
 import type {
   _PhoneFormatModel,
   _PhoneFormatParamsModel,
-} from '@lib/shared/locale/utils/phoneFormat/_phoneFormat.models';
+} from '#lib-shared/locale/utils/phoneFormat/_phoneFormat.models';
 
 export type PhoneFormatParamsModel = _PhoneFormatParamsModel;
 

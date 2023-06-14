@@ -1,8 +1,8 @@
-import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
+import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
 import type {
   _MailModel,
   _MailParamsModel,
-} from '@lib/backend/notification/utils/mail/_mail.models';
+} from '#lib-backend/notification/utils/mail/_mail.models';
 import Email from 'email-templates';
 import toNumber from 'lodash/toNumber';
 import { createTransport } from 'nodemailer';

@@ -1,8 +1,8 @@
-import { TASK_STATUS } from '@tool/task/core/core.constants';
-import type { TaskParamsModel } from '@tool/task/core/core.models';
-import { rename } from '@tool/task/core/utils/rename/rename';
-import { NODE_POST_INSTALL_JS_TO_JSX } from '@tool/task/node/tasks/postInstall/postInstall.constants';
-import type { PostInstallParamsModel } from '@tool/task/node/tasks/postInstall/postInstall.models';
+import { TASK_STATUS } from '#tool-task/core/core.constants';
+import type { TaskParamsModel } from '#tool-task/core/core.models';
+import { rename } from '#tool-task/core/utils/rename/rename';
+import { NODE_POST_INSTALL_JS_TO_JSX } from '#tool-task/node/tasks/postInstall/postInstall.constants';
+import type { PostInstallParamsModel } from '#tool-task/node/tasks/postInstall/postInstall.models';
 
 const postInstall: TaskParamsModel<PostInstallParamsModel> = {
   name: 'node-post-install',

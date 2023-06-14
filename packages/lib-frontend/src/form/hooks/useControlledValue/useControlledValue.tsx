@@ -1,8 +1,9 @@
+import { useState } from 'react';
+
 import type {
   UseControlledValueModel,
   UseControlledValueParamsModel,
-} from '@lib/frontend/form/hooks/useControlledValue/useControlledValue.models';
-import { useState } from 'react';
+} from '#lib-frontend/form/hooks/useControlledValue/useControlledValue.models';
 
 export const useControlledValue = <TType extends string = string>({
   defaultValue,

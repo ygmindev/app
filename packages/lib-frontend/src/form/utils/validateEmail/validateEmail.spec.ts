@@ -1,5 +1,5 @@
-import { validateEmail } from '@lib/frontend/form/utils/validateEmail/validateEmail';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { validateEmail } from '#lib-frontend/form/utils/validateEmail/validateEmail';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ validateEmail });
 

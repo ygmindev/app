@@ -1,8 +1,8 @@
-import type { AnimationStatesModel } from '@lib/frontend/animation/animation.models';
-import type { SlidePropsModel } from '@lib/frontend/animation/components/Slide/Slide.models';
-import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import type { MeasureModel } from '@lib/frontend/core/core.models';
-import type { StyleModel } from '@lib/frontend/style/style.models';
+import type { AnimationStatesModel } from '#lib-frontend/animation/animation.models';
+import type { SlidePropsModel } from '#lib-frontend/animation/components/Slide/Slide.models';
+import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import type { MeasureModel } from '#lib-frontend/core/core.models';
+import type { StyleModel } from '#lib-frontend/style/style.models';
 
 export const ANIMATION_STATES_APPEARABLE: AnimationStatesModel<StyleModel> = {
   [ELEMENT_STATE.ACTIVE]: { opacity: 1 },

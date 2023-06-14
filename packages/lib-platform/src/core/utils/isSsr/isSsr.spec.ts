@@ -1,5 +1,6 @@
-import { isSsr } from '@lib/platform/core/utils/isSsr/isSsr';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+
+import { isSsr } from '#lib-platform/core/utils/isSsr/isSsr';
 
 const { displayName } = withTest({ isSsr });
 

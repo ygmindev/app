@@ -1,6 +1,6 @@
-import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
+import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ fromPackages });
 

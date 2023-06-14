@@ -1,8 +1,9 @@
-import { withEntity } from '@lib/backend/resource/decorators/withEntity/withEntity';
-import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
-import type { FormParamsModel } from '@lib/backend/resource/utils/Form/Form.models';
-import type { ConstructorModel } from '@lib/shared/core/core.models';
 import isFunction from 'lodash/isFunction';
+
+import { withEntity } from '#lib-backend/resource/decorators/withEntity/withEntity';
+import { EntityResource } from '#lib-backend/resource/resources/EntityResource/EntityResource';
+import type { FormParamsModel } from '#lib-backend/resource/utils/Form/Form.models';
+import type { ConstructorModel } from '#lib-shared/core/core.models';
 
 export const Form = <TType extends unknown>({
   Resource,

@@ -1,14 +1,14 @@
-import { withEntity } from '@lib/backend/resource/decorators/withEntity/withEntity';
-import { withField } from '@lib/backend/resource/decorators/withField/withField';
-import type { ConnectionParamsModel } from '@lib/backend/resource/utils/Connection/Connection.models';
-import { Edge } from '@lib/backend/resource/utils/Edge/Edge';
-import { PageInfo } from '@lib/backend/resource/utils/PageInfo/PageInfo';
-import type { ConstructorModel } from '@lib/shared/core/core.models';
+import { withEntity } from '#lib-backend/resource/decorators/withEntity/withEntity';
+import { withField } from '#lib-backend/resource/decorators/withField/withField';
+import type { ConnectionParamsModel } from '#lib-backend/resource/utils/Connection/Connection.models';
+import { Edge } from '#lib-backend/resource/utils/Edge/Edge';
+import { PageInfo } from '#lib-backend/resource/utils/PageInfo/PageInfo';
+import type { ConstructorModel } from '#lib-shared/core/core.models';
 import type {
   ConnectionModel,
   EdgeModel,
   PageInfoModel,
-} from '@lib/shared/resource/utils/Connection/Connection.models';
+} from '#lib-shared/resource/utils/Connection/Connection.models';
 
 export const Connection = <TType extends unknown>({
   Resource,

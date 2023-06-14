@@ -1,15 +1,15 @@
-import { _useRouter } from '@lib/frontend/route/hooks/useRouter/_useRouter';
+import { _useRouter } from '#lib-frontend/route/hooks/useRouter/_useRouter';
 import type {
   PathUpdateParamsModel,
   UseRouterModel,
-} from '@lib/frontend/route/hooks/useRouter/useRouter.models';
-import type { LocationParamsModel } from '@lib/frontend/route/route.models';
-import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
-import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
-import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import type { CallableModel } from '@lib/shared/core/core.models';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
+} from '#lib-frontend/route/hooks/useRouter/useRouter.models';
+import type { LocationParamsModel } from '#lib-frontend/route/route.models';
+import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
+import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
+import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
+import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
+import type { CallableModel } from '#lib-shared/core/core.models';
+import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 export const useRouter = <
   TParams extends LocationParamsModel = LocationParamsModel,

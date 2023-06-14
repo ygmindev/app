@@ -2,7 +2,7 @@ import type {
   LayoutPropsModel,
   TranslatableOptionModel,
   ValuePropsModel,
-} from '@lib/frontend/core/core.models';
+} from '#lib-frontend/core/core.models';
 
 export interface NavigationLayoutPropsModel<TType extends TranslatableOptionModel>
   extends LayoutPropsModel,

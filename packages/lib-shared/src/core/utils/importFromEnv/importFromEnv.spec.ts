@@ -1,10 +1,11 @@
 jest.mock('fs');
 
-import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
-import { PLATFORM } from '@lib/platform/core/core.constants';
-import { importFromEnv } from '@lib/shared/core/utils/importFromEnv/importFromEnv';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { importFromEnv } from '#lib-shared/core/utils/importFromEnv/importFromEnv';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+
+import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
+import { writeFile } from '#lib-backend/file/utils/writeFile/writeFile';
+import { PLATFORM } from '#lib-platform/core/core.constants';
 
 const { displayName } = withTest({ importFromEnv });
 

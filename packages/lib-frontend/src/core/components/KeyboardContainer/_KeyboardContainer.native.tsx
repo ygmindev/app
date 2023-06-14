@@ -1,5 +1,5 @@
-import type { _KeyboardContainerPropsModel } from '@lib/frontend/core/components/KeyboardContainer/_KeyboardContainer.models';
-import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
+import type { _KeyboardContainerPropsModel } from '#lib-frontend/core/components/KeyboardContainer/_KeyboardContainer.models';
+import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
 import type { KeyboardAvoidingViewProps } from 'react-native';
 import { Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 

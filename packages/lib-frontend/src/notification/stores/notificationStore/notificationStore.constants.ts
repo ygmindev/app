@@ -1,6 +1,7 @@
-import type { NotificationReducerModel } from '@lib/frontend/notification/stores/notificationStore/notificationStore.models';
-import { uid } from '@lib/shared/core/utils/uid/uid';
 import uniqBy from 'lodash/uniqBy';
+
+import type { NotificationReducerModel } from '#lib-frontend/notification/stores/notificationStore/notificationStore.models';
+import { uid } from '#lib-shared/core/utils/uid/uid';
 
 export const NOTIFICATION_REDUCER: NotificationReducerModel = {
   actions: {

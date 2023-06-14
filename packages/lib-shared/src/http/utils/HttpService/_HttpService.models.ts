@@ -1,4 +1,4 @@
-import type { HttpRequestParamsModel } from '@lib/shared/http/utils/HttpService/HttpService.models';
+import type { HttpRequestParamsModel } from '#lib-shared/http/utils/HttpService/HttpService.models';
 
 export interface _HttpRequestParamsModel<TParams> {
   params?: TParams;

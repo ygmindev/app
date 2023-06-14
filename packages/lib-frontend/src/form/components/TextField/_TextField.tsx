@@ -1,22 +1,3 @@
-import type { AnimationModel } from '@lib/frontend/animation/animation.models';
-import { AnimatableText } from '@lib/frontend/animation/components/AnimatableText/AnimatableText';
-import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
-import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import type { RSFCModel } from '@lib/frontend/core/core.models';
-import type { _TextFieldPropsModel } from '@lib/frontend/form/components/TextField/_TextField.models';
-import { TEXT_FIELD_KEYBOARD } from '@lib/frontend/form/components/TextField/TextField.constants';
-import type {
-  TextFieldKeyboardModel,
-  TextFieldRefModel,
-} from '@lib/frontend/form/components/TextField/TextField.models';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
-import type { TextStyleModel } from '@lib/frontend/style/style.models';
-import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import isString from 'lodash/isString';
 import type { RefObject } from 'react';
 import { forwardRef } from 'react';
@@ -27,6 +8,26 @@ import type {
 } from 'react-native';
 import { StyleSheet, TextInput as NativeTextInput } from 'react-native';
 import { TextInput } from 'react-native-paper';
+
+import type { AnimationModel } from '#lib-frontend/animation/animation.models';
+import { AnimatableText } from '#lib-frontend/animation/components/AnimatableText/AnimatableText';
+import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
+import { Icon } from '#lib-frontend/core/components/Icon/Icon';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import type { RSFCModel } from '#lib-frontend/core/core.models';
+import type { _TextFieldPropsModel } from '#lib-frontend/form/components/TextField/_TextField.models';
+import { TEXT_FIELD_KEYBOARD } from '#lib-frontend/form/components/TextField/TextField.constants';
+import type {
+  TextFieldKeyboardModel,
+  TextFieldRefModel,
+} from '#lib-frontend/form/components/TextField/TextField.models';
+import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
+import { THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
+import type { TextStyleModel } from '#lib-frontend/style/style.models';
+import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 
 const getKeyboardType = (type?: TextFieldKeyboardModel): TextInputProps['keyboardType'] => {
   switch (type) {

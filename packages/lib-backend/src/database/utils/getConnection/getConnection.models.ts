@@ -1,7 +1,7 @@
-import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
-import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
-import type { PaginationModel } from '@lib/shared/resource/utils/Pagination/Pagination.models';
+import type { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
+import type { InputModel } from '#lib-shared/resource/utils/Input/Input.models';
+import type { OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
+import type { PaginationModel } from '#lib-shared/resource/utils/Pagination/Pagination.models';
 
 export interface GetConnectionParamsModel<TType, TForm, TRoot = undefined> {
   count: number;

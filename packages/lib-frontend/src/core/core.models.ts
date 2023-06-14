@@ -1,12 +1,13 @@
-import type { ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
-import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
-import type { WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
-import type { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
-import type { StyleModel, StylePropsModel, ViewStyleModel } from '@lib/frontend/style/style.models';
-import type { TestIdPropsModel } from '@lib/frontend/test/test.models';
-import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
 import type { ComponentType, FC as _FC, ReactNode, Ref } from 'react';
+
+import type { ButtonPropsModel } from '#lib-frontend/core/components/Button/Button.models';
+import type { IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
+import type { WrapperPropsModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
+import type { DIRECTION, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import type { TranslatableTextModel } from '#lib-frontend/locale/locale.models';
+import type { StyleModel, StylePropsModel, ViewStyleModel } from '#lib-frontend/style/style.models';
+import type { TestIdPropsModel } from '#lib-frontend/test/test.models';
+import type { WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
 
 export interface FCModel<TProps = object>
   extends _FC<TProps & TestIdPropsModel & { nativeID?: string }> {}

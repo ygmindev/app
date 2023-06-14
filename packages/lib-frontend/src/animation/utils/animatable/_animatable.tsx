@@ -1,12 +1,12 @@
-import type { AnimatableRefModel } from '@lib/frontend/animation/animation.models';
-import { useAnimationState } from '@lib/frontend/animation/hooks/useAnimationState/useAnimationState';
+import type { AnimatableRefModel } from '#lib-frontend/animation/animation.models';
+import { useAnimationState } from '#lib-frontend/animation/hooks/useAnimationState/useAnimationState';
 import type {
   _AnimatableModel,
   _AnimatableParamsModel,
-} from '@lib/frontend/animation/utils/animatable/_animatable.models';
-import type { PropsModel } from '@lib/frontend/core/core.models';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import type { StyleModel, ViewStyleModel } from '@lib/frontend/style/style.models';
+} from '#lib-frontend/animation/utils/animatable/_animatable.models';
+import type { PropsModel } from '#lib-frontend/core/core.models';
+import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import type { StyleModel, ViewStyleModel } from '#lib-frontend/style/style.models';
 import { motify } from 'moti';
 import { createElement, forwardRef, useImperativeHandle } from 'react';
 

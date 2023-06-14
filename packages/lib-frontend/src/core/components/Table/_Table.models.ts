@@ -1,7 +1,7 @@
 import type {
   TableColumnModel,
   TableSelectTypeModel,
-} from '@lib/frontend/core/components/Table/Table.models';
+} from '#lib-frontend/core/components/Table/Table.models';
 
 export interface _TablePropsModel<TType> {
   columns: Array<TableColumnModel<TType, unknown>>;

@@ -1,17 +1,17 @@
-import { CONNECTIVITY } from '@lib/frontend/http/http.constants';
-import { getConnectivity } from '@lib/frontend/http/utils/getConnectivity/getConnectivity';
-import { OfflineError } from '@lib/shared/http/errors/OfflineError/OfflineError';
+import { CONNECTIVITY } from '#lib-frontend/http/http.constants';
+import { getConnectivity } from '#lib-frontend/http/utils/getConnectivity/getConnectivity';
+import { OfflineError } from '#lib-shared/http/errors/OfflineError/OfflineError';
 import type {
   _HttpRequestParamsModel,
   _HttpServiceModel,
-} from '@lib/shared/http/utils/HttpService/_HttpService.models';
-import { HTTP_METHOD } from '@lib/shared/http/utils/HttpService/HttpService.constants';
+} from '#lib-shared/http/utils/HttpService/_HttpService.models';
+import { HTTP_METHOD } from '#lib-shared/http/utils/HttpService/HttpService.constants';
 import type {
   HttpMethodModel,
   HttpResponseTypeModel,
   HttpServiceParamsModel,
-} from '@lib/shared/http/utils/HttpService/HttpService.models';
-import { uri } from '@lib/shared/http/utils/uri/uri';
+} from '#lib-shared/http/utils/HttpService/HttpService.models';
+import { uri } from '#lib-shared/http/utils/uri/uri';
 import type {
   AxiosInstance,
   AxiosRequestConfig,

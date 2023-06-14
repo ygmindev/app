@@ -1,15 +1,16 @@
-import { SERVERLESS_PROVIDER } from '@lib/backend/serverless/serverless.constants';
-import { _config as _bundleConfig } from '@lib/config/node/bundle/bundle.node';
-import { _serverless } from '@lib/config/platform/serverless/_serverless';
+import type { EnvironmentModel } from '#lib-shared/environment/environment.models';
+import { setEnvironment } from '#lib-shared/environment/utils/setEnvironment/setEnvironment';
+import { appUri } from '#lib-shared/http/utils/appUri/appUri';
+import toNumber from 'lodash/toNumber';
+
+import { SERVERLESS_PROVIDER } from '#lib-backend/serverless/serverless.constants';
+import { _config as _bundleConfig } from '#lib-config/node/bundle/bundle.node';
+import { _serverless } from '#lib-config/platform/serverless/_serverless';
 import type {
   _ServerlessConfigModel,
   ServerlessConfigModel,
-} from '@lib/config/platform/serverless/serverless.models';
-import { PLATFORM } from '@lib/platform/core/core.constants';
-import type { EnvironmentModel } from '@lib/shared/environment/environment.models';
-import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
-import { appUri } from '@lib/shared/http/utils/appUri/appUri';
-import toNumber from 'lodash/toNumber';
+} from '#lib-config/platform/serverless/serverless.models';
+import { PLATFORM } from '#lib-platform/core/core.constants';
 
 export const config: ServerlessConfigModel = () => ({
   bundleConfig: _bundleConfig,

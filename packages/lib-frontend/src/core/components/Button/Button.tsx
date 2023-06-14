@@ -1,25 +1,25 @@
-import type { AnimationModel } from '@lib/frontend/animation/animation.models';
-import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
-import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
-import type { ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
-import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { Loading } from '@lib/frontend/core/components/Loading/Loading';
-import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import type { ElementStateModel, SFCModel } from '@lib/frontend/core/core.models';
-import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/useControlledValue';
-import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
-import type { ThemeRoleModel } from '@lib/frontend/style/style.models';
-import { palette } from '@lib/frontend/style/utils/palette/palette';
+import type { AnimationModel } from '#lib-frontend/animation/animation.models';
+import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
+import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
+import type { ButtonPropsModel } from '#lib-frontend/core/components/Button/Button.models';
+import { Icon } from '#lib-frontend/core/components/Icon/Icon';
+import { Loading } from '#lib-frontend/core/components/Loading/Loading';
+import { Pressable } from '#lib-frontend/core/components/Pressable/Pressable';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import type { ElementStateModel, SFCModel } from '#lib-frontend/core/core.models';
+import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
+import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
+import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
+import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
+import type { ThemeRoleModel } from '#lib-frontend/style/style.models';
+import { palette } from '#lib-frontend/style/utils/palette/palette';
 import {
   FLEX_ALIGN,
   FLEX_JUSTIFY,
-} from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
-import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+} from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import { FONT_ALIGN } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { useMemo } from 'react';
 
 export const Button: SFCModel<ButtonPropsModel> = ({

@@ -1,26 +1,26 @@
-import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
-import { Container } from '@lib/backend/core/utils/Container/Container';
-import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
-import { EmbeddedResource } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResource';
-import type { ConstructorModel, PartialModel } from '@lib/shared/core/core.models';
-import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
-import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
-import { flattenObject } from '@lib/shared/core/utils/flattenObject/flattenObject';
-import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
-import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import type { EmbeddedResourceModel } from '@lib/shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
+import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
+import { Container } from '#lib-backend/core/utils/Container/Container';
+import { getConnection } from '#lib-backend/database/utils/getConnection/getConnection';
+import { EmbeddedResource } from '#lib-backend/resource/resources/EmbeddedResource/EmbeddedResource';
+import type { ConstructorModel, PartialModel } from '#lib-shared/core/core.models';
+import { InvalidArgumentError } from '#lib-shared/core/errors/InvalidArgumentError/InvalidArgumentError';
+import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
+import { flattenObject } from '#lib-shared/core/utils/flattenObject/flattenObject';
+import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
+import type { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
+import type { EmbeddedResourceModel } from '#lib-shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
 import type {
   EmbeddedResourceServiceModel,
   EmbeddedResourceServiceParamsModel,
-} from '@lib/shared/resource/resources/EmbeddedResource/EmbeddedResourceService/EmbeddedResourceService.models';
-import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
-import type { ProjectModel } from '@lib/shared/resource/utils/Args/Args.models';
-import type { FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
-import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
-import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
-import type { ResourceServiceDecoratorModel } from '@lib/shared/resource/utils/Resource/ResourceService/ResourceService.models';
-import type { RootModel } from '@lib/shared/resource/utils/Root/Root.models';
-import type { UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
+} from '#lib-shared/resource/resources/EmbeddedResource/EmbeddedResourceService/EmbeddedResourceService.models';
+import type { EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import type { ProjectModel } from '#lib-shared/resource/utils/Args/Args.models';
+import type { FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
+import type { InputModel } from '#lib-shared/resource/utils/Input/Input.models';
+import type { OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
+import type { ResourceServiceDecoratorModel } from '#lib-shared/resource/utils/Resource/ResourceService/ResourceService.models';
+import type { RootModel } from '#lib-shared/resource/utils/Root/Root.models';
+import type { UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
 import forEach from 'lodash/forEach';
 import pick from 'lodash/pick';
 import reduce from 'lodash/reduce';

@@ -1,7 +1,7 @@
-import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
-import { TASK_STATUS } from '@tool/task/core/core.constants';
-import type { TaskParamsModel } from '@tool/task/core/core.models';
-import type { BuildJsonParamsModel } from '@tool/task/core/templates/buildJson/buildJson.models';
+import { writeFile } from '#lib-backend/file/utils/writeFile/writeFile';
+import { TASK_STATUS } from '#tool-task/core/core.constants';
+import type { TaskParamsModel } from '#tool-task/core/core.models';
+import type { BuildJsonParamsModel } from '#tool-task/core/templates/buildJson/buildJson.models';
 
 const buildJson: TaskParamsModel<BuildJsonParamsModel> = {
   name: 'buildJson',

@@ -1,9 +1,10 @@
+import isString from 'lodash/isString';
+import startCase from 'lodash/startCase';
+
 import type {
   TimezoneFormatModel,
   TimezoneFormatParamsModel,
-} from '@lib/shared/format/utils/timezoneFormat/timezoneFormat.models';
-import isString from 'lodash/isString';
-import startCase from 'lodash/startCase';
+} from '#lib-shared/format/utils/timezoneFormat/timezoneFormat.models';
 
 export const timezoneFormat = (params: TimezoneFormatParamsModel): TimezoneFormatModel =>
   isString(params)

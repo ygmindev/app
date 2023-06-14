@@ -1,7 +1,7 @@
 import type {
   ResourceResolverModel,
   ResourceResolverParamsModel,
-} from '@lib/backend/resource/utils/Resource/ResourceResolver/ResourceResolver.models';
+} from '#lib-backend/resource/utils/Resource/ResourceResolver/ResourceResolver.models';
 
 export type EntityResourceResolverParamsModel<TType, TForm> = ResourceResolverParamsModel<
   TType,

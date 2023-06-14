@@ -1,10 +1,10 @@
-import type { SFCModel } from '@lib/frontend/core/core.models';
-import { TextField } from '@lib/frontend/form/components/TextField/TextField';
-import { TEXT_FIELD_KEYBOARD } from '@lib/frontend/form/components/TextField/TextField.constants';
-import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/useControlledValue';
-import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import type { PhoneFieldPropsModel } from '@lib/frontend/user/components/PhoneField/PhoneField.models';
+import type { SFCModel } from '#lib-frontend/core/core.models';
+import { TextField } from '#lib-frontend/form/components/TextField/TextField';
+import { TEXT_FIELD_KEYBOARD } from '#lib-frontend/form/components/TextField/TextField.constants';
+import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
+import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import type { PhoneFieldPropsModel } from '#lib-frontend/user/components/PhoneField/PhoneField.models';
 
 export const PhoneField: SFCModel<PhoneFieldPropsModel> = ({
   defaultValue,

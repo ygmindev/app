@@ -1,8 +1,8 @@
-import type { MenuOptionModel } from '@lib/frontend/core/components/Menu/Menu.models';
-import { THEME_COLOR } from '@lib/frontend/style/style.constants';
-import { SIGN_OUT } from '@lib/shared/auth/auth.constants';
-import { withId } from '@lib/shared/core/decorators/withId/withId';
-import { ACCOUNT } from '@lib/shared/user/user.constants';
+import type { MenuOptionModel } from '#lib-frontend/core/components/Menu/Menu.models';
+import { THEME_COLOR } from '#lib-frontend/style/style.constants';
+import { SIGN_OUT } from '#lib-shared/auth/auth.constants';
+import { withId } from '#lib-shared/core/decorators/withId/withId';
+import { ACCOUNT } from '#lib-shared/user/user.constants';
 
 export interface AuthMenuOptionModel extends MenuOptionModel {
   isProtected?: boolean;

@@ -1,8 +1,8 @@
-import type { SFCPropsModel } from '@lib/frontend/core/core.models';
-import { _Trans } from '@lib/frontend/locale/components/Trans/_Trans';
-import type { _TransPropsModel } from '@lib/frontend/locale/components/Trans/_Trans.models';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
+import type { SFCPropsModel } from '#lib-frontend/core/core.models';
+import { _Trans } from '#lib-frontend/locale/components/Trans/_Trans';
+import type { _TransPropsModel } from '#lib-frontend/locale/components/Trans/_Trans.models';
+import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { textStyler } from '#lib-frontend/style/utils/styler/textStyler/textStyler';
 import type { ReactElement } from 'react';
 
 export const Trans = <TParams,>({

@@ -1,7 +1,7 @@
-import type { _TextPropsModel } from '@lib/frontend/core/components/Text/_Text.models';
-import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
-import type { ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
-import type { TextStyleModel } from '@lib/frontend/style/style.models';
+import type { _TextPropsModel } from '#lib-frontend/core/components/Text/_Text.models';
+import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
+import type { ComposeComponentParamsModel } from '#lib-frontend/core/utils/composeComponent/composeComponent.models';
+import type { TextStyleModel } from '#lib-frontend/style/style.models';
 import type { TextProps } from 'react-native';
 import { Text } from 'react-native';
 

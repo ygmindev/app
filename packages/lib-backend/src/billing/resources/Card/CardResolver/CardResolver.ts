@@ -1,14 +1,14 @@
-import { selfAuthorizer } from '@lib/backend/auth/utils/selfAuthorizer/selfAuthorizer';
-import { Card } from '@lib/backend/billing/resources/Card/Card';
-import { CardService } from '@lib/backend/billing/resources/Card/CardService/CardService';
-import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
-import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
-import { EmbeddedResourceResolver } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResourceResolver/EmbeddedResourceResolver';
-import { User } from '@lib/backend/user/resources/User/User';
-import { CARD_RESOURCE_NAME } from '@lib/shared/billing/resources/Card/Card.constants';
-import type { CardFormModel, CardModel } from '@lib/shared/billing/resources/Card/Card.models';
-import type { CardServiceModel } from '@lib/shared/billing/resources/Card/CardService/CardService.models';
-import type { UserModel } from '@lib/shared/user/resources/User/User.models';
+import { selfAuthorizer } from '#lib-backend/auth/utils/selfAuthorizer/selfAuthorizer';
+import { Card } from '#lib-backend/billing/resources/Card/Card';
+import { CardService } from '#lib-backend/billing/resources/Card/CardService/CardService';
+import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
+import { withResolver } from '#lib-backend/http/decorators/withResolver/withResolver';
+import { EmbeddedResourceResolver } from '#lib-backend/resource/resources/EmbeddedResource/EmbeddedResourceResolver/EmbeddedResourceResolver';
+import { User } from '#lib-backend/user/resources/User/User';
+import { CARD_RESOURCE_NAME } from '#lib-shared/billing/resources/Card/Card.constants';
+import type { CardFormModel, CardModel } from '#lib-shared/billing/resources/Card/Card.models';
+import type { CardServiceModel } from '#lib-shared/billing/resources/Card/CardService/CardService.models';
+import type { UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withContainer()
 @withResolver({ Resource: Card })

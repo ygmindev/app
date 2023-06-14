@@ -1,19 +1,19 @@
-import { cleanDocument } from '@lib/backend/database/utils/cleanDocument/cleanDocument';
+import { cleanDocument } from '#lib-backend/database/utils/cleanDocument/cleanDocument';
 import type {
   DatabaseModel,
   RepositoryModel,
-} from '@lib/backend/database/utils/Database/Database.models';
-import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
-import type { _DatabaseConfigModel } from '@lib/config/database/database.models';
-import type { PartialDeepModel, ReturnTypeModel } from '@lib/shared/core/core.models';
-import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
-import { UninitializedError } from '@lib/shared/core/errors/UninitializedError/UninitializedError';
-import { debug } from '@lib/shared/logging/utils/logger/logger';
-import type { WithResourceNameModel } from '@lib/shared/resource/decorators/withResourceName/withResourceName.models';
-import type { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import type { EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
-import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
-import type { UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
+} from '#lib-backend/database/utils/Database/Database.models';
+import { getConnection } from '#lib-backend/database/utils/getConnection/getConnection';
+import type { _DatabaseConfigModel } from '#lib-config/database/database.models';
+import type { PartialDeepModel, ReturnTypeModel } from '#lib-shared/core/core.models';
+import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/DuplicateError';
+import { UninitializedError } from '#lib-shared/core/errors/UninitializedError/UninitializedError';
+import { debug } from '#lib-shared/logging/utils/logger/logger';
+import type { WithResourceNameModel } from '#lib-shared/resource/decorators/withResourceName/withResourceName.models';
+import type { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
+import type { EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import type { OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
+import type { UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
 import type { FilterQuery } from '@mikro-orm/core';
 import { MikroORM } from '@mikro-orm/core';
 import type { EntityManager, MongoDriver } from '@mikro-orm/mongodb';

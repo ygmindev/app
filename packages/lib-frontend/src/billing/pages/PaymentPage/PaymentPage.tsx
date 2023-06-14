@@ -1,24 +1,25 @@
-import { SkeletonGroup } from '@lib/frontend/animation/components/SkeletonGroup/SkeletonGroup';
-import { PAYMENT_METHOD } from '@lib/frontend/billing/billing.constants';
-import { PaymentMethodItem } from '@lib/frontend/billing/components/PaymentMethodItem/PaymentMethodItem';
-import { usePaymentMethodResource } from '@lib/frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
-import type { PaymentPagePropsModel } from '@lib/frontend/billing/pages/PaymentPage/PaymentPage.models';
-import { Button } from '@lib/frontend/core/components/Button/Button';
-import { LineGroup } from '@lib/frontend/core/components/LineGroup/LineGroup';
-import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useQuery } from '@lib/frontend/core/hooks/useQuery/useQuery';
-import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
-import { FORM } from '@lib/frontend/form/form.constants';
-import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
-import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
-import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
-import { sort } from '@lib/shared/core/utils/sort/sort';
 import range from 'lodash/range';
 import { useMemo } from 'react';
+
+import { SkeletonGroup } from '#lib-frontend/animation/components/SkeletonGroup/SkeletonGroup';
+import { PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants';
+import { PaymentMethodItem } from '#lib-frontend/billing/components/PaymentMethodItem/PaymentMethodItem';
+import { usePaymentMethodResource } from '#lib-frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
+import type { PaymentPagePropsModel } from '#lib-frontend/billing/pages/PaymentPage/PaymentPage.models';
+import { Button } from '#lib-frontend/core/components/Button/Button';
+import { LineGroup } from '#lib-frontend/core/components/LineGroup/LineGroup';
+import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import type { SFCModel } from '#lib-frontend/core/core.models';
+import { useQuery } from '#lib-frontend/core/hooks/useQuery/useQuery';
+import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
+import { FORM } from '#lib-frontend/form/form.constants';
+import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
+import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
+import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
+import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
+import { sort } from '#lib-shared/core/utils/sort/sort';
 
 export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props }) => {
   const { t } = useTranslation();

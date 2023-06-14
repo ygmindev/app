@@ -1,30 +1,31 @@
-import { ANIMATION_STATES_APPEARABLE } from '@lib/frontend/animation/animation.constants';
-import { Button } from '@lib/frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
-import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { Text } from '@lib/frontend/core/components/Text/Text';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import type { WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
-import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
-import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { useRef } from 'react';
+
+import { ANIMATION_STATES_APPEARABLE } from '#lib-frontend/animation/animation.constants';
+import { Button } from '#lib-frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
+import { Icon } from '#lib-frontend/core/components/Icon/Icon';
+import { Text } from '#lib-frontend/core/components/Text/Text';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import type { WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
+import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import type { SFCModel } from '#lib-frontend/core/core.models';
+import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
+import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import {
   NOTIFICATION_DURATION,
   NOTIFICATION_WIDTH,
-} from '@lib/frontend/notification/components/Notification/Notification.constants';
-import type { NotificationPropsModel } from '@lib/frontend/notification/components/Notification/Notification.models';
-import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+} from '#lib-frontend/notification/components/Notification/Notification.constants';
+import type { NotificationPropsModel } from '#lib-frontend/notification/components/Notification/Notification.models';
+import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
+import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import {
   THEME_COLOR,
   THEME_ROLE,
   THEME_SIZE,
   THEME_SIZE_MORE,
-} from '@lib/frontend/style/style.constants';
-import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
-import { useRef } from 'react';
+} from '#lib-frontend/style/style.constants';
+import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 export const Notification: SFCModel<NotificationPropsModel> = ({
   color = THEME_COLOR.PRIMARY,

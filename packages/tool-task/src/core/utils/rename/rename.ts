@@ -1,4 +1,4 @@
-import type { RenameParamsModel } from '@tool/task/core/utils/rename/rename.models';
+import type { RenameParamsModel } from '#tool-task/core/utils/rename/rename.models';
 import { readdirSync, renameSync, statSync } from 'fs';
 import { resolve } from 'path';
 

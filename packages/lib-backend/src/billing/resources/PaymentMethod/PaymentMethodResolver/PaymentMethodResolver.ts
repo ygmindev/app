@@ -1,24 +1,24 @@
-import { selfAuthorizer } from '@lib/backend/auth/utils/selfAuthorizer/selfAuthorizer';
-import { PaymentMethod } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethod';
-import { PaymentMethodService } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethodService/PaymentMethodService';
-import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
-import { Container } from '@lib/backend/core/utils/Container/Container';
-import { withContext } from '@lib/backend/http/decorators/withContext/withContext';
-import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
-import { withInput } from '@lib/backend/resource/decorators/withInput/withInput';
-import { withOutput } from '@lib/backend/resource/decorators/withOutput/withOutput';
-import { EmbeddedResourceResolver } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResourceResolver/EmbeddedResourceResolver';
-import { authorize } from '@lib/backend/resource/utils/Resource/ResourceResolver/ResourceResolver';
-import { User } from '@lib/backend/user/resources/User/User';
-import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
-import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import type { PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
-import type { PaymentMethodServiceModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethodService/PaymentMethodService.models';
-import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import type { ContextModel } from '@lib/shared/resource/utils/Context/Context.models';
-import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
-import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
-import type { UserModel } from '@lib/shared/user/resources/User/User.models';
+import { selfAuthorizer } from '#lib-backend/auth/utils/selfAuthorizer/selfAuthorizer';
+import { PaymentMethod } from '#lib-backend/billing/resources/PaymentMethod/PaymentMethod';
+import { PaymentMethodService } from '#lib-backend/billing/resources/PaymentMethod/PaymentMethodService/PaymentMethodService';
+import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
+import { Container } from '#lib-backend/core/utils/Container/Container';
+import { withContext } from '#lib-backend/http/decorators/withContext/withContext';
+import { withResolver } from '#lib-backend/http/decorators/withResolver/withResolver';
+import { withInput } from '#lib-backend/resource/decorators/withInput/withInput';
+import { withOutput } from '#lib-backend/resource/decorators/withOutput/withOutput';
+import { EmbeddedResourceResolver } from '#lib-backend/resource/resources/EmbeddedResource/EmbeddedResourceResolver/EmbeddedResourceResolver';
+import { authorize } from '#lib-backend/resource/utils/Resource/ResourceResolver/ResourceResolver';
+import { User } from '#lib-backend/user/resources/User/User';
+import { ACCESS_LEVEL } from '#lib-shared/auth/resources/Access/Access.constants';
+import { PAYMENT_METHOD_RESOURCE_NAME } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import type { PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import type { PaymentMethodServiceModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethodService/PaymentMethodService.models';
+import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
+import type { ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
+import type { InputModel } from '#lib-shared/resource/utils/Input/Input.models';
+import type { OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
+import type { UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withContainer()
 @withResolver({ Resource: PaymentMethod })
@@ -54,27 +54,27 @@ export class PaymentMethodResolver
   }
 }
 
-// import { selfAuthorizer } from '@lib/backend/auth/utils/selfAuthorizer/selfAuthorizer';
-// import { PaymentMethod } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethod';
-// import { PaymentMethodService } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethodService/PaymentMethodService';
-// import { withContext } from '@lib/backend/http/decorators/withContext/withContext';
-// import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
-// import { withInput } from '@lib/backend/resource/decorators/withInput/withInput';
-// import { withOutput } from '@lib/backend/resource/decorators/withOutput/withOutput';
-// import { EmbeddedResourceResolver } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResourceResolver/EmbeddedResourceResolver';
-// import { authorize } from '@lib/backend/resource/utils/Resource/ResourceResolver/ResourceResolver';
-// import { User } from '@lib/backend/user/resources/User/User';
-// import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
-// import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-// import type { PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
-// import type { PaymentMethodServiceModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethodService/PaymentMethodService.models';
-// import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
-// import { Container } from '@lib/backend/core/utils/Container/Container';
-// import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-// import type { ContextModel } from '@lib/shared/resource/utils/Context/Context.models';
-// import type { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
-// import type { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
-// import type { UserModel } from '@lib/shared/user/resources/User/User.models';
+// import { selfAuthorizer } from '#lib-backend/auth/utils/selfAuthorizer/selfAuthorizer';
+// import { PaymentMethod } from '#lib-backend/billing/resources/PaymentMethod/PaymentMethod';
+// import { PaymentMethodService } from '#lib-backend/billing/resources/PaymentMethod/PaymentMethodService/PaymentMethodService';
+// import { withContext } from '#lib-backend/http/decorators/withContext/withContext';
+// import { withResolver } from '#lib-backend/http/decorators/withResolver/withResolver';
+// import { withInput } from '#lib-backend/resource/decorators/withInput/withInput';
+// import { withOutput } from '#lib-backend/resource/decorators/withOutput/withOutput';
+// import { EmbeddedResourceResolver } from '#lib-backend/resource/resources/EmbeddedResource/EmbeddedResourceResolver/EmbeddedResourceResolver';
+// import { authorize } from '#lib-backend/resource/utils/Resource/ResourceResolver/ResourceResolver';
+// import { User } from '#lib-backend/user/resources/User/User';
+// import { ACCESS_LEVEL } from '#lib-shared/auth/resources/Access/Access.constants';
+// import { PAYMENT_METHOD_RESOURCE_NAME } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+// import type { PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
+// import type { PaymentMethodServiceModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethodService/PaymentMethodService.models';
+// import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
+// import { Container } from '#lib-backend/core/utils/Container/Container';
+// import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
+// import type { ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
+// import type { InputModel } from '#lib-shared/resource/utils/Input/Input.models';
+// import type { OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
+// import type { UserModel } from '#lib-shared/user/resources/User/User.models';
 
 // @withContainer()
 // @withResolver({ Resource: PaymentMethod })

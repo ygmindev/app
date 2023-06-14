@@ -1,12 +1,12 @@
-import type { UseErrorContextModel } from '@lib/frontend/core/hooks/useErrorContext/useErrorContext.models';
-import { ErrorContext } from '@lib/frontend/core/providers/ErrorProvider/ErrorProvider';
-import { ERROR_MODE } from '@lib/frontend/core/providers/ErrorProvider/ErrorProvider.constants';
-import type { ErrorContextModel } from '@lib/frontend/core/providers/ErrorProvider/ErrorProvider.models';
-import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
-import type { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
-import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
-import { error } from '@lib/shared/logging/utils/logger/logger';
+import type { UseErrorContextModel } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext.models';
+import { ErrorContext } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider';
+import { ERROR_MODE } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider.constants';
+import type { ErrorContextModel } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider.models';
+import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
+import type { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
+import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
+import { error } from '#lib-shared/logging/utils/logger/logger';
 import { useContext } from 'react';
 
 export const useErrorContext = (): UseErrorContextModel => {

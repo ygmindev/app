@@ -1,9 +1,10 @@
-import type { _ModalPropsModel } from '@lib/frontend/core/components/Modal/_Modal.models';
-import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
-import type { PartialModel } from '@lib/shared/core/core.models';
 import type { ComponentType } from 'react';
 import Modal from 'react-native-modal';
+
+import type { _ModalPropsModel } from '#lib-frontend/core/components/Modal/_Modal.models';
+import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
+import type { PartialModel } from '#lib-shared/core/core.models';
 
 export const _Modal = composeComponent<_ModalPropsModel, PartialModel<typeof Modal.defaultProps>>({
   Component: Modal as unknown as ComponentType<PartialModel<typeof Modal.defaultProps>>,

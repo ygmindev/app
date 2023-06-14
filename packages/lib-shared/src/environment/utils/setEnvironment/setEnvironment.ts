@@ -1,9 +1,9 @@
-import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
-import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
-import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
-import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
-import type { SetEnvironmentParamsModel } from '@lib/shared/environment/utils/setEnvironment/setEnvironment.models';
+import { fromConfig } from '#lib-backend/file/utils/fromConfig/fromConfig';
+import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
+import { writeFile } from '#lib-backend/file/utils/writeFile/writeFile';
+import { NotFoundError } from '#lib-shared/core/errors/NotFoundError/NotFoundError';
+import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
+import type { SetEnvironmentParamsModel } from '#lib-shared/environment/utils/setEnvironment/setEnvironment.models';
 import { config } from 'dotenv';
 import { existsSync } from 'fs';
 import forEach from 'lodash/forEach';

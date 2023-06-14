@@ -1,6 +1,6 @@
-import type { ProviderPropsModel } from '@lib/frontend/core/core.models';
-import type { NestedActionsModel } from '@lib/frontend/state/state.models';
-import type { _StoreModel, _StoreParamsModel } from '@lib/frontend/state/utils/Store/_Store.models';
+import type { ProviderPropsModel } from '#lib-frontend/core/core.models';
+import type { NestedActionsModel } from '#lib-frontend/state/state.models';
+import type { _StoreModel, _StoreParamsModel } from '#lib-frontend/state/utils/Store/_Store.models';
 import type { Context } from 'react';
 
 export interface StoreParamsModel<

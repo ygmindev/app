@@ -2,7 +2,7 @@ import type {
   CallablePromiseModel,
   PartialModel,
   RequiredModel,
-} from '@lib/shared/core/core.models';
+} from '#lib-shared/core/core.models';
 
 export interface EntityResourceModel {
   _id: string;

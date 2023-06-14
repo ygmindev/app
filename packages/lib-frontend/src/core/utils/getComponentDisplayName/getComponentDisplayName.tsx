@@ -1,10 +1,11 @@
+import isString from 'lodash/isString';
+import type { ComponentType } from 'react';
+
 import type {
   GetComponentDisplayNameModel,
   GetComponentDisplayNameParamsModel,
-} from '@lib/frontend/core/utils/getComponentDisplayName/getComponentDisplayName.models';
-import { uid } from '@lib/shared/core/utils/uid/uid';
-import isString from 'lodash/isString';
-import type { ComponentType } from 'react';
+} from '#lib-frontend/core/utils/getComponentDisplayName/getComponentDisplayName.models';
+import { uid } from '#lib-shared/core/utils/uid/uid';
 
 export const getComponentDisplayName = (
   params: GetComponentDisplayNameParamsModel,

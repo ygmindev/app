@@ -1,5 +1,5 @@
-import { isPromise } from '@lib/shared/core/utils/isPromise/isPromise';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { isPromise } from '#lib-shared/core/utils/isPromise/isPromise';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ isPromise });
 

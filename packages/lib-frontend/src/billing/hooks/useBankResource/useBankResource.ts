@@ -1,13 +1,13 @@
-import { BANK_OUTPUT_FIELDS } from '@lib/frontend/billing/hooks/useBankResource/useBankResource.constants';
+import { BANK_OUTPUT_FIELDS } from '#lib-frontend/billing/hooks/useBankResource/useBankResource.constants';
 import type {
   UseBankResourceModel,
   UseBankResourceParamsModel,
-} from '@lib/frontend/billing/hooks/useBankResource/useBankResource.models';
-import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
-import { BANK_RESOURCE_NAME } from '@lib/shared/billing/resources/Bank/Bank.constants';
-import type { BankFormModel, BankModel } from '@lib/shared/billing/resources/Bank/Bank.models';
-import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import type { UserModel } from '@lib/shared/user/resources/User/User.models';
+} from '#lib-frontend/billing/hooks/useBankResource/useBankResource.models';
+import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
+import { BANK_RESOURCE_NAME } from '#lib-shared/billing/resources/Bank/Bank.constants';
+import type { BankFormModel, BankModel } from '#lib-shared/billing/resources/Bank/Bank.models';
+import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
+import type { UserModel } from '#lib-shared/user/resources/User/User.models';
 
 export const useBankResource = ({
   root,

@@ -1,11 +1,12 @@
-import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import { error, info } from '@lib/shared/logging/utils/logger/logger';
-import { TASK_STATUS } from '@tool/task/core/core.constants';
+import { TASK_STATUS } from '#tool-task/core/core.constants';
 import type {
   _CommandModel,
   _CommandParamsModel,
-} from '@tool/task/core/utils/command/_command.models';
+} from '#tool-task/core/utils/command/_command.models';
 import { spawn } from 'child_process';
+
+import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
+import { error, info } from '#lib-shared/logging/utils/logger/logger';
 
 export const _command = async (
   ...[

@@ -1,7 +1,7 @@
-import type { CARD_BRAND, CARD_FUNDING } from '@lib/shared/billing/resources/Card/Card.constants';
-import type { PaymentMethodTypeModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
-import type { EmbeddedResourceModel } from '@lib/shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
-import type { EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import type { CARD_BRAND, CARD_FUNDING } from '#lib-shared/billing/resources/Card/Card.constants';
+import type { PaymentMethodTypeModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import type { EmbeddedResourceModel } from '#lib-shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
+import type { EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export type CardFundingModel = `${CARD_FUNDING}`;
 

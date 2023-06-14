@@ -1,5 +1,5 @@
-import type { _PromptModel, _PromptParamsModel } from '@tool/task/core/utils/prompt/_prompt.models';
-import type { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
+import type { _PromptModel, _PromptParamsModel } from '#tool-task/core/utils/prompt/_prompt.models';
+import type { PROMPT_TYPE } from '#tool-task/core/utils/prompt/prompt.constants';
 
 export type PromptParamsModel<TParams extends Array<PromptArgsModel>> = _PromptParamsModel<TParams>;
 

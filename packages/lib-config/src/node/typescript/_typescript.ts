@@ -1,15 +1,16 @@
-import { fromBuild } from '@lib/backend/file/utils/fromBuild/fromBuild';
-import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { packages } from '@lib/backend/file/utils/packages/packages';
-import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
-import type {
-  _TypescriptConfigModel,
-  TypescriptConfigModel,
-} from '@lib/config/node/typescript/typescript.models';
-import type { ReturnTypeModel } from '@lib/shared/core/core.models';
 import { readFileSync } from 'fs';
 import reduce from 'lodash/reduce';
 import type { JsxEmit, ModuleKind, ModuleResolutionKind, ScriptTarget } from 'typescript';
+
+import { fromBuild } from '#lib-backend/file/utils/fromBuild/fromBuild';
+import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
+import { packages } from '#lib-backend/file/utils/packages/packages';
+import { toRelative } from '#lib-backend/file/utils/toRelative/toRelative';
+import type {
+  _TypescriptConfigModel,
+  TypescriptConfigModel,
+} from '#lib-config/node/typescript/typescript.models';
+import type { ReturnTypeModel } from '#lib-shared/core/core.models';
 
 export const _typescript = ({
   outDir,

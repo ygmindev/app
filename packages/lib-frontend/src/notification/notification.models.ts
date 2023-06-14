@@ -1,7 +1,7 @@
-import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
-import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
-import type { ThemeColorModel } from '@lib/frontend/style/style.models';
-import type { WithIdModel } from '@lib/shared/core/decorators/withId/withId.models';
+import type { IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
+import type { TranslatableTextModel } from '#lib-frontend/locale/locale.models';
+import type { ThemeColorModel } from '#lib-frontend/style/style.models';
+import type { WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
 
 export interface NotificationModel extends WithIdModel, Pick<IconPropsModel, 'icon'> {
   color?: ThemeColorModel;

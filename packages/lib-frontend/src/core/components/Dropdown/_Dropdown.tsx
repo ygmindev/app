@@ -1,14 +1,15 @@
-import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
-import type { _DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/_Dropdown.models';
-import { DIRECTION } from '@lib/frontend/core/core.constants';
-import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useChange } from '@lib/frontend/core/hooks/useChange/useChange';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import Tippy from '@tippyjs/react';
 import { useState } from 'react';
 import { View } from 'react-native';
+
+import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
+import type { _DropdownPropsModel } from '#lib-frontend/core/components/Dropdown/_Dropdown.models';
+import { DIRECTION } from '#lib-frontend/core/core.constants';
+import type { SFCModel } from '#lib-frontend/core/core.models';
+import { useChange } from '#lib-frontend/core/hooks/useChange/useChange';
+import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
+import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   anchor,
@@ -69,12 +70,12 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   );
 };
 
-// import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
-// import type { _DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/_Dropdown.models';
-// import { DIRECTION } from '@lib/frontend/core/core.constants';
-// import type { SFCModel } from '@lib/frontend/core/core.models';
-// import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-// import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+// import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
+// import type { _DropdownPropsModel } from '#lib-frontend/core/components/Dropdown/_Dropdown.models';
+// import { DIRECTION } from '#lib-frontend/core/core.constants';
+// import type { SFCModel } from '#lib-frontend/core/core.models';
+// import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+// import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 // import Tippy from '@tippyjs/react';
 // import { View } from 'react-native';
 

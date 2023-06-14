@@ -1,7 +1,7 @@
 import type {
   _TemplateModel,
   _TemplateParamsModel,
-} from '@lib/backend/core/utils/template/_template.models';
+} from '#lib-backend/core/utils/template/_template.models';
 import type { Data } from 'ejs';
 import { renderFile } from 'ejs';
 

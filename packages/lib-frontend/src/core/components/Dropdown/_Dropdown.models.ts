@@ -1,5 +1,6 @@
-import type { ChildrenPropsModel, DirectionModel } from '@lib/frontend/core/core.models';
 import type { ReactNode } from 'react';
+
+import type { ChildrenPropsModel, DirectionModel } from '#lib-frontend/core/core.models';
 
 export interface _DropdownPropsModel extends ChildrenPropsModel {
   anchor: ReactNode;

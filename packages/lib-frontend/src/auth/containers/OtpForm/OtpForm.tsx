@@ -1,22 +1,22 @@
 import {
   OTP_FORM_FIELDS,
   OTP_FORM_VALIDATORS,
-} from '@lib/frontend/auth/containers/OtpForm/OtpForm.constants';
+} from '#lib-frontend/auth/containers/OtpForm/OtpForm.constants';
 import type {
   OtpFormModel,
   OtpFormPropsModel,
-} from '@lib/frontend/auth/containers/OtpForm/OtpForm.models';
-import { Button } from '@lib/frontend/core/components/Button/Button';
-import { Text } from '@lib/frontend/core/components/Text/Text';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import type { SFCModel } from '@lib/frontend/core/core.models';
-import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
-import type { FormRefModel } from '@lib/frontend/form/form.models';
-import { Trans } from '@lib/frontend/locale/components/Trans/Trans';
-import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import type { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
-import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
+} from '#lib-frontend/auth/containers/OtpForm/OtpForm.models';
+import { Button } from '#lib-frontend/core/components/Button/Button';
+import { Text } from '#lib-frontend/core/components/Text/Text';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import type { SFCModel } from '#lib-frontend/core/core.models';
+import { FormContainer } from '#lib-frontend/form/containers/FormContainer/FormContainer';
+import type { FormRefModel } from '#lib-frontend/form/form.models';
+import { Trans } from '#lib-frontend/locale/components/Trans/Trans';
+import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import type { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
+import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
 import { useRef } from 'react';
 
 export const OtpForm: SFCModel<OtpFormPropsModel> = ({

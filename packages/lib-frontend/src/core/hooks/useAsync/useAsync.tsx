@@ -1,8 +1,9 @@
+import { useEffect } from 'react';
+
 import type {
   UseAsyncModel,
   UseAsyncParamsModel,
-} from '@lib/frontend/core/hooks/useAsync/useAsync.models';
-import { useEffect } from 'react';
+} from '#lib-frontend/core/hooks/useAsync/useAsync.models';
 
 export const useAsync = (...[params, deps = [], onUnmount]: UseAsyncParamsModel): UseAsyncModel => {
   useEffect(() => {

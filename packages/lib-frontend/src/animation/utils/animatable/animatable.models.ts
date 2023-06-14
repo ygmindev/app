@@ -1,8 +1,8 @@
 import type {
   _AnimatableModel,
   _AnimatableParamsModel,
-} from '@lib/frontend/animation/utils/animatable/_animatable.models';
-import type { StyleModel, StylePropsModel, ViewStyleModel } from '@lib/frontend/style/style.models';
+} from '#lib-frontend/animation/utils/animatable/_animatable.models';
+import type { StyleModel, StylePropsModel, ViewStyleModel } from '#lib-frontend/style/style.models';
 
 export interface AnimatableParamsModel<
   TProps extends StylePropsModel<TStyle>,

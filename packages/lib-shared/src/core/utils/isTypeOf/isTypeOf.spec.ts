@@ -1,5 +1,5 @@
-import { isTypeOf } from '@lib/shared/core/utils/isTypeOf/isTypeOf';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { isTypeOf } from '#lib-shared/core/utils/isTypeOf/isTypeOf';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ isTypeOf });
 

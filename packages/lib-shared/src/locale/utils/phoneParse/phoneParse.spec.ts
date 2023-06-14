@@ -1,6 +1,6 @@
-import type { PhoneNumberModel } from '@lib/shared/locale/locale.models';
-import { phoneParse } from '@lib/shared/locale/utils/phoneParse/phoneParse';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import type { PhoneNumberModel } from '#lib-shared/locale/locale.models';
+import { phoneParse } from '#lib-shared/locale/utils/phoneParse/phoneParse';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ phoneParse });
 

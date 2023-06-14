@@ -1,8 +1,8 @@
 import {
   WAIT_FOR_INTERVAL_DEFAULT_MILLISECONDS,
   WAIT_FOR_TIMEOUT_DEFAULT_MILLISECONDS,
-} from '@lib/shared/core/utils/waitFor/waitFor.constants';
-import type { WaitForParamsModel } from '@lib/shared/core/utils/waitFor/waitFor.models';
+} from '#lib-shared/core/utils/waitFor/waitFor.constants';
+import type { WaitForParamsModel } from '#lib-shared/core/utils/waitFor/waitFor.models';
 
 export const waitFor = ({ condition, interval, timeout }: WaitForParamsModel): Promise<boolean> =>
   new Promise((resolve) => {

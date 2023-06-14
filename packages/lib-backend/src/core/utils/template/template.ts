@@ -1,8 +1,8 @@
-import { _template } from '@lib/backend/core/utils/template/_template';
+import { _template } from '#lib-backend/core/utils/template/_template';
 import type {
   TemplateModel,
   TemplateParamsModel,
-} from '@lib/backend/core/utils/template/template.models';
+} from '#lib-backend/core/utils/template/template.models';
 
 export const template = async <TParams>({
   ...params

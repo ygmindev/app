@@ -1,4 +1,4 @@
-import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
+import { fromModules } from '#lib-backend/file/utils/fromModules/fromModules';
 
 export const NODE_POST_INSTALL_JS_TO_JSX: Array<string> = [
   fromModules('react-native-animatable/createAnimatableComponent.js'),

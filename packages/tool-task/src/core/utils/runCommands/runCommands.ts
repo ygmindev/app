@@ -1,7 +1,7 @@
-import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
-import { info } from '@lib/shared/logging/utils/logger/logger';
-import { command as commandF } from '@tool/task/core/utils/command/command';
-import type { RunCommandsParamsModel } from '@tool/task/core/utils/runCommands/runCommands.models';
+import { setEnvironment } from '#lib-shared/environment/utils/setEnvironment/setEnvironment';
+import { info } from '#lib-shared/logging/utils/logger/logger';
+import { command as commandF } from '#tool-task/core/utils/command/command';
+import type { RunCommandsParamsModel } from '#tool-task/core/utils/runCommands/runCommands.models';
 import every from 'lodash/every';
 
 export const runCommands = async ({ commands }: RunCommandsParamsModel): Promise<boolean> => {

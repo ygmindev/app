@@ -1,8 +1,8 @@
-import { _useChange } from '@lib/frontend/core/hooks/useChange/_useChange';
+import { _useChange } from '#lib-frontend/core/hooks/useChange/_useChange';
 import type {
   UseChangeModel,
   UseChangeParamsModel,
-} from '@lib/frontend/core/hooks/useChange/useChange.models';
+} from '#lib-frontend/core/hooks/useChange/useChange.models';
 import { useEffect } from 'react';
 
 export const useChange = <TType extends unknown>(

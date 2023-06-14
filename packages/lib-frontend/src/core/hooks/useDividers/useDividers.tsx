@@ -1,10 +1,11 @@
-import { Divider } from '@lib/frontend/core/components/Divider/Divider';
+import { Children, Fragment, useMemo } from 'react';
+
+import { Divider } from '#lib-frontend/core/components/Divider/Divider';
 import type {
   UseDividersModel,
   UseDividersParamsModel,
-} from '@lib/frontend/core/hooks/useDividers/useDividers.models';
-import { uid } from '@lib/shared/core/utils/uid/uid';
-import { Children, Fragment, useMemo } from 'react';
+} from '#lib-frontend/core/hooks/useDividers/useDividers.models';
+import { uid } from '#lib-shared/core/utils/uid/uid';
 
 export const useDividers = (params: UseDividersParamsModel): UseDividersModel =>
   useMemo(

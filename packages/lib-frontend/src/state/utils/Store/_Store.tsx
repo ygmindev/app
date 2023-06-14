@@ -1,13 +1,3 @@
-import type { ActionModel, NestedActionsModel } from '@lib/frontend/state/state.models';
-import { Storage } from '@lib/frontend/state/utils/Storage/Storage';
-import type {
-  _ActionProviderPropsModel,
-  _StoreModel,
-  _StoreParamsModel,
-} from '@lib/frontend/state/utils/Store/_Store.models';
-import type { StateProviderPropsModel } from '@lib/frontend/state/utils/Store/Store.models';
-import { isSsr } from '@lib/platform/core/utils/isSsr/isSsr';
-import { mapValuesAsync } from '@lib/shared/core/utils/mapValuesAsync/mapValuesAsync';
 import type {
   CaseReducer,
   CaseReducerActions,
@@ -35,6 +25,17 @@ import {
   REGISTER,
   REHYDRATE,
 } from 'redux-persist';
+
+import type { ActionModel, NestedActionsModel } from '#lib-frontend/state/state.models';
+import { Storage } from '#lib-frontend/state/utils/Storage/Storage';
+import type {
+  _ActionProviderPropsModel,
+  _StoreModel,
+  _StoreParamsModel,
+} from '#lib-frontend/state/utils/Store/_Store.models';
+import type { StateProviderPropsModel } from '#lib-frontend/state/utils/Store/Store.models';
+import { isSsr } from '#lib-platform/core/utils/isSsr/isSsr';
+import { mapValuesAsync } from '#lib-shared/core/utils/mapValuesAsync/mapValuesAsync';
 
 // TODO: fix when upgrade https://github.com/reduxjs/redux-toolkit/issues/1960
 // import { configureStore, createSlice } from '@reduxjs/toolkit';

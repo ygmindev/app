@@ -1,4 +1,4 @@
-import type { FieldTypeModel } from '@lib/shared/form/form.models';
+import type { FieldTypeModel } from '#lib-shared/form/form.models';
 
 export interface WithFieldParamsModel<TType> {
   Resource?: TType;

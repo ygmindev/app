@@ -1,17 +1,18 @@
-import { useApi } from '@lib/frontend/http/hooks/useApi/useApi';
+import { print } from 'graphql/language/printer';
+import { gql } from 'graphql-tag';
+
+import { useApi } from '#lib-frontend/http/hooks/useApi/useApi';
 import type {
   UseGraphQlModel,
   UseGraphQlParamsModel,
-} from '@lib/frontend/http/hooks/useGraphQl/useGraphQl.models';
-import { graphQlQuery } from '@lib/frontend/http/utils/graphQlQuery/graphQlQuery';
+} from '#lib-frontend/http/hooks/useGraphQl/useGraphQl.models';
+import { graphQlQuery } from '#lib-frontend/http/utils/graphQlQuery/graphQlQuery';
 import type {
   GraphQlHttpParamsModel,
   GraphQlHttpResponseModel,
   GraphQlQueryHttpParamsModel,
-} from '@lib/frontend/http/utils/graphQlQuery/graphQlQuery.models';
-import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
-import { print } from 'graphql/language/printer';
-import { gql } from 'graphql-tag';
+} from '#lib-frontend/http/utils/graphQlQuery/graphQlQuery.models';
+import { GRAPHQL } from '#lib-shared/graphql/graphql.constants';
 
 export const useGraphQl = (params: UseGraphQlParamsModel = {}): UseGraphQlModel => {
   const { post } = useApi({ ...params, path: `api/${GRAPHQL}` });

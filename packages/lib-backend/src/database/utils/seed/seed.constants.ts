@@ -1,15 +1,15 @@
-import { Container } from '@lib/backend/core/utils/Container/Container';
-import type { SeedDataModel } from '@lib/backend/database/utils/seed/seed.models';
-import { UserService } from '@lib/backend/user/resources/User/UserService/UserService';
+import { Container } from '#lib-backend/core/utils/Container/Container';
+import type { SeedDataModel } from '#lib-backend/database/utils/seed/seed.models';
+import { UserService } from '#lib-backend/user/resources/User/UserService/UserService';
 import {
   ACCESS_RESOURCE_NAME,
   ACCESS_ROLE,
-} from '@lib/shared/auth/resources/Access/Access.constants';
-import type { AccessFormModel } from '@lib/shared/auth/resources/Access/Access.models';
-import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
-import type { DummyEntityResourceFormModel } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.models';
-import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
-import type { UserFormModel } from '@lib/shared/user/resources/User/User.models';
+} from '#lib-shared/auth/resources/Access/Access.constants';
+import type { AccessFormModel } from '#lib-shared/auth/resources/Access/Access.models';
+import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
+import type { DummyEntityResourceFormModel } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
+import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
+import type { UserFormModel } from '#lib-shared/user/resources/User/User.models';
 
 export const DUMMY_ENTITY_RESOURCE_SEED_DATA: Array<DummyEntityResourceFormModel> = [
   {

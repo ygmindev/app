@@ -1,6 +1,7 @@
-import type { _ScreenModel } from '@lib/frontend/test/utils/screen/_screen.models';
 import type { Browser, Page } from 'puppeteer';
 import { launch } from 'puppeteer';
+
+import type { _ScreenModel } from '#lib-frontend/test/utils/screen/_screen.models';
 
 let browser: Browser;
 let page: Page;

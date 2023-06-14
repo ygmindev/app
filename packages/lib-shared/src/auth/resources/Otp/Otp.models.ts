@@ -1,4 +1,4 @@
-import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import type { EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export interface OtpModel extends Omit<EntityResourceModel, 'created'> {
   callingCode?: string;

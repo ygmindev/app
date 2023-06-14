@@ -1,8 +1,8 @@
-import type { ThemeColorModel, ThemeRoleModel } from '@lib/frontend/style/style.models';
+import type { ThemeColorModel, ThemeRoleModel } from '#lib-frontend/style/style.models';
 import type {
   BORDER_DIRECTION,
   BORDER_RADIUS_DIRECTION,
-} from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
+} from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.constants';
 
 export type BorderDirectionModel = `${BORDER_DIRECTION}`;
 

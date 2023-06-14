@@ -1,6 +1,6 @@
-import { appUri } from '@lib/shared/http/utils/appUri/appUri';
-import { uri } from '@lib/shared/http/utils/uri/uri';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { appUri } from '#lib-shared/http/utils/appUri/appUri';
+import { uri } from '#lib-shared/http/utils/uri/uri';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 import toNumber from 'lodash/toNumber';
 
 const { displayName } = withTest({ appUri });

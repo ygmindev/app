@@ -1,7 +1,7 @@
 import type {
   ChildrenModel,
   ChildrenParamsModel,
-} from '@lib/backend/file/utils/children/children.models';
+} from '#lib-backend/file/utils/children/children.models';
 import { readdirSync, statSync } from 'fs';
 import { join, normalize } from 'path';
 

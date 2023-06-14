@@ -1,6 +1,7 @@
-import type { ConfigDynamicModel } from '@lib/config/core/core.models';
-import type { InternationalizationDetectionModel } from '@lib/frontend/locale/locale.models';
 import type { i18n, Module } from 'i18next';
+
+import type { ConfigDynamicModel } from '#lib-config/core/core.models';
+import type { InternationalizationDetectionModel } from '#lib-frontend/locale/locale.models';
 
 export interface InternationalizeConfigModel {
   addPath?: string;

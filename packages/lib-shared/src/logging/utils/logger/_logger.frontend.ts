@@ -1,4 +1,4 @@
-import type { _LoggerModel } from '@lib/shared/logging/utils/logger/_logger.models';
+import type { _LoggerModel } from '#lib-shared/logging/utils/logger/_logger.models';
 
 const { _debug, _error, _info, _warn }: _LoggerModel = {
   /* eslint-disable no-console */

@@ -1,7 +1,7 @@
 import type {
   InterleaveModel,
   InterleaveParamsModel,
-} from '@lib/shared/core/utils/interleave/interleave.models';
+} from '#lib-shared/core/utils/interleave/interleave.models';
 
 export const interleave = <TType>(
   ...[value, element]: InterleaveParamsModel<TType>

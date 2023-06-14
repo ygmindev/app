@@ -1,8 +1,9 @@
+import { outputFileSync } from 'fs-extra';
+
 import type {
   _WriteFileModel,
   _WriteFileParamsModel,
-} from '@lib/backend/file/utils/writeFile/_writeFile.models';
-import { outputFileSync } from 'fs-extra';
+} from '#lib-backend/file/utils/writeFile/_writeFile.models';
 
 export const _writeFile = ({ filename, value }: _WriteFileParamsModel): _WriteFileModel =>
   outputFileSync(filename, value);

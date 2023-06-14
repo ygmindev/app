@@ -1,8 +1,8 @@
-import type { IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
-import type { WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
-import type { ElementStatePropsModel, ValuePropsModel } from '@lib/frontend/core/core.models';
-import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
-import type { CallableModel, InferModel, PrimitiveModel } from '@lib/shared/core/core.models';
+import type { IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
+import type { WrapperPropsModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
+import type { ElementStatePropsModel, ValuePropsModel } from '#lib-frontend/core/core.models';
+import type { TranslatableTextModel } from '#lib-frontend/locale/locale.models';
+import type { CallableModel, InferModel, PrimitiveModel } from '#lib-shared/core/core.models';
 
 export interface FieldPropsModel<TType>
   extends Pick<IconPropsModel, 'icon'>,

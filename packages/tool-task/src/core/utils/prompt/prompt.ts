@@ -1,9 +1,9 @@
-import { _prompt } from '@tool/task/core/utils/prompt/_prompt';
+import { _prompt } from '#tool-task/core/utils/prompt/_prompt';
 import type {
   PromptArgsModel,
   PromptModel,
   PromptParamsModel,
-} from '@tool/task/core/utils/prompt/prompt.models';
+} from '#tool-task/core/utils/prompt/prompt.models';
 
 export const prompt = async <TParams extends Array<PromptArgsModel>>(
   params: PromptParamsModel<TParams>,

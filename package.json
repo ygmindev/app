@@ -255,20 +255,20 @@
     "run": "./packages/tool-task/src/index.js"
   },
   "bundledDependencies": [
-    "@app/native",
-    "@app/web",
-    "@app/web-ete",
-    "@app/web-library",
+    "#app-native",
+    "#app-web",
+    "#app-web-ete",
+    "#app-web-library",
     "@asset/static",
-    "@lib/backend",
-    "@lib/config",
-    "@lib/platform",
-    "@lib/frontend",
-    "@lib/library",
-    "@lib/shared",
-    "@backend/lambda",
-    "@backend/sandbox",
-    "@tool/generate",
-    "@tool/task"
+    "#lib-backend",
+    "#lib-config",
+    "#lib-platform",
+    "#lib-frontend",
+    "#lib-library",
+    "#lib-shared",
+    "#backend-lambda",
+    "#backend-sandbox",
+    "#tool-generate",
+    "#tool-task"
   ]
 }

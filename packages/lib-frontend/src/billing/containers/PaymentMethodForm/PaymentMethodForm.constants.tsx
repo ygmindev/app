@@ -1,6 +1,6 @@
-import { PaymentMethodField } from '@lib/frontend/billing/components/PaymentMethodField/PaymentMethodField';
-import type { FormContainerRowModel } from '@lib/frontend/form/containers/FormContainer/FormContainer.models';
-import { withId } from '@lib/shared/core/decorators/withId/withId';
+import { PaymentMethodField } from '#lib-frontend/billing/components/PaymentMethodField/PaymentMethodField';
+import type { FormContainerRowModel } from '#lib-frontend/form/containers/FormContainer/FormContainer.models';
+import { withId } from '#lib-shared/core/decorators/withId/withId';
 
 export const PAYMENT_METHOD_FORM_FIELDS: Array<FormContainerRowModel> = withId([
   {

@@ -1,6 +1,7 @@
-import type { ReducerModel } from '@lib/frontend/state/state.models';
-import type { PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
-import type { EntityResourcePartialModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import type { PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import type { EntityResourcePartialModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+
+import type { ReducerModel } from '#lib-frontend/state/state.models';
 
 export interface BillingStateModel {
   paymentMethods?: Array<EntityResourcePartialModel<PaymentMethodModel>>;

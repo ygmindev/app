@@ -1,6 +1,6 @@
-import type { _PortalHostPropsModel } from '@lib/frontend/core/components/PortalHost/_PortalHost.models';
-import type { ChildrenPropsModel } from '@lib/frontend/core/core.models';
-import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
+import type { _PortalHostPropsModel } from '#lib-frontend/core/components/PortalHost/_PortalHost.models';
+import type { ChildrenPropsModel } from '#lib-frontend/core/core.models';
+import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
 import type { ComponentType } from 'react';
 import { Portal } from 'react-native-paper';
 

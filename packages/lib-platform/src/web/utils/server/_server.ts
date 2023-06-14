@@ -3,23 +3,24 @@ import type { FastifyCookieOptions } from '@fastify/cookie';
 import { fastifyCookie } from '@fastify/cookie';
 import { fastifyMiddie } from '@fastify/middie';
 import { fastifyStatic } from '@fastify/static';
-import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
-import { _config } from '@lib/config/locale/internationalize/internationalize.ssr';
-import { config as webConfig } from '@lib/config/platform/web/web';
-import type { CookieOptionModel } from '@lib/frontend/state/state.models';
-import { renderPage } from '@lib/platform/web/utils/renderPage/renderPage';
-import type {
-  _ServerModel,
-  _ServerParamsModel,
-} from '@lib/platform/web/utils/server/_server.models';
-import { LOCALE } from '@lib/shared/locale/locale.constants';
-import { ROUTE } from '@lib/shared/route/route.constants';
-import { STATE } from '@lib/shared/state/state.constants';
+import { LOCALE } from '#lib-shared/locale/locale.constants';
+import { ROUTE } from '#lib-shared/route/route.constants';
+import { STATE } from '#lib-shared/state/state.constants';
 import type { FastifyPluginCallback, FastifyRegisterOptions } from 'fastify';
 import { fastify } from 'fastify';
 import i18nextMiddleware from 'i18next-http-middleware';
 import toNumber from 'lodash/toNumber';
 import { createServer } from 'vite';
+
+import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
+import { _config } from '#lib-config/locale/internationalize/internationalize.ssr';
+import { config as webConfig } from '#lib-config/platform/web/web';
+import type { CookieOptionModel } from '#lib-frontend/state/state.models';
+import { renderPage } from '#lib-platform/web/utils/renderPage/renderPage';
+import type {
+  _ServerModel,
+  _ServerParamsModel,
+} from '#lib-platform/web/utils/server/_server.models';
 
 export const _server = async ({
   config,

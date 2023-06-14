@@ -1,4 +1,4 @@
-import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
+import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
 
 export class HttpError extends Error {
   statusCode: number;

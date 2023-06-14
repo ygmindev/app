@@ -1,8 +1,8 @@
-import { config } from '@lib/config/style/theme/theme';
-import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
-import type { UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
-import type { ThemeColorModel, ThemeModel } from '@lib/frontend/style/style.models';
-import { palette } from '@lib/frontend/style/utils/palette/palette';
+import { config } from '#lib-config/style/theme/theme';
+import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
+import type { UseThemeModel } from '#lib-frontend/style/hooks/useTheme/useTheme.models';
+import type { ThemeColorModel, ThemeModel } from '#lib-frontend/style/style.models';
+import { palette } from '#lib-frontend/style/utils/palette/palette';
 import { useMemo } from 'react';
 
 export const useTheme = (): UseThemeModel => {

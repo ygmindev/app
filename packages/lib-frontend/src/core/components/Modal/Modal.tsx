@@ -1,16 +1,16 @@
-import { Button } from '@lib/frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
-import { KeyboardContainer } from '@lib/frontend/core/components/KeyboardContainer/KeyboardContainer';
-import { _Modal } from '@lib/frontend/core/components/Modal/_Modal';
-import type { ModalPropsModel } from '@lib/frontend/core/components/Modal/Modal.models';
-import { Text } from '@lib/frontend/core/components/Text/Text';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import type { FCModel } from '@lib/frontend/core/core.models';
-import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR } from '@lib/frontend/style/style.constants';
-import { FONT_TYPE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { Button } from '#lib-frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
+import { KeyboardContainer } from '#lib-frontend/core/components/KeyboardContainer/KeyboardContainer';
+import { _Modal } from '#lib-frontend/core/components/Modal/_Modal';
+import type { ModalPropsModel } from '#lib-frontend/core/components/Modal/Modal.models';
+import { Text } from '#lib-frontend/core/components/Text/Text';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import type { FCModel } from '#lib-frontend/core/core.models';
+import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
+import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
+import { THEME_COLOR } from '#lib-frontend/style/style.constants';
+import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import isString from 'lodash/isString';
 
 export const Modal: FCModel<ModalPropsModel> = ({

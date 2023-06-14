@@ -1,7 +1,8 @@
-import type { _DatabaseInMemoryModel } from '@lib/backend/database/utils/DatabaseInMemory/_DatabaseInMemory.models';
-import { debug } from '@lib/shared/logging/utils/logger/logger';
 import toNumber from 'lodash/toNumber';
 import { MongoMemoryServer } from 'mongodb-memory-server';
+
+import type { _DatabaseInMemoryModel } from '#lib-backend/database/utils/DatabaseInMemory/_DatabaseInMemory.models';
+import { debug } from '#lib-shared/logging/utils/logger/logger';
 
 export class _DatabaseInMemory implements _DatabaseInMemoryModel {
   _server?: MongoMemoryServer;

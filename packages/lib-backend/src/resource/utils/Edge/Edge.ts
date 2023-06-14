@@ -1,8 +1,8 @@
-import { withEntity } from '@lib/backend/resource/decorators/withEntity/withEntity';
-import { withField } from '@lib/backend/resource/decorators/withField/withField';
-import type { EdgeParamsModel } from '@lib/backend/resource/utils/Edge/Edge.models';
-import type { ConstructorModel } from '@lib/shared/core/core.models';
-import type { EdgeModel } from '@lib/shared/resource/utils/Edge/Edge.models';
+import { withEntity } from '#lib-backend/resource/decorators/withEntity/withEntity';
+import { withField } from '#lib-backend/resource/decorators/withField/withField';
+import type { EdgeParamsModel } from '#lib-backend/resource/utils/Edge/Edge.models';
+import type { ConstructorModel } from '#lib-shared/core/core.models';
+import type { EdgeModel } from '#lib-shared/resource/utils/Edge/Edge.models';
 
 export const Edge = <TType extends unknown>({
   Resource,

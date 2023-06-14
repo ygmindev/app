@@ -1,10 +1,10 @@
-import type { AnimationModel } from '@lib/frontend/animation/animation.models';
+import type { AnimationModel } from '#lib-frontend/animation/animation.models';
 import type {
   ChildrenPropsModel,
   DimensionModel,
   ElementStatePropsModel,
-} from '@lib/frontend/core/core.models';
-import type { CallableModel } from '@lib/shared/core/core.models';
+} from '#lib-frontend/core/core.models';
+import type { CallableModel } from '#lib-shared/core/core.models';
 
 export interface _ModalPropsModel
   extends ChildrenPropsModel,

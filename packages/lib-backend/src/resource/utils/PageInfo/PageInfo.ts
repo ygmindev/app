@@ -1,7 +1,7 @@
-import { withEntity } from '@lib/backend/resource/decorators/withEntity/withEntity';
-import { withField } from '@lib/backend/resource/decorators/withField/withField';
-import { FIELD_TYPE } from '@lib/shared/form/form.constants';
-import type { PageInfoModel } from '@lib/shared/resource/utils/Connection/Connection.models';
+import { withEntity } from '#lib-backend/resource/decorators/withEntity/withEntity';
+import { withField } from '#lib-backend/resource/decorators/withField/withField';
+import { FIELD_TYPE } from '#lib-shared/form/form.constants';
+import type { PageInfoModel } from '#lib-shared/resource/utils/Connection/Connection.models';
 
 @withEntity({ name: 'PageInfo' })
 export class PageInfo implements PageInfoModel {

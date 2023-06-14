@@ -1,9 +1,10 @@
+import { render } from '@testing-library/react-native';
+import type { ReactElement } from 'react';
+
 import type {
   _RenderModel,
   _RenderParamsModel,
-} from '@lib/frontend/test/utils/render/_render.models';
-import { render } from '@testing-library/react-native';
-import type { ReactElement } from 'react';
+} from '#lib-frontend/test/utils/render/_render.models';
 
 export const _render = ({ Wrapper, element }: _RenderParamsModel): _RenderModel => {
   const { findByTestId, findByText, unmount } = render(element, { wrapper: Wrapper });

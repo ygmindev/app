@@ -1,12 +1,12 @@
-import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import type { CallablePromiseModel } from '@lib/shared/core/core.models';
-import { sequence } from '@lib/shared/core/utils/sequence/sequence';
-import { TASK_STATUS } from '@tool/task/core/core.constants';
-import type { TaskParamsModel, TaskResultModel } from '@tool/task/core/core.models';
-import { command } from '@tool/task/core/utils/command/command';
-import { prompt } from '@tool/task/core/utils/prompt/prompt';
-import type { PromptArgsModel } from '@tool/task/core/utils/prompt/prompt.models';
-import type { InstallParamsModel } from '@tool/task/node/tasks/install/install.models';
+import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
+import type { CallablePromiseModel } from '#lib-shared/core/core.models';
+import { sequence } from '#lib-shared/core/utils/sequence/sequence';
+import { TASK_STATUS } from '#tool-task/core/core.constants';
+import type { TaskParamsModel, TaskResultModel } from '#tool-task/core/core.models';
+import { command } from '#tool-task/core/utils/command/command';
+import { prompt } from '#tool-task/core/utils/prompt/prompt';
+import type { PromptArgsModel } from '#tool-task/core/utils/prompt/prompt.models';
+import type { InstallParamsModel } from '#tool-task/node/tasks/install/install.models';
 
 const install: TaskParamsModel<InstallParamsModel> = {
   name: 'node-install',

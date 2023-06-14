@@ -1,11 +1,11 @@
 import type {
   ComposeComponentModel,
   ComposeComponentParamsModel,
-} from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
-import { isFragment } from '@lib/frontend/core/utils/isFragment/isFragment';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import type { StyleModel, ViewStyleModel } from '@lib/frontend/style/style.models';
+} from '#lib-frontend/core/utils/composeComponent/composeComponent.models';
+import { isFragment } from '#lib-frontend/core/utils/isFragment/isFragment';
+import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
+import type { StyleModel, ViewStyleModel } from '#lib-frontend/style/style.models';
 import type { ReactElement } from 'react';
 import { createElement, forwardRef } from 'react';
 import { unstable_createElement } from 'react-native-web';

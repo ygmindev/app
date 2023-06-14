@@ -1,7 +1,7 @@
-import { AnimatableText } from '@lib/frontend/animation/components/AnimatableText/AnimatableText';
-import type { SFCModel } from '@lib/frontend/core/core.models';
-import type { TranslatableTextPropsModel } from '@lib/frontend/locale/components/TranslatableText/TranslatableText.models';
-import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { AnimatableText } from '#lib-frontend/animation/components/AnimatableText/AnimatableText';
+import type { SFCModel } from '#lib-frontend/core/core.models';
+import type { TranslatableTextPropsModel } from '#lib-frontend/locale/components/TranslatableText/TranslatableText.models';
+import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
 

@@ -1,6 +1,6 @@
-import { Button } from '@lib/frontend/core/components/Button/Button';
-import type { ModalButtonPropsModel } from '@lib/frontend/core/components/ModalButton/ModalButton.models';
-import type { SFCModel } from '@lib/frontend/core/core.models';
+import { Button } from '#lib-frontend/core/components/Button/Button';
+import type { ModalButtonPropsModel } from '#lib-frontend/core/components/ModalButton/ModalButton.models';
+import type { SFCModel } from '#lib-frontend/core/core.models';
 import { cloneElement, useMemo, useState } from 'react';
 
 export const ModalButton: SFCModel<ModalButtonPropsModel> = ({

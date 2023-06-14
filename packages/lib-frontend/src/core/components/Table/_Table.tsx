@@ -1,21 +1,21 @@
 import 'ag-grid-community/styles/ag-grid.min.css';
 import 'ag-grid-community/styles/ag-theme-material.min.css';
 
-import { AG_GRID_THEME } from '@lib/config/style/css/css.ag-grid';
-import type { _TablePropsModel } from '@lib/frontend/core/components/Table/_Table.models';
+import { AG_GRID_THEME } from '#lib-config/style/css/css.ag-grid';
+import type { _TablePropsModel } from '#lib-frontend/core/components/Table/_Table.models';
 import {
   COLUMN_SORT_TYPE,
   TABLE_SELECT_TYPE,
-} from '@lib/frontend/core/components/Table/Table.constants';
+} from '#lib-frontend/core/components/Table/Table.constants';
 import type {
   TableColumnModel,
   TableRefModel,
-} from '@lib/frontend/core/components/Table/Table.models';
-import { Text } from '@lib/frontend/core/components/Text/Text';
-import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
+} from '#lib-frontend/core/components/Table/Table.models';
+import { Text } from '#lib-frontend/core/components/Text/Text';
+import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
+import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
+import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 import type {
   ColDef,
   ColumnApi,

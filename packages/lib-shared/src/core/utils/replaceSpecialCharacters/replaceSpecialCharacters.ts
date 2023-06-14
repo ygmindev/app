@@ -1,7 +1,7 @@
 import type {
   ReplaceSpecialCharactersModel,
   ReplaceSpecialCharactersParamsModel,
-} from '@lib/shared/core/utils/replaceSpecialCharacters/replaceSpecialCharacters.models';
+} from '#lib-shared/core/utils/replaceSpecialCharacters/replaceSpecialCharacters.models';
 
 export const replaceSpecialCharacters = (
   ...[value, to = '']: ReplaceSpecialCharactersParamsModel

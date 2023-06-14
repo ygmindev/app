@@ -1,15 +1,16 @@
+import type { ScrollView } from 'react-native';
+
 import type {
   ChildrenPropsModel,
   MeasureModel,
   PositionModel,
-} from '@lib/frontend/core/core.models';
-import type { StylePropsModel, ViewStyleModel } from '@lib/frontend/style/style.models';
+} from '#lib-frontend/core/core.models';
+import type { StylePropsModel, ViewStyleModel } from '#lib-frontend/style/style.models';
 import type {
   CallableArgsModel,
   CallableArgsPromiseModel,
   CallableModel,
-} from '@lib/shared/core/core.models';
-import type { ScrollView } from 'react-native';
+} from '#lib-shared/core/core.models';
 
 export interface _ViewPropsModel extends ChildrenPropsModel, StylePropsModel<ViewStyleModel> {
   isFocusable?: boolean;

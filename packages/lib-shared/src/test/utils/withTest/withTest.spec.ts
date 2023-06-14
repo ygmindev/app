@@ -1,4 +1,4 @@
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ withTest });
 

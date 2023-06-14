@@ -1,1 +1,1 @@
-export { _HttpService as HttpService } from '@lib/shared/http/utils/HttpService/_HttpService';
+export { _HttpService as HttpService } from '#lib-shared/http/utils/HttpService/_HttpService';

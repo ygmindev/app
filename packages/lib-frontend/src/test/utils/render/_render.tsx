@@ -1,9 +1,10 @@
+import { render, screen } from '@testing-library/react';
+import type { ReactElement } from 'react';
+
 import type {
   _RenderModel,
   _RenderParamsModel,
-} from '@lib/frontend/test/utils/render/_render.models';
-import { render, screen } from '@testing-library/react';
-import type { ReactElement } from 'react';
+} from '#lib-frontend/test/utils/render/_render.models';
 
 export const _render = ({ Wrapper, element }: _RenderParamsModel): _RenderModel => {
   const { unmount } = render(element, { wrapper: Wrapper });

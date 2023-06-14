@@ -1,17 +1,18 @@
-import type { RootContextModel } from '@lib/frontend/root/root.models';
-import { ROOT_REDUCERS } from '@lib/frontend/root/stores/rootStore.constants';
-import type { RootStateContextModel } from '@lib/frontend/root/stores/rootStore.models';
-import { Store } from '@lib/frontend/state/utils/Store/Store';
-import { getLocaleStoreFromI18n } from '@lib/platform/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
-import type {
-  _ExportRendererServerModel,
-  _ExportRendererServerParamsModel,
-} from '@lib/platform/web/exports/exportRendererServer/_exportRendererServer.models';
-import { LOCALE } from '@lib/shared/locale/locale.constants';
-import { STATE } from '@lib/shared/state/state.constants';
+import type { RootContextModel } from '#lib-frontend/root/root.models';
+import { ROOT_REDUCERS } from '#lib-frontend/root/stores/rootStore.constants';
+import type { RootStateContextModel } from '#lib-frontend/root/stores/rootStore.models';
+import { Store } from '#lib-frontend/state/utils/Store/Store';
+import { LOCALE } from '#lib-shared/locale/locale.constants';
+import { STATE } from '#lib-shared/state/state.constants';
 import pick from 'lodash/pick';
 import ReactDOMServer from 'react-dom/server';
 import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vite-plugin-ssr/server';
+
+import { getLocaleStoreFromI18n } from '#lib-platform/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
+import type {
+  _ExportRendererServerModel,
+  _ExportRendererServerParamsModel,
+} from '#lib-platform/web/exports/exportRendererServer/_exportRendererServer.models';
 
 export const _exportRendererServer = ({
   publicDir,

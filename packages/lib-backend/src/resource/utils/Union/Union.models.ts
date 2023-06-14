@@ -1,4 +1,4 @@
-import type { ConstructorModel, PartialModel } from '@lib/shared/core/core.models';
+import type { ConstructorModel, PartialModel } from '#lib-shared/core/core.models';
 
 export interface UnionParamsModel<TType> {
   Resource: Array<ConstructorModel<PartialModel<TType>>>;

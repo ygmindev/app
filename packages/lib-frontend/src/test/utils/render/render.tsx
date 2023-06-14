@@ -1,14 +1,14 @@
-import { importConfig } from '@lib/config/core/utils/importConfig/importConfig';
+import { importConfig } from '#lib-config/core/utils/importConfig/importConfig';
 import type {
   _InternationalizeConfigModel,
   InternationalizeConfigModel,
-} from '@lib/config/locale/internationalize/internationalize.models';
-import { Root } from '@lib/frontend/root/containers/Root/Root';
-import { Routes } from '@lib/frontend/route/containers/Routes/Routes';
-import { RouteProvider } from '@lib/frontend/route/providers/RouteProvider/RouteProvider.ssr';
-import { _render } from '@lib/frontend/test/utils/render/_render';
-import type { RenderModel, RenderParamsModel } from '@lib/frontend/test/utils/render/render.models';
-import { LOCALE } from '@lib/shared/locale/locale.constants';
+} from '#lib-config/locale/internationalize/internationalize.models';
+import { Root } from '#lib-frontend/root/containers/Root/Root';
+import { Routes } from '#lib-frontend/route/containers/Routes/Routes';
+import { RouteProvider } from '#lib-frontend/route/providers/RouteProvider/RouteProvider.ssr';
+import { _render } from '#lib-frontend/test/utils/render/_render';
+import type { RenderModel, RenderParamsModel } from '#lib-frontend/test/utils/render/render.models';
+import { LOCALE } from '#lib-shared/locale/locale.constants';
 
 export const render = async (params: RenderParamsModel): RenderModel => {
   const { _config } = await importConfig<InternationalizeConfigModel, _InternationalizeConfigModel>(

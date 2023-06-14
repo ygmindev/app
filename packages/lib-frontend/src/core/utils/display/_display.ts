@@ -1,6 +1,7 @@
-import type { _DisplayModel } from '@lib/frontend/core/utils/display/_display.models';
-import { isSsr } from '@lib/platform/core/utils/isSsr/isSsr';
 import { useEffect, useLayoutEffect } from 'react';
+
+import type { _DisplayModel } from '#lib-frontend/core/utils/display/_display.models';
+import { isSsr } from '#lib-platform/core/utils/isSsr/isSsr';
 
 const subscribeEvent = <TType extends Event>(
   eventName: string,

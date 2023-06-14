@@ -1,8 +1,8 @@
-import type { RSFCModel } from '@lib/frontend/core/core.models';
-import type { UseStylesParamsModel } from '@lib/frontend/style/hooks/useStyles/useStyles.models';
-import type { UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
-import type { StyleModel, StylePropsModel, ViewStyleModel } from '@lib/frontend/style/style.models';
-import type { TestIdPropsModel } from '@lib/frontend/test/test.models';
+import type { RSFCModel } from '#lib-frontend/core/core.models';
+import type { UseStylesParamsModel } from '#lib-frontend/style/hooks/useStyles/useStyles.models';
+import type { UseThemeModel } from '#lib-frontend/style/hooks/useTheme/useTheme.models';
+import type { StyleModel, StylePropsModel, ViewStyleModel } from '#lib-frontend/style/style.models';
+import type { TestIdPropsModel } from '#lib-frontend/test/test.models';
 import type { ComponentType, ForwardedRef } from 'react';
 
 export interface ComposeComponentParamsModel<

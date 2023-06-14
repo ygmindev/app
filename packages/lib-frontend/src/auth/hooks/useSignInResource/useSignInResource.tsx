@@ -1,16 +1,16 @@
-import { useSession } from '@lib/frontend/auth/hooks/useSession/useSession';
-import type { UseSignInResourceModel } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource.models';
-import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
-import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
-import { useTracking } from '@lib/frontend/tracking/hooks/useTracking/useTracking';
-import { USER_FIELDS } from '@lib/frontend/user/hooks/useUserResource/useUserResource.constants';
-import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
+import { useSession } from '#lib-frontend/auth/hooks/useSession/useSession';
+import type { UseSignInResourceModel } from '#lib-frontend/auth/hooks/useSignInResource/useSignInResource.models';
+import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
+import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
+import { useTracking } from '#lib-frontend/tracking/hooks/useTracking/useTracking';
+import { USER_FIELDS } from '#lib-frontend/user/hooks/useUserResource/useUserResource.constants';
+import { UnauthorizedError } from '#lib-shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import {
   SIGN_IN_RESOURCE_NAME,
   USERNAME_UPDATE,
-} from '@lib/shared/auth/resources/SignIn/SignIn.constants';
-import type { SignInFormModel, SignInModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
-import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+} from '#lib-shared/auth/resources/SignIn/SignIn.constants';
+import type { SignInFormModel, SignInModel } from '#lib-shared/auth/resources/SignIn/SignIn.models';
+import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 
 export const useSignInResource = (): UseSignInResourceModel => {
   const { identify, reset } = useTracking();

@@ -1,5 +1,5 @@
-import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
-import { withInject } from '@lib/shared/core/decorators/withInject/withInject';
+import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
+import { withInject } from '#lib-shared/core/decorators/withInject/withInject';
 
 export const WITH_CONTAINER_PROPERTY = 'WITH_CONTAINER_PROPERTY';
 

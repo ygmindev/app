@@ -1,9 +1,9 @@
-import { withEntity } from '@lib/backend/resource/decorators/withEntity/withEntity';
-import { withField } from '@lib/backend/resource/decorators/withField/withField';
-import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
-import type { RootParamsModel } from '@lib/backend/resource/utils/Root/Root.models';
-import type { ConstructorModel, PartialModel } from '@lib/shared/core/core.models';
-import type { RootModel } from '@lib/shared/resource/utils/Root/Root.models';
+import { withEntity } from '#lib-backend/resource/decorators/withEntity/withEntity';
+import { withField } from '#lib-backend/resource/decorators/withField/withField';
+import { EntityResource } from '#lib-backend/resource/resources/EntityResource/EntityResource';
+import type { RootParamsModel } from '#lib-backend/resource/utils/Root/Root.models';
+import type { ConstructorModel, PartialModel } from '#lib-shared/core/core.models';
+import type { RootModel } from '#lib-shared/resource/utils/Root/Root.models';
 import isFunction from 'lodash/isFunction';
 
 export const Root = <TRoot = undefined>({

@@ -1,4 +1,4 @@
-import { config } from '@lib/config/core/setup/setup.node';
+import { config } from '#lib-config/core/setup/setup.node';
 import toNumber from 'lodash/toNumber';
 import { _graphql } from 'packages/backend-graphql-sandbox/src/graphql/_graphql';
 

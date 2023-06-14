@@ -1,25 +1,25 @@
-import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
-import { Button } from '@lib/frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
-import { Tooltip } from '@lib/frontend/core/components/Tooltip/Tooltip';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import type { ElementStateModel, RSFCModel } from '@lib/frontend/core/core.models';
-import { MaskedTextField } from '@lib/frontend/form/components/MaskedTextField/MaskedTextField';
-import { _TextField } from '@lib/frontend/form/components/TextField/_TextField';
-import { TEXT_FIELD_KEYBOARD } from '@lib/frontend/form/components/TextField/TextField.constants';
+import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
+import { Button } from '#lib-frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
+import { Tooltip } from '#lib-frontend/core/components/Tooltip/Tooltip';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import type { ElementStateModel, RSFCModel } from '#lib-frontend/core/core.models';
+import { MaskedTextField } from '#lib-frontend/form/components/MaskedTextField/MaskedTextField';
+import { _TextField } from '#lib-frontend/form/components/TextField/_TextField';
+import { TEXT_FIELD_KEYBOARD } from '#lib-frontend/form/components/TextField/TextField.constants';
 import type {
   TextFieldPropsModel,
   TextFieldRefModel,
-} from '@lib/frontend/form/components/TextField/TextField.models';
-import { useControlledValue } from '@lib/frontend/form/hooks/useControlledValue/useControlledValue';
-import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { isTranslatableText } from '@lib/frontend/locale/utils/isTranslatableText/isTranslatableText';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
-import type { ViewStyleModel } from '@lib/frontend/style/style.models';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
-import { variableName } from '@lib/shared/core/utils/variableName/variableName';
+} from '#lib-frontend/form/components/TextField/TextField.models';
+import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
+import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { isTranslatableText } from '#lib-frontend/locale/utils/isTranslatableText/isTranslatableText';
+import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
+import { THEME_COLOR, THEME_SIZE } from '#lib-frontend/style/style.constants';
+import type { ViewStyleModel } from '#lib-frontend/style/style.models';
+import { sleep } from '#lib-shared/core/utils/sleep/sleep';
+import { variableName } from '#lib-shared/core/utils/variableName/variableName';
 import type { RefObject } from 'react';
 import { forwardRef, useEffect, useRef } from 'react';
 

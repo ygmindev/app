@@ -1,11 +1,11 @@
-import { AccessService } from '@lib/backend/auth/resources/Access/AccessService/AccessService';
+import { AccessService } from '#lib-backend/auth/resources/Access/AccessService/AccessService';
 import type {
   AuthorizeModel,
   AuthorizeParamsModel,
-} from '@lib/backend/auth/utils/authorize/authorize.models';
-import { Container } from '@lib/backend/core/utils/Container/Container';
-import { ACCESS_ROLE } from '@lib/shared/auth/resources/Access/Access.constants';
-import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
+} from '#lib-backend/auth/utils/authorize/authorize.models';
+import { Container } from '#lib-backend/core/utils/Container/Container';
+import { ACCESS_ROLE } from '#lib-shared/auth/resources/Access/Access.constants';
+import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 
 export const authorize = async ({
   context,

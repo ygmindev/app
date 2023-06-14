@@ -1,8 +1,8 @@
 import type {
   GetPaymentMethodTitleModel,
   GetPaymentMethodTitleParamsModel,
-} from '@lib/frontend/billing/utils/getPaymentMethodTitle/getPaymentMethodTitle.models';
-import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+} from '#lib-frontend/billing/utils/getPaymentMethodTitle/getPaymentMethodTitle.models';
+import { PAYMENT_METHOD_TYPE } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 
 export const getPaymentMethodTitle =
   (params?: GetPaymentMethodTitleParamsModel): GetPaymentMethodTitleModel =>

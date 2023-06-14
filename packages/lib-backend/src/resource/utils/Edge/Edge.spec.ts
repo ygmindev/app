@@ -1,6 +1,6 @@
-import { Edge } from '@lib/backend/resource/utils/Edge/Edge';
-import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { Edge } from '#lib-backend/resource/utils/Edge/Edge';
+import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ Edge });
 

@@ -1,37 +1,37 @@
-import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
-import { SIGN_IN } from '@lib/frontend/auth/auth.constants';
-import { SignInPage } from '@lib/frontend/auth/pages/SignInPage/SignInPage';
-import { BILLING, PAYMENT, PAYMENT_METHOD } from '@lib/frontend/billing/billing.constants';
-import { PaymentMethodFormPage } from '@lib/frontend/billing/pages/PaymentMethodFormPage/PaymentMethodFormPage';
-import { PaymentPage } from '@lib/frontend/billing/pages/PaymentPage/PaymentPage';
-import { Text } from '@lib/frontend/core/components/Text/Text';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { REDIRECT } from '@lib/frontend/core/core.constants';
-import { DEV } from '@lib/frontend/dev/dev.constants';
-import { DevPage } from '@lib/frontend/dev/pages/DevPage/DevPage';
-import { FORM } from '@lib/frontend/form/form.constants';
-import { TIMEZONE } from '@lib/frontend/locale/locale.constants';
-import { TimezoneFormPage } from '@lib/frontend/locale/pages/TimezoneFormPage/TimezoneFormPage';
-import { NotFoundPage } from '@lib/frontend/route/pages/NotFoundPage/NotFoundPage';
-import { ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
-import type { RouteModel } from '@lib/frontend/route/route.models';
+import { AppLayout } from '#lib-frontend/app/layouts/AppLayout/AppLayout';
+import { SIGN_IN } from '#lib-frontend/auth/auth.constants';
+import { SignInPage } from '#lib-frontend/auth/pages/SignInPage/SignInPage';
+import { BILLING, PAYMENT, PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants';
+import { PaymentMethodFormPage } from '#lib-frontend/billing/pages/PaymentMethodFormPage/PaymentMethodFormPage';
+import { PaymentPage } from '#lib-frontend/billing/pages/PaymentPage/PaymentPage';
+import { Text } from '#lib-frontend/core/components/Text/Text';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import { REDIRECT } from '#lib-frontend/core/core.constants';
+import { DEV } from '#lib-frontend/dev/dev.constants';
+import { DevPage } from '#lib-frontend/dev/pages/DevPage/DevPage';
+import { FORM } from '#lib-frontend/form/form.constants';
+import { TIMEZONE } from '#lib-frontend/locale/locale.constants';
+import { TimezoneFormPage } from '#lib-frontend/locale/pages/TimezoneFormPage/TimezoneFormPage';
+import { NotFoundPage } from '#lib-frontend/route/pages/NotFoundPage/NotFoundPage';
+import { ROUTE_TRANSITION } from '#lib-frontend/route/route.constants';
+import type { RouteModel } from '#lib-frontend/route/route.models';
 import type {
   GetRoutesModel,
   GetRoutesParamsModel,
-} from '@lib/frontend/route/utils/getRoutes/getRoutes.models';
-import { SettingsPage } from '@lib/frontend/settings/pages/SettingsPage/SettingsPage';
-import { SETTINGS } from '@lib/frontend/settings/settings.constants';
-import { BrightnessFormPage } from '@lib/frontend/style/pages/BrightnessFormPage/BrightnessFormPage';
-import { AccountPage } from '@lib/frontend/user/pages/AccountPage/AccountPage';
-import { NameFormPage } from '@lib/frontend/user/pages/NameFormPage/NameFormPage';
-import { PersonalPage } from '@lib/frontend/user/pages/PersonalPage/PersonalPage';
-import { EMAIL, NAME, PERSONAL, PHONE } from '@lib/frontend/user/user.constants';
-import { AUTH, SIGN_IN_METHOD, SIGN_IN_MODE } from '@lib/shared/auth/auth.constants';
-import { CORE } from '@lib/shared/core/core.constants';
-import { LOCALE } from '@lib/shared/locale/locale.constants';
-import { ROUTE } from '@lib/shared/route/route.constants';
-import { BRIGHTNESS, STYLE } from '@lib/shared/style/style.constants';
-import { ACCOUNT, USER } from '@lib/shared/user/user.constants';
+} from '#lib-frontend/route/utils/getRoutes/getRoutes.models';
+import { SettingsPage } from '#lib-frontend/settings/pages/SettingsPage/SettingsPage';
+import { SETTINGS } from '#lib-frontend/settings/settings.constants';
+import { BrightnessFormPage } from '#lib-frontend/style/pages/BrightnessFormPage/BrightnessFormPage';
+import { AccountPage } from '#lib-frontend/user/pages/AccountPage/AccountPage';
+import { NameFormPage } from '#lib-frontend/user/pages/NameFormPage/NameFormPage';
+import { PersonalPage } from '#lib-frontend/user/pages/PersonalPage/PersonalPage';
+import { EMAIL, NAME, PERSONAL, PHONE } from '#lib-frontend/user/user.constants';
+import { AUTH, SIGN_IN_METHOD, SIGN_IN_MODE } from '#lib-shared/auth/auth.constants';
+import { CORE } from '#lib-shared/core/core.constants';
+import { LOCALE } from '#lib-shared/locale/locale.constants';
+import { ROUTE } from '#lib-shared/route/route.constants';
+import { BRIGHTNESS, STYLE } from '#lib-shared/style/style.constants';
+import { ACCOUNT, USER } from '#lib-shared/user/user.constants';
 
 export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesModel =>
   [

@@ -1,9 +1,10 @@
+import i18next, { init, use } from 'i18next';
+
 import type {
   _InternationalizeConfigModel,
   InternationalizeConfigModel,
-} from '@lib/config/locale/internationalize/internationalize.models';
-import type { ReturnTypeModel } from '@lib/shared/core/core.models';
-import i18next, { init, use } from 'i18next';
+} from '#lib-config/locale/internationalize/internationalize.models';
+import type { ReturnTypeModel } from '#lib-shared/core/core.models';
 
 export const _internationalize = ({
   addPath,

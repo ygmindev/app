@@ -1,6 +1,6 @@
-import { cleanDocument } from '@lib/backend/database/utils/cleanDocument/cleanDocument';
-import { randomString } from '@lib/shared/crypto/utils/randomString/randomString';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { cleanDocument } from '#lib-backend/database/utils/cleanDocument/cleanDocument';
+import { randomString } from '#lib-shared/crypto/utils/randomString/randomString';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 import pick from 'lodash/pick';
 import { ObjectId } from 'mongodb';
 

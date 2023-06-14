@@ -1,13 +1,14 @@
-import { Container } from '@lib/backend/core/utils/Container/Container';
-import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
-import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { packages } from '@lib/backend/file/utils/packages/packages';
-import type { _TaskConfigModel, TaskConfigModel } from '@lib/config/core/task/task.models';
-import type { TaskParamsModel } from '@tool/task/core/core.models';
-import { prompt } from '@tool/task/core/utils/prompt/prompt';
-import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
-import { TaskRegistry } from '@tool/task/core/utils/TaskRegistry/TaskRegistry';
+import type { _TaskConfigModel, TaskConfigModel } from '#lib-config/core/task/task.models';
+import type { TaskParamsModel } from '#tool-task/core/core.models';
+import { prompt } from '#tool-task/core/utils/prompt/prompt';
+import { PROMPT_TYPE } from '#tool-task/core/utils/prompt/prompt.constants';
+import { TaskRegistry } from '#tool-task/core/utils/TaskRegistry/TaskRegistry';
 import { existsSync } from 'fs';
+
+import { Container } from '#lib-backend/core/utils/Container/Container';
+import { fromGlobs } from '#lib-backend/file/utils/fromGlobs/fromGlobs';
+import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
+import { packages } from '#lib-backend/file/utils/packages/packages';
 
 export const _task = ({ packageConfig, taskExtension }: TaskConfigModel): _TaskConfigModel => {
   const taskRegistry = Container.get(TaskRegistry);

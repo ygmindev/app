@@ -1,12 +1,12 @@
-import { withContainer } from '@lib/backend/core/decorators/withContainer/withContainer';
-import { withResolver } from '@lib/backend/http/decorators/withResolver/withResolver';
-import { EntityResourceResolver } from '@lib/backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver';
-import { User } from '@lib/backend/user/resources/User/User';
-import { UserService } from '@lib/backend/user/resources/User/UserService/UserService';
-import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
-import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
-import type { UserFormModel, UserModel } from '@lib/shared/user/resources/User/User.models';
-import type { UserServiceModel } from '@lib/shared/user/resources/User/UserService/UserService.models';
+import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
+import { withResolver } from '#lib-backend/http/decorators/withResolver/withResolver';
+import { EntityResourceResolver } from '#lib-backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver';
+import { User } from '#lib-backend/user/resources/User/User';
+import { UserService } from '#lib-backend/user/resources/User/UserService/UserService';
+import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
+import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
+import type { UserFormModel, UserModel } from '#lib-shared/user/resources/User/User.models';
+import type { UserServiceModel } from '#lib-shared/user/resources/User/UserService/UserService.models';
 
 @withContainer()
 @withResolver({ Resource: User })

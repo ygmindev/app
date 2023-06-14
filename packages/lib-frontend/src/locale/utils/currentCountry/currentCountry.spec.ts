@@ -1,5 +1,5 @@
-import { currentCountry } from '@lib/frontend/locale/utils/currentCountry/currentCountry';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { currentCountry } from '#lib-frontend/locale/utils/currentCountry/currentCountry';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ currentCountry });
 

@@ -1,8 +1,8 @@
-import { Root } from '@lib/backend/resource/utils/Root/Root';
-import { uid } from '@lib/shared/core/utils/uid/uid';
-import type { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
-import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { Root } from '#lib-backend/resource/utils/Root/Root';
+import { uid } from '#lib-shared/core/utils/uid/uid';
+import type { EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ Root });
 

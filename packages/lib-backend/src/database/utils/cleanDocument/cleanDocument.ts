@@ -1,8 +1,9 @@
-import { toPlainObject } from '@lib/shared/core/utils/toPlainObject/toPlainObject';
 import isPlainObject from 'lodash/isPlainObject';
 import isString from 'lodash/isString';
 import last from 'lodash/last';
 import { ObjectId } from 'mongodb';
+
+import { toPlainObject } from '#lib-shared/core/utils/toPlainObject/toPlainObject';
 
 export const cleanDocument = <TType extends unknown>(value: TType): TType => {
   const valueF = toPlainObject(value);

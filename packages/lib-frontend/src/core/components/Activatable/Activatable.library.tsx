@@ -1,8 +1,9 @@
-import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
-import type { ActivatablePropsModel } from '@lib/frontend/core/components/Activatable/Activatable.models';
-import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
-import type { LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 import { useState } from 'react';
+
+import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
+import type { ActivatablePropsModel } from '#lib-frontend/core/components/Activatable/Activatable.models';
+import { WrapperFixture } from '#lib-frontend/core/components/Wrapper/Wrapper.fixtures';
+import type { LibraryPropsModel } from '#lib-library/core/components/Library/Library.models';
 
 export const props: LibraryPropsModel<ActivatablePropsModel> = {
   Component: Activatable,

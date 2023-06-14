@@ -1,5 +1,5 @@
-import { isSsr } from '@lib/platform/core/utils/isSsr/isSsr';
-import type { CallableModel } from '@lib/shared/core/core.models';
+import { isSsr } from '#lib-platform/core/utils/isSsr/isSsr';
+import type { CallableModel } from '#lib-shared/core/core.models';
 
 let isEnabled: boolean;
 

@@ -1,13 +1,13 @@
-import { RadioField } from '@lib/frontend/core/components/RadioField/RadioField';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import type { FCModel } from '@lib/frontend/core/core.models';
-import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
-import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
-import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import type { BrightnessFormPagePropsModel } from '@lib/frontend/style/pages/BrightnessFormPage/BrightnessFormPage.models';
-import type { StyleBrightnessStateModel } from '@lib/frontend/style/stores/styleStore/styleStore.models';
-import { STYLE_BRIGHTNESS } from '@lib/frontend/style/style.constants';
+import { RadioField } from '#lib-frontend/core/components/RadioField/RadioField';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import type { FCModel } from '#lib-frontend/core/core.models';
+import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
+import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
+import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
+import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import type { BrightnessFormPagePropsModel } from '#lib-frontend/style/pages/BrightnessFormPage/BrightnessFormPage.models';
+import type { StyleBrightnessStateModel } from '#lib-frontend/style/stores/styleStore/styleStore.models';
+import { STYLE_BRIGHTNESS } from '#lib-frontend/style/style.constants';
 
 export const BrightnessFormPage: FCModel<BrightnessFormPagePropsModel> = ({ testID, ...props }) => {
   const { styles } = useStyles({ props });

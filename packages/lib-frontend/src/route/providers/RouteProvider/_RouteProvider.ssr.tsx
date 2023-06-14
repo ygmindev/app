@@ -1,5 +1,5 @@
-import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
-import type { _RouteProviderPropsModel } from '@lib/frontend/route/providers/RouteProvider/_RouteProvider.models';
+import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
+import type { _RouteProviderPropsModel } from '#lib-frontend/route/providers/RouteProvider/_RouteProvider.models';
 import type { StaticRouterProps } from 'react-router-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 

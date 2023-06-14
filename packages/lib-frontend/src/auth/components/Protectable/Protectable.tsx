@@ -1,14 +1,15 @@
-import { SIGN_IN } from '@lib/frontend/auth/auth.constants';
-import type { ProtectablePropsModel } from '@lib/frontend/auth/components/Protectable/Protectable.models';
-import { useAuthState } from '@lib/frontend/auth/hooks/useAuthState/useAuthState';
-import { AUTH_STATE } from '@lib/frontend/auth/hooks/useAuthState/useAuthState.constants';
-import type { SFCModel } from '@lib/frontend/core/core.models';
-import { rootContext } from '@lib/frontend/root/providers/ContextProvider/ContextProvider';
-import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
-import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
-import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
-import { isSsr } from '@lib/platform/core/utils/isSsr/isSsr';
+import { SIGN_IN } from '#lib-frontend/auth/auth.constants';
+import type { ProtectablePropsModel } from '#lib-frontend/auth/components/Protectable/Protectable.models';
+import { useAuthState } from '#lib-frontend/auth/hooks/useAuthState/useAuthState';
+import { AUTH_STATE } from '#lib-frontend/auth/hooks/useAuthState/useAuthState.constants';
+import type { SFCModel } from '#lib-frontend/core/core.models';
+import { rootContext } from '#lib-frontend/root/providers/ContextProvider/ContextProvider';
+import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
+import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
+import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useContext } from 'react';
+
+import { isSsr } from '#lib-platform/core/utils/isSsr/isSsr';
 
 export const Protectable: SFCModel<ProtectablePropsModel> = ({ children }) => {
   const authState = useAuthState();

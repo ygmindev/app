@@ -1,6 +1,7 @@
-import type { GetConnectionParamsModel } from '@lib/backend/database/utils/getConnection/getConnection.models';
-import type { ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
 import { getOffsetWithDefault, offsetToCursor } from 'graphql-relay';
+
+import type { GetConnectionParamsModel } from '#lib-backend/database/utils/getConnection/getConnection.models';
+import type { ConnectionModel } from '#lib-shared/resource/utils/Connection/Connection.models';
 
 export const getConnection = async <TType, TForm, TRoot = undefined>({
   count,

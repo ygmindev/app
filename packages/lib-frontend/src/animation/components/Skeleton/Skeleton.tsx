@@ -1,10 +1,10 @@
-import { _Skeleton } from '@lib/frontend/animation/components/Skeleton/_Skeleton';
-import type { SkeletonPropsModel } from '@lib/frontend/animation/components/Skeleton/Skeleton.models';
-import { View } from '@lib/frontend/core/components/View/View';
-import type { SFCModel } from '@lib/frontend/core/core.models';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { palette } from '@lib/frontend/style/utils/palette/palette';
+import { _Skeleton } from '#lib-frontend/animation/components/Skeleton/_Skeleton';
+import type { SkeletonPropsModel } from '#lib-frontend/animation/components/Skeleton/Skeleton.models';
+import { View } from '#lib-frontend/core/components/View/View';
+import type { SFCModel } from '#lib-frontend/core/core.models';
+import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
+import { palette } from '#lib-frontend/style/utils/palette/palette';
 
 export const Skeleton: SFCModel<SkeletonPropsModel> = ({ children, ...props }) => {
   const theme = useTheme();

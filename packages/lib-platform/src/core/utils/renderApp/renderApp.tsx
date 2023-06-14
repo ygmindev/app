@@ -1,9 +1,10 @@
-import type { FCModel } from '@lib/frontend/core/core.models';
+import type { FCModel } from '#lib-frontend/core/core.models';
+import { AppRegistry } from 'react-native-web';
+
 import type {
   RenderAppModel,
   RenderAppParamsModel,
-} from '@lib/platform/core/utils/renderApp/renderApp.models';
-import { AppRegistry } from 'react-native-web';
+} from '#lib-platform/core/utils/renderApp/renderApp.models';
 
 export const renderApp = ({
   additionalProviders,
@@ -16,12 +17,12 @@ export const renderApp = ({
   return { element, getCss: getStyleElement };
 };
 
-// import type { FCModel } from '@lib/frontend/core/core.models';
-// import { Root } from '@lib/frontend/root/containers/Root/Root';
+// import type { FCModel } from '#lib-frontend/core/core.models';
+// import { Root } from '#lib-frontend/root/containers/Root/Root';
 // import type {
 //   RenderAppModel,
 //   RenderAppParamsModel,
-// } from '@lib/platform/core/utils/renderApp/renderApp.models';
+// } from '#lib-platform/core/utils/renderApp/renderApp.models';
 // import { AppRegistry } from 'react-native-web';
 
 // export const renderApp = ({

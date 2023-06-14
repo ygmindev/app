@@ -1,12 +1,13 @@
+import isPlainObject from 'lodash/isPlainObject';
+import map from 'lodash/map';
+
 import type {
   GraphQlFragmentFieldModel,
   GraphQlQueryModel,
   GraphQlQueryParamsFieldsModel,
   GraphQlQueryParamsModel,
-} from '@lib/frontend/http/utils/graphQlQuery/graphQlQuery.models';
-import { trimDeep } from '@lib/shared/core/utils/trimDeep/trimDeep';
-import isPlainObject from 'lodash/isPlainObject';
-import map from 'lodash/map';
+} from '#lib-frontend/http/utils/graphQlQuery/graphQlQuery.models';
+import { trimDeep } from '#lib-shared/core/utils/trimDeep/trimDeep';
 
 const getGraphQlFields = <TType extends unknown>(
   fields: GraphQlQueryParamsFieldsModel<TType> | GraphQlFragmentFieldModel<TType>,

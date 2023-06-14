@@ -1,11 +1,11 @@
 import type {
   DropdownPropsModel,
   DropdownRefModel,
-} from '@lib/frontend/core/components/Dropdown/Dropdown.models';
-import type { PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
-import type { TranslatableOptionModel } from '@lib/frontend/core/core.models';
-import type { StringFieldPropsModel } from '@lib/frontend/form/form.models';
-import type { TranslatableTextModel } from '@lib/frontend/locale/locale.models';
+} from '#lib-frontend/core/components/Dropdown/Dropdown.models';
+import type { PressablePropsModel } from '#lib-frontend/core/components/Pressable/Pressable.models';
+import type { TranslatableOptionModel } from '#lib-frontend/core/core.models';
+import type { StringFieldPropsModel } from '#lib-frontend/form/form.models';
+import type { TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import type { ReactElement, ReactNode } from 'react';
 
 export interface MenuRefModel extends DropdownRefModel {}

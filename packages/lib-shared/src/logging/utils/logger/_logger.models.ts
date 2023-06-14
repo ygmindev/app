@@ -1,4 +1,4 @@
-import type { LogModel } from '@lib/shared/logging/utils/logger/logger.models';
+import type { LogModel } from '#lib-shared/logging/utils/logger/logger.models';
 
 export interface _LoggerModel {
   _debug: LogModel;

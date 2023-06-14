@@ -1,12 +1,13 @@
-import type {
-  _UseSessionModel,
-  _UseSessionParamsModel,
-} from '@lib/frontend/auth/hooks/useSession/_useSession.models';
-import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
-import { HTTP_STATUS_CODE } from '@lib/shared/http/errors/HttpError/HttpError.constants';
+import { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
+import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
 import type { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import firebaseAuth from '@react-native-firebase/auth';
 import type { AuthError } from 'firebase/auth';
+
+import type {
+  _UseSessionModel,
+  _UseSessionParamsModel,
+} from '#lib-frontend/auth/hooks/useSession/_useSession.models';
 
 let auth: FirebaseAuthTypes.Module;
 

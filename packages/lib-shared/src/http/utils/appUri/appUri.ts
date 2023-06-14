@@ -1,5 +1,5 @@
-import type { AppUriParamsModel } from '@lib/shared/http/utils/appUri/appUri.models';
-import { uri } from '@lib/shared/http/utils/uri/uri';
+import type { AppUriParamsModel } from '#lib-shared/http/utils/appUri/appUri.models';
+import { uri } from '#lib-shared/http/utils/uri/uri';
 import toNumber from 'lodash/toNumber';
 
 export const appUri = (

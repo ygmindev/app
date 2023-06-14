@@ -1,8 +1,9 @@
+import Color from 'color';
+
 import type {
   _PaletteModel,
   _PaletteParamsModel,
-} from '@lib/frontend/style/utils/palette/_palette.models';
-import Color from 'color';
+} from '#lib-frontend/style/utils/palette/_palette.models';
 
 export const _palette = ({
   alpha = 1.0,

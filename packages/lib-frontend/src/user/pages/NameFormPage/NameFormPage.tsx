@@ -1,16 +1,16 @@
-import type { SFCModel } from '@lib/frontend/core/core.models';
-import { CenterLayout } from '@lib/frontend/core/layouts/CenterLayout/CenterLayout';
-import { FormContainer } from '@lib/frontend/form/containers/FormContainer/FormContainer';
-import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
-import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
-import { useUserResource } from '@lib/frontend/user/hooks/useUserResource/useUserResource';
-import { NAME_FORM_CONTAINER_PROPS } from '@lib/frontend/user/pages/NameFormPage/NameFormPage.constants';
-import type { NameFormPagePropsModel } from '@lib/frontend/user/pages/NameFormPage/NameFormPage.models';
-import { PERSONAL } from '@lib/frontend/user/user.constants';
-import { ACCOUNT } from '@lib/shared/user/user.constants';
+import type { SFCModel } from '#lib-frontend/core/core.models';
+import { CenterLayout } from '#lib-frontend/core/layouts/CenterLayout/CenterLayout';
+import { FormContainer } from '#lib-frontend/form/containers/FormContainer/FormContainer';
+import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
+import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
+import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
+import { useUserResource } from '#lib-frontend/user/hooks/useUserResource/useUserResource';
+import { NAME_FORM_CONTAINER_PROPS } from '#lib-frontend/user/pages/NameFormPage/NameFormPage.constants';
+import type { NameFormPagePropsModel } from '#lib-frontend/user/pages/NameFormPage/NameFormPage.models';
+import { PERSONAL } from '#lib-frontend/user/user.constants';
+import { ACCOUNT } from '#lib-shared/user/user.constants';
 
 export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...props }) => {
   const { t } = useTranslation();

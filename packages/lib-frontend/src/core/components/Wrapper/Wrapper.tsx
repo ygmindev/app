@@ -1,22 +1,23 @@
-import { AnimatableView } from '@lib/frontend/animation/components/AnimatableView/AnimatableView';
-import { View } from '@lib/frontend/core/components/View/View';
-import type {
-  WrapperPropsModel,
-  WrapperRefModel,
-} from '@lib/frontend/core/components/Wrapper/Wrapper.models';
-import type { RSFCModel } from '@lib/frontend/core/core.models';
-import { isFragment } from '@lib/frontend/core/utils/isFragment/isFragment';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
-import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
-import { spacingStyler } from '@lib/frontend/style/utils/styler/spacingStyler/spacingStyler';
-import { viewStyler } from '@lib/frontend/style/utils/styler/viewStyler/viewStyler';
-import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import reduce from 'lodash/reduce';
 import type { ReactElement, ReactNode } from 'react';
 import { Children, cloneElement, createElement, forwardRef, isValidElement, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
+
+import { AnimatableView } from '#lib-frontend/animation/components/AnimatableView/AnimatableView';
+import { View } from '#lib-frontend/core/components/View/View';
+import type {
+  WrapperPropsModel,
+  WrapperRefModel,
+} from '#lib-frontend/core/components/Wrapper/Wrapper.models';
+import type { RSFCModel } from '#lib-frontend/core/core.models';
+import { isFragment } from '#lib-frontend/core/utils/isFragment/isFragment';
+import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
+import { THEME_SIZE } from '#lib-frontend/style/style.constants';
+import { FLEX_ALIGN } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import { spacingStyler } from '#lib-frontend/style/utils/styler/spacingStyler/spacingStyler';
+import { viewStyler } from '#lib-frontend/style/utils/styler/viewStyler/viewStyler';
+import { variableName } from '#lib-shared/core/utils/variableName/variableName';
 
 export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef(
   ({ animation, children, isCenter, isDistribute, isRowAlign, spacing, ...props }, ref) => {

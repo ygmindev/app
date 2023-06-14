@@ -1,8 +1,8 @@
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR, THEME_ROLE } from '@lib/frontend/style/style.constants';
-import { backgroundStyler } from '@lib/frontend/style/utils/styler/backgroundStyler/backgroundStyler';
-import { renderHook } from '@lib/frontend/test/utils/renderHook/renderHook';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
+import { THEME_COLOR, THEME_ROLE } from '#lib-frontend/style/style.constants';
+import { backgroundStyler } from '#lib-frontend/style/utils/styler/backgroundStyler/backgroundStyler';
+import { renderHook } from '#lib-frontend/test/utils/renderHook/renderHook';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ backgroundStyler });
 

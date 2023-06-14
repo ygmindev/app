@@ -1,8 +1,9 @@
+import { fireEvent } from '@testing-library/react';
+
 import type {
   _HoverInModel,
   _HoverInParamsModel,
-} from '@lib/frontend/test/utils/hoverIn/_hoverIn.models';
-import { fireEvent } from '@testing-library/react';
+} from '#lib-frontend/test/utils/hoverIn/_hoverIn.models';
 
 export const _hoverIn = (element: _HoverInParamsModel): _HoverInModel => {
   fireEvent.mouseDown(element as unknown as Element);

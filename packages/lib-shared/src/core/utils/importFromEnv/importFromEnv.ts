@@ -1,11 +1,12 @@
-import { extensions } from '@lib/platform/core/utils/extensions/extensions';
-import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
+import { NotFoundError } from '#lib-shared/core/errors/NotFoundError/NotFoundError';
 import type {
   ImportFromEnvModel,
   ImportFromEnvParamsModel,
-} from '@lib/shared/core/utils/importFromEnv/importFromEnv.models';
-import { resolveFirst } from '@lib/shared/core/utils/resolveFirst/resolveFirst';
+} from '#lib-shared/core/utils/importFromEnv/importFromEnv.models';
+import { resolveFirst } from '#lib-shared/core/utils/resolveFirst/resolveFirst';
 import trim from 'lodash/trim';
+
+import { extensions } from '#lib-platform/core/utils/extensions/extensions';
 
 export const importFromEnv = async <TType>(
   params: ImportFromEnvParamsModel,

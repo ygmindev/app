@@ -1,6 +1,6 @@
-import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
-import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { fromExecutable } from '#lib-backend/file/utils/fromExecutable/fromExecutable';
+import { fromModules } from '#lib-backend/file/utils/fromModules/fromModules';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ fromExecutable });
 

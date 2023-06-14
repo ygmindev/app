@@ -1,5 +1,6 @@
-import type { ChildrenPropsModel } from '@lib/frontend/core/core.models';
 import type { ComponentType, ReactElement } from 'react';
+
+import type { ChildrenPropsModel } from '#lib-frontend/core/core.models';
 
 export interface _RenderParamsModel {
   Wrapper?: ComponentType<ChildrenPropsModel<ReactElement>>;

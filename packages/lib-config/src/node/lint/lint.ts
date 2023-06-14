@@ -1,11 +1,12 @@
-import { fromBuild } from '@lib/backend/file/utils/fromBuild/fromBuild';
-import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
-import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { packages } from '@lib/backend/file/utils/packages/packages';
-import { _lint } from '@lib/config/node/lint/_lint';
-import type { _LintConfigModel, LintConfigModel } from '@lib/config/node/lint/lint.models';
+import { _lint } from '#lib-config/node/lint/_lint';
+import type { _LintConfigModel, LintConfigModel } from '#lib-config/node/lint/lint.models';
+
+import { fromBuild } from '#lib-backend/file/utils/fromBuild/fromBuild';
+import { fromExecutable } from '#lib-backend/file/utils/fromExecutable/fromExecutable';
+import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
+import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
+import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
+import { packages } from '#lib-backend/file/utils/packages/packages';
 
 export const lintCommand = (fix?: boolean): string => {
   const configF = config();

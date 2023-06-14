@@ -1,4 +1,4 @@
-import type { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
+import type { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 
 export type EnvironmentModel = `${ENVIRONMENT}`;
 

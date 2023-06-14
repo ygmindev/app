@@ -1,7 +1,7 @@
-import type { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import type { ElementStateModel, ElementStatePropsModel } from '@lib/frontend/core/core.models';
-import type { StyleModel, StylePropsModel, ViewStyleModel } from '@lib/frontend/style/style.models';
-import type { CallableModel } from '@lib/shared/core/core.models';
+import type { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import type { ElementStateModel, ElementStatePropsModel } from '#lib-frontend/core/core.models';
+import type { StyleModel, StylePropsModel, ViewStyleModel } from '#lib-frontend/style/style.models';
+import type { CallableModel } from '#lib-shared/core/core.models';
 
 export interface AnimationModel<
   TStyle extends StyleModel = ViewStyleModel,

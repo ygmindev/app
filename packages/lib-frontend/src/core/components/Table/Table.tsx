@@ -1,18 +1,18 @@
-import { config } from '@lib/config/style/css/css.ag-grid';
-import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
-import { Skeleton } from '@lib/frontend/animation/components/Skeleton/Skeleton';
-import { _Table } from '@lib/frontend/core/components/Table/_Table';
+import { config } from '#lib-config/style/css/css.ag-grid';
+import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
+import { Skeleton } from '#lib-frontend/animation/components/Skeleton/Skeleton';
+import { _Table } from '#lib-frontend/core/components/Table/_Table';
 import type {
   TableColumnModel,
   TablePropsModel,
   TableRefModel,
-} from '@lib/frontend/core/components/Table/Table.models';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import type { SFCPropsModel } from '@lib/frontend/core/core.models';
-import { GlobalStyle } from '@lib/frontend/style/components/GlobalStyle/GlobalStyle';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+} from '#lib-frontend/core/components/Table/Table.models';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import type { SFCPropsModel } from '#lib-frontend/core/core.models';
+import { GlobalStyle } from '#lib-frontend/style/components/GlobalStyle/GlobalStyle';
+import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import type { ForwardedRef } from 'react';
 import { forwardRef, useState } from 'react';
 

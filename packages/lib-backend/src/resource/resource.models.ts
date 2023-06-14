@@ -1,4 +1,4 @@
-import type { ConstructorModel } from '@lib/shared/core/core.models';
+import type { ConstructorModel } from '#lib-shared/core/core.models';
 
 export type ResourceConstructorModel<TType> = TType extends Array<infer TElement>
   ? Array<ConstructorModel<TElement>>

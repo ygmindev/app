@@ -1,5 +1,5 @@
-import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
-import type { MergeParamsModel } from '@lib/shared/core/utils/merge/merge.models';
+import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
+import type { MergeParamsModel } from '#lib-shared/core/utils/merge/merge.models';
 import isArray from 'lodash/isArray';
 import isPlainObject from 'lodash/isPlainObject';
 import mergeWith from 'lodash/mergeWith';

@@ -1,9 +1,10 @@
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+
 import type {
   _UseQueryModel,
   _UseQueryParamsModel,
-} from '@lib/frontend/core/hooks/useQuery/_useQuery.models';
-import { debounce } from '@lib/shared/core/utils/debounce/debounce';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+} from '#lib-frontend/core/hooks/useQuery/_useQuery.models';
+import { debounce } from '#lib-shared/core/utils/debounce/debounce';
 
 export const _useQuery = <TType,>({
   cache,

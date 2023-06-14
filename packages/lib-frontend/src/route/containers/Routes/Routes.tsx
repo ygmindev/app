@@ -1,12 +1,12 @@
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import type { SFCModel } from '@lib/frontend/core/core.models';
-import { Route } from '@lib/frontend/route/components/Route/Route';
-import { _Routes } from '@lib/frontend/route/containers/Routes/_Routes';
-import type { RoutesPropsModel } from '@lib/frontend/route/containers/Routes/Routes.models';
-import type { RouteModel } from '@lib/frontend/route/route.models';
-import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import type { SFCModel } from '#lib-frontend/core/core.models';
+import { Route } from '#lib-frontend/route/components/Route/Route';
+import { _Routes } from '#lib-frontend/route/containers/Routes/_Routes';
+import type { RoutesPropsModel } from '#lib-frontend/route/containers/Routes/Routes.models';
+import type { RouteModel } from '#lib-frontend/route/route.models';
+import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
+import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import trimEnd from 'lodash/trimEnd';
 import { useMemo } from 'react';
 

@@ -1,6 +1,6 @@
-import { withEntity } from '@lib/backend/resource/decorators/withEntity/withEntity';
-import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { withEntity } from '#lib-backend/resource/decorators/withEntity/withEntity';
+import { NotFoundError } from '#lib-shared/core/errors/NotFoundError/NotFoundError';
+import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ withEntity });
 

@@ -1,5 +1,5 @@
-import type { SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
-import type { CallablePromiseModel } from '@lib/shared/core/core.models';
+import type { SignInTokenModel } from '#lib-shared/auth/resources/SignIn/SignIn.models';
+import type { CallablePromiseModel } from '#lib-shared/core/core.models';
 
 export interface _UseSessionParamsModel {
   onError?(error: Error): void;

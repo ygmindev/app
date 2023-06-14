@@ -1,10 +1,11 @@
-import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
-import { config as configBase } from '@lib/config/locale/internationalize/internationalize.base';
-import { _parser } from '@lib/config/locale/parser/_parser';
+import { config as configBase } from '#lib-config/locale/internationalize/internationalize.base';
+import { _parser } from '#lib-config/locale/parser/_parser';
 import type {
   _ParserConfigModel,
   ParserConfigModel,
-} from '@lib/config/locale/parser/parser.models';
+} from '#lib-config/locale/parser/parser.models';
+
+import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
 
 export const config: ParserConfigModel = {
   languages: configBase.languages,

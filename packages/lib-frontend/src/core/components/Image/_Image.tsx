@@ -1,5 +1,5 @@
-import type { _ImagePropsModel } from '@lib/frontend/core/components/Image/_Image.models';
-import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
+import type { _ImagePropsModel } from '#lib-frontend/core/components/Image/_Image.models';
+import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
 import type { ImageProps } from 'react-native';
 import { Image as NativeImage } from 'react-native';
 

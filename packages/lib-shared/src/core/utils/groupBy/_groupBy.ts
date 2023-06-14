@@ -1,8 +1,9 @@
+import groupBy from 'lodash/groupBy';
+
 import type {
   _GroupByModel,
   _GroupByParamsModel,
-} from '@lib/shared/core/utils/groupBy/_groupBy.models';
-import groupBy from 'lodash/groupBy';
+} from '#lib-shared/core/utils/groupBy/_groupBy.models';
 
 export const _groupBy = <TType>(
   ...[value, by, { isSort } = { isSort: true }]: _GroupByParamsModel<TType>
