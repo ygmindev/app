@@ -5,9 +5,9 @@ import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathnam
 import { screen } from '#lib-frontend/test/utils/screen/screen';
 import type { ScreenModel } from '#lib-frontend/test/utils/screen/screen.models';
 // import { OTP_STATIC } from '#lib-shared/auth/resources/Otp/Otp.constants';
-import { appUri } from '#lib-shared/http/utils/appUri/appUri';
+import { uri } from '#lib-shared/http/utils/uri/uri';
 
-const URI = appUri();
+const URI = uri();
 
 describe('sign in', () => {
   let screenF: ScreenModel;

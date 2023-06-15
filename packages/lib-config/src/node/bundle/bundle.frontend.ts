@@ -22,18 +22,18 @@ export const config: BundleConfigModel = () =>
 
         externals: [
           // 'history',
+          'countries-list',
+          'css-in-js-utils',
           'moti',
+          'inline-style-prefixer',
           'react/jsx-runtime',
           'react-dom',
           'react-native',
           'redux-persist',
+          'react-use',
+          'thenby',
           ...fromGlobs({
-            globs: [
-              '@expo',
-              // '@react-native*',
-              'expo-*',
-              'react-native-!(codegen|gradle-plugin)',
-            ],
+            globs: ['@expo', 'expo-*', 'react-native-!(codegen|gradle-plugin)'],
             root: fromModules(),
           }),
         ],

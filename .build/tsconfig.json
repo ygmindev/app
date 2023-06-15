@@ -36,9 +36,6 @@
       "#app-web/*": [
         "packages/app-web/src/*"
       ],
-      "#app-web-copy/*": [
-        "packages/app-web copy/src/*"
-      ],
       "#app-web-ete/*": [
         "packages/app-web-ete/src/*"
       ],

@@ -1,9 +1,9 @@
-import { mapValues } from 'lodash';
 import isArray from 'lodash/isArray';
 import isFunction from 'lodash/isFunction';
 import isPlainObject from 'lodash/isPlainObject';
 import keys from 'lodash/keys';
 import map from 'lodash/map';
+import mapValues from 'lodash/mapValues';
 import toString from 'lodash/toString';
 import type { Attributes, ComponentType, ReactElement } from 'react';
 import { createElement, isValidElement, useMemo } from 'react';

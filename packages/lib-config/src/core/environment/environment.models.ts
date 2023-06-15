@@ -7,14 +7,12 @@ export interface EnvironmentConfigModel {
   APP_FIREBASE_SENDER_ID: string;
   APP_FIREBASE_STORAGE_BUCKET: string;
   APP_FIREBASE_USE_EMULATOR: 'true' | 'false';
+  APP_HOST?: string;
+  APP_PORT?: string;
   APP_SERVER_API_HOST: string;
   APP_SERVER_API_PORT: string;
   APP_STRIPE_TOKEN: string;
   APP_USERNAME: string;
-  APP_WEB_ADMIN_HOST: string;
-  APP_WEB_ADMIN_PORT: string;
-  APP_WEB_HOST: string;
-  APP_WEB_PORT: string;
   ENV_NAME: string;
   ENV_PLATFORM: string;
   NODE_ENV: 'development' | 'test' | 'production';

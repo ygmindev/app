@@ -58,7 +58,7 @@ export const _exportRendererServer = ({
           [LOCALE]: i18n ? { i18n, store: getLocaleStoreFromI18n({ i18n }) } : undefined,
         };
         return {
-          context: ssrContextKeys && pick(pageContext, ssrContextKeys),
+          context: pick(pageContext, ssrContextKeys),
           enableEagerStreaming: true,
           redirectTo: pageContext.route?.redirect,
         };

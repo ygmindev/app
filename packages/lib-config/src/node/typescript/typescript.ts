@@ -14,6 +14,8 @@ export const config: TypescriptConfigModel = {
 
   paths: {
     '#build/*': toRelative({ from: fromRoot(), to: fromBuild('/*') }),
+    // 'css-in-js-utils/lib/*': 'node_modules/css-in-js-utils/es/*',
+    // 'inline-style-prefixer/lib/*': 'node_modules/inline-style-prefixer/es/*',
     'redux-persist/integration/*': 'node_modules/redux-persist/types/integration/*',
   },
 

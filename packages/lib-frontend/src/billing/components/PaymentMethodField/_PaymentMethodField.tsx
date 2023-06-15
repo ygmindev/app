@@ -17,7 +17,7 @@ import type {
 } from '#lib-shared/billing/resources/Card/Card.models';
 import { PAYMENT_METHOD_TYPE } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
-import { appUri } from '#lib-shared/http/utils/appUri/appUri';
+import { uri } from '#lib-shared/http/utils/uri/uri';
 
 const stripe = loadStripe(process.env.APP_STRIPE_TOKEN);
 
@@ -86,7 +86,11 @@ const StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forwa
         const { error, setupIntent } = await stripeClient.confirmSetup({
           confirmParams: {
             expand: ['payment_method'],
-            return_url: appUri({ path: `$/${REDIRECT}` }),
+            return_url: uri({
+              host: process.env.APP_HOST,
+              path: `$/${REDIRECT}`,
+              port: process.env.APP_PORT,
+            }),
           },
           elements,
           redirect: 'if_required',

@@ -5,8 +5,10 @@ import type { _BundleConfigModel } from '#lib-config/node/bundle/bundle.models';
 import type { RootContextModel } from '#lib-frontend/root/root.models';
 import type { DeepKeyModel } from '#lib-shared/core/core.models';
 
-export interface WebConfigModel {
+export type WebConfigModel = ConfigDynamicModel<{
   bundleConfig: _BundleConfigModel;
+
+  configFile: string;
 
   isSsr?: boolean;
 
@@ -14,7 +16,7 @@ export interface WebConfigModel {
 
   rootId: string;
 
-  ssrContextKeys?: Array<DeepKeyModel<RootContextModel>>;
-}
+  ssrContextKeys: Array<DeepKeyModel<RootContextModel>>;
+}>;
 
 export type _WebConfigModel = ConfigDynamicModel<UserConfig>;

@@ -1,4 +1,4 @@
-import { find } from 'lodash';
+import find from 'lodash/find';
 import { useMemo } from 'react';
 
 import type { SFCModel } from '#lib-frontend/core/core.models';

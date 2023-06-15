@@ -11,7 +11,7 @@ import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathnam
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
-const getRoute = ({ pathname, ...route }: RouteModel, depth = 0): RouteModel => {
+const getRoute = ({ pathname = '/', ...route }: RouteModel, depth = 0): RouteModel => {
   const isLeaf = !route.routes;
   const root = trimEnd(pathname, '/*');
   const pathnameF = trimPathname(isLeaf ? pathname : `${root}/*`);

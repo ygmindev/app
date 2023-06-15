@@ -1,6 +1,8 @@
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
-import commonjs from '@rollup/plugin-commonjs';
+import type { RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
+import { babel } from '@rollup/plugin-babel';
 import inject from '@rollup/plugin-inject';
+import resolve from '@rollup/plugin-node-resolve';
 import react from '@vitejs/plugin-react-swc';
 import { getTsconfig } from 'get-tsconfig';
 import reduce from 'lodash/reduce';
@@ -25,6 +27,7 @@ import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 
 export const _bundle = ({
   aliases,
+  babelConfig,
   define,
   entry,
   envPrefix,
@@ -41,10 +44,12 @@ export const _bundle = ({
   const isReact = ([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>).includes(
     platform,
   );
+  const babelConfigF = babelConfig && babelConfig();
   const config: ReturnTypeModel<_BundleConfigModel> = {
     build: {
       commonjsOptions: {
-        include: externals,
+        defaultIsModuleExports: true,
+        esmExternals: true,
         requireReturnsDefault: 'auto',
         transformMixedEsModules: true,
       },
@@ -52,7 +57,7 @@ export const _bundle = ({
       rollupOptions: {
         ...(entry ? { input: entry } : {}),
 
-        plugins: [commonjs()],
+        plugins: [resolve()],
       },
       watch:
         process.env.NODE_ENV === ENVIRONMENT.DEVELOPMENT && watch ? { include: watch } : undefined,
@@ -106,18 +111,14 @@ export const _bundle = ({
 
       provide && inject(provide),
 
-      // dynamicImport(),
-
-      // process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && dynamicImportVars(),
-
       viteCommonjs(),
 
-      // _babelConfig &&
-      //   babel({
-      //     ..._babelConfig,
-      //     babelHelpers: 'runtime',
-      //     skipPreflightCheck: true,
-      //   } as RollupBabelInputPluginOptions),
+      babelConfigF &&
+        babel({
+          ...babelConfigF,
+          babelHelpers: 'runtime',
+          skipPreflightCheck: true,
+        } as RollupBabelInputPluginOptions),
 
       process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && visualizer(),
 

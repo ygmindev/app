@@ -10,7 +10,6 @@ import type {
 import { PLATFORM } from '#lib-platform/core/core.constants';
 import type { EnvironmentModel } from '#lib-shared/environment/environment.models';
 import { setEnvironment } from '#lib-shared/environment/utils/setEnvironment/setEnvironment';
-import { appUri } from '#lib-shared/http/utils/appUri/appUri';
 
 export const config: ServerlessConfigModel = () => ({
   bundleConfig: _bundleConfig,
@@ -35,7 +34,8 @@ export const config: ServerlessConfigModel = () => ({
     cors: {
       allowedHeaders: ['*'],
 
-      allowedOrigins: ['WEB', 'WEB_LIBRARY'].map((name) => appUri({ name })),
+      // TODO: fix in prod
+      allowedOrigins: ['*'],
     },
 
     memory: 128,
