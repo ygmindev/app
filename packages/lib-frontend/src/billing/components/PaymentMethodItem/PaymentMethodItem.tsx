@@ -20,7 +20,6 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import type { SFCModel } from '#lib-frontend/core/core.models';
 import { FORM } from '#lib-frontend/form/form.constants';
-import { APP_URI } from '#lib-frontend/http/http.constants';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
@@ -80,7 +79,7 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
             return (
               <Image
                 isAutoSize
-                src={`${APP_URI}/images/brands/${brand}.png`}
+                src={`/images/brands/${brand}.png`}
                 width={PAYMENT_METHOD_ITEM_ICON_WIDTH}
               />
             );

@@ -17,5 +17,5 @@ export const resolveFirst = async <TType>(
       errors.push(error);
     }
   }
-  throw new Error();
+  throw new Error(errors.join('\n'));
 };

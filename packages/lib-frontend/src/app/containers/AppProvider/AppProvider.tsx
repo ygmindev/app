@@ -9,8 +9,6 @@ import { debounce } from '#lib-shared/core/utils/debounce/debounce';
 export const AppProvider: SFCModel<AppProviderPropsModel> = ({ children }) => {
   const actions = useActions();
 
-  console.warn('HERE');
-
   display.useLayoutEffect(() => {
     const update: CallableModel = debounce(
       () => actions?.app.dimensionSet(display.getDimension()),

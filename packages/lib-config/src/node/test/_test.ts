@@ -68,7 +68,7 @@ export const _test = ({
 
     rootDir: root,
 
-    roots: ['<rootDir>', fromConfig('node/test')],
+    roots: ['<rootDir>', fromRoot(), fromConfig('node/test')],
 
     setupFilesAfterEnv: [fromConfig('node/test/_initialize.ts')],
 

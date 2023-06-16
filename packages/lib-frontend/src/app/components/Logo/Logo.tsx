@@ -4,7 +4,6 @@ import { Image } from '#lib-frontend/core/components/Image/Image';
 import { Link } from '#lib-frontend/core/components/Link/Link';
 import type { LinkPropsModel } from '#lib-frontend/core/components/Link/Link.models';
 import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
-import { APP_URI } from '#lib-frontend/http/http.constants';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { variableName } from '#lib-shared/core/utils/variableName/variableName';
 
@@ -18,7 +17,8 @@ export const Logo = composeComponent<LogoPropsModel, LinkPropsModel>({
         <Image
           height={height}
           isAutoSize
-          src={`${APP_URI}/images/logos/logo.png`}
+          // TODO: to config?
+          src="/images/logos/logo.png"
           width={width}
         />
       ),

@@ -14,7 +14,8 @@ export const build: TaskParamsModel = {
 
   name: 'build',
 
-  onBefore: ['build-json-typescript', 'build-json-lint'],
+  // TODO: fix
+  // onBefore: ['build-json-typescript'],
 
   task: async ({ root }) => {
     const { configFile } = config();

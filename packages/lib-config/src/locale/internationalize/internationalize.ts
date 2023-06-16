@@ -8,7 +8,6 @@ import type {
   _InternationalizeConfigModel,
   InternationalizeConfigModel,
 } from '#lib-config/locale/internationalize/internationalize.models';
-import { APP_URI } from '#lib-frontend/http/http.constants';
 import { INTERNATIONALIZATION_DETECTION } from '#lib-frontend/locale/locale.constants';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
@@ -18,7 +17,7 @@ export const config: InternationalizeConfigModel = merge(
     {
       caches: [INTERNATIONALIZATION_DETECTION.COOKIE, INTERNATIONALIZATION_DETECTION.LOCAL_STORAGE],
 
-      loadPath: APP_URI,
+      loadPath: '',
 
       modules: [I18NextHttpBackend, I18nextBrowserLanguageDetector] as Array<Module>,
     },

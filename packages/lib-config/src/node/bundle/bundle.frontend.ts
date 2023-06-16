@@ -21,13 +21,11 @@ export const config: BundleConfigModel = () =>
         envPrefix: ['APP_'],
 
         externals: [
-          // 'history',
           'countries-list',
           'css-in-js-utils',
           'moti',
           'inline-style-prefixer',
-          'react/jsx-runtime',
-          'react-dom',
+          // 'react/jsx-runtime',
           'react-native',
           'redux-persist',
           'react-use',

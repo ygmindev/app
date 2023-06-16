@@ -1,5 +1,6 @@
 import isFunction from 'lodash/isFunction';
 
+import { fromConfig } from '#lib-backend/file/utils/fromConfig/fromConfig';
 import type {
   ImportConfigModel,
   ImportConfigParamsModel,
@@ -17,7 +18,7 @@ export const importConfig = async <TParams, TResult = undefined>(
   params: ImportConfigParamsModel,
 ): ImportConfigModel<TParams, TResult> => {
   const { _config, config } = await importFromEnv<{ _config: TResult; config: TParams }>(
-    `#lib-config/${params}`,
+    fromConfig(params),
   );
   return {
     _config: (await loadConfig(_config)) as ReturnTypeModel<TResult>,

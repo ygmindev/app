@@ -5,7 +5,7 @@ const onBeforePrerenderStart = async (_pageContext: PageContextBuiltIn): Promise
   return [
     {
       pageContext: { pageProps: {} },
-      url: '/test',
+      url: '/deleteme',
     },
   ];
 };

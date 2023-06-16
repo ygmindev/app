@@ -10,7 +10,7 @@ import toNumber from 'lodash/toNumber';
 import { createServer } from 'vite';
 
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
-import { _config } from '#lib-config/locale/internationalize/internationalize.ssr';
+import { _config } from '#lib-config/locale/internationalize/internationalize.node';
 import { config as webConfig } from '#lib-config/platform/web/web';
 import type { CookieOptionModel } from '#lib-frontend/state/state.models';
 import { renderPage } from '#lib-platform/web/utils/renderPage/renderPage';

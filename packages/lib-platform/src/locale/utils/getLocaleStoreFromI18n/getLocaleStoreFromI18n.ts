@@ -9,8 +9,8 @@ export const getLocaleStoreFromI18n = ({
   if (i18n.reportNamespaces) {
     const namespaces = i18n.reportNamespaces.getUsedNamespaces();
     const { data } = i18n.services.resourceStore;
-    const { languages } = i18n;
-    return languages.reduce(
+    console.warn(data);
+    return i18n.languages.reduce(
       (result, lang) => ({
         ...result,
         [lang]: namespaces.reduce((nsResult, ns) => ({ ...nsResult, [ns]: data[lang][ns] }), {}),

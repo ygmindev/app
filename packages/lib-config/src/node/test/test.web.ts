@@ -11,6 +11,7 @@ export const config: TestConfigModel = () =>
       {
         bundleConfig,
       },
+
       configFrontend(),
     ],
     MERGE_STRATEGY.DEEP_PREPEND,
