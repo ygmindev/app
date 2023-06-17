@@ -1,9 +1,9 @@
-import { isSsr } from '#lib-platform/core/utils/isSsr/isSsr';
+import { isServer } from '#lib-platform/core/utils/isServer/isServer';
 import type { CallableModel } from '#lib-shared/core/core.models';
 
 let isEnabled: boolean;
 
-if (!isSsr) {
+if (!isServer) {
   isEnabled = true;
   let lastTouchTimestamp = 0;
 

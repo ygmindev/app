@@ -1,10 +1,11 @@
-import { join, resolve } from 'path';
+import { join } from 'path';
 
 import type {
   FromRootModel,
   FromRootParamsModel,
 } from '#lib-backend/file/utils/fromRoot/fromRoot.models';
+import { getRoot } from '#lib-backend/file/utils/getRoot/getRoot';
 
-const ROOT_DIR = resolve(__dirname, '../../../../../..');
+console.warn(`###${getRoot()}`);
 
-export const fromRoot = (...paths: FromRootParamsModel): FromRootModel => join(ROOT_DIR, ...paths);
+export const fromRoot = (...paths: FromRootParamsModel): FromRootModel => join(getRoot(), ...paths);

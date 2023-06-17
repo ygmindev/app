@@ -1,5 +1,4 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
-import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 import type { Plugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
 import { filelocPlugin } from 'esbuild-plugin-fileloc';
@@ -11,15 +10,14 @@ import { PLATFORM } from '#lib-platform/core/core.constants';
 import type { ReturnTypeModel } from '#lib-shared/core/core.models';
 
 export const _plugins = ({
-  externals = [],
   platform,
-}: Pick<ReturnTypeModel<BundleConfigModel>, 'externals' | 'platform'>): Array<Plugin> =>
+  transpiles = [],
+}: Pick<ReturnTypeModel<BundleConfigModel>, 'transpiles' | 'platform'>): Array<Plugin> =>
   [
     esbuildDecorators({ tsconfig: fromWorking('tsconfig.json') }),
 
-    externals && esbuildCommonjs(externals),
-
-    nodeExternalsPlugin({ allowList: externals, packagePath: fromRoot('package.json') }),
+    platform === PLATFORM.NODE &&
+      nodeExternalsPlugin({ allowList: transpiles, packagePath: fromRoot('package.json') }),
 
     platform === PLATFORM.NODE && filelocPlugin(),
   ].filter(Boolean) as Array<Plugin>;

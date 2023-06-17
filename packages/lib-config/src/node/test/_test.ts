@@ -101,8 +101,8 @@ export const _test = ({
       ],
     },
 
-    transformIgnorePatterns: bundleConfigF.externals
-      ? [`node_modules/(?!(${bundleConfigF.externals.join('|')})/)`]
+    transformIgnorePatterns: bundleConfigF.transpiles
+      ? [`node_modules/(?!(${bundleConfigF.transpiles.join('|')})/)`]
       : [],
 
     watch: isWatch,

@@ -1,5 +1,4 @@
 import { fromModules } from '#lib-backend/file/utils/fromModules/fromModules';
-import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { _config as _babelConfig } from '#lib-config/node/babel/babel.base';
 import { _bundle } from '#lib-config/node/bundle/_bundle';
@@ -25,12 +24,12 @@ export const config: BundleConfigModel = () => ({
   tsconfigPath: fromWorking('tsconfig.json'),
 
   // TODO: watch is not really working
-  watch: [
-    fromPackages('asset-static/src/**/*'),
-    fromPackages('lib-config/src/**/*'),
-    fromPackages('lib-shared/src/**/*'),
-    fromWorking('src/**/*'),
-  ],
+  // watch: [
+  //   fromPackages('asset-static/src/**/*'),
+  //   fromPackages('lib-config/src/**/*'),
+  //   fromPackages('lib-shared/src/**/*'),
+  //   fromWorking('src/**/*'),
+  // ],
 });
 
 export const _config: _BundleConfigModel = () => _bundle(config());

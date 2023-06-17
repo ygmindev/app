@@ -1,5 +1,4 @@
 import { fromConfig } from '#lib-backend/file/utils/fromConfig/fromConfig';
-import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
 import { _config as _babelConfig } from '#lib-config/node/babel/babel.web';
 import { _bundle } from '#lib-config/node/bundle/_bundle';
 import { config as configFrontend } from '#lib-config/node/bundle/bundle.frontend';
@@ -25,7 +24,7 @@ export const config: BundleConfigModel = () =>
           requestAnimationFrame: fromConfig('node/bundle/aliases/requestAnimationFrame/index.js'),
         },
 
-        watch: [fromStatic('assets/**/*')],
+        // watch: [fromStatic('assets/**/*')],
       },
 
       configFrontend(),

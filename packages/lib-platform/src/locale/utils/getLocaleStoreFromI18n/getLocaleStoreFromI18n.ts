@@ -9,7 +9,6 @@ export const getLocaleStoreFromI18n = ({
   if (i18n.reportNamespaces) {
     const namespaces = i18n.reportNamespaces.getUsedNamespaces();
     const { data } = i18n.services.resourceStore;
-    console.warn(data);
     return i18n.languages.reduce(
       (result, lang) => ({
         ...result,

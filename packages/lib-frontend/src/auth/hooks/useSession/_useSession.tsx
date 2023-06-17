@@ -12,7 +12,7 @@ import type {
   _UseSessionModel,
   _UseSessionParamsModel,
 } from '#lib-frontend/auth/hooks/useSession/_useSession.models';
-import { isSsr } from '#lib-platform/core/utils/isSsr/isSsr';
+import { isServer } from '#lib-platform/core/utils/isServer/isServer';
 import type { SignInTokenModel } from '#lib-shared/auth/resources/SignIn/SignIn.models';
 import { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
@@ -26,7 +26,7 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
   },
 
   initialize: async (onAuth): Promise<void> => {
-    if (!isSsr && !getApps().length) {
+    if (!isServer && !getApps().length) {
       initializeApp({
         apiKey: process.env.APP_FIREBASE_API_KEY,
         appId: process.env.APP_FIREBASE_APP_ID,

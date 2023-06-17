@@ -5,7 +5,7 @@ import { fastifyMiddie } from '@fastify/middie';
 import { fastifyStatic } from '@fastify/static';
 import type { FastifyPluginCallback, FastifyRegisterOptions } from 'fastify';
 import { fastify } from 'fastify';
-import i18nextMiddleware from 'i18next-http-middleware';
+import { plugin as i18nextMiddleware } from 'i18next-http-middleware';
 import toNumber from 'lodash/toNumber';
 import { createServer } from 'vite';
 
@@ -32,24 +32,17 @@ export const _server = async ({
   const app = fastify();
   await app.register(fastifyMiddie);
   await app.register(fastifyCompress);
-  await app.register(fastifyStatic, {
-    prefix: `/${publicDir}/`,
-    root: fromStatic(publicDir),
-  });
+  await app.register(fastifyStatic, { prefix: `/${publicDir}/`, root: fromStatic(publicDir) });
   await app.register(fastifyCookie, {
     secret: process.env.SERVER_APP_SECRET,
   } as FastifyCookieOptions);
 
-  const { middlewares } = await createServer({
-    ...config,
-    root,
-    server: { middlewareMode: true },
-  });
+  const { middlewares } = await createServer({ ...config, root, server: { middlewareMode: true } });
 
   app.use(middlewares);
 
   app.register(
-    i18nextMiddleware.plugin as unknown as FastifyPluginCallback,
+    i18nextMiddleware as unknown as FastifyPluginCallback,
     { i18next: i18n } as FastifyRegisterOptions<Record<never, never>>,
   );
 
@@ -72,7 +65,6 @@ export const _server = async ({
         },
       },
     });
-
     if (redirect) {
       res.redirect(302, redirect);
     } else if (response) {

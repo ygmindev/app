@@ -5,14 +5,14 @@ import { useChange } from '#lib-frontend/core/hooks/useChange/useChange';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useTracking } from '#lib-frontend/tracking/hooks/useTracking/useTracking';
 import type { TrackingProviderPropsModel } from '#lib-frontend/tracking/providers/TrackingProvider/TrackingProvider.models';
-import { isSsr } from '#lib-platform/core/utils/isSsr/isSsr';
+import { isServer } from '#lib-platform/core/utils/isServer/isServer';
 
 export const TrackingProvider: SFCModel<TrackingProviderPropsModel> = ({ children }) => {
   const { identify, initialize } = useTracking();
   const currentUser = useStore((state) => state.user.currentUser);
 
   useEffect(() => {
-    if (!isSsr) {
+    if (!isServer) {
       initialize(process.env.APP_AMPLITUDE_API_KEY);
     }
   }, [initialize]);

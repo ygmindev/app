@@ -8,7 +8,7 @@ import type {
 import { CORE } from '#lib-shared/core/core.constants';
 
 export const config: InternationalizeConfigModel = {
-  filename: '/locales/{{lng}}/{{ns}}.json',
+  filename: 'locales/{{lng}}/{{ns}}.json',
 
   isSuspense: true,
 

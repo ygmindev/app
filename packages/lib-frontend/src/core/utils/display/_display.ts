@@ -1,24 +1,24 @@
 import { useEffect, useLayoutEffect } from 'react';
 
 import type { _DisplayModel } from '#lib-frontend/core/utils/display/_display.models';
-import { isSsr } from '#lib-platform/core/utils/isSsr/isSsr';
+import { isServer } from '#lib-platform/core/utils/isServer/isServer';
 
 const subscribeEvent = <TType extends Event>(
   eventName: string,
   cb: (event: TType) => void,
 ): void => {
-  isSsr ? null : window.addEventListener(eventName as keyof WindowEventMap, cb as never);
+  isServer ? null : window.addEventListener(eventName as keyof WindowEventMap, cb as never);
 };
 
 const unsubscribeEvent = <TType extends Event>(
   eventName: string,
   cb: (event: TType) => void,
 ): void => {
-  isSsr ? null : window.removeEventListener(eventName as keyof WindowEventMap, cb as never);
+  isServer ? null : window.removeEventListener(eventName as keyof WindowEventMap, cb as never);
 };
 
 export const _display: _DisplayModel = {
-  getDimension: () => (isSsr ? {} : { height: window.innerHeight, width: window.innerWidth }),
+  getDimension: () => (isServer ? {} : { height: window.innerHeight, width: window.innerWidth }),
   open: (uri, { height, onClose, onOpen, width }) => {
     const popup = window.open(
       uri,
@@ -36,5 +36,5 @@ export const _display: _DisplayModel = {
   unsubscribeEvent,
   unsubscribeMessage: (cb) => unsubscribeEvent('message', cb),
   unsubscribeResize: (cb) => unsubscribeEvent('resize', cb),
-  useLayoutEffect: isSsr ? useEffect : useLayoutEffect,
+  useLayoutEffect: isServer ? useEffect : useLayoutEffect,
 };

@@ -18,7 +18,9 @@ export const _web = ({
   return merge(
     [
       {
-        plugins: [isSsr && ssr({ prerender: { partial: true } })].filter(Boolean),
+        plugins: [
+          isSsr && ssr({ includeAssetsImportedByServer: true, prerender: { partial: true } }),
+        ].filter(Boolean),
 
         publicDir: toRelative({ from: fromWorking(), to: fromStatic(publicDir) }),
 

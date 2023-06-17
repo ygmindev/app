@@ -7,6 +7,7 @@ import react from '@vitejs/plugin-react-swc';
 import { getTsconfig } from 'get-tsconfig';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
+// import nodePolyfills from 'rollup-plugin-polyfill-node';
 import { visualizer } from 'rollup-plugin-visualizer';
 import type { PluginOption } from 'vite';
 import { searchForWorkspaceRoot } from 'vite';
@@ -32,12 +33,12 @@ export const _bundle = ({
   entry,
   envPrefix,
   extensions,
-  externals,
   mainFields,
   modulePaths,
   outDir,
   platform,
   provide,
+  transpiles,
   tsconfigPath,
   watch,
 }: ReturnTypeModel<BundleConfigModel>): ReturnTypeModel<_BundleConfigModel> => {
@@ -53,7 +54,9 @@ export const _bundle = ({
         requireReturnsDefault: 'auto',
         transformMixedEsModules: true,
       },
+
       outDir,
+
       rollupOptions: {
         ...(entry ? { input: entry } : {}),
 
@@ -85,7 +88,7 @@ export const _bundle = ({
 
         nodePaths: modulePaths,
 
-        plugins: _plugins({ externals, platform }),
+        plugins: _plugins({ platform, transpiles }),
 
         resolveExtensions: extensions,
 
@@ -96,7 +99,7 @@ export const _bundle = ({
         tsconfig: tsconfigPath,
       },
 
-      include: externals,
+      include: transpiles,
     },
 
     plugins: [
@@ -148,7 +151,7 @@ export const _bundle = ({
     server: { fs: { allow: [searchForWorkspaceRoot(fromRoot()), fromModules()] } },
 
     ssr: {
-      noExternal: externals,
+      noExternal: transpiles,
     },
   };
 

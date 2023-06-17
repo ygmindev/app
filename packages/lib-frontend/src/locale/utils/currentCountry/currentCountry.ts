@@ -1,8 +1,8 @@
 import type { CurrentCountryModel } from '#lib-frontend/locale/utils/currentCountry/currentCountry.models';
-import { isSsr } from '#lib-platform/core/utils/isSsr/isSsr';
+import { isServer } from '#lib-platform/core/utils/isServer/isServer';
 
 export const currentCountry = async (): CurrentCountryModel => {
-  if (isSsr) {
+  if (isServer) {
     return Promise.resolve(null);
   }
   const { _currentCountry } = await import(

@@ -11,6 +11,6 @@ export const _useTranslation = (ns: _UseTranslationParamsModel = []): _UseTransl
   return {
     currentLanguage: i18n.resolvedLanguage || config.languageDefault,
     isInitialized: ready,
-    t,
+    t: t as <TParams = undefined>(key: string, params?: TParams) => string,
   };
 };

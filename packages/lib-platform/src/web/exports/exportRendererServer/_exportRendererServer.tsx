@@ -1,5 +1,5 @@
 import pick from 'lodash/pick';
-import ReactDOMServer from 'react-dom/server';
+import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
 import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vite-plugin-ssr/server';
 
 import type { RootContextModel } from '#lib-frontend/root/root.models';
@@ -27,8 +27,8 @@ export const _exportRendererServer = ({
       [STATE]: { initialState: await store.getState() } as RootStateContextModel,
     };
     const { element, getCss } = render({ children: <Page {...pageProps} />, context: contextF });
-    const styleSheet = ReactDOMServer.renderToStaticMarkup(getCss());
-    const { pipe } = ReactDOMServer.renderToPipeableStream(element);
+    const styleSheet = renderToStaticMarkup(getCss());
+    const { pipe } = renderToPipeableStream(element);
     stampPipe(pipe, 'node-stream');
 
     // TODO: fill in description and title
@@ -52,9 +52,9 @@ export const _exportRendererServer = ({
       documentHtml,
 
       pageContext: async () => {
-        const i18n = context?.locale?.i18n;
+        const i18n = contextF?.locale?.i18n;
         const pageContext: RootContextModel = {
-          ...context,
+          ...contextF,
           [LOCALE]: i18n ? { i18n, store: getLocaleStoreFromI18n({ i18n }) } : undefined,
         };
         return {

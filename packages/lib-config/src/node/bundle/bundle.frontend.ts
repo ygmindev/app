@@ -1,6 +1,5 @@
 import { fromGlobs } from '#lib-backend/file/utils/fromGlobs/fromGlobs';
 import { fromModules } from '#lib-backend/file/utils/fromModules/fromModules';
-import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { _config as _babelConfig } from '#lib-config/node/babel/babel.frontend';
 import { _bundle } from '#lib-config/node/bundle/_bundle';
 import { config as configBase } from '#lib-config/node/bundle/bundle.base';
@@ -20,12 +19,13 @@ export const config: BundleConfigModel = () =>
 
         envPrefix: ['APP_'],
 
-        externals: [
+        transpiles: [
           'countries-list',
           'css-in-js-utils',
           'moti',
           'inline-style-prefixer',
-          // 'react/jsx-runtime',
+          'react/jsx-runtime',
+          'react-dom/server',
           'react-native',
           'redux-persist',
           'react-use',
@@ -36,7 +36,7 @@ export const config: BundleConfigModel = () =>
           }),
         ],
 
-        watch: [fromPackages('lib-frontend/src/**/*')],
+        // watch: [fromPackages('lib-frontend/src/**/*')],
       },
 
       configBase(),

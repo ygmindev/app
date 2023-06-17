@@ -17,8 +17,6 @@ export type BundleConfigModel = ConfigDynamicModel<{
 
   extensions: Array<string>;
 
-  externals?: Array<string>;
-
   mainFields?: Array<string>;
 
   modulePaths: Array<string>;
@@ -28,6 +26,8 @@ export type BundleConfigModel = ConfigDynamicModel<{
   platform: PlatformModel;
 
   provide?: Record<string, string>;
+
+  transpiles?: Array<string>;
 
   tsconfigPath?: string;
 

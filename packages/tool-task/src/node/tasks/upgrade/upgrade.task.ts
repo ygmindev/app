@@ -9,6 +9,8 @@ import { NODE_UPGRADE_EXCLUDES } from '#tool-task/node/tasks/upgrade/upgrade.con
 const upgrade: TaskParamsModel = {
   name: 'node-upgrade',
 
+  onAfter: ['node-post-install'],
+
   task: async (context) => {
     info('excluded', NODE_UPGRADE_EXCLUDES);
     const upgrade = await command(

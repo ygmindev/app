@@ -34,7 +34,7 @@ import type {
   _StoreParamsModel,
 } from '#lib-frontend/state/utils/Store/_Store.models';
 import type { StateProviderPropsModel } from '#lib-frontend/state/utils/Store/Store.models';
-import { isSsr } from '#lib-platform/core/utils/isSsr/isSsr';
+import { isServer } from '#lib-platform/core/utils/isServer/isServer';
 import { mapValuesAsync } from '#lib-shared/core/utils/mapValuesAsync/mapValuesAsync';
 
 // TODO: fix when upgrade https://github.com/reduxjs/redux-toolkit/issues/1960
@@ -121,7 +121,7 @@ export class _Store<
         const persistConfig: PersistConfig<StateModel> | undefined = reducer.storage
           ? {
               key: name,
-              stateReconciler: isSsr ? (_, original) => original : undefined,
+              stateReconciler: isServer ? (_, original) => original : undefined,
               storage: new Storage({ backends: reducer.storage, cookies }),
             }
           : undefined;

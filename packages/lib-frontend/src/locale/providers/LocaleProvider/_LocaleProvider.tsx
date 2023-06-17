@@ -5,7 +5,7 @@ import { config } from '#lib-config/locale/internationalize/internationalize.bas
 import type { SFCModel } from '#lib-frontend/core/core.models';
 import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
 import type { _LocaleProviderPropsModel } from '#lib-frontend/locale/providers/LocaleProvider/_LocaleProvider.models';
-import { isSsr } from '#lib-platform/core/utils/isSsr/isSsr';
+import { isServer } from '#lib-platform/core/utils/isServer/isServer';
 
 export const _LocaleProviderSsr: SFCModel<_LocaleProviderPropsModel> = ({ children, value }) => {
   useSSR(value?.store || {}, value?.lang || config.languageDefault);
@@ -21,7 +21,7 @@ export const _LocaleProvider = composeComponent<
   getProps: ({ children, value }) =>
     value
       ? {
-          children: isSsr ? (
+          children: isServer ? (
             children
           ) : (
             <_LocaleProviderSsr value={value}>{children}</_LocaleProviderSsr>

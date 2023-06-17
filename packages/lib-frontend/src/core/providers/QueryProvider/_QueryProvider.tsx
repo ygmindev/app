@@ -6,7 +6,7 @@ import { persistQueryClient } from '@tanstack/react-query-persist-client';
 
 import type { _QueryProviderPropsModel } from '#lib-frontend/core/providers/QueryProvider/_QueryProvider.models';
 import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
-import { isSsr } from '#lib-platform/core/utils/isSsr/isSsr';
+import { isServer } from '#lib-platform/core/utils/isServer/isServer';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,7 +25,7 @@ const queryClient = new QueryClient({
   },
 });
 
-if (!isSsr) {
+if (!isServer) {
   const persister = createAsyncStoragePersister({ storage: AsyncStorage });
   persistQueryClient({
     dehydrateOptions: {
