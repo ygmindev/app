@@ -147,6 +147,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
 
         {
           element: <SignInPage mode={SIGN_IN_MODE.SIGN_IN} />,
+          isPrerender: true,
           ns: [AUTH],
           pathname: SIGN_IN,
         },
@@ -157,6 +158,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
               <Text>redirect</Text>
             </Wrapper>
           ),
+          isPrerender: true,
           pathname: REDIRECT,
         },
 

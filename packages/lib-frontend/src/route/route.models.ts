@@ -10,6 +10,7 @@ export type RouteIdParamsModel = WithIdModel;
 export type RouteModel = {
   element?: ReactElement;
   header?: { previous?: string };
+  isPrerender?: boolean;
   isProtectable?: boolean;
   pathname: string;
   root?: string;
