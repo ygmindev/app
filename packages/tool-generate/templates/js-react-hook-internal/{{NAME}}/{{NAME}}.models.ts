@@ -3,6 +3,6 @@ import type {
   _{{NAME}}(pascalCase)ParamsModel,
 } from '{{PATH}}/{{NAME}}/_{{NAME}}.models';
 
-export interface {{NAME}}(pascalCase)ParamsModel extends _{{NAME}}(pascalCase)ParamsModel {}
+export type {{NAME}}(pascalCase)ParamsModel = _{{NAME}}(pascalCase)ParamsModel;
 
-export interface {{NAME}}(pascalCase)Model extends _{{NAME}}(pascalCase)Model {}
+export type {{NAME}}(pascalCase)Model = _{{NAME}}(pascalCase)Model;

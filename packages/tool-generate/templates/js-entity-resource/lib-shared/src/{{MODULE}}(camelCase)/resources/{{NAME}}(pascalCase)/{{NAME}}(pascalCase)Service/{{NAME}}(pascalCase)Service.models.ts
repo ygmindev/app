@@ -4,5 +4,5 @@ import type {
   {{NAME}}(pascalCase)Model,
 } from '#lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
 
-export interface {{NAME}}(pascalCase)ServiceModel
-  extends EntityResourceServiceModel<{{NAME}}(pascalCase)Model, {{NAME}}(pascalCase)FormModel> {}
+export type {{NAME}}(pascalCase)ServiceModel
+  = EntityResourceServiceModel<{{NAME}}(pascalCase)Model, {{NAME}}(pascalCase)FormModel>;

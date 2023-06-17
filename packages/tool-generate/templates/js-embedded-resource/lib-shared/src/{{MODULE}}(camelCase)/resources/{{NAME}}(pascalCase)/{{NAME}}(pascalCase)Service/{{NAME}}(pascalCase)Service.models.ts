@@ -5,9 +5,8 @@ import type {
 } from '#lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
 import type { {{NAME_ROOT}}(pascalCase)Model } from '#lib-shared/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase).models';
 
-export interface {{NAME}}(pascalCase)ServiceModel
-  extends EmbeddedResourceServiceModel<
+export type {{NAME}}(pascalCase)ServiceModel = EmbeddedResourceServiceModel<
     {{NAME}}(pascalCase)Model,
     {{NAME}}(pascalCase)FormModel,
     {{NAME_ROOT}}(pascalCase)Model,
-  > {}
+  >;

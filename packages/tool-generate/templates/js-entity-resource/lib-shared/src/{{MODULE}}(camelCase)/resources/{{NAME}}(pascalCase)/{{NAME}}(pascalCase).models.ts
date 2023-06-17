@@ -3,7 +3,7 @@ import type {
   EntityResourceModel,
 } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
-export interface {{NAME}}(pascalCase)Model extends EntityResourceModel {}
+export type {{NAME}}(pascalCase)Model = EntityResourceModel;
 
-export interface {{NAME}}(pascalCase)FormModel
-  extends EntityResourceDataModel<{{NAME}}(pascalCase)Model> {}
+export type {{NAME}}(pascalCase)FormModel
+  = EntityResourceDataModel<{{NAME}}(pascalCase)Model>;

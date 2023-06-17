@@ -1,3 +1,3 @@
-export interface {{NAME}}(pascalCase)ParamsModel {}
+export type {{NAME}}(pascalCase)ParamsModel = Record<string, never>;
 
-export interface {{NAME}}(pascalCase)Model {}
+export type {{NAME}}(pascalCase)Model = Record<string, never>;

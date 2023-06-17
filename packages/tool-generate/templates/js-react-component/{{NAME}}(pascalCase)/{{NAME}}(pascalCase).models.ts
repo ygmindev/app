@@ -1,1 +1,1 @@
-export interface {{NAME}}(pascalCase)PropsModel {}
+export type {{NAME}}(pascalCase)PropsModel = Record<string, never>;
