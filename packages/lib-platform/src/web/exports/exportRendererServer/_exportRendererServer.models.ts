@@ -4,7 +4,7 @@ import type { PageContextBuiltInClientWithServerRouting } from 'vite-plugin-ssr/
 import type { WebConfigModel } from '#lib-config/platform/web/web.models';
 import type { ChildrenPropsModel } from '#lib-frontend/core/core.models';
 import type { RootContextModel } from '#lib-frontend/root/root.models';
-import type { ExportRenderClientParamsModel } from '#lib-platform/web/exports/exportRendererClient/exportRendererClient.models';
+import type { ExportRenderClientRenderParamsModel } from '#lib-platform/web/exports/exportRendererClient/exportRendererClient.models';
 import type {
   CallableModel,
   CallablePromiseModel,
@@ -21,9 +21,11 @@ export interface _ExportRendererServerParamsModel
 
 export interface _ExportRendererServerModel {
   render(
-    params: PageContextBuiltInClientWithServerRouting & ExportRenderClientParamsModel,
+    params: PageContextBuiltInClientWithServerRouting & ExportRenderClientRenderParamsModel,
   ): Promise<{
     documentHtml: { _template: unknown };
-    pageContext: CallablePromiseModel<{ redirectTo?: string } & ExportRenderClientParamsModel>;
+    pageContext: CallablePromiseModel<
+      { redirectTo?: string } & ExportRenderClientRenderParamsModel
+    >;
   }>;
 }

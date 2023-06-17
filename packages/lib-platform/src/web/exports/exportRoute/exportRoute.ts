@@ -1,4 +1,8 @@
 import { _exportRoute } from '#lib-platform/web/exports/exportRoute/_exportRoute';
-import type { ExportRouteModel } from '#lib-platform/web/exports/exportRoute/exportRoute.models';
+import type {
+  ExportRouteModel,
+  ExportRouteParamsModel,
+} from '#lib-platform/web/exports/exportRoute/exportRoute.models';
 
-export const exportRoute = (): ExportRouteModel => _exportRoute();
+export const exportRoute = ({ ...params }: ExportRouteParamsModel): ExportRouteModel =>
+  _exportRoute({ ...params });

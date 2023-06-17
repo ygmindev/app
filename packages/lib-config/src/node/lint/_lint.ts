@@ -42,6 +42,7 @@ export const _lint = ({
   ],
 
   rules: {
+    '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
     '@typescript-eslint/consistent-type-imports': 'error',
     '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
     '@typescript-eslint/no-empty-interface': 'off',

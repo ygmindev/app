@@ -1,3 +1,8 @@
-import type { _ExportRouteModel } from '#lib-platform/web/exports/exportRoute/_exportRoute.models';
+import type {
+  _ExportRouteModel,
+  _ExportRouteParamsModel,
+} from '#lib-platform/web/exports/exportRoute/_exportRoute.models';
 
-export type ExportRouteModel = _ExportRouteModel;
+export interface ExportRouteParamsModel extends _ExportRouteParamsModel {}
+
+export interface ExportRouteModel extends _ExportRouteModel {}
