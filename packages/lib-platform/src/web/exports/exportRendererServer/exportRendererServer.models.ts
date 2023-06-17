@@ -3,7 +3,6 @@ import type { _ExportRendererServerModel } from '#lib-platform/web/exports/expor
 
 export interface ExportRenderServerParamsModel {
   context?: RootContextModel;
-  lang?: string;
 }
 
 export type ExportRendererServerModel = _ExportRendererServerModel;

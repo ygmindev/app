@@ -23,7 +23,6 @@ const onPrerenderStart = ({ pageContexts }: OnPrerenderStartParamsModel): OnPrer
         merge<PageContextBuiltIn & ExportRenderServerParamsModel>([
           {
             context: { [LOCALE]: { lang } },
-            lang,
             urlOriginal: lang === 'en' ? urlOriginal : `/${lang}/${urlOriginal}`,
           },
           pageContext,

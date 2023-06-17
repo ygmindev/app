@@ -66,7 +66,7 @@ export const boilerplate = async ({
       }
       case '{{TARGET}}': {
         const root = await resolveVariable('{{ROOT}}');
-        value = `#${root})}`;
+        value = `#${root}`;
         break;
       }
       default: {

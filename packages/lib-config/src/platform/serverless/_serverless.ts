@@ -47,7 +47,7 @@ export const _serverless = ({
               ...bundleConfigF.optimizeDeps?.esbuildOptions,
               bundle: true,
               format: 'cjs',
-              keepOutputDirectory: true,
+              keepOutputDirectory: false,
               packagePath: fromRoot('package.json'),
               packager: 'yarn',
               packagerOptions: { noInstall: true },
