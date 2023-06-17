@@ -11,6 +11,7 @@ import type {
   ExportPrerenderPagesParamsModel,
 } from '#lib-platform/web/exports/exportPrerenderPages/exportPrerenderPages.models';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
+import { warn } from '#lib-shared/logging/utils/logger/logger';
 
 const { languageDefault, languages } = config;
 
@@ -34,7 +35,6 @@ export const exportPrerenderPages = ({
   const i18n = _config();
   const pages: _ExportPrerenderPagesParamsModel['pages'] = [];
   const pathnames = _getPrerenderPathnames(routes);
-  console.warn(pathnames);
   languages.forEach((lang) =>
     pathnames.forEach((pathname) =>
       pages.push({
@@ -43,5 +43,6 @@ export const exportPrerenderPages = ({
       }),
     ),
   );
+  warn(pages);
   return _exportPrerenderPages({ pages });
 };

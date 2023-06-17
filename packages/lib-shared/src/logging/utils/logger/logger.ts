@@ -1,3 +1,4 @@
+import isArray from 'lodash/isArray';
 import isPlainObject from 'lodash/isPlainObject';
 
 import { stringify } from '#lib-shared/core/utils/stringify/stringify';
@@ -5,7 +6,15 @@ import { _debug, _error, _info, _warn } from '#lib-shared/logging/utils/logger/_
 import type { LoggerModel } from '#lib-shared/logging/utils/logger/logger.models';
 
 const stringifyF = (params: Array<unknown>): string =>
-  params.map((value) => (isPlainObject(value) ? stringify(value as object) : value)).join(' ');
+  params
+    .map((value) =>
+      isPlainObject(value)
+        ? stringify(value as object)
+        : isArray(value)
+        ? value.map((v) => stringifyF([v]))
+        : value,
+    )
+    .join(' ');
 
 const { debug, error, info, warn }: LoggerModel = {
   debug: (...params) => _debug(stringifyF(params)),

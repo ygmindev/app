@@ -7,8 +7,5 @@ export const _exportPrerenderPages = ({
   pages,
 }: _ExportPrerenderPagesParamsModel): _ExportPrerenderPagesModel => ({
   pages: async (_pageContext) =>
-    pages.map(({ context, pathname }) => ({
-      pageContext: { context },
-      url: pathname,
-    })),
+    pages.map(({ context, pathname }) => ({ pageContext: { context }, url: pathname })),
 });
