@@ -1,9 +1,9 @@
 import type { WithResourceNameModel } from '#lib-shared/resource/decorators/withResourceName/withResourceName.models';
 
-export interface SeedParamsModel {
+export type SeedParamsModel = {
   names?: Array<string>;
-}
+};
 
-export interface SeedDataModel<TType> extends WithResourceNameModel {
+export type SeedDataModel<TType> = {
   data: Array<TType | (() => Promise<TType>)>;
-}
+} & WithResourceNameModel;

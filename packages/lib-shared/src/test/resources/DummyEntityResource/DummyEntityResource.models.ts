@@ -5,7 +5,7 @@ import type {
 import type { DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.constants';
 import type { DummyEmbeddedResourceModel } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.models';
 
-export interface DummyEntityResourceModel extends EntityResourceModel {
+export type DummyEntityResourceModel = {
   [DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME]?: Array<DummyEmbeddedResourceModel>;
 
   dateTtlProperty?: Date;
@@ -17,7 +17,6 @@ export interface DummyEntityResourceModel extends EntityResourceModel {
   stringProperty: string;
 
   stringPropertyOptional?: string;
-}
+} & EntityResourceModel;
 
-export interface DummyEntityResourceFormModel
-  extends EntityResourceDataModel<DummyEntityResourceModel> {}
+export type DummyEntityResourceFormModel = EntityResourceDataModel<DummyEntityResourceModel>;

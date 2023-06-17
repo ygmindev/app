@@ -1,6 +1,6 @@
 import type { EnvironmentOverrideParamsModel } from '#lib-shared/environment/environment.models';
 
-export interface RunCommandsParamsModel {
+export type RunCommandsParamsModel = {
   commands: Array<
     {
       command: string;
@@ -8,4 +8,4 @@ export interface RunCommandsParamsModel {
       root?: string;
     } & EnvironmentOverrideParamsModel
   >;
-}
+};

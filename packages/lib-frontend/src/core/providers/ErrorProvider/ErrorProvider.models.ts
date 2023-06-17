@@ -7,19 +7,22 @@ import type {
 
 export type ErrorModeModel = `${ERROR_MODE}`;
 
-export interface ErrorContextModel extends Pick<NotificationModel, 'icon' | 'title' | 'message'> {
+export type ErrorContextModel = {
   mode?: ErrorModeModel;
-}
+} & Pick<NotificationModel, 'icon' | 'title' | 'message'>;
 
-export interface TranslatableErrorContextModel
-  extends Pick<TranslatableNotificationModel, 'icon' | 'title' | 'message'>,
-    Pick<ErrorContextModel, 'mode'> {}
+export type TranslatableErrorContextModel = Pick<
+  TranslatableNotificationModel,
+  'icon' | 'title' | 'message'
+> &
+  Pick<ErrorContextModel, 'mode'>;
 
-export interface ErrorProviderContextModel {
+export type ErrorProviderContextModel = {
   errorContextGet?(error: Error): TranslatableErrorContextModel | undefined;
   errorContextSet(value: ErrorContextModel): void;
   mode: ErrorModeModel;
-}
+};
 
-export interface ErrorProviderPropsModel
-  extends ProviderPropsModel<Pick<ErrorProviderContextModel, 'mode' | 'errorContextGet'>> {}
+export type ErrorProviderPropsModel = ProviderPropsModel<
+  Pick<ErrorProviderContextModel, 'mode' | 'errorContextGet'>
+>;

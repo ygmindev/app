@@ -1,5 +1,5 @@
-export interface TestParamsModel {
+export type TestParamsModel = {
   configFilePath?: string;
   isPrompt?: boolean;
   isWatch?: boolean;
-}
+};

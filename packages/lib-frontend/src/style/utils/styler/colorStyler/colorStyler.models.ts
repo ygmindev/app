@@ -1,6 +1,6 @@
 import type { ThemeColorModel, ThemeRoleModel } from '#lib-frontend/style/style.models';
 
-export interface ColorStylerParamsModel {
+export type ColorStylerParamsModel = {
   color?: ThemeColorModel | string;
   colorRole?: ThemeRoleModel;
-}
+};

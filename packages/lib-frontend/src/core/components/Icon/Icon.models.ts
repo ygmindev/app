@@ -3,7 +3,6 @@ import type { _IconPropsModel } from '#lib-frontend/core/components/Icon/_Icon.m
 import type { TextPropsModel } from '#lib-frontend/core/components/Text/Text.models';
 import type { TextStyleModel } from '#lib-frontend/style/style.models';
 
-export interface IconPropsModel
-  extends _IconPropsModel,
-    Omit<TextPropsModel, 'children'>,
-    AnimatablePropsModel<TextStyleModel> {}
+export type IconPropsModel = _IconPropsModel &
+  Omit<TextPropsModel, 'children'> &
+  AnimatablePropsModel<TextStyleModel>;

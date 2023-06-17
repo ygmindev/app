@@ -4,9 +4,9 @@ import { SIGN_OUT } from '#lib-shared/auth/auth.constants';
 import { withId } from '#lib-shared/core/decorators/withId/withId';
 import { ACCOUNT } from '#lib-shared/user/user.constants';
 
-export interface AuthMenuOptionModel extends MenuOptionModel {
+export type AuthMenuOptionModel = {
   isProtected?: boolean;
-}
+} & MenuOptionModel;
 
 export const AUTH_MENU_OPTIONS: Array<AuthMenuOptionModel> = withId([
   {

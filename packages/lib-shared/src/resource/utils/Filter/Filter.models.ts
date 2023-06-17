@@ -1,6 +1,6 @@
 import type { InferModel, PartialModel } from '#lib-shared/core/core.models';
 
-export interface FilterConditionModel<TType> {
+export type FilterConditionModel<TType> = {
   $eq?: TType;
   $gt?: TType;
   $gte?: TType;
@@ -10,12 +10,12 @@ export interface FilterConditionModel<TType> {
   $ne?: TType;
   $nin?: Array<TType>;
   $not?: FilterConditionModel<TType>;
-}
+};
 
-export interface FilterCombineModel<TType> {
+export type FilterCombineModel<TType> = {
   $and?: Array<FilterModel<TType>>;
   $or?: Array<FilterModel<TType>>;
-}
+};
 
 export type FilterModel<TType> = FilterCombineModel<TType> &
   (

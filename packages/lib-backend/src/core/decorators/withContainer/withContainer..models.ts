@@ -1,3 +1,3 @@
-export interface WithContainerParamsModel {
+export type WithContainerParamsModel = {
   name?: string;
-}
+};

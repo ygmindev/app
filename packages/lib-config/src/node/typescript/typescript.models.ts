@@ -1,7 +1,7 @@
 import type { CreateOptions } from 'ts-node';
 import type { TranspileOptions } from 'typescript';
 
-export interface TypescriptConfigModel {
+export type TypescriptConfigModel = {
   configFile: string;
 
   outDir: string;
@@ -11,8 +11,8 @@ export interface TypescriptConfigModel {
   rootDir: string;
 
   types?: Array<string>;
-}
+};
 
-export interface _TypescriptConfigModel extends TranspileOptions {
+export type _TypescriptConfigModel = {
   'ts-node': CreateOptions;
-}
+} & TranspileOptions;

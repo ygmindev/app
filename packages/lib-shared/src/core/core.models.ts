@@ -11,7 +11,7 @@ import type {
   ValueOf,
 } from 'type-fest';
 
-export interface ConstructorModel<TType = object> extends Constructor<TType> {}
+export type ConstructorModel<TType = object> = Constructor<TType>;
 
 export type PrimitiveModel = Primitive | Date;
 

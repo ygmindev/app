@@ -3,6 +3,6 @@ import type {
   _ProgressParamsModel,
 } from '#tool-task/core/utils/progress/_progress.models';
 
-export interface ProgressParamsModel extends _ProgressParamsModel {}
+export type ProgressParamsModel = _ProgressParamsModel;
 
-export interface ProgressModel extends _ProgressModel {}
+export type ProgressModel = _ProgressModel;

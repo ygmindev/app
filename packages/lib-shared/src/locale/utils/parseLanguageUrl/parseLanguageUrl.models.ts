@@ -1,6 +1,6 @@
 export type ParseLanguageUrlParamsModel = string;
 
-export interface ParseLanguageUrlModel {
+export type ParseLanguageUrlModel = {
   lang?: string;
   url: string;
-}
+};

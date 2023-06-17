@@ -11,10 +11,11 @@ import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 const { displayName } = withTest({ composeComponent });
 
 describe(displayName, () => {
-  interface _ViewProps extends ChildrenPropsModel, StylePropsModel {
+  type _ViewProps = {
     height: number;
     width: number;
-  }
+  } & ChildrenPropsModel &
+    StylePropsModel;
 
   const ViewF = composeComponent<_ViewProps, ViewProps>({
     Component: View,

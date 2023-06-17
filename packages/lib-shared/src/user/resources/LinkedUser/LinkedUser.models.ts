@@ -4,9 +4,9 @@ import type { LINKED_USER_TYPE } from '#lib-shared/user/resources/LinkedUser/Lin
 
 export type LinkedUserTypeModel = `${LINKED_USER_TYPE}`;
 
-export interface LinkedUserModel extends EmbeddedResourceModel {
+export type LinkedUserModel = {
   id: string;
   type: LinkedUserTypeModel;
-}
+} & EmbeddedResourceModel;
 
-export interface LinkedUserFormModel extends EntityResourceDataModel<LinkedUserModel> {}
+export type LinkedUserFormModel = EntityResourceDataModel<LinkedUserModel>;

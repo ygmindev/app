@@ -1,1 +1,1 @@
-export interface AppHeaderPropsModel {}
+export type AppHeaderPropsModel = Record<string, never>;

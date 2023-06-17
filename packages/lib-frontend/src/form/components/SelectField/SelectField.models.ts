@@ -4,9 +4,8 @@ import type { TextFieldPropsModel } from '#lib-frontend/form/components/TextFiel
 import type { StringFieldPropsModel } from '#lib-frontend/form/form.models';
 import type { TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 
-export interface SelectFieldPropsModel<TType extends string = string>
-  extends Pick<MenuPropsModel<TType>, 'options' | 'renderOption'>,
-    TextFieldPropsModel,
-    Omit<StringFieldPropsModel, 'label' | 'error'> {
+export type SelectFieldPropsModel<TType extends string = string> = {
   renderValue?(option: TranslatableOptionModel): TranslatableTextModel;
-}
+} & Pick<MenuPropsModel<TType>, 'options' | 'renderOption'> &
+  TextFieldPropsModel &
+  Omit<StringFieldPropsModel, 'label' | 'error'>;

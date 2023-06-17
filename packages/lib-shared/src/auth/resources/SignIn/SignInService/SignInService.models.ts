@@ -5,10 +5,9 @@ import type { ContextModel } from '#lib-shared/resource/utils/Context/Context.mo
 import type { InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import type { OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 
-export interface SignInServiceModel
-  extends Pick<EntityResourceServiceModel<SignInModel, SignInFormModel>, 'create'> {
+export type SignInServiceModel = {
   usernameUpdate(
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>>;
-}
+} & Pick<EntityResourceServiceModel<SignInModel, SignInFormModel>, 'create'>;

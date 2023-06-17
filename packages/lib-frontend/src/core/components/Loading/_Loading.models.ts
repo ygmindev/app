@@ -1,4 +1,4 @@
-export interface _LoadingPropsModel {
+export type _LoadingPropsModel = {
   color: string;
   size: number;
-}
+};

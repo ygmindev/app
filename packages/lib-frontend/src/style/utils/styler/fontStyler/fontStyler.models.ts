@@ -14,7 +14,7 @@ export type FontFamilyModel = `${FONT_FAMILY}`;
 
 export type FontTypeModel = `${FONT_TYPE}`;
 
-export interface FontStylerParamsModel {
+export type FontStylerParamsModel = {
   align?: FontAlignModel;
   casing?: FontCasingModel;
   family?: FontFamilyModel;
@@ -22,4 +22,4 @@ export interface FontStylerParamsModel {
   isBold?: boolean;
   isLineHeight?: boolean;
   type?: FontTypeModel;
-}
+};

@@ -3,6 +3,6 @@ import type {
   _ExportPrerenderParamsModel,
 } from '#lib-platform/web/exports/exportPrerender/_exportPrerender.models';
 
-export interface ExportPrerenderParamsModel extends Omit<_ExportPrerenderParamsModel, 'i18n'> {}
+export type ExportPrerenderParamsModel = Omit<_ExportPrerenderParamsModel, 'i18n'>;
 
-export interface ExportPrerenderModel extends _ExportPrerenderModel {}
+export type ExportPrerenderModel = _ExportPrerenderModel;

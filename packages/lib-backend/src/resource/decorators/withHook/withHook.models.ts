@@ -2,6 +2,6 @@ import type { HOOK_TYPE } from '#lib-backend/resource/decorators/withHook/withHo
 
 export type HookTypeModel = `${HOOK_TYPE}`;
 
-export interface WithHookParamsModel {
+export type WithHookParamsModel = {
   type: HookTypeModel;
-}
+};

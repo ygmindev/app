@@ -9,26 +9,26 @@ export type HttpMethodModel = `${HTTP_METHOD}`;
 
 export type HttpResponseTypeModel = `${HTTP_RESPONSE_TYPE}`;
 
-export interface HttpRequestParamsModel {
+export type HttpRequestParamsModel = {
   headers?: object;
   responseType?: HttpResponseTypeModel;
   timeout?: number;
   withCredentials?: boolean;
-}
+};
 
-export interface HttpReponseModel<TResult> {
+export type HttpReponseModel<TResult> = {
   data: TResult;
   headers: object;
   status: number;
   statusText: string;
-}
+};
 
-export interface HttpServiceParamsModel {
+export type HttpServiceParamsModel = {
   baseUri?: UriParamsModel;
   onError?(error: Error): void;
   onRequest?(request: HttpRequestParamsModel): Promise<HttpRequestParamsModel>;
   onResponse?<TResult>(response: HttpReponseModel<TResult>): Promise<HttpReponseModel<TResult>>;
   request?: HttpRequestParamsModel;
-}
+};
 
-export interface HttpServiceModel extends _HttpServiceModel {}
+export type HttpServiceModel = _HttpServiceModel;

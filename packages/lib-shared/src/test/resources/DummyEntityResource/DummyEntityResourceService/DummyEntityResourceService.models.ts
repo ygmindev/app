@@ -4,5 +4,7 @@ import type {
   DummyEntityResourceModel,
 } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
 
-export interface DummyEntityResourceServiceModel
-  extends EntityResourceServiceModel<DummyEntityResourceModel, DummyEntityResourceFormModel> {}
+export type DummyEntityResourceServiceModel = EntityResourceServiceModel<
+  DummyEntityResourceModel,
+  DummyEntityResourceFormModel
+>;

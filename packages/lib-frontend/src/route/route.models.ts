@@ -5,9 +5,9 @@ import type { TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import type { ROUTE_TRANSITION } from '#lib-frontend/route/route.constants';
 import type { WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
 
-export interface RouteIdParamsModel extends WithIdModel {}
+export type RouteIdParamsModel = WithIdModel;
 
-export interface RouteModel extends Pick<TranslatableTextPropsModel, 'ns'> {
+export type RouteModel = {
   element?: ReactElement;
   header?: { previous?: string };
   isProtectable?: boolean;
@@ -16,21 +16,21 @@ export interface RouteModel extends Pick<TranslatableTextPropsModel, 'ns'> {
   routes?: Array<RouteModel>;
   title?: TranslatableTextModel;
   transition?: RouteTransitionModel;
-}
+} & Pick<TranslatableTextPropsModel, 'ns'>;
 
-export interface LocationModel<TParams extends LocationParamsModel = LocationParamsModel> {
+export type LocationModel<TParams extends LocationParamsModel = LocationParamsModel> = {
   params?: TParams;
   pathname: string;
-}
+};
 
-export interface LocationParamsModel {
+export type LocationParamsModel = {
   title?: string;
-}
+};
 
-export interface RouteContextModel<TParams extends LocationParamsModel = LocationParamsModel> {
+export type RouteContextModel<TParams extends LocationParamsModel = LocationParamsModel> = {
   location?: LocationModel<TParams>;
   redirect?: string;
   status?: number;
-}
+};
 
 export type RouteTransitionModel = `${ROUTE_TRANSITION}`;

@@ -10,23 +10,23 @@ export type TranslatableTextModel = string | ((params: UseTranslationModel) => s
 
 export type LocaleStoreModel = Record<string, Record<string, object>>;
 
-export interface LocaleContextModel {
+export type LocaleContextModel = {
   i18n: i18n;
   lang?: string;
   store?: LocaleStoreModel;
-}
+};
 
 export type CountryFormatModel = `${COUNTRY_FORMAT}`;
 
-export interface TimezoneModel {
+export type TimezoneModel = {
   name: string;
   offset: number;
-}
+};
 
 export type InternationalizationDetectionModel = `${INTERNATIONALIZATION_DETECTION}`;
 
-export interface CountryModel {
+export type CountryModel = {
   callingCode: string;
   code: string;
   name: string;
-}
+};

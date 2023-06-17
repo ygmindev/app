@@ -1,18 +1,18 @@
 import type { LocationModel } from '#lib-frontend/route/route.models';
 import type { ReducerModel } from '#lib-frontend/state/state.models';
 
-export interface RouteHeaderModel {
+export type RouteHeaderModel = {
   title?: string;
-}
+};
 
-export interface RouteStateModel {
+export type RouteStateModel = {
   isBack?: boolean;
   previous?: LocationModel;
-}
+};
 
-export interface RouteActionsParamsModel {
+export type RouteActionsParamsModel = {
   isBackSet: boolean;
   previousSet: LocationModel;
-}
+};
 
-export interface RouteReducerModel extends ReducerModel<RouteStateModel, RouteActionsParamsModel> {}
+export type RouteReducerModel = ReducerModel<RouteStateModel, RouteActionsParamsModel>;

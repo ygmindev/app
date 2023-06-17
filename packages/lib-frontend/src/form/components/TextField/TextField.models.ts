@@ -5,12 +5,12 @@ import type { CallableModel } from '#lib-shared/core/core.models';
 
 export type TextFieldKeyboardModel = `${TEXT_FIELD_KEYBOARD}`;
 
-export interface TextFieldRefModel {
+export type TextFieldRefModel = {
   blur: CallableModel;
   focus: CallableModel;
-}
+};
 
-export interface TextFieldPropsModel extends TranslatableFieldPropsModel<_TextFieldPropsModel> {
+export type TextFieldPropsModel = {
   isNoClear?: boolean;
   mask?: string;
-}
+} & TranslatableFieldPropsModel<_TextFieldPropsModel>;

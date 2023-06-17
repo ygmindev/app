@@ -3,7 +3,7 @@ import type {
   TableSelectTypeModel,
 } from '#lib-frontend/core/components/Table/Table.models';
 
-export interface _TablePropsModel<TType> {
+export type _TablePropsModel<TType> = {
   columns: Array<TableColumnModel<TType, unknown>>;
   data?: Array<TType>;
   isFullWidth?: boolean;
@@ -12,4 +12,4 @@ export interface _TablePropsModel<TType> {
   onSelect?(rows?: Array<TType>): void;
   rowHeight?: number;
   select?: TableSelectTypeModel;
-}
+};

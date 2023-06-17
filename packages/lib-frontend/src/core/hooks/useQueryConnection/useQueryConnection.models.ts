@@ -4,13 +4,12 @@ import type {
 } from '#lib-frontend/core/hooks/useQueryConnection/_useQueryConnection.models';
 import type { ConnectionModel } from '#lib-shared/resource/utils/Connection/Connection.models';
 
-export interface QueryConnectionModel<TType> {
+export type QueryConnectionModel<TType> = {
   pages?: Array<ConnectionModel<TType> | null>;
-}
+};
 
-export interface UseQueryConnectionParamsModel<TType>
-  extends Omit<_UseQueryConnectionParamsModel<TType>, 'cache'> {
+export type UseQueryConnectionParamsModel<TType> = {
   cache?: number | boolean;
-}
+} & Omit<_UseQueryConnectionParamsModel<TType>, 'cache'>;
 
-export interface UseQueryConnectionModel<TType> extends _UseQueryConnectionModel<TType> {}
+export type UseQueryConnectionModel<TType> = _UseQueryConnectionModel<TType>;

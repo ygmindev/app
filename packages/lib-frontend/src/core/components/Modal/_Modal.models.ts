@@ -6,14 +6,13 @@ import type {
 } from '#lib-frontend/core/core.models';
 import type { CallableModel } from '#lib-shared/core/core.models';
 
-export interface _ModalPropsModel
-  extends ChildrenPropsModel,
-    DimensionModel,
-    Pick<AnimationModel, 'duration'>,
-    ElementStatePropsModel {
+export type _ModalPropsModel = {
   deviceHeight?: number;
   deviceWidth?: number;
   isFullSize?: boolean;
   isOpen?: boolean;
   onClose?: CallableModel;
-}
+} & ChildrenPropsModel &
+  DimensionModel &
+  Pick<AnimationModel, 'duration'> &
+  ElementStatePropsModel;

@@ -2,7 +2,6 @@ import type { UseResourceMethodHookParamsModel } from '#lib-frontend/resource/ho
 import type { BankServiceModel } from '#lib-shared/billing/resources/Bank/BankService/BankService.models';
 import type { UserModel } from '#lib-shared/user/resources/User/User.models';
 
-export interface UseBankResourceParamsModel extends UseResourceMethodHookParamsModel<UserModel> {}
+export type UseBankResourceParamsModel = UseResourceMethodHookParamsModel<UserModel>;
 
-export interface UseBankResourceModel
-  extends Pick<BankServiceModel, 'create' | 'get' | 'update' | 'remove'> {}
+export type UseBankResourceModel = Pick<BankServiceModel, 'create' | 'get' | 'update' | 'remove'>;

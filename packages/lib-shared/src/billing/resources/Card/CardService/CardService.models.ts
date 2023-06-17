@@ -2,5 +2,4 @@ import type { CardFormModel, CardModel } from '#lib-shared/billing/resources/Car
 import type { EmbeddedResourceServiceModel } from '#lib-shared/resource/resources/EmbeddedResource/EmbeddedResourceService/EmbeddedResourceService.models';
 import type { UserModel } from '#lib-shared/user/resources/User/User.models';
 
-export interface CardServiceModel
-  extends EmbeddedResourceServiceModel<CardModel, CardFormModel, UserModel> {}
+export type CardServiceModel = EmbeddedResourceServiceModel<CardModel, CardFormModel, UserModel>;

@@ -36,7 +36,7 @@ import type { ROUTE } from '#lib-shared/route/route.constants';
 import type { STYLE } from '#lib-shared/style/style.constants';
 import type { USER } from '#lib-shared/user/user.constants';
 
-export interface RootStateModel {
+export type RootStateModel = {
   [APP]: AppStateModel;
   [BILLING]: BillingStateModel;
   [LOCALE]: LocaleStateModel;
@@ -44,9 +44,9 @@ export interface RootStateModel {
   [ROUTE]: RouteStateModel;
   [STYLE]: StyleStateModel;
   [USER]: UserStateModel;
-}
+};
 
-export interface RootActionsParamsModel {
+export type RootActionsParamsModel = {
   [APP]: AppActionsParamsModel;
   [BILLING]: BillingActionsParamsModel;
   [LOCALE]: LocaleActionsParamsModel;
@@ -54,13 +54,14 @@ export interface RootActionsParamsModel {
   [ROUTE]: RouteActionsParamsModel;
   [STYLE]: StyleActionsParamsModel;
   [USER]: UserActionsParamsModel;
-}
+};
 
-export interface RootActionsModel
-  extends NestedActionsModel<Array<keyof RootActionsParamsModel>, RootActionsParamsModel> {}
+export type RootActionsModel = NestedActionsModel<
+  Array<keyof RootActionsParamsModel>,
+  RootActionsParamsModel
+>;
 
-export interface RootStateContextModel
-  extends Omit<
-    StoreParamsModel<Array<keyof RootStateModel>, RootStateModel, RootActionsParamsModel>,
-    'reducers'
-  > {}
+export type RootStateContextModel = Omit<
+  StoreParamsModel<Array<keyof RootStateModel>, RootStateModel, RootActionsParamsModel>,
+  'reducers'
+>;

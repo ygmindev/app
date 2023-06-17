@@ -3,19 +3,19 @@ import type { TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import type { ThemeColorModel } from '#lib-frontend/style/style.models';
 import type { WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
 
-export interface NotificationModel extends WithIdModel, Pick<IconPropsModel, 'icon'> {
+export type NotificationModel = {
   color?: ThemeColorModel;
   isInfinite?: boolean;
   message?: string;
   title?: string;
-}
+} & WithIdModel &
+  Pick<IconPropsModel, 'icon'>;
 
-export interface NotificationDataModel extends Omit<NotificationModel, 'id'> {
+export type NotificationDataModel = {
   id?: string;
-}
+} & Omit<NotificationModel, 'id'>;
 
-export interface TranslatableNotificationModel
-  extends Omit<NotificationModel, 'title' | 'message'> {
+export type TranslatableNotificationModel = {
   message?: TranslatableTextModel;
   title?: TranslatableTextModel;
-}
+} & Omit<NotificationModel, 'title' | 'message'>;

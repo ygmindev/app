@@ -1,5 +1,5 @@
 import type { EnvironmentOverrideParamsModel } from '#lib-shared/environment/environment.models';
 
-export interface SetEnvironmentParamsModel extends EnvironmentOverrideParamsModel {
+export type SetEnvironmentParamsModel = {
   writes?: Array<RegExp>;
-}
+} & EnvironmentOverrideParamsModel;

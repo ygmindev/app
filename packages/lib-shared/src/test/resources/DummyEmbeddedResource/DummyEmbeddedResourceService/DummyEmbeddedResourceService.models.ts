@@ -5,9 +5,8 @@ import type {
 } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.models';
 import type { DummyEntityResourceModel } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
 
-export interface DummyEmbeddedResourceServiceModel
-  extends EmbeddedResourceServiceModel<
-    DummyEmbeddedResourceModel,
-    DummyEmbeddedResourceFormModel,
-    DummyEntityResourceModel
-  > {}
+export type DummyEmbeddedResourceServiceModel = EmbeddedResourceServiceModel<
+  DummyEmbeddedResourceModel,
+  DummyEmbeddedResourceFormModel,
+  DummyEntityResourceModel
+>;

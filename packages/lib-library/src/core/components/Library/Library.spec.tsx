@@ -3,7 +3,7 @@ import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/wi
 import { Library } from '#lib-library/core/components/Library/Library';
 import type { LibraryPropsModel } from '#lib-library/core/components/Library/Library.models';
 
-const { Component, displayName, testID } = withTestComponent<LibraryPropsModel>({
+const { Component, displayName, testID } = withTestComponent<LibraryPropsModel<unknown>>({
   target: Library,
 });
 

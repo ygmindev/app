@@ -1,6 +1,6 @@
 import type { StorageBackendModel } from '#lib-frontend/state/utils/Storage/_Storage.models';
 
-export interface ReducerModel<TType extends object, TParams extends object> {
+export type ReducerModel<TType extends object, TParams extends object> = {
   actions: {
     [TKeyParam in keyof TParams]: ActionModel<TType, TParams[TKeyParam]>;
   };
@@ -8,7 +8,7 @@ export interface ReducerModel<TType extends object, TParams extends object> {
   initialState: TType;
 
   storage?: Array<StorageBackendModel>;
-}
+};
 
 export type ActionsModel<TParams extends object> = {
   [TKeyParam in keyof TParams]: (params?: TParams[TKeyParam]) => void;
@@ -44,17 +44,17 @@ export type ActionModel<TType extends object, TParam> = (
   value: TParam,
 ) => void;
 
-export interface CookieOptionModel {
+export type CookieOptionModel = {
   domain?: string;
   expires?: Date;
   path?: string;
   secure?: boolean;
-}
+};
 
-export interface CookiesModel {
+export type CookiesModel = {
   expire(key: string, options?: CookieOptionModel): void;
 
   get<TType extends string = string>(key: string): TType | null;
 
   set<TType extends string = string>(key: string, value: TType, options?: CookieOptionModel): void;
-}
+};

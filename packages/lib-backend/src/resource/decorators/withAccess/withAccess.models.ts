@@ -1,5 +1,5 @@
 import type { AccessLevelModel } from '#lib-shared/auth/resources/Access/Access.models';
 
-export interface WithAccessParamsModel {
+export type WithAccessParamsModel = {
   level?: AccessLevelModel;
-}
+};

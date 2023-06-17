@@ -1,4 +1,4 @@
-export interface ParserConfigModel {
+export type ParserConfigModel = {
   languages: Array<string>;
 
   missingValue: string;
@@ -6,6 +6,6 @@ export interface ParserConfigModel {
   namespaceDefault: string;
 
   outputPath: string;
-}
+};
 
 export type _ParserConfigModel = object;

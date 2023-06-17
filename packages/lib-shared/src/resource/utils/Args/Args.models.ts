@@ -20,49 +20,49 @@ export type ProjectModel<TType> = {
   [TKey in keyof TType]?: _ProjectPropertyModel<TType[TKey]>;
 };
 
-interface _ProjectOptionsModel<TType> {
+type _ProjectOptionsModel<TType> = {
   project?: ProjectModel<TType>;
-}
+};
 
-interface _CreateArgsModel<TType> {
+type _CreateArgsModel<TType> = {
   form: TType;
-}
+};
 
-interface _GetArgsOptionsModel<TType> extends _ProjectOptionsModel<TType> {
+type _GetArgsOptionsModel<TType> = {
   aggregate?: Array<object>;
-}
+} & _ProjectOptionsModel<TType>;
 
-interface _GetArgsModel<TType> {
+type _GetArgsModel<TType> = {
   filter: FilterModel<TType>;
   options?: _GetArgsOptionsModel<TType>;
-}
+};
 
-interface _GetManyArgsOptionsModel<TType> extends _GetArgsOptionsModel<TType> {
+type _GetManyArgsOptionsModel<TType> = {
   skip?: number;
   take?: number;
-}
+} & _GetArgsOptionsModel<TType>;
 
-interface _GetManyArgsModel<TType> {
+type _GetManyArgsModel<TType> = {
   filter: FilterModel<TType>;
   options?: _GetManyArgsOptionsModel<TType>;
-}
+};
 
-interface _GetConnectionArgsModel<TType> {
+type _GetConnectionArgsModel<TType> = {
   filter: FilterModel<TType>;
   pagination: PaginationModel;
-}
+};
 
-interface _RemoveArgsModel<TType> {
+type _RemoveArgsModel<TType> = {
   filter: FilterModel<TType>;
-}
+};
 
-interface _UpdateArgsOptionsModel<TType> extends _ProjectOptionsModel<TType> {}
+type _UpdateArgsOptionsModel<TType> = _ProjectOptionsModel<TType>;
 
-interface _UpdateArgsModel<TType> {
+type _UpdateArgsModel<TType> = {
   filter: FilterModel<TType>;
   options?: _UpdateArgsOptionsModel<TType>;
   update: UpdateModel<TType>;
-}
+};
 
 export type ArgsModel<
   TMethod extends ResourceMethodTypeModel,

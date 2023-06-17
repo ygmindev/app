@@ -1,6 +1,6 @@
 import type { FieldTypeModel } from '#lib-shared/form/form.models';
 
-export interface WithFieldParamsModel<TType> {
+export type WithFieldParamsModel<TType> = {
   Resource?: TType;
   defaultValue?(): TType;
   expire?: number;
@@ -10,4 +10,4 @@ export interface WithFieldParamsModel<TType> {
   isSchema?: boolean;
   isUnique?: boolean;
   type?: FieldTypeModel;
-}
+};

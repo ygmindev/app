@@ -7,7 +7,7 @@ export type CardFundingModel = `${CARD_FUNDING}`;
 
 export type CardBrandModel = `${CARD_BRAND}`;
 
-export interface CardModel extends EmbeddedResourceModel {
+export type CardModel = {
   brand: CardBrandModel;
 
   expMonth: number;
@@ -21,6 +21,6 @@ export interface CardModel extends EmbeddedResourceModel {
   last4: string;
 
   type?: PaymentMethodTypeModel;
-}
+} & EmbeddedResourceModel;
 
-export interface CardFormModel extends EntityResourceDataModel<CardModel> {}
+export type CardFormModel = EntityResourceDataModel<CardModel>;

@@ -28,15 +28,15 @@ export type UseResourceMethodParamsModel<
     method: TMethod;
   };
 
-export interface UseResourceMethodModel<
+export type UseResourceMethodModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
   TForm,
   TRoot = undefined,
-> {
+> = {
   query(
     input: InputModel<TMethod, TType, TForm, TRoot>,
   ): Promise<OutputModel<TMethod, TType, TRoot>>;
-}
+};
 
 export type UseResourceMethodHookParamsModel<TRoot = undefined> = RootModel<TRoot>;

@@ -1,1 +1,1 @@
-export interface UserTablePropsModel {}
+export type UserTablePropsModel = Record<string, never>;

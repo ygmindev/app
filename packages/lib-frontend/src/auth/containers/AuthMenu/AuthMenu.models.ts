@@ -1,1 +1,1 @@
-export interface AuthMenuPropsModel {}
+export type AuthMenuPropsModel = Record<string, never>;

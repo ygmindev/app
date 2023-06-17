@@ -4,8 +4,7 @@ import type {
   TranslatableFieldPropsModel,
 } from '#lib-frontend/form/form.models';
 
-export interface SwitchFieldPropsModel
-  extends TranslatableFieldPropsModel<StringFieldPropsModel<'true' | 'false'>> {
+export type SwitchFieldPropsModel = {
   iconActive?: IconPropsModel['icon'];
   iconInactive?: IconPropsModel['icon'];
-}
+} & TranslatableFieldPropsModel<StringFieldPropsModel<'true' | 'false'>>;

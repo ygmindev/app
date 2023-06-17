@@ -5,8 +5,8 @@ import type { LOCALE } from '#lib-shared/locale/locale.constants';
 import type { ROUTE } from '#lib-shared/route/route.constants';
 import type { STATE } from '#lib-shared/state/state.constants';
 
-export interface RootContextModel {
+export type RootContextModel = {
   [LOCALE]?: LocaleContextModel;
   [ROUTE]?: RouteContextModel;
   [STATE]?: RootStateContextModel;
-}
+};

@@ -1,5 +1,5 @@
 import type { countries } from 'countries-list';
 
-export interface CountryConfigModel {
+export type CountryConfigModel = {
   supportedCountries: Array<keyof typeof countries>;
-}
+};

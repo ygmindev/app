@@ -7,14 +7,12 @@ import type { CallablePromiseModel } from '#lib-shared/core/core.models';
 import type { ConnectionModel } from '#lib-shared/resource/utils/Connection/Connection.models';
 import type { PaginationModel } from '#lib-shared/resource/utils/Pagination/Pagination.models';
 
-export interface _UseQueryConnectionParamsModel<TType>
-  extends Omit<_UseQueryParamsModel<TType>, 'query'> {
+export type _UseQueryConnectionParamsModel<TType> = {
   limit?: number;
   query(params: PaginationModel): Promise<ConnectionModel<TType> | null>;
-}
+} & Omit<_UseQueryParamsModel<TType>, 'query'>;
 
-export interface _UseQueryConnectionModel<TType>
-  extends Omit<_UseQueryModel<TType>, 'data' | 'query'> {
+export type _UseQueryConnectionModel<TType> = {
   data?: QueryConnectionModel<TType>;
   queryNext: CallablePromiseModel;
-}
+} & Omit<_UseQueryModel<TType>, 'data' | 'query'>;

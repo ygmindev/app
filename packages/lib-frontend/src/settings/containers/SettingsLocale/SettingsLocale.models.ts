@@ -1,1 +1,1 @@
-export interface SettingsLocalePropsModel {}
+export type SettingsLocalePropsModel = Record<string, never>;

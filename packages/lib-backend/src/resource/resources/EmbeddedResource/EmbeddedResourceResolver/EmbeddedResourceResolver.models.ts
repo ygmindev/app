@@ -5,14 +5,14 @@ import type {
 import type { EmbeddedResourceModel } from '#lib-shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
 import type { EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
-export interface EmbeddedResourceResolverParamsModel<
+export type EmbeddedResourceResolverParamsModel<
   TType extends EmbeddedResourceModel,
   TForm,
   TRoot extends EntityResourceModel,
-> extends ResourceResolverParamsModel<TType, TForm, TRoot> {}
+> = ResourceResolverParamsModel<TType, TForm, TRoot>;
 
-export interface EmbeddedResourceResolverModel<
+export type EmbeddedResourceResolverModel<
   TType extends EmbeddedResourceModel,
   TForm,
   TRoot extends EntityResourceModel,
-> extends ResourceResolverModel<TType, TForm, TRoot> {}
+> = ResourceResolverModel<TType, TForm, TRoot>;

@@ -1,4 +1,4 @@
-export interface UpdateParamsModel<TType> {
+export type UpdateParamsModel<TType> = {
   Resource: TType;
   name: string;
-}
+};

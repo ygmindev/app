@@ -10,9 +10,9 @@ import { FONT_ALIGN } from '#lib-frontend/style/utils/styler/fontStyler/fontStyl
 
 const WRAPPER_FIXTURE_SIZE = 200;
 
-export interface WrapperFixturePropsModel extends WrapperPropsModel {
+export type WrapperFixturePropsModel = {
   testID?: string;
-}
+} & WrapperPropsModel;
 
 export const WrapperFixture: SFCModel<WrapperFixturePropsModel> = ({
   backgroundColor = THEME_COLOR.PRIMARY,

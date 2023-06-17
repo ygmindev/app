@@ -5,5 +5,8 @@ import type {
 } from '#lib-shared/user/resources/LinkedUser/LinkedUser.models';
 import type { UserModel } from '#lib-shared/user/resources/User/User.models';
 
-export interface LinkedUserServiceModel
-  extends EmbeddedResourceServiceModel<LinkedUserModel, LinkedUserFormModel, UserModel> {}
+export type LinkedUserServiceModel = EmbeddedResourceServiceModel<
+  LinkedUserModel,
+  LinkedUserFormModel,
+  UserModel
+>;

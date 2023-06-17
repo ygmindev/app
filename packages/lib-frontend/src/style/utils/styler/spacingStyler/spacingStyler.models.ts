@@ -2,7 +2,7 @@ import type { ThemeSizeModel } from '#lib-frontend/style/style.models';
 
 export type SpacingModel = number | boolean | ThemeSizeModel;
 
-export interface SpacingStylerParamsModel {
+export type SpacingStylerParamsModel = {
   m?: SpacingModel | 'auto';
   mBottom?: SpacingModel | 'auto';
   mHorizontal?: SpacingModel | 'auto';
@@ -17,4 +17,4 @@ export interface SpacingStylerParamsModel {
   pRight?: SpacingModel;
   pTop?: SpacingModel;
   pVertical?: SpacingModel;
-}
+};

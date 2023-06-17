@@ -6,12 +6,12 @@ import type { UseThemeModel } from '#lib-frontend/style/hooks/useTheme/useTheme.
 import type { StyleModel, StylePropsModel, ViewStyleModel } from '#lib-frontend/style/style.models';
 import type { TestIdPropsModel } from '#lib-frontend/test/test.models';
 
-export interface ComposeComponentParamsModel<
+export type ComposeComponentParamsModel<
   TProps,
   TResult,
   TStyle extends StyleModel = ViewStyleModel,
   TRef = unknown,
-> extends Pick<UseStylesParamsModel<TProps, TStyle>, 'stylers'> {
+> = {
   Component: ComponentType<TResult & StylePropsModel<TStyle>> | string;
 
   getProps?(
@@ -21,7 +21,7 @@ export interface ComposeComponentParamsModel<
   ): TResult | null;
 
   isWeb?: boolean;
-}
+} & Pick<UseStylesParamsModel<TProps, TStyle>, 'stylers'>;
 
 export type ComposeComponentModel<
   TProps,

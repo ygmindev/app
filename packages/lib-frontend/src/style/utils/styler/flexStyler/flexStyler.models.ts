@@ -7,7 +7,7 @@ type FlexAlignModel = `${FLEX_ALIGN}`;
 
 type FlexJustifyModel = `${FLEX_JUSTIFY}`;
 
-export interface FlexStylerParamsModel {
+export type FlexStylerParamsModel = {
   align?: FlexAlignModel;
   alignSelf?: FlexAlignModel;
   basis?: number | 'auto';
@@ -17,4 +17,4 @@ export interface FlexStylerParamsModel {
   isWrap?: boolean;
   justify?: FlexJustifyModel;
   shrink?: boolean | number;
-}
+};

@@ -8,11 +8,10 @@ import type { OutputModel } from '#lib-shared/resource/utils/Output/Output.model
 
 export type ResourceFormModeModel = `${RESOURCE_FORM_MODE}`;
 
-export interface ResourceFormPropsModel<TType extends EntityResourceModel, TForm, TRoot = undefined>
-  extends SubmittablePropsModel,
-    Pick<ResourcesPropsModel<TType, TForm, TRoot>, 'columns' | 'root' | 'validators'> {
+export type ResourceFormPropsModel<TType extends EntityResourceModel, TForm, TRoot = undefined> = {
   data?: TType;
   onCreate?(
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>>;
-}
+} & SubmittablePropsModel &
+  Pick<ResourcesPropsModel<TType, TForm, TRoot>, 'columns' | 'root' | 'validators'>;

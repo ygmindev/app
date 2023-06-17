@@ -7,9 +7,9 @@ import type {
 import type { RSFCModel, SFCPropsModel } from '#lib-frontend/core/core.models';
 import type { StyleModel, ViewStyleModel } from '#lib-frontend/style/style.models';
 
-export interface _AnimatableParamsModel<TProps, TStyle extends StyleModel = ViewStyleModel> {
+export type _AnimatableParamsModel<TProps, TStyle extends StyleModel = ViewStyleModel> = {
   Component: ComponentType<SFCPropsModel<TProps, TStyle>>;
-}
+};
 
 export type _AnimatableModel<TProps, TStyle extends StyleModel = ViewStyleModel> = RSFCModel<
   AnimatableRefModel<TStyle>,

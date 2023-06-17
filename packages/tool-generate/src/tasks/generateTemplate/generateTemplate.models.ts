@@ -1,1 +1,1 @@
-export interface GenerateTemplateParamsModel {}
+export type GenerateTemplateParamsModel = Record<string, never>;

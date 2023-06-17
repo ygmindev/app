@@ -8,14 +8,11 @@ import type { RefPropsModel } from '#lib-frontend/core/core.models';
 import type { StyleModel, ViewStyleModel } from '#lib-frontend/style/style.models';
 import type { TestIdPropsModel } from '#lib-frontend/test/test.models';
 
-export interface _UseAnimationStateParamsModel<TStyle extends StyleModel = ViewStyleModel>
-  extends RefPropsModel<AnimatableRefModel>,
-    AnimatablePropsModel<TStyle>,
-    TestIdPropsModel {}
+export type _UseAnimationStateParamsModel<TStyle extends StyleModel = ViewStyleModel> =
+  RefPropsModel<AnimatableRefModel> & AnimatablePropsModel<TStyle> & TestIdPropsModel;
 
-export interface _UseAnimationStateModel<TStyle extends StyleModel = ViewStyleModel>
-  extends AnimatableRefModel<TStyle> {
+export type _UseAnimationStateModel<TStyle extends StyleModel = ViewStyleModel> = {
   animationProps: MotiProps<TStyle>;
   animationState: UseDynamicAnimationState;
   current?: TStyle;
-}
+} & AnimatableRefModel<TStyle>;

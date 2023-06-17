@@ -1,6 +1,6 @@
 import type { CallablePromiseModel } from '#lib-shared/core/core.models';
 
-export interface BuildJsonParamsModel {
+export type BuildJsonParamsModel = {
   filename: string;
   value: CallablePromiseModel<object>;
-}
+};

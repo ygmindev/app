@@ -4,13 +4,11 @@ import type {
   ValuePropsModel,
 } from '#lib-frontend/core/core.models';
 
-export interface NavigationLayoutPropsModel<TType extends TranslatableOptionModel>
-  extends LayoutPropsModel,
-    NavigationPropsModel<TType> {}
+export type NavigationLayoutPropsModel<TType extends TranslatableOptionModel> = LayoutPropsModel &
+  NavigationPropsModel<TType>;
 
-export interface NavigationPropsModel<TType extends TranslatableOptionModel>
-  extends ValuePropsModel<string> {
+export type NavigationPropsModel<TType extends TranslatableOptionModel> = {
   isHorizontal?: boolean;
   options: Array<TType>;
   title?: string;
-}
+} & ValuePropsModel<string>;

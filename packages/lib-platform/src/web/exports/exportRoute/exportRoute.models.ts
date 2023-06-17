@@ -3,6 +3,6 @@ import type {
   _ExportRouteParamsModel,
 } from '#lib-platform/web/exports/exportRoute/_exportRoute.models';
 
-export interface ExportRouteParamsModel extends _ExportRouteParamsModel {}
+export type ExportRouteParamsModel = _ExportRouteParamsModel;
 
-export interface ExportRouteModel extends _ExportRouteModel {}
+export type ExportRouteModel = _ExportRouteModel;

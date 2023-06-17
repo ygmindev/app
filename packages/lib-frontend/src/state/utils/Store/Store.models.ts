@@ -4,23 +4,23 @@ import type { ProviderPropsModel } from '#lib-frontend/core/core.models';
 import type { NestedActionsModel } from '#lib-frontend/state/state.models';
 import type { _StoreModel, _StoreParamsModel } from '#lib-frontend/state/utils/Store/_Store.models';
 
-export interface StoreParamsModel<
+export type StoreParamsModel<
   TKeys extends Array<string>,
   TType extends Record<TKeys[number], object>,
   TParams extends Record<TKeys[number], object>,
-> extends _StoreParamsModel<TKeys, TType, TParams> {}
+> = _StoreParamsModel<TKeys, TType, TParams>;
 
-export interface StoreModel<
+export type StoreModel<
   TKeys extends Array<string>,
   TType extends Record<TKeys[number], object>,
   TParams extends Record<TKeys[number], object>,
-> extends _StoreModel<TKeys, TType, TParams> {}
+> = _StoreModel<TKeys, TType, TParams>;
 
-export interface StateProviderPropsModel<
+export type StateProviderPropsModel<
   TKeys extends Array<string>,
   TType extends Record<TKeys[number], object>,
   TParams extends Record<TKeys[number], object>,
-> extends ProviderPropsModel<{
-    actionContext: Context<NestedActionsModel<TKeys, TParams> | undefined>;
-    store: StoreModel<TKeys, TType, TParams>;
-  }> {}
+> = ProviderPropsModel<{
+  actionContext: Context<NestedActionsModel<TKeys, TParams> | undefined>;
+  store: StoreModel<TKeys, TType, TParams>;
+}>;

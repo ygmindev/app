@@ -1,4 +1,4 @@
-export interface EdgeParamsModel<TType> {
+export type EdgeParamsModel<TType> = {
   Resource: TType;
   name: string;
-}
+};

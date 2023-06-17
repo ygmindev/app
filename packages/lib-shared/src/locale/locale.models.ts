@@ -1,5 +1,5 @@
-export interface PhoneNumberModel {
+export type PhoneNumberModel = {
   callingCode?: string;
   extension?: string;
   phone: string;
-}
+};

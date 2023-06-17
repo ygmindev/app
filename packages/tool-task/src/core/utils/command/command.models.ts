@@ -7,8 +7,8 @@ export type CommandParamsModel = _CommandParamsModel;
 
 export type CommandModel = _CommandModel;
 
-export interface CommandOptionsModel {
+export type CommandOptionsModel = {
   isSilent?: boolean;
   onData?(value: string): void;
   root?: string;
-}
+};

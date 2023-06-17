@@ -1,15 +1,15 @@
 import type { ComponentType } from 'react';
 
-export interface PageParamsModel {
+export type PageParamsModel = {
   description?: string;
   html?: string;
   lang?: string;
   title?: string;
-}
+};
 
-export interface PageContextModel<TType> {
+export type PageContextModel<TType> = {
   Component: ComponentType;
   pageParams: PageParamsModel;
   pageProps?: TType;
   pathname: string;
-}
+};

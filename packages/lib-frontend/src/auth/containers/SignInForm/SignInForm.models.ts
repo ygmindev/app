@@ -4,6 +4,6 @@ import type {
   UsernameFormPropsModel,
 } from '#lib-frontend/auth/containers/UsernameForm/UsernameForm.models';
 
-export interface SignInFormModel extends UsernameFormModel, OtpFormModel {}
+export type SignInFormModel = UsernameFormModel & OtpFormModel;
 
-export interface SignInFormPropsModel extends Pick<UsernameFormPropsModel, 'method' | 'mode'> {}
+export type SignInFormPropsModel = Pick<UsernameFormPropsModel, 'method' | 'mode'>;

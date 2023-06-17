@@ -1,5 +1,5 @@
 export type WithTestParamsModel = object | string;
 
-export interface WithTestModel {
+export type WithTestModel = {
   displayName: string;
-}
+};

@@ -1,5 +1,5 @@
 import type { TextInputProps } from 'react-native';
 
-export interface _MaskedTextFieldPropsModel extends TextInputProps {
+export type _MaskedTextFieldPropsModel = {
   mask: string;
-}
+} & TextInputProps;

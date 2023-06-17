@@ -4,15 +4,15 @@ import type { ExportRenderServerParamsModel } from '#lib-platform/web/exports/ex
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 
-interface OnPrerenderStartParamsModel {
+type OnPrerenderStartParamsModel = {
   pageContexts: Array<PageContextBuiltIn>;
-}
+};
 
-interface OnPrerenderStartModel {
+type OnPrerenderStartModel = {
   prerenderContext: {
     pageContexts: Array<PageContextBuiltIn & ExportRenderServerParamsModel>;
   };
-}
+};
 
 const onPrerenderStart = ({ pageContexts }: OnPrerenderStartParamsModel): OnPrerenderStartModel => {
   const pageContextsF: Array<PageContextBuiltIn & ExportRenderServerParamsModel> = [];

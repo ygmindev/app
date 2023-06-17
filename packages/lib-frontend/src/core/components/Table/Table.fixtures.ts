@@ -4,11 +4,11 @@ import type { TableColumnModel } from '#lib-frontend/core/components/Table/Table
 import { dateTimeFormat } from '#lib-shared/format/utils/dateTimeFormat/dateTimeFormat';
 import { DATE_TIME_FORMAT_TYPE } from '#lib-shared/format/utils/dateTimeFormat/dateTimeFormat.constants';
 
-export interface TableFixtureRowModel {
+export type TableFixtureRowModel = {
   dateColumn: Date;
   numberColumn: number;
   stringColumn: string;
-}
+};
 
 export const TABLE_FIXTURE_COLUMNS: Array<TableColumnModel<TableFixtureRowModel, unknown>> = [
   {

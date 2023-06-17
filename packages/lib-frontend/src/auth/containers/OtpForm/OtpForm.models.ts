@@ -2,8 +2,8 @@ import type { SignInFormModel } from '#lib-frontend/auth/containers/SignInForm/S
 import type { FormStepPropsModel } from '#lib-frontend/form/components/StepForm/StepForm.models';
 import type { StylePropsModel } from '#lib-frontend/style/style.models';
 
-export interface OtpFormModel {
+export type OtpFormModel = {
   otp?: string;
-}
+};
 
-export interface OtpFormPropsModel extends StylePropsModel, FormStepPropsModel<SignInFormModel> {}
+export type OtpFormPropsModel = StylePropsModel & FormStepPropsModel<SignInFormModel>;

@@ -7,13 +7,12 @@ import type { RootContextModel } from '#lib-frontend/root/root.models';
 import type { ExportRenderClientRenderParamsModel } from '#lib-platform/web/exports/exportRendererClient/exportRendererClient.models';
 import type { ReturnTypeModel } from '#lib-shared/core/core.models';
 
-export interface _ExportRendererClientParamsModel
-  extends Pick<ReturnTypeModel<WebConfigModel>, 'rootId'> {
+export type _ExportRendererClientParamsModel = {
   render(params: { context?: RootContextModel } & ChildrenPropsModel): { element: ReactElement };
-}
+} & Pick<ReturnTypeModel<WebConfigModel>, 'rootId'>;
 
-export interface _ExportRendererClientModel {
+export type _ExportRendererClientModel = {
   render(
     params: PageContextBuiltInClientWithClientRouting & ExportRenderClientRenderParamsModel,
   ): Promise<void>;
-}
+};

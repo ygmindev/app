@@ -1,4 +1,4 @@
-export interface FileConfigModel {
+export type FileConfigModel = {
   backupDir: string;
 
   buildDir: string;
@@ -8,4 +8,4 @@ export interface FileConfigModel {
   excludePatterns: Array<string>;
 
   packagePrefixes: Array<string>;
-}
+};

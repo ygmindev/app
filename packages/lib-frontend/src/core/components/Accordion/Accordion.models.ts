@@ -4,8 +4,7 @@ import type {
   ValuePropsModel,
 } from '#lib-frontend/core/core.models';
 
-export interface AccordionPropsModel
-  extends ChildrenPropsModel,
-    ValuePropsModel<ElementStateModel> {
+export type AccordionPropsModel = {
   label?: string;
-}
+} & ChildrenPropsModel &
+  ValuePropsModel<ElementStateModel>;

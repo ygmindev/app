@@ -2,8 +2,9 @@ import type { UseResourceMethodHookParamsModel } from '#lib-frontend/resource/ho
 import type { PaymentMethodServiceModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethodService/PaymentMethodService.models';
 import type { UserModel } from '#lib-shared/user/resources/User/User.models';
 
-export interface UsePaymentMethodResourceParamsModel
-  extends UseResourceMethodHookParamsModel<UserModel> {}
+export type UsePaymentMethodResourceParamsModel = UseResourceMethodHookParamsModel<UserModel>;
 
-export interface UsePaymentMethodResourceModel
-  extends Pick<PaymentMethodServiceModel, 'createToken' | 'getMany'> {}
+export type UsePaymentMethodResourceModel = Pick<
+  PaymentMethodServiceModel,
+  'createToken' | 'getMany'
+>;

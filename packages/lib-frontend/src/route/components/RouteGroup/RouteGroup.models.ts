@@ -2,12 +2,11 @@ import type { LineItemPropsModel } from '#lib-frontend/core/components/LineItem/
 import type { TranslatableOptionModel } from '#lib-frontend/core/core.models';
 import type { RequiredModel } from '#lib-shared/core/core.models';
 
-export interface RouteGroupPropsModel {
+export type RouteGroupPropsModel = {
   groups?: Array<RouteGroupModel>;
   root?: string;
-}
+};
 
-export interface RouteGroupModel
-  extends RequiredModel<Pick<TranslatableOptionModel, 'id' | 'label'>> {
+export type RouteGroupModel = {
   options: Array<TranslatableOptionModel & Pick<LineItemPropsModel, 'value'>>;
-}
+} & RequiredModel<Pick<TranslatableOptionModel, 'id' | 'label'>>;

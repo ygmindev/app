@@ -6,17 +6,19 @@ import type { ReducerModel } from '#lib-frontend/state/state.models';
 import type { PartialModel } from '#lib-shared/core/core.models';
 import type { WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
 
-export interface NotificationStateModel {
+export type NotificationStateModel = {
   notifications: Array<NotificationModel>;
-}
+};
 
-export interface NotificationActionsParamsModel {
+export type NotificationActionsParamsModel = {
   add: NotificationDataModel;
 
   remove: string;
 
   update: PartialModel<NotificationModel> & WithIdModel;
-}
+};
 
-export interface NotificationReducerModel
-  extends ReducerModel<NotificationStateModel, NotificationActionsParamsModel> {}
+export type NotificationReducerModel = ReducerModel<
+  NotificationStateModel,
+  NotificationActionsParamsModel
+>;

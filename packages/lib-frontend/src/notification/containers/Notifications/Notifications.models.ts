@@ -1,1 +1,1 @@
-export interface NotificationsPropsModel {}
+export type NotificationsPropsModel = Record<string, never>;

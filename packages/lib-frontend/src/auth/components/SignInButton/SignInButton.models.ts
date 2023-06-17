@@ -1,1 +1,1 @@
-export interface SignInButtonPropsModel {}
+export type SignInButtonPropsModel = Record<string, never>;

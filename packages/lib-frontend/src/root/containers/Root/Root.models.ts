@@ -4,9 +4,8 @@ import type { ChildrenPropsModel, ProviderPropsModel } from '#lib-frontend/core/
 import type { ExportRenderClientRenderParamsModel } from '#lib-platform/web/exports/exportRendererClient/exportRendererClient.models';
 import type { ExportRenderServerRenderParamsModel } from '#lib-platform/web/exports/exportRendererServer/exportRendererServer.models';
 
-export interface RootPropsModel
-  extends ChildrenPropsModel,
-    ExportRenderServerRenderParamsModel,
-    ExportRenderClientRenderParamsModel {
+export type RootPropsModel = {
   additionalProviders?: Array<ReactElement<ProviderPropsModel<unknown>>>;
-}
+} & ChildrenPropsModel &
+  ExportRenderServerRenderParamsModel &
+  ExportRenderClientRenderParamsModel;

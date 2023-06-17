@@ -1,4 +1,4 @@
-export interface FilterParamsModel<TType> {
+export type FilterParamsModel<TType> = {
   Resource: TType;
   name: string;
-}
+};

@@ -9,5 +9,4 @@ export type EntityResourceServiceParamsModel<TType, TForm> = ResourceServicePara
   undefined
 >;
 
-export interface EntityResourceServiceModel<TType, TForm>
-  extends ResourceServiceModel<TType, TForm> {}
+export type EntityResourceServiceModel<TType, TForm> = ResourceServiceModel<TType, TForm>;

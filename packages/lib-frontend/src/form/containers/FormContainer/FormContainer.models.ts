@@ -18,10 +18,9 @@ import type { FieldTypeModel } from '#lib-shared/form/form.models';
 
 export type FormFieldTypeModel = `${FORM_FIELD_TYPE}`;
 
-export interface FormContainerFieldPropsModel<TType = void, TResult = void>
-  extends ElementStatePropsModel,
-    StringFieldPropsModel,
-    Pick<UseFormModel<TType, TResult>, 'handleSubmit' | 'handleReset'> {}
+export type FormContainerFieldPropsModel<TType = void, TResult = void> = ElementStatePropsModel &
+  StringFieldPropsModel &
+  Pick<UseFormModel<TType, TResult>, 'handleSubmit' | 'handleReset'>;
 
 export type FormContainerFieldModel = WithIdModel & {
   type?: FieldTypeModel;
@@ -36,10 +35,7 @@ export type FormContainerRowModel = PartialModel<WithIdModel> & {
   fields?: Array<FormContainerFieldModel>;
 };
 
-export interface FormContainerPropsModel<TType = void, TResult = void>
-  extends UseFormParamsModel<TType, TResult>,
-    SubmittablePropsModel<TType, TResult>,
-    Pick<ErrorProviderContextModel, 'errorContextGet'> {
+export type FormContainerPropsModel<TType = void, TResult = void> = {
   autoFocus?: string | boolean;
   bottomElement?(props: FormContainerFieldPropsModel): ReactNode;
   cancelLabel?: TranslatableTextModel;
@@ -51,4 +47,6 @@ export interface FormContainerPropsModel<TType = void, TResult = void>
   submitLabel?: TranslatableTextModel;
   successMessage?: TranslatableTextModel;
   topElement?(props: FormContainerFieldPropsModel): ReactNode;
-}
+} & UseFormParamsModel<TType, TResult> &
+  SubmittablePropsModel<TType, TResult> &
+  Pick<ErrorProviderContextModel, 'errorContextGet'>;

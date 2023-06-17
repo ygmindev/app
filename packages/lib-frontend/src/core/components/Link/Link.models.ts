@@ -2,7 +2,6 @@ import type { _LinkPropsModel } from '#lib-frontend/core/components/Link/_Link.m
 import type { TextPropsModel } from '#lib-frontend/core/components/Text/Text.models';
 import type { ChildrenPropsModel } from '#lib-frontend/core/core.models';
 
-export interface LinkPropsModel
-  extends _LinkPropsModel,
-    Omit<TextPropsModel, 'children'>,
-    ChildrenPropsModel {}
+export type LinkPropsModel = _LinkPropsModel &
+  Omit<TextPropsModel, 'children'> &
+  ChildrenPropsModel;

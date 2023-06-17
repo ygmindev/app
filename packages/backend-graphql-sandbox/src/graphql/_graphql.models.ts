@@ -1,3 +1,3 @@
-export interface _GraphqlParamsModel {
+export type _GraphqlParamsModel = {
   port?: number;
-}
+};

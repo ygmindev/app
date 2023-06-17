@@ -1,7 +1,7 @@
 import type { CallablePromiseModel } from '#lib-shared/core/core.models';
 
-export interface SetupConfigModel {
+export type SetupConfigModel = {
   onInitialize: CallablePromiseModel;
 
   onTerminate: CallablePromiseModel;
-}
+};

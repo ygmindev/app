@@ -2,12 +2,12 @@ import type { _DropdownPropsModel } from '#lib-frontend/core/components/Dropdown
 import type { WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
 import type { CallableModel } from '#lib-shared/core/core.models';
 
-export interface DropdownPropsModel extends _DropdownPropsModel {
+export type DropdownPropsModel = {
   maxHeight?: number;
   width?: number;
-}
+} & _DropdownPropsModel;
 
-export interface DropdownRefModel extends Pick<WrapperRefModel, 'scrollTo'> {
+export type DropdownRefModel = {
   isOpen: CallableModel<boolean>;
   toggle(isOpen?: boolean): void;
-}
+} & Pick<WrapperRefModel, 'scrollTo'>;

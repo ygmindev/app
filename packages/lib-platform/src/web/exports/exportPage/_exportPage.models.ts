@@ -1,9 +1,9 @@
 import type { ComponentType } from 'react';
 
-export interface _ExportPageParamsModel {
+export type _ExportPageParamsModel = {
   Component: ComponentType;
-}
+};
 
-export interface _ExportPageModel {
+export type _ExportPageModel = {
   Page: ComponentType;
-}
+};

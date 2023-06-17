@@ -1,14 +1,14 @@
 import type { DimensionModel } from '#lib-frontend/core/core.models';
 import type { ReducerModel } from '#lib-frontend/state/state.models';
 
-export interface AppStateModel {
+export type AppStateModel = {
   dimension: DimensionModel;
   isLoading?: boolean;
-}
+};
 
-export interface AppActionsParamsModel {
+export type AppActionsParamsModel = {
   dimensionSet: DimensionModel;
   isLoadingSet: boolean;
-}
+};
 
-export interface AppReducerModel extends ReducerModel<AppStateModel, AppActionsParamsModel> {}
+export type AppReducerModel = ReducerModel<AppStateModel, AppActionsParamsModel>;

@@ -2,9 +2,8 @@ import type { WithAccessParamsModel } from '#lib-backend/resource/decorators/wit
 import type { OutputParamsModel } from '#lib-backend/resource/utils/Output/Output.models';
 import type { ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
 
-export interface WithOutputParamsModel<
+export type WithOutputParamsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
   TRoot = undefined,
-> extends WithAccessParamsModel,
-    OutputParamsModel<TMethod, TType, TRoot> {}
+> = WithAccessParamsModel & OutputParamsModel<TMethod, TType, TRoot>;

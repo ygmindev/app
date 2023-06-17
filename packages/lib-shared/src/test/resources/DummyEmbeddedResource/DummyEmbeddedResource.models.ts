@@ -3,9 +3,7 @@ import type { EntityResourceDataModel } from '#lib-shared/resource/resources/Ent
 import type { DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.constants';
 import type { DummyEntityResourceModel } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
 
-export interface DummyEmbeddedResourceModel
-  extends EmbeddedResourceModel,
-    Omit<DummyEntityResourceModel, typeof DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME> {}
+export type DummyEmbeddedResourceModel = EmbeddedResourceModel &
+  Omit<DummyEntityResourceModel, typeof DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME>;
 
-export interface DummyEmbeddedResourceFormModel
-  extends EntityResourceDataModel<DummyEmbeddedResourceModel> {}
+export type DummyEmbeddedResourceFormModel = EntityResourceDataModel<DummyEmbeddedResourceModel>;

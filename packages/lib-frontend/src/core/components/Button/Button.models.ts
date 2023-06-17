@@ -8,21 +8,20 @@ import type { ThemeColorModel, ThemeSizeModel } from '#lib-frontend/style/style.
 
 export type ButtonTypeModel = `${BUTTON_TYPE}`;
 
-export interface ButtonPropsModel
-  extends ChildrenPropsModel<TranslatableTextModel>,
-    Pick<IconPropsModel, 'icon'>,
-    Pick<
-      PressablePropsModel,
-      | 'onPress'
-      | 'onPressIn'
-      | 'onPressOut'
-      | 'confirmMessage'
-      | 'isFocusable'
-      | 'isFullWidth'
-      | 'align'
-    >,
-    AnimatablePropsModel {
+export type ButtonPropsModel = {
   color?: ThemeColorModel;
   size?: ThemeSizeModel;
   type?: ButtonTypeModel;
-}
+} & ChildrenPropsModel<TranslatableTextModel> &
+  Pick<IconPropsModel, 'icon'> &
+  Pick<
+    PressablePropsModel,
+    | 'onPress'
+    | 'onPressIn'
+    | 'onPressOut'
+    | 'confirmMessage'
+    | 'isFocusable'
+    | 'isFullWidth'
+    | 'align'
+  > &
+  AnimatablePropsModel;

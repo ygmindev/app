@@ -4,6 +4,6 @@ import type {
   _UseStoreParamsModel,
 } from '#lib-frontend/state/hooks/useStore/_useStore.models';
 
-export interface UseStoreParamsModel<TValue> extends _UseStoreParamsModel<RootStateModel, TValue> {}
+export type UseStoreParamsModel<TValue> = _UseStoreParamsModel<RootStateModel, TValue>;
 
 export type UseStoreModel<TType> = _UseStoreModel<TType>;

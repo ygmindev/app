@@ -4,7 +4,7 @@ import type { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyle
 
 export type ShapePositionModel = `${SHAPE_POSITION}`;
 
-export interface ShapeStylerParamsModel extends DimensionModel {
+export type ShapeStylerParamsModel = {
   bottom?: number;
   isAbsoluteFill?: boolean;
   isFullHeight?: boolean;
@@ -22,4 +22,4 @@ export interface ShapeStylerParamsModel extends DimensionModel {
   size?: ThemeSizeMoreModel;
   top?: number;
   zIndex?: number;
-}
+} & DimensionModel;

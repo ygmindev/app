@@ -8,5 +8,4 @@ export type EntityResourceResolverParamsModel<TType, TForm> = ResourceResolverPa
   TForm
 >;
 
-export interface EntityResourceResolverModel<TType, TForm>
-  extends ResourceResolverModel<TType, TForm> {}
+export type EntityResourceResolverModel<TType, TForm> = ResourceResolverModel<TType, TForm>;

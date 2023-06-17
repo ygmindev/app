@@ -11,15 +11,14 @@ import type {
   ReturnTypeModel,
 } from '#lib-shared/core/core.models';
 
-export interface _ExportRendererServerParamsModel
-  extends Pick<ReturnTypeModel<WebConfigModel>, 'publicDir' | 'rootId' | 'ssrContextKeys'> {
+export type _ExportRendererServerParamsModel = {
   render(params: { context?: RootContextModel } & ChildrenPropsModel): {
     element: ReactElement;
     getCss: CallableModel<ReactElement>;
   };
-}
+} & Pick<ReturnTypeModel<WebConfigModel>, 'publicDir' | 'rootId' | 'ssrContextKeys'>;
 
-export interface _ExportRendererServerModel {
+export type _ExportRendererServerModel = {
   render(
     params: PageContextBuiltInClientWithServerRouting & ExportRenderClientRenderParamsModel,
   ): Promise<{
@@ -28,4 +27,4 @@ export interface _ExportRendererServerModel {
       { redirectTo?: string } & ExportRenderClientRenderParamsModel
     >;
   }>;
-}
+};

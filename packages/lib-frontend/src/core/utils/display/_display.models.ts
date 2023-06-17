@@ -3,7 +3,7 @@ import type { DependencyList, EffectCallback } from 'react';
 import type { DimensionModel } from '#lib-frontend/core/core.models';
 import type { CallableModel } from '#lib-shared/core/core.models';
 
-export interface _DisplayModel {
+export type _DisplayModel = {
   getDimension(): DimensionModel;
   open(
     uri: string,
@@ -16,4 +16,4 @@ export interface _DisplayModel {
   unsubscribeMessage(cb: (event: MessageEvent) => void): void;
   unsubscribeResize(cb: () => void): void;
   useLayoutEffect(effect: EffectCallback, deps?: DependencyList): void;
-}
+};

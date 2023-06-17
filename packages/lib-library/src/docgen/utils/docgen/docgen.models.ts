@@ -7,12 +7,12 @@ export type DocgenParamsModel = _DocgenParamsModel;
 
 export type DocgenModel = _DocgenModel;
 
-export interface DocgenMetaDataModel {
+export type DocgenMetaDataModel = {
   propTypes?: Array<DocgenMetaDataPropsModel>;
-}
+};
 
-export interface DocgenMetaDataPropsModel {
+export type DocgenMetaDataPropsModel = {
   isOptional?: boolean;
   name: string;
   type?: string;
-}
+};

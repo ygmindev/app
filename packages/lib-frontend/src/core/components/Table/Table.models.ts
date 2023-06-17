@@ -16,7 +16,7 @@ export type ColumnSortTypeModel = `${COLUMN_SORT_TYPE}`;
 
 export type ColumnPinTypeModel = `${COLUMN_PIN_TYPE}`;
 
-export interface TableColumnModel<TType, TValue> {
+export type TableColumnModel<TType, TValue> = {
   flex?: number;
   formatter?: TableColumnFormatterModel<TType, TValue>;
   id: string;
@@ -26,7 +26,7 @@ export interface TableColumnModel<TType, TValue> {
   renderer?: TableColumnRendererModel<TType, TValue>;
   sort?: ColumnSortTypeModel | boolean;
   width?: number;
-}
+};
 
 export type TableColumnRendererModel<TType, TValue> = (params: {
   row: TType;
@@ -38,8 +38,8 @@ export type TableColumnFormatterModel<TType, TValue> = (params: {
   value: TValue;
 }) => string;
 
-export interface TableRefModel {
+export type TableRefModel = {
   deselectRows: CallableModel;
-}
+};
 
-export interface TablePropsModel<TType> extends _TablePropsModel<TType>, ElementStatePropsModel {}
+export type TablePropsModel<TType> = _TablePropsModel<TType> & ElementStatePropsModel;

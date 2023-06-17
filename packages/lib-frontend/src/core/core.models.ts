@@ -9,17 +9,17 @@ import type { StyleModel, StylePropsModel, ViewStyleModel } from '#lib-frontend/
 import type { TestIdPropsModel } from '#lib-frontend/test/test.models';
 import type { WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
 
-export interface FCModel<TProps = object>
-  extends _FC<TProps & TestIdPropsModel & { nativeID?: string }> {}
+export type FCModel<TProps = object> = _FC<TProps & TestIdPropsModel & { nativeID?: string }>;
 
-export interface SFCModel<TProps = object, TStyle extends StyleModel = ViewStyleModel>
-  extends FCModel<TProps & StylePropsModel<TStyle>> {}
+export type SFCModel<TProps = object, TStyle extends StyleModel = ViewStyleModel> = FCModel<
+  TProps & StylePropsModel<TStyle>
+>;
 
-export interface RSFCModel<
+export type RSFCModel<
   TType = undefined,
   TProps = object,
   TStyle extends StyleModel = ViewStyleModel,
-> extends SFCModel<TProps & RefPropsModel<TType>, TStyle> {}
+> = SFCModel<TProps & RefPropsModel<TType>, TStyle>;
 
 export type SFCPropsModel<TProps = object, TStyle extends StyleModel = ViewStyleModel> = PropsModel<
   SFCModel<TProps, TStyle>
@@ -35,67 +35,62 @@ export type RSFCPropsModel<
 
 export type PropsModel<TType> = TType extends ComponentType<infer TProps> ? TProps : never;
 
-export interface RefPropsModel<TType = unknown> {
+export type RefPropsModel<TType = unknown> = {
   ref?: Ref<TType>;
-}
+};
 
-export interface ChildrenPropsModel<TType = ReactNode | Array<ReactNode>>
-  extends ChildPropsModel<TType> {}
+export type ChildrenPropsModel<TType = ReactNode | Array<ReactNode>> = ChildPropsModel<TType>;
 
-export interface ChildPropsModel<TType = ReactNode> {
+export type ChildPropsModel<TType = ReactNode> = {
   children?: TType;
-}
+};
 
-export interface ProviderPropsModel<TType = undefined, TChildren = ReactNode | Array<ReactNode>>
-  extends ChildrenPropsModel<TChildren> {
+export type ProviderPropsModel<TType = undefined, TChildren = ReactNode | Array<ReactNode>> = {
   value?: TType;
-}
+} & ChildrenPropsModel<TChildren>;
 
-export interface PagePropsModel extends ChildrenPropsModel {}
+export type PagePropsModel = ChildrenPropsModel;
 
-export interface LayoutPropsModel
-  extends Pick<WrapperPropsModel, 'children' | 'isFullWidth' | 'isCenter'> {
+export type LayoutPropsModel = {
   isHorizontalCenter?: boolean;
   isVerticalCenter?: boolean;
-}
+} & Pick<WrapperPropsModel, 'children' | 'isFullWidth' | 'isCenter'>;
 
 export type ElementStateModel = `${ELEMENT_STATE}`;
 
 export type DirectionModel = `${DIRECTION}`;
 
-export interface ElementStatePropsModel {
+export type ElementStatePropsModel = {
   elementState?: ElementStateModel;
   onElementStateChange?(value?: ElementStateModel): void;
-}
+};
 
-export interface ValuePropsModel<TType> {
+export type ValuePropsModel<TType> = {
   defaultValue?: TType;
   onChange?(value: TType): void;
   value?: TType;
-}
+};
 
-export interface OptionModel<TType extends string = string>
-  extends WithIdModel<TType>,
-    Pick<IconPropsModel, 'icon'>,
-    Pick<ButtonPropsModel, 'color' | 'onPress' | 'elementState' | 'confirmMessage'> {
+export type OptionModel<TType extends string = string> = {
   category?: string;
   isDivider?: boolean;
   label?: string;
-}
+} & WithIdModel<TType> &
+  Pick<IconPropsModel, 'icon'> &
+  Pick<ButtonPropsModel, 'color' | 'onPress' | 'elementState' | 'confirmMessage'>;
 
-export interface TranslatableOptionModel<TType extends string = string>
-  extends Omit<OptionModel<TType>, 'label'> {
+export type TranslatableOptionModel<TType extends string = string> = {
   label?: TranslatableTextModel;
-}
+} & Omit<OptionModel<TType>, 'label'>;
 
-export interface PositionModel {
+export type PositionModel = {
   x?: number;
   y?: number;
-}
+};
 
-export interface DimensionModel {
+export type DimensionModel = {
   height?: number;
   width?: number;
-}
+};
 
-export interface MeasureModel extends PositionModel, DimensionModel {}
+export type MeasureModel = PositionModel & DimensionModel;

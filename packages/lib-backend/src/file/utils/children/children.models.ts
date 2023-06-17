@@ -1,11 +1,11 @@
-export interface ChildrenParamsModel {
+export type ChildrenParamsModel = {
   from: string;
   isDirectory?: boolean;
-}
+};
 
-export interface ChildrenModel {
+export type ChildrenModel = {
   fullPath: string;
   isDirectory?: boolean;
   lastUpdated: Date;
   name: string;
-}
+};

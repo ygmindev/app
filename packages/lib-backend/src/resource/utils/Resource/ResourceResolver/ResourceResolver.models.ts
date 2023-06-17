@@ -55,8 +55,11 @@ export type ResourceResolverParamsModel<
   };
 };
 
-export interface ResourceResolverModel<TType, TForm, TRoot = undefined>
-  extends ResourceServiceModel<TType, TForm, TRoot> {}
+export type ResourceResolverModel<TType, TForm, TRoot = undefined> = ResourceServiceModel<
+  TType,
+  TForm,
+  TRoot
+>;
 
 export type ResourceResolverAccessTypeModel =
   | 'default'
@@ -64,15 +67,15 @@ export type ResourceResolverAccessTypeModel =
   | 'write'
   | ResourceMethodTypeModel;
 
-export interface ResourceResolverAuthorizerParamsModel<
+export type ResourceResolverAuthorizerParamsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
   TForm,
   TRoot = undefined,
-> {
+> = {
   context?: ContextModel;
   input: InputModel<TMethod, TType, TForm, TRoot>;
-}
+};
 
 export type ResourceResolverAuthorizerModel<
   TMethod extends ResourceMethodTypeModel,

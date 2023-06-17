@@ -1,3 +1,3 @@
 import type { ProviderPropsModel } from '#lib-frontend/core/core.models';
 
-export interface AuthProviderPropsModel extends ProviderPropsModel {}
+export type AuthProviderPropsModel = ProviderPropsModel;

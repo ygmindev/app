@@ -1,1 +1,1 @@
-export interface PostInstallParamsModel {}
+export type PostInstallParamsModel = Record<string, never>;

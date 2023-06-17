@@ -12,7 +12,7 @@ import type {
   CallableModel,
 } from '#lib-shared/core/core.models';
 
-export interface _ViewPropsModel extends ChildrenPropsModel, StylePropsModel<ViewStyleModel> {
+export type _ViewPropsModel = {
   isFocusable?: boolean;
   isHidden?: boolean;
   isHorizontalScrollable?: boolean;
@@ -26,6 +26,7 @@ export interface _ViewPropsModel extends ChildrenPropsModel, StylePropsModel<Vie
   onResponderGrant?: CallableModel;
   onResponderRelease?: CallableModel;
   onScroll?(position: PositionModel): void;
-}
+} & ChildrenPropsModel &
+  StylePropsModel<ViewStyleModel>;
 
-export interface _ViewRefModel extends ScrollView {}
+export type _ViewRefModel = ScrollView;

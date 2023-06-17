@@ -1,4 +1,4 @@
-export interface FormParamsModel<TType> {
+export type FormParamsModel<TType> = {
   Resource: TType;
   name: string;
-}
+};

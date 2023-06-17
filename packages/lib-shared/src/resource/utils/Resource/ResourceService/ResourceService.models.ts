@@ -12,7 +12,7 @@ export type ResourceServiceParamsModel<
   TRoot = undefined,
 > = WithResourceNameModel<TRoot> & ResourceServiceDecoratorModel<TType, TForm, TRoot>;
 
-export interface ResourceServiceModel<TType, TForm, TRoot = undefined> {
+export type ResourceServiceModel<TType, TForm, TRoot = undefined> = {
   create(
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
     context?: ContextModel,
@@ -44,7 +44,7 @@ export interface ResourceServiceModel<TType, TForm, TRoot = undefined> {
     input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>>;
-}
+};
 
 export type ResourceServiceBeforeDecoratorModel<
   TMethod extends ResourceMethodTypeModel,

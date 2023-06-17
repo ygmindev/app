@@ -1,3 +1,3 @@
-export interface PaginationParamsModel {
+export type PaginationParamsModel = {
   name: string;
-}
+};

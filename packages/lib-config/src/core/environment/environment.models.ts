@@ -1,4 +1,4 @@
-export interface EnvironmentConfigModel {
+export type EnvironmentConfigModel = {
   APP_AMPLITUDE_API_KEY: string;
   APP_FIREBASE_API_KEY: string;
   APP_FIREBASE_APP_ID: string;
@@ -48,4 +48,4 @@ export interface EnvironmentConfigModel {
   SERVER_TWILIO_FROM: string;
   SERVER_TWILIO_SID: string;
   SERVER_TWILIO_TOKEN: string;
-}
+};

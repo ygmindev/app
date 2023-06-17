@@ -5,14 +5,14 @@ import type { TestIdPropsModel } from '#lib-frontend/test/test.models';
 import type { PartialModel, RequiredModel } from '#lib-shared/core/core.models';
 import type { WithTestModel } from '#lib-shared/test/utils/withTest/withTest.models';
 
-export interface WithTestComponentParamsModel<
+export type WithTestComponentParamsModel<
   TProps,
   TDefault extends PartialModel<TProps> = PartialModel<TProps>,
-> {
+> = {
   defaultProps?: TDefault & RefPropsModel;
   displayName?: string;
   target: ComponentType<TProps>;
-}
+};
 
 export type WithTestComponentModel<
   TProps,

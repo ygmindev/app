@@ -5,15 +5,15 @@ import type {
 } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import type { UserModel } from '#lib-shared/user/resources/User/User.models';
 
-export interface SignInModel {
+export type SignInModel = {
   isNew?: boolean;
   token?: string;
   user?: EntityResourcePartialModel<UserModel>;
-}
+};
 
-export interface SignInFormModel extends EntityResourceDataModel<OtpModel> {}
+export type SignInFormModel = EntityResourceDataModel<OtpModel>;
 
-export interface SignInTokenModel {
+export type SignInTokenModel = {
   _id: string;
   claims: EntityResourceDataModel<UserModel>;
-}
+};

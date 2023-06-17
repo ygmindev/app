@@ -4,11 +4,11 @@ import type { AuthorizeParamsModel } from '#lib-backend/auth/utils/authorize/aut
 import type { _ContainerModel } from '#lib-backend/core/utils/Container/_Container.models';
 import type { ConstructorModel } from '#lib-shared/core/core.models';
 
-export interface GraphqlConfigModel {
+export type GraphqlConfigModel = {
   authorize(params: AuthorizeParamsModel): Promise<boolean>;
   container: _ContainerModel;
   resolvers: Array<ConstructorModel>;
   schemaPath: string;
-}
+};
 
 export type _GraphqlConfigModel = GraphQLSchema;

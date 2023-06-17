@@ -2,8 +2,8 @@ import type { PagePropsModel, TranslatableOptionModel } from '#lib-frontend/core
 import type { EntityResourcePartialModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import type { UserModel } from '#lib-shared/user/resources/User/User.models';
 
-export interface PersonalPageItemModel extends TranslatableOptionModel {
+export type PersonalPageItemModel = {
   value(user: EntityResourcePartialModel<UserModel>): string | undefined;
-}
+} & TranslatableOptionModel;
 
-export interface PersonalPagePropsModel extends PagePropsModel {}
+export type PersonalPagePropsModel = PagePropsModel;

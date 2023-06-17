@@ -4,13 +4,13 @@ import type { TASK_STATUS } from '#tool-task/core/core.constants';
 
 export type TaskStatusModel = `${TASK_STATUS}`;
 
-export interface TaskResultModel {
+export type TaskResultModel = {
   error?: Error;
   message?: string;
   status: TaskStatusModel;
-}
+};
 
-export interface TaskParamsModel<TType = undefined> extends EnvironmentOverrideParamsModel {
+export type TaskParamsModel<TType = undefined> = {
   name: string;
   onAfter?: Array<string | CallablePromiseModel<TaskResultModel>>;
   onBefore?: Array<string | CallablePromiseModel<TaskResultModel>>;
@@ -18,9 +18,8 @@ export interface TaskParamsModel<TType = undefined> extends EnvironmentOverrideP
   root?: string;
   target?: string;
   task(params: TaskContextModel<TType>): Promise<TaskResultModel>;
-}
+} & EnvironmentOverrideParamsModel;
 
-export interface TaskContextModel<TType = undefined>
-  extends Pick<TaskParamsModel<TType>, 'options' | 'root' | 'target'> {
+export type TaskContextModel<TType = undefined> = {
   name?: string;
-}
+} & Pick<TaskParamsModel<TType>, 'options' | 'root' | 'target'>;

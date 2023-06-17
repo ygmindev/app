@@ -5,10 +5,12 @@ import type {
   ResourceServiceParamsModel,
 } from '#lib-shared/resource/utils/Resource/ResourceService/ResourceService.models';
 
-export interface EmbeddedResourceServiceParamsModel<TType, TForm, TRoot, TRootForm>
-  extends ResourceServiceParamsModel<TType, TForm, TRoot> {
+export type EmbeddedResourceServiceParamsModel<TType, TForm, TRoot, TRootForm> = {
   RootService: ConstructorModel<EntityResourceServiceModel<TRoot, TRootForm>>;
-}
+} & ResourceServiceParamsModel<TType, TForm, TRoot>;
 
-export interface EmbeddedResourceServiceModel<TType, TForm, TRoot>
-  extends ResourceServiceModel<TType, TForm, TRoot> {}
+export type EmbeddedResourceServiceModel<TType, TForm, TRoot> = ResourceServiceModel<
+  TType,
+  TForm,
+  TRoot
+>;

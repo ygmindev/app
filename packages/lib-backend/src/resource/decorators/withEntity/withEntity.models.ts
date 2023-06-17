@@ -1,4 +1,4 @@
-export interface WithEntityParamsModel<TType> {
+export type WithEntityParamsModel<TType> = {
   indices?: Array<Array<keyof TType>>;
   isAbstract?: boolean;
   isEmbedded?: boolean;
@@ -6,4 +6,4 @@ export interface WithEntityParamsModel<TType> {
   isSchema?: boolean;
   isSchemaInput?: boolean;
   name?: string;
-}
+};

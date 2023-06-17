@@ -9,20 +9,19 @@ import type {
 import type { GraphQlOperationTypeModel } from '#lib-shared/graphql/graphql.models';
 import type { ConnectionModel } from '#lib-shared/resource/utils/Connection/Connection.models';
 
-export interface GraphQlHttpParamsModel<TParams> {
+export type GraphQlHttpParamsModel<TParams> = {
   query: string;
   variables?: TParams;
-}
+};
 
-export interface GraphQlQueryHttpParamsModel<TParams, TResult, TName extends string = string>
-  extends GraphQlQueryParamsModel<TParams, TResult, TName> {
+export type GraphQlQueryHttpParamsModel<TParams, TResult, TName extends string = string> = {
   variables?: TParams;
-}
+} & GraphQlQueryParamsModel<TParams, TResult, TName>;
 
-export interface GraphQlHttpResponseModel<TResult, TName extends string = string> {
+export type GraphQlHttpResponseModel<TResult, TName extends string = string> = {
   data?: Record<TName, TResult>;
   errors?: Array<GraphQLError>;
-}
+};
 
 export type GraphQlFragmentFieldModel<TType, TStrict extends boolean = true> = Record<
   string,
@@ -54,11 +53,11 @@ export type GraphQlQueryParamsFieldsModel<TType, TStrict extends boolean = true>
   GraphQlFieldModel<TType, TStrict>
 >;
 
-export interface GraphQlQueryParamsModel<TParams, TResult, TName extends string = string> {
+export type GraphQlQueryParamsModel<TParams, TResult, TName extends string = string> = {
   fields: GraphQlQueryParamsFieldsModel<TResult>;
   name: TName;
   params?: { [TKey in keyof TParams]?: string };
   type: GraphQlOperationTypeModel;
-}
+};
 
 export type GraphQlQueryModel = string;

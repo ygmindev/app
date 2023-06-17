@@ -5,4 +5,4 @@ import type {
 
 export type RenderParamsHookModel<TResult> = _RenderHookParamsModel<TResult>;
 
-export interface RenderHookModel<TResult> extends _RenderHookModel<TResult> {}
+export type RenderHookModel<TResult> = _RenderHookModel<TResult>;

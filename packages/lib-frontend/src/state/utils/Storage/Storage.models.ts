@@ -3,6 +3,6 @@ import type {
   _StorageParamsModel,
 } from '#lib-frontend/state/utils/Storage/_Storage.models';
 
-export interface StorageParamsModel extends _StorageParamsModel {}
+export type StorageParamsModel = _StorageParamsModel;
 
-export interface StorageModel extends _StorageModel {}
+export type StorageModel = _StorageModel;

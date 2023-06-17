@@ -3,29 +3,28 @@ import type { ElementStateModel, ElementStatePropsModel } from '#lib-frontend/co
 import type { StyleModel, StylePropsModel, ViewStyleModel } from '#lib-frontend/style/style.models';
 import type { CallableModel } from '#lib-shared/core/core.models';
 
-export interface AnimationModel<
+export type AnimationModel<
   TStyle extends StyleModel = ViewStyleModel,
   TStates extends AnimationStatesModel<TStyle> = AnimationStatesModel<TStyle>,
-> {
+> = {
   delay?: number;
   duration?: number;
   isInfinite?: boolean;
   isInitial?: boolean;
   onEnd?: CallableModel;
   states?: TStates;
-}
+};
 
-export interface AnimatableRefModel<TStyle extends StyleModel = ViewStyleModel> {
+export type AnimatableRefModel<TStyle extends StyleModel = ViewStyleModel> = {
   to(params: TStyle): void;
   toState(params: ElementStateModel): void;
-}
+};
 
 export type AnimationStatesModel<TStyle extends StyleModel = ViewStyleModel> = {
   [TKey in ELEMENT_STATE]?: TStyle;
 };
 
-export interface AnimatablePropsModel<TStyle extends StyleModel = ViewStyleModel>
-  extends ElementStatePropsModel,
-    StylePropsModel<TStyle> {
+export type AnimatablePropsModel<TStyle extends StyleModel = ViewStyleModel> = {
   animation?: AnimationModel<TStyle>;
-}
+} & ElementStatePropsModel &
+  StylePropsModel<TStyle>;

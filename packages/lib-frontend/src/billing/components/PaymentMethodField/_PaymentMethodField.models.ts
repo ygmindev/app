@@ -4,8 +4,7 @@ import type { CardFormModel } from '#lib-shared/billing/resources/Card/Card.mode
 import type { PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import type { EntityResourcePartialModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
-export interface _PaymentMethodFieldPropsModel
-  extends FieldPropsModel<EntityResourcePartialModel<PaymentMethodModel>>,
-    SubmittablePropsModel<BankFormModel | CardFormModel> {
+export type _PaymentMethodFieldPropsModel = {
   token?: string;
-}
+} & FieldPropsModel<EntityResourcePartialModel<PaymentMethodModel>> &
+  SubmittablePropsModel<BankFormModel | CardFormModel>;

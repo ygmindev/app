@@ -3,14 +3,13 @@ import type { WithResourceNameModel } from '#lib-shared/resource/decorators/with
 import type { EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import type { ResourceServiceModel } from '#lib-shared/resource/utils/Resource/ResourceService/ResourceService.models';
 
-export interface DatabaseModel {
+export type DatabaseModel = {
   close: CallablePromiseModel;
   connect(): Promise<void>;
   getRepository<TType>(params: WithResourceNameModel): RepositoryModel<TType>;
-}
+};
 
-export interface RepositoryModel<TType>
-  extends ResourceServiceModel<TType, EntityResourceDataModel<TType>> {
+export type RepositoryModel<TType> = {
   clear: CallablePromiseModel;
   count: CallablePromiseModel<number>;
-}
+} & ResourceServiceModel<TType, EntityResourceDataModel<TType>>;

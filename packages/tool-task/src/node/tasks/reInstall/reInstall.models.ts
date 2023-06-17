@@ -1,1 +1,1 @@
-export interface ReInstallParamsModel {}
+export type ReInstallParamsModel = Record<string, never>;

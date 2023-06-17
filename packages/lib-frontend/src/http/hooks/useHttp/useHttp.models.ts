@@ -3,6 +3,6 @@ import type {
   HttpServiceParamsModel,
 } from '#lib-shared/http/utils/HttpService/HttpService.models';
 
-export interface UseHttpParamsModel extends HttpServiceParamsModel {}
+export type UseHttpParamsModel = HttpServiceParamsModel;
 
-export interface UseHttpModel extends HttpServiceModel {}
+export type UseHttpModel = HttpServiceModel;

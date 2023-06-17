@@ -10,7 +10,7 @@ import type {
 import type { PaletteParamsModel } from '#lib-frontend/style/utils/palette/palette.models';
 import type { FontFamilyModel } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.models';
 
-export interface ThemeConfigModel {
+export type ThemeConfigModel = {
   animation: {
     duration: number;
     transition: number;
@@ -56,4 +56,4 @@ export interface ThemeConfigModel {
     height: Record<ThemeSizeMoreModel, number>;
     spacing: Record<ThemeSizeModel, number>;
   };
-}
+};

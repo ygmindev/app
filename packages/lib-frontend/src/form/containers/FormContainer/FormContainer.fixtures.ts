@@ -3,11 +3,11 @@ import type { FormContainerPropsModel } from '#lib-frontend/form/containers/Form
 import { withId } from '#lib-shared/core/decorators/withId/withId';
 
 // TODO: move to shared
-export interface FormContainerFixtureModel {
+export type FormContainerFixtureModel = {
   numberField: number;
   stringField: string;
   stringFieldOptional?: string;
-}
+};
 
 export const FORM_CONTAINER_PROPS_FIXTURE: FormContainerPropsModel<FormContainerFixtureModel> = {
   rows: withId([

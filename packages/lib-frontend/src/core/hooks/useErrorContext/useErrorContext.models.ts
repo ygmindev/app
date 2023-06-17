@@ -1,3 +1,3 @@
-export interface UseErrorContextModel {
+export type UseErrorContextModel = {
   handleError(error: Error): void;
-}
+};

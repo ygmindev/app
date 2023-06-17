@@ -6,10 +6,7 @@ import type { TextFieldKeyboardModel } from '#lib-frontend/form/components/TextF
 import type { StringFieldPropsModel, SubmittablePropsModel } from '#lib-frontend/form/form.models';
 import type { CallableModel } from '#lib-shared/core/core.models';
 
-export interface _TextFieldPropsModel
-  extends Omit<StringFieldPropsModel, 'error' | 'label'>,
-    SubmittablePropsModel<string>,
-    DimensionModel {
+export type _TextFieldPropsModel = {
   Component?(inputProps: TextInputProps): ReactElement;
   autoComplete?: string | false;
   error?: string | boolean;
@@ -24,4 +21,6 @@ export interface _TextFieldPropsModel
   onRemove?: CallableModel;
   placeholder?: string;
   rightElement?: ReactNode;
-}
+} & Omit<StringFieldPropsModel, 'error' | 'label'> &
+  SubmittablePropsModel<string> &
+  DimensionModel;

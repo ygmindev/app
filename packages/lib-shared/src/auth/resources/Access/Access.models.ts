@@ -7,12 +7,12 @@ export type AccessRoleModel = `${ACCESS_ROLE}`;
 
 export type AccessLevelModel = `${ACCESS_LEVEL}`;
 
-export interface AccessModel extends EntityResourceModel {
+export type AccessModel = {
   _uid: string;
   role: AccessRoleModel;
   user?: ResolvedFieldModel<UserModel>;
-}
+} & EntityResourceModel;
 
-export interface AccessFormModel extends Pick<AccessModel, 'role'> {
+export type AccessFormModel = {
   _uid: string;
-}
+} & Pick<AccessModel, 'role'>;

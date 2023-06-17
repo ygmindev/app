@@ -1,4 +1,4 @@
-export interface ConnectionParamsModel<TType> {
+export type ConnectionParamsModel<TType> = {
   Resource: TType;
   name: string;
-}
+};
