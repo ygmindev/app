@@ -1,10 +1,13 @@
+import type { i18n } from 'i18next';
 import type { PageContextBuiltIn } from 'vite-plugin-ssr/types';
 
+import type { InternationalizeConfigModel } from '#lib-config/locale/internationalize/internationalize.models';
 import type { ExportRenderServerRenderParamsModel } from '#lib-platform/web/exports/exportRendererServer/exportRendererServer.models';
 
-export type _ExportPrerenderPagesParamsModel = {
-  pages: Array<ExportRenderServerRenderParamsModel & { pathname: string }>;
-};
+export type _ExportPrerenderPagesParamsModel = Pick<
+  InternationalizeConfigModel,
+  'languages' | 'languageDefault'
+> & { i18n: i18n; pathnames: Array<string> };
 
 export type _ExportPrerenderPagesModel = {
   pages(
