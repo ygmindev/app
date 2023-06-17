@@ -1,4 +1,3 @@
-import { _config } from '#lib-config/locale/internationalize/internationalize.node';
 import type {
   _ExportRouteModel,
   _ExportRouteParamsModel,
@@ -8,8 +7,7 @@ import { parseLanguageUrl } from '#lib-shared/locale/utils/parseLanguageUrl/pars
 
 export const _exportRoute = ({}: _ExportRouteParamsModel): _ExportRouteModel => ({
   route: ({ urlOriginal }) => {
-    const i18n = _config();
     const { lang, url } = parseLanguageUrl(urlOriginal);
-    return { pageContext: { context: { [LOCALE]: { i18n, lang } }, urlOriginal: url } };
+    return { pageContext: { context: { [LOCALE]: { lang } }, urlOriginal: url } };
   },
 });
