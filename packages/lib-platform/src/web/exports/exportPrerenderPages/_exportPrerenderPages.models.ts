@@ -1,13 +1,12 @@
-import type { PageContextBuiltIn } from 'vite-plugin-ssr/types';
-
 import type { ExportRenderServerRenderParamsModel } from '#lib-platform/web/exports/exportRendererServer/exportRendererServer.models';
+import type { CallablePromiseModel } from '#lib-shared/core/core.models';
 
 export type _ExportPrerenderPagesParamsModel = {
-  pages: Array<ExportRenderServerRenderParamsModel & { pathname: string }>;
+  pages: Array<{ getContext?: CallablePromiseModel<_PageContextModel>; pathname: string }>;
 };
 
 export type _ExportPrerenderPagesModel = {
-  pages(
-    params: PageContextBuiltIn,
-  ): Promise<Array<{ pageContext: ExportRenderServerRenderParamsModel; url: string }>>;
+  prerenderPages(): Promise<Array<{ pageContext: _PageContextModel; url: string }>>;
 };
+
+type _PageContextModel = ExportRenderServerRenderParamsModel;

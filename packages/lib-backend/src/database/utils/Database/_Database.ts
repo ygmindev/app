@@ -76,17 +76,12 @@ export abstract class _Database implements DatabaseModel {
         const collection = em.getCollection(name);
         const result = (await (options && options.aggregate
           ? collection
-              .aggregate(
-                [
-                  { $match: filterF },
-                  ...(options
-                    ? [
-                        options.project && { $project: options.project },
-                        ...(options.aggregate ?? []),
-                      ]
-                    : []),
-                ].filter(Boolean) as unknown as Document[],
-              )
+              .aggregate([
+                { $match: filterF },
+                ...(options
+                  ? [options.project && { $project: options.project }, ...(options.aggregate ?? [])]
+                  : []),
+              ] as unknown as Document[])
               .next()
           : collection.findOne(filterF, options && { projection: options.project }))) as TType;
         return { result: result ?? undefined };
@@ -109,19 +104,17 @@ export abstract class _Database implements DatabaseModel {
         const filterF = cleanDocument(filter) as object;
         const result = (await (options && options.aggregate
           ? collection
-              .aggregate(
-                [
-                  { $match: filterF },
-                  ...(options
-                    ? [
-                        options.project && { $project: options.project },
-                        options.take && { $limit: options.take + (options.skip ?? 0) },
-                        options.skip && { $skip: options.skip },
-                        ...(options.aggregate ?? []),
-                      ]
-                    : []),
-                ].filter(Boolean) as unknown as Document[],
-              )
+              .aggregate([
+                { $match: filterF },
+                ...(options
+                  ? [
+                      options.project && { $project: options.project },
+                      options.take && { $limit: options.take + (options.skip ?? 0) },
+                      options.skip && { $skip: options.skip },
+                      ...(options.aggregate ?? []),
+                    ]
+                  : []),
+              ] as unknown as Document[])
               .toArray()
           : collection
               .find(

@@ -29,6 +29,7 @@ export type LocationParamsModel = {
 };
 
 export type RouteContextModel<TParams extends LocationParamsModel = LocationParamsModel> = {
+  basename?: string;
   location?: LocationModel<TParams>;
   redirect?: string;
   status?: number;

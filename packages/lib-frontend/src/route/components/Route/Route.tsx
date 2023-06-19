@@ -37,7 +37,7 @@ export const Route: SFCModel<RoutePropsModel> = ({ children, route, testID, ...p
 
   const Container = route.isProtectable ? Protectable : Fragment;
   let element = cloneElement(
-    route.element || (
+    route.element ?? (
       <Wrapper
         grow
         position={SHAPE_POSITION.RELATIVE}

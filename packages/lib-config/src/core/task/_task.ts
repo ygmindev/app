@@ -5,6 +5,7 @@ import { fromGlobs } from '#lib-backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { packages } from '#lib-backend/file/utils/packages/packages';
 import type { _TaskConfigModel, TaskConfigModel } from '#lib-config/core/task/task.models';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import type { TaskParamsModel } from '#tool-task/core/core.models';
 import { prompt } from '#tool-task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '#tool-task/core/utils/prompt/prompt.constants';
@@ -12,7 +13,7 @@ import { TaskRegistry } from '#tool-task/core/utils/TaskRegistry/TaskRegistry';
 
 export const _task = ({ packageConfig, taskExtension }: TaskConfigModel): _TaskConfigModel => {
   const taskRegistry = Container.get(TaskRegistry);
-  const tasks = [
+  const tasks = filterNil([
     // Task files
     ...fromGlobs({
       globs: [`*/src/**/*.${taskExtension}`],
@@ -45,7 +46,6 @@ export const _task = ({ packageConfig, taskExtension }: TaskConfigModel): _TaskC
         return taskRegistry.get(name)();
       },
     },
-  ].filter(Boolean) as Array<TaskParamsModel>;
-
+  ]);
   tasks.forEach(taskRegistry.register);
 };

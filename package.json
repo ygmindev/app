@@ -234,7 +234,6 @@
     "reflect-metadata": "^0.1.13",
     "regenerator-runtime": "^0.13.11",
     "rimraf": "^5.0.1",
-    "rollup-plugin-polyfill-node": "^0.12.0",
     "rollup-plugin-visualizer": "^5.9.2",
     "serverless-dotenv-plugin": "^6.0.0",
     "serverless-esbuild": "^1.45.1",

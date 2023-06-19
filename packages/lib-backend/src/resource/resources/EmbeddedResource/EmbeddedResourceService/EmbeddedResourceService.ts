@@ -9,6 +9,7 @@ import { EmbeddedResource } from '#lib-backend/resource/resources/EmbeddedResour
 import type { ConstructorModel, PartialModel } from '#lib-shared/core/core.models';
 import { InvalidArgumentError } from '#lib-shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { flattenObject } from '#lib-shared/core/utils/flattenObject/flattenObject';
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import type { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
@@ -63,14 +64,12 @@ export const EmbeddedResourceService = <
     input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>,
   ): Array<object> => {
     const nameF = `$${name}`;
-    return [
+    return filterNil([
       { $unwind: nameF },
       { $match: flattenObject({ [name]: input.filter }) },
-      input.options?.project && {
-        $project: flattenObject({ [name]: input.options.project }),
-      },
+      input.options?.project && { $project: flattenObject({ [name]: input.options.project }) },
       { $group: { _id: '$_id', [name]: { $push: nameF } } },
-    ].filter(Boolean) as Array<object>;
+    ]);
   };
 
   @withContainer()

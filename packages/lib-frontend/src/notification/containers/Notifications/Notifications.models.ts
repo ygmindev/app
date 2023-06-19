@@ -1,1 +1,3 @@
-export type NotificationsPropsModel = Record<string, never>;
+import type { EmptyObjectModel } from '#lib-shared/core/core.models';
+
+export type NotificationsPropsModel = EmptyObjectModel;

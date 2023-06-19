@@ -18,6 +18,8 @@ export type InternationalizeConfigModel = {
 
   key: string;
 
+  language?: string;
+
   languageDefault: string;
 
   languages: Array<string>;

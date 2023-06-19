@@ -8,6 +8,7 @@ import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages'
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import type { CallablePromiseModel } from '#lib-shared/core/core.models';
 import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/DuplicateError';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { sequence } from '#lib-shared/core/utils/sequence/sequence';
 import { setEnvironment } from '#lib-shared/environment/utils/setEnvironment/setEnvironment';
 import { error, info, warn } from '#lib-shared/logging/utils/logger/logger';
@@ -32,7 +33,7 @@ export class TaskRegistry extends _TaskRegistry implements TaskRegistryModel {
     task,
   }: TaskParamsModel<TType>): void => {
     const targetF = target && kebabCase(target);
-    const nameF = [targetF, kebabCase(name)].filter(Boolean).join('-');
+    const nameF = filterNil([targetF, kebabCase(name)]).join('-');
     const alias = kebabCase(nameF)
       .split('-')
       .map((p) => p.charAt(0))

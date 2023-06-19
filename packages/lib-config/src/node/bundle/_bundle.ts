@@ -7,9 +7,7 @@ import react from '@vitejs/plugin-react-swc';
 import { getTsconfig } from 'get-tsconfig';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
-// import nodePolyfills from 'rollup-plugin-polyfill-node';
 import { visualizer } from 'rollup-plugin-visualizer';
-import type { PluginOption } from 'vite';
 import { searchForWorkspaceRoot } from 'vite';
 import { checker } from 'vite-plugin-checker';
 import circleDependency from 'vite-plugin-circular-dependency';
@@ -24,6 +22,7 @@ import { lintCommand } from '#lib-config/node/lint/lint';
 import { PLATFORM } from '#lib-platform/core/core.constants';
 import type { PlatformModel } from '#lib-platform/core/core.models';
 import type { ReturnTypeModel } from '#lib-shared/core/core.models';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 
 export const _bundle = ({
@@ -52,15 +51,18 @@ export const _bundle = ({
         defaultIsModuleExports: true,
         esmExternals: true,
         requireReturnsDefault: 'auto',
+
         transformMixedEsModules: true,
       },
+
+      minify: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION,
 
       outDir,
 
       rollupOptions: {
         ...(entry ? { input: entry } : {}),
 
-        plugins: [resolve()],
+        plugins: [resolve({ modulesOnly: true })],
       },
       watch:
         process.env.NODE_ENV === ENVIRONMENT.DEVELOPMENT && watch ? { include: watch } : undefined,
@@ -84,8 +86,6 @@ export const _bundle = ({
 
         mainFields,
 
-        minify: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION,
-
         nodePaths: modulePaths,
 
         plugins: _plugins({ platform, transpiles }),
@@ -102,7 +102,7 @@ export const _bundle = ({
       include: transpiles,
     },
 
-    plugins: [
+    plugins: filterNil([
       tsconfigPath && tsconfigPaths({ projects: [tsconfigPath] }),
 
       checker({
@@ -126,7 +126,7 @@ export const _bundle = ({
       process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && visualizer(),
 
       circleDependency({}),
-    ].filter(Boolean) as Array<PluginOption>,
+    ]),
 
     resolve: {
       alias: {

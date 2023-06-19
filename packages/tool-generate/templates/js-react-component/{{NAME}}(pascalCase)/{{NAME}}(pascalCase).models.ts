@@ -1,1 +1,3 @@
-export type {{NAME}}(pascalCase)PropsModel = Record<string, never>;
+import type { EmptyObjectModel } from '#lib-shared/core/core.models';
+
+export type {{NAME}}(pascalCase)PropsModel = EmptyObjectModel;

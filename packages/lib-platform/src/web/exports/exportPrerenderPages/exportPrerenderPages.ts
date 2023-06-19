@@ -1,7 +1,5 @@
 import trimEnd from 'lodash/trimEnd';
 
-import { config } from '#lib-config/locale/internationalize/internationalize.base';
-import { _config } from '#lib-config/locale/internationalize/internationalize.node';
 import type { RouteModel } from '#lib-frontend/route/route.models';
 import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
 import { _exportPrerenderPages } from '#lib-platform/web/exports/exportPrerenderPages/_exportPrerenderPages';
@@ -10,12 +8,10 @@ import type {
   ExportPrerenderPagesModel,
   ExportPrerenderPagesParamsModel,
 } from '#lib-platform/web/exports/exportPrerenderPages/exportPrerenderPages.models';
-import { LOCALE } from '#lib-shared/locale/locale.constants';
-import { warn } from '#lib-shared/logging/utils/logger/logger';
 
-const { languageDefault, languages } = config;
-
-const _getPrerenderPathnames = (routes?: Array<RouteModel>): Array<string> =>
+const _getPrerenderPathnames = (
+  routes?: Array<RouteModel>,
+): _ExportPrerenderPagesParamsModel['pages'] =>
   routes?.reduce((result, route) => {
     const pathname = trimPathname(`${route.root ?? ''}/${trimEnd(route.pathname, '/*')}`);
     const resultF = [
@@ -26,23 +22,11 @@ const _getPrerenderPathnames = (routes?: Array<RouteModel>): Array<string> =>
           )
         : []),
     ];
-    return route.isPrerender ? [...resultF, pathname] : resultF;
-  }, [] as Array<string>) || [];
+    // TODO: add async context per page if needed
+    return route.isPrerender ? [...resultF, { getContext: undefined, pathname }] : resultF;
+  }, [] as _ExportPrerenderPagesParamsModel['pages']) || [];
 
 export const exportPrerenderPages = ({
   routes,
-}: ExportPrerenderPagesParamsModel): ExportPrerenderPagesModel => {
-  const i18n = _config();
-  const pages: _ExportPrerenderPagesParamsModel['pages'] = [];
-  const pathnames = _getPrerenderPathnames(routes);
-  languages.forEach((lang) =>
-    pathnames.forEach((pathname) =>
-      pages.push({
-        context: { [LOCALE]: { i18n, lang } },
-        pathname: trimPathname(lang === languageDefault ? pathname : `/${lang}/${pathname}`),
-      }),
-    ),
-  );
-  warn(pages);
-  return _exportPrerenderPages({ pages });
-};
+}: ExportPrerenderPagesParamsModel): ExportPrerenderPagesModel =>
+  _exportPrerenderPages({ pages: _getPrerenderPathnames(routes) });

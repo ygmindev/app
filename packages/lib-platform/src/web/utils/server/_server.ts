@@ -47,15 +47,15 @@ export const _server = async ({
   );
 
   app.get('*', async (req, res) => {
+    const { cookies, i18n, language, url } = req;
     const { error, redirect, response } = await renderPage({
       context: {
-        [LOCALE]: { i18n: req.i18n, lang: req.language },
-        [ROUTE]: { location: { pathname: req.url } },
+        [LOCALE]: { i18n, lang: language },
+        [ROUTE]: { location: { pathname: url } },
         [STATE]: {
           cookies: {
             expire: (key) => res.clearCookie(key),
-            get: <TType extends string = string>(key: string) =>
-              (req.cookies[key] as TType) || null,
+            get: <TType extends string = string>(key: string) => (cookies[key] as TType) || null,
             set: <TType extends string = string>(
               key: string,
               value: TType,

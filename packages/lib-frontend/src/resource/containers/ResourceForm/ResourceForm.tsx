@@ -4,6 +4,7 @@ import type { SFCPropsModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/form/containers/FormContainer/FormContainer';
 import type { ResourceFormPropsModel } from '#lib-frontend/resource/containers/ResourceForm/ResourceForm.models';
 import { withId } from '#lib-shared/core/decorators/withId/withId';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import type { EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export const ResourceForm = <TType extends EntityResourceModel, TForm, TRoot = undefined>({
@@ -26,10 +27,8 @@ export const ResourceForm = <TType extends EntityResourceModel, TForm, TRoot = u
       initialValues={data}
       onCancel={onCancel}
       onSubmit={handleSubmit}
-      rows={withId(
-        columns
-          .map((column) => (data || !column.isDisabled) && { fields: [column] })
-          .filter(Boolean),
+      rows={filterNil(
+        withId(columns.map((column) => (data || !column.isDisabled) && { fields: [column] })),
       )}
       testID={testID}
       validators={validators}

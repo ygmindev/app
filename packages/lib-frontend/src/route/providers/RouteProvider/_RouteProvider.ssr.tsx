@@ -7,5 +7,9 @@ import type { _RouteProviderPropsModel } from '#lib-frontend/route/providers/Rou
 export const _RouteProvider = composeComponent<_RouteProviderPropsModel, StaticRouterProps>({
   Component: StaticRouter,
 
-  getProps: ({ children, value }) => ({ children, location: value?.location || '' }),
+  getProps: ({ children, value }) => ({
+    basename: value?.basename,
+    children,
+    location: value?.location || '',
+  }),
 });

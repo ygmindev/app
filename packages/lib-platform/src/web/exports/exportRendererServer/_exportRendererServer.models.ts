@@ -19,12 +19,13 @@ export type _ExportRendererServerParamsModel = {
 } & Pick<ReturnTypeModel<WebConfigModel>, 'publicDir' | 'rootId' | 'ssrContextKeys'>;
 
 export type _ExportRendererServerModel = {
-  render(
-    params: PageContextBuiltInClientWithServerRouting & ExportRenderClientRenderParamsModel,
-  ): Promise<{
+  render(params: _PageContextModel): Promise<{
     documentHtml: { _template: unknown };
     pageContext: CallablePromiseModel<
       { redirectTo?: string } & ExportRenderClientRenderParamsModel
     >;
   }>;
 };
+
+type _PageContextModel = PageContextBuiltInClientWithServerRouting &
+  ExportRenderClientRenderParamsModel;

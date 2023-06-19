@@ -22,49 +22,47 @@ export const _StyleProvider = composeComponent<_StyleProviderPropsModel, Provide
 
       return {
         children,
-        theme: merge<typeof DefaultTheme>(
-          [
-            value && {
-              animation: {
-                scale: 0,
-              },
-
-              colors: {
-                background: theme.colors.tone.neutral.main,
-                error: theme.colors.tone.error.main,
-                errorContainer: theme.colors.tone.error.muted,
-                onBackground: theme.colors.tone.neutral.mainContrast,
-                onError: theme.colors.tone.error.mainContrast,
-                onErrorContainer: theme.colors.tone.error.mutedContrast,
-                onPrimary: theme.colors.tone.primary.mainContrast,
-                onPrimaryContainer: theme.colors.tone.primary.mutedContrast,
-                onSecondary: theme.colors.tone.secondary.mainContrast,
-                onSecondaryContainer: theme.colors.tone.secondary.mutedContrast,
-                outline: theme.colors.tone.neutral.muted,
-                primary: theme.colors.tone.primary.main,
-                primaryContainer: theme.colors.tone.primary.muted,
-                secondary: theme.colors.tone.secondary.main,
-                secondaryContainer: theme.colors.tone.secondary.muted,
-                shadow: theme.colors.tone.neutral.muted,
-              },
-
-              dark: brightness === STYLE_BRIGHTNESS.DARK,
-
-              fonts: {
-                bodyLarge: { ...fontStyle, fontSize: theme.font.size.l },
-                bodyMedium: fontStyle,
-                bodySmall: { ...fontStyle, fontSize: theme.font.size.s },
-                labelLarge: { ...fontStyle, fontSize: theme.font.size.l },
-                labelMedium: fontStyle,
-                labelSmall: { ...fontStyle, fontSize: theme.font.size.s },
-              },
-
-              roundness: theme.shape.borderRadius,
+        theme: merge<typeof DefaultTheme>([
+          value && {
+            animation: {
+              scale: 0,
             },
 
-            DefaultTheme,
-          ].filter(Boolean),
-        ),
+            colors: {
+              background: theme.colors.tone.neutral.main,
+              error: theme.colors.tone.error.main,
+              errorContainer: theme.colors.tone.error.muted,
+              onBackground: theme.colors.tone.neutral.mainContrast,
+              onError: theme.colors.tone.error.mainContrast,
+              onErrorContainer: theme.colors.tone.error.mutedContrast,
+              onPrimary: theme.colors.tone.primary.mainContrast,
+              onPrimaryContainer: theme.colors.tone.primary.mutedContrast,
+              onSecondary: theme.colors.tone.secondary.mainContrast,
+              onSecondaryContainer: theme.colors.tone.secondary.mutedContrast,
+              outline: theme.colors.tone.neutral.muted,
+              primary: theme.colors.tone.primary.main,
+              primaryContainer: theme.colors.tone.primary.muted,
+              secondary: theme.colors.tone.secondary.main,
+              secondaryContainer: theme.colors.tone.secondary.muted,
+              shadow: theme.colors.tone.neutral.muted,
+            },
+
+            dark: brightness === STYLE_BRIGHTNESS.DARK,
+
+            fonts: {
+              bodyLarge: { ...fontStyle, fontSize: theme.font.size.l },
+              bodyMedium: fontStyle,
+              bodySmall: { ...fontStyle, fontSize: theme.font.size.s },
+              labelLarge: { ...fontStyle, fontSize: theme.font.size.l },
+              labelMedium: fontStyle,
+              labelSmall: { ...fontStyle, fontSize: theme.font.size.s },
+            },
+
+            roundness: theme.shape.borderRadius,
+          },
+
+          DefaultTheme,
+        ]),
       };
     }
     return { children, theme: DefaultTheme };

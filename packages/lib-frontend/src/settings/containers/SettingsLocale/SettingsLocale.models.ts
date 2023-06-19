@@ -1,1 +1,3 @@
-export type SettingsLocalePropsModel = Record<string, never>;
+import type { EmptyObjectModel } from '#lib-shared/core/core.models';
+
+export type SettingsLocalePropsModel = EmptyObjectModel;

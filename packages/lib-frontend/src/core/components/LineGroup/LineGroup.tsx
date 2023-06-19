@@ -11,6 +11,7 @@ import { TranslatableText } from '#lib-frontend/locale/components/TranslatableTe
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 
 export const LineGroup: SFCModel<LineGroupPropsModel> = ({
   children,
@@ -22,7 +23,7 @@ export const LineGroup: SFCModel<LineGroupPropsModel> = ({
   const { styles } = useStyles({ props });
   const lineItems = Children.toArray(children) as Array<ReactElement>;
   const childrenF = useDividers(
-    [
+    filterNil([
       title && (
         <Text
           p
@@ -37,7 +38,7 @@ export const LineGroup: SFCModel<LineGroupPropsModel> = ({
               <TranslatableText>{emptyString}</TranslatableText>
             </LineItem>,
           ]),
-    ].filter(Boolean) as Array<ReactElement>,
+    ]),
   );
 
   return (

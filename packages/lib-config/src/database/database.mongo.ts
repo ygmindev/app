@@ -10,20 +10,19 @@ import type {
   _DatabaseConfigModel,
   DatabaseConfigModel,
 } from '#lib-config/database/database.models';
-import type { ConstructorModel } from '#lib-shared/core/core.models';
-import type { EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 
 export const config: DatabaseConfigModel = () => ({
   database: process.env.SERVER_MONGO_DATABASE_NAME,
 
-  entities: [
+  entities: filterNil([
     Access,
     Bank,
     Card,
     Otp,
     User,
     process.env.NODE_ENV !== 'production' && DummyEntityResource,
-  ].filter(Boolean) as Array<ConstructorModel<EntityResourceModel>>,
+  ]),
 
   host: process.env.SERVER_MONGO_DATABASE_URL,
 

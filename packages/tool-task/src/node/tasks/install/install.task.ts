@@ -1,8 +1,8 @@
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
-import type { CallablePromiseModel } from '#lib-shared/core/core.models';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { sequence } from '#lib-shared/core/utils/sequence/sequence';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
-import type { TaskParamsModel, TaskResultModel } from '#tool-task/core/core.models';
+import type { TaskParamsModel } from '#tool-task/core/core.models';
 import { command } from '#tool-task/core/utils/command/command';
 import { prompt } from '#tool-task/core/utils/prompt/prompt';
 import type { PromptArgsModel } from '#tool-task/core/utils/prompt/prompt.models';
@@ -15,24 +15,24 @@ const install: TaskParamsModel<InstallParamsModel> = {
 
   task: async ({ options }) => {
     const root = fromRoot();
-    const prompts: Array<PromptArgsModel> = [
+    const prompts: Array<PromptArgsModel> = filterNil([
       options?.install ?? { isOptional: true, key: 'install' },
       options?.installDev ?? { isOptional: true, key: 'installDev' },
       options?.remove ?? { isOptional: true, key: 'remove' },
-    ].filter(Boolean) as Array<PromptArgsModel>;
+    ]) as Array<PromptArgsModel>;
     const response = prompts ? await prompt(prompts) : {};
     const install = options?.install || response.install;
     const installDev = options?.installDev || response.installDev;
     const remove = options?.remove || response.remove;
     await sequence(
-      [
+      filterNil([
         install &&
           (async () => command(install === '*' ? 'yarn' : `yarn add ${install}`, { root })),
 
         installDev && (async () => command(`yarn add ${installDev} --dev`, { root })),
 
         remove && (async () => command(`yarn remove ${remove}`, { root })),
-      ].filter(Boolean) as Array<CallablePromiseModel<TaskResultModel>>,
+      ]),
     );
     return { status: TASK_STATUS.SUCCESS };
   },

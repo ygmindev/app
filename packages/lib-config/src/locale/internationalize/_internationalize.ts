@@ -14,6 +14,7 @@ export const _internationalize = ({
   isReact,
   isSuspense,
   key,
+  language,
   languageDefault,
   languages,
   loadPath,
@@ -43,7 +44,7 @@ export const _internationalize = ({
 
       interpolation: { escapeValue: false },
 
-      lng: languageDefault,
+      lng: language || languageDefault,
 
       ns: [],
 

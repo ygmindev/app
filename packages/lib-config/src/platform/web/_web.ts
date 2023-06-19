@@ -6,6 +6,7 @@ import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { toRelative } from '#lib-backend/file/utils/toRelative/toRelative';
 import type { _WebConfigModel, WebConfigModel } from '#lib-config/platform/web/web.models';
 import type { ReturnTypeModel } from '#lib-shared/core/core.models';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
 
@@ -18,9 +19,9 @@ export const _web = ({
   return merge(
     [
       {
-        plugins: [
+        plugins: filterNil([
           isSsr && ssr({ includeAssetsImportedByServer: true, prerender: { partial: true } }),
-        ].filter(Boolean),
+        ]),
 
         publicDir: toRelative({ from: fromWorking(), to: fromStatic(publicDir) }),
 

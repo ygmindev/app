@@ -14,7 +14,7 @@ import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { Image } from '#lib-frontend/core/components/Image/Image';
 import { LineItem } from '#lib-frontend/core/components/LineItem/LineItem';
 import { Menu } from '#lib-frontend/core/components/Menu/Menu';
-import type { MenuOptionModel, MenuRefModel } from '#lib-frontend/core/components/Menu/Menu.models';
+import type { MenuRefModel } from '#lib-frontend/core/components/Menu/Menu.models';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
@@ -30,6 +30,7 @@ import { useUserResource } from '#lib-frontend/user/hooks/useUserResource/useUse
 import { CARD_BRAND } from '#lib-shared/billing/resources/Card/Card.constants';
 import type { CardModel } from '#lib-shared/billing/resources/Card/Card.models';
 import { PAYMENT_METHOD_TYPE } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 
 export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
   elementState,
@@ -109,41 +110,39 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
                 icon="ellipsis"
               />
             )}
-            options={
-              [
-                {
-                  icon: 'edit',
-                  id: 'edit',
-                  label: t('core:labels.edit'),
-                  onPress: value
-                    ? () =>
-                        push<PaymentMethodFormPageParamsModel>({
-                          params: { title: t('core:labels.edit', { value: title }), value },
-                          pathname: `/${FORM}/${PAYMENT_METHOD}`,
-                        })
-                    : undefined,
-                },
-                !isPrimary && {
-                  icon: 'checkCircle',
-                  id: 'setAsPrimary',
-                  label: t('core:labels.setAsPrimary'),
-                  onPress: async () =>
-                    update({
-                      filter: { _id: currentUser?._id },
-                      update: { paymentMethodPrimary: value?._id },
-                    }),
-                },
-                { id: 'div', isDivider: true },
-                {
-                  color: THEME_COLOR.ERROR,
-                  confirmMessage: t('core:messages.confirmRemove', { value: title }),
-                  icon: 'trash',
-                  id: 'delete',
-                  label: t('core:labels.remove'),
-                  onPress: handleRemove,
-                },
-              ].filter(Boolean) as Array<MenuOptionModel>
-            }
+            options={filterNil([
+              {
+                icon: 'edit',
+                id: 'edit',
+                label: t('core:labels.edit'),
+                onPress: value
+                  ? () =>
+                      push<PaymentMethodFormPageParamsModel>({
+                        params: { title: t('core:labels.edit', { value: title }), value },
+                        pathname: `/${FORM}/${PAYMENT_METHOD}`,
+                      })
+                  : undefined,
+              },
+              !isPrimary && {
+                icon: 'checkCircle',
+                id: 'setAsPrimary',
+                label: t('core:labels.setAsPrimary'),
+                onPress: async () =>
+                  update({
+                    filter: { _id: currentUser?._id },
+                    update: { paymentMethodPrimary: value?._id },
+                  }),
+              },
+              { id: 'div', isDivider: true },
+              {
+                color: THEME_COLOR.ERROR,
+                confirmMessage: t('core:messages.confirmRemove', { value: title }),
+                icon: 'trash',
+                id: 'delete',
+                label: t('core:labels.remove'),
+                onPress: handleRemove,
+              },
+            ])}
             ref={ref}
           />
         </Skeleton>

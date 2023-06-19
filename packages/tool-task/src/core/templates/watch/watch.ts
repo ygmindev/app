@@ -2,6 +2,7 @@ import trimStart from 'lodash/trimStart';
 
 import { fromExecutable } from '#lib-backend/file/utils/fromExecutable/fromExecutable';
 import { extensions } from '#lib-platform/core/utils/extensions/extensions';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
 import type { TaskParamsModel } from '#tool-task/core/core.models';
@@ -16,14 +17,12 @@ export const watch: TaskParamsModel<WatchParamsModel> = {
   task: async ({ options, root }) => {
     const { executable, patterns, script } = options || {};
     const extensionsF = options?.extensions || extensions();
-    const params = [
+    const params = filterNil([
       patterns && patterns.map((pattern) => `--watch "${pattern}"`).join(' '),
       `--ext ${extensionsF.map((ext) => trimStart(ext, '.')).join(',')}`,
       executable && `--exec "${executable}"`,
       script,
-    ]
-      .filter(Boolean)
-      .join(' ');
+    ]).join(' ');
 
     await command(`${fromExecutable('nodemon')} ${params}`, { root });
     return { status: TASK_STATUS.SUCCESS };

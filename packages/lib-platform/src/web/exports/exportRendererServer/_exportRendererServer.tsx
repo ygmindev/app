@@ -11,6 +11,7 @@ import type {
   _ExportRendererServerModel,
   _ExportRendererServerParamsModel,
 } from '#lib-platform/web/exports/exportRendererServer/_exportRendererServer.models';
+import { merge } from '#lib-shared/core/utils/merge/merge';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 import { STATE } from '#lib-shared/state/state.constants';
 
@@ -22,10 +23,10 @@ export const _exportRendererServer = ({
 }: _ExportRendererServerParamsModel): _ExportRendererServerModel => ({
   render: async ({ Page, context, pageProps }) => {
     const store = new Store({ cookies: context?.state?.cookies, reducers: ROOT_REDUCERS });
-    const contextF: RootContextModel = {
-      ...context,
-      [STATE]: { initialState: await store.getState() } as RootStateContextModel,
-    };
+    const contextF: RootContextModel = merge([
+      { [STATE]: { initialState: await store.getState() } as RootStateContextModel },
+      context,
+    ]);
     const { element, getCss } = render({ children: <Page {...pageProps} />, context: contextF });
     const styleSheet = renderToStaticMarkup(getCss());
     const { pipe } = renderToPipeableStream(element);
@@ -53,10 +54,10 @@ export const _exportRendererServer = ({
 
       pageContext: async () => {
         const i18n = contextF?.locale?.i18n;
-        const pageContext: RootContextModel = {
-          ...contextF,
-          [LOCALE]: i18n ? { i18n, store: getLocaleStoreFromI18n({ i18n }) } : undefined,
-        };
+        const pageContext: RootContextModel = merge([
+          { [LOCALE]: i18n ? { store: getLocaleStoreFromI18n({ i18n }) } : undefined },
+          contextF,
+        ]);
         return {
           context: pick(pageContext, ssrContextKeys),
           enableEagerStreaming: true,

@@ -5,10 +5,9 @@ const { displayName } = withTest({ mapValuesAsync });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await mapValuesAsync({
-      callback: async (value) => Promise.resolve((value as number) + 1),
-      value: { a: 1, b: 2 },
-    });
+    const result = await mapValuesAsync({ a: 1, b: 2 }, async (value) =>
+      Promise.resolve((value as number) + 1),
+    );
     expect(result).toStrictEqual({ a: 2, b: 3 });
   });
 });

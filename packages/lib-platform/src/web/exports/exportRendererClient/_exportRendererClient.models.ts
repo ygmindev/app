@@ -12,7 +12,8 @@ export type _ExportRendererClientParamsModel = {
 } & Pick<ReturnTypeModel<WebConfigModel>, 'rootId'>;
 
 export type _ExportRendererClientModel = {
-  render(
-    params: PageContextBuiltInClientWithClientRouting & ExportRenderClientRenderParamsModel,
-  ): Promise<void>;
+  render(params: _PageContextModel): Promise<void>;
 };
+
+type _PageContextModel = PageContextBuiltInClientWithClientRouting &
+  ExportRenderClientRenderParamsModel;

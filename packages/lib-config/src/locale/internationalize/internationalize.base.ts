@@ -1,11 +1,13 @@
 import { initReactI18next } from 'react-i18next';
 
 import { _internationalize } from '#lib-config/locale/internationalize/_internationalize';
+import { INTERNATIONALIZE_CONFIG_STATIC } from '#lib-config/locale/internationalize/internationalize.constants';
 import type {
   _InternationalizeConfigModel,
   InternationalizeConfigModel,
 } from '#lib-config/locale/internationalize/internationalize.models';
-import { CORE } from '#lib-shared/core/core.constants';
+
+const { languageDefault, languages, namespaceDefault } = INTERNATIONALIZE_CONFIG_STATIC;
 
 export const config: InternationalizeConfigModel = {
   filename: 'locales/{{lng}}/{{ns}}.json',
@@ -14,13 +16,13 @@ export const config: InternationalizeConfigModel = {
 
   key: 'lng',
 
-  languageDefault: 'en',
+  languageDefault,
 
-  languages: ['en', 'kr'],
+  languages,
 
   modules: [initReactI18next],
 
-  namespaceDefault: CORE,
+  namespaceDefault,
 };
 
 export const _config: _InternationalizeConfigModel = () => _internationalize(config);

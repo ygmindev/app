@@ -10,6 +10,7 @@ import type {
 } from '#lib-config/platform/serverless/serverless.models';
 import { PLATFORM } from '#lib-platform/core/core.constants';
 import type { ReturnTypeModel } from '#lib-shared/core/core.models';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 
 export const _serverless = ({
   bundleConfig,
@@ -75,11 +76,11 @@ export const _serverless = ({
       individually: true,
     },
 
-    plugins: [
+    plugins: filterNil([
       'serverless-dotenv-plugin',
       platform === PLATFORM.NODE && 'serverless-esbuild',
       'serverless-offline',
-    ].filter(Boolean) as Array<string>,
+    ]),
 
     provider: {
       httpApi: {

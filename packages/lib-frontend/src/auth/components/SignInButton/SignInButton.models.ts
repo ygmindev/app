@@ -1,1 +1,3 @@
-export type SignInButtonPropsModel = Record<string, never>;
+import type { EmptyObjectModel } from '#lib-shared/core/core.models';
+
+export type SignInButtonPropsModel = EmptyObjectModel;

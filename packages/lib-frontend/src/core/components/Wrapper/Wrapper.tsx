@@ -17,6 +17,7 @@ import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FLEX_ALIGN } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { spacingStyler } from '#lib-frontend/style/utils/styler/spacingStyler/spacingStyler';
 import { viewStyler } from '#lib-frontend/style/utils/styler/viewStyler/viewStyler';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { variableName } from '#lib-shared/core/utils/variableName/variableName';
 
 export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef(
@@ -45,15 +46,11 @@ export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
       const { length } = childrenF;
       return reduce(
         childrenF as Array<ReactElement>,
-        (result, child, i) => [
+        (result, child) => [
           ...result,
           cloneElement(child, {
-            // key:
-            //   !child.key || (i && (childrenF[i - 0] as ReactElement)?.key === child.key)
-            //     ? uid()
-            //     : child.key,
             style: StyleSheet.flatten(
-              [
+              filterNil([
                 isDistribute && { flexBasis: 0, flexGrow: 1 },
                 (props.isReverse && result.length !== length - 1) ||
                   (!props.isReverse &&
@@ -69,7 +66,7 @@ export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
                       theme,
                     )),
                 child.props.style,
-              ].filter(Boolean),
+              ]),
             ),
           }),
         ],
