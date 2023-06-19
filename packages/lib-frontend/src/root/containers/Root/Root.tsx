@@ -34,7 +34,7 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
   );
   const providers = useMemo<Array<ReactElement>>(
     () => [
-      ...(additionalProviders || []),
+      ...(additionalProviders ? additionalProviders.map((provider) => provider(context)) : []),
       <ContextProvider value={context} />,
       <TrackingProvider />,
       <QueryProvider />,

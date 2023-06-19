@@ -15,7 +15,7 @@ import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 
 export const LineGroup: SFCModel<LineGroupPropsModel> = ({
   children,
-  emptyString = ({ t }) => t('core:messages.nothingToShow'),
+  emptyString = ({ t }) => t('core:nothingToShow'),
   testID,
   title,
   ...props

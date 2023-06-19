@@ -5,7 +5,7 @@ import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/wi
 const { Component, displayName, testID } = withTestComponent({ target: TranslatableText });
 
 describe(displayName, () => {
-  const TEST = 'test:labels.testWithString';
+  const TEST = 'test:testWithString';
 
   test('works', async () => {
     const { findByTestId } = await render({ element: <Component /> });

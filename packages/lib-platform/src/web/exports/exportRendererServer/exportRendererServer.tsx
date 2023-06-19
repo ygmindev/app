@@ -15,7 +15,7 @@ export const exportRendererServer = ({
     ...WEB_CONFIG_STATIC,
     render: ({ children, context }) =>
       renderApp({
-        additionalProviders: [<RouteProvider value={context?.route} />],
+        additionalProviders: [(contextF) => <RouteProvider value={contextF?.route} />],
         children,
         context,
       }),

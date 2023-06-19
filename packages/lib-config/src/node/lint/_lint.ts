@@ -30,6 +30,18 @@ export const _lint = ({
 
   ignorePatterns: [`!(${include.join('|')})`],
 
+  overrides: [
+    {
+      extends: ['plugin:jsonc/recommended-with-jsonc'],
+
+      files: ['*.json'],
+
+      rules: {
+        'jsonc/sort-keys': ['error'],
+      },
+    },
+  ],
+
   plugins: [
     '@typescript-eslint',
     'import',

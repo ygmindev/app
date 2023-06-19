@@ -15,6 +15,21 @@
   "ignorePatterns": [
     "!(/Users/ygmin/Projects/mono_v2/app3/app/src/**/*)"
   ],
+  "overrides": [
+    {
+      "extends": [
+        "plugin:jsonc/recommended-with-jsonc"
+      ],
+      "files": [
+        "*.json"
+      ],
+      "rules": {
+        "jsonc/sort-keys": [
+          "error"
+        ]
+      }
+    }
+  ],
   "plugins": [
     "@typescript-eslint",
     "import",

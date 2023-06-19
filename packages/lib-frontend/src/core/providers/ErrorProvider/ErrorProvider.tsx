@@ -52,14 +52,12 @@ export const ErrorProvider: SFCModel<ErrorProviderPropsModel> = ({
 
           {errorContext.title && <Text type={FONT_TYPE.HEADLINE}>{errorContext.title}</Text>}
 
-          {errorContext.message && (
-            <Text>{errorContext.message || t('core:messages.errorGeneric')}</Text>
-          )}
+          {errorContext.message && <Text>{errorContext.message || t('core:errorGeneric')}</Text>}
 
           <Button
             icon="refresh"
             onPress={() => errorContextSet(undefined)}>
-            {t('core:labels.tryAgain')}
+            {t('core:tryAgain')}
           </Button>
         </Wrapper>
       ) : (

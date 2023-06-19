@@ -112,7 +112,7 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
                 icon="chevronLeft"
                 onPress={async () => confirmModalIsOpenSet(false)}
                 type={BUTTON_TYPE.TRANSPARENT}>
-                {t('core:labels.cancel')}
+                {t('core:cancel')}
               </Button>
 
               <Button
@@ -122,7 +122,7 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
                   await handlePress();
                   confirmModalIsOpenSet(false);
                 }}>
-                {t('core:labels.continue')}
+                {t('core:continue')}
               </Button>
             </Wrapper>
           </Wrapper>

@@ -110,7 +110,7 @@ const FormContainerF = forwardRef(
       const initialValuesF = initialValues && getValues(initialValues);
       const dataF = getValues(data);
       if (isEqual(initialValuesF, dataF)) {
-        error({ message: t('core:messages.validateChanged') });
+        error({ message: t('core:validateChanged') });
         return null;
       } else {
         return (onSubmit && (await onSubmit(dataF as TType))) || null;
@@ -256,7 +256,7 @@ const FormContainerF = forwardRef(
                 icon="chevronLeft"
                 onPress={onCancel}
                 type={BUTTON_TYPE.TRANSPARENT}>
-                {cancelLabel || t('core:labels.cancel')}
+                {cancelLabel || t('core:cancel')}
               </Button>
             )}
 
@@ -264,7 +264,7 @@ const FormContainerF = forwardRef(
               elementState={elementStateF}
               icon="chevronRight"
               onPress={handleSubmit}>
-              {submitLabel || t('core:labels.continue')}
+              {submitLabel || t('core:continue')}
             </Button>
           </Wrapper>
         )}

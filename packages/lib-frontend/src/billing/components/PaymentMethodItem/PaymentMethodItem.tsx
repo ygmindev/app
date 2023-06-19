@@ -114,11 +114,11 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
               {
                 icon: 'edit',
                 id: 'edit',
-                label: t('core:labels.edit'),
+                label: t('core:edit'),
                 onPress: value
                   ? () =>
                       push<PaymentMethodFormPageParamsModel>({
-                        params: { title: t('core:labels.edit', { value: title }), value },
+                        params: { title: t('core:edit', { value: title }), value },
                         pathname: `/${FORM}/${PAYMENT_METHOD}`,
                       })
                   : undefined,
@@ -126,7 +126,7 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
               !isPrimary && {
                 icon: 'checkCircle',
                 id: 'setAsPrimary',
-                label: t('core:labels.setAsPrimary'),
+                label: t('core:setAsPrimary'),
                 onPress: async () =>
                   update({
                     filter: { _id: currentUser?._id },
@@ -136,10 +136,10 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
               { id: 'div', isDivider: true },
               {
                 color: THEME_COLOR.ERROR,
-                confirmMessage: t('core:messages.confirmRemove', { value: title }),
+                confirmMessage: t('core:confirmRemove', { value: title }),
                 icon: 'trash',
                 id: 'delete',
-                label: t('core:labels.remove'),
+                label: t('core:remove'),
                 onPress: handleRemove,
               },
             ])}

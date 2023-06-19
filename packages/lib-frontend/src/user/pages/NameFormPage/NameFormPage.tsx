@@ -22,7 +22,7 @@ export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...prop
 
   const handleBack = async (): Promise<void> => replace({ pathname: `/${ACCOUNT}/${PERSONAL}` });
 
-  const tName = t('user:labels.name');
+  const tName = t('user:name');
 
   return currentUser ? (
     <CenterLayout>
@@ -38,7 +38,7 @@ export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...prop
           handleBack();
         }}
         style={styles}
-        successMessage={t('core:messages.updateSuccess', { value: tName })}
+        successMessage={t('core:updateSuccess', { value: tName })}
         testID={testID}
         {...NAME_FORM_CONTAINER_PROPS}
       />

@@ -9,12 +9,12 @@ export const NAME_FORM_CONTAINER_PROPS: FormContainerPropsModel<NameFormModel> =
       fields: [
         {
           field: FORM_FIELD_TYPE.TEXT_FIELD,
-          fieldProps: { isAutoFocus: true, label: ({ t }) => t('user:labels.first') },
+          fieldProps: { isAutoFocus: true, label: ({ t }) => t('user:first') },
           id: 'first',
         },
         {
           field: FORM_FIELD_TYPE.TEXT_FIELD,
-          fieldProps: { label: ({ t }) => t('user:labels.last') },
+          fieldProps: { label: ({ t }) => t('user:last') },
           id: 'last',
         },
       ],

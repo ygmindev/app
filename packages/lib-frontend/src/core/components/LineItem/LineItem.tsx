@@ -57,7 +57,7 @@ export const LineItem: SFCModel<LineItemPropsModel> = ({
                 <Text
                   colorRole={value ? undefined : THEME_ROLE.MUTED}
                   isEllipsis>
-                  {isString(value) ? value : (value && value(state)) || t('core:labels.notSet')}
+                  {isString(value) ? value : (value && value(state)) || t('core:notSet')}
                 </Text>
               )}
             </Wrapper>

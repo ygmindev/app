@@ -52,8 +52,8 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
     [currentUser?.paymentMethodPrimary, data],
   );
 
-  const tPaymentMethod = t('billing:labels.paymentMethod');
-  const tPaymentMethodAdd = t('core:labels.add', { value: tPaymentMethod });
+  const tPaymentMethod = t('billing:paymentMethod');
+  const tPaymentMethodAdd = t('core:add', { value: tPaymentMethod });
 
   return (
     <MainLayout
@@ -61,7 +61,7 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
       style={styles}
       testID={testID}>
       <SkeletonGroup isVisible={isLoading}>
-        <LineGroup title={t('billing:labels.paymentMethod_plural')}>
+        <LineGroup title={t('billing:paymentMethod_plural')}>
           {isLoading
             ? range(5).map((i) => (
                 <PaymentMethodItem

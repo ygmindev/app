@@ -126,7 +126,7 @@ export const _Table = forwardRef(
             }
           }}
           onSelectionChanged={handleSelect}
-          overlayNoRowsTemplate={t('core:messages.nothingToShow')}
+          overlayNoRowsTemplate={t('core:nothingToShow')}
           rowData={data}
           rowHeight={rowHeight}
           rowSelection={select}

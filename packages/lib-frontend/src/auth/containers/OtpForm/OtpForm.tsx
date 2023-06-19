@@ -40,13 +40,13 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
         <Wrapper
           isCenter
           isRowAlign>
-          <Text>{t('auth:messages.otpDidntGet')}</Text>
+          <Text>{t('auth:otpDidntGet')}</Text>
 
           <Button
             elementState={elementState}
             icon="refresh"
             onPress={onBack}>
-            {t('core:labels.tryAgain')}
+            {t('core:tryAgain')}
           </Button>
         </Wrapper>
       )}
@@ -54,8 +54,8 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
         (e as HttpError).statusCode === HTTP_STATUS_CODE.UNAUTHORIZED
           ? {
               icon: 'ban',
-              message: ({ t }) => t('auth:messages.wrongOtp'),
-              title: ({ t }) => t('auth:labels.wrongOtp'),
+              message: ({ t }) => t('auth:wrongOtp'),
+              title: ({ t }) => t('auth:wrongOtp'),
             }
           : undefined
       }
@@ -78,7 +78,7 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
           <Wrapper isCenter>
             <Trans
               components={[<Text isBold />]}
-              i18nKey="messages.otpEnter"
+              i18nKey="otpEnter"
               ns="auth"
               params={{ value: data.email }}
             />

@@ -51,11 +51,11 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({ method, mode, testI
           isCenter
           spacing>
           <Text type={FONT_TYPE.HEADLINE}>
-            {t('core:labels.welcome', { value: process.env.APP_NAME })}
+            {t('core:welcome', { value: process.env.APP_NAME })}
           </Text>
 
           <Text fontSize={THEME_SIZE.LARGE}>
-            {`${t('auth:labels.signIn')} ${t('core:labels.or')} ${t('auth:labels.register')}`}
+            {`${t('auth:signIn')} ${t('core:or')} ${t('auth:register')}`}
           </Text>
         </Wrapper>
       )}

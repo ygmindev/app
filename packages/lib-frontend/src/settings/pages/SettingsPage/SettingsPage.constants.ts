@@ -7,23 +7,23 @@ import { BRIGHTNESS } from '#lib-shared/style/style.constants';
 export const SETTINGS_GROUPS: Array<RouteGroupModel> = withId([
   {
     id: APPEARANCE,
-    label: ({ t }) => t('settings:labels.appearance'),
+    label: ({ t }) => t('settings:appearance'),
     options: [
       {
         icon: 'brightness',
         id: BRIGHTNESS,
-        label: ({ t }) => t('settings:labels.brightness'),
+        label: ({ t }) => t('settings:brightness'),
       },
     ],
   },
   {
     id: LOCATION,
-    label: ({ t }) => t('locale:labels.location'),
+    label: ({ t }) => t('locale:location'),
     options: [
       {
         icon: 'time',
         id: TIMEZONE,
-        label: ({ t }) => t('locale:labels.timezone'),
+        label: ({ t }) => t('locale:timezone'),
       },
     ],
   },

@@ -70,7 +70,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
                 fieldProps: {
                   autoComplete: 'email',
                   icon: 'email',
-                  label: ({ t }) => t('user:labels.email'),
+                  label: ({ t }) => t('user:email'),
                 },
                 id: SIGN_IN_METHOD.EMAIL,
               },
@@ -98,7 +98,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
             ? undefined
             : ({ elementState }) => (
                 <Wrapper spacing>
-                  <Divider>{t('core:labels.or')}</Divider>
+                  <Divider>{t('core:or')}</Divider>
 
                   {valueControlled === SIGN_IN_METHOD.EMAIL && (
                     <Button
@@ -106,7 +106,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
                       icon="phone"
                       onPress={() => valueControlledSet(SIGN_IN_METHOD.PHONE)}
                       type={BUTTON_TYPE.TRANSPARENT}>
-                      {t('core:labels.continueWith', { value: t('user:labels.phone') })}
+                      {t('core:continueWith', { value: t('user:phone') })}
                     </Button>
                   )}
 
@@ -116,7 +116,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
                       icon="email"
                       onPress={() => valueControlledSet(SIGN_IN_METHOD.EMAIL)}
                       type={BUTTON_TYPE.TRANSPARENT}>
-                      {t('core:labels.continueWith', { value: t('user:labels.email') })}
+                      {t('core:continueWith', { value: t('user:email') })}
                     </Button>
                   )}
                 </Wrapper>
@@ -124,7 +124,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
         }
         errorContextGet={(e) =>
           checkExists && (e as HttpError).statusCode === HTTP_STATUS_CODE.CONFLICT
-            ? { icon: 'people', message: t('auth:messages.userExistsError') }
+            ? { icon: 'people', message: t('auth:userExistsError') }
             : undefined
         }
         isGrouped

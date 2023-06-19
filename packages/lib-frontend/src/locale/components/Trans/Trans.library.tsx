@@ -8,20 +8,20 @@ import { TEST } from '#lib-shared/test/test.constants';
 export const props: LibraryPropsModel<TransPropsModel<unknown>> = {
   Component: Trans,
   defaultProps: {
-    i18nKey: 'labels.testWithString',
+    i18nKey: 'testWithString',
     ns: TEST,
   },
   variants: [
     {
       props: {
-        i18nKey: 'labels.testWithParams',
+        i18nKey: 'testWithParams',
         params: { value1: 'value1', value2: 'value2' },
       },
     },
     {
       props: {
         components: [<Text color={THEME_COLOR.PRIMARY} />, <Text color={THEME_COLOR.SECONDARY} />],
-        i18nKey: 'labels.testWithElements',
+        i18nKey: 'testWithElements',
         params: { value1: 'value1', value2: 'value2' },
       },
     },

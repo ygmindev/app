@@ -7,12 +7,12 @@ import { PAYMENT_METHOD_TYPE } from '#lib-shared/billing/resources/PaymentMethod
 export const getPaymentMethodTitle =
   (params?: GetPaymentMethodTitleParamsModel): GetPaymentMethodTitleModel =>
   ({ t }) =>
-    t('billing:labels.endingIn', {
+    t('billing:endingIn', {
       type:
         params?.type === PAYMENT_METHOD_TYPE.BANK
-          ? t('billing:labels.bank')
+          ? t('billing:bank')
           : params?.type === PAYMENT_METHOD_TYPE.CARD
-          ? t('billing:labels.card')
+          ? t('billing:card')
           : '',
       value: params?.last4,
     });

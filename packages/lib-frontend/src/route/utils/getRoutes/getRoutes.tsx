@@ -1,11 +1,10 @@
 import { AppLayout } from '#lib-frontend/app/layouts/AppLayout/AppLayout';
 import { SIGN_IN } from '#lib-frontend/auth/auth.constants';
+import { OAuthRedirectPage } from '#lib-frontend/auth/pages/OAuthRedirectPage/OAuthRedirectPage';
 import { SignInPage } from '#lib-frontend/auth/pages/SignInPage/SignInPage';
 import { BILLING, PAYMENT, PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants';
 import { PaymentMethodFormPage } from '#lib-frontend/billing/pages/PaymentMethodFormPage/PaymentMethodFormPage';
 import { PaymentPage } from '#lib-frontend/billing/pages/PaymentPage/PaymentPage';
-import { Text } from '#lib-frontend/core/components/Text/Text';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { REDIRECT } from '#lib-frontend/core/core.constants';
 import { DEV } from '#lib-frontend/dev/dev.constants';
 import { DevPage } from '#lib-frontend/dev/pages/DevPage/DevPage';
@@ -56,23 +55,23 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
               header: { previous: ACCOUNT },
               isRootsVisible: true,
               pathname: PERSONAL,
-              title: ({ t }) => t('user:labels.personal'),
+              title: ({ t }) => t('user:personal'),
             },
             {
               element: <PaymentPage />,
               header: { previous: ACCOUNT },
               pathname: PAYMENT,
-              title: ({ t }) => t('billing:labels.payment'),
+              title: ({ t }) => t('billing:payment'),
             },
             {
               element: <SettingsPage />,
               header: { previous: ACCOUNT },
               ns: [SETTINGS, LOCALE],
               pathname: SETTINGS,
-              title: ({ t }) => t('settings:labels.settings'),
+              title: ({ t }) => t('settings:settings'),
             },
           ],
-          title: ({ t }) => t('user:labels.account'),
+          title: ({ t }) => t('user:account'),
           transition: ROUTE_TRANSITION.SLIDE,
         },
 
@@ -88,7 +87,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                 {
                   element: <NameFormPage />,
                   pathname: NAME,
-                  title: ({ t }) => t('core:labels.edit', { value: t('user:labels.name') }),
+                  title: ({ t }) => t('core:edit', { value: t('user:name') }),
                 },
 
                 {
@@ -100,7 +99,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                   ),
                   ns: [AUTH],
                   pathname: EMAIL,
-                  title: ({ t }) => t('core:labels.edit', { value: t('user:labels.email') }),
+                  title: ({ t }) => t('core:edit', { value: t('user:email') }),
                 },
 
                 {
@@ -112,7 +111,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                   ),
                   ns: [AUTH, USER],
                   pathname: PHONE,
-                  title: ({ t }) => t('core:labels.edit', { value: t('user:labels.phone') }),
+                  title: ({ t }) => t('core:edit', { value: t('user:phone') }),
                 },
               ],
             },
@@ -125,12 +124,12 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                 {
                   element: <BrightnessFormPage />,
                   pathname: BRIGHTNESS,
-                  title: ({ t }) => t('settings:labels.brightness'),
+                  title: ({ t }) => t('settings:brightness'),
                 },
                 {
                   element: <TimezoneFormPage />,
                   pathname: TIMEZONE,
-                  title: ({ t }) => t('locale:labels.timezone'),
+                  title: ({ t }) => t('locale:timezone'),
                 },
               ],
             },
@@ -140,7 +139,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
               header: { previous: `/${ACCOUNT}/${PAYMENT}` },
               ns: [BILLING],
               pathname: PAYMENT_METHOD,
-              title: ({ t }) => t('core:labels.add', { value: t('billing:labels.paymentMethod') }),
+              title: ({ t }) => t('core:add', { value: t('billing:paymentMethod') }),
             },
           ],
         },
@@ -152,12 +151,9 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
         },
 
         {
-          element: (
-            <Wrapper>
-              <Text>redirect</Text>
-            </Wrapper>
-          ),
+          element: <OAuthRedirectPage />,
           isPrerender: true,
+          ns: [AUTH],
           pathname: REDIRECT,
         },
 

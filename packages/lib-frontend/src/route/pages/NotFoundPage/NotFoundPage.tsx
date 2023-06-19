@@ -15,7 +15,7 @@ export const NotFoundPage: SFCModel<NotFoundPagePropsModel> = ({ testID, ...prop
       isCenter
       style={styles}
       testID={testID}>
-      <Text type={FONT_TYPE.TITLE}>{t('route:labels.notFound')}</Text>
+      <Text type={FONT_TYPE.TITLE}>{t('route:notFound')}</Text>
     </Wrapper>
   );
 };

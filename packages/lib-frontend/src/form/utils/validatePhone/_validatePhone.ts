@@ -5,4 +5,4 @@ import type { _ValidatePhoneModel } from '#lib-frontend/form/utils/validatePhone
 export const _validatePhone: _ValidatePhoneModel = ({ data, value }) =>
   data?.callingCode && value && isValidPhoneNumber(value, { defaultCallingCode: data.callingCode })
     ? null
-    : ({ t }) => t('core:messages.validatePhone');
+    : ({ t }) => t('core:validatePhone');

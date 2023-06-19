@@ -8,24 +8,24 @@ import { ACCOUNT } from '#lib-shared/user/user.constants';
 export const ACCOUNT_GROUPS: Array<RouteGroupModel> = withId([
   {
     id: ACCOUNT,
-    label: ({ t }) => t('user:labels.account'),
+    label: ({ t }) => t('user:account'),
     options: [
       {
         icon: 'person',
         id: PERSONAL,
-        label: ({ t }) => t('user:labels.personal'),
+        label: ({ t }) => t('user:personal'),
       },
 
       {
         icon: 'dollar',
         id: PAYMENT,
-        label: ({ t }) => t('billing:labels.payment'),
+        label: ({ t }) => t('billing:payment'),
       },
 
       {
         icon: 'settings',
         id: SETTINGS,
-        label: ({ t }) => t('settings:labels.settings'),
+        label: ({ t }) => t('settings:settings'),
       },
     ],
   },

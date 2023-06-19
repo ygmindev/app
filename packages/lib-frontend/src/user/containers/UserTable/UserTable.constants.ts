@@ -8,9 +8,9 @@ import type { UserFormModel, UserModel } from '#lib-shared/user/resources/User/U
 export const USER_TABLE_PROPS: ResourcesPropsModel<UserModel, UserFormModel> = {
   columns: [
     ...ENTITY_RESOURCE_COLUMNS.map((column) => ({ ...column, isHidden: true })),
-    { field: FORM_FIELD_TYPE.TEXT_FIELD, id: 'first', label: ({ t }) => t('user:labels.first') },
-    { field: FORM_FIELD_TYPE.TEXT_FIELD, id: 'last', label: ({ t }) => t('user:labels.last') },
-    { field: FORM_FIELD_TYPE.TEXT_FIELD, id: 'email', label: ({ t }) => t('user:labels.email') },
+    { field: FORM_FIELD_TYPE.TEXT_FIELD, id: 'first', label: ({ t }) => t('user:first') },
+    { field: FORM_FIELD_TYPE.TEXT_FIELD, id: 'last', label: ({ t }) => t('user:last') },
+    { field: FORM_FIELD_TYPE.TEXT_FIELD, id: 'email', label: ({ t }) => t('user:email') },
   ],
 
   fields: [{ result: USER_FIELDS }],

@@ -6,12 +6,12 @@ import { phoneFormat } from '#lib-shared/locale/utils/phoneFormat/phoneFormat';
 export const PERSONAL_GROUPS: Array<RouteGroupModel> = withId([
   {
     id: PERSONAL,
-    label: ({ t }) => t('user:labels.personal'),
+    label: ({ t }) => t('user:personal'),
     options: [
       {
         icon: 'id',
         id: NAME,
-        label: ({ t }) => t('user:labels.name'),
+        label: ({ t }) => t('user:name'),
         value: (state) => {
           const { currentUser } = state.user;
           return currentUser && (currentUser.first || currentUser.last)
@@ -22,7 +22,7 @@ export const PERSONAL_GROUPS: Array<RouteGroupModel> = withId([
       {
         icon: 'phone',
         id: PHONE,
-        label: ({ t }) => t('user:labels.phone'),
+        label: ({ t }) => t('user:phone'),
         value: (state) => {
           const { currentUser } = state.user;
           return currentUser && currentUser.callingCode && currentUser.phone
@@ -33,7 +33,7 @@ export const PERSONAL_GROUPS: Array<RouteGroupModel> = withId([
       {
         icon: 'email',
         id: EMAIL,
-        label: ({ t }) => t('user:labels.email'),
+        label: ({ t }) => t('user:email'),
         value: (state) => {
           const { currentUser } = state.user;
           return currentUser?.email ?? null;

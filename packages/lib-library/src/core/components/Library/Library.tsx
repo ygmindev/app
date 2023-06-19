@@ -73,7 +73,7 @@ export const Library = <TProps,>({
 
       {propTypes && (
         <Wrapper>
-          <Text type={FONT_TYPE.TITLE}>{t('library:labels.propTypes')}</Text>
+          <Text type={FONT_TYPE.TITLE}>{t('library:propTypes')}</Text>
 
           {/* <Table
             columns={[

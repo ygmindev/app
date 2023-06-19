@@ -14,11 +14,11 @@ export const SettingsLocale: SFCModel<SettingsLocalePropsModel> = ({ testID, ...
     <LineGroup
       style={styles}
       testID={testID}
-      title={t('locale:labels.location')}>
+      title={t('locale:location')}>
       <LineItem
         icon="time"
         rightElement={() => <TimezoneField />}>
-        <Text>{t('locale:labels.timezone')}</Text>
+        <Text>{t('locale:timezone')}</Text>
       </LineItem>
     </LineGroup>
   );

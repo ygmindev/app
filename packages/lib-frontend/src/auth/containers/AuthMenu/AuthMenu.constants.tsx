@@ -13,7 +13,7 @@ export const AUTH_MENU_OPTIONS: Array<AuthMenuOptionModel> = withId([
     icon: 'personCircle',
     id: ACCOUNT,
     isProtected: true,
-    label: ({ t }) => t('user:labels.account'),
+    label: ({ t }) => t('user:account'),
   },
 
   { isDivider: true, isProtected: true },
@@ -23,6 +23,6 @@ export const AUTH_MENU_OPTIONS: Array<AuthMenuOptionModel> = withId([
     icon: 'signout',
     id: SIGN_OUT,
     isProtected: true,
-    label: ({ t }) => t('auth:labels.signOut'),
+    label: ({ t }) => t('auth:signOut'),
   },
 ] as Array<AuthMenuOptionModel>);

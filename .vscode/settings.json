@@ -15,8 +15,10 @@
   "eslint.validate": [
     "javascript",
     "javascriptreact",
+    "json",
+    "jsonc",
     "typescript",
-    "typescriptreact"
+    "typescriptreact",
   ],
   "explorer.compactFolders": false,
   "explorer.expandSingleFolderWorkspaces": false,

@@ -1,8 +1,6 @@
 {
-  "labels": {
-    "endingIn": "{{type}} ending in {{value}}",
-    "payment": "payment",
-    "paymentMethod": "payment method",
-    "paymentMethod_plural": "{{count}} payment methods"
-  }
+  "endingIn": "{{type}} ending in {{value}}",
+  "payment": "payment",
+  "paymentMethod": "payment method",
+  "paymentMethod_plural": "{{count}} payment methods"
 }

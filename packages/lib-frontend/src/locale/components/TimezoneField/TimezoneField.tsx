@@ -44,7 +44,7 @@ export const TimezoneField: SFCModel<TimezoneFieldPropsModel> = ({
     <SelectField
       {...props}
       icon="time"
-      label={t('locale:labels.timezone')}
+      label={t('locale:timezone')}
       onChange={valueControlledSet}
       options={options}
       style={styles}

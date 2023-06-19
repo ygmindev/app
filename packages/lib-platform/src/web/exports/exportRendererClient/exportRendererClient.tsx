@@ -14,7 +14,7 @@ export const exportRendererClient = ({
     ...params,
     render: ({ children, context }) =>
       renderApp({
-        additionalProviders: [<RouteProvider value={context?.route} />],
+        additionalProviders: [(contextF) => <RouteProvider value={contextF?.route} />],
         children,
         context,
       }),

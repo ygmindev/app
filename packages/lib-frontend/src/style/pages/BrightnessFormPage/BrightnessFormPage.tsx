@@ -28,12 +28,12 @@ export const BrightnessFormPage: FCModel<BrightnessFormPagePropsModel> = ({ test
             {
               icon: 'light',
               id: STYLE_BRIGHTNESS.LIGHT,
-              label: ({ t }) => t('style:labels.light'),
+              label: ({ t }) => t('style:light'),
             },
             {
               icon: 'dark',
               id: STYLE_BRIGHTNESS.DARK,
-              label: ({ t }) => t('style:labels.dark'),
+              label: ({ t }) => t('style:dark'),
             },
           ]}
           value={brightness}

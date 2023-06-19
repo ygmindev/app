@@ -50,7 +50,7 @@ export const CountryField: SFCModel<CountryFieldPropsModel> = ({
     <SelectField
       {...props}
       icon="globe"
-      label={t('core:labels.country')}
+      label={t('core:country')}
       onChange={valueControlledSet}
       options={options}
       style={styles}

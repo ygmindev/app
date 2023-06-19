@@ -72,7 +72,7 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
         },
       ]}
       style={styles}
-      submitLabel={defaultValue ? t('core:labels.edit') : t('core:labels.add')}
+      submitLabel={defaultValue ? t('core:edit') : t('core:add')}
       testID={testID}
     />
   );

@@ -1,3 +1,4 @@
+import { _config } from '#lib-config/locale/internationalize/internationalize.node';
 import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
 import type {
   _ExportPrerenderModel,
@@ -14,10 +15,12 @@ export const _exportPrerender = ({
     const pageContextsF: typeof pageContexts = [];
     languages.forEach((lang) =>
       pageContexts.forEach(({ context, urlOriginal, ...pageContext }) => {
+        const i18n = _config();
+        i18n.changeLanguage(lang);
         const isLanguageDefault = lang === languageDefault;
         pageContextsF.push({
           ...pageContext,
-          context: merge([{ [LOCALE]: { lang } }, context]),
+          context: merge([{ [LOCALE]: { i18n, lang } }, context]),
           urlOriginal: trimPathname(isLanguageDefault ? urlOriginal : `/${lang}/${urlOriginal}`),
         });
       }),

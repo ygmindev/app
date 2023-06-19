@@ -27,6 +27,7 @@ export const _exportRendererServer = ({
       { [STATE]: { initialState: await store.getState() } as RootStateContextModel },
       context,
     ]);
+    console.warn('@@@ _exportRendererServer 111');
     const { element, getCss } = render({ children: <Page {...pageProps} />, context: contextF });
     const styleSheet = renderToStaticMarkup(getCss());
     const { pipe } = renderToPipeableStream(element);
@@ -58,6 +59,7 @@ export const _exportRendererServer = ({
           { [LOCALE]: i18n ? { store: getLocaleStoreFromI18n({ i18n }) } : undefined },
           contextF,
         ]);
+        console.warn('@@@ _exportRendererServer 222');
         return {
           context: pick(pageContext, ssrContextKeys),
           enableEagerStreaming: true,

@@ -15,7 +15,7 @@ describe(displayName, () => {
     const { findByText } = await render({
       element: (
         <Trans
-          i18nKey="labels.testWithString"
+          i18nKey="testWithString"
           ns="test"
         />
       ),
@@ -29,7 +29,7 @@ describe(displayName, () => {
     const { findByText } = await render({
       element: (
         <Trans
-          i18nKey="labels.testWithParams"
+          i18nKey="testWithParams"
           ns="test"
           params={{ value1: 'value1', value2: 'value2' }}
         />
@@ -48,7 +48,7 @@ describe(displayName, () => {
             <Text color={THEME_COLOR.PRIMARY} />,
             <Text color={THEME_COLOR.SECONDARY} />,
           ]}
-          i18nKey="labels.testWithElements"
+          i18nKey="testWithElements"
           ns="test"
           params={{ value1: 'value1', value2: 'value2' }}
         />

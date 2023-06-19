@@ -21,25 +21,25 @@ export const useErrorContext = (): UseErrorContextModel => {
       error(e);
       switch ((e as HttpError).statusCode) {
         case HTTP_STATUS_CODE.FORBIDDEN: {
-          errorContext = { icon: 'ban', message: ({ t }) => t('core:messages.errorForbidden') };
+          errorContext = { icon: 'ban', message: ({ t }) => t('core:errorForbidden') };
           break;
         }
         case HTTP_STATUS_CODE.NETWORK_CONNECT_TIMEOUT: {
           errorContext = {
             icon: 'offline',
-            message: ({ t }) => t('core:messages.errorOffline'),
+            message: ({ t }) => t('core:errorOffline'),
             mode: ERROR_MODE.FALLBACK,
           };
         }
         case HTTP_STATUS_CODE.UNAUTHORIZED: {
           errorContext = {
             icon: 'lock',
-            message: ({ t }) => t('core:messages.errorUnauthorized'),
+            message: ({ t }) => t('core:errorUnauthorized'),
           };
           break;
         }
         default: {
-          errorContext = { icon: 'sad', message: ({ t }) => t('core:messages.errorGeneric') };
+          errorContext = { icon: 'sad', message: ({ t }) => t('core:errorGeneric') };
           break;
         }
       }

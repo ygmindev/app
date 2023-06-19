@@ -1,11 +1,9 @@
 {
-  "labels": {
-    "account": "account",
-    "email": "email",
-    "first": "first name",
-    "last": "last name",
-    "name": "name",
-    "personal": "personal",
-    "phone": "phone"
-  }
+  "account": "account",
+  "email": "email",
+  "first": "first name",
+  "last": "last name",
+  "name": "name",
+  "personal": "personal",
+  "phone": "phone"
 }
