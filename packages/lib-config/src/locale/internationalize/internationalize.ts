@@ -15,7 +15,7 @@ import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
 export const config: InternationalizeConfigModel = merge(
   [
     {
-      caches: [INTERNATIONALIZATION_DETECTION.COOKIE, INTERNATIONALIZATION_DETECTION.LOCAL_STORAGE],
+      caches: [INTERNATIONALIZATION_DETECTION.COOKIE],
 
       loadPath: '',
 

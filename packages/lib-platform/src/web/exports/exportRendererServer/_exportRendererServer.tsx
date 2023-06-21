@@ -1,6 +1,7 @@
 import pick from 'lodash/pick';
-import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
-import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vite-plugin-ssr/server';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { renderToStream } from 'react-streaming/server';
+import { dangerouslySkipEscape, escapeInject } from 'vite-plugin-ssr/server';
 
 import type { RootContextModel } from '#lib-frontend/root/root.models';
 import { ROOT_REDUCERS } from '#lib-frontend/root/stores/rootStore.constants';
@@ -16,6 +17,7 @@ import { LOCALE } from '#lib-shared/locale/locale.constants';
 import { STATE } from '#lib-shared/state/state.constants';
 
 export const _exportRendererServer = ({
+  isStream = false,
   publicDir,
   render,
   rootId,
@@ -27,11 +29,9 @@ export const _exportRendererServer = ({
       { [STATE]: { initialState: await store.getState() } as RootStateContextModel },
       context,
     ]);
-    console.warn('@@@ _exportRendererServer 111');
     const { element, getCss } = render({ children: <Page {...pageProps} />, context: contextF });
     const styleSheet = renderToStaticMarkup(getCss());
-    const { pipe } = renderToPipeableStream(element);
-    stampPipe(pipe, 'node-stream');
+    const stream = await renderToStream(element);
 
     // TODO: fill in description and title
     const documentHtml = escapeInject`
@@ -46,7 +46,7 @@ export const _exportRendererServer = ({
           <title>${''}</title>
           <style>${dangerouslySkipEscape(styleSheet)}</style>
         </head>
-        <body><div id="${rootId}">${pipe}</div></body>
+        <body><div id="${rootId}">${stream}</div></body>
       </html>
     `;
 
@@ -59,7 +59,6 @@ export const _exportRendererServer = ({
           { [LOCALE]: i18n ? { store: getLocaleStoreFromI18n({ i18n }) } : undefined },
           contextF,
         ]);
-        console.warn('@@@ _exportRendererServer 222');
         return {
           context: pick(pageContext, ssrContextKeys),
           enableEagerStreaming: true,

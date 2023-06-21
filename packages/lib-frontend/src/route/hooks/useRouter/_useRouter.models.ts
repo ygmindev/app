@@ -5,7 +5,7 @@ import type { CallablePromiseModel } from '#lib-shared/core/core.models';
 export type _UseRouterModel<TParams extends LocationParamsModel = LocationParamsModel> = {
   back: CallablePromiseModel;
 
-  isActive(params: { from?: string; isExact?: boolean; pathname: string }): boolean;
+  isActive(params: { from?: string; isExact?: boolean; pathname?: string }): boolean;
 
   location: LocationModel<TParams>;
 

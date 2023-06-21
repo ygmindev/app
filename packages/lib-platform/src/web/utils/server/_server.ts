@@ -28,7 +28,6 @@ export const _server = async ({
   root,
 }: _ServerParamsModel): Promise<_ServerModel> => {
   const { publicDir } = webConfig();
-  const i18n = _config();
   const app = fastify();
   await app.register(fastifyMiddie);
   await app.register(fastifyCompress);
@@ -43,7 +42,7 @@ export const _server = async ({
 
   app.register(
     i18nextMiddleware as unknown as FastifyPluginCallback,
-    { i18next: i18n } as FastifyRegisterOptions<Record<never, never>>,
+    { i18next: _config() } as FastifyRegisterOptions<Record<never, never>>,
   );
 
   app.get('*', async (req, res) => {

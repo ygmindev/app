@@ -43,11 +43,13 @@ export const useRouter = <
     back: async () => update({ callback: back, isBack: true }),
 
     isActive: ({ from, pathname, ...params }) =>
-      isActive({
-        from: from ? trimPathname(from) : undefined,
-        pathname: trimPathname(pathname),
-        ...params,
-      }),
+      pathname
+        ? isActive({
+            from: from ? trimPathname(from) : undefined,
+            pathname: trimPathname(pathname),
+            ...params,
+          })
+        : false,
 
     location,
 

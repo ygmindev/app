@@ -4,10 +4,6 @@ export enum COUNTRY_FORMAT {
 
 export enum INTERNATIONALIZATION_DETECTION {
   COOKIE = 'cookie',
-
-  LOCAL_STORAGE = 'localStorage',
-
-  SUB_DOMAIN = 'subdomain',
 }
 
 export const LOCATION = 'location';

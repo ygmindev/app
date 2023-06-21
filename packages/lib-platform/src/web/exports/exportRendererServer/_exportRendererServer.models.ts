@@ -12,6 +12,7 @@ import type {
 } from '#lib-shared/core/core.models';
 
 export type _ExportRendererServerParamsModel = {
+  isStream?: boolean;
   render(params: { context?: RootContextModel } & ChildrenPropsModel): {
     element: ReactElement;
     getCss: CallableModel<ReactElement>;
@@ -21,11 +22,11 @@ export type _ExportRendererServerParamsModel = {
 export type _ExportRendererServerModel = {
   render(params: _PageContextModel): Promise<{
     documentHtml: { _template: unknown };
-    pageContext: CallablePromiseModel<
-      { redirectTo?: string } & ExportRenderClientRenderParamsModel
-    >;
+    pageContext: _PageContextResultModel | CallablePromiseModel<_PageContextResultModel>;
   }>;
 };
 
 type _PageContextModel = PageContextBuiltInClientWithServerRouting &
   ExportRenderClientRenderParamsModel;
+
+type _PageContextResultModel = { redirectTo?: string } & ExportRenderClientRenderParamsModel;

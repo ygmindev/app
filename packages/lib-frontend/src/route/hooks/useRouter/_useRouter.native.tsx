@@ -15,6 +15,9 @@ export const _useRouter = <
     back: async () => navigate(-1),
 
     isActive: ({ from, isExact = false, pathname }) => {
+      if (!pathname) {
+        return false;
+      }
       const match = matchPath({ end: isExact, path: pathname }, from || location.pathname);
       return match !== null;
     },

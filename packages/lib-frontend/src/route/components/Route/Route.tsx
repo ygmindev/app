@@ -12,7 +12,6 @@ import type { RoutePropsModel } from '#lib-frontend/route/components/Route/Route
 import { RouteHeader } from '#lib-frontend/route/containers/RouteHeader/RouteHeader';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { ROUTE_TRANSITION } from '#lib-frontend/route/route.constants';
-import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
@@ -46,9 +45,11 @@ export const Route: SFCModel<RoutePropsModel> = ({ children, route, testID, ...p
     { children },
   );
   element = <Container>{element}</Container>;
-  const pathname = useMemo(() => trimPathname(`${route.root || ''}/${route.pathname}`), [route]);
-  const isLeafActive = useMemo(() => isActive({ isExact: true, pathname }), [pathname]);
-  const isActiveF = useMemo(() => isActive({ pathname }), [pathname]);
+  const isLeafActive = useMemo(
+    () => isActive({ isExact: true, pathname: route.fullpath }),
+    [route.fullpath],
+  );
+  const isActiveF = useMemo(() => isActive({ pathname: route.fullpath }), [route.fullpath]);
   const isLeafActiveF = isLeaf && isLeafActive;
   const childrenF = useMemo(() => {
     switch (route.transition) {

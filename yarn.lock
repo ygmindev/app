@@ -2235,7 +2235,7 @@
   resolved "https://registry.yarnpkg.com/@brillout/import/-/import-0.2.3.tgz#98f04656692b35d70664cc917f3cb0e8f74942dd"
   integrity sha512-1T8WlD75eeFSMrptGy8jiLHmfHgMmSjWvLOIUvHmSVZt+6k0eQqYUoK4KbmE4T9pVLIfxvZSOm2D68VEqKRHRw==
 
-"@brillout/json-serializer@^0.5.3":
+"@brillout/json-serializer@^0.5.1", "@brillout/json-serializer@^0.5.3":
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/@brillout/json-serializer/-/json-serializer-0.5.3.tgz#3bce6e7560e7e9b6a89a915c26df3b49c347fbcc"
   integrity sha512-IxlOMD5gOM0WfFGdeR98jHKiC82Ad1tUnSjvLS5jnRkfMEKBI+YzHA32Umw8W3Ccp5N4fNEX229BW6RaRpxRWQ==
@@ -13896,6 +13896,11 @@ isarray@^2.0.5:
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-2.0.5.tgz#8af1e4c1221244cc62459faf38940d4e644a5723"
   integrity sha512-xHjhDr3cNBK0BzdUJSPXZntQUx/mwMS5Rw4A7lPJ90XGAO6ISP/ePDNuo0vhqOZU+UD5JoodwCAAoZQd3FeAKw==
 
+isbot-fast@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/isbot-fast/-/isbot-fast-1.2.0.tgz#ef0ef1d5db34eb60777250ae26fceb72b94153e2"
+  integrity sha512-twjuQzy2gKMDVfKGQyQqrx6Uy4opu/fiVUTTpdqtFsd7OQijIp5oXvb27n5EemYXaijh5fomndJt/SPRLsEdSg==
+
 isbot@^3.6.10:
   version "3.6.10"
   resolved "https://registry.yarnpkg.com/isbot/-/isbot-3.6.10.tgz#7b66334e81794f0461794debb567975cf08eaf2b"
@@ -18923,6 +18928,15 @@ react-shallow-renderer@^16.15.0:
   dependencies:
     object-assign "^4.1.1"
     react-is "^16.12.0 || ^17.0.0 || ^18.0.0"
+
+react-streaming@^0.3.14:
+  version "0.3.14"
+  resolved "https://registry.yarnpkg.com/react-streaming/-/react-streaming-0.3.14.tgz#0dd4da65977ae536843163c8848ed60998c07be1"
+  integrity sha512-nYTYNp1NjJbEDFiiN/NpuUOhDm94GszLD/aGxXRtbYO2z2GlvL3S/OHjku17+qFfP91IQTF1fcHcvjCKEd3Ong==
+  dependencies:
+    "@brillout/import" "^0.2.3"
+    "@brillout/json-serializer" "^0.5.1"
+    isbot-fast "1.2.0"
 
 react-test-renderer@^18.2.0:
   version "18.2.0"

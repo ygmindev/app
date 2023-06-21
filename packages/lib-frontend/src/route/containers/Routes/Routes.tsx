@@ -15,7 +15,8 @@ const getRoute = ({ pathname = '/', ...route }: RouteModel, depth = 0): RouteMod
   const isLeaf = !route.routes;
   const root = trimEnd(pathname, '/*');
   const pathnameF = trimPathname(isLeaf ? pathname : `${root}/*`);
-  const routeF: RouteModel = { ...route, pathname: pathnameF };
+  const fullpath = trimPathname(`${route.root || ''}/${pathnameF}`);
+  const routeF: RouteModel = { ...route, fullpath, pathname: pathnameF };
   const depthChildren = pathnameF !== '/' ? depth + 1 : depth;
   return {
     ...routeF,

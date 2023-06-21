@@ -9,6 +9,7 @@ export type RouteIdParamsModel = WithIdModel;
 
 export type RouteModel = {
   element?: ReactElement;
+  fullpath?: string;
   header?: { previous?: string };
   isPrerender?: boolean;
   isProtectable?: boolean;

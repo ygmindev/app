@@ -1,4 +1,3 @@
-import { Logo } from '#lib-frontend/app/components/Logo/Logo';
 import type { AppHeaderPropsModel } from '#lib-frontend/app/containers/AppHeader/AppHeader.models';
 import { AuthMenu } from '#lib-frontend/auth/containers/AuthMenu/AuthMenu';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
@@ -24,7 +23,7 @@ export const AppHeader: SFCModel<AppHeaderPropsModel> = ({ testID, ...props }) =
       <Wrapper
         grow
         isRowAlign>
-        <Logo />
+        {/* <Logo /> */}
       </Wrapper>
 
       <AuthMenu />

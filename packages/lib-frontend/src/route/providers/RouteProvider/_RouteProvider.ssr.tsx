@@ -8,7 +8,6 @@ export const _RouteProvider = composeComponent<_RouteProviderPropsModel, StaticR
   Component: StaticRouter,
 
   getProps: ({ children, value }) => ({
-    basename: value?.basename,
     children,
     location: value?.location || '',
   }),

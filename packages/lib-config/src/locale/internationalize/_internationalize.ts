@@ -1,10 +1,13 @@
-import i18next, { init, use } from 'i18next';
+import type { i18n, InitOptions } from 'i18next';
+import { createInstance } from 'i18next';
 
 import type {
   _InternationalizeConfigModel,
   InternationalizeConfigModel,
 } from '#lib-config/locale/internationalize/internationalize.models';
 import type { ReturnTypeModel } from '#lib-shared/core/core.models';
+
+let instanceGlobal: i18n;
 
 export const _internationalize = ({
   addPath,
@@ -21,43 +24,49 @@ export const _internationalize = ({
   modules,
   namespaceDefault,
 }: InternationalizeConfigModel): ReturnTypeModel<_InternationalizeConfigModel> => {
-  modules?.forEach(use);
+  const config: InitOptions = {
+    debug: false,
 
-  !i18next.isInitialized &&
-    init({
-      debug: false,
+    defaultNS: [namespaceDefault],
 
-      defaultNS: [namespaceDefault],
+    detection: {
+      caches,
+      cookieOptions: { path: '/', sameSite: true },
+      lookupCookie: key,
+    },
 
-      detection: {
-        caches,
-        cookieOptions: { path: '/', sameSite: true },
-        lookupCookie: key,
-        lookupFromSubdomainIndex: 0,
-        lookupLocalStorage: key,
-        order: caches,
-      },
+    fallbackLng: languageDefault,
 
-      fallbackLng: languageDefault,
+    initImmediate: !isPreload,
 
-      initImmediate: !isPreload,
+    interpolation: { escapeValue: false },
 
-      interpolation: { escapeValue: false },
+    lng: language || languageDefault,
 
-      lng: language || languageDefault,
+    ns: [],
 
-      ns: [],
+    preload: isPreload ? languages : false,
 
-      preload: isPreload ? languages : false,
+    supportedLngs: languages,
 
-      supportedLngs: languages,
+    ...(isReact ? { react: { defaultTransParent: 'div', useSuspense: isSuspense } } : {}),
 
-      ...(isReact ? { react: { defaultTransParent: 'div', useSuspense: isSuspense } } : {}),
+    ...(addPath ? { backend: { addPath: `${addPath}/${filename}` } } : {}),
 
-      ...(addPath ? { backend: { addPath: `${addPath}/${filename}` } } : {}),
+    ...(loadPath ? { backend: { loadPath: `${loadPath}/${filename}` } } : {}),
+  };
 
-      ...(loadPath ? { backend: { loadPath: `${loadPath}/${filename}` } } : {}),
-    });
+  let instance: i18n;
+  if (instanceGlobal) {
+    instance = instanceGlobal.cloneInstance({ ...config, initImmediate: false });
+  } else {
+    instance = instanceGlobal = createInstance(config);
+  }
 
-  return i18next;
+  if (!instance.isInitialized) {
+    modules?.forEach(instance.use);
+    instance.init(config);
+  }
+
+  return instance;
 };

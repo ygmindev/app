@@ -18,17 +18,18 @@ export const renderApp = ({
   children,
   context,
 }: RenderAppParamsModel): RenderAppModel => {
-  const contextF = merge(
-    filterNil([
-      context?.locale?.lang &&
-        languageDefault !== context.locale.lang && { [ROUTE]: { basename: context.locale.lang } },
-      context,
-    ]),
-  );
   const App: FCModel = () => (
     <Root
       additionalProviders={additionalProviders}
-      context={contextF}>
+      context={merge(
+        filterNil([
+          context?.locale?.lang &&
+            languageDefault !== context.locale.lang && {
+              [ROUTE]: { basename: context.locale.lang },
+            },
+          context,
+        ]),
+      )}>
       {children}
     </Root>
   );
