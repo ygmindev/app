@@ -252,6 +252,7 @@
     "vite": "^4.3.9",
     "vite-plugin-checker": "^0.6.0",
     "vite-plugin-circular-dependency": "^0.2.1",
+    "vite-plugin-static-copy": "^0.16.0",
     "vite-tsconfig-paths": "^4.2.0",
     "vitest": "^0.32.2",
     "vitest-react-native": "^0.1.1"

@@ -47,6 +47,9 @@ export const _bundle = ({
   const babelConfigF = babelConfig && babelConfig();
   const config: ReturnTypeModel<_BundleConfigModel> = {
     build: {
+      assetsDir: fromWorking('assets'),
+
+      // assetsInlineLimit: 4096 * 1000,
       commonjsOptions: {
         defaultIsModuleExports: true,
         esmExternals: true,

@@ -20,7 +20,7 @@ export const build: TaskParamsModel = {
   task: async ({ root }) => {
     const { configFile } = config();
     try {
-      await command(fromExecutable(`vite build --config ${configFile}`), { root });
+      await command(fromExecutable(`vite build --config ${configFile} --ssrManifest`), { root });
       await staticServer({ root: join(root || fromWorking(), 'dist/client') });
       return { status: TASK_STATUS.SUCCESS };
     } catch (e) {
