@@ -152,7 +152,6 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
 
         {
           element: <OAuthRedirectPage />,
-          isPrerender: true,
           ns: [AUTH],
           pathname: REDIRECT,
         },

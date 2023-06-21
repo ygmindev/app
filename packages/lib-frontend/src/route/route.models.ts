@@ -11,7 +11,7 @@ export type RouteModel = {
   element?: ReactElement;
   fullpath?: string;
   header?: { previous?: string };
-  isPrerender?: boolean;
+  isClientOnly?: boolean;
   isProtectable?: boolean;
   pathname: string;
   root?: string;

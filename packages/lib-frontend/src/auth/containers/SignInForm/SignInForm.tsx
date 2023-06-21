@@ -39,10 +39,7 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({ method, mode, testI
           ),
           id: 'username',
         },
-        {
-          element: <OtpForm />,
-          id: 'otp',
-        },
+        { element: <OtpForm />, id: 'otp' },
       ]}
       style={styles}
       testID={testID}>

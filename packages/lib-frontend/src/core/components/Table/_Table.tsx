@@ -113,7 +113,7 @@ export const _Table = forwardRef(
           debounceVerticalScrollbar
           loadingOverlayComponent={Text}
           onGridReady={async ({ api, columnApi }) => {
-            await sleep({ duration });
+            await sleep(duration);
             isFullWidth ? api.sizeColumnsToFit() : columnApi.autoSizeAllColumns();
             gridApiSet(api);
             columnApiSet(columnApi);
@@ -121,7 +121,7 @@ export const _Table = forwardRef(
           }}
           onRowDataUpdated={async () => {
             if (gridApi && columnApi) {
-              await sleep({ duration });
+              await sleep(duration);
               isFullWidth ? gridApi.sizeColumnsToFit() : columnApi.autoSizeAllColumns();
             }
           }}

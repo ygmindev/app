@@ -46,7 +46,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
     async (isMounted) => {
       if (!isInfinite) {
         barRef.current?.toState(ELEMENT_STATE.ACTIVE);
-        await sleep({ duration: NOTIFICATION_DURATION });
+        await sleep(NOTIFICATION_DURATION);
         isMounted() && remove(id);
       }
     },

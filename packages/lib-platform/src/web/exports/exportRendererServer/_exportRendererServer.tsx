@@ -17,7 +17,6 @@ import { LOCALE } from '#lib-shared/locale/locale.constants';
 import { STATE } from '#lib-shared/state/state.constants';
 
 export const _exportRendererServer = ({
-  isStream = false,
   publicDir,
   render,
   rootId,

@@ -1,4 +1,1 @@
-export type SleepParamsModel = {
-  duration?: number;
-  isVerbose?: boolean;
-};
+export type SleepParamsModel = [duration?: number, options?: { isVerbose?: boolean }];

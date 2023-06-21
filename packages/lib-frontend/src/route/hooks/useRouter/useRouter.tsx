@@ -33,7 +33,7 @@ export const useRouter = <
       }
       callback();
       if (isBack) {
-        await sleep({ duration: theme.animation.transition });
+        await sleep(theme.animation.transition);
         actions?.route.isBackSet(false);
       }
     }

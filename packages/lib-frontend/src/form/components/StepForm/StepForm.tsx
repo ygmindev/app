@@ -112,7 +112,8 @@ export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends
                   let dataF = { ...data, ...(stepData as object) } as TType;
                   dataF = beforeSubmit ? await beforeSubmit(dataF) : dataF;
                   onSubmit && (await onSubmit(dataF));
-                  await sleep({ duration: theme.animation.transition });
+                  onSuccess && (await onSuccess(dataF));
+                  await sleep(theme.animation.transition);
                   handleClear();
                 }
               },

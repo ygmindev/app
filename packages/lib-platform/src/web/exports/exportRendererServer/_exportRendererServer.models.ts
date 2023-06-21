@@ -12,7 +12,6 @@ import type {
 } from '#lib-shared/core/core.models';
 
 export type _ExportRendererServerParamsModel = {
-  isStream?: boolean;
   render(params: { context?: RootContextModel } & ChildrenPropsModel): {
     element: ReactElement;
     getCss: CallableModel<ReactElement>;

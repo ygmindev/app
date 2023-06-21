@@ -95,7 +95,7 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
 
     useEffect(() => {
       isAutoFocus &&
-        sleep({ duration: theme.animation.transition }).then(() => {
+        sleep(theme.animation.transition).then(() => {
           const inputRef = (ref || refF) as RefObject<TextFieldRefModel>;
           inputRef.current && inputRef.current.focus();
         });

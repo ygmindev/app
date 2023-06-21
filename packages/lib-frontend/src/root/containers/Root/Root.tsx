@@ -44,7 +44,7 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
       <LocaleProvider value={context?.locale} />,
       <AppProvider />,
       <store.Provider value={{ ...context?.state, actionContext, store }} />,
-      <Suspense />, // to provider?
+      <Suspense fallback={<div>LOADING SUSPENSE</div>} />, // to provider?
     ],
     [additionalProviders, context],
   );
