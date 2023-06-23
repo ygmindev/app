@@ -3,14 +3,14 @@ import { debug } from '#lib-shared/logging/utils/logger/logger';
 
 export const sleep = (...[duration = 0, options]: SleepParamsModel): Promise<void> => {
   const durationF = duration || 0;
-  const isVerboseF = options?.isVerbose || false;
+  const isVerboseF = options?.isVerbose || process.env.NODE_ENV === 'development';
 
   let countdown = durationF / 1000;
 
   const timer =
     isVerboseF &&
     setInterval(() => {
-      debug(sleep, `${countdown}s`);
+      debug('[sleep]', `${countdown}s`);
       countdown--;
       if (countdown <= 0) {
         clearInterval(timer as NodeJS.Timer);

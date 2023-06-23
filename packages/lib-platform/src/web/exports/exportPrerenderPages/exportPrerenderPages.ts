@@ -23,7 +23,7 @@ const _getPrerenderPathnames = (
         : []),
     ];
     // TODO: add async context per page if needed
-    return route.isClientOnly ? resultF : [...resultF, { getContext: undefined, pathname }];
+    return !route.isClientOnly ? resultF : [...resultF, { getContext: undefined, pathname }];
   }, [] as _ExportPrerenderPagesParamsModel['pages']) || [];
 
 export const exportPrerenderPages = ({

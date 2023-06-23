@@ -15,24 +15,16 @@ export const _useQuery = <TType,>({
   const { data, error, isError, isFetching, isStale, refetch } = useQuery<TType | null, Error>(
     [id],
     async () => query(),
-    { cacheTime: cache, retry: false, staleTime: cache },
+    { staleTime: cache },
   );
-
   const refetchF = debounce(refetch);
-
   return {
     data,
     error,
     id,
     isError,
     isLoading: isFetching,
-    query: async () => {
-      if (isStale) {
-        const result = await refetchF();
-        return result?.data || null;
-      }
-      return data || null;
-    },
+    query: async () => (isStale ? (await refetchF())?.data : data) || null,
     resetQuery: (id) => queryClient.invalidateQueries([id]),
     setQueryData: (id, data) => queryClient.setQueryData([id], data),
   };

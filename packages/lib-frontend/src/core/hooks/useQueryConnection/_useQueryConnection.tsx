@@ -19,7 +19,6 @@ export const _useQueryConnection = <TType,>({
     ConnectionModel<TType> | null,
     Error
   >([id], async ({ pageParam }) => query(pageParam), {
-    cacheTime: cache,
     getNextPageParam: (params) =>
       params && params.pageInfo.hasNextPage
         ? { after: params.pageInfo.endCursor, first: limit }

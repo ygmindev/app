@@ -164,8 +164,9 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
       ],
     },
 
-    process.env.NODE_ENV === 'development' && {
+    {
       element: <DevPage />,
+      isClientOnly: true,
       pathname: DEV,
     },
   ] as Array<RouteModel>;
