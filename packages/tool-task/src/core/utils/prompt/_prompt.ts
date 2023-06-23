@@ -41,7 +41,7 @@ export const _prompt = async <TParams extends Array<PromptArgsModel>>(
 
         name: key as string,
 
-        pageSize: options ? options.length : undefined,
+        pageSize: options ? Math.min(options.length, 10) : undefined,
 
         type,
 

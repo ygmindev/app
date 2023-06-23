@@ -3659,15 +3659,6 @@
     chalk "^4.1.2"
     figures "^3.2.0"
 
-"@inquirer/confirm@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@inquirer/confirm/-/confirm-2.0.2.tgz#aaf23a7edad7c2e9d5d8fd3e33840347b9734a2b"
-  integrity sha512-2/Ogb3fkVyCp/V9aowa3Ge/aNiZCwH58BPYLeaMxRGDRtGV70aw50194/WSfceNfliHOFGQF6Db39c7Q85Dpkg==
-  dependencies:
-    "@inquirer/core" "^2.1.0"
-    "@inquirer/type" "^1.1.0"
-    chalk "^4.1.2"
-
 "@inquirer/core@^2.1.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@inquirer/core/-/core-2.1.0.tgz#97bcc4eb5286a3a7ec63f20781d75a67aece3cc2"
@@ -3684,79 +3675,6 @@
     string-width "^4.2.3"
     strip-ansi "^6.0.1"
     wrap-ansi "^6.0.1"
-
-"@inquirer/editor@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@inquirer/editor/-/editor-1.2.0.tgz#e2646bcc471da142285b067433e7a83b88b0e320"
-  integrity sha512-NMXLLNadvqIR6TD6mNZRa/PKHTvdaa4ndGGeXl+DwybQ4K7cVSJNRrztixpM1KDEoG8Ape5ightNwq25cyugTg==
-  dependencies:
-    "@inquirer/core" "^2.1.0"
-    "@inquirer/type" "^1.1.0"
-    chalk "^4.1.2"
-    external-editor "^3.0.3"
-
-"@inquirer/expand@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@inquirer/expand/-/expand-1.1.1.tgz#61dc7c374ed0a3fc6960f2160ae7954a6c00c480"
-  integrity sha512-fXk5NG2FOAiluDWPYfXHuof3sklL/HhZh3NnXfnBZ2IhTCRzXvlXRcQcPlev2sGcZknHn0g6JdKlxjSa+7H2nQ==
-  dependencies:
-    "@inquirer/core" "^2.1.0"
-    "@inquirer/type" "^1.1.0"
-    chalk "^4.1.2"
-    figures "^3.2.0"
-
-"@inquirer/input@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@inquirer/input/-/input-1.2.1.tgz#d3af30ed9b312fb410b189c56f0d464b2c02c0ca"
-  integrity sha512-OYwG3dEo1+lMAE6rYB8b1HTg8eSP++jk0pHSjKZu00gTlN5IHW/dliB82nsWe9Bn//93E9LJ1KrhjFMqOzkCFw==
-  dependencies:
-    "@inquirer/core" "^2.1.0"
-    "@inquirer/type" "^1.1.0"
-    chalk "^4.1.2"
-
-"@inquirer/password@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@inquirer/password/-/password-1.1.1.tgz#4e6d0f3d9033196f7bb56d0cb1045fa7f93094f9"
-  integrity sha512-3M03aA04hOA4lRjLviB9uGoNmmd1YDNo4CYSFM9Uh4qlXdgvhke3xPU07k3kVstRIo0Te1hF14RL7vEgHJQ8tA==
-  dependencies:
-    "@inquirer/input" "^1.2.1"
-    "@inquirer/type" "^1.1.0"
-    chalk "^4.1.2"
-
-"@inquirer/prompts@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@inquirer/prompts/-/prompts-2.1.1.tgz#27a2701247edda8f3d334780fd14d1371e0f5d0c"
-  integrity sha512-DTtdrf3JoXQpfD5vAhW9isUE7lgcOBN5ikkxTqhkXZY41CnrFt7I2DTOmUUUbkh5shrcwq7zzAmVesoW2KM5EA==
-  dependencies:
-    "@inquirer/checkbox" "^1.3.1"
-    "@inquirer/confirm" "^2.0.2"
-    "@inquirer/core" "^2.1.0"
-    "@inquirer/editor" "^1.2.0"
-    "@inquirer/expand" "^1.1.1"
-    "@inquirer/input" "^1.2.1"
-    "@inquirer/password" "^1.1.1"
-    "@inquirer/rawlist" "^1.2.1"
-    "@inquirer/select" "^1.2.1"
-
-"@inquirer/rawlist@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@inquirer/rawlist/-/rawlist-1.2.1.tgz#fe41c813f547c6abab1d6b0f81470f2cedaaadec"
-  integrity sha512-t8lMbE3Gqook4PvQYQl9eVJrl/mBy5kCgolwY9El8HLyGZ7Wc3SGIqHnQUlha4qms8HPOdUIBzyPfcAXl5+3SQ==
-  dependencies:
-    "@inquirer/core" "^2.1.0"
-    "@inquirer/type" "^1.1.0"
-    chalk "^4.1.2"
-
-"@inquirer/select@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@inquirer/select/-/select-1.2.1.tgz#51c68ae116ab1e220fedacc225d7e7a7fd017b42"
-  integrity sha512-13JDLtlwFoqQUYRdMzz5wP3a4DWccJfNA/8M8MDUhhZ8HeKZ3MPaTMlpxwY+Q0Jgbmt56nf7xUuck0XXPce8Xw==
-  dependencies:
-    "@inquirer/core" "^2.1.0"
-    "@inquirer/type" "^1.1.0"
-    ansi-escapes "^4.3.2"
-    chalk "^4.1.2"
-    figures "^3.2.0"
 
 "@inquirer/type@^1.1.0":
   version "1.1.0"
@@ -13329,7 +13247,7 @@ inquirer@^1.1.3:
     strip-ansi "^3.0.0"
     through "^2.3.6"
 
-inquirer@^8.2.3, inquirer@^8.2.5:
+inquirer@^8.2.2, inquirer@^8.2.5:
   version "8.2.5"
   resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-8.2.5.tgz#d8654a7542c35a9b9e069d27e2df4858784d54f8"
   integrity sha512-QAgPDQMEgrDssk1XiwwHoOGYF9BAbUcc1+j+FhEvaOt8/cKRqyLn0U5qA6F74fGhTMGxf92pOvPBeh29jQJDTQ==
