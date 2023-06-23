@@ -1,9 +1,25 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "app",
-  "version": "0.0.0",
-  "license": "MIT",
-  "private": true,
+  "bin": {
+    "cmd": "./packages/tool-task/src/index.js"
+  },
+  "bundledDependencies": [
+    "#app-native",
+    "#app-web",
+    "#app-web-ete",
+    "#app-web-library",
+    "@asset/static",
+    "#lib-backend",
+    "#lib-config",
+    "#lib-platform",
+    "#lib-frontend",
+    "#lib-library",
+    "#lib-shared",
+    "#backend-lambda",
+    "#backend-sandbox",
+    "#tool-generate",
+    "#tool-task"
+  ],
   "dependencies": {
     "@amplitude/react-native": "^2.17.1",
     "@emotion/react": "^11.11.1",
@@ -258,24 +274,8 @@
     "vitest": "^0.32.2",
     "vitest-react-native": "^0.1.1"
   },
-  "bin": {
-    "run": "./packages/tool-task/src/index.js"
-  },
-  "bundledDependencies": [
-    "#app-native",
-    "#app-web",
-    "#app-web-ete",
-    "#app-web-library",
-    "@asset/static",
-    "#lib-backend",
-    "#lib-config",
-    "#lib-platform",
-    "#lib-frontend",
-    "#lib-library",
-    "#lib-shared",
-    "#backend-lambda",
-    "#backend-sandbox",
-    "#tool-generate",
-    "#tool-task"
-  ]
+  "license": "MIT",
+  "name": "app",
+  "private": true,
+  "version": "0.0.0"
 }
