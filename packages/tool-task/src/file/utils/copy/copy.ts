@@ -21,7 +21,7 @@ export const copy = async ({
     if (statSync(from).isDirectory()) {
       existsSync(toF)
         ? isOverwrite && rmSync(toF, { force: true, recursive: true })
-        : mkdirSync(toF);
+        : mkdirSync(toF, { recursive: true });
       for (const child of readdirSync(from)) {
         await copy({ from: join(from, child), isOverwrite, overrides, to: join(toF, child) });
       }
