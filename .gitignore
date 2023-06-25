@@ -3,6 +3,7 @@ dist
 tmp
 out-tsc
 out
+.esbuild
 
 # Node
 node_modules

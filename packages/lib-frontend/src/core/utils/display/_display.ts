@@ -1,5 +1,3 @@
-import { useEffect, useLayoutEffect } from 'react';
-
 import type { _DisplayModel } from '#lib-frontend/core/utils/display/_display.models';
 import { isServer } from '#lib-platform/core/utils/isServer/isServer';
 
@@ -7,14 +5,14 @@ const subscribeEvent = <TType extends Event>(
   eventName: string,
   cb: (event: TType) => void,
 ): void => {
-  isServer ? null : window.addEventListener(eventName as keyof WindowEventMap, cb as never);
+  !isServer && window.addEventListener(eventName as keyof WindowEventMap, cb as never);
 };
 
 const unsubscribeEvent = <TType extends Event>(
   eventName: string,
   cb: (event: TType) => void,
 ): void => {
-  isServer ? null : window.removeEventListener(eventName as keyof WindowEventMap, cb as never);
+  !isServer && window.removeEventListener(eventName as keyof WindowEventMap, cb as never);
 };
 
 export const _display: _DisplayModel = {
@@ -36,5 +34,4 @@ export const _display: _DisplayModel = {
   unsubscribeEvent,
   unsubscribeMessage: (cb) => unsubscribeEvent('message', cb),
   unsubscribeResize: (cb) => unsubscribeEvent('resize', cb),
-  useLayoutEffect: isServer ? useEffect : useLayoutEffect,
 };

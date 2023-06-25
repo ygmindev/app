@@ -49,7 +49,6 @@ export const _bundle = ({
     build: {
       assetsDir: fromWorking('assets'),
 
-      // assetsInlineLimit: 4096 * 1000,
       commonjsOptions: {
         defaultIsModuleExports: true,
         esmExternals: true,

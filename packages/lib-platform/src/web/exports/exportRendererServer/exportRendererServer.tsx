@@ -1,5 +1,5 @@
 import { WEB_CONFIG_STATIC } from '#lib-config/platform/web/web.constants';
-import { RouteProvider } from '#lib-frontend/route/providers/RouteProvider/RouteProvider.ssr';
+import { Root } from '#lib-frontend/root/containers/Root/Root.server';
 import { renderApp } from '#lib-platform/core/utils/renderApp/renderApp';
 import { _exportRendererServer } from '#lib-platform/web/exports/exportRendererServer/_exportRendererServer';
 import type {
@@ -12,11 +12,8 @@ export const exportRendererServer = ({
 }: ExportRenderServerParamsModel): ExportRendererServerModel =>
   _exportRendererServer({
     ...params,
-    ...WEB_CONFIG_STATIC,
-    render: ({ children, context }) =>
-      renderApp({
-        additionalProviders: [(contextF) => <RouteProvider value={contextF?.route} />],
-        children,
-        context,
-      }),
+    publicDir: WEB_CONFIG_STATIC.publicDir,
+    render: ({ children, context }) => renderApp({ Root, children, context }),
+    rootId: WEB_CONFIG_STATIC.rootId,
+    ssrContextKeys: WEB_CONFIG_STATIC.ssrContextKeys,
   });

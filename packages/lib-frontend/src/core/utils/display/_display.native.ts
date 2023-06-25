@@ -1,4 +1,3 @@
-import { useLayoutEffect } from 'react';
 import type { EmitterSubscription } from 'react-native';
 import { Dimensions } from 'react-native';
 
@@ -34,5 +33,4 @@ export const _display: _DisplayModel = {
   unsubscribeEvent,
   unsubscribeMessage: (_cb) => null,
   unsubscribeResize: (cb) => unsubscribeEvent('change', cb),
-  useLayoutEffect,
 };

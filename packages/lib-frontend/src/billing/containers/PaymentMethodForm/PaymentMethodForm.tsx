@@ -31,11 +31,10 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
   const currentUser = useCurrentUser();
   const { createToken } = usePaymentMethodResource();
 
-  const { data, isLoading, mutate } = useMutation({
-    id: `${CREATE_TOKEN}${PAYMENT_METHOD}`,
-    mutate: async () =>
-      currentUser && createToken({ form: undefined, root: { _id: currentUser._id } }),
-  });
+  const { data, isLoading, mutate } = useMutation(
+    `${CREATE_TOKEN}${PAYMENT_METHOD}`,
+    async () => currentUser && createToken({ form: undefined, root: { _id: currentUser._id } }),
+  );
 
   const ref = useRef<FormRefModel>(null);
 

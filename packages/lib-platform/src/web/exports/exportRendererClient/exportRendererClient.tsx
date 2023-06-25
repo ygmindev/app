@@ -1,5 +1,5 @@
 import { WEB_CONFIG_STATIC } from '#lib-config/platform/web/web.constants';
-import { RouteProvider } from '#lib-frontend/route/providers/RouteProvider/RouteProvider';
+import { Root } from '#lib-frontend/root/containers/Root/Root';
 import { renderApp } from '#lib-platform/core/utils/renderApp/renderApp';
 import { _exportRendererClient } from '#lib-platform/web/exports/exportRendererClient/_exportRendererClient';
 import type {
@@ -12,11 +12,6 @@ export const exportRendererClient = ({
 }: ExportRendererClientParamsModel): ExportRendererClientModel =>
   _exportRendererClient({
     ...params,
-    render: ({ children, context }) =>
-      renderApp({
-        additionalProviders: [(contextF) => <RouteProvider value={contextF?.route} />],
-        children,
-        context,
-      }),
+    render: ({ children, context }) => renderApp({ Root, children, context }),
     rootId: WEB_CONFIG_STATIC.rootId,
   });

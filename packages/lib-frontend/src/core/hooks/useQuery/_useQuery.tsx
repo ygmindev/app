@@ -1,4 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import isNumber from 'lodash/isNumber';
 
 import type {
   _UseQueryModel,
@@ -6,16 +7,15 @@ import type {
 } from '#lib-frontend/core/hooks/useQuery/_useQuery.models';
 import { debounce } from '#lib-shared/core/utils/debounce/debounce';
 
-export const _useQuery = <TType,>({
-  cache,
-  id,
-  query,
-}: _UseQueryParamsModel<TType>): _UseQueryModel<TType> => {
+export const _useQuery = <TType,>(
+  ...[id, callback, options]: _UseQueryParamsModel<TType>
+): _UseQueryModel<TType> => {
   const queryClient = useQueryClient();
+  const cache = isNumber(options?.cache) ? options?.cache : 0;
   const { data, error, isError, isFetching, isStale, refetch } = useQuery<TType | null, Error>(
     [id],
-    async () => query(),
-    { staleTime: cache },
+    async () => await callback(),
+    { cacheTime: cache, staleTime: cache },
   );
   const refetchF = debounce(refetch);
   return {

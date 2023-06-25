@@ -30,16 +30,13 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
   const { push } = useRouter();
   const { getMany } = usePaymentMethodResource({ root: { _id: currentUser?._id } });
 
-  const { data, isLoading } = useQuery({
-    id: 'paymentMethods',
-    query: async () => {
-      if (paymentMethods) {
-        return paymentMethods;
-      }
-      const { result } = await getMany({ filter: {} });
-      result && actions?.billing.paymentMethodsSet(result);
-      return result;
-    },
+  const { data, isLoading } = useQuery('paymentMethods', async () => {
+    if (paymentMethods) {
+      return paymentMethods;
+    }
+    const { result } = await getMany({ filter: {} });
+    result && actions?.billing.paymentMethodsSet(result);
+    return result;
   });
 
   const paymentMethodsF = useMemo(

@@ -5,10 +5,10 @@ import type {
   UseQueryParamsModel,
 } from '#lib-frontend/core/hooks/useQuery/useQuery.models';
 
-export const useQuery = <TType,>({
-  cache,
-  ...params
-}: UseQueryParamsModel<TType>): UseQueryModel<TType> => {
-  const cacheF = cache ? (cache === true ? QUERY_EXPIRATION_MILLISECONDS_DEFAULT : cache) : 0;
-  return _useQuery({ ...params, cache: cacheF });
+export const useQuery = <TType,>(
+  ...[id, callback, options]: UseQueryParamsModel<TType>
+): UseQueryModel<TType> => {
+  const cache = options?.cache;
+  const cacheF = (cache === true ? QUERY_EXPIRATION_MILLISECONDS_DEFAULT : cache) || 0;
+  return _useQuery(id, callback, { ...options, cache: cacheF });
 };

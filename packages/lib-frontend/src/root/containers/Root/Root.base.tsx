@@ -1,7 +1,5 @@
 import type { ReactElement } from 'react';
 import { cloneElement, createContext, Suspense, useMemo } from 'react';
-import { Route, Routes } from 'react-router';
-import { BrowserRouter } from 'react-router-dom';
 
 import { AppProvider } from '#lib-frontend/app/containers/AppProvider/AppProvider';
 import { AuthProvider } from '#lib-frontend/auth/providers/AuthProvider/AuthProvider';
@@ -24,7 +22,7 @@ import { TrackingProvider } from '#lib-frontend/tracking/providers/TrackingProvi
 
 export const actionContext = createContext<RootActionsModel | undefined>(undefined);
 
-export const RootClient: FCModel<RootPropsModel> = ({ additionalProviders, children, context }) => {
+export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, context }) => {
   const store = useMemo(
     () =>
       new Store<Array<keyof RootStateModel>, RootStateModel, RootActionsParamsModel>({
@@ -46,24 +44,10 @@ export const RootClient: FCModel<RootPropsModel> = ({ additionalProviders, child
       <LocaleProvider value={context?.locale} />,
       <AppProvider />,
       <store.Provider value={{ ...context?.state, actionContext, store }} />,
-      <Suspense />, // to provider?
+      <Suspense />,
     ],
     [additionalProviders, context],
   );
 
-  return (
-    <>
-      {providers.reduce(
-        (result, element) => cloneElement(element, {}, result),
-        <BrowserRouter>
-          <Routes>
-            <Route
-              element={<div>test?</div>}
-              path="/"
-            />
-          </Routes>
-        </BrowserRouter>,
-      )}
-    </>
-  );
+  return <>{providers.reduce((result, element) => cloneElement(element, {}, result), children)}</>;
 };

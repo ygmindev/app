@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 
-import { Root } from '#lib-frontend/root/containers/Root/Root';
+import { Root } from '#lib-frontend/root/containers/Root/Root.base';
 import type {
   _RenderHookModel,
   _RenderHookParamsModel,

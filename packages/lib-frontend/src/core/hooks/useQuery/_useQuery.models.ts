@@ -1,10 +1,11 @@
 import type { CallablePromiseModel } from '#lib-shared/core/core.models';
 import type { WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
 
-export type _UseQueryParamsModel<TType> = {
-  cache?: number;
-  query: CallablePromiseModel<TType | null>;
-} & WithIdModel;
+export type _UseQueryParamsModel<TType> = [
+  id: string,
+  callback: CallablePromiseModel<TType | null>,
+  options?: { cache?: boolean | number },
+];
 
 export type _UseQueryModel<TType> = {
   data?: TType | null;

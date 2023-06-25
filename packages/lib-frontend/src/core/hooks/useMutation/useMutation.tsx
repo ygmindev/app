@@ -4,7 +4,6 @@ import type {
   UseMutationParamsModel,
 } from '#lib-frontend/core/hooks/useMutation/useMutation.models';
 
-export const useMutation = <TParams = undefined, TResult = void>({
-  ...params
-}: UseMutationParamsModel<TParams, TResult>): UseMutationModel<TParams, TResult> =>
-  _useMutation<TParams, TResult>({ ...params });
+export const useMutation = <TParams = undefined, TResult = void>(
+  ...params: UseMutationParamsModel<TParams, TResult>
+): UseMutationModel<TParams, TResult> => _useMutation<TParams, TResult>(...params);

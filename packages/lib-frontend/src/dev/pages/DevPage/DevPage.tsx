@@ -1,25 +1,29 @@
-import { Suspense } from 'react';
-
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import type { FCModel } from '#lib-frontend/core/core.models';
 import { useQuery } from '#lib-frontend/core/hooks/useQuery/useQuery';
 import type { DevPagePropsModel } from '#lib-frontend/dev/pages/DevPage/DevPage.models';
-import { sleep } from '#lib-shared/core/utils/sleep/sleep';
+import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
+import { USER_OUTPUT_FIELDS } from '#lib-frontend/user/hooks/useUserResource/useUserResource.constants';
+import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
+import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
 
 export const DevPage: FCModel<DevPagePropsModel> = ({ testID }) => {
-  const { data, isLoading } = useQuery({
-    id: 'xxx',
-    query: async () => {
-      await sleep(3000);
-      return 'test';
-    },
+  const { query: get } = useResourceMethod({
+    fields: USER_OUTPUT_FIELDS,
+    method: RESOURCE_METHOD_TYPE.GET,
+    name: USER_RESOURCE_NAME,
   });
+
+  const { data, error, isError, isLoading } = useQuery('a2', async () => {
+    return get({ filter: { _id: '64927d6ee1420f18af63a374' } });
+  });
+
+  console.warn(data);
+
   return (
-    <Suspense fallback={<div>fallback?</div>}>
-      <Wrapper spacing>
-        <Text>{`${isLoading} ${data}`}</Text>
-      </Wrapper>
-    </Suspense>
+    <Wrapper spacing>
+      <Text>{`${'xxx'}`}</Text>
+    </Wrapper>
   );
 };

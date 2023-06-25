@@ -30,7 +30,6 @@ export const _exportRendererServer = ({
     ]);
 
     const { element, getCss } = render({ children: <Page {...pageProps} />, context: contextF });
-
     const styleSheet = renderToStaticMarkup(getCss());
     const stream = await renderToStream(element);
 
