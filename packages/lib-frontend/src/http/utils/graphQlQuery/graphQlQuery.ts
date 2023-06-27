@@ -1,3 +1,5 @@
+import { print } from 'graphql/language/printer';
+import { gql } from 'graphql-tag';
 import isPlainObject from 'lodash/isPlainObject';
 import map from 'lodash/map';
 
@@ -41,9 +43,9 @@ export const graphQlQuery = <TParams, TResult, TName extends string>({
       .map((k) => `${k}: $${k}`)
       .join(', ')})`;
   }
-  return trimDeep(
-    `${type} ${name}${paramsString} {
+  return print(gql`
+    ${trimDeep(`${type} ${name}${paramsString} {
       ${name}${paramsKeys} ${getGraphQlFields<TResult>(fields)}
-    }`,
-  );
+    }`)}
+  `);
 };

@@ -1,5 +1,6 @@
 import { fromGlobs } from '#lib-backend/file/utils/fromGlobs/fromGlobs';
 import { fromModules } from '#lib-backend/file/utils/fromModules/fromModules';
+import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { _config as _babelConfig } from '#lib-config/node/babel/babel.frontend';
 import { _bundle } from '#lib-config/node/bundle/_bundle';
 import { config as configBase } from '#lib-config/node/bundle/bundle.base';
@@ -17,7 +18,7 @@ export const config: BundleConfigModel = () =>
           __DEV__: `${process.env.NODE_ENV === 'development'}`,
         },
 
-        envPrefix: ['APP_'],
+        envPrefix: ['APP_', 'DATABASE_'],
 
         transpiles: [
           'countries-list',
@@ -36,7 +37,7 @@ export const config: BundleConfigModel = () =>
           }),
         ],
 
-        // watch: [fromPackages('lib-frontend/src/**/*')],
+        watch: [fromPackages('lib-frontend/src/**/*')],
       },
 
       configBase(),

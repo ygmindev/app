@@ -24,7 +24,7 @@ export const main = createHandler(async (event, context, callback) => {
         error('[graphql]', stringify(e));
         return { ...e, extensions: { ...e.extensions, statusCode: e.extensions?.statusCode } };
       },
-      schema: _config,
+      schema: _config(),
     });
     handler = startServerAndCreateLambdaHandler(
       server,

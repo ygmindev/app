@@ -14,7 +14,7 @@ export const _useQuery = <TType,>(
   const cache = isNumber(options?.cache) ? options?.cache : 0;
   const { data, error, isError, isFetching, isStale, refetch } = useQuery<TType | null, Error>(
     [id],
-    async () => await callback(),
+    async () => callback(),
     { cacheTime: cache, staleTime: cache },
   );
   const refetchF = debounce(refetch);

@@ -50,6 +50,7 @@
     "aws-lambda": "^1.0.7",
     "axios": "^1.4.0",
     "class-validator": "^0.14.0",
+    "close-with-grace": "^1.2.0",
     "color": "^4.2.3",
     "cookies-js": "^1.2.3",
     "countries-list": "^2.6.1",

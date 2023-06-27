@@ -4,7 +4,8 @@ import { withEntity } from '#lib-backend/resource/decorators/withEntity/withEnti
 import { withField } from '#lib-backend/resource/decorators/withField/withField';
 import { EntityResource } from '#lib-backend/resource/resources/EntityResource/EntityResource';
 import type { RootParamsModel } from '#lib-backend/resource/utils/Root/Root.models';
-import type { ConstructorModel, PartialModel } from '#lib-shared/core/core.models';
+import type { ConstructorModel } from '#lib-shared/core/core.models';
+import { PartialModel } from '#lib-shared/core/core.models';
 import type { RootModel } from '#lib-shared/resource/utils/Root/Root.models';
 
 export const Root = <TRoot = undefined>({

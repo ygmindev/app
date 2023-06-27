@@ -4,10 +4,13 @@ import { babel } from '@rollup/plugin-babel';
 import inject from '@rollup/plugin-inject';
 import resolve from '@rollup/plugin-node-resolve';
 import react from '@vitejs/plugin-react-swc';
+import { existsSync } from 'fs';
 import { getTsconfig } from 'get-tsconfig';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
+import trim from 'lodash/trim';
 import { visualizer } from 'rollup-plugin-visualizer';
+import type { Plugin } from 'vite';
 import { searchForWorkspaceRoot } from 'vite';
 import { checker } from 'vite-plugin-checker';
 import circleDependency from 'vite-plugin-circular-dependency';
@@ -24,6 +27,35 @@ import type { PlatformModel } from '#lib-platform/core/core.models';
 import type { ReturnTypeModel } from '#lib-shared/core/core.models';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
+
+function _vitePluginIsomorphicImport({ serverPostfix }: { serverPostfix: string }): Plugin {
+  return {
+    enforce: 'pre',
+    name: 'vite-plugin-isomorphic-import',
+    async resolveId(this, id, importer, options) {
+      if (importer) {
+        let resolved = await this.resolve(id, importer, { ...options, skipSelf: true });
+        if (resolved && options?.ssr) {
+          const postfix = `.${trim(serverPostfix, '.')}`;
+          const i = resolved?.id.lastIndexOf('.');
+          const idServer =
+            i === -1
+              ? `${resolved.id}${postfix}`
+              : `${resolved.id.substring(0, i)}${postfix}${resolved.id.substring(i)}`;
+          const resolvedServer = await this.resolve(idServer, importer, {
+            ...options,
+            skipSelf: true,
+          });
+          if (resolvedServer && existsSync(resolvedServer.id)) {
+            resolved = resolvedServer;
+          }
+        }
+        return resolved ?? { id };
+      }
+      return null;
+    },
+  };
+}
 
 export const _bundle = ({
   aliases,
@@ -105,6 +137,8 @@ export const _bundle = ({
     },
 
     plugins: filterNil([
+      _vitePluginIsomorphicImport({ serverPostfix: 'server' }),
+
       tsconfigPath && tsconfigPaths({ projects: [tsconfigPath] }),
 
       checker({
@@ -112,7 +146,7 @@ export const _bundle = ({
         typescript: { tsconfigPath },
       }),
 
-      isReact && react(),
+      isReact && react({ tsDecorators: true }),
 
       provide && inject(provide),
 

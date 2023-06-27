@@ -29,6 +29,7 @@ export abstract class _Database implements DatabaseModel {
   }
 
   async connect(): Promise<void> {
+    debug('[database] connecting', this._config.clientUrl);
     this._entityManager =
       this._entityManager ?? (await MikroORM.init<MongoDriver>(this._config)).em;
   }
@@ -166,7 +167,7 @@ export abstract class _Database implements DatabaseModel {
   };
 
   close = async (): Promise<void> => {
-    debug('closing database connections');
+    debug('[database] closing connections', this._config.clientUrl);
     await this._getEntityManager().getConnection().close();
   };
 }

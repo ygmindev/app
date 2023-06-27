@@ -11,7 +11,6 @@ export const staticServer = async ({
   port = STATIC_SERVER_PORT,
   root,
 }: StaticServerParamsModel): StaticServerModel =>
-  await command(
-    fromExecutable(`http-server ${root} --cors --port ${port} ${isOpen ? '--o' : ''}`),
-    { root },
-  );
+  command(fromExecutable(`http-server ${root} --cors --port ${port} ${isOpen ? '--o' : ''}`), {
+    root,
+  });

@@ -15,8 +15,8 @@ import { PAYMENT_METHOD_RESOURCE_NAME } from '#lib-shared/billing/resources/Paym
 import type { PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import type { PaymentMethodServiceModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethodService/PaymentMethodService.models';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-import type { ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
-import type { InputModel } from '#lib-shared/resource/utils/Input/Input.models';
+import { ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
+import { InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import type { OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import type { UserModel } from '#lib-shared/user/resources/User/User.models';
 

@@ -2,7 +2,11 @@ import { _babel } from '#lib-config/node/babel/_babel';
 import type { _BabelConfigModel, BabelConfigModel } from '#lib-config/node/babel/babel.models';
 
 export const config: BabelConfigModel = {
-  plugins: [],
+  plugins: [
+    // '@babel/plugin-transform-runtime',
+    // ['@babel/plugin-proposal-decorators', { legacy: true }],
+    // ['@babel/plugin-proposal-class-properties', { loose: true }],
+  ],
 };
 
 export const _config: _BabelConfigModel = () => _babel(config);

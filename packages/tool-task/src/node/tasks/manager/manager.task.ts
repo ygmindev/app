@@ -5,7 +5,7 @@ const manager: TaskParamsModel = {
   name: 'node-manager',
 
   task: async ({ root }) =>
-    await command(
+    command(
       'corepack enable \
     && corepack prepare yarn@stable --activate \
     && yarn set version stable \

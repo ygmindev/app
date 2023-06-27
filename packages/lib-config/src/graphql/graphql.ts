@@ -12,7 +12,7 @@ import { UserResolver } from '#lib-backend/user/resources/User/UserResolver/User
 import { _graphql } from '#lib-config/graphql/_graphql';
 import type { _GraphqlConfigModel, GraphqlConfigModel } from '#lib-config/graphql/graphql.models';
 
-export const config: GraphqlConfigModel = {
+export const config: GraphqlConfigModel = () => ({
   authorize,
 
   container: Container,
@@ -29,6 +29,6 @@ export const config: GraphqlConfigModel = {
   ],
 
   schemaPath: fromStatic('graphql/schema.gql'),
-};
+});
 
-export const _config: _GraphqlConfigModel = _graphql(config);
+export const _config: _GraphqlConfigModel = () => _graphql(config());

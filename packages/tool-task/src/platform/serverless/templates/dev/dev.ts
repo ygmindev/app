@@ -1,4 +1,5 @@
 import { config } from '#lib-config/core/setup/setup.node';
+import { setup } from '#lib-shared/core/utils/setup/setup';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
 import type { TaskParamsModel } from '#tool-task/core/core.models';
@@ -12,7 +13,7 @@ export const dev: TaskParamsModel<DevParamsModel> = {
 
   onAfter: [
     async () => {
-      await config.onTerminate();
+      await config.onShutdown();
       return { status: TASK_STATUS.SUCCESS };
     },
   ],
@@ -24,5 +25,8 @@ export const dev: TaskParamsModel<DevParamsModel> = {
     },
   ],
 
-  task: async ({ root }) => await command('sls offline start --reloadHandler --verbose', { root }),
+  task: async ({ root }) => {
+    await setup({ onInitialize: config.onInitialize, onShutdown: config.onShutdown });
+    return command('sls offline start --reloadHandler --verbose', { root });
+  },
 };

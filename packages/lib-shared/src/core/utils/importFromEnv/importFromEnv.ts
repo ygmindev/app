@@ -10,7 +10,7 @@ import { resolveFirst } from '#lib-shared/core/utils/resolveFirst/resolveFirst';
 export const importFromEnv = async <TType>(
   params: ImportFromEnvParamsModel,
 ): ImportFromEnvModel<TType> =>
-  await resolveFirst(
+  resolveFirst(
     extensions().map((ext) => async () => {
       const path = `${params}${ext ? `.${trim(ext, '.')}` : ''}`;
       const result = require(path);

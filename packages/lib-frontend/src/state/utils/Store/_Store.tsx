@@ -168,9 +168,8 @@ export class _Store<
     // });
   }
   getState = async (): Promise<TType> =>
-    mapValuesAsync(
-      this._persistors,
-      async (v) => await getStoredState(v as PersistConfig<TType[TKeys[number]]>),
+    mapValuesAsync(this._persistors, async (v) =>
+      getStoredState(v as PersistConfig<TType[TKeys[number]]>),
     ) as Promise<TType>;
 
   get Provider(): ComponentType<StateProviderPropsModel<TKeys, TType, TParams>> {

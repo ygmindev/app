@@ -13,7 +13,7 @@ import type {
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 
 export const config: DatabaseConfigModel = () => ({
-  database: process.env.SERVER_MONGO_DATABASE_NAME,
+  database: process.env.DATABASE_MONGO_NAME,
 
   entities: filterNil([
     Access,
@@ -24,15 +24,15 @@ export const config: DatabaseConfigModel = () => ({
     process.env.NODE_ENV !== 'production' && DummyEntityResource,
   ]),
 
-  host: process.env.SERVER_MONGO_DATABASE_URL,
+  host: process.env.DATABASE_MONGO_URL,
 
-  password: process.env.SERVER_MONGO_DATABASE_PASSWORD,
+  password: process.env.DATABASE_MONGO_PASSWORD,
 
   pool: { max: 10 },
 
   type: DATABASE_TYPE.MONGO,
 
-  username: process.env.SERVER_MONGO_DATABASE_USERNAME,
+  username: process.env.DATABASE_MONGO_USERNAME,
 });
 
 export const _config: _DatabaseConfigModel = () => _database(config());

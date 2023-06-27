@@ -8,7 +8,7 @@ export const _exportPrerenderPages = ({
   pages,
 }: _ExportPrerenderPagesParamsModel): _ExportPrerenderPagesModel => ({
   prerenderPages: async () =>
-    await sequence(
+    sequence(
       pages.map(({ getContext, pathname }) => async () => ({
         pageContext: getContext ? await getContext() : {},
         url: pathname,

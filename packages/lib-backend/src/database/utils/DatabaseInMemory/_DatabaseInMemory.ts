@@ -13,7 +13,7 @@ export class _DatabaseInMemory implements _DatabaseInMemoryModel {
   start = async (): Promise<void> => {
     if (!this._isActive()) {
       debug('starting database');
-      const url = process.env.SERVER_MONGO_DATABASE_URL.replace('mongodb://', '').split(':');
+      const url = process.env.DATABASE_MONGO_URL.replace('mongodb://', '').split(':');
       const port = toNumber(url.pop());
       const ip = url.join(':');
       this._server = await MongoMemoryServer.create({ instance: { ip, port } });

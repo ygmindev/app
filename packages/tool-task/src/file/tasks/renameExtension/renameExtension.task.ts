@@ -11,7 +11,7 @@ const renameExtension: TaskParamsModel = {
     const { from, to } = await prompt([{ key: 'from' }, { key: 'to' }]);
     const fromF = `.${trim(from, '.')}`;
     const toF = `.${trim(to, '.')}`;
-    return await command(
+    return command(
       `find . -depth -name "*${fromF}" -exec bash -c 'mv $0 "$\{0/${fromF}/${toF}}"' {} \\;`,
       { root },
     );

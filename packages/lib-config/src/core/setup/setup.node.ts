@@ -12,23 +12,17 @@ const isTerminated = false;
 export const config: SetupConfigModel = {
   onInitialize: async () => {
     if (!isInitialized) {
-      if (process.env.USE_DATABASE) {
-        const database = new Database(_config());
-        await database.connect();
-        Container.set(Database, database, DATABASE_TYPE.MONGO);
-      }
-
+      const database = new Database(_config());
+      await database.connect();
+      Container.set(Database, database, DATABASE_TYPE.MONGO);
       await configBase.onInitialize();
     }
   },
 
-  onTerminate: async () => {
+  onShutdown: async () => {
     if (!isTerminated) {
-      if (process.env.USE_DATABASE) {
-        const database = Container.get(Database, DATABASE_TYPE.MONGO);
-        await database.close();
-      }
-
+      const database = Container.get(Database, DATABASE_TYPE.MONGO);
+      await database.close();
       await configBase.onInitialize();
     }
   },

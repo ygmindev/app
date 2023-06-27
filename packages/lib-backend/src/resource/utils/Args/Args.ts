@@ -12,9 +12,9 @@ import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/Inval
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import type { ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
 import type { ArgsModel } from '#lib-shared/resource/utils/Args/Args.models';
-import type { FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
-import type { PaginationModel } from '#lib-shared/resource/utils/Pagination/Pagination.models';
-import type { UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
+import { FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
+import { PaginationModel } from '#lib-shared/resource/utils/Pagination/Pagination.models';
+import { UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
 
 export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoot = undefined>({
   Resource,

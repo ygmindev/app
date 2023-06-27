@@ -15,7 +15,7 @@ describe(displayName, () => {
 
   test('works with reject', async () => {
     const result = async (): Promise<unknown> =>
-      await resolveFirst([
+      resolveFirst([
         async () => Promise.reject(new Error('1')),
         async () => Promise.reject(new Error('2')),
         async () => Promise.reject(new Error('3')),

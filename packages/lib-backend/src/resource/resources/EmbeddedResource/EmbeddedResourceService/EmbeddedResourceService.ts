@@ -121,7 +121,7 @@ export const EmbeddedResourceService = <
           result: value as unknown as TType,
           root: rootResult,
         };
-        return this.decorators.afterCreate ? await this.decorators.afterCreate({ output }) : output;
+        return this.decorators.afterCreate ? this.decorators.afterCreate({ output }) : output;
       }
       throw new InvalidArgumentError(`${name} root`);
     }
@@ -143,7 +143,7 @@ export const EmbeddedResourceService = <
           result: result && result[0],
           root: rootResult,
         };
-        return this.decorators.afterGet ? await this.decorators.afterGet({ output }) : output;
+        return this.decorators.afterGet ? this.decorators.afterGet({ output }) : output;
       }
       throw new InvalidArgumentError();
     }
@@ -171,9 +171,7 @@ export const EmbeddedResourceService = <
               : result,
           root: rootResult,
         };
-        return this.decorators.afterGetMany
-          ? await this.decorators.afterGetMany({ output })
-          : output;
+        return this.decorators.afterGetMany ? this.decorators.afterGetMany({ output }) : output;
       }
 
       throw new InvalidArgumentError();
@@ -200,7 +198,7 @@ export const EmbeddedResourceService = <
           root: inputF.root,
         };
         return this.decorators.afterGetConnection
-          ? await this.decorators.afterGetConnection({ output })
+          ? this.decorators.afterGetConnection({ output })
           : output;
       }
       throw new InvalidArgumentError();
@@ -242,7 +240,7 @@ export const EmbeddedResourceService = <
           result: resultF,
           root: rootResult,
         };
-        return this.decorators.afterUpdate ? await this.decorators.afterUpdate({ output }) : output;
+        return this.decorators.afterUpdate ? this.decorators.afterUpdate({ output }) : output;
       }
       throw new InvalidArgumentError();
     }
@@ -262,7 +260,7 @@ export const EmbeddedResourceService = <
         const output: OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot> = {
           root: rootResult,
         };
-        return this.decorators.afterRemove ? await this.decorators.afterRemove({ output }) : output;
+        return this.decorators.afterRemove ? this.decorators.afterRemove({ output }) : output;
       }
       throw new InvalidArgumentError();
     }

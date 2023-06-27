@@ -77,7 +77,7 @@ export const EntityResourceService = <TType, TForm>({
           EntityResourceDataModel<TType>
         >,
       );
-      return this.decorators.afterCreate ? await this.decorators.afterCreate({ output }) : output;
+      return this.decorators.afterCreate ? this.decorators.afterCreate({ output }) : output;
     }
 
     async get(
@@ -87,7 +87,7 @@ export const EntityResourceService = <TType, TForm>({
         this.decorators.beforeGet ? await this.decorators.beforeGet({ input }) : input,
       );
       const output = await this._repository.get(inputF);
-      return this.decorators.afterGet ? await this.decorators.afterGet({ output }) : output;
+      return this.decorators.afterGet ? this.decorators.afterGet({ output }) : output;
     }
 
     async getMany(
@@ -97,7 +97,7 @@ export const EntityResourceService = <TType, TForm>({
         this.decorators.beforeGetMany ? await this.decorators.beforeGetMany({ input }) : input,
       );
       const output = await this._repository.getMany(inputF);
-      return this.decorators.afterGetMany ? await this.decorators.afterGetMany({ output }) : output;
+      return this.decorators.afterGetMany ? this.decorators.afterGetMany({ output }) : output;
     }
 
     async getConnection(
@@ -110,7 +110,7 @@ export const EntityResourceService = <TType, TForm>({
       );
       const output = await this._repository.getConnection(inputF);
       return this.decorators.afterGetConnection
-        ? await this.decorators.afterGetConnection({ output })
+        ? this.decorators.afterGetConnection({ output })
         : output;
     }
 
@@ -121,7 +121,7 @@ export const EntityResourceService = <TType, TForm>({
         this.decorators.beforeUpdate ? await this.decorators.beforeUpdate({ input }) : input,
       );
       const output = await this._repository.update(inputF);
-      return this.decorators.afterUpdate ? await this.decorators.afterUpdate({ output }) : output;
+      return this.decorators.afterUpdate ? this.decorators.afterUpdate({ output }) : output;
     }
 
     async remove(
@@ -131,7 +131,7 @@ export const EntityResourceService = <TType, TForm>({
         this.decorators.beforeRemove ? await this.decorators.beforeRemove({ input }) : input,
       );
       const output = await this._repository.remove(inputF);
-      return this.decorators.afterRemove ? await this.decorators.afterRemove({ output }) : output;
+      return this.decorators.afterRemove ? this.decorators.afterRemove({ output }) : output;
     }
 
     async count(): Promise<number> {

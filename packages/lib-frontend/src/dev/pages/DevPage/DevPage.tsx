@@ -5,10 +5,11 @@ import { useQuery } from '#lib-frontend/core/hooks/useQuery/useQuery';
 import type { DevPagePropsModel } from '#lib-frontend/dev/pages/DevPage/DevPage.models';
 import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { USER_OUTPUT_FIELDS } from '#lib-frontend/user/hooks/useUserResource/useUserResource.constants';
+import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
 
-export const DevPage: FCModel<DevPagePropsModel> = ({ testID }) => {
+export const DevPage: FCModel<DevPagePropsModel> = () => {
   const { query: get } = useResourceMethod({
     fields: USER_OUTPUT_FIELDS,
     method: RESOURCE_METHOD_TYPE.GET,
@@ -16,14 +17,14 @@ export const DevPage: FCModel<DevPagePropsModel> = ({ testID }) => {
   });
 
   const { data, error, isError, isLoading } = useQuery('a2', async () => {
+    await sleep(5000);
     return get({ filter: { _id: '64927d6ee1420f18af63a374' } });
   });
-
   console.warn(data);
 
   return (
     <Wrapper spacing>
-      <Text>{`${'xxx'}`}</Text>
+      <Text>yyy</Text>
     </Wrapper>
   );
 };

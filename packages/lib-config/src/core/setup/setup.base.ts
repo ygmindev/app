@@ -11,7 +11,7 @@ export const config: SetupConfigModel = {
     }
   },
 
-  onTerminate: async () => {
+  onShutdown: async () => {
     if (!isTerminated) {
       return;
     }

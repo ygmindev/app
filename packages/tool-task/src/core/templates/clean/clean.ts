@@ -7,7 +7,7 @@ const clean: TaskParamsModel<CleanParamsModel> = {
   name: 'clean',
 
   task: async ({ options }) =>
-    await runClean({ ...options, excludes: ['node_modules'], root: fromRoot() }),
+    runClean({ ...options, excludes: ['node_modules'], root: fromRoot() }),
 };
 
 export default clean;

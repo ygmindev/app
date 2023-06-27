@@ -12,7 +12,7 @@ export class _TaskRegistry implements _TaskRegistryModel {
     if (registry().tasks()[name]) {
       throw new DuplicateError(`task ${name} exists`);
     }
-    gulpTask(name, async () => await task());
+    gulpTask(name, async () => task());
   };
 
   get registry(): Record<string, CallablePromiseModel<TaskResultModel>> {

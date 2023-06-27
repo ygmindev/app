@@ -16,8 +16,8 @@ import { NotImplementedError } from '#lib-shared/core/errors/NotImplementedError
 import { toPlainObject } from '#lib-shared/core/utils/toPlainObject/toPlainObject';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import type { ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
-import type { ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
-import type { InputModel } from '#lib-shared/resource/utils/Input/Input.models';
+import { ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
+import { InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import type { OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 
 export const authorize = <

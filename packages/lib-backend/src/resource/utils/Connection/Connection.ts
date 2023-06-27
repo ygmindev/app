@@ -7,8 +7,8 @@ import type { ConstructorModel } from '#lib-shared/core/core.models';
 import type {
   ConnectionModel,
   EdgeModel,
-  PageInfoModel,
 } from '#lib-shared/resource/utils/Connection/Connection.models';
+import { PageInfoModel } from '#lib-shared/resource/utils/Connection/Connection.models';
 
 export const Connection = <TType extends unknown>({
   Resource,

@@ -42,6 +42,10 @@ export const _lint = ({
     },
   ],
 
+  parserOptions: {
+    project: ['tsconfig.json'],
+  },
+
   plugins: [
     '@typescript-eslint',
     'import',
@@ -61,8 +65,10 @@ export const _lint = ({
     '@typescript-eslint/no-unnecessary-type-constraint': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/return-await': ['error', 'in-try-catch'],
     'import/no-extraneous-dependencies': ['error', { packageDir: roots }],
     'no-param-reassign': 'error',
+    'no-return-await': 'off',
     'no-unused-vars': 'off',
     'object-shorthand': 'error',
     'prefer-destructuring': 'error',
