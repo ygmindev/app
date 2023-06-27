@@ -14,14 +14,7 @@ export const useApi = ({
 }: UseApiParamsModel): UseApiModel => {
   const { getToken } = useSession();
   return useHttp({
-    baseUri: {
-      host: host || process.env.APP_SERVER_API_HOST,
-      path,
-      port:
-        port || process.env.APP_SERVER_API_PORT
-          ? toNumber(process.env.APP_SERVER_API_PORT)
-          : undefined,
-    },
+    baseUri: { host: host || '', path, port: port ? toNumber(port) : undefined },
     onRequest: async (config) => {
       if (isCredentials) {
         const token = await getToken();

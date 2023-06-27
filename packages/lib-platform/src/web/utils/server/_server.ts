@@ -47,6 +47,7 @@ export const _server = async ({
 
   app.get('*', async (req, res) => {
     const { cookies, i18n, language, url } = req;
+
     const { error, redirect, response } = await renderPage({
       context: {
         [LOCALE]: { i18n, lang: language },

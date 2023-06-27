@@ -13,16 +13,21 @@ import type {
   _ExportRendererServerParamsModel,
 } from '#lib-platform/web/exports/exportRendererServer/_exportRendererServer.models';
 import { merge } from '#lib-shared/core/utils/merge/merge';
+import { setup } from '#lib-shared/core/utils/setup/setup';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 import { STATE } from '#lib-shared/state/state.constants';
 
 export const _exportRendererServer = ({
+  onInitialize,
+  onShutdown,
   publicDir,
   render,
   rootId,
   ssrContextKeys,
 }: _ExportRendererServerParamsModel): _ExportRendererServerModel => ({
   render: async ({ Page, context, pageProps }) => {
+    await setup({ onInitialize, onShutdown });
+
     const store = new Store({ cookies: context?.state?.cookies, reducers: ROOT_REDUCERS });
     const contextF: RootContextModel = merge([
       { [STATE]: { initialState: await store.getState() } as RootStateContextModel },

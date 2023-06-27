@@ -22,7 +22,6 @@ import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import { GRAPHQL } from '#lib-shared/graphql/graphql.constants';
 
 export const useGraphQl = (params: UseGraphQlParamsModel = {}): UseGraphQlModel => {
-  console.warn(`@@@ ${'CLIENT'}`);
   const { post } = useApi({ ...params, path: `api/${GRAPHQL}` });
   return {
     query: async <TParams, TResult, TName extends string = string>({

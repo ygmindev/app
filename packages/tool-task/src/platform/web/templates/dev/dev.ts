@@ -1,4 +1,3 @@
-import { config } from '#lib-config/core/setup/setup.node';
 import { _config } from '#lib-config/platform/web/web';
 import { server } from '#lib-platform/web/utils/server/server';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
@@ -12,13 +11,7 @@ export const dev: TaskParamsModel = {
 
   task: async ({ root }) => {
     const port = process.env.APP_PORT || '';
-    await server({
-      config: _config(),
-      onInitialize: config.onInitialize,
-      onShutdown: config.onShutdown,
-      port,
-      root,
-    });
+    await server({ config: _config(), port, root });
     return { status: TASK_STATUS.SUCCESS };
   },
 };
