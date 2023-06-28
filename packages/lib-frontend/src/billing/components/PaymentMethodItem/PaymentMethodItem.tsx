@@ -157,7 +157,7 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
             {getIcon()}
           </Wrapper>
 
-          <Text type={FONT_TYPE.SUBTITLE}>{`•••• ${value?.last4}`}</Text>
+          <Text type={FONT_TYPE.SUBTITLE}>{value?.last4 && `•••• ${value.last4}`}</Text>
 
           {isPrimary && (
             <Icon

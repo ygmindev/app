@@ -21,7 +21,7 @@ export const _display: _DisplayModel = {
     const popup = window.open(
       uri,
       '_blank',
-      `height=${height}, width=${width}, menubar=no, toolbar=no`,
+      `height=${height || 'undefined'}, width=${width || 'undefined'}, menubar=no, toolbar=no`,
     );
     if (popup) {
       popup.onload = (): void => onOpen && onOpen();

@@ -21,7 +21,7 @@ export const Protectable: SFCModel<ProtectablePropsModel> = ({ children }) => {
       context.route.redirect = trimPathname(SIGN_IN);
       context.route.status = 302;
     } else {
-      replace({ pathname: SIGN_IN });
+      void replace({ pathname: SIGN_IN });
     }
   }
 

@@ -3,8 +3,9 @@ import type {
   StringFieldPropsModel,
   TranslatableFieldPropsModel,
 } from '#lib-frontend/form/form.models';
+import { type BooleanStringModel } from '#lib-shared/core/core.models';
 
 export type SwitchFieldPropsModel = {
   iconActive?: IconPropsModel['icon'];
   iconInactive?: IconPropsModel['icon'];
-} & TranslatableFieldPropsModel<StringFieldPropsModel<'true' | 'false'>>;
+} & TranslatableFieldPropsModel<StringFieldPropsModel<BooleanStringModel>>;

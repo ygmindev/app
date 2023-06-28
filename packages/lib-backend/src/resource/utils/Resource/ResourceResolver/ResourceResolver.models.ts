@@ -1,5 +1,5 @@
 import type { AccessLevelModel } from '#lib-shared/auth/resources/Access/Access.models';
-import type { ConstructorModel, PartialModel } from '#lib-shared/core/core.models';
+import type { ClassModel, PartialModel } from '#lib-shared/core/core.models';
 import type { WithResourceNameModel } from '#lib-shared/resource/decorators/withResourceName/withResourceName.models';
 import type { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import type { ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
@@ -12,13 +12,13 @@ export type ResourceResolverParamsModel<
   TForm,
   TRoot = undefined,
 > = WithResourceNameModel<TRoot> & {
-  Resource: ConstructorModel<TType>;
+  Resource: ClassModel<TType>;
 
-  ResourceData?: ConstructorModel<TForm>;
+  ResourceData?: ClassModel<TForm>;
 
-  ResourceService: ConstructorModel<PartialModel<ResourceServiceModel<TType, TForm, TRoot>>>;
+  ResourceService: ClassModel<PartialModel<ResourceServiceModel<TType, TForm, TRoot>>>;
 
-  RootResource?: TRoot extends undefined ? never : ConstructorModel<TRoot>;
+  RootResource?: TRoot extends undefined ? never : ClassModel<TRoot>;
 
   access?: Record<ResourceResolverAccessTypeModel, AccessLevelModel>;
 

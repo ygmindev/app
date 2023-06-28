@@ -22,7 +22,7 @@ export const Image: SFCModel<ImagePropsModel> = ({
   const [current, currentSet] = useState<number>(0);
   const srcF = isArray(src) ? src[current] : src;
 
-  const handleSuccess = (): void =>
+  const handleSuccess = (): void => {
     ImageBase.getSize(srcF, (srcWidth, srcHeight) => {
       let ratio;
       if (width && height) {
@@ -37,6 +37,7 @@ export const Image: SFCModel<ImagePropsModel> = ({
       const dimensionF = { height: srcHeight * ratio, width: srcWidth * ratio };
       !isEqual(dimensionF, dimension) && dimensionSet(dimensionF);
     });
+  };
 
   return (
     <_Image

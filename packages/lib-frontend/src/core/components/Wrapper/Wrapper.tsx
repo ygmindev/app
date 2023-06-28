@@ -9,7 +9,7 @@ import type {
   WrapperPropsModel,
   WrapperRefModel,
 } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
-import type { RSFCModel } from '#lib-frontend/core/core.models';
+import type { ChildrenPropsModel, RSFCModel } from '#lib-frontend/core/core.models';
 import { isFragment } from '#lib-frontend/core/utils/isFragment/isFragment';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
@@ -38,7 +38,12 @@ export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
         Children.toArray(children),
         (result, child) =>
           isValidElement(child)
-            ? [...result, ...(isFragment(child) ? getChildren(child.props.children) : [child])]
+            ? [
+                ...result,
+                ...(isFragment(child)
+                  ? getChildren((child.props as ChildrenPropsModel).children)
+                  : [child]),
+              ]
             : result,
         [] as Array<ReactNode>,
       );
@@ -46,30 +51,33 @@ export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
       const { length } = childrenF;
       return reduce(
         childrenF as Array<ReactElement>,
-        (result, child) => [
-          ...result,
-          cloneElement(child, {
-            style: StyleSheet.flatten(
-              filterNil([
-                isDistribute && { flexBasis: 0, flexGrow: 1 },
-                (props.isReverse && result.length !== length - 1) ||
-                  (!props.isReverse &&
-                    result.length &&
-                    spacingStyler(
-                      {
-                        mLeft:
-                          child.props.mLeft === undefined
-                            ? isRow && (isRowAlign ? THEME_SIZE.SMALL : spacing)
-                            : child.props.mLeft,
-                        mTop: child.props.mTop === undefined ? !isRow && spacing : child.props.mTop,
-                      },
-                      theme,
-                    )),
-                child.props.style,
-              ]),
-            ),
-          }),
-        ],
+        (result, child) => {
+          const childProps = child.props as WrapperPropsModel;
+          return [
+            ...result,
+            cloneElement(child, {
+              style: StyleSheet.flatten(
+                filterNil([
+                  isDistribute && { flexBasis: 0, flexGrow: 1 },
+                  (props.isReverse && result.length !== length - 1) ||
+                    (!props.isReverse &&
+                      result.length > 0 &&
+                      spacingStyler(
+                        {
+                          mLeft:
+                            childProps.mLeft === undefined
+                              ? isRow && (isRowAlign ? THEME_SIZE.SMALL : spacing)
+                              : childProps.mLeft,
+                          mTop: childProps.mTop === undefined ? !isRow && spacing : childProps.mTop,
+                        },
+                        theme,
+                      )),
+                  childProps.style,
+                ]),
+              ),
+            }),
+          ];
+        },
         [] as Array<ReactNode>,
       );
     };
@@ -81,4 +89,4 @@ export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
   },
 );
 
-process.env.APP_DEBUG && (Wrapper.displayName = variableName({ Wrapper }));
+process.env.APP_IS_DEBUG && (Wrapper.displayName = variableName({ Wrapper }));

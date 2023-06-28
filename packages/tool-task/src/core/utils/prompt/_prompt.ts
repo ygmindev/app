@@ -39,7 +39,7 @@ export const _prompt = async <TParams extends Array<PromptArgsModel>>(
 
         message: `${message}${isOptional ? ' (Optional)' : ''}`,
 
-        name: key as string,
+        name: key,
 
         pageSize: options ? Math.min(options.length, 10) : undefined,
 

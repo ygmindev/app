@@ -21,9 +21,7 @@ export const runAll: TaskParamsModel<RunAllParamsModel> = {
       taskRegistry.registry,
       (result, v, k) =>
         k !== name &&
-        patterns?.some((pattern) =>
-          isString(pattern) ? pattern === k : (pattern as RegExp).test(k),
-        )
+        patterns?.some((pattern) => (isString(pattern) ? pattern === k : pattern.test(k)))
           ? { ...result, [k]: v }
           : result,
       {} as Record<string, CallablePromiseModel<TaskResultModel>>,

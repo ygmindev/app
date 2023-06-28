@@ -3,7 +3,7 @@ import { withField } from '#lib-backend/resource/decorators/withField/withField'
 import type { OutputParamsModel } from '#lib-backend/resource/utils/Output/Output.models';
 import { Result } from '#lib-backend/resource/utils/Result/Result';
 import { Root } from '#lib-backend/resource/utils/Root/Root';
-import type { ConstructorModel } from '#lib-shared/core/core.models';
+import type { ClassModel } from '#lib-shared/core/core.models';
 import type { ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
 import type { OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { ResultModel } from '#lib-shared/resource/utils/Result/Result.models';
@@ -13,9 +13,7 @@ export const Output = <TMethod extends ResourceMethodTypeModel, TType, TRoot = u
   RootResource,
   method,
   name,
-}: OutputParamsModel<TMethod, TType, TRoot>): ConstructorModel<
-  OutputModel<TMethod, TType, TRoot>
-> => {
+}: OutputParamsModel<TMethod, TType, TRoot>): ClassModel<OutputModel<TMethod, TType, TRoot>> => {
   const nameF = `${name}Output`;
   const RootF = Root({ RootResource, name: nameF });
 

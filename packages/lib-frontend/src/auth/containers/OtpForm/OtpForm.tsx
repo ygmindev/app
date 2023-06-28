@@ -4,10 +4,7 @@ import {
   OTP_FORM_FIELDS,
   OTP_FORM_VALIDATORS,
 } from '#lib-frontend/auth/containers/OtpForm/OtpForm.constants';
-import type {
-  OtpFormModel,
-  OtpFormPropsModel,
-} from '#lib-frontend/auth/containers/OtpForm/OtpForm.models';
+import type { OtpFormPropsModel } from '#lib-frontend/auth/containers/OtpForm/OtpForm.models';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
@@ -32,7 +29,7 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const { t } = useTranslation();
-  const ref = useRef<FormRefModel<OtpFormModel>>(null);
+  const ref = useRef<FormRefModel>(null);
 
   return (
     <FormContainer

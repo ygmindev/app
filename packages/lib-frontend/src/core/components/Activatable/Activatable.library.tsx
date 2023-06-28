@@ -14,7 +14,7 @@ export const props: LibraryPropsModel<ActivatablePropsModel> = {
         {...props}
         onActive={() => isActiveSet(true)}
         onInactive={() => isActiveSet(false)}>
-        <WrapperFixture>{`isActive: ${isActive}`}</WrapperFixture>
+        <WrapperFixture>{`isActive: ${isActive.toString()}`}</WrapperFixture>
       </Activatable>
     );
   },

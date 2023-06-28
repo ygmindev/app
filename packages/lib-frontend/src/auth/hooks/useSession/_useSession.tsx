@@ -46,20 +46,20 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
       // _auth && useDeviceLanguage(_auth);
 
       auth &&
-        onAuthStateChanged(auth, async (user: User | null) => {
+        onAuthStateChanged(auth, (user: User | null) => {
           if (user) {
-            try {
-              const { claims } = await user.getIdTokenResult();
-              onAuth({ _id: user.uid, claims } as SignInTokenModel);
-            } catch (e) {
-              const error =
-                (e as AuthError).code === 'auth/network-request-failed'
-                  ? new HttpError(HTTP_STATUS_CODE.SERVICE_UNAVAILABLE, 'Network Error')
-                  : e;
-              onError && onError(error as Error);
-            }
+            user
+              .getIdTokenResult()
+              .then(({ claims }) => onAuth({ _id: user.uid, claims } as SignInTokenModel))
+              .catch((e) => {
+                const error =
+                  (e as AuthError).code === 'auth/network-request-failed'
+                    ? new HttpError(HTTP_STATUS_CODE.SERVICE_UNAVAILABLE, 'Network Error')
+                    : (e as Error);
+                onError && onError(error);
+              });
           } else {
-            onAuth(null);
+            void onAuth(null);
           }
         });
     }

@@ -1,5 +1,5 @@
 import type { RefObject } from 'react';
-import { forwardRef, useEffect, useRef } from 'react';
+import { forwardRef, useRef } from 'react';
 
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 import { Button } from '#lib-frontend/core/components/Button/Button';
@@ -8,6 +8,7 @@ import { Tooltip } from '#lib-frontend/core/components/Tooltip/Tooltip';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import type { ElementStateModel, RSFCModel } from '#lib-frontend/core/core.models';
+import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { MaskedTextField } from '#lib-frontend/form/components/MaskedTextField/MaskedTextField';
 import { _TextField } from '#lib-frontend/form/components/TextField/_TextField';
 import { TEXT_FIELD_KEYBOARD } from '#lib-frontend/form/components/TextField/TextField.constants';
@@ -93,13 +94,15 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       </Wrapper>
     );
 
-    useEffect(() => {
-      isAutoFocus &&
-        sleep(theme.animation.transition).then(() => {
+    useAsync(async (isMounted) => {
+      if (isAutoFocus) {
+        await sleep(theme.animation.transition);
+        if (isMounted()) {
           const inputRef = (ref || refF) as RefObject<TextFieldRefModel>;
           inputRef.current && inputRef.current.focus();
-        });
-    }, [isAutoFocus, theme.animation.transition]);
+        }
+      }
+    });
 
     const handleChange = (newValue: string): void => {
       switch (keyboard) {
@@ -164,4 +167,4 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
   },
 );
 
-process.env.APP_DEBUG && (TextField.displayName = variableName({ TextField }));
+process.env.APP_IS_DEBUG && (TextField.displayName = variableName({ TextField }));

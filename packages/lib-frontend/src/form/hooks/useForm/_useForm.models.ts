@@ -1,5 +1,5 @@
 import type { FormErrorModel, SubmittablePropsModel } from '#lib-frontend/form/form.models';
-import type { CallableArgsModel, CallableModel } from '#lib-shared/core/core.models';
+import type { CallableModel } from '#lib-shared/core/core.models';
 
 export type _UseFormParamsModel<TType = void, TResult = void> = {
   initialValues?: TType;
@@ -14,10 +14,9 @@ export type _UseFormModel<TType = void, TResult = void> = {
   errors: FormErrorModel<TType>;
   handleChange(key: string): (value: string) => void;
   handleReset: CallableModel;
-  handleSubmit: CallableArgsModel;
+  handleSubmit: CallableModel;
   isLoading: boolean;
   isValid: boolean;
   setErrors(errors?: Error): void;
-  setValues(data: TType): void;
   values: TType;
 };

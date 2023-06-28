@@ -5,7 +5,7 @@ const { displayName } = withTest({ getRoot });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await getRoot({});
+    const result = getRoot();
     expect(result).toStrictEqual({});
   });
 });

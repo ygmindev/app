@@ -2,7 +2,7 @@ import { Embeddable, Entity, Index } from '@mikro-orm/core';
 import { InputType, ObjectType } from 'type-graphql';
 
 import type { WithEntityParamsModel } from '#lib-backend/resource/decorators/withEntity/withEntity.models';
-import type { ConstructorModel } from '#lib-shared/core/core.models';
+import type { ClassModel } from '#lib-shared/core/core.models';
 import { NotImplementedError } from '#lib-shared/core/errors/NotImplementedError/NotImplementedError';
 
 export const withEntity = <TType>({
@@ -18,15 +18,17 @@ export const withEntity = <TType>({
     throw new NotImplementedError('name for non-abstract entity');
   }
   return ((Base: TType) => {
-    isSchema && ObjectType(name ?? '', { isAbstract })(Base as unknown as ConstructorModel);
-    isSchemaInput && InputType(`${name}Input`, { isAbstract })(Base as unknown as ConstructorModel);
+    isSchema && ObjectType(name ?? '', { isAbstract })(Base as unknown as ClassModel);
+    isSchemaInput &&
+      name &&
+      InputType(`${name}Input`, { isAbstract })(Base as unknown as ClassModel);
     let BaseF = isRepository
       ? (isEmbedded ? Embeddable : Entity)({ abstract: isAbstract, collection: name })(
-          Base as unknown as ConstructorModel,
+          Base as unknown as ClassModel,
         )
       : Base;
     for (const index of indices) {
-      BaseF = Index({ properties: index })(BaseF as unknown as ConstructorModel);
+      BaseF = Index({ properties: index })(BaseF as unknown as ClassModel) as TType;
     }
     return BaseF;
   }) as ClassDecorator;

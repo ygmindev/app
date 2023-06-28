@@ -3,7 +3,7 @@ import type { TextInputProps } from 'react-native';
 
 import type { DimensionModel } from '#lib-frontend/core/core.models';
 import type { TextFieldKeyboardModel } from '#lib-frontend/form/components/TextField/TextField.models';
-import type { StringFieldPropsModel, SubmittablePropsModel } from '#lib-frontend/form/form.models';
+import type { StringFieldPropsModel } from '#lib-frontend/form/form.models';
 import type { CallableModel } from '#lib-shared/core/core.models';
 
 export type _TextFieldPropsModel = {
@@ -19,8 +19,8 @@ export type _TextFieldPropsModel = {
   numberOfLines?: number;
   onEscape?: CallableModel;
   onRemove?: CallableModel;
+  onSubmit?: CallableModel;
   placeholder?: string;
   rightElement?: ReactNode;
 } & Omit<StringFieldPropsModel, 'error' | 'label'> &
-  SubmittablePropsModel<string> &
   DimensionModel;

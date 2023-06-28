@@ -23,7 +23,7 @@ export const _task = ({ packageConfig, taskExtension }: TaskConfigModel): _TaskC
 
     // Package tasks
     ...packages.reduce((result, target) => {
-      const path = fromPackages(target, packageConfig as string);
+      const path = fromPackages(target, packageConfig);
       if (existsSync(path)) {
         const tasks = require(path).default as Array<TaskParamsModel>;
         return [...result, ...tasks.map((task) => ({ ...task, target }))];

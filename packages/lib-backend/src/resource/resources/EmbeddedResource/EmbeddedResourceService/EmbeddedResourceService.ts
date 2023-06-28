@@ -6,7 +6,7 @@ import { withContainer } from '#lib-backend/core/decorators/withContainer/withCo
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { getConnection } from '#lib-backend/database/utils/getConnection/getConnection';
 import { EmbeddedResource } from '#lib-backend/resource/resources/EmbeddedResource/EmbeddedResource';
-import type { ConstructorModel, PartialModel } from '#lib-shared/core/core.models';
+import type { ClassModel, PartialModel } from '#lib-shared/core/core.models';
 import { InvalidArgumentError } from '#lib-shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
@@ -48,7 +48,7 @@ export const EmbeddedResourceService = <
   beforeUpdate,
   name,
   root,
-}: EmbeddedResourceServiceParamsModel<TType, TForm, TRoot, TRootForm>): ConstructorModel<
+}: EmbeddedResourceServiceParamsModel<TType, TForm, TRoot, TRootForm>): ClassModel<
   EmbeddedResourceServiceModel<TType, TForm, TRoot>
 > => {
   const beforeCreateF = async (
@@ -108,10 +108,8 @@ export const EmbeddedResourceService = <
       );
       inputF.root = inputF.root ?? this._decorators.root;
       if (inputF.root) {
-        const inputFF = await beforeCreateF(
-          inputF as InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
-        );
-        const value = inputFF.form as TForm;
+        const inputFF = await beforeCreateF(inputF);
+        const value = inputFF.form;
         const { result: rootResult } = await this._rootService.update({
           filter: inputFF.root as PartialModel<TRoot>,
           update: { $push: { [name]: value } } as UpdateModel<TRoot>,

@@ -1,3 +1,7 @@
+import { type PlatformModel } from '#lib-platform/core/core.models';
+import { type BooleanStringModel } from '#lib-shared/core/core.models';
+import { type EnvironmentModel } from '#lib-shared/environment/environment.models';
+
 export type EnvironmentConfigModel = {
   APP_AMPLITUDE_API_KEY: string;
   APP_FIREBASE_API_KEY: string;
@@ -6,8 +10,10 @@ export type EnvironmentConfigModel = {
   APP_FIREBASE_PROJECT_ID: string;
   APP_FIREBASE_SENDER_ID: string;
   APP_FIREBASE_STORAGE_BUCKET: string;
-  APP_FIREBASE_USE_EMULATOR: 'true' | 'false';
-  APP_HOST?: string;
+  APP_FIREBASE_USE_EMULATOR: BooleanStringModel;
+  APP_HOST: string;
+  APP_IS_DEBUG: BooleanStringModel;
+  APP_NAME?: string;
   APP_PORT?: string;
   APP_SERVER_API_HOST: string;
   APP_SERVER_API_PORT: string;
@@ -18,22 +24,22 @@ export type EnvironmentConfigModel = {
   DATABASE_MONGO_URL: string;
   DATABASE_MONGO_USERNAME: string;
   ENV_NAME: string;
-  ENV_PLATFORM: string;
-  NODE_ENV: 'development' | 'test' | 'production';
+  ENV_PLATFORM: PlatformModel;
+  NODE_ENV: EnvironmentModel;
   SERVER_APP_SECRET: string;
   SERVER_EMAIL_HOST: string;
   SERVER_EMAIL_PASSWORD: string;
+  SERVER_EMAIL_PORT: string;
+  SERVER_EMAIL_USERNAME: string;
+  SERVER_ENCRYPTION_ALGORITHM: string;
+  SERVER_FIREBASE_ADMIN_EMAIL: string;
   SERVER_FIREBASE_ADMIN_PROJECT_ID: string;
   SERVER_FIREBASE_ADMIN_SECRET: string;
-  SERVER_IS_OTP_STATIC?: 'true' | 'false';
+  SERVER_IS_OTP_STATIC?: BooleanStringModel;
   SERVER_IV_LENGTH: string;
   SERVER_KEY_LENGTH: string;
   SERVER_LAMBDA_HOST: string;
   SERVER_LAMBDA_PORT: string;
-  SERVER_ENCRYPTION_ALGORITHM: string;
-  SERVER_FIREBASE_ADMIN_EMAIL: string;
-  SERVER_EMAIL_PORT: string;
-  SERVER_EMAIL_USERNAME: string;
   SERVER_PLAID_CLIENT_ID: string;
   SERVER_PLAID_COUNTRY_CODES: string;
   SERVER_PLAID_ENV: string;
@@ -48,4 +54,5 @@ export type EnvironmentConfigModel = {
   SERVER_TWILIO_FROM: string;
   SERVER_TWILIO_SID: string;
   SERVER_TWILIO_TOKEN: string;
+  TEST_MATCH?: string;
 };

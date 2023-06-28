@@ -5,11 +5,11 @@ import type {
   EntityResourceResolverParamsModel,
 } from '#lib-backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver.models';
 import { ResourceResolver } from '#lib-backend/resource/utils/Resource/ResourceResolver/ResourceResolver';
-import type { ConstructorModel } from '#lib-shared/core/core.models';
+import type { ClassModel } from '#lib-shared/core/core.models';
 
 export const EntityResourceResolver = <TType, TForm>(
   params: EntityResourceResolverParamsModel<TType, TForm>,
-): ConstructorModel<EntityResourceResolverModel<TType, TForm>> => {
+): ClassModel<EntityResourceResolverModel<TType, TForm>> => {
   @withContainer()
   @withResolver({ isAbstract: true })
   class _EntityResourceResolver

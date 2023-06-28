@@ -11,7 +11,11 @@ import type {
   ValueOf,
 } from 'type-fest';
 
-export type ConstructorModel<TType = object> = Constructor<TType>;
+import { type BOOLEAN_STRING } from '#lib-shared/core/core.constants';
+
+export type ClassModel<TType = object> = Constructor<TType>;
+
+export type PrototypeModel<TType> = TType extends ClassModel<infer TClass> ? TClass : never;
 
 export type PrimitiveModel = Primitive | Date;
 
@@ -22,6 +26,8 @@ export type PartialDeepModel<TType> = PartialDeep<TType>;
 export type RequiredModel<TType> = Required<TType>;
 
 export type EmptyObjectModel = Record<string, never>;
+
+export type BooleanStringModel = `${BOOLEAN_STRING}`;
 
 export type CallableModel<TResult = void, TParams = void> = (args?: TParams | undefined) => TResult;
 

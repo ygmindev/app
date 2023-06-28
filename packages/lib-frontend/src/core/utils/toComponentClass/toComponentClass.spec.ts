@@ -5,7 +5,7 @@ const { displayName } = withTest({ toComponentClass });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await toComponentClass({});
+    const result = toComponentClass();
     expect(result).toStrictEqual({});
   });
 });

@@ -1,9 +1,9 @@
+import { BOOLEAN_STRING } from '#lib-shared/core/core.constants';
+import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
 import type { TaskParamsModel } from '#tool-task/core/core.models';
 import { runCommands } from '#tool-task/core/utils/runCommands/runCommands';
 import { nodeTasks } from '#tool-task/node/utils/nodeTasks/nodeTasks';
-
-import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 
 const tasks: Array<TaskParamsModel<unknown>> = [
   ...nodeTasks({
@@ -13,7 +13,7 @@ const tasks: Array<TaskParamsModel<unknown>> = [
   {
     name: 'setup',
 
-    overrides: { OTP_STATIC: 'true' },
+    overrides: { SERVER_IS_OTP_STATIC: BOOLEAN_STRING.TRUE },
 
     task: async () => {
       await runCommands({

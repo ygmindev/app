@@ -9,7 +9,7 @@ import type {
 import { isFragment } from '#lib-frontend/core/utils/isFragment/isFragment';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import type { StyleModel, ViewStyleModel } from '#lib-frontend/style/style.models';
+import type { StyleModel, StylePropsModel, ViewStyleModel } from '#lib-frontend/style/style.models';
 
 export const composeComponent = <
   TProps,
@@ -26,17 +26,17 @@ export const composeComponent = <
   TStyle,
   TRef
 > =>
-  forwardRef((props, ref): ReactElement<TResult> => {
+  forwardRef((props, ref): ReactElement<TResult> | null => {
     const theme = useTheme();
     const { styles } = useStyles({ props, stylers });
     const propsF = getProps ? getProps({ ...props, style: styles }, theme, ref) : props;
     return (
       propsF &&
-      (isWeb ? unstable_createElement : createElement)(Component, {
+      (isWeb ? (unstable_createElement as typeof createElement) : createElement)(Component, {
         ...propsF,
         ...(isFragment(Component)
           ? {}
           : { nativeid: props.nativeID, ref, style: styles, testID: props.testID }),
-      })
+      } as TResult & StylePropsModel<TStyle>)
     );
   }) as ComposeComponentModel<TProps, TStyle, TRef>;

@@ -1,11 +1,11 @@
-import type { ConstructorModel } from '#lib-shared/core/core.models';
+import type { ClassModel } from '#lib-shared/core/core.models';
 
 export type _WithResolverParamsModel<TType> = {
-  Resource?: ConstructorModel<TType>;
+  Resource?: ClassModel<TType>;
   isAbstract?: boolean;
 };
 
 export type _WithResolverMethodParamsModel<TType> = {
-  Resource?: ConstructorModel<TType>;
+  Resource?: ClassModel<TType>;
   isAbstract?: never;
 };

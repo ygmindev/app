@@ -11,8 +11,8 @@ export const _useRouter = <
   const location = useLocation();
   const params = useParams();
 
-  const paramsF = { ...location.state, ...params };
-  delete paramsF['*'];
+  const paramsF = { ...location.state, ...params } as TParams;
+  delete (paramsF as Record<string, string>)['*'];
 
   return {
     back: async () => navigate(-1),

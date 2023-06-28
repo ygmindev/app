@@ -33,7 +33,7 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
     current,
     to: (params) => {
       animationState.animateTo(params as DynamicStyleProp<MotiTranformProps>);
-      currentSet(params as TStyle);
+      currentSet(params);
     },
     toState: (params) => {
       if (states && states[params]) {

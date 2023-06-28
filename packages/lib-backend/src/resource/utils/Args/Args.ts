@@ -1,6 +1,6 @@
 import { withEntity } from '#lib-backend/resource/decorators/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/decorators/withField/withField';
-import type { ResourceConstructorModel } from '#lib-backend/resource/resource.models';
+import type { ResourceClassModel } from '#lib-backend/resource/resource.models';
 import type { ArgsParamsModel } from '#lib-backend/resource/utils/Args/Args.models';
 import { Filter } from '#lib-backend/resource/utils/Filter/Filter';
 import { Form } from '#lib-backend/resource/utils/Form/Form';
@@ -21,7 +21,7 @@ export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoo
   RootResource,
   method,
   name,
-}: ArgsParamsModel<TMethod, TType, TForm, TRoot>): ResourceConstructorModel<
+}: ArgsParamsModel<TMethod, TType, TForm, TRoot>): ResourceClassModel<
   ArgsModel<TMethod, TType, TForm, TRoot>
 > => {
   const RootF = Root({ RootResource, name });
@@ -42,7 +42,7 @@ export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoo
         )
         filter!: FilterModel<TType>;
       }
-      return _Args as ResourceConstructorModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
+      return _Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
     case RESOURCE_METHOD_TYPE.CREATE: {
       @withEntity({ isAbstract: true })
@@ -55,7 +55,7 @@ export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoo
         )
         form!: TForm;
       }
-      return _Args as ResourceConstructorModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
+      return _Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
     case RESOURCE_METHOD_TYPE.UPDATE: {
       @withEntity({ isAbstract: true })
@@ -73,7 +73,7 @@ export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoo
         )
         update!: UpdateModel<TType>;
       }
-      return _Args as ResourceConstructorModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
+      return _Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
     case RESOURCE_METHOD_TYPE.GET_CONNECTION: {
       @withEntity({ isAbstract: true })
@@ -89,7 +89,7 @@ export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoo
         @withCondition(Resource !== undefined, () => withField({ Resource: Pagination }))
         pagination!: PaginationModel;
       }
-      return _Args as ResourceConstructorModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
+      return _Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
     default:
       throw new InvalidTypeError(method, RESOURCE_METHOD_TYPE);

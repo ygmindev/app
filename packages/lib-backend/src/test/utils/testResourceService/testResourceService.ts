@@ -28,7 +28,7 @@ export const testResourceService = async ({
   const PROJECT_FIELDS: Array<keyof DummyEntityResourceModel> = ['_id', 'stringPropertyOptional'];
 
   beforeAll(async () => {
-    service = await getService();
+    service = getService();
   });
 
   beforeEach(async () => {
@@ -184,7 +184,7 @@ export const testResourceService = async ({
         ((input.filter as FilterCombineModel<DummyEntityResourceModel>).$and ||
           []) as Array<DummyEntityResourceModel>,
       ),
-    ) as Array<DummyEntityResourceModel>;
+    );
 
     expect(result).toStrictEqual(expected);
   });

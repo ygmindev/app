@@ -12,4 +12,4 @@ export const AnimatableText = composeComponent<AnimatableTextPropsModel, _Animat
   },
 );
 
-process.env.APP_DEBUG && (AnimatableText.displayName = variableName({ AnimatableText }));
+process.env.APP_IS_DEBUG && (AnimatableText.displayName = variableName({ AnimatableText }));

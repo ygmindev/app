@@ -8,7 +8,6 @@ import type {
   ServerlessConfigModel,
 } from '#lib-config/platform/serverless/serverless.models';
 import { PLATFORM } from '#lib-platform/core/core.constants';
-import type { EnvironmentModel } from '#lib-shared/environment/environment.models';
 import { setEnvironment } from '#lib-shared/environment/utils/setEnvironment/setEnvironment';
 
 export const config: ServerlessConfigModel = () => ({
@@ -16,7 +15,7 @@ export const config: ServerlessConfigModel = () => ({
 
   dotenv: () => setEnvironment(),
 
-  environment: process.env.NODE_ENV as EnvironmentModel,
+  environment: process.env.NODE_ENV,
 
   host: process.env.APP_SERVER_API_HOST,
 

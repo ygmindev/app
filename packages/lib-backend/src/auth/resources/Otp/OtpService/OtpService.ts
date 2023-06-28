@@ -28,7 +28,7 @@ export class OtpService
     afterCreate: async ({ output }) => {
       if (output.result) {
         // phone verification
-        if (output.result.phone) {
+        if (output.result.phone && output.result.callingCode) {
           await sms<{ otp: string }>({
             from: process.env.SERVER_TWILIO_FROM,
             params: { otp: output.result.otp },

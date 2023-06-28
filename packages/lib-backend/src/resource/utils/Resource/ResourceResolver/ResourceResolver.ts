@@ -10,7 +10,7 @@ import type {
   ResourceResolverParamsModel,
 } from '#lib-backend/resource/utils/Resource/ResourceResolver/ResourceResolver.models';
 import { UnauthorizedError } from '#lib-shared/auth/errors/UnauthorizedError/UnauthorizedError';
-import type { ConstructorModel } from '#lib-shared/core/core.models';
+import type { ClassModel, PrototypeModel } from '#lib-shared/core/core.models';
 import { withCondition } from '#lib-shared/core/decorators/withCondition/withCondition';
 import { NotImplementedError } from '#lib-shared/core/errors/NotImplementedError/NotImplementedError';
 import { toPlainObject } from '#lib-shared/core/utils/toPlainObject/toPlainObject';
@@ -47,15 +47,18 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
   access,
   authorizer,
   name,
-}: ResourceResolverParamsModel<TType, TForm, TRoot>): ConstructorModel<
+}: ResourceResolverParamsModel<TType, TForm, TRoot>): ClassModel<
   ResourceResolverModel<TType, TForm, TRoot>
 > => {
-  const createExists = ResourceService.prototype.create !== undefined;
-  const getExists = ResourceService.prototype.get !== undefined;
-  const getManyExists = ResourceService.prototype.getMany !== undefined;
-  const getConnectionExists = ResourceService.prototype.getConnection !== undefined;
-  const updateExists = ResourceService.prototype.update !== undefined;
-  const removeExists = ResourceService.prototype.remove !== undefined;
+  const prototype = Object.getPrototypeOf(ResourceService) as PrototypeModel<
+    typeof ResourceService
+  >;
+  const createExists = prototype.create !== undefined;
+  const getExists = prototype.get !== undefined;
+  const getManyExists = prototype.getMany !== undefined;
+  const getConnectionExists = prototype.getConnection !== undefined;
+  const updateExists = prototype.update !== undefined;
+  const removeExists = prototype.remove !== undefined;
 
   @withContainer()
   @withResolver({ isAbstract: true })
@@ -74,7 +77,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
     async create(
       @withCondition(createExists, () =>
         withInput({
-          Resource: ResourceData || (Resource as unknown as ConstructorModel<TForm>),
+          Resource: ResourceData || (Resource as unknown as ClassModel<TForm>),
           RootResource,
           method: RESOURCE_METHOD_TYPE.CREATE,
           name,

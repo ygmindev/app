@@ -1,5 +1,5 @@
-import type { ConstructorModel } from '#lib-shared/core/core.models';
+import type { ClassModel } from '#lib-shared/core/core.models';
 
 export type _WithFieldResolverParamsModel<TType> = {
-  Resource?: ConstructorModel<TType>;
+  Resource?: ClassModel<TType>;
 };

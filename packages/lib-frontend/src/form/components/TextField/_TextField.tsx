@@ -25,7 +25,7 @@ import type {
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
-import type { TextStyleModel } from '#lib-frontend/style/style.models';
+import type { TextStyleModel, ViewStyleModel } from '#lib-frontend/style/style.models';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 
@@ -232,7 +232,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
                 return null;
             }
           }}
-          onSubmitEditing={() => onSubmit && onSubmit(value || '')}
+          onSubmitEditing={() => onSubmit && onSubmit()}
           placeholder={placeholder}
           ref={ref as RefObject<NativeTextInput>}
           render={(inputProps) => (
@@ -250,10 +250,10 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
                 {Component({
                   ...inputProps,
                   style: StyleSheet.flatten([
-                    ...inputProps.style,
+                    inputProps.style as ViewStyleModel,
                     { minWidth: '100%', width: 0 },
                     isCenter && { padding: 0, textAlign: 'center' },
-                  ]),
+                  ]) as ViewStyleModel,
                 })}
               </Wrapper>
 

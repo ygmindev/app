@@ -13,7 +13,7 @@ import type { DummyEntityResourceModel } from '#lib-shared/test/resources/DummyE
 export const testEmbeddedResourceService = async ({
   getService,
 }: TestEmbeddedResourceServiceParamsModel): Promise<void> =>
-  testResourceService({
+  void testResourceService({
     before: async (service: TestableEmbeddedResourceServiceModel) => {
       if (service) {
         const { result } = await Container.get(Database, DATABASE_TYPE.MONGO)

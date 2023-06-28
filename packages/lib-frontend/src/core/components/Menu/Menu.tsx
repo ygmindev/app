@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import { type ScrollView } from 'react-native';
 
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
@@ -56,7 +57,8 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
 
     useImperativeHandle(ref, () => ({
       isOpen: () => dropdownRef.current?.isOpen() || false,
-      scrollTo: (params) => virtualizedListRef.current?.getScrollableNode().scrollTo(params),
+      scrollTo: (params) =>
+        (virtualizedListRef.current?.getScrollableNode() as ScrollView).scrollTo(params),
       toggle: (params) => dropdownRef.current?.toggle(params),
     }));
 

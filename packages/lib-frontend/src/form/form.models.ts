@@ -52,7 +52,7 @@ export type TranslatableFieldPropsModel<TType extends StringFieldPropsModel> = O
   label?: TranslatableTextModel;
 };
 
-export type FormRefModel<TType = void> = {
-  reset(): void;
-  submit(data?: TType): void;
+export type FormRefModel = {
+  reset: CallableModel;
+  submit: CallableModel;
 };

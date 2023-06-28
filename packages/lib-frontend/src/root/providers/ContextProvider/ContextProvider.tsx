@@ -16,4 +16,4 @@ export const ContextProvider = composeComponent<
   Component: rootContext.Provider,
 });
 
-process.env.APP_DEBUG && (ContextProvider.displayName = variableName({ ContextProvider }));
+process.env.APP_IS_DEBUG && (ContextProvider.displayName = variableName({ ContextProvider }));

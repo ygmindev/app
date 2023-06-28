@@ -8,4 +8,4 @@ export const PortalHost = composeComponent<PortalHostPropsModel, _PortalHostProp
   Component: _PortalHost,
 });
 
-process.env.APP_DEBUG && (PortalHost.displayName = variableName({ PortalHost }));
+process.env.APP_IS_DEBUG && (PortalHost.displayName = variableName({ PortalHost }));

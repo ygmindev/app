@@ -74,7 +74,7 @@ export const _Table = forwardRef(
     ): ColDef => {
       const definition: ColDef = {
         checkboxSelection: select !== undefined && i === unhiddenColumnIndex,
-        field: id as string,
+        field: id,
         flex,
         headerCheckboxSelection: select === TABLE_SELECT_TYPE.MULTIPLE && i === unhiddenColumnIndex,
         headerName: label ? t(label) : undefined,

@@ -1,6 +1,6 @@
 import { inject } from 'inversify';
 
-import type { ConstructorModel } from '#lib-shared/core/core.models';
+import type { ClassModel } from '#lib-shared/core/core.models';
 
-export const _withInject = <TType extends ConstructorModel>(value: TType): PropertyDecorator =>
+export const _withInject = <TType extends ClassModel>(value: TType): PropertyDecorator =>
   inject(value);

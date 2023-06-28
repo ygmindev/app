@@ -29,4 +29,4 @@ export const Divider = composeComponent<DividerPropsModel, WrapperPropsModel>({
   }),
 });
 
-process.env.APP_DEBUG && (Divider.displayName = variableName({ Divider }));
+process.env.APP_IS_DEBUG && (Divider.displayName = variableName({ Divider }));

@@ -16,6 +16,8 @@ import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_ROLE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { BOOLEAN_STRING } from '#lib-shared/core/core.constants';
+import { type BooleanStringModel } from '#lib-shared/core/core.models';
 
 export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
   defaultValue,
@@ -30,8 +32,8 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
 }) => {
   const theme = useTheme();
   const { styles } = useStyles({ props });
-  const { valueControlled, valueControlledSet } = useControlledValue<'true' | 'false'>({
-    defaultValue: defaultValue || 'false',
+  const { valueControlled, valueControlledSet } = useControlledValue<BooleanStringModel>({
+    defaultValue: defaultValue || BOOLEAN_STRING.FALSE,
     onChange,
     value,
   });

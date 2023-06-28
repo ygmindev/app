@@ -4,21 +4,21 @@ import { withEntity } from '#lib-backend/resource/decorators/withEntity/withEnti
 import { withField } from '#lib-backend/resource/decorators/withField/withField';
 import { EntityResource } from '#lib-backend/resource/resources/EntityResource/EntityResource';
 import type { RootParamsModel } from '#lib-backend/resource/utils/Root/Root.models';
-import type { ConstructorModel } from '#lib-shared/core/core.models';
+import type { ClassModel } from '#lib-shared/core/core.models';
 import { PartialModel } from '#lib-shared/core/core.models';
 import type { RootModel } from '#lib-shared/resource/utils/Root/Root.models';
 
 export const Root = <TRoot = undefined>({
   RootResource,
   name,
-}: RootParamsModel<TRoot>): ConstructorModel<RootModel<TRoot>> => {
+}: RootParamsModel<TRoot>): ClassModel<RootModel<TRoot>> => {
   if (RootResource) {
     const nameF = `${name}Root`;
     const isResource = RootResource && isFunction(RootResource);
 
     @withEntity({ name: nameF })
     class _Resource extends (isResource
-      ? (RootResource as unknown as ConstructorModel)
+      ? (RootResource as unknown as ClassModel)
       : EntityResource) {}
 
     @withEntity({ isAbstract: true })

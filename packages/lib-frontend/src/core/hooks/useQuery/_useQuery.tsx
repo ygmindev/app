@@ -25,7 +25,7 @@ export const _useQuery = <TType,>(
     isError,
     isLoading: isFetching,
     query: async () => (isStale ? (await refetchF())?.data : data) || null,
-    resetQuery: (id) => queryClient.invalidateQueries([id]),
+    resetQuery: async (id) => queryClient.invalidateQueries([id]),
     setQueryData: (id, data) => queryClient.setQueryData([id], data),
   };
 };

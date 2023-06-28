@@ -1,7 +1,7 @@
-import type { ConstructorModel, PartialModel } from '#lib-shared/core/core.models';
+import type { ClassModel, PartialModel } from '#lib-shared/core/core.models';
 
 export type UnionParamsModel<TType> = {
-  Resource: Array<ConstructorModel<PartialModel<TType>>>;
+  Resource: Array<ClassModel<PartialModel<TType>>>;
   name: string;
-  resolve(value: TType): ConstructorModel | undefined;
+  resolve(value: TType): ClassModel | undefined;
 };

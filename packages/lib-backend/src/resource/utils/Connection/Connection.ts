@@ -3,7 +3,7 @@ import { withField } from '#lib-backend/resource/decorators/withField/withField'
 import type { ConnectionParamsModel } from '#lib-backend/resource/utils/Connection/Connection.models';
 import { Edge } from '#lib-backend/resource/utils/Edge/Edge';
 import { PageInfo } from '#lib-backend/resource/utils/PageInfo/PageInfo';
-import type { ConstructorModel } from '#lib-shared/core/core.models';
+import type { ClassModel } from '#lib-shared/core/core.models';
 import type {
   ConnectionModel,
   EdgeModel,
@@ -13,7 +13,7 @@ import { PageInfoModel } from '#lib-shared/resource/utils/Connection/Connection.
 export const Connection = <TType extends unknown>({
   Resource,
   name,
-}: ConnectionParamsModel<TType>): ConstructorModel<ConnectionModel<TType>> => {
+}: ConnectionParamsModel<TType>): ClassModel<ConnectionModel<TType>> => {
   const nameF = `${name}Connection`;
 
   @withEntity({ name: nameF })

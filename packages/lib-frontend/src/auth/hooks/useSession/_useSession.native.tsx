@@ -22,20 +22,20 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
       auth = firebaseAuth();
       process.env.APP_FIREBASE_USE_EMULATOR && auth.useEmulator('http://localhost:9099');
 
-      auth.onAuthStateChanged(async (user: FirebaseAuthTypes.User | null) => {
+      auth.onAuthStateChanged((user: FirebaseAuthTypes.User | null) => {
         if (user) {
-          try {
-            const { claims } = await user.getIdTokenResult();
-            onAuth({ _id: user.uid, claims });
-          } catch (e) {
-            const error =
-              (e as AuthError).code === 'auth/network-request-failed'
-                ? new HttpError(HTTP_STATUS_CODE.SERVICE_UNAVAILABLE, 'Network Error')
-                : e;
-            onError && onError(error as Error);
-          }
+          user
+            .getIdTokenResult()
+            .then(({ claims }) => onAuth({ _id: user.uid, claims }))
+            .catch((e) => {
+              const error =
+                (e as AuthError).code === 'auth/network-request-failed'
+                  ? new HttpError(HTTP_STATUS_CODE.SERVICE_UNAVAILABLE, 'Network Error')
+                  : (e as Error);
+              onError && onError(error);
+            });
         } else {
-          onAuth(null);
+          void onAuth(null);
         }
       });
     }

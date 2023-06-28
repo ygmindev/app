@@ -2,7 +2,7 @@ import { Container } from '#lib-backend/core/utils/Container/Container';
 import { DATABASE_TYPE } from '#lib-backend/database/database.constants';
 import { Database } from '#lib-backend/database/utils/Database/Database';
 import type { RepositoryModel } from '#lib-backend/database/utils/Database/Database.models';
-import type { ConstructorModel } from '#lib-shared/core/core.models';
+import type { ClassModel } from '#lib-shared/core/core.models';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import type { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import type { EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
@@ -28,7 +28,7 @@ export const EntityResourceService = <TType, TForm>({
   beforeRemove,
   beforeUpdate,
   name,
-}: EntityResourceServiceParamsModel<TType, TForm>): ConstructorModel<
+}: EntityResourceServiceParamsModel<TType, TForm>): ClassModel<
   EntityResourceServiceModel<TType, TForm>
 > => {
   class _EntityResourceService implements EntityResourceServiceModel<TType, TForm> {

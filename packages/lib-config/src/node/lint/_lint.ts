@@ -23,6 +23,7 @@ export const _lint = ({
   extends: [
     'plugin:@nx/react-typescript',
     'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:import/recommended',
     'plugin:import/typescript',
     'plugin:typescript-sort-keys/recommended',
@@ -42,8 +43,10 @@ export const _lint = ({
     },
   ],
 
+  parser: '@typescript-eslint/parser',
+
   parserOptions: {
-    project: ['tsconfig.json'],
+    project: 'tsconfig.json',
   },
 
   plugins: [
@@ -59,13 +62,16 @@ export const _lint = ({
 
   rules: {
     '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
-    '@typescript-eslint/consistent-type-imports': 'error',
+    '@typescript-eslint/consistent-type-imports': ['error', { fixStyle: 'inline-type-imports' }],
     '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
     '@typescript-eslint/no-empty-interface': 'off',
+    '@typescript-eslint/no-floating-promises': ['error', { ignoreVoid: true }],
     '@typescript-eslint/no-unnecessary-type-constraint': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/require-await': 'off',
     '@typescript-eslint/return-await': ['error', 'in-try-catch'],
+    '@typescript-eslint/unbound-method': 'off',
     'import/no-extraneous-dependencies': ['error', { packageDir: roots }],
     'no-param-reassign': 'error',
     'no-return-await': 'off',

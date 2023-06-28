@@ -27,7 +27,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   const theme = useTheme();
   const [isOpenF, isOpenSet] = useState<boolean>(isOpen || false);
   useChange(isOpen, () => {
-    isOpen ? isOpenSet(true) : sleep(theme.animation.duration).then(() => isOpenSet(false));
+    isOpen ? isOpenSet(true) : void sleep(theme.animation.duration).then(() => isOpenSet(false));
   });
   return (
     <TippyF

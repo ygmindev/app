@@ -17,8 +17,8 @@ export const ModalButton: SFCModel<ModalButtonPropsModel> = ({
     <>
       <Button
         {...props}
-        onPress={() => {
-          onPress && onPress();
+        onPress={async () => {
+          onPress && (await onPress());
           modalIsOpenSet(!modalIsOpen);
         }}
       />

@@ -14,7 +14,6 @@ import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useSearch } from '#lib-frontend/search/hooks/useSearch/useSearch';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 export const SelectField = <TType extends string = string>({
   defaultValue,
@@ -56,19 +55,18 @@ export const SelectField = <TType extends string = string>({
     onChange: () => menuRef?.current?.scrollTo({ x: 0, y: 0 }),
   });
 
-  const handleToggle = async (isOpen?: boolean): Promise<void> => {
-    await sleep();
+  const handleToggle = (isOpen?: boolean): void => {
     menuRef && menuRef.current && menuRef.current.toggle(isOpen);
     search('');
     querySet('');
   };
 
-  const handleSelect = async (): Promise<void> => {
+  const handleSelect = (): void => {
     const selected = result && result[0];
     const selectedValue = selected.id;
     if (selectedValue) {
       valueControlledSet(selectedValue);
-      onSubmit && (await onSubmit(selectedValue));
+      onSubmit && onSubmit();
     }
     handleToggle(false);
   };
@@ -107,7 +105,7 @@ export const SelectField = <TType extends string = string>({
             }
             onBlur={() => {
               onBlur && onBlur();
-              handleToggle(false);
+              void handleToggle(false);
             }}
             onChange={onQueryChange}
             onFocus={() => {

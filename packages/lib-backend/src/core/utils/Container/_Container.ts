@@ -4,7 +4,7 @@ import { Container } from 'inversify';
 import isFunction from 'lodash/isFunction';
 
 import type { _ContainerModel } from '#lib-backend/core/utils/Container/_Container.models';
-import type { ConstructorModel } from '#lib-shared/core/core.models';
+import type { ClassModel } from '#lib-shared/core/core.models';
 
 const container = new Container({
   autoBindInjectable: true,
@@ -13,16 +13,16 @@ const container = new Container({
 });
 
 export const _Container: _ContainerModel = {
-  get: <TType>(type: ConstructorModel<TType> | string, name?: string): TType =>
-    name ? container.getNamed(type, name) : container.get(type),
+  get: <TType>(type: ClassModel<TType> | string, name?: string): TType =>
+    name ? container.getNamed<TType>(type, name) : container.get<TType>(type),
 
   set: <TType>(
-    type: ConstructorModel<TType> | string,
-    value: TType | ConstructorModel<TType>,
+    type: ClassModel<TType> | string,
+    value: TType | ClassModel<TType>,
     name?: string,
   ): void => {
     const valueF = isFunction(value)
-      ? container.bind<TType>(type).to(value as ConstructorModel<TType>)
+      ? container.bind<TType>(type).to(value as ClassModel<TType>)
       : container.bind<TType>(type).toDynamicValue(() => value as TType);
     name && valueF.whenTargetNamed(name);
   },

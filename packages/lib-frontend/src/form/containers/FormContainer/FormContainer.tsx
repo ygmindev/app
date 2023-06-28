@@ -35,14 +35,15 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { BORDER_RADIUS_DIRECTION } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.constants';
+import { type CallableModel } from '#lib-shared/core/core.models';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 import { FIELD_TYPE } from '#lib-shared/form/form.constants';
 
 export const FormContainer = forwardRef(
   <TType = void, TResult = void>(
     { errorContextGet, ...props }: SFCPropsModel<FormContainerPropsModel<TType, TResult>>,
-    ref: ForwardedRef<FormRefModel<TType>>,
-  ): ReactElement<RSFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>> => (
+    ref: ForwardedRef<FormRefModel>,
+  ): ReactElement<RSFCPropsModel<FormRefModel, FormContainerPropsModel<TType, TResult>>> => (
     <ErrorProvider value={{ errorContextGet, mode: ERROR_MODE.NOTIFICATION }}>
       <FormContainerF
         {...props}
@@ -79,8 +80,8 @@ const FormContainerF = forwardRef(
       validators,
       ...props
     }: SFCPropsModel<FormContainerPropsModel<TType, TResult>>,
-    ref: ForwardedRef<FormRefModel<TType>>,
-  ): ReactElement<RSFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>> => {
+    ref: ForwardedRef<FormRefModel>,
+  ): ReactElement<RSFCPropsModel<FormRefModel, FormContainerPropsModel<TType, TResult>>> => {
     const { styles } = useStyles({ props });
     const { t } = useTranslation();
     const { error, success } = useNotification();
@@ -113,7 +114,7 @@ const FormContainerF = forwardRef(
         error({ message: t('core:validateChanged') });
         return null;
       } else {
-        return (onSubmit && (await onSubmit(dataF as TType))) || null;
+        return (onSubmit && (await onSubmit(dataF))) || null;
       }
     };
 
@@ -137,7 +138,7 @@ const FormContainerF = forwardRef(
     const elementStateF = isLoading ? ELEMENT_STATE.LOADING : elementState;
     const isDisabled =
       elementStateF === ELEMENT_STATE.DISABLED || elementStateF === ELEMENT_STATE.LOADING;
-    const onSubmitF = async (): Promise<void> => handleSubmit();
+    const onSubmitF: CallableModel = () => handleSubmit();
     const getField = useCallback(
       (
         { Component, field, fieldProps, id }: FormContainerFieldModel,
@@ -181,7 +182,7 @@ const FormContainerF = forwardRef(
               <TextField
                 {...(fieldPropsF as TextFieldPropsModel)}
                 key={id}
-                onSubmit={onSubmitF}
+                onSubmit={() => onSubmitF()}
                 testID={id}
               />
             );

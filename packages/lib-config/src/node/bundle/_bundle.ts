@@ -128,7 +128,7 @@ export const _bundle = ({
 
         sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : 'inline',
 
-        target: process.env.PLATFORM === PLATFORM.NODE ? 'node18' : undefined,
+        target: process.env.ENV_PLATFORM === PLATFORM.NODE ? 'node18' : undefined,
 
         tsconfig: tsconfigPath,
       },

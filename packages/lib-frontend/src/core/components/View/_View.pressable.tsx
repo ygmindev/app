@@ -23,7 +23,7 @@ export const _viewParams: ComposeComponentParamsModel<
 
     activeOpacity: 1,
 
-    onPress: () => onPress && onPress(),
+    onPress: () => onPress && void onPress(),
 
     onPressIn: () => onPressIn && onPressIn(),
 

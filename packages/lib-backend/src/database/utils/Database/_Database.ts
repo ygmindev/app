@@ -39,7 +39,7 @@ export abstract class _Database implements DatabaseModel {
     if (em) {
       return em.fork();
     }
-    throw new UninitializedError(`database ${this._config.host}`);
+    throw new UninitializedError('database');
   };
 
   getRepository = <TType extends unknown>({
@@ -152,14 +152,10 @@ export abstract class _Database implements DatabaseModel {
         const { value: result } = await em
           .getConnection()
           .getCollection<TType & object>(name)
-          .findOneAndUpdate(
-            filterF as Filter<TType & object>,
-            updateF as UpdateFilter<TType & object>,
-            {
-              projection: options?.project ? cleanDocument(options.project) : undefined,
-              returnDocument: 'after',
-            },
-          );
+          .findOneAndUpdate(filterF, updateF as UpdateFilter<TType & object>, {
+            projection: options?.project ? cleanDocument(options.project) : undefined,
+            returnDocument: 'after',
+          });
         return { result } as OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
       },
     };

@@ -1,8 +1,9 @@
 import isFunction from 'lodash/isFunction';
-import { cloneElement, useState } from 'react';
+import { cloneElement, type ReactElement, useState } from 'react';
 
 import { _isHoverable } from '#lib-frontend/core/components/Activatable/_isHoverable';
 import type { ActivatablePropsModel } from '#lib-frontend/core/components/Activatable/Activatable.models';
+import { type PressablePropsModel } from '#lib-frontend/core/components/Pressable/Pressable.models';
 import type { SFCModel } from '#lib-frontend/core/core.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import type { CallableModel } from '#lib-shared/core/core.models';
@@ -17,7 +18,9 @@ export const Activatable: SFCModel<ActivatablePropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const [isActive, isActiveSet] = useState<boolean>();
-  const childrenF = isFunction(children) ? children(isActive) : children;
+  const childrenF: ReactElement<PressablePropsModel> | undefined = isFunction(children)
+    ? children(isActive)
+    : children;
 
   const handleToggle = (value?: boolean): void => {
     isFunction(children) && isActiveSet(value || false);

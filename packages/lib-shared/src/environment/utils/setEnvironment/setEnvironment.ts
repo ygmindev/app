@@ -1,6 +1,5 @@
 import { config } from 'dotenv';
 import { existsSync } from 'fs';
-import forEach from 'lodash/forEach';
 import map from 'lodash/map';
 import reduce from 'lodash/reduce';
 import toString from 'lodash/toString';
@@ -17,7 +16,7 @@ export const setEnvironment = ({
   overrides,
   writes,
 }: SetEnvironmentParamsModel = {}): Record<string, string> => {
-  overrides && forEach(overrides, (v, k) => (process.env[k] = v));
+  overrides && (process.env = { ...process.env, ...overrides });
 
   const paths = [
     fromConfig('core/environment/.env.base'),

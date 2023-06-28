@@ -8,10 +8,10 @@ import type {
 export const useAsync = (...[params, deps = [], onUnmount]: UseAsyncParamsModel): UseAsyncModel => {
   useEffect(() => {
     let isMounted = true;
-    params && params(() => isMounted);
+    params && void params(() => isMounted);
     return () => {
       isMounted = false;
-      onUnmount && onUnmount();
+      onUnmount && void onUnmount();
     };
   }, [...deps]);
 };

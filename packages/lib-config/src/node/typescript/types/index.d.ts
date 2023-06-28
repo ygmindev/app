@@ -9,6 +9,7 @@ declare module '*.css';
 declare module '*.ttf';
 
 declare namespace NodeJS {
-  import type { EnvironmentConfigModel } from '#lib-config/core/environment/environment.models';
-  declare type ProcessEnv = EnvironmentConfigModel;
+  type ProcessEnv =
+    // eslint-disable-next-line @typescript-eslint/consistent-type-imports
+    import('#lib-config/core/environment/environment.models').EnvironmentConfigModel;
 }

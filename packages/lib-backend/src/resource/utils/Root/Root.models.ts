@@ -1,6 +1,6 @@
-import type { ConstructorModel } from '#lib-shared/core/core.models';
+import type { ClassModel } from '#lib-shared/core/core.models';
 
 export type RootParamsModel<TRoot> = {
-  RootResource?: ConstructorModel<TRoot>;
+  RootResource?: ClassModel<TRoot>;
   name: string;
 };

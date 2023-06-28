@@ -13,7 +13,7 @@ export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
   const user = useStore((state) => state.user.currentUser);
 
   useAsync(async (isMounted) => {
-    initialize(async (signInToken) => {
+    void initialize(async (signInToken) => {
       if (isMounted()) {
         if (signInToken && user?._id !== signInToken._id) {
           actions?.user.currentUserSet({ ...signInToken.claims, _id: signInToken._id });
