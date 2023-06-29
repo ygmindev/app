@@ -2,6 +2,7 @@ declare module 'esbuild-plugin-fileloc';
 declare module 'geolocator';
 declare module 'i18next-parser';
 declare module 'inquirer-directory';
+declare module 'react-native-web';
 declare module 'redux-persist-cookie-storage';
 
 declare module '*.css';

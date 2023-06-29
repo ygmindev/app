@@ -65,11 +65,12 @@ export const _server = async ({
         },
       },
     });
+
     if (redirect) {
       await res.redirect(302, redirect);
     } else if (response) {
       const { contentType, pipeStream, statusCode } = response;
-      await res.status(statusCode).type(contentType);
+      void res.status(statusCode).type(contentType);
       pipeStream(res.raw);
     } else if (error) {
       // TODO: better error handling

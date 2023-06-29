@@ -9,7 +9,7 @@ import {
   type AccessRoleModel,
 } from '#lib-shared/auth/resources/Access/Access.models';
 import { FIELD_TYPE } from '#lib-shared/form/form.constants';
-import { ResolvedFieldModel } from '#lib-shared/resource/resource.models';
+import { type ResolvedFieldModel } from '#lib-shared/resource/resource.models';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withEntity({ name: `${ACCESS_RESOURCE_NAME}Form` })

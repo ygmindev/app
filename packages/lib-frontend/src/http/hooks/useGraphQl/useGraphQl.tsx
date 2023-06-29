@@ -1,12 +1,3 @@
-// import {
-type; //   UseGraphQlModel,
-//   UseGraphQlParamsModel,
-// } from '#lib-frontend/http/hooks/useGraphQl/useGraphQl.models';
-
-// export const { useGraphQl }: { useGraphQl: (params?: UseGraphQlParamsModel) => UseGraphQlModel } =
-//   // import.meta.env.SSR ? await import('./useGraphQl.server') : await import('./useGraphQl.client');
-//   await import('./useGraphQl.client');
-
 import { useApi } from '#lib-frontend/http/hooks/useApi/useApi';
 import {
   type UseGraphQlModel,
