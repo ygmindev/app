@@ -3,9 +3,9 @@ import toNumber from 'lodash/toNumber';
 import { createTransport } from 'nodemailer';
 
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
-import type {
-  _MailModel,
-  _MailParamsModel,
+import {
+  type _MailModel,
+  type _MailParamsModel,
 } from '#lib-backend/notification/utils/mail/_mail.models';
 
 const transport = createTransport({

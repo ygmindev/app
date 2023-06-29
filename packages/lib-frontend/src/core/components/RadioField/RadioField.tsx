@@ -1,12 +1,12 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
-import type { RadioFieldPropsModel } from '#lib-frontend/core/components/RadioField/RadioField.models';
+import { type RadioFieldPropsModel } from '#lib-frontend/core/components/RadioField/RadioField.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import type { SFCPropsModel } from '#lib-frontend/core/core.models';
+import { type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';

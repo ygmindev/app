@@ -1,5 +1,5 @@
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
-import type { FileConfigModel } from '#lib-config/core/file/file.models';
+import { type FileConfigModel } from '#lib-config/core/file/file.models';
 
 const BUILD_DIR = '.build';
 

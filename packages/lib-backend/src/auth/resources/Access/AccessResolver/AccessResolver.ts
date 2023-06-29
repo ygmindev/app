@@ -9,10 +9,13 @@ import { EntityResourceResolver } from '#lib-backend/resource/resources/EntityRe
 import { User } from '#lib-backend/user/resources/User/User';
 import { UserService } from '#lib-backend/user/resources/User/UserService/UserService';
 import { ACCESS_RESOURCE_NAME } from '#lib-shared/auth/resources/Access/Access.constants';
-import type { AccessFormModel, AccessModel } from '#lib-shared/auth/resources/Access/Access.models';
-import type { AccessServiceModel } from '#lib-shared/auth/resources/Access/AccessService/AccessService.models';
+import {
+  type AccessFormModel,
+  type AccessModel,
+} from '#lib-shared/auth/resources/Access/Access.models';
+import { type AccessServiceModel } from '#lib-shared/auth/resources/Access/AccessService/AccessService.models';
 import { NotFoundError } from '#lib-shared/core/errors/NotFoundError/NotFoundError';
-import type { UserModel } from '#lib-shared/user/resources/User/User.models';
+import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withContainer()
 @withResolver({ Resource: Access })

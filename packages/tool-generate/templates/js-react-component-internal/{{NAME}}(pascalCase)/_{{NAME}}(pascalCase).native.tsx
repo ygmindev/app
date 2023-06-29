@@ -1,5 +1,5 @@
-import type { _{{NAME}}PropsModel } from '{{PATH}}/{{NAME}}/_{{NAME}}.models';
-import type { {{NAME}}Props } from '{{NAME}}';
+import { type _{{NAME}}PropsModel } from '{{PATH}}/{{NAME}}/_{{NAME}}.models';
+import { type {{NAME}}Props } from '{{NAME}}';
 import { {{NAME}} } from '{{NAME}}';
 import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
 

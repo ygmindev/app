@@ -4,12 +4,12 @@ import { EmbeddedResourceResolver } from '#lib-backend/resource/resources/Embedd
 import { DummyEmbeddedResource } from '#lib-backend/test/resources/DummyEmbeddedResource/DummyEmbeddedResource';
 import { DummyEmbeddedResourceService } from '#lib-backend/test/resources/DummyEmbeddedResource/DummyEmbeddedResourceService/DummyEmbeddedResourceService';
 import { DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.constants';
-import type {
-  DummyEmbeddedResourceFormModel,
-  DummyEmbeddedResourceModel,
+import {
+  type DummyEmbeddedResourceFormModel,
+  type DummyEmbeddedResourceModel,
 } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.models';
-import type { DummyEmbeddedResourceServiceModel } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResourceService/DummyEmbeddedResourceService.models';
-import type { DummyEntityResourceModel } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
+import { type DummyEmbeddedResourceServiceModel } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResourceService/DummyEmbeddedResourceService.models';
+import { type DummyEntityResourceModel } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
 
 @withContainer()
 @withResolver({ Resource: DummyEmbeddedResource })

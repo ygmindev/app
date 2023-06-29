@@ -1,14 +1,14 @@
 import { MotiText } from 'moti';
 import { forwardRef, useImperativeHandle } from 'react';
 
-import type { AnimatableRefModel } from '#lib-frontend/animation/animation.models';
-import type { _AnimatableTextPropsModel } from '#lib-frontend/animation/components/AnimatableText/_AnimatableText.models';
+import { type AnimatableRefModel } from '#lib-frontend/animation/animation.models';
+import { type _AnimatableTextPropsModel } from '#lib-frontend/animation/components/AnimatableText/_AnimatableText.models';
 import { useAnimationState } from '#lib-frontend/animation/hooks/useAnimationState/useAnimationState';
 import { _textParams } from '#lib-frontend/core/components/Text/_Text';
-import type { PropsModel, RSFCModel } from '#lib-frontend/core/core.models';
+import { type PropsModel, type RSFCModel } from '#lib-frontend/core/core.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import type { TextStyleModel } from '#lib-frontend/style/style.models';
+import { type TextStyleModel } from '#lib-frontend/style/style.models';
 
 export const _AnimatableText: RSFCModel<
   AnimatableRefModel<TextStyleModel>,

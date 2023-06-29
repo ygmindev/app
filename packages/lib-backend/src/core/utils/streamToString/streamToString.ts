@@ -1,6 +1,6 @@
-import type {
-  StreamToStringModel,
-  StreamToStringParamsModel,
+import {
+  type StreamToStringModel,
+  type StreamToStringParamsModel,
 } from '#lib-backend/core/utils/streamToString/streamToString.models';
 
 export const streamToString = async (

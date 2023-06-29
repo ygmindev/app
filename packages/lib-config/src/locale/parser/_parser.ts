@@ -1,8 +1,8 @@
 import { join } from 'path';
 
-import type {
-  _ParserConfigModel,
-  ParserConfigModel,
+import {
+  type _ParserConfigModel,
+  type ParserConfigModel,
 } from '#lib-config/locale/parser/parser.models';
 
 export const _parser = ({

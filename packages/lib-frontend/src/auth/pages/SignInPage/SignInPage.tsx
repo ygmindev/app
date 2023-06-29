@@ -1,6 +1,6 @@
 import { SignInForm } from '#lib-frontend/auth/containers/SignInForm/SignInForm';
-import type { SignInPagePropsModel } from '#lib-frontend/auth/pages/SignInPage/SignInPage.models';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SignInPagePropsModel } from '#lib-frontend/auth/pages/SignInPage/SignInPage.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { CenterLayout } from '#lib-frontend/core/layouts/CenterLayout/CenterLayout';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 

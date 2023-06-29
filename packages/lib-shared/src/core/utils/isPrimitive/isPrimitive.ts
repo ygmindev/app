@@ -1,6 +1,6 @@
-import type {
-  IsPrimitiveModel,
-  IsPrimitiveParamsModel,
+import {
+  type IsPrimitiveModel,
+  type IsPrimitiveParamsModel,
 } from '#lib-shared/core/utils/isPrimitive/isPrimitive.models';
 
 export const isPrimitive = (params: IsPrimitiveParamsModel): IsPrimitiveModel =>

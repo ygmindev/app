@@ -4,7 +4,10 @@ import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages'
 import { _config as _babelConfig } from '#lib-config/node/babel/babel.frontend';
 import { _bundle } from '#lib-config/node/bundle/_bundle';
 import { config as configBase } from '#lib-config/node/bundle/bundle.base';
-import type { _BundleConfigModel, BundleConfigModel } from '#lib-config/node/bundle/bundle.models';
+import {
+  type _BundleConfigModel,
+  type BundleConfigModel,
+} from '#lib-config/node/bundle/bundle.models';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
 

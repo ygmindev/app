@@ -1,6 +1,6 @@
-import type {
-  FilterNilModel,
-  FilterNilParamsModel,
+import {
+  type FilterNilModel,
+  type FilterNilParamsModel,
 } from '#lib-shared/core/utils/filterNil/filterNil.models';
 
 export const filterNil = <TType>(params: FilterNilParamsModel<TType>): FilterNilModel<TType> =>

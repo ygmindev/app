@@ -1,13 +1,13 @@
-import type { GraphQLError } from 'graphql';
+import { type GraphQLError } from 'graphql';
 
-import type {
-  InferModel,
-  PrimitiveModel,
-  RequiredModel,
-  UnionToIntersectionModel,
+import {
+  type InferModel,
+  type PrimitiveModel,
+  type RequiredModel,
+  type UnionToIntersectionModel,
 } from '#lib-shared/core/core.models';
-import type { GraphQlOperationTypeModel } from '#lib-shared/graphql/graphql.models';
-import type { ConnectionModel } from '#lib-shared/resource/utils/Connection/Connection.models';
+import { type GraphQlOperationTypeModel } from '#lib-shared/graphql/graphql.models';
+import { type ConnectionModel } from '#lib-shared/resource/utils/Connection/Connection.models';
 
 export type GraphQlHttpParamsModel<TParams> = {
   query: string;

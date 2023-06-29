@@ -1,7 +1,7 @@
-import type {
-  CallablePromiseModel,
-  PartialModel,
-  RequiredModel,
+import {
+  type CallablePromiseModel,
+  type PartialModel,
+  type RequiredModel,
 } from '#lib-shared/core/core.models';
 
 export type EntityResourceModel = {

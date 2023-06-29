@@ -1,5 +1,5 @@
 import { Loading } from '#lib-frontend/core/components/Loading/Loading';
-import type { LoadingPropsModel } from '#lib-frontend/core/components/Loading/Loading.models';
+import { type LoadingPropsModel } from '#lib-frontend/core/components/Loading/Loading.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

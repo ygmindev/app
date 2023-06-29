@@ -1,10 +1,13 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 
-import type { IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
-import type { PressablePropsModel } from '#lib-frontend/core/components/Pressable/Pressable.models';
-import type { ChildrenPropsModel, ElementStatePropsModel } from '#lib-frontend/core/core.models';
-import type { TranslatableTextModel } from '#lib-frontend/locale/locale.models';
-import type { RootStateModel } from '#lib-frontend/root/stores/rootStore.models';
+import { type IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
+import { type PressablePropsModel } from '#lib-frontend/core/components/Pressable/Pressable.models';
+import {
+  type ChildrenPropsModel,
+  type ElementStatePropsModel,
+} from '#lib-frontend/core/core.models';
+import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
+import { type RootStateModel } from '#lib-frontend/root/stores/rootStore.models';
 
 export type LineItemPropsModel = {
   label?: TranslatableTextModel;

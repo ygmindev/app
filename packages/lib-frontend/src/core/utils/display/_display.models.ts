@@ -1,5 +1,5 @@
-import type { DimensionModel } from '#lib-frontend/core/core.models';
-import type { CallableModel } from '#lib-shared/core/core.models';
+import { type DimensionModel } from '#lib-frontend/core/core.models';
+import { type CallableModel } from '#lib-shared/core/core.models';
 
 export type _DisplayModel = {
   getDimension(): DimensionModel;

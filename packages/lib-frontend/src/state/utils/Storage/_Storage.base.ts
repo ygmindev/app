@@ -1,9 +1,9 @@
-import type {
-  _StorageModel,
-  _StorageParamsModel,
-  StorageBackendModel,
+import {
+  type _StorageModel,
+  type _StorageParamsModel,
+  type StorageBackendModel,
 } from '#lib-frontend/state/utils/Storage/_Storage.models';
-import type { StorageModel } from '#lib-frontend/state/utils/Storage/Storage.models';
+import { type StorageModel } from '#lib-frontend/state/utils/Storage/Storage.models';
 import { debug } from '#lib-shared/logging/utils/logger/logger';
 
 export class _Storage implements _StorageModel {

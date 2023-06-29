@@ -1,6 +1,6 @@
-import type {
-  _ExportPrerenderPagesModel,
-  _ExportPrerenderPagesParamsModel,
+import {
+  type _ExportPrerenderPagesModel,
+  type _ExportPrerenderPagesParamsModel,
 } from '#lib-platform/web/exports/exportPrerenderPages/_exportPrerenderPages.models';
 import { sequence } from '#lib-shared/core/utils/sequence/sequence';
 

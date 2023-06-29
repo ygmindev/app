@@ -1,9 +1,9 @@
 import Fuse from 'fuse.js';
 import { useCallback, useMemo, useState } from 'react';
 
-import type {
-  _UseSearchModel,
-  _UseSearchParamsModel,
+import {
+  type _UseSearchModel,
+  type _UseSearchParamsModel,
 } from '#lib-frontend/search/hooks/useSearch/_useSearch.models';
 import {
   SEARCH_DELAY,

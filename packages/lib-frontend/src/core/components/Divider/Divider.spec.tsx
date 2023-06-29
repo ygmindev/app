@@ -1,5 +1,5 @@
 import { Divider } from '#lib-frontend/core/components/Divider/Divider';
-import type { DividerPropsModel } from '#lib-frontend/core/components/Divider/Divider.models';
+import { type DividerPropsModel } from '#lib-frontend/core/components/Divider/Divider.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

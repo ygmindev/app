@@ -2,9 +2,9 @@ import { initReactI18next } from 'react-i18next';
 
 import { _internationalize } from '#lib-config/locale/internationalize/_internationalize';
 import { INTERNATIONALIZE_CONFIG_STATIC } from '#lib-config/locale/internationalize/internationalize.constants';
-import type {
-  _InternationalizeConfigModel,
-  InternationalizeConfigModel,
+import {
+  type _InternationalizeConfigModel,
+  type InternationalizeConfigModel,
 } from '#lib-config/locale/internationalize/internationalize.models';
 
 const { languageDefault, languages, namespaceDefault } = INTERNATIONALIZE_CONFIG_STATIC;

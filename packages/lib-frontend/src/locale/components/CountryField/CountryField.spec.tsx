@@ -1,5 +1,5 @@
 import { CountryField } from '#lib-frontend/locale/components/CountryField/CountryField';
-import type { CountryFieldPropsModel } from '#lib-frontend/locale/components/CountryField/CountryField.models';
+import { type CountryFieldPropsModel } from '#lib-frontend/locale/components/CountryField/CountryField.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

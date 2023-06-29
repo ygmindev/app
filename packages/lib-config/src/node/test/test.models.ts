@@ -1,8 +1,8 @@
-import type { Config } from '@jest/types';
+import { type Config } from '@jest/types';
 
-import type { ConfigDynamicModel } from '#lib-config/core/core.models';
-import type { BundleConfigModel } from '#lib-config/node/bundle/bundle.models';
-import type { CallableModel, CallablePromiseModel } from '#lib-shared/core/core.models';
+import { type ConfigDynamicModel } from '#lib-config/core/core.models';
+import { type BundleConfigModel } from '#lib-config/node/bundle/bundle.models';
+import { type CallableModel, type CallablePromiseModel } from '#lib-shared/core/core.models';
 
 export type TestConfigModel = ConfigDynamicModel<{
   bundleConfig: BundleConfigModel;

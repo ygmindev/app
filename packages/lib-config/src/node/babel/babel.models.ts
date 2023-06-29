@@ -1,6 +1,6 @@
-import type { TransformOptions } from '@babel/core';
+import { type TransformOptions } from '@babel/core';
 
-import type { ConfigDynamicModel } from '#lib-config/core/core.models';
+import { type ConfigDynamicModel } from '#lib-config/core/core.models';
 
 export type BabelConfigModel = {
   plugins?: Array<string | [string, object]>;

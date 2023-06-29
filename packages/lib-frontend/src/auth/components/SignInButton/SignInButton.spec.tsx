@@ -1,5 +1,5 @@
 import { SignInButton } from '#lib-frontend/auth/components/SignInButton/SignInButton';
-import type { SignInButtonPropsModel } from '#lib-frontend/auth/components/SignInButton/SignInButton.models';
+import { type SignInButtonPropsModel } from '#lib-frontend/auth/components/SignInButton/SignInButton.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

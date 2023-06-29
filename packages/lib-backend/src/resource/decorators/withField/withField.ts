@@ -1,8 +1,8 @@
 import { ArrayType, Embedded, Index, PrimaryKey, Property } from '@mikro-orm/core';
 import { Field } from 'type-graphql';
-import type { ReturnTypeFuncValue } from 'type-graphql/dist/decorators/types';
+import { type ReturnTypeFuncValue } from 'type-graphql/dist/decorators/types';
 
-import type { WithFieldParamsModel } from '#lib-backend/resource/decorators/withField/withField.models';
+import { type WithFieldParamsModel } from '#lib-backend/resource/decorators/withField/withField.models';
 import { FIELD_TYPE } from '#lib-shared/form/form.constants';
 
 const getField = <TType extends unknown>({

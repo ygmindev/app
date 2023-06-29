@@ -1,4 +1,4 @@
-import type { SetupConfigModel } from '#lib-config/core/setup/setup.models';
+import { type SetupConfigModel } from '#lib-config/core/setup/setup.models';
 
 const isInitialized = false;
 

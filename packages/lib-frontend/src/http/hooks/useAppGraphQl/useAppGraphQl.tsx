@@ -1,4 +1,4 @@
-import type { UseAppGraphQlModel } from '#lib-frontend/http/hooks/useAppGraphQl/useAppGraphQl.models';
+import { type UseAppGraphQlModel } from '#lib-frontend/http/hooks/useAppGraphQl/useAppGraphQl.models';
 import { useGraphQl } from '#lib-frontend/http/hooks/useGraphQl/useGraphQl';
 import { GRAPHQL } from '#lib-shared/graphql/graphql.constants';
 

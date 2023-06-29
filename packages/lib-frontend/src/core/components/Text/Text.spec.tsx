@@ -1,5 +1,5 @@
 import { Text } from '#lib-frontend/core/components/Text/Text';
-import type { TextPropsModel } from '#lib-frontend/core/components/Text/Text.models';
+import { type TextPropsModel } from '#lib-frontend/core/components/Text/Text.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

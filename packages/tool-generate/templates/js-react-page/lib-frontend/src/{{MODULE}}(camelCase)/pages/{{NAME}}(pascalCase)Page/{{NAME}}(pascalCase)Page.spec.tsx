@@ -1,5 +1,5 @@
 import { {{NAME}}(pascalCase)Page } from '#lib-frontend/{{MODULE}}(camelCase)/pages/{{NAME}}(pascalCase)Page/{{NAME}}(pascalCase)Page';
-import type { {{NAME}}(pascalCase)PagePropsModel } from '#lib-frontend/{{MODULE}}(camelCase)/pages/{{NAME}}(pascalCase)Page/{{NAME}}(pascalCase)Page.models';
+import { type {{NAME}}(pascalCase)PagePropsModel } from '#lib-frontend/{{MODULE}}(camelCase)/pages/{{NAME}}(pascalCase)Page/{{NAME}}(pascalCase)Page.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

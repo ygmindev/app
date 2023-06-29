@@ -1,18 +1,18 @@
 import { useAppGraphQl } from '#lib-frontend/http/hooks/useAppGraphQl/useAppGraphQl';
-import type {
-  GraphQlFieldModel,
-  GraphQlQueryParamsFieldsModel,
+import {
+  type GraphQlFieldModel,
+  type GraphQlQueryParamsFieldsModel,
 } from '#lib-frontend/http/utils/graphQlQuery/graphQlQuery.models';
-import type {
-  UseResourceMethodModel,
-  UseResourceMethodParamsModel,
+import {
+  type UseResourceMethodModel,
+  type UseResourceMethodParamsModel,
 } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
 import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { GRAPHQL_OPERATION_TYPE } from '#lib-shared/graphql/graphql.constants';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-import type { ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
-import type { InputModel } from '#lib-shared/resource/utils/Input/Input.models';
-import type { OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
+import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
+import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
+import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 
 const getConnectionFields = <TType, TRoot = undefined>(
   fields: GraphQlQueryParamsFieldsModel<TType, false>,

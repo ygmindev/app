@@ -1,5 +1,5 @@
 import { TextField } from '#lib-frontend/form/components/TextField/TextField';
-import type { TextFieldPropsModel } from '#lib-frontend/form/components/TextField/TextField.models';
+import { type TextFieldPropsModel } from '#lib-frontend/form/components/TextField/TextField.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

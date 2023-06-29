@@ -2,11 +2,11 @@ import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { sequence } from '#lib-shared/core/utils/sequence/sequence';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
-import type { TaskParamsModel } from '#tool-task/core/core.models';
+import { type TaskParamsModel } from '#tool-task/core/core.models';
 import { command } from '#tool-task/core/utils/command/command';
 import { prompt } from '#tool-task/core/utils/prompt/prompt';
-import type { PromptArgsModel } from '#tool-task/core/utils/prompt/prompt.models';
-import type { InstallParamsModel } from '#tool-task/node/tasks/install/install.models';
+import { type PromptArgsModel } from '#tool-task/core/utils/prompt/prompt.models';
+import { type InstallParamsModel } from '#tool-task/node/tasks/install/install.models';
 
 const install: TaskParamsModel<InstallParamsModel> = {
   name: 'node-install',

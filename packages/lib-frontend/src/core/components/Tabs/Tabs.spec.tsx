@@ -1,6 +1,6 @@
 import { Tabs } from '#lib-frontend/core/components/Tabs/Tabs';
-import type { TabsPropsModel } from '#lib-frontend/core/components/Tabs/Tabs.models';
-import type { OptionModel } from '#lib-frontend/core/core.models';
+import { type TabsPropsModel } from '#lib-frontend/core/components/Tabs/Tabs.models';
+import { type OptionModel } from '#lib-frontend/core/core.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

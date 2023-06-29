@@ -1,5 +1,5 @@
 import { Modal } from '#lib-frontend/core/components/Modal/Modal';
-import type { ModalPropsModel } from '#lib-frontend/core/components/Modal/Modal.models';
+import { type ModalPropsModel } from '#lib-frontend/core/components/Modal/Modal.models';
 import { WrapperFixture } from '#lib-frontend/core/components/Wrapper/Wrapper.fixtures';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { waitForExpect } from '#lib-frontend/test/utils/waitForExpect/waitForExpect';

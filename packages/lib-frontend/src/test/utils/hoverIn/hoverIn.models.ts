@@ -1,6 +1,6 @@
-import type {
-  _HoverInModel,
-  _HoverInParamsModel,
+import {
+  type _HoverInModel,
+  type _HoverInParamsModel,
 } from '#lib-frontend/test/utils/hoverIn/_hoverIn.models';
 
 export type HoverInParamsModel = _HoverInParamsModel;

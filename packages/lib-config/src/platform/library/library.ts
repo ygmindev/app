@@ -1,5 +1,5 @@
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
-import type { LibraryConfigModel } from '#lib-config/platform/library/library.models';
+import { type LibraryConfigModel } from '#lib-config/platform/library/library.models';
 
 export const config: LibraryConfigModel = {
   extension: 'library',

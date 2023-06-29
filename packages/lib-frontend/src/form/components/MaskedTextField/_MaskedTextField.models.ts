@@ -1,4 +1,4 @@
-import type { TextInputProps } from 'react-native';
+import { type TextInputProps } from 'react-native';
 
 export type _MaskedTextFieldPropsModel = {
   mask: string;

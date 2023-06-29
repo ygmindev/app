@@ -4,12 +4,12 @@ import { Appearable } from '#lib-frontend/animation/components/Appearable/Appear
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import {
   SWITCH_FIELD_OFFSET,
   SWITCH_FIELD_WIDTH,
 } from '#lib-frontend/form/components/SwitchField/SwitchField.constants';
-import type { SwitchFieldPropsModel } from '#lib-frontend/form/components/SwitchField/SwitchField.models';
+import { type SwitchFieldPropsModel } from '#lib-frontend/form/components/SwitchField/SwitchField.models';
 import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';

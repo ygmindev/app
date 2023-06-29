@@ -1,13 +1,13 @@
-import type { GraphQLArgs } from 'graphql';
+import { type GraphQLArgs } from 'graphql';
 import { graphql } from 'graphql';
 
 import { _config } from '#lib-config/graphql/graphql';
-import type {
-  UseAppGraphQlModel,
-  UseAppGraphQlParamsModel,
+import {
+  type UseAppGraphQlModel,
+  type UseAppGraphQlParamsModel,
 } from '#lib-frontend/http/hooks/useAppGraphQl/useAppGraphQl.models';
 import { graphQlQuery } from '#lib-frontend/http/utils/graphQlQuery/graphQlQuery';
-import type { GraphQlQueryHttpParamsModel } from '#lib-frontend/http/utils/graphQlQuery/graphQlQuery.models';
+import { type GraphQlQueryHttpParamsModel } from '#lib-frontend/http/utils/graphQlQuery/graphQlQuery.models';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 
 export const useAppGraphQl = ({}: UseAppGraphQlParamsModel = {}): UseAppGraphQlModel => ({

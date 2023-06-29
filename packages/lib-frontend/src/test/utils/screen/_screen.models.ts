@@ -1,4 +1,4 @@
-import type { CallablePromiseModel } from '#lib-shared/core/core.models';
+import { type CallablePromiseModel } from '#lib-shared/core/core.models';
 
 export type _ScreenModel = {
   click(testID: string): Promise<void>;

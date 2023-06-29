@@ -1,18 +1,18 @@
-import type { ForwardedRef, ReactElement } from 'react';
+import { type ForwardedRef, type ReactElement } from 'react';
 import { forwardRef } from 'react';
 import { View } from 'react-native';
 
 import { _VirtualizedList } from '#lib-frontend/core/components/VirtualizedList/_VirtualizedList';
-import type {
-  VirtualizedListPropsModel,
-  VirtualizedListRefModel,
+import {
+  type VirtualizedListPropsModel,
+  type VirtualizedListRefModel,
 } from '#lib-frontend/core/components/VirtualizedList/VirtualizedList.models';
-import type { RSFCPropsModel, SFCPropsModel } from '#lib-frontend/core/core.models';
+import { type RSFCPropsModel, type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { getSpacing } from '#lib-frontend/style/utils/styler/spacingStyler/spacingStyler';
-import type { WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
+import { type WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
 
 export const VirtualizedList = forwardRef(
   <TType extends WithIdModel>(

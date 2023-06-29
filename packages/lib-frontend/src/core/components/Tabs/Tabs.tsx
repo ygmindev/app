@@ -1,8 +1,8 @@
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
-import type { TabsPropsModel } from '#lib-frontend/core/components/Tabs/Tabs.models';
+import { type TabsPropsModel } from '#lib-frontend/core/components/Tabs/Tabs.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';

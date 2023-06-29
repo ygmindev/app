@@ -1,4 +1,4 @@
-import type { UserReducerModel } from '#lib-frontend/user/stores/userStore/userStore.models';
+import { type UserReducerModel } from '#lib-frontend/user/stores/userStore/userStore.models';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 
 export const USER_REDUCER: UserReducerModel = {

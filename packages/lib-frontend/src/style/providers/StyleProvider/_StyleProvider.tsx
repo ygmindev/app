@@ -1,8 +1,8 @@
-import type { ProviderProps } from 'react-native-paper';
+import { type ProviderProps } from 'react-native-paper';
 import { DefaultTheme, Provider } from 'react-native-paper';
 
 import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
-import type { _StyleProviderPropsModel } from '#lib-frontend/style/providers/StyleProvider/_StyleProvider.models';
+import { type _StyleProviderPropsModel } from '#lib-frontend/style/providers/StyleProvider/_StyleProvider.models';
 import { STYLE_BRIGHTNESS } from '#lib-frontend/style/style.constants';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 

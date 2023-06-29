@@ -4,20 +4,20 @@ import pick from 'lodash/pick';
 import some from 'lodash/some';
 
 import { seed } from '#lib-backend/database/utils/seed/seed';
-import type {
-  TestableResourceServiceModel,
-  TestResourceServiceParamsModel,
+import {
+  type TestableResourceServiceModel,
+  type TestResourceServiceParamsModel,
 } from '#lib-backend/test/utils/testResourceService/testResourceService.models';
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 import { merge } from '#lib-shared/core/utils/merge/merge';
-import type { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-import type { FilterCombineModel } from '#lib-shared/resource/utils/Filter/Filter.models';
-import type { InputModel } from '#lib-shared/resource/utils/Input/Input.models';
+import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
+import { type FilterCombineModel } from '#lib-shared/resource/utils/Filter/Filter.models';
+import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
-import type {
-  DummyEntityResourceFormModel,
-  DummyEntityResourceModel,
+import {
+  type DummyEntityResourceFormModel,
+  type DummyEntityResourceModel,
 } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
 
 export const testResourceService = async ({

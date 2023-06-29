@@ -1,4 +1,4 @@
-import type { Component, ComponentType, ReactNode } from 'react';
+import { type Component, type ComponentType, type ReactNode } from 'react';
 
 export type IsFragmentParamsModel<TProps> = ReactNode | ComponentType<TProps> | Component<TProps>;
 

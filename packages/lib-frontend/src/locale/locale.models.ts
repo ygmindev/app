@@ -1,9 +1,9 @@
-import type { i18n } from 'i18next';
+import { type i18n } from 'i18next';
 
-import type { UseTranslationModel } from '#lib-frontend/locale/hooks/useTranslation/useTranslation.models';
-import type {
-  COUNTRY_FORMAT,
-  INTERNATIONALIZATION_DETECTION,
+import { type UseTranslationModel } from '#lib-frontend/locale/hooks/useTranslation/useTranslation.models';
+import {
+  type COUNTRY_FORMAT,
+  type INTERNATIONALIZATION_DETECTION,
 } from '#lib-frontend/locale/locale.constants';
 
 export type TranslatableTextModel = string | ((params: UseTranslationModel) => string);

@@ -1,6 +1,6 @@
-import type {
-  FromConfigModel,
-  FromConfigParamsModel,
+import {
+  type FromConfigModel,
+  type FromConfigParamsModel,
 } from '#lib-backend/file/utils/fromConfig/fromConfig.models';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 

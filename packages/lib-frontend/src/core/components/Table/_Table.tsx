@@ -1,26 +1,26 @@
 import 'ag-grid-community/styles/ag-grid.min.css';
 import 'ag-grid-community/styles/ag-theme-material.min.css';
 
-import type {
-  ColDef,
-  ColumnApi,
-  GridApi,
-  ICellRendererParams,
-  ValueFormatterParams,
+import {
+  type ColDef,
+  type ColumnApi,
+  type GridApi,
+  type ICellRendererParams,
+  type ValueFormatterParams,
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import type { ForwardedRef } from 'react';
+import { type ForwardedRef } from 'react';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 
 import { AG_GRID_THEME } from '#lib-config/style/css/css.ag-grid';
-import type { _TablePropsModel } from '#lib-frontend/core/components/Table/_Table.models';
+import { type _TablePropsModel } from '#lib-frontend/core/components/Table/_Table.models';
 import {
   COLUMN_SORT_TYPE,
   TABLE_SELECT_TYPE,
 } from '#lib-frontend/core/components/Table/Table.constants';
-import type {
-  TableColumnModel,
-  TableRefModel,
+import {
+  type TableColumnModel,
+  type TableRefModel,
 } from '#lib-frontend/core/components/Table/Table.models';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -112,17 +112,19 @@ export const _Table = forwardRef(
           columnDefs={columns.map(getColumnDef)}
           debounceVerticalScrollbar
           loadingOverlayComponent={Text}
-          onGridReady={async ({ api, columnApi }) => {
-            await sleep(duration);
-            isFullWidth ? api.sizeColumnsToFit() : columnApi.autoSizeAllColumns();
-            gridApiSet(api);
-            columnApiSet(columnApi);
-            onMount && onMount();
+          onGridReady={({ api, columnApi }) => {
+            void sleep(duration).then(() => {
+              isFullWidth ? api.sizeColumnsToFit() : columnApi.autoSizeAllColumns();
+              gridApiSet(api);
+              columnApiSet(columnApi);
+              onMount && onMount();
+            });
           }}
-          onRowDataUpdated={async () => {
+          onRowDataUpdated={() => {
             if (gridApi && columnApi) {
-              await sleep(duration);
-              isFullWidth ? gridApi.sizeColumnsToFit() : columnApi.autoSizeAllColumns();
+              void sleep(duration).then(() =>
+                isFullWidth ? gridApi.sizeColumnsToFit() : columnApi.autoSizeAllColumns(),
+              );
             }
           }}
           onSelectionChanged={handleSelect}

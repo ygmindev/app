@@ -1,4 +1,4 @@
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { CenterLayout } from '#lib-frontend/core/layouts/CenterLayout/CenterLayout';
 import { FormContainer } from '#lib-frontend/form/containers/FormContainer/FormContainer';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -8,7 +8,10 @@ import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { useUserResource } from '#lib-frontend/user/hooks/useUserResource/useUserResource';
 import { NAME_FORM_CONTAINER_PROPS } from '#lib-frontend/user/pages/NameFormPage/NameFormPage.constants';
-import type { NameFormPagePropsModel } from '#lib-frontend/user/pages/NameFormPage/NameFormPage.models';
+import {
+  type NameFormModel,
+  type NameFormPagePropsModel,
+} from '#lib-frontend/user/pages/NameFormPage/NameFormPage.models';
 import { PERSONAL } from '#lib-frontend/user/user.constants';
 import { ACCOUNT } from '#lib-shared/user/user.constants';
 
@@ -20,7 +23,9 @@ export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...prop
   const { replace } = useRouter();
   const { update } = useUserResource();
 
-  const handleBack = async (): Promise<void> => replace({ pathname: `/${ACCOUNT}/${PERSONAL}` });
+  const handleBack = (): void => {
+    void replace({ pathname: `/${ACCOUNT}/${PERSONAL}` });
+  };
 
   const tName = t('user:name');
 
@@ -29,7 +34,7 @@ export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...prop
       <FormContainer
         initialValues={{ first: currentUser.first, last: currentUser.last }}
         onCancel={handleBack}
-        onSubmit={async ({ first, last }) => {
+        onSubmit={async ({ first, last }: NameFormModel) => {
           const { result } = await update({
             filter: { _id: currentUser._id },
             update: { first, last },

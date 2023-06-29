@@ -1,13 +1,13 @@
 import { CARD_OUTPUT_FIELDS } from '#lib-frontend/billing/hooks/useCardResource/useCardResource.constants';
-import type {
-  UseCardResourceModel,
-  UseCardResourceParamsModel,
+import {
+  type UseCardResourceModel,
+  type UseCardResourceParamsModel,
 } from '#lib-frontend/billing/hooks/useCardResource/useCardResource.models';
 import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { CARD_RESOURCE_NAME } from '#lib-shared/billing/resources/Card/Card.constants';
-import type { CardFormModel, CardModel } from '#lib-shared/billing/resources/Card/Card.models';
+import { type CardFormModel, type CardModel } from '#lib-shared/billing/resources/Card/Card.models';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-import type { UserModel } from '#lib-shared/user/resources/User/User.models';
+import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 export const useCardResource = ({
   root,

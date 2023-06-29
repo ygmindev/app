@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { Modal } from '#lib-frontend/core/components/Modal/Modal';
-import type { PressablePropsModel } from '#lib-frontend/core/components/Pressable/Pressable.models';
+import { type PressablePropsModel } from '#lib-frontend/core/components/Pressable/Pressable.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import type { ElementStateModel, SFCModel } from '#lib-frontend/core/core.models';
+import { type ElementStateModel, type SFCModel } from '#lib-frontend/core/core.models';
 import { lazy } from '#lib-frontend/core/utils/lazy/lazy';
 import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
@@ -14,7 +14,7 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import type { CallablePromiseModel } from '#lib-shared/core/core.models';
+import { type CallablePromiseModel } from '#lib-shared/core/core.models';
 import { isPromise } from '#lib-shared/core/utils/isPromise/isPromise';
 
 const { Button } = lazy(() => import('#lib-frontend/core/components/Button/Button'));

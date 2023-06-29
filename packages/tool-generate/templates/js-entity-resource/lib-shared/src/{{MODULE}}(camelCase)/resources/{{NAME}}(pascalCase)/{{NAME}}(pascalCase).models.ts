@@ -1,5 +1,5 @@
-import type {
-  EntityResourceDataModel,
+import {
+type  EntityResourceDataModel,
   EntityResourceModel,
 } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 

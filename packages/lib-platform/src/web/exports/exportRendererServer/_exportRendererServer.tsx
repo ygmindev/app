@@ -3,14 +3,14 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { renderToStream } from 'react-streaming/server';
 import { dangerouslySkipEscape, escapeInject } from 'vite-plugin-ssr/server';
 
-import type { RootContextModel } from '#lib-frontend/root/root.models';
+import { type RootContextModel } from '#lib-frontend/root/root.models';
 import { ROOT_REDUCERS } from '#lib-frontend/root/stores/rootStore.constants';
-import type { RootStateContextModel } from '#lib-frontend/root/stores/rootStore.models';
+import { type RootStateContextModel } from '#lib-frontend/root/stores/rootStore.models';
 import { Store } from '#lib-frontend/state/utils/Store/Store';
 import { getLocaleStoreFromI18n } from '#lib-platform/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
-import type {
-  _ExportRendererServerModel,
-  _ExportRendererServerParamsModel,
+import {
+  type _ExportRendererServerModel,
+  type _ExportRendererServerParamsModel,
 } from '#lib-platform/web/exports/exportRendererServer/_exportRendererServer.models';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { setup } from '#lib-shared/core/utils/setup/setup';

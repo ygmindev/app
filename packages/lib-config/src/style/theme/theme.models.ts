@@ -1,14 +1,14 @@
-import type { TextStyle } from 'react-native';
+import { type TextStyle } from 'react-native';
 
-import type { STYLE_BRIGHTNESS } from '#lib-frontend/style/style.constants';
-import type {
-  ThemeColorModel,
-  ThemeRoleModel,
-  ThemeSizeModel,
-  ThemeSizeMoreModel,
+import { type STYLE_BRIGHTNESS } from '#lib-frontend/style/style.constants';
+import {
+  type ThemeColorModel,
+  type ThemeRoleModel,
+  type ThemeSizeModel,
+  type ThemeSizeMoreModel,
 } from '#lib-frontend/style/style.models';
-import type { PaletteParamsModel } from '#lib-frontend/style/utils/palette/palette.models';
-import type { FontFamilyModel } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.models';
+import { type PaletteParamsModel } from '#lib-frontend/style/utils/palette/palette.models';
+import { type FontFamilyModel } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.models';
 
 export type ThemeConfigModel = {
   animation: {

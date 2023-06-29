@@ -5,8 +5,8 @@ import { extensions } from '#lib-platform/core/utils/extensions/extensions';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
-import type { TaskParamsModel } from '#tool-task/core/core.models';
-import type { WatchParamsModel } from '#tool-task/core/templates/watch/watch.models';
+import { type TaskParamsModel } from '#tool-task/core/core.models';
+import { type WatchParamsModel } from '#tool-task/core/templates/watch/watch.models';
 import { command } from '#tool-task/core/utils/command/command';
 
 export const watch: TaskParamsModel<WatchParamsModel> = {

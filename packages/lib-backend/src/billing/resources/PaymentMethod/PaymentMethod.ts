@@ -5,7 +5,7 @@ import {
   PAYMENT_METHOD_RESOURCE_NAME,
   PAYMENT_METHOD_TYPE,
 } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import type { PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { type PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
 
 export const PaymentMethod = Union<PaymentMethodModel>({
   Resource: [Bank, Card],

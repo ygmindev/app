@@ -1,5 +1,5 @@
 import { Exitable } from '#lib-frontend/animation/components/Exitable/Exitable';
-import type { ExitablePropsModel } from '#lib-frontend/animation/components/Exitable/Exitable.models';
+import { type ExitablePropsModel } from '#lib-frontend/animation/components/Exitable/Exitable.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

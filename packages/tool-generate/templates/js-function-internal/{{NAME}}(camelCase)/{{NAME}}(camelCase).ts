@@ -1,6 +1,6 @@
 import { _{{NAME}}(camelCase) } from '{{PATH}}/{{NAME}}(camelCase)/_{{NAME}}(camelCase)';
-import type {
-  {{NAME}}(pascalCase)Model,
+import {
+type  {{NAME}}(pascalCase)Model,
   {{NAME}}(pascalCase)ParamsModel,
 } from '{{PATH}}/{{NAME}}(camelCase)/{{NAME}}(camelCase).models';
 

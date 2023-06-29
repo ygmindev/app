@@ -1,5 +1,5 @@
 import { Slide } from '#lib-frontend/animation/components/Slide/Slide';
-import type { SlidePropsModel } from '#lib-frontend/animation/components/Slide/Slide.models';
+import { type SlidePropsModel } from '#lib-frontend/animation/components/Slide/Slide.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

@@ -1,4 +1,4 @@
-import type { CountryConfigModel } from '#lib-config/locale/country/country.models';
+import { type CountryConfigModel } from '#lib-config/locale/country/country.models';
 
 export const config: CountryConfigModel = {
   supportedCountries: [

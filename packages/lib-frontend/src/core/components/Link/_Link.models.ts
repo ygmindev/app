@@ -1,8 +1,8 @@
-import type { ChildrenPropsModel } from '#lib-frontend/core/core.models';
-import type { CallableArgsModel } from '#lib-shared/core/core.models';
+import { type ChildrenPropsModel } from '#lib-frontend/core/core.models';
+import { type CallableModel } from '#lib-shared/core/core.models';
 
 export type _LinkPropsModel = {
   isNewTab?: boolean;
-  onPress?: CallableArgsModel;
+  onPress?: CallableModel;
   pathname?: string;
 } & ChildrenPropsModel;

@@ -1,6 +1,6 @@
-import type {
-  FromExecutableModel,
-  FromExecutableParamsModel,
+import {
+  type FromExecutableModel,
+  type FromExecutableParamsModel,
 } from '#lib-backend/file/utils/fromExecutable/fromExecutable.models';
 import { fromModules } from '#lib-backend/file/utils/fromModules/fromModules';
 

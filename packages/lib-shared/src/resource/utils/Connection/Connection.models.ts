@@ -1,4 +1,4 @@
-import type { Edge, PageInfo } from 'graphql-relay';
+import { type Edge, type PageInfo } from 'graphql-relay';
 
 export type EdgeModel<TType> = Edge<TType>;
 

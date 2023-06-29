@@ -1,5 +1,5 @@
-import type { CallablePromiseModel } from '#lib-shared/core/core.models';
-import type { WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
+import { type CallablePromiseModel } from '#lib-shared/core/core.models';
+import { type WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
 
 export type _UseQueryOptionsModel = {
   cache?: boolean | number;

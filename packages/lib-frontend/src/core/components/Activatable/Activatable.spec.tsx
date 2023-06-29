@@ -1,5 +1,5 @@
 import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
-import type { ActivatablePropsModel } from '#lib-frontend/core/components/Activatable/Activatable.models';
+import { type ActivatablePropsModel } from '#lib-frontend/core/components/Activatable/Activatable.models';
 import { WrapperFixture } from '#lib-frontend/core/components/Wrapper/Wrapper.fixtures';
 import { hoverIn } from '#lib-frontend/test/utils/hoverIn/hoverIn';
 import { hoverOut } from '#lib-frontend/test/utils/hoverOut/hoverOut';

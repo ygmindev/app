@@ -1,6 +1,6 @@
-import type {
-  ResourceServiceModel,
-  ResourceServiceParamsModel,
+import {
+  type ResourceServiceModel,
+  type ResourceServiceParamsModel,
 } from '#lib-shared/resource/utils/Resource/ResourceService/ResourceService.models';
 
 export type EntityResourceServiceParamsModel<TType, TForm> = ResourceServiceParamsModel<

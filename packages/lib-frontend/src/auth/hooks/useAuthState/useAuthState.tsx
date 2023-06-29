@@ -1,5 +1,5 @@
 import { AUTH_STATE } from '#lib-frontend/auth/hooks/useAuthState/useAuthState.constants';
-import type { UseAuthStateModel } from '#lib-frontend/auth/hooks/useAuthState/useAuthState.models';
+import { type UseAuthStateModel } from '#lib-frontend/auth/hooks/useAuthState/useAuthState.models';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 
 export const useAuthState = (): UseAuthStateModel => {

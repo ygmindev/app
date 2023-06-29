@@ -1,5 +1,5 @@
 import { Button } from '#lib-frontend/core/components/Button/Button';
-import type { RouteModel } from '#lib-frontend/route/route.models';
+import { type RouteModel } from '#lib-frontend/route/route.models';
 
 export const routes: Array<RouteModel> = [
   {

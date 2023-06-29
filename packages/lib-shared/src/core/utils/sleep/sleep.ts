@@ -1,4 +1,4 @@
-import type { SleepParamsModel } from '#lib-shared/core/utils/sleep/sleep.models';
+import { type SleepParamsModel } from '#lib-shared/core/utils/sleep/sleep.models';
 import { debug } from '#lib-shared/logging/utils/logger/logger';
 
 export const sleep = (...[duration = 0, options]: SleepParamsModel): Promise<void> => {

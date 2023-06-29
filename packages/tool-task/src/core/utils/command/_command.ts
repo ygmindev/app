@@ -3,9 +3,9 @@ import { spawn } from 'child_process';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { error, info } from '#lib-shared/logging/utils/logger/logger';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
-import type {
-  _CommandModel,
-  _CommandParamsModel,
+import {
+  type _CommandModel,
+  type _CommandParamsModel,
 } from '#tool-task/core/utils/command/_command.models';
 
 export const _command = async (
@@ -22,10 +22,10 @@ export const _command = async (
       shell: true,
       stdio: isSilent ? 'pipe' : 'inherit',
     });
-    cp.stdout?.on('data', (data) => {
+    cp.stdout?.on('data', (data: Buffer) => {
       onData && onData(data.toString());
     });
-    cp.stderr?.on('data', (data) => {
+    cp.stderr?.on('data', (data: Buffer) => {
       onData && onData(data.toString());
     });
     await new Promise((resolve) => {

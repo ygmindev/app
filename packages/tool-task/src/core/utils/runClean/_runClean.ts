@@ -4,9 +4,9 @@ import { rimraf } from 'rimraf';
 
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { config } from '#lib-config/core/file/file';
-import type {
-  _RunCleanModel,
-  _RunCleanParamsModel,
+import {
+  type _RunCleanModel,
+  type _RunCleanParamsModel,
 } from '#tool-task/core/utils/runClean/_runClean.models';
 
 export const _runClean = async ({

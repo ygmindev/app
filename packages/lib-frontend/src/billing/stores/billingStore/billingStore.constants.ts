@@ -1,7 +1,7 @@
 import filter from 'lodash/filter';
 import uniqBy from 'lodash/uniqBy';
 
-import type { BillingReducerModel } from '#lib-frontend/billing/stores/billingStore/billingStore.models';
+import { type BillingReducerModel } from '#lib-frontend/billing/stores/billingStore/billingStore.models';
 
 export const BILLING_REDUCER: BillingReducerModel = {
   actions: {

@@ -1,5 +1,5 @@
 import { NavigationBar } from '#lib-frontend/core/containers/NavigationBar/NavigationBar';
-import type { NavigationBarPropsModel } from '#lib-frontend/core/containers/NavigationBar/NavigationBar.models';
+import { type NavigationBarPropsModel } from '#lib-frontend/core/containers/NavigationBar/NavigationBar.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

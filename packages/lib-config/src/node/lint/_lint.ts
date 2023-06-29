@@ -1,5 +1,5 @@
-import type { _LintConfigModel, LintConfigModel } from '#lib-config/node/lint/lint.models';
-import type { ReturnTypeModel } from '#lib-shared/core/core.models';
+import { type _LintConfigModel, type LintConfigModel } from '#lib-config/node/lint/lint.models';
+import { type ReturnTypeModel } from '#lib-shared/core/core.models';
 
 export const _lint = ({
   include,
@@ -70,6 +70,7 @@ export const _lint = ({
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/require-await': 'off',
+    '@typescript-eslint/restrict-template-expressions': ['error', { allowBoolean: true }],
     '@typescript-eslint/return-await': ['error', 'in-try-catch'],
     '@typescript-eslint/unbound-method': 'off',
     'import/no-extraneous-dependencies': ['error', { packageDir: roots }],

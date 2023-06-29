@@ -1,4 +1,4 @@
-import type { Server } from 'net';
+import { type Server } from 'net';
 import { createServer } from 'net';
 
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';

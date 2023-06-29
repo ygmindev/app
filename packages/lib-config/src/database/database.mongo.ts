@@ -6,9 +6,9 @@ import { DATABASE_TYPE } from '#lib-backend/database/database.constants';
 import { DummyEntityResource } from '#lib-backend/test/resources/DummyEntityResource/DummyEntityResource';
 import { User } from '#lib-backend/user/resources/User/User';
 import { _database } from '#lib-config/database/_database';
-import type {
-  _DatabaseConfigModel,
-  DatabaseConfigModel,
+import {
+  type _DatabaseConfigModel,
+  type DatabaseConfigModel,
 } from '#lib-config/database/database.models';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 

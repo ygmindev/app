@@ -1,7 +1,10 @@
 import toNumber from 'lodash/toNumber';
 
 import { useSession } from '#lib-frontend/auth/hooks/useSession/useSession';
-import type { UseApiModel, UseApiParamsModel } from '#lib-frontend/http/hooks/useApi/useApi.models';
+import {
+  type UseApiModel,
+  type UseApiParamsModel,
+} from '#lib-frontend/http/hooks/useApi/useApi.models';
 import { useHttp } from '#lib-frontend/http/hooks/useHttp/useHttp';
 
 export const useApi = ({
@@ -18,7 +21,7 @@ export const useApi = ({
     onRequest: async (config) => {
       if (isCredentials) {
         const token = await getToken();
-        config.headers = { ...config.headers, Authorization: `Bearer ${token}` };
+        token && (config.headers = { ...config.headers, Authorization: `Bearer ${token}` });
       }
       return onRequest ? onRequest(config) : config;
     },

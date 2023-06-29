@@ -5,7 +5,7 @@ import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { writeFile } from '#lib-backend/file/utils/writeFile/writeFile';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
-import type { TaskParamsModel } from '#tool-task/core/core.models';
+import { type TaskParamsModel } from '#tool-task/core/core.models';
 import { PACKAGE_EXTEND_KEYS } from '#tool-task/node/templates/packageExtend/packageExtend.constants';
 
 export const packageExtend: TaskParamsModel = {

@@ -1,6 +1,6 @@
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
-import type { TaskParamsModel } from '#tool-task/core/core.models';
+import { type TaskParamsModel } from '#tool-task/core/core.models';
 import { command } from '#tool-task/core/utils/command/command';
 import { runClean } from '#tool-task/core/utils/runClean/runClean';
 

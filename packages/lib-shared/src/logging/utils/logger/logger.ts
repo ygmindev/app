@@ -3,7 +3,7 @@ import isPlainObject from 'lodash/isPlainObject';
 
 import { stringify } from '#lib-shared/core/utils/stringify/stringify';
 import { _debug, _error, _info, _warn } from '#lib-shared/logging/utils/logger/_logger';
-import type { LoggerModel } from '#lib-shared/logging/utils/logger/logger.models';
+import { type LoggerModel } from '#lib-shared/logging/utils/logger/logger.models';
 
 const stringifyF = (params: Array<unknown>): string =>
   params

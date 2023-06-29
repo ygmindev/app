@@ -1,6 +1,6 @@
-import type {
-  _DocgenModel,
-  _DocgenParamsModel,
+import {
+  type _DocgenModel,
+  type _DocgenParamsModel,
 } from '#lib-library/docgen/utils/docgen/_docgen.models';
 
 export type DocgenParamsModel = _DocgenParamsModel;

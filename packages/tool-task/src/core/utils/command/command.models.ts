@@ -1,6 +1,6 @@
-import type {
-  _CommandModel,
-  _CommandParamsModel,
+import {
+  type _CommandModel,
+  type _CommandParamsModel,
 } from '#tool-task/core/utils/command/_command.models';
 
 export type CommandParamsModel = _CommandParamsModel;

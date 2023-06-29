@@ -1,12 +1,12 @@
 import { useErrorContext } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext';
-import type {
-  UseHttpModel,
-  UseHttpParamsModel,
+import {
+  type UseHttpModel,
+  type UseHttpParamsModel,
 } from '#lib-frontend/http/hooks/useHttp/useHttp.models';
-import type { GraphQlHttpResponseModel } from '#lib-frontend/http/utils/graphQlQuery/graphQlQuery.models';
+import { type GraphQlHttpResponseModel } from '#lib-frontend/http/utils/graphQlQuery/graphQlQuery.models';
 import { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
 import { HttpService } from '#lib-shared/http/utils/HttpService/HttpService';
-import type { HttpReponseModel } from '#lib-shared/http/utils/HttpService/HttpService.models';
+import { type HttpReponseModel } from '#lib-shared/http/utils/HttpService/HttpService.models';
 import { error } from '#lib-shared/logging/utils/logger/logger';
 
 export const useHttp = (params: UseHttpParamsModel = {}): UseHttpModel => {

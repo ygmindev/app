@@ -1,5 +1,5 @@
-import type { FormErrorModel, SubmittablePropsModel } from '#lib-frontend/form/form.models';
-import type { CallableModel } from '#lib-shared/core/core.models';
+import { type FormErrorModel, type SubmittablePropsModel } from '#lib-frontend/form/form.models';
+import { type CallableModel } from '#lib-shared/core/core.models';
 
 export type _UseFormParamsModel<TType = void, TResult = void> = {
   initialValues?: TType;

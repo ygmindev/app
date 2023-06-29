@@ -1,4 +1,4 @@
-import type { ThemeColorModel, ThemeRoleModel } from '#lib-frontend/style/style.models';
+import { type ThemeColorModel, type ThemeRoleModel } from '#lib-frontend/style/style.models';
 
 export type BackgroundStylerParamsModel = {
   backgroundColor?: ThemeColorModel | string;

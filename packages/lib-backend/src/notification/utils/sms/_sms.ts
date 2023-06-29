@@ -1,7 +1,10 @@
-import type { Twilio } from 'twilio';
+import { type Twilio } from 'twilio';
 import twilio from 'twilio';
 
-import type { _SmsModel, _SmsParamsModel } from '#lib-backend/notification/utils/sms/_sms.models';
+import {
+  type _SmsModel,
+  type _SmsParamsModel,
+} from '#lib-backend/notification/utils/sms/_sms.models';
 
 let client: Twilio;
 

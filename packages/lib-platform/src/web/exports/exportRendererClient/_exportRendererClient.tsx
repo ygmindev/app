@@ -2,11 +2,11 @@ import Cookies from 'cookies-js';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 
 import { _config } from '#lib-config/locale/internationalize/internationalize';
-import type { RootContextModel } from '#lib-frontend/root/root.models';
-import type { CookiesModel } from '#lib-frontend/state/state.models';
-import type {
-  _ExportRendererClientModel,
-  _ExportRendererClientParamsModel,
+import { type RootContextModel } from '#lib-frontend/root/root.models';
+import { type CookiesModel } from '#lib-frontend/state/state.models';
+import {
+  type _ExportRendererClientModel,
+  type _ExportRendererClientParamsModel,
 } from '#lib-platform/web/exports/exportRendererClient/_exportRendererClient.models';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { LOCALE } from '#lib-shared/locale/locale.constants';

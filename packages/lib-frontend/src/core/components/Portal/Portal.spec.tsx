@@ -1,5 +1,5 @@
 import { Portal } from '#lib-frontend/core/components/Portal/Portal';
-import type { PortalPropsModel } from '#lib-frontend/core/components/Portal/Portal.models';
+import { type PortalPropsModel } from '#lib-frontend/core/components/Portal/Portal.models';
 import { WrapperFixture } from '#lib-frontend/core/components/Wrapper/Wrapper.fixtures';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { waitForExpect } from '#lib-frontend/test/utils/waitForExpect/waitForExpect';

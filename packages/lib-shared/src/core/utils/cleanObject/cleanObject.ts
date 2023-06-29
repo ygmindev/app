@@ -6,7 +6,7 @@ import { isPrimitive } from '#lib-shared/core/utils/isPrimitive/isPrimitive';
 import { isTypeOf } from '#lib-shared/core/utils/isTypeOf/isTypeOf';
 import { toPlainObject } from '#lib-shared/core/utils/toPlainObject/toPlainObject';
 
-export const cleanObject = <TType extends unknown>(value: TType): TType => {
+export const cleanObject = <TType>(value: TType): TType => {
   if (isTypeOf(value, Date) || isTypeOf(value, 'ObjectId')) {
     return value;
   }

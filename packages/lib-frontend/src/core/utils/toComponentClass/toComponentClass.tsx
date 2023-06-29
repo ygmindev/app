@@ -1,9 +1,9 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { Component, createElement } from 'react';
 
-import type {
-  ToComponentClassModel,
-  ToComponentClassParamsModel,
+import {
+  type ToComponentClassModel,
+  type ToComponentClassParamsModel,
 } from '#lib-frontend/core/utils/toComponentClass/toComponentClass.models';
 
 export const toComponentClass = <TProps,>(

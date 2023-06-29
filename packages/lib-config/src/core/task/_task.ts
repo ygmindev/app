@@ -4,9 +4,9 @@ import { Container } from '#lib-backend/core/utils/Container/Container';
 import { fromGlobs } from '#lib-backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { packages } from '#lib-backend/file/utils/packages/packages';
-import type { _TaskConfigModel, TaskConfigModel } from '#lib-config/core/task/task.models';
+import { type _TaskConfigModel, type TaskConfigModel } from '#lib-config/core/task/task.models';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
-import type { TaskParamsModel } from '#tool-task/core/core.models';
+import { type TaskParamsModel } from '#tool-task/core/core.models';
 import { prompt } from '#tool-task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '#tool-task/core/utils/prompt/prompt.constants';
 import { TaskRegistry } from '#tool-task/core/utils/TaskRegistry/TaskRegistry';
@@ -19,13 +19,13 @@ export const _task = ({ packageConfig, taskExtension }: TaskConfigModel): _TaskC
       globs: [`*/src/**/*.${taskExtension}`],
       isAbsolute: true,
       root: fromPackages(),
-    }).map((path) => require(path).default as TaskParamsModel),
+    }).map((path) => (require(path) as { default: TaskParamsModel }).default),
 
     // Package tasks
     ...packages.reduce((result, target) => {
       const path = fromPackages(target, packageConfig);
       if (existsSync(path)) {
-        const tasks = require(path).default as Array<TaskParamsModel>;
+        const tasks = (require(path) as { default: Array<TaskParamsModel> }).default;
         return [...result, ...tasks.map((task) => ({ ...task, target }))];
       }
       return result;

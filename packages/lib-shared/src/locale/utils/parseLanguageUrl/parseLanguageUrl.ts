@@ -1,9 +1,9 @@
 import trim from 'lodash/trim';
 
 import { config } from '#lib-config/locale/internationalize/internationalize.base';
-import type {
-  ParseLanguageUrlModel,
-  ParseLanguageUrlParamsModel,
+import {
+  type ParseLanguageUrlModel,
+  type ParseLanguageUrlParamsModel,
 } from '#lib-shared/locale/utils/parseLanguageUrl/parseLanguageUrl.models';
 
 export const parseLanguageUrl = (params: ParseLanguageUrlParamsModel): ParseLanguageUrlModel => {

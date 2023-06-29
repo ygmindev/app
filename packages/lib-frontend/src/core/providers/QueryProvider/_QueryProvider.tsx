@@ -5,8 +5,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { persistQueryClient } from '@tanstack/react-query-persist-client';
 import { Suspense, useState } from 'react';
 
-import type { FCModel } from '#lib-frontend/core/core.models';
-import type { _QueryProviderPropsModel } from '#lib-frontend/core/providers/QueryProvider/_QueryProvider.models';
+import { type FCModel } from '#lib-frontend/core/core.models';
+import { type _QueryProviderPropsModel } from '#lib-frontend/core/providers/QueryProvider/_QueryProvider.models';
 import { isServer } from '#lib-platform/core/utils/isServer/isServer';
 export const _QueryProvider: FCModel<_QueryProviderPropsModel> = ({ children }) => {
   const [client] = useState(() => {

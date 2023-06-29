@@ -1,6 +1,6 @@
 import { ApolloServer } from '@apollo/server';
 import { handlers, startServerAndCreateLambdaHandler } from '@as-integrations/aws-lambda';
-import type { Handler } from 'aws-lambda';
+import { type Handler } from 'aws-lambda';
 
 import { createHandler } from '#lib-backend/serverless/utils/createHandler/createHandler';
 import { getContext } from '#lib-backend/serverless/utils/getContext/getContext';

@@ -4,9 +4,9 @@ import { LineGroup } from '#lib-frontend/core/components/LineGroup/LineGroup';
 import { LineItem } from '#lib-frontend/core/components/LineItem/LineItem';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import type { RouteGroupPropsModel } from '#lib-frontend/route/components/RouteGroup/RouteGroup.models';
+import { type RouteGroupPropsModel } from '#lib-frontend/route/components/RouteGroup/RouteGroup.models';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 

@@ -1,5 +1,5 @@
-import type {
-  _{{NAME}}(pascalCase)Model,
+import {
+type  _{{NAME}}(pascalCase)Model,
   _{{NAME}}(pascalCase)ParamsModel,
 } from '{{PATH}}/{{NAME}}/_{{NAME}}.models';
 

@@ -1,9 +1,9 @@
 import isString from 'lodash/isString';
-import type { ComponentType } from 'react';
+import { type ComponentType } from 'react';
 
-import type {
-  GetComponentDisplayNameModel,
-  GetComponentDisplayNameParamsModel,
+import {
+  type GetComponentDisplayNameModel,
+  type GetComponentDisplayNameParamsModel,
 } from '#lib-frontend/core/utils/getComponentDisplayName/getComponentDisplayName.models';
 import { uid } from '#lib-shared/core/utils/uid/uid';
 

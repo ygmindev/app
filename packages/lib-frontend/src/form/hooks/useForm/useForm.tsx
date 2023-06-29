@@ -3,14 +3,14 @@ import isPlainObject from 'lodash/isPlainObject';
 import reduce from 'lodash/reduce';
 
 import { useErrorContext } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext';
-import type { FormErrorModel, FormValidatorsModel } from '#lib-frontend/form/form.models';
+import { type FormErrorModel, type FormValidatorsModel } from '#lib-frontend/form/form.models';
 import { _useForm } from '#lib-frontend/form/hooks/useForm/_useForm';
-import type {
-  UseFormModel,
-  UseFormParamsModel,
+import {
+  type UseFormModel,
+  type UseFormParamsModel,
 } from '#lib-frontend/form/hooks/useForm/useForm.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import type { TranslatableTextModel } from '#lib-frontend/locale/locale.models';
+import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import { merge } from '#lib-shared/core/utils/merge/merge';

@@ -1,5 +1,5 @@
 import { Route } from '#lib-frontend/route/components/Route/Route';
-import type { RoutePropsModel } from '#lib-frontend/route/components/Route/Route.models';
+import { type RoutePropsModel } from '#lib-frontend/route/components/Route/Route.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

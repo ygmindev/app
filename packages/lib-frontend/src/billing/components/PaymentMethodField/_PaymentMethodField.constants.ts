@@ -1,6 +1,6 @@
-import type { BaseStripeElementsOptions } from '@stripe/stripe-js';
+import { type BaseStripeElementsOptions } from '@stripe/stripe-js';
 
-import type { UseThemeModel } from '#lib-frontend/style/hooks/useTheme/useTheme.models';
+import { type UseThemeModel } from '#lib-frontend/style/hooks/useTheme/useTheme.models';
 import { THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
 
 export const STRIPE_ELEMENTS_STYLE: (theme: UseThemeModel) => BaseStripeElementsOptions = (

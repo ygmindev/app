@@ -1,8 +1,8 @@
-import type { UserConfig } from 'vite';
+import { type UserConfig } from 'vite';
 
-import type { ConfigDynamicModel } from '#lib-config/core/core.models';
-import type { _BabelConfigModel } from '#lib-config/node/babel/babel.models';
-import type { PlatformModel } from '#lib-platform/core/core.models';
+import { type ConfigDynamicModel } from '#lib-config/core/core.models';
+import { type _BabelConfigModel } from '#lib-config/node/babel/babel.models';
+import { type PlatformModel } from '#lib-platform/core/core.models';
 
 export type BundleConfigModel = ConfigDynamicModel<{
   aliases?: Record<string, string>;

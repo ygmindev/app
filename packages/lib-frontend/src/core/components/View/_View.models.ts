@@ -1,12 +1,12 @@
-import type { ScrollView } from 'react-native';
+import { type ScrollView } from 'react-native';
 
-import type {
-  ChildrenPropsModel,
-  MeasureModel,
-  PositionModel,
+import {
+  type ChildrenPropsModel,
+  type MeasureModel,
+  type PositionModel,
 } from '#lib-frontend/core/core.models';
-import type { StylePropsModel, ViewStyleModel } from '#lib-frontend/style/style.models';
-import type { CallableModel, CallablePromiseModel } from '#lib-shared/core/core.models';
+import { type StylePropsModel, type ViewStyleModel } from '#lib-frontend/style/style.models';
+import { type CallableModel, type CallablePromiseModel } from '#lib-shared/core/core.models';
 
 export type _ViewPropsModel = {
   isFocusable?: boolean;

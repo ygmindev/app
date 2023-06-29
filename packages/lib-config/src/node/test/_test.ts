@@ -8,9 +8,9 @@ import { pathsToModuleNameMapper } from 'ts-jest';
 import { fromConfig } from '#lib-backend/file/utils/fromConfig/fromConfig';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
-import type { _TestConfigModel, TestConfigModel } from '#lib-config/node/test/test.models';
+import { type _TestConfigModel, type TestConfigModel } from '#lib-config/node/test/test.models';
 import { PLATFORM } from '#lib-platform/core/core.constants';
-import type { ReturnTypeModel } from '#lib-shared/core/core.models';
+import { type ReturnTypeModel } from '#lib-shared/core/core.models';
 
 import { compilerOptions } from '../../../../../.build/tsconfig.json';
 

@@ -6,7 +6,7 @@ import { join } from 'path';
 
 import { writeFile } from '#lib-backend/file/utils/writeFile/writeFile';
 import { config } from '#lib-config/core/file/file';
-import type { CopyParamsModel } from '#tool-task/file/utils/copy/copy.models';
+import { type CopyParamsModel } from '#tool-task/file/utils/copy/copy.models';
 
 export const copy = async ({
   excludes = config.excludePatterns,

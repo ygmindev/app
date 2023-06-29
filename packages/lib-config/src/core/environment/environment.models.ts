@@ -55,4 +55,5 @@ export type EnvironmentConfigModel = {
   SERVER_TWILIO_SID: string;
   SERVER_TWILIO_TOKEN: string;
   TEST_MATCH?: string;
+  __DEV__: BooleanStringModel;
 };

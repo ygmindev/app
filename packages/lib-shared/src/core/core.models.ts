@@ -1,14 +1,14 @@
-import type {
-  Constructor,
-  Get,
-  Merge,
-  OptionalKeysOf,
-  PartialDeep,
-  Primitive,
-  RequiredKeysOf,
-  TupleToUnion,
-  UnionToIntersection,
-  ValueOf,
+import {
+  type Constructor,
+  type Get,
+  type Merge,
+  type OptionalKeysOf,
+  type PartialDeep,
+  type Primitive,
+  type RequiredKeysOf,
+  type TupleToUnion,
+  type UnionToIntersection,
+  type ValueOf,
 } from 'type-fest';
 
 import { type BOOLEAN_STRING } from '#lib-shared/core/core.constants';

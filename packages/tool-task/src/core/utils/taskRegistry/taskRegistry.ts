@@ -6,16 +6,16 @@ import reduce from 'lodash/reduce';
 import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
-import type { CallablePromiseModel } from '#lib-shared/core/core.models';
+import { type CallablePromiseModel } from '#lib-shared/core/core.models';
 import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/DuplicateError';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { sequence } from '#lib-shared/core/utils/sequence/sequence';
 import { setEnvironment } from '#lib-shared/environment/utils/setEnvironment/setEnvironment';
 import { error, info, warn } from '#lib-shared/logging/utils/logger/logger';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
-import type { TaskParamsModel, TaskResultModel } from '#tool-task/core/core.models';
+import { type TaskParamsModel, type TaskResultModel } from '#tool-task/core/core.models';
 import { _TaskRegistry } from '#tool-task/core/utils/TaskRegistry/_TaskRegistry';
-import type { TaskRegistryModel } from '#tool-task/core/utils/TaskRegistry/TaskRegistry.models';
+import { type TaskRegistryModel } from '#tool-task/core/utils/TaskRegistry/TaskRegistry.models';
 
 @withContainer()
 export class TaskRegistry extends _TaskRegistry implements TaskRegistryModel {
@@ -64,9 +64,8 @@ export class TaskRegistry extends _TaskRegistry implements TaskRegistryModel {
         onAfterF &&
           ['exit', 'SIGINT', 'SIGUSR1', 'SIGUSR2', 'uncaughtException', 'SIGTERM'].forEach(
             (event) =>
-              process.on(event, async () => {
-                onAfterF && (await onAfterF());
-                process.exit();
+              process.on(event, () => {
+                onAfterF && onAfterF()?.then(() => process.exit());
               }),
           );
 

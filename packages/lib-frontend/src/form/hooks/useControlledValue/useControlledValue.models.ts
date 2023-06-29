@@ -1,4 +1,4 @@
-import type { ValuePropsModel } from '#lib-frontend/core/core.models';
+import { type ValuePropsModel } from '#lib-frontend/core/core.models';
 
 export type UseControlledValueParamsModel<TType extends string = string> = ValuePropsModel<TType>;
 

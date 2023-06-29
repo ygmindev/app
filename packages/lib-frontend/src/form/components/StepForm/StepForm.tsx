@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { cloneElement, useMemo, useRef, useState } from 'react';
 
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
@@ -6,17 +6,17 @@ import { Slides } from '#lib-frontend/animation/components/Slides/Slides';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { Portal } from '#lib-frontend/core/components/Portal/Portal';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import type { WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
+import { type WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import type { SFCPropsModel } from '#lib-frontend/core/core.models';
+import { type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
-import type { StepFormPropsModel } from '#lib-frontend/form/components/StepForm/StepForm.models';
+import { type StepFormPropsModel } from '#lib-frontend/form/components/StepForm/StepForm.models';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import type { IntersectionModel, PartialModel } from '#lib-shared/core/core.models';
+import { type IntersectionModel, type PartialModel } from '#lib-shared/core/core.models';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends Array<unknown>>({

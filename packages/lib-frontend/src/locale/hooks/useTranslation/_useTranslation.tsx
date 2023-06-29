@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next';
 
 import { config } from '#lib-config/locale/internationalize/internationalize.base';
-import type {
-  _UseTranslationModel,
-  _UseTranslationParamsModel,
+import {
+  type _UseTranslationModel,
+  type _UseTranslationParamsModel,
 } from '#lib-frontend/locale/hooks/useTranslation/_useTranslation.models';
 
 export const _useTranslation = (ns: _UseTranslationParamsModel = []): _UseTranslationModel => {

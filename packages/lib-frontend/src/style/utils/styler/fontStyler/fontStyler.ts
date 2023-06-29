@@ -1,13 +1,13 @@
 import isNumber from 'lodash/isNumber';
 
 import { THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
-import type { TextStyleModel } from '#lib-frontend/style/style.models';
+import { type TextStyleModel } from '#lib-frontend/style/style.models';
 import {
   FONT_FAMILY,
   FONT_TYPE,
 } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import type { FontStylerParamsModel } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.models';
-import type { StylerModel } from '#lib-frontend/style/utils/styler/styler.models';
+import { type FontStylerParamsModel } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.models';
+import { type StylerModel } from '#lib-frontend/style/utils/styler/styler.models';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 
 export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (

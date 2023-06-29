@@ -3,12 +3,12 @@ import { useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { useIsMobile } from '#lib-frontend/core/hooks/useIsMobile/useIsMobile';
-import type {
-  UseStylesModel,
-  UseStylesParamsModel,
+import {
+  type UseStylesModel,
+  type UseStylesParamsModel,
 } from '#lib-frontend/style/hooks/useStyles/useStyles.models';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import type { StyleModel, ViewStyleModel } from '#lib-frontend/style/style.models';
+import { type StyleModel, type ViewStyleModel } from '#lib-frontend/style/style.models';
 
 export const useStyles = <TProps, TStyle extends StyleModel = ViewStyleModel>({
   props,

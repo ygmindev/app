@@ -3,7 +3,7 @@ import map from 'lodash/map';
 import sortBy from 'lodash/sortBy';
 import { dirname } from 'path';
 import { withCustomConfig } from 'react-docgen-typescript';
-import type { LanguageService, Program } from 'typescript';
+import { type LanguageService, type Program } from 'typescript';
 import {
   createDocumentRegistry,
   createLanguageService,
@@ -15,9 +15,9 @@ import {
 } from 'typescript';
 
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
-import type {
-  _DocgenModel,
-  _DocgenParamsModel,
+import {
+  type _DocgenModel,
+  type _DocgenParamsModel,
 } from '#lib-library/docgen/utils/docgen/_docgen.models';
 
 const fileCache = new Map();

@@ -1,4 +1,4 @@
-import type { CallableArgsModel } from '#lib-shared/core/core.models';
+import { type CallableArgsModel } from '#lib-shared/core/core.models';
 
 export type LogModel = CallableArgsModel<void, Array<unknown>>;
 

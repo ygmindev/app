@@ -5,8 +5,8 @@ import { User } from '#lib-backend/user/resources/User/User';
 import { UserService } from '#lib-backend/user/resources/User/UserService/UserService';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
-import type { UserFormModel, UserModel } from '#lib-shared/user/resources/User/User.models';
-import type { UserServiceModel } from '#lib-shared/user/resources/User/UserService/UserService.models';
+import { type UserFormModel, type UserModel } from '#lib-shared/user/resources/User/User.models';
+import { type UserServiceModel } from '#lib-shared/user/resources/User/UserService/UserService.models';
 
 @withContainer()
 @withResolver({ Resource: User })

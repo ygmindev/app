@@ -1,3 +1,3 @@
-import type { EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export type EmbeddedResourceModel = EntityResourceModel;

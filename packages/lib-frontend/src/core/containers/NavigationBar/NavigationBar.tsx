@@ -1,6 +1,6 @@
 import map from 'lodash/map';
 import toString from 'lodash/toString';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { useMemo } from 'react';
 
 import { Accordion } from '#lib-frontend/core/components/Accordion/Accordion';
@@ -9,9 +9,9 @@ import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { NAVIGATION_BAR_WIDTH } from '#lib-frontend/core/containers/NavigationBar/NavigationBar.constants';
-import type { NavigationBarPropsModel } from '#lib-frontend/core/containers/NavigationBar/NavigationBar.models';
+import { type NavigationBarPropsModel } from '#lib-frontend/core/containers/NavigationBar/NavigationBar.models';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import type { SFCPropsModel } from '#lib-frontend/core/core.models';
+import { type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { useIsMobile } from '#lib-frontend/core/hooks/useIsMobile/useIsMobile';
 import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';

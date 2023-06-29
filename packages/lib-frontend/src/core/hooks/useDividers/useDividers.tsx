@@ -1,9 +1,9 @@
 import { Children, Fragment, useMemo } from 'react';
 
 import { Divider } from '#lib-frontend/core/components/Divider/Divider';
-import type {
-  UseDividersModel,
-  UseDividersParamsModel,
+import {
+  type UseDividersModel,
+  type UseDividersParamsModel,
 } from '#lib-frontend/core/hooks/useDividers/useDividers.models';
 import { uid } from '#lib-shared/core/utils/uid/uid';
 

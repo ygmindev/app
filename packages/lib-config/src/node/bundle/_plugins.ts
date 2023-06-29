@@ -1,13 +1,13 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
-import type { Plugin } from 'esbuild';
+import { type Plugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
 import { filelocPlugin } from 'esbuild-plugin-fileloc';
 
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
-import type { BundleConfigModel } from '#lib-config/node/bundle/bundle.models';
+import { type BundleConfigModel } from '#lib-config/node/bundle/bundle.models';
 import { PLATFORM } from '#lib-platform/core/core.constants';
-import type { ReturnTypeModel } from '#lib-shared/core/core.models';
+import { type CallableModel, type ReturnTypeModel } from '#lib-shared/core/core.models';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 
 export const _plugins = ({
@@ -20,5 +20,5 @@ export const _plugins = ({
     platform === PLATFORM.NODE &&
       nodeExternalsPlugin({ allowList: transpiles, packagePath: fromRoot('package.json') }),
 
-    platform === PLATFORM.NODE && filelocPlugin(),
+    platform === PLATFORM.NODE && (filelocPlugin as CallableModel<Plugin>)(),
   ]);

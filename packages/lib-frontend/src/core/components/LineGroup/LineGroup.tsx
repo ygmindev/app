@@ -1,11 +1,11 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { Children } from 'react';
 
-import type { LineGroupPropsModel } from '#lib-frontend/core/components/LineGroup/LineGroup.models';
+import { type LineGroupPropsModel } from '#lib-frontend/core/components/LineGroup/LineGroup.models';
 import { LineItem } from '#lib-frontend/core/components/LineItem/LineItem';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useDividers } from '#lib-frontend/core/hooks/useDividers/useDividers';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';

@@ -1,8 +1,8 @@
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { GENERATE_TEMPLATE_CASING_OPTIONS } from '#tool-generate/tasks/generateTemplate/generateTemplate.constants';
-import type { GenerateTemplateParamsModel } from '#tool-generate/tasks/generateTemplate/generateTemplate.models';
+import { type GenerateTemplateParamsModel } from '#tool-generate/tasks/generateTemplate/generateTemplate.models';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
-import type { TaskParamsModel } from '#tool-task/core/core.models';
+import { type TaskParamsModel } from '#tool-task/core/core.models';
 import { prompt } from '#tool-task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '#tool-task/core/utils/prompt/prompt.constants';
 import { copy } from '#tool-task/file/utils/copy/copy';

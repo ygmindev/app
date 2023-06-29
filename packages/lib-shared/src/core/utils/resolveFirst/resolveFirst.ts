@@ -1,6 +1,6 @@
-import type {
-  ResolveFirstModel,
-  ResolveFirstParamsModel,
+import {
+  type ResolveFirstModel,
+  type ResolveFirstParamsModel,
 } from '#lib-shared/core/utils/resolveFirst/resolveFirst.models';
 
 export const resolveFirst = async <TType>(

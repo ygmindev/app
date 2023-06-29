@@ -1,5 +1,5 @@
 import { Pressable } from '#lib-frontend/core/components/Pressable/Pressable';
-import type { PressablePropsModel } from '#lib-frontend/core/components/Pressable/Pressable.models';
+import { type PressablePropsModel } from '#lib-frontend/core/components/Pressable/Pressable.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

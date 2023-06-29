@@ -1,19 +1,19 @@
 import { Elements, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import type { PaymentMethod, StripePaymentElementOptions } from '@stripe/stripe-js';
+import { type PaymentMethod, type StripePaymentElementOptions } from '@stripe/stripe-js';
 import { loadStripe } from '@stripe/stripe-js/pure';
 import get from 'lodash/get';
 import { forwardRef, useImperativeHandle } from 'react';
 
 import { STRIPE_ELEMENTS_STYLE } from '#lib-frontend/billing/components/PaymentMethodField/_PaymentMethodField.constants';
-import type { _PaymentMethodFieldPropsModel } from '#lib-frontend/billing/components/PaymentMethodField/_PaymentMethodField.models';
+import { type _PaymentMethodFieldPropsModel } from '#lib-frontend/billing/components/PaymentMethodField/_PaymentMethodField.models';
 import { REDIRECT } from '#lib-frontend/core/core.constants';
-import type { RSFCModel } from '#lib-frontend/core/core.models';
+import { type RSFCModel } from '#lib-frontend/core/core.models';
 import { useErrorContext } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext';
-import type { FormRefModel } from '#lib-frontend/form/form.models';
+import { type FormRefModel } from '#lib-frontend/form/form.models';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import type {
-  CardBrandModel,
-  CardFundingModel,
+import {
+  type CardBrandModel,
+  type CardFundingModel,
 } from '#lib-shared/billing/resources/Card/Card.models';
 import { PAYMENT_METHOD_TYPE } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/InvalidTypeError';

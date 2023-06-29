@@ -1,11 +1,13 @@
+import { type ReactElement } from 'react';
 import { AppRegistry } from 'react-native-web';
 
 import { INTERNATIONALIZE_CONFIG_STATIC } from '#lib-config/locale/internationalize/internationalize.constants';
-import type { FCModel } from '#lib-frontend/core/core.models';
-import type {
-  RenderAppModel,
-  RenderAppParamsModel,
+import { type FCModel } from '#lib-frontend/core/core.models';
+import {
+  type RenderAppModel,
+  type RenderAppParamsModel,
 } from '#lib-platform/core/utils/renderApp/renderApp.models';
+import { type CallableModel, type EmptyObjectModel } from '#lib-shared/core/core.models';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { ROUTE } from '#lib-shared/route/route.constants';
@@ -22,6 +24,13 @@ export const renderApp = ({ Root, children, context }: RenderAppParamsModel): Re
   );
   const App: FCModel = () => <Root context={contextF}>{children}</Root>;
   AppRegistry.registerComponent('App', () => App);
-  const { element, getStyleElement } = AppRegistry.getApplication('App', {});
+  const { element, getStyleElement } = (
+    AppRegistry as unknown as {
+      getApplication: (
+        name: string,
+        props: EmptyObjectModel,
+      ) => { element: ReactElement; getStyleElement: CallableModel<ReactElement> };
+    }
+  ).getApplication('App', {});
   return { element, getCss: getStyleElement };
 };

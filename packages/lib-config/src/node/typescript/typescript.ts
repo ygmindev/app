@@ -2,9 +2,9 @@ import { fromBuild } from '#lib-backend/file/utils/fromBuild/fromBuild';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { toRelative } from '#lib-backend/file/utils/toRelative/toRelative';
 import { _typescript } from '#lib-config/node/typescript/_typescript';
-import type {
-  _TypescriptConfigModel,
-  TypescriptConfigModel,
+import {
+  type _TypescriptConfigModel,
+  type TypescriptConfigModel,
 } from '#lib-config/node/typescript/typescript.models';
 
 export const config: TypescriptConfigModel = {

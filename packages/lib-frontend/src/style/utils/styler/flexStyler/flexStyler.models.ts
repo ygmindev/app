@@ -1,6 +1,6 @@
-import type {
-  FLEX_ALIGN,
-  FLEX_JUSTIFY,
+import {
+  type FLEX_ALIGN,
+  type FLEX_JUSTIFY,
 } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 
 type FlexAlignModel = `${FLEX_ALIGN}`;

@@ -1,5 +1,5 @@
-import type { CreateOptions } from 'ts-node';
-import type { TranspileOptions } from 'typescript';
+import { type CreateOptions } from 'ts-node';
+import { type TranspileOptions } from 'typescript';
 
 export type TypescriptConfigModel = {
   configFile: string;

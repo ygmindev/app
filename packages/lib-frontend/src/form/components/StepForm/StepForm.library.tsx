@@ -1,6 +1,6 @@
 import { StepForm } from '#lib-frontend/form/components/StepForm/StepForm';
-import type { StepFormPropsModel } from '#lib-frontend/form/components/StepForm/StepForm.models';
-import type { LibraryPropsModel } from '#lib-library/core/components/Library/Library.models';
+import { type StepFormPropsModel } from '#lib-frontend/form/components/StepForm/StepForm.models';
+import { type LibraryPropsModel } from '#lib-library/core/components/Library/Library.models';
 
 export const props: LibraryPropsModel<StepFormPropsModel> = {
   Component: StepForm,

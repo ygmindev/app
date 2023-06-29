@@ -3,8 +3,8 @@ import { useMemo } from 'react';
 
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import type { WrapperPropsModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type WrapperPropsModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { THEME_COLOR, THEME_ROLE } from '#lib-frontend/style/style.constants';
 import { FONT_ALIGN } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 

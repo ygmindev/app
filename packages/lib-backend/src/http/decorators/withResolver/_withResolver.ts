@@ -1,6 +1,6 @@
 import { Resolver } from 'type-graphql';
 
-import type { _WithResolverParamsModel } from '#lib-backend/http/decorators/withResolver/_withResolver.models';
+import { type _WithResolverParamsModel } from '#lib-backend/http/decorators/withResolver/_withResolver.models';
 
 export function _withResolver<TType>({
   Resource,

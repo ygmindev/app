@@ -1,8 +1,8 @@
 import { join } from 'path';
 
-import type {
-  FromRootModel,
-  FromRootParamsModel,
+import {
+  type FromRootModel,
+  type FromRootParamsModel,
 } from '#lib-backend/file/utils/fromRoot/fromRoot.models';
 import { getRoot } from '#lib-backend/file/utils/getRoot/getRoot';
 

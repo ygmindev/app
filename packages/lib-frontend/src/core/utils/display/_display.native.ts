@@ -1,7 +1,7 @@
-import type { EmitterSubscription } from 'react-native';
+import { type EmitterSubscription } from 'react-native';
 import { Dimensions } from 'react-native';
 
-import type { _DisplayModel } from '#lib-frontend/core/utils/display/_display.models';
+import { type _DisplayModel } from '#lib-frontend/core/utils/display/_display.models';
 
 const subscribers: Record<string, EmitterSubscription> = {};
 

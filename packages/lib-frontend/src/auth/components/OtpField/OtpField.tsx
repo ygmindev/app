@@ -2,12 +2,12 @@ import range from 'lodash/range';
 import { useState } from 'react';
 
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
-import type { OtpFieldPropsModel } from '#lib-frontend/auth/components/OtpField/OtpField.models';
+import { type OtpFieldPropsModel } from '#lib-frontend/auth/components/OtpField/OtpField.models';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { Tooltip } from '#lib-frontend/core/components/Tooltip/Tooltip';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { TextField } from '#lib-frontend/form/components/TextField/TextField';
 import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
 import { isTranslatableText } from '#lib-frontend/locale/utils/isTranslatableText/isTranslatableText';

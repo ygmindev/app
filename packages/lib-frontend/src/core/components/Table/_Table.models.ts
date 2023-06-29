@@ -1,6 +1,6 @@
-import type {
-  TableColumnModel,
-  TableSelectTypeModel,
+import {
+  type TableColumnModel,
+  type TableSelectTypeModel,
 } from '#lib-frontend/core/components/Table/Table.models';
 
 export type _TablePropsModel<TType> = {

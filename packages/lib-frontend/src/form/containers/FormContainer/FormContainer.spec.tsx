@@ -1,5 +1,5 @@
 import { FormContainer } from '#lib-frontend/form/containers/FormContainer/FormContainer';
-import type { FormContainerPropsModel } from '#lib-frontend/form/containers/FormContainer/FormContainer.models';
+import { type FormContainerPropsModel } from '#lib-frontend/form/containers/FormContainer/FormContainer.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

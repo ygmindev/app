@@ -1,4 +1,4 @@
-import type { CallablePromiseModel } from '#lib-shared/core/core.models';
+import { type CallablePromiseModel } from '#lib-shared/core/core.models';
 
 export type _WaitForExpectParamsModel = [callback: CallablePromiseModel, timeout?: number];
 

@@ -1,6 +1,6 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 
-import type { PositionModel } from '#lib-frontend/core/core.models';
+import { type PositionModel } from '#lib-frontend/core/core.models';
 
 export type _ScrollParamsModel = {
   element: ReactElement;

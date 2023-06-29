@@ -5,7 +5,7 @@ import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { config } from '#lib-config/platform/web/web';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
-import type { TaskParamsModel } from '#tool-task/core/core.models';
+import { type TaskParamsModel } from '#tool-task/core/core.models';
 import { command } from '#tool-task/core/utils/command/command';
 import { staticServer } from '#tool-task/platform/server/utils/staticServer/staticServer.task';
 

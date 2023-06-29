@@ -1,7 +1,7 @@
-import type { ComponentType } from 'react';
+import { type ComponentType } from 'react';
 import { lazy as _lazy } from 'react';
 
-import type { LazyParamsModel } from '#lib-frontend/core/utils/lazy/lazy.models';
+import { type LazyParamsModel } from '#lib-frontend/core/utils/lazy/lazy.models';
 
 export const lazy = <TType extends object, TName extends keyof TType & string>(
   loader: LazyParamsModel<TType>,

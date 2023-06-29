@@ -1,8 +1,8 @@
 import { globSync } from 'glob';
 
-import type {
-  _FromGlobsModel,
-  _FromGlobsParamsModel,
+import {
+  type _FromGlobsModel,
+  type _FromGlobsParamsModel,
 } from '#lib-backend/file/utils/fromGlobs/_fromGlobs.models';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 

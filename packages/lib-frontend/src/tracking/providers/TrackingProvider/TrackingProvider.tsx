@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useChange } from '#lib-frontend/core/hooks/useChange/useChange';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useTracking } from '#lib-frontend/tracking/hooks/useTracking/useTracking';
-import type { TrackingProviderPropsModel } from '#lib-frontend/tracking/providers/TrackingProvider/TrackingProvider.models';
+import { type TrackingProviderPropsModel } from '#lib-frontend/tracking/providers/TrackingProvider/TrackingProvider.models';
 import { isServer } from '#lib-platform/core/utils/isServer/isServer';
 
 export const TrackingProvider: SFCModel<TrackingProviderPropsModel> = ({ children }) => {
@@ -13,11 +13,11 @@ export const TrackingProvider: SFCModel<TrackingProviderPropsModel> = ({ childre
 
   useEffect(() => {
     if (!isServer) {
-      initialize(process.env.APP_AMPLITUDE_API_KEY);
+      void initialize(process.env.APP_AMPLITUDE_API_KEY);
     }
   }, [initialize]);
 
-  useChange(currentUser?._id, () => currentUser && identify(currentUser._id));
+  useChange(currentUser?._id, () => currentUser && void identify(currentUser._id));
 
   return <>{children}</>;
 };

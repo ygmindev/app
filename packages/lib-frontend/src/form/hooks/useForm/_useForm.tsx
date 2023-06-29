@@ -1,11 +1,11 @@
-import type { FormikErrors, FormikValues } from 'formik';
+import { type FormikErrors, type FormikValues } from 'formik';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 
-import type { FormErrorModel } from '#lib-frontend/form/form.models';
-import type {
-  _UseFormModel,
-  _UseFormParamsModel,
+import { type FormErrorModel } from '#lib-frontend/form/form.models';
+import {
+  type _UseFormModel,
+  type _UseFormParamsModel,
 } from '#lib-frontend/form/hooks/useForm/_useForm.models';
 
 export const _useForm = <TType = void, TResult = void>({

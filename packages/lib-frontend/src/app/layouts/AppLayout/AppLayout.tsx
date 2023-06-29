@@ -1,9 +1,9 @@
 import { AppHeader } from '#lib-frontend/app/containers/AppHeader/AppHeader';
-import type { AppLayoutPropsModel } from '#lib-frontend/app/layouts/AppLayout/AppLayout.models';
+import { type AppLayoutPropsModel } from '#lib-frontend/app/layouts/AppLayout/AppLayout.models';
 import { KeyboardContainer } from '#lib-frontend/core/components/KeyboardContainer/KeyboardContainer';
 import { PortalHost } from '#lib-frontend/core/components/PortalHost/PortalHost';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { Notifications } from '#lib-frontend/notification/containers/Notifications/Notifications';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_COLOR } from '#lib-frontend/style/style.constants';

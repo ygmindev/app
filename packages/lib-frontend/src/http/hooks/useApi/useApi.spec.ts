@@ -4,7 +4,7 @@ import nock from 'nock';
 import { useApi } from '#lib-frontend/http/hooks/useApi/useApi';
 import { renderHook } from '#lib-frontend/test/utils/renderHook/renderHook';
 import { uri } from '#lib-shared/http/utils/uri/uri';
-import type { UriParamsModel } from '#lib-shared/http/utils/uri/uri.models';
+import { type UriParamsModel } from '#lib-shared/http/utils/uri/uri.models';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ useApi });

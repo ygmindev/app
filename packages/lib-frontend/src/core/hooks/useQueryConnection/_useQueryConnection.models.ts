@@ -1,11 +1,11 @@
-import type {
-  _UseQueryModel,
-  _UseQueryOptionsModel,
+import {
+  type _UseQueryModel,
+  type _UseQueryOptionsModel,
 } from '#lib-frontend/core/hooks/useQuery/_useQuery.models';
-import type { QueryConnectionModel } from '#lib-frontend/core/hooks/useQueryConnection/useQueryConnection.models';
-import type { CallablePromiseModel } from '#lib-shared/core/core.models';
-import type { ConnectionModel } from '#lib-shared/resource/utils/Connection/Connection.models';
-import type { PaginationModel } from '#lib-shared/resource/utils/Pagination/Pagination.models';
+import { type QueryConnectionModel } from '#lib-frontend/core/hooks/useQueryConnection/useQueryConnection.models';
+import { type CallablePromiseModel } from '#lib-shared/core/core.models';
+import { type ConnectionModel } from '#lib-shared/resource/utils/Connection/Connection.models';
+import { type PaginationModel } from '#lib-shared/resource/utils/Pagination/Pagination.models';
 
 export type _UseQueryConnectionParamsModel<TType> = [
   id: string,

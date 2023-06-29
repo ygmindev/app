@@ -1,8 +1,8 @@
 import { join } from 'path';
 
-import type {
-  FromBuildModel,
-  FromBuildParamsModel,
+import {
+  type FromBuildModel,
+  type FromBuildParamsModel,
 } from '#lib-backend/file/utils/fromBuild/fromBuild.models';
 import { config } from '#lib-config/core/file/file';
 

@@ -1,7 +1,7 @@
-import type { ChipPropsModel } from '#lib-frontend/core/components/Chip/Chip.models';
+import { type ChipPropsModel } from '#lib-frontend/core/components/Chip/Chip.models';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import {
   THEME_COLOR,

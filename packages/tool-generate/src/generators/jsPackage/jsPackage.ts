@@ -6,7 +6,7 @@ import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages'
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { writeFile } from '#lib-backend/file/utils/writeFile/writeFile';
 import { sortKeys } from '#lib-shared/core/utils/sortKeys/sortKeys';
-import type { GeneratorParamsModel } from '#tool-generate/tasks/generate/generate.models';
+import { type GeneratorParamsModel } from '#tool-generate/tasks/generate/generate.models';
 import { prompt } from '#tool-task/core/utils/prompt/prompt';
 
 export const jsPackage: GeneratorParamsModel = {

@@ -1,7 +1,7 @@
-import type { RootStateModel } from '#lib-frontend/root/stores/rootStore.models';
-import type {
-  _UseStoreModel,
-  _UseStoreParamsModel,
+import { type RootStateModel } from '#lib-frontend/root/stores/rootStore.models';
+import {
+  type _UseStoreModel,
+  type _UseStoreParamsModel,
 } from '#lib-frontend/state/hooks/useStore/_useStore.models';
 
 export type UseStoreParamsModel<TValue> = _UseStoreParamsModel<RootStateModel, TValue>;

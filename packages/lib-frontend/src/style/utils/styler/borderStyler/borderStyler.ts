@@ -2,16 +2,16 @@ import isNumber from 'lodash/isNumber';
 import isPlainObject from 'lodash/isPlainObject';
 
 import { THEME_COLOR, THEME_ROLE } from '#lib-frontend/style/style.constants';
-import type { ThemeColorModel } from '#lib-frontend/style/style.models';
+import { type ThemeColorModel } from '#lib-frontend/style/style.models';
 import {
   BORDER_DIRECTION,
   BORDER_RADIUS_DIRECTION,
 } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.constants';
-import type {
-  BorderRadiusDirection,
-  BorderStylerParamsModel,
+import {
+  type BorderRadiusDirection,
+  type BorderStylerParamsModel,
 } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.models';
-import type { StylerModel } from '#lib-frontend/style/utils/styler/styler.models';
+import { type StylerModel } from '#lib-frontend/style/utils/styler/styler.models';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 
 export const borderStyler: StylerModel<BorderStylerParamsModel> = (

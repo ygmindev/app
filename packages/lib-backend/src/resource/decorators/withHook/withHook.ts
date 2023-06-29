@@ -1,7 +1,7 @@
 import { BeforeCreate } from '@mikro-orm/core';
 
 import { HOOK_TYPE } from '#lib-backend/resource/decorators/withHook/withHook.constants';
-import type { WithHookParamsModel } from '#lib-backend/resource/decorators/withHook/withHook.models';
+import { type WithHookParamsModel } from '#lib-backend/resource/decorators/withHook/withHook.models';
 import { InvalidArgumentError } from '#lib-shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 
 const getHook = ({ type }: WithHookParamsModel): PropertyDecorator => {

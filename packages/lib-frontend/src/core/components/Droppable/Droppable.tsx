@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
 import { Dropdown } from '#lib-frontend/core/components/Dropdown/Dropdown';
-import type { DroppablePropsModel } from '#lib-frontend/core/components/Droppable/Droppable.models';
+import { type DroppablePropsModel } from '#lib-frontend/core/components/Droppable/Droppable.models';
 import { View } from '#lib-frontend/core/components/View/View';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 
 export const Droppable: SFCModel<DroppablePropsModel> = ({
   anchor,

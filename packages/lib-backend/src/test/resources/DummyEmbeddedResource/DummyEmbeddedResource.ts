@@ -4,7 +4,7 @@ import { withField } from '#lib-backend/resource/decorators/withField/withField'
 import { EmbeddedResource } from '#lib-backend/resource/resources/EmbeddedResource/EmbeddedResource';
 import { FIELD_TYPE } from '#lib-shared/form/form.constants';
 import { DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.constants';
-import type { DummyEmbeddedResourceModel } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.models';
+import { type DummyEmbeddedResourceModel } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.models';
 
 @withEntity({ isEmbedded: true, isRepository: true, name: DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME })
 export class DummyEmbeddedResource extends EmbeddedResource implements DummyEmbeddedResourceModel {

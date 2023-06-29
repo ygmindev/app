@@ -1,6 +1,6 @@
-import type { DividerPropsModel } from '#lib-frontend/core/components/Divider/Divider.models';
+import { type DividerPropsModel } from '#lib-frontend/core/components/Divider/Divider.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import type { WrapperPropsModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
+import { type WrapperPropsModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
 import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { THEME_COLOR, THEME_SIZE } from '#lib-frontend/style/style.constants';

@@ -1,7 +1,7 @@
 import { _renderHook } from '#lib-frontend/test/utils/renderHook/_renderHook';
-import type {
-  RenderHookModel,
-  RenderParamsHookModel,
+import {
+  type RenderHookModel,
+  type RenderParamsHookModel,
 } from '#lib-frontend/test/utils/renderHook/renderHook.models';
 
 export const renderHook = <TResult,>(

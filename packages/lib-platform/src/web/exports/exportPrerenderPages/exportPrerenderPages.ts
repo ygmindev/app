@@ -1,12 +1,12 @@
 import trimEnd from 'lodash/trimEnd';
 
-import type { RouteModel } from '#lib-frontend/route/route.models';
+import { type RouteModel } from '#lib-frontend/route/route.models';
 import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
 import { _exportPrerenderPages } from '#lib-platform/web/exports/exportPrerenderPages/_exportPrerenderPages';
-import type { _ExportPrerenderPagesParamsModel } from '#lib-platform/web/exports/exportPrerenderPages/_exportPrerenderPages.models';
-import type {
-  ExportPrerenderPagesModel,
-  ExportPrerenderPagesParamsModel,
+import { type _ExportPrerenderPagesParamsModel } from '#lib-platform/web/exports/exportPrerenderPages/_exportPrerenderPages.models';
+import {
+  type ExportPrerenderPagesModel,
+  type ExportPrerenderPagesParamsModel,
 } from '#lib-platform/web/exports/exportPrerenderPages/exportPrerenderPages.models';
 
 const _getPrerenderPathnames = (

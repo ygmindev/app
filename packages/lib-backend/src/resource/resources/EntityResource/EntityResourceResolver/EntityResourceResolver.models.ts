@@ -1,6 +1,6 @@
-import type {
-  ResourceResolverModel,
-  ResourceResolverParamsModel,
+import {
+  type ResourceResolverModel,
+  type ResourceResolverParamsModel,
 } from '#lib-backend/resource/utils/Resource/ResourceResolver/ResourceResolver.models';
 
 export type EntityResourceResolverParamsModel<TType, TForm> = ResourceResolverParamsModel<

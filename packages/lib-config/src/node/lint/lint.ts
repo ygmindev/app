@@ -5,7 +5,7 @@ import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { packages } from '#lib-backend/file/utils/packages/packages';
 import { _lint } from '#lib-config/node/lint/_lint';
-import type { _LintConfigModel, LintConfigModel } from '#lib-config/node/lint/lint.models';
+import { type _LintConfigModel, type LintConfigModel } from '#lib-config/node/lint/lint.models';
 
 export const lintCommand = (fix?: boolean): string => {
   const configF = config();

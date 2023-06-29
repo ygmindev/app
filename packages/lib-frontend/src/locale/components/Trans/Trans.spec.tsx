@@ -1,6 +1,6 @@
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Trans as _Trans } from '#lib-frontend/locale/components/Trans/Trans';
-import type { TransPropsModel } from '#lib-frontend/locale/components/Trans/Trans.models';
+import { type TransPropsModel } from '#lib-frontend/locale/components/Trans/Trans.models';
 import { THEME_COLOR } from '#lib-frontend/style/style.constants';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { waitForExpect } from '#lib-frontend/test/utils/waitForExpect/waitForExpect';

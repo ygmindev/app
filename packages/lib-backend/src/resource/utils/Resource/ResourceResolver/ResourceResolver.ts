@@ -4,21 +4,21 @@ import { withContext } from '#lib-backend/http/decorators/withContext/withContex
 import { withResolver } from '#lib-backend/http/decorators/withResolver/withResolver';
 import { withInput } from '#lib-backend/resource/decorators/withInput/withInput';
 import { withOutput } from '#lib-backend/resource/decorators/withOutput/withOutput';
-import type {
-  ResourceResolverAuthorizerModel,
-  ResourceResolverModel,
-  ResourceResolverParamsModel,
+import {
+  type ResourceResolverAuthorizerModel,
+  type ResourceResolverModel,
+  type ResourceResolverParamsModel,
 } from '#lib-backend/resource/utils/Resource/ResourceResolver/ResourceResolver.models';
 import { UnauthorizedError } from '#lib-shared/auth/errors/UnauthorizedError/UnauthorizedError';
-import type { ClassModel, PrototypeModel } from '#lib-shared/core/core.models';
+import { type ClassModel, type PrototypeModel } from '#lib-shared/core/core.models';
 import { withCondition } from '#lib-shared/core/decorators/withCondition/withCondition';
 import { NotImplementedError } from '#lib-shared/core/errors/NotImplementedError/NotImplementedError';
 import { toPlainObject } from '#lib-shared/core/utils/toPlainObject/toPlainObject';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-import type { ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
-import { ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
-import { InputModel } from '#lib-shared/resource/utils/Input/Input.models';
-import type { OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
+import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
+import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
+import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
+import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 
 export const authorize = <
   TMethod extends ResourceMethodTypeModel,

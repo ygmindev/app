@@ -1,10 +1,10 @@
 import { Authorized } from 'type-graphql';
 
-import type { WithAccessParamsModel } from '#lib-backend/resource/decorators/withAccess/withAccess.models';
+import { type WithAccessParamsModel } from '#lib-backend/resource/decorators/withAccess/withAccess.models';
 import { ACCESS_LEVEL, ACCESS_ROLE } from '#lib-shared/auth/resources/Access/Access.constants';
-import type {
-  AccessLevelModel,
-  AccessRoleModel,
+import {
+  type AccessLevelModel,
+  type AccessRoleModel,
 } from '#lib-shared/auth/resources/Access/Access.models';
 import { withCondition } from '#lib-shared/core/decorators/withCondition/withCondition';
 

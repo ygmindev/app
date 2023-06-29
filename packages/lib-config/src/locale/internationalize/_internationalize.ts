@@ -1,11 +1,11 @@
-import type { i18n, InitOptions } from 'i18next';
+import { type i18n, type InitOptions } from 'i18next';
 import { createInstance } from 'i18next';
 
-import type {
-  _InternationalizeConfigModel,
-  InternationalizeConfigModel,
+import {
+  type _InternationalizeConfigModel,
+  type InternationalizeConfigModel,
 } from '#lib-config/locale/internationalize/internationalize.models';
-import type { ReturnTypeModel } from '#lib-shared/core/core.models';
+import { type ReturnTypeModel } from '#lib-shared/core/core.models';
 
 let instanceGlobal: i18n;
 
@@ -65,7 +65,7 @@ export const _internationalize = ({
 
   if (!instance.isInitialized) {
     modules?.forEach(instance.use);
-    instance.init(config);
+    void instance.init(config);
   }
 
   return instance;

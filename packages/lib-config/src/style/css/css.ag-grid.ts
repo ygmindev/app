@@ -1,4 +1,4 @@
-import type { CssConfigModel } from '#lib-config/style/css/css.models';
+import { type CssConfigModel } from '#lib-config/style/css/css.models';
 
 export const AG_GRID_THEME = 'ag-theme-material';
 

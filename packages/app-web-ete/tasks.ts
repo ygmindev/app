@@ -1,7 +1,7 @@
 import { BOOLEAN_STRING } from '#lib-shared/core/core.constants';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
-import type { TaskParamsModel } from '#tool-task/core/core.models';
+import { type TaskParamsModel } from '#tool-task/core/core.models';
 import { runCommands } from '#tool-task/core/utils/runCommands/runCommands';
 import { nodeTasks } from '#tool-task/node/utils/nodeTasks/nodeTasks';
 

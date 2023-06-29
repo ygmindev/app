@@ -1,6 +1,6 @@
-import type {
-  FromModulesModel,
-  FromModulesParamsModel,
+import {
+  type FromModulesModel,
+  type FromModulesParamsModel,
 } from '#lib-backend/file/utils/fromModules/fromModules.models';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 

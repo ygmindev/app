@@ -1,3 +1,3 @@
-import type { PagePropsModel } from '#lib-frontend/core/core.models';
+import { type PagePropsModel } from '#lib-frontend/core/core.models';
 
 export type AdminHomePagePropsModel = PagePropsModel;

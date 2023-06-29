@@ -5,12 +5,12 @@ import { Button } from '#lib-frontend/core/components/Button/Button';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { ERROR_MODE } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider.constants';
-import type {
-  ErrorContextModel,
-  ErrorProviderContextModel,
-  ErrorProviderPropsModel,
+import {
+  type ErrorContextModel,
+  type ErrorProviderContextModel,
+  type ErrorProviderPropsModel,
 } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';

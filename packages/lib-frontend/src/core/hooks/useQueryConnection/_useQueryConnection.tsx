@@ -1,13 +1,13 @@
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import isNumber from 'lodash/isNumber';
 
-import type {
-  _UseQueryConnectionModel,
-  _UseQueryConnectionParamsModel,
+import {
+  type _UseQueryConnectionModel,
+  type _UseQueryConnectionParamsModel,
 } from '#lib-frontend/core/hooks/useQueryConnection/_useQueryConnection.models';
 import { USE_QUERY_CONNECTION_LIMIT_DEFAULT } from '#lib-frontend/core/hooks/useQueryConnection/useQueryConnection.constants';
 import { debounce } from '#lib-shared/core/utils/debounce/debounce';
-import type { ConnectionModel } from '#lib-shared/resource/utils/Connection/Connection.models';
+import { type ConnectionModel } from '#lib-shared/resource/utils/Connection/Connection.models';
 import { type PaginationModel } from '#lib-shared/resource/utils/Pagination/Pagination.models';
 
 export const _useQueryConnection = <TType,>(

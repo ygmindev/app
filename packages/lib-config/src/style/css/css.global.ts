@@ -2,23 +2,23 @@ import FontAwesome from 'react-native-vector-icons/Fonts/FontAwesome.ttf';
 import Ionicons from 'react-native-vector-icons/Fonts/Ionicons.ttf';
 import MaterialIcons from 'react-native-vector-icons/Fonts/MaterialIcons.ttf';
 
-import type { CssConfigModel } from '#lib-config/style/css/css.models';
+import { type CssConfigModel } from '#lib-config/style/css/css.models';
 import { ROOT } from '#lib-frontend/root/root.constants';
 
 export const config: CssConfigModel = (theme) => `
   @font-face {
     font-family: 'Ionicons';
-    src: url(${Ionicons}) format("truetype");
+    src: url(${Ionicons as string}) format("truetype");
   }
 
   @font-face {
     font-family: 'FontAwesome';
-    src: url("${FontAwesome}") format("truetype");
+    src: url("${FontAwesome as string}") format("truetype");
   }
 
   @font-face {
     font-family: 'MaterialIcons';
-    src: url("${MaterialIcons}") format("truetype");
+    src: url("${MaterialIcons as string}") format("truetype");
   }
 
   html {

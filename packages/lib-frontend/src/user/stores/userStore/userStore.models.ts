@@ -1,9 +1,9 @@
-import type { ReducerModel } from '#lib-frontend/state/state.models';
-import type {
-  EntityResourceDataModel,
-  EntityResourcePartialModel,
+import { type ReducerModel } from '#lib-frontend/state/state.models';
+import {
+  type EntityResourceDataModel,
+  type EntityResourcePartialModel,
 } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
-import type { UserModel } from '#lib-shared/user/resources/User/User.models';
+import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 export type UserStateModel = {
   currentUser?: EntityResourcePartialModel<UserModel> | null;

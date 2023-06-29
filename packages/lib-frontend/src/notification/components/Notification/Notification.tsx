@@ -6,16 +6,16 @@ import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constan
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import type { WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
+import { type WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import {
   NOTIFICATION_DURATION,
   NOTIFICATION_WIDTH,
 } from '#lib-frontend/notification/components/Notification/Notification.constants';
-import type { NotificationPropsModel } from '#lib-frontend/notification/components/Notification/Notification.models';
+import { type NotificationPropsModel } from '#lib-frontend/notification/components/Notification/Notification.models';
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import {

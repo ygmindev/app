@@ -1,6 +1,6 @@
-import type {
-  StringifyModel,
-  StringifyParamsModel,
+import {
+  type StringifyModel,
+  type StringifyParamsModel,
 } from '#lib-shared/core/utils/stringify/stringify.models';
 
 export const stringify = (params?: StringifyParamsModel): StringifyModel =>

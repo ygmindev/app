@@ -1,17 +1,22 @@
 import isFunction from 'lodash/isFunction';
 
 import { fromConfig } from '#lib-backend/file/utils/fromConfig/fromConfig';
-import type {
-  ImportConfigModel,
-  ImportConfigParamsModel,
+import {
+  type ImportConfigModel,
+  type ImportConfigParamsModel,
 } from '#lib-config/core/utils/importConfig/importConfig.models';
-import type { ReturnTypeModel } from '#lib-shared/core/core.models';
+import {
+  type CallableModel,
+  type CallablePromiseModel,
+  type ReturnTypeModel,
+} from '#lib-shared/core/core.models';
 import { importFromEnv } from '#lib-shared/core/utils/importFromEnv/importFromEnv';
-import { isPromise } from '#lib-shared/core/utils/isPromise/isPromise';
 
-const loadConfig = async <TType>(params: unknown): Promise<ReturnTypeModel<TType>> => {
+const loadConfig = async <TType>(
+  params: TType | CallableModel<TType> | CallablePromiseModel<TType>,
+): Promise<ReturnTypeModel<TType>> => {
   const result = isFunction(params) ? params() : params;
-  return isPromise(result) ? await result : result;
+  return result as ReturnTypeModel<TType>;
 };
 
 export const importConfig = async <TParams, TResult = undefined>(

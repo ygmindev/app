@@ -1,5 +1,5 @@
-import type { CallablePromiseModel } from '#lib-shared/core/core.models';
-import type { TaskResultModel } from '#tool-task/core/core.models';
+import { type CallablePromiseModel } from '#lib-shared/core/core.models';
+import { type TaskResultModel } from '#tool-task/core/core.models';
 
 export type _TaskRegistryModel = {
   _register(name: string, task: CallablePromiseModel): void;

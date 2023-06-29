@@ -1,4 +1,4 @@
-import type { CipherCCMTypes } from 'crypto';
+import { type CipherCCMTypes } from 'crypto';
 import { createCipheriv, randomBytes, scryptSync } from 'crypto';
 import toNumber from 'lodash/toNumber';
 

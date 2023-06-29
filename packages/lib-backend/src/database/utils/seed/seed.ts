@@ -4,11 +4,11 @@ import { Container } from '#lib-backend/core/utils/Container/Container';
 import { DATABASE_TYPE } from '#lib-backend/database/database.constants';
 import { Database } from '#lib-backend/database/utils/Database/Database';
 import { SEED_DATA } from '#lib-backend/database/utils/seed/seed.constants';
-import type { SeedParamsModel } from '#lib-backend/database/utils/seed/seed.models';
+import { type SeedParamsModel } from '#lib-backend/database/utils/seed/seed.models';
 import { fromGlobs } from '#lib-backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { type CallablePromiseModel } from '#lib-shared/core/core.models';
-import type { EntityResourceServiceModel } from '#lib-shared/resource/resources/EntityResource/EntityResourceService/EntityResourceService.models';
+import { type EntityResourceServiceModel } from '#lib-shared/resource/resources/EntityResource/EntityResourceService/EntityResourceService.models';
 
 export const seed = async ({ names }: SeedParamsModel = {}): Promise<void> => {
   const services = fromGlobs({

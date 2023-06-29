@@ -1,13 +1,13 @@
 import { forwardRef } from 'react';
 
-import type { AnimatableRefModel } from '#lib-frontend/animation/animation.models';
+import { type AnimatableRefModel } from '#lib-frontend/animation/animation.models';
 import { animatable } from '#lib-frontend/animation/utils/animatable/animatable';
 import { _Icon } from '#lib-frontend/core/components/Icon/_Icon';
 import { ICON_FONT_SIZE_OFFSET } from '#lib-frontend/core/components/Icon/Icon.constants';
-import type { IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
-import type { RSFCModel } from '#lib-frontend/core/core.models';
+import { type IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
+import { type RSFCModel } from '#lib-frontend/core/core.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import type { TextStyleModel } from '#lib-frontend/style/style.models';
+import { type TextStyleModel } from '#lib-frontend/style/style.models';
 import { textStyler } from '#lib-frontend/style/utils/styler/textStyler/textStyler';
 import { variableName } from '#lib-shared/core/utils/variableName/variableName';
 

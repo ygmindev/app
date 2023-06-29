@@ -1,4 +1,4 @@
-import type { InferModel, PartialModel } from '#lib-shared/core/core.models';
+import { type InferModel, type PartialModel } from '#lib-shared/core/core.models';
 
 export type FilterConditionModel<TType> = {
   $eq?: TType;

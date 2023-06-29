@@ -1,5 +1,5 @@
 import { LOCATION, TIMEZONE } from '#lib-frontend/locale/locale.constants';
-import type { RouteGroupModel } from '#lib-frontend/route/components/RouteGroup/RouteGroup.models';
+import { type RouteGroupModel } from '#lib-frontend/route/components/RouteGroup/RouteGroup.models';
 import { APPEARANCE } from '#lib-frontend/settings/settings.constants';
 import { withId } from '#lib-shared/core/decorators/withId/withId';
 import { BRIGHTNESS } from '#lib-shared/style/style.constants';

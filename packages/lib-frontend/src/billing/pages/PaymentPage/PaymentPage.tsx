@@ -5,11 +5,11 @@ import { SkeletonGroup } from '#lib-frontend/animation/components/SkeletonGroup/
 import { PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants';
 import { PaymentMethodItem } from '#lib-frontend/billing/components/PaymentMethodItem/PaymentMethodItem';
 import { usePaymentMethodResource } from '#lib-frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
-import type { PaymentPagePropsModel } from '#lib-frontend/billing/pages/PaymentPage/PaymentPage.models';
+import { type PaymentPagePropsModel } from '#lib-frontend/billing/pages/PaymentPage/PaymentPage.models';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { LineGroup } from '#lib-frontend/core/components/LineGroup/LineGroup';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useQuery } from '#lib-frontend/core/hooks/useQuery/useQuery';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { FORM } from '#lib-frontend/form/form.constants';

@@ -1,6 +1,10 @@
-import type { InferModel, PartialDeepModel, PartialModel } from '#lib-shared/core/core.models';
-import type { EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
-import type { FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
+import {
+  type InferModel,
+  type PartialDeepModel,
+  type PartialModel,
+} from '#lib-shared/core/core.models';
+import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
 export type UnsetModel<TType> = {
   [TKey in keyof EntityResourceDataModel<TType>]?: true | UnsetModel<TType[TKey]>;

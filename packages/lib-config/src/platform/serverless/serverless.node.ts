@@ -1,8 +1,8 @@
 import { _serverless } from '#lib-config/platform/serverless/_serverless';
 import { config as configBase } from '#lib-config/platform/serverless/serverless.base';
-import type {
-  _ServerlessConfigModel,
-  ServerlessConfigModel,
+import {
+  type _ServerlessConfigModel,
+  type ServerlessConfigModel,
 } from '#lib-config/platform/serverless/serverless.models';
 import { PLATFORM } from '#lib-platform/core/core.constants';
 import { merge } from '#lib-shared/core/utils/merge/merge';

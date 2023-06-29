@@ -1,15 +1,15 @@
 import reduce from 'lodash/reduce';
-import type { ReactElement, ReactNode } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 import { Children, cloneElement, createElement, forwardRef, isValidElement, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { AnimatableView } from '#lib-frontend/animation/components/AnimatableView/AnimatableView';
 import { View } from '#lib-frontend/core/components/View/View';
-import type {
-  WrapperPropsModel,
-  WrapperRefModel,
+import {
+  type WrapperPropsModel,
+  type WrapperRefModel,
 } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
-import type { ChildrenPropsModel, RSFCModel } from '#lib-frontend/core/core.models';
+import { type ChildrenPropsModel, type RSFCModel } from '#lib-frontend/core/core.models';
 import { isFragment } from '#lib-frontend/core/utils/isFragment/isFragment';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';

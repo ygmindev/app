@@ -1,6 +1,6 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 
-import type { ChildrenPropsModel, DimensionModel } from '#lib-frontend/core/core.models';
+import { type ChildrenPropsModel, type DimensionModel } from '#lib-frontend/core/core.models';
 
 export type _SkeletonPropsModel = {
   backgroundColor: string;

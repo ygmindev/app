@@ -1,24 +1,24 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { useCallback, useRef } from 'react';
 
 import { Skeleton } from '#lib-frontend/animation/components/Skeleton/Skeleton';
 import { PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants';
 import { PAYMENT_METHOD_ITEM_ICON_WIDTH } from '#lib-frontend/billing/components/PaymentMethodItem/PaymentMethodItem.constants';
-import type { PaymentMethodItemPropsModel } from '#lib-frontend/billing/components/PaymentMethodItem/PaymentMethodItem.models';
+import { type PaymentMethodItemPropsModel } from '#lib-frontend/billing/components/PaymentMethodItem/PaymentMethodItem.models';
 import { useBankResource } from '#lib-frontend/billing/hooks/useBankResource/useBankResource';
 import { useCardResource } from '#lib-frontend/billing/hooks/useCardResource/useCardResource';
-import type { PaymentMethodFormPageParamsModel } from '#lib-frontend/billing/pages/PaymentMethodFormPage/PaymentMethodFormPage.models';
+import { type PaymentMethodFormPageParamsModel } from '#lib-frontend/billing/pages/PaymentMethodFormPage/PaymentMethodFormPage.models';
 import { getPaymentMethodTitle } from '#lib-frontend/billing/utils/getPaymentMethodTitle/getPaymentMethodTitle';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { Image } from '#lib-frontend/core/components/Image/Image';
 import { LineItem } from '#lib-frontend/core/components/LineItem/LineItem';
 import { Menu } from '#lib-frontend/core/components/Menu/Menu';
-import type { MenuRefModel } from '#lib-frontend/core/components/Menu/Menu.models';
+import { type MenuRefModel } from '#lib-frontend/core/components/Menu/Menu.models';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { FORM } from '#lib-frontend/form/form.constants';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
@@ -28,7 +28,7 @@ import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyle
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { useUserResource } from '#lib-frontend/user/hooks/useUserResource/useUserResource';
 import { CARD_BRAND } from '#lib-shared/billing/resources/Card/Card.constants';
-import type { CardModel } from '#lib-shared/billing/resources/Card/Card.models';
+import { type CardModel } from '#lib-shared/billing/resources/Card/Card.models';
 import { PAYMENT_METHOD_TYPE } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 

@@ -1,6 +1,6 @@
-import type {
-  GetPaymentMethodTitleModel,
-  GetPaymentMethodTitleParamsModel,
+import {
+  type GetPaymentMethodTitleModel,
+  type GetPaymentMethodTitleParamsModel,
 } from '#lib-frontend/billing/utils/getPaymentMethodTitle/getPaymentMethodTitle.models';
 import { PAYMENT_METHOD_TYPE } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 

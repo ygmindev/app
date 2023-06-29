@@ -1,11 +1,11 @@
 import find from 'lodash/find';
 import { useMemo } from 'react';
 
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { SelectField } from '#lib-frontend/form/components/SelectField/SelectField';
 import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
-import type { CountryFieldPropsModel } from '#lib-frontend/locale/components/CountryField/CountryField.models';
+import { type CountryFieldPropsModel } from '#lib-frontend/locale/components/CountryField/CountryField.models';
 import { useCountries } from '#lib-frontend/locale/hooks/useCountries/useCountries';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { currentCountry } from '#lib-frontend/locale/utils/currentCountry/currentCountry';

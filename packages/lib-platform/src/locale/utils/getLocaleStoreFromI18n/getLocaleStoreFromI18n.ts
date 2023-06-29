@@ -1,6 +1,6 @@
-import type {
-  GetLocaleStoreFromI18nModel,
-  GetLocaleStoreFromI18nParamsModel,
+import {
+  type GetLocaleStoreFromI18nModel,
+  type GetLocaleStoreFromI18nParamsModel,
 } from 'packages/lib-platform/src/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n.models';
 
 export const getLocaleStoreFromI18n = ({

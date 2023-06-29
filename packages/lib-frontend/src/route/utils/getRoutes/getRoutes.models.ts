@@ -1,4 +1,4 @@
-import type { RouteModel } from '#lib-frontend/route/route.models';
+import { type RouteModel } from '#lib-frontend/route/route.models';
 
 export type GetRoutesParamsModel = {
   appRoutes?: Array<RouteModel>;

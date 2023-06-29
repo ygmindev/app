@@ -3,7 +3,7 @@ import every from 'lodash/every';
 import { setEnvironment } from '#lib-shared/environment/utils/setEnvironment/setEnvironment';
 import { info } from '#lib-shared/logging/utils/logger/logger';
 import { command as commandF } from '#tool-task/core/utils/command/command';
-import type { RunCommandsParamsModel } from '#tool-task/core/utils/runCommands/runCommands.models';
+import { type RunCommandsParamsModel } from '#tool-task/core/utils/runCommands/runCommands.models';
 
 export const runCommands = async ({ commands }: RunCommandsParamsModel): Promise<boolean> => {
   const results = await Promise.all(

@@ -1,4 +1,4 @@
-import type { CallableArgsModel } from '#lib-shared/core/core.models';
+import { type CallableArgsModel } from '#lib-shared/core/core.models';
 
 type _WithConditionResultModel =
   | ClassDecorator

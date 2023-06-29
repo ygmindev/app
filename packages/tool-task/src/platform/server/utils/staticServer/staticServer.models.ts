@@ -1,4 +1,4 @@
-import type { TaskResultModel } from '#tool-task/core/core.models';
+import { type TaskResultModel } from '#tool-task/core/core.models';
 
 export type StaticServerParamsModel = {
   isOpen?: boolean;

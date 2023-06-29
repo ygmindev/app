@@ -1,9 +1,9 @@
 import { relative } from 'path';
 
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
-import type {
-  ToRelativeModel,
-  ToRelativeParamsModel,
+import {
+  type ToRelativeModel,
+  type ToRelativeParamsModel,
 } from '#lib-backend/file/utils/toRelative/toRelative.models';
 
 export const toRelative = ({ from = fromWorking(), to }: ToRelativeParamsModel): ToRelativeModel =>

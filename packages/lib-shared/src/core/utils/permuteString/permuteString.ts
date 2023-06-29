@@ -1,6 +1,6 @@
-import type {
-  PermuteStringModel,
-  PermuteStringParamsModel,
+import {
+  type PermuteStringModel,
+  type PermuteStringParamsModel,
 } from '#lib-shared/core/utils/permuteString/permuteString.models';
 
 export const permuteString = (...[x, y]: PermuteStringParamsModel): PermuteStringModel =>

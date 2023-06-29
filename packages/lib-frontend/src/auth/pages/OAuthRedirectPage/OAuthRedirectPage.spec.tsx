@@ -1,5 +1,5 @@
 import { OAuthRedirectPage } from '#lib-frontend/auth/pages/OAuthRedirectPage/OAuthRedirectPage';
-import type { OAuthRedirectPagePropsModel } from '#lib-frontend/auth/pages/OAuthRedirectPage/OAuthRedirectPage.models';
+import { type OAuthRedirectPagePropsModel } from '#lib-frontend/auth/pages/OAuthRedirectPage/OAuthRedirectPage.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

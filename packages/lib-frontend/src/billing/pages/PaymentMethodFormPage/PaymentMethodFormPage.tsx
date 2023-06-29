@@ -1,10 +1,10 @@
 import { PAYMENT } from '#lib-frontend/billing/billing.constants';
 import { PaymentMethodForm } from '#lib-frontend/billing/containers/PaymentMethodForm/PaymentMethodForm';
-import type {
-  PaymentMethodFormPageParamsModel,
-  PaymentMethodFormPagePropsModel,
+import {
+  type PaymentMethodFormPageParamsModel,
+  type PaymentMethodFormPagePropsModel,
 } from '#lib-frontend/billing/pages/PaymentMethodFormPage/PaymentMethodFormPage.models';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { CenterLayout } from '#lib-frontend/core/layouts/CenterLayout/CenterLayout';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';

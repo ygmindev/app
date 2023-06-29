@@ -1,4 +1,4 @@
-import type { CallableModel, CallablePromiseModel } from '#lib-shared/core/core.models';
+import { type CallableModel, type CallablePromiseModel } from '#lib-shared/core/core.models';
 
 export type UseAsyncParamsModel = [
   params: (isMounted: CallableModel<boolean>) => Promise<void>,

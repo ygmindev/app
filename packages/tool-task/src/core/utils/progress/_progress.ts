@@ -1,8 +1,8 @@
 import { SingleBar } from 'cli-progress';
 
-import type {
-  _ProgressModel,
-  _ProgressParamsModel,
+import {
+  type _ProgressModel,
+  type _ProgressParamsModel,
 } from '#tool-task/core/utils/progress/_progress.models';
 
 export const _progress = ({ name }: _ProgressParamsModel): _ProgressModel => {

@@ -2,11 +2,11 @@ import isString from 'lodash/isString';
 import reduce from 'lodash/reduce';
 
 import { Container } from '#lib-backend/core/utils/Container/Container';
-import type { CallablePromiseModel } from '#lib-shared/core/core.models';
+import { type CallablePromiseModel } from '#lib-shared/core/core.models';
 import { sequence } from '#lib-shared/core/utils/sequence/sequence';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
-import type { TaskParamsModel, TaskResultModel } from '#tool-task/core/core.models';
-import type { RunAllParamsModel } from '#tool-task/core/templates/runAll/runAll.models';
+import { type TaskParamsModel, type TaskResultModel } from '#tool-task/core/core.models';
+import { type RunAllParamsModel } from '#tool-task/core/templates/runAll/runAll.models';
 import { prompt } from '#tool-task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '#tool-task/core/utils/prompt/prompt.constants';
 import { TaskRegistry } from '#tool-task/core/utils/TaskRegistry/TaskRegistry';

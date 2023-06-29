@@ -1,6 +1,6 @@
 import { _AnimatableView } from '#lib-frontend/animation/components/AnimatableView/_AnimatableView';
-import type { _AnimatableViewPropsModel } from '#lib-frontend/animation/components/AnimatableView/_AnimatableView.models';
-import type { AnimatableViewPropsModel } from '#lib-frontend/animation/components/AnimatableView/AnimatableView.models';
+import { type _AnimatableViewPropsModel } from '#lib-frontend/animation/components/AnimatableView/_AnimatableView.models';
+import { type AnimatableViewPropsModel } from '#lib-frontend/animation/components/AnimatableView/AnimatableView.models';
 import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
 import { variableName } from '#lib-shared/core/utils/variableName/variableName';
 

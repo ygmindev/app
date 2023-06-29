@@ -3,8 +3,8 @@ import { borderStyler } from '#lib-frontend/style/utils/styler/borderStyler/bord
 import { flexStyler } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler';
 import { shapeStyler } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler';
 import { spacingStyler } from '#lib-frontend/style/utils/styler/spacingStyler/spacingStyler';
-import type { StylerModel } from '#lib-frontend/style/utils/styler/styler.models';
-import type { ViewStylerParamsModel } from '#lib-frontend/style/utils/styler/viewStyler/viewStyler.models';
+import { type StylerModel } from '#lib-frontend/style/utils/styler/styler.models';
+import { type ViewStylerParamsModel } from '#lib-frontend/style/utils/styler/viewStyler/viewStyler.models';
 
 export const viewStyler: StylerModel<ViewStylerParamsModel> = (params, context) => ({
   ...borderStyler(params, context),

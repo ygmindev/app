@@ -1,7 +1,7 @@
-import type { AppHeaderPropsModel } from '#lib-frontend/app/containers/AppHeader/AppHeader.models';
+import { type AppHeaderPropsModel } from '#lib-frontend/app/containers/AppHeader/AppHeader.models';
 import { AuthMenu } from '#lib-frontend/auth/containers/AuthMenu/AuthMenu';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { BORDER_DIRECTION } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.constants';

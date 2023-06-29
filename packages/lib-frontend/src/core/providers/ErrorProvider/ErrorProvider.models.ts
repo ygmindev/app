@@ -1,8 +1,8 @@
-import type { ProviderPropsModel } from '#lib-frontend/core/core.models';
-import type { ERROR_MODE } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider.constants';
-import type {
-  NotificationModel,
-  TranslatableNotificationModel,
+import { type ProviderPropsModel } from '#lib-frontend/core/core.models';
+import { type ERROR_MODE } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider.constants';
+import {
+  type NotificationModel,
+  type TranslatableNotificationModel,
 } from '#lib-frontend/notification/notification.models';
 
 export type ErrorModeModel = `${ERROR_MODE}`;

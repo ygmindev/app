@@ -1,9 +1,9 @@
 import { fastifyCompress } from '@fastify/compress';
-import type { FastifyCookieOptions } from '@fastify/cookie';
+import { type FastifyCookieOptions } from '@fastify/cookie';
 import { fastifyCookie } from '@fastify/cookie';
 import { fastifyMiddie } from '@fastify/middie';
 import { fastifyStatic } from '@fastify/static';
-import type { FastifyPluginCallback, FastifyRegisterOptions } from 'fastify';
+import { type FastifyPluginCallback, type FastifyRegisterOptions } from 'fastify';
 import { fastify } from 'fastify';
 import { plugin as i18nextMiddleware } from 'i18next-http-middleware';
 import toNumber from 'lodash/toNumber';
@@ -12,11 +12,11 @@ import { createServer } from 'vite';
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
 import { _config } from '#lib-config/locale/internationalize/internationalize.node';
 import { config as webConfig } from '#lib-config/platform/web/web';
-import type { CookieOptionModel } from '#lib-frontend/state/state.models';
+import { type CookieOptionModel } from '#lib-frontend/state/state.models';
 import { renderPage } from '#lib-platform/web/utils/renderPage/renderPage';
-import type {
-  _ServerModel,
-  _ServerParamsModel,
+import {
+  type _ServerModel,
+  type _ServerParamsModel,
 } from '#lib-platform/web/utils/server/_server.models';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 import { ROUTE } from '#lib-shared/route/route.constants';
@@ -38,9 +38,9 @@ export const _server = async ({
 
   const { middlewares } = await createServer({ ...config, root, server: { middlewareMode: true } });
 
-  app.use(middlewares);
+  await app.use(middlewares);
 
-  app.register(
+  await app.register(
     i18nextMiddleware as unknown as FastifyPluginCallback,
     { i18next: _config() } as FastifyRegisterOptions<Record<never, never>>,
   );
@@ -54,28 +54,28 @@ export const _server = async ({
         [ROUTE]: { location: { pathname: url } },
         [STATE]: {
           cookies: {
-            expire: (key) => res.clearCookie(key),
+            expire: (key) => void res.clearCookie(key),
             get: <TType extends string = string>(key: string) => (cookies[key] as TType) || null,
             set: <TType extends string = string>(
               key: string,
               value: TType,
               options?: CookieOptionModel,
-            ) => res.setCookie(key, value, { domain: options?.domain, sameSite: 'strict' }),
+            ) => void res.setCookie(key, value, { domain: options?.domain, sameSite: 'strict' }),
           },
         },
       },
     });
     if (redirect) {
-      res.redirect(302, redirect);
+      await res.redirect(302, redirect);
     } else if (response) {
       const { contentType, pipeStream, statusCode } = response;
-      res.status(statusCode).type(contentType);
+      await res.status(statusCode).type(contentType);
       pipeStream(res.raw);
     } else if (error) {
       // TODO: better error handling
-      res.status(500).send(error);
+      await res.status(500).send(error);
     }
   });
 
-  app.listen({ port: toNumber(port) });
+  await app.listen({ port: toNumber(port) });
 };

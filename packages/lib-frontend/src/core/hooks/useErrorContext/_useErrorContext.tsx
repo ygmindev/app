@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import type { _UseErrorContextModel } from '#lib-frontend/core/hooks/useErrorContext/_useErrorContext.models';
+import { type _UseErrorContextModel } from '#lib-frontend/core/hooks/useErrorContext/_useErrorContext.models';
 import { ErrorContext } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider';
 
 export const _useErrorContext = (): _UseErrorContextModel => {

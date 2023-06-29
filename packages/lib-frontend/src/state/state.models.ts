@@ -1,4 +1,4 @@
-import type { StorageBackendModel } from '#lib-frontend/state/utils/Storage/_Storage.models';
+import { type StorageBackendModel } from '#lib-frontend/state/utils/Storage/_Storage.models';
 
 export type ReducerModel<TType extends object, TParams extends object> = {
   actions: {

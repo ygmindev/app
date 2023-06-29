@@ -1,5 +1,5 @@
 import { AppLayout } from '#lib-frontend/app/layouts/AppLayout/AppLayout';
-import type { AppLayoutPropsModel } from '#lib-frontend/app/layouts/AppLayout/AppLayout.models';
+import { type AppLayoutPropsModel } from '#lib-frontend/app/layouts/AppLayout/AppLayout.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

@@ -1,5 +1,5 @@
 import { SearchField } from '#lib-frontend/search/components/SearchField/SearchField';
-import type { SearchFieldPropsModel } from '#lib-frontend/search/components/SearchField/SearchField.models';
+import { type SearchFieldPropsModel } from '#lib-frontend/search/components/SearchField/SearchField.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

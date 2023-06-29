@@ -1,7 +1,7 @@
 import findIndex from 'lodash/findIndex';
 import map from 'lodash/map';
 import toNumber from 'lodash/toNumber';
-import type { ForwardedRef, ReactElement } from 'react';
+import { type ForwardedRef, type ReactElement } from 'react';
 import {
   createElement,
   forwardRef,
@@ -15,21 +15,25 @@ import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import type { RSFCPropsModel, SFCModel, SFCPropsModel } from '#lib-frontend/core/core.models';
+import {
+  type RSFCPropsModel,
+  type SFCModel,
+  type SFCPropsModel,
+} from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { ErrorProvider } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider';
 import { ERROR_MODE } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider.constants';
 import { Form } from '#lib-frontend/form/components/Form/Form';
 import { SelectField } from '#lib-frontend/form/components/SelectField/SelectField';
-import type { SelectFieldPropsModel } from '#lib-frontend/form/components/SelectField/SelectField.models';
+import { type SelectFieldPropsModel } from '#lib-frontend/form/components/SelectField/SelectField.models';
 import { TextField } from '#lib-frontend/form/components/TextField/TextField';
-import type { TextFieldPropsModel } from '#lib-frontend/form/components/TextField/TextField.models';
+import { type TextFieldPropsModel } from '#lib-frontend/form/components/TextField/TextField.models';
 import { FORM_FIELD_TYPE } from '#lib-frontend/form/containers/FormContainer/FormContainer.constants';
-import type {
-  FormContainerFieldModel,
-  FormContainerPropsModel,
+import {
+  type FormContainerFieldModel,
+  type FormContainerPropsModel,
 } from '#lib-frontend/form/containers/FormContainer/FormContainer.models';
-import type { FormRefModel, StringFieldPropsModel } from '#lib-frontend/form/form.models';
+import { type FormRefModel, type StringFieldPropsModel } from '#lib-frontend/form/form.models';
 import { useForm } from '#lib-frontend/form/hooks/useForm/useForm';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';

@@ -1,6 +1,6 @@
 import { useSession } from '#lib-frontend/auth/hooks/useSession/useSession';
-import type { AuthProviderPropsModel } from '#lib-frontend/auth/providers/AuthProvider/AuthProvider.models';
-import type { FCModel } from '#lib-frontend/core/core.models';
+import { type AuthProviderPropsModel } from '#lib-frontend/auth/providers/AuthProvider/AuthProvider.models';
+import { type FCModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
@@ -30,8 +30,8 @@ export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
 };
 
 // import { useSession } from '#lib-frontend/auth/hooks/useSession/useSession';
-// import type { AuthProviderPropsModel } from '#lib-frontend/auth/providers/AuthProvider/AuthProvider.models';
-// import type { FCModel } from '#lib-frontend/core/core.models';
+// import { type AuthProviderPropsModel } from '#lib-frontend/auth/providers/AuthProvider/AuthProvider.models';
+// import { type FCModel } from '#lib-frontend/core/core.models';
 // import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 // import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 // import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';

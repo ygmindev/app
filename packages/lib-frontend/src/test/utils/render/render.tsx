@@ -1,12 +1,15 @@
 import { importConfig } from '#lib-config/core/utils/importConfig/importConfig';
-import type {
-  _InternationalizeConfigModel,
-  InternationalizeConfigModel,
+import {
+  type _InternationalizeConfigModel,
+  type InternationalizeConfigModel,
 } from '#lib-config/locale/internationalize/internationalize.models';
 import { Root } from '#lib-frontend/root/containers/Root/Root.base';
 import { Routes } from '#lib-frontend/route/containers/Routes/Routes';
 import { _render } from '#lib-frontend/test/utils/render/_render';
-import type { RenderModel, RenderParamsModel } from '#lib-frontend/test/utils/render/render.models';
+import {
+  type RenderModel,
+  type RenderParamsModel,
+} from '#lib-frontend/test/utils/render/render.models';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 
 export const render = async (params: RenderParamsModel): RenderModel => {

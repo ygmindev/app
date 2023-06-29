@@ -11,16 +11,16 @@ import {
   OTP_RESOURCE_NAME,
   OTP_STATIC,
 } from '#lib-shared/auth/resources/Otp/Otp.constants';
-import type { OtpFormModel, OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
-import type { OtpServiceModel } from '#lib-shared/auth/resources/Otp/OtpService/OtpService.models';
+import { type OtpFormModel, type OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
+import { type OtpServiceModel } from '#lib-shared/auth/resources/Otp/OtpService/OtpService.models';
 import { withInject } from '#lib-shared/core/decorators/withInject/withInject';
 import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/DuplicateError';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import { randomInt } from '#lib-shared/crypto/utils/randomInt/randomInt';
-import type { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-import type { EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
-import type { InputModel } from '#lib-shared/resource/utils/Input/Input.models';
-import type { OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
+import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
+import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
+import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 
 @withContainer()
 export class OtpService

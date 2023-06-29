@@ -13,10 +13,10 @@ import { TIMEZONE } from '#lib-frontend/locale/locale.constants';
 import { TimezoneFormPage } from '#lib-frontend/locale/pages/TimezoneFormPage/TimezoneFormPage';
 import { NotFoundPage } from '#lib-frontend/route/pages/NotFoundPage/NotFoundPage';
 import { ROUTE_TRANSITION } from '#lib-frontend/route/route.constants';
-import type { RouteModel } from '#lib-frontend/route/route.models';
-import type {
-  GetRoutesModel,
-  GetRoutesParamsModel,
+import { type RouteModel } from '#lib-frontend/route/route.models';
+import {
+  type GetRoutesModel,
+  type GetRoutesParamsModel,
 } from '#lib-frontend/route/utils/getRoutes/getRoutes.models';
 import { SettingsPage } from '#lib-frontend/settings/pages/SettingsPage/SettingsPage';
 import { SETTINGS } from '#lib-frontend/settings/settings.constants';

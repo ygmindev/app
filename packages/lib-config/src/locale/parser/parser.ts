@@ -1,9 +1,9 @@
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
 import { config as configBase } from '#lib-config/locale/internationalize/internationalize.base';
 import { _parser } from '#lib-config/locale/parser/_parser';
-import type {
-  _ParserConfigModel,
-  ParserConfigModel,
+import {
+  type _ParserConfigModel,
+  type ParserConfigModel,
 } from '#lib-config/locale/parser/parser.models';
 
 export const config: ParserConfigModel = {

@@ -1,11 +1,15 @@
 import { useState } from 'react';
 
-import type { AccordionPropsModel } from '#lib-frontend/core/components/Accordion/Accordion.models';
+import { type AccordionPropsModel } from '#lib-frontend/core/components/Accordion/Accordion.models';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import type { ElementStateModel, MeasureModel, SFCModel } from '#lib-frontend/core/core.models';
+import {
+  type ElementStateModel,
+  type MeasureModel,
+  type SFCModel,
+} from '#lib-frontend/core/core.models';
 import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';

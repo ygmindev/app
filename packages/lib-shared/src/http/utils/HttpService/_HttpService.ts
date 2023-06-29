@@ -1,23 +1,23 @@
-import type {
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
-  InternalAxiosRequestConfig,
+import {
+  type AxiosInstance,
+  type AxiosRequestConfig,
+  type AxiosResponse,
+  type InternalAxiosRequestConfig,
 } from 'axios';
 import axios from 'axios';
 
 import { CONNECTIVITY } from '#lib-frontend/http/http.constants';
 import { getConnectivity } from '#lib-frontend/http/utils/getConnectivity/getConnectivity';
 import { OfflineError } from '#lib-shared/http/errors/OfflineError/OfflineError';
-import type {
-  _HttpRequestParamsModel,
-  _HttpServiceModel,
+import {
+  type _HttpRequestParamsModel,
+  type _HttpServiceModel,
 } from '#lib-shared/http/utils/HttpService/_HttpService.models';
 import { HTTP_METHOD } from '#lib-shared/http/utils/HttpService/HttpService.constants';
-import type {
-  HttpMethodModel,
-  HttpResponseTypeModel,
-  HttpServiceParamsModel,
+import {
+  type HttpMethodModel,
+  type HttpResponseTypeModel,
+  type HttpServiceParamsModel,
 } from '#lib-shared/http/utils/HttpService/HttpService.models';
 import { uri } from '#lib-shared/http/utils/uri/uri';
 
@@ -48,7 +48,13 @@ export class _HttpService implements _HttpServiceModel {
     onResponse &&
       this._instance.interceptors.response.use(
         async ({ data, headers, status, statusText, ...params }) =>
-          onResponse({ ...params, data, headers, status, statusText }) as Promise<AxiosResponse>,
+          onResponse({
+            ...params,
+            data: data as object,
+            headers,
+            status,
+            statusText,
+          }) as Promise<AxiosResponse>,
       );
   }
 
@@ -63,7 +69,7 @@ export class _HttpService implements _HttpServiceModel {
         method,
         url: path || '',
       } as AxiosRequestConfig);
-      return (response && response.data) || null;
+      return (response && (response.data as TResult)) || null;
     } catch (e) {
       const eF =
         (await getConnectivity()) === CONNECTIVITY.OFFLINE ? new OfflineError() : (e as Error);

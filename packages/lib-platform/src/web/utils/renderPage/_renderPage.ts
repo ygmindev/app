@@ -1,10 +1,10 @@
-import type { WritableStream } from 'node:stream/web';
+import { type WritableStream } from 'node:stream/web';
 
 import { renderPage } from 'vite-plugin-ssr/server';
 
-import type {
-  _RenderPageModel,
-  _RenderPageParamsModel,
+import {
+  type _RenderPageModel,
+  type _RenderPageParamsModel,
 } from '#lib-platform/web/utils/renderPage/_renderPage.models';
 
 export const _renderPage = async ({ context }: _RenderPageParamsModel): _RenderPageModel => {

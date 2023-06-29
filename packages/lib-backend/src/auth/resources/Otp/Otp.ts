@@ -5,7 +5,7 @@ import { withField } from '#lib-backend/resource/decorators/withField/withField'
 import { EntityResource } from '#lib-backend/resource/resources/EntityResource/EntityResource';
 import { ACCESS_LEVEL } from '#lib-shared/auth/resources/Access/Access.constants';
 import { OTP_RESOURCE_NAME } from '#lib-shared/auth/resources/Otp/Otp.constants';
-import type { OtpFormModel, OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
+import { type OtpFormModel, type OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
 import { FIELD_TYPE } from '#lib-shared/form/form.constants';
 
 @withEntity({ name: `${OTP_RESOURCE_NAME}Form` })

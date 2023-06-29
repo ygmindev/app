@@ -1,6 +1,6 @@
-import type {
-  ReplaceSpecialCharactersModel,
-  ReplaceSpecialCharactersParamsModel,
+import {
+  type ReplaceSpecialCharactersModel,
+  type ReplaceSpecialCharactersParamsModel,
 } from '#lib-shared/core/utils/replaceSpecialCharacters/replaceSpecialCharacters.models';
 
 export const replaceSpecialCharacters = (

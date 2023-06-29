@@ -1,5 +1,5 @@
 import { Chip } from '#lib-frontend/core/components/Chip/Chip';
-import type { ChipPropsModel } from '#lib-frontend/core/components/Chip/Chip.models';
+import { type ChipPropsModel } from '#lib-frontend/core/components/Chip/Chip.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

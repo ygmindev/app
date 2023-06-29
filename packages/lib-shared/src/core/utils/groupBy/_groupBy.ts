@@ -1,8 +1,8 @@
 import groupBy from 'lodash/groupBy';
 
-import type {
-  _GroupByModel,
-  _GroupByParamsModel,
+import {
+  type _GroupByModel,
+  type _GroupByParamsModel,
 } from '#lib-shared/core/utils/groupBy/_groupBy.models';
 
 export const _groupBy = <TType>(

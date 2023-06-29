@@ -4,3 +4,5 @@ export type _BoilerplateParamsModel = {
   template: string;
   variables?: Record<string, string>;
 };
+
+export type _BoilerplateModel = Promise<void>;

@@ -2,30 +2,30 @@ import pick from 'lodash/pick';
 import { useMemo } from 'react';
 
 import { USERNAME_FORM_VALIDATORS } from '#lib-frontend/auth/containers/UsernameForm/UsernameForm.constants';
-import type {
-  UsernameFormModel,
-  UsernameFormPropsModel,
+import {
+  type UsernameFormModel,
+  type UsernameFormPropsModel,
 } from '#lib-frontend/auth/containers/UsernameForm/UsernameForm.models';
 import { useOtpResource } from '#lib-frontend/auth/hooks/useOtpResource/useOtpResource';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { Divider } from '#lib-frontend/core/components/Divider/Divider';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { CenterLayout } from '#lib-frontend/core/layouts/CenterLayout/CenterLayout';
 import { FormContainer } from '#lib-frontend/form/containers/FormContainer/FormContainer';
 import { FORM_FIELD_TYPE } from '#lib-frontend/form/containers/FormContainer/FormContainer.constants';
-import type { FormContainerRowModel } from '#lib-frontend/form/containers/FormContainer/FormContainer.models';
+import { type FormContainerRowModel } from '#lib-frontend/form/containers/FormContainer/FormContainer.models';
 import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
 import { CountryField } from '#lib-frontend/locale/components/CountryField/CountryField';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { PhoneField } from '#lib-frontend/user/components/PhoneField/PhoneField';
 import { SIGN_IN_METHOD, SIGN_IN_MODE } from '#lib-shared/auth/auth.constants';
-import type { SignInMethodModel } from '#lib-shared/auth/auth.models';
-import type { OtpFormModel, OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
+import { type SignInMethodModel } from '#lib-shared/auth/auth.models';
+import { type OtpFormModel, type OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
 import { withId } from '#lib-shared/core/decorators/withId/withId';
-import type { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
+import { type HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
 
 export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({

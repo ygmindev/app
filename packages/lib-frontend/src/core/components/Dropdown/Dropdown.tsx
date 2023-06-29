@@ -1,13 +1,13 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import { _Dropdown } from '#lib-frontend/core/components/Dropdown/_Dropdown';
-import type {
-  DropdownPropsModel,
-  DropdownRefModel,
+import {
+  type DropdownPropsModel,
+  type DropdownRefModel,
 } from '#lib-frontend/core/components/Dropdown/Dropdown.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import type { WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
-import type { RSFCModel } from '#lib-frontend/core/core.models';
+import { type WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
+import { type RSFCModel } from '#lib-frontend/core/core.models';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
 

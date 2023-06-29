@@ -1,5 +1,5 @@
 import { StepForm } from '#lib-frontend/form/components/StepForm/StepForm';
-import type { StepFormPropsModel } from '#lib-frontend/form/components/StepForm/StepForm.models';
+import { type StepFormPropsModel } from '#lib-frontend/form/components/StepForm/StepForm.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

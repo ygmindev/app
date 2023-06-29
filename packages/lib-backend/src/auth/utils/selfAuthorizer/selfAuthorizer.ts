@@ -1,6 +1,6 @@
-import type {
-  SelfAuthorizerModel,
-  SelfAuthorizerParamsModel,
+import {
+  type SelfAuthorizerModel,
+  type SelfAuthorizerParamsModel,
 } from '#lib-backend/auth/utils/selfAuthorizer/selfAuthorizer.models';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 

@@ -4,7 +4,7 @@ import { config } from '#lib-config/core/generate/generate';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 import { boilerplate } from '#tool-generate/utils/boilerplate/boilerplate';
-import type { BoilerplateParamsModel } from '#tool-generate/utils/boilerplate/boilerplate.models';
+import { type BoilerplateParamsModel } from '#tool-generate/utils/boilerplate/boilerplate.models';
 
 const { displayName } = withTest({ boilerplate });
 

@@ -1,9 +1,9 @@
 import { fromExecutable } from '#lib-backend/file/utils/fromExecutable/fromExecutable';
 import { command } from '#tool-task/core/utils/command/command';
 import { STATIC_SERVER_PORT } from '#tool-task/platform/server/utils/staticServer/staticServer.constants';
-import type {
-  StaticServerModel,
-  StaticServerParamsModel,
+import {
+  type StaticServerModel,
+  type StaticServerParamsModel,
 } from '#tool-task/platform/server/utils/staticServer/staticServer.models';
 
 export const staticServer = async ({

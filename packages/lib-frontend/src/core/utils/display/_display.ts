@@ -1,4 +1,4 @@
-import type { _DisplayModel } from '#lib-frontend/core/utils/display/_display.models';
+import { type _DisplayModel } from '#lib-frontend/core/utils/display/_display.models';
 import { isServer } from '#lib-platform/core/utils/isServer/isServer';
 
 const subscribeEvent = <TType extends Event>(

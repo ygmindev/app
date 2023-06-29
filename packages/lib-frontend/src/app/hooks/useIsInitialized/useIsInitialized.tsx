@@ -1,4 +1,4 @@
-import type { UseIsInitializedModel } from '#lib-frontend/app/hooks/useIsInitialized/useIsInitialized.models';
+import { type UseIsInitializedModel } from '#lib-frontend/app/hooks/useIsInitialized/useIsInitialized.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 

@@ -2,11 +2,11 @@ import isFunction from 'lodash/isFunction';
 import { cloneElement, type ReactElement, useState } from 'react';
 
 import { _isHoverable } from '#lib-frontend/core/components/Activatable/_isHoverable';
-import type { ActivatablePropsModel } from '#lib-frontend/core/components/Activatable/Activatable.models';
+import { type ActivatablePropsModel } from '#lib-frontend/core/components/Activatable/Activatable.models';
 import { type PressablePropsModel } from '#lib-frontend/core/components/Pressable/Pressable.models';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import type { CallableModel } from '#lib-shared/core/core.models';
+import { type CallableModel } from '#lib-shared/core/core.models';
 
 export const Activatable: SFCModel<ActivatablePropsModel> = ({
   children,

@@ -1,5 +1,5 @@
 import { isServer } from '#lib-platform/core/utils/isServer/isServer';
-import type { CallableModel } from '#lib-shared/core/core.models';
+import { type CallableModel } from '#lib-shared/core/core.models';
 
 let isEnabled: boolean;
 

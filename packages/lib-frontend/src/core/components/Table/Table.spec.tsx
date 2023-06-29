@@ -1,10 +1,10 @@
 import { Table } from '#lib-frontend/core/components/Table/Table';
-import type { TableFixtureRowModel } from '#lib-frontend/core/components/Table/Table.fixtures';
+import { type TableFixtureRowModel } from '#lib-frontend/core/components/Table/Table.fixtures';
 import {
   TABLE_FIXTURE_COLUMNS,
   TABLE_FIXTURE_DATA,
 } from '#lib-frontend/core/components/Table/Table.fixtures';
-import type { TablePropsModel } from '#lib-frontend/core/components/Table/Table.models';
+import { type TablePropsModel } from '#lib-frontend/core/components/Table/Table.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

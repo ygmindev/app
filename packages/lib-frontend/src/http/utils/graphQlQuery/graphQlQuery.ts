@@ -2,12 +2,13 @@ import { print } from 'graphql/language/printer';
 import { gql } from 'graphql-tag';
 import isPlainObject from 'lodash/isPlainObject';
 import map from 'lodash/map';
+import reduce from 'lodash/reduce';
 
-import type {
-  GraphQlFragmentFieldModel,
-  GraphQlQueryModel,
-  GraphQlQueryParamsFieldsModel,
-  GraphQlQueryParamsModel,
+import {
+  type GraphQlFragmentFieldModel,
+  type GraphQlQueryModel,
+  type GraphQlQueryParamsFieldsModel,
+  type GraphQlQueryParamsModel,
 } from '#lib-frontend/http/utils/graphQlQuery/graphQlQuery.models';
 import { trimDeep } from '#lib-shared/core/utils/trimDeep/trimDeep';
 
@@ -38,7 +39,11 @@ export const graphQlQuery = <TParams, TResult, TName extends string>({
 }: GraphQlQueryParamsModel<TParams, TResult, TName>): GraphQlQueryModel => {
   let [paramsString, paramsKeys] = ['', ''];
   if (params) {
-    paramsString = `(${map(params, (v, k) => `$${k}: ${v}!`).join(', ')})`;
+    paramsString = `(${reduce(
+      params,
+      (result, v, k) => (v ? [...result, `$${k}: ${v}!`] : result),
+      [] as Array<string>,
+    ).join(', ')})`;
     paramsKeys = `(${Object.keys(params)
       .map((k) => `${k}: $${k}`)
       .join(', ')})`;

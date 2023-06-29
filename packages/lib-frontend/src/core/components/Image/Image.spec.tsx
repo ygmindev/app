@@ -1,5 +1,5 @@
 import { Image } from '#lib-frontend/core/components/Image/Image';
-import type { ImagePropsModel } from '#lib-frontend/core/components/Image/Image.models';
+import { type ImagePropsModel } from '#lib-frontend/core/components/Image/Image.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

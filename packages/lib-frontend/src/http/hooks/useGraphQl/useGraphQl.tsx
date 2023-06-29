@@ -1,5 +1,5 @@
-// import type {
-//   UseGraphQlModel,
+// import {
+type; //   UseGraphQlModel,
 //   UseGraphQlParamsModel,
 // } from '#lib-frontend/http/hooks/useGraphQl/useGraphQl.models';
 
@@ -8,15 +8,15 @@
 //   await import('./useGraphQl.client');
 
 import { useApi } from '#lib-frontend/http/hooks/useApi/useApi';
-import type {
-  UseGraphQlModel,
-  UseGraphQlParamsModel,
+import {
+  type UseGraphQlModel,
+  type UseGraphQlParamsModel,
 } from '#lib-frontend/http/hooks/useGraphQl/useGraphQl.models';
 import { graphQlQuery } from '#lib-frontend/http/utils/graphQlQuery/graphQlQuery';
-import type {
-  GraphQlHttpParamsModel,
-  GraphQlHttpResponseModel,
-  GraphQlQueryHttpParamsModel,
+import {
+  type GraphQlHttpParamsModel,
+  type GraphQlHttpResponseModel,
+  type GraphQlQueryHttpParamsModel,
 } from '#lib-frontend/http/utils/graphQlQuery/graphQlQuery.models';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import { GRAPHQL } from '#lib-shared/graphql/graphql.constants';

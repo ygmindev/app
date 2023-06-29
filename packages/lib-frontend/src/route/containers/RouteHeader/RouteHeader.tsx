@@ -6,11 +6,11 @@ import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import type { WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
+import { type WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import type { RouteHeaderPropsModel } from '#lib-frontend/route/containers/RouteHeader/RouteHeader.models';
+import { type RouteHeaderPropsModel } from '#lib-frontend/route/containers/RouteHeader/RouteHeader.models';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
@@ -47,9 +47,9 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ..
         <Button
           elementState={isLoading ? ELEMENT_STATE.DISABLED : undefined}
           icon="chevronLeft"
-          onPress={() => {
+          onPress={async () => {
             ref.current?.toState(ELEMENT_STATE.INACTIVE);
-            push({ isBack: true, pathname: previous });
+            return push({ isBack: true, pathname: previous });
           }}
           type={BUTTON_TYPE.INVISIBLE}
         />

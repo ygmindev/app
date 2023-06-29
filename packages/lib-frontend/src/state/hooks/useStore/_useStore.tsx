@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 
-import type {
-  _UseStoreModel,
-  _UseStoreParamsModel,
+import {
+  type _UseStoreModel,
+  type _UseStoreParamsModel,
 } from '#lib-frontend/state/hooks/useStore/_useStore.models';
 
 export const _useStore = <TType, TValue>(

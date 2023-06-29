@@ -1,8 +1,8 @@
-import type {
-  _DatabaseConfigModel,
-  DatabaseConfigModel,
+import {
+  type _DatabaseConfigModel,
+  type DatabaseConfigModel,
 } from '#lib-config/database/database.models';
-import type { ReturnTypeModel } from '#lib-shared/core/core.models';
+import { type ReturnTypeModel } from '#lib-shared/core/core.models';
 
 export const _database = ({
   database,

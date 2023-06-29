@@ -1,5 +1,5 @@
 import { getApps, initializeApp } from 'firebase/app';
-import type { Auth, AuthError, User } from 'firebase/auth';
+import { type Auth, type AuthError, type User } from 'firebase/auth';
 import {
   connectAuthEmulator,
   getAuth,
@@ -8,12 +8,12 @@ import {
   signOut,
 } from 'firebase/auth';
 
-import type {
-  _UseSessionModel,
-  _UseSessionParamsModel,
+import {
+  type _UseSessionModel,
+  type _UseSessionParamsModel,
 } from '#lib-frontend/auth/hooks/useSession/_useSession.models';
 import { isServer } from '#lib-platform/core/utils/isServer/isServer';
-import type { SignInTokenModel } from '#lib-shared/auth/resources/SignIn/SignIn.models';
+import { type SignInTokenModel } from '#lib-shared/auth/resources/SignIn/SignIn.models';
 import { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
 

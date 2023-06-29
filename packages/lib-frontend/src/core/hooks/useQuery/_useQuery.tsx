@@ -1,9 +1,9 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import isNumber from 'lodash/isNumber';
 
-import type {
-  _UseQueryModel,
-  _UseQueryParamsModel,
+import {
+  type _UseQueryModel,
+  type _UseQueryParamsModel,
 } from '#lib-frontend/core/hooks/useQuery/_useQuery.models';
 import { debounce } from '#lib-shared/core/utils/debounce/debounce';
 

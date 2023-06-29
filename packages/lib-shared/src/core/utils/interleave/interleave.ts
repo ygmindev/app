@@ -1,6 +1,6 @@
-import type {
-  InterleaveModel,
-  InterleaveParamsModel,
+import {
+  type InterleaveModel,
+  type InterleaveParamsModel,
 } from '#lib-shared/core/utils/interleave/interleave.models';
 
 export const interleave = <TType>(

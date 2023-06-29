@@ -1,8 +1,8 @@
 import isArray from 'lodash/isArray';
 
-import type {
-  WithIdModel,
-  WithIdResultModel,
+import {
+  type WithIdModel,
+  type WithIdResultModel,
 } from '#lib-shared/core/decorators/withId/withId.models';
 import { uid } from '#lib-shared/core/utils/uid/uid';
 

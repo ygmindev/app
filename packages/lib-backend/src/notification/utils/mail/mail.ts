@@ -1,5 +1,8 @@
 import { _mail } from '#lib-backend/notification/utils/mail/_mail';
-import type { MailModel, MailParamsModel } from '#lib-backend/notification/utils/mail/mail.models';
+import {
+  type MailModel,
+  type MailParamsModel,
+} from '#lib-backend/notification/utils/mail/mail.models';
 import { debug } from '#lib-shared/logging/utils/logger/logger';
 
 export const mail = async <TParams>({

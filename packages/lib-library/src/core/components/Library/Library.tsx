@@ -5,23 +5,23 @@ import keys from 'lodash/keys';
 import map from 'lodash/map';
 import mapValues from 'lodash/mapValues';
 import toString from 'lodash/toString';
-import type { Attributes, ComponentType, ReactElement } from 'react';
+import { type Attributes, type ComponentType, type ReactElement } from 'react';
 import { createElement, isValidElement, useMemo } from 'react';
 
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { VirtualizedList } from '#lib-frontend/core/components/VirtualizedList/VirtualizedList';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import type { SFCPropsModel } from '#lib-frontend/core/core.models';
+import { type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import type {
-  LibraryPropsModel,
-  LibraryVariantModel,
+import {
+  type LibraryPropsModel,
+  type LibraryVariantModel,
 } from '#lib-library/core/components/Library/Library.models';
 import { withId } from '#lib-shared/core/decorators/withId/withId';
-import type { WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
+import { type WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
 import { groupBy } from '#lib-shared/core/utils/groupBy/groupBy';
 import { stringify } from '#lib-shared/core/utils/stringify/stringify';
 

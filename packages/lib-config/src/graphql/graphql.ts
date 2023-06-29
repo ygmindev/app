@@ -10,7 +10,10 @@ import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
 import { LinkedUserResolver } from '#lib-backend/user/resources/LinkedUser/LinkedUserResolver/LinkedUserResolver';
 import { UserResolver } from '#lib-backend/user/resources/User/UserResolver/UserResolver';
 import { _graphql } from '#lib-config/graphql/_graphql';
-import type { _GraphqlConfigModel, GraphqlConfigModel } from '#lib-config/graphql/graphql.models';
+import {
+  type _GraphqlConfigModel,
+  type GraphqlConfigModel,
+} from '#lib-config/graphql/graphql.models';
 
 export const config: GraphqlConfigModel = () => ({
   authorize,

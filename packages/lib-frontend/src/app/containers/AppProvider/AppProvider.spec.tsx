@@ -1,5 +1,5 @@
 import { AppProvider } from '#lib-frontend/app/containers/AppProvider/AppProvider';
-import type { AppProviderPropsModel } from '#lib-frontend/app/containers/AppProvider/AppProvider.models';
+import { type AppProviderPropsModel } from '#lib-frontend/app/containers/AppProvider/AppProvider.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

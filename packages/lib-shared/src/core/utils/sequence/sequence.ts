@@ -1,4 +1,4 @@
-import type { CallablePromiseModel } from '#lib-shared/core/core.models';
+import { type CallablePromiseModel } from '#lib-shared/core/core.models';
 
 export const sequence = async <TType>(
   promises: Array<CallablePromiseModel<TType>>,

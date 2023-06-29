@@ -1,14 +1,14 @@
-import type { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
-import type { _TablePropsModel } from '#lib-frontend/core/components/Table/_Table.models';
-import type {
-  COLUMN_PIN_TYPE,
-  COLUMN_SORT_TYPE,
-  TABLE_SELECT_TYPE,
+import { type _TablePropsModel } from '#lib-frontend/core/components/Table/_Table.models';
+import {
+  type COLUMN_PIN_TYPE,
+  type COLUMN_SORT_TYPE,
+  type TABLE_SELECT_TYPE,
 } from '#lib-frontend/core/components/Table/Table.constants';
-import type { ElementStatePropsModel } from '#lib-frontend/core/core.models';
-import type { TranslatableTextModel } from '#lib-frontend/locale/locale.models';
-import type { CallableModel } from '#lib-shared/core/core.models';
+import { type ElementStatePropsModel } from '#lib-frontend/core/core.models';
+import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
+import { type CallableModel } from '#lib-shared/core/core.models';
 
 export type TableSelectTypeModel = `${TABLE_SELECT_TYPE}`;
 

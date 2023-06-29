@@ -1,20 +1,20 @@
 import { useMemo } from 'react';
 
-import type { AnimationModel } from '#lib-frontend/animation/animation.models';
+import { type AnimationModel } from '#lib-frontend/animation/animation.models';
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
-import type { ButtonPropsModel } from '#lib-frontend/core/components/Button/Button.models';
+import { type ButtonPropsModel } from '#lib-frontend/core/components/Button/Button.models';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { Loading } from '#lib-frontend/core/components/Loading/Loading';
 import { Pressable } from '#lib-frontend/core/components/Pressable/Pressable';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import type { ElementStateModel, SFCModel } from '#lib-frontend/core/core.models';
+import { type ElementStateModel, type SFCModel } from '#lib-frontend/core/core.models';
 import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
-import type { ThemeRoleModel } from '#lib-frontend/style/style.models';
+import { type ThemeRoleModel } from '#lib-frontend/style/style.models';
 import { palette } from '#lib-frontend/style/utils/palette/palette';
 import {
   FLEX_ALIGN,

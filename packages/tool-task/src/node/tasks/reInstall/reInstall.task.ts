@@ -1,9 +1,9 @@
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
-import type { TaskParamsModel } from '#tool-task/core/core.models';
+import { type TaskParamsModel } from '#tool-task/core/core.models';
 import { runClean } from '#tool-task/core/utils/runClean/runClean';
 import install from '#tool-task/node/tasks/install/install.task';
-import type { ReInstallParamsModel } from '#tool-task/node/tasks/reInstall/reInstall.models';
+import { type ReInstallParamsModel } from '#tool-task/node/tasks/reInstall/reInstall.models';
 
 const reInstall: TaskParamsModel<ReInstallParamsModel> = {
   name: 'node-re-install',

@@ -1,14 +1,14 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { useRef, useState } from 'react';
 
 import { AnimatableView } from '#lib-frontend/animation/components/AnimatableView/AnimatableView';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { Menu } from '#lib-frontend/core/components/Menu/Menu';
-import type { MenuRefModel } from '#lib-frontend/core/components/Menu/Menu.models';
+import { type MenuRefModel } from '#lib-frontend/core/components/Menu/Menu.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import type { SFCPropsModel } from '#lib-frontend/core/core.models';
-import type { SelectFieldPropsModel } from '#lib-frontend/form/components/SelectField/SelectField.models';
+import { type SFCPropsModel } from '#lib-frontend/core/core.models';
+import { type SelectFieldPropsModel } from '#lib-frontend/form/components/SelectField/SelectField.models';
 import { TextField } from '#lib-frontend/form/components/TextField/TextField';
 import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';

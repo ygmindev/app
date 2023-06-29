@@ -1,14 +1,14 @@
-import type { Config } from '@jest/types';
+import { type Config } from '@jest/types';
 import { runCLI } from 'jest';
 
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { importConfig } from '#lib-config/core/utils/importConfig/importConfig';
-import type { _TestConfigModel, TestConfigModel } from '#lib-config/node/test/test.models';
+import { type _TestConfigModel, type TestConfigModel } from '#lib-config/node/test/test.models';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
-import type { TaskParamsModel } from '#tool-task/core/core.models';
+import { type TaskParamsModel } from '#tool-task/core/core.models';
 import { prompt } from '#tool-task/core/utils/prompt/prompt';
-import type { TestParamsModel } from '#tool-task/node/templates/test/test.models';
+import { type TestParamsModel } from '#tool-task/node/templates/test/test.models';
 
 export const test: TaskParamsModel<TestParamsModel> = {
   environment: ENVIRONMENT.TEST,

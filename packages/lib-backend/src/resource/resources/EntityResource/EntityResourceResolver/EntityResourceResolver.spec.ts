@@ -6,9 +6,9 @@ import { DummyEntityResource } from '#lib-backend/test/resources/DummyEntityReso
 import { DummyEntityResourceService } from '#lib-backend/test/resources/DummyEntityResource/DummyEntityResourceService/DummyEntityResourceService';
 import { testResourceService } from '#lib-backend/test/utils/testResourceService/testResourceService';
 import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
-import type {
-  DummyEntityResourceFormModel,
-  DummyEntityResourceModel,
+import {
+  type DummyEntityResourceFormModel,
+  type DummyEntityResourceModel,
 } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 

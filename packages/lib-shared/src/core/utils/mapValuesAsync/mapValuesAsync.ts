@@ -1,8 +1,8 @@
 import map from 'lodash/map';
 
-import type {
-  MapValuesAsyncModel,
-  MapValuesAsyncParamsModel,
+import {
+  type MapValuesAsyncModel,
+  type MapValuesAsyncParamsModel,
 } from '#lib-shared/core/utils/mapValuesAsync/mapValuesAsync.models';
 
 export const mapValuesAsync = async <TType extends object, TResult>(
@@ -10,4 +10,4 @@ export const mapValuesAsync = async <TType extends object, TResult>(
 ): MapValuesAsyncModel<TType, TResult> =>
   Object.fromEntries(
     await Promise.all(map(value, async (v, k) => [k, await callback(v, k as keyof TType)])),
-  );
+  ) as MapValuesAsyncModel<TType, TResult>;

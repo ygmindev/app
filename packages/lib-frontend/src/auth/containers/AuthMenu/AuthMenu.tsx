@@ -1,7 +1,7 @@
 import { SignInButton } from '#lib-frontend/auth/components/SignInButton/SignInButton';
-import type { AuthMenuOptionModel } from '#lib-frontend/auth/containers/AuthMenu/AuthMenu.constants';
+import { type AuthMenuOptionModel } from '#lib-frontend/auth/containers/AuthMenu/AuthMenu.constants';
 import { AUTH_MENU_OPTIONS } from '#lib-frontend/auth/containers/AuthMenu/AuthMenu.constants';
-import type { AuthMenuPropsModel } from '#lib-frontend/auth/containers/AuthMenu/AuthMenu.models';
+import { type AuthMenuPropsModel } from '#lib-frontend/auth/containers/AuthMenu/AuthMenu.models';
 import { useAuthState } from '#lib-frontend/auth/hooks/useAuthState/useAuthState';
 import { AUTH_STATE } from '#lib-frontend/auth/hooks/useAuthState/useAuthState.constants';
 import { useSignInResource } from '#lib-frontend/auth/hooks/useSignInResource/useSignInResource';
@@ -11,7 +11,7 @@ import { Menu } from '#lib-frontend/core/components/Menu/Menu';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import type { SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
@@ -19,7 +19,7 @@ import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FONT_ALIGN } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SIGN_OUT } from '#lib-shared/auth/auth.constants';
-import type { PartialModel } from '#lib-shared/core/core.models';
+import { type PartialModel } from '#lib-shared/core/core.models';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { ACCOUNT } from '#lib-shared/user/user.constants';
 

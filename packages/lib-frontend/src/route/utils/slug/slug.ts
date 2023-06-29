@@ -1,4 +1,4 @@
-import type { SlugModel, SlugParamsModel } from '#lib-frontend/route/utils/slug/slug.models';
+import { type SlugModel, type SlugParamsModel } from '#lib-frontend/route/utils/slug/slug.models';
 
 export const slug = (params: SlugParamsModel): SlugModel =>
   params

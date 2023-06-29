@@ -1,5 +1,5 @@
 import { Link } from '#lib-frontend/core/components/Link/Link';
-import type { LinkPropsModel } from '#lib-frontend/core/components/Link/Link.models';
+import { type LinkPropsModel } from '#lib-frontend/core/components/Link/Link.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

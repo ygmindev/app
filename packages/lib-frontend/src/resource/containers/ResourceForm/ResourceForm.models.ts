@@ -1,10 +1,10 @@
-import type { SubmittablePropsModel } from '#lib-frontend/form/form.models';
-import type { RESOURCE_FORM_MODE } from '#lib-frontend/resource/containers/ResourceForm/ResourceForm.constants';
-import type { ResourcesPropsModel } from '#lib-frontend/resource/containers/Resources/Resources.models';
-import type { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-import type { EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
-import type { InputModel } from '#lib-shared/resource/utils/Input/Input.models';
-import type { OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
+import { type SubmittablePropsModel } from '#lib-frontend/form/form.models';
+import { type RESOURCE_FORM_MODE } from '#lib-frontend/resource/containers/ResourceForm/ResourceForm.constants';
+import { type ResourcesPropsModel } from '#lib-frontend/resource/containers/Resources/Resources.models';
+import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
+import { type EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
+import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 
 export type ResourceFormModeModel = `${RESOURCE_FORM_MODE}`;
 

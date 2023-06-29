@@ -1,9 +1,9 @@
-import type { _HttpServiceModel } from '#lib-shared/http/utils/HttpService/_HttpService.models';
-import type {
-  HTTP_METHOD,
-  HTTP_RESPONSE_TYPE,
+import { type _HttpServiceModel } from '#lib-shared/http/utils/HttpService/_HttpService.models';
+import {
+  type HTTP_METHOD,
+  type HTTP_RESPONSE_TYPE,
 } from '#lib-shared/http/utils/HttpService/HttpService.constants';
-import type { UriParamsModel } from '#lib-shared/http/utils/uri/uri.models';
+import { type UriParamsModel } from '#lib-shared/http/utils/uri/uri.models';
 
 export type HttpMethodModel = `${HTTP_METHOD}`;
 

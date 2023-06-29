@@ -1,8 +1,8 @@
 import { join } from 'path';
 
-import type {
-  FromWorkingModel,
-  FromWorkingParamsModel,
+import {
+  type FromWorkingModel,
+  type FromWorkingParamsModel,
 } from '#lib-backend/file/utils/fromWorking/fromWorking.models';
 
 export const fromWorking = (...paths: FromWorkingParamsModel): FromWorkingModel =>

@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { Image as ImageBase } from 'react-native';
 
 import { _Image } from '#lib-frontend/core/components/Image/_Image';
-import type { ImagePropsModel } from '#lib-frontend/core/components/Image/Image.models';
-import type { DimensionModel, SFCModel } from '#lib-frontend/core/core.models';
+import { type ImagePropsModel } from '#lib-frontend/core/components/Image/Image.models';
+import { type DimensionModel, type SFCModel } from '#lib-frontend/core/core.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { shapeStyler } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';

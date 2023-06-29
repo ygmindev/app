@@ -1,6 +1,6 @@
-import type {
-  _UseChangeModel,
-  _UseChangeParamsModel,
+import {
+  type _UseChangeModel,
+  type _UseChangeParamsModel,
 } from '#lib-frontend/core/hooks/useChange/_useChange.models';
 
 export type UseChangeParamsModel<TType> = [

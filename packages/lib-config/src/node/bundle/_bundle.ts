@@ -1,5 +1,5 @@
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
-import type { RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
+import { type RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { babel } from '@rollup/plugin-babel';
 import inject from '@rollup/plugin-inject';
 import resolve from '@rollup/plugin-node-resolve';
@@ -10,7 +10,7 @@ import reduce from 'lodash/reduce';
 import some from 'lodash/some';
 import trim from 'lodash/trim';
 import { visualizer } from 'rollup-plugin-visualizer';
-import type { Plugin } from 'vite';
+import { type Plugin } from 'vite';
 import { searchForWorkspaceRoot } from 'vite';
 import { checker } from 'vite-plugin-checker';
 import circleDependency from 'vite-plugin-circular-dependency';
@@ -20,11 +20,14 @@ import { fromModules } from '#lib-backend/file/utils/fromModules/fromModules';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { _plugins } from '#lib-config/node/bundle/_plugins';
-import type { _BundleConfigModel, BundleConfigModel } from '#lib-config/node/bundle/bundle.models';
+import {
+  type _BundleConfigModel,
+  type BundleConfigModel,
+} from '#lib-config/node/bundle/bundle.models';
 import { lintCommand } from '#lib-config/node/lint/lint';
 import { PLATFORM } from '#lib-platform/core/core.constants';
-import type { PlatformModel } from '#lib-platform/core/core.models';
-import type { ReturnTypeModel } from '#lib-shared/core/core.models';
+import { type PlatformModel } from '#lib-platform/core/core.models';
+import { type ReturnTypeModel } from '#lib-shared/core/core.models';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 

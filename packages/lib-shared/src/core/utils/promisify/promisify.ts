@@ -1,4 +1,4 @@
-import type { CallableModel } from '#lib-shared/core/core.models';
+import { type CallableModel } from '#lib-shared/core/core.models';
 
 export const promisify =
   <TParams extends Array<unknown> = never, TResult = void>(

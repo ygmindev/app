@@ -1,6 +1,6 @@
-import type {
-  FromPackagesModel,
-  FromPackagesParamsModel,
+import {
+  type FromPackagesModel,
+  type FromPackagesParamsModel,
 } from '#lib-backend/file/utils/fromPackages/fromPackages.models';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 
