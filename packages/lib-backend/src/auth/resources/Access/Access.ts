@@ -21,7 +21,7 @@ export class AccessForm implements AccessFormModel {
   role!: AccessRoleModel;
 }
 
-@withEntity({ isRepository: true, name: ACCESS_RESOURCE_NAME })
+@withEntity({ base: EntityResource, isRepository: true, name: ACCESS_RESOURCE_NAME })
 export class Access extends EntityResource implements AccessModel {
   @withField({ isRepository: true, type: FIELD_TYPE.ID })
   _uid!: string;

@@ -6,7 +6,12 @@ import { type BankModel } from '#lib-shared/billing/resources/Bank/Bank.models';
 import { type PaymentMethodTypeModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { FIELD_TYPE } from '#lib-shared/form/form.constants';
 
-@withEntity({ isEmbedded: true, isRepository: true, name: BANK_RESOURCE_NAME })
+@withEntity({
+  base: EmbeddedResource,
+  isEmbedded: true,
+  isRepository: true,
+  name: BANK_RESOURCE_NAME,
+})
 export class Bank extends EmbeddedResource implements BankModel {
   @withField({ isRepository: true, type: FIELD_TYPE.STRING })
   bank!: string;

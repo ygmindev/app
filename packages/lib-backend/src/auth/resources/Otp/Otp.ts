@@ -24,6 +24,7 @@ export class OtpForm implements OtpFormModel {
 }
 
 @withEntity({
+  base: EntityResource,
   indices: [['email'], ['phone']],
   isRepository: true,
   name: OTP_RESOURCE_NAME,

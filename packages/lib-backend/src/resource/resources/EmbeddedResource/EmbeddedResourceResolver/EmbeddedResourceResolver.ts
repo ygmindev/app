@@ -16,10 +16,11 @@ export const EmbeddedResourceResolver = <
 >(
   params: EmbeddedResourceResolverParamsModel<TType, TForm, TRoot>,
 ): ClassModel<EmbeddedResourceResolverModel<TType, TForm, TRoot>> => {
+  const ResourceResolverF = ResourceResolver<TType, TForm, TRoot>(params);
   @withContainer()
   @withResolver({ isAbstract: true })
-  class _EmbeddedResourceResolver
-    extends ResourceResolver<TType, TForm, TRoot>(params)
+  class EmbeddedResourceResolverF
+    extends ResourceResolverF
     implements EmbeddedResourceResolverModel<TType, TForm, TRoot> {}
-  return _EmbeddedResourceResolver;
+  return EmbeddedResourceResolverF;
 };

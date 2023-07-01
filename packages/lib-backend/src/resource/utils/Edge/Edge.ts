@@ -11,7 +11,7 @@ export const Edge = <TType extends unknown>({
   const nameF = `${name}Edge`;
 
   @withEntity({ name: nameF })
-  class _Edge implements EdgeModel<TType> {
+  class EdgeF implements EdgeModel<TType> {
     @withField({ Resource })
     node!: TType;
 
@@ -19,5 +19,5 @@ export const Edge = <TType extends unknown>({
     cursor!: string;
   }
 
-  return _Edge;
+  return EdgeF;
 };

@@ -8,7 +8,12 @@ import {
   type LinkedUserTypeModel,
 } from '#lib-shared/user/resources/LinkedUser/LinkedUser.models';
 
-@withEntity({ isEmbedded: true, isRepository: true, name: LINKED_USER_RESOURCE_NAME })
+@withEntity({
+  base: EmbeddedResource,
+  isEmbedded: true,
+  isRepository: true,
+  name: LINKED_USER_RESOURCE_NAME,
+})
 export class LinkedUser extends EmbeddedResource implements LinkedUserModel {
   @withField({ isRepository: true, type: FIELD_TYPE.STRING })
   id!: string;

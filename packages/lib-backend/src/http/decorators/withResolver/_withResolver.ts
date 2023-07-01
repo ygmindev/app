@@ -7,10 +7,7 @@ export function _withResolver<TType>({
   isAbstract,
 }: _WithResolverParamsModel<TType> = {}): ClassDecorator {
   return (target) => {
-    if (isAbstract) {
-      return Resolver({ isAbstract: true })(target);
-    }
-    if (Resource) {
+    if (Resource && !isAbstract) {
       return Resolver(() => Resource)(target);
     }
     return Resolver()(target);

@@ -29,8 +29,8 @@ export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoo
     case RESOURCE_METHOD_TYPE.GET:
     case RESOURCE_METHOD_TYPE.GET_MANY:
     case RESOURCE_METHOD_TYPE.REMOVE: {
-      @withEntity({ isAbstract: true })
-      class _Args
+      @withEntity({ base: RootF, isAbstract: true })
+      class ArgsF
         extends RootF
         implements
           ArgsModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>,
@@ -42,11 +42,11 @@ export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoo
         )
         filter!: FilterModel<TType>;
       }
-      return _Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
+      return ArgsF as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
     case RESOURCE_METHOD_TYPE.CREATE: {
-      @withEntity({ isAbstract: true })
-      class _Args
+      @withEntity({ base: RootF, isAbstract: true })
+      class ArgsF
         extends RootF
         implements ArgsModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>
       {
@@ -55,11 +55,11 @@ export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoo
         )
         form!: TForm;
       }
-      return _Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
+      return ArgsF as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
     case RESOURCE_METHOD_TYPE.UPDATE: {
-      @withEntity({ isAbstract: true })
-      class _Args
+      @withEntity({ base: RootF, isAbstract: true })
+      class ArgsF
         extends RootF
         implements ArgsModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot>
       {
@@ -73,11 +73,11 @@ export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoo
         )
         update!: UpdateModel<TType>;
       }
-      return _Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
+      return ArgsF as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
     case RESOURCE_METHOD_TYPE.GET_CONNECTION: {
-      @withEntity({ isAbstract: true })
-      class _Args
+      @withEntity({ base: RootF, isAbstract: true })
+      class ArgsF
         extends RootF
         implements ArgsModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm, TRoot>
       {
@@ -89,7 +89,7 @@ export const Args = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoo
         @withCondition(Resource !== undefined, () => withField({ Resource: Pagination }))
         pagination!: PaginationModel;
       }
-      return _Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
+      return ArgsF as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
     default:
       throw new InvalidTypeError(method, RESOURCE_METHOD_TYPE);

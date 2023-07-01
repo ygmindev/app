@@ -7,12 +7,12 @@ const { displayName } = withTest({ Form });
 describe(displayName, () => {
   const RESOURCE_PROPERTY = 'RESOURCE_PROPERTY';
 
-  class _Resource {
+  class ResourceF {
     [RESOURCE_PROPERTY] = RESOURCE_PROPERTY;
   }
 
   test('works', async () => {
-    const result = new (Form({ Resource: _Resource, name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME }))();
+    const result = new (Form({ Resource: ResourceF, name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME }))();
     expect(result).toHaveProperty(RESOURCE_PROPERTY);
   });
 });

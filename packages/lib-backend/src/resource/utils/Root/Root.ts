@@ -14,19 +14,18 @@ export const Root = <TRoot = undefined>({
   if (RootResource) {
     const nameF = `${name}Root`;
     const isResource = RootResource && isFunction(RootResource);
+    const Base = isResource ? (RootResource as unknown as ClassModel) : EntityResource;
 
-    @withEntity({ name: nameF })
-    class _Resource extends (isResource
-      ? (RootResource as unknown as ClassModel)
-      : EntityResource) {}
+    @withEntity({ base: Base, name: nameF })
+    class ResourceF extends Base {}
 
     @withEntity({ isAbstract: true })
-    class _Root implements RootModel<TRoot> {
-      @withField({ Resource: _Resource })
+    class RootF implements RootModel<TRoot> {
+      @withField({ Resource: ResourceF })
       root?: PartialModel<TRoot>;
     }
 
-    return _Root;
+    return RootF;
   }
   return class {};
 };

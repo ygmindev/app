@@ -13,7 +13,7 @@ export const Form = <TType extends unknown>({
   const isResource = Resource && isFunction(Resource);
 
   @withEntity({ name: nameF })
-  class _Form extends (isResource ? (Resource as unknown as ClassModel) : EntityResource) {}
+  class FormF extends (isResource ? (Resource as unknown as ClassModel) : EntityResource) {}
 
-  return _Form as ClassModel<TType>;
+  return FormF as ClassModel<TType>;
 };

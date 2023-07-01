@@ -25,7 +25,7 @@ export class SignInForm implements SignInFormModel {
   phone?: string;
 }
 
-@withEntity({ isRepository: true, name: SIGN_IN_RESOURCE_NAME })
+@withEntity({ base: EntityResource, isRepository: true, name: SIGN_IN_RESOURCE_NAME })
 export class SignIn extends EntityResource implements SignInModel {
   @withField({ Resource: User })
   user!: UserModel;

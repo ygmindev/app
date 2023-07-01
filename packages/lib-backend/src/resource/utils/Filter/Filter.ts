@@ -14,6 +14,6 @@ export const Filter = <TType extends unknown>({
   const isResource = Resource && isFunction(Resource);
 
   @withEntity({ name: nameF })
-  class _Filter extends (isResource ? (Resource as unknown as ClassModel) : EntityResource) {}
-  return _Filter;
+  class FilterF extends (isResource ? (Resource as unknown as ClassModel) : EntityResource) {}
+  return FilterF;
 };

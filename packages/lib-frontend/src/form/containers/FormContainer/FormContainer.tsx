@@ -118,7 +118,7 @@ const FormContainerF = forwardRef(
         error({ message: t('core:validateChanged') });
         return null;
       } else {
-        return (onSubmit && (await onSubmit(dataF))) || null;
+        return (onSubmit && (await onSubmit(dataF))) ?? null;
       }
     };
 

@@ -9,7 +9,7 @@ import {
 import { type GraphQlOperationTypeModel } from '#lib-shared/graphql/graphql.models';
 import { type ConnectionModel } from '#lib-shared/resource/utils/Connection/Connection.models';
 
-export type GraphQlHttpParamsModel<TParams> = {
+export type GraphQlParamsModel<TParams> = {
   query: string;
   variables?: TParams;
 };

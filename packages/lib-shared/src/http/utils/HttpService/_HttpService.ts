@@ -69,7 +69,7 @@ export class _HttpService implements _HttpServiceModel {
         method,
         url: path || '',
       } as AxiosRequestConfig);
-      return (response && (response.data as TResult)) || null;
+      return (response && (response.data as TResult)) ?? null;
     } catch (e) {
       const eF =
         (await getConnectivity()) === CONNECTIVITY.OFFLINE ? new OfflineError() : (e as Error);

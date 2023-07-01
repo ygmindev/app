@@ -34,9 +34,8 @@ export const withOutput =
   (target, propertyKey, descriptor) => {
     const nameF = `${name}${method}`;
     const OutputF = Output({ Resource, RootResource, method, name: nameF });
-
     withAccess({ level })(target, propertyKey, descriptor);
-    getOperation(method)(() => OutputF || Boolean, { name: nameF })(
+    getOperation(method)(() => OutputF ?? Boolean, { name: nameF })(
       target,
       propertyKey,
       descriptor,

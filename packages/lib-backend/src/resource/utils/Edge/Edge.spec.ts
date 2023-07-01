@@ -5,10 +5,10 @@ import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 const { displayName } = withTest({ Edge });
 
 describe(displayName, () => {
-  class _Resource {}
+  class ResourceF {}
 
   test('works', async () => {
-    const result = new (Edge({ Resource: _Resource, name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME }))();
+    const result = new (Edge({ Resource: ResourceF, name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME }))();
     expect(result).toHaveProperty('node');
     expect(result).toHaveProperty('cursor');
   });

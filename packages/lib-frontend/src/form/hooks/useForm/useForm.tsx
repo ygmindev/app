@@ -63,7 +63,7 @@ export const useForm = <TType = void, TResult = void>({
       const valuesF = beforeSubmit ? await beforeSubmit(values) : values;
       const data = onSubmit && (await onSubmit(valuesF));
       data && onSuccess && (await onSuccess(values, data));
-      return data || null;
+      return data ?? null;
     } catch (e) {
       console.warn(e);
       onError ? onError(e as Error) : handleError(e as Error);

@@ -8,7 +8,7 @@ const tasks: Array<TaskParamsModel<unknown>> = [
 
   build,
 
-  { ...dev, onBefore: ['ssm'], options: { script: 'dist/index.js' } },
+  { ...dev, onBefore: ['bgsb'], options: { script: 'dist/index.js' } },
 ];
 
 export default tasks;

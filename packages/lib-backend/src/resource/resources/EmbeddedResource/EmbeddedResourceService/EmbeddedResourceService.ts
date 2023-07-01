@@ -73,7 +73,7 @@ export const EmbeddedResourceService = <
   };
 
   @withContainer()
-  class _EmbeddedResourceService implements EmbeddedResourceServiceModel<TType, TForm, TRoot> {
+  class EmbeddedResourceServiceF implements EmbeddedResourceServiceModel<TType, TForm, TRoot> {
     protected _rootService = Container.get(RootService);
 
     protected _decorators: ResourceServiceDecoratorModel<TType, TForm, TRoot> = {
@@ -274,5 +274,5 @@ export const EmbeddedResourceService = <
     }
   }
 
-  return _EmbeddedResourceService;
+  return EmbeddedResourceServiceF;
 };

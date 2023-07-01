@@ -17,7 +17,7 @@ export const Connection = <TType extends unknown>({
   const nameF = `${name}Connection`;
 
   @withEntity({ name: nameF })
-  class _Connection implements ConnectionModel<TType> {
+  class ConnectionF implements ConnectionModel<TType> {
     @withField({ Resource: Edge({ Resource, name }), isArray: true })
     edges!: Array<EdgeModel<TType>>;
 
@@ -25,5 +25,5 @@ export const Connection = <TType extends unknown>({
     pageInfo!: PageInfoModel;
   }
 
-  return _Connection;
+  return ConnectionF;
 };

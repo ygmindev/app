@@ -56,7 +56,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
       form.checkExists = true;
     }
     const { result } = await create({ form });
-    return result || null;
+    return result ?? null;
   };
 
   const rows: Array<FormContainerRowModel> = useMemo(() => {

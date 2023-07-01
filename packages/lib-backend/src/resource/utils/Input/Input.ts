@@ -13,7 +13,8 @@ export const Input = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRo
 }: InputParamsModel<TMethod, TType, TForm, TRoot>): ClassModel<
   InputModel<TMethod, TType, TForm, TRoot>
 > => {
-  @withEntity({ name })
-  class _Input extends Args({ Resource, RootResource, method, name }) {}
-  return _Input as ClassModel<InputModel<TMethod, TType, TForm, TRoot>>;
+  const ArgsF = Args({ Resource, RootResource, method, name });
+  @withEntity({ base: ArgsF, name })
+  class InputF extends ArgsF {}
+  return InputF as ClassModel<InputModel<TMethod, TType, TForm, TRoot>>;
 };

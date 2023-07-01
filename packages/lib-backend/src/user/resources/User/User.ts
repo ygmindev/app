@@ -13,7 +13,12 @@ import { type LinkedUserModel } from '#lib-shared/user/resources/LinkedUser/Link
 import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
-@withEntity({ indices: [['email'], ['phone']], isRepository: true, name: USER_RESOURCE_NAME })
+@withEntity({
+  base: EntityResource,
+  indices: [['email'], ['phone']],
+  isRepository: true,
+  name: USER_RESOURCE_NAME,
+})
 export class User extends EntityResource implements UserModel {
   @withField({ Resource: Card, isArray: true, isOptional: true, isRepository: true })
   [BANK_RESOURCE_NAME]?: Array<BankModel>;

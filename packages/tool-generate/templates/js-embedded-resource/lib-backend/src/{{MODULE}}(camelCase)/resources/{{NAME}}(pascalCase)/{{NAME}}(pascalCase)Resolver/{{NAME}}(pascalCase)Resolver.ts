@@ -12,17 +12,19 @@ type  {{NAME}}(pascalCase)FormModel,
 } from '#lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
 import { type {{NAME_ROOT}}(pascalCase)Model } from '#lib-shared/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase).models';
 
+const EmbeddedResourceResolverF = EmbeddedResourceResolver<
+  {{NAME}}(pascalCase)Model,
+  {{NAME}}(pascalCase)FormModel,
+  {{NAME_ROOT}}(pascalCase)Model
+>({
+  Resource: {{NAME}}(pascalCase),
+  ResourceService: {{NAME}}(pascalCase)Service,
+  RootResource: {{NAME_ROOT}}(pascalCase),
+  name: {{NAME}}(constantCase)_RESOURCE_NAME,
+});
+
 @withContainer()
 @withResolver({ Resource: {{NAME}}(pascalCase) })
 export class {{NAME}}(pascalCase)Resolver
-  extends EmbeddedResourceResolver<
-    {{NAME}}(pascalCase)Model,
-    {{NAME}}(pascalCase)FormModel,
-    {{NAME_ROOT}}(pascalCase)Model
-  >({
-    Resource: {{NAME}}(pascalCase),
-    ResourceService: {{NAME}}(pascalCase)Service,
-    RootResource: {{NAME_ROOT}}(pascalCase),
-    name: {{NAME}}(constantCase)_RESOURCE_NAME,
-  })
+  extends EmbeddedResourceResolverF
   implements {{NAME}}(pascalCase)ServiceModel {}

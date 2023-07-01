@@ -7,13 +7,13 @@ const { displayName } = withTest({ Update });
 describe(displayName, () => {
   const RESOURCE_PROPERTY = 'RESOURCE_PROPERTY';
 
-  class _Resource {
+  class ResourceF {
     [RESOURCE_PROPERTY] = RESOURCE_PROPERTY;
   }
 
   test('works', async () => {
     const result = new (Update({
-      Resource: _Resource,
+      Resource: ResourceF,
       name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
     }))();
     expect(result).toHaveProperty(RESOURCE_PROPERTY);

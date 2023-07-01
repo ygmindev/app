@@ -62,7 +62,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
 
   @withContainer()
   @withResolver({ isAbstract: true })
-  class _ResourceResolver implements ResourceResolverModel<TType, TForm, TRoot> {
+  class ResourceResolverF implements ResourceResolverModel<TType, TForm, TRoot> {
     protected _service = Container.get(ResourceService);
 
     @withCondition(createExists, () =>
@@ -77,7 +77,7 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
     async create(
       @withCondition(createExists, () =>
         withInput({
-          Resource: ResourceData || (Resource as unknown as ClassModel<TForm>),
+          Resource: ResourceData ?? (Resource as unknown as ClassModel<TForm>),
           RootResource,
           method: RESOURCE_METHOD_TYPE.CREATE,
           name,
@@ -264,5 +264,5 @@ export const ResourceResolver = <TType, TForm, TRoot = undefined>({
     }
   }
 
-  return _ResourceResolver;
+  return ResourceResolverF;
 };

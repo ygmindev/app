@@ -9,7 +9,7 @@ import { type DummyEmbeddedResourceModel } from '#lib-shared/test/resources/Dumm
 import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
 import { type DummyEntityResourceModel } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
 
-@withEntity({ isRepository: true, name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME })
+@withEntity({ base: EntityResource, isRepository: true, name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME })
 export class DummyEntityResource extends EntityResource implements DummyEntityResourceModel {
   @withField({
     Resource: DummyEmbeddedResource,

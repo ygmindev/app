@@ -2817,8 +2817,8 @@ var drawChart = (function (exports) {
               file = entry[0];
               return [{ file, bundle }];
           }
-          bundle = entry[0] || null;
-          file = entry.slice(1).join(":") || null;
+          bundle = entry[0] ?? null;
+          file = entry.slice(1).join(":") ?? null;
           return [{ bundle, file }];
       }));
   };

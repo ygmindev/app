@@ -10,10 +10,13 @@ import { type ClassModel } from '#lib-shared/core/core.models';
 export const EntityResourceResolver = <TType, TForm>(
   params: EntityResourceResolverParamsModel<TType, TForm>,
 ): ClassModel<EntityResourceResolverModel<TType, TForm>> => {
+  const ResourceResolverF = ResourceResolver<TType, TForm>(params);
+
   @withContainer()
   @withResolver({ isAbstract: true })
-  class _EntityResourceResolver
-    extends ResourceResolver<TType, TForm>(params)
+  class EntityResourceResolverF
+    extends ResourceResolverF
     implements EntityResourceResolverModel<TType, TForm> {}
-  return _EntityResourceResolver;
+
+  return EntityResourceResolverF;
 };

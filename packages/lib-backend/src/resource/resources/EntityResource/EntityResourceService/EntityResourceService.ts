@@ -31,7 +31,7 @@ export const EntityResourceService = <TType, TForm>({
 }: EntityResourceServiceParamsModel<TType, TForm>): ClassModel<
   EntityResourceServiceModel<TType, TForm>
 > => {
-  class _EntityResourceService implements EntityResourceServiceModel<TType, TForm> {
+  class EntityResourceServiceF implements EntityResourceServiceModel<TType, TForm> {
     protected _repository: RepositoryModel<TType> = Container.get(
       Database,
       DATABASE_TYPE.MONGO,
@@ -139,5 +139,5 @@ export const EntityResourceService = <TType, TForm>({
     }
   }
 
-  return _EntityResourceService;
+  return EntityResourceServiceF;
 };

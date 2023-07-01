@@ -13,8 +13,8 @@ export const config: SetupConfigModel = {
   onInitialize: async () => {
     if (!isInitialized) {
       const database = new Database(_config());
-      await database.connect();
       Container.set(Database, database, DATABASE_TYPE.MONGO);
+      await database.connect();
       await configBase.onInitialize();
     }
   },

@@ -1,11 +1,12 @@
 import { Embeddable, Entity, Index } from '@mikro-orm/core';
-import { InputType, ObjectType } from 'type-graphql';
+import { InputType, InterfaceType, ObjectType } from 'type-graphql';
 
 import { type WithEntityParamsModel } from '#lib-backend/resource/decorators/withEntity/withEntity.models';
 import { type ClassModel } from '#lib-shared/core/core.models';
 import { NotImplementedError } from '#lib-shared/core/errors/NotImplementedError/NotImplementedError';
 
 export const withEntity = <TType>({
+  base,
   indices = [],
   isAbstract = false,
   isEmbedded = false,
@@ -18,10 +19,17 @@ export const withEntity = <TType>({
     throw new NotImplementedError('name for non-abstract entity');
   }
   return ((Base: TType) => {
-    isSchema && ObjectType(name ?? '', { isAbstract })(Base as unknown as ClassModel);
+    isSchema &&
+      (isAbstract ? InterfaceType : ObjectType)(
+        name || '',
+        base ? { implements: base } : undefined,
+      )(Base as unknown as ClassModel);
     isSchemaInput &&
       name &&
-      InputType(`${name}Input`, { isAbstract })(Base as unknown as ClassModel);
+      (isAbstract ? InterfaceType : InputType)(
+        `${name}Input`,
+        base ? { implements: base } : undefined,
+      )(Base as unknown as ClassModel);
     let BaseF = isRepository
       ? (isEmbedded ? Embeddable : Entity)({ abstract: isAbstract, collection: name })(
           Base as unknown as ClassModel,
