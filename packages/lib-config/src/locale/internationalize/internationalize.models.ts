@@ -2,6 +2,9 @@ import { type i18n, type Module } from 'i18next';
 
 import { type ConfigDynamicModel } from '#lib-config/core/core.models';
 import { type InternationalizationDetectionModel } from '#lib-frontend/locale/locale.models';
+import { type EmptyObjectModel } from '#lib-shared/core/core.models';
+
+export type InternationalizeConfigOptionsModel = EmptyObjectModel;
 
 export type InternationalizeConfigModel = {
   addPath?: string;
@@ -31,4 +34,7 @@ export type InternationalizeConfigModel = {
   namespaceDefault: string;
 };
 
-export type _InternationalizeConfigModel = ConfigDynamicModel<i18n>;
+export type _InternationalizeConfigModel = ConfigDynamicModel<
+  i18n,
+  InternationalizeConfigOptionsModel
+>;

@@ -1,5 +1,5 @@
 import { type CallablePromiseModel } from '#lib-shared/core/core.models';
-import { type WithResourceNameModel } from '#lib-shared/resource/decorators/withResourceName/withResourceName.models';
+import { type ResourceNameParamsModel } from '#lib-shared/resource/resource.models';
 
 export type SeedParamsModel = {
   names?: Array<string>;
@@ -7,4 +7,4 @@ export type SeedParamsModel = {
 
 export type SeedDataModel<TType> = {
   data: Array<TType | CallablePromiseModel<TType>>;
-} & WithResourceNameModel;
+} & ResourceNameParamsModel;

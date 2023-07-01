@@ -8,8 +8,8 @@ import { type PaginationModel } from '#lib-shared/resource/utils/Pagination/Pagi
 import { type RootModel } from '#lib-shared/resource/utils/Root/Root.models';
 import { type UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
 
-type _ProjectPropertyModel<TType> = TType extends Array<infer TElement>
-  ? _ProjectPropertyModel<TElement> | boolean
+type ProjectPropertyModel<TType> = TType extends Array<infer TElement>
+  ? ProjectPropertyModel<TElement> | boolean
   : TType extends PrimitiveModel | ObjectId
   ? boolean
   : TType extends object
@@ -17,50 +17,50 @@ type _ProjectPropertyModel<TType> = TType extends Array<infer TElement>
   : boolean;
 
 export type ProjectModel<TType> = {
-  [TKey in keyof TType]?: _ProjectPropertyModel<TType[TKey]>;
+  [TKey in keyof TType]?: ProjectPropertyModel<TType[TKey]>;
 };
 
-type _ProjectOptionsModel<TType> = {
+type ProjectOptionsModel<TType> = {
   project?: ProjectModel<TType>;
 };
 
-type _CreateArgsModel<TType> = {
+type CreateArgsModel<TType> = {
   form: TType;
 };
 
-type _GetArgsOptionsModel<TType> = {
+type GetArgsOptionsModel<TType> = {
   aggregate?: Array<object>;
-} & _ProjectOptionsModel<TType>;
+} & ProjectOptionsModel<TType>;
 
-type _GetArgsModel<TType> = {
+type GetArgsModel<TType> = {
   filter: FilterModel<TType>;
-  options?: _GetArgsOptionsModel<TType>;
+  options?: GetArgsOptionsModel<TType>;
 };
 
-type _GetManyArgsOptionsModel<TType> = {
+type GetManyArgsOptionsModel<TType> = {
   skip?: number;
   take?: number;
-} & _GetArgsOptionsModel<TType>;
+} & GetArgsOptionsModel<TType>;
 
-type _GetManyArgsModel<TType> = {
+type GetManyArgsModel<TType> = {
   filter: FilterModel<TType>;
-  options?: _GetManyArgsOptionsModel<TType>;
+  options?: GetManyArgsOptionsModel<TType>;
 };
 
-type _GetConnectionArgsModel<TType> = {
+type GetConnectionArgsModel<TType> = {
   filter: FilterModel<TType>;
   pagination: PaginationModel;
 };
 
-type _RemoveArgsModel<TType> = {
+type RemoveArgsModel<TType> = {
   filter: FilterModel<TType>;
 };
 
-type _UpdateArgsOptionsModel<TType> = _ProjectOptionsModel<TType>;
+type UpdateArgsOptionsModel<TType> = ProjectOptionsModel<TType>;
 
-type _UpdateArgsModel<TType> = {
+type UpdateArgsModel<TType> = {
   filter: FilterModel<TType>;
-  options?: _UpdateArgsOptionsModel<TType>;
+  options?: UpdateArgsOptionsModel<TType>;
   update: UpdateModel<TType>;
 };
 
@@ -71,15 +71,15 @@ export type ArgsModel<
   TRoot = undefined,
 > = RootModel<TRoot> &
   (TMethod extends RESOURCE_METHOD_TYPE.CREATE
-    ? _CreateArgsModel<TForm>
+    ? CreateArgsModel<TForm>
     : TMethod extends RESOURCE_METHOD_TYPE.GET
-    ? _GetArgsModel<TType>
+    ? GetArgsModel<TType>
     : TMethod extends RESOURCE_METHOD_TYPE.GET_MANY
-    ? _GetManyArgsModel<TType>
+    ? GetManyArgsModel<TType>
     : TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION
-    ? _GetConnectionArgsModel<TType>
+    ? GetConnectionArgsModel<TType>
     : TMethod extends RESOURCE_METHOD_TYPE.REMOVE
-    ? _RemoveArgsModel<TType>
+    ? RemoveArgsModel<TType>
     : TMethod extends RESOURCE_METHOD_TYPE.UPDATE
-    ? _UpdateArgsModel<TType>
+    ? UpdateArgsModel<TType>
     : never);

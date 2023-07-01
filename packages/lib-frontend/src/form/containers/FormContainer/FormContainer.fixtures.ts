@@ -1,6 +1,6 @@
 import { FORM_FIELD_TYPE } from '#lib-frontend/form/containers/FormContainer/FormContainer.constants';
 import { type FormContainerPropsModel } from '#lib-frontend/form/containers/FormContainer/FormContainer.models';
-import { withId } from '#lib-shared/core/decorators/withId/withId';
+import { withId } from '#lib-shared/core/utils/withId/withId';
 
 // TODO: move to shared
 export type FormContainerFixtureModel = {

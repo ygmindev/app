@@ -9,7 +9,7 @@ import {
 } from '#lib-frontend/core/components/VirtualizedList/_VirtualizedList.models';
 import { type RSFCPropsModel, type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { type WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
+import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
 export const _VirtualizedList = forwardRef(
   <TType extends WithIdModel>(

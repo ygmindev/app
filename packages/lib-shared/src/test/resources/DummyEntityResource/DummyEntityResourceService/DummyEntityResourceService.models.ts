@@ -1,4 +1,4 @@
-import { type EntityResourceServiceModel } from '#lib-shared/resource/resources/EntityResource/EntityResourceService/EntityResourceService.models';
+import { type EntityResourceServiceModel } from '#lib-shared/resource/services/EntityResourceService/EntityResourceService.models';
 import {
   type DummyEntityResourceFormModel,
   type DummyEntityResourceModel,

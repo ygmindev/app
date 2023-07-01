@@ -10,7 +10,9 @@ import {
 import { PLATFORM } from '#lib-platform/core/core.constants';
 import { setEnvironment } from '#lib-shared/environment/utils/setEnvironment/setEnvironment';
 
-export const config: ServerlessConfigModel = () => ({
+export const config: ServerlessConfigModel = ({ ...params } = {}) => ({
+  ...params,
+
   bundleConfig: _bundleConfig,
 
   dotenv: () => setEnvironment(),
@@ -45,4 +47,5 @@ export const config: ServerlessConfigModel = () => ({
   },
 });
 
-export const _config: _ServerlessConfigModel = () => _serverless(config());
+export const _config: _ServerlessConfigModel = ({ ...params } = {}) =>
+  _serverless(config({ ...params }));

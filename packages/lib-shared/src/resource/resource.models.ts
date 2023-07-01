@@ -11,3 +11,7 @@ export type ResourceMethodTypeCrudModel =
   | RESOURCE_METHOD_TYPE.UPDATE;
 
 export type ResolvedFieldModel<TType> = PartialModel<TType>;
+
+export type ResourceNameParamsModel<TRoot = undefined> = {
+  name: TRoot extends undefined ? string : keyof TRoot & string;
+};

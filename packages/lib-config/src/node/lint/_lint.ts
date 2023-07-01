@@ -70,7 +70,10 @@ export const _lint = ({
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/require-await': 'off',
-    '@typescript-eslint/restrict-template-expressions': ['error', { allowBoolean: true }],
+    '@typescript-eslint/restrict-template-expressions': [
+      'error',
+      { allowBoolean: true, allowNullish: true },
+    ],
     '@typescript-eslint/return-await': ['error', 'in-try-catch'],
     '@typescript-eslint/unbound-method': 'off',
     'import/no-extraneous-dependencies': ['error', { packageDir: roots }],

@@ -25,4 +25,5 @@ export const config: InternationalizeConfigModel = {
   namespaceDefault,
 };
 
-export const _config: _InternationalizeConfigModel = () => _internationalize(config);
+export const _config: _InternationalizeConfigModel = ({ ...params } = {}) =>
+  _internationalize({ ...config, ...params });

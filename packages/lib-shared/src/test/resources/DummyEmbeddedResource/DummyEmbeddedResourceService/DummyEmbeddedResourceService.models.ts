@@ -1,4 +1,4 @@
-import { type EmbeddedResourceServiceModel } from '#lib-shared/resource/resources/EmbeddedResource/EmbeddedResourceService/EmbeddedResourceService.models';
+import { type EmbeddedResourceServiceModel } from '#lib-shared/resource/services/EmbeddedResourceService/EmbeddedResourceService.models';
 import {
   type DummyEmbeddedResourceFormModel,
   type DummyEmbeddedResourceModel,

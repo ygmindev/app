@@ -16,7 +16,9 @@ export const lintCommand = (fix?: boolean): string => {
   );
 };
 
-export const config: LintConfigModel = () => ({
+export const config: LintConfigModel = ({ ...params } = {}) => ({
+  ...params,
+
   configFile: fromBuild('.eslintrc.json'),
 
   include: [fromWorking('src/**/*')],
@@ -40,4 +42,4 @@ export const config: LintConfigModel = () => ({
   unusedIgnore: '^_',
 });
 
-export const _config: _LintConfigModel = () => _lint(config());
+export const _config: _LintConfigModel = ({ ...params } = {}) => _lint(config({ ...params }));

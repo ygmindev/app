@@ -1,6 +1,6 @@
-import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
-import { withResolver } from '#lib-backend/http/decorators/withResolver/withResolver';
-import { EmbeddedResourceResolver } from '#lib-backend/resource/resources/EmbeddedResource/EmbeddedResourceResolver/EmbeddedResourceResolver';
+import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
+import { withResolver } from '#lib-backend/http/utils/withResolver/withResolver';
+import { createEmbeddedResourceResolver } from '#lib-backend/resource/utils/createEmbeddedResourceResolver/createEmbeddedResourceResolver';
 import { DummyEmbeddedResource } from '#lib-backend/test/resources/DummyEmbeddedResource/DummyEmbeddedResource';
 import { DummyEmbeddedResourceService } from '#lib-backend/test/resources/DummyEmbeddedResource/DummyEmbeddedResourceService/DummyEmbeddedResourceService';
 import { DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.constants';
@@ -14,7 +14,7 @@ import { type DummyEntityResourceModel } from '#lib-shared/test/resources/DummyE
 @withContainer()
 @withResolver({ Resource: DummyEmbeddedResource })
 export class DummyEmbeddedResourceResolver
-  extends EmbeddedResourceResolver<
+  extends createEmbeddedResourceResolver<
     DummyEmbeddedResourceModel,
     DummyEmbeddedResourceFormModel,
     DummyEntityResourceModel

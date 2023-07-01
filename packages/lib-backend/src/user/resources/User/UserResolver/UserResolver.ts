@@ -1,6 +1,6 @@
-import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
-import { withResolver } from '#lib-backend/http/decorators/withResolver/withResolver';
-import { EntityResourceResolver } from '#lib-backend/resource/resources/EntityResource/EntityResourceResolver/EntityResourceResolver';
+import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
+import { withResolver } from '#lib-backend/http/utils/withResolver/withResolver';
+import { createEntityResourceResolver } from '#lib-backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
 import { User } from '#lib-backend/user/resources/User/User';
 import { UserService } from '#lib-backend/user/resources/User/UserService/UserService';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
@@ -11,7 +11,7 @@ import { type UserServiceModel } from '#lib-shared/user/resources/User/UserServi
 @withContainer()
 @withResolver({ Resource: User })
 export class UserResolver
-  extends EntityResourceResolver<UserModel, UserFormModel>({
+  extends createEntityResourceResolver<UserModel, UserFormModel>({
     Resource: User,
     ResourceService: UserService,
     authorizer: {

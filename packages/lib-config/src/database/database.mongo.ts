@@ -12,7 +12,9 @@ import {
 } from '#lib-config/database/database.models';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 
-export const config: DatabaseConfigModel = () => ({
+export const config: DatabaseConfigModel = ({ ...params } = {}) => ({
+  ...params,
+
   database: process.env.DATABASE_MONGO_NAME,
 
   entities: filterNil([
@@ -35,4 +37,5 @@ export const config: DatabaseConfigModel = () => ({
   username: process.env.DATABASE_MONGO_USERNAME,
 });
 
-export const _config: _DatabaseConfigModel = () => _database(config());
+export const _config: _DatabaseConfigModel = ({ ...params } = {}) =>
+  _database(config({ ...params }));

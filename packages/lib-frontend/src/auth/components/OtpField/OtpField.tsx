@@ -16,7 +16,7 @@ import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { OTP_LENGTH } from '#lib-shared/auth/resources/Otp/Otp.constants';
-import { withId } from '#lib-shared/core/decorators/withId/withId';
+import { withId } from '#lib-shared/core/utils/withId/withId';
 
 const IDS = withId(range(OTP_LENGTH));
 

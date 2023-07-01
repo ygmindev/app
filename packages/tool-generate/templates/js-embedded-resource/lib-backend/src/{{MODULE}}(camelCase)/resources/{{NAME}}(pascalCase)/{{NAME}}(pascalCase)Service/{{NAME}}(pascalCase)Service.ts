@@ -1,6 +1,6 @@
-import { EmbeddedResourceService } from '#lib-backend/resource/resources/EmbeddedResource/EmbeddedResourceService/EmbeddedResourceService';
+import { createEmbeddedResourceService } from '#lib-backend/resource/utils/createEmbeddedResourceService/createEmbeddedResourceService';
 import { {{NAME_ROOT}}(pascalCase)Service } from '#lib-backend/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase)Service/{{NAME_ROOT}}(pascalCase)Service';
-import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
+import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { {{NAME}}(constantCase)_RESOURCE_NAME } from '#lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).constants';
 import {
 type  {{NAME}}(pascalCase)FormModel,
@@ -14,7 +14,7 @@ type  {{NAME_ROOT}}(pascalCase)FormModel,
 
 @withContainer()
 export class {{NAME}}(pascalCase)Service
-  extends EmbeddedResourceService<
+  extends createEmbeddedResourceService<
     {{NAME}}(pascalCase)Model,
     {{NAME}}(pascalCase)FormModel,
     {{NAME_ROOT}}(pascalCase)Model,

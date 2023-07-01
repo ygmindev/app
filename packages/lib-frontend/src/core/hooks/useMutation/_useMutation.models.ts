@@ -1,4 +1,4 @@
-import { type WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
+import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
 export type _UseMutationParamsModel<TParams = undefined, TResult = void> = [
   id: string,

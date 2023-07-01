@@ -3,7 +3,7 @@ import isString from 'lodash/isString';
 import kebabCase from 'lodash/kebabCase';
 import reduce from 'lodash/reduce';
 
-import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
+import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { type CallablePromiseModel } from '#lib-shared/core/core.models';

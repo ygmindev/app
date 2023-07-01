@@ -1,6 +1,6 @@
-import { withEntity } from '#lib-backend/resource/decorators/withEntity/withEntity';
-import { withField } from '#lib-backend/resource/decorators/withField/withField';
 import { EmbeddedResource } from '#lib-backend/resource/resources/EmbeddedResource/EmbeddedResource';
+import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
+import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { CARD_RESOURCE_NAME } from '#lib-shared/billing/resources/Card/Card.constants';
 import {
   type CardBrandModel,
@@ -11,7 +11,6 @@ import { type PaymentMethodTypeModel } from '#lib-shared/billing/resources/Payme
 import { FIELD_TYPE } from '#lib-shared/form/form.constants';
 
 @withEntity({
-  base: EmbeddedResource,
   isEmbedded: true,
   isRepository: true,
   name: CARD_RESOURCE_NAME,

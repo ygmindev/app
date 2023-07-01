@@ -12,7 +12,7 @@ import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { getSpacing } from '#lib-frontend/style/utils/styler/spacingStyler/spacingStyler';
-import { type WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
+import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
 export const VirtualizedList = forwardRef(
   <TType extends WithIdModel>(

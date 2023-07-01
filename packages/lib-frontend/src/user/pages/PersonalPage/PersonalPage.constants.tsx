@@ -1,6 +1,6 @@
 import { type RouteGroupModel } from '#lib-frontend/route/components/RouteGroup/RouteGroup.models';
 import { EMAIL, NAME, PERSONAL, PHONE } from '#lib-frontend/user/user.constants';
-import { withId } from '#lib-shared/core/decorators/withId/withId';
+import { withId } from '#lib-shared/core/utils/withId/withId';
 import { phoneFormat } from '#lib-shared/locale/utils/phoneFormat/phoneFormat';
 
 export const PERSONAL_GROUPS: Array<RouteGroupModel> = withId([

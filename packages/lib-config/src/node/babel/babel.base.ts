@@ -9,7 +9,7 @@ export const config: BabelConfigModel = {
   ],
 };
 
-export const _config: _BabelConfigModel = () => _babel(config);
+export const _config: _BabelConfigModel = ({ ...params } = {}) => _babel({ ...config, ...params });
 
 // import { _babel } from '#lib-config/node/babel/_babel';
 // import { type _BabelConfigModel, BabelConfigModel } from '#lib-config/node/babel/babel.models';

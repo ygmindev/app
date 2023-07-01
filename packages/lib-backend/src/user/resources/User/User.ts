@@ -1,7 +1,7 @@
 import { Card } from '#lib-backend/billing/resources/Card/Card';
-import { withEntity } from '#lib-backend/resource/decorators/withEntity/withEntity';
-import { withField } from '#lib-backend/resource/decorators/withField/withField';
 import { EntityResource } from '#lib-backend/resource/resources/EntityResource/EntityResource';
+import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
+import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { LinkedUser } from '#lib-backend/user/resources/LinkedUser/LinkedUser';
 import { BANK_RESOURCE_NAME } from '#lib-shared/billing/resources/Bank/Bank.constants';
 import { type BankModel } from '#lib-shared/billing/resources/Bank/Bank.models';
@@ -14,7 +14,6 @@ import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constan
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withEntity({
-  base: EntityResource,
   indices: [['email'], ['phone']],
   isRepository: true,
   name: USER_RESOURCE_NAME,

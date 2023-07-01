@@ -36,4 +36,4 @@ export const config: BundleConfigModel = () => ({
   ],
 });
 
-export const _config: _BundleConfigModel = () => _bundle(config());
+export const _config: _BundleConfigModel = ({ ...params } = {}) => _bundle(config({ ...params }));

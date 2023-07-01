@@ -1,6 +1,6 @@
-import { withEntity } from '#lib-backend/resource/decorators/withEntity/withEntity';
-import { withField } from '#lib-backend/resource/decorators/withField/withField';
 import { EmbeddedResource } from '#lib-backend/resource/resources/EmbeddedResource/EmbeddedResource';
+import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
+import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { FIELD_TYPE } from '#lib-shared/form/form.constants';
 import { LINKED_USER_RESOURCE_NAME } from '#lib-shared/user/resources/LinkedUser/LinkedUser.constants';
 import {
@@ -9,7 +9,6 @@ import {
 } from '#lib-shared/user/resources/LinkedUser/LinkedUser.models';
 
 @withEntity({
-  base: EmbeddedResource,
   isEmbedded: true,
   isRepository: true,
   name: LINKED_USER_RESOURCE_NAME,

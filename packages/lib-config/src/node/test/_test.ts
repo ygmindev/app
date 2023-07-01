@@ -66,7 +66,7 @@ export const _test = ({
 
     resolver: fromConfig('node/test/_resolver.js'),
 
-    rootDir: root,
+    rootDir: root ?? fromRoot(),
 
     roots: ['<rootDir>', fromRoot(), fromConfig('node/test')],
 
@@ -80,8 +80,8 @@ export const _test = ({
         const extF = trim(ext, '.');
         return [
           ...result,
-          `<rootDir>/src/**/${match}.${extF}`,
-          `<rootDir>/src/**/_${match}.${extF}`,
+          `<rootDir>/src/**/${match ?? '*'}.${extF}`,
+          `<rootDir>/src/**/_${match ?? '*'}.${extF}`,
         ];
       },
       [] as Array<string>,
@@ -90,11 +90,6 @@ export const _test = ({
     testTimeout: timeout,
 
     transform: {
-      // '^.+\\.(js|jsx)$': 'babel-jest',
-      // '^.+\\.(ts|tsx)$': [
-      //   'ts-jest',
-      //   { babelConfig: _bundleConfig.babelConfig, tsconfig: fromWorking('tsconfig.json') },
-      // ],
       '^.+\\.(t|j)sx?$': [
         'ts-jest',
         { isolatedModules: true, tsconfig: fromWorking('tsconfig.json') },

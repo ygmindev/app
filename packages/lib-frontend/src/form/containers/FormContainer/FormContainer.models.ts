@@ -16,7 +16,7 @@ import {
 } from '#lib-frontend/form/hooks/useForm/useForm.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { type PartialModel } from '#lib-shared/core/core.models';
-import { type WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
+import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 import { type FieldTypeModel } from '#lib-shared/form/form.models';
 
 export type FormFieldTypeModel = `${FORM_FIELD_TYPE}`;

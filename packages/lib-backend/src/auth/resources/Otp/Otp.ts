@@ -1,8 +1,8 @@
 import { OTP_EXPIRATION_SECONDS } from '#lib-backend/auth/resources/Otp/Otp.constants';
-import { withAccess } from '#lib-backend/resource/decorators/withAccess/withAccess';
-import { withEntity } from '#lib-backend/resource/decorators/withEntity/withEntity';
-import { withField } from '#lib-backend/resource/decorators/withField/withField';
 import { EntityResource } from '#lib-backend/resource/resources/EntityResource/EntityResource';
+import { withAccess } from '#lib-backend/resource/utils/withAccess/withAccess';
+import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
+import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { ACCESS_LEVEL } from '#lib-shared/auth/resources/Access/Access.constants';
 import { OTP_RESOURCE_NAME } from '#lib-shared/auth/resources/Otp/Otp.constants';
 import { type OtpFormModel, type OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
@@ -24,7 +24,6 @@ export class OtpForm implements OtpFormModel {
 }
 
 @withEntity({
-  base: EntityResource,
   indices: [['email'], ['phone']],
   isRepository: true,
   name: OTP_RESOURCE_NAME,

@@ -1,5 +1,5 @@
-import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
-import { EmbeddedResourceService } from '#lib-backend/resource/resources/EmbeddedResource/EmbeddedResourceService/EmbeddedResourceService';
+import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
+import { createEmbeddedResourceService } from '#lib-backend/resource/utils/createEmbeddedResourceService/createEmbeddedResourceService';
 import { UserService } from '#lib-backend/user/resources/User/UserService/UserService';
 import { BANK_RESOURCE_NAME } from '#lib-shared/billing/resources/Bank/Bank.constants';
 import { type BankFormModel, type BankModel } from '#lib-shared/billing/resources/Bank/Bank.models';
@@ -8,7 +8,7 @@ import { type UserFormModel, type UserModel } from '#lib-shared/user/resources/U
 
 @withContainer()
 export class BankService
-  extends EmbeddedResourceService<BankModel, BankFormModel, UserModel, UserFormModel>({
+  extends createEmbeddedResourceService<BankModel, BankFormModel, UserModel, UserFormModel>({
     RootService: UserService,
     name: BANK_RESOURCE_NAME,
   })

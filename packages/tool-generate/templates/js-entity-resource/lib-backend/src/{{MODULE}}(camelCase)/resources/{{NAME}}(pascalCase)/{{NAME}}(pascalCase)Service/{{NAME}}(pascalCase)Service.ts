@@ -1,5 +1,5 @@
 import { EntityResourceService } from '#lib-backend/resource/resources/EntityResource/EntityResourceService/EntityResourceService';
-import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
+import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { {{NAME}}(constantCase)_RESOURCE_NAME } from '#lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).constants';
 import {
 type  {{NAME}}(pascalCase)FormModel,

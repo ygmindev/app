@@ -11,7 +11,7 @@ import {
   type ViewStyleModel,
 } from '#lib-frontend/style/style.models';
 import { type TestIdPropsModel } from '#lib-frontend/test/test.models';
-import { type WithIdModel } from '#lib-shared/core/decorators/withId/withId.models';
+import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
 export type FCModel<TProps = object> = _FC<TProps & TestIdPropsModel & { nativeID?: string }>;
 

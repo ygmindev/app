@@ -10,7 +10,7 @@ import { PLATFORM } from '#lib-platform/core/core.constants';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
 
-export const config: BundleConfigModel = () =>
+export const config: BundleConfigModel = ({ ...params } = {}) =>
   merge(
     [
       {
@@ -30,9 +30,9 @@ export const config: BundleConfigModel = () =>
         // watch: [fromStatic('assets/**/*')],
       },
 
-      configFrontend(),
+      configFrontend({ ...params }),
     ],
     MERGE_STRATEGY.DEEP_PREPEND,
   );
 
-export const _config: _BundleConfigModel = () => _bundle(config());
+export const _config: _BundleConfigModel = ({ ...params } = {}) => _bundle(config({ ...params }));

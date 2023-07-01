@@ -1,8 +1,5 @@
-import { type Edge, type PageInfo } from 'graphql-relay';
-
-export type EdgeModel<TType> = Edge<TType>;
-
-export type PageInfoModel = PageInfo;
+import { type EdgeModel } from '#lib-shared/resource/utils/Edge/Edge.models';
+import { type PageInfoModel } from '#lib-shared/resource/utils/PageInfo/PageInfo.models';
 
 export type ConnectionModel<TType> = {
   edges: Array<EdgeModel<TType>>;

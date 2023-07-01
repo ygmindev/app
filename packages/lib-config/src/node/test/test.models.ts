@@ -4,36 +4,37 @@ import { type ConfigDynamicModel } from '#lib-config/core/core.models';
 import { type BundleConfigModel } from '#lib-config/node/bundle/bundle.models';
 import { type CallableModel, type CallablePromiseModel } from '#lib-shared/core/core.models';
 
-export type TestConfigModel = ConfigDynamicModel<{
-  bundleConfig: BundleConfigModel;
+export type TestConfigOptionsModel = { match?: string; root?: string };
 
-  cachePath: string;
+export type TestConfigModel = ConfigDynamicModel<
+  {
+    bundleConfig: BundleConfigModel;
 
-  coverageOutputPath: string;
+    cachePath: string;
 
-  fileExtensions: Array<string>;
+    coverageOutputPath: string;
 
-  isWatch?: boolean;
+    fileExtensions: Array<string>;
 
-  match: string;
+    isWatch?: boolean;
 
-  mockPath: string;
+    mockPath: string;
 
-  mocks?: Array<string | [string, CallableModel<unknown>]>;
+    mocks?: Array<string | [string, CallableModel<unknown>]>;
 
-  onAfterAll?: CallablePromiseModel;
+    onAfterAll?: CallablePromiseModel;
 
-  onAfterEach?: CallablePromiseModel;
+    onAfterEach?: CallablePromiseModel;
 
-  onBeforeAll?: CallablePromiseModel;
+    onBeforeAll?: CallablePromiseModel;
 
-  onBeforeEach?: CallablePromiseModel;
+    onBeforeEach?: CallablePromiseModel;
 
-  root: string;
+    testExtensions: Array<string>;
 
-  testExtensions: Array<string>;
+    timeout: number;
+  },
+  TestConfigOptionsModel
+>;
 
-  timeout: number;
-}>;
-
-export type _TestConfigModel = ConfigDynamicModel<Config.InitialOptions>;
+export type _TestConfigModel = ConfigDynamicModel<Config.InitialOptions, TestConfigOptionsModel>;

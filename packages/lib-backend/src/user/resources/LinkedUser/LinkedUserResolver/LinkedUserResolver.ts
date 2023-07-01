@@ -1,7 +1,7 @@
 import { selfAuthorizer } from '#lib-backend/auth/utils/selfAuthorizer/selfAuthorizer';
-import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
-import { withResolver } from '#lib-backend/http/decorators/withResolver/withResolver';
-import { EmbeddedResourceResolver } from '#lib-backend/resource/resources/EmbeddedResource/EmbeddedResourceResolver/EmbeddedResourceResolver';
+import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
+import { withResolver } from '#lib-backend/http/utils/withResolver/withResolver';
+import { createEmbeddedResourceResolver } from '#lib-backend/resource/utils/createEmbeddedResourceResolver/createEmbeddedResourceResolver';
 import { LinkedUser } from '#lib-backend/user/resources/LinkedUser/LinkedUser';
 import { LinkedUserService } from '#lib-backend/user/resources/LinkedUser/LinkedUserService/LinkedUserService';
 import { User } from '#lib-backend/user/resources/User/User';
@@ -16,7 +16,7 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 @withContainer()
 @withResolver({ Resource: LinkedUser })
 export class LinkedUserResolver
-  extends EmbeddedResourceResolver<LinkedUserModel, LinkedUserFormModel, UserModel>({
+  extends createEmbeddedResourceResolver<LinkedUserModel, LinkedUserFormModel, UserModel>({
     Resource: LinkedUser,
     ResourceService: LinkedUserService,
     RootResource: User,

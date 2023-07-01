@@ -1,5 +1,5 @@
-import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
-import { EntityResourceService } from '#lib-backend/resource/resources/EntityResource/EntityResourceService/EntityResourceService';
+import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
+import { createEntityResourceService } from '#lib-backend/resource/utils/createEntityResourceService/createEntityResourceService';
 import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
 import {
   type DummyEntityResourceFormModel,
@@ -9,7 +9,7 @@ import { type DummyEntityResourceServiceModel } from '#lib-shared/test/resources
 
 @withContainer({ name: `${DUMMY_ENTITY_RESOURCE_RESOURCE_NAME}Service` })
 export class DummyEntityResourceService
-  extends EntityResourceService<DummyEntityResourceModel, DummyEntityResourceFormModel>({
+  extends createEntityResourceService<DummyEntityResourceModel, DummyEntityResourceFormModel>({
     afterCreate: async ({ output }) => output,
     afterGet: async ({ output }) => output,
     afterGetConnection: async ({ output }) => output,

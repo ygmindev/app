@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 
 import { STRIPE_ADMIN_SERVICE_API_VERSION } from '#lib-backend/billing/utils/StripeAdminService/StripeAdminService.constants';
-import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
+import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { ExternalError } from '#lib-shared/core/errors/ExternalError/ExternalError';
 
 @withContainer()

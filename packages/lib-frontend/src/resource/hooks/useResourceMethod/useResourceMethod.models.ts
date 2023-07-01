@@ -1,12 +1,14 @@
 import { type GraphQlQueryParamsFieldsModel } from '#lib-frontend/http/utils/graphQlQuery/graphQlQuery.models';
-import { type WithResourceNameModel } from '#lib-shared/resource/decorators/withResourceName/withResourceName.models';
-import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
-import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
+import {
+  type ResourceMethodTypeModel,
+  type ResourceNameParamsModel,
+} from '#lib-shared/resource/resource.models';
 import {
   type ResourceServiceAfterDecoratorModel,
   type ResourceServiceBeforeDecoratorModel,
-} from '#lib-shared/resource/utils/Resource/ResourceService/ResourceService.models';
+} from '#lib-shared/resource/services/ResourceService/ResourceService.models';
+import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
+import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type RootModel } from '#lib-shared/resource/utils/Root/Root.models';
 
 export type UseResourceMethodParamsFieldsModel<
@@ -20,7 +22,7 @@ export type UseResourceMethodParamsModel<
   TType,
   TForm,
   TRoot = undefined,
-> = WithResourceNameModel &
+> = ResourceNameParamsModel &
   RootModel<TRoot> & {
     after?: ResourceServiceAfterDecoratorModel<TMethod, TType, TRoot>;
     before?: ResourceServiceBeforeDecoratorModel<TMethod, TType, TForm, TRoot>;

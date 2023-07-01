@@ -1,6 +1,6 @@
-import { withEntity } from '#lib-backend/resource/decorators/withEntity/withEntity';
-import { withField } from '#lib-backend/resource/decorators/withField/withField';
 import { EntityResource } from '#lib-backend/resource/resources/EntityResource/EntityResource';
+import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
+import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { User } from '#lib-backend/user/resources/User/User';
 import { ACCESS_RESOURCE_NAME } from '#lib-shared/auth/resources/Access/Access.constants';
 import {
@@ -21,7 +21,7 @@ export class AccessForm implements AccessFormModel {
   role!: AccessRoleModel;
 }
 
-@withEntity({ base: EntityResource, isRepository: true, name: ACCESS_RESOURCE_NAME })
+@withEntity({ isRepository: true, name: ACCESS_RESOURCE_NAME })
 export class Access extends EntityResource implements AccessModel {
   @withField({ isRepository: true, type: FIELD_TYPE.ID })
   _uid!: string;

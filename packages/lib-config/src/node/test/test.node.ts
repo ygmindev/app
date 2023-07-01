@@ -6,7 +6,7 @@ import { type _TestConfigModel, type TestConfigModel } from '#lib-config/node/te
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
 
-export const config: TestConfigModel = () =>
+export const config: TestConfigModel = ({ ...params } = {}) =>
   merge(
     [
       {
@@ -15,9 +15,9 @@ export const config: TestConfigModel = () =>
         onBeforeAll: setupConfig.onInitialize,
       },
 
-      configBase(),
+      configBase({ ...params }),
     ],
     MERGE_STRATEGY.DEEP_PREPEND,
   );
 
-export const _config: _TestConfigModel = () => _test(config());
+export const _config: _TestConfigModel = ({ ...params } = {}) => _test(config({ ...params }));

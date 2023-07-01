@@ -3,35 +3,41 @@ import { type UserConfig } from 'vite';
 import { type ConfigDynamicModel } from '#lib-config/core/core.models';
 import { type _BabelConfigModel } from '#lib-config/node/babel/babel.models';
 import { type PlatformModel } from '#lib-platform/core/core.models';
+import { type EmptyObjectModel } from '#lib-shared/core/core.models';
 
-export type BundleConfigModel = ConfigDynamicModel<{
-  aliases?: Record<string, string>;
+export type BundleConfigOptionsModel = EmptyObjectModel;
 
-  babelConfig?: _BabelConfigModel;
+export type BundleConfigModel = ConfigDynamicModel<
+  {
+    aliases?: Record<string, string>;
 
-  define?: Record<string, string>;
+    babelConfig?: _BabelConfigModel;
 
-  entry?: string;
+    define?: Record<string, string>;
 
-  envPrefix: Array<string>;
+    entry?: string;
 
-  extensions: Array<string>;
+    envPrefix: Array<string>;
 
-  mainFields?: Array<string>;
+    extensions: Array<string>;
 
-  modulePaths: Array<string>;
+    mainFields?: Array<string>;
 
-  outDir?: string;
+    modulePaths: Array<string>;
 
-  platform: PlatformModel;
+    outDir?: string;
 
-  provide?: Record<string, string>;
+    platform: PlatformModel;
 
-  transpiles?: Array<string>;
+    provide?: Record<string, string>;
 
-  tsconfigPath?: string;
+    transpiles?: Array<string>;
 
-  watch?: Array<string>;
-}>;
+    tsconfigPath?: string;
 
-export type _BundleConfigModel = ConfigDynamicModel<UserConfig>;
+    watch?: Array<string>;
+  },
+  BundleConfigOptionsModel
+>;
+
+export type _BundleConfigModel = ConfigDynamicModel<UserConfig, BundleConfigOptionsModel>;

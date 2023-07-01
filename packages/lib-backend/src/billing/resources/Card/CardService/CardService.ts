@@ -1,5 +1,5 @@
-import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
-import { EmbeddedResourceService } from '#lib-backend/resource/resources/EmbeddedResource/EmbeddedResourceService/EmbeddedResourceService';
+import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
+import { createEmbeddedResourceService } from '#lib-backend/resource/utils/createEmbeddedResourceService/createEmbeddedResourceService';
 import { UserService } from '#lib-backend/user/resources/User/UserService/UserService';
 import { CARD_RESOURCE_NAME } from '#lib-shared/billing/resources/Card/Card.constants';
 import { type CardFormModel, type CardModel } from '#lib-shared/billing/resources/Card/Card.models';
@@ -8,7 +8,7 @@ import { type UserFormModel, type UserModel } from '#lib-shared/user/resources/U
 
 @withContainer()
 export class CardService
-  extends EmbeddedResourceService<CardModel, CardFormModel, UserModel, UserFormModel>({
+  extends createEmbeddedResourceService<CardModel, CardFormModel, UserModel, UserFormModel>({
     RootService: UserService,
     name: CARD_RESOURCE_NAME,
   })

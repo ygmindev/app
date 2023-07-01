@@ -14,8 +14,8 @@ import { type PartialDeepModel, type ReturnTypeModel } from '#lib-shared/core/co
 import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/DuplicateError';
 import { UninitializedError } from '#lib-shared/core/errors/UninitializedError/UninitializedError';
 import { debug, info } from '#lib-shared/logging/utils/logger/logger';
-import { type WithResourceNameModel } from '#lib-shared/resource/decorators/withResourceName/withResourceName.models';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
+import { type ResourceNameParamsModel } from '#lib-shared/resource/resource.models';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
@@ -31,7 +31,7 @@ export abstract class _Database implements DatabaseModel {
   async connect(): Promise<void> {
     info('[database] connecting', this._config.clientUrl);
     this._entityManager =
-      this._entityManager ?? (await MikroORM.init<MongoDriver>(this._config)).em;
+      this._entityManager || (await MikroORM.init<MongoDriver>(this._config)).em;
   }
 
   _getEntityManager = (): EntityManager => {
@@ -44,7 +44,7 @@ export abstract class _Database implements DatabaseModel {
 
   getRepository = <TType extends unknown>({
     name,
-  }: WithResourceNameModel): RepositoryModel<TType> => {
+  }: ResourceNameParamsModel): RepositoryModel<TType> => {
     const service: RepositoryModel<TType> = {
       clear: async () => {
         await this._getEntityManager()

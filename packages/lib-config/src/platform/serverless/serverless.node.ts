@@ -10,7 +10,7 @@ import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
 import { GRAPHQL } from '#lib-shared/graphql/graphql.constants';
 import { HTTP_METHOD, PING } from '#lib-shared/http/http.constants';
 
-export const config: ServerlessConfigModel = () =>
+export const config: ServerlessConfigModel = ({ ...params } = {}) =>
   merge(
     [
       {
@@ -31,9 +31,10 @@ export const config: ServerlessConfigModel = () =>
         platform: PLATFORM.NODE,
       },
 
-      configBase(),
+      configBase({ ...params }),
     ],
     MERGE_STRATEGY.DEEP_APPEND,
   );
 
-export const _config: _ServerlessConfigModel = () => _serverless(config());
+export const _config: _ServerlessConfigModel = ({ ...params } = {}) =>
+  _serverless(config({ ...params }));

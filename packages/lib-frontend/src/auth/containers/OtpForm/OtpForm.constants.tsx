@@ -4,7 +4,7 @@ import { type FormContainerRowModel } from '#lib-frontend/form/containers/FormCo
 import { type FormValidatorsModel } from '#lib-frontend/form/form.models';
 import { validateLength } from '#lib-frontend/form/utils/validateLength/validateLength';
 import { OTP_LENGTH } from '#lib-shared/auth/resources/Otp/Otp.constants';
-import { withId } from '#lib-shared/core/decorators/withId/withId';
+import { withId } from '#lib-shared/core/utils/withId/withId';
 
 export const OTP_FORM_VALIDATORS: FormValidatorsModel<OtpFormModel> = {
   otp: validateLength(OTP_LENGTH),

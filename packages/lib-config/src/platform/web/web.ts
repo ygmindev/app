@@ -4,7 +4,9 @@ import { _web } from '#lib-config/platform/web/_web';
 import { WEB_CONFIG_STATIC } from '#lib-config/platform/web/web.constants';
 import { type _WebConfigModel, type WebConfigModel } from '#lib-config/platform/web/web.models';
 
-export const config: WebConfigModel = () => ({
+export const config: WebConfigModel = ({ ...params } = {}) => ({
+  ...params,
+
   bundleConfig: _bundleConfig,
 
   configFile: fromWorking('web.js'),
@@ -14,4 +16,4 @@ export const config: WebConfigModel = () => ({
   ...WEB_CONFIG_STATIC,
 });
 
-export const _config: _WebConfigModel = () => _web(config());
+export const _config: _WebConfigModel = ({ ...params } = {}) => _web(config({ ...params }));

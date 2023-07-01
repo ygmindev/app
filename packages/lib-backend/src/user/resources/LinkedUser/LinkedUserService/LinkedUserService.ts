@@ -1,5 +1,5 @@
-import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
-import { EmbeddedResourceService } from '#lib-backend/resource/resources/EmbeddedResource/EmbeddedResourceService/EmbeddedResourceService';
+import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
+import { createEmbeddedResourceService } from '#lib-backend/resource/utils/createEmbeddedResourceService/createEmbeddedResourceService';
 import { UserService } from '#lib-backend/user/resources/User/UserService/UserService';
 import { LINKED_USER_RESOURCE_NAME } from '#lib-shared/user/resources/LinkedUser/LinkedUser.constants';
 import {
@@ -11,7 +11,12 @@ import { type UserFormModel, type UserModel } from '#lib-shared/user/resources/U
 
 @withContainer()
 export class LinkedUserService
-  extends EmbeddedResourceService<LinkedUserModel, LinkedUserFormModel, UserModel, UserFormModel>({
+  extends createEmbeddedResourceService<
+    LinkedUserModel,
+    LinkedUserFormModel,
+    UserModel,
+    UserFormModel
+  >({
     RootService: UserService,
     name: LINKED_USER_RESOURCE_NAME,
   })

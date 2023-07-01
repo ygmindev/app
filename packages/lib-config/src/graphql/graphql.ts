@@ -15,7 +15,9 @@ import {
   type GraphqlConfigModel,
 } from '#lib-config/graphql/graphql.models';
 
-export const config: GraphqlConfigModel = () => ({
+export const config: GraphqlConfigModel = ({ ...params } = {}) => ({
+  ...params,
+
   authorize,
 
   container: Container,
@@ -34,4 +36,4 @@ export const config: GraphqlConfigModel = () => ({
   schemaPath: fromStatic('graphql/schema.gql'),
 });
 
-export const _config: _GraphqlConfigModel = () => _graphql(config());
+export const _config: _GraphqlConfigModel = ({ ...params } = {}) => _graphql(config({ ...params }));

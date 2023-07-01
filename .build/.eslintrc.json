@@ -76,7 +76,8 @@
     "@typescript-eslint/restrict-template-expressions": [
       "error",
       {
-        "allowBoolean": true
+        "allowBoolean": true,
+        "allowNullish": true
       }
     ],
     "@typescript-eslint/return-await": [

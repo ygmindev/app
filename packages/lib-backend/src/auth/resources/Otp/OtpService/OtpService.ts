@@ -1,9 +1,9 @@
-import { withContainer } from '#lib-backend/core/decorators/withContainer/withContainer';
 import { Container } from '#lib-backend/core/utils/Container/Container';
+import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
 import { mail } from '#lib-backend/notification/utils/mail/mail';
 import { sms } from '#lib-backend/notification/utils/sms/sms';
-import { EntityResourceService } from '#lib-backend/resource/resources/EntityResource/EntityResourceService/EntityResourceService';
+import { createEntityResourceService } from '#lib-backend/resource/utils/createEntityResourceService/createEntityResourceService';
 import { UserService } from '#lib-backend/user/resources/User/UserService/UserService';
 import { UnauthorizedError } from '#lib-shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import {
@@ -13,9 +13,9 @@ import {
 } from '#lib-shared/auth/resources/Otp/Otp.constants';
 import { type OtpFormModel, type OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
 import { type OtpServiceModel } from '#lib-shared/auth/resources/Otp/OtpService/OtpService.models';
-import { withInject } from '#lib-shared/core/decorators/withInject/withInject';
 import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/DuplicateError';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
+import { withInject } from '#lib-shared/core/utils/withInject/withInject';
 import { randomInt } from '#lib-shared/crypto/utils/randomInt/randomInt';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
@@ -24,7 +24,7 @@ import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.model
 
 @withContainer()
 export class OtpService
-  extends EntityResourceService<OtpModel, OtpFormModel>({
+  extends createEntityResourceService<OtpModel, OtpFormModel>({
     afterCreate: async ({ output }) => {
       if (output.result) {
         // phone verification

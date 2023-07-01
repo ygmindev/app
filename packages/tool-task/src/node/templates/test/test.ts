@@ -3,7 +3,11 @@ import { runCLI } from 'jest';
 
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { importConfig } from '#lib-config/core/utils/importConfig/importConfig';
-import { type _TestConfigModel, type TestConfigModel } from '#lib-config/node/test/test.models';
+import {
+  type _TestConfigModel,
+  type TestConfigModel,
+  type TestConfigOptionsModel,
+} from '#lib-config/node/test/test.models';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
 import { type TaskParamsModel } from '#tool-task/core/core.models';
@@ -16,13 +20,17 @@ export const test: TaskParamsModel<TestParamsModel> = {
   name: 'test',
 
   task: async ({ options, root }) => {
-    const testMatch =
-      options?.isPrompt && (await prompt([{ isOptional: true, key: 'testMatch' }])).testMatch;
-    testMatch && (process.env.TEST_MATCH = testMatch);
-    const { _config } = await importConfig<TestConfigModel, _TestConfigModel>('node/test/test');
+    const match = options?.isPrompt
+      ? (await prompt([{ isOptional: true, key: 'testMatch' }])).testMatch
+      : undefined;
+    const { _config } = await importConfig<
+      TestConfigModel,
+      _TestConfigModel,
+      TestConfigOptionsModel
+    >('node/test/test', { match, root });
     await runCLI(
       { config: JSON.stringify(_config), runInBand: true, watch: options?.isWatch } as Config.Argv,
-      [root || fromWorking()],
+      [root ?? fromWorking()],
     );
     return { status: TASK_STATUS.SUCCESS };
   },

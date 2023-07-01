@@ -17,7 +17,7 @@ export const config: BabelConfigModel = merge(
   MERGE_STRATEGY.DEEP_PREPEND,
 );
 
-export const _config: _BabelConfigModel = () => _babel(config);
+export const _config: _BabelConfigModel = ({ ...params } = {}) => _babel({ ...config, ...params });
 
 // import { _babel } from '#lib-config/node/babel/_babel';
 // import { config as configFrontend } from '#lib-config/node/babel/babel.frontend';
