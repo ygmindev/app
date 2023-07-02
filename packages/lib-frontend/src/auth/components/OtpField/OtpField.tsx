@@ -9,6 +9,7 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type MeasureModel, type SFCModel } from '#lib-frontend/core/core.models';
 import { TextField } from '#lib-frontend/form/components/TextField/TextField';
+import { TEXT_FIELD_KEYBOARD } from '#lib-frontend/form/components/TextField/TextField.constants';
 import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
 import { isTranslatableText } from '#lib-frontend/locale/utils/isTranslatableText/isTranslatableText';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
@@ -76,6 +77,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             elementState={elementState}
             isAutoFocus={isAutoFocus}
             isNoClear
+            keyboard={TEXT_FIELD_KEYBOARD.NUMBER_POSITIVE}
             maxLength={OTP_LENGTH}
             onBlur={() => isFocusedSet(false)}
             onChange={valueControlledSet}

@@ -1,1 +1,0 @@
-export const NOTIFICATIONS_MAX_WIDTH = 300;
