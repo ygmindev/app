@@ -2,14 +2,7 @@ import findIndex from 'lodash/findIndex';
 import map from 'lodash/map';
 import toNumber from 'lodash/toNumber';
 import { type ForwardedRef, type ReactElement } from 'react';
-import {
-  createElement,
-  forwardRef,
-  useCallback,
-  useImperativeHandle,
-  useMemo,
-  useState,
-} from 'react';
+import { createElement, forwardRef, useImperativeHandle, useMemo, useState } from 'react';
 
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
@@ -39,7 +32,6 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { BORDER_RADIUS_DIRECTION } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.constants';
-import { type CallableModel } from '#lib-shared/core/core.models';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 import { FIELD_TYPE } from '#lib-shared/form/form.constants';
 
@@ -142,77 +134,72 @@ const FormContainerF = forwardRef(
     const elementStateF = isLoading ? ELEMENT_STATE.LOADING : elementState;
     const isDisabled =
       elementStateF === ELEMENT_STATE.DISABLED || elementStateF === ELEMENT_STATE.LOADING;
-    const onSubmitF: CallableModel = () => handleSubmit();
-    const getField = useCallback(
-      (
-        { Component, field, fieldProps, id }: FormContainerFieldModel,
-        isFirstRow = false,
-        isFirstField = false,
-        isLastRow = false,
-        isLastField = false,
-      ) => {
-        const fieldPropsF: StringFieldPropsModel = {
-          ...fieldProps,
-          defaultValue: initialValues
-            ? (initialValues as Record<string, undefined>)[id]
-            : undefined,
-          elementState: isDisabled
-            ? ELEMENT_STATE.DISABLED
-            : elementStateF || fieldProps?.elementState,
-          error: errors ? (errors as Record<string, undefined>)[id] : undefined,
-          isAutoFocus:
-            autoFocus === id ||
-            (!isFirstRow && !isFirstField && autoFocus === true) ||
-            fieldProps?.isAutoFocus,
-          label: fieldProps?.label ? t(fieldProps.label) : undefined,
-          onBlur: () => focusedSet(undefined),
-          onChange: handleChange(id),
-          onFocus: () => focusedSet(id),
-          round: isGrouped
-            ? {
-                [BORDER_RADIUS_DIRECTION.TOP_LEFT]: (isFirstRow && isFirstField) || 0,
-                [BORDER_RADIUS_DIRECTION.TOP_RIGHT]: (isFirstRow && isLastField) || 0,
-                [BORDER_RADIUS_DIRECTION.BOTTOM_LEFT]: (isLastRow && isFirstField) || 0,
-                [BORDER_RADIUS_DIRECTION.BOTTOM_RIGHT]: (isLastRow && isLastField) || 0,
-              }
-            : 0,
-          value: values ? (values as Record<string, undefined>)[id] : undefined,
-          zIndex: focused && focused === id ? 1 : 0,
-        };
 
-        switch (field) {
-          case FORM_FIELD_TYPE.TEXT_FIELD: {
-            return (
-              <TextField
-                {...(fieldPropsF as TextFieldPropsModel)}
-                key={id}
-                onSubmit={() => onSubmitF()}
-                testID={id}
-              />
-            );
-          }
-          case FORM_FIELD_TYPE.SELECT_FIELD: {
-            return (
-              <SelectField
-                {...(fieldPropsF as SelectFieldPropsModel)}
-                key={id}
-                onSubmit={onSubmitF}
-                testID={id}
-              />
-            );
-          }
-          default: {
-            return createElement(Component as SFCModel<TextFieldPropsModel>, {
-              ...fieldPropsF,
-              key: id,
-              onSubmit: onSubmitF,
-              testID: id,
-            });
-          }
+    const getField = (
+      { Component, field, fieldProps, id }: FormContainerFieldModel,
+      isFirstRow = false,
+      isFirstField = false,
+      isLastRow = false,
+      isLastField = false,
+    ): ReactElement => {
+      const fieldPropsF: StringFieldPropsModel = {
+        ...fieldProps,
+        defaultValue: initialValues ? (initialValues as Record<string, undefined>)[id] : undefined,
+        elementState: isDisabled
+          ? ELEMENT_STATE.DISABLED
+          : elementStateF || fieldProps?.elementState,
+        error: errors ? (errors as Record<string, undefined>)[id] : undefined,
+        isAutoFocus:
+          autoFocus === id ||
+          (!isFirstRow && !isFirstField && autoFocus === true) ||
+          fieldProps?.isAutoFocus,
+        label: fieldProps?.label ? t(fieldProps.label) : undefined,
+        onBlur: () => focusedSet(undefined),
+        onChange: handleChange(id),
+        onFocus: () => focusedSet(id),
+        round: isGrouped
+          ? {
+              [BORDER_RADIUS_DIRECTION.TOP_LEFT]: (isFirstRow && isFirstField) || 0,
+              [BORDER_RADIUS_DIRECTION.TOP_RIGHT]: (isFirstRow && isLastField) || 0,
+              [BORDER_RADIUS_DIRECTION.BOTTOM_LEFT]: (isLastRow && isFirstField) || 0,
+              [BORDER_RADIUS_DIRECTION.BOTTOM_RIGHT]: (isLastRow && isLastField) || 0,
+            }
+          : 0,
+        value: values ? (values as Record<string, undefined>)[id] : undefined,
+        zIndex: focused && focused === id ? 1 : 0,
+      };
+
+      switch (field) {
+        case FORM_FIELD_TYPE.TEXT_FIELD: {
+          return (
+            <TextField
+              {...(fieldPropsF as TextFieldPropsModel)}
+              key={id}
+              onSubmit={handleSubmit}
+              testID={id}
+            />
+          );
         }
-      },
-      [values, errors, handleChange, initialValues, onSubmitF, elementStateF],
-    );
+        case FORM_FIELD_TYPE.SELECT_FIELD: {
+          return (
+            <SelectField
+              {...(fieldPropsF as SelectFieldPropsModel)}
+              key={id}
+              onSubmit={handleSubmit}
+              testID={id}
+            />
+          );
+        }
+        default: {
+          return createElement(Component as SFCModel<TextFieldPropsModel>, {
+            ...fieldPropsF,
+            key: id,
+            onSubmit: handleSubmit,
+            testID: id,
+          });
+        }
+      }
+    };
 
     const rowsF = map(rows, ({ fields, id }, i) => (
       <Wrapper

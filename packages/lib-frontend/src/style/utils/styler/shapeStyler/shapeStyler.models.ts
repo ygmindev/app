@@ -21,5 +21,5 @@ export type ShapeStylerParamsModel = {
   scale?: number;
   size?: ThemeSizeMoreModel;
   top?: number;
-  zIndex?: number;
+  zIndex?: number | true;
 } & DimensionModel;

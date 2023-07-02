@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import { cloneElement, useMemo, useRef, useState } from 'react';
+import { cloneElement, useRef, useState } from 'react';
 
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 import { Slides } from '#lib-frontend/animation/components/Slides/Slides';
@@ -38,8 +38,7 @@ export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends
   const [isLoading, isLoadingSet] = useState<boolean>(false);
   const [data, dataSet] = useState<PartialModel<TType>>();
 
-  const isLastStep = useMemo(() => current === steps.length - 1, [current, steps.length]);
-
+  const isLastStep = current === steps.length - 1;
   const barRef = useRef<WrapperRefModel>(null);
 
   const handleClear = (): void => {

@@ -183,7 +183,6 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
           autoCorrect={false}
           dense
           disabled={isDisabled}
-          error={isError}
           keyboardType={getKeyboardType(keyboard)}
           label={
             (icon || label) && (
@@ -240,6 +239,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
               animation={containerAnimation}
               elementState={elementState}
               grow
+              height={height}
               isCenter={isCenter}
               isOverflowHidden
               isRow

@@ -1,7 +1,8 @@
-import { OtpForm } from '#lib-frontend/auth/containers/OtpForm/OtpForm';
+import { useMemo } from 'react';
+
 import { type OtpFormModel } from '#lib-frontend/auth/containers/OtpForm/OtpForm.models';
+import { SIGN_IN_FORM_STEPS } from '#lib-frontend/auth/containers/SignInForm/SignInForm.constants';
 import { type SignInFormPropsModel } from '#lib-frontend/auth/containers/SignInForm/SignInForm.models';
-import { UsernameForm } from '#lib-frontend/auth/containers/UsernameForm/UsernameForm';
 import { type UsernameFormModel } from '#lib-frontend/auth/containers/UsernameForm/UsernameForm.models';
 import { useSignInResource } from '#lib-frontend/auth/hooks/useSignInResource/useSignInResource';
 import { Text } from '#lib-frontend/core/components/Text/Text';
@@ -25,22 +26,13 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({ method, mode, testI
   const handleSubmit = async (form: SignInFormModel): Promise<void> =>
     mode === SIGN_IN_MODE.SIGN_IN ? signIn(form) : usernameUpdate(form);
 
+  const steps = useMemo(() => SIGN_IN_FORM_STEPS({ method, mode }), [method, mode]);
+
   return (
     <StepForm<SignInFormModel, [UsernameFormModel, OtpFormModel]>
       onSubmit={handleSubmit}
       onSuccess={async () => replace({ pathname: '/' })}
-      steps={[
-        {
-          element: (
-            <UsernameForm
-              method={method}
-              mode={mode}
-            />
-          ),
-          id: 'username',
-        },
-        { element: <OtpForm />, id: 'otp' },
-      ]}
+      steps={steps}
       style={styles}
       testID={testID}>
       {mode !== SIGN_IN_MODE.UPDATE && (

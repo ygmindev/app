@@ -14,6 +14,7 @@ import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import { merge } from '#lib-shared/core/utils/merge/merge';
+import { error } from '#lib-shared/logging/utils/logger/logger';
 
 export const useForm = <TType = void, TResult = void>({
   beforeSubmit,
@@ -65,7 +66,7 @@ export const useForm = <TType = void, TResult = void>({
       data && onSuccess && (await onSuccess(values, data));
       return data ?? null;
     } catch (e) {
-      console.warn(e);
+      error(e);
       onError ? onError(e as Error) : handleError(e as Error);
     } finally {
       isBlocking && actions?.app.isLoadingSet(false);

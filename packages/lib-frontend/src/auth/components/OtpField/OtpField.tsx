@@ -7,7 +7,7 @@ import { Button } from '#lib-frontend/core/components/Button/Button';
 import { Tooltip } from '#lib-frontend/core/components/Tooltip/Tooltip';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type MeasureModel, type SFCModel } from '#lib-frontend/core/core.models';
 import { TextField } from '#lib-frontend/form/components/TextField/TextField';
 import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
 import { isTranslatableText } from '#lib-frontend/locale/utils/isTranslatableText/isTranslatableText';
@@ -36,6 +36,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
     onChange,
     value,
   });
+  const [measure, measureSet] = useState<MeasureModel>();
   const [isFocused, isFocusedSet] = useState<boolean>(false);
   return (
     <Wrapper
@@ -45,6 +46,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
       testID={testID}>
       <Wrapper
         isRowAlign
+        onMeasure={measureSet}
         position={SHAPE_POSITION.RELATIVE}>
         {IDS.map(({ id }, i) => (
           <TextField
@@ -84,8 +86,9 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
 
         <Wrapper
           isRowAlign
+          left={measure?.width && measure.width + theme.shape.spacing.s}
           position={SHAPE_POSITION.ABSOLUTE}
-          right={-(theme.shape.height.m + theme.shape.spacing.s)}>
+          zIndex>
           {isTranslatableText(error) && <Tooltip color={THEME_COLOR.ERROR}>{error}</Tooltip>}
 
           {elementState !== ELEMENT_STATE.DISABLED && (

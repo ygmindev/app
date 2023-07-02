@@ -38,5 +38,5 @@ export const shapeStyler: StylerModel<ShapeStylerParamsModel> = ({
     top: isAbsoluteFill ? top || 0 : top,
     transform: scale ? [{ scale }] : undefined,
     width: isFullWidth ? '100%' : width,
-    zIndex,
+    zIndex: zIndex === true ? 1 : zIndex,
   });
