@@ -1,9 +1,9 @@
-import { _useQuery } from '#lib-frontend/core/hooks/useQuery/_useQuery';
-import { QUERY_EXPIRATION_MILLISECONDS_DEFAULT } from '#lib-frontend/core/hooks/useQuery/useQuery.constants';
+import { _useQuery } from '#lib-frontend/query/hooks/useQuery/_useQuery';
+import { QUERY_EXPIRATION_MILLISECONDS_DEFAULT } from '#lib-frontend/query/hooks/useQuery/useQuery.constants';
 import {
   type UseQueryModel,
   type UseQueryParamsModel,
-} from '#lib-frontend/core/hooks/useQuery/useQuery.models';
+} from '#lib-frontend/query/hooks/useQuery/useQuery.models';
 
 export const useQuery = <TType,>(
   ...[id, callback, options]: UseQueryParamsModel<TType>

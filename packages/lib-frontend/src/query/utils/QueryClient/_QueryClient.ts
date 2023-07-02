@@ -1,16 +1,16 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { persistQueryClient } from '@tanstack/react-query-persist-client';
-import { Suspense, useState } from 'react';
 
-import { type FCModel } from '#lib-frontend/core/core.models';
-import { type _QueryProviderPropsModel } from '#lib-frontend/core/providers/QueryProvider/_QueryProvider.models';
+import { type _QueryClientModel } from '#lib-frontend/query/utils/QueryClient/_QueryClient.models';
 import { isServer } from '#lib-platform/core/utils/isServer/isServer';
-export const _QueryProvider: FCModel<_QueryProviderPropsModel> = ({ children }) => {
-  const [client] = useState(() => {
-    const queryClient = new QueryClient({
+
+export class _QueryClient implements _QueryClientModel {
+  protected _client: QueryClient;
+
+  constructor() {
+    this._client = new QueryClient({
       defaultOptions: {
         mutations: {
           cacheTime: 0,
@@ -36,16 +36,16 @@ export const _QueryProvider: FCModel<_QueryProviderPropsModel> = ({ children }) 
           shouldDehydrateQuery: ({ cacheTime }) => cacheTime > 0,
         },
         persister,
-        queryClient,
+        queryClient: this._client,
       });
     }
-    return queryClient;
-  });
-  return (
-    <QueryClientProvider client={client}>
-      <Suspense>{children}</Suspense>
+  }
 
-      {process.env.NODE_ENV === 'development' && <ReactQueryDevtools initialIsOpen={false} />}
-    </QueryClientProvider>
-  );
-};
+  public get client(): QueryClient {
+    return this._client;
+  }
+
+  public get state(): object {
+    return dehydrate(this._client);
+  }
+}

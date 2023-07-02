@@ -1,7 +1,7 @@
 import {
   type _UseQueryConnectionModel,
   type _UseQueryConnectionParamsModel,
-} from '#lib-frontend/core/hooks/useQueryConnection/_useQueryConnection.models';
+} from '#lib-frontend/query/hooks/useQueryConnection/_useQueryConnection.models';
 import { type ConnectionModel } from '#lib-shared/resource/utils/Connection/Connection.models';
 
 export type QueryConnectionModel<TType> = {

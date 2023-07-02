@@ -1,7 +1,7 @@
 import {
   type _UseQueryModel,
   type _UseQueryParamsModel,
-} from '#lib-frontend/core/hooks/useQuery/_useQuery.models';
+} from '#lib-frontend/query/hooks/useQuery/_useQuery.models';
 
 export type UseQueryParamsModel<TType> = _UseQueryParamsModel<TType>;
 

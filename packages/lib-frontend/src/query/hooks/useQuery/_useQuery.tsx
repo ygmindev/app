@@ -4,7 +4,7 @@ import isNumber from 'lodash/isNumber';
 import {
   type _UseQueryModel,
   type _UseQueryParamsModel,
-} from '#lib-frontend/core/hooks/useQuery/_useQuery.models';
+} from '#lib-frontend/query/hooks/useQuery/_useQuery.models';
 import { debounce } from '#lib-shared/core/utils/debounce/debounce';
 
 export const _useQuery = <TType,>(

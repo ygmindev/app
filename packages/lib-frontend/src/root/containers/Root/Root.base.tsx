@@ -6,8 +6,8 @@ import { AuthProvider } from '#lib-frontend/auth/providers/AuthProvider/AuthProv
 import { type FCModel } from '#lib-frontend/core/core.models';
 import { ErrorProvider } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider';
 import { ERROR_MODE } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider.constants';
-import { QueryProvider } from '#lib-frontend/core/providers/QueryProvider/QueryProvider';
 import { LocaleProvider } from '#lib-frontend/locale/providers/LocaleProvider/LocaleProvider';
+import { QueryProvider } from '#lib-frontend/query/providers/QueryProvider/QueryProvider';
 import { type RootPropsModel } from '#lib-frontend/root/containers/Root/Root.models';
 import { ContextProvider } from '#lib-frontend/root/providers/ContextProvider/ContextProvider';
 import { ROOT_REDUCERS } from '#lib-frontend/root/stores/rootStore.constants';
@@ -37,7 +37,7 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
       ...(additionalProviders || []),
       <ContextProvider value={context} />,
       <TrackingProvider />,
-      <QueryProvider />,
+      <QueryProvider value={context?.query} />,
       <AuthProvider />,
       <ErrorProvider value={{ mode: ERROR_MODE.NOTIFICATION }} />,
       <StyleProvider />,

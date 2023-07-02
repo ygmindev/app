@@ -10,5 +10,11 @@ export const WEB_CONFIG_STATIC: Pick<
 
   rootId: ROOT,
 
-  ssrContextKeys: ['locale.store', 'locale.lang', 'state.initialState', 'route.location.pathname'],
+  ssrContextKeys: [
+    'locale.store',
+    'locale.lang',
+    'state.initialState',
+    'route.location.pathname',
+    'query.state',
+  ],
 };

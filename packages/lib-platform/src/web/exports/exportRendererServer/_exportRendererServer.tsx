@@ -3,6 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { renderToStream } from 'react-streaming/server';
 import { dangerouslySkipEscape, escapeInject } from 'vite-plugin-ssr/server';
 
+import { QueryClient } from '#lib-frontend/query/utils/QueryClient/QueryClient';
 import { type RootContextModel } from '#lib-frontend/root/root.models';
 import { ROOT_REDUCERS } from '#lib-frontend/root/stores/rootStore.constants';
 import { type RootStateContextModel } from '#lib-frontend/root/stores/rootStore.models';
@@ -14,6 +15,7 @@ import {
 } from '#lib-platform/web/exports/exportRendererServer/_exportRendererServer.models';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
+import { QUERY } from '#lib-shared/query/query.constants';
 import { STATE } from '#lib-shared/state/state.constants';
 
 export const _exportRendererServer = ({
@@ -23,9 +25,14 @@ export const _exportRendererServer = ({
   ssrContextKeys,
 }: _ExportRendererServerParamsModel): _ExportRendererServerModel => ({
   render: async ({ Page, context, pageProps }) => {
+    const queryClient = new QueryClient();
+
     const store = new Store({ cookies: context?.state?.cookies, reducers: ROOT_REDUCERS });
     const contextF: RootContextModel = merge([
-      { [STATE]: { initialState: await store.getState() } as RootStateContextModel },
+      {
+        [QUERY]: { client: queryClient.client },
+        [STATE]: { initialState: await store.getState() } as RootStateContextModel,
+      },
       context,
     ]);
     const { element, getCss } = render({ children: <Page {...pageProps} />, context: contextF });
@@ -55,7 +62,10 @@ export const _exportRendererServer = ({
       pageContext: async () => {
         const i18n = contextF?.locale?.i18n;
         const pageContext: RootContextModel = merge([
-          { [LOCALE]: i18n ? { store: getLocaleStoreFromI18n({ i18n }) } : undefined },
+          {
+            [LOCALE]: i18n ? { store: getLocaleStoreFromI18n({ i18n }) } : undefined,
+            [QUERY]: { state: queryClient.state },
+          },
           contextF,
         ]);
         return {

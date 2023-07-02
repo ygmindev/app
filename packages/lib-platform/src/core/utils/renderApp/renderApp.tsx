@@ -1,4 +1,4 @@
-import { type ReactElement } from 'react';
+import { type ComponentType, type ReactElement } from 'react';
 import { AppRegistry } from 'react-native-web';
 
 import { INTERNATIONALIZE_CONFIG_STATIC } from '#lib-config/locale/internationalize/internationalize.constants';
@@ -23,7 +23,10 @@ export const renderApp = ({ Root, children, context }: RenderAppParamsModel): Re
     ]),
   );
   const App: FCModel = () => <Root context={contextF}>{children}</Root>;
-  AppRegistry.registerComponent('App', () => App);
+  const AppRegistryF = AppRegistry as {
+    registerComponent: (name: string, component: CallableModel<ComponentType>) => void;
+  };
+  AppRegistryF.registerComponent('App', () => App);
   const { element, getStyleElement } = (
     AppRegistry as unknown as {
       getApplication: (
