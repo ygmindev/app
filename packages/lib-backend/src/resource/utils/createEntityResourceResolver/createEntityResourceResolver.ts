@@ -9,9 +9,7 @@ export const createEntityResourceResolver = <TType, TForm>(
   params: CreateEntityResourceResolverParamsModel<TType, TForm>,
 ): CreateEntityResourceResolverModel<TType, TForm> => {
   const ResourceResolver = createResourceResolver<TType, TForm>(params);
-
   @withResolver({ isAbstract: true })
-  class EntityResourceResolver extends ResourceResolver {}
-
-  return EntityResourceResolver;
+  abstract class EntityResourceResolver extends ResourceResolver {}
+  return EntityResourceResolver as CreateEntityResourceResolverModel<TType, TForm>;
 };

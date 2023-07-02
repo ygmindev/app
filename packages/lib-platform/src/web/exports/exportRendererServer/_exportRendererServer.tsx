@@ -3,7 +3,6 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { renderToStream } from 'react-streaming/server';
 import { dangerouslySkipEscape, escapeInject } from 'vite-plugin-ssr/server';
 
-import { _config as _graphQlConfig } from '#lib-config/graphql/graphql';
 import { type RootContextModel } from '#lib-frontend/root/root.models';
 import { ROOT_REDUCERS } from '#lib-frontend/root/stores/rootStore.constants';
 import { type RootStateContextModel } from '#lib-frontend/root/stores/rootStore.models';
@@ -14,22 +13,16 @@ import {
   type _ExportRendererServerParamsModel,
 } from '#lib-platform/web/exports/exportRendererServer/_exportRendererServer.models';
 import { merge } from '#lib-shared/core/utils/merge/merge';
-// import { setup } from '#lib-shared/core/utils/setup/setup';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 import { STATE } from '#lib-shared/state/state.constants';
 
 export const _exportRendererServer = ({
-  onInitialize,
-  onShutdown,
   publicDir,
   render,
   rootId,
   ssrContextKeys,
 }: _ExportRendererServerParamsModel): _ExportRendererServerModel => ({
   render: async ({ Page, context, pageProps }) => {
-    // await setup({ onInitialize, onShutdown });
-    _graphQlConfig();
-
     const store = new Store({ cookies: context?.state?.cookies, reducers: ROOT_REDUCERS });
     const contextF: RootContextModel = merge([
       { [STATE]: { initialState: await store.getState() } as RootStateContextModel },

@@ -9,7 +9,7 @@ import { FIELD_TYPE } from '#lib-shared/form/form.constants';
 import { type EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 @withEntity({ isAbstract: true })
-export class EntityResource implements EntityResourceModel {
+export abstract class EntityResource implements EntityResourceModel {
   @withField({ defaultValue: () => new Date(), isRepository: true, type: FIELD_TYPE.DATE })
   created!: Date;
 

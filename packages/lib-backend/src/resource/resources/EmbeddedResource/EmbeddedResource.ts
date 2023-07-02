@@ -7,7 +7,7 @@ import { HOOK_TYPE } from '#lib-backend/resource/utils/withHook/withHook.constan
 import { type EmbeddedResourceModel } from '#lib-shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
 
 @withEntity({ isAbstract: true })
-export class EmbeddedResource extends EntityResource implements EmbeddedResourceModel {
+export abstract class EmbeddedResource extends EntityResource implements EmbeddedResourceModel {
   @withHook({ type: HOOK_TYPE.BEFORE_CREATE })
   async beforeCreate(): Promise<void> {
     this._id = this._id ?? (new ObjectId() as unknown as string);

@@ -19,9 +19,9 @@ export const createOutput = <TMethod extends ResourceMethodTypeModel, TType, TRo
   const nameF = `${name}Output`;
   const Root = createRoot({ RootResource, name: nameF });
   @withEntity({ name: nameF })
-  class OutputF extends (Root ?? class {}) implements OutputModel<TMethod, TType, TRoot> {
+  class Output extends (Root ?? class {}) implements OutputModel<TMethod, TType, TRoot> {
     @withField({ Resource: createResult({ Resource, method, name: nameF }) ?? Boolean })
     result?: ResultModel<TMethod, TType>;
   }
-  return OutputF;
+  return Output;
 };

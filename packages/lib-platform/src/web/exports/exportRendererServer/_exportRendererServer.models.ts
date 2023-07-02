@@ -10,9 +10,8 @@ import {
   type CallablePromiseModel,
   type ReturnTypeModel,
 } from '#lib-shared/core/core.models';
-import { type SetupParamsModel } from '#lib-shared/core/utils/setup/setup.models';
 
-export type _ExportRendererServerParamsModel = SetupParamsModel & {
+export type _ExportRendererServerParamsModel = {
   render(params: { context?: RootContextModel } & ChildrenPropsModel): {
     element: ReactElement;
     getCss: CallableModel<ReactElement>;

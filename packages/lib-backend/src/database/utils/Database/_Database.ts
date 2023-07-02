@@ -29,9 +29,12 @@ export abstract class _Database implements DatabaseModel {
   }
 
   async connect(): Promise<void> {
-    info('[database] connecting', this._config.clientUrl);
-    this._entityManager =
-      this._entityManager || (await MikroORM.init<MongoDriver>(this._config)).em;
+    if (this._entityManager) {
+      info('[database] reusing connection', this._config.clientUrl);
+    } else {
+      info('[database] connecting', this._config.clientUrl);
+      this._entityManager = (await MikroORM.init<MongoDriver>(this._config)).em;
+    }
   }
 
   _getEntityManager = (): EntityManager => {

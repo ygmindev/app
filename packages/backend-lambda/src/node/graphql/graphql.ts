@@ -14,6 +14,7 @@ let isInitialized: boolean;
 let handler: Handler;
 
 export const main = createHandler(async (event, context, callback) => {
+  // TODO: better database init
   if (!isInitialized) {
     await config.onInitialize();
     isInitialized = true;

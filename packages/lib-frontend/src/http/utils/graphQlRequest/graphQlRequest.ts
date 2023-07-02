@@ -26,7 +26,6 @@ export const graphQlRequest = async <TParams, TResult, TName extends string = st
     }),
     variables: variables && cleanObject(variables),
   });
-  console.warn(result);
 
   const graphQlError = (
     result as HttpReponseModel<GraphQlHttpResponseModel<unknown>>

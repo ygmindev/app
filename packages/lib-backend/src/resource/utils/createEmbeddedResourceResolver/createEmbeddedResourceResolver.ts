@@ -18,6 +18,6 @@ export const createEmbeddedResourceResolver = <
   const ResourceResolver = createResourceResolver<TType, TForm, TRoot>(params);
   @withContainer()
   @withResolver({ isAbstract: true })
-  class EmbeddedResourceResolver extends ResourceResolver {}
-  return EmbeddedResourceResolver;
+  abstract class EmbeddedResourceResolver extends ResourceResolver {}
+  return EmbeddedResourceResolver as CreateEmbeddedResourceResolverModel<TType, TForm, TRoot>;
 };

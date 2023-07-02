@@ -18,8 +18,9 @@ export const withEntity = <TType>({
     throw new NotImplementedError('name for non-abstract entity');
   }
   return ((Base: TType) => {
-    isSchema && ObjectType(name ?? '')(Base as unknown as ClassModel);
-    isSchemaInput && name && InputType(`${name}Input`)(Base as unknown as ClassModel);
+    const _name = name ?? (Base as ClassModel).name;
+    isSchema && ObjectType(_name)(Base as unknown as ClassModel);
+    isSchemaInput && InputType(`${_name}Input`)(Base as unknown as ClassModel);
     let BaseF = isRepository
       ? (isEmbedded ? Embeddable : Entity)({ abstract: isAbstract, collection: name })(
           Base as unknown as ClassModel,

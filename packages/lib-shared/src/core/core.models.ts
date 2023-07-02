@@ -1,4 +1,5 @@
 import {
+  type AbstractConstructor,
   type Constructor,
   type Get,
   type Merge,
@@ -14,6 +15,8 @@ import {
 import { type BOOLEAN_STRING } from '#lib-shared/core/core.constants';
 
 export type ClassModel<TType = object> = Constructor<TType>;
+
+export type AbstractClassModel<TType = object> = AbstractConstructor<TType>;
 
 export type PrototypeModel<TType> = TType extends ClassModel<infer TClass> ? TClass : never;
 
