@@ -1,3 +1,0 @@
-export const NOTIFICATION_DURATION = 4000;
-
-export const NOTIFICATION_WIDTH = 380;

@@ -11,6 +11,7 @@ export const useTheme = (): UseThemeModel => {
   return useMemo<UseThemeModel>(
     () => ({
       ...config,
+
       colors: {
         activeLightness: config.colors.activeLightness,
 

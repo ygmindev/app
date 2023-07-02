@@ -106,6 +106,11 @@ export const config: ThemeConfigModel = {
     },
   },
 
+  notification: {
+    duration: 5000,
+    width: 380,
+  },
+
   shape: {
     borderRadius: 20,
 

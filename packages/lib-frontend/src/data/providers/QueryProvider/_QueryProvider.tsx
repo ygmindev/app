@@ -1,5 +1,4 @@
 import { Hydrate, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Suspense, useState } from 'react';
 
 import { type FCModel } from '#lib-frontend/core/core.models';
@@ -13,8 +12,6 @@ export const _QueryProvider: FCModel<_QueryProviderPropsModel> = ({ children, va
       <Suspense>
         <Hydrate state={value?.state}>{children}</Hydrate>
       </Suspense>
-
-      {process.env.NODE_ENV === 'development' && <ReactQueryDevtools initialIsOpen={false} />}
     </QueryClientProvider>
   );
 };

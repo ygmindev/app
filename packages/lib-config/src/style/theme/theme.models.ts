@@ -51,6 +51,11 @@ export type ThemeConfigModel = {
     width: Record<ThemeSizeModel, number>;
   };
 
+  notification: {
+    duration: number;
+    width: number;
+  };
+
   shape: {
     borderRadius: number;
     height: Record<ThemeSizeMoreModel, number>;

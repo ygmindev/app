@@ -11,13 +11,10 @@ import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import {
-  NOTIFICATION_DURATION,
-  NOTIFICATION_WIDTH,
-} from '#lib-frontend/notification/components/Notification/Notification.constants';
 import { type NotificationPropsModel } from '#lib-frontend/notification/components/Notification/Notification.models';
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import {
   THEME_COLOR,
   THEME_ROLE,
@@ -40,13 +37,14 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
   const { styles } = useStyles({ props });
   const { t } = useTranslation();
   const { remove } = useNotification();
+  const theme = useTheme();
   const barRef = useRef<WrapperRefModel>(null);
 
   useAsync(
     async (isMounted) => {
       if (!isInfinite) {
         barRef.current?.toState(ELEMENT_STATE.ACTIVE);
-        await sleep(NOTIFICATION_DURATION);
+        await sleep(theme.notification.duration);
         isMounted() && remove(id);
       }
     },
@@ -65,13 +63,13 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
       round
       style={styles}
       testID={testID}
-      width={NOTIFICATION_WIDTH}>
+      width={theme.notification.width}>
       {!isInfinite && (
         <Wrapper
           animation={{
-            duration: NOTIFICATION_DURATION,
+            duration: theme.notification.duration,
             states: {
-              [ELEMENT_STATE.ACTIVE]: { width: NOTIFICATION_WIDTH },
+              [ELEMENT_STATE.ACTIVE]: { width: theme.notification.width },
               [ELEMENT_STATE.INACTIVE]: { width: 0 },
             },
           }}
