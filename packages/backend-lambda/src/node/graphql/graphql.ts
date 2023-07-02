@@ -5,7 +5,7 @@ import { type Handler } from 'aws-lambda';
 import { createHandler } from '#lib-backend/serverless/utils/createHandler/createHandler';
 import { getContext } from '#lib-backend/serverless/utils/getContext/getContext';
 import { config } from '#lib-config/core/setup/setup.node';
-import { _config } from '#lib-config/graphql/graphql';
+import { _config } from '#lib-config/data/graphql/graphql';
 import { stringify } from '#lib-shared/core/utils/stringify/stringify';
 import { error } from '#lib-shared/logging/utils/logger/logger';
 

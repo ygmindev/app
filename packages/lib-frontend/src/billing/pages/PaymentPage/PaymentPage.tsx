@@ -13,7 +13,7 @@ import { type SFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { FORM } from '#lib-frontend/form/form.constants';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useQuery } from '#lib-frontend/query/hooks/useQuery/useQuery';
+import { useQuery } from '#lib-frontend/data/hooks/useQuery/useQuery';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';

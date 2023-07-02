@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { renderToStream } from 'react-streaming/server';
 import { dangerouslySkipEscape, escapeInject } from 'vite-plugin-ssr/server';
 
-import { QueryClient } from '#lib-frontend/query/utils/QueryClient/QueryClient';
+import { QueryClient } from '#lib-frontend/data/utils/QueryClient/QueryClient';
 import { type RootContextModel } from '#lib-frontend/root/root.models';
 import { ROOT_REDUCERS } from '#lib-frontend/root/stores/rootStore.constants';
 import { type RootStateContextModel } from '#lib-frontend/root/stores/rootStore.models';

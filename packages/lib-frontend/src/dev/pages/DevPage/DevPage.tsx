@@ -1,8 +1,8 @@
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type FCModel } from '#lib-frontend/core/core.models';
+import { useQuery } from '#lib-frontend/data/hooks/useQuery/useQuery';
 import { type DevPagePropsModel } from '#lib-frontend/dev/pages/DevPage/DevPage.models';
-import { useQuery } from '#lib-frontend/query/hooks/useQuery/useQuery';
 import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { USER_OUTPUT_FIELDS } from '#lib-frontend/user/hooks/useUserResource/useUserResource.constants';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';

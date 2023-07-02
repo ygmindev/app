@@ -1,4 +1,4 @@
-import { type GraphQlQueryParamsFieldsModel } from '#lib-frontend/http/utils/graphQlQuery/graphQlQuery.models';
+import { type GraphQlQueryParamsFieldsModel } from '#lib-frontend/data/utils/graphQlQuery/graphQlQuery.models';
 import {
   type ResourceMethodTypeModel,
   type ResourceNameParamsModel,

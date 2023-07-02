@@ -7,7 +7,7 @@ import { type FCModel } from '#lib-frontend/core/core.models';
 import { ErrorProvider } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider';
 import { ERROR_MODE } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider.constants';
 import { LocaleProvider } from '#lib-frontend/locale/providers/LocaleProvider/LocaleProvider';
-import { QueryProvider } from '#lib-frontend/query/providers/QueryProvider/QueryProvider';
+import { QueryProvider } from '#lib-frontend/data/providers/QueryProvider/QueryProvider';
 import { type RootPropsModel } from '#lib-frontend/root/containers/Root/Root.models';
 import { ContextProvider } from '#lib-frontend/root/providers/ContextProvider/ContextProvider';
 import { ROOT_REDUCERS } from '#lib-frontend/root/stores/rootStore.constants';

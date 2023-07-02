@@ -1,8 +1,8 @@
-import { useAppGraphQl } from '#lib-frontend/http/hooks/useAppGraphQl/useAppGraphQl';
+import { useAppGraphQl } from '#lib-frontend/data/hooks/useAppGraphQl/useAppGraphQl';
 import {
   type GraphQlFieldModel,
   type GraphQlQueryParamsFieldsModel,
-} from '#lib-frontend/http/utils/graphQlQuery/graphQlQuery.models';
+} from '#lib-frontend/data/utils/graphQlQuery/graphQlQuery.models';
 import {
   type UseResourceMethodModel,
   type UseResourceMethodParamsModel,
