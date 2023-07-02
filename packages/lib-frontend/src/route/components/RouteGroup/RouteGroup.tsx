@@ -16,7 +16,7 @@ export const RouteGroup: SFCModel<RouteGroupPropsModel> = ({ groups, root, testI
   const { push } = useRouter();
   return (
     <Wrapper
-      spacing
+      s
       style={styles}
       testID={testID}>
       {groups?.map((group) => (

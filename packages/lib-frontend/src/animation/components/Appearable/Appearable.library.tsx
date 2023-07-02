@@ -13,7 +13,7 @@ export const props: LibraryPropsModel<AppearablePropsModel> = {
   Renderer: ({ ...props }) => {
     const [isVisible, isVisibleSet] = useState<boolean>(false);
     return (
-      <Wrapper spacing>
+      <Wrapper s>
         <Button
           onPress={() => isVisibleSet(!isVisible)}
           type={BUTTON_TYPE.TRANSPARENT}>

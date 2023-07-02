@@ -103,7 +103,7 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
           <Wrapper
             grow
             isCenter
-            spacing>
+            s>
             {confirmMessage && <TranslatableText>{confirmMessage}</TranslatableText>}
 
             <Wrapper isRowAlign>

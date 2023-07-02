@@ -9,6 +9,6 @@ export type VirtualizedListPropsModel<TType extends WithIdModel> = Omit<
   _VirtualizedListPropsModel<TType>,
   'divider'
 > &
-  Pick<WrapperPropsModel, 'spacing'>;
+  Pick<WrapperPropsModel, 's'>;
 
 export type VirtualizedListRefModel = _VirtualizedListRefModel;

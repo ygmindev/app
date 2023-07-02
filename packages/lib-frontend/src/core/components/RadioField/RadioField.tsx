@@ -40,7 +40,7 @@ export const RadioField = <TType extends string = string>({
   return (
     <Wrapper
       isRow={isHorizontal}
-      spacing={THEME_SIZE.SMALL}
+      s={THEME_SIZE.SMALL}
       style={styles}>
       {options.map(({ icon, id, label }) => {
         const isActiveF = id === valueControlled;

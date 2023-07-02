@@ -54,7 +54,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
       style={styles}
       topElement={
         currentUser ? (
-          <Wrapper spacing={THEME_SIZE.SMALL}>
+          <Wrapper s={THEME_SIZE.SMALL}>
             <Text
               align={FONT_ALIGN.CENTER}
               isEllipsis

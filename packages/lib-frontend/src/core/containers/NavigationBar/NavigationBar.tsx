@@ -53,7 +53,7 @@ export const NavigationBar = ({
         isRowAlign={isHorizontalF}
         isVerticalScrollable={!isHorizontalF}
         p={isHorizontalF ? THEME_SIZE.SMALL : true}
-        spacing
+        s
         testID={testID}
         width={isHorizontalF ? undefined : NAVIGATION_BAR_WIDTH}>
         {map(categories, (v, k) => {
@@ -61,7 +61,7 @@ export const NavigationBar = ({
             <Wrapper
               isRowAlign={isHorizontalF}
               key={toString(k)}
-              spacing={THEME_SIZE.SMALL}>
+              s={THEME_SIZE.SMALL}>
               {v.map(({ icon, id, label, onPress }) => (
                 <Button
                   elementState={trimPathname(id) === valueF ? ELEMENT_STATE.ACTIVE : undefined}

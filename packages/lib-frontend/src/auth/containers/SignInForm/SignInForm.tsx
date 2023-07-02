@@ -38,7 +38,7 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({ method, mode, testI
       {mode !== SIGN_IN_MODE.UPDATE && (
         <Wrapper
           isCenter
-          spacing>
+          s>
           <Text type={FONT_TYPE.HEADLINE}>
             {t('core:welcome', { value: process.env.APP_NAME })}
           </Text>

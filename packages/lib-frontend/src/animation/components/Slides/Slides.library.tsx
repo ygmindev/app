@@ -17,7 +17,7 @@ export const props: LibraryPropsModel<SlidesPropsModel> = {
     return (
       <Wrapper
         isCenter
-        spacing>
+        s>
         <Wrapper isRowAlign>
           <Button
             elementState={current <= 0 ? ELEMENT_STATE.DISABLED : undefined}

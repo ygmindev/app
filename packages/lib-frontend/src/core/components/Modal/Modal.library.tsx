@@ -12,7 +12,7 @@ export const props: LibraryPropsModel<ModalPropsModel> = {
   Renderer: ({ ...props }) => {
     const [isOpen, isOpenSet] = useState<boolean>(false);
     return (
-      <Wrapper spacing>
+      <Wrapper s>
         <Button onPress={() => isOpenSet(true)}>Open</Button>
 
         <Modal

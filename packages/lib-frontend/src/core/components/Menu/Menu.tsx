@@ -104,7 +104,7 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
         grow
         isFullWidth
         shrink
-        spacing={THEME_SIZE.SMALL}>
+        s={THEME_SIZE.SMALL}>
         {topElement}
 
         {options.length && (

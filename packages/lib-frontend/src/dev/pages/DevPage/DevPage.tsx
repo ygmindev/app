@@ -22,7 +22,7 @@ export const DevPage: FCModel<DevPagePropsModel> = () => {
   });
 
   return (
-    <Wrapper spacing>
+    <Wrapper s>
       <Text>{JSON.stringify(data)}</Text>
     </Wrapper>
   );

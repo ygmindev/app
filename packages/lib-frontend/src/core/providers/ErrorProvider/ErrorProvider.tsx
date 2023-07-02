@@ -42,7 +42,7 @@ export const ErrorProvider: SFCModel<ErrorProviderPropsModel> = ({
         <Wrapper
           grow
           isCenter
-          spacing={THEME_SIZE.SMALL}
+          s={THEME_SIZE.SMALL}
           style={styles}
           testID={testID}>
           <Icon

@@ -50,7 +50,7 @@ export const LineItem: SFCModel<LineItemPropsModel> = ({
           )}
 
           {label || isValue ? (
-            <Wrapper spacing={THEME_SIZE.SMALL}>
+            <Wrapper s={THEME_SIZE.SMALL}>
               <TranslatableText isBold={isValue}>{label}</TranslatableText>
 
               {isValue && (

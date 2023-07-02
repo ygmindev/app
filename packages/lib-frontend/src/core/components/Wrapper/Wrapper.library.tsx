@@ -19,8 +19,8 @@ export const props: LibraryPropsModel<WrapperPropsModel> = {
   },
   variants: [
     { props: { isFullWidth: true } },
-    { props: { spacing: true } },
-    { props: { isRow: true, spacing: true } },
+    { props: { s: true } },
+    { props: { isRow: true, s: true } },
     {
       name: 'with fragment',
       props: {
@@ -34,7 +34,7 @@ export const props: LibraryPropsModel<WrapperPropsModel> = {
             <WrapperFixture>4</WrapperFixture>
           </Fragment>,
         ],
-        spacing: true,
+        s: true,
       },
     },
   ],

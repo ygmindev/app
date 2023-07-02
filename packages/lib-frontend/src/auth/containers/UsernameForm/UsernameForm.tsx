@@ -97,7 +97,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
           mode === SIGN_IN_MODE.UPDATE
             ? undefined
             : ({ elementState }) => (
-                <Wrapper spacing>
+                <Wrapper s>
                   <Divider>{t('core:or')}</Divider>
 
                   {valueControlled === SIGN_IN_METHOD.EMAIL && (

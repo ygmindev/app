@@ -100,7 +100,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
           basis={0}
           grow
           isWrap
-          spacing={THEME_SIZE_MORE.SMALL}>
+          s={THEME_SIZE_MORE.SMALL}>
           {title && (
             <Text
               color={color}

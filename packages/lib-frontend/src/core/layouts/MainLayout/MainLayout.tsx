@@ -29,7 +29,7 @@ export const MainLayout: SFCModel<MainLayoutPropsModel> = ({
         m={isCenter ? 'auto' : undefined}
         mHorizontal={isCenter || isHorizontalCenter ? 'auto' : undefined}
         mVertical={isCenter || isVerticalCenter ? 'auto' : undefined}
-        spacing
+        s
         width={isFullWidthF ? undefined : theme.layout.width[THEME_SIZE.MEDIUM]}>
         {children}
       </Wrapper>

@@ -205,7 +205,7 @@ const FormContainerF = forwardRef(
       <Wrapper
         isRowAlign
         key={id}
-        spacing={isGrouped ? -1 : true}
+        s={isGrouped ? -1 : true}
         zIndex={
           focused ? (findIndex(fields, (field) => field.id === focused) >= 0 ? 1 : 0) : undefined
         }>
@@ -228,7 +228,7 @@ const FormContainerF = forwardRef(
         style={styles}
         testID={testID}>
         <Form onSubmit={isDisabled ? undefined : async () => handleSubmit()}>
-          <Wrapper spacing={isGrouped ? -1 : true}>
+          <Wrapper s={isGrouped ? -1 : true}>
             {topElement && topElement({ elementState: elementStateF, handleReset, handleSubmit })}
 
             {rowsF}

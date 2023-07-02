@@ -75,7 +75,7 @@ export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends
       <Wrapper
         grow
         isFullWidth
-        spacing
+        s
         style={styles}
         testID={testID}>
         <Wrapper isRowAlign>

@@ -21,7 +21,7 @@ import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { variableName } from '#lib-shared/core/utils/variableName/variableName';
 
 export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef(
-  ({ animation, children, isCenter, isDistribute, isRowAlign, spacing, ...props }, ref) => {
+  ({ animation, children, isCenter, isDistribute, isRowAlign, s, ...props }, ref) => {
     const theme = useTheme();
     const { styles } = useStyles({
       props: {
@@ -66,9 +66,9 @@ export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
                         {
                           mLeft:
                             childProps.mLeft === undefined
-                              ? isRow && (isRowAlign ? THEME_SIZE.SMALL : spacing)
+                              ? isRow && (isRowAlign ? THEME_SIZE.SMALL : s)
                               : childProps.mLeft,
-                          mTop: childProps.mTop === undefined ? !isRow && spacing : childProps.mTop,
+                          mTop: childProps.mTop === undefined ? !isRow && s : childProps.mTop,
                         },
                         theme,
                       )),

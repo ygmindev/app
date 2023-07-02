@@ -40,7 +40,7 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ..
       pHorizontal
       position={SHAPE_POSITION.RELATIVE}
       ref={ref}
-      spacing
+      s
       style={styles}
       testID={testID}>
       {previous && (

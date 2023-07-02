@@ -8,7 +8,7 @@ export type WrapperPropsModel = {
   isCenter?: boolean;
   isDistribute?: boolean;
   isRowAlign?: boolean;
-  spacing?: SpacingModel;
+  s?: SpacingModel;
 } & ViewPropsModel &
   ViewStylerParamsModel &
   AnimatablePropsModel;

@@ -1,5 +1,6 @@
 import { readFileSync } from 'fs';
 import uniq from 'lodash/uniq';
+import { type TranspileOptions } from 'typescript';
 
 import { fromBuild } from '#lib-backend/file/utils/fromBuild/fromBuild';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
@@ -16,10 +17,12 @@ export const jsPackage: GeneratorParamsModel = {
 
     if (root && target) {
       let filename = fromBuild('node/typescript/tsconfig.paths.json');
-      let content = JSON.parse(readFileSync(filename).toString());
-      content.compilerOptions.paths[`${target}/*`] = [`packages/${root}/src/*`];
-      content.compilerOptions.paths = sortKeys(content.compilerOptions.paths);
-      writeFile({ filename, value: JSON.stringify(content, null, 2) });
+      let content = JSON.parse(readFileSync(filename).toString()) as TranspileOptions;
+      if (content.compilerOptions?.paths) {
+        content.compilerOptions.paths[`${target}/*`] = [`packages/${root}/src/*`];
+        content.compilerOptions.paths = sortKeys(content.compilerOptions.paths);
+        writeFile({ filename, value: JSON.stringify(content, null, 2) });
+      }
 
       // bundled dependencies
       filename = fromRoot('package.json');

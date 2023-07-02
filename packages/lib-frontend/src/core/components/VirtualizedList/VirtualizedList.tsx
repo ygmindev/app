@@ -18,7 +18,7 @@ export const VirtualizedList = forwardRef(
   <TType extends WithIdModel>(
     {
       isHorizontal,
-      spacing = THEME_SIZE.SMALL,
+      s = THEME_SIZE.SMALL,
       ...props
     }: SFCPropsModel<VirtualizedListPropsModel<TType>>,
     ref: ForwardedRef<VirtualizedListRefModel>,
@@ -29,12 +29,10 @@ export const VirtualizedList = forwardRef(
       <_VirtualizedList
         {...props}
         divider={
-          spacing ? (
+          s ? (
             <View
               style={
-                isHorizontal
-                  ? { width: getSpacing(spacing, theme) }
-                  : { height: getSpacing(spacing, theme) }
+                isHorizontal ? { width: getSpacing(s, theme) } : { height: getSpacing(s, theme) }
               }
             />
           ) : undefined

@@ -56,7 +56,7 @@ export const Modal: FCModel<ModalPropsModel> = ({
             grow
             p
             position={SHAPE_POSITION.RELATIVE}
-            spacing>
+            s>
             <Wrapper isRowAlign>
               <Wrapper
                 grow

@@ -39,7 +39,7 @@ export const Accordion: SFCModel<AccordionPropsModel> = ({
 
   return (
     <Wrapper
-      spacing={THEME_SIZE.SMALL}
+      s={THEME_SIZE.SMALL}
       style={styles}
       testID={testID}>
       <Wrapper
