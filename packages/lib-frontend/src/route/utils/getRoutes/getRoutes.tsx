@@ -7,6 +7,7 @@ import { PaymentMethodFormPage } from '#lib-frontend/billing/pages/PaymentMethod
 import { PaymentPage } from '#lib-frontend/billing/pages/PaymentPage/PaymentPage';
 import { REDIRECT } from '#lib-frontend/core/core.constants';
 import { HomePage } from '#lib-frontend/deleteme/pages/HomePage/HomePage';
+import { OfficePage } from '#lib-frontend/deleteme/pages/OfficePage/OfficePage';
 import { DEV } from '#lib-frontend/dev/dev.constants';
 import { DevPage } from '#lib-frontend/dev/pages/DevPage/DevPage';
 import { FORM } from '#lib-frontend/form/form.constants';
@@ -167,6 +168,13 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
           element: <HomePage />,
           ns: ['deleteme'],
           pathname: 'home',
+        },
+
+        {
+          element: <OfficePage />,
+          header: { previous: 'home' },
+          ns: ['deleteme'],
+          pathname: 'office/:id',
         },
       ],
     },

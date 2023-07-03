@@ -25,11 +25,40 @@ export const _viewParams: ComposeComponentParamsModel<
     theme,
     ref,
   ) => {
-    const { height, width, ...containerStyle } = StyleSheet.flatten(style);
+    const {
+      height,
+      margin,
+      marginBottom,
+      marginLeft,
+      marginRight,
+      marginTop,
+      padding,
+      paddingBottom,
+      paddingLeft,
+      paddingRight,
+      paddingTop,
+      width,
+      ...containerStyle
+    } = StyleSheet.flatten(style);
     return {
       children: (
         <View
-          style={{ display: 'flex', flex: width || height ? undefined : 1, height, width }}
+          style={{
+            display: 'flex',
+            flex: width || height ? undefined : 1,
+            height,
+            margin,
+            marginBottom,
+            marginLeft,
+            marginRight,
+            marginTop,
+            padding,
+            paddingBottom,
+            paddingLeft,
+            paddingRight,
+            paddingTop,
+            width,
+          }}
           testID={testID}>
           <ScrollView
             {...(_viewParamsBase.getProps && _viewParamsBase.getProps(props, theme, ref))}
@@ -47,8 +76,8 @@ export const _viewParams: ComposeComponentParamsModel<
             scrollEnabled
             scrollEventThrottle={16}
             scrollToOverflowEnabled
-            showsHorizontalScrollIndicator={isHorizontalScrollable || undefined}
-            showsVerticalScrollIndicator={isVerticalScrollable || undefined}
+            showsHorizontalScrollIndicator={isHorizontalScrollable}
+            showsVerticalScrollIndicator={isVerticalScrollable}
           />
         </View>
       ),

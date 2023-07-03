@@ -103,8 +103,8 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
       <Wrapper
         grow
         isFullWidth
-        shrink
-        s={THEME_SIZE.SMALL}>
+        s={THEME_SIZE.SMALL}
+        shrink>
         {topElement}
 
         {options.length && (

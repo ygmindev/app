@@ -9,6 +9,7 @@ import { CenterLayout } from '#lib-frontend/core/layouts/CenterLayout/CenterLayo
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
+import { type CallablePromiseModel } from '#lib-shared/core/core.models';
 import { ACCOUNT } from '#lib-shared/user/user.constants';
 
 export const PaymentMethodFormPage: SFCModel<PaymentMethodFormPagePropsModel> = ({
@@ -19,7 +20,7 @@ export const PaymentMethodFormPage: SFCModel<PaymentMethodFormPagePropsModel> = 
   const { styles } = useStyles({ props });
   const { location, replace } = useRouter<PaymentMethodFormPageParamsModel>();
 
-  const handleBack = async (): Promise<void> => replace({ pathname: `/${ACCOUNT}/${PAYMENT}` });
+  const handleBack: CallablePromiseModel = () => replace({ pathname: `/${ACCOUNT}/${PAYMENT}` });
 
   return (
     <CenterLayout

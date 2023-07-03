@@ -7,12 +7,11 @@ import {
   type ElementStatePropsModel,
 } from '#lib-frontend/core/core.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
-import { type RootStateModel } from '#lib-frontend/root/stores/rootStore.models';
 
 export type LineItemPropsModel = {
   label?: TranslatableTextModel;
   rightElement?(isOpen?: boolean): ReactElement;
-  value?: ((state: RootStateModel) => string) | null;
+  value?: string | null;
 } & ChildrenPropsModel &
   ElementStatePropsModel &
   Pick<PressablePropsModel, 'onPress'> &

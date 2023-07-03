@@ -10,7 +10,7 @@ export const _Loading = composeComponent<_LoadingPropsModel, SpinnerProps>({
   getProps: ({ color, size }) => ({
     animating: true,
     color,
-    hidesWhenStopped: true,
+    hidesWhenStopped: false,
     size,
   }),
 });

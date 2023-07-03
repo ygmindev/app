@@ -1,13 +1,13 @@
 import { type ReactElement } from 'react';
-import { cloneElement, createContext, Suspense, useMemo } from 'react';
+import { cloneElement, createContext, useMemo } from 'react';
 
 import { AppProvider } from '#lib-frontend/app/containers/AppProvider/AppProvider';
 import { AuthProvider } from '#lib-frontend/auth/providers/AuthProvider/AuthProvider';
 import { type FCModel } from '#lib-frontend/core/core.models';
 import { ErrorProvider } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider';
 import { ERROR_MODE } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider.constants';
-import { LocaleProvider } from '#lib-frontend/locale/providers/LocaleProvider/LocaleProvider';
 import { QueryProvider } from '#lib-frontend/data/providers/QueryProvider/QueryProvider';
+import { LocaleProvider } from '#lib-frontend/locale/providers/LocaleProvider/LocaleProvider';
 import { type RootPropsModel } from '#lib-frontend/root/containers/Root/Root.models';
 import { ContextProvider } from '#lib-frontend/root/providers/ContextProvider/ContextProvider';
 import { ROOT_REDUCERS } from '#lib-frontend/root/stores/rootStore.constants';
@@ -44,7 +44,6 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
       <LocaleProvider value={context?.locale} />,
       <AppProvider />,
       <store.Provider value={{ ...context?.state, actionContext, store }} />,
-      <Suspense />,
     ],
     [additionalProviders, context],
   );
