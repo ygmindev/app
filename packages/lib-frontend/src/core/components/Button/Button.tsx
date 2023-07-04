@@ -15,7 +15,6 @@ import { TranslatableText } from '#lib-frontend/locale/components/TranslatableTe
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { type ThemeRoleModel } from '#lib-frontend/style/style.models';
-import { palette } from '#lib-frontend/style/utils/palette/palette';
 import {
   FLEX_ALIGN,
   FLEX_JUSTIFY,
@@ -46,53 +45,37 @@ export const Button: SFCModel<ButtonPropsModel> = ({
     animation?: AnimationModel;
     childColorRole?: ThemeRoleModel;
   }>(() => {
-    const colorF = theme.colors.tone[color];
-    const activeColor = palette({ color: colorF.main, lightness: theme.colors.activeLightness });
+    const colorF = theme.color.palette[color];
+    const activeColor = colorF[THEME_ROLE.ACTIVE];
     switch (type) {
       case BUTTON_TYPE.FILLED: {
         return {
           animation: {
             states: {
               [ELEMENT_STATE.ACTIVE]: { backgroundColor: activeColor, opacity: 1 },
-              [ELEMENT_STATE.DISABLED]: {
-                backgroundColor: activeColor,
-                opacity: theme.colors.disabledOpacity,
-              },
-              [ELEMENT_STATE.LOADING]: {
-                backgroundColor: activeColor,
-                opacity: theme.colors.disabledOpacity,
-              },
+              [ELEMENT_STATE.DISABLED]: { backgroundColor: activeColor, opacity: theme.opaque },
+              [ELEMENT_STATE.LOADING]: { backgroundColor: activeColor, opacity: theme.opaque },
               [ELEMENT_STATE.INACTIVE]: { backgroundColor: colorF.main, opacity: 1 },
             },
           },
-          childColorRole: THEME_ROLE.MAIN_CONTRAST,
+          childColorRole: THEME_ROLE.CONTRAST,
         };
       }
       case BUTTON_TYPE.INVISIBLE:
-      case BUTTON_TYPE.TRANSPARENT:
+      case BUTTON_TYPE.TRANSPARENT: {
+        const colorInactive = theme.color.palette.surface.muted;
         return {
           animation: {
             states: {
-              [ELEMENT_STATE.ACTIVE]: {
-                backgroundColor: colorF.muted,
-                opacity: 1,
-              },
-              [ELEMENT_STATE.DISABLED]: {
-                backgroundColor: theme.colors.tone.neutral.main,
-                opacity: theme.colors.disabledOpacity,
-              },
-              [ELEMENT_STATE.LOADING]: {
-                backgroundColor: theme.colors.tone.neutral.main,
-                opacity: theme.colors.disabledOpacity,
-              },
-              [ELEMENT_STATE.INACTIVE]: {
-                backgroundColor: theme.colors.tone.neutral.main,
-                opacity: 1,
-              },
+              [ELEMENT_STATE.ACTIVE]: { backgroundColor: colorF.muted, opacity: 1 },
+              [ELEMENT_STATE.DISABLED]: { backgroundColor: colorInactive, opacity: theme.opaque },
+              [ELEMENT_STATE.LOADING]: { backgroundColor: colorInactive, opacity: theme.opaque },
+              [ELEMENT_STATE.INACTIVE]: { backgroundColor: colorInactive, opacity: 1 },
             },
           },
-          childColorRole: THEME_ROLE.BASE,
+          childColorRole: THEME_ROLE.MAIN,
         };
+      }
       default:
         return {};
     }
@@ -134,7 +117,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
       animation={animation}
       border={type === BUTTON_TYPE.TRANSPARENT}
       borderColor={type === BUTTON_TYPE.TRANSPARENT ? color : undefined}
-      borderRole={THEME_ROLE.BASE}
+      borderRole={THEME_ROLE.MAIN}
       elementState={valueControlled}
       height={height}
       justify={FLEX_JUSTIFY.CENTER}

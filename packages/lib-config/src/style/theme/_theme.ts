@@ -5,7 +5,6 @@ import {
   type ThemeConfigModel,
 } from '#lib-config/style/theme/theme.models';
 import {
-  STYLE_BRIGHTNESS,
   THEME_COLOR,
   THEME_ROLE,
   THEME_SHADE,
@@ -13,7 +12,7 @@ import {
 } from '#lib-frontend/style/style.constants';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 
-export const _theme = ({ brightness, color, font, shape }: ThemeConfigModel): _ThemeConfigModel => {
+export const _theme = ({ color, font, shape }: ThemeConfigModel): _ThemeConfigModel => {
   const fontStyle = {
     fontFamily: font.fontFamily.main,
     fontSize: font.size[THEME_SIZE.MEDIUM],
@@ -28,9 +27,9 @@ export const _theme = ({ brightness, color, font, shape }: ThemeConfigModel): _T
       },
 
       colors: {
-        background: color.palette.surface[THEME_SHADE.MAIN][THEME_ROLE.BASE],
-        error: color.palette[THEME_COLOR.ERROR][THEME_SHADE.MAIN][THEME_ROLE.BASE],
-        errorContainer: color.palette[THEME_COLOR.ERROR][THEME_SHADE.MUTED][THEME_ROLE.BASE],
+        background: color.palette.surface[THEME_SHADE.MAIN][THEME_ROLE.MAIN],
+        error: color.palette[THEME_COLOR.ERROR][THEME_SHADE.MAIN][THEME_ROLE.MAIN],
+        errorContainer: color.palette[THEME_COLOR.ERROR][THEME_SHADE.MUTED][THEME_ROLE.MAIN],
         onBackground: color.palette.surface[THEME_SHADE.MAIN][THEME_ROLE.CONTRAST],
         onError: color.palette[THEME_COLOR.ERROR][THEME_SHADE.MAIN][THEME_ROLE.CONTRAST],
         onErrorContainer: color.palette[THEME_COLOR.ERROR][THEME_SHADE.MUTED][THEME_ROLE.CONTRAST],
@@ -41,15 +40,15 @@ export const _theme = ({ brightness, color, font, shape }: ThemeConfigModel): _T
         onSecondaryContainer:
           color.palette[THEME_COLOR.SECONDARY][THEME_SHADE.MUTED][THEME_ROLE.CONTRAST],
         outline: color.border,
-        primary: color.palette[THEME_COLOR.PRIMARY][THEME_SHADE.MAIN][THEME_ROLE.BASE],
-        primaryContainer: color.palette[THEME_COLOR.PRIMARY][THEME_SHADE.MUTED][THEME_ROLE.BASE],
-        secondary: color.palette[THEME_COLOR.SECONDARY][THEME_SHADE.MAIN][THEME_ROLE.BASE],
+        primary: color.palette[THEME_COLOR.PRIMARY][THEME_SHADE.MAIN][THEME_ROLE.MAIN],
+        primaryContainer: color.palette[THEME_COLOR.PRIMARY][THEME_SHADE.MUTED][THEME_ROLE.MAIN],
+        secondary: color.palette[THEME_COLOR.SECONDARY][THEME_SHADE.MAIN][THEME_ROLE.MAIN],
         secondaryContainer:
-          color.palette[THEME_COLOR.SECONDARY][THEME_SHADE.MUTED][THEME_ROLE.BASE],
+          color.palette[THEME_COLOR.SECONDARY][THEME_SHADE.MUTED][THEME_ROLE.MAIN],
         shadow: color.border,
       },
 
-      dark: brightness === STYLE_BRIGHTNESS.DARK,
+      dark: color.isDark,
 
       fonts: {
         bodyLarge: { ...fontStyle, fontSize: font.size[THEME_SIZE.LARGE] },

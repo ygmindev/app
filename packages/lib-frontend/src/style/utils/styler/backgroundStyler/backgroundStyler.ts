@@ -5,9 +5,9 @@ import { type StylerModel } from '#lib-frontend/style/utils/styler/styler.models
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 
 export const backgroundStyler: StylerModel<BackgroundStylerParamsModel> = (
-  { backgroundColor, backgroundRole = THEME_ROLE.BASE },
+  { backgroundColor, backgroundRole = THEME_ROLE.MAIN },
   theme,
 ) => {
-  const color = theme.colors.tone[backgroundColor as ThemeColorModel];
-  return cleanObject({ backgroundColor: color ? color[backgroundRole] : backgroundColor });
+  const colorF = theme.color.palette[backgroundColor as ThemeColorModel];
+  return cleanObject({ backgroundColor: colorF ? colorF[backgroundRole] : backgroundColor });
 };

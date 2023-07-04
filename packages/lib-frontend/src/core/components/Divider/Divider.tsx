@@ -13,7 +13,7 @@ export const Divider = composeComponent<DividerPropsModel, WrapperPropsModel>({
 
   getProps: ({ children }, theme) => ({
     border: BORDER_DIRECTION.TOP,
-    borderColor: theme.colors.tone.neutral.muted,
+    borderColor: theme.color.border,
     children: children && (
       <Wrapper
         backgroundColor={THEME_COLOR.NEUTRAL}

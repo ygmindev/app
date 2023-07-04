@@ -6,14 +6,11 @@ export enum THEME_COLOR {
   WARNING = 'warning',
 }
 
-export enum THEME_SHADE {
+export enum THEME_ROLE {
+  ACTIVE = 'active',
+  CONTRAST = 'contrast',
   MAIN = 'main',
   MUTED = 'muted',
-}
-
-export enum THEME_ROLE {
-  BASE = 'base',
-  CONTRAST = 'contrast',
 }
 
 export enum THEME_SIZE {

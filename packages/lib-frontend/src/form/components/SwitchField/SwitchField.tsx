@@ -74,8 +74,8 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
       <Wrapper
         animation={{
           states: {
-            [ELEMENT_STATE.ACTIVE]: { backgroundColor: theme.colors.tone.primary.main },
-            [ELEMENT_STATE.INACTIVE]: { backgroundColor: theme.colors.tone.neutral.muted },
+            [ELEMENT_STATE.ACTIVE]: { backgroundColor: theme.color.palette.primary.main.base },
+            [ELEMENT_STATE.INACTIVE]: { backgroundColor: theme.color.border },
           },
         }}
         elementState={elementStateF}

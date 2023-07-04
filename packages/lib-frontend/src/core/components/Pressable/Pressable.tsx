@@ -78,10 +78,10 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
             states: {
               ...animation?.states,
               [ELEMENT_STATE.ACTIVE]: animation?.states?.active || {
-                backgroundColor: theme.colors.tone.neutral.muted,
+                backgroundColor: theme.color.border,
               },
               [ELEMENT_STATE.INACTIVE]: animation?.states?.inactive || {
-                backgroundColor: theme.colors.tone.neutral.main,
+                backgroundColor: theme.color.palette.surface.muted,
               },
             },
           }}

@@ -2,10 +2,8 @@ import { type TextStyle } from 'react-native';
 import { type MD3Theme } from 'react-native-paper';
 
 import {
-  type BrightnessModel,
   type ThemeColorModel,
   type ThemeRoleModel,
-  type ThemeShadeModel,
   type ThemeSizeModel,
   type ThemeSizeMoreModel,
 } from '#lib-frontend/style/style.models';
@@ -18,17 +16,12 @@ export type ThemeConfigModel = {
     transition: number;
   };
 
-  brightness?: BrightnessModel;
-
   color: {
     border: string;
 
     isDark?: boolean;
 
-    palette: Record<
-      ThemeColorModel | 'surface',
-      Record<ThemeShadeModel, Record<ThemeRoleModel, string>>
-    >;
+    palette: Record<ThemeColorModel | 'surface', Record<ThemeRoleModel, string>>;
   };
 
   font: {
@@ -60,6 +53,8 @@ export type ThemeConfigModel = {
 
     width: number;
   };
+
+  opaque: number;
 
   shape: {
     borderRadius: number;

@@ -4,7 +4,6 @@ import { View } from '#lib-frontend/core/components/View/View';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { palette } from '#lib-frontend/style/utils/palette/palette';
 
 export const Skeleton: SFCModel<SkeletonPropsModel> = ({ children, ...props }) => {
   const theme = useTheme();
@@ -12,11 +11,8 @@ export const Skeleton: SFCModel<SkeletonPropsModel> = ({ children, ...props }) =
   const element = (
     <_Skeleton
       {...props}
-      backgroundColor={theme.colors.tone.neutral.muted}
-      foregroundColor={palette({
-        color: theme.colors.tone.neutral.muted,
-        lightness: theme.colors.activeLightness,
-      })}
+      backgroundColor={theme.color.palette.surface.muted}
+      foregroundColor={theme.color.palette.surface.active}
       radius={theme.shape.borderRadius}>
       {children}
     </_Skeleton>
@@ -26,7 +22,7 @@ export const Skeleton: SFCModel<SkeletonPropsModel> = ({ children, ...props }) =
     <>
       <View
         style={{
-          backgroundColor: theme.colors.tone.neutral.main,
+          backgroundColor: theme.color.palette.surface.muted,
           height: styles.marginTop,
           width: styles.marginLeft,
         }}

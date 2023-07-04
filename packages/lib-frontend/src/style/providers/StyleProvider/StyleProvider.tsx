@@ -13,7 +13,7 @@ export const StyleProvider: FCModel<StyleProviderPropsModel> = ({ children }) =>
   const brightness = useStore((state) => state.style.brightness);
   const sheet = useMemo(() => config.stylesheet(theme), [config, theme]);
   return (
-    <_StyleProvider value={{ brightness, theme }}>
+    <_StyleProvider value={{ brightness }}>
       <GlobalStyle sheet={sheet} />
 
       {children}

@@ -11,7 +11,6 @@ import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { palette } from '#lib-frontend/style/utils/palette/palette';
 
 export const Link: SFCModel<LinkPropsModel> = ({ children, ...props }) => {
   const { styles } = useStyles({ props });
@@ -27,13 +26,8 @@ export const Link: SFCModel<LinkPropsModel> = ({ children, ...props }) => {
           {...props}
           animation={{
             states: {
-              [ELEMENT_STATE.ACTIVE]: {
-                color: palette({
-                  color: theme.colors.tone.primary.main,
-                  lightness: theme.colors.activeLightness,
-                }),
-              },
-              [ELEMENT_STATE.INACTIVE]: { color: theme.colors.tone.primary.main },
+              [ELEMENT_STATE.ACTIVE]: { color: theme.color.palette.primary.main.active },
+              [ELEMENT_STATE.INACTIVE]: { color: theme.color.palette.primary.main.base },
             },
           }}
           ref={ref}>

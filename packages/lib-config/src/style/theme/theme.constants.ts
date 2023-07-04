@@ -77,6 +77,8 @@ export const THEME_CONFIG = {
     width: 380,
   },
 
+  opaque: 0.7,
+
   shape: {
     borderRadius: 20,
 

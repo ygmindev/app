@@ -1,7 +1,7 @@
 import isNumber from 'lodash/isNumber';
 import isPlainObject from 'lodash/isPlainObject';
 
-import { THEME_COLOR, THEME_ROLE } from '#lib-frontend/style/style.constants';
+import { THEME_ROLE } from '#lib-frontend/style/style.constants';
 import { type ThemeColorModel } from '#lib-frontend/style/style.models';
 import {
   BORDER_DIRECTION,
@@ -15,14 +15,7 @@ import { type StylerModel } from '#lib-frontend/style/utils/styler/styler.models
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 
 export const borderStyler: StylerModel<BorderStylerParamsModel> = (
-  {
-    border,
-    borderColor = THEME_COLOR.NEUTRAL,
-    borderRole = THEME_ROLE.MUTED,
-    borderWidth = 1,
-    isShadow,
-    round,
-  },
+  { border, borderColor, borderRole = THEME_ROLE.MUTED, borderWidth = 1, isShadow, round },
   theme,
 ) => {
   const getBorderRadius = (value?: typeof round, key?: BorderRadiusDirection): number | undefined =>
@@ -34,8 +27,8 @@ export const borderStyler: StylerModel<BorderStylerParamsModel> = (
       ? getBorderRadius(value[key])
       : undefined;
 
-  const color = theme.colors.tone[borderColor as ThemeColorModel];
-  const borderColorF = color ? color[borderRole] : borderColor;
+  const colorF = theme.color.palette[borderColor as ThemeColorModel];
+  const borderColorF = colorF ? colorF[borderRole] : theme.color.border;
   return cleanObject({
     borderBottomLeftRadius: getBorderRadius(round, BORDER_RADIUS_DIRECTION.BOTTOM_LEFT),
     borderBottomRightRadius: getBorderRadius(round, BORDER_RADIUS_DIRECTION.BOTTOM_RIGHT),

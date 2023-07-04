@@ -13,7 +13,7 @@ export const SkeletonGroup: SFCModel<SkeletonGroupPropsModel> = ({ children, ...
     <>
       <View
         style={{
-          backgroundColor: theme.colors.tone.neutral.main,
+          backgroundColor: theme.color.palette.surface.muted,
           height: styles.marginTop,
           width: styles.marginLeft,
         }}

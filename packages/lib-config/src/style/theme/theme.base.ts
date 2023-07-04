@@ -3,17 +3,14 @@ import reduce from 'lodash/reduce';
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { THEME_COLOR_TONES, THEME_CONFIG } from '#lib-config/style/theme/theme.constants';
 import { type ThemeConfigModel } from '#lib-config/style/theme/theme.models';
-import { THEME_COLOR, THEME_ROLE, THEME_SHADE } from '#lib-frontend/style/style.constants';
-import {
-  type ThemeColorModel,
-  type ThemeRoleModel,
-  type ThemeShadeModel,
-} from '#lib-frontend/style/style.models';
+import { THEME_COLOR, THEME_ROLE } from '#lib-frontend/style/style.constants';
+import { type ThemeColorModel, type ThemeRoleModel } from '#lib-frontend/style/style.models';
 import { palette } from '#lib-frontend/style/utils/palette/palette';
 
 const COLOR_SURFACE_BASE = '#FFFFFF';
 const COLOR_SURFACE_CONTRAST = '#000000';
 const COLOR_BORDER = '#8C8C8C';
+const LIGHTNESS_ACTIVE = 40;
 const LIGHTNESS_THEME_MUTED = 75;
 const LIGHTNESS_SURFACE_MUTED = 40;
 
@@ -28,14 +25,10 @@ const { _config, config } = defineConfig({
 
       palette: {
         surface: {
-          [THEME_SHADE.MAIN]: {
-            [THEME_ROLE.BASE]: COLOR_SURFACE_BASE,
-            [THEME_ROLE.CONTRAST]: COLOR_SURFACE_CONTRAST,
-          },
-          [THEME_SHADE.MUTED]: {
-            [THEME_ROLE.BASE]: palette(COLOR_SURFACE_BASE, { lightness: LIGHTNESS_SURFACE_MUTED }),
-            [THEME_ROLE.CONTRAST]: COLOR_SURFACE_CONTRAST,
-          },
+          [THEME_ROLE.ACTIVE]: palette(COLOR_SURFACE_BASE, { lightness: LIGHTNESS_ACTIVE }),
+          [THEME_ROLE.MAIN]: COLOR_SURFACE_BASE,
+          [THEME_ROLE.CONTRAST]: COLOR_SURFACE_CONTRAST,
+          [THEME_ROLE.MUTED]: palette(COLOR_SURFACE_BASE, { lightness: LIGHTNESS_SURFACE_MUTED }),
         },
 
         ...reduce(
@@ -45,18 +38,14 @@ const { _config, config } = defineConfig({
             return {
               ...result,
               [color]: {
-                [THEME_SHADE.MAIN]: {
-                  [THEME_ROLE.BASE]: tone,
-                  [THEME_ROLE.CONTRAST]: COLOR_SURFACE_BASE,
-                },
-                [THEME_SHADE.MUTED]: {
-                  [THEME_ROLE.BASE]: palette(tone, { lightness: LIGHTNESS_THEME_MUTED }),
-                  [THEME_ROLE.CONTRAST]: COLOR_SURFACE_BASE,
-                },
+                [THEME_ROLE.ACTIVE]: palette(tone, { lightness: LIGHTNESS_ACTIVE }),
+                [THEME_ROLE.MAIN]: tone,
+                [THEME_ROLE.CONTRAST]: COLOR_SURFACE_BASE,
+                [THEME_ROLE.MUTED]: palette(tone, { lightness: LIGHTNESS_THEME_MUTED }),
               },
             };
           },
-          {} as Record<ThemeColorModel, Record<ThemeShadeModel, Record<ThemeRoleModel, string>>>,
+          {} as Record<ThemeColorModel, Record<ThemeRoleModel, string>>,
         ),
       },
     },

@@ -5,7 +5,6 @@ import {
   type STYLE_BRIGHTNESS,
   type THEME_COLOR,
   type THEME_ROLE,
-  type THEME_SHADE,
   type THEME_SIZE,
   type THEME_SIZE_MORE,
 } from '#lib-frontend/style/style.constants';
@@ -21,8 +20,6 @@ export type StyleModel = ViewStyleModel | TextStyleModel | ImageStyleModel;
 export type ThemeSizeModel = `${THEME_SIZE}`;
 
 export type ThemeColorModel = `${THEME_COLOR}`;
-
-export type ThemeShadeModel = `${THEME_SHADE}`;
 
 export type ThemeRoleModel = `${THEME_ROLE}`;
 
