@@ -9,9 +9,9 @@ const buildJsonLint: TaskParamsModel<BuildJsonLintParamsModel> = {
   name: 'build-json-lint',
 
   options: {
-    filename: config().configFile,
+    filename: config.configFile,
 
-    value: async () => _config(),
+    value: async () => _config,
   },
 };
 
