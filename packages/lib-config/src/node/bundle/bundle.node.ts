@@ -1,31 +1,23 @@
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
+import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _config as _babelConfig } from '#lib-config/node/babel/babel.node';
 import { _bundle } from '#lib-config/node/bundle/_bundle';
 import { config as configBase } from '#lib-config/node/bundle/bundle.base';
-import {
-  type _BundleConfigModel,
-  type BundleConfigModel,
-} from '#lib-config/node/bundle/bundle.models';
-import { PLATFORM } from '#lib-platform/core/core.constants';
-import { merge } from '#lib-shared/core/utils/merge/merge';
-import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
 
-export const config: BundleConfigModel = ({ ...params } = {}) =>
-  merge(
-    [
-      {
-        babelConfig: _babelConfig,
+const { _config, config } = defineConfig({
+  _config: _bundle,
 
-        envPrefix: ['SERVER_', 'DATABASE_'],
+  config: configBase,
 
-        platform: PLATFORM.NODE,
+  overrides: () => [
+    {
+      babelConfig: _babelConfig,
 
-        watch: [fromPackages('lib-backend/src/**/*')],
-      },
+      envPrefix: ['SERVER_', 'DATABASE_'],
 
-      configBase({ ...params }),
-    ],
-    MERGE_STRATEGY.DEEP_PREPEND,
-  );
+      watch: [fromPackages('lib-backend/src/**/*')],
+    },
+  ],
+});
 
-export const _config: _BundleConfigModel = ({ ...params } = {}) => _bundle(config({ ...params }));
+export { _config, config };

@@ -20,7 +20,7 @@ import { type EntityResourceDataModel } from '#lib-shared/resource/resources/Ent
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
 
-export abstract class _Database implements DatabaseModel {
+export class _Database implements DatabaseModel {
   protected _config: ReturnTypeModel<_DatabaseConfigModel>;
   protected _entityManager?: EntityManager;
 

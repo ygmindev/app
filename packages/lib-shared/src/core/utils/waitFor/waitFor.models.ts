@@ -1,7 +1,7 @@
-import { type CallableModel } from '#lib-shared/core/core.models';
+import { type OptionalCallableModel } from '#lib-shared/core/core.models';
 
 export type WaitForParamsModel = {
-  condition: CallableModel<boolean>;
+  condition: OptionalCallableModel<boolean>;
   interval?: number;
   timeout?: number;
 };

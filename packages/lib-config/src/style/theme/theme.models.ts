@@ -1,64 +1,73 @@
 import { type TextStyle } from 'react-native';
+import { type MD3Theme } from 'react-native-paper';
 
-import { type STYLE_BRIGHTNESS } from '#lib-frontend/style/style.constants';
 import {
+  type BrightnessModel,
   type ThemeColorModel,
   type ThemeRoleModel,
+  type ThemeShadeModel,
   type ThemeSizeModel,
   type ThemeSizeMoreModel,
 } from '#lib-frontend/style/style.models';
-import { type PaletteParamsModel } from '#lib-frontend/style/utils/palette/palette.models';
 import { type FontFamilyModel } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.models';
 
 export type ThemeConfigModel = {
   animation: {
     duration: number;
+
     transition: number;
   };
 
-  colors: {
-    activeLightness: number;
+  brightness?: BrightnessModel;
 
-    disabledOpacity: number;
+  color: {
+    border: string;
 
-    palette: {
-      [STYLE_BRIGHTNESS.DARK]: Record<
-        'theme' | 'neutral',
-        Record<ThemeRoleModel, Omit<PaletteParamsModel, 'color'>>
-      >;
-      [STYLE_BRIGHTNESS.LIGHT]: Record<
-        'theme' | 'neutral',
-        Record<ThemeRoleModel, Omit<PaletteParamsModel, 'color'>>
-      >;
-    };
+    isDark?: boolean;
 
-    tone: Record<ThemeColorModel, string>;
+    palette: Record<
+      ThemeColorModel | 'surface',
+      Record<ThemeShadeModel, Record<ThemeRoleModel, string>>
+    >;
   };
 
   font: {
     fontFamily: Record<FontFamilyModel, string>;
+
     lineHeight: number;
+
     size: Record<ThemeSizeMoreModel, number>;
-    weight: TextStyle['fontWeight'];
-    weightBold: TextStyle['fontWeight'];
+
+    weight: {
+      bold: TextStyle['fontWeight'];
+
+      main: TextStyle['fontWeight'];
+    };
   };
 
   layout: {
     header: {
       height: number;
     };
+
     height: Record<ThemeSizeModel, number>;
+
     width: Record<ThemeSizeModel, number>;
   };
 
   notification: {
     duration: number;
+
     width: number;
   };
 
   shape: {
     borderRadius: number;
+
     height: Record<ThemeSizeMoreModel, number>;
+
     spacing: Record<ThemeSizeModel, number>;
   };
 };
+
+export type _ThemeConfigModel = MD3Theme;

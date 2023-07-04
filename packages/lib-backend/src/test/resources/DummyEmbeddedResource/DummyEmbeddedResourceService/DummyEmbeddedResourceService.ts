@@ -1,5 +1,6 @@
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { createEmbeddedResourceService } from '#lib-backend/resource/utils/createEmbeddedResourceService/createEmbeddedResourceService';
+import { DummyEmbeddedResource } from '#lib-backend/test/resources/DummyEmbeddedResource/DummyEmbeddedResource';
 import { DummyEntityResourceService } from '#lib-backend/test/resources/DummyEntityResource/DummyEntityResourceService/DummyEntityResourceService';
 import { DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.constants';
 import {
@@ -20,6 +21,7 @@ export class DummyEmbeddedResourceService
     DummyEntityResourceModel,
     DummyEntityResourceFormModel
   >({
+    Resource: DummyEmbeddedResource,
     RootService: DummyEntityResourceService,
     name: DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME,
   })

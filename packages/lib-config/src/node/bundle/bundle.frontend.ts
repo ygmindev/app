@@ -1,51 +1,46 @@
 import { fromGlobs } from '#lib-backend/file/utils/fromGlobs/fromGlobs';
 import { fromModules } from '#lib-backend/file/utils/fromModules/fromModules';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
+import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _config as _babelConfig } from '#lib-config/node/babel/babel.frontend';
 import { _bundle } from '#lib-config/node/bundle/_bundle';
 import { config as configBase } from '#lib-config/node/bundle/bundle.base';
-import {
-  type _BundleConfigModel,
-  type BundleConfigModel,
-} from '#lib-config/node/bundle/bundle.models';
-import { merge } from '#lib-shared/core/utils/merge/merge';
-import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
 
-export const config: BundleConfigModel = ({ ...params } = {}) =>
-  merge(
-    [
-      {
-        babelConfig: _babelConfig,
+const { _config, config } = defineConfig({
+  _config: _bundle,
 
-        define: {
-          __DEV__: `${process.env.NODE_ENV === 'development'}`,
-        },
+  config: configBase,
 
-        envPrefix: ['APP_', 'DATABASE_'],
+  overrides: () => [
+    {
+      babelConfig: _babelConfig,
 
-        transpiles: [
-          'countries-list',
-          'css-in-js-utils',
-          'moti',
-          'inline-style-prefixer',
-          'react/jsx-runtime',
-          'react-dom/server',
-          'react-native',
-          'redux-persist',
-          'react-use',
-          'thenby',
-          ...fromGlobs({
-            globs: ['@expo', 'expo-*', 'react-native-!(codegen|gradle-plugin)'],
-            root: fromModules(),
-          }),
-        ],
-
-        watch: [fromPackages('lib-frontend/src/**/*')],
+      define: {
+        __DEV__: `${process.env.NODE_ENV === 'development'}`,
       },
 
-      configBase({ ...params }),
-    ],
-    MERGE_STRATEGY.DEEP_PREPEND,
-  );
+      envPrefix: ['APP_', 'DATABASE_'],
 
-export const _config: _BundleConfigModel = ({ ...params } = {}) => _bundle(config({ ...params }));
+      transpiles: [
+        'countries-list',
+        'css-in-js-utils',
+        'moti',
+        'inline-style-prefixer',
+        'react/jsx-runtime',
+        'react-dom/server',
+        'react-native',
+        'redux-persist',
+        'react-use',
+        'thenby',
+        ...fromGlobs({
+          globs: ['@expo', 'expo-*', 'react-native-!(codegen|gradle-plugin)'],
+          root: fromModules(),
+        }),
+      ],
+
+      watch: [fromPackages('lib-frontend/src/**/*')],
+    },
+  ],
+});
+
+export { _config, config };

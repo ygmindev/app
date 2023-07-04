@@ -1,39 +1,38 @@
 import { fromModules } from '#lib-backend/file/utils/fromModules/fromModules';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
+import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _config as _babelConfig } from '#lib-config/node/babel/babel.base';
 import { _bundle } from '#lib-config/node/bundle/_bundle';
-import {
-  type _BundleConfigModel,
-  type BundleConfigModel,
-} from '#lib-config/node/bundle/bundle.models';
-import { PLATFORM } from '#lib-platform/core/core.constants';
+import { type BundleConfigModel } from '#lib-config/node/bundle/bundle.models';
 import { extensions } from '#lib-platform/core/utils/extensions/extensions';
 
-export const config: BundleConfigModel = () => ({
-  babelConfig: _babelConfig,
+const { _config, config } = defineConfig({
+  _config: _bundle,
 
-  envPrefix: ['ENV_', 'NODE_ENV'],
+  config: () =>
+    ({
+      babelConfig: _babelConfig,
 
-  extensions: extensions(),
+      envPrefix: ['ENV_', 'NODE_ENV'],
 
-  mainFields: ['module', 'main'],
+      extensions: extensions(),
 
-  modulePaths: [fromModules()],
+      mainFields: ['module', 'main'],
 
-  outDir: fromWorking('dist'),
+      modulePaths: [fromModules()],
 
-  platform: PLATFORM.BASE,
+      outDir: fromWorking('dist'),
 
-  tsconfigPath: fromWorking('tsconfig.json'),
+      tsconfigPath: fromWorking('tsconfig.json'),
 
-  // TODO: watch is not really working
-  watch: [
-    fromPackages('asset-static/src/**/*'),
-    fromPackages('lib-config/src/**/*'),
-    fromPackages('lib-shared/src/**/*'),
-    fromWorking('src/**/*'),
-  ],
+      watch: [
+        fromPackages('asset-static/src/**/*'),
+        fromPackages('lib-config/src/**/*'),
+        fromPackages('lib-shared/src/**/*'),
+        fromWorking('src/**/*'),
+      ],
+    } satisfies BundleConfigModel),
 });
 
-export const _config: _BundleConfigModel = ({ ...params } = {}) => _bundle(config({ ...params }));
+export { _config, config };

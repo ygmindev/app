@@ -1,3 +1,4 @@
+import { type OptionalCallablePromiseModel } from '#lib-shared/core/core.models';
 import { resolveFirst } from '#lib-shared/core/utils/resolveFirst/resolveFirst';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
@@ -14,12 +15,12 @@ describe(displayName, () => {
   });
 
   test('works with reject', async () => {
-    const result = async (): Promise<unknown> =>
+    const result: OptionalCallablePromiseModel<unknown> = async () =>
       resolveFirst([
         async () => Promise.reject(new Error('1')),
         async () => Promise.reject(new Error('2')),
         async () => Promise.reject(new Error('3')),
       ]);
-    expect(result).rejects.toThrow('3');
+    await expect(result).rejects.toThrow('3');
   });
 });

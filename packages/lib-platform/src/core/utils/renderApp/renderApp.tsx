@@ -1,7 +1,7 @@
 import { type ComponentType, type ReactElement } from 'react';
 import { AppRegistry } from 'react-native-web';
 
-import { INTERNATIONALIZE_CONFIG_STATIC } from '#lib-config/locale/internationalize/internationalize.constants';
+import { INTERNATIONALIZE_CONFIG } from '#lib-config/locale/internationalize/internationalize.constants';
 import { type FCModel } from '#lib-frontend/core/core.models';
 import {
   type RenderAppModel,
@@ -12,7 +12,7 @@ import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { ROUTE } from '#lib-shared/route/route.constants';
 
-const { languageDefault } = INTERNATIONALIZE_CONFIG_STATIC;
+const { languageDefault } = INTERNATIONALIZE_CONFIG;
 
 export const renderApp = ({ Root, children, context }: RenderAppParamsModel): RenderAppModel => {
   const contextF = merge(

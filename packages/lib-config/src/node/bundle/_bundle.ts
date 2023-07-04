@@ -70,16 +70,14 @@ export const _bundle = ({
   mainFields,
   modulePaths,
   outDir,
-  platform,
   provide,
   transpiles,
   tsconfigPath,
   watch,
-}: ReturnTypeModel<BundleConfigModel>): ReturnTypeModel<_BundleConfigModel> => {
+}: BundleConfigModel): _BundleConfigModel => {
   const isReact = ([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>).includes(
-    platform,
+    process.env.ENV_PLATFORM,
   );
-  const babelConfigF = babelConfig && babelConfig();
   const config: ReturnTypeModel<_BundleConfigModel> = {
     build: {
       assetsDir: fromWorking('assets'),
@@ -125,7 +123,7 @@ export const _bundle = ({
 
         nodePaths: modulePaths,
 
-        plugins: _plugins({ platform, transpiles }),
+        plugins: _plugins({ transpiles }),
 
         resolveExtensions: extensions,
 
@@ -155,9 +153,9 @@ export const _bundle = ({
 
       viteCommonjs(),
 
-      babelConfigF &&
+      babelConfig &&
         babel({
-          ...babelConfigF,
+          ...babelConfig,
           babelHelpers: 'runtime',
           skipPreflightCheck: true,
         } as RollupBabelInputPluginOptions),

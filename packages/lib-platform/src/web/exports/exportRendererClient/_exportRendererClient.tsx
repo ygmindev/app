@@ -1,7 +1,7 @@
 import Cookies from 'cookies-js';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 
-import { _config } from '#lib-config/locale/internationalize/internationalize';
+import { _config } from '#lib-config/locale/internationalize/internationalize.web';
 import { type RootContextModel } from '#lib-frontend/root/root.models';
 import { type CookiesModel } from '#lib-frontend/state/state.models';
 import {

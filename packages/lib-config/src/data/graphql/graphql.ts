@@ -9,31 +9,32 @@ import { Container } from '#lib-backend/core/utils/Container/Container';
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
 import { LinkedUserResolver } from '#lib-backend/user/resources/LinkedUser/LinkedUserResolver/LinkedUserResolver';
 import { UserResolver } from '#lib-backend/user/resources/User/UserResolver/UserResolver';
+import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _graphql } from '#lib-config/data/graphql/_graphql';
-import {
-  type _GraphqlConfigModel,
-  type GraphqlConfigModel,
-} from '#lib-config/data/graphql/graphql.models';
+import { type GraphqlConfigModel } from '#lib-config/data/graphql/graphql.models';
 
-export const config: GraphqlConfigModel = ({ ...params } = {}) => ({
-  ...params,
+const { _config, config } = defineConfig({
+  _config: _graphql,
 
-  authorize,
+  config: () =>
+    ({
+      authorize,
 
-  container: Container,
+      container: Container,
 
-  resolvers: [
-    AccessResolver,
-    BankResolver,
-    CardResolver,
-    LinkedUserResolver,
-    OtpResolver,
-    PaymentMethodResolver,
-    SignInResolver,
-    UserResolver,
-  ],
+      resolvers: [
+        AccessResolver,
+        BankResolver,
+        CardResolver,
+        LinkedUserResolver,
+        OtpResolver,
+        PaymentMethodResolver,
+        SignInResolver,
+        UserResolver,
+      ],
 
-  schemaPath: fromStatic('graphql/schema.gql'),
+      schemaPath: fromStatic('graphql/schema.gql'),
+    } satisfies GraphqlConfigModel),
 });
 
-export const _config: _GraphqlConfigModel = ({ ...params } = {}) => _graphql(config({ ...params }));
+export { _config, config };

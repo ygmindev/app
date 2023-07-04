@@ -5,7 +5,6 @@ import reduce from 'lodash/reduce';
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { getConnection } from '#lib-backend/database/utils/getConnection/getConnection';
-import { EmbeddedResource } from '#lib-backend/resource/resources/EmbeddedResource/EmbeddedResource';
 import {
   type CreateEmbeddedResourceServiceModel,
   type CreateEmbeddedResourceServiceParamsModel,
@@ -34,6 +33,7 @@ export const createEmbeddedResourceService = <
   TRoot extends EntityResourceModel,
   TRootorm,
 >({
+  Resource,
   RootService,
   afterCreate,
   afterGet,
@@ -58,7 +58,7 @@ export const createEmbeddedResourceService = <
   const beforeCreateF = async (
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
   ): Promise<InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>> => {
-    const value = new EmbeddedResource() as TType;
+    const value = new Resource();
     forEach(input.form as unknown as object, (v, k) => ((value as Record<string, unknown>)[k] = v));
     value.beforeCreate && (await value.beforeCreate());
     return { ...input, form: value as unknown as TForm };

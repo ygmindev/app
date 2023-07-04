@@ -8,12 +8,9 @@ import {
 export const _parser = ({
   languages,
   missingValue,
-  namespaceDefault,
   outputPath,
 }: ParserConfigModel): _ParserConfigModel => ({
   createOldCatalogs: false,
-
-  defaultNamespace: namespaceDefault,
 
   defaultValue: missingValue,
 

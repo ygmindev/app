@@ -1,7 +1,7 @@
-import { type CallablePromiseModel } from '#lib-shared/core/core.models';
+import { type OptionalCallablePromiseModel } from '#lib-shared/core/core.models';
 
 export const sequence = async <TType>(
-  promises: Array<CallablePromiseModel<TType>>,
+  promises: Array<OptionalCallablePromiseModel<TType>>,
 ): Promise<Array<TType>> => {
   if (promises.length === 0) return [];
   const [first, ...rest] = promises;

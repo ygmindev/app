@@ -1,5 +1,5 @@
 import { _{{NAME}}(camelCase) } from '#lib-config/{{MODULE}}(camelCase)/{{NAME}}(camelCase)/_{{NAME}}(camelCase)';
-import { config as configFrontend } from '#lib-config/{{MODULE}}(camelCase)/{{NAME}}(camelCase)/{{NAME}}(camelCase).frontend';
+import { config as configBase } from '#lib-config/{{MODULE}}(camelCase)/{{NAME}}(camelCase)/{{NAME}}(camelCase).frontend';
 import {
   type _{{NAME}}(pascalCase)ConfigModel,
   type {{NAME}}(pascalCase)ConfigModel,
@@ -12,7 +12,7 @@ export const config: {{NAME}}(pascalCase)ConfigModel = ({ ...params } = {}) =>
     [
       {},
 
-      configFrontend({ ...params }),
+      configBase({ ...params }),
     ],
     MERGE_STRATEGY.DEEP_PREPEND,
   );

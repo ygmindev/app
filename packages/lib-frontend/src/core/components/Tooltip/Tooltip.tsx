@@ -15,7 +15,7 @@ export const Tooltip = composeComponent<TooltipPropsModel, DroppablePropsModel>(
   Component: Droppable,
 
   getProps: ({ children, color = THEME_COLOR.PRIMARY, icon = 'info' }, theme) => {
-    const colorF = theme.colors.tone[color][THEME_ROLE.MAIN];
+    const colorF = theme.colors.tone[color][THEME_ROLE.BASE];
     return {
       anchor: (isActive) => (
         <Icon

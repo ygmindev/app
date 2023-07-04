@@ -10,30 +10,19 @@ import { type ReturnTypeModel } from '#lib-shared/core/core.models';
 let instanceGlobal: i18n;
 
 export const _internationalize = ({
-  addPath,
-  caches,
-  filename,
   isPreload,
-  isReact,
-  isSuspense,
-  key,
   language,
   languageDefault,
   languages,
-  loadPath,
   modules,
-  namespaceDefault,
-}: InternationalizeConfigModel): ReturnTypeModel<_InternationalizeConfigModel> => {
+  path,
+}: ReturnTypeModel<InternationalizeConfigModel>): ReturnTypeModel<_InternationalizeConfigModel> => {
+  const languageF = language || languageDefault;
+
   const config: InitOptions = {
     debug: false,
 
-    defaultNS: [namespaceDefault],
-
-    detection: {
-      caches,
-      cookieOptions: { path: '/', sameSite: true },
-      lookupCookie: key,
-    },
+    defaultNS: false,
 
     fallbackLng: languageDefault,
 
@@ -41,20 +30,21 @@ export const _internationalize = ({
 
     interpolation: { escapeValue: false },
 
-    lng: language || languageDefault,
+    lng: language,
 
     ns: [],
 
-    preload: isPreload ? languages : false,
+    preload: isPreload ? [languageF] : false,
+
+    react: { defaultTransParent: 'div', useSuspense: true },
 
     supportedLngs: languages,
-
-    ...(isReact ? { react: { defaultTransParent: 'div', useSuspense: isSuspense } } : {}),
-
-    ...(addPath ? { backend: { addPath: `${addPath}/${filename}` } } : {}),
-
-    ...(loadPath ? { backend: { loadPath: `${loadPath}/${filename}` } } : {}),
   };
+
+  if (path) {
+    const pathF = `${path}/locales/{{lng}}/{{ns}}.json`;
+    config.backend = { addPath: pathF, loadPath: pathF };
+  }
 
   let instance: i18n;
   if (instanceGlobal) {

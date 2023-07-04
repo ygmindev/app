@@ -4,7 +4,7 @@ import {
   type InternationalizeConfigModel,
 } from '#lib-config/locale/internationalize/internationalize.models';
 import { Root } from '#lib-frontend/root/containers/Root/Root.base';
-import { Routes } from '#lib-frontend/route/containers/Routes/Routes';
+import { Router } from '#lib-frontend/route/containers/Router/Router';
 import { _render } from '#lib-frontend/test/utils/render/_render';
 import {
   type RenderModel,
@@ -20,7 +20,7 @@ export const render = async (params: RenderParamsModel): RenderModel => {
     ...params,
     Wrapper: (props) => (
       <Root context={_config ? { [LOCALE]: { i18n: _config, lang: _config.language } } : {}}>
-        <Routes routes={[{ element: props.children, pathname: '/' }]} />
+        <Router routes={[{ element: props.children, pathname: '/' }]} />
       </Root>
     ),
   });

@@ -1,7 +1,6 @@
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { type FileConfigModel } from '#lib-config/core/file/file.models';
-
-const BUILD_DIR = '.build';
+import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 
 const CLEAN_PATTERNS = [
   '.cache',
@@ -15,14 +14,18 @@ const CLEAN_PATTERNS = [
   'public/assets',
 ];
 
-export const config: FileConfigModel = {
-  backupDir: fromRoot('../backups'),
+const { _config, config } = defineConfig({
+  config: {
+    backupDir: fromRoot('../backups'),
 
-  buildDir: fromRoot(BUILD_DIR),
+    buildDir: fromRoot('.build'),
 
-  cleanPatterns: CLEAN_PATTERNS,
+    cleanPatterns: CLEAN_PATTERNS,
 
-  excludePatterns: [...CLEAN_PATTERNS, '.git', '.backups', 'ios/Pods', 'node_modules'],
+    excludePatterns: [...CLEAN_PATTERNS, '.git', '.backups', 'ios/Pods', 'node_modules'],
 
-  packagePrefixes: ['app', 'build', 'backend', 'lib', 'tool'],
-};
+    packagePrefixes: ['app', 'build', 'backend', 'lib', 'tool'],
+  } satisfies FileConfigModel,
+});
+
+export { _config, config };

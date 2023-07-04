@@ -11,7 +11,7 @@ import { type StyleProviderPropsModel } from '#lib-frontend/style/providers/Styl
 export const StyleProvider: FCModel<StyleProviderPropsModel> = ({ children }) => {
   const theme = useTheme();
   const brightness = useStore((state) => state.style.brightness);
-  const sheet = useMemo(() => config(theme), [config, theme]);
+  const sheet = useMemo(() => config.stylesheet(theme), [config, theme]);
   return (
     <_StyleProvider value={{ brightness, theme }}>
       <GlobalStyle sheet={sheet} />

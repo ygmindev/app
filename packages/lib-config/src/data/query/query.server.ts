@@ -1,8 +1,13 @@
+import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _query } from '#lib-config/data/query/_query';
-import { type _QueryConfigModel, type QueryConfigModel } from '#lib-config/data/query/query.models';
+import { config as configBase } from '#lib-config/data/query/query';
 
-export const config: QueryConfigModel = {
-  cacheTime: Infinity,
-};
+const { _config, config } = defineConfig({
+  _config: _query,
 
-export const _config: _QueryConfigModel = _query(config);
+  config: configBase,
+
+  overrides: [{ cacheTime: Infinity }],
+});
+
+export { _config, config };

@@ -5,7 +5,7 @@ import { type StylerModel } from '#lib-frontend/style/utils/styler/styler.models
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 
 export const backgroundStyler: StylerModel<BackgroundStylerParamsModel> = (
-  { backgroundColor, backgroundRole = THEME_ROLE.MAIN },
+  { backgroundColor, backgroundRole = THEME_ROLE.BASE },
   theme,
 ) => {
   const color = theme.colors.tone[backgroundColor as ThemeColorModel];

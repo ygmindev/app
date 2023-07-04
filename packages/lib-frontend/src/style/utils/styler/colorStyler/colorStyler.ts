@@ -7,7 +7,7 @@ import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 export const colorStyler: StylerModel<ColorStylerParamsModel, TextStyleModel> = (
   {
     color = THEME_COLOR.NEUTRAL,
-    colorRole = color === THEME_COLOR.NEUTRAL ? THEME_ROLE.MAIN_CONTRAST : THEME_ROLE.MAIN,
+    colorRole = color === THEME_COLOR.NEUTRAL ? THEME_ROLE.MAIN_CONTRAST : THEME_ROLE.BASE,
   },
   theme,
 ) => {

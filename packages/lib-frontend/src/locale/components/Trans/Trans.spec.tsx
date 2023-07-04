@@ -20,9 +20,7 @@ describe(displayName, () => {
         />
       ),
     });
-    await waitForExpect({
-      callback: () => expect(await findByText('test with string')).toBeTruthy(),
-    });
+    await waitForExpect(async () => expect(await findByText('test with string')).toBeTruthy());
   });
 
   test('works with params', async () => {
@@ -35,9 +33,9 @@ describe(displayName, () => {
         />
       ),
     });
-    await waitForExpect({
-      callback: () => expect(await findByText('test with params: value1 value2')).toBeTruthy(),
-    });
+    await waitForExpect(async () =>
+      expect(await findByText('test with params: value1 value2')).toBeTruthy(),
+    );
   });
 
   test('works with elements', async () => {
@@ -54,12 +52,10 @@ describe(displayName, () => {
         />
       ),
     });
-    await waitForExpect({
-      callback: () => {
-        expect(await findByText('test with elements:')).toBeTruthy();
-        expect(await findByText('value1')).toBeTruthy();
-        expect(await findByText('value2')).toBeTruthy();
-      },
+    await waitForExpect(async () => {
+      expect(await findByText('test with elements:')).toBeTruthy();
+      expect(await findByText('value1')).toBeTruthy();
+      expect(await findByText('value2')).toBeTruthy();
     });
   });
 });

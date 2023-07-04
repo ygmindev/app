@@ -45,7 +45,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
 
         {
           isProtectable: true,
-          ns: [ACCOUNT, BILLING, SETTINGS, USER],
+          ns: [BILLING, SETTINGS, USER, LOCALE],
           pathname: ACCOUNT,
           routes: [
             {

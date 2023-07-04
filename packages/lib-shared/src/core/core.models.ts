@@ -1,6 +1,5 @@
 import {
-  type AbstractConstructor,
-  type Constructor,
+  type Class,
   type Get,
   type Merge,
   type OptionalKeysOf,
@@ -14,9 +13,7 @@ import {
 
 import { type BOOLEAN_STRING } from '#lib-shared/core/core.constants';
 
-export type ClassModel<TType = object> = Constructor<TType>;
-
-export type AbstractClassModel<TType = object> = AbstractConstructor<TType>;
+export type ClassModel<TType = object> = Class<TType>;
 
 export type PrototypeModel<TType> = TType extends ClassModel<infer TClass> ? TClass : never;
 
@@ -32,28 +29,42 @@ export type EmptyObjectModel = Record<string, never>;
 
 export type BooleanStringModel = `${BOOLEAN_STRING}`;
 
-export type CallableModel<TResult = void, TParams = void> = (args?: TParams | undefined) => TResult;
+export type CallableModel<TResult = void, TParams = void> = (args: TParams) => TResult;
 
-export type CallablePromiseModel<TResult = void, TParams = void> = CallableModel<
-  Promise<TResult>,
+export type OptionalCallableModel<TResult = void, TParams = void> = (
+  args?: TParams | undefined,
+) => TResult;
+
+export type OptionalCallablePromiseModel<TResult = void, TParams = void> = OptionalCallableModel<
+  Promise<Awaited<TResult>>,
   TParams
 >;
 
-export type CallableArgsModel<TResult = void, TParams extends Array<unknown> = never> = (
+export type CallablePromiseModel<TResult = void, TParams = void> = CallableModel<
+  Promise<Awaited<TResult>>,
+  TParams
+>;
+
+export type RequiredCallablePromiseModel<TResult = void, TParams = void> = CallableModel<
+  Promise<Awaited<TResult>>,
+  TParams
+>;
+
+export type ArrayCallableModel<TResult = void, TParams extends Array<unknown> = never> = (
   ...args: TParams
 ) => TResult;
 
-export type CallableArgsPromiseModel<
+export type ArrayCallablePromiseModel<
   TResult = void,
   TParams extends Array<unknown> = Array<unknown>,
-> = CallableArgsModel<Promise<TResult>, TParams>;
+> = ArrayCallableModel<Promise<TResult>, TParams>;
 
-export type ReturnTypeModel<TType> = TType extends CallablePromiseModel<infer TReturn>
+export type ReturnTypeModel<TType> = TType extends OptionalCallablePromiseModel<infer TReturn>
   ? Awaited<TReturn>
   : TType extends
-      | CallableModel<infer TReturn>
-      | CallableArgsModel<infer TReturn>
-      | CallableArgsPromiseModel<infer TReturn>
+      | OptionalCallableModel<infer TReturn>
+      | ArrayCallableModel<infer TReturn>
+      | ArrayCallablePromiseModel<infer TReturn>
   ? TReturn
   : TType;
 

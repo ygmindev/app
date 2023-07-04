@@ -1,13 +1,6 @@
-import {
-  type CallableModel,
-  type EmptyObjectModel,
-  type PartialModel,
-  type ReturnTypeModel,
-} from '#lib-shared/core/core.models';
+import { type ReturnTypeModel } from '#lib-shared/core/core.models';
 
-export type ConfigDynamicModel<TType, TOptions = EmptyObjectModel> = CallableModel<
-  TOptions extends EmptyObjectModel
-    ? ReturnTypeModel<TType>
-    : ReturnTypeModel<TType> & PartialModel<TOptions>,
-  TOptions
->;
+export type ConfigModuleModel<TParams, TResult = undefined> = {
+  _config: TResult extends undefined ? undefined : ReturnTypeModel<TResult>;
+  config: ReturnTypeModel<TParams>;
+};

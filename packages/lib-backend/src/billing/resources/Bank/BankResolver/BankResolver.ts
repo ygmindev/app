@@ -10,7 +10,11 @@ import { type BankFormModel, type BankModel } from '#lib-shared/billing/resource
 import { type BankServiceModel } from '#lib-shared/billing/resources/Bank/BankService/BankService.models';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
-const EmbeddedResourceResolverF = createEmbeddedResourceResolver<BankModel, BankFormModel, UserModel>({
+const EmbeddedResourceResolverF = createEmbeddedResourceResolver<
+  BankModel,
+  BankFormModel,
+  UserModel
+>({
   Resource: Bank,
   ResourceService: BankService,
   RootResource: User,

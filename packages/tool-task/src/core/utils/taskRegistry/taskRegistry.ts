@@ -6,7 +6,7 @@ import reduce from 'lodash/reduce';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
-import { type CallablePromiseModel } from '#lib-shared/core/core.models';
+import { type OptionalCallablePromiseModel } from '#lib-shared/core/core.models';
 import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/DuplicateError';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { sequence } from '#lib-shared/core/utils/sequence/sequence';
@@ -101,7 +101,7 @@ export class TaskRegistry extends _TaskRegistry implements TaskRegistryModel {
     });
   };
 
-  get registry(): Record<string, CallablePromiseModel<TaskResultModel>> {
+  get registry(): Record<string, OptionalCallablePromiseModel<TaskResultModel>> {
     return reduce(
       super.registry,
       (result, v, k) => (k === 'default' ? result : { ...result, [k]: v }),

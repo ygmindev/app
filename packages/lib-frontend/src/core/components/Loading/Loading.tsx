@@ -14,7 +14,7 @@ const AnimatableLoading = animatable<_LoadingPropsModel, TextStyleModel>({ Compo
 export const Loading: SFCModel<LoadingPropsModel> = ({
   animation,
   color = THEME_COLOR.PRIMARY,
-  colorRole = THEME_ROLE.MAIN,
+  colorRole = THEME_ROLE.BASE,
   fontSize = THEME_SIZE_MORE.LARGE,
 }) => {
   const theme = useTheme();

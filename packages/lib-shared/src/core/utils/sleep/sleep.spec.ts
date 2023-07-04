@@ -9,7 +9,7 @@ describe(displayName, () => {
   const SLEEP_DURATION_MILLISECONDS = 5000;
 
   test('works', async () => {
-    sleep(SLEEP_DURATION_MILLISECONDS);
+    await sleep(SLEEP_DURATION_MILLISECONDS);
     expect(setTimeout).toHaveBeenCalledTimes(1);
     expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), SLEEP_DURATION_MILLISECONDS);
   });

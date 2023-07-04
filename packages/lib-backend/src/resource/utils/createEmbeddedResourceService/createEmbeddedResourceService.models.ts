@@ -7,6 +7,7 @@ import { type ResourceServiceDecoratorModel } from '#lib-shared/resource/service
 export type CreateEmbeddedResourceServiceParamsModel<TType, TForm, TRoot, TRootorm> =
   ResourceNameParamsModel<TRoot> &
     ResourceServiceDecoratorModel<TType, TForm, TRoot> & {
+      Resource: ClassModel<TType>;
       RootService: ClassModel<EntityResourceServiceModel<TRoot, TRootorm>>;
     };
 

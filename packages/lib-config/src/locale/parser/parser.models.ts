@@ -3,8 +3,6 @@ export type ParserConfigModel = {
 
   missingValue: string;
 
-  namespaceDefault: string;
-
   outputPath: string;
 };
 

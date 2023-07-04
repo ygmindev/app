@@ -1,26 +1,18 @@
-import { _config as _babelConfig } from '#lib-config/node/babel/babel.frontend';
+import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
+import { _config as _babelConfig } from '#lib-config/node/babel/babel.native';
 import { _bundle } from '#lib-config/node/bundle/_bundle';
-import { config as configFrontend } from '#lib-config/node/bundle/bundle.frontend';
-import {
-  type _BundleConfigModel,
-  type BundleConfigModel,
-} from '#lib-config/node/bundle/bundle.models';
-import { PLATFORM } from '#lib-platform/core/core.constants';
-import { merge } from '#lib-shared/core/utils/merge/merge';
-import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
+import { config as configBase } from '#lib-config/node/bundle/bundle.native';
 
-export const config: BundleConfigModel = ({ ...params } = {}) =>
-  merge(
-    [
-      {
-        babelConfig: _babelConfig,
+const { _config, config } = defineConfig({
+  _config: _bundle,
 
-        platform: PLATFORM.IOS,
-      },
+  config: configBase,
 
-      configFrontend({ ...params }),
-    ],
-    MERGE_STRATEGY.DEEP_PREPEND,
-  );
+  overrides: () => [
+    {
+      babelConfig: _babelConfig,
+    },
+  ],
+});
 
-export const _config: _BundleConfigModel = ({ ...params } = {}) => _bundle(config({ ...params }));
+export { _config, config };

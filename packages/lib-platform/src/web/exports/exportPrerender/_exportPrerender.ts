@@ -1,4 +1,4 @@
-import { _config } from '#lib-config/locale/internationalize/internationalize.node';
+import { _config } from '#lib-config/locale/internationalize/internationalize.server';
 import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
 import {
   type _ExportPrerenderModel,

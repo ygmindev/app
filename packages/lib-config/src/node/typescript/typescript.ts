@@ -1,27 +1,29 @@
 import { fromBuild } from '#lib-backend/file/utils/fromBuild/fromBuild';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { toRelative } from '#lib-backend/file/utils/toRelative/toRelative';
+import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _typescript } from '#lib-config/node/typescript/_typescript';
-import {
-  type _TypescriptConfigModel,
-  type TypescriptConfigModel,
-} from '#lib-config/node/typescript/typescript.models';
+import { type TypescriptConfigModel } from '#lib-config/node/typescript/typescript.models';
 
-export const config: TypescriptConfigModel = {
-  configFile: fromBuild('tsconfig.json'),
+const { _config, config } = defineConfig({
+  _config: _typescript,
 
-  outDir: fromBuild('out-tsc'),
+  config: {
+    configFile: fromBuild('tsconfig.json'),
 
-  paths: {
-    '#build/*': toRelative({ from: fromRoot(), to: fromBuild('/*') }),
-    'css-in-js-utils/lib/*': 'node_modules/css-in-js-utils/es/*',
-    'inline-style-prefixer/lib/*': 'node_modules/inline-style-prefixer/es/*',
-    'redux-persist/integration/*': 'node_modules/redux-persist/types/integration/*',
-  },
+    outDir: fromBuild('out-tsc'),
 
-  rootDir: fromRoot(),
+    paths: {
+      '#build/*': toRelative({ from: fromRoot(), to: fromBuild('/*') }),
+      'css-in-js-utils/lib/*': 'node_modules/css-in-js-utils/es/*',
+      'inline-style-prefixer/lib/*': 'node_modules/inline-style-prefixer/es/*',
+      'redux-persist/integration/*': 'node_modules/redux-persist/types/integration/*',
+    },
 
-  types: ['react-native', 'jest', 'vite/client'],
-};
+    rootDir: fromRoot(),
 
-export const _config: _TypescriptConfigModel = _typescript(config);
+    types: ['react-native', 'jest', 'vite/client'],
+  } satisfies TypescriptConfigModel,
+});
+
+export { _config, config };

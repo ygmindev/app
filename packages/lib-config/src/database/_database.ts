@@ -2,7 +2,6 @@ import {
   type _DatabaseConfigModel,
   type DatabaseConfigModel,
 } from '#lib-config/database/database.models';
-import { type ReturnTypeModel } from '#lib-shared/core/core.models';
 
 export const _database = ({
   database,
@@ -12,8 +11,8 @@ export const _database = ({
   pool,
   type,
   username,
-}: ReturnTypeModel<DatabaseConfigModel>): ReturnTypeModel<_DatabaseConfigModel> => {
-  const config: ReturnTypeModel<_DatabaseConfigModel> = {
+}: DatabaseConfigModel): _DatabaseConfigModel => {
+  const config: _DatabaseConfigModel = {
     clientUrl: host,
     dbName: database,
     debug: false,

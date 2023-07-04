@@ -8,7 +8,7 @@ import {
   type StylePropsModel,
   type ViewStyleModel,
 } from '#lib-frontend/style/style.models';
-import { type CallableModel } from '#lib-shared/core/core.models';
+import { type OptionalCallableModel } from '#lib-shared/core/core.models';
 
 export type AnimationModel<
   TStyle extends StyleModel = ViewStyleModel,
@@ -18,7 +18,7 @@ export type AnimationModel<
   duration?: number;
   isInfinite?: boolean;
   isInitial?: boolean;
-  onEnd?: CallableModel;
+  onEnd?: OptionalCallableModel;
   states?: TStates;
 };
 

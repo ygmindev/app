@@ -1,13 +1,8 @@
 import { type InternationalizeConfigModel } from '#lib-config/locale/internationalize/internationalize.models';
-import { CORE } from '#lib-shared/core/core.constants';
+import { type PartialModel, type ReturnTypeModel } from '#lib-shared/core/core.models';
 
-export const INTERNATIONALIZE_CONFIG_STATIC: Pick<
-  InternationalizeConfigModel,
-  'languages' | 'languageDefault' | 'namespaceDefault'
-> = {
+export const INTERNATIONALIZE_CONFIG = {
   languageDefault: 'en',
 
   languages: ['en', 'kr'],
-
-  namespaceDefault: CORE,
-};
+} satisfies PartialModel<ReturnTypeModel<InternationalizeConfigModel>>;

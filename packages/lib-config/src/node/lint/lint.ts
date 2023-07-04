@@ -5,41 +5,44 @@ import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { packages } from '#lib-backend/file/utils/packages/packages';
 import { _lint } from '#lib-config/node/lint/_lint';
-import { type _LintConfigModel, type LintConfigModel } from '#lib-config/node/lint/lint.models';
+import { type LintConfigModel } from '#lib-config/node/lint/lint.models';
 
 export const lintCommand = (fix?: boolean): string => {
-  const configF = config();
   return fromExecutable(
-    `eslint --config ${configF.configFile} ${
+    `eslint --config ${config.configFile} ${
       fix ? '--fix' : ''
-    } --no-error-on-unmatched-pattern ${configF.include.join(' ')}`,
+    } --no-error-on-unmatched-pattern ${config.include.join(' ')}`,
   );
 };
 
-export const config: LintConfigModel = ({ ...params } = {}) => ({
-  ...params,
+import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 
-  configFile: fromBuild('.eslintrc.json'),
+const { _config, config } = defineConfig({
+  _config: _lint,
 
-  include: [fromWorking('src/**/*')],
+  config: {
+    configFile: fromBuild('.eslintrc.json'),
 
-  indentWidth: 2,
+    include: [fromWorking('src/**/*')],
 
-  isParenthesis: true,
+    indentWidth: 2,
 
-  isSameLine: true,
+    isParenthesis: true,
 
-  isSingleQuote: true,
+    isSameLine: true,
 
-  isSpacing: true,
+    isSingleQuote: true,
 
-  isTrailingComma: true,
+    isSpacing: true,
 
-  printWidth: 100,
+    isTrailingComma: true,
 
-  roots: [fromRoot(), ...packages.map((pkg) => fromPackages(pkg))],
+    printWidth: 100,
 
-  unusedIgnore: '^_',
+    roots: [fromRoot(), ...packages.map((pkg) => fromPackages(pkg))],
+
+    unusedIgnore: '^_',
+  } satisfies LintConfigModel,
 });
 
-export const _config: _LintConfigModel = ({ ...params } = {}) => _lint(config({ ...params }));
+export { _config, config };

@@ -63,7 +63,7 @@ export const createResourceResolver = <TType, TForm, TRoot = undefined>({
 
   @withContainer()
   @withResolver({ isAbstract: true })
-  abstract class ResourceResolver implements ResourceResolverModel<TType, TForm, TRoot> {
+  class ResourceResolver implements ResourceResolverModel<TType, TForm, TRoot> {
     protected _service = Container.get(ResourceService);
 
     @withCondition(createExists, () =>

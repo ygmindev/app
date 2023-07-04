@@ -91,7 +91,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
               },
             },
           },
-          childColorRole: THEME_ROLE.MAIN,
+          childColorRole: THEME_ROLE.BASE,
         };
       default:
         return {};
@@ -134,7 +134,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
       animation={animation}
       border={type === BUTTON_TYPE.TRANSPARENT}
       borderColor={type === BUTTON_TYPE.TRANSPARENT ? color : undefined}
-      borderRole={THEME_ROLE.MAIN}
+      borderRole={THEME_ROLE.BASE}
       elementState={valueControlled}
       height={height}
       justify={FLEX_JUSTIFY.CENTER}

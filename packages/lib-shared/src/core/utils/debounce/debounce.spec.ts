@@ -6,7 +6,7 @@ const { displayName } = withTest({ debounce });
 describe(displayName, () => {
   jest.useFakeTimers();
 
-  const fn = jest.fn();
+  const fn = jest.fn<void, Array<undefined>>();
   const TIMES = 10;
 
   afterEach(async () => {

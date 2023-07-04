@@ -18,7 +18,7 @@ export const createRoot = <TRoot = undefined>({
     class RootResourceF extends (RootResource as ClassModel) {}
 
     @withEntity({ isAbstract: true, name: `${nameF}Root` })
-    abstract class Root implements RootModel<TRoot> {
+    class Root implements RootModel<TRoot> {
       @withField({ Resource: RootResourceF })
       root?: PartialModel<TRoot>;
     }

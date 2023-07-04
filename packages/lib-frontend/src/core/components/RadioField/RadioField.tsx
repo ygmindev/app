@@ -46,7 +46,7 @@ export const RadioField = <TType extends string = string>({
         const isActiveF = id === valueControlled;
         const colorF =
           theme.colors.tone[isActiveF ? color : THEME_COLOR.NEUTRAL][
-            isDisabled || !isActiveF ? THEME_ROLE.MUTED : THEME_ROLE.MAIN
+            isDisabled || !isActiveF ? THEME_ROLE.MUTED : THEME_ROLE.BASE
           ];
         return (
           <Activatable key={id}>

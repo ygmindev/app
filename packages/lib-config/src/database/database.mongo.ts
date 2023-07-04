@@ -1,41 +1,26 @@
-import { Access } from '#lib-backend/auth/resources/Access/Access';
-import { Otp } from '#lib-backend/auth/resources/Otp/Otp';
-import { Bank } from '#lib-backend/billing/resources/Bank/Bank';
-import { Card } from '#lib-backend/billing/resources/Card/Card';
 import { DATABASE_TYPE } from '#lib-backend/database/database.constants';
-import { DummyEntityResource } from '#lib-backend/test/resources/DummyEntityResource/DummyEntityResource';
-import { User } from '#lib-backend/user/resources/User/User';
+import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _database } from '#lib-config/database/_database';
-import {
-  type _DatabaseConfigModel,
-  type DatabaseConfigModel,
-} from '#lib-config/database/database.models';
-import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
+import { config as configBase } from '#lib-config/database/database.base';
 
-export const config: DatabaseConfigModel = ({ ...params } = {}) => ({
-  ...params,
+const { _config, config } = defineConfig({
+  _config: _database,
 
-  database: process.env.DATABASE_MONGO_NAME,
+  config: configBase,
 
-  entities: filterNil([
-    Access,
-    Bank,
-    Card,
-    Otp,
-    User,
-    process.env.NODE_ENV !== 'production' && DummyEntityResource,
-  ]),
+  overrides: () => [
+    {
+      database: process.env.DATABASE_MONGO_NAME,
 
-  host: process.env.DATABASE_MONGO_URL,
+      host: process.env.DATABASE_MONGO_URL,
 
-  password: process.env.DATABASE_MONGO_PASSWORD,
+      password: process.env.DATABASE_MONGO_PASSWORD,
 
-  pool: { max: 10 },
+      type: DATABASE_TYPE.MONGO,
 
-  type: DATABASE_TYPE.MONGO,
-
-  username: process.env.DATABASE_MONGO_USERNAME,
+      username: process.env.DATABASE_MONGO_USERNAME,
+    },
+  ],
 });
 
-export const _config: _DatabaseConfigModel = ({ ...params } = {}) =>
-  _database(config({ ...params }));
+export { _config, config };

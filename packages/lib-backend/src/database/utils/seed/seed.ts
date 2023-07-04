@@ -8,7 +8,7 @@ import { type SeedParamsModel } from '#lib-backend/database/utils/seed/seed.mode
 import { fromGlobs } from '#lib-backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { type CallablePromiseModel } from '#lib-shared/core/core.models';
-import { type CreateEntityResourceServiceModel } from '#lib-shared/resource/resources/EntityResource/EntityResourceService/EntityResourceService.models';
+import { type EntityResourceServiceModel } from '#lib-shared/resource/services/EntityResourceService/EntityResourceService.models';
 
 export const seed = async ({ names }: SeedParamsModel = {}): Promise<void> => {
   const services = fromGlobs({
@@ -27,7 +27,7 @@ export const seed = async ({ names }: SeedParamsModel = {}): Promise<void> => {
     if (!names || names.includes(name)) {
       const repository = database.getRepository({ name });
       await repository.clear();
-      const service = Container.get<CreateEntityResourceServiceModel<unknown, unknown>>(`${name}Service`);
+      const service = Container.get<EntityResourceServiceModel<unknown, unknown>>(`${name}Service`);
       for (const form of data) {
         const formF = isFunction(form) ? await (form as CallablePromiseModel<unknown>)() : form;
         service.create && (await service.create({ form: formF }));

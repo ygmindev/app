@@ -1,40 +1,42 @@
 import { type Config } from '@jest/types';
 
-import { type ConfigDynamicModel } from '#lib-config/core/core.models';
 import { type BundleConfigModel } from '#lib-config/node/bundle/bundle.models';
-import { type CallableModel, type CallablePromiseModel } from '#lib-shared/core/core.models';
+import {
+  type OptionalCallableModel,
+  type OptionalCallablePromiseModel,
+  type PartialDeepModel,
+} from '#lib-shared/core/core.models';
 
-export type TestConfigOptionsModel = { match?: string; root?: string };
+export type TestConfigModel = {
+  bundleConfig: OptionalCallableModel<BundleConfigModel, PartialDeepModel<BundleConfigModel>>;
 
-export type TestConfigModel = ConfigDynamicModel<
-  {
-    bundleConfig: BundleConfigModel;
+  cachePath: string;
 
-    cachePath: string;
+  coverageOutputPath: string;
 
-    coverageOutputPath: string;
+  fileExtensions: Array<string>;
 
-    fileExtensions: Array<string>;
+  isWatch?: boolean;
 
-    isWatch?: boolean;
+  match?: string;
 
-    mockPath: string;
+  mockPath: string;
 
-    mocks?: Array<string | [string, CallableModel<unknown>]>;
+  mocks?: Array<string | [string, OptionalCallableModel<unknown>]>;
 
-    onAfterAll?: CallablePromiseModel;
+  onAfterAll?: OptionalCallablePromiseModel;
 
-    onAfterEach?: CallablePromiseModel;
+  onAfterEach?: OptionalCallablePromiseModel;
 
-    onBeforeAll?: CallablePromiseModel;
+  onBeforeAll?: OptionalCallablePromiseModel;
 
-    onBeforeEach?: CallablePromiseModel;
+  onBeforeEach?: OptionalCallablePromiseModel;
 
-    testExtensions: Array<string>;
+  root?: string;
 
-    timeout: number;
-  },
-  TestConfigOptionsModel
->;
+  testExtensions: Array<string>;
 
-export type _TestConfigModel = ConfigDynamicModel<Config.InitialOptions, TestConfigOptionsModel>;
+  timeout: number;
+};
+
+export type _TestConfigModel = Config.InitialOptions;

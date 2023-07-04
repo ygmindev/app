@@ -5,7 +5,7 @@ const { displayName } = withTest({ validatePhone });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await validatePhone({});
+    const result = validatePhone({});
     expect(result).toStrictEqual({});
   });
 });

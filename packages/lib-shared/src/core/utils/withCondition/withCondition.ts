@@ -1,4 +1,4 @@
-import { type CallableArgsModel, type CallableModel } from '#lib-shared/core/core.models';
+import { type ArrayCallableModel, type OptionalCallableModel } from '#lib-shared/core/core.models';
 
 type _WithConditionResultModel =
   | ClassDecorator
@@ -9,12 +9,12 @@ type _WithConditionResultModel =
 export const withCondition =
   (
     condition: boolean,
-    ifTrue?: CallableModel<_WithConditionResultModel>,
-    ifFalse?: CallableModel<_WithConditionResultModel>,
+    ifTrue?: OptionalCallableModel<_WithConditionResultModel>,
+    ifFalse?: OptionalCallableModel<_WithConditionResultModel>,
   ) =>
   (...params: Array<unknown>): void =>
     ifTrue && condition
-      ? (ifTrue() as CallableArgsModel<void, Array<unknown>>)(...params)
+      ? (ifTrue() as ArrayCallableModel<void, Array<unknown>>)(...params)
       : ifFalse && !condition
-      ? (ifFalse() as CallableArgsModel<void, Array<unknown>>)(...params)
+      ? (ifFalse() as ArrayCallableModel<void, Array<unknown>>)(...params)
       : undefined;

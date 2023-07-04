@@ -1,7 +1,9 @@
-export type _PaletteParamsModel = {
-  alpha?: number;
-  color: string;
-  lightness?: number;
-};
+export type _PaletteParamsModel = [
+  color: string,
+  options: {
+    alpha?: number;
+    lightness?: number;
+  },
+];
 
 export type _PaletteModel = string;

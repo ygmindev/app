@@ -1,19 +1,22 @@
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
-import { config as configBase } from '#lib-config/locale/internationalize/internationalize.base';
+import { INTERNATIONALIZE_CONFIG } from '#lib-config/locale/internationalize/internationalize.constants';
 import { _parser } from '#lib-config/locale/parser/_parser';
-import {
-  type _ParserConfigModel,
-  type ParserConfigModel,
-} from '#lib-config/locale/parser/parser.models';
+import { type ParserConfigModel } from '#lib-config/locale/parser/parser.models';
 
-export const config: ParserConfigModel = {
-  languages: configBase.languages,
+const { languages } = INTERNATIONALIZE_CONFIG;
 
-  missingValue: 'TRANSLATION_MISSING',
+import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 
-  namespaceDefault: configBase.namespaceDefault,
+const { _config, config } = defineConfig({
+  _config: _parser,
 
-  outputPath: fromStatic('assets/locales'),
-};
+  config: {
+    languages,
 
-export const _config: _ParserConfigModel = _parser(config);
+    missingValue: 'TRANSLATION_MISSING',
+
+    outputPath: fromStatic('assets/locales'),
+  } satisfies ParserConfigModel,
+});
+
+export { _config, config };

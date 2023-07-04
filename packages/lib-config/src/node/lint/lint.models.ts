@@ -1,35 +1,27 @@
 import { type Linter } from 'eslint';
 
-import { type ConfigDynamicModel } from '#lib-config/core/core.models';
-import { type EmptyObjectModel } from '#lib-shared/core/core.models';
+export type LintConfigModel = {
+  configFile: string;
 
-export type LintConfigOptionsModel = EmptyObjectModel;
+  include: Array<string>;
 
-export type LintConfigModel = ConfigDynamicModel<
-  {
-    configFile: string;
+  indentWidth: number;
 
-    include: Array<string>;
+  isParenthesis?: boolean;
 
-    indentWidth: number;
+  isSameLine?: boolean;
 
-    isParenthesis?: boolean;
+  isSingleQuote?: boolean;
 
-    isSameLine?: boolean;
+  isSpacing?: boolean;
 
-    isSingleQuote?: boolean;
+  isTrailingComma?: boolean;
 
-    isSpacing?: boolean;
+  printWidth: number;
 
-    isTrailingComma?: boolean;
+  roots: Array<string>;
 
-    printWidth: number;
+  unusedIgnore?: string;
+};
 
-    roots: Array<string>;
-
-    unusedIgnore?: string;
-  },
-  LintConfigOptionsModel
->;
-
-export type _LintConfigModel = ConfigDynamicModel<Linter.Config, LintConfigOptionsModel>;
+export type _LintConfigModel = Linter.Config;

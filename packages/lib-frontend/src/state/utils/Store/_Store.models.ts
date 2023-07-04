@@ -7,7 +7,7 @@ import {
   type NestedReducerModel,
 } from '#lib-frontend/state/state.models';
 import { type StateProviderPropsModel } from '#lib-frontend/state/utils/Store/Store.models';
-import { type CallablePromiseModel } from '#lib-shared/core/core.models';
+import { type OptionalCallablePromiseModel } from '#lib-shared/core/core.models';
 
 export type _StoreParamsModel<
   TKeys extends Array<string>,
@@ -26,7 +26,7 @@ export type _StoreModel<
 > = {
   Provider: ComponentType<StateProviderPropsModel<TKeys, TType, TParams>>;
 
-  getState: CallablePromiseModel<TType>;
+  getState: OptionalCallablePromiseModel<TType>;
 };
 
 export type _ActionProviderPropsModel<

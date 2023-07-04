@@ -1,7 +1,7 @@
-import { type CallablePromiseModel } from '#lib-shared/core/core.models';
+import { type OptionalCallablePromiseModel } from '#lib-shared/core/core.models';
 
 export type SetupConfigModel = {
-  onInitialize: CallablePromiseModel;
+  onInitialize: OptionalCallablePromiseModel;
 
-  onShutdown: CallablePromiseModel;
+  onShutdown: OptionalCallablePromiseModel;
 };

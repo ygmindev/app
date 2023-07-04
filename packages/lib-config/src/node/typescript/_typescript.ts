@@ -15,14 +15,13 @@ import {
   type _TypescriptConfigModel,
   type TypescriptConfigModel,
 } from '#lib-config/node/typescript/typescript.models';
-import { type ReturnTypeModel } from '#lib-shared/core/core.models';
 
 export const _typescript = ({
   outDir,
   paths,
   rootDir,
   types,
-}: TypescriptConfigModel): ReturnTypeModel<_TypescriptConfigModel> => {
+}: TypescriptConfigModel): _TypescriptConfigModel => {
   const root = toRelative({ from: fromBuild(), to: rootDir });
   return {
     compilerOptions: {

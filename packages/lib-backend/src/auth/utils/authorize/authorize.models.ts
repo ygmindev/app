@@ -5,4 +5,4 @@ export type AuthorizeParamsModel = {
   roles?: Array<string>;
 };
 
-export type AuthorizeModel = boolean;
+export type AuthorizeModel = Promise<boolean>;

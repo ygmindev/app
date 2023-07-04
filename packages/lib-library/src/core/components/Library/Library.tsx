@@ -20,10 +20,10 @@ import {
   type LibraryPropsModel,
   type LibraryVariantModel,
 } from '#lib-library/core/components/Library/Library.models';
-import { withId } from '#lib-shared/core/utils/withId/withId';
-import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 import { groupBy } from '#lib-shared/core/utils/groupBy/groupBy';
 import { stringify } from '#lib-shared/core/utils/stringify/stringify';
+import { withId } from '#lib-shared/core/utils/withId/withId';
+import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
 export const Library = <TProps,>({
   Component,
@@ -66,7 +66,7 @@ export const Library = <TProps,>({
   return (
     <Wrapper
       grow
-      spacing
+      s
       style={styles}
       testID={testID}>
       {name && <Text type={FONT_TYPE.HEADLINE}>{name}</Text>}

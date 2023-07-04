@@ -1,4 +1,5 @@
 import pick from 'lodash/pick';
+import { type PackageJson } from 'type-fest';
 
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
@@ -12,8 +13,12 @@ export const packageExtend: TaskParamsModel = {
   name: 'packageExtend',
 
   task: async () => {
-    const { default: _1, ...parentPackage } = await import(fromRoot('package.json'));
-    const { default: _2, ...localPackage } = await import(fromWorking('package.json'));
+    const { default: _1, ...parentPackage } = (await import(
+      fromRoot('package.json')
+    )) as PackageJson;
+    const { default: _2, ...localPackage } = (await import(
+      fromWorking('package.json')
+    )) as PackageJson;
     const finalPackage = merge([localPackage, pick(parentPackage, PACKAGE_EXTEND_KEYS)]);
     writeFile({
       filename: fromWorking('package.json'),

@@ -62,7 +62,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
 
     signOut: async () => {
       await signOut();
-      reset();
+      return reset();
     },
 
     usernameUpdate: async (form) => {

@@ -1,51 +1,50 @@
 import toNumber from 'lodash/toNumber';
 
 import { SERVERLESS_PROVIDER } from '#lib-backend/serverless/serverless.constants';
+import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _config as _bundleConfig } from '#lib-config/node/bundle/bundle.node';
 import { _serverless } from '#lib-config/platform/serverless/_serverless';
-import {
-  type _ServerlessConfigModel,
-  type ServerlessConfigModel,
-} from '#lib-config/platform/serverless/serverless.models';
+import { type ServerlessConfigModel } from '#lib-config/platform/serverless/serverless.models';
 import { PLATFORM } from '#lib-platform/core/core.constants';
 import { setEnvironment } from '#lib-shared/environment/utils/setEnvironment/setEnvironment';
 
-export const config: ServerlessConfigModel = ({ ...params } = {}) => ({
-  ...params,
+const { _config, config } = defineConfig({
+  _config: _serverless,
 
-  bundleConfig: _bundleConfig,
+  config: {
+    bundleConfig: _bundleConfig,
 
-  dotenv: () => setEnvironment(),
+    dotenv: () => setEnvironment(),
 
-  environment: process.env.NODE_ENV,
+    environment: process.env.NODE_ENV,
 
-  host: process.env.APP_SERVER_API_HOST,
+    host: process.env.APP_SERVER_API_HOST,
 
-  lambdaPort: toNumber(process.env.SERVER_LAMBDA_PORT),
+    lambdaPort: toNumber(process.env.SERVER_LAMBDA_PORT),
 
-  name: 'serverless',
+    name: 'serverless',
 
-  platform: PLATFORM.BASE,
+    platform: PLATFORM.BASE,
 
-  port: toNumber(process.env.APP_SERVER_API_PORT),
+    port: toNumber(process.env.APP_SERVER_API_PORT),
 
-  provider: SERVERLESS_PROVIDER.AWS,
+    provider: SERVERLESS_PROVIDER.AWS,
 
-  server: {
-    cors: {
-      allowedHeaders: ['*'],
+    server: {
+      cors: {
+        allowedHeaders: ['*'],
 
-      // TODO: fix in prod
-      allowedOrigins: ['*'],
+        // TODO: fix in prod
+        allowedOrigins: ['*'],
+      },
+
+      memory: 128,
+
+      region: process.env.SERVER_REGION,
+
+      timeout: 10,
     },
-
-    memory: 128,
-
-    region: process.env.SERVER_REGION,
-
-    timeout: 10,
-  },
+  } satisfies ServerlessConfigModel,
 });
 
-export const _config: _ServerlessConfigModel = ({ ...params } = {}) =>
-  _serverless(config({ ...params }));
+export { _config, config };

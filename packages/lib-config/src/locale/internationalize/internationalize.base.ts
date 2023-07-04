@@ -1,29 +1,21 @@
 import { initReactI18next } from 'react-i18next';
 
+import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _internationalize } from '#lib-config/locale/internationalize/_internationalize';
-import { INTERNATIONALIZE_CONFIG_STATIC } from '#lib-config/locale/internationalize/internationalize.constants';
-import {
-  type _InternationalizeConfigModel,
-  type InternationalizeConfigModel,
-} from '#lib-config/locale/internationalize/internationalize.models';
+import { INTERNATIONALIZE_CONFIG } from '#lib-config/locale/internationalize/internationalize.constants';
+import { type InternationalizeConfigModel } from '#lib-config/locale/internationalize/internationalize.models';
 
-const { languageDefault, languages, namespaceDefault } = INTERNATIONALIZE_CONFIG_STATIC;
+const { _config, config } = defineConfig({
+  _config: _internationalize,
 
-export const config: InternationalizeConfigModel = {
-  filename: 'locales/{{lng}}/{{ns}}.json',
+  config: () =>
+    ({
+      ...INTERNATIONALIZE_CONFIG,
 
-  isSuspense: true,
+      isPreload: false,
 
-  key: 'lng',
+      modules: [initReactI18next],
+    } satisfies InternationalizeConfigModel),
+});
 
-  languageDefault,
-
-  languages,
-
-  modules: [initReactI18next],
-
-  namespaceDefault,
-};
-
-export const _config: _InternationalizeConfigModel = ({ ...params } = {}) =>
-  _internationalize({ ...config, ...params });
+export { _config, config };

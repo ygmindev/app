@@ -1,6 +1,5 @@
-import { type RouteModel } from '#lib-frontend/route/route.models';
+import { type RouterPropsModel } from '#lib-frontend/route/containers/Router/Router.models';
 
-export type _RoutesPropsModel = {
+export type _RoutesPropsModel = RouterPropsModel & {
   depth?: number;
-  routes: Array<RouteModel>;
 };

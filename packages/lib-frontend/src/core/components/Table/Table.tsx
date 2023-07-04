@@ -45,7 +45,7 @@ export const Table = forwardRef(
         isOverflowHidden
         style={styles}
         testID={testID}>
-        <GlobalStyle sheet={config(theme)} />
+        <GlobalStyle sheet={config.stylesheet(theme)} />
 
         <Appearable
           grow

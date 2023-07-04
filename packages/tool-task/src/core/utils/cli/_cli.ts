@@ -5,5 +5,5 @@ import { command } from '#tool-task/core/utils/command/command';
 
 export const _cli = async ({ task }: _CliParamsModel): _CliModel =>
   command(
-    `gulp --cwd ${fromRoot()} --gulpfile ${fromConfig('core/task/task.config.js')} ${task || ''}`,
+    `gulp --cwd ${fromRoot()} --gulpfile ${fromConfig('core/task/task.js')} ${task || ''}`,
   );

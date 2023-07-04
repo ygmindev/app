@@ -5,6 +5,7 @@ import {
   type STYLE_BRIGHTNESS,
   type THEME_COLOR,
   type THEME_ROLE,
+  type THEME_SHADE,
   type THEME_SIZE,
   type THEME_SIZE_MORE,
 } from '#lib-frontend/style/style.constants';
@@ -21,6 +22,8 @@ export type ThemeSizeModel = `${THEME_SIZE}`;
 
 export type ThemeColorModel = `${THEME_COLOR}`;
 
+export type ThemeShadeModel = `${THEME_SHADE}`;
+
 export type ThemeRoleModel = `${THEME_ROLE}`;
 
 export type ThemeSizeMoreModel = `${THEME_SIZE_MORE}`;
@@ -31,8 +34,4 @@ export type StylePropsModel<TType extends StyleModel = ViewStyleModel> = {
 
 export type BrightnessModel = `${STYLE_BRIGHTNESS}`;
 
-export type ThemeModel = {
-  colors: Pick<ThemeConfigModel['colors'], 'activeLightness' | 'disabledOpacity'> & {
-    tone: Record<ThemeColorModel, Record<ThemeRoleModel, string>>;
-  };
-} & Omit<ThemeConfigModel, 'colors'>;
+export type ThemeModel = ThemeConfigModel;

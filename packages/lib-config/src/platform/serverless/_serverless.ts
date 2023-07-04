@@ -9,7 +9,6 @@ import {
   type ServerlessConfigModel,
 } from '#lib-config/platform/serverless/serverless.models';
 import { PLATFORM } from '#lib-platform/core/core.constants';
-import { type ReturnTypeModel } from '#lib-shared/core/core.models';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 
 export const _serverless = ({
@@ -24,80 +23,77 @@ export const _serverless = ({
   port,
   provider,
   server,
-}: ReturnTypeModel<ServerlessConfigModel>): ReturnTypeModel<_ServerlessConfigModel> => {
-  const bundleConfigF = bundleConfig();
-  return {
-    custom: {
-      dotenv: {
-        dotenvParser: dotenv,
-        logging: false,
-      },
-
-      'serverless-offline': {
-        allowCache: false,
-        host: host.split('://')[1],
-        httpPort: port,
-        ignoreJWTSignature: true,
-        lambdaPort,
-        noPrependStageInUrl: true,
-      },
-
-      ...(platform === PLATFORM.NODE
-        ? {
-            esbuild: {
-              ...bundleConfigF.optimizeDeps?.esbuildOptions,
-              bundle: true,
-              format: 'cjs',
-              keepOutputDirectory: false,
-              packagePath: fromRoot('package.json'),
-              packager: 'yarn',
-              packagerOptions: { noInstall: true },
-              plugins: toRelative({ to: fromConfig('platform/serverless/_plugins.js') }),
-              watch: { pattern: bundleConfigF.build?.watch?.include },
-            },
-          }
-        : {}),
+}: ServerlessConfigModel): _ServerlessConfigModel => ({
+  custom: {
+    dotenv: {
+      dotenvParser: dotenv,
+      logging: false,
     },
 
-    functions: reduce(
-      functions,
-      (result, v, k) => ({
-        ...result,
-        [k]: {
-          events: [{ httpApi: { method: v.method, path: v.pathname } }],
-          handler: v.handler,
-        },
-      }),
-      {},
-    ),
-
-    package: {
-      excludeDevDependencies: true,
-      individually: true,
+    'serverless-offline': {
+      allowCache: false,
+      host: host.split('://')[1],
+      httpPort: port,
+      ignoreJWTSignature: true,
+      lambdaPort,
+      noPrependStageInUrl: true,
     },
 
-    plugins: filterNil([
-      'serverless-dotenv-plugin',
-      platform === PLATFORM.NODE && 'serverless-esbuild',
-      'serverless-offline',
-    ]),
+    ...(platform === PLATFORM.NODE
+      ? {
+          esbuild: {
+            ...bundleConfig.optimizeDeps?.esbuildOptions,
+            bundle: true,
+            format: 'cjs',
+            keepOutputDirectory: false,
+            packagePath: fromRoot('package.json'),
+            packager: 'yarn',
+            packagerOptions: { noInstall: true },
+            plugins: toRelative({ to: fromConfig('platform/serverless/_plugins.js') }),
+            watch: { pattern: bundleConfig.build?.watch?.include },
+          },
+        }
+      : {}),
+  },
 
-    provider: {
-      httpApi: {
-        cors: {
-          allowedHeaders: server.cors.allowedHeaders,
-          allowedOrigins: server.cors.allowedOrigins,
-        },
+  functions: reduce(
+    functions,
+    (result, v, k) => ({
+      ...result,
+      [k]: {
+        events: [{ httpApi: { method: v.method, path: v.pathname } }],
+        handler: v.handler,
       },
-      memorySize: server.memory,
-      name: provider,
-      region: server.region as AWS['provider']['region'],
-      runtime: 'nodejs18.x',
-      stage: environment,
-      timeout: server.timeout,
-      versionFunctions: false,
-    },
+    }),
+    {},
+  ),
 
-    service: name,
-  };
-};
+  package: {
+    excludeDevDependencies: true,
+    individually: true,
+  },
+
+  plugins: filterNil([
+    'serverless-dotenv-plugin',
+    platform === PLATFORM.NODE && 'serverless-esbuild',
+    'serverless-offline',
+  ]),
+
+  provider: {
+    httpApi: {
+      cors: {
+        allowedHeaders: server.cors.allowedHeaders,
+        allowedOrigins: server.cors.allowedOrigins,
+      },
+    },
+    memorySize: server.memory,
+    name: provider,
+    region: server.region as AWS['provider']['region'],
+    runtime: 'nodejs18.x',
+    stage: environment,
+    timeout: server.timeout,
+    versionFunctions: false,
+  },
+
+  service: name,
+});

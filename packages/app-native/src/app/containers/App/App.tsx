@@ -1,10 +1,10 @@
 import { routes } from '#app-native/routes';
 import { type FCModel } from '#lib-frontend/core/core.models';
 import { Root } from '#lib-frontend/root/containers/Root/Root';
-import { Routes } from '#lib-frontend/route/containers/Routes/Routes';
+import { Router } from '#lib-frontend/route/containers/Router/Router';
 
 export const App: FCModel = () => (
   <Root>
-    <Routes routes={routes} />
+    <Router routes={routes} />
   </Root>
 );

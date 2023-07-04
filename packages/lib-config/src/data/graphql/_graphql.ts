@@ -5,7 +5,6 @@ import {
   type _GraphqlConfigModel,
   type GraphqlConfigModel,
 } from '#lib-config/data/graphql/graphql.models';
-import { type ReturnTypeModel } from '#lib-shared/core/core.models';
 import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
 
 export const _graphql = ({
@@ -13,7 +12,7 @@ export const _graphql = ({
   container,
   resolvers,
   schemaPath,
-}: ReturnTypeModel<GraphqlConfigModel>): ReturnTypeModel<_GraphqlConfigModel> =>
+}: GraphqlConfigModel): _GraphqlConfigModel =>
   buildSchemaSync({
     authChecker: ({ context }, roles) => authorize({ context: context as ContextModel, roles }),
     container: container as unknown as ContainerType,

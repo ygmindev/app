@@ -1,40 +1,34 @@
+import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _serverless } from '#lib-config/platform/serverless/_serverless';
 import { config as configBase } from '#lib-config/platform/serverless/serverless.base';
-import {
-  type _ServerlessConfigModel,
-  type ServerlessConfigModel,
-} from '#lib-config/platform/serverless/serverless.models';
 import { PLATFORM } from '#lib-platform/core/core.constants';
-import { merge } from '#lib-shared/core/utils/merge/merge';
-import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
 import { GRAPHQL } from '#lib-shared/graphql/graphql.constants';
 import { HTTP_METHOD, PING } from '#lib-shared/http/http.constants';
 
-export const config: ServerlessConfigModel = ({ ...params } = {}) =>
-  merge(
-    [
-      {
-        functions: {
-          [GRAPHQL]: {
-            handler: 'src/node/graphql/graphql.main',
-            method: HTTP_METHOD.POST,
-            pathname: `/api/${GRAPHQL}`,
-          },
+const { _config, config } = defineConfig({
+  _config: _serverless,
 
-          [PING]: {
-            handler: 'src/core/ping/ping.main',
-            method: HTTP_METHOD.GET,
-            pathname: `/api/${PING}`,
-          },
+  config: configBase,
+
+  overrides: [
+    {
+      functions: {
+        [GRAPHQL]: {
+          handler: 'src/node/graphql/graphql.main',
+          method: HTTP_METHOD.POST,
+          pathname: `/api/${GRAPHQL}`,
         },
 
-        platform: PLATFORM.NODE,
+        [PING]: {
+          handler: 'src/core/ping/ping.main',
+          method: HTTP_METHOD.GET,
+          pathname: `/api/${PING}`,
+        },
       },
 
-      configBase({ ...params }),
-    ],
-    MERGE_STRATEGY.DEEP_APPEND,
-  );
+      platform: PLATFORM.NODE,
+    },
+  ],
+});
 
-export const _config: _ServerlessConfigModel = ({ ...params } = {}) =>
-  _serverless(config({ ...params }));
+export { _config, config };

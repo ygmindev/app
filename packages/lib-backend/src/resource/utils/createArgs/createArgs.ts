@@ -41,7 +41,7 @@ export const createArgs = <
     case RESOURCE_METHOD_TYPE.GET_MANY:
     case RESOURCE_METHOD_TYPE.REMOVE: {
       @withEntity({ isAbstract: true })
-      abstract class Args
+      class Args
         extends (Root ?? class {})
         implements
           ArgsModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>,
@@ -57,7 +57,7 @@ export const createArgs = <
     }
     case RESOURCE_METHOD_TYPE.CREATE: {
       @withEntity({ isAbstract: true })
-      abstract class Args
+      class Args
         extends (Root ?? class {})
         implements ArgsModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>
       {
@@ -70,7 +70,7 @@ export const createArgs = <
     }
     case RESOURCE_METHOD_TYPE.UPDATE: {
       @withEntity({ isAbstract: true })
-      abstract class Args
+      class Args
         extends (Root ?? class {})
         implements ArgsModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot>
       {
@@ -88,7 +88,7 @@ export const createArgs = <
     }
     case RESOURCE_METHOD_TYPE.GET_CONNECTION: {
       @withEntity({ isAbstract: true })
-      abstract class Args
+      class Args
         extends (Root ?? class {})
         implements ArgsModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm, TRoot>
       {

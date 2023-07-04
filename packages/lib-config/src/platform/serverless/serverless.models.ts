@@ -1,55 +1,49 @@
 import { type AWS } from '@serverless/typescript';
 
 import { type ServerlessProviderModel } from '#lib-backend/serverless/serverless.models';
-import { type ConfigDynamicModel } from '#lib-config/core/core.models';
 import { type _BundleConfigModel } from '#lib-config/node/bundle/bundle.models';
 import { type PlatformModel } from '#lib-platform/core/core.models';
-import { type CallableModel, type EmptyObjectModel } from '#lib-shared/core/core.models';
+import { type OptionalCallableModel } from '#lib-shared/core/core.models';
 import { type EnvironmentModel } from '#lib-shared/environment/environment.models';
 import { type HttpMethodModel } from '#lib-shared/http/http.models';
 import { type UriParamsModel } from '#lib-shared/http/utils/uri/uri.models';
 
-export type ServerlessConfigOptionsModel = EmptyObjectModel;
+export type ServerlessConfigModel = Pick<UriParamsModel, 'host' | 'port'> & {
+  bundleConfig: _BundleConfigModel;
 
-export type ServerlessConfigModel = ConfigDynamicModel<
-  Pick<UriParamsModel, 'host' | 'port'> & {
-    bundleConfig: _BundleConfigModel;
+  dotenv: OptionalCallableModel;
 
-    dotenv: CallableModel;
+  environment: EnvironmentModel;
 
-    environment: EnvironmentModel;
+  functions?: Record<
+    string,
+    {
+      handler: string;
+      method: HttpMethodModel;
+      pathname: string;
+    }
+  >;
 
-    functions?: Record<
-      string,
-      {
-        handler: string;
-        method: HttpMethodModel;
-        pathname: string;
-      }
-    >;
+  lambdaPort: number;
 
-    lambdaPort: number;
+  name: string;
 
-    name: string;
+  platform: PlatformModel;
 
-    platform: PlatformModel;
+  provider: ServerlessProviderModel;
 
-    provider: ServerlessProviderModel;
-
-    server: {
-      cors: {
-        allowedHeaders: Array<string>;
-        allowedOrigins: Array<string>;
-      };
-
-      memory: number;
-
-      region: string;
-
-      timeout: number;
+  server: {
+    cors: {
+      allowedHeaders: Array<string>;
+      allowedOrigins: Array<string>;
     };
-  },
-  ServerlessConfigOptionsModel
->;
 
-export type _ServerlessConfigModel = ConfigDynamicModel<AWS, ServerlessConfigOptionsModel>;
+    memory: number;
+
+    region: string;
+
+    timeout: number;
+  };
+};
+
+export type _ServerlessConfigModel = AWS;

@@ -10,7 +10,6 @@ import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { type _TestConfigModel, type TestConfigModel } from '#lib-config/node/test/test.models';
 import { PLATFORM } from '#lib-platform/core/core.constants';
-import { type ReturnTypeModel } from '#lib-shared/core/core.models';
 
 import { compilerOptions } from '../../../../../.build/tsconfig.json';
 
@@ -25,7 +24,7 @@ export const _test = ({
   root,
   testExtensions,
   timeout,
-}: ReturnTypeModel<TestConfigModel>): ReturnTypeModel<_TestConfigModel> => {
+}: TestConfigModel): _TestConfigModel => {
   const bundleConfigF = bundleConfig();
   return {
     cacheDirectory: cachePath,
@@ -72,7 +71,7 @@ export const _test = ({
 
     setupFilesAfterEnv: [fromConfig('node/test/_initialize.ts')],
 
-    testEnvironment: bundleConfigF.platform === PLATFORM.WEB ? 'jsdom' : 'node',
+    testEnvironment: process.env.ENV_PLATFORM === PLATFORM.WEB ? 'jsdom' : 'node',
 
     testMatch: reduce(
       testExtensions,

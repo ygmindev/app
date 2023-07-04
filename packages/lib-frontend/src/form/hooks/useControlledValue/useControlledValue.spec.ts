@@ -15,7 +15,7 @@ describe(displayName, () => {
     );
     expect(result.current.valueControlled).toBe(VALUE);
 
-    act(() => result.current.valueControlledSet(VALUE_NEW));
+    await act(() => result.current.valueControlledSet(VALUE_NEW));
     expect(result.current.valueControlled).toBe(VALUE_NEW);
 
     unmount();

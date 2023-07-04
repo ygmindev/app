@@ -1,12 +1,12 @@
 import {
-  type CallablePromiseModel,
+  type OptionalCallablePromiseModel,
   type PartialModel,
   type RequiredModel,
 } from '#lib-shared/core/core.models';
 
 export type EntityResourceModel = {
   _id: string;
-  beforeCreate?: CallablePromiseModel;
+  beforeCreate?: OptionalCallablePromiseModel;
   created: Date;
 };
 

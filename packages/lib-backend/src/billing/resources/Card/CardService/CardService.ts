@@ -1,3 +1,4 @@
+import { Card } from '#lib-backend/billing/resources/Card/Card';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { createEmbeddedResourceService } from '#lib-backend/resource/utils/createEmbeddedResourceService/createEmbeddedResourceService';
 import { UserService } from '#lib-backend/user/resources/User/UserService/UserService';
@@ -9,6 +10,7 @@ import { type UserFormModel, type UserModel } from '#lib-shared/user/resources/U
 @withContainer()
 export class CardService
   extends createEmbeddedResourceService<CardModel, CardFormModel, UserModel, UserFormModel>({
+    Resource: Card,
     RootService: UserService,
     name: CARD_RESOURCE_NAME,
   })

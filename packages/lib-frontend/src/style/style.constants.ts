@@ -1,17 +1,19 @@
 export enum THEME_COLOR {
   ERROR = 'error',
-  NEUTRAL = 'neutral',
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   SUCCESS = 'success',
   WARNING = 'warning',
 }
 
-export enum THEME_ROLE {
+export enum THEME_SHADE {
   MAIN = 'main',
-  MAIN_CONTRAST = 'mainContrast',
   MUTED = 'muted',
-  MUTED_CONTRAST = 'mutedContrast',
+}
+
+export enum THEME_ROLE {
+  BASE = 'base',
+  CONTRAST = 'contrast',
 }
 
 export enum THEME_SIZE {

@@ -8,12 +8,12 @@ describe(displayName, () => {
   const VALUE_INVALID = '';
 
   test('works with valid', async () => {
-    const result = validateNotEmpty()({ value: VALUE_VALID });
+    const result = validateNotEmpty({ value: VALUE_VALID });
     expect(result).toBeFalsy();
   });
 
   test('works with invalid', async () => {
-    const result = validateNotEmpty()({ value: VALUE_INVALID });
+    const result = validateNotEmpty({ value: VALUE_INVALID });
     expect(result).toBeTruthy();
   });
 });

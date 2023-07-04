@@ -1,27 +1,31 @@
 import { fromConfig } from '#lib-backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
+import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { config as bundleConfig } from '#lib-config/node/bundle/bundle.base';
 import { _test } from '#lib-config/node/test/_test';
-import { type _TestConfigModel, type TestConfigModel } from '#lib-config/node/test/test.models';
+import { type TestConfigModel } from '#lib-config/node/test/test.models';
 import { extensions } from '#lib-platform/core/utils/extensions/extensions';
 import { permuteString } from '#lib-shared/core/utils/permuteString/permuteString';
 
-export const config: TestConfigModel = ({ ...params } = {}) => ({
-  ...params,
+const { _config, config } = defineConfig({
+  _config: _test,
 
-  bundleConfig,
+  config: () =>
+    ({
+      bundleConfig,
 
-  cachePath: fromWorking('.cache/test'),
+      cachePath: fromWorking('.cache/test'),
 
-  coverageOutputPath: fromWorking('coverage'),
+      coverageOutputPath: fromWorking('coverage'),
 
-  fileExtensions: ['gif', 'jpeg', 'jpg', 'otf', 'png', 'svg', 'ttf', 'woff', 'woff2'],
+      fileExtensions: ['gif', 'jpeg', 'jpg', 'otf', 'png', 'svg', 'ttf', 'woff', 'woff2'],
 
-  mockPath: fromConfig('node/test/params/__mocks__'),
+      mockPath: fromConfig('node/test/params/__mocks__'),
 
-  testExtensions: permuteString(['.e2e', '.spec'], extensions()),
+      testExtensions: permuteString(['.e2e', '.spec'], extensions()),
 
-  timeout: 60e3,
+      timeout: 60e3,
+    } satisfies TestConfigModel),
 });
 
-export const _config: _TestConfigModel = ({ ...params } = {}) => _test(config({ ...params }));
+export { _config, config };
