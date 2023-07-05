@@ -23,7 +23,7 @@ export const _useSearch = <TType,>({
 
   const querySetF = useCallback(
     debounce(
-      (value) => {
+      (value: string) => {
         querySet(value);
         onChange && onChange(value);
       },

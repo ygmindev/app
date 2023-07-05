@@ -6,6 +6,15 @@ export enum THEME_COLOR {
   WARNING = 'warning',
 }
 
+export enum THEME_COLOR_MORE {
+  ERROR = 'error',
+  PRIMARY = 'primary',
+  SECONDARY = 'secondary',
+  SUCCESS = 'success',
+  SURFACE = 'surface',
+  WARNING = 'warning',
+}
+
 export enum THEME_ROLE {
   ACTIVE = 'active',
   CONTRAST = 'contrast',

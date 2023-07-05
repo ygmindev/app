@@ -26,8 +26,8 @@ export const Link: SFCModel<LinkPropsModel> = ({ children, ...props }) => {
           {...props}
           animation={{
             states: {
-              [ELEMENT_STATE.ACTIVE]: { color: theme.color.palette.primary.main.active },
-              [ELEMENT_STATE.INACTIVE]: { color: theme.color.palette.primary.main.base },
+              [ELEMENT_STATE.ACTIVE]: { color: theme.color.palette.primary.active },
+              [ELEMENT_STATE.INACTIVE]: { color: theme.color.palette.primary.main },
             },
           }}
           ref={ref}>

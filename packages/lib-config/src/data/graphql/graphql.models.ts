@@ -8,7 +8,7 @@ import { type ContainerModel } from '#lib-backend/core/utils/Container/Container
 import { type CallablePromiseModel, type ClassModel } from '#lib-shared/core/core.models';
 
 export type GraphqlConfigModel = {
-  authorize: CallablePromiseModel<AuthorizeModel, AuthorizeParamsModel>;
+  authorize: CallablePromiseModel<Awaited<AuthorizeModel>, AuthorizeParamsModel>;
   container: ContainerModel;
   resolvers: Array<ClassModel>;
   schemaPath: string;

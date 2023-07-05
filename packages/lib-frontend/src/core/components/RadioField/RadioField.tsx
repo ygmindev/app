@@ -11,12 +11,7 @@ import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import {
-  THEME_COLOR,
-  THEME_ROLE,
-  THEME_SHADE,
-  THEME_SIZE,
-} from '#lib-frontend/style/style.constants';
+import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const RadioField = <TType extends string = string>({
@@ -51,8 +46,8 @@ export const RadioField = <TType extends string = string>({
         const isActiveF = id === valueControlled;
         const colorF =
           theme.color.palette[color][
-            isDisabled || !isActiveF ? THEME_SHADE.MUTED : THEME_SHADE.MAIN
-          ][isActiveF ? THEME_ROLE.ACTIVE : THEME_ROLE.MAIN];
+            isActiveF ? THEME_ROLE.ACTIVE : isDisabled ? THEME_ROLE.MUTED : THEME_ROLE.MAIN
+          ];
         return (
           <Activatable key={id}>
             {(isActive) => (

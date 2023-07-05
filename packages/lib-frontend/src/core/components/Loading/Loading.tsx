@@ -6,12 +6,7 @@ import { type _LoadingPropsModel } from '#lib-frontend/core/components/Loading/_
 import { type LoadingPropsModel } from '#lib-frontend/core/components/Loading/Loading.models';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import {
-  THEME_COLOR,
-  THEME_ROLE,
-  THEME_SHADE,
-  THEME_SIZE_MORE,
-} from '#lib-frontend/style/style.constants';
+import { THEME_COLOR, THEME_ROLE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
 import { type TextStyleModel, type ThemeColorModel } from '#lib-frontend/style/style.models';
 
 const AnimatableLoading = animatable<_LoadingPropsModel, TextStyleModel>({ Component: _Loading });
@@ -20,7 +15,6 @@ export const Loading: SFCModel<LoadingPropsModel> = ({
   animation,
   color = THEME_COLOR.PRIMARY,
   colorRole = THEME_ROLE.MAIN,
-  colorShade = THEME_SHADE.MAIN,
   fontSize = THEME_SIZE_MORE.LARGE,
 }) => {
   const theme = useTheme();
@@ -28,7 +22,7 @@ export const Loading: SFCModel<LoadingPropsModel> = ({
   return (
     <AnimatableLoading
       animation={animation}
-      color={colorF ? colorF[colorShade][colorRole] : color}
+      color={colorF ? colorF[colorRole] : color}
       size={isNumber(fontSize) ? fontSize : theme.font.size[fontSize]}
     />
   );

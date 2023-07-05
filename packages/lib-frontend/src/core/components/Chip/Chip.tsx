@@ -27,7 +27,7 @@ export const Chip: SFCModel<ChipPropsModel> = ({
       testID={testID}>
       <Text
         color={color}
-        colorRole={THEME_ROLE.MAIN_CONTRAST}
+        colorRole={THEME_ROLE.CONTRAST}
         fontSize={THEME_SIZE_MORE.SMALL}
         isBold>
         {children}

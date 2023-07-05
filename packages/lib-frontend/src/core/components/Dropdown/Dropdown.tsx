@@ -9,7 +9,7 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
 import { type RSFCModel } from '#lib-frontend/core/core.models';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR, THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
+import { THEME_COLOR_MORE, THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
 
 export const Dropdown: RSFCModel<DropdownRefModel, DropdownPropsModel> = forwardRef(
   (
@@ -31,7 +31,7 @@ export const Dropdown: RSFCModel<DropdownRefModel, DropdownPropsModel> = forward
         isOpen={isOpen}
         onToggle={onToggle}>
         <Wrapper
-          backgroundColor={THEME_COLOR.NEUTRAL}
+          backgroundColor={THEME_COLOR_MORE.SURFACE}
           border
           isFullWidth={width ? undefined : true}
           isShadow

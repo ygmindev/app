@@ -2,7 +2,7 @@ import { type TextStyle } from 'react-native';
 import { type MD3Theme } from 'react-native-paper';
 
 import {
-  type ThemeColorModel,
+  type ThemeColorMoreModel,
   type ThemeRoleModel,
   type ThemeSizeModel,
   type ThemeSizeMoreModel,
@@ -21,7 +21,7 @@ export type ThemeConfigModel = {
 
     isDark?: boolean;
 
-    palette: Record<ThemeColorModel | 'surface', Record<ThemeRoleModel, string>>;
+    palette: Record<ThemeColorMoreModel, Record<ThemeRoleModel, string>>;
   };
 
   font: {

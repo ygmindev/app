@@ -1,6 +1,6 @@
-import { type ThemeColorModel, type ThemeRoleModel } from '#lib-frontend/style/style.models';
+import { type ThemeColorMoreModel, type ThemeRoleModel } from '#lib-frontend/style/style.models';
 
 export type ColorStylerParamsModel = {
-  color?: ThemeColorModel | string;
+  color?: ThemeColorMoreModel | string;
   colorRole?: ThemeRoleModel;
 };

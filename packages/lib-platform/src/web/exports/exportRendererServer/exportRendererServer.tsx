@@ -1,4 +1,4 @@
-import { WEB_CONFIG_STATIC } from '#lib-config/platform/web/web.constants';
+import { WEB_CONFIG } from '#lib-config/platform/web/web.constants';
 import { Root } from '#lib-frontend/root/containers/Root/Root.server';
 import { renderApp } from '#lib-platform/core/utils/renderApp/renderApp';
 import { _exportRendererServer } from '#lib-platform/web/exports/exportRendererServer/_exportRendererServer';
@@ -12,8 +12,8 @@ export const exportRendererServer = ({
 }: ExportRenderServerParamsModel): ExportRendererServerModel =>
   _exportRendererServer({
     ...params,
-    publicDir: WEB_CONFIG_STATIC.publicDir,
+    publicDir: WEB_CONFIG.publicDir,
     render: ({ children, context }) => renderApp({ Root, children, context }),
-    rootId: WEB_CONFIG_STATIC.rootId,
-    ssrContextKeys: WEB_CONFIG_STATIC.ssrContextKeys,
+    rootId: WEB_CONFIG.rootId,
+    ssrContextKeys: WEB_CONFIG.ssrContextKeys,
   });

@@ -6,7 +6,7 @@ import { type SFCPropsModel, type TranslatableOptionModel } from '#lib-frontend/
 import { useIsMobile } from '#lib-frontend/core/hooks/useIsMobile/useIsMobile';
 import { type NavigationLayoutPropsModel } from '#lib-frontend/core/layouts/NavigationLayout/NavigationLayout.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { THEME_COLOR } from '#lib-frontend/style/style.constants';
+import { THEME_COLOR_MORE } from '#lib-frontend/style/style.constants';
 
 export const NavigationLayout = <TOption extends TranslatableOptionModel>({
   children,
@@ -24,7 +24,7 @@ export const NavigationLayout = <TOption extends TranslatableOptionModel>({
   const isHorizontalF = isHorizontal || isMobile;
   return (
     <Wrapper
-      backgroundColor={THEME_COLOR.NEUTRAL}
+      backgroundColor={THEME_COLOR_MORE.SURFACE}
       basis={0}
       grow
       isRow={!isHorizontalF}

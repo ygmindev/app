@@ -91,7 +91,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
         p>
         <Icon
           color={color}
-          colorRole={THEME_ROLE.MAIN_CONTRAST}
+          colorRole={THEME_ROLE.CONTRAST}
           fontSize={THEME_SIZE_MORE.LARGE}
           icon={icon}
         />
@@ -104,7 +104,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
           {title && (
             <Text
               color={color}
-              colorRole={THEME_ROLE.MAIN_CONTRAST}
+              colorRole={THEME_ROLE.CONTRAST}
               isBold>
               {t(title)}
             </Text>
@@ -113,7 +113,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
           {message && (
             <Text
               color={color}
-              colorRole={THEME_ROLE.MAIN_CONTRAST}>
+              colorRole={THEME_ROLE.CONTRAST}>
               {t(message)}
             </Text>
           )}

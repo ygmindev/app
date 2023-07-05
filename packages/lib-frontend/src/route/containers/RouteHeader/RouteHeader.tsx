@@ -15,7 +15,7 @@ import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR } from '#lib-frontend/style/style.constants';
+import { THEME_COLOR_MORE } from '#lib-frontend/style/style.constants';
 import { BORDER_DIRECTION } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
@@ -31,7 +31,7 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ..
   return (
     <Wrapper
       animation={{ duration: theme.animation.transition, states: ANIMATION_STATES_APPEARABLE }}
-      backgroundColor={THEME_COLOR.NEUTRAL}
+      backgroundColor={THEME_COLOR_MORE.SURFACE}
       border={BORDER_DIRECTION.BOTTOM}
       elementState={ELEMENT_STATE.ACTIVE}
       height={theme.layout.header.height}

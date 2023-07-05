@@ -36,17 +36,17 @@ export type OptionalCallableModel<TResult = void, TParams = void> = (
 ) => TResult;
 
 export type OptionalCallablePromiseModel<TResult = void, TParams = void> = OptionalCallableModel<
-  Promise<Awaited<TResult>>,
+  Promise<TResult>,
   TParams
 >;
 
 export type CallablePromiseModel<TResult = void, TParams = void> = CallableModel<
-  Promise<Awaited<TResult>>,
+  Promise<TResult>,
   TParams
 >;
 
 export type RequiredCallablePromiseModel<TResult = void, TParams = void> = CallableModel<
-  Promise<Awaited<TResult>>,
+  Promise<TResult>,
   TParams
 >;
 

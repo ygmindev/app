@@ -1,19 +1,18 @@
-import { config as setupConfig } from '#lib-config/core/setup/setup.node';
+import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { config as bundleConfig } from '#lib-config/node/bundle/bundle.node';
 import { _test } from '#lib-config/node/test/_test';
-import { config as configBase } from '#lib-config/node/test/test.base';
-import { type _TestConfigModel, type TestConfigModel } from '#lib-config/node/test/test.models';
-import { merge } from '#lib-shared/core/utils/merge/merge';
+import { config as configBase } from '#lib-config/node/test/test.frontend';
 
-export const config: TestConfigModel = ({ ...params } = {}) =>
-  merge([
+const { _config, config } = defineConfig({
+  _config: _test,
+
+  config: configBase,
+
+  overrides: () => [
     {
       bundleConfig,
-
-      onBeforeAll: setupConfig.onInitialize,
     },
+  ],
+});
 
-    configBase({ ...params }),
-  ]);
-
-export const _config: _TestConfigModel = ({ ...params } = {}) => _test(config({ ...params }));
+export { _config, config };

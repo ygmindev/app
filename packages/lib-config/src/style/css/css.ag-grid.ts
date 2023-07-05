@@ -9,13 +9,13 @@ const { _config, config } = defineConfig({
     stylesheet: (theme) => `
     .${AG_GRID_THEME} {
       --ag-background-color: transparent;
-      --ag-border-color: ${theme?.colors.tone.neutral.mutedContrast};
-      --ag-checkbox-border-radius: ${theme?.shape.borderRadius}px;
-      --ag-checkbox-checked-color: ${theme?.colors.tone.primary.main};
-      --ag-checkbox-indeterminate-color: ${theme?.colors.tone.secondary.main};
-      --ag-foreground-color: ${theme?.colors.tone.neutral.mainContrast};
+      --ag-border-color: ${theme.color.border};
+      --ag-checkbox-border-radius: ${theme.shape.borderRadius}px;
+      --ag-checkbox-checked-color: ${theme.color.palette.primary.main};
+      --ag-checkbox-indeterminate-color: ${theme.color.palette.secondary.main};
+      --ag-foreground-color: ${theme.color.palette.surface.contrast};
       --ag-header-background-color: transparent;
-      --ag-header-foreground-color: ${theme?.colors.tone.neutral.mainContrast};
+      --ag-header-foreground-color: ${theme.color.palette.surface.contrast};
       --ag-selected-row-background-color: transparent;
   
       .ag-cell, .ag-header-cell {

@@ -1,5 +1,6 @@
 import { readFileSync } from 'fs';
 import uniq from 'lodash/uniq';
+import { type PackageJson } from 'type-fest';
 import { type TranspileOptions } from 'typescript';
 
 import { fromBuild } from '#lib-backend/file/utils/fromBuild/fromBuild';
@@ -17,26 +18,26 @@ export const jsPackage: GeneratorParamsModel = {
 
     if (root && target) {
       let filename = fromBuild('node/typescript/tsconfig.paths.json');
-      let content = JSON.parse(readFileSync(filename).toString()) as TranspileOptions;
-      if (content.compilerOptions?.paths) {
-        content.compilerOptions.paths[`${target}/*`] = [`packages/${root}/src/*`];
-        content.compilerOptions.paths = sortKeys(content.compilerOptions.paths);
-        writeFile({ filename, value: JSON.stringify(content, null, 2) });
+      const tsConfig = JSON.parse(readFileSync(filename).toString()) as TranspileOptions;
+      if (tsConfig.compilerOptions?.paths) {
+        tsConfig.compilerOptions.paths[`${target}/*`] = [`packages/${root}/src/*`];
+        tsConfig.compilerOptions.paths = sortKeys(tsConfig.compilerOptions.paths);
+        writeFile({ filename, value: JSON.stringify(tsConfig, null, 2) });
       }
 
       // bundled dependencies
       filename = fromRoot('package.json');
-      content = JSON.parse(readFileSync(filename).toString());
-      content.bundledDependencies = [...(content.bundledDependencies || []), target];
-      content.bundledDependencies = uniq(content.bundledDependencies).sort();
-      writeFile({ filename, value: JSON.stringify(content, null, 2) });
+      const packageJson = JSON.parse(readFileSync(filename).toString()) as PackageJson;
+      packageJson.bundledDependencies = [...(packageJson.bundledDependencies || []), target];
+      packageJson.bundledDependencies = uniq(packageJson.bundledDependencies).sort();
+      writeFile({ filename, value: JSON.stringify(tsConfig, null, 2) });
 
       // workspace
       filename = fromRoot('workspace.json');
-      content = JSON.parse(readFileSync(filename).toString());
-      content.projects[root] = fromPackages(root);
-      content.projects = sortKeys(content.projects);
-      writeFile({ filename, value: JSON.stringify(content, null, 2) });
+      const workspaceJson = JSON.parse(readFileSync(filename).toString());
+      workspaceJson.projects[root] = fromPackages(root);
+      workspaceJson.projects = sortKeys(workspaceJson.projects);
+      writeFile({ filename, value: JSON.stringify(tsConfig, null, 2) });
     }
   },
 

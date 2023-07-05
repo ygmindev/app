@@ -38,7 +38,7 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
 
     fontWeight:
       isBold || type === FONT_TYPE.HEADLINE || type === FONT_TYPE.TITLE
-        ? theme.font.weightBold
+        ? theme.font.weight.bold
         : undefined,
 
     lineHeight:

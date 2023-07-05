@@ -22,7 +22,7 @@ const generate: TaskParamsModel<GenerateParamsModel> = {
         type: PROMPT_TYPE.LIST,
       },
     ]);
-    const { onSuccess, output, prepare } = config[template] || {};
+    const { onSuccess, output, prepare } = config['js-package'];
     const params = merge<BoilerplateParamsModel>([
       { onSuccess, output, template },
       prepare ? await prepare() : {},

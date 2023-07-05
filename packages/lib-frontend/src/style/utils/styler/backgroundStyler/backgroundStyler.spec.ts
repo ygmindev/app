@@ -16,13 +16,13 @@ describe(displayName, () => {
       backgroundColor: '#000000',
     });
     expect(backgroundStyler({ backgroundColor: THEME_COLOR.PRIMARY }, theme)).toStrictEqual({
-      backgroundColor: theme.color.palette.primary.main.base,
+      backgroundColor: theme.color.palette.primary.main,
     });
     expect(
       backgroundStyler(
-        { backgroundColor: THEME_COLOR.PRIMARY, backgroundRole: THEME_ROLE.MAIN_CONTRAST },
+        { backgroundColor: THEME_COLOR.PRIMARY, backgroundRole: THEME_ROLE.CONTRAST },
         theme,
       ),
-    ).toStrictEqual({ backgroundColor: theme.color.palette.primary.main.baseContrast });
+    ).toStrictEqual({ backgroundColor: theme.color.palette.primary.contrast });
   });
 });

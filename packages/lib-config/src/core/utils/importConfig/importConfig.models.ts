@@ -1,11 +1,11 @@
-import { type ConfigModuleModel } from '#lib-config/core/core.models';
-import { type EmptyObjectModel } from '#lib-shared/core/core.models';
+import { type PartialDeepModel } from '#lib-shared/core/core.models';
 
-export type ImportConfigParamsModel<TOptions = EmptyObjectModel> = [
+export type ImportConfigParamsModel<TParams> = [
   name: string,
-  options?: TOptions,
+  overrides?: Array<PartialDeepModel<TParams>>,
 ];
 
-export type ImportConfigModel<TParams, TResult = undefined> = Promise<
-  ConfigModuleModel<TParams, TResult>
->;
+export type ImportConfigModel<TParams, TResult = undefined> = Promise<{
+  _config: TResult extends undefined ? undefined : TResult;
+  config: TParams;
+}>;

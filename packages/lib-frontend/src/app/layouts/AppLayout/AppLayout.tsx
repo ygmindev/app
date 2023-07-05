@@ -6,7 +6,7 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { Notifications } from '#lib-frontend/notification/containers/Notifications/Notifications';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { THEME_COLOR } from '#lib-frontend/style/style.constants';
+import { THEME_COLOR_MORE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const AppLayout: SFCModel<AppLayoutPropsModel> = ({ children, testID, ...props }) => {
@@ -20,7 +20,7 @@ export const AppLayout: SFCModel<AppLayoutPropsModel> = ({ children, testID, ...
           grow
           position={SHAPE_POSITION.RELATIVE}>
           <Wrapper
-            backgroundColor={THEME_COLOR.NEUTRAL}
+            backgroundColor={THEME_COLOR_MORE.SURFACE}
             grow
             style={styles}>
             <AppHeader />

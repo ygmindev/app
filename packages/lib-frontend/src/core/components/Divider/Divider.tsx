@@ -3,7 +3,7 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type WrapperPropsModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
 import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
-import { THEME_COLOR, THEME_SIZE } from '#lib-frontend/style/style.constants';
+import { THEME_COLOR_MORE, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { BORDER_DIRECTION } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { variableName } from '#lib-shared/core/utils/variableName/variableName';
@@ -16,7 +16,7 @@ export const Divider = composeComponent<DividerPropsModel, WrapperPropsModel>({
     borderColor: theme.color.border,
     children: children && (
       <Wrapper
-        backgroundColor={THEME_COLOR.NEUTRAL}
+        backgroundColor={THEME_COLOR_MORE.SURFACE}
         m="auto"
         pHorizontal={THEME_SIZE.SMALL}
         position={SHAPE_POSITION.ABSOLUTE}>

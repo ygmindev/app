@@ -1,4 +1,4 @@
-import { WEB_CONFIG_STATIC } from '#lib-config/platform/web/web.constants';
+import { WEB_CONFIG } from '#lib-config/platform/web/web.constants';
 import { Root } from '#lib-frontend/root/containers/Root/Root';
 import { renderApp } from '#lib-platform/core/utils/renderApp/renderApp';
 import { _exportRendererClient } from '#lib-platform/web/exports/exportRendererClient/_exportRendererClient';
@@ -13,5 +13,5 @@ export const exportRendererClient = ({
   _exportRendererClient({
     ...params,
     render: ({ children, context }) => renderApp({ Root, children, context }),
-    rootId: WEB_CONFIG_STATIC.rootId,
+    rootId: WEB_CONFIG.rootId,
   });

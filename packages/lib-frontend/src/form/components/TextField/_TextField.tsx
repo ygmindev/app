@@ -120,10 +120,8 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
     const isError = error === true || (isString(error) && error.length > 0);
     const isDisabled = elementState === ELEMENT_STATE.DISABLED;
     const activeBackgroundColor = theme.color.palette.surface.muted;
-    const activeColor = isError
-      ? theme.color.palette.error.main.base
-      : theme.color.palette.primary.main.base;
-    const inactiveColor = isError ? theme.color.palette.error.main.base : theme.color.border;
+    const activeColor = isError ? theme.color.palette.error.main : theme.color.palette.primary.main;
+    const inactiveColor = isError ? theme.color.palette.error.main : theme.color.border;
 
     const containerAnimation: AnimationModel = {
       states: {

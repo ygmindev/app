@@ -14,7 +14,7 @@ import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR, THEME_ROLE } from '#lib-frontend/style/style.constants';
+import { THEME_COLOR, THEME_COLOR_MORE, THEME_ROLE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { BOOLEAN_STRING } from '#lib-shared/core/core.constants';
 import { type BooleanStringModel } from '#lib-shared/core/core.models';
@@ -74,7 +74,7 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
       <Wrapper
         animation={{
           states: {
-            [ELEMENT_STATE.ACTIVE]: { backgroundColor: theme.color.palette.primary.main.base },
+            [ELEMENT_STATE.ACTIVE]: { backgroundColor: theme.color.palette.primary.main },
             [ELEMENT_STATE.INACTIVE]: { backgroundColor: theme.color.border },
           },
         }}
@@ -90,7 +90,7 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
               [ELEMENT_STATE.INACTIVE]: { left: SWITCH_FIELD_OFFSET },
             },
           }}
-          backgroundColor={THEME_COLOR.NEUTRAL}
+          backgroundColor={THEME_COLOR_MORE.SURFACE}
           elementState={elementStateF}
           height={childSize}
           left={SWITCH_FIELD_OFFSET}
@@ -115,7 +115,7 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
               isAbsoluteFill
               isVisible={valueControlled === 'false'}>
               <Icon
-                color={THEME_COLOR.NEUTRAL}
+                color={THEME_COLOR_MORE.SURFACE}
                 colorRole={THEME_ROLE.MUTED}
                 icon={iconInactive}
                 m="auto"

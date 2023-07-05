@@ -4,12 +4,7 @@ import {
   type _ThemeConfigModel,
   type ThemeConfigModel,
 } from '#lib-config/style/theme/theme.models';
-import {
-  THEME_COLOR,
-  THEME_ROLE,
-  THEME_SHADE,
-  THEME_SIZE,
-} from '#lib-frontend/style/style.constants';
+import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 
 export const _theme = ({ color, font, shape }: ThemeConfigModel): _ThemeConfigModel => {
@@ -27,24 +22,21 @@ export const _theme = ({ color, font, shape }: ThemeConfigModel): _ThemeConfigMo
       },
 
       colors: {
-        background: color.palette.surface[THEME_SHADE.MAIN][THEME_ROLE.MAIN],
-        error: color.palette[THEME_COLOR.ERROR][THEME_SHADE.MAIN][THEME_ROLE.MAIN],
-        errorContainer: color.palette[THEME_COLOR.ERROR][THEME_SHADE.MUTED][THEME_ROLE.MAIN],
-        onBackground: color.palette.surface[THEME_SHADE.MAIN][THEME_ROLE.CONTRAST],
-        onError: color.palette[THEME_COLOR.ERROR][THEME_SHADE.MAIN][THEME_ROLE.CONTRAST],
-        onErrorContainer: color.palette[THEME_COLOR.ERROR][THEME_SHADE.MUTED][THEME_ROLE.CONTRAST],
-        onPrimary: color.palette[THEME_COLOR.PRIMARY][THEME_SHADE.MAIN][THEME_ROLE.CONTRAST],
-        onPrimaryContainer:
-          color.palette[THEME_COLOR.PRIMARY][THEME_SHADE.MUTED][THEME_ROLE.CONTRAST],
-        onSecondary: color.palette[THEME_COLOR.SECONDARY][THEME_SHADE.MAIN][THEME_ROLE.CONTRAST],
-        onSecondaryContainer:
-          color.palette[THEME_COLOR.SECONDARY][THEME_SHADE.MUTED][THEME_ROLE.CONTRAST],
+        background: color.palette.surface[THEME_ROLE.MAIN],
+        error: color.palette[THEME_COLOR.ERROR][THEME_ROLE.MAIN],
+        errorContainer: color.palette[THEME_COLOR.ERROR][THEME_ROLE.MUTED],
+        onBackground: color.palette.surface[THEME_ROLE.CONTRAST],
+        onError: color.palette[THEME_COLOR.ERROR][THEME_ROLE.CONTRAST],
+        onErrorContainer: color.palette[THEME_COLOR.ERROR][THEME_ROLE.CONTRAST],
+        onPrimary: color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.CONTRAST],
+        onPrimaryContainer: color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.CONTRAST],
+        onSecondary: color.palette[THEME_COLOR.SECONDARY][THEME_ROLE.CONTRAST],
+        onSecondaryContainer: color.palette[THEME_COLOR.SECONDARY][THEME_ROLE.CONTRAST],
         outline: color.border,
-        primary: color.palette[THEME_COLOR.PRIMARY][THEME_SHADE.MAIN][THEME_ROLE.MAIN],
-        primaryContainer: color.palette[THEME_COLOR.PRIMARY][THEME_SHADE.MUTED][THEME_ROLE.MAIN],
-        secondary: color.palette[THEME_COLOR.SECONDARY][THEME_SHADE.MAIN][THEME_ROLE.MAIN],
-        secondaryContainer:
-          color.palette[THEME_COLOR.SECONDARY][THEME_SHADE.MUTED][THEME_ROLE.MAIN],
+        primary: color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN],
+        primaryContainer: color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MUTED],
+        secondary: color.palette[THEME_COLOR.SECONDARY][THEME_ROLE.MAIN],
+        secondaryContainer: color.palette[THEME_COLOR.SECONDARY][THEME_ROLE.MUTED],
         shadow: color.border,
       },
 

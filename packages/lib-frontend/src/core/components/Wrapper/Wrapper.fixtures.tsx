@@ -36,7 +36,7 @@ export const WrapperFixture: SFCModel<WrapperFixturePropsModel> = ({
       {isString(children) ? (
         <Text
           align={FONT_ALIGN.CENTER}
-          colorRole={THEME_ROLE.MUTED_CONTRAST}>
+          colorRole={THEME_ROLE.CONTRAST}>
           {children}
         </Text>
       ) : (

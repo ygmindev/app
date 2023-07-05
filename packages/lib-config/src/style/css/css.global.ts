@@ -7,6 +7,7 @@ import { type CssConfigModel } from '#lib-config/style/css/css.models';
 export const AG_GRID_THEME = 'ag-theme-material';
 
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
+import { ROOT } from '#lib-frontend/root/root.constants';
 
 const { _config, config } = defineConfig({
   config: {

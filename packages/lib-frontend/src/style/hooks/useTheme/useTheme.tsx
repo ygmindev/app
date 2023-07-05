@@ -1,38 +1,19 @@
 import { useMemo } from 'react';
 
-import { config } from '#lib-config/style/theme/theme';
+import { config as configBase } from '#lib-config/style/theme/theme.base';
+import { config as configDark } from '#lib-config/style/theme/theme.dark';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { type UseThemeModel } from '#lib-frontend/style/hooks/useTheme/useTheme.models';
-import { type ThemeColorModel, type ThemeModel } from '#lib-frontend/style/style.models';
-import { palette } from '#lib-frontend/style/utils/palette/palette';
+import { STYLE_BRIGHTNESS } from '#lib-frontend/style/style.constants';
 
 export const useTheme = (): UseThemeModel => {
   const brightness = useStore((state) => state.style.brightness);
-  return useMemo<UseThemeModel>(
-    () => ({
-      ...config,
-
-      colors: {
-        activeLightness: config.colors.activeLightness,
-
-        disabledOpacity: config.colors.disabledOpacity,
-
-        tone: (Object.keys(config.colors.tone) as Array<ThemeColorModel>).reduce((result, key) => {
-          const color = config.colors.tone[key] as ThemeColorModel;
-          const paletteF =
-            config.colors.palette[brightness][key === 'neutral' ? 'neutral' : 'theme'];
-          return {
-            ...result,
-            [key]: {
-              main: palette({ color, ...paletteF.main }),
-              mainContrast: palette({ color, ...paletteF.mainContrast }),
-              muted: palette({ color, ...paletteF.muted }),
-              mutedContrast: palette({ color, ...paletteF.mutedContrast }),
-            },
-          };
-        }, {} as ThemeModel['colors']['tone']),
-      },
-    }),
-    [config, brightness],
-  );
+  return useMemo<UseThemeModel>(() => {
+    switch (brightness) {
+      case STYLE_BRIGHTNESS.DARK:
+        return configDark;
+      default:
+        return configBase;
+    }
+  }, [brightness]);
 };

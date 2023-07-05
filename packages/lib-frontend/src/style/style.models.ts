@@ -4,6 +4,7 @@ import { type ThemeConfigModel } from '#lib-config/style/theme/theme.models';
 import {
   type STYLE_BRIGHTNESS,
   type THEME_COLOR,
+  type THEME_COLOR_MORE,
   type THEME_ROLE,
   type THEME_SIZE,
   type THEME_SIZE_MORE,
@@ -20,6 +21,8 @@ export type StyleModel = ViewStyleModel | TextStyleModel | ImageStyleModel;
 export type ThemeSizeModel = `${THEME_SIZE}`;
 
 export type ThemeColorModel = `${THEME_COLOR}`;
+
+export type ThemeColorMoreModel = `${THEME_COLOR_MORE}`;
 
 export type ThemeRoleModel = `${THEME_ROLE}`;
 
