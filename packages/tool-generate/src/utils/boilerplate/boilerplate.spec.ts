@@ -15,7 +15,7 @@ describe(displayName, () => {
 
   test('works', async () => {
     const templatesDir = fromPackages('tool-generate/templates');
-    children({ from: templatesDir, isDirectory: true }).map(({ name }) => name);
+    children(templatesDir, { isDirectory: true }).map(({ name }) => name);
     const { onSuccess, output, prepare } = config['js-package'];
     const params = merge<BoilerplateParamsModel>([
       { onSuccess, output },

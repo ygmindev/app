@@ -5,6 +5,7 @@ import {
   type ImportFromEnvModel,
   type ImportFromEnvParamsModel,
 } from '#lib-shared/core/utils/importFromEnv/importFromEnv.models';
+import { requireInterop } from '#lib-shared/core/utils/requireInterop/requireInterop';
 import { resolveFirst } from '#lib-shared/core/utils/resolveFirst/resolveFirst';
 
 export const importFromEnv = async <TType>(
@@ -13,7 +14,6 @@ export const importFromEnv = async <TType>(
   resolveFirst<TType>(
     extensions().map((ext) => async () => {
       const path = `${params}${ext ? `.${trim(ext, '.')}` : ''}`;
-      const result = require(path) as unknown;
-      return (result as { default: TType }).default ?? (result as TType);
+      return requireInterop<TType>(path);
     }),
   );

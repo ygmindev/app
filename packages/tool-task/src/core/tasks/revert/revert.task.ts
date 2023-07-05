@@ -15,11 +15,11 @@ const revert: TaskParamsModel = {
 
   task: async () => {
     const backups = sortBy(
-      children({ from: config.backupDir, isDirectory: true }),
+      children(config.backupDir, { isDirectory: true }),
       ({ lastUpdated }) => -lastUpdated.valueOf(),
     ).map(({ name }) => name);
     const { name } = await prompt([{ key: 'name', options: backups, type: PROMPT_TYPE.LIST }]);
-    const childrenF = children({ from: resolve(config.backupDir, name) });
+    const childrenF = children(resolve(config.backupDir, name));
     for (const child of childrenF) {
       await copy({ from: child.fullPath, isOverwrite: true, to: fromRoot(child.name) });
     }

@@ -6,7 +6,7 @@ import {
   type ChildrenParamsModel,
 } from '#lib-backend/file/utils/children/children.models';
 
-export const children = ({ from, isDirectory }: ChildrenParamsModel): Array<ChildrenModel> => {
+export const children = (...[from, isDirectory]: ChildrenParamsModel): ChildrenModel => {
   const root = `/${normalize(from)}`;
   return readdirSync(root, { withFileTypes: true })
     .map((directory) => {

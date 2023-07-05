@@ -1,3 +1,4 @@
+// COMPLETE
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { type FileConfigModel } from '#lib-config/core/file/file.models';
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
@@ -24,7 +25,7 @@ const { _config, config } = defineConfig({
 
     excludePatterns: [...CLEAN_PATTERNS, '.git', '.backups', 'ios/Pods', 'node_modules'],
 
-    packagePrefixes: ['app', 'build', 'backend', 'lib', 'tool'],
+    packagePrefixes: ['app', 'backend', 'lib', 'tool'],
   } satisfies FileConfigModel,
 });
 

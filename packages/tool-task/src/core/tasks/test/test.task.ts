@@ -11,7 +11,7 @@ const test: TaskParamsModel<RunAllParamsModel> = {
 
   onAfter: [
     async () => {
-      await config.onShutdown();
+      await config.onTerminate();
       return { status: TASK_STATUS.SUCCESS };
     },
   ],

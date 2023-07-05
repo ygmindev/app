@@ -1,3 +1,4 @@
+// COMPLETE
 export type FileConfigModel = {
   backupDir: string;
 

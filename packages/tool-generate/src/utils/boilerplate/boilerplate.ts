@@ -17,7 +17,7 @@ const getTemplateVariables = async (from: string): Promise<Array<string>> => {
   const base = basename(from);
   let variables: Array<string> = base.match(BOILERPLATE_TEMPLATE_VARIABLE_PATTERN) || [];
 
-  for (const child of children({ from })) {
+  for (const child of children(from)) {
     if (child.isDirectory) {
       variables = variables.concat((await getTemplateVariables(child.fullPath)).flat());
     } else {

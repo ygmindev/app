@@ -12,7 +12,7 @@ describe(displayName, () => {
   });
 
   test('works', async () => {
-    const result = children({ from: 'packages', isDirectory: true }).map(({ name }) => name);
+    const result = children('packages', { isDirectory: true }).map(({ name }) => name);
     expect(result).toStrictEqual(Object.keys(FS_FIXTURE.packages));
   });
 });

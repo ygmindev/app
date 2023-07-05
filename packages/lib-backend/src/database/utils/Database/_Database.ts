@@ -167,6 +167,6 @@ export class _Database implements DatabaseModel {
 
   close = async (): Promise<void> => {
     debug('[database] closing connections', this._config.clientUrl);
-    await this._getEntityManager().getConnection().close();
+    await this._getEntityManager().getConnection()?.close();
   };
 }
