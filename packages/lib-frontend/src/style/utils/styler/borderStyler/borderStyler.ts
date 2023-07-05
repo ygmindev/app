@@ -15,7 +15,7 @@ import { type StylerModel } from '#lib-frontend/style/utils/styler/styler.models
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 
 export const borderStyler: StylerModel<BorderStylerParamsModel> = (
-  { border, borderColor, borderRole = THEME_ROLE.MUTED, borderWidth = 1, isShadow, round },
+  { border, borderColor, borderRole = THEME_ROLE.MAIN, borderWidth = 1, isShadow, round },
   theme,
 ) => {
   const getBorderRadius = (value?: typeof round, key?: BorderRadiusDirection): number | undefined =>

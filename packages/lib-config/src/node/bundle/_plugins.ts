@@ -12,7 +12,7 @@ import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 
 export const _plugins = ({
   transpiles = [],
-}: Pick<BundleConfigModel, 'transpiles'>): Array<Plugin> =>
+}: Pick<BundleConfigModel, 'transpiles'> = {}): Array<Plugin> =>
   filterNil([
     esbuildDecorators({ tsconfig: fromWorking('tsconfig.json') }),
 

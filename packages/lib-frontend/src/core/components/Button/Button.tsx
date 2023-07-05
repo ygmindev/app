@@ -63,7 +63,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
       }
       case BUTTON_TYPE.INVISIBLE:
       case BUTTON_TYPE.TRANSPARENT: {
-        const colorInactive = theme.color.palette.surface.muted;
+        const colorInactive = theme.color.palette.surface.main;
         return {
           animation: {
             states: {

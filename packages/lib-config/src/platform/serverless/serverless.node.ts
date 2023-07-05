@@ -10,7 +10,7 @@ const { _config, config } = defineConfig({
 
   config: configBase,
 
-  overrides: [
+  overrides: () => [
     {
       functions: {
         [GRAPHQL]: {

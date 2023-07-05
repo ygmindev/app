@@ -11,40 +11,41 @@ import { setEnvironment } from '#lib-shared/environment/utils/setEnvironment/set
 const { _config, config } = defineConfig({
   _config: _serverless,
 
-  config: {
-    bundleConfig: _bundleConfig,
+  config: () =>
+    ({
+      bundleConfig: _bundleConfig,
 
-    dotenv: () => setEnvironment(),
+      dotenv: () => setEnvironment(),
 
-    environment: process.env.NODE_ENV,
+      environment: process.env.NODE_ENV,
 
-    host: process.env.APP_SERVER_API_HOST,
+      host: process.env.APP_SERVER_API_HOST,
 
-    lambdaPort: toNumber(process.env.SERVER_LAMBDA_PORT),
+      lambdaPort: toNumber(process.env.SERVER_LAMBDA_PORT),
 
-    name: 'serverless',
+      name: 'serverless',
 
-    platform: PLATFORM.BASE,
+      platform: PLATFORM.BASE,
 
-    port: toNumber(process.env.APP_SERVER_API_PORT),
+      port: toNumber(process.env.APP_SERVER_API_PORT),
 
-    provider: SERVERLESS_PROVIDER.AWS,
+      provider: SERVERLESS_PROVIDER.AWS,
 
-    server: {
-      cors: {
-        allowedHeaders: ['*'],
+      server: {
+        cors: {
+          allowedHeaders: ['*'],
 
-        // TODO: fix in prod
-        allowedOrigins: ['*'],
+          // TODO: fix in prod
+          allowedOrigins: ['*'],
+        },
+
+        memory: 128,
+
+        region: process.env.SERVER_REGION,
+
+        timeout: 10,
       },
-
-      memory: 128,
-
-      region: process.env.SERVER_REGION,
-
-      timeout: 10,
-    },
-  } satisfies ServerlessConfigModel,
+    } satisfies ServerlessConfigModel),
 });
 
 export { _config, config };

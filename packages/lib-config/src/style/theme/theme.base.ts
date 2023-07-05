@@ -9,7 +9,7 @@ import { palette } from '#lib-frontend/style/utils/palette/palette';
 
 const COLOR_SURFACE_BASE = '#FFFFFF';
 const COLOR_SURFACE_CONTRAST = '#000000';
-const COLOR_BORDER = '#8C8C8C';
+const COLOR_BORDER = '#A2A2A2';
 const LIGHTNESS_ACTIVE = 40;
 const LIGHTNESS_THEME_MUTED = 75;
 const LIGHTNESS_SURFACE_MUTED = 40;
