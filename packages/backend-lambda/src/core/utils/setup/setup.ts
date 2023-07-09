@@ -18,7 +18,7 @@ export const setup = async (): SetupModel => {
 
   const server = new ApolloServer({
     formatError: (e) => {
-      error('[graphql]', stringify(e));
+      error(stringify(e));
       return { ...e, extensions: { ...e.extensions, statusCode: e.extensions?.statusCode } };
     },
     schema: _graphQlConfig(),

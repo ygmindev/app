@@ -7,5 +7,5 @@ import { info } from '#lib-shared/logging/utils/logger/logger';
 export const _graphql = async ({ port }: _GraphqlParamsModel): Promise<void> => {
   const server = new ApolloServer({ schema: _config() });
   const { url } = await server.listen(port);
-  info('[graphql] sandbox running on:', url);
+  info('sandbox running on:', url);
 };

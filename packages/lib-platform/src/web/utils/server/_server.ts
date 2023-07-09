@@ -19,6 +19,7 @@ import {
   type _ServerParamsModel,
 } from '#lib-platform/web/utils/server/_server.models';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
+import { info } from '#lib-shared/logging/utils/logger/logger';
 import { ROUTE } from '#lib-shared/route/route.constants';
 import { STATE } from '#lib-shared/state/state.constants';
 
@@ -46,6 +47,8 @@ export const _server = async ({
   );
 
   app.get('*', async (req, res) => {
+    info(req.method, req.url);
+
     const { cookies, i18n, language, url } = req;
 
     const { error, redirect, response } = await renderPage({

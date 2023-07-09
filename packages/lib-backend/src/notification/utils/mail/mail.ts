@@ -11,6 +11,6 @@ export const mail = async <TParams>({
   if (process.env.NODE_ENV === 'production') {
     return _mail({ ...params });
   }
-  debug('[mail]', params);
+  debug(params);
   return true;
 };

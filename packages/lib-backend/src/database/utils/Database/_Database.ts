@@ -32,9 +32,9 @@ export class _Database implements _DatabaseModel {
 
   async connect(): Promise<void> {
     if (await this.isConnected()) {
-      info('[database] reusing connection', this._config.clientUrl);
+      info('reusing connection', this._config.clientUrl);
     } else {
-      info('[database] connecting', this._config.clientUrl);
+      info('connecting', this._config.clientUrl);
       this._entityManager = (await MikroORM.init<MongoDriver>(this._config)).em;
     }
   }
@@ -168,7 +168,7 @@ export class _Database implements _DatabaseModel {
   };
 
   close = async (): Promise<void> => {
-    debug('[database] closing connections', this._config.clientUrl);
+    debug('closing connections', this._config.clientUrl);
     if (await this.isConnected()) {
       await this._getEntityManager().getConnection()?.close();
     }
