@@ -47,6 +47,5 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
     ],
     [additionalProviders, context],
   );
-
   return <>{providers.reduce((result, element) => cloneElement(element, {}, result), children)}</>;
 };

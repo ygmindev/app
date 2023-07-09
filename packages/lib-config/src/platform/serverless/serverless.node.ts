@@ -14,13 +14,13 @@ const { _config, config } = defineConfig({
     {
       functions: {
         [GRAPHQL]: {
-          handler: 'src/node/graphql/graphql.main',
+          handler: 'src/functions/graphql/graphql.main',
           method: HTTP_METHOD.POST,
           pathname: `/api/${GRAPHQL}`,
         },
 
         [PING]: {
-          handler: 'src/core/ping/ping.main',
+          handler: 'src/functions/ping/ping.main',
           method: HTTP_METHOD.GET,
           pathname: `/api/${PING}`,
         },

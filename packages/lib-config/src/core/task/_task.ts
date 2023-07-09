@@ -1,3 +1,4 @@
+// COMPLETE
 import { existsSync } from 'fs';
 
 import { Container } from '#lib-backend/core/utils/Container/Container';
@@ -6,30 +7,33 @@ import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages'
 import { packages } from '#lib-backend/file/utils/packages/packages';
 import { type _TaskConfigModel, type TaskConfigModel } from '#lib-config/core/task/task.models';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
+import { joinExtension } from '#lib-shared/core/utils/joinExtension/joinExtension';
+import { requireInterop } from '#lib-shared/core/utils/requireInterop/requireInterop';
 import { type TaskParamsModel } from '#tool-task/core/core.models';
 import { prompt } from '#tool-task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '#tool-task/core/utils/prompt/prompt.constants';
 import { TaskRegistry } from '#tool-task/core/utils/TaskRegistry/TaskRegistry';
 
-export const _task = ({ packageConfig, taskExtension }: TaskConfigModel): _TaskConfigModel => {
+export const _task = ({ packageFilename, taskExtension }: TaskConfigModel): _TaskConfigModel => {
   const taskRegistry = Container.get(TaskRegistry);
+
   const tasks = filterNil([
     // Task files
     ...fromGlobs({
-      globs: [`*/src/**/*.${taskExtension}`],
+      globs: [joinExtension('*/src/**/*', taskExtension)],
       isAbsolute: true,
       root: fromPackages(),
-    }).map((path) => (require(path) as { default: TaskParamsModel }).default),
+    }).map((path) => requireInterop<TaskParamsModel>(path)),
 
     // Package tasks
-    ...packages.reduce((result, target) => {
-      const path = fromPackages(target, packageConfig);
+    ...packages.reduce<Array<TaskParamsModel>>((result, target) => {
+      const path = fromPackages(target, packageFilename);
       if (existsSync(path)) {
-        const tasks = (require(path) as { default: Array<TaskParamsModel> }).default;
+        const tasks = requireInterop<Array<TaskParamsModel>>(path);
         return [...result, ...tasks.map((task) => ({ ...task, target }))];
       }
       return result;
-    }, [] as Array<TaskParamsModel>),
+    }, []),
 
     // All tasks
     {
@@ -47,5 +51,6 @@ export const _task = ({ packageConfig, taskExtension }: TaskConfigModel): _TaskC
       },
     },
   ]);
+
   tasks.forEach(taskRegistry.register);
 };

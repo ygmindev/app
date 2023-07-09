@@ -4,10 +4,8 @@ import { type EntityManager, type MongoDriver } from '@mikro-orm/mongodb';
 import { type Filter, type MongoError, type UpdateFilter } from 'mongodb';
 
 import { cleanDocument } from '#lib-backend/database/utils/cleanDocument/cleanDocument';
-import {
-  type DatabaseModel,
-  type RepositoryModel,
-} from '#lib-backend/database/utils/Database/Database.models';
+import { type _DatabaseModel } from '#lib-backend/database/utils/Database/_Database.models';
+import { type RepositoryModel } from '#lib-backend/database/utils/Database/Database.models';
 import { getConnection } from '#lib-backend/database/utils/getConnection/getConnection';
 import { type _DatabaseConfigModel } from '#lib-config/database/database.models';
 import { type PartialDeepModel, type ReturnTypeModel } from '#lib-shared/core/core.models';
@@ -20,7 +18,7 @@ import { type EntityResourceDataModel } from '#lib-shared/resource/resources/Ent
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
 
-export class _Database implements DatabaseModel {
+export class _Database implements _DatabaseModel {
   protected _config: ReturnTypeModel<_DatabaseConfigModel>;
   protected _entityManager?: EntityManager;
 
@@ -28,8 +26,12 @@ export class _Database implements DatabaseModel {
     this._config = config;
   }
 
+  async isConnected(): Promise<boolean> {
+    return this._entityManager?.getConnection().isConnected() ?? false;
+  }
+
   async connect(): Promise<void> {
-    if (this._entityManager) {
+    if (await this.isConnected()) {
       info('[database] reusing connection', this._config.clientUrl);
     } else {
       info('[database] connecting', this._config.clientUrl);
@@ -167,6 +169,8 @@ export class _Database implements DatabaseModel {
 
   close = async (): Promise<void> => {
     debug('[database] closing connections', this._config.clientUrl);
-    await this._getEntityManager().getConnection()?.close();
+    if (await this.isConnected()) {
+      await this._getEntityManager().getConnection()?.close();
+    }
   };
 }

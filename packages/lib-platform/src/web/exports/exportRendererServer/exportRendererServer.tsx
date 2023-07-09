@@ -9,11 +9,12 @@ import {
 
 export const exportRendererServer = ({
   ...params
-}: ExportRenderServerParamsModel): ExportRendererServerModel =>
-  _exportRendererServer({
+}: ExportRenderServerParamsModel): ExportRendererServerModel => ({
+  ..._exportRendererServer({
     ...params,
     publicDir: WEB_CONFIG.publicDir,
     render: ({ children, context }) => renderApp({ Root, children, context }),
     rootId: WEB_CONFIG.rootId,
     ssrContextKeys: WEB_CONFIG.ssrContextKeys,
-  });
+  }),
+});

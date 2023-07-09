@@ -10,6 +10,7 @@ import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { type _TestConfigModel, type TestConfigModel } from '#lib-config/node/test/test.models';
 import { PLATFORM } from '#lib-platform/core/core.constants';
+import { joinExtension } from '#lib-shared/core/utils/joinExtension/joinExtension';
 
 import { compilerOptions } from '../../../../../.build/tsconfig.json';
 
@@ -79,8 +80,8 @@ export const _test = ({
         const extF = trim(ext, '.');
         return [
           ...result,
-          `<rootDir>/src/**/${match ?? '*'}.${extF}`,
-          `<rootDir>/src/**/_${match ?? '*'}.${extF}`,
+          joinExtension(`<rootDir>/src/**/${match ?? '*'}`, extF),
+          joinExtension(`<rootDir>/src/**/_${match ?? '*'}`, extF),
         ];
       },
       [] as Array<string>,

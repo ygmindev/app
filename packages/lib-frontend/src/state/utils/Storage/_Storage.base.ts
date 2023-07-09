@@ -11,7 +11,7 @@ export class _Storage implements _StorageModel {
   protected _storages: Array<StorageModel | null> = [];
 
   constructor({ backends }: Pick<_StorageParamsModel, 'backends'>) {
-    this._backends = backends || [];
+    this._backends = backends ?? [];
   }
 
   async getItem<TType extends string = string>(key: string): Promise<TType | null> {
@@ -22,7 +22,7 @@ export class _Storage implements _StorageModel {
           const result = await storage.getItem<TType>(key);
           if (result) {
             process.env.NODE_ENV === 'development' &&
-              debug('[Storage] get', key, result, this._backends[i]);
+              debug(`[Storage (${this._backends[i]})] get`, key, result);
             return result;
           }
         } catch {
@@ -39,7 +39,7 @@ export class _Storage implements _StorageModel {
       if (storage) {
         try {
           process.env.NODE_ENV === 'development' &&
-            debug('[Storage] remove', key, this._backends[i]);
+            debug(`[Storage (${this._backends[i]})] remove`, key);
           await storage.removeItem(key);
           break;
         } catch {
@@ -54,7 +54,7 @@ export class _Storage implements _StorageModel {
       const storage = this._storages[i];
       if (storage) {
         process.env.NODE_ENV === 'development' &&
-          debug('[Storage] set', key, value, this._backends[i]);
+          debug(`[Storage (${this._backends[i]})] set`, key, value);
         try {
           await storage.setItem<TType>(key, value);
           break;

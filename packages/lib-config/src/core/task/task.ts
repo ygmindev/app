@@ -6,9 +6,9 @@ const { _config, config } = defineConfig({
   _config: _task,
 
   config: {
-    packageConfig: 'tasks.ts',
+    packageFilename: 'tasks.ts',
 
-    taskExtension: 'task.ts',
+    taskExtension: '.task.ts',
   } satisfies TaskConfigModel,
 });
 

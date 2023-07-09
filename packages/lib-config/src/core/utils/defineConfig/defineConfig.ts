@@ -1,3 +1,4 @@
+// COMPLETE
 import isFunction from 'lodash/isFunction';
 
 import {

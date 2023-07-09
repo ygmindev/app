@@ -29,9 +29,7 @@ export const _useForm = <TType = void, TResult = void>({
     onSubmit: async (data) => {
       dataSet((onSubmit && (await onSubmit(data))) ?? null);
     },
-    validate: async () => {
-      onValidate && (await onValidate(values));
-    },
+    validate: onValidate,
     validateOnChange: false,
   });
 

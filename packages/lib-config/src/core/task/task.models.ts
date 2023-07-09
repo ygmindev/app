@@ -1,5 +1,6 @@
+// COMPLETE
 export type TaskConfigModel = {
-  packageConfig: string;
+  packageFilename: string;
 
   taskExtension: string;
 };

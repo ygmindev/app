@@ -119,7 +119,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
 
     const isError = error === true || (isString(error) && error.length > 0);
     const isDisabled = elementState === ELEMENT_STATE.DISABLED;
-    const activeBackgroundColor = theme.color.palette.surface.muted;
+    const backgroundColor = theme.color.palette.surface.main;
     const activeColor = isError ? theme.color.palette.error.main : theme.color.palette.primary.main;
     const inactiveColor = isError ? theme.color.palette.error.main : theme.color.border;
 
@@ -130,12 +130,12 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
           opacity: theme.opaque,
         },
         [ELEMENT_STATE.INACTIVE]: {
-          backgroundColor: activeBackgroundColor,
+          backgroundColor,
           borderColor: isTransparent ? undefined : inactiveColor,
           opacity: 1,
         },
         [ELEMENT_STATE.ACTIVE]: {
-          backgroundColor: activeBackgroundColor,
+          backgroundColor,
           borderColor: isTransparent ? undefined : activeColor,
           opacity: 1,
         },
@@ -233,6 +233,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
           }}
           onSubmitEditing={() => onSubmit && onSubmit()}
           placeholder={placeholder}
+          placeholderTextColor={theme.color.border}
           ref={ref as RefObject<NativeTextInput>}
           render={(inputProps) => (
             <Wrapper
@@ -251,8 +252,8 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
                   ...inputProps,
                   style: StyleSheet.flatten([
                     inputProps.style as ViewStyleModel,
-                    { minWidth: '100%', width: 0 },
                     isCenter && { padding: 0, textAlign: 'center' },
+                    { minWidth: '100%', width: 0 },
                   ]) as ViewStyleModel,
                 })}
               </Wrapper>
@@ -262,14 +263,9 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
           )}
           secureTextEntry={keyboard === TEXT_FIELD_KEYBOARD.PASSWORD}
           spellCheck={false}
+          textColor={theme.color.palette.surface.contrast}
           textContentType={getTextContentType(autoComplete, keyboard)}
-          theme={{
-            animation: { scale: 1 },
-            colors: {
-              background: 'transparent',
-              placeholder: theme.color.border,
-            },
-          }}
+          theme={{ animation: { scale: 1 }, colors: { background: 'transparent' } }}
           underlineColor="transparent"
           value={value}
         />

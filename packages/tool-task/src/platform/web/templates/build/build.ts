@@ -7,7 +7,7 @@ import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
 import { type TaskParamsModel } from '#tool-task/core/core.models';
 import { command } from '#tool-task/core/utils/command/command';
-import { staticServer } from '#tool-task/platform/server/utils/staticServer/staticServer.task';
+import { staticServer } from '#tool-task/platform/server/utils/staticServer/staticServer';
 
 export const build: TaskParamsModel = {
   environment: ENVIRONMENT.PRODUCTION,

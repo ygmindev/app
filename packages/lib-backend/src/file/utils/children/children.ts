@@ -6,7 +6,7 @@ import {
   type ChildrenParamsModel,
 } from '#lib-backend/file/utils/children/children.models';
 
-export const children = (...[from, isDirectory]: ChildrenParamsModel): ChildrenModel => {
+export const children = (...[from, options]: ChildrenParamsModel): ChildrenModel => {
   const root = `/${normalize(from)}`;
   return readdirSync(root, { withFileTypes: true })
     .map((directory) => {
@@ -20,7 +20,8 @@ export const children = (...[from, isDirectory]: ChildrenParamsModel): ChildrenM
       };
     })
     .filter(
-      ({ isDirectory: _isDirectory, name }) =>
-        !name.startsWith('.') && (isDirectory === undefined || isDirectory === _isDirectory),
+      ({ isDirectory: isDirectoryF, name }) =>
+        !name.startsWith('.') &&
+        (options?.isDirectory === undefined || options?.isDirectory === isDirectoryF),
     );
 };

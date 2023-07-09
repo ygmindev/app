@@ -1,6 +1,7 @@
 import reduce from 'lodash/reduce';
 
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
+import { _theme } from '#lib-config/style/theme/_theme';
 import { THEME_COLOR_TONES, THEME_CONFIG } from '#lib-config/style/theme/theme.constants';
 import { type ThemeConfigModel } from '#lib-config/style/theme/theme.models';
 import { THEME_COLOR, THEME_ROLE } from '#lib-frontend/style/style.constants';
@@ -11,10 +12,12 @@ const COLOR_SURFACE_BASE = '#FFFFFF';
 const COLOR_SURFACE_CONTRAST = '#000000';
 const COLOR_BORDER = '#A2A2A2';
 const LIGHTNESS_ACTIVE = 40;
-const LIGHTNESS_THEME_MUTED = 75;
+const LIGHTNESS_THEME_MUTED = 85;
 const LIGHTNESS_SURFACE_MUTED = 40;
 
 const { _config, config } = defineConfig({
+  _config: _theme,
+
   config: {
     ...THEME_CONFIG,
 

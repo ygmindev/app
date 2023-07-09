@@ -1,4 +1,4 @@
-import { _config } from '#lib-config/core/setup/setup.node';
+import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 import { type TaskParamsModel } from '#tool-task/core/core.models';
 import { command } from '#tool-task/core/utils/command/command';
@@ -9,8 +9,9 @@ export const dev: TaskParamsModel<DevParamsModel> = {
 
   name: 'dev',
 
-  task: async ({ root }) => {
-    await _config.setup();
-    return command('sls offline start --reloadHandler --verbose', { root });
+  overrides: {
+    NODE_OPTIONS: `--require ${fromPackages('lib-config/src/tracking/telemetry/telemetry.js')}`,
   },
+
+  task: async ({ root }) => command('sls offline start --reloadHandler --verbose', { root }),
 };

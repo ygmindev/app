@@ -1,9 +1,12 @@
+import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _{{NAME}}(camelCase) } from '#lib-config/{{MODULE}}(camelCase)/{{NAME}}(camelCase)/_{{NAME}}(camelCase)';
-import {
-  type _{{NAME}}(pascalCase)ConfigModel,
-  type {{NAME}}(pascalCase)ConfigModel,
-} from '#lib-config/{{MODULE}}(camelCase)/{{NAME}}(camelCase)/{{NAME}}(camelCase).models';
+import { type {{NAME}}(pascalCase)ConfigModel } from '#lib-config/{{MODULE}}(camelCase)/{{NAME}}(camelCase)/{{NAME}}(camelCase).models';
 
-export const config: {{NAME}}(pascalCase)ConfigModel = () => ({});
+const { _config, config } = defineConfig({
+  _config: _{{NAME}}(camelCase),
 
-export const _config: _{{NAME}}(pascalCase)ConfigModel = ({ ...params } = {}) => _{{NAME}}(camelCase)(config({ ...params }));
+  config: {
+  } satisfies {{NAME}}(pascalCase)ConfigModel,
+});
+
+export { _config, config };

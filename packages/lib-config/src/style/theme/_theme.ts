@@ -32,6 +32,8 @@ export const _theme = ({ color, font, shape }: ThemeConfigModel): _ThemeConfigMo
         onPrimaryContainer: color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.CONTRAST],
         onSecondary: color.palette[THEME_COLOR.SECONDARY][THEME_ROLE.CONTRAST],
         onSecondaryContainer: color.palette[THEME_COLOR.SECONDARY][THEME_ROLE.CONTRAST],
+        onSurface: color.palette.surface[THEME_ROLE.CONTRAST],
+        onSurfaceVariant: color.border,
         outline: color.border,
         primary: color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN],
         primaryContainer: color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MUTED],

@@ -19,6 +19,8 @@ export type EnvironmentConfigModel = {
   APP_SERVER_API_HOST: string;
   APP_SERVER_API_PORT: string;
   APP_STRIPE_TOKEN: string;
+  APP_TRACKING_NAME: string;
+  APP_UPTRACE_SOURCE: string;
   APP_USERNAME: string;
   DATABASE_MONGO_NAME: string;
   DATABASE_MONGO_PASSWORD: string;
@@ -27,6 +29,7 @@ export type EnvironmentConfigModel = {
   ENV_NAME: string;
   ENV_PLATFORM: PlatformModel;
   NODE_ENV: EnvironmentModel;
+  NODE_OPTIONS?: string;
   SERVER_APP_SECRET: string;
   SERVER_EMAIL_HOST: string;
   SERVER_EMAIL_PASSWORD: string;

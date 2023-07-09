@@ -7,7 +7,7 @@ import {
   type Reducer,
   type SliceCaseReducers,
 } from '@reduxjs/toolkit';
-import * as toolkit from '@reduxjs/toolkit';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { type NoInfer } from '@reduxjs/toolkit/dist/tsHelpers';
 import mapValues from 'lodash/mapValues';
 import reduce from 'lodash/reduce';
@@ -36,11 +36,6 @@ import {
 import { type StateProviderPropsModel } from '#lib-frontend/state/utils/Store/Store.models';
 import { isServer } from '#lib-platform/core/utils/isServer/isServer';
 import { mapValuesAsync } from '#lib-shared/core/utils/mapValuesAsync/mapValuesAsync';
-
-// TODO: fix when upgrade https://github.com/reduxjs/redux-toolkit/issues/1960
-// import { configureStore, createSlice } from '@reduxjs/toolkit';
-const { configureStore, createSlice } = ((toolkit as unknown as { default: unknown }).default ??
-  toolkit) as typeof toolkit;
 
 const ActionProvider = <
   TKeys extends Array<string>,
@@ -85,9 +80,9 @@ export class _Store<
 
   constructor({ cookies, initialState, reducers }: _StoreParamsModel<TKeys, TType, TParams>) {
     const {
-      actions: _actions,
-      persistors: _persistors,
-      reducers: _reducers,
+      actions: actionsF,
+      persistors: persistorsF,
+      reducers: reducersF,
     } = reduce(
       reducers,
       (result, reducer, name) => {
@@ -149,8 +144,8 @@ export class _Store<
       },
     );
 
-    this._actions = _actions;
-    this._persistors = _persistors;
+    this._actions = actionsF;
+    this._persistors = persistorsF;
     this._store = configureStore({
       middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
@@ -159,7 +154,7 @@ export class _Store<
           },
         }),
       preloadedState: initialState as PreloadedState<CombinedState<NoInfer<TType>>>,
-      reducer: _reducers,
+      reducer: reducersF,
     });
     this._persistor = persistStore(this._store);
     // this._persistor.subscribe(() => {

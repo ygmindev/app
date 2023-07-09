@@ -10,7 +10,7 @@ import { type TaskParamsModel } from '#tool-task/core/core.models';
 import { PACKAGE_EXTEND_KEYS } from '#tool-task/node/templates/packageExtend/packageExtend.constants';
 
 export const packageExtend: TaskParamsModel = {
-  name: 'packageExtend',
+  name: 'package-extend',
 
   task: async () => {
     const { default: _1, ...parentPackage } = (await import(
