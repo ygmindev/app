@@ -8,6 +8,7 @@ import { type ExportRenderClientRenderParamsModel } from '#lib-platform/web/expo
 import {
   type CallableModel,
   type CallablePromiseModel,
+  type OptionalCallablePromiseModel,
   type ReturnTypeModel,
 } from '#lib-shared/core/core.models';
 
@@ -16,6 +17,8 @@ export type _ExportRendererServerParamsModel = {
     element: ReactElement;
     getCss: CallableModel<ReactElement>;
   };
+  // TODO: unknown to context?
+  setup?: OptionalCallablePromiseModel<unknown>;
 } & Pick<ReturnTypeModel<WebConfigModel>, 'publicDir' | 'rootId' | 'ssrContextKeys'>;
 
 export type _ExportRendererServerModel = {

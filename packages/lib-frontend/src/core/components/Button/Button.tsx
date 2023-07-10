@@ -26,10 +26,12 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   align = FLEX_ALIGN.CENTER,
   children,
   color = THEME_COLOR.PRIMARY,
+  leftElement,
   icon,
   type = !children && icon ? BUTTON_TYPE.INVISIBLE : BUTTON_TYPE.FILLED,
   size = THEME_SIZE.MEDIUM,
   elementState,
+  height,
   onElementStateChange,
   ...props
 }) => {
@@ -89,26 +91,27 @@ export const Button: SFCModel<ButtonPropsModel> = ({
       {children}
     </TranslatableText>
   );
-  if (icon) {
-    const iconF = (
-      <Icon
-        color={color}
-        colorRole={childColorRole}
-        icon={icon}
-      />
-    );
-    childrenF = childrenF ? (
-      <Wrapper isRowAlign>
-        {iconF}
+  const iconF = icon ? (
+    <Icon
+      color={color}
+      colorRole={childColorRole}
+      icon={icon}
+    />
+  ) : undefined;
 
-        {childrenF}
-      </Wrapper>
-    ) : (
-      iconF
-    );
-  }
+  childrenF = childrenF ? (
+    <Wrapper isRowAlign>
+      {leftElement}
 
-  const height = theme.shape.height[size];
+      {iconF}
+
+      {childrenF}
+    </Wrapper>
+  ) : (
+    iconF
+  );
+
+  const heightF = height ?? theme.shape.height[size];
   const isLoading = valueControlled === ELEMENT_STATE.LOADING;
   return (
     <Pressable
@@ -119,22 +122,22 @@ export const Button: SFCModel<ButtonPropsModel> = ({
       borderColor={type === BUTTON_TYPE.TRANSPARENT ? color : undefined}
       borderRole={THEME_ROLE.MAIN}
       elementState={valueControlled}
-      height={height}
+      height={heightF}
       justify={FLEX_JUSTIFY.CENTER}
       onElementStateChange={valueControlledSet}
       position={SHAPE_POSITION.RELATIVE}
       width={children ? undefined : height}>
       <>
         <Appearable
-          isScalable={false}
-          isVisible={!isLoading}>
+          isActive={!isLoading}
+          isScalable={false}>
           {childrenF}
         </Appearable>
 
         <Appearable
           isAbsoluteFill
-          isCenter
-          isVisible={isLoading}>
+          isActive={isLoading}
+          isCenter>
           <Loading
             color={color}
             colorRole={childColorRole}

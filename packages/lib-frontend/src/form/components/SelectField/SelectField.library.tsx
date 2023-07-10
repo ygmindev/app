@@ -8,6 +8,7 @@ export const props: LibraryPropsModel<SelectFieldPropsModel> = {
   Component: SelectField,
   category: 'form',
   defaultProps: { options: MENU_FIXTURE_OPTIONS },
+  minWidth: 200,
   variants: [
     { props: { icon: 'personCircle' } },
     { props: { isAutoFocus: true } },

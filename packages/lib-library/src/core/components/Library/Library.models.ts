@@ -1,9 +1,10 @@
 import { type ComponentType } from 'react';
 
+import { type WrapperPropsModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
 import { type DocgenMetaDataPropsModel } from '#lib-library/docgen/utils/docgen/docgen.models';
 import { type PartialModel } from '#lib-shared/core/core.models';
 
-export type LibraryPropsModel<TProps> = {
+export type LibraryPropsModel<TProps> = Pick<WrapperPropsModel, 'minWidth'> & {
   Component: ComponentType<TProps>;
   Renderer?: ComponentType<TProps>;
   category?: string;

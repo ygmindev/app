@@ -1,3 +1,5 @@
+import { type ReactElement } from 'react';
+
 import { type AnimatablePropsModel } from '#lib-frontend/animation/animation.models';
 import { type BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { type IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
@@ -10,18 +12,20 @@ export type ButtonTypeModel = `${BUTTON_TYPE}`;
 
 export type ButtonPropsModel = {
   color?: ThemeColorModel;
+  leftElement?: ReactElement;
   size?: ThemeSizeModel;
   type?: ButtonTypeModel;
 } & ChildrenPropsModel<TranslatableTextModel> &
   Pick<IconPropsModel, 'icon'> &
   Pick<
     PressablePropsModel,
+    | 'align'
+    | 'confirmMessage'
+    | 'height'
+    | 'isFocusable'
+    | 'isFullWidth'
     | 'onPress'
     | 'onPressIn'
     | 'onPressOut'
-    | 'confirmMessage'
-    | 'isFocusable'
-    | 'isFullWidth'
-    | 'align'
   > &
   AnimatablePropsModel;

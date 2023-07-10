@@ -12,7 +12,7 @@ export const props: LibraryPropsModel<TextPropsModel> = {
   Component: Text,
   defaultProps: {
     children: 'children',
-    width: 100,
+    width: 200,
   },
   variants: [
     ...Object.values(THEME_SIZE_MORE).map((fontSize) => ({ props: { fontSize } })),

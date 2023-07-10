@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
 import { type AccordionPropsModel } from '#lib-frontend/core/components/Accordion/Accordion.models';
-import { Icon } from '#lib-frontend/core/components/Icon/Icon';
+import { RotatableIcon } from '#lib-frontend/core/components/RotatableIcon/RotatableIcon';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import { DIRECTION, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import {
   type ElementStateModel,
   type MeasureModel,
@@ -48,16 +48,11 @@ export const Accordion: SFCModel<AccordionPropsModel> = ({
         onPress={handleToggle}>
         {label && <Text fontSize={THEME_SIZE_MORE.LARGE}>{label}</Text>}
 
-        <Wrapper
-          animation={{
-            states: {
-              [ELEMENT_STATE.INACTIVE]: { transform: [{ rotateZ: '0deg' }] },
-              [ELEMENT_STATE.ACTIVE]: { transform: [{ rotateZ: '90deg' }] },
-            },
-          }}
-          elementState={valueControlled}>
-          <Icon icon="chevronRight" />
-        </Wrapper>
+        <RotatableIcon
+          directionActive={DIRECTION.BOTTOM}
+          directionInactive={DIRECTION.RIGHT}
+          elementState={valueControlled}
+        />
       </Wrapper>
 
       <Wrapper

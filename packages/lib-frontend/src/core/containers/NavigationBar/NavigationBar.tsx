@@ -5,16 +5,19 @@ import { useMemo } from 'react';
 
 import { Accordion } from '#lib-frontend/core/components/Accordion/Accordion';
 import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
+import { ACTIVATABLE_TRIGGER } from '#lib-frontend/core/components/Activatable/Activatable.constants';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
+import { Droppable } from '#lib-frontend/core/components/Droppable/Droppable';
+import { RotatableIcon } from '#lib-frontend/core/components/RotatableIcon/RotatableIcon';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { NAVIGATION_BAR_WIDTH } from '#lib-frontend/core/containers/NavigationBar/NavigationBar.constants';
 import { type NavigationBarPropsModel } from '#lib-frontend/core/containers/NavigationBar/NavigationBar.models';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { useIsMobile } from '#lib-frontend/core/hooks/useIsMobile/useIsMobile';
 import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { BORDER_DIRECTION } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import { groupBy } from '#lib-shared/core/utils/groupBy/groupBy';
@@ -31,6 +34,7 @@ export const NavigationBar = ({
 > => {
   const { styles } = useStyles({ props });
   const isMobile = useIsMobile();
+  const theme = useTheme();
 
   const categories = useMemo(
     () => groupBy(options, ({ category }) => toString(category)),
@@ -40,26 +44,22 @@ export const NavigationBar = ({
 
   const isHorizontalF = isHorizontal || isMobile;
   return (
-    <Activatable
-      isPressable={false}
-      style={styles}
-      // onActive={() => console.warn('active')}
-      // onInactive={() => console.warn('inactive')}
-    >
+    <Activatable style={styles}>
       <Wrapper
-        border={BORDER_DIRECTION.RIGHT}
+        basis={0}
+        border={isHorizontalF ? BORDER_DIRECTION.BOTTOM : BORDER_DIRECTION.RIGHT}
         isFullWidth={isHorizontalF}
         isHorizontalScrollable={isHorizontalF}
         isRowAlign={isHorizontalF}
         isVerticalScrollable={!isHorizontalF}
-        p={isHorizontalF ? THEME_SIZE.SMALL : true}
+        p
         s
         testID={testID}
-        width={isHorizontalF ? undefined : NAVIGATION_BAR_WIDTH}>
+        width={isHorizontalF ? undefined : theme.layout.navigation.width}>
         {map(categories, (v, k) => {
           const optionsF = (
             <Wrapper
-              isRowAlign={isHorizontalF}
+              isRowAlign={!k && isHorizontalF}
               key={toString(k)}
               s={THEME_SIZE.SMALL}>
               {v.map(({ icon, id, label, onPress }) => (
@@ -79,12 +79,31 @@ export const NavigationBar = ({
             </Wrapper>
           );
           return k ? (
-            <Accordion
-              defaultValue={ELEMENT_STATE.ACTIVE}
-              key={toString(k)}
-              label={k}>
-              {optionsF}
-            </Accordion>
+            isHorizontalF ? (
+              <Droppable
+                anchor={(isOpen) => (
+                  <Button
+                    leftElement={
+                      <RotatableIcon
+                        elementState={isOpen ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE}
+                      />
+                    }
+                    type={BUTTON_TYPE.INVISIBLE}>
+                    {k}
+                  </Button>
+                )}
+                key={toString(k)}
+                trigger={ACTIVATABLE_TRIGGER.PRESS}>
+                {optionsF}
+              </Droppable>
+            ) : (
+              <Accordion
+                defaultValue={ELEMENT_STATE.ACTIVE}
+                key={toString(k)}
+                label={k}>
+                {optionsF}
+              </Accordion>
+            )
           ) : (
             optionsF
           );

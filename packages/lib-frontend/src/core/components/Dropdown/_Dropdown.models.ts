@@ -1,6 +1,7 @@
 import { type ReactNode } from 'react';
 
 import { type ChildrenPropsModel, type DirectionModel } from '#lib-frontend/core/core.models';
+import { type OptionalCallableModel } from '#lib-shared/core/core.models';
 
 export type _DropdownPropsModel = {
   anchor: ReactNode;
@@ -8,5 +9,5 @@ export type _DropdownPropsModel = {
   isFullWidth?: boolean;
   isOpen?: boolean;
   maxWidth?: number;
-  onToggle(value?: boolean): void;
+  onToggle: OptionalCallableModel<void, boolean>;
 } & ChildrenPropsModel;

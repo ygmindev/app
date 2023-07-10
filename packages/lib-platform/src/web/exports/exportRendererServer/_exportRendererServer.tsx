@@ -3,7 +3,6 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { renderToStream } from 'react-streaming/server';
 import { dangerouslySkipEscape, escapeInject } from 'vite-plugin-ssr/server';
 
-import { setup } from '#app-web/core/utils/setup/setup';
 import { QueryClient } from '#lib-frontend/data/utils/QueryClient/QueryClient';
 import { type RootContextModel } from '#lib-frontend/root/root.models';
 import { ROOT_REDUCERS } from '#lib-frontend/root/stores/rootStore.constants';
@@ -23,10 +22,11 @@ export const _exportRendererServer = ({
   publicDir,
   render,
   rootId,
+  setup,
   ssrContextKeys,
 }: _ExportRendererServerParamsModel): _ExportRendererServerModel => ({
   render: async ({ Page, context, pageProps }) => {
-    await setup();
+    setup && (await setup());
 
     const queryClient = new QueryClient();
 

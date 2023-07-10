@@ -67,7 +67,7 @@ export const RadioField = <TType extends string = string>({
                   isCenter
                   round={outerCircleSize / 2}
                   width={outerCircleSize}>
-                  <Appearable isVisible={isActive || isActiveF}>
+                  <Appearable isActive={isActive || isActiveF}>
                     <Wrapper
                       backgroundColor={colorF}
                       height={innerCircleSize}

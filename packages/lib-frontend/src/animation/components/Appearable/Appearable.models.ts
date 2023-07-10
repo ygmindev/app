@@ -2,7 +2,7 @@ import { type AnimatablePropsModel } from '#lib-frontend/animation/animation.mod
 import { type WrapperPropsModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
 
 export type AppearablePropsModel = {
+  isActive?: boolean;
   isScalable?: boolean;
-  isVisible?: boolean;
 } & WrapperPropsModel &
   AnimatablePropsModel;

@@ -67,6 +67,10 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       value: elementState,
     });
 
+    const heightF = label
+      ? theme.shape.height[THEME_SIZE.LARGE]
+      : theme.shape.height[THEME_SIZE.MEDIUM];
+
     const rightElementF = (
       <Wrapper
         isRowAlign
@@ -74,13 +78,14 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         {!isNoClear && (
           <Appearable
             elementState={elementStateControlled}
-            isCenter
-            isVisible={
+            isActive={
               !!valueControlled &&
               valueControlled.length > 0 &&
               elementStateControlled === ELEMENT_STATE.ACTIVE
-            }>
+            }
+            isCenter>
             <Button
+              height={heightF - theme.shape.spacing[THEME_SIZE.SMALL]}
               icon="times"
               onPress={() => handleChange('')}
               type={BUTTON_TYPE.INVISIBLE}
@@ -147,7 +152,7 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         }
         elementState={elementStateControlled}
         error={isTranslatableText(error) ? t(error) : error}
-        height={label ? theme.shape.height.l : theme.shape.height.m}
+        height={heightF}
         isCenter={isCenter}
         keyboard={keyboard}
         label={label && t(label)}
@@ -158,7 +163,7 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         onEscape={isNoClear ? undefined : () => handleChange('')}
         onFocus={onFocus}
         placeholder={mask || placeholder}
-        ref={ref || refF}
+        ref={ref ?? refF}
         rightElement={rightElementF}
         value={valueControlled}
         width={width}

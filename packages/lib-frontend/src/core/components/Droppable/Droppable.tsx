@@ -10,22 +10,26 @@ export const Droppable: SFCModel<DroppablePropsModel> = ({
   anchor,
   children,
   testID,
+  trigger,
   ...props
 }) => {
   const [isActive, isActiveSet] = useState<boolean>(false);
+  const anchorF = anchor(isActive);
+  const childrenF = (
+    <Dropdown
+      {...props}
+      anchor={anchorF}
+      isOpen={isActive}
+      onToggle={(value) => isActiveSet(value || false)}>
+      {children}
+    </Dropdown>
+  );
   return (
     <Activatable
       onActive={() => isActiveSet(true)}
-      onInactive={() => isActiveSet(false)}>
-      <View testID={testID}>
-        <Dropdown
-          {...props}
-          anchor={anchor(isActive)}
-          isOpen={isActive}
-          onToggle={(value) => isActiveSet(value || false)}>
-          {children}
-        </Dropdown>
-      </View>
+      onInactive={() => isActiveSet(false)}
+      trigger={trigger}>
+      <View testID={testID}>{childrenF}</View>
     </Activatable>
   );
 };

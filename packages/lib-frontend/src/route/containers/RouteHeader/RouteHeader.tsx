@@ -55,7 +55,7 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ..
         />
       )}
 
-      <Appearable isVisible={!!(location.params?.title || route.title)}>
+      <Appearable isActive={!!(location.params?.title || route.title)}>
         <Text type={FONT_TYPE.SUBTITLE}>{t(location.params?.title || route.title)}</Text>
       </Appearable>
     </Wrapper>

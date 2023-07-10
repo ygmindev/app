@@ -1,8 +1,10 @@
 import { type RootContextModel } from '#lib-frontend/root/root.models';
-import { type _ExportRendererServerModel } from '#lib-platform/web/exports/exportRendererServer/_exportRendererServer.models';
-import { type EmptyObjectModel } from '#lib-shared/core/core.models';
+import {
+  type _ExportRendererServerModel,
+  type _ExportRendererServerParamsModel,
+} from '#lib-platform/web/exports/exportRendererServer/_exportRendererServer.models';
 
-export type ExportRenderServerParamsModel = EmptyObjectModel;
+export type ExportRenderServerParamsModel = Pick<_ExportRendererServerParamsModel, 'setup'>;
 
 export type ExportRenderServerRenderParamsModel = {
   context?: RootContextModel;

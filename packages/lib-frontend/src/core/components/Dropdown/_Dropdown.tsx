@@ -9,6 +9,7 @@ import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useChange } from '#lib-frontend/core/hooks/useChange/useChange';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
+import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 const TippyF = (Tippy as unknown as { default: typeof Tippy }).default ?? Tippy;
@@ -36,7 +37,8 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
       content={
         <Appearable
           grow
-          isVisible={isOpen}>
+          isActive={isOpen}
+          p={THEME_SIZE.SMALL}>
           {children}
         </Appearable>
       }
@@ -44,7 +46,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
       ignoreAttributes
       interactive
       maxWidth={maxWidth ?? '100%'}
-      offset={direction ? [0, theme.shape.spacing.m] : undefined}
+      offset={[0, 0]}
       onClickOutside={() => {
         onToggle(false);
       }}

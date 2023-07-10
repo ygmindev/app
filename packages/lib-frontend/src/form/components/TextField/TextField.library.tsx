@@ -8,6 +8,7 @@ export const props: LibraryPropsModel<TextFieldPropsModel> = {
   Component: TextField,
   category: 'form',
   defaultProps: {},
+  minWidth: 200,
   variants: [
     { props: { isAutoFocus: true } },
     { props: { label: 'label' } },

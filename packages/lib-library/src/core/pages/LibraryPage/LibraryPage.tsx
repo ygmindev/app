@@ -18,7 +18,7 @@ import {
 
 // TODO: get from glob
 const libraries = LIBRARY_PROPS.map(({ name, ...props }) => {
-  const id = name || getComponentDisplayName(props.Component as ComponentType);
+  const id = name ?? getComponentDisplayName(props.Component as ComponentType);
   return { id, name: id, pathname: trimPathname(id), ...props };
 });
 

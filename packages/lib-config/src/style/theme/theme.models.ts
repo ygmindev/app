@@ -45,6 +45,10 @@ export type ThemeConfigModel = {
 
     height: Record<ThemeSizeModel, number>;
 
+    navigation: {
+      width: number;
+    };
+
     width: Record<ThemeSizeModel, number>;
   };
 

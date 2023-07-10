@@ -11,18 +11,18 @@ import { type LibraryPropsModel } from '#lib-library/core/components/Library/Lib
 export const props: LibraryPropsModel<AppearablePropsModel> = {
   Component: Appearable,
   Renderer: ({ ...props }) => {
-    const [isVisible, isVisibleSet] = useState<boolean>(false);
+    const [isActive, isActiveSet] = useState<boolean>(false);
     return (
       <Wrapper s>
         <Button
-          onPress={() => isVisibleSet(!isVisible)}
+          onPress={() => isActiveSet(!isActive)}
           type={BUTTON_TYPE.TRANSPARENT}>
-          {isVisible ? 'Close' : 'Open'}
+          {isActive ? 'Close' : 'Open'}
         </Button>
 
         <Appearable
           {...props}
-          isVisible={isVisible}
+          isActive={isActive}
         />
       </Wrapper>
     );

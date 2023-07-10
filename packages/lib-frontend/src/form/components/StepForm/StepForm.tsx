@@ -79,7 +79,7 @@ export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends
         style={styles}
         testID={testID}>
         <Wrapper isRowAlign>
-          <Appearable isVisible={current > 0}>
+          <Appearable isActive={current > 0}>
             <Button
               elementState={current <= 0 || isLoading ? ELEMENT_STATE.DISABLED : undefined}
               icon="arrowLeft"

@@ -13,7 +13,7 @@ const COLOR_SURFACE_CONTRAST = '#000000';
 const COLOR_BORDER = '#A2A2A2';
 const LIGHTNESS_ACTIVE = 40;
 const LIGHTNESS_THEME_MUTED = 85;
-const LIGHTNESS_SURFACE_MUTED = 40;
+const LIGHTNESS_SURFACE_MUTED = 80;
 
 const { _config, config } = defineConfig({
   _config: _theme,

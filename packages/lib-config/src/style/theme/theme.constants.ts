@@ -62,6 +62,10 @@ export const THEME_CONFIG = {
       [THEME_SIZE.LARGE]: 750,
     },
 
+    navigation: {
+      width: 300,
+    },
+
     width: {
       [THEME_SIZE.SMALL]: 250,
 
@@ -85,7 +89,7 @@ export const THEME_CONFIG = {
     height: {
       [THEME_SIZE_MORE.LARGE]: 52,
 
-      [THEME_SIZE_MORE.MEDIUM]: 45,
+      [THEME_SIZE_MORE.MEDIUM]: 47,
 
       [THEME_SIZE_MORE.SMALL]: 32,
 

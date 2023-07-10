@@ -23,7 +23,7 @@ export const _useRouter = <
       }
       const match = matchPath(
         { end: isExact, path: pathname.replaceAll('*', '') },
-        from || location.pathname,
+        from ?? location.pathname,
       );
       return match !== null;
     },

@@ -2,28 +2,31 @@ import isFunction from 'lodash/isFunction';
 import { cloneElement, type ReactElement, useState } from 'react';
 
 import { _isHoverable } from '#lib-frontend/core/components/Activatable/_isHoverable';
+import { ACTIVATABLE_TRIGGER } from '#lib-frontend/core/components/Activatable/Activatable.constants';
 import { type ActivatablePropsModel } from '#lib-frontend/core/components/Activatable/Activatable.models';
 import { type PressablePropsModel } from '#lib-frontend/core/components/Pressable/Pressable.models';
 import { type SFCModel } from '#lib-frontend/core/core.models';
+import { useIsMobile } from '#lib-frontend/core/hooks/useIsMobile/useIsMobile';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { type CallableModel } from '#lib-shared/core/core.models';
 
 export const Activatable: SFCModel<ActivatablePropsModel> = ({
   children,
-  isHoverable = true,
-  isPressable = true,
   onActive,
   onInactive,
+  trigger,
   ...props
 }) => {
   const { styles } = useStyles({ props });
-  const [isActive, isActiveSet] = useState<boolean>();
+  const isMobile = useIsMobile();
+  const [isActive, isActiveSet] = useState<boolean>(false);
   const childrenF: ReactElement<PressablePropsModel> | undefined = isFunction(children)
     ? children(isActive)
     : children;
+  const triggerF = trigger ?? (isMobile ? ACTIVATABLE_TRIGGER.FOCUS : ACTIVATABLE_TRIGGER.HOVER);
 
   const handleToggle = (value?: boolean): void => {
-    isFunction(children) && isActiveSet(value || false);
+    isActiveSet(value || false);
     value ? onActive && onActive() : onInactive && onInactive();
   };
 
@@ -39,17 +42,27 @@ export const Activatable: SFCModel<ActivatablePropsModel> = ({
     handleToggle(false);
   };
 
+  const triggerProps: PressablePropsModel = (() => {
+    switch (triggerF) {
+      case ACTIVATABLE_TRIGGER.HOVER:
+        return _isHoverable()
+          ? { onMouseEnter: () => handleToggle(true), onMouseLeave: () => handleToggle(false) }
+          : {};
+      case ACTIVATABLE_TRIGGER.FOCUS:
+        return {
+          onPressIn: handleGrant,
+          onPressOut: handleRelease,
+          onResponderGrant: handleRelease,
+          onResponderRelease: handleRelease,
+        };
+      case ACTIVATABLE_TRIGGER.PRESS:
+        return { onPress: () => handleToggle(!isActive) };
+      default:
+        return {};
+    }
+  })();
+
   return childrenF
-    ? cloneElement(childrenF, {
-        onMouseEnter: isHoverable
-          ? () => (_isHoverable() ? handleToggle(true) : undefined)
-          : undefined,
-        onMouseLeave: isHoverable ? () => handleToggle(false) : undefined,
-        onPressIn: isPressable ? handleGrant : undefined,
-        onPressOut: isPressable ? handleRelease : undefined,
-        onResponderGrant: isPressable ? handleGrant : undefined,
-        onResponderRelease: isPressable ? handleRelease : undefined,
-        style: { ...childrenF.props.style, ...styles },
-      })
+    ? cloneElement(childrenF, { ...triggerProps, style: { ...childrenF.props.style, ...styles } })
     : null;
 };

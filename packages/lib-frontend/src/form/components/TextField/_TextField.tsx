@@ -28,6 +28,7 @@ import { THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants
 import { type TextStyleModel, type ViewStyleModel } from '#lib-frontend/style/style.models';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
+import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 const getKeyboardType = (type?: TextFieldKeyboardModel): TextInputProps['keyboardType'] => {
   switch (type) {
@@ -152,8 +153,8 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
 
     const leftElementF = leftElement && (
       <Appearable
+        isActive={!isEmpty(value) || elementState === ELEMENT_STATE.ACTIVE || !label}
         isCenter
-        isVisible={!isEmpty(value) || elementState === ELEMENT_STATE.ACTIVE || !label}
         mLeft={label ? true : THEME_SIZE.SMALL}
         mTop={label ? 18 : undefined}>
         {leftElement}
@@ -169,7 +170,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
         height={height}
         isOverflowHidden
         position={SHAPE_POSITION.RELATIVE}
-        round={round || true}
+        round={round ?? true}
         style={styles}
         testID={testID}
         width={width}
@@ -213,8 +214,10 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
           multiline={(numberOfLines as number) > 1}
           numberOfLines={numberOfLines}
           onBlur={() => {
-            onBlur && onBlur();
-            onElementStateChange && onElementStateChange(ELEMENT_STATE.INACTIVE);
+            void sleep().then(() => {
+              onBlur && onBlur();
+              onElementStateChange && onElementStateChange(ELEMENT_STATE.INACTIVE);
+            });
           }}
           onChangeText={onChange}
           onFocus={() => {
@@ -240,7 +243,6 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
               animation={containerAnimation}
               elementState={elementState}
               grow
-              height={height}
               isCenter={isCenter}
               isOverflowHidden
               isRow
@@ -263,6 +265,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
           )}
           secureTextEntry={keyboard === TEXT_FIELD_KEYBOARD.PASSWORD}
           spellCheck={false}
+          style={{ height }}
           textColor={theme.color.palette.surface.contrast}
           textContentType={getTextContentType(autoComplete, keyboard)}
           theme={{ animation: { scale: 1 }, colors: { background: 'transparent' } }}

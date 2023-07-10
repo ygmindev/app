@@ -49,7 +49,7 @@ export const Table = forwardRef(
 
         <Appearable
           grow
-          isVisible={isMounted}>
+          isActive={isMounted}>
           <_Table
             columns={
               columns.map((column) => ({

@@ -12,8 +12,8 @@ import { merge } from '#lib-shared/core/utils/merge/merge';
 export const Appearable: SFCModel<AppearablePropsModel> = ({
   animation,
   children,
+  isActive,
   isScalable = true,
-  isVisible,
   ...props
 }) => (
   <Wrapper
@@ -24,8 +24,8 @@ export const Appearable: SFCModel<AppearablePropsModel> = ({
       ),
       ...animation,
     }}
-    elementState={isVisible ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.EXIT}
-    isHidden={!isVisible}>
+    elementState={isActive ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.EXIT}
+    isHidden={!isActive}>
     {children}
   </Wrapper>
 );

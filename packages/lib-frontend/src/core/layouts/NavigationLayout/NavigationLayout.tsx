@@ -21,11 +21,11 @@ export const NavigationLayout = <TOption extends TranslatableOptionModel>({
 > => {
   const { styles } = useStyles({ props });
   const isMobile = useIsMobile();
-  const isHorizontalF = isHorizontal || isMobile;
+  // const isHorizontalF = isHorizontal || isMobile;
+  const isHorizontalF = true;
   return (
     <Wrapper
       backgroundColor={THEME_COLOR_MORE.SURFACE}
-      basis={0}
       grow
       isRow={!isHorizontalF}
       style={styles}>

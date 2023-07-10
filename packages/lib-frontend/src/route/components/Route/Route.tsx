@@ -81,7 +81,7 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
         return (
           <Appearable
             isAbsoluteFill
-            isVisible={isActiveF}
+            isActive={isActiveF}
             style={styles}
             testID={testID}>
             {element}

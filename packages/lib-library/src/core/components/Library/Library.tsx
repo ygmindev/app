@@ -29,6 +29,7 @@ export const Library = <TProps,>({
   Component,
   Renderer,
   defaultProps,
+  minWidth,
   name,
   propTypes,
   testID,
@@ -109,7 +110,7 @@ export const Library = <TProps,>({
         <Wrapper
           key={toString(k)}
           p
-          spacing>
+          s>
           {k && <Text type={FONT_TYPE.TITLE}>{k}</Text>}
 
           <VirtualizedList
@@ -123,12 +124,13 @@ export const Library = <TProps,>({
               <Wrapper
                 key={id}
                 pBottom
-                spacing={THEME_SIZE.SMALL}>
+                s={THEME_SIZE.SMALL}>
                 <Wrapper
                   border
+                  minWidth={minWidth}
                   p
                   round
-                  spacing={THEME_SIZE.SMALL}>
+                  s={THEME_SIZE.SMALL}>
                   {variantName && <Text>{variantName}</Text>}
 
                   {createElement(

@@ -101,7 +101,7 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
           {iconActive && (
             <Appearable
               isAbsoluteFill
-              isVisible={valueControlled === 'true'}>
+              isActive={valueControlled === 'true'}>
               <Icon
                 color={THEME_COLOR.PRIMARY}
                 icon={iconActive}
@@ -113,7 +113,7 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
           {iconInactive && (
             <Appearable
               isAbsoluteFill
-              isVisible={valueControlled === 'false'}>
+              isActive={valueControlled === 'false'}>
               <Icon
                 color={THEME_COLOR_MORE.SURFACE}
                 colorRole={THEME_ROLE.MUTED}

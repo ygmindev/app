@@ -95,8 +95,8 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
 
           {elementState !== ELEMENT_STATE.DISABLED && (
             <Appearable
-              isCenter
-              isVisible={valueControlled.length > 0}>
+              isActive={valueControlled.length > 0}
+              isCenter>
               <Button
                 icon="times"
                 onPress={() => valueControlledSet('')}
