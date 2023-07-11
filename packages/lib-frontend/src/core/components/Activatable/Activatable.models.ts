@@ -14,3 +14,9 @@ export type ActivatablePropsModel = {
 >;
 
 export type ActivatableTriggerModel = `${ACTIVATABLE_TRIGGER}`;
+
+export type ActivatableRefModel = {
+  press: PressablePropsModel['onPress'];
+  pressIn: PressablePropsModel['onPressIn'];
+  pressOut: PressablePropsModel['onPressOut'];
+};

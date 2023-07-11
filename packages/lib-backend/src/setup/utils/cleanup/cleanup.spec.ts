@@ -1,5 +1,5 @@
+import { cleanup } from '#lib-backend/setup/utils/cleanup/cleanup';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
-import { cleanup } from '#lib-shared/core/utils/cleanup/cleanup';
 
 const { displayName } = withTest({ cleanup });
 

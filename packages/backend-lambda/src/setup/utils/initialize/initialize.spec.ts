@@ -1,11 +1,11 @@
-import { setup } from '#backend-lambda/core/utils/setup/setup';
+import { initialize } from '#backend-lambda/setup/utils/initialize/initialize';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ setup });
+const { displayName } = withTest({ initialize });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await setup();
+    const result = await initialize();
     expect(result).toStrictEqual({});
   });
 });

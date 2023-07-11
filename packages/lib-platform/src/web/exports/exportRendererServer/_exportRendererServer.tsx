@@ -19,10 +19,10 @@ import { QUERY } from '#lib-shared/query/query.constants';
 import { STATE } from '#lib-shared/state/state.constants';
 
 export const _exportRendererServer = ({
+  initialize: setup,
   publicDir,
   render,
   rootId,
-  setup,
   ssrContextKeys,
 }: _ExportRendererServerParamsModel): _ExportRendererServerModel => ({
   render: async ({ Page, context, pageProps }) => {

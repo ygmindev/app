@@ -4,7 +4,7 @@ import {
   type _ExportRendererServerParamsModel,
 } from '#lib-platform/web/exports/exportRendererServer/_exportRendererServer.models';
 
-export type ExportRenderServerParamsModel = Pick<_ExportRendererServerParamsModel, 'setup'>;
+export type ExportRenderServerParamsModel = Pick<_ExportRendererServerParamsModel, 'initialize'>;
 
 export type ExportRenderServerRenderParamsModel = {
   context?: RootContextModel;

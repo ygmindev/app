@@ -13,12 +13,12 @@ import {
 } from '#lib-shared/core/core.models';
 
 export type _ExportRendererServerParamsModel = {
+  // TODO: unknown to context?
+  initialize?: OptionalCallablePromiseModel<unknown>;
   render(params: { context?: RootContextModel } & ChildrenPropsModel): {
     element: ReactElement;
     getCss: CallableModel<ReactElement>;
   };
-  // TODO: unknown to context?
-  setup?: OptionalCallablePromiseModel<unknown>;
 } & Pick<ReturnTypeModel<WebConfigModel>, 'publicDir' | 'rootId' | 'ssrContextKeys'>;
 
 export type _ExportRendererServerModel = {

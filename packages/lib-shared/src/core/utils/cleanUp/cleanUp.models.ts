@@ -1,8 +1,8 @@
 import {
-  type _CleanUpModel,
-  type _CleanUpParamsModel,
-} from '#lib-shared/core/utils/cleanUp/_cleanUp.models';
+  type _CleanupModel,
+  type _CleanupParamsModel,
+} from '#lib-shared/core/utils/cleanup/_cleanup.models';
 
-export type CleanUpParamsModel = _CleanUpParamsModel;
+export type CleanupParamsModel = _CleanupParamsModel;
 
-export type CleanUpModel = _CleanUpModel;
+export type CleanupModel = _CleanupModel;

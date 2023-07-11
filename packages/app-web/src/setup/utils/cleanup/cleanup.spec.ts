@@ -1,11 +1,11 @@
-import { setup } from '#app-web/core/utils/setup/setup';
+import { cleanup } from '#app-web/setup/utils/cleanup/cleanup';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ setup });
+const { displayName } = withTest({ cleanup });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await setup();
+    const result = await cleanup();
     expect(result).toStrictEqual({});
   });
 });

@@ -1,20 +1,15 @@
 import { ApolloServer } from '@apollo/server';
 import { handlers, startServerAndCreateLambdaHandler } from '@as-integrations/aws-lambda';
 
-import { type SetupModel } from '#backend-lambda/core/utils/setup/setup.models';
-import { Container } from '#lib-backend/core/utils/Container/Container';
-import { DATABASE_TYPE } from '#lib-backend/database/database.constants';
-import { Database } from '#lib-backend/database/utils/Database/Database';
+import { initialize as initializeBackend } from '#backend-lambda/setup/utils/initialize/initialize';
+import { type InitializeModel } from '#backend-lambda/setup/utils/initialize/initialize.models';
 import { getContext } from '#lib-backend/serverless/utils/getContext/getContext';
 import { _config as _graphQlConfig } from '#lib-config/data/graphql/graphql';
-import { _config as _configDatabase } from '#lib-config/database/database.mongo';
 import { stringify } from '#lib-shared/core/utils/stringify/stringify';
 import { error } from '#lib-shared/logging/utils/logger/logger';
 
-export const setup = async (): SetupModel => {
-  const database = new Database(_configDatabase());
-  await database.connect();
-  Container.set(Database, database, DATABASE_TYPE.MONGO);
+export const initialize = async (): InitializeModel => {
+  const { database } = await initializeBackend();
 
   const server = new ApolloServer({
     formatError: (e) => {
@@ -28,11 +23,5 @@ export const setup = async (): SetupModel => {
     handlers.createAPIGatewayProxyEventV2RequestHandler(),
     { context: async ({ context, event }) => getContext({ context, event }) },
   );
-  return {
-    database,
-    handler,
-    onTerminate: async () => {
-      await database.close();
-    },
-  };
+  return { database, handler };
 };

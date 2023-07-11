@@ -1,13 +1,13 @@
-import { type LambdaContextModel } from '#backend-lambda/core/core.models';
-import { setup } from '#backend-lambda/core/utils/setup/setup';
+import { initialize } from '#backend-lambda/setup/utils/initialize/initialize';
+import { type InitializeContextModel } from '#backend-lambda/setup/utils/initialize/initialize.models';
 import { createHandler } from '#lib-backend/serverless/utils/createHandler/createHandler';
 import { type OptionalCallablePromiseModel } from '#lib-shared/core/core.models';
 
-let lambdaContext: LambdaContextModel;
+let initializeContext: InitializeContextModel;
 
-const getContext: OptionalCallablePromiseModel<LambdaContextModel> = async () => {
-  lambdaContext = lambdaContext ?? (await setup());
-  return lambdaContext;
+const getContext: OptionalCallablePromiseModel<InitializeContextModel> = async () => {
+  initializeContext = initializeContext ?? (await initialize());
+  return initializeContext;
 };
 
 export const main = createHandler(async (event, context, callback) => {

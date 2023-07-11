@@ -1,7 +1,7 @@
-import { _cleanUp } from '#lib-shared/core/utils/cleanUp/_cleanUp';
+import { _cleanup } from '#lib-shared/core/utils/cleanup/_cleanup';
 import {
-  type CleanUpModel,
-  type CleanUpParamsModel,
-} from '#lib-shared/core/utils/cleanUp/cleanUp.models';
+  type CleanupModel,
+  type CleanupParamsModel,
+} from '#lib-shared/core/utils/cleanup/cleanup.models';
 
-export const cleanUp = (params: CleanUpParamsModel): CleanUpModel => _cleanUp(params);
+export const cleanup = (params: CleanupParamsModel): CleanupModel => _cleanup(params);
