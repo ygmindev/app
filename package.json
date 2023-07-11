@@ -65,6 +65,7 @@
     "close-with-grace": "^1.2.0",
     "color": "^4.2.3",
     "cookies-js": "^1.2.3",
+    "core-js": "^3.31.1",
     "countries-list": "^2.6.1",
     "dataloader": "^2.2.2",
     "ejs": "^3.1.9",

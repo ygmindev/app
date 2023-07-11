@@ -1,3 +1,5 @@
+import 'core-js';
+
 import { importConfig } from '#lib-config/core/utils/importConfig/importConfig';
 import { type TestConfigModel } from '#lib-config/node/test/test.models';
 

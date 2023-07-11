@@ -4,6 +4,8 @@ import pick from 'lodash/pick';
 import some from 'lodash/some';
 
 import { seed } from '#lib-backend/database/utils/seed/seed';
+import { cleanup } from '#lib-backend/setup/utils/cleanup/cleanup';
+import { initialize } from '#lib-backend/setup/utils/initialize/initialize';
 import {
   type TestableResourceServiceModel,
   type TestResourceServiceParamsModel,
@@ -28,7 +30,12 @@ export const testResourceService = async ({
   const PROJECT_FIELDS: Array<keyof DummyEntityResourceModel> = ['_id', 'stringPropertyOptional'];
 
   beforeAll(async () => {
+    await initialize();
     service = getService();
+  });
+
+  afterAll(async () => {
+    await cleanup();
   });
 
   beforeEach(async () => {
