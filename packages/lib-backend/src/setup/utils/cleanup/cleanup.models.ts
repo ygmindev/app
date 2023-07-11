@@ -1,1 +1,1 @@
-export type CleanupModel = Promise<void>;
+export type CleanupModel = void;

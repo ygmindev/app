@@ -4,4 +4,4 @@ export type _RunCleanParamsModel = {
   root?: string;
 };
 
-export type _RunCleanModel = Promise<void>;
+export type _RunCleanModel = void;

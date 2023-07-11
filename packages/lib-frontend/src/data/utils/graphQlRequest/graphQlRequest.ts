@@ -16,7 +16,7 @@ export const graphQlRequest = async <TParams, TResult, TName extends string = st
   params,
   type,
   variables,
-}: GraphQlRequestParamsModel<TParams, TResult, TName>): GraphQlRequestModel<TResult> => {
+}: GraphQlRequestParamsModel<TParams, TResult, TName>): Promise<GraphQlRequestModel<TResult>> => {
   const result = await onRequest({
     query: graphQlQuery<TParams, TResult, TName>({
       fields,

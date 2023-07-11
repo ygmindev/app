@@ -7,7 +7,7 @@ import {
 
 let isTerminated: boolean;
 
-export const _cleanup = async ({ onCleanup }: _CleanupParamsModel): _CleanupModel => {
+export const _cleanup = async ({ onCleanup }: _CleanupParamsModel): Promise<_CleanupModel> => {
   closeWithGrace(async (_) => {
     if (!isTerminated) {
       onCleanup && (await onCleanup());

@@ -15,6 +15,8 @@ export type BundleConfigModel = {
 
   extensions: Array<string>;
 
+  logSuppressPatterns?: Array<RegExp>;
+
   mainFields?: Array<string>;
 
   modulePaths: Array<string>;

@@ -9,7 +9,10 @@ import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages'
 import { packages } from '#lib-backend/file/utils/packages/packages';
 import { _boilerplate } from '#tool-generate/utils/boilerplate/_boilerplate';
 import { BOILERPLATE_TEMPLATE_VARIABLE_PATTERN } from '#tool-generate/utils/boilerplate/boilerplate.constants';
-import { type BoilerplateParamsModel } from '#tool-generate/utils/boilerplate/boilerplate.models';
+import {
+  type BoilerplateModel,
+  type BoilerplateParamsModel,
+} from '#tool-generate/utils/boilerplate/boilerplate.models';
 import { prompt } from '#tool-task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '#tool-task/core/utils/prompt/prompt.constants';
 
@@ -34,7 +37,7 @@ export const boilerplate = async ({
   output,
   template,
   variables,
-}: BoilerplateParamsModel): Promise<void> => {
+}: BoilerplateParamsModel): Promise<BoilerplateModel> => {
   const templateDir = fromPackages('tool-generate/templates', template);
   let templateVariables = await getTemplateVariables(templateDir);
   templateVariables = uniq(templateVariables).sort();

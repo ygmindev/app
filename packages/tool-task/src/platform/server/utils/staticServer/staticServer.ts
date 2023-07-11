@@ -10,7 +10,7 @@ export const staticServer = async ({
   isOpen = true,
   port = STATIC_SERVER_PORT,
   root,
-}: StaticServerParamsModel): StaticServerModel =>
+}: StaticServerParamsModel): Promise<StaticServerModel> =>
   command(fromExecutable(`http-server ${root} --cors --port ${port} ${isOpen ? '--o' : ''}`), {
     root,
   });

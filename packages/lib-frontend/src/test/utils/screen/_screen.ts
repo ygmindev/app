@@ -6,8 +6,8 @@ import { type _ScreenModel } from '#lib-frontend/test/utils/screen/_screen.model
 let browser: Browser;
 let page: Page;
 
-export const _screen = async (): _ScreenModel => {
-  browser = browser || (await launch({ headless: true }));
+export const _screen = async (): Promise<_ScreenModel> => {
+  browser = browser || (await launch({ headless: 'new' }));
   page = page || (await browser.newPage());
 
   return {

@@ -13,4 +13,4 @@ export type GraphQlRequestParamsModel<
   }): Promise<ExecutionResult<{ [name in TName]: TResult }> | null>;
 };
 
-export type GraphQlRequestModel<TResult> = Promise<TResult | null>;
+export type GraphQlRequestModel<TResult> = TResult | null;

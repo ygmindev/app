@@ -7,4 +7,4 @@ import {
 
 export const prompt = async <TParams extends Array<PromptArgsModel>>(
   params: PromptParamsModel<TParams>,
-): PromptModel<TParams> => _prompt(params);
+): Promise<PromptModel<TParams>> => _prompt(params);

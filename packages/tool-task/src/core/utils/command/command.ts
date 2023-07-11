@@ -4,4 +4,5 @@ import {
   type CommandParamsModel,
 } from '#tool-task/core/utils/command/command.models';
 
-export const command = async (...params: CommandParamsModel): CommandModel => _command(...params);
+export const command = async (...params: CommandParamsModel): Promise<CommandModel> =>
+  _command(...params);

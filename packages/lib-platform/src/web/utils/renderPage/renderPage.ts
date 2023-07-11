@@ -4,5 +4,5 @@ import {
   type RenderPageParamsModel,
 } from '#lib-platform/web/utils/renderPage/renderPage.models';
 
-export const renderPage = async ({ ...params }: RenderPageParamsModel): RenderPageModel =>
+export const renderPage = async ({ ...params }: RenderPageParamsModel): Promise<RenderPageModel> =>
   _renderPage({ ...params });

@@ -8,7 +8,7 @@ import { screen } from '#lib-frontend/test/utils/screen/screen';
 import { type ScreenModel } from '#lib-frontend/test/utils/screen/screen.models';
 
 describe('sign in', () => {
-  let screenF: Awaited<ScreenModel>;
+  let screenF: ScreenModel;
 
   beforeAll(async () => {
     screenF = await screen();

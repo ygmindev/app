@@ -2,7 +2,7 @@ import { type ExportRenderServerRenderParamsModel } from '#lib-platform/web/expo
 
 export type _RenderPageParamsModel = ExportRenderServerRenderParamsModel;
 
-export type _RenderPageModel = Promise<{
+export type _RenderPageModel = {
   error?: Error;
   redirect?: string;
   response?: {
@@ -10,4 +10,4 @@ export type _RenderPageModel = Promise<{
     pipeStream(writable: NodeJS.WritableStream): void;
     statusCode: number;
   };
-}>;
+};

@@ -5,4 +5,4 @@ import {
 
 export type ServerParamsModel = _ServerParamsModel;
 
-export type ServerModel = Promise<_ServerModel>;
+export type ServerModel = _ServerModel;

@@ -5,7 +5,7 @@ import {
   type RunCleanParamsModel,
 } from '#tool-task/core/utils/runClean/runClean.models';
 
-export const runClean = async (params: RunCleanParamsModel): RunCleanModel => {
+export const runClean = async (params: RunCleanParamsModel): Promise<RunCleanModel> => {
   try {
     await _runClean(params);
     return { status: TASK_STATUS.SUCCESS };

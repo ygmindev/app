@@ -9,7 +9,7 @@ import { resolveFirst } from '#lib-shared/core/utils/resolveFirst/resolveFirst';
 
 export const importFromEnv = async <TType>(
   params: ImportFromEnvParamsModel,
-): ImportFromEnvModel<TType> =>
+): Promise<ImportFromEnvModel<TType>> =>
   resolveFirst<TType>(
     extensions().map(
       (ext) => async () => requireInterop<TType>(ext ? joinExtension(params, ext) : params),

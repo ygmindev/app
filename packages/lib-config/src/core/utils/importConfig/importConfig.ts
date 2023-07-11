@@ -11,7 +11,7 @@ import { merge } from '#lib-shared/core/utils/merge/merge';
 
 export const importConfig = async <TParams, TResult = undefined>(
   ...[name, overrides]: ImportConfigParamsModel<TParams>
-): ImportConfigModel<TParams, TResult> => {
+): Promise<ImportConfigModel<TParams, TResult>> => {
   const { _config, config } = await importFromEnv<{
     _config?: TResult | CallableModel<TResult, TParams>;
     config: TParams | OptionalCallableModel<TParams>;

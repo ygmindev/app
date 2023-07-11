@@ -15,7 +15,7 @@ registerPrompt(PROMPT_TYPE.DIRECTORY, directory as prompts.PromptConstructor);
 
 export const _prompt = async <TParams extends Array<PromptArgsModel>>(
   prompts: _PromptParamsModel<TParams>,
-): _PromptModel<TParams> =>
+): Promise<_PromptModel<TParams>> =>
   prompt(
     prompts.map(
       ({

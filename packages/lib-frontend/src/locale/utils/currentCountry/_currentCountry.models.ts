@@ -1,1 +1,1 @@
-export type _CurrentCountryModel = Promise<string | null>;
+export type _CurrentCountryModel = string | null;

@@ -3,4 +3,4 @@ import { type CommandOptionsModel } from '#tool-task/core/utils/command/command.
 
 export type _CommandParamsModel = [command: string, options?: CommandOptionsModel];
 
-export type _CommandModel = Promise<TaskResultModel>;
+export type _CommandModel = TaskResultModel;

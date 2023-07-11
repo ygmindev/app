@@ -5,7 +5,7 @@ export type ImportConfigParamsModel<TParams> = [
   overrides?: Array<PartialDeepModel<TParams>>,
 ];
 
-export type ImportConfigModel<TParams, TResult = undefined> = Promise<{
+export type ImportConfigModel<TParams, TResult = undefined> = {
   _config: TResult extends undefined ? undefined : TResult;
   config: TParams;
-}>;
+};

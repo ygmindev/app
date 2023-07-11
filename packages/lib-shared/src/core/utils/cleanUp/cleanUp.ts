@@ -4,4 +4,4 @@ import {
   type CleanupParamsModel,
 } from '#lib-shared/core/utils/cleanup/cleanup.models';
 
-export const cleanup = (params: CleanupParamsModel): CleanupModel => _cleanup(params);
+export const cleanup = (params: CleanupParamsModel): Promise<CleanupModel> => _cleanup(params);

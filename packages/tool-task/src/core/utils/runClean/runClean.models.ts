@@ -3,4 +3,4 @@ import { type _RunCleanParamsModel } from '#tool-task/core/utils/runClean/_runCl
 
 export type RunCleanParamsModel = _RunCleanParamsModel;
 
-export type RunCleanModel = Promise<TaskResultModel>;
+export type RunCleanModel = TaskResultModel;

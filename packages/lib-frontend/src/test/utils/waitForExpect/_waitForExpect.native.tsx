@@ -8,6 +8,6 @@ import { WAIT_FOR_EXPECT_DURATION_DEFAULT_MILLISECONDS } from '#lib-frontend/tes
 
 export const _waitForExpect = async (
   ...[callback, timeout = WAIT_FOR_EXPECT_DURATION_DEFAULT_MILLISECONDS]: _WaitForExpectParamsModel
-): _WaitForExpectModel => {
+): Promise<_WaitForExpectModel> => {
   await waitFor(callback, { timeout });
 };

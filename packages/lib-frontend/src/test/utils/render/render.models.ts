@@ -5,4 +5,4 @@ import {
 
 export type RenderParamsModel = Omit<_RenderParamsModel, 'Wrapper'>;
 
-export type RenderModel = Promise<_RenderModel>;
+export type RenderModel = _RenderModel;

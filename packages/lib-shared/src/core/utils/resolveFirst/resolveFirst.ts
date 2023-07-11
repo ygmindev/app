@@ -5,7 +5,7 @@ import {
 
 export const resolveFirst = async <TType>(
   params: ResolveFirstParamsModel<TType>,
-): ResolveFirstModel<TType> => {
+): Promise<ResolveFirstModel<TType>> => {
   const errors = [];
   for (const promise of params || []) {
     try {

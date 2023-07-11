@@ -4,4 +4,4 @@ export type _CliParamsModel = {
   task?: string;
 };
 
-export type _CliModel = Promise<TaskResultModel>;
+export type _CliModel = TaskResultModel;

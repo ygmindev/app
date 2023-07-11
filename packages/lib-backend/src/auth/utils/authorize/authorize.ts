@@ -7,7 +7,10 @@ import { Container } from '#lib-backend/core/utils/Container/Container';
 import { ACCESS_ROLE } from '#lib-shared/auth/resources/Access/Access.constants';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 
-export const authorize = async ({ context, roles }: AuthorizeParamsModel): AuthorizeModel => {
+export const authorize = async ({
+  context,
+  roles,
+}: AuthorizeParamsModel): Promise<AuthorizeModel> => {
   if (roles) {
     if (context.user) {
       if (isEqual(roles, [ACCESS_ROLE.ANY, ACCESS_ROLE.USER])) {

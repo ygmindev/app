@@ -12,7 +12,7 @@ export const _boilerplate = async ({
   output,
   template,
   variables,
-}: _BoilerplateParamsModel): _BoilerplateModel =>
+}: _BoilerplateParamsModel): Promise<_BoilerplateModel> =>
   new Promise((resolve) => {
     void generateTemplateFilesBatch([
       {

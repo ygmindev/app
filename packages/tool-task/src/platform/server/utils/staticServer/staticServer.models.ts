@@ -6,4 +6,4 @@ export type StaticServerParamsModel = {
   root: string;
 };
 
-export type StaticServerModel = Promise<TaskResultModel>;
+export type StaticServerModel = TaskResultModel;

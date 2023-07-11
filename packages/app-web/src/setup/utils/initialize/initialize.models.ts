@@ -1,1 +1,1 @@
-export type InitializeModel = Promise<void>;
+export type InitializeModel = void;

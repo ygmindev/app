@@ -13,7 +13,7 @@ export const _runClean = async ({
   excludes,
   patterns,
   root = fromWorking(),
-}: _RunCleanParamsModel): _RunCleanModel => {
+}: _RunCleanParamsModel): Promise<_RunCleanModel> => {
   await rimraf(
     patterns ||
       config.cleanPatterns

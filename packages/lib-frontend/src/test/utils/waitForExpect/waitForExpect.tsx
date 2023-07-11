@@ -4,5 +4,5 @@ import {
   type WaitForExpectParamsModel,
 } from '#lib-frontend/test/utils/waitForExpect/waitForExpect.models';
 
-export const waitForExpect = (...params: WaitForExpectParamsModel): WaitForExpectModel =>
+export const waitForExpect = (...params: WaitForExpectParamsModel): Promise<WaitForExpectModel> =>
   _waitForExpect(...params);

@@ -9,7 +9,7 @@ import { getTsconfig } from 'get-tsconfig';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { type Plugin } from 'vite';
+import { createLogger, type Logger, type Plugin } from 'vite';
 import { searchForWorkspaceRoot } from 'vite';
 import { checker } from 'vite-plugin-checker';
 import circleDependency from 'vite-plugin-circular-dependency';
@@ -31,7 +31,7 @@ import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { joinExtension } from '#lib-shared/core/utils/joinExtension/joinExtension';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 
-function _vitePluginIsomorphicImport({ serverPostfix }: { serverPostfix: string }): Plugin {
+function vitePluginIsomorphicImport({ serverPostfix }: { serverPostfix: string }): Plugin {
   return {
     enforce: 'pre',
     name: 'vite-plugin-isomorphic-import',
@@ -69,6 +69,7 @@ export const _bundle = ({
   entry,
   envPrefix,
   extensions,
+  logSuppressPatterns,
   mainFields,
   modulePaths,
   outDir,
@@ -77,6 +78,19 @@ export const _bundle = ({
   tsconfigPath,
   watch,
 }: BundleConfigModel): _BundleConfigModel => {
+  const customLogger = createLogger();
+  if (logSuppressPatterns) {
+    const methods = ['warn', 'warnOnce', 'info', 'error'] satisfies Array<keyof Logger>;
+    methods.forEach((method) => {
+      const methodF = customLogger[method];
+      customLogger[method] = (msg, options) => {
+        if (some(logSuppressPatterns, (pattern) => msg.match(pattern))) {
+          return;
+        }
+        methodF(msg, options);
+      };
+    });
+  }
   const isReact = ([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>).includes(
     process.env.ENV_PLATFORM,
   );
@@ -105,12 +119,14 @@ export const _bundle = ({
         process.env.NODE_ENV === ENVIRONMENT.DEVELOPMENT && watch ? { include: watch } : undefined,
     },
 
+    customLogger,
+
     define,
 
     envPrefix,
 
     esbuild: {
-      sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : true,
+      sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : 'inline',
     },
 
     mode: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? 'production' : 'development',
@@ -129,8 +145,6 @@ export const _bundle = ({
 
         resolveExtensions: extensions,
 
-        sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : 'inline',
-
         target: process.env.ENV_PLATFORM === PLATFORM.NODE ? 'node18' : undefined,
 
         tsconfig: tsconfigPath,
@@ -140,7 +154,7 @@ export const _bundle = ({
     },
 
     plugins: filterNil([
-      _vitePluginIsomorphicImport({ serverPostfix: 'server' }),
+      vitePluginIsomorphicImport({ serverPostfix: 'server' }),
 
       tsconfigPath && tsconfigPaths({ projects: [tsconfigPath] }),
 

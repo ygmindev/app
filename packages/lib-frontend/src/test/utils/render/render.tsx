@@ -12,7 +12,7 @@ import {
 } from '#lib-frontend/test/utils/render/render.models';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 
-export const render = async (params: RenderParamsModel): RenderModel => {
+export const render = async (params: RenderParamsModel): Promise<RenderModel> => {
   const { _config } = await importConfig<InternationalizeConfigModel, _InternationalizeConfigModel>(
     'locale/internationalize/internationalize',
   );

@@ -4,4 +4,4 @@ export type _CleanupParamsModel = {
   onCleanup?: OptionalCallablePromiseModel;
 };
 
-export type _CleanupModel = Promise<void>;
+export type _CleanupModel = void;

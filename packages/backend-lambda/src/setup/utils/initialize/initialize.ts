@@ -8,7 +8,7 @@ import { _config as _graphQlConfig } from '#lib-config/data/graphql/graphql';
 import { stringify } from '#lib-shared/core/utils/stringify/stringify';
 import { error } from '#lib-shared/logging/utils/logger/logger';
 
-export const initialize = async (): InitializeModel => {
+export const initialize = async (): Promise<InitializeModel> => {
   const { database } = await initializeBackend();
 
   const server = new ApolloServer({

@@ -13,7 +13,7 @@ export const _command = async (
     command,
     { isSilent = false, onData = undefined, root = fromRoot() } = {},
   ]: _CommandParamsModel
-): _CommandModel => {
+): Promise<_CommandModel> => {
   try {
     info(command);
     const cp = spawn(command, {

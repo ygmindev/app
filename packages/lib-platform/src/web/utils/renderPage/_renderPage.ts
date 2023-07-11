@@ -7,7 +7,9 @@ import {
   type _RenderPageParamsModel,
 } from '#lib-platform/web/utils/renderPage/_renderPage.models';
 
-export const _renderPage = async ({ context }: _RenderPageParamsModel): _RenderPageModel => {
+export const _renderPage = async ({
+  context,
+}: _RenderPageParamsModel): Promise<_RenderPageModel> => {
   const { errorWhileRendering, httpResponse, redirectTo } = await renderPage({
     context,
     redirectTo: undefined,

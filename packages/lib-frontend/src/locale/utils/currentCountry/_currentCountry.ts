@@ -2,7 +2,7 @@ import geolocator from 'geolocator';
 
 import { type _CurrentCountryModel } from '#lib-frontend/locale/utils/currentCountry/_currentCountry.models';
 
-export const _currentCountry = async (): _CurrentCountryModel => {
+export const _currentCountry = async (): Promise<_CurrentCountryModel> => {
   geolocator.config({ language: 'en' });
   return new Promise((resovle, reject) =>
     geolocator.locate(

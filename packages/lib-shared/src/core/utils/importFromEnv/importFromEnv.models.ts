@@ -1,3 +1,3 @@
 export type ImportFromEnvParamsModel = string;
 
-export type ImportFromEnvModel<TType> = Promise<TType>;
+export type ImportFromEnvModel<TType> = TType;
