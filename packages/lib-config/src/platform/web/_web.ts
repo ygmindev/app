@@ -21,7 +21,7 @@ export const _web = ({ bundleConfig, isSsr, publicDir }: WebConfigModel): _WebCo
         publicDir: toRelative({ from: fromWorking(), to: fromStatic(publicDir) }),
 
         server: {
-          watch: (bundleConfigF.build?.watch as WatchOptions) || undefined,
+          watch: (bundleConfigF.build?.watch as WatchOptions) ?? undefined,
         },
       },
 

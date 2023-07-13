@@ -1,7 +1,6 @@
 import pick from 'lodash/pick';
-import { renderToStaticMarkup } from 'react-dom/server';
-import { renderToStream } from 'react-streaming/server';
-import { dangerouslySkipEscape, escapeInject } from 'vite-plugin-ssr/server';
+import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
+import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vite-plugin-ssr/server';
 
 import { QueryClient } from '#lib-frontend/data/utils/QueryClient/QueryClient';
 import { type RootContextModel } from '#lib-frontend/root/root.models';
@@ -40,7 +39,9 @@ export const _exportRendererServer = ({
     ]);
     const { element, getCss } = render({ children: <Page {...pageProps} />, context: contextF });
     const styleSheet = renderToStaticMarkup(getCss());
-    const stream = await renderToStream(element);
+    // const stream = await renderToStream(element);
+    const { pipe } = renderToPipeableStream(element);
+    stampPipe(pipe, 'node-stream');
 
     // TODO: fill in description and title
     const documentHtml = escapeInject`
@@ -55,7 +56,7 @@ export const _exportRendererServer = ({
           <title>${''}</title>
           <style>${dangerouslySkipEscape(styleSheet)}</style>
         </head>
-        <body><div id="${rootId}">${stream}</div></body>
+        <body><div id="${rootId}">${pipe}</div></body>
       </html>
     `;
 

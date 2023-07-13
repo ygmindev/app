@@ -1,11 +1,15 @@
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _query } from '#lib-config/data/query/_query';
-import { config as configBase } from '#lib-config/data/query/query.base';
+import { type QueryConfigModel } from '#lib-config/data/query/query.models';
 
 const { _config, config } = defineConfig({
   _config: _query,
 
-  config: configBase,
+  config: {
+    cacheTime: 5000,
+
+    cacheTimeDefault: 1000 * 60 * 60, // 1h
+  } satisfies QueryConfigModel,
 });
 
 export { _config, config };

@@ -13,6 +13,14 @@ const { _config, config } = defineConfig({
 
   overrides: () => [
     {
+      aliases: {
+        // TODO: preact missing renderToPipeableStream
+        // react: 'preact/compat',
+        // 'react-dom': 'preact/compat',
+        // 'react-dom/test-utils': 'preact/test-utils',
+        // 'react/jsx-runtime': 'preact/jsx-runtime',
+      },
+
       babelConfig: _babelConfig,
 
       define: {
@@ -21,13 +29,15 @@ const { _config, config } = defineConfig({
 
       envPrefix: ['APP_', 'DATABASE_'],
 
+      externals: ['react', 'react-dom', 'react/jsx-runtime'],
+
       transpiles: [
         'countries-list',
         'css-in-js-utils',
         'moti',
         'inline-style-prefixer',
         'react/jsx-runtime',
-        'react-dom/server',
+        // 'react-dom/server',
         'react-native',
         'redux-persist',
         'react-use',

@@ -21,6 +21,8 @@ const { _config, config } = defineConfig({
       provide: {
         requestAnimationFrame: fromConfig('node/bundle/aliases/requestAnimationFrame/index.js'),
       },
+
+      serverExtension: '.server',
     },
   ],
 });

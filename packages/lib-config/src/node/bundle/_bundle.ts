@@ -31,26 +31,26 @@ import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { joinExtension } from '#lib-shared/core/utils/joinExtension/joinExtension';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 
-function vitePluginIsomorphicImport({ serverPostfix }: { serverPostfix: string }): Plugin {
+function vitePluginIsomorphicImport(serverExtension: string): Plugin {
   return {
     enforce: 'pre',
     name: 'vite-plugin-isomorphic-import',
     async resolveId(this, id, importer, options) {
+      if (id[0] == '\0' || id.startsWith('virtual:') || id.startsWith('/virtual:')) {
+        return null;
+      }
       if (importer) {
         let resolved = await this.resolve(id, importer, { ...options, skipSelf: true });
-        if (resolved && options?.ssr) {
+        if (resolved && !resolved.external && options?.ssr) {
           const i = resolved?.id.lastIndexOf('.');
-          const idServer =
+          const idF =
             i === -1
-              ? joinExtension(resolved.id, serverPostfix)
+              ? joinExtension(resolved.id, serverExtension)
               : `${joinExtension(
                   resolved.id.substring(0, i),
-                  serverPostfix,
+                  serverExtension,
                 )}${resolved.id.substring(i)}`;
-          const resolvedServer = await this.resolve(idServer, importer, {
-            ...options,
-            skipSelf: true,
-          });
+          const resolvedServer = await this.resolve(idF, importer, { ...options, skipSelf: true });
           if (resolvedServer && existsSync(resolvedServer.id)) {
             resolved = resolvedServer;
           }
@@ -69,11 +69,13 @@ export const _bundle = ({
   entry,
   envPrefix,
   extensions,
+  externals,
   logSuppressPatterns,
   mainFields,
   modulePaths,
   outDir,
   provide,
+  serverExtension,
   transpiles,
   tsconfigPath,
   watch,
@@ -102,7 +104,6 @@ export const _bundle = ({
         defaultIsModuleExports: true,
         esmExternals: true,
         requireReturnsDefault: 'auto',
-
         transformMixedEsModules: true,
       },
 
@@ -111,6 +112,8 @@ export const _bundle = ({
       outDir,
 
       rollupOptions: {
+        external: externals,
+
         ...(entry ? { input: entry } : {}),
 
         plugins: [resolve({ modulesOnly: true })],
@@ -154,7 +157,7 @@ export const _bundle = ({
     },
 
     plugins: filterNil([
-      vitePluginIsomorphicImport({ serverPostfix: 'server' }),
+      serverExtension && vitePluginIsomorphicImport(serverExtension),
 
       tsconfigPath && tsconfigPaths({ projects: [tsconfigPath] }),
 
@@ -197,11 +200,17 @@ export const _bundle = ({
       },
 
       extensions,
+
+      preserveSymlinks: true,
     },
 
     root: fromWorking(),
 
-    server: { fs: { allow: [searchForWorkspaceRoot(fromRoot()), fromModules()] } },
+    server: {
+      fs: {
+        allow: [searchForWorkspaceRoot(fromRoot()), fromModules()],
+      },
+    },
 
     ssr: {
       noExternal: transpiles,

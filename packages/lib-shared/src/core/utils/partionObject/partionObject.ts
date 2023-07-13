@@ -1,5 +1,5 @@
 // COMPLETE
-import { reduce } from 'lodash';
+import reduce from 'lodash/reduce';
 
 import {
   type PartionObjectModel,

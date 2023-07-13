@@ -15,6 +15,8 @@ export type BundleConfigModel = {
 
   extensions: Array<string>;
 
+  externals?: Array<string>;
+
   logSuppressPatterns?: Array<RegExp>;
 
   mainFields?: Array<string>;
@@ -24,6 +26,8 @@ export type BundleConfigModel = {
   outDir?: string;
 
   provide?: Record<string, string>;
+
+  serverExtension?: string;
 
   transpiles?: Array<string>;
 
