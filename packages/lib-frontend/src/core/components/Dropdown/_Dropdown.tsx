@@ -3,14 +3,13 @@ import { useState } from 'react';
 import { View } from 'react-native';
 
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
+import { sleepForEffect } from '#lib-frontend/animation/utils/sleepForEffect/sleepForEffect';
 import { type _DropdownPropsModel } from '#lib-frontend/core/components/Dropdown/_Dropdown.models';
 import { DIRECTION } from '#lib-frontend/core/core.constants';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useChange } from '#lib-frontend/core/hooks/useChange/useChange';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 const TippyF = (Tippy as unknown as { default: typeof Tippy }).default ?? Tippy;
 
@@ -25,10 +24,9 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   ...props
 }) => {
   const { styles } = useStyles({ props });
-  const theme = useTheme();
   const [isOpenF, isOpenSet] = useState<boolean>(isOpen || false);
   useChange(isOpen, () => {
-    isOpen ? isOpenSet(true) : void sleep(theme.animation.motion).then(() => isOpenSet(false));
+    isOpen ? isOpenSet(true) : void sleepForEffect().then(() => isOpenSet(false));
   });
   return (
     <TippyF

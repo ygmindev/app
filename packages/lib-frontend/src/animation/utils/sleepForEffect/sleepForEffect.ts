@@ -3,4 +3,4 @@ import { type SleepForEffectModel } from '#lib-frontend/animation/utils/sleepFor
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 export const sleepForEffect = async (): Promise<SleepForEffectModel> =>
-  sleep(THEME_CONFIG.animation.motion);
+  sleep(THEME_CONFIG.animation.effect);
