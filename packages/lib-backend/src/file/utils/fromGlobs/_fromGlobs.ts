@@ -6,9 +6,7 @@ import {
 } from '#lib-backend/file/utils/fromGlobs/_fromGlobs.models';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 
-export const _fromGlobs = ({
-  globs,
-  isAbsolute,
-  root = fromWorking(),
-}: _FromGlobsParamsModel): _FromGlobsModel =>
+export const _fromGlobs = (
+  ...[globs, { isAbsolute = false, root = fromWorking() } = {}]: _FromGlobsParamsModel
+): _FromGlobsModel =>
   globs.map((glob) => globSync(glob, { absolute: isAbsolute, cwd: root })).flat(1);

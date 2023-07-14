@@ -1,4 +1,4 @@
-import { fromBuild } from '#lib-backend/file/utils/fromBuild/fromBuild';
+import { fromDist } from '#lib-backend/file/utils/fromDist/fromDist';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { toRelative } from '#lib-backend/file/utils/toRelative/toRelative';
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
@@ -9,12 +9,12 @@ const { _config, config } = defineConfig({
   _config: _typescript,
 
   config: {
-    configFile: fromBuild('tsconfig.json'),
+    configFile: fromDist('tsconfig.json'),
 
-    outDir: fromBuild('out-tsc'),
+    outDir: fromDist('out-tsc'),
 
     paths: {
-      '#build/*': toRelative({ from: fromRoot(), to: fromBuild('/*') }),
+      '#dist/*': toRelative({ from: fromRoot(), to: fromDist('/*') }),
       'css-in-js-utils/lib/*': 'node_modules/css-in-js-utils/es/*',
       'inline-style-prefixer/lib/*': 'node_modules/inline-style-prefixer/es/*',
       'redux-persist/integration/*': 'node_modules/redux-persist/types/integration/*',

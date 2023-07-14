@@ -3,7 +3,7 @@ import uniq from 'lodash/uniq';
 import { type PackageJson } from 'type-fest';
 import { type TranspileOptions } from 'typescript';
 
-import { fromBuild } from '#lib-backend/file/utils/fromBuild/fromBuild';
+import { fromDist } from '#lib-backend/file/utils/fromDist/fromDist';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { writeFile } from '#lib-backend/file/utils/writeFile/writeFile';
@@ -17,7 +17,7 @@ export const jsPackage: GeneratorParamsModel = {
     const target = variables && variables['{{TARGET}}'];
 
     if (root && target) {
-      let filename = fromBuild('node/typescript/tsconfig.paths.json');
+      let filename = fromDist('node/typescript/tsconfig.paths.json');
       const tsConfig = JSON.parse(readFileSync(filename).toString()) as TranspileOptions;
       if (tsConfig.compilerOptions?.paths) {
         tsConfig.compilerOptions.paths[`${target}/*`] = [`packages/${root}/src/*`];

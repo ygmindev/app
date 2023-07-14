@@ -22,10 +22,10 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
-    "outDir": "/Users/ygmin/Projects/mono_v2/app3/app/.build/out-tsc",
+    "outDir": "/Users/ygmin/Projects/mono_v2/app3/app/.dist/out-tsc",
     "paths": {
-      "#build/*": [
-        ".build/*"
+      "#dist/*": [
+        ".dist/*"
       ],
       "css-in-js-utils/lib/*": [
         "node_modules/css-in-js-utils/es/*"

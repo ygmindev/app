@@ -4,5 +4,4 @@ import {
   type FromGlobsParamsModel,
 } from '#lib-backend/file/utils/fromGlobs/fromGlobs.models';
 
-export const fromGlobs = ({ ...params }: FromGlobsParamsModel): FromGlobsModel =>
-  _fromGlobs({ ...params });
+export const fromGlobs = (...params: FromGlobsParamsModel): FromGlobsModel => _fromGlobs(...params);

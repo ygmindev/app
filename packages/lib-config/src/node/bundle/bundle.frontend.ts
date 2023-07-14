@@ -40,8 +40,7 @@ const { _config, config } = defineConfig({
         'redux-persist',
         'react-use',
         'thenby',
-        ...fromGlobs({
-          globs: ['@expo', 'expo-*', 'react-native-!(codegen|gradle-plugin)'],
+        ...fromGlobs(['@expo', 'expo-*', 'react-native-!(codegen|gradle-plugin)'], {
           root: fromModules(),
         }),
       ],

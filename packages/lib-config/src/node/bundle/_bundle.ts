@@ -18,6 +18,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import { fromModules } from '#lib-backend/file/utils/fromModules/fromModules';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
+import { joinPaths } from '#lib-backend/file/utils/joinPaths/joinPaths';
 import { _plugins } from '#lib-config/node/bundle/_plugins';
 import {
   type _BundleConfigModel,
@@ -28,7 +29,6 @@ import { PLATFORM } from '#lib-platform/core/core.constants';
 import { type PlatformModel } from '#lib-platform/core/core.models';
 import { type ReturnTypeModel } from '#lib-shared/core/core.models';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
-import { joinExtension } from '#lib-shared/core/utils/joinExtension/joinExtension';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 
 function vitePluginIsomorphicImport(serverExtension: string): Plugin {
@@ -45,11 +45,11 @@ function vitePluginIsomorphicImport(serverExtension: string): Plugin {
           const i = resolved?.id.lastIndexOf('.');
           const idF =
             i === -1
-              ? joinExtension(resolved.id, serverExtension)
-              : `${joinExtension(
-                  resolved.id.substring(0, i),
-                  serverExtension,
-                )}${resolved.id.substring(i)}`;
+              ? joinPaths({ extension: serverExtension, paths: [resolved.id] })
+              : `${joinPaths({
+                  extension: serverExtension,
+                  paths: [resolved.id.substring(0, i)],
+                })}${resolved.id.substring(i)}`;
           const resolvedServer = await this.resolve(idF, importer, { ...options, skipSelf: true });
           if (resolvedServer && existsSync(resolvedServer.id)) {
             resolved = resolvedServer;

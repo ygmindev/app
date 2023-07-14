@@ -7,7 +7,7 @@ import {
   type ScriptTarget,
 } from 'typescript';
 
-import { fromBuild } from '#lib-backend/file/utils/fromBuild/fromBuild';
+import { fromDist } from '#lib-backend/file/utils/fromDist/fromDist';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { packages } from '#lib-backend/file/utils/packages/packages';
 import { toRelative } from '#lib-backend/file/utils/toRelative/toRelative';
@@ -22,7 +22,7 @@ export const _typescript = ({
   rootDir,
   types,
 }: TypescriptConfigModel): _TypescriptConfigModel => {
-  const root = toRelative({ from: fromBuild(), to: rootDir });
+  const root = toRelative({ from: fromDist(), to: rootDir });
   return {
     compilerOptions: {
       allowJs: true,

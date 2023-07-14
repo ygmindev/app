@@ -13,7 +13,7 @@ export type _ScreenModel = {
 
   press: CallablePromiseModel<void, string>;
 
-  snapshot(params: { match?: boolean; name: string; path?: string }): Promise<void>;
+  snapshot(params: { match?: boolean; name: string }): Promise<void>;
 
   type(testID: string, value: string): Promise<void>;
 };

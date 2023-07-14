@@ -19,9 +19,10 @@ describe('sign in', () => {
     await screenF.snapshot({ name: 'email' });
 
     await screenF.press(`${USERNAME_FORM_TEST_ID}-submit`);
-    await screenF.snapshot({ name: 'otp1' });
+    // await sleep(THEME_CONFIG.animation.transition);
+
     await screenF.type('otp', OTP_STATIC);
-    await screenF.snapshot({ name: 'otp2' });
+    await screenF.snapshot({ name: 'otp' });
 
     expect(1).toStrictEqual(1);
   });

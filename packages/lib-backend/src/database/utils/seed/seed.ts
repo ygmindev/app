@@ -11,8 +11,7 @@ import { type CallablePromiseModel } from '#lib-shared/core/core.models';
 import { type EntityResourceServiceModel } from '#lib-shared/resource/services/EntityResourceService/EntityResourceService.models';
 
 export const seed = async ({ names }: SeedParamsModel = {}): Promise<void> => {
-  const services = fromGlobs({
-    globs: ['**/resources/**/*Service.ts'],
+  const services = fromGlobs(['**/resources/**/*Service.ts'], {
     isAbsolute: true,
     root: fromPackages('lib-backend/src'),
   });

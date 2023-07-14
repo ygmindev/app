@@ -19,7 +19,6 @@ import { PROMPT_TYPE } from '#tool-task/core/utils/prompt/prompt.constants';
 const getTemplateVariables = async (from: string): Promise<Array<string>> => {
   const base = basename(from);
   let variables: Array<string> = base.match(BOILERPLATE_TEMPLATE_VARIABLE_PATTERN) || [];
-
   for (const child of children(from)) {
     if (child.isDirectory) {
       variables = variables.concat((await getTemplateVariables(child.fullPath)).flat());
@@ -28,7 +27,6 @@ const getTemplateVariables = async (from: string): Promise<Array<string>> => {
       variables = variables.concat(content.match(BOILERPLATE_TEMPLATE_VARIABLE_PATTERN) || []);
     }
   }
-
   return variables;
 };
 
@@ -46,7 +44,7 @@ export const boilerplate = async ({
     : templateVariables;
 
   let outputF = output;
-  const variablesF: Record<string, string> = variables || {};
+  const variablesF: Record<string, string> = variables ?? {};
   const resolveVariable = async (variable: string): Promise<string> => {
     if (variablesF[variable]) {
       return variablesF[variable];
@@ -59,7 +57,7 @@ export const boilerplate = async ({
         const { path } = await prompt([
           { basePath: fromPackages(root, 'src'), key: 'path', type: PROMPT_TYPE.DIRECTORY },
         ]);
-        outputF = fromPackages(root, trim(`src/${path}`), '/');
+        outputF = fromPackages(root, `src/${path}`);
         value = trim(join(target, path), '/');
         break;
       }

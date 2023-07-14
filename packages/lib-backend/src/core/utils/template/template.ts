@@ -4,6 +4,6 @@ import {
   type TemplateParamsModel,
 } from '#lib-backend/core/utils/template/template.models';
 
-export const template = async <TParams>({
-  ...params
-}: TemplateParamsModel<TParams>): Promise<TemplateModel> => _template({ ...params });
+export const template = async <TParams>(
+  params: TemplateParamsModel<TParams>,
+): Promise<TemplateModel> => _template(params);

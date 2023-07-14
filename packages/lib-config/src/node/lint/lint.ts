@@ -1,4 +1,4 @@
-import { fromBuild } from '#lib-backend/file/utils/fromBuild/fromBuild';
+import { fromDist } from '#lib-backend/file/utils/fromDist/fromDist';
 import { fromExecutable } from '#lib-backend/file/utils/fromExecutable/fromExecutable';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
@@ -21,7 +21,7 @@ const { _config, config } = defineConfig({
   _config: _lint,
 
   config: {
-    configFile: fromBuild('.eslintrc.json'),
+    configFile: fromDist('.eslintrc.json'),
 
     include: [fromWorking('src/**/*')],
 

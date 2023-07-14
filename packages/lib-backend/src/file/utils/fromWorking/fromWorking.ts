@@ -1,9 +1,8 @@
-import { join } from 'path';
-
 import {
   type FromWorkingModel,
   type FromWorkingParamsModel,
 } from '#lib-backend/file/utils/fromWorking/fromWorking.models';
+import { joinPaths } from '#lib-backend/file/utils/joinPaths/joinPaths';
 
 export const fromWorking = (...paths: FromWorkingParamsModel): FromWorkingModel =>
-  join(process.cwd(), ...paths);
+  joinPaths({ paths: [process.cwd(), ...paths] });

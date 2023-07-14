@@ -8,11 +8,10 @@ import { pathsToModuleNameMapper } from 'ts-jest';
 import { fromConfig } from '#lib-backend/file/utils/fromConfig/fromConfig';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
+import { joinPaths } from '#lib-backend/file/utils/joinPaths/joinPaths';
 import { type _TestConfigModel, type TestConfigModel } from '#lib-config/node/test/test.models';
+import { _config } from '#lib-config/node/typescript/typescript';
 import { PLATFORM } from '#lib-platform/core/core.constants';
-import { joinExtension } from '#lib-shared/core/utils/joinExtension/joinExtension';
-
-import { compilerOptions } from '../../../../../.build/tsconfig.json';
 
 export const _test = ({
   bundleConfig,
@@ -44,7 +43,9 @@ export const _test = ({
 
     moduleNameMapper: {
       ...mapKeys(bundleConfigF.aliases, (k) => `^${k}$`),
-      ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: fromRoot() }),
+      ...(_config.compilerOptions?.paths
+        ? pathsToModuleNameMapper(_config.compilerOptions.paths, { prefix: fromRoot() })
+        : {}),
       [`\\.(${fileExtensions.join('|')})$`]: join(mockPath, 'file'),
     },
 
@@ -80,8 +81,8 @@ export const _test = ({
         const extF = trim(ext, '.');
         return [
           ...result,
-          joinExtension(`<rootDir>/src/**/${match ?? '*'}`, extF),
-          joinExtension(`<rootDir>/src/**/_${match ?? '*'}`, extF),
+          joinPaths({ extension: extF, paths: [`<rootDir>/src/**/${match ?? '*'}`] }),
+          joinPaths({ extension: extF, paths: [`<rootDir>/src/**/_${match ?? '*'}`] }),
         ];
       },
       [] as Array<string>,

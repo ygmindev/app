@@ -4,10 +4,10 @@ import { existsSync } from 'fs';
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { fromGlobs } from '#lib-backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
+import { joinPaths } from '#lib-backend/file/utils/joinPaths/joinPaths';
 import { packages } from '#lib-backend/file/utils/packages/packages';
 import { type _TaskConfigModel, type TaskConfigModel } from '#lib-config/core/task/task.models';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
-import { joinExtension } from '#lib-shared/core/utils/joinExtension/joinExtension';
 import { requireInterop } from '#lib-shared/core/utils/requireInterop/requireInterop';
 import { type TaskParamsModel } from '#tool-task/core/core.models';
 import { prompt } from '#tool-task/core/utils/prompt/prompt';
@@ -19,8 +19,7 @@ export const _task = ({ packageFilename, taskExtension }: TaskConfigModel): _Tas
 
   const tasks = filterNil([
     // Task files
-    ...fromGlobs({
-      globs: [joinExtension('*/src/**/*', taskExtension)],
+    ...fromGlobs([joinPaths({ extension: taskExtension, paths: ['*/src/**/*'] })], {
       isAbsolute: true,
       root: fromPackages(),
     }).map((path) => requireInterop<TaskParamsModel>(path)),

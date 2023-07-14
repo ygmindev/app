@@ -25,7 +25,6 @@ const generate: TaskParamsModel<GenerateParamsModel> = {
     const { onSuccess, output, prepare } = (config as GenerateConfigModel)[template] || {};
     const params = merge([{ onSuccess, output }, prepare ? await prepare() : {}]);
     await boilerplate({ ...params, template });
-
     return { status: TASK_STATUS.SUCCESS };
   },
 };

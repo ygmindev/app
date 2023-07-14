@@ -2,6 +2,7 @@ import { toMatchImageSnapshot } from 'jest-image-snapshot';
 
 import { fromConfig } from '#lib-backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
+import { config as fileConfig } from '#lib-config/core/file/file';
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { config as bundleConfig } from '#lib-config/node/bundle/bundle.base';
 import { _test } from '#lib-config/node/test/_test';
@@ -30,7 +31,7 @@ const { _config, config } = defineConfig({
         expect.extend({ toMatchImageSnapshot });
       },
 
-      outputPath: fromWorking('dist'),
+      outputPath: fromWorking(fileConfig.distDir),
 
       testExtensions: permuteString(['.e2e', '.spec'], extensions()),
 

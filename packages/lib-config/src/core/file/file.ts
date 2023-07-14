@@ -3,15 +3,17 @@ import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { type FileConfigModel } from '#lib-config/core/file/file.models';
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 
+const BUILD_DIR = '.build';
+
 // TODO: Update
 const CLEAN_PATTERNS = [
+  BUILD_DIR,
   '.cache',
   '.esbuild',
   '.eslintcache',
   '.swc',
   '*.log*',
   '.DS_Store',
-  'dist',
   'coverage',
   'public/assets',
 ];
@@ -20,9 +22,11 @@ const { _config, config } = defineConfig({
   config: {
     backupDir: fromRoot('../backups'),
 
-    buildDir: fromRoot('.build'),
+    buildDir: BUILD_DIR,
 
     cleanPatterns: CLEAN_PATTERNS,
+
+    distDir: '.dist',
 
     excludePatterns: [...CLEAN_PATTERNS, '.git', 'ios/Pods', 'node_modules'],
 

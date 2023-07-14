@@ -27,6 +27,8 @@ export type RequiredModel<TType> = Required<TType>;
 
 export type EmptyObjectModel = Record<string, never>;
 
+export type NillableArrayModel<TType> = Array<TType | '' | boolean | undefined | null>;
+
 export type BooleanStringModel = `${BOOLEAN_STRING}`;
 
 export type CallableModel<TResult = void, TParams = void> = (args: TParams) => TResult;

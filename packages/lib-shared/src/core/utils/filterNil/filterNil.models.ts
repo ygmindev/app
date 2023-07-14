@@ -1,3 +1,5 @@
-export type FilterNilParamsModel<TType> = Array<TType | '' | boolean | undefined | null>;
+import { type NillableArrayModel } from '#lib-shared/core/core.models';
+
+export type FilterNilParamsModel<TType> = NillableArrayModel<TType>;
 
 export type FilterNilModel<TType> = Array<TType>;
