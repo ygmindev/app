@@ -266,6 +266,7 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
           secureTextEntry={keyboard === TEXT_FIELD_KEYBOARD.PASSWORD}
           spellCheck={false}
           style={{ height }}
+          testID={`${testID}-input`}
           textColor={theme.color.palette.surface.contrast}
           textContentType={getTextContentType(autoComplete, keyboard)}
           theme={{ animation: { scale: 1 }, colors: { background: 'transparent' } }}

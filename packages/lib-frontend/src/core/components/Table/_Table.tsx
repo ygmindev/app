@@ -46,7 +46,7 @@ export const _Table = forwardRef(
     const theme = useTheme();
     const [gridApi, gridApiSet] = useState<GridApi>();
     const [columnApi, columnApiSet] = useState<ColumnApi>();
-    const { duration } = theme.animation;
+    const { motion: duration } = theme.animation;
 
     useImperativeHandle(ref, () => ({
       deselectRows: () => gridApi && gridApi.deselectAll(),

@@ -11,7 +11,7 @@ import { type FontFamilyModel } from '#lib-frontend/style/utils/styler/fontStyle
 
 export type ThemeConfigModel = {
   animation: {
-    duration: number;
+    effect: number;
 
     transition: number;
   };

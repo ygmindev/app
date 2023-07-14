@@ -15,7 +15,7 @@ export const useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
     ...props,
     animation: {
       ...animation,
-      duration: animation?.duration || theme.animation.duration,
+      duration: animation?.duration || theme.animation.motion,
     },
   });
 };

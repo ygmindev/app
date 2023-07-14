@@ -39,6 +39,8 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
   });
   const [measure, measureSet] = useState<MeasureModel>();
   const [isFocused, isFocusedSet] = useState<boolean>(false);
+  console.warn('HERE!!!');
+  console.error(valueControlled);
   return (
     <Wrapper
       isCenter
@@ -82,6 +84,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             onBlur={() => isFocusedSet(false)}
             onChange={valueControlledSet}
             onFocus={() => isFocusedSet(true)}
+            testID={`${testID}-input`}
             value={valueControlled}
           />
         </Wrapper>

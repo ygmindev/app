@@ -2,6 +2,8 @@ import { join } from 'path';
 import { type Browser, type Page } from 'puppeteer';
 import { launch } from 'puppeteer';
 
+import { joinPaths } from '#lib-backend/file/utils/joinPaths/joinPaths';
+import { sleepForEffect } from '#lib-frontend/animation/utils/sleepForEffect/sleepForEffect';
 import { slug } from '#lib-frontend/route/utils/slug/slug';
 import {
   type _ScreenModel,
@@ -21,7 +23,8 @@ export const _screen = async ({
     (await launch({
       args: dimension ? [`--window-size-${dimension.width},${dimension.height}`] : undefined,
       defaultViewport: null,
-      headless: 'new',
+      // headless: 'new',
+      headless: false,
       ignoreHTTPSErrors: true,
     }));
   page = page ?? (await browser.newPage());
@@ -46,15 +49,16 @@ export const _screen = async ({
           customDiffDir: join(outputPath, 'diffs'),
           customReceivedDir: join(outputPath, 'received'),
           customSnapshotIdentifier: ({ currentTestName }) =>
-            join(slug(currentTestName), slug(name)),
+            joinPaths({ extension: imageExtension, paths: [slug(currentTestName), slug(name)] }),
           customSnapshotsDir: join(outputPath, 'snapshots'),
         });
     },
 
     type: async (testID, value) => {
-      const selector = `[data-testid="${testID}"] input`;
+      const selector = `[data-testid="${testID}"]`;
       await page.waitForSelector(selector);
       await page.focus(selector);
+      await sleepForEffect();
       await page.type(selector, value);
     },
   };

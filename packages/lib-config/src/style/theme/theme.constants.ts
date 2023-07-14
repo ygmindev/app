@@ -15,7 +15,7 @@ export const THEME_COLOR_TONES: Record<ThemeColorModel, string> = {
 
 export const THEME_CONFIG = {
   animation: {
-    duration: 150,
+    motion: 150,
 
     transition: 400,
   },
