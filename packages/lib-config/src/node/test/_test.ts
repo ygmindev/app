@@ -17,11 +17,11 @@ import { compilerOptions } from '../../../../../.build/tsconfig.json';
 export const _test = ({
   bundleConfig,
   cachePath,
-  coverageOutputPath,
   fileExtensions,
   isWatch,
   match,
   mockPath,
+  outputPath,
   root,
   testExtensions,
   timeout,
@@ -32,7 +32,7 @@ export const _test = ({
 
     collectCoverage: true,
 
-    coverageDirectory: coverageOutputPath,
+    coverageDirectory: join(outputPath, 'coverage'),
 
     coverageReporters: ['lcov'],
 
@@ -55,11 +55,11 @@ export const _test = ({
     reporters: [
       'default',
       [
-        'jest-stare',
+        'jest-html-reporters',
         {
-          coverageLink: join(coverageOutputPath, 'lcov-report/index.html'),
-          reportSummary: true,
-          resultDir: join(coverageOutputPath, 'js-stare'),
+          darkTheme: true,
+          openReport: process.env.NODE_ENV === 'test',
+          publicPath: outputPath,
         },
       ],
     ],

@@ -1,7 +1,10 @@
 import pick from 'lodash/pick';
 import { useMemo } from 'react';
 
-import { USERNAME_FORM_VALIDATORS } from '#lib-frontend/auth/containers/UsernameForm/UsernameForm.constants';
+import {
+  USERNAME_FORM_TEST_ID,
+  USERNAME_FORM_VALIDATORS,
+} from '#lib-frontend/auth/containers/UsernameForm/UsernameForm.constants';
 import {
   type UsernameFormModel,
   type UsernameFormPropsModel,
@@ -132,6 +135,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
         onSubmit={handleSubmit}
         onSuccess={onSuccess}
         rows={rows}
+        testID={USERNAME_FORM_TEST_ID}
         validators={USERNAME_FORM_VALIDATORS}></FormContainer>
     </CenterLayout>
   );

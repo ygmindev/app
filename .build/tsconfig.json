@@ -88,7 +88,8 @@
     "types": [
       "react-native",
       "jest",
-      "vite/client"
+      "vite/client",
+      "@types/jest-image-snapshot"
     ]
   },
   "ts-node": {

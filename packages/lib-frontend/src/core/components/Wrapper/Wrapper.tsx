@@ -83,6 +83,7 @@ export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
     };
 
     const childrenF = useMemo(() => getChildren(children), [children]);
+
     return animation
       ? createElement(AnimatableView, { ...props, animation, ref, style: styles }, childrenF)
       : createElement(View, { ...props, ref, style: styles }, childrenF);

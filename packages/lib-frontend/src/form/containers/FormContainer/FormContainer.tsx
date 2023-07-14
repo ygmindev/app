@@ -33,6 +33,7 @@ import { useNotification } from '#lib-frontend/notification/hooks/useNotificatio
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { BORDER_RADIUS_DIRECTION } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
+import { uid } from '#lib-shared/core/utils/uid/uid';
 import { FIELD_TYPE } from '#lib-shared/form/form.constants';
 
 export const FormContainer = forwardRef(
@@ -147,7 +148,7 @@ const FormContainerF = forwardRef(
         defaultValue: initialValues ? (initialValues as Record<string, undefined>)[id] : undefined,
         elementState: isDisabled
           ? ELEMENT_STATE.DISABLED
-          : elementStateF || fieldProps?.elementState,
+          : elementStateF ?? fieldProps?.elementState,
         error: errors ? (errors as Record<string, undefined>)[id] : undefined,
         isAutoFocus:
           autoFocus === id ||
@@ -248,15 +249,16 @@ const FormContainerF = forwardRef(
                 icon="chevronLeft"
                 onPress={onCancel}
                 type={BUTTON_TYPE.TRANSPARENT}>
-                {cancelLabel || t('core:cancel')}
+                {cancelLabel ?? t('core:cancel')}
               </Button>
             )}
 
             <Button
               elementState={elementStateF}
               icon="chevronRight"
-              onPress={handleSubmit}>
-              {submitLabel || t('core:continue')}
+              onPress={handleSubmit}
+              testID={`${testID ?? uid()}-submit`}>
+              {submitLabel ?? t('core:continue')}
             </Button>
           </Wrapper>
         )}

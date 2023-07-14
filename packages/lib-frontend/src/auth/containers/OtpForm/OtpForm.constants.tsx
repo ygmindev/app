@@ -14,7 +14,7 @@ export const OTP_FORM_FIELDS: Array<FormContainerRowModel> = withId([
   {
     fields: [
       {
-        Component: ({ elementState, error, onChange, onSubmit, value }) => (
+        Component: ({ elementState, error, onChange, onSubmit, testID, value }) => (
           <OtpField
             elementState={elementState}
             error={error}
@@ -25,6 +25,7 @@ export const OTP_FORM_FIELDS: Array<FormContainerRowModel> = withId([
                 onSubmit && onSubmit();
               }
             }}
+            testID={testID}
             value={value}
           />
         ),

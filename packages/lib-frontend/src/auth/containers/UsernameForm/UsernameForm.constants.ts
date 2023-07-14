@@ -9,3 +9,5 @@ export const USERNAME_FORM_VALIDATORS: FormValidatorsModel<UsernameFormModel> = 
   email: (params) => (params.data?.phone ? null : validateEmail(params)),
   phone: (params) => (params.data?.email ? null : validatePhone(params)),
 };
+
+export const USERNAME_FORM_TEST_ID = 'username';

@@ -1,6 +1,7 @@
 import { type Config } from '@jest/types';
 
 import { type BundleConfigModel } from '#lib-config/node/bundle/bundle.models';
+import { type DimensionModel } from '#lib-frontend/core/core.models';
 import {
   type OptionalCallableModel,
   type OptionalCallablePromiseModel,
@@ -12,9 +13,11 @@ export type TestConfigModel = {
 
   cachePath: string;
 
-  coverageOutputPath: string;
+  dimension?: DimensionModel;
 
   fileExtensions: Array<string>;
+
+  imageExtension: string;
 
   isWatch?: boolean;
 
@@ -31,6 +34,8 @@ export type TestConfigModel = {
   onBeforeAll?: OptionalCallablePromiseModel;
 
   onBeforeEach?: OptionalCallablePromiseModel;
+
+  outputPath: string;
 
   root?: string;
 

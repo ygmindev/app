@@ -1,3 +1,5 @@
+import { toMatchImageSnapshot } from 'jest-image-snapshot';
+
 import { fromConfig } from '#lib-backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
@@ -16,11 +18,19 @@ const { _config, config } = defineConfig({
 
       cachePath: fromWorking('.cache/test'),
 
-      coverageOutputPath: fromWorking('coverage'),
+      dimension: { height: 800, width: 1280 },
 
       fileExtensions: ['gif', 'jpeg', 'jpg', 'otf', 'png', 'svg', 'ttf', 'woff', 'woff2'],
 
+      imageExtension: 'png',
+
       mockPath: fromConfig('node/test/params/__mocks__'),
+
+      onBeforeAll: async () => {
+        expect.extend({ toMatchImageSnapshot });
+      },
+
+      outputPath: fromWorking('dist'),
 
       testExtensions: permuteString(['.e2e', '.spec'], extensions()),
 

@@ -6,12 +6,16 @@ import {
 import { joinExtension } from '#lib-shared/core/utils/joinExtension/joinExtension';
 import { requireInterop } from '#lib-shared/core/utils/requireInterop/requireInterop';
 import { resolveFirst } from '#lib-shared/core/utils/resolveFirst/resolveFirst';
+import { debug } from '#lib-shared/logging/utils/logger/logger';
 
 export const importFromEnv = async <TType>(
   params: ImportFromEnvParamsModel,
 ): Promise<ImportFromEnvModel<TType>> =>
   resolveFirst<TType>(
-    extensions().map(
-      (ext) => async () => requireInterop<TType>(ext ? joinExtension(params, ext) : params),
-    ),
+    extensions().map((ext) => async () => {
+      const name = ext ? joinExtension(params, ext) : params;
+      const result = requireInterop<TType>(name);
+      result && debug('imported', name);
+      return result;
+    }),
   );

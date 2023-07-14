@@ -15,6 +15,8 @@ const { _config, config } = defineConfig({
     {
       bundleConfig,
 
+      dimension: { height: 844, width: 390 },
+
       mocks: [
         ['@react-native-async-storage/async-storage', () => mockAsyncStorage] as [
           string,

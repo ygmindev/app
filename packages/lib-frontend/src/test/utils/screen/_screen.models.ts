@@ -1,11 +1,19 @@
+import { type TestConfigModel } from '#lib-config/node/test/test.models';
 import { type CallablePromiseModel } from '#lib-shared/core/core.models';
 
-export type _ScreenModel = {
-  click(testID: string): Promise<void>;
+export type _ScreenParamsModel = Pick<
+  TestConfigModel,
+  'dimension' | 'imageExtension' | 'outputPath'
+>;
 
+export type _ScreenModel = {
   close: CallablePromiseModel;
 
-  open(route: string): Promise<void>;
+  goto: CallablePromiseModel<void, string>;
+
+  press: CallablePromiseModel<void, string>;
+
+  snapshot(params: { match?: boolean; name: string; path?: string }): Promise<void>;
 
   type(testID: string, value: string): Promise<void>;
 };
