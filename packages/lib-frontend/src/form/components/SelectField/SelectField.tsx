@@ -88,7 +88,8 @@ export const SelectField = <TType extends string = string>({
   return (
     <Wrapper
       isFullWidth
-      style={styles}>
+      style={styles}
+      testID={testID}>
       <Menu
         anchor={(isOpen) => (
           <TextField
@@ -126,7 +127,6 @@ export const SelectField = <TType extends string = string>({
               </AnimatableView>
             }
             round={round}
-            testID={testID}
             value={isOpen ? query : t(selectedLabel)}
             width={width}
           />

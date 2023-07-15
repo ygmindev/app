@@ -39,8 +39,6 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
   });
   const [measure, measureSet] = useState<MeasureModel>();
   const [isFocused, isFocusedSet] = useState<boolean>(false);
-  console.warn('HERE!!!');
-  console.error(valueControlled);
   return (
     <Wrapper
       isCenter
@@ -51,6 +49,24 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
         isRowAlign
         onMeasure={measureSet}
         position={SHAPE_POSITION.RELATIVE}>
+        <Wrapper
+          isAbsoluteFill
+          opacity={0}
+          zIndex={1}>
+          <TextField
+            defaultValue=""
+            elementState={elementState}
+            isAutoFocus={isAutoFocus}
+            isNoClear
+            keyboard={TEXT_FIELD_KEYBOARD.NUMBER}
+            maxLength={OTP_LENGTH}
+            onBlur={() => isFocusedSet(false)}
+            onChange={valueControlledSet}
+            onFocus={() => isFocusedSet(true)}
+            value={valueControlled}
+          />
+        </Wrapper>
+
         {IDS.map(({ id }, i) => (
           <TextField
             defaultValue=""
@@ -69,25 +85,6 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             width={theme.shape.height.m}
           />
         ))}
-
-        <Wrapper
-          isAbsoluteFill
-          opacity={0}
-          zIndex={1}>
-          <TextField
-            defaultValue=""
-            elementState={elementState}
-            isAutoFocus={isAutoFocus}
-            isNoClear
-            keyboard={TEXT_FIELD_KEYBOARD.NUMBER_POSITIVE}
-            maxLength={OTP_LENGTH}
-            onBlur={() => isFocusedSet(false)}
-            onChange={valueControlledSet}
-            onFocus={() => isFocusedSet(true)}
-            testID={`${testID}-input`}
-            value={valueControlled}
-          />
-        </Wrapper>
 
         <Wrapper
           isRowAlign

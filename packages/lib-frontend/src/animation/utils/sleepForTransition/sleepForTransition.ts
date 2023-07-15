@@ -3,4 +3,4 @@ import { type SleepForTransitionModel } from '#lib-frontend/animation/utils/slee
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 export const sleepForTransition = async (): Promise<SleepForTransitionModel> =>
-  sleep(THEME_CONFIG.animation.transition);
+  sleep(THEME_CONFIG.animation.transition + 100);

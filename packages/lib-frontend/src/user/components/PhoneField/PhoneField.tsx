@@ -29,7 +29,6 @@ export const PhoneField: SFCModel<PhoneFieldPropsModel> = ({
       label={t('user:phone')}
       onChange={valueControlledSet}
       style={styles}
-      testID={testID}
       value={valueControlled}
     />
   );

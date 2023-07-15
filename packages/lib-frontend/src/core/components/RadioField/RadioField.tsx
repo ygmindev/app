@@ -21,6 +21,7 @@ export const RadioField = <TType extends string = string>({
   isHorizontal,
   onChange,
   options,
+  testID,
   value,
   ...props
 }: SFCPropsModel<RadioFieldPropsModel<TType>>): ReactElement<
@@ -41,7 +42,8 @@ export const RadioField = <TType extends string = string>({
     <Wrapper
       isRow={isHorizontal}
       s={THEME_SIZE.SMALL}
-      style={styles}>
+      style={styles}
+      testID={testID}>
       {options.map(({ icon, id, label }) => {
         const isActiveF = id === valueControlled;
         const colorF =

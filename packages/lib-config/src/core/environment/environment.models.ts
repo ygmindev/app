@@ -39,7 +39,6 @@ export type EnvironmentConfigModel = {
   SERVER_FIREBASE_ADMIN_EMAIL: string;
   SERVER_FIREBASE_ADMIN_PROJECT_ID: string;
   SERVER_FIREBASE_ADMIN_SECRET: string;
-  SERVER_IS_OTP_STATIC?: BooleanStringModel;
   SERVER_IV_LENGTH: string;
   SERVER_KEY_LENGTH: string;
   SERVER_LAMBDA_HOST: string;

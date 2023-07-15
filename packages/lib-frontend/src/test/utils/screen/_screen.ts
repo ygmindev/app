@@ -23,8 +23,7 @@ export const _screen = async ({
     (await launch({
       args: dimension ? [`--window-size-${dimension.width},${dimension.height}`] : undefined,
       defaultViewport: null,
-      // headless: 'new',
-      headless: false,
+      headless: 'new',
       ignoreHTTPSErrors: true,
     }));
   page = page ?? (await browser.newPage());
@@ -55,11 +54,12 @@ export const _screen = async ({
     },
 
     type: async (testID, value) => {
-      const selector = `[data-testid="${testID}"]`;
+      const selector = `[data-testid="${testID}"] input`;
       await page.waitForSelector(selector);
-      await page.focus(selector);
+      const [input] = await page.$$(selector);
+      await input.focus();
       await sleepForEffect();
-      await page.type(selector, value);
+      await page.keyboard.type(value);
     },
   };
 };

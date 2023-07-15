@@ -52,9 +52,8 @@ export class OtpService
     beforeCreate: async ({ input }) => {
       const service = Container.get(OtpService);
       await service.remove({ filter: cleanObject(input.form) });
-      input.form.otp = process.env.SERVER_IS_OTP_STATIC
-        ? OTP_STATIC
-        : randomInt(OTP_LENGTH).toString();
+      input.form.otp =
+        process.env.NODE_ENV === 'test' ? OTP_STATIC : randomInt(OTP_LENGTH).toString();
       return input;
     },
 
