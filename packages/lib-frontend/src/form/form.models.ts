@@ -2,19 +2,15 @@ import { type IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.mod
 import { type WrapperPropsModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
 import { type ElementStatePropsModel, type ValuePropsModel } from '#lib-frontend/core/core.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
-import {
-  type CallableModel,
-  type InferModel,
-  type PrimitiveModel,
-} from '#lib-shared/core/core.models';
+import { type InferModel, type PrimitiveModel } from '#lib-shared/core/core.models';
 
 export type FieldPropsModel<TType> = {
   error?: TranslatableTextModel | boolean;
   isAutoFocus?: boolean;
   isTransparent?: boolean;
   label?: TranslatableTextModel;
-  onBlur?: CallableModel;
-  onFocus?: CallableModel;
+  onBlur?(): void;
+  onFocus?(): void;
 } & Pick<IconPropsModel, 'icon'> &
   ElementStatePropsModel &
   ValuePropsModel<TType> &
@@ -41,8 +37,8 @@ export type FormValidatorsModel<TType> = {
 
 export type SubmittablePropsModel<TType = void, TResult = void> = {
   beforeSubmit?(data: TType): Promise<TType>;
-  onCancel?: CallableModel;
-  onComplete?: CallableModel;
+  onCancel?(): void;
+  onComplete?(): void;
   onError?(error: Error): void;
   onSubmit?(data: TType): Promise<TResult | null>;
   onSuccess?(data: TType, result?: TResult | null): Promise<void>;
@@ -57,6 +53,6 @@ export type TranslatableFieldPropsModel<TType extends StringFieldPropsModel> = O
 };
 
 export type FormRefModel = {
-  reset: CallableModel;
-  submit: CallableModel;
+  reset(): void;
+  submit(): void;
 };

@@ -2,16 +2,12 @@ import { type ReactElement } from 'react';
 
 import { type ChildrenPropsModel } from '#lib-frontend/core/core.models';
 import { type SubmittablePropsModel } from '#lib-frontend/form/form.models';
-import {
-  type CallableModel,
-  type IntersectionModel,
-  type PartialModel,
-} from '#lib-shared/core/core.models';
+import { type IntersectionModel, type PartialModel } from '#lib-shared/core/core.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
 export type FormStepPropsModel<TType, TStep = PartialModel<TType>, TResult = void> = {
   data?: TStep;
-  onBack?: CallableModel;
+  onBack?(): void;
 } & SubmittablePropsModel<TStep, TResult>;
 
 export type FormStepModel<TType, TStep = PartialModel<TType>> = {

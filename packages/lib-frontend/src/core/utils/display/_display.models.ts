@@ -1,12 +1,8 @@
 import { type DimensionModel } from '#lib-frontend/core/core.models';
-import { type CallableModel } from '#lib-shared/core/core.models';
 
 export type _DisplayModel = {
   getDimension(): DimensionModel;
-  open(
-    uri: string,
-    options: DimensionModel & { onClose?: CallableModel; onOpen?: CallableModel },
-  ): void;
+  open(uri: string, options: DimensionModel & { onClose?(): void; onOpen?(): void }): void;
   subscribeEvent<TType extends Event>(name: string, cb: (event: TType) => void): void;
   subscribeMessage(cb: (event: MessageEvent) => void): void;
   subscribeResize(cb: () => void): void;

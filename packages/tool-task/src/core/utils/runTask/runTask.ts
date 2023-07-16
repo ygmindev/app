@@ -3,21 +3,18 @@ import isString from 'lodash/isString';
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
-import { type OptionalCallablePromiseModel } from '#lib-shared/core/core.models';
 import { sequence } from '#lib-shared/core/utils/sequence/sequence';
 import { setEnvironment } from '#lib-shared/environment/utils/setEnvironment/setEnvironment';
 import { error, info, warn } from '#lib-shared/logging/utils/logger/logger';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
-import { type TaskResultModel } from '#tool-task/core/core.models';
+import { type TaskFunctionModel } from '#tool-task/core/core.models';
 import {
   type RunTaskModel,
   type RunTaskParamsModel,
 } from '#tool-task/core/utils/runTask/runTask.models';
 import { TaskRunner } from '#tool-task/core/utils/TaskRunner/TaskRunner';
 
-const getTask = (
-  task: string | OptionalCallablePromiseModel<TaskResultModel>,
-): OptionalCallablePromiseModel<TaskResultModel> =>
+const getTask = (task: string | TaskFunctionModel): TaskFunctionModel =>
   isString(task) ? Container.get(TaskRunner).getTask(task) : task;
 
 export const runTask = async <TType = undefined>({
@@ -31,7 +28,7 @@ export const runTask = async <TType = undefined>({
   target,
   task,
 }: RunTaskParamsModel<TType>): Promise<RunTaskModel> => {
-  const handleClose: OptionalCallablePromiseModel = async () => {
+  const handleClose = async (): Promise<void> => {
     process.exit(0);
   };
 

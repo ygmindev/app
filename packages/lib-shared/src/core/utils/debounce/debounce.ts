@@ -1,6 +1,5 @@
 import _debounce from 'lodash/debounce';
 
-import { type ArrayCallableModel } from '#lib-shared/core/core.models';
 import {
   type DebounceModel,
   type DebounceParamsModel,
@@ -13,4 +12,4 @@ export const debounce = <TResult = void, TParams extends Array<unknown> = Array<
     callback,
     duration,
     isLeading ? { leading: true, trailing: false } : { leading: false, trailing: true },
-  ) as ArrayCallableModel<TResult, TParams>;
+  ) as DebounceModel<TResult, TParams>;

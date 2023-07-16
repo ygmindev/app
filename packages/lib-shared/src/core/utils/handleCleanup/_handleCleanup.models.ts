@@ -1,7 +1,5 @@
-import { type OptionalCallablePromiseModel } from '#lib-shared/core/core.models';
-
 export type _HandleCleanupParamsModel = {
-  onCleanup?: OptionalCallablePromiseModel;
+  onCleanup?(): Promise<void>;
 };
 
 export type _HandleCleanupModel = void;

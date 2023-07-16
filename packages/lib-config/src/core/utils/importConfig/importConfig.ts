@@ -5,7 +5,6 @@ import {
   type ImportConfigModel,
   type ImportConfigParamsModel,
 } from '#lib-config/core/utils/importConfig/importConfig.models';
-import { type CallableModel, type OptionalCallableModel } from '#lib-shared/core/core.models';
 import { importFromEnv } from '#lib-shared/core/utils/importFromEnv/importFromEnv';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 
@@ -13,8 +12,8 @@ export const importConfig = async <TParams, TResult = undefined>(
   ...[name, overrides]: ImportConfigParamsModel<TParams>
 ): Promise<ImportConfigModel<TParams, TResult>> => {
   const { _config, config } = await importFromEnv<{
-    _config?: TResult | CallableModel<TResult, TParams>;
-    config: TParams | OptionalCallableModel<TParams>;
+    _config?: TResult | ((params: TParams) => TResult);
+    config: TParams | (() => TParams);
   }>(fromConfig(name));
   let configF = isFunction(config) ? config() : config;
   if (overrides) {

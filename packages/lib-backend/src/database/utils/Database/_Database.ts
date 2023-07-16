@@ -8,7 +8,7 @@ import { type _DatabaseModel } from '#lib-backend/database/utils/Database/_Datab
 import { type RepositoryModel } from '#lib-backend/database/utils/Database/Database.models';
 import { getConnection } from '#lib-backend/database/utils/getConnection/getConnection';
 import { type _DatabaseConfigModel } from '#lib-config/database/database.models';
-import { type PartialDeepModel, type ReturnTypeModel } from '#lib-shared/core/core.models';
+import { type PartialDeepModel } from '#lib-shared/core/core.models';
 import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/DuplicateError';
 import { UninitializedError } from '#lib-shared/core/errors/UninitializedError/UninitializedError';
 import { debug, info } from '#lib-shared/logging/utils/logger/logger';
@@ -19,10 +19,10 @@ import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.model
 import { type UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
 
 export class _Database implements _DatabaseModel {
-  protected _config: ReturnTypeModel<_DatabaseConfigModel>;
+  protected _config: _DatabaseConfigModel;
   protected _entityManager?: EntityManager;
 
-  constructor(config: ReturnTypeModel<_DatabaseConfigModel>) {
+  constructor(config: _DatabaseConfigModel) {
     this._config = config;
   }
 

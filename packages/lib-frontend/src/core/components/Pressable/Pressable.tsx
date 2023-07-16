@@ -14,7 +14,6 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { type CallablePromiseModel } from '#lib-shared/core/core.models';
 import { isPromise } from '#lib-shared/core/utils/isPromise/isPromise';
 
 const { Button } = lazy(() => import('#lib-frontend/core/components/Button/Button'));
@@ -44,7 +43,7 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
   const isDisabled =
     valueControlled === ELEMENT_STATE.DISABLED || valueControlled === ELEMENT_STATE.LOADING;
 
-  const handleButtonPress: CallablePromiseModel = async () => {
+  const handleButtonPress = async (): Promise<void> => {
     if (!isDisabled) {
       if (confirmMessage) {
         confirmModalIsOpenSet(true);
@@ -54,7 +53,7 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
     }
   };
 
-  const handlePress: CallablePromiseModel = async () => {
+  const handlePress = async (): Promise<void> => {
     if (!isDisabled) {
       const result = onPress && onPress();
       if (isPromise(result)) {

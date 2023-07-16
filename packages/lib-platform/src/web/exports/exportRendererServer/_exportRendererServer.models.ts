@@ -5,26 +5,20 @@ import { type WebConfigModel } from '#lib-config/platform/web/web.models';
 import { type ChildrenPropsModel } from '#lib-frontend/core/core.models';
 import { type RootContextModel } from '#lib-frontend/root/root.models';
 import { type ExportRenderClientRenderParamsModel } from '#lib-platform/web/exports/exportRendererClient/exportRendererClient.models';
-import {
-  type CallableModel,
-  type CallablePromiseModel,
-  type OptionalCallablePromiseModel,
-  type ReturnTypeModel,
-} from '#lib-shared/core/core.models';
 
 export type _ExportRendererServerParamsModel = {
   // TODO: unknown to context?
-  initialize?: OptionalCallablePromiseModel<unknown>;
+  initialize?(): Promise<void>;
   render(params: { context?: RootContextModel } & ChildrenPropsModel): {
     element: ReactElement;
-    getCss: CallableModel<ReactElement>;
+    getCss(): ReactElement;
   };
-} & Pick<ReturnTypeModel<WebConfigModel>, 'publicDir' | 'rootId' | 'ssrContextKeys'>;
+} & Pick<WebConfigModel, 'publicDir' | 'rootId' | 'ssrContextKeys'>;
 
 export type _ExportRendererServerModel = {
   render(params: _PageContextModel): Promise<{
     documentHtml: { _template: unknown };
-    pageContext: _PageContextResultModel | CallablePromiseModel<_PageContextResultModel>;
+    pageContext: _PageContextResultModel | (() => Promise<_PageContextResultModel>);
   }>;
 };
 

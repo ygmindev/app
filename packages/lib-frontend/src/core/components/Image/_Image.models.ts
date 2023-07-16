@@ -1,7 +1,5 @@
-import { type CallableModel } from '#lib-shared/core/core.models';
-
 export type _ImagePropsModel = {
-  onError?: CallableModel;
-  onSuccess?: CallableModel;
+  onError?(): void;
+  onSuccess?(): void;
   src: string;
 };

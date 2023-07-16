@@ -8,7 +8,6 @@ import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathnam
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { type CallablePromiseModel } from '#lib-shared/core/core.models';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 export const useRouter = <
@@ -20,7 +19,7 @@ export const useRouter = <
   const theme = useTheme();
 
   const update = async <TNextParams extends LocationParamsModel = LocationParamsModel>(
-    callback: CallablePromiseModel,
+    callback: () => Promise<void>,
     { isBack }: Pick<PathUpdateParamsModel<TNextParams>, 'isBack'>,
   ): Promise<void> => {
     if (!isLoading) {

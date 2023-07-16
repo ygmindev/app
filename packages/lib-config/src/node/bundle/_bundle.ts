@@ -27,7 +27,6 @@ import {
 import { lintCommand } from '#lib-config/node/lint/lint';
 import { PLATFORM } from '#lib-platform/core/core.constants';
 import { type PlatformModel } from '#lib-platform/core/core.models';
-import { type ReturnTypeModel } from '#lib-shared/core/core.models';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 
@@ -96,7 +95,7 @@ export const _bundle = ({
   const isReact = ([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>).includes(
     process.env.ENV_PLATFORM,
   );
-  const config: ReturnTypeModel<_BundleConfigModel> = {
+  const config: _BundleConfigModel = {
     build: {
       assetsDir: fromWorking('assets'),
 

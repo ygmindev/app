@@ -28,11 +28,11 @@ const logger: Logger = createLogger({
   transports: [new transports.Console({ stderrLevels: ['error'] })],
 });
 
-const { _debug, _error, _info, _warn }: _LoggerModel = {
-  _debug: (message) => logger.debug.bind(logger)(message),
-  _error: (message) => logger.error.bind(logger)(message),
-  _info: (message) => logger.info.bind(logger)(message),
-  _warn: (message) => logger.warn.bind(logger)(message),
+const { debug, error, info, warn }: _LoggerModel = {
+  debug: (message) => logger.debug.bind(logger)(message),
+  error: (message) => logger.error.bind(logger)(message),
+  info: (message) => logger.info.bind(logger)(message),
+  warn: (message) => logger.warn.bind(logger)(message),
 };
 
-export { _debug, _error, _info, _warn };
+export { debug, error, info, warn };

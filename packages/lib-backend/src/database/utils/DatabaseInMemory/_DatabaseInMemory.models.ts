@@ -1,7 +1,5 @@
-import { type CallablePromiseModel } from '#lib-shared/core/core.models';
-
 export type _DatabaseInMemoryModel = {
-  start: CallablePromiseModel;
+  start(): Promise<void>;
 
-  stop: CallablePromiseModel;
+  stop(): Promise<void>;
 };

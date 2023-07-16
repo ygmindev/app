@@ -14,7 +14,7 @@ export const _textParams: ComposeComponentParamsModel<_TextPropsModel, TextProps
       children,
       ellipsizeMode: isEllipsis ? 'tail' : undefined,
       numberOfLines: isEllipsis ? 1 : undefined,
-      onPress: onPress ? () => onPress() : undefined,
+      onPress,
     }),
   };
 

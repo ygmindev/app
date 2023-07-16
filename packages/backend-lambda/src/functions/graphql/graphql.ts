@@ -1,11 +1,10 @@
 import { initialize } from '#backend-lambda/setup/utils/initialize/initialize';
 import { type InitializeModel } from '#backend-lambda/setup/utils/initialize/initialize.models';
 import { createHandler } from '#lib-backend/serverless/utils/createHandler/createHandler';
-import { type OptionalCallablePromiseModel } from '#lib-shared/core/core.models';
 
 let initialized: InitializeModel;
 
-const getInitialized: OptionalCallablePromiseModel<InitializeModel> = async () => {
+const getInitialized = async (): Promise<InitializeModel> => {
   initialized = initialized ?? (await initialize());
   return initialized;
 };

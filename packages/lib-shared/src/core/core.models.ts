@@ -31,42 +31,19 @@ export type NillableArrayModel<TType> = Array<TType | '' | boolean | undefined |
 
 export type BooleanStringModel = `${BOOLEAN_STRING}`;
 
-export type CallableModel<TResult = void, TParams = void> = (args: TParams) => TResult;
+export type DecoratorModel =
+  | ClassDecorator
+  | MethodDecorator
+  | ParameterDecorator
+  | PropertyDecorator;
 
-export type OptionalCallableModel<TResult = void, TParams = void> = (
-  args?: TParams | undefined,
-) => TResult;
+export type CallableModel = (args?: Array<unknown>) => unknown;
 
-export type OptionalCallablePromiseModel<TResult = void, TParams = void> = OptionalCallableModel<
-  Promise<TResult>,
-  TParams
->;
-
-export type CallablePromiseModel<TResult = void, TParams = void> = CallableModel<
-  Promise<TResult>,
-  TParams
->;
-
-export type RequiredCallablePromiseModel<TResult = void, TParams = void> = CallableModel<
-  Promise<TResult>,
-  TParams
->;
-
-export type ArrayCallableModel<TResult = void, TParams extends Array<unknown> = never> = (
-  ...args: TParams
-) => TResult;
-
-export type ArrayCallablePromiseModel<
-  TResult = void,
-  TParams extends Array<unknown> = Array<unknown>,
-> = ArrayCallableModel<Promise<TResult>, TParams>;
-
-export type ReturnTypeModel<TType> = TType extends OptionalCallablePromiseModel<infer TReturn>
-  ? Awaited<TReturn>
-  : TType extends
-      | OptionalCallableModel<infer TReturn>
-      | ArrayCallableModel<infer TReturn>
-      | ArrayCallablePromiseModel<infer TReturn>
+export type ReturnTypeModel<TType> = TType extends
+  | ((args?: unknown) => infer TReturn)
+  | ((args?: unknown) => Promise<infer TReturn>)
+  | ((args?: unknown) => Array<infer TReturn>)
+  | ((args?: unknown) => Promise<Array<infer TReturn>>)
   ? TReturn
   : TType;
 

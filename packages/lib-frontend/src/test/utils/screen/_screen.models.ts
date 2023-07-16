@@ -1,5 +1,4 @@
 import { type TestConfigModel } from '#lib-config/node/test/test.models';
-import { type CallablePromiseModel } from '#lib-shared/core/core.models';
 
 export type _ScreenParamsModel = Pick<
   TestConfigModel,
@@ -7,11 +6,11 @@ export type _ScreenParamsModel = Pick<
 >;
 
 export type _ScreenModel = {
-  close: CallablePromiseModel;
+  close(): Promise<void>;
 
-  goto: CallablePromiseModel<void, string>;
+  goto(params: string): Promise<void>;
 
-  press: CallablePromiseModel<void, string>;
+  press(params: string): Promise<void>;
 
   snapshot(params: { match?: boolean; name: string }): Promise<void>;
 

@@ -8,7 +8,6 @@ import {
 } from '#lib-frontend/core/components/Table/Table.constants';
 import { type ElementStatePropsModel } from '#lib-frontend/core/core.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
-import { type CallableModel } from '#lib-shared/core/core.models';
 
 export type TableSelectTypeModel = `${TABLE_SELECT_TYPE}`;
 
@@ -39,7 +38,7 @@ export type TableColumnFormatterModel<TType, TValue> = (params: {
 }) => string;
 
 export type TableRefModel = {
-  deselectRows: CallableModel;
+  deselectRows(): void;
 };
 
 export type TablePropsModel<TType> = _TablePropsModel<TType> & ElementStatePropsModel;

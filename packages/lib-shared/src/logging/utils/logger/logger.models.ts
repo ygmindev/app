@@ -1,10 +1,5 @@
-import { type ArrayCallableModel } from '#lib-shared/core/core.models';
+import { type _LoggerModel } from '#lib-shared/logging/utils/logger/_logger.models';
 
-export type LogModel = ArrayCallableModel<void, Array<unknown>>;
+export type LogModel = (params?: Array<unknown>) => void;
 
-export type LoggerModel = {
-  debug: LogModel;
-  error: LogModel;
-  info: LogModel;
-  warn: LogModel;
-};
+export type LoggerModel = _LoggerModel;

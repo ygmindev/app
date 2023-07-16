@@ -1,5 +1,3 @@
-import { type OptionalCallablePromiseModel } from '#lib-shared/core/core.models';
-
-export type ResolveFirstParamsModel<TType> = Array<OptionalCallablePromiseModel<TType>>;
+export type ResolveFirstParamsModel<TType> = Array<() => Promise<TType>>;
 
 export type ResolveFirstModel<TType> = TType;

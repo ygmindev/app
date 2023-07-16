@@ -1,5 +1,3 @@
-import { type CallableModel } from '#lib-shared/core/core.models';
-
 export type _ProgressParamsModel = {
   name: string;
 };
@@ -7,6 +5,6 @@ export type _ProgressParamsModel = {
 export type _ProgressModel = {
   increment(value?: number): void;
   start(end: number, start?: number): void;
-  stop: CallableModel;
+  stop(): void;
   update(value: number): void;
 };

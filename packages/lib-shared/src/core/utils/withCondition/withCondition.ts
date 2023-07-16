@@ -1,20 +1,14 @@
-import { type ArrayCallableModel, type OptionalCallableModel } from '#lib-shared/core/core.models';
-
-type _WithConditionResultModel =
-  | ClassDecorator
-  | MethodDecorator
-  | ParameterDecorator
-  | PropertyDecorator;
+import { type CallableModel } from '#lib-shared/core/core.models';
+import {
+  type WithConditionModel,
+  type WithConditionParamsModel,
+} from '#lib-shared/core/utils/withCondition/withCondition.models';
 
 export const withCondition =
-  (
-    condition: boolean,
-    ifTrue?: OptionalCallableModel<_WithConditionResultModel>,
-    ifFalse?: OptionalCallableModel<_WithConditionResultModel>,
-  ) =>
-  (...params: Array<unknown>): void =>
+  (...[condition, ifTrue, ifFalse]: WithConditionParamsModel): WithConditionModel =>
+  (...params) =>
     ifTrue && condition
-      ? (ifTrue() as ArrayCallableModel<void, Array<unknown>>)(...params)
+      ? (ifTrue() as CallableModel)(...params)
       : ifFalse && !condition
-      ? (ifFalse() as ArrayCallableModel<void, Array<unknown>>)(...params)
+      ? (ifFalse() as CallableModel)(...params)
       : undefined;

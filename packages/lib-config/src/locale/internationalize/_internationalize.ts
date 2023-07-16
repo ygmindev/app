@@ -5,7 +5,6 @@ import {
   type _InternationalizeConfigModel,
   type InternationalizeConfigModel,
 } from '#lib-config/locale/internationalize/internationalize.models';
-import { type ReturnTypeModel } from '#lib-shared/core/core.models';
 
 let instanceGlobal: i18n;
 
@@ -16,8 +15,8 @@ export const _internationalize = ({
   languages,
   modules,
   path,
-}: ReturnTypeModel<InternationalizeConfigModel>): ReturnTypeModel<_InternationalizeConfigModel> => {
-  const languageF = language || languageDefault;
+}: InternationalizeConfigModel): _InternationalizeConfigModel => {
+  const languageF = language ?? languageDefault;
 
   const config: InitOptions = {
     debug: false,

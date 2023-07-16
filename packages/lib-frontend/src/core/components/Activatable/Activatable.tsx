@@ -11,7 +11,6 @@ import { type PressablePropsModel } from '#lib-frontend/core/components/Pressabl
 import { type RSFCModel } from '#lib-frontend/core/core.models';
 import { useIsMobile } from '#lib-frontend/core/hooks/useIsMobile/useIsMobile';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { type CallableModel } from '#lib-shared/core/core.models';
 import { variableName } from '#lib-shared/core/utils/variableName/variableName';
 
 export const Activatable: RSFCModel<ActivatableRefModel, ActivatablePropsModel> = forwardRef(
@@ -30,20 +29,20 @@ export const Activatable: RSFCModel<ActivatableRefModel, ActivatablePropsModel> 
     };
 
     const handlePress = (): void => {
-      const onPress = childrenF?.props.onPress as CallableModel;
-      onPress && onPress();
+      const { onPress } = childrenF?.props as PressablePropsModel;
+      onPress && void onPress();
       handleToggle(!isActive);
     };
 
     const handlePressIn = (): void => {
-      const onPressIn = childrenF?.props.onPressIn as CallableModel;
-      onPressIn && onPressIn();
+      const { onPressIn } = childrenF?.props as PressablePropsModel;
+      onPressIn && void onPressIn();
       handleToggle(true);
     };
 
     const handlePressOut = (): void => {
-      const onPressOut = childrenF?.props.onPressOut as CallableModel;
-      onPressOut && onPressOut();
+      const { onPressOut } = childrenF?.props as PressablePropsModel;
+      onPressOut && void onPressOut();
       handleToggle(false);
     };
 

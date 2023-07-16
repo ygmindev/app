@@ -1,10 +1,9 @@
-import { type OptionalCallablePromiseModel } from '#lib-shared/core/core.models';
-import { type TaskResultModel } from '#tool-task/core/core.models';
+import { type TaskFunctionModel } from '#tool-task/core/core.models';
 
 export type _TaskRunnerModel = {
-  getTask(name: string): OptionalCallablePromiseModel<TaskResultModel>;
+  getTask(name: string): TaskFunctionModel;
 
-  registerTask(name: string, task: OptionalCallablePromiseModel): void;
+  registerTask(name: string, task: () => Promise<void>): void;
 
-  registry: Record<string, OptionalCallablePromiseModel<TaskResultModel>>;
+  registry: Record<string, TaskFunctionModel>;
 };

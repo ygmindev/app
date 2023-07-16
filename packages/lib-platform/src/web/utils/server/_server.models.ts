@@ -1,8 +1,7 @@
 import { type _WebConfigModel } from '#lib-config/platform/web/web.models';
-import { type ReturnTypeModel } from '#lib-shared/core/core.models';
 
 export type _ServerParamsModel = {
-  config: ReturnTypeModel<_WebConfigModel>;
+  config: _WebConfigModel;
   port: string;
   root?: string;
 };

@@ -4,7 +4,6 @@ import {
   type _ExportPrerenderModel,
   type _ExportPrerenderParamsModel,
 } from '#lib-platform/web/exports/exportPrerender/_exportPrerender.models';
-import { type CallablePromiseModel } from '#lib-shared/core/core.models';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { sequence } from '#lib-shared/core/utils/sequence/sequence';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
@@ -15,7 +14,7 @@ export const _exportPrerender = ({
   languages,
 }: _ExportPrerenderParamsModel): _ExportPrerenderModel => ({
   prerender: async ({ pageContexts }) => {
-    const pageContextPromises: Array<CallablePromiseModel<(typeof pageContexts)[number]>> = [];
+    const pageContextPromises: Array<() => Promise<(typeof pageContexts)[number]>> = [];
     languages.forEach((lang) =>
       pageContexts.forEach(({ context, urlOriginal, ...pageContext }) =>
         pageContextPromises.push(async () => {

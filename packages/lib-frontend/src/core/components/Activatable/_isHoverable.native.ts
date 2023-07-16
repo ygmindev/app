@@ -1,3 +1,3 @@
-import { type CallableModel } from '#lib-shared/core/core.models';
+import { type _IsHoverableModel } from '#lib-frontend/core/components/Activatable/_isHoverable.models';
 
-export const _isHoverable: CallableModel<boolean> = () => false;
+export const _isHoverable = (): _IsHoverableModel => false;

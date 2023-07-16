@@ -2,14 +2,9 @@ import { type Config } from '@jest/types';
 
 import { type BundleConfigModel } from '#lib-config/node/bundle/bundle.models';
 import { type DimensionModel } from '#lib-frontend/core/core.models';
-import {
-  type OptionalCallableModel,
-  type OptionalCallablePromiseModel,
-  type PartialDeepModel,
-} from '#lib-shared/core/core.models';
 
 export type TestConfigModel = {
-  bundleConfig: OptionalCallableModel<BundleConfigModel, PartialDeepModel<BundleConfigModel>>;
+  bundleConfig(): BundleConfigModel;
 
   cachePath: string;
 
@@ -25,15 +20,15 @@ export type TestConfigModel = {
 
   mockPath: string;
 
-  mocks?: Array<string | [string, OptionalCallableModel<unknown>]>;
+  mocks?: Array<string | [string, () => unknown]>;
 
-  onAfterAll?: OptionalCallablePromiseModel;
+  onAfterAll?(): Promise<void>;
 
-  onAfterEach?: OptionalCallablePromiseModel;
+  onAfterEach?(): Promise<void>;
 
-  onBeforeAll?: OptionalCallablePromiseModel;
+  onBeforeAll?(): Promise<void>;
 
-  onBeforeEach?: OptionalCallablePromiseModel;
+  onBeforeEach?(): Promise<void>;
 
   outputPath: string;
 

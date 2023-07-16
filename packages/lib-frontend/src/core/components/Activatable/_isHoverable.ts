@@ -1,5 +1,5 @@
+import { type _IsHoverableModel } from '#lib-frontend/core/components/Activatable/_isHoverable.models';
 import { isServer } from '#lib-platform/core/utils/isServer/isServer';
-import { type CallableModel } from '#lib-shared/core/core.models';
 
 let isEnabled: boolean;
 
@@ -26,4 +26,4 @@ if (!isServer) {
   document.addEventListener('mousemove', enableHover, true);
 }
 
-export const _isHoverable: CallableModel<boolean> = () => isEnabled;
+export const _isHoverable = (): _IsHoverableModel => isEnabled;

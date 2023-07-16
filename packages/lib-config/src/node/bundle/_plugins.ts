@@ -7,7 +7,6 @@ import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { type BundleConfigModel } from '#lib-config/node/bundle/bundle.models';
 import { PLATFORM } from '#lib-platform/core/core.constants';
-import { type OptionalCallableModel } from '#lib-shared/core/core.models';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 
 export const _plugins = ({
@@ -19,6 +18,5 @@ export const _plugins = ({
     process.env.ENV_PLATFORM === PLATFORM.NODE &&
       nodeExternalsPlugin({ allowList: transpiles, packagePath: fromRoot('package.json') }),
 
-    process.env.ENV_PLATFORM === PLATFORM.NODE &&
-      (filelocPlugin as OptionalCallableModel<Plugin>)(),
+    process.env.ENV_PLATFORM === PLATFORM.NODE && (filelocPlugin as () => Plugin)(),
   ]);

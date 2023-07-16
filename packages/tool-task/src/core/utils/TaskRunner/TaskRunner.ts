@@ -6,14 +6,13 @@ import reduce from 'lodash/reduce';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
-import { type OptionalCallablePromiseModel } from '#lib-shared/core/core.models';
 import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/DuplicateError';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { sequence } from '#lib-shared/core/utils/sequence/sequence';
 import { setEnvironment } from '#lib-shared/environment/utils/setEnvironment/setEnvironment';
 import { error, info, warn } from '#lib-shared/logging/utils/logger/logger';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
-import { type TaskParamsModel, type TaskResultModel } from '#tool-task/core/core.models';
+import { type TaskFunctionModel, type TaskParamsModel } from '#tool-task/core/core.models';
 import { _TaskRunner } from '#tool-task/core/utils/TaskRunner/_TaskRunner';
 import { type TaskRunnerModel } from '#tool-task/core/utils/TaskRunner/TaskRunner.models';
 
@@ -53,7 +52,9 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
         setEnvironment({ environment, overrides });
 
         onBefore &&
-          (await sequence(onBefore.map((value) => (isString(value) ? this.getTask(value) : value))));
+          (await sequence(
+            onBefore.map((value) => (isString(value) ? this.getTask(value) : value)),
+          ));
 
         const onAfterF =
           onAfter &&
@@ -101,7 +102,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     });
   };
 
-  get registry(): Record<string, OptionalCallablePromiseModel<TaskResultModel>> {
+  get registry(): Record<string, TaskFunctionModel> {
     return reduce(
       super.registry,
       (result, v, k) => (k === 'default' ? result : { ...result, [k]: v }),

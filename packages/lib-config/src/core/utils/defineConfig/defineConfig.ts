@@ -5,15 +5,11 @@ import {
   type DefineConfigModel,
   type DefineConfigParamsModel,
 } from '#lib-config/core/utils/defineConfig/defineConfig.models';
-import { type OptionalCallableModel, type PartialDeepModel } from '#lib-shared/core/core.models';
+import { type PartialDeepModel } from '#lib-shared/core/core.models';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
 
-const getConfigs = <
-  TParams,
-  TParamsConfig extends TParams | OptionalCallableModel<TParams>,
-  TResult = undefined,
->({
+const getConfigs = <TParams, TParamsConfig extends TParams | (() => TParams), TResult = undefined>({
   config,
   overrides,
   strategy,
@@ -33,7 +29,7 @@ const getConfigs = <
 
 export const defineConfig = <
   TParams,
-  TParamsConfig extends TParams | OptionalCallableModel<TParams>,
+  TParamsConfig extends TParams | (() => TParams),
   TResult = undefined,
 >({
   _config,
@@ -54,9 +50,7 @@ export const defineConfig = <
                 config,
                 overrides: [
                   params,
-                  ...(overrides
-                    ? (overrides as OptionalCallableModel<Array<PartialDeepModel<TParams>>>)()
-                    : []),
+                  ...(overrides ? (overrides as () => Array<PartialDeepModel<TParams>>)() : []),
                 ],
                 strategy,
               } as Pick<DefineConfigParamsModel<TParams, TParamsConfig, TResult>, 'config' | 'overrides' | 'strategy'>),

@@ -29,8 +29,6 @@ const { _config, config } = defineConfig({
 
       port: toNumber(process.env.SERVER_PORT),
 
-      prefix: 'api',
-
       provider: SERVERLESS_PROVIDER.AWS,
 
       server: {

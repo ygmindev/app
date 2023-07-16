@@ -7,7 +7,7 @@ import {
   type RenderAppModel,
   type RenderAppParamsModel,
 } from '#lib-platform/core/utils/renderApp/renderApp.models';
-import { type CallableModel, type EmptyObjectModel } from '#lib-shared/core/core.models';
+import { type EmptyObjectModel } from '#lib-shared/core/core.models';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { ROUTE } from '#lib-shared/route/route.constants';
@@ -24,7 +24,7 @@ export const renderApp = ({ Root, children, context }: RenderAppParamsModel): Re
   );
   const App: FCModel = () => <Root context={contextF}>{children}</Root>;
   const AppRegistryF = AppRegistry as {
-    registerComponent: (name: string, component: CallableModel<ComponentType>) => void;
+    registerComponent: (name: string, component: () => ComponentType) => void;
   };
   AppRegistryF.registerComponent('App', () => App);
   const { element, getStyleElement } = (
@@ -32,7 +32,7 @@ export const renderApp = ({ Root, children, context }: RenderAppParamsModel): Re
       getApplication: (
         name: string,
         props: EmptyObjectModel,
-      ) => { element: ReactElement; getStyleElement: CallableModel<ReactElement> };
+      ) => { element: ReactElement; getStyleElement: () => ReactElement };
     }
   ).getApplication('App', {});
   return { element, getCss: getStyleElement };

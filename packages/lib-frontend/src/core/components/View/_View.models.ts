@@ -6,10 +6,6 @@ import {
   type PositionModel,
 } from '#lib-frontend/core/core.models';
 import { type StylePropsModel, type ViewStyleModel } from '#lib-frontend/style/style.models';
-import {
-  type OptionalCallableModel,
-  type OptionalCallablePromiseModel,
-} from '#lib-shared/core/core.models';
 
 export type _ViewPropsModel = {
   isFocusable?: boolean;
@@ -17,13 +13,13 @@ export type _ViewPropsModel = {
   isHorizontalScrollable?: boolean;
   isVerticalScrollable?: boolean;
   onMeasure?(measure: MeasureModel): void;
-  onMouseEnter?: OptionalCallableModel;
-  onMouseLeave?: OptionalCallableModel;
-  onPress?: OptionalCallablePromiseModel | OptionalCallableModel;
-  onPressIn?: OptionalCallableModel;
-  onPressOut?: OptionalCallableModel;
-  onResponderGrant?: OptionalCallableModel;
-  onResponderRelease?: OptionalCallableModel;
+  onMouseEnter?(): void;
+  onMouseLeave?(): void;
+  onPress?: (() => void) | (() => Promise<void>);
+  onPressIn?(): void;
+  onPressOut?(): void;
+  onResponderGrant?(): void;
+  onResponderRelease?(): void;
   onScroll?(position: PositionModel): void;
 } & ChildrenPropsModel &
   StylePropsModel<ViewStyleModel>;

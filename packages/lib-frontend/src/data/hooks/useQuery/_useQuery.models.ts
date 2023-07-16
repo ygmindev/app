@@ -1,4 +1,3 @@
-import { type CallablePromiseModel } from '#lib-shared/core/core.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
 export type _UseQueryOptionsModel = {
@@ -7,7 +6,7 @@ export type _UseQueryOptionsModel = {
 
 export type _UseQueryParamsModel<TType> = [
   id: string,
-  callback: CallablePromiseModel<TType | null>,
+  callback: () => Promise<TType | null>,
   options?: _UseQueryOptionsModel,
 ];
 
@@ -16,7 +15,7 @@ export type _UseQueryModel<TType> = {
   error?: Error | null;
   isError: boolean;
   isLoading: boolean;
-  query: CallablePromiseModel<TType | null>;
+  query: () => Promise<TType | null>;
   resetQuery(id: string): Promise<void>;
   setQueryData(id: string, data?: TType | null): void;
 } & WithIdModel;
