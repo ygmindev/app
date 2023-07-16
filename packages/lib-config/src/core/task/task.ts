@@ -9,6 +9,14 @@ const { _config, config } = defineConfig({
     packageFilename: 'tasks.ts',
 
     taskExtension: '.task.ts',
+
+    wait: {
+      delay: 1000,
+
+      interval: 500,
+
+      timeout: 30e3,
+    },
   } satisfies TaskConfigModel,
 });
 

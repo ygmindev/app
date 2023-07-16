@@ -19,7 +19,7 @@ const { _config, config } = defineConfig({
 
       environment: process.env.NODE_ENV,
 
-      host: process.env.APP_SERVER_API_HOST,
+      host: process.env.SERVER_HOST,
 
       lambdaPort: toNumber(process.env.SERVER_LAMBDA_PORT),
 
@@ -27,7 +27,7 @@ const { _config, config } = defineConfig({
 
       platform: PLATFORM.BASE,
 
-      port: toNumber(process.env.APP_SERVER_API_PORT),
+      port: toNumber(process.env.SERVER_PORT),
 
       provider: SERVERLESS_PROVIDER.AWS,
 

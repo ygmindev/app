@@ -9,14 +9,17 @@ import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { writeFile } from '#lib-backend/file/utils/writeFile/writeFile';
 import { NotFoundError } from '#lib-shared/core/errors/NotFoundError/NotFoundError';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
-import { type SetEnvironmentParamsModel } from '#lib-shared/environment/utils/setEnvironment/setEnvironment.models';
+import {
+  type SetEnvironmentModel,
+  type SetEnvironmentParamsModel,
+} from '#lib-shared/environment/utils/setEnvironment/setEnvironment.models';
 
 export const setEnvironment = ({
-  environment = process.env.NODE_ENV || ENVIRONMENT.DEVELOPMENT,
+  environment = process.env.NODE_ENV ?? ENVIRONMENT.DEVELOPMENT,
   overrides,
   writes,
-}: SetEnvironmentParamsModel = {}): Record<string, string> => {
-  overrides && (process.env = { ...process.env, ...overrides });
+}: SetEnvironmentParamsModel = {}): SetEnvironmentModel => {
+  overrides && (process.env = { ...process.env, ...overrides() });
 
   const paths = [
     fromConfig('core/environment/.env.base'),

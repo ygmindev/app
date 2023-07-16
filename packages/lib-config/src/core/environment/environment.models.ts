@@ -16,8 +16,6 @@ export type EnvironmentConfigModel = {
   APP_IS_DEBUG: BooleanStringModel;
   APP_NAME?: string;
   APP_PORT?: string;
-  APP_SERVER_API_HOST: string;
-  APP_SERVER_API_PORT: string;
   APP_STRIPE_TOKEN: string;
   APP_TRACKING_NAME: string;
   APP_UPTRACE_SOURCE: string;
@@ -34,6 +32,8 @@ export type EnvironmentConfigModel = {
   SERVER_EMAIL_HOST: string;
   SERVER_EMAIL_PASSWORD: string;
   SERVER_EMAIL_PORT: string;
+  SERVER_PORT: string;
+  SERVER_HOST: string;
   SERVER_EMAIL_USERNAME: string;
   SERVER_ENCRYPTION_ALGORITHM: string;
   SERVER_FIREBASE_ADMIN_EMAIL: string;
@@ -43,6 +43,8 @@ export type EnvironmentConfigModel = {
   SERVER_KEY_LENGTH: string;
   SERVER_LAMBDA_HOST: string;
   SERVER_LAMBDA_PORT: string;
+  SERVER_OTP_LENGTH: number;
+  SERVER_OTP_STATIC?: string;
   SERVER_PLAID_CLIENT_ID: string;
   SERVER_PLAID_COUNTRY_CODES: string;
   SERVER_PLAID_ENV: string;

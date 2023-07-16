@@ -47,13 +47,12 @@ export class TaskRegistry extends _TaskRegistry implements TaskRegistryModel {
 
     [nameF, alias].forEach((value) => {
       this._register(value, async () => {
-        const rootF = root ?? (target ? fromPackages(target) : fromRoot());
-        process.chdir(rootF);
-
-        setEnvironment({ environment, overrides });
-
         onBefore &&
           (await sequence(onBefore.map((value) => (isString(value) ? this.get(value) : value))));
+
+        const rootF = root ?? (target ? fromPackages(target) : fromRoot());
+        process.chdir(rootF);
+        setEnvironment({ environment, overrides });
 
         const onAfterF =
           onAfter &&

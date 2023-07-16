@@ -3,3 +3,5 @@ import { type EnvironmentOverrideParamsModel } from '#lib-shared/environment/env
 export type SetEnvironmentParamsModel = {
   writes?: Array<RegExp>;
 } & EnvironmentOverrideParamsModel;
+
+export type SetEnvironmentModel = Record<string, string>;

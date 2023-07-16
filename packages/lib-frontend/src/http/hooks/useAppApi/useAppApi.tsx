@@ -6,7 +6,7 @@ import {
 
 export const useAppApi = ({}: UseAppApiParamsModel = {}): UseAppApiModel =>
   useApi({
-    host: process.env.APP_SERVER_API_HOST,
+    host: process.env.SERVER_HOST,
     path: '',
-    port: process.env.APP_SERVER_API_PORT,
+    port: process.env.SERVER_PORT,
   });

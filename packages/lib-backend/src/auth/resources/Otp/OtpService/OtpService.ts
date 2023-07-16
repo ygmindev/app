@@ -6,11 +6,7 @@ import { sms } from '#lib-backend/notification/utils/sms/sms';
 import { createEntityResourceService } from '#lib-backend/resource/utils/createEntityResourceService/createEntityResourceService';
 import { UserService } from '#lib-backend/user/resources/User/UserService/UserService';
 import { UnauthorizedError } from '#lib-shared/auth/errors/UnauthorizedError/UnauthorizedError';
-import {
-  OTP_LENGTH,
-  OTP_RESOURCE_NAME,
-  OTP_STATIC,
-} from '#lib-shared/auth/resources/Otp/Otp.constants';
+import { OTP_RESOURCE_NAME } from '#lib-shared/auth/resources/Otp/Otp.constants';
 import { type OtpFormModel, type OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
 import { type OtpServiceModel } from '#lib-shared/auth/resources/Otp/OtpService/OtpService.models';
 import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/DuplicateError';
@@ -53,7 +49,7 @@ export class OtpService
       const service = Container.get(OtpService);
       await service.remove({ filter: cleanObject(input.form) });
       input.form.otp =
-        process.env.NODE_ENV === 'test' ? OTP_STATIC : randomInt(OTP_LENGTH).toString();
+        process.env.SERVER_OTP_STATIC ?? randomInt(process.env.SERVER_OTP_LENGTH).toString();
       return input;
     },
 

@@ -3,6 +3,6 @@ import { _graphql } from 'packages/backend-graphql-sandbox/src/graphql/_graphql'
 
 export const graphql = async (): Promise<void> => {
   await _graphql({
-    port: process.env.APP_SERVER_API_PORT ? toNumber(process.env.APP_SERVER_API_PORT) : undefined,
+    port: process.env.SERVER_PORT ? toNumber(process.env.SERVER_PORT) : undefined,
   });
 };

@@ -14,7 +14,7 @@ export const runServer = async ({
 }: RunServerParamsModel): Promise<RunServerModel> =>
   command(
     fromExecutable(
-      `http-server ${path} --cors --port ${port || STATIC_SERVER_PORT} ${isOpen ? '--o' : ''}`,
+      `http-server ${path} --cors --port ${port ?? STATIC_SERVER_PORT} ${isOpen ? '--o' : ''}`,
     ),
     { root },
   );

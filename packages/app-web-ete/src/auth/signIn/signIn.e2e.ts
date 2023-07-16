@@ -5,7 +5,6 @@ import { APP_URI } from '#lib-frontend/http/http.constants';
 import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
 import { screen } from '#lib-frontend/test/utils/screen/screen';
 import { type ScreenModel } from '#lib-frontend/test/utils/screen/screen.models';
-import { OTP_STATIC } from '#lib-shared/auth/resources/Otp/Otp.constants';
 
 describe('sign in', () => {
   let screenF: ScreenModel;
@@ -22,7 +21,7 @@ describe('sign in', () => {
     await screenF.press(`${USERNAME_FORM_TEST_ID}-submit`);
     await sleepForTransition();
 
-    await screenF.type('otp', OTP_STATIC);
+    await screenF.type('otp', process.env.SERVER_OTP_STATIC ?? '123456');
     await screenF.snapshot({ name: 'otp' });
 
     expect(1).toStrictEqual(1);

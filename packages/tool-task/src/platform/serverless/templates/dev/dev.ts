@@ -9,9 +9,9 @@ export const dev: TaskParamsModel<DevParamsModel> = {
 
   name: 'dev',
 
-  overrides: {
+  overrides: () => ({
     NODE_OPTIONS: `--require ${fromPackages('lib-config/src/tracking/telemetry/telemetry.js')}`,
-  },
+  }),
 
   task: async ({ root }) => command('sls offline start --reloadHandler --verbose', { root }),
 };
