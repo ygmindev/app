@@ -10,7 +10,7 @@ export const _waitOn = async (...[params, options]: _WaitOnParamsModel): Promise
   await waitOn({
     delay,
     interval,
-    resources: params.map(([resource, type]) => `${type}:${resource}`),
+    resources: params.map(([resource, type]) => `${type}${resource.replace(/^https?:\/\//, '')}`),
     timeout,
   });
 };

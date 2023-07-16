@@ -20,7 +20,11 @@ const tasks: Array<TaskParamsModel<unknown>> = [
             //   WAIT_ON_RESOURCE_TYPE.HTTP,
             // ],
             [
-              uri({ host: process.env.SERVER_HOST, port: process.env.SERVER_PORT }),
+              uri({
+                host: process.env.SERVER_HOST,
+                path: '/api/ping',
+                port: process.env.SERVER_PORT,
+              }),
               WAIT_ON_RESOURCE_TYPE.HTTP,
             ],
           ]);
