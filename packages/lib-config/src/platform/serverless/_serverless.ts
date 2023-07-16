@@ -8,6 +8,7 @@ import {
   type _ServerlessConfigModel,
   type ServerlessConfigModel,
 } from '#lib-config/platform/serverless/serverless.models';
+import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
 import { PLATFORM } from '#lib-platform/core/core.constants';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 
@@ -63,7 +64,7 @@ export const _serverless = ({
       (result, v, k) => ({
         ...result,
         [k]: {
-          events: [{ httpApi: { method: v.method, path: v.pathname } }],
+          events: [{ httpApi: { method: v.method, path: trimPathname(v.pathname) } }],
           handler: v.handler,
         },
       }),

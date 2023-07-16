@@ -29,7 +29,27 @@ export const _command = async (
       onData && void onData(data.toString());
     });
     await new Promise((resolve) => {
-      ['exit', 'close'].forEach((event) => cp.on(event, (code) => resolve(code === 0)));
+      [
+        'exit',
+        'cleanup',
+        'close',
+        'uncaughtException',
+        'SIGINT',
+        'SIGTERM',
+        'SIGUSR1',
+        'SIGUSR2',
+      ].forEach((event) => {
+        // process.on(event, () => cp.kill());
+        // cp.on(event, (code) => resolve(code === 0));
+        process.on(event, (code) => {
+          console.warn(`@@@ pkill ${command} ${code as string}`);
+          cp.kill();
+        });
+        cp.on(event, (code) => {
+          console.warn(`@@@ cpkill ${command} ${code as string}`);
+          resolve(code === 0);
+        });
+      });
     });
     return { status: TASK_STATUS.SUCCESS };
   } catch (e) {

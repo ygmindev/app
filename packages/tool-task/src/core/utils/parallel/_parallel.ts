@@ -19,7 +19,12 @@ export const _parallel = async (params: _ParallelParamsModel): Promise<_Parallel
       setEnvironment({ environment, overrides });
       return { command, cwd: root, env: process.env, name: command };
     }),
-    { killOthers: ['failure', 'success'], raw: true, successCondition: 'all' },
+    {
+      killOthers: ['success', 'failure'],
+      killSignal: 'SIGTERM',
+      raw: true,
+      successCondition: 'all',
+    },
   );
   try {
     await result;

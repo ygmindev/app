@@ -13,7 +13,7 @@ const { _config, config } = defineConfig({
     wait: {
       delay: 1000,
 
-      interval: 500,
+      interval: 3000,
 
       timeout: 30e3,
     },

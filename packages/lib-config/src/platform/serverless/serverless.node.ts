@@ -22,7 +22,7 @@ const { _config, config } = defineConfig({
         [PING]: {
           handler: 'src/functions/ping/ping.main',
           method: HTTP_METHOD.GET,
-          pathname: `/api/${PING}`,
+          pathname: PING,
         },
       },
 

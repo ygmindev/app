@@ -5,6 +5,7 @@ import { SignInPage } from '#lib-frontend/auth/pages/SignInPage/SignInPage';
 import { BILLING, PAYMENT, PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants';
 import { PaymentMethodFormPage } from '#lib-frontend/billing/pages/PaymentMethodFormPage/PaymentMethodFormPage';
 import { PaymentPage } from '#lib-frontend/billing/pages/PaymentPage/PaymentPage';
+import { Text } from '#lib-frontend/core/components/Text/Text';
 import { REDIRECT } from '#lib-frontend/core/core.constants';
 import { HomePage } from '#lib-frontend/deleteme/pages/HomePage/HomePage';
 import { OfficePage } from '#lib-frontend/deleteme/pages/OfficePage/OfficePage';
@@ -29,6 +30,7 @@ import { PersonalPage } from '#lib-frontend/user/pages/PersonalPage/PersonalPage
 import { EMAIL, NAME, PERSONAL, PHONE } from '#lib-frontend/user/user.constants';
 import { AUTH, SIGN_IN_METHOD, SIGN_IN_MODE } from '#lib-shared/auth/auth.constants';
 import { CORE } from '#lib-shared/core/core.constants';
+import { PING } from '#lib-shared/http/http.constants';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 import { ROUTE } from '#lib-shared/route/route.constants';
 import { BRIGHTNESS, STYLE } from '#lib-shared/style/style.constants';
@@ -36,6 +38,11 @@ import { ACCOUNT, USER } from '#lib-shared/user/user.constants';
 
 export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesModel =>
   [
+    {
+      element: <Text>ping</Text>,
+      pathname: PING,
+    },
+
     {
       element: <AppLayout />,
       ns: [AUTH, CORE, STYLE, USER],
