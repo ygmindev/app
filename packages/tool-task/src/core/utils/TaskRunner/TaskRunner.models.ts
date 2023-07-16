@@ -5,4 +5,6 @@ export type TaskRunnerModel = {
   aliases: Record<string, string>;
 
   register<TType = undefined>(params: TaskParamsModel<TType>): void;
+
+  runTask<TType = undefined>(params: TaskParamsModel<TType>): Promise<void>;
 } & _TaskRunnerModel;

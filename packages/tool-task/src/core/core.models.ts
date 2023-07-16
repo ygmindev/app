@@ -18,7 +18,7 @@ export type TaskParamsModel<TType = undefined> = {
   options?: TType;
   root?: string;
   target?: string;
-  task(params: TaskContextModel<TType>): Promise<TaskResultModel>;
+  task(params: TaskContextModel<TType>): Promise<TaskResultModel> | string;
 } & EnvironmentOverrideParamsModel;
 
 export type TaskContextModel<TType = undefined> = {
