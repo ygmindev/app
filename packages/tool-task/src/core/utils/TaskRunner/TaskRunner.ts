@@ -21,7 +21,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
   protected _aliases: Record<string, string> = {};
   protected _children = [];
 
-  registerTask = <TType = undefined>({
+  register = <TType = undefined>({
     environment,
     name,
     onAfter,
@@ -83,7 +83,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
 
           switch (status) {
             case TASK_STATUS.SUCCESS: {
-              info(`[${nameF}]`, message || 'completed');
+              info(`[${nameF}]`, message ?? 'completed');
               break;
             }
             case TASK_STATUS.WARNING: {
