@@ -12,10 +12,10 @@ import { requireInterop } from '#lib-shared/core/utils/requireInterop/requireInt
 import { type TaskParamsModel } from '#tool-task/core/core.models';
 import { prompt } from '#tool-task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '#tool-task/core/utils/prompt/prompt.constants';
-import { TaskRegistry } from '#tool-task/core/utils/TaskRegistry/TaskRegistry';
+import { TaskRunner } from '#tool-task/core/utils/TaskRunner/TaskRunner';
 
 export const _task = ({ packageFilename, taskExtension }: TaskConfigModel): _TaskConfigModel => {
-  const taskRegistry = Container.get(TaskRegistry);
+  const taskRunner = Container.get(TaskRunner);
 
   const tasks = filterNil([
     // Task files
@@ -42,14 +42,14 @@ export const _task = ({ packageFilename, taskExtension }: TaskConfigModel): _Tas
         const { name } = await prompt([
           {
             key: 'name',
-            options: [...Object.keys(taskRegistry.aliases), ...Object.keys(taskRegistry.registry)],
+            options: [...Object.keys(taskRunner.aliases), ...Object.keys(taskRunner.registry)],
             type: PROMPT_TYPE.LIST,
           },
         ]);
-        return taskRegistry.get(name)();
+        return taskRunner.get(name)();
       },
     },
   ]);
 
-  tasks.forEach(taskRegistry.register);
+  tasks.forEach(taskRunner.register);
 };

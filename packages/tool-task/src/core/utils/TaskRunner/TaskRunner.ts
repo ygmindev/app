@@ -14,14 +14,15 @@ import { setEnvironment } from '#lib-shared/environment/utils/setEnvironment/set
 import { error, info, warn } from '#lib-shared/logging/utils/logger/logger';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
 import { type TaskParamsModel, type TaskResultModel } from '#tool-task/core/core.models';
-import { _TaskRegistry } from '#tool-task/core/utils/TaskRegistry/_TaskRegistry';
-import { type TaskRegistryModel } from '#tool-task/core/utils/TaskRegistry/TaskRegistry.models';
+import { _TaskRunner } from '#tool-task/core/utils/TaskRunner/_TaskRunner';
+import { type TaskRunnerModel } from '#tool-task/core/utils/TaskRunner/TaskRunner.models';
 
 @withContainer()
-export class TaskRegistry extends _TaskRegistry implements TaskRegistryModel {
+export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
   protected _aliases: Record<string, string> = {};
+  protected _children = [];
 
-  register = <TType = undefined>({
+  registerTask = <TType = undefined>({
     environment,
     name,
     onAfter,
@@ -46,18 +47,18 @@ export class TaskRegistry extends _TaskRegistry implements TaskRegistryModel {
     this._aliases[alias] = nameF;
 
     [nameF, alias].forEach((value) => {
-      this._register(value, async () => {
+      this.registerTask(value, async () => {
         const rootF = root ?? (target ? fromPackages(target) : fromRoot());
         process.chdir(rootF);
         setEnvironment({ environment, overrides });
 
         onBefore &&
-          (await sequence(onBefore.map((value) => (isString(value) ? this.get(value) : value))));
+          (await sequence(onBefore.map((value) => (isString(value) ? this.getTask(value) : value))));
 
         const onAfterF =
           onAfter &&
           debounce(async () => {
-            await sequence(onAfter.map((value) => (isString(value) ? this.get(value) : value)));
+            await sequence(onAfter.map((value) => (isString(value) ? this.getTask(value) : value)));
           });
 
         onAfterF &&

@@ -9,16 +9,16 @@ import { type TaskParamsModel, type TaskResultModel } from '#tool-task/core/core
 import { type RunAllParamsModel } from '#tool-task/core/templates/runAll/runAll.models';
 import { prompt } from '#tool-task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '#tool-task/core/utils/prompt/prompt.constants';
-import { TaskRegistry } from '#tool-task/core/utils/TaskRegistry/TaskRegistry';
+import { TaskRunner } from '#tool-task/core/utils/TaskRunner/TaskRunner';
 
 export const runAll: TaskParamsModel<RunAllParamsModel> = {
   name: 'runAll',
 
   task: async ({ name, options = {} }) => {
-    const taskRegistry = Container.get(TaskRegistry);
+    const taskRunner = Container.get(TaskRunner);
     const { isParallel, patterns } = options;
-    const taskRegistryF = reduce(
-      taskRegistry.registry,
+    const taskRunnerF = reduce(
+      taskRunner.registry,
       (result, v, k) =>
         k !== name &&
         patterns?.some((pattern) => (isString(pattern) ? pattern === k : pattern.test(k)))
@@ -26,16 +26,16 @@ export const runAll: TaskParamsModel<RunAllParamsModel> = {
           : result,
       {} as Record<string, CallablePromiseModel<TaskResultModel>>,
     );
-    if (taskRegistryF) {
+    if (taskRunnerF) {
       const { tasks } = await prompt([
         {
-          defaultValue: Object.keys(taskRegistryF),
+          defaultValue: Object.keys(taskRunnerF),
           key: 'tasks',
-          options: Object.keys(taskRegistryF),
+          options: Object.keys(taskRunnerF),
           type: PROMPT_TYPE.CHECKBOX,
         },
       ]);
-      const tasksF = tasks.map((task) => taskRegistryF[task]);
+      const tasksF = tasks.map((task) => taskRunnerF[task]);
       await (isParallel ? Promise.all(tasksF) : sequence(tasksF));
     }
 
