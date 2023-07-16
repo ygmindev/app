@@ -13,17 +13,22 @@ const tasks: Array<TaskParamsModel<unknown>> = [
       onBefore: [
         async () => {
           // await parallel([['run awd'], ['run bld']]);
-          await parallel([['run bld']]);
+          console.warn(111);
+          void parallel([['run bld']]);
+          console.warn(222);
           await waitOn([
-            [
-              uri({ host: process.env.APP_HOST, port: process.env.APP_PORT }),
-              WAIT_ON_RESOURCE_TYPE.HTTP,
-            ],
+            // [
+            //   uri({ host: process.env.APP_HOST, port: process.env.APP_PORT }),
+            //   WAIT_ON_RESOURCE_TYPE.HTTP,
+            // ],
             [
               uri({ host: process.env.SERVER_HOST, port: process.env.SERVER_PORT }),
               WAIT_ON_RESOURCE_TYPE.HTTP,
             ],
           ]);
+          console.warn(333);
+          console.warn(process.env.SERVER_HOST);
+          console.warn(process.env.SERVER_PORT);
           return { status: TASK_STATUS.SUCCESS };
         },
       ],
