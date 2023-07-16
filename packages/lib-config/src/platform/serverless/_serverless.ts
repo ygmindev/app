@@ -37,7 +37,7 @@ export const _serverless = ({
         host: host.split('://')[1],
         httpPort: port,
         ignoreJWTSignature: true,
-        lambdaPort,
+        lambdaPort: null,
         noPrependStageInUrl: true,
       },
 
