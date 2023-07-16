@@ -21,7 +21,7 @@ const { _config, config } = defineConfig({
 
       host: process.env.SERVER_HOST,
 
-      lambdaPort: toNumber(process.env.SERVER_LAMBDA_PORT),
+      lambdaPort: toNumber(process.env.SERVER_PORT),
 
       name: 'serverless',
 

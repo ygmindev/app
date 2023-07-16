@@ -32,17 +32,14 @@ export type EnvironmentConfigModel = {
   SERVER_EMAIL_HOST: string;
   SERVER_EMAIL_PASSWORD: string;
   SERVER_EMAIL_PORT: string;
-  SERVER_PORT: string;
-  SERVER_HOST: string;
   SERVER_EMAIL_USERNAME: string;
   SERVER_ENCRYPTION_ALGORITHM: string;
   SERVER_FIREBASE_ADMIN_EMAIL: string;
   SERVER_FIREBASE_ADMIN_PROJECT_ID: string;
   SERVER_FIREBASE_ADMIN_SECRET: string;
+  SERVER_HOST: string;
   SERVER_IV_LENGTH: string;
   SERVER_KEY_LENGTH: string;
-  SERVER_LAMBDA_HOST: string;
-  SERVER_LAMBDA_PORT: string;
   SERVER_OTP_LENGTH: number;
   SERVER_OTP_STATIC?: string;
   SERVER_PLAID_CLIENT_ID: string;
@@ -52,6 +49,7 @@ export type EnvironmentConfigModel = {
   SERVER_PLAID_REDIRECT_URI: string;
   SERVER_PLAID_SECRET: string;
   SERVER_PLAID_VERSION: string;
+  SERVER_PORT: string;
   SERVER_REGION: string;
   SERVER_SALT_LENGTH: string;
   SERVER_STRIPE_TOKEN: string;
