@@ -23,10 +23,10 @@ export const _command = async (
       stdio: isSilent ? 'pipe' : 'inherit',
     });
     cp.stdout?.on('data', (data: Buffer) => {
-      onData && onData(data.toString());
+      onData && void onData(data.toString());
     });
     cp.stderr?.on('data', (data: Buffer) => {
-      onData && onData(data.toString());
+      onData && void onData(data.toString());
     });
     await new Promise((resolve) => {
       ['exit', 'close'].forEach((event) => cp.on(event, (code) => resolve(code === 0)));
