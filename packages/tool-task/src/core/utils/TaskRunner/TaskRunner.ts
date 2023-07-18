@@ -1,8 +1,8 @@
 import { type ChildProcess, spawn } from 'child_process';
+import isArray from 'lodash/isArray';
 import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
 import kebabCase from 'lodash/kebabCase';
-import reduce from 'lodash/reduce';
 
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
@@ -11,13 +11,14 @@ import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/Duplicate
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { sequence } from '#lib-shared/core/utils/sequence/sequence';
 import { setEnvironment } from '#lib-shared/environment/utils/setEnvironment/setEnvironment';
-import { error, info, warn } from '#lib-shared/logging/utils/logger/logger';
-import { TASK_STATUS } from '#tool-task/core/core.constants';
+import { error, info } from '#lib-shared/logging/utils/logger/logger';
 import {
-  type TaskFunctionModel,
+  type TaskContextModel,
+  type TaskModel,
   type TaskParamsModel,
-  type TaskResultModel,
 } from '#tool-task/core/core.models';
+import { parseArgs } from '#tool-task/core/utils/parseArgs/parseArgs';
+import { prompt } from '#tool-task/core/utils/prompt/prompt';
 import { _TaskRunner } from '#tool-task/core/utils/TaskRunner/_TaskRunner';
 import { type TaskRunnerModel } from '#tool-task/core/utils/TaskRunner/TaskRunner.models';
 
@@ -26,7 +27,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
   protected _aliases: Record<string, string> = {};
   protected _pids: Set<number> = new Set();
 
-  handleProcess = (p: ChildProcess | NodeJS.Process): Promise<TaskResultModel> =>
+  handleProcess = (p: ChildProcess | NodeJS.Process): Promise<void> =>
     new Promise((resolve, reject) => {
       const pidF = p.pid;
       pidF && this._pids.add(pidF);
@@ -35,11 +36,11 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
       };
       const handleSuccess = (): void => {
         handleFinish();
-        resolve({ status: TASK_STATUS.SUCCESS });
+        resolve();
       };
       const handleError = (message: string): void => {
         handleFinish();
-        reject({ message, status: TASK_STATUS.ERROR });
+        reject(new Error(message));
       };
       p.once('SIGTERM', handleSuccess);
       p.once('SIGINT', handleSuccess);
@@ -47,74 +48,76 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
       p.once('unhandledRejection', handleError);
     });
 
-  resolveTask = async (
-    task: string | TaskResultModel | TaskFunctionModel,
-  ): Promise<TaskResultModel> => {
-    if (isString(task)) {
-      const taskF =
-        this.getTask(task) ??
-        (async () => {
-          const cp = spawn(task, { env: process.env, shell: true });
+  resolveTask = async <TType>(
+    value: TaskModel<TType>,
+    context: TaskContextModel<TType>,
+  ): Promise<void> => {
+    if (value) {
+      if (isFunction(value)) {
+        let valueF = value(context);
+        valueF = valueF && (isString(valueF) ? this.resolveTask(valueF, context) : valueF);
+        await valueF;
+      } else if (isString(value)) {
+        const valueF = this.getTask(value);
+        if (valueF) {
+          await valueF();
+        } else {
+          const cp = spawn(value, { env: process.env, shell: true });
           return this.handleProcess(cp);
-        });
-      return taskF();
+        }
+      }
     }
-    return isFunction(task) ? task() : task;
   };
 
-  runTask = async <TType = undefined>({
+  runTasks = async <TType>(
+    value: TaskModel<TType> | Array<TaskModel<TType>>,
+    context: TaskContextModel<TType>,
+  ): Promise<void> => {
+    if (isArray(value)) {
+      await sequence(value.map((v) => async () => this.resolveTask(v, context)));
+    } else {
+      await this.resolveTask(value, context);
+    }
+  };
+
+  handleClose = async (): Promise<void> => {
+    this._pids.forEach(process.kill);
+    process.exit(0);
+  };
+
+  runTask = async <TType>({
     environment,
     name,
-    onAfter,
-    onBefore,
-    options,
+    onFinish,
     overrides,
+    params,
     root,
     target,
     task,
   }: TaskParamsModel<TType>): Promise<void> => {
-    const handleClose = async (): Promise<void> => {
-      this._pids.forEach(process.kill);
-      process.exit(0);
-    };
+    const rootF = root ?? (target ? fromPackages(target) : fromRoot());
+    process.chdir(rootF);
+    setEnvironment({ environment, overrides });
 
+    let paramsF = parseArgs() as TType;
+    if (params) {
+      paramsF = await prompt(params.filter(({ key }) => !(key in (paramsF as object))));
+    }
+
+    const context: TaskContextModel<TType> = { params: paramsF, root };
     try {
       info('running', name);
-
-      process.on('exit', () => void handleClose());
-
-      const rootF = root ?? (target ? fromPackages(target) : fromRoot());
-      process.chdir(rootF);
-      setEnvironment({ environment, overrides });
-
-      onBefore && (await sequence(onBefore.map((value) => async () => this.resolveTask(value))));
-
-      const taskF = await task({ name, options, root: rootF, target });
-      const { error: errorF, message, status } = await this.resolveTask(taskF);
-
-      onAfter && (await sequence(onAfter.map((value) => async () => this.resolveTask(value))));
-
-      switch (status) {
-        case TASK_STATUS.SUCCESS: {
-          info(name, message ?? 'completed');
-          break;
-        }
-        case TASK_STATUS.WARNING: {
-          warn(name, message ?? 'completed with warnings');
-          break;
-        }
-        default: {
-          error(name, errorF?.message ?? message ?? 'failed');
-          break;
-        }
-      }
+      await this.runTasks(task, context);
     } catch (e) {
       error(name, (e as Error).stack);
-      await handleClose();
+    } finally {
+      this._pids.forEach(process.kill);
+      onFinish && (await this.runTasks(onFinish, context));
+      info('completed:', name);
     }
   };
 
-  register = <TType = undefined>({ name, target, ...params }: TaskParamsModel<TType>): void => {
+  register = <TType>({ name, target, ...params }: TaskParamsModel<TType>): void => {
     const targetF = target && kebabCase(target);
     const nameF = filterNil([targetF, kebabCase(name)]).join('-');
     const alias = kebabCase(nameF)
@@ -134,14 +137,6 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
       );
     });
   };
-
-  get registry(): Record<string, TaskFunctionModel> {
-    return reduce(
-      super.registry,
-      (result, v, k) => (k === 'default' ? result : { ...result, [k]: v }),
-      {},
-    );
-  }
 
   get aliases(): Record<string, string> {
     return this._aliases;

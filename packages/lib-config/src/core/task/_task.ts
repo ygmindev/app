@@ -22,13 +22,13 @@ export const _task = ({ packageFilename, taskExtension }: TaskConfigModel): _Tas
     ...fromGlobs([joinPaths({ extension: taskExtension, paths: ['*/src/**/*'] })], {
       isAbsolute: true,
       root: fromPackages(),
-    }).map((path) => requireInterop<TaskParamsModel>(path)),
+    }).map((path) => requireInterop<TaskParamsModel<unknown>>(path)),
 
     // Package tasks
-    ...packages.reduce<Array<TaskParamsModel>>((result, target) => {
+    ...packages.reduce<Array<TaskParamsModel<unknown>>>((result, target) => {
       const path = fromPackages(target, packageFilename);
       if (existsSync(path)) {
-        const tasks = requireInterop<Array<TaskParamsModel>>(path);
+        const tasks = requireInterop<Array<TaskParamsModel<unknown>>>(path);
         return [...result, ...tasks.map((task) => ({ ...task, target }))];
       }
       return result;
@@ -39,7 +39,7 @@ export const _task = ({ packageFilename, taskExtension }: TaskConfigModel): _Tas
       name: 'default',
 
       task: async () => {
-        const { name } = await prompt([
+        const { name } = await prompt<{ name: string }>([
           {
             key: 'name',
             options: [...Object.keys(taskRunner.aliases), ...Object.keys(taskRunner.registry)],

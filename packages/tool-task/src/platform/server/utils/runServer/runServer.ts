@@ -1,20 +1,13 @@
 import { fromExecutable } from '#lib-backend/file/utils/fromExecutable/fromExecutable';
-import { command } from '#tool-task/core/utils/command/command';
-import { STATIC_SERVER_PORT } from '#tool-task/platform/server/utils/runServer/runServer.constants';
 import {
   type RunServerModel,
   type RunServerParamsModel,
 } from '#tool-task/platform/server/utils/runServer/runServer.models';
 
-export const runServer = async ({
+export const runServer = ({
+  host = process.env.SERVER_HOST,
   isOpen = true,
   path,
-  port,
-  root,
-}: RunServerParamsModel): Promise<RunServerModel> =>
-  command(
-    fromExecutable(
-      `http-server ${path} --cors --port ${port ?? STATIC_SERVER_PORT} ${isOpen ? '--o' : ''}`,
-    ),
-    { root },
-  );
+  port = process.env.SERVER_PORT,
+}: RunServerParamsModel): RunServerModel =>
+  fromExecutable(`http-server ${path} -a ${host} --cors --port ${port} ${isOpen ? '--o' : ''}`);

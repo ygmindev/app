@@ -1,11 +1,11 @@
-import { runTask } from '#tool-task/core/utils/runTask/runTask';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { parseArgs } from '#tool-task/core/utils/parseArgs/parseArgs';
 
-const { displayName } = withTest({ runTask });
+const { displayName } = withTest({ parseArgs });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await runTask({});
+    const result = parseArgs();
     expect(result).toStrictEqual({});
   });
 });

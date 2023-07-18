@@ -1,10 +1,16 @@
-import { type PROMPT_TYPE } from '#tool-task/core/utils/prompt/prompt.constants';
-import { type PromptArgsModel } from '#tool-task/core/utils/prompt/prompt.models';
+import {
+  type ArrayPromptArgsModel,
+  type StringPromptArgsModel,
+} from '#tool-task/core/utils/prompt/prompt.models';
 
-export type _PromptParamsModel<TParams extends Array<PromptArgsModel>> = TParams;
+export type _PromptParamsModel<TType> = Array<
+  {
+    [TKey in keyof TType]: TType[TKey] extends Array<string>
+      ? ArrayPromptArgsModel<TKey>
+      : TType[TKey] extends string
+      ? StringPromptArgsModel<TKey>
+      : never;
+  }[keyof TType]
+>;
 
-export type _PromptModel<TParams extends Array<PromptArgsModel>> = {
-  [TKey in TParams[number]['key']]: TParams[number]['type'] extends PROMPT_TYPE.CHECKBOX
-    ? Array<string>
-    : string;
-};
+export type _PromptModel<TType> = TType;

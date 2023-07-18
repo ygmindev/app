@@ -15,10 +15,10 @@ beforeEach(async () => {
 
 afterAll(async () => {
   const { config } = await importConfig<TestConfigModel>('node/test/test');
-  config.onAfterAll && (await config.onAfterAll());
+  config.onFinishAll && (await config.onFinishAll());
 });
 
 afterEach(async () => {
   const { config } = await importConfig<TestConfigModel>('node/test/test');
-  config.onAfterEach && (await config.onAfterEach());
+  config.onFinishEach && (await config.onFinishEach());
 });

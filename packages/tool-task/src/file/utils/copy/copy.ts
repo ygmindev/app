@@ -26,9 +26,9 @@ export const copy = async ({
         await copy({ from: join(from, child), isOverwrite, overrides, to: join(toF, child) });
       }
     } else if (isOverwrite || !existsSync(toF)) {
-      let _file = readFileSync(from, 'utf8');
-      overrides && forEach(overrides, (v, k) => (_file = _file.replaceAll(k, v)));
-      writeFile({ filename: toF, value: _file });
+      let fileF = readFileSync(from, 'utf8');
+      overrides && forEach(overrides, (v, k) => (fileF = fileF.replaceAll(k, v)));
+      writeFile({ filename: toF, value: fileF });
     }
   }
 };

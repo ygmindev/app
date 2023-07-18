@@ -9,13 +9,12 @@ import {
   type _PromptParamsModel,
 } from '#tool-task/core/utils/prompt/_prompt.models';
 import { PROMPT_TYPE } from '#tool-task/core/utils/prompt/prompt.constants';
-import { type PromptArgsModel } from '#tool-task/core/utils/prompt/prompt.models';
 
 registerPrompt(PROMPT_TYPE.DIRECTORY, directory as prompts.PromptConstructor);
 
-export const _prompt = async <TParams extends Array<PromptArgsModel>>(
-  prompts: _PromptParamsModel<TParams>,
-): Promise<_PromptModel<TParams>> =>
+export const _prompt = async <TType>(
+  prompts: _PromptParamsModel<TType>,
+): Promise<_PromptModel<TType>> =>
   prompt(
     prompts.map(
       ({

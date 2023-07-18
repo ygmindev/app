@@ -15,10 +15,10 @@ const backup: TaskParamsModel<BackupParamsModel> = {
   name: 'backup',
 
   task: async ({ options, root }) => {
-    const { excludes, includes, name } = options || {};
-    const nameF = name || (await prompt([{ key: 'name' }])).name;
-    const includesF = includes || [fromRoot('*')];
-    const excludesF = excludes || config.excludePatterns;
+    const { excludes, includes, name } = options ?? {};
+    const nameF = name ?? (await prompt([{ key: 'name' }])).name;
+    const includesF = includes ?? [fromRoot('*')];
+    const excludesF = excludes ?? config.excludePatterns;
     const dest = join(
       config.backupDir,
       `${kebabCase(nameF)}-${kebabCase(
@@ -30,7 +30,7 @@ const backup: TaskParamsModel<BackupParamsModel> = {
         .map((pattern) => `--exclude '${pattern.replace('**/', '')}'`)
         .join(' ')} ${dest}`,
     );
-    process.chdir(root || fromRoot());
+    process.chdir(root ?? fromRoot());
     return { status: TASK_STATUS.SUCCESS };
   },
 };

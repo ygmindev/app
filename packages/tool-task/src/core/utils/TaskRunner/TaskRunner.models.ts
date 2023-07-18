@@ -4,7 +4,7 @@ import { type _TaskRunnerModel } from '#tool-task/core/utils/TaskRunner/_TaskRun
 export type TaskRunnerModel = {
   aliases: Record<string, string>;
 
-  register<TType = undefined>(params: TaskParamsModel<TType>): void;
+  register<TType>(params: TaskParamsModel<TType>): void;
 
-  runTask<TType = undefined>(params: TaskParamsModel<TType>): Promise<void>;
+  runTask<TType>(params: TaskParamsModel<TType>): Promise<void>;
 } & _TaskRunnerModel;

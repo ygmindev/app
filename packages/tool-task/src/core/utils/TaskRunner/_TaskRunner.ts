@@ -2,7 +2,6 @@ import { registry, series, task as gulpTask } from 'gulp';
 import reduce from 'lodash/reduce';
 
 import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/DuplicateError';
-import { type TaskFunctionModel } from '#tool-task/core/core.models';
 import { type _TaskRunnerModel } from '#tool-task/core/utils/TaskRunner/_TaskRunner.models';
 
 export class _TaskRunner implements _TaskRunnerModel {
@@ -13,9 +12,9 @@ export class _TaskRunner implements _TaskRunnerModel {
     gulpTask(name, async () => task());
   };
 
-  getTask = (name: string): TaskFunctionModel | null => this.registry[name] ?? null;
+  getTask = (name: string): (() => Promise<void>) => this.registry[name];
 
-  get registry(): Record<string, TaskFunctionModel> {
+  get registry(): Record<string, () => Promise<void>> {
     return reduce(
       registry().tasks(),
       (result, v, k) => ({

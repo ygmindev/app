@@ -66,6 +66,10 @@ export const _lint = ({
     '@typescript-eslint/no-empty-interface': 'off',
     '@typescript-eslint/no-floating-promises': ['error', { ignoreVoid: true }],
     '@typescript-eslint/no-unnecessary-type-constraint': 'off',
+    '@typescript-eslint/no-unused-expressions': [
+      'warn',
+      { allowShortCircuit: true, allowTaggedTemplates: true, allowTernary: true },
+    ],
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/require-await': 'off',
@@ -78,6 +82,7 @@ export const _lint = ({
     'import/no-extraneous-dependencies': ['error', { packageDir: roots }],
     'no-param-reassign': 'error',
     'no-return-await': 'off',
+    'no-unused-expressions': 'off',
     'no-unused-vars': 'off',
     'object-shorthand': 'error',
     'prefer-destructuring': 'error',

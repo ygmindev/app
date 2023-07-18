@@ -1,18 +1,12 @@
-import { TASK_STATUS } from '#tool-task/core/core.constants';
 import { type TaskParamsModel } from '#tool-task/core/core.models';
-import { command } from '#tool-task/core/utils/command/command';
-import { portIsOpen } from '#tool-task/core/utils/portIsOpen/portIsOpen';
-import { prompt } from '#tool-task/core/utils/prompt/prompt';
+import { type PortKillParamsModel } from '#tool-task/core/tasks/portKill/portKill.models';
 
-const portKill: TaskParamsModel = {
-  name: 'portKill',
+const portKill: TaskParamsModel<PortKillParamsModel> = {
+  name: 'port-kill',
 
-  task: async ({ root }) => {
-    const { port } = await prompt([{ key: 'port' }]);
-    !(await portIsOpen(port)) &&
-      (await command(`if pids=$(lsof -ti:${port}); then kill -9 $pids; fi`, { root }));
-    return { status: TASK_STATUS.SUCCESS };
-  },
+  params: [{ key: 'port' }],
+
+  task: ({ params }) => `if pids=$(lsof -ti:${params?.port}); then kill -9 $pids; fi`,
 };
 
 export default portKill;

@@ -22,13 +22,13 @@ export type TestConfigModel = {
 
   mocks?: Array<string | [string, () => unknown]>;
 
-  onAfterAll?(): Promise<void>;
-
-  onAfterEach?(): Promise<void>;
-
   onBeforeAll?(): Promise<void>;
 
   onBeforeEach?(): Promise<void>;
+
+  onFinishAll?(): Promise<void>;
+
+  onFinishEach?(): Promise<void>;
 
   outputPath: string;
 

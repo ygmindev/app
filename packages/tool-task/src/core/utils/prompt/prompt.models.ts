@@ -4,9 +4,9 @@ import {
 } from '#tool-task/core/utils/prompt/_prompt.models';
 import { type PROMPT_TYPE } from '#tool-task/core/utils/prompt/prompt.constants';
 
-export type PromptParamsModel<TParams extends Array<PromptArgsModel>> = _PromptParamsModel<TParams>;
+export type PromptParamsModel<TType> = _PromptParamsModel<TType>;
 
-export type PromptModel<TParams extends Array<PromptArgsModel>> = _PromptModel<TParams>;
+export type PromptModel<TType> = _PromptModel<TType>;
 
 export type PromptTypeModel = `${PROMPT_TYPE}`;
 
@@ -20,3 +20,22 @@ export type PromptArgsModel = {
   | { basePath?: never; defaultValue?: Array<string>; type?: PROMPT_TYPE.CHECKBOX }
   | { basePath?: never; defaultValue?: string; type?: PromptTypeModel }
 );
+
+export type BasePromptArgsModel<TKey> = {
+  isOptional?: boolean;
+  key: TKey;
+  message?: string;
+  options?: Array<string>;
+};
+
+export type StringPromptArgsModel<TKey> = BasePromptArgsModel<TKey> &
+  (
+    | { basePath?: string; defaultValue?: string; type?: PROMPT_TYPE.DIRECTORY }
+    | { basePath?: never; defaultValue?: string; type?: PromptTypeModel }
+  );
+
+export type ArrayPromptArgsModel<TKey> = BasePromptArgsModel<TKey> & {
+  basePath?: never;
+  defaultValue?: Array<string>;
+  type?: PROMPT_TYPE.CHECKBOX;
+};

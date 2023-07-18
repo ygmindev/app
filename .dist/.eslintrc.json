@@ -109,6 +109,8 @@
     ],
     "no-param-reassign": "error",
     "no-return-await": "off",
+    "@typescript-eslint/no-unused-expressions": ["warn", { "allowShortCircuit": true, "allowTernary": true, "allowTaggedTemplates": true }],
+    "no-unused-expressions": "off",
     "no-unused-vars": "off",
     "object-shorthand": "error",
     "prefer-destructuring": "error",

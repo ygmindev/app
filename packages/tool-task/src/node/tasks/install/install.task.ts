@@ -11,7 +11,7 @@ import { type InstallParamsModel } from '#tool-task/node/tasks/install/install.m
 const install: TaskParamsModel<InstallParamsModel> = {
   name: 'node-install',
 
-  onAfter: ['node-post-install'],
+  onFinish: ['node-post-install'],
 
   task: async ({ options }) => {
     const root = fromRoot();

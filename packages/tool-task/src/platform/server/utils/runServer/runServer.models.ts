@@ -1,10 +1,7 @@
-import { type TaskResultModel } from '#tool-task/core/core.models';
+import { type UriParamsModel } from '#lib-shared/http/utils/uri/uri.models';
 
-export type RunServerParamsModel = {
+export type RunServerParamsModel = Omit<UriParamsModel, 'params'> & {
   isOpen?: boolean;
-  path: string;
-  port?: number | string;
-  root?: string;
 };
 
-export type RunServerModel = TaskResultModel;
+export type RunServerModel = string;
