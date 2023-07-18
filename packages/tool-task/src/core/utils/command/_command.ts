@@ -29,19 +29,12 @@ export const _command = async (
       onData && void onData(data.toString());
     });
     await new Promise((resolve) => {
-      [
-        'exit',
-        'cleanup',
-        'close',
-        'uncaughtException',
-        'SIGTERM',
-        'SIGKILL',
-        'SIGUSR1',
-        'SIGUSR2',
-      ].forEach((event) => {
-        process.on(event, () => cp.kill());
-        cp.on(event, (code) => resolve(code === 0));
-      });
+      ['exit', 'cleanup', 'close', 'uncaughtException', 'SIGTERM', 'SIGUSR1', 'SIGUSR2'].forEach(
+        (event) => {
+          process.on(event, () => cp.kill());
+          cp.on(event, (code) => resolve(code === 0));
+        },
+      );
     });
     return { status: TASK_STATUS.SUCCESS };
   } catch (e) {

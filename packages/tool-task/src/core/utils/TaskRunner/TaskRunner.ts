@@ -48,7 +48,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
       p.once('unhandledRejection', handleError);
     });
 
-  resolveTask = async <TType>(
+  resolveTask = async <TType = undefined>(
     value: TaskModel<TType>,
     context: TaskContextModel<TType>,
   ): Promise<void> => {
@@ -69,7 +69,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     }
   };
 
-  runTasks = async <TType>(
+  runTasks = async <TType = undefined>(
     value: TaskModel<TType> | Array<TaskModel<TType>>,
     context: TaskContextModel<TType>,
   ): Promise<void> => {
@@ -85,7 +85,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     process.exit(0);
   };
 
-  runTask = async <TType>({
+  runTask = async <TType = undefined>({
     environment,
     name,
     onFinish,
@@ -117,7 +117,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     }
   };
 
-  register = <TType>({ name, target, ...params }: TaskParamsModel<TType>): void => {
+  register = <TType = undefined>({ name, target, ...params }: TaskParamsModel<TType>): void => {
     const targetF = target && kebabCase(target);
     const nameF = filterNil([targetF, kebabCase(name)]).join('-');
     const alias = kebabCase(nameF)

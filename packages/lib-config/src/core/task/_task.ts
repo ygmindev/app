@@ -46,7 +46,7 @@ export const _task = ({ packageFilename, taskExtension }: TaskConfigModel): _Tas
             type: PROMPT_TYPE.LIST,
           },
         ]);
-        return taskRunner.get(name)();
+        return taskRunner.getTask(name)();
       },
     },
   ]);
