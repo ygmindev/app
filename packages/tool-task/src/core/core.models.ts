@@ -1,4 +1,4 @@
-import { type NilModel } from '#lib-shared/core/core.models';
+import { type NilModel, type PartialModel } from '#lib-shared/core/core.models';
 import { type EnvironmentOverrideParamsModel } from '#lib-shared/environment/environment.models';
 import { type TASK_STATUS } from '#tool-task/core/core.constants';
 import { type PromptParamsModel } from '#tool-task/core/utils/prompt/prompt.models';
@@ -6,7 +6,7 @@ import { type PromptParamsModel } from '#tool-task/core/utils/prompt/prompt.mode
 export type TaskStatusModel = `${TASK_STATUS}`;
 
 export type TaskModel<TType = undefined> =
-  | ((params: TaskContextModel<TType>) => string | Promise<void> | NilModel)
+  | ((context: TaskContextModel<TType>) => string | Promise<void> | void | NilModel)
   | string
   | NilModel;
 
@@ -16,15 +16,21 @@ export type TaskResultModel = {
   status: TaskStatusModel;
 };
 
-export type TaskParamsModel<TType = undefined> = {
-  name: string;
-  onFinish?: TaskModel<TType> | Array<TaskModel<TType>>;
-  params?: PromptParamsModel<TType>;
-  root?: string;
+export type TaskParamsModel<TType = undefined> = Omit<TaskContextModel<TType>, 'options'> & {
+  onFinish?: Array<TaskModel<TType>>;
+  options?:
+    | PromptParamsModel<TType>
+    | ((
+        context: Pick<TaskContextModel<TType>, 'name' | 'root' | 'overrides'>,
+      ) => PromptParamsModel<TType>);
+
   target?: string;
-  task: TaskModel<TType> | Array<TaskModel<TType>>;
+  task: Array<TaskModel<TType>>;
 } & EnvironmentOverrideParamsModel;
 
-export type TaskContextModel<TType = undefined> = Pick<TaskParamsModel<TType>, 'root'> & {
-  params?: TType;
+export type TaskContextModel<TType = undefined> = {
+  name: string;
+  options?: TType;
+  overrides?: PartialModel<TType>;
+  root?: string;
 };

@@ -38,16 +38,18 @@ export const _task = ({ packageFilename, taskExtension }: TaskConfigModel): _Tas
     {
       name: 'default',
 
-      task: async () => {
-        const { name } = await prompt<{ name: string }>([
-          {
-            key: 'name',
-            options: [...Object.keys(taskRunner.aliases), ...Object.keys(taskRunner.registry)],
-            type: PROMPT_TYPE.LIST,
-          },
-        ]);
-        return taskRunner.getTask(name)();
-      },
+      task: [
+        async () => {
+          const { name } = await prompt<{ name: string }>([
+            {
+              key: 'name',
+              options: [...Object.keys(taskRunner.aliases), ...Object.keys(taskRunner.registry)],
+              type: PROMPT_TYPE.LIST,
+            },
+          ]);
+          return taskRunner.getTask(name)();
+        },
+      ],
     },
   ]);
 

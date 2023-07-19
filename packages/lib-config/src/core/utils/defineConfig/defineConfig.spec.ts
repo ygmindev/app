@@ -41,7 +41,6 @@ describe(displayName, () => {
       _config: _CONFIG,
       config: () => ({ k1: 1, k2: 2 }),
     });
-    console.warn(_config);
     expect(_config()).toStrictEqual({ v1: '1', v2: '2' });
   });
 

@@ -1,5 +1,4 @@
 import { type ChildProcess, spawn } from 'child_process';
-import isArray from 'lodash/isArray';
 import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
 import kebabCase from 'lodash/kebabCase';
@@ -44,6 +43,8 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
       };
       p.once('SIGTERM', handleSuccess);
       p.once('SIGINT', handleSuccess);
+      p.once('close', handleSuccess);
+      p.once('exit', handleSuccess);
       p.once('uncaughtException', handleError);
       p.once('unhandledRejection', handleError);
     });
@@ -70,14 +71,10 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
   };
 
   runTasks = async <TType = undefined>(
-    value: TaskModel<TType> | Array<TaskModel<TType>>,
+    value: Array<TaskModel<TType>>,
     context: TaskContextModel<TType>,
   ): Promise<void> => {
-    if (isArray(value)) {
-      await sequence(value.map((v) => async () => this.resolveTask(v, context)));
-    } else {
-      await this.resolveTask(value, context);
-    }
+    await sequence(value.map((v) => async () => this.resolveTask(v, context)));
   };
 
   handleClose = async (): Promise<void> => {
@@ -89,22 +86,25 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     environment,
     name,
     onFinish,
+    options,
     overrides,
-    params,
     root,
-    target,
     task,
+    variables,
   }: TaskParamsModel<TType>): Promise<void> => {
-    const rootF = root ?? (target ? fromPackages(target) : fromRoot());
-    process.chdir(rootF);
-    setEnvironment({ environment, overrides });
+    process.chdir(root ?? fromRoot());
+    setEnvironment({ environment, variables });
 
-    let paramsF = parseArgs() as TType;
-    if (params) {
-      paramsF = await prompt(params.filter(({ key }) => !(key in (paramsF as object))));
+    let optionsF = { ...parseArgs(), ...overrides } as TType;
+    if (options) {
+      const optionsPromps = isFunction(options) ? options({ name, overrides, root }) : options;
+      optionsF = {
+        ...optionsF,
+        ...(await prompt(optionsPromps.filter(({ key }) => !(key in (optionsF as object))))),
+      };
     }
 
-    const context: TaskContextModel<TType> = { params: paramsF, root };
+    const context: TaskContextModel<TType> = { name, options: optionsF, root };
     try {
       info('running', name);
       await this.runTasks(task, context);
@@ -117,7 +117,13 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     }
   };
 
-  register = <TType = undefined>({ name, target, ...params }: TaskParamsModel<TType>): void => {
+  register = <TType = undefined>({
+    name,
+    root,
+    target,
+    ...options
+  }: TaskParamsModel<TType>): void => {
+    const rootF = root ?? (target ? fromPackages(target) : fromRoot());
     const targetF = target && kebabCase(target);
     const nameF = filterNil([targetF, kebabCase(name)]).join('-');
     const alias = kebabCase(nameF)
@@ -133,7 +139,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
 
     [nameF, alias].forEach((value) => {
       this.registerTask(value, async () =>
-        this.runTask({ ...params, name: nameF, target: targetF }),
+        this.runTask({ ...options, name: nameF, root: rootF, target: targetF }),
       );
     });
   };

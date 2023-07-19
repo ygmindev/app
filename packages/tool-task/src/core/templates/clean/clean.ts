@@ -6,8 +6,9 @@ import { runClean } from '#tool-task/core/utils/runClean/runClean';
 const clean: TaskParamsModel<CleanParamsModel> = {
   name: 'clean',
 
-  task: async ({ options }) =>
-    runClean({ ...options, excludes: ['node_modules'], root: fromRoot() }),
+  task: [
+    async ({ options }) => runClean({ ...options, excludes: ['node_modules'], root: fromRoot() }),
+  ],
 };
 
 export default clean;

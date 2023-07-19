@@ -1,6 +1,5 @@
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 import { type TaskParamsModel } from '#tool-task/core/core.models';
-import { command } from '#tool-task/core/utils/command/command';
 import { type TestParamsModel } from '#tool-task/node/templates/test/test.models';
 
 export const test: TaskParamsModel<TestParamsModel> = {
@@ -8,7 +7,7 @@ export const test: TaskParamsModel<TestParamsModel> = {
 
   name: 'test',
 
-  task: async ({ options, root }) => command('echo hello'),
+  task: ['echo hello'],
 };
 
 // import { type Config } from '@jest/types';

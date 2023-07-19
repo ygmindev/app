@@ -70,6 +70,14 @@
       }
     ],
     "@typescript-eslint/no-unnecessary-type-constraint": "off",
+    "@typescript-eslint/no-unused-expressions": [
+      "warn",
+      {
+        "allowShortCircuit": true,
+        "allowTaggedTemplates": true,
+        "allowTernary": true
+      }
+    ],
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/require-await": "off",
@@ -109,7 +117,6 @@
     ],
     "no-param-reassign": "error",
     "no-return-await": "off",
-    "@typescript-eslint/no-unused-expressions": ["warn", { "allowShortCircuit": true, "allowTernary": true, "allowTaggedTemplates": true }],
     "no-unused-expressions": "off",
     "no-unused-vars": "off",
     "object-shorthand": "error",

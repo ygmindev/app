@@ -10,31 +10,20 @@ export type PromptModel<TType> = _PromptModel<TType>;
 
 export type PromptTypeModel = `${PROMPT_TYPE}`;
 
-export type PromptArgsModel = {
-  isOptional?: boolean;
-  key: string;
-  message?: string;
-  options?: Array<string>;
-} & (
-  | { basePath?: string; defaultValue?: string; type?: PROMPT_TYPE.DIRECTORY }
-  | { basePath?: never; defaultValue?: Array<string>; type?: PROMPT_TYPE.CHECKBOX }
-  | { basePath?: never; defaultValue?: string; type?: PromptTypeModel }
-);
-
-export type BasePromptArgsModel<TKey> = {
+export type PromptArgsModel<TKey> = {
   isOptional?: boolean;
   key: TKey;
   message?: string;
   options?: Array<string>;
 };
 
-export type StringPromptArgsModel<TKey> = BasePromptArgsModel<TKey> &
+export type StringPromptArgsModel<TKey> = PromptArgsModel<TKey> &
   (
     | { basePath?: string; defaultValue?: string; type?: PROMPT_TYPE.DIRECTORY }
     | { basePath?: never; defaultValue?: string; type?: PromptTypeModel }
   );
 
-export type ArrayPromptArgsModel<TKey> = BasePromptArgsModel<TKey> & {
+export type ArrayPromptArgsModel<TKey> = PromptArgsModel<TKey> & {
   basePath?: never;
   defaultValue?: Array<string>;
   type?: PROMPT_TYPE.CHECKBOX;

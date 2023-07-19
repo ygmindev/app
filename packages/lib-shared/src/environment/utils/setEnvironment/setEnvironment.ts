@@ -16,10 +16,10 @@ import {
 
 export const setEnvironment = ({
   environment = process.env.NODE_ENV ?? ENVIRONMENT.DEVELOPMENT,
-  overrides,
+  variables,
   writes,
 }: SetEnvironmentParamsModel = {}): SetEnvironmentModel => {
-  overrides && (process.env = { ...process.env, ...overrides() });
+  variables && (process.env = { ...process.env, ...variables() });
 
   const paths = [
     fromConfig('core/environment/.env.base'),

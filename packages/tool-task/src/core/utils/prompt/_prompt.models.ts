@@ -5,12 +5,12 @@ import {
 
 export type _PromptParamsModel<TType> = Array<
   {
-    [TKey in keyof TType]: TType[TKey] extends Array<string>
+    [TKey in keyof Required<TType>]: Required<TType>[TKey] extends Array<string>
       ? ArrayPromptArgsModel<TKey>
-      : TType[TKey] extends string
+      : Required<TType>[TKey] extends string
       ? StringPromptArgsModel<TKey>
       : never;
-  }[keyof TType]
+  }[keyof Required<TType>]
 >;
 
 export type _PromptModel<TType> = TType;

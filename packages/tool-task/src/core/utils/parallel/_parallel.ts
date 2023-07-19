@@ -15,8 +15,8 @@ export const _parallel = async (params: _ParallelParamsModel): Promise<_Parallel
         return task;
       }
       const [command, options] = task;
-      const { environment, overrides, root } = options ?? {};
-      setEnvironment({ environment, overrides });
+      const { environment, root, variables } = options ?? {};
+      setEnvironment({ environment, variables });
       return { command, cwd: root, env: process.env, name: command };
     }),
     {
