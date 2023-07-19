@@ -1,5 +1,5 @@
 export type DebounceParamsModel<TResult = void, TParams extends Array<unknown> = Array<unknown>> = [
-  callback: (params?: TParams) => TResult,
+  callback: (...params: TParams) => TResult,
   options?: {
     duration?: number;
     isLeading?: boolean;
@@ -7,5 +7,5 @@ export type DebounceParamsModel<TResult = void, TParams extends Array<unknown> =
 ];
 
 export type DebounceModel<TResult = void, TParams extends Array<unknown> = never> = (
-  params?: TParams,
+  ...params: TParams
 ) => TResult;

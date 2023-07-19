@@ -59,19 +59,18 @@ export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
               style: StyleSheet.flatten(
                 filterNil([
                   isDistribute && { flexBasis: 0, flexGrow: 1 },
-                  (props.isReverse && result.length !== length - 1) ||
-                    (!props.isReverse &&
-                      result.length > 0 &&
-                      spacingStyler(
-                        {
-                          mLeft:
-                            childProps.mLeft === undefined
-                              ? isRow && (isRowAlign ? THEME_SIZE.SMALL : s)
-                              : childProps.mLeft,
-                          mTop: childProps.mTop === undefined ? !isRow && s : childProps.mTop,
-                        },
-                        theme,
-                      )),
+                  ((props.isReverse && result.length !== length - 1) ||
+                    (!props.isReverse && result.length > 0)) &&
+                    spacingStyler(
+                      {
+                        mLeft:
+                          childProps.mLeft === undefined
+                            ? isRow && (isRowAlign ? THEME_SIZE.SMALL : s)
+                            : childProps.mLeft,
+                        mTop: childProps.mTop === undefined ? !isRow && s : childProps.mTop,
+                      },
+                      theme,
+                    ),
                   childProps.style,
                 ]),
               ),

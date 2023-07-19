@@ -3,7 +3,6 @@ import { type EnvironmentOverrideParamsModel } from '#lib-shared/environment/env
 import { PING } from '#lib-shared/http/http.constants';
 import { uri } from '#lib-shared/http/utils/uri/uri';
 import { TASK_STATUS } from '#tool-task/core/core.constants';
-import { type TaskParamsModel } from '#tool-task/core/core.models';
 import { parallel } from '#tool-task/core/utils/parallel/parallel';
 import { waitOn } from '#tool-task/core/utils/waitOn/waitOn';
 import { WAIT_ON_RESOURCE_TYPE } from '#tool-task/core/utils/waitOn/waitOn.constants';
@@ -14,7 +13,7 @@ const overrides: EnvironmentOverrideParamsModel['overrides'] = () => ({
   SERVER_OTP_STATIC: randomInt(process.env.SERVER_OTP_LENGTH).toString(),
 });
 
-const tasks: Array<TaskParamsModel<unknown>> = [
+const tasks = [
   ...nodeTasks({
     testOverrides: {
       onBefore: [
@@ -60,7 +59,7 @@ export default tasks;
 //   SERVER_OTP_STATIC: randomInt(process.env.SERVER_OTP_LENGTH).toString(),
 // });
 
-// const tasks: Array<TaskParamsModel<unknown>> = [
+// const tasks = [
 //   ...nodeTasks({
 //     testOverrides: {
 //       onBefore: [

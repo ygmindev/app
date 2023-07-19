@@ -17,7 +17,7 @@ export const _useQuery = <TType,>(
     async () => callback(),
     { cacheTime: cache, staleTime: cache },
   );
-  const refetchF = debounce(refetch);
+  const refetchF = debounce(async () => refetch());
   return {
     data,
     error,

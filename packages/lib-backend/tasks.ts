@@ -1,7 +1,6 @@
-import { type TaskParamsModel } from '#tool-task/core/core.models';
 import { nodeTasks } from '#tool-task/node/utils/nodeTasks/nodeTasks';
 
-const tasks: Array<TaskParamsModel<unknown>> = [
+const tasks = [
   ...nodeTasks({
     testOverrides: { onAfter: ['database-kill'], onBefore: ['database-start'] },
   }),

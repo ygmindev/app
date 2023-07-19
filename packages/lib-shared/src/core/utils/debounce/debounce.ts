@@ -1,4 +1,4 @@
-import _debounce from 'lodash/debounce';
+import debounceF from 'lodash/debounce';
 
 import {
   type DebounceModel,
@@ -8,8 +8,8 @@ import {
 export const debounce = <TResult = void, TParams extends Array<unknown> = Array<unknown>>(
   ...[callback, { duration = 0, isLeading = false } = {}]: DebounceParamsModel<TResult, TParams>
 ): DebounceModel<TResult, TParams> =>
-  _debounce(
+  debounceF(
     callback,
     duration,
     isLeading ? { leading: true, trailing: false } : { leading: false, trailing: true },
-  ) as DebounceModel<TResult, TParams>;
+  ) as unknown as DebounceModel<TResult, TParams>;
