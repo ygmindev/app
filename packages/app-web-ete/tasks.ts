@@ -30,7 +30,7 @@ const tasks: Array<TaskParamsModel<unknown>> = nodeTasks({
   ],
 
   testOverrides: {
-    onBefore: [
+    task: [
       [
         ['run awew', 'run awd', 'run bld'],
         {

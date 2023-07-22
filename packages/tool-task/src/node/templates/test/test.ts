@@ -15,7 +15,7 @@ export const test: TaskParamsModel<TestParamsModel> = {
   name: 'test',
 
   options: ({ overrides }) =>
-    filterNil([!overrides?.isPrompt && { isOptional: true, key: 'testMatch' }]),
+    filterNil([overrides?.isPrompt && { isOptional: true, key: 'testMatch' }]),
 
   task: [
     async ({ options, root }) => {
