@@ -9,10 +9,15 @@ export const _parallel = async (
   ...[tasks, options]: _ParallelParamsModel
 ): Promise<_ParallelModel> => {
   const { result } = _concurrently(
-    tasks.map((command) => ({ command, env: process.env, name: command })),
+    tasks.map((command, i) => ({
+      command,
+      env: process.env,
+      name: command,
+      raw: !options?.silent?.includes(i),
+    })),
     {
+      hide: options?.silent,
       killOthers: ['success', 'failure'],
-      raw: true,
       successCondition: options?.condition ?? 'all',
     },
   );

@@ -6,7 +6,7 @@ import { type BuildJsonParamsModel } from '#tool-task/core/templates/buildJson/b
 const buildConfigTypescript: TaskParamsModel<BuildJsonParamsModel> = {
   ...buildJson,
 
-  name: 'build-config-typescript',
+  name: 'build-json-typescript',
 
   overrides: {
     filename: config.configFile,

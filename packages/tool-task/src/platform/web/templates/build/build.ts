@@ -14,6 +14,8 @@ export const build: TaskParamsModel<unknown> = {
   task: [
     'build-json-typescript',
 
+    'build-json-lint',
+
     () => fromExecutable(`vite build --config ${config().configFile}`),
 
     ({ root }) => runServer({ path: join(root, 'dist/client') }),

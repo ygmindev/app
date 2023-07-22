@@ -33,7 +33,8 @@
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "tsconfig.json"
+    "project": "tsconfig.json",
+    "tsconfigRootDir": "/Users/ygmin/Projects/mono_v2/app3/app"
   },
   "plugins": [
     "@typescript-eslint",

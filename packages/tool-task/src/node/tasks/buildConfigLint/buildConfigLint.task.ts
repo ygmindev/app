@@ -6,7 +6,7 @@ import { type BuildJsonParamsModel } from '#tool-task/core/templates/buildJson/b
 const buildConfigLint: TaskParamsModel<BuildJsonParamsModel> = {
   ...buildJson,
 
-  name: 'build-config-lint',
+  name: 'build-json-lint',
 
   overrides: {
     filename: config.configFile,

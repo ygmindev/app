@@ -30,7 +30,15 @@ const tasks: Array<TaskParamsModel<unknown>> = nodeTasks({
   ],
 
   testOverrides: {
-    onBefore: [[['run awew', 'run awd'], { condition: PARALLEL_CONDITION.FIRST }]],
+    onBefore: [
+      [
+        ['run awew', 'run awd'],
+        {
+          condition: PARALLEL_CONDITION.FIRST,
+          silent: [1],
+        },
+      ],
+    ],
     variables: () => ({
       NODE_ENV: ENVIRONMENT.TEST,
       // TODO: rename SERVER variables for security?

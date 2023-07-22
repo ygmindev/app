@@ -2,7 +2,7 @@ import { type ParallelConditionModel } from '#tool-task/core/utils/parallel/para
 
 export type _ParallelParamsModel = [
   tasks: Array<string>,
-  options?: { condition?: ParallelConditionModel },
+  options?: { condition?: ParallelConditionModel; silent?: Array<number> },
 ];
 
 export type _ParallelModel = void;
