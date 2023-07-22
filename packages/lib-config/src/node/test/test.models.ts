@@ -16,6 +16,8 @@ export type TestConfigModel = {
 
   imageExtension: string;
 
+  isBrowser?: boolean;
+
   isWatch?: boolean;
 
   match?: string;

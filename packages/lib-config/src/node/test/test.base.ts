@@ -25,6 +25,8 @@ const { _config, config } = defineConfig({
 
       imageExtension: 'png',
 
+      isBrowser: false,
+
       mockPath: fromConfig('node/test/params/__mocks__'),
 
       onBeforeAll: async () => {

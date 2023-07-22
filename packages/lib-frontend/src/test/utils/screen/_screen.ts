@@ -16,6 +16,7 @@ let page: Page;
 export const _screen = async ({
   dimension,
   imageExtension,
+  isBrowser,
   outputPath,
   timeout,
 }: _ScreenParamsModel): Promise<_ScreenModel> => {
@@ -24,8 +25,7 @@ export const _screen = async ({
     (await launch({
       args: dimension ? [`--window-size-${dimension.width},${dimension.height}`] : undefined,
       defaultViewport: null,
-      // headless: 'new',
-      headless: false,
+      headless: isBrowser ? false : 'new',
       ignoreHTTPSErrors: true,
     }));
   page = page ?? (await browser.newPage());
