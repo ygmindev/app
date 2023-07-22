@@ -17,6 +17,8 @@ const { _config, config } = defineConfig({
 
       cachePath: fromWorking('.cache/test'),
 
+      delay: 500,
+
       dimension: { height: 800, width: 1280 },
 
       eteExtensions: ['.ete'],

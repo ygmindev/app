@@ -9,11 +9,13 @@ import {
   type _ScreenModel,
   type _ScreenParamsModel,
 } from '#lib-frontend/test/utils/screen/_screen.models';
+import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 let browser: Browser;
 let page: Page;
 
 export const _screen = async ({
+  delay,
   dimension,
   imageExtension,
   isBrowser,
@@ -44,6 +46,7 @@ export const _screen = async ({
     },
 
     snapshot: async ({ match = true, name }) => {
+      await sleep(delay);
       const img = await page.screenshot();
       match &&
         expect(img).toMatchImageSnapshot({
@@ -59,6 +62,7 @@ export const _screen = async ({
       const selector = `[data-testid="${testID}"] input`;
       await page.waitForSelector(selector, { timeout });
       const [input] = await page.$$(selector);
+      await sleep(delay);
       await input.focus();
       await sleepForEffect();
       await page.keyboard.type(value);

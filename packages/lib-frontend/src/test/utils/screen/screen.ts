@@ -5,6 +5,6 @@ import { type ScreenModel } from '#lib-frontend/test/utils/screen/screen.models'
 
 export const screen = async (): Promise<ScreenModel> => {
   const { config } = await importConfig<TestConfigModel>('node/test/test');
-  const { dimension, imageExtension, isBrowser, outputPath, timeout } = config;
-  return _screen({ dimension, imageExtension, isBrowser, outputPath, timeout });
+  const { delay, dimension, imageExtension, isBrowser, outputPath, timeout } = config;
+  return _screen({ delay, dimension, imageExtension, isBrowser, outputPath, timeout });
 };

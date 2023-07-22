@@ -8,6 +8,8 @@ export type TestConfigModel = {
 
   cachePath: string;
 
+  delay: number;
+
   dimension?: DimensionModel;
 
   eteExtensions: Array<string>;
