@@ -7,7 +7,7 @@ import {
   error as _error,
   info as _info,
   warn as _warn,
-} from '#lib-shared/logging/utils/logger/_logger.node';
+} from '#lib-shared/logging/utils/logger/_logger';
 import { type LoggerModel } from '#lib-shared/logging/utils/logger/logger.models';
 
 const stringifyF = (params: Array<unknown>): string =>
