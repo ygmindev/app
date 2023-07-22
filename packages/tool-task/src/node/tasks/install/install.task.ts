@@ -13,7 +13,8 @@ const install: TaskParamsModel<InstallParamsModel> = {
   ],
 
   task: [
-    ({ options }) => (options?.install === '*' ? 'yarn' : `yarn add ${options?.install}`),
+    ({ options }) =>
+      options?.install === '*' ? 'yarn' : options?.install ? `yarn add ${options.install}` : null,
 
     ({ options }) => options?.installDev && `yarn add  --dev ${options.installDev}`,
 
