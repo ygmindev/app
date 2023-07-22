@@ -9,19 +9,22 @@ import { type LintConfigModel } from '#lib-config/node/lint/lint.models';
 
 export const lintCommand = (fix?: boolean): string => {
   return fromExecutable(
-    `eslint --config ${config.configFile} ${
+    `eslint --config ${config.configFile} --ext ${config.extensions.join(',')} ${
       fix ? '--fix' : ''
     } --no-error-on-unmatched-pattern ${config.include.join(' ')}`,
   );
 };
 
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
+import { EXTENSIONS_BASE } from '#lib-platform/core/utils/extensions/extensions.constants';
 
 const { _config, config } = defineConfig({
   _config: _lint,
 
   config: {
     configFile: fromDist('.eslintrc.json'),
+
+    extensions: EXTENSIONS_BASE,
 
     include: [fromWorking('src/**/*')],
 
