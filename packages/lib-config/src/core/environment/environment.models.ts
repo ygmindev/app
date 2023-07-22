@@ -20,10 +20,10 @@ export type EnvironmentConfigModel = {
   APP_TRACKING_NAME: string;
   APP_UPTRACE_SOURCE: string;
   APP_USERNAME: string;
-  DATABASE_MONGO_NAME: string;
-  DATABASE_MONGO_PASSWORD: string;
-  DATABASE_MONGO_URL: string;
-  DATABASE_MONGO_USERNAME: string;
+  SERVER_DB_MONGO_NAME: string;
+  SERVER_DB_MONGO_PASSWORD: string;
+  SERVER_DB_MONGO_URL: string;
+  SERVER_DB_MONGO_USERNAME: string;
   ENV_NAME: string;
   ENV_PLATFORM: PlatformModel;
   NODE_ENV: EnvironmentModel;

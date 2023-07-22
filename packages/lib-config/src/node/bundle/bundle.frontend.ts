@@ -28,7 +28,7 @@ const { _config, config } = defineConfig({
         __DEV__: `${process.env.NODE_ENV === 'development'}`,
       },
 
-      envPrefix: ['APP_', 'DATABASE_'],
+      envPrefix: ['APP_', 'SERVER_'],
 
       transpiles: [
         'countries-list',

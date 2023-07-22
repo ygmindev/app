@@ -13,7 +13,7 @@ const { _config, config } = defineConfig({
     {
       babelConfig: _babelConfig,
 
-      envPrefix: ['SERVER_', 'DATABASE_'],
+      envPrefix: ['SERVER_'],
 
       watch: [fromPackages('lib-backend/src/**/*')],
     },

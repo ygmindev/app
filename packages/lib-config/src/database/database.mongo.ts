@@ -10,15 +10,15 @@ const { _config, config } = defineConfig({
 
   overrides: () => [
     {
-      database: process.env.DATABASE_MONGO_NAME,
+      database: process.env.SERVER_DB_MONGO_NAME,
 
-      host: process.env.DATABASE_MONGO_URL,
+      host: process.env.SERVER_DB_MONGO_URL,
 
-      password: process.env.DATABASE_MONGO_PASSWORD,
+      password: process.env.SERVER_DB_MONGO_PASSWORD,
 
       type: DATABASE_TYPE.MONGO,
 
-      username: process.env.DATABASE_MONGO_USERNAME,
+      username: process.env.SERVER_DB_MONGO_USERNAME,
     },
   ],
 });
