@@ -2,7 +2,7 @@ import { type TestConfigModel } from '#lib-config/node/test/test.models';
 
 export type _ScreenParamsModel = Pick<
   TestConfigModel,
-  'dimension' | 'imageExtension' | 'outputPath'
+  'dimension' | 'imageExtension' | 'outputPath' | 'timeout'
 >;
 
 export type _ScreenModel = {

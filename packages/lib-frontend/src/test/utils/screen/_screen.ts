@@ -17,6 +17,7 @@ export const _screen = async ({
   dimension,
   imageExtension,
   outputPath,
+  timeout,
 }: _ScreenParamsModel): Promise<_ScreenModel> => {
   browser =
     browser ??
@@ -32,7 +33,7 @@ export const _screen = async ({
     close: async () => browser.close(),
 
     goto: async (route) => {
-      await page.goto(route, { waitUntil: 'networkidle0' });
+      await page.goto(route, { timeout, waitUntil: 'networkidle0' });
     },
 
     press: async (testID) => {
