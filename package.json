@@ -6,7 +6,6 @@
   "bundledDependencies": [
     "#app-native",
     "#app-web",
-    "#app-web-ete",
     "#app-web-library",
     "@asset/static",
     "#lib-backend",

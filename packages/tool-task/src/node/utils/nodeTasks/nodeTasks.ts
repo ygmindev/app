@@ -1,4 +1,5 @@
 import { config } from '#lib-config/node/test/test.base';
+import { PLATFORM } from '#lib-platform/core/core.constants';
 import { type PartialModel } from '#lib-shared/core/core.models';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { type TaskParamsModel } from '#tool-task/core/core.models';
@@ -39,6 +40,7 @@ export const nodeTasks = <TType extends Array<TaskParamsModel<unknown>>>({
             },
           ],
         ],
+        variables: () => ({ ENV_PLATFORM: PLATFORM.BASE }),
       },
       testSpec,
     ]);

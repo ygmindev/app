@@ -42,9 +42,6 @@
       "#app-web/*": [
         "packages/app-web/src/*"
       ],
-      "#app-web-ete/*": [
-        "packages/app-web-ete/src/*"
-      ],
       "#app-web-library/*": [
         "packages/app-web-library/src/*"
       ],
