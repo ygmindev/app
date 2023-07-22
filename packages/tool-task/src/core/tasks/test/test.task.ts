@@ -7,7 +7,9 @@ const test: TaskParamsModel<RunAllParamsModel> = {
 
   name: 'test',
 
-  overrides: { patterns: [/test/] },
+  overrides: {
+    patterns: [/test/],
+  },
 };
 
 export default test;

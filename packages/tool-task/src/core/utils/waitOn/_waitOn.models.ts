@@ -3,7 +3,7 @@ import { type WaitOnResourceTypeModel } from '#tool-task/core/utils/waitOn/waitO
 
 export type _WaitOnParamsModel = [
   resources: Array<[resource: string, type: WaitOnResourceTypeModel]>,
-  options?: TaskConfigModel['wait'],
+  options: TaskConfigModel['wait'],
 ];
 
 export type _WaitOnModel = void;

@@ -3,7 +3,7 @@ import { DatabaseInMemory } from '#lib-backend/database/utils/DatabaseInMemory/D
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 import { type TaskParamsModel } from '#tool-task/core/core.models';
 
-const kill: TaskParamsModel = {
+const kill: TaskParamsModel<unknown> = {
   environment: ENVIRONMENT.DEVELOPMENT,
 
   name: 'database-kill',

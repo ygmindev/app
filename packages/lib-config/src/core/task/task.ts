@@ -11,11 +11,11 @@ const { _config, config } = defineConfig({
     taskExtension: '.task.ts',
 
     wait: {
-      delay: 1000,
+      delay: 1e3,
 
-      interval: 3000,
+      interval: 500,
 
-      timeout: 30e3,
+      timeout: 60e3,
     },
   } satisfies TaskConfigModel,
 });

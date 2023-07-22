@@ -1,5 +1,8 @@
-import { type TaskResultModel } from '#tool-task/core/core.models';
+import { type ParallelConditionModel } from '#tool-task/core/utils/parallel/parallel.models';
 
-export type _ParallelParamsModel = Array<string>;
+export type _ParallelParamsModel = [
+  tasks: Array<string>,
+  options?: { condition?: ParallelConditionModel },
+];
 
-export type _ParallelModel = TaskResultModel;
+export type _ParallelModel = void;

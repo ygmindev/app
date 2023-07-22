@@ -3,11 +3,11 @@ import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { lintCommand } from '#lib-config/node/lint/lint';
 import { type TaskParamsModel } from '#tool-task/core/core.models';
 
-export const lint: TaskParamsModel = {
+export const lint: TaskParamsModel<unknown> = {
   name: 'lint',
 
   task: [
     () => `${fromExecutable('tsc')} --project ${fromWorking('tsconfig.json')}`,
-    () => lintCommand(true),
+    lintCommand(true),
   ],
 };

@@ -4,7 +4,7 @@ import {
 } from '#tool-task/core/utils/waitOn/_waitOn.models';
 import { type WAIT_ON_RESOURCE_TYPE } from '#tool-task/core/utils/waitOn/waitOn.constants';
 
-export type WaitOnParamsModel = _WaitOnParamsModel;
+export type WaitOnParamsModel = _WaitOnParamsModel[0];
 
 export type WaitOnModel = _WaitOnModel;
 

@@ -19,8 +19,6 @@ export const setEnvironment = ({
   variables,
   writes,
 }: SetEnvironmentParamsModel = {}): SetEnvironmentModel => {
-  variables && (process.env = { ...process.env, ...variables() });
-
   const paths = [
     fromConfig('core/environment/.env.base'),
     fromConfig(`core/environment/.env.${environment}`),
@@ -29,7 +27,7 @@ export const setEnvironment = ({
 
   const envs = paths.reduce((result, path) => {
     if (existsSync(path)) {
-      const { error, parsed } = config({ path });
+      const { error, parsed } = config({ override: true, path });
       if (error) {
         throw new NotFoundError(path);
       }
@@ -48,7 +46,9 @@ export const setEnvironment = ({
         : result;
     }
     return result;
-  }, {} as Record<string, string>);
+  }, {});
+
+  variables && (process.env = { ...process.env, ...variables() });
 
   environment === 'production' &&
     writes &&

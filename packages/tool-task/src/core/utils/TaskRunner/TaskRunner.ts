@@ -1,4 +1,5 @@
 import { type ChildProcess, spawn } from 'child_process';
+import isArray from 'lodash/isArray';
 import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
 import kebabCase from 'lodash/kebabCase';
@@ -16,6 +17,7 @@ import {
   type TaskModel,
   type TaskParamsModel,
 } from '#tool-task/core/core.models';
+import { parallel } from '#tool-task/core/utils/parallel/parallel';
 import { parseArgs } from '#tool-task/core/utils/parseArgs/parseArgs';
 import { prompt } from '#tool-task/core/utils/prompt/prompt';
 import { _TaskRunner } from '#tool-task/core/utils/TaskRunner/_TaskRunner';
@@ -49,12 +51,14 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
       p.once('unhandledRejection', handleError);
     });
 
-  resolveTask = async <TType = undefined>(
+  resolveTask = async <TType>(
     value: TaskModel<TType>,
     context: TaskContextModel<TType>,
   ): Promise<void> => {
     if (value) {
-      if (isFunction(value)) {
+      if (isArray(value)) {
+        await parallel(value);
+      } else if (isFunction(value)) {
         let valueF = value(context);
         valueF = valueF && (isString(valueF) ? this.resolveTask(valueF, context) : valueF);
         await valueF;
@@ -63,14 +67,14 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
         if (valueF) {
           await valueF();
         } else {
-          const cp = spawn(value, { env: process.env, shell: true });
+          const cp = spawn(value, { env: process.env, shell: true, stdio: 'inherit' });
           return this.handleProcess(cp);
         }
       }
     }
   };
 
-  runTasks = async <TType = undefined>(
+  runTasks = async <TType>(
     value: Array<TaskModel<TType>>,
     context: TaskContextModel<TType>,
   ): Promise<void> => {
@@ -82,9 +86,10 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     process.exit(0);
   };
 
-  runTask = async <TType = undefined>({
+  runTask = async <TType>({
     environment,
     name,
+    onBefore,
     onFinish,
     options,
     overrides,
@@ -107,8 +112,10 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     const context: TaskContextModel<TType> = { name, options: optionsF, root };
     try {
       info('running', name);
+      onBefore && (await this.runTasks(onBefore, context));
       await this.runTasks(task, context);
     } catch (e) {
+      console.warn(e);
       error(name, (e as Error).stack);
     } finally {
       this._pids.forEach(process.kill);
@@ -117,12 +124,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     }
   };
 
-  register = <TType = undefined>({
-    name,
-    root,
-    target,
-    ...options
-  }: TaskParamsModel<TType>): void => {
+  register = <TType>({ name, root, target, ...options }: TaskParamsModel<TType>): void => {
     const rootF = root ?? (target ? fromPackages(target) : fromRoot());
     const targetF = target && kebabCase(target);
     const nameF = filterNil([targetF, kebabCase(name)]).join('-');

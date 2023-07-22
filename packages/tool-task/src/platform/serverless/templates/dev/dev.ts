@@ -2,7 +2,7 @@ import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages'
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 import { type TaskParamsModel } from '#tool-task/core/core.models';
 
-export const dev: TaskParamsModel = {
+export const dev: TaskParamsModel<unknown> = {
   environment: ENVIRONMENT.DEVELOPMENT,
 
   name: 'dev',

@@ -6,13 +6,13 @@ import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 import { type TaskParamsModel } from '#tool-task/core/core.models';
 import { runServer } from '#tool-task/platform/server/utils/runServer/runServer';
 
-export const build: TaskParamsModel = {
+export const build: TaskParamsModel<unknown> = {
   environment: ENVIRONMENT.PRODUCTION,
 
   name: 'build',
 
   task: [
-    () => 'build-json-typescript',
+    'build-json-typescript',
 
     () => fromExecutable(`vite build --config ${config().configFile}`),
 
