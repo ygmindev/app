@@ -8,6 +8,7 @@ export const {{NAME}}(pascalCase)Page: SFCModel<{{NAME}}(pascalCase)PagePropsMod
   const { styles } = useStyles({ props });
   return (
     <Wrapper
+      grow
       style={styles}
       testID={testID}>
       <Text>{{NAME}}(pascalCase)Page</Text>

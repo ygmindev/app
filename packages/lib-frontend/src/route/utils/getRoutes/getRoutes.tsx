@@ -24,6 +24,8 @@ import {
 import { SettingsPage } from '#lib-frontend/settings/pages/SettingsPage/SettingsPage';
 import { SETTINGS } from '#lib-frontend/settings/settings.constants';
 import { BrightnessFormPage } from '#lib-frontend/style/pages/BrightnessFormPage/BrightnessFormPage';
+import { ReportPage } from '#lib-frontend/test/pages/ReportPage/ReportPage';
+import { REPORT } from '#lib-frontend/test/test.constants';
 import { AccountPage } from '#lib-frontend/user/pages/AccountPage/AccountPage';
 import { NameFormPage } from '#lib-frontend/user/pages/NameFormPage/NameFormPage';
 import { PersonalPage } from '#lib-frontend/user/pages/PersonalPage/PersonalPage';
@@ -34,6 +36,7 @@ import { PING } from '#lib-shared/http/http.constants';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 import { ROUTE } from '#lib-shared/route/route.constants';
 import { BRIGHTNESS, STYLE } from '#lib-shared/style/style.constants';
+import { TEST } from '#lib-shared/test/test.constants';
 import { ACCOUNT, USER } from '#lib-shared/user/user.constants';
 
 export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesModel =>
@@ -41,6 +44,16 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
     {
       element: <Text>ping</Text>,
       pathname: PING,
+    },
+
+    {
+      pathname: TEST,
+      routes: [
+        {
+          element: <ReportPage />,
+          pathname: REPORT,
+        },
+      ],
     },
 
     {

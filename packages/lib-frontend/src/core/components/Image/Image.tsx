@@ -12,13 +12,17 @@ import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 export const Image: SFCModel<ImagePropsModel> = ({
   height,
   isAutoSize,
+  isGrow,
   src,
   testID,
   width,
   ...props
 }) => {
   const [dimension, dimensionSet] = useState<DimensionModel>({ height, width });
-  const { styles } = useStyles({ props: { ...props, ...dimension }, stylers: [shapeStyler] });
+  const { styles } = useStyles({
+    props: { ...props, ...dimension },
+    stylers: [shapeStyler, isGrow && { flex: 1 }],
+  });
   const [current, currentSet] = useState<number>(0);
   const srcF = isArray(src) ? src[current] : src;
 

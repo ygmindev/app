@@ -152,6 +152,8 @@ export const _bundle = ({
         tsconfig: tsconfigPath,
       },
 
+      force: true,
+
       include: transpiles,
     },
 

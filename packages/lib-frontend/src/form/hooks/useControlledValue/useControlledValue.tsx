@@ -10,7 +10,7 @@ export const useControlledValue = <TType extends string = string>({
   onChange,
   value,
 }: UseControlledValueParamsModel<TType>): UseControlledValueModel<TType> => {
-  const [valueState, valueStateSet] = useState<TType>(defaultValue || ('' as TType));
+  const [valueState, valueStateSet] = useState<TType>(defaultValue ?? ('' as TType));
   return {
     valueControlled: value ?? valueState,
     valueControlledSet: onChange ?? valueStateSet,
