@@ -30,10 +30,11 @@ export const nodeTasks = <TType extends Array<TaskParamsModel<unknown>>>({
     ]);
     const testEte: TaskParamsModel<TestParamsModel> = merge([
       {
+        name: `${testSpec.name}-ete`,
         overrides: { testExtensions: eteExtensions },
         task: [
           [
-            [`run ${testSpec.name}-ete`, ...(onBeforeEte ?? [])],
+            [`run ${testSpec.name}`, ...(onBeforeEte ?? [])],
             {
               condition: PARALLEL_CONDITION.FIRST,
               silent: onBeforeEte ? range(1, onBeforeEte.length + 1) : undefined,
