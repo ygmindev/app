@@ -10,6 +10,8 @@ export type TestConfigModel = {
 
   dimension?: DimensionModel;
 
+  eteExtensions: Array<string>;
+
   fileExtensions: Array<string>;
 
   imageExtension: string;
@@ -34,7 +36,9 @@ export type TestConfigModel = {
 
   root?: string;
 
-  testExtensions: Array<string>;
+  specExtensions: Array<string>;
+
+  testExtensions?: Array<string>;
 
   timeout: number;
 };

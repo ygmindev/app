@@ -7,8 +7,6 @@ import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { config as bundleConfig } from '#lib-config/node/bundle/bundle.base';
 import { _test } from '#lib-config/node/test/_test';
 import { type TestConfigModel } from '#lib-config/node/test/test.models';
-import { extensions } from '#lib-platform/core/utils/extensions/extensions';
-import { permuteString } from '#lib-shared/core/utils/permuteString/permuteString';
 
 const { _config, config } = defineConfig({
   _config: _test,
@@ -20,6 +18,8 @@ const { _config, config } = defineConfig({
       cachePath: fromWorking('.cache/test'),
 
       dimension: { height: 800, width: 1280 },
+
+      eteExtensions: ['.ete'],
 
       fileExtensions: ['gif', 'jpeg', 'jpg', 'otf', 'png', 'svg', 'ttf', 'woff', 'woff2'],
 
@@ -33,7 +33,7 @@ const { _config, config } = defineConfig({
 
       outputPath: fromWorking(fileConfig.distDir),
 
-      testExtensions: permuteString(['.e2e', '.spec'], extensions()),
+      specExtensions: ['.spec'],
 
       timeout: 60e3,
     } satisfies TestConfigModel),
