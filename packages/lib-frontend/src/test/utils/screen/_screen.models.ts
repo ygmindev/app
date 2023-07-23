@@ -2,7 +2,7 @@ import { type TestConfigModel } from '#lib-config/node/test/test.models';
 
 export type _ScreenParamsModel = Pick<
   TestConfigModel,
-  'delay' | 'dimension' | 'imageExtension' | 'isBrowser' | 'outputPath' | 'timeout'
+  'delay' | 'dimension' | 'imageExtension' | 'isBrowser' | 'outputDir' | 'timeout'
 >;
 
 export type _ScreenModel = {
@@ -12,7 +12,7 @@ export type _ScreenModel = {
 
   press(params: string): Promise<void>;
 
-  snapshot(params: { match?: boolean; name: string }): Promise<void>;
+  snapshot(params?: { match?: boolean }): Promise<void>;
 
   type(testID: string, value: string): Promise<void>;
 };

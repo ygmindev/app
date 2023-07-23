@@ -19,7 +19,7 @@ export const _screen = async ({
   dimension,
   imageExtension,
   isBrowser,
-  outputPath,
+  outputDir,
   timeout,
 }: _ScreenParamsModel): Promise<_ScreenModel> => {
   browser =
@@ -45,16 +45,19 @@ export const _screen = async ({
       await page.$eval(selector, (element) => (element as HTMLButtonElement).click());
     },
 
-    snapshot: async ({ match = true, name }) => {
+    snapshot: async ({ match = true } = {}) => {
       await sleep(delay);
       const img = await page.screenshot();
       match &&
         expect(img).toMatchImageSnapshot({
-          customDiffDir: join(outputPath, 'diffs'),
-          customReceivedDir: join(outputPath, 'received'),
-          customSnapshotIdentifier: ({ currentTestName }) =>
-            joinPaths({ extension: imageExtension, paths: [slug(currentTestName), slug(name)] }),
-          customSnapshotsDir: join(outputPath, 'snapshots'),
+          customDiffDir: join(outputDir, 'diffs'),
+          customReceivedDir: join(outputDir, 'received'),
+          customSnapshotIdentifier: ({ counter, currentTestName }) =>
+            joinPaths({
+              extension: imageExtension,
+              paths: [slug(currentTestName), counter.toString()],
+            }),
+          customSnapshotsDir: join(outputDir, 'snapshots'),
         });
     },
 

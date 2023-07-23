@@ -8,7 +8,7 @@ import {
 export const _parser = ({
   languages,
   missingValue,
-  outputPath,
+  outputDir,
 }: ParserConfigModel): _ParserConfigModel => ({
   createOldCatalogs: false,
 
@@ -16,7 +16,7 @@ export const _parser = ({
 
   locales: languages,
 
-  output: join(outputPath, '$LOCALE/$NAMESPACE.json'),
+  output: join(outputDir, '$LOCALE/$NAMESPACE.json'),
 
   sort: true,
 

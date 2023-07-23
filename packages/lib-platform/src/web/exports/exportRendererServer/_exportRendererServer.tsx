@@ -19,7 +19,7 @@ import { STATE } from '#lib-shared/state/state.constants';
 
 export const _exportRendererServer = ({
   initialize,
-  publicDir,
+  publicPath,
   render,
   rootId,
   ssrContextKeys,
@@ -52,7 +52,7 @@ export const _exportRendererServer = ({
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width" />
           <meta name="description" content="${''}" />
-          <link rel="icon" type="image/svg+xml" href="/${publicDir}/favico/favico.svg" />
+          <link rel="icon" type="image/svg+xml" href="/${publicPath}/favico/favico.svg" />
           <title>${''}</title>
           <style>${dangerouslySkipEscape(styleSheet)}</style>
         </head>

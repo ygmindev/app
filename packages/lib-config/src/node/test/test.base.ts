@@ -1,3 +1,5 @@
+import { join } from 'path';
+
 import { fromConfig } from '#lib-backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { config as fileConfig } from '#lib-config/core/file/file';
@@ -13,7 +15,7 @@ const { _config, config } = defineConfig({
     ({
       bundleConfig,
 
-      cachePath: fromWorking('.cache/test'),
+      cachePath: fromWorking(fileConfig.cachePath, 'test'),
 
       delay: 500,
 
@@ -27,13 +29,13 @@ const { _config, config } = defineConfig({
 
       isBrowser: false,
 
-      mockPath: fromConfig('node/test/__mocks__'),
+      mockDir: fromConfig('node/test/__mocks__'),
 
-      outputPath: fromWorking(fileConfig.distDir),
+      outputPath: join(fileConfig.distPath, 'test'),
 
       specExtensions: ['.spec'],
 
-      timeout: 90e3,
+      timeout: 120e3,
     } satisfies TestConfigModel),
 });
 

@@ -6,4 +6,4 @@ import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { config } from '#lib-config/core/file/file';
 
 export const fromDist = (...paths: FromDistParamsModel): FromDistModel =>
-  fromRoot(config.distDir, ...paths);
+  fromRoot(config.distPath, ...paths);

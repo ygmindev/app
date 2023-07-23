@@ -20,7 +20,7 @@ export const _test = ({
   fileExtensions,
   isWatch,
   match,
-  mockPath,
+  mockDir,
   outputPath,
   root,
   specExtensions,
@@ -29,11 +29,11 @@ export const _test = ({
 }: TestConfigModel): _TestConfigModel => {
   const bundleConfigF = bundleConfig();
   return {
-    cacheDirectory: cachePath,
+    cacheDirectory: fromWorking(cachePath),
 
     collectCoverage: true,
 
-    coverageDirectory: join(outputPath, 'coverage'),
+    coverageDirectory: fromWorking(outputPath, 'coverage'),
 
     coverageReporters: ['lcov'],
 
@@ -48,7 +48,7 @@ export const _test = ({
       ...(_config.compilerOptions?.paths
         ? pathsToModuleNameMapper(_config.compilerOptions.paths, { prefix: fromRoot() })
         : {}),
-      [`\\.(${fileExtensions.join('|')})$`]: join(mockPath, 'file'),
+      [`\\.(${fileExtensions.join('|')})$`]: join(mockDir, 'file'),
     },
 
     passWithNoTests: true,
@@ -62,7 +62,7 @@ export const _test = ({
         {
           darkTheme: true,
           openReport: process.env.NODE_ENV === 'test',
-          publicPath: outputPath,
+          publicPath: fromWorking(outputPath, 'reports'),
         },
       ],
     ],

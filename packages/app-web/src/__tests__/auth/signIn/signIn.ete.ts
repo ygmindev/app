@@ -16,13 +16,13 @@ describe('sign in', () => {
   test('works', async () => {
     await screenF.goto(`${APP_URI}${trimPathname(SIGN_IN)}`);
     await screenF.type('email', 'admin@admin.com');
-    await screenF.snapshot({ name: 'email' });
+    await screenF.snapshot();
 
     await screenF.press(`${USERNAME_FORM_TEST_ID}-submit`);
     await sleepForTransition();
 
     await screenF.type('otp', process.env.SERVER_OTP_STATIC ?? '123456');
-    await screenF.snapshot({ name: 'otp' });
+    await screenF.snapshot();
 
     expect(1).toStrictEqual(1);
   });

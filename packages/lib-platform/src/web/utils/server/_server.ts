@@ -28,7 +28,7 @@ export const _server = async ({
   port,
   root,
 }: _ServerParamsModel): Promise<_ServerModel> => {
-  const { publicDir } = webConfig();
+  const { publicPath: publicDir } = webConfig();
   const app = fastify();
   await app.register(fastifyMiddie);
   await app.register(fastifyCompress);

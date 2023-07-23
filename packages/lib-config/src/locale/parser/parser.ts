@@ -15,7 +15,7 @@ const { _config, config } = defineConfig({
 
     missingValue: 'TRANSLATION_MISSING',
 
-    outputPath: fromStatic('assets/locales'),
+    outputDir: fromStatic('assets/locales'),
   } satisfies ParserConfigModel,
 });
 

@@ -46,7 +46,7 @@ export const _Table = forwardRef(
     const theme = useTheme();
     const [gridApi, gridApiSet] = useState<GridApi>();
     const [columnApi, columnApiSet] = useState<ColumnApi>();
-    const { motion: duration } = theme.animation;
+    const { effect } = theme.animation;
 
     useImperativeHandle(ref, () => ({
       deselectRows: () => gridApi && gridApi.deselectAll(),
@@ -113,7 +113,7 @@ export const _Table = forwardRef(
           debounceVerticalScrollbar
           loadingOverlayComponent={Text}
           onGridReady={({ api, columnApi }) => {
-            void sleep(duration).then(() => {
+            void sleep(effect).then(() => {
               isFullWidth ? api.sizeColumnsToFit() : columnApi.autoSizeAllColumns();
               gridApiSet(api);
               columnApiSet(columnApi);
@@ -122,7 +122,7 @@ export const _Table = forwardRef(
           }}
           onRowDataUpdated={() => {
             if (gridApi && columnApi) {
-              void sleep(duration).then(() =>
+              void sleep(effect).then(() =>
                 isFullWidth ? gridApi.sizeColumnsToFit() : columnApi.autoSizeAllColumns(),
               );
             }

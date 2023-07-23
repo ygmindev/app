@@ -24,7 +24,7 @@ export type TestConfigModel = {
 
   match?: string;
 
-  mockPath: string;
+  mockDir: string;
 
   mocks?: Array<string | [string, () => unknown]>;
 

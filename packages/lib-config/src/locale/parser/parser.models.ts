@@ -3,7 +3,7 @@ export type ParserConfigModel = {
 
   missingValue: string;
 
-  outputPath: string;
+  outputDir: string;
 };
 
 export type _ParserConfigModel = object;

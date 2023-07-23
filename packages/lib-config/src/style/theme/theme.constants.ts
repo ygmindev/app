@@ -43,7 +43,7 @@ export const THEME_CONFIG = {
     },
 
     weight: {
-      bold: '500',
+      bold: '700',
 
       main: 'normal',
     },

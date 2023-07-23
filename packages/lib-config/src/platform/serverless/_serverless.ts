@@ -35,7 +35,7 @@ export const _serverless = ({
 
       'serverless-offline': {
         allowCache: false,
-        host: host.split('://')[1],
+        host: host?.split('://')[1],
         httpPort: port,
         ignoreJWTSignature: true,
         lambdaPort: null,

@@ -1,6 +1,5 @@
-import { join } from 'path';
-
 import { fromExecutable } from '#lib-backend/file/utils/fromExecutable/fromExecutable';
+import { joinPaths } from '#lib-backend/file/utils/joinPaths/joinPaths';
 import { config } from '#lib-config/platform/web/web';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 import { type TaskParamsModel } from '#tool-task/core/core.models';
@@ -18,6 +17,6 @@ export const build: TaskParamsModel<unknown> = {
 
     () => fromExecutable(`vite build --config ${config().configFile}`),
 
-    ({ root }) => runServer({ path: join(root, 'dist/client') }),
+    ({ root }) => runServer({ path: joinPaths({ paths: [root, 'dist/clint'] }) }),
   ],
 };

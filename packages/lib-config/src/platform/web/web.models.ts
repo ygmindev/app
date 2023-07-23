@@ -11,7 +11,7 @@ export type WebConfigModel = {
 
   isSsr?: boolean;
 
-  publicDir: string;
+  publicPath: string;
 
   rootId: string;
 

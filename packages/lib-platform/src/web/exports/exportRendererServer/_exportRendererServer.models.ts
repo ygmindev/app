@@ -13,7 +13,7 @@ export type _ExportRendererServerParamsModel = {
     element: ReactElement;
     getCss(): ReactElement;
   };
-} & Pick<WebConfigModel, 'publicDir' | 'rootId' | 'ssrContextKeys'>;
+} & Pick<WebConfigModel, 'publicPath' | 'rootId' | 'ssrContextKeys'>;
 
 export type _ExportRendererServerModel = {
   render(params: _PageContextModel): Promise<{

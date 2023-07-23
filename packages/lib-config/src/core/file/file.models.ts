@@ -2,11 +2,13 @@
 export type FileConfigModel = {
   backupDir: string;
 
-  buildDir: string;
+  buildPath: string;
+
+  cachePath: string;
 
   cleanPatterns: Array<string>;
 
-  distDir: string;
+  distPath: string;
 
   excludePatterns: Array<string>;
 

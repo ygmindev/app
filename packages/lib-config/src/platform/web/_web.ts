@@ -9,7 +9,7 @@ import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
 
-export const _web = ({ bundleConfig, isSsr, publicDir }: WebConfigModel): _WebConfigModel => {
+export const _web = ({ bundleConfig, isSsr, publicPath }: WebConfigModel): _WebConfigModel => {
   const bundleConfigF = bundleConfig();
   return merge(
     [
@@ -18,7 +18,7 @@ export const _web = ({ bundleConfig, isSsr, publicDir }: WebConfigModel): _WebCo
           isSsr && ssr({ includeAssetsImportedByServer: true, prerender: { partial: true } }),
         ]),
 
-        publicDir: toRelative({ from: fromWorking(), to: fromStatic(publicDir) }),
+        publicDir: toRelative({ from: fromWorking(), to: fromStatic(publicPath) }),
 
         server: {
           watch: (bundleConfigF.build?.watch as WatchOptions) ?? undefined,

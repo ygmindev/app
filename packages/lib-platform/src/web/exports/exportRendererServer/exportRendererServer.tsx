@@ -12,7 +12,7 @@ export const exportRendererServer = ({
 }: ExportRenderServerParamsModel): ExportRendererServerModel => ({
   ..._exportRendererServer({
     ...params,
-    publicDir: WEB_CONFIG.publicDir,
+    publicPath: WEB_CONFIG.publicPath,
     render: ({ children, context }) => renderApp({ Root, children, context }),
     rootId: WEB_CONFIG.rootId,
     ssrContextKeys: WEB_CONFIG.ssrContextKeys,
