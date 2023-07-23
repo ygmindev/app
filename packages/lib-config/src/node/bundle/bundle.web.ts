@@ -1,4 +1,3 @@
-import { fromConfig } from '#lib-backend/file/utils/fromConfig/fromConfig';
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _config as _babelConfig } from '#lib-config/node/babel/babel.web';
 import { _bundle } from '#lib-config/node/bundle/_bundle';
@@ -17,10 +16,6 @@ const { _config, config } = defineConfig({
       },
 
       babelConfig: _babelConfig,
-
-      provide: {
-        requestAnimationFrame: fromConfig('node/bundle/aliases/requestAnimationFrame/index.js'),
-      },
 
       serverExtension: '.server',
     },

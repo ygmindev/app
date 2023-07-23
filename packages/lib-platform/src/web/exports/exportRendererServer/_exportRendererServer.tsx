@@ -25,7 +25,7 @@ export const _exportRendererServer = ({
   ssrContextKeys,
 }: _ExportRendererServerParamsModel): _ExportRendererServerModel => ({
   render: async ({ Page, context, pageProps }) => {
-    // initialize && (await initialize());
+    initialize && (await initialize());
 
     const queryClient = new QueryClient();
 
