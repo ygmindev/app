@@ -30,7 +30,6 @@ export type TaskParamsModel<TType> = Omit<TaskContextModel<TType>, 'options'> & 
     | ((
         context: Pick<TaskContextModel<TType>, 'name' | 'root' | 'overrides'>,
       ) => PromptParamsModel<TType>);
-  target?: string;
   task: Array<TaskModel<TType>>;
 } & EnvironmentOverrideParamsModel;
 
@@ -39,4 +38,5 @@ export type TaskContextModel<TType> = {
   options?: TType;
   overrides?: PartialModel<TType>;
   root?: string;
+  target?: string;
 };

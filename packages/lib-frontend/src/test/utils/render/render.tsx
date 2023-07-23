@@ -3,7 +3,7 @@ import {
   type _InternationalizeConfigModel,
   type InternationalizeConfigModel,
 } from '#lib-config/locale/internationalize/internationalize.models';
-import { Root } from '#lib-frontend/root/containers/Root/Root.base';
+import { Root } from '#lib-frontend/root/containers/Root/Root';
 import { Router } from '#lib-frontend/route/containers/Router/Router';
 import { _render } from '#lib-frontend/test/utils/render/_render';
 import {

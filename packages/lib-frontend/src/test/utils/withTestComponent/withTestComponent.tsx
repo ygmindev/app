@@ -20,7 +20,7 @@ export const withTestComponent = <
   target,
 }: WithTestComponentParamsModel<TProps, TDefault>): WithTestComponentModel<TProps, TDefault> => {
   const testID = uid('withTestComponent');
-  const displayNameF = displayName || getComponentDisplayName(target as ComponentType);
+  const displayNameF = displayName ?? getComponentDisplayName(target as ComponentType);
   const Component: TestComponentModel<TProps, TDefault> = (props) =>
     createElement(
       target as ComponentType<TProps & object>,

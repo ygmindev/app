@@ -1,4 +1,4 @@
-import { join } from 'lodash';
+import { join } from 'path';
 
 import { fromExecutable } from '#lib-backend/file/utils/fromExecutable/fromExecutable';
 import { config } from '#lib-config/platform/web/web';

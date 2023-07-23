@@ -1,3 +1,5 @@
+import range from 'lodash/range';
+
 import { config } from '#lib-config/node/test/test.base';
 import { PLATFORM } from '#lib-platform/core/core.constants';
 import { type PartialModel } from '#lib-shared/core/core.models';
@@ -33,10 +35,10 @@ export const nodeTasks = <TType extends Array<TaskParamsModel<unknown>>>({
         overrides: { testExtensions: eteExtensions },
         task: [
           [
-            [({ name }) => `run ${name}-test`, ...(eteTasks ?? [])],
+            [({ target }) => `run ${target}-test`, ...(eteTasks ?? [])],
             {
               condition: PARALLEL_CONDITION.FIRST,
-              // silent: eteTasks ? range(1, eteTasks.length + 1) : undefined,
+              silent: eteTasks ? range(1, eteTasks.length + 1) : undefined,
             },
           ],
         ],

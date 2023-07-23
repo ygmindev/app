@@ -29,7 +29,7 @@ const { _config, config } = defineConfig({
 
       isBrowser: false,
 
-      mockPath: fromConfig('node/test/params/__mocks__'),
+      mockPath: fromConfig('node/test/__mocks__'),
 
       onBeforeAll: async () => {
         expect.extend({ toMatchImageSnapshot });

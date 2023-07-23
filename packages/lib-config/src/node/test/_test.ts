@@ -1,4 +1,3 @@
-import mapKeys from 'lodash/mapKeys';
 import reduce from 'lodash/reduce';
 import trim from 'lodash/trim';
 import trimStart from 'lodash/trimStart';
@@ -45,7 +44,7 @@ export const _test = ({
     moduleFileExtensions: bundleConfigF.extensions.map((ext) => trimStart(ext, '.')),
 
     moduleNameMapper: {
-      ...mapKeys(bundleConfigF.aliases, (k) => `^${k}$`),
+      ...reduce(bundleConfigF.aliases, (result, v, k) => ({ ...result, [`^${k}$`]: v }), {}),
       ...(_config.compilerOptions?.paths
         ? pathsToModuleNameMapper(_config.compilerOptions.paths, { prefix: fromRoot() })
         : {}),

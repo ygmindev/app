@@ -94,6 +94,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     options,
     overrides,
     root,
+    target,
     task,
     variables,
   }: TaskParamsModel<TType>): Promise<void> => {
@@ -109,7 +110,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
       };
     }
 
-    const context: TaskContextModel<TType> = { name, options: optionsF, root };
+    const context: TaskContextModel<TType> = { name, options: optionsF, root, target };
     try {
       info('running', name);
       onBefore && (await this.runTasks(onBefore, context));
