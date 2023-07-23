@@ -1,6 +1,10 @@
 import 'core-js';
 import 'raf/polyfill';
 
+import { toMatchImageSnapshot } from 'jest-image-snapshot';
+
+expect.extend({ toMatchImageSnapshot });
+
 // import { importConfig } from '#lib-config/core/utils/importConfig/importConfig';
 // import { type TestConfigModel } from '#lib-config/node/test/test.models';
 

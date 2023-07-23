@@ -29,13 +29,18 @@ export const nodeTasks = <TType extends Array<TaskParamsModel<unknown>>>({
       params,
       test,
     ]);
+    const testBase: TaskParamsModel<TestParamsModel> = {
+      ...testSpec,
+      name: `${testSpec.name}-base`,
+      variables: () => ({ ENV_PLATFORM: PLATFORM.BASE }),
+    };
     const testEte: TaskParamsModel<TestParamsModel> = merge([
       {
         name: `${testSpec.name}-ete`,
         overrides: { testExtensions: eteExtensions },
         task: [
           [
-            [({ target }) => `run ${target}-test`, ...(eteTasks ?? [])],
+            [({ target }) => `run ${target}-${testBase.name}`, ...(eteTasks ?? [])],
             {
               condition: PARALLEL_CONDITION.FIRST,
               silent: eteTasks ? range(1, eteTasks.length + 1) : undefined,
@@ -46,7 +51,7 @@ export const nodeTasks = <TType extends Array<TaskParamsModel<unknown>>>({
       },
       testSpec,
     ]);
-    return [testSpec, testEte];
+    return [testSpec, testBase, testEte];
   };
 
   return [

@@ -1,5 +1,3 @@
-import { toMatchImageSnapshot } from 'jest-image-snapshot';
-
 import { fromConfig } from '#lib-backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { config as fileConfig } from '#lib-config/core/file/file';
@@ -30,10 +28,6 @@ const { _config, config } = defineConfig({
       isBrowser: false,
 
       mockPath: fromConfig('node/test/__mocks__'),
-
-      onBeforeAll: async () => {
-        expect.extend({ toMatchImageSnapshot });
-      },
 
       outputPath: fromWorking(fileConfig.distDir),
 
