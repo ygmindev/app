@@ -38,33 +38,30 @@ export const nodeTasks = <TType extends Array<TaskParamsModel<unknown>>>({
     const testBase: TaskParamsModel<TestParamsModel> = {
       ...testSpec,
       name: `${testSpec.name}-base`,
+      overrides: { testExtensions: eteExtensions },
       variables: () => ({ ENV_PLATFORM: PLATFORM.BASE }),
     };
-    const testEte: TaskParamsModel<TestParamsModel> = merge([
-      {
-        name: `${testSpec.name}-ete`,
-        onFinish: [
-          async ({ root }) =>
-            copy({
-              from: joinPaths({ paths: [root, outputPath] }),
-              isOverwrite: true,
-              to: fromStatic(publicPath, config.distPath, 'test'),
-            }),
+    const testEte: TaskParamsModel<TestParamsModel> = {
+      name: `${testSpec.name}-ete`,
+      onFinish: [
+        async ({ root }) =>
+          copy({
+            from: joinPaths({ paths: [root, outputPath] }),
+            isOverwrite: true,
+            to: fromStatic(publicPath, config.distPath, 'test'),
+          }),
+      ],
+      task: [
+        [
+          [({ target }) => `run ${target}-${testBase.name}`, ...(eteTasks ?? [])],
+          {
+            condition: PARALLEL_CONDITION.FIRST,
+            silent: eteTasks ? range(1, eteTasks.length + 1) : undefined,
+          },
         ],
-        overrides: { testExtensions: eteExtensions },
-        task: [
-          [
-            [({ target }) => `run ${target}-${testBase.name}`, ...(eteTasks ?? [])],
-            {
-              condition: PARALLEL_CONDITION.FIRST,
-              silent: eteTasks ? range(1, eteTasks.length + 1) : undefined,
-            },
-          ],
-        ],
-        variables: () => ({ ENV_PLATFORM: PLATFORM.BASE }),
-      },
-      testSpec,
-    ]);
+      ],
+      variables: () => ({ ENV_PLATFORM: PLATFORM.BASE }),
+    };
     return [testSpec, testBase, testEte];
   };
 

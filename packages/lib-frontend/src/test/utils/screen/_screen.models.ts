@@ -2,7 +2,7 @@ import { type TestConfigModel } from '#lib-config/node/test/test.models';
 
 export type _ScreenParamsModel = Pick<
   TestConfigModel,
-  'delay' | 'dimension' | 'isBrowser' | 'outputPath' | 'timeout'
+  'delay' | 'dimension' | 'isBrowser' | 'outputPath' | 'snapshotPrefix' | 'timeout'
 >;
 
 export type _ScreenModel = {

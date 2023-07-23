@@ -20,7 +20,7 @@ export const test: TaskParamsModel<TestParamsModel> = {
   task: [
     async ({ options, root }) => {
       const { _config } = await importConfig<TestConfigModel, _TestConfigModel>('node/test/test', [
-        { match: options?.testMatch, root },
+        { match: options?.testMatch, root, testExtensions: options?.testExtensions },
       ]);
       await runCLI(
         {

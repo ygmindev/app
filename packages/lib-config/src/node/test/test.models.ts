@@ -36,6 +36,8 @@ export type TestConfigModel = {
 
   outputPath: string;
 
+  snapshotPrefix: string;
+
   root?: string;
 
   specExtensions: Array<string>;

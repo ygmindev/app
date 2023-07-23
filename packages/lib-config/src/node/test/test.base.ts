@@ -31,6 +31,8 @@ const { _config, config } = defineConfig({
 
       outputPath: join(fileConfig.buildPath, 'test'),
 
+      snapshotPrefix: 'snapshot',
+
       specExtensions: ['.spec'],
 
       timeout: 120e3,
