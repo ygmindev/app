@@ -12,7 +12,6 @@ const PATH_PATH = '.cache';
 // TODO: Update
 const CLEAN_PATTERNS = [
   BUILD_PATH,
-  DIST_PATH,
   '.cache',
   '.esbuild',
   '.eslintcache',

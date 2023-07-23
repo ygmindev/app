@@ -31,7 +31,7 @@ const { _config, config } = defineConfig({
 
       mockDir: fromConfig('node/test/__mocks__'),
 
-      outputPath: join(fileConfig.distPath, 'test'),
+      outputPath: join(fileConfig.buildPath, 'test'),
 
       specExtensions: ['.spec'],
 

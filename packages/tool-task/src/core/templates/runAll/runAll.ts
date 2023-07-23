@@ -10,7 +10,7 @@ import { TaskRunner } from '#tool-task/core/utils/TaskRunner/TaskRunner';
 export const runAll: TaskParamsModel<RunAllParamsModel> = {
   name: 'run-all',
 
-  options: ({ name, variables: overrides }) => {
+  options: ({ name, overrides }) => {
     const { registry } = Container.get(TaskRunner);
     const options = Object.keys(registry).filter(
       (k) =>
