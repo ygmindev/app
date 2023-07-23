@@ -2,6 +2,7 @@ import range from 'lodash/range';
 
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
 import { joinPaths } from '#lib-backend/file/utils/joinPaths/joinPaths';
+import { config } from '#lib-config/core/file/file';
 import { config as testConfig } from '#lib-config/node/test/test.base';
 import { config as webConfig } from '#lib-config/platform/web/web';
 import { PLATFORM } from '#lib-platform/core/core.constants';
@@ -47,7 +48,7 @@ export const nodeTasks = <TType extends Array<TaskParamsModel<unknown>>>({
             copy({
               from: joinPaths({ paths: [root, outputPath] }),
               isOverwrite: true,
-              to: fromStatic(publicPath, 'test'),
+              to: fromStatic(publicPath, config.distPath, 'test'),
             }),
         ],
         overrides: { testExtensions: eteExtensions },

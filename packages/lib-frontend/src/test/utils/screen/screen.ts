@@ -3,6 +3,6 @@ import { _screen } from '#lib-frontend/test/utils/screen/_screen';
 import { type ScreenModel } from '#lib-frontend/test/utils/screen/screen.models';
 
 export const screen = async (): Promise<ScreenModel> => {
-  const { delay, dimension, imageExtension, isBrowser, outputDir, timeout } = config();
-  return _screen({ delay, dimension, imageExtension, isBrowser, outputDir, timeout });
+  const { delay, dimension, imageExtension, isBrowser, outputPath, timeout } = config();
+  return _screen({ delay, dimension, imageExtension, isBrowser, outputPath, timeout });
 };

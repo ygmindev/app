@@ -18,7 +18,7 @@ const { _config, config } = defineConfig({
 
       extensions: extensions(),
 
-      logSuppressPatterns: [/.*sourcemap.*/i],
+      logSuppressPatterns: [/.*sourcemap.*/i, /.*source map.*/i],
 
       mainFields: ['module', 'main'],
 

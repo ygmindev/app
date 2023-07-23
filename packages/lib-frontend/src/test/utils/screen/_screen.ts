@@ -1,7 +1,7 @@
-import { join } from 'path';
 import { type Browser, type Page } from 'puppeteer';
 import { launch } from 'puppeteer';
 
+import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '#lib-backend/file/utils/joinPaths/joinPaths';
 import { sleepForEffect } from '#lib-frontend/animation/utils/sleepForEffect/sleepForEffect';
 import { slug } from '#lib-frontend/route/utils/slug/slug';
@@ -19,7 +19,7 @@ export const _screen = async ({
   dimension,
   imageExtension,
   isBrowser,
-  outputDir,
+  outputPath,
   timeout,
 }: _ScreenParamsModel): Promise<_ScreenModel> => {
   browser =
@@ -50,14 +50,14 @@ export const _screen = async ({
       const img = await page.screenshot();
       match &&
         expect(img).toMatchImageSnapshot({
-          customDiffDir: join(outputDir, 'diffs'),
-          customReceivedDir: join(outputDir, 'received'),
+          customDiffDir: fromWorking(outputPath, 'diffs'),
+          customReceivedDir: fromWorking(outputPath, 'received'),
           customSnapshotIdentifier: ({ counter, currentTestName }) =>
             joinPaths({
               extension: imageExtension,
               paths: [slug(currentTestName), counter.toString()],
             }),
-          customSnapshotsDir: join(outputDir, 'snapshots'),
+          customSnapshotsDir: fromWorking(outputPath, 'snapshots'),
         });
     },
 

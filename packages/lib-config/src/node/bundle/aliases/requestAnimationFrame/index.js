@@ -1,8 +1,8 @@
-import 'setimmediate';
+require('setimmediate');
 
-import { polyfill } from 'raf';
+const raf = require('raf');
 
-const result = {};
-polyfill(result);
+const polys = {};
+raf.polyfill(polys);
 
-export default result.requestAnimationFrame;
+module.exports = polys.requestAnimationFrame;
