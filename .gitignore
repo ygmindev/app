@@ -1,9 +1,6 @@
 # Compiled output
-dist
-tmp
-out-tsc
-out
 .esbuild
+.build
 
 # Node
 node_modules

@@ -16,8 +16,6 @@ export type TestConfigModel = {
 
   fileExtensions: Array<string>;
 
-  imageExtension: string;
-
   isBrowser?: boolean;
 
   isWatch?: boolean;

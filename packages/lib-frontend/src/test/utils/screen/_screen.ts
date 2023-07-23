@@ -17,7 +17,6 @@ let page: Page;
 export const _screen = async ({
   delay,
   dimension,
-  imageExtension,
   isBrowser,
   outputPath,
   timeout,
@@ -53,10 +52,7 @@ export const _screen = async ({
           customDiffDir: fromWorking(outputPath, 'diffs'),
           customReceivedDir: fromWorking(outputPath, 'received'),
           customSnapshotIdentifier: ({ counter, currentTestName }) =>
-            joinPaths({
-              extension: imageExtension,
-              paths: [slug(currentTestName), counter.toString()],
-            }),
+            joinPaths({ paths: [slug(currentTestName), counter.toString()] }),
           customSnapshotsDir: fromWorking(outputPath, 'snapshots'),
         });
     },
