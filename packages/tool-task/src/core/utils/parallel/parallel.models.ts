@@ -9,3 +9,5 @@ export type ParallelParamsModel = _ParallelParamsModel;
 export type ParallelModel = _ParallelModel;
 
 export type ParallelConditionModel = `${PARALLEL_CONDITION}`;
+
+export type ParallelOptionsModel = { condition?: ParallelConditionModel; silent?: Array<number> };

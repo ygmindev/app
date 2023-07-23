@@ -5,9 +5,12 @@ import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 
 const BUILD_DIR = '.build';
 
+const DIST_DIR = '.dist';
+
 // TODO: Update
 const CLEAN_PATTERNS = [
   BUILD_DIR,
+  DIST_DIR,
   '.cache',
   '.esbuild',
   '.eslintcache',
@@ -26,7 +29,7 @@ const { _config, config } = defineConfig({
 
     cleanPatterns: CLEAN_PATTERNS,
 
-    distDir: '.dist',
+    distDir: DIST_DIR,
 
     excludePatterns: [...CLEAN_PATTERNS, '.git', 'ios/Pods', 'node_modules'],
 

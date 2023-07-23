@@ -1,7 +1,7 @@
 import { type NilModel, type PartialModel } from '#lib-shared/core/core.models';
 import { type EnvironmentOverrideParamsModel } from '#lib-shared/environment/environment.models';
 import { type TASK_STATUS } from '#tool-task/core/core.constants';
-import { type ParallelParamsModel } from '#tool-task/core/utils/parallel/parallel.models';
+import { type ParallelOptionsModel } from '#tool-task/core/utils/parallel/parallel.models';
 import { type PromptParamsModel } from '#tool-task/core/utils/prompt/prompt.models';
 
 export type TaskStatusModel = `${TASK_STATUS}`;
@@ -9,7 +9,7 @@ export type TaskStatusModel = `${TASK_STATUS}`;
 export type TaskModel<TType> =
   | ((context: TaskContextModel<TType>) => Promise<void> | void | NilModel)
   | TaskCommandModel<TType>
-  | ParallelParamsModel;
+  | [tasks: Array<TaskCommandModel<TType>>, options?: ParallelOptionsModel];
 
 export type TaskCommandModel<TType> =
   | ((context: TaskContextModel<TType>) => string | NilModel)
