@@ -1,3 +1,4 @@
+import isArray from 'lodash/isArray';
 import trimEnd from 'lodash/trimEnd';
 
 import { type RouteModel } from '#lib-frontend/route/route.models';
@@ -20,7 +21,17 @@ const pages = (routes?: Array<RouteModel>): _PreparePrerenderParamsModel['pages'
           : []),
       ];
       // TODO: add async context per page if needed
-      return !route.isClientOnly ? resultF : [...resultF, { getContext: undefined, pathname }];
+      return route.prerender
+        ? [
+            ...resultF,
+            ...(isArray(route.prerender)
+              ? route.prerender.map((value) => ({
+                  getContext: undefined,
+                  pathname: trimPathname(`${pathname}/${value}`),
+                }))
+              : [{ getContext: undefined, pathname }]),
+          ]
+        : result;
     },
     [] as _PreparePrerenderParamsModel['pages'],
   ) ?? [];

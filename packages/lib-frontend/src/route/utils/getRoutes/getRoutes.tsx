@@ -184,8 +184,8 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
 
         {
           element: <DevPage />,
-          isClientOnly: true,
           pathname: DEV,
+          prerender: [''],
         },
       ],
     },

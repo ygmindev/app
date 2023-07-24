@@ -12,9 +12,9 @@ export type RouteModel<TProps extends ChildrenPropsModel = ChildrenPropsModel> =
   element?: ReactElement<TProps>;
   fullpath?: string;
   header?: { previous?: string };
-  isClientOnly?: boolean;
   isProtectable?: boolean;
   pathname: string;
+  prerender?: false | Array<string>;
   root?: string;
   routes?: Array<RouteModel>;
   title?: TranslatableTextModel;

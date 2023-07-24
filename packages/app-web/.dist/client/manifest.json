@@ -13,10 +13,10 @@
   },
   "../../node_modules/vite-plugin-ssr/dist/esm/client/router/entry.js": {
     "dynamicImports": [
-      "virtual:vite-plugin-ssr:importPageCode:client:/src/pages/*",
-      "virtual:vite-plugin-ssr:importPageCode:client:/src/pages/_error"
+      "virtual:vite-plugin-ssr:importPageCode:client:/src/pages/_error",
+      "virtual:vite-plugin-ssr:importPageCode:client:/src/pages/*"
     ],
-    "file": "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/entries/entry-client-routing.902d27ba.js",
+    "file": "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/entries/entry-client-routing.f124ee68.js",
     "imports": [
       "_chunk-cf010ec4.js"
     ],
@@ -28,13 +28,13 @@
     "isDynamicEntry": true,
     "src": "../lib-frontend/src/locale/utils/currentCountry/_currentCountry.ts"
   },
-  "_chunk-56d6e827.js": {
+  "_chunk-5763065a.js": {
     "assets": [
       "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/static/FontAwesome.aa58f33f.ttf",
       "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/static/Ionicons.9c7fb907.ttf",
       "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/static/MaterialIcons.ef149f08.ttf"
     ],
-    "file": "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/chunks/chunk-56d6e827.js",
+    "file": "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/chunks/chunk-5763065a.js",
     "imports": [
       "_chunk-cf010ec4.js"
     ]
@@ -46,9 +46,9 @@
     "dynamicImports": [
       "../lib-frontend/src/locale/utils/currentCountry/_currentCountry.ts"
     ],
-    "file": "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/entries/src_pages_.75baa6ea.js",
+    "file": "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/entries/src_pages_.ac39fa64.js",
     "imports": [
-      "_chunk-56d6e827.js",
+      "_chunk-5763065a.js",
       "_chunk-cf010ec4.js"
     ],
     "isDynamicEntry": true,
@@ -56,9 +56,9 @@
     "src": "virtual:vite-plugin-ssr:importPageCode:client:/src/pages/*"
   },
   "virtual:vite-plugin-ssr:importPageCode:client:/src/pages/_error": {
-    "file": "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/entries/src_pages_error.66746dcc.js",
+    "file": "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/entries/src_pages_error.40247b5e.js",
     "imports": [
-      "_chunk-56d6e827.js",
+      "_chunk-5763065a.js",
       "_chunk-cf010ec4.js"
     ],
     "isDynamicEntry": true,
