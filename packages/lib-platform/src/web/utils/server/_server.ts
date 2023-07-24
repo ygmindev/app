@@ -13,7 +13,7 @@ import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
 import { _config } from '#lib-config/locale/internationalize/internationalize.server';
 import { config as webConfig } from '#lib-config/platform/web/web';
 import { type CookieOptionModel } from '#lib-frontend/state/state.models';
-import { renderPage } from '#lib-platform/web/utils/renderPage/renderPage';
+import { render } from '#lib-platform/web/utils/render/render';
 import {
   type _ServerModel,
   type _ServerParamsModel,
@@ -51,7 +51,7 @@ export const _server = async ({
 
     const { cookies, i18n, language, url } = req;
 
-    const { error, redirect, response } = await renderPage({
+    const { error, redirect, response } = await render({
       context: {
         [LOCALE]: { i18n, lang: language },
         [ROUTE]: { location: { pathname: url } },

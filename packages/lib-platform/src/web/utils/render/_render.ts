@@ -3,13 +3,11 @@ import { type WritableStream } from 'node:stream/web';
 import { renderPage } from 'vite-plugin-ssr/server';
 
 import {
-  type _RenderPageModel,
-  type _RenderPageParamsModel,
-} from '#lib-platform/web/utils/renderPage/_renderPage.models';
+  type _RenderModel,
+  type _RenderParamsModel,
+} from '#lib-platform/web/utils/render/_render.models';
 
-export const _renderPage = async ({
-  context,
-}: _RenderPageParamsModel): Promise<_RenderPageModel> => {
+export const _render = async ({ context }: _RenderParamsModel): Promise<_RenderModel> => {
   const { errorWhileRendering, httpResponse, redirectTo } = await renderPage({
     context,
     redirectTo: undefined,

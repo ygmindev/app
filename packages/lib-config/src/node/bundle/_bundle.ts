@@ -63,16 +63,18 @@ function vitePluginIsomorphicImport(serverExtension: string): Plugin {
 export const _bundle = ({
   aliases,
   babelConfig,
+  cachePath,
   define,
+  distPath,
   entry,
   envPrefix,
   extensions,
   externals,
-  fileConfig,
   logSuppressPatterns,
   mainFields,
   modulePaths,
   provide,
+  publicPath,
   serverExtension,
   transpiles,
   tsconfigPath,
@@ -94,7 +96,6 @@ export const _bundle = ({
   const isReact = ([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>).includes(
     process.env.ENV_PLATFORM,
   );
-  const { cachePath, distPath, publicPath } = fileConfig;
   const config: _BundleConfigModel = {
     build: {
       assetsDir: joinPaths([fromWorking(), publicPath]),
