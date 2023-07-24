@@ -14,7 +14,7 @@
     "plugin:typescript-sort-keys/recommended"
   ],
   "ignorePatterns": [
-    "!(/Users/ygmin/Projects/mono_v2/app3/app/src/**/*)"
+    "!(/Users/ygmin/Projects/mono_v2/app3/app/src/**/*.tsx|/Users/ygmin/Projects/mono_v2/app3/app/src/**/*.ts|/Users/ygmin/Projects/mono_v2/app3/app/src/**/*.jsx|/Users/ygmin/Projects/mono_v2/app3/app/src/**/*.js)"
   ],
   "overrides": [
     {
@@ -33,7 +33,7 @@
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "tsconfig.json",
+    "project": "./tsconfig.json",
     "tsconfigRootDir": "/Users/ygmin/Projects/mono_v2/app3/app"
   },
   "plugins": [

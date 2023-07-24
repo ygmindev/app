@@ -26,9 +26,10 @@ export const copy = async ({
         await copy({ from: join(from, child), isOverwrite, overrides, to: join(toF, child) });
       }
     } else if (isOverwrite || !existsSync(toF)) {
-      let fileF = readFileSync(from, 'base64');
+      const encoding = toF.match(/\.(jpg|jpeg|png|gif)$/i) ? 'base64' : 'utf8';
+      let fileF = readFileSync(from, encoding);
       overrides && forEach(overrides, (v, k) => (fileF = fileF.replaceAll(k, v)));
-      writeFile({ filename: toF, value: fileF });
+      writeFile({ encoding, filename: toF, value: fileF });
     }
   }
 };

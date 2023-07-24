@@ -20,7 +20,7 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
   initialize: async (onAuth): Promise<void> => {
     if (process.env.NODE_ENV !== 'test') {
       auth = firebaseAuth();
-      process.env.APP_FIREBASE_USE_EMULATOR && auth.useEmulator('http://localhost:9099');
+      process.env.APP_FIREBASE_USE_EMULATOR && auth.useEmulator('http://127.0.0.1:9099');
 
       auth.onAuthStateChanged((user: FirebaseAuthTypes.User | null) => {
         if (user) {

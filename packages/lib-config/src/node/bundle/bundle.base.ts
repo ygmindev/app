@@ -1,6 +1,7 @@
 import { fromModules } from '#lib-backend/file/utils/fromModules/fromModules';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
+import { config as fileConfig } from '#lib-config/core/file/file';
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _config as _babelConfig } from '#lib-config/node/babel/babel.base';
 import { _bundle } from '#lib-config/node/bundle/_bundle';
@@ -14,6 +15,12 @@ const { _config, config } = defineConfig({
     ({
       babelConfig: _babelConfig,
 
+      buildPath: fileConfig.buildPath,
+
+      cachePath: fileConfig.cachePath,
+
+      distPath: fileConfig.distPath,
+
       envPrefix: ['ENV_', 'NODE_ENV'],
 
       extensions: extensions(),
@@ -24,7 +31,7 @@ const { _config, config } = defineConfig({
 
       modulePaths: [fromModules()],
 
-      outDir: fromWorking('dist'),
+      publicPath: 'assets',
 
       tsconfigPath: fromWorking('tsconfig.json'),
 
@@ -34,7 +41,7 @@ const { _config, config } = defineConfig({
         fromPackages('lib-shared/src/**/*'),
         fromWorking('src/**/*'),
       ],
-    } satisfies BundleConfigModel),
+    }) satisfies BundleConfigModel,
 });
 
 export { _config, config };

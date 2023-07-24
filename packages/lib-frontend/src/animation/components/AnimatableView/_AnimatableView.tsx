@@ -48,7 +48,7 @@ export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewP
         {...(_viewParams.getProps && _viewParams.getProps({ ...props, style: styles }, theme))}
         {...(_viewParamsPressable.getProps &&
           _viewParamsPressable.getProps({ ...props, style: styles }, theme))}
-        {...(animationProps as MotiProps['animate'])}
+        {...(animationProps as Omit<MotiProps['animate'], 'pointerEvents'>)}
         hitSlop={undefined}
         ref={ref}
         state={animationState}

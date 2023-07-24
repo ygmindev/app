@@ -30,6 +30,8 @@ const { _config, config } = defineConfig({
 
       envPrefix: ['APP_', 'SERVER_'],
 
+      externals: ['raf/polyfill.js', 'setimmediate'],
+
       transpiles: [
         'countries-list',
         'css-in-js-utils',

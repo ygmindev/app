@@ -40,7 +40,7 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
 
       auth &&
         process.env.APP_FIREBASE_USE_EMULATOR &&
-        connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
+        connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true });
 
       // TODO: from locale
       // _auth && useDeviceLanguage(_auth);

@@ -8,28 +8,18 @@ import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 
-export const Carousel: SFCModel<CarouselPropsModel> = ({
-  current,
-  height,
-  slides,
-  testID,
-  width,
-  ...props
-}) => {
+export const Carousel: SFCModel<CarouselPropsModel> = ({ current, slides, testID, ...props }) => {
   const { styles } = useStyles({ props });
   const [currentF, currentSet] = useState<number>(current ?? 0);
   const isFirst = currentF <= 0;
   const isLast = currentF >= (slides?.length ?? 0) - 1;
   return (
     <Wrapper
-      border
       grow
-      height={height}
-      isFullWidth={!width}
+      isFullWidth
       isRowAlign
       style={styles}
-      testID={testID}
-      width={width}>
+      testID={testID}>
       <Button
         elementState={isFirst ? ELEMENT_STATE.DISABLED : undefined}
         icon="chevronLeft"
@@ -38,7 +28,7 @@ export const Carousel: SFCModel<CarouselPropsModel> = ({
 
       <Wrapper
         grow
-        height={height}>
+        isFullHeight>
         <Slides
           current={currentF}
           slides={slides}

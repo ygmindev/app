@@ -1,0 +1,1 @@
+import o from"geolocator";const t=async()=>(o.config({language:"en"}),new Promise((n,u)=>o.locate({addressLookup:!1,fallbackToIP:!0,timezone:!1},(r,e)=>{var s;r?u(r):n(((s=e==null?void 0:e.address)==null?void 0:s.countryCode)??null)})));export{t as _currentCountry};

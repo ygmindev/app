@@ -7,19 +7,20 @@ const BUILD_PATH = '.build';
 
 const DIST_PATH = '.dist';
 
-const PATH_PATH = '.cache';
+const CACHE_PATH = '.cache';
+
+const PUBLIC_PATH = 'assets';
 
 // TODO: Update
 const CLEAN_PATTERNS = [
   BUILD_PATH,
-  '.cache',
+  CACHE_PATH,
   '.esbuild',
   '.eslintcache',
   '.swc',
   '*.log*',
   '.DS_Store',
   'coverage',
-  'public/assets',
 ];
 
 const { _config, config } = defineConfig({
@@ -28,7 +29,7 @@ const { _config, config } = defineConfig({
 
     buildPath: BUILD_PATH,
 
-    cachePath: PATH_PATH,
+    cachePath: CACHE_PATH,
 
     cleanPatterns: CLEAN_PATTERNS,
 
@@ -37,6 +38,8 @@ const { _config, config } = defineConfig({
     excludePatterns: [...CLEAN_PATTERNS, '.git', 'ios/Pods', 'node_modules'],
 
     packagePrefixes: ['app', 'backend', 'lib', 'tool'],
+
+    publicPath: PUBLIC_PATH,
   } satisfies FileConfigModel,
 });
 

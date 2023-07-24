@@ -1,4 +1,3 @@
-import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _config as _bundleConfig } from '#lib-config/node/bundle/bundle.web';
 import { _web } from '#lib-config/platform/web/_web';
@@ -12,7 +11,7 @@ const { _config, config } = defineConfig({
     ({
       bundleConfig: _bundleConfig,
 
-      configFile: fromWorking('web.js'),
+      configFile: 'web.js',
 
       isSsr: true,
 

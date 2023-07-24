@@ -10,4 +10,4 @@ export const runServer = ({
   path,
   port = process.env.SERVER_PORT,
 }: RunServerParamsModel): RunServerModel =>
-  fromExecutable(`http-server ${path} -a ${host} --cors --port ${port} ${isOpen ? '--o' : ''}`);
+  fromExecutable(`http-server ${path} -a ${host.split('://')[1]} --cors --port ${port} ${isOpen ? '--o' : ''}`);

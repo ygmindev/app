@@ -15,13 +15,14 @@ export const ReportPage: SFCModel<ReportPagePropsModel> = ({ testID, ...props })
       style={styles}
       testID={testID}>
       <Carousel
-        height={200}
         slides={[
           {
             element: (
               <Image
-                isGrow
-                src="/images/brands/visa.png"
+                border
+                grow
+                round
+                src="/.dist/test/snapshots/sign-in-works/snapshot-1.png"
               />
             ),
             id: '1',
@@ -29,8 +30,10 @@ export const ReportPage: SFCModel<ReportPagePropsModel> = ({ testID, ...props })
           {
             element: (
               <Image
-                isGrow
-                src="/images/brands/amex.png"
+                border
+                grow
+                round
+                src="/.dist/test/snapshots/sign-in-works/snapshot-2.png"
               />
             ),
             id: '2',

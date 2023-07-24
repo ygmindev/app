@@ -6,13 +6,12 @@ import { _Image } from '#lib-frontend/core/components/Image/_Image';
 import { type ImagePropsModel } from '#lib-frontend/core/components/Image/Image.models';
 import { type DimensionModel, type SFCModel } from '#lib-frontend/core/core.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { shapeStyler } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler';
+import { viewStyler } from '#lib-frontend/style/utils/styler/viewStyler/viewStyler';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 
 export const Image: SFCModel<ImagePropsModel> = ({
   height,
   isAutoSize,
-  isGrow,
   src,
   testID,
   width,
@@ -21,7 +20,7 @@ export const Image: SFCModel<ImagePropsModel> = ({
   const [dimension, dimensionSet] = useState<DimensionModel>({ height, width });
   const { styles } = useStyles({
     props: { ...props, ...dimension },
-    stylers: [shapeStyler, isGrow && { flex: 1 }],
+    stylers: [viewStyler],
   });
   const [current, currentSet] = useState<number>(0);
   const srcF = isArray(src) ? src[current] : src;

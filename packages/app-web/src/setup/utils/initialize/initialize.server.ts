@@ -1,5 +1,5 @@
 import 'setimmediate';
-import 'raf/polyfill';
+import 'raf/polyfill.js';
 
 import { type InitializeModel } from '#app-web/setup/utils/initialize/initialize.models.server';
 

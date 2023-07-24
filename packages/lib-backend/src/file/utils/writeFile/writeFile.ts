@@ -4,5 +4,4 @@ import {
   type WriteFileParamsModel,
 } from '#lib-backend/file/utils/writeFile/writeFile.models';
 
-export const writeFile = ({ ...params }: WriteFileParamsModel): WriteFileModel =>
-  _writeFile({ ...params });
+export const writeFile = (params: WriteFileParamsModel): WriteFileModel => _writeFile(params);

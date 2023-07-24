@@ -64,7 +64,9 @@ function vitePluginIsomorphicImport(serverExtension: string): Plugin {
 export const _bundle = ({
   aliases,
   babelConfig,
+  cachePath,
   define,
+  distPath,
   entry,
   envPrefix,
   extensions,
@@ -72,8 +74,8 @@ export const _bundle = ({
   logSuppressPatterns,
   mainFields,
   modulePaths,
-  outDir,
   provide,
+  publicPath,
   serverExtension,
   transpiles,
   tsconfigPath,
@@ -97,7 +99,7 @@ export const _bundle = ({
   );
   const config: _BundleConfigModel = {
     build: {
-      assetsDir: fromWorking('assets'),
+      assetsDir: joinPaths({ paths: [fromWorking(), publicPath] }),
 
       commonjsOptions: {
         defaultIsModuleExports: true,
@@ -108,7 +110,7 @@ export const _bundle = ({
 
       minify: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION,
 
-      outDir,
+      outDir: joinPaths({ paths: [fromWorking(), distPath] }),
 
       rollupOptions: {
         external: externals,
@@ -120,6 +122,8 @@ export const _bundle = ({
       watch:
         process.env.NODE_ENV === ENVIRONMENT.DEVELOPMENT && watch ? { include: watch } : undefined,
     },
+
+    cacheDir: joinPaths({ paths: [fromWorking(), cachePath] }),
 
     customLogger,
 

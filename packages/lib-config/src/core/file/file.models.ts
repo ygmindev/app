@@ -13,4 +13,6 @@ export type FileConfigModel = {
   excludePatterns: Array<string>;
 
   packagePrefixes: Array<string>;
+
+  publicPath: string;
 };
