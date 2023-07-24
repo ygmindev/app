@@ -107,6 +107,8 @@ export const _bundle = ({
         transformMixedEsModules: true,
       },
 
+      emptyOutDir: true,
+
       minify: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION,
 
       outDir: joinPaths([fromWorking(), distPath]),

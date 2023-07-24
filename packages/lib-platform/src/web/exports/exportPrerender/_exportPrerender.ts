@@ -24,6 +24,17 @@ export const _exportPrerender = ({
           const pathname = trimPathname(
             isLanguageDefault ? urlOriginal : `/${lang}/${urlOriginal}`,
           );
+          console.warn({
+            ...pageContext,
+            context: merge([
+              {
+                [LOCALE]: { i18n, lang },
+                [ROUTE]: { location: { pathname: trimPathname(urlOriginal) } },
+              },
+              context,
+            ]),
+            urlOriginal: pathname,
+          });
           return {
             ...pageContext,
             context: merge([

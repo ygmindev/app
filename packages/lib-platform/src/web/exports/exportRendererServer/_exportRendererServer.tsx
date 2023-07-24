@@ -72,6 +72,8 @@ export const _exportRendererServer = ({
           },
           contextF,
         ]);
+        console.warn('@@@ pagecontext');
+        console.warn(pageContext);
         return {
           context: pick(pageContext, ssrContextKeys),
           enableEagerStreaming: true,

@@ -36,7 +36,7 @@ const { _config, config } = defineConfig({
       specExtensions: ['.spec'],
 
       timeout: 120e3,
-    } satisfies TestConfigModel),
+    }) satisfies TestConfigModel,
 });
 
 export { _config, config };

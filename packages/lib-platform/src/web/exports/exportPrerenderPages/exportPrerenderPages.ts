@@ -12,19 +12,22 @@ import {
 const _getPrerenderPathnames = (
   routes?: Array<RouteModel>,
 ): _ExportPrerenderPagesParamsModel['pages'] =>
-  routes?.reduce((result, route) => {
-    const pathname = trimPathname(`${route.root ?? ''}/${trimEnd(route.pathname, '/*')}`);
-    const resultF = [
-      ...result,
-      ...(route.routes
-        ? _getPrerenderPathnames(
-            route.routes.map(({ ...routeChild }) => ({ ...routeChild, root: pathname })),
-          )
-        : []),
-    ];
-    // TODO: add async context per page if needed
-    return !route.isClientOnly ? resultF : [...resultF, { getContext: undefined, pathname }];
-  }, [] as _ExportPrerenderPagesParamsModel['pages']) || [];
+  routes?.reduce(
+    (result, route) => {
+      const pathname = trimPathname(`${route.root ?? ''}/${trimEnd(route.pathname, '/*')}`);
+      const resultF = [
+        ...result,
+        ...(route.routes
+          ? _getPrerenderPathnames(
+              route.routes.map(({ ...routeChild }) => ({ ...routeChild, root: pathname })),
+            )
+          : []),
+      ];
+      // TODO: add async context per page if needed
+      return !route.isClientOnly ? resultF : [...resultF, { getContext: undefined, pathname }];
+    },
+    [] as _ExportPrerenderPagesParamsModel['pages'],
+  ) || [];
 
 export const exportPrerenderPages = ({
   routes,
