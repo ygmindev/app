@@ -1,5 +1,5 @@
-import { exportRendererClient } from '#lib-platform/web/exports/exportRendererClient/exportRendererClient';
+import { renderClient } from '#lib-platform/web/exports/renderClient/renderClient';
 
-const { render } = exportRendererClient({});
+const { render } = renderClient({});
 
 export default render;

@@ -35,5 +35,5 @@ export const renderApp = ({ Root, children, context }: RenderAppParamsModel): Re
       ) => { element: ReactElement; getStyleElement: () => ReactElement };
     }
   ).getApplication('App', {});
-  return { element, getCss: getStyleElement };
+  return { element, getStyleSheet: getStyleElement };
 };

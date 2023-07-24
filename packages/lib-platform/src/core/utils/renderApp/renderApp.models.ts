@@ -11,5 +11,5 @@ export type RenderAppParamsModel = {
 
 export type RenderAppModel = {
   element: ReactElement;
-  getCss(): ReactElement;
+  getStyleSheet(): ReactElement;
 };

@@ -1,0 +1,27 @@
+import { type ReactElement } from 'react';
+import { type PageContextBuiltInClientWithServerRouting } from 'vite-plugin-ssr/types';
+
+import { type WebConfigModel } from '#lib-config/platform/web/web.models';
+import { type RootContextModel } from '#lib-frontend/root/root.models';
+import { type RenderAppModel } from '#lib-platform/core/utils/renderApp/renderApp.models';
+
+export type _RenderServerParamsModel = Pick<
+  WebConfigModel,
+  'publicPath' | 'rootId' | 'ssrContextKeys'
+> & {
+  initialize?(): Promise<void>;
+
+  render(params: { context: RootContextModel; element: ReactElement }): RenderAppModel;
+};
+
+export type _RenderServerModel = {
+  render(
+    params: PageContextBuiltInClientWithServerRouting & {
+      context?: RootContextModel;
+      pageProps?: object;
+    },
+  ): Promise<{
+    documentHtml: { _template: unknown };
+    pageContext(): Promise<{ context?: RootContextModel; pageProps?: object; redirectTo?: string }>;
+  }>;
+};

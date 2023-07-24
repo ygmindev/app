@@ -1,6 +1,6 @@
-import { type ExportRenderServerRenderParamsModel } from '#lib-platform/web/exports/exportRendererServer/exportRendererServer.models';
+import { type RenderServerRenderParamsModel } from '#lib-platform/web/exports/renderServer/renderServer.models';
 
-export type _RenderPageParamsModel = ExportRenderServerRenderParamsModel;
+export type _RenderPageParamsModel = RenderServerRenderParamsModel;
 
 export type _RenderPageModel = {
   error?: Error;

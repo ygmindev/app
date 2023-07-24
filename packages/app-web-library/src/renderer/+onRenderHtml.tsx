@@ -1,5 +1,5 @@
-import { exportRendererServer } from '#lib-platform/web/exports/exportRendererServer/exportRendererServer';
+import { RendererServer } from '#lib-platform/web/exports/RendererServer/RendererServer';
 
-const { render } = exportRendererServer({});
+const { render } = RendererServer({});
 
 export default render;

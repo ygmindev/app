@@ -1,7 +1,7 @@
 import { type PageContextBuiltIn } from 'vite-plugin-ssr/types';
 
 import { type InternationalizeConfigModel } from '#lib-config/locale/internationalize/internationalize.models';
-import { type ExportRenderServerRenderParamsModel } from '#lib-platform/web/exports/exportRendererServer/exportRendererServer.models';
+import { type RenderServerRenderParamsModel } from '#lib-platform/web/exports/renderServer/renderServer.models';
 
 export type _ExportPrerenderParamsModel = Pick<
   InternationalizeConfigModel,
@@ -15,4 +15,4 @@ export type _ExportPrerenderModel = {
 };
 
 type _PageContextModel = Pick<PageContextBuiltIn, 'urlOriginal'> &
-  ExportRenderServerRenderParamsModel;
+  RenderServerRenderParamsModel;

@@ -9,21 +9,21 @@ import { type RootStateContextModel } from '#lib-frontend/root/stores/rootStore.
 import { Store } from '#lib-frontend/state/utils/Store/Store';
 import { getLocaleStoreFromI18n } from '#lib-platform/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
 import {
-  type _ExportRendererServerModel,
-  type _ExportRendererServerParamsModel,
-} from '#lib-platform/web/exports/exportRendererServer/_exportRendererServer.models';
+  type _RenderServerModel,
+  type _RenderServerParamsModel,
+} from '#lib-platform/web/exports/renderServer/_renderServer.models';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 import { QUERY } from '#lib-shared/query/query.constants';
 import { STATE } from '#lib-shared/state/state.constants';
 
-export const _exportRendererServer = ({
+export const _renderServer = ({
   initialize,
   publicPath,
   render,
   rootId,
   ssrContextKeys,
-}: _ExportRendererServerParamsModel): _ExportRendererServerModel => ({
+}: _RenderServerParamsModel): _RenderServerModel => ({
   render: async ({ Page, context, pageProps }) => {
     initialize && (await initialize());
 
@@ -37,8 +37,8 @@ export const _exportRendererServer = ({
       },
       context,
     ]);
-    const { element, getCss } = render({ children: <Page {...pageProps} />, context: contextF });
-    const styleSheet = renderToStaticMarkup(getCss());
+    const { element, getStyleSheet } = render({ context: contextF, element: <Page {...pageProps} /> });
+    const styleSheet = renderToStaticMarkup(getStyleSheet());
     // const stream = await renderToStream(element);
     const { pipe } = renderToPipeableStream(element);
     stampPipe(pipe, 'node-stream');
@@ -72,8 +72,6 @@ export const _exportRendererServer = ({
           },
           contextF,
         ]);
-        console.warn('@@@ pagecontext');
-        console.warn(pageContext);
         return {
           context: pick(pageContext, ssrContextKeys),
           enableEagerStreaming: true,

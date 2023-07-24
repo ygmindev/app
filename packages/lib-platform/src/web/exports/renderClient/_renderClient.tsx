@@ -5,18 +5,20 @@ import { _config } from '#lib-config/locale/internationalize/internationalize.we
 import { type RootContextModel } from '#lib-frontend/root/root.models';
 import { type CookiesModel } from '#lib-frontend/state/state.models';
 import {
-  type _ExportRendererClientModel,
-  type _ExportRendererClientParamsModel,
-} from '#lib-platform/web/exports/exportRendererClient/_exportRendererClient.models';
+  type _RenderClientModel,
+  type _RenderClientParamsModel,
+} from '#lib-platform/web/exports/renderClient/_renderClient.models';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 import { STATE } from '#lib-shared/state/state.constants';
 
-export const _exportRendererClient = ({
+export const _renderClient = ({
+  initialize,
   render,
   rootId,
-}: _ExportRendererClientParamsModel): _ExportRendererClientModel => ({
+}: _RenderClientParamsModel): _RenderClientModel => ({
   render: async ({ Page, context, isHydration, pageProps }) => {
+    initialize && (await initialize());
     const contextF: RootContextModel = merge([
       {
         [LOCALE]: { i18n: context?.locale?.i18n ?? _config() },
@@ -24,7 +26,7 @@ export const _exportRendererClient = ({
       },
       context,
     ]);
-    const { element } = render({ children: <Page {...pageProps} />, context: contextF });
+    const { element } = render({ context: contextF, element: <Page {...pageProps} /> });
     const root = document.getElementById(rootId);
     root && (isHydration ? hydrateRoot(root, element) : createRoot(root).render(element));
   },
