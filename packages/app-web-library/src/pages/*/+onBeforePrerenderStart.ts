@@ -1,6 +1,4 @@
 import { routes } from '#app-web/routes';
-import { exportPrerenderPages } from '#lib-platform/web/exports/exportPrerenderPages/exportPrerenderPages';
+import { preparePrerender } from '#lib-platform/web/exports/preparePrerender/preparePrerender';
 
-const { prerenderPages } = exportPrerenderPages({ routes });
-
-export default prerenderPages;
+export default preparePrerender({ routes });

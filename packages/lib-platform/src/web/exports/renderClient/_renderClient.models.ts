@@ -11,11 +11,9 @@ export type _RenderClientParamsModel = Pick<WebConfigModel, 'rootId'> & {
   render(params: { context: RootContextModel; element: ReactElement }): RenderAppModel;
 };
 
-export type _RenderClientModel = {
-  render(
-    params: PageContextBuiltInClientWithClientRouting & {
-      context?: RootContextModel;
-      pageProps?: object;
-    },
-  ): Promise<void>;
-};
+export type _RenderClientModel = (
+  params: PageContextBuiltInClientWithClientRouting & {
+    context?: RootContextModel;
+    pageProps?: object;
+  },
+) => Promise<void>;

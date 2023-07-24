@@ -14,14 +14,12 @@ export type _RenderServerParamsModel = Pick<
   render(params: { context: RootContextModel; element: ReactElement }): RenderAppModel;
 };
 
-export type _RenderServerModel = {
-  render(
-    params: PageContextBuiltInClientWithServerRouting & {
-      context?: RootContextModel;
-      pageProps?: object;
-    },
-  ): Promise<{
-    documentHtml: { _template: unknown };
-    pageContext(): Promise<{ context?: RootContextModel; pageProps?: object; redirectTo?: string }>;
-  }>;
-};
+export type _RenderServerModel = (
+  params: PageContextBuiltInClientWithServerRouting & {
+    context?: RootContextModel;
+    pageProps?: object;
+  },
+) => Promise<{
+  documentHtml: { _template: unknown };
+  pageContext(): Promise<{ context?: RootContextModel; pageProps?: object; redirectTo?: string }>;
+}>;

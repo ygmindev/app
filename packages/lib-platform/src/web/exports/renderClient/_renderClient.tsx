@@ -12,12 +12,9 @@ import { merge } from '#lib-shared/core/utils/merge/merge';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 import { STATE } from '#lib-shared/state/state.constants';
 
-export const _renderClient = ({
-  initialize,
-  render,
-  rootId,
-}: _RenderClientParamsModel): _RenderClientModel => ({
-  render: async ({ Page, context, isHydration, pageProps }) => {
+export const _renderClient =
+  ({ initialize, render, rootId }: _RenderClientParamsModel): _RenderClientModel =>
+  async ({ Page, context, isHydration, pageProps }) => {
     initialize && (await initialize());
     const contextF: RootContextModel = merge([
       {
@@ -29,5 +26,4 @@ export const _renderClient = ({
     const { element } = render({ context: contextF, element: <Page {...pageProps} /> });
     const root = document.getElementById(rootId);
     root && (isHydration ? hydrateRoot(root, element) : createRoot(root).render(element));
-  },
-});
+  };

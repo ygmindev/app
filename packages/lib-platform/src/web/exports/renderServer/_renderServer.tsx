@@ -17,14 +17,15 @@ import { LOCALE } from '#lib-shared/locale/locale.constants';
 import { QUERY } from '#lib-shared/query/query.constants';
 import { STATE } from '#lib-shared/state/state.constants';
 
-export const _renderServer = ({
-  initialize,
-  publicPath,
-  render,
-  rootId,
-  ssrContextKeys,
-}: _RenderServerParamsModel): _RenderServerModel => ({
-  render: async ({ Page, context, pageProps }) => {
+export const _renderServer =
+  ({
+    initialize,
+    publicPath,
+    render,
+    rootId,
+    ssrContextKeys,
+  }: _RenderServerParamsModel): _RenderServerModel =>
+  async ({ Page, context, pageProps }) => {
     initialize && (await initialize());
 
     const queryClient = new QueryClient();
@@ -37,7 +38,10 @@ export const _renderServer = ({
       },
       context,
     ]);
-    const { element, getStyleSheet } = render({ context: contextF, element: <Page {...pageProps} /> });
+    const { element, getStyleSheet } = render({
+      context: contextF,
+      element: <Page {...pageProps} />,
+    });
     const styleSheet = renderToStaticMarkup(getStyleSheet());
     // const stream = await renderToStream(element);
     const { pipe } = renderToPipeableStream(element);
@@ -79,5 +83,4 @@ export const _renderServer = ({
         };
       },
     };
-  },
-});
+  };

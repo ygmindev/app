@@ -1,5 +1,5 @@
-import { exportPrerender } from '#lib-platform/web/exports/exportPrerender/exportPrerender';
+import { prerender } from '#lib-platform/web/exports/prerender/prerender';
 
-const { prerender } = exportPrerender({});
+const { prerender } = prerender({});
 
 export default prerender;
