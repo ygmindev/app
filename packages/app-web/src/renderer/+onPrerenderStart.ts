@@ -2,4 +2,4 @@ import { exportPrerender } from '#lib-platform/web/exports/exportPrerender/expor
 
 const { prerender } = exportPrerender({});
 
-export { prerender };
+export default prerender;
