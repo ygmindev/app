@@ -11,11 +11,11 @@ const { _config, config } = defineConfig({
   _config: _parser,
 
   config: {
+    distDir: fromStatic('assets/locales'),
+
     languages,
 
     missingValue: 'TRANSLATION_MISSING',
-
-    outputDir: fromStatic('assets/locales'),
   } satisfies ParserConfigModel,
 });
 

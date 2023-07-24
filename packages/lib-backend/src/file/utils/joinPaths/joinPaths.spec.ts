@@ -5,7 +5,7 @@ const { displayName } = withTest({ joinPaths });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = joinPaths({ paths: [] });
+    const result = joinPaths([]);
     expect(result).toStrictEqual({});
   });
 });

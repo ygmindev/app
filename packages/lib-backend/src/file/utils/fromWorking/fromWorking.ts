@@ -5,4 +5,4 @@ import {
 import { joinPaths } from '#lib-backend/file/utils/joinPaths/joinPaths';
 
 export const fromWorking = (...paths: FromWorkingParamsModel): FromWorkingModel =>
-  joinPaths({ paths: [process.cwd(), ...paths] });
+  joinPaths([process.cwd(), ...paths]);

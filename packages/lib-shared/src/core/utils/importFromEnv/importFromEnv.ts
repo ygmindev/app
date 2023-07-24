@@ -13,7 +13,7 @@ export const importFromEnv = async <TType>(
 ): Promise<ImportFromEnvModel<TType>> =>
   resolveFirst<TType>(
     extensions().map((extension) => async () => {
-      const name = extension ? joinPaths({ extension, paths: [params] }) : params;
+      const name = extension ? joinPaths([params], { extension }) : params;
       const result = requireInterop<TType>(name);
       result && debug('imported', name);
       return result;

@@ -1,9 +1,9 @@
 export type ParserConfigModel = {
+  distDir: string;
+
   languages: Array<string>;
 
   missingValue: string;
-
-  outputDir: string;
 };
 
 export type _ParserConfigModel = object;

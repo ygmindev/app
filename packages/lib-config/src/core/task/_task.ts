@@ -19,7 +19,7 @@ export const _task = ({ packageFilename, taskExtension }: TaskConfigModel): _Tas
 
   const tasks = filterNil([
     // Task files
-    ...fromGlobs([joinPaths({ extension: taskExtension, paths: ['*/src/**/*'] })], {
+    ...fromGlobs([joinPaths(['*/src/**/*'], { extension: taskExtension })], {
       isAbsolute: true,
       root: fromPackages(),
     }).map((path) => requireInterop<TaskParamsModel<unknown>>(path)),

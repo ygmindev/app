@@ -44,10 +44,9 @@ function vitePluginIsomorphicImport(serverExtension: string): Plugin {
           const i = resolved?.id.lastIndexOf('.');
           const idF =
             i === -1
-              ? joinPaths({ extension: serverExtension, paths: [resolved.id] })
-              : `${joinPaths({
+              ? joinPaths([resolved.id], { extension: serverExtension })
+              : `${joinPaths([resolved.id.substring(0, i)], {
                   extension: serverExtension,
-                  paths: [resolved.id.substring(0, i)],
                 })}${resolved.id.substring(i)}`;
           const resolvedServer = await this.resolve(idF, importer, { ...options, skipSelf: true });
           if (resolvedServer && existsSync(resolvedServer.id)) {
@@ -99,7 +98,7 @@ export const _bundle = ({
   );
   const config: _BundleConfigModel = {
     build: {
-      assetsDir: joinPaths({ paths: [fromWorking(), publicPath] }),
+      assetsDir: joinPaths([fromWorking(), publicPath]),
 
       commonjsOptions: {
         defaultIsModuleExports: true,
@@ -110,7 +109,7 @@ export const _bundle = ({
 
       minify: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION,
 
-      outDir: joinPaths({ paths: [fromWorking(), distPath] }),
+      outDir: joinPaths([fromWorking(), distPath]),
 
       rollupOptions: {
         external: externals,
@@ -123,7 +122,7 @@ export const _bundle = ({
         process.env.NODE_ENV === ENVIRONMENT.DEVELOPMENT && watch ? { include: watch } : undefined,
     },
 
-    cacheDir: joinPaths({ paths: [fromWorking(), cachePath] }),
+    cacheDir: joinPaths([fromWorking(), cachePath]),
 
     customLogger,
 

@@ -1,14 +1,13 @@
-import { join } from 'path';
-
+import { joinPaths } from '#lib-backend/file/utils/joinPaths/joinPaths';
 import {
   type _ParserConfigModel,
   type ParserConfigModel,
 } from '#lib-config/locale/parser/parser.models';
 
 export const _parser = ({
+  distDir,
   languages,
   missingValue,
-  outputDir,
 }: ParserConfigModel): _ParserConfigModel => ({
   createOldCatalogs: false,
 
@@ -16,7 +15,7 @@ export const _parser = ({
 
   locales: languages,
 
-  output: join(outputDir, '$LOCALE/$NAMESPACE.json'),
+  output: joinPaths([distDir, '$LOCALE/$NAMESPACE.json']),
 
   sort: true,
 

@@ -46,7 +46,7 @@ export const nodeTasks = <TType extends Array<TaskParamsModel<unknown>>>({
       onFinish: [
         async ({ root }) =>
           copy({
-            from: joinPaths({ paths: [root, outputPath] }),
+            from: joinPaths([root, outputPath]),
             isOverwrite: true,
             to: fromStatic(publicPath, config.distPath, 'test'),
           }),

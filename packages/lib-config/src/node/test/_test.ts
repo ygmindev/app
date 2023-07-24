@@ -86,8 +86,8 @@ export const _test = ({
         const extF = trim(ext, '.');
         return [
           ...result,
-          joinPaths({ extension: extF, paths: [`<rootDir>/src/**/${match || '*'}`] }),
-          joinPaths({ extension: extF, paths: [`<rootDir>/src/**/_${match || '*'}`] }),
+          joinPaths([`<rootDir>/src/**/${match || '*'}`], { extension: extF }),
+          joinPaths([`<rootDir>/src/**/_${match || '*'}`], { extension: extF }),
         ];
       },
       [] as Array<string>,
