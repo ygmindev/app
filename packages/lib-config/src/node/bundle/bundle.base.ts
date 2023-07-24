@@ -31,8 +31,6 @@ const { _config, config } = defineConfig({
 
       modulePaths: [fromModules()],
 
-      outDir: fileConfig.distPath,
-
       publicPath: 'assets',
 
       tsconfigPath: fromWorking('tsconfig.json'),
