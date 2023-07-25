@@ -14,7 +14,7 @@ import { type ResourceServiceDecoratorModel } from '#lib-shared/resource/service
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 
-export const createEntityResourceService = <TType, TForm>({
+export const createEntityResourceService = <TType, TForm = undefined>({
   afterCreate,
   afterGet,
   afterGetConnection,

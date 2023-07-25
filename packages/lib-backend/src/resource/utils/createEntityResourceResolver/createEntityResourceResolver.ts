@@ -5,7 +5,7 @@ import {
 } from '#lib-backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver.models';
 import { createResourceResolver } from '#lib-backend/resource/utils/createResourceResolver/createResourceResolver';
 
-export const createEntityResourceResolver = <TType, TForm>(
+export const createEntityResourceResolver = <TType, TForm = undefined>(
   params: CreateEntityResourceResolverParamsModel<TType, TForm>,
 ): CreateEntityResourceResolverModel<TType, TForm> => {
   const ResourceResolver = createResourceResolver<TType, TForm>(params);

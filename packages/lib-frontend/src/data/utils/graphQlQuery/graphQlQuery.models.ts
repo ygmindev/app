@@ -32,22 +32,21 @@ export type GraphQlFieldModel<
   TType,
   TStrict extends boolean = true,
   TInfer = RequiredModel<InferModel<TType>>,
-> =
-  | {
-      [TKey in keyof TInfer]?: TInfer[TKey] extends PrimitiveModel
-        ? TKey
-        : TStrict extends true
-        ? Record<TKey, Array<GraphQlFieldModel<TInfer[TKey], TStrict>>>
-        : TInfer[TKey] extends ConnectionModel<infer TResource>
-        ? Record<
-            TKey,
-            Array<GraphQlFieldModel<TResource, TStrict>> | GraphQlFragmentFieldModel<TResource>
-          >
-        : Record<
-            TKey,
-            Array<GraphQlFieldModel<TInfer[TKey]>> | GraphQlFragmentFieldModel<TInfer[TKey]>
-          >;
-    }[keyof TInfer];
+> = {
+  [TKey in keyof TInfer]?: TInfer[TKey] extends PrimitiveModel
+    ? TKey
+    : TStrict extends true
+    ? Record<TKey, Array<GraphQlFieldModel<TInfer[TKey], TStrict>>>
+    : TInfer[TKey] extends ConnectionModel<infer TResource>
+    ? Record<
+        TKey,
+        Array<GraphQlFieldModel<TResource, TStrict>> | GraphQlFragmentFieldModel<TResource>
+      >
+    : Record<
+        TKey,
+        Array<GraphQlFieldModel<TInfer[TKey]>> | GraphQlFragmentFieldModel<TInfer[TKey]>
+      >;
+}[keyof TInfer];
 
 export type GraphQlQueryParamsFieldsModel<TType, TStrict extends boolean = true> = Array<
   GraphQlFieldModel<TType, TStrict>

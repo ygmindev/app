@@ -33,7 +33,7 @@ export class SignInResolver
   })
   implements SignInServiceModel
 {
-  @withInject(SignInService) protected _signInService!: SignInService;
+  @withInject(SignInService) protected signInService!: SignInService;
 
   @withOutput({
     Resource: SignIn,
@@ -47,6 +47,6 @@ export class SignInResolver
     @withContext()
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
-    return this._signInService.usernameUpdate(input, context);
+    return this.signInService.usernameUpdate(input, context);
   }
 }

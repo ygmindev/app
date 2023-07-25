@@ -3,10 +3,12 @@ import {
   type CreateResourceResolverParamsModel,
 } from '#lib-backend/resource/utils/createResourceResolver/createResourceResolver.models';
 
-export type CreateEntityResourceResolverParamsModel<TType, TForm> =
-  CreateResourceResolverParamsModel<TType, TForm>;
-
-export type CreateEntityResourceResolverModel<TType, TForm> = CreateResourceResolverModel<
+export type CreateEntityResourceResolverParamsModel<
   TType,
-  TForm
->;
+  TForm = undefined,
+> = CreateResourceResolverParamsModel<TType, TForm>;
+
+export type CreateEntityResourceResolverModel<
+  TType,
+  TForm = undefined,
+> = CreateResourceResolverModel<TType, TForm>;

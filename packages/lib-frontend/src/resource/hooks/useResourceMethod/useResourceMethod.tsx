@@ -35,7 +35,7 @@ const getConnectionFields = <TType, TRoot = undefined>(
 export const useResourceMethod = <
   TMethod extends ResourceMethodTypeModel,
   TType,
-  TForm,
+  TForm = undefined,
   TRoot = undefined,
 >({
   after,

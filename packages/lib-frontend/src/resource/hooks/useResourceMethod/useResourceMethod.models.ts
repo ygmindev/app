@@ -20,7 +20,7 @@ export type UseResourceMethodParamsFieldsModel<
 export type UseResourceMethodParamsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
-  TForm,
+  TForm = undefined,
   TRoot = undefined,
 > = ResourceNameParamsModel &
   RootModel<TRoot> & {
@@ -33,7 +33,7 @@ export type UseResourceMethodParamsModel<
 export type UseResourceMethodModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
-  TForm,
+  TForm = undefined,
   TRoot = undefined,
 > = {
   query(

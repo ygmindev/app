@@ -7,6 +7,7 @@ import { CardResolver } from '#lib-backend/billing/resources/Card/CardResolver/C
 import { PaymentMethodResolver } from '#lib-backend/billing/resources/PaymentMethod/PaymentMethodResolver/PaymentMethodResolver';
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
+import { SnapshotResolver } from '#lib-backend/test/resources/Snapshot/SnapshotResolver/SnapshotResolver';
 import { LinkedUserResolver } from '#lib-backend/user/resources/LinkedUser/LinkedUserResolver/LinkedUserResolver';
 import { UserResolver } from '#lib-backend/user/resources/User/UserResolver/UserResolver';
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
@@ -31,10 +32,11 @@ const { _config, config } = defineConfig({
         PaymentMethodResolver,
         SignInResolver,
         UserResolver,
+        SnapshotResolver,
       ],
 
       schemaPath: fromStatic('graphql/schema.gql'),
-    } satisfies GraphqlConfigModel),
+    }) satisfies GraphqlConfigModel,
 });
 
 export { _config, config };
