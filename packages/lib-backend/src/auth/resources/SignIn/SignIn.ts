@@ -10,6 +10,18 @@ import {
 import { FIELD_TYPE } from '#lib-shared/form/form.constants';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
+@withEntity({ isRepository: true, name: SIGN_IN_RESOURCE_NAME })
+export class SignIn extends EntityResource implements SignInModel {
+  @withField({ Resource: User })
+  user!: UserModel;
+
+  @withField()
+  token!: string;
+
+  @withField({ isOptional: true, type: FIELD_TYPE.BOOLEAN })
+  isNew?: boolean;
+}
+
 @withEntity({ name: `${SIGN_IN_RESOURCE_NAME}Form` })
 export class SignInForm implements SignInFormModel {
   @withField({ isOptional: true })
@@ -23,16 +35,4 @@ export class SignInForm implements SignInFormModel {
 
   @withField({ isOptional: true })
   phone?: string;
-}
-
-@withEntity({ isRepository: true, name: SIGN_IN_RESOURCE_NAME })
-export class SignIn extends EntityResource implements SignInModel {
-  @withField({ Resource: User })
-  user!: UserModel;
-
-  @withField()
-  token!: string;
-
-  @withField({ isOptional: true, type: FIELD_TYPE.BOOLEAN })
-  isNew?: boolean;
 }

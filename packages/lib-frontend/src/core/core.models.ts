@@ -53,7 +53,9 @@ export type ProviderPropsModel<TType = undefined, TChildren = ReactNode | Array<
   value?: TType;
 } & ChildrenPropsModel<TChildren>;
 
-export type PagePropsModel = ChildrenPropsModel;
+export type PagePropsModel<TType = undefined> = ChildrenPropsModel & {
+  pageProps?: TType;
+};
 
 export type LayoutPropsModel = {
   isHorizontalCenter?: boolean;

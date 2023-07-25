@@ -17,15 +17,16 @@ import { type AccessServiceModel } from '#lib-shared/auth/resources/Access/Acces
 import { NotFoundError } from '#lib-shared/core/errors/NotFoundError/NotFoundError';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
-const EntityResourceResolverF = createEntityResourceResolver<AccessModel, AccessFormModel>({
-  Resource: Access,
-  ResourceService: AccessService,
-  name: ACCESS_RESOURCE_NAME,
-});
-
 @withContainer()
 @withResolver({ Resource: Access })
-export class AccessResolver extends EntityResourceResolverF implements AccessServiceModel {
+export class AccessResolver
+  extends createEntityResourceResolver<AccessModel, AccessFormModel>({
+    Resource: Access,
+    ResourceService: AccessService,
+    name: ACCESS_RESOURCE_NAME,
+  })
+  implements AccessServiceModel
+{
   @withFieldResolver({ Resource: User })
   async user(@withSelf() access: Access): Promise<UserModel> {
     const { result } = await Container.get(UserService).get({ filter: { _id: access._uid } });

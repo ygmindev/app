@@ -13,7 +13,7 @@ import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 export const RouteGroup: SFCModel<RouteGroupPropsModel> = ({ groups, root, testID, ...props }) => {
   const { t } = useTranslation();
   const { styles } = useStyles({ props });
-  const { push } = useRouter();
+  const { location, push } = useRouter();
   return (
     <Wrapper
       s
@@ -28,7 +28,11 @@ export const RouteGroup: SFCModel<RouteGroupPropsModel> = ({ groups, root, testI
               icon={icon}
               key={id}
               label={label}
-              onPress={() => push({ pathname: `${root ? `${root}/` : ''}${id}` })}
+              onPress={() =>
+                push({
+                  pathname: `${root === true ? location.pathname : root ? `${root}/` : ''}${id}`,
+                })
+              }
               rightElement={(isActive) => (
                 <Button
                   elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}

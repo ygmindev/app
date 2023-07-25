@@ -4,7 +4,7 @@ import { type RequiredModel } from '#lib-shared/core/core.models';
 
 export type RouteGroupPropsModel = {
   groups?: Array<RouteGroupModel>;
-  root?: string;
+  root?: string | true;
 };
 
 export type RouteGroupModel = {
