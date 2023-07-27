@@ -1,4 +1,4 @@
-import { BANK_OUTPUT_FIELDS } from '#lib-frontend/billing/hooks/useBankResource/useBankResource.constants';
+import { BANK_FIELDS } from '#lib-frontend/billing/hooks/useBankResource/useBankResource.constants';
 import {
   type UseBankResourceModel,
   type UseBankResourceParamsModel,
@@ -18,7 +18,7 @@ export const useBankResource = ({
     BankFormModel,
     UserModel
   >({
-    fields: BANK_OUTPUT_FIELDS,
+    fields: [{ result: BANK_FIELDS }],
     method: RESOURCE_METHOD_TYPE.GET,
     name: BANK_RESOURCE_NAME,
     root,
@@ -30,7 +30,7 @@ export const useBankResource = ({
     BankFormModel,
     UserModel
   >({
-    fields: BANK_OUTPUT_FIELDS,
+    fields: [{ result: BANK_FIELDS }],
     method: RESOURCE_METHOD_TYPE.CREATE,
     name: BANK_RESOURCE_NAME,
     root,
@@ -42,7 +42,7 @@ export const useBankResource = ({
     BankFormModel,
     UserModel
   >({
-    fields: BANK_OUTPUT_FIELDS,
+    fields: [{ result: BANK_FIELDS }],
     method: RESOURCE_METHOD_TYPE.UPDATE,
     name: BANK_RESOURCE_NAME,
     root,
@@ -54,7 +54,7 @@ export const useBankResource = ({
     BankFormModel,
     UserModel
   >({
-    fields: BANK_OUTPUT_FIELDS,
+    fields: [{ result: BANK_FIELDS }],
     method: RESOURCE_METHOD_TYPE.REMOVE,
     name: BANK_RESOURCE_NAME,
     root,

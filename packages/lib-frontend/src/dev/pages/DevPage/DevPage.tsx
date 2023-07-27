@@ -4,13 +4,13 @@ import { type FCModel } from '#lib-frontend/core/core.models';
 import { useQuery } from '#lib-frontend/data/hooks/useQuery/useQuery';
 import { type DevPagePropsModel } from '#lib-frontend/dev/pages/DevPage/DevPage.models';
 import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
-import { USER_OUTPUT_FIELDS } from '#lib-frontend/user/hooks/useUserResource/useUserResource.constants';
+import { USER_FIELDS } from '#lib-frontend/user/hooks/useUserResource/useUserResource.constants';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
 
 export const DevPage: FCModel<DevPagePropsModel> = () => {
   const { query: get } = useResourceMethod({
-    fields: USER_OUTPUT_FIELDS,
+    fields: [{ result: USER_FIELDS }],
     method: RESOURCE_METHOD_TYPE.GET,
     name: USER_RESOURCE_NAME,
   });
@@ -147,33 +147,3 @@ export const DevPage: FCModel<DevPagePropsModel> = () => {
     </Wrapper>
   );
 };
-
-// import { Text } from '#lib-frontend/core/components/Text/Text';
-// import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-// import { type FCModel } from '#lib-frontend/core/core.models';
-// import { useQuery } from '#lib-frontend/data/hooks/useQuery/useQuery';
-// import { type DevPagePropsModel } from '#lib-frontend/dev/pages/DevPage/DevPage.models';
-// import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
-// import { USER_OUTPUT_FIELDS } from '#lib-frontend/user/hooks/useUserResource/useUserResource.constants';
-// import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-// import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
-
-// export const DevPage: FCModel<DevPagePropsModel> = () => {
-//   const { query: get } = useResourceMethod({
-//     fields: USER_OUTPUT_FIELDS,
-//     method: RESOURCE_METHOD_TYPE.GET,
-//     name: USER_RESOURCE_NAME,
-//   });
-
-//   const { data, error, isError, isLoading } = useQuery('a2', async () => {
-//     return get({ filter: { _id: '6448881dd34cb0fcb6734acf' } });
-//   });
-
-//   return (
-//     <Wrapper
-//       p
-//       s>
-//       <Text>{JSON.stringify(data)}</Text>
-//     </Wrapper>
-//   );
-// };

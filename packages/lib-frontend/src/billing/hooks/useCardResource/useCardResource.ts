@@ -1,4 +1,4 @@
-import { CARD_OUTPUT_FIELDS } from '#lib-frontend/billing/hooks/useCardResource/useCardResource.constants';
+import { CARD_FIELDS } from '#lib-frontend/billing/hooks/useCardResource/useCardResource.constants';
 import {
   type UseCardResourceModel,
   type UseCardResourceParamsModel,
@@ -18,7 +18,7 @@ export const useCardResource = ({
     CardFormModel,
     UserModel
   >({
-    fields: CARD_OUTPUT_FIELDS,
+    fields: [{ result: CARD_FIELDS }],
     method: RESOURCE_METHOD_TYPE.GET,
     name: CARD_RESOURCE_NAME,
     root,
@@ -30,7 +30,7 @@ export const useCardResource = ({
     CardFormModel,
     UserModel
   >({
-    fields: CARD_OUTPUT_FIELDS,
+    fields: [{ result: CARD_FIELDS }],
     method: RESOURCE_METHOD_TYPE.CREATE,
     name: CARD_RESOURCE_NAME,
     root,
@@ -42,7 +42,7 @@ export const useCardResource = ({
     CardFormModel,
     UserModel
   >({
-    fields: CARD_OUTPUT_FIELDS,
+    fields: [{ result: CARD_FIELDS }],
     method: RESOURCE_METHOD_TYPE.UPDATE,
     name: CARD_RESOURCE_NAME,
     root,
@@ -54,7 +54,7 @@ export const useCardResource = ({
     CardFormModel,
     UserModel
   >({
-    fields: CARD_OUTPUT_FIELDS,
+    fields: [{ result: CARD_FIELDS }],
     method: RESOURCE_METHOD_TYPE.REMOVE,
     name: CARD_RESOURCE_NAME,
     root,

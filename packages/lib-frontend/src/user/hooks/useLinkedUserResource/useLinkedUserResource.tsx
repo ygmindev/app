@@ -1,5 +1,5 @@
 import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
-import { LINKED_USER_OUTPUT_FIELDS } from '#lib-frontend/user/hooks/useLinkedUserResource/useLinkedUserResource.constants';
+import { LINKED_USER_FIELDS } from '#lib-frontend/user/hooks/useLinkedUserResource/useLinkedUserResource.constants';
 import {
   type UseLinkedUserResourceModel,
   type UseLinkedUserResourceParamsModel,
@@ -21,7 +21,7 @@ export const useLinkedUserResource = ({
     LinkedUserFormModel,
     UserModel
   >({
-    fields: LINKED_USER_OUTPUT_FIELDS,
+    fields: [{ result: LINKED_USER_FIELDS }],
     method: RESOURCE_METHOD_TYPE.GET,
     name: LINKED_USER_RESOURCE_NAME,
     root,

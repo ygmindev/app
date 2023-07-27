@@ -33,7 +33,7 @@ export type GraphQlFieldModel<
   TStrict extends boolean = true,
   TInfer = RequiredModel<InferModel<TType>>,
 > = {
-  [TKey in keyof TInfer]?: TInfer[TKey] extends PrimitiveModel
+  [TKey in keyof TInfer]?: TInfer[TKey] extends PrimitiveModel | Array<PrimitiveModel>
     ? TKey
     : TStrict extends true
     ? Record<TKey, Array<GraphQlFieldModel<TInfer[TKey], TStrict>>>

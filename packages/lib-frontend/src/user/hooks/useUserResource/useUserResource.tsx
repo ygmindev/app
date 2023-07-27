@@ -2,7 +2,7 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
 import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
-import { USER_OUTPUT_FIELDS } from '#lib-frontend/user/hooks/useUserResource/useUserResource.constants';
+import { USER_FIELDS } from '#lib-frontend/user/hooks/useUserResource/useUserResource.constants';
 import { type UseUserResourceModel } from '#lib-frontend/user/hooks/useUserResource/useUserResource.models';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
@@ -14,7 +14,7 @@ export const useUserResource = (): UseUserResourceModel => {
   const { success } = useNotification();
 
   const { query: get } = useResourceMethod<RESOURCE_METHOD_TYPE.GET, UserModel, UserFormModel>({
-    fields: USER_OUTPUT_FIELDS,
+    fields: [{ result: USER_FIELDS }],
     method: RESOURCE_METHOD_TYPE.GET,
     name: USER_RESOURCE_NAME,
   });
@@ -31,7 +31,7 @@ export const useUserResource = (): UseUserResourceModel => {
       }
       return output;
     },
-    fields: USER_OUTPUT_FIELDS,
+    fields: [{ result: USER_FIELDS }],
     method: RESOURCE_METHOD_TYPE.UPDATE,
     name: USER_RESOURCE_NAME,
   });
