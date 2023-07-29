@@ -70,7 +70,7 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
         {
           fields: [
             {
-              Component: ({ elementState, error, onChange, onSubmit, testID, value, ...x }) => (
+              Component: ({ elementState, error, onChange, onSubmit, testID, value }) => (
                 <OtpField
                   elementState={elementState}
                   error={error}

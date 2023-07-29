@@ -33,6 +33,7 @@ import { useNotification } from '#lib-frontend/notification/hooks/useNotificatio
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { BORDER_RADIUS_DIRECTION } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
+import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 import { uid } from '#lib-shared/core/utils/uid/uid';
 import { FIELD_TYPE } from '#lib-shared/form/form.constants';
 
@@ -195,7 +196,9 @@ const FormContainerF = forwardRef(
           return createElement(Component as SFCModel<TextFieldPropsModel>, {
             ...fieldPropsF,
             key: id,
-            onSubmit: handleSubmit,
+            onSubmit: () => {
+              void sleep().then(handleSubmit);
+            },
             testID: id,
           });
         }

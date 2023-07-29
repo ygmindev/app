@@ -25,7 +25,7 @@ export const _useForm = <TType = void, TResult = void>({
     setFieldValue,
     values,
   } = useFormik<TType & FormikValues>({
-    initialValues: initialValues || ({} as TType & FormikValues),
+    initialValues: initialValues ?? ({} as TType & FormikValues),
     onSubmit: async (data) => {
       dataSet((onSubmit && (await onSubmit(data))) ?? null);
     },
