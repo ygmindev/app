@@ -30,7 +30,7 @@ export const _Icon: SFCModel<_IconPropsModel, TextStyleModel> = forwardRef(
         Component && (
           <Component
             {...props}
-            name={(ICONS as Record<string, string>)[icon] || ''}
+            name={(ICONS as Record<string, string>)[icon] ?? ''}
             ref={ref as null}
             style={styles as IconProps['style']}
           />

@@ -1,6 +1,6 @@
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { children } from '#lib-backend/file/utils/children/children';
-import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
+import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { config as testConfig } from '#lib-config/node/test/test.base';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
@@ -18,7 +18,7 @@ export class SnapshotService implements SnapshotServiceModel {
   > {
     const { outputPath, snapshotPath } = testConfig();
     const nameF = filter.name as string;
-    const path = fromWorking(outputPath, snapshotPath, nameF);
+    const path = fromPackages('app-web', outputPath, snapshotPath, nameF);
     const snapshots = {
       images: children(path).map((child) => child.name),
       name: nameF,
@@ -30,9 +30,8 @@ export class SnapshotService implements SnapshotServiceModel {
     _input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, SnapshotModel>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, SnapshotModel>> {
     const { outputPath, snapshotPath } = testConfig();
-    const path = fromWorking(outputPath, snapshotPath);
+    const path = fromPackages('app-web', outputPath, snapshotPath);
     const snapshots = children(path).map(({ name }) => ({ name }));
-    console.warn(snapshots);
     return { result: snapshots };
   }
 }

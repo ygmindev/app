@@ -15,6 +15,7 @@ const PUBLIC_PATH = 'assets';
 const CLEAN_PATTERNS = [
   BUILD_PATH,
   CACHE_PATH,
+  '.vite',
   '.esbuild',
   '.eslintcache',
   '.swc',

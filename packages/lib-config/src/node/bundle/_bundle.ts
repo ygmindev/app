@@ -124,7 +124,7 @@ export const _bundle = ({
         process.env.NODE_ENV === ENVIRONMENT.DEVELOPMENT && watch ? { include: watch } : undefined,
     },
 
-    cacheDir: joinPaths([fromWorking(), cachePath]),
+    // cacheDir: joinPaths([fromWorking(), cachePath]),
 
     customLogger,
 
@@ -156,8 +156,6 @@ export const _bundle = ({
 
         tsconfig: tsconfigPath,
       },
-
-      force: true,
 
       include: transpiles,
     },

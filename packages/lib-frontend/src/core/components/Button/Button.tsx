@@ -129,7 +129,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
       justify={FLEX_JUSTIFY.CENTER}
       onElementStateChange={valueControlledSet}
       position={SHAPE_POSITION.RELATIVE}
-      round={isIcon ? heightF / 2 : undefined}
+      round={isIcon ? heightF / 2 : true}
       width={children ? undefined : height}>
       <>
         <Appearable

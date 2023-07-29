@@ -1,7 +1,9 @@
+import toNumber from 'lodash/toNumber';
 import { useRef } from 'react';
 
+import { OtpField } from '#lib-frontend/auth/components/OtpField/OtpField';
 import {
-  OTP_FORM_FIELDS,
+  OTP_FORM_TEST_ID,
   OTP_FORM_VALIDATORS,
 } from '#lib-frontend/auth/containers/OtpForm/OtpForm.constants';
 import { type OtpFormPropsModel } from '#lib-frontend/auth/containers/OtpForm/OtpForm.models';
@@ -24,7 +26,6 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
   onError,
   onSubmit,
   onSuccess,
-  testID,
   ...props
 }) => {
   const { styles } = useStyles({ props });
@@ -65,9 +66,33 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
       onSubmit={onSubmit}
       onSuccess={onSuccess}
       ref={ref}
-      rows={OTP_FORM_FIELDS}
+      rows={[
+        {
+          fields: [
+            {
+              Component: ({ elementState, error, onChange, onSubmit, testID, value, ...x }) => (
+                <OtpField
+                  elementState={elementState}
+                  error={error}
+                  isAutoFocus
+                  onChange={(value) => {
+                    onChange && onChange(value);
+                    if (value.length === toNumber(process.env.SERVER_OTP_LENGTH)) {
+                      onSubmit && onSubmit();
+                    }
+                  }}
+                  testID={testID}
+                  value={value}
+                />
+              ),
+              id: 'otp',
+            },
+          ],
+          id: 'otp',
+        },
+      ]}
       style={styles}
-      testID={testID}
+      testID={OTP_FORM_TEST_ID}
       topElement={() =>
         // TODO: handle phone
         data &&

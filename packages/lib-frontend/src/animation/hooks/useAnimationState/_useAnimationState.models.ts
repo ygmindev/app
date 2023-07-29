@@ -14,5 +14,4 @@ export type _UseAnimationStateParamsModel<TStyle extends StyleModel = ViewStyleM
 export type _UseAnimationStateModel<TStyle extends StyleModel = ViewStyleModel> = {
   animationProps: MotiProps<TStyle>;
   animationState: UseDynamicAnimationState;
-  current?: TStyle;
 } & AnimatableRefModel<TStyle>;

@@ -1,5 +1,6 @@
 import { sleepForTransition } from '#lib-frontend/animation/utils/sleepForTransition/sleepForTransition';
 import { SIGN_IN } from '#lib-frontend/auth/auth.constants';
+import { OTP_FORM_TEST_ID } from '#lib-frontend/auth/containers/OtpForm/OtpForm.constants';
 import { USERNAME_FORM_TEST_ID } from '#lib-frontend/auth/containers/UsernameForm/UsernameForm.constants';
 import { APP_URI } from '#lib-frontend/http/http.constants';
 import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
@@ -22,6 +23,11 @@ describe('sign in', () => {
     await sleepForTransition();
 
     await screenF.type('otp', process.env.SERVER_OTP_STATIC ?? '123456');
+    await screenF.snapshot();
+
+    await screenF.press(`${OTP_FORM_TEST_ID}-submit`);
+    await screenF.press('otp-submit');
+    await sleepForTransition();
     await screenF.snapshot();
 
     expect(1).toStrictEqual(1);
