@@ -1,5 +1,5 @@
 export type SnapshotModel = {
-  images: Array<string>;
+  images?: Array<string>;
 
   name: string;
 };

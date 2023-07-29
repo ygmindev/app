@@ -38,6 +38,8 @@ export type TestConfigModel = {
 
   root?: string;
 
+  snapshotPath: string;
+
   snapshotPrefix: string;
 
   specExtensions: Array<string>;

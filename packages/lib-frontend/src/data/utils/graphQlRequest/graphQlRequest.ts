@@ -29,7 +29,7 @@ export const graphQlRequest = async <TParams, TResult, TName extends string = st
 
   const graphQlError = (
     result as HttpReponseModel<GraphQlHttpResponseModel<unknown>>
-  ).data?.errors?.at(0);
+  )?.data?.errors?.at(0);
   if (graphQlError) {
     error(graphQlError);
     // TODO: fix statuscode

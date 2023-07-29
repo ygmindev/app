@@ -1,7 +1,6 @@
-import { join } from 'path';
-
 import { fromConfig } from '#lib-backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
+import { joinPaths } from '#lib-backend/file/utils/joinPaths/joinPaths';
 import { config as fileConfig } from '#lib-config/core/file/file';
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { config as bundleConfig } from '#lib-config/node/bundle/bundle.base';
@@ -29,7 +28,9 @@ const { _config, config } = defineConfig({
 
       mockDir: fromConfig('node/test/__mocks__'),
 
-      outputPath: join(fileConfig.buildPath, 'test'),
+      outputPath: joinPaths([fileConfig.buildPath, 'test']),
+
+      snapshotPath: 'snapshots',
 
       snapshotPrefix: 'snapshot',
 

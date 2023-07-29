@@ -15,13 +15,13 @@ const getField = <TType extends unknown>({
   }
   switch (type) {
     case FIELD_TYPE.STRING:
-      return Field(() => String);
+      return Field(() => (isArray ? [String] : String));
     case FIELD_TYPE.BOOLEAN:
-      return Field(() => Boolean);
+      return Field(() => (isArray ? [Boolean] : Boolean));
     case FIELD_TYPE.DATE:
-      return Field(() => Date);
+      return Field(() => (isArray ? [Date] : Date));
     default:
-      return Field(() => String);
+      return Field(() => (isArray ? [String] : String));
   }
 };
 

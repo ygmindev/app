@@ -19,6 +19,7 @@ export const _screen = async ({
   dimension,
   isBrowser,
   outputPath,
+  snapshotPath,
   snapshotPrefix,
   timeout,
 }: _ScreenParamsModel): Promise<_ScreenModel> => {
@@ -54,7 +55,7 @@ export const _screen = async ({
           customReceivedDir: fromWorking(outputPath, 'received'),
           customSnapshotIdentifier: ({ counter, currentTestName }) =>
             joinPaths([slug(currentTestName), `${snapshotPrefix}-${counter.toString()}`]),
-          customSnapshotsDir: fromWorking(outputPath, 'snapshots'),
+          customSnapshotsDir: fromWorking(outputPath, snapshotPath),
         });
     },
 

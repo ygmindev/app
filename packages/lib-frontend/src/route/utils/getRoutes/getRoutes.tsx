@@ -23,6 +23,7 @@ import { SettingsPage } from '#lib-frontend/settings/pages/SettingsPage/Settings
 import { SETTINGS } from '#lib-frontend/settings/settings.constants';
 import { BrightnessFormPage } from '#lib-frontend/style/pages/BrightnessFormPage/BrightnessFormPage';
 import { ReportPage } from '#lib-frontend/test/pages/ReportPage/ReportPage';
+import { SnapshotPage } from '#lib-frontend/test/pages/SnapshotPage/SnapshotPage';
 import { REPORT } from '#lib-frontend/test/test.constants';
 import { AccountPage } from '#lib-frontend/user/pages/AccountPage/AccountPage';
 import { NameFormPage } from '#lib-frontend/user/pages/NameFormPage/NameFormPage';
@@ -42,16 +43,6 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
     {
       element: <Text>ping</Text>,
       pathname: PING,
-    },
-
-    {
-      pathname: TEST,
-      routes: [
-        {
-          element: <ReportPage />,
-          pathname: REPORT,
-        },
-      ],
     },
 
     {
@@ -177,15 +168,36 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
         },
 
         {
-          element: <NotFoundPage />,
-          ns: [ROUTE],
-          pathname: '*',
-        },
-
-        {
           element: <DevPage />,
           pathname: DEV,
           prerender: [''],
+        },
+
+        {
+          pathname: TEST,
+          routes: [
+            {
+              pathname: REPORT,
+              routes: [
+                {
+                  element: <ReportPage />,
+                  pathname: '/',
+                },
+                {
+                  element: <SnapshotPage />,
+                  header: { previous: `${TEST}/${REPORT}` },
+                  pathname: ':id',
+                },
+              ],
+              transition: ROUTE_TRANSITION.SLIDE,
+            },
+          ],
+        },
+
+        {
+          element: <NotFoundPage />,
+          ns: [ROUTE],
+          pathname: '*',
         },
       ],
     },

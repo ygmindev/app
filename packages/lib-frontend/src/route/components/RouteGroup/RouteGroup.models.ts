@@ -8,5 +8,5 @@ export type RouteGroupPropsModel = {
 };
 
 export type RouteGroupModel = {
-  options: Array<TranslatableOptionModel & Pick<LineItemPropsModel, 'value'>>;
+  options?: Array<TranslatableOptionModel & Pick<LineItemPropsModel, 'value'>>;
 } & RequiredModel<Pick<TranslatableOptionModel, 'id' | 'label'>>;

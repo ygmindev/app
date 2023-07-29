@@ -7,7 +7,7 @@ import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.mode
 export const withInput = <
   TMethod extends ResourceMethodTypeModel,
   TType,
-  TForm,
+  TForm = undefined,
   TRoot = undefined,
 >({
   Resource,

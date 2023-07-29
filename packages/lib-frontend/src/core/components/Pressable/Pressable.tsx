@@ -27,6 +27,7 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
   onPress,
   onPressIn,
   onPressOut,
+  round,
   ...props
 }) => {
   const theme = useTheme();
@@ -90,7 +91,7 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
           onPressOut={onPressOut}
           pHorizontal
           pVertical={THEME_SIZE.SMALL}
-          round>
+          round={round}>
           {children}
         </Wrapper>
       </Activatable>

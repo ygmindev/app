@@ -6,8 +6,8 @@ import { type SnapshotModel } from '#lib-shared/test/resources/Snapshot/Snapshot
 
 @withEntity({ name: SNAPSHOT_RESOURCE_NAME })
 export class Snapshot implements SnapshotModel {
-  @withField({ isArray: true, type: FIELD_TYPE.STRING })
-  images!: Array<string>;
+  @withField({ isArray: true, isOptional: true, type: FIELD_TYPE.STRING })
+  images?: Array<string>;
 
   @withField({ type: FIELD_TYPE.STRING })
   name!: string;

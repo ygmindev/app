@@ -6,13 +6,13 @@ import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 export type CreateInputParamsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
-  TForm,
+  TForm = undefined,
   TRoot = undefined,
 > = CreateArgsParamsModel<TMethod, TType, TForm, TRoot>;
 
 export type CreateInputModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
-  TForm,
+  TForm = undefined,
   TRoot = undefined,
 > = ResourceClassModel<InputModel<TMethod, TType, TForm, TRoot>>;

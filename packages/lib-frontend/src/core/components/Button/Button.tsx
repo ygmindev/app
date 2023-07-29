@@ -26,13 +26,13 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   align = FLEX_ALIGN.CENTER,
   children,
   color = THEME_COLOR.PRIMARY,
-  leftElement,
-  icon,
-  type = !children && icon ? BUTTON_TYPE.INVISIBLE : BUTTON_TYPE.FILLED,
-  size = THEME_SIZE.MEDIUM,
   elementState,
   height,
+  icon,
+  leftElement,
   onElementStateChange,
+  size = THEME_SIZE.MEDIUM,
+  type,
   ...props
 }) => {
   const theme = useTheme();
@@ -43,13 +43,18 @@ export const Button: SFCModel<ButtonPropsModel> = ({
     value: elementState,
   });
 
+  const heightF = height ?? theme.shape.height[size];
+  const isLoading = valueControlled === ELEMENT_STATE.LOADING;
+  const isIcon = icon && !children;
+  const typeF = type ?? (isIcon ? BUTTON_TYPE.INVISIBLE : BUTTON_TYPE.FILLED);
+
   const { animation, childColorRole } = useMemo<{
     animation?: AnimationModel;
     childColorRole?: ThemeRoleModel;
   }>(() => {
     const colorF = theme.color.palette[color];
     const activeColor = colorF[THEME_ROLE.ACTIVE];
-    switch (type) {
+    switch (typeF) {
       case BUTTON_TYPE.FILLED: {
         return {
           animation: {
@@ -81,7 +86,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
       default:
         return {};
     }
-  }, [color, theme, type]);
+  }, [color, theme, typeF]);
 
   let childrenF = children && (
     <TranslatableText
@@ -111,21 +116,20 @@ export const Button: SFCModel<ButtonPropsModel> = ({
     iconF
   );
 
-  const heightF = height ?? theme.shape.height[size];
-  const isLoading = valueControlled === ELEMENT_STATE.LOADING;
   return (
     <Pressable
       {...props}
       align={align}
       animation={animation}
-      border={type === BUTTON_TYPE.TRANSPARENT}
-      borderColor={type === BUTTON_TYPE.TRANSPARENT ? color : undefined}
+      border={typeF === BUTTON_TYPE.TRANSPARENT}
+      borderColor={typeF === BUTTON_TYPE.TRANSPARENT ? color : undefined}
       borderRole={THEME_ROLE.MAIN}
       elementState={valueControlled}
       height={heightF}
       justify={FLEX_JUSTIFY.CENTER}
       onElementStateChange={valueControlledSet}
       position={SHAPE_POSITION.RELATIVE}
+      round={isIcon ? heightF / 2 : undefined}
       width={children ? undefined : height}>
       <>
         <Appearable

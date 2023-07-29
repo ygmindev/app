@@ -23,14 +23,14 @@ export const RouteGroup: SFCModel<RouteGroupPropsModel> = ({ groups, root, testI
         <LineGroup
           key={group.id}
           title={t(group.label)}>
-          {group.options.map(({ icon, id, label, value }) => (
+          {group.options?.map(({ icon, id, label, value }) => (
             <LineItem
               icon={icon}
               key={id}
               label={label}
               onPress={() =>
                 push({
-                  pathname: `${root === true ? location.pathname : root ? `${root}/` : ''}${id}`,
+                  pathname: `${root === true ? location.pathname : root ?? ''}/${id}`,
                 })
               }
               rightElement={(isActive) => (
