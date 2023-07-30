@@ -9,11 +9,7 @@ import { _Route, _Routes as _RoutesBase } from '#lib-frontend/route/containers/R
 export const _Routes: FCModel<_RoutesPropsModel> = ({ depth = 1, routes }) => {
   const location = useLocation();
   const key = useMemo(
-    () =>
-      location.pathname
-        .split('/')
-        .splice(1, depth + 1)
-        .join('/'),
+    () => location.pathname.split('/').splice(1, depth).join('/'),
     [location.pathname, depth],
   );
   return (

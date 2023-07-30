@@ -11,5 +11,5 @@ export const _Exitable = composeComponent<
 >({
   Component: AnimatePresence,
 
-  getProps: ({ children, isInitial = false }) => ({ children, initial: isInitial }),
+  getProps: ({ children, isInitial = true }) => ({ children, initial: isInitial }),
 });

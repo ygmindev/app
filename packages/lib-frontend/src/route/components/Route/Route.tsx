@@ -1,10 +1,10 @@
-import { cloneElement, Fragment, useMemo } from 'react';
+import { cloneElement, Fragment, useMemo, useState } from 'react';
 
 import { Slide } from '#lib-frontend/animation/components/Slide/Slide';
 import { Protectable } from '#lib-frontend/auth/components/Protectable/Protectable';
 import { Portal } from '#lib-frontend/core/components/Portal/Portal';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type MeasureModel, type SFCModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type RoutePropsModel } from '#lib-frontend/route/components/Route/Route.models';
@@ -26,27 +26,20 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
   const { styles } = useStyles({ props });
   const { isActive } = useRouter();
   const { track } = useTracking();
-  const dimension = useStore((state) => state.app.dimension);
+  const [measure, measureSet] = useState<MeasureModel>();
   const isBack = useStore((state) => state.route.isBack);
   const isLeaf = !route.routes;
-  const isLeafActive = useMemo(
-    () => isActive({ isExact: true, pathname: route.fullpath }),
-    [route.fullpath],
-  );
   const isActiveF = useMemo(() => isActive({ pathname: route.fullpath }), [route.fullpath]);
-  const isLeafActiveF = isLeaf && isLeafActive;
-  const transitionF =
-    route.transition ?? (route.header?.previous ? ROUTE_TRANSITION.SLIDE : undefined);
+  const isActiveLeaf = useMemo(
+    () => isLeaf && isActive({ isExact: true, pathname: route.fullpath }),
+    [isLeaf, route.fullpath],
+  );
 
   useAsync(async () => {
-    isLeafActive &&
+    isActiveLeaf &&
       (await track({ action: TRACKING_EVENT_ACTION.OPEN, object: TRACKING_EVENT_OBJECT.PAGE }));
-  }, [isLeafActive]);
+  }, [isActiveLeaf]);
 
-  console.warn(`@@@ ${route.fullpath} ${transitionF}`);
-  console.warn('\n\n');
-
-  const Container = route.isProtectable ? Protectable : Fragment;
   let element = cloneElement(
     route.element ?? (
       <Wrapper
@@ -59,63 +52,62 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
         <Wrapper
           grow
           isOverflowHidden
+          onMeasure={measureSet}
           position={SHAPE_POSITION.RELATIVE}>
           <Routes
             depth={depth}
-            routes={route.routes}
+            routes={route.routes.map(({ element, ...child }) => ({
+              ...child,
+              element: (() => {
+                switch (route.transition) {
+                  case ROUTE_TRANSITION.SLIDE:
+                    return (
+                      <Slide
+                        isBack={isBack}
+                        measure={measure}>
+                        {element}
+                      </Slide>
+                    );
+                  default:
+                    return element;
+                }
+              })(),
+            }))}
           />
         </Wrapper>
       ),
     },
   );
-  element = <Container>{element}</Container>;
 
-  element = useMemo(() => {
-    switch (transitionF) {
-      case ROUTE_TRANSITION.SLIDE:
-        return (
-          <Slide
-            isBack={isBack}
-            measure={dimension}
-            style={styles}
-            testID={testID}>
-            {element}
-          </Slide>
-        );
-      default:
-        return (
-          <Wrapper
-            isAbsoluteFill
-            isHidden={!isActiveF}
-            style={styles}
-            testID={testID}>
-            {element}
-          </Wrapper>
-        );
-    }
-  }, [element, isBack, isLeaf, isActiveF, dimension, transitionF]);
+  const Container = route.isProtectable ? Protectable : Fragment;
+  element = <Container>{element}</Container>;
 
   return (
     <>
-      {isLeafActiveF && route.header && (
+      {isActiveLeaf && route.header && (
         <Portal>
           <RouteHeader route={route} />
         </Portal>
       )}
 
-      {element}
+      <Wrapper
+        isAbsoluteFill
+        isHidden={!isActiveF}
+        style={styles}
+        testID={testID}>
+        {element}
+      </Wrapper>
     </>
   );
 };
 
-// import { cloneElement, Fragment, useMemo } from 'react';
+// import { cloneElement, Fragment, useMemo, useState } from 'react';
 
-// import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 // import { Slide } from '#lib-frontend/animation/components/Slide/Slide';
 // import { Protectable } from '#lib-frontend/auth/components/Protectable/Protectable';
 // import { Portal } from '#lib-frontend/core/components/Portal/Portal';
 // import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-// import { type SFCModel } from '#lib-frontend/core/core.models';
+// import { type MeasureModel, type SFCModel } from '#lib-frontend/core/core.models';
 // import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 // import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 // import { type RoutePropsModel } from '#lib-frontend/route/components/Route/Route.models';
@@ -137,24 +129,20 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
 //   const { styles } = useStyles({ props });
 //   const { isActive } = useRouter();
 //   const { track } = useTracking();
-//   const dimension = useStore((state) => state.app.dimension);
+//   const [measure, measureSet] = useState<MeasureModel>();
 //   const isBack = useStore((state) => state.route.isBack);
 //   const isLeaf = !route.routes;
-//   const isLeafActive = useMemo(
-//     () => isActive({ isExact: true, pathname: route.fullpath }),
-//     [route.fullpath],
-//   );
 //   const isActiveF = useMemo(() => isActive({ pathname: route.fullpath }), [route.fullpath]);
-//   const isLeafActiveF = isLeaf && isLeafActive;
-//   const transitionF =
-//     route.transition ?? (route.header?.previous ? ROUTE_TRANSITION.SLIDE : undefined);
+//   const isActiveLeaf = useMemo(
+//     () => isLeaf && isActive({ isExact: true, pathname: route.fullpath }),
+//     [isLeaf, route.fullpath],
+//   );
 
 //   useAsync(async () => {
-//     isLeafActive &&
+//     isActiveLeaf &&
 //       (await track({ action: TRACKING_EVENT_ACTION.OPEN, object: TRACKING_EVENT_OBJECT.PAGE }));
-//   }, [isLeafActive]);
+//   }, [isActiveLeaf]);
 
-//   const Container = route.isProtectable ? Protectable : Fragment;
 //   let element = cloneElement(
 //     route.element ?? (
 //       <Wrapper
@@ -167,6 +155,7 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
 //         <Wrapper
 //           grow
 //           isOverflowHidden
+//           onMeasure={measureSet}
 //           position={SHAPE_POSITION.RELATIVE}>
 //           <Routes
 //             depth={depth}
@@ -176,54 +165,44 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
 //       ),
 //     },
 //   );
+
+//   const Container = route.isProtectable ? Protectable : Fragment;
 //   element = <Container>{element}</Container>;
 
-//   const childrenF = useMemo(() => {
-//     if (isLeaf) {
-//       switch (transitionF) {
-//         case ROUTE_TRANSITION.SLIDE:
-//           return (
-//             <Slide
-//               isBack={isBack}
-//               measure={dimension}
-//               style={styles}
-//               testID={testID}>
-//               {element}
-//             </Slide>
-//           );
-//         default:
-//           return (
-//             <Appearable
-//               isAbsoluteFill
-//               isActive={isActiveF}
-//               style={styles}
-//               testID={testID}>
-//               {element}
-//             </Appearable>
-//           );
-//       }
+//   element = (() => {
+//     switch (route.transition) {
+//       case ROUTE_TRANSITION.SLIDE:
+//         return (
+//           <Slide
+//             isBack={isBack}
+//             measure={measure}
+//             style={styles}
+//             testID={testID}>
+//             {element}
+//           </Slide>
+//         );
+//       default:
+//         return (
+//           <Wrapper
+//             isAbsoluteFill
+//             isHidden={!isActiveF}
+//             style={styles}
+//             testID={testID}>
+//             {element}
+//           </Wrapper>
+//         );
 //     }
-//     return (
-//       <Wrapper
-//         isAbsoluteFill
-//         style={styles}
-//         testID={testID}>
-//         {element}
-//       </Wrapper>
-//     );
-//   }, [element, isBack, isLeaf, isActiveF, dimension, transitionF]);
+//   })();
 
 //   return (
 //     <>
-//       {isLeafActiveF && route.header && (
+//       {isActiveLeaf && route.header && (
 //         <Portal>
 //           <RouteHeader route={route} />
 //         </Portal>
 //       )}
 
-//       {route.element?.props?.children}
-
-//       {childrenF}
+//       {element}
 //     </>
 //   );
 // };

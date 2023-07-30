@@ -73,7 +73,6 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
               header: { previous: true },
               pathname: PAYMENT,
               title: ({ t }) => t('billing:payment'),
-              transition: ROUTE_TRANSITION.SLIDE,
             },
             {
               element: <SettingsPage />,
