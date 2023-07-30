@@ -7,7 +7,5 @@ export type _UseMutationParamsModel<TParams = undefined, TResult = void> = [
 
 export type _UseMutationModel<TParams = undefined, TResult = void> = {
   data?: TResult | null;
-  isError: boolean;
-  isLoading: boolean;
   mutate(params?: TParams): Promise<void>;
 } & WithIdModel;

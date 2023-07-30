@@ -10,8 +10,8 @@ export const _SkeletonGroup = composeComponent<
 >({
   Component: Skeleton.Group,
 
-  getProps: ({ children, isVisible }) => ({
+  getProps: ({ children }) => ({
     children,
-    show: isVisible || false,
+    show: true,
   }),
 });

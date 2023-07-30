@@ -1,7 +1,6 @@
 import noop from 'lodash/noop';
 import { createContext, Suspense, useState } from 'react';
 
-import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 import { ERROR_MODE } from '#lib-frontend/core/components/AsyncBoundary/AsyncBoundary.constants';
 import {
   type AsyncBoundaryContextModel,
@@ -42,43 +41,35 @@ export const AsyncBoundary: SFCModel<AsyncBoundaryPropsModel> = ({
   return (
     <AsyncBoundaryContext.Provider
       value={{ errorContextGet, errorContextSet, errorMode, handleRefresh: reset }}>
-      <Appearable
-        isAbsoluteFill
-        isActive={errorContext !== undefined}>
-        {errorContext && (
-          <Wrapper
-            grow
-            isCenter
-            s={THEME_SIZE.SMALL}
-            style={styles}
-            testID={testID}>
-            <Icon
-              fontSize={THEME_SIZE_MORE.XLARGE}
-              icon={errorContext.icon ?? 'sad'}
-            />
+      {errorContext ? (
+        <Wrapper
+          grow
+          isCenter
+          s={THEME_SIZE.SMALL}
+          style={styles}
+          testID={testID}>
+          <Icon
+            fontSize={THEME_SIZE_MORE.XLARGE}
+            icon={errorContext.icon ?? 'sad'}
+          />
 
-            {errorContext.title && <Text type={FONT_TYPE.HEADLINE}>{errorContext.title}</Text>}
+          {errorContext.title && <Text type={FONT_TYPE.HEADLINE}>{errorContext.title}</Text>}
 
-            {errorContext.message && <Text>{errorContext.message ?? t('core:errorGeneric')}</Text>}
+          {errorContext.message && <Text>{errorContext.message ?? t('core:errorGeneric')}</Text>}
 
-            <Button
-              icon="refresh"
-              onPress={() => {
-                errorContextSet(undefined);
-                reset();
-                onRefresh && void onRefresh();
-              }}>
-              {t('core:tryAgain')}
-            </Button>
-          </Wrapper>
-        )}
-      </Appearable>
-
-      <Appearable
-        isAbsoluteFill
-        isActive={!errorContext}>
+          <Button
+            icon="refresh"
+            onPress={() => {
+              errorContextSet(undefined);
+              reset();
+              onRefresh && void onRefresh();
+            }}>
+            {t('core:tryAgain')}
+          </Button>
+        </Wrapper>
+      ) : (
         <Suspense fallback={fallback ?? null}>{children}</Suspense>
-      </Appearable>
+      )}
     </AsyncBoundaryContext.Provider>
   );
 };
