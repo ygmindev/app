@@ -2,16 +2,16 @@ import noop from 'lodash/noop';
 import { createContext, Suspense, useState } from 'react';
 
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
-import { Button } from '#lib-frontend/core/components/Button/Button';
-import { Icon } from '#lib-frontend/core/components/Icon/Icon';
-import { Text } from '#lib-frontend/core/components/Text/Text';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { ERROR_MODE } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.constants';
+import { ERROR_MODE } from '#lib-frontend/core/components/AsyncBoundary/AsyncBoundary.constants';
 import {
   type AsyncBoundaryContextModel,
   type AsyncBoundaryPropsModel,
   type ErrorContextModel,
-} from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
+} from '#lib-frontend/core/components/AsyncBoundary/AsyncBoundary.models';
+import { Button } from '#lib-frontend/core/components/Button/Button';
+import { Icon } from '#lib-frontend/core/components/Icon/Icon';
+import { Text } from '#lib-frontend/core/components/Text/Text';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useQueryContext } from '#lib-frontend/data/hooks/useQueryContext/useQueryContext';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -42,7 +42,9 @@ export const AsyncBoundary: SFCModel<AsyncBoundaryPropsModel> = ({
   return (
     <AsyncBoundaryContext.Provider
       value={{ errorContextGet, errorContextSet, errorMode, handleRefresh: reset }}>
-      <Appearable isActive={errorContext !== undefined}>
+      <Appearable
+        isAbsoluteFill
+        isActive={errorContext !== undefined}>
         {errorContext && (
           <Wrapper
             grow
@@ -72,7 +74,9 @@ export const AsyncBoundary: SFCModel<AsyncBoundaryPropsModel> = ({
         )}
       </Appearable>
 
-      <Appearable isActive={!errorContext}>
+      <Appearable
+        isAbsoluteFill
+        isActive={!errorContext}>
         <Suspense fallback={fallback ?? null}>{children}</Suspense>
       </Appearable>
     </AsyncBoundaryContext.Provider>

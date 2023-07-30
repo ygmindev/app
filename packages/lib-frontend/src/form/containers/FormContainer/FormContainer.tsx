@@ -4,11 +4,11 @@ import toNumber from 'lodash/toNumber';
 import { type ForwardedRef, type ReactElement } from 'react';
 import { createElement, forwardRef, useImperativeHandle, useMemo, useState } from 'react';
 
+import { AsyncBoundary } from '#lib-frontend/core/components/AsyncBoundary/AsyncBoundary';
+import { ERROR_MODE } from '#lib-frontend/core/components/AsyncBoundary/AsyncBoundary.constants';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { AsyncBoundary } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
-import { ERROR_MODE } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.constants';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import {
   type RSFCPropsModel,

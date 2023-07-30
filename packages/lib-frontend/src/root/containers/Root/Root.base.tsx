@@ -3,8 +3,8 @@ import { cloneElement, createContext, useMemo } from 'react';
 
 import { AppProvider } from '#lib-frontend/app/containers/AppProvider/AppProvider';
 import { AuthProvider } from '#lib-frontend/auth/providers/AuthProvider/AuthProvider';
-import { AsyncBoundary } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
-import { ERROR_MODE } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.constants';
+import { AsyncBoundary } from '#lib-frontend/core/components/AsyncBoundary/AsyncBoundary';
+import { ERROR_MODE } from '#lib-frontend/core/components/AsyncBoundary/AsyncBoundary.constants';
 import { type FCModel } from '#lib-frontend/core/core.models';
 import { QueryProvider } from '#lib-frontend/data/providers/QueryProvider/QueryProvider';
 import { LocaleProvider } from '#lib-frontend/locale/providers/LocaleProvider/LocaleProvider';

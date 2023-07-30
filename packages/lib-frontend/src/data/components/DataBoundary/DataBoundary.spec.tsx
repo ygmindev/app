@@ -1,11 +1,9 @@
-import { AsyncBoundary } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
-import { type AsyncBoundaryPropsModel } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
+import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBoundary';
+import { type DataBoundaryPropsModel } from '#lib-frontend/data/components/DataBoundary/DataBoundary.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<AsyncBoundaryPropsModel>({
-  target: AsyncBoundary,
-});
+const { Component, displayName, testID } = withTestComponent<DataBoundaryPropsModel>({ target: DataBoundary });
 
 describe(displayName, () => {
   test('works', async () => {

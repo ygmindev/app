@@ -63,20 +63,20 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
             },
             {
               element: <PersonalPage />,
-              header: { previous: ACCOUNT },
+              header: { previous: true },
               isRootsVisible: true,
               pathname: PERSONAL,
               title: ({ t }) => t('user:personal'),
             },
             {
               element: <PaymentPage />,
-              header: { previous: ACCOUNT },
+              header: { previous: true },
               pathname: PAYMENT,
               title: ({ t }) => t('billing:payment'),
             },
             {
               element: <SettingsPage />,
-              header: { previous: ACCOUNT },
+              header: { previous: true },
               ns: [SETTINGS, LOCALE],
               pathname: SETTINGS,
               title: ({ t }) => t('settings:settings'),
@@ -185,7 +185,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                 },
                 {
                   element: <SnapshotPage />,
-                  header: { previous: `${TEST}/${REPORT}` },
+                  header: { previous: true },
                   pathname: ':id',
                 },
               ],

@@ -11,7 +11,7 @@ export type RouteIdParamsModel = WithIdModel;
 export type RouteModel<TProps extends ChildrenPropsModel = ChildrenPropsModel> = {
   element?: ReactElement<TProps>;
   fullpath?: string;
-  header?: { previous?: string };
+  header?: { previous?: boolean | string };
   isProtectable?: boolean;
   pathname: string;
   prerender?: false | Array<string>;
