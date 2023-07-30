@@ -13,6 +13,9 @@ import {
 const pages = (routes?: Array<RouteModel>): _PreparePrerenderParamsModel['pages'] =>
   routes?.reduce(
     (result, route) => {
+      if (route.prerender === false) {
+        return result;
+      }
       const pathname = trimPathname(`${route.root ?? ''}/${trimEnd(route.pathname, '/*')}`);
       const resultF = [
         ...result,
@@ -21,17 +24,17 @@ const pages = (routes?: Array<RouteModel>): _PreparePrerenderParamsModel['pages'
           : []),
       ];
       // TODO: add async context per page if needed
-      return route.prerender
-        ? [
-            ...resultF,
-            ...(isArray(route.prerender)
-              ? route.prerender.map((value) => ({
-                  getContext: undefined,
-                  pathname: trimPathname(`${pathname}/${value}`),
-                }))
-              : [{ getContext: undefined, pathname }]),
-          ]
-        : result;
+      return [
+        ...resultF,
+        ...(route.routes
+          ? []
+          : isArray(route.prerender)
+          ? route.prerender.map((value) => ({
+              getContext: undefined,
+              pathname: trimPathname(`${pathname}/${value}`),
+            }))
+          : [{ getContext: undefined, pathname }]),
+      ];
     },
     [] as _PreparePrerenderParamsModel['pages'],
   ) ?? [];

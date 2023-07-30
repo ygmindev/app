@@ -7,6 +7,8 @@ import { createElement, forwardRef, useImperativeHandle, useMemo, useState } fro
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import { ErrorBoundary } from '#lib-frontend/core/containers/ErrorBoundary/ErrorBoundary';
+import { ERROR_MODE } from '#lib-frontend/core/containers/ErrorBoundary/ErrorBoundary.constants';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import {
   type RSFCPropsModel,
@@ -14,8 +16,6 @@ import {
   type SFCPropsModel,
 } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
-import { ErrorProvider } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider';
-import { ERROR_MODE } from '#lib-frontend/core/providers/ErrorProvider/ErrorProvider.constants';
 import { Form } from '#lib-frontend/form/components/Form/Form';
 import { SelectField } from '#lib-frontend/form/components/SelectField/SelectField';
 import { type SelectFieldPropsModel } from '#lib-frontend/form/components/SelectField/SelectField.models';
@@ -42,12 +42,14 @@ export const FormContainer = forwardRef(
     { errorContextGet, ...props }: SFCPropsModel<FormContainerPropsModel<TType, TResult>>,
     ref: ForwardedRef<FormRefModel>,
   ): ReactElement<RSFCPropsModel<FormRefModel, FormContainerPropsModel<TType, TResult>>> => (
-    <ErrorProvider value={{ errorContextGet, mode: ERROR_MODE.NOTIFICATION }}>
+    <ErrorBoundary
+      errorContextGet={errorContextGet}
+      mode={ERROR_MODE.NOTIFICATION}>
       <FormContainerF
         {...props}
         ref={ref}
       />
-    </ErrorProvider>
+    </ErrorBoundary>
   ),
 );
 

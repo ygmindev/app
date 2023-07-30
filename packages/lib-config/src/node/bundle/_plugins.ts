@@ -1,8 +1,8 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
 import { type Plugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
-import { filelocPlugin } from 'esbuild-plugin-fileloc';
 
+// import { filelocPlugin } from 'esbuild-plugin-fileloc';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { type BundleConfigModel } from '#lib-config/node/bundle/bundle.models';
@@ -18,5 +18,5 @@ export const _plugins = ({
     process.env.ENV_PLATFORM === PLATFORM.NODE &&
       nodeExternalsPlugin({ allowList: transpiles, packagePath: fromRoot('package.json') }),
 
-    process.env.ENV_PLATFORM === PLATFORM.NODE && (filelocPlugin as () => Plugin)(),
+    // process.env.ENV_PLATFORM === PLATFORM.NODE && (filelocPlugin as () => Plugin)(),
   ]);

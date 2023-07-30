@@ -5,9 +5,11 @@ import {
 } from '#tool-task/platform/server/utils/runServer/runServer.models';
 
 export const runServer = ({
-  host = process.env.SERVER_HOST,
+  host = process.env.STATIC_HOST,
   isOpen = true,
   path,
-  port = process.env.SERVER_PORT,
+  port = process.env.STATIC_PORT,
 }: RunServerParamsModel): RunServerModel =>
-  fromExecutable(`http-server ${path} -a ${host.split('://')[1]} --cors --port ${port} ${isOpen ? '--o' : ''}`);
+  fromExecutable(
+    `http-server ${path} -a ${host.split('://')[1]} --cors --port ${port} ${isOpen ? '--o' : ''}`,
+  );

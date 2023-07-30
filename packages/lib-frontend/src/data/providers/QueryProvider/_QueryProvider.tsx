@@ -9,7 +9,7 @@ export const _QueryProvider: FCModel<_QueryProviderPropsModel> = ({ children, va
   const [client] = useState(() => value?.client ?? new QueryClient().client);
   return (
     <QueryClientProvider client={client}>
-      <Suspense>
+      <Suspense fallback={<div>loading</div>}>
         <Hydrate state={value?.state}>{children}</Hydrate>
       </Suspense>
     </QueryClientProvider>
