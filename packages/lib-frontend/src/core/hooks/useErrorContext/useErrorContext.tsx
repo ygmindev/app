@@ -30,6 +30,7 @@ export const useErrorContext = (): UseErrorContextModel => {
             message: ({ t }) => t('core:errorOffline'),
             mode: ERROR_MODE.FALLBACK,
           };
+          break;
         }
         case HTTP_STATUS_CODE.UNAUTHORIZED: {
           errorContext = {

@@ -14,8 +14,7 @@ import {
 } from '#lib-frontend/auth/hooks/useSession/_useSession.models';
 import { isServer } from '#lib-platform/core/utils/isServer/isServer';
 import { type SignInTokenModel } from '#lib-shared/auth/resources/SignIn/SignIn.models';
-import { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
-import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
+import { OfflineError } from '#lib-shared/http/errors/OfflineError/OfflineError';
 
 let auth: Auth;
 
@@ -54,7 +53,7 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
               .catch((e) => {
                 const error =
                   (e as AuthError).code === 'auth/network-request-failed'
-                    ? new HttpError(HTTP_STATUS_CODE.SERVICE_UNAVAILABLE, 'Network Error')
+                    ? new OfflineError()
                     : (e as Error);
                 onError && onError(error);
               });
