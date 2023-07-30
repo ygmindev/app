@@ -65,9 +65,12 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
   );
   const isActiveF = useMemo(() => isActive({ pathname: route.fullpath }), [route.fullpath]);
   const isLeafActiveF = isLeaf && isLeafActive;
+  const transitionF =
+    route.transition ?? (route.header?.previous ? ROUTE_TRANSITION.SLIDE : undefined);
+
   const childrenF = useMemo(() => {
-    switch (route.transition) {
-      case ROUTE_TRANSITION.SLIDE:
+    switch (transitionF) {
+      case ROUTE_TRANSITION.SLIDE: {
         return (
           <Slide
             isBack={isBack}
@@ -77,6 +80,7 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
             {element}
           </Slide>
         );
+      }
       default:
         return (
           <Appearable
@@ -88,7 +92,7 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
           </Appearable>
         );
     }
-  }, [element, isBack, isLeaf, isActiveF, dimension, route.transition]);
+  }, [element, isBack, isActiveF, dimension, transitionF]);
 
   return (
     <>
