@@ -1,5 +1,4 @@
 import range from 'lodash/range';
-import { useMemo } from 'react';
 
 import { SkeletonGroup } from '#lib-frontend/animation/components/SkeletonGroup/SkeletonGroup';
 import { PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants';
@@ -30,19 +29,15 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
 
   const { data, isLoading } = useQuery('paymentMethods', async () => {
     const { result } = await getMany({ filter: {} });
-    result && actions?.billing.paymentMethodsSet(result);
-    return result;
-  });
-
-  const paymentMethodsF = useMemo(
-    () =>
-      data &&
+    const resultF =
+      result &&
       sort({
         by: [(x) => currentUser?.paymentMethodPrimary !== x._id, ['created', false]],
-        value: data,
-      }),
-    [currentUser?.paymentMethodPrimary, data],
-  );
+        value: result,
+      });
+    resultF && actions?.billing.paymentMethodsSet(resultF);
+    return resultF;
+  });
 
   const tPaymentMethod = t('billing:paymentMethod');
   const tPaymentMethodAdd = t('core:add', { value: tPaymentMethod });
@@ -61,7 +56,7 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
                   key={i}
                 />
               ))
-            : paymentMethodsF?.map((value) => (
+            : data?.map((value) => (
                 <PaymentMethodItem
                   key={value._id}
                   value={value}
