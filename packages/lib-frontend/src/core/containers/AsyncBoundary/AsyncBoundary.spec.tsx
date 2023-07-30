@@ -1,10 +1,10 @@
-import { ErrorBoundary } from '#lib-frontend/core/containers/ErrorBoundary/ErrorBoundary';
-import { type ErrorBoundaryPropsModel } from '#lib-frontend/core/containers/ErrorBoundary/ErrorBoundary.models';
+import { AsyncBoundary } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
+import { type AsyncBoundaryPropsModel } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<ErrorBoundaryPropsModel>({
-  target: ErrorBoundary,
+const { Component, displayName, testID } = withTestComponent<AsyncBoundaryPropsModel>({
+  target: AsyncBoundary,
 });
 
 describe(displayName, () => {

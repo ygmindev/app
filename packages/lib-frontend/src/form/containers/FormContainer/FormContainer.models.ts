@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 
-import { type ErrorBoundaryContextModel } from '#lib-frontend/core/containers/ErrorBoundary/ErrorBoundary.models';
+import { type AsyncBoundaryContextModel } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import { type ElementStatePropsModel, type SFCModel } from '#lib-frontend/core/core.models';
 import { type SelectFieldPropsModel } from '#lib-frontend/form/components/SelectField/SelectField.models';
 import { type SwitchFieldPropsModel } from '#lib-frontend/form/components/SwitchField/SwitchField.models';
@@ -52,4 +52,4 @@ export type FormContainerPropsModel<TType = void, TResult = void> = {
   topElement?(props: FormContainerFieldPropsModel): ReactNode;
 } & UseFormParamsModel<TType, TResult> &
   SubmittablePropsModel<TType, TResult> &
-  Pick<ErrorBoundaryContextModel, 'errorContextGet'>;
+  Pick<AsyncBoundaryContextModel, 'errorContextGet'>;

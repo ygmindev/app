@@ -1,4 +1,4 @@
-import { type ERROR_MODE } from '#lib-frontend/core/containers/ErrorBoundary/ErrorBoundary.constants';
+import { type ERROR_MODE } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.constants';
 import { type ChildrenPropsModel } from '#lib-frontend/core/core.models';
 import {
   type NotificationModel,
@@ -8,20 +8,20 @@ import {
 export type ErrorModeModel = `${ERROR_MODE}`;
 
 export type ErrorContextModel = {
-  mode?: ErrorModeModel;
+  errorMode?: ErrorModeModel;
 } & Pick<NotificationModel, 'icon' | 'title' | 'message'>;
 
 export type TranslatableErrorContextModel = Pick<
   TranslatableNotificationModel,
   'icon' | 'title' | 'message'
 > &
-  Pick<ErrorContextModel, 'mode'>;
+  Pick<ErrorContextModel, 'errorMode'>;
 
-export type ErrorBoundaryContextModel = {
+export type AsyncBoundaryContextModel = {
   errorContextGet?(error: Error): TranslatableErrorContextModel | undefined;
   errorContextSet(value: ErrorContextModel): void;
-  mode: ErrorModeModel;
+  errorMode: ErrorModeModel;
 };
 
-export type ErrorBoundaryPropsModel = ChildrenPropsModel &
-  Pick<ErrorBoundaryContextModel, 'mode' | 'errorContextGet'>;
+export type AsyncBoundaryPropsModel = ChildrenPropsModel &
+  Pick<AsyncBoundaryContextModel, 'errorMode' | 'errorContextGet'>;

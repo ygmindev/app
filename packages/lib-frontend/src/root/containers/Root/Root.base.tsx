@@ -3,8 +3,8 @@ import { cloneElement, createContext, useMemo } from 'react';
 
 import { AppProvider } from '#lib-frontend/app/containers/AppProvider/AppProvider';
 import { AuthProvider } from '#lib-frontend/auth/providers/AuthProvider/AuthProvider';
-import { ErrorBoundary } from '#lib-frontend/core/containers/ErrorBoundary/ErrorBoundary';
-import { ERROR_MODE } from '#lib-frontend/core/containers/ErrorBoundary/ErrorBoundary.constants';
+import { AsyncBoundary } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
+import { ERROR_MODE } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.constants';
 import { type FCModel } from '#lib-frontend/core/core.models';
 import { QueryProvider } from '#lib-frontend/data/providers/QueryProvider/QueryProvider';
 import { LocaleProvider } from '#lib-frontend/locale/providers/LocaleProvider/LocaleProvider';
@@ -39,7 +39,7 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
       <TrackingProvider />,
       <QueryProvider value={context?.query} />,
       <AuthProvider />,
-      <ErrorBoundary mode={ERROR_MODE.NOTIFICATION} />,
+      <AsyncBoundary errorMode={ERROR_MODE.NOTIFICATION} />,
       <StyleProvider />,
       <LocaleProvider value={context?.locale} />,
       <AppProvider />,

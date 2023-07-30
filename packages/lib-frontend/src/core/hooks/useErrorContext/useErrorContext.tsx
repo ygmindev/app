@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 
+import { ErrorContext } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
+import { ERROR_MODE } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.constants';
+import { type ErrorContextModel } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import { type UseErrorContextModel } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext.models';
-import { ErrorContext } from '#lib-frontend/core/containers/ErrorBoundary/ErrorBoundary';
-import { ERROR_MODE } from '#lib-frontend/core/containers/ErrorBoundary/ErrorBoundary.constants';
-import { type ErrorContextModel } from '#lib-frontend/core/containers/ErrorBoundary/ErrorBoundary.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
 import { type HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
@@ -13,7 +13,7 @@ import { error } from '#lib-shared/logging/utils/logger/logger';
 export const useErrorContext = (): UseErrorContextModel => {
   const { t } = useTranslation();
   const { error: notify } = useNotification();
-  const { errorContextGet, errorContextSet, mode } = useContext(ErrorContext);
+  const { errorContextGet, errorContextSet, errorMode } = useContext(ErrorContext);
 
   const errorContextGetF = (e: Error): ErrorContextModel => {
     let errorContext = errorContextGet && errorContextGet(e);
@@ -26,9 +26,9 @@ export const useErrorContext = (): UseErrorContextModel => {
         }
         case HTTP_STATUS_CODE.NETWORK_CONNECT_TIMEOUT: {
           errorContext = {
+            errorMode: ERROR_MODE.FALLBACK,
             icon: 'offline',
             message: ({ t }) => t('core:errorOffline'),
-            mode: ERROR_MODE.FALLBACK,
           };
           break;
         }
@@ -45,13 +45,13 @@ export const useErrorContext = (): UseErrorContextModel => {
         }
       }
     }
-    const { icon, message, mode, title } = errorContext;
-    return { icon, message: message && t(message), mode, title: title && t(title) };
+    const { errorMode, icon, message, title } = errorContext;
+    return { errorMode, icon, message: message && t(message), title: title && t(title) };
   };
 
   const handleError = (error: Error): void => {
     const errorContext = errorContextGetF(error);
-    [mode, errorContext.mode].includes(ERROR_MODE.FALLBACK)
+    [errorMode, errorContext.errorMode].includes(ERROR_MODE.FALLBACK)
       ? errorContextSet(errorContext)
       : notify({
           icon: errorContext.icon,

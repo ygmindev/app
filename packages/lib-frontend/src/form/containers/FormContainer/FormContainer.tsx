@@ -7,8 +7,8 @@ import { createElement, forwardRef, useImperativeHandle, useMemo, useState } fro
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { ErrorBoundary } from '#lib-frontend/core/containers/ErrorBoundary/ErrorBoundary';
-import { ERROR_MODE } from '#lib-frontend/core/containers/ErrorBoundary/ErrorBoundary.constants';
+import { AsyncBoundary } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
+import { ERROR_MODE } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.constants';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import {
   type RSFCPropsModel,
@@ -42,14 +42,14 @@ export const FormContainer = forwardRef(
     { errorContextGet, ...props }: SFCPropsModel<FormContainerPropsModel<TType, TResult>>,
     ref: ForwardedRef<FormRefModel>,
   ): ReactElement<RSFCPropsModel<FormRefModel, FormContainerPropsModel<TType, TResult>>> => (
-    <ErrorBoundary
+    <AsyncBoundary
       errorContextGet={errorContextGet}
-      mode={ERROR_MODE.NOTIFICATION}>
+      errorMode={ERROR_MODE.NOTIFICATION}>
       <FormContainerF
         {...props}
         ref={ref}
       />
-    </ErrorBoundary>
+    </AsyncBoundary>
   ),
 );
 
