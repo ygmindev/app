@@ -15,23 +15,14 @@ const getRoute = ({ pathname = '/', ...route }: RouteModel, depth = 0): RouteMod
   const pathnameEnd = trimEnd(pathname, '/*');
   const pathnameF = trimPathname(route.routes ? `${pathnameEnd}/*` : pathname);
   const depthF = pathnameF === '/' ? depth : depth + 1;
+  const rootF = trimPathname(`${route.root ?? ''}/${pathnameEnd}`);
   const routeF: RouteModel = {
     ...route,
     fullpath: trimPathname(`${route.root ?? ''}/${pathnameF}`),
     pathname: pathnameF,
-    routes: route.routes
-      ? route.routes.map((child) =>
-          getRoute(
-            {
-              ...child,
-              header: child.header || route.header,
-              root: trimPathname(`${route.root ?? ''}/${pathnameEnd}`),
-              transition: child.transition || route.transition,
-            },
-            depthF,
-          ),
-        )
-      : undefined,
+    routes: route.routes?.map((child) =>
+      getRoute({ ...child, header: child.header ?? route.header, root: rootF }, depthF),
+    ),
   };
   return {
     ...routeF,

@@ -25,18 +25,17 @@ export const Slides: SFCModel<SlidesPropsModel> = ({ current, slides, testID, ..
       style={styles}
       testID={testID}>
       <Exitable>
-        {slides &&
-          slides.map(
-            ({ element, id }, i) =>
-              i === currentF && (
-                <Slide
-                  isBack={isBack}
-                  key={id}
-                  measure={measure}>
-                  {element}
-                </Slide>
-              ),
-          )}
+        {slides?.map(
+          ({ element, id }, i) =>
+            i === currentF && (
+              <Slide
+                isBack={isBack}
+                key={id}
+                measure={measure}>
+                {element}
+              </Slide>
+            ),
+        )}
       </Exitable>
     </Wrapper>
   );
