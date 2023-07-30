@@ -16,14 +16,12 @@ import { FORM } from '#lib-frontend/form/form.constants';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
-import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { sort } from '#lib-shared/core/utils/sort/sort';
 
 export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props }) => {
   const { t } = useTranslation();
-  const paymentMethods = useStore((state) => state.billing.paymentMethods);
   const actions = useActions();
   const currentUser = useCurrentUser();
   const { styles } = useStyles({ props });
@@ -31,9 +29,6 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
   const { getMany } = usePaymentMethodResource({ root: { _id: currentUser?._id } });
 
   const { data, isLoading } = useQuery('paymentMethods', async () => {
-    if (paymentMethods) {
-      return paymentMethods;
-    }
     const { result } = await getMany({ filter: {} });
     result && actions?.billing.paymentMethodsSet(result);
     return result;
