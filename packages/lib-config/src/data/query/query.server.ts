@@ -7,7 +7,7 @@ const { _config, config } = defineConfig({
 
   config: configBase,
 
-  overrides: [{ cacheTime: Infinity }],
+  overrides: [{ cacheTimeDefault: Infinity }],
 });
 
 export { _config, config };
