@@ -96,6 +96,7 @@ export const _bundle = ({
   const isReact = ([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>).includes(
     process.env.ENV_PLATFORM,
   );
+  const tsconfigDir = fromWorking(tsconfigPath);
   const config: _BundleConfigModel = {
     build: {
       assetsDir: joinPaths([fromWorking(), publicPath]),
@@ -154,7 +155,7 @@ export const _bundle = ({
 
         target: process.env.ENV_PLATFORM === PLATFORM.NODE ? 'node18' : undefined,
 
-        tsconfig: tsconfigPath,
+        tsconfig: tsconfigDir,
       },
 
       include: transpiles,
@@ -163,11 +164,11 @@ export const _bundle = ({
     plugins: filterNil([
       serverExtension && vitePluginIsomorphicImport(serverExtension),
 
-      tsconfigPath && tsconfigPaths({ projects: [tsconfigPath] }),
+      tsconfigPaths({ projects: [tsconfigDir] }),
 
       checker({
         eslint: { lintCommand: lintCommand() },
-        typescript: { tsconfigPath },
+        typescript: { tsconfigPath: tsconfigDir },
       }),
 
       isReact && react({ tsDecorators: true }),
@@ -191,16 +192,14 @@ export const _bundle = ({
     resolve: {
       alias: {
         ...aliases,
-        ...(tsconfigPath
-          ? reduce(
-              getTsconfig(tsconfigPath)?.config?.compilerOptions?.paths,
-              (result, v, k) => ({
-                ...result,
-                [k.replaceAll('*', '')]: fromRoot(v[0].replaceAll('*', '')),
-              }),
-              {},
-            )
-          : {}),
+        ...reduce(
+          getTsconfig(tsconfigDir)?.config?.compilerOptions?.paths,
+          (result, v, k) => ({
+            ...result,
+            [k.replaceAll('*', '')]: fromRoot(v[0].replaceAll('*', '')),
+          }),
+          {},
+        ),
       },
 
       extensions,

@@ -33,7 +33,7 @@ const { _config, config } = defineConfig({
 
       publicPath: 'assets',
 
-      tsconfigPath: fromWorking('tsconfig.json'),
+      tsconfigPath: 'tsconfig.json',
 
       watch: [
         fromPackages('asset-static/src/**/*'),

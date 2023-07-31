@@ -1,12 +1,12 @@
 import noop from 'lodash/noop';
 import { createContext, Suspense, useState } from 'react';
 
-import { ERROR_MODE } from '#lib-frontend/core/components/AsyncBoundary/AsyncBoundary.constants';
+import { ERROR_MODE } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.constants';
 import {
   type AsyncBoundaryContextModel,
   type AsyncBoundaryPropsModel,
   type ErrorContextModel,
-} from '#lib-frontend/core/components/AsyncBoundary/AsyncBoundary.models';
+} from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { Text } from '#lib-frontend/core/components/Text/Text';

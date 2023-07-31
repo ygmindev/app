@@ -1,5 +1,4 @@
 import { fromConfig } from '#lib-backend/file/utils/fromConfig/fromConfig';
-import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '#lib-backend/file/utils/joinPaths/joinPaths';
 import { config as fileConfig } from '#lib-config/core/file/file';
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
@@ -14,7 +13,7 @@ const { _config, config } = defineConfig({
     ({
       bundleConfig,
 
-      cachePath: fromWorking(fileConfig.cachePath, 'test'),
+      cachePath: joinPaths([fileConfig.cachePath, 'test']),
 
       delay: 500,
 
@@ -30,7 +29,7 @@ const { _config, config } = defineConfig({
 
       outputPath: joinPaths([fileConfig.buildPath, 'test']),
 
-      snapshotPath: 'snapshots',
+      snapshotPath: joinPaths([fileConfig.buildPath, 'snapshots']),
 
       snapshotPrefix: 'snapshot',
 

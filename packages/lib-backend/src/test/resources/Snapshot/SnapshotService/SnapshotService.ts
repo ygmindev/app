@@ -16,9 +16,9 @@ export class SnapshotService implements SnapshotServiceModel {
   }: InputModel<RESOURCE_METHOD_TYPE.GET, SnapshotModel>): Promise<
     OutputModel<RESOURCE_METHOD_TYPE.GET, SnapshotModel>
   > {
-    const { outputPath, snapshotPath } = testConfig();
+    const { snapshotPath } = testConfig();
     const nameF = filter.name as string;
-    const path = fromPackages('app-web', outputPath, snapshotPath, nameF);
+    const path = fromPackages('app-web', snapshotPath, nameF);
     const snapshots = {
       images: children(path).map((child) => child.name),
       name: nameF,
@@ -29,8 +29,8 @@ export class SnapshotService implements SnapshotServiceModel {
   async getMany(
     _input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, SnapshotModel>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, SnapshotModel>> {
-    const { outputPath, snapshotPath } = testConfig();
-    const path = fromPackages('app-web', outputPath, snapshotPath);
+    const { snapshotPath } = testConfig();
+    const path = fromPackages('app-web', snapshotPath);
     const snapshots = children(path).map(({ name }) => ({ name }));
     return { result: snapshots };
   }

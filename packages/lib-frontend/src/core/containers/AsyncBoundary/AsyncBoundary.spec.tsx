@@ -1,5 +1,5 @@
-import { AsyncBoundary } from '#lib-frontend/core/components/AsyncBoundary/AsyncBoundary';
-import { type AsyncBoundaryPropsModel } from '#lib-frontend/core/components/AsyncBoundary/AsyncBoundary.models';
+import { AsyncBoundary } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
+import { type AsyncBoundaryPropsModel } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 

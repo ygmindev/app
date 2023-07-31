@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react';
 
-import { AsyncBoundary } from '#lib-frontend/core/components/AsyncBoundary/AsyncBoundary';
+import { AsyncBoundary } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
 import { type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { type DataBoundaryPropsModel } from '#lib-frontend/data/components/DataBoundary/DataBoundary.models';
 import { useQuery } from '#lib-frontend/data/hooks/useQuery/useQuery';

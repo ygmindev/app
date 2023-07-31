@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 
-import { type AsyncBoundaryContextModel } from '#lib-frontend/core/components/AsyncBoundary/AsyncBoundary.models';
+import { type AsyncBoundaryContextModel } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import { type ElementStatePropsModel, type SFCModel } from '#lib-frontend/core/core.models';
 import { type SelectFieldPropsModel } from '#lib-frontend/form/components/SelectField/SelectField.models';
 import { type SwitchFieldPropsModel } from '#lib-frontend/form/components/SwitchField/SwitchField.models';

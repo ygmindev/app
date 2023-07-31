@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react';
 
-import { type AsyncBoundaryPropsModel } from '#lib-frontend/core/components/AsyncBoundary/AsyncBoundary.models';
+import { type AsyncBoundaryPropsModel } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import { type ChildrenPropsModel } from '#lib-frontend/core/core.models';
 import { type UseQueryModel } from '#lib-frontend/data/hooks/useQuery/useQuery.models';
 import { type NilModel } from '#lib-shared/core/core.models';

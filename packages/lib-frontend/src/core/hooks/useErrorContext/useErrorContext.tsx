@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 
-import { AsyncBoundaryContext } from '#lib-frontend/core/components/AsyncBoundary/AsyncBoundary';
-import { ERROR_MODE } from '#lib-frontend/core/components/AsyncBoundary/AsyncBoundary.constants';
-import { type ErrorContextModel } from '#lib-frontend/core/components/AsyncBoundary/AsyncBoundary.models';
+import { AsyncBoundaryContext } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
+import { ERROR_MODE } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.constants';
+import { type ErrorContextModel } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import { type UseErrorContextModel } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
