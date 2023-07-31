@@ -16,11 +16,12 @@ const pages = (routes?: Array<RouteModel>): _PreparePrerenderParamsModel['pages'
       if (route.prerender === false) {
         return result;
       }
-      const pathname = trimPathname(`${route.root ?? ''}/${trimEnd(route.pathname, '/*')}`);
+      let pathnameF = trimPathname(`${route.root ?? ''}/${trimEnd(route.pathname, '/*')}`);
+      pathnameF = pathnameF.replace(/\/:[^\/]+/, '');
       const resultF = [
         ...result,
         ...(route.routes
-          ? pages(route.routes.map(({ ...child }) => ({ ...child, root: pathname })))
+          ? pages(route.routes.map(({ ...child }) => ({ ...child, root: pathnameF })))
           : []),
       ];
       // TODO: add async context per page if needed
@@ -31,9 +32,9 @@ const pages = (routes?: Array<RouteModel>): _PreparePrerenderParamsModel['pages'
           : isArray(route.prerender)
           ? route.prerender.map((value) => ({
               getContext: undefined,
-              pathname: trimPathname(`${pathname}/${value}`),
+              pathname: trimPathname(`${pathnameF}/${value}`),
             }))
-          : [{ getContext: undefined, pathname }]),
+          : [{ getContext: undefined, pathname: pathnameF }]),
       ];
     },
     [] as _PreparePrerenderParamsModel['pages'],

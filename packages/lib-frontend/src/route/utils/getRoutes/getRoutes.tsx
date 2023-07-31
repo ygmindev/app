@@ -170,7 +170,6 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
         {
           element: <DevPage />,
           pathname: DEV,
-          prerender: [''],
         },
 
         {
@@ -187,6 +186,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                   element: <SnapshotPage />,
                   header: { previous: true },
                   pathname: ':id',
+                  prerender: ['sign-in-works'],
                 },
               ],
               transition: ROUTE_TRANSITION.SLIDE,
