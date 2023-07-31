@@ -29,7 +29,7 @@ const { _config, config } = defineConfig({
 
       outputPath: joinPaths([fileConfig.buildPath, 'test']),
 
-      snapshotPath: joinPaths([fileConfig.buildPath, 'snapshots']),
+      snapshotPath: joinPaths([fileConfig.buildPath, 'test', 'snapshots']),
 
       snapshotPrefix: 'snapshot',
 

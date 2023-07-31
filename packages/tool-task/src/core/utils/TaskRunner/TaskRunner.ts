@@ -116,7 +116,6 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
       onBefore && (await this.runTasks(onBefore, context));
       await this.runTasks(task, context);
     } catch (e) {
-      console.warn(e);
       error(name, (e as Error).stack);
     } finally {
       this._pids.forEach(process.kill);

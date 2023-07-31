@@ -53,7 +53,7 @@ export const _screen = async ({
           customReceivedDir: fromWorking(outputPath, 'received'),
           customSnapshotIdentifier: ({ counter, currentTestName }) =>
             joinPaths([slug(currentTestName), `${snapshotPrefix}-${counter.toString()}`]),
-          customSnapshotsDir: fromWorking(outputPath, snapshotPath),
+          customSnapshotsDir: fromWorking(snapshotPath),
         });
     },
 

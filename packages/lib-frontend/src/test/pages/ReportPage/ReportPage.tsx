@@ -10,7 +10,6 @@ export const ReportPage: SFCModel<ReportPagePropsModel> = ({ testID, ...props })
   const { styles } = useStyles({ props });
   const { getMany } = useSnapshotResource();
   const { data } = useQuery('snapshots', async () => getMany({ filter: {} }));
-  console.warn(data);
   return (
     <MainLayout
       isHorizontalCenter
