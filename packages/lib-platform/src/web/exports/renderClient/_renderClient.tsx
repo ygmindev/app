@@ -1,5 +1,5 @@
 import Cookies from 'cookies-js';
-import { createRoot, hydrateRoot } from 'react-dom/client';
+import { hydrateRoot } from 'react-dom/client';
 
 import { _config } from '#lib-config/locale/internationalize/internationalize.web';
 import { type RootContextModel } from '#lib-frontend/root/root.models';
@@ -14,7 +14,7 @@ import { STATE } from '#lib-shared/state/state.constants';
 
 export const _renderClient =
   ({ initialize, render, rootId }: _RenderClientParamsModel): _RenderClientModel =>
-  async ({ Page, context, isHydration, pageProps }) => {
+  async ({ Page, context, pageProps }) => {
     initialize && (await initialize());
     const contextF: RootContextModel = merge([
       {
@@ -25,5 +25,5 @@ export const _renderClient =
     ]);
     const { element } = render({ context: contextF, element: <Page {...pageProps} /> });
     const root = document.getElementById(rootId);
-    root && (isHydration ? hydrateRoot(root, element) : createRoot(root).render(element));
+    root && hydrateRoot(root, element);
   };

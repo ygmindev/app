@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useLocation } from 'react-router';
 
 import { Exitable } from '#lib-frontend/animation/components/Exitable/Exitable';
@@ -8,10 +7,7 @@ import { _Route, _Routes as _RoutesBase } from '#lib-frontend/route/containers/R
 
 export const _Routes: FCModel<_RoutesPropsModel> = ({ depth = 1, routes }) => {
   const location = useLocation();
-  const key = useMemo(
-    () => location.pathname.split('/').splice(1, depth).join('/'),
-    [location.pathname, depth],
-  );
+  const key = location.pathname.split('/').splice(1, depth).join('/');
   return (
     <Exitable>
       <_RoutesBase

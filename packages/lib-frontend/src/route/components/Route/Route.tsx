@@ -1,4 +1,4 @@
-import { cloneElement, Fragment, useMemo, useState } from 'react';
+import { cloneElement, Fragment, useState } from 'react';
 
 import { Slide } from '#lib-frontend/animation/components/Slide/Slide';
 import { Protectable } from '#lib-frontend/auth/components/Protectable/Protectable';
@@ -29,11 +29,8 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
   const [measure, measureSet] = useState<MeasureModel>();
   const isBack = useStore((state) => state.route.isBack);
   const isLeaf = !route.routes;
-  const isActiveF = useMemo(() => isActive({ pathname: route.fullpath }), [route.fullpath]);
-  const isActiveLeaf = useMemo(
-    () => isLeaf && isActive({ isExact: true, pathname: route.fullpath }),
-    [isLeaf, route.fullpath],
-  );
+  const isActiveF = isActive({ pathname: route.fullpath });
+  const isActiveLeaf = isLeaf && isActive({ isExact: true, pathname: route.fullpath });
 
   useAsync(async () => {
     isActiveLeaf &&
