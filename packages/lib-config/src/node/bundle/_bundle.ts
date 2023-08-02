@@ -101,6 +101,8 @@ export const _bundle = ({
     build: {
       assetsDir: joinPaths([fromWorking(), publicPath]),
 
+      assetsInlineLimit: 1e7,
+
       commonjsOptions: {
         defaultIsModuleExports: true,
         esmExternals: true,
@@ -144,6 +146,10 @@ export const _bundle = ({
         define,
 
         keepNames: true,
+
+        loader: {
+          '.png': 'base64',
+        },
 
         mainFields,
 
