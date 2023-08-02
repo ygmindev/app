@@ -39,6 +39,10 @@ export type ThemeConfigModel = {
   };
 
   layout: {
+    dropdown: {
+      maxHeight: number;
+    };
+
     header: {
       height: number;
     };

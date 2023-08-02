@@ -50,6 +50,10 @@ export const THEME_CONFIG = {
   },
 
   layout: {
+    dropdown: {
+      maxHeight: 300,
+    },
+
     header: {
       height: 60,
     },

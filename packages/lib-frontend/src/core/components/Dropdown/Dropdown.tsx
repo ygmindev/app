@@ -10,7 +10,7 @@ import { type WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrap
 import { type RSFCModel } from '#lib-frontend/core/core.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR_MORE, THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
+import { THEME_COLOR_MORE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
 
 export const Dropdown: RSFCModel<DropdownRefModel, DropdownPropsModel> = forwardRef(
   (
@@ -49,13 +49,14 @@ export const Dropdown: RSFCModel<DropdownRefModel, DropdownPropsModel> = forward
           border
           isFullWidth={width ? undefined : true}
           isShadow
+          maxWidth={maxWidth}
           round
           width={width}>
           <Wrapper
             grow
+            isFullWidth
             isVerticalScrollable
-            maxHeight={maxHeight || theme.layout.height[THEME_SIZE.MEDIUM]}
-            maxWidth={maxWidth || theme.layout.width[THEME_SIZE.SMALL]}
+            maxHeight={maxHeight ?? theme.layout.dropdown.maxHeight}
             p={THEME_SIZE_MORE.SMALL}
             ref={wrapperRef}>
             {children}
