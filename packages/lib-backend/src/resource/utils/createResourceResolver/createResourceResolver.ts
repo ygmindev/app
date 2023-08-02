@@ -11,7 +11,7 @@ import {
 import { withInput } from '#lib-backend/resource/utils/withInput/withInput';
 import { withOutput } from '#lib-backend/resource/utils/withOutput/withOutput';
 import { UnauthorizedError } from '#lib-shared/auth/errors/UnauthorizedError/UnauthorizedError';
-import { type ClassModel, type PrototypeModel } from '#lib-shared/core/core.models';
+import { type ClassModel } from '#lib-shared/core/core.models';
 import { NotImplementedError } from '#lib-shared/core/errors/NotImplementedError/NotImplementedError';
 import { toPlainObject } from '#lib-shared/core/utils/toPlainObject/toPlainObject';
 import { withCondition } from '#lib-shared/core/utils/withCondition/withCondition';
@@ -40,7 +40,7 @@ export const authorize = <
   }
 };
 
-export const createResourceResolver = <TType, TForm, TRoot = undefined>({
+export const createResourceResolver = <TType, TForm = undefined, TRoot = undefined>({
   Resource,
   ResourceData,
   ResourceService,
@@ -53,7 +53,7 @@ export const createResourceResolver = <TType, TForm, TRoot = undefined>({
   TForm,
   TRoot
 > => {
-  const prototype = ResourceService.prototype as PrototypeModel<typeof ResourceService>;
+  const { prototype } = ResourceService;
   const createExists = prototype.create !== undefined;
   const getExists = prototype.get !== undefined;
   const getManyExists = prototype.getMany !== undefined;

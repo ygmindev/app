@@ -11,7 +11,7 @@ import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 
 export type CreateResourceResolverParamsModel<
   TType,
-  TForm,
+  TForm = undefined,
   TRoot = undefined,
 > = ResourceNameParamsModel<TRoot> & {
   Resource: ClassModel<TType>;
@@ -57,15 +57,15 @@ export type CreateResourceResolverParamsModel<
   };
 };
 
-export type CreateResourceResolverModel<TType, TForm, TRoot = undefined> = ClassModel<
+export type CreateResourceResolverModel<TType, TForm = undefined, TRoot = undefined> = ClassModel<
   ResourceResolverModel<TType, TForm, TRoot>
 >;
 
-export type ResourceResolverModel<TType, TForm, TRoot = undefined> = ResourceServiceModel<
+export type ResourceResolverModel<
   TType,
-  TForm,
-  TRoot
->;
+  TForm = undefined,
+  TRoot = undefined,
+> = ResourceServiceModel<TType, TForm, TRoot>;
 
 export type ResourceResolverAccessTypeModel =
   | 'default'
@@ -76,7 +76,7 @@ export type ResourceResolverAccessTypeModel =
 export type ResourceResolverAuthorizerParamsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
-  TForm,
+  TForm = undefined,
   TRoot = undefined,
 > = {
   context?: ContextModel;
@@ -86,6 +86,6 @@ export type ResourceResolverAuthorizerParamsModel<
 export type ResourceResolverAuthorizerModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
-  TForm,
+  TForm = undefined,
   TRoot = undefined,
 > = (params: ResourceResolverAuthorizerParamsModel<TMethod, TType, TForm, TRoot>) => boolean;
