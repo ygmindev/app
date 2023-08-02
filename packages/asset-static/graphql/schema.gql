@@ -11,33 +11,8 @@ type Access {
   user: User
 }
 
-input AccessCreateFormInput {
-  _id: String
-  _uid: String
-  created: DateTime
-  role: String
-  user: UserInput
-}
-
-input AccessCreateInput {
-  form: AccessCreateFormInput
-}
-
 type AccessCreateOutput {
   result: Access
-}
-
-input AccessGetConnectionFilterInput {
-  _id: String
-  _uid: String
-  created: DateTime
-  role: String
-  user: UserInput
-}
-
-input AccessGetConnectionInput {
-  filter: AccessGetConnectionFilterInput
-  pagination: PaginationInput
 }
 
 type AccessGetConnectionOutput {
@@ -54,30 +29,6 @@ type AccessGetConnectionOutputEdge {
   node: Access
 }
 
-input AccessGetFilterInput {
-  _id: String
-  _uid: String
-  created: DateTime
-  role: String
-  user: UserInput
-}
-
-input AccessGetInput {
-  filter: AccessGetFilterInput
-}
-
-input AccessGetManyFilterInput {
-  _id: String
-  _uid: String
-  created: DateTime
-  role: String
-  user: UserInput
-}
-
-input AccessGetManyInput {
-  filter: AccessGetManyFilterInput
-}
-
 type AccessGetManyOutput {
   result: [Access]
 }
@@ -86,45 +37,12 @@ type AccessGetOutput {
   result: Access
 }
 
-input AccessRemoveFilterInput {
-  _id: String
-  _uid: String
-  created: DateTime
-  role: String
-  user: UserInput
-}
-
-input AccessRemoveInput {
-  filter: AccessRemoveFilterInput
-}
-
 type AccessRemoveOutput {
   result: Access
 }
 
-input AccessUpdateFilterInput {
-  _id: String
-  _uid: String
-  created: DateTime
-  role: String
-  user: UserInput
-}
-
-input AccessUpdateInput {
-  filter: AccessUpdateFilterInput
-  update: AccessUpdateUpdateInput
-}
-
 type AccessUpdateOutput {
   result: Access
-}
-
-input AccessUpdateUpdateInput {
-  _id: String
-  _uid: String
-  created: DateTime
-  role: String
-  user: UserInput
 }
 
 type Bank {
@@ -134,20 +52,6 @@ type Bank {
   id: String
   last4: String
   type: String
-}
-
-input BankCreateFormInput {
-  _id: String
-  bank: String
-  created: DateTime
-  id: String
-  last4: String
-  type: String
-}
-
-input BankCreateInput {
-  form: BankCreateFormInput
-  root: BankCreateRootInput
 }
 
 type BankCreateOutput {
@@ -167,35 +71,6 @@ type BankCreateOutputRoot {
   last: String
   paymentMethodPrimary: String
   phone: String
-}
-
-input BankCreateRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input BankGetConnectionFilterInput {
-  _id: String
-  bank: String
-  created: DateTime
-  id: String
-  last4: String
-  type: String
-}
-
-input BankGetConnectionInput {
-  filter: BankGetConnectionFilterInput
-  pagination: PaginationInput
-  root: BankGetConnectionRootInput
 }
 
 type BankGetConnectionOutput {
@@ -227,48 +102,6 @@ type BankGetConnectionOutputRoot {
   phone: String
 }
 
-input BankGetConnectionRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input BankGetFilterInput {
-  _id: String
-  bank: String
-  created: DateTime
-  id: String
-  last4: String
-  type: String
-}
-
-input BankGetInput {
-  filter: BankGetFilterInput
-  root: BankGetRootInput
-}
-
-input BankGetManyFilterInput {
-  _id: String
-  bank: String
-  created: DateTime
-  id: String
-  last4: String
-  type: String
-}
-
-input BankGetManyInput {
-  filter: BankGetManyFilterInput
-  root: BankGetManyRootInput
-}
-
 type BankGetManyOutput {
   result: [Bank]
   root: BankGetManyOutputRoot
@@ -278,20 +111,6 @@ type BankGetManyOutputRoot {
   Bank: [Card]
   Card: [Card]
   LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input BankGetManyRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
   _id: String
   callingCode: String
   created: DateTime
@@ -321,34 +140,6 @@ type BankGetOutputRoot {
   phone: String
 }
 
-input BankGetRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input BankRemoveFilterInput {
-  _id: String
-  bank: String
-  created: DateTime
-  id: String
-  last4: String
-  type: String
-}
-
-input BankRemoveInput {
-  filter: BankRemoveFilterInput
-  root: BankRemoveRootInput
-}
-
 type BankRemoveOutput {
   result: Bank
   root: BankRemoveOutputRoot
@@ -366,35 +157,6 @@ type BankRemoveOutputRoot {
   last: String
   paymentMethodPrimary: String
   phone: String
-}
-
-input BankRemoveRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input BankUpdateFilterInput {
-  _id: String
-  bank: String
-  created: DateTime
-  id: String
-  last4: String
-  type: String
-}
-
-input BankUpdateInput {
-  filter: BankUpdateFilterInput
-  root: BankUpdateRootInput
-  update: BankUpdateUpdateInput
 }
 
 type BankUpdateOutput {
@@ -416,29 +178,6 @@ type BankUpdateOutputRoot {
   phone: String
 }
 
-input BankUpdateRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input BankUpdateUpdateInput {
-  _id: String
-  bank: String
-  created: DateTime
-  id: String
-  last4: String
-  type: String
-}
-
 type Card {
   _id: String
   brand: String
@@ -449,23 +188,6 @@ type Card {
   id: String
   last4: String
   type: String
-}
-
-input CardCreateFormInput {
-  _id: String
-  brand: String
-  created: DateTime
-  expMonth: String
-  expYear: String
-  funding: String
-  id: String
-  last4: String
-  type: String
-}
-
-input CardCreateInput {
-  form: CardCreateFormInput
-  root: CardCreateRootInput
 }
 
 type CardCreateOutput {
@@ -485,38 +207,6 @@ type CardCreateOutputRoot {
   last: String
   paymentMethodPrimary: String
   phone: String
-}
-
-input CardCreateRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input CardGetConnectionFilterInput {
-  _id: String
-  brand: String
-  created: DateTime
-  expMonth: String
-  expYear: String
-  funding: String
-  id: String
-  last4: String
-  type: String
-}
-
-input CardGetConnectionInput {
-  filter: CardGetConnectionFilterInput
-  pagination: PaginationInput
-  root: CardGetConnectionRootInput
 }
 
 type CardGetConnectionOutput {
@@ -548,54 +238,6 @@ type CardGetConnectionOutputRoot {
   phone: String
 }
 
-input CardGetConnectionRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input CardGetFilterInput {
-  _id: String
-  brand: String
-  created: DateTime
-  expMonth: String
-  expYear: String
-  funding: String
-  id: String
-  last4: String
-  type: String
-}
-
-input CardGetInput {
-  filter: CardGetFilterInput
-  root: CardGetRootInput
-}
-
-input CardGetManyFilterInput {
-  _id: String
-  brand: String
-  created: DateTime
-  expMonth: String
-  expYear: String
-  funding: String
-  id: String
-  last4: String
-  type: String
-}
-
-input CardGetManyInput {
-  filter: CardGetManyFilterInput
-  root: CardGetManyRootInput
-}
-
 type CardGetManyOutput {
   result: [Card]
   root: CardGetManyOutputRoot
@@ -605,20 +247,6 @@ type CardGetManyOutputRoot {
   Bank: [Card]
   Card: [Card]
   LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input CardGetManyRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
   _id: String
   callingCode: String
   created: DateTime
@@ -648,20 +276,6 @@ type CardGetOutputRoot {
   phone: String
 }
 
-input CardGetRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
 input CardInput {
   _id: String
   brand: String
@@ -672,23 +286,6 @@ input CardInput {
   id: String
   last4: String
   type: String
-}
-
-input CardRemoveFilterInput {
-  _id: String
-  brand: String
-  created: DateTime
-  expMonth: String
-  expYear: String
-  funding: String
-  id: String
-  last4: String
-  type: String
-}
-
-input CardRemoveInput {
-  filter: CardRemoveFilterInput
-  root: CardRemoveRootInput
 }
 
 type CardRemoveOutput {
@@ -710,38 +307,6 @@ type CardRemoveOutputRoot {
   phone: String
 }
 
-input CardRemoveRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input CardUpdateFilterInput {
-  _id: String
-  brand: String
-  created: DateTime
-  expMonth: String
-  expYear: String
-  funding: String
-  id: String
-  last4: String
-  type: String
-}
-
-input CardUpdateInput {
-  filter: CardUpdateFilterInput
-  root: CardUpdateRootInput
-  update: CardUpdateUpdateInput
-}
-
 type CardUpdateOutput {
   result: Card
   root: CardUpdateOutputRoot
@@ -761,32 +326,6 @@ type CardUpdateOutputRoot {
   phone: String
 }
 
-input CardUpdateRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input CardUpdateUpdateInput {
-  _id: String
-  brand: String
-  created: DateTime
-  expMonth: String
-  expYear: String
-  funding: String
-  id: String
-  last4: String
-  type: String
-}
-
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
@@ -797,18 +336,6 @@ type LinkedUser {
   created: DateTime
   id: String
   type: String
-}
-
-input LinkedUserCreateFormInput {
-  _id: String
-  created: DateTime
-  id: String
-  type: String
-}
-
-input LinkedUserCreateInput {
-  form: LinkedUserCreateFormInput
-  root: LinkedUserCreateRootInput
 }
 
 type LinkedUserCreateOutput {
@@ -828,33 +355,6 @@ type LinkedUserCreateOutputRoot {
   last: String
   paymentMethodPrimary: String
   phone: String
-}
-
-input LinkedUserCreateRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input LinkedUserGetConnectionFilterInput {
-  _id: String
-  created: DateTime
-  id: String
-  type: String
-}
-
-input LinkedUserGetConnectionInput {
-  filter: LinkedUserGetConnectionFilterInput
-  pagination: PaginationInput
-  root: LinkedUserGetConnectionRootInput
 }
 
 type LinkedUserGetConnectionOutput {
@@ -886,44 +386,6 @@ type LinkedUserGetConnectionOutputRoot {
   phone: String
 }
 
-input LinkedUserGetConnectionRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input LinkedUserGetFilterInput {
-  _id: String
-  created: DateTime
-  id: String
-  type: String
-}
-
-input LinkedUserGetInput {
-  filter: LinkedUserGetFilterInput
-  root: LinkedUserGetRootInput
-}
-
-input LinkedUserGetManyFilterInput {
-  _id: String
-  created: DateTime
-  id: String
-  type: String
-}
-
-input LinkedUserGetManyInput {
-  filter: LinkedUserGetManyFilterInput
-  root: LinkedUserGetManyRootInput
-}
-
 type LinkedUserGetManyOutput {
   result: [LinkedUser]
   root: LinkedUserGetManyOutputRoot
@@ -933,20 +395,6 @@ type LinkedUserGetManyOutputRoot {
   Bank: [Card]
   Card: [Card]
   LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input LinkedUserGetManyRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
   _id: String
   callingCode: String
   created: DateTime
@@ -976,37 +424,11 @@ type LinkedUserGetOutputRoot {
   phone: String
 }
 
-input LinkedUserGetRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
 input LinkedUserInput {
   _id: String
   created: DateTime
   id: String
   type: String
-}
-
-input LinkedUserRemoveFilterInput {
-  _id: String
-  created: DateTime
-  id: String
-  type: String
-}
-
-input LinkedUserRemoveInput {
-  filter: LinkedUserRemoveFilterInput
-  root: LinkedUserRemoveRootInput
 }
 
 type LinkedUserRemoveOutput {
@@ -1028,33 +450,6 @@ type LinkedUserRemoveOutputRoot {
   phone: String
 }
 
-input LinkedUserRemoveRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input LinkedUserUpdateFilterInput {
-  _id: String
-  created: DateTime
-  id: String
-  type: String
-}
-
-input LinkedUserUpdateInput {
-  filter: LinkedUserUpdateFilterInput
-  root: LinkedUserUpdateRootInput
-  update: LinkedUserUpdateUpdateInput
-}
-
 type LinkedUserUpdateOutput {
   result: LinkedUser
   root: LinkedUserUpdateOutputRoot
@@ -1074,48 +469,27 @@ type LinkedUserUpdateOutputRoot {
   phone: String
 }
 
-input LinkedUserUpdateRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input LinkedUserUpdateUpdateInput {
-  _id: String
-  created: DateTime
-  id: String
-  type: String
-}
-
 type Mutation {
-  AccessCreate(input: AccessCreateInput): AccessCreateOutput
-  AccessRemove(input: AccessRemoveInput): AccessRemoveOutput
-  AccessUpdate(input: AccessUpdateInput): AccessUpdateOutput
-  BankCreate(input: BankCreateInput): BankCreateOutput
-  BankRemove(input: BankRemoveInput): BankRemoveOutput
-  BankUpdate(input: BankUpdateInput): BankUpdateOutput
-  CardCreate(input: CardCreateInput): CardCreateOutput
-  CardRemove(input: CardRemoveInput): CardRemoveOutput
-  CardUpdate(input: CardUpdateInput): CardUpdateOutput
-  LinkedUserCreate(input: LinkedUserCreateInput): LinkedUserCreateOutput
-  LinkedUserRemove(input: LinkedUserRemoveInput): LinkedUserRemoveOutput
-  LinkedUserUpdate(input: LinkedUserUpdateInput): LinkedUserUpdateOutput
-  OtpCreate(input: OtpCreateInput): OtpCreateOutput
-  OtpRemove(input: OtpRemoveInput): OtpRemoveOutput
-  OtpUpdate(input: OtpUpdateInput): OtpUpdateOutput
+  AccessCreate: AccessCreateOutput
+  AccessRemove: AccessRemoveOutput
+  AccessUpdate: AccessUpdateOutput
+  BankCreate: BankCreateOutput
+  BankRemove: BankRemoveOutput
+  BankUpdate: BankUpdateOutput
+  CardCreate: CardCreateOutput
+  CardRemove: CardRemoveOutput
+  CardUpdate: CardUpdateOutput
+  LinkedUserCreate: LinkedUserCreateOutput
+  LinkedUserRemove: LinkedUserRemoveOutput
+  LinkedUserUpdate: LinkedUserUpdateOutput
+  OtpCreate: OtpCreateOutput
+  OtpRemove: OtpRemoveOutput
+  OtpUpdate: OtpUpdateOutput
   PaymentMethodTokenCreate(input: PaymentMethodTokenCreateInput): PaymentMethodTokenCreateOutput
-  SignInCreate(input: SignInCreateInput): SignInCreateOutput
-  UserCreate(input: UserCreateInput): UserCreateOutput
-  UserRemove(input: UserRemoveInput): UserRemoveOutput
-  UserUpdate(input: UserUpdateInput): UserUpdateOutput
+  SignInCreate: SignInCreateOutput
+  UserCreate: UserCreateOutput
+  UserRemove: UserRemoveOutput
+  UserUpdate: UserUpdateOutput
   UserenameUpdateCreate(input: UserenameUpdateCreateInput): UserenameUpdateCreateOutput
 }
 
@@ -1128,33 +502,8 @@ type Otp {
   phone: String
 }
 
-input OtpCreateFormInput {
-  callingCode: String
-  checkExists: Boolean
-  email: String
-  phone: String
-}
-
-input OtpCreateInput {
-  form: OtpCreateFormInput
-}
-
 type OtpCreateOutput {
   result: Otp
-}
-
-input OtpGetConnectionFilterInput {
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  otp: String
-  phone: String
-}
-
-input OtpGetConnectionInput {
-  filter: OtpGetConnectionFilterInput
-  pagination: PaginationInput
 }
 
 type OtpGetConnectionOutput {
@@ -1171,32 +520,6 @@ type OtpGetConnectionOutputEdge {
   node: Otp
 }
 
-input OtpGetFilterInput {
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  otp: String
-  phone: String
-}
-
-input OtpGetInput {
-  filter: OtpGetFilterInput
-}
-
-input OtpGetManyFilterInput {
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  otp: String
-  phone: String
-}
-
-input OtpGetManyInput {
-  filter: OtpGetManyFilterInput
-}
-
 type OtpGetManyOutput {
   result: [Otp]
 }
@@ -1205,48 +528,12 @@ type OtpGetOutput {
   result: Otp
 }
 
-input OtpRemoveFilterInput {
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  otp: String
-  phone: String
-}
-
-input OtpRemoveInput {
-  filter: OtpRemoveFilterInput
-}
-
 type OtpRemoveOutput {
   result: Otp
 }
 
-input OtpUpdateFilterInput {
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  otp: String
-  phone: String
-}
-
-input OtpUpdateInput {
-  filter: OtpUpdateFilterInput
-  update: OtpUpdateUpdateInput
-}
-
 type OtpUpdateOutput {
   result: Otp
-}
-
-input OtpUpdateUpdateInput {
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  otp: String
-  phone: String
 }
 
 type PageInfo {
@@ -1256,24 +543,7 @@ type PageInfo {
   startCursor: String
 }
 
-input PaginationInput {
-  after: String
-  before: String
-  first: String
-  last: String
-}
-
 union PaymentMethod = Bank | Card
-
-input PaymentMethodGetManyFilterInput {
-  _id: String
-  created: DateTime
-}
-
-input PaymentMethodGetManyInput {
-  filter: PaymentMethodGetManyFilterInput
-  root: PaymentMethodGetManyRootInput
-}
 
 type PaymentMethodGetManyOutput {
   result: [PaymentMethod]
@@ -1284,20 +554,6 @@ type PaymentMethodGetManyOutputRoot {
   Bank: [Card]
   Card: [Card]
   LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input PaymentMethodGetManyRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
   _id: String
   callingCode: String
   created: DateTime
@@ -1346,27 +602,27 @@ input PaymentMethodTokenCreateRootInput {
 }
 
 type Query {
-  AccessGet(input: AccessGetInput): AccessGetOutput
-  AccessGetConnection(input: AccessGetConnectionInput): AccessGetConnectionOutput
-  AccessGetMany(input: AccessGetManyInput): AccessGetManyOutput
-  BankGet(input: BankGetInput): BankGetOutput
-  BankGetConnection(input: BankGetConnectionInput): BankGetConnectionOutput
-  BankGetMany(input: BankGetManyInput): BankGetManyOutput
-  CardGet(input: CardGetInput): CardGetOutput
-  CardGetConnection(input: CardGetConnectionInput): CardGetConnectionOutput
-  CardGetMany(input: CardGetManyInput): CardGetManyOutput
-  LinkedUserGet(input: LinkedUserGetInput): LinkedUserGetOutput
-  LinkedUserGetConnection(input: LinkedUserGetConnectionInput): LinkedUserGetConnectionOutput
-  LinkedUserGetMany(input: LinkedUserGetManyInput): LinkedUserGetManyOutput
-  OtpGet(input: OtpGetInput): OtpGetOutput
-  OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
-  OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput
-  PaymentMethodGetMany(input: PaymentMethodGetManyInput): PaymentMethodGetManyOutput
+  AccessGet: AccessGetOutput
+  AccessGetConnection: AccessGetConnectionOutput
+  AccessGetMany: AccessGetManyOutput
+  BankGet: BankGetOutput
+  BankGetConnection: BankGetConnectionOutput
+  BankGetMany: BankGetManyOutput
+  CardGet: CardGetOutput
+  CardGetConnection: CardGetConnectionOutput
+  CardGetMany: CardGetManyOutput
+  LinkedUserGet: LinkedUserGetOutput
+  LinkedUserGetConnection: LinkedUserGetConnectionOutput
+  LinkedUserGetMany: LinkedUserGetManyOutput
+  OtpGet: OtpGetOutput
+  OtpGetConnection: OtpGetConnectionOutput
+  OtpGetMany: OtpGetManyOutput
+  PaymentMethodGetMany: PaymentMethodGetManyOutput
   SnapshotGet(input: SnapshotGetInput): SnapshotGetOutput
   SnapshotGetMany(input: SnapshotGetManyInput): SnapshotGetManyOutput
-  UserGet(input: UserGetInput): UserGetOutput
-  UserGetConnection(input: UserGetConnectionInput): UserGetConnectionOutput
-  UserGetMany(input: UserGetManyInput): UserGetManyOutput
+  UserGet: UserGetOutput
+  UserGetConnection: UserGetConnectionOutput
+  UserGetMany: UserGetManyOutput
 }
 
 type SignIn {
@@ -1375,17 +631,6 @@ type SignIn {
   isNew: Boolean
   token: String
   user: User
-}
-
-input SignInCreateFormInput {
-  callingCode: String
-  email: String
-  otp: String
-  phone: String
-}
-
-input SignInCreateInput {
-  form: SignInCreateFormInput
 }
 
 type SignInCreateOutput {
@@ -1437,45 +682,8 @@ type User {
   phone: String
 }
 
-input UserCreateFormInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input UserCreateInput {
-  form: UserCreateFormInput
-}
-
 type UserCreateOutput {
   result: User
-}
-
-input UserGetConnectionFilterInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input UserGetConnectionInput {
-  filter: UserGetConnectionFilterInput
-  pagination: PaginationInput
 }
 
 type UserGetConnectionOutput {
@@ -1492,42 +700,6 @@ type UserGetConnectionOutputEdge {
   node: User
 }
 
-input UserGetFilterInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input UserGetInput {
-  filter: UserGetFilterInput
-}
-
-input UserGetManyFilterInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input UserGetManyInput {
-  filter: UserGetManyFilterInput
-}
-
 type UserGetManyOutput {
   result: [User]
 }
@@ -1536,77 +708,12 @@ type UserGetOutput {
   result: User
 }
 
-input UserInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input UserRemoveFilterInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input UserRemoveInput {
-  filter: UserRemoveFilterInput
-}
-
 type UserRemoveOutput {
   result: User
 }
 
-input UserUpdateFilterInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input UserUpdateInput {
-  filter: UserUpdateFilterInput
-  update: UserUpdateUpdateInput
-}
-
 type UserUpdateOutput {
   result: User
-}
-
-input UserUpdateUpdateInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
 }
 
 input UserenameUpdateCreateFormInput {

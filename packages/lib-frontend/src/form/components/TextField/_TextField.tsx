@@ -13,7 +13,6 @@ import { type AnimationModel } from '#lib-frontend/animation/animation.models';
 import { AnimatableText } from '#lib-frontend/animation/components/AnimatableText/AnimatableText';
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
-import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type RSFCModel } from '#lib-frontend/core/core.models';
@@ -176,8 +175,6 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
         testID={testID}
         width={width}
         zIndex={zIndex}>
-        <Text>{testID}</Text>
-
         <TextInput
           accessibilityLabelledBy={nativeID}
           accessibilityLanguage={language}
