@@ -2,7 +2,10 @@ import { Mutation, Query } from 'type-graphql';
 
 import { createOutput } from '#lib-backend/resource/utils/createOutput/createOutput';
 import { withAccess } from '#lib-backend/resource/utils/withAccess/withAccess';
-import { type WithOutputParamsModel } from '#lib-backend/resource/utils/withOutput/withOutput.models';
+import {
+  type WithOutputModel,
+  type WithOutputParamsModel,
+} from '#lib-backend/resource/utils/withOutput/withOutput.models';
 import { ACCESS_LEVEL } from '#lib-shared/auth/resources/Access/Access.constants';
 import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
@@ -30,7 +33,7 @@ export const withOutput =
     level = ACCESS_LEVEL.PUBLIC,
     method,
     name,
-  }: WithOutputParamsModel<TMethod, TType, TRoot>): MethodDecorator =>
+  }: WithOutputParamsModel<TMethod, TType, TRoot>): WithOutputModel =>
   (target, propertyKey, descriptor) => {
     const nameF = `${name}${method}`;
     const OutputF = createOutput({ Resource, RootResource, method, name: nameF });

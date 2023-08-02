@@ -1,3 +1,5 @@
+import isArray from 'lodash/isArray';
+
 import {
   type WithConditionModel,
   type WithConditionParamsModel,
@@ -5,5 +7,13 @@ import {
 
 export const withCondition =
   (...[condition, ifTrue]: WithConditionParamsModel): WithConditionModel =>
-  (...params: Array<unknown>) =>
-    condition ? (ifTrue() as (...args: Array<unknown>) => void)(...params) : undefined;
+  (...params: Array<unknown>) => {
+    if (condition) {
+      const decorators = ifTrue();
+      return isArray(decorators)
+        ? decorators.forEach((decorator) =>
+            (decorator as (...args: Array<unknown>) => void)(...params),
+          )
+        : (decorators as (...args: Array<unknown>) => void)(...params);
+    }
+  };

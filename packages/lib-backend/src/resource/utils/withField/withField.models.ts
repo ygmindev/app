@@ -11,3 +11,5 @@ export type WithFieldParamsModel<TType> = {
   isUnique?: boolean;
   type?: FieldTypeModel;
 };
+
+export type WithFieldModel = PropertyDecorator;

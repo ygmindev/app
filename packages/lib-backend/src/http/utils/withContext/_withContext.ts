@@ -1,4 +1,6 @@
 import { Ctx } from 'type-graphql';
 
-export const _withContext = (): ParameterDecorator => (target, propertyKey, parameterIndex) =>
-  Ctx()(target, propertyKey, parameterIndex);
+import { type _WithContextModel } from '#lib-backend/http/utils/withContext/_withContext.models';
+
+export const _withContext = (): _WithContextModel => (target, propertyKey, parameterIndex) =>
+  (Ctx() as ParameterDecorator)(target, propertyKey, parameterIndex);

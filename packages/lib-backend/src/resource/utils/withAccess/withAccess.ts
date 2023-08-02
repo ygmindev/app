@@ -1,6 +1,9 @@
 import { Authorized } from 'type-graphql';
 
-import { type WithAccessParamsModel } from '#lib-backend/resource/utils/withAccess/withAccess.models';
+import {
+  type WithAccessModel,
+  type WithAccessParamsModel,
+} from '#lib-backend/resource/utils/withAccess/withAccess.models';
 import { ACCESS_LEVEL, ACCESS_ROLE } from '#lib-shared/auth/resources/Access/Access.constants';
 import {
   type AccessLevelModel,
@@ -23,5 +26,5 @@ export const getAccessRole = (level: AccessLevelModel): Array<AccessRoleModel> =
 
 export const withAccess = ({
   level = ACCESS_LEVEL.PUBLIC,
-}: WithAccessParamsModel): PropertyDecorator & MethodDecorator =>
+}: WithAccessParamsModel): WithAccessModel =>
   withCondition(level !== ACCESS_LEVEL.PUBLIC, () => Authorized(getAccessRole(level)));

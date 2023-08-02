@@ -7,3 +7,5 @@ export type WithInputParamsModel<
   TForm = undefined,
   TRoot = undefined,
 > = CreateInputParamsModel<TMethod, TType, TForm, TRoot>;
+
+export type WithInputModel = ParameterDecorator;

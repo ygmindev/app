@@ -6,7 +6,6 @@ import { withResolver } from '#lib-backend/http/utils/withResolver/withResolver'
 import { createEntityResourceResolver } from '#lib-backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
 import { withInput } from '#lib-backend/resource/utils/withInput/withInput';
 import { withOutput } from '#lib-backend/resource/utils/withOutput/withOutput';
-import { ACCESS_LEVEL } from '#lib-shared/auth/resources/Access/Access.constants';
 import {
   SIGN_IN_RESOURCE_NAME,
   USERNAME_UPDATE,
@@ -37,7 +36,7 @@ export class SignInResolver
 
   @withOutput({
     Resource: SignIn,
-    level: ACCESS_LEVEL.PROTECTED,
+    // level: ACCESS_LEVEL.PROTECTED,
     method: RESOURCE_METHOD_TYPE.CREATE,
     name: USERNAME_UPDATE,
   })

@@ -1,5 +1,3 @@
-import { toString } from 'lodash';
-
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { withResolver } from '#lib-backend/http/utils/withResolver/withResolver';
 import { createEntityResourceResolver } from '#lib-backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
@@ -17,11 +15,7 @@ export class UserResolver
     Resource: User,
     ResourceService: UserService,
     authorizer: {
-      // Update: ({ context, input }) => isEqual(context?.user?._id, input.filter._id),
-      Update: ({ context, input }) => {
-        console.warn(`@@@ ${context?.user?._id} : ${toString(input.filter._id)}`);
-        return isEqual(context?.user?._id, input.filter._id);
-      },
+      Update: ({ context, input }) => isEqual(context?.user?._id, input.filter._id),
     },
     name: USER_RESOURCE_NAME,
   })

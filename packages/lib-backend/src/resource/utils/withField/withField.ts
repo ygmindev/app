@@ -2,7 +2,10 @@ import { ArrayType, Embedded, Index, PrimaryKey, Property } from '@mikro-orm/cor
 import { Field } from 'type-graphql';
 import { type ReturnTypeFuncValue } from 'type-graphql/dist/decorators/types';
 
-import { type WithFieldParamsModel } from '#lib-backend/resource/utils/withField/withField.models';
+import {
+  type WithFieldModel,
+  type WithFieldParamsModel,
+} from '#lib-backend/resource/utils/withField/withField.models';
 import { FIELD_TYPE } from '#lib-shared/form/form.constants';
 
 const getField = <TType extends unknown>({
@@ -77,7 +80,7 @@ export const withField =
     isSchema = true,
     isUnique,
     type,
-  }: WithFieldParamsModel<TType> = {}): PropertyDecorator =>
+  }: WithFieldParamsModel<TType> = {}): WithFieldModel =>
   (target, propertyKey) => {
     (expire || isUnique) &&
       (Index({ options: expire ? { expireAfterSeconds: expire } : {} }) as PropertyDecorator)(

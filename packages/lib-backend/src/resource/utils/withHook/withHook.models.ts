@@ -5,3 +5,5 @@ export type HookTypeModel = `${HOOK_TYPE}`;
 export type WithHookParamsModel = {
   type: HookTypeModel;
 };
+
+export type WithHookModel = PropertyDecorator;

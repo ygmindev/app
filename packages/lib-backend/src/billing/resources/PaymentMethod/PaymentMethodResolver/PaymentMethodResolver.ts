@@ -6,7 +6,7 @@ import { withContainer } from '#lib-backend/core/utils/withContainer/withContain
 import { withContext } from '#lib-backend/http/utils/withContext/withContext';
 import { withResolver } from '#lib-backend/http/utils/withResolver/withResolver';
 import { createEmbeddedResourceResolver } from '#lib-backend/resource/utils/createEmbeddedResourceResolver/createEmbeddedResourceResolver';
-import { authorize } from '#lib-backend/resource/utils/createResourceResolver/createResourceResolver';
+import { withAuthorizer } from '#lib-backend/resource/utils/withAuthorizer/withAuthorizer';
 import { withInput } from '#lib-backend/resource/utils/withInput/withInput';
 import { withOutput } from '#lib-backend/resource/utils/withOutput/withOutput';
 import { User } from '#lib-backend/user/resources/User/User';
@@ -32,6 +32,7 @@ export class PaymentMethodResolver
   })
   implements PaymentMethodServiceModel
 {
+  @withAuthorizer({ authorizer: selfAuthorizer })
   @withOutput({
     Resource: String,
     RootResource: User,
@@ -47,9 +48,8 @@ export class PaymentMethodResolver
     })
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, string, undefined, UserModel>,
     @withContext()
-    context?: ContextModel,
+    _context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, string, UserModel>> {
-    authorize({ authorizer: selfAuthorizer, context, input });
     return Container.get(PaymentMethodService).createToken(input);
   }
 }

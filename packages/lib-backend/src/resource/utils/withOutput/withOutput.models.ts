@@ -7,3 +7,5 @@ export type WithOutputParamsModel<
   TType,
   TRoot = undefined,
 > = WithAccessParamsModel & CreateOutputParamsModel<TMethod, TType, TRoot>;
+
+export type WithOutputModel = MethodDecorator;
