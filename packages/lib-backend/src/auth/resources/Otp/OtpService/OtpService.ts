@@ -76,7 +76,7 @@ export class OtpService
     return super.create({ form });
   }
 
-  async verify(data: EntityResourceDataModel<OtpModel>): Promise<boolean> {
+  async verify(data: Omit<EntityResourceDataModel<OtpModel>, '_uid'>): Promise<OtpModel> {
     const { result } = await this.get({
       filter: data,
       options: { project: { otp: true } },
@@ -85,6 +85,6 @@ export class OtpService
       throw new UnauthorizedError();
     }
     await super.remove({ filter: data });
-    return true;
+    return result;
   }
 }

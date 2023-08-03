@@ -29,7 +29,5 @@ describe('sign in', () => {
     await screenF.press('otp-submit');
     await sleepForTransition();
     await screenF.snapshot();
-
-    expect(1).toStrictEqual(1);
   });
 });

@@ -11,7 +11,7 @@ export type SignInModel = {
   user?: EntityResourcePartialModel<UserModel>;
 };
 
-export type SignInFormModel = EntityResourceDataModel<OtpModel>;
+export type SignInFormModel = EntityResourceDataModel<Omit<OtpModel, '_uid'>>;
 
 export type SignInTokenModel = {
   _id: string;

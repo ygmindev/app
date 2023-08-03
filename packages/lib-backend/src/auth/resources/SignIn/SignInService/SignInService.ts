@@ -5,6 +5,7 @@ import { SIGN_IN_TOKEN_CLAIM_FIELDS } from '#lib-backend/auth/resources/SignIn/S
 import { JwtService } from '#lib-backend/auth/utils/JwtService/JwtService';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { UserService } from '#lib-backend/user/resources/User/UserService/UserService';
+import { UnauthorizedError } from '#lib-shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import { SIGN_IN_RESOURCE_NAME } from '#lib-shared/auth/resources/SignIn/SignIn.constants';
 import {
   type SignInFormModel,
@@ -65,14 +66,17 @@ export class SignInService implements SignInServiceModel {
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
     if (form.otp) {
       const formF = cleanObject(form);
-      await this._otpService.verify(formF);
-      const id = context?.user?._id;
-      const { result: user } = await this._userService.update({
-        filter: { _id: id },
-        update: formF,
-      });
-      const signIn = await createSignIn(user);
-      return { result: signIn };
+      const otp = await this._otpService.verify(formF);
+      if (otp._uid === context?.user?._id) {
+        const id = context?.user?._id;
+        const { result: user } = await this._userService.update({
+          filter: { _id: id },
+          update: formF,
+        });
+        const signIn = await createSignIn(user);
+        return { result: signIn };
+      }
+      throw new UnauthorizedError();
     }
     throw new HttpError(HTTP_STATUS_CODE.BAD_REQUEST, 'otp');
   }

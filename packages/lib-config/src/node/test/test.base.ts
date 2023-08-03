@@ -23,7 +23,7 @@ const { _config, config } = defineConfig({
 
       fileExtensions: ['gif', 'jpeg', 'jpg', 'otf', 'png', 'svg', 'ttf', 'woff', 'woff2'],
 
-      isBrowser: true,
+      isBrowser: false,
 
       mockDir: fromConfig('node/test/__mocks__'),
 

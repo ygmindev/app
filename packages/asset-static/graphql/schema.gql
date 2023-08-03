@@ -1121,6 +1121,7 @@ type Mutation {
 
 type Otp {
   _id: String
+  _uid: String
   callingCode: String
   created: DateTime
   email: String
@@ -1145,6 +1146,7 @@ type OtpCreateOutput {
 
 input OtpGetConnectionFilterInput {
   _id: String
+  _uid: String
   callingCode: String
   created: DateTime
   email: String
@@ -1173,6 +1175,7 @@ type OtpGetConnectionOutputEdge {
 
 input OtpGetFilterInput {
   _id: String
+  _uid: String
   callingCode: String
   created: DateTime
   email: String
@@ -1186,6 +1189,7 @@ input OtpGetInput {
 
 input OtpGetManyFilterInput {
   _id: String
+  _uid: String
   callingCode: String
   created: DateTime
   email: String
@@ -1207,6 +1211,7 @@ type OtpGetOutput {
 
 input OtpRemoveFilterInput {
   _id: String
+  _uid: String
   callingCode: String
   created: DateTime
   email: String
@@ -1224,6 +1229,7 @@ type OtpRemoveOutput {
 
 input OtpUpdateFilterInput {
   _id: String
+  _uid: String
   callingCode: String
   created: DateTime
   email: String
@@ -1242,6 +1248,7 @@ type OtpUpdateOutput {
 
 input OtpUpdateUpdateInput {
   _id: String
+  _uid: String
   callingCode: String
   created: DateTime
   email: String

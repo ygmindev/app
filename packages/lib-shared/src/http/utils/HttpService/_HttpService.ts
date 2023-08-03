@@ -67,7 +67,7 @@ export class _HttpService implements _HttpServiceModel {
         ...request,
         data: params,
         method,
-        url: path || '',
+        url: path ?? '',
       } as AxiosRequestConfig);
       return (response && (response.data as TResult)) ?? null;
     } catch (e) {

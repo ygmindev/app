@@ -1,6 +1,7 @@
 import { type EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export type OtpModel = {
+  _uid: string;
   callingCode?: string;
   created: Date;
   email?: string;

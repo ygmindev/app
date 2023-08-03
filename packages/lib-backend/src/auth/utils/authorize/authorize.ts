@@ -5,15 +5,17 @@ import {
 } from '#lib-backend/auth/utils/authorize/authorize.models';
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { ACCESS_ROLE } from '#lib-shared/auth/resources/Access/Access.constants';
-import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 
 export const authorize = async ({
   context,
   roles,
 }: AuthorizeParamsModel): Promise<AuthorizeModel> => {
   if (roles) {
+    if (roles.includes(ACCESS_ROLE.ANY)) {
+      return true;
+    }
     if (context.user) {
-      if (isEqual(roles, [ACCESS_ROLE.ANY, ACCESS_ROLE.USER])) {
+      if (roles.includes(ACCESS_ROLE.USER)) {
         return true;
       }
       const { result } = await Container.get(AccessService).get({
@@ -21,7 +23,7 @@ export const authorize = async ({
       });
       return result ? roles.includes(result.role) : false;
     }
-    return roles.includes(ACCESS_ROLE.ANY);
+    return false;
   }
   return false;
 };
