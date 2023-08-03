@@ -8,6 +8,7 @@ import { config as webConfig } from '#lib-config/platform/web/web';
 import { PLATFORM } from '#lib-platform/core/core.constants';
 import { type PartialModel } from '#lib-shared/core/core.models';
 import { merge } from '#lib-shared/core/utils/merge/merge';
+import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 import { type TaskParamsModel } from '#tool-task/core/core.models';
 import clean from '#tool-task/core/templates/clean/clean';
 import { PARALLEL_CONDITION } from '#tool-task/core/utils/parallel/parallel.constants';
@@ -23,6 +24,7 @@ import {
 export const nodeTasks = <TType extends Array<TaskParamsModel<unknown>>>({
   additionalTasks,
   eteTasks,
+  testParams,
 }: NodeTasksParamsModel<TType> = {}): NodeTasksMdoel => {
   const { eteExtensions, outputPath, specExtensions } = testConfig();
   const { publicPath } = webConfig();
@@ -33,6 +35,7 @@ export const nodeTasks = <TType extends Array<TaskParamsModel<unknown>>>({
     const testSpec: TaskParamsModel<TestParamsModel> = merge([
       { overrides: { testExtensions: specExtensions } },
       params,
+      testParams,
       test,
     ]);
     const testBase: TaskParamsModel<TestParamsModel> = merge([
@@ -61,10 +64,12 @@ export const nodeTasks = <TType extends Array<TaskParamsModel<unknown>>>({
               condition: PARALLEL_CONDITION.FIRST,
               silent: eteTasks ? range(1, eteTasks.length + 1) : undefined,
             },
+            { environment: ENVIRONMENT.TEST },
           ],
         ],
         variables: () => ({ ENV_PLATFORM: PLATFORM.BASE }),
       },
+      testParams,
       params,
     ]);
     return [testSpec, testBase, testEte];

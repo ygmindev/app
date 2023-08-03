@@ -9,7 +9,11 @@ export type TaskStatusModel = `${TASK_STATUS}`;
 export type TaskModel<TType> =
   | ((context: TaskContextModel<TType>) => Promise<void> | void | NilModel)
   | TaskCommandModel<TType>
-  | [tasks: Array<TaskCommandModel<TType>>, options?: ParallelOptionsModel];
+  | [
+      tasks: Array<TaskCommandModel<TType>>,
+      options?: ParallelOptionsModel,
+      environment?: EnvironmentOverrideParamsModel,
+    ];
 
 export type TaskCommandModel<TType> =
   | ((context: TaskContextModel<TType>) => string | NilModel)

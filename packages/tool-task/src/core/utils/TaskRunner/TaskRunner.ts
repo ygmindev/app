@@ -57,7 +57,11 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
   ): Promise<void> => {
     if (value) {
       if (isArray(value)) {
-        await parallel(filterNil(value[0].map((v) => (isFunction(v) ? v(context) : v))), value[1]);
+        await parallel(
+          filterNil(value[0].map((v) => (isFunction(v) ? v(context) : v))),
+          value[1],
+          value[2],
+        );
       } else if (isFunction(value)) {
         let valueF = value(context);
         valueF = valueF && (isString(valueF) ? this.resolveTask(valueF, context) : valueF);

@@ -5,11 +5,11 @@ import { SignInPage } from '#lib-frontend/auth/pages/SignInPage/SignInPage';
 import { BILLING, PAYMENT, PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants';
 import { PaymentMethodFormPage } from '#lib-frontend/billing/pages/PaymentMethodFormPage/PaymentMethodFormPage';
 import { PaymentPage } from '#lib-frontend/billing/pages/PaymentPage/PaymentPage';
-import { Text } from '#lib-frontend/core/components/Text/Text';
 import { REDIRECT } from '#lib-frontend/core/core.constants';
 import { DEV } from '#lib-frontend/dev/dev.constants';
 import { DevPage } from '#lib-frontend/dev/pages/DevPage/DevPage';
 import { FORM } from '#lib-frontend/form/form.constants';
+import { PingPage } from '#lib-frontend/http/pages/PingPage/PingPage';
 import { TIMEZONE } from '#lib-frontend/locale/locale.constants';
 import { TimezoneFormPage } from '#lib-frontend/locale/pages/TimezoneFormPage/TimezoneFormPage';
 import { NotFoundPage } from '#lib-frontend/route/pages/NotFoundPage/NotFoundPage';
@@ -41,7 +41,7 @@ import { ACCOUNT, USER } from '#lib-shared/user/user.constants';
 export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesModel =>
   [
     {
-      element: <Text>ping</Text>,
+      element: <PingPage />,
       pathname: PING,
     },
 

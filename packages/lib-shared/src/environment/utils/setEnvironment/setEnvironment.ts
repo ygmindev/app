@@ -24,7 +24,6 @@ export const setEnvironment = ({
     fromConfig(`core/environment/.env.${environment}`),
     fromWorking('.env'),
   ];
-
   const envs = paths.reduce((result, path) => {
     if (existsSync(path)) {
       const { error, parsed } = config({ override: true, path });

@@ -4,7 +4,9 @@ import { launch } from 'puppeteer';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '#lib-backend/file/utils/joinPaths/joinPaths';
 import { sleepForEffect } from '#lib-frontend/animation/utils/sleepForEffect/sleepForEffect';
+import { APP_URI } from '#lib-frontend/http/http.constants';
 import { slug } from '#lib-frontend/route/utils/slug/slug';
+import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
 import {
   type _ScreenModel,
   type _ScreenParamsModel,
@@ -35,7 +37,7 @@ export const _screen = async ({
     close: async () => browser.close(),
 
     goto: async (route) => {
-      await page.goto(route, { timeout, waitUntil: 'networkidle0' });
+      await page.goto(`${APP_URI}${trimPathname(route)}`, { timeout, waitUntil: 'networkidle0' });
     },
 
     press: async (testID) => {
@@ -44,7 +46,7 @@ export const _screen = async ({
       await page.$eval(selector, (element) => (element as HTMLButtonElement).click());
     },
 
-    snapshot: async ({ match = true } = {}) => {
+    snapshot: async ({ match = false } = {}) => {
       await sleepForEffect();
       const img = await page.screenshot();
       match &&
