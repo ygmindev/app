@@ -59,6 +59,7 @@ export type EnvironmentConfigModel = {
   SERVER_TWILIO_TOKEN: string;
   STATIC_HOST: string;
   STATIC_PORT: number;
+  TEST_IS_ETE?: BooleanStringModel;
   TEST_MATCH?: string;
   __DEV__: BooleanStringModel;
 };

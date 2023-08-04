@@ -6,6 +6,7 @@ import { config } from '#lib-config/core/file/file';
 import { config as testConfig } from '#lib-config/node/test/test.base';
 import { config as webConfig } from '#lib-config/platform/web/web';
 import { PLATFORM } from '#lib-platform/core/core.constants';
+import { BOOLEAN_STRING } from '#lib-shared/core/core.constants';
 import { type PartialModel } from '#lib-shared/core/core.models';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
@@ -26,29 +27,23 @@ export const nodeTasks = <TType extends Array<TaskParamsModel<unknown>>>({
   eteTasks,
   testParams,
 }: NodeTasksParamsModel<TType> = {}): NodeTasksMdoel => {
-  const { eteExtensions, outputPath, specExtensions } = testConfig();
+  const { outputPath } = testConfig();
   const { publicPath } = webConfig();
 
   const getTestTasks = (
     params?: PartialModel<TaskParamsModel<TestParamsModel>>,
   ): Array<TaskParamsModel<TestParamsModel>> => {
-    const testSpec: TaskParamsModel<TestParamsModel> = merge([
-      { overrides: { testExtensions: specExtensions } },
-      params,
-      testParams,
-      test,
-    ]);
+    const testUnit: TaskParamsModel<TestParamsModel> = merge([params, testParams, test]);
     const testBase: TaskParamsModel<TestParamsModel> = merge([
       {
-        name: `${testSpec.name}-base`,
-        overrides: { testExtensions: eteExtensions },
-        variables: () => ({ ENV_PLATFORM: PLATFORM.BASE }),
+        name: `${testUnit.name}-base`,
+        variables: () => ({ ENV_PLATFORM: PLATFORM.BASE, TEST_IS_ETE: BOOLEAN_STRING.TRUE }),
       },
-      testSpec,
+      testUnit,
     ]);
     const testEte: TaskParamsModel<TestParamsModel> = merge([
       {
-        name: `${testSpec.name}-ete`,
+        name: `${testUnit.name}-ete`,
         onFinish: [
           async ({ root }) =>
             copy({
@@ -67,12 +62,12 @@ export const nodeTasks = <TType extends Array<TaskParamsModel<unknown>>>({
             { environment: ENVIRONMENT.TEST },
           ],
         ],
-        variables: () => ({ ENV_PLATFORM: PLATFORM.BASE }),
+        variables: () => ({ ENV_PLATFORM: PLATFORM.BASE, TEST_IS_ETE: BOOLEAN_STRING.TRUE }),
       },
       testParams,
       params,
     ]);
-    return [testSpec, testBase, testEte];
+    return [testUnit, testBase, testEte];
   };
 
   return [

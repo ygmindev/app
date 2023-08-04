@@ -1,6 +1,4 @@
-import { type TestConfigModel } from '#lib-config/node/test/test.models';
-
-export type TestParamsModel = Pick<TestConfigModel, 'testExtensions'> & {
+export type TestParamsModel = {
   configFilePath?: string;
   isPrompt?: boolean;
   isWatch?: boolean;

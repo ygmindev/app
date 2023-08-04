@@ -44,8 +44,6 @@ export type TestConfigModel = {
 
   specExtensions: Array<string>;
 
-  testExtensions?: Array<string>;
-
   timeout: number;
 };
 

@@ -24,10 +24,10 @@ export const _test = ({
   outputPath,
   root,
   specExtensions,
-  testExtensions,
   timeout,
 }: TestConfigModel): _TestConfigModel => {
   const bundleConfigF = bundleConfig();
+  const testExtensions = process.env.TEST_IS_ETE ? eteExtensions : specExtensions;
   return {
     cacheDirectory: fromWorking(cachePath),
 
@@ -77,21 +77,20 @@ export const _test = ({
 
     testEnvironment: process.env.ENV_PLATFORM === PLATFORM.WEB ? 'jsdom' : 'node',
 
-    testMatch: reduce(
-      permuteString(
-        testExtensions ?? [...specExtensions, ...eteExtensions],
-        bundleConfigF.extensions,
-      ),
-      (result, ext) => {
-        const extF = trim(ext, '.');
-        return [
-          ...result,
-          joinPaths([`<rootDir>/src/**/${match || '*'}`], { extension: extF }),
-          joinPaths([`<rootDir>/src/**/_${match || '*'}`], { extension: extF }),
-        ];
-      },
-      [] as Array<string>,
-    ),
+    testMatch: testExtensions
+      ? reduce(
+          permuteString(testExtensions, bundleConfigF.extensions),
+          (result, ext) => {
+            const extF = trim(ext, '.');
+            return [
+              ...result,
+              joinPaths([`<rootDir>/src/**/${match || '*'}`], { extension: extF }),
+              joinPaths([`<rootDir>/src/**/_${match || '*'}`], { extension: extF }),
+            ];
+          },
+          [] as Array<string>,
+        )
+      : [],
 
     testTimeout: timeout,
 
