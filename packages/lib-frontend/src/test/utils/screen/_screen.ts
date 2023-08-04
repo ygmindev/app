@@ -37,6 +37,7 @@ export const _screen = async ({
 
     goto: async (route) => {
       await page.goto(route, { timeout, waitUntil: 'networkidle0' });
+      await sleepForTransition();
     },
 
     press: async (testID) => {
@@ -45,7 +46,7 @@ export const _screen = async ({
       await page.$eval(selector, (element) => (element as HTMLButtonElement).click());
     },
 
-    snapshot: async ({ match = false } = {}) => {
+    snapshot: async ({ match = true } = {}) => {
       await sleepForEffect();
       const img = await page.screenshot();
       match &&
@@ -65,7 +66,7 @@ export const _screen = async ({
       await sleepForEffect();
       await input.focus();
       await sleepForEffect();
-      await page.keyboard.type(value);
+      value && (await page.keyboard.type(value));
     },
 
     waitForNavigation: async () => {

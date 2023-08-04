@@ -14,7 +14,7 @@ export type _ScreenModel = {
 
   snapshot(params?: { match?: boolean }): Promise<void>;
 
-  type(testID: string, value: string): Promise<void>;
+  type(testID: string, value?: string): Promise<void>;
 
   waitForNavigation(): Promise<void>;
 };
