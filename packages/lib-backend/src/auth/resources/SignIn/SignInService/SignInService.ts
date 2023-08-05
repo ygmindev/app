@@ -22,20 +22,22 @@ import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
-const createSignIn = async (user: UserModel | null | undefined): Promise<SignInModel> => {
-  if (user) {
-    const claims = pick(user, SIGN_IN_TOKEN_CLAIM_FIELDS);
-    const token = await JwtService.createToken(user._id, claims);
-    return { token, user };
-  }
-  return {};
-};
-
 @withContainer({ name: `${SIGN_IN_RESOURCE_NAME}Service` })
 export class SignInService implements SignInServiceModel {
   @withInject(UserService) protected _userService!: UserService;
 
   @withInject(OtpService) protected _otpService!: OtpService;
+
+  @withInject(JwtService) protected _jwtService!: JwtService;
+
+  createSignIn = async (user: UserModel | null | undefined): Promise<SignInModel> => {
+    if (user) {
+      const claims = pick(user, SIGN_IN_TOKEN_CLAIM_FIELDS);
+      const token = await this._jwtService.createToken(user._id, claims);
+      return { token, user };
+    }
+    return {};
+  };
 
   async create({
     form,
@@ -54,7 +56,7 @@ export class SignInService implements SignInServiceModel {
         user = created;
         isNew = true;
       }
-      const signIn = await createSignIn(user);
+      const signIn = await this.createSignIn(user);
       return { result: { ...signIn, isNew } };
     }
     throw new HttpError(HTTP_STATUS_CODE.BAD_REQUEST, 'otp');
@@ -73,7 +75,7 @@ export class SignInService implements SignInServiceModel {
           filter: { _id: id },
           update: formF,
         });
-        const signIn = await createSignIn(user);
+        const signIn = await this.createSignIn(user);
         return { result: signIn };
       }
       throw new UnauthorizedError();

@@ -1,18 +1,21 @@
-import { type PathUpdateParamsModel } from '#lib-frontend/route/hooks/useRouter/useRouter.models';
-import { type LocationModel, type LocationParamsModel } from '#lib-frontend/route/route.models';
+import {
+  type LocationModel,
+  type LocationParamsModel,
+  type RouteUpdateModel,
+} from '#lib-frontend/route/route.models';
 
-export type _UseRouterModel<TParams extends LocationParamsModel = LocationParamsModel> = {
+export type _UseRouterModel<TType extends LocationParamsModel = LocationParamsModel> = {
   back(): Promise<void>;
 
   isActive(params: { from?: string; isExact?: boolean; pathname?: string }): boolean;
 
-  location: LocationModel<TParams>;
+  location: LocationModel<TType>;
 
-  push<TNextParams extends LocationParamsModel = LocationParamsModel>(
-    params: PathUpdateParamsModel<TNextParams>,
+  push<TNextType extends LocationParamsModel = LocationParamsModel>(
+    params: RouteUpdateModel<TNextType>,
   ): Promise<void>;
 
-  replace<TNextParams extends LocationParamsModel = LocationParamsModel>(
-    params: PathUpdateParamsModel<TNextParams>,
+  replace<TNextType extends LocationParamsModel = LocationParamsModel>(
+    params: RouteUpdateModel<TNextType>,
   ): Promise<void>;
 };

@@ -20,7 +20,7 @@ export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
           // const { result } = await get({ filter: { _id: signInToken._id } });
           // result && actions?.user.currentUserSet(result);
         } else {
-          user && actions?.user.currentUserSet(null);
+          actions?.user.currentUserSet(null);
         }
       }
     });

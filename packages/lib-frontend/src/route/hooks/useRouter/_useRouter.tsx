@@ -1,17 +1,16 @@
 import { matchPath, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { type _UseRouterModel } from '#lib-frontend/route/hooks/useRouter/_useRouter.models';
-import { type PathUpdateParamsModel } from '#lib-frontend/route/hooks/useRouter/useRouter.models';
-import { type LocationParamsModel } from '#lib-frontend/route/route.models';
+import { type LocationParamsModel, type RouteUpdateModel } from '#lib-frontend/route/route.models';
 
 export const _useRouter = <
-  TParams extends LocationParamsModel = LocationParamsModel,
->(): _UseRouterModel<TParams> => {
+  TType extends LocationParamsModel = LocationParamsModel,
+>(): _UseRouterModel<TType> => {
   const navigate = useNavigate();
   const location = useLocation();
   const params = useParams();
 
-  const paramsF = { ...location.state, ...params } as TParams;
+  const paramsF = { ...location.state, ...params } as TType;
   delete (paramsF as Record<string, string>)['*'];
 
   return {
@@ -33,14 +32,14 @@ export const _useRouter = <
       pathname: location.pathname,
     },
 
-    push: async <TNextParams extends LocationParamsModel = LocationParamsModel>({
+    push: async <TNextType extends LocationParamsModel = LocationParamsModel>({
       params,
       pathname,
-    }: PathUpdateParamsModel<TNextParams>) => navigate(pathname, { state: params }),
+    }: RouteUpdateModel<TNextType>) => navigate(pathname, { state: params }),
 
-    replace: async <TNextParams extends LocationParamsModel = LocationParamsModel>({
+    replace: async <TNextType extends LocationParamsModel = LocationParamsModel>({
       params,
       pathname,
-    }: PathUpdateParamsModel<TNextParams>) => navigate(pathname, { replace: true, state: params }),
+    }: RouteUpdateModel<TNextType>) => navigate(pathname, { replace: true, state: params }),
   };
 };

@@ -9,6 +9,7 @@ import { plugin as i18nextMiddleware } from 'i18next-http-middleware';
 import toNumber from 'lodash/toNumber';
 import { createServer } from 'vite';
 
+import { getUserFromHeader } from '#lib-backend/auth/utils/getUserFromHeader/getUserFromHeader';
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
 import { _config } from '#lib-config/locale/internationalize/internationalize.server';
 import { config as webConfig } from '#lib-config/platform/web/web';
@@ -22,6 +23,7 @@ import { LOCALE } from '#lib-shared/locale/locale.constants';
 import { info } from '#lib-shared/logging/utils/logger/logger';
 import { ROUTE } from '#lib-shared/route/route.constants';
 import { STATE } from '#lib-shared/state/state.constants';
+import { USER } from '#lib-shared/user/user.constants';
 
 export const _server = async ({
   config,
@@ -49,7 +51,9 @@ export const _server = async ({
   app.get('*', async (req, res) => {
     info(req.method, req.url);
 
-    const { cookies, i18n, language, url } = req;
+    const { cookies, headers, i18n, language, url } = req;
+
+    const user = await getUserFromHeader(headers.authorization);
 
     const { error, redirect, response } = await render({
       context: {
@@ -65,6 +69,7 @@ export const _server = async ({
               options?: CookieOptionModel,
             ) => void res.setCookie(key, value, { domain: options?.domain, sameSite: 'strict' }),
           },
+          initialState: { [USER]: { currentUser: user } },
         },
       },
     });

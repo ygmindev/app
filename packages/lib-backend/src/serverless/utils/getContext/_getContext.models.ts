@@ -4,3 +4,5 @@ export type _GetContextParamsModel = {
   context: Context;
   event: APIGatewayProxyEventV2;
 };
+
+export type _GetContextModel = Context;

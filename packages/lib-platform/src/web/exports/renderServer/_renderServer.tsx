@@ -38,6 +38,8 @@ export const _renderServer =
       },
       context,
     ]);
+    console.warn('@@@CONTEXT');
+    console.warn(contextF);
     const { element, getStyleSheet } = render({
       context: contextF,
       element: <Page {...pageProps} />,

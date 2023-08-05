@@ -8,20 +8,22 @@ import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { type LocationParamsModel } from '#lib-frontend/route/route.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 
-export const RouteLink = <TParams extends LocationParamsModel = LocationParamsModel>({
+export const RouteLink = <TType extends LocationParamsModel = LocationParamsModel>({
   children,
   pathname,
   testID,
   ...props
-}: SFCPropsModel<RouteLinkPropsModel<TParams>>): ReactElement<
-  SFCModel<RouteLinkPropsModel<TParams>>
+}: SFCPropsModel<RouteLinkPropsModel<TType>>): ReactElement<
+  SFCModel<RouteLinkPropsModel<TType>>
 > => {
   const { styles } = useStyles({ props });
   const { t } = useTranslation();
   const { push } = useRouter();
   return (
     <Link
-      onPress={async () => push({ pathname })}
+      onPress={() => {
+        void push({ pathname });
+      }}
       style={styles}
       testID={testID}>
       {t(children)}

@@ -14,7 +14,7 @@ describe('usernameUpdate', () => {
   });
 
   test('works', async () => {
-    await signIn({ isSnapshot: true, screen: screenF });
+    await signIn({ screen: screenF });
     await screenF.goto(`/${FORM}/${ACCOUNT}/${PERSONAL}/${EMAIL}`);
     await sleep(5000);
     await screenF.snapshot();
