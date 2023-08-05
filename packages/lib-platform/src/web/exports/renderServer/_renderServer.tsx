@@ -38,8 +38,6 @@ export const _renderServer =
       },
       context,
     ]);
-    console.warn('@@@CONTEXT');
-    console.warn(contextF);
     const { element, getStyleSheet } = render({
       context: contextF,
       element: <Page {...pageProps} />,
@@ -81,7 +79,7 @@ export const _renderServer =
         return {
           context: pick(pageContext, ssrContextKeys),
           enableEagerStreaming: true,
-          redirectTo: pageContext.route?.redirect,
+          redirectTo: pageContext.route?.redirectTo,
         };
       },
     };

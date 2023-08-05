@@ -55,7 +55,7 @@ export const _server = async ({
 
     const user = await getUserFromHeader(headers.authorization);
 
-    const { error, redirect, response } = await render({
+    const { error, redirectTo: redirect, response } = await render({
       context: {
         [LOCALE]: { i18n, lang: language },
         [ROUTE]: { location: { pathname: url } },

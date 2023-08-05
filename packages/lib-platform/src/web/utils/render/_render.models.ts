@@ -7,7 +7,7 @@ export type _RenderParamsModel = {
 
 export type _RenderModel = {
   error?: Error;
-  redirect?: string;
+  redirectTo?: string;
   response?: {
     contentType: string;
     pipeStream(writable: NodeJS.WritableStream): void;

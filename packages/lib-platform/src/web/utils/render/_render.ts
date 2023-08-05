@@ -15,7 +15,7 @@ export const _render = async ({ context }: _RenderParamsModel): Promise<_RenderM
   });
   return {
     error: errorWhileRendering as Error,
-    redirect: redirectTo,
+    redirectTo,
     response: httpResponse
       ? {
           contentType: httpResponse.contentType,
