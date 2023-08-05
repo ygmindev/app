@@ -1,6 +1,3 @@
-export type UriParamsModel<TParams = undefined> = {
-  host?: string;
-  params?: TParams;
-  path?: string;
-  port?: number | string;
-};
+import { type UriModel } from '#lib-frontend/route/route.models';
+
+export type UriParamsModel<TParams = undefined> = UriModel<TParams>;

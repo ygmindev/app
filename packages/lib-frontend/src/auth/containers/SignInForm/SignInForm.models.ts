@@ -6,4 +6,6 @@ import {
 
 export type SignInFormModel = UsernameFormModel & OtpFormModel;
 
-export type SignInFormPropsModel = Pick<UsernameFormPropsModel, 'method' | 'mode'>;
+export type SignInFormPropsModel = Pick<UsernameFormPropsModel, 'method' | 'mode'> & {
+  redirectTo?: string;
+};

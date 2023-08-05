@@ -1,4 +1,5 @@
 import { type TestConfigModel } from '#lib-config/node/test/test.models';
+import { type UriModel } from '#lib-frontend/route/route.models';
 
 export type _ScreenParamsModel = Pick<
   TestConfigModel,
@@ -15,6 +16,8 @@ export type _ScreenModel = {
   snapshot(params?: { match?: boolean }): Promise<void>;
 
   type(testID: string, value?: string): Promise<void>;
+
+  uri(): UriModel;
 
   waitForNavigation(): Promise<void>;
 };

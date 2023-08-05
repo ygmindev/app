@@ -1,12 +1,6 @@
 import { getApps, initializeApp } from 'firebase/app';
 import { type Auth, type AuthError, type User } from 'firebase/auth';
-import {
-  connectAuthEmulator,
-  getAuth,
-  onAuthStateChanged,
-  signInWithCustomToken,
-  signOut,
-} from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signInWithCustomToken, signOut } from 'firebase/auth';
 
 import {
   type _UseSessionModel,
@@ -37,9 +31,9 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
 
       auth = getAuth();
 
-      auth &&
-        process.env.APP_FIREBASE_USE_EMULATOR &&
-        connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true });
+      // auth &&
+      //   process.env.APP_FIREBASE_USE_EMULATOR &&
+      //   connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true });
 
       // TODO: from locale
       // _auth && useDeviceLanguage(_auth);

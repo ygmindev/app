@@ -22,12 +22,20 @@ export type RouteModel<TProps extends ChildrenPropsModel = ChildrenPropsModel> =
   transition?: RouteTransitionModel;
 } & Pick<TranslatableTextPropsModel, 'ns'>;
 
+export type UriModel<TParams = undefined> = {
+  host?: string;
+  params?: TParams;
+  path?: string;
+  port?: number | string;
+};
+
 export type LocationModel<TType extends LocationParamsModel = LocationParamsModel> = {
   params?: TType;
   pathname: string;
 };
 
 export type LocationParamsModel = {
+  previous?: string;
   title?: string;
 };
 
@@ -35,7 +43,6 @@ export type RouteContextModel<TType extends LocationParamsModel = LocationParams
   basename?: string;
   location?: LocationModel<TType>;
   redirectTo?: string;
-  status?: number;
 };
 
 export type RouteTransitionModel = `${ROUTE_TRANSITION}`;

@@ -17,7 +17,13 @@ import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyle
 import { SIGN_IN_MODE } from '#lib-shared/auth/auth.constants';
 import { type SignInFormModel } from '#lib-shared/auth/resources/SignIn/SignIn.models';
 
-export const SignInForm: SFCModel<SignInFormPropsModel> = ({ method, mode, testID, ...props }) => {
+export const SignInForm: SFCModel<SignInFormPropsModel> = ({
+  method,
+  mode,
+  redirectTo,
+  testID,
+  ...props
+}) => {
   const { t } = useTranslation();
   const { styles } = useStyles({ props });
   const { replace } = useRouter();
@@ -31,7 +37,8 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({ method, mode, testI
   return (
     <StepForm<SignInFormModel, [UsernameFormModel, OtpFormModel]>
       onSubmit={handleSubmit}
-      onSuccess={async () => replace({ pathname: '/' })}
+      // TODO: replace to previous path
+      onSuccess={async () => replace({ pathname: redirectTo ?? '/' })}
       steps={steps}
       style={styles}
       testID={testID}>

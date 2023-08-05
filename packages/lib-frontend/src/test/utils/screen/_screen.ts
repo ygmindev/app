@@ -69,6 +69,11 @@ export const _screen = async ({
       value && (await page.keyboard.type(value));
     },
 
+    uri: () => {
+      const { host, pathname, port } = new URL(page.url());
+      return { host, pathname, port };
+    },
+
     waitForNavigation: async () => {
       await page.waitForNavigation({ waitUntil: 'networkidle0' });
       await sleepForTransition();

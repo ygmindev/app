@@ -52,13 +52,27 @@ export const useRouter = <
       params,
       pathname,
     }: RouteUpdateModel<TNextType>) =>
-      update(() => push({ params, pathname: trimPathname(pathname) }), { isBack }),
+      update(
+        () =>
+          push({
+            params: { ...params, previous: location.pathname },
+            pathname: trimPathname(pathname),
+          }),
+        { isBack },
+      ),
 
     replace: async <TNextType extends LocationParamsModel = LocationParamsModel>({
       isBack,
       params,
       pathname,
     }: RouteUpdateModel<TNextType>) =>
-      update(() => replace({ params, pathname: trimPathname(pathname) }), { isBack }),
+      update(
+        () =>
+          replace({
+            params: { ...params, previous: location.pathname },
+            pathname: trimPathname(pathname),
+          }),
+        { isBack },
+      ),
   };
 };

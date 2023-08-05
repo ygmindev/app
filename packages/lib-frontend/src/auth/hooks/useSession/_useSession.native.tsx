@@ -18,27 +18,25 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
   },
 
   initialize: async (onAuth): Promise<void> => {
-    if (process.env.NODE_ENV !== 'test') {
-      auth = firebaseAuth();
-      process.env.APP_FIREBASE_USE_EMULATOR && auth.useEmulator('http://127.0.0.1:9099');
+    auth = firebaseAuth();
+    // process.env.APP_FIREBASE_USE_EMULATOR && auth.useEmulator('http://127.0.0.1:9099');
 
-      auth.onAuthStateChanged((user: FirebaseAuthTypes.User | null) => {
-        if (user) {
-          user
-            .getIdTokenResult()
-            .then(({ claims }) => onAuth({ _id: user.uid, claims }))
-            .catch((e) => {
-              const error =
-                (e as AuthError).code === 'auth/network-request-failed'
-                  ? new HttpError(HTTP_STATUS_CODE.SERVICE_UNAVAILABLE, 'Network Error')
-                  : (e as Error);
-              onError && onError(error);
-            });
-        } else {
-          void onAuth(null);
-        }
-      });
-    }
+    auth.onAuthStateChanged((user: FirebaseAuthTypes.User | null) => {
+      if (user) {
+        user
+          .getIdTokenResult()
+          .then(({ claims }) => onAuth({ _id: user.uid, claims }))
+          .catch((e) => {
+            const error =
+              (e as AuthError).code === 'auth/network-request-failed'
+                ? new HttpError(HTTP_STATUS_CODE.SERVICE_UNAVAILABLE, 'Network Error')
+                : (e as Error);
+            onError && onError(error);
+          });
+      } else {
+        void onAuth(null);
+      }
+    });
   },
 
   signInWithToken: async (token: string): Promise<void> => {

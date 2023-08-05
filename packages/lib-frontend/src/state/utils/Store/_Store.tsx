@@ -8,11 +8,10 @@ import {
   type SliceCaseReducers,
 } from '@reduxjs/toolkit';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-import { type NoInfer } from '@reduxjs/toolkit/dist/tsHelpers';
 import mapValues from 'lodash/mapValues';
 import reduce from 'lodash/reduce';
 import { type ComponentType, type ReactElement } from 'react';
-import { Provider as _Provider, useDispatch } from 'react-redux';
+import { type NoInfer, Provider as _Provider, useDispatch } from 'react-redux';
 import { type PersistConfig, type Persistor } from 'redux-persist';
 import {
   FLUSH,
