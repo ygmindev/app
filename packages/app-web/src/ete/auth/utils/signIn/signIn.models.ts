@@ -1,4 +1,4 @@
-import { type ScreenModel } from '#lib-frontend/test/utils/screen/screen.models';
+import { type ScreenModel } from '#lib-frontend/test/utils/withScreen/withScreen.models';
 
 export type SignInParamsModel = {
   isSnapshot?: boolean;

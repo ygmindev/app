@@ -7,9 +7,11 @@ import {
 export const runServer = ({
   host = process.env.STATIC_HOST,
   isOpen = true,
-  path,
+  pathname,
   port = process.env.STATIC_PORT,
 }: RunServerParamsModel): RunServerModel =>
   fromExecutable(
-    `http-server ${path} -a ${host.split('://')[1]} --cors --port ${port} ${isOpen ? '--o' : ''}`,
+    `http-server ${pathname} -a ${host.split('://')[1]} --cors --port ${port} ${
+      isOpen ? '--o' : ''
+    }`,
   );

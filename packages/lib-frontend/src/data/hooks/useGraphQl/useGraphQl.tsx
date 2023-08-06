@@ -12,7 +12,7 @@ import { useApi } from '#lib-frontend/http/hooks/useApi/useApi';
 import { GRAPHQL } from '#lib-shared/graphql/graphql.constants';
 
 export const useGraphQl = (params: UseGraphQlParamsModel = {}): UseGraphQlModel => {
-  const { post } = useApi({ ...params, path: `api/${GRAPHQL}` });
+  const { post } = useApi({ ...params, pathname: `api/${GRAPHQL}` });
   return {
     query: async <TParams, TResult, TName extends string = string>({
       fields,

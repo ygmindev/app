@@ -1,4 +1,3 @@
-import { type Browser, type Page } from 'puppeteer';
 import { launch } from 'puppeteer';
 
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
@@ -7,32 +6,32 @@ import { sleepForEffect } from '#lib-frontend/animation/utils/sleepForEffect/sle
 import { sleepForTransition } from '#lib-frontend/animation/utils/sleepForTransition/sleepForTransition';
 import { slug } from '#lib-frontend/route/utils/slug/slug';
 import {
-  type _ScreenModel,
-  type _ScreenParamsModel,
-} from '#lib-frontend/test/utils/screen/_screen.models';
+  type _WithScreenModel,
+  type _WithScreenParamsModel,
+} from '#lib-frontend/test/utils/withScreen/_withScreen.models';
+import { type ScreenModel } from '#lib-frontend/test/utils/withScreen/withScreen.models';
 
-let browser: Browser;
-let page: Page;
-
-export const _screen = async ({
-  dimension,
-  isBrowser,
-  outputPath,
-  snapshotPath,
-  snapshotPrefix,
-  timeout,
-}: _ScreenParamsModel): Promise<_ScreenModel> => {
-  browser =
-    browser ??
-    (await launch({
-      args: dimension ? [`--window-size-${dimension.width},${dimension.height}`] : undefined,
-      defaultViewport: null,
-      headless: isBrowser ? false : 'new',
-      ignoreHTTPSErrors: true,
-    }));
-  page = page ?? (await browser.newPage());
-
-  return {
+export const _withScreen = async (
+  ...[
+    callback,
+    { dimension, isBrowser, outputPath, snapshotPath, snapshotPrefix, timeout } = {
+      dimension: undefined,
+      isBrowser: false,
+      outputPath: '',
+      snapshotPath: '',
+      snapshotPrefix: '',
+      timeout: 0,
+    },
+  ]: _WithScreenParamsModel
+): Promise<_WithScreenModel> => {
+  const browser = await launch({
+    args: dimension ? [`--window-size-${dimension.width},${dimension.height}`] : undefined,
+    defaultViewport: null,
+    headless: isBrowser ? false : 'new',
+    ignoreHTTPSErrors: true,
+  });
+  const page = await browser.newPage();
+  const screen: ScreenModel = {
     close: async () => browser.close(),
 
     goto: async (route) => {
@@ -78,5 +77,15 @@ export const _screen = async ({
       await page.waitForNavigation({ waitUntil: 'networkidle0' });
       await sleepForTransition();
     },
+
+    waitForText: async (value) => {
+      await page.waitForSelector(`div ::-p-text(${value})`);
+    },
   };
+
+  try {
+    await callback(screen);
+  } finally {
+    await browser.close();
+  }
 };

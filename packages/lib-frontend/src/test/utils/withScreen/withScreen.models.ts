@@ -1,12 +1,14 @@
-import { type TestConfigModel } from '#lib-config/node/test/test.models';
 import { type UriModel } from '#lib-frontend/route/route.models';
+import {
+  type _WithScreenModel,
+  type _WithScreenParamsModel,
+} from '#lib-frontend/test/utils/withScreen/_withScreen.models';
 
-export type _ScreenParamsModel = Pick<
-  TestConfigModel,
-  'dimension' | 'isBrowser' | 'outputPath' | 'snapshotPath' | 'snapshotPrefix' | 'timeout'
->;
+export type WithScreenParamsModel = _WithScreenParamsModel;
 
-export type _ScreenModel = {
+export type WithScreenModel = _WithScreenModel;
+
+export type ScreenModel = {
   close(): Promise<void>;
 
   goto(params: string): Promise<void>;
@@ -20,4 +22,6 @@ export type _ScreenModel = {
   uri(): UriModel;
 
   waitForNavigation(): Promise<void>;
+
+  waitForText(value: string): Promise<void>;
 };

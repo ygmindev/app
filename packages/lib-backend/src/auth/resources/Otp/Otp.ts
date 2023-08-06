@@ -29,9 +29,6 @@ export class OtpForm implements OtpFormModel {
   name: OTP_RESOURCE_NAME,
 })
 export class Otp extends EntityResource implements OtpModel {
-  @withField({ isRepository: true, type: FIELD_TYPE.ID })
-  _uid!: string;
-
   @withField({
     defaultValue: () => new Date(),
     expire: OTP_EXPIRATION_SECONDS,

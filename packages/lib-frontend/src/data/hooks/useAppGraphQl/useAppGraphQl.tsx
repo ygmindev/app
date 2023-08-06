@@ -5,6 +5,6 @@ import { GRAPHQL } from '#lib-shared/graphql/graphql.constants';
 export const useAppGraphQl = (): UseAppGraphQlModel =>
   useGraphQl({
     host: process.env.SERVER_HOST,
-    path: `api/${GRAPHQL}`,
+    pathname: `api/${GRAPHQL}`,
     port: process.env.SERVER_PORT,
   });

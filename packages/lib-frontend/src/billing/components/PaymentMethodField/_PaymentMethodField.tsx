@@ -88,7 +88,7 @@ const StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forwa
             expand: ['payment_method'],
             return_url: uri({
               host: process.env.APP_HOST,
-              path: `$/${REDIRECT}`,
+              pathname: `$/${REDIRECT}`,
               port: process.env.APP_PORT,
             }),
           },

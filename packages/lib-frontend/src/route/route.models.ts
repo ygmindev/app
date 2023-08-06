@@ -25,7 +25,7 @@ export type RouteModel<TProps extends ChildrenPropsModel = ChildrenPropsModel> =
 export type UriModel<TParams = undefined> = {
   host?: string;
   params?: TParams;
-  path?: string;
+  pathname?: string;
   port?: number | string;
 };
 

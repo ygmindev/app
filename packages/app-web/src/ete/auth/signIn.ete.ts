@@ -1,15 +1,15 @@
 import { signIn } from '#app-web/ete/auth/utils/signIn/signIn';
-import { screen } from '#lib-frontend/test/utils/screen/screen';
-import { type ScreenModel } from '#lib-frontend/test/utils/screen/screen.models';
+import { withScreen } from '#lib-frontend/test/utils/withScreen/withScreen';
+import { PERSONAL } from '#lib-frontend/user/user.constants';
+import { USER_FIXTURE } from '#lib-shared/user/resources/User/User.fixtures';
+import { ACCOUNT } from '#lib-shared/user/user.constants';
 
 describe('sign in', () => {
-  let screenF: ScreenModel;
-
-  beforeAll(async () => {
-    screenF = await screen();
-  });
-
   test('works', async () => {
-    await signIn({ isSnapshot: true, screen: screenF });
+    await withScreen(async (screen) => {
+      await signIn({ isSnapshot: true, screen });
+      await screen.goto(`${ACCOUNT}/${PERSONAL}`);
+      await screen.waitForText(USER_FIXTURE.email);
+    });
   });
 });

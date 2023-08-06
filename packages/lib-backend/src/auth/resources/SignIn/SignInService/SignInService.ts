@@ -69,12 +69,12 @@ export class SignInService implements SignInServiceModel {
     if (form.otp) {
       const formF = cleanObject(form);
       const otp = await this._otpService.verify(formF);
-      if (otp._uid === context?.user?._id) {
-        const id = context?.user?._id;
-        const { result: user } = await this._userService.update({
-          filter: { _id: id },
-          update: formF,
-        });
+      const otpF = cleanObject(pick(otp, ['email', 'phone', 'callingCode']));
+      const { result: user } = await this._userService.update({
+        filter: { _id: context?.user?._id, ...otpF },
+        update: formF,
+      });
+      if (user) {
         const signIn = await this.createSignIn(user);
         return { result: signIn };
       }

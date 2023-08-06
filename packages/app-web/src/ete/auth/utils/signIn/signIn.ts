@@ -8,10 +8,11 @@ import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathnam
 import { USER_FIXTURE } from '#lib-shared/user/resources/User/User.fixtures';
 
 export const signIn = async ({ isSnapshot, screen }: SignInParamsModel): Promise<SignInModel> => {
-  screen.uri().path !== trimPathname(SIGN_IN) && (await screen.goto(SIGN_IN));
+  screen.uri().pathname !== trimPathname(SIGN_IN) && (await screen.goto(SIGN_IN));
   await screen.type('email', USER_FIXTURE.email);
   isSnapshot && (await screen.snapshot());
   await screen.press(`${USERNAME_FORM_TEST_ID}-submit`);
   await screen.type('otp', process.env.SERVER_OTP_STATIC ?? '');
+  await screen.waitForNavigation();
   isSnapshot && (await screen.snapshot());
 };

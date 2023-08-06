@@ -18,6 +18,6 @@ export const build: TaskParamsModel<unknown> = {
 
     ({ root }) => fromExecutable(`vite build --config ${joinPaths([root, config().configFile])}`),
 
-    ({ root }) => runServer({ path: joinPaths([root, fileConfig.distPath, 'client']) }),
+    ({ root }) => runServer({ pathname: joinPaths([root, fileConfig.distPath, 'client']) }),
   ],
 };

@@ -16,6 +16,7 @@ import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SIGN_IN_MODE } from '#lib-shared/auth/auth.constants';
 import { type SignInFormModel } from '#lib-shared/auth/resources/SignIn/SignIn.models';
+import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 export const SignInForm: SFCModel<SignInFormPropsModel> = ({
   method,
@@ -37,8 +38,10 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({
   return (
     <StepForm<SignInFormModel, [UsernameFormModel, OtpFormModel]>
       onSubmit={handleSubmit}
-      // TODO: replace to previous path
-      onSuccess={async () => replace({ pathname: redirectTo ?? '/' })}
+      onSuccess={async () => {
+        await sleep();
+        await replace({ pathname: redirectTo ?? '/' });
+      }}
       steps={steps}
       style={styles}
       testID={testID}>

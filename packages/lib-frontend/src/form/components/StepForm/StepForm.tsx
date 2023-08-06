@@ -42,7 +42,6 @@ export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends
   const barRef = useRef<WrapperRefModel>(null);
 
   const handleClear = (): void => {
-    currentSetF(0);
     dataSet(undefined);
   };
 
