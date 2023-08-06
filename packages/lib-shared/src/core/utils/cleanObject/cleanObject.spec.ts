@@ -1,7 +1,7 @@
 import cloneDeep from 'lodash/cloneDeep';
-import pick from 'lodash/pick';
 
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
+import { pick } from '#lib-shared/core/utils/pick/pick';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ cleanObject });

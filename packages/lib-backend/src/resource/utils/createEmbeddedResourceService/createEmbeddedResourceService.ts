@@ -1,5 +1,4 @@
 import forEach from 'lodash/forEach';
-import pick from 'lodash/pick';
 import reduce from 'lodash/reduce';
 
 import { Container } from '#lib-backend/core/utils/Container/Container';
@@ -15,6 +14,7 @@ import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { flattenObject } from '#lib-shared/core/utils/flattenObject/flattenObject';
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
+import { pick } from '#lib-shared/core/utils/pick/pick';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type EmbeddedResourceModel } from '#lib-shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
 import { type EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';

@@ -1,6 +1,5 @@
 import filter from 'lodash/filter';
 import find from 'lodash/find';
-import pick from 'lodash/pick';
 import some from 'lodash/some';
 
 import { seed } from '#lib-backend/database/utils/seed/seed';
@@ -13,6 +12,7 @@ import {
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 import { merge } from '#lib-shared/core/utils/merge/merge';
+import { pick } from '#lib-shared/core/utils/pick/pick';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type FilterCombineModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';

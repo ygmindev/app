@@ -1,7 +1,7 @@
-import pick from 'lodash/pick';
 import { ObjectId } from 'mongodb';
 
 import { cleanDocument } from '#lib-backend/database/utils/cleanDocument/cleanDocument';
+import { pick } from '#lib-shared/core/utils/pick/pick';
 import { randomString } from '#lib-shared/crypto/utils/randomString/randomString';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 

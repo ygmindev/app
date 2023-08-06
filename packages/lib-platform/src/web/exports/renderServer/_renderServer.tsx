@@ -1,4 +1,3 @@
-import pick from 'lodash/pick';
 import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
 import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vite-plugin-ssr/server';
 
@@ -13,6 +12,7 @@ import {
   type _RenderServerParamsModel,
 } from '#lib-platform/web/exports/renderServer/_renderServer.models';
 import { merge } from '#lib-shared/core/utils/merge/merge';
+import { pick } from '#lib-shared/core/utils/pick/pick';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 import { QUERY } from '#lib-shared/query/query.constants';
 import { STATE } from '#lib-shared/state/state.constants';

@@ -1,4 +1,3 @@
-import pick from 'lodash/pick';
 import { useMemo } from 'react';
 
 import {
@@ -27,6 +26,7 @@ import { PhoneField } from '#lib-frontend/user/components/PhoneField/PhoneField'
 import { SIGN_IN_METHOD, SIGN_IN_MODE } from '#lib-shared/auth/auth.constants';
 import { type SignInMethodModel } from '#lib-shared/auth/auth.models';
 import { type OtpFormModel, type OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
+import { pick } from '#lib-shared/core/utils/pick/pick';
 import { withId } from '#lib-shared/core/utils/withId/withId';
 import { type HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';

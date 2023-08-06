@@ -1,5 +1,3 @@
-import pick from 'lodash/pick';
-
 import { OtpService } from '#lib-backend/auth/resources/Otp/OtpService/OtpService';
 import { SIGN_IN_TOKEN_CLAIM_FIELDS } from '#lib-backend/auth/resources/SignIn/SignIn.constants';
 import { JwtService } from '#lib-backend/auth/utils/JwtService/JwtService';
@@ -13,6 +11,7 @@ import {
 } from '#lib-shared/auth/resources/SignIn/SignIn.models';
 import { type SignInServiceModel } from '#lib-shared/auth/resources/SignIn/SignInService/SignInService.models';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
+import { pick } from '#lib-shared/core/utils/pick/pick';
 import { withInject } from '#lib-shared/core/utils/withInject/withInject';
 import { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
