@@ -140,5 +140,5 @@ export const createEntityResourceService = <TType, TForm = undefined>({
     }
   }
 
-  return EntityResourceService;
+  return EntityResourceService as CreateEntityResourceServiceModel<TType, TForm>;
 };

@@ -47,7 +47,6 @@ export class SignInService implements SignInServiceModel {
       const formF = cleanObject(form);
       await this._otpService.verify(formF);
       delete (formF as Partial<SignInFormModel>).otp;
-
       let { result: user } = await this._userService.get({ filter: formF });
       let isNew;
       if (!user) {

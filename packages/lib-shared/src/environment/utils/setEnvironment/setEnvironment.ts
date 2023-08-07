@@ -8,22 +8,23 @@ import { fromConfig } from '#lib-backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { writeFile } from '#lib-backend/file/utils/writeFile/writeFile';
 import { NotFoundError } from '#lib-shared/core/errors/NotFoundError/NotFoundError';
-import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import {
   type SetEnvironmentModel,
   type SetEnvironmentParamsModel,
 } from '#lib-shared/environment/utils/setEnvironment/setEnvironment.models';
 
 export const setEnvironment = ({
-  environment = process.env.NODE_ENV ?? ENVIRONMENT.DEVELOPMENT,
+  environment,
   variables,
   writes,
 }: SetEnvironmentParamsModel = {}): SetEnvironmentModel => {
-  const paths = [
+  const environmentF = process.env.NODE_ENV ?? environment;
+  const paths = filterNil([
     fromConfig('core/environment/.env.base'),
-    fromConfig(`core/environment/.env.${environment}`),
+    environmentF && fromConfig(`core/environment/.env.${environmentF}`),
     fromWorking('.env'),
-  ];
+  ]);
   const envs = paths.reduce((result, path) => {
     if (existsSync(path)) {
       const { error, parsed } = config({ override: true, path });
@@ -49,11 +50,12 @@ export const setEnvironment = ({
 
   variables && (process.env = { ...process.env, ...variables() });
 
-  environment === 'production' &&
+  environmentF === 'production' &&
     writes &&
     envs &&
     writeFile({
-      filename: fromWorking(`.env.${environment}`),
+      encoding: 'utf8',
+      filename: fromWorking(`.env.${environmentF}`),
       value: map(envs, (v, k) => `${k.trim()}=${toString(v).trim()}`).join('\n'),
     });
 

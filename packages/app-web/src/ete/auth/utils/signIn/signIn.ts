@@ -13,6 +13,5 @@ export const signIn = async ({ isSnapshot, screen }: SignInParamsModel): Promise
   isSnapshot && (await screen.snapshot());
   await screen.press(`${USERNAME_FORM_TEST_ID}-submit`);
   await screen.type('otp', process.env.SERVER_OTP_STATIC ?? '');
-  await screen.waitForNavigation();
   isSnapshot && (await screen.snapshot());
 };

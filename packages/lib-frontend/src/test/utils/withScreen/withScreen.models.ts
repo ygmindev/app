@@ -21,7 +21,5 @@ export type ScreenModel = {
 
   uri(): UriModel;
 
-  waitForNavigation(): Promise<void>;
-
   waitForText(value: string): Promise<void>;
 };

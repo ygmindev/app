@@ -17,7 +17,6 @@ export const seed = async ({ names }: SeedParamsModel = {}): Promise<void> => {
   for (const service of services) {
     await import(service);
   }
-
   const database = Container.get(Database, DATABASE_TYPE.MONGO);
   await database.connect();
   for (const resource of SEED_DATA) {

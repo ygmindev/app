@@ -144,11 +144,11 @@ export class _Database implements _DatabaseModel {
         const filterF = cleanDocument(filter) as Filter<TType & object>;
         const updateF = cleanDocument(update);
         Object.keys(updateF).forEach((key) => {
-          const keyF = key as string & keyof UpdateModel<TType>;
-          if (!keyF.startsWith('$')) {
+          const keyF = key as keyof UpdateModel<TType>;
+          if (!key.startsWith('$')) {
             updateF['$set'] = {
               ...(updateF['$set'] ?? {}),
-              [keyF]: updateF[keyF],
+              [key]: updateF[keyF],
             } as PartialDeepModel<EntityResourceDataModel<TType>>;
             delete updateF[keyF];
           }

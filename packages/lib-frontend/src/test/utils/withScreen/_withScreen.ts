@@ -24,6 +24,8 @@ export const _withScreen = async (
     },
   ]: _WithScreenParamsModel
 ): Promise<_WithScreenModel> => {
+  let isOpen: boolean;
+
   const browser = await launch({
     args: dimension ? [`--window-size-${dimension.width},${dimension.height}`] : undefined,
     defaultViewport: null,
@@ -32,10 +34,15 @@ export const _withScreen = async (
   });
   const page = await browser.newPage();
   const screen: ScreenModel = {
-    close: async () => browser.close(),
+    close: async () => {
+      isOpen = false;
+      await browser.close();
+    },
 
     goto: async (route) => {
+      isOpen && (await page.waitForNavigation({ timeout, waitUntil: 'networkidle0' }));
       await page.goto(route, { timeout, waitUntil: 'networkidle0' });
+      isOpen = true;
       await sleepForTransition();
     },
 
@@ -71,11 +78,6 @@ export const _withScreen = async (
     uri: () => {
       const { host, pathname, port } = new URL(page.url());
       return { host, pathname, port };
-    },
-
-    waitForNavigation: async () => {
-      await page.waitForNavigation({ waitUntil: 'networkidle0' });
-      await sleepForTransition();
     },
 
     waitForText: async (value) => {

@@ -47,7 +47,6 @@ export class SignInResolver
     @withContext()
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
-    console.warn(111);
     return this.signInService.usernameUpdate(input, context);
   }
 }

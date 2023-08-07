@@ -9,7 +9,7 @@ import {
 export const _parallel = async (
   ...[tasks, options, environment]: _ParallelParamsModel
 ): Promise<_ParallelModel> => {
-  environment && setEnvironment(environment);
+  setEnvironment(environment);
   const { result } = _concurrently(
     tasks.map((command, i) => ({
       command,

@@ -8,6 +8,7 @@ import {
 import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
 import { type DummyEntityResourceFormModel } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
 import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
+import { USER_FIXTURE } from '#lib-shared/user/resources/User/User.fixtures';
 
 export const DUMMY_ENTITY_RESOURCE_SEED_DATA: Array<DummyEntityResourceFormModel> = [
   {
@@ -27,10 +28,7 @@ export const DUMMY_ENTITY_RESOURCE_SEED_DATA: Array<DummyEntityResourceFormModel
 
 export const SEED_DATA = [
   {
-    data: [
-      { email: 'ygmindev@gmail.com', first: 'YG', last: 'Min' },
-      { email: 'admin@admin.com', first: 'Admin', last: 'Admin' },
-    ],
+    data: [USER_FIXTURE],
     name: USER_RESOURCE_NAME,
   },
 
