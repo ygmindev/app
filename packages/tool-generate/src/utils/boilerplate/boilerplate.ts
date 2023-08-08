@@ -54,7 +54,7 @@ export const boilerplate = async ({
       case '{{PATH}}': {
         const root = await resolveVariable('{{ROOT}}');
         const target = await resolveVariable('{{TARGET}}');
-        const { path } = await prompt([
+        const { path } = await prompt<{ path: string }>([
           { basePath: fromPackages(root, 'src'), key: 'path', type: PROMPT_TYPE.DIRECTORY },
         ]);
         outputF = fromPackages(root, `src/${path}`);
@@ -62,7 +62,11 @@ export const boilerplate = async ({
         break;
       }
       case '{{ROOT}}': {
-        value = (await prompt([{ key: 'root', options: packages, type: PROMPT_TYPE.LIST }])).root;
+        value = (
+          await prompt<{ root: string }>([
+            { key: 'root', options: packages, type: PROMPT_TYPE.LIST },
+          ])
+        ).root;
         break;
       }
       case '{{TARGET}}': {
@@ -71,7 +75,7 @@ export const boilerplate = async ({
         break;
       }
       default: {
-        value = (await prompt([{ key: variable }]))[variable];
+        value = (await prompt<{ [key: typeof variable]: string }>([{ key: variable }]))[variable];
         break;
       }
     }
