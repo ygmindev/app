@@ -9,7 +9,7 @@ import { type _CliModel, type _CliParamsModel } from '#tool-task/core/utils/cli/
 export const _cli = async ({ task }: _CliParamsModel): Promise<_CliModel> => {
   const taskF = gulp.task(task ?? 'default');
   if (taskF) {
-    await taskF(noop);
+    return taskF(noop);
   }
   throw new NotFoundError(task);
 };
