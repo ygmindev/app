@@ -20,7 +20,7 @@ import {
   type _DocgenParamsModel,
 } from '#lib-library/docgen/utils/docgen/_docgen.models';
 
-const fileCache = new Map();
+const fileCache = new Map<string, { text: string; version: number }>();
 
 export const _docgen = (params: _DocgenParamsModel): _DocgenModel => {
   const tsconfigFile = fromWorking('tsconfig.json');

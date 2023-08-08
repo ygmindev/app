@@ -1,5 +1,4 @@
-import { RendererServer } from '#lib-platform/web/exports/RendererServer/RendererServer';
+import { initialize } from '#app-web/setup/utils/initialize/initialize';
+import { renderServer } from '#lib-platform/web/exports/renderServer/renderServer';
 
-const { render } = RendererServer({});
-
-export default render;
+export default renderServer({ initialize });

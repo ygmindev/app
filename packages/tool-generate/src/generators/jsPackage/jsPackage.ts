@@ -42,7 +42,7 @@ export const jsPackage: GeneratorParamsModel = {
   },
 
   prepare: async () => {
-    const { name } = await prompt([{ key: 'name' }]);
+    const { name } = await prompt<{ name: string }>([{ key: 'name' }]);
     return { output: fromPackages(), variables: { '{{NAME}}': name, '{{ROOT}}': name } };
   },
 };

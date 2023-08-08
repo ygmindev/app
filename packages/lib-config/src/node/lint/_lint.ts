@@ -2,6 +2,7 @@ import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { type _LintConfigModel, type LintConfigModel } from '#lib-config/node/lint/lint.models';
 
 export const _lint = ({
+  exclude,
   include,
   indentWidth,
   isParenthesis,
@@ -29,7 +30,7 @@ export const _lint = ({
     'plugin:typescript-sort-keys/recommended',
   ],
 
-  ignorePatterns: [`!(${include.join('|')})`],
+  ignorePatterns: [`!(${include.join('|')})`, ...exclude],
 
   overrides: [
     {

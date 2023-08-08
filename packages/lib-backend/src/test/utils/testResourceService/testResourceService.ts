@@ -128,7 +128,7 @@ export const testResourceService = async ({
     const { result } = await service.get(input);
     const expected = find(data, (row) =>
       some((input.filter as FilterCombineModel<DummyEntityResourceModel>).$or, (condition) => {
-        const rowF = pick(row, Object.keys(condition));
+        const rowF = pick(row, Object.keys(condition) as Array<keyof typeof row>);
         return !isEmpty(rowF) && isEqual(rowF, condition);
       }),
     ) as DummyEntityResourceModel;
@@ -210,7 +210,7 @@ export const testResourceService = async ({
     const { result } = await service.getMany(input);
     const expected = filter(data, (row) =>
       some((input.filter as FilterCombineModel<DummyEntityResourceModel>).$or, (condition) => {
-        const rowF = pick(row, Object.keys(condition));
+        const rowF = pick(row, Object.keys(condition) as Array<keyof typeof row>);
         return !isEmpty(rowF) && isEqual(rowF, condition);
       }),
     );

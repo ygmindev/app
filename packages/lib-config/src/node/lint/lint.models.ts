@@ -3,6 +3,8 @@ import { type Linter } from 'eslint';
 export type LintConfigModel = {
   configFile: string;
 
+  exclude: Array<string>;
+
   extensions: Array<string>;
 
   include: Array<string>;

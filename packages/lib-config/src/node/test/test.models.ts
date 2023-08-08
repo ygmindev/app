@@ -12,7 +12,7 @@ export type TestConfigModel = {
 
   dimension?: DimensionModel;
 
-  eteExtensions: Array<string>;
+  eteExtension: string;
 
   fileExtensions: Array<string>;
 
@@ -42,7 +42,7 @@ export type TestConfigModel = {
 
   snapshotPrefix: string;
 
-  specExtensions: Array<string>;
+  specExtension: string;
 
   timeout: number;
 };

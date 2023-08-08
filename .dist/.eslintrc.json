@@ -14,7 +14,9 @@
     "plugin:typescript-sort-keys/recommended"
   ],
   "ignorePatterns": [
-    "!(/Users/ygmin/Projects/mono_v2/app3/app/src/**/*.tsx|/Users/ygmin/Projects/mono_v2/app3/app/src/**/*.ts|/Users/ygmin/Projects/mono_v2/app3/app/src/**/*.jsx|/Users/ygmin/Projects/mono_v2/app3/app/src/**/*.js)"
+    "!(/Users/ygmin/Projects/mono_v2/app3/app/src/**/*.tsx|/Users/ygmin/Projects/mono_v2/app3/app/src/**/*.ts|/Users/ygmin/Projects/mono_v2/app3/app/src/**/*.jsx|/Users/ygmin/Projects/mono_v2/app3/app/src/**/*.js)",
+    "**/*..spec.*",
+    "**/*..ete.*"
   ],
   "overrides": [
     {

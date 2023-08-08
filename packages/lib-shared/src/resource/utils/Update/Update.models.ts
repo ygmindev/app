@@ -14,10 +14,9 @@ export type PushModel<TType> = {
   [TKey in keyof EntityResourceDataModel<TType>]?: InferModel<TType[TKey]>;
 };
 
-export type UpdateModel<TType> =
-  | {
-      $pull?: FilterModel<TType>;
-      $push?: PushModel<TType>;
-      $set?: PartialDeepModel<EntityResourceDataModel<TType>>;
-      $unset?: UnsetModel<TType>;
-    } & PartialModel<EntityResourceDataModel<TType>>;
+export type UpdateModel<TType> = {
+  $pull?: FilterModel<TType>;
+  $push?: PushModel<TType>;
+  $set?: PartialDeepModel<EntityResourceDataModel<TType>>;
+  $unset?: UnsetModel<TType>;
+} & PartialModel<EntityResourceDataModel<TType>>;

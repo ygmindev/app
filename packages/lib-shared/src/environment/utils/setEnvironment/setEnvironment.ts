@@ -54,7 +54,6 @@ export const setEnvironment = ({
     writes &&
     envs &&
     writeFile({
-      encoding: 'utf8',
       filename: fromWorking(`.env.${environmentF}`),
       value: map(envs, (v, k) => `${k.trim()}=${toString(v).trim()}`).join('\n'),
     });

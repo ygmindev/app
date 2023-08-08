@@ -232,5 +232,5 @@ export const createResourceResolver = <TType, TForm = undefined, TRoot = undefin
     }
   }
 
-  return ResourceResolver;
+  return ResourceResolver as CreateResourceResolverModel<TType, TForm, TRoot>;
 };

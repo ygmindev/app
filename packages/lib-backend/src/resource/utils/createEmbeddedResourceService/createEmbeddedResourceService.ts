@@ -8,7 +8,7 @@ import {
   type CreateEmbeddedResourceServiceModel,
   type CreateEmbeddedResourceServiceParamsModel,
 } from '#lib-backend/resource/utils/createEmbeddedResourceService/createEmbeddedResourceService.models';
-import { type PartialModel } from '#lib-shared/core/core.models';
+import { type DeepKeyModel, type PartialModel } from '#lib-shared/core/core.models';
 import { InvalidArgumentError } from '#lib-shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
@@ -235,8 +235,11 @@ export const createEmbeddedResourceService = <
         });
         const result = rootResult && (rootResult[name] as unknown as Array<TType>);
         let resultF = result?.length ? result[0] : undefined;
-        if (inputF.options?.project) {
-          resultF = pick(resultF, Object.keys(inputF.options?.project)) as TType;
+        if (resultF && inputF.options?.project) {
+          resultF = pick(
+            resultF,
+            Object.keys(inputF.options.project) as Array<DeepKeyModel<typeof resultF>>,
+          ) as TType;
         }
         const output: OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot> = {
           result: resultF,
@@ -278,5 +281,5 @@ export const createEmbeddedResourceService = <
     }
   }
 
-  return EmbeddedResourceService;
+  return EmbeddedResourceService as CreateEmbeddedResourceServiceModel<TType, TForm, TRoot>;
 };

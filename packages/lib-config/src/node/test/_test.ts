@@ -16,18 +16,18 @@ import { permuteString } from '#lib-shared/core/utils/permuteString/permuteStrin
 export const _test = ({
   bundleConfig,
   cachePath,
-  eteExtensions,
+  eteExtension,
   fileExtensions,
   isWatch,
   match,
   mockDir,
   outputPath,
   root,
-  specExtensions,
+  specExtension,
   timeout,
 }: TestConfigModel): _TestConfigModel => {
   const bundleConfigF = bundleConfig();
-  const testExtensions = process.env.TEST_IS_ETE ? eteExtensions : specExtensions;
+  const testExtension = process.env.TEST_IS_ETE ? eteExtension : specExtension;
   return {
     cacheDirectory: fromWorking(cachePath),
 
@@ -48,7 +48,7 @@ export const _test = ({
       ...(_config.compilerOptions?.paths
         ? pathsToModuleNameMapper(_config.compilerOptions.paths, { prefix: fromRoot() })
         : {}),
-      [`\\.(${fileExtensions.join('|')})$`]: join(mockDir, 'file'),
+      [`\\(${fileExtensions.join('|')})$`]: join(mockDir, 'file'),
     },
 
     passWithNoTests: true,
@@ -77,9 +77,9 @@ export const _test = ({
 
     testEnvironment: process.env.ENV_PLATFORM === PLATFORM.WEB ? 'jsdom' : 'node',
 
-    testMatch: testExtensions
+    testMatch: testExtension
       ? reduce(
-          permuteString(testExtensions, bundleConfigF.extensions),
+          permuteString([testExtension], bundleConfigF.extensions),
           (result, ext) => {
             const extF = trim(ext, '.');
             return [
