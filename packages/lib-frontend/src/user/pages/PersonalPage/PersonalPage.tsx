@@ -18,39 +18,34 @@ export const PersonalPage: SFCModel<PersonalPagePropsModel> = ({ testID, ...prop
       style={styles}
       testID={testID}>
       <RouteGroup
-        groups={[
+        label={({ t }) => t('user:personal')}
+        root={`${FORM}/${ACCOUNT}/${PERSONAL}`}
+        routes={[
           {
-            id: PERSONAL,
-            label: ({ t }) => t('user:personal'),
-            options: [
-              {
-                icon: 'id',
-                id: NAME,
-                label: ({ t }) => t('user:name'),
-                value:
-                  currentUser && (currentUser.first || currentUser.last)
-                    ? `${currentUser.first || ''} ${currentUser.last || ''}`
-                    : null,
-              },
-              {
-                icon: 'phone',
-                id: PHONE,
-                label: ({ t }) => t('user:phone'),
-                value:
-                  currentUser && currentUser.callingCode && currentUser.phone
-                    ? phoneFormat(`+${currentUser.callingCode}${currentUser.phone}`)
-                    : null,
-              },
-              {
-                icon: 'email',
-                id: EMAIL,
-                label: ({ t }) => t('user:email'),
-                value: currentUser?.email ?? null,
-              },
-            ],
+            icon: 'id',
+            id: NAME,
+            label: ({ t }) => t('user:name'),
+            value:
+              currentUser && (currentUser.first || currentUser.last)
+                ? `${currentUser.first || ''} ${currentUser.last || ''}`
+                : null,
+          },
+          {
+            icon: 'phone',
+            id: PHONE,
+            label: ({ t }) => t('user:phone'),
+            value:
+              currentUser && currentUser.callingCode && currentUser.phone
+                ? phoneFormat(`+${currentUser.callingCode}${currentUser.phone}`)
+                : null,
+          },
+          {
+            icon: 'email',
+            id: EMAIL,
+            label: ({ t }) => t('user:email'),
+            value: currentUser?.email ?? null,
           },
         ]}
-        root={`${FORM}/${ACCOUNT}/${PERSONAL}`}
       />
     </MainLayout>
   );

@@ -1,15 +1,17 @@
 import { PAYMENT } from '#lib-frontend/billing/billing.constants';
-import { type RouteGroupModel } from '#lib-frontend/route/components/RouteGroup/RouteGroup.models';
+import { type RouteGroupPropsModel } from '#lib-frontend/route/components/RouteGroup/RouteGroup.models';
 import { SETTINGS } from '#lib-frontend/settings/settings.constants';
 import { PERSONAL } from '#lib-frontend/user/user.constants';
 import { withId } from '#lib-shared/core/utils/withId/withId';
+import { type WithIdResultModel } from '#lib-shared/core/utils/withId/withId.models';
 import { ACCOUNT } from '#lib-shared/user/user.constants';
 
-export const ACCOUNT_GROUPS: Array<RouteGroupModel> = withId([
+export const ACCOUNT_GROUPS: WithIdResultModel<Array<RouteGroupPropsModel>> = withId([
   {
     id: ACCOUNT,
     label: ({ t }) => t('user:account'),
-    options: [
+    root: ACCOUNT,
+    routes: [
       {
         icon: 'person',
         id: PERSONAL,
