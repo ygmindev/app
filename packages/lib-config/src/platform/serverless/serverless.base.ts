@@ -21,8 +21,6 @@ const { _config, config } = defineConfig({
 
       host: process.env.SERVER_HOST,
 
-      lambdaPort: toNumber(process.env.SERVER_PORT),
-
       name: 'serverless',
 
       platform: PLATFORM.BASE,
@@ -45,7 +43,7 @@ const { _config, config } = defineConfig({
 
         timeout: 10,
       },
-    } satisfies ServerlessConfigModel),
+    }) satisfies ServerlessConfigModel,
 });
 
 export { _config, config };

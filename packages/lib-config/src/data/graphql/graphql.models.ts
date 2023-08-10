@@ -11,7 +11,7 @@ export type GraphqlConfigModel = {
   authorize(params: AuthorizeParamsModel): Promise<AuthorizeModel>;
   container: ContainerModel;
   resolvers: Array<ClassModel>;
-  schemaPath: string;
+  schemaDir: string;
 };
 
 export type _GraphqlConfigModel = GraphQLSchema;

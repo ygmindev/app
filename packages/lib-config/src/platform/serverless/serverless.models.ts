@@ -23,8 +23,6 @@ export type ServerlessConfigModel = Pick<UriParamsModel, 'host' | 'port'> & {
     }
   >;
 
-  lambdaPort: number;
-
   name: string;
 
   platform: PlatformModel;

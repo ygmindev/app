@@ -35,7 +35,7 @@ const { _config, config } = defineConfig({
         SnapshotResolver,
       ],
 
-      schemaPath: fromStatic('graphql/schema.gql'),
+      schemaDir: fromStatic('graphql/schema.gql'),
     }) satisfies GraphqlConfigModel,
 });
 

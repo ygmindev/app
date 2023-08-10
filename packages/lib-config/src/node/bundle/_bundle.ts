@@ -134,7 +134,7 @@ export const _bundle = ({
     envPrefix,
 
     esbuild: {
-      sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : 'inline',
+      sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : 'linked',
     },
 
     mode: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? 'production' : 'development',
@@ -146,6 +146,8 @@ export const _bundle = ({
         keepNames: true,
 
         mainFields,
+
+        minify: process.env.NODE_ENV === 'production',
 
         nodePaths: modulePaths,
 

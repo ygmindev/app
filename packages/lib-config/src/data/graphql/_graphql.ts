@@ -11,12 +11,12 @@ export const _graphql = ({
   authorize,
   container,
   resolvers,
-  schemaPath,
+  schemaDir,
 }: GraphqlConfigModel): _GraphqlConfigModel =>
   buildSchemaSync({
     authChecker: ({ context }, roles) => authorize({ context: context as ContextModel, roles }),
     container: container as unknown as ContainerType,
-    emitSchemaFile: schemaPath,
+    emitSchemaFile: schemaDir,
     nullableByDefault: true,
     resolvers: resolvers as unknown as BuildSchemaOptions['resolvers'],
     validate: { forbidUnknownValues: false },

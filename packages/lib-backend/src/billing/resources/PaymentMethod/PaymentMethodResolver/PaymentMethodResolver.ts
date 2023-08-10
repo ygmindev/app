@@ -27,7 +27,7 @@ export class PaymentMethodResolver
     Resource: PaymentMethod,
     ResourceService: PaymentMethodService,
     RootResource: User,
-    authorizer: { default: selfAuthorizer },
+    // authorizer: { default: selfAuthorizer },
     name: PAYMENT_METHOD_RESOURCE_NAME,
   })
   implements PaymentMethodServiceModel

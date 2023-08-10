@@ -1,8 +1,8 @@
 import admin from 'firebase-admin';
 import toString from 'lodash/toString';
 
-import { SIGN_IN_TOKEN_CLAIM_FIELDS } from '#lib-backend/auth/resources/SignIn/SignIn.constants';
 import { type _JwtServiceModel } from '#lib-backend/auth/utils/JwtService/_JwtService.models';
+import { SIGN_IN_TOKEN_CLAIM_KEYS } from '#lib-shared/auth/resources/SignIn/SignIn.constants';
 import { type SignInTokenModel } from '#lib-shared/auth/resources/SignIn/SignIn.models';
 import { pick } from '#lib-shared/core/utils/pick/pick';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
@@ -29,7 +29,7 @@ export class _JwtService implements _JwtServiceModel {
       _id: decoded.uid,
       claims: {
         ...((decoded.additionalClaims as EntityResourceDataModel<UserModel>) ?? {}),
-        ...pick(decoded, SIGN_IN_TOKEN_CLAIM_FIELDS),
+        ...pick(decoded, SIGN_IN_TOKEN_CLAIM_KEYS),
       },
     };
   };

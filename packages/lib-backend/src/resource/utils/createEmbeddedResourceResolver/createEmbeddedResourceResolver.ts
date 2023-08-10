@@ -1,4 +1,3 @@
-import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { withResolver } from '#lib-backend/http/utils/withResolver/withResolver';
 import {
   type CreateEmbeddedResourceResolverModel,
@@ -16,7 +15,6 @@ export const createEmbeddedResourceResolver = <
   params: CreateEmbeddedResourceResolverParamsModel<TType, TForm, TRoot>,
 ): CreateEmbeddedResourceResolverModel<TType, TForm, TRoot> => {
   const ResourceResolver = createResourceResolver<TType, TForm, TRoot>(params);
-  @withContainer()
   @withResolver({ isAbstract: true })
   class EmbeddedResourceResolver extends ResourceResolver {}
   return EmbeddedResourceResolver as CreateEmbeddedResourceResolverModel<TType, TForm, TRoot>;

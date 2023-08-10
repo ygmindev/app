@@ -9,6 +9,6 @@ export const useQuery = <TType,>(
   ...[id, callback, options]: UseQueryParamsModel<TType>
 ): UseQueryModel<TType> => {
   const cache = options?.cache;
-  const cacheF = (cache === true ? config.cacheTime : cache) || config.cacheTimeDefault;
+  const cacheF = (cache === true ? config.cacheTime : cache) ?? config.cacheTimeDefault;
   return _useQuery(id, callback, { ...options, cache: cacheF });
 };

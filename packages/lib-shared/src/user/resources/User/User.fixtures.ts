@@ -1,4 +1,4 @@
-import { SIGN_IN_TOKEN_CLAIM_FIELDS } from '#lib-backend/auth/resources/SignIn/SignIn.constants';
+import { SIGN_IN_TOKEN_CLAIM_KEYS } from '#lib-shared/auth/resources/SignIn/SignIn.constants';
 import { BANK_RESOURCE_NAME } from '#lib-shared/billing/resources/Bank/Bank.constants';
 import { CARD_RESOURCE_NAME } from '#lib-shared/billing/resources/Card/Card.constants';
 import { PAYMENT_METHOD_RESOURCE_NAME } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
@@ -28,5 +28,5 @@ export const USER_FIXTURE: RequiredModel<UserModel> = {
 
 export const USER_DATA_FIXTURE: EntityResourceDataModel<UserModel> = pick(
   USER_FIXTURE,
-  SIGN_IN_TOKEN_CLAIM_FIELDS,
+  SIGN_IN_TOKEN_CLAIM_KEYS,
 );

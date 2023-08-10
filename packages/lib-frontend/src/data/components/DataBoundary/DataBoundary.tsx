@@ -28,14 +28,12 @@ export const DataBoundary = <TType,>({
   ...props
 }: SFCPropsModel<DataBoundaryPropsModel<TType>>): ReactElement<
   SFCPropsModel<DataBoundaryPropsModel<TType>>
-> => {
-  return (
-    <AsyncBoundary {...props}>
-      <DataComponent
-        id={id}
-        query={query}>
-        {children}
-      </DataComponent>
-    </AsyncBoundary>
-  );
-};
+> => (
+  <AsyncBoundary {...props}>
+    <DataComponent
+      id={id}
+      query={query}>
+      {children}
+    </DataComponent>
+  </AsyncBoundary>
+);

@@ -1,10 +1,12 @@
 import { OtpService } from '#lib-backend/auth/resources/Otp/OtpService/OtpService';
-import { SIGN_IN_TOKEN_CLAIM_FIELDS } from '#lib-backend/auth/resources/SignIn/SignIn.constants';
 import { JwtService } from '#lib-backend/auth/utils/JwtService/JwtService';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { UserService } from '#lib-backend/user/resources/User/UserService/UserService';
 import { UnauthorizedError } from '#lib-shared/auth/errors/UnauthorizedError/UnauthorizedError';
-import { SIGN_IN_RESOURCE_NAME } from '#lib-shared/auth/resources/SignIn/SignIn.constants';
+import {
+  SIGN_IN_RESOURCE_NAME,
+  SIGN_IN_TOKEN_CLAIM_KEYS,
+} from '#lib-shared/auth/resources/SignIn/SignIn.constants';
 import {
   type SignInFormModel,
   type SignInModel,
@@ -31,7 +33,7 @@ export class SignInService implements SignInServiceModel {
 
   createSignIn = async (user: UserModel | null | undefined): Promise<SignInModel> => {
     if (user) {
-      const claims = pick(user, SIGN_IN_TOKEN_CLAIM_FIELDS);
+      const claims = pick(user, SIGN_IN_TOKEN_CLAIM_KEYS);
       const token = await this._jwtService.createToken(user._id, claims);
       return { token, user };
     }

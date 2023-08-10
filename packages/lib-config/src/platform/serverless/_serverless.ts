@@ -18,7 +18,6 @@ export const _serverless = ({
   environment,
   functions,
   host,
-  lambdaPort,
   name,
   platform,
   port,
@@ -44,11 +43,13 @@ export const _serverless = ({
 
       ...(platform === PLATFORM.NODE
         ? {
+            // TODO: vscode debug point not working
             esbuild: {
+              ...bundleConfigF.esbuild,
               ...bundleConfigF.optimizeDeps?.esbuildOptions,
               bundle: true,
               format: 'cjs',
-              keepOutputDirectory: false,
+              keepOutputDirectory: true,
               packagePath: fromRoot('package.json'),
               packager: 'yarn',
               packagerOptions: { noInstall: true },

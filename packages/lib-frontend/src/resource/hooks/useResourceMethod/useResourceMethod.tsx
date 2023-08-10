@@ -86,7 +86,7 @@ export const useResourceMethod = <
         params: { input: `${nameF}Input` },
         type,
         variables: { input: { ...inputF, root: rootF } },
-      })) || { result: undefined, root: rootF };
+      })) ?? { result: undefined, root: rootF };
       return after ? after({ output }) : output;
     },
   };
