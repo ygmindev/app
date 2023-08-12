@@ -1,16 +1,17 @@
 import noop from 'lodash/noop';
 import { createContext, Suspense, useState } from 'react';
 
+import { Button } from '#lib-frontend/core/components/Button/Button';
+import { Icon } from '#lib-frontend/core/components/Icon/Icon';
+import { Loading } from '#lib-frontend/core/components/Loading/Loading';
+import { Text } from '#lib-frontend/core/components/Text/Text';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ERROR_MODE } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.constants';
 import {
   type AsyncBoundaryContextModel,
   type AsyncBoundaryPropsModel,
   type ErrorContextModel,
 } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
-import { Button } from '#lib-frontend/core/components/Button/Button';
-import { Icon } from '#lib-frontend/core/components/Icon/Icon';
-import { Text } from '#lib-frontend/core/components/Text/Text';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useQueryContext } from '#lib-frontend/data/hooks/useQueryContext/useQueryContext';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -37,7 +38,6 @@ export const AsyncBoundary: SFCModel<AsyncBoundaryPropsModel> = ({
   const { styles } = useStyles({ props });
   const [errorContext, errorContextSet] = useState<ErrorContextModel | undefined>();
   const { reset } = useQueryContext();
-
   return (
     <AsyncBoundaryContext.Provider
       value={{ errorContextGet, errorContextSet, errorMode, handleRefresh: reset }}>
@@ -68,7 +68,18 @@ export const AsyncBoundary: SFCModel<AsyncBoundaryPropsModel> = ({
           </Button>
         </Wrapper>
       ) : (
-        <Suspense fallback={fallback ?? null}>{children}</Suspense>
+        <Suspense
+          fallback={
+            fallback ?? (
+              <Wrapper
+                grow
+                isCenter>
+                <Loading />
+              </Wrapper>
+            )
+          }>
+          {children}
+        </Suspense>
       )}
     </AsyncBoundaryContext.Provider>
   );
