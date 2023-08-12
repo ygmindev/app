@@ -12,7 +12,7 @@ export type SignInServiceModel = Pick<
   EntityResourceServiceModel<SignInModel, SignInFormModel>,
   'create'
 > & {
-  signInUpdate(
+  usernameUpdate(
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>>;

@@ -41,12 +41,12 @@ export class SignInResolver
     method: RESOURCE_METHOD_TYPE.CREATE,
     name: SIGN_IN_UPDATE,
   })
-  async signInUpdate(
+  async usernameUpdate(
     @withInput({ Resource: SignInForm, method: RESOURCE_METHOD_TYPE.CREATE, name: SIGN_IN_UPDATE })
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel>,
     @withContext()
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
-    return this.signInService.signInUpdate(input, context);
+    return this.signInService.usernameUpdate(input, context);
   }
 }

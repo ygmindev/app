@@ -28,10 +28,10 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({
   const { t } = useTranslation();
   const { styles } = useStyles({ props });
   const { replace } = useRouter();
-  const { signIn, signInUpdate } = useSignInResource();
+  const { signIn, usernameUpdate } = useSignInResource();
 
   const handleSubmit = async (form: SignInFormModel): Promise<void> =>
-    mode === SIGN_IN_MODE.SIGN_IN ? signIn(form) : signInUpdate(form);
+    mode === SIGN_IN_MODE.SIGN_IN ? signIn(form) : usernameUpdate(form);
 
   const steps = useMemo(() => SIGN_IN_FORM_STEPS({ method, mode }), [method, mode]);
 

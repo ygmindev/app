@@ -38,7 +38,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
     name: SIGN_IN_RESOURCE_NAME,
   });
 
-  const { query: signInUpdate } = useResourceMethod<
+  const { query: usernameUpdate } = useResourceMethod<
     RESOURCE_METHOD_TYPE.CREATE,
     SignInModel,
     SignInFormModel
@@ -58,18 +58,18 @@ export const useSignInResource = (): UseSignInResourceModel => {
       }
     },
 
-    signInUpdate: async (form) => {
-      const { result } = await signInUpdate({ form });
+    signOut: async () => {
+      await signOut();
+      return reset();
+    },
+
+    usernameUpdate: async (form) => {
+      const { result } = await usernameUpdate({ form });
       if (result) {
         await signIn(result);
       } else {
         throw new UnauthorizedError();
       }
-    },
-
-    signOut: async () => {
-      await signOut();
-      return reset();
     },
   };
 };

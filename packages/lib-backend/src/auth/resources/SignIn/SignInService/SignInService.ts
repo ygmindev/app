@@ -62,7 +62,7 @@ export class SignInService implements SignInServiceModel {
     throw new HttpError(HTTP_STATUS_CODE.BAD_REQUEST, 'otp');
   }
 
-  async signInUpdate(
+  async usernameUpdate(
     { form }: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
