@@ -1,4 +1,5 @@
 import { Access } from '#lib-backend/auth/resources/Access/Access';
+import { type AccessResolverModel } from '#lib-backend/auth/resources/Access/AccessResolver/AccessResolver.models';
 import { AccessService } from '#lib-backend/auth/resources/Access/AccessService/AccessService';
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
@@ -13,7 +14,6 @@ import {
   type AccessFormModel,
   type AccessModel,
 } from '#lib-shared/auth/resources/Access/Access.models';
-import { type AccessServiceModel } from '#lib-shared/auth/resources/Access/AccessService/AccessService.models';
 import { NotFoundError } from '#lib-shared/core/errors/NotFoundError/NotFoundError';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
@@ -25,7 +25,7 @@ export class AccessResolver
     ResourceService: AccessService,
     name: ACCESS_RESOURCE_NAME,
   })
-  implements AccessServiceModel
+  implements AccessResolverModel
 {
   @withFieldResolver({ Resource: User })
   async user(@withSelf() access: Access): Promise<UserModel> {

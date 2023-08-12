@@ -7,8 +7,11 @@ import { type EntityResourceServiceModel } from '#lib-shared/resource/services/E
 import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
+import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 export type SignInServiceModel = {
+  createSignIn(user: UserModel | null | undefined): Promise<SignInModel>;
+
   usernameUpdate(
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel>,
     context?: ContextModel,

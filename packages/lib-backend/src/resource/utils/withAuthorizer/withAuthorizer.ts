@@ -12,16 +12,16 @@ export const withAuthorizer =
   <TMethod extends ResourceMethodTypeModel, TType, TForm = undefined, TRoot = undefined>({
     authorizer,
   }: WithAuthorizerParamsModel<TMethod, TType, TForm, TRoot>): WithAuthorizerModel =>
-  (target, _propertyKey, descriptor) => {
+  (_target, _propertyKey, descriptor) => {
     if (authorizer) {
       type AuthorizerModel = (
         input: InputModel<TMethod, TType, TForm, TRoot>,
         context?: ContextModel,
       ) => Promise<OutputModel<TMethod, TType, TRoot>>;
       const original = descriptor.value as AuthorizerModel;
-      (descriptor as { value: AuthorizerModel }).value = (input, context) => {
+      (descriptor as { value: AuthorizerModel }).value = async function (input, context) {
         if (authorizer({ context, input })) {
-          return original.apply(target, [input, context]);
+          return original.apply(this, [input, context]);
         }
         throw new UnauthorizedError();
       };

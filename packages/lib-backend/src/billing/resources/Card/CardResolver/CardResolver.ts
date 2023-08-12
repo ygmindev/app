@@ -1,5 +1,6 @@
 import { selfAuthorizer } from '#lib-backend/auth/utils/selfAuthorizer/selfAuthorizer';
 import { Card } from '#lib-backend/billing/resources/Card/Card';
+import { type CardResolverModel } from '#lib-backend/billing/resources/Card/CardResolver/CardResolver.models';
 import { CardService } from '#lib-backend/billing/resources/Card/CardService/CardService';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { withResolver } from '#lib-backend/http/utils/withResolver/withResolver';
@@ -7,7 +8,6 @@ import { createEmbeddedResourceResolver } from '#lib-backend/resource/utils/crea
 import { User } from '#lib-backend/user/resources/User/User';
 import { CARD_RESOURCE_NAME } from '#lib-shared/billing/resources/Card/Card.constants';
 import { type CardFormModel, type CardModel } from '#lib-shared/billing/resources/Card/Card.models';
-import { type CardServiceModel } from '#lib-shared/billing/resources/Card/CardService/CardService.models';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withContainer()
@@ -20,4 +20,4 @@ export class CardResolver
     authorizer: { default: selfAuthorizer },
     name: CARD_RESOURCE_NAME,
   })
-  implements CardServiceModel {}
+  implements CardResolverModel {}

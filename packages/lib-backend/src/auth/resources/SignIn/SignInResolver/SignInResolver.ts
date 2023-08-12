@@ -1,4 +1,5 @@
 import { SignIn, SignInForm } from '#lib-backend/auth/resources/SignIn/SignIn';
+import { type SignInResolverModel } from '#lib-backend/auth/resources/SignIn/SignInResolver/SignInResolver.models';
 import { SignInService } from '#lib-backend/auth/resources/SignIn/SignInService/SignInService';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { withContext } from '#lib-backend/http/utils/withContext/withContext';
@@ -15,7 +16,6 @@ import {
   type SignInFormModel,
   type SignInModel,
 } from '#lib-shared/auth/resources/SignIn/SignIn.models';
-import { type SignInServiceModel } from '#lib-shared/auth/resources/SignIn/SignInService/SignInService.models';
 import { withInject } from '#lib-shared/core/utils/withInject/withInject';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
@@ -31,7 +31,7 @@ export class SignInResolver
     ResourceService: SignInService,
     name: SIGN_IN_RESOURCE_NAME,
   })
-  implements SignInServiceModel
+  implements SignInResolverModel
 {
   @withInject(SignInService) protected signInService!: SignInService;
 

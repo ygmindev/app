@@ -12,8 +12,9 @@ export const initialize = async (): Promise<InitializeModel> => {
 
   const server = new ApolloServer({
     formatError: (e) => {
+      // TODO: original error isn't printed
       error(e);
-      return { ...e, extensions: { ...e.extensions, statusCode: e.extensions?.statusCode } };
+      return e;
     },
     schema: _graphQlConfig(),
   });
