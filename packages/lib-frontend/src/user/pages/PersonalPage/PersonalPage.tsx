@@ -1,13 +1,11 @@
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
-import { FORM } from '#lib-frontend/form/form.constants';
 import { RouteGroup } from '#lib-frontend/route/components/RouteGroup/RouteGroup';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { type PersonalPagePropsModel } from '#lib-frontend/user/pages/PersonalPage/PersonalPage.models';
-import { EMAIL, NAME, PERSONAL, PHONE } from '#lib-frontend/user/user.constants';
+import { EMAIL, NAME, PHONE } from '#lib-frontend/user/user.constants';
 import { phoneFormat } from '#lib-shared/locale/utils/phoneFormat/phoneFormat';
-import { ACCOUNT } from '#lib-shared/user/user.constants';
 
 export const PersonalPage: SFCModel<PersonalPagePropsModel> = ({ testID, ...props }) => {
   const { styles } = useStyles({ props });
@@ -19,7 +17,7 @@ export const PersonalPage: SFCModel<PersonalPagePropsModel> = ({ testID, ...prop
       testID={testID}>
       <RouteGroup
         label={({ t }) => t('user:personal')}
-        root={`${FORM}/${ACCOUNT}/${PERSONAL}`}
+        root
         routes={[
           {
             icon: 'id',

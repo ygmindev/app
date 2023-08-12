@@ -7,7 +7,6 @@ import { usePaymentMethodResource } from '#lib-frontend/billing/hooks/usePayment
 import { type PaymentPagePropsModel } from '#lib-frontend/billing/pages/PaymentPage/PaymentPage.models';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { LineGroup } from '#lib-frontend/core/components/LineGroup/LineGroup';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
@@ -64,18 +63,16 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
         }
         id="paymentMethods"
         query={query}>
-        {({ data }) =>
-          data && (
-            <Wrapper s>
-              {data.map((value) => (
-                <PaymentMethodItem
-                  key={value._id}
-                  value={value}
-                />
-              ))}
-            </Wrapper>
-          )
-        }
+        {({ data }) => (
+          <LineGroup title={t('billing:paymentMethod_plural')}>
+            {data?.map((value) => (
+              <PaymentMethodItem
+                key={value._id}
+                value={value}
+              />
+            ))}
+          </LineGroup>
+        )}
       </DataBoundary>
 
       <Button

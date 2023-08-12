@@ -32,13 +32,14 @@ export const LineItem: SFCModel<LineItemPropsModel> = ({
   const isValue = value !== undefined;
   const rightElementF =
     rightElement ??
-    ((isActive) => (
-      <Button
-        elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
-        icon="chevronRight"
-        type={BUTTON_TYPE.INVISIBLE}
-      />
-    ));
+    (onPress &&
+      ((isActive) => (
+        <Button
+          elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
+          icon="chevronRight"
+          type={BUTTON_TYPE.INVISIBLE}
+        />
+      )));
 
   return (
     <Activatable
@@ -76,7 +77,7 @@ export const LineItem: SFCModel<LineItemPropsModel> = ({
           {children}
         </Wrapper>
 
-        {rightElementF(isActive)}
+        {rightElementF && rightElementF(isActive)}
       </Wrapper>
     </Activatable>
   );

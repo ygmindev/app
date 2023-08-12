@@ -59,14 +59,29 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
           routes: [
             {
               element: <AccountPage />,
+              header: { previous: '/' },
               pathname: '/',
+              title: ({ t }) => t('user:account'),
             },
             {
-              element: <PersonalPage />,
-              header: { previous: true },
-              isRootsVisible: true,
+              header: { previous: ACCOUNT },
               pathname: PERSONAL,
+              routes: [
+                {
+                  element: <PersonalPage />,
+                  header: { previous: ACCOUNT },
+                  pathname: '/',
+                  title: ({ t }) => t('user:personal'),
+                },
+                {
+                  element: <NameFormPage />,
+                  header: { previous: true },
+                  pathname: NAME,
+                  title: ({ t }) => t('core:edit', { value: t('user:name') }),
+                },
+              ],
               title: ({ t }) => t('user:personal'),
+              transition: ROUTE_TRANSITION.SLIDE,
             },
             {
               element: <PaymentPage />,
@@ -100,7 +115,6 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                   pathname: NAME,
                   title: ({ t }) => t('core:edit', { value: t('user:name') }),
                 },
-
                 {
                   element: (
                     <SignInPage
@@ -112,7 +126,6 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                   pathname: EMAIL,
                   title: ({ t }) => t('core:edit', { value: t('user:email') }),
                 },
-
                 {
                   element: (
                     <SignInPage
@@ -125,6 +138,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                   title: ({ t }) => t('core:edit', { value: t('user:phone') }),
                 },
               ],
+              transition: ROUTE_TRANSITION.SLIDE,
             },
 
             {

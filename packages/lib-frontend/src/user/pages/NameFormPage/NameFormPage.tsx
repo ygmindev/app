@@ -1,13 +1,13 @@
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { CenterLayout } from '#lib-frontend/core/layouts/CenterLayout/CenterLayout';
 import { FormContainer } from '#lib-frontend/form/containers/FormContainer/FormContainer';
+import { FORM_FIELD_TYPE } from '#lib-frontend/form/containers/FormContainer/FormContainer.constants';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { useUserResource } from '#lib-frontend/user/hooks/useUserResource/useUserResource';
-import { NAME_FORM_CONTAINER_PROPS } from '#lib-frontend/user/pages/NameFormPage/NameFormPage.constants';
 import {
   type NameFormModel,
   type NameFormPagePropsModel,
@@ -42,10 +42,26 @@ export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...prop
           actions?.user.currentUserUpdate(result);
           handleBack();
         }}
+        rows={[
+          {
+            fields: [
+              {
+                field: FORM_FIELD_TYPE.TEXT_FIELD,
+                fieldProps: { isAutoFocus: true, label: ({ t }) => t('user:first') },
+                id: 'first',
+              },
+              {
+                field: FORM_FIELD_TYPE.TEXT_FIELD,
+                fieldProps: { label: ({ t }) => t('user:last') },
+                id: 'last',
+              },
+            ],
+            id: 'row',
+          },
+        ]}
         style={styles}
         successMessage={t('core:updateSuccess', { value: tName })}
         testID={testID}
-        {...NAME_FORM_CONTAINER_PROPS}
       />
     </CenterLayout>
   ) : null;

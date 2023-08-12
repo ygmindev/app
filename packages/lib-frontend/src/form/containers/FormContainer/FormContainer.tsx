@@ -168,7 +168,7 @@ const FormContainerF = forwardRef(
               [BORDER_RADIUS_DIRECTION.BOTTOM_LEFT]: (isLastRow && isFirstField) || 0,
               [BORDER_RADIUS_DIRECTION.BOTTOM_RIGHT]: (isLastRow && isLastField) || 0,
             }
-          : 0,
+          : true,
         value: values ? (values as Record<string, undefined>)[id] : undefined,
         zIndex: focused && focused === id ? 1 : 0,
       };
