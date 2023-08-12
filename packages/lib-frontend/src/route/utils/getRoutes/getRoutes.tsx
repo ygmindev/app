@@ -8,7 +8,6 @@ import { PaymentPage } from '#lib-frontend/billing/pages/PaymentPage/PaymentPage
 import { REDIRECT } from '#lib-frontend/core/core.constants';
 import { DEV } from '#lib-frontend/dev/dev.constants';
 import { DevPage } from '#lib-frontend/dev/pages/DevPage/DevPage';
-import { FORM } from '#lib-frontend/form/form.constants';
 import { PingPage } from '#lib-frontend/http/pages/PingPage/PingPage';
 import { TIMEZONE } from '#lib-frontend/locale/locale.constants';
 import { TimezoneFormPage } from '#lib-frontend/locale/pages/TimezoneFormPage/TimezoneFormPage';
@@ -54,7 +53,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
 
         {
           isProtectable: true,
-          ns: [BILLING, SETTINGS, USER, LOCALE],
+          ns: [AUTH, BILLING, SETTINGS, USER, LOCALE],
           pathname: ACCOUNT,
           routes: [
             {
@@ -79,42 +78,6 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                   pathname: NAME,
                   title: ({ t }) => t('core:edit', { value: t('user:name') }),
                 },
-              ],
-              title: ({ t }) => t('user:personal'),
-              transition: ROUTE_TRANSITION.SLIDE,
-            },
-            {
-              element: <PaymentPage />,
-              header: { previous: true },
-              pathname: PAYMENT,
-              title: ({ t }) => t('billing:payment'),
-            },
-            {
-              element: <SettingsPage />,
-              header: { previous: true },
-              ns: [SETTINGS, LOCALE],
-              pathname: SETTINGS,
-              title: ({ t }) => t('settings:settings'),
-            },
-          ],
-          title: ({ t }) => t('user:account'),
-          transition: ROUTE_TRANSITION.SLIDE,
-        },
-
-        {
-          isProtectable: true,
-          pathname: FORM,
-          routes: [
-            {
-              header: { previous: `/${ACCOUNT}/${PERSONAL}` },
-              ns: [USER],
-              pathname: `/${ACCOUNT}/${PERSONAL}`,
-              routes: [
-                {
-                  element: <NameFormPage />,
-                  pathname: NAME,
-                  title: ({ t }) => t('core:edit', { value: t('user:name') }),
-                },
                 {
                   element: (
                     <SignInPage
@@ -122,7 +85,6 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                       mode={SIGN_IN_MODE.UPDATE}
                     />
                   ),
-                  ns: [AUTH],
                   pathname: EMAIL,
                   title: ({ t }) => t('core:edit', { value: t('user:email') }),
                 },
@@ -138,14 +100,37 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                   title: ({ t }) => t('core:edit', { value: t('user:phone') }),
                 },
               ],
+              title: ({ t }) => t('user:personal'),
               transition: ROUTE_TRANSITION.SLIDE,
             },
-
             {
-              header: { previous: `/${ACCOUNT}/${SETTINGS}` },
-              ns: [USER, SETTINGS],
-              pathname: `/${ACCOUNT}/${SETTINGS}`,
+              pathname: PAYMENT,
               routes: [
+                {
+                  element: <PaymentPage />,
+                  header: { previous: true },
+                  pathname: '/',
+                  title: ({ t }) => t('billing:payment'),
+                },
+                {
+                  element: <PaymentMethodFormPage />,
+                  header: { previous: true },
+                  ns: [BILLING],
+                  pathname: PAYMENT_METHOD,
+                  title: ({ t }) => t('core:add', { value: t('billing:paymentMethod') }),
+                },
+              ],
+            },
+            {
+              ns: [SETTINGS, LOCALE],
+              pathname: SETTINGS,
+              routes: [
+                {
+                  element: <SettingsPage />,
+                  header: { previous: true },
+                  pathname: '/',
+                  title: ({ t }) => t('settings:settings'),
+                },
                 {
                   element: <BrightnessFormPage />,
                   pathname: BRIGHTNESS,
@@ -158,15 +143,9 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                 },
               ],
             },
-
-            {
-              element: <PaymentMethodFormPage />,
-              header: { previous: `/${ACCOUNT}/${PAYMENT}` },
-              ns: [BILLING],
-              pathname: PAYMENT_METHOD,
-              title: ({ t }) => t('core:add', { value: t('billing:paymentMethod') }),
-            },
           ],
+          title: ({ t }) => t('user:account'),
+          transition: ROUTE_TRANSITION.SLIDE,
         },
 
         {
