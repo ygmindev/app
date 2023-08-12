@@ -1,3 +1,4 @@
+import { useSignInResource } from '#lib-frontend/auth/hooks/useSignInResource/useSignInResource';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { CenterLayout } from '#lib-frontend/core/layouts/CenterLayout/CenterLayout';
 import { FormContainer } from '#lib-frontend/form/containers/FormContainer/FormContainer';
@@ -7,7 +8,6 @@ import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
-import { useUserResource } from '#lib-frontend/user/hooks/useUserResource/useUserResource';
 import {
   type NameFormModel,
   type NameFormPagePropsModel,
@@ -21,7 +21,7 @@ export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...prop
   const actions = useActions();
   const currentUser = useCurrentUser();
   const { replace } = useRouter();
-  const { update } = useUserResource();
+  const { userUpdate } = useSignInResource();
 
   const handleBack = (): void => {
     void replace({ pathname: `/${ACCOUNT}/${PERSONAL}` });
@@ -35,11 +35,12 @@ export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...prop
         initialValues={{ first: currentUser.first, last: currentUser.last }}
         onCancel={handleBack}
         onSubmit={async ({ first, last }: NameFormModel) => {
-          const { result } = await update({
+          const result = await userUpdate({
             filter: { _id: currentUser._id },
             update: { first, last },
           });
-          actions?.user.currentUserUpdate(result);
+          console.warn(result);
+          // actions?.user.currentUserUpdate(result);
           handleBack();
         }}
         rows={[

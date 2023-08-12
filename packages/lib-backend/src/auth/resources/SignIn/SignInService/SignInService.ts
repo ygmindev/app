@@ -21,7 +21,7 @@ import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constan
 import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
-import { type UserModel } from '#lib-shared/user/resources/User/User.models';
+import { type UserFormModel, type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withContainer({ name: `${SIGN_IN_RESOURCE_NAME}Service` })
 export class SignInService implements SignInServiceModel {
@@ -60,6 +60,18 @@ export class SignInService implements SignInServiceModel {
       return { result: { ...signIn, isNew } };
     }
     throw new HttpError(HTTP_STATUS_CODE.BAD_REQUEST, 'otp');
+  }
+
+  async userUpdate(
+    input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, UserModel, UserFormModel>,
+    _context?: ContextModel,
+  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
+    const result = await this._userService.update(input);
+    if (result?.result) {
+      const signIn = await this.createSignIn(result.result);
+      return { result: signIn };
+    }
+    throw new HttpError(HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR);
   }
 
   async usernameUpdate(

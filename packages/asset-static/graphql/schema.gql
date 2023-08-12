@@ -1113,10 +1113,11 @@ type Mutation {
   OtpUpdate(input: OtpUpdateInput): OtpUpdateOutput
   PaymentMethodTokenCreate(input: PaymentMethodTokenCreateInput): PaymentMethodTokenCreateOutput
   SignInCreate(input: SignInCreateInput): SignInCreateOutput
+  SignInUserUpdate(input: SignInUserUpdateInput): SignInUserUpdateOutput
+  SignInUsernameCreate(input: SignInUsernameCreateInput): SignInUsernameCreateOutput
   UserCreate(input: UserCreateInput): UserCreateOutput
   UserRemove(input: UserRemoveInput): UserRemoveOutput
   UserUpdate(input: UserUpdateInput): UserUpdateOutput
-  UserenameUpdateCreate(input: UserenameUpdateCreateInput): UserenameUpdateCreateOutput
 }
 
 type Otp {
@@ -1392,6 +1393,58 @@ type SignInCreateOutput {
   result: SignIn
 }
 
+input SignInUserUpdateFilterInput {
+  Bank: [CardInput]
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  callingCode: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  paymentMethodPrimary: String
+  phone: String
+}
+
+input SignInUserUpdateInput {
+  filter: SignInUserUpdateFilterInput
+  update: SignInUserUpdateUpdateInput
+}
+
+type SignInUserUpdateOutput {
+  result: SignIn
+}
+
+input SignInUserUpdateUpdateInput {
+  Bank: [CardInput]
+  Card: [CardInput]
+  LinkedUser: [LinkedUserInput]
+  _id: String
+  callingCode: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  paymentMethodPrimary: String
+  phone: String
+}
+
+input SignInUsernameCreateFormInput {
+  callingCode: String
+  email: String
+  otp: String
+  phone: String
+}
+
+input SignInUsernameCreateInput {
+  form: SignInUsernameCreateFormInput
+}
+
+type SignInUsernameCreateOutput {
+  result: SignIn
+}
+
 type Snapshot {
   images: [String]
   name: String
@@ -1607,19 +1660,4 @@ input UserUpdateUpdateInput {
   last: String
   paymentMethodPrimary: String
   phone: String
-}
-
-input UserenameUpdateCreateFormInput {
-  callingCode: String
-  email: String
-  otp: String
-  phone: String
-}
-
-input UserenameUpdateCreateInput {
-  form: UserenameUpdateCreateFormInput
-}
-
-type UserenameUpdateCreateOutput {
-  result: SignIn
 }
