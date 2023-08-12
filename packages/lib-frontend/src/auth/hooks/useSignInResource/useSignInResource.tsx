@@ -1,6 +1,8 @@
 import { useSession } from '#lib-frontend/auth/hooks/useSession/useSession';
 import { type UseSignInResourceModel } from '#lib-frontend/auth/hooks/useSignInResource/useSignInResource.models';
 import { useAppGraphQl } from '#lib-frontend/data/hooks/useAppGraphQl/useAppGraphQl';
+import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
 import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { useTracking } from '#lib-frontend/tracking/hooks/useTracking/useTracking';
@@ -22,10 +24,13 @@ import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.model
 import { type UserFormModel, type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 export const useSignInResource = (): UseSignInResourceModel => {
-  const { identify, reset } = useTracking();
   const actions = useActions();
-
+  const { identify, reset } = useTracking();
   const { signInWithToken, signOut } = useSession();
+  const { success } = useNotification();
+  const { t } = useTranslation();
+
+  const handleUpdateSuccess = (): void => success({ message: t('core:updateSuccess') });
 
   const signIn = async (signIn?: SignInModel): Promise<void> => {
     if (signIn) {
@@ -33,8 +38,9 @@ export const useSignInResource = (): UseSignInResourceModel => {
       actions?.user.currentUserSet(user ?? null);
       token && (await signInWithToken(token));
       user && void identify(user._id);
+    } else {
+      throw new UnauthorizedError();
     }
-    throw new UnauthorizedError();
   };
 
   const { query: create } = useResourceMethod<
@@ -84,6 +90,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
       });
       if (output?.result) {
         await signIn(output.result);
+        handleUpdateSuccess();
       } else {
         throw new UnauthorizedError();
       }
@@ -92,6 +99,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
     usernameUpdate: async (form) => {
       const { result } = await usernameUpdate({ form });
       await signIn(result);
+      handleUpdateSuccess();
     },
   };
 };

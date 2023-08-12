@@ -16,7 +16,7 @@
   "remove": "remove",
   "setAsPrimary": "set as primary",
   "tryAgain": "try again",
-  "updateSuccess": "Successfully update {{value}}",
+  "updateSuccess": "Successfully updated {{value}}",
   "validateAlphaNumeric": "TRANSLATION_MISSING",
   "validateChanged": "nothing changed",
   "validateEmail": "invalid email",
