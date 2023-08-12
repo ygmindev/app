@@ -4,7 +4,7 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 export const SIGN_IN_RESOURCE_NAME = 'SignIn';
 
-export const USERNAME_UPDATE = `Userename${RESOURCE_METHOD_TYPE.UPDATE}`;
+export const SIGN_IN_UPDATE = `SignIn${RESOURCE_METHOD_TYPE.UPDATE}`;
 
 export const SIGN_IN_TOKEN_CLAIM_KEYS: Array<keyof EntityResourceDataModel<UserModel>> = [
   'email',

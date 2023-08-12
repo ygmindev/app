@@ -7,7 +7,7 @@ import { USER_FIELDS } from '#lib-frontend/user/hooks/useUserResource/useUserRes
 import { UnauthorizedError } from '#lib-shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import {
   SIGN_IN_RESOURCE_NAME,
-  USERNAME_UPDATE,
+  SIGN_IN_UPDATE,
 } from '#lib-shared/auth/resources/SignIn/SignIn.constants';
 import {
   type SignInFormModel,
@@ -38,14 +38,14 @@ export const useSignInResource = (): UseSignInResourceModel => {
     name: SIGN_IN_RESOURCE_NAME,
   });
 
-  const { query: usernameUpdate } = useResourceMethod<
+  const { query: signInUpdate } = useResourceMethod<
     RESOURCE_METHOD_TYPE.CREATE,
     SignInModel,
     SignInFormModel
   >({
     fields: [{ result: ['token', { user: USER_FIELDS }] }],
     method: RESOURCE_METHOD_TYPE.CREATE,
-    name: USERNAME_UPDATE,
+    name: SIGN_IN_UPDATE,
   });
 
   return {
@@ -58,18 +58,18 @@ export const useSignInResource = (): UseSignInResourceModel => {
       }
     },
 
-    signOut: async () => {
-      await signOut();
-      return reset();
-    },
-
-    usernameUpdate: async (form) => {
-      const { result } = await usernameUpdate({ form });
+    signInUpdate: async (form) => {
+      const { result } = await signInUpdate({ form });
       if (result) {
         await signIn(result);
       } else {
         throw new UnauthorizedError();
       }
+    },
+
+    signOut: async () => {
+      await signOut();
+      return reset();
     },
   };
 };

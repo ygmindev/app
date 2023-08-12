@@ -10,7 +10,7 @@ import { withOutput } from '#lib-backend/resource/utils/withOutput/withOutput';
 import { ACCESS_LEVEL } from '#lib-shared/auth/resources/Access/Access.constants';
 import {
   SIGN_IN_RESOURCE_NAME,
-  USERNAME_UPDATE,
+  SIGN_IN_UPDATE,
 } from '#lib-shared/auth/resources/SignIn/SignIn.constants';
 import {
   type SignInFormModel,
@@ -39,14 +39,14 @@ export class SignInResolver
     Resource: SignIn,
     level: ACCESS_LEVEL.PROTECTED,
     method: RESOURCE_METHOD_TYPE.CREATE,
-    name: USERNAME_UPDATE,
+    name: SIGN_IN_UPDATE,
   })
-  async usernameUpdate(
-    @withInput({ Resource: SignInForm, method: RESOURCE_METHOD_TYPE.CREATE, name: USERNAME_UPDATE })
+  async signInUpdate(
+    @withInput({ Resource: SignInForm, method: RESOURCE_METHOD_TYPE.CREATE, name: SIGN_IN_UPDATE })
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel>,
     @withContext()
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
-    return this.signInService.usernameUpdate(input, context);
+    return this.signInService.signInUpdate(input, context);
   }
 }

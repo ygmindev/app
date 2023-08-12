@@ -1,3 +1,3 @@
 import { type SignInServiceModel } from '#lib-shared/auth/resources/SignIn/SignInService/SignInService.models';
 
-export type SignInResolverModel = Omit<SignInServiceModel, 'createSignIn'>;
+export type SignInResolverModel = SignInServiceModel;

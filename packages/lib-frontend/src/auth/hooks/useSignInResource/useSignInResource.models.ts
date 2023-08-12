@@ -3,7 +3,7 @@ import { type SignInFormModel } from '#lib-shared/auth/resources/SignIn/SignIn.m
 export type UseSignInResourceModel = {
   signIn(form: SignInFormModel): Promise<void>;
 
-  signOut(): Promise<void>;
+  signInUpdate(form: SignInFormModel): Promise<void>;
 
-  usernameUpdate(form: SignInFormModel): Promise<void>;
+  signOut(): Promise<void>;
 };
