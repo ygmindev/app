@@ -5,7 +5,7 @@ export type _UseMutationParamsModel<TParams = undefined, TResult = void> = [
   callback: (params?: TParams) => Promise<TResult | null>,
 ];
 
-export type _UseMutationModel<TParams = undefined, TResult = void> = {
+export type _UseMutationModel<TParams = undefined, TResult = void> = WithIdModel & {
   data?: TResult | null;
   mutate(params?: TParams): Promise<void>;
-} & WithIdModel;
+};

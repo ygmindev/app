@@ -108,7 +108,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
               routes: [
                 {
                   element: <PaymentPage />,
-                  header: { previous: true },
+                  header: { previous: '/' },
                   pathname: '/',
                   title: ({ t }) => t('billing:payment'),
                 },
@@ -120,28 +120,33 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                   title: ({ t }) => t('core:add', { value: t('billing:paymentMethod') }),
                 },
               ],
+              transition: ROUTE_TRANSITION.SLIDE,
             },
             {
+              header: { previous: true },
               ns: [SETTINGS, LOCALE],
               pathname: SETTINGS,
               routes: [
                 {
                   element: <SettingsPage />,
-                  header: { previous: true },
+                  header: { previous: '/' },
                   pathname: '/',
                   title: ({ t }) => t('settings:settings'),
                 },
                 {
                   element: <BrightnessFormPage />,
+                  header: { previous: true },
                   pathname: BRIGHTNESS,
                   title: ({ t }) => t('settings:brightness'),
                 },
                 {
                   element: <TimezoneFormPage />,
+                  header: { previous: true },
                   pathname: TIMEZONE,
                   title: ({ t }) => t('locale:timezone'),
                 },
               ],
+              transition: ROUTE_TRANSITION.SLIDE,
             },
           ],
           title: ({ t }) => t('user:account'),

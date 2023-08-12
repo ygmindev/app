@@ -6,8 +6,7 @@ import { type PaymentMethodFormPropsModel } from '#lib-frontend/billing/containe
 import { usePaymentMethodResource } from '#lib-frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
-import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
-import { useMutation } from '#lib-frontend/core/hooks/useMutation/useMutation';
+import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBoundary';
 import { FormContainer } from '#lib-frontend/form/containers/FormContainer/FormContainer';
 import { type FormRefModel } from '#lib-frontend/form/form.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -29,16 +28,7 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
   const theme = useTheme();
   const currentUser = useCurrentUser();
   const { createToken } = usePaymentMethodResource();
-
-  const { data, mutate } = useMutation(
-    `${CREATE_TOKEN}${PAYMENT_METHOD}`,
-    async () => currentUser && createToken({ form: undefined, root: { _id: currentUser._id } }),
-  );
-
   const ref = useRef<FormRefModel>(null);
-
-  useAsync(async () => mutate());
-
   return (
     <FormContainer
       onCancel={onCancel}
@@ -50,15 +40,24 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
             {
               Component: ({ elementState, error }) => (
                 <Wrapper width={theme.layout.width[THEME_SIZE.MEDIUM]}>
-                  <PaymentMethodField
-                    defaultValue={defaultValue}
-                    elementState={elementState}
-                    error={error}
-                    ref={ref}
-                    token={data?.result}
-                    // error={error}
-                    // isAutoFocus
-                  />
+                  <DataBoundary
+                    id={`${CREATE_TOKEN}${PAYMENT_METHOD}`}
+                    mutate={async () =>
+                      currentUser &&
+                      createToken({ form: undefined, root: { _id: currentUser._id } })
+                    }>
+                    {({ data }) => (
+                      <PaymentMethodField
+                        defaultValue={defaultValue}
+                        elementState={elementState}
+                        error={error}
+                        ref={ref}
+                        token={data?.result}
+                        // error={error}
+                        // isAutoFocus
+                      />
+                    )}
+                  </DataBoundary>
                 </Wrapper>
               ),
               id: PAYMENT_METHOD,

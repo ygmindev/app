@@ -6,7 +6,7 @@ import { withId } from '#lib-shared/core/utils/withId/withId';
 import { type WithIdResultModel } from '#lib-shared/core/utils/withId/withId.models';
 import { ACCOUNT } from '#lib-shared/user/user.constants';
 
-export const ACCOUNT_GROUPS: WithIdResultModel<Array<RouteGroupPropsModel>> = withId([
+export const ACCOUNT_GROUPS = withId([
   {
     id: ACCOUNT,
     label: ({ t }) => t('user:account'),
@@ -31,4 +31,4 @@ export const ACCOUNT_GROUPS: WithIdResultModel<Array<RouteGroupPropsModel>> = wi
       },
     ],
   },
-]);
+]) satisfies WithIdResultModel<Array<RouteGroupPropsModel>>;

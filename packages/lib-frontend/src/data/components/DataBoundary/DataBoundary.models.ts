@@ -2,11 +2,24 @@ import { type ReactElement } from 'react';
 
 import { type AsyncBoundaryPropsModel } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import { type ChildrenPropsModel } from '#lib-frontend/core/core.models';
-import { type UseQueryModel } from '#lib-frontend/data/hooks/useQuery/useQuery.models';
-import { type NilModel } from '#lib-shared/core/core.models';
+import { type UseMutationParamsModel } from '#lib-frontend/data/hooks/useMutation/useMutation.models';
+import { type UseQueryParamsModel } from '#lib-frontend/data/hooks/useQuery/useQuery.models';
+import { type NilModel, type PartialModel } from '#lib-shared/core/core.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
-export type DataBoundaryPropsModel<TType> = Omit<AsyncBoundaryPropsModel, 'children'> &
+export type DataBoundaryPropsModel<TParams = undefined, TResult = void> = Omit<
+  AsyncBoundaryPropsModel,
+  'children'
+> &
   WithIdModel &
-  Pick<UseQueryModel<TType>, 'query'> &
-  ChildrenPropsModel<(props: { data?: TType | null }) => ReactElement | NilModel>;
+  PartialModel<QueryComponentPropsModel<TResult> & MutateComponentPropsModel<TParams, TResult>>;
+
+export type QueryComponentPropsModel<TResult = void> = WithIdModel &
+  ChildrenPropsModel<(props: { data?: TResult | null }) => ReactElement | NilModel> & {
+    query: UseQueryParamsModel<TResult>[1];
+  };
+
+export type MutateComponentPropsModel<TParams = undefined, TResult = void> = WithIdModel &
+  ChildrenPropsModel<(props: { data?: TResult | null }) => ReactElement | NilModel> & {
+    mutate: UseMutationParamsModel<TParams, TResult>[1];
+  };

@@ -1,7 +1,7 @@
 import range from 'lodash/range';
 
 import { SkeletonGroup } from '#lib-frontend/animation/components/SkeletonGroup/SkeletonGroup';
-import { PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants';
+import { PAYMENT, PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants';
 import { PaymentMethodItem } from '#lib-frontend/billing/components/PaymentMethodItem/PaymentMethodItem';
 import { usePaymentMethodResource } from '#lib-frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
 import { type PaymentPagePropsModel } from '#lib-frontend/billing/pages/PaymentPage/PaymentPage.models';
@@ -11,7 +11,6 @@ import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBoundary';
-import { FORM } from '#lib-frontend/form/form.constants';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
@@ -19,6 +18,7 @@ import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { type PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { sort } from '#lib-shared/core/utils/sort/sort';
+import { ACCOUNT } from '#lib-shared/user/user.constants';
 
 export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props }) => {
   const { t } = useTranslation();
@@ -77,7 +77,7 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
 
       <Button
         icon="add"
-        onPress={() => push({ pathname: `/${FORM}/${PAYMENT_METHOD}` })}>
+        onPress={() => push({ pathname: `${ACCOUNT}/${PAYMENT}/${PAYMENT_METHOD}` })}>
         {tPaymentMethodAdd}
       </Button>
     </MainLayout>

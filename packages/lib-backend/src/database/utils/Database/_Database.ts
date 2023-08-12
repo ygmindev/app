@@ -11,6 +11,7 @@ import { type _DatabaseConfigModel } from '#lib-config/database/database.models'
 import { type PartialDeepModel } from '#lib-shared/core/core.models';
 import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/DuplicateError';
 import { UninitializedError } from '#lib-shared/core/errors/UninitializedError/UninitializedError';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { debug, info } from '#lib-shared/logging/utils/logger/logger';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type ResourceNameParamsModel } from '#lib-shared/resource/resource.models';
@@ -80,16 +81,22 @@ export class _Database implements _DatabaseModel {
         const em = this._getEntityManager();
         const filterF = cleanDocument(filter) as object;
         const collection = em.getCollection(name);
-        const result = (await (options && options.aggregate
-          ? collection
-              .aggregate([
-                { $match: filterF },
-                ...(options
-                  ? [options.project && { $project: options.project }, ...(options.aggregate ?? [])]
-                  : []),
-              ] as unknown as Document[])
-              .next()
-          : collection.findOne(filterF, options && { projection: options.project }))) as TType;
+        const result = (options &&
+          (await (options.aggregate
+            ? collection
+                .aggregate(
+                  filterNil([
+                    { $match: filterF },
+                    ...(options
+                      ? [
+                          options.project && { $project: options.project },
+                          ...(options.aggregate ?? []),
+                        ]
+                      : []),
+                  ] as unknown as Document[]),
+                )
+                .next()
+            : collection.findOne(filterF, options && { projection: options.project })))) as TType;
         return { result: result ?? undefined };
       },
 
