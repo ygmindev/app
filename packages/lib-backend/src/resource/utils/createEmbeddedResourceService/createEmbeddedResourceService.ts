@@ -2,7 +2,6 @@ import forEach from 'lodash/forEach';
 import reduce from 'lodash/reduce';
 
 import { Container } from '#lib-backend/core/utils/Container/Container';
-import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { getConnection } from '#lib-backend/database/utils/getConnection/getConnection';
 import {
   type CreateEmbeddedResourceServiceModel,
@@ -76,7 +75,6 @@ export const createEmbeddedResourceService = <
     ]);
   };
 
-  @withContainer()
   class EmbeddedResourceService implements EmbeddedResourceServiceModel<TType, TForm, TRoot> {
     protected _rootService = Container.get(RootService);
 

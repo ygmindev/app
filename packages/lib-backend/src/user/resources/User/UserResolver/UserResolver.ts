@@ -3,7 +3,6 @@ import { withResolver } from '#lib-backend/http/utils/withResolver/withResolver'
 import { createEntityResourceResolver } from '#lib-backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
 import { User } from '#lib-backend/user/resources/User/User';
 import { UserService } from '#lib-backend/user/resources/User/UserService/UserService';
-import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
 import { type UserFormModel, type UserModel } from '#lib-shared/user/resources/User/User.models';
 import { type UserServiceModel } from '#lib-shared/user/resources/User/UserService/UserService.models';
@@ -14,9 +13,9 @@ export class UserResolver
   extends createEntityResourceResolver<UserModel, UserFormModel>({
     Resource: User,
     ResourceService: UserService,
-    authorizer: {
-      Update: ({ context, input }) => isEqual(context?.user?._id, input.filter._id),
-    },
+    // authorizer: {
+    //   Update: ({ context, input }) => isEqual(context?.user?._id, input.filter._id),
+    // },
     name: USER_RESOURCE_NAME,
   })
   implements UserServiceModel {}

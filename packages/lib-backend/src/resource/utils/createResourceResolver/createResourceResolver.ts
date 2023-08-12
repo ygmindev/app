@@ -1,5 +1,4 @@
 import { Container } from '#lib-backend/core/utils/Container/Container';
-import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { withContext } from '#lib-backend/http/utils/withContext/withContext';
 import { withResolver } from '#lib-backend/http/utils/withResolver/withResolver';
 import {
@@ -40,7 +39,6 @@ export const createResourceResolver = <TType, TForm = undefined, TRoot = undefin
   const updateExists = prototype.update !== undefined;
   const removeExists = prototype.remove !== undefined;
 
-  @withContainer()
   @withResolver({ isAbstract: true })
   class ResourceResolver implements ResourceResolverModel<TType, TForm, TRoot> {
     protected _service = Container.get(ResourceService);
