@@ -12,6 +12,8 @@ import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type RouteHeaderPropsModel } from '#lib-frontend/route/containers/RouteHeader/RouteHeader.models';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
+import { ROUTE_DIRECTION } from '#lib-frontend/route/route.constants';
+import { type RouteDirectionModel } from '#lib-frontend/route/route.models';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
@@ -24,7 +26,7 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ..
   const { t } = useTranslation();
   const { styles } = useStyles({ props });
   const theme = useTheme();
-  const { location, push } = useRouter();
+  const { back, push } = useRouter();
   const previous = route.header?.previous;
   const ref = useRef<WrapperRefModel>(null);
   const isLoading = useStore((state) => state.app.isLoading);
@@ -49,8 +51,11 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ..
           icon="chevronLeft"
           onPress={async () => {
             ref.current?.toState(ELEMENT_STATE.INACTIVE);
+            if ((previous as RouteDirectionModel) === ROUTE_DIRECTION.BACK) {
+              return back();
+            }
             const previousF =
-              previous === true
+              (previous as RouteDirectionModel) === ROUTE_DIRECTION.UP
                 ? route.pathname === '/'
                   ? route.root?.slice(0, route.root.lastIndexOf('/'))
                   : route.root

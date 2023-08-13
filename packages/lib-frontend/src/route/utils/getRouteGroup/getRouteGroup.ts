@@ -1,4 +1,4 @@
-import { ROUTE_TRANSITION } from '#lib-frontend/route/route.constants';
+import { ROUTE_DIRECTION, ROUTE_TRANSITION } from '#lib-frontend/route/route.constants';
 import {
   type GetRouteGroupModel,
   type GetRouteGroupParamsModel,
@@ -7,18 +7,20 @@ import { merge } from '#lib-shared/core/utils/merge/merge';
 
 export const getRouteGroup = ({
   element,
-  header = { previous: true },
+  header,
   ns,
   pathname,
   routes,
   title,
-}: GetRouteGroupParamsModel): GetRouteGroupModel => ({
-  header,
-  ns,
-  pathname,
-  routes: [
-    { element, header, pathname: '/', title },
-    ...(routes ? routes.map((route) => merge([{ header: { previous: true } }, route])) : []),
-  ],
-  transition: ROUTE_TRANSITION.SLIDE,
-});
+}: GetRouteGroupParamsModel): GetRouteGroupModel => {
+  const headerF = merge([{ previous: ROUTE_DIRECTION.UP }, header]);
+  return {
+    ns,
+    pathname,
+    routes: [
+      { element, header: headerF, pathname: '/', title },
+      ...(routes ? routes.map((route) => merge([route, { header: headerF }])) : []),
+    ],
+    transition: ROUTE_TRANSITION.SLIDE,
+  };
+};

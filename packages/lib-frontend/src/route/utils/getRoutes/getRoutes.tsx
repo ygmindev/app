@@ -52,17 +52,13 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
       routes: [
         ...appRoutes,
 
-        {
+        getRouteGroup({
+          element: <AccountPage />,
+          header: { previous: '/' },
           isProtectable: true,
           ns: [AUTH, BILLING, SETTINGS, USER, LOCALE],
           pathname: ACCOUNT,
           routes: [
-            {
-              element: <AccountPage />,
-              header: { previous: '/' },
-              pathname: '/',
-              title: ({ t }) => t('user:account'),
-            },
             getRouteGroup({
               element: <PersonalPage />,
               ns: [AUTH, USER],
@@ -131,8 +127,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
             }),
           ],
           title: ({ t }) => t('user:account'),
-          transition: ROUTE_TRANSITION.SLIDE,
-        },
+        }),
 
         {
           element: <SignInPage mode={SIGN_IN_MODE.SIGN_IN} />,

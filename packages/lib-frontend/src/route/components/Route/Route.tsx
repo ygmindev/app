@@ -78,7 +78,6 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
 
   const Container = route.isProtectable ? Protectable : Fragment;
   element = <Container>{element}</Container>;
-
   return (
     <>
       {isActiveLeaf && route.header && (
