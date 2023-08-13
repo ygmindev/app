@@ -13,7 +13,7 @@ export const getRouteGroup = ({
   routes,
   title,
 }: GetRouteGroupParamsModel): GetRouteGroupModel => {
-  const headerF = merge([{ previous: ROUTE_DIRECTION.UP }, header]);
+  const headerF = merge([header, { previous: ROUTE_DIRECTION.UP }]);
   return {
     ns,
     pathname,
