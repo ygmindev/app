@@ -1,3 +1,3 @@
-import { graphql } from 'packages/backend-graphql-sandbox/src/graphql/graphql';
+import { graphql } from '#backend-graphql-sandbox/functions/graphql/graphql';
 
-graphql();
+void graphql();
