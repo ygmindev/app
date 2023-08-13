@@ -36,7 +36,6 @@ export type LocationModel<TType extends LocationParamsModel = LocationParamsMode
 
 export type LocationParamsModel = {
   previous?: string;
-  title?: string;
 };
 
 export type RouteContextModel<TType extends LocationParamsModel = LocationParamsModel> = {

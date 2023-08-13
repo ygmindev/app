@@ -61,8 +61,8 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ..
         />
       )}
 
-      <Appearable isActive={!!(location.params?.title || route.title)}>
-        <Text type={FONT_TYPE.SUBTITLE}>{t(location.params?.title || route.title)}</Text>
+      <Appearable isActive={!!route.title}>
+        <Text type={FONT_TYPE.SUBTITLE}>{t(route.title)}</Text>
       </Appearable>
     </Wrapper>
   );

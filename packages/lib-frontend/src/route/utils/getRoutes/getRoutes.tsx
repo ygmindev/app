@@ -63,12 +63,6 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
               pathname: '/',
               title: ({ t }) => t('user:account'),
             },
-            {
-              header: { previous: ACCOUNT },
-              pathname: PERSONAL,
-              routes: [],
-            },
-
             getRouteGroup({
               element: <PersonalPage />,
               ns: [AUTH, USER],

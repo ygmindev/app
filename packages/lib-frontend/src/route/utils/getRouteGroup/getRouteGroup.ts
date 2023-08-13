@@ -17,14 +17,8 @@ export const getRouteGroup = ({
   ns,
   pathname,
   routes: [
-    {
-      element,
-      // header,
-      pathname: '/',
-      title: ({ t }) => t('settings:settings'),
-    },
+    { element, header, pathname: '/', title },
     ...(routes ? routes.map((route) => merge([{ header: { previous: true } }, route])) : []),
   ],
-  title,
   transition: ROUTE_TRANSITION.SLIDE,
 });

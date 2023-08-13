@@ -20,9 +20,7 @@ const getRoute = ({ pathname = '/', ...route }: RouteModel, depth = 0): RouteMod
     ...route,
     fullpath: trimPathname(`${route.root ?? ''}/${pathnameF}`),
     pathname: pathnameF,
-    routes: route.routes?.map((child) =>
-      getRoute({ ...child, header: child.header ?? route.header, root: rootF }, depthF),
-    ),
+    routes: route.routes?.map((child) => getRoute({ ...child, root: rootF }, depthF)),
   };
   return {
     ...routeF,

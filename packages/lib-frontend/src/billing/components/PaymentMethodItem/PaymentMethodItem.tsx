@@ -2,7 +2,7 @@ import { type ReactElement } from 'react';
 import { useCallback, useRef } from 'react';
 
 import { Skeleton } from '#lib-frontend/animation/components/Skeleton/Skeleton';
-import { PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants';
+import { BILLING, PAYMENT, PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants';
 import { PAYMENT_METHOD_ITEM_ICON_WIDTH } from '#lib-frontend/billing/components/PaymentMethodItem/PaymentMethodItem.constants';
 import { type PaymentMethodItemPropsModel } from '#lib-frontend/billing/components/PaymentMethodItem/PaymentMethodItem.models';
 import { useBankResource } from '#lib-frontend/billing/hooks/useBankResource/useBankResource';
@@ -19,7 +19,6 @@ import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type SFCModel } from '#lib-frontend/core/core.models';
-import { FORM } from '#lib-frontend/form/form.constants';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
@@ -31,6 +30,7 @@ import { CARD_BRAND } from '#lib-shared/billing/resources/Card/Card.constants';
 import { type CardModel } from '#lib-shared/billing/resources/Card/Card.models';
 import { PAYMENT_METHOD_TYPE } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
+import { ACCOUNT } from '#lib-shared/user/user.constants';
 
 export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
   elementState,
@@ -118,8 +118,8 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
                 onPress: value
                   ? () =>
                       push<PaymentMethodFormPageParamsModel>({
-                        params: { title: t('core:edit', { value: title }), value },
-                        pathname: `/${FORM}/${PAYMENT_METHOD}`,
+                        params: { value },
+                        pathname: `/${ACCOUNT}/${BILLING}/${PAYMENT}/${PAYMENT_METHOD}`,
                       })
                   : undefined,
               },

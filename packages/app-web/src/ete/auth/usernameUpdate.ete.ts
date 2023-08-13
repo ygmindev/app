@@ -2,7 +2,6 @@ import { signIn } from '#app-web/ete/auth/utils/signIn/signIn';
 import { seed } from '#lib-backend/database/utils/seed/seed';
 import { initialize } from '#lib-backend/setup/utils/initialize/initialize';
 import { USERNAME_FORM_TEST_ID } from '#lib-frontend/auth/containers/UsernameForm/UsernameForm.constants';
-import { FORM } from '#lib-frontend/form/form.constants';
 import { withScreen } from '#lib-frontend/test/utils/withScreen/withScreen';
 import { EMAIL, PERSONAL } from '#lib-frontend/user/user.constants';
 import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
@@ -21,7 +20,7 @@ describe('usernameUpdate', () => {
 
   test('works', async () => {
     await withScreen(async (screen) => {
-      await screen.goto(`/${FORM}/${ACCOUNT}/${PERSONAL}/${EMAIL}`);
+      await screen.goto(`/${ACCOUNT}/${PERSONAL}/${EMAIL}`);
       await screen.snapshot();
       await signIn({ screen });
       await screen.snapshot();
