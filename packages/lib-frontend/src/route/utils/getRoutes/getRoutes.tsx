@@ -14,6 +14,7 @@ import { TimezoneFormPage } from '#lib-frontend/locale/pages/TimezoneFormPage/Ti
 import { NotFoundPage } from '#lib-frontend/route/pages/NotFoundPage/NotFoundPage';
 import { ROUTE_TRANSITION } from '#lib-frontend/route/route.constants';
 import { type RouteModel } from '#lib-frontend/route/route.models';
+import { getRouteGroup } from '#lib-frontend/route/utils/getRouteGroup/getRouteGroup';
 import {
   type GetRoutesModel,
   type GetRoutesParamsModel,
@@ -65,16 +66,16 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
             {
               header: { previous: ACCOUNT },
               pathname: PERSONAL,
+              routes: [],
+            },
+
+            getRouteGroup({
+              element: <PersonalPage />,
+              ns: [AUTH, USER],
+              pathname: PERSONAL,
               routes: [
                 {
-                  element: <PersonalPage />,
-                  header: { previous: ACCOUNT },
-                  pathname: '/',
-                  title: ({ t }) => t('user:personal'),
-                },
-                {
                   element: <NameFormPage />,
-                  header: { previous: true },
                   pathname: NAME,
                   title: ({ t }) => t('core:edit', { value: t('user:name') }),
                 },
@@ -95,59 +96,45 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                       mode={SIGN_IN_MODE.UPDATE}
                     />
                   ),
-                  ns: [AUTH, USER],
                   pathname: PHONE,
                   title: ({ t }) => t('core:edit', { value: t('user:phone') }),
                 },
               ],
               title: ({ t }) => t('user:personal'),
-              transition: ROUTE_TRANSITION.SLIDE,
-            },
-            {
+            }),
+
+            getRouteGroup({
+              element: <PaymentPage />,
+              ns: [BILLING],
               pathname: PAYMENT,
               routes: [
                 {
-                  element: <PaymentPage />,
-                  header: { previous: '/' },
-                  pathname: '/',
-                  title: ({ t }) => t('billing:payment'),
-                },
-                {
                   element: <PaymentMethodFormPage />,
-                  header: { previous: true },
-                  ns: [BILLING],
                   pathname: PAYMENT_METHOD,
                   title: ({ t }) => t('core:add', { value: t('billing:paymentMethod') }),
                 },
               ],
-              transition: ROUTE_TRANSITION.SLIDE,
-            },
-            {
-              header: { previous: true },
+              title: ({ t }) => t('billing:payment'),
+            }),
+
+            getRouteGroup({
+              element: <SettingsPage />,
               ns: [SETTINGS, LOCALE],
               pathname: SETTINGS,
               routes: [
                 {
-                  element: <SettingsPage />,
-                  header: { previous: '/' },
-                  pathname: '/',
-                  title: ({ t }) => t('settings:settings'),
-                },
-                {
                   element: <BrightnessFormPage />,
-                  header: { previous: true },
                   pathname: BRIGHTNESS,
                   title: ({ t }) => t('settings:brightness'),
                 },
                 {
                   element: <TimezoneFormPage />,
-                  header: { previous: true },
                   pathname: TIMEZONE,
                   title: ({ t }) => t('locale:timezone'),
                 },
               ],
-              transition: ROUTE_TRANSITION.SLIDE,
-            },
+              title: ({ t }) => t('settings:settings'),
+            }),
           ],
           title: ({ t }) => t('user:account'),
           transition: ROUTE_TRANSITION.SLIDE,
