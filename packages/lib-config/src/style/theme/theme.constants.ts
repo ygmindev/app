@@ -55,7 +55,7 @@ export const THEME_CONFIG = {
     },
 
     header: {
-      height: 60,
+      height: 50,
     },
 
     height: {
@@ -88,7 +88,13 @@ export const THEME_CONFIG = {
   opaque: 0.7,
 
   shape: {
-    borderRadius: 20,
+    borderRadius: {
+      [THEME_SIZE_MORE.LARGE]: 30,
+
+      [THEME_SIZE_MORE.MEDIUM]: 20,
+
+      [THEME_SIZE_MORE.SMALL]: 8,
+    },
 
     height: {
       [THEME_SIZE_MORE.LARGE]: 52,

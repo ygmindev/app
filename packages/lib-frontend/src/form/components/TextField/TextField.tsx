@@ -64,7 +64,7 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
     } = useControlledValue<ElementStateModel>({
       defaultValue: ELEMENT_STATE.INACTIVE,
       onChange: onElementStateChange,
-      value: elementState,
+      value: elementState || undefined,
     });
 
     const heightF = label

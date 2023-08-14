@@ -41,10 +41,7 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
         ? theme.font.weight.bold
         : undefined,
 
-    lineHeight:
-      isLineHeight || type === FONT_TYPE.HEADLINE || type === FONT_TYPE.TITLE
-        ? theme.font.lineHeight
-        : undefined,
+    lineHeight: isLineHeight && type === FONT_TYPE.BODY ? theme.font.lineHeight : undefined,
 
     textAlign: align,
 

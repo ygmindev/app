@@ -16,12 +16,13 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
 }: _UseAnimationStateParamsModel<TStyle>): _UseAnimationStateModel<TStyle> => {
   const { delay, duration, isInfinite, isInitial = false, states } = animation ?? {};
   const animationState = useDynamicAnimation();
+  const elementStateF = states && elementState ? (states[elementState] as never) : undefined;
   return {
     animationProps: {
-      animate: ref ? undefined : states && (states[elementState] as never),
+      animate: ref ? undefined : states && elementStateF,
       animateInitialState: isInitial,
       exit: states?.exit ?? states?.inactive,
-      from: ref ? states && (states[elementState] as never) : (states?.inactive as never),
+      from: ref ? states && elementStateF : (states?.inactive as never),
       transition: { delay, duration, loop: isInfinite, type: 'timing' },
     },
     animationState: animationState as UseDynamicAnimationState,

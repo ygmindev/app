@@ -1,5 +1,6 @@
 import { cloneElement, Fragment, useState } from 'react';
 
+import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 import { Slide } from '#lib-frontend/animation/components/Slide/Slide';
 import { Protectable } from '#lib-frontend/auth/components/Protectable/Protectable';
 import { Portal } from '#lib-frontend/core/components/Portal/Portal';
@@ -65,8 +66,17 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
                         {element}
                       </Slide>
                     );
-                  default:
-                    return element;
+                  default: {
+                    return isLeaf ? (
+                      <Appearable
+                        isAbsoluteFill
+                        isActive={isActiveLeaf}>
+                        {element}
+                      </Appearable>
+                    ) : (
+                      element
+                    );
+                  }
                 }
               })(),
             }))}
@@ -86,13 +96,14 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
         </Portal>
       )}
 
-      <Wrapper
+      <Appearable
+        grow
         isAbsoluteFill
-        isHidden={!isActiveF}
+        isActive={isActiveF}
         style={styles}
         testID={testID}>
         {element}
-      </Wrapper>
+      </Appearable>
     </>
   );
 };

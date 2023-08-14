@@ -40,7 +40,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   const { valueControlled, valueControlledSet } = useControlledValue<ElementStateModel>({
     defaultValue: ELEMENT_STATE.INACTIVE,
     onChange: onElementStateChange,
-    value: elementState,
+    value: elementState || undefined,
   });
 
   const heightF = height ?? theme.shape.height[size];

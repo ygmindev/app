@@ -69,7 +69,7 @@ export const Table = forwardRef(
             }}
             onSelect={onSelect}
             ref={ref}
-            rowHeight={rowHeight || theme.font.lineHeight}
+            rowHeight={rowHeight ?? theme.font.lineHeight}
             select={select}
           />
         </Appearable>

@@ -1,4 +1,4 @@
-import { type ThemeColorModel, type ThemeRoleModel } from '#lib-frontend/style/style.models';
+import { type ThemeRoleModel, type ThemeSizeModel } from '#lib-frontend/style/style.models';
 import {
   type BORDER_DIRECTION,
   type BORDER_RADIUS_DIRECTION,
@@ -10,9 +10,13 @@ export type BorderRadiusDirection = `${BORDER_RADIUS_DIRECTION}`;
 
 export type BorderStylerParamsModel = {
   border?: BorderDirectionModel | boolean;
-  borderColor?: ThemeColorModel | string;
+  borderColor?: string;
   borderRole?: ThemeRoleModel;
   borderWidth?: number;
   isShadow?: boolean;
-  round?: Record<BorderRadiusDirection, boolean | number> | boolean | number;
+  round?:
+    | Record<BorderRadiusDirection, ThemeSizeModel | boolean | number>
+    | ThemeSizeModel
+    | boolean
+    | number;
 };

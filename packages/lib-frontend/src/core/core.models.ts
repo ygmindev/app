@@ -11,6 +11,7 @@ import {
   type ViewStyleModel,
 } from '#lib-frontend/style/style.models';
 import { type TestIdPropsModel } from '#lib-frontend/test/test.models';
+import { type NilModel } from '#lib-shared/core/core.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
 export type FCModel<TProps = object> = _FC<TProps & TestIdPropsModel & { nativeID?: string }>;
@@ -60,14 +61,23 @@ export type PagePropsModel<TType = undefined> = ChildrenPropsModel & {
 export type LayoutPropsModel = {
   isHorizontalCenter?: boolean;
   isVerticalCenter?: boolean;
-} & Pick<WrapperPropsModel, 'children' | 'isFullWidth' | 'isCenter'>;
+} & Pick<
+  WrapperPropsModel,
+  | 'p'
+  | 's'
+  | 'children'
+  | 'isFullWidth'
+  | 'isCenter'
+  | 'isHorizontalScrollable'
+  | 'isVerticalScrollable'
+>;
 
 export type ElementStateModel = `${ELEMENT_STATE}`;
 
 export type DirectionModel = `${DIRECTION}`;
 
 export type ElementStatePropsModel = {
-  elementState?: ElementStateModel;
+  elementState?: ElementStateModel | NilModel;
   onElementStateChange?(value?: ElementStateModel): void;
 };
 

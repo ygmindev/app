@@ -1,8 +1,8 @@
 import isNumber from 'lodash/isNumber';
 import isPlainObject from 'lodash/isPlainObject';
 
-import { THEME_ROLE } from '#lib-frontend/style/style.constants';
-import { type ThemeColorModel } from '#lib-frontend/style/style.models';
+import { THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
+import { type ThemeColorModel, type ThemeSizeModel } from '#lib-frontend/style/style.models';
 import {
   BORDER_DIRECTION,
   BORDER_RADIUS_DIRECTION,
@@ -19,13 +19,14 @@ export const borderStyler: StylerModel<BorderStylerParamsModel> = (
   theme,
 ) => {
   const getBorderRadius = (value?: typeof round, key?: BorderRadiusDirection): number | undefined =>
-    value === true
-      ? theme.shape.borderRadius
+    theme.shape.borderRadius[value as unknown as ThemeSizeModel] ||
+    (value === true
+      ? theme.shape.borderRadius[THEME_SIZE.MEDIUM]
       : isNumber(value)
       ? value
       : value && isPlainObject(value) && key
-      ? getBorderRadius(value[key])
-      : undefined;
+      ? getBorderRadius(value[key as keyof typeof value])
+      : undefined);
 
   const colorF = theme.color.palette[borderColor as ThemeColorModel];
   const borderColorF = colorF ? colorF[borderRole] : theme.color.border;

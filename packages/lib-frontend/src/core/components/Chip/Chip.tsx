@@ -22,7 +22,7 @@ export const Chip: SFCModel<ChipPropsModel> = ({
       backgroundColor={color}
       isCenter
       p={THEME_SIZE.SMALL}
-      round
+      round={THEME_SIZE.SMALL}
       style={styles}
       testID={testID}>
       <Text

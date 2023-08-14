@@ -38,7 +38,7 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
   const { valueControlled, valueControlledSet } = useControlledValue<ElementStateModel>({
     defaultValue: ELEMENT_STATE.INACTIVE,
     onChange: onElementStateChange,
-    value: elementState,
+    value: elementState || undefined,
   });
 
   const isDisabled =

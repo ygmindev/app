@@ -20,13 +20,12 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
   const { styles } = useStyles({ props });
   const { t } = useTranslation();
   const { valueControlled, valueControlledSet } = useControlledValue({
-    defaultValue: defaultValue || (tabs && tabs.length ? tabs[0].id : ''),
+    defaultValue: defaultValue ?? (tabs && tabs.length ? tabs[0].id : ''),
     onChange,
     value,
   });
   return (
     <Wrapper
-      grow={0}
       isHorizontalScrollable={!isVertical}
       isRow={!isVertical}
       isVerticalScrollable={isVertical}
@@ -40,6 +39,7 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
             icon={tab.icon}
             key={tab.id}
             onPress={() => valueControlledSet(tab.id)}
+            testID={tab.id}
             type={isActive ? undefined : BUTTON_TYPE.TRANSPARENT}>
             {t(tab.label)}
           </Button>

@@ -11,7 +11,11 @@ export const MainLayout: SFCModel<MainLayoutPropsModel> = ({
   isCenter,
   isFullWidth,
   isHorizontalCenter,
+  isHorizontalScrollable,
   isVerticalCenter,
+  isVerticalScrollable,
+  p,
+  s,
   ...props
 }) => {
   const { styles } = useStyles({ props });
@@ -22,14 +26,19 @@ export const MainLayout: SFCModel<MainLayoutPropsModel> = ({
     <Wrapper
       grow
       isFullWidth={isFullWidthF}
-      p
+      shrink
       style={styles}>
       <Wrapper
+        grow
         isFullWidth={isFullWidthF}
+        isHorizontalScrollable={isHorizontalScrollable}
+        isVerticalScrollable={isVerticalScrollable}
         m={isCenter ? 'auto' : undefined}
         mHorizontal={isCenter || isHorizontalCenter ? 'auto' : undefined}
         mVertical={isCenter || isVerticalCenter ? 'auto' : undefined}
-        s
+        p={p}
+        s={s}
+        shrink
         width={isFullWidthF ? undefined : theme.layout.width[THEME_SIZE.MEDIUM]}>
         {children}
       </Wrapper>

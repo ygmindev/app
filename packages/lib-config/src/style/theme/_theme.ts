@@ -53,7 +53,7 @@ export const _theme = ({ color, font, shape }: ThemeConfigModel): _ThemeConfigMo
         labelSmall: { ...fontStyle, fontSize: font.size[THEME_SIZE.SMALL] },
       },
 
-      roundness: shape.borderRadius,
+      roundness: shape.borderRadius[THEME_SIZE.MEDIUM],
     },
 
     DefaultTheme,

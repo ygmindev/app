@@ -10,7 +10,7 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type FCModel } from '#lib-frontend/core/core.models';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR_MORE } from '#lib-frontend/style/style.constants';
+import { THEME_COLOR_MORE, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
@@ -48,8 +48,8 @@ export const Modal: FCModel<ModalPropsModel> = ({
         isFullWidth
         isShadow
         style={{
-          borderTopLeftRadius: theme.shape.borderRadius,
-          borderTopRightRadius: theme.shape.borderRadius,
+          borderTopLeftRadius: theme.shape.borderRadius[THEME_SIZE.MEDIUM],
+          borderTopRightRadius: theme.shape.borderRadius[THEME_SIZE.MEDIUM],
         }}>
         <KeyboardContainer>
           <Wrapper
