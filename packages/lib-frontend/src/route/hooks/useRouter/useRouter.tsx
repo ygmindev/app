@@ -20,6 +20,7 @@ export const useRouter = <
     { isBack }: Pick<RouteUpdateModel<TNextType>, 'isBack'>,
   ): Promise<void> => {
     if (!isLoading) {
+      await sleep(100);
       actions?.route.previousSet({ pathname: location.pathname });
       if (isBack) {
         actions?.route.isBackSet(true);
