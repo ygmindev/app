@@ -32,7 +32,7 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
       s={THEME_SIZE.SMALL}
       style={styles}
       testID={testID}>
-      {tabs.map((tab) => {
+      {tabs?.map((tab) => {
         const isActive = valueControlled === tab.id;
         return (
           <Button

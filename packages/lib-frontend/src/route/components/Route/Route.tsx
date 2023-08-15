@@ -96,14 +96,14 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
         </Portal>
       )}
 
-      <Appearable
+      <Wrapper
         grow
         isAbsoluteFill
-        isActive={isActiveF}
+        isHidden={!isActiveF}
         style={styles}
         testID={testID}>
         {element}
-      </Appearable>
+      </Wrapper>
     </>
   );
 };

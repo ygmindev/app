@@ -136,7 +136,8 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
         onSuccess={onSuccess}
         rows={rows}
         testID={USERNAME_FORM_TEST_ID}
-        validators={USERNAME_FORM_VALIDATORS}></FormContainer>
+        validators={USERNAME_FORM_VALIDATORS}
+      />
     </CenterLayout>
   );
 };

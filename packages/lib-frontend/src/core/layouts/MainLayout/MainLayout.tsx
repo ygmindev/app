@@ -14,8 +14,8 @@ export const MainLayout: SFCModel<MainLayoutPropsModel> = ({
   isHorizontalScrollable,
   isVerticalCenter,
   isVerticalScrollable,
-  p,
-  s,
+  p = true,
+  s = true,
   ...props
 }) => {
   const { styles } = useStyles({ props });
@@ -29,7 +29,6 @@ export const MainLayout: SFCModel<MainLayoutPropsModel> = ({
       shrink
       style={styles}>
       <Wrapper
-        grow
         isFullWidth={isFullWidthF}
         isHorizontalScrollable={isHorizontalScrollable}
         isVerticalScrollable={isVerticalScrollable}

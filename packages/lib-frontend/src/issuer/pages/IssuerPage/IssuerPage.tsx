@@ -1,21 +1,17 @@
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
-import { Tabs } from '#lib-frontend/core/components/Tabs/Tabs';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
-import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
-import { ISSUER } from '#lib-frontend/issuer/issuer.constants';
+import { COMPARABLES, ISSUER, OFFERS } from '#lib-frontend/issuer/issuer.constants';
 import { type IssuerPagePropsModel } from '#lib-frontend/issuer/pages/IssuerPage/IssuerPage.models';
-import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
+import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { RouteTabs } from '#lib-frontend/route/components/RouteTabs/RouteTabs';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 
 export const IssuerPage: SFCModel<IssuerPagePropsModel> = ({ children, testID, ...props }) => {
   const { styles } = useStyles({ props });
-  const { push } = useRouter();
-  const { valueControlled, valueControlledSet } = useControlledValue<string>({
-    defaultValue: 'offers',
-  });
+  const { t } = useTranslation();
   return (
     <Wrapper
       grow
@@ -23,7 +19,10 @@ export const IssuerPage: SFCModel<IssuerPagePropsModel> = ({ children, testID, .
       s
       style={styles}
       testID={testID}>
-      <Wrapper isRowAlign>
+      <Wrapper
+        isHorizontalScrollable
+        isRowAlign
+        p>
         <Button
           icon="chevronDown"
           size="s"
@@ -69,16 +68,11 @@ export const IssuerPage: SFCModel<IssuerPagePropsModel> = ({ children, testID, .
 
       <Wrapper>
         <MainLayout isHorizontalCenter>
-          <Tabs
-            onChange={(value) => {
-              void push({ pathname: `/${ISSUER}/${value}` });
-              valueControlledSet(value);
-            }}
-            tabs={[
-              { id: 'offers', label: 'Offers' },
-              { id: 'comparables', label: 'Comparables' },
+          <RouteTabs
+            routes={[
+              { label: t('issuer:offers'), pathname: `/${ISSUER}/${OFFERS}` },
+              { label: t('issuer:comparables'), pathname: `/${ISSUER}/${COMPARABLES}` },
             ]}
-            value={valueControlled}
           />
         </MainLayout>
       </Wrapper>

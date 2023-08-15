@@ -35,7 +35,12 @@ export const _viewParams: ComposeComponentParamsModel<
         <View
           style={{
             display: 'flex',
-            flex: stylesView.width || stylesView.height ? undefined : 1,
+            flex:
+              stylesView.width || stylesView.height
+                ? undefined
+                : isVerticalScrollable
+                ? 1
+                : undefined,
             ...stylesView,
           }}
           testID={testID}>

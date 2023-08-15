@@ -55,7 +55,7 @@ export const THEME_CONFIG = {
     },
 
     header: {
-      height: 50,
+      height: 55,
     },
 
     height: {
