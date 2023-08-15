@@ -1,4 +1,4 @@
-import { {{NAME}}(constantCase)_OUTPUT_FIELDS } from '#lib-frontend/{{MODULE}}(camelCase)/hooks/use{{NAME}}(pascalCase)Resource/use{{NAME}}(pascalCase)Resource.constants';
+import { {{NAME}}(constantCase)_FIELDS } from '#lib-frontend/{{MODULE}}(camelCase)/hooks/use{{NAME}}(pascalCase)Resource/use{{NAME}}(pascalCase)Resource.constants';
 import { type Use{{NAME}}(pascalCase)ResourceModel } from '#lib-frontend/{{MODULE}}(camelCase)/hooks/use{{NAME}}(pascalCase)Resource/use{{NAME}}(pascalCase)Resource.models';
 import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { {{NAME}}(constantCase)_RESOURCE_NAME } from '#lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).constants';
@@ -14,7 +14,7 @@ export const use{{NAME}}(pascalCase)Resource = (): Use{{NAME}}(pascalCase)Resour
     {{NAME}}(pascalCase)Model,
     {{NAME}}(pascalCase)FormModel
   >({
-    fields: {{NAME}}(constantCase)_OUTPUT_FIELDS,
+    fields: {{NAME}}(constantCase)_FIELDS,
     method: RESOURCE_METHOD_TYPE.CREATE,
     name: {{NAME}}(constantCase)_RESOURCE_NAME,
   });

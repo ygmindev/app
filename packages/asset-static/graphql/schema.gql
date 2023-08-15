@@ -1363,8 +1363,8 @@ type Query {
   OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
   OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput
   PaymentMethodGetMany(input: PaymentMethodGetManyInput): PaymentMethodGetManyOutput
-  SnapshotGet(input: SnapshotGetInput): SnapshotGetOutput
-  SnapshotGetMany(input: SnapshotGetManyInput): SnapshotGetManyOutput
+  SnapshotGet: SnapshotGetOutput
+  SnapshotGetMany: SnapshotGetManyOutput
   UserGet(input: UserGetInput): UserGetOutput
   UserGetConnection(input: UserGetConnectionInput): UserGetConnectionOutput
   UserGetMany(input: UserGetManyInput): UserGetManyOutput
@@ -1448,24 +1448,6 @@ type SignInUsernameCreateOutput {
 type Snapshot {
   images: [String]
   name: String
-}
-
-input SnapshotGetFilterInput {
-  images: [String]
-  name: String
-}
-
-input SnapshotGetInput {
-  filter: SnapshotGetFilterInput
-}
-
-input SnapshotGetManyFilterInput {
-  images: [String]
-  name: String
-}
-
-input SnapshotGetManyInput {
-  filter: SnapshotGetManyFilterInput
 }
 
 type SnapshotGetManyOutput {

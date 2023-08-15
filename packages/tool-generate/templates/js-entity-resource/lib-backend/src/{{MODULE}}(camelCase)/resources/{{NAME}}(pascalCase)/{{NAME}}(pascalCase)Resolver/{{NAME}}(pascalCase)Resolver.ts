@@ -8,7 +8,7 @@ import {
   type {{NAME}}(pascalCase)FormModel,
   type {{NAME}}(pascalCase)Model,
 } from '#lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
-import { type {{NAME}}(pascalCase)ServiceModel } from '#lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Service/{{NAME}}(pascalCase)Service.models';
+import { type {{NAME}}(pascalCase)ResolverModel } from '#lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Resolver/{{NAME}}(pascalCase)Resolver.models';
 
 @withContainer()
 @withResolver({ Resource: {{NAME}}(pascalCase) })
@@ -18,4 +18,4 @@ export class {{NAME}}(pascalCase)Resolver
     ResourceService: {{NAME}}(pascalCase)Service,
     name: {{NAME}}(constantCase)_RESOURCE_NAME,
   })
-  implements {{NAME}}(pascalCase)ServiceModel {}
+  implements {{NAME}}(pascalCase)ResolverModel {}
