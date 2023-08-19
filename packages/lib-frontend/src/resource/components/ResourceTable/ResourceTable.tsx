@@ -6,6 +6,7 @@ import { type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { ResourceFilterForm } from '#lib-frontend/resource/components/ResourceFilterForm/ResourceFilterForm';
 import { type ResourceTablePropsModel } from '#lib-frontend/resource/components/ResourceTable/ResourceTable.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
 export const ResourceTable = <TType, TForm = undefined, TRoot = undefined>({
   filters,
@@ -17,12 +18,24 @@ export const ResourceTable = <TType, TForm = undefined, TRoot = undefined>({
   SFCPropsModel<ResourceTablePropsModel<TType, TForm, TRoot>>
 > => {
   const { styles } = useStyles({ props });
+
+  const handleFilter = async (data: FilterModel<TType>): Promise<void> => {
+    const result = await service.getConnection({ filter: data, pagination: { first: 10 } });
+    console.warn(result);
+  };
+
   return (
     <Wrapper
       grow
+      s
       style={styles}
       testID={testID}>
-      {filters && <ResourceFilterForm<TType, TForm, TRoot> filters={filters} />}
+      {filters && (
+        <ResourceFilterForm<TType, TForm, TRoot>
+          filters={filters}
+          onSubmit={handleFilter}
+        />
+      )}
 
       <Table
         columns={[

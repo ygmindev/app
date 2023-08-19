@@ -26,7 +26,7 @@ export const useResource = <TType, TForm = undefined, TRoot = undefined>({
   const { query: get } = useResourceMethod<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>({
     after: afterGet,
     before: beforeGet,
-    fields: [{ result: fields }] as UseResourceMethodParamsModel<
+    fields: fields as UseResourceMethodParamsModel<
       RESOURCE_METHOD_TYPE.GET,
       TType,
       TForm,
@@ -40,7 +40,7 @@ export const useResource = <TType, TForm = undefined, TRoot = undefined>({
   const { query: create } = useResourceMethod<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>({
     after: afterCreate,
     before: beforeCreate,
-    fields: [{ result: fields }] as UseResourceMethodParamsModel<
+    fields: fields as UseResourceMethodParamsModel<
       RESOURCE_METHOD_TYPE.CREATE,
       TType,
       TForm,
@@ -54,7 +54,7 @@ export const useResource = <TType, TForm = undefined, TRoot = undefined>({
   const { query: getMany } = useResourceMethod<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot>({
     after: afterGetMany,
     before: beforeGetMany,
-    fields: [{ result: fields }] as UseResourceMethodParamsModel<
+    fields: fields as UseResourceMethodParamsModel<
       RESOURCE_METHOD_TYPE.GET_MANY,
       TType,
       TForm,
@@ -68,7 +68,7 @@ export const useResource = <TType, TForm = undefined, TRoot = undefined>({
   const { query: update } = useResourceMethod<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot>({
     after: afterUpdate,
     before: beforeUpdate,
-    fields: [{ result: fields }] as UseResourceMethodParamsModel<
+    fields: fields as UseResourceMethodParamsModel<
       RESOURCE_METHOD_TYPE.UPDATE,
       TType,
       TForm,
@@ -81,7 +81,7 @@ export const useResource = <TType, TForm = undefined, TRoot = undefined>({
   const { query: remove } = useResourceMethod<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm, TRoot>({
     after: afterRemove,
     before: beforeRemove,
-    fields: [{ result: fields }] as UseResourceMethodParamsModel<
+    fields: fields as UseResourceMethodParamsModel<
       RESOURCE_METHOD_TYPE.REMOVE,
       TType,
       TForm,
@@ -99,7 +99,7 @@ export const useResource = <TType, TForm = undefined, TRoot = undefined>({
   >({
     after: afterGetConnection,
     before: beforeGetConnection,
-    fields: [{ result: fields }] as UseResourceMethodParamsModel<
+    fields: fields as UseResourceMethodParamsModel<
       RESOURCE_METHOD_TYPE.GET_CONNECTION,
       TType,
       TForm,

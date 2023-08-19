@@ -29,6 +29,6 @@ export class Access extends EntityResource implements AccessModel {
   @withField({ isRepository: true, type: FIELD_TYPE.STRING })
   role!: AccessRoleModel;
 
-  @withField({ Resource: User, isOptional: true })
+  @withField({ Resource: User, isOptional: true, type: FIELD_TYPE.RESOURCE })
   user?: ResolvedFieldModel<UserModel>;
 }

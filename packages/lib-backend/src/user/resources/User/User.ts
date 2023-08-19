@@ -19,13 +19,31 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
   name: USER_RESOURCE_NAME,
 })
 export class User extends EntityResource implements UserModel {
-  @withField({ Resource: Card, isArray: true, isOptional: true, isRepository: true })
+  @withField({
+    Resource: Card,
+    isArray: true,
+    isOptional: true,
+    isRepository: true,
+    type: FIELD_TYPE.RESOURCE,
+  })
   [BANK_RESOURCE_NAME]?: Array<BankModel>;
 
-  @withField({ Resource: Card, isArray: true, isOptional: true, isRepository: true })
+  @withField({
+    Resource: Card,
+    isArray: true,
+    isOptional: true,
+    isRepository: true,
+    type: FIELD_TYPE.RESOURCE,
+  })
   [CARD_RESOURCE_NAME]?: Array<CardModel>;
 
-  @withField({ Resource: LinkedUser, isArray: true, isOptional: true, isRepository: true })
+  @withField({
+    Resource: LinkedUser,
+    isArray: true,
+    isOptional: true,
+    isRepository: true,
+    type: FIELD_TYPE.RESOURCE,
+  })
   [LINKED_USER_RESOURCE_NAME]?: Array<LinkedUserModel>;
 
   @withField({ isOptional: true, isRepository: true, type: FIELD_TYPE.STRING })

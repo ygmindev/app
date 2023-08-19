@@ -6,6 +6,7 @@ import { createResult } from '#lib-backend/resource/utils/createResult/createRes
 import { createRoot } from '#lib-backend/resource/utils/createRoot/createRoot';
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
+import { FIELD_TYPE } from '#lib-shared/form/form.constants';
 import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type ResultModel } from '#lib-shared/resource/utils/Result/Result.models';
@@ -20,7 +21,10 @@ export const createOutput = <TMethod extends ResourceMethodTypeModel, TType, TRo
   const Root = createRoot({ RootResource, name: nameF });
   @withEntity({ name: nameF })
   class Output extends (Root ?? class {}) implements OutputModel<TMethod, TType, TRoot> {
-    @withField({ Resource: createResult({ Resource, method, name: nameF }) ?? Boolean })
+    @withField({
+      Resource: createResult({ Resource, method, name: nameF }) ?? Boolean,
+      type: FIELD_TYPE.RESOURCE,
+    })
     result?: ResultModel<TMethod, TType>;
   }
   return Output;

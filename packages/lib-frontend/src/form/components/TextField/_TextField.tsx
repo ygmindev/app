@@ -164,11 +164,13 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
     return (
       <Wrapper
         animation={containerAnimation}
+        backgroundColor="blue"
         border={!isTransparent}
         elementState={elementState}
         grow
         height={height}
         isOverflowHidden
+        maxWidth={width}
         position={SHAPE_POSITION.RELATIVE}
         round={round ?? true}
         style={styles}

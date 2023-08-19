@@ -26,10 +26,9 @@ import { type FormRefModel, type StringFieldPropsModel } from '#lib-frontend/for
 import { useForm } from '#lib-frontend/form/hooks/useForm/useForm';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { BORDER_RADIUS_DIRECTION } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.constants';
+import { FLEX_ALIGN } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
-import { uid } from '#lib-shared/core/utils/uid/uid';
 import { FIELD_TYPE } from '#lib-shared/form/form.constants';
 
 export const FormContainer = forwardRef(
@@ -61,6 +60,7 @@ const FormContainerF = forwardRef(
       isButton = true,
       isFullWidth,
       isGrouped,
+      isHorizontal,
       leftElement,
       onCancel,
       onComplete,
@@ -77,7 +77,6 @@ const FormContainerF = forwardRef(
     }: SFCPropsModel<FormContainerPropsModel<TType, TResult>>,
     ref: ForwardedRef<FormRefModel>,
   ): ReactElement<RSFCPropsModel<FormRefModel, FormContainerPropsModel<TType, TResult>>> => {
-    const { styles } = useStyles({ props });
     const { t } = useTranslation();
     const { error, success } = useNotification();
     const [focused, focusedSet] = useState<string>();
@@ -207,43 +206,47 @@ const FormContainerF = forwardRef(
       <Wrapper
         isDistribute
         isRowAlign
+        justify={isHorizontal ? FLEX_ALIGN.FLEX_START : undefined}
         key={id}
         s={isGrouped ? -1 : true}
         zIndex={
           focused ? (findIndex(fields, (field) => field.id === focused) >= 0 ? 1 : 0) : undefined
         }>
-        {map(fields, (field, j) => (
-          <Wrapper key={field.id}>
-            {getField(
-              field,
-              i === 0,
-              j === 0,
-              i === (rows?.length || 0) - 1,
-              j === (fields?.length || 0) - 1,
-            )}
-          </Wrapper>
-        ))}
+        {map(fields, (field, j) =>
+          getField(
+            field,
+            i === 0,
+            j === 0,
+            i === (rows?.length || 0) - 1,
+            j === (fields?.length || 0) - 1,
+          ),
+        )}
       </Wrapper>
     ));
 
     return (
       <MainLayout
+        {...props}
         isCenter
         isFullWidth={isFullWidth}
-        style={styles}
+        isRow={isHorizontal}
         testID={testID}>
-        <Form onSubmit={isDisabled ? undefined : async () => handleSubmit()}>
-          <Wrapper s={isGrouped ? -1 : true}>
-            {topElement && topElement({ elementState: elementStateF, handleReset, handleSubmit })}
+        <Wrapper
+          grow
+          isHorizontalScrollable
+          isVerticalScrollable>
+          <Form onSubmit={isDisabled ? undefined : async () => handleSubmit()}>
+            <Wrapper s={isGrouped ? -1 : true}>
+              {topElement && topElement({ elementState: elementStateF, handleReset, handleSubmit })}
 
-            {rowsF}
-          </Wrapper>
-        </Form>
+              {rowsF}
+            </Wrapper>
+          </Form>
+        </Wrapper>
 
         {isButton && (
           <Wrapper
             isDistribute
-            isFullWidth
             isRowAlign>
             {leftElement && leftElement({ elementState: elementStateF, handleReset, handleSubmit })}
 
@@ -262,7 +265,7 @@ const FormContainerF = forwardRef(
                 elementState={elementStateF}
                 icon="chevronRight"
                 onPress={handleSubmit}
-                testID={`${testID ?? uid()}-submit`}>
+                testID={testID ? `${testID}-submit` : undefined}>
                 {submitLabel ?? t('core:continue')}
               </Button>
             )}

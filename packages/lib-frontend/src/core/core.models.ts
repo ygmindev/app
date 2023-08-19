@@ -69,6 +69,8 @@ export type LayoutPropsModel = {
   | 'isFullWidth'
   | 'isCenter'
   | 'isHorizontalScrollable'
+  | 'isRow'
+  | 'isRowAlign'
   | 'isVerticalScrollable'
 >;
 

@@ -12,6 +12,8 @@ export const MainLayout: SFCModel<MainLayoutPropsModel> = ({
   isFullWidth,
   isHorizontalCenter,
   isHorizontalScrollable,
+  isRow,
+  isRowAlign,
   isVerticalCenter,
   isVerticalScrollable,
   p,
@@ -30,6 +32,8 @@ export const MainLayout: SFCModel<MainLayoutPropsModel> = ({
       <Wrapper
         isFullWidth={isFullWidthF}
         isHorizontalScrollable={isHorizontalScrollable}
+        isRow={isRow}
+        isRowAlign={isRowAlign}
         isVerticalScrollable={isVerticalScrollable}
         m={isCenter ? 'auto' : undefined}
         mHorizontal={isCenter || isHorizontalCenter ? 'auto' : undefined}

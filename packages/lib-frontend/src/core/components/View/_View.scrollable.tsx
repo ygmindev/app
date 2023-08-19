@@ -46,8 +46,6 @@ export const _viewParams: ComposeComponentParamsModel<
           testID={testID}>
           <ScrollView
             {...(_viewParamsBase.getProps && _viewParamsBase.getProps(props, theme, ref))}
-            {...(isHorizontalScrollable ? { showsHorizontalScrollIndicator: true } : {})}
-            {...(isVerticalScrollable ? { showsVerticalScrollIndicator: true } : {})}
             alwaysBounceHorizontal={false}
             alwaysBounceVertical={false}
             contentContainerStyle={{ ...stylesContainer, flexGrow: 1 }}
@@ -62,6 +60,8 @@ export const _viewParams: ComposeComponentParamsModel<
             scrollEnabled
             scrollEventThrottle={16}
             scrollToOverflowEnabled
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
           />
         </View>
       ),

@@ -9,7 +9,7 @@ export type WithFieldParamsModel<TType> = {
   isRepository?: boolean;
   isSchema?: boolean;
   isUnique?: boolean;
-  type?: FieldTypeModel;
+  type: FieldTypeModel;
 };
 
 export type WithFieldModel = PropertyDecorator;

@@ -1,7 +1,11 @@
 import { type ReactElement, type ReactNode } from 'react';
 
 import { type AsyncBoundaryContextModel } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
-import { type ElementStatePropsModel, type SFCPropsModel } from '#lib-frontend/core/core.models';
+import {
+  type ElementStatePropsModel,
+  type LayoutPropsModel,
+  type SFCPropsModel,
+} from '#lib-frontend/core/core.models';
 import { type SelectFieldPropsModel } from '#lib-frontend/form/components/SelectField/SelectField.models';
 import { type SwitchFieldPropsModel } from '#lib-frontend/form/components/SwitchField/SwitchField.models';
 import { type TextFieldPropsModel } from '#lib-frontend/form/components/TextField/TextField.models';
@@ -19,21 +23,26 @@ import { type PartialModel } from '#lib-shared/core/core.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 import { type FieldTypeModel } from '#lib-shared/form/form.models';
 
-export type FormContainerPropsModel<TType = void, TResult = void> = {
-  autoFocus?: string | boolean;
-  bottomElement?(props: FormContainerFieldPropsModel): ReactNode;
-  cancelLabel?: TranslatableTextModel;
-  isButton?: boolean;
-  isFullWidth?: boolean;
-  isGrouped?: boolean;
-  leftElement?(props: FormContainerFieldPropsModel): ReactNode;
-  rows?: Array<FormContainerRowModel>;
-  submitLabel?: TranslatableTextModel;
-  successMessage?: TranslatableTextModel;
-  topElement?(props: FormContainerFieldPropsModel): ReactNode;
-} & UseFormParamsModel<TType, TResult> &
+export type FormContainerPropsModel<TType = void, TResult = void> = UseFormParamsModel<
+  TType,
+  TResult
+> &
+  LayoutPropsModel &
   SubmittablePropsModel<TType, TResult> &
-  Pick<AsyncBoundaryContextModel, 'errorContextGet'>;
+  Pick<AsyncBoundaryContextModel, 'errorContextGet'> & {
+    autoFocus?: string | boolean;
+    bottomElement?(props: FormContainerFieldPropsModel): ReactNode;
+    cancelLabel?: TranslatableTextModel;
+    isButton?: boolean;
+    isFullWidth?: boolean;
+    isGrouped?: boolean;
+    isHorizontal?: boolean;
+    leftElement?(props: FormContainerFieldPropsModel): ReactNode;
+    rows?: Array<FormContainerRowModel>;
+    submitLabel?: TranslatableTextModel;
+    successMessage?: TranslatableTextModel;
+    topElement?(props: FormContainerFieldPropsModel): ReactNode;
+  };
 
 export type FormContainerFieldPropsModel<TType = void, TResult = void> = ElementStatePropsModel &
   StringFieldPropsModel &

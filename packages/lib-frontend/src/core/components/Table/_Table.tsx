@@ -7,6 +7,7 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 
 export const _Table = <TType extends Record<string, unknown>>({
   columns,
@@ -14,9 +15,12 @@ export const _Table = <TType extends Record<string, unknown>>({
   isFullWidth,
   onSelect,
   select,
+  testID,
+  ...props
 }: SFCPropsModel<_TablePropsModel<TType>>): ReactElement<
   SFCPropsModel<_TablePropsModel<TType>>
 > => {
+  const { styles } = useStyles({ props });
   const { t } = useTranslation();
   const table = useReactTable<TType>({
     columns:
@@ -27,7 +31,10 @@ export const _Table = <TType extends Record<string, unknown>>({
   });
 
   return (
-    <Wrapper grow>
+    <Wrapper
+      grow
+      style={styles}
+      testID={testID}>
       {table.getHeaderGroups().map(({ headers, id }) => (
         <Wrapper
           isRow

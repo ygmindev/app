@@ -12,10 +12,10 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withEntity({ isRepository: true, name: SIGN_IN_RESOURCE_NAME })
 export class SignIn extends EntityResource implements SignInModel {
-  @withField({ Resource: User })
+  @withField({ Resource: User, type: FIELD_TYPE.RESOURCE })
   user!: UserModel;
 
-  @withField()
+  @withField({ type: FIELD_TYPE.STRING })
   token!: string;
 
   @withField({ isOptional: true, type: FIELD_TYPE.BOOLEAN })
@@ -24,15 +24,15 @@ export class SignIn extends EntityResource implements SignInModel {
 
 @withEntity({ name: `${SIGN_IN_RESOURCE_NAME}Form` })
 export class SignInForm implements SignInFormModel {
-  @withField({ isOptional: true })
+  @withField({ isOptional: true, type: FIELD_TYPE.STRING })
   callingCode?: string;
 
-  @withField({ isOptional: true })
+  @withField({ isOptional: true, type: FIELD_TYPE.STRING })
   email?: string;
 
-  @withField()
+  @withField({ type: FIELD_TYPE.STRING })
   otp!: string;
 
-  @withField({ isOptional: true })
+  @withField({ isOptional: true, type: FIELD_TYPE.STRING })
   phone?: string;
 }

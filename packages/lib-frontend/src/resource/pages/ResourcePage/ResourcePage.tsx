@@ -30,7 +30,6 @@ export const ResourcePage: SFCModel<ResourcePagePropsModel> = ({ testID, ...prop
   };
 
   const service = useUserResource();
-
   return (
     <Wrapper
       grow
@@ -45,7 +44,8 @@ export const ResourcePage: SFCModel<ResourcePagePropsModel> = ({ testID, ...prop
       />
 
       <ResourceTable
-        filters={[{ id: 'first' }]}
+        filters={[{ id: 'first' }, { id: 'last' }]}
+        // filters={[{ id: 'first' }, { id: 'last' }]}
         name={id}
         service={service}
       />

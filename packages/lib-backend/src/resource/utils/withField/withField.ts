@@ -80,7 +80,7 @@ export const withField =
     isSchema = true,
     isUnique,
     type,
-  }: WithFieldParamsModel<TType> = {}): WithFieldModel =>
+  }: WithFieldParamsModel<TType>): WithFieldModel =>
   (target, propertyKey) => {
     (expire || isUnique) &&
       (Index({ options: expire ? { expireAfterSeconds: expire } : {} }) as PropertyDecorator)(

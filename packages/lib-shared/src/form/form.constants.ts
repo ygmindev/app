@@ -4,5 +4,6 @@ export enum FIELD_TYPE {
   ID = 'ID',
   NUMBER = 'Number',
   PRIMARY_KEY = 'PrimaryKey',
+  RESOURCE = 'Resource',
   STRING = 'String',
 }

@@ -5,7 +5,8 @@ import { TextField } from '#lib-frontend/form/components/TextField/TextField';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { RESOURCE_FILTER_FIELD_TYPE } from '#lib-frontend/resource/components/ResourceFilterField/ResourceFilterField.constants';
 import { type ResourceFilterFieldPropsModel } from '#lib-frontend/resource/components/ResourceFilterField/ResourceFilterField.models';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
+import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 
 export const ResourceFilterField = <TType, TForm = undefined, TRoot = undefined>({
   id,
@@ -15,15 +16,15 @@ export const ResourceFilterField = <TType, TForm = undefined, TRoot = undefined>
 }: SFCPropsModel<ResourceFilterFieldPropsModel<TType, TForm, TRoot>>): ReactElement<
   SFCPropsModel<ResourceFilterFieldPropsModel<TType, TForm, TRoot>>
 > => {
-  const { styles } = useStyles({ props });
   const { t } = useTranslation();
+  const theme = useTheme();
   switch (type) {
     case RESOURCE_FILTER_FIELD_TYPE.STRING:
       return (
         <TextField
+          {...props}
           label={`${id} ${t('core:contains')}`}
-          style={styles}
-          testID={testID}
+          width={theme.layout.width[THEME_SIZE.SMALL]}
         />
       );
     default:

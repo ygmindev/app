@@ -16,6 +16,7 @@ export class DummyEntityResource extends EntityResource implements DummyEntityRe
     isArray: true,
     isOptional: true,
     isRepository: true,
+    type: FIELD_TYPE.RESOURCE,
   })
   [DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME]?: Array<DummyEmbeddedResourceModel>;
 

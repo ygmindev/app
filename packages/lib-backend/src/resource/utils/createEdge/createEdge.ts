@@ -4,6 +4,7 @@ import {
 } from '#lib-backend/resource/utils/createEdge/createEdge.models';
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
+import { FIELD_TYPE } from '#lib-shared/form/form.constants';
 import { type EdgeModel } from '#lib-shared/resource/utils/Edge/Edge.models';
 
 export const createEdge = <TType extends unknown>({
@@ -14,10 +15,10 @@ export const createEdge = <TType extends unknown>({
 
   @withEntity({ name: nameF })
   class EdgeF implements EdgeModel<TType> {
-    @withField({ Resource })
+    @withField({ Resource, type: FIELD_TYPE.RESOURCE })
     node!: TType;
 
-    @withField()
+    @withField({ type: FIELD_TYPE.STRING })
     cursor!: string;
   }
 
