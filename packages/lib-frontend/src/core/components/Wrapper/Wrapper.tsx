@@ -65,7 +65,7 @@ export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
                       {
                         mLeft:
                           childProps.mLeft === undefined
-                            ? isRow && (isRowAlign ? THEME_SIZE.SMALL : s)
+                            ? isRow && (s ?? (isRowAlign ? THEME_SIZE.SMALL : undefined))
                             : childProps.mLeft,
                         mTop: childProps.mTop === undefined ? !isRow && s : childProps.mTop,
                       },

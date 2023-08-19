@@ -1,7 +1,7 @@
-import { type ReactNode } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 
 import { type AsyncBoundaryContextModel } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
-import { type ElementStatePropsModel, type SFCModel } from '#lib-frontend/core/core.models';
+import { type ElementStatePropsModel, type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { type SelectFieldPropsModel } from '#lib-frontend/form/components/SelectField/SelectField.models';
 import { type SwitchFieldPropsModel } from '#lib-frontend/form/components/SwitchField/SwitchField.models';
 import { type TextFieldPropsModel } from '#lib-frontend/form/components/TextField/TextField.models';
@@ -19,25 +19,6 @@ import { type PartialModel } from '#lib-shared/core/core.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 import { type FieldTypeModel } from '#lib-shared/form/form.models';
 
-export type FormFieldTypeModel = `${FORM_FIELD_TYPE}`;
-
-export type FormContainerFieldPropsModel<TType = void, TResult = void> = ElementStatePropsModel &
-  StringFieldPropsModel &
-  Pick<UseFormModel<TType, TResult>, 'handleSubmit' | 'handleReset'>;
-
-export type FormContainerFieldModel = WithIdModel & {
-  type?: FieldTypeModel;
-} & (
-    | { Component?: never; field: FORM_FIELD_TYPE.TEXT_FIELD; fieldProps?: TextFieldPropsModel }
-    | { Component?: never; field: FORM_FIELD_TYPE.SELECT_FIELD; fieldProps?: SelectFieldPropsModel }
-    | { Component?: never; field: FORM_FIELD_TYPE.SWITCH_FIELD; fieldProps?: SwitchFieldPropsModel }
-    | { Component: SFCModel<TextFieldPropsModel>; field?: never; fieldProps?: never }
-  );
-
-export type FormContainerRowModel = PartialModel<WithIdModel> & {
-  fields?: Array<FormContainerFieldModel>;
-};
-
 export type FormContainerPropsModel<TType = void, TResult = void> = {
   autoFocus?: string | boolean;
   bottomElement?(props: FormContainerFieldPropsModel): ReactNode;
@@ -53,3 +34,24 @@ export type FormContainerPropsModel<TType = void, TResult = void> = {
 } & UseFormParamsModel<TType, TResult> &
   SubmittablePropsModel<TType, TResult> &
   Pick<AsyncBoundaryContextModel, 'errorContextGet'>;
+
+export type FormContainerFieldPropsModel<TType = void, TResult = void> = ElementStatePropsModel &
+  StringFieldPropsModel &
+  Pick<UseFormModel<TType, TResult>, 'handleSubmit' | 'handleReset'>;
+
+export type FormContainerRowModel = PartialModel<WithIdModel> & {
+  fields?: Array<FormFieldPropsModel>;
+};
+
+export type FormFieldPropsModel = WithIdModel & {
+  type?: FieldTypeModel;
+} & (
+    | { element?: never; field: FORM_FIELD_TYPE.TEXT_FIELD; fieldProps?: TextFieldPropsModel }
+    | { element?: never; field: FORM_FIELD_TYPE.SELECT_FIELD; fieldProps?: SelectFieldPropsModel }
+    | { element?: never; field: FORM_FIELD_TYPE.SWITCH_FIELD; fieldProps?: SwitchFieldPropsModel }
+    | {
+        element: ReactElement<SFCPropsModel<StringFieldPropsModel>>;
+        field?: never;
+        fieldProps?: never;
+      }
+  );

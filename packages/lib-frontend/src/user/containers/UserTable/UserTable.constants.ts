@@ -1,4 +1,4 @@
-import { FORM_FIELD_TYPE } from '#lib-frontend/form/containers/FormContainer/FormContainer.constants';
+import { FORM_FIELD_TYPE } from '#lib-frontend/form/form.constants';
 import { ENTITY_RESOURCE_COLUMNS } from '#lib-frontend/resource/containers/Resources/Resources.constants';
 import { type ResourcesPropsModel } from '#lib-frontend/resource/containers/Resources/Resources.models';
 import { USER_FIELDS } from '#lib-frontend/user/hooks/useUserResource/useUserResource.constants';

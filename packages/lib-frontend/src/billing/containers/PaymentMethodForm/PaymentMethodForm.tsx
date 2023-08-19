@@ -38,7 +38,7 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
         {
           fields: [
             {
-              Component: ({ elementState, error }) => (
+              element: (
                 <Wrapper width={theme.layout.width[THEME_SIZE.MEDIUM]}>
                   <DataBoundary
                     id={`${CREATE_TOKEN}${PAYMENT_METHOD}`}
@@ -49,8 +49,8 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
                     {({ data }) => (
                       <PaymentMethodField
                         defaultValue={defaultValue}
-                        elementState={elementState}
-                        error={error}
+                        // elementState={elementState}
+                        // error={error}
                         ref={ref}
                         token={data?.result}
                         // error={error}

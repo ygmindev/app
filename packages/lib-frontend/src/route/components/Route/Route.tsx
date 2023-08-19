@@ -99,7 +99,6 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
       <Wrapper
         grow
         isAbsoluteFill
-        isHidden={!isActiveF}
         style={styles}
         testID={testID}>
         {element}

@@ -2,14 +2,12 @@ import {
   type TableColumnModel,
   type TableSelectTypeModel,
 } from '#lib-frontend/core/components/Table/Table.models';
+import { type StringKeyModel } from '#lib-shared/core/core.models';
 
-export type _TablePropsModel<TType> = {
-  columns: Array<TableColumnModel<TType, unknown>>;
-  data?: Array<TType>;
+export type _TablePropsModel<TType extends Record<string, unknown>> = {
+  columns?: Array<TableColumnModel<TType, Array<StringKeyModel<TType>>[number]>>;
+  data: Array<TType>;
   isFullWidth?: boolean;
-  isVirtualized?: boolean;
-  onMount?(): void;
   onSelect?(rows?: Array<TType>): void;
-  rowHeight?: number;
   select?: TableSelectTypeModel;
 };

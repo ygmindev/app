@@ -198,13 +198,15 @@ export const _TextField: RSFCModel<TextFieldRefModel, _TextFieldPropsModel> = fo
                   />
                 )}
 
-                {label && (
+                {isString(label) ? (
                   <AnimatableText
                     animation={childrenAnimation}
                     elementState={elementState}
                     fontSize={THEME_SIZE_MORE.SMALL}>
                     {label}
                   </AnimatableText>
+                ) : (
+                  label
                 )}
               </Wrapper>
             )

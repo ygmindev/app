@@ -3,14 +3,12 @@ import { matchPath, useLocation, useNavigate, useParams } from 'react-router-nat
 import { type _UseRouterModel } from '#lib-frontend/route/hooks/useRouter/_useRouter.models';
 import { type LocationParamsModel, type RouteUpdateModel } from '#lib-frontend/route/route.models';
 
-export const _useRouter = <
-  TType extends LocationParamsModel = LocationParamsModel,
->(): _UseRouterModel<TType> => {
+export const _useRouter = <TType = undefined,>(): _UseRouterModel<TType> => {
   const navigate = useNavigate();
   const location = useLocation();
   const params = useParams();
 
-  const paramsF = { ...location.state, ...params } as TType;
+  const paramsF = { ...location.state, ...params } as TType & LocationParamsModel;
   delete (paramsF as Record<string, string>)['*'];
 
   return {
@@ -20,7 +18,7 @@ export const _useRouter = <
       if (!pathname) {
         return false;
       }
-      const match = matchPath({ end: isExact, path: pathname }, from || location.pathname);
+      const match = matchPath({ end: isExact, path: pathname }, from ?? location.pathname);
       return match !== null;
     },
 
@@ -29,14 +27,10 @@ export const _useRouter = <
       pathname: location.pathname,
     },
 
-    push: async <TNextType extends LocationParamsModel = LocationParamsModel>({
-      params,
-      pathname,
-    }: RouteUpdateModel<TNextType>) => navigate(pathname, { state: params }),
+    push: async <TNextType,>({ params, pathname }: RouteUpdateModel<TNextType>) =>
+      navigate(pathname, { state: params }),
 
-    replace: async <TNextType extends LocationParamsModel = LocationParamsModel>({
-      params,
-      pathname,
-    }: RouteUpdateModel<TNextType>) => navigate(pathname, { replace: true, state: params }),
+    replace: async <TNextType,>({ params, pathname }: RouteUpdateModel<TNextType>) =>
+      navigate(pathname, { replace: true, state: params }),
   };
 };

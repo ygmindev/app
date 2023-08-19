@@ -29,8 +29,8 @@ export type UriModel<TParams = undefined> = {
   port?: number | string;
 };
 
-export type LocationModel<TType extends LocationParamsModel = LocationParamsModel> = {
-  params?: TType;
+export type LocationModel<TType = undefined> = {
+  params?: TType & LocationParamsModel;
   pathname: string;
 };
 
@@ -38,14 +38,14 @@ export type LocationParamsModel = {
   previous?: string;
 };
 
-export type RouteContextModel<TType extends LocationParamsModel = LocationParamsModel> = {
+export type RouteContextModel<TType = undefined> = {
   basename?: string;
   location?: LocationModel<TType>;
   redirectTo?: string;
 };
 
-export type RouteUpdateModel<TNextType extends LocationParamsModel = LocationParamsModel> =
-  LocationModel<TNextType> & Pick<RouteStateModel, 'isBack'>;
+export type RouteUpdateModel<TNextType = undefined> = LocationModel<TNextType> &
+  Pick<RouteStateModel, 'isBack'>;
 
 export type RouteTransitionModel = `${ROUTE_TRANSITION}`;
 

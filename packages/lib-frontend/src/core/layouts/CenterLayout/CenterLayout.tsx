@@ -5,7 +5,7 @@ import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 
 export const CenterLayout: SFCModel<CenterLayoutPropsModel> = ({
   children,
-  p = true,
+  p,
   s = true,
   ...props
 }) => {

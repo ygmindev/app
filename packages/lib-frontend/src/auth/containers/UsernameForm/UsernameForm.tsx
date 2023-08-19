@@ -82,8 +82,8 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
         ]) as Array<FormContainerRowModel>;
       case SIGN_IN_METHOD.PHONE:
         return withId([
-          { fields: [{ Component: CountryField, id: 'callingCode' }] },
-          { fields: [{ Component: PhoneField, id: SIGN_IN_METHOD.PHONE }] },
+          { fields: [{ element: <CountryField />, id: 'callingCode' }] },
+          { fields: [{ element: <PhoneField />, id: SIGN_IN_METHOD.PHONE }] },
         ]);
       default:
         return [];

@@ -1,4 +1,3 @@
-import toNumber from 'lodash/toNumber';
 import { useRef } from 'react';
 
 import { OtpField } from '#lib-frontend/auth/components/OtpField/OtpField';
@@ -70,21 +69,7 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
         {
           fields: [
             {
-              Component: ({ elementState, error, onChange, onSubmit, testID, value }) => (
-                <OtpField
-                  elementState={elementState}
-                  error={error}
-                  isAutoFocus
-                  onChange={(value) => {
-                    onChange && onChange(value);
-                    if (value.length === toNumber(process.env.SERVER_OTP_LENGTH)) {
-                      onSubmit && onSubmit();
-                    }
-                  }}
-                  testID={testID}
-                  value={value}
-                />
-              ),
+              element: <OtpField isAutoFocus />,
               id: 'otp',
             },
           ],

@@ -5,10 +5,9 @@ import { type SFCModel, type SFCPropsModel } from '#lib-frontend/core/core.model
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type RouteLinkPropsModel } from '#lib-frontend/route/components/RouteLink/RouteLink.models';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
-import { type LocationParamsModel } from '#lib-frontend/route/route.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 
-export const RouteLink = <TType extends LocationParamsModel = LocationParamsModel>({
+export const RouteLink = <TType = undefined,>({
   children,
   pathname,
   testID,

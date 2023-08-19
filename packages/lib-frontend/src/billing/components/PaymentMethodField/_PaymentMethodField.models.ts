@@ -6,5 +6,5 @@ import { type EntityResourcePartialModel } from '#lib-shared/resource/resources/
 
 export type _PaymentMethodFieldPropsModel = {
   token?: string;
-} & FieldPropsModel<EntityResourcePartialModel<PaymentMethodModel>> &
+} & Omit<FieldPropsModel<EntityResourcePartialModel<PaymentMethodModel>>, 'onSubmit'> &
   SubmittablePropsModel<BankFormModel | CardFormModel>;

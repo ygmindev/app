@@ -5,6 +5,8 @@ import { authorize } from '#lib-backend/auth/utils/authorize/authorize';
 import { BankResolver } from '#lib-backend/billing/resources/Bank/BankResolver/BankResolver';
 import { CardResolver } from '#lib-backend/billing/resources/Card/CardResolver/CardResolver';
 import { PaymentMethodResolver } from '#lib-backend/billing/resources/PaymentMethod/PaymentMethodResolver/PaymentMethodResolver';
+import { IssuerResolver } from '#lib-backend/capital/resources/Issuer/IssuerResolver/IssuerResolver';
+import { UnderwriterResolver } from '#lib-backend/capital/resources/Underwriter/UnderwriterResolver/UnderwriterResolver';
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
 import { SnapshotResolver } from '#lib-backend/test/resources/Snapshot/SnapshotResolver/SnapshotResolver';
@@ -33,6 +35,8 @@ const { _config, config } = defineConfig({
         SignInResolver,
         UserResolver,
         SnapshotResolver,
+        IssuerResolver,
+        UnderwriterResolver,
       ],
 
       schemaDir: fromStatic('graphql/schema.gql'),

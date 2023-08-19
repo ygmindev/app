@@ -78,3 +78,5 @@ export type DeepKeyModel<TType extends object> = {
     ? `${TKey}` | `${TKey}.${DeepKeyModel<RequiredModel<TType>[TKey]>}`
     : `${TKey}`;
 }[keyof RequiredModel<TType> & (string | number)];
+
+export type StringKeyModel<TType> = Extract<keyof TType, string>;

@@ -5,7 +5,6 @@ import { FormContainer } from '#lib-frontend/form/containers/FormContainer/FormC
 import { FORM_FIELD_TYPE } from '#lib-frontend/form/containers/FormContainer/FormContainer.constants';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
-import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
 import {
@@ -18,7 +17,6 @@ import { ACCOUNT } from '#lib-shared/user/user.constants';
 export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...props }) => {
   const { t } = useTranslation();
   const { styles } = useStyles({ props });
-  const actions = useActions();
   const currentUser = useCurrentUser();
   const { replace } = useRouter();
   const { userUpdate } = useSignInResource();
@@ -35,12 +33,10 @@ export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...prop
         initialValues={{ first: currentUser.first, last: currentUser.last }}
         onCancel={handleBack}
         onSubmit={async ({ first, last }: NameFormModel) => {
-          const result = await userUpdate({
+          await userUpdate({
             filter: { _id: currentUser._id },
             update: { first, last },
           });
-          console.warn(result);
-          // actions?.user.currentUserUpdate(result);
           handleBack();
         }}
         rows={[

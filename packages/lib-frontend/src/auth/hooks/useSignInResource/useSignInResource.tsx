@@ -90,6 +90,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
       });
       if (output?.result) {
         await signIn(output.result);
+        actions?.user.currentUserUpdate(output.result.user);
         handleUpdateSuccess();
       } else {
         throw new UnauthorizedError();

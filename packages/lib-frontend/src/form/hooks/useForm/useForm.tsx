@@ -14,6 +14,7 @@ import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import { merge } from '#lib-shared/core/utils/merge/merge';
+import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 import { error } from '#lib-shared/logging/utils/logger/logger';
 
 export const useForm = <TType = void, TResult = void>({
@@ -60,6 +61,7 @@ export const useForm = <TType = void, TResult = void>({
 
   const handleSubmit = async (values: TType): Promise<TResult | null> => {
     try {
+      void sleep();
       isBlocking && actions?.app.isLoadingSet(true);
       const valuesF = beforeSubmit ? await beforeSubmit(values) : values;
       const data = onSubmit && (await onSubmit(valuesF));

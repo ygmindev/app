@@ -1,8 +1,8 @@
 import findIndex from 'lodash/findIndex';
 import map from 'lodash/map';
 import toNumber from 'lodash/toNumber';
-import { type ForwardedRef, type ReactElement } from 'react';
-import { createElement, forwardRef, useImperativeHandle, useMemo, useState } from 'react';
+import { cloneElement, type ForwardedRef, type ReactElement } from 'react';
+import { forwardRef, useImperativeHandle, useMemo, useState } from 'react';
 
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
@@ -10,11 +10,7 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { AsyncBoundary } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
 import { ERROR_MODE } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.constants';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import {
-  type RSFCPropsModel,
-  type SFCModel,
-  type SFCPropsModel,
-} from '#lib-frontend/core/core.models';
+import { type RSFCPropsModel, type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { Form } from '#lib-frontend/form/components/Form/Form';
 import { SelectField } from '#lib-frontend/form/components/SelectField/SelectField';
@@ -23,8 +19,8 @@ import { TextField } from '#lib-frontend/form/components/TextField/TextField';
 import { type TextFieldPropsModel } from '#lib-frontend/form/components/TextField/TextField.models';
 import { FORM_FIELD_TYPE } from '#lib-frontend/form/containers/FormContainer/FormContainer.constants';
 import {
-  type FormContainerFieldModel,
   type FormContainerPropsModel,
+  type FormFieldPropsModel,
 } from '#lib-frontend/form/containers/FormContainer/FormContainer.models';
 import { type FormRefModel, type StringFieldPropsModel } from '#lib-frontend/form/form.models';
 import { useForm } from '#lib-frontend/form/hooks/useForm/useForm';
@@ -33,7 +29,6 @@ import { useNotification } from '#lib-frontend/notification/hooks/useNotificatio
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { BORDER_RADIUS_DIRECTION } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
-import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 import { uid } from '#lib-shared/core/utils/uid/uid';
 import { FIELD_TYPE } from '#lib-shared/form/form.constants';
 
@@ -140,7 +135,7 @@ const FormContainerF = forwardRef(
       elementStateF === ELEMENT_STATE.DISABLED || elementStateF === ELEMENT_STATE.LOADING;
 
     const getField = (
-      { Component, field, fieldProps, id }: FormContainerFieldModel,
+      { element, field, fieldProps, id }: FormFieldPropsModel,
       isFirstRow = false,
       isFirstField = false,
       isLastRow = false,
@@ -157,7 +152,6 @@ const FormContainerF = forwardRef(
           autoFocus === id ||
           (!isFirstRow && !isFirstField && autoFocus === true) ||
           fieldProps?.isAutoFocus,
-        label: fieldProps?.label ? t(fieldProps.label) : undefined,
         onBlur: () => focusedSet(undefined),
         onChange: handleChange(id),
         onFocus: () => focusedSet(id),
@@ -195,35 +189,40 @@ const FormContainerF = forwardRef(
           );
         }
         default: {
-          return createElement(Component as SFCModel<TextFieldPropsModel>, {
-            ...fieldPropsF,
-            key: id,
-            onSubmit: () => {
-              void sleep().then(handleSubmit);
-            },
-            testID: id,
-          });
+          return element ? (
+            cloneElement(element, {
+              ...fieldPropsF,
+              key: id,
+              onSubmit: handleSubmit,
+              testID: id,
+            })
+          ) : (
+            <></>
+          );
         }
       }
     };
 
     const rowsF = map(rows, ({ fields, id }, i) => (
       <Wrapper
+        isDistribute
         isRowAlign
         key={id}
         s={isGrouped ? -1 : true}
         zIndex={
           focused ? (findIndex(fields, (field) => field.id === focused) >= 0 ? 1 : 0) : undefined
         }>
-        {map(fields, (field, j) =>
-          getField(
-            field,
-            i === 0,
-            j === 0,
-            i === (rows?.length || 0) - 1,
-            j === (fields?.length || 0) - 1,
-          ),
-        )}
+        {map(fields, (field, j) => (
+          <Wrapper key={field.id}>
+            {getField(
+              field,
+              i === 0,
+              j === 0,
+              i === (rows?.length || 0) - 1,
+              j === (fields?.length || 0) - 1,
+            )}
+          </Wrapper>
+        ))}
       </Wrapper>
     ));
 
@@ -258,13 +257,15 @@ const FormContainerF = forwardRef(
               </Button>
             )}
 
-            <Button
-              elementState={elementStateF}
-              icon="chevronRight"
-              onPress={handleSubmit}
-              testID={`${testID ?? uid()}-submit`}>
-              {submitLabel ?? t('core:continue')}
-            </Button>
+            {onSubmit && (
+              <Button
+                elementState={elementStateF}
+                icon="chevronRight"
+                onPress={handleSubmit}
+                testID={`${testID ?? uid()}-submit`}>
+                {submitLabel ?? t('core:continue')}
+              </Button>
+            )}
           </Wrapper>
         )}
 

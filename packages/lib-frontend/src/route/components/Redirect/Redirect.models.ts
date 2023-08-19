@@ -1,4 +1,3 @@
-import { type LocationParamsModel, type RouteUpdateModel } from '#lib-frontend/route/route.models';
+import { type RouteUpdateModel } from '#lib-frontend/route/route.models';
 
-export type RedirectPropsModel<TType extends LocationParamsModel = LocationParamsModel> =
-  RouteUpdateModel<TType>;
+export type RedirectPropsModel<TType> = RouteUpdateModel<TType>;

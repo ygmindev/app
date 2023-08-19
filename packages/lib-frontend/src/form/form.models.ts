@@ -11,6 +11,7 @@ export type FieldPropsModel<TType> = {
   label?: TranslatableTextModel;
   onBlur?(): void;
   onFocus?(): void;
+  onSubmit?(): void;
 } & Pick<IconPropsModel, 'icon'> &
   ElementStatePropsModel &
   ValuePropsModel<TType> &
@@ -44,12 +45,12 @@ export type SubmittablePropsModel<TType = void, TResult = void> = {
   onSuccess?(data: TType, result?: TResult | null): Promise<void>;
 } & ElementStatePropsModel;
 
-export type TranslatableFieldPropsModel<TType extends StringFieldPropsModel> = Omit<
+export type TranslatableFieldPropsModel<TType extends FieldPropsModel<unknown>> = Omit<
   TType,
   'label' | 'error'
 > & {
-  error?: TranslatableTextModel | boolean;
-  label?: TranslatableTextModel;
+  error?: TType['error'] | TranslatableTextModel | boolean;
+  label?: TType['label'] | TranslatableTextModel;
 };
 
 export type FormRefModel = {

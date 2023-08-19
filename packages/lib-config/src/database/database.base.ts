@@ -2,6 +2,8 @@ import { Access } from '#lib-backend/auth/resources/Access/Access';
 import { Otp } from '#lib-backend/auth/resources/Otp/Otp';
 import { Bank } from '#lib-backend/billing/resources/Bank/Bank';
 import { Card } from '#lib-backend/billing/resources/Card/Card';
+import { Issuer } from '#lib-backend/capital/resources/Issuer/Issuer';
+import { Underwriter } from '#lib-backend/capital/resources/Underwriter/Underwriter';
 import { DummyEntityResource } from '#lib-backend/test/resources/DummyEntityResource/DummyEntityResource';
 import { User } from '#lib-backend/user/resources/User/User';
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
@@ -18,6 +20,8 @@ const { _config, config } = defineConfig({
       Card,
       Otp,
       User,
+      Issuer,
+      Underwriter,
       process.env.NODE_ENV !== 'production' && DummyEntityResource,
     ]),
 

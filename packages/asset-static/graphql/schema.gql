@@ -792,6 +792,114 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
+type Issuer {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input IssuerCreateFormInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input IssuerCreateInput {
+  form: IssuerCreateFormInput
+}
+
+type IssuerCreateOutput {
+  result: Issuer
+}
+
+input IssuerGetConnectionFilterInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input IssuerGetConnectionInput {
+  filter: IssuerGetConnectionFilterInput
+  pagination: PaginationInput
+}
+
+type IssuerGetConnectionOutput {
+  result: IssuerGetConnectionOutputConnection
+}
+
+type IssuerGetConnectionOutputConnection {
+  edges: [IssuerGetConnectionOutputEdge]
+  pageInfo: PageInfo
+}
+
+type IssuerGetConnectionOutputEdge {
+  cursor: String
+  node: Issuer
+}
+
+input IssuerGetFilterInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input IssuerGetInput {
+  filter: IssuerGetFilterInput
+}
+
+input IssuerGetManyFilterInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input IssuerGetManyInput {
+  filter: IssuerGetManyFilterInput
+}
+
+type IssuerGetManyOutput {
+  result: [Issuer]
+}
+
+type IssuerGetOutput {
+  result: Issuer
+}
+
+input IssuerRemoveFilterInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input IssuerRemoveInput {
+  filter: IssuerRemoveFilterInput
+}
+
+type IssuerRemoveOutput {
+  result: Issuer
+}
+
+input IssuerUpdateFilterInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input IssuerUpdateInput {
+  filter: IssuerUpdateFilterInput
+  update: IssuerUpdateUpdateInput
+}
+
+type IssuerUpdateOutput {
+  result: Issuer
+}
+
+input IssuerUpdateUpdateInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
 type LinkedUser {
   _id: String
   created: DateTime
@@ -1105,6 +1213,9 @@ type Mutation {
   CardCreate(input: CardCreateInput): CardCreateOutput
   CardRemove(input: CardRemoveInput): CardRemoveOutput
   CardUpdate(input: CardUpdateInput): CardUpdateOutput
+  IssuerCreate(input: IssuerCreateInput): IssuerCreateOutput
+  IssuerRemove(input: IssuerRemoveInput): IssuerRemoveOutput
+  IssuerUpdate(input: IssuerUpdateInput): IssuerUpdateOutput
   LinkedUserCreate(input: LinkedUserCreateInput): LinkedUserCreateOutput
   LinkedUserRemove(input: LinkedUserRemoveInput): LinkedUserRemoveOutput
   LinkedUserUpdate(input: LinkedUserUpdateInput): LinkedUserUpdateOutput
@@ -1115,6 +1226,9 @@ type Mutation {
   SignInCreate(input: SignInCreateInput): SignInCreateOutput
   SignInUserUpdate(input: SignInUserUpdateInput): SignInUserUpdateOutput
   SignInUsernameCreate(input: SignInUsernameCreateInput): SignInUsernameCreateOutput
+  UnderwriterCreate(input: UnderwriterCreateInput): UnderwriterCreateOutput
+  UnderwriterRemove(input: UnderwriterRemoveInput): UnderwriterRemoveOutput
+  UnderwriterUpdate(input: UnderwriterUpdateInput): UnderwriterUpdateOutput
   UserCreate(input: UserCreateInput): UserCreateOutput
   UserRemove(input: UserRemoveInput): UserRemoveOutput
   UserUpdate(input: UserUpdateInput): UserUpdateOutput
@@ -1356,6 +1470,9 @@ type Query {
   CardGet(input: CardGetInput): CardGetOutput
   CardGetConnection(input: CardGetConnectionInput): CardGetConnectionOutput
   CardGetMany(input: CardGetManyInput): CardGetManyOutput
+  IssuerGet(input: IssuerGetInput): IssuerGetOutput
+  IssuerGetConnection(input: IssuerGetConnectionInput): IssuerGetConnectionOutput
+  IssuerGetMany(input: IssuerGetManyInput): IssuerGetManyOutput
   LinkedUserGet(input: LinkedUserGetInput): LinkedUserGetOutput
   LinkedUserGetConnection(input: LinkedUserGetConnectionInput): LinkedUserGetConnectionOutput
   LinkedUserGetMany(input: LinkedUserGetManyInput): LinkedUserGetManyOutput
@@ -1363,8 +1480,11 @@ type Query {
   OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
   OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput
   PaymentMethodGetMany(input: PaymentMethodGetManyInput): PaymentMethodGetManyOutput
-  SnapshotGet: SnapshotGetOutput
-  SnapshotGetMany: SnapshotGetManyOutput
+  SnapshotGet(input: SnapshotGetInput): SnapshotGetOutput
+  SnapshotGetMany(input: SnapshotGetManyInput): SnapshotGetManyOutput
+  UnderwriterGet(input: UnderwriterGetInput): UnderwriterGetOutput
+  UnderwriterGetConnection(input: UnderwriterGetConnectionInput): UnderwriterGetConnectionOutput
+  UnderwriterGetMany(input: UnderwriterGetManyInput): UnderwriterGetManyOutput
   UserGet(input: UserGetInput): UserGetOutput
   UserGetConnection(input: UserGetConnectionInput): UserGetConnectionOutput
   UserGetMany(input: UserGetManyInput): UserGetManyOutput
@@ -1450,12 +1570,138 @@ type Snapshot {
   name: String
 }
 
+input SnapshotGetFilterInput {
+  images: [String]
+  name: String
+}
+
+input SnapshotGetInput {
+  filter: SnapshotGetFilterInput
+}
+
+input SnapshotGetManyFilterInput {
+  images: [String]
+  name: String
+}
+
+input SnapshotGetManyInput {
+  filter: SnapshotGetManyFilterInput
+}
+
 type SnapshotGetManyOutput {
   result: [Snapshot]
 }
 
 type SnapshotGetOutput {
   result: Snapshot
+}
+
+type Underwriter {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input UnderwriterCreateFormInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input UnderwriterCreateInput {
+  form: UnderwriterCreateFormInput
+}
+
+type UnderwriterCreateOutput {
+  result: Underwriter
+}
+
+input UnderwriterGetConnectionFilterInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input UnderwriterGetConnectionInput {
+  filter: UnderwriterGetConnectionFilterInput
+  pagination: PaginationInput
+}
+
+type UnderwriterGetConnectionOutput {
+  result: UnderwriterGetConnectionOutputConnection
+}
+
+type UnderwriterGetConnectionOutputConnection {
+  edges: [UnderwriterGetConnectionOutputEdge]
+  pageInfo: PageInfo
+}
+
+type UnderwriterGetConnectionOutputEdge {
+  cursor: String
+  node: Underwriter
+}
+
+input UnderwriterGetFilterInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input UnderwriterGetInput {
+  filter: UnderwriterGetFilterInput
+}
+
+input UnderwriterGetManyFilterInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input UnderwriterGetManyInput {
+  filter: UnderwriterGetManyFilterInput
+}
+
+type UnderwriterGetManyOutput {
+  result: [Underwriter]
+}
+
+type UnderwriterGetOutput {
+  result: Underwriter
+}
+
+input UnderwriterRemoveFilterInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input UnderwriterRemoveInput {
+  filter: UnderwriterRemoveFilterInput
+}
+
+type UnderwriterRemoveOutput {
+  result: Underwriter
+}
+
+input UnderwriterUpdateFilterInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input UnderwriterUpdateInput {
+  filter: UnderwriterUpdateFilterInput
+  update: UnderwriterUpdateUpdateInput
+}
+
+type UnderwriterUpdateOutput {
+  result: Underwriter
+}
+
+input UnderwriterUpdateUpdateInput {
+  _id: String
+  created: DateTime
+  name: String
 }
 
 type User {

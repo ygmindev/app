@@ -1,5 +1,5 @@
 import { type GraphQlQueryParamsFieldsModel } from '#lib-frontend/data/utils/graphQlQuery/graphQlQuery.models';
-import { type {{NAME}}(pascalCase)Model } from '#lib-shared/{{module}}(camelcase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
+import { type {{NAME}}(pascalCase)Model } from '#lib-shared/{{module}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
 
 export const {{NAME}}(CONSTANTCASE)_FIELDS: GraphQlQueryParamsFieldsModel<{{NAME}}(pascalCase)Model> = [
   '_id',

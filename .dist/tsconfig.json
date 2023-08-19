@@ -42,6 +42,9 @@
       "#app-web/*": [
         "packages/app-web/src/*"
       ],
+      "#app-web-admin/*": [
+        "packages/app-web-admin/src/*"
+      ],
       "#app-web-library/*": [
         "packages/app-web-library/src/*"
       ],

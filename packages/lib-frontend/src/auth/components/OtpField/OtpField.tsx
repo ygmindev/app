@@ -1,4 +1,5 @@
 import range from 'lodash/range';
+import toNumber from 'lodash/toNumber';
 import { useState } from 'react';
 
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
@@ -25,6 +26,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
   error,
   isAutoFocus,
   onChange,
+  onSubmit,
   testID,
   value,
   ...props
@@ -60,7 +62,12 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             keyboard={TEXT_FIELD_KEYBOARD.NUMBER}
             maxLength={process.env.SERVER_OTP_LENGTH}
             onBlur={() => isFocusedSet(false)}
-            onChange={valueControlledSet}
+            onChange={(value) => {
+              valueControlledSet(value);
+              if (value.length === toNumber(process.env.SERVER_OTP_LENGTH)) {
+                onSubmit && onSubmit();
+              }
+            }}
             onFocus={() => isFocusedSet(true)}
             value={valueControlled}
           />

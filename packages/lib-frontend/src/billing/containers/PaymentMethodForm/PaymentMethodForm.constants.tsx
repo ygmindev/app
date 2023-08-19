@@ -6,22 +6,20 @@ export const PAYMENT_METHOD_FORM_FIELDS: Array<FormContainerRowModel> = withId([
   {
     fields: [
       {
-        Component: ({ elementState, error }) => (
+        element: (
           <PaymentMethodField
-            elementState={elementState}
-            error={error}
-            // onChange={onChange}
-            // value={value}
-            // elementState={elementState}
-            // error={error}
-            // isAutoFocus
-            // onChange={async (value: string): Promise<void> => {
-            //   onChange && onChange(value);
-            //   if (value.length === OTP_LENGTH) {
-            //     await sleep();
-            //     handleSubmit();
-            //   }
-            // }}
+          // onChange={onChange}
+          // value={value}
+          // elementState={elementState}
+          // error={error}
+          // isAutoFocus
+          // onChange={async (value: string): Promise<void> => {
+          //   onChange && onChange(value);
+          //   if (value.length === OTP_LENGTH) {
+          //     await sleep();
+          //     handleSubmit();
+          //   }
+          // }}
           />
         ),
         id: 'payment',

@@ -1,143 +1,58 @@
-import 'ag-grid-community/styles/ag-grid.min.css';
-import 'ag-grid-community/styles/ag-theme-material.min.css';
+import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import { type ReactElement } from 'react';
 
-import {
-  type ColDef,
-  type ColumnApi,
-  type GridApi,
-  type ICellRendererParams,
-  type ValueFormatterParams,
-} from 'ag-grid-community';
-import { AgGridReact } from 'ag-grid-react';
-import { type ForwardedRef } from 'react';
-import { forwardRef, useImperativeHandle, useState } from 'react';
-
-import { AG_GRID_THEME } from '#lib-config/style/css/css.ag-grid';
 import { type _TablePropsModel } from '#lib-frontend/core/components/Table/_Table.models';
-import {
-  COLUMN_SORT_TYPE,
-  TABLE_SELECT_TYPE,
-} from '#lib-frontend/core/components/Table/Table.constants';
-import {
-  type TableColumnModel,
-  type TableRefModel,
-} from '#lib-frontend/core/components/Table/Table.models';
 import { Text } from '#lib-frontend/core/components/Text/Text';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import { type SFCPropsModel } from '#lib-frontend/core/core.models';
+import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
-import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
-export const _Table = forwardRef(
-  <TType,>(
-    {
-      columns,
-      data,
-      isFullWidth,
-      isVirtualized = true,
-      onMount,
-      onSelect,
-      rowHeight,
-      select,
-    }: _TablePropsModel<TType>,
-    ref: ForwardedRef<TableRefModel>,
-  ) => {
-    const { t } = useTranslation();
-    const theme = useTheme();
-    const [gridApi, gridApiSet] = useState<GridApi>();
-    const [columnApi, columnApiSet] = useState<ColumnApi>();
-    const { effect } = theme.animation;
+export const _Table = <TType extends Record<string, unknown>>({
+  columns,
+  data,
+  isFullWidth,
+  onSelect,
+  select,
+}: SFCPropsModel<_TablePropsModel<TType>>): ReactElement<
+  SFCPropsModel<_TablePropsModel<TType>>
+> => {
+  const { t } = useTranslation();
+  const table = useReactTable<TType>({
+    columns:
+      columns?.map(({ id, label }) => ({ accessorKey: id, header: label ? t(label) : id, id })) ||
+      [],
+    data,
+    getCoreRowModel: getCoreRowModel(),
+  });
 
-    useImperativeHandle(ref, () => ({
-      deselectRows: () => gridApi && gridApi.deselectAll(),
-    }));
+  return (
+    <Wrapper grow>
+      {table.getHeaderGroups().map(({ headers, id }) => (
+        <Wrapper
+          isRow
+          key={id}>
+          {headers.map((header) => (
+            <Wrapper key={header.id}>
+              <TranslatableText>{header.column.columnDef.header as string}</TranslatableText>
+            </Wrapper>
+          ))}
+        </Wrapper>
+      ))}
 
-    const handleSelect = (): void => {
-      const selectedRows = gridApi ? gridApi.getSelectedRows() : [];
-      onSelect && onSelect(selectedRows);
-    };
+      {table.getRowModel().rows.map((row) => (
+        <Wrapper
+          isRow
+          key={row.id}>
+          {row.getVisibleCells().map((cell) => (
+            <Wrapper key={cell.id}>
+              <Text>{cell.getValue() as string}</Text>
 
-    const unhiddenColumnIndex = columns.findIndex(({ isHidden }) => !isHidden);
-    const getColumnDef = <TValue,>(
-      {
-        flex,
-        formatter,
-        id,
-        isHidden,
-        label,
-        pin,
-        renderer,
-        sort,
-        width,
-      }: TableColumnModel<TType, TValue>,
-      i: number,
-    ): ColDef => {
-      const definition: ColDef = {
-        checkboxSelection: select !== undefined && i === unhiddenColumnIndex,
-        field: id,
-        flex,
-        headerCheckboxSelection: select === TABLE_SELECT_TYPE.MULTIPLE && i === unhiddenColumnIndex,
-        headerName: label ? t(label) : undefined,
-        hide: isHidden,
-        maxWidth: width,
-        minWidth: width,
-        pinned: pin,
-        showDisabledCheckboxes: true,
-        sort: [COLUMN_SORT_TYPE.ASCENDING, COLUMN_SORT_TYPE.DESCENDING].includes(
-          sort as COLUMN_SORT_TYPE,
-        )
-          ? (sort as COLUMN_SORT_TYPE)
-          : undefined,
-        sortable: sort === true || !isEmpty(sort),
-        suppressSizeToFit: (width || 0) > 0,
-        width,
-      };
-
-      if (renderer) {
-        definition.cellRenderer = ({ node, value }: ICellRendererParams) =>
-          renderer({ row: node && node.data, value });
-      }
-
-      definition.valueFormatter = ({ node, value }: ValueFormatterParams) =>
-        formatter ? formatter({ row: node && node.data, value }) : isEmpty(value) ? '-' : value;
-
-      return definition;
-    };
-    return (
-      <div
-        className={AG_GRID_THEME}
-        style={{ flex: 1 }}>
-        <AgGridReact
-          animateRows
-          columnDefs={columns.map(getColumnDef)}
-          debounceVerticalScrollbar
-          loadingOverlayComponent={Text}
-          onGridReady={({ api, columnApi }) => {
-            void sleep(effect).then(() => {
-              isFullWidth ? api.sizeColumnsToFit() : columnApi.autoSizeAllColumns();
-              gridApiSet(api);
-              columnApiSet(columnApi);
-              onMount && onMount();
-            });
-          }}
-          onRowDataUpdated={() => {
-            if (gridApi && columnApi) {
-              void sleep(effect).then(() =>
-                isFullWidth ? gridApi.sizeColumnsToFit() : columnApi.autoSizeAllColumns(),
-              );
-            }
-          }}
-          onSelectionChanged={handleSelect}
-          overlayNoRowsTemplate={t('core:nothingToShow')}
-          rowData={data}
-          rowHeight={rowHeight}
-          rowSelection={select}
-          suppressCellFocus
-          suppressRowClickSelection
-          suppressRowHoverHighlight
-          suppressRowVirtualisation={!isVirtualized}
-        />
-      </div>
-    );
-  },
-);
+              {flexRender(cell.column.columnDef.cell, cell.getContext())}
+            </Wrapper>
+          ))}
+        </Wrapper>
+      ))}
+    </Wrapper>
+  );
+};
