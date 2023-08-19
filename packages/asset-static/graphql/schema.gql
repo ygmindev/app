@@ -443,8 +443,8 @@ type Card {
   _id: String
   brand: String
   created: DateTime
-  expMonth: String
-  expYear: String
+  expMonth: Float
+  expYear: Float
   funding: String
   id: String
   last4: String
@@ -455,8 +455,8 @@ input CardCreateFormInput {
   _id: String
   brand: String
   created: DateTime
-  expMonth: String
-  expYear: String
+  expMonth: Float
+  expYear: Float
   funding: String
   id: String
   last4: String
@@ -505,8 +505,8 @@ input CardGetConnectionFilterInput {
   _id: String
   brand: String
   created: DateTime
-  expMonth: String
-  expYear: String
+  expMonth: Float
+  expYear: Float
   funding: String
   id: String
   last4: String
@@ -566,8 +566,8 @@ input CardGetFilterInput {
   _id: String
   brand: String
   created: DateTime
-  expMonth: String
-  expYear: String
+  expMonth: Float
+  expYear: Float
   funding: String
   id: String
   last4: String
@@ -583,8 +583,8 @@ input CardGetManyFilterInput {
   _id: String
   brand: String
   created: DateTime
-  expMonth: String
-  expYear: String
+  expMonth: Float
+  expYear: Float
   funding: String
   id: String
   last4: String
@@ -666,8 +666,8 @@ input CardInput {
   _id: String
   brand: String
   created: DateTime
-  expMonth: String
-  expYear: String
+  expMonth: Float
+  expYear: Float
   funding: String
   id: String
   last4: String
@@ -678,8 +678,8 @@ input CardRemoveFilterInput {
   _id: String
   brand: String
   created: DateTime
-  expMonth: String
-  expYear: String
+  expMonth: Float
+  expYear: Float
   funding: String
   id: String
   last4: String
@@ -728,8 +728,8 @@ input CardUpdateFilterInput {
   _id: String
   brand: String
   created: DateTime
-  expMonth: String
-  expYear: String
+  expMonth: Float
+  expYear: Float
   funding: String
   id: String
   last4: String
@@ -779,8 +779,8 @@ input CardUpdateUpdateInput {
   _id: String
   brand: String
   created: DateTime
-  expMonth: String
-  expYear: String
+  expMonth: Float
+  expYear: Float
   funding: String
   id: String
   last4: String
@@ -1374,8 +1374,8 @@ type PageInfo {
 input PaginationInput {
   after: String
   before: String
-  first: String
-  last: String
+  first: Float
+  last: Float
 }
 
 union PaymentMethod = Bank | Card

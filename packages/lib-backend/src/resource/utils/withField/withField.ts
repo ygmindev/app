@@ -23,6 +23,8 @@ const getField = <TType extends unknown>({
       return Field(() => (isArray ? [Boolean] : Boolean));
     case FIELD_TYPE.DATE:
       return Field(() => (isArray ? [Date] : Date));
+    case FIELD_TYPE.NUMBER:
+      return Field(() => (isArray ? [Number] : Number));
     default:
       return Field(() => (isArray ? [String] : String));
   }
