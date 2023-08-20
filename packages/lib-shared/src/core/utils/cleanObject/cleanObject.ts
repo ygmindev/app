@@ -13,13 +13,11 @@ export const cleanObject = <TType>(value: TType): TType => {
   const valueF = isPlainObject(value) ? value : toPlainObject(value);
   Object.keys(valueF as object).forEach((k) => {
     const v = (valueF as Record<string, unknown>)[k];
-    CLEAN_OBJECT_KEYS.includes(k)
+    CLEAN_OBJECT_KEYS.includes(k) || v === undefined
       ? delete (valueF as Record<string, unknown>)[k]
-      : isArray(v)
-      ? v.map(cleanObject)
       : isPrimitive(v)
-      ? v === undefined && delete (valueF as Record<string, unknown>)[k]
-      : ((valueF as Record<string, unknown>)[k] = cleanObject(v));
+      ? undefined
+      : ((valueF as Record<string, unknown>)[k] = isArray(v) ? v.map(cleanObject) : cleanObject(v));
   });
   return valueF;
 };

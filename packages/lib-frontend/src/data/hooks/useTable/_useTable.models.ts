@@ -8,7 +8,7 @@ import { type StringKeyModel } from '#lib-shared/core/core.models';
 
 export type _UseTableParamsModel<TType> = {
   columns?: Array<TableColumnModel<TType, Array<StringKeyModel<TType>>[number]>>;
-  data: Array<TType>;
+  data?: Array<TType>;
   isFullWidth?: boolean;
   onSelect?(rows?: Array<TType>): void;
   select?: TableSelectTypeModel;

@@ -20,7 +20,7 @@ export const _useTable = <TType,>({
         header: label ? t(label) : id,
         size: width,
       })) ?? [],
-    data,
+    data: data ?? [],
     getCoreRowModel: getCoreRowModel(),
   });
   return {

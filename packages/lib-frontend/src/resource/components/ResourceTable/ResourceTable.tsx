@@ -12,7 +12,6 @@ import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.model
 export const ResourceTable = <TType, TForm = undefined, TRoot = undefined>({
   columns,
   filters,
-  name,
   service,
   testID,
   ...props
@@ -20,8 +19,8 @@ export const ResourceTable = <TType, TForm = undefined, TRoot = undefined>({
   SFCPropsModel<ResourceTablePropsModel<TType, TForm, TRoot>>
 > => {
   const { styles } = useStyles({ props });
-  const { getConnection } = service();
-  const [data, setData] = useState<ConnectionModel<TType>>();
+  const [data, setData] = useState<ConnectionModel<TType> | undefined>();
+  const { getConnection } = service;
 
   const handleFilter = async (data: Array<FilterModel<TType>>): Promise<void> => {
     const result = await getConnection({ filter: data, pagination: { first: 10 } });

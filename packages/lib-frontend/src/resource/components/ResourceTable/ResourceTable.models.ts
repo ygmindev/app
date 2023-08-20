@@ -6,7 +6,4 @@ export type ResourceTablePropsModel<TType, TForm = undefined, TRoot = undefined>
   ResourceFilterFormPropsModel<TType, TForm, TRoot>,
   'filters'
 > &
-  Pick<TablePropsModel<TType>, 'columns'> & {
-    name: string;
-    service(): ResourceServiceModel<TType, TForm, TRoot>;
-  };
+  Pick<TablePropsModel<TType>, 'columns'> & { service: ResourceServiceModel<TType, TForm, TRoot> };

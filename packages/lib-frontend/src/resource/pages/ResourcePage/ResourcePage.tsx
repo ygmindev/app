@@ -6,7 +6,6 @@ import { type TabModel } from '#lib-frontend/core/components/Tabs/Tabs.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { ResourceTable } from '#lib-frontend/resource/components/ResourceTable/ResourceTable';
 import { RESOURCE_ITEMS } from '#lib-frontend/resource/pages/ResourcePage/ResourcePage.constants';
 import {
   type ResourcePageParamsModel,
@@ -46,16 +45,7 @@ export const ResourcePage: SFCModel<ResourcePagePropsModel> = ({ testID, ...prop
         value={id}
       />
 
-      {resource ? (
-        <ResourceTable
-          columns={resource.columns}
-          filters={resource.filters}
-          name={id}
-          service={resource.service}
-        />
-      ) : (
-        <NotFoundPage />
-      )}
+      {resource ? resource.element : <NotFoundPage />}
     </Wrapper>
   );
 };

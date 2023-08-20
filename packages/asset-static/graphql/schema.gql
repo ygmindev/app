@@ -28,7 +28,7 @@ type AccessCreateOutput {
 }
 
 input AccessGetConnectionInput {
-  filter: String
+  filter: [FilterInput]
   pagination: PaginationInput
 }
 
@@ -47,11 +47,11 @@ type AccessGetConnectionOutputEdge {
 }
 
 input AccessGetInput {
-  filter: [String]
+  filter: [FilterInput]
 }
 
 input AccessGetManyInput {
-  filter: [String]
+  filter: [FilterInput]
 }
 
 type AccessGetManyOutput {
@@ -63,7 +63,7 @@ type AccessGetOutput {
 }
 
 input AccessRemoveInput {
-  filter: [String]
+  filter: [FilterInput]
 }
 
 type AccessRemoveOutput {
@@ -71,7 +71,7 @@ type AccessRemoveOutput {
 }
 
 input AccessUpdateInput {
-  filter: [String]
+  filter: [FilterInput]
   update: AccessUpdateUpdateInput
 }
 
@@ -144,7 +144,7 @@ input BankCreateRootInput {
 }
 
 input BankGetConnectionInput {
-  filter: String
+  filter: [FilterInput]
   pagination: PaginationInput
   root: BankGetConnectionRootInput
 }
@@ -193,12 +193,12 @@ input BankGetConnectionRootInput {
 }
 
 input BankGetInput {
-  filter: [String]
+  filter: [FilterInput]
   root: BankGetRootInput
 }
 
 input BankGetManyInput {
-  filter: [String]
+  filter: [FilterInput]
   root: BankGetManyRootInput
 }
 
@@ -269,7 +269,7 @@ input BankGetRootInput {
 }
 
 input BankRemoveInput {
-  filter: [String]
+  filter: [FilterInput]
   root: BankRemoveRootInput
 }
 
@@ -307,7 +307,7 @@ input BankRemoveRootInput {
 }
 
 input BankUpdateInput {
-  filter: [String]
+  filter: [FilterInput]
   root: BankUpdateRootInput
   update: BankUpdateUpdateInput
 }
@@ -417,7 +417,7 @@ input CardCreateRootInput {
 }
 
 input CardGetConnectionInput {
-  filter: String
+  filter: [FilterInput]
   pagination: PaginationInput
   root: CardGetConnectionRootInput
 }
@@ -466,12 +466,12 @@ input CardGetConnectionRootInput {
 }
 
 input CardGetInput {
-  filter: [String]
+  filter: [FilterInput]
   root: CardGetRootInput
 }
 
 input CardGetManyInput {
-  filter: [String]
+  filter: [FilterInput]
   root: CardGetManyRootInput
 }
 
@@ -554,7 +554,7 @@ input CardInput {
 }
 
 input CardRemoveInput {
-  filter: [String]
+  filter: [FilterInput]
   root: CardRemoveRootInput
 }
 
@@ -592,7 +592,7 @@ input CardRemoveRootInput {
 }
 
 input CardUpdateInput {
-  filter: [String]
+  filter: [FilterInput]
   root: CardUpdateRootInput
   update: CardUpdateUpdateInput
 }
@@ -647,6 +647,12 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
+input FilterInput {
+  condition: String
+  field: String
+  value: String
+}
+
 type Issuer {
   _id: String
   created: DateTime
@@ -668,7 +674,7 @@ type IssuerCreateOutput {
 }
 
 input IssuerGetConnectionInput {
-  filter: String
+  filter: [FilterInput]
   pagination: PaginationInput
 }
 
@@ -687,11 +693,11 @@ type IssuerGetConnectionOutputEdge {
 }
 
 input IssuerGetInput {
-  filter: [String]
+  filter: [FilterInput]
 }
 
 input IssuerGetManyInput {
-  filter: [String]
+  filter: [FilterInput]
 }
 
 type IssuerGetManyOutput {
@@ -703,7 +709,7 @@ type IssuerGetOutput {
 }
 
 input IssuerRemoveInput {
-  filter: [String]
+  filter: [FilterInput]
 }
 
 type IssuerRemoveOutput {
@@ -711,7 +717,7 @@ type IssuerRemoveOutput {
 }
 
 input IssuerUpdateInput {
-  filter: [String]
+  filter: [FilterInput]
   update: IssuerUpdateUpdateInput
 }
 
@@ -778,7 +784,7 @@ input LinkedUserCreateRootInput {
 }
 
 input LinkedUserGetConnectionInput {
-  filter: String
+  filter: [FilterInput]
   pagination: PaginationInput
   root: LinkedUserGetConnectionRootInput
 }
@@ -827,12 +833,12 @@ input LinkedUserGetConnectionRootInput {
 }
 
 input LinkedUserGetInput {
-  filter: [String]
+  filter: [FilterInput]
   root: LinkedUserGetRootInput
 }
 
 input LinkedUserGetManyInput {
-  filter: [String]
+  filter: [FilterInput]
   root: LinkedUserGetManyRootInput
 }
 
@@ -910,7 +916,7 @@ input LinkedUserInput {
 }
 
 input LinkedUserRemoveInput {
-  filter: [String]
+  filter: [FilterInput]
   root: LinkedUserRemoveRootInput
 }
 
@@ -948,7 +954,7 @@ input LinkedUserRemoveRootInput {
 }
 
 input LinkedUserUpdateInput {
-  filter: [String]
+  filter: [FilterInput]
   root: LinkedUserUpdateRootInput
   update: LinkedUserUpdateUpdateInput
 }
@@ -1049,7 +1055,7 @@ type OtpCreateOutput {
 }
 
 input OtpGetConnectionInput {
-  filter: String
+  filter: [FilterInput]
   pagination: PaginationInput
 }
 
@@ -1068,11 +1074,11 @@ type OtpGetConnectionOutputEdge {
 }
 
 input OtpGetInput {
-  filter: [String]
+  filter: [FilterInput]
 }
 
 input OtpGetManyInput {
-  filter: [String]
+  filter: [FilterInput]
 }
 
 type OtpGetManyOutput {
@@ -1084,7 +1090,7 @@ type OtpGetOutput {
 }
 
 input OtpRemoveInput {
-  filter: [String]
+  filter: [FilterInput]
 }
 
 type OtpRemoveOutput {
@@ -1092,7 +1098,7 @@ type OtpRemoveOutput {
 }
 
 input OtpUpdateInput {
-  filter: [String]
+  filter: [FilterInput]
   update: OtpUpdateUpdateInput
 }
 
@@ -1126,7 +1132,7 @@ input PaginationInput {
 union PaymentMethod = Bank | Card
 
 input PaymentMethodGetManyInput {
-  filter: [String]
+  filter: [FilterInput]
   root: PaymentMethodGetManyRootInput
 }
 
@@ -1254,7 +1260,7 @@ type SignInCreateOutput {
 }
 
 input SignInUserUpdateInput {
-  filter: [String]
+  filter: [FilterInput]
   update: SignInUserUpdateUpdateInput
 }
 
@@ -1297,11 +1303,11 @@ type Snapshot {
 }
 
 input SnapshotGetInput {
-  filter: [String]
+  filter: [FilterInput]
 }
 
 input SnapshotGetManyInput {
-  filter: [String]
+  filter: [FilterInput]
 }
 
 type SnapshotGetManyOutput {
@@ -1333,7 +1339,7 @@ type UnderwriterCreateOutput {
 }
 
 input UnderwriterGetConnectionInput {
-  filter: String
+  filter: [FilterInput]
   pagination: PaginationInput
 }
 
@@ -1352,11 +1358,11 @@ type UnderwriterGetConnectionOutputEdge {
 }
 
 input UnderwriterGetInput {
-  filter: [String]
+  filter: [FilterInput]
 }
 
 input UnderwriterGetManyInput {
-  filter: [String]
+  filter: [FilterInput]
 }
 
 type UnderwriterGetManyOutput {
@@ -1368,7 +1374,7 @@ type UnderwriterGetOutput {
 }
 
 input UnderwriterRemoveInput {
-  filter: [String]
+  filter: [FilterInput]
 }
 
 type UnderwriterRemoveOutput {
@@ -1376,7 +1382,7 @@ type UnderwriterRemoveOutput {
 }
 
 input UnderwriterUpdateInput {
-  filter: [String]
+  filter: [FilterInput]
   update: UnderwriterUpdateUpdateInput
 }
 
@@ -1427,7 +1433,7 @@ type UserCreateOutput {
 }
 
 input UserGetConnectionInput {
-  filter: String
+  filter: [FilterInput]
   pagination: PaginationInput
 }
 
@@ -1446,11 +1452,11 @@ type UserGetConnectionOutputEdge {
 }
 
 input UserGetInput {
-  filter: [String]
+  filter: [FilterInput]
 }
 
 input UserGetManyInput {
-  filter: [String]
+  filter: [FilterInput]
 }
 
 type UserGetManyOutput {
@@ -1476,7 +1482,7 @@ input UserInput {
 }
 
 input UserRemoveInput {
-  filter: [String]
+  filter: [FilterInput]
 }
 
 type UserRemoveOutput {
@@ -1484,7 +1490,7 @@ type UserRemoveOutput {
 }
 
 input UserUpdateInput {
-  filter: [String]
+  filter: [FilterInput]
   update: UserUpdateUpdateInput
 }
 
