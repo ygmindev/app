@@ -411,7 +411,7 @@ export const testResourceService = async ({
     const { result } = await service.update(input);
 
     expect(result?.stringArrayProperty).toStrictEqual([
-      ...(data[0].stringArrayProperty || []),
+      ...(data[0].stringArrayProperty ?? []),
       'stringArrayPropertyElement1',
     ]);
   });
@@ -429,7 +429,7 @@ export const testResourceService = async ({
     const { result } = await service.update(input);
     const expected = filter(data[0].stringArrayProperty, input.update.$pull);
 
-    expect(result?.stringArrayProperty || []).toStrictEqual(expected);
+    expect(result?.stringArrayProperty ?? []).toStrictEqual(expected);
   });
 
   test('works with update with project', async () => {

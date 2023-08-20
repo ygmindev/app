@@ -7,7 +7,7 @@ export const resolveFirst = async <TType>(
   params: ResolveFirstParamsModel<TType>,
 ): Promise<ResolveFirstModel<TType>> => {
   const errors = [];
-  for (const promise of params || []) {
+  for (const promise of params ?? []) {
     try {
       const result = await promise();
       if (result) {

@@ -1,4 +1,4 @@
-import { range } from 'lodash';
+import range from 'lodash/range';
 import round from 'lodash/round';
 
 import { Table } from '#lib-frontend/core/components/Table/Table';

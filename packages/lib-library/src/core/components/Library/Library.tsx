@@ -44,7 +44,7 @@ export const Library = <TProps,>({
   const categories = useMemo(
     () =>
       groupBy(
-        withId([{ category: 'default', props: defaultProps }, ...(variants || [])]),
+        withId([{ category: 'default', props: defaultProps }, ...(variants ?? [])]),
         ({ category, props }) => category || keys(props).join(', '),
         { isSort: false },
       ),

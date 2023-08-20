@@ -1,12 +1,10 @@
 import isNumber from 'lodash/isNumber';
 import isPlainObject from 'lodash/isPlainObject';
 
+import { DIRECTION } from '#lib-frontend/core/core.constants';
 import { THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { type ThemeColorModel, type ThemeSizeModel } from '#lib-frontend/style/style.models';
-import {
-  BORDER_DIRECTION,
-  BORDER_RADIUS_DIRECTION,
-} from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.constants';
+import { BORDER_RADIUS_DIRECTION } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import {
   type BorderRadiusDirection,
   type BorderStylerParamsModel,
@@ -33,15 +31,15 @@ export const borderStyler: StylerModel<BorderStylerParamsModel> = (
   return cleanObject({
     borderBottomLeftRadius: getBorderRadius(round, BORDER_RADIUS_DIRECTION.BOTTOM_LEFT),
     borderBottomRightRadius: getBorderRadius(round, BORDER_RADIUS_DIRECTION.BOTTOM_RIGHT),
-    borderBottomWidth: border === BORDER_DIRECTION.BOTTOM ? borderWidth : undefined,
+    borderBottomWidth: border === DIRECTION.BOTTOM ? borderWidth : undefined,
     borderColor: border ? borderColorF : undefined,
-    borderLeftWidth: border === BORDER_DIRECTION.LEFT ? borderWidth : undefined,
+    borderLeftWidth: border === DIRECTION.LEFT ? borderWidth : undefined,
     borderRadius: getBorderRadius(round),
-    borderRightWidth: border === BORDER_DIRECTION.RIGHT ? borderWidth : undefined,
+    borderRightWidth: border === DIRECTION.RIGHT ? borderWidth : undefined,
     borderStyle: border ? 'solid' : undefined,
     borderTopLeftRadius: getBorderRadius(round, BORDER_RADIUS_DIRECTION.TOP_LEFT),
     borderTopRightRadius: getBorderRadius(round, BORDER_RADIUS_DIRECTION.TOP_RIGHT),
-    borderTopWidth: border === BORDER_DIRECTION.TOP ? borderWidth : undefined,
+    borderTopWidth: border === DIRECTION.TOP ? borderWidth : undefined,
     borderWidth: border === true ? borderWidth : undefined,
     ...(isShadow
       ? {

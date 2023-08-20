@@ -18,7 +18,7 @@ export const jsPackage: GeneratorParamsModel = {
       // bundled dependencies
       const filename = fromRoot('package.json');
       const packageJson = JSON.parse(readFileSync(filename).toString()) as PackageJson;
-      packageJson.bundledDependencies = [...(packageJson.bundledDependencies || []), target];
+      packageJson.bundledDependencies = [...(packageJson.bundledDependencies ?? []), target];
       packageJson.bundledDependencies = uniq(packageJson.bundledDependencies).sort();
       writeFile({ filename, value: stringify(packageJson) });
     }

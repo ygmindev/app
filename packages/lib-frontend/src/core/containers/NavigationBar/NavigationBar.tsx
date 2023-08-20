@@ -19,7 +19,6 @@ import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathnam
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { BORDER_DIRECTION } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import { groupBy } from '#lib-shared/core/utils/groupBy/groupBy';
 
 export const NavigationBar = ({
@@ -47,7 +46,7 @@ export const NavigationBar = ({
     <Activatable style={styles}>
       <Wrapper
         basis={0}
-        border={isHorizontalF ? BORDER_DIRECTION.BOTTOM : BORDER_DIRECTION.RIGHT}
+        border={isHorizontalF ? DIRECTION.BOTTOM : DIRECTION.RIGHT}
         isFullWidth={isHorizontalF}
         isHorizontalScrollable={isHorizontalF}
         isRowAlign={isHorizontalF}

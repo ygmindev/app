@@ -6,16 +6,16 @@ import { type BillingReducerModel } from '#lib-frontend/billing/stores/billingSt
 export const BILLING_REDUCER: BillingReducerModel = {
   actions: {
     paymentMethodAdd: (store, value) => {
-      store.set('paymentMethods', uniqBy([...(store.get('paymentMethods') || []), value], '_id'));
+      store.set('paymentMethods', uniqBy([...(store.get('paymentMethods') ?? []), value], '_id'));
     },
     paymentMethodRemove: (store, value) => {
-      store.set('paymentMethods', filter(store.get('paymentMethods') || [], { _id: value }));
+      store.set('paymentMethods', filter(store.get('paymentMethods') ?? [], { _id: value }));
     },
 
     paymentMethodUpdate: (store, value) => {
       store.set(
         'paymentMethods',
-        (store.get('paymentMethods') || []).map((paymentMethod) =>
+        (store.get('paymentMethods') ?? []).map((paymentMethod) =>
           paymentMethod._id === value._id ? value : paymentMethod,
         ),
       );

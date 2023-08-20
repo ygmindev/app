@@ -18,13 +18,13 @@ import { PROMPT_TYPE } from '#tool-task/core/utils/prompt/prompt.constants';
 
 const getTemplateVariables = async (from: string): Promise<Array<string>> => {
   const base = basename(from);
-  let variables: Array<string> = base.match(BOILERPLATE_TEMPLATE_VARIABLE_PATTERN) || [];
+  let variables: Array<string> = base.match(BOILERPLATE_TEMPLATE_VARIABLE_PATTERN) ?? [];
   for (const child of children(from)) {
     if (child.isDirectory) {
       variables = variables.concat((await getTemplateVariables(child.fullPath)).flat());
     } else {
       const content = readFileSync(child.fullPath, 'utf8');
-      variables = variables.concat(content.match(BOILERPLATE_TEMPLATE_VARIABLE_PATTERN) || []);
+      variables = variables.concat(content.match(BOILERPLATE_TEMPLATE_VARIABLE_PATTERN) ?? []);
     }
   }
   return variables;

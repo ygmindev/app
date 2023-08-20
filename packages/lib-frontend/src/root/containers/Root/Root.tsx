@@ -7,7 +7,7 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, ...props })
   <RootBase
     {...props}
     additionalProviders={[
-      ...(additionalProviders || []),
+      ...(additionalProviders ?? []),
       <RouteProvider value={props.context?.route} />,
     ]}
   />

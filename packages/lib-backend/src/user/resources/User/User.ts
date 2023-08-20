@@ -26,7 +26,7 @@ export class User extends EntityResource implements UserModel {
     isRepository: true,
     type: FIELD_TYPE.RESOURCE,
   })
-  [BANK_RESOURCE_NAME]?: Array<BankModel>;
+  [BANK_RESOURCE_NAME]: Array<BankModel>;
 
   @withField({
     Resource: Card,
