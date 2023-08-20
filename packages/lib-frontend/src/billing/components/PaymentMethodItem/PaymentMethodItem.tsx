@@ -51,11 +51,11 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
   const handleRemove = async (): Promise<void> => {
     switch (value?.type) {
       case PAYMENT_METHOD_TYPE.BANK: {
-        await bankRemove({ filter: { _id: value._id } });
+        await bankRemove({ filter: [{ field: '_id', value: value._id }] });
         break;
       }
       case PAYMENT_METHOD_TYPE.CARD: {
-        await cardRemove({ filter: { _id: value._id } });
+        await cardRemove({ filter: [{ field: '_id', value: value._id }] });
         break;
       }
     }
@@ -128,8 +128,9 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
                 id: 'setAsPrimary',
                 label: t('core:setAsPrimary'),
                 onPress: async () =>
+                  currentUser &&
                   update({
-                    filter: { _id: currentUser?._id },
+                    filter: [{ field: '_id', value: currentUser._id }],
                     update: { paymentMethodPrimary: value?._id },
                   }),
               },

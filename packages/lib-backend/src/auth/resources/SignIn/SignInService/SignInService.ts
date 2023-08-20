@@ -13,6 +13,7 @@ import {
 } from '#lib-shared/auth/resources/SignIn/SignIn.models';
 import { type SignInServiceModel } from '#lib-shared/auth/resources/SignIn/SignInService/SignInService.models';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { pick } from '#lib-shared/core/utils/pick/pick';
 import { withInject } from '#lib-shared/core/utils/withInject/withInject';
 import { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
@@ -81,9 +82,13 @@ export class SignInService implements SignInServiceModel {
     if (form.otp) {
       const formF = cleanObject(form);
       const otp = await this._otpService.verify(formF);
-      const otpF = cleanObject(pick(otp, ['email', 'phone', 'callingCode']));
       const { result: user } = await this._userService.update({
-        filter: { _id: context?.user?._id, ...otpF },
+        filter: filterNil([
+          context?.user && { field: '_id', value: context.user._id },
+          otp.email && { field: 'email', value: otp.email },
+          otp.phone && { field: 'phone', value: otp.phone },
+          otp.callingCode && { field: 'callingCode', value: otp.callingCode },
+        ]),
         update: formF,
       });
       if (user) {

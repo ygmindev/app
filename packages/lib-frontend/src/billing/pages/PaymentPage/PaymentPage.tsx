@@ -32,7 +32,7 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
   const tPaymentMethodAdd = t('core:add', { value: tPaymentMethod });
 
   const query = async (): Promise<Array<PaymentMethodModel> | undefined> => {
-    const { result } = await getMany({ filter: {} });
+    const { result } = await getMany({ filter: [] });
     const resultF =
       result &&
       sort({

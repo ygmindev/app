@@ -15,7 +15,7 @@ export type PushModel<TType> = {
 };
 
 export type UpdateModel<TType> = {
-  $pull?: FilterModel<TType>;
+  $pull?: Array<FilterModel<TType>>;
   $push?: PushModel<TType>;
   $set?: PartialDeepModel<EntityResourceDataModel<TType>>;
   $unset?: UnsetModel<TType>;

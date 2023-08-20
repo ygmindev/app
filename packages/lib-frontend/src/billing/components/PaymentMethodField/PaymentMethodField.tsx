@@ -41,11 +41,17 @@ export const PaymentMethodField: RSFCModel<FormRefModel, PaymentMethodFieldProps
             switch (form.type) {
               case PAYMENT_METHOD_TYPE.BANK:
                 return defaultValue
-                  ? updateBank({ filter: { _id: defaultValue._id }, update: form as BankFormModel })
+                  ? updateBank({
+                      filter: [{ field: '_id', value: defaultValue._id }],
+                      update: form as BankFormModel,
+                    })
                   : createBank({ form: form as BankFormModel });
               case PAYMENT_METHOD_TYPE.CARD:
                 return defaultValue
-                  ? updateCard({ filter: { _id: defaultValue._id }, update: form as CardFormModel })
+                  ? updateCard({
+                      filter: [{ field: '_id', value: defaultValue._id }],
+                      update: form as CardFormModel,
+                    })
                   : createCard({ form: form as CardFormModel });
               default:
                 return undefined;

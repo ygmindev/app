@@ -1,5 +1,4 @@
 import isNil from 'lodash/isNil';
-import reduce from 'lodash/reduce';
 import { type ReactElement } from 'react';
 
 import { type SFCPropsModel } from '#lib-frontend/core/core.models';
@@ -7,6 +6,7 @@ import { FormContainer } from '#lib-frontend/form/containers/FormContainer/FormC
 import { ResourceFilterField } from '#lib-frontend/resource/components/ResourceFilterField/ResourceFilterField';
 import { type ResourceFilterFormPropsModel } from '#lib-frontend/resource/components/ResourceFilterForm/ResourceFilterForm.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
 import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
 export const ResourceFilterForm = <TType, TForm = undefined, TRoot = undefined>({
@@ -19,14 +19,24 @@ export const ResourceFilterForm = <TType, TForm = undefined, TRoot = undefined>(
 > => {
   const { styles } = useStyles({ props });
   const handleSubmit = async (data: TType): Promise<void> => {
-    const filterData = reduce(
-      filters,
-      (result, filter) => {
-        const value = data[filter.id];
-        return isNil(value) ? result : { ...result, [filter.id]: value };
-      },
-      {} as FilterModel<TType>,
-    );
+    const filterData = filters
+      ? filters.reduce(
+          (result, filter) => {
+            const value = data[filter.id];
+            return isNil(value)
+              ? result
+              : [
+                  ...result,
+                  {
+                    condition: FILTER_CONDITION.CONTAINS,
+                    field: filter.id,
+                    value: value as string,
+                  },
+                ];
+          },
+          [] as Array<FilterModel<TType>>,
+        )
+      : [];
     onSubmit && (await onSubmit(filterData));
   };
 

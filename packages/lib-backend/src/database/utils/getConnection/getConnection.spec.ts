@@ -25,7 +25,7 @@ describe(displayName, () => {
     const result = await getConnection({
       count: entities.length,
       getMany: async ({ filter }) => ({ result: _filter(entities, filter) }),
-      input: { filter: {} },
+      input: { filter: [] },
       pagination: { first: LIMIT },
     });
     expect(result?.edges.map(({ node }) => node)).toStrictEqual(entities);
@@ -38,7 +38,7 @@ describe(displayName, () => {
       getMany: async ({ filter }) => ({
         result: _filter(entities, filter) as Array<DummyEntityResourceModel>,
       }),
-      input: { filter: {} },
+      input: { filter: [] },
       pagination: { first: LIMIT },
     });
     const expected = _filter(entities, filter);

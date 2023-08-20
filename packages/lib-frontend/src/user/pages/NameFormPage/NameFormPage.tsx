@@ -34,7 +34,7 @@ export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...prop
         onCancel={handleBack}
         onSubmit={async ({ first, last }: NameFormModel) => {
           await userUpdate({
-            filter: { _id: currentUser._id },
+            filter: [{ field: '_id', value: currentUser._id }],
             update: { first, last },
           });
           handleBack();

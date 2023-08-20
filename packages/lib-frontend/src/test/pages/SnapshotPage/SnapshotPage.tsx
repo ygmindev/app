@@ -16,7 +16,9 @@ export const SnapshotPage: SFCModel<SnapshotPagePropsModel> = ({ testID, ...prop
 
   const { get } = useSnapshotResource();
   const name = location.params?.id;
-  const { data } = useQuery('snapshot', async () => (name ? get({ filter: { name } }) : undefined));
+  const { data } = useQuery('snapshot', async () =>
+    name ? get({ filter: [{ field: 'name', value: name }] }) : undefined,
+  );
   return (
     <Carousel
       p

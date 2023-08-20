@@ -9,7 +9,7 @@ describe(displayName, () => {
   test('works with authorized', async () => {
     const result = selfAuthorizer({
       context: CONTEXT_FIXTURE,
-      input: { filter: {}, root: { _id: USER_FIXTURE._id } },
+      input: { filter: [], root: { _id: USER_FIXTURE._id } },
     });
     expect(result).toStrictEqual(true);
   });
@@ -17,7 +17,7 @@ describe(displayName, () => {
   test('works with unauthorized', async () => {
     const result = selfAuthorizer({
       context: CONTEXT_FIXTURE,
-      input: { filter: {}, root: { _id: 'unauthorized user' } },
+      input: { filter: [], root: { _id: 'unauthorized user' } },
     });
     expect(result).toStrictEqual(false);
   });

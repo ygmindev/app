@@ -23,7 +23,7 @@ export const ResourceTable = <TType, TForm = undefined, TRoot = undefined>({
   const { getConnection } = service();
   const [data, setData] = useState<ConnectionModel<TType>>();
 
-  const handleFilter = async (data: FilterModel<TType>): Promise<void> => {
+  const handleFilter = async (data: Array<FilterModel<TType>>): Promise<void> => {
     const result = await getConnection({ filter: data, pagination: { first: 10 } });
     result && setData(result.result);
   };

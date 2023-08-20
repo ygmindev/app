@@ -1,28 +1,10 @@
-import { type InferModel, type PartialModel } from '#lib-shared/core/core.models';
+import { type StringKeyModel } from '#lib-shared/core/core.models';
+import { type FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
 
-export type FilterConditionModel<TType> = {
-  $eq?: TType;
-  $gt?: TType;
-  $gte?: TType;
-  $in?: Array<TType>;
-  $lt?: TType;
-  $lte?: TType;
-  $ne?: TType;
-  $nin?: Array<TType>;
-  $not?: FilterConditionModel<TType>;
+export type FilterModel<TType> = {
+  condition?: FilterConditionModel;
+  field: StringKeyModel<TType>;
+  value: string;
 };
 
-export type FilterCombineModel<TType> = {
-  $and?: Array<FilterModel<TType>>;
-  $or?: Array<FilterModel<TType>>;
-};
-
-export type FilterModel<TType> = FilterCombineModel<TType> &
-  (
-    | PartialModel<TType>
-    | {
-        [TKey in keyof TType]?:
-          | FilterConditionModel<InferModel<TType[TKey]>>
-          | InferModel<TType[TKey]>;
-      }
-  );
+export type FilterConditionModel = `${FILTER_CONDITION}`;

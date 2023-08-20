@@ -33,12 +33,12 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>> {
     if (input.root) {
       const { result: banks } = await this._bankService.getMany({
-        filter: {},
+        filter: [],
         options: { project: { _id: true, id: true, last4: true } },
         root: { _id: input.root._id },
       });
       const { result: cards } = await this._cardService.getMany({
-        filter: {},
+        filter: [],
         options: { project: { _id: true, id: true, last4: true } },
         root: { _id: input.root._id },
       });
@@ -58,7 +58,7 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
     if (input.root) {
       const uid = input.root._id;
       let { result: linkedUser } = await this._linkedUserService.get({
-        filter: { type: LINKED_USER_TYPE.STRIPE },
+        filter: [{ field: 'type', value: LINKED_USER_TYPE.STRIPE }],
         options: { project: { _id: true } },
         root: { _id: uid },
       });

@@ -23,7 +23,9 @@ describe(displayName, () => {
   test('create by email', async () => {
     const sendSpy = jest.spyOn(mailer, 'mail');
     await otpService.create({ form: { email: USER_FIXTURE.email } });
-    const { result } = await otpService.getMany({ filter: { email: USER_FIXTURE.email } });
+    const { result } = await otpService.getMany({
+      filter: [{ field: 'email', value: USER_FIXTURE.email }],
+    });
     expect(sendSpy).toBeCalledTimes(1);
     expect(result && result.length).toEqual(1);
     expect(result && result[0].otp).toBeTruthy();
@@ -33,7 +35,9 @@ describe(displayName, () => {
     const { result: created } = await otpService.create({ form: { email: USER_FIXTURE.email } });
     const verified =
       created && (await otpService.verify({ email: created.email, otp: created.otp }));
-    const { result } = await otpService.getMany({ filter: { email: USER_FIXTURE.email } });
+    const { result } = await otpService.getMany({
+      filter: [{ field: 'email', value: USER_FIXTURE.email }],
+    });
     expect(verified).toStrictEqual(true);
     expect(result && result.length).toEqual(0);
   });

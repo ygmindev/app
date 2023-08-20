@@ -8,6 +8,6 @@ export type ResourceFilterFormPropsModel<
   TType,
   TForm = undefined,
   TRoot = undefined,
-> = SubmittablePropsModel<FilterModel<TType>> & {
+> = SubmittablePropsModel<Array<FilterModel<TType>>> & {
   filters?: Array<WithIdModel<StringKeyModel<TType>> & { type?: ResourceFilterFieldTypeModel }>;
 };

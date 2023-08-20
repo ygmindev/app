@@ -20,7 +20,6 @@ import { type EntityResourceModel } from '#lib-shared/resource/resources/EntityR
 import { type EmbeddedResourceServiceModel } from '#lib-shared/resource/services/EmbeddedResourceService/EmbeddedResourceService.models';
 import { type ResourceServiceDecoratorModel } from '#lib-shared/resource/services/ResourceService/ResourceService.models';
 import { type ProjectModel } from '#lib-shared/resource/utils/Args/Args.models';
-import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type RootModel } from '#lib-shared/resource/utils/Root/Root.models';

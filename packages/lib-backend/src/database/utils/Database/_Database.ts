@@ -15,8 +15,34 @@ import { debug, info } from '#lib-shared/logging/utils/logger/logger';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type ResourceNameParamsModel } from '#lib-shared/resource/resource.models';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
+import { type FilterConditionModel } from '#lib-shared/resource/utils/Filter/Filter.models';
+import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
+
+const getFilter = <TType>(
+  filters?: Array<FilterModel<TType>>,
+): Filter<TType & object> =>
+  filters
+    ? filters.reduce(
+        (result, v) => {
+          const conditionF = v.condition ?? FILTER_CONDITION.EQUAL;
+          return {
+            ...result,
+            [v.field]: (
+              [
+                FILTER_CONDITION.CONTAINS,
+                FILTER_CONDITION.NOT_CONTAINS,
+              ] as Array<FilterConditionModel>
+            ).includes(conditionF)
+              ? { $regex: new RegExp(v.value, 'i') }
+              : { [conditionF]: v.value },
+          };
+        },
+        {} as Filter<TType & object>,
+      )
+    : {};
 
 export class _Database implements _DatabaseModel {
   protected _config: _DatabaseConfigModel;
@@ -78,7 +104,7 @@ export class _Database implements _DatabaseModel {
 
       get: async ({ filter, options }) => {
         const em = this._getEntityManager();
-        const filterF = cleanDocument(filter) as object;
+        const filterF = getFilter<TType>(filter) as FilterQuery<TType & object>;
         const collection = em.getCollection(name);
         const result = (await (options?.aggregate
           ? collection
@@ -94,11 +120,10 @@ export class _Database implements _DatabaseModel {
       },
 
       getConnection: async ({ filter, pagination }) => {
-        const filterF = cleanDocument(filter);
         const result = await getConnection({
           count: await service.count(),
           getMany: service.getMany,
-          input: { filter: filterF },
+          input: { filter },
           pagination,
         });
         return { result: result ?? undefined };
@@ -107,7 +132,7 @@ export class _Database implements _DatabaseModel {
       getMany: async ({ filter, options }) => {
         const em = this._getEntityManager();
         const collection = em.getCollection(name);
-        const filterF = cleanDocument(filter) as object;
+        const filterF = getFilter<TType>(filter) as FilterQuery<TType & object>;
         const result = (await (options && options.aggregate
           ? collection
               .aggregate([
@@ -133,7 +158,7 @@ export class _Database implements _DatabaseModel {
 
       remove: async ({ filter }) => {
         const em = this._getEntityManager();
-        const filterF = cleanDocument(filter) as FilterQuery<TType & object>;
+        const filterF = getFilter<TType>(filter) as FilterQuery<TType & object>;
         const entity = await service.get({ filter });
         await em.getRepository<TType & object>(name).nativeDelete(filterF);
         return entity as unknown as OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType>;
@@ -141,7 +166,7 @@ export class _Database implements _DatabaseModel {
 
       update: async ({ filter, options, update }) => {
         const em = this._getEntityManager();
-        const filterF = cleanDocument(filter) as Filter<TType & object>;
+        const filterF = getFilter<TType>(filter);
         const updateF = cleanDocument(update);
         Object.keys(updateF).forEach((key) => {
           const keyF = key as keyof UpdateModel<TType>;

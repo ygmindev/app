@@ -29,7 +29,9 @@ export class AccessResolver
 {
   @withFieldResolver({ Resource: User })
   async user(@withSelf() access: Access): Promise<UserModel> {
-    const { result } = await Container.get(UserService).get({ filter: { _id: access._uid } });
+    const { result } = await Container.get(UserService).get({
+      filter: [{ field: '_id', value: access._uid }],
+    });
     if (result) {
       return result;
     }

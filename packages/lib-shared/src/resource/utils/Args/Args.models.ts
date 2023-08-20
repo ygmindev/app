@@ -33,7 +33,7 @@ type GetArgsOptionsModel<TType> = {
 } & ProjectOptionsModel<TType>;
 
 type GetArgsModel<TType> = {
-  filter: FilterModel<TType>;
+  filter: Array<FilterModel<TType>>;
   options?: GetArgsOptionsModel<TType>;
 };
 
@@ -43,23 +43,23 @@ type GetManyArgsOptionsModel<TType> = {
 } & GetArgsOptionsModel<TType>;
 
 type GetManyArgsModel<TType> = {
-  filter: FilterModel<TType>;
+  filter: Array<FilterModel<TType>>;
   options?: GetManyArgsOptionsModel<TType>;
 };
 
 type GetConnectionArgsModel<TType> = {
-  filter: FilterModel<TType>;
+  filter: Array<FilterModel<TType>>;
   pagination: PaginationModel;
 };
 
 type RemoveArgsModel<TType> = {
-  filter: FilterModel<TType>;
+  filter: Array<FilterModel<TType>>;
 };
 
 type UpdateArgsOptionsModel<TType> = ProjectOptionsModel<TType>;
 
 type UpdateArgsModel<TType> = {
-  filter: FilterModel<TType>;
+  filter: Array<FilterModel<TType>>;
   options?: UpdateArgsOptionsModel<TType>;
   update: UpdateModel<TType>;
 };

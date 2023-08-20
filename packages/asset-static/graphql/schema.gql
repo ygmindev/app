@@ -27,16 +27,8 @@ type AccessCreateOutput {
   result: Access
 }
 
-input AccessGetConnectionFilterInput {
-  _id: String
-  _uid: String
-  created: DateTime
-  role: String
-  user: UserInput
-}
-
 input AccessGetConnectionInput {
-  filter: AccessGetConnectionFilterInput
+  filter: String
   pagination: PaginationInput
 }
 
@@ -54,28 +46,12 @@ type AccessGetConnectionOutputEdge {
   node: Access
 }
 
-input AccessGetFilterInput {
-  _id: String
-  _uid: String
-  created: DateTime
-  role: String
-  user: UserInput
-}
-
 input AccessGetInput {
-  filter: AccessGetFilterInput
-}
-
-input AccessGetManyFilterInput {
-  _id: String
-  _uid: String
-  created: DateTime
-  role: String
-  user: UserInput
+  filter: [String]
 }
 
 input AccessGetManyInput {
-  filter: AccessGetManyFilterInput
+  filter: [String]
 }
 
 type AccessGetManyOutput {
@@ -86,32 +62,16 @@ type AccessGetOutput {
   result: Access
 }
 
-input AccessRemoveFilterInput {
-  _id: String
-  _uid: String
-  created: DateTime
-  role: String
-  user: UserInput
-}
-
 input AccessRemoveInput {
-  filter: AccessRemoveFilterInput
+  filter: [String]
 }
 
 type AccessRemoveOutput {
   result: Access
 }
 
-input AccessUpdateFilterInput {
-  _id: String
-  _uid: String
-  created: DateTime
-  role: String
-  user: UserInput
-}
-
 input AccessUpdateInput {
-  filter: AccessUpdateFilterInput
+  filter: [String]
   update: AccessUpdateUpdateInput
 }
 
@@ -183,17 +143,8 @@ input BankCreateRootInput {
   phone: String
 }
 
-input BankGetConnectionFilterInput {
-  _id: String
-  bank: String
-  created: DateTime
-  id: String
-  last4: String
-  type: String
-}
-
 input BankGetConnectionInput {
-  filter: BankGetConnectionFilterInput
+  filter: String
   pagination: PaginationInput
   root: BankGetConnectionRootInput
 }
@@ -241,31 +192,13 @@ input BankGetConnectionRootInput {
   phone: String
 }
 
-input BankGetFilterInput {
-  _id: String
-  bank: String
-  created: DateTime
-  id: String
-  last4: String
-  type: String
-}
-
 input BankGetInput {
-  filter: BankGetFilterInput
+  filter: [String]
   root: BankGetRootInput
 }
 
-input BankGetManyFilterInput {
-  _id: String
-  bank: String
-  created: DateTime
-  id: String
-  last4: String
-  type: String
-}
-
 input BankGetManyInput {
-  filter: BankGetManyFilterInput
+  filter: [String]
   root: BankGetManyRootInput
 }
 
@@ -335,17 +268,8 @@ input BankGetRootInput {
   phone: String
 }
 
-input BankRemoveFilterInput {
-  _id: String
-  bank: String
-  created: DateTime
-  id: String
-  last4: String
-  type: String
-}
-
 input BankRemoveInput {
-  filter: BankRemoveFilterInput
+  filter: [String]
   root: BankRemoveRootInput
 }
 
@@ -382,17 +306,8 @@ input BankRemoveRootInput {
   phone: String
 }
 
-input BankUpdateFilterInput {
-  _id: String
-  bank: String
-  created: DateTime
-  id: String
-  last4: String
-  type: String
-}
-
 input BankUpdateInput {
-  filter: BankUpdateFilterInput
+  filter: [String]
   root: BankUpdateRootInput
   update: BankUpdateUpdateInput
 }
@@ -501,20 +416,8 @@ input CardCreateRootInput {
   phone: String
 }
 
-input CardGetConnectionFilterInput {
-  _id: String
-  brand: String
-  created: DateTime
-  expMonth: Float
-  expYear: Float
-  funding: String
-  id: String
-  last4: String
-  type: String
-}
-
 input CardGetConnectionInput {
-  filter: CardGetConnectionFilterInput
+  filter: String
   pagination: PaginationInput
   root: CardGetConnectionRootInput
 }
@@ -562,37 +465,13 @@ input CardGetConnectionRootInput {
   phone: String
 }
 
-input CardGetFilterInput {
-  _id: String
-  brand: String
-  created: DateTime
-  expMonth: Float
-  expYear: Float
-  funding: String
-  id: String
-  last4: String
-  type: String
-}
-
 input CardGetInput {
-  filter: CardGetFilterInput
+  filter: [String]
   root: CardGetRootInput
 }
 
-input CardGetManyFilterInput {
-  _id: String
-  brand: String
-  created: DateTime
-  expMonth: Float
-  expYear: Float
-  funding: String
-  id: String
-  last4: String
-  type: String
-}
-
 input CardGetManyInput {
-  filter: CardGetManyFilterInput
+  filter: [String]
   root: CardGetManyRootInput
 }
 
@@ -674,20 +553,8 @@ input CardInput {
   type: String
 }
 
-input CardRemoveFilterInput {
-  _id: String
-  brand: String
-  created: DateTime
-  expMonth: Float
-  expYear: Float
-  funding: String
-  id: String
-  last4: String
-  type: String
-}
-
 input CardRemoveInput {
-  filter: CardRemoveFilterInput
+  filter: [String]
   root: CardRemoveRootInput
 }
 
@@ -724,20 +591,8 @@ input CardRemoveRootInput {
   phone: String
 }
 
-input CardUpdateFilterInput {
-  _id: String
-  brand: String
-  created: DateTime
-  expMonth: Float
-  expYear: Float
-  funding: String
-  id: String
-  last4: String
-  type: String
-}
-
 input CardUpdateInput {
-  filter: CardUpdateFilterInput
+  filter: [String]
   root: CardUpdateRootInput
   update: CardUpdateUpdateInput
 }
@@ -812,14 +667,8 @@ type IssuerCreateOutput {
   result: Issuer
 }
 
-input IssuerGetConnectionFilterInput {
-  _id: String
-  created: DateTime
-  name: String
-}
-
 input IssuerGetConnectionInput {
-  filter: IssuerGetConnectionFilterInput
+  filter: String
   pagination: PaginationInput
 }
 
@@ -837,24 +686,12 @@ type IssuerGetConnectionOutputEdge {
   node: Issuer
 }
 
-input IssuerGetFilterInput {
-  _id: String
-  created: DateTime
-  name: String
-}
-
 input IssuerGetInput {
-  filter: IssuerGetFilterInput
-}
-
-input IssuerGetManyFilterInput {
-  _id: String
-  created: DateTime
-  name: String
+  filter: [String]
 }
 
 input IssuerGetManyInput {
-  filter: IssuerGetManyFilterInput
+  filter: [String]
 }
 
 type IssuerGetManyOutput {
@@ -865,28 +702,16 @@ type IssuerGetOutput {
   result: Issuer
 }
 
-input IssuerRemoveFilterInput {
-  _id: String
-  created: DateTime
-  name: String
-}
-
 input IssuerRemoveInput {
-  filter: IssuerRemoveFilterInput
+  filter: [String]
 }
 
 type IssuerRemoveOutput {
   result: Issuer
 }
 
-input IssuerUpdateFilterInput {
-  _id: String
-  created: DateTime
-  name: String
-}
-
 input IssuerUpdateInput {
-  filter: IssuerUpdateFilterInput
+  filter: [String]
   update: IssuerUpdateUpdateInput
 }
 
@@ -952,15 +777,8 @@ input LinkedUserCreateRootInput {
   phone: String
 }
 
-input LinkedUserGetConnectionFilterInput {
-  _id: String
-  created: DateTime
-  id: String
-  type: String
-}
-
 input LinkedUserGetConnectionInput {
-  filter: LinkedUserGetConnectionFilterInput
+  filter: String
   pagination: PaginationInput
   root: LinkedUserGetConnectionRootInput
 }
@@ -1008,27 +826,13 @@ input LinkedUserGetConnectionRootInput {
   phone: String
 }
 
-input LinkedUserGetFilterInput {
-  _id: String
-  created: DateTime
-  id: String
-  type: String
-}
-
 input LinkedUserGetInput {
-  filter: LinkedUserGetFilterInput
+  filter: [String]
   root: LinkedUserGetRootInput
 }
 
-input LinkedUserGetManyFilterInput {
-  _id: String
-  created: DateTime
-  id: String
-  type: String
-}
-
 input LinkedUserGetManyInput {
-  filter: LinkedUserGetManyFilterInput
+  filter: [String]
   root: LinkedUserGetManyRootInput
 }
 
@@ -1105,15 +909,8 @@ input LinkedUserInput {
   type: String
 }
 
-input LinkedUserRemoveFilterInput {
-  _id: String
-  created: DateTime
-  id: String
-  type: String
-}
-
 input LinkedUserRemoveInput {
-  filter: LinkedUserRemoveFilterInput
+  filter: [String]
   root: LinkedUserRemoveRootInput
 }
 
@@ -1150,15 +947,8 @@ input LinkedUserRemoveRootInput {
   phone: String
 }
 
-input LinkedUserUpdateFilterInput {
-  _id: String
-  created: DateTime
-  id: String
-  type: String
-}
-
 input LinkedUserUpdateInput {
-  filter: LinkedUserUpdateFilterInput
+  filter: [String]
   root: LinkedUserUpdateRootInput
   update: LinkedUserUpdateUpdateInput
 }
@@ -1258,17 +1048,8 @@ type OtpCreateOutput {
   result: Otp
 }
 
-input OtpGetConnectionFilterInput {
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  otp: String
-  phone: String
-}
-
 input OtpGetConnectionInput {
-  filter: OtpGetConnectionFilterInput
+  filter: String
   pagination: PaginationInput
 }
 
@@ -1286,30 +1067,12 @@ type OtpGetConnectionOutputEdge {
   node: Otp
 }
 
-input OtpGetFilterInput {
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  otp: String
-  phone: String
-}
-
 input OtpGetInput {
-  filter: OtpGetFilterInput
-}
-
-input OtpGetManyFilterInput {
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  otp: String
-  phone: String
+  filter: [String]
 }
 
 input OtpGetManyInput {
-  filter: OtpGetManyFilterInput
+  filter: [String]
 }
 
 type OtpGetManyOutput {
@@ -1320,34 +1083,16 @@ type OtpGetOutput {
   result: Otp
 }
 
-input OtpRemoveFilterInput {
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  otp: String
-  phone: String
-}
-
 input OtpRemoveInput {
-  filter: OtpRemoveFilterInput
+  filter: [String]
 }
 
 type OtpRemoveOutput {
   result: Otp
 }
 
-input OtpUpdateFilterInput {
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  otp: String
-  phone: String
-}
-
 input OtpUpdateInput {
-  filter: OtpUpdateFilterInput
+  filter: [String]
   update: OtpUpdateUpdateInput
 }
 
@@ -1380,13 +1125,8 @@ input PaginationInput {
 
 union PaymentMethod = Bank | Card
 
-input PaymentMethodGetManyFilterInput {
-  _id: String
-  created: DateTime
-}
-
 input PaymentMethodGetManyInput {
-  filter: PaymentMethodGetManyFilterInput
+  filter: [String]
   root: PaymentMethodGetManyRootInput
 }
 
@@ -1513,22 +1253,8 @@ type SignInCreateOutput {
   result: SignIn
 }
 
-input SignInUserUpdateFilterInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
 input SignInUserUpdateInput {
-  filter: SignInUserUpdateFilterInput
+  filter: [String]
   update: SignInUserUpdateUpdateInput
 }
 
@@ -1570,22 +1296,12 @@ type Snapshot {
   name: String
 }
 
-input SnapshotGetFilterInput {
-  images: [String]
-  name: String
-}
-
 input SnapshotGetInput {
-  filter: SnapshotGetFilterInput
-}
-
-input SnapshotGetManyFilterInput {
-  images: [String]
-  name: String
+  filter: [String]
 }
 
 input SnapshotGetManyInput {
-  filter: SnapshotGetManyFilterInput
+  filter: [String]
 }
 
 type SnapshotGetManyOutput {
@@ -1616,14 +1332,8 @@ type UnderwriterCreateOutput {
   result: Underwriter
 }
 
-input UnderwriterGetConnectionFilterInput {
-  _id: String
-  created: DateTime
-  name: String
-}
-
 input UnderwriterGetConnectionInput {
-  filter: UnderwriterGetConnectionFilterInput
+  filter: String
   pagination: PaginationInput
 }
 
@@ -1641,24 +1351,12 @@ type UnderwriterGetConnectionOutputEdge {
   node: Underwriter
 }
 
-input UnderwriterGetFilterInput {
-  _id: String
-  created: DateTime
-  name: String
-}
-
 input UnderwriterGetInput {
-  filter: UnderwriterGetFilterInput
-}
-
-input UnderwriterGetManyFilterInput {
-  _id: String
-  created: DateTime
-  name: String
+  filter: [String]
 }
 
 input UnderwriterGetManyInput {
-  filter: UnderwriterGetManyFilterInput
+  filter: [String]
 }
 
 type UnderwriterGetManyOutput {
@@ -1669,28 +1367,16 @@ type UnderwriterGetOutput {
   result: Underwriter
 }
 
-input UnderwriterRemoveFilterInput {
-  _id: String
-  created: DateTime
-  name: String
-}
-
 input UnderwriterRemoveInput {
-  filter: UnderwriterRemoveFilterInput
+  filter: [String]
 }
 
 type UnderwriterRemoveOutput {
   result: Underwriter
 }
 
-input UnderwriterUpdateFilterInput {
-  _id: String
-  created: DateTime
-  name: String
-}
-
 input UnderwriterUpdateInput {
-  filter: UnderwriterUpdateFilterInput
+  filter: [String]
   update: UnderwriterUpdateUpdateInput
 }
 
@@ -1740,22 +1426,8 @@ type UserCreateOutput {
   result: User
 }
 
-input UserGetConnectionFilterInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
 input UserGetConnectionInput {
-  filter: UserGetConnectionFilterInput
+  filter: String
   pagination: PaginationInput
 }
 
@@ -1773,40 +1445,12 @@ type UserGetConnectionOutputEdge {
   node: User
 }
 
-input UserGetFilterInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
 input UserGetInput {
-  filter: UserGetFilterInput
-}
-
-input UserGetManyFilterInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
+  filter: [String]
 }
 
 input UserGetManyInput {
-  filter: UserGetManyFilterInput
+  filter: [String]
 }
 
 type UserGetManyOutput {
@@ -1831,44 +1475,16 @@ input UserInput {
   phone: String
 }
 
-input UserRemoveFilterInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
 input UserRemoveInput {
-  filter: UserRemoveFilterInput
+  filter: [String]
 }
 
 type UserRemoveOutput {
   result: User
 }
 
-input UserUpdateFilterInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
 input UserUpdateInput {
-  filter: UserUpdateFilterInput
+  filter: [String]
   update: UserUpdateUpdateInput
 }
 

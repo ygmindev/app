@@ -3,10 +3,10 @@ import {
   type CreateArgsModel,
   type CreateArgsParamsModel,
 } from '#lib-backend/resource/utils/createArgs/createArgs.models';
-import { createFilter } from '#lib-backend/resource/utils/createFilter/createFilter';
 import { createForm } from '#lib-backend/resource/utils/createForm/createForm';
 import { createRoot } from '#lib-backend/resource/utils/createRoot/createRoot';
 import { createUpdate } from '#lib-backend/resource/utils/createUpdate/createUpdate';
+import { Filter } from '#lib-backend/resource/utils/Filter/Filter';
 import { Pagination } from '#lib-backend/resource/utils/Pagination/Pagination';
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
@@ -50,9 +50,13 @@ export const createArgs = <
           ArgsModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm, TRoot>
       {
         @withCondition(Resource !== undefined, () =>
-          withField({ Resource: createFilter({ Resource, name }), type: FIELD_TYPE.RESOURCE }),
+          withField({
+            Resource: Filter<TType>,
+            isArray: true,
+            type: FIELD_TYPE.RESOURCE,
+          }),
         )
-        filter!: FilterModel<TType>;
+        filter!: Array<FilterModel<TType>>;
       }
       return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
@@ -76,9 +80,13 @@ export const createArgs = <
         implements ArgsModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot>
       {
         @withCondition(Resource !== undefined, () =>
-          withField({ Resource: createFilter({ Resource, name }), type: FIELD_TYPE.RESOURCE }),
+          withField({
+            Resource: Filter<TType>,
+            isArray: true,
+            type: FIELD_TYPE.RESOURCE,
+          }),
         )
-        filter!: FilterModel<TType>;
+        filter!: Array<FilterModel<TType>>;
 
         @withCondition(Resource !== undefined, () =>
           withField({ Resource: createUpdate({ Resource, name }), type: FIELD_TYPE.RESOURCE }),
@@ -94,9 +102,9 @@ export const createArgs = <
         implements ArgsModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm, TRoot>
       {
         @withCondition(Resource !== undefined, () =>
-          withField({ Resource: createFilter({ Resource, name }), type: FIELD_TYPE.RESOURCE }),
+          withField({ Resource: Filter<TType>, type: FIELD_TYPE.RESOURCE }),
         )
-        filter!: FilterModel<TType>;
+        filter!: Array<FilterModel<TType>>;
 
         @withCondition(Resource !== undefined, () =>
           withField({ Resource: Pagination, type: FIELD_TYPE.RESOURCE }),

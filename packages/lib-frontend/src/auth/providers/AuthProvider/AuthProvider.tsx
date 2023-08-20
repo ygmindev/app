@@ -17,7 +17,7 @@ export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
       if (isMounted()) {
         if (signInToken && user?._id !== signInToken._id) {
           actions?.user.currentUserSet({ ...signInToken.claims, _id: signInToken._id });
-          // const { result } = await get({ filter: { _id: signInToken._id } });
+          // const { result } = await get({ filter: [{ field: '_id', value: signInToken._id }] });
           // result && actions?.user.currentUserSet(result);
         } else {
           actions?.user.currentUserSet(null);

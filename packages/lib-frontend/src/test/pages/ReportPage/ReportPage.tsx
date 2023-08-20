@@ -9,7 +9,7 @@ import { type ReportPagePropsModel } from '#lib-frontend/test/pages/ReportPage/R
 export const ReportPage: SFCModel<ReportPagePropsModel> = ({ testID, ...props }) => {
   const { styles } = useStyles({ props });
   const { getMany } = useSnapshotResource();
-  const { data } = useQuery('snapshots', async () => getMany({ filter: {} }));
+  const { data } = useQuery('snapshots', async () => getMany({ filter: [] }));
   return (
     <MainLayout
       isHorizontalCenter
