@@ -10,6 +10,7 @@ import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 
 export const Table = <TType,>({
+  isHeadless,
   testID,
   ...props
 }: SFCPropsModel<TablePropsModel<TType>>): ReactElement<SFCPropsModel<TablePropsModel<TType>>> => {
@@ -20,22 +21,24 @@ export const Table = <TType,>({
       grow
       style={styles}
       testID={testID}>
-      <Wrapper
-        border={DIRECTION.BOTTOM}
-        isRowAlign
-        p={THEME_SIZE.SMALL}>
-        {headers.map(({ id, label, width }) => (
-          <Wrapper
-            key={id}
-            width={width}>
-            <Text
-              isBold
-              isEllipsis>
-              {label}
-            </Text>
-          </Wrapper>
-        ))}
-      </Wrapper>
+      {!isHeadless && (
+        <Wrapper
+          border={DIRECTION.BOTTOM}
+          isRowAlign
+          p={THEME_SIZE.SMALL}>
+          {headers.map(({ id, label, width }) => (
+            <Wrapper
+              key={id}
+              width={width}>
+              <Text
+                isBold
+                isEllipsis>
+                {label}
+              </Text>
+            </Wrapper>
+          ))}
+        </Wrapper>
+      )}
 
       <Wrapper grow>
         {rows.map(({ cells, id }) => (
