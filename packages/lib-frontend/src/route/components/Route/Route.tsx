@@ -9,7 +9,6 @@ import { type MeasureModel, type SFCModel } from '#lib-frontend/core/core.models
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type RoutePropsModel } from '#lib-frontend/route/components/Route/Route.models';
-import { RouteTabs } from '#lib-frontend/route/components/RouteTabs/RouteTabs';
 import { RouteHeader } from '#lib-frontend/route/containers/RouteHeader/RouteHeader';
 import { Routes } from '#lib-frontend/route/containers/Routes/Routes';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
@@ -19,7 +18,6 @@ import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { useTracking } from '#lib-frontend/tracking/hooks/useTracking/useTracking';
-import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import {
   TRACKING_EVENT_ACTION,
   TRACKING_EVENT_OBJECT,
@@ -105,17 +103,9 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
         s={THEME_SIZE.SMALL}
         style={styles}
         testID={testID}>
-        {route.routes && route.navigation && (
-          <RouteTabs
-            key="tabs"
-            routes={filterNil(
-              route.routes.map(
-                ({ fullpath, pathname, title }) =>
-                  fullpath && { label: title ? t(title) : pathname, pathname: fullpath },
-              ),
-            )}
-          />
-        )}
+        {route.routes &&
+          route.navigator &&
+          cloneElement(route.navigator, { key: 'navigator', routes: route.routes })}
 
         {element}
       </Wrapper>

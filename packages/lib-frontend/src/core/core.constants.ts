@@ -1,5 +1,7 @@
 export const REDIRECT = 'redirect';
 
+export const HOME = 'home';
+
 export enum ELEMENT_STATE {
   ACTIVE = 'active',
   DISABLED = 'disabled',

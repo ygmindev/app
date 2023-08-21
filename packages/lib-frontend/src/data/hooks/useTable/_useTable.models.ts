@@ -10,6 +10,7 @@ export type _UseTableParamsModel<TType> = {
   columns?: Array<TableColumnModel<TType, Array<StringKeyModel<TType>>[number]>>;
   data?: Array<TType>;
   isFullWidth?: boolean;
+  nilString?: string;
   onSelect?(rows?: Array<TType>): void;
   select?: TableSelectTypeModel;
 };

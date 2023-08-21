@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { type AccordionPropsModel } from '#lib-frontend/core/components/Accordion/Accordion.models';
+import { type AccordionPropsModel } from '#lib-frontend/animation/components/Accordion/Accordion.models';
 import { RotatableIcon } from '#lib-frontend/core/components/RotatableIcon/RotatableIcon';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';

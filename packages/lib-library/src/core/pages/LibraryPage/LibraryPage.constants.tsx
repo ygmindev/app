@@ -2,7 +2,7 @@ import { props as appearableProps } from '#lib-frontend/animation/components/App
 import { props as slidesProps } from '#lib-frontend/animation/components/Slides/Slides.library';
 import { props as logoProps } from '#lib-frontend/app/components/Logo/Logo.library';
 import { props as otpFieldProps } from '#lib-frontend/auth/components/OtpField/OtpField.library';
-import { props as accordionProps } from '#lib-frontend/core/components/Accordion/Accordion.library';
+import { props as accordionProps } from '#lib-frontend/animation/components/Accordion/Accordion.library';
 import { props as activatableProps } from '#lib-frontend/core/components/Activatable/Activatable.library';
 import { props as buttonProps } from '#lib-frontend/core/components/Button/Button.library';
 import { props as chilProps } from '#lib-frontend/core/components/Chip/Chip.library';

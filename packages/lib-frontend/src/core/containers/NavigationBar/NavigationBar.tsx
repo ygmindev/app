@@ -3,7 +3,7 @@ import toString from 'lodash/toString';
 import { type ReactElement } from 'react';
 import { useMemo } from 'react';
 
-import { Accordion } from '#lib-frontend/core/components/Accordion/Accordion';
+import { Accordion } from '#lib-frontend/animation/components/Accordion/Accordion';
 import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
 import { ACTIVATABLE_TRIGGER } from '#lib-frontend/core/components/Activatable/Activatable.constants';
 import { Button } from '#lib-frontend/core/components/Button/Button';

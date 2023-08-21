@@ -1,32 +1,33 @@
 import { type ReactElement } from 'react';
 
+import { type IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
 import { type ChildrenPropsModel, type LayoutPropsModel } from '#lib-frontend/core/core.models';
 import { type TranslatableTextPropsModel } from '#lib-frontend/locale/components/TranslatableText/TranslatableText.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
-import {
-  type ROUTE_DIRECTION,
-  type ROUTE_NAVIGATION,
-  type ROUTE_TRANSITION,
-} from '#lib-frontend/route/route.constants';
+import { type ROUTE_DIRECTION, type ROUTE_TRANSITION } from '#lib-frontend/route/route.constants';
 import { type RouteStateModel } from '#lib-frontend/route/stores/routeStore/routeStore.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
 export type RouteIdParamsModel = WithIdModel;
 
-export type RouteModel<TProps extends ChildrenPropsModel = ChildrenPropsModel> = {
-  element?: ReactElement<TProps>;
-  fullpath?: string;
-  header?: { previous?: string };
-  isProtectable?: boolean;
-  layoutProps?: LayoutPropsModel;
-  navigation?: RouteNavigationModel;
-  pathname: string;
-  prerender?: false | Array<string>;
-  root?: string;
-  routes?: Array<RouteModel>;
-  title?: TranslatableTextModel;
-  transition?: RouteTransitionModel;
-} & Pick<TranslatableTextPropsModel, 'ns'>;
+export type RouteModel<TProps extends ChildrenPropsModel = ChildrenPropsModel> = Pick<
+  TranslatableTextPropsModel,
+  'ns'
+> &
+  Pick<IconPropsModel, 'icon'> & {
+    element?: ReactElement<TProps>;
+    fullpath?: string;
+    header?: { previous?: string };
+    isProtectable?: boolean;
+    layoutProps?: LayoutPropsModel;
+    navigator?: ReactElement<NavigatorPropsModel>;
+    pathname: string;
+    prerender?: false | Array<string>;
+    root?: string;
+    routes?: Array<RouteModel>;
+    title?: TranslatableTextModel;
+    transition?: RouteTransitionModel;
+  };
 
 export type UriModel<TParams = undefined> = {
   host?: string;
@@ -57,4 +58,6 @@ export type RouteTransitionModel = `${ROUTE_TRANSITION}`;
 
 export type RouteDirectionModel = `${ROUTE_DIRECTION}`;
 
-export type RouteNavigationModel = `${ROUTE_NAVIGATION}`;
+export type NavigatorPropsModel = {
+  routes?: Array<RouteModel>;
+};

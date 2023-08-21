@@ -8,8 +8,10 @@ import { type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { useTable } from '#lib-frontend/data/hooks/useTable/useTable';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
+import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const Table = <TType,>({
+  isFullWidth,
   isHeadless,
   testID,
   ...props
@@ -18,20 +20,23 @@ export const Table = <TType,>({
   const { headers, rows } = useTable(props);
   return (
     <Wrapper
-      grow
+      position={SHAPE_POSITION.RELATIVE}
       style={styles}
       testID={testID}>
       {!isHeadless && (
         <Wrapper
           border={DIRECTION.BOTTOM}
-          isRowAlign
-          p={THEME_SIZE.SMALL}>
-          {headers.map(({ id, label, width }) => (
+          isFullWidth={isFullWidth}
+          isRowAlign>
+          {headers.map(({ align, id, label, width }) => (
             <Wrapper
+              basis={width}
+              grow={width ? undefined : 1}
               key={id}
-              width={width}>
+              p={THEME_SIZE.SMALL}
+              shrink={width ? undefined : 1}>
               <Text
-                isBold
+                align={align}
                 isEllipsis>
                 {label}
               </Text>
@@ -40,17 +45,29 @@ export const Table = <TType,>({
         </Wrapper>
       )}
 
-      <Wrapper grow>
-        {rows.map(({ cells, id }) => (
+      <Wrapper
+        grow
+        isFullWidth={isFullWidth}>
+        {rows.map((row) => (
           <Wrapper
             isRowAlign
-            key={id}>
-            {cells.map(({ id, value, width }) => (
+            key={row.id}>
+            {row.cells.map((cell) => (
               <Wrapper
-                key={id}
+                basis={cell.width}
+                grow={cell.width ? undefined : 1}
+                key={cell.id}
                 p={THEME_SIZE.SMALL}
-                width={width}>
-                <Text isEllipsis>{value}</Text>
+                shrink={cell.width ? undefined : 1}>
+                {cell.renderer ? (
+                  cell.renderer({ row: row.value, value: cell.value })
+                ) : (
+                  <Text
+                    align={cell.align}
+                    isEllipsis>
+                    {cell.value}
+                  </Text>
+                )}
               </Wrapper>
             ))}
           </Wrapper>

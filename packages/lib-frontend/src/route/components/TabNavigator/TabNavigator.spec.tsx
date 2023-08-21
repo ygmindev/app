@@ -1,9 +1,11 @@
-import { RouteTabs } from '#lib-frontend/route/components/RouteTabs/RouteTabs';
-import { type RouteTabsPropsModel } from '#lib-frontend/route/components/RouteTabs/RouteTabs.models';
+import { TabNavigator } from '#lib-frontend/route/components/TabNavigator/TabNavigator';
+import { type TabNavigatorPropsModel } from '#lib-frontend/route/components/TabNavigator/TabNavigator.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<RouteTabsPropsModel>({ target: RouteTabs });
+const { Component, displayName, testID } = withTestComponent<TabNavigatorPropsModel>({
+  target: TabNavigator,
+});
 
 describe(displayName, () => {
   test('works', async () => {

@@ -1,5 +1,6 @@
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
+import { TABS_TYPE } from '#lib-frontend/core/components/Tabs/Tabs.constants';
 import { type TabsPropsModel } from '#lib-frontend/core/components/Tabs/Tabs.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
@@ -10,10 +11,10 @@ import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 
 export const Tabs: SFCModel<TabsPropsModel> = ({
   defaultValue,
-  isVertical,
   onChange,
   tabs,
   testID,
+  type = TABS_TYPE.TRANSPARENT,
   value,
   ...props
 }) => {
@@ -26,9 +27,8 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
   });
   return (
     <Wrapper
-      isHorizontalScrollable={!isVertical}
-      isRow={!isVertical}
-      isVerticalScrollable={isVertical}
+      isHorizontalScrollable
+      isRow
       s={THEME_SIZE.SMALL}
       style={styles}
       testID={testID}>

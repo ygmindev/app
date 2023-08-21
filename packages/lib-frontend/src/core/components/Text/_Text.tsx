@@ -1,4 +1,3 @@
-import capitalize from 'lodash/capitalize';
 import lowerCase from 'lodash/lowerCase';
 import upperCase from 'lodash/upperCase';
 import { type TextProps } from 'react-native';
@@ -24,7 +23,7 @@ export const _textParams: ComposeComponentParamsModel<_TextPropsModel, TextProps
       if (childrenF) {
         switch (casing) {
           case TEXT_CASING.CAPITALIZE: {
-            childrenF = capitalize(childrenF);
+            childrenF = `${childrenF[0].toUpperCase()}${childrenF.substring(1)}`;
             break;
           }
           case TEXT_CASING.UPPERCASE: {
