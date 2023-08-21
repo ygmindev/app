@@ -58,10 +58,7 @@ export type PagePropsModel<TType = undefined> = ChildrenPropsModel & {
   pageProps?: TType;
 };
 
-export type LayoutPropsModel = {
-  isHorizontalCenter?: boolean;
-  isVerticalCenter?: boolean;
-} & Pick<
+export type LayoutPropsModel = Pick<
   WrapperPropsModel,
   | 'p'
   | 's'

@@ -10,11 +10,9 @@ export const MainLayout: SFCModel<MainLayoutPropsModel> = ({
   children,
   isCenter,
   isFullWidth,
-  isHorizontalCenter,
   isHorizontalScrollable,
   isRow,
   isRowAlign,
-  isVerticalCenter,
   isVerticalScrollable,
   p,
   s = true,
@@ -36,8 +34,8 @@ export const MainLayout: SFCModel<MainLayoutPropsModel> = ({
         isRowAlign={isRowAlign}
         isVerticalScrollable={isVerticalScrollable}
         m={isCenter ? 'auto' : undefined}
-        mHorizontal={isCenter || isHorizontalCenter ? 'auto' : undefined}
-        mVertical={isCenter || isVerticalCenter ? 'auto' : undefined}
+        mHorizontal={isCenter ? 'auto' : undefined}
+        mVertical={isCenter ? 'auto' : undefined}
         p={p}
         s={s}
         shrink

@@ -36,7 +36,7 @@ export const SEED_DATA = [
     data: [
       async () => {
         const { result } = await Container.get(UserService).get({
-          filter: { email: 'admin@admin.com' },
+          filter: [{ field: 'email', value: 'admin@admin.com' }],
         });
         return { _uid: result?._id, role: ACCESS_ROLE.ADMIN };
       },

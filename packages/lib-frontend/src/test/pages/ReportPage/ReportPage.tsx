@@ -12,7 +12,7 @@ export const ReportPage: SFCModel<ReportPagePropsModel> = ({ testID, ...props })
   const { data } = useQuery('snapshots', async () => getMany({ filter: [] }));
   return (
     <MainLayout
-      isHorizontalCenter
+      
       style={styles}
       testID={testID}>
       <RouteGroup

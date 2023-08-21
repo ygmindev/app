@@ -1,9 +1,9 @@
 import { Text } from '#lib-frontend/core/components/Text/Text';
+import { TEXT_CASING } from '#lib-frontend/core/components/Text/Text.constants';
 import { type TextPropsModel } from '#lib-frontend/core/components/Text/Text.models';
 import { THEME_COLOR, THEME_ROLE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
 import {
   FONT_ALIGN,
-  FONT_CASING,
   FONT_TYPE,
 } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { type LibraryPropsModel } from '#lib-library/core/components/Library/Library.models';
@@ -29,7 +29,7 @@ export const props: LibraryPropsModel<TextPropsModel> = {
     { props: { type: FONT_TYPE.TITLE } },
     { props: { type: FONT_TYPE.SUBTITLE } },
     { props: { type: FONT_TYPE.BODY } },
-    ...Object.values(FONT_CASING).map((casing) => ({ props: { casing } })),
+    ...Object.values(TEXT_CASING).map((casing) => ({ props: { casing } })),
     { props: { isLineHeight: true } },
   ],
 };

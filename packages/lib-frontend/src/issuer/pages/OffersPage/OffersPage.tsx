@@ -79,7 +79,7 @@ export const OffersPage: SFCModel<OffersPagePropsModel> = ({ testID, ...props })
   const { styles } = useStyles({ props });
   return (
     <MainLayout
-      isHorizontalCenter
+      
       s
       style={styles}
       testID={testID}>

@@ -61,7 +61,7 @@ export const testResourceService = async ({
       DummyEntityResourceModel,
       DummyEntityResourceFormModel
     > = {
-      filter: { _id: data[0]._id },
+      filter: [{ field: '_id', value: data[0]._id }],
     };
     const { result } = await service.get(input);
     const expected = find(data, input.filter) as DummyEntityResourceModel;
@@ -75,7 +75,7 @@ export const testResourceService = async ({
       DummyEntityResourceModel,
       DummyEntityResourceFormModel
     > = {
-      filter: { stringProperty: 'stringProperty1' },
+      filter: [{ field: 'stringProperty', value: 'stringProperty1' }],
     };
     const { result } = await service.get(input);
     const expected = find(data, input.filter) as DummyEntityResourceModel;
@@ -138,7 +138,7 @@ export const testResourceService = async ({
       DummyEntityResourceModel,
       DummyEntityResourceFormModel
     > = {
-      filter: { _id: data[0]._id },
+      filter: [{ field: '_id', value: data[0]._id }],
       options: {
         project: PROJECT_FIELDS.reduce((result, field) => ({ ...result, [field]: true }), {}),
       },
@@ -157,7 +157,7 @@ export const testResourceService = async ({
       DummyEntityResourceModel,
       DummyEntityResourceFormModel
     > = {
-      filter: { stringProperty: 'stringProperty1' },
+      filter: [{ field: 'stringProperty', value: 'stringProperty1' }],
     };
     const { result } = await service.getMany(input);
     const expected = filter(data, input.filter) as Array<DummyEntityResourceModel>;
@@ -223,7 +223,7 @@ export const testResourceService = async ({
       DummyEntityResourceModel,
       DummyEntityResourceFormModel
     > = {
-      filter: { stringProperty: 'stringProperty1' },
+      filter: [{ field: 'stringProperty', value: 'stringProperty1' }],
       options: { skip: SKIP, take: TAKE },
     };
     const { result } = await service.getMany(input);
@@ -240,7 +240,7 @@ export const testResourceService = async ({
       DummyEntityResourceModel,
       DummyEntityResourceFormModel
     > = {
-      filter: { stringProperty: 'stringProperty1' },
+      filter: [{ field: 'stringProperty', value: 'stringProperty1' }],
       options: {
         project: PROJECT_FIELDS.reduce((result, field) => ({ ...result, [field]: true }), {}),
       },
@@ -273,7 +273,7 @@ export const testResourceService = async ({
       DummyEntityResourceModel,
       undefined
     > = {
-      filter: { stringProperty: 'stringProperty1' },
+      filter: [{ field: 'stringProperty', value: 'stringProperty1' }],
       pagination: {},
     };
     const { result } = await service.getConnection(input);
@@ -385,7 +385,7 @@ export const testResourceService = async ({
       DummyEntityResourceModel,
       DummyEntityResourceFormModel
     > = {
-      filter: { _id: data[0]._id },
+      filter: [{ field: '_id', value: data[0]._id }],
       update: { stringProperty: 'stringProperty2' },
     };
     const { result } = await service.update(input);
@@ -400,7 +400,7 @@ export const testResourceService = async ({
       DummyEntityResourceModel,
       DummyEntityResourceFormModel
     > = {
-      filter: { _id: data[0]._id },
+      filter: [{ field: '_id', value: data[0]._id }],
       update: { $push: { stringArrayProperty: 'stringArrayPropertyElement1' } },
     };
     const { result } = await service.update(input);
@@ -418,8 +418,8 @@ export const testResourceService = async ({
       DummyEntityResourceModel,
       DummyEntityResourceFormModel
     > = {
-      filter: { _id: data[0]._id },
-      update: { $pull: { stringArrayProperty: 'stringArrayPropertyElement1' } },
+      filter: [{ field: '_id', value: data[0]._id }],
+      update: { $pull: [{ field: 'stringArrayProperty', value: 'stringArrayPropertyElement1' }] },
     };
     const { result } = await service.update(input);
     const expected = filter(data[0].stringArrayProperty, input.update.$pull);
@@ -434,7 +434,7 @@ export const testResourceService = async ({
       DummyEntityResourceModel,
       DummyEntityResourceFormModel
     > = {
-      filter: { _id: data[0]._id },
+      filter: [{ field: '_id', value: data[0]._id }],
       options: {
         project: PROJECT_FIELDS.reduce((result, field) => ({ ...result, [field]: true }), {}),
       },
@@ -451,7 +451,7 @@ export const testResourceService = async ({
       DummyEntityResourceModel,
       DummyEntityResourceFormModel
     > = {
-      filter: { stringProperty: 'stringProperty1' },
+      filter: [{ field: 'stringProperty', value: 'stringProperty1' }],
     };
     await service.remove(input);
     const { result } = await service.get(input);

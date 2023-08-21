@@ -13,7 +13,6 @@ export const RouteTabs: SFCModel<RouteTabsPropsModel> = ({ routes, testID, value
     defaultValue: isActiveF?.pathname,
     value,
   });
-
   return (
     <Tabs
       onChange={(tab) => {

@@ -1,5 +1,7 @@
 export const ISSUER = 'issuer';
 
-export const OFFERS = 'offers';
+export const BORROW = 'borrow';
 
-export const COMPARABLES = 'comparables';
+export const QUOTES = 'quotes';
+
+export const FINANCERS = 'financers';

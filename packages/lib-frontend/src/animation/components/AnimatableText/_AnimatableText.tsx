@@ -13,7 +13,7 @@ import { type TextStyleModel } from '#lib-frontend/style/style.models';
 export const _AnimatableText: RSFCModel<
   AnimatableRefModel<TextStyleModel>,
   _AnimatableTextPropsModel
-> = forwardRef(({ animation, children, elementState, ...props }, ref) => {
+> = forwardRef(({ animation, elementState, ...props }, ref) => {
   const theme = useTheme();
   const { styles } = useStyles({ props });
   const { animationProps, animationState, to, toState } = useAnimationState({
@@ -32,8 +32,7 @@ export const _AnimatableText: RSFCModel<
       {...(animationProps as PropsModel<typeof MotiText>)}
       ref={ref}
       state={animationState}
-      style={styles}>
-      {children}
-    </MotiText>
+      style={styles}
+    />
   );
 });

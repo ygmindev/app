@@ -45,7 +45,7 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
 
   return (
     <MainLayout
-      isHorizontalCenter
+      
       style={styles}
       testID={testID}>
       <DataBoundary

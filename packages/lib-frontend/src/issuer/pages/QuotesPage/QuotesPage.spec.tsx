@@ -1,10 +1,10 @@
-import { IssuerPage } from '#lib-frontend/issuer/pages/IssuerPage/IssuerPage';
-import { type IssuerPagePropsModel } from '#lib-frontend/issuer/pages/IssuerPage/IssuerPage.models';
+import { QuotesPage } from '#lib-frontend/issuer/pages/QuotesPage/QuotesPage';
+import { type QuotesPagePropsModel } from '#lib-frontend/issuer/pages/QuotesPage/QuotesPage.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<IssuerPagePropsModel>({
-  target: IssuerPage,
+const { Component, displayName, testID } = withTestComponent<QuotesPagePropsModel>({
+  target: QuotesPage,
 });
 
 describe(displayName, () => {

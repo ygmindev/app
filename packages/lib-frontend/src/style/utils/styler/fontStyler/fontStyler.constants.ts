@@ -17,9 +17,3 @@ export enum FONT_ALIGN {
   LEFT = 'left',
   RIGHT = 'right',
 }
-
-export enum FONT_CASING {
-  CAPITALIZE = 'capitalize',
-  LOWERCASE = 'lowercase',
-  UPPERCASE = 'uppercase',
-}

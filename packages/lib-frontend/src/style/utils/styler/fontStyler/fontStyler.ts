@@ -13,7 +13,6 @@ import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
   {
     align,
-    casing,
     family = FONT_FAMILY.MAIN,
     fontSize = THEME_SIZE_MORE.MEDIUM,
     isBold,
@@ -44,6 +43,4 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
     lineHeight: isLineHeight && type === FONT_TYPE.BODY ? theme.font.lineHeight : undefined,
 
     textAlign: align,
-
-    textTransform: casing,
   });
