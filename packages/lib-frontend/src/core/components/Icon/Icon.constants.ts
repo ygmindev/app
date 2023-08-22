@@ -47,6 +47,7 @@ export const IONIC_ICONS = {
   exclamationCircle: 'alert-circle-outline',
   eye: 'eye-outline',
   eyeOff: 'eye-off-outline',
+  filter: 'filter-outline',
   fingerprint: 'finger-print-outline',
   git: 'git-branch-outline',
   globe: 'globe-outline',

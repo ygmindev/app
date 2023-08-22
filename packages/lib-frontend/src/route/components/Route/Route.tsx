@@ -15,7 +15,6 @@ import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { ROUTE_TRANSITION } from '#lib-frontend/route/route.constants';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { useTracking } from '#lib-frontend/tracking/hooks/useTracking/useTracking';
 import {
@@ -24,7 +23,8 @@ import {
 } from '#lib-shared/tracking/resources/TrackingEvent/TrackingEvent.constants';
 
 export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...props }) => {
-  const { t } = useTranslation(route.ns);
+  useTranslation(route.ns);
+
   const { styles } = useStyles({ props });
   const { isActive } = useRouter();
   const { track } = useTracking();
@@ -100,7 +100,6 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
         {...route.layoutProps}
         grow
         isAbsoluteFill
-        s={THEME_SIZE.SMALL}
         style={styles}
         testID={testID}>
         {route.routes &&

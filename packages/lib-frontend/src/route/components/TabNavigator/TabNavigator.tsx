@@ -5,27 +5,32 @@ import { type TabNavigatorPropsModel } from '#lib-frontend/route/components/TabN
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 
-export const TabNavigator: SFCModel<TabNavigatorPropsModel> = ({ routes, testID, ...props }) => {
+export const TabNavigator: SFCModel<TabNavigatorPropsModel> = ({
+  routes,
+  testID,
+  type,
+  ...props
+}) => {
   const { t } = useTranslation();
   const { styles } = useStyles({ props });
   const { isActive, push } = useRouter();
   const isActiveF = routes?.find(({ fullpath, pathname }) =>
     isActive({ pathname: fullpath ?? pathname }),
   );
-  const value = isActiveF?.pathname;
   return (
     <Tabs
       onChange={(tab) => {
         void push({ pathname: tab });
       }}
       style={styles}
-      tabs={routes?.map(({ icon, pathname, title }) => ({
+      tabs={routes?.map(({ fullpath, icon, pathname, title }) => ({
         icon,
-        id: pathname,
+        id: fullpath ?? pathname,
         label: title ? t(title) : pathname,
       }))}
       testID={testID}
-      value={value}
+      type={type}
+      value={isActiveF?.fullpath}
     />
   );
 };

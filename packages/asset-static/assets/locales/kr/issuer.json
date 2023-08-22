@@ -1,5 +1,6 @@
 {
   "borrow": "TRANSLATION_MISSING",
-  "financer_plural": "TRANSLATION_MISSING",
-  "quote_plural": "TRANSLATION_MISSING"
+  "lender_plural": "TRANSLATION_MISSING",
+  "quote_plural": "TRANSLATION_MISSING",
+  "quotedOn": "TRANSLATION_MISSING"
 }

@@ -4,4 +4,4 @@ export const BORROW = 'borrow';
 
 export const QUOTES = 'quotes';
 
-export const FINANCERS = 'financers';
+export const LENDERS = 'lenders';
