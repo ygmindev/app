@@ -1,6 +1,6 @@
 import range from 'lodash/range';
 
-import { type TableColumnModel } from '#lib-frontend/core/components/Table/Table.models';
+import { type TableColumnModel } from '#lib-frontend/data/components/Table/Table.models';
 import { dateTimeFormat } from '#lib-shared/format/utils/dateTimeFormat/dateTimeFormat';
 import { DATE_TIME_FORMAT_TYPE } from '#lib-shared/format/utils/dateTimeFormat/dateTimeFormat.constants';
 

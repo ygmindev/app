@@ -1,4 +1,6 @@
 {
-  "location": "TRANSLATION_MISSING",
-  "timezone": "TRANSLATION_MISSING"
+  "location": "location",
+  "timezone": "timezone",
+  "today": "today",
+  "yesterday": "yesterday"
 }

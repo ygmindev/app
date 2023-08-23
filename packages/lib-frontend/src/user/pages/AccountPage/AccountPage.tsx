@@ -9,7 +9,6 @@ export const AccountPage: SFCModel<AccountPagePropsModel> = ({ testID, ...props 
   const { styles } = useStyles({ props });
   return (
     <MainLayout
-      
       style={styles}
       testID={testID}>
       {ACCOUNT_GROUPS.map(({ id, root, routes }) => (

@@ -7,7 +7,7 @@ import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constan
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
-import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import { DIRECTION, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type RouteHeaderPropsModel } from '#lib-frontend/route/containers/RouteHeader/RouteHeader.models';
@@ -18,7 +18,6 @@ import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR_MORE } from '#lib-frontend/style/style.constants';
-import { DIRECTION } from '#lib-frontend/core/core.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 

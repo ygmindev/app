@@ -4,6 +4,7 @@ import isNumber from 'lodash/isNumber';
 import toString from 'lodash/toString';
 import moment from 'moment';
 
+import { NUMBER_UNIT } from '#lib-frontend/data/hooks/useFormatter/useFormatter.constants';
 import {
   type DateFormatterOptionsModel,
   type FormatterOptionsModel,
@@ -23,25 +24,59 @@ export const useFormatter = (): UseFormatterModel => {
 
     if (isNumber(value)) {
       let valueF = value as number;
-      const { isSeparated, multiplier, precision } = (options ?? {}) as NumberFormatterOptionsModel;
-      !!multiplier && (valueF *= multiplier);
-      return isSeparated
-        ? valueF.toLocaleString(
-            'en-US',
-            isNil(precision)
-              ? undefined
-              : { maximumFractionDigits: precision, minimumFractionDigits: precision },
-          )
-        : isNil(precision)
-        ? toString(valueF)
-        : valueF.toFixed(precision);
+      const { isSeparated, multiplier, precision, unit } = (options ??
+        {}) as NumberFormatterOptionsModel;
+
+      !isNil(multiplier) && (valueF *= multiplier);
+
+      let postfix = '';
+      switch (unit) {
+        case NUMBER_UNIT.BASIS_POINT: {
+          valueF *= 1e4;
+          postfix = 'bps';
+          break;
+        }
+        case NUMBER_UNIT.BILLION: {
+          valueF /= 1e9;
+          postfix = 'bn';
+          break;
+        }
+        case NUMBER_UNIT.MILLION: {
+          valueF /= 1e6;
+          postfix = 'mm';
+          break;
+        }
+        case NUMBER_UNIT.PERCENT: {
+          valueF *= 1e2;
+          postfix = '%';
+          break;
+        }
+        case NUMBER_UNIT.THOUSAND: {
+          valueF /= 1e3;
+          postfix = 'k';
+          break;
+        }
+      }
+
+      return `${
+        isSeparated
+          ? valueF.toLocaleString(
+              'en-US',
+              isNil(precision)
+                ? undefined
+                : { maximumFractionDigits: precision, minimumFractionDigits: precision },
+            )
+          : isNil(precision)
+          ? toString(valueF)
+          : valueF.toFixed(precision)
+      }${postfix}`;
     }
     if (isDate(value)) {
       const { format, isReadable } = (options ?? {}) as DateFormatterOptionsModel;
       if (isReadable) {
         const diff = moment().diff(value, 'days');
         switch (diff) {
-          case -1:
+          case 1:
             return t('locale:yesterday');
           case 0:
             return t('locale:today');

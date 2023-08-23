@@ -1,6 +1,6 @@
 import { type ReactElement, useState } from 'react';
 
-import { Table } from '#lib-frontend/core/components/Table/Table';
+import { Table } from '#lib-frontend/data/components/Table/Table';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { ResourceFilterForm } from '#lib-frontend/resource/components/ResourceFilterForm/ResourceFilterForm';

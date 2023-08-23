@@ -1,6 +1,12 @@
-export const REDIRECT = 'redirect';
-
 export const HOME = 'home';
+
+export const SUMMARY = 'summary';
+
+export const IN_PROGRESS = 'inProgress';
+
+export const COMPLETED = 'completed';
+
+export const REDIRECT = 'redirect';
 
 export enum ELEMENT_STATE {
   ACTIVE = 'active',

@@ -32,8 +32,7 @@ export const Tile: SFCModel<TilePropsModel> = ({
           border={isBorder}
           onPress={onPress}
           p
-          round
-          s>
+          round>
           <Wrapper isRowAlign>
             {preview}
 

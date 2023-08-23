@@ -1,10 +1,10 @@
-import { OffersPage } from '#lib-frontend/issuer/pages/OffersPage/OffersPage';
-import { type OffersPagePropsModel } from '#lib-frontend/issuer/pages/OffersPage/OffersPage.models';
+import { QuotesPage } from '#lib-frontend/funding/pages/QuotesPage/QuotesPage';
+import { type QuotesPagePropsModel } from '#lib-frontend/funding/pages/QuotesPage/QuotesPage.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<OffersPagePropsModel>({
-  target: OffersPage,
+const { Component, displayName, testID } = withTestComponent<QuotesPagePropsModel>({
+  target: QuotesPage,
 });
 
 describe(displayName, () => {

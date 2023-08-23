@@ -1,7 +1,3 @@
-export const HOME = 'home';
-
-export const SUMMARY = 'summary';
-
 export enum ROUTE_TRANSITION {
   SLIDE = 'slide',
 }

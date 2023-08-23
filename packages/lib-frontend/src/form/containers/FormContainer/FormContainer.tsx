@@ -227,7 +227,6 @@ const FormContainerF = forwardRef(
     return (
       <MainLayout
         {...props}
-        isCenter
         isFullWidth={isFullWidth}
         isRow={isHorizontal}
         testID={testID}>

@@ -7,7 +7,9 @@ import { type ViewStylerParamsModel } from '#lib-frontend/style/utils/styler/vie
 export type WrapperPropsModel = {
   isCenter?: boolean;
   isDistribute?: boolean;
+  isHorizontalCenter?: boolean;
   isRowAlign?: boolean;
+  isVerticalCenter?: boolean;
   s?: SpacingModel;
 } & ViewPropsModel &
   ViewStylerParamsModel &

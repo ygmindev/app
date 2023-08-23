@@ -1,0 +1,11 @@
+{
+  "amount": "amount",
+  "borrow": "borrow",
+  "cp": "commerical paper",
+  "funding": "funding",
+  "gcp": "general corporate purpose",
+  "maturity": "maturity",
+  "quoted": "quoted {{value}}",
+  "refinancing": "refinancing",
+  "type": "type"
+}

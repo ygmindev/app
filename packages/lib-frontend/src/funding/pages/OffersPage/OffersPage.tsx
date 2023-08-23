@@ -6,14 +6,14 @@ import { Tile } from '#lib-frontend/core/components/Tile/Tile';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
-import { type OffersPagePropsModel } from '#lib-frontend/issuer/pages/OffersPage/OffersPage.models';
+import { type OffersPagePropsModel } from '#lib-frontend/funding/pages/OffersPage/OffersPage.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 const SIZE = 80;
 
-const FINANCINGS = [
+const FUNDINGS = [
   {
     icon: 'bank',
     id: 'gs',
@@ -79,7 +79,6 @@ export const OffersPage: SFCModel<OffersPagePropsModel> = ({ testID, ...props })
   const { styles } = useStyles({ props });
   return (
     <MainLayout
-      
       s
       style={styles}
       testID={testID}>
@@ -88,7 +87,7 @@ export const OffersPage: SFCModel<OffersPagePropsModel> = ({ testID, ...props })
       <Wrapper
         isVerticalScrollable
         s>
-        {FINANCINGS.map(({ icon, id, logo, products, rate, tags, title }) => (
+        {FUNDINGS.map(({ icon, id, logo, products, rate, tags, title }) => (
           <Tile
             description={
               <Wrapper s="s">

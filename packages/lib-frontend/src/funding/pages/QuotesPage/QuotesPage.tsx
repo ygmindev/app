@@ -1,13 +1,13 @@
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { Image } from '#lib-frontend/core/components/Image/Image';
-import { Table } from '#lib-frontend/core/components/Table/Table';
 import { Tile } from '#lib-frontend/core/components/Tile/Tile';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
+import { Table } from '#lib-frontend/data/components/Table/Table';
 import { useFormatter } from '#lib-frontend/data/hooks/useFormatter/useFormatter';
-import { type QuotesPagePropsModel } from '#lib-frontend/issuer/pages/QuotesPage/QuotesPage.models';
+import { type QuotesPagePropsModel } from '#lib-frontend/funding/pages/QuotesPage/QuotesPage.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
@@ -17,6 +17,8 @@ export const QuotesPage: SFCModel<QuotesPagePropsModel> = ({ testID, ...props })
   const { t } = useTranslation();
   const { styles } = useStyles({ props });
   const format = useFormatter();
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
   return (
     <MainLayout
       p
@@ -33,7 +35,9 @@ export const QuotesPage: SFCModel<QuotesPagePropsModel> = ({ testID, ...props })
       </Wrapper>
 
       <Tile
-        description={t('issuer:quotedOn', { value: format(new Date(), { isReadable: true }) })}
+        description={t('funding:quoted', {
+          value: format(yesterday, { isReadable: true }),
+        })}
         onPress={() => null}
         preview={
           <Image

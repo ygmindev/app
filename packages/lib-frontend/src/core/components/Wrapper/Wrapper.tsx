@@ -21,14 +21,31 @@ import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { variableName } from '#lib-shared/core/utils/variableName/variableName';
 
 export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef(
-  ({ animation, children, isCenter, isDistribute, isRowAlign, s, ...props }, ref) => {
+  (
+    {
+      animation,
+      children,
+      isCenter,
+      isDistribute,
+      isHorizontalCenter,
+      isRowAlign,
+      isVerticalCenter,
+      s,
+      ...props
+    },
+    ref,
+  ) => {
     const theme = useTheme();
+    const isRow = props.isRow || isRowAlign;
     const { styles } = useStyles({
       props: {
         ...props,
-        align: isCenter || isRowAlign ? FLEX_ALIGN.CENTER : props.align,
+        align:
+          isCenter || isRowAlign || (isHorizontalCenter && !isRow)
+            ? FLEX_ALIGN.CENTER
+            : props.align,
         isRow: props.isRow || isRowAlign,
-        justify: isCenter ? FLEX_ALIGN.CENTER : props.justify,
+        justify: isCenter || (isVerticalCenter && !isRow) ? FLEX_ALIGN.CENTER : props.justify,
       },
       stylers: [viewStyler],
     });
@@ -47,7 +64,6 @@ export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
             : result,
         [] as Array<ReactNode>,
       );
-      const isRow = props.isRow || isRowAlign;
       const { length } = childrenF;
       return reduce(
         childrenF as Array<ReactElement>,

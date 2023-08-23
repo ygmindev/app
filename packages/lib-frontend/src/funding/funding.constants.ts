@@ -1,4 +1,4 @@
-export const ISSUER = 'issuer';
+export const FUNDING = 'funding';
 
 export const BORROW = 'borrow';
 

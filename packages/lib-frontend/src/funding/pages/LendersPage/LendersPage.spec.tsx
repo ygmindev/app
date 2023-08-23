@@ -1,10 +1,10 @@
-import { ComparablesPage } from '#lib-frontend/issuer/pages/ComparablesPage/ComparablesPage';
-import { type ComparablesPagePropsModel } from '#lib-frontend/issuer/pages/ComparablesPage/ComparablesPage.models';
+import { LendersPage } from '#lib-frontend/funding/pages/LendersPage/LendersPage';
+import { type LendersPagePropsModel } from '#lib-frontend/funding/pages/LendersPage/LendersPage.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<ComparablesPagePropsModel>({
-  target: ComparablesPage,
+const { Component, displayName, testID } = withTestComponent<LendersPagePropsModel>({
+  target: LendersPage,
 });
 
 describe(displayName, () => {

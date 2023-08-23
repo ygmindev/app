@@ -11,6 +11,7 @@ import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_COLOR, THEME_SIZE } from '#lib-frontend/style/style.constants';
+import { FLEX_ALIGN } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const Tabs: SFCModel<TabsPropsModel> = ({
@@ -29,13 +30,17 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
     onChange,
     value,
   });
+  const isContained = type === TABS_TYPE.CONTAINED;
   const isUnderline = type === TABS_TYPE.UNDERLINE;
   return (
     <Wrapper
-      border={isUnderline ? DIRECTION.BOTTOM : undefined}
+      alignSelf={isContained ? FLEX_ALIGN.CENTER : undefined}
+      border={isContained ? true : isUnderline ? DIRECTION.BOTTOM : undefined}
       isHorizontalScrollable
-      isRow
-      s={THEME_SIZE.SMALL}
+      isRowAlign
+      m={isContained ? THEME_SIZE.SMALL : undefined}
+      p={isContained ? THEME_SIZE.SMALL : undefined}
+      round={isContained}
       style={styles}
       testID={testID}>
       {tabs?.map((tab) => {
@@ -70,8 +75,9 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
             icon={tab.icon}
             key={tab.id}
             onPress={() => valueControlledSet(tab.id)}
+            size={THEME_SIZE.SMALL}
             type={
-              isUnderline ? BUTTON_TYPE.INVISIBLE : isActiveF ? undefined : BUTTON_TYPE.TRANSPARENT
+              isActiveF ? undefined : isContained ? BUTTON_TYPE.INVISIBLE : BUTTON_TYPE.TRANSPARENT
             }>
             {tab.label ? t(tab.label) : tab.id}
           </Button>

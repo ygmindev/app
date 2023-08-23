@@ -107,7 +107,7 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
             anchor={(isOpen) => (
               <Button
                 elementState={isActive || isOpen ? ELEMENT_STATE.ACTIVE : elementState}
-                icon="ellipsis"
+                icon="dots"
               />
             )}
             options={filterNil([

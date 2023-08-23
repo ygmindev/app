@@ -15,7 +15,6 @@ export const BrightnessFormPage: FCModel<BrightnessFormPagePropsModel> = ({ test
   const brightness = useStore((state) => state.style.brightness);
   return (
     <MainLayout
-      isCenter
       style={styles}
       testID={testID}>
       <Wrapper

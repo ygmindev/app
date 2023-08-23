@@ -28,7 +28,10 @@ export const _viewParams: ComposeComponentParamsModel<
   ) => {
     const [stylesView, stylesContainer] = partionObject(
       StyleSheet.flatten(style) as Record<string, unknown>,
-      (_, k) => ['height', 'width'].includes(k) || k.startsWith('margin') || k.startsWith('border'),
+      (_, k) =>
+        ['height', 'width', 'alignSelf'].includes(k) ||
+        k.startsWith('margin') ||
+        k.startsWith('border'),
     );
     return {
       children: (

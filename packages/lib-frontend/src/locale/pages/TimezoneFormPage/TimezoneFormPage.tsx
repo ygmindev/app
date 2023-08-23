@@ -17,7 +17,6 @@ export const TimezoneFormPage: SFCModel<TimezoneFormPagePropsModel> = ({ testID,
 
   return (
     <MainLayout
-      isCenter
       style={styles}
       testID={testID}>
       <SwitchField

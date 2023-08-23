@@ -31,6 +31,7 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
   const [measure, measureSet] = useState<MeasureModel>();
   const isBack = useStore((state) => state.route.isBack);
   const isLeaf = !route.routes;
+  const isActiveF = isActive({ pathname: route.fullpath });
   const isActiveLeaf = isLeaf && isActive({ isExact: true, pathname: route.fullpath });
 
   useAsync(async () => {
@@ -67,14 +68,12 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
                       </Slide>
                     );
                   default: {
-                    return isLeaf ? (
+                    return (
                       <Appearable
                         isAbsoluteFill
-                        isActive={isActiveLeaf}>
+                        isActive={isActiveF}>
                         {element}
                       </Appearable>
-                    ) : (
-                      element
                     );
                   }
                 }
@@ -100,6 +99,7 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
         {...route.layoutProps}
         grow
         isAbsoluteFill
+        position={SHAPE_POSITION.RELATIVE}
         style={styles}
         testID={testID}>
         {route.routes &&

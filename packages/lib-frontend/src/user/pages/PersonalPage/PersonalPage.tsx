@@ -12,7 +12,6 @@ export const PersonalPage: SFCModel<PersonalPagePropsModel> = ({ testID, ...prop
   const currentUser = useStore((state) => state.user.currentUser);
   return (
     <MainLayout
-      
       style={styles}
       testID={testID}>
       <RouteGroup

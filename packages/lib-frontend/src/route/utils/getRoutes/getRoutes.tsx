@@ -33,7 +33,6 @@ import { AUTH, SIGN_IN_METHOD, SIGN_IN_MODE } from '#lib-shared/auth/auth.consta
 import { CORE } from '#lib-shared/core/core.constants';
 import { PING } from '#lib-shared/http/http.constants';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
-import { ROUTE } from '#lib-shared/route/route.constants';
 import { BRIGHTNESS, STYLE } from '#lib-shared/style/style.constants';
 import { TEST } from '#lib-shared/test/test.constants';
 import { ACCOUNT, USER } from '#lib-shared/user/user.constants';
@@ -170,7 +169,6 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
 
         {
           element: <NotFoundPage />,
-          ns: [ROUTE],
           pathname: '*',
         },
       ],

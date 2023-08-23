@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+// import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 import { type IconProps } from 'react-native-vector-icons/Icon';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
