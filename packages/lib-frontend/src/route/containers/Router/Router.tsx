@@ -16,14 +16,13 @@ const getRoute = (
   depth = 0,
   rootRoutes: Array<RouteModel> = [],
 ): RouteModel => {
-  const pathnameEnd = trimEnd(pathname, '/*');
-  const pathnameF = trimPathname(route.routes ? `${pathnameEnd}/*` : pathname);
+  const pathnameF = trimPathname(trimEnd(pathname, '/*'));
   const depthF = pathnameF === '/' ? depth : depth + 1;
-  const parentF = trimPathname(`${route.parent ?? ''}/${pathnameEnd}`);
+  const parentF = trimPathname(`${route.parent ?? ''}${pathnameF}`);
   const routeF: RouteModel = {
     ...route,
     fullpath: trimPathname(`${route.parent ?? ''}/${pathnameF}`),
-    pathname: pathnameF,
+    pathname: trimPathname(route.routes ? `${pathnameF}/*` : pathnameF),
     routes: route.routes?.reduce((result, child) => {
       const childRoute = getRoute({ ...child, parent: parentF }, depthF, rootRoutes);
       if (childRoute.isFullScreen) {

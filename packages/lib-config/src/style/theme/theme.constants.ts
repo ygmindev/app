@@ -6,11 +6,11 @@ import { PLATFORM } from '#lib-platform/core/core.constants';
 import { type PartialDeepModel } from '#lib-shared/core/core.models';
 
 export const THEME_COLOR_TONES: Record<ThemeColorModel, string> = {
-  [THEME_COLOR.ERROR]: '#F44336',
-  [THEME_COLOR.PRIMARY]: '#5469D4',
-  [THEME_COLOR.SECONDARY]: '#8C8C8C',
-  [THEME_COLOR.SUCCESS]: '#28A745',
-  [THEME_COLOR.WARNING]: '#FFB52E',
+  [THEME_COLOR.ERROR]: '#f44336',
+  [THEME_COLOR.PRIMARY]: '#151c6d',
+  [THEME_COLOR.SECONDARY]: '#8c8c8c',
+  [THEME_COLOR.SUCCESS]: '#28a745',
+  [THEME_COLOR.WARNING]: '#ffb52e',
 };
 
 export const THEME_CONFIG = {

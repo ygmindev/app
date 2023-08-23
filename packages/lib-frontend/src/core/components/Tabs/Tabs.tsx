@@ -1,6 +1,7 @@
 import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
+import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { TABS_TYPE } from '#lib-frontend/core/components/Tabs/Tabs.constants';
 import { type TabsPropsModel } from '#lib-frontend/core/components/Tabs/Tabs.models';
 import { Text } from '#lib-frontend/core/components/Text/Text';
@@ -37,7 +38,8 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
       alignSelf={isContained ? FLEX_ALIGN.CENTER : undefined}
       border={isContained ? true : isUnderline ? DIRECTION.BOTTOM : undefined}
       isHorizontalScrollable
-      isRowAlign
+      isRow={isUnderline}
+      isRowAlign={!isUnderline}
       m={isContained ? THEME_SIZE.SMALL : undefined}
       p={isContained ? THEME_SIZE.SMALL : undefined}
       round={isContained}
@@ -47,28 +49,41 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
         const isActiveF = valueControlled === tab.id;
         return isUnderline ? (
           <Activatable key={tab.id}>
-            {(isActive) => (
-              <Wrapper position={SHAPE_POSITION.RELATIVE}>
-                <Text
-                  color={isActive ? THEME_COLOR.PRIMARY : undefined}
+            {(isActive) => {
+              const isActiveFF = isActiveF || isActive;
+              return (
+                <Wrapper
                   onPress={() => valueControlledSet(tab.id)}
-                  p>
-                  {tab.label ? t(tab.label) : tab.id}
-                </Text>
-
-                {isActiveF && (
+                  position={SHAPE_POSITION.RELATIVE}>
                   <Wrapper
-                    backgroundColor={THEME_COLOR.PRIMARY}
-                    bottom={0}
-                    height={5}
-                    left={0}
-                    position={SHAPE_POSITION.ABSOLUTE}
-                    right={0}
-                    zIndex
-                  />
-                )}
-              </Wrapper>
-            )}
+                    isRowAlign
+                    p>
+                    {tab.icon && (
+                      <Icon
+                        color={isActiveFF ? THEME_COLOR.PRIMARY : undefined}
+                        icon={tab.icon}
+                      />
+                    )}
+
+                    <Text color={isActiveFF ? THEME_COLOR.PRIMARY : undefined}>
+                      {tab.label ? t(tab.label) : tab.id}
+                    </Text>
+                  </Wrapper>
+
+                  {isActiveF && (
+                    <Wrapper
+                      backgroundColor={THEME_COLOR.PRIMARY}
+                      bottom={0}
+                      height={5}
+                      left={0}
+                      position={SHAPE_POSITION.ABSOLUTE}
+                      right={0}
+                      zIndex
+                    />
+                  )}
+                </Wrapper>
+              );
+            }}
           </Activatable>
         ) : (
           <Button

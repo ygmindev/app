@@ -12,4 +12,4 @@ export const {{NAME}}(pascalCase) = composeComponent<{{NAME}}(pascalCase)PropsMo
   }),
 });
 
-process.env.DEBUG && ({{NAME}}(pascalCase).displayName = variableName(() => {{NAME}}(pascalCase)));
+process.env.APP_IS_DEBUG && ({{NAME}}(pascalCase).displayName = variableName({ {{NAME}}(pascalCase) }));

@@ -12,4 +12,4 @@ export const Chart = composeComponent<ChartPropsModel, _ChartPropsModel>({
   }),
 });
 
-process.env.DEBUG && (Chart.displayName = variableName(() => Chart));
+process.env.APP_IS_DEBUG && (Chart.displayName = variableName({ Chart }));

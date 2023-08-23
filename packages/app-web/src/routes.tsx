@@ -2,7 +2,7 @@ import { TABS_TYPE } from '#lib-frontend/core/components/Tabs/Tabs.constants';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { COMPLETED, HOME, IN_PROGRESS, SUMMARY } from '#lib-frontend/core/core.constants';
 import { BORROW, FUNDING, QUOTES } from '#lib-frontend/funding/funding.constants';
-import { FundingInProgressPage } from '#lib-frontend/funding/pages/FundingInProgressPage/FundingInProgressPage';
+import { BorrowInProgressPage } from '#lib-frontend/funding/pages/BorrowInProgressPage/BorrowInProgressPage';
 import { QuotesPage } from '#lib-frontend/funding/pages/QuotesPage/QuotesPage';
 import { TabNavigator } from '#lib-frontend/route/components/TabNavigator/TabNavigator';
 import { type RouteModel } from '#lib-frontend/route/route.models';
@@ -15,7 +15,7 @@ export const routes: Array<RouteModel> = getRoutes({
       layoutProps: { p: true },
       navigator: <TabNavigator type={TABS_TYPE.BUTTON} />,
       ns: [FUNDING],
-      pathname: FUNDING,
+      pathname: '/',
       routes: [
         {
           icon: 'home',
@@ -23,21 +23,23 @@ export const routes: Array<RouteModel> = getRoutes({
           title: ({ t }) => t('core:home'),
         },
         {
-          icon: 'card',
+          icon: 'dollar',
           navigator: <TabNavigator type={TABS_TYPE.UNDERLINE} />,
-          pathname: BORROW,
+          pathname: FUNDING,
           routes: [
             {
               element: <Wrapper />,
+              icon: 'document',
               pathname: SUMMARY,
               title: ({ t }) => t('core:summary'),
             },
             {
+              icon: 'card',
               navigator: <TabNavigator type={TABS_TYPE.CONTAINED} />,
-              pathname: FUNDING,
+              pathname: BORROW,
               routes: [
                 getRouteGroup({
-                  element: <FundingInProgressPage />,
+                  element: <BorrowInProgressPage />,
                   icon: 'dotsCircle',
                   pathname: IN_PROGRESS,
                   routes: [
@@ -57,10 +59,10 @@ export const routes: Array<RouteModel> = getRoutes({
                   title: ({ t }) => t('core:completed'),
                 },
               ],
-              title: ({ t }) => t('funding:funding'),
+              title: ({ t }) => t('funding:borrow'),
             },
           ],
-          title: ({ t }) => t('funding:borrow'),
+          title: ({ t }) => t('funding:funding'),
         },
       ],
     },
