@@ -39,11 +39,6 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
       (await track({ action: TRACKING_EVENT_ACTION.OPEN, object: TRACKING_EVENT_OBJECT.PAGE }));
   }, [isActiveLeaf]);
 
-  if (route?.pathname?.includes('in-progress')) {
-    console.warn(isActiveF);
-    console.warn(isActiveLeaf);
-  }
-
   let element = cloneElement(
     route.element ?? (
       <Wrapper
