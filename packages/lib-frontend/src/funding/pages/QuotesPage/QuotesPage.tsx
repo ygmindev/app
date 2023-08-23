@@ -21,6 +21,7 @@ export const QuotesPage: SFCModel<QuotesPagePropsModel> = ({ testID, ...props })
   yesterday.setDate(yesterday.getDate() - 1);
   return (
     <MainLayout
+      isHorizontalCenter
       p
       style={styles}
       testID={testID}>

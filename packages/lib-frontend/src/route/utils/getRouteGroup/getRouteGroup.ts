@@ -21,6 +21,7 @@ export const getRouteGroup = ({
       { element, header: headerF, pathname: '/', title },
       ...(routes ? routes.map((route) => merge([route, { header: headerF }])) : []),
     ],
+    title,
     transition: ROUTE_TRANSITION.SLIDE,
   };
 };

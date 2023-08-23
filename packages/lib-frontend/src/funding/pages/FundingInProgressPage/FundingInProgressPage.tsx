@@ -1,5 +1,6 @@
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { Chip } from '#lib-frontend/core/components/Chip/Chip';
+import { FloatingDot } from '#lib-frontend/core/components/FloatingDot/FloatingDot';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Tile } from '#lib-frontend/core/components/Tile/Tile';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
@@ -32,7 +33,10 @@ export const FundingInProgressPage: SFCModel<FundingInProgressPagePropsModel> = 
         rightElement={
           <Wrapper
             isCenter
+            position={SHAPE_POSITION.RELATIVE}
             s={THEME_SIZE.SMALL}>
+            <FloatingDot />
+
             <Chip color={THEME_COLOR.ERROR}>5</Chip>
 
             <Text fontSize={THEME_SIZE_MORE.SMALL}>quotes</Text>
@@ -102,7 +106,7 @@ export const FundingInProgressPage: SFCModel<FundingInProgressPagePropsModel> = 
         <Button
           icon="add"
           isShadow>
-          {t('funding:requestForQuote')}
+          {t('funding:startNewFunding')}
         </Button>
       </Wrapper>
     </MainLayout>

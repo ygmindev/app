@@ -3,7 +3,7 @@ import { type ComponentType, type FC as _FC, type ReactNode, type Ref } from 're
 import { type ButtonPropsModel } from '#lib-frontend/core/components/Button/Button.models';
 import { type IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
 import { type WrapperPropsModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
-import { type DIRECTION, type ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import { type CORNER, type DIRECTION, type ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import {
   type StyleModel,
@@ -109,5 +109,7 @@ export type DimensionModel = {
   height?: number;
   width?: number;
 };
+
+export type CornerModel = `${CORNER}`;
 
 export type MeasureModel = PositionModel & DimensionModel;

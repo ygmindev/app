@@ -1,4 +1,4 @@
-import { cloneElement, Fragment, useState } from 'react';
+import { cloneElement, useState } from 'react';
 
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 import { Slide } from '#lib-frontend/animation/components/Slide/Slide';
@@ -85,8 +85,26 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
     },
   );
 
-  const Container = route.isProtectable ? Protectable : Fragment;
-  element = <Container>{element}</Container>;
+  route.isProtectable && (element = <Protectable>{element}</Protectable>);
+
+  element = (
+    <Wrapper
+      {...route.layoutProps}
+      isAbsoluteFill
+      position={SHAPE_POSITION.RELATIVE}
+      style={styles}
+      testID={testID}>
+      {route.routes &&
+        route.navigator &&
+        cloneElement(route.navigator, {
+          key: 'navigator',
+          routes: route.routes,
+        })}
+
+      {element}
+    </Wrapper>
+  );
+
   return (
     <>
       {isActiveLeaf && route.header && (
@@ -95,19 +113,7 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
         </Portal>
       )}
 
-      <Wrapper
-        {...route.layoutProps}
-        grow
-        isAbsoluteFill
-        position={SHAPE_POSITION.RELATIVE}
-        style={styles}
-        testID={testID}>
-        {route.routes &&
-          route.navigator &&
-          cloneElement(route.navigator, { key: 'navigator', routes: route.routes })}
-
-        {element}
-      </Wrapper>
+      {element}
     </>
   );
 };

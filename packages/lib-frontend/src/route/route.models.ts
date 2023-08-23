@@ -18,6 +18,7 @@ export type RouteModel<TProps extends ChildrenPropsModel = ChildrenPropsModel> =
     element?: ReactElement<TProps>;
     fullpath?: string;
     header?: { previous?: string };
+    isFullScreen?: boolean;
     isProtectable?: boolean;
     layoutProps?: LayoutPropsModel;
     navigator?: ReactElement<NavigatorPropsModel>;

@@ -12,25 +12,22 @@ import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/sha
 export const AppLayout: SFCModel<AppLayoutPropsModel> = ({ children, testID, ...props }) => {
   const { styles } = useStyles({ props });
   return (
-    <PortalHost>
-      <KeyboardContainer
-        style={styles}
-        testID={testID}>
-        <Wrapper
-          grow
-          position={SHAPE_POSITION.RELATIVE}>
-          <Wrapper
-            backgroundColor={THEME_COLOR_MORE.SURFACE}
-            grow
-            style={styles}>
-            <AppHeader />
+    <KeyboardContainer
+      style={styles}
+      testID={testID}>
+      <Wrapper
+        backgroundColor={THEME_COLOR_MORE.SURFACE}
+        grow
+        position={SHAPE_POSITION.RELATIVE}
+        style={styles}>
+        <AppHeader />
 
-            {children}
-          </Wrapper>
+        <PortalHost>
+          {children}
 
           <Notifications />
-        </Wrapper>
-      </KeyboardContainer>
-    </PortalHost>
+        </PortalHost>
+      </Wrapper>
+    </KeyboardContainer>
   );
 };

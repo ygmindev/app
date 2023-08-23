@@ -9,7 +9,7 @@ import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constan
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { AsyncBoundary } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
 import { ERROR_MODE } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.constants';
-import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import { CORNER, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type RSFCPropsModel, type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { Form } from '#lib-frontend/form/components/Form/Form';
@@ -26,7 +26,6 @@ import { type FormRefModel, type StringFieldPropsModel } from '#lib-frontend/for
 import { useForm } from '#lib-frontend/form/hooks/useForm/useForm';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
-import { BORDER_RADIUS_DIRECTION } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import { FLEX_ALIGN } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 import { FIELD_TYPE } from '#lib-shared/form/form.constants';
@@ -156,10 +155,10 @@ const FormContainerF = forwardRef(
         onFocus: () => focusedSet(id),
         round: isGrouped
           ? {
-              [BORDER_RADIUS_DIRECTION.TOP_LEFT]: (isFirstRow && isFirstField) || 0,
-              [BORDER_RADIUS_DIRECTION.TOP_RIGHT]: (isFirstRow && isLastField) || 0,
-              [BORDER_RADIUS_DIRECTION.BOTTOM_LEFT]: (isLastRow && isFirstField) || 0,
-              [BORDER_RADIUS_DIRECTION.BOTTOM_RIGHT]: (isLastRow && isLastField) || 0,
+              [CORNER.TOP_LEFT]: (isFirstRow && isFirstField) || 0,
+              [CORNER.TOP_RIGHT]: (isFirstRow && isLastField) || 0,
+              [CORNER.BOTTOM_LEFT]: (isLastRow && isFirstField) || 0,
+              [CORNER.BOTTOM_RIGHT]: (isLastRow && isLastField) || 0,
             }
           : true,
         value: values ? (values as Record<string, undefined>)[id] : undefined,
