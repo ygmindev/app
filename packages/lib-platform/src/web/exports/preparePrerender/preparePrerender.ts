@@ -16,7 +16,7 @@ const pages = (routes?: Array<RouteModel>): _PreparePrerenderParamsModel['pages'
       if (route.prerender === false) {
         return result;
       }
-      let pathnameF = trimPathname(`${route.root ?? ''}/${trimEnd(route.pathname, '/*')}`);
+      let pathnameF = trimPathname(`${route.parent ?? ''}/${trimEnd(route.pathname, '/*')}`);
       pathnameF = pathnameF.replace(/\/:[^\/]+/, '');
       const resultF = [
         ...result,

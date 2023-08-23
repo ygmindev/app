@@ -20,11 +20,12 @@ export type RouteModel<TProps extends ChildrenPropsModel = ChildrenPropsModel> =
     header?: { previous?: string };
     isFullScreen?: boolean;
     isProtectable?: boolean;
+    isRoot?: string;
     layoutProps?: LayoutPropsModel;
     navigator?: ReactElement<NavigatorPropsModel>;
+    parent?: string;
     pathname: string;
     prerender?: false | Array<string>;
-    root?: string;
     routes?: Array<RouteModel>;
     title?: TranslatableTextModel;
     transition?: RouteTransitionModel;
