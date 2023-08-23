@@ -7,6 +7,6 @@
   "maturity": "maturity",
   "quoted": "quoted {{value}}",
   "refinancing": "refinancing",
-  "requestForQuote": "request for quote",
+  "startNewFunding": "start new funding",
   "type": "type"
 }

@@ -8,17 +8,15 @@ import { merge } from '#lib-shared/core/utils/merge/merge';
 export const getRouteGroup = ({
   element,
   header,
-  ns,
-  pathname,
   routes,
   title,
+  ...params
 }: GetRouteGroupParamsModel): GetRouteGroupModel => {
   const headerF = merge([header, { previous: ROUTE_DIRECTION.UP }]);
   return {
-    ns,
-    pathname,
+    ...params,
     routes: [
-      { element, header: headerF, pathname: '/', title },
+      { element, pathname: '/', title },
       ...(routes ? routes.map((route) => merge([route, { header: headerF }])) : []),
     ],
     title,
