@@ -28,7 +28,7 @@ export const routes: Array<RouteModel> = getRoutes({
           pathname: BORROW,
           routes: [
             {
-              element: <QuotesPage />,
+              element: <Wrapper />,
               pathname: SUMMARY,
               title: ({ t }) => t('core:summary'),
             },
@@ -59,17 +59,6 @@ export const routes: Array<RouteModel> = getRoutes({
               ],
               title: ({ t }) => t('funding:funding'),
             },
-            // {
-            //   element: <QuotesPage />,
-            //   pathname: QUOTES,
-            //   title: ({ t }) => t('funding:quote_plural'),
-            // },
-
-            // {
-            //   element: <QuotesPage />,
-            //   pathname: LENDERS,
-            //   title: ({ t }) => t('funding:lender_plural'),
-            // },
           ],
           title: ({ t }) => t('funding:borrow'),
         },

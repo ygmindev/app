@@ -11,7 +11,11 @@ import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathnam
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
-const getRoute = ({ pathname = '/', ...route }: RouteModel, depth = 0): RouteModel => {
+const getRoute = (
+  { pathname = '/', ...route }: RouteModel,
+  depth = 0,
+  rootRoutes: Array<RouteModel> = [],
+): RouteModel => {
   const pathnameEnd = trimEnd(pathname, '/*');
   const pathnameF = trimPathname(route.routes ? `${pathnameEnd}/*` : pathname);
   const depthF = pathnameF === '/' ? depth : depth + 1;
@@ -20,8 +24,21 @@ const getRoute = ({ pathname = '/', ...route }: RouteModel, depth = 0): RouteMod
     ...route,
     fullpath: trimPathname(`${route.parent ?? ''}/${pathnameF}`),
     pathname: pathnameF,
-    routes: route.routes?.map((child) => getRoute({ ...child, parent: parentF }, depthF)),
+    routes: route.routes?.reduce((result, child) => {
+      const childRoute = getRoute({ ...child, parent: parentF }, depthF, rootRoutes);
+      if (childRoute.isFullScreen) {
+        rootRoutes.push({
+          ...childRoute,
+          pathname: childRoute.fullpath ?? childRoute.pathname,
+        });
+        return result;
+      }
+      return [...result, childRoute];
+    }, [] as Array<RouteModel>),
   };
+  if (routeF.isRoot && routeF.routes) {
+    routeF.routes = [...rootRoutes, ...routeF.routes];
+  }
   return {
     ...routeF,
     element: (
