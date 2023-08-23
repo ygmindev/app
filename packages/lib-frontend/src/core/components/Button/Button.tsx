@@ -12,9 +12,11 @@ import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type ElementStateModel, type SFCModel } from '#lib-frontend/core/core.models';
 import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
+import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { type ThemeRoleModel } from '#lib-frontend/style/style.models';
+import { borderStyler } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler';
 import {
   FLEX_ALIGN,
   FLEX_JUSTIFY,
@@ -29,6 +31,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   elementState,
   height,
   icon,
+  isShadow,
   leftElement,
   onElementStateChange,
   size = THEME_SIZE.MEDIUM,
@@ -36,6 +39,10 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   ...props
 }) => {
   const theme = useTheme();
+  const { styles } = useStyles({
+    props: { ...props, isShadow },
+    stylers: [borderStyler],
+  });
 
   const { valueControlled, valueControlledSet } = useControlledValue<ElementStateModel>({
     defaultValue: ELEMENT_STATE.INACTIVE,
@@ -43,7 +50,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
     value: elementState || undefined,
   });
 
-  const heightF = height ?? theme.shape.height[size];
+  const heightF = height ?? theme.shape.size[size];
   const isLoading = valueControlled === ELEMENT_STATE.LOADING;
   const isIcon = icon && !children;
   const typeF = type ?? (isIcon ? BUTTON_TYPE.INVISIBLE : BUTTON_TYPE.FILLED);
@@ -130,6 +137,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
       onElementStateChange={valueControlledSet}
       position={SHAPE_POSITION.RELATIVE}
       round={isIcon ? heightF / 2 : true}
+      style={styles}
       width={children ? undefined : height}>
       <>
         <Appearable

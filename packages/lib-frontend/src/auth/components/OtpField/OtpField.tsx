@@ -15,7 +15,7 @@ import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/
 import { isTranslatableText } from '#lib-frontend/locale/utils/isTranslatableText/isTranslatableText';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR } from '#lib-frontend/style/style.constants';
+import { THEME_COLOR, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { withId } from '#lib-shared/core/utils/withId/withId';
 
@@ -88,7 +88,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             isNoClear
             key={id}
             value={valueControlled[i] || ''}
-            width={theme.shape.height.m}
+            width={theme.shape.size[THEME_SIZE_MORE.MEDIUM]}
           />
         ))}
 

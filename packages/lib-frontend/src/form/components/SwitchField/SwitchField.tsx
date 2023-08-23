@@ -14,7 +14,12 @@ import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR, THEME_COLOR_MORE, THEME_ROLE } from '#lib-frontend/style/style.constants';
+import {
+  THEME_COLOR,
+  THEME_COLOR_MORE,
+  THEME_ROLE,
+  THEME_SIZE_MORE,
+} from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { BOOLEAN_STRING } from '#lib-shared/core/core.constants';
 import { type BooleanStringModel } from '#lib-shared/core/core.models';
@@ -52,10 +57,10 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
     containerHeight,
     containerWidth,
   } = useMemo(() => {
-    const containerHeight = theme.shape.height.s;
-    const childSize = theme.shape.height.s - SWITCH_FIELD_OFFSET * 2;
+    const containerHeight = theme.shape.size[THEME_SIZE_MORE.SMALL];
+    const childSize = containerHeight - SWITCH_FIELD_OFFSET * 2;
     return {
-      childActiveLeft: SWITCH_FIELD_OFFSET + SWITCH_FIELD_WIDTH - theme.shape.height.s,
+      childActiveLeft: SWITCH_FIELD_OFFSET + SWITCH_FIELD_WIDTH - containerHeight,
       childBorderRadius: childSize / 2,
       childSize,
       containerBorderRadius: containerHeight / 2,

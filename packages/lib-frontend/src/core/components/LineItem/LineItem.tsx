@@ -13,7 +13,7 @@ import { TranslatableText } from '#lib-frontend/locale/components/TranslatableTe
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
+import { THEME_ROLE, THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
 
 export const LineItem: SFCModel<LineItemPropsModel> = ({
   children,
@@ -55,7 +55,7 @@ export const LineItem: SFCModel<LineItemPropsModel> = ({
           grow
           isRowAlign>
           {icon && (
-            <Wrapper width={theme.shape.height.s}>
+            <Wrapper width={theme.shape.size[THEME_SIZE_MORE.SMALL]}>
               <Icon icon={icon} />
             </Wrapper>
           )}

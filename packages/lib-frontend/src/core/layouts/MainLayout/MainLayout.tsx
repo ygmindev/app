@@ -5,18 +5,16 @@ import { type MainLayoutPropsModel } from '#lib-frontend/core/layouts/MainLayout
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import {
-  FLEX_ALIGN,
-  FLEX_JUSTIFY,
-} from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 
 export const MainLayout: SFCModel<MainLayoutPropsModel> = ({
   children,
   isCenter,
   isFullWidth,
+  isHorizontalCenter,
   isHorizontalScrollable,
   isRow,
   isRowAlign,
+  isVerticalCenter,
   isVerticalScrollable,
   p,
   s = true,
@@ -28,18 +26,19 @@ export const MainLayout: SFCModel<MainLayoutPropsModel> = ({
   const theme = useTheme();
   return (
     <Wrapper
+      grow
+      isCenter={isCenter}
       isFullWidth={isFullWidthF}
-      shrink
+      isHorizontalCenter={isHorizontalCenter}
+      isVerticalCenter={isVerticalCenter}
       style={styles}>
       <Wrapper
-        align={isCenter ? FLEX_ALIGN.CENTER : undefined}
+        grow
         isFullWidth={isFullWidthF}
         isHorizontalScrollable={isHorizontalScrollable}
         isRow={isRow}
         isRowAlign={isRowAlign}
         isVerticalScrollable={isVerticalScrollable}
-        justify={isCenter ? FLEX_JUSTIFY.CENTER : undefined}
-        m="auto"
         p={p}
         s={s}
         shrink

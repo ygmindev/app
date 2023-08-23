@@ -67,7 +67,7 @@ export type ThemeConfigModel = {
   shape: {
     borderRadius: Record<ThemeSizeModel, number>;
 
-    height: Record<ThemeSizeMoreModel, number>;
+    size: Record<ThemeSizeMoreModel, number>;
 
     spacing: Record<ThemeSizeModel, number>;
   };

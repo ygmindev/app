@@ -68,8 +68,8 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
     });
 
     const heightF = label
-      ? theme.shape.height[THEME_SIZE.LARGE]
-      : theme.shape.height[THEME_SIZE.MEDIUM];
+      ? theme.shape.size[THEME_SIZE.LARGE]
+      : theme.shape.size[THEME_SIZE.MEDIUM];
 
     const rightElementF = (
       <Wrapper

@@ -21,7 +21,7 @@ export const routes: Array<RouteModel> = getRoutes({
           title: ({ t }) => t('core:home'),
         },
         {
-          icon: 'borrow',
+          icon: 'card',
           navigator: <TabNavigator type={TABS_TYPE.UNDERLINE} />,
           pathname: BORROW,
           routes: [

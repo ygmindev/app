@@ -18,6 +18,7 @@ export const Tile: SFCModel<TilePropsModel> = ({
   isBorder = true,
   onPress,
   preview,
+  rightElement,
   testID,
   title,
   ...props
@@ -32,30 +33,36 @@ export const Tile: SFCModel<TilePropsModel> = ({
           border={isBorder}
           onPress={onPress}
           p
-          round>
+          round
+          s={description ? THEME_SIZE.SMALL : undefined}>
           <Wrapper isRowAlign>
             {preview}
 
             <Wrapper
               grow
+              isRowAlign
               s={THEME_SIZE.SMALL}>
-              <Wrapper isRowAlign>
-                {icon && <Icon icon={icon} />}
+              <Wrapper grow>
+                <Wrapper isRowAlign>
+                  {icon && <Icon icon={icon} />}
 
-                {title && (
-                  <TranslatableText
-                    isEllipsis
-                    type={FONT_TYPE.TITLE}>
-                    {title}
-                  </TranslatableText>
+                  {title && (
+                    <TranslatableText
+                      isEllipsis
+                      type={FONT_TYPE.TITLE}>
+                      {title}
+                    </TranslatableText>
+                  )}
+                </Wrapper>
+
+                {description && isTranslatableText(description) ? (
+                  <TranslatableText isEllipsis>{description}</TranslatableText>
+                ) : (
+                  description
                 )}
               </Wrapper>
 
-              {description && isTranslatableText(description) ? (
-                <TranslatableText isEllipsis>{description}</TranslatableText>
-              ) : (
-                description
-              )}
+              {rightElement}
             </Wrapper>
 
             {onPress && (

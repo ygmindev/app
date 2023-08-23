@@ -12,7 +12,6 @@ export const IONIC_ICONS = {
   bar: 'bar-chart-outline',
   book: 'book-outline',
   bookmark: 'bookmark-outline',
-  borrow: 'hand-holding-usd',
   briefcase: 'briefcase-outline',
   bucket: 'color-fill-outline',
   bug: 'bug-outline',

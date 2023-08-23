@@ -21,7 +21,6 @@
   "or": "or",
   "remove": "remove",
   "setAsPrimary": "set as primary",
-  "start": "start {{value}}",
   "summary": "summary",
   "tryAgain": "try again",
   "updateSuccess": "Successfully updated {{value}}",

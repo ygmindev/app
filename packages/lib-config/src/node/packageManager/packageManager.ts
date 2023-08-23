@@ -14,7 +14,6 @@ const { _config, config } = defineConfig({
       fromModules('react-native-animatable/createAnimatableComponent.js'),
       fromModules('react-native-reanimated/lib/createAnimatedComponent.js'),
       fromModules('react-native-vector-icons/lib/create-icon-set.js'),
-      fromModules('react-native-vector-icons/lib/create-multi-style-icon-set.js'),
       fromModules('react-native-vector-icons/lib/icon-button.js'),
       fromModules('moti/build/core/use-motify.js'),
       fromModules('moti/src/core/use-motify.ts'),

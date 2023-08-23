@@ -12,5 +12,6 @@ export type TilePropsModel = ChildrenPropsModel &
     isBorder?: boolean;
     onPressTooltip?: TranslatableTextModel;
     preview?: ReactElement;
+    rightElement?: ReactElement;
     title?: TranslatableTextModel;
   };

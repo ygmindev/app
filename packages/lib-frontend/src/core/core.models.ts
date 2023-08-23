@@ -60,15 +60,17 @@ export type PagePropsModel<TType = undefined> = ChildrenPropsModel & {
 
 export type LayoutPropsModel = Pick<
   WrapperPropsModel,
-  | 'p'
-  | 's'
   | 'children'
-  | 'isFullWidth'
   | 'isCenter'
+  | 'isFullWidth'
+  | 'isHorizontalCenter'
   | 'isHorizontalScrollable'
   | 'isRow'
   | 'isRowAlign'
+  | 'isVerticalCenter'
   | 'isVerticalScrollable'
+  | 'p'
+  | 's'
 >;
 
 export type ElementStateModel = `${ELEMENT_STATE}`;
