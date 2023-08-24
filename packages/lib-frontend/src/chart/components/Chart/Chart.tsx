@@ -1,15 +1,22 @@
+import { type ReactElement } from 'react';
+
 import { _Chart } from '#lib-frontend/chart/components/Chart/_Chart';
-import { type _ChartPropsModel } from '#lib-frontend/chart/components/Chart/_Chart.models';
 import { type ChartPropsModel } from '#lib-frontend/chart/components/Chart/Chart.models';
-import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
-import { variableName } from '#lib-shared/core/utils/variableName/variableName';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import { type SFCPropsModel } from '#lib-frontend/core/core.models';
+import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 
-export const Chart = composeComponent<ChartPropsModel, _ChartPropsModel>({
-  Component: _Chart,
-
-  getProps: ({ children }) => ({
-    children,
-  }),
-});
-
-process.env.APP_IS_DEBUG && (Chart.displayName = variableName({ Chart }));
+export const Chart = <TType,>({
+  testID,
+  ...props
+}: SFCPropsModel<ChartPropsModel<TType>>): ReactElement<SFCPropsModel<ChartPropsModel<TType>>> => {
+  const { styles } = useStyles({ props });
+  return (
+    <Wrapper
+      grow
+      style={styles}
+      testID={testID}>
+      <_Chart {...props} />
+    </Wrapper>
+  );
+};

@@ -12,7 +12,7 @@ import { NUMBER_UNIT } from '#lib-frontend/data/hooks/useFormatter/useFormatter.
 import { type BorrowInProgressPagePropsModel } from '#lib-frontend/funding/pages/BorrowInProgressPage/BorrowInProgressPage.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { THEME_COLOR, THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
+import { THEME_COLOR, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const BorrowInProgressPage: SFCModel<BorrowInProgressPagePropsModel> = ({
@@ -39,7 +39,7 @@ export const BorrowInProgressPage: SFCModel<BorrowInProgressPagePropsModel> = ({
 
             <Chip color={THEME_COLOR.ERROR}>5</Chip>
 
-            <Text fontSize={THEME_SIZE_MORE.SMALL}>quotes</Text>
+            <Text fontSize={THEME_SIZE.SMALL}>quotes</Text>
           </Wrapper>
         }
         title={t('funding:refinancing')}>
@@ -72,7 +72,7 @@ export const BorrowInProgressPage: SFCModel<BorrowInProgressPagePropsModel> = ({
             s={THEME_SIZE.SMALL}>
             <Chip color={THEME_COLOR.ERROR}>7</Chip>
 
-            <Text fontSize={THEME_SIZE_MORE.SMALL}>quotes</Text>
+            <Text fontSize={THEME_SIZE.SMALL}>quotes</Text>
           </Wrapper>
         }
         title={t('funding:gcp')}>

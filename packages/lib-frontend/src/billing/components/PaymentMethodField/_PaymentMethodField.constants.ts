@@ -1,7 +1,7 @@
 import { type BaseStripeElementsOptions } from '@stripe/stripe-js';
 
 import { type UseThemeModel } from '#lib-frontend/style/hooks/useTheme/useTheme.models';
-import { THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
+import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 
 export const STRIPE_ELEMENTS_STYLE: (theme: UseThemeModel) => BaseStripeElementsOptions = (
   theme,
@@ -19,7 +19,7 @@ export const STRIPE_ELEMENTS_STYLE: (theme: UseThemeModel) => BaseStripeElements
     },
     theme: 'flat',
     variables: {
-      borderRadius: `${theme.shape.borderRadius}px`,
+      borderRadius: `${theme.shape.borderRadius[THEME_SIZE.MEDIUM]}px`,
       colorBackground: theme.color.palette.surface.muted,
       colorDanger: theme.color.palette.error.main,
       colorPrimary: theme.color.palette.primary.main,
@@ -28,7 +28,7 @@ export const STRIPE_ELEMENTS_STYLE: (theme: UseThemeModel) => BaseStripeElements
       colorTextPlaceholder: theme.color.border,
       colorWarningText: theme.color.palette.warning.main,
       fontFamily: theme.font.fontFamily.main,
-      fontSizeBase: `${theme.font.size[THEME_SIZE_MORE.MEDIUM]}px`,
+      fontSizeBase: `${theme.font.size[THEME_SIZE.MEDIUM]}px`,
     },
   },
 });

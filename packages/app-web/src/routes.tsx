@@ -3,6 +3,7 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { COMPLETED, HOME, IN_PROGRESS, SUMMARY } from '#lib-frontend/core/core.constants';
 import { BORROW, FUNDING, QUOTES } from '#lib-frontend/funding/funding.constants';
 import { BorrowInProgressPage } from '#lib-frontend/funding/pages/BorrowInProgressPage/BorrowInProgressPage';
+import { FundingSummaryPage } from '#lib-frontend/funding/pages/FundingSummaryPage/FundingSummaryPage';
 import { QuotesPage } from '#lib-frontend/funding/pages/QuotesPage/QuotesPage';
 import { TabNavigator } from '#lib-frontend/route/components/TabNavigator/TabNavigator';
 import { type RouteModel } from '#lib-frontend/route/route.models';
@@ -28,7 +29,7 @@ export const routes: Array<RouteModel> = getRoutes({
           pathname: FUNDING,
           routes: [
             {
-              element: <Wrapper />,
+              element: <FundingSummaryPage />,
               icon: 'document',
               pathname: SUMMARY,
               title: ({ t }) => t('core:summary'),

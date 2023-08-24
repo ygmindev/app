@@ -18,7 +18,7 @@ import {
   THEME_COLOR,
   THEME_COLOR_MORE,
   THEME_ROLE,
-  THEME_SIZE_MORE,
+  THEME_SIZE,
 } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { BOOLEAN_STRING } from '#lib-shared/core/core.constants';
@@ -57,7 +57,7 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
     containerHeight,
     containerWidth,
   } = useMemo(() => {
-    const containerHeight = theme.shape.size[THEME_SIZE_MORE.SMALL];
+    const containerHeight = theme.shape.size[THEME_SIZE.SMALL];
     const childSize = containerHeight - SWITCH_FIELD_OFFSET * 2;
     return {
       childActiveLeft: SWITCH_FIELD_OFFSET + SWITCH_FIELD_WIDTH - containerHeight,

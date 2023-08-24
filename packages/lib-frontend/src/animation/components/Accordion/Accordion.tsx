@@ -12,7 +12,7 @@ import {
 } from '#lib-frontend/core/core.models';
 import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
+import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 
 export const Accordion: SFCModel<AccordionPropsModel> = ({
@@ -46,7 +46,7 @@ export const Accordion: SFCModel<AccordionPropsModel> = ({
         isRowAlign
         justify={FLEX_JUSTIFY.SPACE_BETWEEN}
         onPress={handleToggle}>
-        {label && <Text fontSize={THEME_SIZE_MORE.LARGE}>{label}</Text>}
+        {label && <Text fontSize={THEME_SIZE.LARGE}>{label}</Text>}
 
         <RotatableIcon
           directionActive={DIRECTION.BOTTOM}

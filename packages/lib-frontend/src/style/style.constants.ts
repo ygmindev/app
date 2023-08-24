@@ -7,12 +7,7 @@ export enum THEME_COLOR {
 }
 
 export enum THEME_COLOR_MORE {
-  ERROR = 'error',
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
-  SUCCESS = 'success',
   SURFACE = 'surface',
-  WARNING = 'warning',
 }
 
 export enum THEME_ROLE {
@@ -29,9 +24,6 @@ export enum THEME_SIZE {
 }
 
 export enum THEME_SIZE_MORE {
-  LARGE = 'l',
-  MEDIUM = 'm',
-  SMALL = 's',
   XLARGE = 'xl',
   XSMALL = 'xs',
 }

@@ -14,7 +14,7 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
+import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import {
   type LibraryPropsModel,
@@ -83,7 +83,7 @@ export const Library = <TProps,>({
                 renderer: ({ value }) => (
                   <Text
                     family={FONT_FAMILY.CODE}
-                    fontSize={THEME_SIZE_MORE.SMALL}>
+                    fontSize={THEME_SIZE.SMALL}>
                     {value as string}
                   </Text>
                 ),
@@ -93,7 +93,7 @@ export const Library = <TProps,>({
                 renderer: ({ value }) => (
                   <Text
                     family={FONT_FAMILY.CODE}
-                    fontSize={THEME_SIZE_MORE.SMALL}>
+                    fontSize={THEME_SIZE.SMALL}>
                     {value as string}
                   </Text>
                 ),
@@ -143,12 +143,12 @@ export const Library = <TProps,>({
                   {map(variantProps as object, (v, k) => (
                     <Wrapper key={k}>
                       <Text
-                        fontSize={THEME_SIZE_MORE.SMALL}
+                        fontSize={THEME_SIZE.SMALL}
                         isBold>
                         {k}
                       </Text>
 
-                      <Text fontSize={THEME_SIZE_MORE.SMALL}>{typeToString(v)}</Text>
+                      <Text fontSize={THEME_SIZE.SMALL}>{typeToString(v)}</Text>
                     </Wrapper>
                   ))}
                 </Wrapper>

@@ -11,12 +11,7 @@ import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import {
-  THEME_COLOR,
-  THEME_ROLE,
-  THEME_SIZE,
-  THEME_SIZE_MORE,
-} from '#lib-frontend/style/style.constants';
+import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const RadioField = <TType extends string = string>({
@@ -40,7 +35,7 @@ export const RadioField = <TType extends string = string>({
     value,
   });
   const isDisabled = elementState === ELEMENT_STATE.DISABLED;
-  const outerCircleSize = theme.shape.size[THEME_SIZE_MORE.SMALL];
+  const outerCircleSize = theme.shape.size[THEME_SIZE.SMALL];
   const innerCircleSize = outerCircleSize - theme.shape.spacing.s;
 
   return (

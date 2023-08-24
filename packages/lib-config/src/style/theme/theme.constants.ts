@@ -35,11 +35,11 @@ export const THEME_CONFIG = {
     lineHeight: 25,
 
     size: {
-      [THEME_SIZE_MORE.LARGE]: 20,
-      [THEME_SIZE_MORE.MEDIUM]: 14,
-      [THEME_SIZE_MORE.SMALL]: 12,
+      [THEME_SIZE.LARGE]: 20,
+      [THEME_SIZE.MEDIUM]: 14,
+      [THEME_SIZE.SMALL]: 12,
       [THEME_SIZE_MORE.XLARGE]: 34,
-      [THEME_SIZE_MORE.XSMALL]: 10,
+      [THEME_SIZE_MORE.XSMALL]: 8,
     },
 
     weight: {
@@ -89,19 +89,19 @@ export const THEME_CONFIG = {
 
   shape: {
     borderRadius: {
-      [THEME_SIZE_MORE.LARGE]: 30,
+      [THEME_SIZE.LARGE]: 30,
 
-      [THEME_SIZE_MORE.MEDIUM]: 20,
+      [THEME_SIZE.MEDIUM]: 20,
 
-      [THEME_SIZE_MORE.SMALL]: 8,
+      [THEME_SIZE.SMALL]: 8,
     },
 
     size: {
-      [THEME_SIZE_MORE.LARGE]: 52,
+      [THEME_SIZE.LARGE]: 52,
 
-      [THEME_SIZE_MORE.MEDIUM]: 47,
+      [THEME_SIZE.MEDIUM]: 47,
 
-      [THEME_SIZE_MORE.SMALL]: 32,
+      [THEME_SIZE.SMALL]: 32,
 
       [THEME_SIZE_MORE.XLARGE]: 60,
 
@@ -109,11 +109,11 @@ export const THEME_CONFIG = {
     },
 
     spacing: {
-      [THEME_SIZE_MORE.LARGE]: 28,
+      [THEME_SIZE.LARGE]: 28,
 
-      [THEME_SIZE_MORE.MEDIUM]: 16,
+      [THEME_SIZE.MEDIUM]: 16,
 
-      [THEME_SIZE_MORE.SMALL]: 8,
+      [THEME_SIZE.SMALL]: 8,
     },
   },
 } satisfies PartialDeepModel<ThemeConfigModel>;

@@ -129,6 +129,7 @@
     "react-ssr-prepass": "^1.5.0",
     "react-streaming": "^0.3.14",
     "react-use": "^17.4.0",
+    "recharts": "^2.7.3",
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
     "redux-persist-cookie-storage": "^1.0.0",
@@ -143,8 +144,6 @@
     "typedi": "^0.10.0",
     "typeorm": "^0.3.17",
     "uuid": "^9.0.0",
-    "victory": "^36.6.11",
-    "victory-native": "^36.6.11",
     "vite-plugin-ssr": "^0.4.133",
     "winston": "^3.10.0"
   },

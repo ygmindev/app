@@ -2,6 +2,7 @@ import { type TextStyle } from 'react-native';
 import { type MD3Theme } from 'react-native-paper';
 
 import {
+  type ThemeColorModel,
   type ThemeColorMoreModel,
   type ThemeRoleModel,
   type ThemeSizeModel,
@@ -21,7 +22,7 @@ export type ThemeConfigModel = {
 
     isDark?: boolean;
 
-    palette: Record<ThemeColorMoreModel, Record<ThemeRoleModel, string>>;
+    palette: Record<ThemeColorModel | ThemeColorMoreModel, Record<ThemeRoleModel, string>>;
   };
 
   font: {
@@ -29,7 +30,7 @@ export type ThemeConfigModel = {
 
     lineHeight: number;
 
-    size: Record<ThemeSizeMoreModel, number>;
+    size: Record<ThemeSizeModel | ThemeSizeMoreModel, number>;
 
     weight: {
       bold: TextStyle['fontWeight'];
@@ -67,7 +68,7 @@ export type ThemeConfigModel = {
   shape: {
     borderRadius: Record<ThemeSizeModel, number>;
 
-    size: Record<ThemeSizeMoreModel, number>;
+    size: Record<ThemeSizeModel | ThemeSizeMoreModel, number>;
 
     spacing: Record<ThemeSizeModel, number>;
   };

@@ -3,12 +3,7 @@ import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import {
-  THEME_COLOR,
-  THEME_ROLE,
-  THEME_SIZE,
-  THEME_SIZE_MORE,
-} from '#lib-frontend/style/style.constants';
+import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
 
 export const Chip: SFCModel<ChipPropsModel> = ({
   children,
@@ -28,7 +23,7 @@ export const Chip: SFCModel<ChipPropsModel> = ({
       <Text
         color={color}
         colorRole={THEME_ROLE.CONTRAST}
-        fontSize={THEME_SIZE_MORE.SMALL}
+        fontSize={THEME_SIZE.SMALL}
         isBold>
         {children}
       </Text>

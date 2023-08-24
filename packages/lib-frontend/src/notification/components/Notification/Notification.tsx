@@ -15,12 +15,7 @@ import { type NotificationPropsModel } from '#lib-frontend/notification/componen
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import {
-  THEME_COLOR,
-  THEME_ROLE,
-  THEME_SIZE,
-  THEME_SIZE_MORE,
-} from '#lib-frontend/style/style.constants';
+import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
@@ -92,7 +87,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
         <Icon
           color={color}
           colorRole={THEME_ROLE.CONTRAST}
-          fontSize={THEME_SIZE_MORE.LARGE}
+          fontSize={THEME_SIZE.LARGE}
           icon={icon}
         />
 
@@ -100,7 +95,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
           basis={0}
           grow
           isWrap
-          s={THEME_SIZE_MORE.SMALL}>
+          s={THEME_SIZE.SMALL}>
           {title && (
             <Text
               color={color}
