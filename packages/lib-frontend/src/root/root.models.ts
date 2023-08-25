@@ -1,4 +1,4 @@
-import { type QueryContextModel } from '#lib-frontend/data/query.models';
+import { type QueryContextModel } from '#lib-frontend/data/data.models';
 import { type LocaleContextModel } from '#lib-frontend/locale/locale.models';
 import { type RootStateContextModel } from '#lib-frontend/root/stores/rootStore.models';
 import { type RouteContextModel } from '#lib-frontend/route/route.models';

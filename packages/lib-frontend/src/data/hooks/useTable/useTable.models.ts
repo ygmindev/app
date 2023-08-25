@@ -1,5 +1,4 @@
-import { type ReactNode } from 'react';
-
+import { type DataFormatterModel, type DataRendererModel } from '#lib-frontend/data/data.models';
 import {
   type _UseTableModel,
   type _UseTableParamsModel,
@@ -23,19 +22,12 @@ export type TableSortTypeModel = `${TABLE_SORT_TYPE}`;
 
 export type TableColumnModel<TType, TKey extends StringKeyModel<TType>> = WithIdModel<TKey> & {
   align?: FontAlignModel;
-  formatter?: TableColumnFormatterModel<TType, TKey>;
+  formatter?: DataFormatterModel<TType, TKey>;
   label?: TranslatableTextModel;
-  renderer?: TableColumnRendererModel<TType>;
+  renderer?: DataRendererModel<TType>;
   sort?: TableSortTypeModel | boolean;
   width?: number;
 };
-
-export type TableColumnRendererModel<TType> = (params: { row: TType; value?: string }) => ReactNode;
-
-export type TableColumnFormatterModel<TType, TKey extends StringKeyModel<TType>> = (params: {
-  row: TType;
-  value: TType[TKey];
-}) => string;
 
 export type TableRenderModel<TType> = Pick<
   TableColumnModel<TType, StringKeyModel<TType>>,

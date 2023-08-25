@@ -19,6 +19,7 @@ export const routes: Array<RouteModel> = getRoutes({
       pathname: '/',
       routes: [
         {
+          element: <Wrapper />,
           icon: 'home',
           pathname: HOME,
           title: ({ t }) => t('core:home'),

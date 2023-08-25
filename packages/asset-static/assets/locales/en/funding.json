@@ -3,6 +3,7 @@
   "borrow": "borrow",
   "cp": "commerical paper",
   "funding": "funding",
+  "fundingCost": "funding cost",
   "gcp": "general corporate purpose",
   "maturity": "maturity",
   "quoted": "quoted {{value}}",

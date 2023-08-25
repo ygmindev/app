@@ -1,27 +1,36 @@
-import { Chart } from '#lib-frontend/chart/components/Chart/Chart';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import { random, range } from 'lodash';
+
 import { type SFCModel } from '#lib-frontend/core/core.models';
+import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
+import { Chart } from '#lib-frontend/data/components/Chart/Chart';
 import { type FundingSummaryPagePropsModel } from '#lib-frontend/funding/pages/FundingSummaryPage/FundingSummaryPage.models';
+import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 
 export const FundingSummaryPage: SFCModel<FundingSummaryPagePropsModel> = ({
   testID,
   ...props
 }) => {
+  const { t } = useTranslation();
   const { styles } = useStyles({ props });
   return (
-    <Wrapper
-      grow
+    <MainLayout
+      isHorizontalCenter
+      p
       style={styles}
       testID={testID}>
       <Chart
-        data={[
-          { x: 1, y: 1, z: 2 },
-          { x: 2, y: 3, z: 4 },
-        ]}
+        data={range(0, 30).map((i) => ({
+          '10y': random(6, 8, true),
+          '2y': random(2, 3, true),
+          '30y': random(8, 10, true),
+          '3y': random(3, 5, true),
+          '5y': random(4, 6, true),
+        }))}
         gradientStep={10}
-        series={[{ id: 'y' }, { id: 'z' }]}
+        series={[{ id: '2y' }, { id: '3y' }, { id: '5y' }, { id: '10y' }, { id: '30y' }]}
+        title={t('funding:fundingCost')}
       />
-    </Wrapper>
+    </MainLayout>
   );
 };
