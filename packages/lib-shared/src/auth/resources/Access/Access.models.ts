@@ -10,11 +10,11 @@ export type AccessRoleModel = `${ACCESS_ROLE}`;
 
 export type AccessLevelModel = `${ACCESS_LEVEL}`;
 
-export type AccessModel = {
+export type AccessModel = EntityResourceModel & {
   _uid: string;
   role: AccessRoleModel;
   user?: ResolvedFieldModel<UserModel>;
-} & EntityResourceModel;
+};
 
 export type AccessFormModel = {
   _uid: string;

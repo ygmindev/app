@@ -1,11 +1,11 @@
-import { type PhoneNumberModel } from '#lib-shared/locale/locale.models';
+import { type PhoneNumberValueModel } from '#lib-shared/locale/locale.models';
 import { phoneParse } from '#lib-shared/locale/utils/phoneParse/phoneParse';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ phoneParse });
 
 describe(displayName, () => {
-  const TEST_VALUE: PhoneNumberModel = {
+  const TEST_VALUE: PhoneNumberValueModel = {
     callingCode: '1',
     extension: undefined,
     phone: '9171234567',

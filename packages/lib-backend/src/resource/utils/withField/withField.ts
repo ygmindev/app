@@ -1,5 +1,5 @@
 import { ArrayType, Embedded, Index, PrimaryKey, Property } from '@mikro-orm/core';
-import { Field } from 'type-graphql';
+import { Field, Float } from 'type-graphql';
 import { type ReturnTypeFuncValue } from 'type-graphql/dist/decorators/types';
 
 import {
@@ -24,7 +24,7 @@ const getField = <TType extends unknown>({
     case FIELD_TYPE.DATE:
       return Field(() => (isArray ? [Date] : Date));
     case FIELD_TYPE.NUMBER:
-      return Field(() => (isArray ? [Number] : Number));
+      return Field(() => (isArray ? [Float] : Float));
     default:
       return Field(() => (isArray ? [String] : String));
   }

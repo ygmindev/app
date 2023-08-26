@@ -11,7 +11,7 @@ import {
 import { type LINKED_USER_RESOURCE_NAME } from '#lib-shared/user/resources/LinkedUser/LinkedUser.constants';
 import { type LinkedUserModel } from '#lib-shared/user/resources/LinkedUser/LinkedUser.models';
 
-export type UserModel = {
+export type UserModel = EntityResourceModel & {
   [BANK_RESOURCE_NAME]?: Array<BankModel>;
 
   [CARD_RESOURCE_NAME]?: Array<CardModel>;
@@ -31,6 +31,6 @@ export type UserModel = {
   paymentMethodPrimary?: string;
 
   phone?: string;
-} & EntityResourceModel;
+};
 
 export type UserFormModel = EntityResourceDataModel<UserModel>;

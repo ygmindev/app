@@ -1,3 +1,8 @@
+export enum FORM_MODE {
+  NEW = 'new',
+  UPDATE = 'update',
+}
+
 export enum FIELD_TYPE {
   BOOLEAN = 'Boolean',
   DATE = 'Date',

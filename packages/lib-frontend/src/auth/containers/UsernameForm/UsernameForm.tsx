@@ -22,11 +22,12 @@ import { CountryField } from '#lib-frontend/locale/components/CountryField/Count
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { PhoneField } from '#lib-frontend/user/components/PhoneField/PhoneField';
-import { SIGN_IN_METHOD, SIGN_IN_MODE } from '#lib-shared/auth/auth.constants';
+import { SIGN_IN_METHOD } from '#lib-shared/auth/auth.constants';
 import { type SignInMethodModel } from '#lib-shared/auth/auth.models';
 import { type OtpFormModel, type OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
 import { pick } from '#lib-shared/core/utils/pick/pick';
 import { withId } from '#lib-shared/core/utils/withId/withId';
+import { FORM_MODE } from '#lib-shared/form/form.constants';
 import { type HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
 
@@ -48,7 +49,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
     value: method,
   });
 
-  const checkExists = mode === SIGN_IN_MODE.UPDATE;
+  const checkExists = mode === FORM_MODE.UPDATE;
 
   const handleSubmit = async (data: UsernameFormModel): Promise<OtpModel | null> => {
     onSubmit && (await onSubmit(data));
@@ -92,7 +93,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
     <FormContainer
       autoFocus={valueControlled}
       bottomElement={
-        mode === SIGN_IN_MODE.UPDATE
+        mode === FORM_MODE.UPDATE
           ? undefined
           : ({ elementState }) => (
               <Wrapper s>

@@ -9,6 +9,7 @@ import { IssuerResolver } from '#lib-backend/capital/resources/Issuer/IssuerReso
 import { UnderwriterResolver } from '#lib-backend/capital/resources/Underwriter/UnderwriterResolver/UnderwriterResolver';
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
+import { FundingResolver } from '#lib-backend/funding/resources/Funding/FundingResolver/FundingResolver';
 import { SnapshotResolver } from '#lib-backend/test/resources/Snapshot/SnapshotResolver/SnapshotResolver';
 import { LinkedUserResolver } from '#lib-backend/user/resources/LinkedUser/LinkedUserResolver/LinkedUserResolver';
 import { UserResolver } from '#lib-backend/user/resources/User/UserResolver/UserResolver';
@@ -29,6 +30,7 @@ const { _config, config } = defineConfig({
         AccessResolver,
         BankResolver,
         CardResolver,
+        FundingResolver,
         LinkedUserResolver,
         OtpResolver,
         PaymentMethodResolver,

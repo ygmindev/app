@@ -29,8 +29,9 @@ import { AccountPage } from '#lib-frontend/user/pages/AccountPage/AccountPage';
 import { NameFormPage } from '#lib-frontend/user/pages/NameFormPage/NameFormPage';
 import { PersonalPage } from '#lib-frontend/user/pages/PersonalPage/PersonalPage';
 import { EMAIL, NAME, PERSONAL, PHONE } from '#lib-frontend/user/user.constants';
-import { AUTH, SIGN_IN_METHOD, SIGN_IN_MODE } from '#lib-shared/auth/auth.constants';
+import { AUTH, SIGN_IN_METHOD } from '#lib-shared/auth/auth.constants';
 import { CORE } from '#lib-shared/core/core.constants';
+import { FORM_MODE } from '#lib-shared/form/form.constants';
 import { PING } from '#lib-shared/http/http.constants';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 import { BRIGHTNESS, STYLE } from '#lib-shared/style/style.constants';
@@ -73,7 +74,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                   element: (
                     <SignInPage
                       method={SIGN_IN_METHOD.EMAIL}
-                      mode={SIGN_IN_MODE.UPDATE}
+                      mode={FORM_MODE.UPDATE}
                     />
                   ),
                   pathname: EMAIL,
@@ -83,7 +84,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                   element: (
                     <SignInPage
                       method={SIGN_IN_METHOD.PHONE}
-                      mode={SIGN_IN_MODE.UPDATE}
+                      mode={FORM_MODE.UPDATE}
                     />
                   ),
                   pathname: PHONE,
@@ -130,7 +131,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
         }),
 
         {
-          element: <SignInPage mode={SIGN_IN_MODE.SIGN_IN} />,
+          element: <SignInPage mode={FORM_MODE.NEW} />,
           ns: [AUTH],
           pathname: SIGN_IN,
         },

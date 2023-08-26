@@ -3,8 +3,8 @@ import {
   type EntityResourceModel,
 } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
-export type UnderwriterModel = {
+export type UnderwriterModel = EntityResourceModel & {
   name: string;
-} & EntityResourceModel;
+};
 
 export type UnderwriterFormModel = EntityResourceDataModel<UnderwriterModel>;

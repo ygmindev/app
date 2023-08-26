@@ -1,8 +1,7 @@
-import { useMemo } from 'react';
-
+import { OtpForm } from '#lib-frontend/auth/containers/OtpForm/OtpForm';
 import { type OtpFormModel } from '#lib-frontend/auth/containers/OtpForm/OtpForm.models';
-import { SIGN_IN_FORM_STEPS } from '#lib-frontend/auth/containers/SignInForm/SignInForm.constants';
 import { type SignInFormPropsModel } from '#lib-frontend/auth/containers/SignInForm/SignInForm.models';
+import { UsernameForm } from '#lib-frontend/auth/containers/UsernameForm/UsernameForm';
 import { type UsernameFormModel } from '#lib-frontend/auth/containers/UsernameForm/UsernameForm.models';
 import { useSignInResource } from '#lib-frontend/auth/hooks/useSignInResource/useSignInResource';
 import { Text } from '#lib-frontend/core/components/Text/Text';
@@ -13,8 +12,8 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { SIGN_IN_MODE } from '#lib-shared/auth/auth.constants';
 import { type SignInFormModel } from '#lib-shared/auth/resources/SignIn/SignIn.models';
+import { FORM_MODE } from '#lib-shared/form/form.constants';
 
 export const SignInForm: SFCModel<SignInFormPropsModel> = ({
   method,
@@ -27,18 +26,27 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({
   const { signIn, usernameUpdate } = useSignInResource();
 
   const handleSubmit = async (form: SignInFormModel): Promise<void> =>
-    mode === SIGN_IN_MODE.SIGN_IN ? signIn(form) : usernameUpdate(form);
-
-  const steps = useMemo(() => SIGN_IN_FORM_STEPS({ method, mode }), [method, mode]);
+    mode === FORM_MODE.NEW ? signIn(form) : usernameUpdate(form);
 
   return (
     <StepForm<SignInFormModel, [UsernameFormModel, OtpFormModel]>
       {...props}
       onSubmit={handleSubmit}
       onSuccess={async () => replace({ pathname: redirectTo ?? '/' })}
-      steps={steps}
+      steps={[
+        {
+          element: (
+            <UsernameForm
+              method={method}
+              mode={mode}
+            />
+          ),
+          id: 'username',
+        },
+        { element: <OtpForm />, id: 'otp' },
+      ]}
       topElement={
-        mode === SIGN_IN_MODE.UPDATE ? undefined : (
+        mode === FORM_MODE.UPDATE ? undefined : (
           <Wrapper
             isCenter
             s>
@@ -51,6 +59,7 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({
             </Text>
           </Wrapper>
         )
-      }></StepForm>
+      }
+    />
   );
 };
