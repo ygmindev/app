@@ -15,4 +15,4 @@ export type RangeModel<TType> = {
   value?: TType;
 };
 
-export type RelativeDateModel = { unit: string; value: number };
+export type ScaledNumberModel = { unit?: string; value: number };

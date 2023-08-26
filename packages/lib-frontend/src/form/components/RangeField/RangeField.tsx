@@ -1,6 +1,7 @@
 import { type ReactElement } from 'react';
 
 import { RadioField } from '#lib-frontend/core/components/RadioField/RadioField';
+import { Slider } from '#lib-frontend/core/components/Slider/Slider';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { type RangeFieldPropsModel } from '#lib-frontend/form/components/RangeField/RangeField.models';
@@ -31,10 +32,13 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({ label, testID, type
   };
 
   return (
-    <Wrapper
-      {...wrapperProps}
-      border
-      round>
+    <Wrapper {...wrapperProps}>
+      <Slider
+        lower={0}
+        step={1}
+        upper={10}
+      />
+
       <RadioField
         isHorizontal
         onChange={rangeSet}

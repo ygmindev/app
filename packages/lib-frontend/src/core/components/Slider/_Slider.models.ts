@@ -1,3 +1,20 @@
-import { type EmptyObjectModel } from '#lib-shared/core/core.models';
+import { type IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
+import { type ValuePropsModel } from '#lib-frontend/core/core.models';
 
-export type _SliderPropsModel = EmptyObjectModel;
+export type _SliderPropsModel = ValuePropsModel<number> & {
+  backgroundColor: string;
+  defaultValueMax?: number;
+  fontColor: string;
+  isDisabled?: boolean;
+  isRange?: boolean;
+  lower: number;
+  markerColor: string;
+  markerSize: number;
+  max?: number;
+  maxIcon: IconPropsModel['icon'];
+  minIcon: IconPropsModel['icon'];
+  onChangeMax?(value: number): void;
+  step: number;
+  upper: number;
+  valueIcon: IconPropsModel['icon'];
+};

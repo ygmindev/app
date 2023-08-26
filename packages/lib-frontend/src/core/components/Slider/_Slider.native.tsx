@@ -1,12 +1,13 @@
+// TODO: react native slider
+import { type MultiSliderProps } from '@ptomasroos/react-native-multi-slider';
+
 import { type _SliderPropsModel } from '#lib-frontend/core/components/Slider/_Slider.models';
-import { type SliderProps } from 'Slider';
-import { Slider } from 'Slider';
 import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
 
-export const _Slider = composeComponent<_SliderPropsModel, SliderProps>({
-  Component: Slider,
+export const _Slider = composeComponent<_SliderPropsModel, MultiSliderProps>({
+  Component: MultiSlider,
 
-  getProps: ({ children }) => ({
-    children,
+  getProps: ({ values }) => ({
+    values,
   }),
 });

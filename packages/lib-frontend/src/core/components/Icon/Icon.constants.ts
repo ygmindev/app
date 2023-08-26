@@ -26,6 +26,7 @@ export const IONIC_ICONS = {
   check: 'checkmark-outline',
   checkCircle: 'checkmark-circle-outline',
   chevronDown: 'chevron-down-outline',
+  chevronHorizontal: 'code-outline',
   chevronLeft: 'chevron-back-outline',
   chevronRight: 'chevron-forward-outline',
   chevronUp: 'chevron-up-outline',

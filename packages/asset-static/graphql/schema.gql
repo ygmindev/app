@@ -655,18 +655,18 @@ input FilterInput {
 
 type Funding {
   _id: String
-  amount: [NumberRange]
+  amount: [ScaledNumberRange]
   created: DateTime
   currency: String
-  maturity: [RelativeDateRange]
+  maturity: [ScaledNumberRange]
 }
 
 input FundingCreateFormInput {
   _id: String
-  amount: [NumberRangeInput]
+  amount: [ScaledNumberRangeInput]
   created: DateTime
   currency: String
-  maturity: [RelativeDateRangeInput]
+  maturity: [ScaledNumberRangeInput]
 }
 
 input FundingCreateInput {
@@ -731,10 +731,10 @@ type FundingUpdateOutput {
 
 input FundingUpdateUpdateInput {
   _id: String
-  amount: [NumberRangeInput]
+  amount: [ScaledNumberRangeInput]
   created: DateTime
   currency: String
-  maturity: [RelativeDateRangeInput]
+  maturity: [ScaledNumberRangeInput]
 }
 
 type Issuer {
@@ -1117,16 +1117,6 @@ type Mutation {
   UserUpdate(input: UserUpdateInput): UserUpdateOutput
 }
 
-type NumberRange {
-  max: Float
-  value: Float
-}
-
-input NumberRangeInput {
-  max: Float
-  value: Float
-}
-
 type Otp {
   _id: String
   callingCode: String
@@ -1336,24 +1326,24 @@ type Query {
   UserGetMany(input: UserGetManyInput): UserGetManyOutput
 }
 
-type RelativeDate {
+type ScaledNumber {
   unit: String
   value: Float
 }
 
-input RelativeDateInput {
+input ScaledNumberInput {
   unit: String
   value: Float
 }
 
-type RelativeDateRange {
-  max: RelativeDate
-  value: RelativeDate
+type ScaledNumberRange {
+  max: ScaledNumber
+  value: ScaledNumber
 }
 
-input RelativeDateRangeInput {
-  max: RelativeDateInput
-  value: RelativeDateInput
+input ScaledNumberRangeInput {
+  max: ScaledNumberInput
+  value: ScaledNumberInput
 }
 
 type SignIn {
