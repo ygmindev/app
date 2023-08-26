@@ -29,8 +29,13 @@ export const Slider: LFCModel<SliderPropsModel> = ({
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
-  const {} = useValueControlled({ defaultValue, onChange, value });
-  const {} = useValueControlled({ defaultValue: defaultMax, onChange: onChangeMax, value: max });
+  const { valueControlled, valueControlledSet } = useValueControlled<number>({
+    defaultValue,
+    onChange,
+    value,
+  });
+  const { valueControlled: maxControlled, valueControlledSet: maxControlledSet } =
+    useValueControlled<number>({ defaultValue: defaultMax, onChange: onChangeMax, value: max });
   return (
     <Wrapper
       {...wrapperProps}
@@ -43,10 +48,14 @@ export const Slider: LFCModel<SliderPropsModel> = ({
         lower={lower}
         markerColor={theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN]}
         markerSize={theme.shape.size[THEME_SIZE.SMALL]}
+        max={maxControlled}
         maxIcon="chevronRight"
         minIcon="chevronLeft"
+        onChange={valueControlledSet}
+        onChangeMax={maxControlledSet}
         step={step}
         upper={upper}
+        value={valueControlled}
         valueIcon="chevronHorizontal"
       />
     </Wrapper>

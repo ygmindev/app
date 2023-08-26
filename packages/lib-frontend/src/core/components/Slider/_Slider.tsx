@@ -26,55 +26,50 @@ export const _Slider: SFCModel<_SliderPropsModel> = ({
   upper,
   value,
   valueIcon,
-}) => {
-  console.warn(value);
-  console.warn(isRange ? [value ?? lower, max ?? upper] : value);
-  return (
-    <Slider
-      allowCross={false}
-      disabled={isDisabled}
-      dots
-      handleRender={(original, { index }) =>
-        cloneElement<ChildrenPropsModel>(original as unknown as ReactElement<ChildrenPropsModel>, {
-          children: (
-            <Wrapper
-              isAbsoluteFill
-              isCenter
-              m="auto"
-              zIndex>
-              <Icon
-                color={fontColor}
-                icon={isRange ? (index ? maxIcon : minIcon) : valueIcon}
-              />
-            </Wrapper>
-          ),
-        })
+}) => (
+  <Slider
+    allowCross={false}
+    disabled={isDisabled}
+    handleRender={(original, { index }) =>
+      cloneElement<ChildrenPropsModel>(original as unknown as ReactElement<ChildrenPropsModel>, {
+        children: (
+          <Wrapper
+            isAbsoluteFill
+            isCenter
+            m="auto"
+            zIndex>
+            <Icon
+              color={fontColor}
+              icon={isRange ? (index ? maxIcon : minIcon) : valueIcon}
+            />
+          </Wrapper>
+        ),
+      })
+    }
+    handleStyle={{
+      backgroundColor: markerColor,
+      border: 'none',
+      boxShadow: 'none',
+      height: markerSize,
+      opacity: 1.0,
+      width: markerSize,
+    }}
+    max={upper}
+    min={lower}
+    onChange={(v) => {
+      if (isArray(v)) {
+        onChange && onChange(v[0]);
+        onChangeMax && onChangeMax(v[1]);
+      } else {
+        onChange && onChange(v);
       }
-      handleStyle={{
-        backgroundColor: markerColor,
-        border: 'none',
-        boxShadow: 'none',
-        height: markerSize,
-        opacity: 1.0,
-        width: markerSize,
-      }}
-      max={upper}
-      min={lower}
-      onChange={(v) => {
-        if (isArray(v)) {
-          onChange && onChange(v[0]);
-          onChangeMax && onChangeMax(v[1]);
-        } else {
-          onChange && onChange(v);
-        }
-      }}
-      railStyle={{ backgroundColor, bottom: 0, margin: 'auto', top: 0 }}
-      range={isRange}
-      step={step}
-      style={{ height: markerSize }}
-      tabIndex={2}
-      trackStyle={{ backgroundColor: markerColor, bottom: 0, margin: 'auto', top: 0 }}
-      value={isRange ? [value ?? lower, max ?? upper] : value}
-    />
-  );
-};
+    }}
+    railStyle={{ backgroundColor, bottom: 0, margin: 'auto', top: 0 }}
+    range={isRange}
+    step={step}
+    style={{ height: markerSize }}
+    tabIndex={2}
+    trackStyle={{ backgroundColor: markerColor, bottom: 0, margin: 'auto', top: 0 }}
+    value={isRange ? [value ?? lower, max ?? upper] : value}
+  />
+);
