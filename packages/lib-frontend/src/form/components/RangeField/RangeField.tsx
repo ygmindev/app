@@ -8,6 +8,7 @@ import { type RangeFieldPropsModel } from '#lib-frontend/form/components/RangeFi
 import { TextField } from '#lib-frontend/form/components/TextField/TextField';
 import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FIELD_TYPE, FIELD_TYPE_MORE } from '#lib-shared/form/form.constants';
 
 export const RangeField: LFCModel<RangeFieldPropsModel> = ({ label, type, ...props }) => {
@@ -32,7 +33,22 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({ label, type, ...pro
   };
 
   return (
-    <Wrapper {...wrapperProps}>
+    <Wrapper
+      {...wrapperProps}
+      pHorizontal
+      s={THEME_SIZE.SMALL}>
+      <Wrapper isHorizontalCenter>
+        <RadioField
+          isHorizontal
+          onChange={rangeSet}
+          options={[
+            { icon: 'target', id: 'exact', label: ({ t }) => t('core:exact') },
+            { icon: 'range', id: 'range', label: ({ t }) => t('core:range') },
+          ]}
+          value={range}
+        />
+      </Wrapper>
+
       <Slider
         isRange={range === 'range'}
         lower={0}
@@ -40,17 +56,11 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({ label, type, ...pro
         upper={10}
       />
 
-      <RadioField
-        isHorizontal
-        onChange={rangeSet}
-        options={[
-          { icon: 'target', id: 'exact', label: ({ t }) => t('core:exact') },
-          { icon: 'range', id: 'range', label: ({ t }) => t('core:range') },
-        ]}
-        value={range}
-      />
-
-      {range === 'range' ? null : getFieldElement()}
+      <Wrapper
+        isHorizontalCenter
+        isRowAlign>
+        {range === 'range' ? getFieldElement() : getFieldElement()}
+      </Wrapper>
     </Wrapper>
   );
 };

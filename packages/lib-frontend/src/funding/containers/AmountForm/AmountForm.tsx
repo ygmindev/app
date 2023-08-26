@@ -4,5 +4,10 @@ import { type AmountFormPropsModel } from '#lib-frontend/funding/containers/Amou
 import { FIELD_TYPE_MORE } from '#lib-shared/form/form.constants';
 
 export const AmountForm: SFCModel<AmountFormPropsModel> = ({ testID, ...props }) => {
-  return <RangeField type={FIELD_TYPE_MORE.NUMBER_POSITIVE} />;
+  return (
+    <RangeField
+      label={({ t }) => t('funding:amount')}
+      type={FIELD_TYPE_MORE.NUMBER_POSITIVE}
+    />
+  );
 };

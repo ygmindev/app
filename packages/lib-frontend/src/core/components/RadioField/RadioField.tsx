@@ -8,7 +8,6 @@ import { type LFCPropsModel } from '#lib-frontend/core/core.models';
 import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR, THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { FLEX_ALIGN } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 
 export const RadioField = <TType extends string = string>({
   color = THEME_COLOR.PRIMARY,
@@ -31,7 +30,6 @@ export const RadioField = <TType extends string = string>({
   return (
     <Wrapper
       {...wrapperProps}
-      alignSelf={FLEX_ALIGN.FLEX_START}
       border
       isRow={isHorizontal}
       p={THEME_SIZE.SMALL}

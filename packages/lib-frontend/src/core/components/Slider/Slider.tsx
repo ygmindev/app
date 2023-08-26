@@ -37,9 +37,7 @@ export const Slider: LFCModel<SliderPropsModel> = ({
   const { valueControlled: maxControlled, valueControlledSet: maxControlledSet } =
     useValueControlled<number>({ defaultValue: defaultMax, onChange: onChangeMax, value: max });
   return (
-    <Wrapper
-      {...wrapperProps}
-      p>
+    <Wrapper {...wrapperProps}>
       <_Slider
         backgroundColor={theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MUTED]}
         fontColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MAIN]}
