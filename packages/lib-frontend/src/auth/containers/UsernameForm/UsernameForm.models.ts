@@ -9,6 +9,6 @@ export type UsernameFormModel = Pick<UserModel, 'callingCode' | 'phone' | 'email
 
 export type UsernameFormPropsModel = {
   method?: SignInMethodModel;
-  mode: FormModeModel;
+  mode?: FormModeModel;
   onMethodChange?(value: SignInMethodModel): void;
 } & FormStepPropsModel<SignInFormModel, UsernameFormModel, OtpModel>;

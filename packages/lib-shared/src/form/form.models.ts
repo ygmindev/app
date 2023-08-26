@@ -4,4 +4,4 @@ export type FormModeModel = `${FORM_MODE}`;
 
 export type FieldTypeModel = `${FIELD_TYPE}`;
 
-export type RelativeDateInputModel = { unit: string; value: number };
+export type RelativeDateModel = { unit: string; value: number };

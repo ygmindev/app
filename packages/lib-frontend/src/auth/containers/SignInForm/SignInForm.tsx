@@ -1,8 +1,6 @@
 import { OtpForm } from '#lib-frontend/auth/containers/OtpForm/OtpForm';
-import { type OtpFormModel } from '#lib-frontend/auth/containers/OtpForm/OtpForm.models';
 import { type SignInFormPropsModel } from '#lib-frontend/auth/containers/SignInForm/SignInForm.models';
 import { UsernameForm } from '#lib-frontend/auth/containers/UsernameForm/UsernameForm';
-import { type UsernameFormModel } from '#lib-frontend/auth/containers/UsernameForm/UsernameForm.models';
 import { useSignInResource } from '#lib-frontend/auth/hooks/useSignInResource/useSignInResource';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
@@ -12,12 +10,15 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { type SignInFormModel } from '#lib-shared/auth/resources/SignIn/SignIn.models';
+import {
+  type SignInFormModel,
+  type SignInFormStepsModel,
+} from '#lib-shared/auth/resources/SignIn/SignIn.models';
 import { FORM_MODE } from '#lib-shared/form/form.constants';
 
 export const SignInForm: SFCModel<SignInFormPropsModel> = ({
   method,
-  mode,
+  mode = FORM_MODE.NEW,
   redirectTo,
   ...props
 }) => {
@@ -29,7 +30,7 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({
     mode === FORM_MODE.NEW ? signIn(form) : usernameUpdate(form);
 
   return (
-    <StepForm<SignInFormModel, [UsernameFormModel, OtpFormModel]>
+    <StepForm<SignInFormModel, SignInFormStepsModel>
       {...props}
       onSubmit={handleSubmit}
       onSuccess={async () => replace({ pathname: redirectTo ?? '/' })}

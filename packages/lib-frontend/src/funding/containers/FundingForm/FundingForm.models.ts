@@ -1,7 +1,9 @@
-import { type EmptyObjectModel } from '#lib-shared/core/core.models';
+import { type FormModeModel } from '#lib-shared/form/form.models';
 import { type FundingFormModel } from '#lib-shared/funding/resources/Funding/Funding.models';
 
-export type FundingFormPropsModel = EmptyObjectModel;
+export type FundingFormPropsModel = {
+  mode?: FormModeModel;
+};
 
 export type FundingFormStepsModel = [
   Pick<FundingFormModel, 'amount' | 'currency'>,

@@ -33,7 +33,7 @@ import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.co
 
 export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   method,
-  mode,
+  mode = FORM_MODE.NEW,
   onComplete,
   onMethodChange,
   onSubmit,

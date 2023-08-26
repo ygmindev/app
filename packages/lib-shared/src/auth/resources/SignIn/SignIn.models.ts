@@ -1,4 +1,5 @@
-import { type OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
+import { type UsernameFormModel } from '#lib-frontend/auth/containers/UsernameForm/UsernameForm.models';
+import { type OtpFormModel, type OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
 import {
   type EntityResourceDataModel,
   type EntityResourcePartialModel,
@@ -12,6 +13,8 @@ export type SignInModel = {
 };
 
 export type SignInFormModel = EntityResourceDataModel<OtpModel>;
+
+export type SignInFormStepsModel = [UsernameFormModel, OtpFormModel];
 
 export type SignInTokenModel = {
   _id: string;

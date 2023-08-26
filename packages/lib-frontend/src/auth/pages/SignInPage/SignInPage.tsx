@@ -5,8 +5,13 @@ import {
 } from '#lib-frontend/auth/pages/SignInPage/SignInPage.models';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
+import { FORM_MODE } from '#lib-shared/form/form.constants';
 
-export const SignInPage: SFCModel<SignInPagePropsModel> = ({ method, mode, ...props }) => {
+export const SignInPage: SFCModel<SignInPagePropsModel> = ({
+  method,
+  mode = FORM_MODE.NEW,
+  ...props
+}) => {
   const { location } = useRouter<SignInPageParamsModel>();
   return (
     <SignInForm

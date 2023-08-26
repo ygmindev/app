@@ -10,7 +10,7 @@ export type CardFundingModel = `${CARD_FUNDING}`;
 
 export type CardBrandModel = `${CARD_BRAND}`;
 
-export type CardModel = {
+export type CardModel = EmbeddedResourceModel & {
   brand: CardBrandModel;
 
   expMonth: number;
@@ -24,6 +24,6 @@ export type CardModel = {
   last4: string;
 
   type?: PaymentMethodTypeModel;
-} & EmbeddedResourceModel;
+};
 
 export type CardFormModel = EntityResourceDataModel<CardModel>;
