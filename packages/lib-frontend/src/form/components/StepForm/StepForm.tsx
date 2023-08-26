@@ -12,7 +12,7 @@ import { type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { type StepFormPropsModel } from '#lib-frontend/form/components/StepForm/StepForm.models';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
@@ -21,16 +21,16 @@ import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends Array<unknown>>({
   beforeSubmit,
-  children,
   onSubmit,
   onSuccess,
   steps,
   testID,
+  topElement,
   ...props
 }: SFCPropsModel<StepFormPropsModel<TType, TSteps>>): ReactElement<
   SFCPropsModel<StepFormPropsModel<TType, TSteps>>
 > => {
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const { width } = useStore((state) => state.app.dimension);
   const theme = useTheme();
 
@@ -72,10 +72,10 @@ export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends
       )}
 
       <Wrapper
+        {...wrapperProps}
         grow
         isFullWidth
         s
-        style={styles}
         testID={testID}>
         <Wrapper isRowAlign>
           <Appearable isActive={current > 0}>
@@ -87,7 +87,7 @@ export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends
           </Appearable>
         </Wrapper>
 
-        <Wrapper isCenter>{children}</Wrapper>
+        {topElement}
 
         <Slides
           current={current}

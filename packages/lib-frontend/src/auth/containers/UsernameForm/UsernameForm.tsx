@@ -37,7 +37,6 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   onMethodChange,
   onSubmit,
   onSuccess,
-  testID,
   ...props
 }) => {
   const { t } = useTranslation();
@@ -127,6 +126,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
           : undefined
       }
       isGrouped
+      isVerticalCenter
       onComplete={onComplete}
       onSubmit={handleSubmit}
       onSuccess={onSuccess}

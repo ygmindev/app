@@ -12,5 +12,7 @@ export type UseStylesParamsModel<TType, TStyle extends StyleModel = ViewStyleMod
 };
 
 export type UseStylesModel<TStyle extends StyleModel = ViewStyleModel> = {
+  computedStyles: TStyle;
+  inheritedStyles: TStyle;
   styles: TStyle;
 };

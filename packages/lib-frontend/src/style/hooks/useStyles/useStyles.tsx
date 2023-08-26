@@ -31,6 +31,8 @@ export const useStyles = <TType, TStyle extends StyleModel = ViewStyleModel>({
   );
 
   return {
+    computedStyles: computedStyles as TStyle,
+    inheritedStyles: inheritedStyles as TStyle,
     styles: styles as TStyle,
   };
 };

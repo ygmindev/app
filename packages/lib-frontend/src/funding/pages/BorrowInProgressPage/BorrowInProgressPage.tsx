@@ -1,4 +1,3 @@
-import { Button } from '#lib-frontend/core/components/Button/Button';
 import { Chip } from '#lib-frontend/core/components/Chip/Chip';
 import { FloatingDot } from '#lib-frontend/core/components/FloatingDot/FloatingDot';
 import { Text } from '#lib-frontend/core/components/Text/Text';
@@ -24,8 +23,8 @@ export const BorrowInProgressPage: SFCModel<BorrowInProgressPagePropsModel> = ({
   const { styles } = useStyles({ props });
   return (
     <MainLayout
-      isHorizontalCenter
       p
+      s
       style={styles}
       testID={testID}>
       <Tile
@@ -96,19 +95,6 @@ export const BorrowInProgressPage: SFCModel<BorrowInProgressPagePropsModel> = ({
           ]}
         />
       </Tile>
-
-      <Wrapper
-        bottom={0}
-        isHorizontalCenter
-        left={0}
-        position={SHAPE_POSITION.ABSOLUTE}
-        right={0}>
-        <Button
-          icon="add"
-          isShadow>
-          {t('funding:startNewFunding')}
-        </Button>
-      </Wrapper>
     </MainLayout>
   );
 };

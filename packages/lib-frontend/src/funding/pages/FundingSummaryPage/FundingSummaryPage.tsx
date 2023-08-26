@@ -15,7 +15,6 @@ export const FundingSummaryPage: SFCModel<FundingSummaryPagePropsModel> = ({
   const { styles } = useStyles({ props });
   return (
     <MainLayout
-      isHorizontalCenter
       p
       style={styles}
       testID={testID}>

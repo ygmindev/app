@@ -4,6 +4,7 @@ import { type ButtonPropsModel } from '#lib-frontend/core/components/Button/Butt
 import { type IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
 import { type CORNER, type DIRECTION, type ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
+import { type LayoutPropsModel } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles.models';
 import {
   type StyleModel,
   type StylePropsModel,
@@ -53,7 +54,7 @@ export type ProviderPropsModel<TType = undefined, TChildren = ReactNode | Array<
   value?: TType;
 } & ChildrenPropsModel<TChildren>;
 
-export type PagePropsModel<TType = undefined> = ChildrenPropsModel & {
+export type PagePropsModel<TType = undefined> = LayoutPropsModel & {
   pageProps?: TType;
 };
 

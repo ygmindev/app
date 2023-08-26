@@ -6,20 +6,26 @@ import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLa
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 
-export const MainLayout: SFCModel<MainLayoutPropsModel> = ({ children, ...props }) => {
-  const { styles, wrapperProps } = useLayoutStyles({ props });
+export const MainLayout: SFCModel<MainLayoutPropsModel> = ({ children, testID, ...props }) => {
+  const { computedStyles, inheritedStyles, wrapperProps } = useLayoutStyles({ props });
   const isMobile = useIsMobile();
   const isFullWidthF = props.isFullWidth || isMobile;
   const theme = useTheme();
   return (
     <Wrapper
       grow
-      {...wrapperProps}
       isFullWidth={isFullWidthF}
-      shrink
-      style={styles}
-      width={isFullWidthF ? undefined : theme.layout.width[THEME_SIZE.MEDIUM]}>
-      {children}
+      style={inheritedStyles}
+      testID={testID}>
+      <Wrapper
+        {...wrapperProps}
+        grow
+        m="auto"
+        shrink
+        style={computedStyles}
+        width={isFullWidthF ? undefined : theme.layout.width[THEME_SIZE.MEDIUM]}>
+        {children}
+      </Wrapper>
     </Wrapper>
   );
 };

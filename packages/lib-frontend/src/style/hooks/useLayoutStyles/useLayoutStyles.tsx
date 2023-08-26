@@ -13,7 +13,7 @@ export const useLayoutStyles = <TType,>({
 }: UseLayoutStylesParamsModel<TType>): UseLayoutStylesModel => {
   const { align, isCenter, isHorizontalCenter, isRow, isRowAlign, isVerticalCenter, justify } =
     props;
-  const { styles } = useStyles({
+  const styles = useStyles({
     props: {
       ...props,
       align: isCenter || isRowAlign || (isHorizontalCenter && !isRow) ? FLEX_ALIGN.CENTER : align,
@@ -23,7 +23,7 @@ export const useLayoutStyles = <TType,>({
     stylers: [viewStyler],
   });
   return {
-    styles,
-    wrapperProps: pick(props, LAYOUT_PROPS),
+    ...styles,
+    wrapperProps: { ...pick(props, LAYOUT_PROPS), style: styles.styles },
   };
 };

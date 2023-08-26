@@ -1,8 +1,11 @@
 import { TABS_TYPE } from '#lib-frontend/core/components/Tabs/Tabs.constants';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { COMPLETED, HOME, IN_PROGRESS, SUMMARY } from '#lib-frontend/core/core.constants';
+import { FORM } from '#lib-frontend/form/form.constants';
 import { BORROW, FUNDING, QUOTES } from '#lib-frontend/funding/funding.constants';
 import { BorrowInProgressPage } from '#lib-frontend/funding/pages/BorrowInProgressPage/BorrowInProgressPage';
+import { BorrowPage } from '#lib-frontend/funding/pages/BorrowPage/BorrowPage';
+import { FundingFormPage } from '#lib-frontend/funding/pages/FundingFormPage/FundingFormPage';
 import { FundingSummaryPage } from '#lib-frontend/funding/pages/FundingSummaryPage/FundingSummaryPage';
 import { QuotesPage } from '#lib-frontend/funding/pages/QuotesPage/QuotesPage';
 import { TabNavigator } from '#lib-frontend/route/components/TabNavigator/TabNavigator';
@@ -36,6 +39,7 @@ export const routes: Array<RouteModel> = getRoutes({
               title: ({ t }) => t('core:summary'),
             },
             {
+              element: <BorrowPage />,
               icon: 'card',
               navigator: <TabNavigator type={TABS_TYPE.CONTAINED} />,
               pathname: BORROW,
@@ -55,13 +59,19 @@ export const routes: Array<RouteModel> = getRoutes({
                   title: ({ t }) => t('core:inProgress'),
                 }),
                 {
-                  element: <Wrapper />,
                   icon: 'checkCircle',
                   pathname: COMPLETED,
                   title: ({ t }) => t('core:completed'),
                 },
               ],
               title: ({ t }) => t('funding:borrow'),
+            },
+            {
+              element: <FundingFormPage />,
+              isFullScreen: true,
+              isNavigatable: false,
+              pathname: FORM,
+              title: ({ t }) => t('core:form'),
             },
           ],
           title: ({ t }) => t('funding:funding'),

@@ -11,22 +11,18 @@ import { type SFCModel } from '#lib-frontend/core/core.models';
 import { StepForm } from '#lib-frontend/form/components/StepForm/StepForm';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SIGN_IN_MODE } from '#lib-shared/auth/auth.constants';
 import { type SignInFormModel } from '#lib-shared/auth/resources/SignIn/SignIn.models';
-import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 export const SignInForm: SFCModel<SignInFormPropsModel> = ({
   method,
   mode,
   redirectTo,
-  testID,
   ...props
 }) => {
   const { t } = useTranslation();
-  const { styles } = useStyles({ props });
   const { replace } = useRouter();
   const { signIn, usernameUpdate } = useSignInResource();
 
@@ -37,27 +33,24 @@ export const SignInForm: SFCModel<SignInFormPropsModel> = ({
 
   return (
     <StepForm<SignInFormModel, [UsernameFormModel, OtpFormModel]>
+      {...props}
       onSubmit={handleSubmit}
-      onSuccess={async () => {
-        await sleep();
-        await replace({ pathname: redirectTo ?? '/' });
-      }}
+      onSuccess={async () => replace({ pathname: redirectTo ?? '/' })}
       steps={steps}
-      style={styles}
-      testID={testID}>
-      {mode !== SIGN_IN_MODE.UPDATE && (
-        <Wrapper
-          isCenter
-          s>
-          <Text type={FONT_TYPE.HEADLINE}>
-            {t('core:welcome', { value: process.env.APP_NAME })}
-          </Text>
+      topElement={
+        mode === SIGN_IN_MODE.UPDATE ? undefined : (
+          <Wrapper
+            isCenter
+            s>
+            <Text type={FONT_TYPE.HEADLINE}>
+              {t('core:welcome', { value: process.env.APP_NAME })}
+            </Text>
 
-          <Text fontSize={THEME_SIZE.LARGE}>
-            {`${t('auth:signIn')} ${t('core:or')} ${t('auth:register')}`}
-          </Text>
-        </Wrapper>
-      )}
-    </StepForm>
+            <Text fontSize={THEME_SIZE.LARGE}>
+              {`${t('auth:signIn')} ${t('core:or')} ${t('auth:register')}`}
+            </Text>
+          </Wrapper>
+        )
+      }></StepForm>
   );
 };

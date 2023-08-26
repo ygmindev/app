@@ -228,6 +228,7 @@ const FormContainerF = forwardRef(
         {...props}
         isFullWidth={isFullWidth}
         isRow={isHorizontal}
+        s
         testID={testID}>
         <Form onSubmit={isDisabled ? undefined : async () => handleSubmit()}>
           <Wrapper s={isGrouped ? -1 : true}>

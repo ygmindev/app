@@ -6,6 +6,7 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { type TabNavigatorPropsModel } from '#lib-frontend/route/components/TabNavigator/TabNavigator.models';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 
 export const TabNavigator: SFCModel<TabNavigatorPropsModel> = ({
   routes,
@@ -22,7 +23,7 @@ export const TabNavigator: SFCModel<TabNavigatorPropsModel> = ({
   );
 
   useEffect(() => {
-    !isActiveF && routes && void push({ pathname: routes[0].fullpath || routes[0].pathname });
+    !isActiveF && routes && void push({ pathname: routes[0].fullpath ?? routes[0].pathname });
   }, [isActiveF]);
 
   return (
@@ -31,11 +32,16 @@ export const TabNavigator: SFCModel<TabNavigatorPropsModel> = ({
         void push({ pathname });
       }}
       style={styles}
-      tabs={routes?.map(({ fullpath, icon, pathname, title }) => ({
-        icon,
-        id: fullpath ?? pathname,
-        label: title ? t(title) : pathname,
-      }))}
+      tabs={filterNil(
+        routes?.map(
+          ({ fullpath, icon, isNavigatable = true, pathname, title }) =>
+            isNavigatable && {
+              icon,
+              id: fullpath ?? pathname,
+              label: title ? t(title) : pathname,
+            },
+        ),
+      )}
       testID={testID}
       type={type}
       value={isActiveF?.fullpath}

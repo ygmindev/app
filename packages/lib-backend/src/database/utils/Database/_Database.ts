@@ -16,14 +16,14 @@ import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constan
 import { type ResourceNameParamsModel } from '#lib-shared/resource/resource.models';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
-import { type FilterConditionModel } from '#lib-shared/resource/utils/Filter/Filter.models';
-import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
+import {
+  type FilterConditionModel,
+  type FilterModel,
+} from '#lib-shared/resource/utils/Filter/Filter.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
 
-const getFilter = <TType>(
-  filters?: Array<FilterModel<TType>>,
-): Filter<TType & object> =>
+const getFilter = <TType>(filters?: Array<FilterModel<TType>>): Filter<TType & object> =>
   filters
     ? filters.reduce(
         (result, v) => {

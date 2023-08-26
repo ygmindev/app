@@ -20,7 +20,8 @@ export type RouteModel<TProps extends ChildrenPropsModel = ChildrenPropsModel> =
     fullpath?: string;
     header?: { previous?: string };
     isFullScreen?: boolean;
-    isLeaf?: boolean;
+    isIndex?: boolean;
+    isNavigatable?: boolean;
     isProtectable?: boolean;
     isRoot?: string;
     layoutProps?: LayoutPropsModel;

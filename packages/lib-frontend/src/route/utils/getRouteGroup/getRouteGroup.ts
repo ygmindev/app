@@ -16,7 +16,7 @@ export const getRouteGroup = ({
   return {
     ...params,
     routes: [
-      { element, pathname: '/', title },
+      { element, isNavigatable: false, pathname: '/', title },
       ...(routes ? routes.map((route) => merge([route, { header: headerF }])) : []),
     ],
     title,

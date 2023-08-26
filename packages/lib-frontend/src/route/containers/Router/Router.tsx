@@ -22,7 +22,6 @@ const getRoute = (
   const routeF: RouteModel = {
     ...route,
     fullpath: trimPathname(`${route.parent ?? ''}/${pathnameF}`),
-    isLeaf: !!route.element,
     pathname: trimPathname(route.routes ? `${pathnameF}/*` : pathnameF),
     routes: route.routes?.reduce((result, child) => {
       const childRoute = getRoute({ ...child, parent: parentF }, depthF, rootRoutes);
