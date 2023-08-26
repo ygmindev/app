@@ -16,9 +16,23 @@ import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
 export type FCModel<TProps = object> = _FC<TProps & TestIdPropsModel & { nativeID?: string }>;
 
+export type SFCPropsModel<TProps = object, TStyle extends StyleModel = ViewStyleModel> = PropsModel<
+  SFCModel<TProps, TStyle>
+>;
+
 export type SFCModel<TProps = object, TStyle extends StyleModel = ViewStyleModel> = FCModel<
   TProps & StylePropsModel<TStyle>
 >;
+
+export type LFCPropsModel<TProps = object> = PropsModel<LFCModel<TProps>>;
+
+export type LFCModel<TProps = object> = FCModel<TProps & LayoutPropsModel>;
+
+export type RSFCPropsModel<
+  TType = undefined,
+  TProps = object,
+  TStyle extends StyleModel = ViewStyleModel,
+> = PropsModel<RSFCModel<TType, TProps, TStyle>>;
 
 export type RSFCModel<
   TType = undefined,
@@ -26,17 +40,11 @@ export type RSFCModel<
   TStyle extends StyleModel = ViewStyleModel,
 > = SFCModel<TProps & RefPropsModel<TType>, TStyle>;
 
-export type SFCPropsModel<TProps = object, TStyle extends StyleModel = ViewStyleModel> = PropsModel<
-  SFCModel<TProps, TStyle>
+export type RLFCPropsModel<TType = undefined, TProps = object> = PropsModel<
+  RLFCModel<TType, TProps>
 >;
 
-export type FCPropsModel<TProps = object> = PropsModel<FCModel<TProps>>;
-
-export type RSFCPropsModel<
-  TType = undefined,
-  TProps = object,
-  TStyle extends StyleModel = ViewStyleModel,
-> = PropsModel<RSFCModel<TType, TProps, TStyle>>;
+export type RLFCModel<TType = undefined, TProps = object> = LFCModel<TProps & RefPropsModel<TType>>;
 
 export type PropsModel<TType> = TType extends ComponentType<infer TProps> ? TProps : never;
 

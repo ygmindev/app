@@ -15,7 +15,6 @@ import {
   type UseFormParamsModel,
 } from '#lib-frontend/form/hooks/useForm/useForm.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
-import { type LayoutPropsModel } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles.models';
 import { type PartialModel } from '#lib-shared/core/core.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 import { type FieldTypeModel } from '#lib-shared/form/form.models';
@@ -24,7 +23,6 @@ export type FormContainerPropsModel<TType = void, TResult = void> = UseFormParam
   TType,
   TResult
 > &
-  LayoutPropsModel &
   SubmittablePropsModel<TType, TResult> &
   Pick<AsyncBoundaryContextModel, 'errorContextGet'> & {
     autoFocus?: string | boolean;

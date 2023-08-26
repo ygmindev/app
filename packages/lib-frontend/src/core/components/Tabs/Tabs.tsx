@@ -7,24 +7,23 @@ import { type TabsPropsModel } from '#lib-frontend/core/components/Tabs/Tabs.mod
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION } from '#lib-frontend/core/core.constants';
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FLEX_ALIGN } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
-export const Tabs: SFCModel<TabsPropsModel> = ({
+export const Tabs: LFCModel<TabsPropsModel> = ({
   defaultValue,
   onChange,
   tabs,
-  testID,
   type = TABS_TYPE.BUTTON,
   value,
   ...props
 }) => {
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation();
   const { valueControlled, valueControlledSet } = useControlledValue({
     defaultValue,
@@ -35,6 +34,7 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
   const isUnderline = type === TABS_TYPE.UNDERLINE;
   return (
     <Wrapper
+      {...wrapperProps}
       alignSelf={isContained ? FLEX_ALIGN.CENTER : undefined}
       border={isContained ? true : isUnderline ? DIRECTION.BOTTOM : undefined}
       isHorizontalScrollable
@@ -42,9 +42,7 @@ export const Tabs: SFCModel<TabsPropsModel> = ({
       isRowAlign={!isUnderline}
       m={isContained ? THEME_SIZE.SMALL : undefined}
       p={isContained ? THEME_SIZE.SMALL : undefined}
-      round={isContained}
-      style={styles}
-      testID={testID}>
+      round={isContained}>
       {tabs?.map((tab) => {
         const isActiveF = valueControlled === tab.id;
         return isUnderline ? (

@@ -8,7 +8,7 @@ import { Portal } from '#lib-frontend/core/components/Portal/Portal';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type SFCPropsModel } from '#lib-frontend/core/core.models';
+import { type LFCPropsModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { type StepFormPropsModel } from '#lib-frontend/form/components/StepForm/StepForm.models';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
@@ -27,8 +27,8 @@ export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends
   testID,
   topElement,
   ...props
-}: SFCPropsModel<StepFormPropsModel<TType, TSteps>>): ReactElement<
-  SFCPropsModel<StepFormPropsModel<TType, TSteps>>
+}: LFCPropsModel<StepFormPropsModel<TType, TSteps>>): ReactElement<
+  LFCPropsModel<StepFormPropsModel<TType, TSteps>>
 > => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { width } = useStore((state) => state.app.dimension);

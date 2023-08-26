@@ -10,7 +10,12 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { AsyncBoundary } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
 import { ERROR_MODE } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.constants';
 import { CORNER, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type RSFCPropsModel, type SFCPropsModel } from '#lib-frontend/core/core.models';
+import {
+  type LFCPropsModel,
+  type RLFCPropsModel,
+  type RSFCPropsModel,
+  type SFCPropsModel,
+} from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { Form } from '#lib-frontend/form/components/Form/Form';
 import { SelectField } from '#lib-frontend/form/components/SelectField/SelectField';
@@ -73,9 +78,9 @@ const FormContainerF = forwardRef(
       topElement,
       validators,
       ...props
-    }: SFCPropsModel<FormContainerPropsModel<TType, TResult>>,
+    }: LFCPropsModel<FormContainerPropsModel<TType, TResult>>,
     ref: ForwardedRef<FormRefModel>,
-  ): ReactElement<RSFCPropsModel<FormRefModel, FormContainerPropsModel<TType, TResult>>> => {
+  ): ReactElement<RLFCPropsModel<FormRefModel, FormContainerPropsModel<TType, TResult>>> => {
     const { t } = useTranslation();
     const { error, success } = useNotification();
     const [focused, focusedSet] = useState<string>();

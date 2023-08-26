@@ -2,10 +2,10 @@ import { type TABS_TYPE } from '#lib-frontend/core/components/Tabs/Tabs.constant
 import { type OptionModel } from '#lib-frontend/core/core.models';
 import { type StringFieldPropsModel } from '#lib-frontend/form/form.models';
 
-export type TabsPropsModel = {
+export type TabsPropsModel = StringFieldPropsModel & {
   tabs?: Array<TabModel>;
   type?: TabsTypeModel;
-} & StringFieldPropsModel;
+};
 
 export type TabModel = OptionModel;
 
