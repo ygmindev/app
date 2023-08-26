@@ -72,11 +72,13 @@ export type ValuesModel<TType> = ValueOf<TType>;
 
 export type GetModel<TType extends object, TKey extends DeepKeyModel<TType>> = Get<TType, TKey>;
 
-export type DeepKeyModel<TType extends object> = {
-  [TKey in keyof RequiredModel<TType> &
-    (string | number)]: RequiredModel<TType>[TKey] extends object
-    ? `${TKey}` | `${TKey}.${DeepKeyModel<RequiredModel<TType>[TKey]>}`
-    : `${TKey}`;
-}[keyof RequiredModel<TType> & (string | number)];
+export type DeepKeyModel<TType extends object> =
+  | StringKeyModel<TType>
+  | {
+      [TKey in keyof RequiredModel<TType> &
+        (string | number)]: RequiredModel<TType>[TKey] extends object
+        ? `${TKey}` | `${TKey}.${DeepKeyModel<RequiredModel<TType>[TKey]>}`
+        : `${TKey}`;
+    }[keyof RequiredModel<TType> & (string | number)];
 
 export type StringKeyModel<TType> = Extract<keyof TType, string>;

@@ -14,7 +14,6 @@ import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constan
 import { Divider } from '#lib-frontend/core/components/Divider/Divider';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
-import { CenterLayout } from '#lib-frontend/core/layouts/CenterLayout/CenterLayout';
 import { FormContainer } from '#lib-frontend/form/containers/FormContainer/FormContainer';
 import { FORM_FIELD_TYPE } from '#lib-frontend/form/containers/FormContainer/FormContainer.constants';
 import { type FormContainerRowModel } from '#lib-frontend/form/containers/FormContainer/FormContainer.models';
@@ -91,53 +90,50 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   }, [valueControlled]);
 
   return (
-    <CenterLayout
+    <FormContainer
+      autoFocus={valueControlled}
+      bottomElement={
+        mode === SIGN_IN_MODE.UPDATE
+          ? undefined
+          : ({ elementState }) => (
+              <Wrapper s>
+                <Divider>{t('core:or')}</Divider>
+
+                {valueControlled === SIGN_IN_METHOD.EMAIL && (
+                  <Button
+                    elementState={elementState}
+                    icon="phone"
+                    onPress={() => valueControlledSet(SIGN_IN_METHOD.PHONE)}
+                    type={BUTTON_TYPE.TRANSPARENT}>
+                    {t('core:continueWith', { value: t('user:phone') })}
+                  </Button>
+                )}
+
+                {valueControlled === SIGN_IN_METHOD.PHONE && (
+                  <Button
+                    elementState={elementState}
+                    icon="email"
+                    onPress={() => valueControlledSet(SIGN_IN_METHOD.EMAIL)}
+                    type={BUTTON_TYPE.TRANSPARENT}>
+                    {t('core:continueWith', { value: t('user:email') })}
+                  </Button>
+                )}
+              </Wrapper>
+            )
+      }
+      errorContextGet={(e) =>
+        checkExists && (e as HttpError).statusCode === HTTP_STATUS_CODE.CONFLICT
+          ? { icon: 'people', message: t('auth:userExistsError') }
+          : undefined
+      }
+      isGrouped
+      onComplete={onComplete}
+      onSubmit={handleSubmit}
+      onSuccess={onSuccess}
+      rows={rows}
       style={styles}
-      testID={testID}>
-      <FormContainer
-        autoFocus={valueControlled}
-        bottomElement={
-          mode === SIGN_IN_MODE.UPDATE
-            ? undefined
-            : ({ elementState }) => (
-                <Wrapper s>
-                  <Divider>{t('core:or')}</Divider>
-
-                  {valueControlled === SIGN_IN_METHOD.EMAIL && (
-                    <Button
-                      elementState={elementState}
-                      icon="phone"
-                      onPress={() => valueControlledSet(SIGN_IN_METHOD.PHONE)}
-                      type={BUTTON_TYPE.TRANSPARENT}>
-                      {t('core:continueWith', { value: t('user:phone') })}
-                    </Button>
-                  )}
-
-                  {valueControlled === SIGN_IN_METHOD.PHONE && (
-                    <Button
-                      elementState={elementState}
-                      icon="email"
-                      onPress={() => valueControlledSet(SIGN_IN_METHOD.EMAIL)}
-                      type={BUTTON_TYPE.TRANSPARENT}>
-                      {t('core:continueWith', { value: t('user:email') })}
-                    </Button>
-                  )}
-                </Wrapper>
-              )
-        }
-        errorContextGet={(e) =>
-          checkExists && (e as HttpError).statusCode === HTTP_STATUS_CODE.CONFLICT
-            ? { icon: 'people', message: t('auth:userExistsError') }
-            : undefined
-        }
-        isGrouped
-        onComplete={onComplete}
-        onSubmit={handleSubmit}
-        onSuccess={onSuccess}
-        rows={rows}
-        testID={USERNAME_FORM_TEST_ID}
-        validators={USERNAME_FORM_VALIDATORS}
-      />
-    </CenterLayout>
+      testID={USERNAME_FORM_TEST_ID}
+      validators={USERNAME_FORM_VALIDATORS}
+    />
   );
 };

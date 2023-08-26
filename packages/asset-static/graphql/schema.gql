@@ -11,25 +11,8 @@ type Access {
   user: User
 }
 
-input AccessCreateFormInput {
-  _id: String
-  _uid: String
-  created: DateTime
-  role: String
-  user: UserInput
-}
-
-input AccessCreateInput {
-  form: AccessCreateFormInput
-}
-
 type AccessCreateOutput {
   result: Access
-}
-
-input AccessGetConnectionInput {
-  filter: [FilterInput]
-  pagination: PaginationInput
 }
 
 type AccessGetConnectionOutput {
@@ -46,14 +29,6 @@ type AccessGetConnectionOutputEdge {
   node: Access
 }
 
-input AccessGetInput {
-  filter: [FilterInput]
-}
-
-input AccessGetManyInput {
-  filter: [FilterInput]
-}
-
 type AccessGetManyOutput {
   result: [Access]
 }
@@ -62,29 +37,12 @@ type AccessGetOutput {
   result: Access
 }
 
-input AccessRemoveInput {
-  filter: [FilterInput]
-}
-
 type AccessRemoveOutput {
   result: Access
 }
 
-input AccessUpdateInput {
-  filter: [FilterInput]
-  update: AccessUpdateUpdateInput
-}
-
 type AccessUpdateOutput {
   result: Access
-}
-
-input AccessUpdateUpdateInput {
-  _id: String
-  _uid: String
-  created: DateTime
-  role: String
-  user: UserInput
 }
 
 type Bank {
@@ -659,23 +617,8 @@ type Issuer {
   name: String
 }
 
-input IssuerCreateFormInput {
-  _id: String
-  created: DateTime
-  name: String
-}
-
-input IssuerCreateInput {
-  form: IssuerCreateFormInput
-}
-
 type IssuerCreateOutput {
   result: Issuer
-}
-
-input IssuerGetConnectionInput {
-  filter: [FilterInput]
-  pagination: PaginationInput
 }
 
 type IssuerGetConnectionOutput {
@@ -692,14 +635,6 @@ type IssuerGetConnectionOutputEdge {
   node: Issuer
 }
 
-input IssuerGetInput {
-  filter: [FilterInput]
-}
-
-input IssuerGetManyInput {
-  filter: [FilterInput]
-}
-
 type IssuerGetManyOutput {
   result: [Issuer]
 }
@@ -708,27 +643,12 @@ type IssuerGetOutput {
   result: Issuer
 }
 
-input IssuerRemoveInput {
-  filter: [FilterInput]
-}
-
 type IssuerRemoveOutput {
   result: Issuer
 }
 
-input IssuerUpdateInput {
-  filter: [FilterInput]
-  update: IssuerUpdateUpdateInput
-}
-
 type IssuerUpdateOutput {
   result: Issuer
-}
-
-input IssuerUpdateUpdateInput {
-  _id: String
-  created: DateTime
-  name: String
 }
 
 type LinkedUser {
@@ -1000,34 +920,34 @@ input LinkedUserUpdateUpdateInput {
 }
 
 type Mutation {
-  AccessCreate(input: AccessCreateInput): AccessCreateOutput
-  AccessRemove(input: AccessRemoveInput): AccessRemoveOutput
-  AccessUpdate(input: AccessUpdateInput): AccessUpdateOutput
+  AccessCreate: AccessCreateOutput
+  AccessRemove: AccessRemoveOutput
+  AccessUpdate: AccessUpdateOutput
   BankCreate(input: BankCreateInput): BankCreateOutput
   BankRemove(input: BankRemoveInput): BankRemoveOutput
   BankUpdate(input: BankUpdateInput): BankUpdateOutput
   CardCreate(input: CardCreateInput): CardCreateOutput
   CardRemove(input: CardRemoveInput): CardRemoveOutput
   CardUpdate(input: CardUpdateInput): CardUpdateOutput
-  IssuerCreate(input: IssuerCreateInput): IssuerCreateOutput
-  IssuerRemove(input: IssuerRemoveInput): IssuerRemoveOutput
-  IssuerUpdate(input: IssuerUpdateInput): IssuerUpdateOutput
+  IssuerCreate: IssuerCreateOutput
+  IssuerRemove: IssuerRemoveOutput
+  IssuerUpdate: IssuerUpdateOutput
   LinkedUserCreate(input: LinkedUserCreateInput): LinkedUserCreateOutput
   LinkedUserRemove(input: LinkedUserRemoveInput): LinkedUserRemoveOutput
   LinkedUserUpdate(input: LinkedUserUpdateInput): LinkedUserUpdateOutput
-  OtpCreate(input: OtpCreateInput): OtpCreateOutput
-  OtpRemove(input: OtpRemoveInput): OtpRemoveOutput
-  OtpUpdate(input: OtpUpdateInput): OtpUpdateOutput
+  OtpCreate: OtpCreateOutput
+  OtpRemove: OtpRemoveOutput
+  OtpUpdate: OtpUpdateOutput
   PaymentMethodTokenCreate(input: PaymentMethodTokenCreateInput): PaymentMethodTokenCreateOutput
   SignInCreate(input: SignInCreateInput): SignInCreateOutput
   SignInUserUpdate(input: SignInUserUpdateInput): SignInUserUpdateOutput
   SignInUsernameCreate(input: SignInUsernameCreateInput): SignInUsernameCreateOutput
-  UnderwriterCreate(input: UnderwriterCreateInput): UnderwriterCreateOutput
-  UnderwriterRemove(input: UnderwriterRemoveInput): UnderwriterRemoveOutput
-  UnderwriterUpdate(input: UnderwriterUpdateInput): UnderwriterUpdateOutput
-  UserCreate(input: UserCreateInput): UserCreateOutput
-  UserRemove(input: UserRemoveInput): UserRemoveOutput
-  UserUpdate(input: UserUpdateInput): UserUpdateOutput
+  UnderwriterCreate: UnderwriterCreateOutput
+  UnderwriterRemove: UnderwriterRemoveOutput
+  UnderwriterUpdate: UnderwriterUpdateOutput
+  UserCreate: UserCreateOutput
+  UserRemove: UserRemoveOutput
+  UserUpdate: UserUpdateOutput
 }
 
 type Otp {
@@ -1039,24 +959,8 @@ type Otp {
   phone: String
 }
 
-input OtpCreateFormInput {
-  callingCode: String
-  checkExists: Boolean
-  email: String
-  phone: String
-}
-
-input OtpCreateInput {
-  form: OtpCreateFormInput
-}
-
 type OtpCreateOutput {
   result: Otp
-}
-
-input OtpGetConnectionInput {
-  filter: [FilterInput]
-  pagination: PaginationInput
 }
 
 type OtpGetConnectionOutput {
@@ -1073,14 +977,6 @@ type OtpGetConnectionOutputEdge {
   node: Otp
 }
 
-input OtpGetInput {
-  filter: [FilterInput]
-}
-
-input OtpGetManyInput {
-  filter: [FilterInput]
-}
-
 type OtpGetManyOutput {
   result: [Otp]
 }
@@ -1089,30 +985,12 @@ type OtpGetOutput {
   result: Otp
 }
 
-input OtpRemoveInput {
-  filter: [FilterInput]
-}
-
 type OtpRemoveOutput {
   result: Otp
 }
 
-input OtpUpdateInput {
-  filter: [FilterInput]
-  update: OtpUpdateUpdateInput
-}
-
 type OtpUpdateOutput {
   result: Otp
-}
-
-input OtpUpdateUpdateInput {
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  otp: String
-  phone: String
 }
 
 type PageInfo {
@@ -1207,33 +1085,33 @@ input PaymentMethodTokenCreateRootInput {
 }
 
 type Query {
-  AccessGet(input: AccessGetInput): AccessGetOutput
-  AccessGetConnection(input: AccessGetConnectionInput): AccessGetConnectionOutput
-  AccessGetMany(input: AccessGetManyInput): AccessGetManyOutput
+  AccessGet: AccessGetOutput
+  AccessGetConnection: AccessGetConnectionOutput
+  AccessGetMany: AccessGetManyOutput
   BankGet(input: BankGetInput): BankGetOutput
   BankGetConnection(input: BankGetConnectionInput): BankGetConnectionOutput
   BankGetMany(input: BankGetManyInput): BankGetManyOutput
   CardGet(input: CardGetInput): CardGetOutput
   CardGetConnection(input: CardGetConnectionInput): CardGetConnectionOutput
   CardGetMany(input: CardGetManyInput): CardGetManyOutput
-  IssuerGet(input: IssuerGetInput): IssuerGetOutput
-  IssuerGetConnection(input: IssuerGetConnectionInput): IssuerGetConnectionOutput
-  IssuerGetMany(input: IssuerGetManyInput): IssuerGetManyOutput
+  IssuerGet: IssuerGetOutput
+  IssuerGetConnection: IssuerGetConnectionOutput
+  IssuerGetMany: IssuerGetManyOutput
   LinkedUserGet(input: LinkedUserGetInput): LinkedUserGetOutput
   LinkedUserGetConnection(input: LinkedUserGetConnectionInput): LinkedUserGetConnectionOutput
   LinkedUserGetMany(input: LinkedUserGetManyInput): LinkedUserGetManyOutput
-  OtpGet(input: OtpGetInput): OtpGetOutput
-  OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
-  OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput
+  OtpGet: OtpGetOutput
+  OtpGetConnection: OtpGetConnectionOutput
+  OtpGetMany: OtpGetManyOutput
   PaymentMethodGetMany(input: PaymentMethodGetManyInput): PaymentMethodGetManyOutput
-  SnapshotGet(input: SnapshotGetInput): SnapshotGetOutput
-  SnapshotGetMany(input: SnapshotGetManyInput): SnapshotGetManyOutput
-  UnderwriterGet(input: UnderwriterGetInput): UnderwriterGetOutput
-  UnderwriterGetConnection(input: UnderwriterGetConnectionInput): UnderwriterGetConnectionOutput
-  UnderwriterGetMany(input: UnderwriterGetManyInput): UnderwriterGetManyOutput
-  UserGet(input: UserGetInput): UserGetOutput
-  UserGetConnection(input: UserGetConnectionInput): UserGetConnectionOutput
-  UserGetMany(input: UserGetManyInput): UserGetManyOutput
+  SnapshotGet: SnapshotGetOutput
+  SnapshotGetMany: SnapshotGetManyOutput
+  UnderwriterGet: UnderwriterGetOutput
+  UnderwriterGetConnection: UnderwriterGetConnectionOutput
+  UnderwriterGetMany: UnderwriterGetManyOutput
+  UserGet: UserGetOutput
+  UserGetConnection: UserGetConnectionOutput
+  UserGetMany: UserGetManyOutput
 }
 
 type SignIn {
@@ -1302,14 +1180,6 @@ type Snapshot {
   name: String
 }
 
-input SnapshotGetInput {
-  filter: [FilterInput]
-}
-
-input SnapshotGetManyInput {
-  filter: [FilterInput]
-}
-
 type SnapshotGetManyOutput {
   result: [Snapshot]
 }
@@ -1324,23 +1194,8 @@ type Underwriter {
   name: String
 }
 
-input UnderwriterCreateFormInput {
-  _id: String
-  created: DateTime
-  name: String
-}
-
-input UnderwriterCreateInput {
-  form: UnderwriterCreateFormInput
-}
-
 type UnderwriterCreateOutput {
   result: Underwriter
-}
-
-input UnderwriterGetConnectionInput {
-  filter: [FilterInput]
-  pagination: PaginationInput
 }
 
 type UnderwriterGetConnectionOutput {
@@ -1357,14 +1212,6 @@ type UnderwriterGetConnectionOutputEdge {
   node: Underwriter
 }
 
-input UnderwriterGetInput {
-  filter: [FilterInput]
-}
-
-input UnderwriterGetManyInput {
-  filter: [FilterInput]
-}
-
 type UnderwriterGetManyOutput {
   result: [Underwriter]
 }
@@ -1373,27 +1220,12 @@ type UnderwriterGetOutput {
   result: Underwriter
 }
 
-input UnderwriterRemoveInput {
-  filter: [FilterInput]
-}
-
 type UnderwriterRemoveOutput {
   result: Underwriter
 }
 
-input UnderwriterUpdateInput {
-  filter: [FilterInput]
-  update: UnderwriterUpdateUpdateInput
-}
-
 type UnderwriterUpdateOutput {
   result: Underwriter
-}
-
-input UnderwriterUpdateUpdateInput {
-  _id: String
-  created: DateTime
-  name: String
 }
 
 type User {
@@ -1410,31 +1242,8 @@ type User {
   phone: String
 }
 
-input UserCreateFormInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input UserCreateInput {
-  form: UserCreateFormInput
-}
-
 type UserCreateOutput {
   result: User
-}
-
-input UserGetConnectionInput {
-  filter: [FilterInput]
-  pagination: PaginationInput
 }
 
 type UserGetConnectionOutput {
@@ -1451,14 +1260,6 @@ type UserGetConnectionOutputEdge {
   node: User
 }
 
-input UserGetInput {
-  filter: [FilterInput]
-}
-
-input UserGetManyInput {
-  filter: [FilterInput]
-}
-
 type UserGetManyOutput {
   result: [User]
 }
@@ -1467,47 +1268,10 @@ type UserGetOutput {
   result: User
 }
 
-input UserInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input UserRemoveInput {
-  filter: [FilterInput]
-}
-
 type UserRemoveOutput {
   result: User
 }
 
-input UserUpdateInput {
-  filter: [FilterInput]
-  update: UserUpdateUpdateInput
-}
-
 type UserUpdateOutput {
   result: User
-}
-
-input UserUpdateUpdateInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
 }

@@ -229,18 +229,13 @@ const FormContainerF = forwardRef(
         isFullWidth={isFullWidth}
         isRow={isHorizontal}
         testID={testID}>
-        <Wrapper
-          grow
-          isHorizontalScrollable
-          isVerticalScrollable>
-          <Form onSubmit={isDisabled ? undefined : async () => handleSubmit()}>
-            <Wrapper s={isGrouped ? -1 : true}>
-              {topElement && topElement({ elementState: elementStateF, handleReset, handleSubmit })}
+        <Form onSubmit={isDisabled ? undefined : async () => handleSubmit()}>
+          <Wrapper s={isGrouped ? -1 : true}>
+            {topElement && topElement({ elementState: elementStateF, handleReset, handleSubmit })}
 
-              {rowsF}
-            </Wrapper>
-          </Form>
-        </Wrapper>
+            {rowsF}
+          </Wrapper>
+        </Form>
 
         {isButton && (
           <Wrapper

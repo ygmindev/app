@@ -1,11 +1,12 @@
 import { type ReactElement } from 'react';
 
 import { type IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
-import { type ChildrenPropsModel, type LayoutPropsModel } from '#lib-frontend/core/core.models';
+import { type ChildrenPropsModel } from '#lib-frontend/core/core.models';
 import { type TranslatableTextPropsModel } from '#lib-frontend/locale/components/TranslatableText/TranslatableText.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { type ROUTE_DIRECTION, type ROUTE_TRANSITION } from '#lib-frontend/route/route.constants';
 import { type RouteStateModel } from '#lib-frontend/route/stores/routeStore/routeStore.models';
+import { type LayoutPropsModel } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
 export type RouteIdParamsModel = WithIdModel;

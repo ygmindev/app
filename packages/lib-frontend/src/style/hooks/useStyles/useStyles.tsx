@@ -10,10 +10,10 @@ import {
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { type StyleModel, type ViewStyleModel } from '#lib-frontend/style/style.models';
 
-export const useStyles = <TProps, TStyle extends StyleModel = ViewStyleModel>({
+export const useStyles = <TType, TStyle extends StyleModel = ViewStyleModel>({
   props,
   stylers,
-}: UseStylesParamsModel<TProps, TStyle>): UseStylesModel<TProps, TStyle> => {
+}: UseStylesParamsModel<TType, TStyle>): UseStylesModel<TStyle> => {
   const theme = useTheme();
   const isMobile = useIsMobile();
 
@@ -31,9 +31,6 @@ export const useStyles = <TProps, TStyle extends StyleModel = ViewStyleModel>({
   );
 
   return {
-    computedStyles: computedStyles as TStyle,
-    inheritedStyles: inheritedStyles as TStyle,
-    propsWithOutStyle: (({ style: _, ...rest }) => rest)(props),
     styles: styles as TStyle,
   };
 };

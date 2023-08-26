@@ -5,7 +5,6 @@ import {
   type PaymentMethodFormPagePropsModel,
 } from '#lib-frontend/billing/pages/PaymentMethodFormPage/PaymentMethodFormPage.models';
 import { type SFCModel } from '#lib-frontend/core/core.models';
-import { CenterLayout } from '#lib-frontend/core/layouts/CenterLayout/CenterLayout';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
@@ -21,17 +20,15 @@ export const PaymentMethodFormPage: SFCModel<PaymentMethodFormPagePropsModel> = 
 
   const handleBack = async (): Promise<void> => replace({ pathname: `/${ACCOUNT}/${PAYMENT}` });
 
-  return (
-    <CenterLayout
+  return currentUser ? (
+    <PaymentMethodForm
+      defaultValue={location.params?.value}
+      onCancel={() => void handleBack()}
+      onSuccess={handleBack}
       style={styles}
-      testID={testID}>
-      {currentUser && (
-        <PaymentMethodForm
-          defaultValue={location.params?.value}
-          onCancel={() => void handleBack()}
-          onSuccess={handleBack}
-        />
-      )}
-    </CenterLayout>
+      testID={testID}
+    />
+  ) : (
+    <></>
   );
 };

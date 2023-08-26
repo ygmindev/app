@@ -2,7 +2,6 @@ import { type ComponentType, type FC as _FC, type ReactNode, type Ref } from 're
 
 import { type ButtonPropsModel } from '#lib-frontend/core/components/Button/Button.models';
 import { type IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
-import { type WrapperPropsModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
 import { type CORNER, type DIRECTION, type ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import {
@@ -57,21 +56,6 @@ export type ProviderPropsModel<TType = undefined, TChildren = ReactNode | Array<
 export type PagePropsModel<TType = undefined> = ChildrenPropsModel & {
   pageProps?: TType;
 };
-
-export type LayoutPropsModel = Pick<
-  WrapperPropsModel,
-  | 'children'
-  | 'isCenter'
-  | 'isFullWidth'
-  | 'isHorizontalCenter'
-  | 'isHorizontalScrollable'
-  | 'isRow'
-  | 'isRowAlign'
-  | 'isVerticalCenter'
-  | 'isVerticalScrollable'
-  | 'p'
-  | 's'
->;
 
 export type ElementStateModel = `${ELEMENT_STATE}`;
 

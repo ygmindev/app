@@ -1,6 +1,5 @@
 import { useSignInResource } from '#lib-frontend/auth/hooks/useSignInResource/useSignInResource';
 import { type SFCModel } from '#lib-frontend/core/core.models';
-import { CenterLayout } from '#lib-frontend/core/layouts/CenterLayout/CenterLayout';
 import { FormContainer } from '#lib-frontend/form/containers/FormContainer/FormContainer';
 import { FORM_FIELD_TYPE } from '#lib-frontend/form/containers/FormContainer/FormContainer.constants';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -28,38 +27,36 @@ export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...prop
   const tName = t('user:name');
 
   return currentUser ? (
-    <CenterLayout>
-      <FormContainer
-        initialValues={{ first: currentUser.first, last: currentUser.last }}
-        onCancel={handleBack}
-        onSubmit={async ({ first, last }: NameFormModel) => {
-          await userUpdate({
-            filter: [{ field: '_id', value: currentUser._id }],
-            update: { first, last },
-          });
-          handleBack();
-        }}
-        rows={[
-          {
-            fields: [
-              {
-                field: FORM_FIELD_TYPE.TEXT_FIELD,
-                fieldProps: { isAutoFocus: true, label: ({ t }) => t('user:first') },
-                id: 'first',
-              },
-              {
-                field: FORM_FIELD_TYPE.TEXT_FIELD,
-                fieldProps: { label: ({ t }) => t('user:last') },
-                id: 'last',
-              },
-            ],
-            id: 'row',
-          },
-        ]}
-        style={styles}
-        successMessage={t('core:updateSuccess', { value: tName })}
-        testID={testID}
-      />
-    </CenterLayout>
+    <FormContainer
+      initialValues={{ first: currentUser.first, last: currentUser.last }}
+      onCancel={handleBack}
+      onSubmit={async ({ first, last }: NameFormModel) => {
+        await userUpdate({
+          filter: [{ field: '_id', value: currentUser._id }],
+          update: { first, last },
+        });
+        handleBack();
+      }}
+      rows={[
+        {
+          fields: [
+            {
+              field: FORM_FIELD_TYPE.TEXT_FIELD,
+              fieldProps: { isAutoFocus: true, label: ({ t }) => t('user:first') },
+              id: 'first',
+            },
+            {
+              field: FORM_FIELD_TYPE.TEXT_FIELD,
+              fieldProps: { label: ({ t }) => t('user:last') },
+              id: 'last',
+            },
+          ],
+          id: 'row',
+        },
+      ]}
+      style={styles}
+      successMessage={t('core:updateSuccess', { value: tName })}
+      testID={testID}
+    />
   ) : null;
 };
