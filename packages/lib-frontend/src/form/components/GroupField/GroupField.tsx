@@ -1,13 +1,19 @@
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { type SFCModel } from '#lib-frontend/core/core.models';
-import { type GroupFieldPropsModel } from '#lib-frontend/form/components/GroupField/GroupField.models';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { cloneElement } from 'react';
 
-export const GroupField: SFCModel<GroupFieldPropsModel> = ({ testID, ...props }) => {
-  const { styles } = useStyles({ props });
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import { type LFCModel } from '#lib-frontend/core/core.models';
+import { type GroupFieldPropsModel } from '#lib-frontend/form/components/GroupField/GroupField.models';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+
+export const GroupField: LFCModel<GroupFieldPropsModel> = ({ children, ...props }) => {
+  const { wrapperProps } = useLayoutStyles({ props });
   return (
     <Wrapper
-      style={styles}
-      testID={testID}></Wrapper>
+      {...wrapperProps}
+      border
+      isRowAlign
+      round>
+      {children?.map((child) => cloneElement(child, { isTransparent: true }))}
+    </Wrapper>
   );
 };
