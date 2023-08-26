@@ -2,7 +2,6 @@ import isFunction from 'lodash/isFunction';
 import { useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { useIsMobile } from '#lib-frontend/core/hooks/useIsMobile/useIsMobile';
 import {
   type UseStylesModel,
   type UseStylesParamsModel,
@@ -15,18 +14,12 @@ export const useStyles = <TType, TStyle extends StyleModel = ViewStyleModel>({
   stylers,
 }: UseStylesParamsModel<TType, TStyle>): UseStylesModel<TStyle> => {
   const theme = useTheme();
-  const isMobile = useIsMobile();
-
-  const inheritedStyles = useMemo(() => StyleSheet.flatten(props.style), [props.style]);
-  const computedStyles = useMemo(
-    () =>
-      StyleSheet.flatten(
-        stylers?.map((styler) => (isFunction(styler) ? styler(props, theme) : styler)),
-      ),
-    [props, stylers, theme, isMobile],
+  const inheritedStyles = StyleSheet.flatten(props.style);
+  const computedStyles = StyleSheet.flatten(
+    stylers?.map((styler) => (isFunction(styler) ? styler(props, theme) : styler)),
   );
   const styles = useMemo(
-    () => StyleSheet.flatten([computedStyles, inheritedStyles]),
+    () => StyleSheet.flatten([inheritedStyles, computedStyles]),
     [computedStyles, inheritedStyles],
   );
 

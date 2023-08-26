@@ -44,6 +44,7 @@ export const IONIC_ICONS = {
   edit: 'create-outline',
   email: 'mail-outline',
   empty: 'file-tray-outline',
+  exchange: 'swap-horizontal-outline',
   exclamationCircle: 'alert-circle-outline',
   eye: 'eye-outline',
   eyeOff: 'eye-off-outline',
@@ -109,6 +110,8 @@ export const FONTAWESOME_ICONS = {
   diamond: 'diamond',
   dollar: 'dollar',
   id: 'id-card-o',
+  range: 'arrows-h',
+  target: 'crosshairs',
 };
 
 export const MATERIAL_ICONS = {

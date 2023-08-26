@@ -42,6 +42,7 @@ export const RadioField = <TType extends string = string>({
         const isActive = id === valueControlled;
         return (
           <Button
+            color={color}
             elementState={elementState ?? (isActive ? ELEMENT_STATE.ACTIVE : undefined)}
             icon={icon}
             key={id}

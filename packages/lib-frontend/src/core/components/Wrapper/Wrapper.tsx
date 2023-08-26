@@ -9,46 +9,19 @@ import {
   type WrapperPropsModel,
   type WrapperRefModel,
 } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
-import { type ChildrenPropsModel, type RSFCModel } from '#lib-frontend/core/core.models';
+import { type ChildrenPropsModel, type RLFCModel } from '#lib-frontend/core/core.models';
 import { isFragment } from '#lib-frontend/core/utils/isFragment/isFragment';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { FLEX_ALIGN } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { spacingStyler } from '#lib-frontend/style/utils/styler/spacingStyler/spacingStyler';
-import { viewStyler } from '#lib-frontend/style/utils/styler/viewStyler/viewStyler';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { variableName } from '#lib-shared/core/utils/variableName/variableName';
 
-export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef(
-  (
-    {
-      animation,
-      children,
-      isCenter,
-      isDistribute,
-      isHorizontalCenter,
-      isRowAlign,
-      isVerticalCenter,
-      s,
-      ...props
-    },
-    ref,
-  ) => {
+export const Wrapper: RLFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef(
+  ({ animation, children, isDistribute, ...props }, ref) => {
     const theme = useTheme();
-    const isRow = props.isRow || isRowAlign;
-    const { styles } = useStyles({
-      props: {
-        ...props,
-        align:
-          isCenter || isRowAlign || (isHorizontalCenter && !isRow)
-            ? FLEX_ALIGN.CENTER
-            : props.align,
-        isRow: props.isRow || isRowAlign,
-        justify: isCenter || (isVerticalCenter && !isRow) ? FLEX_ALIGN.CENTER : props.justify,
-      },
-      stylers: [viewStyler],
-    });
+    const { styles, wrapperProps } = useLayoutStyles({ props });
 
     const getChildren = (children: ReactNode | Array<ReactNode>): Array<ReactNode> => {
       const childrenF = reduce(
@@ -64,6 +37,7 @@ export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
             : result,
         [] as Array<ReactNode>,
       );
+
       const { length } = childrenF;
       return reduce(
         childrenF as Array<ReactElement>,
@@ -75,15 +49,20 @@ export const Wrapper: RSFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
               style: StyleSheet.flatten(
                 filterNil([
                   isDistribute && { flexBasis: 0, flexGrow: 1 },
-                  ((props.isReverse && result.length !== length - 1) ||
-                    (!props.isReverse && result.length > 0)) &&
+                  ((wrapperProps.isReverse && result.length !== length - 1) ||
+                    (!wrapperProps.isReverse && result.length > 0)) &&
                     spacingStyler(
                       {
                         mLeft:
                           childProps.mLeft === undefined
-                            ? isRow && (s ?? (isRowAlign ? THEME_SIZE.SMALL : undefined))
+                            ? wrapperProps.isRow &&
+                              (wrapperProps.s ??
+                                (wrapperProps.isRowAlign ? THEME_SIZE.SMALL : undefined))
                             : childProps.mLeft,
-                        mTop: childProps.mTop === undefined ? !isRow && s : childProps.mTop,
+                        mTop:
+                          childProps.mTop === undefined
+                            ? !wrapperProps.isRow && wrapperProps.s
+                            : childProps.mTop,
                       },
                       theme,
                     ),

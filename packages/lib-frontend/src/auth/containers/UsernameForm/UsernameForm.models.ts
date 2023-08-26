@@ -7,8 +7,12 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 export type UsernameFormModel = Pick<UserModel, 'callingCode' | 'phone' | 'email'>;
 
-export type UsernameFormPropsModel = {
+export type UsernameFormPropsModel = FormStepPropsModel<
+  SignInFormModel,
+  UsernameFormModel,
+  OtpModel
+> & {
   method?: SignInMethodModel;
   mode?: FormModeModel;
   onMethodChange?(value: SignInMethodModel): void;
-} & FormStepPropsModel<SignInFormModel, UsernameFormModel, OtpModel>;
+};

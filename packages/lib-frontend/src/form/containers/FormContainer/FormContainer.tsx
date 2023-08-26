@@ -10,12 +10,7 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { AsyncBoundary } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
 import { ERROR_MODE } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.constants';
 import { CORNER, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import {
-  type LFCPropsModel,
-  type RLFCPropsModel,
-  type RSFCPropsModel,
-  type SFCPropsModel,
-} from '#lib-frontend/core/core.models';
+import { type LFCPropsModel, type RLFCPropsModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { Form } from '#lib-frontend/form/components/Form/Form';
 import { SelectField } from '#lib-frontend/form/components/SelectField/SelectField';
@@ -37,9 +32,9 @@ import { FIELD_TYPE } from '#lib-shared/form/form.constants';
 
 export const FormContainer = forwardRef(
   <TType = void, TResult = void>(
-    { errorContextGet, ...props }: SFCPropsModel<FormContainerPropsModel<TType, TResult>>,
+    { errorContextGet, ...props }: LFCPropsModel<FormContainerPropsModel<TType, TResult>>,
     ref: ForwardedRef<FormRefModel>,
-  ): ReactElement<RSFCPropsModel<FormRefModel, FormContainerPropsModel<TType, TResult>>> => (
+  ): ReactElement<RLFCPropsModel<FormRefModel, FormContainerPropsModel<TType, TResult>>> => (
     <AsyncBoundary
       errorContextGet={errorContextGet}
       errorMode={ERROR_MODE.NOTIFICATION}>

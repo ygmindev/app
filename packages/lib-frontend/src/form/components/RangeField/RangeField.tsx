@@ -11,9 +11,10 @@ export const RangeField: SFCModel<RangeFieldPropsModel> = ({ testID, type, ...pr
       style={styles}
       testID={testID}>
       <RadioField
+        isHorizontal
         options={[
-          { id: 'value', label: ({ t }) => t('core:value') },
-          { id: 'range', label: ({ t }) => t('core:range') },
+          { icon: 'target', id: 'value', label: ({ t }) => t('core:value') },
+          { icon: 'range', id: 'range', label: ({ t }) => t('core:range') },
         ]}
       />
     </Wrapper>
