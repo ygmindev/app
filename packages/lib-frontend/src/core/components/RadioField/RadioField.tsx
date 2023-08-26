@@ -9,7 +9,7 @@ import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
@@ -21,13 +21,12 @@ export const RadioField = <TType extends string = string>({
   isHorizontal,
   onChange,
   options,
-  testID,
   value,
   ...props
 }: SFCPropsModel<RadioFieldPropsModel<TType>>): ReactElement<
   SFCPropsModel<RadioFieldPropsModel<TType>>
 > => {
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
   const { valueControlled, valueControlledSet } = useControlledValue({
     defaultValue,
@@ -40,10 +39,9 @@ export const RadioField = <TType extends string = string>({
 
   return (
     <Wrapper
+      {...wrapperProps}
       isRow={isHorizontal}
-      s={THEME_SIZE.SMALL}
-      style={styles}
-      testID={testID}>
+      s={THEME_SIZE.SMALL}>
       {options.map(({ icon, id, label }) => {
         const isActiveF = id === valueControlled;
         const colorF =

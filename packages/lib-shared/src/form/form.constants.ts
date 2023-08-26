@@ -12,3 +12,7 @@ export enum FIELD_TYPE {
   RESOURCE = 'Resource',
   STRING = 'String',
 }
+
+export enum FIELD_TYPE_MORE {
+  RELATIVE_DATE = 'RelativeDate',
+}

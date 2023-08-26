@@ -1,10 +1,3 @@
-export type NumberValueModel = {
-  value?: number;
-};
+import { type RangeModel } from '#lib-shared/form/form.models';
 
-export type NumberBoundModel = {
-  max?: number;
-  min?: number;
-};
-
-export type NumberRangeModel = NumberValueModel | NumberBoundModel;
+export type NumberRangeModel = RangeModel<number>;
