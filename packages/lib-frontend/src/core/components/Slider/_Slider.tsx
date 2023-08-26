@@ -27,9 +27,13 @@ export const _Slider: SFCModel<_SliderPropsModel> = ({
   value,
   valueIcon,
 }) => {
+  console.warn(value);
+  console.warn(isRange ? [value ?? lower, max ?? upper] : value);
   return (
     <Slider
+      allowCross={false}
       disabled={isDisabled}
+      dots
       handleRender={(original, { index }) =>
         cloneElement<ChildrenPropsModel>(original as unknown as ReactElement<ChildrenPropsModel>, {
           children: (
@@ -56,18 +60,19 @@ export const _Slider: SFCModel<_SliderPropsModel> = ({
       }}
       max={upper}
       min={lower}
-      onChange={(value) => {
-        if (isArray(value)) {
-          onChange && onChange(value[0]);
-          onChangeMax && onChangeMax(value[1]);
+      onChange={(v) => {
+        if (isArray(v)) {
+          onChange && onChange(v[0]);
+          onChangeMax && onChangeMax(v[1]);
         } else {
-          onChange && onChange(value);
+          onChange && onChange(v);
         }
       }}
-      railStyle={{ backgroundColor, bottom: 0, margin: 'auto', opacity: 0.5, top: 0 }}
+      railStyle={{ backgroundColor, bottom: 0, margin: 'auto', top: 0 }}
       range={isRange}
       step={step}
       style={{ height: markerSize }}
+      tabIndex={2}
       trackStyle={{ backgroundColor: markerColor, bottom: 0, margin: 'auto', top: 0 }}
       value={isRange ? [value ?? lower, max ?? upper] : value}
     />

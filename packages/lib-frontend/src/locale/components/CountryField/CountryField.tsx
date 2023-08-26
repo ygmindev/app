@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { SelectField } from '#lib-frontend/form/components/SelectField/SelectField';
-import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
+import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
 import { type CountryFieldPropsModel } from '#lib-frontend/locale/components/CountryField/CountryField.models';
 import { useCountries } from '#lib-frontend/locale/hooks/useCountries/useCountries';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -20,7 +20,7 @@ export const CountryField: SFCModel<CountryFieldPropsModel> = ({
 }) => {
   const { t } = useTranslation();
   const { styles } = useStyles({ props });
-  const { valueControlled, valueControlledSet } = useControlledValue({
+  const { valueControlled, valueControlledSet } = useValueControlled({
     defaultValue,
     onChange,
     value,

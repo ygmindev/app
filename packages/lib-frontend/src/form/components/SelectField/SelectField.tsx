@@ -10,7 +10,7 @@ import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { type SelectFieldPropsModel } from '#lib-frontend/form/components/SelectField/SelectField.models';
 import { TextField } from '#lib-frontend/form/components/TextField/TextField';
-import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
+import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useSearch } from '#lib-frontend/search/hooks/useSearch/useSearch';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
@@ -41,7 +41,7 @@ export const SelectField = <TType extends string = string>({
   const { styles } = useStyles({ props });
   const { t } = useTranslation();
   const [query, querySet] = useState<string>();
-  const { valueControlled, valueControlledSet } = useControlledValue({
+  const { valueControlled, valueControlledSet } = useValueControlled({
     defaultValue,
     onChange,
     value,

@@ -6,10 +6,7 @@ import { type SelectFieldPropsModel } from '#lib-frontend/form/components/Select
 import { type SwitchFieldPropsModel } from '#lib-frontend/form/components/SwitchField/SwitchField.models';
 import { type TextFieldPropsModel } from '#lib-frontend/form/components/TextField/TextField.models';
 import { type FORM_FIELD_TYPE } from '#lib-frontend/form/containers/FormContainer/FormContainer.constants';
-import {
-  type StringFieldPropsModel,
-  type SubmittablePropsModel,
-} from '#lib-frontend/form/form.models';
+import { type FieldPropsModel, type SubmittablePropsModel } from '#lib-frontend/form/form.models';
 import {
   type UseFormModel,
   type UseFormParamsModel,
@@ -40,7 +37,7 @@ export type FormContainerPropsModel<TType = void, TResult = void> = UseFormParam
   };
 
 export type FormContainerFieldPropsModel<TType = void, TResult = void> = ElementStatePropsModel &
-  StringFieldPropsModel &
+  FieldPropsModel &
   Pick<UseFormModel<TType, TResult>, 'handleSubmit' | 'handleReset'>;
 
 export type FormContainerRowModel = PartialModel<WithIdModel> & {
@@ -54,7 +51,7 @@ export type FormFieldPropsModel = WithIdModel & {
     | { element?: never; field: FORM_FIELD_TYPE.SELECT_FIELD; fieldProps?: SelectFieldPropsModel }
     | { element?: never; field: FORM_FIELD_TYPE.SWITCH_FIELD; fieldProps?: SwitchFieldPropsModel }
     | {
-        element: ReactElement<SFCPropsModel<StringFieldPropsModel>>;
+        element: ReactElement<SFCPropsModel<FieldPropsModel>>;
         field?: never;
         fieldProps?: never;
       }

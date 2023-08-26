@@ -17,7 +17,7 @@ import { type SFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/form/containers/FormContainer/FormContainer';
 import { FORM_FIELD_TYPE } from '#lib-frontend/form/containers/FormContainer/FormContainer.constants';
 import { type FormContainerRowModel } from '#lib-frontend/form/containers/FormContainer/FormContainer.models';
-import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
+import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
 import { CountryField } from '#lib-frontend/locale/components/CountryField/CountryField';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
@@ -43,7 +43,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   const { t } = useTranslation();
   const { styles } = useStyles({ props });
   const { create } = useOtpResource();
-  const { valueControlled, valueControlledSet } = useControlledValue<SignInMethodModel>({
+  const { valueControlled, valueControlledSet } = useValueControlled<SignInMethodModel>({
     defaultValue: SIGN_IN_METHOD.EMAIL,
     onChange: onMethodChange,
     value: method,

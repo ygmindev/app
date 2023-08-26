@@ -10,7 +10,7 @@ import {
   SWITCH_FIELD_WIDTH,
 } from '#lib-frontend/form/components/SwitchField/SwitchField.constants';
 import { type SwitchFieldPropsModel } from '#lib-frontend/form/components/SwitchField/SwitchField.models';
-import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
+import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
@@ -21,8 +21,6 @@ import {
   THEME_SIZE,
 } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { BOOLEAN_STRING } from '#lib-shared/core/core.constants';
-import { type BooleanStringModel } from '#lib-shared/core/core.models';
 
 export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
   defaultValue,
@@ -37,17 +35,16 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
 }) => {
   const theme = useTheme();
   const { styles } = useStyles({ props });
-  const { valueControlled, valueControlledSet } = useControlledValue<BooleanStringModel>({
-    defaultValue: defaultValue || BOOLEAN_STRING.FALSE,
+  const { valueControlled, valueControlledSet } = useValueControlled<boolean>({
+    defaultValue: defaultValue ?? false,
     onChange,
     value,
   });
-  const elementStateF =
-    valueControlled === 'true'
-      ? ELEMENT_STATE.ACTIVE
-      : elementState === ELEMENT_STATE.DISABLED || elementState === ELEMENT_STATE.LOADING
-      ? ELEMENT_STATE.DISABLED
-      : ELEMENT_STATE.INACTIVE;
+  const elementStateF = valueControlled
+    ? ELEMENT_STATE.ACTIVE
+    : elementState === ELEMENT_STATE.DISABLED || elementState === ELEMENT_STATE.LOADING
+    ? ELEMENT_STATE.DISABLED
+    : ELEMENT_STATE.INACTIVE;
 
   const {
     childActiveLeft,
@@ -73,7 +70,7 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
     <Wrapper
       elementState={elementStateF}
       isRowAlign
-      onPress={() => valueControlledSet(valueControlled === 'true' ? 'false' : 'true')}
+      onPress={() => valueControlledSet(!valueControlled)}
       style={styles}
       testID={testID}>
       <Wrapper
@@ -106,7 +103,7 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
           {iconActive && (
             <Appearable
               isAbsoluteFill
-              isActive={valueControlled === 'true'}>
+              isActive={valueControlled}>
               <Icon
                 color={THEME_COLOR.PRIMARY}
                 icon={iconActive}
@@ -118,7 +115,7 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
           {iconInactive && (
             <Appearable
               isAbsoluteFill
-              isActive={valueControlled === 'false'}>
+              isActive={valueControlled}>
               <Icon
                 color={THEME_COLOR_MORE.SURFACE}
                 colorRole={THEME_ROLE.MUTED}

@@ -1,9 +1,9 @@
-import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
+import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
 import { act } from '#lib-frontend/test/utils/act/act';
 import { renderHook } from '#lib-frontend/test/utils/renderHook/renderHook';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ useControlledValue });
+const { displayName } = withTest({ useValueControlled });
 
 describe(displayName, () => {
   const VALUE = 'VALUE';
@@ -11,7 +11,7 @@ describe(displayName, () => {
 
   test('works', async () => {
     const { result, unmount } = renderHook(() =>
-      useControlledValue<string>({ defaultValue: VALUE }),
+      useValueControlled<string>({ defaultValue: VALUE }),
     );
     expect(result.current.valueControlled).toBe(VALUE);
 

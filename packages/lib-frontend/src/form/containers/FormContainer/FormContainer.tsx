@@ -22,7 +22,7 @@ import {
   type FormContainerPropsModel,
   type FormFieldPropsModel,
 } from '#lib-frontend/form/containers/FormContainer/FormContainer.models';
-import { type FormRefModel, type StringFieldPropsModel } from '#lib-frontend/form/form.models';
+import { type FieldPropsModel, type FormRefModel } from '#lib-frontend/form/form.models';
 import { useForm } from '#lib-frontend/form/hooks/useForm/useForm';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
@@ -139,7 +139,7 @@ const FormContainerF = forwardRef(
       isLastRow = false,
       isLastField = false,
     ): ReactElement => {
-      const fieldPropsF: StringFieldPropsModel = {
+      const fieldPropsF: FieldPropsModel = {
         ...fieldProps,
         defaultValue: initialValues ? (initialValues as Record<string, undefined>)[id] : undefined,
         elementState: isDisabled

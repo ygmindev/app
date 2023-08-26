@@ -9,7 +9,8 @@ export type TextFieldRefModel = {
   focus(): void;
 };
 
-export type TextFieldPropsModel = {
-  isNoClear?: boolean;
-  mask?: string;
-} & TranslatableFieldPropsModel<_TextFieldPropsModel>;
+export type TextFieldPropsModel = TranslatableFieldPropsModel &
+  Omit<_TextFieldPropsModel, 'error' | 'label'> & {
+    isNoClear?: boolean;
+    mask?: string;
+  };

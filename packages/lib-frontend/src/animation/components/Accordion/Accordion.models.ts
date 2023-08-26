@@ -1,10 +1,7 @@
-import {
-  type ChildrenPropsModel,
-  type ElementStateModel,
-  type ValuePropsModel,
-} from '#lib-frontend/core/core.models';
+import { type ChildrenPropsModel, type ElementStateModel } from '#lib-frontend/core/core.models';
+import { type ValuePropsModel } from '#lib-frontend/form/form.models';
 
-export type AccordionPropsModel = {
-  label?: string;
-} & ChildrenPropsModel &
-  ValuePropsModel<ElementStateModel>;
+export type AccordionPropsModel = ChildrenPropsModel &
+  ValuePropsModel<ElementStateModel> & {
+    label?: string;
+  };

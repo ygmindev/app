@@ -5,7 +5,7 @@ import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constan
 import { type RadioFieldPropsModel } from '#lib-frontend/core/components/RadioField/RadioField.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCPropsModel } from '#lib-frontend/core/core.models';
-import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
+import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FLEX_ALIGN } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
@@ -23,7 +23,7 @@ export const RadioField = <TType extends string = string>({
   LFCPropsModel<RadioFieldPropsModel<TType>>
 > => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { valueControlled, valueControlledSet } = useControlledValue({
+  const { valueControlled, valueControlledSet } = useValueControlled({
     defaultValue,
     onChange,
     value,

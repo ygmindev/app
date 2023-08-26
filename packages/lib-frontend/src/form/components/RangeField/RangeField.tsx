@@ -6,13 +6,13 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { type RangeFieldPropsModel } from '#lib-frontend/form/components/RangeField/RangeField.models';
 import { TextField } from '#lib-frontend/form/components/TextField/TextField';
-import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
+import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { FIELD_TYPE, FIELD_TYPE_MORE } from '#lib-shared/form/form.constants';
 
-export const RangeField: LFCModel<RangeFieldPropsModel> = ({ label, testID, type, ...props }) => {
+export const RangeField: LFCModel<RangeFieldPropsModel> = ({ label, type, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { valueControlled: range, valueControlledSet: rangeSet } = useControlledValue<
+  const { valueControlled: range, valueControlledSet: rangeSet } = useValueControlled<
     'range' | 'exact'
   >({ defaultValue: 'exact' });
 
@@ -34,6 +34,7 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({ label, testID, type
   return (
     <Wrapper {...wrapperProps}>
       <Slider
+        isRange={range === 'range'}
         lower={0}
         step={1}
         upper={10}

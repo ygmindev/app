@@ -1,9 +1,9 @@
 import { type IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
-import { type ValuePropsModel } from '#lib-frontend/core/core.models';
+import { type ValuePropsModel } from '#lib-frontend/form/form.models';
 
 export type _SliderPropsModel = ValuePropsModel<number> & {
   backgroundColor: string;
-  defaultValueMax?: number;
+  defaultMax?: number;
   fontColor: string;
   isDisabled?: boolean;
   isRange?: boolean;

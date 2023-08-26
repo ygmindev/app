@@ -11,6 +11,7 @@ import { joinPaths } from '#lib-backend/file/utils/joinPaths/joinPaths';
 import { type _TestConfigModel, type TestConfigModel } from '#lib-config/node/test/test.models';
 import { _config } from '#lib-config/node/typescript/typescript';
 import { PLATFORM } from '#lib-platform/core/core.constants';
+import { BOOLEAN_STRING } from '#lib-shared/core/core.constants';
 import { permuteString } from '#lib-shared/core/utils/permuteString/permuteString';
 
 export const _test = ({
@@ -27,7 +28,8 @@ export const _test = ({
   timeout,
 }: TestConfigModel): _TestConfigModel => {
   const bundleConfigF = bundleConfig();
-  const testExtension = process.env.TEST_IS_ETE ? eteExtension : specExtension;
+  const testExtension =
+    process.env.TEST_IS_ETE === BOOLEAN_STRING.TRUE ? eteExtension : specExtension;
   return {
     cacheDirectory: fromWorking(cachePath),
 

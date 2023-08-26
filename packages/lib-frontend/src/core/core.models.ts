@@ -11,7 +11,6 @@ import {
   type ViewStyleModel,
 } from '#lib-frontend/style/style.models';
 import { type TestIdPropsModel } from '#lib-frontend/test/test.models';
-import { type NilModel } from '#lib-shared/core/core.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
 export type FCModel<TProps = object> = _FC<TProps & TestIdPropsModel & { nativeID?: string }>;
@@ -71,14 +70,8 @@ export type ElementStateModel = `${ELEMENT_STATE}`;
 export type DirectionModel = `${DIRECTION}`;
 
 export type ElementStatePropsModel = {
-  elementState?: ElementStateModel | NilModel;
+  elementState?: ElementStateModel;
   onElementStateChange?(value?: ElementStateModel): void;
-};
-
-export type ValuePropsModel<TType> = {
-  defaultValue?: TType;
-  onChange?(value: TType): void;
-  value?: TType;
 };
 
 export type OptionModel<TType extends string = string> = {

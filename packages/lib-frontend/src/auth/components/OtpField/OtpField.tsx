@@ -11,7 +11,7 @@ import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type MeasureModel, type SFCModel } from '#lib-frontend/core/core.models';
 import { TextField } from '#lib-frontend/form/components/TextField/TextField';
 import { TEXT_FIELD_KEYBOARD } from '#lib-frontend/form/components/TextField/TextField.constants';
-import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
+import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
 import { isTranslatableText } from '#lib-frontend/locale/utils/isTranslatableText/isTranslatableText';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
@@ -22,6 +22,7 @@ import { withId } from '#lib-shared/core/utils/withId/withId';
 const IDS = withId(range(process.env.SERVER_OTP_LENGTH));
 
 export const OtpField: SFCModel<OtpFieldPropsModel> = ({
+  defaultValue,
   elementState,
   error,
   isAutoFocus,
@@ -33,8 +34,8 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const theme = useTheme();
-  const { valueControlled, valueControlledSet } = useControlledValue({
-    defaultValue: '',
+  const { valueControlled, valueControlledSet } = useValueControlled({
+    defaultValue,
     onChange,
     value,
   });
@@ -78,6 +79,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             defaultValue=""
             elementState={
               isFocused &&
+              valueControlled &&
               i === Math.min(valueControlled.length, process.env.SERVER_OTP_LENGTH - 1) &&
               elementState !== ELEMENT_STATE.DISABLED
                 ? ELEMENT_STATE.ACTIVE
@@ -87,7 +89,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             isCenter
             isNoClear
             key={id}
-            value={valueControlled[i] || ''}
+            value={(valueControlled && valueControlled[i]) ?? ''}
             width={theme.shape.size[THEME_SIZE.MEDIUM]}
           />
         ))}
@@ -101,7 +103,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
 
           {elementState !== ELEMENT_STATE.DISABLED && (
             <Appearable
-              isActive={valueControlled.length > 0}
+              isActive={valueControlled ? valueControlled?.length > 0 : undefined}
               isCenter>
               <Button
                 icon="times"

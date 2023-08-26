@@ -21,10 +21,8 @@ export const TimezoneFormPage: SFCModel<TimezoneFormPagePropsModel> = ({ testID,
       testID={testID}>
       <SwitchField
         label={t('settings:setAutomatically')}
-        onChange={(value) =>
-          actions?.locale.isTimezoneAutomaticSet(value === 'true' ? true : false)
-        }
-        value={isTimezoneAutomatic ? 'true' : 'false'}
+        onChange={(value) => actions?.locale.isTimezoneAutomaticSet(value)}
+        value={isTimezoneAutomatic}
       />
 
       <TimezoneField elementState={isTimezoneAutomatic ? ELEMENT_STATE.DISABLED : undefined} />

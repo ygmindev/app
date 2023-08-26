@@ -7,7 +7,7 @@ import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constan
 import { Tooltip } from '#lib-frontend/core/components/Tooltip/Tooltip';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type ElementStateModel, type RSFCModel } from '#lib-frontend/core/core.models';
+import { type ElementStateModel, type RLFCModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { MaskedTextField } from '#lib-frontend/form/components/MaskedTextField/MaskedTextField';
 import { _TextField } from '#lib-frontend/form/components/TextField/_TextField';
@@ -16,7 +16,7 @@ import {
   type TextFieldPropsModel,
   type TextFieldRefModel,
 } from '#lib-frontend/form/components/TextField/TextField.models';
-import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
+import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { isTranslatableText } from '#lib-frontend/locale/utils/isTranslatableText/isTranslatableText';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
@@ -25,7 +25,7 @@ import { type ViewStyleModel } from '#lib-frontend/style/style.models';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 import { variableName } from '#lib-shared/core/utils/variableName/variableName';
 
-export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forwardRef(
+export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forwardRef(
   (
     {
       defaultValue,
@@ -53,7 +53,7 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
     const refF = useRef<TextFieldRefModel>(null);
     const { t } = useTranslation();
     const theme = useTheme();
-    const { valueControlled, valueControlledSet } = useControlledValue({
+    const { valueControlled, valueControlledSet } = useValueControlled({
       defaultValue,
       onChange,
       value,
@@ -61,10 +61,10 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
     const {
       valueControlled: elementStateControlled,
       valueControlledSet: setElementStateControlled,
-    } = useControlledValue<ElementStateModel>({
+    } = useValueControlled<ElementStateModel>({
       defaultValue: ELEMENT_STATE.INACTIVE,
       onChange: onElementStateChange,
-      value: elementState || undefined,
+      value: elementState,
     });
 
     const heightF = label
@@ -162,7 +162,7 @@ export const TextField: RSFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         onElementStateChange={setElementStateControlled}
         onEscape={isNoClear ? undefined : () => handleChange('')}
         onFocus={onFocus}
-        placeholder={mask || placeholder}
+        placeholder={mask ?? placeholder}
         ref={ref ?? refF}
         rightElement={rightElementF}
         value={valueControlled}

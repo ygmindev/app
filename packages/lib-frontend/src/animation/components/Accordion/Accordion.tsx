@@ -10,7 +10,7 @@ import {
   type MeasureModel,
   type SFCModel,
 } from '#lib-frontend/core/core.models';
-import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
+import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
@@ -26,7 +26,7 @@ export const Accordion: SFCModel<AccordionPropsModel> = ({
 }) => {
   const { styles } = useStyles({ props });
   const [measure, measureSet] = useState<MeasureModel>();
-  const { valueControlled, valueControlledSet } = useControlledValue<ElementStateModel>({
+  const { valueControlled, valueControlledSet } = useValueControlled<ElementStateModel>({
     defaultValue,
     onChange,
     value,

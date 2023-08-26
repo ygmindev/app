@@ -1,10 +1,16 @@
 import { type IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
 import { type WrapperPropsModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
-import { type ElementStatePropsModel, type ValuePropsModel } from '#lib-frontend/core/core.models';
+import { type ElementStatePropsModel } from '#lib-frontend/core/core.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { type InferModel, type PrimitiveModel } from '#lib-shared/core/core.models';
 
-export type FieldPropsModel<TType> = {
+export type ValuePropsModel<TType = string> = {
+  defaultValue?: TType;
+  onChange?(value: TType): void;
+  value?: TType;
+};
+
+export type FieldPropsModel<TType = string> = {
   error?: TranslatableTextModel | boolean;
   isAutoFocus?: boolean;
   isTransparent?: boolean;
@@ -16,8 +22,6 @@ export type FieldPropsModel<TType> = {
   ElementStatePropsModel &
   ValuePropsModel<TType> &
   Pick<WrapperPropsModel, 'round' | 'zIndex'>;
-
-export type StringFieldPropsModel<TType extends string = string> = FieldPropsModel<TType>;
 
 export type FormErrorModel<TType> = {
   [TKey in keyof TType]?: InferModel<TType[TKey]> extends PrimitiveModel
@@ -45,12 +49,12 @@ export type SubmittablePropsModel<TType = void, TResult = void> = {
   onSuccess?(data: TType, result?: TResult | null): Promise<void>;
 } & ElementStatePropsModel;
 
-export type TranslatableFieldPropsModel<TType extends FieldPropsModel<unknown>> = Omit<
-  TType,
+export type TranslatableFieldPropsModel<TType = string> = Omit<
+  FieldPropsModel<TType>,
   'label' | 'error'
 > & {
-  error?: TType['error'] | TranslatableTextModel | boolean;
-  label?: TType['label'] | TranslatableTextModel;
+  error?: FieldPropsModel<TType>['error'] | TranslatableTextModel;
+  label?: FieldPropsModel<TType>['label'] | TranslatableTextModel;
 };
 
 export type FormRefModel = {

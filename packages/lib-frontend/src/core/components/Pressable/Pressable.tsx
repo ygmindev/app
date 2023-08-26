@@ -8,7 +8,7 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type ElementStateModel, type SFCModel } from '#lib-frontend/core/core.models';
 import { lazy } from '#lib-frontend/core/utils/lazy/lazy';
-import { useControlledValue } from '#lib-frontend/form/hooks/useControlledValue/useControlledValue';
+import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
@@ -35,10 +35,10 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
   const [confirmModalIsOpen, confirmModalIsOpenSet] = useState<boolean>(false);
   const { styles } = useStyles({ props });
 
-  const { valueControlled, valueControlledSet } = useControlledValue<ElementStateModel>({
+  const { valueControlled, valueControlledSet } = useValueControlled<ElementStateModel>({
     defaultValue: ELEMENT_STATE.INACTIVE,
     onChange: onElementStateChange,
-    value: elementState || undefined,
+    value: elementState,
   });
 
   const isDisabled =

@@ -67,7 +67,7 @@ export const Tile: SFCModel<TilePropsModel> = ({
 
             {onPress && (
               <Button
-                elementState={isActive && ELEMENT_STATE.ACTIVE}
+                elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
                 icon="chevronRight"
               />
             )}
