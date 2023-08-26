@@ -4,15 +4,16 @@ export enum FORM_MODE {
 }
 
 export enum FIELD_TYPE {
-  BOOLEAN = 'Boolean',
-  DATE = 'Date',
-  ID = 'ID',
-  NUMBER = 'Number',
-  PRIMARY_KEY = 'PrimaryKey',
-  RESOURCE = 'Resource',
-  STRING = 'String',
+  BOOLEAN = 'boolean',
+  DATE = 'date',
+  ID = 'id',
+  NUMBER = 'number',
+  PRIMARY_KEY = 'primaryKey',
+  RESOURCE = 'resource',
+  STRING = 'string',
 }
 
 export enum FIELD_TYPE_MORE {
-  RELATIVE_DATE = 'RelativeDate',
+  NUMBER_POSITIVE = 'numberPositive',
+  RELATIVE_DATE = 'relativeDate',
 }
