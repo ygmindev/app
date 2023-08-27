@@ -24,35 +24,37 @@ export const useFormatter = (): UseFormatterModel => {
 
     if (isNumber(value)) {
       let valueF = value as number;
-      const { isSeparated, multiplier, precision, unit } = (options ??
-        {}) as NumberFormatterOptionsModel;
-
-      !isNil(multiplier) && (valueF *= multiplier);
+      const {
+        isScale = true,
+        isSeparated = true,
+        precision,
+        unit,
+      } = (options ?? {}) as NumberFormatterOptionsModel;
 
       let postfix = '';
       switch (unit) {
         case NUMBER_UNIT_RATE.BASIS_POINT: {
-          valueF *= 1e4;
+          isScale && (valueF *= 1e4);
           postfix = 'bps';
           break;
         }
         case NUMBER_UNIT_AMOUNT.BILLION: {
-          valueF /= 1e9;
+          isScale && (valueF /= 1e9);
           postfix = 'bn';
           break;
         }
         case NUMBER_UNIT_AMOUNT.MILLION: {
-          valueF /= 1e6;
+          isScale && (valueF /= 1e6);
           postfix = 'mm';
           break;
         }
         case NUMBER_UNIT_RATE.PERCENT: {
-          valueF *= 1e2;
+          isScale && (valueF *= 1e2);
           postfix = '%';
           break;
         }
         case NUMBER_UNIT_AMOUNT.THOUSAND: {
-          valueF /= 1e3;
+          isScale && (valueF /= 1e3);
           postfix = 'k';
           break;
         }

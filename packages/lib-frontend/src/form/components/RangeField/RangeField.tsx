@@ -34,12 +34,17 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({
 }) => {
   const { t } = useTranslation([DATA]);
   const { wrapperProps } = useLayoutStyles({ props });
-  const { valueControlled, valueControlledSet } = useValueControlled<ScaledNumberRangeModel>();
   const [rangeType, rangeTypeSet] = useState<RangeTypeModel>(RANGE_TYPE.EXACT);
+  const isRange = rangeType === RANGE_TYPE.RANGE;
   const [lower, lowerSet] = useState<number>(1);
   const [upper, upperSet] = useState<number>(1e3);
+  const { valueControlled, valueControlledSet } = useValueControlled<ScaledNumberRangeModel>({
+    defaultValue: {
+      value: { unit: defaultUnit, value: 1 },
+      ...(isRange ? { max: { unit: defaultUnit, value: 1000 } } : {}),
+    },
+  });
   const { format } = useFormatter();
-  const isRange = rangeType === RANGE_TYPE.RANGE;
 
   const getFieldElement = (key: keyof ScaledNumberRangeModel): ReactElement | null => {
     switch (type) {
@@ -121,14 +126,14 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({
       <Slider
         isRange={isRange}
         lower={lower}
-        lowerFormatter={(v) => format(v, { unit: valueControlled?.value?.unit })}
+        lowerFormatter={(v) => format(v, { isScale: false, unit: valueControlled?.value?.unit })}
         onChange={(v) =>
           valueControlledSet(
             merge([{ max: { value: v.max }, value: { value: v.value } }, valueControlled]),
           )
         }
         upper={upper}
-        upperFormatter={(v) => format(v, { unit: valueControlled?.value?.unit })}
+        upperFormatter={(v) => format(v, { isScale: false, unit: valueControlled?.value?.unit })}
         value={{
           value: valueControlled?.value?.value,
           ...(isRange ? { max: valueControlled?.max?.value } : {}),
@@ -139,7 +144,7 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({
         onPress={() =>
           rangeTypeSet(rangeType === RANGE_TYPE.RANGE ? RANGE_TYPE.EXACT : RANGE_TYPE.RANGE)
         }
-        type={BUTTON_TYPE.TRANSPARENT}>
+        type={BUTTON_TYPE.INVISIBLE}>
         {rangeType === RANGE_TYPE.RANGE ? t('data:exactMessage') : t('data:rangeMessage')}
       </Button>
     </Wrapper>

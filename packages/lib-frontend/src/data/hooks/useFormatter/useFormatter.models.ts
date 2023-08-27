@@ -11,8 +11,8 @@ export type FormatterOptionsModel<TType> = TType extends number
   : never;
 
 export type NumberFormatterOptionsModel = {
+  isScale?: boolean;
   isSeparated?: boolean;
-  multiplier?: number;
   precision?: number;
   unit?: NumberUnitModel;
 };
