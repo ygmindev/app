@@ -12,7 +12,6 @@ import { THEME_COLOR, THEME_SIZE } from '#lib-frontend/style/style.constants';
 export const RadioField = <TType extends string = string>({
   color = THEME_COLOR.PRIMARY,
   defaultValue,
-  elementState,
   isHorizontal,
   onChange,
   options,

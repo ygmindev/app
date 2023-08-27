@@ -17,12 +17,10 @@ export const _Slider: SFCModel<_SliderPropsModel> = ({
   lower,
   markerColor,
   markerSize,
-  max,
   maxIcon,
   minIcon,
   onChange,
-  onChangeMax,
-  step,
+  step = 1,
   upper,
   value,
   valueIcon,
@@ -56,20 +54,13 @@ export const _Slider: SFCModel<_SliderPropsModel> = ({
     }}
     max={upper}
     min={lower}
-    onChange={(v) => {
-      if (isArray(v)) {
-        onChange && onChange(v[0]);
-        onChangeMax && onChangeMax(v[1]);
-      } else {
-        onChange && onChange(v);
-      }
-    }}
+    onChange={(v) => onChange && onChange(isArray(v) ? { max: v[1], value: v[0] } : { value: v })}
     railStyle={{ backgroundColor, bottom: 0, margin: 'auto', top: 0 }}
     range={isRange}
     step={step}
     style={{ height: markerSize }}
     tabIndex={2}
     trackStyle={{ backgroundColor: markerColor, bottom: 0, margin: 'auto', top: 0 }}
-    value={isRange ? [value ?? lower, max ?? upper] : value}
+    value={isRange ? [value?.value ?? lower ?? 0, value?.max ?? upper ?? 0] : value?.value}
   />
 );

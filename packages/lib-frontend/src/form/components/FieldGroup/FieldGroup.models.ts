@@ -1,6 +1,7 @@
 import { type ReactElement } from 'react';
 
-import { type ChildrenPropsModel } from '#lib-frontend/core/core.models';
-import { type FieldPropsModel } from '#lib-frontend/form/form.models';
+import { type TextFieldPropsModel } from '#lib-frontend/form/components/TextField/TextField.models';
 
-export type FieldGroupPropsModel = ChildrenPropsModel<ReactElement<FieldPropsModel<unknown>>>;
+export type FieldGroupPropsModel = {
+  fields: Array<{ element: ReactElement<TextFieldPropsModel>; id: string }>;
+};

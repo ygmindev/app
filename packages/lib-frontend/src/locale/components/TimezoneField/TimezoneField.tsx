@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { SelectField } from '#lib-frontend/form/components/SelectField/SelectField';
 import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
@@ -11,7 +11,7 @@ import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { timezoneFormat } from '#lib-shared/format/utils/timezoneFormat/timezoneFormat';
 
-export const TimezoneField: SFCModel<TimezoneFieldPropsModel> = ({
+export const TimezoneField: LFCModel<TimezoneFieldPropsModel> = ({
   defaultValue,
   onChange,
   testID,

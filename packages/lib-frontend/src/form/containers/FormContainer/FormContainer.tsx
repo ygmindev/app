@@ -13,11 +13,6 @@ import { CORNER, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type LFCPropsModel, type RLFCPropsModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { Form } from '#lib-frontend/form/components/Form/Form';
-import { SelectField } from '#lib-frontend/form/components/SelectField/SelectField';
-import { type SelectFieldPropsModel } from '#lib-frontend/form/components/SelectField/SelectField.models';
-import { TextField } from '#lib-frontend/form/components/TextField/TextField';
-import { type TextFieldPropsModel } from '#lib-frontend/form/components/TextField/TextField.models';
-import { FORM_FIELD_TYPE } from '#lib-frontend/form/containers/FormContainer/FormContainer.constants';
 import {
   type FormContainerPropsModel,
   type FormFieldPropsModel,
@@ -138,7 +133,7 @@ const FormContainerF = forwardRef(
       isFirstField = false,
       isLastRow = false,
       isLastField = false,
-    ): ReactElement => {
+    ): ReactElement<FieldPropsModel> => {
       const fieldPropsF: FieldPropsModel = {
         ...fieldProps,
         defaultValue: initialValues ? (initialValues as Record<string, undefined>)[id] : undefined,
@@ -166,26 +161,26 @@ const FormContainerF = forwardRef(
       };
 
       switch (field) {
-        case FORM_FIELD_TYPE.TEXT_FIELD: {
-          return (
-            <TextField
-              {...(fieldPropsF as TextFieldPropsModel)}
-              key={id}
-              onSubmit={handleSubmit}
-              testID={id}
-            />
-          );
-        }
-        case FORM_FIELD_TYPE.SELECT_FIELD: {
-          return (
-            <SelectField
-              {...(fieldPropsF as SelectFieldPropsModel)}
-              key={id}
-              onSubmit={handleSubmit}
-              testID={id}
-            />
-          );
-        }
+        // case FORM_FIELD_TYPE.TEXT_FIELD: {
+        //   return (
+        //     <TextField
+        //       {...(fieldPropsF as TextFieldPropsModel)}
+        //       key={id}
+        //       onSubmit={handleSubmit}
+        //       testID={id}
+        //     />
+        //   );
+        // }
+        // case FORM_FIELD_TYPE.SELECT_FIELD: {
+        //   return (
+        //     <SelectField
+        //       {...(fieldPropsF as SelectFieldPropsModel)}
+        //       key={id}
+        //       onSubmit={handleSubmit}
+        //       testID={id}
+        //     />
+        //   );
+        // }
         default: {
           return element ? (
             cloneElement(element, {

@@ -4,5 +4,5 @@ export type UseValueControlledParamsModel<TType> = ValuePropsModel<TType>;
 
 export type UseValueControlledModel<TType> = {
   valueControlled?: TType;
-  valueControlledSet(value: TType): void;
+  valueControlledSet(value?: TType): void;
 };

@@ -1,20 +1,18 @@
 import { type IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
 import { type ValuePropsModel } from '#lib-frontend/form/form.models';
+import { type RangeModel } from '#lib-shared/form/form.models';
 
-export type _SliderPropsModel = ValuePropsModel<number> & {
+export type _SliderPropsModel = ValuePropsModel<RangeModel<number>> & {
   backgroundColor: string;
-  defaultMax?: number;
   fontColor: string;
   isDisabled?: boolean;
   isRange?: boolean;
-  lower: number;
+  lower?: number;
   markerColor: string;
   markerSize: number;
-  max?: number;
   maxIcon: IconPropsModel['icon'];
   minIcon: IconPropsModel['icon'];
-  onChangeMax?(value: number): void;
-  step: number;
-  upper: number;
+  step?: number;
+  upper?: number;
   valueIcon: IconPropsModel['icon'];
 };

@@ -65,7 +65,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             onBlur={() => isFocusedSet(false)}
             onChange={(value) => {
               valueControlledSet(value);
-              if (value.length === toNumber(process.env.SERVER_OTP_LENGTH)) {
+              if (value?.length === toNumber(process.env.SERVER_OTP_LENGTH)) {
                 onSubmit && onSubmit();
               }
             }}
@@ -76,7 +76,6 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
 
         {IDS.map(({ id }, i) => (
           <TextField
-            defaultValue=""
             elementState={
               isFocused &&
               valueControlled &&

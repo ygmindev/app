@@ -1,7 +1,7 @@
 import find from 'lodash/find';
 import { useMemo } from 'react';
 
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { SelectField } from '#lib-frontend/form/components/SelectField/SelectField';
 import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
@@ -11,7 +11,7 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { currentCountry } from '#lib-frontend/locale/utils/currentCountry/currentCountry';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 
-export const CountryField: SFCModel<CountryFieldPropsModel> = ({
+export const CountryField: LFCModel<CountryFieldPropsModel> = ({
   defaultValue,
   onChange,
   testID,

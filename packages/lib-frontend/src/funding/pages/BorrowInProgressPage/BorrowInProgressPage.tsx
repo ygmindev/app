@@ -6,8 +6,8 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { ItemTable } from '#lib-frontend/data/components/ItemTable/ItemTable';
+import { NUMBER_UNIT_AMOUNT } from '#lib-frontend/data/data.constants';
 import { useFormatter } from '#lib-frontend/data/hooks/useFormatter/useFormatter';
-import { NUMBER_UNIT } from '#lib-frontend/data/hooks/useFormatter/useFormatter.constants';
 import { type BorrowInProgressPagePropsModel } from '#lib-frontend/funding/pages/BorrowInProgressPage/BorrowInProgressPage.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
@@ -45,7 +45,7 @@ export const BorrowInProgressPage: SFCModel<BorrowInProgressPagePropsModel> = ({
         <ItemTable
           data={[
             {
-              description: `${format(100e6, { unit: NUMBER_UNIT.MILLION })} USD`,
+              description: `${format(100e6, { unit: NUMBER_UNIT_AMOUNT.MILLION })} USD`,
               icon: 'dollar',
               title: t('funding:amount'),
             },
@@ -78,7 +78,7 @@ export const BorrowInProgressPage: SFCModel<BorrowInProgressPagePropsModel> = ({
         <ItemTable
           data={[
             {
-              description: `${format(50e6, { unit: NUMBER_UNIT.MILLION })} USD`,
+              description: `${format(50e6, { unit: NUMBER_UNIT_AMOUNT.MILLION })} USD`,
               icon: 'dollar',
               title: t('funding:amount'),
             },

@@ -39,7 +39,7 @@ export const THEME_CONFIG = {
       [THEME_SIZE.MEDIUM]: 14,
       [THEME_SIZE.SMALL]: 12,
       [THEME_SIZE_MORE.XLARGE]: 34,
-      [THEME_SIZE_MORE.XSMALL]: 8,
+      [THEME_SIZE_MORE.XSMALL]: 10,
     },
 
     weight: {

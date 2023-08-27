@@ -1,4 +1,4 @@
-import { type NUMBER_UNIT } from '#lib-frontend/data/hooks/useFormatter/useFormatter.constants';
+import { type NumberUnitModel } from '#lib-frontend/data/data.models';
 
 export type UseFormatterModel = <TType>(
   value?: TType,
@@ -10,8 +10,6 @@ export type FormatterOptionsModel<TType> = TType extends number
   : TType extends Date
   ? DateFormatterOptionsModel
   : never;
-
-export type NumberUnitModel = `${NUMBER_UNIT}`;
 
 export type NumberFormatterOptionsModel = {
   isSeparated?: boolean;

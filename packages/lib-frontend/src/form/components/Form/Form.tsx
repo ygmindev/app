@@ -6,8 +6,6 @@ import { variableName } from '#lib-shared/core/utils/variableName/variableName';
 
 export const Form = composeComponent<FormPropsModel, _FormPropsModel>({
   Component: _Form,
-
-  stylers: [{ width: '100%' }],
 });
 
 process.env.APP_IS_DEBUG && (Form.displayName = variableName({ Form }));

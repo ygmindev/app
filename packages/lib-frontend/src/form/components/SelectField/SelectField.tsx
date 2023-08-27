@@ -7,13 +7,14 @@ import { Menu } from '#lib-frontend/core/components/Menu/Menu';
 import { type MenuRefModel } from '#lib-frontend/core/components/Menu/Menu.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type SFCPropsModel } from '#lib-frontend/core/core.models';
+import { type LFCPropsModel } from '#lib-frontend/core/core.models';
 import { type SelectFieldPropsModel } from '#lib-frontend/form/components/SelectField/SelectField.models';
 import { TextField } from '#lib-frontend/form/components/TextField/TextField';
 import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useSearch } from '#lib-frontend/search/hooks/useSearch/useSearch';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 export const SelectField = <TType extends string = string>({
   defaultValue,
@@ -35,10 +36,10 @@ export const SelectField = <TType extends string = string>({
   value,
   width,
   ...props
-}: SFCPropsModel<SelectFieldPropsModel<TType>>): ReactElement<
-  SFCPropsModel<SelectFieldPropsModel<TType>>
+}: LFCPropsModel<SelectFieldPropsModel<TType>>): ReactElement<
+  LFCPropsModel<SelectFieldPropsModel<TType>>
 > => {
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation();
   const [query, querySet] = useState<string>();
   const { valueControlled, valueControlledSet } = useValueControlled({
@@ -52,13 +53,15 @@ export const SelectField = <TType extends string = string>({
   const { result, search } = useSearch({
     keys: ['label', 'value'],
     list: options,
-    onChange: () => menuRef?.current?.scrollTo({ x: 0, y: 0 }),
+    onChange: () => menuRef.current?.scrollTo({ x: 0, y: 0 }),
   });
 
   const handleToggle = (isOpen?: boolean): void => {
-    menuRef && menuRef.current && menuRef.current.toggle(isOpen);
-    search('');
-    querySet('');
+    void sleep(100).then(() => {
+      menuRef.current?.toggle(isOpen);
+      search('');
+      querySet('');
+    });
   };
 
   const handleSelect = (): void => {
@@ -87,9 +90,8 @@ export const SelectField = <TType extends string = string>({
 
   return (
     <Wrapper
-      isFullWidth
-      style={styles}
-      testID={testID}>
+      {...wrapperProps}
+      grow>
       <Menu
         anchor={(isOpen) => (
           <TextField

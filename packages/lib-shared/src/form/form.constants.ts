@@ -14,6 +14,8 @@ export enum FIELD_TYPE {
 }
 
 export enum FIELD_TYPE_MORE {
+  AMOUNT = 'amount',
   NUMBER_POSITIVE = 'numberPositive',
+  RATE = 'rate',
   RELATIVE_DATE = 'relativeDate',
 }

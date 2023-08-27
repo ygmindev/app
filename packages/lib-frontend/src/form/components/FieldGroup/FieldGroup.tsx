@@ -1,21 +1,50 @@
-import { Children, cloneElement, type ReactElement } from 'react';
+import some from 'lodash/some';
+import { cloneElement, Fragment, useState } from 'react';
 
+import { ANIMATION_STATES_FOCUSABLE } from '#lib-frontend/animation/animation.constants';
+import { Divider } from '#lib-frontend/core/components/Divider/Divider';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { type LFCModel } from '#lib-frontend/core/core.models';
+import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import { type ElementStateModel, type LFCModel } from '#lib-frontend/core/core.models';
 import { type FieldGroupPropsModel } from '#lib-frontend/form/components/FieldGroup/FieldGroup.models';
+import { FocusableWrapper } from '#lib-frontend/form/components/FocusableWrapper/FocusableWrapper';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 
-export const FieldGroup: LFCModel<FieldGroupPropsModel> = ({ children, ...props }) => {
+export const FieldGroup: LFCModel<FieldGroupPropsModel> = ({ fields, ...props }) => {
+  const theme = useTheme();
   const { wrapperProps } = useLayoutStyles({ props });
+  const [elementState, elementStateSet] = useState<ElementStateModel>();
+  const isError = some(fields, ({ element }) => !!element.props.error);
   return (
-    <Wrapper
+    <FocusableWrapper
       {...wrapperProps}
-      border
-      isRowAlign
-      round>
-      {Children.toArray(children).map((child) =>
-        cloneElement(child as ReactElement, { isTransparent: true }),
-      )}
-    </Wrapper>
+      elementState={elementState}
+      error={isError}
+      isRow
+      onElementStateChange={elementStateSet}>
+      {fields.map(({ element, id }, i) => (
+        <Fragment key={id}>
+          {i && (
+            <Divider
+              animation={{ states: ANIMATION_STATES_FOCUSABLE({ isError, theme }) }}
+              elementState={elementState}
+              isVertical
+            />
+          )}
+
+          <Wrapper
+            grow
+            key={id}
+            shrink>
+            {cloneElement(element, {
+              isTransparent: true,
+              onBlur: () => elementStateSet(ELEMENT_STATE.INACTIVE),
+              onFocus: () => elementStateSet(ELEMENT_STATE.ACTIVE),
+            })}
+          </Wrapper>
+        </Fragment>
+      ))}
+    </FocusableWrapper>
   );
 };

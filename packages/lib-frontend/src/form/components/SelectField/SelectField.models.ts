@@ -6,6 +6,6 @@ import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 
 export type SelectFieldPropsModel<TType extends string = string> = {
   renderValue?(option: TranslatableOptionModel): TranslatableTextModel;
-} & Pick<MenuPropsModel<TType>, 'options' | 'renderOption'> &
-  TextFieldPropsModel &
+} & TextFieldPropsModel &
+  Pick<MenuPropsModel<TType>, 'options' | 'renderOption'> &
   Omit<FieldPropsModel, 'label' | 'error'>;
