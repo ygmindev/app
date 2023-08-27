@@ -4,6 +4,7 @@ import { RadioField } from '#lib-frontend/core/components/RadioField/RadioField'
 import { Slider } from '#lib-frontend/core/components/Slider/Slider';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
+import { FieldGroup } from '#lib-frontend/form/components/FieldGroup/FieldGroup';
 import { type RangeFieldPropsModel } from '#lib-frontend/form/components/RangeField/RangeField.models';
 import { TextField } from '#lib-frontend/form/components/TextField/TextField';
 import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
@@ -22,10 +23,12 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({ label, type, ...pro
       case FIELD_TYPE.NUMBER:
       case FIELD_TYPE_MORE.NUMBER_POSITIVE:
         return (
-          <TextField
-            keyboard={type}
-            label={label}
-          />
+          <FieldGroup>
+            <TextField
+              keyboard={type}
+              label={label}
+            />
+          </FieldGroup>
         );
       default:
         return null;

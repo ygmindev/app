@@ -1,9 +1,9 @@
-import { GroupField } from '#lib-frontend/form/components/GroupField/GroupField';
-import { type GroupFieldPropsModel } from '#lib-frontend/form/components/GroupField/GroupField.models';
+import { FocusableWrapper } from '#lib-frontend/form/components/FocusableWrapper/FocusableWrapper';
+import { type FocusableWrapperPropsModel } from '#lib-frontend/form/components/FocusableWrapper/FocusableWrapper.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<GroupFieldPropsModel>({ target: GroupField });
+const { Component, displayName, testID } = withTestComponent<FocusableWrapperPropsModel>({ target: FocusableWrapper });
 
 describe(displayName, () => {
   test('works', async () => {
