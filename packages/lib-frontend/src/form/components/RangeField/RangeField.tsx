@@ -9,6 +9,7 @@ import { Slider } from '#lib-frontend/core/components/Slider/Slider';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { DATA, NUMBER_UNIT_AMOUNT_OPTIONS } from '#lib-frontend/data/data.constants';
+import { useFormatter } from '#lib-frontend/data/hooks/useFormatter/useFormatter';
 import { FieldGroup } from '#lib-frontend/form/components/FieldGroup/FieldGroup';
 import {
   type RangeFieldPropsModel,
@@ -25,25 +26,35 @@ import { merge } from '#lib-shared/core/utils/merge/merge';
 import { FIELD_TYPE_MORE } from '#lib-shared/form/form.constants';
 import { type ScaledNumberRangeModel } from '#lib-shared/form/resources/ScaledNumberRange/ScaledNumberRange.models';
 
-export const RangeField: LFCModel<RangeFieldPropsModel> = ({ type, value, ...props }) => {
+export const RangeField: LFCModel<RangeFieldPropsModel> = ({
+  defaultUnit,
+  type,
+  value,
+  ...props
+}) => {
   const { t } = useTranslation([DATA]);
   const { wrapperProps } = useLayoutStyles({ props });
   const { valueControlled, valueControlledSet } = useValueControlled<ScaledNumberRangeModel>();
   const [rangeType, rangeTypeSet] = useState<RangeTypeModel>(RANGE_TYPE.EXACT);
   const [lower, lowerSet] = useState<number>(1);
   const [upper, upperSet] = useState<number>(1e3);
+  const { format } = useFormatter();
   const isRange = rangeType === RANGE_TYPE.RANGE;
 
   const getFieldElement = (key: keyof ScaledNumberRangeModel): ReactElement | null => {
     switch (type) {
       case FIELD_TYPE_MORE.AMOUNT: {
+        let unitValue = (valueControlled && valueControlled[key]?.unit) ?? defaultUnit;
         let unitOptions = NUMBER_UNIT_AMOUNT_OPTIONS;
         if (key === 'max' && isRange && valueControlled?.value?.unit) {
           const minUnitIndex = findIndex(
             unitOptions,
             ({ id }) => id === valueControlled?.value?.unit,
           );
-          minUnitIndex >= 0 && (unitOptions = unitOptions.slice(minUnitIndex));
+          if (minUnitIndex >= 0) {
+            unitValue = unitValue ?? unitOptions[minUnitIndex].id;
+            unitOptions = unitOptions.slice(minUnitIndex);
+          }
         }
         return (
           <FieldGroup
@@ -52,7 +63,13 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({ type, value, ...pro
                 element: (
                   <TextField
                     keyboard={FIELD_TYPE_MORE.NUMBER_POSITIVE}
-                    label={t('funding:amount')}
+                    label={
+                      isRange
+                        ? key === 'max'
+                          ? t('data:max', { value: t('funding:amount') })
+                          : t('data:min', { value: t('funding:amount') })
+                        : t('funding:amount')
+                    }
                     onChange={(v) =>
                       valueControlledSet(
                         merge([{ [key]: { value: toNumber(v) } }, valueControlled]),
@@ -71,6 +88,7 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({ type, value, ...pro
                       valueControlledSet(merge([{ [key]: { unit: v } }, valueControlled]))
                     }
                     options={unitOptions}
+                    value={unitValue}
                   />
                 ),
                 id: 'unit',
@@ -103,12 +121,14 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({ type, value, ...pro
       <Slider
         isRange={isRange}
         lower={lower}
+        lowerFormatter={(v) => format(v, { unit: valueControlled?.value?.unit })}
         onChange={(v) =>
           valueControlledSet(
             merge([{ max: { value: v.max }, value: { value: v.value } }, valueControlled]),
           )
         }
         upper={upper}
+        upperFormatter={(v) => format(v, { unit: valueControlled?.value?.unit })}
         value={{
           value: valueControlled?.value?.value,
           ...(isRange ? { max: valueControlled?.max?.value } : {}),

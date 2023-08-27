@@ -17,7 +17,7 @@ import { LOCALE } from '#lib-shared/locale/locale.constants';
 export const useFormatter = (): UseFormatterModel => {
   const { t } = useTranslation([LOCALE]);
 
-  return <TType,>(value?: TType, options?: FormatterOptionsModel<TType>): string => {
+  const format = <TType,>(value?: TType, options?: FormatterOptionsModel<TType>): string => {
     if (isNil(value)) {
       return '';
     }
@@ -86,4 +86,6 @@ export const useFormatter = (): UseFormatterModel => {
     }
     return toString(value);
   };
+
+  return { format };
 };

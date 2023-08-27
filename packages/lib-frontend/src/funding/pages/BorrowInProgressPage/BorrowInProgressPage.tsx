@@ -19,7 +19,7 @@ export const BorrowInProgressPage: SFCModel<BorrowInProgressPagePropsModel> = ({
   ...props
 }) => {
   const { t } = useTranslation();
-  const format = useFormatter();
+  const { format } = useFormatter();
   const { styles } = useStyles({ props });
   return (
     <MainLayout

@@ -1,4 +1,6 @@
 {
-  "rangeMessage": "i want to provide a range instead",
-  "exactMessage": "i want to provde the exact value instead"
+  "exactMessage": "i want to provde the exact value instead",
+  "max": "TRANSLATION_MISSING",
+  "min": "TRANSLATION_MISSING",
+  "rangeMessage": "i want to provide a range instead"
 }

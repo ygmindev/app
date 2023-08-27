@@ -16,7 +16,7 @@ import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexSt
 export const QuotesPage: SFCModel<QuotesPagePropsModel> = ({ testID, ...props }) => {
   const { t } = useTranslation();
   const { styles } = useStyles({ props });
-  const format = useFormatter();
+  const { format } = useFormatter();
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
   return (
