@@ -1,4 +1,4 @@
 {
-  "boundMessage": "TRANSLATION_MISSING",
-  "exactMessage": "TRANSLATION_MISSING"
+  "rangeMessage": "i want to provide a range instead",
+  "exactMessage": "i want to provde the exact value instead"
 }

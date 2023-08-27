@@ -9,7 +9,7 @@ export const useValueControlled = <TType,>({
   defaultValue,
   onChange,
   value,
-}: UseValueControlledParamsModel<TType>): UseValueControlledModel<TType> => {
+}: UseValueControlledParamsModel<TType> = {}): UseValueControlledModel<TType> => {
   const [valueState, valueStateSet] = useState<TType | undefined>(defaultValue);
   return {
     valueControlled: value ?? valueState,

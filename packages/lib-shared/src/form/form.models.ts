@@ -1,3 +1,4 @@
+import { type NumberUnitModel } from '#lib-frontend/data/data.models';
 import {
   type FIELD_TYPE,
   type FIELD_TYPE_MORE,
@@ -15,4 +16,4 @@ export type RangeModel<TType> = {
   value?: TType;
 };
 
-export type ScaledNumberModel = { unit?: string; value: number };
+export type ScaledNumberModel = { unit?: NumberUnitModel; value: number };

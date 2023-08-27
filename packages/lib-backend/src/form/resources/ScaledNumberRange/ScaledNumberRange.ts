@@ -1,5 +1,6 @@
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
+import { NumberUnitModel } from '#lib-frontend/data/data.models';
 import { FIELD_TYPE } from '#lib-shared/form/form.constants';
 import { type ScaledNumberModel } from '#lib-shared/form/form.models';
 import { type ScaledNumberRangeModel } from '#lib-shared/form/resources/ScaledNumberRange/ScaledNumberRange.models';
@@ -7,7 +8,7 @@ import { type ScaledNumberRangeModel } from '#lib-shared/form/resources/ScaledNu
 @withEntity({ name: 'ScaledNumber' })
 class ScaledNumber implements ScaledNumberModel {
   @withField({ type: FIELD_TYPE.STRING })
-  unit!: string;
+  unit!: NumberUnitModel;
 
   @withField({ type: FIELD_TYPE.NUMBER })
   value!: number;
