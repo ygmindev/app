@@ -7,7 +7,7 @@ import {
   type SignInFormModel,
   type SignInModel,
 } from '#lib-shared/auth/resources/SignIn/SignIn.models';
-import { FIELD_TYPE } from '#lib-shared/form/form.constants';
+import { FIELD_TYPE } from '#lib-shared/data/data.constants';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withEntity({ isRepository: true, name: SIGN_IN_RESOURCE_NAME })

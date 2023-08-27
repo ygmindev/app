@@ -5,7 +5,7 @@ import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constan
 import { type RadioFieldPropsModel } from '#lib-frontend/core/components/RadioField/RadioField.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCPropsModel } from '#lib-frontend/core/core.models';
-import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
+import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR, THEME_SIZE } from '#lib-frontend/style/style.constants';
 

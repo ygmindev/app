@@ -6,7 +6,7 @@ import {
 } from '#lib-frontend/core/components/Dropdown/Dropdown.models';
 import { type PressablePropsModel } from '#lib-frontend/core/components/Pressable/Pressable.models';
 import { type TranslatableOptionModel } from '#lib-frontend/core/core.models';
-import { type FieldPropsModel } from '#lib-frontend/form/form.models';
+import { type FieldPropsModel } from '#lib-frontend/data/data.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 
 export type MenuRefModel = DropdownRefModel;

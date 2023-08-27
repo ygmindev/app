@@ -6,7 +6,7 @@ import {
   type WithFieldModel,
   type WithFieldParamsModel,
 } from '#lib-backend/resource/utils/withField/withField.models';
-import { FIELD_TYPE } from '#lib-shared/form/form.constants';
+import { FIELD_TYPE } from '#lib-shared/data/data.constants';
 
 const getField = <TType extends unknown>({
   Resource,

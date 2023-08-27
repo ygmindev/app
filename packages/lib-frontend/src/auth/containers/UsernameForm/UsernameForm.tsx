@@ -14,10 +14,10 @@ import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constan
 import { Divider } from '#lib-frontend/core/components/Divider/Divider';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
-import { FormContainer } from '#lib-frontend/form/containers/FormContainer/FormContainer';
-import { FORM_FIELD_TYPE } from '#lib-frontend/form/containers/FormContainer/FormContainer.constants';
-import { type FormContainerRowModel } from '#lib-frontend/form/containers/FormContainer/FormContainer.models';
-import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
+import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
+import { FORM_FIELD_TYPE } from '#lib-frontend/data/components/FormContainer/FormContainer.constants';
+import { type FormContainerRowModel } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
+import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { CountryField } from '#lib-frontend/locale/components/CountryField/CountryField';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
@@ -27,7 +27,7 @@ import { type SignInMethodModel } from '#lib-shared/auth/auth.models';
 import { type OtpFormModel, type OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
 import { pick } from '#lib-shared/core/utils/pick/pick';
 import { withId } from '#lib-shared/core/utils/withId/withId';
-import { FORM_MODE } from '#lib-shared/form/form.constants';
+import { FORM_MODE } from '#lib-shared/data/data.constants';
 import { type HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
 

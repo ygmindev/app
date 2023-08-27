@@ -6,7 +6,7 @@ import {
   type UnderwriterFormModel,
   type UnderwriterModel,
 } from '#lib-shared/capital/resources/Underwriter/Underwriter.models';
-import { FIELD_TYPE } from '#lib-shared/form/form.constants';
+import { FIELD_TYPE } from '#lib-shared/data/data.constants';
 
 @withEntity({ isRepository: true, name: UNDERWRITER_RESOURCE_NAME })
 export class Underwriter extends EntityResource implements UnderwriterModel {

@@ -6,7 +6,7 @@ import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type LFCModel } from '#lib-frontend/core/core.models';
-import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
+import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import {
@@ -16,7 +16,7 @@ import {
   THEME_SIZE,
 } from '#lib-frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
-import { type RangeModel } from '#lib-shared/form/form.models';
+import { type RangeModel } from '#lib-shared/data/data.models';
 
 export const Slider: LFCModel<SliderPropsModel> = ({
   defaultValue,

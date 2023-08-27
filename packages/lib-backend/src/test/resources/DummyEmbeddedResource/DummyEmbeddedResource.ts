@@ -2,7 +2,7 @@ import { OTP_EXPIRATION_SECONDS } from '#lib-backend/auth/resources/Otp/Otp.cons
 import { EmbeddedResource } from '#lib-backend/resource/resources/EmbeddedResource/EmbeddedResource';
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
-import { FIELD_TYPE } from '#lib-shared/form/form.constants';
+import { FIELD_TYPE } from '#lib-shared/data/data.constants';
 import { DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.constants';
 import { type DummyEmbeddedResourceModel } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.models';
 

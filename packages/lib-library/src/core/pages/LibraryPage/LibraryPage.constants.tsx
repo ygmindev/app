@@ -16,9 +16,9 @@ import { props as textProps } from '#lib-frontend/core/components/Text/Text.libr
 import { props as tileProps } from '#lib-frontend/core/components/Tile/Tile.library';
 import { props as tooltipProps } from '#lib-frontend/core/components/Tooltip/Tooltip.library';
 import { props as wrapperProps } from '#lib-frontend/core/components/Wrapper/Wrapper.library';
-import { props as selectFieldProps } from '#lib-frontend/form/components/SelectField/SelectField.library';
-import { props as switchFieldProps } from '#lib-frontend/form/components/SwitchField/SwitchField.library';
-import { props as textFieldProps } from '#lib-frontend/form/components/TextField/TextField.library';
+import { props as selectFieldProps } from '#lib-frontend/data/components/SelectField/SelectField.library';
+import { props as switchFieldProps } from '#lib-frontend/data/components/SwitchField/SwitchField.library';
+import { props as textFieldProps } from '#lib-frontend/data/components/TextField/TextField.library';
 import { props as notificationProps } from '#lib-frontend/notification/components/Notification/Notification.library';
 import { props as notificationsProps } from '#lib-frontend/notification/containers/Notifications/Notifications.library';
 import { props as searchFieldProps } from '#lib-frontend/search/components/SearchField/SearchField.library';

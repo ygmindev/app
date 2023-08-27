@@ -1,5 +1,5 @@
 import { type SFCModel } from '#lib-frontend/core/core.models';
-import { StepForm } from '#lib-frontend/form/components/StepForm/StepForm';
+import { StepForm } from '#lib-frontend/data/components/StepForm/StepForm';
 import { AmountForm } from '#lib-frontend/funding/containers/AmountForm/AmountForm';
 import {
   type FundingFormPropsModel,

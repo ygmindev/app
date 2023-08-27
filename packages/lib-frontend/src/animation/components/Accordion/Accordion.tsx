@@ -10,7 +10,7 @@ import {
   type MeasureModel,
   type SFCModel,
 } from '#lib-frontend/core/core.models';
-import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
+import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';

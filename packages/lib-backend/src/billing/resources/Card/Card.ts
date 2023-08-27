@@ -8,7 +8,7 @@ import {
   type CardModel,
 } from '#lib-shared/billing/resources/Card/Card.models';
 import { type PaymentMethodTypeModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
-import { FIELD_TYPE } from '#lib-shared/form/form.constants';
+import { FIELD_TYPE } from '#lib-shared/data/data.constants';
 
 @withEntity({
   isEmbedded: true,

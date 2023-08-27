@@ -5,7 +5,7 @@ import { useSignInResource } from '#lib-frontend/auth/hooks/useSignInResource/us
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
-import { StepForm } from '#lib-frontend/form/components/StepForm/StepForm';
+import { StepForm } from '#lib-frontend/data/components/StepForm/StepForm';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
@@ -14,7 +14,7 @@ import {
   type SignInFormModel,
   type SignInFormStepsModel,
 } from '#lib-shared/auth/resources/SignIn/SignIn.models';
-import { FORM_MODE } from '#lib-shared/form/form.constants';
+import { FORM_MODE } from '#lib-shared/data/data.constants';
 
 export const SignInForm: LFCModel<SignInFormPropsModel> = ({
   method,

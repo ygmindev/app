@@ -1,4 +1,9 @@
 import { type TranslatableOptionModel } from '#lib-frontend/core/core.models';
+import { type NumberUnitModel } from '#lib-frontend/data/data.models';
+
+export const ADD = 'add';
+
+export const FORM = 'form';
 
 export const DATA = 'data';
 
@@ -13,7 +18,7 @@ export enum NUMBER_UNIT_AMOUNT {
   THOUSAND = 'thousand',
 }
 
-export const NUMBER_UNIT_AMOUNT_OPTIONS: Array<TranslatableOptionModel> = [
+export const NUMBER_UNIT_AMOUNT_OPTIONS: Array<TranslatableOptionModel<NumberUnitModel>> = [
   { id: NUMBER_UNIT_AMOUNT.THOUSAND, label: ({ t }) => t('core:thousand') },
   { id: NUMBER_UNIT_AMOUNT.MILLION, label: ({ t }) => t('core:million') },
   { id: NUMBER_UNIT_AMOUNT.BILLION, label: ({ t }) => t('core:billion') },

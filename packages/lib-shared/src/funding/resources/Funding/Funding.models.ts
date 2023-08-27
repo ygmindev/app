@@ -1,4 +1,4 @@
-import { type ScaledNumberRangeModel } from '#lib-shared/form/resources/ScaledNumberRange/ScaledNumberRange.models';
+import { type ScaledNumberRangeModel } from '#lib-shared/data/resources/ScaledNumberRange/ScaledNumberRange.models';
 import {
   type EntityResourceDataModel,
   type EntityResourceModel,

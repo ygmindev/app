@@ -2,14 +2,14 @@ import { useMemo } from 'react';
 
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
-import { SelectField } from '#lib-frontend/form/components/SelectField/SelectField';
-import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
+import { SelectField } from '#lib-frontend/data/components/SelectField/SelectField';
+import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { type TimezoneFieldPropsModel } from '#lib-frontend/locale/components/TimezoneField/TimezoneField.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { timezones } from '#lib-frontend/locale/utils/timezones/timezones';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { timezoneFormat } from '#lib-shared/format/utils/timezoneFormat/timezoneFormat';
+import { timezoneFormat } from '#lib-shared/data/utils/timezoneFormat/timezoneFormat';
 
 export const TimezoneField: LFCModel<TimezoneFieldPropsModel> = ({
   defaultValue,

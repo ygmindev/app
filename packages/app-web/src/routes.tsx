@@ -1,7 +1,7 @@
 import { TABS_TYPE } from '#lib-frontend/core/components/Tabs/Tabs.constants';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { COMPLETED, HOME, IN_PROGRESS, SUMMARY } from '#lib-frontend/core/core.constants';
-import { FORM } from '#lib-frontend/form/form.constants';
+import { FORM } from '#lib-frontend/data/data.constants';
 import { BORROW, FUNDING, QUOTES } from '#lib-frontend/funding/funding.constants';
 import { BorrowInProgressPage } from '#lib-frontend/funding/pages/BorrowInProgressPage/BorrowInProgressPage';
 import { BorrowPage } from '#lib-frontend/funding/pages/BorrowPage/BorrowPage';

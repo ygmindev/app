@@ -1,4 +1,4 @@
-import { type SubmittablePropsModel } from '#lib-frontend/form/form.models';
+import { type SubmittablePropsModel } from '#lib-frontend/data/data.models';
 import { type RESOURCE_FORM_MODE } from '#lib-frontend/resource/containers/ResourceForm/ResourceForm.constants';
 import { type ResourcesPropsModel } from '#lib-frontend/resource/containers/Resources/Resources.models';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';

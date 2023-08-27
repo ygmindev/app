@@ -6,7 +6,7 @@ import {
   type IssuerFormModel,
   type IssuerModel,
 } from '#lib-shared/capital/resources/Issuer/Issuer.models';
-import { FIELD_TYPE } from '#lib-shared/form/form.constants';
+import { FIELD_TYPE } from '#lib-shared/data/data.constants';
 
 @withEntity({ isRepository: true, name: ISSUER_RESOURCE_NAME })
 export class Issuer extends EntityResource implements IssuerModel {

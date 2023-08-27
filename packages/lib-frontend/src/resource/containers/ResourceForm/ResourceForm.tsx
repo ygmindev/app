@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
 
 import { type SFCPropsModel } from '#lib-frontend/core/core.models';
-import { FormContainer } from '#lib-frontend/form/containers/FormContainer/FormContainer';
+import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { type ResourceFormPropsModel } from '#lib-frontend/resource/containers/ResourceForm/ResourceForm.models';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { withId } from '#lib-shared/core/utils/withId/withId';

@@ -12,7 +12,7 @@ import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { withCondition } from '#lib-shared/core/utils/withCondition/withCondition';
-import { FIELD_TYPE } from '#lib-shared/form/form.constants';
+import { FIELD_TYPE } from '#lib-shared/data/data.constants';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
 import { type ArgsModel } from '#lib-shared/resource/utils/Args/Args.models';

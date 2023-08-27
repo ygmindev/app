@@ -7,7 +7,7 @@ import { BANK_RESOURCE_NAME } from '#lib-shared/billing/resources/Bank/Bank.cons
 import { type BankModel } from '#lib-shared/billing/resources/Bank/Bank.models';
 import { CARD_RESOURCE_NAME } from '#lib-shared/billing/resources/Card/Card.constants';
 import { type CardModel } from '#lib-shared/billing/resources/Card/Card.models';
-import { FIELD_TYPE } from '#lib-shared/form/form.constants';
+import { FIELD_TYPE } from '#lib-shared/data/data.constants';
 import { LINKED_USER_RESOURCE_NAME } from '#lib-shared/user/resources/LinkedUser/LinkedUser.constants';
 import { type LinkedUserModel } from '#lib-shared/user/resources/LinkedUser/LinkedUser.models';
 import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';

@@ -9,7 +9,7 @@ import { type _PaymentMethodFieldPropsModel } from '#lib-frontend/billing/compon
 import { REDIRECT } from '#lib-frontend/core/core.constants';
 import { type RSFCModel } from '#lib-frontend/core/core.models';
 import { useErrorContext } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext';
-import { type FormRefModel } from '#lib-frontend/form/form.models';
+import { type FormRefModel } from '#lib-frontend/data/data.models';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import {
   type CardBrandModel,

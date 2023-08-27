@@ -1,7 +1,7 @@
 import { useSignInResource } from '#lib-frontend/auth/hooks/useSignInResource/useSignInResource';
 import { type SFCModel } from '#lib-frontend/core/core.models';
-import { FormContainer } from '#lib-frontend/form/containers/FormContainer/FormContainer';
-import { FORM_FIELD_TYPE } from '#lib-frontend/form/containers/FormContainer/FormContainer.constants';
+import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
+import { FORM_FIELD_TYPE } from '#lib-frontend/data/components/FormContainer/FormContainer.constants';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';

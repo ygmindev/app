@@ -31,7 +31,7 @@ import { PersonalPage } from '#lib-frontend/user/pages/PersonalPage/PersonalPage
 import { EMAIL, NAME, PERSONAL, PHONE } from '#lib-frontend/user/user.constants';
 import { AUTH, SIGN_IN_METHOD } from '#lib-shared/auth/auth.constants';
 import { CORE } from '#lib-shared/core/core.constants';
-import { FORM_MODE } from '#lib-shared/form/form.constants';
+import { FORM_MODE } from '#lib-shared/data/data.constants';
 import { PING } from '#lib-shared/http/http.constants';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 import { BRIGHTNESS, STYLE } from '#lib-shared/style/style.constants';

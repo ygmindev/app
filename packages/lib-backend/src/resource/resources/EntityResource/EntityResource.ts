@@ -5,7 +5,7 @@ import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { withHook } from '#lib-backend/resource/utils/withHook/withHook';
 import { HOOK_TYPE } from '#lib-backend/resource/utils/withHook/withHook.constants';
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
-import { FIELD_TYPE } from '#lib-shared/form/form.constants';
+import { FIELD_TYPE } from '#lib-shared/data/data.constants';
 import { type EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 @withEntity({ isAbstract: true })

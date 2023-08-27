@@ -8,7 +8,7 @@ import {
   type AccessModel,
   type AccessRoleModel,
 } from '#lib-shared/auth/resources/Access/Access.models';
-import { FIELD_TYPE } from '#lib-shared/form/form.constants';
+import { FIELD_TYPE } from '#lib-shared/data/data.constants';
 import { type ResolvedFieldModel } from '#lib-shared/resource/resource.models';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 

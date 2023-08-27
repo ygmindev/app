@@ -1,7 +1,7 @@
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { type StringKeyModel } from '#lib-shared/core/core.models';
-import { FIELD_TYPE } from '#lib-shared/form/form.constants';
+import { FIELD_TYPE } from '#lib-shared/data/data.constants';
 import {
   type FilterConditionModel,
   type FilterModel,

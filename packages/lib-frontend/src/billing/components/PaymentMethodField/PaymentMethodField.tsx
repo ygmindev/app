@@ -5,7 +5,7 @@ import { type PaymentMethodFieldPropsModel } from '#lib-frontend/billing/compone
 import { useBankResource } from '#lib-frontend/billing/hooks/useBankResource/useBankResource';
 import { useCardResource } from '#lib-frontend/billing/hooks/useCardResource/useCardResource';
 import { type RSFCModel } from '#lib-frontend/core/core.models';
-import { type FormRefModel } from '#lib-frontend/form/form.models';
+import { type FormRefModel } from '#lib-frontend/data/data.models';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { type BankFormModel } from '#lib-shared/billing/resources/Bank/Bank.models';

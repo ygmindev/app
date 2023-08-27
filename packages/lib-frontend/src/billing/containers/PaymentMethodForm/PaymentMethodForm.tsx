@@ -7,8 +7,8 @@ import { usePaymentMethodResource } from '#lib-frontend/billing/hooks/usePayment
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBoundary';
-import { FormContainer } from '#lib-frontend/form/containers/FormContainer/FormContainer';
-import { type FormRefModel } from '#lib-frontend/form/form.models';
+import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
+import { type FormRefModel } from '#lib-frontend/data/data.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';

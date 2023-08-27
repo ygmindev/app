@@ -1,3 +1,3 @@
-import { type TextFieldPropsModel } from '#lib-frontend/form/components/TextField/TextField.models';
+import { type TextFieldPropsModel } from '#lib-frontend/data/components/TextField/TextField.models';
 
 export type PhoneFieldPropsModel = TextFieldPropsModel;

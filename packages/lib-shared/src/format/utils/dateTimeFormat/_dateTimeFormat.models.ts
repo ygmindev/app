@@ -1,4 +1,4 @@
-import { type DateTimeFormatTypeModel } from '#lib-shared/format/utils/dateTimeFormat/dateTimeFormat.models';
+import { type DateTimeFormatTypeModel } from '#lib-shared/data/utils/dateTimeFormat/dateTimeFormat.models';
 
 export type _DateTimeFormatParamsModel = {
   format: DateTimeFormatTypeModel;

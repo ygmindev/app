@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
 
 import { type SFCPropsModel } from '#lib-frontend/core/core.models';
-import { TextField } from '#lib-frontend/form/components/TextField/TextField';
+import { TextField } from '#lib-frontend/data/components/TextField/TextField';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { RESOURCE_FILTER_FIELD_TYPE } from '#lib-frontend/resource/components/ResourceFilterField/ResourceFilterField.constants';
 import { type ResourceFilterFieldPropsModel } from '#lib-frontend/resource/components/ResourceFilterField/ResourceFilterField.models';

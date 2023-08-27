@@ -2,7 +2,7 @@ import isNil from 'lodash/isNil';
 import { type ReactElement } from 'react';
 
 import { type SFCPropsModel } from '#lib-frontend/core/core.models';
-import { FormContainer } from '#lib-frontend/form/containers/FormContainer/FormContainer';
+import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { ResourceFilterField } from '#lib-frontend/resource/components/ResourceFilterField/ResourceFilterField';
 import { type ResourceFilterFormPropsModel } from '#lib-frontend/resource/components/ResourceFilterForm/ResourceFilterForm.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';

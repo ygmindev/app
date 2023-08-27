@@ -1,7 +1,7 @@
 import { type LFCModel } from '#lib-frontend/core/core.models';
-import { TextField } from '#lib-frontend/form/components/TextField/TextField';
-import { TEXT_FIELD_KEYBOARD } from '#lib-frontend/form/components/TextField/TextField.constants';
-import { useValueControlled } from '#lib-frontend/form/hooks/useValueControlled/useValueControlled';
+import { TextField } from '#lib-frontend/data/components/TextField/TextField';
+import { TEXT_FIELD_KEYBOARD } from '#lib-frontend/data/components/TextField/TextField.constants';
+import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { type PhoneFieldPropsModel } from '#lib-frontend/user/components/PhoneField/PhoneField.models';

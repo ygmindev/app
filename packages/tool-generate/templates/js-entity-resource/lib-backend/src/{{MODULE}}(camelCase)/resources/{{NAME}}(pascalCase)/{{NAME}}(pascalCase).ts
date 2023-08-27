@@ -6,7 +6,7 @@ import {
   type {{NAME}}(pascalCase)FormModel,
   type {{NAME}}(pascalCase)Model,
 } from '#lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
-import { FIELD_TYPE } from '#lib-shared/form/form.constants';
+import { FIELD_TYPE } from '#lib-shared/data/data.constants';
 
 @withEntity({ isRepository: true, name: {{NAME}}(constantCase)_RESOURCE_NAME })
 export class {{NAME}}(pascalCase) extends EntityResource implements {{NAME}}(pascalCase)Model {

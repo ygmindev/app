@@ -6,7 +6,7 @@ import { createResult } from '#lib-backend/resource/utils/createResult/createRes
 import { createRoot } from '#lib-backend/resource/utils/createRoot/createRoot';
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
-import { FIELD_TYPE } from '#lib-shared/form/form.constants';
+import { FIELD_TYPE } from '#lib-shared/data/data.constants';
 import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type ResultModel } from '#lib-shared/resource/utils/Result/Result.models';

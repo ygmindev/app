@@ -1,9 +1,9 @@
-import { ScaledNumberRange } from '#lib-backend/form/resources/ScaledNumberRange/ScaledNumberRange';
+import { ScaledNumberRange } from '#lib-backend/data/resources/ScaledNumberRange/ScaledNumberRange';
 import { EntityResource } from '#lib-backend/resource/resources/EntityResource/EntityResource';
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
-import { FIELD_TYPE } from '#lib-shared/form/form.constants';
-import { type ScaledNumberRangeModel } from '#lib-shared/form/resources/ScaledNumberRange/ScaledNumberRange.models';
+import { FIELD_TYPE } from '#lib-shared/data/data.constants';
+import { type ScaledNumberRangeModel } from '#lib-shared/data/resources/ScaledNumberRange/ScaledNumberRange.models';
 import { FUNDING_RESOURCE_NAME } from '#lib-shared/funding/resources/Funding/Funding.constants';
 import { type FundingModel } from '#lib-shared/funding/resources/Funding/Funding.models';
 

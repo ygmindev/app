@@ -1,4 +1,4 @@
-import { type FieldPropsModel, type SubmittablePropsModel } from '#lib-frontend/form/form.models';
+import { type FieldPropsModel, type SubmittablePropsModel } from '#lib-frontend/data/data.models';
 import { type BankFormModel } from '#lib-shared/billing/resources/Bank/Bank.models';
 import { type CardFormModel } from '#lib-shared/billing/resources/Card/Card.models';
 import { type PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
