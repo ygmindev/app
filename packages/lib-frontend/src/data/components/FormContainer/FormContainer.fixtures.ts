@@ -1,4 +1,4 @@
-import { FORM_FIELD_TYPE } from '#lib-frontend/data/components/FormContainer/FormContainer.constants';
+import { FORM_PROPERTY_TYPE } from '#lib-frontend/data/components/FormContainer/FormContainer.constants';
 import { type FormContainerPropsModel } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
 import { withId } from '#lib-shared/core/utils/withId/withId';
 
@@ -13,14 +13,14 @@ export const FORM_CONTAINER_PROPS_FIXTURE: FormContainerPropsModel<FormContainer
   rows: withId([
     {
       fields: [
-        { field: FORM_FIELD_TYPE.TEXT_FIELD, id: 'stringField', label: 'stringField' },
+        { field: FORM_PROPERTY_TYPE.TEXT_FIELD, id: 'stringField', label: 'stringField' },
         // {
-        //   field: FORM_FIELD_TYPE.TEXT_FIELD,
+        //   field: FORM_PROPERTY_TYPE.TEXT_FIELD,
         //   id: 'stringFieldOptional',
         //   label: 'stringFieldOptional',
         // },
       ],
     },
-    // { fields: [{ field: FORM_FIELD_TYPE.TEXT_FIELD, id: 'numberField', label: 'numberField' }] },
+    // { fields: [{ field: FORM_PROPERTY_TYPE.TEXT_FIELD, id: 'numberField', label: 'numberField' }] },
   ]),
 };

@@ -5,7 +5,7 @@ import {
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { type ClassModel, type PartialModel } from '#lib-shared/core/core.models';
-import { FIELD_TYPE } from '#lib-shared/data/data.constants';
+import { PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 import { type RootModel } from '#lib-shared/resource/utils/Root/Root.models';
 
 export const createRoot = <TRoot = undefined>({
@@ -20,7 +20,7 @@ export const createRoot = <TRoot = undefined>({
 
     @withEntity({ isAbstract: true, name: `${nameF}Root` })
     class Root implements RootModel<TRoot> {
-      @withField({ Resource: RootResourceF, type: FIELD_TYPE.RESOURCE })
+      @withField({ Resource: RootResourceF, type: PROPERTY_TYPE.RESOURCE })
       root?: PartialModel<TRoot>;
     }
 

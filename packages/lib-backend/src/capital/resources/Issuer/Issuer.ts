@@ -6,16 +6,16 @@ import {
   type IssuerFormModel,
   type IssuerModel,
 } from '#lib-shared/capital/resources/Issuer/Issuer.models';
-import { FIELD_TYPE } from '#lib-shared/data/data.constants';
+import { DATA_TYPE } from '#lib-shared/data/data.constants';
 
 @withEntity({ isRepository: true, name: ISSUER_RESOURCE_NAME })
 export class Issuer extends EntityResource implements IssuerModel {
-  @withField({ isRepository: true, type: FIELD_TYPE.STRING })
+  @withField({ isRepository: true, type: DATA_TYPE.STRING })
   name!: string;
 }
 
 @withEntity({ name: `${ISSUER_RESOURCE_NAME}Form` })
 export class IssuerForm implements IssuerFormModel {
-  @withField({ type: FIELD_TYPE.STRING })
+  @withField({ type: DATA_TYPE.STRING })
   name!: string;
 }

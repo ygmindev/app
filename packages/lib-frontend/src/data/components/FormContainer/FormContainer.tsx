@@ -23,7 +23,7 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
 import { FLEX_ALIGN } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
-import { FIELD_TYPE } from '#lib-shared/data/data.constants';
+import { DATA_TYPE } from '#lib-shared/data/data.constants';
 
 export const FormContainer = forwardRef(
   <TType = void, TResult = void>(
@@ -84,7 +84,7 @@ const FormContainerF = forwardRef(
             if (field?.id) {
               let value = (data as Record<string, unknown>)[field.id];
               switch (field?.type) {
-                case FIELD_TYPE.NUMBER: {
+                case DATA_TYPE.NUMBER: {
                   value = toNumber(value);
                   break;
                 }
@@ -161,7 +161,7 @@ const FormContainerF = forwardRef(
       };
 
       switch (field) {
-        // case FORM_FIELD_TYPE.TEXT_FIELD: {
+        // case FORM_PROPERTY_TYPE.TEXT_FIELD: {
         //   return (
         //     <TextField
         //       {...(fieldPropsF as TextFieldPropsModel)}
@@ -171,7 +171,7 @@ const FormContainerF = forwardRef(
         //     />
         //   );
         // }
-        // case FORM_FIELD_TYPE.SELECT_FIELD: {
+        // case FORM_PROPERTY_TYPE.SELECT_FIELD: {
         //   return (
         //     <SelectField
         //       {...(fieldPropsF as SelectFieldPropsModel)}

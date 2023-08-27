@@ -15,7 +15,7 @@ import { Divider } from '#lib-frontend/core/components/Divider/Divider';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
-import { FORM_FIELD_TYPE } from '#lib-frontend/data/components/FormContainer/FormContainer.constants';
+import { FORM_PROPERTY_TYPE } from '#lib-frontend/data/components/FormContainer/FormContainer.constants';
 import { type FormContainerRowModel } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { CountryField } from '#lib-frontend/locale/components/CountryField/CountryField';
@@ -68,7 +68,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
           {
             fields: [
               {
-                field: FORM_FIELD_TYPE.TEXT_FIELD,
+                field: FORM_PROPERTY_TYPE.TEXT_FIELD,
                 fieldProps: {
                   autoComplete: 'email',
                   icon: 'email',

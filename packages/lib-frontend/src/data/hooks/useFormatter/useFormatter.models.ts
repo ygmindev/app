@@ -3,7 +3,7 @@ import { type NumberUnitModel } from '#lib-frontend/data/data.models';
 export type UseFormatterModel = {
   format: <TType>(value?: TType, options?: FormatterOptionsModel<TType>) => string;
 
-  unformat: <TType>(value?: string, type?: d\, options?: FormatterOptionsModel<TType>) => TType | undefined;
+  // unformat: <TType>(value?: string, options?: FormatterOptionsModel<TType>) => TType | undefined;
 };
 
 export type FormatterOptionsModel<TType> = TType extends number

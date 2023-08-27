@@ -1,5 +1,5 @@
 import { type FieldPropsModel } from '#lib-frontend/data/data.models';
-import { type RESOURCE_FILTER_FIELD_TYPE } from '#lib-frontend/resource/components/ResourceFilterField/ResourceFilterField.constants';
+import { type RESOURCE_FILTER_PROPERTY_TYPE } from '#lib-frontend/resource/components/ResourceFilterField/ResourceFilterField.constants';
 import { type StringKeyModel } from '#lib-shared/core/core.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
@@ -12,4 +12,4 @@ export type ResourceFilterFieldPropsModel<
     type?: ResourceFilterFieldTypeModel;
   };
 
-export type ResourceFilterFieldTypeModel = `${RESOURCE_FILTER_FIELD_TYPE}`;
+export type ResourceFilterFieldTypeModel = `${RESOURCE_FILTER_PROPERTY_TYPE}`;

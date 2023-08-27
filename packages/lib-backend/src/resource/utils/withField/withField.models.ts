@@ -1,4 +1,4 @@
-import { type FieldTypeModel } from '#lib-shared/data/data.models';
+import { type DataTypeModel, type FieldTypeModel } from '#lib-shared/data/data.models';
 
 export type WithFieldParamsModel<TType> = {
   Resource?: TType;
@@ -9,7 +9,7 @@ export type WithFieldParamsModel<TType> = {
   isRepository?: boolean;
   isSchema?: boolean;
   isUnique?: boolean;
-  type: FieldTypeModel;
+  type: DataTypeModel | FieldTypeModel;
 };
 
 export type WithFieldModel = PropertyDecorator;

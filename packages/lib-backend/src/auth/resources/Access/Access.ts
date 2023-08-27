@@ -8,27 +8,27 @@ import {
   type AccessModel,
   type AccessRoleModel,
 } from '#lib-shared/auth/resources/Access/Access.models';
-import { FIELD_TYPE } from '#lib-shared/data/data.constants';
+import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 import { type ResolvedFieldModel } from '#lib-shared/resource/resource.models';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withEntity({ name: `${ACCESS_RESOURCE_NAME}Form` })
 export class AccessForm implements AccessFormModel {
-  @withField({ isRepository: true, type: FIELD_TYPE.ID })
+  @withField({ isRepository: true, type: PROPERTY_TYPE.ID })
   _uid!: string;
 
-  @withField({ isRepository: true, type: FIELD_TYPE.STRING })
+  @withField({ isRepository: true, type: DATA_TYPE.STRING })
   role!: AccessRoleModel;
 }
 
 @withEntity({ isRepository: true, name: ACCESS_RESOURCE_NAME })
 export class Access extends EntityResource implements AccessModel {
-  @withField({ isRepository: true, type: FIELD_TYPE.ID })
+  @withField({ isRepository: true, type: PROPERTY_TYPE.ID })
   _uid!: string;
 
-  @withField({ isRepository: true, type: FIELD_TYPE.STRING })
+  @withField({ isRepository: true, type: DATA_TYPE.STRING })
   role!: AccessRoleModel;
 
-  @withField({ Resource: User, isOptional: true, type: FIELD_TYPE.RESOURCE })
+  @withField({ Resource: User, isOptional: true, type: PROPERTY_TYPE.RESOURCE })
   user?: ResolvedFieldModel<UserModel>;
 }

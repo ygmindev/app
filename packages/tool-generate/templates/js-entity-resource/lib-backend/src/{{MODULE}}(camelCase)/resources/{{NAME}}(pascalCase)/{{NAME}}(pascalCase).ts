@@ -6,11 +6,11 @@ import {
   type {{NAME}}(pascalCase)FormModel,
   type {{NAME}}(pascalCase)Model,
 } from '#lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
-import { FIELD_TYPE } from '#lib-shared/data/data.constants';
+import { PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 
 @withEntity({ isRepository: true, name: {{NAME}}(constantCase)_RESOURCE_NAME })
 export class {{NAME}}(pascalCase) extends EntityResource implements {{NAME}}(pascalCase)Model {
-  @withField({ isRepository: true, type: FIELD_TYPE.ID })
+  @withField({ isRepository: true, type: PROPERTY_TYPE.ID })
   id!: string;
 }
 

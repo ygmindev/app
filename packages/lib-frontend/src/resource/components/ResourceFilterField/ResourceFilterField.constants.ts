@@ -1,3 +1,3 @@
-export enum RESOURCE_FILTER_FIELD_TYPE {
+export enum RESOURCE_FILTER_PROPERTY_TYPE {
   STRING = 'string',
 }

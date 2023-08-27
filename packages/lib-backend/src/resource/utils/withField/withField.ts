@@ -6,7 +6,7 @@ import {
   type WithFieldModel,
   type WithFieldParamsModel,
 } from '#lib-backend/resource/utils/withField/withField.models';
-import { FIELD_TYPE } from '#lib-shared/data/data.constants';
+import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 
 const getField = <TType extends unknown>({
   Resource,
@@ -17,13 +17,13 @@ const getField = <TType extends unknown>({
     return Field(() => (isArray ? [Resource] : Resource) as ReturnTypeFuncValue, { simple: true });
   }
   switch (type) {
-    case FIELD_TYPE.STRING:
+    case DATA_TYPE.STRING:
       return Field(() => (isArray ? [String] : String));
-    case FIELD_TYPE.BOOLEAN:
+    case DATA_TYPE.BOOLEAN:
       return Field(() => (isArray ? [Boolean] : Boolean));
-    case FIELD_TYPE.DATE:
+    case DATA_TYPE.DATE:
       return Field(() => (isArray ? [Date] : Date));
-    case FIELD_TYPE.NUMBER:
+    case DATA_TYPE.NUMBER:
       return Field(() => (isArray ? [Float] : Float));
     default:
       return Field(() => (isArray ? [String] : String));
@@ -49,15 +49,15 @@ const getColumn = <TType extends unknown>({
       return [Property, { defaultValue, type: ArrayType }];
     }
     switch (type) {
-      case FIELD_TYPE.PRIMARY_KEY:
+      case PROPERTY_TYPE.PRIMARY_KEY:
         return [PrimaryKey, { defaultValue, type: 'ObjectId' }];
-      case FIELD_TYPE.ID:
+      case PROPERTY_TYPE.ID:
         return [Property, { defaultValue, type: 'ObjectId' }];
-      case FIELD_TYPE.STRING:
+      case DATA_TYPE.STRING:
         return [Property, { defaultValue, type: 'string' }];
-      case FIELD_TYPE.NUMBER:
+      case DATA_TYPE.NUMBER:
         return [Property, { defaultValue, type: 'number' }];
-      case FIELD_TYPE.DATE:
+      case DATA_TYPE.DATE:
         return [Property, { defaultValue, type: Date }];
       default:
         return [Property, { defaultValue, type: undefined }];

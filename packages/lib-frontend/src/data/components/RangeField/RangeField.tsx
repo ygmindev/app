@@ -25,7 +25,7 @@ import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLa
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { type ScaledNumberRangeModel } from '#lib-shared/data/resources/ScaledNumberRange/ScaledNumberRange.models';
-import { FIELD_TYPE_MORE } from '#lib-shared/data/data.constants';
+import { DATA_TYPE_MORE } from '#lib-shared/data/data.constants';
 
 export const RangeField: LFCModel<RangeFieldPropsModel> = ({
   defaultUnit,
@@ -49,7 +49,7 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({
 
   const getFieldElement = (key: keyof ScaledNumberRangeModel): ReactElement | null => {
     switch (type) {
-      case FIELD_TYPE_MORE.AMOUNT: {
+      case DATA_TYPE_MORE.AMOUNT: {
         let unitOptions = NUMBER_UNIT_AMOUNT_OPTIONS;
         if (key === 'max' && isRange && valueControlled?.value?.unit) {
           const minUnitIndex = findIndex(
@@ -66,7 +66,7 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({
               {
                 element: (
                   <TextField
-                    keyboard={FIELD_TYPE_MORE.NUMBER_POSITIVE}
+                    keyboard={DATA_TYPE_MORE.NUMBER_POSITIVE}
                     label={
                       isRange
                         ? key === 'max'
