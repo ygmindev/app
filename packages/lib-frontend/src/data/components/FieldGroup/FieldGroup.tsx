@@ -39,8 +39,14 @@ export const FieldGroup: LFCModel<FieldGroupPropsModel> = ({ fields, ...props })
             shrink>
             {cloneElement(element, {
               isTransparent: true,
-              onBlur: () => elementStateSet(ELEMENT_STATE.INACTIVE),
-              onFocus: () => elementStateSet(ELEMENT_STATE.ACTIVE),
+              onBlur: () => {
+                element.props.onBlur && element.props.onBlur();
+                elementStateSet(ELEMENT_STATE.INACTIVE);
+              },
+              onFocus: () => {
+                element.props.onFocus && element.props.onFocus();
+                elementStateSet(ELEMENT_STATE.ACTIVE);
+              },
             })}
           </Wrapper>
         </Fragment>

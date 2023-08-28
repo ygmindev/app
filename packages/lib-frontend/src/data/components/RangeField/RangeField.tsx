@@ -9,9 +9,6 @@ import { Slider } from '#lib-frontend/core/components/Slider/Slider';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { FieldGroup } from '#lib-frontend/data/components/FieldGroup/FieldGroup';
-import { DATA, NUMBER_UNIT_AMOUNT_OPTIONS } from '#lib-frontend/data/data.constants';
-import { type NumberUnitModel } from '#lib-frontend/data/data.models';
-import { useFormatter } from '#lib-frontend/data/hooks/useFormatter/useFormatter';
 import {
   type RangeFieldPropsModel,
   type RangeTypeModel,
@@ -19,13 +16,16 @@ import {
 import { RANGE_TYPE } from '#lib-frontend/data/components/RangeField/RangField.constants';
 import { SelectField } from '#lib-frontend/data/components/SelectField/SelectField';
 import { TextField } from '#lib-frontend/data/components/TextField/TextField';
+import { DATA, NUMBER_UNIT_AMOUNT_OPTIONS } from '#lib-frontend/data/data.constants';
+import { type NumberUnitModel } from '#lib-frontend/data/data.models';
+import { useFormatter } from '#lib-frontend/data/hooks/useFormatter/useFormatter';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { merge } from '#lib-shared/core/utils/merge/merge';
+import { DATA_TYPE, DATA_TYPE_MORE } from '#lib-shared/data/data.constants';
 import { type ScaledNumberRangeModel } from '#lib-shared/data/resources/ScaledNumberRange/ScaledNumberRange.models';
-import { DATA_TYPE_MORE } from '#lib-shared/data/data.constants';
 
 export const RangeField: LFCModel<RangeFieldPropsModel> = ({
   defaultUnit,
@@ -45,7 +45,20 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({
       ...(isRange ? { max: { unit: defaultUnit, value: 1000 } } : {}),
     },
   });
-  const { format } = useFormatter();
+  const { format, unformat } = useFormatter();
+
+  const handleBlur = (): void => {
+    if (isRange && valueControlled?.value && valueControlled?.max) {
+      const { max, value: min } = valueControlled;
+      const [minValue, maxValue] = [
+        unformat(DATA_TYPE.NUMBER, toString(min.value), { unit: min.unit }),
+        unformat(DATA_TYPE.NUMBER, toString(max.value), { unit: max.unit }),
+      ];
+      if (minValue && maxValue && minValue > maxValue) {
+        valueControlledSet({ max: valueControlled.value, value: valueControlled.max });
+      }
+    }
+  };
 
   const getFieldElement = (key: keyof ScaledNumberRangeModel): ReactElement | null => {
     switch (type) {
@@ -74,6 +87,7 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({
                           : t('data:min', { value: t('funding:amount') })
                         : t('funding:amount')
                     }
+                    onBlur={handleBlur}
                     onChange={(v) =>
                       valueControlledSet(
                         merge([{ [key]: { value: toNumber(v) } }, valueControlled]),
