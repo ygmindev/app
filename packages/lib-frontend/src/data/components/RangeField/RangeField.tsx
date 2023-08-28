@@ -122,6 +122,18 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({
     }
   };
 
+  const handleRangeTypeChange = (): void => {
+    if (isRange) {
+      const { max: _, ...rest } = valueControlled ?? {};
+      valueControlledSet(rest);
+      rangeTypeSet(RANGE_TYPE.EXACT);
+    } else {
+      const { value } = valueControlled ?? {};
+      valueControlledSet({ max: { unit: value?.unit, value: upper }, value });
+      rangeTypeSet(RANGE_TYPE.RANGE);
+    }
+  };
+
   return (
     <Wrapper
       {...wrapperProps}
@@ -154,9 +166,7 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({
       />
 
       <Button
-        onPress={() =>
-          rangeTypeSet(rangeType === RANGE_TYPE.RANGE ? RANGE_TYPE.EXACT : RANGE_TYPE.RANGE)
-        }
+        onPress={handleRangeTypeChange}
         type={BUTTON_TYPE.INVISIBLE}>
         {rangeType === RANGE_TYPE.RANGE ? t('data:exactMessage') : t('data:rangeMessage')}
       </Button>
