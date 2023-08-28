@@ -82,6 +82,8 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       }
     });
 
+    const leftElementF = leftElement && <Wrapper isCenter>{leftElement}</Wrapper>;
+
     const rightElementF = (
       <Wrapper
         bottom={0}
@@ -182,6 +184,8 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
           align={FLEX_ALIGN.FLEX_END}
           grow
           isRow>
+          {leftElementF}
+
           <_TextField
             {...props}
             foregroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST]}
