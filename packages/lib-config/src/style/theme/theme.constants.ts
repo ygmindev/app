@@ -109,7 +109,7 @@ export const THEME_CONFIG = {
     },
 
     spacing: {
-      [THEME_SIZE.LARGE]: 28,
+      [THEME_SIZE.LARGE]: 40,
 
       [THEME_SIZE.MEDIUM]: 16,
 
