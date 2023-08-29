@@ -4,12 +4,12 @@ import {
   type _UseFormParamsModel,
 } from '#lib-frontend/data/hooks/useForm/_useForm.models';
 
-export type UseFormParamsModel<TType = void, TResult = void> = {
+export type UseFormParamsModel<TType, TResult> = {
   isBlocking?: boolean;
   validators?: FormValidatorsModel<TType>;
 } & Pick<
   _UseFormParamsModel<TType, TResult>,
-  'beforeSubmit' | 'initialValues' | 'onSubmit' | 'onSuccess' | 'onComplete' | 'onError'
+  'initialValues' | 'onSubmit' | 'onSuccess' | 'onComplete' | 'onError'
 >;
 
-export type UseFormModel<TType = void, TResult = void> = _UseFormModel<TType, TResult>;
+export type UseFormModel<TType, TResult> = _UseFormModel<TType, TResult>;

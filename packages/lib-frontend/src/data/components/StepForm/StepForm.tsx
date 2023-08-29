@@ -20,7 +20,6 @@ import { type IntersectionModel, type PartialModel } from '#lib-shared/core/core
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends Array<unknown>>({
-  beforeSubmit,
   onSubmit,
   onSuccess,
   steps,
@@ -107,8 +106,7 @@ export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends
                 isLoadingSet(true);
                 element.props.onSubmit && (await element.props.onSubmit(data));
                 if (isLastStep) {
-                  let dataF = { ...data, ...(stepData as object) } as TType;
-                  dataF = beforeSubmit ? await beforeSubmit(dataF) : dataF;
+                  const dataF = { ...data, ...(stepData as object) } as TType;
                   onSubmit && (await onSubmit(dataF));
                   onSuccess && (await onSuccess(dataF));
                   await sleep(theme.animation.transition);

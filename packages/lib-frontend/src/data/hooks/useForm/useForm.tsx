@@ -17,8 +17,7 @@ import { merge } from '#lib-shared/core/utils/merge/merge';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 import { error } from '#lib-shared/logging/utils/logger/logger';
 
-export const useForm = <TType = void, TResult = void>({
-  beforeSubmit,
+export const useForm = <TType, TResult>({
   initialValues,
   isBlocking = true,
   onComplete,
@@ -63,8 +62,7 @@ export const useForm = <TType = void, TResult = void>({
     try {
       void sleep();
       isBlocking && actions?.app.isLoadingSet(true);
-      const valuesF = beforeSubmit ? await beforeSubmit(values) : values;
-      const data = onSubmit && (await onSubmit(valuesF));
+      const data = onSubmit && (await onSubmit(values));
       data && onSuccess && (await onSuccess(values, data));
       return data ?? null;
     } catch (e) {

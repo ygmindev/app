@@ -3,7 +3,8 @@ import { type LFCPropsModel } from '#lib-frontend/core/core.models';
 import { type UseStylesModel } from '#lib-frontend/style/hooks/useStyles/useStyles.models';
 import { type StylePropsModel, type ViewStyleModel } from '#lib-frontend/style/style.models';
 
-export type LayoutPropsModel = StylePropsModel<ViewStyleModel> & WrapperPropsModel;
+export type LayoutPropsModel = StylePropsModel<ViewStyleModel> &
+  Omit<WrapperPropsModel, 'children'>;
 
 export type UseLayoutStylesParamsModel<TType> = {
   props: TType & LayoutPropsModel;

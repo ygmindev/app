@@ -56,6 +56,7 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
             }
           : undefined
       }
+      fields={[{ element: <OtpField isAutoFocus />, id: 'otp' }]}
       isButton={false}
       onComplete={() => {
         onComplete && onComplete();
@@ -65,17 +66,6 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
       onSubmit={onSubmit}
       onSuccess={onSuccess}
       ref={ref}
-      rows={[
-        {
-          fields: [
-            {
-              element: <OtpField isAutoFocus />,
-              id: 'otp',
-            },
-          ],
-          id: 'otp',
-        },
-      ]}
       style={styles}
       testID={OTP_FORM_TEST_ID}
       topElement={() =>

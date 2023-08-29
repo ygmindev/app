@@ -55,7 +55,6 @@ export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...prop
         },
       ]}
       style={styles}
-      successMessage={t('core:updateSuccess', { value: tName })}
       testID={testID}
     />
   ) : null;

@@ -2,8 +2,8 @@ import { type QueryClient } from '@tanstack/react-query';
 import { type ReactNode } from 'react';
 
 import { type IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
-import { type WrapperPropsModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
 import { type ElementStatePropsModel } from '#lib-frontend/core/core.models';
+import { type FocusableWrapperPropsModel } from '#lib-frontend/data/components/FocusableWrapper/FocusableWrapper.models';
 import { type NUMBER_UNIT_AMOUNT, type NUMBER_UNIT_RATE } from '#lib-frontend/data/data.constants';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import {
@@ -36,18 +36,16 @@ export type ValuePropsModel<TType = string> = {
   value?: TType;
 };
 
-export type FieldPropsModel<TType = string> = {
-  error?: TranslatableTextModel | boolean;
-  isAutoFocus?: boolean;
-  isTransparent?: boolean;
-  label?: TranslatableTextModel;
-  onBlur?(): void;
-  onFocus?(): void;
-  onSubmit?(): void;
-} & Pick<IconPropsModel, 'icon'> &
-  ElementStatePropsModel &
-  ValuePropsModel<TType> &
-  Pick<WrapperPropsModel, 'round' | 'zIndex'>;
+export type FieldPropsModel<TType = string> = FocusableWrapperPropsModel &
+  IconPropsModel &
+  ValuePropsModel<TType> & {
+    isAutoFocus?: boolean;
+    isTransparent?: boolean;
+    label?: TranslatableTextModel;
+    onBlur?(): void;
+    onFocus?(): void;
+    onSubmit?(): void;
+  };
 
 export type FormErrorModel<TType> = {
   [TKey in keyof TType]?: InferModel<TType[TKey]> extends PrimitiveModel
@@ -66,21 +64,12 @@ export type FormValidatorsModel<TType> = {
     : FormValidatorModel<TType, TType[TKey]>;
 };
 
-export type SubmittablePropsModel<TType = void, TResult = void> = {
-  beforeSubmit?(data: TType): Promise<TType>;
+export type SubmittablePropsModel<TType, TResult> = ElementStatePropsModel & {
   onCancel?(): void;
   onComplete?(): void;
   onError?(error: Error): void;
   onSubmit?(data: TType): Promise<TResult | null>;
   onSuccess?(data: TType, result?: TResult | null): Promise<void>;
-} & ElementStatePropsModel;
-
-export type TranslatableFieldPropsModel<TType = string> = Omit<
-  FieldPropsModel<TType>,
-  'label' | 'error'
-> & {
-  error?: FieldPropsModel<TType>['error'] | TranslatableTextModel;
-  label?: FieldPropsModel<TType>['label'] | TranslatableTextModel;
 };
 
 export type FormRefModel = {

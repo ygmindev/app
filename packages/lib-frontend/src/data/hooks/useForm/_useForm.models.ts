@@ -1,14 +1,14 @@
 import { type FormErrorModel, type SubmittablePropsModel } from '#lib-frontend/data/data.models';
 
-export type _UseFormParamsModel<TType = void, TResult = void> = {
+export type _UseFormParamsModel<TType, TResult> = Pick<
+  SubmittablePropsModel<TType, TResult>,
+  'onSubmit' | 'onSuccess' | 'onComplete' | 'onError'
+> & {
   initialValues?: TType;
   onValidate?(data: TType): Promise<FormErrorModel<TType>>;
-} & Pick<
-  SubmittablePropsModel<TType, TResult>,
-  'beforeSubmit' | 'onSubmit' | 'onSuccess' | 'onComplete' | 'onError'
->;
+};
 
-export type _UseFormModel<TType = void, TResult = void> = {
+export type _UseFormModel<TType, TResult> = {
   data?: TResult | null;
   errors: FormErrorModel<TType>;
   handleChange(key: string): (value: string) => void;

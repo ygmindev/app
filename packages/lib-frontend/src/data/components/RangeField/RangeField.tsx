@@ -112,8 +112,6 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({
                 id: 'unit',
               },
             ]}
-            grow
-            shrink
           />
         );
       }
@@ -139,7 +137,9 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({
       {...wrapperProps}
       s={THEME_SIZE.SMALL}>
       {isRange ? (
-        <Wrapper isRowAlign>
+        <Wrapper
+          isDistribute
+          isRowAlign>
           {getFieldElement('value')}
 
           {getFieldElement('max')}

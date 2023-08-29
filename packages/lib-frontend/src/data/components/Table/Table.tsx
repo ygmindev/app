@@ -31,10 +31,9 @@ export const Table = <TType,>({
           {headers.map(({ align, id, label, width }) => (
             <Wrapper
               basis={width}
-              grow={width ? undefined : 1}
+              isDistribute={!width}
               key={id}
-              p={THEME_SIZE.SMALL}
-              shrink={width ? undefined : 1}>
+              p={THEME_SIZE.SMALL}>
               <Text
                 align={align}
                 isEllipsis>

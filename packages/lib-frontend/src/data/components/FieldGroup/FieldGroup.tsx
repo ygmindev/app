@@ -11,17 +11,17 @@ import { FocusableWrapper } from '#lib-frontend/data/components/FocusableWrapper
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 
-export const FieldGroup: LFCModel<FieldGroupPropsModel> = ({ fields, ...props }) => {
+export const FieldGroup: LFCModel<FieldGroupPropsModel> = ({ fields, isVertical, ...props }) => {
   const theme = useTheme();
   const { wrapperProps } = useLayoutStyles({ props });
   const [elementState, elementStateSet] = useState<ElementStateModel>();
-  const isError = some(fields, ({ element }) => !!element.props.error);
+  const isError = some(fields, (field) => !!field.element.props.error);
   return (
     <FocusableWrapper
       {...wrapperProps}
       elementState={elementState}
       error={isError}
-      isRow
+      isRow={!isVertical}
       onElementStateChange={elementStateSet}>
       {fields.map(({ element, id }, i) => (
         <Fragment key={id}>
@@ -29,14 +29,13 @@ export const FieldGroup: LFCModel<FieldGroupPropsModel> = ({ fields, ...props })
             <Divider
               animation={{ states: ANIMATION_STATES_FOCUSABLE({ isError, theme }) }}
               elementState={elementState}
-              isVertical
+              isVertical={!isVertical}
             />
           )}
 
           <Wrapper
-            grow
-            key={id}
-            shrink>
+            isDistribute
+            key={id}>
             {cloneElement(element, {
               isTransparent: true,
               onBlur: () => {

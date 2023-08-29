@@ -15,8 +15,8 @@ import { Divider } from '#lib-frontend/core/components/Divider/Divider';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
-import { FORM_PROPERTY_TYPE } from '#lib-frontend/data/components/FormContainer/FormContainer.constants';
-import { type FormContainerRowModel } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
+import { type FormFieldModel } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
+import { TextField } from '#lib-frontend/data/components/TextField/TextField';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { CountryField } from '#lib-frontend/locale/components/CountryField/CountryField';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -26,7 +26,6 @@ import { SIGN_IN_METHOD } from '#lib-shared/auth/auth.constants';
 import { type SignInMethodModel } from '#lib-shared/auth/auth.models';
 import { type OtpFormModel, type OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
 import { pick } from '#lib-shared/core/utils/pick/pick';
-import { withId } from '#lib-shared/core/utils/withId/withId';
 import { FORM_MODE } from '#lib-shared/data/data.constants';
 import { type HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
@@ -61,29 +60,27 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
     return result ?? null;
   };
 
-  const rows: Array<FormContainerRowModel> = useMemo(() => {
+  const fields: Array<FormFieldModel> = useMemo(() => {
     switch (valueControlled) {
       case SIGN_IN_METHOD.EMAIL:
-        return withId([
+        return [
           {
-            fields: [
-              {
-                field: FORM_PROPERTY_TYPE.TEXT_FIELD,
-                fieldProps: {
-                  autoComplete: 'email',
-                  icon: 'email',
-                  label: ({ t }) => t('user:email'),
-                },
-                id: SIGN_IN_METHOD.EMAIL,
-              },
-            ],
+            element: (
+              <TextField
+                autoComplete="email"
+                isAutoFocus
+                label={t('user:email')}
+              />
+            ),
+            icon: 'email',
+            id: 'email',
           },
-        ]) as Array<FormContainerRowModel>;
+        ];
       case SIGN_IN_METHOD.PHONE:
-        return withId([
-          { fields: [{ element: <CountryField />, id: 'callingCode' }] },
-          { fields: [{ element: <PhoneField />, id: SIGN_IN_METHOD.PHONE }] },
-        ]);
+        return [
+          { element: <CountryField />, id: 'callingCode' },
+          { element: <PhoneField />, id: 'phone' },
+        ];
       default:
         return [];
     }
@@ -91,7 +88,6 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
 
   return (
     <FormContainer
-      autoFocus={valueControlled}
       bottomElement={
         mode === FORM_MODE.UPDATE
           ? undefined
@@ -126,12 +122,12 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
           ? { icon: 'people', message: t('auth:userExistsError') }
           : undefined
       }
+      fields={fields}
       isGrouped
       isVerticalCenter
       onComplete={onComplete}
       onSubmit={handleSubmit}
       onSuccess={onSuccess}
-      rows={rows}
       style={styles}
       testID={USERNAME_FORM_TEST_ID}
       validators={USERNAME_FORM_VALIDATORS}
