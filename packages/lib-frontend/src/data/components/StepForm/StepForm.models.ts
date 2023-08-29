@@ -4,12 +4,12 @@ import { type SubmittablePropsModel } from '#lib-frontend/data/data.models';
 import { type IntersectionModel, type PartialModel } from '#lib-shared/core/core.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
-export type FormStepPropsModel<TType, TStep = PartialModel<TType>, TResult = void> = {
-  data?: TStep;
+export type FormStepPropsModel<TType, TStep, TResult = void> = {
+  data?: PartialModel<TType>;
   onBack?(): void;
 } & SubmittablePropsModel<TStep, TResult>;
 
-export type FormStepModel<TType, TStep = PartialModel<TType>> = {
+export type FormStepModel<TType, TStep> = {
   element: ReactElement<FormStepPropsModel<TType, TStep>>;
 } & WithIdModel;
 

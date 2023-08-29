@@ -13,7 +13,13 @@ import {
 } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { DATA_TYPE_MORE } from '#lib-shared/data/data.constants';
 
-export const AmountForm: SFCModel<AmountFormPropsModel> = ({ ...props }) => {
+export const AmountForm: SFCModel<AmountFormPropsModel> = ({
+  onComplete,
+  onError,
+  onSubmit,
+  onSuccess,
+  ...props
+}) => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
   return (
