@@ -7,7 +7,7 @@ import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { Slider } from '#lib-frontend/core/components/Slider/Slider';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { type LFCModel } from '#lib-frontend/core/core.models';
+import { type LFCPropsModel } from '#lib-frontend/core/core.models';
 import { FieldGroup } from '#lib-frontend/data/components/FieldGroup/FieldGroup';
 import {
   type RangeFieldPropsModel,
@@ -16,7 +16,7 @@ import {
 import { RANGE_TYPE } from '#lib-frontend/data/components/RangeField/RangField.constants';
 import { SelectField } from '#lib-frontend/data/components/SelectField/SelectField';
 import { TextField } from '#lib-frontend/data/components/TextField/TextField';
-import { AMOUNT_UNIT_OPTIONS, DATA } from '#lib-frontend/data/data.constants';
+import { DATA } from '#lib-frontend/data/data.constants';
 import { type NumberUnitModel } from '#lib-frontend/data/data.models';
 import { useFormatter } from '#lib-frontend/data/hooks/useFormatter/useFormatter';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
@@ -27,24 +27,28 @@ import { merge } from '#lib-shared/core/utils/merge/merge';
 import { DATA_TYPE, DATA_TYPE_MORE } from '#lib-shared/data/data.constants';
 import { type ScaledNumberRangeModel } from '#lib-shared/data/resources/ScaledNumberRange/ScaledNumberRange.models';
 
-export const RangeField: LFCModel<RangeFieldPropsModel> = ({
+export const RangeField = <TType extends NumberUnitModel>({
   defaultUnit,
-  type,
+  unitOptions,
   value,
   ...props
-}) => {
+}: LFCPropsModel<RangeFieldPropsModel<TType>>): ReactElement<
+  LFCPropsModel<RangeFieldPropsModel<TType>>
+> => {
   const { t } = useTranslation([DATA]);
   const { wrapperProps } = useLayoutStyles({ props });
   const [rangeType, rangeTypeSet] = useState<RangeTypeModel>(RANGE_TYPE.EXACT);
   const isRange = rangeType === RANGE_TYPE.RANGE;
   const [lower, lowerSet] = useState<number>(1);
   const [upper, upperSet] = useState<number>(1e3);
-  const { valueControlled, valueControlledSet } = useValueControlled<ScaledNumberRangeModel>({
-    defaultValue: {
-      value: { unit: defaultUnit, value: 1 },
-      ...(isRange ? { max: { unit: defaultUnit, value: 1000 } } : {}),
+  const { valueControlled, valueControlledSet } = useValueControlled<ScaledNumberRangeModel<TType>>(
+    {
+      defaultValue: {
+        value: { unit: defaultUnit, value: 1 },
+        ...(isRange ? { max: { unit: defaultUnit, value: 1000 } } : {}),
+      },
     },
-  });
+  );
   const { format, unformat } = useFormatter();
 
   const handleBlur = (): void => {
@@ -60,64 +64,53 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({
     }
   };
 
-  const getFieldElement = (key: keyof ScaledNumberRangeModel): ReactElement | null => {
-    switch (type) {
-      case DATA_TYPE_MORE.AMOUNT: {
-        let unitOptions = AMOUNT_UNIT_OPTIONS;
-        if (key === 'max' && isRange && valueControlled?.value?.unit) {
-          const minUnitIndex = findIndex(
-            unitOptions,
-            ({ id }) => id === valueControlled?.value?.unit,
-          );
-          if (minUnitIndex >= 0) {
-            unitOptions = unitOptions.slice(minUnitIndex);
-          }
-        }
-        return (
-          <FieldGroup
-            fields={[
-              {
-                element: (
-                  <TextField
-                    keyboard={DATA_TYPE_MORE.NUMBER_POSITIVE}
-                    label={
-                      isRange
-                        ? key === 'max'
-                          ? t('data:max', { value: t('funding:amount') })
-                          : t('data:min', { value: t('funding:amount') })
-                        : t('funding:amount')
-                    }
-                    onBlur={handleBlur}
-                    onChange={(v) =>
-                      valueControlledSet(
-                        merge([{ [key]: { value: toNumber(v) } }, valueControlled]),
-                      )
-                    }
-                    value={valueControlled && toString(valueControlled[key]?.value)}
-                  />
-                ),
-                id: 'value',
-              },
-              {
-                element: (
-                  <SelectField<NumberUnitModel>
-                    label={t('core:unit')}
-                    onChange={(v: NumberUnitModel) =>
-                      valueControlledSet(merge([{ [key]: { unit: v } }, valueControlled]))
-                    }
-                    options={unitOptions}
-                    value={valueControlled && valueControlled[key]?.unit}
-                  />
-                ),
-                id: 'unit',
-              },
-            ]}
-          />
-        );
+  const getFieldElement = (key: keyof ScaledNumberRangeModel<TType>): ReactElement => {
+    let unitOptionsF = unitOptions;
+    if (key === 'max' && isRange && valueControlled?.value?.unit) {
+      const minUnitIndex = findIndex(unitOptionsF, ({ id }) => id === valueControlled?.value?.unit);
+      if (minUnitIndex >= 0) {
+        unitOptionsF = unitOptionsF.slice(minUnitIndex);
       }
-      default:
-        return null;
     }
+    return (
+      <FieldGroup
+        fields={[
+          {
+            element: (
+              <TextField
+                keyboard={DATA_TYPE_MORE.NUMBER_POSITIVE}
+                label={
+                  isRange
+                    ? key === 'max'
+                      ? t('data:max', { value: t('funding:amount') })
+                      : t('data:min', { value: t('funding:amount') })
+                    : t('funding:amount')
+                }
+                onBlur={handleBlur}
+                onChange={(v) =>
+                  valueControlledSet(merge([{ [key]: { value: toNumber(v) } }, valueControlled]))
+                }
+                value={valueControlled && toString(valueControlled[key]?.value)}
+              />
+            ),
+            id: 'value',
+          },
+          {
+            element: (
+              <SelectField<TType>
+                label={t('core:unit')}
+                onChange={(v) =>
+                  valueControlledSet(merge([{ [key]: { unit: v } }, valueControlled]))
+                }
+                options={unitOptionsF}
+                value={valueControlled && valueControlled[key]?.unit}
+              />
+            ),
+            id: 'unit',
+          },
+        ]}
+      />
+    );
   };
 
   const handleRangeTypeChange = (): void => {
