@@ -5,7 +5,7 @@ import isNumber from 'lodash/isNumber';
 import toString from 'lodash/toString';
 import moment from 'moment';
 
-import { AMOUNT_UNIT, RATE_UNIT } from '#lib-frontend/data/data.constants';
+import { AMOUNT_UNIT, RATE_UNIT, RELATIVE_DATE_UNIT } from '#lib-frontend/data/data.constants';
 import {
   type DateFormatterOptionsModel,
   type FormatterOptionsModel,
@@ -14,8 +14,8 @@ import {
   type UseFormatterModel,
 } from '#lib-frontend/data/hooks/useFormatter/useFormatter.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { DATA_TYPE } from '#lib-shared/data/data.constants';
-import { type DataTypeModel } from '#lib-shared/data/data.models';
+import { DATA_TYPE, DATA_TYPE_MORE } from '#lib-shared/data/data.constants';
+import { type DataTypeModel, type DataTypeMoreModel } from '#lib-shared/data/data.models';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 
 export const useFormatter = (): UseFormatterModel => {
@@ -35,6 +35,7 @@ export const useFormatter = (): UseFormatterModel => {
         unit,
       } = (options ?? {}) as NumberFormatterOptionsModel;
 
+      // TODO: postfix to translation
       let postfix = '';
       switch (unit) {
         case RATE_UNIT.BASIS_POINT: {
@@ -60,6 +61,22 @@ export const useFormatter = (): UseFormatterModel => {
         case AMOUNT_UNIT.THOUSAND: {
           isScale && (valueF /= 1e3);
           postfix = 'k';
+          break;
+        }
+        // TODO: Day count convention?
+        case RELATIVE_DATE_UNIT.WEEK: {
+          isScale && (valueF *= 7);
+          postfix = 'w';
+          break;
+        }
+        case RELATIVE_DATE_UNIT.MONTH: {
+          isScale && (valueF *= 30);
+          postfix = 'm';
+          break;
+        }
+        case RELATIVE_DATE_UNIT.YEAR: {
+          isScale && (valueF *= 365);
+          postfix = 'y';
           break;
         }
       }
@@ -93,7 +110,7 @@ export const useFormatter = (): UseFormatterModel => {
     return toString(value);
   };
 
-  const unformat = <TType extends DataTypeModel>(
+  const unformat = <TType extends DataTypeModel | DataTypeMoreModel>(
     type: TType,
     value?: string,
     options?: FormatterOptionsModel<UnformatModel<TType>>,
@@ -103,7 +120,8 @@ export const useFormatter = (): UseFormatterModel => {
     }
 
     switch (type) {
-      case DATA_TYPE.NUMBER: {
+      case DATA_TYPE.NUMBER:
+      case DATA_TYPE_MORE.RELATIVE_DATE: {
         let valueF = toNumber(value.replace(/\D+/g, ''));
         const { isScale = true, unit } = (options ?? {}) as NumberFormatterOptionsModel;
         switch (unit) {
@@ -125,6 +143,18 @@ export const useFormatter = (): UseFormatterModel => {
           }
           case AMOUNT_UNIT.THOUSAND: {
             isScale && (valueF *= 1e3);
+            break;
+          }
+          case RELATIVE_DATE_UNIT.WEEK: {
+            isScale && (valueF /= 7);
+            break;
+          }
+          case RELATIVE_DATE_UNIT.MONTH: {
+            isScale && (valueF /= 30);
+            break;
+          }
+          case RELATIVE_DATE_UNIT.YEAR: {
+            isScale && (valueF /= 365);
             break;
           }
         }

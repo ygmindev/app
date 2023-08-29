@@ -1,3 +1,4 @@
+import { type AmountUnitModel, type RelativeDateUnitModel } from '#lib-frontend/data/data.models';
 import { type ScaledNumberRangeModel } from '#lib-shared/data/resources/ScaledNumberRange/ScaledNumberRange.models';
 import {
   type EntityResourceDataModel,
@@ -5,9 +6,13 @@ import {
 } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export type FundingModel = EntityResourceModel & {
-  amount?: Array<ScaledNumberRangeModel>;
+  amount?: Array<ScaledNumberRangeModel<AmountUnitModel>>;
   currency?: string;
-  maturity?: Array<ScaledNumberRangeModel>;
+  maturity?: Array<ScaledNumberRangeModel<RelativeDateUnitModel>>;
+  // financials?
+  // ccr
+  // tranche ratings
+  //
 };
 
 export type FundingFormModel = EntityResourceDataModel<FundingModel>;

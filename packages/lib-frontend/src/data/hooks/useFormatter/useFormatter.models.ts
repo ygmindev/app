@@ -1,6 +1,6 @@
 import { type NumberUnitModel } from '#lib-frontend/data/data.models';
 import { type DATA_TYPE } from '#lib-shared/data/data.constants';
-import { type DataTypeModel } from '#lib-shared/data/data.models';
+import { type DataTypeModel, type DataTypeMoreModel } from '#lib-shared/data/data.models';
 
 export type UseFormatterModel = {
   format: <TType>(value?: TType, options?: FormatterOptionsModel<TType>) => string;
@@ -29,8 +29,5 @@ export type DateFormatterOptionsModel = {
   isReadable?: boolean;
 };
 
-export type UnformatModel<TType extends DataTypeModel> = TType extends DATA_TYPE.NUMBER
-  ? number
-  : TType extends DATA_TYPE.DATE
-  ? Date
-  : never;
+export type UnformatModel<TType extends DataTypeModel | DataTypeMoreModel> =
+  TType extends DATA_TYPE.NUMBER ? number : TType extends DATA_TYPE.DATE ? Date : never;
