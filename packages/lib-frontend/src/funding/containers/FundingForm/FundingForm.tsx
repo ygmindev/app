@@ -1,17 +1,17 @@
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { StepForm } from '#lib-frontend/data/components/StepForm/StepForm';
 import { AmountForm } from '#lib-frontend/funding/containers/AmountForm/AmountForm';
-import {
-  type FundingFormPropsModel,
-  type FundingFormStepsModel,
-} from '#lib-frontend/funding/containers/FundingForm/FundingForm.models';
+import { type FundingFormPropsModel } from '#lib-frontend/funding/containers/FundingForm/FundingForm.models';
 import { type FundingFormModel } from '#lib-shared/funding/resources/Funding/Funding.models';
 
 export const FundingForm: SFCModel<FundingFormPropsModel> = ({ ...props }) => {
   return (
-    <StepForm<FundingFormModel, FundingFormStepsModel>
+    <StepForm<FundingFormModel>
       {...props}
-      onSubmit={async (value) => console.warn(value)}
+      onSubmit={async (value) => {
+        console.warn(value);
+        return;
+      }}
       steps={[
         {
           element: <AmountForm />,

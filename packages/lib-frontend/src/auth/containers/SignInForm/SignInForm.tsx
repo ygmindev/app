@@ -10,10 +10,7 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import {
-  type SignInFormModel,
-  type SignInFormStepsModel,
-} from '#lib-shared/auth/resources/SignIn/SignIn.models';
+import { type SignInFormModel } from '#lib-shared/auth/resources/SignIn/SignIn.models';
 import { FORM_MODE } from '#lib-shared/data/data.constants';
 
 export const SignInForm: LFCModel<SignInFormPropsModel> = ({
@@ -30,7 +27,7 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
     mode === FORM_MODE.NEW ? signIn(form) : usernameUpdate(form);
 
   return (
-    <StepForm<SignInFormModel, SignInFormStepsModel>
+    <StepForm<SignInFormModel>
       {...props}
       onSubmit={handleSubmit}
       onSuccess={async () => replace({ pathname: redirectTo ?? '/' })}
