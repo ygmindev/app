@@ -43,7 +43,6 @@ export const ResourceFilterForm = <TType, TForm = undefined, TRoot = undefined>(
   return (
     <FormContainer
       isFullWidth
-      isHorizontal
       onSubmit={handleSubmit}
       rows={[
         {

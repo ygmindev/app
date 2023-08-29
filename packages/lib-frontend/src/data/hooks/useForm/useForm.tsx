@@ -17,7 +17,7 @@ import { merge } from '#lib-shared/core/utils/merge/merge';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 import { error } from '#lib-shared/logging/utils/logger/logger';
 
-export const useForm = <TType, TResult>({
+export const useForm = <TType, TResult = void>({
   initialValues,
   isBlocking = true,
   onComplete,

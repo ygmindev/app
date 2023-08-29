@@ -1,7 +1,7 @@
 import { useSignInResource } from '#lib-frontend/auth/hooks/useSignInResource/useSignInResource';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
-import { FORM_PROPERTY_TYPE } from '#lib-frontend/data/components/FormContainer/FormContainer.constants';
+import { TextField } from '#lib-frontend/data/components/TextField/TextField';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
@@ -24,10 +24,23 @@ export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...prop
     void replace({ pathname: `/${ACCOUNT}/${PERSONAL}` });
   };
 
-  const tName = t('user:name');
-
   return currentUser ? (
     <FormContainer
+      fields={[
+        {
+          element: (
+            <TextField
+              isAutoFocus
+              label={t('user:first')}
+            />
+          ),
+          id: 'first',
+        },
+        {
+          element: <TextField label={t('user:last')} />,
+          id: 'last',
+        },
+      ]}
       initialValues={{ first: currentUser.first, last: currentUser.last }}
       onCancel={handleBack}
       onSubmit={async ({ first, last }: NameFormModel) => {
@@ -37,23 +50,6 @@ export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...prop
         });
         handleBack();
       }}
-      rows={[
-        {
-          fields: [
-            {
-              field: FORM_PROPERTY_TYPE.TEXT_FIELD,
-              fieldProps: { isAutoFocus: true, label: ({ t }) => t('user:first') },
-              id: 'first',
-            },
-            {
-              field: FORM_PROPERTY_TYPE.TEXT_FIELD,
-              fieldProps: { label: ({ t }) => t('user:last') },
-              id: 'last',
-            },
-          ],
-          id: 'row',
-        },
-      ]}
       style={styles}
       testID={testID}
     />

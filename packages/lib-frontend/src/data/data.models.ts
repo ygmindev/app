@@ -64,7 +64,7 @@ export type FormValidatorsModel<TType> = {
     : FormValidatorModel<TType, TType[TKey]>;
 };
 
-export type SubmittablePropsModel<TType, TResult> = ElementStatePropsModel & {
+export type SubmittablePropsModel<TType, TResult = void> = ElementStatePropsModel & {
   onCancel?(): void;
   onComplete?(): void;
   onError?(error: Error): void;

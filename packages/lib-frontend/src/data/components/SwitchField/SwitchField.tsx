@@ -4,7 +4,7 @@ import { Appearable } from '#lib-frontend/animation/components/Appearable/Appear
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel } from '#lib-frontend/core/core.models';
 import {
   SWITCH_FIELD_OFFSET,
   SWITCH_FIELD_WIDTH,
@@ -12,7 +12,7 @@ import {
 import { type SwitchFieldPropsModel } from '#lib-frontend/data/components/SwitchField/SwitchField.models';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import {
   THEME_COLOR,
@@ -22,19 +22,18 @@ import {
 } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
-export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
+export const SwitchField: LFCModel<SwitchFieldPropsModel> = ({
   defaultValue,
   elementState,
   iconActive = 'check',
   iconInactive = 'times',
   label,
   onChange,
-  testID,
   value,
   ...props
 }) => {
   const theme = useTheme();
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const { valueControlled, valueControlledSet } = useValueControlled<boolean>({
     defaultValue: defaultValue ?? false,
     onChange,
@@ -68,11 +67,10 @@ export const SwitchField: SFCModel<SwitchFieldPropsModel> = ({
 
   return (
     <Wrapper
+      {...wrapperProps}
       elementState={elementStateF}
       isRowAlign
-      onPress={() => valueControlledSet(!valueControlled)}
-      style={styles}
-      testID={testID}>
+      onPress={() => valueControlledSet(!valueControlled)}>
       <Wrapper
         animation={{
           states: {

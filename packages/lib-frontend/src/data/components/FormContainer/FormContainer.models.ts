@@ -8,7 +8,7 @@ import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 import { type DataTypeModel } from '#lib-shared/data/data.models';
 
-export type FormContainerPropsModel<TType, TResult> = UseFormParamsModel<TType, TResult> &
+export type FormContainerPropsModel<TType, TResult = void> = UseFormParamsModel<TType, TResult> &
   SubmittablePropsModel<TType, TResult> &
   Pick<AsyncBoundaryContextModel, 'errorContextGet'> & {
     bottomElement?(params: Pick<ElementStatePropsModel, 'elementState'>): ReactNode;

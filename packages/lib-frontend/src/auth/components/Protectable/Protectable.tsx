@@ -3,11 +3,11 @@ import { type ProtectablePropsModel } from '#lib-frontend/auth/components/Protec
 import { useAuthState } from '#lib-frontend/auth/hooks/useAuthState/useAuthState';
 import { AUTH_STATE } from '#lib-frontend/auth/hooks/useAuthState/useAuthState.constants';
 import { type SignInPageParamsModel } from '#lib-frontend/auth/pages/SignInPage/SignInPage.models';
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type FCModel } from '#lib-frontend/core/core.models';
 import { Redirect } from '#lib-frontend/route/components/Redirect/Redirect';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 
-export const Protectable: SFCModel<ProtectablePropsModel> = ({ children }) => {
+export const Protectable: FCModel<ProtectablePropsModel> = ({ children }) => {
   const authState = useAuthState();
   const { location } = useRouter();
   return authState === AUTH_STATE.UNAUTHENTICATED ? (

@@ -8,7 +8,7 @@ import {
   type _UseFormParamsModel,
 } from '#lib-frontend/data/hooks/useForm/_useForm.models';
 
-export const _useForm = <TType, TResult>({
+export const _useForm = <TType, TResult = void>({
   initialValues,
   onSubmit,
   onValidate,

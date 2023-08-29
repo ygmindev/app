@@ -31,7 +31,7 @@ import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 import { DATA_TYPE } from '#lib-shared/data/data.constants';
 
 export const FormContainer = forwardRef(
-  <TType, TResult>(
+  <TType, TResult = void>(
     { errorContextGet, ...props }: LFCPropsModel<FormContainerPropsModel<TType, TResult>>,
     ref: ForwardedRef<FormRefModel>,
   ): ReactElement<RLFCPropsModel<FormRefModel, FormContainerPropsModel<TType, TResult>>> => {
@@ -53,7 +53,7 @@ export const FormContainer = forwardRef(
 );
 
 const FormContainerF = forwardRef(
-  <TType = void, TResult = void>(
+  <TType, TResult = void>(
     {
       bottomElement,
       cancelLabel,

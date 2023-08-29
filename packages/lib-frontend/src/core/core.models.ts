@@ -61,9 +61,8 @@ export type ProviderPropsModel<TType = undefined, TChildren = ReactNode | Array<
   value?: TType;
 } & ChildrenPropsModel<TChildren>;
 
-export type PagePropsModel<TType = undefined> = LayoutPropsModel & {
-  pageProps?: TType;
-};
+export type PagePropsModel<TType = undefined> = LayoutPropsModel &
+  ChildrenPropsModel & { pageProps?: TType };
 
 export type ElementStateModel = `${ELEMENT_STATE}`;
 

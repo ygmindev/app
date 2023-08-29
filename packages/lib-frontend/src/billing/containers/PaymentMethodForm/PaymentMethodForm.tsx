@@ -31,41 +31,35 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
   const ref = useRef<FormRefModel>(null);
   return (
     <FormContainer
-      onCancel={onCancel}
-      onSubmit={async () => ref.current?.submit()}
-      onSuccess={onSuccess}
-      rows={[
+      fields={[
         {
-          fields: [
-            {
-              element: (
-                <Wrapper width={theme.layout.width[THEME_SIZE.MEDIUM]}>
-                  <DataBoundary
-                    id={`${CREATE_TOKEN}${PAYMENT_METHOD}`}
-                    mutate={async () =>
-                      currentUser &&
-                      createToken({ form: undefined, root: { _id: currentUser._id } })
-                    }>
-                    {({ data }) => (
-                      <PaymentMethodField
-                        defaultValue={defaultValue}
-                        // elementState={elementState}
-                        // error={error}
-                        ref={ref}
-                        token={data?.result}
-                        // error={error}
-                        // isAutoFocus
-                      />
-                    )}
-                  </DataBoundary>
-                </Wrapper>
-              ),
-              id: PAYMENT_METHOD,
-            },
-          ],
+          element: (
+            <Wrapper width={theme.layout.width[THEME_SIZE.MEDIUM]}>
+              <DataBoundary
+                id={`${CREATE_TOKEN}${PAYMENT_METHOD}`}
+                mutate={async () =>
+                  currentUser && createToken({ form: undefined, root: { _id: currentUser._id } })
+                }>
+                {({ data }) => (
+                  <PaymentMethodField
+                    defaultValue={defaultValue}
+                    // elementState={elementState}
+                    // error={error}
+                    ref={ref}
+                    token={data?.result}
+                    // error={error}
+                    // isAutoFocus
+                  />
+                )}
+              </DataBoundary>
+            </Wrapper>
+          ),
           id: PAYMENT_METHOD,
         },
       ]}
+      onCancel={onCancel}
+      onSubmit={async () => ref.current?.submit()}
+      onSuccess={onSuccess}
       style={styles}
       submitLabel={defaultValue ? t('core:edit') : t('core:add')}
       testID={testID}
