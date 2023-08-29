@@ -16,7 +16,7 @@ import {
 import { RANGE_TYPE } from '#lib-frontend/data/components/RangeField/RangField.constants';
 import { SelectField } from '#lib-frontend/data/components/SelectField/SelectField';
 import { TextField } from '#lib-frontend/data/components/TextField/TextField';
-import { DATA, NUMBER_UNIT_AMOUNT_OPTIONS } from '#lib-frontend/data/data.constants';
+import { AMOUNT_UNIT_OPTIONS, DATA } from '#lib-frontend/data/data.constants';
 import { type NumberUnitModel } from '#lib-frontend/data/data.models';
 import { useFormatter } from '#lib-frontend/data/hooks/useFormatter/useFormatter';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
@@ -63,7 +63,7 @@ export const RangeField: LFCModel<RangeFieldPropsModel> = ({
   const getFieldElement = (key: keyof ScaledNumberRangeModel): ReactElement | null => {
     switch (type) {
       case DATA_TYPE_MORE.AMOUNT: {
-        let unitOptions = NUMBER_UNIT_AMOUNT_OPTIONS;
+        let unitOptions = AMOUNT_UNIT_OPTIONS;
         if (key === 'max' && isRange && valueControlled?.value?.unit) {
           const minUnitIndex = findIndex(
             unitOptions,

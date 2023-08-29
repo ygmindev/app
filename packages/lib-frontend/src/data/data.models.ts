@@ -4,7 +4,11 @@ import { type ReactNode } from 'react';
 import { type IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
 import { type ElementStatePropsModel } from '#lib-frontend/core/core.models';
 import { type FocusableWrapperPropsModel } from '#lib-frontend/data/components/FocusableWrapper/FocusableWrapper.models';
-import { type NUMBER_UNIT_AMOUNT, type NUMBER_UNIT_RATE } from '#lib-frontend/data/data.constants';
+import {
+  type AMOUNT_UNIT,
+  type RATE_UNIT,
+  type RELATIVE_DATE_UNIT,
+} from '#lib-frontend/data/data.constants';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import {
   type InferModel,
@@ -24,11 +28,13 @@ export type DataFormatterModel<TType, TKey extends StringKeyModel<TType>> = (par
   value: TType[TKey];
 }) => string;
 
-export type NumberUnitAmountModel = `${NUMBER_UNIT_AMOUNT}`;
+export type AmountUnitModel = `${AMOUNT_UNIT}`;
 
-export type NumberUnitRateModel = `${NUMBER_UNIT_RATE}`;
+export type RateUnitModel = `${RATE_UNIT}`;
 
-export type NumberUnitModel = NumberUnitAmountModel | NumberUnitRateModel;
+export type RelativeDateUnitModel = `${RELATIVE_DATE_UNIT}`;
+
+export type NumberUnitModel = AmountUnitModel | RateUnitModel | RelativeDateUnitModel;
 
 export type ValuePropsModel<TType = string> = {
   defaultValue?: TType;

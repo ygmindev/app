@@ -5,7 +5,7 @@ import isNumber from 'lodash/isNumber';
 import toString from 'lodash/toString';
 import moment from 'moment';
 
-import { NUMBER_UNIT_AMOUNT, NUMBER_UNIT_RATE } from '#lib-frontend/data/data.constants';
+import { AMOUNT_UNIT, RATE_UNIT } from '#lib-frontend/data/data.constants';
 import {
   type DateFormatterOptionsModel,
   type FormatterOptionsModel,
@@ -37,27 +37,27 @@ export const useFormatter = (): UseFormatterModel => {
 
       let postfix = '';
       switch (unit) {
-        case NUMBER_UNIT_RATE.BASIS_POINT: {
+        case RATE_UNIT.BASIS_POINT: {
           isScale && (valueF *= 1e4);
           postfix = 'bps';
           break;
         }
-        case NUMBER_UNIT_AMOUNT.BILLION: {
+        case AMOUNT_UNIT.BILLION: {
           isScale && (valueF /= 1e9);
           postfix = 'bn';
           break;
         }
-        case NUMBER_UNIT_AMOUNT.MILLION: {
+        case AMOUNT_UNIT.MILLION: {
           isScale && (valueF /= 1e6);
           postfix = 'mm';
           break;
         }
-        case NUMBER_UNIT_RATE.PERCENT: {
+        case RATE_UNIT.PERCENT: {
           isScale && (valueF *= 1e2);
           postfix = '%';
           break;
         }
-        case NUMBER_UNIT_AMOUNT.THOUSAND: {
+        case AMOUNT_UNIT.THOUSAND: {
           isScale && (valueF /= 1e3);
           postfix = 'k';
           break;
@@ -107,23 +107,23 @@ export const useFormatter = (): UseFormatterModel => {
         let valueF = toNumber(value.replace(/\D+/g, ''));
         const { isScale = true, unit } = (options ?? {}) as NumberFormatterOptionsModel;
         switch (unit) {
-          case NUMBER_UNIT_RATE.BASIS_POINT: {
+          case RATE_UNIT.BASIS_POINT: {
             isScale && (valueF /= 1e4);
             break;
           }
-          case NUMBER_UNIT_AMOUNT.BILLION: {
+          case AMOUNT_UNIT.BILLION: {
             isScale && (valueF *= 1e9);
             break;
           }
-          case NUMBER_UNIT_AMOUNT.MILLION: {
+          case AMOUNT_UNIT.MILLION: {
             isScale && (valueF *= 1e6);
             break;
           }
-          case NUMBER_UNIT_RATE.PERCENT: {
+          case RATE_UNIT.PERCENT: {
             isScale && (valueF /= 1e2);
             break;
           }
-          case NUMBER_UNIT_AMOUNT.THOUSAND: {
+          case AMOUNT_UNIT.THOUSAND: {
             isScale && (valueF *= 1e3);
             break;
           }

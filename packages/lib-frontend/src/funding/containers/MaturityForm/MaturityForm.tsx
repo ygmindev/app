@@ -2,17 +2,16 @@ import { Text } from '#lib-frontend/core/components/Text/Text';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { RangeField } from '#lib-frontend/data/components/RangeField/RangeField';
-import { AMOUNT_UNIT } from '#lib-frontend/data/data.constants';
-import { type AmountFormPropsModel } from '#lib-frontend/funding/containers/AmountForm/AmountForm.models';
+import { RELATIVE_DATE_UNIT } from '#lib-frontend/data/data.constants';
+import { type MaturityFormPropsModel } from '#lib-frontend/funding/containers/MaturityForm/MaturityForm.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import {
   FONT_ALIGN,
   FONT_TYPE,
 } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { DATA_TYPE_MORE } from '#lib-shared/data/data.constants';
 
-export const AmountForm: SFCModel<AmountFormPropsModel> = ({
+export const MaturityForm: SFCModel<MaturityFormPropsModel> = ({
   onComplete,
   onError,
   onSubmit,
@@ -28,11 +27,11 @@ export const AmountForm: SFCModel<AmountFormPropsModel> = ({
         {
           element: (
             <RangeField
-              defaultUnit={AMOUNT_UNIT.MILLION}
-              type={DATA_TYPE_MORE.AMOUNT}
+              defaultUnit={RELATIVE_DATE_UNIT.YEAR}
+              // type={DATA_TYPE_MORE.Maturity}
             />
           ),
-          id: 'amount',
+          id: 'maturity',
         },
       ]}
       isVerticalCenter
@@ -44,7 +43,7 @@ export const AmountForm: SFCModel<AmountFormPropsModel> = ({
         <Text
           align={FONT_ALIGN.CENTER}
           type={FONT_TYPE.HEADLINE}>
-          {t('funding:amountFormMessage')}
+          {t('funding:maturityFormMessage')}
         </Text>
       )}
     />
