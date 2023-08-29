@@ -16,18 +16,18 @@ import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLa
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { type IntersectionModel, type PartialModel } from '#lib-shared/core/core.models';
+import { type PartialModel } from '#lib-shared/core/core.models';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
-export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends Array<unknown>>({
+export const StepForm = <TType, TResult = void>({
   onSubmit,
   onSuccess,
   steps,
   testID,
   topElement,
   ...props
-}: LFCPropsModel<StepFormPropsModel<TType, TSteps>>): ReactElement<
-  LFCPropsModel<StepFormPropsModel<TType, TSteps>>
+}: LFCPropsModel<StepFormPropsModel<TType, TResult>>): ReactElement<
+  LFCPropsModel<StepFormPropsModel<TType, TResult>>
 > => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { width } = useStore((state) => state.app.dimension);
@@ -102,20 +102,20 @@ export const StepForm = <TType extends IntersectionModel<TSteps>, TSteps extends
                 isLoadingSet(false);
                 element.props.onComplete && element.props.onComplete();
               },
-              onSubmit: async (stepData: TSteps[number]) => {
+              onSubmit: async (stepData: PartialModel<TType>) => {
                 isLoadingSet(true);
-                element.props.onSubmit && (await element.props.onSubmit(data));
+                data && element.props.onSubmit && (await element.props.onSubmit(data));
                 if (isLastStep) {
-                  const dataF = { ...data, ...(stepData as object) } as TType;
+                  const dataF = { ...data, ...stepData } as TType;
                   onSubmit && (await onSubmit(dataF));
                   onSuccess && (await onSuccess(dataF));
                   await sleep(theme.animation.transition);
                   handleClear();
                 }
               },
-              onSuccess: async (stepData: TSteps[number]) => {
+              onSuccess: async (stepData: PartialModel<TType>) => {
                 element.props.onSuccess && (await element.props.onSuccess(stepData));
-                const dataF = { ...data, ...(stepData as object) };
+                const dataF = { ...data, ...stepData };
                 if (!isLastStep) {
                   dataSet(dataF);
                   currentSetF(current + 1);
