@@ -1,11 +1,11 @@
-import { ISSUER_FIELDS } from '#lib-frontend/capital/hooks/useIssuerResource/useIssuerResource.constants';
-import { type UseIssuerResourceModel } from '#lib-frontend/capital/hooks/useIssuerResource/useIssuerResource.models';
+import { ISSUER_FIELDS } from '#lib-frontend/funding/hooks/useIssuerResource/useIssuerResource.constants';
+import { type UseIssuerResourceModel } from '#lib-frontend/funding/hooks/useIssuerResource/useIssuerResource.models';
 import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
-import { ISSUER_RESOURCE_NAME } from '#lib-shared/capital/resources/Issuer/Issuer.constants';
+import { ISSUER_RESOURCE_NAME } from '#lib-shared/funding/resources/Issuer/Issuer.constants';
 import {
   type IssuerFormModel,
   type IssuerModel,
-} from '#lib-shared/capital/resources/Issuer/Issuer.models';
+} from '#lib-shared/funding/resources/Issuer/Issuer.models';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 
 export const useIssuerResource = (): UseIssuerResourceModel => {

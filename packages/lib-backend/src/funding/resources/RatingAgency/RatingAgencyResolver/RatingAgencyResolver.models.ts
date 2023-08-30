@@ -1,3 +1,3 @@
-import { type RatingAgencyServiceModel } from '#lib-shared/{{module}}(camelCase)/resources/RatingAgency/RatingAgencyService/RatingAgencyService.models';
+import { type RatingAgencyServiceModel } from '#lib-shared/funding/resources/RatingAgency/RatingAgencyService/RatingAgencyService.models';
 
 export type RatingAgencyResolverModel = RatingAgencyServiceModel;
