@@ -12,6 +12,7 @@ import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.model
 export const ResourceTable = <TType, TForm = undefined, TRoot = undefined>({
   columns,
   filters,
+  form,
   service,
   testID,
   ...props

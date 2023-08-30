@@ -1,8 +1,6 @@
-import { type StringKeyModel } from '#lib-shared/core/core.models';
-
 export type TransformKeysParamsModel<TType extends Record<string, unknown>> = [
   params: TType,
-  transform: (key: StringKeyModel<TType>) => string,
+  transform: (key: string) => string,
 ];
 
 export type TransformKeysModel<TType extends Record<string, unknown>> = TType extends Record<
