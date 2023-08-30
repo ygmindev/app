@@ -43,7 +43,7 @@ export type ValuePropsModel<TType = string> = {
 };
 
 export type FieldPropsModel<TType = string> = FocusableWrapperPropsModel &
-  IconPropsModel &
+  Pick<IconPropsModel, 'icon'> &
   ValuePropsModel<TType> & {
     isAutoFocus?: boolean;
     isTransparent?: boolean;
