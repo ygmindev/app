@@ -11,6 +11,7 @@ import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const Table = <TType,>({
+  emptyElement,
   isFullWidth,
   isHeadless,
   testID,
@@ -70,7 +71,7 @@ export const Table = <TType,>({
               </Wrapper>
             ))}
           </Wrapper>
-        ))}
+        )) ?? emptyElement}
       </Wrapper>
     </Wrapper>
   );
