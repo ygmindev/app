@@ -25,17 +25,7 @@ export type CreateResourceResolverParamsModel<
   access?: Record<ResourceResolverAccessTypeModel, AccessLevelModel>;
 
   authorizer?: {
-    default?: ResourceResolverAuthorizerModel<
-      | RESOURCE_METHOD_TYPE.CREATE
-      | RESOURCE_METHOD_TYPE.GET
-      | RESOURCE_METHOD_TYPE.GET_CONNECTION
-      | RESOURCE_METHOD_TYPE.GET_MANY
-      | RESOURCE_METHOD_TYPE.REMOVE
-      | RESOURCE_METHOD_TYPE.UPDATE,
-      TType,
-      TForm,
-      TRoot
-    >;
+    default?: ResourceResolverAuthorizerModel<ResourceMethodTypeModel, TType, TForm, TRoot>;
 
     read?: ResourceResolverAuthorizerModel<
       | RESOURCE_METHOD_TYPE.GET
