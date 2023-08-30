@@ -1,11 +1,13 @@
 {
   "amount": "TRANSLATION_MISSING",
+  "amountFormMessage": "TRANSLATION_MISSING",
   "borrow": "TRANSLATION_MISSING",
   "cp": "TRANSLATION_MISSING",
   "funding": "TRANSLATION_MISSING",
   "fundingCost": "TRANSLATION_MISSING",
   "gcp": "TRANSLATION_MISSING",
   "maturity": "TRANSLATION_MISSING",
+  "maturityFormMessage": "TRANSLATION_MISSING",
   "quoted": "TRANSLATION_MISSING",
   "refinancing": "TRANSLATION_MISSING",
   "startNewFunding": "TRANSLATION_MISSING",

@@ -46,6 +46,7 @@ export const ResourceFilterForm = <TType, TForm = undefined, TRoot = undefined>(
         element: (
           <ResourceFilterField<TType, TForm, TRoot>
             id={id}
+            key={id}
             type={type}
           />
         ),
