@@ -1,4 +1,3 @@
-import capitalize from 'lodash/capitalize';
 import reduce from 'lodash/reduce';
 
 import { Tabs } from '#lib-frontend/core/components/Tabs/Tabs';
@@ -14,6 +13,7 @@ import {
 import { RESOURCE } from '#lib-frontend/resource/resource.constants';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { NotFoundPage } from '#lib-frontend/route/pages/NotFoundPage/NotFoundPage';
+import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 
 export const ResourcePage: SFCModel<ResourcePagePropsModel> = ({ testID, ...props }) => {
@@ -25,9 +25,7 @@ export const ResourcePage: SFCModel<ResourcePagePropsModel> = ({ testID, ...prop
     void push({ pathname: `${RESOURCE}/${value}` });
   };
 
-  const id = capitalize(location?.params?.id);
-  const resource = RESOURCE_ITEMS[id];
-
+  const id = location?.params?.id && trimPathname(location.params.id);
   return (
     <Wrapper
       grow
@@ -45,7 +43,7 @@ export const ResourcePage: SFCModel<ResourcePagePropsModel> = ({ testID, ...prop
         value={id}
       />
 
-      {resource ? resource.element : <NotFoundPage />}
+      {(id && RESOURCE_ITEMS[id].element) ?? <NotFoundPage />}
     </Wrapper>
   );
 };
