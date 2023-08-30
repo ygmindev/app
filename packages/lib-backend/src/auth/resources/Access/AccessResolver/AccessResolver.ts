@@ -30,11 +30,11 @@ export class AccessResolver
   @withFieldResolver({ Resource: User })
   async user(@withSelf() access: Access): Promise<UserModel> {
     const { result } = await Container.get(UserService).get({
-      filter: [{ field: '_id', value: access._uid }],
+      filter: [{ field: '_id', value: access._user }],
     });
     if (result) {
       return result;
     }
-    throw new NotFoundError(access._uid);
+    throw new NotFoundError(access._user);
   }
 }

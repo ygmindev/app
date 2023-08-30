@@ -11,11 +11,11 @@ export type AccessRoleModel = `${ACCESS_ROLE}`;
 export type AccessLevelModel = `${ACCESS_LEVEL}`;
 
 export type AccessModel = EntityResourceModel & {
-  _uid: string;
+  _user: string;
   role: AccessRoleModel;
   user?: ResolvedFieldModel<UserModel>;
 };
 
 export type AccessFormModel = {
-  _uid: string;
+  _user: string;
 } & Pick<AccessModel, 'role'>;

@@ -19,7 +19,7 @@ export const authorize = async ({
         return true;
       }
       const { result } = await Container.get(AccessService).get({
-        filter: [{ field: '_uid', value: context.user._id }],
+        filter: [{ field: '_user', value: context.user._id }],
       });
       return result ? roles.includes(result.role) : false;
     }

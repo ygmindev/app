@@ -76,7 +76,7 @@ export class OtpService
     return super.create({ form });
   }
 
-  async verify(data: Omit<EntityResourceDataModel<OtpModel>, '_uid'>): Promise<OtpModel> {
+  async verify(data: Omit<EntityResourceDataModel<OtpModel>, '_user'>): Promise<OtpModel> {
     const { result } = await this.get({
       filter: data,
       options: { project: { otp: true } },

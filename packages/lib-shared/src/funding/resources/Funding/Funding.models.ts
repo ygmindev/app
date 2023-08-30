@@ -7,6 +7,7 @@ import {
 
 export type FundingModel = EntityResourceModel & {
   amount?: Array<ScaledNumberRangeModel<AmountUnitModel>>;
+  creditRating: Array<CreditRatingModel>;
   currency?: string;
   maturity?: Array<ScaledNumberRangeModel<RelativeDateUnitModel>>;
   // financials?

@@ -15,7 +15,7 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 @withEntity({ name: `${ACCESS_RESOURCE_NAME}Form` })
 export class AccessForm implements AccessFormModel {
   @withField({ isRepository: true, type: PROPERTY_TYPE.ID })
-  _uid!: string;
+  _user!: string;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   role!: AccessRoleModel;
@@ -24,7 +24,7 @@ export class AccessForm implements AccessFormModel {
 @withEntity({ isRepository: true, name: ACCESS_RESOURCE_NAME })
 export class Access extends EntityResource implements AccessModel {
   @withField({ isRepository: true, type: PROPERTY_TYPE.ID })
-  _uid!: string;
+  _user!: string;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   role!: AccessRoleModel;
