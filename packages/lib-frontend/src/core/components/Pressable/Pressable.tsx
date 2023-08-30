@@ -5,35 +5,39 @@ import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constan
 import { Modal } from '#lib-frontend/core/components/Modal/Modal';
 import { type PressablePropsModel } from '#lib-frontend/core/components/Pressable/Pressable.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import { type WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type ElementStateModel, type SFCModel } from '#lib-frontend/core/core.models';
+import { type ElementStateModel, type RLFCModel } from '#lib-frontend/core/core.models';
 import { lazy } from '#lib-frontend/core/utils/lazy/lazy';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { isPromise } from '#lib-shared/core/utils/isPromise/isPromise';
 
 const { Button } = lazy(() => import('#lib-frontend/core/components/Button/Button'));
 
-export const Pressable: SFCModel<PressablePropsModel> = ({
+export const Pressable: RLFCModel<WrapperRefModel, PressablePropsModel> = ({
   animation,
   children,
   confirmMessage,
   elementState,
+  onActive,
   onElementStateChange,
+  onInactive,
   onPress,
   onPressIn,
   onPressOut,
   round,
+  trigger,
   ...props
 }) => {
   const theme = useTheme();
   const { t } = useTranslation();
   const [confirmModalIsOpen, confirmModalIsOpenSet] = useState<boolean>(false);
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
 
   const { valueControlled, valueControlledSet } = useValueControlled<ElementStateModel>({
     defaultValue: ELEMENT_STATE.INACTIVE,
@@ -68,19 +72,23 @@ export const Pressable: SFCModel<PressablePropsModel> = ({
   return (
     <>
       <Activatable
-        onActive={() => valueControlledSet(ELEMENT_STATE.ACTIVE)}
-        onInactive={() => valueControlledSet(ELEMENT_STATE.INACTIVE)}
-        style={styles}>
+        onActive={() => {
+          onActive && onActive();
+          valueControlledSet(ELEMENT_STATE.ACTIVE);
+        }}
+        onInactive={() => {
+          onInactive && onInactive();
+          valueControlledSet(ELEMENT_STATE.INACTIVE);
+        }}
+        trigger={trigger}>
         <Wrapper
-          {...props}
+          {...wrapperProps}
           animation={{
-            ...animation,
             states: {
-              ...animation?.states,
-              [ELEMENT_STATE.ACTIVE]: animation?.states?.active || {
+              [ELEMENT_STATE.ACTIVE]: animation?.states?.active ?? {
                 backgroundColor: theme.color.border,
               },
-              [ELEMENT_STATE.INACTIVE]: animation?.states?.inactive || {
+              [ELEMENT_STATE.INACTIVE]: animation?.states?.inactive ?? {
                 backgroundColor: theme.color.palette.surface.muted,
               },
             },

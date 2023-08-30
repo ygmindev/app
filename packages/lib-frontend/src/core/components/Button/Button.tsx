@@ -8,15 +8,15 @@ import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { Loading } from '#lib-frontend/core/components/Loading/Loading';
 import { Pressable } from '#lib-frontend/core/components/Pressable/Pressable';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import { type WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type ElementStateModel, type SFCModel } from '#lib-frontend/core/core.models';
+import { type ElementStateModel, type RLFCModel } from '#lib-frontend/core/core.models';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { type ThemeRoleModel } from '#lib-frontend/style/style.models';
-import { borderStyler } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler';
 import {
   FLEX_ALIGN,
   FLEX_JUSTIFY,
@@ -24,7 +24,7 @@ import {
 import { FONT_ALIGN } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
-export const Button: SFCModel<ButtonPropsModel> = ({
+export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
   align = FLEX_ALIGN.CENTER,
   children,
   color = THEME_COLOR.PRIMARY,
@@ -39,10 +39,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
   ...props
 }) => {
   const theme = useTheme();
-  const { styles } = useStyles({
-    props: { ...props, isShadow },
-    stylers: [borderStyler],
-  });
+  const { styles } = useLayoutStyles({ props: { ...props, isShadow } });
 
   const { valueControlled, valueControlledSet } = useValueControlled<ElementStateModel>({
     defaultValue: ELEMENT_STATE.INACTIVE,
@@ -52,8 +49,8 @@ export const Button: SFCModel<ButtonPropsModel> = ({
 
   const heightF = height ?? theme.shape.size[size];
   const isLoading = valueControlled === ELEMENT_STATE.LOADING;
-  const isIcon = icon && !children;
-  const typeF = type ?? (isIcon ? BUTTON_TYPE.INVISIBLE : BUTTON_TYPE.FILLED);
+  const isIconOnly = icon && !children;
+  const typeF = type ?? (isIconOnly && !isShadow ? BUTTON_TYPE.INVISIBLE : BUTTON_TYPE.FILLED);
 
   const { animation, childColorRole } = useMemo<{
     animation?: AnimationModel;
@@ -74,6 +71,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
           },
           childColorRole: THEME_ROLE.CONTRAST,
         };
+        break;
       }
       case BUTTON_TYPE.INVISIBLE:
       case BUTTON_TYPE.TRANSPARENT: {
@@ -136,7 +134,7 @@ export const Button: SFCModel<ButtonPropsModel> = ({
       justify={FLEX_JUSTIFY.CENTER}
       onElementStateChange={valueControlledSet}
       position={SHAPE_POSITION.RELATIVE}
-      round={isIcon ? heightF / 2 : true}
+      round={isIconOnly ? heightF / 2 : true}
       style={styles}
       width={children ? undefined : heightF}>
       <>

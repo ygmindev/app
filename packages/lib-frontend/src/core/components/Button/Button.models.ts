@@ -27,7 +27,10 @@ export type ButtonPropsModel = {
     | 'height'
     | 'isFocusable'
     | 'isFullWidth'
+    | 'onActive'
+    | 'onInactive'
     | 'onPress'
     | 'onPressIn'
     | 'onPressOut'
+    | 'trigger'
   >;

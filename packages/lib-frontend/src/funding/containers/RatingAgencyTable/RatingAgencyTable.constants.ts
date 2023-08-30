@@ -7,4 +7,5 @@ import {
 
 export const RATING_AGENCY_TABLE_PROPS = {
   columns: [{ id: 'name' }, ...Object.values(RATING_KEY).map((id) => ({ id }))],
+  title: ({ t }) => t('funding:ratingAgency'),
 } satisfies Omit<ResourceTablePropsModel<RatingAgencyModel, RatingAgencyFormModel>, 'service'>;

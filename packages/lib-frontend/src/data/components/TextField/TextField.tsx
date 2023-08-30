@@ -169,7 +169,6 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         ANIMATION_STATES_FOCUSABLE({ isError, isText: true, theme }),
       ]),
     };
-
     return (
       <FocusableWrapper
         {...wrapperProps}

@@ -1,5 +1,5 @@
 export const IONIC_ICONS = {
-  add: 'add-circle-outline',
+  add: 'add-outline',
   alarm: 'alarm-outline',
   analytics: 'analytics-outline',
   arrowIn: 'return-down-back-outline',

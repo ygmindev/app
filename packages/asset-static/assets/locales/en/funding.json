@@ -9,6 +9,7 @@
   "maturity": "maturity",
   "maturityFormMessage": "TRANSLATION_MISSING",
   "quoted": "quoted {{value}}",
+  "ratingAgency": "TRANSLATION_MISSING",
   "refinancing": "refinancing",
   "startNewFunding": "start new funding",
   "type": "type"

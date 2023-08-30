@@ -43,7 +43,7 @@ export const ResourcePage: SFCModel<ResourcePagePropsModel> = ({ testID, ...prop
         value={id}
       />
 
-      {(id && RESOURCE_ITEMS[id].element) ?? <NotFoundPage />}
+      {id ? RESOURCE_ITEMS[id].element : <NotFoundPage />}
     </Wrapper>
   );
 };

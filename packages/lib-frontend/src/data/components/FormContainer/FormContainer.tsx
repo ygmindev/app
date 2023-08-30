@@ -26,6 +26,7 @@ import { useForm } from '#lib-frontend/data/hooks/useForm/useForm';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { type StringKeyModel } from '#lib-shared/core/core.models';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 
 export const FormContainer = forwardRef(
@@ -82,7 +83,7 @@ const FormContainerF = forwardRef(
     const getValues = useCallback(
       (data: TType) =>
         fields?.reduce((result, field) => {
-          const fieldsF = (field as FormRowModel).fields ?? [field];
+          const fieldsF = (field as FormRowModel<TType>).fields ?? [field];
           return {
             ...result,
             ...fieldsF.reduce(
@@ -128,7 +129,10 @@ const FormContainerF = forwardRef(
     const isDisabled =
       elementStateF === ELEMENT_STATE.DISABLED || elementStateF === ELEMENT_STATE.LOADING;
 
-    const getField = ({ element, id }: FormFieldModel): FormFieldModel => {
+    const getField = <TKey extends StringKeyModel<TType>>({
+      element,
+      id,
+    }: FormFieldModel<TType, TKey>): FormFieldModel<TType, TKey> => {
       const fieldProps = {
         defaultValue: initialValues ? (initialValues as Record<string, unknown>)[id] : undefined,
         elementState: elementStateF ?? element.props.elementState,
@@ -137,14 +141,14 @@ const FormContainerF = forwardRef(
         onChange: handleChange(id),
         onSubmit: handleSubmit,
         value: (values as Record<string, unknown>)[id],
-      } as FieldPropsModel;
+      } as FieldPropsModel<TType[TKey]>;
       return { element: cloneElement(element, fieldProps), id };
     };
 
     const rows = map(fields, (field) => {
-      const fieldRow = field as FormRowModel;
+      const fieldRow = field as FormRowModel<TType>;
       if (fieldRow.fields) {
-        const fieldsF = map(fields, getField);
+        const fieldsF = map(fieldRow.fields, getField);
         return {
           element: fieldRow.isGrouped ? (
             <FieldGroup
@@ -162,7 +166,7 @@ const FormContainerF = forwardRef(
           id: fieldRow.id,
         };
       }
-      return field;
+      return field as FormFieldModel<TType, StringKeyModel<TType>>;
     });
 
     return (

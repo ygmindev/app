@@ -5,6 +5,7 @@ import { type ElementStatePropsModel } from '#lib-frontend/core/core.models';
 import { type FieldPropsModel, type SubmittablePropsModel } from '#lib-frontend/data/data.models';
 import { type UseFormParamsModel } from '#lib-frontend/data/hooks/useForm/useForm.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
+import { type StringKeyModel } from '#lib-shared/core/core.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
 export type FormContainerPropsModel<TType, TResult = void> = UseFormParamsModel<TType, TResult> &
@@ -12,18 +13,21 @@ export type FormContainerPropsModel<TType, TResult = void> = UseFormParamsModel<
   Pick<AsyncBoundaryContextModel, 'errorContextGet'> & {
     bottomElement?(params: Pick<ElementStatePropsModel, 'elementState'>): ReactNode;
     cancelLabel?: TranslatableTextModel;
-    fields?: Array<FormFieldModel>;
+    fields?: Array<FormFieldModel<TType> | FormRowModel<TType>>;
     isButton?: boolean;
     isGrouped?: boolean;
     submitLabel?: TranslatableTextModel;
     topElement?(params: Pick<ElementStatePropsModel, 'elementState'>): ReactNode;
   };
 
-export type FormRowModel = WithIdModel & {
-  fields?: Array<FormFieldModel>;
+export type FormRowModel<TType> = WithIdModel & {
+  fields?: Array<FormFieldModel<TType>>;
   isGrouped?: boolean;
 };
 
-export type FormFieldModel = WithIdModel & {
-  element: ReactElement<FieldPropsModel>;
+export type FormFieldModel<
+  TType,
+  TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
+> = WithIdModel<TKey> & {
+  element: ReactElement<FieldPropsModel<TType[TKey]>>;
 };

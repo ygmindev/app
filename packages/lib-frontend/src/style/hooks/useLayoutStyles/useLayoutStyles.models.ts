@@ -6,9 +6,7 @@ import { type StylePropsModel, type ViewStyleModel } from '#lib-frontend/style/s
 export type LayoutPropsModel = StylePropsModel<ViewStyleModel> &
   Omit<WrapperPropsModel, 'children'>;
 
-export type UseLayoutStylesParamsModel<TType> = {
-  props: TType & LayoutPropsModel;
-};
+export type UseLayoutStylesParamsModel<TType> = { props: TType & LayoutPropsModel };
 
 export type UseLayoutStylesModel = UseStylesModel<ViewStyleModel> & {
   wrapperProps: LFCPropsModel<WrapperPropsModel>;

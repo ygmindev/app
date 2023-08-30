@@ -22,7 +22,7 @@ export const Table = <TType,>({
   const { t } = useTranslation();
   const { styles } = useStyles({ props });
   const { headers, rows } = useTable(props);
-  return (
+  return rows?.length ? (
     <Wrapper
       position={SHAPE_POSITION.RELATIVE}
       style={styles}
@@ -74,16 +74,16 @@ export const Table = <TType,>({
               </Wrapper>
             ))}
           </Wrapper>
-        )) ??
-          emptyElement ?? (
-            <Text
-              align={FONT_ALIGN.CENTER}
-              colorRole={THEME_ROLE.MUTED}
-              p>
-              {t('core:nothingToShow')}
-            </Text>
-          )}
+        ))}
       </Wrapper>
     </Wrapper>
+  ) : (
+    emptyElement ?? (
+      <Text
+        align={FONT_ALIGN.CENTER}
+        colorRole={THEME_ROLE.MUTED}>
+        {t('core:nothingToShow')}
+      </Text>
+    )
   );
 };

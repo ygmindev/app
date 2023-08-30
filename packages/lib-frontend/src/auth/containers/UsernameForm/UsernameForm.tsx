@@ -60,7 +60,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
     return result ?? null;
   };
 
-  const fields: Array<FormFieldModel> = useMemo(() => {
+  const fields: Array<FormFieldModel<UsernameFormModel>> = useMemo(() => {
     switch (valueControlled) {
       case SIGN_IN_METHOD.EMAIL:
         return [

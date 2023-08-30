@@ -48,7 +48,7 @@ export const Wrapper: RLFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
             cloneElement(child, {
               style: StyleSheet.flatten(
                 filterNil([
-                  isDistribute && { flexBasis: 0, flexGrow: 1 },
+                  isDistribute && { flexGrow: 1, flexShrink: 1 },
                   ((wrapperProps.isReverse && result.length !== length - 1) ||
                     (!wrapperProps.isReverse && result.length > 0)) &&
                     spacingStyler(
