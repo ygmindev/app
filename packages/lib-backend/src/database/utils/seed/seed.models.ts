@@ -4,6 +4,6 @@ export type SeedParamsModel = {
   names?: Array<string>;
 };
 
-export type SeedDataModel<TType> = {
+export type SeedDataModel<TType> = ResourceNameParamsModel & {
   data: Array<TType | (() => Promise<TType>)>;
-} & ResourceNameParamsModel;
+};

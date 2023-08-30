@@ -26,5 +26,5 @@ export type StringPromptArgsModel<TKey> = PromptArgsModel<TKey> &
 export type ArrayPromptArgsModel<TKey> = PromptArgsModel<TKey> & {
   basePath?: never;
   defaultValue?: Array<string>;
-  type?: PROMPT_TYPE.CHECKBOX;
+  type?: PROMPT_TYPE.MULTIPLE;
 };

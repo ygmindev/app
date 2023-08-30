@@ -19,7 +19,7 @@ export const runAll: TaskParamsModel<RunAllParamsModel> = {
           isString(pattern) ? pattern === k : pattern.test(k),
         ),
     );
-    return [{ defaultValue: options, key: 'tasks', options, type: PROMPT_TYPE.CHECKBOX }];
+    return [{ defaultValue: options, key: 'tasks', options, type: PROMPT_TYPE.MULTIPLE }];
   },
 
   task: [

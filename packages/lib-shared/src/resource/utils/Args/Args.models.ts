@@ -28,19 +28,19 @@ type CreateArgsModel<TType> = {
   form: TType;
 };
 
-type GetArgsOptionsModel<TType> = {
+type GetArgsOptionsModel<TType> = ProjectOptionsModel<TType> & {
   aggregate?: Array<object>;
-} & ProjectOptionsModel<TType>;
+};
 
 type GetArgsModel<TType> = {
   filter: Array<FilterModel<TType>>;
   options?: GetArgsOptionsModel<TType>;
 };
 
-type GetManyArgsOptionsModel<TType> = {
+type GetManyArgsOptionsModel<TType> = GetArgsOptionsModel<TType> & {
   skip?: number;
   take?: number;
-} & GetArgsOptionsModel<TType>;
+};
 
 type GetManyArgsModel<TType> = {
   filter: Array<FilterModel<TType>>;

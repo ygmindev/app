@@ -31,7 +31,7 @@ export const _prompt = async <TType>(
         choices: options
           ? options.map((option) => ({
               checked:
-                type === PROMPT_TYPE.CHECKBOX &&
+                type === PROMPT_TYPE.MULTIPLE &&
                 options &&
                 defaultValue &&
                 defaultValue.includes(option),
