@@ -6,8 +6,10 @@ import { DIRECTION } from '#lib-frontend/core/core.constants';
 import { type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { type TablePropsModel } from '#lib-frontend/data/components/Table/Table.models';
 import { useTable } from '#lib-frontend/data/hooks/useTable/useTable';
+import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { THEME_SIZE } from '#lib-frontend/style/style.constants';
+import { THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
+import { FONT_ALIGN } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const Table = <TType,>({
@@ -17,6 +19,7 @@ export const Table = <TType,>({
   testID,
   ...props
 }: SFCPropsModel<TablePropsModel<TType>>): ReactElement<SFCPropsModel<TablePropsModel<TType>>> => {
+  const { t } = useTranslation();
   const { styles } = useStyles({ props });
   const { headers, rows } = useTable(props);
   return (
@@ -71,7 +74,15 @@ export const Table = <TType,>({
               </Wrapper>
             ))}
           </Wrapper>
-        )) ?? emptyElement}
+        )) ??
+          emptyElement ?? (
+            <Text
+              align={FONT_ALIGN.CENTER}
+              colorRole={THEME_ROLE.MUTED}
+              p>
+              {t('core:nothingToShow')}
+            </Text>
+          )}
       </Wrapper>
     </Wrapper>
   );

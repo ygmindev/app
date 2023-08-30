@@ -6,7 +6,6 @@ import { type FieldPropsModel, type SubmittablePropsModel } from '#lib-frontend/
 import { type UseFormParamsModel } from '#lib-frontend/data/hooks/useForm/useForm.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
-import { type DataTypeModel } from '#lib-shared/data/data.models';
 
 export type FormContainerPropsModel<TType, TResult = void> = UseFormParamsModel<TType, TResult> &
   SubmittablePropsModel<TType, TResult> &
@@ -27,5 +26,4 @@ export type FormRowModel = WithIdModel & {
 
 export type FormFieldModel = WithIdModel & {
   element: ReactElement<FieldPropsModel>;
-  type?: DataTypeModel;
 };

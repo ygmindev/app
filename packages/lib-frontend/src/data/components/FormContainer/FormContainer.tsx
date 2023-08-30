@@ -1,5 +1,4 @@
 import map from 'lodash/map';
-import toNumber from 'lodash/toNumber';
 import { cloneElement, type ForwardedRef, type ReactElement, useCallback } from 'react';
 import { forwardRef, useImperativeHandle } from 'react';
 
@@ -28,7 +27,6 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
-import { DATA_TYPE } from '#lib-shared/data/data.constants';
 
 export const FormContainer = forwardRef(
   <TType, TResult = void>(
@@ -87,16 +85,13 @@ const FormContainerF = forwardRef(
           const fieldsF = (field as FormRowModel).fields ?? [field];
           return {
             ...result,
-            ...fieldsF.reduce((resultRow, { id, type }) => {
-              let value = (data as Record<string, unknown>)[id];
-              switch (type) {
-                case DATA_TYPE.NUMBER: {
-                  value = toNumber(value);
-                  break;
-                }
-              }
-              return { ...resultRow, [id]: value };
-            }, {}),
+            ...fieldsF.reduce(
+              (resultRow, { id }) => ({
+                ...resultRow,
+                [id]: (data as Record<string, unknown>)[id],
+              }),
+              {},
+            ),
           };
         }, {} as TType),
       [fields],
