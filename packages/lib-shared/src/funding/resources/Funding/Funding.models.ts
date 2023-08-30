@@ -1,5 +1,6 @@
 import { type AmountUnitModel, type RelativeDateUnitModel } from '#lib-frontend/data/data.models';
 import { type ScaledNumberRangeModel } from '#lib-shared/data/resources/ScaledNumberRange/ScaledNumberRange.models';
+import { type CREDIT_RATING_RESOURCE_NAME } from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
 import { type CreditRatingModel } from '#lib-shared/funding/resources/CreditRating/CreditRating.models';
 import {
   type EntityResourceDataModel,
@@ -7,9 +8,9 @@ import {
 } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export type FundingModel = EntityResourceModel & {
-  amount?: Array<ScaledNumberRangeModel<AmountUnitModel>>;
+  [CREDIT_RATING_RESOURCE_NAME]?: Array<CreditRatingModel>;
 
-  creditRating?: Array<CreditRatingModel>;
+  amount?: Array<ScaledNumberRangeModel<AmountUnitModel>>;
 
   currency?: string;
 
@@ -17,7 +18,6 @@ export type FundingModel = EntityResourceModel & {
 
   // financials?
   // ccr
-  // tranche ratings
 };
 
 export type FundingFormModel = EntityResourceDataModel<FundingModel>;

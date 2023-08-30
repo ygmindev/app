@@ -10,7 +10,6 @@ import { type RatingAgencyModel } from '#lib-shared/funding/resources/RatingAgen
 export class RatingAgency extends EntityResource implements RatingAgencyModel {
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   name!: string;
-
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   [RATING_KEY.AAA]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })

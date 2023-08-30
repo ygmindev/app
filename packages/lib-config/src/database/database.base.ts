@@ -4,6 +4,7 @@ import { Bank } from '#lib-backend/billing/resources/Bank/Bank';
 import { Card } from '#lib-backend/billing/resources/Card/Card';
 import { Issuer } from '#lib-backend/capital/resources/Issuer/Issuer';
 import { Underwriter } from '#lib-backend/capital/resources/Underwriter/Underwriter';
+import { CreditRating } from '#lib-backend/funding/resources/CreditRating/CreditRating';
 import { Funding } from '#lib-backend/funding/resources/Funding/Funding';
 import { RatingAgency } from '#lib-backend/funding/resources/RatingAgency/RatingAgency';
 import { DummyEntityResource } from '#lib-backend/test/resources/DummyEntityResource/DummyEntityResource';
@@ -20,6 +21,7 @@ const { _config, config } = defineConfig({
       Access,
       Bank,
       Card,
+      CreditRating,
       Funding,
       Otp,
       RatingAgency,
