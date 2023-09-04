@@ -1,10 +1,10 @@
 {
-  "day": "TRANSLATION_MISSING",
+  "day": "day",
   "location": "location",
-  "month": "TRANSLATION_MISSING",
+  "month": "month",
   "timezone": "timezone",
   "today": "today",
-  "week": "TRANSLATION_MISSING",
-  "year": "TRANSLATION_MISSING",
+  "week": "week",
+  "year": "year",
   "yesterday": "yesterday"
 }

@@ -1,5 +1,5 @@
 import Fuse from 'fuse.js';
-import { useCallback, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import {
   type _UseSearchModel,
@@ -17,29 +17,22 @@ export const _useSearch = <TType,>({
   keys,
   limit = SEARCH_LIMIT,
   list,
-  onChange,
 }: _UseSearchParamsModel<TType>): _UseSearchModel<TType> => {
-  const [query, querySet] = useState<string>('');
+  const [query, querySet] = useState<string>();
+  const [result, resultSet] = useState<Array<TType>>(list);
 
-  const querySetF = useCallback(
-    debounce(
-      (value: string) => {
-        querySet(value);
-        onChange && onChange(value);
-      },
-      { duration: delay },
-    ),
-    [querySet, delay],
+  const searchF = debounce(
+    () => {
+      const resultF = query ? fuse.search(query, { limit }).map(({ item }) => item) : list;
+      resultSet(resultF);
+    },
+    { duration: delay },
   );
 
   const fuse = useMemo(() => new Fuse(list, { keys, threshold: SEARCH_THRESHOLD }), [list]);
-
-  const result = useMemo(
-    () => (query ? fuse.search(query, { limit }).map(({ item }) => item) : list),
-    [fuse, limit, query],
-  );
-
-  const search = useCallback(querySetF, []);
-
-  return { result, search };
+  const search = (value: string): void => {
+    querySet(value);
+    searchF();
+  };
+  return { query, result, search };
 };

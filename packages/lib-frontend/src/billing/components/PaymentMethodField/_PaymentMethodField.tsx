@@ -44,6 +44,9 @@ const StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forwa
 
     useImperativeHandle(ref, () => ({
       reset: () => null,
+      setValues: async () => {
+        return;
+      },
       submit: handleSubmit,
     }));
 

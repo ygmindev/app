@@ -4,10 +4,11 @@ import { type SubmittablePropsModel } from '#lib-frontend/data/data.models';
 import { type PartialModel } from '#lib-shared/core/core.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
-export type StepFormPropsModel<TType, TResult = void> = SubmittablePropsModel<TType, TResult> & {
-  steps: Array<FormStepModel<TType>>;
-  topElement?: ReactElement;
-};
+export type StepFormPropsModel<TKey extends string, TType, TResult = void> = WithIdModel<TKey> &
+  SubmittablePropsModel<TType, TResult> & {
+    steps: Array<FormStepModel<TType>>;
+    topElement?: ReactElement;
+  };
 
 export type FormStepPropsModel<TType, TResult = void> = SubmittablePropsModel<
   PartialModel<TType>,

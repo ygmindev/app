@@ -1,27 +1,28 @@
-import { cloneElement, useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import { Button } from '#lib-frontend/core/components/Button/Button';
+import { Modal } from '#lib-frontend/core/components/Modal/Modal';
 import { type ModalButtonPropsModel } from '#lib-frontend/core/components/ModalButton/ModalButton.models';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 
-export const ModalButton: LFCModel<ModalButtonPropsModel> = ({ modal, onPress, ...props }) => {
-  const [modalIsOpen, modalIsOpenSet] = useState<boolean>();
-
-  const modalElementF = useMemo(() => {
-    cloneElement(modal, { isOpen: modalIsOpen, onClose: () => modalIsOpenSet(false) });
-  }, [modalIsOpen]);
-  console.warn(modalIsOpen);
+export const ModalButton: LFCModel<ModalButtonPropsModel> = ({ element, onPress, ...props }) => {
+  const [isOpen, isOpenSet] = useState<boolean>();
   return (
     <>
       <Button
         {...props}
         onPress={async () => {
           onPress && (await onPress());
-          modalIsOpenSet(!modalIsOpen);
+          isOpenSet(!isOpen);
         }}
       />
 
-      {modalElementF}
+      <Modal
+        isFullSize
+        isOpen={isOpen}
+        onClose={() => isOpenSet(false)}>
+        {element}
+      </Modal>
     </>
   );
 };

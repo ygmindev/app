@@ -1,6 +1,5 @@
 import { type ReactElement } from 'react';
 
-import { type FormContainerPropsModel } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
 import { type TablePropsModel } from '#lib-frontend/data/components/Table/Table.models';
 import { type FieldPropsModel } from '#lib-frontend/data/data.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
@@ -12,7 +11,6 @@ export type ResourceTablePropsModel<TType, TForm = undefined, TRoot = undefined>
   'filters'
 > &
   Pick<TablePropsModel<TType>, 'columns'> & {
-    form?: ReactElement<FormContainerPropsModel<TType>>;
     service: ResourceServiceModel<TType, TForm, TRoot>;
     title?: TranslatableTextModel;
   };

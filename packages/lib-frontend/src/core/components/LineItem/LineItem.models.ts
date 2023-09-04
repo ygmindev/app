@@ -8,11 +8,11 @@ import {
 } from '#lib-frontend/core/core.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 
-export type LineItemPropsModel = {
-  label?: TranslatableTextModel;
-  rightElement?(isOpen?: boolean): ReactElement;
-  value?: string | null;
-} & ChildrenPropsModel &
+export type LineItemPropsModel = ChildrenPropsModel &
   ElementStatePropsModel &
   Pick<PressablePropsModel, 'onPress'> &
-  Partial<Pick<IconPropsModel, 'icon'>>;
+  Partial<Pick<IconPropsModel, 'icon'>> & {
+    label?: TranslatableTextModel;
+    rightElement?(isOpen?: boolean): ReactElement;
+    value?: string | null;
+  };

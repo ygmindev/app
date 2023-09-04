@@ -1,3 +1,4 @@
+import { SIGN_IN } from '#lib-frontend/auth/auth.constants';
 import { OtpForm } from '#lib-frontend/auth/containers/OtpForm/OtpForm';
 import { type SignInFormPropsModel } from '#lib-frontend/auth/containers/SignInForm/SignInForm.models';
 import { UsernameForm } from '#lib-frontend/auth/containers/UsernameForm/UsernameForm';
@@ -27,8 +28,9 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
     mode === FORM_MODE.NEW ? signIn(form) : usernameUpdate(form);
 
   return (
-    <StepForm<SignInFormModel>
+    <StepForm
       {...props}
+      id={SIGN_IN}
       onSubmit={handleSubmit}
       onSuccess={async () => replace({ pathname: redirectTo ?? '/' })}
       steps={[

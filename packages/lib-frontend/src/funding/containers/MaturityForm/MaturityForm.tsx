@@ -1,5 +1,5 @@
 import { Text } from '#lib-frontend/core/components/Text/Text';
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { RangeField } from '#lib-frontend/data/components/RangeField/RangeField';
 import { RELATIVE_DATE_UNIT, RELATIVE_DATE_UNIT_OPTIONS } from '#lib-frontend/data/data.constants';
@@ -11,7 +11,7 @@ import {
   FONT_TYPE,
 } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
-export const MaturityForm: SFCModel<MaturityFormPropsModel> = ({
+export const MaturityForm: LFCModel<MaturityFormPropsModel> = ({
   onComplete,
   onError,
   onSubmit,

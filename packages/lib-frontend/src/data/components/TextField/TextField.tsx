@@ -82,12 +82,12 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       }
     });
 
-    const leftElementF = leftElement && <Wrapper isCenter>{leftElement}</Wrapper>;
+    const leftElementF = leftElement && <Wrapper isRowAlign>{leftElement}</Wrapper>;
 
     const rightElementF = (
       <Wrapper
         bottom={0}
-        isCenter
+        isRowAlign
         position={SHAPE_POSITION.ABSOLUTE}
         right={0}
         top={0}>
@@ -180,9 +180,10 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         position={SHAPE_POSITION.RELATIVE}
         ref={focusableRef}>
         <Wrapper
-          align={FLEX_ALIGN.FLEX_END}
+          align={label ? FLEX_ALIGN.FLEX_END : FLEX_ALIGN.CENTER}
           grow
-          isRow>
+          isRow
+          s={THEME_SIZE.SMALL}>
           {leftElementF}
 
           <_TextField

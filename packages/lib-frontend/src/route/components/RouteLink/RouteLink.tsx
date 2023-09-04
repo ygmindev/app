@@ -7,7 +7,7 @@ import { type RouteLinkPropsModel } from '#lib-frontend/route/components/RouteLi
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 
-export const RouteLink = <TType = undefined,>({
+export const RouteLink = <TType = object,>({
   children,
   pathname,
   testID,

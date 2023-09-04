@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import { AnimatableView } from '#lib-frontend/animation/components/AnimatableView/AnimatableView';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
@@ -41,7 +41,6 @@ export const SelectField = <TType extends string = string>({
 > => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation();
-  const [query, querySet] = useState<string>();
   const { valueControlled, valueControlledSet } = useValueControlled({
     defaultValue,
     onChange,
@@ -50,9 +49,9 @@ export const SelectField = <TType extends string = string>({
 
   const menuRef = useRef<MenuRefModel>(null);
 
-  const { result, search } = useSearch({
-    keys: ['label', 'value'],
-    list: options,
+  const { query, result, search } = useSearch({
+    keys: ['label', 'id'],
+    list: options.map(({ label, ...option }) => ({ ...option, label: t(label) })),
     onChange: () => menuRef.current?.scrollTo({ x: 0, y: 0 }),
   });
 
@@ -60,7 +59,6 @@ export const SelectField = <TType extends string = string>({
     void sleep(100).then(() => {
       menuRef.current?.toggle(isOpen);
       search('');
-      querySet('');
     });
   };
 
@@ -72,11 +70,6 @@ export const SelectField = <TType extends string = string>({
       onSubmit && onSubmit();
     }
     handleToggle(false);
-  };
-
-  const onQueryChange = (value: string): void => {
-    querySet(value);
-    search(value);
   };
 
   const selectedOption = options.find(({ id }) => id === valueControlled);
@@ -110,7 +103,7 @@ export const SelectField = <TType extends string = string>({
               onBlur && onBlur();
               void handleToggle(false);
             }}
-            onChange={onQueryChange}
+            onChange={search}
             onFocus={() => {
               onFocus && onFocus();
               handleToggle(true);

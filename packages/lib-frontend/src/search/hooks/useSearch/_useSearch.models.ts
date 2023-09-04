@@ -7,6 +7,7 @@ export type _UseSearchParamsModel<TType> = {
 };
 
 export type _UseSearchModel<TResult> = {
+  query?: string;
   result: Array<TResult>;
   search(query: string): void;
 };

@@ -1,4 +1,5 @@
-import { random, range } from 'lodash';
+import random from 'lodash/random';
+import range from 'lodash/range';
 
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';

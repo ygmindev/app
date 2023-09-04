@@ -3,35 +3,28 @@ import { type ReactElement } from 'react';
 import { type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { type ResourceFormPropsModel } from '#lib-frontend/resource/containers/ResourceForm/ResourceForm.models';
-import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
-import { withId } from '#lib-shared/core/utils/withId/withId';
-import { type EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
-export const ResourceForm = <TType extends EntityResourceModel, TForm, TRoot = undefined>({
-  columns,
-  data,
-  onCancel,
-  onCreate,
-  root,
-  testID,
-  validators,
+export const ResourceForm = <TType, TForm = undefined, TRoot = undefined>({
+  fields,
+  service,
+  ...props
 }: SFCPropsModel<ResourceFormPropsModel<TType, TForm, TRoot>>): ReactElement<
   SFCPropsModel<ResourceFormPropsModel<TType, TForm, TRoot>>
 > => {
-  const handleSubmit = async (form: TForm): Promise<void> => {
-    onCreate && (await onCreate({ form, root }));
+  const { wrapperProps } = useLayoutStyles({ props });
+  const { create, update } = service;
+
+  const handleSubmit = async (data: TForm): Promise<void> => {
+    console.warn(data);
+    return;
   };
 
   return (
     <FormContainer
-      initialValues={data}
-      onCancel={onCancel}
+      {...wrapperProps}
+      fields={fields}
       onSubmit={handleSubmit}
-      rows={filterNil(
-        withId(columns.map((column) => (data || !column.isDisabled) && { fields: [column] })),
-      )}
-      testID={testID}
-      validators={validators}
     />
   );
 };

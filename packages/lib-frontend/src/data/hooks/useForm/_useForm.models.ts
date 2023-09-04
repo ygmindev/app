@@ -17,5 +17,6 @@ export type _UseFormModel<TType, TResult = void> = {
   isLoading: boolean;
   isValid: boolean;
   setErrors(errors?: Error): void;
+  setValues(data?: TType): Promise<void>;
   values: TType;
 };

@@ -7,15 +7,15 @@ import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
-export const useRouter = <TType = undefined,>(): UseRouterModel<TType> => {
+export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
   const { back, isActive, location, push, replace } = _useRouter<TType>();
   const actions = useActions();
   const isLoading = useStore((state) => state.app.isLoading);
   const theme = useTheme();
 
-  const update = async <TNextType = undefined,>(
+  const update = async <TTypeNext = undefined,>(
     callback: () => Promise<void>,
-    { isBack }: Pick<RouteUpdateModel<TNextType>, 'isBack'>,
+    { isBack }: Pick<RouteUpdateModel<TTypeNext>, 'isBack'>,
   ): Promise<void> => {
     if (!isLoading) {
       await sleep(100);
@@ -46,29 +46,31 @@ export const useRouter = <TType = undefined,>(): UseRouterModel<TType> => {
 
     location,
 
-    push: async <TNextType = undefined,>({
+    push: async <TTypeNext = undefined,>({
       isBack,
       params,
       pathname,
-    }: RouteUpdateModel<TNextType>) =>
+    }: RouteUpdateModel<TTypeNext>) =>
       update(
         () =>
           push({
-            params: { ...params, previous: location.pathname },
+            context: { previous: location.pathname },
+            params,
             pathname: trimPathname(pathname),
           }),
         { isBack },
       ),
 
-    replace: async <TNextType = undefined,>({
+    replace: async <TTypeNext = undefined,>({
       isBack,
       params,
       pathname,
-    }: RouteUpdateModel<TNextType>) =>
+    }: RouteUpdateModel<TTypeNext>) =>
       update(
         () =>
           replace({
-            params: { ...params, previous: location.pathname },
+            context: { previous: location.pathname },
+            params,
             pathname: trimPathname(pathname),
           }),
         { isBack },

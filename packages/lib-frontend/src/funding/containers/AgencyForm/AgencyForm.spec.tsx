@@ -1,9 +1,11 @@
-import { ResourceModal } from '#lib-frontend/resource/containers/ResourceModal/ResourceModal';
-import { type ResourceModalPropsModel } from '#lib-frontend/resource/containers/ResourceModal/ResourceModal.models';
+import { AgencyForm } from '#lib-frontend/funding/containers/AgencyForm/AgencyForm';
+import { type AgencyFormPropsModel } from '#lib-frontend/funding/containers/AgencyForm/AgencyForm.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<ResourceModalPropsModel>({ target: ResourceModal });
+const { Component, displayName, testID } = withTestComponent<AgencyFormPropsModel>({
+  target: AgencyForm,
+});
 
 describe(displayName, () => {
   test('works', async () => {

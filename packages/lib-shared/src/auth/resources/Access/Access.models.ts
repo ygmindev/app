@@ -3,7 +3,10 @@ import {
   type ACCESS_ROLE,
 } from '#lib-shared/auth/resources/Access/Access.constants';
 import { type ResolvedFieldModel } from '#lib-shared/resource/resource.models';
-import { type EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import {
+  type EntityResourceDataModel,
+  type EntityResourceModel,
+} from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 export type AccessRoleModel = `${ACCESS_ROLE}`;
@@ -16,6 +19,4 @@ export type AccessModel = EntityResourceModel & {
   user?: ResolvedFieldModel<UserModel>;
 };
 
-export type AccessFormModel = {
-  _user: string;
-} & Pick<AccessModel, 'role'>;
+export type AccessFormModel = EntityResourceDataModel<AccessModel>;

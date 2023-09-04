@@ -5,8 +5,8 @@ import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 import { CREDIT_RATING_RESOURCE_NAME } from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
 import {
+  CreditRatingCategoryModel,
   type CreditRatingModel,
-  CreditRatingTypeModel,
 } from '#lib-shared/funding/resources/CreditRating/CreditRating.models';
 import { type RatingAgencyModel } from '#lib-shared/funding/resources/RatingAgency/RatingAgency.models';
 import { ResolvedFieldModel } from '#lib-shared/resource/resource.models';
@@ -19,9 +19,6 @@ export class CreditRating extends EmbeddedResource implements CreditRatingModel 
   @withField({ Resource: RatingAgency, isOptional: true, type: PROPERTY_TYPE.RESOURCE })
   agency?: ResolvedFieldModel<RatingAgencyModel>;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  type!: CreditRatingTypeModel;
-
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  value!: string;
+  @withField({ isOptional: true, type: DATA_TYPE.STRING })
+  longTermCategory?: CreditRatingCategoryModel;
 }

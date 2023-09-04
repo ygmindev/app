@@ -1,3 +1,4 @@
+import { type OtpFormModel } from '#lib-frontend/auth/containers/OtpForm/OtpForm.models';
 import { type SignInFormModel } from '#lib-frontend/auth/containers/SignInForm/SignInForm.models';
 import { type FormStepPropsModel } from '#lib-frontend/data/components/StepForm/StepForm.models';
 import { type SignInMethodModel } from '#lib-shared/auth/auth.models';
@@ -6,7 +7,7 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 export type UsernameFormModel = Pick<UserModel, 'callingCode' | 'phone' | 'email'>;
 
-export type UsernameFormPropsModel = FormStepPropsModel<SignInFormModel> & {
+export type UsernameFormPropsModel = FormStepPropsModel<SignInFormModel, OtpFormModel> & {
   method?: SignInMethodModel;
   mode?: FormModeModel;
   onMethodChange?(value: SignInMethodModel): void;

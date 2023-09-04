@@ -13,6 +13,7 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
+import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 import { error } from '#lib-shared/logging/utils/logger/logger';
@@ -20,6 +21,7 @@ import { error } from '#lib-shared/logging/utils/logger/logger';
 export const useForm = <TType, TResult = void>({
   initialValues,
   isBlocking = true,
+  isValidateChanged,
   onComplete,
   onError,
   onSubmit,
@@ -61,9 +63,14 @@ export const useForm = <TType, TResult = void>({
   const handleSubmit = async (values: TType): Promise<TResult | null> => {
     try {
       void sleep();
+
+      isValidateChanged &&
+        isEqual(values, initialValues) &&
+        handleError(Error(t('core:validateChanged')));
+
       isBlocking && actions?.app.isLoadingSet(true);
       const data = onSubmit && (await onSubmit(values));
-      data && onSuccess && (await onSuccess(values, data));
+      onSuccess && (await onSuccess(values, data));
       return data ?? null;
     } catch (e) {
       error(e);

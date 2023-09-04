@@ -1,7 +1,7 @@
-import { toNumber } from 'lodash';
 import isDate from 'lodash/isDate';
 import isNil from 'lodash/isNil';
 import isNumber from 'lodash/isNumber';
+import toNumber from 'lodash/toNumber';
 import toString from 'lodash/toString';
 import moment from 'moment';
 
@@ -64,6 +64,10 @@ export const useFormatter = (): UseFormatterModel => {
           break;
         }
         // TODO: Day count convention?
+        case RELATIVE_DATE_UNIT.DAY: {
+          postfix = 'd';
+          break;
+        }
         case RELATIVE_DATE_UNIT.WEEK: {
           isScale && (valueF *= 7);
           postfix = 'w';

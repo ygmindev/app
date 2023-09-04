@@ -24,18 +24,16 @@ import {
 import { type FieldPropsModel, type FormRefModel } from '#lib-frontend/data/data.models';
 import { useForm } from '#lib-frontend/data/hooks/useForm/useForm';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { type StringKeyModel } from '#lib-shared/core/core.models';
-import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 
 export const FormContainer = forwardRef(
   <TType, TResult = void>(
     { errorContextGet, ...props }: LFCPropsModel<FormContainerPropsModel<TType, TResult>>,
-    ref: ForwardedRef<FormRefModel>,
-  ): ReactElement<RLFCPropsModel<FormRefModel, FormContainerPropsModel<TType, TResult>>> => {
+    ref: ForwardedRef<FormRefModel<TType>>,
+  ): ReactElement<RLFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>> => {
     const Component = FormContainerF as RLFCModel<
-      FormRefModel,
+      FormRefModel<TType>,
       FormContainerPropsModel<TType, TResult>
     >;
     return (
@@ -49,7 +47,9 @@ export const FormContainer = forwardRef(
       </AsyncBoundary>
     );
   },
-);
+) as <TType, TResult = void>(
+  props: RLFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>,
+) => ReactElement<RLFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>>;
 
 const FormContainerF = forwardRef(
   <TType, TResult = void>(
@@ -62,6 +62,7 @@ const FormContainerF = forwardRef(
       isBlocking,
       isButton = true,
       isGrouped,
+      isValidateChanged,
       onCancel,
       onComplete,
       onError,
@@ -72,13 +73,12 @@ const FormContainerF = forwardRef(
       validators,
       ...props
     }: LFCPropsModel<FormContainerPropsModel<TType, TResult>>,
-    ref: ForwardedRef<FormRefModel>,
-  ): ReactElement<RLFCPropsModel<FormRefModel, FormContainerPropsModel<TType, TResult>>> => {
+    ref: ForwardedRef<FormRefModel<TType>>,
+  ): ReactElement<RLFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>> => {
     const { t } = useTranslation();
-    const { error } = useNotification();
     const { wrapperProps } = useLayoutStyles({ props });
 
-    useImperativeHandle(ref, () => ({ reset: handleReset, submit: handleSubmit }));
+    useImperativeHandle(ref, () => ({ reset: handleReset, setValues, submit: handleSubmit }));
 
     const getValues = useCallback(
       (data: TType) =>
@@ -102,28 +102,25 @@ const FormContainerF = forwardRef(
       const initialValuesF = initialValues && getValues(initialValues);
       const dataF = getValues(data);
       if (dataF) {
-        if (isEqual(initialValuesF, dataF)) {
-          error({ message: t('core:validateChanged') });
-          return null;
-        } else {
-          return (onSubmit && (await onSubmit(dataF))) ?? null;
-        }
+        // if (isValidateChanged && isEqual(initialValuesF, dataF)) {
+        //   throw new Error(t('core:validateChanged'));
+        // }
+        return (onSubmit && (await onSubmit(dataF))) ?? null;
       }
       return null;
     };
 
-    const { errors, handleChange, handleReset, handleSubmit, isLoading, values } = useForm<
-      TType,
-      TResult
-    >({
-      initialValues,
-      isBlocking,
-      onComplete,
-      onError,
-      onSubmit: handleSubmitF,
-      onSuccess,
-      validators,
-    });
+    const { errors, handleChange, handleReset, handleSubmit, isLoading, setValues, values } =
+      useForm<TType, TResult>({
+        initialValues,
+        isBlocking,
+        isValidateChanged,
+        onComplete,
+        onError,
+        onSubmit: handleSubmitF,
+        onSuccess,
+        validators,
+      });
 
     const elementStateF = isLoading ? ELEMENT_STATE.LOADING : elementState;
     const isDisabled =
@@ -160,13 +157,13 @@ const FormContainerF = forwardRef(
               isDistribute
               isRowAlign
               key={field.id}>
-              {fieldsF.map(({ element }) => element)}
+              {fieldsF.map(({ element, id }) => cloneElement(element, { key: id }))}
             </Wrapper>
           ),
           id: fieldRow.id,
         };
       }
-      return field as FormFieldModel<TType, StringKeyModel<TType>>;
+      return getField(field as FormFieldModel<TType>);
     });
 
     return (
@@ -177,7 +174,11 @@ const FormContainerF = forwardRef(
           <Wrapper s>
             {topElement && topElement({ elementState: elementStateF })}
 
-            {isGrouped ? <FieldGroup fields={rows} /> : rows.map(({ element }) => element)}
+            {isGrouped ? (
+              <FieldGroup fields={rows} />
+            ) : (
+              rows.map(({ element, id }) => cloneElement(element, { key: id }))
+            )}
           </Wrapper>
         </Form>
 

@@ -1,4 +1,4 @@
-import { type RATING_KEY } from '#lib-shared/funding/funding.constants';
+import { type CREDIT_RATING_CATEGORY } from '#lib-shared/funding/resources/CreditRatingCategory/CreditRatingCategory.constants';
 import {
   type EntityResourceDataModel,
   type EntityResourceModel,
@@ -6,26 +6,26 @@ import {
 
 export type RatingAgencyModel = EntityResourceModel & {
   name: string;
-  [RATING_KEY.AAA]?: string;
-  [RATING_KEY.AAp]?: string;
-  [RATING_KEY.AA]?: string;
-  [RATING_KEY.AAm]?: string;
-  [RATING_KEY.Ap]?: string;
-  [RATING_KEY.A]?: string;
-  [RATING_KEY.Am]?: string;
-  [RATING_KEY.BBBp]?: string;
-  [RATING_KEY.BBB]?: string;
-  [RATING_KEY.BBBm]?: string;
-  [RATING_KEY.BBp]?: string;
-  [RATING_KEY.BB]?: string;
-  [RATING_KEY.BBm]?: string;
-  [RATING_KEY.Bp]?: string;
-  [RATING_KEY.B]?: string;
-  [RATING_KEY.Bm]?: string;
-  [RATING_KEY.CCCp]?: string;
-  [RATING_KEY.CCC]?: string;
-  [RATING_KEY.CCCm]?: string;
-  [RATING_KEY.D]?: string;
+  [CREDIT_RATING_CATEGORY.AAA]?: string;
+  [CREDIT_RATING_CATEGORY.AAp]?: string;
+  [CREDIT_RATING_CATEGORY.AA]?: string;
+  [CREDIT_RATING_CATEGORY.AAm]?: string;
+  [CREDIT_RATING_CATEGORY.Ap]?: string;
+  [CREDIT_RATING_CATEGORY.A]?: string;
+  [CREDIT_RATING_CATEGORY.Am]?: string;
+  [CREDIT_RATING_CATEGORY.BBBp]?: string;
+  [CREDIT_RATING_CATEGORY.BBB]?: string;
+  [CREDIT_RATING_CATEGORY.BBBm]?: string;
+  [CREDIT_RATING_CATEGORY.BBp]?: string;
+  [CREDIT_RATING_CATEGORY.BB]?: string;
+  [CREDIT_RATING_CATEGORY.BBm]?: string;
+  [CREDIT_RATING_CATEGORY.Bp]?: string;
+  [CREDIT_RATING_CATEGORY.B]?: string;
+  [CREDIT_RATING_CATEGORY.Bm]?: string;
+  [CREDIT_RATING_CATEGORY.CCCp]?: string;
+  [CREDIT_RATING_CATEGORY.CCC]?: string;
+  [CREDIT_RATING_CATEGORY.CCCm]?: string;
+  [CREDIT_RATING_CATEGORY.D]?: string;
 };
 
 export type RatingAgencyFormModel = EntityResourceDataModel<RatingAgencyModel>;

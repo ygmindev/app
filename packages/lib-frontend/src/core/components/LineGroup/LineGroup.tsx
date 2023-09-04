@@ -8,7 +8,7 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useDividers } from '#lib-frontend/core/hooks/useDividers/useDividers';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
@@ -16,11 +16,10 @@ import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 export const LineGroup: SFCModel<LineGroupPropsModel> = ({
   children,
   emptyString = ({ t }) => t('core:nothingToShow'),
-  testID,
   title,
   ...props
 }) => {
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const lineItems = Children.toArray(children) as Array<ReactElement>;
   const childrenF = useDividers(
     filterNil([
@@ -43,11 +42,9 @@ export const LineGroup: SFCModel<LineGroupPropsModel> = ({
 
   return (
     <Wrapper
-      border
-      pHorizontal={THEME_SIZE.SMALL}
-      round
-      style={styles}
-      testID={testID}>
+      {...wrapperProps}
+      isVerticalScrollable
+      pHorizontal={THEME_SIZE.SMALL}>
       {childrenF}
     </Wrapper>
   );

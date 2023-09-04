@@ -1,3 +1,3 @@
 import { type UriModel } from '#lib-frontend/route/route.models';
 
-export type UriParamsModel<TParams = undefined> = UriModel<TParams>;
+export type UriParamsModel<TType = object> = UriModel<TType>;

@@ -9,6 +9,7 @@ export type ShapeStylerParamsModel = {
   isAbsoluteFill?: boolean;
   isFullHeight?: boolean;
   isFullWidth?: boolean;
+  isHidden?: boolean;
   isOverflowHidden?: boolean;
   left?: number;
   maxHeight?: number;

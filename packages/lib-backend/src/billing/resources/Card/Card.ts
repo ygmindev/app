@@ -7,7 +7,7 @@ import {
   type CardFundingModel,
   type CardModel,
 } from '#lib-shared/billing/resources/Card/Card.models';
-import { type PaymentMethodTypeModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { PAYMENT_METHOD_TYPE } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { DATA_TYPE } from '#lib-shared/data/data.constants';
 
 @withEntity({ isEmbedded: true, isRepository: true, name: CARD_RESOURCE_NAME })
@@ -30,6 +30,6 @@ export class Card extends EmbeddedResource implements CardModel {
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   last4!: string;
 
-  @withField({ isOptional: true, type: DATA_TYPE.STRING })
-  type?: PaymentMethodTypeModel;
+  @withField({ type: DATA_TYPE.STRING })
+  type!: PAYMENT_METHOD_TYPE.CARD;
 }

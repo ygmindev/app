@@ -2,7 +2,7 @@ import { EntityResource } from '#lib-backend/resource/resources/EntityResource/E
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { DATA_TYPE } from '#lib-shared/data/data.constants';
-import { RATING_KEY } from '#lib-shared/funding/funding.constants';
+import { CREDIT_RATING_CATEGORY } from '#lib-shared/funding/resources/CreditRatingCategory/CreditRatingCategory.constants';
 import { RATING_AGENCY_RESOURCE_NAME } from '#lib-shared/funding/resources/RatingAgency/RatingAgency.constants';
 import { type RatingAgencyModel } from '#lib-shared/funding/resources/RatingAgency/RatingAgency.models';
 
@@ -11,43 +11,43 @@ export class RatingAgency extends EntityResource implements RatingAgencyModel {
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   name!: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.AAA]?: string;
+  [CREDIT_RATING_CATEGORY.AAA]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.AAp]?: string;
+  [CREDIT_RATING_CATEGORY.AAp]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.AA]?: string;
+  [CREDIT_RATING_CATEGORY.AA]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.AAm]?: string;
+  [CREDIT_RATING_CATEGORY.AAm]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.Ap]?: string;
+  [CREDIT_RATING_CATEGORY.Ap]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.A]?: string;
+  [CREDIT_RATING_CATEGORY.A]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.Am]?: string;
+  [CREDIT_RATING_CATEGORY.Am]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.BBBp]?: string;
+  [CREDIT_RATING_CATEGORY.BBBp]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.BBB]?: string;
+  [CREDIT_RATING_CATEGORY.BBB]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.BBBm]?: string;
+  [CREDIT_RATING_CATEGORY.BBBm]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.BBp]?: string;
+  [CREDIT_RATING_CATEGORY.BBp]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.BB]?: string;
+  [CREDIT_RATING_CATEGORY.BB]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.BBm]?: string;
+  [CREDIT_RATING_CATEGORY.BBm]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.Bp]?: string;
+  [CREDIT_RATING_CATEGORY.Bp]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.B]?: string;
+  [CREDIT_RATING_CATEGORY.B]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.Bm]?: string;
+  [CREDIT_RATING_CATEGORY.Bm]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.CCCp]?: string;
+  [CREDIT_RATING_CATEGORY.CCCp]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.CCC]?: string;
+  [CREDIT_RATING_CATEGORY.CCC]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.CCCm]?: string;
+  [CREDIT_RATING_CATEGORY.CCCm]?: string;
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  [RATING_KEY.D]?: string;
+  [CREDIT_RATING_CATEGORY.D]?: string;
 }

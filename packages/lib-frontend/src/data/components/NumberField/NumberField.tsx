@@ -1,6 +1,5 @@
 import toNumber from 'lodash/toNumber';
 import toString from 'lodash/toString';
-import { useState } from 'react';
 
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { type NumberFieldPropsModel } from '#lib-frontend/data/components/NumberField/NumberField.models';
@@ -9,7 +8,6 @@ import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/
 
 export const NumberField: LFCModel<NumberFieldPropsModel> = ({
   defaultValue,
-  onBlur,
   onChange,
   value,
   ...props
@@ -19,20 +17,11 @@ export const NumberField: LFCModel<NumberFieldPropsModel> = ({
     onChange,
     value,
   });
-  const [stringValue, stringValueSet] = useState<string | undefined>(toString(valueControlled));
-  const handleChange = (): void => {
-    stringValue && valueControlledSet(toNumber(stringValue));
-  };
-
   return (
     <TextField
       {...props}
-      onBlur={() => {
-        onBlur && onBlur();
-        handleChange();
-      }}
-      onChange={stringValueSet}
-      value={stringValue}
+      onChange={(v) => valueControlledSet(v ? toNumber(v) : defaultValue)}
+      value={toString(valueControlled)}
     />
   );
 };

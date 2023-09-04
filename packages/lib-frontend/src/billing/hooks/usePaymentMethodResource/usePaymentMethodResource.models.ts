@@ -4,7 +4,4 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 export type UsePaymentMethodResourceParamsModel = UseResourceMethodHookParamsModel<UserModel>;
 
-export type UsePaymentMethodResourceModel = Pick<
-  PaymentMethodServiceModel,
-  'createToken' | 'getMany'
->;
+export type UsePaymentMethodResourceModel = PaymentMethodServiceModel;

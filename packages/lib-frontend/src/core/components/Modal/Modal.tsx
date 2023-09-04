@@ -47,6 +47,7 @@ export const Modal: FCModel<ModalPropsModel> = ({
         grow={isFullSize}
         isFullWidth
         isShadow
+        mTop
         style={{
           borderTopLeftRadius: theme.shape.borderRadius[THEME_SIZE.MEDIUM],
           borderTopRightRadius: theme.shape.borderRadius[THEME_SIZE.MEDIUM],

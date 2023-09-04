@@ -1,4 +1,3 @@
-import { selfAuthorizer } from '#lib-backend/auth/utils/selfAuthorizer/selfAuthorizer';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { CreditRating } from '#lib-backend/funding/resources/CreditRating/CreditRating';
 import { type CreditRatingResolverModel } from '#lib-backend/funding/resources/CreditRating/CreditRatingResolver/CreditRatingResolver.models';
@@ -20,7 +19,6 @@ export class CreditRatingResolver
     Resource: CreditRating,
     ResourceService: CreditRatingService,
     RootResource: Funding,
-    authorizer: { default: selfAuthorizer },
     name: CREDIT_RATING_RESOURCE_NAME,
   })
   implements CreditRatingResolverModel {}

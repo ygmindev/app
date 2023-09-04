@@ -1,15 +1,14 @@
-import { matchPath, useLocation, useNavigate, useParams } from 'react-router-native';
+import { useMemo } from 'react';
+import { matchPath, useLocation, useNavigate, useSearchParams } from 'react-router-native';
 
 import { type _UseRouterModel } from '#lib-frontend/route/hooks/useRouter/_useRouter.models';
-import { type LocationParamsModel, type RouteUpdateModel } from '#lib-frontend/route/route.models';
+import { type LocationContextModel, type RouteUpdateModel } from '#lib-frontend/route/route.models';
 
-export const _useRouter = <TType = undefined,>(): _UseRouterModel<TType> => {
+export const _useRouter = <TType = object,>(): _UseRouterModel<TType> => {
   const navigate = useNavigate();
   const location = useLocation();
-  const params = useParams();
-
-  const paramsF = { ...location.state, ...params } as TType & LocationParamsModel;
-  delete (paramsF as Record<string, string>)['*'];
+  const [searchParams, searchParamsSet] = useSearchParams();
+  const params = useMemo(() => Object.fromEntries(searchParams.entries()) as TType, []);
 
   return {
     back: async () => navigate(-1),
@@ -23,14 +22,19 @@ export const _useRouter = <TType = undefined,>(): _UseRouterModel<TType> => {
     },
 
     location: {
-      params: paramsF,
+      context: { previous: (location.state as LocationContextModel)?.previous },
+      params,
       pathname: location.pathname,
     },
 
-    push: async <TNextType,>({ params, pathname }: RouteUpdateModel<TNextType>) =>
-      navigate(pathname, { state: params }),
+    push: async <TTypeNext,>({ context, params, pathname }: RouteUpdateModel<TTypeNext>) => {
+      navigate(pathname, { state: context });
+      params && searchParamsSet(params);
+    },
 
-    replace: async <TNextType,>({ params, pathname }: RouteUpdateModel<TNextType>) =>
-      navigate(pathname, { replace: true, state: params }),
+    replace: async <TTypeNext,>({ context, params, pathname }: RouteUpdateModel<TTypeNext>) => {
+      navigate(pathname, { replace: true, state: context });
+      params && searchParamsSet(params);
+    },
   };
 };

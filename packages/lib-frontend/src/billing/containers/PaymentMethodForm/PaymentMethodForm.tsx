@@ -28,7 +28,8 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
   const theme = useTheme();
   const currentUser = useCurrentUser();
   const { createToken } = usePaymentMethodResource();
-  const ref = useRef<FormRefModel>(null);
+  // TODO: fix
+  const ref = useRef<FormRefModel<undefined>>(null);
   return (
     <FormContainer
       fields={[

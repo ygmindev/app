@@ -23,6 +23,7 @@ export const _useForm = <TType, TResult = void>({
     isValid,
     setErrors,
     setFieldValue,
+    setValues,
     values,
   } = useFormik<TType & FormikValues>({
     initialValues: initialValues ?? ({} as TType & FormikValues),
@@ -42,6 +43,9 @@ export const _useForm = <TType, TResult = void>({
     isLoading: isSubmitting,
     isValid,
     setErrors: (error) => setErrors(error as unknown as FormikErrors<TType & FormikValues>),
+    setValues: async (data) => {
+      await setValues(data as TType & FormikValues);
+    },
     values,
   };
 };

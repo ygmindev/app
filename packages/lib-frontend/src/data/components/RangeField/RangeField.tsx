@@ -1,5 +1,4 @@
 import findIndex from 'lodash/findIndex';
-import toNumber from 'lodash/toNumber';
 import toString from 'lodash/toString';
 import { type ReactElement, useState } from 'react';
 
@@ -9,13 +8,14 @@ import { Slider } from '#lib-frontend/core/components/Slider/Slider';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCPropsModel } from '#lib-frontend/core/core.models';
 import { FieldGroup } from '#lib-frontend/data/components/FieldGroup/FieldGroup';
+import { NumberField } from '#lib-frontend/data/components/NumberField/NumberField';
 import {
   type RangeFieldPropsModel,
   type RangeTypeModel,
 } from '#lib-frontend/data/components/RangeField/RangeField.models';
 import { RANGE_TYPE } from '#lib-frontend/data/components/RangeField/RangField.constants';
 import { SelectField } from '#lib-frontend/data/components/SelectField/SelectField';
-import { TextField } from '#lib-frontend/data/components/TextField/TextField';
+import { TEXT_FIELD_KEYBOARD } from '#lib-frontend/data/components/TextField/TextField.constants';
 import { DATA } from '#lib-frontend/data/data.constants';
 import { type NumberUnitModel } from '#lib-frontend/data/data.models';
 import { useFormatter } from '#lib-frontend/data/hooks/useFormatter/useFormatter';
@@ -24,11 +24,12 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { merge } from '#lib-shared/core/utils/merge/merge';
-import { DATA_TYPE, DATA_TYPE_MORE } from '#lib-shared/data/data.constants';
+import { DATA_TYPE } from '#lib-shared/data/data.constants';
 import { type ScaledNumberRangeModel } from '#lib-shared/data/resources/ScaledNumberRange/ScaledNumberRange.models';
 
 export const RangeField = <TType extends NumberUnitModel>({
   defaultUnit,
+  onChange,
   unitOptions,
   value,
   ...props
@@ -47,6 +48,8 @@ export const RangeField = <TType extends NumberUnitModel>({
         value: { unit: defaultUnit, value: 1 },
         ...(isRange ? { max: { unit: defaultUnit, value: 1000 } } : {}),
       },
+      onChange,
+      value,
     },
   );
   const { format, unformat } = useFormatter();
@@ -77,8 +80,9 @@ export const RangeField = <TType extends NumberUnitModel>({
         fields={[
           {
             element: (
-              <TextField
-                keyboard={DATA_TYPE_MORE.NUMBER_POSITIVE}
+              <NumberField
+                defaultValue={1}
+                keyboard={TEXT_FIELD_KEYBOARD.NUMBER_POSITIVE}
                 label={
                   isRange
                     ? key === 'max'
@@ -88,9 +92,9 @@ export const RangeField = <TType extends NumberUnitModel>({
                 }
                 onBlur={handleBlur}
                 onChange={(v) =>
-                  valueControlledSet(merge([{ [key]: { value: toNumber(v) } }, valueControlled]))
+                  valueControlledSet(merge([{ [key]: { value: v } }, valueControlled]))
                 }
-                value={valueControlled && toString(valueControlled[key]?.value)}
+                value={valueControlled && valueControlled[key]?.value}
               />
             ),
             id: 'value',

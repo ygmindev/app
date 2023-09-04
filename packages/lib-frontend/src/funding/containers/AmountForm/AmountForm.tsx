@@ -1,5 +1,5 @@
 import { Text } from '#lib-frontend/core/components/Text/Text';
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { RangeField } from '#lib-frontend/data/components/RangeField/RangeField';
 import { AMOUNT_UNIT, AMOUNT_UNIT_OPTIONS } from '#lib-frontend/data/data.constants';
@@ -11,7 +11,8 @@ import {
   FONT_TYPE,
 } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
-export const AmountForm: SFCModel<AmountFormPropsModel> = ({
+export const AmountForm: LFCModel<AmountFormPropsModel> = ({
+  data,
   onComplete,
   onError,
   onSubmit,
@@ -34,6 +35,7 @@ export const AmountForm: SFCModel<AmountFormPropsModel> = ({
           id: 'amount',
         },
       ]}
+      initialValues={data}
       isVerticalCenter
       onComplete={onComplete}
       onError={onError}

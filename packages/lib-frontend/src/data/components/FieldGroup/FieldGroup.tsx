@@ -30,12 +30,14 @@ export const FieldGroup: LFCModel<FieldGroupPropsModel> = ({ fields, isVertical,
               animation={{ states: ANIMATION_STATES_FOCUSABLE({ isError, theme }) }}
               elementState={elementState}
               isVertical={!isVertical}
+              key={`${id}-divider`}
             />
           )}
 
           <Wrapper
-            isDistribute
-            key={id}>
+            grow
+            key={`${id}-field`}
+            shrink>
             {cloneElement(element, {
               isTransparent: true,
               onBlur: () => {

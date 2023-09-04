@@ -2,7 +2,7 @@ import {
   type CARD_BRAND,
   type CARD_FUNDING,
 } from '#lib-shared/billing/resources/Card/Card.constants';
-import { type PaymentMethodTypeModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { type PAYMENT_METHOD_TYPE } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type EmbeddedResourceModel } from '#lib-shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
@@ -23,7 +23,7 @@ export type CardModel = EmbeddedResourceModel & {
 
   last4: string;
 
-  type?: PaymentMethodTypeModel;
+  type: PAYMENT_METHOD_TYPE.CARD;
 };
 
 export type CardFormModel = EntityResourceDataModel<CardModel>;

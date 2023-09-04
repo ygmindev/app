@@ -647,8 +647,7 @@ type CreditRating {
   _id: String
   agency: RatingAgency
   created: DateTime
-  type: String
-  value: String
+  longTermCategory: String
 }
 
 input CreditRatingCreateFormInput {
@@ -656,8 +655,7 @@ input CreditRatingCreateFormInput {
   _id: String
   agency: RatingAgencyInput
   created: DateTime
-  type: String
-  value: String
+  longTermCategory: String
 }
 
 input CreditRatingCreateInput {
@@ -788,8 +786,7 @@ input CreditRatingInput {
   _id: String
   agency: RatingAgencyInput
   created: DateTime
-  type: String
-  value: String
+  longTermCategory: String
 }
 
 input CreditRatingRemoveInput {
@@ -854,8 +851,7 @@ input CreditRatingUpdateUpdateInput {
   _id: String
   agency: RatingAgencyInput
   created: DateTime
-  type: String
-  value: String
+  longTermCategory: String
 }
 
 """
@@ -962,23 +958,8 @@ type Issuer {
   name: String
 }
 
-input IssuerCreateFormInput {
-  _id: String
-  created: DateTime
-  name: String
-}
-
-input IssuerCreateInput {
-  form: IssuerCreateFormInput
-}
-
 type IssuerCreateOutput {
   result: Issuer
-}
-
-input IssuerGetConnectionInput {
-  filter: [FilterInput]
-  pagination: PaginationInput
 }
 
 type IssuerGetConnectionOutput {
@@ -995,14 +976,6 @@ type IssuerGetConnectionOutputEdge {
   node: Issuer
 }
 
-input IssuerGetInput {
-  filter: [FilterInput]
-}
-
-input IssuerGetManyInput {
-  filter: [FilterInput]
-}
-
 type IssuerGetManyOutput {
   result: [Issuer]
 }
@@ -1011,27 +984,12 @@ type IssuerGetOutput {
   result: Issuer
 }
 
-input IssuerRemoveInput {
-  filter: [FilterInput]
-}
-
 type IssuerRemoveOutput {
   result: Issuer
 }
 
-input IssuerUpdateInput {
-  filter: [FilterInput]
-  update: IssuerUpdateUpdateInput
-}
-
 type IssuerUpdateOutput {
   result: Issuer
-}
-
-input IssuerUpdateUpdateInput {
-  _id: String
-  created: DateTime
-  name: String
 }
 
 type LinkedUser {
@@ -1318,28 +1276,28 @@ type Mutation {
   FundingCreate(input: FundingCreateInput): FundingCreateOutput
   FundingRemove(input: FundingRemoveInput): FundingRemoveOutput
   FundingUpdate(input: FundingUpdateInput): FundingUpdateOutput
-  IssuerCreate(input: IssuerCreateInput): IssuerCreateOutput
-  IssuerRemove(input: IssuerRemoveInput): IssuerRemoveOutput
-  IssuerUpdate(input: IssuerUpdateInput): IssuerUpdateOutput
+  IssuerCreate: IssuerCreateOutput
+  IssuerRemove: IssuerRemoveOutput
+  IssuerUpdate: IssuerUpdateOutput
   LinkedUserCreate(input: LinkedUserCreateInput): LinkedUserCreateOutput
   LinkedUserRemove(input: LinkedUserRemoveInput): LinkedUserRemoveOutput
   LinkedUserUpdate(input: LinkedUserUpdateInput): LinkedUserUpdateOutput
-  OtpCreate(input: OtpCreateInput): OtpCreateOutput
-  OtpRemove(input: OtpRemoveInput): OtpRemoveOutput
-  OtpUpdate(input: OtpUpdateInput): OtpUpdateOutput
+  OtpCreate: OtpCreateOutput
+  OtpRemove: OtpRemoveOutput
+  OtpUpdate: OtpUpdateOutput
   PaymentMethodTokenCreate(input: PaymentMethodTokenCreateInput): PaymentMethodTokenCreateOutput
   RatingAgencyCreate(input: RatingAgencyCreateInput): RatingAgencyCreateOutput
   RatingAgencyRemove(input: RatingAgencyRemoveInput): RatingAgencyRemoveOutput
   RatingAgencyUpdate(input: RatingAgencyUpdateInput): RatingAgencyUpdateOutput
-  SignInCreate(input: SignInCreateInput): SignInCreateOutput
+  SignInCreate: SignInCreateOutput
   SignInUserUpdate(input: SignInUserUpdateInput): SignInUserUpdateOutput
   SignInUsernameCreate(input: SignInUsernameCreateInput): SignInUsernameCreateOutput
-  UnderwriterCreate(input: UnderwriterCreateInput): UnderwriterCreateOutput
-  UnderwriterRemove(input: UnderwriterRemoveInput): UnderwriterRemoveOutput
-  UnderwriterUpdate(input: UnderwriterUpdateInput): UnderwriterUpdateOutput
-  UserCreate(input: UserCreateInput): UserCreateOutput
-  UserRemove(input: UserRemoveInput): UserRemoveOutput
-  UserUpdate(input: UserUpdateInput): UserUpdateOutput
+  UnderwriterCreate: UnderwriterCreateOutput
+  UnderwriterRemove: UnderwriterRemoveOutput
+  UnderwriterUpdate: UnderwriterUpdateOutput
+  UserCreate: UserCreateOutput
+  UserRemove: UserRemoveOutput
+  UserUpdate: UserUpdateOutput
 }
 
 type Otp {
@@ -1351,24 +1309,8 @@ type Otp {
   phone: String
 }
 
-input OtpCreateFormInput {
-  callingCode: String
-  checkExists: Boolean
-  email: String
-  phone: String
-}
-
-input OtpCreateInput {
-  form: OtpCreateFormInput
-}
-
 type OtpCreateOutput {
   result: Otp
-}
-
-input OtpGetConnectionInput {
-  filter: [FilterInput]
-  pagination: PaginationInput
 }
 
 type OtpGetConnectionOutput {
@@ -1385,14 +1327,6 @@ type OtpGetConnectionOutputEdge {
   node: Otp
 }
 
-input OtpGetInput {
-  filter: [FilterInput]
-}
-
-input OtpGetManyInput {
-  filter: [FilterInput]
-}
-
 type OtpGetManyOutput {
   result: [Otp]
 }
@@ -1401,30 +1335,12 @@ type OtpGetOutput {
   result: Otp
 }
 
-input OtpRemoveInput {
-  filter: [FilterInput]
-}
-
 type OtpRemoveOutput {
   result: Otp
 }
 
-input OtpUpdateInput {
-  filter: [FilterInput]
-  update: OtpUpdateUpdateInput
-}
-
 type OtpUpdateOutput {
   result: Otp
-}
-
-input OtpUpdateUpdateInput {
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  otp: String
-  phone: String
 }
 
 type PageInfo {
@@ -1534,27 +1450,27 @@ type Query {
   FundingGet(input: FundingGetInput): FundingGetOutput
   FundingGetConnection(input: FundingGetConnectionInput): FundingGetConnectionOutput
   FundingGetMany(input: FundingGetManyInput): FundingGetManyOutput
-  IssuerGet(input: IssuerGetInput): IssuerGetOutput
-  IssuerGetConnection(input: IssuerGetConnectionInput): IssuerGetConnectionOutput
-  IssuerGetMany(input: IssuerGetManyInput): IssuerGetManyOutput
+  IssuerGet: IssuerGetOutput
+  IssuerGetConnection: IssuerGetConnectionOutput
+  IssuerGetMany: IssuerGetManyOutput
   LinkedUserGet(input: LinkedUserGetInput): LinkedUserGetOutput
   LinkedUserGetConnection(input: LinkedUserGetConnectionInput): LinkedUserGetConnectionOutput
   LinkedUserGetMany(input: LinkedUserGetManyInput): LinkedUserGetManyOutput
-  OtpGet(input: OtpGetInput): OtpGetOutput
-  OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
-  OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput
+  OtpGet: OtpGetOutput
+  OtpGetConnection: OtpGetConnectionOutput
+  OtpGetMany: OtpGetManyOutput
   PaymentMethodGetMany(input: PaymentMethodGetManyInput): PaymentMethodGetManyOutput
   RatingAgencyGet(input: RatingAgencyGetInput): RatingAgencyGetOutput
   RatingAgencyGetConnection(input: RatingAgencyGetConnectionInput): RatingAgencyGetConnectionOutput
   RatingAgencyGetMany(input: RatingAgencyGetManyInput): RatingAgencyGetManyOutput
-  SnapshotGet(input: SnapshotGetInput): SnapshotGetOutput
-  SnapshotGetMany(input: SnapshotGetManyInput): SnapshotGetManyOutput
-  UnderwriterGet(input: UnderwriterGetInput): UnderwriterGetOutput
-  UnderwriterGetConnection(input: UnderwriterGetConnectionInput): UnderwriterGetConnectionOutput
-  UnderwriterGetMany(input: UnderwriterGetManyInput): UnderwriterGetManyOutput
-  UserGet(input: UserGetInput): UserGetOutput
-  UserGetConnection(input: UserGetConnectionInput): UserGetConnectionOutput
-  UserGetMany(input: UserGetManyInput): UserGetManyOutput
+  SnapshotGet: SnapshotGetOutput
+  SnapshotGetMany: SnapshotGetManyOutput
+  UnderwriterGet: UnderwriterGetOutput
+  UnderwriterGetConnection: UnderwriterGetConnectionOutput
+  UnderwriterGetMany: UnderwriterGetManyOutput
+  UserGet: UserGetOutput
+  UserGetConnection: UserGetConnectionOutput
+  UserGetMany: UserGetManyOutput
 }
 
 type RatingAgency {
@@ -1749,17 +1665,6 @@ type SignIn {
   user: User
 }
 
-input SignInCreateFormInput {
-  callingCode: String
-  email: String
-  otp: String
-  phone: String
-}
-
-input SignInCreateInput {
-  form: SignInCreateFormInput
-}
-
 type SignInCreateOutput {
   result: SignIn
 }
@@ -1807,14 +1712,6 @@ type Snapshot {
   name: String
 }
 
-input SnapshotGetInput {
-  filter: [FilterInput]
-}
-
-input SnapshotGetManyInput {
-  filter: [FilterInput]
-}
-
 type SnapshotGetManyOutput {
   result: [Snapshot]
 }
@@ -1829,23 +1726,8 @@ type Underwriter {
   name: String
 }
 
-input UnderwriterCreateFormInput {
-  _id: String
-  created: DateTime
-  name: String
-}
-
-input UnderwriterCreateInput {
-  form: UnderwriterCreateFormInput
-}
-
 type UnderwriterCreateOutput {
   result: Underwriter
-}
-
-input UnderwriterGetConnectionInput {
-  filter: [FilterInput]
-  pagination: PaginationInput
 }
 
 type UnderwriterGetConnectionOutput {
@@ -1862,14 +1744,6 @@ type UnderwriterGetConnectionOutputEdge {
   node: Underwriter
 }
 
-input UnderwriterGetInput {
-  filter: [FilterInput]
-}
-
-input UnderwriterGetManyInput {
-  filter: [FilterInput]
-}
-
 type UnderwriterGetManyOutput {
   result: [Underwriter]
 }
@@ -1878,27 +1752,12 @@ type UnderwriterGetOutput {
   result: Underwriter
 }
 
-input UnderwriterRemoveInput {
-  filter: [FilterInput]
-}
-
 type UnderwriterRemoveOutput {
   result: Underwriter
 }
 
-input UnderwriterUpdateInput {
-  filter: [FilterInput]
-  update: UnderwriterUpdateUpdateInput
-}
-
 type UnderwriterUpdateOutput {
   result: Underwriter
-}
-
-input UnderwriterUpdateUpdateInput {
-  _id: String
-  created: DateTime
-  name: String
 }
 
 type User {
@@ -1915,31 +1774,8 @@ type User {
   phone: String
 }
 
-input UserCreateFormInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input UserCreateInput {
-  form: UserCreateFormInput
-}
-
 type UserCreateOutput {
   result: User
-}
-
-input UserGetConnectionInput {
-  filter: [FilterInput]
-  pagination: PaginationInput
 }
 
 type UserGetConnectionOutput {
@@ -1954,14 +1790,6 @@ type UserGetConnectionOutputConnection {
 type UserGetConnectionOutputEdge {
   cursor: String
   node: User
-}
-
-input UserGetInput {
-  filter: [FilterInput]
-}
-
-input UserGetManyInput {
-  filter: [FilterInput]
 }
 
 type UserGetManyOutput {
@@ -1986,33 +1814,10 @@ input UserInput {
   phone: String
 }
 
-input UserRemoveInput {
-  filter: [FilterInput]
-}
-
 type UserRemoveOutput {
   result: User
 }
 
-input UserUpdateInput {
-  filter: [FilterInput]
-  update: UserUpdateUpdateInput
-}
-
 type UserUpdateOutput {
   result: User
-}
-
-input UserUpdateUpdateInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
 }

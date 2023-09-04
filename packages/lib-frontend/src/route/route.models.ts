@@ -34,29 +34,30 @@ export type RouteModel<TProps extends ChildrenPropsModel = ChildrenPropsModel> =
     transition?: RouteTransitionModel;
   };
 
-export type UriModel<TParams = undefined> = {
+export type UriModel<TType = object> = {
   host?: string;
-  params?: TParams;
+  params?: TType;
   pathname?: string;
   port?: number | string;
 };
 
-export type LocationModel<TType = undefined> = {
-  params?: TType & LocationParamsModel;
+export type LocationModel<TType = object> = {
+  context?: LocationContextModel;
+  params?: TType;
   pathname: string;
 };
 
-export type LocationParamsModel = {
+export type LocationContextModel = {
   previous?: string;
 };
 
-export type RouteContextModel<TType = undefined> = {
+export type RouteContextModel<TType = object> = {
   basename?: string;
   location?: LocationModel<TType>;
   redirectTo?: string;
 };
 
-export type RouteUpdateModel<TNextType = undefined> = LocationModel<TNextType> &
+export type RouteUpdateModel<TTypeNext = object> = LocationModel<TTypeNext> &
   Pick<RouteStateModel, 'isBack'>;
 
 export type RouteTransitionModel = `${ROUTE_TRANSITION}`;
