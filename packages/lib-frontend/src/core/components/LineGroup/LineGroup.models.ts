@@ -4,9 +4,9 @@ import { type LineItemPropsModel } from '#lib-frontend/core/components/LineItem/
 import { type ChildrenPropsModel } from '#lib-frontend/core/core.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 
-export type LineGroupPropsModel = {
+export type LineGroupPropsModel = ChildrenPropsModel<
+  ReactElement<LineItemPropsModel> | Array<ReactElement<LineItemPropsModel>> | null
+> & {
   emptyString?: TranslatableTextModel;
   title?: string;
-} & ChildrenPropsModel<
-  ReactElement<LineItemPropsModel> | Array<ReactElement<LineItemPropsModel>> | null
->;
+};

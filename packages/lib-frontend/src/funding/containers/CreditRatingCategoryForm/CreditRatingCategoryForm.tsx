@@ -2,7 +2,7 @@ import { type LFCModel } from '#lib-frontend/core/core.models';
 import { ItemStepForm } from '#lib-frontend/data/components/ItemStepForm/ItemStepForm';
 import { type CreditRatingCategoryFormPropsModel } from '#lib-frontend/funding/containers/CreditRatingCategoryForm/CreditRatingCategoryForm.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { CREDIT_RATING_CATEGORY } from '#lib-shared/funding/resources/CreditRatingCategory/CreditRatingCategory.constants';
+import { CREDIT_RATING_CATEGORY } from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
 
 export const CreditRatingCategoryForm: LFCModel<CreditRatingCategoryFormPropsModel> = ({
   data,
@@ -15,8 +15,8 @@ export const CreditRatingCategoryForm: LFCModel<CreditRatingCategoryFormPropsMod
   return (
     <ItemStepForm
       data={data}
-      id="value"
-      message={t('funding:creditRatingCategoryFormMessage')}
+      id="longTermCategory"
+      message={t('funding:longTermCategoryFormMessage')}
       onComplete={onComplete}
       onError={onError}
       onSubmit={onSubmit}

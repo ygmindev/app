@@ -7,11 +7,11 @@ import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { type LineItemPropsModel } from '#lib-frontend/core/components/LineItem/LineItem.models';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import { DIRECTION, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
 
@@ -21,15 +21,15 @@ export const LineItem: SFCModel<LineItemPropsModel> = ({
   label,
   onPress,
   rightElement,
-  testID,
   value,
   ...props
 }) => {
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
   const { t } = useTranslation();
   const [isActive, isActiveSet] = useState<boolean>();
-  const isValue = value !== undefined;
+  const isValue = !!value;
+
   const rightElementF =
     rightElement ??
     (onPress &&
@@ -44,15 +44,15 @@ export const LineItem: SFCModel<LineItemPropsModel> = ({
   return (
     <Activatable
       onActive={() => isActiveSet(true)}
-      onInactive={() => isActiveSet(false)}
-      style={styles}>
+      onInactive={() => isActiveSet(false)}>
       <Wrapper
+        {...wrapperProps}
+        border={DIRECTION.TOP}
         isRow
         onPress={onPress}
-        p={THEME_SIZE.SMALL}
-        testID={testID}>
+        p={THEME_SIZE.SMALL}>
         <Wrapper
-          grow
+          flex
           isRowAlign>
           {icon && (
             <Wrapper width={theme.shape.size[THEME_SIZE.SMALL]}>
@@ -60,7 +60,7 @@ export const LineItem: SFCModel<LineItemPropsModel> = ({
             </Wrapper>
           )}
 
-          {label || isValue ? (
+          {label ?? isValue ? (
             <Wrapper s={THEME_SIZE.SMALL}>
               <TranslatableText isBold={isValue}>{label}</TranslatableText>
 
@@ -68,7 +68,7 @@ export const LineItem: SFCModel<LineItemPropsModel> = ({
                 <Text
                   colorRole={value ? undefined : THEME_ROLE.MUTED}
                   isEllipsis>
-                  {value || t('core:notSet')}
+                  {value ?? t('core:notSet')}
                 </Text>
               )}
             </Wrapper>

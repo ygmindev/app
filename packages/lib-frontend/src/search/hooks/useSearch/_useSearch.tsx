@@ -22,8 +22,8 @@ export const _useSearch = <TType,>({
   const [result, resultSet] = useState<Array<TType>>(list);
 
   const searchF = debounce(
-    () => {
-      const resultF = query ? fuse.search(query, { limit }).map(({ item }) => item) : list;
+    (value: string) => {
+      const resultF = value ? fuse.search(value, { limit }).map(({ item }) => item) : list;
       resultSet(resultF);
     },
     { duration: delay },
@@ -32,7 +32,7 @@ export const _useSearch = <TType,>({
   const fuse = useMemo(() => new Fuse(list, { keys, threshold: SEARCH_THRESHOLD }), [list]);
   const search = (value: string): void => {
     querySet(value);
-    searchF();
+    searchF(value);
   };
   return { query, result, search };
 };

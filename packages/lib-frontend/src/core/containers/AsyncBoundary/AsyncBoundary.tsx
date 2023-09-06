@@ -19,7 +19,7 @@ import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
-export const AsyncBoundaryContext = createContext<AsyncBoundaryContextModel>({
+export const asyncBoundaryContext = createContext<AsyncBoundaryContextModel>({
   errorContextSet: noop,
   errorMode: ERROR_MODE.NOTIFICATION,
   handleRefresh: noop,
@@ -39,7 +39,7 @@ export const AsyncBoundary: SFCModel<AsyncBoundaryPropsModel> = ({
   const [errorContext, errorContextSet] = useState<ErrorContextModel | undefined>();
   const { reset } = useQueryContext();
   return (
-    <AsyncBoundaryContext.Provider
+    <asyncBoundaryContext.Provider
       value={{ errorContextGet, errorContextSet, errorMode, handleRefresh: reset }}>
       {errorContext ? (
         <Wrapper
@@ -81,6 +81,6 @@ export const AsyncBoundary: SFCModel<AsyncBoundaryPropsModel> = ({
           {children}
         </Suspense>
       )}
-    </AsyncBoundaryContext.Provider>
+    </asyncBoundaryContext.Provider>
   );
 };

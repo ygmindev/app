@@ -9,16 +9,15 @@ import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLa
 import { THEME_COLOR_MORE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
-export const AppLayout: LFCModel<AppLayoutPropsModel> = ({ children, testID, ...props }) => {
-  const { styles } = useLayoutStyles({ props });
+export const AppLayout: LFCModel<AppLayoutPropsModel> = ({ children, ...props }) => {
+  const { wrapperProps } = useLayoutStyles({ props });
   return (
     <KeyboardContainer>
       <Wrapper
+        {...wrapperProps}
         backgroundColor={THEME_COLOR_MORE.SURFACE}
-        grow
-        position={SHAPE_POSITION.RELATIVE}
-        style={styles}
-        testID={testID}>
+        flex
+        position={SHAPE_POSITION.RELATIVE}>
         <AppHeader />
 
         <PortalHost>

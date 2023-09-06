@@ -29,21 +29,17 @@ export const _viewParams: ComposeComponentParamsModel<
     const [stylesView, stylesContainer] = partionObject(
       StyleSheet.flatten(style) as Record<string, unknown>,
       (_, k) =>
-        ['height', 'width', 'alignSelf'].includes(k) ||
+        ['height', 'width', 'alignSelf', 'flex'].includes(k) ||
         k.startsWith('margin') ||
         k.startsWith('border'),
     );
+    const isScrollable = isVerticalScrollable || isHorizontalScrollable;
     return {
       children: (
         <View
           style={{
             display: 'flex',
-            flex:
-              stylesView.width || stylesView.height
-                ? undefined
-                : isVerticalScrollable
-                ? 1
-                : undefined,
+            flex: stylesView.width || stylesView.height ? undefined : isScrollable ? 1 : undefined,
             ...stylesView,
           }}
           testID={testID}>
@@ -51,7 +47,7 @@ export const _viewParams: ComposeComponentParamsModel<
             {...(_viewParamsBase.getProps && _viewParamsBase.getProps(props, theme, ref))}
             alwaysBounceHorizontal={false}
             alwaysBounceVertical={false}
-            contentContainerStyle={{ ...stylesContainer, flexGrow: 1 }}
+            contentContainerStyle={{ ...stylesContainer, flex: 1 }}
             horizontal={isHorizontalScrollable ?? false}
             onScroll={
               onScroll

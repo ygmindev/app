@@ -1,4 +1,4 @@
 import { type FormStepPropsModel } from '#lib-frontend/data/components/StepForm/StepForm.models';
-import { type CreditRatingCategoryFormModel } from '#lib-shared/funding/resources/CreditRatingCategory/CreditRatingCategory.models';
+import { type CreditRatingFormModel } from '#lib-shared/funding/resources/CreditRating/CreditRating.models';
 
-export type CreditRatingCategoryFormPropsModel = FormStepPropsModel<CreditRatingCategoryFormModel>;
+export type CreditRatingCategoryFormPropsModel = FormStepPropsModel<CreditRatingFormModel>;

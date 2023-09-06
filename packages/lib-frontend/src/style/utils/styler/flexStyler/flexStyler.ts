@@ -6,6 +6,7 @@ export const flexStyler: StylerModel<FlexStylerParamsModel> = ({
   align,
   alignSelf,
   basis,
+  flex,
   grow,
   isReverse,
   isRow,
@@ -17,6 +18,7 @@ export const flexStyler: StylerModel<FlexStylerParamsModel> = ({
     alignItems: align,
     alignSelf,
     display: 'flex',
+    flex: flex === true ? 1 : flex === false ? undefined : flex,
     flexBasis: basis,
     flexDirection: isRow
       ? isReverse

@@ -171,7 +171,9 @@ const FormContainerF = forwardRef(
         {...wrapperProps}
         s>
         <Form onSubmit={isDisabled ? undefined : async () => handleSubmit()}>
-          <Wrapper s>
+          <Wrapper
+            flex
+            s>
             {topElement && topElement({ elementState: elementStateF })}
 
             {isGrouped ? (

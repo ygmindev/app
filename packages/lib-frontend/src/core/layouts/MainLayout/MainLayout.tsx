@@ -13,15 +13,15 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({ children, testID, .
   const theme = useTheme();
   return (
     <Wrapper
-      grow
+      flex
       isFullWidth={isFullWidthF}
       style={inheritedStyles}
       testID={testID}>
       <Wrapper
         {...wrapperProps}
-        grow
+        flex
+        isVerticalScrollable
         m="auto"
-        shrink
         style={computedStyles}
         width={isFullWidthF ? undefined : theme.layout.width[THEME_SIZE.MEDIUM]}>
         {children}

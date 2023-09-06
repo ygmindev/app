@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { AsyncBoundaryContext } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
+import { asyncBoundaryContext } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
 import { ERROR_MODE } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.constants';
 import { type ErrorContextModel } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import { type UseErrorContextModel } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext.models';
@@ -13,7 +13,7 @@ import { error } from '#lib-shared/logging/utils/logger/logger';
 export const useErrorContext = (): UseErrorContextModel => {
   const { t } = useTranslation();
   const { error: notify } = useNotification();
-  const { errorContextGet, errorContextSet, errorMode } = useContext(AsyncBoundaryContext);
+  const { errorContextGet, errorContextSet, errorMode } = useContext(asyncBoundaryContext);
 
   const errorContextGetF = (e: Error): ErrorContextModel => {
     let errorContext = errorContextGet && errorContextGet(e);

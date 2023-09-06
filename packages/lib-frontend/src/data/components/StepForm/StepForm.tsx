@@ -1,5 +1,5 @@
 import findIndex from 'lodash/findIndex';
-import { type ReactElement, useEffect } from 'react';
+import { type ReactElement, useEffect, useMemo } from 'react';
 import { cloneElement, useRef, useState } from 'react';
 
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
@@ -25,7 +25,6 @@ export const StepForm = <TKey extends string, TType, TResult = void>({
   onSubmit,
   onSuccess,
   steps,
-  testID,
   topElement,
   ...props
 }: LFCPropsModel<StepFormPropsModel<TKey, TType, TResult>>): ReactElement<
@@ -58,31 +57,36 @@ export const StepForm = <TKey extends string, TType, TResult = void>({
     width && barRef.current?.to({ width: (width / (steps.length + 1)) * (value + 1) });
   };
 
-  return (
-    <>
-      {steps.length > 1 && width && width > 0 && (
+  const bar = useMemo(
+    () =>
+      width &&
+      width > 0 && (
         <Portal>
           <Wrapper
-            animation={{
-              duration: theme.animation.transition,
-              states: { [ELEMENT_STATE.INACTIVE]: { width: 0 } },
-            }}
+            animation={{ duration: theme.animation.transition }}
             backgroundColor={THEME_COLOR.PRIMARY}
             height={5}
             left={0}
             position={SHAPE_POSITION.ABSOLUTE}
             ref={barRef}
             top={0}
+            width={0}
+            zIndex
           />
         </Portal>
-      )}
+      ),
+    [width],
+  );
+
+  return (
+    <>
+      {bar}
 
       <Wrapper
         {...wrapperProps}
-        grow
+        flex
         isFullWidth
-        s
-        testID={testID}>
+        s>
         <Wrapper
           isRowAlign
           p>

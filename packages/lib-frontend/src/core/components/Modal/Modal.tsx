@@ -44,23 +44,23 @@ export const Modal: FCModel<ModalPropsModel> = ({
       width={width}>
       <Wrapper
         backgroundColor={THEME_COLOR_MORE.SURFACE}
-        grow={isFullSize}
+        flex={isFullSize}
         isFullWidth
         isShadow
         mTop
+        position={SHAPE_POSITION.RELATIVE}
         style={{
           borderTopLeftRadius: theme.shape.borderRadius[THEME_SIZE.MEDIUM],
           borderTopRightRadius: theme.shape.borderRadius[THEME_SIZE.MEDIUM],
         }}>
         <KeyboardContainer>
           <Wrapper
-            grow
+            flex
             p
-            position={SHAPE_POSITION.RELATIVE}
             s>
             <Wrapper isRowAlign>
               <Wrapper
-                grow
+                flex
                 isRowAlign>
                 {isString(header) ? <Text type={FONT_TYPE.TITLE}>{header}</Text> : header}
               </Wrapper>
@@ -75,7 +75,7 @@ export const Modal: FCModel<ModalPropsModel> = ({
             </Wrapper>
 
             <Wrapper
-              grow
+              flex
               isCenter>
               {children}
             </Wrapper>

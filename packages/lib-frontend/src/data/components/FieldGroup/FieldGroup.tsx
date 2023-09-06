@@ -35,9 +35,8 @@ export const FieldGroup: LFCModel<FieldGroupPropsModel> = ({ fields, isVertical,
           )}
 
           <Wrapper
-            grow
-            key={`${id}-field`}
-            shrink>
+            flex
+            key={`${id}-field`}>
             {cloneElement(element, {
               isTransparent: true,
               onBlur: () => {

@@ -58,10 +58,9 @@ export const Table = <TType,>({
             {row.cells.map((cell) => (
               <Wrapper
                 basis={cell.width}
-                grow={cell.width ? undefined : 1}
+                flex={cell.width ? undefined : 1}
                 key={cell.id}
-                p={THEME_SIZE.SMALL}
-                shrink={cell.width ? undefined : 1}>
+                p={THEME_SIZE.SMALL}>
                 {cell.renderer ? (
                   cell.renderer({ row: row.value, value: cell.value })
                 ) : (

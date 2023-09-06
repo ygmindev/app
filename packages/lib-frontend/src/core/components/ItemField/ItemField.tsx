@@ -1,6 +1,5 @@
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { type ItemFieldPropsModel } from '#lib-frontend/core/components/ItemField/ItemField.models';
-import { LineGroup } from '#lib-frontend/core/components/LineGroup/LineGroup';
 import { LineItem } from '#lib-frontend/core/components/LineItem/LineItem';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
@@ -36,13 +35,16 @@ export const ItemField: LFCModel<ItemFieldPropsModel> = ({
   return (
     <Wrapper
       {...wrapperProps}
+      flex
       s>
       <SearchField
         onChange={search}
         value={query}
       />
 
-      <LineGroup>
+      <Wrapper
+        flex
+        isVerticalScrollable>
         {result?.map(({ id, label }) => (
           <LineItem
             key={id}
@@ -55,7 +57,7 @@ export const ItemField: LFCModel<ItemFieldPropsModel> = ({
             {valueControlled === id && <Icon icon="check" />}
           </LineItem>
         ))}
-      </LineGroup>
+      </Wrapper>
     </Wrapper>
   );
 };
