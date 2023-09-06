@@ -1,11 +1,11 @@
-import { cloneElement, useState } from 'react';
+import { cloneElement } from 'react';
 
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 import { Slide } from '#lib-frontend/animation/components/Slide/Slide';
 import { Protectable } from '#lib-frontend/auth/components/Protectable/Protectable';
 import { Portal } from '#lib-frontend/core/components/Portal/Portal';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { type MeasureModel, type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type RoutePropsModel } from '#lib-frontend/route/components/Route/Route.models';
@@ -22,13 +22,12 @@ import {
   TRACKING_EVENT_OBJECT,
 } from '#lib-shared/tracking/resources/TrackingEvent/TrackingEvent.constants';
 
-export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...props }) => {
+export const Route: LFCModel<RoutePropsModel> = ({ depth, route, ...props }) => {
   useTranslation(route.ns);
 
-  const { styles } = useLayoutStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const { isActive } = useRouter();
   const { track } = useTracking();
-  const [measure, measureSet] = useState<MeasureModel>();
   const isBack = useStore((state) => state.route.isBack);
   const isLeaf = !route.routes;
   const isActiveF = isActive({ pathname: route.fullpath });
@@ -42,16 +41,15 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
   let element = cloneElement(
     route.element ?? (
       <Wrapper
-        grow
+        flex
         position={SHAPE_POSITION.RELATIVE}
       />
     ),
     {
       children: route.routes && (
         <Wrapper
-          grow
+          flex
           isOverflowHidden
-          onMeasure={measureSet}
           position={SHAPE_POSITION.RELATIVE}>
           <Routes
             depth={depth}
@@ -60,13 +58,7 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
               element: (() => {
                 switch (route.transition) {
                   case ROUTE_TRANSITION.SLIDE:
-                    return (
-                      <Slide
-                        isBack={isBack}
-                        measure={measure}>
-                        {element}
-                      </Slide>
-                    );
+                    return <Slide isBack={isBack}>{element}</Slide>;
                   default: {
                     return (
                       <Appearable
@@ -89,11 +81,9 @@ export const Route: SFCModel<RoutePropsModel> = ({ depth, route, testID, ...prop
 
   element = (
     <Wrapper
+      {...wrapperProps}
       {...route.layoutProps}
-      isAbsoluteFill
-      position={SHAPE_POSITION.RELATIVE}
-      style={styles}
-      testID={testID}>
+      isAbsoluteFill>
       {route.routes &&
         route.navigator &&
         cloneElement(route.navigator, {

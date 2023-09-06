@@ -1,7 +1,6 @@
 import { type AnimationStatesModel } from '#lib-frontend/animation/animation.models';
 import { type SlidePropsModel } from '#lib-frontend/animation/components/Slide/Slide.models';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type MeasureModel } from '#lib-frontend/core/core.models';
 import { THEME_COLOR, THEME_ROLE } from '#lib-frontend/style/style.constants';
 import { type StyleModel, type ThemeModel } from '#lib-frontend/style/style.models';
 
@@ -19,24 +18,11 @@ export const ANIMATION_STATES_SCALABLE: AnimationStatesModel<StyleModel> = {
 
 export const ANIMATION_STATES_SLIDABLE = ({
   isBack = false,
-  measure,
-}: { measure?: MeasureModel } & Pick<
-  SlidePropsModel,
-  'isBack'
->): AnimationStatesModel<StyleModel> => ({
+  width,
+}: { width?: number } & Pick<SlidePropsModel, 'isBack'>): AnimationStatesModel<StyleModel> => ({
   [ELEMENT_STATE.ACTIVE]: { left: 0 },
-  [ELEMENT_STATE.INACTIVE]:
-    measure && measure.width
-      ? isBack
-        ? { left: -measure.width }
-        : { left: measure.width }
-      : { left: 0 },
-  [ELEMENT_STATE.EXIT]:
-    measure && measure.width
-      ? isBack
-        ? { left: measure.width }
-        : { left: -measure.width }
-      : { left: 0 },
+  [ELEMENT_STATE.INACTIVE]: width ? (isBack ? { left: -width } : { left: width }) : { left: 0 },
+  [ELEMENT_STATE.EXIT]: width ? (isBack ? { left: width } : { left: -width }) : { left: 0 },
 });
 
 export const ANIMATION_STATES_FOCUSABLE = ({

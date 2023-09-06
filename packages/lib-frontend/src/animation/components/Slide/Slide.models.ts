@@ -1,6 +1,5 @@
-import { type ChildrenPropsModel, type MeasureModel } from '#lib-frontend/core/core.models';
+import { type ChildrenPropsModel } from '#lib-frontend/core/core.models';
 
-export type SlidePropsModel = {
+export type SlidePropsModel = ChildrenPropsModel & {
   isBack?: boolean;
-  measure?: MeasureModel;
-} & ChildrenPropsModel;
+};
