@@ -1,5 +1,5 @@
 import findIndex from 'lodash/findIndex';
-import { type ReactElement, useEffect, useMemo } from 'react';
+import { type ReactElement, useEffect } from 'react';
 import { cloneElement, useRef, useState } from 'react';
 
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
@@ -57,10 +57,9 @@ export const StepForm = <TKey extends string, TType, TResult = void>({
     width && barRef.current?.to({ width: (width / (steps.length + 1)) * (value + 1) });
   };
 
-  const bar = useMemo(
-    () =>
-      width &&
-      width > 0 && (
+  return (
+    <>
+      {width && width > 0 && (
         <Portal>
           <Wrapper
             animation={{ duration: theme.animation.transition }}
@@ -74,13 +73,7 @@ export const StepForm = <TKey extends string, TType, TResult = void>({
             zIndex
           />
         </Portal>
-      ),
-    [width],
-  );
-
-  return (
-    <>
-      {bar}
+      )}
 
       <Wrapper
         {...wrapperProps}

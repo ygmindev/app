@@ -29,5 +29,5 @@ export const _Form = composeComponent<_FormPropsModel, FormHTMLAttributes<HTMLFo
 
   isWeb: true,
 
-  // stylers: [{ display: 'flex', flex: 1, height: '100%' }],
+  stylers: [{ display: 'flex', flex: 1, height: '100%' }],
 });

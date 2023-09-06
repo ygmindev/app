@@ -39,7 +39,9 @@ export const Slider: LFCModel<SliderPropsModel> = ({
     value,
   });
   return (
-    <Wrapper {...wrapperProps}>
+    <Wrapper
+      {...wrapperProps}
+      mHorizontal={theme.shape.size[THEME_SIZE.SMALL] / 2}>
       <_Slider
         backgroundColor={theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MUTED]}
         fontColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MAIN]}

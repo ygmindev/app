@@ -167,51 +167,47 @@ const FormContainerF = forwardRef(
     });
 
     return (
-      <MainLayout
-        {...wrapperProps}
-        s>
-        <Form onSubmit={isDisabled ? undefined : async () => handleSubmit()}>
-          <Wrapper
-            flex
-            s>
-            {topElement && topElement({ elementState: elementStateF })}
+      <Form onSubmit={isDisabled ? undefined : async () => handleSubmit()}>
+        <MainLayout
+          {...wrapperProps}
+          s>
+          {topElement && topElement({ elementState: elementStateF })}
 
-            {isGrouped ? (
-              <FieldGroup fields={rows} />
-            ) : (
-              rows.map(({ element, id }) => cloneElement(element, { key: id }))
-            )}
-          </Wrapper>
-        </Form>
+          {isGrouped ? (
+            <FieldGroup fields={rows} />
+          ) : (
+            rows.map(({ element, id }) => cloneElement(element, { key: id }))
+          )}
 
-        {isButton && (
-          <Wrapper
-            isDistribute
-            isRowAlign>
-            {onCancel && (
-              <Button
-                elementState={elementStateF}
-                icon="chevronLeft"
-                onPress={onCancel}
-                type={BUTTON_TYPE.TRANSPARENT}>
-                {cancelLabel ?? t('core:cancel')}
-              </Button>
-            )}
+          {isButton && (
+            <Wrapper
+              isDistribute
+              isRowAlign>
+              {onCancel && (
+                <Button
+                  elementState={elementStateF}
+                  icon="chevronLeft"
+                  onPress={onCancel}
+                  type={BUTTON_TYPE.TRANSPARENT}>
+                  {cancelLabel ?? t('core:cancel')}
+                </Button>
+              )}
 
-            {onSubmit && (
-              <Button
-                elementState={elementStateF}
-                icon="chevronRight"
-                onPress={handleSubmit}
-                testID={props.testID ? `${props.testID}-submit` : undefined}>
-                {submitLabel ?? t('core:continue')}
-              </Button>
-            )}
-          </Wrapper>
-        )}
+              {onSubmit && (
+                <Button
+                  elementState={elementStateF}
+                  icon="chevronRight"
+                  onPress={handleSubmit}
+                  testID={props.testID ? `${props.testID}-submit` : undefined}>
+                  {submitLabel ?? t('core:continue')}
+                </Button>
+              )}
+            </Wrapper>
+          )}
 
-        {bottomElement && bottomElement({ elementState: elementStateF })}
-      </MainLayout>
+          {bottomElement && bottomElement({ elementState: elementStateF })}
+        </MainLayout>
+      </Form>
     );
   },
 );
