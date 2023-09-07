@@ -13,6 +13,8 @@ export type CreditRatingModel = EmbeddedResourceModel & {
   agency?: ResolvedFieldModel<RatingAgencyModel>;
 
   longTermCategory?: CreditRatingCategoryModel;
+
+  longTermWatch?: CreditRatingWatchModel;
 };
 
 export type CreditRatingFormModel = EntityResourceDataModel<CreditRatingModel>;

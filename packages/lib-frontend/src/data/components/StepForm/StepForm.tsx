@@ -10,6 +10,7 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type LFCPropsModel } from '#lib-frontend/core/core.models';
+import { useUnmount } from '#lib-frontend/core/hooks/useUnmount/useUnmount';
 import { type StepFormPropsModel } from '#lib-frontend/data/components/StepForm/StepForm.models';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
@@ -56,6 +57,12 @@ export const StepForm = <TKey extends string, TType, TResult = void>({
     void replace({ ...location, params: { ...location.params, [id]: steps[value].id } });
     width && barRef.current?.to({ width: (width / (steps.length + 1)) * (value + 1) });
   };
+
+  useUnmount(() => {
+    const { params } = location;
+    params && delete params[id];
+    void replace({ ...location, params });
+  });
 
   return (
     <>

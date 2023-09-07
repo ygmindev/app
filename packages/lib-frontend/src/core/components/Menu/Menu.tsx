@@ -154,7 +154,7 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
         <Modal
           isFullSize={false}
           isOpen={isOpen}
-          onClose={() => handleToggle(false)}>
+          onToggle={handleToggle}>
           {children}
         </Modal>
       </>

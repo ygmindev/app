@@ -5,13 +5,13 @@ import {
   type ElementStatePropsModel,
 } from '#lib-frontend/core/core.models';
 
-export type _ModalPropsModel = {
-  deviceHeight?: number;
-  deviceWidth?: number;
-  isFullSize?: boolean;
-  isOpen?: boolean;
-  onClose?(): void;
-} & ChildrenPropsModel &
+export type _ModalPropsModel = ChildrenPropsModel &
   DimensionModel &
-  Pick<AnimationModel, 'duration'> &
-  ElementStatePropsModel;
+  ElementStatePropsModel &
+  Pick<AnimationModel, 'duration'> & {
+    deviceHeight?: number;
+    deviceWidth?: number;
+    isFullSize?: boolean;
+    isOpen?: boolean;
+    onToggle?(value?: boolean): void;
+  };

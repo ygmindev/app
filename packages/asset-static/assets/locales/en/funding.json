@@ -1,4 +1,5 @@
 {
+  "agencyFormMessage": "TRANSLATION_MISSING",
   "amount": "amount",
   "amountFormMessage": "TRANSLATION_MISSING",
   "borrow": "borrow",
@@ -6,11 +7,15 @@
   "funding": "funding",
   "fundingCost": "funding cost",
   "gcp": "general corporate purpose",
+  "longTermCategoryFormMessage": "TRANSLATION_MISSING",
+  "longTermRatingMessage": "TRANSLATION_MISSING",
   "maturity": "maturity",
   "maturityFormMessage": "TRANSLATION_MISSING",
+  "moodys": "TRANSLATION_MISSING",
   "quoted": "quoted {{value}}",
   "ratingAgency": "TRANSLATION_MISSING",
   "refinancing": "refinancing",
+  "sAndP": "TRANSLATION_MISSING",
   "startNewFunding": "start new funding",
   "type": "type"
 }

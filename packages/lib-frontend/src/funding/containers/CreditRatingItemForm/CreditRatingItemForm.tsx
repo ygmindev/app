@@ -2,14 +2,12 @@ import { type LFCModel } from '#lib-frontend/core/core.models';
 import { StepForm } from '#lib-frontend/data/components/StepForm/StepForm';
 import { AgencyForm } from '#lib-frontend/funding/containers/AgencyForm/AgencyForm';
 import { CreditRatingCategoryForm } from '#lib-frontend/funding/containers/CreditRatingCategoryForm/CreditRatingCategoryForm';
-import { type CreditRatingFormPropsModel } from '#lib-frontend/funding/containers/CreditRatingForm/CreditRatingForm.models';
+import { type CreditRatingItemFormPropsModel } from '#lib-frontend/funding/containers/CreditRatingItemForm/CreditRatingItemForm.models';
+import { CreditRatingWatchForm } from '#lib-frontend/funding/containers/CreditRatingWatchForm/CreditRatingWatchForm';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
-export const CreditRatingItemForm: LFCModel<CreditRatingFormPropsModel> = ({
-  onComplete,
-  onError,
+export const CreditRatingItemForm: LFCModel<CreditRatingItemFormPropsModel> = ({
   onSubmit,
-  onSuccess,
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -17,6 +15,7 @@ export const CreditRatingItemForm: LFCModel<CreditRatingFormPropsModel> = ({
     <StepForm
       {...wrapperProps}
       id="creditRating"
+      onSubmit={onSubmit}
       steps={[
         {
           element: <AgencyForm />,
@@ -25,6 +24,10 @@ export const CreditRatingItemForm: LFCModel<CreditRatingFormPropsModel> = ({
         {
           element: <CreditRatingCategoryForm />,
           id: 'category',
+        },
+        {
+          element: <CreditRatingWatchForm />,
+          id: 'watch',
         },
       ]}
     />

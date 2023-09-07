@@ -9,7 +9,7 @@ import { type PartialModel } from '#lib-shared/core/core.models';
 export const _Modal = composeComponent<_ModalPropsModel, PartialModel<typeof Modal.defaultProps>>({
   Component: Modal as unknown as ComponentType<PartialModel<typeof Modal.defaultProps>>,
 
-  getProps: ({ children, deviceHeight, deviceWidth, duration, elementState, isOpen, onClose }) => {
+  getProps: ({ children, deviceHeight, deviceWidth, duration, elementState, isOpen, onToggle }) => {
     const isDisabled =
       elementState === ELEMENT_STATE.DISABLED || elementState === ELEMENT_STATE.LOADING;
     return {
@@ -27,8 +27,8 @@ export const _Modal = composeComponent<_ModalPropsModel, PartialModel<typeof Mod
       hasBackdrop: true,
       hideModalContentWhileAnimating: true,
       isVisible: isOpen,
-      onBackdropPress: isDisabled ? undefined : onClose,
-      onSwipeComplete: isDisabled ? undefined : () => onClose && onClose(),
+      onBackdropPress: isDisabled ? undefined : () => onToggle && onToggle(false),
+      onSwipeComplete: isDisabled ? undefined : () => onToggle && onToggle(false),
       presentationStyle: 'formSheet',
       supportedOrientations: ['portrait', 'landscape'],
       swipeDirection: isDisabled ? undefined : 'down',

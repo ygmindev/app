@@ -1,4 +1,4 @@
-import { type CREDIT_RATING_CATEGORY } from '#lib-shared/funding/resources/CreditRatingCategory/CreditRatingCategory.constants';
+import { type CREDIT_RATING_CATEGORY } from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
 import {
   type EntityResourceDataModel,
   type EntityResourceModel,

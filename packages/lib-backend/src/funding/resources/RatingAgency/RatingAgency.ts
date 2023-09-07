@@ -2,7 +2,7 @@ import { EntityResource } from '#lib-backend/resource/resources/EntityResource/E
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { DATA_TYPE } from '#lib-shared/data/data.constants';
-import { CREDIT_RATING_CATEGORY } from '#lib-shared/funding/resources/CreditRatingCategory/CreditRatingCategory.constants';
+import { CREDIT_RATING_CATEGORY } from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
 import { RATING_AGENCY_RESOURCE_NAME } from '#lib-shared/funding/resources/RatingAgency/RatingAgency.constants';
 import { type RatingAgencyModel } from '#lib-shared/funding/resources/RatingAgency/RatingAgency.models';
 

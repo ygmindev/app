@@ -36,7 +36,7 @@ export const Pressable: RLFCModel<WrapperRefModel, PressablePropsModel> = ({
 }) => {
   const theme = useTheme();
   const { t } = useTranslation();
-  const [confirmModalIsOpen, confirmModalIsOpenSet] = useState<boolean>(false);
+  const [confirmModalIsOpen, confirmModalIsOpenSet] = useState<boolean | undefined>();
   const { wrapperProps } = useLayoutStyles({ props });
 
   const { valueControlled, valueControlledSet } = useValueControlled<ElementStateModel>({
@@ -107,7 +107,7 @@ export const Pressable: RLFCModel<WrapperRefModel, PressablePropsModel> = ({
       {confirmMessage && (
         <Modal
           isOpen={confirmModalIsOpen}
-          onClose={() => confirmModalIsOpenSet(false)}>
+          onToggle={confirmModalIsOpenSet}>
           <Wrapper
             grow
             isCenter
