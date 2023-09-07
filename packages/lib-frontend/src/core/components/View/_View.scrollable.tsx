@@ -33,13 +33,17 @@ export const _viewParams: ComposeComponentParamsModel<
         k.startsWith('margin') ||
         k.startsWith('border'),
     );
-    const isScrollable = isVerticalScrollable || isHorizontalScrollable;
     return {
       children: (
         <View
           style={{
             display: 'flex',
-            flex: stylesView.width || stylesView.height ? undefined : isScrollable ? 1 : undefined,
+            flex:
+              stylesView.width || stylesView.height
+                ? undefined
+                : isVerticalScrollable
+                ? 1
+                : undefined,
             ...stylesView,
           }}
           testID={testID}>
