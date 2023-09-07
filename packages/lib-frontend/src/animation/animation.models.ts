@@ -30,7 +30,8 @@ export type AnimationStatesModel<TStyle extends StyleModel = ViewStyleModel> = {
   [TKey in ELEMENT_STATE]?: TStyle;
 };
 
-export type AnimatablePropsModel<TStyle extends StyleModel = ViewStyleModel> = {
-  animation?: AnimationModel<TStyle>;
-} & ElementStatePropsModel &
-  StylePropsModel<TStyle>;
+export type AnimatablePropsModel<TStyle extends StyleModel = ViewStyleModel> =
+  StylePropsModel<TStyle> &
+    ElementStatePropsModel & {
+      animation?: AnimationModel<TStyle>;
+    };

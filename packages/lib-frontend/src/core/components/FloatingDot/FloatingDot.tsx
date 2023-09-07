@@ -1,12 +1,12 @@
 import { type FloatingDotPropsModel } from '#lib-frontend/core/components/FloatingDot/FloatingDot.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { CORNER } from '#lib-frontend/core/core.constants';
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_COLOR } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
-export const FloatingDot: SFCModel<FloatingDotPropsModel> = ({
+export const FloatingDot: LFCModel<FloatingDotPropsModel> = ({
   color = THEME_COLOR.PRIMARY,
   corner = CORNER.TOP_LEFT,
   testID,
