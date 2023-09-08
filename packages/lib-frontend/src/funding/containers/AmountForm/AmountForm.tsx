@@ -6,10 +6,7 @@ import { AMOUNT_UNIT, AMOUNT_UNIT_OPTIONS } from '#lib-frontend/data/data.consta
 import { type AmountFormPropsModel } from '#lib-frontend/funding/containers/AmountForm/AmountForm.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import {
-  FONT_ALIGN,
-  FONT_TYPE,
-} from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 export const AmountForm: LFCModel<AmountFormPropsModel> = ({
   data,
@@ -41,13 +38,7 @@ export const AmountForm: LFCModel<AmountFormPropsModel> = ({
       onError={onError}
       onSubmit={onSubmit}
       onSuccess={onSuccess}
-      topElement={() => (
-        <Text
-          align={FONT_ALIGN.CENTER}
-          type={FONT_TYPE.HEADLINE}>
-          {t('funding:amountFormMessage')}
-        </Text>
-      )}
+      topElement={() => <Text type={FONT_TYPE.HEADLINE}>{t('funding:amountFormMessage')}</Text>}
     />
   );
 };

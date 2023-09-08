@@ -6,10 +6,7 @@ import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormC
 import { type ItemStepFormPropsModel } from '#lib-frontend/data/components/ItemStepForm/ItemStepForm.models';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import {
-  FONT_ALIGN,
-  FONT_TYPE,
-} from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { type PartialModel } from '#lib-shared/core/core.models';
 
 export const ItemStepForm = <TType,>({
@@ -38,13 +35,7 @@ export const ItemStepForm = <TType,>({
       onSubmit={onSubmit}
       onSuccess={onSuccess}
       topElement={() =>
-        message && (
-          <TranslatableText
-            align={FONT_ALIGN.CENTER}
-            type={FONT_TYPE.HEADLINE}>
-            {message}
-          </TranslatableText>
-        )
+        message && <TranslatableText type={FONT_TYPE.HEADLINE}>{message}</TranslatableText>
       }
     />
   );

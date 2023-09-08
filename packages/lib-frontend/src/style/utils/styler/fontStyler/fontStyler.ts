@@ -3,6 +3,7 @@ import isNumber from 'lodash/isNumber';
 import { THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
 import { type TextStyleModel } from '#lib-frontend/style/style.models';
 import {
+  FONT_ALIGN,
   FONT_FAMILY,
   FONT_TYPE,
 } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
@@ -42,5 +43,7 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
 
     lineHeight: isLineHeight && type === FONT_TYPE.BODY ? theme.font.lineHeight : undefined,
 
-    textAlign: align,
+    textAlign:
+      align ??
+      (type === FONT_TYPE.HEADLINE || type === FONT_TYPE.TITLE ? FONT_ALIGN.CENTER : undefined),
   });

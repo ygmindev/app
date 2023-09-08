@@ -6,10 +6,7 @@ import { RELATIVE_DATE_UNIT, RELATIVE_DATE_UNIT_OPTIONS } from '#lib-frontend/da
 import { type MaturityFormPropsModel } from '#lib-frontend/funding/containers/MaturityForm/MaturityForm.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import {
-  FONT_ALIGN,
-  FONT_TYPE,
-} from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 export const MaturityForm: LFCModel<MaturityFormPropsModel> = ({
   onComplete,
@@ -39,13 +36,7 @@ export const MaturityForm: LFCModel<MaturityFormPropsModel> = ({
       onError={onError}
       onSubmit={onSubmit}
       onSuccess={onSuccess}
-      topElement={() => (
-        <Text
-          align={FONT_ALIGN.CENTER}
-          type={FONT_TYPE.HEADLINE}>
-          {t('funding:maturityFormMessage')}
-        </Text>
-      )}
+      topElement={() => <Text type={FONT_TYPE.HEADLINE}>{t('funding:maturityFormMessage')}</Text>}
     />
   );
 };

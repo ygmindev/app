@@ -11,12 +11,12 @@ export type _UseFormParamsModel<TType, TResult = void> = Pick<
 export type _UseFormModel<TType, TResult = void> = {
   data?: TResult | null;
   errors: FormErrorModel<TType>;
+  errorsSet(errors?: Error): void;
   handleChange(key: string): (value: string) => void;
   handleReset(): void;
   handleSubmit(): void;
   isLoading: boolean;
   isValid: boolean;
-  setErrors(errors?: Error): void;
-  setValues(data?: TType): Promise<void>;
   values: TType;
+  valuesSet(data?: TType): Promise<void>;
 };

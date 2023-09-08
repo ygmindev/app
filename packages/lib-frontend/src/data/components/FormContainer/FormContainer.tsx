@@ -78,7 +78,12 @@ const FormContainerF = forwardRef(
     const { t } = useTranslation();
     const { wrapperProps } = useLayoutStyles({ props });
 
-    useImperativeHandle(ref, () => ({ reset: handleReset, setValues, submit: handleSubmit }));
+    useImperativeHandle(ref, () => ({
+      reset: handleReset,
+      submit: async () => handleSubmit(),
+      values: () => values,
+      valuesSet,
+    }));
 
     const getValues = useCallback(
       (data: TType) =>
@@ -99,18 +104,11 @@ const FormContainerF = forwardRef(
     );
 
     const handleSubmitF = async (data: TType): Promise<TResult | null> => {
-      const initialValuesF = initialValues && getValues(initialValues);
       const dataF = getValues(data);
-      if (dataF) {
-        // if (isValidateChanged && isEqual(initialValuesF, dataF)) {
-        //   throw new Error(t('core:validateChanged'));
-        // }
-        return (onSubmit && (await onSubmit(dataF))) ?? null;
-      }
-      return null;
+      return dataF ? (onSubmit && (await onSubmit(dataF))) ?? null : null;
     };
 
-    const { errors, handleChange, handleReset, handleSubmit, isLoading, setValues, values } =
+    const { errors, handleChange, handleReset, handleSubmit, isLoading, values, valuesSet } =
       useForm<TType, TResult>({
         initialValues,
         isBlocking,

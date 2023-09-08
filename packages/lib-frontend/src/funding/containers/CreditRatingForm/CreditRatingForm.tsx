@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 
 import { type ModalRefModel } from '#lib-frontend/core/components/Modal/Modal.models';
 import { ModalButton } from '#lib-frontend/core/components/ModalButton/ModalButton';
+import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Tile } from '#lib-frontend/core/components/Tile/Tile';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
@@ -10,6 +11,7 @@ import { type CreditRatingFormPropsModel } from '#lib-frontend/funding/container
 import { CreditRatingItemForm } from '#lib-frontend/funding/containers/CreditRatingItemForm/CreditRatingItemForm';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { withId } from '#lib-shared/core/utils/withId/withId';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 import { type CreditRatingModel } from '#lib-shared/funding/resources/CreditRating/CreditRating.models';
@@ -21,7 +23,6 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({ data, .
   const ref = useRef<ModalRefModel>(null);
 
   const handleSubmit = async (value: CreditRatingModel): Promise<void> => {
-    console.warn(value);
     valuesSet(withId([...values, value]));
     ref.current?.toggle(false);
   };
@@ -30,19 +31,23 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({ data, .
     <MainLayout
       {...wrapperProps}
       s>
-      {values.map(({ _agency, id, longTermCategory, longTermWatch }) => (
-        <Tile
-          key={id}
-          title={_agency}>
-          <Table
-            columns={[{ id: 'name' }, { id: 'value' }]}
-            data={[
-              { name: 'longTermCategory', value: longTermCategory },
-              { name: 'longTermWatch', value: longTermWatch },
-            ]}
-          />
-        </Tile>
-      ))}
+      {values.length ? (
+        values.map(({ _agency, id, longTermCategory, longTermWatch }) => (
+          <Tile
+            key={id}
+            title={_agency}>
+            <Table
+              columns={[{ id: 'name' }, { id: 'value' }]}
+              data={[
+                { name: 'longTermCategory', value: longTermCategory },
+                { name: 'longTermWatch', value: longTermWatch },
+              ]}
+            />
+          </Tile>
+        ))
+      ) : (
+        <Text type={FONT_TYPE.HEADLINE}>{t('funding:noCreditRatingMessage')}</Text>
+      )}
 
       <ModalButton
         element={<CreditRatingItemForm onSubmit={handleSubmit} />}
