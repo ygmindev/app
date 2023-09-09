@@ -34,7 +34,7 @@ export const TimezoneField: LFCModel<TimezoneFieldPropsModel> = ({
   const options = useMemo(
     () =>
       timezones().map(({ name, offset }) => ({
-        id: timezoneFormat(name),
+        _id: timezoneFormat(name),
         label: timezoneFormat({ name, offset }),
       })),
     [],

@@ -15,10 +15,13 @@ export type MenuOptionModel<TType extends string = string> = TranslatableOptionM
   subOptions?: Array<MenuOptionModel>;
 };
 
-export type MenuPropsModel<TType extends string = string> = {
-  anchor(isOpen?: boolean): ReactElement<PressablePropsModel>;
-  options: Array<MenuOptionModel<TType>>;
-  renderOption?(option: MenuOptionModel<TType>): TranslatableTextModel;
-  topElement?: ReactNode;
-} & Pick<DropdownPropsModel, 'width' | 'maxWidth' | 'maxHeight' | 'isFullWidth' | 'direction'> &
-  Omit<FieldPropsModel, 'id'>;
+export type MenuPropsModel<TType extends string = string> = Pick<
+  DropdownPropsModel,
+  'width' | 'maxWidth' | 'maxHeight' | 'isFullWidth' | 'direction'
+> &
+  Omit<FieldPropsModel, '_id'> & {
+    anchor(isOpen?: boolean): ReactElement<PressablePropsModel>;
+    options: Array<MenuOptionModel<TType>>;
+    renderOption?(option: MenuOptionModel<TType>): TranslatableTextModel;
+    topElement?: ReactNode;
+  };

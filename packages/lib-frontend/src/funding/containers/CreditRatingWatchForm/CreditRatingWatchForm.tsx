@@ -14,14 +14,14 @@ export const CreditRatingWatchForm: LFCModel<CreditRatingWatchFormPropsModel> = 
   const { t } = useTranslation();
   return (
     <ItemStepForm
+      _id="longTermWatch"
       data={data}
-      id="longTermWatch"
       message={t('funding:longTermWatchFormMessage')}
       onComplete={onComplete}
       onError={onError}
       onSubmit={onSubmit}
       onSuccess={onSuccess}
-      options={Object.values(CREDIT_RATING_WATCH).map((id) => ({ id, label: id }))}
+      options={Object.values(CREDIT_RATING_WATCH).map((_id) => ({ _id, label: _id }))}
     />
   );
 };

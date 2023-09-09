@@ -23,13 +23,13 @@ export const AmountForm: LFCModel<AmountFormPropsModel> = ({
       {...wrapperProps}
       fields={[
         {
+          _id: 'amount',
           element: (
             <RangeField
               defaultUnit={AMOUNT_UNIT.MILLION}
               unitOptions={AMOUNT_UNIT_OPTIONS}
             />
           ),
-          id: 'amount',
         },
       ]}
       initialValues={data}

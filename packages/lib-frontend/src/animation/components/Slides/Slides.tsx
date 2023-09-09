@@ -24,11 +24,11 @@ export const Slides: SFCModel<SlidesPropsModel> = ({ current, slides, testID, ..
       testID={testID}>
       <Exitable>
         {slides?.map(
-          ({ element, id }, i) =>
+          ({ _id, element }, i) =>
             i === currentF && (
               <Slide
                 isBack={isBack}
-                key={id}>
+                key={_id}>
                 {element}
               </Slide>
             ),

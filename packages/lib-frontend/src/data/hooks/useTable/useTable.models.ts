@@ -20,7 +20,10 @@ export type TableSelectTypeModel = `${TABLE_SELECT_TYPE}`;
 
 export type TableSortTypeModel = `${TABLE_SORT_TYPE}`;
 
-export type TableColumnModel<TType, TKey extends StringKeyModel<TType>> = WithIdModel<TKey> & {
+export type TableColumnModel<
+  TType,
+  TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
+> = WithIdModel<TKey> & {
   align?: FontAlignModel;
   formatter?: DataFormatterModel<TType, TKey>;
   label?: TranslatableTextModel;

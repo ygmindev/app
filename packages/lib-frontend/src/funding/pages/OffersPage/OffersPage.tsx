@@ -15,8 +15,8 @@ const SIZE = 80;
 
 const FUNDINGS = [
   {
+    _id: 'gs',
     icon: 'bank',
-    id: 'gs',
     logo: 'https://design.gs.com/downloads/Goldman_Sachs_Blue_Box.png',
     products: ['Bond', 'Loan', 'Revolving Credit'],
     rate: '4.250% - 5.250%',
@@ -25,8 +25,8 @@ const FUNDINGS = [
   },
 
   {
+    _id: 'jpm',
     icon: 'bank',
-    id: 'jpm',
     logo: 'https://media2.vault.com/14343503/210909_jp-morgan_logo.jpg',
     products: ['Bond', 'Loan', 'Revolving Credit'],
     rate: '4.750% - 5.2500%',
@@ -35,8 +35,8 @@ const FUNDINGS = [
   },
 
   {
+    _id: 'woori',
     icon: 'bank',
-    id: 'woori',
     logo: 'https://companieslogo.com/img/orig/WF-f6e6a56c.png?t=1660034230',
     products: ['Loan', 'Revolving Credit'],
     rate: '4.500% - 5.500%',
@@ -45,8 +45,8 @@ const FUNDINGS = [
   },
 
   {
+    _id: 'nycb',
     icon: 'bank',
-    id: 'nycb',
     logo: 'https://media.licdn.com/dms/image/C560BAQGrW1LPgE5zBg/company-logo_200_200/0/1558629289814?e=2147483647&v=beta&t=-4DIGHg9bph1EiAHJ7qt_qslVOkPriV2OkxDFk_vNmk',
     products: ['Loan', 'Revolving Credit'],
     rate: '3.500% - 4.750%',
@@ -55,8 +55,8 @@ const FUNDINGS = [
   },
 
   {
+    _id: 'bofa',
     icon: 'bank',
-    id: 'bofa',
     logo: 'https://freelogopng.com/images/all_img/1658985797bank-of-america-logo.png',
     products: ['Loan', 'Revolving Credit'],
     rate: '3.750% - 5.000%',
@@ -65,8 +65,8 @@ const FUNDINGS = [
   },
 
   {
+    _id: 'ms',
     icon: 'bank',
-    id: 'ms',
     logo: 'https://scontent-lga3-2.xx.fbcdn.net/v/t39.30808-6/334271731_562433455663663_7385988108907043037_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=be3454&_nc_ohc=kMG1bsjJdEsAX-xDazi&_nc_ht=scontent-lga3-2.xx&oh=00_AfCW5CxDXmNIBYCl6dPWkWSwPe82Vy43zxac9S25vO0eUw&oe=64DDCED2',
     products: ['Bond', 'Loan', 'Revolving Credit'],
     rate: '3.500% - 4.750%',
@@ -87,7 +87,7 @@ export const OffersPage: SFCModel<OffersPagePropsModel> = ({ testID, ...props })
       <Wrapper
         isVerticalScrollable
         s>
-        {FUNDINGS.map(({ icon, id, logo, products, rate, tags, title }) => (
+        {FUNDINGS.map(({ _id, icon, logo, products, rate, tags, title }) => (
           <Tile
             description={
               <Wrapper s="s">
@@ -109,7 +109,7 @@ export const OffersPage: SFCModel<OffersPagePropsModel> = ({ testID, ...props })
               </Wrapper>
             }
             icon={icon as IconPropsModel['icon']}
-            key={id}
+            key={_id}
             onPress={() => null}
             preview={
               <Wrapper

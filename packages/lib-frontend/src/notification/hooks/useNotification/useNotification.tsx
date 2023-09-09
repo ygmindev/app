@@ -19,14 +19,14 @@ export const useNotification = (): UseNotificationModel => {
     add: notify,
 
     error: (alert) =>
-      notify({ ...alert, color: THEME_COLOR.ERROR, icon: alert.icon || 'exclamationCircle' }),
+      notify({ ...alert, color: THEME_COLOR.ERROR, icon: alert.icon ?? 'exclamationCircle' }),
 
     remove: (id) => actions?.notification.remove(id),
 
     success: (alert) =>
-      notify({ ...alert, color: THEME_COLOR.SUCCESS, icon: alert.icon || 'checkCircle' }),
+      notify({ ...alert, color: THEME_COLOR.SUCCESS, icon: alert.icon ?? 'checkCircle' }),
 
     warn: (alert) =>
-      notify({ ...alert, color: THEME_COLOR.WARNING, icon: alert.icon || 'exclamationCircle' }),
+      notify({ ...alert, color: THEME_COLOR.WARNING, icon: alert.icon ?? 'exclamationCircle' }),
   };
 };

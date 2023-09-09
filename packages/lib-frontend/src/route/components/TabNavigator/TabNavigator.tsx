@@ -36,8 +36,8 @@ export const TabNavigator: SFCModel<TabNavigatorPropsModel> = ({
         routes?.map(
           ({ fullpath, icon, isNavigatable = true, pathname, title }) =>
             isNavigatable && {
+              _id: fullpath ?? pathname,
               icon,
-              id: fullpath ?? pathname,
               label: title ? t(title) : pathname,
             },
         ),

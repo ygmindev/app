@@ -34,14 +34,14 @@ export const RadioField = <TType extends string = string>({
       p={THEME_SIZE.SMALL}
       round
       s={THEME_SIZE.SMALL}>
-      {options.map(({ icon, id, label }) => {
-        const isActive = id === valueControlled;
+      {options.map(({ _id, icon, label }) => {
+        const isActive = _id === valueControlled;
         return (
           <Button
             color={color}
             icon={icon}
-            key={id}
-            onPress={() => valueControlledSet(id)}
+            key={_id}
+            onPress={() => valueControlledSet(_id)}
             size={THEME_SIZE.SMALL}
             type={isActive ? BUTTON_TYPE.FILLED : BUTTON_TYPE.INVISIBLE}>
             {label}

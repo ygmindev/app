@@ -59,12 +59,12 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
         topElement={() =>
           values.length ? (
             <Wrapper s>
-              {values.map(({ _agency, id, longTermCategory, longTermWatch }) => (
+              {values.map(({ _agency, _id, longTermCategory, longTermWatch }) => (
                 <Tile
-                  key={id}
+                  key={_id}
                   title={_agency}>
                   <Table
-                    columns={[{ id: 'name' }, { id: 'value' }]}
+                    columns={[{ _id: 'name' }, { _id: 'value' }]}
                     data={[
                       { name: 'longTermCategory', value: longTermCategory },
                       { name: 'longTermWatch', value: longTermWatch },

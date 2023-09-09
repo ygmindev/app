@@ -5,12 +5,12 @@ const { displayName } = withTest({ withId });
 
 describe(displayName, () => {
   test('works', async () => {
-    const value = [{ key: 'value' }, { id: 'id', key: 'value' }, { key: 'value' }];
+    const value = [{ key: 'value' }, { _id: 'id', key: 'value' }, { key: 'value' }];
     const results = withId(value);
-    results.forEach(({ id }, i) => {
-      expect(id).toBeTruthy();
+    results.forEach(({ _id }, i) => {
+      expect(_id).toBeTruthy();
       if (i === 1) {
-        expect(id).toStrictEqual('id');
+        expect(_id).toStrictEqual('id');
       }
     });
   });

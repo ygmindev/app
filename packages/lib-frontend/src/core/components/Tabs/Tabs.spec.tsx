@@ -9,11 +9,11 @@ const SECOND_CHILDREN = 'SECOND_CHILDREN';
 
 const TABS: Array<OptionModel> = [
   {
-    id: FIRST_CHILDREN,
+    _id: FIRST_CHILDREN,
     label: FIRST_CHILDREN,
   },
   {
-    id: SECOND_CHILDREN,
+    _id: SECOND_CHILDREN,
     label: SECOND_CHILDREN,
   },
 ];

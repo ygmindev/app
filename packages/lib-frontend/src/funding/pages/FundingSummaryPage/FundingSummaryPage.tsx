@@ -28,7 +28,7 @@ export const FundingSummaryPage: SFCModel<FundingSummaryPagePropsModel> = ({
           '5y': random(4, 6, true),
         }))}
         gradientStep={10}
-        series={[{ id: '2y' }, { id: '3y' }, { id: '5y' }, { id: '10y' }, { id: '30y' }]}
+        series={[{ _id: '2y' }, { _id: '3y' }, { _id: '5y' }, { _id: '10y' }, { _id: '30y' }]}
         title={t('funding:fundingCost')}
       />
     </MainLayout>

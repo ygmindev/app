@@ -11,9 +11,9 @@ export const AccountPage: SFCModel<AccountPagePropsModel> = ({ testID, ...props 
     <MainLayout
       style={styles}
       testID={testID}>
-      {ACCOUNT_GROUPS.map(({ id, root, routes }) => (
+      {ACCOUNT_GROUPS.map(({ _id, root, routes }) => (
         <RouteGroup
-          key={id}
+          key={_id}
           root={root}
           routes={routes}
         />

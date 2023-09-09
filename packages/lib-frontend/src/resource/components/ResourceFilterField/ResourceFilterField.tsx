@@ -10,7 +10,7 @@ import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 
 export const ResourceFilterField = <TType, TForm = undefined, TRoot = undefined>({
-  id,
+  _id,
   type = RESOURCE_FILTER_PROPERTY_TYPE.STRING,
   ...props
 }: LFCPropsModel<ResourceFilterFieldPropsModel<TType, TForm, TRoot>>): ReactElement<
@@ -24,7 +24,7 @@ export const ResourceFilterField = <TType, TForm = undefined, TRoot = undefined>
       return (
         <TextField
           {...wrapperProps}
-          label={`${id} ${t('core:contains')}`}
+          label={`${_id} ${t('core:contains')}`}
           width={theme.layout.width[THEME_SIZE.SMALL]}
         />
       );

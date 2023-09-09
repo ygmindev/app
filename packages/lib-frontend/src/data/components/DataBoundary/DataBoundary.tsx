@@ -12,31 +12,31 @@ import { useMutation } from '#lib-frontend/data/hooks/useMutation/useMutation';
 import { useQuery } from '#lib-frontend/data/hooks/useQuery/useQuery';
 
 const QueryComponent = <TResult = void,>({
+  _id,
   children,
-  id,
   query,
 }: SFCPropsModel<QueryComponentPropsModel<TResult>>): ReactElement<
   SFCPropsModel<QueryComponentPropsModel<TResult>>
 > => {
-  const { data } = useQuery(id, query);
+  const { data } = useQuery(_id, query);
   return (children && children({ data })) || <></>;
 };
 
 const MutateComponent = <TParams = undefined, TResult = void>({
+  _id,
   children,
-  id,
   mutate,
 }: SFCPropsModel<MutateComponentPropsModel<TParams, TResult>>): ReactElement<
   SFCPropsModel<MutateComponentPropsModel<TParams, TResult>>
 > => {
-  const { data, mutate: mutateF } = useMutation<TParams, TResult>(id, mutate);
+  const { data, mutate: mutateF } = useMutation<TParams, TResult>(_id, mutate);
   useAsync(async () => mutateF());
   return (children && children({ data })) || <></>;
 };
 
 export const DataBoundary = <TParams = undefined, TResult = void>({
+  _id,
   children,
-  id,
   mutate,
   query,
   ...props
@@ -46,13 +46,13 @@ export const DataBoundary = <TParams = undefined, TResult = void>({
   <AsyncBoundary {...props}>
     {query ? (
       <QueryComponent<TResult>
-        id={id}
+        _id={_id}
         query={query}>
         {children}
       </QueryComponent>
     ) : mutate ? (
       <MutateComponent<TParams, TResult>
-        id={id}
+        _id={_id}
         mutate={mutate}>
         {children}
       </MutateComponent>

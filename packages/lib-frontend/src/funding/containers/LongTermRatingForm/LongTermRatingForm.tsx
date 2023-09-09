@@ -13,16 +13,16 @@ export const LongTermRatingForm: LFCModel<LongTermRatingFormPropsModel> = ({
   const { t } = useTranslation();
   return (
     <ItemStepForm
+      _id="value"
       data={data}
-      id="value"
       message={t('funding:longTermRatingMessage')}
       onComplete={onComplete}
       onError={onError}
       onSubmit={onSubmit}
       onSuccess={onSuccess}
       options={[
-        { id: 'sAndP', label: ({ t }) => t('funding:sAndP') },
-        { id: 'moodys', label: ({ t }) => t('funding:moodys') },
+        { _id: 'sAndP', label: ({ t }) => t('funding:sAndP') },
+        { _id: 'moodys', label: ({ t }) => t('funding:moodys') },
       ]}
     />
   );

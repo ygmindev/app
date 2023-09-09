@@ -11,9 +11,9 @@ export const SettingsPage: SFCModel<SettingsPagePropsModel> = ({ testID, ...prop
     <MainLayout
       style={styles}
       testID={testID}>
-      {SETTINGS_GROUPS.map(({ id, label, routes }) => (
+      {SETTINGS_GROUPS.map(({ _id, label, routes }) => (
         <RouteGroup
-          key={id}
+          key={_id}
           label={label}
           root
           routes={routes}

@@ -22,13 +22,13 @@ export const MaturityForm: LFCModel<MaturityFormPropsModel> = ({
       {...wrapperProps}
       fields={[
         {
+          _id: 'maturity',
           element: (
             <RangeField
               defaultUnit={RELATIVE_DATE_UNIT.YEAR}
               unitOptions={RELATIVE_DATE_UNIT_OPTIONS}
             />
           ),
-          id: 'maturity',
         },
       ]}
       isVerticalCenter

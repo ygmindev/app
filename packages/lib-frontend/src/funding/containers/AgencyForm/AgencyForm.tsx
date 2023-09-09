@@ -13,16 +13,16 @@ export const AgencyForm: LFCModel<AgencyFormPropsModel> = ({
   const { t } = useTranslation();
   return (
     <ItemStepForm
+      _id="agency"
       data={data}
-      id="agency"
       message={t('funding:agencyFormMessage')}
       onComplete={onComplete}
       onError={onError}
       onSubmit={onSubmit}
       onSuccess={onSuccess}
       options={[
-        { id: 'sAndP', label: ({ t }) => t('funding:sAndP') },
-        { id: 'moodys', label: ({ t }) => t('funding:moodys') },
+        { _id: 'sAndP', label: ({ t }) => t('funding:sAndP') },
+        { _id: 'moodys', label: ({ t }) => t('funding:moodys') },
       ]}
     />
   );

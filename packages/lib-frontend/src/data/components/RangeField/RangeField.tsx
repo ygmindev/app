@@ -70,7 +70,10 @@ export const RangeField = <TType extends NumberUnitModel>({
   const getFieldElement = (key: keyof ScaledNumberRangeModel<TType>): ReactElement => {
     let unitOptionsF = unitOptions;
     if (key === 'max' && isRange && valueControlled?.value?.unit) {
-      const minUnitIndex = findIndex(unitOptionsF, ({ id }) => id === valueControlled?.value?.unit);
+      const minUnitIndex = findIndex(
+        unitOptionsF,
+        ({ _id }) => _id === valueControlled?.value?.unit,
+      );
       if (minUnitIndex >= 0) {
         unitOptionsF = unitOptionsF.slice(minUnitIndex);
       }
@@ -79,6 +82,7 @@ export const RangeField = <TType extends NumberUnitModel>({
       <FieldGroup
         fields={[
           {
+            _id: 'value',
             element: (
               <NumberField
                 defaultValue={1}
@@ -97,9 +101,9 @@ export const RangeField = <TType extends NumberUnitModel>({
                 value={valueControlled && valueControlled[key]?.value}
               />
             ),
-            id: 'value',
           },
           {
+            _id: 'unit',
             element: (
               <SelectField<TType>
                 label={t('core:unit')}
@@ -110,7 +114,6 @@ export const RangeField = <TType extends NumberUnitModel>({
                 value={valueControlled && valueControlled[key]?.unit}
               />
             ),
-            id: 'unit',
           },
         ]}
       />

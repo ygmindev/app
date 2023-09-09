@@ -32,11 +32,11 @@ export const Table = <TType,>({
           border={DIRECTION.BOTTOM}
           isFullWidth={isFullWidth}
           isRowAlign>
-          {headers.map(({ align, id, label, width }) => (
+          {headers.map(({ _id, align, label, width }) => (
             <Wrapper
               basis={width}
               isDistribute={!width}
-              key={id}
+              key={_id}
               p={THEME_SIZE.SMALL}>
               <Text
                 align={align}
@@ -54,12 +54,12 @@ export const Table = <TType,>({
         {rows.map((row) => (
           <Wrapper
             isRowAlign
-            key={row.id}>
+            key={row._id}>
             {row.cells.map((cell) => (
               <Wrapper
                 basis={cell.width}
                 flex={cell.width ? undefined : 1}
-                key={cell.id}
+                key={cell._id}
                 p={THEME_SIZE.SMALL}>
                 {cell.renderer ? (
                   cell.renderer({ row: row.value, value: cell.value })

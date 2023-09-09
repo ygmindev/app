@@ -19,8 +19,8 @@ export const PersonalPage: SFCModel<PersonalPagePropsModel> = ({ testID, ...prop
         root
         routes={[
           {
+            _id: NAME,
             icon: 'id',
-            id: NAME,
             label: ({ t }) => t('user:name'),
             value:
               currentUser && (currentUser.first || currentUser.last)
@@ -28,8 +28,8 @@ export const PersonalPage: SFCModel<PersonalPagePropsModel> = ({ testID, ...prop
                 : null,
           },
           {
+            _id: PHONE,
             icon: 'phone',
-            id: PHONE,
             label: ({ t }) => t('user:phone'),
             value:
               currentUser && currentUser.callingCode && currentUser.phone
@@ -37,8 +37,8 @@ export const PersonalPage: SFCModel<PersonalPagePropsModel> = ({ testID, ...prop
                 : null,
           },
           {
+            _id: EMAIL,
             icon: 'email',
-            id: EMAIL,
             label: ({ t }) => t('user:email'),
             value: currentUser?.email ?? null,
           },

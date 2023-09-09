@@ -19,19 +19,19 @@ import {
 // TODO: get from glob
 const libraries = LIBRARY_PROPS.map(({ name, ...props }) => {
   const id = name ?? getComponentDisplayName(props.Component as ComponentType);
-  return { id, name: id, pathname: trimPathname(id), ...props };
+  return { _id: id, name: id, pathname: trimPathname(id), ...props };
 });
 
 export const LibraryPage: SFCModel<LibraryPagePropsModel> = ({ testID, ...props }) => {
   const { styles } = useStyles({ props });
   const { location, push } = useRouter<LibraryPageParamsModel>();
-  const value = location.params?.id;
+  const value = location.params?._id;
   const valueF = value && trimPathname(value);
 
   const options: Array<OptionModel> = libraries.map((params) => ({
     ...params,
-    label: params.id,
-    onPress: () => push({ pathname: params.id }),
+    label: params._id,
+    onPress: () => push({ pathname: params._id }),
   }));
 
   const library = valueF && find(libraries, { pathname: valueF });

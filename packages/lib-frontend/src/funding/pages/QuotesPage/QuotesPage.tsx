@@ -51,10 +51,10 @@ export const QuotesPage: SFCModel<QuotesPagePropsModel> = ({ testID, ...props })
         title="Woori Bank">
         <Table
           columns={[
-            { formatter: ({ value }) => `${value.toFixed(0)} years`, id: 'tenor' },
-            { formatter: ({ value }) => `T + ${value.toFixed(0)} bps`, id: 'spread' },
-            { formatter: ({ value }) => `${value.toFixed(3)} %`, id: 'yield' },
-            { formatter: ({ value }) => `${value.toFixed(3)} %`, id: 'coupon' },
+            { _id: 'tenor', formatter: ({ value }) => `${value.toFixed(0)} years` },
+            { _id: 'spread', formatter: ({ value }) => `T + ${value.toFixed(0)} bps` },
+            { _id: 'yield', formatter: ({ value }) => `${value.toFixed(3)} %` },
+            { _id: 'coupon', formatter: ({ value }) => `${value.toFixed(3)} %` },
           ]}
           data={[
             { coupon: 3.25, spread: 100, tenor: 2, yield: 3.231 },
@@ -83,10 +83,10 @@ export const QuotesPage: SFCModel<QuotesPagePropsModel> = ({ testID, ...props })
         title="Goldman Sachs">
         <Table
           columns={[
-            { formatter: ({ value }) => `${value.toFixed(0)} years`, id: 'tenor' },
-            { formatter: ({ value }) => `T + ${value.toFixed(0)} bps`, id: 'spread' },
-            { formatter: ({ value }) => `${value.toFixed(3)} %`, id: 'yield' },
-            { formatter: ({ value }) => `${value.toFixed(3)} %`, id: 'coupon' },
+            { _id: 'tenor', formatter: ({ value }) => `${value.toFixed(0)} years` },
+            { _id: 'spread', formatter: ({ value }) => `T + ${value.toFixed(0)} bps` },
+            { _id: 'yield', formatter: ({ value }) => `${value.toFixed(3)} %` },
+            { _id: 'coupon', formatter: ({ value }) => `${value.toFixed(3)} %` },
           ]}
           data={[
             { coupon: 3.3, spread: 110, tenor: 2, yield: 3.331 },

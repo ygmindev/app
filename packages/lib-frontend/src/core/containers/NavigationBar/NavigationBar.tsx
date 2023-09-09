@@ -12,7 +12,7 @@ import { Droppable } from '#lib-frontend/core/components/Droppable/Droppable';
 import { RotatableIcon } from '#lib-frontend/core/components/RotatableIcon/RotatableIcon';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type NavigationBarPropsModel } from '#lib-frontend/core/containers/NavigationBar/NavigationBar.models';
-import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import { DIRECTION, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { useIsMobile } from '#lib-frontend/core/hooks/useIsMobile/useIsMobile';
 import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
@@ -61,16 +61,16 @@ export const NavigationBar = ({
               isRowAlign={!k && isHorizontalF}
               key={toString(k)}
               s={THEME_SIZE.SMALL}>
-              {v.map(({ icon, id, label, onPress }) => (
+              {v.map(({ _id, icon, label, onPress }) => (
                 <Button
-                  elementState={trimPathname(id) === valueF ? ELEMENT_STATE.ACTIVE : undefined}
+                  elementState={trimPathname(_id) === valueF ? ELEMENT_STATE.ACTIVE : undefined}
                   icon={icon}
-                  key={id}
+                  key={_id}
                   onPress={async () => {
                     onPress && (await onPress());
-                    onChange && onChange(id);
+                    onChange && onChange(_id);
                   }}
-                  testID={id}
+                  testID={_id}
                   type={BUTTON_TYPE.INVISIBLE}>
                   {label}
                 </Button>

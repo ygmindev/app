@@ -15,7 +15,7 @@ export const SnapshotPage: SFCModel<SnapshotPagePropsModel> = ({ testID, ...prop
   const { location } = useRouter<SnapshotPagearamsModel>();
 
   const { get } = useSnapshotResource();
-  const name = location.params?.id;
+  const name = location.params?._id;
   const { data } = useQuery('snapshot', async () =>
     name ? get({ filter: [{ field: 'name', value: name }] }) : undefined,
   );
@@ -23,6 +23,7 @@ export const SnapshotPage: SFCModel<SnapshotPagePropsModel> = ({ testID, ...prop
     <Carousel
       p
       slides={data?.result?.images?.map((image) => ({
+        _id: image,
         element: (
           <Image
             border
@@ -31,7 +32,6 @@ export const SnapshotPage: SFCModel<SnapshotPagePropsModel> = ({ testID, ...prop
             src={`/.dist/test/snapshots/${name}/${image}`}
           />
         ),
-        id: image,
       }))}
       style={styles}
       testID={testID}

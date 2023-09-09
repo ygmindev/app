@@ -44,14 +44,14 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
       p={isContained ? THEME_SIZE.SMALL : undefined}
       round={isContained}>
       {tabs?.map((tab) => {
-        const isActiveF = valueControlled === tab.id;
+        const isActiveF = valueControlled === tab._id;
         return isUnderline ? (
-          <Activatable key={tab.id}>
+          <Activatable key={tab._id}>
             {(isActive) => {
               const isActiveFF = isActiveF || isActive;
               return (
                 <Wrapper
-                  onPress={() => valueControlledSet(tab.id)}
+                  onPress={() => valueControlledSet(tab._id)}
                   position={SHAPE_POSITION.RELATIVE}>
                   <Wrapper
                     isRowAlign
@@ -64,7 +64,7 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
                     )}
 
                     <Text color={isActiveFF ? THEME_COLOR.PRIMARY : undefined}>
-                      {tab.label ? t(tab.label) : tab.id}
+                      {tab.label ? t(tab.label) : tab._id}
                     </Text>
                   </Wrapper>
 
@@ -86,13 +86,13 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
         ) : (
           <Button
             icon={tab.icon}
-            key={tab.id}
-            onPress={() => valueControlledSet(tab.id)}
+            key={tab._id}
+            onPress={() => valueControlledSet(tab._id)}
             size={THEME_SIZE.SMALL}
             type={
               isActiveF ? undefined : isContained ? BUTTON_TYPE.INVISIBLE : BUTTON_TYPE.TRANSPARENT
             }>
-            {tab.label ? t(tab.label) : tab.id}
+            {tab.label ? t(tab.label) : tab._id}
           </Button>
         );
       })}

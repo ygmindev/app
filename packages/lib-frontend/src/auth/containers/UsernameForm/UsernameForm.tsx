@@ -65,6 +65,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
       case SIGN_IN_METHOD.EMAIL:
         return [
           {
+            _id: 'email',
             element: (
               <TextField
                 autoComplete="email"
@@ -73,13 +74,12 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
               />
             ),
             icon: 'email',
-            id: 'email',
           },
         ];
       case SIGN_IN_METHOD.PHONE:
         return [
-          { element: <CountryField />, id: 'callingCode' },
-          { element: <PhoneField />, id: 'phone' },
+          { _id: 'callingCode', element: <CountryField /> },
+          { _id: 'phone', element: <PhoneField /> },
         ];
       default:
         return [];

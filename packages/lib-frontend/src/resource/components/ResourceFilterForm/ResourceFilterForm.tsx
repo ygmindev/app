@@ -22,14 +22,14 @@ export const ResourceFilterForm = <TType, TForm = undefined, TRoot = undefined>(
     const filterData = filters
       ? filters.reduce(
           (result, filter) => {
-            const value = data[filter.id];
+            const value = data[filter._id];
             return isNil(value)
               ? result
               : [
                   ...result,
                   {
                     condition: FILTER_CONDITION.CONTAINS,
-                    field: filter.id,
+                    field: filter._id,
                     value: value as string,
                   },
                 ];
@@ -42,15 +42,15 @@ export const ResourceFilterForm = <TType, TForm = undefined, TRoot = undefined>(
 
   return (
     <FormContainer
-      fields={filters?.map(({ id, type }) => ({
+      fields={filters?.map(({ _id, type }) => ({
+        _id,
         element: (
           <ResourceFilterField<TType, TForm, TRoot>
-            id={id}
-            key={id}
+            _id={_id}
+            key={_id}
             type={type}
           />
         ),
-        id,
       }))}
       isFullWidth
       onSubmit={handleSubmit}

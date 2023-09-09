@@ -9,7 +9,7 @@ export const NOTIFICATION_REDUCER: NotificationReducerModel = {
       store.set(
         'notifications',
         uniqBy(
-          [{ ...value, id: value.id || uid('alert') }, ...store.get('notifications')],
+          [{ ...value, _id: value._id ?? uid('alert') }, ...store.get('notifications')],
           'message',
         ),
       );
@@ -18,7 +18,7 @@ export const NOTIFICATION_REDUCER: NotificationReducerModel = {
     remove: (store, value: string) => {
       store.set(
         'notifications',
-        store.get('notifications').filter(({ id }) => id !== value),
+        store.get('notifications').filter(({ _id }) => _id !== value),
       );
     },
 
@@ -28,7 +28,7 @@ export const NOTIFICATION_REDUCER: NotificationReducerModel = {
         store
           .get('notifications')
           .map((notification) =>
-            notification.id === value.id ? { ...notification, ...value } : notification,
+            notification._id === value._id ? { ...notification, ...value } : notification,
           ),
       );
     },

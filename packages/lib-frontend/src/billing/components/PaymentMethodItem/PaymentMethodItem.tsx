@@ -112,8 +112,8 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
             )}
             options={filterNil([
               {
+                _id: 'edit',
                 icon: 'edit',
-                id: 'edit',
                 label: t('core:edit'),
                 onPress: value
                   ? () =>
@@ -124,8 +124,8 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
                   : undefined,
               },
               !isPrimary && {
+                _id: 'setAsPrimary',
                 icon: 'checkCircle',
-                id: 'setAsPrimary',
                 label: t('core:setAsPrimary'),
                 onPress: async () =>
                   currentUser &&
@@ -134,12 +134,12 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
                     update: { paymentMethodPrimary: value?._id },
                   }),
               },
-              { id: 'div', isDivider: true },
+              { _id: 'div', isDivider: true },
               {
+                _id: 'delete',
                 color: THEME_COLOR.ERROR,
                 confirmMessage: t('core:confirmRemove', { value: title }),
                 icon: 'trash',
-                id: 'delete',
                 label: t('core:remove'),
                 onPress: handleRemove,
               },

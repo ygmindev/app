@@ -27,7 +27,7 @@ export const ItemField: LFCModel<ItemFieldPropsModel> = ({
   });
 
   const { query, result, search } = useSearch({
-    keys: ['label', 'id'],
+    keys: ['label', '_id'],
     list: options.map(({ label, ...option }) => ({ ...option, label: t(label) })),
     // onChange: () => menuRef.current?.scrollTo({ x: 0, y: 0 }),
   });
@@ -45,16 +45,16 @@ export const ItemField: LFCModel<ItemFieldPropsModel> = ({
       <Wrapper
         flex
         isVerticalScrollable>
-        {result?.map(({ id, label }) => (
+        {result?.map(({ _id, label }) => (
           <LineItem
-            key={id}
+            key={_id}
             onPress={() => {
-              valueControlledSet(id);
+              valueControlledSet(_id);
               onSubmit && onSubmit();
             }}>
             <TranslatableText>{label}</TranslatableText>
 
-            {valueControlled === id && <Icon icon="check" />}
+            {valueControlled === _id && <Icon icon="check" />}
           </LineItem>
         ))}
       </Wrapper>

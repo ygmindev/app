@@ -33,14 +33,14 @@ export const _Chart = <TType,>({
   const seriesF = useMemo<Array<Payload>>(
     () =>
       series
-        ? series.map(({ id, title }, i) => ({
+        ? series.map(({ _id, title }, i) => ({
             color: i
               ? palette(theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN], {
                   lightness: 0.5 + i * 0.07,
                 })
               : theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN],
-            id,
-            value: title ? t(title) : id,
+            id: _id,
+            value: title ? t(title) : _id,
           }))
         : [],
     [series],

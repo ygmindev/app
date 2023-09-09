@@ -24,7 +24,7 @@ import { type PartialModel } from '#lib-shared/core/core.models';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 export const StepForm = <TKey extends string, TType, TResult = void>({
-  id,
+  _id,
   isProgressBar = true,
   onSubmit,
   onSuccess,
@@ -50,21 +50,21 @@ export const StepForm = <TKey extends string, TType, TResult = void>({
   const handleClear = (): void => dataSet(undefined);
 
   useEffect(() => {
-    const stepId = location.params && location.params[id];
-    let step = stepId ? findIndex(steps, (step) => step.id === stepId) : undefined;
+    const stepId = location.params && location.params[_id];
+    let step = stepId ? findIndex(steps, (step) => step._id === stepId) : undefined;
     step = step && step >= 0 ? step : 0;
     handleCurrentSet(step);
   }, []);
 
   const handleCurrentSet = (value: number): void => {
     currentSet(value);
-    void replace({ ...location, params: { ...location.params, [id]: steps[value].id } });
+    void replace({ ...location, params: { ...location.params, [_id]: steps[value]._id } });
     width && barRef.current?.to({ width: (width / (steps.length + 1)) * (value + 1) });
   };
 
   const handleUnmount = (): void => {
     const { params } = location;
-    params && delete params[id];
+    params && delete params[_id];
     void replace({ ...location, params });
   };
 
@@ -84,12 +84,12 @@ export const StepForm = <TKey extends string, TType, TResult = void>({
           s>
           {steps.map((step, i) => {
             const isCurrent = i === current;
-            const isStepComplete = isComplete[step.id];
+            const isStepComplete = isComplete[step._id];
             const color = isStepComplete ? THEME_COLOR.SUCCESS : theme.color.border;
             return (
               <Wrapper
                 isRowAlign
-                key={step.id}
+                key={step._id}
                 onPress={i <= current ? () => handleCurrentSet(i) : undefined}>
                 <Circle
                   backgroundColor={isCurrent ? color : THEME_COLOR_MORE.SURFACE}
@@ -130,9 +130,10 @@ export const StepForm = <TKey extends string, TType, TResult = void>({
       <Slides
         current={current}
         slides={steps.map((step) => ({
+          _id: step._id,
           element: cloneElement(step.element, {
             data,
-            key: step.id,
+            key: step._id,
             onBack: () => {
               step.element.props.onBack && step.element.props.onBack();
               handleCurrentSet(current - 1);
@@ -144,10 +145,10 @@ export const StepForm = <TKey extends string, TType, TResult = void>({
             onSubmit: async (stepData: PartialModel<TType>) => {
               isLoadingSet(true);
               data && step.element.props.onSubmit && (await step.element.props.onSubmit(data));
-              const isCompleteF = { ...isComplete, [step.id]: true };
+              const isCompleteF = { ...isComplete, [step._id]: true };
               isCompleteSet(isCompleteF);
               if (isLastStep) {
-                const incompleteStep = findIndex(steps, (stepF) => !isCompleteF[stepF.id]);
+                const incompleteStep = findIndex(steps, (stepF) => !isCompleteF[stepF._id]);
                 if (incompleteStep >= 0) {
                   handleCurrentSet(incompleteStep);
                 } else {
@@ -166,10 +167,9 @@ export const StepForm = <TKey extends string, TType, TResult = void>({
                 dataSet(dataF);
                 handleCurrentSet(current + 1);
               }
-              isCompleteSet({ ...isComplete, [step.id]: true });
+              isCompleteSet({ ...isComplete, [step._id]: true });
             },
           }),
-          id: step.id,
         }))}
       />
     </Wrapper>

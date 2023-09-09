@@ -6,15 +6,15 @@ import {
 } from '#lib-frontend/data/hooks/useMutation/_useMutation.models';
 
 export const _useMutation = <TParams = undefined, TResult = void>(
-  ...[id, callback]: _UseMutationParamsModel<TParams, TResult>
+  ...[_id, callback]: _UseMutationParamsModel<TParams, TResult>
 ): _UseMutationModel<TParams, TResult> => {
   const queryClient = useQueryClient();
-  const { data, mutate } = useMutation([id], callback, {
-    onMutate: async () => queryClient.cancelQueries([id]),
+  const { data, mutate } = useMutation([_id], callback, {
+    onMutate: async () => queryClient.cancelQueries([_id]),
   });
   return {
+    _id,
     data,
-    id,
     mutate: async (data) => mutate(data),
   };
 };

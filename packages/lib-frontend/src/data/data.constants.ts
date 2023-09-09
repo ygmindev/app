@@ -26,14 +26,14 @@ export enum RELATIVE_DATE_UNIT {
 }
 
 export const AMOUNT_UNIT_OPTIONS: Array<TranslatableOptionModel<AmountUnitModel>> = [
-  { id: AMOUNT_UNIT.THOUSAND, label: ({ t }) => t('core:thousand') },
-  { id: AMOUNT_UNIT.MILLION, label: ({ t }) => t('core:million') },
-  { id: AMOUNT_UNIT.BILLION, label: ({ t }) => t('core:billion') },
+  { _id: AMOUNT_UNIT.THOUSAND, label: ({ t }) => t('core:thousand') },
+  { _id: AMOUNT_UNIT.MILLION, label: ({ t }) => t('core:million') },
+  { _id: AMOUNT_UNIT.BILLION, label: ({ t }) => t('core:billion') },
 ];
 
 export const RELATIVE_DATE_UNIT_OPTIONS: Array<TranslatableOptionModel<NumberUnitModel>> = [
-  { id: RELATIVE_DATE_UNIT.DAY, label: ({ t }) => t('locale:day') },
-  { id: RELATIVE_DATE_UNIT.WEEK, label: ({ t }) => t('locale:week') },
-  { id: RELATIVE_DATE_UNIT.MONTH, label: ({ t }) => t('locale:month') },
-  { id: RELATIVE_DATE_UNIT.YEAR, label: ({ t }) => t('locale:year') },
+  { _id: RELATIVE_DATE_UNIT.DAY, label: ({ t }) => t('locale:day') },
+  { _id: RELATIVE_DATE_UNIT.WEEK, label: ({ t }) => t('locale:week') },
+  { _id: RELATIVE_DATE_UNIT.MONTH, label: ({ t }) => t('locale:month') },
+  { _id: RELATIVE_DATE_UNIT.YEAR, label: ({ t }) => t('locale:year') },
 ];

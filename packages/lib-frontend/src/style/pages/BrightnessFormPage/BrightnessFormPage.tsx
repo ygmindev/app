@@ -25,13 +25,13 @@ export const BrightnessFormPage: FCModel<BrightnessFormPagePropsModel> = ({ test
           onChange={(value) => actions?.style.brightnessSet(value)}
           options={[
             {
+              _id: STYLE_BRIGHTNESS.LIGHT,
               icon: 'light',
-              id: STYLE_BRIGHTNESS.LIGHT,
               label: ({ t }) => t('style:light'),
             },
             {
+              _id: STYLE_BRIGHTNESS.DARK,
               icon: 'dark',
-              id: STYLE_BRIGHTNESS.DARK,
               label: ({ t }) => t('style:dark'),
             },
           ]}

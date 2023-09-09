@@ -20,9 +20,9 @@ import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/sha
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 export const Notification: SFCModel<NotificationPropsModel> = ({
+  _id,
   color = THEME_COLOR.PRIMARY,
   icon,
-  id,
   isInfinite,
   message,
   testID,
@@ -40,10 +40,10 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
       if (!isInfinite) {
         barRef.current?.toState(ELEMENT_STATE.ACTIVE);
         await sleep(theme.notification.duration);
-        isMounted() && remove(id);
+        isMounted() && remove(_id);
       }
     },
-    [isInfinite, remove, id],
+    [isInfinite, remove, _id],
   );
 
   return (
@@ -117,7 +117,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
         <Button
           color={color}
           icon="times"
-          onPress={() => remove(id)}
+          onPress={() => remove(_id)}
           type={BUTTON_TYPE.FILLED}
         />
       </Wrapper>

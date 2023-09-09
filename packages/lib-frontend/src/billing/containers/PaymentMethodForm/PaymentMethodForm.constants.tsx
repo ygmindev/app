@@ -6,6 +6,7 @@ export const PAYMENT_METHOD_FORM_FIELDS: Array<FormRowModel> = withId([
   {
     fields: [
       {
+        _id: 'payment',
         element: (
           <PaymentMethodField
           // onChange={onChange}
@@ -22,7 +23,6 @@ export const PAYMENT_METHOD_FORM_FIELDS: Array<FormRowModel> = withId([
           // }}
           />
         ),
-        id: 'payment',
       },
     ],
   },

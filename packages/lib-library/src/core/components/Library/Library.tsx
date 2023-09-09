@@ -79,7 +79,7 @@ export const Library = <TProps,>({
           {/* <Table
             columns={[
               {
-                id: 'name',
+                _id: 'name',
                 renderer: ({ value }) => (
                   <Text
                     family={FONT_FAMILY.CODE}
@@ -89,7 +89,7 @@ export const Library = <TProps,>({
                 ),
               },
               {
-                id: 'type',
+                _id: 'type',
                 renderer: ({ value }) => (
                   <Text
                     family={FONT_FAMILY.CODE}
@@ -98,7 +98,7 @@ export const Library = <TProps,>({
                   </Text>
                 ),
               },
-              { id: 'isOptional' },
+              { _id: 'isOptional' },
             ]}
             data={propTypes}
             isVirtualized={false}
@@ -117,12 +117,12 @@ export const Library = <TProps,>({
             isHorizontal
             items={v}
             render={({
-              id,
+              _id,
               name: variantName,
               props: variantProps,
             }: LibraryVariantModel<TProps> & WithIdModel<string>) => (
               <Wrapper
-                key={id}
+                key={_id}
                 pBottom
                 s={THEME_SIZE.SMALL}>
                 <Wrapper

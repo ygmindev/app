@@ -13,7 +13,7 @@ export const ItemTable: SFCModel<ItemTablePropsModel> = ({ data, testID, ...prop
     <Table
       columns={[
         {
-          id: 'icon',
+          _id: 'icon',
           renderer: ({ value }) =>
             value && (
               <Icon
@@ -24,11 +24,11 @@ export const ItemTable: SFCModel<ItemTablePropsModel> = ({ data, testID, ...prop
           width: 20,
         },
         {
-          id: 'title',
+          _id: 'title',
           renderer: ({ value }) => value && <Text colorRole={THEME_ROLE.MUTED}>{value}</Text>,
           width: 100,
         },
-        { id: 'description' },
+        { _id: 'description' },
       ]}
       data={data}
       isHeadless
