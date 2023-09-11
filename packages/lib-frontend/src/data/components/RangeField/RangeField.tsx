@@ -29,6 +29,7 @@ import { type ScaledNumberRangeModel } from '#lib-shared/data/resources/ScaledNu
 
 export const RangeField = <TType extends NumberUnitModel>({
   defaultUnit,
+  error,
   onChange,
   unitOptions,
   value,
@@ -82,6 +83,7 @@ export const RangeField = <TType extends NumberUnitModel>({
             element: (
               <NumberField
                 defaultValue={1}
+                error={error}
                 keyboard={TEXT_FIELD_KEYBOARD.NUMBER_POSITIVE}
                 label={
                   isRange
