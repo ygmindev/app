@@ -24,7 +24,8 @@ import { type PartialModel } from '#lib-shared/core/core.models';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 export const StepForm = <TKey extends string, TType, TResult = void>({
-  _id,
+  id,
+  initialValues,
   isProgressBar = true,
   onSubmit,
   onSuccess,
@@ -42,29 +43,29 @@ export const StepForm = <TKey extends string, TType, TResult = void>({
 
   const [current, currentSet] = useState<number>(0);
   const [isLoading, isLoadingSet] = useState<boolean>(false);
-  const [data, dataSet] = useState<PartialModel<TType>>();
+  const [data, dataSet] = useState<PartialModel<TType>>(initialValues ?? {});
 
   const isLastStep = current === steps.length - 1;
   const barRef = useRef<WrapperRefModel>(null);
 
-  const handleClear = (): void => dataSet(undefined);
+  const handleClear = (): void => dataSet({});
 
   useEffect(() => {
-    const stepId = location.params && location.params[_id];
-    let step = stepId ? findIndex(steps, (step) => step._id === stepId) : undefined;
+    const stepId = location.params && location.params[id];
+    let step = stepId ? findIndex(steps, (step) => step.id === stepId) : undefined;
     step = step && step >= 0 ? step : 0;
     handleCurrentSet(step);
   }, []);
 
   const handleCurrentSet = (value: number): void => {
     currentSet(value);
-    void replace({ ...location, params: { ...location.params, [_id]: steps[value]._id } });
+    void replace({ ...location, params: { ...location.params, [id]: steps[value].id } });
     width && barRef.current?.to({ width: (width / (steps.length + 1)) * (value + 1) });
   };
 
   const handleUnmount = (): void => {
     const { params } = location;
-    params && delete params[_id];
+    params && delete params[id];
     void replace({ ...location, params });
   };
 
@@ -84,12 +85,12 @@ export const StepForm = <TKey extends string, TType, TResult = void>({
           s>
           {steps.map((step, i) => {
             const isCurrent = i === current;
-            const isStepComplete = isComplete[step._id];
+            const isStepComplete = isComplete[step.id];
             const color = isStepComplete ? THEME_COLOR.SUCCESS : theme.color.border;
             return (
               <Wrapper
                 isRowAlign
-                key={step._id}
+                key={step.id}
                 onPress={i <= current ? () => handleCurrentSet(i) : undefined}>
                 <Circle
                   backgroundColor={isCurrent ? color : THEME_COLOR_MORE.SURFACE}
@@ -130,10 +131,9 @@ export const StepForm = <TKey extends string, TType, TResult = void>({
       <Slides
         current={current}
         slides={steps.map((step) => ({
-          _id: step._id,
           element: cloneElement(step.element, {
             data,
-            key: step._id,
+            key: step.id,
             onBack: () => {
               step.element.props.onBack && step.element.props.onBack();
               handleCurrentSet(current - 1);
@@ -145,14 +145,17 @@ export const StepForm = <TKey extends string, TType, TResult = void>({
             onSubmit: async (stepData: PartialModel<TType>) => {
               isLoadingSet(true);
               data && step.element.props.onSubmit && (await step.element.props.onSubmit(data));
-              const isCompleteF = { ...isComplete, [step._id]: true };
+              const isCompleteF = { ...isComplete, [step.id]: true };
               isCompleteSet(isCompleteF);
               if (isLastStep) {
-                const incompleteStep = findIndex(steps, (stepF) => !isCompleteF[stepF._id]);
+                const incompleteStep = findIndex(steps, (stepF) => !isCompleteF[stepF.id]);
                 if (incompleteStep >= 0) {
                   handleCurrentSet(incompleteStep);
                 } else {
+                  console.warn(data);
                   const dataF = { ...data, ...stepData } as TType;
+                  console.warn(dataF);
+                  console.warn('\n\n');
                   onSubmit && (await onSubmit(dataF));
                   onSuccess && (await onSuccess(dataF));
                   await sleep(theme.animation.transition);
@@ -167,9 +170,10 @@ export const StepForm = <TKey extends string, TType, TResult = void>({
                 dataSet(dataF);
                 handleCurrentSet(current + 1);
               }
-              isCompleteSet({ ...isComplete, [step._id]: true });
+              isCompleteSet({ ...isComplete, [step.id]: true });
             },
           }),
+          id: step.id,
         }))}
       />
     </Wrapper>

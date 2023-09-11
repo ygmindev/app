@@ -39,7 +39,7 @@ export type EnvironmentConfigModel = {
   SERVER_HOST: string;
   SERVER_IV_LENGTH: string;
   SERVER_KEY_LENGTH: string;
-  SERVER_OTP_LENGTH: number;
+  SERVER_OTP_LENGTH: string;
   SERVER_OTP_STATIC?: string;
   SERVER_PLAID_CLIENT_ID: string;
   SERVER_PLAID_COUNTRY_CODES: string;

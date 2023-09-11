@@ -16,10 +16,11 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
-import { withId } from '#lib-shared/core/utils/withId/withId';
+import { CREDIT_RATING_RESOURCE_NAME } from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
 import { type CreditRatingModel } from '#lib-shared/funding/resources/CreditRating/CreditRating.models';
 
 export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
+  data,
   onComplete,
   onError,
   onSubmit,
@@ -28,19 +29,16 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
 }) => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
-  const [values, valuesSet] = useState<Array<CreditRatingModel>>([]);
+  const [values, valuesSet] = useState(data ? data[CREDIT_RATING_RESOURCE_NAME] ?? [] : []);
   const modalRef = useRef<ModalRefModel>(null);
 
   const handleAdd = async (value: CreditRatingModel): Promise<void> => {
-    valuesSet(withId([...values, value]));
+    valuesSet([...values, value]);
     modalRef.current?.toggle(false);
   };
 
   const handleSubmit = async (): Promise<void> => {
-    // onSubmit && onSubmit({
-    //   [CREDIT_RATING_RESOURCE_NAME]?: values.map((value) => ({
-    //   }))
-    //  });
+    onSubmit && void onSubmit({ [CREDIT_RATING_RESOURCE_NAME]: values });
   };
 
   useAsync(async () => {
@@ -59,9 +57,9 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
         topElement={() =>
           values.length ? (
             <Wrapper s>
-              {values.map(({ _agency, _id, longTermCategory, longTermWatch }) => (
+              {values?.map(({ _agency, longTermCategory, longTermWatch }) => (
                 <Tile
-                  key={_id}
+                  key={_agency}
                   title={_agency}>
                   <Table
                     columns={[{ _id: 'name' }, { _id: 'value' }]}

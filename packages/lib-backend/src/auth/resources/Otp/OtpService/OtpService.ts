@@ -1,3 +1,5 @@
+import toNumber from 'lodash/toNumber';
+
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
@@ -49,7 +51,8 @@ export class OtpService
       const service = Container.get(OtpService);
       await service.remove({ filter: cleanObject(input.form) });
       input.form.otp =
-        process.env.SERVER_OTP_STATIC ?? randomInt(process.env.SERVER_OTP_LENGTH).toString();
+        process.env.SERVER_OTP_STATIC ??
+        randomInt(toNumber(process.env.SERVER_OTP_LENGTH)).toString();
       return input;
     },
 

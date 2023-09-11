@@ -16,12 +16,12 @@ export class Funding extends EntityResource implements FundingModel {
   @withField({ Resource: CreditRating, isArray: true, type: PROPERTY_TYPE.RESOURCE })
   [CREDIT_RATING_RESOURCE_NAME]?: Array<CreditRatingModel>;
 
-  @withField({ Resource: ScaledNumberRange, isArray: true, type: PROPERTY_TYPE.RESOURCE })
-  amount?: Array<ScaledNumberRangeModel<AmountUnitModel>>;
+  @withField({ Resource: ScaledNumberRange, type: PROPERTY_TYPE.RESOURCE })
+  amount?: ScaledNumberRangeModel<AmountUnitModel>;
 
   @withField({ type: DATA_TYPE.STRING })
   currency?: string;
 
-  @withField({ Resource: ScaledNumberRange, isArray: true, type: PROPERTY_TYPE.RESOURCE })
-  maturity?: Array<ScaledNumberRangeModel<RelativeDateUnitModel>>;
+  @withField({ Resource: ScaledNumberRange, type: PROPERTY_TYPE.RESOURCE })
+  maturity?: ScaledNumberRangeModel<RelativeDateUnitModel>;
 }

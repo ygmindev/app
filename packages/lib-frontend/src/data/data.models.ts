@@ -59,23 +59,23 @@ export type FormErrorModel<TType> = {
     : FormErrorModel<TType[TKey]>;
 };
 
-export type FormValidatorModel<TForm = unknown, TType = string | undefined> = (params: {
+export type FormValidatorModel<TType = string | undefined, TForm = unknown> = (params: {
   data?: TForm;
-  value: TType;
+  value?: TType;
 }) => TranslatableTextModel | null;
 
 export type FormValidatorsModel<TType> = {
   [TKey in keyof TType]?: TType[TKey] extends object
     ? FormValidatorsModel<TType[TKey]>
-    : FormValidatorModel<TType, TType[TKey]>;
+    : FormValidatorModel<TType[TKey], TType>;
 };
 
 export type SubmittablePropsModel<TType, TResult = void> = ElementStatePropsModel & {
   onCancel?(): void;
   onComplete?(): void;
   onError?(error: Error): void;
-  onSubmit?(data: TType): Promise<TResult | null>;
-  onSuccess?(data: TType, result?: TResult | null): Promise<void>;
+  onSubmit?(data?: TType): Promise<TResult | null>;
+  onSuccess?(data?: TType, result?: TResult | null): Promise<void>;
 };
 
 export type FormRefModel<TType = undefined> = {

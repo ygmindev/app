@@ -2,7 +2,9 @@ import toNumber from 'lodash/toNumber';
 
 import { type FormValidatorModel } from '#lib-frontend/data/data.models';
 
-export const validateRange: (min: number, max: number) => FormValidatorModel =
-  (min, max) =>
+export const validateRange =
+  (min?: number, max?: number): FormValidatorModel<number> =>
   ({ value }) =>
-    toNumber(value) >= min && toNumber(value) <= max ? null : ({ t }) => t('core:validateRange');
+    !!min && toNumber(value) >= min && !!max && toNumber(value) <= max
+      ? null
+      : ({ t }) => t('core:validateRange');

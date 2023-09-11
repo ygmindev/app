@@ -45,7 +45,7 @@ export const RangeField = <TType extends NumberUnitModel>({
   const { valueControlled, valueControlledSet } = useValueControlled<ScaledNumberRangeModel<TType>>(
     {
       defaultValue: {
-        value: { unit: defaultUnit, value: 1 },
+        value: { unit: defaultUnit, value: 0 },
         ...(isRange ? { max: { unit: defaultUnit, value: 1000 } } : {}),
       },
       onChange,

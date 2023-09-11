@@ -105,7 +105,7 @@ const FormContainerF = forwardRef(
 
     const handleSubmitF = async (data: TType): Promise<TResult | null> => {
       const dataF = getValues(data);
-      return dataF ? (onSubmit && (await onSubmit(dataF))) ?? null : null;
+      return (onSubmit && (await onSubmit(dataF))) ?? null;
     };
 
     const { errors, handleChange, handleReset, handleSubmit, isLoading, values, valuesSet } =

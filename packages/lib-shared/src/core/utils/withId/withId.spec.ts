@@ -7,7 +7,7 @@ describe(displayName, () => {
   test('works', async () => {
     const value = [{ key: 'value' }, { _id: 'id', key: 'value' }, { key: 'value' }];
     const results = withId(value);
-    results.forEach(({ _id }, i) => {
+    results.forEach(({ id: _id }, i) => {
       expect(_id).toBeTruthy();
       if (i === 1) {
         expect(_id).toStrictEqual('id');

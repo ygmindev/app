@@ -8,8 +8,6 @@ import { type RSFCModel } from '#lib-frontend/core/core.models';
 import { type FormRefModel } from '#lib-frontend/data/data.models';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
-import { type BankFormModel } from '#lib-shared/billing/resources/Bank/Bank.models';
-import { type CardFormModel } from '#lib-shared/billing/resources/Card/Card.models';
 import { PAYMENT_METHOD_TYPE } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
@@ -38,21 +36,21 @@ export const PaymentMethodField: RSFCModel<FormRefModel, PaymentMethodFieldProps
               UserModel
             >
           > | void => {
-            switch (form.type) {
+            switch (form?.type) {
               case PAYMENT_METHOD_TYPE.BANK:
                 return defaultValue
                   ? updateBank({
                       filter: [{ field: '_id', value: defaultValue._id }],
-                      update: form as BankFormModel,
+                      update: form,
                     })
-                  : createBank({ form: form as BankFormModel });
+                  : createBank({ form });
               case PAYMENT_METHOD_TYPE.CARD:
                 return defaultValue
                   ? updateCard({
                       filter: [{ field: '_id', value: defaultValue._id }],
-                      update: form as CardFormModel,
+                      update: form,
                     })
-                  : createCard({ form: form as CardFormModel });
+                  : createCard({ form });
               default:
                 return undefined;
             }
