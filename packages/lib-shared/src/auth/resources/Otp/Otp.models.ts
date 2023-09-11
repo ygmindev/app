@@ -1,14 +1,14 @@
 import { type EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
-export type OtpModel = {
+export type OtpModel = Omit<EntityResourceModel, 'created'> & {
   callingCode?: string;
   created: Date;
   email?: string;
   otp: string;
   phone?: string;
-} & Omit<EntityResourceModel, 'created'>;
+};
 
-export type OtpFormModel = {
+export type OtpFormModel = Pick<OtpModel, 'email' | 'phone' | 'callingCode'> & {
   checkExists?: boolean;
   otp?: string;
-} & Pick<OtpModel, 'email' | 'phone' | 'callingCode'>;
+};

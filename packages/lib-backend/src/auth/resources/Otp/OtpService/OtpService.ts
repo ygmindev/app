@@ -6,13 +6,13 @@ import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
 import { mail } from '#lib-backend/notification/utils/mail/mail';
 import { sms } from '#lib-backend/notification/utils/sms/sms';
 import { createEntityResourceService } from '#lib-backend/resource/utils/createEntityResourceService/createEntityResourceService';
+import { objectToEquality } from '#lib-backend/resource/utils/objectToEquality/objectToEquality';
 import { UserService } from '#lib-backend/user/resources/User/UserService/UserService';
 import { UnauthorizedError } from '#lib-shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import { OTP_RESOURCE_NAME } from '#lib-shared/auth/resources/Otp/Otp.constants';
 import { type OtpFormModel, type OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
 import { type OtpServiceModel } from '#lib-shared/auth/resources/Otp/OtpService/OtpService.models';
 import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/DuplicateError';
-import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import { withInject } from '#lib-shared/core/utils/withInject/withInject';
 import { randomInt } from '#lib-shared/crypto/utils/randomInt/randomInt';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
@@ -49,7 +49,9 @@ export class OtpService
 
     beforeCreate: async ({ input }) => {
       const service = Container.get(OtpService);
-      await service.remove({ filter: cleanObject(input.form) });
+      await service.remove({
+        filter: objectToEquality(input.form),
+      });
       input.form.otp =
         process.env.SERVER_OTP_STATIC ??
         randomInt(toNumber(process.env.SERVER_OTP_LENGTH)).toString();
@@ -69,7 +71,7 @@ export class OtpService
   > {
     if (form.checkExists) {
       const { result } = await this._userService.get({
-        filter: form,
+        filter: objectToEquality(form),
         options: { project: { _id: true } },
       });
       if (result) {
@@ -79,15 +81,16 @@ export class OtpService
     return super.create({ form });
   }
 
-  async verify(data: Omit<EntityResourceDataModel<OtpModel>, '_user'>): Promise<OtpModel> {
+  async verify(data: EntityResourceDataModel<OtpModel>): Promise<OtpModel> {
+    const filter = objectToEquality(data);
     const { result } = await this.get({
-      filter: data,
+      filter,
       options: { project: { otp: true } },
     });
     if (!result || result.otp !== data.otp) {
       throw new UnauthorizedError();
     }
-    await super.remove({ filter: data });
+    await super.remove({ filter });
     return result;
   }
 }
