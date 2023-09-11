@@ -5,11 +5,11 @@ import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 import { CREDIT_RATING_RESOURCE_NAME } from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
 import {
-  CreditRatingCategoryModel,
+  type CreditRatingCategoryModel,
   type CreditRatingModel,
 } from '#lib-shared/funding/resources/CreditRating/CreditRating.models';
 import { type RatingAgencyModel } from '#lib-shared/funding/resources/RatingAgency/RatingAgency.models';
-import { ResolvedFieldModel } from '#lib-shared/resource/resource.models';
+import { type ResolvedFieldModel } from '#lib-shared/resource/resource.models';
 
 @withEntity({ isEmbedded: true, isRepository: true, name: CREDIT_RATING_RESOURCE_NAME })
 export class CreditRating extends EmbeddedResource implements CreditRatingModel {

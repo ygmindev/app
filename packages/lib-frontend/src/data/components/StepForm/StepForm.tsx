@@ -26,7 +26,7 @@ import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 export const StepForm = <TKey extends string, TType, TResult = void>({
   id,
   initialValues,
-  isProgressBar = true,
+  isProgressVisible = true,
   onSubmit,
   onSuccess,
   steps,
@@ -76,7 +76,7 @@ export const StepForm = <TKey extends string, TType, TResult = void>({
       {...wrapperProps}
       flex
       isFullWidth>
-      {isProgressBar && (
+      {isProgressVisible && (
         <Wrapper
           isHorizontalCenter
           isHorizontalScrollable
@@ -91,7 +91,7 @@ export const StepForm = <TKey extends string, TType, TResult = void>({
               <Wrapper
                 isRowAlign
                 key={step.id}
-                onPress={i <= current ? () => handleCurrentSet(i) : undefined}>
+                onPress={i <= current || isStepComplete ? () => handleCurrentSet(i) : undefined}>
                 <Circle
                   backgroundColor={isCurrent ? color : THEME_COLOR_MORE.SURFACE}
                   border
@@ -152,10 +152,7 @@ export const StepForm = <TKey extends string, TType, TResult = void>({
                 if (incompleteStep >= 0) {
                   handleCurrentSet(incompleteStep);
                 } else {
-                  console.warn(data);
                   const dataF = { ...data, ...stepData } as TType;
-                  console.warn(dataF);
-                  console.warn('\n\n');
                   onSubmit && (await onSubmit(dataF));
                   onSuccess && (await onSuccess(dataF));
                   await sleep(theme.animation.transition);

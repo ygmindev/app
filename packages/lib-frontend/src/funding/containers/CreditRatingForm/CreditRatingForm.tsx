@@ -29,7 +29,7 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
 }) => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
-  const [values, valuesSet] = useState(data ? data[CREDIT_RATING_RESOURCE_NAME] ?? [] : []);
+  const [values, valuesSet] = useState((data && data[CREDIT_RATING_RESOURCE_NAME]) ?? []);
   const modalRef = useRef<ModalRefModel>(null);
 
   const handleAdd = async (value: CreditRatingModel): Promise<void> => {
