@@ -10,8 +10,8 @@ export type AuthMenuOptionModel = {
 
 export const AUTH_MENU_OPTIONS: Array<AuthMenuOptionModel> = withId([
   {
-    _id: ACCOUNT,
     icon: 'personCircle',
+    id: ACCOUNT,
     isProtected: true,
     label: ({ t }) => t('user:account'),
   },
@@ -19,9 +19,9 @@ export const AUTH_MENU_OPTIONS: Array<AuthMenuOptionModel> = withId([
   { isDivider: true, isProtected: true },
 
   {
-    _id: SIGN_OUT,
     color: THEME_COLOR.ERROR,
     icon: 'signout',
+    id: SIGN_OUT,
     isProtected: true,
     label: ({ t }) => t('auth:signOut'),
   },

@@ -10,8 +10,8 @@ import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyle
 import { type PartialModel } from '#lib-shared/core/core.models';
 
 export const ItemStepForm = <TType,>({
-  _id,
   data,
+  id,
   message,
   onComplete,
   onError,
@@ -26,7 +26,7 @@ export const ItemStepForm = <TType,>({
   return (
     <FormContainer<PartialModel<TType>>
       {...wrapperProps}
-      fields={[{ _id, element: <ItemField options={options} /> }]}
+      fields={[{ element: <ItemField options={options} />, id }]}
       initialValues={data}
       isButton={false}
       isVerticalCenter

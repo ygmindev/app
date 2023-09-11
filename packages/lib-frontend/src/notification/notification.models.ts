@@ -12,8 +12,8 @@ export type NotificationModel = WithIdModel &
   };
 
 export type NotificationDataModel = {
-  _id?: string;
-} & Omit<NotificationModel, '_id'>;
+  id?: string;
+} & Omit<NotificationModel, 'id'>;
 
 export type TranslatableNotificationModel = Omit<NotificationModel, 'title' | 'message'> & {
   message?: TranslatableTextModel;

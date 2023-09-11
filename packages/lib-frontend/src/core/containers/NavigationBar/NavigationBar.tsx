@@ -61,16 +61,16 @@ export const NavigationBar = ({
               isRowAlign={!k && isHorizontalF}
               key={toString(k)}
               s={THEME_SIZE.SMALL}>
-              {v.map(({ _id, icon, label, onPress }) => (
+              {v.map(({ icon, id, label, onPress }) => (
                 <Button
-                  elementState={trimPathname(_id) === valueF ? ELEMENT_STATE.ACTIVE : undefined}
+                  elementState={trimPathname(id) === valueF ? ELEMENT_STATE.ACTIVE : undefined}
                   icon={icon}
-                  key={_id}
+                  key={id}
                   onPress={async () => {
                     onPress && (await onPress());
-                    onChange && onChange(_id);
+                    onChange && onChange(id);
                   }}
-                  testID={_id}
+                  testID={id}
                   type={BUTTON_TYPE.INVISIBLE}>
                   {label}
                 </Button>

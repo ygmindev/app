@@ -34,11 +34,10 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
     <FormContainer
       fields={[
         {
-          _id: PAYMENT_METHOD,
           element: (
             <Wrapper width={theme.layout.width[THEME_SIZE.MEDIUM]}>
               <DataBoundary
-                _id={`${CREATE_TOKEN}${PAYMENT_METHOD}`}
+                id={`${CREATE_TOKEN}${PAYMENT_METHOD}`}
                 mutate={async () =>
                   currentUser && createToken({ form: undefined, root: { _id: currentUser._id } })
                 }>
@@ -56,6 +55,7 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
               </DataBoundary>
             </Wrapper>
           ),
+          id: PAYMENT_METHOD,
         },
       ]}
       onCancel={onCancel}

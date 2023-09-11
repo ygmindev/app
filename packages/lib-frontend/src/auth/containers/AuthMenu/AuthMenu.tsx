@@ -38,7 +38,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
     (result, option) =>
       option.isProtected && authState !== AUTH_STATE.AUTHENTICATED
         ? result
-        : [...result, merge<AuthMenuOptionModel>([optionsOverrides[option._id] ?? {}, option])],
+        : [...result, merge<AuthMenuOptionModel>([optionsOverrides[option.id] ?? {}, option])],
     [] as Array<AuthMenuOptionModel>,
   );
 

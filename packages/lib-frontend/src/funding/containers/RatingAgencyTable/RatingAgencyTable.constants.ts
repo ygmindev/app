@@ -6,6 +6,6 @@ import {
 } from '#lib-shared/funding/resources/RatingAgency/RatingAgency.models';
 
 export const RATING_AGENCY_TABLE_PROPS = {
-  columns: [{ _id: 'name' }, ...Object.values(CREDIT_RATING_CATEGORY).map((id) => ({ _id: id }))],
+  columns: [{ id: 'name' }, ...Object.values(CREDIT_RATING_CATEGORY).map((id) => ({ id }))],
   title: ({ t }) => t('funding:ratingAgency'),
 } satisfies Omit<ResourceTablePropsModel<RatingAgencyModel, RatingAgencyFormModel>, 'service'>;

@@ -31,7 +31,7 @@ export const _VirtualizedList = forwardRef(
         contentContainerStyle={{ flex: 1 }}
         data={items}
         horizontal={isHorizontal}
-        keyExtractor={({ _id }) => _id}
+        keyExtractor={({ id }) => id}
         ref={ref}
         renderItem={renderItem}
         scrollEnabled

@@ -28,17 +28,17 @@ export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...prop
     <FormContainer
       fields={[
         {
-          _id: 'first',
           element: (
             <TextField
               isAutoFocus
               label={t('user:first')}
             />
           ),
+          id: 'first',
         },
         {
-          _id: 'last',
           element: <TextField label={t('user:last')} />,
+          id: 'last',
         },
       ]}
       initialValues={{ first: currentUser.first, last: currentUser.last }}

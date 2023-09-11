@@ -18,9 +18,9 @@ export const _useTable = <TType,>({
   const { t } = useTranslation();
   const table = useReactTable<TType>({
     columns:
-      columns?.map(({ _id, label, width }) => ({
-        accessorKey: _id,
-        header: label ? t(label) : _id,
+      columns?.map(({ id, label, width }) => ({
+        accessorKey: id,
+        header: label ? t(label) : id,
         minSize: 0,
         size: width ?? 0,
       })) ?? [],
@@ -34,7 +34,7 @@ export const _useTable = <TType,>({
         ...group.headers.map((header, i) => {
           const column = columns && columns[i];
           return {
-            _id: header.id as StringKeyModel<TType>,
+            id: header.id as StringKeyModel<TType>,
             label: header.column.columnDef.header as string,
             width: header.getSize() ?? undefined,
             ...(column ? { align: column.align } : {}),
@@ -45,12 +45,11 @@ export const _useTable = <TType,>({
     ),
     rows:
       table.getRowModel().rows.map((row) => ({
-        _id: row.id,
         cells: row.getVisibleCells().map((cell, i) => {
           const column = columns && columns[i];
           const value = cell.getValue();
           return {
-            _id: cell.id as StringKeyModel<TType>,
+            id: cell.id as StringKeyModel<TType>,
             value: isNil(value)
               ? nilString
               : column && column.formatter
@@ -63,6 +62,7 @@ export const _useTable = <TType,>({
             ...(column ? { align: column.align, renderer: column.renderer } : {}),
           };
         }),
+        id: row.id,
         value: row.original,
       })) ?? [],
   };

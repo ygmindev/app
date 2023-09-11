@@ -51,18 +51,18 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
   const handleRemove = async (): Promise<void> => {
     switch (value?.type) {
       case PAYMENT_METHOD_TYPE.BANK: {
-        await bankRemove({ filter: [{ field: '_id', value: value._id }] });
+        await bankRemove({ filter: [{ field: 'id', value: value._id }] });
         break;
       }
       case PAYMENT_METHOD_TYPE.CARD: {
-        await cardRemove({ filter: [{ field: '_id', value: value._id }] });
+        await cardRemove({ filter: [{ field: 'id', value: value._id }] });
         break;
       }
     }
   };
 
   const title = t(getPaymentMethodTitle(value));
-  const isPrimary = currentUser?.paymentMethodPrimary === value?._id;
+  const isPrimary = currentUser?.paymentMethodPrimary === value?.id;
 
   const getIcon = useCallback((): ReactElement | null => {
     switch (value?.type) {
@@ -112,8 +112,8 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
             )}
             options={filterNil([
               {
-                _id: 'edit',
                 icon: 'edit',
+                id: 'edit',
                 label: t('core:edit'),
                 onPress: value
                   ? () =>
@@ -124,22 +124,22 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
                   : undefined,
               },
               !isPrimary && {
-                _id: 'setAsPrimary',
                 icon: 'checkCircle',
+                id: 'setAsPrimary',
                 label: t('core:setAsPrimary'),
                 onPress: async () =>
                   currentUser &&
                   update({
                     filter: [{ field: '_id', value: currentUser._id }],
-                    update: { paymentMethodPrimary: value?._id },
+                    update: { paymentMethodPrimary: value?.id },
                   }),
               },
-              { _id: 'div', isDivider: true },
+              { id: 'div', isDivider: true },
               {
-                _id: 'delete',
                 color: THEME_COLOR.ERROR,
                 confirmMessage: t('core:confirmRemove', { value: title }),
                 icon: 'trash',
+                id: 'delete',
                 label: t('core:remove'),
                 onPress: handleRemove,
               },

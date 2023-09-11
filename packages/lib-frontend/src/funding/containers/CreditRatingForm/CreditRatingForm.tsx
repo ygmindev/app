@@ -62,7 +62,7 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
                   key={_agency}
                   title={_agency}>
                   <Table
-                    columns={[{ _id: 'name' }, { _id: 'value' }]}
+                    columns={[{ id: 'name' }, { id: 'value' }]}
                     data={[
                       { name: 'longTermCategory', value: longTermCategory },
                       { name: 'longTermWatch', value: longTermWatch },

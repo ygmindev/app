@@ -15,5 +15,5 @@ export type SignInFormModel = EntityResourceDataModel<OtpModel>;
 
 export type SignInTokenModel = {
   _id: string;
-  claims: EntityResourcePartialModel<UserModel>;
+  claims: EntityResourceDataModel<UserModel>;
 };

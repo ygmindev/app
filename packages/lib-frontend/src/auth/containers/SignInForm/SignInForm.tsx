@@ -30,22 +30,22 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
   return (
     <StepForm
       {...props}
-      _id={SIGN_IN}
+      id={SIGN_IN}
       isProgressBar={false}
       onSubmit={handleSubmit}
       onSuccess={async () => replace({ pathname: redirectTo ?? '/' })}
       steps={[
         {
-          _id: 'username',
           element: (
             <UsernameForm
               method={method}
               mode={mode}
             />
           ),
+          id: 'username',
           title: t('auth:username'),
         },
-        { _id: 'otp', element: <OtpForm />, title: t('auth:otp') },
+        { element: <OtpForm />, id: 'otp', title: t('auth:otp') },
       ]}
       topElement={
         mode === FORM_MODE.UPDATE ? undefined : (

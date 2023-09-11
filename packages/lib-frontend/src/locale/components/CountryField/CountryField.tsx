@@ -30,8 +30,8 @@ export const CountryField: LFCModel<CountryFieldPropsModel> = ({
   const options = useMemo(
     () =>
       countries.map(({ callingCode, code, name }) => ({
-        _id: callingCode,
         code,
+        id: callingCode,
         label: `${name} +${callingCode}`,
       })),
     [countries],
@@ -41,7 +41,7 @@ export const CountryField: LFCModel<CountryFieldPropsModel> = ({
     async (isMounted) => {
       const country = isMounted() && (await currentCountry());
       const value = country && find(options, ({ code }) => code.includes(country));
-      isMounted() && value && valueControlledSet(value._id);
+      isMounted() && value && valueControlledSet(value.id);
     },
     [options],
   );

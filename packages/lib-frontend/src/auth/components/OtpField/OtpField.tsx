@@ -76,7 +76,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
           />
         </Wrapper>
 
-        {IDS.map(({ _id }, i) => (
+        {IDS.map(({ id }, i) => (
           <TextField
             elementState={
               isFocused &&
@@ -89,7 +89,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             error={error !== undefined}
             isCenter
             isNoClear
-            key={_id}
+            key={id}
             value={(valueControlled && valueControlled[i]) ?? ''}
             width={theme.shape.size[THEME_SIZE.MEDIUM]}
           />

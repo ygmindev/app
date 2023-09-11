@@ -12,25 +12,25 @@ export const FundingForm: LFCModel<FundingFormPropsModel> = ({ ...props }) => {
   return (
     <StepForm
       {...props}
-      _id={FUNDING}
+      id={FUNDING}
       onSubmit={async (value) => {
         console.warn(value);
         return;
       }}
       steps={[
         {
-          _id: 'amount',
           element: <AmountForm />,
+          id: 'amount',
           title: t('funding:amount'),
         },
         {
-          _id: 'maturity',
           element: <MaturityForm />,
+          id: 'maturity',
           title: t('funding:maturity'),
         },
         {
-          _id: 'creditRating',
           element: <CreditRatingForm />,
+          id: 'creditRating',
           title: t('funding:creditRating'),
         },
       ]}

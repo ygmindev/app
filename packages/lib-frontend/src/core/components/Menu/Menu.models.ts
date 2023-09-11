@@ -19,7 +19,7 @@ export type MenuPropsModel<TType extends string = string> = Pick<
   DropdownPropsModel,
   'width' | 'maxWidth' | 'maxHeight' | 'isFullWidth' | 'direction'
 > &
-  Omit<FieldPropsModel, '_id'> & {
+  Omit<FieldPropsModel, 'id'> & {
     anchor(isOpen?: boolean): ReactElement<PressablePropsModel>;
     options: Array<MenuOptionModel<TType>>;
     renderOption?(option: MenuOptionModel<TType>): TranslatableTextModel;

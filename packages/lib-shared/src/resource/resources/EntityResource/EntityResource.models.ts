@@ -6,17 +6,6 @@ export type EntityResourceModel = {
   created: Date;
 };
 
-// export type EntityResourcePartialModel<TType> = (TType extends EntityResourceModel
-//   ? { _id: string }
-//   : object) &
-//   PartialModel<TType>;
-
-// export type EntityResourceDataModel<TType> = {
-//   [TKey in keyof Omit<TType, keyof EntityResourceModel>]: TType[TKey] extends PrimitiveModel
-//     ? TType[TKey]
-//     : EntityResourceDataModel<TType[TKey]>;
-// };
-
 export type EntityResourcePartialModel<TType> = PartialModel<TType> &
   (TType extends EntityResourceModel ? { _id: string } : undefined);
 

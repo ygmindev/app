@@ -17,8 +17,8 @@ export const CreditRatingCategoryForm: LFCModel<CreditRatingCategoryFormPropsMod
   const { t } = useTranslation();
   return (
     <ItemStepForm
-      _id="longTermCategory"
       data={data}
+      id="longTermCategory"
       message={t('funding:longTermCategoryFormMessage')}
       onComplete={onComplete}
       onError={onError}
@@ -26,9 +26,9 @@ export const CreditRatingCategoryForm: LFCModel<CreditRatingCategoryFormPropsMod
       onSuccess={onSuccess}
       options={Object.values(CREDIT_RATING_CATEGORY)
         .sort((x, y) => CREDIT_RATING_CATEGORY_RANK[x] - CREDIT_RATING_CATEGORY_RANK[y])
-        .map((_id) => ({
-          _id,
-          label: _id.replace('m', '-').replace('p', '+'),
+        .map((id) => ({
+          id,
+          label: id.replace('m', '-').replace('p', '+'),
         }))}
     />
   );

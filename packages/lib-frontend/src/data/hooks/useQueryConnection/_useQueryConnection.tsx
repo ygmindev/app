@@ -11,12 +11,12 @@ import { type ConnectionModel } from '#lib-shared/resource/utils/Connection/Conn
 import { type PaginationModel } from '#lib-shared/resource/utils/Pagination/Pagination.models';
 
 export const _useQueryConnection = <TType,>(
-  ...[_id, callback, options]: _UseQueryConnectionParamsModel<TType>
+  ...[id, callback, options]: _UseQueryConnectionParamsModel<TType>
 ): _UseQueryConnectionModel<TType> => {
   const limit = options?.limit || USE_QUERY_CONNECTION_LIMIT_DEFAULT;
   const cache = isNumber(options?.cache) ? options?.cache : 0;
   const { data, fetchNextPage } = useInfiniteQuery<ConnectionModel<TType> | null, Error>(
-    [_id],
+    [id],
     async ({ pageParam }) => callback(pageParam as PaginationModel),
     {
       cacheTime: cache,
@@ -35,8 +35,8 @@ export const _useQueryConnection = <TType,>(
   const fetchNextPageF = debounce(fetchNextPage);
 
   return {
-    _id,
     data,
+    id,
     queryNext: async () => {
       await fetchNextPageF();
     },

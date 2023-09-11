@@ -50,7 +50,7 @@ export const SelectField = <TType extends string = string>({
   const menuRef = useRef<MenuRefModel>(null);
 
   const { query, result, search } = useSearch({
-    keys: ['label', '_id'],
+    keys: ['label', 'id'],
     list: options.map(({ label, ...option }) => ({ ...option, label: t(label) })),
     onChange: () => menuRef.current?.scrollTo({ x: 0, y: 0 }),
   });
@@ -64,7 +64,7 @@ export const SelectField = <TType extends string = string>({
 
   const handleSelect = (): void => {
     const selected = result && result[0];
-    const selectedValue = selected._id;
+    const selectedValue = selected.id;
     if (selectedValue) {
       valueControlledSet(selectedValue);
       onSubmit && onSubmit();
@@ -72,7 +72,7 @@ export const SelectField = <TType extends string = string>({
     handleToggle(false);
   };
 
-  const selectedOption = options.find(({ _id }) => _id === valueControlled);
+  const selectedOption = options.find(({ id }) => id === valueControlled);
   const selectedLabel = selectedOption
     ? renderValue
       ? renderValue(selectedOption)

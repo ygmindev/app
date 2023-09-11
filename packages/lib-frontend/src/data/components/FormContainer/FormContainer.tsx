@@ -92,9 +92,9 @@ const FormContainerF = forwardRef(
           return {
             ...result,
             ...fieldsF.reduce(
-              (resultRow, { _id }) => ({
+              (resultRow, { id }) => ({
                 ...resultRow,
-                [_id]: (data as Record<string, unknown>)[_id],
+                [id]: (data as Record<string, unknown>)[id],
               }),
               {},
             ),
@@ -125,19 +125,19 @@ const FormContainerF = forwardRef(
       elementStateF === ELEMENT_STATE.DISABLED || elementStateF === ELEMENT_STATE.LOADING;
 
     const getField = <TKey extends StringKeyModel<TType>>({
-      _id,
       element,
+      id,
     }: FormFieldModel<TType, TKey>): FormFieldModel<TType, TKey> => {
       const fieldProps = {
-        defaultValue: initialValues ? (initialValues as Record<string, unknown>)[_id] : undefined,
+        defaultValue: initialValues ? (initialValues as Record<string, unknown>)[id] : undefined,
         elementState: elementStateF ?? element.props.elementState,
-        error: (errors as Record<string, unknown>)[_id],
-        key: _id,
-        onChange: handleChange(_id),
+        error: (errors as Record<string, unknown>)[id],
+        key: id,
+        onChange: handleChange(id),
         onSubmit: handleSubmit,
-        value: (values as Record<string, unknown>)[_id],
+        value: (values as Record<string, unknown>)[id],
       } as FieldPropsModel<TType[TKey]>;
-      return { _id, element: cloneElement(element, fieldProps) };
+      return { element: cloneElement(element, fieldProps), id };
     };
 
     const rows = map(fields, (field) => {
@@ -145,20 +145,20 @@ const FormContainerF = forwardRef(
       if (fieldRow.fields) {
         const fieldsF = map(fieldRow.fields, getField);
         return {
-          _id: fieldRow._id,
           element: fieldRow.isGrouped ? (
             <FieldGroup
               fields={fieldsF}
-              key={field._id}
+              key={field.id}
             />
           ) : (
             <Wrapper
               isDistribute
               isRowAlign
-              key={field._id}>
-              {fieldsF.map(({ _id, element }) => cloneElement(element, { key: _id }))}
+              key={field.id}>
+              {fieldsF.map(({ element, id }) => cloneElement(element, { key: id }))}
             </Wrapper>
           ),
+          id: fieldRow.id,
         };
       }
       return getField(field as FormFieldModel<TType>);
@@ -174,7 +174,7 @@ const FormContainerF = forwardRef(
           {isGrouped ? (
             <FieldGroup fields={rows} />
           ) : (
-            rows.map(({ _id, element }) => cloneElement(element, { key: _id }))
+            rows.map(({ element, id }) => cloneElement(element, { key: id }))
           )}
 
           {isButton && (

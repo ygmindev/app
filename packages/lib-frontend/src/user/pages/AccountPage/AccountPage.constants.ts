@@ -8,25 +8,25 @@ import { ACCOUNT } from '#lib-shared/user/user.constants';
 
 export const ACCOUNT_GROUPS = withId([
   {
-    _id: ACCOUNT,
+    id: ACCOUNT,
     label: ({ t }) => t('user:account'),
     root: ACCOUNT,
     routes: [
       {
-        _id: PERSONAL,
         icon: 'person',
+        id: PERSONAL,
         label: ({ t }) => t('user:personal'),
       },
 
       {
-        _id: PAYMENT,
         icon: 'dollar',
+        id: PAYMENT,
         label: ({ t }) => t('billing:payment'),
       },
 
       {
-        _id: SETTINGS,
         icon: 'settings',
+        id: SETTINGS,
         label: ({ t }) => t('settings:settings'),
       },
     ],

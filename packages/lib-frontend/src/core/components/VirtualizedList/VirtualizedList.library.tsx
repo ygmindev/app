@@ -9,7 +9,7 @@ export const props: LibraryPropsModel<VirtualizedListPropsModel<MenuOptionModel>
   Component: VirtualizedList,
   defaultProps: {
     items: MENU_FIXTURE_OPTIONS,
-    render: ({ _id }) => <WrapperFixture>{_id}</WrapperFixture>,
+    render: ({ id }) => <WrapperFixture>{id}</WrapperFixture>,
   },
   variants: [],
 };

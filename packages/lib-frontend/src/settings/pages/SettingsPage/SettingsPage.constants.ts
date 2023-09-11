@@ -7,23 +7,23 @@ import { BRIGHTNESS } from '#lib-shared/style/style.constants';
 
 export const SETTINGS_GROUPS = withId([
   {
-    _id: APPEARANCE,
+    id: APPEARANCE,
     label: ({ t }) => t('settings:appearance'),
     routes: [
       {
-        _id: BRIGHTNESS,
         icon: 'brightness',
+        id: BRIGHTNESS,
         label: ({ t }) => t('settings:brightness'),
       },
     ],
   },
   {
-    _id: LOCATION,
+    id: LOCATION,
     label: ({ t }) => t('locale:location'),
     routes: [
       {
-        _id: TIMEZONE,
         icon: 'time',
+        id: TIMEZONE,
         label: ({ t }) => t('locale:timezone'),
       },
     ],

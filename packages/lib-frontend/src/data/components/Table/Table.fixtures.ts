@@ -12,17 +12,17 @@ export type TableFixtureRowModel = {
 
 export const TABLE_FIXTURE_COLUMNS: Array<TableColumnModel<TableFixtureRowModel>> = [
   {
-    _id: 'stringColumn',
+    id: 'stringColumn',
     label: 'String Column',
   },
   {
-    _id: 'numberColumn',
+    id: 'numberColumn',
     label: 'Number Column',
   },
   {
-    _id: 'dateColumn',
     formatter: ({ value }) =>
       dateTimeFormat({ format: DATE_TIME_FORMAT_TYPE.DATE, value: value as Date }),
+    id: 'dateColumn',
     label: 'Date Column',
   },
 ];

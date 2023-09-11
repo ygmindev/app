@@ -25,7 +25,7 @@ export const Notifications: SFCModel<NotificationsPropsModel> = () => {
         <Exitable>
           {notifications.map((notification) => (
             <Notification
-              key={notification._id}
+              key={notification.id}
               {...notification}
             />
           ))}

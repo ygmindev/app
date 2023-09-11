@@ -23,20 +23,20 @@ export const FieldGroup: LFCModel<FieldGroupPropsModel> = ({ fields, isVertical,
       error={isError}
       isRow={!isVertical}
       onElementStateChange={elementStateSet}>
-      {fields.map(({ _id, element }, i) => (
-        <Fragment key={_id}>
+      {fields.map(({ element, id }, i) => (
+        <Fragment key={id}>
           {i && (
             <Divider
               animation={{ states: ANIMATION_STATES_FOCUSABLE({ isError, theme }) }}
               elementState={elementState}
               isVertical={!isVertical}
-              key={`${_id}-divider`}
+              key={`${id}-divider`}
             />
           )}
 
           <Wrapper
             flex
-            key={`${_id}-field`}>
+            key={`${id}-field`}>
             {cloneElement(element, {
               isTransparent: true,
               onBlur: () => {

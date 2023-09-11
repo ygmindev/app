@@ -48,7 +48,6 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
       style={styles}
       testID={testID}>
       <DataBoundary
-        _id="paymentMethods"
         fallback={
           <SkeletonGroup>
             <LineGroup title={t('billing:paymentMethod_plural')}>
@@ -61,6 +60,7 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
             </LineGroup>
           </SkeletonGroup>
         }
+        id="paymentMethods"
         query={query}>
         {({ data }) => (
           <LineGroup title={t('billing:paymentMethod_plural')}>

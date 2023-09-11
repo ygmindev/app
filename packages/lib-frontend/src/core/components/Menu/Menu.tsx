@@ -66,7 +66,7 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
       () =>
         options.reduce(
           (result, option) =>
-            option.subOptions ? { ...result, [option._id]: createRef<MenuRefModel>() } : result,
+            option.subOptions ? { ...result, [option.id]: createRef<MenuRefModel>() } : result,
           {} as Record<string, RefObject<MenuRefModel>>,
         ),
       [options],
@@ -78,14 +78,14 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
     };
 
     const handlePressOption = async ({
-      _id,
+      id,
       onPress,
       subOptions,
     }: MenuOptionModel): Promise<void> => {
       if (subOptions) {
-        subMenuRefs[_id].current?.toggle(true);
+        subMenuRefs[id].current?.toggle(true);
       } else {
-        (onPress && (await onPress())) || (onChange && onChange(_id));
+        (onPress && (await onPress())) || (onChange && onChange(id));
       }
       handleToggle(false);
     };
@@ -112,9 +112,9 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
             ref={virtualizedListRef}
             render={(option: MenuOptionModel) => {
               if (option.isDivider) {
-                return <Divider key={option._id} />;
+                return <Divider key={option.id} />;
               }
-              const { _id, color, confirmMessage, elementState, icon, label, subOptions } = option;
+              const { color, confirmMessage, elementState, icon, id, label, subOptions } = option;
               const optionF = (value?: boolean): ReactElement => (
                 <Button
                   align={FLEX_ALIGN.FLEX_START}
@@ -123,7 +123,7 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
                   elementState={value ? ELEMENT_STATE.ACTIVE : elementState}
                   icon={icon}
                   isFullWidth
-                  key={_id}
+                  key={id}
                   onPress={subOptions ? undefined : async () => handlePressOption(option)}
                   onPressOut={() => confirmMessage && handleToggle(false)}
                   type={BUTTON_TYPE.INVISIBLE}>
@@ -134,9 +134,9 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
                 <Menu
                   anchor={optionF}
                   direction={DIRECTION.LEFT}
-                  key={_id}
+                  key={id}
                   options={subOptions}
-                  ref={subMenuRefs[_id]}
+                  ref={subMenuRefs[id]}
                 />
               ) : (
                 optionF()
