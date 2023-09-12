@@ -5,11 +5,10 @@ import { type CreditRatingModel } from '#lib-shared/funding/resources/CreditRati
 import {
   type EntityResourceDataModel,
   type EntityResourceModel,
-  type EntityResourcePartialModel,
 } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export type FundingModel = EntityResourceModel & {
-  [CREDIT_RATING_RESOURCE_NAME]?: Array<EntityResourcePartialModel<CreditRatingModel>>;
+  [CREDIT_RATING_RESOURCE_NAME]?: Array<CreditRatingModel>;
 
   amount?: ScaledNumberRangeModel<AmountUnitModel>;
 

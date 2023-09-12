@@ -20,47 +20,59 @@ export type ProjectModel<TType> = {
   [TKey in keyof TType]?: ProjectPropertyModel<TType[TKey]>;
 };
 
-type ProjectOptionsModel<TType> = {
-  project?: ProjectModel<TType>;
+type CommonOptionsModel = object;
+
+type CreateOptionsModel = CommonOptionsModel & {
+  isCommit?: boolean;
 };
 
 type CreateArgsModel<TType> = {
   form: TType;
+  options?: CreateOptionsModel;
 };
 
-type GetArgsOptionsModel<TType> = ProjectOptionsModel<TType> & {
+type ProjectOptionsModel<TType> = CommonOptionsModel & {
+  project?: ProjectModel<TType>;
+};
+
+type GetOptionsModel<TType> = ProjectOptionsModel<TType> & {
   aggregate?: Array<object>;
 };
 
 type GetArgsModel<TType> = {
   filter: Array<FilterModel<TType>>;
-  options?: GetArgsOptionsModel<TType>;
+  options?: GetOptionsModel<TType>;
 };
 
-type GetManyArgsOptionsModel<TType> = GetArgsOptionsModel<TType> & {
+type GetManyOptionsModel<TType> = GetOptionsModel<TType> & {
   skip?: number;
   take?: number;
 };
 
 type GetManyArgsModel<TType> = {
   filter: Array<FilterModel<TType>>;
-  options?: GetManyArgsOptionsModel<TType>;
+  options?: GetManyOptionsModel<TType>;
 };
+
+type GetConnectionOptionsModel = CommonOptionsModel;
 
 type GetConnectionArgsModel<TType> = {
   filter: Array<FilterModel<TType>>;
+  options?: GetConnectionOptionsModel;
   pagination: PaginationModel;
 };
+type RemoveOptionsModel = CommonOptionsModel;
 
 type RemoveArgsModel<TType> = {
   filter: Array<FilterModel<TType>>;
+  options?: RemoveOptionsModel;
 };
 
-type UpdateArgsOptionsModel<TType> = ProjectOptionsModel<TType>;
+type UpdateOptionsModel<TType> = ProjectOptionsModel<TType>;
 
 type UpdateArgsModel<TType> = {
   filter: Array<FilterModel<TType>>;
-  options?: UpdateArgsOptionsModel<TType>;
+  options?: UpdateOptionsModel<TType>;
   update: UpdateModel<TType>;
 };
 

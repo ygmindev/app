@@ -19,9 +19,9 @@ import { THEME_COLOR, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { withId } from '#lib-shared/core/utils/withId/withId';
 
-const otpLenvgh = toNumber(process.env.SERVER_OTP_LENGTH);
+const otpLength = toNumber(process.env.SERVER_OTP_LENGTH);
 
-const IDS = withId(range(otpLenvgh));
+const IDS = withId(range(otpLength));
 
 export const OtpField: SFCModel<OtpFieldPropsModel> = ({
   defaultValue,
@@ -63,11 +63,11 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             isAutoFocus={isAutoFocus}
             isNoClear
             keyboard={TEXT_FIELD_KEYBOARD.NUMBER}
-            maxLength={otpLenvgh}
+            maxLength={otpLength}
             onBlur={() => isFocusedSet(false)}
             onChange={(value) => {
               valueControlledSet(value);
-              if (value?.length === otpLenvgh) {
+              if (value?.length === otpLength) {
                 onSubmit && onSubmit();
               }
             }}
@@ -81,7 +81,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             elementState={
               isFocused &&
               valueControlled &&
-              i === Math.min(valueControlled.length, otpLenvgh - 1) &&
+              i === Math.min(valueControlled.length, otpLength - 1) &&
               elementState !== ELEMENT_STATE.DISABLED
                 ? ELEMENT_STATE.ACTIVE
                 : elementState

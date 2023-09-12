@@ -62,12 +62,10 @@ export const useForm = <TType, TResult = void>({
 
   const handleSubmit = async (values: TType): Promise<TResult | null> => {
     try {
-      void sleep();
-
+      void (await sleep());
       isValidateChanged &&
         isEqual(values, initialValues) &&
         handleError(Error(t('core:validateChanged')));
-
       isBlocking && actions?.app.isLoadingSet(true);
       const data = onSubmit && (await onSubmit(values));
       onSuccess && (await onSuccess(values, data));

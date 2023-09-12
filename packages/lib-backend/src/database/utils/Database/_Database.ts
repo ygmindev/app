@@ -85,12 +85,12 @@ export class _Database implements _DatabaseModel {
 
       count: async () => this._getEntityManager().getRepository<TType & object>(name).count(),
 
-      create: async ({ form }) => {
+      create: async ({ form, options }) => {
         const em = this._getEntityManager();
         try {
           const formF = cleanDocument(form) as TType & object;
           const result = em.create<TType & object>(name, formF);
-          await em.persistAndFlush(result);
+          !options?.isCommitted && (await em.persistAndFlush(result));
           return { result };
         } catch (e) {
           switch ((e as MongoError).code as unknown as number) {

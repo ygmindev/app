@@ -15,7 +15,7 @@ import {
 import { type SignInServiceModel } from '#lib-shared/auth/resources/SignIn/SignInService/SignInService.models';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
-import { pick, pick } from '#lib-shared/core/utils/pick/pick';
+import { pick } from '#lib-shared/core/utils/pick/pick';
 import { withInject } from '#lib-shared/core/utils/withInject/withInject';
 import { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
