@@ -23,7 +23,7 @@ export type ProjectModel<TType> = {
 type CommonOptionsModel = object;
 
 type CreateOptionsModel = CommonOptionsModel & {
-  isCommit?: boolean;
+  isCommitted?: boolean;
 };
 
 type CreateArgsModel<TType> = {

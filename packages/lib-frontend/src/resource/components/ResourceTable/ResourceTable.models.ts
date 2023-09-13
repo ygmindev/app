@@ -4,7 +4,7 @@ import { type TablePropsModel } from '#lib-frontend/data/components/Table/Table.
 import { type FieldPropsModel } from '#lib-frontend/data/data.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { type ResourceFilterFormPropsModel } from '#lib-frontend/resource/components/ResourceFilterForm/ResourceFilterForm.models';
-import { type ResourceServiceModel } from '#lib-shared/resource/services/ResourceService/ResourceService.models';
+import { type ResourceServiceModel } from '#lib-shared/resource/utils/ResourceService/ResourceService.models';
 
 export type ResourceTablePropsModel<TType, TForm = undefined, TRoot = undefined> = Pick<
   ResourceFilterFormPropsModel<TType, TForm, TRoot>,

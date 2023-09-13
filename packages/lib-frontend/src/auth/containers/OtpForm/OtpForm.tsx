@@ -12,16 +12,16 @@ import {
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { type FormRefModel } from '#lib-frontend/data/data.models';
 import { Trans } from '#lib-frontend/locale/components/Trans/Trans';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { type HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
 
-export const OtpForm: SFCModel<OtpFormPropsModel> = ({
+export const OtpForm: LFCModel<OtpFormPropsModel> = ({
   data,
   onBack,
   onComplete,
@@ -30,12 +30,13 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
   onSuccess,
   ...props
 }) => {
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation();
   const ref = useRef<FormRefModel<OtpFormModel>>(null);
 
   return (
     <FormContainer
+      {...wrapperProps}
       bottomElement={({ elementState }) => (
         <Wrapper
           isCenter
@@ -69,7 +70,6 @@ export const OtpForm: SFCModel<OtpFormPropsModel> = ({
       onSubmit={onSubmit}
       onSuccess={onSuccess}
       ref={ref}
-      style={styles}
       testID={OTP_FORM_TEST_ID}
       topElement={() =>
         // TODO: handle phone

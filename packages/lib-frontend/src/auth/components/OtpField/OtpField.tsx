@@ -8,33 +8,33 @@ import { Button } from '#lib-frontend/core/components/Button/Button';
 import { Tooltip } from '#lib-frontend/core/components/Tooltip/Tooltip';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type MeasureModel, type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel, type MeasureModel } from '#lib-frontend/core/core.models';
 import { TextField } from '#lib-frontend/data/components/TextField/TextField';
 import { TEXT_FIELD_KEYBOARD } from '#lib-frontend/data/components/TextField/TextField.constants';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { isTranslatableText } from '#lib-frontend/locale/utils/isTranslatableText/isTranslatableText';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 import { withId } from '#lib-shared/core/utils/withId/withId';
 
 const otpLength = toNumber(process.env.SERVER_OTP_LENGTH);
 
 const IDS = withId(range(otpLength));
 
-export const OtpField: SFCModel<OtpFieldPropsModel> = ({
+export const OtpField: LFCModel<OtpFieldPropsModel> = ({
   defaultValue,
   elementState,
   error,
   isAutoFocus,
   onChange,
   onSubmit,
-  testID,
   value,
   ...props
 }) => {
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
   const { valueControlled, valueControlledSet } = useValueControlled({
     defaultValue,
@@ -45,10 +45,9 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
   const [isFocused, isFocusedSet] = useState<boolean>(false);
   return (
     <Wrapper
+      {...wrapperProps}
       isCenter
-      isFullWidth
-      style={styles}
-      testID={testID}>
+      isFullWidth>
       <Wrapper
         isRowAlign
         onMeasure={measureSet}
@@ -68,7 +67,7 @@ export const OtpField: SFCModel<OtpFieldPropsModel> = ({
             onChange={(value) => {
               valueControlledSet(value);
               if (value?.length === otpLength) {
-                onSubmit && onSubmit();
+                void sleep().then(onSubmit);
               }
             }}
             onFocus={() => isFocusedSet(true)}

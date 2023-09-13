@@ -42,17 +42,25 @@ import { variableName } from '#lib-shared/core/utils/variableName/variableName';
 export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forwardRef(
   (
     {
+      autoComplete,
       defaultValue,
       icon,
       isAutoFocus,
+      isDisabled,
       isNoClear,
       isTransparent,
+      keyboard,
       label,
+      language,
       leftElement,
+      maxLength,
+      numberOfLines,
       onBlur,
       onChange,
       onEscape,
       onFocus,
+      onRemove,
+      onSubmit,
       rightElement,
       value,
       ...props
@@ -118,7 +126,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
     );
 
     const handleChange = (v: string): void => {
-      switch (props.keyboard) {
+      switch (keyboard) {
         case TEXT_FIELD_KEYBOARD.NUMBER:
         case TEXT_FIELD_KEYBOARD.TEL: {
           if (/^\d*$/.test(v)) {
@@ -187,9 +195,14 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
           {leftElementF}
 
           <_TextField
-            {...props}
+            autoComplete={autoComplete}
             foregroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST]}
             height={theme.shape.size[THEME_SIZE.SMALL]}
+            isDisabled={isDisabled}
+            keyboard={keyboard}
+            language={language}
+            maxLength={maxLength}
+            numberOfLines={numberOfLines}
             onBlur={() => {
               onBlur && onBlur();
               void sleep(100).then(() => focusableRef?.current?.blur());
@@ -205,6 +218,8 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
               onFocus && onFocus();
               focusableRef?.current?.focus();
             }}
+            onRemove={onRemove}
+            onSubmit={onSubmit}
             ref={inputRefF}
             value={valueControlled}
           />

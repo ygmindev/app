@@ -52,6 +52,11 @@ export class _Database implements _DatabaseModel {
     this._config = config;
   }
 
+  async flush(): Promise<void> {
+    const em = this._getEntityManager();
+    await em.flush();
+  }
+
   async isConnected(): Promise<boolean> {
     return this._entityManager?.getConnection().isConnected() ?? false;
   }

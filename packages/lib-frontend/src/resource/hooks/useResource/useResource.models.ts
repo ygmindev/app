@@ -6,7 +6,7 @@ import {
 import {
   type ResourceServiceDecoratorModel,
   type ResourceServiceModel,
-} from '#lib-shared/resource/services/ResourceService/ResourceService.models';
+} from '#lib-shared/resource/utils/ResourceService/ResourceService.models';
 import { type RootModel } from '#lib-shared/resource/utils/Root/Root.models';
 
 export type UseResourceParamsModel<

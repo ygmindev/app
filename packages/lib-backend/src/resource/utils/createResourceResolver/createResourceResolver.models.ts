@@ -5,7 +5,7 @@ import {
   type ResourceMethodTypeModel,
   type ResourceNameParamsModel,
 } from '#lib-shared/resource/resource.models';
-import { type ResourceServiceModel } from '#lib-shared/resource/services/ResourceService/ResourceService.models';
+import { type ResourceServiceModel } from '#lib-shared/resource/utils/ResourceService/ResourceService.models';
 import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 

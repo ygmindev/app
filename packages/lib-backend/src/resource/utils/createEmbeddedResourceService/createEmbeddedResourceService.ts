@@ -16,12 +16,12 @@ import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import { pick } from '#lib-shared/core/utils/pick/pick';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type EmbeddedResourceModel } from '#lib-shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
+import { type EmbeddedResourceServiceModel } from '#lib-shared/resource/resources/EmbeddedResource/EmbeddedResourceService/EmbeddedResourceService.models';
 import { type EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
-import { type EmbeddedResourceServiceModel } from '#lib-shared/resource/services/EmbeddedResourceService/EmbeddedResourceService.models';
-import { type ResourceServiceDecoratorModel } from '#lib-shared/resource/services/ResourceService/ResourceService.models';
 import { type ProjectModel } from '#lib-shared/resource/utils/Args/Args.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
+import { type ResourceServiceDecoratorModel } from '#lib-shared/resource/utils/ResourceService/ResourceService.models';
 import { type RootModel } from '#lib-shared/resource/utils/Root/Root.models';
 import { type UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
 

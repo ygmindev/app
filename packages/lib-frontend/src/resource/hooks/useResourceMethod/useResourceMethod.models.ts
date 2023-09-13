@@ -6,7 +6,7 @@ import {
 import {
   type ResourceServiceAfterDecoratorModel,
   type ResourceServiceBeforeDecoratorModel,
-} from '#lib-shared/resource/services/ResourceService/ResourceService.models';
+} from '#lib-shared/resource/utils/ResourceService/ResourceService.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type RootModel } from '#lib-shared/resource/utils/Root/Root.models';

@@ -4,6 +4,7 @@ import { type ResourceNameParamsModel } from '#lib-shared/resource/resource.mode
 export type _DatabaseModel = {
   close(): Promise<void>;
   connect(): Promise<void>;
+  flush(): Promise<void>;
   getRepository<TType>(params: ResourceNameParamsModel): RepositoryModel<TType>;
   isConnected(): Promise<boolean>;
 };
