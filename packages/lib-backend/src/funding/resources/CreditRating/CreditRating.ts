@@ -7,7 +7,7 @@ import { CREDIT_RATING_RESOURCE_NAME } from '#lib-shared/funding/resources/Credi
 import {
   type CreditRatingCategoryModel,
   type CreditRatingModel,
-  CreditRatingWatchModel,
+  type CreditRatingWatchModel,
 } from '#lib-shared/funding/resources/CreditRating/CreditRating.models';
 import { type RatingAgencyModel } from '#lib-shared/funding/resources/RatingAgency/RatingAgency.models';
 import { type ResolvedFieldModel } from '#lib-shared/resource/resource.models';
