@@ -21,6 +21,7 @@ import { type CreditRatingModel } from '#lib-shared/funding/resources/CreditRati
 
 export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
   data,
+  elementState,
   onComplete,
   onError,
   onSubmit,
@@ -80,6 +81,7 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
       <FloatingFooter>
         <ModalButton
           element={<CreditRatingItemForm onSubmit={handleAdd} />}
+          elementState={elementState}
           icon="add"
           ref={modalRef}>
           {t('core:add', { value: t('funding:creditRating') })}

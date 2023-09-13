@@ -87,19 +87,21 @@ const FormContainerF = forwardRef(
 
     const getValues = useCallback(
       (data: TType) =>
-        fields?.reduce((result, field) => {
-          const fieldsF = (field as FormRowModel<TType>).fields ?? [field];
-          return {
-            ...result,
-            ...fieldsF.reduce(
-              (resultRow, { id }) => ({
-                ...resultRow,
-                [id]: (data as Record<string, unknown>)[id],
-              }),
-              {},
-            ),
-          };
-        }, {} as TType),
+        fields
+          ? fields.reduce((result, field) => {
+              const fieldsF = (field as FormRowModel<TType>).fields ?? [field];
+              return {
+                ...result,
+                ...fieldsF.reduce(
+                  (resultRow, { id }) => ({
+                    ...resultRow,
+                    [id]: (data as Record<string, unknown>)[id],
+                  }),
+                  {},
+                ),
+              };
+            }, {} as TType)
+          : data,
       [fields],
     );
 

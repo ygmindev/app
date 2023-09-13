@@ -7,6 +7,7 @@ import { CREDIT_RATING_RESOURCE_NAME } from '#lib-shared/funding/resources/Credi
 import {
   type CreditRatingCategoryModel,
   type CreditRatingModel,
+  CreditRatingWatchModel,
 } from '#lib-shared/funding/resources/CreditRating/CreditRating.models';
 import { type RatingAgencyModel } from '#lib-shared/funding/resources/RatingAgency/RatingAgency.models';
 import { type ResolvedFieldModel } from '#lib-shared/resource/resource.models';
@@ -21,4 +22,7 @@ export class CreditRating extends EmbeddedResource implements CreditRatingModel 
 
   @withField({ isOptional: true, type: DATA_TYPE.STRING })
   longTermCategory?: CreditRatingCategoryModel;
+
+  @withField({ isOptional: true, type: DATA_TYPE.STRING })
+  longTermWatch?: CreditRatingWatchModel;
 }

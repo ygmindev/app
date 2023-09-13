@@ -74,7 +74,7 @@ export type SubmittablePropsModel<TType, TResult = void> = ElementStatePropsMode
   onCancel?(): void;
   onComplete?(): void;
   onError?(error: Error): void;
-  onSubmit?(data?: TType): Promise<TResult | null>;
+  onSubmit?(data: TType): Promise<TResult | null>;
   onSuccess?(data?: TType, result?: TResult | null): Promise<void>;
 };
 

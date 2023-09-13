@@ -133,6 +133,7 @@ export const StepForm = <TKey extends string, TType, TResult = void>({
         slides={steps.map((step) => ({
           element: cloneElement(step.element, {
             data,
+            elementState: isLoading ? ELEMENT_STATE.LOADING : undefined,
             key: step.id,
             onBack: () => {
               step.element.props.onBack && step.element.props.onBack();
