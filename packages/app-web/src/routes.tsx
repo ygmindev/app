@@ -18,7 +18,6 @@ export const routes: Array<RouteModel> = getRoutes({
     {
       layoutProps: { p: true },
       navigator: <TabNavigator type={TABS_TYPE.BUTTON} />,
-      ns: [FUNDING],
       pathname: '/',
       routes: [
         {

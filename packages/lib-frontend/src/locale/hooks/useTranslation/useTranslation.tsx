@@ -7,9 +7,10 @@ import {
   type UseTranslationParamsModel,
 } from '#lib-frontend/locale/hooks/useTranslation/useTranslation.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
+import { CORE } from '#lib-shared/core/core.constants';
 
 export const useTranslation = (ns: UseTranslationParamsModel = []): UseTranslationModel => {
-  const { currentLanguage, isInitialized, t: _t } = _useTranslation(ns);
+  const { currentLanguage, isInitialized, t: _t } = _useTranslation([CORE, ...ns]);
 
   const t = useCallback(
     <TParams = undefined,>(key?: TranslatableTextModel, params?: TParams): string =>

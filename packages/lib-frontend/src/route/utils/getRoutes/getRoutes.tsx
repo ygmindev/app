@@ -2,7 +2,7 @@ import { AppLayout } from '#lib-frontend/app/layouts/AppLayout/AppLayout';
 import { SIGN_IN } from '#lib-frontend/auth/auth.constants';
 import { OAuthRedirectPage } from '#lib-frontend/auth/pages/OAuthRedirectPage/OAuthRedirectPage';
 import { SignInPage } from '#lib-frontend/auth/pages/SignInPage/SignInPage';
-import { BILLING, PAYMENT, PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants';
+import { PAYMENT, PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants';
 import { PaymentMethodFormPage } from '#lib-frontend/billing/pages/PaymentMethodFormPage/PaymentMethodFormPage';
 import { PaymentPage } from '#lib-frontend/billing/pages/PaymentPage/PaymentPage';
 import { REDIRECT } from '#lib-frontend/core/core.constants';
@@ -29,14 +29,12 @@ import { AccountPage } from '#lib-frontend/user/pages/AccountPage/AccountPage';
 import { NameFormPage } from '#lib-frontend/user/pages/NameFormPage/NameFormPage';
 import { PersonalPage } from '#lib-frontend/user/pages/PersonalPage/PersonalPage';
 import { EMAIL, NAME, PERSONAL, PHONE } from '#lib-frontend/user/user.constants';
-import { AUTH, SIGN_IN_METHOD } from '#lib-shared/auth/auth.constants';
-import { CORE } from '#lib-shared/core/core.constants';
+import { SIGN_IN_METHOD } from '#lib-shared/auth/auth.constants';
 import { FORM_MODE } from '#lib-shared/data/data.constants';
 import { PING } from '#lib-shared/http/http.constants';
-import { LOCALE } from '#lib-shared/locale/locale.constants';
-import { BRIGHTNESS, STYLE } from '#lib-shared/style/style.constants';
+import { BRIGHTNESS } from '#lib-shared/style/style.constants';
 import { TEST } from '#lib-shared/test/test.constants';
-import { ACCOUNT, USER } from '#lib-shared/user/user.constants';
+import { ACCOUNT } from '#lib-shared/user/user.constants';
 
 export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesModel =>
   [
@@ -48,7 +46,6 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
     {
       element: <AppLayout />,
       isRoot: true,
-      ns: [AUTH, CORE, STYLE, USER],
       pathname: '/',
       routes: [
         ...appRoutes,
@@ -57,12 +54,10 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
           element: <AccountPage />,
           header: { previous: '/' },
           isProtectable: true,
-          ns: [AUTH, BILLING, SETTINGS, USER, LOCALE],
           pathname: ACCOUNT,
           routes: [
             getRouteGroup({
               element: <PersonalPage />,
-              ns: [AUTH, USER],
               pathname: PERSONAL,
               routes: [
                 {
@@ -96,7 +91,6 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
 
             getRouteGroup({
               element: <PaymentPage />,
-              ns: [BILLING],
               pathname: PAYMENT,
               routes: [
                 {
@@ -110,7 +104,6 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
 
             getRouteGroup({
               element: <SettingsPage />,
-              ns: [SETTINGS, LOCALE],
               pathname: SETTINGS,
               routes: [
                 {
@@ -132,13 +125,11 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
 
         {
           element: <SignInPage mode={FORM_MODE.NEW} />,
-          ns: [AUTH],
           pathname: SIGN_IN,
         },
 
         {
           element: <OAuthRedirectPage />,
-          ns: [AUTH],
           pathname: REDIRECT,
         },
 

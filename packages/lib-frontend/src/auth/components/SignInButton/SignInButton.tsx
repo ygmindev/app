@@ -4,18 +4,18 @@ import { Button } from '#lib-frontend/core/components/Button/Button';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { AUTH } from '#lib-shared/auth/auth.constants';
 
-export const SignInButton: SFCModel<SignInButtonPropsModel> = ({ testID, ...props }) => {
-  const { styles } = useStyles({ props });
-  const { t } = useTranslation();
+export const SignInButton: SFCModel<SignInButtonPropsModel> = ({ ...props }) => {
+  const { wrapperProps } = useLayoutStyles({ props });
+  const { t } = useTranslation([AUTH]);
   const { push } = useRouter();
   return (
     <Button
+      {...wrapperProps}
       icon="signin"
-      onPress={() => push({ pathname: SIGN_IN })}
-      style={styles}
-      testID={testID}>
+      onPress={() => push({ pathname: SIGN_IN })}>
       {`${t('auth:signIn')} ${t('core:or')} ${t('auth:register')}`}
     </Button>
   );

@@ -7,7 +7,6 @@ import { Portal } from '#lib-frontend/core/components/Portal/Portal';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
-import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type RoutePropsModel } from '#lib-frontend/route/components/Route/Route.models';
 import { RouteHeader } from '#lib-frontend/route/containers/RouteHeader/RouteHeader';
 import { Routes } from '#lib-frontend/route/containers/Routes/Routes';
@@ -23,8 +22,6 @@ import {
 } from '#lib-shared/tracking/resources/TrackingEvent/TrackingEvent.constants';
 
 export const Route: LFCModel<RoutePropsModel> = ({ depth, route, ...props }) => {
-  useTranslation(route.ns);
-
   const { wrapperProps } = useLayoutStyles({ props });
   const { isActive } = useRouter();
   const { track } = useTracking();
