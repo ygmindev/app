@@ -1,22 +1,21 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
-import { type Plugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
+import { type UserConfig } from 'vite';
 
-// import { filelocPlugin } from 'esbuild-plugin-fileloc';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
 import { type BundleConfigModel } from '#lib-config/node/bundle/bundle.models';
 import { PLATFORM } from '#lib-platform/core/core.constants';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 
+type PluginsModel = Required<Required<UserConfig>['optimizeDeps']>['esbuildOptions']['plugins'];
+
 export const _plugins = ({
   transpiles = [],
-}: Pick<BundleConfigModel, 'transpiles'> = {}): Array<Plugin> =>
+}: Pick<BundleConfigModel, 'transpiles'> = {}): PluginsModel =>
   filterNil([
     esbuildDecorators({ tsconfig: fromWorking('tsconfig.json') }),
 
     process.env.ENV_PLATFORM === PLATFORM.NODE &&
       nodeExternalsPlugin({ allowList: transpiles, packagePath: fromRoot('package.json') }),
-
-    // process.env.ENV_PLATFORM === PLATFORM.NODE && (filelocPlugin as () => Plugin)(),
-  ]);
+  ]) as PluginsModel;
