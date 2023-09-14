@@ -7,7 +7,8 @@ import {
   type CreateEmbeddedResourceServiceModel,
   type CreateEmbeddedResourceServiceParamsModel,
 } from '#lib-backend/resource/utils/createEmbeddedResourceService/createEmbeddedResourceService.models';
-import { type DeepKeyModel, type PartialModel } from '#lib-shared/core/core.models';
+import { objectToEquality } from '#lib-backend/resource/utils/objectToEquality/objectToEquality';
+import { type DeepKeyModel } from '#lib-shared/core/core.models';
 import { InvalidArgumentError } from '#lib-shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
@@ -112,7 +113,7 @@ export const createEmbeddedResourceService = <
         const inputFF = await beforeCreateF(inputF);
         const value = inputFF.form;
         const { result: rootResult } = await this._rootService.update({
-          filter: inputFF.root as PartialModel<TRoot>,
+          filter: objectToEquality(inputFF.root),
           update: { $push: { [name]: value } } as UpdateModel<TRoot>,
         });
         const output: OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot> = {
@@ -134,7 +135,7 @@ export const createEmbeddedResourceService = <
       inputF.root = inputF.root ?? this._decorators.root;
       if (inputF.root) {
         const { result: rootResult } = await this._rootService.get({
-          filter: inputF.root,
+          filter: objectToEquality(inputF.root),
           options: { aggregate: getAggregation(inputF) },
         });
         const result = rootResult && (rootResult[name] as unknown as Array<TType>);
@@ -159,7 +160,7 @@ export const createEmbeddedResourceService = <
         const skip = inputF.options?.skip ?? 0;
         const limit = inputF.options?.take;
         const { result: rootResult } = await this._rootService.get({
-          filter: inputF.root,
+          filter: objectToEquality(inputF.root),
           options: isEmpty(inputF.filter) ? {} : { aggregate: getAggregation(inputF) },
         });
         const result = rootResult && (rootResult[name] as unknown as Array<TType>);
@@ -212,10 +213,7 @@ export const createEmbeddedResourceService = <
       inputF.root = inputF.root ?? this._decorators.root;
       if (inputF.root) {
         const { result: rootResult } = await this._rootService.update({
-          filter: {
-            ...inputF.root,
-            ...flattenObject({ [name]: inputF.filter }),
-          } as FilterModel<TRoot>,
+          filter: objectToEquality({ ...inputF.root, ...flattenObject({ [name]: inputF.filter }) }),
           options: {
             project: { [name]: { $elemMatch: inputF.filter } } as unknown as ProjectModel<TRoot>,
           },
@@ -256,8 +254,8 @@ export const createEmbeddedResourceService = <
       inputF.root = inputF.root ?? this._decorators.root;
       if (inputF.root) {
         const { result: rootResult } = await this._rootService.update({
-          filter: inputF.root,
-          update: { $pull: { [name]: inputF.filter } } as UpdateModel<TRoot>,
+          filter: objectToEquality(inputF.root),
+          update: { $pull: { [name]: inputF.filter } },
         });
         const output: OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot> = {
           root: rootResult,
@@ -270,7 +268,9 @@ export const createEmbeddedResourceService = <
     async count(input: RootModel<TRoot>): Promise<number> {
       input.root = input.root ?? this._decorators.root;
       if (input.root) {
-        const { result: rootResult } = await this._rootService.get({ filter: input.root });
+        const { result: rootResult } = await this._rootService.get({
+          filter: objectToEquality(input.root),
+        });
         const result = rootResult && (rootResult[name] as unknown as Array<TType>);
         return result?.length || 0;
       }
