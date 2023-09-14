@@ -19,7 +19,7 @@ export const AgencyForm: LFCModel<AgencyFormPropsModel> = ({
   const { t } = useTranslation([FUNDING]);
   const { getMany } = useRatingAgencyResource();
 
-  const { data: agencies } = useQuery('agenciesy1', async () => getMany({ filter: [] }));
+  const { data: agencies } = useQuery('agenciesy5', async () => getMany({ filter: [] }));
   console.warn(agencies);
 
   return (

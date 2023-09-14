@@ -1,13 +1,13 @@
 import { SIGN_IN } from '#lib-frontend/auth/auth.constants';
 import { type SignInButtonPropsModel } from '#lib-frontend/auth/components/SignInButton/SignInButton.models';
 import { Button } from '#lib-frontend/core/components/Button/Button';
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { AUTH } from '#lib-shared/auth/auth.constants';
 
-export const SignInButton: SFCModel<SignInButtonPropsModel> = ({ ...props }) => {
+export const SignInButton: LFCModel<SignInButtonPropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([AUTH]);
   const { push } = useRouter();

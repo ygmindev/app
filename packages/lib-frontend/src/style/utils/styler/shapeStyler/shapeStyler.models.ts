@@ -1,10 +1,9 @@
 import { type DimensionModel } from '#lib-frontend/core/core.models';
-import { type ThemeSizeModel, type ThemeSizeMoreModel } from '#lib-frontend/style/style.models';
 import { type SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export type ShapePositionModel = `${SHAPE_POSITION}`;
 
-export type ShapeStylerParamsModel = {
+export type ShapeStylerParamsModel = DimensionModel & {
   bottom?: number;
   isAbsoluteFill?: boolean;
   isFullHeight?: boolean;
@@ -20,7 +19,6 @@ export type ShapeStylerParamsModel = {
   position?: ShapePositionModel;
   right?: number;
   scale?: number;
-  size?: ThemeSizeModel | ThemeSizeMoreModel;
   top?: number;
   zIndex?: number | true;
-} & DimensionModel;
+};
