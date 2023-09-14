@@ -3,11 +3,11 @@ import { type ReactElement } from 'react';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION } from '#lib-frontend/core/core.constants';
-import { type SFCPropsModel } from '#lib-frontend/core/core.models';
+import { type LFCPropsModel } from '#lib-frontend/core/core.models';
 import { type TablePropsModel } from '#lib-frontend/data/components/Table/Table.models';
 import { useTable } from '#lib-frontend/data/hooks/useTable/useTable';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FONT_ALIGN } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
@@ -16,17 +16,16 @@ export const Table = <TType,>({
   emptyElement,
   isFullWidth,
   isHeadless,
-  testID,
   ...props
-}: SFCPropsModel<TablePropsModel<TType>>): ReactElement<SFCPropsModel<TablePropsModel<TType>>> => {
+}: LFCPropsModel<TablePropsModel<TType>>): ReactElement<LFCPropsModel<TablePropsModel<TType>>> => {
   const { t } = useTranslation();
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const { headers, rows } = useTable(props);
   return rows?.length ? (
     <Wrapper
-      position={SHAPE_POSITION.RELATIVE}
-      style={styles}
-      testID={testID}>
+      {...wrapperProps}
+      flex
+      position={SHAPE_POSITION.RELATIVE}>
       {!isHeadless && (
         <Wrapper
           border={DIRECTION.BOTTOM}
@@ -78,11 +77,15 @@ export const Table = <TType,>({
     </Wrapper>
   ) : (
     emptyElement ?? (
-      <Text
-        align={FONT_ALIGN.CENTER}
-        colorRole={THEME_ROLE.MUTED}>
-        {t('core:nothingToShow')}
-      </Text>
+      <Wrapper
+        flex
+        isCenter>
+        <Text
+          align={FONT_ALIGN.CENTER}
+          colorRole={THEME_ROLE.MUTED}>
+          {t('core:nothingToShow')}
+        </Text>
+      </Wrapper>
     )
   );
 };

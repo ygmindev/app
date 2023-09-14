@@ -10,6 +10,5 @@ export const _RouteProvider = composeComponent<_RouteProviderPropsModel, Browser
   getProps: ({ children, value }) => ({
     basename: value?.basename,
     children,
-    location: value?.location || '',
   }),
 });

@@ -24,7 +24,6 @@ export const ResourcePage: SFCModel<ResourcePagePropsModel> = ({ testID, ...prop
   const handleChange = (value: string): void => {
     void push({ pathname: `${RESOURCE}/${value}` });
   };
-
   const id = location?.params?.id && trimPathname(location.params.id);
   return (
     <Wrapper

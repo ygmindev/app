@@ -50,6 +50,7 @@ export const _server = async ({
     info(req.method, req.url);
 
     const { cookies, i18n, language, url } = req;
+    console.warn(url);
     const { error, redirectTo, response } = await render({
       context: {
         [LOCALE]: { i18n, lang: language },

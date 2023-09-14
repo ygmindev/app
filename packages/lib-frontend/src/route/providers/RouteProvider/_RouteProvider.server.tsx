@@ -1,3 +1,4 @@
+import { resolvePath } from 'react-router';
 import { type StaticRouterProps } from 'react-router-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 
@@ -9,6 +10,6 @@ export const _RouteProvider = composeComponent<_RouteProviderPropsModel, StaticR
 
   getProps: ({ children, value }) => ({
     children,
-    location: value?.location || '',
+    location: value?.location?.pathname ? resolvePath(value?.location?.pathname) : '',
   }),
 });

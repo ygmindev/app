@@ -8,8 +8,8 @@ import { type _LocaleProviderPropsModel } from '#lib-frontend/locale/providers/L
 
 const { languageDefault } = INTERNATIONALIZE_CONFIG;
 
-export const _LocaleProviderF: SFCModel<_LocaleProviderPropsModel> = ({ children, value }) => {
-  useSSR(value?.store || {}, value?.lang || languageDefault);
+const _LocaleProviderF: SFCModel<_LocaleProviderPropsModel> = ({ children, value }) => {
+  useSSR(value?.store ?? {}, value?.lang ?? languageDefault);
   return <>{children}</>;
 };
 

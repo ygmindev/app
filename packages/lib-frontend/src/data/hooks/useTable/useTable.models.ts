@@ -11,6 +11,7 @@ import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { type FontAlignModel } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.models';
 import { type StringKeyModel } from '#lib-shared/core/core.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
+import { type DataTypeModel, type FieldTypeModel } from '#lib-shared/data/data.models';
 
 export type UseTableParamsModel<TType> = _UseTableParamsModel<TType>;
 
@@ -29,6 +30,7 @@ export type TableColumnModel<
   label?: TranslatableTextModel;
   renderer?: DataRendererModel<TType>;
   sort?: TableSortTypeModel | boolean;
+  type?: DataTypeModel | FieldTypeModel;
   width?: number;
 };
 

@@ -2,13 +2,13 @@ import trimEnd from 'lodash/trimEnd';
 import { useMemo } from 'react';
 
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel } from '#lib-frontend/core/core.models';
 import { Route } from '#lib-frontend/route/components/Route/Route';
 import { type RouterPropsModel } from '#lib-frontend/route/containers/Router/Router.models';
 import { Routes } from '#lib-frontend/route/containers/Routes/Routes';
 import { type RouteModel } from '#lib-frontend/route/route.models';
 import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 const getRoute = (
@@ -49,16 +49,15 @@ const getRoute = (
   };
 };
 
-export const Router: SFCModel<RouterPropsModel> = ({ routes, testID, ...props }) => {
-  const { styles } = useStyles({ props });
+export const Router: LFCModel<RouterPropsModel> = ({ routes, ...props }) => {
+  const { wrapperProps } = useLayoutStyles({ props });
   const routesF = useMemo(() => routes.map((route) => getRoute(route)), [routes]);
   return (
     <Wrapper
-      grow
+      {...wrapperProps}
+      flex
       isOverflowHidden
-      position={SHAPE_POSITION.RELATIVE}
-      style={styles}
-      testID={testID}>
+      position={SHAPE_POSITION.RELATIVE}>
       <Routes routes={routesF} />
     </Wrapper>
   );

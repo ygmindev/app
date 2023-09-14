@@ -13,7 +13,7 @@ export const routes: Array<RouteModel> = getRoutes({
 
     {
       element: <ResourcePage />,
-      pathname: `${RESOURCE}/:id?`,
+      pathname: `${RESOURCE}/:id`,
     },
   ],
 });

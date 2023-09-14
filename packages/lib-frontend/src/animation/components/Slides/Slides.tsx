@@ -9,7 +9,7 @@ import { useChange } from '#lib-frontend/core/hooks/useChange/useChange';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
-export const Slides: SFCModel<SlidesPropsModel> = ({ current, slides, testID, ...props }) => {
+export const Slides: SFCModel<SlidesPropsModel> = ({ current, slides, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const [currentF, currentSet] = useState(current);
   const previous = useChange(current, () => currentSet(current));
@@ -20,8 +20,7 @@ export const Slides: SFCModel<SlidesPropsModel> = ({ current, slides, testID, ..
       flex
       isFullWidth
       isOverflowHidden
-      position={SHAPE_POSITION.RELATIVE}
-      testID={testID}>
+      position={SHAPE_POSITION.RELATIVE}>
       <Exitable>
         {slides?.map(
           ({ element, id }, i) =>

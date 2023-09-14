@@ -10,44 +10,44 @@ import { type RatingAgencyModel } from '#lib-shared/funding/resources/RatingAgen
 export class RatingAgency extends EntityResource implements RatingAgencyModel {
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   name!: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.AAA]?: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.AAp]?: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.AA]?: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.AAm]?: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.Ap]?: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.A]?: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.Am]?: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.BBBp]?: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.BBB]?: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.BBBm]?: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.BBp]?: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.BB]?: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.BBm]?: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.Bp]?: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.B]?: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.Bm]?: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.CCCp]?: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.CCC]?: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.CCCm]?: string;
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   [CREDIT_RATING_CATEGORY.D]?: string;
 }

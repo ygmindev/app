@@ -1,23 +1,23 @@
 import isNil from 'lodash/isNil';
 import { type ReactElement } from 'react';
 
-import { type SFCPropsModel } from '#lib-frontend/core/core.models';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import { type LFCPropsModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { ResourceFilterField } from '#lib-frontend/resource/components/ResourceFilterField/ResourceFilterField';
 import { type ResourceFilterFormPropsModel } from '#lib-frontend/resource/components/ResourceFilterForm/ResourceFilterForm.models';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
 import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
 export const ResourceFilterForm = <TType, TForm = undefined, TRoot = undefined>({
   filters,
   onSubmit,
-  testID,
   ...props
-}: SFCPropsModel<ResourceFilterFormPropsModel<TType, TForm, TRoot>>): ReactElement<
-  SFCPropsModel<ResourceFilterFormPropsModel<TType, TForm, TRoot>>
+}: LFCPropsModel<ResourceFilterFormPropsModel<TType, TForm, TRoot>>): ReactElement<
+  LFCPropsModel<ResourceFilterFormPropsModel<TType, TForm, TRoot>>
 > => {
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const handleSubmit = async (data: TType): Promise<void> => {
     const filterData = filters
       ? filters.reduce(
@@ -39,23 +39,24 @@ export const ResourceFilterForm = <TType, TForm = undefined, TRoot = undefined>(
       : [];
     onSubmit && (await onSubmit(filterData));
   };
-
   return (
-    <FormContainer
-      fields={filters?.map(({ id, type }) => ({
-        element: (
-          <ResourceFilterField<TType, TForm, TRoot>
-            id={id}
-            key={id}
-            type={type}
-          />
-        ),
-        id,
-      }))}
-      isFullWidth
-      onSubmit={handleSubmit}
-      style={styles}
-      testID={testID}
-    />
+    <Wrapper {...wrapperProps}>
+      <FormContainer
+        fields={filters?.map(({ id, type }) => ({
+          element: (
+            <ResourceFilterField<TType, TForm, TRoot>
+              id={id}
+              key={id}
+              type={type}
+            />
+          ),
+          id,
+        }))}
+        isFullWidth
+        isRowAlign
+        onSubmit={handleSubmit}
+        shrink={1}
+      />
+    </Wrapper>
   );
 };

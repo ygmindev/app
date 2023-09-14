@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { matchPath, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { matchPath, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import { type _UseRouterModel } from '#lib-frontend/route/hooks/useRouter/_useRouter.models';
 import { type LocationContextModel, type RouteUpdateModel } from '#lib-frontend/route/route.models';
@@ -7,8 +7,12 @@ import { type LocationContextModel, type RouteUpdateModel } from '#lib-frontend/
 export const _useRouter = <TType = object,>(): _UseRouterModel<TType> => {
   const navigate = useNavigate();
   const location = useLocation();
+  const routeParams = useParams();
   const [searchParams, searchParamsSet] = useSearchParams();
-  const params = useMemo(() => Object.fromEntries(searchParams.entries()) as TType, []);
+  const params = useMemo(() => {
+    delete (routeParams as Record<string, string>)['*'];
+    return { ...Object.fromEntries(searchParams.entries()), ...routeParams } as TType;
+  }, [searchParams, routeParams]);
 
   return {
     back: async () => navigate(-1),
