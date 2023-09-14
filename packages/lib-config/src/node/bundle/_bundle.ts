@@ -13,7 +13,6 @@ import { createLogger, type Logger, type Plugin } from 'vite';
 import { searchForWorkspaceRoot } from 'vite';
 import { checker } from 'vite-plugin-checker';
 import circleDependency from 'vite-plugin-circular-dependency';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
 import { fromModules } from '#lib-backend/file/utils/fromModules/fromModules';
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
@@ -165,8 +164,6 @@ export const _bundle = ({
 
     plugins: filterNil([
       serverExtension && vitePluginIsomorphicImport(serverExtension),
-
-      tsconfigPaths({ projects: [tsconfigDir] }),
 
       checker({
         eslint: { lintCommand: lintCommand() },
