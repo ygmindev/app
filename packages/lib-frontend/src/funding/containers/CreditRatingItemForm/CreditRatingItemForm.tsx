@@ -16,7 +16,6 @@ export const CreditRatingItemForm: LFCModel<CreditRatingItemFormPropsModel> = ({
   return (
     <StepForm
       {...wrapperProps}
-      id="creditRating"
       onSubmit={onSubmit}
       steps={[
         {

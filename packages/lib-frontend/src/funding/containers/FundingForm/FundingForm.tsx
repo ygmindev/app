@@ -5,7 +5,6 @@ import { CreditRatingForm } from '#lib-frontend/funding/containers/CreditRatingF
 import { FUNDING_FORM_INITIAL_VALUES } from '#lib-frontend/funding/containers/FundingForm/FundingForm.constants';
 import { type FundingFormPropsModel } from '#lib-frontend/funding/containers/FundingForm/FundingForm.models';
 import { MaturityForm } from '#lib-frontend/funding/containers/MaturityForm/MaturityForm';
-import { FUNDING } from '#lib-frontend/funding/funding.constants';
 import { useFundingResource } from '#lib-frontend/funding/hooks/useFundingResource/useFundingResource';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 
@@ -15,9 +14,10 @@ export const FundingForm: LFCModel<FundingFormPropsModel> = ({ ...props }) => {
   return (
     <StepForm
       {...props}
-      id={FUNDING}
       initialValues={FUNDING_FORM_INITIAL_VALUES}
-      onSubmit={async (form) => create({ form })}
+      onSubmit={async (form) => {
+        await create({ form });
+      }}
       steps={[
         {
           element: <AmountForm />,

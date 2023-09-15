@@ -5,7 +5,7 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { CREDIT_RATING_WATCH } from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
 
 export const CreditRatingWatchForm: LFCModel<CreditRatingWatchFormPropsModel> = ({
-  data,
+  initialValues,
   onComplete,
   onError,
   onSubmit,
@@ -14,8 +14,8 @@ export const CreditRatingWatchForm: LFCModel<CreditRatingWatchFormPropsModel> = 
   const { t } = useTranslation();
   return (
     <ItemStepForm
-      data={data}
       id="longTermWatch"
+      initialValues={initialValues}
       message={t('funding:longTermWatchFormMessage')}
       onComplete={onComplete}
       onError={onError}

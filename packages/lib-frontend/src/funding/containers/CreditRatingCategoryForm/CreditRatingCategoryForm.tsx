@@ -8,7 +8,7 @@ import {
 } from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
 
 export const CreditRatingCategoryForm: LFCModel<CreditRatingCategoryFormPropsModel> = ({
-  data,
+  initialValues,
   onComplete,
   onError,
   onSubmit,
@@ -17,8 +17,8 @@ export const CreditRatingCategoryForm: LFCModel<CreditRatingCategoryFormPropsMod
   const { t } = useTranslation();
   return (
     <ItemStepForm
-      data={data}
       id="longTermCategory"
+      initialValues={initialValues}
       message={t('funding:longTermCategoryFormMessage')}
       onComplete={onComplete}
       onError={onError}

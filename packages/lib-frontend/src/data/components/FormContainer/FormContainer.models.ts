@@ -16,6 +16,7 @@ export type FormContainerPropsModel<TType, TResult = void> = UseFormParamsModel<
     fields?: Array<FormFieldModel<TType> | FormRowModel<TType>>;
     isButton?: boolean;
     isGrouped?: boolean;
+    onChange?<TKey extends StringKeyModel<TType>>(id: TKey, value: TType[TKey]): void;
     submitLabel?: TranslatableTextModel;
     topElement?(params: Pick<ElementStatePropsModel, 'elementState'>): ReactNode;
   };

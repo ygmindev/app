@@ -9,7 +9,7 @@ import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLa
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 export const MaturityForm: LFCModel<MaturityFormPropsModel> = ({
-  data,
+  initialValues,
   onComplete,
   onError,
   onSubmit,
@@ -32,7 +32,7 @@ export const MaturityForm: LFCModel<MaturityFormPropsModel> = ({
           id: 'maturity',
         },
       ]}
-      initialValues={data}
+      initialValues={initialValues}
       isVerticalCenter
       onComplete={onComplete}
       onError={onError}

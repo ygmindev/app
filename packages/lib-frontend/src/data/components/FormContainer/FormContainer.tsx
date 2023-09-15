@@ -64,6 +64,7 @@ const FormContainerF = forwardRef(
       isGrouped,
       isValidateChanged,
       onCancel,
+      onChange,
       onComplete,
       onError,
       onSubmit,
@@ -94,7 +95,7 @@ const FormContainerF = forwardRef(
                 ...fieldsF.reduce(
                   (resultRow, { id }) => ({
                     ...resultRow,
-                    [id]: (data as Record<string, unknown>)[id],
+                    [id]: data[id as StringKeyModel<TType>],
                   }),
                   {},
                 ),
@@ -130,13 +131,16 @@ const FormContainerF = forwardRef(
       id,
     }: FormFieldModel<TType, TKey>): FormFieldModel<TType, TKey> => {
       const fieldProps = {
-        defaultValue: initialValues ? (initialValues as Record<string, unknown>)[id] : undefined,
+        defaultValue: initialValues ? initialValues[id] : undefined,
         elementState: elementStateF ?? element.props.elementState,
-        error: (errors as Record<string, unknown>)[id],
+        error: errors[id],
         key: id,
-        onChange: handleChange(id),
+        onChange: (v) => {
+          handleChange(id)(v);
+          onChange && onChange(id, v);
+        },
         onSubmit: handleSubmit,
-        value: (values as Record<string, unknown>)[id],
+        value: values[id],
       } as FieldPropsModel<TType[TKey]>;
       return { element: cloneElement(element, fieldProps), id };
     };

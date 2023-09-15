@@ -1,20 +1,14 @@
-import { useRef } from 'react';
-
 import { OtpField } from '#lib-frontend/auth/components/OtpField/OtpField';
 import {
   OTP_FORM_TEST_ID,
   OTP_FORM_VALIDATORS,
 } from '#lib-frontend/auth/containers/OtpForm/OtpForm.constants';
-import {
-  type OtpFormModel,
-  type OtpFormPropsModel,
-} from '#lib-frontend/auth/containers/OtpForm/OtpForm.models';
+import { type OtpFormPropsModel } from '#lib-frontend/auth/containers/OtpForm/OtpForm.models';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
-import { type FormRefModel } from '#lib-frontend/data/data.models';
 import { Trans } from '#lib-frontend/locale/components/Trans/Trans';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -32,7 +26,6 @@ export const OtpForm: LFCModel<OtpFormPropsModel> = ({
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation();
-  const ref = useRef<FormRefModel<OtpFormModel>>(null);
   return (
     <FormContainer
       {...wrapperProps}
@@ -61,19 +54,13 @@ export const OtpForm: LFCModel<OtpFormPropsModel> = ({
       }
       fields={[{ element: <OtpField isAutoFocus />, id: 'otp' }]}
       isButton={false}
-      onComplete={() => {
-        onComplete && onComplete();
-        ref.current?.reset();
-      }}
+      onComplete={onComplete}
       onError={onError}
       onSubmit={onSubmit}
       onSuccess={onSuccess}
-      ref={ref}
       testID={OTP_FORM_TEST_ID}
       topElement={() =>
-        // TODO: handle phone
-        data &&
-        data.email && (
+        data?.email && (
           <Wrapper isCenter>
             <Trans
               components={[<Text isBold />]}

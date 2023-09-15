@@ -20,8 +20,8 @@ import { CREDIT_RATING_RESOURCE_NAME } from '#lib-shared/funding/resources/Credi
 import { type CreditRatingModel } from '#lib-shared/funding/resources/CreditRating/CreditRating.models';
 
 export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
-  data,
   elementState,
+  initialValues,
   onComplete,
   onError,
   onSubmit,
@@ -30,7 +30,9 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
 }) => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
-  const [values, valuesSet] = useState((data && data[CREDIT_RATING_RESOURCE_NAME]) ?? []);
+  const [values, valuesSet] = useState(
+    (initialValues && initialValues[CREDIT_RATING_RESOURCE_NAME]) ?? [],
+  );
   const modalRef = useRef<ModalRefModel>(null);
 
   const handleAdd = async (value: CreditRatingModel): Promise<void> => {

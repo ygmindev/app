@@ -1,10 +1,10 @@
-import { LongTermRatingForm } from '#lib-frontend/funding/containers/LongTermRatingForm/LongTermRatingForm';
-import { type LongTermRatingFormPropsModel } from '#lib-frontend/funding/containers/LongTermRatingForm/LongTermRatingForm.models';
+import { StepForm } from '#lib-frontend/data/components/StepForm/StepForm';
+import { type StepFormPropsModel } from '#lib-frontend/data/components/StepForm/StepForm.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<LongTermRatingFormPropsModel>({
-  target: LongTermRatingForm,
+const { Component, displayName, testID } = withTestComponent<StepFormPropsModel>({
+  target: StepForm,
 });
 
 describe(displayName, () => {

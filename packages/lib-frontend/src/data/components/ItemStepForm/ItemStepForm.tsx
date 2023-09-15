@@ -9,9 +9,9 @@ import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLa
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { type PartialModel } from '#lib-shared/core/core.models';
 
-export const ItemStepForm = <TType,>({
-  data,
+export const ItemStepForm = <TType, TStep extends PartialModel<TType>>({
   id,
+  initialValues,
   message,
   onComplete,
   onError,
@@ -19,15 +19,15 @@ export const ItemStepForm = <TType,>({
   onSuccess,
   options,
   ...props
-}: LFCPropsModel<ItemStepFormPropsModel<TType>>): ReactElement<
-  LFCPropsModel<ItemStepFormPropsModel<TType>>
+}: LFCPropsModel<ItemStepFormPropsModel<TType, TStep>>): ReactElement<
+  LFCPropsModel<ItemStepFormPropsModel<TType, TStep>>
 > => {
   const { wrapperProps } = useLayoutStyles({ props });
   return (
-    <FormContainer<PartialModel<TType>>
+    <FormContainer<TStep>
       {...wrapperProps}
       fields={[{ element: <ItemField options={options} />, id }]}
-      initialValues={data}
+      initialValues={initialValues}
       isButton={false}
       isVerticalCenter
       onComplete={onComplete}

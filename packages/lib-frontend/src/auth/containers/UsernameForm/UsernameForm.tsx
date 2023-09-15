@@ -13,14 +13,14 @@ import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { Divider } from '#lib-frontend/core/components/Divider/Divider';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { type FormFieldModel } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
 import { TextField } from '#lib-frontend/data/components/TextField/TextField';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { CountryField } from '#lib-frontend/locale/components/CountryField/CountryField';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { PhoneField } from '#lib-frontend/user/components/PhoneField/PhoneField';
 import { SIGN_IN_METHOD } from '#lib-shared/auth/auth.constants';
 import { type SignInMethodModel } from '#lib-shared/auth/auth.models';
@@ -30,7 +30,7 @@ import { FORM_MODE } from '#lib-shared/data/data.constants';
 import { type HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
 
-export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
+export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
   method,
   mode = FORM_MODE.NEW,
   onComplete,
@@ -40,7 +40,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
   ...props
 }) => {
   const { t } = useTranslation();
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const { create } = useOtpResource();
   const { valueControlled, valueControlledSet } = useValueControlled<SignInMethodModel>({
     defaultValue: SIGN_IN_METHOD.EMAIL,
@@ -88,6 +88,7 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
 
   return (
     <FormContainer
+      {...wrapperProps}
       bottomElement={
         mode === FORM_MODE.UPDATE
           ? undefined
@@ -128,7 +129,6 @@ export const UsernameForm: SFCModel<UsernameFormPropsModel> = ({
       onComplete={onComplete}
       onSubmit={handleSubmit}
       onSuccess={onSuccess}
-      style={styles}
       testID={USERNAME_FORM_TEST_ID}
       validators={USERNAME_FORM_VALIDATORS}
     />

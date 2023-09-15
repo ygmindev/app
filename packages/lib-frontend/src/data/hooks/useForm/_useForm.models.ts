@@ -1,4 +1,5 @@
 import { type FormErrorModel, type SubmittablePropsModel } from '#lib-frontend/data/data.models';
+import { type StringKeyModel } from '#lib-shared/core/core.models';
 
 export type _UseFormParamsModel<TType, TResult = void> = Pick<
   SubmittablePropsModel<TType, TResult>,
@@ -12,7 +13,7 @@ export type _UseFormModel<TType, TResult = void> = {
   data?: TResult | null;
   errors: FormErrorModel<TType>;
   errorsSet(errors?: Error): void;
-  handleChange(key: string): (value: string) => void;
+  handleChange: <TKey extends StringKeyModel<TType>>(key: TKey) => (value: TType[TKey]) => void;
   handleReset(): void;
   handleSubmit(): void;
   isLoading: boolean;

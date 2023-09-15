@@ -1,9 +1,5 @@
-import { type SignInFormModel } from '#lib-frontend/auth/containers/SignInForm/SignInForm.models';
 import { type FormStepPropsModel } from '#lib-frontend/data/components/StepForm/StepForm.models';
-import { type StylePropsModel } from '#lib-frontend/style/style.models';
+import { type OtpFormModel } from '#lib-shared/auth/resources/Otp/Otp.models';
+import { type SignInFormModel } from '#lib-shared/auth/resources/SignIn/SignIn.models';
 
-export type OtpFormModel = {
-  otp?: string;
-};
-
-export type OtpFormPropsModel = StylePropsModel & FormStepPropsModel<SignInFormModel>;
+export type OtpFormPropsModel = FormStepPropsModel<SignInFormModel, OtpFormModel>;
