@@ -46,11 +46,11 @@ export const LineItem: SFCModel<LineItemPropsModel> = ({
       onActive={() => isActiveSet(true)}
       onInactive={() => isActiveSet(false)}>
       <Wrapper
-        {...wrapperProps}
         border={DIRECTION.TOP}
         isRow
         onPress={onPress}
-        p={THEME_SIZE.SMALL}>
+        p={THEME_SIZE.SMALL}
+        {...wrapperProps}>
         <Wrapper
           flex
           isRowAlign>

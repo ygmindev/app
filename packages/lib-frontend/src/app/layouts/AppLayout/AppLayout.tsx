@@ -14,10 +14,10 @@ export const AppLayout: LFCModel<AppLayoutPropsModel> = ({ children, ...props })
   return (
     <KeyboardContainer>
       <Wrapper
-        {...wrapperProps}
         backgroundColor={THEME_COLOR_MORE.SURFACE}
         flex
-        position={SHAPE_POSITION.RELATIVE}>
+        position={SHAPE_POSITION.RELATIVE}
+        {...wrapperProps}>
         <AppHeader />
 
         <PortalHost>

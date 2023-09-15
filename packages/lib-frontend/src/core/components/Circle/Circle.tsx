@@ -13,11 +13,11 @@ export const Circle: LFCModel<CirclePropsModel> = ({ size = THEME_SIZE.MEDIUM, .
   const sizeF = isNumber(size) ? size : theme.shape.size[size];
   return (
     <Wrapper
-      {...wrapperProps}
       height={sizeF}
       isCenter
       round={sizeF / 2}
       width={sizeF}
+      {...wrapperProps}
     />
   );
 };

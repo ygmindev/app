@@ -81,7 +81,6 @@ const FormContainerF = forwardRef(
     useImperativeHandle(ref, () => ({
       reset: handleReset,
       submit: async () => handleSubmit(),
-      values: () => values,
       valuesSet,
     }));
 

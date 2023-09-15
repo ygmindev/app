@@ -33,7 +33,6 @@ export const OtpForm: LFCModel<OtpFormPropsModel> = ({
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation();
   const ref = useRef<FormRefModel<OtpFormModel>>(null);
-
   return (
     <FormContainer
       {...wrapperProps}

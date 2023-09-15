@@ -13,13 +13,13 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
   const theme = useTheme();
   return (
     <Wrapper
-      {...wrapperProps}
       border={DIRECTION.BOTTOM}
       height={theme.layout.header.height}
       isFullWidth
       isRowAlign
       pHorizontal
-      position={SHAPE_POSITION.RELATIVE}>
+      position={SHAPE_POSITION.RELATIVE}
+      {...wrapperProps}>
       <Wrapper
         grow
         isRowAlign>

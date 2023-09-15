@@ -3,12 +3,7 @@ import { FundingForm } from '#lib-frontend/funding/containers/FundingForm/Fundin
 import { type FundingFormPagePropsModel } from '#lib-frontend/funding/pages/FundingFormPage/FundingFormPage.models';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
-export const FundingFormPage: SFCModel<FundingFormPagePropsModel> = ({ testID, ...props }) => {
+export const FundingFormPage: SFCModel<FundingFormPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  return (
-    <FundingForm
-      {...wrapperProps}
-      testID={testID}
-    />
-  );
+  return <FundingForm {...wrapperProps} />;
 };

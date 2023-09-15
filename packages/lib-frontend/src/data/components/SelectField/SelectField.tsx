@@ -84,7 +84,7 @@ export const SelectField = <TType extends string = string>({
   return (
     <Wrapper
       {...wrapperProps}
-      grow>
+      flex>
       <Menu
         anchor={(isOpen) => (
           <TextField

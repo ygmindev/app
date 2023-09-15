@@ -81,6 +81,5 @@ export type SubmittablePropsModel<TType, TResult = void> = ElementStatePropsMode
 export type FormRefModel<TType = undefined> = {
   reset(): void;
   submit(): Promise<void>;
-  values(): TType;
   valuesSet(data?: TType): Promise<void>;
 };
