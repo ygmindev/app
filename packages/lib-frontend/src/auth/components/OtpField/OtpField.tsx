@@ -25,7 +25,6 @@ const otpLength = toNumber(process.env.SERVER_OTP_LENGTH);
 const IDS = withId(range(otpLength));
 
 export const OtpField: LFCModel<OtpFieldPropsModel> = ({
-  defaultValue,
   elementState,
   error,
   isAutoFocus,
@@ -37,7 +36,7 @@ export const OtpField: LFCModel<OtpFieldPropsModel> = ({
   const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
   const { valueControlled, valueControlledSet } = useValueControlled({
-    defaultValue,
+    defaultValue: '',
     onChange,
     value,
   });
@@ -79,8 +78,7 @@ export const OtpField: LFCModel<OtpFieldPropsModel> = ({
           <TextField
             elementState={
               isFocused &&
-              valueControlled &&
-              i === Math.min(valueControlled.length, otpLength - 1) &&
+              i === Math.min((valueControlled ?? '').length, otpLength - 1) &&
               elementState !== ELEMENT_STATE.DISABLED
                 ? ELEMENT_STATE.ACTIVE
                 : elementState

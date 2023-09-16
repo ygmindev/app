@@ -46,6 +46,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       defaultValue,
       icon,
       isAutoFocus,
+      isCenter,
       isDisabled,
       isNoClear,
       isTransparent,
@@ -72,6 +73,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
     const inputRef = useRef<TextFieldRefModel>(null);
     const inputRefF = ref ?? inputRef;
     const [elementState, elementStateSet] = useState<ElementStateModel>();
+    const elementStateF = props.elementState ?? elementState;
 
     const theme = useTheme();
     const { valueControlled, valueControlledSet } = useValueControlled({
@@ -101,11 +103,11 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         top={0}>
         {!isNoClear && (
           <Appearable
-            elementState={elementState}
+            elementState={elementStateF}
             isActive={
               !!valueControlled &&
               valueControlled.length > 0 &&
-              elementState === ELEMENT_STATE.ACTIVE
+              elementStateF === ELEMENT_STATE.ACTIVE
             }
             isCenter>
             <Button
@@ -181,7 +183,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       <FocusableWrapper
         {...wrapperProps}
         border={!isTransparent}
-        elementState={elementState}
+        elementState={elementStateF}
         height={theme.shape.size[THEME_SIZE.MEDIUM]}
         onElementStateChange={elementStateSet}
         pHorizontal
@@ -198,6 +200,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
             autoComplete={autoComplete}
             foregroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST]}
             height={theme.shape.size[THEME_SIZE.SMALL]}
+            isCenter={isCenter}
             isDisabled={isDisabled}
             keyboard={keyboard}
             language={language}
@@ -229,7 +232,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
 
         <Wrapper
           animation={containerAnimation}
-          elementState={elementState}
+          elementState={elementStateF}
           isCenter
           left={0}
           pHorizontal
@@ -238,7 +241,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
           {icon && (
             <Icon
               animation={textAnimation}
-              elementState={elementState}
+              elementState={elementStateF}
               icon={icon}
             />
           )}
@@ -246,7 +249,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
           {label && (
             <TranslatableText
               animation={textAnimation}
-              elementState={elementState}>
+              elementState={elementStateF}>
               {label}
             </TranslatableText>
           )}

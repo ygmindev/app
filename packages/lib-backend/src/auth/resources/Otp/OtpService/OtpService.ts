@@ -81,10 +81,7 @@ export class OtpService
 
   async verify(data: EntityResourceDataModel<OtpModel>): Promise<OtpModel> {
     const filter = objectToEquality(data);
-    const { result } = await this.get({
-      filter,
-      options: { project: { otp: true } },
-    });
+    const { result } = await this.get({ filter, options: { project: { otp: true } } });
     if (!result || result.otp !== data.otp) {
       throw new UnauthorizedError();
     }

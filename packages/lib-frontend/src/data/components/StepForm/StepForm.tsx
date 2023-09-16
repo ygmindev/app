@@ -69,11 +69,9 @@ export const StepForm = <TType, TResult = void>({
             onSubmit: async (stepValues: PartialModel<TType>) => {
               isLoadingSet(true);
               step.element.props.onSubmit && (await step.element.props.onSubmit(stepValues));
-              if (isLastStep) {
-                const valuesF = { ...values, ...stepValues };
-                await valuesSet(valuesF);
-                handleSubmit && handleSubmit();
-              }
+              const valuesF = { ...values, ...stepValues };
+              await valuesSet(valuesF);
+              isLastStep && handleSubmit && handleSubmit();
             },
             onSuccess: async (stepValues: PartialModel<TType>) => {
               step.element.props.onSuccess && (await step.element.props.onSuccess(stepValues));
