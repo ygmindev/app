@@ -133,6 +133,7 @@ export const _bundle = ({
     envPrefix,
 
     esbuild: {
+      loader: 'tsx',
       sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : 'linked',
     },
 
@@ -143,6 +144,10 @@ export const _bundle = ({
         define,
 
         keepNames: true,
+
+        loader: {
+          '.js': 'tsx',
+        },
 
         mainFields,
 
@@ -158,6 +163,8 @@ export const _bundle = ({
 
         tsconfig: tsconfigDir,
       },
+
+      force: true,
 
       include: transpiles,
     },

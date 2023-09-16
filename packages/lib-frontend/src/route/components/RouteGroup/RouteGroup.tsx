@@ -7,22 +7,15 @@ import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type RouteGroupPropsModel } from '#lib-frontend/route/components/RouteGroup/RouteGroup.models';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
-export const RouteGroup: SFCModel<RouteGroupPropsModel> = ({
-  label,
-  root,
-  routes,
-  testID,
-  ...props
-}) => {
+export const RouteGroup: SFCModel<RouteGroupPropsModel> = ({ label, root, routes, ...props }) => {
   const { t } = useTranslation();
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const { location, push } = useRouter();
   return (
     <LineGroup
-      style={styles}
-      testID={testID}
+      {...wrapperProps}
       title={t(label)}>
       {routes?.map(({ icon, id, label, value }) => (
         <LineItem

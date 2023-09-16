@@ -16,6 +16,7 @@ export const FundingForm: LFCModel<FundingFormPropsModel> = ({ ...props }) => {
       {...props}
       initialValues={FUNDING_FORM_INITIAL_VALUES}
       onSubmit={async (form) => {
+        console.warn(form);
         await create({ form });
       }}
       steps={[

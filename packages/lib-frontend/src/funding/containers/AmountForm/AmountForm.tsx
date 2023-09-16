@@ -40,7 +40,7 @@ export const AmountForm: LFCModel<AmountFormPropsModel> = ({
       onSubmit={onSubmit}
       onSuccess={onSuccess}
       topElement={() => <Text type={FONT_TYPE.HEADLINE}>{t('funding:amountFormMessage')}</Text>}
-      validators={{ amount: ({ value }) => validateRange(0)({ value: value?.value?.value ?? 0 }) }}
+      validators={{ amount: ({ value }) => validateRange(1)({ value: value?.value?.value ?? 0 }) }}
     />
   );
 };

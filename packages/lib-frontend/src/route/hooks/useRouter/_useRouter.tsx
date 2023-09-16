@@ -15,7 +15,7 @@ export const _useRouter = <TType = object,>(): _UseRouterModel<TType> => {
   }, [searchParams, routeParams]);
 
   return {
-    back: async () => navigate(-1),
+    back: () => navigate(-1),
 
     isActive: ({ from, isExact = false, pathname }) => {
       if (!pathname) {
@@ -34,12 +34,12 @@ export const _useRouter = <TType = object,>(): _UseRouterModel<TType> => {
       pathname: location.pathname,
     },
 
-    push: async <TTypeNext,>({ context, params, pathname }: RouteUpdateModel<TTypeNext>) => {
+    push: <TTypeNext,>({ context, params, pathname }: RouteUpdateModel<TTypeNext>) => {
       navigate(pathname, { state: context });
       params && searchParamsSet(params);
     },
 
-    replace: async <TTypeNext,>({ context, params, pathname }: RouteUpdateModel<TTypeNext>) => {
+    replace: <TTypeNext,>({ context, params, pathname }: RouteUpdateModel<TTypeNext>) => {
       navigate(pathname, { replace: true, state: context });
       params && searchParamsSet(params);
     },

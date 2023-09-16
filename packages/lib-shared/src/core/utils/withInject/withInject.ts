@@ -6,5 +6,5 @@ import {
 } from '#lib-shared/core/utils/withInject/withInject.models';
 
 export const withInject = <TType extends ClassModel>(
-  ...params: WithInjectParamsModel<TType>
-): WithInjectModel => _withInject(...params);
+  params: WithInjectParamsModel<TType>,
+): WithInjectModel => _withInject(params);

@@ -1,3 +1,4 @@
+import { _Container } from '#lib-backend/core/utils/Container/_Container';
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { DATABASE_TYPE } from '#lib-backend/database/database.constants';
@@ -5,7 +6,6 @@ import { Database } from '#lib-backend/database/utils/Database/Database';
 import { CreditRatingService } from '#lib-backend/funding/resources/CreditRating/CreditRatingService/CreditRatingService';
 import { createEntityResourceService } from '#lib-backend/resource/utils/createEntityResourceService/createEntityResourceService';
 import { sequence } from '#lib-shared/core/utils/sequence/sequence';
-import { withInject } from '#lib-shared/core/utils/withInject/withInject';
 import { FUNDING_RESOURCE_NAME } from '#lib-shared/funding/resources/Funding/Funding.constants';
 import {
   type FundingFormModel,
@@ -23,12 +23,10 @@ export class FundingService
   })
   implements FundingServiceModel
 {
-  @withInject(CreditRatingService, { isLazy: true })
-  protected _creditRatingService!: CreditRatingService;
-
   async create(
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, FundingModel, FundingFormModel>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, FundingModel>> {
+    const creditRatingService = _Container.get(CreditRatingService);
     const creditRatings = input.form.CreditRating;
     delete input.form.CreditRating;
     const output = await super.create(input);
@@ -37,12 +35,15 @@ export class FundingService
       (await sequence(
         creditRatings?.map(
           (form) => async () =>
-            this._creditRatingService.create({ form, options: { isCommitted: true } }),
+            creditRatingService.create({
+              form,
+              options: { isCommitted: true },
+              root: { _id: output.result?._id },
+            }),
         ),
       ));
 
     await Container.get(Database, DATABASE_TYPE.MONGO).flush();
-
     return output;
   }
 }

@@ -1,3 +1,4 @@
+import find from 'lodash/find';
 import { useRef, useState } from 'react';
 
 import { FloatingFooter } from '#lib-frontend/app/components/FloatingFooter/FloatingFooter';
@@ -10,8 +11,11 @@ import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { Table } from '#lib-frontend/data/components/Table/Table';
+import { useQuery } from '#lib-frontend/data/hooks/useQuery/useQuery';
 import { type CreditRatingFormPropsModel } from '#lib-frontend/funding/containers/CreditRatingForm/CreditRatingForm.models';
 import { CreditRatingItemForm } from '#lib-frontend/funding/containers/CreditRatingItemForm/CreditRatingItemForm';
+import { FUNDING } from '#lib-frontend/funding/funding.constants';
+import { useRatingAgencyResource } from '#lib-frontend/funding/hooks/useRatingAgencyResource/useRatingAgencyResource';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
@@ -28,7 +32,7 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
   onSuccess,
   ...props
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation([FUNDING]);
   const { wrapperProps } = useLayoutStyles({ props });
   const [values, valuesSet] = useState(
     (initialValues && initialValues[CREDIT_RATING_RESOURCE_NAME]) ?? [],
@@ -49,6 +53,9 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
     !values.length && modalRef.current?.toggle(true);
   }, []);
 
+  const { getMany } = useRatingAgencyResource();
+  const { data: agencies } = useQuery('agencies', async () => getMany({ filter: [] }));
+
   return (
     <>
       <FormContainer
@@ -60,19 +67,22 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
         topElement={() =>
           values.length ? (
             <Wrapper s>
-              {values?.map(({ _agency, longTermCategory, longTermWatch }) => (
-                <Tile
-                  key={_agency}
-                  title={_agency}>
-                  <Table
-                    columns={[{ id: 'name' }, { id: 'value' }]}
-                    data={[
-                      { name: 'longTermCategory', value: longTermCategory },
-                      { name: 'longTermWatch', value: longTermWatch },
-                    ]}
-                  />
-                </Tile>
-              ))}
+              {values.map(({ _agency, longTermCategory, longTermWatch }) => {
+                const agencyName = find(agencies?.result, ({ _id }) => _id === _agency);
+                return (
+                  <Tile
+                    key={_agency}
+                    title={agencyName?.name}>
+                    <Table
+                      columns={[{ id: 'name' }, { id: 'value' }]}
+                      data={[
+                        { name: t('funding:longTermCategory'), value: longTermCategory },
+                        { name: t('funding:longTermWatch'), value: longTermWatch },
+                      ]}
+                    />
+                  </Tile>
+                );
+              })}
             </Wrapper>
           ) : (
             <Text type={FONT_TYPE.HEADLINE}>{t('funding:noCreditRatingMessage')}</Text>

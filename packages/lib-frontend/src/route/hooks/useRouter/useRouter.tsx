@@ -14,7 +14,7 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
   const theme = useTheme();
 
   const update = async <TTypeNext = undefined,>(
-    callback: () => Promise<void>,
+    callback: () => void,
     { isBack }: Pick<RouteUpdateModel<TTypeNext>, 'isBack'>,
   ): Promise<void> => {
     if (!isLoading) {
@@ -24,7 +24,7 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
         actions?.route.isBackSet(true);
         await sleep();
       }
-      await callback();
+      callback();
       if (isBack) {
         await sleep(theme.animation.transition);
         actions?.route.isBackSet(false);
@@ -33,7 +33,9 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
   };
 
   return {
-    back: async () => update(back, { isBack: true }),
+    back: () => {
+      void update(back, { isBack: true });
+    },
 
     isActive: ({ from, pathname, ...params }) =>
       pathname
@@ -46,12 +48,8 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
 
     location,
 
-    push: async <TTypeNext = undefined,>({
-      isBack,
-      params,
-      pathname,
-    }: RouteUpdateModel<TTypeNext>) =>
-      update(
+    push: <TTypeNext = undefined,>({ isBack, params, pathname }: RouteUpdateModel<TTypeNext>) => {
+      void update(
         () =>
           push({
             context: { previous: location.pathname },
@@ -59,14 +57,15 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
             pathname: trimPathname(pathname),
           }),
         { isBack },
-      ),
+      );
+    },
 
-    replace: async <TTypeNext = undefined,>({
+    replace: <TTypeNext = undefined,>({
       isBack,
       params,
       pathname,
-    }: RouteUpdateModel<TTypeNext>) =>
-      update(
+    }: RouteUpdateModel<TTypeNext>) => {
+      void update(
         () =>
           replace({
             context: { previous: location.pathname },
@@ -74,6 +73,7 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
             pathname: trimPathname(pathname),
           }),
         { isBack },
-      ),
+      );
+    },
   };
 };

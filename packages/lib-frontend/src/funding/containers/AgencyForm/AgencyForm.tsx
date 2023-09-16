@@ -1,6 +1,7 @@
+import { Loading } from '#lib-frontend/core/components/Loading/Loading';
 import { type LFCModel } from '#lib-frontend/core/core.models';
+import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBoundary';
 import { ItemStepForm } from '#lib-frontend/data/components/ItemStepForm/ItemStepForm';
-import { useQuery } from '#lib-frontend/data/hooks/useQuery/useQuery';
 import {
   type AgencyFormModel,
   type AgencyFormPropsModel,
@@ -22,24 +23,24 @@ export const AgencyForm: LFCModel<AgencyFormPropsModel> = ({
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([FUNDING]);
   const { getMany } = useRatingAgencyResource();
-
-  const { data: agencies } = useQuery('agencies1', async () => getMany({ filter: [] }));
-  console.warn(agencies);
-
   return (
-    <ItemStepForm<CreditRatingFormModel, AgencyFormModel>
-      {...wrapperProps}
-      id="agency"
-      initialValues={initialValues}
-      message={t('funding:agencyFormMessage')}
-      onComplete={onComplete}
-      onError={onError}
-      onSubmit={onSubmit}
-      onSuccess={onSuccess}
-      options={[
-        { id: 'sAndP', label: ({ t }) => t('funding:sAndP') },
-        { id: 'moodys', label: ({ t }) => t('funding:moodys') },
-      ]}
-    />
+    <DataBoundary
+      fallback={<Loading />}
+      id="agencies"
+      query={async () => getMany({ filter: [] })}>
+      {({ data }) => (
+        <ItemStepForm<CreditRatingFormModel, AgencyFormModel>
+          {...wrapperProps}
+          id="_agency"
+          initialValues={initialValues}
+          message={t('funding:agencyFormMessage')}
+          onComplete={onComplete}
+          onError={onError}
+          onSubmit={onSubmit}
+          onSuccess={onSuccess}
+          options={data?.result?.map(({ _id, name }) => ({ id: _id, label: name })) ?? []}
+        />
+      )}
+    </DataBoundary>
   );
 };

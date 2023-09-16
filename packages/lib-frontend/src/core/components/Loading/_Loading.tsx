@@ -1,16 +1,13 @@
-import { Flow } from 'react-native-animated-spinkit';
-import { type SpinnerProps } from 'react-native-animated-spinkit/lib/typescript/SpinnerProps';
+import { type LoaderSizeMarginProps } from 'react-spinners/helpers/props';
+import PulseLoader from 'react-spinners/PulseLoader';
 
 import { type _LoadingPropsModel } from '#lib-frontend/core/components/Loading/_Loading.models';
 import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
 
-export const _Loading = composeComponent<_LoadingPropsModel, SpinnerProps>({
-  Component: Flow,
+export const _Loading = composeComponent<_LoadingPropsModel, LoaderSizeMarginProps>({
+  Component: PulseLoader,
 
-  getProps: ({ color, size }) => ({
-    animating: true,
-    color,
-    hidesWhenStopped: false,
-    size,
-  }),
+  getProps: ({ color, size }) => ({ color, loading: true, size }),
+
+  isWeb: true,
 });

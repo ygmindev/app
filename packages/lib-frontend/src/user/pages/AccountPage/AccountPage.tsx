@@ -1,16 +1,16 @@
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { RouteGroup } from '#lib-frontend/route/components/RouteGroup/RouteGroup';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { ACCOUNT_GROUPS } from '#lib-frontend/user/pages/AccountPage/AccountPage.constants';
 import { type AccountPagePropsModel } from '#lib-frontend/user/pages/AccountPage/AccountPage.models';
 
-export const AccountPage: SFCModel<AccountPagePropsModel> = ({ testID, ...props }) => {
-  const { styles } = useStyles({ props });
+export const AccountPage: LFCModel<AccountPagePropsModel> = ({ testID, ...props }) => {
+  const { wrapperProps } = useLayoutStyles({ props });
   return (
     <MainLayout
-      style={styles}
-      testID={testID}>
+      {...wrapperProps}
+      p>
       {ACCOUNT_GROUPS.map(({ id, root, routes }) => (
         <RouteGroup
           key={id}
