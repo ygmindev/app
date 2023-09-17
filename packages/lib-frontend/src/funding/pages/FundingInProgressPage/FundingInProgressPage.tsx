@@ -51,7 +51,9 @@ export const FundingInProgressPage: LFCModel<FundingInProgressPagePropsModel> = 
                   <ItemTable
                     data={[
                       {
-                        description: `${formatRange(node.amount, { isScale: false })}`,
+                        description: `${node.currency} ${formatRange(node.amount, {
+                          isScale: false,
+                        })}`,
                         icon: 'water',
                         title: t('funding:amount'),
                       },
