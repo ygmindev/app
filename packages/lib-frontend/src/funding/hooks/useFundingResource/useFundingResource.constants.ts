@@ -5,6 +5,7 @@ import { type FundingModel } from '#lib-shared/funding/resources/Funding/Funding
 export const FUNDING_FIELDS: GraphQlQueryParamsFieldsModel<FundingModel> = [
   '_id',
   'created',
+  'currency',
   { amount: ['min', 'max', 'unit'] },
   { maturity: ['min', 'max', 'unit'] },
   { [CREDIT_RATING_RESOURCE_NAME]: ['longTermCategory', 'longTermWatch'] },

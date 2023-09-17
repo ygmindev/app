@@ -55,7 +55,8 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
                   position={SHAPE_POSITION.RELATIVE}>
                   <Wrapper
                     isRowAlign
-                    p>
+                    pHorizontal
+                    pVertical={THEME_SIZE.SMALL}>
                     {tab.icon && (
                       <Icon
                         color={isActiveFF ? THEME_COLOR.PRIMARY : undefined}
@@ -72,7 +73,7 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
                     <Wrapper
                       backgroundColor={THEME_COLOR.PRIMARY}
                       bottom={0}
-                      height={5}
+                      height={3}
                       left={0}
                       position={SHAPE_POSITION.ABSOLUTE}
                       right={0}

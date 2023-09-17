@@ -16,7 +16,7 @@ export const routes: Array<RouteModel> = getRoutes({
   appRoutes: [
     {
       layoutProps: { p: true },
-      navigator: <TabNavigator type={TABS_TYPE.BUTTON} />,
+      navigator: <TabNavigator type={TABS_TYPE.UNDERLINE} />,
       pathname: '/',
       routes: [
         {

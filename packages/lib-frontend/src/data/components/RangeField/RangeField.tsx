@@ -21,6 +21,7 @@ import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
+import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { type RangeModel } from '#lib-shared/data/data.models';
@@ -69,42 +70,42 @@ export const RangeField = <TType extends NumberUnitModel>({
         case RELATIVE_DATE_UNIT.DAY:
           return {
             lowerF: 1,
-            maxF: rangeTypeFF === RANGE_TYPE.RANGE ? max ?? 90 : max,
+            maxF: rangeTypeFF === RANGE_TYPE.RANGE ? max ?? 90 : undefined,
             minF: min ?? 1,
             upperF: 365,
           };
         case RELATIVE_DATE_UNIT.WEEK:
           return {
             lowerF: 1,
-            maxF: rangeTypeFF === RANGE_TYPE.RANGE ? max ?? 36 : max,
+            maxF: rangeTypeFF === RANGE_TYPE.RANGE ? max ?? 36 : undefined,
             minF: min ?? 1,
             upperF: 52,
           };
         case RELATIVE_DATE_UNIT.MONTH:
           return {
             lowerF: 1,
-            maxF: rangeTypeFF === RANGE_TYPE.RANGE ? max ?? 12 : max,
+            maxF: rangeTypeFF === RANGE_TYPE.RANGE ? max ?? 12 : undefined,
             minF: min ?? 1,
             upperF: 18,
           };
         case RELATIVE_DATE_UNIT.YEAR:
           return {
             lowerF: 1,
-            maxF: rangeTypeFF === RANGE_TYPE.RANGE ? max ?? 1e1 : max,
+            maxF: rangeTypeFF === RANGE_TYPE.RANGE ? max ?? 1e1 : undefined,
             minF: min ?? 1,
             upperF: 1e2,
           };
         case AMOUNT_UNIT.BILLION:
           return {
             lowerF: 1,
-            maxF: rangeTypeFF === RANGE_TYPE.RANGE ? max ?? 5 : max,
+            maxF: rangeTypeFF === RANGE_TYPE.RANGE ? max ?? 5 : undefined,
             minF: min ?? 1,
             upperF: 1e1,
           };
         default:
           return {
             lowerF: 10,
-            maxF: rangeTypeFF === RANGE_TYPE.RANGE ? max ?? 500 : max,
+            maxF: rangeTypeFF === RANGE_TYPE.RANGE ? max ?? 500 : undefined,
             minF: min ?? 1,
             upperF: 1e3,
           };
@@ -114,7 +115,12 @@ export const RangeField = <TType extends NumberUnitModel>({
     if (rangeTypeF) {
       rangeTypeSet(rangeTypeF);
     }
-    valueControlledSet(merge([{ max: maxF, min: minF, unit }, valueControlled]));
+    valueControlledSet(
+      merge([
+        cleanObject({ max: maxF === minF ? undefined : maxF, min: minF, unit }),
+        valueControlled,
+      ]),
+    );
   };
 
   return (

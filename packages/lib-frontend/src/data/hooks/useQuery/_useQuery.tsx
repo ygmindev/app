@@ -13,6 +13,7 @@ export const _useQuery = <TType,>(
   const cache = isNumber(options?.cache) ? options?.cache : 0;
   const { data, isStale, refetch } = useQuery<TType | null, Error>([id], callback, {
     cacheTime: cache,
+    refetchOnMount: cache === 0 ? 'always' : true,
     staleTime: cache,
   });
   const refetchF = debounce(async () => refetch());

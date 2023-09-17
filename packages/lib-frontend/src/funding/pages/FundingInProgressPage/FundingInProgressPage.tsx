@@ -17,7 +17,7 @@ import { CREDIT_RATING_WATCH } from '#lib-shared/funding/resources/CreditRating/
 export const FundingInProgressPage: LFCModel<FundingInProgressPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation();
-  const { format, formatRange } = useFormatter();
+  const { formatRange } = useFormatter();
   const { getConnection } = useFundingResource();
   return (
     <MainLayout

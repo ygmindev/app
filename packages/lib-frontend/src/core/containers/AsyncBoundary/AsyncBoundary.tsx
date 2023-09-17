@@ -43,7 +43,7 @@ export const AsyncBoundary: LFCModel<AsyncBoundaryPropsModel> = ({
       {errorContext ? (
         <Wrapper
           {...wrapperProps}
-          grow
+          flex
           isCenter
           s={THEME_SIZE.SMALL}>
           <Icon
@@ -70,7 +70,7 @@ export const AsyncBoundary: LFCModel<AsyncBoundaryPropsModel> = ({
           fallback={
             fallback ?? (
               <Wrapper
-                grow
+                flex
                 isCenter>
                 <Loading />
               </Wrapper>

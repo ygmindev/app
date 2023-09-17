@@ -28,6 +28,7 @@ export const _useQueryConnection = <TType,>(
         params && params.pageInfo.hasPreviousPage
           ? { after: params.pageInfo.endCursor, first: limit }
           : undefined,
+      refetchOnMount: cache === 0 ? 'always' : true,
       staleTime: cache,
     },
   );
