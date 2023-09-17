@@ -1721,24 +1721,16 @@ input RatingAgencyUpdateUpdateInput {
   name: String
 }
 
-type ScaledNumber {
-  unit: String
-  value: Float
-}
-
-input ScaledNumberInput {
-  unit: String
-  value: Float
-}
-
 type ScaledNumberRange {
-  max: ScaledNumber
-  value: ScaledNumber
+  max: Float
+  min: Float
+  unit: String
 }
 
 input ScaledNumberRangeInput {
-  max: ScaledNumberInput
-  value: ScaledNumberInput
+  max: Float
+  min: Float
+  unit: String
 }
 
 type SignIn {

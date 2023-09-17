@@ -7,7 +7,6 @@ import { type PartialModel } from '#lib-shared/core/core.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
 export type StepFormPropsModel<TType, TResult = void> = UseFormParamsModel<TType, TResult> & {
-  isProgressVisible?: boolean;
   steps: Array<FormStepModel<TType, PartialModel<TType>>>;
   topElement?: ReactElement;
 };

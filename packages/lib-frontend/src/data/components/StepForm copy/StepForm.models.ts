@@ -9,7 +9,6 @@ import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 export type StepFormPropsModel<TKey extends string, TType, TResult = void> = WithIdModel<TKey> &
   SubmittablePropsModel<TType, TResult> & {
     initialValues?: PartialModel<TType>;
-    isProgressVisible?: boolean;
     steps: Array<FormStepModel<TType>>;
     topElement?: ReactElement;
   };

@@ -4,9 +4,11 @@ import { type FundingFormModel } from '#lib-shared/funding/resources/Funding/Fun
 
 export const FUNDING_FORM_INITIAL_VALUES: PartialModel<FundingFormModel> = {
   amount: {
-    value: { unit: AMOUNT_UNIT.MILLION, value: 10 },
+    min: 10,
+    unit: AMOUNT_UNIT.MILLION,
   },
   maturity: {
-    value: { unit: RELATIVE_DATE_UNIT.YEAR, value: 5 },
+    min: 5,
+    unit: RELATIVE_DATE_UNIT.YEAR,
   },
 };

@@ -16,7 +16,7 @@ export type FieldTypeModel = `${PROPERTY_TYPE}` | DataTypeModel;
 
 export type RangeModel<TType> = {
   max?: TType;
-  value?: TType;
+  min?: TType;
 };
 
 export type ScaledNumberModel<TType extends NumberUnitModel> = { unit?: TType; value: number };

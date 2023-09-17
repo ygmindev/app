@@ -9,7 +9,4 @@ export type SliderPropsModel = Omit<
   | 'maxIcon'
   | 'minIcon'
   | 'valueIcon'
-> & {
-  lowerFormatter?(value?: number): string;
-  upperFormatter?(value?: number): string;
-};
+> & { formatter?(value?: number): string };

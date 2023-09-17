@@ -13,9 +13,9 @@ export const SignInButton: LFCModel<SignInButtonPropsModel> = ({ ...props }) => 
   const { push } = useRouter();
   return (
     <Button
+      {...wrapperProps}
       icon="signin"
-      onPress={() => push({ pathname: SIGN_IN })}
-      {...wrapperProps}>
+      onPress={() => push({ pathname: SIGN_IN })}>
       {`${t('auth:signIn')} ${t('core:or')} ${t('auth:register')}`}
     </Button>
   );

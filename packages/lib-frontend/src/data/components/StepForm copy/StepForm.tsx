@@ -26,7 +26,6 @@ import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 export const StepForm = <TKey extends string, TType, TResult = void>({
   id,
   initialValues,
-  isProgressVisible = true,
   onSubmit,
   onSuccess,
   steps,

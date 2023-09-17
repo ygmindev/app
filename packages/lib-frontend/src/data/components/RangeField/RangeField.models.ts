@@ -6,7 +6,6 @@ import { type ScaledNumberRangeModel } from '#lib-shared/data/resources/ScaledNu
 export type RangeFieldPropsModel<TType extends NumberUnitModel> = FieldPropsModel<
   ScaledNumberRangeModel<TType>
 > & {
-  defaultUnit: TType;
   unitOptions: Array<TranslatableOptionModel<TType>>;
 };
 

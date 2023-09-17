@@ -2,25 +2,18 @@ import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { type NumberUnitModel } from '#lib-frontend/data/data.models';
 import { DATA_TYPE } from '#lib-shared/data/data.constants';
-import { type ScaledNumberModel } from '#lib-shared/data/data.models';
 import { type ScaledNumberRangeModel } from '#lib-shared/data/resources/ScaledNumberRange/ScaledNumberRange.models';
-
-@withEntity({ name: 'ScaledNumber' })
-class ScaledNumber<TType extends NumberUnitModel> implements ScaledNumberModel<TType> {
-  @withField({ type: DATA_TYPE.STRING })
-  unit!: TType;
-
-  @withField({ type: DATA_TYPE.NUMBER })
-  value!: number;
-}
 
 @withEntity({ name: 'ScaledNumberRange' })
 export class ScaledNumberRange<TType extends NumberUnitModel>
   implements ScaledNumberRangeModel<TType>
 {
-  @withField({ Resource: ScaledNumber<TType>, type: DATA_TYPE.NUMBER })
-  max?: ScaledNumberModel<TType>;
+  @withField({ isOptional: true, type: DATA_TYPE.STRING })
+  unit?: TType;
 
-  @withField({ Resource: ScaledNumber<TType>, type: DATA_TYPE.NUMBER })
-  value?: ScaledNumberModel<TType>;
+  @withField({ isOptional: true, type: DATA_TYPE.NUMBER })
+  min?: number;
+
+  @withField({ isOptional: true, type: DATA_TYPE.NUMBER })
+  max?: number;
 }

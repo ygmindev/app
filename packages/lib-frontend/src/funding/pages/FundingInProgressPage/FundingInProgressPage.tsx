@@ -47,21 +47,7 @@ export const FundingInProgressPage: LFCModel<FundingInProgressPagePropsModel> = 
               return (
                 <Tile
                   key={node._id}
-                  onPress={() => null}
-                  // rightElement={
-                  //   <Wrapper
-                  //     isCenter
-                  //     position={SHAPE_POSITION.RELATIVE}
-                  //     s={THEME_SIZE.SMALL}>
-                  //     <FloatingDot />
-
-                  //     <Chip color={THEME_COLOR.ERROR}>5</Chip>
-
-                  //     <Text fontSize={THEME_SIZE.SMALL}>quotes</Text>
-                  //   </Wrapper>
-                  // }
-                  // title={t('funding:refinancing')}
-                >
+                  onPress={() => null}>
                   <ItemTable
                     data={[
                       {

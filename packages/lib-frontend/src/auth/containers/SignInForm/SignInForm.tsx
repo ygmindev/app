@@ -29,7 +29,6 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
   return (
     <StepForm
       {...props}
-      isProgressVisible={false}
       onSubmit={handleSubmit}
       onSuccess={async () => replace({ pathname: redirectTo ?? '/' })}
       steps={[

@@ -54,13 +54,13 @@ export const _Slider: SFCModel<_SliderPropsModel> = ({
     }}
     max={upper}
     min={lower}
-    onChange={(v) => onChange && onChange(isArray(v) ? { max: v[1], value: v[0] } : { value: v })}
+    onChange={(v) => onChange && onChange(isArray(v) ? { max: v[1], min: v[0] } : { min: v })}
     railStyle={{ backgroundColor, bottom: 0, margin: 'auto', top: 0 }}
     range={isRange}
     step={step}
     style={{ height: markerSize }}
     tabIndex={2}
     trackStyle={{ backgroundColor: markerColor, bottom: 0, margin: 'auto', top: 0 }}
-    value={isRange ? [value?.value ?? lower ?? 0, value?.max ?? upper ?? 0] : value?.value}
+    value={isRange ? [value?.min ?? lower ?? 0, value?.max ?? upper ?? 0] : value?.min}
   />
 );

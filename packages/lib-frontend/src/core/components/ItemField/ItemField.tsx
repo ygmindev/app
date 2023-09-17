@@ -34,9 +34,9 @@ export const ItemField: LFCModel<ItemFieldPropsModel> = ({
 
   return (
     <Wrapper
+      {...wrapperProps}
       flex
-      s
-      {...wrapperProps}>
+      s>
       <SearchField
         onChange={search}
         value={query}

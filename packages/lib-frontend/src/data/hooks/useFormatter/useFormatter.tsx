@@ -183,14 +183,14 @@ export const useFormatter = (): UseFormatterModel => {
   return {
     format,
     formatRange: <TType extends NumberUnitModel>(
-      v?: ScaledNumberRangeModel<TType>,
-      options?: FormatterOptionsModel<number>,
+      value?: ScaledNumberRangeModel<TType>,
+      options?: NumberFormatterOptionsModel,
     ): string => {
-      if (v) {
-        const { max, value } = v;
+      if (value) {
+        const { max, min } = value;
         return filterNil([
-          value && format(value?.value, { ...options, unit: value?.unit }),
-          max && format(max?.value, { ...options, unit: max?.unit }),
+          min && format(min, { ...options, unit: value.unit }),
+          max && format(max, { ...options, unit: value.unit }),
         ]).join(' - ');
       }
       return '';

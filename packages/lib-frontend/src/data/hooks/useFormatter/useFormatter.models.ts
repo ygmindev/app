@@ -8,7 +8,7 @@ export type UseFormatterModel = {
 
   formatRange<TType extends NumberUnitModel>(
     value?: ScaledNumberRangeModel<TType>,
-    options?: FormatterOptionsModel<number>,
+    options?: NumberFormatterOptionsModel,
   ): string;
 
   unformat<TType extends DataTypeModel>(

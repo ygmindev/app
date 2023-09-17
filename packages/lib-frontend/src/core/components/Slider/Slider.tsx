@@ -21,13 +21,12 @@ import { type RangeModel } from '#lib-shared/data/data.models';
 export const Slider: LFCModel<SliderPropsModel> = ({
   defaultValue,
   elementState,
+  formatter,
   isRange,
   lower,
-  lowerFormatter,
   onChange,
   step,
   upper,
-  upperFormatter,
   value,
   ...props
 }) => {
@@ -62,9 +61,9 @@ export const Slider: LFCModel<SliderPropsModel> = ({
       <Wrapper
         isRowAlign
         justify={FLEX_JUSTIFY.SPACE_BETWEEN}>
-        {lower && <Text>{lowerFormatter ? lowerFormatter(lower) : toString(lower)}</Text>}
+        {lower && <Text>{formatter ? formatter(lower) : toString(lower)}</Text>}
 
-        {upper && <Text>{upperFormatter ? upperFormatter(upper) : toString(upper)}</Text>}
+        {upper && <Text>{formatter ? formatter(upper) : toString(upper)}</Text>}
       </Wrapper>
     </Wrapper>
   );
