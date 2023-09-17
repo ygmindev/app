@@ -12,10 +12,10 @@ import {
   type AsyncBoundaryPropsModel,
   type ErrorContextModel,
 } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useQueryContext } from '#lib-frontend/data/hooks/useQueryContext/useQueryContext';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
@@ -25,17 +25,16 @@ export const asyncBoundaryContext = createContext<AsyncBoundaryContextModel>({
   handleRefresh: noop,
 });
 
-export const AsyncBoundary: SFCModel<AsyncBoundaryPropsModel> = ({
+export const AsyncBoundary: LFCModel<AsyncBoundaryPropsModel> = ({
   children,
   errorContextGet,
   errorMode = ERROR_MODE.NOTIFICATION,
   fallback,
   onRefresh,
-  testID,
   ...props
 }) => {
   const { t } = useTranslation();
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const [errorContext, errorContextSet] = useState<ErrorContextModel | undefined>();
   const { reset } = useQueryContext();
   return (
@@ -43,11 +42,10 @@ export const AsyncBoundary: SFCModel<AsyncBoundaryPropsModel> = ({
       value={{ errorContextGet, errorContextSet, errorMode, handleRefresh: reset }}>
       {errorContext ? (
         <Wrapper
+          {...wrapperProps}
           grow
           isCenter
-          s={THEME_SIZE.SMALL}
-          style={styles}
-          testID={testID}>
+          s={THEME_SIZE.SMALL}>
           <Icon
             fontSize={THEME_SIZE_MORE.XLARGE}
             icon={errorContext.icon ?? 'sad'}

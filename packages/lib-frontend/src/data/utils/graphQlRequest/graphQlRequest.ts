@@ -6,7 +6,6 @@ import {
 } from '#lib-frontend/data/utils/graphQlRequest/graphQlRequest.models';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
-import { type HttpReponseModel } from '#lib-shared/http/utils/HttpService/HttpService.models';
 import { error } from '#lib-shared/logging/utils/logger/logger';
 
 export const graphQlRequest = async <TParams, TResult, TName extends string = string>({
@@ -26,14 +25,11 @@ export const graphQlRequest = async <TParams, TResult, TName extends string = st
     }),
     variables: variables && cleanObject(variables),
   });
-  const graphQlError = (
-    result as HttpReponseModel<GraphQlHttpResponseModel<unknown>>
-  )?.data?.errors?.at(0);
+  const graphQlError = (result as GraphQlHttpResponseModel<unknown>)?.errors?.at(0);
   if (graphQlError) {
     error(graphQlError);
     // TODO: fix statuscode
     throw new HttpError(500, graphQlError.message);
   }
-
   return (result && result.data && (result.data[name] as TResult)) ?? null;
 };

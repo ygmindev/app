@@ -1,6 +1,6 @@
 import findIndex from 'lodash/findIndex';
 import toString from 'lodash/toString';
-import { type ReactElement, useState } from 'react';
+import { type ReactElement, useEffect, useState } from 'react';
 
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
@@ -16,7 +16,7 @@ import {
 import { RANGE_TYPE } from '#lib-frontend/data/components/RangeField/RangField.constants';
 import { SelectField } from '#lib-frontend/data/components/SelectField/SelectField';
 import { TEXT_FIELD_KEYBOARD } from '#lib-frontend/data/components/TextField/TextField.constants';
-import { DATA } from '#lib-frontend/data/data.constants';
+import { AMOUNT_UNIT, DATA } from '#lib-frontend/data/data.constants';
 import { type NumberUnitModel } from '#lib-frontend/data/data.models';
 import { useFormatter } from '#lib-frontend/data/hooks/useFormatter/useFormatter';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
@@ -41,19 +41,15 @@ export const RangeField = <TType extends NumberUnitModel>({
   const { wrapperProps } = useLayoutStyles({ props });
   const [rangeType, rangeTypeSet] = useState<RangeTypeModel>(RANGE_TYPE.EXACT);
   const isRange = rangeType === RANGE_TYPE.RANGE;
-  const [lower, lowerSet] = useState<number>(1);
-  const [upper, upperSet] = useState<number>(1e3);
-  const { valueControlled, valueControlledSet } = useValueControlled<ScaledNumberRangeModel<TType>>(
-    {
-      defaultValue: {
-        value: { unit: defaultUnit, value: 0 },
-        ...(isRange ? { max: { unit: defaultUnit, value: 1000 } } : {}),
-      },
-      onChange,
-      value,
-    },
-  );
+  const [range, rangeSet] = useState<[number, number]>([1, 1e3]);
   const { format, unformat } = useFormatter();
+  const { valueControlled, valueControlledSet } = useValueControlled<ScaledNumberRangeModel<TType>>(
+    { onChange, value },
+  );
+
+  useEffect(() => {
+    handleChange({ key: 'value', unit: defaultUnit, value: value?.value?.value });
+  }, [defaultUnit]);
 
   const handleBlur = (): void => {
     if (isRange && valueControlled?.value && valueControlled?.max) {
@@ -66,6 +62,27 @@ export const RangeField = <TType extends NumberUnitModel>({
         valueControlledSet({ max: valueControlled.value, value: valueControlled.max });
       }
     }
+  };
+
+  const handleChange = ({
+    key,
+    unit,
+    value,
+  }: {
+    key: keyof ScaledNumberRangeModel<TType>;
+    unit?: TType;
+    value?: number;
+  }): void => {
+    const [valueF, lowerF, upperF] = (() => {
+      switch (unit) {
+        case AMOUNT_UNIT.BILLION:
+          return [1, 1, 1e1];
+        default:
+          return [1e2, 1, 1e3];
+      }
+    })();
+    rangeSet([lowerF, upperF]);
+    valueControlledSet(merge([{ [key]: { unit, value: value ?? valueF } }, valueControlled]));
   };
 
   const getFieldElement = (key: keyof ScaledNumberRangeModel<TType>): ReactElement => {
@@ -93,9 +110,7 @@ export const RangeField = <TType extends NumberUnitModel>({
                     : t('funding:amount')
                 }
                 onBlur={handleBlur}
-                onChange={(v) =>
-                  valueControlledSet(merge([{ [key]: { value: v } }, valueControlled]))
-                }
+                onChange={(v) => handleChange({ key, value: v })}
                 value={valueControlled && valueControlled[key]?.value}
               />
             ),
@@ -105,9 +120,7 @@ export const RangeField = <TType extends NumberUnitModel>({
             element: (
               <SelectField<TType>
                 label={t('core:unit')}
-                onChange={(v) =>
-                  valueControlledSet(merge([{ [key]: { unit: v } }, valueControlled]))
-                }
+                onChange={(v) => handleChange({ key, unit: v as TType })}
                 options={unitOptionsF}
                 value={valueControlled && valueControlled[key]?.unit}
               />
@@ -126,7 +139,7 @@ export const RangeField = <TType extends NumberUnitModel>({
       rangeTypeSet(RANGE_TYPE.EXACT);
     } else {
       const { value } = valueControlled ?? {};
-      valueControlledSet({ max: { unit: value?.unit, value: upper }, value });
+      valueControlledSet({ max: { unit: value?.unit, value: range[1] }, value });
       rangeTypeSet(RANGE_TYPE.RANGE);
     }
   };
@@ -149,14 +162,14 @@ export const RangeField = <TType extends NumberUnitModel>({
 
       <Slider
         isRange={isRange}
-        lower={lower}
+        lower={range[0]}
         lowerFormatter={(v) => format(v, { isScale: false, unit: valueControlled?.value?.unit })}
         onChange={(v) =>
           valueControlledSet(
             merge([{ max: { value: v.max }, value: { value: v.value } }, valueControlled]),
           )
         }
-        upper={upper}
+        upper={range[1]}
         upperFormatter={(v) => format(v, { isScale: false, unit: valueControlled?.value?.unit })}
         value={{
           value: valueControlled?.value?.value,

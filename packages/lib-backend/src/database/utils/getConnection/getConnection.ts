@@ -14,12 +14,8 @@ export const getConnection = async <TType, TForm, TRoot = undefined>({
   const afterOffset = getOffsetWithDefault(after, -1);
   let startOffset = Math.max(-1, afterOffset) + 1;
   let endOffset = Math.min(beforeOffset, count);
-  if (first) {
-    endOffset = Math.min(endOffset, startOffset + first);
-  }
-  if (last) {
-    startOffset = Math.max(startOffset, endOffset - last);
-  }
+  first && (endOffset = Math.min(endOffset, startOffset + first));
+  last && (startOffset = Math.max(startOffset, endOffset - last));
   const skip = Math.max(startOffset, 0);
   const take = Math.max(endOffset - startOffset, 1);
   const { result } = await getMany({ ...input, options: { skip, take } });

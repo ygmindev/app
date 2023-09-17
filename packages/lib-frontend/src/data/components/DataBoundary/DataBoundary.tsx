@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
 
 import { AsyncBoundary } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
-import { type SFCPropsModel } from '#lib-frontend/core/core.models';
+import { type LFCPropsModel, type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import {
   type DataBoundaryPropsModel,
@@ -40,8 +40,8 @@ export const DataBoundary = <TParams = undefined, TResult = void>({
   mutate,
   query,
   ...props
-}: SFCPropsModel<DataBoundaryPropsModel<TParams, TResult>>): ReactElement<
-  SFCPropsModel<DataBoundaryPropsModel<TParams, TResult>>
+}: LFCPropsModel<DataBoundaryPropsModel<TParams, TResult>>): ReactElement<
+  LFCPropsModel<DataBoundaryPropsModel<TParams, TResult>>
 > => (
   <AsyncBoundary {...props}>
     {query ? (

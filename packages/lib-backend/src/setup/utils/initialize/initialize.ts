@@ -9,14 +9,7 @@ import { type CallableModel } from '#lib-shared/core/core.models';
 
 process.env.NODE_ENV !== 'production' && (install as CallableModel)();
 
-let isInitialized: boolean;
-
 export const initialize = async (): Promise<InitializeModel> => {
-  if (isInitialized) {
-    const database = Container.get(Database, DATABASE_TYPE.MONGO);
-    isInitialized = true;
-    return { database };
-  }
   const database = new Database(_configDatabase());
   await database.connect();
   Container.set(Database, database, DATABASE_TYPE.MONGO);

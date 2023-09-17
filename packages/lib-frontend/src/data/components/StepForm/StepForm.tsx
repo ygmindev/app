@@ -27,11 +27,17 @@ export const StepForm = <TType, TResult = void>({
   const [current, currentSet] = useState<number>(0);
   const [isLoading, isLoadingSet] = useState<boolean>(false);
   const isLastStep = current === steps.length - 1;
-  const { handleSubmit, values, valuesSet } = useForm<TType, TResult>({
+  const {
+    handleSubmit,
+    isLoading: isLoadingF,
+    values,
+    valuesSet,
+  } = useForm<TType, TResult>({
     initialValues,
     onSubmit,
     onSuccess,
   });
+  const isLoadingFF = isLoadingF || isLoading;
   return (
     <Wrapper
       {...wrapperProps}
@@ -56,7 +62,7 @@ export const StepForm = <TType, TResult = void>({
         slides={steps.map((step) => ({
           element: cloneElement(step.element, {
             data: values,
-            elementState: isLoading ? ELEMENT_STATE.LOADING : undefined,
+            elementState: isLoadingFF ? ELEMENT_STATE.LOADING : undefined,
             initialValues,
             key: step.id,
             onBack: () => {

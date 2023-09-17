@@ -90,6 +90,7 @@ export const IONIC_ICONS = {
   signout: 'log-out-outline',
   skill: 'medal-outline',
   smile: 'happy-outline',
+  speedometer: 'speedometer-outline',
   star: 'star',
   starBlank: 'star-outline',
   switch: 'toggle-outline',
@@ -101,6 +102,7 @@ export const IONIC_ICONS = {
   undo: 'arrow-undo-outline',
   upload: 'cloud-upload-outline',
   wallet: 'wallet-outline',
+  water: 'water-outline',
 };
 
 export const FONTAWESOME_ICONS = {

@@ -55,11 +55,11 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
 
   const { getMany } = useRatingAgencyResource();
   const { data: agencies } = useQuery('agencies', async () => getMany({ filter: [] }));
-
   return (
     <>
       <FormContainer
         {...wrapperProps}
+        elementState={elementState}
         onComplete={onComplete}
         onError={onError}
         onSubmit={handleSubmit}
