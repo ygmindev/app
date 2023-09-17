@@ -11,16 +11,20 @@ import { FUNDING } from '#lib-frontend/funding/funding.constants';
 import { useFundingResource } from '#lib-frontend/funding/hooks/useFundingResource/useFundingResource';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
+import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
 
 export const FundingForm: LFCModel<FundingFormPropsModel> = ({ ...props }) => {
   const { t } = useTranslation();
   const { create } = useFundingResource();
   const { replace } = useRouter();
+  const currentUser = useCurrentUser();
   return (
     <StepForm
       {...props}
       initialValues={FUNDING_FORM_INITIAL_VALUES}
-      onSubmit={async (form) => create({ form })}
+      onSubmit={async (form) =>
+        currentUser && create({ form: { ...form, _user: currentUser._id } })
+      }
       onSuccess={async () => replace({ pathname: `${FUNDING}/${IN_PROGRESS}` })}
       steps={[
         {

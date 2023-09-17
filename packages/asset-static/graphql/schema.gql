@@ -673,6 +673,7 @@ type CreditRatingCreateOutput {
 type CreditRatingCreateOutputRoot {
   CreditRating: [CreditRating]
   _id: String
+  _user: String
   amount: ScaledNumberRange
   created: DateTime
   currency: String
@@ -682,6 +683,7 @@ type CreditRatingCreateOutputRoot {
 input CreditRatingCreateRootInput {
   CreditRating: [CreditRatingInput]
   _id: String
+  _user: String
   amount: ScaledNumberRangeInput
   created: DateTime
   currency: String
@@ -712,6 +714,7 @@ type CreditRatingGetConnectionOutputEdge {
 type CreditRatingGetConnectionOutputRoot {
   CreditRating: [CreditRating]
   _id: String
+  _user: String
   amount: ScaledNumberRange
   created: DateTime
   currency: String
@@ -721,6 +724,7 @@ type CreditRatingGetConnectionOutputRoot {
 input CreditRatingGetConnectionRootInput {
   CreditRating: [CreditRatingInput]
   _id: String
+  _user: String
   amount: ScaledNumberRangeInput
   created: DateTime
   currency: String
@@ -745,6 +749,7 @@ type CreditRatingGetManyOutput {
 type CreditRatingGetManyOutputRoot {
   CreditRating: [CreditRating]
   _id: String
+  _user: String
   amount: ScaledNumberRange
   created: DateTime
   currency: String
@@ -754,6 +759,7 @@ type CreditRatingGetManyOutputRoot {
 input CreditRatingGetManyRootInput {
   CreditRating: [CreditRatingInput]
   _id: String
+  _user: String
   amount: ScaledNumberRangeInput
   created: DateTime
   currency: String
@@ -768,6 +774,7 @@ type CreditRatingGetOutput {
 type CreditRatingGetOutputRoot {
   CreditRating: [CreditRating]
   _id: String
+  _user: String
   amount: ScaledNumberRange
   created: DateTime
   currency: String
@@ -777,6 +784,7 @@ type CreditRatingGetOutputRoot {
 input CreditRatingGetRootInput {
   CreditRating: [CreditRatingInput]
   _id: String
+  _user: String
   amount: ScaledNumberRangeInput
   created: DateTime
   currency: String
@@ -805,6 +813,7 @@ type CreditRatingRemoveOutput {
 type CreditRatingRemoveOutputRoot {
   CreditRating: [CreditRating]
   _id: String
+  _user: String
   amount: ScaledNumberRange
   created: DateTime
   currency: String
@@ -814,6 +823,7 @@ type CreditRatingRemoveOutputRoot {
 input CreditRatingRemoveRootInput {
   CreditRating: [CreditRatingInput]
   _id: String
+  _user: String
   amount: ScaledNumberRangeInput
   created: DateTime
   currency: String
@@ -834,6 +844,7 @@ type CreditRatingUpdateOutput {
 type CreditRatingUpdateOutputRoot {
   CreditRating: [CreditRating]
   _id: String
+  _user: String
   amount: ScaledNumberRange
   created: DateTime
   currency: String
@@ -843,6 +854,7 @@ type CreditRatingUpdateOutputRoot {
 input CreditRatingUpdateRootInput {
   CreditRating: [CreditRatingInput]
   _id: String
+  _user: String
   amount: ScaledNumberRangeInput
   created: DateTime
   currency: String
@@ -872,6 +884,7 @@ input FilterInput {
 type Funding {
   CreditRating: [CreditRating]
   _id: String
+  _user: String
   amount: ScaledNumberRange
   created: DateTime
   currency: String
@@ -881,6 +894,7 @@ type Funding {
 input FundingCreateFormInput {
   CreditRating: [CreditRatingInput]
   _id: String
+  _user: String
   amount: ScaledNumberRangeInput
   created: DateTime
   currency: String
@@ -950,6 +964,7 @@ type FundingUpdateOutput {
 input FundingUpdateUpdateInput {
   CreditRating: [CreditRatingInput]
   _id: String
+  _user: String
   amount: ScaledNumberRangeInput
   created: DateTime
   currency: String

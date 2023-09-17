@@ -15,6 +15,7 @@ import { getRoutes } from '#lib-frontend/route/utils/getRoutes/getRoutes';
 export const routes: Array<RouteModel> = getRoutes({
   appRoutes: [
     {
+      isProtectable: true,
       layoutProps: { p: true },
       navigator: <TabNavigator type={TABS_TYPE.UNDERLINE} />,
       pathname: '/',

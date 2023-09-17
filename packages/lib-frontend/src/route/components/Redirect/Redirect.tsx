@@ -15,6 +15,7 @@ export const Redirect = <TType,>({
   // const context = useContext(rootContext);
 
   useEffect(() => {
+    console.warn(pathname);
     void replace<TType>({ isBack, params, pathname });
   }, []);
 

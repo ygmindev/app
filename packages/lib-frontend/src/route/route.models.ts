@@ -47,6 +47,7 @@ export type LocationModel<TType = object> = {
 
 export type LocationContextModel = {
   previous?: string;
+  redirectTo?: string;
 };
 
 export type RouteContextModel<TType = object> = {

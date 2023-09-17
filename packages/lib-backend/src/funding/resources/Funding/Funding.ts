@@ -22,6 +22,9 @@ export class Funding extends EntityResource implements FundingModel {
   })
   [CREDIT_RATING_RESOURCE_NAME]?: Array<CreditRatingModel>;
 
+  @withField({ isRepository: true, type: PROPERTY_TYPE.ID })
+  _user!: string;
+
   @withField({
     Resource: ScaledNumberRange,
     isOptional: true,

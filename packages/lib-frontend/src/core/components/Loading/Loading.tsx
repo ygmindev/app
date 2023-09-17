@@ -1,5 +1,3 @@
-import isNumber from 'lodash/isNumber';
-
 import { _Loading } from '#lib-frontend/core/components/Loading/_Loading';
 import { type _LoadingPropsModel } from '#lib-frontend/core/components/Loading/_Loading.models';
 import { type LoadingPropsModel } from '#lib-frontend/core/components/Loading/Loading.models';
@@ -11,10 +9,10 @@ export const Loading = composeComponent<LoadingPropsModel, _LoadingPropsModel>({
   Component: _Loading,
 
   getProps: (
-    { color = THEME_COLOR.PRIMARY, colorRole = THEME_ROLE.MAIN, fontSize = THEME_SIZE.LARGE },
+    { color = THEME_COLOR.PRIMARY, colorRole = THEME_ROLE.MAIN, size = THEME_SIZE.MEDIUM },
     theme,
   ) => ({
     color: theme.color.palette[color as ThemeColorModel][colorRole],
-    size: isNumber(fontSize) ? fontSize : theme.font.size[fontSize],
+    size: theme.font.size[size],
   }),
 });

@@ -12,7 +12,7 @@ export const Protectable: FCModel<ProtectablePropsModel> = ({ children }) => {
   const { location } = useRouter();
   return authState === AUTH_STATE.UNAUTHENTICATED ? (
     <Redirect<SignInPageParamsModel>
-      params={{ redirectTo: location.pathname }}
+      context={{ redirectTo: location.pathname }}
       pathname={SIGN_IN}
     />
   ) : (
