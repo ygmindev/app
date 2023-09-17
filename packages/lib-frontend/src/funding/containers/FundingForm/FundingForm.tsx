@@ -3,6 +3,7 @@ import { type LFCModel } from '#lib-frontend/core/core.models';
 import { StepForm } from '#lib-frontend/data/components/StepForm/StepForm';
 import { AmountForm } from '#lib-frontend/funding/containers/AmountForm/AmountForm';
 import { CreditRatingForm } from '#lib-frontend/funding/containers/CreditRatingForm/CreditRatingForm';
+import { CurrencyForm } from '#lib-frontend/funding/containers/CurrencyForm/CurrencyForm';
 import { FUNDING_FORM_INITIAL_VALUES } from '#lib-frontend/funding/containers/FundingForm/FundingForm.constants';
 import { type FundingFormPropsModel } from '#lib-frontend/funding/containers/FundingForm/FundingForm.models';
 import { MaturityForm } from '#lib-frontend/funding/containers/MaturityForm/MaturityForm';
@@ -22,6 +23,11 @@ export const FundingForm: LFCModel<FundingFormPropsModel> = ({ ...props }) => {
       onSubmit={async (form) => create({ form })}
       onSuccess={async () => replace({ pathname: `${FUNDING}/${IN_PROGRESS}` })}
       steps={[
+        {
+          element: <CurrencyForm />,
+          id: 'currency',
+          title: t('funding:currency'),
+        },
         {
           element: <AmountForm />,
           id: 'amount',

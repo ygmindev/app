@@ -12,7 +12,7 @@ export type FundingModel = EntityResourceModel & {
 
   amount?: ScaledNumberRangeModel<AmountUnitModel>;
 
-  currency?: string;
+  currency: string;
 
   maturity?: ScaledNumberRangeModel<RelativeDateUnitModel>;
 };

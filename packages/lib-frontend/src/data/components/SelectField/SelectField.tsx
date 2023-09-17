@@ -1,3 +1,5 @@
+import find from 'lodash/find';
+import lowerCase from 'lodash/lowerCase';
 import { type ReactElement } from 'react';
 import { useRef } from 'react';
 
@@ -32,7 +34,6 @@ export const SelectField = <TType extends string = string>({
   renderOption,
   renderValue,
   round,
-  testID,
   value,
   width,
   ...props
@@ -51,7 +52,10 @@ export const SelectField = <TType extends string = string>({
 
   const { query, result, search } = useSearch({
     keys: ['label', 'id'],
-    list: options.map(({ label, ...option }) => ({ ...option, label: t(label) })),
+    list: options.map(({ label, ...option }) => ({
+      ...option,
+      label: label ? t(label) : undefined,
+    })),
     onChange: () => menuRef.current?.scrollTo({ x: 0, y: 0 }),
   });
 
@@ -63,11 +67,11 @@ export const SelectField = <TType extends string = string>({
   };
 
   const handleSelect = (): void => {
-    const selected = result && result[0];
+    const queryValue = find(result, ({ id }) => lowerCase(query) === lowerCase(id));
+    const selected = queryValue ?? (result && result[0]);
     const selectedValue = selected.id;
     if (selectedValue) {
       valueControlledSet(selectedValue);
-      onSubmit && onSubmit();
     }
     handleToggle(false);
   };
@@ -78,13 +82,11 @@ export const SelectField = <TType extends string = string>({
       ? renderValue(selectedOption)
       : renderOption
       ? renderOption(selectedOption)
-      : selectedOption.label
+      : selectedOption.label ?? selectedOption.id
     : undefined;
 
   return (
-    <Wrapper
-      {...wrapperProps}
-      flex>
+    <Wrapper {...wrapperProps}>
       <Menu
         anchor={(isOpen) => (
           <TextField

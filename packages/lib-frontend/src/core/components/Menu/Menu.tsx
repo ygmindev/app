@@ -127,7 +127,7 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
                   onPress={subOptions ? undefined : async () => handlePressOption(option)}
                   onPressOut={() => confirmMessage && handleToggle(false)}
                   type={BUTTON_TYPE.INVISIBLE}>
-                  {renderOption ? renderOption(option) : label}
+                  {(renderOption ? renderOption(option) : label) ?? id}
                 </Button>
               );
               return subOptions ? (

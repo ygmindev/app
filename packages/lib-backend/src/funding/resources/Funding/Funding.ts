@@ -30,8 +30,8 @@ export class Funding extends EntityResource implements FundingModel {
   })
   amount?: ScaledNumberRangeModel<AmountUnitModel>;
 
-  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
-  currency?: string;
+  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  currency!: string;
 
   @withField({
     Resource: ScaledNumberRange,
