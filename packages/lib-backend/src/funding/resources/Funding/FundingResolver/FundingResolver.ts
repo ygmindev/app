@@ -1,3 +1,4 @@
+import { selfAuthorizer } from '#lib-backend/auth/utils/selfAuthorizer/selfAuthorizer';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { Funding } from '#lib-backend/funding/resources/Funding/Funding';
 import { type FundingResolverModel } from '#lib-backend/funding/resources/Funding/FundingResolver/FundingResolver.models';
@@ -9,6 +10,7 @@ import {
   type FundingFormModel,
   type FundingModel,
 } from '#lib-shared/funding/resources/Funding/Funding.models';
+import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 
 @withContainer()
 @withResolver({ Resource: Funding })
@@ -16,6 +18,9 @@ export class FundingResolver
   extends createEntityResourceResolver<FundingModel, FundingFormModel>({
     Resource: Funding,
     ResourceService: FundingService,
+    authorizer: {
+      [RESOURCE_METHOD_TYPE.CREATE]: selfAuthorizer((input) => input.form._user),
+    },
     name: FUNDING_RESOURCE_NAME,
   })
   implements FundingResolverModel {}

@@ -17,7 +17,7 @@ export class BankResolver
     Resource: Bank,
     ResourceService: BankService,
     RootResource: User,
-    authorizer: { default: selfAuthorizer },
+    authorizer: { default: selfAuthorizer() },
     name: BANK_RESOURCE_NAME,
   })
   implements BankResolverModel {}

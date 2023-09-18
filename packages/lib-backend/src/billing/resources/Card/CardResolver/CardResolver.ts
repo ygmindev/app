@@ -17,7 +17,7 @@ export class CardResolver
     Resource: Card,
     ResourceService: CardService,
     RootResource: User,
-    authorizer: { default: selfAuthorizer },
+    authorizer: { default: selfAuthorizer() },
     name: CARD_RESOURCE_NAME,
   })
   implements CardResolverModel {}

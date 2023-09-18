@@ -20,7 +20,7 @@ export class LinkedUserResolver
     Resource: LinkedUser,
     ResourceService: LinkedUserService,
     RootResource: User,
-    authorizer: { default: selfAuthorizer },
+    authorizer: { default: selfAuthorizer() },
     name: LINKED_USER_RESOURCE_NAME,
   })
   implements LinkedUserServiceModel {}

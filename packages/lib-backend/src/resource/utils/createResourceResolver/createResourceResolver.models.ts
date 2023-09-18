@@ -4,10 +4,12 @@ import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constan
 import {
   type ResourceMethodTypeModel,
   type ResourceNameParamsModel,
+  type ResourceReadMethodTypeModel,
+  type ResourceWriteMethodTypeModel,
 } from '#lib-shared/resource/resource.models';
-import { type ResourceServiceModel } from '#lib-shared/resource/utils/ResourceService/ResourceService.models';
 import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
+import { type ResourceServiceModel } from '#lib-shared/resource/utils/ResourceService/ResourceService.models';
 
 export type CreateResourceResolverParamsModel<
   TType,
@@ -27,21 +29,9 @@ export type CreateResourceResolverParamsModel<
   authorizer?: {
     default?: ResourceResolverAuthorizerModel<ResourceMethodTypeModel, TType, TForm, TRoot>;
 
-    read?: ResourceResolverAuthorizerModel<
-      | RESOURCE_METHOD_TYPE.GET
-      | RESOURCE_METHOD_TYPE.GET_CONNECTION
-      | RESOURCE_METHOD_TYPE.GET_MANY,
-      TType,
-      TForm,
-      TRoot
-    >;
+    read?: ResourceResolverAuthorizerModel<ResourceReadMethodTypeModel, TType, TForm, TRoot>;
 
-    write?: ResourceResolverAuthorizerModel<
-      RESOURCE_METHOD_TYPE.CREATE | RESOURCE_METHOD_TYPE.REMOVE | RESOURCE_METHOD_TYPE.UPDATE,
-      TType,
-      TForm,
-      TRoot
-    >;
+    write?: ResourceResolverAuthorizerModel<ResourceWriteMethodTypeModel, TType, TForm, TRoot>;
   } & {
     [TKey in RESOURCE_METHOD_TYPE]?: ResourceResolverAuthorizerModel<TKey, TType, TForm, TRoot>;
   };
