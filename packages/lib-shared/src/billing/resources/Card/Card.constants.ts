@@ -1,4 +1,4 @@
-export const CARD_RESOURCE_NAME = 'Card';
+export const CARD_RESOURCE_NAME = 'card';
 
 export enum CARD_FUNDING {
   CREDIT = 'credit',

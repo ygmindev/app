@@ -4,9 +4,7 @@ import { Bank } from '#lib-backend/billing/resources/Bank/Bank';
 import { Card } from '#lib-backend/billing/resources/Card/Card';
 import { CreditRating } from '#lib-backend/funding/resources/CreditRating/CreditRating';
 import { Funding } from '#lib-backend/funding/resources/Funding/Funding';
-import { Issuer } from '#lib-backend/funding/resources/Issuer/Issuer';
 import { RatingAgency } from '#lib-backend/funding/resources/RatingAgency/RatingAgency';
-import { Underwriter } from '#lib-backend/funding/resources/Underwriter/Underwriter';
 import { DummyEntityResource } from '#lib-backend/test/resources/DummyEntityResource/DummyEntityResource';
 import { User } from '#lib-backend/user/resources/User/User';
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
@@ -26,8 +24,6 @@ const { _config, config } = defineConfig({
       Otp,
       RatingAgency,
       User,
-      Issuer,
-      Underwriter,
       process.env.NODE_ENV !== 'production' && DummyEntityResource,
     ]),
 

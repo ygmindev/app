@@ -1,12 +1,12 @@
-import { useIssuerResource } from '#lib-frontend/funding/hooks/useIssuerResource/useIssuerResource';
+import { useGroupResource } from '#lib-frontend/funding/hooks/useGroupResource/useGroupResource';
 import { renderHook } from '#lib-frontend/test/utils/renderHook/renderHook';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ useIssuerResource });
+const { displayName } = withTest({ useGroupResource });
 
 describe(displayName, () => {
   test('works', async () => {
-    const { result, unmount } = renderHook(() => useIssuerResource());
+    const { result, unmount } = renderHook(() => useGroupResource());
 
     unmount();
   });

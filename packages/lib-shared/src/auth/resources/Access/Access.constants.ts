@@ -1,4 +1,4 @@
-export const ACCESS_RESOURCE_NAME = 'Access';
+export const ACCESS_RESOURCE_NAME = 'access';
 
 export enum ACCESS_ROLE {
   ADMIN = 'Admin',

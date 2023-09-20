@@ -1,1 +1,1 @@
-export const FUNDING_RESOURCE_NAME = 'Funding';
+export const FUNDING_RESOURCE_NAME = 'funding';

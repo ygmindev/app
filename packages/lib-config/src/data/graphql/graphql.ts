@@ -9,9 +9,7 @@ import { Container } from '#lib-backend/core/utils/Container/Container';
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
 import { CreditRatingResolver } from '#lib-backend/funding/resources/CreditRating/CreditRatingResolver/CreditRatingResolver';
 import { FundingResolver } from '#lib-backend/funding/resources/Funding/FundingResolver/FundingResolver';
-import { IssuerResolver } from '#lib-backend/funding/resources/Issuer/IssuerResolver/IssuerResolver';
 import { RatingAgencyResolver } from '#lib-backend/funding/resources/RatingAgency/RatingAgencyResolver/RatingAgencyResolver';
-import { UnderwriterResolver } from '#lib-backend/funding/resources/Underwriter/UnderwriterResolver/UnderwriterResolver';
 import { SnapshotResolver } from '#lib-backend/test/resources/Snapshot/SnapshotResolver/SnapshotResolver';
 import { LinkedUserResolver } from '#lib-backend/user/resources/LinkedUser/LinkedUserResolver/LinkedUserResolver';
 import { UserResolver } from '#lib-backend/user/resources/User/UserResolver/UserResolver';
@@ -41,8 +39,6 @@ const { _config, config } = defineConfig({
         SignInResolver,
         UserResolver,
         SnapshotResolver,
-        IssuerResolver,
-        UnderwriterResolver,
       ],
 
       schemaDir: fromStatic('graphql/schema.gql'),

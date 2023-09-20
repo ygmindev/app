@@ -1,4 +1,4 @@
-export const TRACKING_EVENT_RESOURCE_NAME = 'TrackingEvent';
+export const TRACKING_EVENT_RESOURCE_NAME = 'trackingEvent';
 
 export enum TRACKING_EVENT_ACTION {
   CLOSE = 'close',
