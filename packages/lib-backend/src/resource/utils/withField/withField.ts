@@ -1,11 +1,22 @@
-import { ArrayType, Embedded, Index, PrimaryKey, Property } from '@mikro-orm/core';
+import {
+  ArrayType,
+  Embedded,
+  type EntityClass,
+  Index,
+  ManyToMany,
+  OneToMany,
+  PrimaryKey,
+  Property,
+} from '@mikro-orm/core';
 import { Field, Float } from 'type-graphql';
 import { type ReturnTypeFuncValue } from 'type-graphql/dist/decorators/types';
 
+import { FIELD_RELATION } from '#lib-backend/resource/utils/withField/withField.constants';
 import {
   type WithFieldModel,
   type WithFieldParamsModel,
 } from '#lib-backend/resource/utils/withField/withField.models';
+import { type StringKeyModel } from '#lib-shared/core/core.models';
 import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 
 const getField = <TType extends unknown>({
@@ -35,14 +46,32 @@ const getColumn = <TType extends unknown>({
   defaultValue,
   isArray,
   isOptional,
+  relation,
+  root,
   type,
 }: WithFieldParamsModel<TType>): PropertyDecorator => {
   if (Resource) {
-    return (
-      isArray
-        ? Embedded(() => Resource, { array: true, nullable: isOptional })
-        : Property({ nullable: isOptional, type: () => Resource })
-    ) as PropertyDecorator;
+    if (isArray) {
+      switch (relation) {
+        case FIELD_RELATION.MANY_TO_MANY:
+          return (
+            root
+              ? ManyToMany(() => Resource as unknown as EntityClass<TType>, root)
+              : ManyToMany(() => Resource as unknown as EntityClass<TType>)
+          ) as PropertyDecorator;
+        case FIELD_RELATION.ONE_TO_MANY:
+          return OneToMany(
+            () => Resource as unknown as EntityClass<TType>,
+            root ?? ('' as StringKeyModel<TType>),
+          ) as PropertyDecorator;
+        default:
+          return Embedded(() => Resource, {
+            array: true,
+            nullable: isOptional,
+          }) as PropertyDecorator;
+      }
+    }
+    return Property({ nullable: isOptional, type: () => Resource }) as PropertyDecorator;
   }
   const [Field, _options] = (() => {
     if (isArray) {
@@ -81,6 +110,8 @@ export const withField =
     isRepository = false,
     isSchema = true,
     isUnique,
+    relation,
+    root,
     type,
   }: WithFieldParamsModel<TType>): WithFieldModel =>
   (target, propertyKey) => {
@@ -90,8 +121,11 @@ export const withField =
         propertyKey,
       );
 
-    isSchema && getField({ Resource, isArray, isOptional, type })(target, propertyKey);
+    isSchema && getField({ Resource, isArray, isOptional, relation, type })(target, propertyKey);
 
     isRepository &&
-      getColumn({ Resource, defaultValue, isArray, isOptional, type })(target, propertyKey);
+      getColumn({ Resource, defaultValue, isArray, isOptional, relation, type })(
+        target,
+        propertyKey,
+      );
   };
