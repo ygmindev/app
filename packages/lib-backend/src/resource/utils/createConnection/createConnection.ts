@@ -18,10 +18,10 @@ export const createConnection = <TType extends unknown>({
 
   @withEntity({ name: nameF })
   class ConnectionF implements ConnectionModel<TType> {
-    @withField({ Resource: createEdge({ Resource, name }), isArray: true })
+    @withField({ Resource: () => createEdge({ Resource, name }), isArray: true })
     edges!: Array<EdgeModel<TType>>;
 
-    @withField({ Resource: PageInfo })
+    @withField({ Resource: () => PageInfo })
     pageInfo!: PageInfoModel;
   }
 

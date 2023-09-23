@@ -2,7 +2,7 @@ import {
   type ACCESS_LEVEL,
   type ACCESS_ROLE,
 } from '#lib-shared/auth/resources/Access/Access.constants';
-import { type ResolvedFieldModel } from '#lib-shared/resource/resource.models';
+import { type GroupModel } from '#lib-shared/funding/resources/Group/Group.models';
 import {
   type EntityResourceDataModel,
   type EntityResourceModel,
@@ -14,9 +14,9 @@ export type AccessRoleModel = `${ACCESS_ROLE}`;
 export type AccessLevelModel = `${ACCESS_LEVEL}`;
 
 export type AccessModel = EntityResourceModel & {
-  _user: string;
-  role: AccessRoleModel;
-  user?: ResolvedFieldModel<UserModel>;
+  group: GroupModel;
+  role: Array<AccessRoleModel>;
+  user: UserModel;
 };
 
 export type AccessFormModel = EntityResourceDataModel<AccessModel>;

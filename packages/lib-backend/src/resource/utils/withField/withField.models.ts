@@ -3,7 +3,7 @@ import { type StringKeyModel } from '#lib-shared/core/core.models';
 import { type DataTypeModel, type FieldTypeModel } from '#lib-shared/data/data.models';
 
 export type WithFieldParamsModel<TType> = {
-  Resource?: TType;
+  Resource?(): TType;
   defaultValue?(): TType;
   expire?: number;
   isArray?: boolean;
@@ -11,6 +11,7 @@ export type WithFieldParamsModel<TType> = {
   isRepository?: boolean;
   isSchema?: boolean;
   isUnique?: boolean;
+  name?: string;
   relation?: FieldRelation;
   root?: StringKeyModel<TType>;
   type: DataTypeModel | FieldTypeModel;

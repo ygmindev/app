@@ -11,6 +11,7 @@ import {
 } from '#lib-shared/auth/resources/Access/Access.models';
 import { withCondition } from '#lib-shared/core/utils/withCondition/withCondition';
 
+// TODO: should come from database
 export const getAccessRole = (level: AccessLevelModel): Array<AccessRoleModel> => {
   switch (level) {
     case ACCESS_LEVEL.PROHIBITED:

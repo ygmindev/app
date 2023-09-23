@@ -10,8 +10,6 @@ import {
 export type FundingModel = EntityResourceModel & {
   [CREDIT_RATING_RESOURCE_NAME]?: Array<CreditRatingModel>;
 
-  _user: string;
-
   amount?: ScaledNumberRangeModel<AmountUnitModel>;
 
   currency?: string;

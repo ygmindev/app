@@ -3,7 +3,7 @@ import { EntityResource } from '#lib-backend/resource/resources/EntityResource/E
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { DummyEmbeddedResource } from '#lib-backend/test/resources/DummyEmbeddedResource/DummyEmbeddedResource';
-import { DATA_TYPE, PROPERTY_TYPE } from'#lib-shared/data/data.constants';
+import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 import { DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.constants';
 import { type DummyEmbeddedResourceModel } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.models';
 import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
@@ -12,7 +12,7 @@ import { type DummyEntityResourceModel } from '#lib-shared/test/resources/DummyE
 @withEntity({ isRepository: true, name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME })
 export class DummyEntityResource extends EntityResource implements DummyEntityResourceModel {
   @withField({
-    Resource: DummyEmbeddedResource,
+    Resource: () => DummyEmbeddedResource,
     isArray: true,
     isOptional: true,
     isRepository: true,

@@ -14,7 +14,7 @@ import { type FundingModel } from '#lib-shared/funding/resources/Funding/Funding
 @withEntity({ isRepository: true, name: FUNDING_RESOURCE_NAME })
 export class Funding extends EntityResource implements FundingModel {
   @withField({
-    Resource: CreditRating,
+    Resource: () => CreditRating,
     isArray: true,
     isOptional: true,
     isRepository: true,
@@ -26,7 +26,7 @@ export class Funding extends EntityResource implements FundingModel {
   _user!: string;
 
   @withField({
-    Resource: ScaledNumberRange,
+    Resource: () => ScaledNumberRange,
     isOptional: true,
     isRepository: true,
     type: PROPERTY_TYPE.RESOURCE,
@@ -37,7 +37,7 @@ export class Funding extends EntityResource implements FundingModel {
   currency?: string;
 
   @withField({
-    Resource: ScaledNumberRange,
+    Resource: () => ScaledNumberRange,
     isOptional: true,
     isRepository: true,
     type: PROPERTY_TYPE.RESOURCE,

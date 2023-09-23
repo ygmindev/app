@@ -17,7 +17,7 @@ export class CreditRating extends EmbeddedResource implements CreditRatingModel 
   @withField({ isRepository: true, type: PROPERTY_TYPE.ID })
   _agency!: string;
 
-  @withField({ Resource: RatingAgency, isOptional: true, type: PROPERTY_TYPE.RESOURCE })
+  @withField({ Resource: () => RatingAgency, isOptional: true, type: PROPERTY_TYPE.RESOURCE })
   agency?: ResolvedFieldModel<RatingAgencyModel>;
 
   @withField({ isOptional: true, type: DATA_TYPE.STRING })

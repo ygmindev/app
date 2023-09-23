@@ -4,7 +4,9 @@ import {
   type EntityClass,
   Index,
   ManyToMany,
+  ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryKey,
   Property,
 } from '@mikro-orm/core';
@@ -25,7 +27,9 @@ const getField = <TType extends unknown>({
   type,
 }: WithFieldParamsModel<TType>): PropertyDecorator => {
   if (Resource) {
-    return Field(() => (isArray ? [Resource] : Resource) as ReturnTypeFuncValue, { simple: true });
+    return Field(() => (isArray ? [Resource()] : Resource()) as ReturnTypeFuncValue, {
+      simple: true,
+    });
   }
   switch (type) {
     case DATA_TYPE.STRING:
@@ -46,6 +50,7 @@ const getColumn = <TType extends unknown>({
   defaultValue,
   isArray,
   isOptional,
+  name,
   relation,
   root,
   type,
@@ -54,15 +59,16 @@ const getColumn = <TType extends unknown>({
     if (isArray) {
       switch (relation) {
         case FIELD_RELATION.MANY_TO_MANY:
-          return (
-            root
-              ? ManyToMany(() => Resource as unknown as EntityClass<TType>, root)
-              : ManyToMany(() => Resource as unknown as EntityClass<TType>)
+          return ManyToMany(
+            Resource as () => EntityClass<TType>,
+            root ? root : undefined,
+            name ? { joinColumn: `_${name}` } : {},
           ) as PropertyDecorator;
         case FIELD_RELATION.ONE_TO_MANY:
           return OneToMany(
-            () => Resource as unknown as EntityClass<TType>,
+            Resource as () => EntityClass<TType>,
             root ?? ('' as StringKeyModel<TType>),
+            root ? { joinColumn: `_${root}` } : {},
           ) as PropertyDecorator;
         default:
           return Embedded(() => Resource, {
@@ -71,7 +77,20 @@ const getColumn = <TType extends unknown>({
           }) as PropertyDecorator;
       }
     }
-    return Property({ nullable: isOptional, type: () => Resource }) as PropertyDecorator;
+    switch (relation) {
+      case FIELD_RELATION.MANY_TO_ONE:
+        return ManyToOne(
+          Resource as () => EntityClass<TType>,
+          name ? { joinColumn: `_${name}` } : {},
+        ) as PropertyDecorator;
+      case FIELD_RELATION.ONE_TO_ONE:
+        return OneToOne(
+          Resource as () => EntityClass<TType>,
+          name ? { joinColumn: `_${name}` } : {},
+        ) as PropertyDecorator;
+      default:
+        return Property({ nullable: isOptional, type: () => Resource }) as PropertyDecorator;
+    }
   }
   const [Field, _options] = (() => {
     if (isArray) {
@@ -110,6 +129,7 @@ export const withField =
     isRepository = false,
     isSchema = true,
     isUnique,
+    name,
     relation,
     root,
     type,
@@ -121,10 +141,11 @@ export const withField =
         propertyKey,
       );
 
-    isSchema && getField({ Resource, isArray, isOptional, relation, type })(target, propertyKey);
+    isSchema &&
+      getField({ Resource, isArray, isOptional, name, relation, root, type })(target, propertyKey);
 
     isRepository &&
-      getColumn({ Resource, defaultValue, isArray, isOptional, relation, type })(
+      getColumn({ Resource, defaultValue, isArray, isOptional, name, relation, root, type })(
         target,
         propertyKey,
       );

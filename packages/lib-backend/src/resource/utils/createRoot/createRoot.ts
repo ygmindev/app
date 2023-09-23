@@ -20,7 +20,7 @@ export const createRoot = <TRoot = undefined>({
 
     @withEntity({ isAbstract: true, name: `${nameF}Root` })
     class Root implements RootModel<TRoot> {
-      @withField({ Resource: RootResourceF, type: PROPERTY_TYPE.RESOURCE })
+      @withField({ Resource: () => RootResourceF, type: PROPERTY_TYPE.RESOURCE })
       root?: PartialModel<TRoot>;
     }
 

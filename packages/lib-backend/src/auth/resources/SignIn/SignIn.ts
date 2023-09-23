@@ -12,7 +12,7 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withEntity({ isRepository: true, name: SIGN_IN_RESOURCE_NAME })
 export class SignIn extends EntityResource implements SignInModel {
-  @withField({ Resource: User, type: PROPERTY_TYPE.RESOURCE })
+  @withField({ Resource: () => User, type: PROPERTY_TYPE.RESOURCE })
   user!: UserModel;
 
   @withField({ type: DATA_TYPE.STRING })
