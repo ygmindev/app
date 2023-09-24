@@ -1,6 +1,5 @@
 import {
   ArrayType,
-  Embedded,
   type EntityClass,
   Index,
   ManyToMany,
@@ -56,28 +55,29 @@ const getColumn = <TType extends unknown>({
   type,
 }: WithFieldParamsModel<TType>): PropertyDecorator => {
   if (Resource) {
-    if (isArray) {
-      switch (relation) {
-        case FIELD_RELATION.MANY_TO_MANY:
-          return ManyToMany(
-            Resource as () => EntityClass<TType>,
-            root ? root : undefined,
-            name ? { joinColumn: `_${name}` } : {},
-          ) as PropertyDecorator;
-        case FIELD_RELATION.ONE_TO_MANY:
-          return OneToMany(
-            Resource as () => EntityClass<TType>,
-            root ?? ('' as StringKeyModel<TType>),
-            root ? { joinColumn: `_${root}` } : {},
-          ) as PropertyDecorator;
-        default:
-          return Embedded(() => Resource, {
-            array: true,
-            nullable: isOptional,
-          }) as PropertyDecorator;
-      }
-    }
+    // if (isArray) {
+    //   switch (relation) {
+    //     default:
+    //       return Embedded(() => Resource, {
+    //         array: true,
+    //         nullable: isOptional,
+    //       }) as PropertyDecorator;
+    //   }
+    // }
     switch (relation) {
+      case FIELD_RELATION.MANY_TO_MANY:
+        return ManyToMany(
+          Resource as () => EntityClass<TType>,
+          root ? root : undefined,
+          name ? { joinColumn: `_${name}` } : {},
+        ) as PropertyDecorator;
+      case FIELD_RELATION.ONE_TO_MANY:
+        return OneToMany(
+          Resource as () => EntityClass<TType>,
+          root ?? ('' as StringKeyModel<TType>),
+          root ? { joinColumn: `_${root}` } : {},
+        ) as PropertyDecorator;
+
       case FIELD_RELATION.MANY_TO_ONE:
         return ManyToOne(
           Resource as () => EntityClass<TType>,

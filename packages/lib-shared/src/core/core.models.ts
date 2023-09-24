@@ -1,3 +1,4 @@
+import { type Function, type Object, type String } from 'ts-toolbelt';
 import {
   type Class,
   type Get,
@@ -72,13 +73,23 @@ export type ValuesModel<TType> = ValueOf<TType>;
 
 export type GetModel<TType extends object, TKey extends DeepKeyModel<TType>> = Get<TType, TKey>;
 
-export type DeepKeyModel<TType extends object> =
-  | StringKeyModel<TType>
-  | {
-      [TKey in keyof RequiredModel<TType> &
-        (string | number)]: RequiredModel<TType>[TKey] extends object
-        ? `${TKey}` | `${TKey}.${DeepKeyModel<RequiredModel<TType>[TKey]>}`
-        : `${TKey}`;
-    }[keyof RequiredModel<TType> & (string | number)];
+// export type DeepKeyModel<TType> = TType extends Array<infer TElement>
+//   ? `${DeepKeyModel<TElement>}`
+//   : TType extends object
+//   ? {
+//       [TKey in StringKeyModel<TType>]: `${TKey}` | `${TKey}.${DeepKeyModel<TType[TKey]>}`;
+//     }[StringKeyModel<TType>]
+//   : never;
+
+// TODO: cleanup if possible?
+type _IndexArray = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+export type DeepKeyModel<TType extends object, TDepth extends number = 10> =
+  [TDepth] extends [0] ? never :
+  TType extends Array<object> ? DeepKeyModel<TType[number], TDepth> :
+  keyof TType extends infer TKey ?
+  TKey extends StringKeyModel<TType> ?
+  TType[TKey] extends object ?
+  TKey | `${TKey}.${DeepKeyModel<TType[TKey], _IndexArray[TDepth]>}` :
+  TKey : never : never;
 
 export type StringKeyModel<TType> = Extract<keyof TType, string>;

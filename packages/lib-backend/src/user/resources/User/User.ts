@@ -3,6 +3,7 @@ import { EntityResource } from '#lib-backend/resource/resources/EntityResource/E
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { FIELD_RELATION } from '#lib-backend/resource/utils/withField/withField.constants';
+import { ACCESS_RESOURCE_NAME } from '#lib-shared/auth/resources/Access/Access.constants';
 import { type AccessModel } from '#lib-shared/auth/resources/Access/Access.models';
 import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
@@ -18,7 +19,7 @@ export class User extends EntityResource implements UserModel {
     relation: FIELD_RELATION.ONE_TO_MANY,
     type: PROPERTY_TYPE.RESOURCE,
   })
-  access?: Array<AccessModel>;
+  [ACCESS_RESOURCE_NAME]?: Array<AccessModel>;
 
   // @withField({
   //   Resource: () => Card,

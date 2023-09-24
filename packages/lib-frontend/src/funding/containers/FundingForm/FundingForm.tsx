@@ -22,9 +22,7 @@ export const FundingForm: LFCModel<FundingFormPropsModel> = ({ ...props }) => {
     <StepForm
       {...props}
       initialValues={FUNDING_FORM_INITIAL_VALUES}
-      // onSubmit={async (form) =>
-      //   currentUser && create({ form: { ...form, _user: currentUser._id } })
-      // }
+      onSubmit={async (form) => currentUser && create({ form })}
       onSuccess={async () => replace({ pathname: `${FUNDING}/${IN_PROGRESS}` })}
       steps={[
         {

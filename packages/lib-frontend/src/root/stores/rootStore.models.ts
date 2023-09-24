@@ -7,6 +7,11 @@ import {
   type BillingActionsParamsModel,
   type BillingStateModel,
 } from '#lib-frontend/billing/stores/billingStore/billingStore.models';
+import { type GROUP } from '#lib-frontend/group/group.constants';
+import {
+  type GroupActionsParamsModel,
+  type GroupStateModel,
+} from '#lib-frontend/group/stores/groupStore/groupStore.models';
 import {
   type LocaleActionsParamsModel,
   type LocaleStateModel,
@@ -39,6 +44,7 @@ import { type USER } from '#lib-shared/user/user.constants';
 export type RootStateModel = {
   [APP]: AppStateModel;
   [BILLING]: BillingStateModel;
+  [GROUP]: GroupStateModel;
   [LOCALE]: LocaleStateModel;
   [NOTIFICATION]: NotificationStateModel;
   [ROUTE]: RouteStateModel;
@@ -49,6 +55,7 @@ export type RootStateModel = {
 export type RootActionsParamsModel = {
   [APP]: AppActionsParamsModel;
   [BILLING]: BillingActionsParamsModel;
+  [GROUP]: GroupActionsParamsModel;
   [LOCALE]: LocaleActionsParamsModel;
   [NOTIFICATION]: NotificationActionsParamsModel;
   [ROUTE]: RouteActionsParamsModel;

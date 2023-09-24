@@ -1,4 +1,4 @@
-import { Group } from '#lib-backend/funding/resources/Group/Group';
+import { Group } from '#lib-backend/group/resources/Group/Group';
 import { EntityResource } from '#lib-backend/resource/resources/EntityResource/EntityResource';
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
@@ -10,8 +10,8 @@ import {
   type AccessRoleModel,
 } from '#lib-shared/auth/resources/Access/Access.models';
 import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
-import { GROUP_RESOURCE_NAME } from '#lib-shared/funding/resources/Group/Group.constants';
-import { type GroupModel } from '#lib-shared/funding/resources/Group/Group.models';
+import { GROUP_RESOURCE_NAME } from '#lib-shared/group/resources/Group/Group.constants';
+import { type GroupModel } from '#lib-shared/group/resources/Group/Group.models';
 import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
@@ -24,7 +24,7 @@ export class Access extends EntityResource implements AccessModel {
     relation: FIELD_RELATION.MANY_TO_ONE,
     type: PROPERTY_TYPE.RESOURCE,
   })
-  group!: GroupModel;
+  [GROUP_RESOURCE_NAME]!: GroupModel;
 
   @withField({
     Resource: () => User,
@@ -33,7 +33,7 @@ export class Access extends EntityResource implements AccessModel {
     relation: FIELD_RELATION.MANY_TO_ONE,
     type: PROPERTY_TYPE.RESOURCE,
   })
-  user!: UserModel;
+  [USER_RESOURCE_NAME]!: UserModel;
 
   @withField({ isArray: true, isRepository: true, type: DATA_TYPE.STRING })
   role!: Array<AccessRoleModel>;

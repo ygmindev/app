@@ -6,6 +6,7 @@ import {
 } from '#lib-frontend/data/utils/graphQlRequest/graphQlRequest.models';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
+import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
 import { error } from '#lib-shared/logging/utils/logger/logger';
 
 export const graphQlRequest = async <TParams, TResult, TName extends string = string>({
@@ -29,7 +30,7 @@ export const graphQlRequest = async <TParams, TResult, TName extends string = st
   if (graphQlError) {
     error(graphQlError);
     // TODO: fix statuscode
-    throw new HttpError(500, graphQlError.message);
+    throw new HttpError(HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR, graphQlError.message);
   }
   return (result && result.data && (result.data[name] as TResult)) ?? null;
 };

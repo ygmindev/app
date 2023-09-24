@@ -1,6 +1,8 @@
 import { APP_REDUCER } from '#lib-frontend/app/stores/appStore/appStore.constants';
 import { BILLING } from '#lib-frontend/billing/billing.constants';
 import { BILLING_REDUCER } from '#lib-frontend/billing/stores/billingStore/billingStore.constants';
+import { GROUP } from '#lib-frontend/group/group.constants';
+import { GROUP_REDUCER } from '#lib-frontend/group/stores/groupStore/groupStore.constants';
 import { LOCALE_REDUCER } from '#lib-frontend/locale/stores/localeStore/localeStore.constants';
 import { NOTIFICATION_REDUCER } from '#lib-frontend/notification/stores/notificationStore/notificationStore.constants';
 import {
@@ -23,6 +25,7 @@ export const ROOT_REDUCERS: {
 } = {
   [APP]: APP_REDUCER,
   [BILLING]: BILLING_REDUCER,
+  [GROUP]: GROUP_REDUCER,
   [LOCALE]: LOCALE_REDUCER,
   [NOTIFICATION]: NOTIFICATION_REDUCER,
   [ROUTE]: ROUTE_REDUCER,

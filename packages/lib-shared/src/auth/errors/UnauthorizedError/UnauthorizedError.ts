@@ -3,6 +3,6 @@ import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.co
 
 export class UnauthorizedError extends HttpError {
   constructor(message?: string) {
-    super(HTTP_STATUS_CODE.UNAUTHORIZED, message);
+    super(HTTP_STATUS_CODE.UNAUTHORIZED, message ?? 'unauthorized');
   }
 }

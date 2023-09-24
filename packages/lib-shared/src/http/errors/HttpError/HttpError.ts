@@ -5,7 +5,8 @@ export class HttpError extends Error {
 
   constructor(statusCode?: number, message?: string) {
     super();
-    this.statusCode = statusCode || HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR;
-    this.message = message || '';
+    Object.setPrototypeOf(this, HttpError.prototype);
+    this.statusCode = statusCode ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR;
+    this.message = message ?? 'HttpError';
   }
 }

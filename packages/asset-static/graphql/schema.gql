@@ -4,19 +4,20 @@
 # -----------------------------------------------
 
 type Access {
+  Group: Group
+  User: User
   _id: String
   created: DateTime
-  group: Group
   role: [String]
   user: User
 }
 
 input AccessCreateFormInput {
+  Group: GroupInput
+  User: UserInput
   _id: String
   created: DateTime
-  group: GroupInput
   role: [String]
-  user: UserInput
 }
 
 input AccessCreateInput {
@@ -63,11 +64,11 @@ type AccessGetOutput {
 }
 
 input AccessInput {
+  Group: GroupInput
+  User: UserInput
   _id: String
   created: DateTime
-  group: GroupInput
   role: [String]
-  user: UserInput
 }
 
 input AccessRemoveInput {
@@ -88,14 +89,15 @@ type AccessUpdateOutput {
 }
 
 input AccessUpdateUpdateInput {
+  Group: GroupInput
+  User: UserInput
   _id: String
   created: DateTime
-  group: GroupInput
   role: [String]
-  user: UserInput
 }
 
 type CreditRating {
+  Funding: [Funding]
   _id: String
   agency: RatingAgency
   created: DateTime
@@ -104,6 +106,7 @@ type CreditRating {
 }
 
 input CreditRatingCreateFormInput {
+  Funding: [FundingInput]
   _id: String
   agency: RatingAgencyInput
   created: DateTime
@@ -122,8 +125,8 @@ type CreditRatingCreateOutput {
 }
 
 type CreditRatingCreateOutputRoot {
+  CreditRating: [CreditRating]
   _id: String
-  _user: String
   amount: ScaledNumberRange
   created: DateTime
   currency: String
@@ -131,8 +134,8 @@ type CreditRatingCreateOutputRoot {
 }
 
 input CreditRatingCreateRootInput {
+  CreditRating: [CreditRatingInput]
   _id: String
-  _user: String
   amount: ScaledNumberRangeInput
   created: DateTime
   currency: String
@@ -161,8 +164,8 @@ type CreditRatingGetConnectionOutput {
 }
 
 type CreditRatingGetConnectionOutputRoot {
+  CreditRating: [CreditRating]
   _id: String
-  _user: String
   amount: ScaledNumberRange
   created: DateTime
   currency: String
@@ -170,8 +173,8 @@ type CreditRatingGetConnectionOutputRoot {
 }
 
 input CreditRatingGetConnectionRootInput {
+  CreditRating: [CreditRatingInput]
   _id: String
-  _user: String
   amount: ScaledNumberRangeInput
   created: DateTime
   currency: String
@@ -194,8 +197,8 @@ type CreditRatingGetManyOutput {
 }
 
 type CreditRatingGetManyOutputRoot {
+  CreditRating: [CreditRating]
   _id: String
-  _user: String
   amount: ScaledNumberRange
   created: DateTime
   currency: String
@@ -203,8 +206,8 @@ type CreditRatingGetManyOutputRoot {
 }
 
 input CreditRatingGetManyRootInput {
+  CreditRating: [CreditRatingInput]
   _id: String
-  _user: String
   amount: ScaledNumberRangeInput
   created: DateTime
   currency: String
@@ -217,8 +220,8 @@ type CreditRatingGetOutput {
 }
 
 type CreditRatingGetOutputRoot {
+  CreditRating: [CreditRating]
   _id: String
-  _user: String
   amount: ScaledNumberRange
   created: DateTime
   currency: String
@@ -226,12 +229,21 @@ type CreditRatingGetOutputRoot {
 }
 
 input CreditRatingGetRootInput {
+  CreditRating: [CreditRatingInput]
   _id: String
-  _user: String
   amount: ScaledNumberRangeInput
   created: DateTime
   currency: String
   maturity: ScaledNumberRangeInput
+}
+
+input CreditRatingInput {
+  Funding: [FundingInput]
+  _id: String
+  agency: RatingAgencyInput
+  created: DateTime
+  longTermCategory: String
+  longTermWatch: String
 }
 
 input CreditRatingRemoveInput {
@@ -245,8 +257,8 @@ type CreditRatingRemoveOutput {
 }
 
 type CreditRatingRemoveOutputRoot {
+  CreditRating: [CreditRating]
   _id: String
-  _user: String
   amount: ScaledNumberRange
   created: DateTime
   currency: String
@@ -254,8 +266,8 @@ type CreditRatingRemoveOutputRoot {
 }
 
 input CreditRatingRemoveRootInput {
+  CreditRating: [CreditRatingInput]
   _id: String
-  _user: String
   amount: ScaledNumberRangeInput
   created: DateTime
   currency: String
@@ -274,8 +286,8 @@ type CreditRatingUpdateOutput {
 }
 
 type CreditRatingUpdateOutputRoot {
+  CreditRating: [CreditRating]
   _id: String
-  _user: String
   amount: ScaledNumberRange
   created: DateTime
   currency: String
@@ -283,8 +295,8 @@ type CreditRatingUpdateOutputRoot {
 }
 
 input CreditRatingUpdateRootInput {
+  CreditRating: [CreditRatingInput]
   _id: String
-  _user: String
   amount: ScaledNumberRangeInput
   created: DateTime
   currency: String
@@ -292,6 +304,7 @@ input CreditRatingUpdateRootInput {
 }
 
 input CreditRatingUpdateUpdateInput {
+  Funding: [FundingInput]
   _id: String
   agency: RatingAgencyInput
   created: DateTime
@@ -311,8 +324,8 @@ input FilterInput {
 }
 
 type Funding {
+  CreditRating: [CreditRating]
   _id: String
-  _user: String
   amount: ScaledNumberRange
   created: DateTime
   currency: String
@@ -320,8 +333,8 @@ type Funding {
 }
 
 input FundingCreateFormInput {
+  CreditRating: [CreditRatingInput]
   _id: String
-  _user: String
   amount: ScaledNumberRangeInput
   created: DateTime
   currency: String
@@ -371,6 +384,15 @@ type FundingGetOutput {
   result: Funding
 }
 
+input FundingInput {
+  CreditRating: [CreditRatingInput]
+  _id: String
+  amount: ScaledNumberRangeInput
+  created: DateTime
+  currency: String
+  maturity: ScaledNumberRangeInput
+}
+
 input FundingRemoveInput {
   filter: [FilterInput]
 }
@@ -389,8 +411,8 @@ type FundingUpdateOutput {
 }
 
 input FundingUpdateUpdateInput {
+  CreditRating: [CreditRatingInput]
   _id: String
-  _user: String
   amount: ScaledNumberRangeInput
   created: DateTime
   currency: String
@@ -398,15 +420,15 @@ input FundingUpdateUpdateInput {
 }
 
 type Group {
+  Access: [Access]
   _id: String
-  access: [Access]
   created: DateTime
   name: String
 }
 
 input GroupInput {
+  Access: [AccessInput]
   _id: String
-  access: [AccessInput]
   created: DateTime
   name: String
 }
@@ -686,8 +708,8 @@ type SignInUserUpdateOutput {
 }
 
 input SignInUserUpdateUpdateInput {
+  Access: [AccessInput]
   _id: String
-  access: [AccessInput]
   callingCode: String
   created: DateTime
   email: String
@@ -734,8 +756,8 @@ type SnapshotGetOutput {
 }
 
 type User {
+  Access: [Access]
   _id: String
-  access: [Access]
   callingCode: String
   created: DateTime
   email: String
@@ -746,8 +768,8 @@ type User {
 }
 
 input UserCreateFormInput {
+  Access: [AccessInput]
   _id: String
-  access: [AccessInput]
   callingCode: String
   created: DateTime
   email: String
@@ -801,8 +823,8 @@ type UserGetOutput {
 }
 
 input UserInput {
+  Access: [AccessInput]
   _id: String
-  access: [AccessInput]
   callingCode: String
   created: DateTime
   email: String
@@ -830,8 +852,8 @@ type UserUpdateOutput {
 }
 
 input UserUpdateUpdateInput {
+  Access: [AccessInput]
   _id: String
-  access: [AccessInput]
   callingCode: String
   created: DateTime
   email: String
