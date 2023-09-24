@@ -44,7 +44,7 @@ export const FundingForm: LFCModel<FundingFormPropsModel> = ({ ...props }) => {
         },
         {
           element: <CreditRatingForm />,
-          id: 'creditRating',
+          id: 'CrditRating',
           title: t('funding:creditRating'),
         },
       ]}
