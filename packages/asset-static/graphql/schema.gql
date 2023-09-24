@@ -3,438 +3,6 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
-type Access {
-  _id: String
-  _user: String
-  created: DateTime
-  role: String
-  user: User
-}
-
-type AccessCreateOutput {
-  result: Access
-}
-
-type AccessGetConnectionOutput {
-  result: AccessGetConnectionOutputConnection
-}
-
-type AccessGetConnectionOutputConnection {
-  edges: [AccessGetConnectionOutputEdge]
-  pageInfo: PageInfo
-}
-
-type AccessGetConnectionOutputEdge {
-  cursor: String
-  node: Access
-}
-
-type AccessGetManyOutput {
-  result: [Access]
-}
-
-type AccessGetOutput {
-  result: Access
-}
-
-type AccessRemoveOutput {
-  result: Access
-}
-
-type AccessUpdateOutput {
-  result: Access
-}
-
-type Bank {
-  _id: String
-  bank: String
-  created: DateTime
-  id: String
-  last4: String
-  type: String
-}
-
-type BankCreateOutput {
-  result: Bank
-  root: BankCreateOutputRoot
-}
-
-type BankCreateOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-type BankGetConnectionOutput {
-  result: BankGetConnectionOutputConnection
-  root: BankGetConnectionOutputRoot
-}
-
-type BankGetConnectionOutputConnection {
-  edges: [BankGetConnectionOutputEdge]
-  pageInfo: PageInfo
-}
-
-type BankGetConnectionOutputEdge {
-  cursor: String
-  node: Bank
-}
-
-type BankGetConnectionOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-type BankGetManyOutput {
-  result: [Bank]
-  root: BankGetManyOutputRoot
-}
-
-type BankGetManyOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-type BankGetOutput {
-  result: Bank
-  root: BankGetOutputRoot
-}
-
-type BankGetOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-type BankRemoveOutput {
-  result: Bank
-  root: BankRemoveOutputRoot
-}
-
-type BankRemoveOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-type BankUpdateOutput {
-  result: Bank
-  root: BankUpdateOutputRoot
-}
-
-type BankUpdateOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-type Card {
-  _id: String
-  brand: String
-  created: DateTime
-  expMonth: Float
-  expYear: Float
-  funding: String
-  id: String
-  last4: String
-  type: String
-}
-
-type CardCreateOutput {
-  result: Card
-  root: CardCreateOutputRoot
-}
-
-type CardCreateOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-type CardGetConnectionOutput {
-  result: CardGetConnectionOutputConnection
-  root: CardGetConnectionOutputRoot
-}
-
-type CardGetConnectionOutputConnection {
-  edges: [CardGetConnectionOutputEdge]
-  pageInfo: PageInfo
-}
-
-type CardGetConnectionOutputEdge {
-  cursor: String
-  node: Card
-}
-
-type CardGetConnectionOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-type CardGetManyOutput {
-  result: [Card]
-  root: CardGetManyOutputRoot
-}
-
-type CardGetManyOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-type CardGetOutput {
-  result: Card
-  root: CardGetOutputRoot
-}
-
-type CardGetOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input CardInput {
-  _id: String
-  brand: String
-  created: DateTime
-  expMonth: Float
-  expYear: Float
-  funding: String
-  id: String
-  last4: String
-  type: String
-}
-
-type CardRemoveOutput {
-  result: Card
-  root: CardRemoveOutputRoot
-}
-
-type CardRemoveOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-type CardUpdateOutput {
-  result: Card
-  root: CardUpdateOutputRoot
-}
-
-type CardUpdateOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-type CreditRating {
-  _agency: String
-  _id: String
-  agency: RatingAgency
-  created: DateTime
-  longTermCategory: String
-  longTermWatch: String
-}
-
-type CreditRatingCreateOutput {
-  result: CreditRating
-  root: CreditRatingCreateOutputRoot
-}
-
-type CreditRatingCreateOutputRoot {
-  CreditRating: [CreditRating]
-  _id: String
-  _user: String
-  amount: ScaledNumberRange
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRange
-}
-
-type CreditRatingGetConnectionOutput {
-  result: CreditRatingGetConnectionOutputConnection
-  root: CreditRatingGetConnectionOutputRoot
-}
-
-type CreditRatingGetConnectionOutputConnection {
-  edges: [CreditRatingGetConnectionOutputEdge]
-  pageInfo: PageInfo
-}
-
-type CreditRatingGetConnectionOutputEdge {
-  cursor: String
-  node: CreditRating
-}
-
-type CreditRatingGetConnectionOutputRoot {
-  CreditRating: [CreditRating]
-  _id: String
-  _user: String
-  amount: ScaledNumberRange
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRange
-}
-
-type CreditRatingGetManyOutput {
-  result: [CreditRating]
-  root: CreditRatingGetManyOutputRoot
-}
-
-type CreditRatingGetManyOutputRoot {
-  CreditRating: [CreditRating]
-  _id: String
-  _user: String
-  amount: ScaledNumberRange
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRange
-}
-
-type CreditRatingGetOutput {
-  result: CreditRating
-  root: CreditRatingGetOutputRoot
-}
-
-type CreditRatingGetOutputRoot {
-  CreditRating: [CreditRating]
-  _id: String
-  _user: String
-  amount: ScaledNumberRange
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRange
-}
-
-type CreditRatingRemoveOutput {
-  result: CreditRating
-  root: CreditRatingRemoveOutputRoot
-}
-
-type CreditRatingRemoveOutputRoot {
-  CreditRating: [CreditRating]
-  _id: String
-  _user: String
-  amount: ScaledNumberRange
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRange
-}
-
-type CreditRatingUpdateOutput {
-  result: CreditRating
-  root: CreditRatingUpdateOutputRoot
-}
-
-type CreditRatingUpdateOutputRoot {
-  CreditRating: [CreditRating]
-  _id: String
-  _user: String
-  amount: ScaledNumberRange
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRange
-}
-
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
@@ -446,304 +14,28 @@ input FilterInput {
   value: String
 }
 
-type Funding {
-  CreditRating: [CreditRating]
-  _id: String
-  _user: String
-  amount: ScaledNumberRange
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRange
-}
-
-type FundingCreateOutput {
-  result: Funding
-}
-
-type FundingGetConnectionOutput {
-  result: FundingGetConnectionOutputConnection
-}
-
-type FundingGetConnectionOutputConnection {
-  edges: [FundingGetConnectionOutputEdge]
-  pageInfo: PageInfo
-}
-
-type FundingGetConnectionOutputEdge {
-  cursor: String
-  node: Funding
-}
-
-type FundingGetManyOutput {
-  result: [Funding]
-}
-
-type FundingGetOutput {
-  result: Funding
-}
-
-type FundingRemoveOutput {
-  result: Funding
-}
-
-type FundingUpdateOutput {
-  result: Funding
-}
-
-type Issuer {
-  _id: String
-  created: DateTime
-  id: String
-}
-
-input IssuerCreateFormInput {
-  _id: String
-  created: DateTime
-  id: String
-}
-
-input IssuerCreateInput {
-  form: IssuerCreateFormInput
-}
-
-type IssuerCreateOutput {
-  result: Issuer
-}
-
-input IssuerGetConnectionInput {
-  filter: [FilterInput]
-  pagination: PaginationInput
-}
-
-type IssuerGetConnectionOutput {
-  result: IssuerGetConnectionOutputConnection
-}
-
-type IssuerGetConnectionOutputConnection {
-  edges: [IssuerGetConnectionOutputEdge]
-  pageInfo: PageInfo
-}
-
-type IssuerGetConnectionOutputEdge {
-  cursor: String
-  node: Issuer
-}
-
-input IssuerGetInput {
-  filter: [FilterInput]
-}
-
-input IssuerGetManyInput {
-  filter: [FilterInput]
-}
-
-type IssuerGetManyOutput {
-  result: [Issuer]
-}
-
-type IssuerGetOutput {
-  result: Issuer
-}
-
-input IssuerRemoveInput {
-  filter: [FilterInput]
-}
-
-type IssuerRemoveOutput {
-  result: Issuer
-}
-
-input IssuerUpdateInput {
-  filter: [FilterInput]
-  update: IssuerUpdateUpdateInput
-}
-
-type IssuerUpdateOutput {
-  result: Issuer
-}
-
-input IssuerUpdateUpdateInput {
-  _id: String
-  created: DateTime
-  id: String
-}
-
-type LinkedUser {
-  _id: String
-  created: DateTime
-  id: String
-  type: String
-}
-
-type LinkedUserCreateOutput {
-  result: LinkedUser
-  root: LinkedUserCreateOutputRoot
-}
-
-type LinkedUserCreateOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-type LinkedUserGetConnectionOutput {
-  result: LinkedUserGetConnectionOutputConnection
-  root: LinkedUserGetConnectionOutputRoot
-}
-
-type LinkedUserGetConnectionOutputConnection {
-  edges: [LinkedUserGetConnectionOutputEdge]
-  pageInfo: PageInfo
-}
-
-type LinkedUserGetConnectionOutputEdge {
-  cursor: String
-  node: LinkedUser
-}
-
-type LinkedUserGetConnectionOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-type LinkedUserGetManyOutput {
-  result: [LinkedUser]
-  root: LinkedUserGetManyOutputRoot
-}
-
-type LinkedUserGetManyOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-type LinkedUserGetOutput {
-  result: LinkedUser
-  root: LinkedUserGetOutputRoot
-}
-
-type LinkedUserGetOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input LinkedUserInput {
-  _id: String
-  created: DateTime
-  id: String
-  type: String
-}
-
-type LinkedUserRemoveOutput {
-  result: LinkedUser
-  root: LinkedUserRemoveOutputRoot
-}
-
-type LinkedUserRemoveOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-type LinkedUserUpdateOutput {
-  result: LinkedUser
-  root: LinkedUserUpdateOutputRoot
-}
-
-type LinkedUserUpdateOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
 type Mutation {
-  AccessCreate: AccessCreateOutput
-  AccessRemove: AccessRemoveOutput
-  AccessUpdate: AccessUpdateOutput
-  BankCreate: BankCreateOutput
-  BankRemove: BankRemoveOutput
-  BankUpdate: BankUpdateOutput
-  CardCreate: CardCreateOutput
-  CardRemove: CardRemoveOutput
-  CardUpdate: CardUpdateOutput
-  CreditRatingCreate: CreditRatingCreateOutput
-  CreditRatingRemove: CreditRatingRemoveOutput
-  CreditRatingUpdate: CreditRatingUpdateOutput
-  FundingCreate: FundingCreateOutput
-  FundingRemove: FundingRemoveOutput
-  FundingUpdate: FundingUpdateOutput
-  IssuerCreate(input: IssuerCreateInput): IssuerCreateOutput
-  IssuerRemove(input: IssuerRemoveInput): IssuerRemoveOutput
-  IssuerUpdate(input: IssuerUpdateInput): IssuerUpdateOutput
-  LinkedUserCreate: LinkedUserCreateOutput
-  LinkedUserRemove: LinkedUserRemoveOutput
-  LinkedUserUpdate: LinkedUserUpdateOutput
-  OtpCreate: OtpCreateOutput
-  OtpRemove: OtpRemoveOutput
-  OtpUpdate: OtpUpdateOutput
-  PaymentMethodTokenCreate(input: PaymentMethodTokenCreateInput): PaymentMethodTokenCreateOutput
-  RatingAgencyCreate: RatingAgencyCreateOutput
-  RatingAgencyRemove: RatingAgencyRemoveOutput
-  RatingAgencyUpdate: RatingAgencyUpdateOutput
-  SignInCreate: SignInCreateOutput
-  SignInUserUpdate(input: SignInUserUpdateInput): SignInUserUpdateOutput
-  SignInUsernameCreate(input: SignInUsernameCreateInput): SignInUsernameCreateOutput
-  UnderwriterCreate: UnderwriterCreateOutput
-  UnderwriterRemove: UnderwriterRemoveOutput
-  UnderwriterUpdate: UnderwriterUpdateOutput
-  UserCreate: UserCreateOutput
-  UserRemove: UserRemoveOutput
-  UserUpdate: UserUpdateOutput
+  OtpCreate(input: OtpCreateInput): OtpCreateOutput
+  OtpRemove(input: OtpRemoveInput): OtpRemoveOutput
+  OtpUpdate(input: OtpUpdateInput): OtpUpdateOutput
+  accessCreate(input: accessCreateInput): accessCreateOutput
+  accessRemove(input: accessRemoveInput): accessRemoveOutput
+  accessUpdate(input: accessUpdateInput): accessUpdateOutput
+  creditRatingCreate(input: creditRatingCreateInput): creditRatingCreateOutput
+  creditRatingRemove(input: creditRatingRemoveInput): creditRatingRemoveOutput
+  creditRatingUpdate(input: creditRatingUpdateInput): creditRatingUpdateOutput
+  fundingCreate(input: fundingCreateInput): fundingCreateOutput
+  fundingRemove(input: fundingRemoveInput): fundingRemoveOutput
+  fundingUpdate(input: fundingUpdateInput): fundingUpdateOutput
+  ratingAgencyCreate(input: ratingAgencyCreateInput): ratingAgencyCreateOutput
+  ratingAgencyRemove(input: ratingAgencyRemoveInput): ratingAgencyRemoveOutput
+  ratingAgencyUpdate(input: ratingAgencyUpdateInput): ratingAgencyUpdateOutput
+  signInCreate(input: signInCreateInput): signInCreateOutput
+  signInUsernameCreate(input: signInUsernameCreateInput): signInUsernameCreateOutput
+  signInuserUpdate(input: signInuserUpdateInput): signInuserUpdateOutput
+  userCreate(input: userCreateInput): userCreateOutput
+  userRemove(input: userRemoveInput): userRemoveOutput
+  userUpdate(input: userUpdateInput): userUpdateOutput
 }
 
 type Otp {
@@ -755,22 +47,46 @@ type Otp {
   phone: String
 }
 
+input OtpCreateFormInput {
+  callingCode: String
+  checkExists: Boolean
+  email: String
+  phone: String
+}
+
+input OtpCreateInput {
+  form: OtpCreateFormInput
+}
+
 type OtpCreateOutput {
   result: Otp
 }
 
-type OtpGetConnectionOutput {
-  result: OtpGetConnectionOutputConnection
-}
-
-type OtpGetConnectionOutputConnection {
-  edges: [OtpGetConnectionOutputEdge]
+type OtpGetConnectionConnection {
+  edges: [OtpGetConnectionEdge]
   pageInfo: PageInfo
 }
 
-type OtpGetConnectionOutputEdge {
+type OtpGetConnectionEdge {
   cursor: String
   node: Otp
+}
+
+input OtpGetConnectionInput {
+  filter: [FilterInput]
+  pagination: PaginationInput
+}
+
+type OtpGetConnectionOutput {
+  result: OtpGetConnectionConnection
+}
+
+input OtpGetInput {
+  filter: [FilterInput]
+}
+
+input OtpGetManyInput {
+  filter: [FilterInput]
 }
 
 type OtpGetManyOutput {
@@ -781,12 +97,30 @@ type OtpGetOutput {
   result: Otp
 }
 
+input OtpRemoveInput {
+  filter: [FilterInput]
+}
+
 type OtpRemoveOutput {
   result: Otp
 }
 
+input OtpUpdateInput {
+  filter: [FilterInput]
+  update: OtpUpdateUpdateInput
+}
+
 type OtpUpdateOutput {
   result: Otp
+}
+
+input OtpUpdateUpdateInput {
+  _id: String
+  callingCode: String
+  created: DateTime
+  email: String
+  otp: String
+  phone: String
 }
 
 type PageInfo {
@@ -803,161 +137,27 @@ input PaginationInput {
   last: Float
 }
 
-union PaymentMethod = Bank | Card
-
-type PaymentMethodGetManyOutput {
-  result: [PaymentMethod]
-  root: PaymentMethodGetManyOutputRoot
-}
-
-type PaymentMethodGetManyOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input PaymentMethodTokenCreateInput {
-  root: PaymentMethodTokenCreateRootInput
-}
-
-type PaymentMethodTokenCreateOutput {
-  result: String
-  root: PaymentMethodTokenCreateOutputRoot
-}
-
-type PaymentMethodTokenCreateOutputRoot {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input PaymentMethodTokenCreateRootInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
 type Query {
-  AccessGet: AccessGetOutput
-  AccessGetConnection: AccessGetConnectionOutput
-  AccessGetMany: AccessGetManyOutput
-  BankGet: BankGetOutput
-  BankGetConnection: BankGetConnectionOutput
-  BankGetMany: BankGetManyOutput
-  CardGet: CardGetOutput
-  CardGetConnection: CardGetConnectionOutput
-  CardGetMany: CardGetManyOutput
-  CreditRatingGet: CreditRatingGetOutput
-  CreditRatingGetConnection: CreditRatingGetConnectionOutput
-  CreditRatingGetMany: CreditRatingGetManyOutput
-  FundingGet: FundingGetOutput
-  FundingGetConnection: FundingGetConnectionOutput
-  FundingGetMany: FundingGetManyOutput
-  IssuerGet(input: IssuerGetInput): IssuerGetOutput
-  IssuerGetConnection(input: IssuerGetConnectionInput): IssuerGetConnectionOutput
-  IssuerGetMany(input: IssuerGetManyInput): IssuerGetManyOutput
-  LinkedUserGet: LinkedUserGetOutput
-  LinkedUserGetConnection: LinkedUserGetConnectionOutput
-  LinkedUserGetMany: LinkedUserGetManyOutput
-  OtpGet: OtpGetOutput
-  OtpGetConnection: OtpGetConnectionOutput
-  OtpGetMany: OtpGetManyOutput
-  PaymentMethodGetMany: PaymentMethodGetManyOutput
-  RatingAgencyGet: RatingAgencyGetOutput
-  RatingAgencyGetConnection: RatingAgencyGetConnectionOutput
-  RatingAgencyGetMany: RatingAgencyGetManyOutput
-  SnapshotGet: SnapshotGetOutput
-  SnapshotGetMany: SnapshotGetManyOutput
-  UnderwriterGet: UnderwriterGetOutput
-  UnderwriterGetConnection: UnderwriterGetConnectionOutput
-  UnderwriterGetMany: UnderwriterGetManyOutput
-  UserGet: UserGetOutput
-  UserGetConnection: UserGetConnectionOutput
-  UserGetMany: UserGetManyOutput
-}
-
-type RatingAgency {
-  A: String
-  AA: String
-  AAA: String
-  AAm: String
-  AAp: String
-  Am: String
-  Ap: String
-  B: String
-  BB: String
-  BBB: String
-  BBBm: String
-  BBBp: String
-  BBm: String
-  BBp: String
-  Bm: String
-  Bp: String
-  CCC: String
-  CCCm: String
-  CCCp: String
-  D: String
-  _id: String
-  created: DateTime
-  name: String
-}
-
-type RatingAgencyCreateOutput {
-  result: RatingAgency
-}
-
-type RatingAgencyGetConnectionOutput {
-  result: RatingAgencyGetConnectionOutputConnection
-}
-
-type RatingAgencyGetConnectionOutputConnection {
-  edges: [RatingAgencyGetConnectionOutputEdge]
-  pageInfo: PageInfo
-}
-
-type RatingAgencyGetConnectionOutputEdge {
-  cursor: String
-  node: RatingAgency
-}
-
-type RatingAgencyGetManyOutput {
-  result: [RatingAgency]
-}
-
-type RatingAgencyGetOutput {
-  result: RatingAgency
-}
-
-type RatingAgencyRemoveOutput {
-  result: RatingAgency
-}
-
-type RatingAgencyUpdateOutput {
-  result: RatingAgency
+  OtpGet(input: OtpGetInput): OtpGetOutput
+  OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
+  OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput
+  accessGet(input: accessGetInput): accessGetOutput
+  accessGetConnection(input: accessGetConnectionInput): accessGetConnectionOutput
+  accessGetMany(input: accessGetManyInput): accessGetManyOutput
+  creditRatingGet(input: creditRatingGetInput): creditRatingGetOutput
+  creditRatingGetConnection(input: creditRatingGetConnectionInput): creditRatingGetConnectionOutput
+  creditRatingGetMany(input: creditRatingGetManyInput): creditRatingGetManyOutput
+  fundingGet(input: fundingGetInput): fundingGetOutput
+  fundingGetConnection(input: fundingGetConnectionInput): fundingGetConnectionOutput
+  fundingGetMany(input: fundingGetManyInput): fundingGetManyOutput
+  ratingAgencyGet(input: ratingAgencyGetInput): ratingAgencyGetOutput
+  ratingAgencyGetConnection(input: ratingAgencyGetConnectionInput): ratingAgencyGetConnectionOutput
+  ratingAgencyGetMany(input: ratingAgencyGetManyInput): ratingAgencyGetManyOutput
+  snapshotGet(input: snapshotGetInput): snapshotGetOutput
+  snapshotGetMany(input: snapshotGetManyInput): snapshotGetManyOutput
+  userGet(input: userGetInput): userGetOutput
+  userGetConnection(input: userGetConnectionInput): userGetConnectionOutput
+  userGetMany(input: userGetManyInput): userGetManyOutput
 }
 
 type ScaledNumberRange {
@@ -966,114 +166,543 @@ type ScaledNumberRange {
   unit: String
 }
 
-type SignIn {
+input ScaledNumberRangeInput {
+  max: Float
+  min: Float
+  unit: String
+}
+
+type access {
+  _id: String
+  created: DateTime
+  group: group
+  role: [String]
+  user: user
+}
+
+input accessCreateFormInput {
+  _id: String
+  created: DateTime
+  group: groupInput
+  role: [String]
+  user: userInput
+}
+
+input accessCreateInput {
+  form: accessCreateFormInput
+}
+
+type accessCreateOutput {
+  result: access
+}
+
+type accessGetConnectionConnection {
+  edges: [accessGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type accessGetConnectionEdge {
+  cursor: String
+  node: access
+}
+
+input accessGetConnectionInput {
+  filter: [FilterInput]
+  pagination: PaginationInput
+}
+
+type accessGetConnectionOutput {
+  result: accessGetConnectionConnection
+}
+
+input accessGetInput {
+  filter: [FilterInput]
+}
+
+input accessGetManyInput {
+  filter: [FilterInput]
+}
+
+type accessGetManyOutput {
+  result: [access]
+}
+
+type accessGetOutput {
+  result: access
+}
+
+input accessInput {
+  _id: String
+  created: DateTime
+  group: groupInput
+  role: [String]
+  user: userInput
+}
+
+input accessRemoveInput {
+  filter: [FilterInput]
+}
+
+type accessRemoveOutput {
+  result: access
+}
+
+input accessUpdateInput {
+  filter: [FilterInput]
+  update: accessUpdateUpdateInput
+}
+
+type accessUpdateOutput {
+  result: access
+}
+
+input accessUpdateUpdateInput {
+  _id: String
+  created: DateTime
+  group: groupInput
+  role: [String]
+  user: userInput
+}
+
+type creditRating {
+  _id: String
+  agency: ratingAgency
+  created: DateTime
+  longTermCategory: String
+  longTermWatch: String
+}
+
+input creditRatingCreateFormInput {
+  _id: String
+  agency: ratingAgencyInput
+  created: DateTime
+  longTermCategory: String
+  longTermWatch: String
+}
+
+input creditRatingCreateInput {
+  form: creditRatingCreateFormInput
+  root: creditRatingCreateRootInput
+}
+
+type creditRatingCreateOutput {
+  result: creditRating
+  root: creditRatingCreateOutputRoot
+}
+
+type creditRatingCreateOutputRoot {
+  _id: String
+  _user: String
+  amount: ScaledNumberRange
+  created: DateTime
+  currency: String
+  maturity: ScaledNumberRange
+}
+
+input creditRatingCreateRootInput {
+  _id: String
+  _user: String
+  amount: ScaledNumberRangeInput
+  created: DateTime
+  currency: String
+  maturity: ScaledNumberRangeInput
+}
+
+type creditRatingGetConnectionConnection {
+  edges: [creditRatingGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type creditRatingGetConnectionEdge {
+  cursor: String
+  node: creditRating
+}
+
+input creditRatingGetConnectionInput {
+  filter: [FilterInput]
+  pagination: PaginationInput
+  root: creditRatingGetConnectionRootInput
+}
+
+type creditRatingGetConnectionOutput {
+  result: creditRatingGetConnectionConnection
+  root: creditRatingGetConnectionOutputRoot
+}
+
+type creditRatingGetConnectionOutputRoot {
+  _id: String
+  _user: String
+  amount: ScaledNumberRange
+  created: DateTime
+  currency: String
+  maturity: ScaledNumberRange
+}
+
+input creditRatingGetConnectionRootInput {
+  _id: String
+  _user: String
+  amount: ScaledNumberRangeInput
+  created: DateTime
+  currency: String
+  maturity: ScaledNumberRangeInput
+}
+
+input creditRatingGetInput {
+  filter: [FilterInput]
+  root: creditRatingGetRootInput
+}
+
+input creditRatingGetManyInput {
+  filter: [FilterInput]
+  root: creditRatingGetManyRootInput
+}
+
+type creditRatingGetManyOutput {
+  result: [creditRating]
+  root: creditRatingGetManyOutputRoot
+}
+
+type creditRatingGetManyOutputRoot {
+  _id: String
+  _user: String
+  amount: ScaledNumberRange
+  created: DateTime
+  currency: String
+  maturity: ScaledNumberRange
+}
+
+input creditRatingGetManyRootInput {
+  _id: String
+  _user: String
+  amount: ScaledNumberRangeInput
+  created: DateTime
+  currency: String
+  maturity: ScaledNumberRangeInput
+}
+
+type creditRatingGetOutput {
+  result: creditRating
+  root: creditRatingGetOutputRoot
+}
+
+type creditRatingGetOutputRoot {
+  _id: String
+  _user: String
+  amount: ScaledNumberRange
+  created: DateTime
+  currency: String
+  maturity: ScaledNumberRange
+}
+
+input creditRatingGetRootInput {
+  _id: String
+  _user: String
+  amount: ScaledNumberRangeInput
+  created: DateTime
+  currency: String
+  maturity: ScaledNumberRangeInput
+}
+
+input creditRatingRemoveInput {
+  filter: [FilterInput]
+  root: creditRatingRemoveRootInput
+}
+
+type creditRatingRemoveOutput {
+  result: creditRating
+  root: creditRatingRemoveOutputRoot
+}
+
+type creditRatingRemoveOutputRoot {
+  _id: String
+  _user: String
+  amount: ScaledNumberRange
+  created: DateTime
+  currency: String
+  maturity: ScaledNumberRange
+}
+
+input creditRatingRemoveRootInput {
+  _id: String
+  _user: String
+  amount: ScaledNumberRangeInput
+  created: DateTime
+  currency: String
+  maturity: ScaledNumberRangeInput
+}
+
+input creditRatingUpdateInput {
+  filter: [FilterInput]
+  root: creditRatingUpdateRootInput
+  update: creditRatingUpdateUpdateInput
+}
+
+type creditRatingUpdateOutput {
+  result: creditRating
+  root: creditRatingUpdateOutputRoot
+}
+
+type creditRatingUpdateOutputRoot {
+  _id: String
+  _user: String
+  amount: ScaledNumberRange
+  created: DateTime
+  currency: String
+  maturity: ScaledNumberRange
+}
+
+input creditRatingUpdateRootInput {
+  _id: String
+  _user: String
+  amount: ScaledNumberRangeInput
+  created: DateTime
+  currency: String
+  maturity: ScaledNumberRangeInput
+}
+
+input creditRatingUpdateUpdateInput {
+  _id: String
+  agency: ratingAgencyInput
+  created: DateTime
+  longTermCategory: String
+  longTermWatch: String
+}
+
+type funding {
+  _id: String
+  _user: String
+  amount: ScaledNumberRange
+  created: DateTime
+  currency: String
+  maturity: ScaledNumberRange
+}
+
+input fundingCreateFormInput {
+  _id: String
+  _user: String
+  amount: ScaledNumberRangeInput
+  created: DateTime
+  currency: String
+  maturity: ScaledNumberRangeInput
+}
+
+input fundingCreateInput {
+  form: fundingCreateFormInput
+}
+
+type fundingCreateOutput {
+  result: funding
+}
+
+type fundingGetConnectionConnection {
+  edges: [fundingGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type fundingGetConnectionEdge {
+  cursor: String
+  node: funding
+}
+
+input fundingGetConnectionInput {
+  filter: [FilterInput]
+  pagination: PaginationInput
+}
+
+type fundingGetConnectionOutput {
+  result: fundingGetConnectionConnection
+}
+
+input fundingGetInput {
+  filter: [FilterInput]
+}
+
+input fundingGetManyInput {
+  filter: [FilterInput]
+}
+
+type fundingGetManyOutput {
+  result: [funding]
+}
+
+type fundingGetOutput {
+  result: funding
+}
+
+input fundingRemoveInput {
+  filter: [FilterInput]
+}
+
+type fundingRemoveOutput {
+  result: funding
+}
+
+input fundingUpdateInput {
+  filter: [FilterInput]
+  update: fundingUpdateUpdateInput
+}
+
+type fundingUpdateOutput {
+  result: funding
+}
+
+input fundingUpdateUpdateInput {
+  _id: String
+  _user: String
+  amount: ScaledNumberRangeInput
+  created: DateTime
+  currency: String
+  maturity: ScaledNumberRangeInput
+}
+
+type group {
+  _id: String
+  access: [access]
+  created: DateTime
+  name: String
+}
+
+input groupInput {
+  _id: String
+  access: [accessInput]
+  created: DateTime
+  name: String
+}
+
+type ratingAgency {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input ratingAgencyCreateFormInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input ratingAgencyCreateInput {
+  form: ratingAgencyCreateFormInput
+}
+
+type ratingAgencyCreateOutput {
+  result: ratingAgency
+}
+
+type ratingAgencyGetConnectionConnection {
+  edges: [ratingAgencyGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type ratingAgencyGetConnectionEdge {
+  cursor: String
+  node: ratingAgency
+}
+
+input ratingAgencyGetConnectionInput {
+  filter: [FilterInput]
+  pagination: PaginationInput
+}
+
+type ratingAgencyGetConnectionOutput {
+  result: ratingAgencyGetConnectionConnection
+}
+
+input ratingAgencyGetInput {
+  filter: [FilterInput]
+}
+
+input ratingAgencyGetManyInput {
+  filter: [FilterInput]
+}
+
+type ratingAgencyGetManyOutput {
+  result: [ratingAgency]
+}
+
+type ratingAgencyGetOutput {
+  result: ratingAgency
+}
+
+input ratingAgencyInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input ratingAgencyRemoveInput {
+  filter: [FilterInput]
+}
+
+type ratingAgencyRemoveOutput {
+  result: ratingAgency
+}
+
+input ratingAgencyUpdateInput {
+  filter: [FilterInput]
+  update: ratingAgencyUpdateUpdateInput
+}
+
+type ratingAgencyUpdateOutput {
+  result: ratingAgency
+}
+
+input ratingAgencyUpdateUpdateInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+type signIn {
   _id: String
   created: DateTime
   isNew: Boolean
   token: String
-  user: User
+  user: user
 }
 
-type SignInCreateOutput {
-  result: SignIn
-}
-
-input SignInUserUpdateInput {
-  filter: [FilterInput]
-  update: SignInUserUpdateUpdateInput
-}
-
-type SignInUserUpdateOutput {
-  result: SignIn
-}
-
-input SignInUserUpdateUpdateInput {
-  Bank: [CardInput]
-  Card: [CardInput]
-  LinkedUser: [LinkedUserInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input SignInUsernameCreateFormInput {
+input signInCreateFormInput {
   callingCode: String
   email: String
   otp: String
   phone: String
 }
 
-input SignInUsernameCreateInput {
-  form: SignInUsernameCreateFormInput
+input signInCreateInput {
+  form: signInCreateFormInput
 }
 
-type SignInUsernameCreateOutput {
-  result: SignIn
+type signInCreateOutput {
+  result: signIn
 }
 
-type Snapshot {
-  images: [String]
-  name: String
+input signInUsernameCreateFormInput {
+  callingCode: String
+  email: String
+  otp: String
+  phone: String
 }
 
-type SnapshotGetManyOutput {
-  result: [Snapshot]
+input signInUsernameCreateInput {
+  form: signInUsernameCreateFormInput
 }
 
-type SnapshotGetOutput {
-  result: Snapshot
+type signInUsernameCreateOutput {
+  result: signIn
 }
 
-type Underwriter {
+input signInuserUpdateInput {
+  filter: [FilterInput]
+  update: signInuserUpdateUpdateInput
+}
+
+type signInuserUpdateOutput {
+  result: signIn
+}
+
+input signInuserUpdateUpdateInput {
   _id: String
-  created: DateTime
-  name: String
-}
-
-type UnderwriterCreateOutput {
-  result: Underwriter
-}
-
-type UnderwriterGetConnectionOutput {
-  result: UnderwriterGetConnectionOutputConnection
-}
-
-type UnderwriterGetConnectionOutputConnection {
-  edges: [UnderwriterGetConnectionOutputEdge]
-  pageInfo: PageInfo
-}
-
-type UnderwriterGetConnectionOutputEdge {
-  cursor: String
-  node: Underwriter
-}
-
-type UnderwriterGetManyOutput {
-  result: [Underwriter]
-}
-
-type UnderwriterGetOutput {
-  result: Underwriter
-}
-
-type UnderwriterRemoveOutput {
-  result: Underwriter
-}
-
-type UnderwriterUpdateOutput {
-  result: Underwriter
-}
-
-type User {
-  Bank: [Card]
-  Card: [Card]
-  LinkedUser: [LinkedUser]
-  _id: String
+  access: [accessInput]
   callingCode: String
   created: DateTime
   email: String
@@ -1083,36 +712,131 @@ type User {
   phone: String
 }
 
-type UserCreateOutput {
-  result: User
+type snapshot {
+  images: [String]
+  name: String
 }
 
-type UserGetConnectionOutput {
-  result: UserGetConnectionOutputConnection
+input snapshotGetInput {
+  filter: [FilterInput]
 }
 
-type UserGetConnectionOutputConnection {
-  edges: [UserGetConnectionOutputEdge]
+input snapshotGetManyInput {
+  filter: [FilterInput]
+}
+
+type snapshotGetManyOutput {
+  result: [snapshot]
+}
+
+type snapshotGetOutput {
+  result: snapshot
+}
+
+type user {
+  _id: String
+  access: [access]
+  callingCode: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  paymentMethodPrimary: String
+  phone: String
+}
+
+input userCreateFormInput {
+  _id: String
+  access: [accessInput]
+  callingCode: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  paymentMethodPrimary: String
+  phone: String
+}
+
+input userCreateInput {
+  form: userCreateFormInput
+}
+
+type userCreateOutput {
+  result: user
+}
+
+type userGetConnectionConnection {
+  edges: [userGetConnectionEdge]
   pageInfo: PageInfo
 }
 
-type UserGetConnectionOutputEdge {
+type userGetConnectionEdge {
   cursor: String
-  node: User
+  node: user
 }
 
-type UserGetManyOutput {
-  result: [User]
+input userGetConnectionInput {
+  filter: [FilterInput]
+  pagination: PaginationInput
 }
 
-type UserGetOutput {
-  result: User
+type userGetConnectionOutput {
+  result: userGetConnectionConnection
 }
 
-type UserRemoveOutput {
-  result: User
+input userGetInput {
+  filter: [FilterInput]
 }
 
-type UserUpdateOutput {
-  result: User
+input userGetManyInput {
+  filter: [FilterInput]
+}
+
+type userGetManyOutput {
+  result: [user]
+}
+
+type userGetOutput {
+  result: user
+}
+
+input userInput {
+  _id: String
+  access: [accessInput]
+  callingCode: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  paymentMethodPrimary: String
+  phone: String
+}
+
+input userRemoveInput {
+  filter: [FilterInput]
+}
+
+type userRemoveOutput {
+  result: user
+}
+
+input userUpdateInput {
+  filter: [FilterInput]
+  update: userUpdateUpdateInput
+}
+
+type userUpdateOutput {
+  result: user
+}
+
+input userUpdateUpdateInput {
+  _id: String
+  access: [accessInput]
+  callingCode: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  paymentMethodPrimary: String
+  phone: String
 }

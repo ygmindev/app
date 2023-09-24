@@ -57,6 +57,8 @@ export const createArgs = <
       return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
     case RESOURCE_METHOD_TYPE.CREATE: {
+      const Form = createForm({ Resource, name });
+
       @withEntity({ isAbstract: true })
       class Args
         extends (Root ?? class {})
@@ -64,7 +66,7 @@ export const createArgs = <
       {
         @withCondition(Resource !== undefined, () =>
           withField({
-            Resource: () => createForm({ Resource, name }),
+            Resource: () => Form,
             type: PROPERTY_TYPE.RESOURCE,
           }),
         )
@@ -73,6 +75,8 @@ export const createArgs = <
       return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
     case RESOURCE_METHOD_TYPE.UPDATE: {
+      const Update = createUpdate({ Resource, name });
+
       @withEntity({ isAbstract: true })
       class Args
         extends (Root ?? class {})
@@ -85,7 +89,7 @@ export const createArgs = <
 
         @withCondition(Resource !== undefined, () =>
           withField({
-            Resource: () => createUpdate({ Resource, name }),
+            Resource: () => Update,
             type: PROPERTY_TYPE.RESOURCE,
           }),
         )

@@ -10,15 +10,11 @@ import {
   type CreditRatingWatchModel,
 } from '#lib-shared/funding/resources/CreditRating/CreditRating.models';
 import { type RatingAgencyModel } from '#lib-shared/funding/resources/RatingAgency/RatingAgency.models';
-import { type ResolvedFieldModel } from '#lib-shared/resource/resource.models';
 
-@withEntity({ isEmbedded: true, isRepository: true, name: CREDIT_RATING_RESOURCE_NAME })
+@withEntity({ isRepository: true, name: CREDIT_RATING_RESOURCE_NAME })
 export class CreditRating extends EmbeddedResource implements CreditRatingModel {
-  @withField({ isRepository: true, type: PROPERTY_TYPE.ID })
-  _agency!: string;
-
   @withField({ Resource: () => RatingAgency, isOptional: true, type: PROPERTY_TYPE.RESOURCE })
-  agency?: ResolvedFieldModel<RatingAgencyModel>;
+  agency?: RatingAgencyModel;
 
   @withField({ isOptional: true, type: DATA_TYPE.STRING })
   longTermCategory?: CreditRatingCategoryModel;

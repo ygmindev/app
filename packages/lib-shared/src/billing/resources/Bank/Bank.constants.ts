@@ -1,1 +1,1 @@
-export const BANK_RESOURCE_NAME = 'bank';
+export const BANK_RESOURCE_NAME = 'Bank';

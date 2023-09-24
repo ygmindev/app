@@ -1,1 +1,1 @@
-export const DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME = 'dummyEmbeddedResource';
+export const DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME = 'DummyEmbeddedResource';

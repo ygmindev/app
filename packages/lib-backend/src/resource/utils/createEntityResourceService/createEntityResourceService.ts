@@ -10,9 +10,9 @@ import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { type EntityResourceServiceModel } from '#lib-shared/resource/resources/EntityResource/EntityResourceService/EntityResourceService.models';
-import { type ResourceServiceDecoratorModel } from '#lib-shared/resource/utils/ResourceService/ResourceService.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
+import { type ResourceServiceDecoratorModel } from '#lib-shared/resource/utils/ResourceService/ResourceService.models';
 
 export const createEntityResourceService = <TType, TForm = undefined>({
   afterCreate,

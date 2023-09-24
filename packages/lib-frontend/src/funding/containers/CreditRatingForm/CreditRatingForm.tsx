@@ -67,11 +67,11 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
         topElement={() =>
           values.length ? (
             <Wrapper s>
-              {values.map(({ _agency, longTermCategory, longTermWatch }) => {
-                const agencyName = find(agencies?.result, ({ _id }) => _id === _agency);
+              {values.map(({ agency, longTermCategory, longTermWatch }) => {
+                const agencyName = find(agencies?.result, ({ _id }) => _id === agency?._id);
                 return (
                   <Tile
-                    key={_agency}
+                    key={agency?._id}
                     title={agencyName?.name}>
                     <Table
                       columns={[{ id: 'name' }, { id: 'value' }]}

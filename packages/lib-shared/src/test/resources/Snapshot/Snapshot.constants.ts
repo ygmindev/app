@@ -1,1 +1,1 @@
-export const SNAPSHOT_RESOURCE_NAME = 'snapshot';
+export const SNAPSHOT_RESOURCE_NAME = 'Snapshot';

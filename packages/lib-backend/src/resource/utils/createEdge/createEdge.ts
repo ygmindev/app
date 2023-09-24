@@ -11,16 +11,13 @@ export const createEdge = <TType extends unknown>({
   Resource,
   name,
 }: CreateEdgeParamsModel<TType>): CreateEdgeModel<TType> => {
-  const nameF = `${name}Edge`;
-
-  @withEntity({ name: nameF })
+  @withEntity({ name: `${name}Edge` })
   class EdgeF implements EdgeModel<TType> {
-    @withField({ Resource, type: PROPERTY_TYPE.RESOURCE })
+    @withField({ Resource: () => Resource, type: PROPERTY_TYPE.RESOURCE })
     node!: TType;
 
     @withField({ type: DATA_TYPE.STRING })
     cursor!: string;
   }
-
   return EdgeF;
 };

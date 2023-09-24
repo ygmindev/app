@@ -6,7 +6,7 @@ import { DATA_TYPE } from '#lib-shared/data/data.constants';
 import { DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.constants';
 import { type DummyEmbeddedResourceModel } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.models';
 
-@withEntity({ isEmbedded: true, isRepository: true, name: DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME })
+@withEntity({  isRepository: true, name: DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME })
 export class DummyEmbeddedResource extends EmbeddedResource implements DummyEmbeddedResourceModel {
   @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.NUMBER })
   numberProperty?: number;

@@ -1,6 +1,6 @@
 import { type CreditRatingCategoryModel } from '#lib-shared/funding/resources/CreditRating/CreditRating.models';
 
-export const CREDIT_RATING_RESOURCE_NAME = 'creditRating';
+export const CREDIT_RATING_RESOURCE_NAME = 'CreditRating';
 
 export enum CREDIT_RATING_CATEGORY {
   A = 'A',

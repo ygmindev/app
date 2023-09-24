@@ -31,7 +31,8 @@ export const AgencyForm: LFCModel<AgencyFormPropsModel> = ({
       {({ data }) => (
         <ItemStepForm<CreditRatingFormModel, AgencyFormModel>
           {...wrapperProps}
-          id="_agency"
+          // id="_agency"
+          id="agency"
           initialValues={initialValues}
           message={t('funding:agencyFormMessage')}
           onComplete={onComplete}

@@ -2,23 +2,20 @@ import { OTP_EXPIRATION_SECONDS } from '#lib-backend/auth/resources/Otp/Otp.cons
 import { EntityResource } from '#lib-backend/resource/resources/EntityResource/EntityResource';
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
-import { DummyEmbeddedResource } from '#lib-backend/test/resources/DummyEmbeddedResource/DummyEmbeddedResource';
-import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
-import { DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.constants';
-import { type DummyEmbeddedResourceModel } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.models';
+import { DATA_TYPE } from '#lib-shared/data/data.constants';
 import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
 import { type DummyEntityResourceModel } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
 
 @withEntity({ isRepository: true, name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME })
 export class DummyEntityResource extends EntityResource implements DummyEntityResourceModel {
-  @withField({
-    Resource: () => DummyEmbeddedResource,
-    isArray: true,
-    isOptional: true,
-    isRepository: true,
-    type: PROPERTY_TYPE.RESOURCE,
-  })
-  [DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME]?: Array<DummyEmbeddedResourceModel>;
+  // @withField({
+  //   Resource: () => DummyEmbeddedResource,
+  //   isArray: true,
+  //   isOptional: true,
+  //   isRepository: true,
+  //   type: PROPERTY_TYPE.RESOURCE,
+  // })
+  // [DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME]?: Array<DummyEmbeddedResourceModel>;
 
   @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.NUMBER })
   numberProperty?: number;

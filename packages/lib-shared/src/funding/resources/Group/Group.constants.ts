@@ -1,1 +1,1 @@
-export const GROUP_RESOURCE_NAME = 'group';
+export const GROUP_RESOURCE_NAME = 'Group';

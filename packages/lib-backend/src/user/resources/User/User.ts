@@ -1,15 +1,10 @@
 import { Access } from '#lib-backend/auth/resources/Access/Access';
-import { Card } from '#lib-backend/billing/resources/Card/Card';
 import { EntityResource } from '#lib-backend/resource/resources/EntityResource/EntityResource';
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { FIELD_RELATION } from '#lib-backend/resource/utils/withField/withField.constants';
-import { LinkedUser } from '#lib-backend/user/resources/LinkedUser/LinkedUser';
 import { type AccessModel } from '#lib-shared/auth/resources/Access/Access.models';
-import { type BankModel } from '#lib-shared/billing/resources/Bank/Bank.models';
-import { type CardModel } from '#lib-shared/billing/resources/Card/Card.models';
 import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
-import { type LinkedUserModel } from '#lib-shared/user/resources/LinkedUser/LinkedUser.models';
 import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
@@ -25,32 +20,32 @@ export class User extends EntityResource implements UserModel {
   })
   access?: Array<AccessModel>;
 
-  @withField({
-    Resource: () => Card,
-    isArray: true,
-    isOptional: true,
-    isRepository: true,
-    type: PROPERTY_TYPE.RESOURCE,
-  })
-  bank?: Array<BankModel>;
+  // @withField({
+  //   Resource: () => Card,
+  //   isArray: true,
+  //   isOptional: true,
+  //   isRepository: true,
+  //   type: PROPERTY_TYPE.RESOURCE,
+  // })
+  // bank?: Array<BankModel>;
 
-  @withField({
-    Resource: () => Card,
-    isArray: true,
-    isOptional: true,
-    isRepository: true,
-    type: PROPERTY_TYPE.RESOURCE,
-  })
-  card?: Array<CardModel>;
+  // @withField({
+  //   Resource: () => Card,
+  //   isArray: true,
+  //   isOptional: true,
+  //   isRepository: true,
+  //   type: PROPERTY_TYPE.RESOURCE,
+  // })
+  // card?: Array<CardModel>;
 
-  @withField({
-    Resource: () => LinkedUser,
-    isArray: true,
-    isOptional: true,
-    isRepository: true,
-    type: PROPERTY_TYPE.RESOURCE,
-  })
-  linkedUser?: Array<LinkedUserModel>;
+  // @withField({
+  //   Resource: () => LinkedUser,
+  //   isArray: true,
+  //   isOptional: true,
+  //   isRepository: true,
+  //   type: PROPERTY_TYPE.RESOURCE,
+  // })
+  // linkedUser?: Array<LinkedUserModel>;
 
   @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   callingCode?: string;

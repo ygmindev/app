@@ -18,13 +18,15 @@ export const withEntity = <TType>({
     throw new NotImplementedError('name for non-abstract entity');
   }
   return ((Base: TType) => {
-    const _name = name ?? (Base as ClassModel).name;
-    isSchema && ObjectType(_name)(Base as unknown as ClassModel);
-    isSchemaInput && InputType(`${_name}Input`)(Base as unknown as ClassModel);
+    const nameF = name ?? (Base as ClassModel).name;
+    isSchema && ObjectType(nameF)(Base as unknown as ClassModel);
+    isSchemaInput && InputType(`${nameF}Input`)(Base as unknown as ClassModel);
     let BaseF = isRepository
-      ? (isEmbedded ? Embeddable : Entity)({ abstract: isAbstract, collection: name })(
-          Base as unknown as ClassModel,
-        )
+      ? (isEmbedded ? Embeddable : Entity)({
+          abstract: isAbstract,
+          collection: nameF,
+          tableName: nameF,
+        })(Base as unknown as ClassModel)
       : Base;
     for (const index of indices) {
       BaseF = Index({ properties: index })(BaseF as unknown as ClassModel) as TType;

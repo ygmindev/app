@@ -1,1 +1,1 @@
-export const RATING_AGENCY_RESOURCE_NAME = 'ratingAgency';
+export const RATING_AGENCY_RESOURCE_NAME = 'RatingAgency';
