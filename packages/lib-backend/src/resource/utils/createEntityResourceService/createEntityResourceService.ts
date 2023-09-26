@@ -66,10 +66,10 @@ export const createEntityResourceService = <TType, TForm = undefined>({
       this._decorators = value;
     }
 
-    async create(
+    create = async (
       input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>,
       context?: ContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType>> {
+    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType>> => {
       const inputF = cleanObject(
         this.decorators.beforeCreate
           ? await this.decorators.beforeCreate({ input }, context)
@@ -85,23 +85,23 @@ export const createEntityResourceService = <TType, TForm = undefined>({
       return this.decorators.afterCreate
         ? this.decorators.afterCreate({ output }, context)
         : output;
-    }
+    };
 
-    async get(
+    get = async (
       input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm>,
       context?: ContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType>> {
+    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType>> => {
       const inputF = cleanObject(
         this.decorators.beforeGet ? await this.decorators.beforeGet({ input }, context) : input,
       );
       const output = await this._repository.get(inputF);
       return this.decorators.afterGet ? this.decorators.afterGet({ output }, context) : output;
-    }
+    };
 
-    async getMany(
+    getMany = async (
       input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm>,
       context?: ContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>> {
+    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>> => {
       const inputF = cleanObject(
         this.decorators.beforeGetMany
           ? await this.decorators.beforeGetMany({ input }, context)
@@ -111,12 +111,12 @@ export const createEntityResourceService = <TType, TForm = undefined>({
       return this.decorators.afterGetMany
         ? this.decorators.afterGetMany({ output }, context)
         : output;
-    }
+    };
 
-    async getConnection(
+    getConnection = async (
       input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm>,
       context?: ContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>> {
+    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>> => {
       const inputF = cleanObject(
         this.decorators.beforeGetConnection
           ? await this.decorators.beforeGetConnection({ input }, context)
@@ -126,12 +126,12 @@ export const createEntityResourceService = <TType, TForm = undefined>({
       return this.decorators.afterGetConnection
         ? this.decorators.afterGetConnection({ output }, context)
         : output;
-    }
+    };
 
-    async update(
+    update = async (
       input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm>,
       context?: ContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>> {
+    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>> => {
       const inputF = cleanObject(
         this.decorators.beforeUpdate
           ? await this.decorators.beforeUpdate({ input }, context)
@@ -141,12 +141,12 @@ export const createEntityResourceService = <TType, TForm = undefined>({
       return this.decorators.afterUpdate
         ? this.decorators.afterUpdate({ output }, context)
         : output;
-    }
+    };
 
-    async remove(
+    remove = async (
       input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm>,
       context?: ContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType>> {
+    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType>> => {
       const inputF = cleanObject(
         this.decorators.beforeRemove
           ? await this.decorators.beforeRemove({ input }, context)
@@ -156,11 +156,11 @@ export const createEntityResourceService = <TType, TForm = undefined>({
       return this.decorators.afterRemove
         ? this.decorators.afterRemove({ output }, context)
         : output;
-    }
+    };
 
-    async count(): Promise<number> {
+    count = async (): Promise<number> => {
       return this._repository.count();
-    }
+    };
   }
 
   return EntityResourceService as CreateEntityResourceServiceModel<TType, TForm>;

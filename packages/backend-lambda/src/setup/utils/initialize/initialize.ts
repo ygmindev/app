@@ -14,10 +14,12 @@ export const initialize = async (): Promise<InitializeModel> => {
 
   const server = new ApolloServer({
     formatError: (e, originalError) => {
+      console.warn(e);
       const originalErrorF = (originalError as GraphQLError)?.originalError as HttpError;
       const errorF = new HttpError(
         originalErrorF?.statusCode,
         e.message ?? originalErrorF?.message,
+        (e.extensions?.stacktrace as string) ?? originalErrorF.stack,
       );
       error(errorF);
       return errorF;

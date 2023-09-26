@@ -33,22 +33,19 @@ export type GraphQlFragmentFieldModel<TType> = Record<
 export type GraphQlFieldModel<TType, TDepth extends number = 10> = [TDepth] extends [0]
   ? never
   : {
-      [TKey in StringKeyModel<RequiredModel<TType>>]?: RequiredModel<TType>[TKey] extends
-        | PrimitiveModel
-        | Array<PrimitiveModel>
+      [TKey in StringKeyModel<RequiredModel<InferModel<TType>>>]?: RequiredModel<
+        InferModel<TType>
+      >[TKey] extends PrimitiveModel | Array<PrimitiveModel>
         ? TKey
-        : RequiredModel<TType>[TKey] extends Array<infer TElement>
-        ? Array<GraphQlFieldModel<TElement, DepthArray[TDepth]>>
-        : RequiredModel<TType>[TKey] extends ConnectionModel<infer TResource>
-        ? Record<
+        : RequiredModel<InferModel<TType>>[TKey] extends Array<infer TElement>
+        ? Record<TKey, Array<GraphQlFieldModel<TElement, DepthArray[TDepth]>>>
+        : RequiredModel<InferModel<TType>>[TKey] extends ConnectionModel<infer TResource>
+        ? Record<TKey, Array<GraphQlFieldModel<TResource, DepthArray[TDepth]>>>
+        : Record<
             TKey,
-            | Array<GraphQlFieldModel<TResource, DepthArray[TDepth]>>
-            | GraphQlFragmentFieldModel<TResource>
-          >
-        : RequiredModel<TType>[TKey] extends object
-        ? Record<TKey, Array<GraphQlFieldModel<RequiredModel<TType>[TKey], DepthArray[TDepth]>>>
-        : never;
-    }[StringKeyModel<RequiredModel<TType>>];
+            Array<GraphQlFieldModel<RequiredModel<InferModel<TType>>[TKey], DepthArray[TDepth]>>
+          >;
+    }[StringKeyModel<RequiredModel<InferModel<TType>>>];
 
 export type GraphQlQueryParamsFieldsModel<TType> = Array<GraphQlFieldModel<TType>>;
 

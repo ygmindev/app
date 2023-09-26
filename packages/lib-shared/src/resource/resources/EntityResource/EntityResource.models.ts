@@ -12,19 +12,15 @@ export type EntityResourceModel = {
 
 export type EntityResourceDataModel<TType> = Omit<TType, keyof EntityResourceModel>;
 
-export type EntityResourcePartialModel<TType> = (TType extends EntityResourceModel
-  ? { _id: string }
-  : EmptyObjectModel) &
-  (
-    | TType
-    | {
-        [TKey in keyof Omit<
-          TType,
-          keyof EntityResourceModel
-        >]?: RequiredModel<TType>[TKey] extends PrimitiveModel
-          ? TType[TKey]
-          : RequiredModel<TType>[TKey] extends Array<infer TValue>
-          ? Array<EntityResourcePartialModel<TValue>>
-          : EntityResourcePartialModel<TType[TKey]>;
-      }
-  );
+export type EntityResourcePartialModel<TType> =
+  | TType
+  | ((TType extends EntityResourceModel ? { _id: string } : EmptyObjectModel) & {
+      [TKey in keyof Omit<
+        TType,
+        keyof EntityResourceModel
+      >]?: RequiredModel<TType>[TKey] extends PrimitiveModel
+        ? TType[TKey]
+        : RequiredModel<TType>[TKey] extends Array<infer TValue>
+        ? Array<EntityResourcePartialModel<TValue>>
+        : EntityResourcePartialModel<TType[TKey]>;
+    });

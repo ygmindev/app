@@ -1,3 +1,4 @@
+import { ACCESS_RESOURCE_NAME } from '#lib-shared/auth/resources/Access/Access.constants';
 import { SIGN_IN_TOKEN_CLAIM_KEYS } from '#lib-shared/auth/resources/SignIn/SignIn.constants';
 import { type RequiredModel } from '#lib-shared/core/core.models';
 import { pick } from '#lib-shared/core/utils/pick/pick';
@@ -9,6 +10,7 @@ export const USER_FIXTURE: RequiredModel<UserModel> = {
   // [CARD_RESOURCE_NAME]: [],
   // [LINKED_USER_RESOURCE_NAME]: [],
   // [PAYMENT_METHOD_RESOURCE_NAME]: [],
+  [ACCESS_RESOURCE_NAME]: [],
   _id: '6448881dd34cb0fcb6734acf',
   beforeCreate: async (): Promise<void> => {
     return;
