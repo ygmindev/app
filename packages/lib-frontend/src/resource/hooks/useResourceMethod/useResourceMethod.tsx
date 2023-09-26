@@ -15,7 +15,7 @@ import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 
 const getConnectionFields = <TType, TRoot = undefined>(
-  fields: GraphQlQueryParamsFieldsModel<TType, false>,
+  fields: GraphQlQueryParamsFieldsModel<TType>,
 ): Array<GraphQlFieldModel<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>>> =>
   fields.map((field) => {
     const fieldF = field as GraphQlFieldModel<
@@ -70,7 +70,7 @@ export const useResourceMethod = <
 
   const fieldsF =
     method === RESOURCE_METHOD_TYPE.GET_CONNECTION
-      ? getConnectionFields(fields as GraphQlQueryParamsFieldsModel<TType, false>)
+      ? getConnectionFields(fields as GraphQlQueryParamsFieldsModel<TType>)
       : fields;
 
   return {

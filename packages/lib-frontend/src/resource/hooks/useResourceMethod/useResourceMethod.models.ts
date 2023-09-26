@@ -15,7 +15,7 @@ export type UseResourceMethodParamsFieldsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
   TRoot = undefined,
-> = GraphQlQueryParamsFieldsModel<OutputModel<TMethod, TType, TRoot>, false>;
+> = GraphQlQueryParamsFieldsModel<OutputModel<TMethod, TType, TRoot>>;
 
 export type UseResourceMethodParamsModel<
   TMethod extends ResourceMethodTypeModel,
