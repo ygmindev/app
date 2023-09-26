@@ -1,12 +1,12 @@
 import { IN_PROGRESS } from '#lib-frontend/core/core.constants';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { StepForm } from '#lib-frontend/data/components/StepForm/StepForm';
-import { AmountForm } from '#lib-frontend/funding/containers/AmountForm/AmountForm';
 import { CreditRatingForm } from '#lib-frontend/funding/containers/CreditRatingForm/CreditRatingForm';
-import { CurrencyForm } from '#lib-frontend/funding/containers/CurrencyForm/CurrencyForm';
+import { FundingAmountForm } from '#lib-frontend/funding/containers/FundingAmountForm/FundingAmountForm';
+import { FundingCurrencyForm } from '#lib-frontend/funding/containers/FundingCurrencyForm/FundingCurrencyForm';
 import { FUNDING_FORM_INITIAL_VALUES } from '#lib-frontend/funding/containers/FundingForm/FundingForm.constants';
 import { type FundingFormPropsModel } from '#lib-frontend/funding/containers/FundingForm/FundingForm.models';
-import { MaturityForm } from '#lib-frontend/funding/containers/MaturityForm/MaturityForm';
+import { FundingMaturityForm } from '#lib-frontend/funding/containers/FundingMaturityForm/FundingMaturityForm';
 import { FUNDING } from '#lib-frontend/funding/funding.constants';
 import { useFundingResource } from '#lib-frontend/funding/hooks/useFundingResource/useFundingResource';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -26,17 +26,17 @@ export const FundingForm: LFCModel<FundingFormPropsModel> = ({ ...props }) => {
       onSuccess={async () => replace({ pathname: `${FUNDING}/${IN_PROGRESS}` })}
       steps={[
         {
-          element: <CurrencyForm />,
+          element: <FundingCurrencyForm />,
           id: 'currency',
           title: t('funding:currency'),
         },
         {
-          element: <AmountForm />,
+          element: <FundingAmountForm />,
           id: 'amount',
           title: t('funding:amount'),
         },
         {
-          element: <MaturityForm />,
+          element: <FundingMaturityForm />,
           id: 'maturity',
           title: t('funding:maturity'),
         },

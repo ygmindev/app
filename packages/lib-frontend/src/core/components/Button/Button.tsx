@@ -58,15 +58,32 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
   }>(() => {
     const colorF = theme.color.palette[color];
     const activeColor = colorF[THEME_ROLE.ACTIVE];
+    const mainColor = colorF[THEME_ROLE.MAIN];
     switch (typeF) {
       case BUTTON_TYPE.FILLED: {
         return {
           animation: {
             states: {
-              [ELEMENT_STATE.ACTIVE]: { backgroundColor: activeColor, opacity: 1 },
-              [ELEMENT_STATE.DISABLED]: { backgroundColor: activeColor, opacity: theme.opaque },
-              [ELEMENT_STATE.LOADING]: { backgroundColor: activeColor, opacity: theme.opaque },
-              [ELEMENT_STATE.INACTIVE]: { backgroundColor: colorF.main, opacity: 1 },
+              [ELEMENT_STATE.ACTIVE]: {
+                backgroundColor: activeColor,
+                borderColor: activeColor,
+                opacity: 1,
+              },
+              [ELEMENT_STATE.DISABLED]: {
+                backgroundColor: activeColor,
+                borderColor: activeColor,
+                opacity: theme.opaque,
+              },
+              [ELEMENT_STATE.LOADING]: {
+                backgroundColor: activeColor,
+                borderColor: activeColor,
+                opacity: theme.opaque,
+              },
+              [ELEMENT_STATE.INACTIVE]: {
+                backgroundColor: mainColor,
+                borderColor: mainColor,
+                opacity: 1,
+              },
             },
           },
           childColorRole: THEME_ROLE.CONTRAST,
@@ -106,6 +123,7 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
       color={color}
       colorRole={childColorRole}
       icon={icon}
+      width={20}
     />
   ) : undefined;
 
@@ -126,8 +144,7 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
       {...props}
       align={align}
       animation={animation}
-      border={typeF === BUTTON_TYPE.TRANSPARENT}
-      borderColor={typeF === BUTTON_TYPE.TRANSPARENT ? color : undefined}
+      border={typeF !== BUTTON_TYPE.INVISIBLE}
       borderRole={THEME_ROLE.MAIN}
       elementState={valueControlled}
       height={heightF}

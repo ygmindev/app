@@ -17,7 +17,9 @@ export type AccessLevelModel = `${ACCESS_LEVEL}`;
 
 export type AccessModel = EntityResourceModel & {
   [GROUP_RESOURCE_NAME]: GroupModel;
+
   [USER_RESOURCE_NAME]: UserModel;
+
   role: Array<AccessRoleModel>;
 };
 

@@ -44,17 +44,19 @@ export type ResourceServiceBeforeDecoratorModel<
   TType,
   TForm,
   TRoot = undefined,
-> = (params: {
-  input: InputModel<TMethod, TType, TForm, TRoot>;
-}) => Promise<InputModel<TMethod, TType, TForm, TRoot>>;
+> = (
+  params: { input: InputModel<TMethod, TType, TForm, TRoot> },
+  context?: ContextModel,
+) => Promise<InputModel<TMethod, TType, TForm, TRoot>>;
 
 export type ResourceServiceAfterDecoratorModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
   TRoot = undefined,
-> = (params: {
-  output: OutputModel<TMethod, TType, TRoot>;
-}) => Promise<OutputModel<TMethod, TType, TRoot>>;
+> = (
+  params: { output: OutputModel<TMethod, TType, TRoot> },
+  context?: ContextModel,
+) => Promise<OutputModel<TMethod, TType, TRoot>>;
 
 export type ResourceServiceDecoratorModel<TType, TForm, TRoot = undefined> = RootModel<TRoot> & {
   afterCreate?: ResourceServiceAfterDecoratorModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>;

@@ -7,6 +7,7 @@ import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
 import { CreditRatingResolver } from '#lib-backend/funding/resources/CreditRating/CreditRatingResolver/CreditRatingResolver';
 import { FundingResolver } from '#lib-backend/funding/resources/Funding/FundingResolver/FundingResolver';
 import { RatingAgencyResolver } from '#lib-backend/funding/resources/RatingAgency/RatingAgencyResolver/RatingAgencyResolver';
+import { GroupResolver } from '#lib-backend/group/resources/Group/GroupResolver/GroupResolver';
 import { SnapshotResolver } from '#lib-backend/test/resources/Snapshot/SnapshotResolver/SnapshotResolver';
 import { UserResolver } from '#lib-backend/user/resources/User/UserResolver/UserResolver';
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
@@ -28,6 +29,7 @@ const { _config, config } = defineConfig({
         // CardResolver,
         CreditRatingResolver,
         FundingResolver,
+        GroupResolver,
         // LinkedUserResolver,
         OtpResolver,
         // PaymentMethodResolver,

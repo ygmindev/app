@@ -22,7 +22,9 @@ export const testResourceService = async ({
   getService,
 }: TestResourceServiceParamsModel): Promise<void> => {
   let service: TestableResourceServiceModel;
-  const PROJECT_FIELDS: Array<keyof DummyEntityResourceModel> = ['_id', 'stringPropertyOptional'];
+  const PROJECT_FIELDS = ['_id', 'stringPropertyOptional'] satisfies Array<
+    keyof DummyEntityResourceModel
+  >;
 
   beforeAll(async () => {
     await initialize();

@@ -1,3 +1,5 @@
+import { type ACCESS_RESOURCE_NAME } from '#lib-shared/auth/resources/Access/Access.constants';
+import { type AccessModel } from '#lib-shared/auth/resources/Access/Access.models';
 import {
   type EntityResourceDataModel,
   type EntityResourceModel,
@@ -11,6 +13,8 @@ export type UserModel = EntityResourceModel & {
   // [LINKED_USER_RESOURCE_NAME]?: Array<LinkedUserModel>;
 
   // [PAYMENT_METHOD_RESOURCE_NAME]?: Array<PaymentMethodModel>;
+
+  [ACCESS_RESOURCE_NAME]?: Array<AccessModel>;
 
   callingCode?: string;
 

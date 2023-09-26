@@ -1,9 +1,11 @@
 import { type GraphQLError } from 'graphql';
 
 import {
+  type DepthArray,
   type InferModel,
   type PrimitiveModel,
   type RequiredModel,
+  type StringKeyModel,
   type UnionToIntersectionModel,
 } from '#lib-shared/core/core.models';
 import { type GraphQlOperationTypeModel } from '#lib-shared/graphql/graphql.models';
@@ -31,22 +33,27 @@ export type GraphQlFragmentFieldModel<TType, TStrict extends boolean = true> = R
 export type GraphQlFieldModel<
   TType,
   TStrict extends boolean = true,
+  TDepth extends number = 10,
   TInfer = RequiredModel<InferModel<TType>>,
-> = {
-  [TKey in keyof TInfer]?: TInfer[TKey] extends PrimitiveModel | Array<PrimitiveModel>
-    ? TKey
-    : TStrict extends true
-    ? Record<TKey, Array<GraphQlFieldModel<TInfer[TKey], TStrict>>>
-    : TInfer[TKey] extends ConnectionModel<infer TResource>
-    ? Record<
-        TKey,
-        Array<GraphQlFieldModel<TResource, TStrict>> | GraphQlFragmentFieldModel<TResource>
-      >
-    : Record<
-        TKey,
-        Array<GraphQlFieldModel<TInfer[TKey]>> | GraphQlFragmentFieldModel<TInfer[TKey]>
-      >;
-}[keyof TInfer];
+> = [TDepth] extends [0]
+  ? never
+  : {
+      [TKey in StringKeyModel<TInfer>]?: TInfer[TKey] extends PrimitiveModel | Array<PrimitiveModel>
+        ? TKey
+        : TInfer[TKey] extends Array<infer TElement>
+        ? Array<GraphQlFieldModel<TElement, TStrict, DepthArray[TDepth]>>
+        : TStrict extends true
+        ? Record<TKey, Array<GraphQlFieldModel<TInfer[TKey], TStrict, DepthArray[TDepth]>>>
+        : TInfer[TKey] extends ConnectionModel<infer TResource>
+        ? Record<
+            TKey,
+            Array<GraphQlFieldModel<TResource, TStrict>> | GraphQlFragmentFieldModel<TResource>
+          >
+        : Record<
+            TKey,
+            Array<GraphQlFieldModel<TInfer[TKey]>> | GraphQlFragmentFieldModel<TInfer[TKey]>
+          >;
+    }[StringKeyModel<TInfer>];
 
 export type GraphQlQueryParamsFieldsModel<TType, TStrict extends boolean = true> = Array<
   GraphQlFieldModel<TType, TStrict>

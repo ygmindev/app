@@ -1,4 +1,4 @@
-export const SEARCH_THRESHOLD = 0.9;
+export const SEARCH_THRESHOLD = 0.95;
 
 export const SEARCH_DELAY = 500;
 

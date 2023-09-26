@@ -4,13 +4,15 @@ import { type CreditRatingModel } from '#lib-shared/funding/resources/CreditRati
 import { type FundingModel } from '#lib-shared/funding/resources/Funding/Funding.models';
 import { type ResourceMethodTypeCrudModel } from '#lib-shared/resource/resource.models';
 
-export const CREDIT_RATING_FIELDS: GraphQlQueryParamsFieldsModel<CreditRatingModel> = [
+export const CREDIT_RATING_FIELDS = [
   '_id',
   { agency: ['_id'] },
-];
+] satisfies GraphQlQueryParamsFieldsModel<CreditRatingModel>;
 
-export const CREDIT_RATING_OUTPUT_FIELDS: UseResourceMethodParamsFieldsModel<
+export const CREDIT_RATING_OUTPUT_FIELDS = [
+  { result: CREDIT_RATING_FIELDS },
+] satisfies UseResourceMethodParamsFieldsModel<
   ResourceMethodTypeCrudModel,
   CreditRatingModel,
   FundingModel
-> = [{ result: CREDIT_RATING_FIELDS }];
+>;

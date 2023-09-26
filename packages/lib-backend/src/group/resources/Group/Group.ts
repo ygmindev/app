@@ -7,7 +7,10 @@ import { ACCESS_RESOURCE_NAME } from '#lib-shared/auth/resources/Access/Access.c
 import { type AccessModel } from '#lib-shared/auth/resources/Access/Access.models';
 import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 import { GROUP_RESOURCE_NAME } from '#lib-shared/group/resources/Group/Group.constants';
-import { type GroupModel } from '#lib-shared/group/resources/Group/Group.models';
+import {
+  type GroupModel,
+  type GroupTypeModel,
+} from '#lib-shared/group/resources/Group/Group.models';
 
 @withEntity({ isRepository: true, name: GROUP_RESOURCE_NAME })
 export class Group extends EntityResource implements GroupModel {
@@ -23,4 +26,10 @@ export class Group extends EntityResource implements GroupModel {
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   name!: string;
+
+  @withField({ isArray: true, isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  types?: Array<GroupTypeModel>;
+
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  profileImage?: string;
 }

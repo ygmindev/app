@@ -5,6 +5,7 @@ import { Otp } from '#lib-backend/auth/resources/Otp/Otp';
 import { CreditRating } from '#lib-backend/funding/resources/CreditRating/CreditRating';
 import { Funding } from '#lib-backend/funding/resources/Funding/Funding';
 import { RatingAgency } from '#lib-backend/funding/resources/RatingAgency/RatingAgency';
+import { Group } from '#lib-backend/group/resources/Group/Group';
 import { DummyEntityResource } from '#lib-backend/test/resources/DummyEntityResource/DummyEntityResource';
 import { User } from '#lib-backend/user/resources/User/User';
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
@@ -21,6 +22,7 @@ const { _config, config } = defineConfig({
       // Card,
       CreditRating,
       Funding,
+      Group,
       Otp,
       RatingAgency,
       User,

@@ -1,3 +1,4 @@
+import { AppHomePage } from '#lib-frontend/app/pages/AppHomePage/AppHomePage';
 import { TABS_TYPE } from '#lib-frontend/core/components/Tabs/Tabs.constants';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { COMPLETED, IN_PROGRESS, SUMMARY } from '#lib-frontend/core/core.constants';
@@ -7,6 +8,7 @@ import { FundingFormPage } from '#lib-frontend/funding/pages/FundingFormPage/Fun
 import { FundingInProgressPage } from '#lib-frontend/funding/pages/FundingInProgressPage/FundingInProgressPage';
 import { FundingPage } from '#lib-frontend/funding/pages/FundingPage/FundingPage';
 import { QuotesPage } from '#lib-frontend/funding/pages/QuotesPage/QuotesPage';
+import { GroupFormPage } from '#lib-frontend/group/pages/GroupFormPage/GroupFormPage';
 import { TabNavigator } from '#lib-frontend/route/components/TabNavigator/TabNavigator';
 import { type RouteModel } from '#lib-frontend/route/route.models';
 import { getRouteGroup } from '#lib-frontend/route/utils/getRouteGroup/getRouteGroup';
@@ -14,6 +16,14 @@ import { getRoutes } from '#lib-frontend/route/utils/getRoutes/getRoutes';
 
 export const routes: Array<RouteModel> = getRoutes({
   appRoutes: [
+    {
+      element: <AppHomePage />,
+      pathname: '/',
+    },
+    {
+      element: <GroupFormPage />,
+      pathname: '/group/form',
+    },
     {
       isProtectable: true,
       layoutProps: { p: true },

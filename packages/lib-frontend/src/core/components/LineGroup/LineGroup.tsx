@@ -18,6 +18,8 @@ export const LineGroup: LFCModel<LineGroupPropsModel> = ({
   return (
     <Wrapper
       {...wrapperProps}
+      round
+      border
       isVerticalScrollable
       pHorizontal={THEME_SIZE.SMALL}>
       {title && (

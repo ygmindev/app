@@ -73,7 +73,7 @@ export type ValuesModel<TType> = ValueOf<TType>;
 export type GetModel<TType extends object, TKey extends DeepKeyModel<TType>> = Get<TType, TKey>;
 
 // TODO: cleanup if possible?
-type _IndexArray = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+export type DepthArray = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 export type DeepKeyModel<TType extends object, TDepth extends number = 10> = [TDepth] extends [0]
   ? never
   :
@@ -81,7 +81,7 @@ export type DeepKeyModel<TType extends object, TDepth extends number = 10> = [TD
       | {
           [TKey in keyof RequiredModel<TType> &
             (string | number)]: RequiredModel<TType>[TKey] extends object
-            ? `${TKey}.${DeepKeyModel<RequiredModel<TType>[TKey], _IndexArray[TDepth]>}`
+            ? `${TKey}.${DeepKeyModel<RequiredModel<TType>[TKey], DepthArray[TDepth]>}`
             : `${TKey}`;
         }[keyof RequiredModel<TType> & (string | number)];
 
