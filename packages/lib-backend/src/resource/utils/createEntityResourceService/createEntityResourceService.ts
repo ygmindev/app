@@ -66,6 +66,16 @@ export const createEntityResourceService = <TType, TForm = undefined>({
       this._decorators = value;
     }
 
+    constructor() {
+      this.create = this.create.bind(this);
+      this.get = this.get.bind(this);
+      this.getMany = this.getMany.bind(this);
+      this.getConnection = this.getConnection.bind(this);
+      this.update = this.update.bind(this);
+      this.remove = this.remove.bind(this);
+      this.count = this.count.bind(this);
+    }
+
     async create(
       input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>,
       context?: ContextModel,

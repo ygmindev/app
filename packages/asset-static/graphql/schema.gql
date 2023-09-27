@@ -97,20 +97,6 @@ type CreditRating {
   longTermWatch: String
 }
 
-input CreditRatingCreateFormInput {
-  Funding: [FundingInput]
-  _id: String
-  agency: RatingAgencyInput
-  created: DateTime
-  longTermCategory: String
-  longTermWatch: String
-}
-
-input CreditRatingCreateInput {
-  form: CreditRatingCreateFormInput
-  root: CreditRatingCreateRootInput
-}
-
 type CreditRatingCreateOutput {
   result: CreditRating
   root: CreditRatingCreateOutputRoot
@@ -125,15 +111,6 @@ type CreditRatingCreateOutputRoot {
   maturity: ScaledNumberRange
 }
 
-input CreditRatingCreateRootInput {
-  CreditRating: [CreditRatingInput]
-  _id: String
-  amount: ScaledNumberRangeInput
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRangeInput
-}
-
 type CreditRatingGetConnectionConnection {
   edges: [CreditRatingGetConnectionEdge]
   pageInfo: PageInfo
@@ -142,12 +119,6 @@ type CreditRatingGetConnectionConnection {
 type CreditRatingGetConnectionEdge {
   cursor: String
   node: CreditRating
-}
-
-input CreditRatingGetConnectionInput {
-  filter: [FilterInput]
-  pagination: PaginationInput
-  root: CreditRatingGetConnectionRootInput
 }
 
 type CreditRatingGetConnectionOutput {
@@ -164,25 +135,6 @@ type CreditRatingGetConnectionOutputRoot {
   maturity: ScaledNumberRange
 }
 
-input CreditRatingGetConnectionRootInput {
-  CreditRating: [CreditRatingInput]
-  _id: String
-  amount: ScaledNumberRangeInput
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRangeInput
-}
-
-input CreditRatingGetInput {
-  filter: [FilterInput]
-  root: CreditRatingGetRootInput
-}
-
-input CreditRatingGetManyInput {
-  filter: [FilterInput]
-  root: CreditRatingGetManyRootInput
-}
-
 type CreditRatingGetManyOutput {
   result: [CreditRating]
   root: CreditRatingGetManyOutputRoot
@@ -195,15 +147,6 @@ type CreditRatingGetManyOutputRoot {
   created: DateTime
   currency: String
   maturity: ScaledNumberRange
-}
-
-input CreditRatingGetManyRootInput {
-  CreditRating: [CreditRatingInput]
-  _id: String
-  amount: ScaledNumberRangeInput
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRangeInput
 }
 
 type CreditRatingGetOutput {
@@ -220,29 +163,6 @@ type CreditRatingGetOutputRoot {
   maturity: ScaledNumberRange
 }
 
-input CreditRatingGetRootInput {
-  CreditRating: [CreditRatingInput]
-  _id: String
-  amount: ScaledNumberRangeInput
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRangeInput
-}
-
-input CreditRatingInput {
-  Funding: [FundingInput]
-  _id: String
-  agency: RatingAgencyInput
-  created: DateTime
-  longTermCategory: String
-  longTermWatch: String
-}
-
-input CreditRatingRemoveInput {
-  filter: [FilterInput]
-  root: CreditRatingRemoveRootInput
-}
-
 type CreditRatingRemoveOutput {
   result: CreditRating
   root: CreditRatingRemoveOutputRoot
@@ -257,21 +177,6 @@ type CreditRatingRemoveOutputRoot {
   maturity: ScaledNumberRange
 }
 
-input CreditRatingRemoveRootInput {
-  CreditRating: [CreditRatingInput]
-  _id: String
-  amount: ScaledNumberRangeInput
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRangeInput
-}
-
-input CreditRatingUpdateInput {
-  filter: [FilterInput]
-  root: CreditRatingUpdateRootInput
-  update: CreditRatingUpdateUpdateInput
-}
-
 type CreditRatingUpdateOutput {
   result: CreditRating
   root: CreditRatingUpdateOutputRoot
@@ -284,24 +189,6 @@ type CreditRatingUpdateOutputRoot {
   created: DateTime
   currency: String
   maturity: ScaledNumberRange
-}
-
-input CreditRatingUpdateRootInput {
-  CreditRating: [CreditRatingInput]
-  _id: String
-  amount: ScaledNumberRangeInput
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRangeInput
-}
-
-input CreditRatingUpdateUpdateInput {
-  Funding: [FundingInput]
-  _id: String
-  agency: RatingAgencyInput
-  created: DateTime
-  longTermCategory: String
-  longTermWatch: String
 }
 
 """
@@ -324,19 +211,6 @@ type Funding {
   maturity: ScaledNumberRange
 }
 
-input FundingCreateFormInput {
-  CreditRating: [CreditRatingInput]
-  _id: String
-  amount: ScaledNumberRangeInput
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRangeInput
-}
-
-input FundingCreateInput {
-  form: FundingCreateFormInput
-}
-
 type FundingCreateOutput {
   result: Funding
 }
@@ -351,56 +225,20 @@ type FundingGetConnectionEdge {
   node: Funding
 }
 
-input FundingGetConnectionInput {
-  filter: [FilterInput]
-  pagination: PaginationInput
-}
-
 type FundingGetConnectionOutput {
   result: FundingGetConnectionConnection
-}
-
-input FundingGetManyInput {
-  filter: [FilterInput]
 }
 
 type FundingGetManyOutput {
   result: [Funding]
 }
 
-input FundingInput {
-  CreditRating: [CreditRatingInput]
-  _id: String
-  amount: ScaledNumberRangeInput
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRangeInput
-}
-
-input FundingRemoveInput {
-  filter: [FilterInput]
-}
-
 type FundingRemoveOutput {
   result: Funding
 }
 
-input FundingUpdateInput {
-  filter: [FilterInput]
-  update: FundingUpdateUpdateInput
-}
-
 type FundingUpdateOutput {
   result: Funding
-}
-
-input FundingUpdateUpdateInput {
-  CreditRating: [CreditRatingInput]
-  _id: String
-  amount: ScaledNumberRangeInput
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRangeInput
 }
 
 type Group {
@@ -495,21 +333,21 @@ type Mutation {
   AccessCreate(input: AccessCreateInput): AccessCreateOutput
   AccessRemove(input: AccessRemoveInput): AccessRemoveOutput
   AccessUpdate(input: AccessUpdateInput): AccessUpdateOutput
-  CreditRatingCreate(input: CreditRatingCreateInput): CreditRatingCreateOutput
-  CreditRatingRemove(input: CreditRatingRemoveInput): CreditRatingRemoveOutput
-  CreditRatingUpdate(input: CreditRatingUpdateInput): CreditRatingUpdateOutput
-  FundingCreate(input: FundingCreateInput): FundingCreateOutput
-  FundingRemove(input: FundingRemoveInput): FundingRemoveOutput
-  FundingUpdate(input: FundingUpdateInput): FundingUpdateOutput
+  CreditRatingCreate: CreditRatingCreateOutput
+  CreditRatingRemove: CreditRatingRemoveOutput
+  CreditRatingUpdate: CreditRatingUpdateOutput
+  FundingCreate: FundingCreateOutput
+  FundingRemove: FundingRemoveOutput
+  FundingUpdate: FundingUpdateOutput
   GroupCreate(input: GroupCreateInput): GroupCreateOutput
   GroupRemove(input: GroupRemoveInput): GroupRemoveOutput
   GroupUpdate(input: GroupUpdateInput): GroupUpdateOutput
-  OtpCreate(input: OtpCreateInput): OtpCreateOutput
-  OtpRemove(input: OtpRemoveInput): OtpRemoveOutput
-  OtpUpdate(input: OtpUpdateInput): OtpUpdateOutput
-  RatingAgencyCreate(input: RatingAgencyCreateInput): RatingAgencyCreateOutput
-  RatingAgencyRemove(input: RatingAgencyRemoveInput): RatingAgencyRemoveOutput
-  RatingAgencyUpdate(input: RatingAgencyUpdateInput): RatingAgencyUpdateOutput
+  OtpCreate: OtpCreateOutput
+  OtpRemove: OtpRemoveOutput
+  OtpUpdate: OtpUpdateOutput
+  RatingAgencyCreate: RatingAgencyCreateOutput
+  RatingAgencyRemove: RatingAgencyRemoveOutput
+  RatingAgencyUpdate: RatingAgencyUpdateOutput
   SignInCreate(input: SignInCreateInput): SignInCreateOutput
   SignInUserUpdate(input: SignInUserUpdateInput): SignInUserUpdateOutput
   SignInUsernameCreate(input: SignInUsernameCreateInput): SignInUsernameCreateOutput
@@ -527,17 +365,6 @@ type Otp {
   phone: String
 }
 
-input OtpCreateFormInput {
-  callingCode: String
-  checkExists: Boolean
-  email: String
-  phone: String
-}
-
-input OtpCreateInput {
-  form: OtpCreateFormInput
-}
-
 type OtpCreateOutput {
   result: Otp
 }
@@ -552,47 +379,20 @@ type OtpGetConnectionEdge {
   node: Otp
 }
 
-input OtpGetConnectionInput {
-  filter: [FilterInput]
-  pagination: PaginationInput
-}
-
 type OtpGetConnectionOutput {
   result: OtpGetConnectionConnection
-}
-
-input OtpGetManyInput {
-  filter: [FilterInput]
 }
 
 type OtpGetManyOutput {
   result: [Otp]
 }
 
-input OtpRemoveInput {
-  filter: [FilterInput]
-}
-
 type OtpRemoveOutput {
   result: Otp
 }
 
-input OtpUpdateInput {
-  filter: [FilterInput]
-  update: OtpUpdateUpdateInput
-}
-
 type OtpUpdateOutput {
   result: Otp
-}
-
-input OtpUpdateUpdateInput {
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  otp: String
-  phone: String
 }
 
 type PageInfo {
@@ -612,17 +412,17 @@ input PaginationInput {
 type Query {
   AccessGetConnection(input: AccessGetConnectionInput): AccessGetConnectionOutput
   AccessGetMany(input: AccessGetManyInput): AccessGetManyOutput
-  CreditRatingGet(input: CreditRatingGetInput): CreditRatingGetOutput
-  CreditRatingGetConnection(input: CreditRatingGetConnectionInput): CreditRatingGetConnectionOutput
-  CreditRatingGetMany(input: CreditRatingGetManyInput): CreditRatingGetManyOutput
-  FundingGetConnection(input: FundingGetConnectionInput): FundingGetConnectionOutput
-  FundingGetMany(input: FundingGetManyInput): FundingGetManyOutput
+  CreditRatingGet: CreditRatingGetOutput
+  CreditRatingGetConnection: CreditRatingGetConnectionOutput
+  CreditRatingGetMany: CreditRatingGetManyOutput
+  FundingGetConnection: FundingGetConnectionOutput
+  FundingGetMany: FundingGetManyOutput
   GroupGetConnection(input: GroupGetConnectionInput): GroupGetConnectionOutput
   GroupGetMany(input: GroupGetManyInput): GroupGetManyOutput
-  OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
-  OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput
-  RatingAgencyGetConnection(input: RatingAgencyGetConnectionInput): RatingAgencyGetConnectionOutput
-  RatingAgencyGetMany(input: RatingAgencyGetManyInput): RatingAgencyGetManyOutput
+  OtpGetConnection: OtpGetConnectionOutput
+  OtpGetMany: OtpGetManyOutput
+  RatingAgencyGetConnection: RatingAgencyGetConnectionOutput
+  RatingAgencyGetMany: RatingAgencyGetManyOutput
   SnapshotGet: SnapshotGetOutput
   SnapshotGetMany: SnapshotGetManyOutput
   UserGetConnection(input: UserGetConnectionInput): UserGetConnectionOutput
@@ -633,16 +433,6 @@ type RatingAgency {
   _id: String
   created: DateTime
   name: String
-}
-
-input RatingAgencyCreateFormInput {
-  _id: String
-  created: DateTime
-  name: String
-}
-
-input RatingAgencyCreateInput {
-  form: RatingAgencyCreateFormInput
 }
 
 type RatingAgencyCreateOutput {
@@ -659,59 +449,23 @@ type RatingAgencyGetConnectionEdge {
   node: RatingAgency
 }
 
-input RatingAgencyGetConnectionInput {
-  filter: [FilterInput]
-  pagination: PaginationInput
-}
-
 type RatingAgencyGetConnectionOutput {
   result: RatingAgencyGetConnectionConnection
-}
-
-input RatingAgencyGetManyInput {
-  filter: [FilterInput]
 }
 
 type RatingAgencyGetManyOutput {
   result: [RatingAgency]
 }
 
-input RatingAgencyInput {
-  _id: String
-  created: DateTime
-  name: String
-}
-
-input RatingAgencyRemoveInput {
-  filter: [FilterInput]
-}
-
 type RatingAgencyRemoveOutput {
   result: RatingAgency
-}
-
-input RatingAgencyUpdateInput {
-  filter: [FilterInput]
-  update: RatingAgencyUpdateUpdateInput
 }
 
 type RatingAgencyUpdateOutput {
   result: RatingAgency
 }
 
-input RatingAgencyUpdateUpdateInput {
-  _id: String
-  created: DateTime
-  name: String
-}
-
 type ScaledNumberRange {
-  max: Float
-  min: Float
-  unit: String
-}
-
-input ScaledNumberRangeInput {
   max: Float
   min: Float
   unit: String

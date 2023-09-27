@@ -1,5 +1,6 @@
 module.exports = (path, options) => {
   const firebaseRegex = /^@?firebase/;
+
   return options.defaultResolver(path, {
     ...options,
     packageFilter: (pkg) => {

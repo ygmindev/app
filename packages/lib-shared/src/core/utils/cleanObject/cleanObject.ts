@@ -1,23 +1,26 @@
 import isArray from 'lodash/isArray';
 import isPlainObject from 'lodash/isPlainObject';
+import toPlainObject from 'lodash/toPlainObject';
 
+import { type StringKeyModel } from '#lib-shared/core/core.models';
 import { CLEAN_OBJECT_KEYS } from '#lib-shared/core/utils/cleanObject/cleanObject.constants';
 import { isPrimitive } from '#lib-shared/core/utils/isPrimitive/isPrimitive';
-import { isTypeOf } from '#lib-shared/core/utils/isTypeOf/isTypeOf';
-import { toPlainObject } from '#lib-shared/core/utils/toPlainObject/toPlainObject';
 
 export const cleanObject = <TType>(value: TType): TType => {
-  if (isTypeOf(value, Date) || isTypeOf(value, 'ObjectId')) {
-    return value;
-  }
-  const valueF = isPlainObject(value) ? value : toPlainObject(value);
-  Object.keys(valueF as object).forEach((k) => {
-    const v = (valueF as Record<string, unknown>)[k];
+  const valueF = toPlainObject(value) as TType;
+  (Object.keys(valueF as object) as Array<StringKeyModel<TType>>).forEach((k) => {
+    const v = valueF[k];
     CLEAN_OBJECT_KEYS.includes(k) || v === undefined
-      ? delete (valueF as Record<string, unknown>)[k]
+      ? delete valueF[k]
       : isPrimitive(v)
       ? undefined
-      : ((valueF as Record<string, unknown>)[k] = isArray(v) ? v.map(cleanObject) : cleanObject(v));
+      : (valueF[k] = (
+          isArray(v)
+            ? v.map((vv: object) => (isPlainObject(vv) ? cleanObject(vv) : vv))
+            : isPlainObject(v)
+            ? cleanObject(v)
+            : v
+        ) as typeof v);
   });
   return valueF;
 };

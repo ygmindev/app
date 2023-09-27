@@ -2,6 +2,7 @@ import { AccessService } from '#lib-backend/auth/resources/Access/AccessService/
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { createEntityResourceService } from '#lib-backend/resource/utils/createEntityResourceService/createEntityResourceService';
+import { UserService } from '#lib-backend/user/resources/User/UserService/UserService';
 import {
   ACCESS_RESOURCE_NAME,
   ACCESS_ROLE,
@@ -18,18 +19,16 @@ import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constan
 export class GroupService
   extends createEntityResourceService<GroupModel, GroupFormModel>({
     afterCreate: async ({ output }, context) => {
-      const { create: userCreate, get: userGet } = Container.get(AccessService);
+      const { get: userGet } = Container.get(UserService);
+      const { create: accessCreate } = Container.get(AccessService);
       const { update: groupUpdate } = Container.get(GroupService);
       if (output.result && context?.user) {
         const user = (await userGet({ filter: [{ field: '_id', value: context.user._id }] }))
           .result;
-        console.warn('@@@user:');
-        console.warn(user);
-        console.warn('\n\n');
         const access =
           user &&
           (
-            await userCreate({
+            await accessCreate({
               form: {
                 [GROUP_RESOURCE_NAME]: output.result,
                 [USER_RESOURCE_NAME]: user,

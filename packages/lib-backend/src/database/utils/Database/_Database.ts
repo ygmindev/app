@@ -101,11 +101,12 @@ export class _Database implements _DatabaseModel {
       create: async ({ form, options }) => {
         const em = this._getEntityManager();
         try {
-          const formF = cleanDocument(form, true) as TType & object;
+          const formF = cleanDocument(form) as TType & object;
           const result = em.create<TType & object>(name, formF);
           !options?.isCommitted && (await em.persistAndFlush(result));
           return { result };
         } catch (e) {
+          console.warn(e);
           switch ((e as MongoError).code as unknown as number) {
             case 11000:
               throw new DuplicateError(name);
@@ -180,7 +181,7 @@ export class _Database implements _DatabaseModel {
       update: async ({ filter, options, update }) => {
         const em = this._getEntityManager();
         const filterF = getFilter<TType>(filter);
-        const updateF = cleanDocument(update, true);
+        const updateF = cleanDocument(update);
         Object.keys(updateF).forEach((key) => {
           const keyF = key as keyof UpdateModel<TType>;
           if (!key.startsWith('$')) {
@@ -196,7 +197,7 @@ export class _Database implements _DatabaseModel {
           .getConnection()
           .getCollection<TType & object>(name)
           .findOneAndUpdate(filterF, updateF as UpdateFilter<TType & object>, {
-            projection: options?.project ? cleanDocument(options.project, true) : undefined,
+            projection: options?.project ? cleanDocument(options.project) : undefined,
             returnDocument: 'after',
           });
         return { result } as OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;

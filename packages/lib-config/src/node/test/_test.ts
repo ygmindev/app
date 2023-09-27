@@ -50,7 +50,7 @@ export const _test = ({
       ...(_config.compilerOptions?.paths
         ? pathsToModuleNameMapper(_config.compilerOptions.paths, { prefix: fromRoot() })
         : {}),
-      [`\\(${fileExtensions.join('|')})$`]: join(mockDir, 'file'),
+      [`(${fileExtensions.join('|')})$`]: join(mockDir, 'file'),
     },
 
     passWithNoTests: true,
