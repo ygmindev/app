@@ -23,6 +23,9 @@ export class GroupService
       if (output.result && context?.user) {
         const user = (await userGet({ filter: [{ field: '_id', value: context.user._id }] }))
           .result;
+        console.warn('@@@user:');
+        console.warn(user);
+        console.warn('\n\n');
         const access =
           user &&
           (

@@ -1,7 +1,9 @@
 import { type FilterQuery } from '@mikro-orm/core';
 import { MikroORM } from '@mikro-orm/core';
 import { type EntityManager, type MongoDriver } from '@mikro-orm/mongodb';
-import { type Filter, type MongoError, type UpdateFilter } from 'mongodb';
+import isString from 'lodash/isString';
+import last from 'lodash/last';
+import { type Filter, type MongoError, ObjectId, type UpdateFilter } from 'mongodb';
 
 import { cleanDocument } from '#lib-backend/database/utils/cleanDocument/cleanDocument';
 import { type _DatabaseModel } from '#lib-backend/database/utils/Database/_Database.models';
@@ -28,6 +30,7 @@ const getFilter = <TType>(filters?: Array<FilterModel<TType>>): Filter<TType & o
     ? filters.reduce(
         (result, v) => {
           const conditionF = v.condition ?? FILTER_CONDITION.EQUAL;
+
           return {
             ...result,
             [v.field]: (
@@ -37,7 +40,12 @@ const getFilter = <TType>(filters?: Array<FilterModel<TType>>): Filter<TType & o
               ] as Array<FilterConditionModel>
             ).includes(conditionF)
               ? { $regex: new RegExp(v.value, 'i') }
-              : { [conditionF]: v.value },
+              : {
+                  [conditionF]:
+                    last(v.field.split('.'))?.startsWith('_') && isString(v.value)
+                      ? new ObjectId(v.value)
+                      : v.value,
+                },
           };
         },
         {} as Filter<TType & object>,
@@ -93,7 +101,7 @@ export class _Database implements _DatabaseModel {
       create: async ({ form, options }) => {
         const em = this._getEntityManager();
         try {
-          const formF = cleanDocument(form) as TType & object;
+          const formF = cleanDocument(form, true) as TType & object;
           const result = em.create<TType & object>(name, formF);
           !options?.isCommitted && (await em.persistAndFlush(result));
           return { result };
@@ -172,7 +180,7 @@ export class _Database implements _DatabaseModel {
       update: async ({ filter, options, update }) => {
         const em = this._getEntityManager();
         const filterF = getFilter<TType>(filter);
-        const updateF = cleanDocument(update);
+        const updateF = cleanDocument(update, true);
         Object.keys(updateF).forEach((key) => {
           const keyF = key as keyof UpdateModel<TType>;
           if (!key.startsWith('$')) {
@@ -188,7 +196,7 @@ export class _Database implements _DatabaseModel {
           .getConnection()
           .getCollection<TType & object>(name)
           .findOneAndUpdate(filterF, updateF as UpdateFilter<TType & object>, {
-            projection: options?.project ? cleanDocument(options.project) : undefined,
+            projection: options?.project ? cleanDocument(options.project, true) : undefined,
             returnDocument: 'after',
           });
         return { result } as OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;

@@ -66,10 +66,10 @@ export const createEntityResourceService = <TType, TForm = undefined>({
       this._decorators = value;
     }
 
-    create = async (
+    async create(
       input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>,
       context?: ContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType>> => {
+    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType>> {
       const inputF = cleanObject(
         this.decorators.beforeCreate
           ? await this.decorators.beforeCreate({ input }, context)
@@ -85,7 +85,7 @@ export const createEntityResourceService = <TType, TForm = undefined>({
       return this.decorators.afterCreate
         ? this.decorators.afterCreate({ output }, context)
         : output;
-    };
+    }
 
     get = async (
       input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm>,
@@ -98,10 +98,10 @@ export const createEntityResourceService = <TType, TForm = undefined>({
       return this.decorators.afterGet ? this.decorators.afterGet({ output }, context) : output;
     };
 
-    getMany = async (
+    async getMany(
       input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm>,
       context?: ContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>> => {
+    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>> {
       const inputF = cleanObject(
         this.decorators.beforeGetMany
           ? await this.decorators.beforeGetMany({ input }, context)
@@ -111,12 +111,12 @@ export const createEntityResourceService = <TType, TForm = undefined>({
       return this.decorators.afterGetMany
         ? this.decorators.afterGetMany({ output }, context)
         : output;
-    };
+    }
 
-    getConnection = async (
+    async getConnection(
       input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm>,
       context?: ContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>> => {
+    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>> {
       const inputF = cleanObject(
         this.decorators.beforeGetConnection
           ? await this.decorators.beforeGetConnection({ input }, context)
@@ -126,12 +126,12 @@ export const createEntityResourceService = <TType, TForm = undefined>({
       return this.decorators.afterGetConnection
         ? this.decorators.afterGetConnection({ output }, context)
         : output;
-    };
+    }
 
-    update = async (
+    async update(
       input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm>,
       context?: ContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>> => {
+    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>> {
       const inputF = cleanObject(
         this.decorators.beforeUpdate
           ? await this.decorators.beforeUpdate({ input }, context)
@@ -141,12 +141,12 @@ export const createEntityResourceService = <TType, TForm = undefined>({
       return this.decorators.afterUpdate
         ? this.decorators.afterUpdate({ output }, context)
         : output;
-    };
+    }
 
-    remove = async (
+    async remove(
       input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm>,
       context?: ContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType>> => {
+    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType>> {
       const inputF = cleanObject(
         this.decorators.beforeRemove
           ? await this.decorators.beforeRemove({ input }, context)
@@ -156,11 +156,11 @@ export const createEntityResourceService = <TType, TForm = undefined>({
       return this.decorators.afterRemove
         ? this.decorators.afterRemove({ output }, context)
         : output;
-    };
+    }
 
-    count = async (): Promise<number> => {
+    async count(): Promise<number> {
       return this._repository.count();
-    };
+    }
   }
 
   return EntityResourceService as CreateEntityResourceServiceModel<TType, TForm>;

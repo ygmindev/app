@@ -88,7 +88,6 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
           },
           childColorRole: THEME_ROLE.CONTRAST,
         };
-        break;
       }
       case BUTTON_TYPE.INVISIBLE:
       case BUTTON_TYPE.TRANSPARENT: {
@@ -96,10 +95,26 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
         return {
           animation: {
             states: {
-              [ELEMENT_STATE.ACTIVE]: { backgroundColor: colorF.muted, opacity: 1 },
-              [ELEMENT_STATE.DISABLED]: { backgroundColor: colorInactive, opacity: theme.opaque },
-              [ELEMENT_STATE.LOADING]: { backgroundColor: colorInactive, opacity: theme.opaque },
-              [ELEMENT_STATE.INACTIVE]: { backgroundColor: colorInactive, opacity: 1 },
+              [ELEMENT_STATE.ACTIVE]: {
+                backgroundColor: colorF.muted,
+                borderColor: activeColor,
+                opacity: 1,
+              },
+              [ELEMENT_STATE.DISABLED]: {
+                backgroundColor: colorInactive,
+                borderColor: activeColor,
+                opacity: theme.opaque,
+              },
+              [ELEMENT_STATE.LOADING]: {
+                backgroundColor: colorInactive,
+                borderColor: activeColor,
+                opacity: theme.opaque,
+              },
+              [ELEMENT_STATE.INACTIVE]: {
+                backgroundColor: colorInactive,
+                borderColor: activeColor,
+                opacity: 1,
+              },
             },
           },
           childColorRole: THEME_ROLE.MAIN,
