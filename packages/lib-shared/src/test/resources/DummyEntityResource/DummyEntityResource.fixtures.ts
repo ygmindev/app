@@ -1,0 +1,1 @@
+export const DUMMY_ENTITY_RESOURCE_FIXTURE: 
