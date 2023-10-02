@@ -1,5 +1,6 @@
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { createEntityResourceService } from '#lib-backend/resource/utils/createEntityResourceService/createEntityResourceService';
+import { DummyEntityResource } from '#lib-backend/test/resources/DummyEntityResource/DummyEntityResource';
 import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
 import {
   type DummyEntityResourceFormModel,
@@ -10,6 +11,7 @@ import { type DummyEntityResourceServiceModel } from '#lib-shared/test/resources
 @withContainer({ name: `${DUMMY_ENTITY_RESOURCE_RESOURCE_NAME}Service` })
 export class DummyEntityResourceService
   extends createEntityResourceService<DummyEntityResourceModel, DummyEntityResourceFormModel>({
+    Resource: DummyEntityResource,
     afterCreate: async ({ output }) => output,
     afterGet: async ({ output }) => output,
     afterGetConnection: async ({ output }) => output,

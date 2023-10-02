@@ -1,11 +1,16 @@
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
+import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type RootModel } from '#lib-shared/resource/utils/Root/Root.models';
 
-export type ResourceServiceModel<TType, TForm = undefined, TRoot = undefined> = {
+export type ResourceServiceModel<
+  TType,
+  TForm = EntityResourceDataModel<TType>,
+  TRoot = undefined,
+> = {
   create(
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
     context?: ContextModel,

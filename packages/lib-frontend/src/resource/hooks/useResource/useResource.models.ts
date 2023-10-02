@@ -3,6 +3,7 @@ import {
   type ResourceMethodTypeCrudModel,
   type ResourceNameParamsModel,
 } from '#lib-shared/resource/resource.models';
+import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import {
   type ResourceServiceDecoratorModel,
   type ResourceServiceModel,
@@ -11,7 +12,7 @@ import { type RootModel } from '#lib-shared/resource/utils/Root/Root.models';
 
 export type UseResourceParamsModel<
   TType,
-  TForm = undefined,
+  TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 > = ResourceNameParamsModel &
   RootModel<TRoot> &
@@ -19,8 +20,8 @@ export type UseResourceParamsModel<
     fields: UseResourceMethodParamsFieldsModel<ResourceMethodTypeCrudModel, TType, TRoot>;
   };
 
-export type UseResourceModel<TType, TForm = undefined, TRoot = undefined> = ResourceServiceModel<
+export type UseResourceModel<
   TType,
-  TForm,
-  TRoot
->;
+  TForm = EntityResourceDataModel<TType>,
+  TRoot = undefined,
+> = ResourceServiceModel<TType, TForm, TRoot>;

@@ -1,6 +1,3 @@
-import isFunction from 'lodash/isFunction';
-
-import { EntityResource } from '#lib-backend/resource/resources/EntityResource/EntityResource';
 import {
   type CreateFormModel,
   type CreateFormParamsModel,
@@ -12,11 +9,7 @@ export const createForm = <TType extends unknown>({
   Resource,
   name,
 }: CreateFormParamsModel<TType>): CreateFormModel<TType> => {
-  const nameF = `${name}Form`;
-  const isResource = Resource && isFunction(Resource);
-
-  @withEntity({ name: nameF })
-  class FormF extends (isResource ? (Resource as unknown as ClassModel) : EntityResource) {}
-
+  @withEntity({ name: `${name}Form` })
+  class FormF extends (Resource as unknown as ClassModel) {}
   return FormF as CreateFormModel<TType>;
 };

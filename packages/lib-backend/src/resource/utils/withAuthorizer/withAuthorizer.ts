@@ -4,12 +4,18 @@ import {
 } from '#lib-backend/resource/utils/withAuthorizer/withAuthorizer.models';
 import { UnauthorizedError } from '#lib-shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
+import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 
 export const withAuthorizer =
-  <TMethod extends ResourceMethodTypeModel, TType, TForm = undefined, TRoot = undefined>({
+  <
+    TMethod extends ResourceMethodTypeModel,
+    TType,
+    TForm = EntityResourceDataModel<TType>,
+    TRoot = undefined,
+  >({
     authorizer,
   }: WithAuthorizerParamsModel<TMethod, TType, TForm, TRoot>): WithAuthorizerModel =>
   (_target, _propertyKey, descriptor) => {

@@ -1,7 +1,7 @@
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { DATABASE_TYPE } from '#lib-backend/database/database.constants';
 import { Database } from '#lib-backend/database/utils/Database/Database';
-import { DUMMY_ENTITY_RESOURCE_SEED_DATA } from '#lib-backend/database/utils/seed/seed.constants';
+import { DUMMY_ENTITY_RESOURCE_SEED_DATA } from '#lib-backend/test/utils/seed/seed.constants';
 import {
   type TestableEmbeddedResourceServiceModel,
   type TestEmbeddedResourceServiceParamsModel,

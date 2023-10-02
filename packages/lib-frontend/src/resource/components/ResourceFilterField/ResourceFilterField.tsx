@@ -8,8 +8,13 @@ import { type ResourceFilterFieldPropsModel } from '#lib-frontend/resource/compo
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
+import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
-export const ResourceFilterField = <TType, TForm = undefined, TRoot = undefined>({
+export const ResourceFilterField = <
+  TType,
+  TForm = EntityResourceDataModel<TType>,
+  TRoot = undefined,
+>({
   id,
   type = RESOURCE_FILTER_PROPERTY_TYPE.STRING,
   ...props

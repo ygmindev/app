@@ -4,6 +4,8 @@ import {
   type EntityResourceDataModel,
   type EntityResourceModel,
 } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type DUMMY_USER_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyUserResource/DummyUserResource.constants';
+import { type DummyUserResourceModel } from '#lib-shared/test/resources/DummyUserResource/DummyUserResource.models';
 
 export type UserModel = EntityResourceModel & {
   // [BANK_RESOURCE_NAME]?: Array<BankModel>;
@@ -15,6 +17,8 @@ export type UserModel = EntityResourceModel & {
   // [PAYMENT_METHOD_RESOURCE_NAME]?: Array<PaymentMethodModel>;
 
   [ACCESS_RESOURCE_NAME]?: Array<AccessModel>;
+
+  [DUMMY_USER_RESOURCE_RESOURCE_NAME]?: Array<DummyUserResourceModel>;
 
   callingCode?: string;
 

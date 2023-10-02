@@ -14,11 +14,16 @@ import { NotImplementedError } from '#lib-shared/core/errors/NotImplementedError
 import { toPlainObject } from '#lib-shared/core/utils/toPlainObject/toPlainObject';
 import { withCondition } from '#lib-shared/core/utils/withCondition/withCondition';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
+import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 
-export const createResourceResolver = <TType, TForm = undefined, TRoot = undefined>({
+export const createResourceResolver = <
+  TType,
+  TForm = EntityResourceDataModel<TType>,
+  TRoot = undefined,
+>({
   Resource,
   ResourceData,
   ResourceService,
@@ -43,26 +48,31 @@ export const createResourceResolver = <TType, TForm = undefined, TRoot = undefin
   class ResourceResolver implements ResourceResolverModel<TType, TForm, TRoot> {
     protected _service = Container.get(ResourceService);
 
-    @withCondition(createExists, () => [
-      withAuthorizer({
-        authorizer: authorizer?.default ?? authorizer?.write ?? authorizer?.Create,
-      }),
-      withOutput({
-        Resource,
-        RootResource,
-        level: access?.default ?? access?.write ?? access?.Create,
-        method: RESOURCE_METHOD_TYPE.CREATE,
-        name,
-      }),
-    ])
-    async create(
-      @withCondition(createExists, () =>
-        withInput({
-          Resource: ResourceData ?? (Resource as unknown as ClassModel<TForm>),
+    @withCondition(
+      () => createExists,
+      () => [
+        withAuthorizer({
+          authorizer: authorizer?.default ?? authorizer?.write ?? authorizer?.Create,
+        }),
+        withOutput({
+          Resource,
           RootResource,
+          level: access?.default ?? access?.write ?? access?.Create,
           method: RESOURCE_METHOD_TYPE.CREATE,
           name,
         }),
+      ],
+    )
+    async create(
+      @withCondition(
+        () => createExists,
+        () =>
+          withInput({
+            Resource: ResourceData ?? (Resource as unknown as ClassModel<TForm>),
+            RootResource,
+            method: RESOURCE_METHOD_TYPE.CREATE,
+            name,
+          }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
       @withContext()
@@ -74,26 +84,31 @@ export const createResourceResolver = <TType, TForm = undefined, TRoot = undefin
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.CREATE);
     }
 
-    @withCondition(getExists, () => [
-      withAuthorizer({
-        authorizer: authorizer?.default ?? authorizer?.read ?? authorizer?.Get,
-      }),
-      withOutput({
-        Resource,
-        RootResource,
-        level: access?.default ?? access?.read ?? access?.Get,
-        method: RESOURCE_METHOD_TYPE.GET,
-        name,
-      }),
-    ])
-    async get(
-      @withCondition(getExists, () =>
-        withInput({
+    @withCondition(
+      () => getExists,
+      () => [
+        withAuthorizer({
+          authorizer: authorizer?.default ?? authorizer?.read ?? authorizer?.Get,
+        }),
+        withOutput({
           Resource,
           RootResource,
+          level: access?.default ?? access?.read ?? access?.Get,
           method: RESOURCE_METHOD_TYPE.GET,
           name,
         }),
+      ],
+    )
+    async get(
+      @withCondition(
+        () => getExists,
+        () =>
+          withInput({
+            Resource,
+            RootResource,
+            method: RESOURCE_METHOD_TYPE.GET,
+            name,
+          }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>,
       @withContext()
@@ -105,26 +120,31 @@ export const createResourceResolver = <TType, TForm = undefined, TRoot = undefin
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.GET);
     }
 
-    @withCondition(getManyExists, () => [
-      withAuthorizer({
-        authorizer: authorizer?.default ?? authorizer?.read ?? authorizer?.GetMany,
-      }),
-      withOutput({
-        Resource,
-        RootResource,
-        level: access?.default ?? access?.read ?? access?.GetMany,
-        method: RESOURCE_METHOD_TYPE.GET_MANY,
-        name,
-      }),
-    ])
-    async getMany(
-      @withCondition(getManyExists, () =>
-        withInput({
+    @withCondition(
+      () => getManyExists,
+      () => [
+        withAuthorizer({
+          authorizer: authorizer?.default ?? authorizer?.read ?? authorizer?.GetMany,
+        }),
+        withOutput({
           Resource,
           RootResource,
+          level: access?.default ?? access?.read ?? access?.GetMany,
           method: RESOURCE_METHOD_TYPE.GET_MANY,
           name,
         }),
+      ],
+    )
+    async getMany(
+      @withCondition(
+        () => getManyExists,
+        () =>
+          withInput({
+            Resource,
+            RootResource,
+            method: RESOURCE_METHOD_TYPE.GET_MANY,
+            name,
+          }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>,
       @withContext()
@@ -136,26 +156,31 @@ export const createResourceResolver = <TType, TForm = undefined, TRoot = undefin
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.GET_MANY);
     }
 
-    @withCondition(getConnectionExists, () => [
-      withAuthorizer({
-        authorizer: authorizer?.default ?? authorizer?.read ?? authorizer?.GetConnection,
-      }),
-      withOutput({
-        Resource,
-        RootResource,
-        level: access?.default ?? access?.read ?? access?.GetConnection,
-        method: RESOURCE_METHOD_TYPE.GET_CONNECTION,
-        name,
-      }),
-    ])
-    async getConnection(
-      @withCondition(getConnectionExists, () =>
-        withInput({
+    @withCondition(
+      () => getConnectionExists,
+      () => [
+        withAuthorizer({
+          authorizer: authorizer?.default ?? authorizer?.read ?? authorizer?.GetConnection,
+        }),
+        withOutput({
           Resource,
           RootResource,
+          level: access?.default ?? access?.read ?? access?.GetConnection,
           method: RESOURCE_METHOD_TYPE.GET_CONNECTION,
           name,
         }),
+      ],
+    )
+    async getConnection(
+      @withCondition(
+        () => getConnectionExists,
+        () =>
+          withInput({
+            Resource,
+            RootResource,
+            method: RESOURCE_METHOD_TYPE.GET_CONNECTION,
+            name,
+          }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>,
       @withContext()
@@ -167,26 +192,31 @@ export const createResourceResolver = <TType, TForm = undefined, TRoot = undefin
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.GET_CONNECTION);
     }
 
-    @withCondition(updateExists, () => [
-      withAuthorizer({
-        authorizer: authorizer?.default ?? authorizer?.write ?? authorizer?.Update,
-      }),
-      withOutput({
-        Resource,
-        RootResource,
-        level: access?.default ?? access?.write ?? access?.Update,
-        method: RESOURCE_METHOD_TYPE.UPDATE,
-        name,
-      }),
-    ])
-    async update(
-      @withCondition(updateExists, () =>
-        withInput({
+    @withCondition(
+      () => updateExists,
+      () => [
+        withAuthorizer({
+          authorizer: authorizer?.default ?? authorizer?.write ?? authorizer?.Update,
+        }),
+        withOutput({
           Resource,
           RootResource,
+          level: access?.default ?? access?.write ?? access?.Update,
           method: RESOURCE_METHOD_TYPE.UPDATE,
           name,
         }),
+      ],
+    )
+    async update(
+      @withCondition(
+        () => updateExists,
+        () =>
+          withInput({
+            Resource,
+            RootResource,
+            method: RESOURCE_METHOD_TYPE.UPDATE,
+            name,
+          }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>,
       @withContext()
@@ -198,26 +228,31 @@ export const createResourceResolver = <TType, TForm = undefined, TRoot = undefin
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.UPDATE);
     }
 
-    @withCondition(removeExists, () => [
-      withAuthorizer({
-        authorizer: authorizer?.default ?? authorizer?.write ?? authorizer?.Remove,
-      }),
-      withOutput({
-        Resource,
-        RootResource,
-        level: access?.default ?? access?.write ?? access?.Remove,
-        method: RESOURCE_METHOD_TYPE.REMOVE,
-        name,
-      }),
-    ])
-    async remove(
-      @withCondition(removeExists, () =>
-        withInput({
+    @withCondition(
+      () => removeExists,
+      () => [
+        withAuthorizer({
+          authorizer: authorizer?.default ?? authorizer?.write ?? authorizer?.Remove,
+        }),
+        withOutput({
           Resource,
           RootResource,
+          level: access?.default ?? access?.write ?? access?.Remove,
           method: RESOURCE_METHOD_TYPE.REMOVE,
           name,
         }),
+      ],
+    )
+    async remove(
+      @withCondition(
+        () => removeExists,
+        () =>
+          withInput({
+            Resource,
+            RootResource,
+            method: RESOURCE_METHOD_TYPE.REMOVE,
+            name,
+          }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>,
       @withContext()

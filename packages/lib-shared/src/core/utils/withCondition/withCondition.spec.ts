@@ -21,10 +21,10 @@ describe(displayName, () => {
       };
     };
 
-    @withCondition(false, () => decorator)
+    @withCondition(() => false, () => decorator)
     class B extends A {}
 
-    @withCondition(true, () => decorator)
+    @withCondition(() => true, () => decorator)
     class C extends A {}
 
     new B().test();

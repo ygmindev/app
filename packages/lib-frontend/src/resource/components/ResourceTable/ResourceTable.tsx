@@ -11,10 +11,11 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { ResourceFilterForm } from '#lib-frontend/resource/components/ResourceFilterForm/ResourceFilterForm';
 import { type ResourceTablePropsModel } from '#lib-frontend/resource/components/ResourceTable/ResourceTable.models';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { type ConnectionModel } from '#lib-shared/resource/utils/Connection/Connection.models';
 import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
-export const ResourceTable = <TType, TForm = undefined, TRoot = undefined>({
+export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRoot = undefined>({
   columns,
   filters,
   service,

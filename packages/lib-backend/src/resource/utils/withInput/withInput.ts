@@ -6,11 +6,12 @@ import {
   type WithInputParamsModel,
 } from '#lib-backend/resource/utils/withInput/withInput.models';
 import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
+import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export const withInput = <
   TMethod extends ResourceMethodTypeModel,
   TType,
-  TForm = undefined,
+  TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 >({
   Resource,

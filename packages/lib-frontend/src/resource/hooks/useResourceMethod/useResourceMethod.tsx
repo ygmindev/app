@@ -11,6 +11,7 @@ import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/Inval
 import { GRAPHQL_OPERATION_TYPE } from '#lib-shared/graphql/graphql.constants';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
+import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 
@@ -35,7 +36,7 @@ const getConnectionFields = <TType, TRoot = undefined>(
 export const useResourceMethod = <
   TMethod extends ResourceMethodTypeModel,
   TType,
-  TForm = undefined,
+  TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 >({
   after,

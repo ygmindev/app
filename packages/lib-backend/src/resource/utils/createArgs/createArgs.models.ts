@@ -3,12 +3,13 @@ import { type CreateRootParamsModel } from '#lib-backend/resource/utils/createRo
 import { type ClassModel } from '#lib-shared/core/core.models';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
+import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { type ArgsModel } from '#lib-shared/resource/utils/Args/Args.models';
 
 export type CreateArgsParamsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
-  TForm = undefined,
+  TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 > = {
   Resource?: ClassModel<TMethod extends RESOURCE_METHOD_TYPE.CREATE ? TForm : TType>;
@@ -19,6 +20,6 @@ export type CreateArgsParamsModel<
 export type CreateArgsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
-  TForm = undefined,
+  TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 > = ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;

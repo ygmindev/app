@@ -28,4 +28,7 @@ export const getAccessRole = (level: AccessLevelModel): Array<AccessRoleModel> =
 export const withAccess = ({
   level = ACCESS_LEVEL.PUBLIC,
 }: WithAccessParamsModel): WithAccessModel =>
-  withCondition(level !== ACCESS_LEVEL.PUBLIC, () => Authorized(getAccessRole(level)));
+  withCondition(
+    () => level !== ACCESS_LEVEL.PUBLIC,
+    () => Authorized(getAccessRole(level)),
+  );

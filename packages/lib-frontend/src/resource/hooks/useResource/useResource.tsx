@@ -5,8 +5,9 @@ import {
 import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { type UseResourceMethodParamsModel } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
+import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
-export const useResource = <TType, TForm = undefined, TRoot = undefined>({
+export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot = undefined>({
   afterCreate,
   afterGet,
   afterGetConnection,

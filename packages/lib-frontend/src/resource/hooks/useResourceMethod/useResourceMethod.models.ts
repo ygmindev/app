@@ -3,6 +3,7 @@ import {
   type ResourceMethodTypeModel,
   type ResourceNameParamsModel,
 } from '#lib-shared/resource/resource.models';
+import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import {
@@ -20,7 +21,7 @@ export type UseResourceMethodParamsFieldsModel<
 export type UseResourceMethodParamsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
-  TForm = undefined,
+  TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 > = ResourceNameParamsModel &
   RootModel<TRoot> & {
@@ -33,7 +34,7 @@ export type UseResourceMethodParamsModel<
 export type UseResourceMethodModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
-  TForm = undefined,
+  TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 > = {
   query(

@@ -12,6 +12,6 @@ export const createUnion = <TType>({
 }: CreateUnionParamsModel<TType>): CreateUnionModel<TType> =>
   createUnionType({
     name,
-    resolveType: (value) => resolve(value as TType),
+    resolveType: resolve ? (value) => resolve(value as TType) : undefined,
     types: () => Resource,
   }) as CreateUnionModel<TType>;

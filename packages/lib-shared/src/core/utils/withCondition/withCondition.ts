@@ -8,7 +8,7 @@ import {
 export const withCondition =
   (...[condition, ifTrue]: WithConditionParamsModel): WithConditionModel =>
   (...params: Array<unknown>) => {
-    if (condition) {
+    if (condition()) {
       const decorators = ifTrue();
       return isArray(decorators)
         ? decorators.forEach((decorator) =>

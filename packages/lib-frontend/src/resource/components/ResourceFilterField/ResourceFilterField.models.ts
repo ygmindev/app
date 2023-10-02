@@ -4,7 +4,7 @@ import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
 export type ResourceFilterFieldPropsModel<
   TType,
-  TForm = undefined,
+  TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 > = WithIdModel<StringKeyModel<TType>> & {
   type?: ResourceFilterFieldTypeModel;

@@ -4,7 +4,10 @@ import { type ResourceServiceModel } from '#lib-shared/resource/utils/ResourceSe
 
 export type DatabaseModel = _DatabaseModel;
 
-export type RepositoryModel<TType> = {
+export type RepositoryModel<TType, TForm = EntityResourceDataModel<TType>> = ResourceServiceModel<
+  TType,
+  TForm
+> & {
   clear(): Promise<void>;
   count(): Promise<number>;
-} & ResourceServiceModel<TType, EntityResourceDataModel<TType>>;
+};

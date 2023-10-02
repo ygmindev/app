@@ -15,7 +15,7 @@ export const _database = ({
   const config: _DatabaseConfigModel = {
     clientUrl: host,
     dbName: database,
-    debug: false,
+    debug: process.env.NODE_ENV === 'development',
     ensureIndexes: true,
     entities,
     pool: { max: pool.max, min: 0 },

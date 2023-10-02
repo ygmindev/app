@@ -1,7 +1,7 @@
 import { type DecoratorModel } from '#lib-shared/core/core.models';
 
 export type WithConditionParamsModel = [
-  condition: boolean,
+  condition: () => boolean,
   ifTrue: () => DecoratorModel | Array<DecoratorModel>,
 ];
 

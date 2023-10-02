@@ -1,6 +1,6 @@
 import { type FilterQuery } from '@mikro-orm/core';
 import { MikroORM } from '@mikro-orm/core';
-import { type EntityManager, type MongoDriver } from '@mikro-orm/mongodb';
+import { type EntityManager } from '@mikro-orm/mongodb';
 import isString from 'lodash/isString';
 import last from 'lodash/last';
 import { type Filter, type MongoError, ObjectId, type UpdateFilter } from 'mongodb';
@@ -74,7 +74,7 @@ export class _Database implements _DatabaseModel {
       info('reusing connection', this._config.clientUrl);
     } else {
       info('connecting', this._config.clientUrl);
-      this._entityManager = (await MikroORM.init<MongoDriver>(this._config)).em;
+      this._entityManager = (await MikroORM.init(this._config)).em;
     }
   }
 
@@ -86,10 +86,10 @@ export class _Database implements _DatabaseModel {
     throw new UninitializedError('database');
   };
 
-  getRepository = <TType extends unknown>({
+  getRepository = <TType, TForm = EntityResourceDataModel<TType>>({
     name,
-  }: ResourceNameParamsModel): RepositoryModel<TType> => {
-    const service: RepositoryModel<TType> = {
+  }: ResourceNameParamsModel): RepositoryModel<TType, TForm> => {
+    const service: RepositoryModel<TType, TForm> = {
       clear: async () => {
         await this._getEntityManager()
           .getRepository<TType & object>(name)
@@ -106,7 +106,6 @@ export class _Database implements _DatabaseModel {
           !options?.isCommitted && (await em.persistAndFlush(result));
           return { result };
         } catch (e) {
-          console.warn(e);
           switch ((e as MongoError).code as unknown as number) {
             case 11000:
               throw new DuplicateError(name);

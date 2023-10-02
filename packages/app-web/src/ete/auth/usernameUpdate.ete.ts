@@ -1,10 +1,9 @@
 import { signIn } from '#app-web/ete/auth/utils/signIn/signIn';
-import { seed } from '#lib-backend/database/utils/seed/seed';
 import { initialize } from '#lib-backend/setup/utils/initialize/initialize';
+import { seed } from '#lib-backend/test/utils/seed/seed';
 import { USERNAME_FORM_TEST_ID } from '#lib-frontend/auth/containers/UsernameForm/UsernameForm.constants';
 import { withScreen } from '#lib-frontend/test/utils/withScreen/withScreen';
 import { EMAIL, PERSONAL } from '#lib-frontend/user/user.constants';
-import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
 import { ACCOUNT } from '#lib-shared/user/user.constants';
 
 describe('usernameUpdate', () => {
@@ -13,7 +12,7 @@ describe('usernameUpdate', () => {
   });
 
   beforeEach(async () => {
-    await seed({ names: [USER_RESOURCE_NAME] });
+    await seed();
   });
 
   const USERNAME_NEW = 'new@new.com';

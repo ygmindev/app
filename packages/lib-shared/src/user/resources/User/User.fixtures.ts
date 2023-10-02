@@ -6,11 +6,11 @@ import { type EntityResourceDataModel } from '#lib-shared/resource/resources/Ent
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 export const USER_FIXTURE: RequiredModel<UserModel> = {
+  [ACCESS_RESOURCE_NAME]: [],
   // [BANK_RESOURCE_NAME]: [],
   // [CARD_RESOURCE_NAME]: [],
   // [LINKED_USER_RESOURCE_NAME]: [],
   // [PAYMENT_METHOD_RESOURCE_NAME]: [],
-  [ACCESS_RESOURCE_NAME]: [],
   _id: '6448881dd34cb0fcb6734acf',
   beforeCreate: async (): Promise<void> => {
     return;

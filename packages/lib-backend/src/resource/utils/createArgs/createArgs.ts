@@ -3,13 +3,14 @@ import {
   type CreateArgsModel,
   type CreateArgsParamsModel,
 } from '#lib-backend/resource/utils/createArgs/createArgs.models';
+import { createFilter } from '#lib-backend/resource/utils/createFilter/createFilter';
 import { createForm } from '#lib-backend/resource/utils/createForm/createForm';
 import { createRoot } from '#lib-backend/resource/utils/createRoot/createRoot';
 import { createUpdate } from '#lib-backend/resource/utils/createUpdate/createUpdate';
-import { Filter } from '#lib-backend/resource/utils/Filter/Filter';
 import { Pagination } from '#lib-backend/resource/utils/Pagination/Pagination';
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
+import { type StringKeyModel } from '#lib-shared/core/core.models';
 import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { withCondition } from '#lib-shared/core/utils/withCondition/withCondition';
 import { PROPERTY_TYPE } from '#lib-shared/data/data.constants';
@@ -37,6 +38,8 @@ export const createArgs = <
   TRoot
 > => {
   const Root = createRoot({ RootResource, name });
+  const Filter = createFilter({ Resource, name });
+
   switch (method) {
     case RESOURCE_METHOD_TYPE.GET:
     case RESOURCE_METHOD_TYPE.GET_MANY:
@@ -49,10 +52,16 @@ export const createArgs = <
           ArgsModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot>,
           ArgsModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm, TRoot>
       {
-        @withCondition(Resource !== undefined, () =>
-          withField({ Resource: () => Filter<TType>, isArray: true, type: PROPERTY_TYPE.RESOURCE }),
+        @withCondition(
+          () => Resource !== undefined,
+          () =>
+            withField({
+              Resource: () => Filter,
+              isArray: true,
+              type: PROPERTY_TYPE.RESOURCE,
+            }),
         )
-        filter!: Array<FilterModel<TType>>;
+        filter!: Array<FilterModel<TType, StringKeyModel<TType>>>;
       }
       return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
@@ -64,11 +73,13 @@ export const createArgs = <
         extends (Root ?? class {})
         implements ArgsModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>
       {
-        @withCondition(Resource !== undefined, () =>
-          withField({
-            Resource: () => Form,
-            type: PROPERTY_TYPE.RESOURCE,
-          }),
+        @withCondition(
+          () => Resource !== undefined,
+          () =>
+            withField({
+              Resource: () => Form,
+              type: PROPERTY_TYPE.RESOURCE,
+            }),
         )
         form!: TForm;
       }
@@ -82,16 +93,24 @@ export const createArgs = <
         extends (Root ?? class {})
         implements ArgsModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot>
       {
-        @withCondition(Resource !== undefined, () =>
-          withField({ Resource: () => Filter<TType>, isArray: true, type: PROPERTY_TYPE.RESOURCE }),
+        @withCondition(
+          () => Resource !== undefined,
+          () =>
+            withField({
+              Resource: () => Filter,
+              isArray: true,
+              type: PROPERTY_TYPE.RESOURCE,
+            }),
         )
-        filter!: Array<FilterModel<TType>>;
+        filter!: Array<FilterModel<TType, StringKeyModel<TType>>>;
 
-        @withCondition(Resource !== undefined, () =>
-          withField({
-            Resource: () => Update,
-            type: PROPERTY_TYPE.RESOURCE,
-          }),
+        @withCondition(
+          () => Resource !== undefined,
+          () =>
+            withField({
+              Resource: () => Update,
+              type: PROPERTY_TYPE.RESOURCE,
+            }),
         )
         update!: UpdateModel<TType>;
       }
@@ -103,13 +122,20 @@ export const createArgs = <
         extends (Root ?? class {})
         implements ArgsModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm, TRoot>
       {
-        @withCondition(Resource !== undefined, () =>
-          withField({ Resource: () => Filter<TType>, isArray: true, type: PROPERTY_TYPE.RESOURCE }),
+        @withCondition(
+          () => Resource !== undefined,
+          () =>
+            withField({
+              Resource: () => Filter,
+              isArray: true,
+              type: PROPERTY_TYPE.RESOURCE,
+            }),
         )
-        filter!: Array<FilterModel<TType>>;
+        filter!: Array<FilterModel<TType, StringKeyModel<TType>>>;
 
-        @withCondition(Resource !== undefined, () =>
-          withField({ Resource: () => Pagination, type: PROPERTY_TYPE.RESOURCE }),
+        @withCondition(
+          () => Resource !== undefined,
+          () => withField({ Resource: () => Pagination, type: PROPERTY_TYPE.RESOURCE }),
         )
         pagination!: PaginationModel;
       }

@@ -7,6 +7,7 @@ import { Funding } from '#lib-backend/funding/resources/Funding/Funding';
 import { RatingAgency } from '#lib-backend/funding/resources/RatingAgency/RatingAgency';
 import { Group } from '#lib-backend/group/resources/Group/Group';
 import { DummyEntityResource } from '#lib-backend/test/resources/DummyEntityResource/DummyEntityResource';
+import { DummyUserResource } from '#lib-backend/test/resources/DummyUserResource/DummyUserResource';
 import { User } from '#lib-backend/user/resources/User/User';
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _database } from '#lib-config/database/_database';
@@ -27,6 +28,7 @@ const { _config, config } = defineConfig({
       RatingAgency,
       User,
       process.env.NODE_ENV !== 'production' && DummyEntityResource,
+      process.env.NODE_ENV !== 'production' && DummyUserResource,
     ]),
 
     pool: { max: 10 },
