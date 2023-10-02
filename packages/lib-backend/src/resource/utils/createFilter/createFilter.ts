@@ -6,15 +6,11 @@ import { createUnion } from '#lib-backend/resource/utils/createUnion/createUnion
 import { PrimitiveValue } from '#lib-backend/resource/utils/PrimitiveValue/PrimitiveValue';
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
-import {
-  type ClassModel,
-  type PartialModel,
-  type StringKeyModel,
-} from '#lib-shared/core/core.models';
+import { type ClassModel, type PartialModel } from '#lib-shared/core/core.models';
 import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 import { FilterConditionModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
-export const createFilter = <TType, TKey extends StringKeyModel<TType>>({
+export const createFilter = <TType, TKey extends keyof TType>({
   Resource,
   name,
 }: CreateFilterParamsModel<TType>): CreateFilterModel<TType, TKey> => {

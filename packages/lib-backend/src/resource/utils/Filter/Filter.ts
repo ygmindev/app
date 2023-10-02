@@ -1,10 +1,6 @@
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
-import {
-  type PartialModel,
-  type PrimitiveModel,
-  type StringKeyModel,
-} from '#lib-shared/core/core.models';
+import { type PartialModel, type PrimitiveModel } from '#lib-shared/core/core.models';
 import { DATA_TYPE } from '#lib-shared/data/data.constants';
 import {
   type FilterConditionModel,
@@ -12,7 +8,7 @@ import {
 } from '#lib-shared/resource/utils/Filter/Filter.models';
 
 @withEntity({ name: 'Filter' })
-export class Filter<TType, TKey extends StringKeyModel<TType>> implements FilterModel<TType, TKey> {
+export class Filter<TType, TKey extends keyof TType> implements FilterModel<TType, TKey> {
   @withField({ type: DATA_TYPE.STRING })
   field!: TKey;
 

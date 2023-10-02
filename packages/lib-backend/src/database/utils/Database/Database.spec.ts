@@ -13,7 +13,7 @@ import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 const { displayName } = withTest({ Database });
 
 describe(displayName, () => {
-  void testResourceService<DummyEntityResourceModel>({
+  testResourceService<DummyEntityResourceModel>({
     form: DUMMY_ENTITY_RESOURCE_FIXTURE,
     getService: () =>
       Container.get(Database, DATABASE_TYPE.MONGO).getRepository<

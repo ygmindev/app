@@ -10,11 +10,7 @@ import {
   type RELATIVE_DATE_UNIT,
 } from '#lib-frontend/data/data.constants';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
-import {
-  type InferModel,
-  type PrimitiveModel,
-  type StringKeyModel,
-} from '#lib-shared/core/core.models';
+import { type InferModel, type PrimitiveModel } from '#lib-shared/core/core.models';
 
 export type QueryContextModel = {
   client?: QueryClient;
@@ -23,7 +19,7 @@ export type QueryContextModel = {
 
 export type DataRendererModel<TType> = (params: { row: TType; value?: string }) => ReactNode;
 
-export type DataFormatterModel<TType, TKey extends StringKeyModel<TType>> = (params: {
+export type DataFormatterModel<TType, TKey extends keyof TType> = (params: {
   row: TType;
   value: TType[TKey];
 }) => string;

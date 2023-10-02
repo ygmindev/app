@@ -10,7 +10,6 @@ import { createUpdate } from '#lib-backend/resource/utils/createUpdate/createUpd
 import { Pagination } from '#lib-backend/resource/utils/Pagination/Pagination';
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
-import { type StringKeyModel } from '#lib-shared/core/core.models';
 import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { withCondition } from '#lib-shared/core/utils/withCondition/withCondition';
 import { PROPERTY_TYPE } from '#lib-shared/data/data.constants';
@@ -61,7 +60,7 @@ export const createArgs = <
               type: PROPERTY_TYPE.RESOURCE,
             }),
         )
-        filter!: Array<FilterModel<TType, StringKeyModel<TType>>>;
+        filter!: Array<FilterModel<TType, keyof TType>>;
       }
       return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
@@ -102,7 +101,7 @@ export const createArgs = <
               type: PROPERTY_TYPE.RESOURCE,
             }),
         )
-        filter!: Array<FilterModel<TType, StringKeyModel<TType>>>;
+        filter!: Array<FilterModel<TType, keyof TType>>;
 
         @withCondition(
           () => Resource !== undefined,
@@ -131,7 +130,7 @@ export const createArgs = <
               type: PROPERTY_TYPE.RESOURCE,
             }),
         )
-        filter!: Array<FilterModel<TType, StringKeyModel<TType>>>;
+        filter!: Array<FilterModel<TType, keyof TType>>;
 
         @withCondition(
           () => Resource !== undefined,

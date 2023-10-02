@@ -63,7 +63,7 @@ export const _test = ({
         'jest-html-reporters',
         {
           darkTheme: true,
-          openReport: process.env.NODE_ENV === 'test',
+          openReport: false,
           publicPath: fromWorking(outputPath, 'reports'),
         },
       ],

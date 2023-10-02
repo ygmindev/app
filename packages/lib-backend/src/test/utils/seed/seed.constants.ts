@@ -1,4 +1,4 @@
-import { type SeedDataModel } from '#lib-backend/test/utils/seeder/seeder.models';
+import { type SeedDataModel } from '#lib-backend/test/utils/seed/seed.models';
 import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
 import { type DummyEntityResourceFormModel } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
 import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';

@@ -4,6 +4,7 @@ import { withContainer } from '#lib-backend/core/utils/withContainer/withContain
 import { DATABASE_TYPE } from '#lib-backend/database/database.constants';
 import { Database } from '#lib-backend/database/utils/Database/Database';
 import { CreditRatingService } from '#lib-backend/funding/resources/CreditRating/CreditRatingService/CreditRatingService';
+import { Funding } from '#lib-backend/funding/resources/Funding/Funding';
 import { createEntityResourceService } from '#lib-backend/resource/utils/createEntityResourceService/createEntityResourceService';
 import { sequence } from '#lib-shared/core/utils/sequence/sequence';
 import { FUNDING_RESOURCE_NAME } from '#lib-shared/funding/resources/Funding/Funding.constants';
@@ -19,6 +20,7 @@ import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.model
 @withContainer({ name: `${FUNDING_RESOURCE_NAME}Service` })
 export class FundingService
   extends createEntityResourceService<FundingModel, FundingFormModel>({
+    Resource: Funding,
     name: FUNDING_RESOURCE_NAME,
   })
   implements FundingServiceModel
