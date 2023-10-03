@@ -10,10 +10,10 @@ import { type ClassModel, type PartialModel } from '#lib-shared/core/core.models
 import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 import { FilterConditionModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
-export const createFilter = <TType, TKey extends keyof TType>({
+export const createFilter = <TType>({
   Resource,
   name,
-}: CreateFilterParamsModel<TType>): CreateFilterModel<TType, TKey> => {
+}: CreateFilterParamsModel<TType>): CreateFilterModel<TType> => {
   @withEntity({ name: `${name}ResourceValue` })
   class ResourceValue extends (Resource as unknown as ClassModel) {
     @withField({ Resource: () => Resource, type: PROPERTY_TYPE.RESOURCE })
@@ -28,11 +28,11 @@ export const createFilter = <TType, TKey extends keyof TType>({
   @withEntity({ name: `${name}Filter` })
   class Filter extends FilterValue {
     @withField({ type: DATA_TYPE.STRING })
-    field!: TKey;
+    field!: keyof TType;
 
     @withField({ type: DATA_TYPE.STRING })
     condition!: FilterConditionModel;
   }
 
-  return Filter;
+  return Filter as CreateFilterModel<TType>;
 };

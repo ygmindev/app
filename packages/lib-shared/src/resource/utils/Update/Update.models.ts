@@ -13,9 +13,9 @@ export type UpdateElementModel<TType> = {
   [TKey in keyof EntityResourceDataModel<TType>]?: InferModel<TType[TKey]>;
 };
 
-export type UpdateModel<TType> = {
+export type UpdateModel<TType> = PartialModel<EntityResourceDataModel<TType>> & {
   $pull?: UpdateElementModel<TType>;
   $push?: UpdateElementModel<TType>;
   $set?: PartialDeepModel<EntityResourceDataModel<TType>>;
   $unset?: UnsetModel<TType>;
-} & PartialModel<EntityResourceDataModel<TType>>;
+};

@@ -6,6 +6,4 @@ export type CreateFilterParamsModel<TType> = {
   name: string;
 };
 
-export type CreateFilterModel<TType, TKey extends keyof TType> = ResourceClassModel<
-  FilterModel<TType, TKey>
->;
+export type CreateFilterModel<TType> = ResourceClassModel<FilterModel<TType>>;

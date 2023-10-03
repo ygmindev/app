@@ -19,9 +19,7 @@ export const testResourceService = <TType extends TestableResourceModel>({
 }: TestResourceServiceParamsModel<TType>): void => {
   let service: EntityResourceServiceModel<TType>;
 
-  const _getFilter = (
-    filters: Array<FilterModel<TType, keyof TType>>,
-  ): Record<keyof TType, unknown> =>
+  const _getFilter = (filters: Array<FilterModel<TType>>): Record<keyof TType, unknown> =>
     reduce(
       filters,
       (result, filter) => ({ ...result, [filter.field]: filter.value }),
@@ -30,12 +28,12 @@ export const testResourceService = <TType extends TestableResourceModel>({
 
   const _findAll = (
     data: Array<TType> | undefined,
-    filters: Array<FilterModel<TType, keyof TType>>,
+    filters: Array<FilterModel<TType>>,
   ): Array<TType> => (_filter(data, _getFilter(filters)) as Array<TType>) || [];
 
   const _find = (
     data: Array<TType> | undefined,
-    filters: Array<FilterModel<TType, keyof TType>>,
+    filters: Array<FilterModel<TType>>,
   ): TType | null => (find(data, _getFilter(filters)) as TType) ?? null;
 
   const PROJECT_FIELDS = ['_id', 'stringPropertyOptional'] satisfies Array<keyof TType>;
@@ -67,9 +65,9 @@ export const testResourceService = <TType extends TestableResourceModel>({
 
   test('works with get by id', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
-    const input: InputModel<RESOURCE_METHOD_TYPE.GET, TType> = {
+    const input = {
       filter: [{ field: '_id', value: data[0]._id }],
-    };
+    } as InputModel<RESOURCE_METHOD_TYPE.GET, TType>;
     const { result } = await service.get(input);
     const expected = _find(data, input.filter);
     expect(result?._id).toStrictEqual(expected?._id);
@@ -77,9 +75,9 @@ export const testResourceService = <TType extends TestableResourceModel>({
 
   test('works with get by partial', async () => {
     const { result: data } = await service.getMany({ filter: [] });
-    const input: InputModel<RESOURCE_METHOD_TYPE.GET, TType> = {
+    const input = {
       filter: [{ field: 'stringProperty', value: 'stringProperty1' }],
-    };
+    } as InputModel<RESOURCE_METHOD_TYPE.GET, TType>;
     const { result } = await service.get(input);
     const expected = _find(data, input.filter);
     expect(result?._id).toStrictEqual(expected?._id);
@@ -87,12 +85,12 @@ export const testResourceService = <TType extends TestableResourceModel>({
 
   test('works with get with project', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
-    const input: InputModel<RESOURCE_METHOD_TYPE.GET, TType> = {
+    const input = {
       filter: [{ field: '_id', value: data[0]._id }],
       options: {
         project: PROJECT_FIELDS.reduce((result, field) => ({ ...result, [field]: true }), {}),
       },
-    };
+    } as InputModel<RESOURCE_METHOD_TYPE.GET, TType>;
     const { result } = await service.get(input);
     const expected = _find(data, input.filter);
     expect(result?._id).toStrictEqual(expected?._id);
@@ -101,9 +99,9 @@ export const testResourceService = <TType extends TestableResourceModel>({
 
   test('works with getMany by partial', async () => {
     const { result: data } = await service.getMany({ filter: [] });
-    const input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType> = {
+    const input = {
       filter: [{ field: 'stringProperty', value: 'stringProperty1' }],
-    };
+    } as InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>;
     const { result } = await service.getMany(input);
     const expected = _findAll(data, input.filter);
     expect(result).toStrictEqual(expected);
@@ -114,10 +112,10 @@ export const testResourceService = <TType extends TestableResourceModel>({
     const TAKE = 1;
 
     const { result: data } = await service.getMany({ filter: [] });
-    const input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType> = {
+    const input = {
       filter: [{ field: 'stringProperty', value: 'stringProperty1' }],
       options: { skip: SKIP, take: TAKE },
-    };
+    } as InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>;
     const { result } = await service.getMany(input);
     let expected = _findAll(data, input.filter);
     expected = expected.slice(SKIP, SKIP + TAKE);
@@ -126,12 +124,12 @@ export const testResourceService = <TType extends TestableResourceModel>({
 
   test('works with getMany with project', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
-    const input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType> = {
+    const input = {
       filter: [{ field: 'stringProperty', value: 'stringProperty1' }],
       options: {
         project: PROJECT_FIELDS.reduce((result, field) => ({ ...result, [field]: true }), {}),
       },
-    };
+    } as InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>;
     const { result } = await service.getMany(input);
     const resultF = result && result[0];
     const expected = _find(data, input.filter);
@@ -154,10 +152,10 @@ export const testResourceService = <TType extends TestableResourceModel>({
 
   test('works with getConnection filtered result', async () => {
     const { result: data } = await service.getMany({ filter: [] });
-    const input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, undefined> = {
+    const input = {
       filter: [{ field: 'stringProperty', value: 'stringProperty1' }],
       pagination: {},
-    };
+    } as InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>;
     const { result } = await service.getConnection(input);
     const expected = _findAll(data, input.filter);
     expect(result?.edges.length).toStrictEqual(expected.length);
@@ -176,10 +174,10 @@ export const testResourceService = <TType extends TestableResourceModel>({
   test('works with getConnection paged result first', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
     const size = 2;
-    const input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, undefined> = {
+    const input = {
       filter: [],
       pagination: { first: size },
-    };
+    } as InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>;
     const { result } = await service.getConnection(input);
 
     expect(result?.edges.length).toStrictEqual(size);
@@ -197,10 +195,10 @@ export const testResourceService = <TType extends TestableResourceModel>({
     const { result: data = [] } = await service.getMany({ filter: [] });
     const size = 2;
     const { result: allResult } = await service.getConnection({ filter: [], pagination: {} });
-    const input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, undefined> = {
+    const input = {
       filter: [],
       pagination: { after: allResult?.edges[size - 1].cursor, first: size },
-    };
+    } as InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>;
     const { result } = await service.getConnection(input);
 
     expect(result?.edges.length).toStrictEqual(size);
@@ -217,10 +215,10 @@ export const testResourceService = <TType extends TestableResourceModel>({
   test('works with getConnection paged result last', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
     const size = 2;
-    const input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, undefined> = {
+    const input = {
       filter: [],
       pagination: { last: size },
-    };
+    } as InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>;
     const { result } = await service.getConnection(input);
 
     expect(result?.edges.length).toStrictEqual(size);
@@ -238,10 +236,10 @@ export const testResourceService = <TType extends TestableResourceModel>({
     const { result: data = [] } = await service.getMany({ filter: [] });
     const size = 2;
     const { result: allResult } = await service.getConnection({ filter: [], pagination: {} });
-    const input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, undefined> = {
+    const input = {
       filter: [],
       pagination: { before: allResult?.edges[size].cursor, last: size },
-    };
+    } as InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>;
     const { result } = await service.getConnection(input);
 
     expect(result?.edges.length).toStrictEqual(size);
@@ -257,10 +255,10 @@ export const testResourceService = <TType extends TestableResourceModel>({
 
   test('works with update by partial', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
-    const input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType> = {
+    const input = {
       filter: [{ field: '_id', value: data[0]._id }],
       update: { stringProperty: 'stringProperty2' },
-    };
+    } as InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
     const { result } = await service.update(input);
 
     expect(result?.stringProperty).toStrictEqual('stringProperty2');
@@ -268,10 +266,10 @@ export const testResourceService = <TType extends TestableResourceModel>({
 
   test('works with update by push', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
-    const input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType> = {
+    const input = {
       filter: [{ field: '_id', value: data[0]._id }],
       update: { $push: { stringArrayProperty: 'stringArrayPropertyElement1' } },
-    };
+    } as InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
     const { result } = await service.update(input);
 
     expect(result?.stringArrayProperty).toStrictEqual([
@@ -282,10 +280,10 @@ export const testResourceService = <TType extends TestableResourceModel>({
 
   test('works with update by pull', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
-    const input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType> = {
+    const input = {
       filter: [{ field: '_id', value: data[0]._id }],
       update: { $pull: { stringArrayProperty: 'stringArrayPropertyElement1' } },
-    };
+    } as InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
     const { result } = await service.update(input);
     const expected = _filter(data[0].stringArrayProperty, input.update.$pull);
     expect(result?.stringArrayProperty ?? []).toStrictEqual(expected);
@@ -293,21 +291,21 @@ export const testResourceService = <TType extends TestableResourceModel>({
 
   test('works with update with project', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
-    const input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType> = {
+    const input = {
       filter: [{ field: '_id', value: data[0]._id }],
       options: {
         project: PROJECT_FIELDS.reduce((result, field) => ({ ...result, [field]: true }), {}),
       },
       update: { stringProperty: 'stringProperty2' },
-    };
+    } as InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
     const { result } = await service.update(input);
     expect(result && Object.keys(result)).toStrictEqual(PROJECT_FIELDS);
   });
 
   test('works with remove by id', async () => {
-    const input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType> = {
+    const input = {
       filter: [{ field: 'stringProperty', value: 'stringProperty1' }],
-    };
+    } as InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType>;
     await service.remove(input);
     const { result } = await service.get(input);
     expect(result).toBeFalsy();
