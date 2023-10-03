@@ -1,3 +1,4 @@
+import { Access } from '#lib-backend/auth/resources/Access/Access';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { createEntityResourceService } from '#lib-backend/resource/utils/createEntityResourceService/createEntityResourceService';
 import { ACCESS_RESOURCE_NAME } from '#lib-shared/auth/resources/Access/Access.constants';
@@ -9,5 +10,8 @@ import { type AccessServiceModel } from '#lib-shared/auth/resources/Access/Acces
 
 @withContainer({ name: `${ACCESS_RESOURCE_NAME}Service` })
 export class AccessService
-  extends createEntityResourceService<AccessModel, AccessFormModel>({ name: ACCESS_RESOURCE_NAME })
+  extends createEntityResourceService<AccessModel, AccessFormModel>({
+    Resource: Access,
+    name: ACCESS_RESOURCE_NAME,
+  })
   implements AccessServiceModel {}
