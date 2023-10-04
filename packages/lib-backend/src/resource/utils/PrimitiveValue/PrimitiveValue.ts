@@ -28,7 +28,6 @@ export class StringValue {
   value!: string;
 }
 
-@withEntity({ name: 'PrimitiveValue' })
 export const PrimitiveValue = createUnion<PrimitiveValueModel>({
   Resource: [BooleanValue, DateValue, IntegerValue, StringValue],
   name: 'PrimitiveValue',
