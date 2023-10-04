@@ -1,10 +1,12 @@
 import { type FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
 
-// TODO: type keys?
 export type FilterModel<TType> = {
+  booleanValue?: boolean;
   condition?: FilterConditionModel;
+  dateValue?: Date;
   field: keyof TType;
-  value: unknown;
+  numberValue?: number;
+  stringValue?: string;
 };
 
 export type FilterConditionModel = `${FILTER_CONDITION}`;

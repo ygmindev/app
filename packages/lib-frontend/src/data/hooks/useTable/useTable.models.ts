@@ -34,7 +34,7 @@ export type TableColumnModel<
   width?: number;
 };
 
-export type TableRenderModel<TType> = Pick<TableColumnModel<TType, keyof TType>, 'align' | 'width'>;
+export type TableRenderModel<TType> = Pick<TableColumnModel<TType>, 'align' | 'width'>;
 
 export type TableHeaderModel<TType> = WithIdModel<StringKeyModel<TType>> &
   TableRenderModel<TType> & {
@@ -48,7 +48,7 @@ export type TableRowModel<TType> = WithIdModel & {
 
 export type TableCellModel<TType> = WithIdModel<StringKeyModel<TType>> &
   TableRenderModel<TType> &
-  Pick<TableColumnModel<TType, keyof TType>, 'renderer'> & {
+  Pick<TableColumnModel<TType>, 'renderer'> & {
     value?: string;
     width?: number;
   };

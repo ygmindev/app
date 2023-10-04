@@ -44,6 +44,9 @@ export const createResourceResolver = <
   const updateExists = prototype.update !== undefined;
   const removeExists = prototype.remove !== undefined;
 
+  console.warn(`@@@${name}`);
+  console.warn(Resource);
+
   @withResolver({ isAbstract: true })
   class ResourceResolver implements ResourceResolverModel<TType, TForm, TRoot> {
     protected _service = Container.get(ResourceService);

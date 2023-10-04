@@ -9,7 +9,6 @@ type Access {
   _id: String
   created: DateTime
   role: [String]
-  user: User
 }
 
 input AccessCreateFormInput {
@@ -39,7 +38,7 @@ type AccessGetConnectionEdge {
 }
 
 input AccessGetConnectionInput {
-  filter: [FilterInput]
+  filter: [AccessGetConnectionValueInput]
   pagination: PaginationInput
 }
 
@@ -47,12 +46,38 @@ type AccessGetConnectionOutput {
   result: AccessGetConnectionConnection
 }
 
+input AccessGetConnectionValueInput {
+  condition: String
+  field: String
+  value: AccessInput
+}
+
+input AccessGetInput {
+  filter: [AccessGetValueInput]
+}
+
 input AccessGetManyInput {
-  filter: [FilterInput]
+  filter: [AccessGetManyValueInput]
 }
 
 type AccessGetManyOutput {
   result: [Access]
+}
+
+input AccessGetManyValueInput {
+  condition: String
+  field: String
+  value: AccessInput
+}
+
+type AccessGetOutput {
+  result: Access
+}
+
+input AccessGetValueInput {
+  condition: String
+  field: String
+  value: AccessInput
 }
 
 input AccessInput {
@@ -64,15 +89,21 @@ input AccessInput {
 }
 
 input AccessRemoveInput {
-  filter: [FilterInput]
+  filter: [AccessRemoveValueInput]
 }
 
 type AccessRemoveOutput {
   result: Access
 }
 
+input AccessRemoveValueInput {
+  condition: String
+  field: String
+  value: AccessInput
+}
+
 input AccessUpdateInput {
-  filter: [FilterInput]
+  filter: [AccessUpdateValueInput]
   update: AccessUpdateUpdateInput
 }
 
@@ -88,107 +119,10 @@ input AccessUpdateUpdateInput {
   role: [String]
 }
 
-type CreditRating {
-  Funding: [Funding]
-  _id: String
-  agency: RatingAgency
-  created: DateTime
-  longTermCategory: String
-  longTermWatch: String
-}
-
-type CreditRatingCreateOutput {
-  result: CreditRating
-  root: CreditRatingCreateOutputRoot
-}
-
-type CreditRatingCreateOutputRoot {
-  CreditRating: [CreditRating]
-  _id: String
-  amount: ScaledNumberRange
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRange
-}
-
-type CreditRatingGetConnectionConnection {
-  edges: [CreditRatingGetConnectionEdge]
-  pageInfo: PageInfo
-}
-
-type CreditRatingGetConnectionEdge {
-  cursor: String
-  node: CreditRating
-}
-
-type CreditRatingGetConnectionOutput {
-  result: CreditRatingGetConnectionConnection
-  root: CreditRatingGetConnectionOutputRoot
-}
-
-type CreditRatingGetConnectionOutputRoot {
-  CreditRating: [CreditRating]
-  _id: String
-  amount: ScaledNumberRange
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRange
-}
-
-type CreditRatingGetManyOutput {
-  result: [CreditRating]
-  root: CreditRatingGetManyOutputRoot
-}
-
-type CreditRatingGetManyOutputRoot {
-  CreditRating: [CreditRating]
-  _id: String
-  amount: ScaledNumberRange
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRange
-}
-
-type CreditRatingGetOutput {
-  result: CreditRating
-  root: CreditRatingGetOutputRoot
-}
-
-type CreditRatingGetOutputRoot {
-  CreditRating: [CreditRating]
-  _id: String
-  amount: ScaledNumberRange
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRange
-}
-
-type CreditRatingRemoveOutput {
-  result: CreditRating
-  root: CreditRatingRemoveOutputRoot
-}
-
-type CreditRatingRemoveOutputRoot {
-  CreditRating: [CreditRating]
-  _id: String
-  amount: ScaledNumberRange
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRange
-}
-
-type CreditRatingUpdateOutput {
-  result: CreditRating
-  root: CreditRatingUpdateOutputRoot
-}
-
-type CreditRatingUpdateOutputRoot {
-  CreditRating: [CreditRating]
-  _id: String
-  amount: ScaledNumberRange
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRange
+input AccessUpdateValueInput {
+  condition: String
+  field: String
+  value: AccessInput
 }
 
 """
@@ -196,49 +130,8 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
-input FilterInput {
-  condition: String
-  field: String
-  value: String
-}
-
-type Funding {
-  CreditRating: [CreditRating]
-  _id: String
-  amount: ScaledNumberRange
-  created: DateTime
-  currency: String
-  maturity: ScaledNumberRange
-}
-
-type FundingCreateOutput {
-  result: Funding
-}
-
-type FundingGetConnectionConnection {
-  edges: [FundingGetConnectionEdge]
-  pageInfo: PageInfo
-}
-
-type FundingGetConnectionEdge {
-  cursor: String
-  node: Funding
-}
-
-type FundingGetConnectionOutput {
-  result: FundingGetConnectionConnection
-}
-
-type FundingGetManyOutput {
-  result: [Funding]
-}
-
-type FundingRemoveOutput {
-  result: Funding
-}
-
-type FundingUpdateOutput {
-  result: Funding
+type GetManyUserGetManyOutput {
+  result: [Access]
 }
 
 type Group {
@@ -278,7 +171,7 @@ type GroupGetConnectionEdge {
 }
 
 input GroupGetConnectionInput {
-  filter: [FilterInput]
+  filter: [GroupGetConnectionValueInput]
   pagination: PaginationInput
 }
 
@@ -286,12 +179,38 @@ type GroupGetConnectionOutput {
   result: GroupGetConnectionConnection
 }
 
+input GroupGetConnectionValueInput {
+  condition: String
+  field: String
+  value: GroupInput
+}
+
+input GroupGetInput {
+  filter: [GroupGetValueInput]
+}
+
 input GroupGetManyInput {
-  filter: [FilterInput]
+  filter: [GroupGetManyValueInput]
 }
 
 type GroupGetManyOutput {
   result: [Group]
+}
+
+input GroupGetManyValueInput {
+  condition: String
+  field: String
+  value: GroupInput
+}
+
+type GroupGetOutput {
+  result: Group
+}
+
+input GroupGetValueInput {
+  condition: String
+  field: String
+  value: GroupInput
 }
 
 input GroupInput {
@@ -304,15 +223,21 @@ input GroupInput {
 }
 
 input GroupRemoveInput {
-  filter: [FilterInput]
+  filter: [GroupRemoveValueInput]
 }
 
 type GroupRemoveOutput {
   result: Group
 }
 
+input GroupRemoveValueInput {
+  condition: String
+  field: String
+  value: GroupInput
+}
+
 input GroupUpdateInput {
-  filter: [FilterInput]
+  filter: [GroupUpdateValueInput]
   update: GroupUpdateUpdateInput
 }
 
@@ -329,25 +254,25 @@ input GroupUpdateUpdateInput {
   types: [String]
 }
 
+input GroupUpdateValueInput {
+  condition: String
+  field: String
+  value: GroupInput
+}
+
 type Mutation {
   AccessCreate(input: AccessCreateInput): AccessCreateOutput
   AccessRemove(input: AccessRemoveInput): AccessRemoveOutput
   AccessUpdate(input: AccessUpdateInput): AccessUpdateOutput
-  CreditRatingCreate: CreditRatingCreateOutput
-  CreditRatingRemove: CreditRatingRemoveOutput
-  CreditRatingUpdate: CreditRatingUpdateOutput
-  FundingCreate: FundingCreateOutput
-  FundingRemove: FundingRemoveOutput
-  FundingUpdate: FundingUpdateOutput
   GroupCreate(input: GroupCreateInput): GroupCreateOutput
   GroupRemove(input: GroupRemoveInput): GroupRemoveOutput
   GroupUpdate(input: GroupUpdateInput): GroupUpdateOutput
-  OtpCreate: OtpCreateOutput
-  OtpRemove: OtpRemoveOutput
-  OtpUpdate: OtpUpdateOutput
-  RatingAgencyCreate: RatingAgencyCreateOutput
-  RatingAgencyRemove: RatingAgencyRemoveOutput
-  RatingAgencyUpdate: RatingAgencyUpdateOutput
+  OtpCreate(input: OtpCreateInput): OtpCreateOutput
+  OtpRemove(input: OtpRemoveInput): OtpRemoveOutput
+  OtpUpdate(input: OtpUpdateInput): OtpUpdateOutput
+  RatingAgencyCreate(input: RatingAgencyCreateInput): RatingAgencyCreateOutput
+  RatingAgencyRemove(input: RatingAgencyRemoveInput): RatingAgencyRemoveOutput
+  RatingAgencyUpdate(input: RatingAgencyUpdateInput): RatingAgencyUpdateOutput
   SignInCreate(input: SignInCreateInput): SignInCreateOutput
   SignInUserUpdate(input: SignInUserUpdateInput): SignInUserUpdateOutput
   SignInUsernameCreate(input: SignInUsernameCreateInput): SignInUsernameCreateOutput
@@ -365,6 +290,17 @@ type Otp {
   phone: String
 }
 
+input OtpCreateFormInput {
+  callingCode: String
+  checkExists: Boolean
+  email: String
+  phone: String
+}
+
+input OtpCreateInput {
+  form: OtpCreateFormInput
+}
+
 type OtpCreateOutput {
   result: Otp
 }
@@ -379,20 +315,94 @@ type OtpGetConnectionEdge {
   node: Otp
 }
 
+input OtpGetConnectionInput {
+  filter: [OtpGetConnectionValueInput]
+  pagination: PaginationInput
+}
+
 type OtpGetConnectionOutput {
   result: OtpGetConnectionConnection
+}
+
+input OtpGetConnectionValueInput {
+  condition: String
+  field: String
+  value: OtpInput
+}
+
+input OtpGetInput {
+  filter: [OtpGetValueInput]
+}
+
+input OtpGetManyInput {
+  filter: [OtpGetManyValueInput]
 }
 
 type OtpGetManyOutput {
   result: [Otp]
 }
 
+input OtpGetManyValueInput {
+  condition: String
+  field: String
+  value: OtpInput
+}
+
+type OtpGetOutput {
+  result: Otp
+}
+
+input OtpGetValueInput {
+  condition: String
+  field: String
+  value: OtpInput
+}
+
+input OtpInput {
+  _id: String
+  callingCode: String
+  created: DateTime
+  email: String
+  otp: String
+  phone: String
+}
+
+input OtpRemoveInput {
+  filter: [OtpRemoveValueInput]
+}
+
 type OtpRemoveOutput {
   result: Otp
 }
 
+input OtpRemoveValueInput {
+  condition: String
+  field: String
+  value: OtpInput
+}
+
+input OtpUpdateInput {
+  filter: [OtpUpdateValueInput]
+  update: OtpUpdateUpdateInput
+}
+
 type OtpUpdateOutput {
   result: Otp
+}
+
+input OtpUpdateUpdateInput {
+  _id: String
+  callingCode: String
+  created: DateTime
+  email: String
+  otp: String
+  phone: String
+}
+
+input OtpUpdateValueInput {
+  condition: String
+  field: String
+  value: OtpInput
 }
 
 type PageInfo {
@@ -410,21 +420,22 @@ input PaginationInput {
 }
 
 type Query {
+  AccessGet(input: AccessGetInput): AccessGetOutput
   AccessGetConnection(input: AccessGetConnectionInput): AccessGetConnectionOutput
   AccessGetMany(input: AccessGetManyInput): AccessGetManyOutput
-  CreditRatingGet: CreditRatingGetOutput
-  CreditRatingGetConnection: CreditRatingGetConnectionOutput
-  CreditRatingGetMany: CreditRatingGetManyOutput
-  FundingGetConnection: FundingGetConnectionOutput
-  FundingGetMany: FundingGetManyOutput
+  GetManyUserGetMany: GetManyUserGetManyOutput
+  GroupGet(input: GroupGetInput): GroupGetOutput
   GroupGetConnection(input: GroupGetConnectionInput): GroupGetConnectionOutput
   GroupGetMany(input: GroupGetManyInput): GroupGetManyOutput
-  OtpGetConnection: OtpGetConnectionOutput
-  OtpGetMany: OtpGetManyOutput
-  RatingAgencyGetConnection: RatingAgencyGetConnectionOutput
-  RatingAgencyGetMany: RatingAgencyGetManyOutput
-  SnapshotGet: SnapshotGetOutput
-  SnapshotGetMany: SnapshotGetManyOutput
+  OtpGet(input: OtpGetInput): OtpGetOutput
+  OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
+  OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput
+  RatingAgencyGet(input: RatingAgencyGetInput): RatingAgencyGetOutput
+  RatingAgencyGetConnection(input: RatingAgencyGetConnectionInput): RatingAgencyGetConnectionOutput
+  RatingAgencyGetMany(input: RatingAgencyGetManyInput): RatingAgencyGetManyOutput
+  SnapshotGet(input: SnapshotGetInput): SnapshotGetOutput
+  SnapshotGetMany(input: SnapshotGetManyInput): SnapshotGetManyOutput
+  UserGet(input: UserGetInput): UserGetOutput
   UserGetConnection(input: UserGetConnectionInput): UserGetConnectionOutput
   UserGetMany(input: UserGetManyInput): UserGetManyOutput
 }
@@ -433,6 +444,16 @@ type RatingAgency {
   _id: String
   created: DateTime
   name: String
+}
+
+input RatingAgencyCreateFormInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input RatingAgencyCreateInput {
+  form: RatingAgencyCreateFormInput
 }
 
 type RatingAgencyCreateOutput {
@@ -449,26 +470,88 @@ type RatingAgencyGetConnectionEdge {
   node: RatingAgency
 }
 
+input RatingAgencyGetConnectionInput {
+  filter: [RatingAgencyGetConnectionValueInput]
+  pagination: PaginationInput
+}
+
 type RatingAgencyGetConnectionOutput {
   result: RatingAgencyGetConnectionConnection
+}
+
+input RatingAgencyGetConnectionValueInput {
+  condition: String
+  field: String
+  value: RatingAgencyInput
+}
+
+input RatingAgencyGetInput {
+  filter: [RatingAgencyGetValueInput]
+}
+
+input RatingAgencyGetManyInput {
+  filter: [RatingAgencyGetManyValueInput]
 }
 
 type RatingAgencyGetManyOutput {
   result: [RatingAgency]
 }
 
+input RatingAgencyGetManyValueInput {
+  condition: String
+  field: String
+  value: RatingAgencyInput
+}
+
+type RatingAgencyGetOutput {
+  result: RatingAgency
+}
+
+input RatingAgencyGetValueInput {
+  condition: String
+  field: String
+  value: RatingAgencyInput
+}
+
+input RatingAgencyInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input RatingAgencyRemoveInput {
+  filter: [RatingAgencyRemoveValueInput]
+}
+
 type RatingAgencyRemoveOutput {
   result: RatingAgency
+}
+
+input RatingAgencyRemoveValueInput {
+  condition: String
+  field: String
+  value: RatingAgencyInput
+}
+
+input RatingAgencyUpdateInput {
+  filter: [RatingAgencyUpdateValueInput]
+  update: RatingAgencyUpdateUpdateInput
 }
 
 type RatingAgencyUpdateOutput {
   result: RatingAgency
 }
 
-type ScaledNumberRange {
-  max: Float
-  min: Float
-  unit: String
+input RatingAgencyUpdateUpdateInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input RatingAgencyUpdateValueInput {
+  condition: String
+  field: String
+  value: RatingAgencyInput
 }
 
 type SignIn {
@@ -495,7 +578,7 @@ type SignInCreateOutput {
 }
 
 input SignInUserUpdateInput {
-  filter: [FilterInput]
+  filter: [SignInUserUpdateValueInput]
   update: SignInUserUpdateUpdateInput
 }
 
@@ -513,6 +596,12 @@ input SignInUserUpdateUpdateInput {
   last: String
   paymentMethodPrimary: String
   phone: String
+}
+
+input SignInUserUpdateValueInput {
+  condition: String
+  field: String
+  value: UserInput
 }
 
 input SignInUsernameCreateFormInput {
@@ -535,12 +624,37 @@ type Snapshot {
   name: String
 }
 
+input SnapshotGetInput {
+  filter: [SnapshotGetValueInput]
+}
+
+input SnapshotGetManyInput {
+  filter: [SnapshotGetManyValueInput]
+}
+
 type SnapshotGetManyOutput {
   result: [Snapshot]
 }
 
+input SnapshotGetManyValueInput {
+  condition: String
+  field: String
+  value: SnapshotInput
+}
+
 type SnapshotGetOutput {
   result: Snapshot
+}
+
+input SnapshotGetValueInput {
+  condition: String
+  field: String
+  value: SnapshotInput
+}
+
+input SnapshotInput {
+  images: [String]
+  name: String
 }
 
 type User {
@@ -586,7 +700,7 @@ type UserGetConnectionEdge {
 }
 
 input UserGetConnectionInput {
-  filter: [FilterInput]
+  filter: [UserGetConnectionValueInput]
   pagination: PaginationInput
 }
 
@@ -594,12 +708,38 @@ type UserGetConnectionOutput {
   result: UserGetConnectionConnection
 }
 
+input UserGetConnectionValueInput {
+  condition: String
+  field: String
+  value: UserInput
+}
+
+input UserGetInput {
+  filter: [UserGetValueInput]
+}
+
 input UserGetManyInput {
-  filter: [FilterInput]
+  filter: [UserGetManyValueInput]
 }
 
 type UserGetManyOutput {
   result: [User]
+}
+
+input UserGetManyValueInput {
+  condition: String
+  field: String
+  value: UserInput
+}
+
+type UserGetOutput {
+  result: User
+}
+
+input UserGetValueInput {
+  condition: String
+  field: String
+  value: UserInput
 }
 
 input UserInput {
@@ -615,15 +755,21 @@ input UserInput {
 }
 
 input UserRemoveInput {
-  filter: [FilterInput]
+  filter: [UserRemoveValueInput]
 }
 
 type UserRemoveOutput {
   result: User
 }
 
+input UserRemoveValueInput {
+  condition: String
+  field: String
+  value: UserInput
+}
+
 input UserUpdateInput {
-  filter: [FilterInput]
+  filter: [UserUpdateValueInput]
   update: UserUpdateUpdateInput
 }
 
@@ -641,4 +787,10 @@ input UserUpdateUpdateInput {
   last: String
   paymentMethodPrimary: String
   phone: String
+}
+
+input UserUpdateValueInput {
+  condition: String
+  field: String
+  value: UserInput
 }

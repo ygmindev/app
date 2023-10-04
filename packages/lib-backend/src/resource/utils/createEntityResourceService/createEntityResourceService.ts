@@ -28,10 +28,15 @@ export const createEntityResourceService = <TType, TForm = EntityResourceDataMod
   TType,
   TForm
 > => {
-  const repository: RepositoryModel<TType, TForm> = Container.get(
-    Database,
-    DATABASE_TYPE.MONGO,
-  ).getRepository<TType, TForm>({ name });
+  let repository: RepositoryModel<TType, TForm>;
+
+  const getRepository = (): RepositoryModel<TType, TForm> => {
+    repository =
+      repository ??
+      Container.get(Database, DATABASE_TYPE.MONGO).getRepository<TType, TForm>({ name });
+    return repository;
+  };
+
   return createResourceService<TType, TForm>({
     Resource,
     afterCreate,
@@ -46,13 +51,13 @@ export const createEntityResourceService = <TType, TForm = EntityResourceDataMod
     beforeGetMany,
     beforeRemove,
     beforeUpdate,
-    count: async () => repository.count(),
-    create: async (input) => repository.create(input),
-    get: async (input) => repository.get(input),
-    getConnection: async (input) => repository.getConnection(input),
-    getMany: async (input) => repository.getMany(input),
+    count: async () => getRepository().count(),
+    create: async (input) => getRepository().create(input),
+    get: async (input) => getRepository().get(input),
+    getConnection: async (input) => getRepository().getConnection(input),
+    getMany: async (input) => getRepository().getMany(input),
     name,
-    remove: async (input) => repository.remove(input),
-    update: async (input) => repository.update(input),
+    remove: async (input) => getRepository().remove(input),
+    update: async (input) => getRepository().update(input),
   });
 };

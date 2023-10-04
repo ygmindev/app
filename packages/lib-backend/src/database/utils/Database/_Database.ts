@@ -39,7 +39,7 @@ const getFilter = <TType>(filters?: Array<FilterModel<TType>>): Filter<TType & o
                 FILTER_CONDITION.NOT_CONTAINS,
               ] as Array<FilterConditionModel>
             ).includes(conditionF)
-              ? { $regex: new RegExp(v.value, 'i') }
+              ? { $regex: new RegExp(v.value as string, 'i') }
               : {
                   [conditionF]:
                     last((v.field as string).split('.'))?.startsWith('_') && isString(v.value)
