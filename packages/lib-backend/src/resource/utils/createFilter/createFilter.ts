@@ -5,7 +5,7 @@ import {
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { DATA_TYPE } from '#lib-shared/data/data.constants';
-import { FilterConditionModel } from '#lib-shared/resource/utils/Filter/Filter.models';
+import { type FilterConditionModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
 export const createFilter = <TType>({
   Resource,
