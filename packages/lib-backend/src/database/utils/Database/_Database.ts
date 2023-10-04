@@ -42,7 +42,7 @@ const getFilter = <TType>(filters?: Array<FilterModel<TType>>): Filter<TType & o
               ? { $regex: new RegExp(v.value, 'i') }
               : {
                   [conditionF]:
-                    last(v.field.split('.'))?.startsWith('_') && isString(v.value)
+                    last((v.field as string).split('.'))?.startsWith('_') && isString(v.value)
                       ? new ObjectId(v.value)
                       : v.value,
                 },
