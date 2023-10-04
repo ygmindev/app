@@ -1,21 +1,19 @@
 import { Access } from '#lib-backend/auth/resources/Access/Access';
 import { type AccessResolverModel } from '#lib-backend/auth/resources/Access/AccessResolver/AccessResolver.models';
 import { AccessService } from '#lib-backend/auth/resources/Access/AccessService/AccessService';
-import { Container } from '#lib-backend/core/utils/Container/Container';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
-import { withFieldResolver } from '#lib-backend/http/utils/withFieldResolver/withFieldResolver';
 import { withResolver } from '#lib-backend/http/utils/withResolver/withResolver';
-import { withSelf } from '#lib-backend/http/utils/withSelf/withSelf';
 import { createEntityResourceResolver } from '#lib-backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
-import { User } from '#lib-backend/user/resources/User/User';
-import { UserService } from '#lib-backend/user/resources/User/UserService/UserService';
+import { withOutput } from '#lib-backend/resource/utils/withOutput/withOutput';
 import { ACCESS_RESOURCE_NAME } from '#lib-shared/auth/resources/Access/Access.constants';
 import {
   type AccessFormModel,
   type AccessModel,
 } from '#lib-shared/auth/resources/Access/Access.models';
-import { NotFoundError } from '#lib-shared/core/errors/NotFoundError/NotFoundError';
-import { type UserModel } from '#lib-shared/user/resources/User/User.models';
+import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
+import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
+import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
+import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 
 @withContainer()
 @withResolver({ Resource: Access })
@@ -27,14 +25,15 @@ export class AccessResolver
   })
   implements AccessResolverModel
 {
-  @withFieldResolver({ Resource: User })
-  async user(@withSelf() access: Access): Promise<UserModel> {
-    const { result } = await Container.get(UserService).get({
-      filter: [{ field: '_id', value: access._user }],
-    });
-    if (result) {
-      return result;
-    }
-    throw new NotFoundError(access._user);
+  @withOutput({
+    Resource: Access,
+    method: RESOURCE_METHOD_TYPE.GET_MANY,
+    name: `${RESOURCE_METHOD_TYPE.GET_MANY}User`,
+  })
+  async getManyUser(
+    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, AccessModel, AccessFormModel>,
+    context?: ContextModel,
+  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, AccessModel>> {
+    return this.getManyUser(input, context);
   }
 }

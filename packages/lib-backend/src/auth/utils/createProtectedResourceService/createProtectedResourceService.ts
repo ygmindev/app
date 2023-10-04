@@ -6,11 +6,12 @@ import {
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { createEntityResourceService } from '#lib-backend/resource/utils/createEntityResourceService/createEntityResourceService';
 import { UnauthenticatedError } from '#lib-shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
+import { type ProtectedResourceModel } from '#lib-shared/auth/resources/ProtectedResource/ProtectedResource.models';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
 
 export const createProtectedResoureService = <
-  TType,
+  TType extends ProtectedResourceModel,
   TForm extends EntityResourceDataModel<TType> = EntityResourceDataModel<TType>,
 >({
   ...params
