@@ -60,7 +60,7 @@ export const createArgs = <
               type: PROPERTY_TYPE.RESOURCE,
             }),
         )
-        filter!: Array<FilterModel<TType, keyof TType>>;
+        filter!: Array<FilterModel<TType>>;
       }
       return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
@@ -101,7 +101,7 @@ export const createArgs = <
               type: PROPERTY_TYPE.RESOURCE,
             }),
         )
-        filter!: Array<FilterModel<TType, keyof TType>>;
+        filter!: Array<FilterModel<TType>>;
 
         @withCondition(
           () => Resource !== undefined,
@@ -130,7 +130,7 @@ export const createArgs = <
               type: PROPERTY_TYPE.RESOURCE,
             }),
         )
-        filter!: Array<FilterModel<TType, keyof TType>>;
+        filter!: Array<FilterModel<TType>>;
 
         @withCondition(
           () => Resource !== undefined,

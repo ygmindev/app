@@ -1,6 +1,7 @@
 import { AccessService } from '#lib-backend/auth/resources/Access/AccessService/AccessService';
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
+import { Group } from '#lib-backend/group/resources/Group/Group';
 import { createEntityResourceService } from '#lib-backend/resource/utils/createEntityResourceService/createEntityResourceService';
 import { UserService } from '#lib-backend/user/resources/User/UserService/UserService';
 import {
@@ -18,6 +19,7 @@ import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constan
 @withContainer({ name: `${GROUP_RESOURCE_NAME}Service` })
 export class GroupService
   extends createEntityResourceService<GroupModel, GroupFormModel>({
+    Resource: Group,
     afterCreate: async ({ output }, context) => {
       const { get: userGet } = Container.get(UserService);
       const { create: accessCreate } = Container.get(AccessService);

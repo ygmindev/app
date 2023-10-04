@@ -1,5 +1,6 @@
 import toNumber from 'lodash/toNumber';
 
+import { Otp } from '#lib-backend/auth/resources/Otp/Otp';
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
@@ -23,6 +24,7 @@ import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.model
 @withContainer()
 export class OtpService
   extends createEntityResourceService<OtpModel, OtpFormModel>({
+    Resource: Otp,
     afterCreate: async ({ output }) => {
       if (output.result) {
         // phone verification
