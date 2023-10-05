@@ -37,8 +37,18 @@ type AccessGetConnectionEdge {
   node: Access
 }
 
+input AccessGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: AccessInput
+  stringValue: String
+}
+
 input AccessGetConnectionInput {
-  filter: [AccessGetConnectionValueInput]
+  filter: [AccessGetConnectionFilterInput]
   pagination: PaginationInput
 }
 
@@ -46,38 +56,40 @@ type AccessGetConnectionOutput {
   result: AccessGetConnectionConnection
 }
 
-input AccessGetConnectionValueInput {
+input AccessGetFilterInput {
+  booleanValue: Boolean
   condition: String
+  dateValue: DateTime
   field: String
-  value: AccessInput
+  numberValue: Float
+  resourceValue: AccessInput
+  stringValue: String
 }
 
 input AccessGetInput {
-  filter: [AccessGetValueInput]
+  filter: [AccessGetFilterInput]
+}
+
+input AccessGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: AccessInput
+  stringValue: String
 }
 
 input AccessGetManyInput {
-  filter: [AccessGetManyValueInput]
+  filter: [AccessGetManyFilterInput]
 }
 
 type AccessGetManyOutput {
   result: [Access]
 }
 
-input AccessGetManyValueInput {
-  condition: String
-  field: String
-  value: AccessInput
-}
-
 type AccessGetOutput {
   result: Access
-}
-
-input AccessGetValueInput {
-  condition: String
-  field: String
-  value: AccessInput
 }
 
 input AccessInput {
@@ -88,22 +100,36 @@ input AccessInput {
   role: [String]
 }
 
+input AccessRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: AccessInput
+  stringValue: String
+}
+
 input AccessRemoveInput {
-  filter: [AccessRemoveValueInput]
+  filter: [AccessRemoveFilterInput]
 }
 
 type AccessRemoveOutput {
   result: Access
 }
 
-input AccessRemoveValueInput {
+input AccessUpdateFilterInput {
+  booleanValue: Boolean
   condition: String
+  dateValue: DateTime
   field: String
-  value: AccessInput
+  numberValue: Float
+  resourceValue: AccessInput
+  stringValue: String
 }
 
 input AccessUpdateInput {
-  filter: [AccessUpdateValueInput]
+  filter: [AccessUpdateFilterInput]
   update: AccessUpdateUpdateInput
 }
 
@@ -117,12 +143,6 @@ input AccessUpdateUpdateInput {
   _id: String
   created: DateTime
   role: [String]
-}
-
-input AccessUpdateValueInput {
-  condition: String
-  field: String
-  value: AccessInput
 }
 
 """
@@ -170,8 +190,18 @@ type GroupGetConnectionEdge {
   node: Group
 }
 
+input GroupGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: GroupInput
+  stringValue: String
+}
+
 input GroupGetConnectionInput {
-  filter: [GroupGetConnectionValueInput]
+  filter: [GroupGetConnectionFilterInput]
   pagination: PaginationInput
 }
 
@@ -179,38 +209,40 @@ type GroupGetConnectionOutput {
   result: GroupGetConnectionConnection
 }
 
-input GroupGetConnectionValueInput {
+input GroupGetFilterInput {
+  booleanValue: Boolean
   condition: String
+  dateValue: DateTime
   field: String
-  value: GroupInput
+  numberValue: Float
+  resourceValue: GroupInput
+  stringValue: String
 }
 
 input GroupGetInput {
-  filter: [GroupGetValueInput]
+  filter: [GroupGetFilterInput]
+}
+
+input GroupGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: GroupInput
+  stringValue: String
 }
 
 input GroupGetManyInput {
-  filter: [GroupGetManyValueInput]
+  filter: [GroupGetManyFilterInput]
 }
 
 type GroupGetManyOutput {
   result: [Group]
 }
 
-input GroupGetManyValueInput {
-  condition: String
-  field: String
-  value: GroupInput
-}
-
 type GroupGetOutput {
   result: Group
-}
-
-input GroupGetValueInput {
-  condition: String
-  field: String
-  value: GroupInput
 }
 
 input GroupInput {
@@ -222,22 +254,36 @@ input GroupInput {
   types: [String]
 }
 
+input GroupRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: GroupInput
+  stringValue: String
+}
+
 input GroupRemoveInput {
-  filter: [GroupRemoveValueInput]
+  filter: [GroupRemoveFilterInput]
 }
 
 type GroupRemoveOutput {
   result: Group
 }
 
-input GroupRemoveValueInput {
+input GroupUpdateFilterInput {
+  booleanValue: Boolean
   condition: String
+  dateValue: DateTime
   field: String
-  value: GroupInput
+  numberValue: Float
+  resourceValue: GroupInput
+  stringValue: String
 }
 
 input GroupUpdateInput {
-  filter: [GroupUpdateValueInput]
+  filter: [GroupUpdateFilterInput]
   update: GroupUpdateUpdateInput
 }
 
@@ -252,12 +298,6 @@ input GroupUpdateUpdateInput {
   name: String
   profileImage: String
   types: [String]
-}
-
-input GroupUpdateValueInput {
-  condition: String
-  field: String
-  value: GroupInput
 }
 
 type Mutation {
@@ -315,8 +355,18 @@ type OtpGetConnectionEdge {
   node: Otp
 }
 
+input OtpGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: OtpInput
+  stringValue: String
+}
+
 input OtpGetConnectionInput {
-  filter: [OtpGetConnectionValueInput]
+  filter: [OtpGetConnectionFilterInput]
   pagination: PaginationInput
 }
 
@@ -324,38 +374,40 @@ type OtpGetConnectionOutput {
   result: OtpGetConnectionConnection
 }
 
-input OtpGetConnectionValueInput {
+input OtpGetFilterInput {
+  booleanValue: Boolean
   condition: String
+  dateValue: DateTime
   field: String
-  value: OtpInput
+  numberValue: Float
+  resourceValue: OtpInput
+  stringValue: String
 }
 
 input OtpGetInput {
-  filter: [OtpGetValueInput]
+  filter: [OtpGetFilterInput]
+}
+
+input OtpGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: OtpInput
+  stringValue: String
 }
 
 input OtpGetManyInput {
-  filter: [OtpGetManyValueInput]
+  filter: [OtpGetManyFilterInput]
 }
 
 type OtpGetManyOutput {
   result: [Otp]
 }
 
-input OtpGetManyValueInput {
-  condition: String
-  field: String
-  value: OtpInput
-}
-
 type OtpGetOutput {
   result: Otp
-}
-
-input OtpGetValueInput {
-  condition: String
-  field: String
-  value: OtpInput
 }
 
 input OtpInput {
@@ -367,22 +419,36 @@ input OtpInput {
   phone: String
 }
 
+input OtpRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: OtpInput
+  stringValue: String
+}
+
 input OtpRemoveInput {
-  filter: [OtpRemoveValueInput]
+  filter: [OtpRemoveFilterInput]
 }
 
 type OtpRemoveOutput {
   result: Otp
 }
 
-input OtpRemoveValueInput {
+input OtpUpdateFilterInput {
+  booleanValue: Boolean
   condition: String
+  dateValue: DateTime
   field: String
-  value: OtpInput
+  numberValue: Float
+  resourceValue: OtpInput
+  stringValue: String
 }
 
 input OtpUpdateInput {
-  filter: [OtpUpdateValueInput]
+  filter: [OtpUpdateFilterInput]
   update: OtpUpdateUpdateInput
 }
 
@@ -397,12 +463,6 @@ input OtpUpdateUpdateInput {
   email: String
   otp: String
   phone: String
-}
-
-input OtpUpdateValueInput {
-  condition: String
-  field: String
-  value: OtpInput
 }
 
 type PageInfo {
@@ -470,8 +530,18 @@ type RatingAgencyGetConnectionEdge {
   node: RatingAgency
 }
 
+input RatingAgencyGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: RatingAgencyInput
+  stringValue: String
+}
+
 input RatingAgencyGetConnectionInput {
-  filter: [RatingAgencyGetConnectionValueInput]
+  filter: [RatingAgencyGetConnectionFilterInput]
   pagination: PaginationInput
 }
 
@@ -479,38 +549,40 @@ type RatingAgencyGetConnectionOutput {
   result: RatingAgencyGetConnectionConnection
 }
 
-input RatingAgencyGetConnectionValueInput {
+input RatingAgencyGetFilterInput {
+  booleanValue: Boolean
   condition: String
+  dateValue: DateTime
   field: String
-  value: RatingAgencyInput
+  numberValue: Float
+  resourceValue: RatingAgencyInput
+  stringValue: String
 }
 
 input RatingAgencyGetInput {
-  filter: [RatingAgencyGetValueInput]
+  filter: [RatingAgencyGetFilterInput]
+}
+
+input RatingAgencyGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: RatingAgencyInput
+  stringValue: String
 }
 
 input RatingAgencyGetManyInput {
-  filter: [RatingAgencyGetManyValueInput]
+  filter: [RatingAgencyGetManyFilterInput]
 }
 
 type RatingAgencyGetManyOutput {
   result: [RatingAgency]
 }
 
-input RatingAgencyGetManyValueInput {
-  condition: String
-  field: String
-  value: RatingAgencyInput
-}
-
 type RatingAgencyGetOutput {
   result: RatingAgency
-}
-
-input RatingAgencyGetValueInput {
-  condition: String
-  field: String
-  value: RatingAgencyInput
 }
 
 input RatingAgencyInput {
@@ -519,22 +591,36 @@ input RatingAgencyInput {
   name: String
 }
 
+input RatingAgencyRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: RatingAgencyInput
+  stringValue: String
+}
+
 input RatingAgencyRemoveInput {
-  filter: [RatingAgencyRemoveValueInput]
+  filter: [RatingAgencyRemoveFilterInput]
 }
 
 type RatingAgencyRemoveOutput {
   result: RatingAgency
 }
 
-input RatingAgencyRemoveValueInput {
+input RatingAgencyUpdateFilterInput {
+  booleanValue: Boolean
   condition: String
+  dateValue: DateTime
   field: String
-  value: RatingAgencyInput
+  numberValue: Float
+  resourceValue: RatingAgencyInput
+  stringValue: String
 }
 
 input RatingAgencyUpdateInput {
-  filter: [RatingAgencyUpdateValueInput]
+  filter: [RatingAgencyUpdateFilterInput]
   update: RatingAgencyUpdateUpdateInput
 }
 
@@ -546,12 +632,6 @@ input RatingAgencyUpdateUpdateInput {
   _id: String
   created: DateTime
   name: String
-}
-
-input RatingAgencyUpdateValueInput {
-  condition: String
-  field: String
-  value: RatingAgencyInput
 }
 
 type SignIn {
@@ -577,8 +657,18 @@ type SignInCreateOutput {
   result: SignIn
 }
 
+input SignInUserUpdateFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: UserInput
+  stringValue: String
+}
+
 input SignInUserUpdateInput {
-  filter: [SignInUserUpdateValueInput]
+  filter: [SignInUserUpdateFilterInput]
   update: SignInUserUpdateUpdateInput
 }
 
@@ -596,12 +686,6 @@ input SignInUserUpdateUpdateInput {
   last: String
   paymentMethodPrimary: String
   phone: String
-}
-
-input SignInUserUpdateValueInput {
-  condition: String
-  field: String
-  value: UserInput
 }
 
 input SignInUsernameCreateFormInput {
@@ -624,32 +708,40 @@ type Snapshot {
   name: String
 }
 
+input SnapshotGetFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: SnapshotInput
+  stringValue: String
+}
+
 input SnapshotGetInput {
-  filter: [SnapshotGetValueInput]
+  filter: [SnapshotGetFilterInput]
+}
+
+input SnapshotGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: SnapshotInput
+  stringValue: String
 }
 
 input SnapshotGetManyInput {
-  filter: [SnapshotGetManyValueInput]
+  filter: [SnapshotGetManyFilterInput]
 }
 
 type SnapshotGetManyOutput {
   result: [Snapshot]
 }
 
-input SnapshotGetManyValueInput {
-  condition: String
-  field: String
-  value: SnapshotInput
-}
-
 type SnapshotGetOutput {
   result: Snapshot
-}
-
-input SnapshotGetValueInput {
-  condition: String
-  field: String
-  value: SnapshotInput
 }
 
 input SnapshotInput {
@@ -699,8 +791,18 @@ type UserGetConnectionEdge {
   node: User
 }
 
+input UserGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: UserInput
+  stringValue: String
+}
+
 input UserGetConnectionInput {
-  filter: [UserGetConnectionValueInput]
+  filter: [UserGetConnectionFilterInput]
   pagination: PaginationInput
 }
 
@@ -708,38 +810,40 @@ type UserGetConnectionOutput {
   result: UserGetConnectionConnection
 }
 
-input UserGetConnectionValueInput {
+input UserGetFilterInput {
+  booleanValue: Boolean
   condition: String
+  dateValue: DateTime
   field: String
-  value: UserInput
+  numberValue: Float
+  resourceValue: UserInput
+  stringValue: String
 }
 
 input UserGetInput {
-  filter: [UserGetValueInput]
+  filter: [UserGetFilterInput]
+}
+
+input UserGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: UserInput
+  stringValue: String
 }
 
 input UserGetManyInput {
-  filter: [UserGetManyValueInput]
+  filter: [UserGetManyFilterInput]
 }
 
 type UserGetManyOutput {
   result: [User]
 }
 
-input UserGetManyValueInput {
-  condition: String
-  field: String
-  value: UserInput
-}
-
 type UserGetOutput {
   result: User
-}
-
-input UserGetValueInput {
-  condition: String
-  field: String
-  value: UserInput
 }
 
 input UserInput {
@@ -754,22 +858,36 @@ input UserInput {
   phone: String
 }
 
+input UserRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: UserInput
+  stringValue: String
+}
+
 input UserRemoveInput {
-  filter: [UserRemoveValueInput]
+  filter: [UserRemoveFilterInput]
 }
 
 type UserRemoveOutput {
   result: User
 }
 
-input UserRemoveValueInput {
+input UserUpdateFilterInput {
+  booleanValue: Boolean
   condition: String
+  dateValue: DateTime
   field: String
-  value: UserInput
+  numberValue: Float
+  resourceValue: UserInput
+  stringValue: String
 }
 
 input UserUpdateInput {
-  filter: [UserUpdateValueInput]
+  filter: [UserUpdateFilterInput]
   update: UserUpdateUpdateInput
 }
 
@@ -787,10 +905,4 @@ input UserUpdateUpdateInput {
   last: String
   paymentMethodPrimary: String
   phone: String
-}
-
-input UserUpdateValueInput {
-  condition: String
-  field: String
-  value: UserInput
 }

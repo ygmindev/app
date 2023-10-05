@@ -5,6 +5,7 @@ import {
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { collapseFilter } from '#lib-shared/resource/utils/collapseFilter/collapseFilter';
 import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
@@ -51,11 +52,26 @@ export const createResourceService = <
       afterRemove,
       afterUpdate,
       beforeCreate,
-      beforeGet,
-      beforeGetConnection,
-      beforeGetMany,
-      beforeRemove,
-      beforeUpdate,
+      beforeGet: async ({ input }) => {
+        const inputF = { ...input, filter: collapseFilter(input.filter) };
+        return beforeGet ? beforeGet({ input: inputF }) : inputF;
+      },
+      beforeGetConnection: async ({ input }) => {
+        const inputF = { ...input, filter: collapseFilter(input.filter) };
+        return beforeGetConnection ? beforeGetConnection({ input: inputF }) : inputF;
+      },
+      beforeGetMany: async ({ input }) => {
+        const inputF = { ...input, filter: collapseFilter(input.filter) };
+        return beforeGetMany ? beforeGetMany({ input: inputF }) : inputF;
+      },
+      beforeRemove: async ({ input }) => {
+        const inputF = { ...input, filter: collapseFilter(input.filter) };
+        return beforeRemove ? beforeRemove({ input: inputF }) : inputF;
+      },
+      beforeUpdate: async ({ input }) => {
+        const inputF = { ...input, filter: collapseFilter(input.filter) };
+        return beforeUpdate ? beforeUpdate({ input: inputF }) : inputF;
+      },
       root,
     };
 
