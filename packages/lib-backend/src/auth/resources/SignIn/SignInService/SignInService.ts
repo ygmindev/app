@@ -52,7 +52,7 @@ export class SignInService implements SignInServiceModel {
       await this._otpService.verify({ ...formF, otp: form.otp });
       delete (formF as Partial<SignInFormModel>).otp;
       let { result: user } = await this._userService.get({
-        filter: objectToEquality<UserModel>(formF),
+        filter: objectToEquality(formF),
       });
       let isNew;
       if (!user) {
@@ -87,7 +87,7 @@ export class SignInService implements SignInServiceModel {
       const otp = await this._otpService.verify(formF);
       const { result: user } = await this._userService.update({
         filter: filterNil([
-          context?.user && { field: '_id', value: context.user._id },
+          context?.user?._id && { field: '_id', value: context.user._id },
           otp.email && { field: 'email', value: otp.email },
           otp.phone && { field: 'phone', value: otp.phone },
           otp.callingCode && { field: 'callingCode', value: otp.callingCode },

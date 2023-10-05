@@ -1,12 +1,14 @@
-import { type Get } from 'type-fest';
+export type _PickParamsModel<TType, TKey extends string> = [value: TType, key: Array<TKey>];
 
-import { type DeepKeyModel } from '#lib-shared/core/core.models';
-
-export type _PickParamsModel<TType extends object, TKeys extends Array<DeepKeyModel<TType>>> = [
-  value: TType,
-  keys: TKeys,
-];
-
-export type _PickModel<TType extends object, TKeys extends Array<DeepKeyModel<TType>>> = {
-  [TKey in TKeys[number]]: Get<TType, TKey>;
+export type _PickModel<TType, TKey extends string> = {
+  [TProperty in keyof TType as TProperty extends (
+    TKey extends `${infer TElement}.${string}` ? TElement : TKey
+  )
+    ? TProperty
+    : never]: TProperty extends TKey
+    ? TType[TProperty]
+    : _PickModel<
+        TType[TProperty],
+        TKey extends `${Exclude<TProperty, symbol>}.${infer TElement}` ? TElement : never
+      >;
 };

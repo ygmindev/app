@@ -1,15 +1,19 @@
-import { type PartialModel, type PrimitiveModel } from '#lib-shared/core/core.models';
+import {
+  type PartialModel,
+  type PrimitiveModel,
+  type RequiredModel,
+} from '#lib-shared/core/core.models';
 import { type FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
 
 export type FilterModel<TType> = {
   booleanValue?: boolean;
   condition?: FilterConditionModel;
   dateValue?: Date;
-  field: keyof TType;
+  field: keyof PartialModel<RequiredModel<TType>>;
   numberValue?: number;
-  resourceValue?: PartialModel<TType>;
+  resourceValue?: PartialModel<RequiredModel<TType>>;
   stringValue?: string;
-  value?: PrimitiveModel | keyof TType;
+  value?: PrimitiveModel | PartialModel<RequiredModel<TType>>;
 };
 
 export type FilterConditionModel = `${FILTER_CONDITION}`;

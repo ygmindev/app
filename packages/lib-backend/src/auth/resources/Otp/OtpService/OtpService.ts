@@ -14,12 +14,10 @@ import { OTP_RESOURCE_NAME } from '#lib-shared/auth/resources/Otp/Otp.constants'
 import { type OtpFormModel, type OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
 import { type OtpServiceModel } from '#lib-shared/auth/resources/Otp/OtpService/OtpService.models';
 import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/DuplicateError';
-import { withInject } from '#lib-shared/core/utils/withInject/withInject';
+import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
+import { pick } from '#lib-shared/core/utils/pick/pick';
 import { randomInt } from '#lib-shared/crypto/utils/randomInt/randomInt';
-import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
-import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 
 @withContainer()
 export class OtpService
@@ -50,8 +48,19 @@ export class OtpService
     },
 
     beforeCreate: async ({ input }) => {
-      const service = Container.get(OtpService);
-      await service.remove({ filter: objectToEquality(input.form) });
+      const { checkExists, ...formF } = input.form;
+      if (checkExists) {
+        const userService = Container.get(UserService);
+        const { result } = await userService.get({
+          filter: objectToEquality(cleanObject(pick(formF, ['callingCode', 'email', 'phone']))),
+          options: { project: { _id: true } },
+        });
+        if (result) {
+          throw new DuplicateError(result._id);
+        }
+      }
+      const otpService = Container.get(OtpService);
+      await otpService.remove({ filter: objectToEquality(formF) });
       input.form.otp =
         process.env.SERVER_OTP_STATIC ??
         randomInt(toNumber(process.env.SERVER_OTP_LENGTH)).toString();
@@ -62,25 +71,6 @@ export class OtpService
   })
   implements OtpServiceModel
 {
-  @withInject(UserService) protected _userService!: UserService;
-
-  async create({
-    form,
-  }: InputModel<RESOURCE_METHOD_TYPE.CREATE, OtpModel, OtpFormModel>): Promise<
-    OutputModel<RESOURCE_METHOD_TYPE.CREATE, OtpModel>
-  > {
-    if (form.checkExists) {
-      const { result } = await this._userService.get({
-        filter: objectToEquality(form),
-        options: { project: { _id: true } },
-      });
-      if (result) {
-        throw new DuplicateError(result._id);
-      }
-    }
-    return super.create({ form });
-  }
-
   async verify(data: EntityResourceDataModel<OtpModel>): Promise<OtpModel> {
     const filter = objectToEquality(data);
     const { result } = await this.get({ filter, options: { project: { otp: true } } });

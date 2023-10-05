@@ -1,8 +1,7 @@
 import pick from 'lodash/pick';
 
-import { type DeepKeyModel } from '#lib-shared/core/core.models';
 import { type _PickModel, type _PickParamsModel } from '#lib-shared/core/utils/pick/_pick.models';
 
-export const _pick = <TType extends object, TKeys extends Array<DeepKeyModel<TType>>>(
-  ...[value, keys]: _PickParamsModel<TType, TKeys>
-): _PickModel<TType, TKeys> => pick(value, keys) as _PickModel<TType, TKeys>;
+export const _pick = <TType extends object, TKey extends string>(
+  ...[value, keys]: _PickParamsModel<TType, TKey>
+): _PickModel<TType, TKey> => pick(value, keys) as unknown as _PickModel<TType, TKey>;
