@@ -5,7 +5,7 @@ import { type USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.co
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 export type ProtectedResourceModel = EntityResourceModel & {
-  [GROUP_RESOURCE_NAME]?: GroupModel;
+  [GROUP_RESOURCE_NAME]: GroupModel;
 
-  [USER_RESOURCE_NAME]?: UserModel;
+  [USER_RESOURCE_NAME]: UserModel;
 };

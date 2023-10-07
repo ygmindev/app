@@ -4,6 +4,7 @@ import {
   type EntityResourceDataModel,
   type EntityResourceModel,
 } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type CollectionModel } from '#lib-shared/resource/utils/Collection/Collection.models';
 
 export type UserModel = EntityResourceModel & {
   // [BANK_RESOURCE_NAME]?: Array<BankModel>;
@@ -14,7 +15,7 @@ export type UserModel = EntityResourceModel & {
 
   // [PAYMENT_METHOD_RESOURCE_NAME]?: Array<PaymentMethodModel>;
 
-  [ACCESS_RESOURCE_NAME]?: Array<AccessModel>;
+  [ACCESS_RESOURCE_NAME]?: CollectionModel<AccessModel>;
 
   callingCode?: string;
 

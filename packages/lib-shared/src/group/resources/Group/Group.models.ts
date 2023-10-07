@@ -5,9 +5,10 @@ import {
   type EntityResourceDataModel,
   type EntityResourceModel,
 } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type CollectionModel } from '#lib-shared/resource/utils/Collection/Collection.models';
 
 export type GroupModel = EntityResourceModel & {
-  [ACCESS_RESOURCE_NAME]?: Array<AccessModel>;
+  [ACCESS_RESOURCE_NAME]?: CollectionModel<AccessModel>;
 
   name: string;
 

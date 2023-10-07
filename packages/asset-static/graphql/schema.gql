@@ -691,7 +691,7 @@ type SignInUserUpdateOutput {
 }
 
 input SignInUserUpdateUpdateInput {
-  Access: [AccessInput]
+  Access: [AccessInput] = []
   _id: String
   callingCode: String
   created: DateTime
@@ -776,7 +776,7 @@ type User {
 }
 
 input UserCreateFormInput {
-  Access: [AccessInput]
+  Access: [AccessInput] = []
   _id: String
   callingCode: String
   created: DateTime
@@ -861,7 +861,7 @@ type UserGetOutput {
 }
 
 input UserInput {
-  Access: [AccessInput]
+  Access: [AccessInput] = []
   _id: String
   callingCode: String
   created: DateTime
@@ -910,7 +910,7 @@ type UserUpdateOutput {
 }
 
 input UserUpdateUpdateInput {
-  Access: [AccessInput]
+  Access: [AccessInput] = []
   _id: String
   callingCode: String
   created: DateTime
