@@ -88,6 +88,24 @@ type AccessGetManyOutput {
   result: [Access]
 }
 
+input AccessGetManyUserGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: AccessInput
+  stringValue: String
+}
+
+input AccessGetManyUserGetManyInput {
+  filter: [AccessGetManyUserGetManyFilterInput]
+}
+
+type AccessGetManyUserGetManyOutput {
+  result: [Access]
+}
+
 type AccessGetOutput {
   result: Access
 }
@@ -149,10 +167,6 @@ input AccessUpdateUpdateInput {
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
 scalar DateTime
-
-type GetManyUserGetManyOutput {
-  result: [Access]
-}
 
 type Group {
   Access: [Access]
@@ -483,7 +497,7 @@ type Query {
   AccessGet(input: AccessGetInput): AccessGetOutput
   AccessGetConnection(input: AccessGetConnectionInput): AccessGetConnectionOutput
   AccessGetMany(input: AccessGetManyInput): AccessGetManyOutput
-  GetManyUserGetMany: GetManyUserGetManyOutput
+  AccessGetManyUserGetMany(input: AccessGetManyUserGetManyInput): AccessGetManyUserGetManyOutput
   GroupGet(input: GroupGetInput): GroupGetOutput
   GroupGetConnection(input: GroupGetConnectionInput): GroupGetConnectionOutput
   GroupGetMany(input: GroupGetManyInput): GroupGetManyOutput

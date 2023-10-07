@@ -17,7 +17,7 @@ export const useAccessResource = (): UseAccessResourceModel => {
   >({
     fields: [{ result: ACCESS_FIELDS }],
     method: RESOURCE_METHOD_TYPE.GET_MANY,
-    name: `${RESOURCE_METHOD_TYPE.GET_MANY}User`,
+    name: `${ACCESS_RESOURCE_NAME}${RESOURCE_METHOD_TYPE.GET_MANY}User`,
   });
   return {
     ...useResource<AccessModel, AccessFormModel>({

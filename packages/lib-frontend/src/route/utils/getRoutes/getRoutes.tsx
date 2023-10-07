@@ -135,6 +135,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
 
         {
           element: <DevPage />,
+          isProtectable: true,
           pathname: DEV,
         },
 
