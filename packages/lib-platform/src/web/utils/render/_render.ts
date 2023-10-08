@@ -18,7 +18,7 @@ export const _render = async ({ context }: _RenderParamsModel): Promise<_RenderM
     redirectTo,
     response: httpResponse
       ? {
-          contentType: httpResponse.contentType,
+          headers: httpResponse.headers,
           pipeStream: (stream) => httpResponse.pipe(stream as unknown as WritableStream),
           statusCode: httpResponse.statusCode,
         }

@@ -71,8 +71,9 @@ export const _server = async ({
     if (redirectTo) {
       await res.redirect(302, redirectTo);
     } else if (response) {
-      const { contentType, pipeStream, statusCode } = response;
-      void res.status(statusCode).type(contentType);
+      const { headers, pipeStream, statusCode } = response;
+      void res.status(statusCode);
+      headers.forEach(([name, value]) => res.raw.setHeader(name, value));
       pipeStream(res.raw);
     } else if (error) {
       // TODO: better error handling

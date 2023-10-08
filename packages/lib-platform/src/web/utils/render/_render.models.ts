@@ -9,7 +9,7 @@ export type _RenderModel = {
   error?: Error;
   redirectTo?: string;
   response?: {
-    contentType: string;
+    headers: Array<[string, string]>;
     pipeStream(writable: NodeJS.WritableStream): void;
     statusCode: number;
   };
