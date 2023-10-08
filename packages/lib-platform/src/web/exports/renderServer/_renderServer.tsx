@@ -20,7 +20,7 @@ import { STATE } from '#lib-shared/state/state.constants';
 export const _renderServer =
   ({
     initialize,
-    publicPath,
+    // publicPath,
     render,
     rootId,
     ssrContextKeys,

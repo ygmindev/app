@@ -128,7 +128,12 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     }
   };
 
-  register = <TType>({ name, root, target, ...options }: TaskParamsModel<TType>): void => {
+  register = <TType extends unknown>({
+    name,
+    root,
+    target,
+    ...options
+  }: TaskParamsModel<TType>): void => {
     const rootF = root ?? (target ? fromPackages(target) : fromRoot());
     const targetF = target && kebabCase(target);
     const nameF = filterNil([targetF, kebabCase(name)]).join('-');

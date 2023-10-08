@@ -4,5 +4,6 @@ import {
   type WithResolverParamsModel,
 } from '#lib-backend/http/utils/withResolver/withResolver.models';
 
-export const withResolver = <TType>(params: WithResolverParamsModel<TType>): WithResolverModel =>
-  _withResolver(params);
+export const withResolver = <TType extends unknown>(
+  params: WithResolverParamsModel<TType>,
+): WithResolverModel => _withResolver(params);

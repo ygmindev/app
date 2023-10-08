@@ -118,6 +118,8 @@ export const _bundle = ({
 
         ...(entry ? { input: entry } : {}),
 
+        output: { chunkFileNames: '[name].js', entryFileNames: '[name].js' },
+
         plugins: [resolve({ modulesOnly: true })],
       },
       watch:

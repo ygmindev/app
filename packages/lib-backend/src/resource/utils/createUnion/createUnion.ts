@@ -5,7 +5,7 @@ import {
   type CreateUnionParamsModel,
 } from '#lib-backend/resource/utils/createUnion/createUnion.models';
 
-export const createUnion = <TType>({
+export const createUnion = <TType extends unknown>({
   Resource,
   name,
   resolve,

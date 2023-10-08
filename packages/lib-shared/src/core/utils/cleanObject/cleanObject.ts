@@ -10,7 +10,7 @@ import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import { isPrimitive } from '#lib-shared/core/utils/isPrimitive/isPrimitive';
 import { isTypeOf } from '#lib-shared/core/utils/isTypeOf/isTypeOf';
 
-export const cleanObject = <TType>(value: TType): TType => {
+export const cleanObject = <TType extends unknown>(value: TType): TType => {
   const valueF = toPlainObject(value) as TType;
   (Object.keys(valueF as object) as Array<StringKeyModel<TType>>).forEach((k) => {
     const v = valueF[k];

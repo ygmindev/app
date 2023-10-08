@@ -4,6 +4,6 @@ import {
   type WithFieldResolverParamsModel,
 } from '#lib-backend/http/utils/withFieldResolver/withFieldResolver.models';
 
-export const withFieldResolver = <TType>(
+export const withFieldResolver = <TType extends unknown>(
   params: WithFieldResolverParamsModel<TType>,
 ): WithFieldResolverModel => _withFieldResolver(params);

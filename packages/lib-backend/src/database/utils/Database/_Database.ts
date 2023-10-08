@@ -25,7 +25,9 @@ import {
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
 
-const getFilter = <TType>(filters?: Array<FilterModel<TType>>): Filter<TType & object> =>
+const getFilter = <TType extends unknown>(
+  filters?: Array<FilterModel<TType>>,
+): Filter<TType & object> =>
   filters
     ? filters.reduce(
         (result, v) => {

@@ -5,7 +5,7 @@ import { type WithEntityParamsModel } from '#lib-backend/resource/utils/withEnti
 import { type ClassModel } from '#lib-shared/core/core.models';
 import { NotImplementedError } from '#lib-shared/core/errors/NotImplementedError/NotImplementedError';
 
-export const withEntity = <TType>({
+export const withEntity = <TType extends unknown>({
   indices = [],
   isAbstract = false,
   isEmbedded = false,

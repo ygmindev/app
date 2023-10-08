@@ -1,4 +1,4 @@
-export type WithEntityParamsModel<TType> = {
+export type WithEntityParamsModel<TType extends unknown> = {
   indices?: Array<Array<keyof TType>>;
   isAbstract?: boolean;
   isEmbedded?: boolean;

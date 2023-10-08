@@ -6,7 +6,7 @@ import {
 } from '#lib-shared/resource/utils/expandFilter/expandFilter.models';
 import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
-export const expandFilter = <TType>(
+export const expandFilter = <TType extends unknown>(
   params: ExpandFilterParamsModel<TType>,
 ): ExpandFilterModel<TType> =>
   params.map(({ condition, field, value }) => {

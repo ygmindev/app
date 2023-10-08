@@ -6,7 +6,7 @@ import {
 } from '#lib-backend/resource/utils/objectToEquality/objectToEquality.models';
 import { type StringKeyModel } from '#lib-shared/core/core.models';
 
-export const objectToEquality = <TType>(
+export const objectToEquality = <TType extends unknown>(
   params: ObjectToEqualityParamsModel<TType>,
 ): ObjectToEqualityModel<TType> =>
   reduce(

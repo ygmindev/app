@@ -5,7 +5,7 @@ import {
   type _GroupByParamsModel,
 } from '#lib-shared/core/utils/groupBy/_groupBy.models';
 
-export const _groupBy = <TType>(
+export const _groupBy = <TType extends unknown>(
   ...[value, by, { isSort } = { isSort: true }]: _GroupByParamsModel<TType>
 ): _GroupByModel<TType> => {
   const valueF = groupBy(value, by);
