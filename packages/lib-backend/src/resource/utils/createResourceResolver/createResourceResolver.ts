@@ -1,3 +1,5 @@
+import toPlainObject from 'lodash/toPlainObject';
+
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { withContext } from '#lib-backend/http/utils/withContext/withContext';
 import { withResolver } from '#lib-backend/http/utils/withResolver/withResolver';
@@ -11,7 +13,6 @@ import { withInput } from '#lib-backend/resource/utils/withInput/withInput';
 import { withOutput } from '#lib-backend/resource/utils/withOutput/withOutput';
 import { type ClassModel } from '#lib-shared/core/core.models';
 import { NotImplementedError } from '#lib-shared/core/errors/NotImplementedError/NotImplementedError';
-import { toPlainObject } from '#lib-shared/core/utils/toPlainObject/toPlainObject';
 import { withCondition } from '#lib-shared/core/utils/withCondition/withCondition';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
