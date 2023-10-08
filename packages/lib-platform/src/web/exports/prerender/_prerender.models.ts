@@ -1,4 +1,4 @@
-import { type PageContextBuiltIn } from 'vite-plugin-ssr/types';
+import { type PageContextBuiltIn } from 'vike/types';
 
 import { type InternationalizeConfigModel } from '#lib-config/locale/internationalize/internationalize.models';
 import { type RootContextModel } from '#lib-frontend/root/root.models';

@@ -29,10 +29,6 @@ export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewP
       testID,
     });
 
-    if (testID === 'DELETEME') {
-      console.warn(animationProps);
-    }
-
     useImperativeHandle(ref, () => ({
       scrollTo: (position) =>
         (ref as RefObject<AnimatableViewRefModel>).current?.scrollTo(position),

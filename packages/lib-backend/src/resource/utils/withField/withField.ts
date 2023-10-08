@@ -70,6 +70,7 @@ const getColumn = <TType extends unknown>({
           entity: Resource as () => EntityClass<TType>,
           joinColumn: name ? `_${name}` : undefined,
           mappedBy: root as StringKeyModel<TType>,
+          nullable: true,
         }) as PropertyDecorator;
       case FIELD_RELATION.MANY_TO_ONE:
         return ManyToOne({

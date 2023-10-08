@@ -1,6 +1,6 @@
 import { type WritableStream } from 'node:stream/web';
 
-import { renderPage } from 'vite-plugin-ssr/server';
+import { renderPage } from 'vike/server';
 
 import {
   type _RenderModel,
@@ -11,7 +11,7 @@ export const _render = async ({ context }: _RenderParamsModel): Promise<_RenderM
   const { errorWhileRendering, httpResponse, redirectTo } = await renderPage({
     context,
     redirectTo: undefined,
-    urlOriginal: context?.route?.location?.pathname,
+    urlOriginal: context?.route?.location?.pathname ?? '',
   });
   return {
     error: errorWhileRendering as Error,

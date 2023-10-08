@@ -1,5 +1,5 @@
 import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
-import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vite-plugin-ssr/server';
+import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vike/server';
 
 import { QueryClient } from '#lib-frontend/data/utils/QueryClient/QueryClient';
 import { type RootContextModel } from '#lib-frontend/root/root.models';

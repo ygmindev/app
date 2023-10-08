@@ -84,7 +84,7 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "esnext",
+    "target": "es2019",
     "types": [
       "react-native",
       "jest",

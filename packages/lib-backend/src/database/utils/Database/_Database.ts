@@ -99,8 +99,8 @@ export class _Database implements _DatabaseModel {
       count: async () => this._getEntityManager().getRepository<TType & object>(name).count(),
 
       create: async ({ form, options }) => {
-        const em = this._getEntityManager();
         try {
+          const em = this._getEntityManager();
           const formF = cleanDocument(form) as TType & object;
           const result = em.create<TType & object>(name, formF);
           !options?.isCommitted && (await em.persistAndFlush(result));

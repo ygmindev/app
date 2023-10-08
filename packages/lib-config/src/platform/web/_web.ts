@@ -1,5 +1,5 @@
+import ssr from 'vike/plugin';
 import { type WatchOptions } from 'vite';
-import ssr from 'vite-plugin-ssr/plugin';
 
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';

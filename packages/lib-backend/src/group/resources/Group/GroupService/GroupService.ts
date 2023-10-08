@@ -33,8 +33,6 @@ export class GroupService
             (
               await accessCreate({
                 form: {
-                  // [GROUP_RESOURCE_NAME]: output.result,
-                  // [USER_RESOURCE_NAME]: user,
                   [GROUP_RESOURCE_NAME]: output.result._id as unknown as GroupModel,
                   [USER_RESOURCE_NAME]: new ObjectId(userId) as unknown as UserModel,
                   role: [ACCESS_ROLE.ADMIN],

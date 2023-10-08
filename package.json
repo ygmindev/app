@@ -147,7 +147,6 @@
     "typedi": "^0.10.0",
     "typeorm": "^0.3.17",
     "uuid": "^9.0.0",
-    "vite-plugin-ssr": "^0.4.133",
     "winston": "^3.10.0"
   },
   "devDependencies": {
@@ -304,6 +303,7 @@
     "tsconfig-paths": "^4.2.0",
     "type-fest": "4.0.0",
     "typescript": "5.0.2",
+    "vike": "^0.4.142",
     "vite": "^4.4.6",
     "vite-plugin-checker": "^0.6.1",
     "vite-plugin-circular-dependency": "^0.2.1",

@@ -178,7 +178,7 @@ type Group {
 }
 
 input GroupCreateFormInput {
-  Access: [AccessInput]
+  Access: [AccessInput] = []
   _id: String
   created: DateTime
   name: String
@@ -260,7 +260,7 @@ type GroupGetOutput {
 }
 
 input GroupInput {
-  Access: [AccessInput]
+  Access: [AccessInput] = []
   _id: String
   created: DateTime
   name: String
@@ -306,7 +306,7 @@ type GroupUpdateOutput {
 }
 
 input GroupUpdateUpdateInput {
-  Access: [AccessInput]
+  Access: [AccessInput] = []
   _id: String
   created: DateTime
   name: String
