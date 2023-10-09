@@ -2,13 +2,11 @@ import isArray from 'lodash/isArray';
 import isObject from 'lodash/isObject';
 import isPlainObject from 'lodash/isPlainObject';
 import toPlainObject from 'lodash/toPlainObject';
-import { ObjectId } from 'mongodb';
 
 import { type StringKeyModel } from '#lib-shared/core/core.models';
 import { CLEAN_OBJECT_KEYS } from '#lib-shared/core/utils/cleanObject/cleanObject.constants';
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import { isPrimitive } from '#lib-shared/core/utils/isPrimitive/isPrimitive';
-import { isTypeOf } from '#lib-shared/core/utils/isTypeOf/isTypeOf';
 
 export const cleanObject = <TType extends unknown>(value: TType): TType => {
   const valueF = toPlainObject(value) as TType;
@@ -16,7 +14,8 @@ export const cleanObject = <TType extends unknown>(value: TType): TType => {
     const v = valueF[k];
     CLEAN_OBJECT_KEYS.includes(k) ||
     v === undefined ||
-    (isObject(v) && !isTypeOf(v, ObjectId) && isEmpty(v))
+    // (isObject(v) && !isTypeOf(v, ObjectId) && isEmpty(v))
+    (isObject(v) && isEmpty(v))
       ? delete valueF[k]
       : isPrimitive(v)
       ? undefined

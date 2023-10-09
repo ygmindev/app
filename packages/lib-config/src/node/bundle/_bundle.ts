@@ -172,7 +172,7 @@ export const _bundle = ({
     },
 
     plugins: filterNil([
-      // serverExtension && vitePluginIsomorphicImport(serverExtension),
+      serverExtension && vitePluginIsomorphicImport(serverExtension),
 
       checker({
         eslint: { lintCommand: lintCommand() },
