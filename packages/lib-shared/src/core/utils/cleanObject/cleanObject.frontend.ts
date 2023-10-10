@@ -1,5 +1,3 @@
-import { ObjectId } from 'mongodb';
-
 import { cleanObject as cleanObjectBase } from '#lib-shared/core/utils/cleanObject/cleanObject.base';
 import {
   type CleanObjectModel,
@@ -8,5 +6,4 @@ import {
 
 export const cleanObject = <TType extends unknown>(
   ...[value, options]: CleanObjectParamsModel<TType>
-): CleanObjectModel<TType> =>
-  cleanObjectBase(value, { primitiveTypes: [...(options?.primitiveTypes ?? []), ObjectId] });
+): CleanObjectModel<TType> => cleanObjectBase(value, options);

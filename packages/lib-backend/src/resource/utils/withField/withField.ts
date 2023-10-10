@@ -71,6 +71,7 @@ const getColumn = <TType extends unknown>({
           joinColumn: name ? `_${name}` : undefined,
           mappedBy: root as StringKeyModel<TType>,
           nullable: true,
+          orphanRemoval: true,
         }) as PropertyDecorator;
       case FIELD_RELATION.MANY_TO_ONE:
         return ManyToOne({

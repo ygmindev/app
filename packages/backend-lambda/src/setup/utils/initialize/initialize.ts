@@ -18,7 +18,7 @@ export const initialize = async (): Promise<InitializeModel> => {
       const errorF = new HttpError(
         originalErrorF?.statusCode,
         e.message ?? originalErrorF?.message,
-        (e.extensions?.stacktrace as string) ?? originalErrorF.stack,
+        (e.extensions?.stacktrace as string) ?? (e as Error)?.stack ?? originalErrorF.stack,
       );
       error(errorF);
       return errorF;

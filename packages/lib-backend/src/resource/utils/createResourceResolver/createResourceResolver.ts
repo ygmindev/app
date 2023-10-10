@@ -1,8 +1,7 @@
-import toPlainObject from 'lodash/toPlainObject';
-
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { withContext } from '#lib-backend/http/utils/withContext/withContext';
 import { withResolver } from '#lib-backend/http/utils/withResolver/withResolver';
+import { type ResourceClassModel } from '#lib-backend/resource/resource.models';
 import {
   type CreateResourceResolverModel,
   type CreateResourceResolverParamsModel,
@@ -11,8 +10,8 @@ import {
 import { withAuthorizer } from '#lib-backend/resource/utils/withAuthorizer/withAuthorizer';
 import { withInput } from '#lib-backend/resource/utils/withInput/withInput';
 import { withOutput } from '#lib-backend/resource/utils/withOutput/withOutput';
-import { type ClassModel } from '#lib-shared/core/core.models';
 import { NotImplementedError } from '#lib-shared/core/errors/NotImplementedError/NotImplementedError';
+import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import { withCondition } from '#lib-shared/core/utils/withCondition/withCondition';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
@@ -69,7 +68,7 @@ export const createResourceResolver = <
         () => createExists,
         () =>
           withInput({
-            Resource: ResourceData ?? (Resource as unknown as ClassModel<TForm>),
+            Resource: ResourceData ?? (Resource as unknown as ResourceClassModel<TForm>),
             RootResource,
             method: RESOURCE_METHOD_TYPE.CREATE,
             name,
@@ -80,7 +79,7 @@ export const createResourceResolver = <
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> {
       if (this._service.create) {
-        return this._service.create(toPlainObject(input), context);
+        return this._service.create(cleanObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.CREATE);
     }
@@ -116,7 +115,7 @@ export const createResourceResolver = <
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>> {
       if (this._service.get) {
-        return this._service.get(toPlainObject(input), context);
+        return this._service.get(cleanObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.GET);
     }
@@ -152,7 +151,7 @@ export const createResourceResolver = <
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> {
       if (this._service.getMany) {
-        return this._service.getMany(toPlainObject(input), context);
+        return this._service.getMany(cleanObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.GET_MANY);
     }
@@ -188,7 +187,7 @@ export const createResourceResolver = <
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>> {
       if (this._service.getConnection) {
-        return this._service.getConnection(toPlainObject(input), context);
+        return this._service.getConnection(cleanObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.GET_CONNECTION);
     }
@@ -224,7 +223,7 @@ export const createResourceResolver = <
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>> {
       if (this._service.update) {
-        return this._service.update(toPlainObject(input), context);
+        return this._service.update(cleanObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.UPDATE);
     }
@@ -260,7 +259,7 @@ export const createResourceResolver = <
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>> {
       if (this._service.remove) {
-        return this._service.remove(toPlainObject(input), context);
+        return this._service.remove(cleanObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.REMOVE);
     }

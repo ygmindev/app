@@ -74,11 +74,7 @@ export const createArgs = <
       {
         @withCondition(
           () => Resource !== undefined,
-          () =>
-            withField({
-              Resource: () => Form,
-              type: PROPERTY_TYPE.RESOURCE,
-            }),
+          () => withField({ Resource: () => Form, type: PROPERTY_TYPE.RESOURCE }),
         )
         form!: TForm;
       }

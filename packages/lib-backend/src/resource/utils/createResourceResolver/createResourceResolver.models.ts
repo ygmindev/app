@@ -1,5 +1,6 @@
+import { type ResourceClassModel } from '#lib-backend/resource/resource.models';
 import { type AccessLevelModel } from '#lib-shared/auth/resources/Access/Access.models';
-import { type ClassModel, type PartialModel } from '#lib-shared/core/core.models';
+import { type PartialModel } from '#lib-shared/core/core.models';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import {
   type ResourceMethodTypeModel,
@@ -17,13 +18,13 @@ export type CreateResourceResolverParamsModel<
   TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 > = ResourceNameParamsModel<TRoot> & {
-  Resource: ClassModel<TType>;
+  Resource: ResourceClassModel<TType>;
 
-  ResourceData?: ClassModel<TForm>;
+  ResourceData?: ResourceClassModel<TForm>;
 
-  ResourceService: ClassModel<PartialModel<ResourceServiceModel<TType, TForm, TRoot>>>;
+  ResourceService: ResourceClassModel<PartialModel<ResourceServiceModel<TType, TForm, TRoot>>>;
 
-  RootResource?: TRoot extends undefined ? never : ClassModel<TRoot>;
+  RootResource?: TRoot extends undefined ? never : ResourceClassModel<TRoot>;
 
   access?: Record<ResourceResolverAccessTypeModel, AccessLevelModel>;
 
@@ -42,7 +43,7 @@ export type CreateResourceResolverModel<
   TType,
   TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
-> = ClassModel<ResourceResolverModel<TType, TForm, TRoot>>;
+> = ResourceClassModel<ResourceResolverModel<TType, TForm, TRoot>>;
 
 export type ResourceResolverModel<
   TType,
