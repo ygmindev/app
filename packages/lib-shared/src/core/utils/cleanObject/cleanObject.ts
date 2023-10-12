@@ -9,4 +9,7 @@ import {
 export const cleanObject = <TType extends unknown>(
   ...[value, options]: CleanObjectParamsModel<TType>
 ): CleanObjectModel<TType> =>
-  cleanObjectBase(value, { primitiveTypes: [...(options?.primitiveTypes ?? []), ObjectId] });
+  cleanObjectBase(value, {
+    ...options,
+    primitiveTypes: [...(options?.primitiveTypes ?? []), ObjectId],
+  });

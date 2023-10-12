@@ -56,7 +56,6 @@ const getColumn = <TType extends unknown>({
   type,
 }: WithFieldParamsModel<TType>): PropertyDecorator => {
   const defaultOptions: PropertyOptions<TType> = { nullable: isOptional, onCreate: defaultValue };
-
   if (Resource) {
     switch (relation) {
       case FIELD_RELATION.MANY_TO_MANY:
@@ -88,7 +87,6 @@ const getColumn = <TType extends unknown>({
         return Property({ ...defaultOptions, type: () => Resource }) as PropertyDecorator;
     }
   }
-
   if (isArray) {
     return Property({ ...defaultOptions, type: ArrayType }) as PropertyDecorator;
   }
