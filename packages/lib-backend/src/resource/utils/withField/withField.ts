@@ -55,20 +55,19 @@ const getColumn = <TType extends unknown>({
   root,
   type,
 }: WithFieldParamsModel<TType>): PropertyDecorator => {
-  const defaultOptions: PropertyOptions<TType> = { nullable: isOptional };
+  const defaultOptions: PropertyOptions<TType> = { nullable: isOptional, onCreate: defaultValue };
+
   if (Resource) {
     switch (relation) {
       case FIELD_RELATION.MANY_TO_MANY:
         return ManyToMany({
           ...defaultOptions,
           entity: Resource as () => EntityClass<TType>,
-          joinColumn: name ? `_${name}` : undefined,
         }) as PropertyDecorator;
       case FIELD_RELATION.ONE_TO_MANY:
         return OneToMany({
           ...defaultOptions,
           entity: Resource as () => EntityClass<TType>,
-          joinColumn: name ? `_${name}` : undefined,
           mappedBy: root as StringKeyModel<TType>,
           nullable: true,
           orphanRemoval: true,
@@ -77,45 +76,36 @@ const getColumn = <TType extends unknown>({
         return ManyToOne({
           ...defaultOptions,
           entity: Resource as () => EntityClass<TType>,
-          joinColumn: name ? `_${name}` : undefined,
-          primary: true,
+          // primary: true,
           ref: true,
         }) as PropertyDecorator;
       case FIELD_RELATION.ONE_TO_ONE:
         return OneToOne({
           ...defaultOptions,
           entity: Resource as () => EntityClass<TType>,
-          joinColumn: name ? `_${name}` : undefined,
         }) as PropertyDecorator;
       default:
         return Property({ ...defaultOptions, type: () => Resource }) as PropertyDecorator;
     }
   }
-  const [Field, fieldOptions] = (() => {
-    if (isArray) {
-      return [Property, { defaultValue, type: ArrayType }];
-    }
-    switch (type) {
-      case PROPERTY_TYPE.PRIMARY_KEY:
-        return [PrimaryKey, { defaultValue, type: 'ObjectId' }];
-      case PROPERTY_TYPE.ID:
-        return [Property, { defaultValue, type: 'ObjectId' }];
-      case DATA_TYPE.STRING:
-        return [Property, { defaultValue, type: 'string' }];
-      case DATA_TYPE.NUMBER:
-        return [Property, { defaultValue, type: 'number' }];
-      case DATA_TYPE.DATE:
-        return [Property, { defaultValue, type: Date }];
-      default:
-        return [Property, { defaultValue, type: undefined }];
-    }
-  })();
 
-  return Field({
-    ...defaultOptions,
-    ...fieldOptions,
-    onCreate: defaultValue ?? undefined,
-  }) as PropertyDecorator;
+  if (isArray) {
+    return Property({ ...defaultOptions, type: ArrayType }) as PropertyDecorator;
+  }
+  switch (type) {
+    case PROPERTY_TYPE.PRIMARY_KEY:
+      return PrimaryKey({ ...defaultOptions, type: 'ObjectId' }) as PropertyDecorator;
+    case PROPERTY_TYPE.ID:
+      return Property({ ...defaultOptions, type: 'ObjectId' }) as PropertyDecorator;
+    case DATA_TYPE.STRING:
+      return Property({ ...defaultOptions, type: 'string' }) as PropertyDecorator;
+    case DATA_TYPE.NUMBER:
+      return Property({ ...defaultOptions, type: 'number' }) as PropertyDecorator;
+    case DATA_TYPE.DATE:
+      return Property({ ...defaultOptions, type: Date }) as PropertyDecorator;
+    default:
+      return Property({ ...defaultOptions, type: undefined }) as PropertyDecorator;
+  }
 };
 
 export const withField =

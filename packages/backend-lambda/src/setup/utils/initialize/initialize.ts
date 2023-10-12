@@ -20,6 +20,7 @@ export const initialize = async (): Promise<InitializeModel> => {
         e.message ?? originalErrorF?.message,
         (e.extensions?.stacktrace as string) ?? (e as Error)?.stack ?? originalErrorF.stack,
       );
+      console.warn(errorF);
       error(errorF);
       return errorF;
     },

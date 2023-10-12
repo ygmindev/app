@@ -1,3 +1,5 @@
+import { PrimaryKeyProp, PrimaryKeyType, Ref } from '@mikro-orm/core';
+
 import { Group } from '#lib-backend/group/resources/Group/Group';
 import { EntityResource } from '#lib-backend/resource/resources/EntityResource/EntityResource';
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
@@ -11,12 +13,13 @@ import {
 } from '#lib-shared/auth/resources/Access/Access.models';
 import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 import { GROUP_RESOURCE_NAME } from '#lib-shared/group/resources/Group/Group.constants';
-import { type GroupModel } from '#lib-shared/group/resources/Group/Group.models';
 import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
-import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withEntity({ isRepository: true, name: ACCESS_RESOURCE_NAME })
 export class Access extends EntityResource implements AccessModel {
+  [PrimaryKeyProp]?: ['_id', 'User', 'Group'];
+  [PrimaryKeyType]?: [string, string, string];
+
   @withField({
     Resource: () => Group,
     isRepository: true,
@@ -24,7 +27,7 @@ export class Access extends EntityResource implements AccessModel {
     relation: FIELD_RELATION.MANY_TO_ONE,
     type: PROPERTY_TYPE.RESOURCE,
   })
-  [GROUP_RESOURCE_NAME]!: GroupModel;
+  [GROUP_RESOURCE_NAME]!: Ref<Group>;
 
   @withField({
     Resource: () => User,
@@ -33,7 +36,7 @@ export class Access extends EntityResource implements AccessModel {
     relation: FIELD_RELATION.MANY_TO_ONE,
     type: PROPERTY_TYPE.RESOURCE,
   })
-  [USER_RESOURCE_NAME]!: UserModel;
+  [USER_RESOURCE_NAME]!: Ref<User>;
 
   @withField({ isArray: true, isRepository: true, type: DATA_TYPE.STRING })
   role!: Array<AccessRoleModel>;

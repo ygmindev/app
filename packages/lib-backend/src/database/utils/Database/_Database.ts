@@ -105,6 +105,13 @@ export class _Database implements _DatabaseModel {
           const em = this._getEntityManager();
           const formF = cleanDocument(form) as TType & object;
           const result = em.create<TType & object>(name, formF);
+
+          console.warn('@@@$create');
+          console.warn(form);
+          console.warn(formF);
+          console.warn(result);
+          console.warn('\n\n');
+
           !options?.isCommitted && (await em.persistAndFlush(result));
           return { result };
         } catch (e) {
