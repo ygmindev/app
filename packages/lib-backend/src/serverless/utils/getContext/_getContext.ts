@@ -3,7 +3,7 @@ import {
   type _GetContextModel,
   type _GetContextParamsModel,
 } from '#lib-backend/serverless/utils/getContext/_getContext.models';
-import { type SignInTokenModel } from '#lib-shared/auth/resources/SignIn/SignIn.models';
+import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
 
 export const _getContext = async ({
   context,
@@ -12,7 +12,7 @@ export const _getContext = async ({
   const { authorization } = event.headers;
   const user = await getUserFromHeader(authorization);
   if (user) {
-    (context as unknown as { user: SignInTokenModel }).user = user;
+    (context as unknown as ContextModel).user = user;
   }
   return context;
 };

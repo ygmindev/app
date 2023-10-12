@@ -119,7 +119,7 @@ export class _Database implements _DatabaseModel {
 
       get: async ({ filter, options }) => {
         const em = this._getEntityManager();
-        const filterF = getFilter<TType>(filter) as FilterQuery<TType & object>;
+        const filterF = cleanDocument(getFilter<TType>(filter) as FilterQuery<TType & object>);
         const collection = em.getCollection(name);
         const result = (await (options?.aggregate
           ? collection
@@ -147,7 +147,8 @@ export class _Database implements _DatabaseModel {
       getMany: async ({ filter, options }) => {
         const em = this._getEntityManager();
         const collection = em.getCollection(name);
-        const filterF = getFilter<TType>(filter) as FilterQuery<TType & object>;
+        const filterF = cleanDocument(getFilter<TType>(filter) as FilterQuery<TType & object>);
+        console.warn(filterF);
         const result = (await (options && options.aggregate
           ? collection
               .aggregate([

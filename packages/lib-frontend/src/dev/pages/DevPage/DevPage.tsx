@@ -8,9 +8,6 @@ import { type DevPagePropsModel } from '#lib-frontend/dev/pages/DevPage/DevPage.
 export const DevPage: FCModel<DevPagePropsModel> = () => {
   const { getManyUser } = useAccessResource();
   useEffect(() => {
-    // setTimeout(() => {
-    //   void getManyUser({ filter: [] });
-    // }, 5000);
     void getManyUser({ filter: [] });
   }, []);
   return <Loading />;
