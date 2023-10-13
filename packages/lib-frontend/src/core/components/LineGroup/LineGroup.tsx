@@ -6,7 +6,6 @@ import { type LFCModel } from '#lib-frontend/core/core.models';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 export const LineGroup: LFCModel<LineGroupPropsModel> = ({
   children,
@@ -18,14 +17,14 @@ export const LineGroup: LFCModel<LineGroupPropsModel> = ({
   return (
     <Wrapper
       {...wrapperProps}
-      round
       border
       isVerticalScrollable
-      pHorizontal={THEME_SIZE.SMALL}>
+      pHorizontal={THEME_SIZE.SMALL}
+      round>
       {title && (
         <Text
-          p
-          type={FONT_TYPE.TITLE}>
+          fontSize={THEME_SIZE.LARGE}
+          p>
           {title}
         </Text>
       )}

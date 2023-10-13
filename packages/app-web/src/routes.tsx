@@ -18,6 +18,7 @@ export const routes: Array<RouteModel> = getRoutes({
   appRoutes: [
     {
       element: <AppHomePage />,
+      isProtectable: true,
       pathname: '/',
     },
     {

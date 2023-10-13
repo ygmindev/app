@@ -18,7 +18,7 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
   const { t } = useTranslation([GROUP]);
   const { wrapperProps } = useLayoutStyles({ props });
   const currentUser = useCurrentUser();
-  const { getMany } = useAccessResource();
+  const { getManyUser } = useAccessResource();
   return (
     <MainLayout
       {...wrapperProps}
@@ -38,7 +38,7 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
           </SkeletonGroup>
         }
         id="accesses"
-        query={async () => getMany({ filter: [] })}>
+        query={async () => getManyUser({ filter: [] })}>
         {({ data }) => (
           <LineGroup title={t('group:group_plural', { value: currentUser?.email })}>
             {data?.result?.map((value) => <LineItem key={value._id} />)}
