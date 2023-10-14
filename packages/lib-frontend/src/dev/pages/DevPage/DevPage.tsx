@@ -6,9 +6,9 @@ import { type FCModel } from '#lib-frontend/core/core.models';
 import { type DevPagePropsModel } from '#lib-frontend/dev/pages/DevPage/DevPage.models';
 
 export const DevPage: FCModel<DevPagePropsModel> = () => {
-  const { getManyUser } = useAccessResource();
+  const { getManyProtected } = useAccessResource();
   useEffect(() => {
-    void getManyUser({ filter: [] }).then(console.warn);
+    void getManyProtected({ filter: [] }).then(console.warn);
   }, []);
   return <Loading />;
 };
