@@ -41,12 +41,13 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
         query={async () => getManyProtected({ filter: [] })}>
         {({ data }) => (
           <LineGroup title={t('group:group_plural', { value: currentUser?.email })}>
-            {data?.result?.map(({ _id, name }) => (
+            {data?.result?.map(({ _id, name, types }) => (
               <LineItem
                 key={_id}
                 label={name}
-                onPress={() => null}
-              />
+                onPress={() => null}>
+                {types?.join(',')}
+              </LineItem>
             ))}
           </LineGroup>
         )}

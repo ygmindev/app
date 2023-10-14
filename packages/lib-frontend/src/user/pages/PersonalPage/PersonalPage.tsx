@@ -25,7 +25,7 @@ export const PersonalPage: SFCModel<PersonalPagePropsModel> = ({ testID, ...prop
             value:
               currentUser && (currentUser.first || currentUser.last)
                 ? `${currentUser.first || ''} ${currentUser.last || ''}`
-                : null,
+                : undefined,
           },
           {
             icon: 'phone',
@@ -34,13 +34,13 @@ export const PersonalPage: SFCModel<PersonalPagePropsModel> = ({ testID, ...prop
             value:
               currentUser && currentUser.callingCode && currentUser.phone
                 ? phoneFormat(`+${currentUser.callingCode}${currentUser.phone}`)
-                : null,
+                : undefined,
           },
           {
             icon: 'email',
             id: EMAIL,
             label: ({ t }) => t('user:email'),
-            value: currentUser?.email ?? null,
+            value: currentUser?.email ?? undefined,
           },
         ]}
       />

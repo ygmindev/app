@@ -81,9 +81,10 @@ export type OptionModel<TType extends string = string> = {
   Pick<IconPropsModel, 'icon'> &
   Pick<ButtonPropsModel, 'color' | 'onPress' | 'elementState' | 'confirmMessage'>;
 
-export type TranslatableOptionModel<TType extends string = string> = {
-  label?: TranslatableTextModel;
-} & Omit<OptionModel<TType>, 'label'>;
+export type TranslatableOptionModel<TType extends string = string> = Omit<
+  OptionModel<TType>,
+  'label'
+> & { label?: TranslatableTextModel };
 
 export type PositionModel = {
   x?: number;
