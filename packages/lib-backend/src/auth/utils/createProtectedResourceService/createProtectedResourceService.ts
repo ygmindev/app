@@ -44,7 +44,7 @@ export const createProtectedResoureService = <
             {
               condition: FILTER_CONDITION.IN,
               field: '_id',
-              value: accessAll.map(({ _id }) => _id),
+              value: accessAll.map(({ Group }) => Group),
             },
           ];
           return this.getMany(input, context);

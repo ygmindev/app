@@ -3,7 +3,7 @@ import { Group } from '#lib-backend/group/resources/Group/Group';
 import { type GroupResolverModel } from '#lib-backend/group/resources/Group/GroupResolver/GroupResolver.models';
 import { GroupService } from '#lib-backend/group/resources/Group/GroupService/GroupService';
 import { withResolver } from '#lib-backend/http/utils/withResolver/withResolver';
-import { createEntityResourceResolver } from '#lib-backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
+import { createProtectedResourceResolver } from '#lib-backend/resource/utils/createProtectedResourceResolver/createProtectedResourceResolver';
 import { GROUP_RESOURCE_NAME } from '#lib-shared/group/resources/Group/Group.constants';
 import {
   type GroupFormModel,
@@ -13,7 +13,7 @@ import {
 @withContainer()
 @withResolver({ Resource: Group })
 export class GroupResolver
-  extends createEntityResourceResolver<GroupModel, GroupFormModel>({
+  extends createProtectedResourceResolver<GroupModel, GroupFormModel>({
     Resource: Group,
     ResourceService: GroupService,
     name: GROUP_RESOURCE_NAME,

@@ -88,7 +88,7 @@ type AccessGetManyOutput {
   result: [Access]
 }
 
-input AccessGetManyUserGetManyFilterInput {
+input AccessGetManyProtectedGetManyFilterInput {
   booleanValue: Boolean
   condition: String
   dateValue: DateTime
@@ -98,11 +98,11 @@ input AccessGetManyUserGetManyFilterInput {
   stringValue: String
 }
 
-input AccessGetManyUserGetManyInput {
-  filter: [AccessGetManyUserGetManyFilterInput]
+input AccessGetManyProtectedGetManyInput {
+  filter: [AccessGetManyProtectedGetManyFilterInput]
 }
 
-type AccessGetManyUserGetManyOutput {
+type AccessGetManyProtectedGetManyOutput {
   result: [Access]
 }
 
@@ -169,6 +169,8 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 scalar DateTime
 
 type Group {
+  Group: Group
+  User: User
   _id: String
   created: DateTime
   name: String
@@ -177,6 +179,8 @@ type Group {
 }
 
 input GroupCreateFormInput {
+  Group: GroupInput
+  User: UserInput
   _id: String
   created: DateTime
   name: String
@@ -253,11 +257,31 @@ type GroupGetManyOutput {
   result: [Group]
 }
 
+input GroupGetManyProtectedGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: GroupInput
+  stringValue: String
+}
+
+input GroupGetManyProtectedGetManyInput {
+  filter: [GroupGetManyProtectedGetManyFilterInput]
+}
+
+type GroupGetManyProtectedGetManyOutput {
+  result: [Group]
+}
+
 type GroupGetOutput {
   result: Group
 }
 
 input GroupInput {
+  Group: GroupInput
+  User: UserInput
   _id: String
   created: DateTime
   name: String
@@ -303,6 +327,8 @@ type GroupUpdateOutput {
 }
 
 input GroupUpdateUpdateInput {
+  Group: GroupInput
+  User: UserInput
   _id: String
   created: DateTime
   name: String
@@ -493,10 +519,11 @@ type Query {
   AccessGet(input: AccessGetInput): AccessGetOutput
   AccessGetConnection(input: AccessGetConnectionInput): AccessGetConnectionOutput
   AccessGetMany(input: AccessGetManyInput): AccessGetManyOutput
-  AccessGetManyUserGetMany(input: AccessGetManyUserGetManyInput): AccessGetManyUserGetManyOutput
+  AccessGetManyProtectedGetMany(input: AccessGetManyProtectedGetManyInput): AccessGetManyProtectedGetManyOutput
   GroupGet(input: GroupGetInput): GroupGetOutput
   GroupGetConnection(input: GroupGetConnectionInput): GroupGetConnectionOutput
   GroupGetMany(input: GroupGetManyInput): GroupGetManyOutput
+  GroupGetManyProtectedGetMany(input: GroupGetManyProtectedGetManyInput): GroupGetManyProtectedGetManyOutput
   OtpGet(input: OtpGetInput): OtpGetOutput
   OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
   OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput

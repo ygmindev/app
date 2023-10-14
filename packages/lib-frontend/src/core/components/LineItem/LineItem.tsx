@@ -50,7 +50,7 @@ export const LineItem: LFCModel<LineItemPropsModel> = ({
         border={DIRECTION.TOP}
         isRow
         onPress={onPress}
-        p={THEME_SIZE.SMALL}>
+        p={label ? THEME_SIZE.SMALL : true}>
         <Wrapper
           flex
           isRowAlign>

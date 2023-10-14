@@ -11,8 +11,8 @@ import { withOutput } from '#lib-backend/resource/utils/withOutput/withOutput';
 import { type ProtectedResourceModel } from '#lib-shared/auth/resources/ProtectedResource/ProtectedResource.models';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
-import { ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
-import { InputModel } from '#lib-shared/resource/utils/Input/Input.models';
+import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
+import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 
 export const createProtectedResourceResolver = <

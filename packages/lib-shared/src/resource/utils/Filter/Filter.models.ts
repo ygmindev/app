@@ -1,4 +1,4 @@
-import { type PartialModel, type PrimitiveModel } from '#lib-shared/core/core.models';
+import { type PartialModel } from '#lib-shared/core/core.models';
 import { type FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
 
 export type FilterModel<TType extends unknown> = {
@@ -9,7 +9,7 @@ export type FilterModel<TType extends unknown> = {
   numberValue?: number;
   resourceValue?: PartialModel<TType>;
   stringValue?: string;
-  value?: PrimitiveModel | Array<PrimitiveModel> | PartialModel<TType>;
+  value?: unknown;
 };
 
 export type FilterConditionModel = `${FILTER_CONDITION}`;
