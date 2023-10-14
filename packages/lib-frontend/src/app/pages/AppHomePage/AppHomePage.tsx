@@ -2,8 +2,10 @@ import range from 'lodash/range';
 
 import { SkeletonGroup } from '#lib-frontend/animation/components/SkeletonGroup/SkeletonGroup';
 import { type AppHomePagePropsModel } from '#lib-frontend/app/pages/AppHomePage/AppHomePage.models';
+import { Chip } from '#lib-frontend/core/components/Chip/Chip';
 import { LineGroup } from '#lib-frontend/core/components/LineGroup/LineGroup';
 import { LineItem } from '#lib-frontend/core/components/LineItem/LineItem';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
@@ -46,7 +48,7 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
                 key={_id}
                 label={name}
                 onPress={() => null}>
-                {types?.join(',')}
+                <Wrapper isRowAlign>{types?.map((type) => <Chip key={type}>{type}</Chip>)}</Wrapper>
               </LineItem>
             ))}
           </LineGroup>
