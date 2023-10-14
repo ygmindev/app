@@ -1,6 +1,6 @@
 import { Access } from '#lib-backend/auth/resources/Access/Access';
+import { createProtectedResoureService } from '#lib-backend/auth/utils/createProtectedResourceService/createProtectedResourceService';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
-import { createEntityResourceService } from '#lib-backend/resource/utils/createEntityResourceService/createEntityResourceService';
 import { UnauthenticatedError } from '#lib-shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
 import { ACCESS_RESOURCE_NAME } from '#lib-shared/auth/resources/Access/Access.constants';
 import {
@@ -16,7 +16,7 @@ import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constan
 
 @withContainer({ name: `${ACCESS_RESOURCE_NAME}Service` })
 export class AccessService
-  extends createEntityResourceService<AccessModel, AccessFormModel>({
+  extends createProtectedResoureService<AccessModel, AccessFormModel>({
     Resource: Access,
     name: ACCESS_RESOURCE_NAME,
   })

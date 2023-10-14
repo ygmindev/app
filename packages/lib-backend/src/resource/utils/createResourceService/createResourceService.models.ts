@@ -21,4 +21,8 @@ export type CreateResourceServiceModel<
   TType,
   TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
-> = ClassModel<ResourceServiceModel<TType, TForm, TRoot> & { count(): Promise<number> }>;
+> = ClassModel<
+  ResourceServiceModel<TType, TForm, TRoot> & {
+    count(): Promise<number>;
+  }
+>;

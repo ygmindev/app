@@ -9,8 +9,7 @@ import { type EntityResourceDataModel } from '#lib-shared/resource/resources/Ent
 export const createEntityResourceResolver = <TType, TForm = EntityResourceDataModel<TType>>(
   params: CreateEntityResourceResolverParamsModel<TType, TForm>,
 ): CreateEntityResourceResolverModel<TType, TForm> => {
-  const ResourceResolver = createResourceResolver<TType, TForm>(params);
   @withResolver({ isAbstract: true })
-  class EntityResourceResolver extends ResourceResolver {}
+  class EntityResourceResolver extends createResourceResolver<TType, TForm>(params) {}
   return EntityResourceResolver as CreateEntityResourceResolverModel<TType, TForm>;
 };

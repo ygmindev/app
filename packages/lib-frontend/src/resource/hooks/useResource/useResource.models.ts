@@ -14,7 +14,7 @@ export type UseResourceParamsModel<
   TType,
   TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
-> = ResourceNameParamsModel &
+> = ResourceNameParamsModel<TRoot> &
   RootModel<TRoot> &
   ResourceServiceDecoratorModel<TType, TForm, TRoot> & {
     fields: UseResourceMethodParamsFieldsModel<ResourceMethodTypeCrudModel, TType, TRoot>;

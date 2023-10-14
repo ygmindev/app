@@ -2,6 +2,7 @@ import {
   type CreateResourceServiceModel,
   type CreateResourceServiceParamsModel,
 } from '#lib-backend/resource/utils/createResourceService/createResourceService.models';
+import { type PrototypeModel } from '#lib-shared/core/core.models';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
@@ -9,10 +10,7 @@ import { collapseFilter } from '#lib-shared/resource/utils/collapseFilter/collap
 import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
-import {
-  type ResourceServiceDecoratorModel,
-  type ResourceServiceModel,
-} from '#lib-shared/resource/utils/ResourceService/ResourceService.models';
+import { type ResourceServiceDecoratorModel } from '#lib-shared/resource/utils/ResourceService/ResourceService.models';
 
 export const createResourceService = <
   TType,
@@ -43,7 +41,7 @@ export const createResourceService = <
   TForm,
   TRoot
 > => {
-  class ResourceService implements ResourceServiceModel<TType, TForm, TRoot> {
+  class ResourceService implements PrototypeModel<CreateResourceServiceModel<TType, TForm, TRoot>> {
     protected _decorators: ResourceServiceDecoratorModel<TType, TForm, TRoot> = {
       afterCreate,
       afterGet,

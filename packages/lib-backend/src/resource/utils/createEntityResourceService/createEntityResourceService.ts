@@ -29,14 +29,12 @@ export const createEntityResourceService = <TType, TForm = EntityResourceDataMod
   TForm
 > => {
   let repository: RepositoryModel<TType, TForm>;
-
   const getRepository = (): RepositoryModel<TType, TForm> => {
     repository =
       repository ??
       Container.get(Database, DATABASE_TYPE.MONGO).getRepository<TType, TForm>({ name });
     return repository;
   };
-
   return createResourceService<TType, TForm>({
     Resource,
     afterCreate,

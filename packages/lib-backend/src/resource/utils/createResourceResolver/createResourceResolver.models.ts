@@ -43,13 +43,7 @@ export type CreateResourceResolverModel<
   TType,
   TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
-> = ResourceClassModel<ResourceResolverModel<TType, TForm, TRoot>>;
-
-export type ResourceResolverModel<
-  TType,
-  TForm = EntityResourceDataModel<TType>,
-  TRoot = undefined,
-> = ResourceServiceModel<TType, TForm, TRoot>;
+> = ResourceClassModel<ResourceServiceModel<TType, TForm, TRoot>>;
 
 export type ResourceResolverAccessTypeModel =
   | 'default'

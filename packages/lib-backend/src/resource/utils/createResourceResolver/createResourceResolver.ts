@@ -5,11 +5,11 @@ import { type ResourceClassModel } from '#lib-backend/resource/resource.models';
 import {
   type CreateResourceResolverModel,
   type CreateResourceResolverParamsModel,
-  type ResourceResolverModel,
 } from '#lib-backend/resource/utils/createResourceResolver/createResourceResolver.models';
 import { withAuthorizer } from '#lib-backend/resource/utils/withAuthorizer/withAuthorizer';
 import { withInput } from '#lib-backend/resource/utils/withInput/withInput';
 import { withOutput } from '#lib-backend/resource/utils/withOutput/withOutput';
+import { type PrototypeModel } from '#lib-shared/core/core.models';
 import { NotImplementedError } from '#lib-shared/core/errors/NotImplementedError/NotImplementedError';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import { withCondition } from '#lib-shared/core/utils/withCondition/withCondition';
@@ -45,7 +45,9 @@ export const createResourceResolver = <
   const removeExists = prototype.remove !== undefined;
 
   @withResolver({ isAbstract: true })
-  class ResourceResolver implements ResourceResolverModel<TType, TForm, TRoot> {
+  class ResourceResolver
+    implements PrototypeModel<CreateResourceResolverModel<TType, TForm, TRoot>>
+  {
     protected _service = Container.get(ResourceService);
 
     @withCondition(

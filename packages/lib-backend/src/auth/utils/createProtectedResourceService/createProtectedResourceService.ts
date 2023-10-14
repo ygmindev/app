@@ -54,5 +54,5 @@ export const createProtectedResoureService = <
       throw new UnauthenticatedError();
     }
   }
-  return ProtectedResourceService as CreateProtectedResoureServiceModel<TType, TForm>;
+  return ProtectedResourceService;
 };

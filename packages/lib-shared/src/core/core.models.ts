@@ -15,7 +15,7 @@ import { type BOOLEAN_STRING } from '#lib-shared/core/core.constants';
 
 export type ClassModel<TType = object> = Class<TType>;
 
-export type PrototypeModel<TType> = TType extends ClassModel<infer TClass> ? TClass : never;
+export type PrototypeModel<TType> = TType extends ClassModel<infer TPrototype> ? TPrototype : never;
 
 export type PrimitiveModel = Primitive | Date;
 

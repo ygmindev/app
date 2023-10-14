@@ -11,9 +11,12 @@ export type EntityResourceModel = {
 };
 
 export type EntityResourceDataModel<TType> = {
-  [TKey in keyof Omit<TType, keyof EntityResourceModel>]?: TType[TKey] extends EntityResourceModel
+  [TKey in keyof Omit<
+    TType,
+    keyof RequiredModel<EntityResourceModel>
+  >]?: RequiredModel<TType>[TKey] extends EntityResourceModel
     ? Pick<EntityResourceModel, '_id'>
-    : TType[TKey];
+    : RequiredModel<TType>[TKey];
 };
 
 export type EntityResourcePartialModel<TType> =
