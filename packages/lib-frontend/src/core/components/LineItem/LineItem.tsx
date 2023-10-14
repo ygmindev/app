@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { Skeleton } from '#lib-frontend/animation/components/Skeleton/Skeleton';
 import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
@@ -13,6 +14,7 @@ import { isTranslatableText } from '#lib-frontend/locale/utils/isTranslatableTex
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
+import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 export const LineItem: LFCModel<LineItemPropsModel> = ({
   children,
@@ -41,24 +43,25 @@ export const LineItem: LFCModel<LineItemPropsModel> = ({
     <Activatable
       onActive={() => isActiveSet(true)}
       onInactive={() => isActiveSet(false)}>
-      <Wrapper
+      <Skeleton
         {...wrapperProps}
         border={DIRECTION.TOP}
-        isRow
-        onPress={onPress}
-        p={label ? THEME_SIZE.SMALL : true}>
+        p>
         <Wrapper
           flex
-          isRowAlign>
-          {icon && (
-            <Wrapper width={theme.shape.size[THEME_SIZE.SMALL]}>
-              <Icon icon={icon} />
-            </Wrapper>
-          )}
+          isRow
+          onPress={onPress}>
+          <Wrapper
+            flex
+            isRowAlign>
+            {icon && (
+              <Wrapper width={theme.shape.size[THEME_SIZE.SMALL]}>
+                <Icon icon={icon} />
+              </Wrapper>
+            )}
 
-          {label || children ? (
             <Wrapper s={THEME_SIZE.SMALL}>
-              <TranslatableText isBold>{label}</TranslatableText>
+              <TranslatableText type={FONT_TYPE.TITLE}>{label}</TranslatableText>
 
               {isTranslatableText(children) ? (
                 <TranslatableText>{children}</TranslatableText>
@@ -66,11 +69,11 @@ export const LineItem: LFCModel<LineItemPropsModel> = ({
                 children
               )}
             </Wrapper>
-          ) : null}
-        </Wrapper>
+          </Wrapper>
 
-        {rightElementF && rightElementF(isActive)}
-      </Wrapper>
+          {rightElementF && rightElementF(isActive)}
+        </Wrapper>
+      </Skeleton>
     </Activatable>
   );
 };

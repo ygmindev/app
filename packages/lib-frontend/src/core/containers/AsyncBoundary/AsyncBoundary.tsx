@@ -36,13 +36,13 @@ export const AsyncBoundary: LFCModel<AsyncBoundaryPropsModel> = ({
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
   const [errorContext, errorContextSet] = useState<ErrorContextModel | undefined>();
+
   const { reset } = useQueryContext();
   return (
     <asyncBoundaryContext.Provider
       value={{ errorContextGet, errorContextSet, errorMode, handleRefresh: reset }}>
       {errorContext ? (
         <Wrapper
-          {...wrapperProps}
           flex
           isCenter
           s={THEME_SIZE.SMALL}>
@@ -70,13 +70,18 @@ export const AsyncBoundary: LFCModel<AsyncBoundaryPropsModel> = ({
           fallback={
             fallback ?? (
               <Wrapper
+                {...wrapperProps}
                 flex
                 isCenter>
                 <Loading />
               </Wrapper>
             )
           }>
-          {children}
+          <Wrapper
+            {...wrapperProps}
+            flex>
+            {children}
+          </Wrapper>
         </Suspense>
       )}
     </asyncBoundaryContext.Provider>
