@@ -1,8 +1,5 @@
-import { Button } from '#lib-frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { LineGroup } from '#lib-frontend/core/components/LineGroup/LineGroup';
 import { LineItem } from '#lib-frontend/core/components/LineItem/LineItem';
-import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type RouteGroupPropsModel } from '#lib-frontend/route/components/RouteGroup/RouteGroup.models';
@@ -24,14 +21,7 @@ export const RouteGroup: LFCModel<RouteGroupPropsModel> = ({ label, root, routes
           label={label}
           onPress={() =>
             push({ pathname: `${root === true ? location.pathname : root ?? ''}/${id}` })
-          }
-          rightElement={(isActive) => (
-            <Button
-              elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
-              icon="chevronRight"
-              type={BUTTON_TYPE.INVISIBLE}
-            />
-          )}>
+          }>
           {''}
         </LineItem>
       ))}

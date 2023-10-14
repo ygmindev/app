@@ -3,7 +3,6 @@ import range from 'lodash/range';
 import { type AppHomePagePropsModel } from '#lib-frontend/app/pages/AppHomePage/AppHomePage.models';
 import { Chip } from '#lib-frontend/core/components/Chip/Chip';
 import { LineGroup } from '#lib-frontend/core/components/LineGroup/LineGroup';
-import { LineItem } from '#lib-frontend/core/components/LineItem/LineItem';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
@@ -12,6 +11,7 @@ import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBou
 import { useGroupResource } from '#lib-frontend/funding/hooks/useGroupResource/useGroupResource';
 import { GROUP } from '#lib-frontend/group/group.constants';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { RouteLineItem } from '#lib-frontend/route/components/RouteLineItem/RouteLineItem';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
@@ -30,13 +30,6 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
 
       <LineGroup title={t('group:group_plural', { value: currentUser?.email })}>
         <DataBoundary
-          // fallback={
-          //   <SkeletonGroup>
-          //     {range(3).map((i) => (
-          //       <LineItem key={i} />
-          //     ))}
-          //   </SkeletonGroup>
-          // }
           fallbackData={{
             result: range(3).map((i) => ({ _id: `${i}` })),
           }}
@@ -45,14 +38,16 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
           {({ data }) => (
             <>
               {data?.result?.map(({ _id, name, types }) => (
-                <LineItem
+                <RouteLineItem
                   key={_id}
                   label={name}
-                  onPress={() => null}>
+                  onPress={() => null}
+                  root={GROUP}
+                  route={{ pathname: _id }}>
                   <Wrapper isRowAlign>
                     {types?.map((type) => <Chip key={type}>{type}</Chip>)}
                   </Wrapper>
-                </LineItem>
+                </RouteLineItem>
               ))}
             </>
           )}
