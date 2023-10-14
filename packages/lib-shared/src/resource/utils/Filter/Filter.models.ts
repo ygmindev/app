@@ -9,7 +9,7 @@ export type FilterModel<TType extends unknown> = {
   numberValue?: number;
   resourceValue?: PartialModel<TType>;
   stringValue?: string;
-  value?: PrimitiveModel | PartialModel<TType>;
+  value?: PrimitiveModel | Array<PrimitiveModel> | PartialModel<TType>;
 };
 
 export type FilterConditionModel = `${FILTER_CONDITION}`;

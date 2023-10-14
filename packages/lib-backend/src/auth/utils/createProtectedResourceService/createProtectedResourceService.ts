@@ -7,7 +7,12 @@ import { Container } from '#lib-backend/core/utils/Container/Container';
 import { createEntityResourceService } from '#lib-backend/resource/utils/createEntityResourceService/createEntityResourceService';
 import { UnauthenticatedError } from '#lib-shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
 import { type ProtectedResourceModel } from '#lib-shared/auth/resources/ProtectedResource/ProtectedResource.models';
+import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
+import { FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
+import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
+import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
 
 export const createProtectedResoureService = <
@@ -19,17 +24,35 @@ export const createProtectedResoureService = <
   TType,
   TForm
 > => {
-  return createEntityResourceService<TType, TForm>({
+  class ProtectedResourceService extends createEntityResourceService<TType, TForm>({
     ...params,
-    beforeGet: async ({ input }, context) => {
+  }) {
+    async getManyProtected(
+      input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm>,
+      context?: ContextModel,
+    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>> {
       const userId = context?.user?._id;
       if (userId) {
-        const accessAll = Container.get(AccessService).getMany({
-          filter: [{ field: USER_RESOURCE_NAME, value: { _id: userId } }],
-        });
-        return input;
+        const accessAll = (
+          await Container.get(AccessService).getMany({
+            filter: [{ field: USER_RESOURCE_NAME, value: { _id: userId } }],
+          })
+        ).result;
+        if (accessAll) {
+          input.filter = [
+            ...input.filter,
+            {
+              condition: FILTER_CONDITION.IN,
+              field: '_id',
+              value: accessAll.map(({ _id }) => _id),
+            },
+          ];
+          return this.getMany(input, context);
+        }
+        return { result: [] };
       }
       throw new UnauthenticatedError();
-    },
-  });
+    }
+  }
+  return ProtectedResourceService as CreateProtectedResoureServiceModel<TType, TForm>;
 };

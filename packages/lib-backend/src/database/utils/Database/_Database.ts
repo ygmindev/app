@@ -10,7 +10,6 @@ import { type _DatabaseModel } from '#lib-backend/database/utils/Database/_Datab
 import { type RepositoryModel } from '#lib-backend/database/utils/Database/Database.models';
 import { getConnection } from '#lib-backend/database/utils/getConnection/getConnection';
 import { type _DatabaseConfigModel } from '#lib-config/database/database.models';
-import { type PartialDeepModel } from '#lib-shared/core/core.models';
 import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/DuplicateError';
 import { UninitializedError } from '#lib-shared/core/errors/UninitializedError/UninitializedError';
 import { debug, info } from '#lib-shared/logging/utils/logger/logger';
@@ -190,7 +189,7 @@ export class _Database implements _DatabaseModel {
             updateF['$set'] = {
               ...(updateF['$set'] ?? {}),
               [key]: updateF[keyF],
-            } as PartialDeepModel<EntityResourceDataModel<TType>>;
+            } as EntityResourceDataModel<TType>;
             delete updateF[keyF];
           }
         });

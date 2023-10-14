@@ -39,11 +39,24 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
         }
         id="accesses"
         query={async () => getManyUser({ filter: [] })}>
-        {({ data }) => (
+        {/* {({ data }) => (
           <LineGroup title={t('group:group_plural', { value: currentUser?.email })}>
             {data?.result?.map((value) => <LineItem key={value._id} />)}
           </LineGroup>
-        )}
+        )} */}
+        {({ data }) => {
+          console.warn(data);
+          return (
+            <LineGroup title={t('group:group_plural', { value: currentUser?.email })}>
+              {data?.result?.map(({ _id }) => (
+                <LineItem
+                  key={_id}
+                  label={_id}
+                />
+              ))}
+            </LineGroup>
+          );
+        }}
       </DataBoundary>
     </MainLayout>
   );

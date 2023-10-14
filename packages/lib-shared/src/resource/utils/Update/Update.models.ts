@@ -1,8 +1,4 @@
-import {
-  type InferModel,
-  type PartialDeepModel,
-  type PartialModel,
-} from '#lib-shared/core/core.models';
+import { type InferModel, type PartialModel } from '#lib-shared/core/core.models';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export type UnsetModel<TType> = {
@@ -16,6 +12,6 @@ export type UpdateElementModel<TType> = {
 export type UpdateModel<TType> = PartialModel<EntityResourceDataModel<TType>> & {
   $pull?: UpdateElementModel<TType>;
   $push?: UpdateElementModel<TType>;
-  $set?: PartialDeepModel<EntityResourceDataModel<TType>>;
+  $set?: EntityResourceDataModel<TType>;
   $unset?: UnsetModel<TType>;
 };

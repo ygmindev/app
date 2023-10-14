@@ -1,9 +1,8 @@
-import {
-  type CreateEntityResourceServiceModel,
-  type CreateEntityResourceServiceParamsModel,
-} from '#lib-backend/resource/utils/createEntityResourceService/createEntityResourceService.models';
+import { type CreateEntityResourceServiceParamsModel } from '#lib-backend/resource/utils/createEntityResourceService/createEntityResourceService.models';
 import { type ProtectedResourceModel } from '#lib-shared/auth/resources/ProtectedResource/ProtectedResource.models';
+import { type ClassModel } from '#lib-shared/core/core.models';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceServiceModel } from '#lib-shared/resource/resources/EntityResource/EntityResourceService/EntityResourceService.models';
 
 export type CreateProtectedResoureServiceParamsModel<
   TType extends ProtectedResourceModel,
@@ -13,4 +12,8 @@ export type CreateProtectedResoureServiceParamsModel<
 export type CreateProtectedResoureServiceModel<
   TType extends ProtectedResourceModel,
   TForm = EntityResourceDataModel<TType>,
-> = CreateEntityResourceServiceModel<TType, TForm>;
+> = ClassModel<
+  EntityResourceServiceModel<TType, TForm> & {
+    getManyProtected: EntityResourceServiceModel<TType, TForm>['getMany'];
+  }
+>;
