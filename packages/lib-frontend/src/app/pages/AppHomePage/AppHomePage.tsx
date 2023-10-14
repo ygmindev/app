@@ -1,6 +1,5 @@
 import range from 'lodash/range';
 
-import { SkeletonGroup } from '#lib-frontend/animation/components/SkeletonGroup/SkeletonGroup';
 import { type AppHomePagePropsModel } from '#lib-frontend/app/pages/AppHomePage/AppHomePage.models';
 import { Chip } from '#lib-frontend/core/components/Chip/Chip';
 import { LineGroup } from '#lib-frontend/core/components/LineGroup/LineGroup';
@@ -31,13 +30,16 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
 
       <LineGroup title={t('group:group_plural', { value: currentUser?.email })}>
         <DataBoundary
-          fallback={
-            <SkeletonGroup>
-              {range(3).map((i) => (
-                <LineItem key={i} />
-              ))}
-            </SkeletonGroup>
-          }
+          // fallback={
+          //   <SkeletonGroup>
+          //     {range(3).map((i) => (
+          //       <LineItem key={i} />
+          //     ))}
+          //   </SkeletonGroup>
+          // }
+          fallbackData={{
+            result: range(3).map((i) => ({ _id: `${i}` })),
+          }}
           id="accesses"
           query={async () => getManyProtected({ filter: [] })}>
           {({ data }) => (

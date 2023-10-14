@@ -19,6 +19,7 @@ import {
 } from '#lib-shared/auth/resources/SignIn/SignIn.models';
 import { GRAPHQL_OPERATION_TYPE } from '#lib-shared/graphql/graphql.constants';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
+import { type EntityResourcePartialModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type UserFormModel, type UserModel } from '#lib-shared/user/resources/User/User.models';
@@ -32,7 +33,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
 
   const handleUpdateSuccess = (): void => success({ message: t('core:updateSuccess') });
 
-  const signIn = async (signIn?: SignInModel): Promise<void> => {
+  const signIn = async (signIn?: EntityResourcePartialModel<SignInModel>): Promise<void> => {
     if (signIn) {
       const { token, user } = signIn;
       actions?.user.currentUserSet(user ?? null);

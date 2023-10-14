@@ -12,7 +12,9 @@ export type DataBoundaryPropsModel<TParams = undefined, TResult = void> = Omit<
   'children'
 > &
   WithIdModel &
-  PartialModel<QueryComponentPropsModel<TResult> & MutateComponentPropsModel<TParams, TResult>>;
+  PartialModel<QueryComponentPropsModel<TResult> & MutateComponentPropsModel<TParams, TResult>> & {
+    fallbackData?: TResult;
+  };
 
 export type QueryComponentPropsModel<TResult = void> = WithIdModel &
   ChildrenPropsModel<(props: { data?: TResult | null }) => ReactElement | NilModel> & {

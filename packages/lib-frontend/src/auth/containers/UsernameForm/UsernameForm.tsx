@@ -29,6 +29,7 @@ import { pick } from '#lib-shared/core/utils/pick/pick';
 import { FORM_MODE } from '#lib-shared/data/data.constants';
 import { type HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
+import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
   method,
@@ -50,7 +51,9 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
 
   const checkExists = mode === FORM_MODE.UPDATE;
 
-  const handleSubmit = async (data: UsernameFormModel): Promise<OtpModel | null> => {
+  const handleSubmit = async (
+    data: UsernameFormModel,
+  ): Promise<EntityResourceDataModel<OtpModel> | null> => {
     onSubmit && (await onSubmit(data));
     const form: OtpFormModel = pick(data, ['callingCode', 'phone', 'email']);
     if (checkExists) {

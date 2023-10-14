@@ -1,5 +1,6 @@
 import { type ReactElement } from 'react';
 
+import { SkeletonGroup } from '#lib-frontend/animation/components/SkeletonGroup/SkeletonGroup';
 import { AsyncBoundary } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
 import { type LFCPropsModel, type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
@@ -36,6 +37,7 @@ const MutateComponent = <TParams = undefined, TResult = void>({
 
 export const DataBoundary = <TParams = undefined, TResult = void>({
   children,
+  fallbackData,
   id,
   mutate,
   query,
@@ -43,7 +45,13 @@ export const DataBoundary = <TParams = undefined, TResult = void>({
 }: LFCPropsModel<DataBoundaryPropsModel<TParams, TResult>>): ReactElement<
   LFCPropsModel<DataBoundaryPropsModel<TParams, TResult>>
 > => (
-  <AsyncBoundary {...props}>
+  <AsyncBoundary
+    {...props}
+    fallback={
+      props.fallback ?? fallbackData ? (
+        <SkeletonGroup>{children && children({ data: fallbackData })}</SkeletonGroup>
+      ) : undefined
+    }>
     {query ? (
       <QueryComponent<TResult>
         id={id}

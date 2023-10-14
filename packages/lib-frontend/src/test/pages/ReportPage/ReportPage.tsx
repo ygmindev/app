@@ -16,7 +16,7 @@ export const ReportPage: SFCModel<ReportPagePropsModel> = ({ testID, ...props })
       testID={testID}>
       <RouteGroup
         label="tests"
-        routes={data?.result?.map(({ name }) => ({ id: name, label: name }))}
+        routes={data?.result?.map(({ name }) => ({ id: name || '', label: name }))}
       />
     </MainLayout>
   );

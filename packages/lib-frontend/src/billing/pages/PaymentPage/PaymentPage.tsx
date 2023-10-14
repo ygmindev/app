@@ -18,6 +18,7 @@ import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { type PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { sort } from '#lib-shared/core/utils/sort/sort';
+import { type EntityResourcePartialModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { ACCOUNT } from '#lib-shared/user/user.constants';
 
 export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props }) => {
@@ -31,7 +32,9 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
   const tPaymentMethod = t('billing:paymentMethod');
   const tPaymentMethodAdd = t('core:add', { value: tPaymentMethod });
 
-  const query = async (): Promise<Array<PaymentMethodModel> | undefined> => {
+  const query = async (): Promise<
+    Array<EntityResourcePartialModel<PaymentMethodModel>> | undefined
+  > => {
     const { result } = await getMany({ filter: [] });
     const resultF =
       result &&

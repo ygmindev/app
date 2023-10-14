@@ -1,5 +1,6 @@
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
+import { type EntityResourcePartialModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { type ConnectionModel } from '#lib-shared/resource/utils/Connection/Connection.models';
 
 export type ResultModel<TMethod extends ResourceMethodTypeModel, TType> = TMethod extends
@@ -7,9 +8,9 @@ export type ResultModel<TMethod extends ResourceMethodTypeModel, TType> = TMetho
   | RESOURCE_METHOD_TYPE.GET
   | RESOURCE_METHOD_TYPE.UPDATE
   | RESOURCE_METHOD_TYPE.REMOVE
-  ? TType
+  ? EntityResourcePartialModel<TType>
   : TMethod extends RESOURCE_METHOD_TYPE.GET_MANY
-  ? Array<TType>
+  ? Array<EntityResourcePartialModel<TType>>
   : TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION
   ? ConnectionModel<TType>
   : never;

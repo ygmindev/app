@@ -1,9 +1,8 @@
-import { type FilterQuery } from '@mikro-orm/core';
 import { MikroORM } from '@mikro-orm/core';
 import { type EntityManager } from '@mikro-orm/mongodb';
 import isString from 'lodash/isString';
 import last from 'lodash/last';
-import { type Filter, type MongoError, ObjectId, type UpdateFilter } from 'mongodb';
+import { type Document, type Filter, type MongoError, ObjectId, type UpdateFilter } from 'mongodb';
 
 import { cleanDocument } from '#lib-backend/database/utils/cleanDocument/cleanDocument';
 import { type _DatabaseModel } from '#lib-backend/database/utils/Database/_Database.models';
@@ -15,7 +14,10 @@ import { UninitializedError } from '#lib-shared/core/errors/UninitializedError/U
 import { debug, info } from '#lib-shared/logging/utils/logger/logger';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type ResourceNameParamsModel } from '#lib-shared/resource/resource.models';
-import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import {
+  type EntityResourceDataModel,
+  type EntityResourcePartialModel,
+} from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
 import {
   type FilterConditionModel,
@@ -24,33 +26,28 @@ import {
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
 
-const getFilter = <TType extends unknown>(
-  filters?: Array<FilterModel<TType>>,
-): Filter<TType & object> =>
+const getFilter = <TType extends unknown>(filters?: Array<FilterModel<TType>>): Filter<TType> =>
   filters
-    ? filters.reduce(
-        (result, v) => {
-          const conditionF = v.condition ?? FILTER_CONDITION.EQUAL;
+    ? filters.reduce((result, v) => {
+        const conditionF = v.condition ?? FILTER_CONDITION.EQUAL;
 
-          return {
-            ...result,
-            [v.field]: (
-              [
-                FILTER_CONDITION.CONTAINS,
-                FILTER_CONDITION.NOT_CONTAINS,
-              ] as Array<FilterConditionModel>
-            ).includes(conditionF)
-              ? { $regex: new RegExp(v.value as string, 'i') }
-              : {
-                  [conditionF]:
-                    last((v.field as string).split('.'))?.startsWith('_') && isString(v.value)
-                      ? new ObjectId(v.value)
-                      : v.value,
-                },
-          };
-        },
-        {} as Filter<TType & object>,
-      )
+        return {
+          ...result,
+          [v.field]: (
+            [
+              FILTER_CONDITION.CONTAINS,
+              FILTER_CONDITION.NOT_CONTAINS,
+            ] as Array<FilterConditionModel>
+          ).includes(conditionF)
+            ? { $regex: new RegExp(v.value as string, 'i') }
+            : {
+                [conditionF]:
+                  last((v.field as string).split('.'))?.startsWith('_') && isString(v.value)
+                    ? new ObjectId(v.value)
+                    : v.value,
+              },
+        };
+      }, {} as Filter<TType>)
     : {};
 
 export class _Database implements _DatabaseModel {
@@ -92,20 +89,18 @@ export class _Database implements _DatabaseModel {
   }: ResourceNameParamsModel): RepositoryModel<TType, TForm> => {
     const service: RepositoryModel<TType, TForm> = {
       clear: async () => {
-        await this._getEntityManager()
-          .getRepository<TType & object>(name)
-          .nativeDelete({} as FilterQuery<TType & object>);
+        await this._getEntityManager().getRepository(name).nativeDelete({});
       },
 
-      count: async () => this._getEntityManager().getRepository<TType & object>(name).count(),
+      count: async () => this._getEntityManager().getRepository(name).count(),
 
       create: async ({ form, options }) => {
         try {
           const em = this._getEntityManager();
-          const formF = cleanDocument(form) as TType & object;
-          const result = em.create<TType & object>(name, formF);
+          const formF = cleanDocument(form);
+          const result = em.create(name, formF as object);
           !options?.isCommitted && (await em.persistAndFlush(result));
-          return { result };
+          return { result: result as EntityResourcePartialModel<TType> };
         } catch (e) {
           switch ((e as MongoError).code as unknown as number) {
             case 11000:
@@ -118,7 +113,7 @@ export class _Database implements _DatabaseModel {
 
       get: async ({ filter, options }) => {
         const em = this._getEntityManager();
-        const filterF = cleanDocument(getFilter<TType>(filter) as FilterQuery<TType & object>);
+        const filterF = cleanDocument(getFilter<TType>(filter));
         const collection = em.getCollection(name);
         const result = (await (options?.aggregate
           ? collection
@@ -129,7 +124,10 @@ export class _Database implements _DatabaseModel {
                   : []),
               ] as unknown as Document[])
               .next()
-          : collection.findOne(filterF, options && { projection: options.project }))) as TType;
+          : collection.findOne(
+              filterF as Filter<Document>,
+              options && { projection: options.project },
+            ))) as EntityResourcePartialModel<TType>;
         return { result: result ?? undefined };
       },
 
@@ -146,9 +144,8 @@ export class _Database implements _DatabaseModel {
       getMany: async ({ filter, options }) => {
         const em = this._getEntityManager();
         const collection = em.getCollection(name);
-        const filterF = cleanDocument(getFilter<TType>(filter) as FilterQuery<TType & object>);
-        console.warn(filterF);
-        const result = (await (options && options.aggregate
+        const filterF = cleanDocument(getFilter<TType>(filter));
+        const result = await (options && options.aggregate
           ? collection
               .aggregate([
                 { $match: filterF },
@@ -164,18 +161,18 @@ export class _Database implements _DatabaseModel {
               .toArray()
           : collection
               .find(
-                filterF,
+                filterF as Filter<Document>,
                 options && { limit: options.take, projection: options.project, skip: options.skip },
               )
-              .toArray())) as Array<TType>;
-        return { result: result ?? undefined };
+              .toArray());
+        return { result: (result as Array<EntityResourcePartialModel<TType>>) ?? undefined };
       },
 
       remove: async ({ filter }) => {
         const em = this._getEntityManager();
-        const filterF = getFilter<TType>(filter) as FilterQuery<TType & object>;
+        const filterF = getFilter<TType>(filter);
         const entity = await service.get({ filter });
-        await em.getRepository<TType & object>(name).nativeDelete(filterF);
+        await em.getRepository(name).nativeDelete(filterF);
         return entity as unknown as OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType>;
       },
 
@@ -196,8 +193,8 @@ export class _Database implements _DatabaseModel {
 
         const { value: result } = await em
           .getConnection()
-          .getCollection<TType & object>(name)
-          .findOneAndUpdate(filterF, updateF as UpdateFilter<TType & object>, {
+          .getCollection(name)
+          .findOneAndUpdate(filterF as Filter<Document>, updateF as UpdateFilter<object>, {
             projection: options?.project ? cleanDocument(options.project) : undefined,
             returnDocument: 'after',
           });

@@ -1,5 +1,5 @@
 import {
-  type EmptyObjectModel,
+  type PartialModel,
   type PrimitiveModel,
   type RequiredModel,
 } from '#lib-shared/core/core.models';
@@ -19,15 +19,12 @@ export type EntityResourceDataModel<TType> = {
     : RequiredModel<TType>[TKey];
 };
 
-export type EntityResourcePartialModel<TType> =
-  | TType
-  | ((TType extends EntityResourceModel ? { _id: string } : EmptyObjectModel) & {
-      [TKey in keyof Omit<
-        TType,
-        keyof EntityResourceModel
-      >]?: RequiredModel<TType>[TKey] extends PrimitiveModel
-        ? TType[TKey]
-        : RequiredModel<TType>[TKey] extends Array<infer TValue>
-        ? Array<EntityResourcePartialModel<TValue>>
-        : EntityResourcePartialModel<TType[TKey]>;
-    });
+export type EntityResourcePartialModel<TType> = TType extends PrimitiveModel
+  ? TType
+  : TType extends Array<infer TElement>
+  ? Array<EntityResourcePartialModel<TElement>>
+  : (TType extends EntityResourceModel ? { _id: string } : PartialModel<Omit<TType, '_id'>>) & {
+      [TKey in keyof Omit<RequiredModel<TType>, '_id'>]?: EntityResourcePartialModel<
+        RequiredModel<TType>[TKey]
+      >;
+    };
