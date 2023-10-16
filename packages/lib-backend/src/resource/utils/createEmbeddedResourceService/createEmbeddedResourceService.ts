@@ -16,8 +16,12 @@ import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import { pick } from '#lib-shared/core/utils/pick/pick';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type EmbeddedResourceModel } from '#lib-shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
-import { type EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import {
+  type EntityResourceModel,
+  type EntityResourcePartialModel,
+} from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { type ProjectModel } from '#lib-shared/resource/utils/Args/Args.models';
+import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type RootModel } from '#lib-shared/resource/utils/Root/Root.models';
@@ -52,10 +56,12 @@ export const createEmbeddedResourceService = <
 >): CreateEmbeddedResourceServiceModel<TType, TForm, TRoot> => {
   const beforeCreateF = async (
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
+    context?: ContextModel,
   ): Promise<InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>> => {
     const value = new Resource();
-    forEach(input.form as unknown as object, (v, k) => ((value as Record<string, unknown>)[k] = v));
+    forEach(input.form as unknown as object, (v, k) => (value[k as keyof typeof value] = v));
     value.beforeCreate && (await value.beforeCreate());
+    beforeCreate && (await beforeCreate({ input }, context));
     return { ...input, form: value as unknown as TForm };
   };
 
@@ -115,15 +121,15 @@ export const createEmbeddedResourceService = <
     beforeRemove,
     beforeUpdate,
     count,
-    create: async (input) => {
-      const inputF = await beforeCreateF(input);
+    create: async (input, context) => {
+      const inputF = await beforeCreateF(input, context);
       const value = inputF.form;
       const { result: rootResult } = await rootService.update({
         filter: objectToEquality(inputF.root),
         update: { $push: { [name]: value } } as UpdateModel<TRoot>,
       });
       return {
-        result: value as unknown as TType,
+        result: value as unknown as EntityResourcePartialModel<TType>,
         root: rootResult,
       };
     },

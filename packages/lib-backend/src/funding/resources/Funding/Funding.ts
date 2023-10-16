@@ -19,7 +19,7 @@ export class Funding extends EntityResource implements FundingModel {
     isArray: true,
     isOptional: true,
     isRepository: true,
-    relation: FIELD_RELATION.ONE_TO_MANY,
+    relation: FIELD_RELATION.EMBEDDED,
     type: PROPERTY_TYPE.RESOURCE,
   })
   [CREDIT_RATING_RESOURCE_NAME]?: Array<CreditRatingModel>;

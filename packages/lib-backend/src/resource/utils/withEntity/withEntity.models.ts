@@ -1,7 +1,7 @@
 export type WithEntityParamsModel<TType extends unknown> = {
   indices?: Array<Array<keyof TType>>;
   isAbstract?: boolean;
-  isEmbedded?: boolean;
+  isEmbeddable?: boolean;
   isRepository?: boolean;
   isSchema?: boolean;
   isSchemaInput?: boolean;

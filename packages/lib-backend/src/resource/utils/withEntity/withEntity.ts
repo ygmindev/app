@@ -8,7 +8,7 @@ import { NotImplementedError } from '#lib-shared/core/errors/NotImplementedError
 export const withEntity = <TType extends unknown>({
   indices = [],
   isAbstract = false,
-  isEmbedded = false,
+  isEmbeddable = false,
   isRepository = false,
   isSchema = true,
   isSchemaInput = true,
@@ -22,7 +22,7 @@ export const withEntity = <TType extends unknown>({
     isSchema && ObjectType(nameF)(Base as unknown as ClassModel);
     isSchemaInput && InputType(`${nameF}Input`)(Base as unknown as ClassModel);
     let BaseF = isRepository
-      ? (isEmbedded ? Embeddable : Entity)({
+      ? (isEmbeddable ? Embeddable : Entity)({
           abstract: isAbstract,
           collection: nameF,
           tableName: nameF,

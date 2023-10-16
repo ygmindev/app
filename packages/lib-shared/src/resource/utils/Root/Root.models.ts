@@ -1,5 +1,5 @@
-import { type PartialModel } from '#lib-shared/core/core.models';
+import { type EntityResourcePartialModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export type RootModel<TRoot = undefined> = {
-  root?: PartialModel<TRoot>;
+  root?: EntityResourcePartialModel<TRoot>;
 };

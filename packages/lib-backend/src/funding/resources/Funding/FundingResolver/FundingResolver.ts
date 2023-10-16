@@ -16,10 +16,6 @@ export class FundingResolver
   extends createEntityResourceResolver<FundingModel, FundingFormModel>({
     Resource: Funding,
     ResourceService: FundingService,
-    // TODO: deleteme
-    // authorizer: {
-    //   [RESOURCE_METHOD_TYPE.CREATE]: selfAuthorizer((input) => input.form._user),
-    // },
     name: FUNDING_RESOURCE_NAME,
   })
   implements FundingResolverModel {}

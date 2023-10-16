@@ -1,5 +1,7 @@
 import { Access } from '#lib-backend/auth/resources/Access/Access';
 import { Otp } from '#lib-backend/auth/resources/Otp/Otp';
+import { CreditRating } from '#lib-backend/funding/resources/CreditRating/CreditRating';
+import { Funding } from '#lib-backend/funding/resources/Funding/Funding';
 // import { Bank } from '#lib-backend/billing/resources/Bank/Bank';
 // import { Card } from '#lib-backend/billing/resources/Card/Card';
 // import { CreditRating } from '#lib-backend/funding/resources/CreditRating/CreditRating';
@@ -20,8 +22,8 @@ const { _config, config } = defineConfig({
       Access,
       // Bank,
       // Card,
-      // CreditRating,
-      // Funding,
+      CreditRating,
+      Funding,
       Group,
       Otp,
       RatingAgency,

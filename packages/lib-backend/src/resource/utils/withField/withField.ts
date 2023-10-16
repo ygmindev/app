@@ -1,5 +1,6 @@
 import {
   ArrayType,
+  Embedded,
   type EntityClass,
   Index,
   ManyToMany,
@@ -58,6 +59,12 @@ const getColumn = <TType extends unknown>({
   const defaultOptions: PropertyOptions<TType> = { nullable: isOptional, onCreate: defaultValue };
   if (Resource) {
     switch (relation) {
+      case FIELD_RELATION.EMBEDDED:
+        return Embedded({
+          entity: Resource as () => EntityClass<TType>,
+          nullable: defaultOptions.nullable,
+          object: !isArray,
+        }) as PropertyDecorator;
       case FIELD_RELATION.MANY_TO_MANY:
         return ManyToMany({
           ...defaultOptions,

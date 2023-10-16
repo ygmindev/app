@@ -1,4 +1,3 @@
-import { _Container } from '#lib-backend/core/utils/Container/_Container';
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { DATABASE_TYPE } from '#lib-backend/database/database.constants';
@@ -28,7 +27,7 @@ export class FundingService
   async create(
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, FundingModel, FundingFormModel>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, FundingModel>> {
-    const creditRatingService = _Container.get(CreditRatingService);
+    const creditRatingService = Container.get(CreditRatingService);
     const creditRatings = input.form.CreditRating;
     delete input.form.CreditRating;
     const output = await super.create(input);
