@@ -11,7 +11,6 @@ import { Pagination } from '#lib-backend/resource/utils/Pagination/Pagination';
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
-import { withCondition } from '#lib-shared/core/utils/withCondition/withCondition';
 import { PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
@@ -30,12 +29,7 @@ export const createArgs = <
   RootResource,
   method,
   name,
-}: CreateArgsParamsModel<TMethod, TType, TForm, TRoot>): CreateArgsModel<
-  TMethod,
-  TType,
-  TForm,
-  TRoot
-> => {
+}: CreateArgsParamsModel<TMethod, TType, TForm, TRoot>): CreateArgsModel<TMethod, TType, TForm> => {
   const Root = createRoot({ RootResource, name });
   const Filter = createFilter({ Resource, name });
 
@@ -47,94 +41,55 @@ export const createArgs = <
       class Args
         extends (Root ?? class {})
         implements
-          ArgsModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>,
-          ArgsModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot>,
-          ArgsModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm, TRoot>
+          ArgsModel<RESOURCE_METHOD_TYPE.GET, TType, TForm>,
+          ArgsModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm>,
+          ArgsModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm>
       {
-        @withCondition(
-          () => Resource !== undefined,
-          () =>
-            withField({
-              Resource: () => Filter,
-              isArray: true,
-              type: PROPERTY_TYPE.RESOURCE,
-            }),
-        )
+        @withField({ Resource: () => Filter, isArray: true, type: PROPERTY_TYPE.RESOURCE })
         filter!: Array<FilterModel<TType>>;
       }
-      return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
+      return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm>>;
     }
     case RESOURCE_METHOD_TYPE.CREATE: {
       const Form = createForm({ Resource, name });
-
       @withEntity({ isAbstract: true })
       class Args
         extends (Root ?? class {})
-        implements ArgsModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>
+        implements ArgsModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>
       {
-        @withCondition(
-          () => Resource !== undefined,
-          () => withField({ Resource: () => Form, type: PROPERTY_TYPE.RESOURCE }),
-        )
+        @withField({ Resource: () => Form, type: PROPERTY_TYPE.RESOURCE })
         form!: TForm;
       }
-      return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
+      return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm>>;
     }
     case RESOURCE_METHOD_TYPE.UPDATE: {
       const Update = createUpdate({ Resource, name });
-
       @withEntity({ isAbstract: true })
       class Args
         extends (Root ?? class {})
-        implements ArgsModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot>
+        implements ArgsModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm>
       {
-        @withCondition(
-          () => Resource !== undefined,
-          () =>
-            withField({
-              Resource: () => Filter,
-              isArray: true,
-              type: PROPERTY_TYPE.RESOURCE,
-            }),
-        )
+        @withField({ Resource: () => Filter, isArray: true, type: PROPERTY_TYPE.RESOURCE })
         filter!: Array<FilterModel<TType>>;
 
-        @withCondition(
-          () => Resource !== undefined,
-          () =>
-            withField({
-              Resource: () => Update,
-              type: PROPERTY_TYPE.RESOURCE,
-            }),
-        )
+        @withField({ Resource: () => Update, type: PROPERTY_TYPE.RESOURCE })
         update!: UpdateModel<TType>;
       }
-      return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
+      return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm>>;
     }
     case RESOURCE_METHOD_TYPE.GET_CONNECTION: {
       @withEntity({ isAbstract: true })
       class Args
         extends (Root ?? class {})
-        implements ArgsModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm, TRoot>
+        implements ArgsModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm>
       {
-        @withCondition(
-          () => Resource !== undefined,
-          () =>
-            withField({
-              Resource: () => Filter,
-              isArray: true,
-              type: PROPERTY_TYPE.RESOURCE,
-            }),
-        )
+        @withField({ Resource: () => Filter, isArray: true, type: PROPERTY_TYPE.RESOURCE })
         filter!: Array<FilterModel<TType>>;
 
-        @withCondition(
-          () => Resource !== undefined,
-          () => withField({ Resource: () => Pagination, type: PROPERTY_TYPE.RESOURCE }),
-        )
+        @withField({ Resource: () => Pagination, type: PROPERTY_TYPE.RESOURCE })
         pagination!: PaginationModel;
       }
-      return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
+      return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm>>;
     }
     default:
       throw new InvalidTypeError(method, RESOURCE_METHOD_TYPE);

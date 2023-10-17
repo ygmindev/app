@@ -1,33 +1,33 @@
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { DATABASE_TYPE } from '#lib-backend/database/database.constants';
 import { Database } from '#lib-backend/database/utils/Database/Database';
-import { DUMMY_ENTITY_RESOURCE_SEED_DATA } from '#lib-backend/test/utils/seed/seed.constants';
-import {
-  type TestableEmbeddedResourceServiceModel,
-  type TestEmbeddedResourceServiceParamsModel,
-} from '#lib-backend/test/utils/testEmbeddedResourceService/testEmbeddedResourceService.models';
+import { TESTABLE_ENTITY_RESOURCE_SEED_DATA } from '#lib-backend/test/utils/seed/seed.constants';
+import { type TestEmbeddedResourceServiceParamsModel } from '#lib-backend/test/utils/testEmbeddedResourceService/testEmbeddedResourceService.models';
 import { testResourceService } from '#lib-backend/test/utils/testResourceService/testResourceService';
-import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
-import { type DummyEntityResourceModel } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
+import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.constants';
+import { type TestableEntityResourceModel } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.models';
 
 export const testEmbeddedResourceService = async ({
+  form,
   getService,
 }: TestEmbeddedResourceServiceParamsModel): Promise<void> =>
-  void testResourceService({
-    before: async (service: TestableEmbeddedResourceServiceModel) => {
+  testResourceService({
+    before: async (service) => {
       if (service) {
         const { result } = await Container.get(Database, DATABASE_TYPE.MONGO)
-          .getRepository<DummyEntityResourceModel>({ name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME })
-          .create({ form: { stringProperty: 'stringProperty' } });
+          .getRepository<TestableEntityResourceModel>({
+            name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
+          })
+          .create({ form: { stringField: 'stringField' } });
 
         if (result) {
-          const root = { _id: result._id };
-          for (const form of DUMMY_ENTITY_RESOURCE_SEED_DATA) {
-            await service.create({ form, root });
+          for (const form of TESTABLE_ENTITY_RESOURCE_SEED_DATA) {
+            await service.create({ form, root: result._id });
           }
-          service.decorators = { ...service.decorators, root };
+          service.decorators = { ...service.decorators, root: result._id };
         }
       }
     },
+    form,
     getService,
   });

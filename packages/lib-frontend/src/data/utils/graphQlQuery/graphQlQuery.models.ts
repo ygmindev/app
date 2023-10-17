@@ -16,9 +16,13 @@ export type GraphQlParamsModel<TParams> = {
   variables?: TParams;
 };
 
-export type GraphQlQueryHttpParamsModel<TParams, TResult, TName extends string = string> = {
+export type GraphQlQueryHttpParamsModel<
+  TParams,
+  TResult,
+  TName extends string = string,
+> = GraphQlQueryParamsModel<TParams, TResult, TName> & {
   variables?: TParams;
-} & GraphQlQueryParamsModel<TParams, TResult, TName>;
+};
 
 export type GraphQlHttpResponseModel<TResult, TName extends string = string> = {
   data?: Record<TName, TResult>;

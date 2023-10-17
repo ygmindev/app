@@ -19,10 +19,10 @@ export const PaymentMethodField: RSFCModel<FormRefModel, PaymentMethodFieldProps
     const actions = useActions();
     const currentUser = useCurrentUser();
     const { create: createBank, update: updateBank } = useBankResource({
-      root: { _id: currentUser?._id },
+      root: currentUser?._id,
     });
     const { create: createCard, update: updateCard } = useCardResource({
-      root: { _id: currentUser?._id },
+      root: currentUser?._id,
     });
     return currentUser ? (
       <_PaymentMethodField

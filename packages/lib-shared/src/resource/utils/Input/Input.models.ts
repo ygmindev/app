@@ -6,5 +6,4 @@ export type InputModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
   TForm = EntityResourceDataModel<TType>,
-  TRoot = undefined,
-> = ArgsModel<TMethod, TType, TForm, TRoot>;
+> = ArgsModel<TMethod, TType, TForm>;

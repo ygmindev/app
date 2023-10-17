@@ -45,8 +45,8 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
 
   const currentUser = useCurrentUser();
   const { update } = useUserResource();
-  const { remove: bankRemove } = useBankResource({ root: { _id: currentUser?._id } });
-  const { remove: cardRemove } = useCardResource({ root: { _id: currentUser?._id } });
+  const { remove: bankRemove } = useBankResource({ root: currentUser?._id });
+  const { remove: cardRemove } = useCardResource({ root: currentUser?._id });
 
   const handleRemove = async (): Promise<void> => {
     switch (value?.type) {

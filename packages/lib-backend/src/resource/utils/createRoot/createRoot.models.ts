@@ -6,4 +6,4 @@ export type CreateRootParamsModel<TRoot = undefined> = {
   name: string;
 };
 
-export type CreateRootModel<TRoot = undefined> = ResourceClassModel<RootModel<TRoot>>;
+export type CreateRootModel<TRoot = undefined> = ResourceClassModel<RootModel<TRoot>> | undefined;

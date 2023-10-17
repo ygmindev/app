@@ -1,5 +1,5 @@
 import { createForm } from '#lib-backend/resource/utils/createForm/createForm';
-import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
+import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.constants';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ createForm });
@@ -14,7 +14,7 @@ describe(displayName, () => {
   test('works', async () => {
     const result = new (createForm({
       Resource: ResourceF,
-      name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
+      name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
     }))();
     expect(result).toHaveProperty(RESOURCE_PROPERTY);
   });

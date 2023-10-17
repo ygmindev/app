@@ -2,9 +2,9 @@ import _filter from 'lodash/filter';
 
 import { getConnection } from '#lib-backend/database/utils/getConnection/getConnection';
 import {
-  type DummyEntityResourceFormModel,
-  type DummyEntityResourceModel,
-} from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
+  type TestableEntityResourceFormModel,
+  type TestableEntityResourceModel,
+} from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.models';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ getConnection });
@@ -12,17 +12,17 @@ const { displayName } = withTest({ getConnection });
 describe(displayName, () => {
   const LIMIT = 3;
 
-  const entities: Array<DummyEntityResourceFormModel> = [
-    { stringProperty: 'stringProperty' },
-    { stringProperty: 'stringProperty' },
-    { stringProperty: 'stringProperty' },
-    { stringProperty: 'stringProperty' },
-    { stringProperty: 'stringProperty' },
-    { stringProperty: 'stringProperty' },
+  const entities: Array<TestableEntityResourceFormModel> = [
+    { stringField: 'stringField' },
+    { stringField: 'stringField' },
+    { stringField: 'stringField' },
+    { stringField: 'stringField' },
+    { stringField: 'stringField' },
+    { stringField: 'stringField' },
   ];
 
   test('works', async () => {
-    const result = await getConnection({
+    const { result } = await getConnection({
       count: entities.length,
       getMany: async ({ filter }) => ({ result: _filter(entities, filter) }),
       input: { filter: [] },
@@ -32,11 +32,11 @@ describe(displayName, () => {
   });
 
   test('works with filter', async () => {
-    const filter = { stringProperty: 'stringProperty' };
+    const filter = { stringField: 'stringField' };
     const result = await getConnection({
       count: entities.length,
       getMany: async ({ filter }) => ({
-        result: _filter(entities, filter) as Array<DummyEntityResourceModel>,
+        result: _filter(entities, filter) as Array<TestableEntityResourceModel>,
       }),
       input: { filter: [] },
       pagination: { first: LIMIT },

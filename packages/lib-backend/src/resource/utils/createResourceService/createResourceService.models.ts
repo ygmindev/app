@@ -5,6 +5,7 @@ import {
   type ResourceServiceDecoratorModel,
   type ResourceServiceModel,
 } from '#lib-shared/resource/utils/ResourceService/ResourceService.models';
+import { type RootInputModel } from '#lib-shared/resource/utils/Root/Root.models';
 
 export type CreateResourceServiceParamsModel<
   TType,
@@ -14,7 +15,7 @@ export type CreateResourceServiceParamsModel<
   ResourceServiceModel<TType, TForm, TRoot> &
   ResourceServiceDecoratorModel<TType, TForm, TRoot> & {
     Resource: ClassModel<TType>;
-    count(): Promise<number>;
+    count(input: RootInputModel<TRoot>): Promise<number>;
   };
 
 export type CreateResourceServiceModel<

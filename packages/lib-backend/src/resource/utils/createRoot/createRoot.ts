@@ -1,11 +1,12 @@
+import { createFilter } from '#lib-backend/resource/utils/createFilter/createFilter';
 import {
   type CreateRootModel,
   type CreateRootParamsModel,
 } from '#lib-backend/resource/utils/createRoot/createRoot.models';
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
-import { type ClassModel, type PartialModel } from '#lib-shared/core/core.models';
 import { PROPERTY_TYPE } from '#lib-shared/data/data.constants';
+import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 import { type RootModel } from '#lib-shared/resource/utils/Root/Root.models';
 
 export const createRoot = <TRoot = undefined>({
@@ -13,18 +14,13 @@ export const createRoot = <TRoot = undefined>({
   name,
 }: CreateRootParamsModel<TRoot>): CreateRootModel<TRoot> => {
   if (RootResource) {
-    const nameF = `${name}Root`;
-
-    @withEntity({ name: nameF })
-    class RootResourceF extends (RootResource as ClassModel) {}
-
-    @withEntity({ isAbstract: true, name: `${nameF}Root` })
+    const RootFilter = createFilter({ Resource: RootResource, name: `${name}Root` });
+    @withEntity({ isAbstract: true })
     class Root implements RootModel<TRoot> {
-      @withField({ Resource: () => RootResourceF, type: PROPERTY_TYPE.RESOURCE })
-      root?: PartialModel<TRoot>;
+      @withField({ Resource: () => RootFilter, isArray: true, type: PROPERTY_TYPE.RESOURCE })
+      root?: Array<FilterModel<TRoot>>;
     }
-
-    return Root as CreateRootModel<TRoot>;
+    return Root;
   }
-  return undefined as unknown as CreateRootModel<TRoot>;
+  return undefined;
 };

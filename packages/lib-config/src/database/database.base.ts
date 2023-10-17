@@ -8,7 +8,7 @@ import { Funding } from '#lib-backend/funding/resources/Funding/Funding';
 // import { Funding } from '#lib-backend/funding/resources/Funding/Funding';
 import { RatingAgency } from '#lib-backend/funding/resources/RatingAgency/RatingAgency';
 import { Group } from '#lib-backend/group/resources/Group/Group';
-import { DummyEntityResource } from '#lib-backend/test/resources/DummyEntityResource/DummyEntityResource';
+import { TestableEntityResource } from '#lib-backend/test/resources/TestableEntityResource/TestableEntityResource';
 import { User } from '#lib-backend/user/resources/User/User';
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _database } from '#lib-config/database/_database';
@@ -28,7 +28,7 @@ const { _config, config } = defineConfig({
       Otp,
       RatingAgency,
       User,
-      process.env.NODE_ENV !== 'production' && DummyEntityResource,
+      process.env.NODE_ENV !== 'production' && TestableEntityResource,
     ]),
 
     pool: { max: 10 },

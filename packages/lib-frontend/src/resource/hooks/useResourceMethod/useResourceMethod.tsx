@@ -77,9 +77,9 @@ export const useResourceMethod = <
   return {
     query: async (input) => {
       const inputF = before ? await before({ input }) : input;
-      const rootF = inputF.root || root;
+      const rootF = inputF.root ?? root;
       const output = (await query<
-        { input: InputModel<TMethod, TType, TForm, TRoot> },
+        { input: InputModel<TMethod, TType, TForm> },
         OutputModel<TMethod, TType, TRoot>
       >({
         fields: fieldsF as GraphQlQueryParamsFieldsModel<OutputModel<TMethod, TType, TRoot>>,
@@ -87,7 +87,7 @@ export const useResourceMethod = <
         params: { input: `${nameF}Input` },
         type,
         variables: { input: { ...inputF, root: rootF } },
-      })) ?? { result: undefined, root: rootF };
+      })) ?? { result: undefined };
       return after ? after({ output }) : output;
     },
   };

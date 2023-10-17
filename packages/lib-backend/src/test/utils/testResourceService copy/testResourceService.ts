@@ -14,40 +14,40 @@ import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.model
 // import { type FilterCombineModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 // import { type FilterCombineModel } from '#lib-shared/resource/utils/Filter/Filter.models';
-import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
+import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.constants';
 import {
-  type DummyEntityResourceFormModel,
-  type DummyEntityResourceModel,
-} from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
+  type TestableEntityResourceFormModel,
+  type TestableEntityResourceModel,
+} from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.models';
 
 const _getFilter = (
-  filters: Array<FilterModel<DummyEntityResourceModel>>,
-): Record<keyof DummyEntityResourceModel, unknown> =>
+  filters: Array<FilterModel<TestableEntityResourceModel>>,
+): Record<keyof TestableEntityResourceModel, unknown> =>
   reduce(
     filters,
     (result, filter) => ({ ...result, [filter.field]: filter.value }),
-    {} as Record<keyof DummyEntityResourceModel, unknown>,
+    {} as Record<keyof TestableEntityResourceModel, unknown>,
   );
 
 const _findAll = (
-  data: Array<DummyEntityResourceModel> | undefined,
-  filters: Array<FilterModel<DummyEntityResourceModel>>,
-): Array<DummyEntityResourceModel> =>
-  (_filter(data, _getFilter(filters)) as Array<DummyEntityResourceModel>) || [];
+  data: Array<TestableEntityResourceModel> | undefined,
+  filters: Array<FilterModel<TestableEntityResourceModel>>,
+): Array<TestableEntityResourceModel> =>
+  (_filter(data, _getFilter(filters)) as Array<TestableEntityResourceModel>) || [];
 
 const _find = (
-  data: Array<DummyEntityResourceModel> | undefined,
-  filters: Array<FilterModel<DummyEntityResourceModel>>,
-): DummyEntityResourceModel | null =>
-  (find(data, _getFilter(filters)) as DummyEntityResourceModel) ?? null;
+  data: Array<TestableEntityResourceModel> | undefined,
+  filters: Array<FilterModel<TestableEntityResourceModel>>,
+): TestableEntityResourceModel | null =>
+  (find(data, _getFilter(filters)) as TestableEntityResourceModel) ?? null;
 
 export const testResourceService = async ({
   before,
   getService,
 }: TestResourceServiceParamsModel): Promise<void> => {
   let service: TestableResourceServiceModel;
-  const PROJECT_FIELDS = ['_id', 'stringPropertyOptional'] satisfies Array<
-    keyof DummyEntityResourceModel
+  const PROJECT_FIELDS = ['_id', 'stringFieldOptional'] satisfies Array<
+    keyof TestableEntityResourceModel
   >;
 
   beforeAll(async () => {
@@ -60,7 +60,7 @@ export const testResourceService = async ({
   });
 
   beforeEach(async () => {
-    await seed({ names: [DUMMY_ENTITY_RESOURCE_RESOURCE_NAME] });
+    await seed({ names: [TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME] });
     before && (await before(service));
     jest.clearAllMocks();
   });
@@ -68,24 +68,24 @@ export const testResourceService = async ({
   test('works with create', async () => {
     const input: InputModel<
       RESOURCE_METHOD_TYPE.CREATE,
-      DummyEntityResourceModel,
-      DummyEntityResourceFormModel
+      TestableEntityResourceModel,
+      TestableEntityResourceFormModel
     > = {
-      form: { stringProperty: 'stringProperty1', stringPropertyOptional: undefined },
+      form: { stringField: 'stringField1', stringFieldOptional: undefined },
     };
     const { result } = await service.create(input);
     expect(result?._id).toBeDefined();
     expect(result?.created && new Date().getTime() - result?.created.getTime()).toBeLessThan(1000);
-    expect(result?.stringProperty).toStrictEqual(input.form.stringProperty);
-    expect(Object.keys(result as object)).not.toContainEqual('stringPropertyOptional');
+    expect(result?.stringField).toStrictEqual(input.form.stringField);
+    expect(Object.keys(result as object)).not.toContainEqual('stringFieldOptional');
   });
 
   test('works with get by id', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
     const input: InputModel<
       RESOURCE_METHOD_TYPE.GET,
-      DummyEntityResourceModel,
-      DummyEntityResourceFormModel
+      TestableEntityResourceModel,
+      TestableEntityResourceFormModel
     > = {
       filter: [{ field: '_id', value: data[0]._id }],
     };
@@ -98,10 +98,10 @@ export const testResourceService = async ({
     const { result: data } = await service.getMany({ filter: [] });
     const input: InputModel<
       RESOURCE_METHOD_TYPE.GET,
-      DummyEntityResourceModel,
-      DummyEntityResourceFormModel
+      TestableEntityResourceModel,
+      TestableEntityResourceFormModel
     > = {
-      filter: [{ field: 'stringProperty', value: 'stringProperty1' }],
+      filter: [{ field: 'stringField', value: 'stringField1' }],
     };
     const { result } = await service.get(input);
     const expected = _find(data, input.filter);
@@ -112,13 +112,13 @@ export const testResourceService = async ({
   //   const { result: data } = await service.getMany({ filter: [] });
   //   const input: InputModel<
   //     RESOURCE_METHOD_TYPE.GET,
-  //     DummyEntityResourceModel,
-  //     DummyEntityResourceFormModel
+  //     TestableEntityResourceModel,
+  //     TestableEntityResourceFormModel
   //   > = {
   //     filter: {
   //       $and: [
-  //         { stringProperty: 'stringProperty1' },
-  //         { stringPropertyOptional: 'stringPropertyOptional1' },
+  //         { stringField: 'stringField1' },
+  //         { stringFieldOptional: 'stringFieldOptional1' },
   //       ],
   //     },
   //   };
@@ -126,10 +126,10 @@ export const testResourceService = async ({
   //   const expected = find(
   //     data,
   //     merge(
-  //       ((input.filter as FilterCombineModel<DummyEntityResourceModel>).$and ||
-  //         []) as Array<DummyEntityResourceModel>,
+  //       ((input.filter as FilterCombineModel<TestableEntityResourceModel>).$and ||
+  //         []) as Array<TestableEntityResourceModel>,
   //     ),
-  //   ) as DummyEntityResourceModel;
+  //   ) as TestableEntityResourceModel;
 
   //   expect(result?._id).toStrictEqual(expected._id);
   // });
@@ -138,20 +138,20 @@ export const testResourceService = async ({
   //   const { result: data } = await service.getMany({ filter: [] });
   //   const input: InputModel<
   //     RESOURCE_METHOD_TYPE.GET,
-  //     DummyEntityResourceModel,
-  //     DummyEntityResourceFormModel
+  //     TestableEntityResourceModel,
+  //     TestableEntityResourceFormModel
   //   > = {
   //     filter: {
-  //       $or: [{ stringProperty: 'stringProperty1' }, { stringPropertyOptional: 'does not exist' }],
+  //       $or: [{ stringField: 'stringField1' }, { stringFieldOptional: 'does not exist' }],
   //     },
   //   };
   //   const { result } = await service.get(input);
   //   const expected = find(data, (row) =>
-  //     some((input.filter as FilterCombineModel<DummyEntityResourceModel>).$or, (condition) => {
+  //     some((input.filter as FilterCombineModel<TestableEntityResourceModel>).$or, (condition) => {
   //       const rowF = pick(row, Object.keys(condition) as Array<keyof typeof row>);
   //       return !isEmpty(rowF) && isEqual(rowF, condition);
   //     }),
-  //   ) as DummyEntityResourceModel;
+  //   ) as TestableEntityResourceModel;
 
   //   expect(result?._id).toStrictEqual(expected._id);
   // });
@@ -160,8 +160,8 @@ export const testResourceService = async ({
     const { result: data = [] } = await service.getMany({ filter: [] });
     const input: InputModel<
       RESOURCE_METHOD_TYPE.GET,
-      DummyEntityResourceModel,
-      DummyEntityResourceFormModel
+      TestableEntityResourceModel,
+      TestableEntityResourceFormModel
     > = {
       filter: [{ field: '_id', value: data[0]._id }],
       options: {
@@ -178,10 +178,10 @@ export const testResourceService = async ({
     const { result: data } = await service.getMany({ filter: [] });
     const input: InputModel<
       RESOURCE_METHOD_TYPE.GET_MANY,
-      DummyEntityResourceModel,
-      DummyEntityResourceFormModel
+      TestableEntityResourceModel,
+      TestableEntityResourceFormModel
     > = {
-      filter: [{ field: 'stringProperty', value: 'stringProperty1' }],
+      filter: [{ field: 'stringField', value: 'stringField1' }],
     };
     const { result } = await service.getMany(input);
     const expected = _findAll(data, input.filter);
@@ -192,13 +192,13 @@ export const testResourceService = async ({
   //   const { result: data } = await service.getMany({ filter: [] });
   //   const input: InputModel<
   //     RESOURCE_METHOD_TYPE.GET_MANY,
-  //     DummyEntityResourceModel,
-  //     DummyEntityResourceFormModel
+  //     TestableEntityResourceModel,
+  //     TestableEntityResourceFormModel
   //   > = {
   //     filter: {
   //       $and: [
-  //         { stringProperty: 'stringProperty1' },
-  //         { stringPropertyOptional: 'stringPropertyOptional1' },
+  //         { stringField: 'stringField1' },
+  //         { stringFieldOptional: 'stringFieldOptional1' },
   //       ],
   //     },
   //   };
@@ -206,8 +206,8 @@ export const testResourceService = async ({
   //   const expected = filter(
   //     data,
   //     merge(
-  //       ((input.filter as FilterCombineModel<DummyEntityResourceModel>).$and ||
-  //         []) as Array<DummyEntityResourceModel>,
+  //       ((input.filter as FilterCombineModel<TestableEntityResourceModel>).$and ||
+  //         []) as Array<TestableEntityResourceModel>,
   //     ),
   //   );
 
@@ -218,16 +218,16 @@ export const testResourceService = async ({
   //   const { result: data } = await service.getMany({ filter: [] });
   //   const input: InputModel<
   //     RESOURCE_METHOD_TYPE.GET_MANY,
-  //     DummyEntityResourceModel,
-  //     DummyEntityResourceFormModel
+  //     TestableEntityResourceModel,
+  //     TestableEntityResourceFormModel
   //   > = {
   //     filter: {
-  //       $or: [{ stringProperty: 'stringProperty1' }, { stringPropertyOptional: 'does not exist' }],
+  //       $or: [{ stringField: 'stringField1' }, { stringFieldOptional: 'does not exist' }],
   //     },
   //   };
   //   const { result } = await service.getMany(input);
   //   const expected = filter(data, (row) =>
-  //     some((input.filter as FilterCombineModel<DummyEntityResourceModel>).$or, (condition) => {
+  //     some((input.filter as FilterCombineModel<TestableEntityResourceModel>).$or, (condition) => {
   //       const rowF = pick(row, Object.keys(condition) as Array<keyof typeof row>);
   //       return !isEmpty(rowF) && isEqual(rowF, condition);
   //     }),
@@ -243,10 +243,10 @@ export const testResourceService = async ({
     const { result: data } = await service.getMany({ filter: [] });
     const input: InputModel<
       RESOURCE_METHOD_TYPE.GET_MANY,
-      DummyEntityResourceModel,
-      DummyEntityResourceFormModel
+      TestableEntityResourceModel,
+      TestableEntityResourceFormModel
     > = {
-      filter: [{ field: 'stringProperty', value: 'stringProperty1' }],
+      filter: [{ field: 'stringField', value: 'stringField1' }],
       options: { skip: SKIP, take: TAKE },
     };
     const { result } = await service.getMany(input);
@@ -259,10 +259,10 @@ export const testResourceService = async ({
     const { result: data = [] } = await service.getMany({ filter: [] });
     const input: InputModel<
       RESOURCE_METHOD_TYPE.GET_MANY,
-      DummyEntityResourceModel,
-      DummyEntityResourceFormModel
+      TestableEntityResourceModel,
+      TestableEntityResourceFormModel
     > = {
-      filter: [{ field: 'stringProperty', value: 'stringProperty1' }],
+      filter: [{ field: 'stringField', value: 'stringField1' }],
       options: {
         project: PROJECT_FIELDS.reduce((result, field) => ({ ...result, [field]: true }), {}),
       },
@@ -291,10 +291,10 @@ export const testResourceService = async ({
     const { result: data } = await service.getMany({ filter: [] });
     const input: InputModel<
       RESOURCE_METHOD_TYPE.GET_CONNECTION,
-      DummyEntityResourceModel,
+      TestableEntityResourceModel,
       undefined
     > = {
-      filter: [{ field: 'stringProperty', value: 'stringProperty1' }],
+      filter: [{ field: 'stringField', value: 'stringField1' }],
       pagination: {},
     };
     const { result } = await service.getConnection(input);
@@ -317,7 +317,7 @@ export const testResourceService = async ({
     const size = 2;
     const input: InputModel<
       RESOURCE_METHOD_TYPE.GET_CONNECTION,
-      DummyEntityResourceModel,
+      TestableEntityResourceModel,
       undefined
     > = { filter: [], pagination: { first: size } };
     const { result } = await service.getConnection(input);
@@ -339,7 +339,7 @@ export const testResourceService = async ({
     const { result: allResult } = await service.getConnection({ filter: [], pagination: {} });
     const input: InputModel<
       RESOURCE_METHOD_TYPE.GET_CONNECTION,
-      DummyEntityResourceModel,
+      TestableEntityResourceModel,
       undefined
     > = { filter: [], pagination: { after: allResult?.edges[size - 1].cursor, first: size } };
     const { result } = await service.getConnection(input);
@@ -360,7 +360,7 @@ export const testResourceService = async ({
     const size = 2;
     const input: InputModel<
       RESOURCE_METHOD_TYPE.GET_CONNECTION,
-      DummyEntityResourceModel,
+      TestableEntityResourceModel,
       undefined
     > = { filter: [], pagination: { last: size } };
     const { result } = await service.getConnection(input);
@@ -382,7 +382,7 @@ export const testResourceService = async ({
     const { result: allResult } = await service.getConnection({ filter: [], pagination: {} });
     const input: InputModel<
       RESOURCE_METHOD_TYPE.GET_CONNECTION,
-      DummyEntityResourceModel,
+      TestableEntityResourceModel,
       undefined
     > = { filter: [], pagination: { before: allResult?.edges[size].cursor, last: size } };
     const { result } = await service.getConnection(input);
@@ -402,32 +402,32 @@ export const testResourceService = async ({
     const { result: data = [] } = await service.getMany({ filter: [] });
     const input: InputModel<
       RESOURCE_METHOD_TYPE.UPDATE,
-      DummyEntityResourceModel,
-      DummyEntityResourceFormModel
+      TestableEntityResourceModel,
+      TestableEntityResourceFormModel
     > = {
       filter: [{ field: '_id', value: data[0]._id }],
-      update: { stringProperty: 'stringProperty2' },
+      update: { stringField: 'stringField2' },
     };
     const { result } = await service.update(input);
 
-    expect(result?.stringProperty).toStrictEqual('stringProperty2');
+    expect(result?.stringField).toStrictEqual('stringField2');
   });
 
   test('works with update by push', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
     const input: InputModel<
       RESOURCE_METHOD_TYPE.UPDATE,
-      DummyEntityResourceModel,
-      DummyEntityResourceFormModel
+      TestableEntityResourceModel,
+      TestableEntityResourceFormModel
     > = {
       filter: [{ field: '_id', value: data[0]._id }],
-      update: { $push: { stringArrayProperty: 'stringArrayPropertyElement1' } },
+      update: { $push: { stringArrayField: 'stringArrayFieldElement1' } },
     };
     const { result } = await service.update(input);
 
-    expect(result?.stringArrayProperty).toStrictEqual([
-      ...(data[0].stringArrayProperty ?? []),
-      'stringArrayPropertyElement1',
+    expect(result?.stringArrayField).toStrictEqual([
+      ...(data[0].stringArrayField ?? []),
+      'stringArrayFieldElement1',
     ]);
   });
 
@@ -435,29 +435,29 @@ export const testResourceService = async ({
     const { result: data = [] } = await service.getMany({ filter: [] });
     const input: InputModel<
       RESOURCE_METHOD_TYPE.UPDATE,
-      DummyEntityResourceModel,
-      DummyEntityResourceFormModel
+      TestableEntityResourceModel,
+      TestableEntityResourceFormModel
     > = {
       filter: [{ field: '_id', value: data[0]._id }],
-      update: { $pull: { stringArrayProperty: 'stringArrayPropertyElement1' } },
+      update: { $pull: { stringArrayField: 'stringArrayFieldElement1' } },
     };
     const { result } = await service.update(input);
-    const expected = _filter(data[0].stringArrayProperty, input.update.$pull);
-    expect(result?.stringArrayProperty ?? []).toStrictEqual(expected);
+    const expected = _filter(data[0].stringArrayField, input.update.$pull);
+    expect(result?.stringArrayField ?? []).toStrictEqual(expected);
   });
 
   test('works with update with project', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
     const input: InputModel<
       RESOURCE_METHOD_TYPE.UPDATE,
-      DummyEntityResourceModel,
-      DummyEntityResourceFormModel
+      TestableEntityResourceModel,
+      TestableEntityResourceFormModel
     > = {
       filter: [{ field: '_id', value: data[0]._id }],
       options: {
         project: PROJECT_FIELDS.reduce((result, field) => ({ ...result, [field]: true }), {}),
       },
-      update: { stringProperty: 'stringProperty2' },
+      update: { stringField: 'stringField2' },
     };
     const { result } = await service.update(input);
     expect(result && Object.keys(result)).toStrictEqual(PROJECT_FIELDS);
@@ -466,10 +466,10 @@ export const testResourceService = async ({
   test('works with remove by id', async () => {
     const input: InputModel<
       RESOURCE_METHOD_TYPE.REMOVE,
-      DummyEntityResourceModel,
-      DummyEntityResourceFormModel
+      TestableEntityResourceModel,
+      TestableEntityResourceFormModel
     > = {
-      filter: [{ field: 'stringProperty', value: 'stringProperty1' }],
+      filter: [{ field: 'stringField', value: 'stringField1' }],
     };
     await service.remove(input);
     const { result } = await service.get(input);

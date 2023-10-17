@@ -5,7 +5,6 @@ import {
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
-import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 export const selfAuthorizer =
@@ -15,8 +14,7 @@ export const selfAuthorizer =
     TForm = EntityResourceDataModel<TType>,
     TRoot = UserModel,
   >(
-    self: SelfAuthorizerParamsModel<TMethod, TType, TForm, TRoot> = (input) =>
-      (input as InputModel<TMethod, TType, TForm, UserModel>).root?._id,
-  ): SelfAuthorizerModel<TMethod, TType, TForm, TRoot> =>
+    self: SelfAuthorizerParamsModel<TMethod, TType, TForm> = (input) => input.root,
+  ): SelfAuthorizerModel<TMethod, TType, TForm> =>
   ({ context, input }) =>
     isEqual(context?.user?._id, self(input));

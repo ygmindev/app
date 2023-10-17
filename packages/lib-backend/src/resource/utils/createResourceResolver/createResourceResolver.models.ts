@@ -29,13 +29,13 @@ export type CreateResourceResolverParamsModel<
   access?: Record<ResourceResolverAccessTypeModel, AccessLevelModel>;
 
   authorizer?: {
-    default?: ResourceResolverAuthorizerModel<ResourceMethodTypeModel, TType, TForm, TRoot>;
+    default?: ResourceResolverAuthorizerModel<ResourceMethodTypeModel, TType, TForm>;
 
-    read?: ResourceResolverAuthorizerModel<ResourceReadMethodTypeModel, TType, TForm, TRoot>;
+    read?: ResourceResolverAuthorizerModel<ResourceReadMethodTypeModel, TType, TForm>;
 
-    write?: ResourceResolverAuthorizerModel<ResourceWriteMethodTypeModel, TType, TForm, TRoot>;
+    write?: ResourceResolverAuthorizerModel<ResourceWriteMethodTypeModel, TType, TForm>;
   } & {
-    [TKey in RESOURCE_METHOD_TYPE]?: ResourceResolverAuthorizerModel<TKey, TType, TForm, TRoot>;
+    [TKey in RESOURCE_METHOD_TYPE]?: ResourceResolverAuthorizerModel<TKey, TType, TForm>;
   };
 };
 
@@ -55,15 +55,13 @@ export type ResourceResolverAuthorizerParamsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
   TForm = EntityResourceDataModel<TType>,
-  TRoot = undefined,
 > = {
   context?: ContextModel;
-  input: InputModel<TMethod, TType, TForm, TRoot>;
+  input: InputModel<TMethod, TType, TForm>;
 };
 
 export type ResourceResolverAuthorizerModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
   TForm = EntityResourceDataModel<TType>,
-  TRoot = undefined,
-> = (params: ResourceResolverAuthorizerParamsModel<TMethod, TType, TForm, TRoot>) => boolean;
+> = (params: ResourceResolverAuthorizerParamsModel<TMethod, TType, TForm>) => boolean;

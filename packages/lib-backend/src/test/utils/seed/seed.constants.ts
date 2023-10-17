@@ -1,23 +1,23 @@
 import { type SeedDataModel } from '#lib-backend/test/utils/seed/seed.models';
-import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
-import { type DummyEntityResourceFormModel } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
+import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.constants';
+import { type TestableEntityResourceFormModel } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.models';
 import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
 import { USER_FIXTURE } from '#lib-shared/user/resources/User/User.fixtures';
 
-export const DUMMY_ENTITY_RESOURCE_SEED_DATA: Array<DummyEntityResourceFormModel> = [
+export const TESTABLE_ENTITY_RESOURCE_SEED_DATA: Array<TestableEntityResourceFormModel> = [
   {
-    stringProperty: 'stringProperty1',
-    stringPropertyOptional: 'stringPropertyOptional1',
+    stringField: 'stringField1',
+    stringFieldOptional: 'stringFieldOptional1',
   },
-  { stringProperty: 'stringProperty1' },
-  { stringProperty: 'stringProperty1' },
+  { stringField: 'stringField1' },
+  { stringField: 'stringField1' },
   {
-    stringArrayProperty: ['stringArrayPropertyElement1'],
-    stringProperty: 'stringProperty1',
-    stringPropertyOptional: 'stringPropertyOptional1',
+    stringArrayField: ['stringArrayFieldElement1'],
+    stringField: 'stringField1',
+    stringFieldOptional: 'stringFieldOptional1',
   },
-  { stringProperty: 'stringProperty2' },
-  { stringProperty: 'stringProperty2' },
+  { stringField: 'stringField2' },
+  { stringField: 'stringField2' },
 ];
 
 export const SEED_DATA = [
@@ -27,7 +27,7 @@ export const SEED_DATA = [
   },
 
   {
-    data: () => DUMMY_ENTITY_RESOURCE_SEED_DATA,
-    name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
+    data: () => TESTABLE_ENTITY_RESOURCE_SEED_DATA,
+    name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
   },
 ] satisfies Array<SeedDataModel<unknown>>;

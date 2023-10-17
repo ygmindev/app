@@ -2,7 +2,7 @@ import { createArgs } from '#lib-backend/resource/utils/createArgs/createArgs';
 import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
-import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
+import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.constants';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ createArgs });
@@ -19,7 +19,7 @@ describe(displayName, () => {
       createArgs({
         Resource: ResourceF,
         method: 'unsupported method' as ResourceMethodTypeModel,
-        name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
+        name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
       }),
     ).toThrowError(InvalidTypeError);
   });
@@ -28,7 +28,7 @@ describe(displayName, () => {
     const result = new (createArgs({
       Resource: ResourceF,
       method: RESOURCE_METHOD_TYPE.CREATE,
-      name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
+      name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
     }))();
     expect(result).toHaveProperty('form');
   });
@@ -37,7 +37,7 @@ describe(displayName, () => {
     const result = new (createArgs({
       Resource: ResourceF,
       method: RESOURCE_METHOD_TYPE.GET,
-      name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
+      name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
     }))();
     expect(result).toHaveProperty('filter');
   });
@@ -46,7 +46,7 @@ describe(displayName, () => {
     const result = new (createArgs({
       Resource: ResourceF,
       method: RESOURCE_METHOD_TYPE.GET_MANY,
-      name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
+      name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
     }))();
     expect(result).toHaveProperty('filter');
   });
@@ -55,7 +55,7 @@ describe(displayName, () => {
     const result = new (createArgs({
       Resource: ResourceF,
       method: RESOURCE_METHOD_TYPE.GET_CONNECTION,
-      name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
+      name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
     }))();
     expect(result).toHaveProperty('filter');
     expect(result).toHaveProperty('pagination');
@@ -65,7 +65,7 @@ describe(displayName, () => {
     const result = new (createArgs({
       Resource: ResourceF,
       method: RESOURCE_METHOD_TYPE.REMOVE,
-      name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
+      name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
     }))();
     expect(result).toHaveProperty('filter');
   });
@@ -74,7 +74,7 @@ describe(displayName, () => {
     const result = new (createArgs({
       Resource: ResourceF,
       method: RESOURCE_METHOD_TYPE.UPDATE,
-      name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME,
+      name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
     }))();
     expect(result).toHaveProperty('filter');
     expect(result).toHaveProperty('update');

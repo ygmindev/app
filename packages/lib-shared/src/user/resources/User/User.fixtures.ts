@@ -9,7 +9,7 @@ import { LINKED_USER_RESOURCE_NAME } from '#lib-shared/user/resources/LinkedUser
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 export const USER_FIXTURE: RequiredModel<UserModel> = {
-  // [DUMMY_USER_RESOURCE_RESOURCE_NAME]: [],
+  // [TESTABLE_USER_RESOURCE_RESOURCE_NAME]: [],
   [BANK_RESOURCE_NAME]: [],
   [CARD_RESOURCE_NAME]: [],
   [LINKED_USER_RESOURCE_NAME]: [],

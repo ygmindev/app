@@ -27,7 +27,7 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
   const currentUser = useCurrentUser();
   const { styles } = useStyles({ props });
   const { push } = useRouter();
-  const { getMany } = usePaymentMethodResource({ root: { _id: currentUser?._id } });
+  const { getMany } = usePaymentMethodResource({ root: currentUser?._id });
 
   const tPaymentMethod = t('billing:paymentMethod');
   const tPaymentMethodAdd = t('core:add', { value: tPaymentMethod });

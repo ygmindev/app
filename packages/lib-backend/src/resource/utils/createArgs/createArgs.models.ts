@@ -10,15 +10,14 @@ export type CreateArgsParamsModel<
   TType,
   TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
-> = {
+> = CreateRootParamsModel<TRoot> & {
   Resource?: ResourceClassModel<TMethod extends RESOURCE_METHOD_TYPE.CREATE ? TForm : TType>;
   method: TMethod;
   name: string;
-} & CreateRootParamsModel<TRoot>;
+};
 
 export type CreateArgsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
   TForm = EntityResourceDataModel<TType>,
-  TRoot = undefined,
-> = ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
+> = ResourceClassModel<ArgsModel<TMethod, TType, TForm>>;

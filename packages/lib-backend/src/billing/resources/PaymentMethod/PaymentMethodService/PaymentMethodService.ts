@@ -29,18 +29,18 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
   @withInject(StripeAdminService) protected _stripeAdminService!: StripeAdminService;
 
   async getMany(
-    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, unknown, UserModel>,
+    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>> {
     if (input.root) {
       const { result: banks } = await this._bankService.getMany({
         filter: [],
         options: { project: { _id: true, id: true, last4: true } },
-        root: { _id: input.root._id },
+        root: { _id: input.root },
       });
       const { result: cards } = await this._cardService.getMany({
         filter: [],
         options: { project: { _id: true, id: true, last4: true } },
-        root: { _id: input.root._id },
+        root: { _id: input.root },
       });
       return {
         result: [
@@ -53,10 +53,10 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
   }
 
   async createToken(
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, string, undefined, UserModel>,
+    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, string>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, string, UserModel>> {
     if (input.root) {
-      const uid = input.root._id;
+      const uid = input.root;
       let { result: linkedUser } = await this._linkedUserService.get({
         filter: [{ field: 'type', value: LINKED_USER_TYPE.STRIPE }],
         options: { project: { _id: true } },

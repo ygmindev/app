@@ -1,7 +1,3 @@
-import { type DummyEmbeddedResourceServiceModel } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResourceService/DummyEmbeddedResourceService.models';
+import { type TestResourceServiceParamsModel } from '#lib-backend/test/utils/testResourceService/testResourceService.models';
 
-export type TestEmbeddedResourceServiceParamsModel = {
-  getService(): TestableEmbeddedResourceServiceModel;
-};
-
-export type TestableEmbeddedResourceServiceModel = DummyEmbeddedResourceServiceModel;
+export type TestEmbeddedResourceServiceParamsModel = TestResourceServiceParamsModel;

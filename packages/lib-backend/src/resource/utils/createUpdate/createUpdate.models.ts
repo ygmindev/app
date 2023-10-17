@@ -1,4 +1,4 @@
-import { type ResourceClassModel } from '#lib-backend/resource/resource.models';
+import { type ClassModel } from '#lib-shared/core/core.models';
 import { type UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
 
 export type CreateUpdateParamsModel<TType> = {
@@ -6,4 +6,4 @@ export type CreateUpdateParamsModel<TType> = {
   name: string;
 };
 
-export type CreateUpdateModel<TType> = ResourceClassModel<UpdateModel<TType>>;
+export type CreateUpdateModel<TType> = ClassModel<UpdateModel<TType>>;

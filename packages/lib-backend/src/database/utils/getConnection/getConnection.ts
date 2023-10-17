@@ -1,14 +1,16 @@
 import { getOffsetWithDefault, offsetToCursor } from 'graphql-relay';
 
-import { type GetConnectionParamsModel } from '#lib-backend/database/utils/getConnection/getConnection.models';
-import { type ConnectionModel } from '#lib-shared/resource/utils/Connection/Connection.models';
+import {
+  type GetConnectionModel,
+  type GetConnectionParamsModel,
+} from '#lib-backend/database/utils/getConnection/getConnection.models';
 
 export const getConnection = async <TType, TForm, TRoot = undefined>({
   count,
   getMany,
   input,
   pagination,
-}: GetConnectionParamsModel<TType, TForm, TRoot>): Promise<ConnectionModel<TType> | undefined> => {
+}: GetConnectionParamsModel<TType, TForm, TRoot>): Promise<GetConnectionModel<TType, TRoot>> => {
   const { after, before, first, last } = pagination;
   const beforeOffset = getOffsetWithDefault(before, count);
   const afterOffset = getOffsetWithDefault(after, -1);
@@ -18,7 +20,7 @@ export const getConnection = async <TType, TForm, TRoot = undefined>({
   last && (startOffset = Math.max(startOffset, endOffset - last));
   const skip = Math.max(startOffset, 0);
   const take = Math.max(endOffset - startOffset, 1);
-  const { result } = await getMany({ ...input, options: { skip, take } });
+  const { result, root } = await getMany({ ...input, options: { skip, take } });
 
   if (result && result.length) {
     const edges = result.map((node, index) => ({
@@ -36,10 +38,13 @@ export const getConnection = async <TType, TForm, TRoot = undefined>({
       hasPreviousPage: last ? startOffset > lowerBound : false,
       startCursor: firstEdge.cursor,
     };
-    return { edges, pageInfo };
+    return { result: { edges, pageInfo }, root };
   }
   return {
-    edges: [],
-    pageInfo: { endCursor: '', hasNextPage: false, hasPreviousPage: false, startCursor: '' },
+    result: {
+      edges: [],
+      pageInfo: { endCursor: '', hasNextPage: false, hasPreviousPage: false, startCursor: '' },
+    },
+    root,
   };
 };

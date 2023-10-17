@@ -19,11 +19,10 @@ export const createInput = <
 }: CreateInputParamsModel<TMethod, TType, TForm, TRoot>): CreateInputModel<
   TMethod,
   TType,
-  TForm,
-  TRoot
+  TForm
 > => {
   const Args = createArgs({ Resource, RootResource, method, name });
   @withEntity({ name })
   class Input extends Args {}
-  return Input as unknown as CreateInputModel<TMethod, TType, TForm, TRoot>;
+  return Input as unknown as CreateInputModel<TMethod, TType, TForm>;
 };

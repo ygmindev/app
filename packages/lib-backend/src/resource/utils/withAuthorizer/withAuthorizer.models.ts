@@ -8,7 +8,7 @@ export type WithAuthorizerParamsModel<
   TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 > = {
-  authorizer?: ResourceResolverAuthorizerModel<TMethod, TType, TForm, TRoot>;
+  authorizer?: ResourceResolverAuthorizerModel<TMethod, TType, TForm>;
 };
 
 export type WithAuthorizerModel = MethodDecorator;

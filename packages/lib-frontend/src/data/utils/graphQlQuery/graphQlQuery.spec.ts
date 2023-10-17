@@ -2,14 +2,14 @@ import { graphQlQuery } from '#lib-frontend/data/utils/graphQlQuery/graphQlQuery
 import { type GraphQlQueryParamsModel } from '#lib-frontend/data/utils/graphQlQuery/graphQlQuery.models';
 import { trimDeep } from '#lib-shared/core/utils/trimDeep/trimDeep';
 import { GRAPHQL_OPERATION_TYPE } from '#lib-shared/graphql/graphql.constants';
-import { type DummyEntityResourceModel } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
+import { type TestableEntityResourceModel } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.models';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ graphQlQuery });
 
 describe(displayName, () => {
   test('works without params', async () => {
-    const PARAMS: GraphQlQueryParamsModel<void, DummyEntityResourceModel> = {
+    const PARAMS: GraphQlQueryParamsModel<void, TestableEntityResourceModel> = {
       fields: ['_id', 'created'],
       name: 'NAME',
       type: GRAPHQL_OPERATION_TYPE.QUERY,
@@ -25,7 +25,7 @@ describe(displayName, () => {
   });
 
   test('works with params', async () => {
-    const PARAMS: GraphQlQueryParamsModel<{ a: string; b: string }, DummyEntityResourceModel> = {
+    const PARAMS: GraphQlQueryParamsModel<{ a: string; b: string }, TestableEntityResourceModel> = {
       fields: ['_id', 'created'],
       name: 'NAME',
       params: { a: 'A', b: 'B' },

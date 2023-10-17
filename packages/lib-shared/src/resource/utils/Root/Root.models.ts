@@ -3,3 +3,7 @@ import { type EntityResourcePartialModel } from '#lib-shared/resource/resources/
 export type RootModel<TRoot = undefined> = {
   root?: EntityResourcePartialModel<TRoot>;
 };
+
+export type RootInputModel = {
+  root?: string;
+};

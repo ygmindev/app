@@ -3,22 +3,25 @@ import { EmbeddedResource } from '#lib-backend/resource/resources/EmbeddedResour
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { DATA_TYPE } from '#lib-shared/data/data.constants';
-import { DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.constants';
-import { type DummyEmbeddedResourceModel } from '#lib-shared/test/resources/DummyEmbeddedResource/DummyEmbeddedResource.models';
+import { TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.constants';
+import { type TestableEmbeddedResourceModel } from '#lib-shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.models';
 
-@withEntity({  isRepository: true, name: DUMMY_EMBEDDED_RESOURCE_RESOURCE_NAME })
-export class DummyEmbeddedResource extends EmbeddedResource implements DummyEmbeddedResourceModel {
+@withEntity({ isRepository: true, name: TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME })
+export class TestableEmbeddedResource
+  extends EmbeddedResource
+  implements TestableEmbeddedResourceModel
+{
   @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.NUMBER })
   numberProperty?: number;
 
   @withField({ isArray: true, isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
-  stringArrayProperty?: Array<string>;
+  stringArrayField?: Array<string>;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  stringProperty!: string;
+  stringField!: string;
 
   @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
-  stringPropertyOptional?: string;
+  stringFieldOptional?: string;
 
   @withField({
     defaultValue: () => new Date(),

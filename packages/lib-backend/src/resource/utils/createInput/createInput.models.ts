@@ -15,5 +15,4 @@ export type CreateInputModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
   TForm = EntityResourceDataModel<TType>,
-  TRoot = undefined,
-> = ResourceClassModel<InputModel<TMethod, TType, TForm, TRoot>>;
+> = ResourceClassModel<InputModel<TMethod, TType, TForm>>;

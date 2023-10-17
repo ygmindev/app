@@ -76,7 +76,7 @@ export const createResourceResolver = <
             name,
           }),
       )
-      input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
+      input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>,
       @withContext()
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> {
@@ -112,7 +112,7 @@ export const createResourceResolver = <
             name,
           }),
       )
-      input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>,
+      input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm>,
       @withContext()
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>> {
@@ -148,7 +148,7 @@ export const createResourceResolver = <
             name,
           }),
       )
-      input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>,
+      input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm>,
       @withContext()
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> {
@@ -184,7 +184,7 @@ export const createResourceResolver = <
             name,
           }),
       )
-      input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>,
+      input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm>,
       @withContext()
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>> {
@@ -220,7 +220,7 @@ export const createResourceResolver = <
             name,
           }),
       )
-      input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>,
+      input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm>,
       @withContext()
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>> {
@@ -256,7 +256,7 @@ export const createResourceResolver = <
             name,
           }),
       )
-      input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>,
+      input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm>,
       @withContext()
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>> {
@@ -267,5 +267,5 @@ export const createResourceResolver = <
     }
   }
 
-  return ResourceResolver as CreateResourceResolverModel<TType, TForm, TRoot>;
+  return ResourceResolver;
 };

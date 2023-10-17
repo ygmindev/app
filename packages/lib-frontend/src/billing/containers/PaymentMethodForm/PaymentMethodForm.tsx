@@ -39,7 +39,7 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
               <DataBoundary
                 id={`${CREATE_TOKEN}${PAYMENT_METHOD}`}
                 mutate={async () =>
-                  currentUser && createToken({ form: undefined, root: { _id: currentUser._id } })
+                  currentUser && createToken({ form: undefined, root: currentUser._id })
                 }>
                 {({ data }) => (
                   <PaymentMethodField

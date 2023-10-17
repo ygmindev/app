@@ -8,8 +8,7 @@ import {
   type CreateEmbeddedResourceServiceParamsModel,
 } from '#lib-backend/resource/utils/createEmbeddedResourceService/createEmbeddedResourceService.models';
 import { createResourceService } from '#lib-backend/resource/utils/createResourceService/createResourceService';
-import { objectToEquality } from '#lib-backend/resource/utils/objectToEquality/objectToEquality';
-import { type DeepKeyModel } from '#lib-shared/core/core.models';
+import { InvalidArgumentError } from '#lib-shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { flattenObject } from '#lib-shared/core/utils/flattenObject/flattenObject';
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
@@ -20,11 +19,13 @@ import {
   type EntityResourceModel,
   type EntityResourcePartialModel,
 } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceServiceModel } from '#lib-shared/resource/resources/EntityResource/EntityResourceService/EntityResourceService.models';
 import { type ProjectModel } from '#lib-shared/resource/utils/Args/Args.models';
 import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
+import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
-import { type RootModel } from '#lib-shared/resource/utils/Root/Root.models';
+import { type RootInputModel } from '#lib-shared/resource/utils/Root/Root.models';
 import { type UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
 
 export const createEmbeddedResourceService = <
@@ -54,10 +55,16 @@ export const createEmbeddedResourceService = <
   TRoot,
   TRootForm
 >): CreateEmbeddedResourceServiceModel<TType, TForm, TRoot> => {
+  let rootService: EntityResourceServiceModel<TRoot, TRootForm>;
+  const getRootService = (): EntityResourceServiceModel<TRoot, TRootForm> => {
+    rootService = rootService ?? Container.get(RootService);
+    return rootService;
+  };
+
   const beforeCreateF = async (
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
+    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>,
     context?: ContextModel,
-  ): Promise<InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>> => {
+  ): Promise<InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>> => {
     const value = new Resource();
     forEach(input.form as unknown as object, (v, k) => (value[k as keyof typeof value] = v));
     value.beforeCreate && (await value.beforeCreate());
@@ -66,7 +73,7 @@ export const createEmbeddedResourceService = <
   };
 
   const getAggregation = (
-    input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>,
+    input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm>,
   ): Array<object> => {
     const nameF = `$${name}`;
     return filterNil([
@@ -77,33 +84,39 @@ export const createEmbeddedResourceService = <
     ]);
   };
 
-  const rootService = Container.get(RootService);
-
-  const count = async (input?: RootModel<TRoot>): Promise<number> => {
-    const { result: rootResult } = await rootService.get({
-      filter: objectToEquality(input?.root),
-    });
-    const result = rootResult && (rootResult[name] as unknown as Array<TType>);
-    return result?.length || 0;
+  const getCount = async (input: RootInputModel): Promise<number> => {
+    if (input.root) {
+      const { result: rootResult } = await getRootService().get({
+        filter: [{ field: '_id', value: input.root }],
+      });
+      const result = rootResult && (rootResult[name] as unknown as Array<TType>);
+      return result?.length || 0;
+    }
+    throw new InvalidArgumentError('root');
   };
 
   const getMany = async (
-    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot>,
+    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> => {
-    const skip = input.options?.skip ?? 0;
-    const limit = input.options?.take;
-    const { result: rootResult } = await rootService.get({
-      filter: objectToEquality(input.root),
-      options: isEmpty(input.filter) ? {} : { aggregate: getAggregation(input) },
-    });
-    const result = rootResult && (rootResult[name] as unknown as Array<TType>);
-    return {
-      result:
-        (skip || limit) && result?.length
-          ? result.slice(skip, limit ? skip + (limit || 0) : undefined)
-          : result,
-      root: rootResult,
-    };
+    if (input.root) {
+      const skip = input.options?.skip ?? 0;
+      const limit = input.options?.take;
+      const { result: rootResult } = await getRootService().get({
+        filter: [{ field: '_id', value: input.root }],
+        options: isEmpty(input.filter) ? {} : { aggregate: getAggregation(input) },
+      });
+      const result =
+        ((rootResult && rootResult[name]) as unknown as Array<EntityResourcePartialModel<TType>>) ??
+        [];
+      return {
+        result:
+          (skip || limit) && result?.length
+            ? result.slice(skip, limit ? skip + (limit || 0) : undefined)
+            : result,
+        root: rootResult,
+      };
+    }
+    throw new InvalidArgumentError('root');
   };
 
   return createResourceService<TType, TForm, TRoot>({
@@ -120,52 +133,60 @@ export const createEmbeddedResourceService = <
     beforeGetMany,
     beforeRemove,
     beforeUpdate,
-    count,
+    count: getCount,
     create: async (input, context) => {
-      const inputF = await beforeCreateF(input, context);
-      const value = inputF.form;
-      const { result: rootResult } = await rootService.update({
-        filter: objectToEquality(inputF.root),
-        update: { $push: { [name]: value } } as UpdateModel<TRoot>,
-      });
-      return {
-        result: value as unknown as EntityResourcePartialModel<TType>,
-        root: rootResult,
-      };
+      if (input.root) {
+        const inputF = await beforeCreateF(input, context);
+        const value = inputF.form as EntityResourcePartialModel<TType>;
+        const { result: rootResult } = await getRootService().update({
+          filter: [{ field: '_id', value: input.root }],
+          update: { $push: { [name]: value } } as UpdateModel<TRoot>,
+        });
+        return { result: value, root: rootResult };
+      }
+      throw new InvalidArgumentError('root');
     },
     get: async (input) => {
-      const { result: rootResult } = await rootService.get({
-        filter: objectToEquality(input.root),
-        options: { aggregate: getAggregation(input) },
-      });
-      const result = rootResult && (rootResult[name] as unknown as Array<TType>);
-      return {
-        result: result && result[0],
-        root: rootResult,
-      };
+      if (input.root) {
+        const { result: rootResult } = await getRootService().get({
+          filter: [{ field: '_id', value: input.root }],
+          options: { aggregate: getAggregation(input) },
+        });
+        const result =
+          rootResult && (rootResult[name] as unknown as Array<EntityResourcePartialModel<TType>>);
+        return { result: result && result[0], root: rootResult };
+      }
+      throw new InvalidArgumentError('root');
     },
     getConnection: async (input) => {
-      const result = await getConnection({
-        count: await count(input),
-        getMany: getMany.bind(this),
-        input,
-        pagination: input.pagination,
-      });
-      return { result, root: input.root };
+      if (input.root) {
+        return getConnection({
+          count: await getCount(input),
+          getMany: getMany.bind(this),
+          input,
+          pagination: input.pagination,
+        });
+      }
+      throw new InvalidArgumentError('root');
     },
     getMany,
     name,
     remove: async (input) => {
-      const { result: rootResult } = await rootService.update({
-        filter: objectToEquality(input.root),
-        // update: { $pull: { [name]: input.filter } },
-        update: {},
+      const { result: rootResult } = await getRootService().update({
+        filter: [{ field: '_id', value: input.root }],
+        update: { $pull: { [name]: input.filter } } as UpdateModel<TRoot>,
       });
       return { root: rootResult };
     },
     update: async (input) => {
-      const { result: rootResult } = await rootService.update({
-        filter: objectToEquality({ ...input.root, ...flattenObject({ [name]: input.filter }) }),
+      const { result: rootResult } = await getRootService().update({
+        filter: [
+          { field: '_id', value: input.root },
+          ...input.filter?.map(
+            (filter) =>
+              ({ ...filter, field: `${name}.$.${filter.field as string}` }) as FilterModel<TRoot>,
+          ),
+        ],
         options: {
           project: { [name]: { $elemMatch: input.filter } } as unknown as ProjectModel<TRoot>,
         },
@@ -180,13 +201,14 @@ export const createEmbeddedResourceService = <
           {},
         ),
       });
-      const result = rootResult && (rootResult[name] as unknown as Array<TType>);
+      const result =
+        rootResult && (rootResult[name] as unknown as Array<EntityResourcePartialModel<TType>>);
       let resultF = result?.length ? result[0] : undefined;
       if (resultF && input.options?.project) {
         resultF = pick(
           resultF,
-          Object.keys(input.options.project) as Array<DeepKeyModel<typeof resultF>>,
-        ) as TType;
+          Object.keys(input.options.project),
+        ) as EntityResourcePartialModel<TType>;
       }
       return { result: resultF, root: rootResult };
     },

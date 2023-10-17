@@ -3,11 +3,11 @@ import { EntityResource } from '#lib-backend/resource/resources/EntityResource/E
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { DATA_TYPE } from '#lib-shared/data/data.constants';
-import { DUMMY_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.constants';
-import { type DummyEntityResourceModel } from '#lib-shared/test/resources/DummyEntityResource/DummyEntityResource.models';
+import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.constants';
+import { type TestableEntityResourceModel } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.models';
 
-@withEntity({ isRepository: true, name: DUMMY_ENTITY_RESOURCE_RESOURCE_NAME })
-export class DummyEntityResource extends EntityResource implements DummyEntityResourceModel {
+@withEntity({ isRepository: true, name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME })
+export class TestableEntityResource extends EntityResource implements TestableEntityResourceModel {
   @withField({
     defaultValue: () => new Date(),
     expire: OTP_EXPIRATION_SECONDS,
@@ -21,11 +21,11 @@ export class DummyEntityResource extends EntityResource implements DummyEntityRe
   numberProperty?: number;
 
   @withField({ isArray: true, isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
-  stringArrayProperty?: Array<string>;
+  stringArrayField?: Array<string>;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  stringProperty!: string;
+  stringField!: string;
 
   @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
-  stringPropertyOptional?: string;
+  stringFieldOptional?: string;
 }

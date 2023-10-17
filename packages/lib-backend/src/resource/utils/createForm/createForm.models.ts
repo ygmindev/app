@@ -1,8 +1,8 @@
-import { type ResourceClassModel } from '#lib-backend/resource/resource.models';
+import { type ClassModel } from '#lib-shared/core/core.models';
 
 export type CreateFormParamsModel<TType> = {
   Resource: TType;
   name: string;
 };
 
-export type CreateFormModel<TType> = ResourceClassModel<TType>;
+export type CreateFormModel<TType> = ClassModel<TType>;

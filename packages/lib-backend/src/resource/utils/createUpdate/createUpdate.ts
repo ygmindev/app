@@ -1,6 +1,3 @@
-import isFunction from 'lodash/isFunction';
-
-import { EntityResource } from '#lib-backend/resource/resources/EntityResource/EntityResource';
 import {
   type CreateUpdateModel,
   type CreateUpdateParamsModel,
@@ -12,9 +9,7 @@ export const createUpdate = <TType extends unknown>({
   Resource,
   name,
 }: CreateUpdateParamsModel<TType>): CreateUpdateModel<TType> => {
-  const nameF = `${name}Update`;
-  const isResource = Resource && isFunction(Resource);
-  @withEntity({ name: nameF })
-  class Update extends (isResource ? (Resource as unknown as ClassModel) : EntityResource) {}
-  return Update as CreateUpdateModel<TType>;
+  @withEntity({ name: `${name}Update` })
+  class Update extends (Resource as unknown as ClassModel) {}
+  return Update;
 };

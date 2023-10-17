@@ -30,7 +30,6 @@ const getFilter = <TType extends unknown>(filters?: Array<FilterModel<TType>>): 
   filters
     ? filters.reduce((result, v) => {
         const conditionF = v.condition ?? FILTER_CONDITION.EQUAL;
-
         return {
           ...result,
           [v.field]: (
@@ -132,7 +131,7 @@ export class _Database implements _DatabaseModel {
       },
 
       getConnection: async ({ filter, pagination }) => {
-        const result = await getConnection({
+        const { result } = await getConnection({
           count: await service.count(),
           getMany: service.getMany,
           input: { filter },
@@ -190,7 +189,6 @@ export class _Database implements _DatabaseModel {
             delete updateF[keyF];
           }
         });
-
         const { value: result } = await em
           .getConnection()
           .getCollection(name)
