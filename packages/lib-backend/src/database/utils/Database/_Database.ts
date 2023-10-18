@@ -11,6 +11,7 @@ import { getConnection } from '#lib-backend/database/utils/getConnection/getConn
 import { type _DatabaseConfigModel } from '#lib-config/database/database.models';
 import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/DuplicateError';
 import { UninitializedError } from '#lib-shared/core/errors/UninitializedError/UninitializedError';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { debug, info } from '#lib-shared/logging/utils/logger/logger';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type ResourceNameParamsModel } from '#lib-shared/resource/resource.models';
@@ -26,13 +27,16 @@ import {
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
 
-const getFilter = <TType extends unknown>(filters?: Array<FilterModel<TType>>): Filter<TType> =>
+export const getFilter = <TType extends unknown>(
+  filters?: Array<FilterModel<TType>>,
+  prefix?: string,
+): Filter<TType> =>
   filters
     ? filters.reduce((result, v) => {
         const conditionF = v.condition ?? FILTER_CONDITION.EQUAL;
         return {
           ...result,
-          [v.field]: (
+          [prefix ? `${prefix}.${v.field as string}` : v.field]: (
             [
               FILTER_CONDITION.CONTAINS,
               FILTER_CONDITION.NOT_CONTAINS,
@@ -119,9 +123,12 @@ export class _Database implements _DatabaseModel {
               .aggregate([
                 { $match: filterF },
                 ...(options
-                  ? [options.project && { $project: options.project }, ...(options.aggregate ?? [])]
+                  ? filterNil([
+                      options.project && { $project: options.project },
+                      ...(options.aggregate ?? []),
+                    ])
                   : []),
-              ] as unknown as Document[])
+              ] as unknown as Array<Document>)
               .next()
           : collection.findOne(
               filterF as Filter<Document>,
@@ -193,7 +200,7 @@ export class _Database implements _DatabaseModel {
           .getConnection()
           .getCollection(name)
           .findOneAndUpdate(filterF as Filter<Document>, updateF as UpdateFilter<object>, {
-            projection: options?.project ? cleanDocument(options.project) : undefined,
+            projection: options?.project,
             returnDocument: 'after',
           });
         return { result } as OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;

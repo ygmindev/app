@@ -2,6 +2,7 @@ import forEach from 'lodash/forEach';
 import reduce from 'lodash/reduce';
 
 import { Container } from '#lib-backend/core/utils/Container/Container';
+import { getFilter } from '#lib-backend/database/utils/Database/_Database';
 import { getConnection } from '#lib-backend/database/utils/getConnection/getConnection';
 import {
   type CreateEmbeddedResourceServiceModel,
@@ -11,7 +12,6 @@ import { createResourceService } from '#lib-backend/resource/utils/createResourc
 import { InvalidArgumentError } from '#lib-shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { flattenObject } from '#lib-shared/core/utils/flattenObject/flattenObject';
-import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import { pick } from '#lib-shared/core/utils/pick/pick';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type EmbeddedResourceModel } from '#lib-shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
@@ -78,7 +78,7 @@ export const createEmbeddedResourceService = <
     const nameF = `$${name}`;
     return filterNil([
       { $unwind: nameF },
-      { $match: flattenObject({ [name]: input.filter }) },
+      { $match: getFilter(input.filter, name) },
       input.options?.project && { $project: flattenObject({ [name]: input.options.project }) },
       { $group: { _id: '$_id', [name]: { $push: nameF } } },
     ]);
@@ -103,7 +103,7 @@ export const createEmbeddedResourceService = <
       const limit = input.options?.take;
       const { result: rootResult } = await getRootService().get({
         filter: [{ field: '_id', value: input.root }],
-        options: isEmpty(input.filter) ? {} : { aggregate: getAggregation(input) },
+        options: input.filter ? { aggregate: getAggregation(input) } : undefined,
       });
       const result =
         ((rootResult && rootResult[name]) as unknown as Array<EntityResourcePartialModel<TType>>) ??
@@ -184,19 +184,19 @@ export const createEmbeddedResourceService = <
           { field: '_id', value: input.root },
           ...input.filter?.map(
             (filter) =>
-              ({ ...filter, field: `${name}.$.${filter.field as string}` }) as FilterModel<TRoot>,
+              ({ ...filter, field: `${name}.${filter.field as string}` }) as FilterModel<TRoot>,
           ),
         ],
         options: {
-          project: { [name]: { $elemMatch: input.filter } } as unknown as ProjectModel<TRoot>,
+          project: {
+            [name]: { $elemMatch: getFilter(input.filter) },
+          } as unknown as ProjectModel<TRoot>,
         },
         update: reduce(
           input.update as object,
           (result, v, k) => ({
             ...result,
-            ...(k.startsWith('$')
-              ? { [k]: flattenObject({ [`${name}.$`]: v }) }
-              : flattenObject({ [`${name}.$`]: { [k]: v } })),
+            ...(k.startsWith('$') ? { [k]: { [`${name}.$`]: v } } : { [`${name}.$.${k}`]: v }),
           }),
           {},
         ),

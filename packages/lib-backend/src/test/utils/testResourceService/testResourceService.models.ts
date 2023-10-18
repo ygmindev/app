@@ -1,24 +1,13 @@
-import { type EntityResourceServiceModel } from '#lib-shared/resource/resources/EntityResource/EntityResourceService/EntityResourceService.models';
-import {
-  type TestableEntityResourceFormModel,
-  type TestableEntityResourceModel,
-} from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.models';
+import { type TestableEmbeddedResourceServiceModel } from '#lib-shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResourceService/TestableEmbeddedResourceService.models';
+import { type TestableEntityResourceFormModel } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.models';
+import { type TestableEntityResourceServiceModel } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResourceService/TestableEntityResourceService.models';
 
 export type TestResourceServiceParamsModel = {
-  before?(
-    params: EntityResourceServiceModel<
-      TestableEntityResourceModel,
-      TestableEntityResourceFormModel
-    >,
-  ): Promise<void>;
+  before?(params: TestableResourceServiceModel): Promise<void>;
   form: TestableEntityResourceFormModel;
-  getService(): EntityResourceServiceModel<
-    TestableEntityResourceModel,
-    TestableEntityResourceFormModel
-  >;
+  getService(): TestableResourceServiceModel;
 };
 
-export type TestableResourceServiceModel = EntityResourceServiceModel<
-  TestableEntityResourceModel,
-  TestableEntityResourceFormModel
->;
+export type TestableResourceServiceModel =
+  | TestableEntityResourceServiceModel
+  | TestableEmbeddedResourceServiceModel;

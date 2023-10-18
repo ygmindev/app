@@ -6,22 +6,24 @@ import { cleanup } from '#lib-backend/setup/utils/cleanup/cleanup';
 import { initialize } from '#lib-backend/setup/utils/initialize/initialize';
 import { clearSeed } from '#lib-backend/test/utils/clearSeed/clearSeed';
 import { seed } from '#lib-backend/test/utils/seed/seed';
-import { type TestResourceServiceParamsModel } from '#lib-backend/test/utils/testResourceService/testResourceService.models';
+import {
+  type TestableResourceServiceModel,
+  type TestResourceServiceParamsModel,
+} from '#lib-backend/test/utils/testResourceService/testResourceService.models';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type EntityResourcePartialModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type TestableEntityResourceModel } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.models';
-import { type TestableEntityResourceServiceModel } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResourceService/TestableEntityResourceService.models';
 
 export const testResourceService = ({
   before,
   form,
   getService,
 }: TestResourceServiceParamsModel): void => {
-  let service: TestableEntityResourceServiceModel;
+  let service: TestableResourceServiceModel;
 
-  const _getFilter = (
+  const getFilter = (
     filters: Array<FilterModel<TestableEntityResourceModel>>,
   ): Record<keyof TestableEntityResourceModel, unknown> =>
     reduce(
@@ -30,17 +32,20 @@ export const testResourceService = ({
       {} as Record<keyof TestableEntityResourceModel, unknown>,
     );
 
-  const _findAll = (
+  const findAll = (
     data: Array<EntityResourcePartialModel<TestableEntityResourceModel>> | undefined,
     filters: Array<FilterModel<TestableEntityResourceModel>>,
   ): Array<EntityResourcePartialModel<TestableEntityResourceModel>> =>
-    _filter(data, _getFilter(filters)) || [];
+    (_filter(data, getFilter(filters)) as Array<
+      EntityResourcePartialModel<TestableEntityResourceModel>
+    >) || [];
 
-  const _find = (
+  const findF = (
     data: Array<EntityResourcePartialModel<TestableEntityResourceModel>> | undefined,
     filters: Array<FilterModel<TestableEntityResourceModel>>,
   ): EntityResourcePartialModel<TestableEntityResourceModel> | null =>
-    find(data, _getFilter(filters)) ?? null;
+    (find(data, getFilter(filters)) as EntityResourcePartialModel<TestableEntityResourceModel>) ??
+    null;
 
   const PROJECT_FIELDS = ['_id', 'stringFieldOptional'] satisfies Array<
     keyof TestableEntityResourceModel
@@ -74,11 +79,12 @@ export const testResourceService = ({
 
   test('works with get by id', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
-    const input = {
-      filter: [{ field: '_id', value: data[0]._id }],
-    } as InputModel<RESOURCE_METHOD_TYPE.GET, TestableEntityResourceModel>;
+    const input = { filter: [{ field: '_id', value: data[0]._id }] } as InputModel<
+      RESOURCE_METHOD_TYPE.GET,
+      TestableEntityResourceModel
+    >;
     const { result } = await service.get(input);
-    const expected = _find(data, input.filter);
+    const expected = findF(data, input.filter);
     expect(result?._id).toStrictEqual(expected?._id);
   });
 
@@ -88,7 +94,7 @@ export const testResourceService = ({
       filter: [{ field: 'stringField', value: 'stringField1' }],
     } as InputModel<RESOURCE_METHOD_TYPE.GET, TestableEntityResourceModel>;
     const { result } = await service.get(input);
-    const expected = _find(data, input.filter);
+    const expected = findF(data, input.filter);
     expect(result?._id).toStrictEqual(expected?._id);
   });
 
@@ -101,7 +107,7 @@ export const testResourceService = ({
       },
     } as InputModel<RESOURCE_METHOD_TYPE.GET, TestableEntityResourceModel>;
     const { result } = await service.get(input);
-    const expected = _find(data, input.filter);
+    const expected = findF(data, input.filter);
     expect(result?._id).toStrictEqual(expected?._id);
     expect(result && Object.keys(result)).toStrictEqual(PROJECT_FIELDS);
   });
@@ -112,7 +118,7 @@ export const testResourceService = ({
       filter: [{ field: 'stringField', value: 'stringField1' }],
     } as InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TestableEntityResourceModel>;
     const { result } = await service.getMany(input);
-    const expected = _findAll(data, input.filter);
+    const expected = findAll(data, input.filter);
     expect(result).toStrictEqual(expected);
   });
 
@@ -126,7 +132,7 @@ export const testResourceService = ({
       options: { skip: SKIP, take: TAKE },
     } as InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TestableEntityResourceModel>;
     const { result } = await service.getMany(input);
-    let expected = _findAll(data, input.filter);
+    let expected = findAll(data, input.filter);
     expected = expected.slice(SKIP, SKIP + TAKE);
     expect(result).toStrictEqual(expected);
   });
@@ -141,7 +147,7 @@ export const testResourceService = ({
     } as InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TestableEntityResourceModel>;
     const { result } = await service.getMany(input);
     const resultF = result && result[0];
-    const expected = _find(data, input.filter);
+    const expected = findF(data, input.filter);
     expect(resultF?._id).toStrictEqual(expected?._id);
     expect(resultF && Object.keys(resultF)).toStrictEqual(PROJECT_FIELDS);
   });
@@ -166,7 +172,7 @@ export const testResourceService = ({
       pagination: {},
     } as InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TestableEntityResourceModel>;
     const { result } = await service.getConnection(input);
-    const expected = _findAll(data, input.filter);
+    const expected = findAll(data, input.filter);
     expect(result?.edges.length).toStrictEqual(expected.length);
     expect(result?.edges[0].node._id).toStrictEqual(expected[0]._id);
     expect(result?.edges[expected.length - 1].node._id).toStrictEqual(
