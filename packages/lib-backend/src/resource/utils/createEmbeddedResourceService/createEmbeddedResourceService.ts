@@ -174,7 +174,7 @@ export const createEmbeddedResourceService = <
     remove: async (input) => {
       const { result: rootResult } = await getRootService().update({
         filter: [{ field: '_id', value: input.root }],
-        update: { $pull: { [name]: input.filter } } as UpdateModel<TRoot>,
+        update: { $pull: { [name]: getFilter(input.filter) } } as UpdateModel<TRoot>,
       });
       return { root: rootResult };
     },
