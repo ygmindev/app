@@ -1,5 +1,5 @@
 import { RatingAgency } from '#lib-backend/funding/resources/RatingAgency/RatingAgency';
-import { EntityResource } from '#lib-backend/resource/resources/EntityResource/EntityResource';
+import { EmbeddedResource } from '#lib-backend/resource/resources/EmbeddedResource/EmbeddedResource';
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
@@ -12,7 +12,7 @@ import {
 import { type RatingAgencyModel } from '#lib-shared/funding/resources/RatingAgency/RatingAgency.models';
 
 @withEntity({ isEmbeddable: true, isRepository: true, name: CREDIT_RATING_RESOURCE_NAME })
-export class CreditRating extends EntityResource implements CreditRatingModel {
+export class CreditRating extends EmbeddedResource implements CreditRatingModel {
   @withField({ Resource: () => RatingAgency, isOptional: true, type: PROPERTY_TYPE.RESOURCE })
   agency?: RatingAgencyModel;
 
