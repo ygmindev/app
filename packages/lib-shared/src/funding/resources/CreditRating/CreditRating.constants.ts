@@ -1,4 +1,4 @@
-import { type CreditRatingCategoryModel } from '#lib-shared/funding/resources/CreditRating/CreditRating.models';
+import { type CreditRatingStepModel } from '#lib-shared/funding/resources/CreditRating/CreditRating.models';
 
 export const CREDIT_RATING_RESOURCE_NAME = 'CreditRating';
 
@@ -33,7 +33,7 @@ export enum CREDIT_RATING_WATCH {
   POSITIVE = 'positive',
 }
 
-export const CREDIT_RATING_CATEGORY_RANK: Record<CreditRatingCategoryModel, number> = {
+export const CREDIT_RATING_CATEGORY_RANK: Record<CreditRatingStepModel, number> = {
   [CREDIT_RATING_CATEGORY.AAA]: 1,
   [CREDIT_RATING_CATEGORY.AAp]: 2,
   [CREDIT_RATING_CATEGORY.AA]: 3,

@@ -67,7 +67,7 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
         topElement={() =>
           values.length ? (
             <Wrapper s>
-              {values.map(({ agency, longTermCategory, longTermWatch }) => {
+              {values.map(({ agency, longTermStep, longTermWatch }) => {
                 const agencyName = find(agencies?.result, ({ _id }) => _id === agency?._id);
                 return (
                   <Tile
@@ -76,7 +76,7 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
                     <Table
                       columns={[{ id: 'name' }, { id: 'value' }]}
                       data={[
-                        { name: t('funding:longTermCategory'), value: longTermCategory },
+                        { name: t('funding:longTermStep'), value: longTermStep },
                         { name: t('funding:longTermWatch'), value: longTermWatch },
                       ]}
                     />

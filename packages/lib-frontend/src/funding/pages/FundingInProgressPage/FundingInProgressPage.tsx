@@ -33,8 +33,8 @@ export const FundingInProgressPage: LFCModel<FundingInProgressPagePropsModel> = 
               const creditRatings = uniq(
                 filterNil(
                   node.CreditRating?.map(
-                    ({ longTermCategory, longTermWatch }) =>
-                      `${longTermCategory}${
+                    ({ longTermStep, longTermWatch }) =>
+                      `${longTermStep}${
                         longTermWatch === CREDIT_RATING_WATCH.POSITIVE
                           ? '*+'
                           : longTermWatch === CREDIT_RATING_WATCH.NEGATIVE

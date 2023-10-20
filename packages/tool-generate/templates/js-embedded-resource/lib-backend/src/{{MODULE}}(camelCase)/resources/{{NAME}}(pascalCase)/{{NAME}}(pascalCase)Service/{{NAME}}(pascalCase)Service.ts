@@ -7,7 +7,7 @@ type  {{NAME}}(pascalCase)FormModel,
   {{NAME}}(pascalCase)Model,
 } from '#lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
 import { type {{NAME}}(pascalCase)ServiceModel } from '#lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Service/{{NAME}}(pascalCase)Service.models';
-import { type {{NAME}}(pascalCase) } from '#lib-backend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)';
+import { {{NAME}}(pascalCase) } from '#lib-backend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)';
 import {
 type  {{NAME_ROOT}}(pascalCase)FormModel,
   {{NAME_ROOT}}(pascalCase)Model,

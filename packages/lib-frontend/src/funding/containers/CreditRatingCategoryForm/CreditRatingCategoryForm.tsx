@@ -17,9 +17,9 @@ export const CreditRatingCategoryForm: LFCModel<CreditRatingCategoryFormPropsMod
   const { t } = useTranslation();
   return (
     <ItemStepForm
-      id="longTermCategory"
+      id="longTermStep"
       initialValues={initialValues}
-      message={t('funding:longTermCategoryFormMessage')}
+      message={t('funding:longTermStepFormMessage')}
       onComplete={onComplete}
       onError={onError}
       onSubmit={onSubmit}

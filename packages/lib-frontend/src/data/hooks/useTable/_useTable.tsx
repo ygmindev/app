@@ -16,7 +16,7 @@ export const _useTable = <TType,>({
   nilString = '-',
 }: _UseTableParamsModel<TType>): _UseTableModel<TType> => {
   const { t } = useTranslation();
-  const table = useReactTable<TType>({
+  const table = useReactTable({
     columns:
       columns?.map(({ id, label, width }) => ({
         accessorKey: id,

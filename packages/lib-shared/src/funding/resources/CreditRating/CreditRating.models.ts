@@ -9,13 +9,13 @@ import { type EntityResourceDataModel } from '#lib-shared/resource/resources/Ent
 export type CreditRatingModel = EmbeddedResourceModel & {
   agency?: RatingAgencyModel;
 
-  longTermCategory?: CreditRatingCategoryModel;
+  longTermStep?: CreditRatingStepModel;
 
   longTermWatch?: CreditRatingWatchModel;
 };
 
 export type CreditRatingFormModel = EntityResourceDataModel<CreditRatingModel>;
 
-export type CreditRatingCategoryModel = `${CREDIT_RATING_CATEGORY}`;
+export type CreditRatingStepModel = `${CREDIT_RATING_CATEGORY}`;
 
 export type CreditRatingWatchModel = `${CREDIT_RATING_WATCH}`;

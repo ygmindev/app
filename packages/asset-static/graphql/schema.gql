@@ -167,7 +167,7 @@ type CreditRating {
   _id: String
   agency: RatingAgency
   created: DateTime
-  longTermCategory: String
+  longTermStep: String
   longTermWatch: String
 }
 
@@ -175,7 +175,7 @@ input CreditRatingCreateFormInput {
   _id: String
   agency: RatingAgencyInput
   created: DateTime
-  longTermCategory: String
+  longTermStep: String
   longTermWatch: String
 }
 
@@ -344,7 +344,7 @@ input CreditRatingInput {
   _id: String
   agency: RatingAgencyInput
   created: DateTime
-  longTermCategory: String
+  longTermStep: String
   longTermWatch: String
 }
 
@@ -433,7 +433,7 @@ input CreditRatingUpdateUpdateInput {
   _id: String
   agency: RatingAgencyInput
   created: DateTime
-  longTermCategory: String
+  longTermStep: String
   longTermWatch: String
 }
 
@@ -970,12 +970,14 @@ type Query {
 }
 
 type RatingAgency {
+  RatingStep: RatingStep
   _id: String
   created: DateTime
   name: String
 }
 
 input RatingAgencyCreateFormInput {
+  RatingStep: RatingStepInput
   _id: String
   created: DateTime
   name: String
@@ -1055,6 +1057,7 @@ type RatingAgencyGetOutput {
 }
 
 input RatingAgencyInput {
+  RatingStep: RatingStepInput
   _id: String
   created: DateTime
   name: String
@@ -1098,9 +1101,24 @@ type RatingAgencyUpdateOutput {
 }
 
 input RatingAgencyUpdateUpdateInput {
+  RatingStep: RatingStepInput
   _id: String
   created: DateTime
   name: String
+}
+
+type RatingStep {
+  _id: String
+  created: DateTime
+  name: String
+  rank: Float
+}
+
+input RatingStepInput {
+  _id: String
+  created: DateTime
+  name: String
+  rank: Float
 }
 
 type ScaledNumberRange {

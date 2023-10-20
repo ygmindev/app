@@ -1,6 +1,7 @@
 import { type RESOURCE_FILTER_PROPERTY_TYPE } from '#lib-frontend/resource/components/ResourceFilterField/ResourceFilterField.constants';
 import { type StringKeyModel } from '#lib-shared/core/core.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
+import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export type ResourceFilterFieldPropsModel<
   TType,

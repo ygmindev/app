@@ -40,7 +40,7 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
       flex
       s>
       {filters && (
-        <ResourceFilterForm<TType, TForm, TRoot>
+        <ResourceFilterForm
           filters={filters}
           onSubmit={handleFilter}
         />
