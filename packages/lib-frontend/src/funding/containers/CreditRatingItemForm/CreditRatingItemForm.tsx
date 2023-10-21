@@ -1,7 +1,7 @@
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { StepForm } from '#lib-frontend/data/components/StepForm/StepForm';
-import { CreditRatingCategoryForm } from '#lib-frontend/funding/containers/CreditRatingCategoryForm/CreditRatingCategoryForm';
 import { type CreditRatingItemFormPropsModel } from '#lib-frontend/funding/containers/CreditRatingItemForm/CreditRatingItemForm.models';
+import { CreditRatingCategoryForm } from '#lib-frontend/funding/containers/CreditRatingValueForm/CreditRatingValueForm';
 import { CreditRatingWatchForm } from '#lib-frontend/funding/containers/CreditRatingWatchForm/CreditRatingWatchForm';
 import { FundingAgencyForm } from '#lib-frontend/funding/containers/FundingAgencyForm/FundingAgencyForm';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -21,12 +21,12 @@ export const CreditRatingItemForm: LFCModel<CreditRatingItemFormPropsModel> = ({
         {
           element: <FundingAgencyForm />,
           id: 'agency',
-          title: t('funding:agency'),
+          title: t('funding:ratingAgency'),
         },
         {
           element: <CreditRatingCategoryForm />,
-          id: 'category',
-          title: t('funding:category'),
+          id: 'creditRating',
+          title: t('funding:creditRating'),
         },
         {
           element: <CreditRatingWatchForm />,

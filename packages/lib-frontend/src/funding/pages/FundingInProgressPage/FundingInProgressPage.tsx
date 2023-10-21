@@ -1,5 +1,3 @@
-import uniq from 'lodash/uniq';
-
 import { Tile } from '#lib-frontend/core/components/Tile/Tile';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
@@ -11,7 +9,6 @@ import { useFundingResource } from '#lib-frontend/funding/hooks/useFundingResour
 import { type FundingInProgressPagePropsModel } from '#lib-frontend/funding/pages/FundingInProgressPage/FundingInProgressPage.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { CREDIT_RATING_WATCH } from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
 
 export const FundingInProgressPage: LFCModel<FundingInProgressPagePropsModel> = ({ ...props }) => {
@@ -30,19 +27,15 @@ export const FundingInProgressPage: LFCModel<FundingInProgressPagePropsModel> = 
         {({ data }) => (
           <Wrapper s>
             {data?.result?.edges.map(({ node }) => {
-              const creditRatings = uniq(
-                filterNil(
-                  node.CreditRating?.map(
-                    ({ longTermRating, longTermWatch }) =>
-                      `${longTermRating}${
-                        longTermWatch === CREDIT_RATING_WATCH.POSITIVE
-                          ? '*+'
-                          : longTermWatch === CREDIT_RATING_WATCH.NEGATIVE
-                          ? '*-'
-                          : ''
-                      }`,
-                  ),
-                ),
+              const creditRatings = node.CreditRating?.map(
+                ({ longTermRating, longTermWatch }) =>
+                  `${longTermRating}${
+                    longTermWatch === CREDIT_RATING_WATCH.POSITIVE
+                      ? '*+'
+                      : longTermWatch === CREDIT_RATING_WATCH.NEGATIVE
+                      ? '*-'
+                      : ''
+                  }`,
               ).join(' / ');
               return (
                 <Tile

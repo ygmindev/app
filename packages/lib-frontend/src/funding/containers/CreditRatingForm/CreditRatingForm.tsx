@@ -47,7 +47,9 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
 
   const handleAdd = async (value: CreditRatingModel): Promise<void> => {
     const agencyF = find(values, ({ agency }) => agency?._id === value.agency?._id);
-    agencyF ? error({ message: t('core:alreadyExists') }) : valuesSet([...values, value]);
+    agencyF
+      ? error({ message: t('core:alreadyExists', { value: t('funding:ratingAgency') }) })
+      : valuesSet([...values, value]);
     modalRef.current?.toggle(false);
   };
 

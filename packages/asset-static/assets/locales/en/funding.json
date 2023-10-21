@@ -1,21 +1,20 @@
 {
-  "agency": "TRANSLATION_MISSING",
+  "agency": "agency",
   "agencyFormMessage": "TRANSLATION_MISSING",
   "amount": "amount",
   "amountFormMessage": "TRANSLATION_MISSING",
-  "category": "TRANSLATION_MISSING",
-  "creditRating": "TRANSLATION_MISSING",
-  "curencyFormMessage": "TRANSLATION_MISSING",
-  "currency": "TRANSLATION_MISSING",
+  "creditRating": "credit rating",
+  "curencyFormMessage": "which currency do you need funding in?",
+  "currency": "currency",
   "funding": "funding",
   "longTermRating": "long-term category",
   "longTermRatingFormMessage": "TRANSLATION_MISSING",
-  "longTermWatch": "TRANSLATION_MISSING",
+  "longTermWatch": "long-term watch",
   "longTermWatchFormMessage": "TRANSLATION_MISSING",
   "maturity": "maturity",
   "maturityFormMessage": "TRANSLATION_MISSING",
   "noCreditRatingMessage": "TRANSLATION_MISSING",
   "quoted": "quoted {{value}}",
-  "ratingAgency": "TRANSLATION_MISSING",
-  "watch": "TRANSLATION_MISSING"
+  "ratingAgency": "rating agency",
+  "watch": "watch"
 }

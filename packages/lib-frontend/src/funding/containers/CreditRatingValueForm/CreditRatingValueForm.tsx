@@ -1,6 +1,6 @@
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { ItemStepForm } from '#lib-frontend/data/components/ItemStepForm/ItemStepForm';
-import { type CreditRatingCategoryFormPropsModel } from '#lib-frontend/funding/containers/CreditRatingCategoryForm/CreditRatingCategoryForm.models';
+import { type CreditRatingCategoryFormPropsModel } from '#lib-frontend/funding/containers/CreditRatingValueForm/CreditRatingValueForm.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import {
   CREDIT_RATING_VALUE,

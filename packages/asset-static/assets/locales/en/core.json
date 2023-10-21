@@ -1,5 +1,6 @@
 {
   "add": "add {{value}}",
+  "alreadyExists": "{{value}} already exists",
   "billion": "billion",
   "cancel": "cancel",
   "completed": "completed",
@@ -17,10 +18,9 @@
   "form": "form",
   "inProgress": "in progress",
   "million": "million",
-  "name": "TRANSLATION_MISSING",
+  "name": "name",
   "notFound": "not found",
   "nothingToShow": "Nothing to show",
-  "notSet": "not set",
   "or": "or",
   "quotes": "quotes",
   "remove": "remove",
@@ -38,5 +38,6 @@
   "validatePhone": "TRANSLATION_MISSING",
   "validateRange": "TRANSLATION_MISSING",
   "validateZipCode": "TRANSLATION_MISSING",
-  "welcome": "welcome to {{value}}"
+  "welcome": "welcome to {{value}}",
+  "welcomeBack": "welcome back"
 }
