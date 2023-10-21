@@ -19,6 +19,7 @@ export const ItemField: LFCModel<ItemFieldPropsModel> = ({ id, options, ...props
     <DataBoundary
       fallbackData={range(3).map((i) => ({ id: `${i}`, label: '' }))}
       id={id}
+      isBlocking
       query={options}>
       {({ data }) => (
         <ItemFieldResult

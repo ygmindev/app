@@ -24,6 +24,7 @@ import {
 import { type FieldPropsModel, type FormRefModel } from '#lib-frontend/data/data.models';
 import { useForm } from '#lib-frontend/data/hooks/useForm/useForm';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { type StringKeyModel } from '#lib-shared/core/core.models';
 
@@ -75,12 +76,13 @@ const FormContainerF = forwardRef(
     }: LFCPropsModel<FormContainerPropsModel<TType, TResult>>,
     ref: ForwardedRef<FormRefModel<TType>>,
   ): ReactElement<RLFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>> => {
+    const isAppLoading = useStore((state) => state.app.isLoading);
     const { t } = useTranslation();
     const { wrapperProps } = useLayoutStyles({ props });
 
     useImperativeHandle(ref, () => ({
       reset: handleReset,
-      submit: async () => handleSubmit(),
+      submit: async () => handleSubmitF(),
       valuesSet,
     }));
 
@@ -104,9 +106,13 @@ const FormContainerF = forwardRef(
       [fields],
     );
 
-    const handleSubmitF = async (data: TType): Promise<TResult | null> => {
+    const onSubmitF = async (data: TType): Promise<TResult | null> => {
       const dataF = getValues(data);
       return (onSubmit && (await onSubmit(dataF))) ?? null;
+    };
+
+    const handleSubmitF = (): void => {
+      !isAppLoading && handleSubmit();
     };
 
     const { errors, handleChange, handleReset, handleSubmit, isLoading, values, valuesSet } =
@@ -116,7 +122,7 @@ const FormContainerF = forwardRef(
         isValidateChanged,
         onComplete,
         onError,
-        onSubmit: handleSubmitF,
+        onSubmit: onSubmitF,
         onSuccess,
         validators,
       });
@@ -135,7 +141,7 @@ const FormContainerF = forwardRef(
         error: errors[id],
         key: id,
         onChange: (v) => handleChange(id)(v),
-        onSubmit: handleSubmit,
+        onSubmit: handleSubmitF,
         value: values[id],
       } as FieldPropsModel<TType[TKey]>;
       return { element: cloneElement(element, fieldProps), id };
@@ -166,7 +172,7 @@ const FormContainerF = forwardRef(
     });
 
     return (
-      <Form onSubmit={isDisabled ? undefined : async () => handleSubmit()}>
+      <Form onSubmit={isDisabled ? undefined : async () => handleSubmitF()}>
         <MainLayout
           {...wrapperProps}
           s>
@@ -196,7 +202,7 @@ const FormContainerF = forwardRef(
                 <Button
                   elementState={elementStateF}
                   icon="chevronRight"
-                  onPress={handleSubmit}
+                  onPress={handleSubmitF}
                   testID={props.testID ? `${props.testID}-submit` : undefined}>
                   {submitLabel ?? t('core:continue')}
                 </Button>
