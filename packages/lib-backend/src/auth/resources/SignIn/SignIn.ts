@@ -7,13 +7,14 @@ import {
   type SignInFormModel,
   type SignInModel,
 } from '#lib-shared/auth/resources/SignIn/SignIn.models';
+import { type PartialModel } from '#lib-shared/core/core.models';
 import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withEntity({ isRepository: true, name: SIGN_IN_RESOURCE_NAME })
 export class SignIn extends EntityResource implements SignInModel {
   @withField({ Resource: () => User, type: PROPERTY_TYPE.RESOURCE })
-  user!: UserModel;
+  user!: PartialModel<UserModel>;
 
   @withField({ type: DATA_TYPE.STRING })
   token!: string;

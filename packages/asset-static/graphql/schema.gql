@@ -970,14 +970,12 @@ type Query {
 }
 
 type RatingAgency {
-  RatingStep: RatingStep
   _id: String
   created: DateTime
   name: String
 }
 
 input RatingAgencyCreateFormInput {
-  RatingStep: RatingStepInput
   _id: String
   created: DateTime
   name: String
@@ -1057,7 +1055,6 @@ type RatingAgencyGetOutput {
 }
 
 input RatingAgencyInput {
-  RatingStep: RatingStepInput
   _id: String
   created: DateTime
   name: String
@@ -1101,24 +1098,9 @@ type RatingAgencyUpdateOutput {
 }
 
 input RatingAgencyUpdateUpdateInput {
-  RatingStep: RatingStepInput
   _id: String
   created: DateTime
   name: String
-}
-
-type RatingStep {
-  _id: String
-  created: DateTime
-  name: String
-  rank: Float
-}
-
-input RatingStepInput {
-  _id: String
-  created: DateTime
-  name: String
-  rank: Float
 }
 
 type ScaledNumberRange {

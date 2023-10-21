@@ -9,16 +9,14 @@ import {
   type CreateEmbeddedResourceServiceParamsModel,
 } from '#lib-backend/resource/utils/createEmbeddedResourceService/createEmbeddedResourceService.models';
 import { createResourceService } from '#lib-backend/resource/utils/createResourceService/createResourceService';
+import { type PartialModel } from '#lib-shared/core/core.models';
 import { InvalidArgumentError } from '#lib-shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { flattenObject } from '#lib-shared/core/utils/flattenObject/flattenObject';
 import { pick } from '#lib-shared/core/utils/pick/pick';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type EmbeddedResourceModel } from '#lib-shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
-import {
-  type EntityResourceModel,
-  type EntityResourcePartialModel,
-} from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { type EntityResourceServiceModel } from '#lib-shared/resource/resources/EntityResource/EntityResourceService/EntityResourceService.models';
 import { type ProjectModel } from '#lib-shared/resource/utils/Args/Args.models';
 import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
@@ -106,8 +104,7 @@ export const createEmbeddedResourceService = <
         options: input.filter ? { aggregate: getAggregation(input) } : undefined,
       });
       const result =
-        ((rootResult && rootResult[name]) as unknown as Array<EntityResourcePartialModel<TType>>) ??
-        [];
+        ((rootResult && rootResult[name]) as unknown as Array<PartialModel<TType>>) ?? [];
       return {
         result:
           (skip || limit) && result?.length
@@ -137,7 +134,7 @@ export const createEmbeddedResourceService = <
     create: async (input, context) => {
       if (input.root) {
         const inputF = await beforeCreateF(input, context);
-        const value = inputF.form as EntityResourcePartialModel<TType>;
+        const value = inputF.form as PartialModel<TType>;
         const { result: rootResult } = await getRootService().update({
           filter: [{ field: '_id', value: input.root }],
           update: { $push: { [name]: value } } as UpdateModel<TRoot>,
@@ -152,8 +149,7 @@ export const createEmbeddedResourceService = <
           filter: [{ field: '_id', value: input.root }],
           options: { aggregate: getAggregation(input) },
         });
-        const result =
-          rootResult && (rootResult[name] as unknown as Array<EntityResourcePartialModel<TType>>);
+        const result = rootResult && (rootResult[name] as unknown as Array<PartialModel<TType>>);
         return { result: result && result[0], root: rootResult };
       }
       throw new InvalidArgumentError('root');
@@ -201,14 +197,13 @@ export const createEmbeddedResourceService = <
           {},
         ),
       });
-      const result =
-        rootResult && (rootResult[name] as unknown as Array<EntityResourcePartialModel<TType>>);
+      const result = rootResult && (rootResult[name] as unknown as Array<PartialModel<TType>>);
       let resultF = result?.length ? result[0] : undefined;
       if (resultF && input.options?.project) {
         resultF = pick(
           resultF,
           Object.keys(input.options.project),
-        ) as EntityResourcePartialModel<TType>;
+        ) as unknown as PartialModel<TType>;
       }
       return { result: resultF, root: rootResult };
     },

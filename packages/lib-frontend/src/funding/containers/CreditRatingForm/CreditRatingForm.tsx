@@ -17,6 +17,7 @@ import { CreditRatingItemForm } from '#lib-frontend/funding/containers/CreditRat
 import { FUNDING } from '#lib-frontend/funding/funding.constants';
 import { useRatingAgencyResource } from '#lib-frontend/funding/hooks/useRatingAgencyResource/useRatingAgencyResource';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
@@ -37,10 +38,14 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
   const [values, valuesSet] = useState(
     (initialValues && initialValues[CREDIT_RATING_RESOURCE_NAME]) ?? [],
   );
+  const { getMany } = useRatingAgencyResource();
+  const { error } = useNotification();
+  const { data: agencies } = useQuery('agencies', async () => getMany({ filter: [] }));
   const modalRef = useRef<ModalRefModel>(null);
 
   const handleAdd = async (value: CreditRatingModel): Promise<void> => {
-    valuesSet([...values, value]);
+    const agencyF = find(values, ({ agency }) => agency?._id === value._id);
+    agencyF ? error({ message: t('core:alreadyExists') }) : valuesSet([...values, value]);
     modalRef.current?.toggle(false);
   };
 
@@ -53,8 +58,6 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
     !values.length && modalRef.current?.toggle(true);
   }, []);
 
-  const { getMany } = useRatingAgencyResource();
-  const { data: agencies } = useQuery('agencies', async () => getMany({ filter: [] }));
   return (
     <>
       <FormContainer
@@ -68,11 +71,11 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
           values.length ? (
             <Wrapper s>
               {values.map(({ agency, longTermStep, longTermWatch }) => {
-                const agencyName = find(agencies?.result, ({ _id }) => _id === agency?._id);
+                const agencyF = find(agencies?.result, ({ _id }) => _id === agency?._id);
                 return (
                   <Tile
-                    key={agency?._id}
-                    title={agencyName?.name}>
+                    key={agencyF?._id}
+                    title={agencyF?.name}>
                     <Table
                       columns={[{ id: 'name' }, { id: 'value' }]}
                       data={[

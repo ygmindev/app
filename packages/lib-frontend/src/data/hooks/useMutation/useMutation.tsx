@@ -3,7 +3,22 @@ import {
   type UseMutationModel,
   type UseMutationParamsModel,
 } from '#lib-frontend/data/hooks/useMutation/useMutation.models';
+import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 
 export const useMutation = <TParams = undefined, TResult = void>(
-  ...params: UseMutationParamsModel<TParams, TResult>
-): UseMutationModel<TParams, TResult> => _useMutation<TParams, TResult>(...params);
+  ...[id, callback, options]: UseMutationParamsModel<TParams, TResult>
+): UseMutationModel<TParams, TResult> => {
+  const actions = useActions();
+  return _useMutation<TParams, TResult>(
+    id,
+    options?.isBlocking
+      ? async () => {
+          actions?.app.isLoadingSet(true);
+          const result = await callback();
+          actions?.app.isLoadingSet(false);
+          return result;
+        }
+      : callback,
+    options,
+  );
+};

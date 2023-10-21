@@ -26,7 +26,17 @@ export const ItemStepForm = <TType, TStep extends PartialModel<TType>>({
   return (
     <FormContainer<TStep>
       {...wrapperProps}
-      fields={[{ element: <ItemField options={options} />, id }]}
+      fields={[
+        {
+          element: (
+            <ItemField
+              id={id}
+              options={options}
+            />
+          ),
+          id,
+        },
+      ]}
       initialValues={initialValues}
       isButton={false}
       isVerticalCenter

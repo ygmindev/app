@@ -3,8 +3,8 @@ import { ItemStepForm } from '#lib-frontend/data/components/ItemStepForm/ItemSte
 import { type CreditRatingCategoryFormPropsModel } from '#lib-frontend/funding/containers/CreditRatingCategoryForm/CreditRatingCategoryForm.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import {
-  CREDIT_RATING_CATEGORY,
-  CREDIT_RATING_CATEGORY_RANK,
+  CREDIT_RATING_STEP,
+  CREDIT_RATING_STEP_RANK,
 } from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
 
 export const CreditRatingCategoryForm: LFCModel<CreditRatingCategoryFormPropsModel> = ({
@@ -24,8 +24,8 @@ export const CreditRatingCategoryForm: LFCModel<CreditRatingCategoryFormPropsMod
       onError={onError}
       onSubmit={onSubmit}
       onSuccess={onSuccess}
-      options={Object.values(CREDIT_RATING_CATEGORY)
-        .sort((x, y) => CREDIT_RATING_CATEGORY_RANK[x] - CREDIT_RATING_CATEGORY_RANK[y])
+      options={Object.values(CREDIT_RATING_STEP)
+        .sort((x, y) => CREDIT_RATING_STEP_RANK[x] - CREDIT_RATING_STEP_RANK[y])
         .map((id) => ({
           id,
           label: id.replace('m', '-').replace('p', '+'),

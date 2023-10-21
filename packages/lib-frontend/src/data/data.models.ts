@@ -10,7 +10,11 @@ import {
   type RELATIVE_DATE_UNIT,
 } from '#lib-frontend/data/data.constants';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
-import { type InferModel, type PrimitiveModel } from '#lib-shared/core/core.models';
+import {
+  type InferModel,
+  type PrimitiveModel,
+  type RequiredModel,
+} from '#lib-shared/core/core.models';
 
 export type QueryContextModel = {
   client?: QueryClient;
@@ -21,7 +25,7 @@ export type DataRendererModel<TType> = (params: { row: TType; value?: string }) 
 
 export type DataFormatterModel<TType, TKey extends keyof TType> = (params: {
   row: TType;
-  value: TType[TKey];
+  value: RequiredModel<TType>[TKey];
 }) => string;
 
 export type AmountUnitModel = `${AMOUNT_UNIT}`;
@@ -78,4 +82,8 @@ export type FormRefModel<TType = undefined> = {
   reset(): void;
   submit(): Promise<void>;
   valuesSet(data?: TType): Promise<void>;
+};
+
+export type AsyncPropsModel = {
+  isBlocking?: boolean;
 };

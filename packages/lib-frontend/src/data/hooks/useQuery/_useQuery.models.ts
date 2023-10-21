@@ -1,6 +1,7 @@
+import { type AsyncPropsModel } from '#lib-frontend/data/data.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
-export type _UseQueryOptionsModel = {
+export type _UseQueryOptionsModel = AsyncPropsModel & {
   cache?: boolean | number;
 };
 

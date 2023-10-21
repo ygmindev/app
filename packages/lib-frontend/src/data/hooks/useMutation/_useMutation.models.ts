@@ -1,8 +1,12 @@
+import { type AsyncPropsModel } from '#lib-frontend/data/data.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
+
+export type _UseMutationOptionsModel = AsyncPropsModel;
 
 export type _UseMutationParamsModel<TParams = undefined, TResult = void> = [
   id: string,
   callback: (params?: TParams) => Promise<TResult | null>,
+  options?: _UseMutationOptionsModel,
 ];
 
 export type _UseMutationModel<TParams = undefined, TResult = void> = WithIdModel & {

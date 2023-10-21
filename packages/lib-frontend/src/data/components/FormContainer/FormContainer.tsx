@@ -64,7 +64,6 @@ const FormContainerF = forwardRef(
       isGrouped,
       isValidateChanged,
       onCancel,
-      onChange,
       onComplete,
       onError,
       onSubmit,
@@ -135,10 +134,7 @@ const FormContainerF = forwardRef(
         elementState: elementStateF ?? element.props.elementState,
         error: errors[id],
         key: id,
-        onChange: (v) => {
-          handleChange(id)(v);
-          onChange && onChange(id, v);
-        },
+        onChange: (v) => handleChange(id)(v),
         onSubmit: handleSubmit,
         value: values[id],
       } as FieldPropsModel<TType[TKey]>;

@@ -9,16 +9,14 @@ import { type _DatabaseModel } from '#lib-backend/database/utils/Database/_Datab
 import { type RepositoryModel } from '#lib-backend/database/utils/Database/Database.models';
 import { getConnection } from '#lib-backend/database/utils/getConnection/getConnection';
 import { type _DatabaseConfigModel } from '#lib-config/database/database.models';
+import { type PartialModel } from '#lib-shared/core/core.models';
 import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/DuplicateError';
 import { UninitializedError } from '#lib-shared/core/errors/UninitializedError/UninitializedError';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { debug, info } from '#lib-shared/logging/utils/logger/logger';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type ResourceNameParamsModel } from '#lib-shared/resource/resource.models';
-import {
-  type EntityResourceDataModel,
-  type EntityResourcePartialModel,
-} from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
 import {
   type FilterConditionModel,
@@ -103,7 +101,7 @@ export class _Database implements _DatabaseModel {
           const formF = cleanDocument(form);
           const result = em.create(name, formF as object);
           !options?.isCommitted && (await em.persistAndFlush(result));
-          return { result: result as EntityResourcePartialModel<TType> };
+          return { result: result as PartialModel<TType> };
         } catch (e) {
           switch ((e as MongoError).code as unknown as number) {
             case 11000:
@@ -133,7 +131,7 @@ export class _Database implements _DatabaseModel {
           : collection.findOne(
               filterF as Filter<Document>,
               options && { projection: options.project },
-            ))) as EntityResourcePartialModel<TType>;
+            ))) as PartialModel<TType>;
         return { result: result ?? undefined };
       },
 
@@ -171,7 +169,7 @@ export class _Database implements _DatabaseModel {
                 options && { limit: options.take, projection: options.project, skip: options.skip },
               )
               .toArray());
-        return { result: (result as Array<EntityResourcePartialModel<TType>>) ?? undefined };
+        return { result: (result as Array<PartialModel<TType>>) ?? undefined };
       },
 
       remove: async ({ filter }) => {
@@ -190,7 +188,7 @@ export class _Database implements _DatabaseModel {
           const keyF = key as keyof UpdateModel<TType>;
           if (!key.startsWith('$')) {
             updateF['$set'] = {
-              ...(updateF['$set'] ?? {}),
+              ...((updateF['$set'] as object) ?? {}),
               [key]: updateF[keyF],
             } as EntityResourceDataModel<TType>;
             delete updateF[keyF];

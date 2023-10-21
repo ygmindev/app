@@ -1,19 +1,19 @@
 import { type ReducerModel } from '#lib-frontend/state/state.models';
 import { type PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
-import { type EntityResourcePartialModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type PartialModel } from '#lib-shared/core/core.models';
 
 export type BillingStateModel = {
-  paymentMethods?: Array<EntityResourcePartialModel<PaymentMethodModel>>;
+  paymentMethods?: Array<PartialModel<PaymentMethodModel>>;
 };
 
 export type BillingActionsParamsModel = {
-  paymentMethodAdd: EntityResourcePartialModel<PaymentMethodModel>;
+  paymentMethodAdd: PartialModel<PaymentMethodModel>;
 
   paymentMethodRemove: string;
 
-  paymentMethodUpdate: EntityResourcePartialModel<PaymentMethodModel>;
+  paymentMethodUpdate: PartialModel<PaymentMethodModel>;
 
-  paymentMethodsSet: Array<EntityResourcePartialModel<PaymentMethodModel>>;
+  paymentMethodsSet: Array<PartialModel<PaymentMethodModel>>;
 };
 
 export type BillingReducerModel = ReducerModel<BillingStateModel, BillingActionsParamsModel>;

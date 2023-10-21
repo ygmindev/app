@@ -1,5 +1,5 @@
 import {
-  type CREDIT_RATING_CATEGORY,
+  type CREDIT_RATING_STEP,
   type CREDIT_RATING_WATCH,
 } from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
 import { type RatingAgencyModel } from '#lib-shared/funding/resources/RatingAgency/RatingAgency.models';
@@ -16,6 +16,6 @@ export type CreditRatingModel = EmbeddedResourceModel & {
 
 export type CreditRatingFormModel = EntityResourceDataModel<CreditRatingModel>;
 
-export type CreditRatingStepModel = `${CREDIT_RATING_CATEGORY}`;
+export type CreditRatingStepModel = `${CREDIT_RATING_STEP}`;
 
 export type CreditRatingWatchModel = `${CREDIT_RATING_WATCH}`;

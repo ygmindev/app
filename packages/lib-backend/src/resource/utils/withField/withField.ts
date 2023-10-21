@@ -61,6 +61,7 @@ const getColumn = <TType extends unknown>({
     switch (relation) {
       case FIELD_RELATION.EMBEDDED:
         return Embedded({
+          array: isArray,
           entity: Resource as () => EntityClass<TType>,
           nullable: defaultOptions.nullable,
           object: !isArray,

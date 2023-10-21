@@ -6,7 +6,11 @@ import { DATA_TYPE } from '#lib-shared/data/data.constants';
 import { TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.constants';
 import { type TestableEmbeddedResourceModel } from '#lib-shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.models';
 
-@withEntity({ isRepository: true, name: TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME })
+@withEntity({
+  isEmbeddable: true,
+  isRepository: true,
+  name: TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME,
+})
 export class TestableEmbeddedResource
   extends EmbeddedResource
   implements TestableEmbeddedResourceModel

@@ -1,15 +1,15 @@
 import { type ReducerModel } from '#lib-frontend/state/state.models';
-import { type EntityResourcePartialModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type PartialModel } from '#lib-shared/core/core.models';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 export type UserStateModel = {
-  currentUser?: EntityResourcePartialModel<UserModel> | null;
+  currentUser?: PartialModel<UserModel> | null;
 };
 
 export type UserActionsParamsModel = {
-  currentUserSet: EntityResourcePartialModel<UserModel> | null;
+  currentUserSet: PartialModel<UserModel> | null;
 
-  currentUserUpdate: EntityResourcePartialModel<UserModel>;
+  currentUserUpdate: PartialModel<UserModel>;
 };
 
 export type UserReducerModel = ReducerModel<UserStateModel, UserActionsParamsModel>;
