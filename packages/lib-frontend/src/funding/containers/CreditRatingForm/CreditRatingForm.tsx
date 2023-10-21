@@ -13,6 +13,7 @@ import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { Table } from '#lib-frontend/data/components/Table/Table';
 import { useQuery } from '#lib-frontend/data/hooks/useQuery/useQuery';
+import { CREDIT_RATING_FORM_LOGO_HEIGHT } from '#lib-frontend/funding/containers/CreditRatingForm/CreditRatingForm.constants';
 import { type CreditRatingFormPropsModel } from '#lib-frontend/funding/containers/CreditRatingForm/CreditRatingForm.models';
 import { CreditRatingItemForm } from '#lib-frontend/funding/containers/CreditRatingItemForm/CreditRatingItemForm';
 import { FUNDING } from '#lib-frontend/funding/funding.constants';
@@ -80,7 +81,7 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
                       preview={
                         agencyF.logo ? (
                           <Image
-                            height={50}
+                            height={CREDIT_RATING_FORM_LOGO_HEIGHT}
                             isAutoSize
                             src={agencyF.logo}
                           />

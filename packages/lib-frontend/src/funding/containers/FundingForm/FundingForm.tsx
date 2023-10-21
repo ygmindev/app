@@ -12,6 +12,7 @@ import { useFundingResource } from '#lib-frontend/funding/hooks/useFundingResour
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
+import { GROUP_TYPE } from '#lib-shared/group/resources/Group/Group.constants';
 
 export const FundingForm: LFCModel<FundingFormPropsModel> = ({ ...props }) => {
   const { t } = useTranslation();
@@ -23,7 +24,9 @@ export const FundingForm: LFCModel<FundingFormPropsModel> = ({ ...props }) => {
       {...props}
       initialValues={FUNDING_FORM_INITIAL_VALUES}
       onSubmit={async (form) => currentUser && create({ form })}
-      onSuccess={async () => replace({ pathname: `${FUNDING}/${IN_PROGRESS}` })}
+      onSuccess={async () =>
+        replace({ pathname: `${GROUP_TYPE.ISSUER}/${FUNDING}/${IN_PROGRESS}` })
+      }
       steps={[
         {
           element: <FundingCurrencyForm />,
