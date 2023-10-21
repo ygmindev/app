@@ -1,6 +1,6 @@
 import { AppHomePage } from '#lib-frontend/app/pages/AppHomePage/AppHomePage';
 import { TABS_TYPE } from '#lib-frontend/core/components/Tabs/Tabs.constants';
-import { COMPLETED, IN_PROGRESS } from '#lib-frontend/core/core.constants';
+import { COMPLETED, IN_PROGRESS, SUMMARY } from '#lib-frontend/core/core.constants';
 import { FORM } from '#lib-frontend/data/data.constants';
 import { FUNDING, QUOTES } from '#lib-frontend/funding/funding.constants';
 import { FundingFormPage } from '#lib-frontend/funding/pages/FundingFormPage/FundingFormPage';
@@ -42,7 +42,7 @@ export const routes: Array<RouteModel> = getRoutes({
         {
           element: <GroupHomePage />,
           icon: 'document',
-          pathname: '/:id',
+          pathname: `${SUMMARY}/:id`,
           title: ({ t }) => t('core:summary'),
         },
         {

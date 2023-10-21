@@ -82,6 +82,7 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
                         { name: t('funding:longTermStep'), value: longTermStep },
                         { name: t('funding:longTermWatch'), value: longTermWatch },
                       ]}
+                      isHeadless
                     />
                   </Tile>
                 );

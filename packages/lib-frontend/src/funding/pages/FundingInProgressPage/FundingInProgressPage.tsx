@@ -43,7 +43,7 @@ export const FundingInProgressPage: LFCModel<FundingInProgressPagePropsModel> = 
                       }`,
                   ),
                 ),
-              ).join('/');
+              ).join(' / ');
               return (
                 <Tile
                   key={node._id}
