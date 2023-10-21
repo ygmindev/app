@@ -2,6 +2,7 @@ import find from 'lodash/find';
 import { useRef, useState } from 'react';
 
 import { FloatingFooter } from '#lib-frontend/app/components/FloatingFooter/FloatingFooter';
+import { Image } from '#lib-frontend/core/components/Image/Image';
 import { type ModalRefModel } from '#lib-frontend/core/components/Modal/Modal.models';
 import { ModalButton } from '#lib-frontend/core/components/ModalButton/ModalButton';
 import { Text } from '#lib-frontend/core/components/Text/Text';
@@ -70,21 +71,32 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
         topElement={() =>
           values.length ? (
             <Wrapper s>
-              {values.map(({ agency, longTermStep, longTermWatch }) => {
+              {values.map(({ agency, longTermRating, longTermWatch }) => {
                 const agencyF = find(agencies?.result, ({ _id }) => _id === agency?._id);
                 return (
-                  <Tile
-                    key={agencyF?._id}
-                    title={agencyF?.name}>
-                    <Table
-                      columns={[{ id: 'name' }, { id: 'value' }]}
-                      data={[
-                        { name: t('funding:longTermStep'), value: longTermStep },
-                        { name: t('funding:longTermWatch'), value: longTermWatch },
-                      ]}
-                      isHeadless
-                    />
-                  </Tile>
+                  agencyF && (
+                    <Tile
+                      key={agencyF._id}
+                      preview={
+                        agencyF.logo ? (
+                          <Image
+                            height={50}
+                            isAutoSize
+                            src={agencyF.logo}
+                          />
+                        ) : undefined
+                      }
+                      title={agencyF.name}>
+                      <Table
+                        columns={[{ id: 'name' }, { id: 'value' }]}
+                        data={[
+                          { name: t('funding:longTermRating'), value: longTermRating },
+                          { name: t('funding:longTermWatch'), value: longTermWatch },
+                        ]}
+                        isHeadless
+                      />
+                    </Tile>
+                  )
                 );
               })}
             </Wrapper>

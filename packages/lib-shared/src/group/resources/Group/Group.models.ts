@@ -3,9 +3,9 @@ import { type GROUP_TYPE } from '#lib-shared/group/resources/Group/Group.constan
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export type GroupModel = ProtectedResourceModel & {
-  name: string;
+  logo?: string;
 
-  profileImage?: string;
+  name: string;
 
   types?: Array<GroupTypeModel>;
 };

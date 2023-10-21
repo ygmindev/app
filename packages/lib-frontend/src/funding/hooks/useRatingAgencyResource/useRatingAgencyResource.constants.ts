@@ -4,4 +4,5 @@ import { type RatingAgencyModel } from '#lib-shared/funding/resources/RatingAgen
 export const RATING_AGENCY_FIELDS = [
   '_id',
   'name',
+  'logo',
 ] satisfies GraphQlQueryParamsFieldsModel<RatingAgencyModel>;

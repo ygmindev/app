@@ -8,5 +8,5 @@ export const FUNDING_FIELDS = [
   'currency',
   { amount: ['min', 'max', 'unit'] },
   { maturity: ['min', 'max', 'unit'] },
-  { [CREDIT_RATING_RESOURCE_NAME]: ['longTermStep', 'longTermWatch'] },
+  { [CREDIT_RATING_RESOURCE_NAME]: ['longTermRating', 'longTermWatch'] },
 ] satisfies GraphQlQueryParamsFieldsModel<FundingModel>;

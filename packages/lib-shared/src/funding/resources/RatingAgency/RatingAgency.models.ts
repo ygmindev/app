@@ -4,6 +4,8 @@ import {
 } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export type RatingAgencyModel = EntityResourceModel & {
+  logo?: string;
+
   name: string;
 };
 

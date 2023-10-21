@@ -7,8 +7,8 @@ import {
 export const RATING_AGENCY_TABLE_PROPS = {
   columns: [
     { id: 'name' },
-    // ...Object.values(CREDIT_RATING_STEP)
-    //   .sort((x, y) => CREDIT_RATING_STEP_RANK[x] - CREDIT_RATING_STEP_RANK[y])
+    // ...Object.values(CREDIT_RATING_VALUE)
+    //   .sort((x, y) => CREDIT_RATING_VALUE_RANK[x] - CREDIT_RATING_VALUE_RANK[y])
     //   .map((id) => ({ id })),
   ],
   title: ({ t }) => t('funding:ratingAgency'),

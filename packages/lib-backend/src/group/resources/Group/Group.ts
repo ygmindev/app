@@ -17,5 +17,5 @@ export class Group extends ProtectedResource implements GroupModel {
   types?: Array<GroupTypeModel>;
 
   @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
-  profileImage?: string;
+  logo?: string;
 }
