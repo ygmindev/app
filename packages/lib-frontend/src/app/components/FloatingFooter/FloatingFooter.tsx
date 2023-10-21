@@ -13,7 +13,8 @@ export const FloatingFooter: FCModel<FloatingFooterPropsModel> = ({ children }) 
       <Wrapper
         bottom={theme.shape.spacing[THEME_SIZE.MEDIUM]}
         isFullWidth
-        position={SHAPE_POSITION.ABSOLUTE}>
+        position={SHAPE_POSITION.ABSOLUTE}
+        zIndex>
         <Wrapper mHorizontal="auto">{children}</Wrapper>
       </Wrapper>
     </Portal>

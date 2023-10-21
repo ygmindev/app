@@ -21,7 +21,7 @@ export const Notifications: SFCModel<NotificationsPropsModel> = () => {
         position={SHAPE_POSITION.ABSOLUTE}
         right={0}
         width={theme.notification.width}
-        zIndex={1}>
+        zIndex>
         <Exitable>
           {notifications.map((notification) => (
             <Notification

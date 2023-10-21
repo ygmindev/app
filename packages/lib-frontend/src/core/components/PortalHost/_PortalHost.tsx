@@ -7,5 +7,6 @@ import { composeComponent } from '#lib-frontend/core/utils/composeComponent/comp
 
 export const _PortalHost = composeComponent<_PortalHostPropsModel, ChildrenPropsModel>({
   Component: Portal.Host as ComponentType<ChildrenPropsModel>,
+
   getProps: ({ children }) => ({ children }),
 });
