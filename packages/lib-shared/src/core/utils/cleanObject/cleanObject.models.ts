@@ -9,4 +9,4 @@ export type CleanObjectParamsModel<TType> = [
   },
 ];
 
-export type CleanObjectModel<TType> = Promise<TType>;
+export type CleanObjectModel<TType> = TType;

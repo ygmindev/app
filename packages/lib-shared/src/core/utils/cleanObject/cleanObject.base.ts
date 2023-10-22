@@ -12,7 +12,7 @@ import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { isPrimitive } from '#lib-shared/core/utils/isPrimitive/isPrimitive';
 import { toPlainObject } from '#lib-shared/core/utils/toPlainObject/toPlainObject';
 
-export const cleanObject = async <TType extends unknown>(
+export const cleanObject = <TType extends unknown>(
   ...[value, options]: CleanObjectParamsModel<TType>
 ): CleanObjectModel<TType> => {
   if (isPrimitive(value)) {
