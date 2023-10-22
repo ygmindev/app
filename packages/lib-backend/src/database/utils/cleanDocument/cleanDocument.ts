@@ -18,7 +18,7 @@ const resolveObjectId = <TType extends unknown>(value: TType): TType =>
 
 export const cleanDocument = <TType extends unknown>(value: TType): TType =>
   cleanObject(value, {
-    additionalTransformer: <TValue>(v: TValue, k: string) =>
+    keyValueTransformer: <TValue>(v: TValue, k: string) =>
       (isPlainObject(v) && isEqual(Object.keys(v as object), ['_id'])
         ? resolveObjectId((v as EntityResourceModel)._id)
         : isString(v) && last(k.split('.'))?.startsWith('_')

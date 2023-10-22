@@ -65,7 +65,7 @@ export const createEmbeddedResourceService = <
   ): Promise<InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>> => {
     const value = new Resource();
     forEach(input.form as unknown as object, (v, k) => (value[k as keyof typeof value] = v));
-    value.beforeCreate && (await value.beforeCreate());
+    value.beforeCreate && value.beforeCreate();
     beforeCreate && (await beforeCreate({ input }, context));
     return { ...input, form: value as unknown as TForm };
   };

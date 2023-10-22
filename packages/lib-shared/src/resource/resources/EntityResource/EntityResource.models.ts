@@ -6,7 +6,7 @@ import {
 
 export type EntityResourceModel = {
   _id: string;
-  beforeCreate?(): Promise<void>;
+  beforeCreate?(): void;
   created: Date;
 };
 

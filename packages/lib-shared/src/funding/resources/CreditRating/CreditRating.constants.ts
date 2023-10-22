@@ -28,8 +28,6 @@ export enum CREDIT_RATING_VALUE {
 export enum CREDIT_RATING_WATCH {
   NEGATIVE = 'negative',
 
-  NETURAL = 'neutral',
-
   POSITIVE = 'positive',
 }
 
