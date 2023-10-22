@@ -1,4 +1,5 @@
 import { type ChipPropsModel } from '#lib-frontend/core/components/Chip/Chip.models';
+import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
@@ -8,6 +9,7 @@ import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.c
 export const Chip: SFCModel<ChipPropsModel> = ({
   children,
   color = THEME_COLOR.PRIMARY,
+  icon,
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -16,8 +18,18 @@ export const Chip: SFCModel<ChipPropsModel> = ({
       {...wrapperProps}
       backgroundColor={color}
       isCenter
+      isRowAlign
       p={THEME_SIZE.SMALL}
       round={THEME_SIZE.SMALL}>
+      {icon && (
+        <Icon
+          color={color}
+          colorRole={THEME_ROLE.CONTRAST}
+          fontSize={THEME_SIZE.SMALL}
+          icon={icon}
+        />
+      )}
+
       <TranslatableText
         color={color}
         colorRole={THEME_ROLE.CONTRAST}

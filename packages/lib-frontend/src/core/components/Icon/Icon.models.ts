@@ -6,3 +6,5 @@ import { type TextStyleModel } from '#lib-frontend/style/style.models';
 export type IconPropsModel = _IconPropsModel &
   Omit<TextPropsModel, 'children'> &
   AnimatablePropsModel<TextStyleModel>;
+
+export type WithIconPropsModel = Pick<IconPropsModel, 'icon'>;

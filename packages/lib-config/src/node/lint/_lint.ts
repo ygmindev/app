@@ -102,7 +102,7 @@ export const _lint = ({
         trailingComma: isTrailingComma ? 'all' : 'none',
       },
     ],
-    quotes: ['error', isSingleQuote ? 'single' : 'double'],
+    quotes: ['error', isSingleQuote ? 'single' : 'double', { avoidEscape: true }],
     'react/jsx-newline': 'error',
     'react/jsx-sort-props': 'error',
     'simple-import-sort/exports': 'error',

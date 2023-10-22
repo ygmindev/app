@@ -30,7 +30,7 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
   const { getMany } = usePaymentMethodResource({ root: currentUser?._id });
 
   const tPaymentMethod = t('billing:paymentMethod');
-  const tPaymentMethodAdd = t('core:add', { value: tPaymentMethod });
+  const tPaymentMethodAdd = t('core:new', { value: tPaymentMethod });
 
   const query = async (): Promise<Array<PartialModel<PaymentMethodModel>> | undefined> => {
     const { result } = await getMany({ filter: [] });

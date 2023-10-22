@@ -105,7 +105,7 @@ export const THEME_CONFIG = {
 
       [THEME_SIZE_MORE.XLARGE]: 60,
 
-      [THEME_SIZE_MORE.XSMALL]: 28,
+      [THEME_SIZE_MORE.XSMALL]: 25,
     },
 
     spacing: {

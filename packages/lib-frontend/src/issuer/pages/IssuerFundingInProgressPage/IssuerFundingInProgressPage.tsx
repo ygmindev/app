@@ -9,17 +9,21 @@ import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBou
 import { ItemTable } from '#lib-frontend/data/components/ItemTable/ItemTable';
 import { useFormatter } from '#lib-frontend/data/hooks/useFormatter/useFormatter';
 import { useFundingResource } from '#lib-frontend/funding/hooks/useFundingResource/useFundingResource';
-import { type FundingInProgressPagePropsModel } from '#lib-frontend/funding/pages/FundingInProgressPage/FundingInProgressPage.models';
+import { useCurrentGroup } from '#lib-frontend/group/hooks/useCurrentGroup/useCurrentGroup';
+import { type IssuerFundingInProgressPagePropsModel } from '#lib-frontend/issuer/pages/IssuerFundingInProgressPage/IssuerFundingInProgressPage.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR } from '#lib-frontend/style/style.constants';
 import { CREDIT_RATING_WATCH } from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
 
-export const FundingInProgressPage: LFCModel<FundingInProgressPagePropsModel> = ({ ...props }) => {
+export const IssuerFundingInProgressPage: LFCModel<IssuerFundingInProgressPagePropsModel> = ({
+  ...props
+}) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation();
   const { formatRange } = useFormatter();
   const { getConnection } = useFundingResource();
+  const currentGroup = useCurrentGroup();
   return (
     <MainLayout
       {...wrapperProps}
@@ -32,6 +36,7 @@ export const FundingInProgressPage: LFCModel<FundingInProgressPagePropsModel> = 
           <Wrapper s>
             {data?.result?.edges.map(({ node }) => (
               <Tile
+                image={currentGroup?.logo}
                 key={node._id}
                 onPress={() => null}
                 title={t('funding:funding')}>
@@ -69,7 +74,8 @@ export const FundingInProgressPage: LFCModel<FundingInProgressPagePropsModel> = 
                                           longTermWatch === CREDIT_RATING_WATCH.POSITIVE
                                             ? THEME_COLOR.SUCCESS
                                             : THEME_COLOR.WARNING
-                                        }>
+                                        }
+                                        icon="eye">
                                         {longTermWatch}
                                       </Chip>
                                     )}

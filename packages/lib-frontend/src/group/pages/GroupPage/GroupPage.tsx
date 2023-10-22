@@ -7,6 +7,7 @@ import {
   type GroupPagePropsModel,
 } from '#lib-frontend/group/pages/GroupPage/GroupPage.models';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
+import { NotFoundPage } from '#lib-frontend/route/pages/NotFoundPage/NotFoundPage';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 
 export const GroupPage: LFCModel<GroupPagePropsModel> = ({ children }) => {
@@ -31,6 +32,6 @@ export const GroupPage: LFCModel<GroupPagePropsModel> = ({ children }) => {
       )}
     </DataBoundary>
   ) : (
-    <></>
+    <NotFoundPage />
   );
 };

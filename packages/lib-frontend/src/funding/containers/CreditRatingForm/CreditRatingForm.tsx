@@ -107,7 +107,7 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
           elementState={elementState}
           icon="add"
           ref={modalRef}>
-          {t('core:add', { value: t('funding:creditRating') })}
+          {t('core:new', { value: t('funding:creditRating') })}
         </ModalButton>
       </FloatingFooter>
     </>

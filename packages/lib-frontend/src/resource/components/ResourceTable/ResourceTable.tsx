@@ -72,7 +72,7 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
           }
           icon="add"
           isShadow>
-          {t('core:add', { value: title && t(title) })}
+          {t('core:new', { value: title && t(title) })}
         </ModalButton>
       </FloatingFooter>
     </Wrapper>

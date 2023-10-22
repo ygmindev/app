@@ -20,6 +20,7 @@ import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyle
 
 export const LineItem: LFCModel<LineItemPropsModel> = ({
   children,
+  elementState,
   icon,
   image,
   isBorder = true,
@@ -37,7 +38,7 @@ export const LineItem: LFCModel<LineItemPropsModel> = ({
     (onPress &&
       ((isActive) => (
         <Button
-          elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
+          elementState={elementState ?? (isActive ? ELEMENT_STATE.ACTIVE : undefined)}
           icon="chevronRight"
           type={BUTTON_TYPE.INVISIBLE}
         />

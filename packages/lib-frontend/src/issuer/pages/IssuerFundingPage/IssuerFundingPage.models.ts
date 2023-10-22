@@ -1,3 +1,3 @@
 import { type PagePropsModel } from '#lib-frontend/core/core.models';
 
-export type GroupHomePagePropsModel = PagePropsModel;
+export type IssuerFundingPagePropsModel = PagePropsModel;

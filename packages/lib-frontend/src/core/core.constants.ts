@@ -2,6 +2,8 @@ export const HOME = 'home';
 
 export const SUMMARY = 'summary';
 
+export const ANALYTICS = 'analytics';
+
 export const IN_PROGRESS = 'inProgress';
 
 export const COMPLETED = 'completed';

@@ -1,7 +1,7 @@
 import { type ComponentType, type FC as _FC, type ReactNode, type Ref } from 'react';
 
 import { type ButtonPropsModel } from '#lib-frontend/core/components/Button/Button.models';
-import { type IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
+import { type WithIconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
 import { type CORNER, type DIRECTION, type ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { type LayoutPropsModel } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles.models';
@@ -74,7 +74,7 @@ export type ElementStatePropsModel = {
 };
 
 export type OptionModel<TType extends string = string> = WithIdModel<TType> &
-  Pick<IconPropsModel, 'icon'> &
+  WithIconPropsModel &
   Pick<ButtonPropsModel, 'color' | 'onPress' | 'elementState' | 'confirmMessage'> & {
     category?: string;
     image?: string;

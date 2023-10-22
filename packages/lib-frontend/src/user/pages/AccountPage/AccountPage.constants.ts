@@ -27,7 +27,7 @@ export const ACCOUNT_GROUPS = withId([
       {
         icon: 'settings',
         id: SETTINGS,
-        label: ({ t }) => t('settings:settings'),
+        label: ({ t }) => t('settings:preferences'),
       },
     ],
   },

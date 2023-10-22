@@ -62,7 +62,7 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
       onSubmit={async () => ref.current?.submit()}
       onSuccess={onSuccess}
       style={styles}
-      submitLabel={defaultValue ? t('core:edit') : t('core:add')}
+      submitLabel={defaultValue ? t('core:edit') : t('core:new')}
       testID={testID}
     />
   );

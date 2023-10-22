@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { cloneElement, Fragment } from 'react';
 
 import { Divider } from '#lib-frontend/core/components/Divider/Divider';
 import {
@@ -17,6 +17,6 @@ export const withDivider = (...[params, props]: WithDividerParamsModel): WithDiv
         />
       )}
 
-      {element}
+      {cloneElement(element, { key: `${id}-element` })}
     </Fragment>
   ));

@@ -96,7 +96,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                 {
                   element: <PaymentMethodFormPage />,
                   pathname: PAYMENT_METHOD,
-                  title: ({ t }) => t('core:add', { value: t('billing:paymentMethod') }),
+                  title: ({ t }) => t('core:new', { value: t('billing:paymentMethod') }),
                 },
               ],
               title: ({ t }) => t('billing:payment'),
@@ -117,7 +117,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                   title: ({ t }) => t('locale:timezone'),
                 },
               ],
-              title: ({ t }) => t('settings:settings'),
+              title: ({ t }) => t('settings:preferences'),
             }),
           ],
           title: ({ t }) => t('user:account'),

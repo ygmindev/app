@@ -2,7 +2,7 @@ import { type ReactElement } from 'react';
 
 import { type AnimatablePropsModel } from '#lib-frontend/animation/animation.models';
 import { type BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
-import { type IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
+import { type WithIconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
 import { type PressablePropsModel } from '#lib-frontend/core/components/Pressable/Pressable.models';
 import { type WrapperPropsModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
 import { type ChildrenPropsModel } from '#lib-frontend/core/core.models';
@@ -17,7 +17,7 @@ export type ButtonPropsModel = {
   size?: ThemeSizeModel;
   type?: ButtonTypeModel;
 } & ChildrenPropsModel<TranslatableTextModel> &
-  Pick<IconPropsModel, 'icon'> &
+  WithIconPropsModel &
   Pick<WrapperPropsModel, 'isShadow'> &
   AnimatablePropsModel &
   Pick<

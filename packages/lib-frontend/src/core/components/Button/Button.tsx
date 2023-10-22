@@ -15,7 +15,12 @@ import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
+import {
+  THEME_COLOR,
+  THEME_ROLE,
+  THEME_SIZE,
+  THEME_SIZE_MORE,
+} from '#lib-frontend/style/style.constants';
 import { type ThemeRoleModel } from '#lib-frontend/style/style.models';
 import {
   FLEX_ALIGN,
@@ -136,10 +141,11 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
 
   const iconF = icon ? (
     <Icon
+      align={FONT_ALIGN.CENTER}
       color={color}
       colorRole={childColorRole}
       icon={icon}
-      width={isIconOnly ? undefined : theme.shape.size[THEME_SIZE.SMALL]}
+      width={isIconOnly ? undefined : theme.shape.size[THEME_SIZE_MORE.XSMALL]}
     />
   ) : undefined;
 
