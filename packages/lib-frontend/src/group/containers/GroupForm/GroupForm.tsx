@@ -1,5 +1,6 @@
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { StepForm } from '#lib-frontend/data/components/StepForm/StepForm';
+import { FUNDING } from '#lib-frontend/funding/funding.constants';
 import { useGroupResource } from '#lib-frontend/funding/hooks/useGroupResource/useGroupResource';
 import { GROUP_FORM_INITIAL_VALUES } from '#lib-frontend/group/containers/GroupForm/GroupForm.constants';
 import { type GroupFormPropsModel } from '#lib-frontend/group/containers/GroupForm/GroupForm.models';
@@ -8,7 +9,7 @@ import { GroupTypesForm } from '#lib-frontend/group/containers/GroupTypesForm/Gr
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 
 export const GroupForm: LFCModel<GroupFormPropsModel> = ({ ...props }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation([FUNDING]);
   const { create } = useGroupResource();
   return (
     <StepForm

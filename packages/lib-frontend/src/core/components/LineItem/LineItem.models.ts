@@ -12,6 +12,8 @@ export type LineItemPropsModel = ChildrenPropsModel<ReactNode | TranslatableText
   ElementStatePropsModel &
   Pick<PressablePropsModel, 'onPress'> &
   Partial<Pick<IconPropsModel, 'icon'>> & {
+    image?: string;
+    isBorder?: boolean;
     label?: TranslatableTextModel;
     rightElement?(isOpen?: boolean): ReactElement;
   };

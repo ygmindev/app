@@ -73,13 +73,14 @@ export type ElementStatePropsModel = {
   onElementStateChange?(value?: ElementStateModel): void;
 };
 
-export type OptionModel<TType extends string = string> = {
-  category?: string;
-  isDivider?: boolean;
-  label?: string;
-} & WithIdModel<TType> &
+export type OptionModel<TType extends string = string> = WithIdModel<TType> &
   Pick<IconPropsModel, 'icon'> &
-  Pick<ButtonPropsModel, 'color' | 'onPress' | 'elementState' | 'confirmMessage'>;
+  Pick<ButtonPropsModel, 'color' | 'onPress' | 'elementState' | 'confirmMessage'> & {
+    category?: string;
+    image?: string;
+    isDivider?: boolean;
+    label?: string;
+  };
 
 export type TranslatableOptionModel<TType extends string = string> = Omit<
   OptionModel<TType>,

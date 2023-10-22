@@ -45,13 +45,13 @@ export const spacingStyler: StylerModel<SpacingStylerParamsModel> = (
   const pVerticalF = pF || getSpacing(pVertical, theme);
   return cleanObject({
     margin: mF,
-    marginBottom: mVerticalF || getSpacing(mBottom, theme),
-    marginLeft: mHorizontalF || getSpacing(mLeft, theme),
-    marginRight: mHorizontalF || getSpacing(mRight, theme),
-    marginTop: mVerticalF || getSpacing(mTop, theme),
-    paddingBottom: pVerticalF || getSpacing(pBottom, theme),
-    paddingLeft: pHorizontalF || getSpacing(pLeft, theme),
-    paddingRight: pHorizontalF || getSpacing(pRight, theme),
-    paddingTop: pVerticalF || getSpacing(pTop, theme),
+    marginBottom: getSpacing(mBottom, theme) ?? mVerticalF,
+    marginLeft: getSpacing(mLeft, theme) ?? mHorizontalF,
+    marginRight: getSpacing(mRight, theme) ?? mHorizontalF,
+    marginTop: getSpacing(mTop, theme) ?? mVerticalF,
+    paddingBottom: getSpacing(pBottom, theme) ?? pVerticalF,
+    paddingLeft: getSpacing(pLeft, theme) ?? pHorizontalF,
+    paddingRight: getSpacing(pRight, theme) ?? pHorizontalF,
+    paddingTop: getSpacing(pTop, theme) ?? pVerticalF,
   });
 };

@@ -28,6 +28,7 @@ import { type ScaledNumberRangeModel } from '#lib-shared/data/resources/ScaledNu
 export const RangeField = <TType extends NumberUnitModel>({
   defaultValue,
   error,
+  label,
   onChange,
   unitOptions,
   value,
@@ -64,60 +65,49 @@ export const RangeField = <TType extends NumberUnitModel>({
     rangeType?: RangeTypeModel;
   }): void => {
     const rangeTypeFF = rangeTypeF ?? rangeType;
-    const { lowerF, maxF, minF, upperF } = (() => {
+    const { lowerF, upperF } = (() => {
       switch (unit ?? valueControlled?.unit) {
         case RELATIVE_DATE_UNIT.DAY:
           return {
             lowerF: 0,
-            maxF: rangeTypeFF === RANGE_TYPE.RANGE ? max ?? 90 : undefined,
-            minF: min,
             upperF: 365,
           };
         case RELATIVE_DATE_UNIT.WEEK:
           return {
             lowerF: 0,
-            maxF: rangeTypeFF === RANGE_TYPE.RANGE ? max ?? 36 : undefined,
-            minF: min,
             upperF: 52,
           };
         case RELATIVE_DATE_UNIT.MONTH:
           return {
             lowerF: 0,
-            maxF: rangeTypeFF === RANGE_TYPE.RANGE ? max ?? 12 : undefined,
-            minF: min,
             upperF: 18,
           };
         case RELATIVE_DATE_UNIT.YEAR:
           return {
             lowerF: 0,
-            maxF: rangeTypeFF === RANGE_TYPE.RANGE ? max ?? 1e1 : undefined,
-            minF: min,
             upperF: 1e2,
           };
         case AMOUNT_UNIT.BILLION:
           return {
             lowerF: 0,
-            maxF: rangeTypeFF === RANGE_TYPE.RANGE ? max ?? 5 : undefined,
-            minF: min,
             upperF: 1e1,
           };
         default:
           return {
             lowerF: 10,
-            maxF: rangeTypeFF === RANGE_TYPE.RANGE ? max ?? 500 : undefined,
-            minF: min,
             upperF: 1e3,
           };
       }
     })();
     rangeSet([lowerF, upperF]);
-    if (rangeTypeF) {
-      rangeTypeSet(rangeTypeF);
-    }
+    rangeTypeF && rangeTypeSet(rangeTypeF);
     valueControlledSet({
       ...valueControlled,
-      max: maxF === minF ? undefined : maxF,
-      min: minF,
+      max:
+        max === null
+          ? undefined
+          : max ?? valueControlled?.max ?? (rangeTypeF === RANGE_TYPE.RANGE ? upperF : undefined),
+      min: min === null ? undefined : min ?? valueControlled?.min,
       unit: unit ?? valueControlled?.unit,
     });
   };
@@ -133,11 +123,9 @@ export const RangeField = <TType extends NumberUnitModel>({
               <NumberField
                 error={error}
                 keyboard={TEXT_FIELD_KEYBOARD.NUMBER_POSITIVE}
-                label={
-                  isRange ? t('data:min', { value: t('funding:amount') }) : t('funding:amount')
-                }
+                label={isRange ? t('data:min', { value: label }) : label}
                 onBlur={handleBlur}
-                onChange={(v) => handleChange({ min: v })}
+                onChange={(v) => handleChange({ min: v ?? null })}
                 value={valueControlled && valueControlled.min}
               />
             ),
@@ -148,9 +136,9 @@ export const RangeField = <TType extends NumberUnitModel>({
               <NumberField
                 error={error}
                 keyboard={TEXT_FIELD_KEYBOARD.NUMBER_POSITIVE}
-                label={t('data:max', { value: t('funding:amount') })}
+                label={t('data:max', { value: label })}
                 onBlur={handleBlur}
-                onChange={(v) => handleChange({ max: v })}
+                onChange={(v) => handleChange({ max: v ?? null })}
                 value={valueControlled && valueControlled.max}
               />
             ),

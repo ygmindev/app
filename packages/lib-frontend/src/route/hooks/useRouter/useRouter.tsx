@@ -8,7 +8,7 @@ import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
-  const { back, isActive, location, push, replace } = _useRouter<TType>();
+  const { back, getPath, isActive, location, push, replace } = _useRouter<TType>();
   const actions = useActions();
   const isLoading = useStore((state) => state.app.isLoading);
   const theme = useTheme();
@@ -36,6 +36,8 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
     back: () => {
       void update(back, { isBack: true });
     },
+
+    getPath,
 
     isActive: ({ from, pathname, ...params }) =>
       pathname

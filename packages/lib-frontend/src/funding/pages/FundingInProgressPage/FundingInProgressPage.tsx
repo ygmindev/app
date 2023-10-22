@@ -33,7 +33,8 @@ export const FundingInProgressPage: LFCModel<FundingInProgressPagePropsModel> = 
             {data?.result?.edges.map(({ node }) => (
               <Tile
                 key={node._id}
-                onPress={() => null}>
+                onPress={() => null}
+                title={t('funding:funding')}>
                 <ItemTable
                   items={[
                     {
@@ -85,7 +86,6 @@ export const FundingInProgressPage: LFCModel<FundingInProgressPagePropsModel> = 
                       title: t('funding:creditRating'),
                     },
                   ]}
-                  titleWidth={100}
                 />
               </Tile>
             ))}

@@ -14,6 +14,7 @@ export const CreditRatingWatchForm: LFCModel<CreditRatingWatchFormPropsModel> = 
   const { t } = useTranslation();
   return (
     <ItemStepForm
+      emptyLabel={t('funding:noWatch')}
       id="longTermWatch"
       initialValues={initialValues}
       message={t('funding:longTermWatchFormMessage')}

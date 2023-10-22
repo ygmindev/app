@@ -11,21 +11,25 @@ import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 export const TabNavigator: LFCModel<TabNavigatorPropsModel> = ({ routes, type, ...props }) => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
-  const { isActive, push } = useRouter();
+  const { getPath, isActive, location, push } = useRouter();
 
   const isActiveF = routes?.find(({ fullpath, pathname }) =>
     isActive({ pathname: fullpath ?? pathname }),
   );
 
   useEffect(() => {
-    !isActiveF && routes && void push({ pathname: routes[0].fullpath ?? routes[0].pathname });
+    if (!isActiveF && routes) {
+      const pathnameF = getPath(routes[0].fullpath ?? routes[0].pathname, location.params);
+      void push({ pathname: pathnameF });
+    }
   }, [isActiveF]);
 
   return (
     <Tabs
       {...wrapperProps}
       onChange={(pathname) => {
-        void push({ pathname });
+        const pathnameF = getPath(pathname, location.params);
+        void push({ pathname: pathnameF });
       }}
       tabs={filterNil(
         routes?.map(

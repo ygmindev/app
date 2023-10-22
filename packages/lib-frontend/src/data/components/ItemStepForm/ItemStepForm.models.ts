@@ -7,5 +7,5 @@ import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 export type ItemStepFormPropsModel<TType, TStep extends PartialModel<TType>> = WithIdModel<
   StringKeyModel<TType>
 > &
-  Pick<ItemFieldPropsModel, 'options'> &
+  Pick<ItemFieldPropsModel, 'emptyLabel' | 'options'> &
   FormStepPropsModel<TType, TStep> & { message?: TranslatableTextModel };

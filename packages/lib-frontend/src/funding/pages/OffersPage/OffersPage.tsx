@@ -1,6 +1,5 @@
 import { Chip } from '#lib-frontend/core/components/Chip/Chip';
 import { type IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
-import { Image } from '#lib-frontend/core/components/Image/Image';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Tile } from '#lib-frontend/core/components/Tile/Tile';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
@@ -8,7 +7,6 @@ import { type SFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { type OffersPagePropsModel } from '#lib-frontend/funding/pages/OffersPage/OffersPage.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 const SIZE = 80;
@@ -109,21 +107,9 @@ export const OffersPage: SFCModel<OffersPagePropsModel> = ({ testID, ...props })
               </Wrapper>
             }
             icon={icon as IconPropsModel['icon']}
+            image={logo}
             key={id}
             onPress={() => null}
-            preview={
-              <Wrapper
-                height={SIZE}
-                isOverflowHidden
-                round={THEME_SIZE.SMALL}
-                width={SIZE}>
-                <Image
-                  height={SIZE}
-                  src={logo}
-                  width={SIZE}
-                />
-              </Wrapper>
-            }
             title={title}>
             <Wrapper isRowAlign>{tags?.map((tag) => <Chip key={tag}>{tag}</Chip>)}</Wrapper>
           </Tile>

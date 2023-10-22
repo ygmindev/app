@@ -10,6 +10,7 @@ import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyle
 import { type PartialModel } from '#lib-shared/core/core.models';
 
 export const ItemStepForm = <TType, TStep extends PartialModel<TType>>({
+  emptyLabel,
   id,
   initialValues,
   message,
@@ -30,6 +31,7 @@ export const ItemStepForm = <TType, TStep extends PartialModel<TType>>({
         {
           element: (
             <ItemField
+              emptyLabel={emptyLabel}
               id={id}
               options={options}
             />

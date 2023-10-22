@@ -17,6 +17,7 @@ export const CreditRatingCategoryForm: LFCModel<CreditRatingCategoryFormPropsMod
   const { t } = useTranslation();
   return (
     <ItemStepForm
+      emptyLabel={t('funding:notRated')}
       id="longTermRating"
       initialValues={initialValues}
       message={t('funding:longTermRatingFormMessage')}

@@ -2,7 +2,6 @@ import find from 'lodash/find';
 import { useRef, useState } from 'react';
 
 import { FloatingFooter } from '#lib-frontend/app/components/FloatingFooter/FloatingFooter';
-import { Image } from '#lib-frontend/core/components/Image/Image';
 import { type ModalRefModel } from '#lib-frontend/core/components/Modal/Modal.models';
 import { ModalButton } from '#lib-frontend/core/components/ModalButton/ModalButton';
 import { Text } from '#lib-frontend/core/components/Text/Text';
@@ -13,7 +12,6 @@ import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { Table } from '#lib-frontend/data/components/Table/Table';
 import { useQuery } from '#lib-frontend/data/hooks/useQuery/useQuery';
-import { CREDIT_RATING_FORM_LOGO_HEIGHT } from '#lib-frontend/funding/containers/CreditRatingForm/CreditRatingForm.constants';
 import { type CreditRatingFormPropsModel } from '#lib-frontend/funding/containers/CreditRatingForm/CreditRatingForm.models';
 import { CreditRatingItemForm } from '#lib-frontend/funding/containers/CreditRatingItemForm/CreditRatingItemForm';
 import { FUNDING } from '#lib-frontend/funding/funding.constants';
@@ -42,7 +40,9 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
   );
   const { getMany } = useRatingAgencyResource();
   const { error } = useNotification();
-  const { data: agencies } = useQuery('agencies', async () => getMany({ filter: [] }));
+  const { data: agencies } = useQuery('agencies', async () => getMany({ filter: [] }), {
+    cache: true,
+  });
   const modalRef = useRef<ModalRefModel>(null);
 
   const handleAdd = async (value: CreditRatingModel): Promise<void> => {
@@ -79,16 +79,8 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
                 return (
                   agencyF && (
                     <Tile
+                      image={agencyF.logo}
                       key={agencyF._id}
-                      preview={
-                        agencyF.logo ? (
-                          <Image
-                            height={CREDIT_RATING_FORM_LOGO_HEIGHT}
-                            isAutoSize
-                            src={agencyF.logo}
-                          />
-                        ) : undefined
-                      }
                       title={agencyF.name}>
                       <Table
                         columns={[{ id: 'name' }, { id: 'value' }]}
@@ -104,7 +96,7 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
               })}
             </Wrapper>
           ) : (
-            <Text type={FONT_TYPE.HEADLINE}>{t('funding:noCreditRatingMessage')}</Text>
+            <Text type={FONT_TYPE.HEADLINE}>{t('funding:notRated')}</Text>
           )
         }
       />

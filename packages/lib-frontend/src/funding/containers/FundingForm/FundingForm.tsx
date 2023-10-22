@@ -9,23 +9,27 @@ import { type FundingFormPropsModel } from '#lib-frontend/funding/containers/Fun
 import { FundingMaturityForm } from '#lib-frontend/funding/containers/FundingMaturityForm/FundingMaturityForm';
 import { FUNDING } from '#lib-frontend/funding/funding.constants';
 import { useFundingResource } from '#lib-frontend/funding/hooks/useFundingResource/useFundingResource';
+import { GROUP } from '#lib-frontend/group/group.constants';
+import { useCurrentGroup } from '#lib-frontend/group/hooks/useCurrentGroup/useCurrentGroup';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
-import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
-import { GROUP_TYPE } from '#lib-shared/group/resources/Group/Group.constants';
+import { GROUP_RESOURCE_NAME } from '#lib-shared/group/resources/Group/Group.constants';
 
 export const FundingForm: LFCModel<FundingFormPropsModel> = ({ ...props }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation([FUNDING]);
   const { create } = useFundingResource();
   const { replace } = useRouter();
-  const currentUser = useCurrentUser();
+  const currentGroup = useCurrentGroup();
   return (
     <StepForm
       {...props}
       initialValues={FUNDING_FORM_INITIAL_VALUES}
-      onSubmit={async (form) => currentUser && create({ form })}
+      onSubmit={async (form) =>
+        currentGroup?._id &&
+        create({ form: { ...form, [GROUP_RESOURCE_NAME]: { _id: currentGroup?._id } } })
+      }
       onSuccess={async () =>
-        replace({ pathname: `${GROUP_TYPE.ISSUER}/${FUNDING}/${IN_PROGRESS}` })
+        replace({ pathname: `/${GROUP}/${currentGroup?._id}/${FUNDING}/${IN_PROGRESS}` })
       }
       steps={[
         {

@@ -1,1 +1,0 @@
-export const CREDIT_RATING_FORM_LOGO_HEIGHT = 40;

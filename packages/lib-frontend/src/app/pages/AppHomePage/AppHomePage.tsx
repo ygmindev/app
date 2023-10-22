@@ -41,7 +41,6 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
                 <RouteLineItem
                   key={_id}
                   label={name}
-                  onPress={() => null}
                   root={GROUP}
                   route={{ pathname: _id ?? '' }}>
                   <Wrapper isRowAlign>

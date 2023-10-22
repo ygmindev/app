@@ -62,6 +62,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       onFocus,
       onRemove,
       onSubmit,
+      placeholder,
       rightElement,
       value,
       ...props
@@ -223,6 +224,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
             }}
             onRemove={onRemove}
             onSubmit={onSubmit}
+            placeholder={placeholder}
             ref={inputRefF}
             value={valueControlled}
           />

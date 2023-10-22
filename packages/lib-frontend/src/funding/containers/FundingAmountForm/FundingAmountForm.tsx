@@ -25,7 +25,12 @@ export const FundingAmountForm: LFCModel<FundingAmountFormPropsModel> = ({
       {...wrapperProps}
       fields={[
         {
-          element: <RangeField unitOptions={AMOUNT_UNIT_OPTIONS} />,
+          element: (
+            <RangeField
+              label={t('funding:amount')}
+              unitOptions={AMOUNT_UNIT_OPTIONS}
+            />
+          ),
           id: 'amount',
         },
       ]}

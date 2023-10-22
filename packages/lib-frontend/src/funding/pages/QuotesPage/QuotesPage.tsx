@@ -1,6 +1,5 @@
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
-import { Image } from '#lib-frontend/core/components/Image/Image';
 import { Tile } from '#lib-frontend/core/components/Tile/Tile';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
@@ -10,7 +9,6 @@ import { useFormatter } from '#lib-frontend/data/hooks/useFormatter/useFormatter
 import { type QuotesPagePropsModel } from '#lib-frontend/funding/pages/QuotesPage/QuotesPage.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 
 export const QuotesPage: SFCModel<QuotesPagePropsModel> = ({ testID, ...props }) => {
@@ -39,15 +37,8 @@ export const QuotesPage: SFCModel<QuotesPagePropsModel> = ({ testID, ...props })
         description={t('funding:quoted', {
           value: format(yesterday, { isReadable: true }),
         })}
+        image="https://companieslogo.com/img/orig/WF-f6e6a56c.png?t=1660034230"
         onPress={() => null}
-        preview={
-          <Image
-            height={80}
-            round={THEME_SIZE.SMALL}
-            src="https://companieslogo.com/img/orig/WF-f6e6a56c.png?t=1660034230"
-            width={80}
-          />
-        }
         title="Woori Bank">
         <Table
           columns={[
@@ -71,15 +62,8 @@ export const QuotesPage: SFCModel<QuotesPagePropsModel> = ({ testID, ...props })
         description={t('funding:quoted', {
           value: format(yesterday, { isReadable: true }),
         })}
+        image="https://design.gs.com/downloads/Goldman_Sachs_Blue_Box.png"
         onPress={() => null}
-        preview={
-          <Image
-            height={80}
-            round={THEME_SIZE.SMALL}
-            src="https://design.gs.com/downloads/Goldman_Sachs_Blue_Box.png"
-            width={80}
-          />
-        }
         title="Goldman Sachs">
         <Table
           columns={[

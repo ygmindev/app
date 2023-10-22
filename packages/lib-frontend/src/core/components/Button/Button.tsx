@@ -133,12 +133,13 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
       {children}
     </TranslatableText>
   );
+
   const iconF = icon ? (
     <Icon
       color={color}
       colorRole={childColorRole}
       icon={icon}
-      width={20}
+      width={isIconOnly ? undefined : theme.shape.size[THEME_SIZE.SMALL]}
     />
   ) : undefined;
 

@@ -444,6 +444,8 @@ scalar DateTime
 
 type Funding {
   CreditRating: [CreditRating]
+  Group: Group
+  User: User
   _id: String
   amount: ScaledNumberRange
   created: DateTime
@@ -453,6 +455,8 @@ type Funding {
 
 input FundingCreateFormInput {
   CreditRating: [CreditRatingInput]
+  Group: GroupInput
+  User: UserInput
   _id: String
   amount: ScaledNumberRangeInput
   created: DateTime
@@ -529,12 +533,32 @@ type FundingGetManyOutput {
   result: [Funding]
 }
 
+input FundingGetManyProtectedGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: FundingInput
+  stringValue: String
+}
+
+input FundingGetManyProtectedGetManyInput {
+  filter: [FundingGetManyProtectedGetManyFilterInput]
+}
+
+type FundingGetManyProtectedGetManyOutput {
+  result: [Funding]
+}
+
 type FundingGetOutput {
   result: Funding
 }
 
 input FundingInput {
   CreditRating: [CreditRatingInput]
+  Group: GroupInput
+  User: UserInput
   _id: String
   amount: ScaledNumberRangeInput
   created: DateTime
@@ -581,6 +605,8 @@ type FundingUpdateOutput {
 
 input FundingUpdateUpdateInput {
   CreditRating: [CreditRatingInput]
+  Group: GroupInput
+  User: UserInput
   _id: String
   amount: ScaledNumberRangeInput
   created: DateTime
@@ -952,6 +978,7 @@ type Query {
   FundingGet(input: FundingGetInput): FundingGetOutput
   FundingGetConnection(input: FundingGetConnectionInput): FundingGetConnectionOutput
   FundingGetMany(input: FundingGetManyInput): FundingGetManyOutput
+  FundingGetManyProtectedGetMany(input: FundingGetManyProtectedGetManyInput): FundingGetManyProtectedGetManyOutput
   GroupGet(input: GroupGetInput): GroupGetOutput
   GroupGetConnection(input: GroupGetConnectionInput): GroupGetConnectionOutput
   GroupGetMany(input: GroupGetManyInput): GroupGetManyOutput

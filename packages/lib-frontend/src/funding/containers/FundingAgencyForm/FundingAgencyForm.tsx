@@ -20,6 +20,7 @@ export const FundingAgencyForm: LFCModel<FundingAgencyFormPropsModel> = ({
   return (
     <ItemStepForm
       {...wrapperProps}
+      emptyLabel={t('funding:notRated')}
       id="_agency"
       initialValues={initialValues}
       message={t('funding:agencyFormMessage')}
@@ -30,8 +31,9 @@ export const FundingAgencyForm: LFCModel<FundingAgencyFormPropsModel> = ({
       }}
       onSuccess={onSuccess}
       options={async () =>
-        (await getMany({ filter: [] }))?.result?.map(({ _id, name }) => ({
+        (await getMany({ filter: [] }))?.result?.map(({ _id, logo, name }) => ({
           id: _id ?? '',
+          image: logo,
           label: name,
         })) ?? []
       }

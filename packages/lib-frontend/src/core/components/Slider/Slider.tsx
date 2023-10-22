@@ -15,7 +15,7 @@ import {
   THEME_ROLE,
   THEME_SIZE,
 } from '#lib-frontend/style/style.constants';
-import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import { FONT_ALIGN } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { type RangeModel } from '#lib-shared/data/data.models';
 
 export const Slider: LFCModel<SliderPropsModel> = ({
@@ -59,11 +59,15 @@ export const Slider: LFCModel<SliderPropsModel> = ({
       />
 
       <Wrapper
-        isRowAlign
-        justify={FLEX_JUSTIFY.SPACE_BETWEEN}>
-        {lower && <Text>{formatter ? formatter(lower) : toString(lower)}</Text>}
+        isDistribute
+        isRowAlign>
+        {lower !== undefined && (
+          <Text align={FONT_ALIGN.LEFT}>{formatter ? formatter(lower) : toString(lower)}</Text>
+        )}
 
-        {upper && <Text>{formatter ? formatter(upper) : toString(upper)}</Text>}
+        {lower !== undefined && (
+          <Text align={FONT_ALIGN.RIGHT}>{formatter ? formatter(upper) : toString(upper)}</Text>
+        )}
       </Wrapper>
     </Wrapper>
   );

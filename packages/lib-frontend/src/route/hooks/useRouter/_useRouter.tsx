@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { generatePath } from 'react-router';
 import { matchPath, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import { type _UseRouterModel } from '#lib-frontend/route/hooks/useRouter/_useRouter.models';
@@ -16,6 +17,9 @@ export const _useRouter = <TType = object,>(): _UseRouterModel<TType> => {
 
   return {
     back: () => navigate(-1),
+
+    getPath: <TTypeNext,>(pathname: string, params?: TTypeNext) =>
+      generatePath(pathname, params as object),
 
     isActive: ({ from, isExact = false, pathname }) => {
       if (!pathname) {

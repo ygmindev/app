@@ -10,11 +10,11 @@ import { QuotesPage } from '#lib-frontend/funding/pages/QuotesPage/QuotesPage';
 import { GROUP } from '#lib-frontend/group/group.constants';
 import { GroupFormPage } from '#lib-frontend/group/pages/GroupFormPage/GroupFormPage';
 import { GroupHomePage } from '#lib-frontend/group/pages/GroupHomePage/GroupHomePage';
+import { GroupPage } from '#lib-frontend/group/pages/GroupPage/GroupPage';
 import { TabNavigator } from '#lib-frontend/route/components/TabNavigator/TabNavigator';
 import { type RouteModel } from '#lib-frontend/route/route.models';
 import { getRouteGroup } from '#lib-frontend/route/utils/getRouteGroup/getRouteGroup';
 import { getRoutes } from '#lib-frontend/route/utils/getRoutes/getRoutes';
-import { GROUP_TYPE } from '#lib-shared/group/resources/Group/Group.constants';
 
 export const routes: Array<RouteModel> = getRoutes({
   appRoutes: [
@@ -24,26 +24,22 @@ export const routes: Array<RouteModel> = getRoutes({
       pathname: '/',
     },
     {
-      isProtectable: true,
-      pathname: GROUP,
-      routes: [
-        {
-          element: <GroupFormPage />,
-          pathname: FORM,
-        },
-      ],
-    },
-    {
+      element: <GroupPage />,
       isProtectable: true,
       layoutProps: { p: true },
       navigator: <TabNavigator type={TABS_TYPE.UNDERLINE} />,
-      pathname: GROUP_TYPE.ISSUER,
+      pathname: `${GROUP}/:id`,
       routes: [
         {
           element: <GroupHomePage />,
           icon: 'document',
-          pathname: `${SUMMARY}/:id`,
+          pathname: SUMMARY,
           title: ({ t }) => t('core:summary'),
+        },
+        {
+          element: <GroupFormPage />,
+          isNavigatable: false,
+          pathname: FORM,
         },
         {
           element: <FundingPage />,

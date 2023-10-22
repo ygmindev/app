@@ -58,22 +58,26 @@ const getTextContentType = (
 export const _TextField = composeComponent<_TextFieldPropsModel, TextInputProps>({
   Component: TextInput,
 
-  getProps: ({
-    autoComplete,
-    foregroundColor,
-    isDisabled,
-    keyboard,
-    language,
-    maxLength,
-    numberOfLines,
-    onBlur,
-    onChange,
-    onEscape,
-    onFocus,
-    onRemove,
-    onSubmit,
-    value,
-  }) => ({
+  getProps: (
+    {
+      autoComplete,
+      foregroundColor,
+      isDisabled,
+      keyboard,
+      language,
+      maxLength,
+      numberOfLines,
+      onBlur,
+      onChange,
+      onEscape,
+      onFocus,
+      onRemove,
+      onSubmit,
+      placeholder,
+      value,
+    },
+    theme,
+  ) => ({
     accessibilityLanguage: language,
     autoCapitalize: 'none',
     autoComplete: getAutoCompleteType(autoComplete, keyboard),
@@ -96,6 +100,8 @@ export const _TextField = composeComponent<_TextFieldPropsModel, TextInputProps>
       }
     },
     onSubmitEditing: onSubmit,
+    placeholder,
+    placeholderTextColor: theme.color.border,
     secureTextEntry: keyboard === TEXT_FIELD_KEYBOARD.PASSWORD,
     spellCheck: false,
     textColor: foregroundColor,

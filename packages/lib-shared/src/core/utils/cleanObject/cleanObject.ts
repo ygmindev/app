@@ -1,4 +1,4 @@
-import { toPlainObject } from 'lodash';
+import toPlainObject from 'lodash/toPlainObject';
 import { ObjectId } from 'mongodb';
 
 import { cleanObject as cleanObjectBase } from '#lib-shared/core/utils/cleanObject/cleanObject.base';

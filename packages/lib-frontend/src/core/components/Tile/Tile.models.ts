@@ -9,9 +9,8 @@ export type TilePropsModel = ChildrenPropsModel &
   Pick<IconPropsModel, 'icon'> &
   Pick<PressablePropsModel, 'onPress'> & {
     description?: TranslatableTextModel | ReactElement;
+    image?: string;
     isBorder?: boolean;
     onPressTooltip?: TranslatableTextModel;
-    preview?: ReactElement;
-    rightElement?: ReactElement;
     title?: TranslatableTextModel;
   };

@@ -12,13 +12,13 @@ export const expandFilter = <TType extends unknown>(
   params.map(({ condition, field, value }) => {
     const valueF = ((): Omit<FilterModel<TType>, 'condition' | 'field'> => {
       switch (trueTypeOf(value)) {
-        case 'boolean':
+        case 'Boolean':
           return { booleanValue: value as boolean };
-        case 'date':
+        case 'Date':
           return { dateValue: value as Date };
-        case 'number':
+        case 'Number':
           return { numberValue: value as number };
-        case 'string':
+        case 'String':
           return { stringValue: value as string };
         default:
           return { resourceValue: value as PartialModel<TType> };
