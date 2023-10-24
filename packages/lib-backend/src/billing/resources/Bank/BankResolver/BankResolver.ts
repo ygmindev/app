@@ -11,7 +11,7 @@ import { type BankFormModel, type BankModel } from '#lib-shared/billing/resource
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withContainer()
-@withResolver({ Resource: Bank })
+@withResolver({ Resource: () => Bank })
 export class BankResolver
   extends createEmbeddedResourceResolver<BankModel, BankFormModel, UserModel>({
     Resource: Bank,

@@ -24,8 +24,13 @@ export const Table = <TType,>({
   return rows?.length ? (
     <Wrapper
       {...wrapperProps}
+      border
       flex
-      position={SHAPE_POSITION.RELATIVE}>
+      isHorizontalScrollable
+      isVerticalScrollable
+      p
+      position={SHAPE_POSITION.RELATIVE}
+      round>
       {!isHeadless && (
         <Wrapper
           border={DIRECTION.BOTTOM}
@@ -39,6 +44,7 @@ export const Table = <TType,>({
               p={THEME_SIZE.SMALL}>
               <Text
                 align={align}
+                isBold
                 isEllipsis>
                 {label}
               </Text>

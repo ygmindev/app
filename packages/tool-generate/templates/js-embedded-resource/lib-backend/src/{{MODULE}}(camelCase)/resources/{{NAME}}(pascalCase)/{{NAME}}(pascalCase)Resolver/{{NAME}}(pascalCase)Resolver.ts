@@ -13,7 +13,7 @@ import {
 import { type {{NAME_ROOT}}(pascalCase)Model } from '#lib-shared/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase).models';
 
 @withContainer()
-@withResolver({ Resource: {{NAME}}(pascalCase) })
+@withResolver({ Resource: () => {{NAME}}(pascalCase) })
 export class {{NAME}}(pascalCase)Resolver
   extends createEmbeddedResourceResolver<{{NAME}}(pascalCase)Model, {{NAME}}(pascalCase)FormModel, {{NAME_ROOT}}(pascalCase)Model>({
     Resource: {{NAME}}(pascalCase),

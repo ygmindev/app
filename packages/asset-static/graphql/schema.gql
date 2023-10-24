@@ -616,7 +616,6 @@ input FundingUpdateUpdateInput {
 
 type Group {
   Group: Group
-  User: User
   _id: String
   created: DateTime
   logo: String
@@ -625,8 +624,6 @@ type Group {
 }
 
 input GroupCreateFormInput {
-  Group: GroupInput
-  User: UserInput
   _id: String
   created: DateTime
   logo: String
@@ -726,8 +723,6 @@ type GroupGetOutput {
 }
 
 input GroupInput {
-  Group: GroupInput
-  User: UserInput
   _id: String
   created: DateTime
   logo: String
@@ -773,8 +768,6 @@ type GroupUpdateOutput {
 }
 
 input GroupUpdateUpdateInput {
-  Group: GroupInput
-  User: UserInput
   _id: String
   created: DateTime
   logo: String

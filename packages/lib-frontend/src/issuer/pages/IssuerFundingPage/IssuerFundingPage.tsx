@@ -8,6 +8,7 @@ import { useCurrentGroup } from '#lib-frontend/group/hooks/useCurrentGroup/useCu
 import { type IssuerFundingPagePropsModel } from '#lib-frontend/issuer/pages/IssuerFundingPage/IssuerFundingPage.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
+import { GROUP_TYPE } from '#lib-shared/group/resources/Group/Group.constants';
 
 export const IssuerFundingPage: LFCModel<IssuerFundingPagePropsModel> = ({ children }) => {
   const { t } = useTranslation([FUNDING]);
@@ -20,7 +21,11 @@ export const IssuerFundingPage: LFCModel<IssuerFundingPagePropsModel> = ({ child
       <FloatingFooter>
         <Button
           icon="add"
-          onPress={() => push({ pathname: `/${GROUP}/${currentGroup?._id}/${FUNDING}/${FORM}` })}>
+          onPress={() =>
+            push({
+              pathname: `/${GROUP}/${currentGroup?._id}/${GROUP_TYPE.ISSUER}/${FUNDING}/${FORM}`,
+            })
+          }>
           {t('core:new', { value: t('funding:funding') })}
         </Button>
       </FloatingFooter>

@@ -11,7 +11,7 @@ import {
 } from '#lib-shared/auth/resources/Access/Access.models';
 
 @withContainer()
-@withResolver({ Resource: Access })
+@withResolver({ Resource: () => Access })
 export class AccessResolver
   extends createProtectedResourceResolver<AccessModel, AccessFormModel>({
     Resource: Access,

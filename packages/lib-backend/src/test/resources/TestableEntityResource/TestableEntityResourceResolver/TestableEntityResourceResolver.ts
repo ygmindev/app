@@ -11,7 +11,7 @@ import {
 import { type TestableEntityResourceServiceModel } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResourceService/TestableEntityResourceService.models';
 
 @withContainer()
-@withResolver({ Resource: TestableEntityResource })
+@withResolver({ Resource: () => TestableEntityResource })
 export class TestableEntityResourceResolver
   extends createEntityResourceResolver<
     TestableEntityResourceModel,

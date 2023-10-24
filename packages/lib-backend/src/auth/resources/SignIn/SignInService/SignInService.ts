@@ -13,6 +13,8 @@ import {
   type SignInModel,
 } from '#lib-shared/auth/resources/SignIn/SignIn.models';
 import { type SignInServiceModel } from '#lib-shared/auth/resources/SignIn/SignInService/SignInService.models';
+import { type PartialModel } from '#lib-shared/core/core.models';
+import { NotFoundError } from '#lib-shared/core/errors/NotFoundError/NotFoundError';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { pick } from '#lib-shared/core/utils/pick/pick';
@@ -27,19 +29,19 @@ import { type UserFormModel, type UserModel } from '#lib-shared/user/resources/U
 
 @withContainer({ name: `${SIGN_IN_RESOURCE_NAME}Service` })
 export class SignInService implements SignInServiceModel {
-  @withInject(UserService) protected _userService!: UserService;
+  @withInject(UserService) protected userService!: UserService;
 
-  @withInject(OtpService) protected _otpService!: OtpService;
+  @withInject(OtpService) protected otpService!: OtpService;
 
-  @withInject(JwtService) protected _jwtService!: JwtService;
+  @withInject(JwtService) protected jwtService!: JwtService;
 
-  createSignIn = async (user: UserModel | null | undefined): Promise<SignInModel> => {
-    if (user) {
+  createSignIn = async (user: PartialModel<UserModel> | null | undefined): Promise<SignInModel> => {
+    if (user?._id) {
       const claims = pick(user, SIGN_IN_TOKEN_CLAIM_KEYS);
-      const token = await this._jwtService.createToken(user._id, claims);
+      const token = await this.jwtService.createToken(user._id, claims);
       return { token, user };
     }
-    return {};
+    throw new NotFoundError('user');
   };
 
   async create({
@@ -49,14 +51,14 @@ export class SignInService implements SignInServiceModel {
   > {
     if (form.otp) {
       const formF = cleanObject(pick(form, ['callingCode', 'email', 'phone']));
-      await this._otpService.verify({ ...formF, otp: form.otp });
+      await this.otpService.verify({ ...formF, otp: form.otp });
       delete (formF as Partial<SignInFormModel>).otp;
-      let { result: user } = await this._userService.get({
+      let { result: user } = await this.userService.get({
         filter: objectToEquality(formF),
       });
       let isNew;
       if (!user) {
-        const { result: created } = await this._userService.create({ form: formF });
+        const { result: created } = await this.userService.create({ form: formF });
         user = created;
         isNew = true;
       }
@@ -70,7 +72,7 @@ export class SignInService implements SignInServiceModel {
     input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, UserModel, UserFormModel>,
     _context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
-    const result = await this._userService.update(input);
+    const result = await this.userService.update(input);
     if (result?.result) {
       const signIn = await this.createSignIn(result.result);
       return { result: signIn };
@@ -84,8 +86,8 @@ export class SignInService implements SignInServiceModel {
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
     if (form.otp) {
       const formF = cleanObject(form);
-      const otp = await this._otpService.verify(formF);
-      const { result: user } = await this._userService.update({
+      const otp = await this.otpService.verify(formF);
+      const { result: user } = await this.userService.update({
         filter: filterNil([
           context?.user?._id && { field: '_id', value: context.user._id },
           otp.email && { field: 'email', value: otp.email },

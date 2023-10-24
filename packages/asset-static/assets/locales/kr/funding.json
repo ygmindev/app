@@ -2,10 +2,14 @@
   "agencyFormMessage": "TRANSLATION_MISSING",
   "amount": "TRANSLATION_MISSING",
   "amountFormMessage": "TRANSLATION_MISSING",
+  "benchmark": "TRANSLATION_MISSING",
+  "benchmarkYield": "TRANSLATION_MISSING",
   "creditRating": "TRANSLATION_MISSING",
   "curencyFormMessage": "TRANSLATION_MISSING",
   "currency": "TRANSLATION_MISSING",
+  "deal_plural": "TRANSLATION_MISSING",
   "funding": "TRANSLATION_MISSING",
+  "issuer": "TRANSLATION_MISSING",
   "longTermRating": "TRANSLATION_MISSING",
   "longTermRatingFormMessage": "TRANSLATION_MISSING",
   "longTermWatch": "TRANSLATION_MISSING",
@@ -16,5 +20,8 @@
   "noWatch": "TRANSLATION_MISSING",
   "quoted": "TRANSLATION_MISSING",
   "ratingAgency": "TRANSLATION_MISSING",
-  "watch": "TRANSLATION_MISSING"
+  "spread": "TRANSLATION_MISSING",
+  "swappedToFloating": "TRANSLATION_MISSING",
+  "watch": "TRANSLATION_MISSING",
+  "yield": "TRANSLATION_MISSING"
 }

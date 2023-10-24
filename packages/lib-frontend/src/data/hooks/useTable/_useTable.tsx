@@ -22,7 +22,7 @@ export const _useTable = <TType,>({
         accessorKey: id,
         header: label ? t(label) : id,
         minSize: 0,
-        size: width ?? 0,
+        size: width,
       })) ?? [],
     data: data ?? [],
     getCoreRowModel: getCoreRowModel(),

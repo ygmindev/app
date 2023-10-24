@@ -20,7 +20,7 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
   const { t } = useTranslation([GROUP]);
   const { wrapperProps } = useLayoutStyles({ props });
   const currentUser = useCurrentUser();
-  const { getManyProtected } = useGroupResource();
+  const { getMany } = useGroupResource();
   return (
     <MainLayout
       {...wrapperProps}
@@ -34,7 +34,7 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
             result: range(3).map((i) => ({ _id: `${i}` })),
           }}
           id="accesses"
-          query={async () => getManyProtected({ filter: [] })}>
+          query={async () => getMany({ filter: [] })}>
           {({ data }) => (
             <>
               {data?.result?.map(({ _id, name, types }) => (

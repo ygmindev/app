@@ -11,7 +11,7 @@ import {
 } from '#lib-shared/funding/resources/Funding/Funding.models';
 
 @withContainer()
-@withResolver({ Resource: Funding })
+@withResolver({ Resource: () => Funding })
 export class FundingResolver
   extends createProtectedResourceResolver<FundingModel, FundingFormModel>({
     Resource: Funding,

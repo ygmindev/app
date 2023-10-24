@@ -11,7 +11,7 @@ import {
 } from '#lib-shared/funding/resources/RatingAgency/RatingAgency.models';
 
 @withContainer()
-@withResolver({ Resource: RatingAgency })
+@withResolver({ Resource: () => RatingAgency })
 export class RatingAgencyResolver
   extends createEntityResourceResolver<RatingAgencyModel, RatingAgencyFormModel>({
     Resource: RatingAgency,

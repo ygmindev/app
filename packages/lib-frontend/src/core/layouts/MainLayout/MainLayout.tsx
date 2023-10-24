@@ -7,7 +7,11 @@ import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 
-export const MainLayout: LFCModel<MainLayoutPropsModel> = ({ children, ...props }) => {
+export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
+  children,
+  size = THEME_SIZE.MEDIUM,
+  ...props
+}) => {
   const { computedStyles, inheritedStyles, wrapperProps } = useLayoutStyles({ props });
   const isMobile = useIsMobile();
   const isFullWidthF = props.isFullWidth || isMobile;
@@ -17,14 +21,14 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({ children, ...props 
       align={FLEX_JUSTIFY.CENTER}
       flex
       isFullWidth={isFullWidthF}
+      isVerticalScrollable
       justify={FLEX_JUSTIFY.FLEX_START}
       style={inheritedStyles}>
       <Wrapper
         {...wrapperProps}
         flex
-        isVerticalScrollable
         style={computedStyles}
-        width={isFullWidthF ? undefined : theme.layout.width[THEME_SIZE.MEDIUM]}>
+        width={isFullWidthF ? undefined : theme.layout.width[size]}>
         {children}
       </Wrapper>
     </Wrapper>

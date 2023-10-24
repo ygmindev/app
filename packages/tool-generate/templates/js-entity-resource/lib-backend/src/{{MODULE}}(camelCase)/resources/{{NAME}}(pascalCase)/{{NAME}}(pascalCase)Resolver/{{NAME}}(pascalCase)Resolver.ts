@@ -11,7 +11,7 @@ import {
 import { type {{NAME}}(pascalCase)ResolverModel } from '#lib-backend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Resolver/{{NAME}}(pascalCase)Resolver.models';
 
 @withContainer()
-@withResolver({ Resource: {{NAME}}(pascalCase) })
+@withResolver({ Resource: () => {{NAME}}(pascalCase) })
 export class {{NAME}}(pascalCase)Resolver
   extends createEntityResourceResolver<{{NAME}}(pascalCase)Model, {{NAME}}(pascalCase)FormModel>({
     Resource: {{NAME}}(pascalCase),

@@ -63,6 +63,8 @@ export const _viewParams: ComposeComponentParamsModel<
             scrollEnabled
             scrollEventThrottle={16}
             scrollToOverflowEnabled
+            // showsHorizontalScrollIndicator={isHorizontalScrollable}
+            // showsVerticalScrollIndicator={isVerticalScrollable}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
           />

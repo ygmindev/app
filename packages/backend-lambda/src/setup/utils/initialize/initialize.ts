@@ -7,7 +7,6 @@ import { getContext } from '#lib-backend/serverless/utils/getContext/getContext'
 import { initialize as initializeBackend } from '#lib-backend/setup/utils/initialize/initialize';
 import { _config } from '#lib-config/data/graphql/graphql';
 import { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
-import { error } from '#lib-shared/logging/utils/logger/logger';
 
 export const initialize = async (): Promise<InitializeModel> => {
   const { database } = await initializeBackend();
@@ -20,7 +19,7 @@ export const initialize = async (): Promise<InitializeModel> => {
         e.message ?? originalErrorF?.message,
         (e.extensions?.stacktrace as string) ?? (e as Error)?.stack ?? originalErrorF.stack,
       );
-      error(errorF);
+      console.error(errorF);
       return errorF;
     },
     schema: _config(),

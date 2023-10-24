@@ -26,7 +26,7 @@ export type CreateResourceResolverParamsModel<
 
   RootResource?: TRoot extends undefined ? never : ResourceClassModel<TRoot>;
 
-  access?: Record<ResourceResolverAccessTypeModel, AccessLevelModel>;
+  access?: PartialModel<Record<ResourceResolverAccessTypeModel, AccessLevelModel>>;
 
   authorizer?: {
     default?: ResourceResolverAuthorizerModel<ResourceMethodTypeModel, TType, TForm>;

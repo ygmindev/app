@@ -14,7 +14,7 @@ import { type LinkedUserServiceModel } from '#lib-shared/user/resources/LinkedUs
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withContainer()
-@withResolver({ Resource: LinkedUser })
+@withResolver({ Resource: () => LinkedUser })
 export class LinkedUserResolver
   extends createEmbeddedResourceResolver<LinkedUserModel, LinkedUserFormModel, UserModel>({
     Resource: LinkedUser,

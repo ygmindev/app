@@ -5,5 +5,5 @@ import {
 } from '#lib-backend/http/utils/withResolver/withResolver.models';
 
 export const withResolver = <TType extends unknown>(
-  params: WithResolverParamsModel<TType>,
+  params: WithResolverParamsModel<TType> = {},
 ): WithResolverModel => _withResolver(params);

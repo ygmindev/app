@@ -97,9 +97,9 @@ export const THEME_CONFIG = {
     },
 
     size: {
-      [THEME_SIZE.LARGE]: 52,
+      [THEME_SIZE.LARGE]: 55,
 
-      [THEME_SIZE.MEDIUM]: 47,
+      [THEME_SIZE.MEDIUM]: 50,
 
       [THEME_SIZE.SMALL]: 32,
 

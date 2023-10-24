@@ -64,6 +64,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       onSubmit,
       placeholder,
       rightElement,
+      size = label ? THEME_SIZE.MEDIUM : THEME_SIZE.SMALL,
       value,
       ...props
     },
@@ -185,7 +186,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         {...wrapperProps}
         border={!isTransparent}
         elementState={elementStateF}
-        height={theme.shape.size[THEME_SIZE.MEDIUM]}
+        height={theme.shape.size[size]}
         onElementStateChange={elementStateSet}
         pHorizontal
         position={SHAPE_POSITION.RELATIVE}

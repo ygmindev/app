@@ -10,7 +10,7 @@ import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constan
 import { type UserFormModel, type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withContainer()
-@withResolver({ Resource: User })
+@withResolver({ Resource: () => User })
 export class UserResolver
   extends createEntityResourceResolver<UserModel, UserFormModel>({
     Resource: User,

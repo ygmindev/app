@@ -15,7 +15,7 @@ export const createEmbeddedResourceResolver = <
   params: CreateEmbeddedResourceResolverParamsModel<TType, TForm, TRoot>,
 ): CreateEmbeddedResourceResolverModel<TType, TForm, TRoot> => {
   const ResourceResolver = createResourceResolver<TType, TForm, TRoot>(params);
-  @withResolver({ isAbstract: true })
+  @withResolver()
   class EmbeddedResourceResolver extends ResourceResolver {}
   return EmbeddedResourceResolver as CreateEmbeddedResourceResolverModel<TType, TForm, TRoot>;
 };

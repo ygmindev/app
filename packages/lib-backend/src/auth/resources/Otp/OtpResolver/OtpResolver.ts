@@ -8,7 +8,7 @@ import { OTP_RESOURCE_NAME } from '#lib-shared/auth/resources/Otp/Otp.constants'
 import { type OtpFormModel, type OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
 
 @withContainer()
-@withResolver({ Resource: Otp })
+@withResolver({ Resource: () => Otp })
 export class OtpResolver
   extends createEntityResourceResolver<OtpModel, OtpFormModel>({
     Resource: Otp,

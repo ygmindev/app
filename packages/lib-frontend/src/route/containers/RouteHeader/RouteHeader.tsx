@@ -15,22 +15,23 @@ import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { ROUTE_DIRECTION } from '#lib-frontend/route/route.constants';
 import { type RouteDirectionModel } from '#lib-frontend/route/route.models';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR_MORE } from '#lib-frontend/style/style.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
-export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ...props }) => {
+export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, ...props }) => {
   const { t } = useTranslation();
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
-  const { back, push } = useRouter();
+  const { back, getPath, location, push } = useRouter();
   const previous = route.header?.previous;
   const ref = useRef<WrapperRefModel>(null);
   const isLoading = useStore((state) => state.app.isLoading);
   return (
     <Wrapper
+      {...wrapperProps}
       animation={{ duration: theme.animation.transition, states: ANIMATION_STATES_APPEARABLE }}
       backgroundColor={THEME_COLOR_MORE.SURFACE}
       border={DIRECTION.BOTTOM}
@@ -41,9 +42,7 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ..
       pHorizontal
       position={SHAPE_POSITION.RELATIVE}
       ref={ref}
-      s
-      style={styles}
-      testID={testID}>
+      s>
       {previous && (
         <Button
           elementState={isLoading ? ELEMENT_STATE.DISABLED : undefined}
@@ -53,13 +52,19 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, testID, ..
             if ((previous as RouteDirectionModel) === ROUTE_DIRECTION.BACK) {
               return back();
             }
+            // const previousF =
+            //   (previous as RouteDirectionModel) === ROUTE_DIRECTION.UP
+            //     ? route.pathname === '/'
+            //       ? route.parent?.slice(0, route.parent.lastIndexOf('/'))
+            //       : route.parent
+            //     : previous;
             const previousF =
               (previous as RouteDirectionModel) === ROUTE_DIRECTION.UP
-                ? route.pathname === '/'
-                  ? route.parent?.slice(0, route.parent.lastIndexOf('/'))
-                  : route.parent
+                ? location.pathname.slice(0, location.pathname.lastIndexOf('/'))
                 : previous;
-            return previousF && push({ isBack: true, pathname: previousF });
+            return (
+              previousF && push({ isBack: true, pathname: getPath(previousF, location.params) })
+            );
           }}
           type={BUTTON_TYPE.INVISIBLE}
         />

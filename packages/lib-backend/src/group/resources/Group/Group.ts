@@ -1,4 +1,4 @@
-import { ProtectedResource } from '#lib-backend/auth/resources/ProtectedResource/ProtectedResource';
+import { EntityResource } from '#lib-backend/resource/resources/EntityResource/EntityResource';
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { DATA_TYPE } from '#lib-shared/data/data.constants';
@@ -9,7 +9,7 @@ import {
 } from '#lib-shared/group/resources/Group/Group.models';
 
 @withEntity({ isRepository: true, name: GROUP_RESOURCE_NAME })
-export class Group extends ProtectedResource implements GroupModel {
+export class Group extends EntityResource implements GroupModel {
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   name!: string;
 

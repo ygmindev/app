@@ -41,7 +41,7 @@ const { _config, config } = defineConfig({
 
         region: process.env.SERVER_REGION,
 
-        timeout: 10,
+        timeout: 15,
       },
     }) satisfies ServerlessConfigModel,
 });

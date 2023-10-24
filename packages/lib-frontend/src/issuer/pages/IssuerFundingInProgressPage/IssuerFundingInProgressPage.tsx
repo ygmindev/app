@@ -1,99 +1,34 @@
-import { Chip } from '#lib-frontend/core/components/Chip/Chip';
-import { Text } from '#lib-frontend/core/components/Text/Text';
-import { Tile } from '#lib-frontend/core/components/Tile/Tile';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
-import { withDivider } from '#lib-frontend/core/utils/withDivider/withDivider';
 import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBoundary';
-import { ItemTable } from '#lib-frontend/data/components/ItemTable/ItemTable';
-import { useFormatter } from '#lib-frontend/data/hooks/useFormatter/useFormatter';
+import { FundingTile } from '#lib-frontend/funding/components/FundingTile/FundingTile';
 import { useFundingResource } from '#lib-frontend/funding/hooks/useFundingResource/useFundingResource';
 import { useCurrentGroup } from '#lib-frontend/group/hooks/useCurrentGroup/useCurrentGroup';
 import { type IssuerFundingInProgressPagePropsModel } from '#lib-frontend/issuer/pages/IssuerFundingInProgressPage/IssuerFundingInProgressPage.models';
-import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { THEME_COLOR } from '#lib-frontend/style/style.constants';
-import { CREDIT_RATING_WATCH } from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
 
 export const IssuerFundingInProgressPage: LFCModel<IssuerFundingInProgressPagePropsModel> = ({
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { t } = useTranslation();
-  const { formatRange } = useFormatter();
-  const { getConnection } = useFundingResource();
+  const { getMany } = useFundingResource();
   const currentGroup = useCurrentGroup();
   return (
     <MainLayout
       {...wrapperProps}
-      p
       s>
       <DataBoundary
         id="fundings"
-        query={async () => getConnection({ filter: [], pagination: { first: 10 } })}>
+        query={async () => getMany({ filter: [] })}>
         {({ data }) => (
           <Wrapper s>
-            {data?.result?.edges.map(({ node }) => (
-              <Tile
+            {data?.result?.map((funding) => (
+              <FundingTile
+                funding={funding}
                 image={currentGroup?.logo}
-                key={node._id}
-                onPress={() => null}
-                title={t('funding:funding')}>
-                <ItemTable
-                  items={[
-                    {
-                      description: `${node.currency} ${formatRange(node.amount, {
-                        isScale: false,
-                      })}`,
-                      icon: 'water',
-                      id: 'amount',
-                      title: t('funding:amount'),
-                    },
-                    {
-                      description: `${formatRange(node.maturity, { isScale: false })}`,
-                      icon: 'hourglass',
-                      id: 'maturity',
-                      title: t('funding:maturity'),
-                    },
-                    {
-                      description: (
-                        <Wrapper
-                          isRow
-                          s>
-                          {node.CreditRating &&
-                            withDivider(
-                              node.CreditRating.map(({ _id, longTermRating, longTermWatch }) => ({
-                                element: (
-                                  <Wrapper isRowAlign>
-                                    <Text>{longTermRating}</Text>
-
-                                    {longTermWatch && (
-                                      <Chip
-                                        color={
-                                          longTermWatch === CREDIT_RATING_WATCH.POSITIVE
-                                            ? THEME_COLOR.SUCCESS
-                                            : THEME_COLOR.WARNING
-                                        }
-                                        icon="eye">
-                                        {longTermWatch}
-                                      </Chip>
-                                    )}
-                                  </Wrapper>
-                                ),
-                                id: _id ?? '',
-                              })),
-                              { isVertical: true },
-                            )}
-                        </Wrapper>
-                      ),
-                      icon: 'speedometer',
-                      id: 'creditRatings',
-                      title: t('funding:creditRating'),
-                    },
-                  ]}
-                />
-              </Tile>
+                key={funding._id}
+              />
             ))}
           </Wrapper>
         )}

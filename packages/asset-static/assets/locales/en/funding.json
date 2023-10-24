@@ -2,10 +2,13 @@
   "agencyFormMessage": "do you have any credit rating from the agencies below?",
   "amount": "amount",
   "amountFormMessage": "how much funding do you need?",
+  "benchmark": "benchmark",
   "creditRating": "credit rating",
   "curencyFormMessage": "which currency do you need funding in?",
   "currency": "currency",
+  "deal_plural": "deals",
   "funding": "funding",
+  "issuer": "issuer",
   "longTermRating": "long-term rating",
   "longTermRatingFormMessage": "what is the long term credit rating?",
   "longTermWatch": "long-term watch",
@@ -16,5 +19,8 @@
   "noWatch": "no watch",
   "quoted": "quoted {{value}}",
   "ratingAgency": "rating agency",
-  "watch": "watch"
+  "spread": "spread",
+  "swappedToFloating": "swapped to floating",
+  "watch": "watch",
+  "yield": "yield"
 }

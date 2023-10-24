@@ -8,7 +8,7 @@ import { type SnapshotModel } from '#lib-shared/test/resources/Snapshot/Snapshot
 import { type SnapshotServiceModel } from '#lib-shared/test/resources/Snapshot/SnapshotService/SnapshotService.models';
 
 @withContainer()
-@withResolver({ Resource: Snapshot })
+@withResolver({ Resource: () => Snapshot })
 export class SnapshotResolver
   extends createEntityResourceResolver<SnapshotModel>({
     Resource: Snapshot,

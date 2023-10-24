@@ -7,11 +7,10 @@ import {
 
 export function _withResolver<TType>({
   Resource,
-  isAbstract,
 }: _WithResolverParamsModel<TType> = {}): _WithResolverModel {
   return (target) => {
-    if (Resource && !isAbstract) {
-      return Resolver(() => Resource)(target);
+    if (Resource) {
+      return Resolver(Resource)(target);
     }
     return Resolver()(target);
   };

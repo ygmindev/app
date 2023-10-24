@@ -5,6 +5,7 @@ import { SelectField } from '#lib-frontend/data/components/SelectField/SelectFie
 import { validateNotEmpty } from '#lib-frontend/data/utils/validateNotEmpty/validateNotEmpty';
 import { CURRENCY_FIELD_OPTIONS } from '#lib-frontend/funding/containers/FundingCurrencyForm/FundingCurrencyForm.constants';
 import { type FundingCurrencyFormPropsModel } from '#lib-frontend/funding/containers/FundingCurrencyForm/FundingCurrencyForm.models';
+import { FUNDING } from '#lib-frontend/funding/funding.constants';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
@@ -17,14 +18,19 @@ export const FundingCurrencyForm: LFCModel<FundingCurrencyFormPropsModel> = ({
   onSuccess,
   ...props
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation([FUNDING]);
   const { wrapperProps } = useLayoutStyles({ props });
   return (
     <FormContainer
       {...wrapperProps}
       fields={[
         {
-          element: <SelectField options={CURRENCY_FIELD_OPTIONS} />,
+          element: (
+            <SelectField
+              label={t('funding:currency')}
+              options={CURRENCY_FIELD_OPTIONS}
+            />
+          ),
           id: 'currency',
         },
       ]}

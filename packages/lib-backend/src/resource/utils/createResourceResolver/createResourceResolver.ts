@@ -9,6 +9,7 @@ import {
 import { withAuthorizer } from '#lib-backend/resource/utils/withAuthorizer/withAuthorizer';
 import { withInput } from '#lib-backend/resource/utils/withInput/withInput';
 import { withOutput } from '#lib-backend/resource/utils/withOutput/withOutput';
+import { ACCESS_LEVEL } from '#lib-shared/auth/resources/Access/Access.constants';
 import { type PrototypeModel } from '#lib-shared/core/core.models';
 import { NotImplementedError } from '#lib-shared/core/errors/NotImplementedError/NotImplementedError';
 import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
@@ -28,7 +29,7 @@ export const createResourceResolver = <
   ResourceData,
   ResourceService,
   RootResource,
-  access,
+  access = { default: ACCESS_LEVEL.RESTRICTED },
   authorizer,
   name,
 }: CreateResourceResolverParamsModel<TType, TForm, TRoot>): CreateResourceResolverModel<
@@ -44,7 +45,7 @@ export const createResourceResolver = <
   const updateExists = prototype.update !== undefined;
   const removeExists = prototype.remove !== undefined;
 
-  @withResolver({ isAbstract: true })
+  @withResolver()
   class ResourceResolver
     implements PrototypeModel<CreateResourceResolverModel<TType, TForm, TRoot>>
   {

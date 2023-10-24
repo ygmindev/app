@@ -1,7 +1,7 @@
-import { type ProtectedResourceServiceModel } from '#lib-shared/auth/resources/ProtectedResource/ProtectedResourceService/ProtectedResourceService.models';
 import {
   type GroupFormModel,
   type GroupModel,
 } from '#lib-shared/group/resources/Group/Group.models';
+import { type EntityResourceServiceModel } from '#lib-shared/resource/resources/EntityResource/EntityResourceService/EntityResourceService.models';
 
-export type GroupServiceModel = ProtectedResourceServiceModel<GroupModel, GroupFormModel>;
+export type GroupServiceModel = EntityResourceServiceModel<GroupModel, GroupFormModel>;

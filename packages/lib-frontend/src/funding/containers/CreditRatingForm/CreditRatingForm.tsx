@@ -10,7 +10,7 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
-import { Table } from '#lib-frontend/data/components/Table/Table';
+import { ItemTable } from '#lib-frontend/data/components/ItemTable/ItemTable';
 import { useQuery } from '#lib-frontend/data/hooks/useQuery/useQuery';
 import { type CreditRatingFormPropsModel } from '#lib-frontend/funding/containers/CreditRatingForm/CreditRatingForm.models';
 import { CreditRatingItemForm } from '#lib-frontend/funding/containers/CreditRatingItemForm/CreditRatingItemForm';
@@ -82,13 +82,19 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
                       image={agencyF.logo}
                       key={agencyF._id}
                       title={agencyF.name}>
-                      <Table
-                        columns={[{ id: 'name' }, { id: 'value' }]}
-                        data={[
-                          { name: t('funding:longTermRating'), value: longTermRating },
-                          { name: t('funding:longTermWatch'), value: longTermWatch },
+                      <ItemTable
+                        items={[
+                          {
+                            description: longTermRating,
+                            id: 'longTermRating',
+                            title: t('funding:longTermRating'),
+                          },
+                          {
+                            description: longTermWatch,
+                            id: 'longTermWatch',
+                            title: t('funding:longTermWatch'),
+                          },
                         ]}
-                        isHeadless
                       />
                     </Tile>
                   )

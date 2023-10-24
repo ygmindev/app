@@ -12,7 +12,7 @@ import { type TestableEmbeddedResourceServiceModel } from '#lib-shared/test/reso
 import { type TestableEntityResourceModel } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.models';
 
 @withContainer()
-@withResolver({ Resource: TestableEmbeddedResource })
+@withResolver({ Resource: () => TestableEmbeddedResource })
 export class TestableEmbeddedResourceResolver
   extends createEmbeddedResourceResolver<
     TestableEmbeddedResourceModel,

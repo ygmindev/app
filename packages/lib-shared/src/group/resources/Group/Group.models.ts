@@ -1,8 +1,10 @@
-import { type ProtectedResourceModel } from '#lib-shared/auth/resources/ProtectedResource/ProtectedResource.models';
 import { type GROUP_TYPE } from '#lib-shared/group/resources/Group/Group.constants';
-import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import {
+  type EntityResourceDataModel,
+  type EntityResourceModel,
+} from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
-export type GroupModel = ProtectedResourceModel & {
+export type GroupModel = EntityResourceModel & {
   logo?: string;
 
   name: string;

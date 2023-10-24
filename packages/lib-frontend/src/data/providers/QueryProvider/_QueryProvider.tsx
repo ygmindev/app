@@ -12,7 +12,7 @@ export const _QueryProvider: FCModel<_QueryProviderPropsModel> = ({ children, va
     <QueryClientProvider client={client}>
       <Hydrate state={value?.state}>{children}</Hydrate>
 
-      {process.env.NODE_ENV === 'development' && <ReactQueryDevtools />}
+      {process.env.APP_IS_DEBUG === 'true' && <ReactQueryDevtools />}
     </QueryClientProvider>
   );
 };

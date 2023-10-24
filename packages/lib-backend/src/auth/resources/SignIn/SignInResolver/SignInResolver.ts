@@ -26,7 +26,7 @@ import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.model
 import { type UserFormModel, type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withContainer()
-@withResolver({ Resource: SignIn })
+@withResolver({ Resource: () => SignIn })
 export class SignInResolver
   extends createEntityResourceResolver<SignInModel, SignInFormModel>({
     Resource: SignIn,

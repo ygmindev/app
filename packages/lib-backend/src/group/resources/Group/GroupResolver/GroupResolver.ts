@@ -11,7 +11,7 @@ import {
 } from '#lib-shared/group/resources/Group/Group.models';
 
 @withContainer()
-@withResolver({ Resource: Group })
+@withResolver({ Resource: () => Group })
 export class GroupResolver
   extends createProtectedResourceResolver<GroupModel, GroupFormModel>({
     Resource: Group,

@@ -13,7 +13,7 @@ import {
 import { type FundingModel } from '#lib-shared/funding/resources/Funding/Funding.models';
 
 @withContainer()
-@withResolver({ Resource: CreditRating })
+@withResolver({ Resource: () => CreditRating })
 export class CreditRatingResolver
   extends createEmbeddedResourceResolver<CreditRatingModel, CreditRatingFormModel, FundingModel>({
     Resource: CreditRating,
