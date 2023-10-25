@@ -11,7 +11,6 @@ import { FUNDING } from '#lib-frontend/funding/funding.constants';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { type UnderwriterQuoteFormPagePropsModel } from '#lib-frontend/underwriter/pages/UnderwriterQuoteFormPage/UnderwriterQuoteFormPage.models';
 
 export const UnderwriterQuoteFormPage: LFCModel<UnderwriterQuoteFormPagePropsModel> = ({
@@ -32,26 +31,36 @@ export const UnderwriterQuoteFormPage: LFCModel<UnderwriterQuoteFormPagePropsMod
             id: 'maturity',
             label: t('funding:maturity'),
             renderer: () => (
-              <TextField rightElement={<Text color={theme.color.border}>{t('core:years')}</Text>} />
+              <TextField
+                rightElement={<Text color={theme.color.border}>{t('core:yrs')}</Text>}
+                size="l"
+              />
             ),
+            width: 100,
           },
           {
             id: 'spread',
             label: t('funding:spread'),
             renderer: () => (
-              <TextField rightElement={<Text color={theme.color.border}>{t('core:bps')}</Text>} />
+              <TextField
+                rightElement={<Text color={theme.color.border}>{t('core:bps')}</Text>}
+                size="l"
+              />
             ),
+            width: 100,
           },
           {
             formatter: ({ value }) => format(value, { precision: 3, unit: RATE_UNIT.PERCENT }),
             id: 'yield',
             label: t('funding:yield'),
+            width: 80,
           },
           { id: 'benchmark', label: t('funding:benchmark') },
           {
             formatter: ({ value }) => format(value, { unit: RATE_UNIT.BASIS_POINT }),
             id: 'swappedToFloating',
             label: t('funding:swappedToFloating'),
+            width: 100,
           },
         ]}
         data={[
@@ -60,7 +69,7 @@ export const UnderwriterQuoteFormPage: LFCModel<UnderwriterQuoteFormPagePropsMod
             maturity: 2,
             spread: 0.01,
             swappedToFloating: 0.01,
-            yield: 0.01,
+            yield: 0.05383,
           },
           {
             benchmark: 'T 4.625 10/15/2026',
@@ -68,42 +77,62 @@ export const UnderwriterQuoteFormPage: LFCModel<UnderwriterQuoteFormPagePropsMod
             maturity: 3,
             spread: 0.01,
             swappedToFloating: 0.01,
-            yield: 0.01,
+            yield: 0.06267,
           },
           {
             benchmark: 'T 4.625 10/15/2026',
             maturity: 5,
             spread: 0.01,
             swappedToFloating: 0.01,
-            yield: 0.01,
+            yield: 0.07431,
           },
           {
             benchmark: 'T 4.625 10/15/2026',
             maturity: 7,
             spread: 0.01,
             swappedToFloating: 0.01,
-            yield: 0.01,
+            yield: 0.08822,
           },
           {
             benchmark: 'T 4.625 10/15/2026',
             maturity: 10,
             spread: 0.01,
             swappedToFloating: 0.01,
-            yield: 0.01,
+            yield: 0.1034,
+          },
+          {
+            benchmark: 'T 4.625 10/15/2026',
+            maturity: 20,
+            spread: 0.01,
+            swappedToFloating: 0.01,
+            yield: 0.1141,
+          },
+          {
+            benchmark: 'T 4.625 10/15/2026',
+            maturity: 30,
+            spread: 0.01,
+            swappedToFloating: 0.01,
+            yield: 0.1332,
           },
         ]}
       />
 
       <Wrapper
         isRowAlign
-        justify={FLEX_JUSTIFY.FLEX_END}>
+        // justify={FLEX_JUSTIFY.FLEX_END}
+      >
         <Button
+          flex
           icon="chevronLeft"
           type={BUTTON_TYPE.INVISIBLE}>
           {t('core:cancel')}
         </Button>
 
-        <Button icon="chevronRight">{t('funding:sendPricingQuote')}</Button>
+        <Button
+          flex
+          icon="chevronRight">
+          {t('funding:send')}
+        </Button>
       </Wrapper>
     </Wrapper>
   );

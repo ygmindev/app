@@ -2,6 +2,7 @@
   "alreadyExists": "TRANSLATION_MISSING",
   "analytics": "TRANSLATION_MISSING",
   "billion": "TRANSLATION_MISSING",
+  "bps": "TRANSLATION_MISSING",
   "cancel": "TRANSLATION_MISSING",
   "completed": "TRANSLATION_MISSING",
   "confirmRemove": "TRANSLATION_MISSING",
@@ -40,5 +41,6 @@
   "validateRange": "TRANSLATION_MISSING",
   "validateZipCode": "TRANSLATION_MISSING",
   "welcome": "TRANSLATION_MISSING",
-  "welcomeBack": "TRANSLATION_MISSING"
+  "welcomeBack": "TRANSLATION_MISSING",
+  "years": "TRANSLATION_MISSING"
 }

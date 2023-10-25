@@ -1,3 +1,3 @@
-export type _RandomIntParamsModel = number;
+export type _RandomIntParamsModel = [min: number, max: number];
 
 export type _RandomIntModel = number;

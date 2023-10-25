@@ -9,7 +9,6 @@ export const useHttp = (params: UseHttpParamsModel = {}): UseHttpModel => {
   const { handleError } = useErrorContext();
   return new HttpService({
     ...params,
-
     onError: handleError,
   });
 };

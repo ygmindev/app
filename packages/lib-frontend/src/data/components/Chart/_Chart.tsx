@@ -54,16 +54,17 @@ export const _Chart = <TType,>({
         <XAxis
           stroke={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST]}
           style={style}
-          tickFormatter={(v) => `${v}D`}
-          ticks={[0, 5, 10, 15, 20, 25, 30]}
+          // tickFormatter={(v) => `${v}D`}
+          // ticks={[0, 5, 10, 15, 20, 25, 30]}
         />
 
         <YAxis
           domain={[0, 10]}
           stroke={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST]}
           style={style}
-          tickFormatter={(v) => `${(v as number).toFixed(3)}%`}
-          ticks={[0, 2, 4, 6, 8, 10]}
+          ticks={[0, 50, 100, 150, 200, 250, 300]}
+          // tickFormatter={(v) => `${(v as number).toFixed(3)}%`}
+          // ticks={[0, 2, 4, 6, 8, 10]}
         />
 
         <Tooltip />

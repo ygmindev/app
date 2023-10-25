@@ -11,8 +11,7 @@ export const _getContext = async ({
 }: _GetContextParamsModel): Promise<_GetContextModel> => {
   const { authorization } = event.headers;
   const user = await getUserFromHeader(authorization);
-  if (user) {
-    (context as unknown as ContextModel).user = user;
-  }
+  user && ((context as unknown as ContextModel).user = user);
+  event.headers.group && ((context as unknown as ContextModel).group = event.headers.group);
   return context;
 };

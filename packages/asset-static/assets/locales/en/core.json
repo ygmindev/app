@@ -2,6 +2,7 @@
   "alreadyExists": "{{value}} already exists",
   "analytics": "analytics",
   "billion": "billion",
+  "bps": "bps",
   "cancel": "cancel",
   "completed": "completed",
   "confirmRemove": "Are you sure you want to remove {{value}}?",
@@ -40,5 +41,6 @@
   "validateRange": "TRANSLATION_MISSING",
   "validateZipCode": "TRANSLATION_MISSING",
   "welcome": "welcome to {{value}}",
-  "welcomeBack": "welcome back"
+  "welcomeBack": "welcome back",
+  "years": "TRANSLATION_MISSING"
 }

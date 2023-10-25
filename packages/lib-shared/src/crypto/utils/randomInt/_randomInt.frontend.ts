@@ -1,4 +1,4 @@
-import { randomInt } from 'crypto';
+import { Random } from 'random-js';
 
 import {
   type _RandomIntModel,
@@ -6,4 +6,4 @@ import {
 } from '#lib-shared/crypto/utils/randomInt/_randomInt.models';
 
 export const _randomInt = (...[min, max]: _RandomIntParamsModel): _RandomIntModel =>
-  randomInt(min, max);
+  new Random().integer(min, max);

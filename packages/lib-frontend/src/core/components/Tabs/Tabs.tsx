@@ -40,8 +40,8 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
       isHorizontalScrollable
       isRow={isUnderline}
       isRowAlign={!isUnderline}
-      m={isContained ? THEME_SIZE.SMALL : undefined}
-      p={isContained ? THEME_SIZE.SMALL : undefined}
+      // m={isContained ? THEME_SIZE.SMALL : undefined}
+      // p={isContained ? THEME_SIZE.SMALL : undefined}
       round={isContained}>
       {tabs?.map((tab) => {
         const isActiveF = valueControlled === tab.id;

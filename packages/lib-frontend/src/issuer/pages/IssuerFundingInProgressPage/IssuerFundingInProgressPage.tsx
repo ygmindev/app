@@ -12,7 +12,7 @@ export const IssuerFundingInProgressPage: LFCModel<IssuerFundingInProgressPagePr
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { getMany } = useFundingResource();
+  const { getManyProtected } = useFundingResource();
   const currentGroup = useCurrentGroup();
   return (
     <MainLayout
@@ -20,7 +20,7 @@ export const IssuerFundingInProgressPage: LFCModel<IssuerFundingInProgressPagePr
       s>
       <DataBoundary
         id="fundings"
-        query={async () => getMany({ filter: [] })}>
+        query={async () => getManyProtected({ filter: [] })}>
         {({ data }) => (
           <Wrapper s>
             {data?.result?.map((funding) => (

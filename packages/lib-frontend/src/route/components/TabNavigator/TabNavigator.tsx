@@ -27,6 +27,7 @@ export const TabNavigator: LFCModel<TabNavigatorPropsModel> = ({ routes, type, .
   return (
     <Tabs
       {...wrapperProps}
+      mBottom
       onChange={(pathname) => {
         const pathnameF = getPath(pathname, location.params);
         void push({ pathname: pathnameF });

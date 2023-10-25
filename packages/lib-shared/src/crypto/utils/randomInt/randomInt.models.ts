@@ -3,6 +3,6 @@ import {
   type _RandomIntParamsModel,
 } from '#lib-shared/crypto/utils/randomInt/_randomInt.models';
 
-export type RandomIntParamsModel = _RandomIntModel;
+export type RandomIntParamsModel = _RandomIntParamsModel | [length: number];
 
-export type RandomIntModel = _RandomIntParamsModel;
+export type RandomIntModel = _RandomIntModel;

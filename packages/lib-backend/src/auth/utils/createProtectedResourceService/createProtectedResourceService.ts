@@ -1,3 +1,5 @@
+import { ObjectId } from 'mongodb';
+
 import { AccessService } from '#lib-backend/auth/resources/Access/AccessService/AccessService';
 import {
   type CreateProtectedResoureServiceModel,
@@ -10,13 +12,14 @@ import { UnauthenticatedError } from '#lib-shared/auth/errors/UnauthenticatedErr
 import { type ProtectedResourceModel } from '#lib-shared/auth/resources/ProtectedResource/ProtectedResource.models';
 import { type PartialModel } from '#lib-shared/core/core.models';
 import { NotFoundError } from '#lib-shared/core/errors/NotFoundError/NotFoundError';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { withInject } from '#lib-shared/core/utils/withInject/withInject';
+import { GROUP_RESOURCE_NAME } from '#lib-shared/group/resources/Group/Group.constants';
 import { type GroupModel } from '#lib-shared/group/resources/Group/Group.models';
 import { type GroupServiceModel } from '#lib-shared/group/resources/Group/GroupService/GroupService.models';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
-import { FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
@@ -47,14 +50,10 @@ export const createProtectedResoureService = <
           })
         ).result;
         if (accessAll) {
-          input.filter = [
+          input.filter = filterNil([
             ...input.filter,
-            {
-              condition: FILTER_CONDITION.IN,
-              field: '_id',
-              value: accessAll.map(({ Group }) => Group),
-            },
-          ];
+            context.group && { field: GROUP_RESOURCE_NAME, value: new ObjectId(context.group) },
+          ]);
           return this.getMany(input, context);
         }
         return { result: [] };
