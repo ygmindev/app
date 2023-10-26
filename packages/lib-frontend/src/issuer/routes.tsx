@@ -5,10 +5,10 @@ import { FORM } from '#lib-frontend/data/data.constants';
 import { FUNDING, QUOTES } from '#lib-frontend/funding/funding.constants';
 import { QuotesPage } from '#lib-frontend/funding/pages/QuotesPage/QuotesPage';
 import { GroupFormPage } from '#lib-frontend/group/pages/GroupFormPage/GroupFormPage';
-import { IssuerAnalyticsPage } from '#lib-frontend/issuer/pages/IssuerAnalyticsPage/IssuerAnalyticsPage';
-import { IssuerFundingFormPage } from '#lib-frontend/issuer/pages/IssuerFundingFormPage/IssuerFundingFormPage';
-import { IssuerFundingInProgressPage } from '#lib-frontend/issuer/pages/IssuerFundingInProgressPage/IssuerFundingInProgressPage';
-import { IssuerFundingPage } from '#lib-frontend/issuer/pages/IssuerFundingPage/IssuerFundingPage';
+import { AnalyticsPage } from '#lib-frontend/issuer/pages/AnalyticsPage/AnalyticsPage';
+import { FundingFormPage } from '#lib-frontend/issuer/pages/FundingFormPage/FundingFormPage';
+import { FundingInProgressPage } from '#lib-frontend/issuer/pages/FundingInProgressPage/FundingInProgressPage';
+import { FundingPage } from '#lib-frontend/issuer/pages/FundingPage/FundingPage';
 import { IssuerPage } from '#lib-frontend/issuer/pages/IssuerPage/IssuerPage';
 import { TabNavigator } from '#lib-frontend/route/components/TabNavigator/TabNavigator';
 import { type RouteModel } from '#lib-frontend/route/route.models';
@@ -23,19 +23,19 @@ export const issuerRoutes: Array<RouteModel> = [
     pathname: GROUP_TYPE.ISSUER,
     routes: [
       {
-        element: <IssuerAnalyticsPage />,
+        element: <AnalyticsPage />,
         icon: 'analytics',
         pathname: ANALYTICS,
         title: ({ t }) => t('core:analytics'),
       },
       {
-        element: <IssuerFundingPage />,
+        element: <FundingPage />,
         icon: 'dollar',
         navigator: <TabNavigator type={TABS_TYPE.CONTAINED} />,
         pathname: FUNDING,
         routes: [
           getRouteGroup({
-            element: <IssuerFundingInProgressPage />,
+            element: <FundingInProgressPage />,
             icon: 'dotsCircle',
             pathname: IN_PROGRESS,
             routes: [
@@ -54,7 +54,7 @@ export const issuerRoutes: Array<RouteModel> = [
             title: ({ t }) => t('core:completed'),
           },
           {
-            element: <IssuerFundingFormPage />,
+            element: <FundingFormPage />,
             isFullScreen: true,
             isNavigatable: false,
             pathname: FORM,
