@@ -5,9 +5,9 @@ import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBou
 import { FundingTile } from '#lib-frontend/funding/components/FundingTile/FundingTile';
 import { useFundingResource } from '#lib-frontend/funding/hooks/useFundingResource/useFundingResource';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { type DealsPagePropsModel } from '#lib-frontend/underwriter/pages/DealsPage/DealsPage.models';
+import { type FundingPagePropsModel } from '#lib-frontend/underwriter/pages/FundingPage/FundingPage.models';
 
-export const DealsPage: LFCModel<DealsPagePropsModel> = ({ ...props }) => {
+export const FundingPage: LFCModel<FundingPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { getConnection } = useFundingResource();
   return (

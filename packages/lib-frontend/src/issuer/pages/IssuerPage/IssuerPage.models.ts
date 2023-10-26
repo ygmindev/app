@@ -1,6 +1,6 @@
 import { type PagePropsModel } from '#lib-frontend/core/core.models';
-import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
+import { type GroupPageParamsModel } from '#lib-frontend/group/pages/GroupPage/GroupPage.models';
 
 export type IssuerPagePropsModel = PagePropsModel;
 
-export type IssuerPageParamsModel = WithIdModel;
+export type IssuerPageParamsModel = GroupPageParamsModel;

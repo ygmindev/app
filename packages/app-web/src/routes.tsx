@@ -15,7 +15,6 @@ export const routes: Array<RouteModel> = getRoutes({
       isProtectable: true,
       pathname: '/',
     },
-
     {
       isProtectable: true,
       pathname: GROUP,
@@ -24,10 +23,9 @@ export const routes: Array<RouteModel> = getRoutes({
           element: <GroupFormPage />,
           pathname: FORM,
         },
-
         {
           element: <GroupPage />,
-          pathname: ':id',
+          pathname: ':groupid',
           routes: [...issuerRoutes, ...underwriterRoutes],
         },
       ],

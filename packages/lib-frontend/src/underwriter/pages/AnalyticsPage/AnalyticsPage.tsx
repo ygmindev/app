@@ -4,9 +4,7 @@ import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { type AnalyticsPagePropsModel } from '#lib-frontend/underwriter/pages/AnalyticsPage/AnalyticsPage.models';
 
-export const AnalyticsPage: LFCModel<AnalyticsPagePropsModel> = ({
-  ...props
-}) => {
+export const AnalyticsPage: LFCModel<AnalyticsPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   return (
     <Wrapper

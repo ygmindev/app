@@ -16,7 +16,7 @@ export const UnderwriterPage: LFCModel<UnderwriterPagePropsModel> = ({ children 
 
   useEffect(() => {
     !currentGroup?.types?.includes(GROUP_TYPE.UNDERWRITER) &&
-      replace({ pathname: `${GROUP}/${location.params?.id}` });
+      replace({ pathname: `${GROUP}/${location.params?.groupid}` });
   }, []);
 
   return <>{children}</>;

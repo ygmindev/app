@@ -14,16 +14,15 @@ import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 
 export const GroupPage: LFCModel<GroupPagePropsModel> = ({ children }) => {
   useTranslation([FUNDING]);
-
   const actions = useActions();
   const { location } = useRouter<GroupPageParamsModel>();
   const { get } = useGroupResource();
-  const groupId = location.params?.id;
-  return groupId ? (
+  const groupid = location.params?.groupid;
+  return groupid ? (
     <DataBoundary
       id="group"
       query={async () => {
-        const { result } = await get({ filter: [{ field: '_id', value: groupId }] });
+        const { result } = await get({ filter: [{ field: '_id', value: groupid }] });
         actions?.group.currentGroupSet(result);
         return result;
       }}>

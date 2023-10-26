@@ -16,7 +16,7 @@ export const IssuerPage: LFCModel<IssuerPagePropsModel> = ({ children }) => {
 
   useEffect(() => {
     !currentGroup?.types?.includes(GROUP_TYPE.ISSUER) &&
-      replace({ pathname: `${GROUP}/${location.params?.id}` });
+      replace({ pathname: `${GROUP}/${location.params?.groupid}` });
   }, []);
 
   return <>{children}</>;

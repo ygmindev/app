@@ -152,7 +152,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
                 {
                   element: <SnapshotPage />,
                   header: { previous: true },
-                  pathname: ':id',
+                  pathname: ':snapshotid',
                   prerender: ['sign-in-works'],
                 },
               ],
