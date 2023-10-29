@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 
 import { FloatingFooter } from '#lib-frontend/app/components/FloatingFooter/FloatingFooter';
 import { Button } from '#lib-frontend/core/components/Button/Button';
+import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { NumberField } from '#lib-frontend/data/components/NumberField/NumberField';
@@ -14,6 +15,7 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { THEME_ROLE } from '#lib-frontend/style/style.constants';
 import { QUOTE_FORM_MATURITIES } from '#lib-frontend/underwriter/pages/QuoteFormPage/QuoteFormPage.constants';
 import {
   type QuoteFormPageParamsModel,
@@ -58,6 +60,7 @@ export const QuoteFormPage: LFCModel<QuoteFormPagePropsModel> = ({ ...props }) =
     getMaturities().map(({ unit, value }) => ({
       maturity: value,
       spread: undefined,
+      unit,
     })),
   );
 
@@ -74,12 +77,16 @@ export const QuoteFormPage: LFCModel<QuoteFormPagePropsModel> = ({ ...props }) =
       <Table
         columns={[
           {
-            field: <NumberField />,
+            field: ({ row }) => (
+              <NumberField
+                rightElement={row.unit && <Text colorRole={THEME_ROLE.MUTED}>{row.unit}</Text>}
+              />
+            ),
             id: 'maturity',
             label: t('funding:maturity'),
           },
           {
-            field: <NumberField />,
+            field: () => <NumberField />,
             id: 'spread',
             label: t('funding:spread'),
           },
@@ -89,7 +96,7 @@ export const QuoteFormPage: LFCModel<QuoteFormPagePropsModel> = ({ ...props }) =
         isHeadless
         onChange={(value) => dataSet(value ?? [])}
         ref={tableRef}
-        validators={{ spread: validateNotEmpty }}
+        validators={{ maturity: validateNotEmpty, spread: validateNotEmpty }}
       />
 
       <FloatingFooter>

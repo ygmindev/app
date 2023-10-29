@@ -32,7 +32,7 @@ export type TableColumnModel<
   TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
 > = WithIdModel<TKey> & {
   align?: FontAlignModel;
-  field?: ReactElement<FieldPropsModel<TType[TKey]>>;
+  field?(params: { row: TType; value?: TType[TKey] }): ReactElement<FieldPropsModel<TType[TKey]>>;
   formatter?: DataFormatterModel<TType, TKey>;
   label?: TranslatableTextModel;
   renderer?: DataRendererModel<TType, TKey>;

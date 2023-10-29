@@ -138,7 +138,7 @@ export const Table = forwardRef(
                   {cell.renderer ? (
                     cell.renderer({ row: row.value, value: cell.value })
                   ) : cell.field ? (
-                    cloneElement(cell.field, {
+                    cloneElement(cell.field({ row: row.value, value: cell.value }), {
                       error:
                         row.id && cell.columnId && getValue(errors, `${row.id}.${cell.columnId}`),
                       label: cell.label,
