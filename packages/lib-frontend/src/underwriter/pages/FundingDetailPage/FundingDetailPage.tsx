@@ -42,13 +42,11 @@ export const FundingDetailPage: LFCModel<FundingDetailPagePropsModel> = ({ ...pr
       </MainLayout>
 
       <FloatingFooter>
-        <Wrapper isCenter>
-          <Button
-            icon="send"
-            onPress={() => push({ params: { funding }, pathname: QUOTE, root: true })}>
-            {t('funding:sendQuote')}
-          </Button>
-        </Wrapper>
+        <Button
+          icon="send"
+          onPress={() => push({ params: { funding }, pathname: QUOTE, root: true })}>
+          {t('funding:sendQuote')}
+        </Button>
       </FloatingFooter>
     </>
   );

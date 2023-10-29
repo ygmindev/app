@@ -1,7 +1,7 @@
 import cloneDeep from 'lodash/cloneDeep';
 import isNil from 'lodash/isNil';
 import toString from 'lodash/toString';
-import { cloneElement, type ReactElement } from 'react';
+import { cloneElement, type ReactElement, useState } from 'react';
 
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
@@ -12,6 +12,7 @@ import { type LFCPropsModel } from '#lib-frontend/core/core.models';
 import { type TablePropsModel } from '#lib-frontend/data/components/Table/Table.models';
 import { useTable } from '#lib-frontend/data/hooks/useTable/useTable';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
@@ -27,12 +28,17 @@ export const Table = <TType,>({
   isHeadless,
   nilString,
   onChange,
+  validators,
   ...props
 }: LFCPropsModel<TablePropsModel<TType>>): ReactElement<LFCPropsModel<TablePropsModel<TType>>> => {
   const { t } = useTranslation();
   const theme = useTheme();
   const { wrapperProps } = useLayoutStyles({ props });
   const { headers, rows } = useTable(props);
+
+  const [errors, errorsSet] =
+    useState<Record<string, Record<StringKeyModel<TType>, TranslatableTextModel | undefined>>>();
+
   return rows?.length ? (
     <Wrapper
       {...wrapperProps}
@@ -82,7 +88,7 @@ export const Table = <TType,>({
                   onChange
                     ? () => {
                         const newValue = cloneDeep(props.data);
-                        newValue?.splice(i);
+                        newValue?.splice(i, 1);
                         onChange(newValue);
                       }
                     : undefined
@@ -124,7 +130,7 @@ export const Table = <TType,>({
           </Wrapper>
         ))}
 
-        {isDeletable && (
+        {isAddable && (
           <Button
             color={THEME_COLOR.PRIMARY}
             icon="add"
