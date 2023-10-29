@@ -32,6 +32,9 @@ export class SignInResolver
     Resource: SignIn,
     ResourceData: SignInForm,
     ResourceService: SignInService,
+    access: {
+      [RESOURCE_METHOD_TYPE.CREATE]: ACCESS_LEVEL.PUBLIC,
+    },
     name: SIGN_IN_RESOURCE_NAME,
   })
   implements SignInResolverModel

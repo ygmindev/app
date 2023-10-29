@@ -25,7 +25,7 @@ export const QuotesPage: SFCModel<QuotesPagePropsModel> = ({ testID, ...props })
       testID={testID}>
       <Wrapper
         isRow
-        justify={FLEX_JUSTIFY.FLEX_END}>
+        justify={FLEX_JUSTIFY.END}>
         <Button
           icon="filter"
           type={BUTTON_TYPE.TRANSPARENT}>

@@ -64,7 +64,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       onSubmit,
       placeholder,
       rightElement,
-      size = label ? THEME_SIZE.MEDIUM : THEME_SIZE.SMALL,
+      size,
       value,
       ...props
     },
@@ -76,6 +76,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
     const inputRefF = ref ?? inputRef;
     const [elementState, elementStateSet] = useState<ElementStateModel>();
     const elementStateF = props.elementState ?? elementState;
+    const sizeF = size ?? (label ? THEME_SIZE.MEDIUM : THEME_SIZE.SMALL);
 
     const theme = useTheme();
     const { valueControlled, valueControlledSet } = useValueControlled({
@@ -106,11 +107,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         {!isNoClear && (
           <Appearable
             elementState={elementStateF}
-            isActive={
-              !!valueControlled &&
-              valueControlled.length > 0 &&
-              elementStateF === ELEMENT_STATE.ACTIVE
-            }
+            isActive={elementStateF === ELEMENT_STATE.ACTIVE}
             isCenter>
             <Button
               icon="times"
@@ -186,13 +183,13 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         {...wrapperProps}
         border={!isTransparent}
         elementState={elementStateF}
-        height={theme.shape.size[size]}
+        height={theme.shape.size[sizeF]}
         onElementStateChange={elementStateSet}
         pHorizontal
         position={SHAPE_POSITION.RELATIVE}
         ref={focusableRef}>
         <Wrapper
-          align={label ? FLEX_ALIGN.FLEX_END : FLEX_ALIGN.CENTER}
+          align={label ? FLEX_ALIGN.END : FLEX_ALIGN.CENTER}
           grow
           isRow
           s={THEME_SIZE.SMALL}>

@@ -1,25 +1,50 @@
-import { Button } from '#lib-frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
-import { Text } from '#lib-frontend/core/components/Text/Text';
+import { useState } from 'react';
+
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
+import { NumberField } from '#lib-frontend/data/components/NumberField/NumberField';
 import { Table } from '#lib-frontend/data/components/Table/Table';
-import { TextField } from '#lib-frontend/data/components/TextField/TextField';
-import { RATE_UNIT } from '#lib-frontend/data/data.constants';
-import { useFormatter } from '#lib-frontend/data/hooks/useFormatter/useFormatter';
+import { type RelativeDateUnitModel } from '#lib-frontend/data/data.models';
 import { FUNDING } from '#lib-frontend/funding/funding.constants';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { type QuoteFormPagePropsModel } from '#lib-frontend/underwriter/pages/QuoteFormPage/QuoteFormPage.models';
+import { QUOTE_FORM_MATURITIES } from '#lib-frontend/underwriter/pages/QuoteFormPage/QuoteFormPage.constants';
+import {
+  type QuoteFormPageParamsModel,
+  type QuoteFormPagePropsModel,
+} from '#lib-frontend/underwriter/pages/QuoteFormPage/QuoteFormPage.models';
+import { type ScaledNumberModel } from '#lib-shared/data/data.models';
 
-export const QuoteFormPage: LFCModel<QuoteFormPagePropsModel> = ({
-  ...props
-}) => {
+export const QuoteFormPage: LFCModel<QuoteFormPagePropsModel> = ({ ...props }) => {
   const { t } = useTranslation([FUNDING]);
   const theme = useTheme();
   const { wrapperProps } = useLayoutStyles({ props });
-  const { format } = useFormatter();
+  const { location } = useRouter<QuoteFormPageParamsModel>();
+  const funding = location.params?.funding;
+
+  const getMaturities = (): Array<ScaledNumberModel<RelativeDateUnitModel>> => {
+    const min = funding?.maturity?.min;
+    const max = funding?.maturity?.max;
+    const unit = funding?.maturity?.unit;
+    if (unit) {
+      const maturities = QUOTE_FORM_MATURITIES[unit];
+      return maturities.filter(
+        (maturity) => (!min || min <= maturity.value) && (!max || max >= maturity.value),
+      );
+    }
+    return [];
+  };
+
+  const [maturities, maturitiesSet] = useState(getMaturities());
+  const [data, dataSet] = useState(
+    maturities.map(({ unit, value }) => ({
+      maturity: value,
+      spread: undefined,
+    })),
+  );
+
   return (
     <Wrapper
       {...wrapperProps}
@@ -28,112 +53,21 @@ export const QuoteFormPage: LFCModel<QuoteFormPagePropsModel> = ({
       <Table
         columns={[
           {
+            field: <NumberField />,
             id: 'maturity',
             label: t('funding:maturity'),
-            renderer: () => (
-              <TextField
-                rightElement={<Text color={theme.color.border}>{t('core:yrs')}</Text>}
-                size="l"
-              />
-            ),
-            width: 100,
           },
           {
+            field: <NumberField />,
             id: 'spread',
             label: t('funding:spread'),
-            renderer: () => (
-              <TextField
-                rightElement={<Text color={theme.color.border}>{t('core:bps')}</Text>}
-                size="l"
-              />
-            ),
-            width: 100,
-          },
-          {
-            formatter: ({ value }) => format(value, { precision: 3, unit: RATE_UNIT.PERCENT }),
-            id: 'yield',
-            label: t('funding:yield'),
-            width: 80,
-          },
-          { id: 'benchmark', label: t('funding:benchmark') },
-          {
-            formatter: ({ value }) => format(value, { unit: RATE_UNIT.BASIS_POINT }),
-            id: 'swappedToFloating',
-            label: t('funding:swappedToFloating'),
-            width: 100,
           },
         ]}
-        data={[
-          {
-            benchmark: 'T 5.09/30/2025',
-            maturity: 2,
-            spread: 0.01,
-            swappedToFloating: 0.01,
-            yield: 0.05383,
-          },
-          {
-            benchmark: 'T 4.625 10/15/2026',
-            benchmarkyield: 0.01,
-            maturity: 3,
-            spread: 0.01,
-            swappedToFloating: 0.01,
-            yield: 0.06267,
-          },
-          {
-            benchmark: 'T 4.625 10/15/2026',
-            maturity: 5,
-            spread: 0.01,
-            swappedToFloating: 0.01,
-            yield: 0.07431,
-          },
-          {
-            benchmark: 'T 4.625 10/15/2026',
-            maturity: 7,
-            spread: 0.01,
-            swappedToFloating: 0.01,
-            yield: 0.08822,
-          },
-          {
-            benchmark: 'T 4.625 10/15/2026',
-            maturity: 10,
-            spread: 0.01,
-            swappedToFloating: 0.01,
-            yield: 0.1034,
-          },
-          {
-            benchmark: 'T 4.625 10/15/2026',
-            maturity: 20,
-            spread: 0.01,
-            swappedToFloating: 0.01,
-            yield: 0.1141,
-          },
-          {
-            benchmark: 'T 4.625 10/15/2026',
-            maturity: 30,
-            spread: 0.01,
-            swappedToFloating: 0.01,
-            yield: 0.1332,
-          },
-        ]}
+        data={data}
+        isDeletable
+        isHeadless
+        onChange={(value) => dataSet(value ?? [])}
       />
-
-      <Wrapper
-        isRowAlign
-        // justify={FLEX_JUSTIFY.FLEX_END}
-      >
-        <Button
-          flex
-          icon="chevronLeft"
-          type={BUTTON_TYPE.INVISIBLE}>
-          {t('core:cancel')}
-        </Button>
-
-        <Button
-          flex
-          icon="chevronRight">
-          {t('funding:send')}
-        </Button>
-      </Wrapper>
     </Wrapper>
   );
 };

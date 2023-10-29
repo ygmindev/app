@@ -94,7 +94,7 @@ export const Route: LFCModel<RoutePropsModel> = ({ depth, route, ...props }) => 
 
   return (
     <>
-      {isActiveLeaf && route.header && (
+      {isActiveF && route.header && (
         <Portal>
           <RouteHeader route={route} />
         </Portal>

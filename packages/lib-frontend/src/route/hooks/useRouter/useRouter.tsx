@@ -1,3 +1,5 @@
+import isString from 'lodash/isString';
+
 import { _useRouter } from '#lib-frontend/route/hooks/useRouter/_useRouter';
 import { type UseRouterModel } from '#lib-frontend/route/hooks/useRouter/useRouter.models';
 import { type RouteUpdateModel } from '#lib-frontend/route/route.models';
@@ -50,13 +52,22 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
 
     location,
 
-    push: <TTypeNext = undefined,>({ isBack, params, pathname }: RouteUpdateModel<TTypeNext>) => {
+    push: <TTypeNext = undefined,>({
+      isBack,
+      params,
+      pathname,
+      root,
+    }: RouteUpdateModel<TTypeNext>) => {
       void update(
         () =>
           push({
             context: { previous: location.pathname },
             params,
-            pathname: trimPathname(pathname),
+            pathname: trimPathname(
+              `${
+                isString(root) ? `${root}/` : root === true ? `${location.pathname}/` : ''
+              }${pathname}`,
+            ),
           }),
         { isBack },
       );
@@ -66,13 +77,18 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
       isBack,
       params,
       pathname,
+      root,
     }: RouteUpdateModel<TTypeNext>) => {
       void update(
         () =>
           replace({
             context: { previous: location.pathname },
             params,
-            pathname: trimPathname(pathname),
+            pathname: trimPathname(
+              `${
+                isString(root) ? `${root}/` : root === true ? `${location.pathname}/` : ''
+              }${pathname}`,
+            ),
           }),
         { isBack },
       );

@@ -81,6 +81,7 @@ export const IONIC_ICONS = {
   preferences: 'options-outline',
   question: 'help-outline',
   refresh: 'refresh-outline',
+  remove: 'remove-circle-outline',
   repeat: 'repeat-outline',
   return: 'return-down-back-outline',
   sad: 'sad-outline',

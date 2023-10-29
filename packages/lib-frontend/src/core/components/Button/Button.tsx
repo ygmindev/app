@@ -44,7 +44,7 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
   ...props
 }) => {
   const theme = useTheme();
-  const { styles } = useLayoutStyles({ props: { ...props, isShadow } });
+  const { wrapperProps } = useLayoutStyles({ props: { ...props, isShadow } });
 
   const { valueControlled, valueControlledSet } = useValueControlled<ElementStateModel>({
     defaultValue: ELEMENT_STATE.INACTIVE,
@@ -164,6 +164,7 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
   return (
     <Pressable
       {...props}
+      {...wrapperProps}
       align={align}
       animation={animation}
       border={typeF !== BUTTON_TYPE.INVISIBLE}
@@ -174,8 +175,7 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
       onElementStateChange={valueControlledSet}
       position={SHAPE_POSITION.RELATIVE}
       round={isIconOnly ? heightF / 2 : true}
-      style={styles}
-      width={children ? undefined : heightF}>
+      width={props.width ?? (children ? undefined : heightF)}>
       <>
         <Appearable
           isActive={!isLoading}

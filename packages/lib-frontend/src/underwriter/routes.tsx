@@ -30,18 +30,20 @@ export const underwriterRoutes: Array<RouteModel> = [
         icon: 'dollar',
         pathname: FUNDING,
         routes: [
-          {
+          getRouteGroup({
             element: <FundingDetailPage />,
             pathname: ':fundingid',
-            title: ({ t }) => t('funding:sendPricingQuote'),
-          },
-          {
-            element: <QuoteFormPage />,
-            pathname: QUOTE,
-            title: ({ t }) => t('funding:sendPricingQuote'),
-          },
+            routes: [
+              {
+                element: <QuoteFormPage />,
+                pathname: QUOTE,
+                title: ({ t }) => t('funding:sendQuote'),
+              },
+            ],
+            title: ({ t }) => t('funding:fundingDetail'),
+          }),
         ],
-        title: ({ t }) => t('funding:deal_plural'),
+        title: ({ t }) => t('funding:funding_plural'),
       }),
       {
         element: <FundingPage />,

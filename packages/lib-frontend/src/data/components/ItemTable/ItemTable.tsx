@@ -42,7 +42,7 @@ export const ItemTable: LFCModel<ItemTablePropsModel> = ({ items, ...props }) =>
           {title && <TranslatableText isEllipsis>{title}</TranslatableText>}
 
           <Wrapper
-            align={FLEX_JUSTIFY.FLEX_END}
+            align={FLEX_JUSTIFY.END}
             flex>
             {isString(description) ? (
               <TranslatableText>{description}</TranslatableText>

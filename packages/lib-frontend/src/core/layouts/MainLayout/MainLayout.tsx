@@ -22,7 +22,7 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
       flex
       isFullWidth={isFullWidthF}
       isVerticalScrollable
-      justify={FLEX_JUSTIFY.FLEX_START}
+      justify={FLEX_JUSTIFY.START}
       style={inheritedStyles}>
       <Wrapper
         {...wrapperProps}

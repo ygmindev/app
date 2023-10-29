@@ -5,11 +5,11 @@ import {
 import { type AppearablePropsModel } from '#lib-frontend/animation/components/Appearable/Appearable.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel } from '#lib-frontend/core/core.models';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 
-export const Appearable: SFCModel<AppearablePropsModel> = ({
+export const Appearable: LFCModel<AppearablePropsModel> = ({
   animation,
   children,
   isActive,

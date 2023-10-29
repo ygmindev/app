@@ -53,7 +53,9 @@ export const OtpForm: LFCModel<OtpFormPropsModel> = ({
           : undefined
       }
       fields={[{ element: <OtpField isAutoFocus />, id: 'otp' }]}
+      flex
       isButton={false}
+      isCenter
       onComplete={onComplete}
       onError={onError}
       onSubmit={onSubmit}

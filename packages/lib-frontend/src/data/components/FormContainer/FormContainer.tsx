@@ -127,11 +127,7 @@ const FormContainerF = forwardRef(
         validators,
       });
 
-    const elementStateF = isAppLoading
-      ? ELEMENT_STATE.DISABLED
-      : isLoading
-      ? ELEMENT_STATE.LOADING
-      : elementState;
+    const elementStateF = isAppLoading || isLoading ? ELEMENT_STATE.LOADING : elementState;
 
     const isDisabled =
       elementStateF === ELEMENT_STATE.DISABLED || elementStateF === ELEMENT_STATE.LOADING;

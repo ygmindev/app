@@ -10,7 +10,12 @@ export const FUNDING_FIELDS = [
   { amount: ['min', 'max', 'unit'] },
   { maturity: ['min', 'max', 'unit'] },
   {
-    [CREDIT_RATING_RESOURCE_NAME]: ['_id', { agency: ['_id'] }, 'longTermRating', 'longTermWatch'],
+    [CREDIT_RATING_RESOURCE_NAME]: [
+      '_id',
+      { agency: ['_id', 'name'] },
+      'longTermRating',
+      'longTermWatch',
+    ],
   },
   {
     [GROUP_RESOURCE_NAME]: ['_id', 'name', 'logo'],

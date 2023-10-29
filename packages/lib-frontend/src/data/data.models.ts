@@ -14,6 +14,7 @@ import {
   type InferModel,
   type PrimitiveModel,
   type RequiredModel,
+  type StringKeyModel,
 } from '#lib-shared/core/core.models';
 
 export type QueryContextModel = {
@@ -21,12 +22,15 @@ export type QueryContextModel = {
   state?: object;
 };
 
-export type DataRendererModel<TType> = (params: { row: TType; value?: string }) => ReactNode;
+export type DataRendererModel<
+  TType,
+  TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
+> = (params: { row: TType; value?: TType[TKey] }) => ReactNode;
 
-export type DataFormatterModel<TType, TKey extends keyof TType> = (params: {
-  row: TType;
-  value: RequiredModel<TType>[TKey];
-}) => string;
+export type DataFormatterModel<
+  TType,
+  TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
+> = (params: { row: TType; value: RequiredModel<TType>[TKey] }) => string;
 
 export type AmountUnitModel = `${AMOUNT_UNIT}`;
 

@@ -1,6 +1,4 @@
 import { getCoreRowModel, useReactTable } from '@tanstack/react-table';
-import isNil from 'lodash/isNil';
-import toString from 'lodash/toString';
 
 import {
   type _UseTableModel,
@@ -13,7 +11,6 @@ import { type StringKeyModel } from '#lib-shared/core/core.models';
 export const _useTable = <TType,>({
   columns,
   data,
-  nilString = '-',
 }: _UseTableParamsModel<TType>): _UseTableModel<TType> => {
   const { t } = useTranslation();
   const table = useReactTable({
@@ -50,16 +47,22 @@ export const _useTable = <TType,>({
           const value = cell.getValue();
           return {
             id: cell.id as StringKeyModel<TType>,
-            value: isNil(value)
-              ? nilString
-              : column && column.formatter
+            value: (column && column.formatter
               ? column.formatter({
                   row: row.original,
                   value: value as TType[StringKeyModel<TType>],
                 })
-              : toString(value),
+              : value) as TType[StringKeyModel<TType>],
             width: cell.column.getSize() ?? undefined,
-            ...(column ? { align: column.align, renderer: column.renderer } : {}),
+            ...(column
+              ? {
+                  align: column.align,
+                  columnId: column.id,
+                  field: column.field,
+                  label: column.label,
+                  renderer: column.renderer,
+                }
+              : {}),
           };
         }),
         id: row.id,

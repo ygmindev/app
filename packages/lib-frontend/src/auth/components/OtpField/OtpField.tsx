@@ -70,6 +70,7 @@ export const OtpField: LFCModel<OtpFieldPropsModel> = ({
               }
             }}
             onFocus={() => isFocusedSet(true)}
+            size={THEME_SIZE.MEDIUM}
             value={valueControlled}
           />
         </Wrapper>
@@ -87,6 +88,7 @@ export const OtpField: LFCModel<OtpFieldPropsModel> = ({
             isCenter
             isNoClear
             key={id}
+            size={THEME_SIZE.MEDIUM}
             value={(valueControlled && valueControlled[i]) ?? ''}
             width={theme.shape.size[THEME_SIZE.MEDIUM]}
           />

@@ -1,4 +1,10 @@
-import { type DataFormatterModel, type DataRendererModel } from '#lib-frontend/data/data.models';
+import { type ReactElement } from 'react';
+
+import {
+  type DataFormatterModel,
+  type DataRendererModel,
+  type FieldPropsModel,
+} from '#lib-frontend/data/data.models';
 import {
   type _UseTableModel,
   type _UseTableParamsModel,
@@ -26,9 +32,10 @@ export type TableColumnModel<
   TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
 > = WithIdModel<TKey> & {
   align?: FontAlignModel;
+  field?: ReactElement<FieldPropsModel<TType[TKey]>>;
   formatter?: DataFormatterModel<TType, TKey>;
   label?: TranslatableTextModel;
-  renderer?: DataRendererModel<TType>;
+  renderer?: DataRendererModel<TType, TKey>;
   sort?: TableSortTypeModel | boolean;
   type?: DataTypeModel | FieldTypeModel;
   width?: number;
@@ -46,9 +53,13 @@ export type TableRowModel<TType> = WithIdModel & {
   value: TType;
 };
 
-export type TableCellModel<TType> = WithIdModel<StringKeyModel<TType>> &
+export type TableCellModel<
+  TType,
+  TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
+> = WithIdModel<StringKeyModel<TType>> &
   TableRenderModel<TType> &
-  Pick<TableColumnModel<TType>, 'renderer'> & {
-    value?: string;
+  Pick<TableColumnModel<TType>, 'field' | 'label' | 'renderer'> & {
+    columnId?: TKey;
+    value?: TType[TKey];
     width?: number;
   };

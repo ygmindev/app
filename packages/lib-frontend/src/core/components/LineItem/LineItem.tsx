@@ -75,7 +75,7 @@ export const LineItem: LFCModel<LineItemPropsModel> = ({
             )}
 
             <Wrapper
-              align={FLEX_ALIGN.FLEX_START}
+              align={FLEX_ALIGN.START}
               s={THEME_SIZE.SMALL}>
               <TranslatableText type={FONT_TYPE.TITLE}>{label}</TranslatableText>
 

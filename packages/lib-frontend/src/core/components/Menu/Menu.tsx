@@ -117,7 +117,7 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
               const { color, confirmMessage, elementState, icon, id, label, subOptions } = option;
               const optionF = (value?: boolean): ReactElement => (
                 <Button
-                  align={FLEX_ALIGN.FLEX_START}
+                  align={FLEX_ALIGN.START}
                   color={color}
                   confirmMessage={confirmMessage}
                   elementState={value ? ELEMENT_STATE.ACTIVE : elementState}
