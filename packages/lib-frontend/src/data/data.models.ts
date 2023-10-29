@@ -57,11 +57,13 @@ export type FieldPropsModel<TType = string> = FocusableWrapperPropsModel &
     onSubmit?(): void;
   };
 
-export type FormErrorModel<TType> = {
-  [TKey in keyof TType]?: InferModel<TType[TKey]> extends PrimitiveModel
-    ? TranslatableTextModel | boolean | undefined
-    : FormErrorModel<TType[TKey]>;
-};
+export type FormErrorModel<TType> =
+  | {
+      [TKey in keyof TType]?: InferModel<TType[TKey]> extends PrimitiveModel
+        ? TranslatableTextModel | boolean | undefined
+        : FormErrorModel<TType[TKey]>;
+    }
+  | undefined;
 
 export type FormValidatorModel<TType = string | undefined, TForm = unknown> = (params: {
   data?: TForm;

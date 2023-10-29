@@ -139,7 +139,7 @@ const FormContainerF = forwardRef(
       const fieldProps = {
         defaultValue: initialValues ? initialValues[id] : undefined,
         elementState: elementStateF ?? element.props.elementState,
-        error: errors[id],
+        error: errors ? errors[id] : undefined,
         key: id,
         onChange: (v) => handleChange(id)(v),
         onSubmit: handleSubmitF,

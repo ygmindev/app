@@ -74,7 +74,7 @@ export type GetModel<TType extends object, TKey extends DeepKeyModel<TType>> = G
 
 // TODO: cleanup if possible?
 export type DepthArray = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-export type DeepKeyModel<TType extends object, TDepth extends number = 10> = [TDepth] extends [0]
+export type DeepKeyModel<TType, TDepth extends number = 10> = [TDepth] extends [0]
   ? never
   :
       | StringKeyModel<TType>

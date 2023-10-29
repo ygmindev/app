@@ -12,3 +12,7 @@ export type TablePropsModel<TType> = UseTableParamsModel<TType> & {
   onChange?(data?: Array<TType>): void;
   validators?: FormValidatorsModel<TType>;
 };
+
+export type TableRefModel = {
+  validate(): boolean;
+};

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { FloatingFooter } from '#lib-frontend/app/components/FloatingFooter/FloatingFooter';
 import { Button } from '#lib-frontend/core/components/Button/Button';
@@ -6,7 +6,9 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { NumberField } from '#lib-frontend/data/components/NumberField/NumberField';
 import { Table } from '#lib-frontend/data/components/Table/Table';
+import { type TableRefModel } from '#lib-frontend/data/components/Table/Table.models';
 import { type RelativeDateUnitModel } from '#lib-frontend/data/data.models';
+import { validateNotEmpty } from '#lib-frontend/data/utils/validateNotEmpty/validateNotEmpty';
 import { FUNDING } from '#lib-frontend/funding/funding.constants';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
@@ -25,6 +27,8 @@ export const QuoteFormPage: LFCModel<QuoteFormPagePropsModel> = ({ ...props }) =
   const { wrapperProps } = useLayoutStyles({ props });
   const { location } = useRouter<QuoteFormPageParamsModel>();
   const funding = location.params?.funding;
+
+  const tableRef = useRef<TableRefModel>(null);
 
   const [errors, errorsSet] =
     useState<
@@ -58,6 +62,7 @@ export const QuoteFormPage: LFCModel<QuoteFormPagePropsModel> = ({ ...props }) =
   );
 
   const handleSubmit = async (): Promise<void> => {
+    console.warn(tableRef?.current?.validate());
     console.warn(data);
   };
 
@@ -83,6 +88,8 @@ export const QuoteFormPage: LFCModel<QuoteFormPagePropsModel> = ({ ...props }) =
         isDeletable
         isHeadless
         onChange={(value) => dataSet(value ?? [])}
+        ref={tableRef}
+        validators={{ spread: validateNotEmpty }}
       />
 
       <FloatingFooter>

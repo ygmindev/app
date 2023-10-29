@@ -36,7 +36,7 @@
   "validateChanged": "nothing changed",
   "validateEmail": "invalid email",
   "validateLength": "please enter {{value}} characters",
-  "validateNotEmpty": "TRANSLATION_MISSING",
+  "validateNotEmpty": "Please enter a value",
   "validatePhone": "TRANSLATION_MISSING",
   "validateRange": "TRANSLATION_MISSING",
   "validateZipCode": "TRANSLATION_MISSING",

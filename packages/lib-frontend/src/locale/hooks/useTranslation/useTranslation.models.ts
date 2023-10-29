@@ -6,6 +6,6 @@ import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 
 export type UseTranslationParamsModel = _UseTranslationParamsModel;
 
-export type UseTranslationModel = {
+export type UseTranslationModel = Omit<_UseTranslationModel, 't'> & {
   t<TParams = undefined>(key?: TranslatableTextModel, params?: TParams): string;
-} & Omit<_UseTranslationModel, 't'>;
+};
