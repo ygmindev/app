@@ -100,7 +100,7 @@ export const RangeField = <TType extends NumberUnitModel>({
       }
     })();
     rangeSet([lowerF, upperF]);
-    rangeTypeF && rangeTypeSet(rangeTypeF);
+    rangeTypeSet(rangeTypeFF);
     valueControlledSet({
       ...valueControlled,
       max:
