@@ -87,7 +87,8 @@ export const Table = forwardRef(
           <Wrapper
             border={DIRECTION.BOTTOM}
             isFullWidth={isFullWidth}
-            isRowAlign>
+            isRowAlign
+            s={0}>
             {isDeletable && <Wrapper width={theme.shape.size[THEME_SIZE.MEDIUM]} />}
 
             {headers.map(({ align, id, label, width }) => (
@@ -112,7 +113,8 @@ export const Table = forwardRef(
           {rows.map((row, i) => (
             <Wrapper
               isRowAlign
-              key={row.id}>
+              key={row.id}
+              s={0}>
               {isDeletable && (
                 <Button
                   color={THEME_COLOR.ERROR}

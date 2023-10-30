@@ -51,7 +51,6 @@ export const ScaledNumberField = <TType extends NumberUnitModel>({
     onChange,
     value,
   });
-
   return (
     <FieldGroup
       {...wrapperProps}

@@ -8,6 +8,7 @@ import { ScaledNumberField } from '#lib-frontend/data/components/ScaledNumberFie
 import { Table } from '#lib-frontend/data/components/Table/Table';
 import { type TableRefModel } from '#lib-frontend/data/components/Table/Table.models';
 import { type RelativeDateUnitModel } from '#lib-frontend/data/data.models';
+import { validateNotEmpty } from '#lib-frontend/data/utils/validateNotEmpty/validateNotEmpty';
 import { FUNDING } from '#lib-frontend/funding/funding.constants';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
@@ -64,6 +65,7 @@ export const QuoteFormPage: LFCModel<QuoteFormPagePropsModel> = ({ ...props }) =
   );
 
   const handleSubmit = async (): Promise<void> => {
+    tableRef?.current?.validate();
     console.warn(data);
   };
 
@@ -90,7 +92,10 @@ export const QuoteFormPage: LFCModel<QuoteFormPagePropsModel> = ({ ...props }) =
         isHeadless
         onChange={(value) => dataSet(value ?? [])}
         ref={tableRef}
-        // validators={{ maturity: validateNotEmpty, spread: validateNotEmpty }}
+        validators={{
+          maturity: ({ value }) => validateNotEmpty({ value: value?.value }),
+          pricing: ({ value }) => validateNotEmpty({ value: value?.value }),
+        }}
       />
 
       <FloatingFooter>
