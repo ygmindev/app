@@ -15,7 +15,10 @@ import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { FocusableWrapper } from '#lib-frontend/data/components/FocusableWrapper/FocusableWrapper';
 import { type FocusableRefModel } from '#lib-frontend/data/components/FocusableWrapper/FocusableWrapper.models';
 import { _TextField } from '#lib-frontend/data/components/TextField/_TextField';
-import { TEXT_FIELD_KEYBOARD } from '#lib-frontend/data/components/TextField/TextField.constants';
+import {
+  TEXT_FIELD_KEYBOARD,
+  TEXT_FIELD_MIN_WIDTH,
+} from '#lib-frontend/data/components/TextField/TextField.constants';
 import {
   type TextFieldPropsModel,
   type TextFieldRefModel,
@@ -66,6 +69,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       rightElement,
       size,
       value,
+      width,
       ...props
     },
     ref,
@@ -184,13 +188,14 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         border={!isTransparent}
         elementState={elementStateF}
         height={theme.shape.size[sizeF]}
+        minWidth={width ?? TEXT_FIELD_MIN_WIDTH}
         onElementStateChange={elementStateSet}
         pHorizontal
         position={SHAPE_POSITION.RELATIVE}
         ref={focusableRef}>
         <Wrapper
           align={label ? FLEX_ALIGN.END : FLEX_ALIGN.CENTER}
-          grow
+          flex
           isRow
           s={THEME_SIZE.SMALL}>
           {leftElementF}

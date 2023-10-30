@@ -1,6 +1,6 @@
 import { RELATIVE_DATE_UNIT } from '#lib-frontend/data/data.constants';
 import { type RelativeDateUnitModel } from '#lib-frontend/data/data.models';
-import { type ScaledNumberModel } from '#lib-shared/data/data.models';
+import { type ScaledNumberModel } from '#lib-shared/data/resources/ScaledNumber/ScaledNumber.models';
 
 export const QUOTE_FORM_MATURITIES: Record<
   RelativeDateUnitModel,

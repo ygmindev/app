@@ -8,3 +8,5 @@ export enum TEXT_FIELD_KEYBOARD {
   TEL = 'tel',
   TEXT = 'text',
 }
+
+export const TEXT_FIELD_MIN_WIDTH = 120;

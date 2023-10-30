@@ -40,7 +40,7 @@ export const useFormatter = (): UseFormatterModel => {
       // TODO: postfix to translation
       let postfix = '';
       switch (unit) {
-        case RATE_UNIT.BASIS_POINT: {
+        case RATE_UNIT.SPREAD: {
           isScale && (valueF *= 1e4);
           postfix = 'bps';
           break;
@@ -55,7 +55,7 @@ export const useFormatter = (): UseFormatterModel => {
           postfix = 'mm';
           break;
         }
-        case RATE_UNIT.PERCENT: {
+        case RATE_UNIT.YIELD: {
           isScale && (valueF *= 1e2);
           postfix = '%';
           break;
@@ -131,7 +131,7 @@ export const useFormatter = (): UseFormatterModel => {
         let valueF = toNumber(value.replace(/\D+/g, ''));
         const { isScale = true, unit } = (options ?? {}) as NumberFormatterOptionsModel;
         switch (unit) {
-          case RATE_UNIT.BASIS_POINT: {
+          case RATE_UNIT.SPREAD: {
             isScale && (valueF /= 1e4);
             break;
           }
@@ -143,7 +143,7 @@ export const useFormatter = (): UseFormatterModel => {
             isScale && (valueF *= 1e6);
             break;
           }
-          case RATE_UNIT.PERCENT: {
+          case RATE_UNIT.YIELD: {
             isScale && (valueF /= 1e2);
             break;
           }

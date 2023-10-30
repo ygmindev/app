@@ -33,7 +33,6 @@ export const FocusableWrapper: RLFCModel<FocusableRefModel, FocusableWrapperProp
         animation={{ states: ANIMATION_STATES_FOCUSABLE({ isError, theme }) }}
         border={wrapperProps.border ?? true}
         elementState={valueControlled}
-        isOverflowHidden
         onElementStateChange={valueControlledSet}
         round>
         {children}

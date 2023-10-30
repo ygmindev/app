@@ -12,6 +12,7 @@ import {
   type RangeTypeModel,
 } from '#lib-frontend/data/components/RangeField/RangeField.models';
 import { RANGE_TYPE } from '#lib-frontend/data/components/RangeField/RangField.constants';
+import { unitOptions } from '#lib-frontend/data/components/ScaledNumberField/ScaledNumberField';
 import { SelectField } from '#lib-frontend/data/components/SelectField/SelectField';
 import { TEXT_FIELD_KEYBOARD } from '#lib-frontend/data/components/TextField/TextField.constants';
 import { AMOUNT_UNIT, DATA, RELATIVE_DATE_UNIT } from '#lib-frontend/data/data.constants';
@@ -23,6 +24,7 @@ import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLa
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { type RangeModel } from '#lib-shared/data/data.models';
+import { SCALED_NUMBER_UNIT } from '#lib-shared/data/resources/ScaledNumber/ScaledNumber.constants';
 import { type ScaledNumberRangeModel } from '#lib-shared/data/resources/ScaledNumberRange/ScaledNumberRange.models';
 
 export const RangeField = <TType extends NumberUnitModel>({
@@ -30,7 +32,7 @@ export const RangeField = <TType extends NumberUnitModel>({
   error,
   label,
   onChange,
-  unitOptions,
+  type = SCALED_NUMBER_UNIT.AMOUNT,
   value,
   ...props
 }: LFCPropsModel<RangeFieldPropsModel<TType>>): ReactElement<
@@ -149,7 +151,7 @@ export const RangeField = <TType extends NumberUnitModel>({
               <SelectField<TType>
                 label={t('core:unit')}
                 onChange={(v) => handleChange({ unit: v as TType })}
-                options={unitOptions}
+                options={unitOptions(type)}
                 value={valueControlled?.unit}
               />
             ),

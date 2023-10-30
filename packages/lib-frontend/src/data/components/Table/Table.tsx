@@ -16,6 +16,7 @@ import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION } from '#lib-frontend/core/core.constants';
 import { type RLFCPropsModel } from '#lib-frontend/core/core.models';
+import { TABLE_CELL_WIDTH_DEFAULT } from '#lib-frontend/data/components/Table/Table.constants';
 import {
   type TablePropsModel,
   type TableRefModel,
@@ -27,6 +28,7 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
+import { FLEX_ALIGN } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { FONT_ALIGN } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { type StringKeyModel } from '#lib-shared/core/core.models';
@@ -73,6 +75,7 @@ export const Table = forwardRef(
     return rows?.length ? (
       <Wrapper
         {...wrapperProps}
+        align={FLEX_ALIGN.START}
         border
         flex
         isHorizontalScrollable
@@ -89,10 +92,9 @@ export const Table = forwardRef(
 
             {headers.map(({ align, id, label, width }) => (
               <Wrapper
-                basis={width}
-                isDistribute={!width}
                 key={id}
-                p={THEME_SIZE.SMALL}>
+                p={THEME_SIZE.SMALL}
+                width={width || TABLE_CELL_WIDTH_DEFAULT}>
                 <Text
                   align={align}
                   isBold
@@ -131,10 +133,9 @@ export const Table = forwardRef(
 
               {row.cells.map((cell) => (
                 <Wrapper
-                  basis={cell.width}
-                  flex={cell.width ? undefined : 1}
                   key={cell.id}
-                  p={THEME_SIZE.SMALL}>
+                  p={THEME_SIZE.SMALL}
+                  width={cell.width || TABLE_CELL_WIDTH_DEFAULT}>
                   {cell.renderer ? (
                     cell.renderer({ row: row.value, value: cell.value })
                   ) : cell.field ? (

@@ -48,14 +48,14 @@ export const QuoteFormPage: LFCModel<QuoteFormPagePropsModel> = ({ ...props }) =
             width: 100,
           },
           {
-            formatter: ({ value }) => format(value, { precision: 3, unit: RATE_UNIT.PERCENT }),
+            formatter: ({ value }) => format(value, { precision: 3, unit: RATE_UNIT.YIELD }),
             id: 'yield',
             label: t('funding:yield'),
             width: 80,
           },
           { id: 'benchmark', label: t('funding:benchmark') },
           {
-            formatter: ({ value }) => format(value, { unit: RATE_UNIT.BASIS_POINT }),
+            formatter: ({ value }) => format(value, { unit: RATE_UNIT.SPREAD }),
             id: 'swappedToFloating',
             label: t('funding:swappedToFloating'),
             width: 100,

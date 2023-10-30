@@ -6,7 +6,7 @@ import {
   type {{NAME}}(pascalCase)FormModel,
   type {{NAME}}(pascalCase)Model,
 } from '#lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
-import { type {{NAME_ROOT}}(pascalCase)Model } from '#lib-shared/{{MODULE_ROOT}}(pascalCase)/resources/Funding/Funding.models';
+import { type {{NAME_ROOT}}(pascalCase)Model } from '#lib-shared/{{MODULE_ROOT}}(camelCase)/resources/Funding/Funding.models';
 
 export const use{{NAME}}(pascalCase)Resource = (): Use{{NAME}}(pascalCase)ResourceModel =>
   useResource<{{NAME}}(pascalCase)Model, {{NAME}}(pascalCase)FormModel, FundingModel>({

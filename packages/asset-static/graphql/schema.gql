@@ -444,6 +444,7 @@ scalar DateTime
 
 type Funding {
   CreditRating: [CreditRating]
+  FundingQuote: [FundingQuote]
   Group: Group
   User: User
   _id: String
@@ -455,6 +456,7 @@ type Funding {
 
 input FundingCreateFormInput {
   CreditRating: [CreditRatingInput]
+  FundingQuote: [FundingQuoteInput]
   Group: GroupInput
   User: UserInput
   _id: String
@@ -557,6 +559,7 @@ type FundingGetOutput {
 
 input FundingInput {
   CreditRating: [CreditRatingInput]
+  FundingQuote: [FundingQuoteInput]
   Group: GroupInput
   User: UserInput
   _id: String
@@ -564,6 +567,20 @@ input FundingInput {
   created: DateTime
   currency: String
   maturity: ScaledNumberRangeInput
+}
+
+type FundingQuote {
+  _id: String
+  created: DateTime
+  maturity: ScaledNumber
+  pricing: ScaledNumber
+}
+
+input FundingQuoteInput {
+  _id: String
+  created: DateTime
+  maturity: ScaledNumberInput
+  pricing: ScaledNumberInput
 }
 
 input FundingRemoveFilterInput {
@@ -605,6 +622,7 @@ type FundingUpdateOutput {
 
 input FundingUpdateUpdateInput {
   CreditRating: [CreditRatingInput]
+  FundingQuote: [FundingQuoteInput]
   Group: GroupInput
   User: UserInput
   _id: String
@@ -1125,6 +1143,16 @@ input RatingAgencyUpdateUpdateInput {
   created: DateTime
   logo: String
   name: String
+}
+
+type ScaledNumber {
+  unit: String
+  value: Float
+}
+
+input ScaledNumberInput {
+  unit: String
+  value: Float
 }
 
 type ScaledNumberRange {

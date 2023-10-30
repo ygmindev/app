@@ -112,6 +112,7 @@ export const _TextField = composeComponent<_TextFieldPropsModel, TextInputProps>
   stylers: [
     ({ height, isCenter }) => ({
       height,
+      minWidth: 0,
       textAlign: isCenter ? 'center' : undefined,
       width: '100%',
     }),
