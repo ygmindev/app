@@ -30,6 +30,11 @@ type CreateArgsModel<TType> = {
   options?: CreateOptionsModel;
 };
 
+type CreateManyArgsModel<TType> = {
+  form: Array<TType>;
+  options?: CreateOptionsModel;
+};
+
 type ProjectOptionsModel<TType> = CommonOptionsModel & {
   project?: ProjectModel<TType>;
 };
@@ -79,6 +84,8 @@ export type ArgsModel<TMethod extends ResourceMethodTypeModel, TType, TForm> = {
   root?: string;
 } & (TMethod extends RESOURCE_METHOD_TYPE.CREATE
   ? CreateArgsModel<TForm>
+  : TMethod extends RESOURCE_METHOD_TYPE.CREATE_MANY
+  ? CreateManyArgsModel<TForm>
   : TMethod extends RESOURCE_METHOD_TYPE.GET
   ? GetArgsModel<TType>
   : TMethod extends RESOURCE_METHOD_TYPE.GET_MANY

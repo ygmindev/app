@@ -35,12 +35,14 @@ export const createEmbeddedResourceService = <
   Resource,
   RootService,
   afterCreate,
+  afterCreateMany,
   afterGet,
   afterGetConnection,
   afterGetMany,
   afterRemove,
   afterUpdate,
   beforeCreate,
+  beforeCreateMany,
   beforeGet,
   beforeGetConnection,
   beforeGetMany,
@@ -59,13 +61,17 @@ export const createEmbeddedResourceService = <
     return rootService;
   };
 
+  const getForm = async (form: TForm): Promise<TType> => {
+    const formF = new Resource();
+    forEach(form as unknown as object, (v, k) => (formF[k as keyof typeof formF] = v));
+    formF.beforeCreate && formF.beforeCreate();
+    return formF;
+  };
+
   const beforeCreateF = async (
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>,
     context?: ContextModel,
   ): Promise<InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>> => {
-    const value = new Resource();
-    forEach(input.form as unknown as object, (v, k) => (value[k as keyof typeof value] = v));
-    value.beforeCreate && value.beforeCreate();
     beforeCreate && (await beforeCreate({ input }, context));
     return { ...input, form: value as unknown as TForm };
   };
@@ -119,27 +125,39 @@ export const createEmbeddedResourceService = <
   return createResourceService<TType, TForm, TRoot>({
     Resource,
     afterCreate,
+    afterCreateMany,
     afterGet,
     afterGetConnection,
     afterGetMany,
     afterRemove,
     afterUpdate,
     beforeCreate,
+    beforeCreateMany,
     beforeGet,
     beforeGetConnection,
     beforeGetMany,
     beforeRemove,
     beforeUpdate,
     count: getCount,
-    create: async (input, context) => {
+    create: async (input) => {
       if (input.root) {
-        const inputF = await beforeCreateF(input, context);
-        const value = inputF.form as PartialModel<TType>;
+        const formF = await getForm(input.form);
         const { result: rootResult } = await getRootService().update({
           filter: [{ field: '_id', value: input.root }],
-          update: { $push: { [name]: value } } as UpdateModel<TRoot>,
+          update: { $push: { [name]: formF } } as UpdateModel<TRoot>,
         });
-        return { result: value, root: rootResult };
+        return { result: formF, root: rootResult };
+      }
+      throw new InvalidArgumentError('root');
+    },
+    createMany: async (input) => {
+      if (input.root) {
+        const formF = await Promise.all(input.form.map((value) => getForm(value)));
+        const { result: rootResult } = await getRootService().update({
+          filter: [{ field: '_id', value: input.root }],
+          update: { $push: { [name]: { $each: formF } } } as UpdateModel<TRoot>,
+        });
+        return { result: formF, root: rootResult };
       }
       throw new InvalidArgumentError('root');
     },

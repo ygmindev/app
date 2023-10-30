@@ -10,12 +10,14 @@ import { expandFilter } from '#lib-shared/resource/utils/expandFilter/expandFilt
 
 export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot = undefined>({
   afterCreate,
+  afterCreateMany,
   afterGet,
   afterGetConnection,
   afterGetMany,
   afterRemove,
   afterUpdate,
   beforeCreate,
+  beforeCreateMany,
   beforeGet,
   beforeGetConnection,
   beforeGetMany,
@@ -53,6 +55,25 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
       TRoot
     >['fields'],
     method: RESOURCE_METHOD_TYPE.CREATE,
+    name,
+    root,
+  });
+
+  const { query: createMany } = useResourceMethod<
+    RESOURCE_METHOD_TYPE.CREATE_MANY,
+    TType,
+    TForm,
+    TRoot
+  >({
+    after: afterCreateMany,
+    before: beforeCreateMany,
+    fields: fields as UseResourceMethodParamsModel<
+      RESOURCE_METHOD_TYPE.CREATE_MANY,
+      TType,
+      TForm,
+      TRoot
+    >['fields'],
+    method: RESOURCE_METHOD_TYPE.CREATE_MANY,
     name,
     root,
   });
@@ -129,6 +150,8 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
 
   return {
     create,
+
+    createMany,
 
     get,
 

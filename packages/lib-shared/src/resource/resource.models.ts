@@ -9,6 +9,7 @@ export type ResourceReadMethodTypeModel =
 
 export type ResourceWriteMethodTypeModel =
   | RESOURCE_METHOD_TYPE.CREATE
+  | RESOURCE_METHOD_TYPE.CREATE_MANY
   | RESOURCE_METHOD_TYPE.REMOVE
   | RESOURCE_METHOD_TYPE.UPDATE;
 

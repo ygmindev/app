@@ -18,18 +18,21 @@ export const createResourceService = <
   TRoot = undefined,
 >({
   afterCreate,
+  afterCreateMany,
   afterGet,
   afterGetConnection,
   afterGetMany,
   afterRemove,
   afterUpdate,
   beforeCreate,
+  beforeCreateMany,
   beforeGet,
   beforeGetConnection,
   beforeGetMany,
   beforeRemove,
   beforeUpdate,
   create,
+  createMany,
   get,
   getConnection,
   getMany,
@@ -44,12 +47,14 @@ export const createResourceService = <
   class ResourceService implements PrototypeModel<CreateResourceServiceModel<TType, TForm, TRoot>> {
     protected _decorators: ResourceServiceDecoratorModel<TType, TForm, TRoot> = {
       afterCreate,
+      afterCreateMany,
       afterGet,
       afterGetConnection,
       afterGetMany,
       afterRemove,
       afterUpdate,
       beforeCreate,
+      beforeCreateMany,
       beforeGet: async ({ input }, context) => {
         const inputF = { ...input, filter: collapseFilter(input.filter) };
         return beforeGet ? beforeGet({ input: inputF }, context) : inputF;
@@ -75,6 +80,7 @@ export const createResourceService = <
 
     constructor() {
       this.create = this.create.bind(this);
+      this.createMany = this.createMany.bind(this);
       this.get = this.get.bind(this);
       this.getMany = this.getMany.bind(this);
       this.getConnection = this.getConnection.bind(this);
@@ -107,6 +113,26 @@ export const createResourceService = <
       );
       return this.decorators.afterCreate
         ? this.decorators.afterCreate({ output }, context)
+        : output;
+    }
+
+    async createMany(
+      input: InputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TForm>,
+      context?: ContextModel,
+    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>> {
+      const inputF = cleanObject(
+        this.decorators.beforeCreateMany
+          ? await this.decorators.beforeCreateMany({ input }, context)
+          : input,
+      );
+      const root = inputF.root ?? this._decorators.root;
+      root && (inputF.root = root);
+      const output: OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot> = await createMany(
+        inputF,
+        context,
+      );
+      return this.decorators.afterCreateMany
+        ? this.decorators.afterCreateMany({ output }, context)
         : output;
     }
 

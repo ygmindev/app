@@ -9,7 +9,7 @@ export type ResultModel<TMethod extends ResourceMethodTypeModel, TType> = TMetho
   | RESOURCE_METHOD_TYPE.UPDATE
   | RESOURCE_METHOD_TYPE.REMOVE
   ? PartialModel<TType>
-  : TMethod extends RESOURCE_METHOD_TYPE.GET_MANY
+  : TMethod extends RESOURCE_METHOD_TYPE.GET_MANY | RESOURCE_METHOD_TYPE.CREATE_MANY
   ? Array<PartialModel<TType>>
   : TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION
   ? ConnectionModel<TType>

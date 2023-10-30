@@ -16,6 +16,11 @@ export type ResourceServiceModel<
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>>;
 
+  createMany(
+    input: InputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TForm>,
+    context?: ContextModel,
+  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>>;
+
   decorators?: ResourceServiceDecoratorModel<TType, TForm, TRoot>;
 
   get(
@@ -64,6 +69,11 @@ export type ResourceServiceAfterDecoratorModel<
 
 export type ResourceServiceDecoratorModel<TType, TForm, TRoot = undefined> = RootInputModel & {
   afterCreate?: ResourceServiceAfterDecoratorModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>;
+  afterCreateMany?: ResourceServiceAfterDecoratorModel<
+    RESOURCE_METHOD_TYPE.CREATE_MANY,
+    TType,
+    TRoot
+  >;
   afterGet?: ResourceServiceAfterDecoratorModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>;
   afterGetConnection?: ResourceServiceAfterDecoratorModel<
     RESOURCE_METHOD_TYPE.GET_CONNECTION,
@@ -74,6 +84,11 @@ export type ResourceServiceDecoratorModel<TType, TForm, TRoot = undefined> = Roo
   afterRemove?: ResourceServiceAfterDecoratorModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>;
   afterUpdate?: ResourceServiceAfterDecoratorModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>;
   beforeCreate?: ResourceServiceBeforeDecoratorModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>;
+  beforeCreateMany?: ResourceServiceBeforeDecoratorModel<
+    RESOURCE_METHOD_TYPE.CREATE_MANY,
+    TType,
+    TForm
+  >;
   beforeGet?: ResourceServiceBeforeDecoratorModel<RESOURCE_METHOD_TYPE.GET, TType, TForm>;
   beforeGetConnection?: ResourceServiceBeforeDecoratorModel<
     RESOURCE_METHOD_TYPE.GET_CONNECTION,
