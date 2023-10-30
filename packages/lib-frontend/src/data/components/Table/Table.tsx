@@ -87,14 +87,12 @@ export const Table = forwardRef(
           <Wrapper
             border={DIRECTION.BOTTOM}
             isFullWidth={isFullWidth}
-            isRowAlign
-            s={0}>
+            isRowAlign>
             {isDeletable && <Wrapper width={theme.shape.size[THEME_SIZE.MEDIUM]} />}
 
             {headers.map(({ align, id, label, width }) => (
               <Wrapper
                 key={id}
-                p={THEME_SIZE.SMALL}
                 width={width || TABLE_CELL_WIDTH_DEFAULT}>
                 <Text
                   align={align}
@@ -109,12 +107,12 @@ export const Table = forwardRef(
 
         <Wrapper
           grow
-          isFullWidth={isFullWidth}>
+          isFullWidth={isFullWidth}
+          s={THEME_SIZE.SMALL}>
           {rows.map((row, i) => (
             <Wrapper
               isRowAlign
-              key={row.id}
-              s={0}>
+              key={row.id}>
               {isDeletable && (
                 <Button
                   color={THEME_COLOR.ERROR}
@@ -136,7 +134,6 @@ export const Table = forwardRef(
               {row.cells.map((cell) => (
                 <Wrapper
                   key={cell.id}
-                  p={THEME_SIZE.SMALL}
                   width={cell.width || TABLE_CELL_WIDTH_DEFAULT}>
                   {cell.renderer ? (
                     cell.renderer({ row: row.value, value: cell.value })
