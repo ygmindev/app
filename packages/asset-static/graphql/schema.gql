@@ -21,6 +21,24 @@ input AccessCreateFormInput {
 
 input AccessCreateInput {
   form: AccessCreateFormInput
+  root: String
+}
+
+input AccessCreateManyFormInput {
+  Group: GroupInput
+  User: UserInput
+  _id: String
+  created: DateTime
+  role: [String]
+}
+
+input AccessCreateManyInput {
+  form: [AccessCreateManyFormInput]
+  root: String
+}
+
+type AccessCreateManyOutput {
+  result: Access
 }
 
 type AccessCreateOutput {
@@ -50,6 +68,7 @@ input AccessGetConnectionFilterInput {
 input AccessGetConnectionInput {
   filter: [AccessGetConnectionFilterInput]
   pagination: PaginationInput
+  root: String
 }
 
 type AccessGetConnectionOutput {
@@ -68,6 +87,7 @@ input AccessGetFilterInput {
 
 input AccessGetInput {
   filter: [AccessGetFilterInput]
+  root: String
 }
 
 input AccessGetManyFilterInput {
@@ -82,6 +102,7 @@ input AccessGetManyFilterInput {
 
 input AccessGetManyInput {
   filter: [AccessGetManyFilterInput]
+  root: String
 }
 
 type AccessGetManyOutput {
@@ -100,6 +121,7 @@ input AccessGetManyProtectedGetManyFilterInput {
 
 input AccessGetManyProtectedGetManyInput {
   filter: [AccessGetManyProtectedGetManyFilterInput]
+  root: String
 }
 
 type AccessGetManyProtectedGetManyOutput {
@@ -130,6 +152,7 @@ input AccessRemoveFilterInput {
 
 input AccessRemoveInput {
   filter: [AccessRemoveFilterInput]
+  root: String
 }
 
 type AccessRemoveOutput {
@@ -148,6 +171,7 @@ input AccessUpdateFilterInput {
 
 input AccessUpdateInput {
   filter: [AccessUpdateFilterInput]
+  root: String
   update: AccessUpdateUpdateInput
 }
 
@@ -181,32 +205,38 @@ input CreditRatingCreateFormInput {
 
 input CreditRatingCreateInput {
   form: CreditRatingCreateFormInput
-  root: [CreditRatingCreateRootFilterInput]
+  root: String
+}
+
+input CreditRatingCreateManyFormInput {
+  _id: String
+  agency: RatingAgencyInput
+  created: DateTime
+  longTermRating: String
+  longTermWatch: String
+}
+
+input CreditRatingCreateManyInput {
+  form: [CreditRatingCreateManyFormInput]
+  root: String
+}
+
+type CreditRatingCreateManyOutput {
+  result: CreditRating
+  root: CreditRatingCreateManyOutputRoot
+}
+
+type CreditRatingCreateManyOutputRoot {
+  root: CreditRatingCreateManyOutputRoot
 }
 
 type CreditRatingCreateOutput {
   result: CreditRating
-  root: [CreditRatingCreateOutputRootFilter]
+  root: CreditRatingCreateOutputRoot
 }
 
-type CreditRatingCreateOutputRootFilter {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceValue: Funding
-  stringValue: String
-}
-
-input CreditRatingCreateRootFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceValue: FundingInput
-  stringValue: String
+type CreditRatingCreateOutputRoot {
+  root: CreditRatingCreateOutputRoot
 }
 
 type CreditRatingGetConnectionConnection {
@@ -232,32 +262,16 @@ input CreditRatingGetConnectionFilterInput {
 input CreditRatingGetConnectionInput {
   filter: [CreditRatingGetConnectionFilterInput]
   pagination: PaginationInput
-  root: [CreditRatingGetConnectionRootFilterInput]
+  root: String
 }
 
 type CreditRatingGetConnectionOutput {
   result: CreditRatingGetConnectionConnection
-  root: [CreditRatingGetConnectionOutputRootFilter]
+  root: CreditRatingGetConnectionOutputRoot
 }
 
-type CreditRatingGetConnectionOutputRootFilter {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceValue: Funding
-  stringValue: String
-}
-
-input CreditRatingGetConnectionRootFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceValue: FundingInput
-  stringValue: String
+type CreditRatingGetConnectionOutputRoot {
+  root: CreditRatingGetConnectionOutputRoot
 }
 
 input CreditRatingGetFilterInput {
@@ -272,7 +286,7 @@ input CreditRatingGetFilterInput {
 
 input CreditRatingGetInput {
   filter: [CreditRatingGetFilterInput]
-  root: [CreditRatingGetRootFilterInput]
+  root: String
 }
 
 input CreditRatingGetManyFilterInput {
@@ -287,57 +301,25 @@ input CreditRatingGetManyFilterInput {
 
 input CreditRatingGetManyInput {
   filter: [CreditRatingGetManyFilterInput]
-  root: [CreditRatingGetManyRootFilterInput]
+  root: String
 }
 
 type CreditRatingGetManyOutput {
   result: [CreditRating]
-  root: [CreditRatingGetManyOutputRootFilter]
+  root: CreditRatingGetManyOutputRoot
 }
 
-type CreditRatingGetManyOutputRootFilter {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceValue: Funding
-  stringValue: String
-}
-
-input CreditRatingGetManyRootFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceValue: FundingInput
-  stringValue: String
+type CreditRatingGetManyOutputRoot {
+  root: CreditRatingGetManyOutputRoot
 }
 
 type CreditRatingGetOutput {
   result: CreditRating
-  root: [CreditRatingGetOutputRootFilter]
+  root: CreditRatingGetOutputRoot
 }
 
-type CreditRatingGetOutputRootFilter {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceValue: Funding
-  stringValue: String
-}
-
-input CreditRatingGetRootFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceValue: FundingInput
-  stringValue: String
+type CreditRatingGetOutputRoot {
+  root: CreditRatingGetOutputRoot
 }
 
 input CreditRatingInput {
@@ -360,32 +342,16 @@ input CreditRatingRemoveFilterInput {
 
 input CreditRatingRemoveInput {
   filter: [CreditRatingRemoveFilterInput]
-  root: [CreditRatingRemoveRootFilterInput]
+  root: String
 }
 
 type CreditRatingRemoveOutput {
   result: CreditRating
-  root: [CreditRatingRemoveOutputRootFilter]
+  root: CreditRatingRemoveOutputRoot
 }
 
-type CreditRatingRemoveOutputRootFilter {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceValue: Funding
-  stringValue: String
-}
-
-input CreditRatingRemoveRootFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceValue: FundingInput
-  stringValue: String
+type CreditRatingRemoveOutputRoot {
+  root: CreditRatingRemoveOutputRoot
 }
 
 input CreditRatingUpdateFilterInput {
@@ -400,33 +366,17 @@ input CreditRatingUpdateFilterInput {
 
 input CreditRatingUpdateInput {
   filter: [CreditRatingUpdateFilterInput]
-  root: [CreditRatingUpdateRootFilterInput]
+  root: String
   update: CreditRatingUpdateUpdateInput
 }
 
 type CreditRatingUpdateOutput {
   result: CreditRating
-  root: [CreditRatingUpdateOutputRootFilter]
+  root: CreditRatingUpdateOutputRoot
 }
 
-type CreditRatingUpdateOutputRootFilter {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceValue: Funding
-  stringValue: String
-}
-
-input CreditRatingUpdateRootFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceValue: FundingInput
-  stringValue: String
+type CreditRatingUpdateOutputRoot {
+  root: CreditRatingUpdateOutputRoot
 }
 
 input CreditRatingUpdateUpdateInput {
@@ -452,6 +402,7 @@ type Funding {
   created: DateTime
   currency: String
   maturity: ScaledNumberRange
+  quoteCount: Float
 }
 
 input FundingCreateFormInput {
@@ -464,10 +415,34 @@ input FundingCreateFormInput {
   created: DateTime
   currency: String
   maturity: ScaledNumberRangeInput
+  quoteCount: Float
 }
 
 input FundingCreateInput {
   form: FundingCreateFormInput
+  root: String
+}
+
+input FundingCreateManyFormInput {
+  CreditRating: [CreditRatingInput]
+  FundingQuote: [FundingQuoteInput]
+  Group: GroupInput
+  User: UserInput
+  _id: String
+  amount: ScaledNumberRangeInput
+  created: DateTime
+  currency: String
+  maturity: ScaledNumberRangeInput
+  quoteCount: Float
+}
+
+input FundingCreateManyInput {
+  form: [FundingCreateManyFormInput]
+  root: String
+}
+
+type FundingCreateManyOutput {
+  result: Funding
 }
 
 type FundingCreateOutput {
@@ -497,6 +472,7 @@ input FundingGetConnectionFilterInput {
 input FundingGetConnectionInput {
   filter: [FundingGetConnectionFilterInput]
   pagination: PaginationInput
+  root: String
 }
 
 type FundingGetConnectionOutput {
@@ -515,6 +491,7 @@ input FundingGetFilterInput {
 
 input FundingGetInput {
   filter: [FundingGetFilterInput]
+  root: String
 }
 
 input FundingGetManyFilterInput {
@@ -529,6 +506,7 @@ input FundingGetManyFilterInput {
 
 input FundingGetManyInput {
   filter: [FundingGetManyFilterInput]
+  root: String
 }
 
 type FundingGetManyOutput {
@@ -547,6 +525,7 @@ input FundingGetManyProtectedGetManyFilterInput {
 
 input FundingGetManyProtectedGetManyInput {
   filter: [FundingGetManyProtectedGetManyFilterInput]
+  root: String
 }
 
 type FundingGetManyProtectedGetManyOutput {
@@ -567,6 +546,7 @@ input FundingInput {
   created: DateTime
   currency: String
   maturity: ScaledNumberRangeInput
+  quoteCount: Float
 }
 
 type FundingQuote {
@@ -576,7 +556,188 @@ type FundingQuote {
   pricing: ScaledNumber
 }
 
+input FundingQuoteCreateFormInput {
+  _id: String
+  created: DateTime
+  maturity: ScaledNumberInput
+  pricing: ScaledNumberInput
+}
+
+input FundingQuoteCreateInput {
+  form: FundingQuoteCreateFormInput
+  root: String
+}
+
+input FundingQuoteCreateManyFormInput {
+  _id: String
+  created: DateTime
+  maturity: ScaledNumberInput
+  pricing: ScaledNumberInput
+}
+
+input FundingQuoteCreateManyInput {
+  form: [FundingQuoteCreateManyFormInput]
+  root: String
+}
+
+type FundingQuoteCreateManyOutput {
+  result: FundingQuote
+  root: FundingQuoteCreateManyOutputRoot
+}
+
+type FundingQuoteCreateManyOutputRoot {
+  root: FundingQuoteCreateManyOutputRoot
+}
+
+type FundingQuoteCreateOutput {
+  result: FundingQuote
+  root: FundingQuoteCreateOutputRoot
+}
+
+type FundingQuoteCreateOutputRoot {
+  root: FundingQuoteCreateOutputRoot
+}
+
+type FundingQuoteGetConnectionConnection {
+  edges: [FundingQuoteGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type FundingQuoteGetConnectionEdge {
+  cursor: String
+  node: FundingQuote
+}
+
+input FundingQuoteGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: FundingQuoteInput
+  stringValue: String
+}
+
+input FundingQuoteGetConnectionInput {
+  filter: [FundingQuoteGetConnectionFilterInput]
+  pagination: PaginationInput
+  root: String
+}
+
+type FundingQuoteGetConnectionOutput {
+  result: FundingQuoteGetConnectionConnection
+  root: FundingQuoteGetConnectionOutputRoot
+}
+
+type FundingQuoteGetConnectionOutputRoot {
+  root: FundingQuoteGetConnectionOutputRoot
+}
+
+input FundingQuoteGetFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: FundingQuoteInput
+  stringValue: String
+}
+
+input FundingQuoteGetInput {
+  filter: [FundingQuoteGetFilterInput]
+  root: String
+}
+
+input FundingQuoteGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: FundingQuoteInput
+  stringValue: String
+}
+
+input FundingQuoteGetManyInput {
+  filter: [FundingQuoteGetManyFilterInput]
+  root: String
+}
+
+type FundingQuoteGetManyOutput {
+  result: [FundingQuote]
+  root: FundingQuoteGetManyOutputRoot
+}
+
+type FundingQuoteGetManyOutputRoot {
+  root: FundingQuoteGetManyOutputRoot
+}
+
+type FundingQuoteGetOutput {
+  result: FundingQuote
+  root: FundingQuoteGetOutputRoot
+}
+
+type FundingQuoteGetOutputRoot {
+  root: FundingQuoteGetOutputRoot
+}
+
 input FundingQuoteInput {
+  _id: String
+  created: DateTime
+  maturity: ScaledNumberInput
+  pricing: ScaledNumberInput
+}
+
+input FundingQuoteRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: FundingQuoteInput
+  stringValue: String
+}
+
+input FundingQuoteRemoveInput {
+  filter: [FundingQuoteRemoveFilterInput]
+  root: String
+}
+
+type FundingQuoteRemoveOutput {
+  result: FundingQuote
+  root: FundingQuoteRemoveOutputRoot
+}
+
+type FundingQuoteRemoveOutputRoot {
+  root: FundingQuoteRemoveOutputRoot
+}
+
+input FundingQuoteUpdateFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceValue: FundingQuoteInput
+  stringValue: String
+}
+
+input FundingQuoteUpdateInput {
+  filter: [FundingQuoteUpdateFilterInput]
+  root: String
+  update: FundingQuoteUpdateUpdateInput
+}
+
+type FundingQuoteUpdateOutput {
+  result: FundingQuote
+  root: FundingQuoteUpdateOutputRoot
+}
+
+type FundingQuoteUpdateOutputRoot {
+  root: FundingQuoteUpdateOutputRoot
+}
+
+input FundingQuoteUpdateUpdateInput {
   _id: String
   created: DateTime
   maturity: ScaledNumberInput
@@ -595,6 +756,7 @@ input FundingRemoveFilterInput {
 
 input FundingRemoveInput {
   filter: [FundingRemoveFilterInput]
+  root: String
 }
 
 type FundingRemoveOutput {
@@ -613,6 +775,7 @@ input FundingUpdateFilterInput {
 
 input FundingUpdateInput {
   filter: [FundingUpdateFilterInput]
+  root: String
   update: FundingUpdateUpdateInput
 }
 
@@ -630,6 +793,7 @@ input FundingUpdateUpdateInput {
   created: DateTime
   currency: String
   maturity: ScaledNumberRangeInput
+  quoteCount: Float
 }
 
 type Group {
@@ -651,6 +815,24 @@ input GroupCreateFormInput {
 
 input GroupCreateInput {
   form: GroupCreateFormInput
+  root: String
+}
+
+input GroupCreateManyFormInput {
+  _id: String
+  created: DateTime
+  logo: String
+  name: String
+  types: [String]
+}
+
+input GroupCreateManyInput {
+  form: [GroupCreateManyFormInput]
+  root: String
+}
+
+type GroupCreateManyOutput {
+  result: Group
 }
 
 type GroupCreateOutput {
@@ -680,6 +862,7 @@ input GroupGetConnectionFilterInput {
 input GroupGetConnectionInput {
   filter: [GroupGetConnectionFilterInput]
   pagination: PaginationInput
+  root: String
 }
 
 type GroupGetConnectionOutput {
@@ -698,6 +881,7 @@ input GroupGetFilterInput {
 
 input GroupGetInput {
   filter: [GroupGetFilterInput]
+  root: String
 }
 
 input GroupGetManyFilterInput {
@@ -712,6 +896,7 @@ input GroupGetManyFilterInput {
 
 input GroupGetManyInput {
   filter: [GroupGetManyFilterInput]
+  root: String
 }
 
 type GroupGetManyOutput {
@@ -730,6 +915,7 @@ input GroupGetManyProtectedGetManyFilterInput {
 
 input GroupGetManyProtectedGetManyInput {
   filter: [GroupGetManyProtectedGetManyFilterInput]
+  root: String
 }
 
 type GroupGetManyProtectedGetManyOutput {
@@ -760,6 +946,7 @@ input GroupRemoveFilterInput {
 
 input GroupRemoveInput {
   filter: [GroupRemoveFilterInput]
+  root: String
 }
 
 type GroupRemoveOutput {
@@ -778,6 +965,7 @@ input GroupUpdateFilterInput {
 
 input GroupUpdateInput {
   filter: [GroupUpdateFilterInput]
+  root: String
   update: GroupUpdateUpdateInput
 }
 
@@ -795,27 +983,38 @@ input GroupUpdateUpdateInput {
 
 type Mutation {
   AccessCreate(input: AccessCreateInput): AccessCreateOutput
+  AccessCreateMany(input: AccessCreateManyInput): AccessCreateManyOutput
   AccessRemove(input: AccessRemoveInput): AccessRemoveOutput
   AccessUpdate(input: AccessUpdateInput): AccessUpdateOutput
   CreditRatingCreate(input: CreditRatingCreateInput): CreditRatingCreateOutput
+  CreditRatingCreateMany(input: CreditRatingCreateManyInput): CreditRatingCreateManyOutput
   CreditRatingRemove(input: CreditRatingRemoveInput): CreditRatingRemoveOutput
   CreditRatingUpdate(input: CreditRatingUpdateInput): CreditRatingUpdateOutput
   FundingCreate(input: FundingCreateInput): FundingCreateOutput
+  FundingCreateMany(input: FundingCreateManyInput): FundingCreateManyOutput
+  FundingQuoteCreate(input: FundingQuoteCreateInput): FundingQuoteCreateOutput
+  FundingQuoteCreateMany(input: FundingQuoteCreateManyInput): FundingQuoteCreateManyOutput
+  FundingQuoteRemove(input: FundingQuoteRemoveInput): FundingQuoteRemoveOutput
+  FundingQuoteUpdate(input: FundingQuoteUpdateInput): FundingQuoteUpdateOutput
   FundingRemove(input: FundingRemoveInput): FundingRemoveOutput
   FundingUpdate(input: FundingUpdateInput): FundingUpdateOutput
   GroupCreate(input: GroupCreateInput): GroupCreateOutput
+  GroupCreateMany(input: GroupCreateManyInput): GroupCreateManyOutput
   GroupRemove(input: GroupRemoveInput): GroupRemoveOutput
   GroupUpdate(input: GroupUpdateInput): GroupUpdateOutput
   OtpCreate(input: OtpCreateInput): OtpCreateOutput
+  OtpCreateMany(input: OtpCreateManyInput): OtpCreateManyOutput
   OtpRemove(input: OtpRemoveInput): OtpRemoveOutput
   OtpUpdate(input: OtpUpdateInput): OtpUpdateOutput
   RatingAgencyCreate(input: RatingAgencyCreateInput): RatingAgencyCreateOutput
+  RatingAgencyCreateMany(input: RatingAgencyCreateManyInput): RatingAgencyCreateManyOutput
   RatingAgencyRemove(input: RatingAgencyRemoveInput): RatingAgencyRemoveOutput
   RatingAgencyUpdate(input: RatingAgencyUpdateInput): RatingAgencyUpdateOutput
   SignInCreate(input: SignInCreateInput): SignInCreateOutput
   SignInUserUpdate(input: SignInUserUpdateInput): SignInUserUpdateOutput
   SignInUsernameCreate(input: SignInUsernameCreateInput): SignInUsernameCreateOutput
   UserCreate(input: UserCreateInput): UserCreateOutput
+  UserCreateMany(input: UserCreateManyInput): UserCreateManyOutput
   UserRemove(input: UserRemoveInput): UserRemoveOutput
   UserUpdate(input: UserUpdateInput): UserUpdateOutput
 }
@@ -838,6 +1037,23 @@ input OtpCreateFormInput {
 
 input OtpCreateInput {
   form: OtpCreateFormInput
+  root: String
+}
+
+input OtpCreateManyFormInput {
+  callingCode: String
+  checkExists: Boolean
+  email: String
+  phone: String
+}
+
+input OtpCreateManyInput {
+  form: [OtpCreateManyFormInput]
+  root: String
+}
+
+type OtpCreateManyOutput {
+  result: Otp
 }
 
 type OtpCreateOutput {
@@ -867,6 +1083,7 @@ input OtpGetConnectionFilterInput {
 input OtpGetConnectionInput {
   filter: [OtpGetConnectionFilterInput]
   pagination: PaginationInput
+  root: String
 }
 
 type OtpGetConnectionOutput {
@@ -885,6 +1102,7 @@ input OtpGetFilterInput {
 
 input OtpGetInput {
   filter: [OtpGetFilterInput]
+  root: String
 }
 
 input OtpGetManyFilterInput {
@@ -899,6 +1117,7 @@ input OtpGetManyFilterInput {
 
 input OtpGetManyInput {
   filter: [OtpGetManyFilterInput]
+  root: String
 }
 
 type OtpGetManyOutput {
@@ -930,6 +1149,7 @@ input OtpRemoveFilterInput {
 
 input OtpRemoveInput {
   filter: [OtpRemoveFilterInput]
+  root: String
 }
 
 type OtpRemoveOutput {
@@ -948,6 +1168,7 @@ input OtpUpdateFilterInput {
 
 input OtpUpdateInput {
   filter: [OtpUpdateFilterInput]
+  root: String
   update: OtpUpdateUpdateInput
 }
 
@@ -990,6 +1211,9 @@ type Query {
   FundingGetConnection(input: FundingGetConnectionInput): FundingGetConnectionOutput
   FundingGetMany(input: FundingGetManyInput): FundingGetManyOutput
   FundingGetManyProtectedGetMany(input: FundingGetManyProtectedGetManyInput): FundingGetManyProtectedGetManyOutput
+  FundingQuoteGet(input: FundingQuoteGetInput): FundingQuoteGetOutput
+  FundingQuoteGetConnection(input: FundingQuoteGetConnectionInput): FundingQuoteGetConnectionOutput
+  FundingQuoteGetMany(input: FundingQuoteGetManyInput): FundingQuoteGetManyOutput
   GroupGet(input: GroupGetInput): GroupGetOutput
   GroupGetConnection(input: GroupGetConnectionInput): GroupGetConnectionOutput
   GroupGetMany(input: GroupGetManyInput): GroupGetManyOutput
@@ -1023,6 +1247,23 @@ input RatingAgencyCreateFormInput {
 
 input RatingAgencyCreateInput {
   form: RatingAgencyCreateFormInput
+  root: String
+}
+
+input RatingAgencyCreateManyFormInput {
+  _id: String
+  created: DateTime
+  logo: String
+  name: String
+}
+
+input RatingAgencyCreateManyInput {
+  form: [RatingAgencyCreateManyFormInput]
+  root: String
+}
+
+type RatingAgencyCreateManyOutput {
+  result: RatingAgency
 }
 
 type RatingAgencyCreateOutput {
@@ -1052,6 +1293,7 @@ input RatingAgencyGetConnectionFilterInput {
 input RatingAgencyGetConnectionInput {
   filter: [RatingAgencyGetConnectionFilterInput]
   pagination: PaginationInput
+  root: String
 }
 
 type RatingAgencyGetConnectionOutput {
@@ -1070,6 +1312,7 @@ input RatingAgencyGetFilterInput {
 
 input RatingAgencyGetInput {
   filter: [RatingAgencyGetFilterInput]
+  root: String
 }
 
 input RatingAgencyGetManyFilterInput {
@@ -1084,6 +1327,7 @@ input RatingAgencyGetManyFilterInput {
 
 input RatingAgencyGetManyInput {
   filter: [RatingAgencyGetManyFilterInput]
+  root: String
 }
 
 type RatingAgencyGetManyOutput {
@@ -1113,6 +1357,7 @@ input RatingAgencyRemoveFilterInput {
 
 input RatingAgencyRemoveInput {
   filter: [RatingAgencyRemoveFilterInput]
+  root: String
 }
 
 type RatingAgencyRemoveOutput {
@@ -1131,6 +1376,7 @@ input RatingAgencyUpdateFilterInput {
 
 input RatingAgencyUpdateInput {
   filter: [RatingAgencyUpdateFilterInput]
+  root: String
   update: RatingAgencyUpdateUpdateInput
 }
 
@@ -1184,6 +1430,7 @@ input SignInCreateFormInput {
 
 input SignInCreateInput {
   form: SignInCreateFormInput
+  root: String
 }
 
 type SignInCreateOutput {
@@ -1202,6 +1449,7 @@ input SignInUserUpdateFilterInput {
 
 input SignInUserUpdateInput {
   filter: [SignInUserUpdateFilterInput]
+  root: String
   update: SignInUserUpdateUpdateInput
 }
 
@@ -1230,6 +1478,7 @@ input SignInUsernameCreateFormInput {
 
 input SignInUsernameCreateInput {
   form: SignInUsernameCreateFormInput
+  root: String
 }
 
 type SignInUsernameCreateOutput {
@@ -1253,6 +1502,7 @@ input SnapshotGetFilterInput {
 
 input SnapshotGetInput {
   filter: [SnapshotGetFilterInput]
+  root: String
 }
 
 input SnapshotGetManyFilterInput {
@@ -1267,6 +1517,7 @@ input SnapshotGetManyFilterInput {
 
 input SnapshotGetManyInput {
   filter: [SnapshotGetManyFilterInput]
+  root: String
 }
 
 type SnapshotGetManyOutput {
@@ -1308,6 +1559,28 @@ input UserCreateFormInput {
 
 input UserCreateInput {
   form: UserCreateFormInput
+  root: String
+}
+
+input UserCreateManyFormInput {
+  Access: [AccessInput] = []
+  _id: String
+  callingCode: String
+  created: DateTime
+  email: String
+  first: String
+  last: String
+  paymentMethodPrimary: String
+  phone: String
+}
+
+input UserCreateManyInput {
+  form: [UserCreateManyFormInput]
+  root: String
+}
+
+type UserCreateManyOutput {
+  result: User
 }
 
 type UserCreateOutput {
@@ -1337,6 +1610,7 @@ input UserGetConnectionFilterInput {
 input UserGetConnectionInput {
   filter: [UserGetConnectionFilterInput]
   pagination: PaginationInput
+  root: String
 }
 
 type UserGetConnectionOutput {
@@ -1355,6 +1629,7 @@ input UserGetFilterInput {
 
 input UserGetInput {
   filter: [UserGetFilterInput]
+  root: String
 }
 
 input UserGetManyFilterInput {
@@ -1369,6 +1644,7 @@ input UserGetManyFilterInput {
 
 input UserGetManyInput {
   filter: [UserGetManyFilterInput]
+  root: String
 }
 
 type UserGetManyOutput {
@@ -1403,6 +1679,7 @@ input UserRemoveFilterInput {
 
 input UserRemoveInput {
   filter: [UserRemoveFilterInput]
+  root: String
 }
 
 type UserRemoveOutput {
@@ -1421,6 +1698,7 @@ input UserUpdateFilterInput {
 
 input UserUpdateInput {
   filter: [UserUpdateFilterInput]
+  root: String
   update: UserUpdateUpdateInput
 }
 

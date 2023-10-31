@@ -19,6 +19,7 @@ import {
   type QuoteFormPageParamsModel,
   type QuoteFormPagePropsModel,
 } from '#lib-frontend/underwriter/pages/QuoteFormPage/QuoteFormPage.models';
+import { NotFoundError } from '#lib-shared/core/errors/NotFoundError/NotFoundError';
 import { SCALED_NUMBER_UNIT } from '#lib-shared/data/resources/ScaledNumber/ScaledNumber.constants';
 import { type ScaledNumberModel } from '#lib-shared/data/resources/ScaledNumber/ScaledNumber.models';
 import { type FundingQuoteFormModel } from '#lib-shared/funding/resources/FundingQuote/FundingQuote.models';
@@ -54,8 +55,13 @@ export const QuoteFormPage: LFCModel<QuoteFormPagePropsModel> = ({ ...props }) =
   );
 
   const handleSubmit = async (): Promise<void> => {
-    tableRef?.current?.validate();
-    // await create({ form: data });
+    if (funding?._id) {
+      if (tableRef?.current?.validate()) {
+        const result = await createMany({ form: data, root: funding?._id });
+        console.warn(result);
+      }
+    }
+    throw new NotFoundError('root');
   };
 
   return (

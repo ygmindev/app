@@ -8,8 +8,7 @@ export type CreateInputParamsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
   TForm = EntityResourceDataModel<TType>,
-  TRoot = undefined,
-> = CreateArgsParamsModel<TMethod, TType, TForm, TRoot>;
+> = CreateArgsParamsModel<TMethod, TType, TForm>;
 
 export type CreateInputModel<
   TMethod extends ResourceMethodTypeModel,

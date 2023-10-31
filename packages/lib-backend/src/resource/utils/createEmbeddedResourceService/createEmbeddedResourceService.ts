@@ -19,7 +19,6 @@ import { type EmbeddedResourceModel } from '#lib-shared/resource/resources/Embed
 import { type EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import { type EntityResourceServiceModel } from '#lib-shared/resource/resources/EntityResource/EntityResourceService/EntityResourceService.models';
 import { type ProjectModel } from '#lib-shared/resource/utils/Args/Args.models';
-import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
 import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
@@ -66,14 +65,6 @@ export const createEmbeddedResourceService = <
     forEach(form as unknown as object, (v, k) => (formF[k as keyof typeof formF] = v));
     formF.beforeCreate && formF.beforeCreate();
     return formF;
-  };
-
-  const beforeCreateF = async (
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>,
-    context?: ContextModel,
-  ): Promise<InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>> => {
-    beforeCreate && (await beforeCreate({ input }, context));
-    return { ...input, form: value as unknown as TForm };
   };
 
   const getAggregation = (

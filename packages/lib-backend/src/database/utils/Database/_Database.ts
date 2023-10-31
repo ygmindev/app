@@ -112,6 +112,22 @@ export class _Database implements _DatabaseModel {
         }
       },
 
+      createMany: async ({ form }) => {
+        try {
+          const em = this._getEntityManager();
+          const formF = form.map(cleanDocument);
+          const result = await em.insertMany(name, formF as Array<object>);
+          return { result: result as Array<PartialModel<TType>> };
+        } catch (e) {
+          switch ((e as MongoError).code as unknown as number) {
+            case 11000:
+              throw new DuplicateError(name);
+            default:
+              throw e;
+          }
+        }
+      },
+
       get: async ({ filter, options }) => {
         const em = this._getEntityManager();
         const filterF = cleanDocument(getFilter<TType>(filter));

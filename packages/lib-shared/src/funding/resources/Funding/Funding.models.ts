@@ -17,6 +17,8 @@ export type FundingModel = ProtectedResourceModel & {
   currency?: string;
 
   maturity?: ScaledNumberRangeModel<RelativeDateUnitModel>;
+
+  quoteCount?: number;
 };
 
 export type FundingFormModel = EntityResourceDataModel<FundingModel>;

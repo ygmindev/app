@@ -12,14 +12,12 @@ export const withInput = <
   TMethod extends ResourceMethodTypeModel,
   TType,
   TForm = EntityResourceDataModel<TType>,
-  TRoot = undefined,
 >({
   Resource,
-  RootResource,
   method,
   name,
-}: WithInputParamsModel<TMethod, TType, TForm, TRoot>): WithInputModel => {
+}: WithInputParamsModel<TMethod, TType, TForm>): WithInputModel => {
   const nameF = `${name}${method}`;
-  const InputF = createInput({ Resource, RootResource, method, name: nameF });
+  const InputF = createInput({ Resource, method, name: nameF });
   return ArgDecorator('input', () => InputF) as WithInputModel;
 };

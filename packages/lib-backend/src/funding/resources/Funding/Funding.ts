@@ -55,4 +55,7 @@ export class Funding extends ProtectedResource implements FundingModel {
     type: PROPERTY_TYPE.RESOURCE,
   })
   maturity?: ScaledNumberRangeModel<RelativeDateUnitModel>;
+
+  @withField({ isOptional: true, type: DATA_TYPE.NUMBER })
+  quoteCount?: number;
 }

@@ -16,6 +16,7 @@ export const FundingDetail: LFCModel<FundingDetailPropsModel> = ({ funding, ...p
   const { t } = useTranslation([FUNDING]);
   const { formatRange } = useFormatter();
   const { wrapperProps } = useLayoutStyles({ props });
+  console.warn(funding);
   return (
     <ItemTable
       {...wrapperProps}

@@ -18,6 +18,7 @@ const getOperation = (method: ResourceMethodTypeModel): typeof Mutation | typeof
     case RESOURCE_METHOD_TYPE.GET_CONNECTION:
       return Query;
     case RESOURCE_METHOD_TYPE.CREATE:
+    case RESOURCE_METHOD_TYPE.CREATE_MANY:
     case RESOURCE_METHOD_TYPE.UPDATE:
     case RESOURCE_METHOD_TYPE.REMOVE:
       return Mutation;

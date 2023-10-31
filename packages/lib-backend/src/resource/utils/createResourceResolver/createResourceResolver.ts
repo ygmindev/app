@@ -39,6 +39,7 @@ export const createResourceResolver = <
 > => {
   const { prototype } = ResourceService;
   const createExists = prototype.create !== undefined;
+  const createManyExists = prototype.createMany !== undefined;
   const getExists = prototype.get !== undefined;
   const getManyExists = prototype.getMany !== undefined;
   const getConnectionExists = prototype.getConnection !== undefined;
@@ -72,7 +73,6 @@ export const createResourceResolver = <
         () =>
           withInput({
             Resource: ResourceData ?? (Resource as unknown as ResourceClassModel<TForm>),
-            RootResource,
             method: RESOURCE_METHOD_TYPE.CREATE,
             name,
           }),
@@ -85,6 +85,41 @@ export const createResourceResolver = <
         return this._service.create(cleanObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.CREATE);
+    }
+
+    @withCondition(
+      () => createManyExists,
+      () => [
+        withAuthorizer({
+          authorizer: authorizer?.default ?? authorizer?.write ?? authorizer?.CreateMany,
+        }),
+        withOutput({
+          Resource,
+          RootResource,
+          level: access?.default ?? access?.write ?? access?.CreateMany,
+          method: RESOURCE_METHOD_TYPE.CREATE_MANY,
+          name,
+        }),
+      ],
+    )
+    async createMany(
+      @withCondition(
+        () => createManyExists,
+        () =>
+          withInput({
+            Resource: ResourceData ?? (Resource as unknown as ResourceClassModel<TForm>),
+            method: RESOURCE_METHOD_TYPE.CREATE_MANY,
+            name,
+          }),
+      )
+      input: InputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TForm>,
+      @withContext()
+      context?: ContextModel,
+    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>> {
+      if (this._service.createMany) {
+        return this._service.createMany(cleanObject(input), context);
+      }
+      throw new NotImplementedError(RESOURCE_METHOD_TYPE.CREATE_MANY);
     }
 
     @withCondition(
@@ -108,7 +143,6 @@ export const createResourceResolver = <
         () =>
           withInput({
             Resource,
-            RootResource,
             method: RESOURCE_METHOD_TYPE.GET,
             name,
           }),
@@ -144,7 +178,6 @@ export const createResourceResolver = <
         () =>
           withInput({
             Resource,
-            RootResource,
             method: RESOURCE_METHOD_TYPE.GET_MANY,
             name,
           }),
@@ -180,7 +213,6 @@ export const createResourceResolver = <
         () =>
           withInput({
             Resource,
-            RootResource,
             method: RESOURCE_METHOD_TYPE.GET_CONNECTION,
             name,
           }),
@@ -216,7 +248,6 @@ export const createResourceResolver = <
         () =>
           withInput({
             Resource,
-            RootResource,
             method: RESOURCE_METHOD_TYPE.UPDATE,
             name,
           }),
@@ -252,7 +283,6 @@ export const createResourceResolver = <
         () =>
           withInput({
             Resource,
-            RootResource,
             method: RESOURCE_METHOD_TYPE.REMOVE,
             name,
           }),

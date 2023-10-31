@@ -6,7 +6,6 @@ export type WithInputParamsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
   TForm = EntityResourceDataModel<TType>,
-  TRoot = undefined,
-> = CreateInputParamsModel<TMethod, TType, TForm, TRoot>;
+> = CreateInputParamsModel<TMethod, TType, TForm>;
 
 export type WithInputModel = ParameterDecorator;

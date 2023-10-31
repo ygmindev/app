@@ -5,8 +5,9 @@ import { GROUP_RESOURCE_NAME } from '#lib-shared/group/resources/Group/Group.con
 
 export const FUNDING_FIELDS = [
   '_id',
-  'created',
   'currency',
+  'created',
+  'quoteCount',
   { amount: ['min', 'max', 'unit'] },
   { maturity: ['min', 'max', 'unit'] },
   {
