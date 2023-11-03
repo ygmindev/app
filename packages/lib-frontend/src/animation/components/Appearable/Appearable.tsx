@@ -13,6 +13,7 @@ export const Appearable: LFCModel<AppearablePropsModel> = ({
   animation,
   children,
   isActive,
+  isHidden,
   isScalable = true,
   ...props
 }) => (
@@ -25,7 +26,7 @@ export const Appearable: LFCModel<AppearablePropsModel> = ({
       ...animation,
     }}
     elementState={isActive ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.EXIT}
-    isHidden={!isActive}>
+    isHidden={isHidden ?? !isActive}>
     {children}
   </Wrapper>
 );
