@@ -1,3 +1,3 @@
-export type SequenceParamsModel<TType> = Array<() => Promise<TType>>;
+export type SequenceParamsModel<TType extends unknown> = Array<() => Promise<TType>>;
 
-export type SequenceModel<TType> = Array<TType>;
+export type SequenceModel<TType extends unknown> = Array<TType>;

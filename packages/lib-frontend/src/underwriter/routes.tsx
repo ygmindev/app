@@ -33,6 +33,7 @@ export const underwriterRoutes: Array<RouteModel> = [
           getRouteGroup({
             element: <FundingDetailPage />,
             pathname: ':fundingid',
+            prerender: false,
             routes: [
               {
                 element: <QuoteFormPage />,

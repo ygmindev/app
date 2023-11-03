@@ -38,8 +38,6 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
       anchor,
       direction,
       isFullWidth,
-      maxHeight,
-      maxWidth,
       onChange,
       options,
       renderOption,
@@ -164,8 +162,6 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
         direction={direction}
         isFullWidth={isFullWidth}
         isOpen={isOpen}
-        maxHeight={maxHeight}
-        maxWidth={maxWidth}
         onToggle={handleToggle}
         ref={dropdownRef}
         style={styles}

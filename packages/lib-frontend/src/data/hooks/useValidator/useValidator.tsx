@@ -10,7 +10,7 @@ import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 
-const validate = <TType>({
+const validate = <TType,>({
   data,
   t,
   validators,
@@ -48,7 +48,7 @@ const validate = <TType>({
   return isEmpty(errors) ? undefined : errors;
 };
 
-export const useValidator = <TType>(): UseValidatorModel<TType> => {
+export const useValidator = <TType,>(): UseValidatorModel<TType> => {
   const { t } = useTranslation();
   return ({ data, validators }) => (validators || data ? validate({ data, t, validators }) : {});
 };

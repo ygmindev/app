@@ -1,0 +1,6 @@
+{
+  "exactMessage": "enter exact value instead",
+  "max": "max {{value}}",
+  "min": "min {{value}}",
+  "rangeMessage": "enter range instead"
+}

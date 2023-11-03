@@ -8,7 +8,7 @@ import { type ItemTablePropsModel } from '#lib-frontend/data/components/ItemTabl
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
+import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 
@@ -33,7 +33,6 @@ export const ItemTable: LFCModel<ItemTablePropsModel> = ({ items, ...props }) =>
 
           {icon && (
             <Icon
-              colorRole={THEME_ROLE.MUTED}
               icon={icon}
               width={theme.shape.size[THEME_SIZE.SMALL]}
             />

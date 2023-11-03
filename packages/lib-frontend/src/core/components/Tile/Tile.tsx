@@ -14,6 +14,7 @@ export const Tile: LFCModel<TilePropsModel> = ({
   image,
   isBorder = true,
   onPress,
+  rightElement,
   title,
   ...props
 }) => {
@@ -32,7 +33,8 @@ export const Tile: LFCModel<TilePropsModel> = ({
             image={image}
             isBorder={false}
             label={title}
-            onPress={onPress}>
+            onPress={onPress}
+            rightElement={rightElement}>
             {description}
           </LineItem>
 

@@ -1,4 +1,5 @@
 import { AppHomePage } from '#lib-frontend/app/pages/AppHomePage/AppHomePage';
+import { HOME } from '#lib-frontend/core/core.constants';
 import { FORM } from '#lib-frontend/data/data.constants';
 import { GROUP } from '#lib-frontend/group/group.constants';
 import { GroupFormPage } from '#lib-frontend/group/pages/GroupFormPage/GroupFormPage';
@@ -13,7 +14,7 @@ export const routes: Array<RouteModel> = getRoutes({
     {
       element: <AppHomePage />,
       isProtectable: true,
-      pathname: '/',
+      pathname: HOME,
     },
     {
       isProtectable: true,

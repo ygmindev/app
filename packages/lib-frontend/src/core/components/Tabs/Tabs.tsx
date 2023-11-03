@@ -69,7 +69,7 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
                     </Text>
                   </Wrapper>
 
-                  {isActiveF && (
+                  {isActiveFF && (
                     <Wrapper
                       backgroundColor={THEME_COLOR.PRIMARY}
                       bottom={0}

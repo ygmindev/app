@@ -19,6 +19,7 @@ import { FLEX_ALIGN } from '#lib-frontend/style/utils/styler/flexStyler/flexStyl
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 export const LineItem: LFCModel<LineItemPropsModel> = ({
+  button,
   children,
   elementState,
   icon,
@@ -34,7 +35,7 @@ export const LineItem: LFCModel<LineItemPropsModel> = ({
   const [isActive, isActiveSet] = useState<boolean>();
 
   const rightElementF =
-    rightElement ??
+    button ??
     (onPress &&
       ((isActive) => (
         <Button
@@ -86,6 +87,8 @@ export const LineItem: LFCModel<LineItemPropsModel> = ({
               )}
             </Wrapper>
           </Wrapper>
+
+          {rightElement}
 
           {rightElementF && rightElementF(isActive)}
         </Wrapper>

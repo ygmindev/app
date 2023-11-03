@@ -7,12 +7,12 @@ import {
 } from '#lib-frontend/core/components/Dropdown/Dropdown.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
-import { type RSFCModel } from '#lib-frontend/core/core.models';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { type RLFCModel } from '#lib-frontend/core/core.models';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR_MORE, THEME_SIZE } from '#lib-frontend/style/style.constants';
 
-export const Dropdown: RSFCModel<DropdownRefModel, DropdownPropsModel> = forwardRef(
+export const Dropdown: RLFCModel<DropdownRefModel, DropdownPropsModel> = forwardRef(
   (
     {
       anchor,
@@ -30,7 +30,7 @@ export const Dropdown: RSFCModel<DropdownRefModel, DropdownPropsModel> = forward
   ) => {
     const theme = useTheme();
     const wrapperRef = useRef<WrapperRefModel>(null);
-    const { styles } = useStyles({ props });
+    const { styles } = useLayoutStyles({ props });
     useImperativeHandle(ref, () => ({
       isOpen: () => isOpen || false,
       scrollTo: (params) => wrapperRef?.current?.scrollTo(params),
@@ -42,6 +42,9 @@ export const Dropdown: RSFCModel<DropdownRefModel, DropdownPropsModel> = forward
         direction={direction}
         isFullWidth={isFullWidth}
         isOpen={isOpen}
+        maxHeight={maxHeight ?? theme.shape.size[THEME_SIZE.MEDIUM]}
+        maxWidth={maxWidth ?? theme.shape.size[THEME_SIZE.MEDIUM]}
+        offset={theme.shape.spacing[THEME_SIZE.MEDIUM]}
         onToggle={onToggle}
         style={styles}>
         <Wrapper
@@ -53,7 +56,7 @@ export const Dropdown: RSFCModel<DropdownRefModel, DropdownPropsModel> = forward
           round
           width={width}>
           <Wrapper
-            grow
+            flex
             isFullWidth
             isVerticalScrollable
             maxHeight={maxHeight ?? theme.layout.dropdown.maxHeight}

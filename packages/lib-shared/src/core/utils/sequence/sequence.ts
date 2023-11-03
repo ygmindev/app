@@ -3,7 +3,7 @@ import {
   type SequenceParamsModel,
 } from '#lib-shared/core/utils/sequence/sequence.models';
 
-export const sequence = async <TType>(
+export const sequence = async <TType extends unknown>(
   params: SequenceParamsModel<TType>,
 ): Promise<SequenceModel<TType>> => {
   if (params.length === 0) return [];

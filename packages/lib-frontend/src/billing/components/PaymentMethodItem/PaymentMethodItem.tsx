@@ -100,8 +100,7 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
 
   return (
     <LineItem
-      onPress={() => ref.current?.toggle()}
-      rightElement={(isActive) => (
+      button={(isActive) => (
         <Skeleton>
           <Menu
             anchor={(isOpen) => (
@@ -148,6 +147,7 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
           />
         </Skeleton>
       )}
+      onPress={() => ref.current?.toggle()}
       style={styles}
       testID={testID}>
       <Skeleton>

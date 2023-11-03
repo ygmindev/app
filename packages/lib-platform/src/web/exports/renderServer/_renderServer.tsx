@@ -27,9 +27,7 @@ export const _renderServer =
   }: _RenderServerParamsModel): _RenderServerModel =>
   async ({ Page, context, pageProps }) => {
     initialize && (await initialize());
-
     const queryClient = new QueryClient();
-
     const store = new Store({ cookies: context?.state?.cookies, reducers: ROOT_REDUCERS });
     const contextF: RootContextModel = merge([
       {

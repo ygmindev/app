@@ -13,27 +13,25 @@ import {
 const pages = (routes?: Array<RouteModel>): _PreparePrerenderParamsModel['pages'] =>
   routes?.reduce(
     (result, route) => {
-      if (route.prerender === false) {
+      if (route.isProtectable || route.prerender === false) {
         return result;
       }
-      let pathnameF = trimPathname(`${route.parent ?? ''}/${trimEnd(route.pathname, '/*')}`);
-      pathnameF = pathnameF.replace(/\/:[^\/]+/, '');
-      const resultF = [
+      const pathnameF = trimPathname(`${route.parent ?? ''}/${trimEnd(route.pathname, '/*')}`);
+      if (pathnameF.includes(':')) {
+        return [
+          ...result,
+          ...(isArray(route.prerender)
+            ? route.prerender.map((value) => ({
+                getContext: undefined,
+                pathname: pathnameF.replace(/\/:[^\/]+/, value),
+              }))
+            : []),
+        ];
+      }
+      return [
         ...result,
         ...(route.routes
-          ? pages(route.routes.map(({ ...child }) => ({ ...child, root: pathnameF })))
-          : []),
-      ];
-      // TODO: add async context per page if needed
-      return [
-        ...resultF,
-        ...(route.routes
-          ? []
-          : isArray(route.prerender)
-          ? route.prerender.map((value) => ({
-              getContext: undefined,
-              pathname: trimPathname(`${pathnameF}/${value}`),
-            }))
+          ? pages(route.routes?.map(({ ...child }) => ({ ...child, parent: pathnameF })))
           : [{ getContext: undefined, pathname: pathnameF }]),
       ];
     },

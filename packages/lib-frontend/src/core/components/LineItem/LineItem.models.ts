@@ -12,8 +12,9 @@ export type LineItemPropsModel = ChildrenPropsModel<ReactNode | TranslatableText
   ElementStatePropsModel &
   Pick<PressablePropsModel, 'onPress'> &
   WithIconPropsModel & {
+    button?(isOpen?: boolean): ReactElement;
     image?: string;
     isBorder?: boolean;
     label?: TranslatableTextModel;
-    rightElement?(isOpen?: boolean): ReactElement;
+    rightElement?: ReactElement;
   };
