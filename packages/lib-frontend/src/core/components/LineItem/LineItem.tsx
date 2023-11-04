@@ -54,7 +54,8 @@ export const LineItem: LFCModel<LineItemPropsModel> = ({
         border={isBorder ? DIRECTION.TOP : undefined}
         isRowAlign
         onPress={onPress}
-        p>
+        pHorizontal
+        pVertical={THEME_SIZE.SMALL}>
         <Wrapper
           flex
           isRowAlign>
