@@ -1,13 +1,15 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { type ViewProps } from 'react-native';
 import { ScrollView, StyleSheet } from 'react-native';
 
+import { ScrollBar } from '#lib-frontend/core/components/ScrollBar/ScrollBar';
 import { _viewParams as _viewParamsBase } from '#lib-frontend/core/components/View/_View';
 import {
   type _ViewPropsModel,
   type _ViewRefModel,
 } from '#lib-frontend/core/components/View/_View.models';
 import { View } from '#lib-frontend/core/components/View/View';
+import { type MeasureModel, type PositionModel } from '#lib-frontend/core/core.models';
 import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
 import { type ComposeComponentParamsModel } from '#lib-frontend/core/utils/composeComponent/composeComponent.models';
 import { type ViewStyleModel } from '#lib-frontend/style/style.models';
@@ -22,7 +24,16 @@ export const _viewParams: ComposeComponentParamsModel<
   Component: Fragment,
 
   getProps: (
-    { isHorizontalScrollable, isVerticalScrollable, onScroll, style, testID, ...props },
+    {
+      isHorizontalScrollable,
+      isHorizontalScrollableVisible,
+      isVerticalScrollable,
+      isVerticalScrollableVisible,
+      onScroll,
+      style,
+      testID,
+      ...props
+    },
     theme,
     ref,
   ) => {
@@ -33,6 +44,20 @@ export const _viewParams: ComposeComponentParamsModel<
         k.startsWith('margin') ||
         k.startsWith('border'),
     );
+
+    const [measure, measureSet] = useState<MeasureModel>();
+    const [measureContent, measureContentSet] = useState<MeasureModel>();
+    const [value, valueSet] = useState<PositionModel>();
+
+    const isHorizontalScrollableVisibleF =
+      isHorizontalScrollable &&
+      isHorizontalScrollableVisible &&
+      (measure?.width ?? 0) < (measureContent?.width ?? 0);
+    const isVerticalScrollableVisibleF =
+      isVerticalScrollable &&
+      isVerticalScrollableVisible &&
+      (measure?.height ?? 0) < (measureContent?.height ?? 0);
+
     return {
       children: (
         <View
@@ -44,6 +69,7 @@ export const _viewParams: ComposeComponentParamsModel<
                 : isVerticalScrollable
                 ? 1
                 : undefined,
+            position: 'relative',
             ...stylesView,
           }}
           testID={testID}>
@@ -51,23 +77,46 @@ export const _viewParams: ComposeComponentParamsModel<
             {...(_viewParamsBase.getProps && _viewParamsBase.getProps(props, theme, ref))}
             alwaysBounceHorizontal={false}
             alwaysBounceVertical={false}
-            contentContainerStyle={{ ...stylesContainer, flex: 1 }}
+            contentContainerStyle={{ ...stylesContainer }}
             horizontal={isHorizontalScrollable ?? false}
-            onScroll={
-              onScroll
-                ? ({ nativeEvent }) =>
-                    onScroll({ x: nativeEvent.contentOffset.x, y: nativeEvent.contentOffset.y })
-                : undefined
-            }
+            onContentSizeChange={(width, height) => measureContentSet({ height, width })}
+            onLayout={({
+              nativeEvent: {
+                layout: { height, width },
+              },
+            }) => {
+              measureSet({ height, width });
+              props.onMeasure && props.onMeasure({ height, width });
+            }}
+            onScroll={({ nativeEvent }) => {
+              const { x, y } = nativeEvent.contentOffset;
+              valueSet({ x, y });
+              onScroll && onScroll({ x, y });
+            }}
             ref={ref}
             scrollEnabled
             scrollEventThrottle={16}
             scrollToOverflowEnabled
-            // showsHorizontalScrollIndicator={isHorizontalScrollable}
-            // showsVerticalScrollIndicator={isVerticalScrollable}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
           />
+
+          {isHorizontalScrollableVisibleF && (
+            <ScrollBar
+              contentSize={measureContent?.width}
+              isHorizontal
+              size={measure?.width}
+              value={value?.x}
+            />
+          )}
+
+          {isVerticalScrollableVisibleF && (
+            <ScrollBar
+              contentSize={measureContent?.height}
+              size={measure?.height}
+              value={value?.y}
+            />
+          )}
         </View>
       ),
     };

@@ -62,6 +62,7 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
     childColorRole?: ThemeRoleModel;
   }>(() => {
     const colorF = theme.color.palette[color];
+    const opacity = theme.opaque[THEME_SIZE.LARGE];
     const activeColor = colorF[THEME_ROLE.ACTIVE];
     const mainColor = colorF[THEME_ROLE.MAIN];
     switch (typeF) {
@@ -77,12 +78,12 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
               [ELEMENT_STATE.DISABLED]: {
                 backgroundColor: activeColor,
                 borderColor: activeColor,
-                opacity: theme.opaque,
+                opacity,
               },
               [ELEMENT_STATE.LOADING]: {
                 backgroundColor: activeColor,
                 borderColor: activeColor,
-                opacity: theme.opaque,
+                opacity,
               },
               [ELEMENT_STATE.INACTIVE]: {
                 backgroundColor: mainColor,
@@ -108,12 +109,12 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
               [ELEMENT_STATE.DISABLED]: {
                 backgroundColor: colorInactive,
                 borderColor: activeColor,
-                opacity: theme.opaque,
+                opacity,
               },
               [ELEMENT_STATE.LOADING]: {
                 backgroundColor: colorInactive,
                 borderColor: activeColor,
-                opacity: theme.opaque,
+                opacity,
               },
               [ELEMENT_STATE.INACTIVE]: {
                 backgroundColor: colorInactive,

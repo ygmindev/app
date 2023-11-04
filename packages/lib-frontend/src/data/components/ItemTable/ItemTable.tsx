@@ -18,7 +18,7 @@ export const ItemTable: LFCModel<ItemTablePropsModel> = ({ items, ...props }) =>
   return (
     <Wrapper
       {...wrapperProps}
-      s>
+      s={THEME_SIZE.SMALL}>
       {filterNil(items).map(({ description, icon, id, image, title }) => (
         <Wrapper
           isRowAlign

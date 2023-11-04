@@ -70,6 +70,10 @@ export const THEME_CONFIG = {
       width: 300,
     },
 
+    scrollBar: {
+      thickness: 8,
+    },
+
     width: {
       [THEME_SIZE.SMALL]: 170,
 
@@ -85,7 +89,13 @@ export const THEME_CONFIG = {
     width: 380,
   },
 
-  opaque: 0.7,
+  opaque: {
+    [THEME_SIZE.LARGE]: 0.7,
+
+    [THEME_SIZE.MEDIUM]: 0.4,
+
+    [THEME_SIZE.SMALL]: 0.2,
+  },
 
   shape: {
     borderRadius: {

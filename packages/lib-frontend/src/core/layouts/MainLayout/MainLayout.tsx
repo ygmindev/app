@@ -22,11 +22,11 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
       flex
       isFullWidth={isFullWidthF}
       isVerticalScrollable
+      isVerticalScrollableVisible
       justify={FLEX_JUSTIFY.START}
       style={inheritedStyles}>
       <Wrapper
         {...wrapperProps}
-        flex
         style={computedStyles}
         width={isFullWidthF ? undefined : theme.layout.width[size]}>
         {children}

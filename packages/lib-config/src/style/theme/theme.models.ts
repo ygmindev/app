@@ -54,6 +54,10 @@ export type ThemeConfigModel = {
       width: number;
     };
 
+    scrollBar: {
+      thickness: number;
+    };
+
     width: Record<ThemeSizeModel, number>;
   };
 
@@ -63,7 +67,7 @@ export type ThemeConfigModel = {
     width: number;
   };
 
-  opaque: number;
+  opaque: Record<ThemeSizeModel, number>;
 
   shape: {
     borderRadius: Record<ThemeSizeModel, number>;
