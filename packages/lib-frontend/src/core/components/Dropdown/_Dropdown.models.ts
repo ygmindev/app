@@ -4,6 +4,7 @@ import { type ChildrenPropsModel, type DirectionModel } from '#lib-frontend/core
 
 export type _DropdownPropsModel = ChildrenPropsModel & {
   anchor: ReactNode;
+  delay: number;
   direction?: DirectionModel;
   isFullWidth?: boolean;
   isOpen?: boolean;

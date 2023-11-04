@@ -8,9 +8,7 @@ import { useCurrentGroup } from '#lib-frontend/group/hooks/useCurrentGroup/useCu
 import { type FundingInProgressPagePropsModel } from '#lib-frontend/issuer/pages/FundingInProgressPage/FundingInProgressPage.models';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
-export const FundingInProgressPage: LFCModel<FundingInProgressPagePropsModel> = ({
-  ...props
-}) => {
+export const FundingInProgressPage: LFCModel<FundingInProgressPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { getManyProtected } = useFundingResource();
   const currentGroup = useCurrentGroup();

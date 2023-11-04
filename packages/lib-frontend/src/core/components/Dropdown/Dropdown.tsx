@@ -39,6 +39,7 @@ export const Dropdown: RLFCModel<DropdownRefModel, DropdownPropsModel> = forward
     return (
       <_Dropdown
         anchor={anchor}
+        delay={theme.animation.effect}
         direction={direction}
         isFullWidth={isFullWidth}
         isOpen={isOpen}

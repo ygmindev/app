@@ -10,6 +10,12 @@ export const COMPLETED = 'completed';
 
 export const REDIRECT = 'redirect';
 
+export const TEST_TEXT_SHORT = '-----';
+
+export const TEST_TEXT_MEDIUM = '----------';
+
+export const TEST_TEXT_LONG = '--------------------';
+
 export enum ELEMENT_STATE {
   ACTIVE = 'active',
   DISABLED = 'disabled',

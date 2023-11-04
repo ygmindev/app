@@ -49,50 +49,55 @@ export const LineItem: LFCModel<LineItemPropsModel> = ({
     <Activatable
       onActive={() => isActiveSet(true)}
       onInactive={() => isActiveSet(false)}>
-      <Skeleton
+      <Wrapper
         {...wrapperProps}
         border={isBorder ? DIRECTION.TOP : undefined}
+        isRowAlign
+        onPress={onPress}
         p>
         <Wrapper
           flex
-          isRowAlign
-          onPress={onPress}>
-          <Wrapper
-            flex
-            isRowAlign>
-            {image && (
+          isRowAlign>
+          {image && (
+            <Skeleton>
               <Image
                 isAutoSize
                 src={image}
                 width={theme.shape.size[THEME_SIZE.MEDIUM]}
               />
-            )}
+            </Skeleton>
+          )}
 
-            {icon && (
+          {icon && (
+            <Skeleton>
               <Icon
                 icon={icon}
                 width={theme.shape.size[THEME_SIZE.SMALL]}
               />
-            )}
+            </Skeleton>
+          )}
 
-            <Wrapper
-              align={FLEX_ALIGN.START}
-              s={THEME_SIZE.SMALL}>
+          <Wrapper
+            align={FLEX_ALIGN.START}
+            s={THEME_SIZE.SMALL}>
+            <Skeleton>
               <TranslatableText type={FONT_TYPE.TITLE}>{label}</TranslatableText>
+            </Skeleton>
 
-              {isTranslatableText(children) ? (
+            {isTranslatableText(children) ? (
+              <Skeleton>
                 <TranslatableText>{children}</TranslatableText>
-              ) : (
-                children
-              )}
-            </Wrapper>
+              </Skeleton>
+            ) : (
+              children
+            )}
           </Wrapper>
-
-          {rightElement}
-
-          {rightElementF && rightElementF(isActive)}
         </Wrapper>
-      </Skeleton>
+
+        {rightElement}
+
+        {rightElementF && rightElementF(isActive)}
+      </Wrapper>
     </Activatable>
   );
 };

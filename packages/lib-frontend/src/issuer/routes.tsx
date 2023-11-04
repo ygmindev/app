@@ -40,6 +40,13 @@ export const issuerRoutes: Array<RouteModel> = [
             pathname: IN_PROGRESS,
             routes: [
               {
+                element: <FundingFormPage />,
+                isFullScreen: true,
+                isNavigatable: false,
+                pathname: FORM,
+                title: ({ t }) => t('core:form'),
+              },
+              {
                 element: <QuotesPage />,
                 isFullScreen: true,
                 pathname: QUOTES,
@@ -52,13 +59,6 @@ export const issuerRoutes: Array<RouteModel> = [
             icon: 'checkCircle',
             pathname: COMPLETED,
             title: ({ t }) => t('core:completed'),
-          },
-          {
-            element: <FundingFormPage />,
-            isFullScreen: true,
-            isNavigatable: false,
-            pathname: FORM,
-            title: ({ t }) => t('core:form'),
           },
         ],
         title: ({ t }) => t('funding:funding'),

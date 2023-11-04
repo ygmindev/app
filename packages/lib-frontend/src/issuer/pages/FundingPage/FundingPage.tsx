@@ -3,17 +3,13 @@ import { Button } from '#lib-frontend/core/components/Button/Button';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { FORM } from '#lib-frontend/data/data.constants';
 import { FUNDING } from '#lib-frontend/funding/funding.constants';
-import { GROUP } from '#lib-frontend/group/group.constants';
-import { useCurrentGroup } from '#lib-frontend/group/hooks/useCurrentGroup/useCurrentGroup';
 import { type FundingPagePropsModel } from '#lib-frontend/issuer/pages/FundingPage/FundingPage.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
-import { GROUP_TYPE } from '#lib-shared/group/resources/Group/Group.constants';
 
 export const FundingPage: LFCModel<FundingPagePropsModel> = ({ children }) => {
   const { t } = useTranslation([FUNDING]);
   const { push } = useRouter();
-  const currentGroup = useCurrentGroup();
   return (
     <>
       {children}
@@ -21,11 +17,7 @@ export const FundingPage: LFCModel<FundingPagePropsModel> = ({ children }) => {
       <FloatingFooter>
         <Button
           icon="add"
-          onPress={() =>
-            push({
-              pathname: `/${GROUP}/${currentGroup?._id}/${GROUP_TYPE.ISSUER}/${FUNDING}/${FORM}`,
-            })
-          }>
+          onPress={() => push({ pathname: FORM, root: true })}>
           {t('core:new', { value: t('funding:funding') })}
         </Button>
       </FloatingFooter>

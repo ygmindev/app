@@ -5,6 +5,7 @@ import { Chip } from '#lib-frontend/core/components/Chip/Chip';
 import { LineGroup } from '#lib-frontend/core/components/LineGroup/LineGroup';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import { TEST_TEXT_LONG } from '#lib-frontend/core/core.constants';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBoundary';
@@ -31,7 +32,7 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
       <LineGroup title={t('group:group_plural', { value: currentUser?.email })}>
         <DataBoundary
           fallbackData={{
-            result: range(3).map((i) => ({ _id: `${i}` })),
+            result: range(3).map((i) => ({ _id: `${i}`, name: TEST_TEXT_LONG })),
           }}
           id="accesses"
           query={async () => getMany({ filter: [] })}>

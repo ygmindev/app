@@ -1,4 +1,4 @@
-import { type ReactElement } from 'react';
+import { type ReactElement, Suspense } from 'react';
 import { cloneElement, createContext, useMemo } from 'react';
 
 import { AppProvider } from '#lib-frontend/app/containers/AppProvider/AppProvider';
@@ -44,6 +44,7 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
       <LocaleProvider value={context?.locale} />,
       <AppProvider />,
       <store.Provider value={{ ...context?.state, actionContext, store }} />,
+      <Suspense />,
     ],
     [additionalProviders, context],
   );

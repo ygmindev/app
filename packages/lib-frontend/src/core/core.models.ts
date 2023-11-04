@@ -54,7 +54,7 @@ export type RefPropsModel<TType = unknown> = {
 export type ChildrenPropsModel<TType = ReactNode | Array<ReactNode>> = ChildPropsModel<TType>;
 
 export type ChildPropsModel<TType = ReactNode> = {
-  children?: TType;
+  children?: TType | null;
 };
 
 export type ProviderPropsModel<TType = undefined, TChildren = ReactNode | Array<ReactNode>> = {
