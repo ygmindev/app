@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
+import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { Modal } from '#lib-frontend/core/components/Modal/Modal';
 import { type PressablePropsModel } from '#lib-frontend/core/components/Pressable/Pressable.models';
@@ -8,7 +9,6 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type WrapperRefModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type ElementStateModel, type RLFCModel } from '#lib-frontend/core/core.models';
-import { lazy } from '#lib-frontend/core/utils/lazy/lazy';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -17,7 +17,7 @@ import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { isPromise } from '#lib-shared/core/utils/isPromise/isPromise';
 
-const { Button } = lazy(() => import('#lib-frontend/core/components/Button/Button'));
+// const { Button } = lazy(() => import('#lib-frontend/core/components/Button/Button'));
 
 export const Pressable: RLFCModel<WrapperRefModel, PressablePropsModel> = ({
   animation,

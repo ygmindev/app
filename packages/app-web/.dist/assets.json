@@ -26,6 +26,11 @@
     "isEntry": true,
     "src": "../../node_modules/vike/dist/esm/client/server-routing-runtime/entry.js"
   },
+  "../lib-frontend/src/locale/utils/currentCountry/_currentCountry.ts": {
+    "file": "_currentCountry.js",
+    "isDynamicEntry": true,
+    "src": "../lib-frontend/src/locale/utils/currentCountry/_currentCountry.ts"
+  },
   "_preload-helper.js": {
     "file": "preload-helper.js"
   },
@@ -37,6 +42,9 @@
     ],
     "css": [
       "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/static/pages.3a0c3634.css"
+    ],
+    "dynamicImports": [
+      "../lib-frontend/src/locale/utils/currentCountry/_currentCountry.ts"
     ],
     "file": "entries/src/pages.js",
     "imports": [
