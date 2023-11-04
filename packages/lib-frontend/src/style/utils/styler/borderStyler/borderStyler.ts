@@ -42,9 +42,9 @@ export const borderStyler: StylerModel<BorderStylerParamsModel> = (
       ? {
           elevation: 1,
           shadowColor: '#000',
-          shadowOffset: { height: 1, width: 0 },
-          shadowOpacity: 0.3,
-          shadowRadius: 3,
+          shadowOffset: { height: theme.shape.shadow.elevation, width: 0 },
+          shadowOpacity: theme.shape.shadow.opacity,
+          shadowRadius: theme.shape.shadow.size,
         }
       : {}),
   });

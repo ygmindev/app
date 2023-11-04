@@ -1,3 +1,4 @@
+import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
@@ -40,7 +41,6 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
       isHorizontalScrollable
       isRow={isUnderline}
       isRowAlign={!isUnderline}
-      // m={isContained ? THEME_SIZE.SMALL : undefined}
       p={isContained ? THEME_SIZE.SMALL : undefined}
       round={isContained}>
       {tabs?.map((tab) => {
@@ -69,17 +69,16 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
                     </Text>
                   </Wrapper>
 
-                  {isActiveFF && (
-                    <Wrapper
-                      backgroundColor={THEME_COLOR.PRIMARY}
-                      bottom={0}
-                      height={3}
-                      left={0}
-                      position={SHAPE_POSITION.ABSOLUTE}
-                      right={0}
-                      zIndex
-                    />
-                  )}
+                  <Appearable
+                    backgroundColor={THEME_COLOR.PRIMARY}
+                    bottom={0}
+                    height={3}
+                    isActive={isActiveFF}
+                    left={0}
+                    position={SHAPE_POSITION.ABSOLUTE}
+                    right={0}
+                    zIndex
+                  />
                 </Wrapper>
               );
             }}

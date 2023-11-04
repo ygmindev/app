@@ -17,6 +17,7 @@ export const FundingPage: LFCModel<FundingPagePropsModel> = ({ children }) => {
       <FloatingFooter>
         <Button
           icon="add"
+          isShadow
           onPress={() => push({ pathname: FORM, root: true })}>
           {t('core:new', { value: t('funding:funding') })}
         </Button>

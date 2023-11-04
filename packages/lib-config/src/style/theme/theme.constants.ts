@@ -96,6 +96,14 @@ export const THEME_CONFIG = {
       [THEME_SIZE.SMALL]: 8,
     },
 
+    shadow: {
+      elevation: 1.5,
+
+      opacity: 0.5,
+
+      size: 5,
+    },
+
     size: {
       [THEME_SIZE.LARGE]: 55,
 
