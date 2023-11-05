@@ -1,5 +1,6 @@
 import isString from 'lodash/isString';
 
+import { Skeleton } from '#lib-frontend/animation/components/Skeleton/Skeleton';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { Image } from '#lib-frontend/core/components/Image/Image';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
@@ -24,31 +25,37 @@ export const ItemTable: LFCModel<ItemTablePropsModel> = ({ items, ...props }) =>
           isRowAlign
           key={id}>
           {image && (
-            <Image
-              isAutoSize
-              src={image}
-              width={theme.shape.size[THEME_SIZE.MEDIUM]}
-            />
+            <Skeleton>
+              <Image
+                isAutoSize
+                src={image}
+                width={theme.shape.size[THEME_SIZE.MEDIUM]}
+              />
+            </Skeleton>
           )}
 
           {icon && (
-            <Icon
-              icon={icon}
-              width={theme.shape.size[THEME_SIZE.SMALL]}
-            />
+            <Skeleton>
+              <Icon
+                icon={icon}
+                width={theme.shape.size[THEME_SIZE.SMALL]}
+              />
+            </Skeleton>
           )}
 
           {title && <TranslatableText isEllipsis>{title}</TranslatableText>}
 
-          <Wrapper
-            align={FLEX_JUSTIFY.END}
-            flex>
-            {isString(description) ? (
-              <TranslatableText>{description}</TranslatableText>
-            ) : (
-              description
-            )}
-          </Wrapper>
+          <Skeleton>
+            <Wrapper
+              align={FLEX_JUSTIFY.END}
+              flex>
+              {isString(description) ? (
+                <TranslatableText>{description}</TranslatableText>
+              ) : (
+                description
+              )}
+            </Wrapper>
+          </Skeleton>
         </Wrapper>
       ))}
     </Wrapper>

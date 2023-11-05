@@ -8,6 +8,8 @@ import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { type FundingDetailPageParamsModel } from '#lib-frontend/underwriter/pages/FundingDetailPage/FundingDetailPage.models';
 import { type FundingPagePropsModel } from '#lib-frontend/underwriter/pages/FundingPage/FundingPage.models';
+import { sleep } from '#lib-shared/core/utils/sleep/sleep';
+import { FUNDING_FIXTURES } from '#lib-shared/funding/resources/Funding/Funding.fixtures';
 
 export const FundingPage: LFCModel<FundingPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -20,8 +22,23 @@ export const FundingPage: LFCModel<FundingPagePropsModel> = ({ ...props }) => {
       p
       s>
       <DataBoundary
+        fallbackData={{
+          result: {
+            edges: FUNDING_FIXTURES.map((node) => ({ cursor: '', node })),
+            pageInfo: {
+              endCursor: '',
+              hasNextPage: false,
+              hasPreviousPage: false,
+              startCursor: '',
+            },
+          },
+        }}
         id="funding"
-        query={async () => getConnection({ filter: [], pagination: { first: 10 } })}>
+        // query={async () => getConnection({ filter: [], pagination: { first: 10 } })}>
+        query={async () => {
+          await sleep(300000);
+          return getConnection({ filter: [], pagination: { first: 10 } });
+        }}>
         {({ data }) => (
           <Wrapper s>
             {data?.result?.edges.map(({ node }) => (
