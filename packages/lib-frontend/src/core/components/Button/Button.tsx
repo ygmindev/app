@@ -39,6 +39,7 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
   isShadow,
   leftElement,
   onElementStateChange,
+  rightElement,
   size = THEME_SIZE.MEDIUM,
   type,
   ...props
@@ -49,7 +50,7 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
   const { valueControlled, valueControlledSet } = useValueControlled<ElementStateModel>({
     defaultValue: ELEMENT_STATE.INACTIVE,
     onChange: onElementStateChange,
-    value: elementState || undefined,
+    value: elementState,
   });
 
   const heightF = height ?? theme.shape.size[size];
@@ -157,6 +158,8 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
       {iconF}
 
       {childrenF}
+
+      {rightElement}
     </Wrapper>
   ) : (
     iconF

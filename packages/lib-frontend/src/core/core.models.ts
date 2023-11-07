@@ -4,7 +4,7 @@ import { type ButtonPropsModel } from '#lib-frontend/core/components/Button/Butt
 import { type WithIconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
 import { type CORNER, type DIRECTION, type ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
-import { type LayoutPropsModel } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles.models';
+import { type LayoutStylePropsModel } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles.models';
 import {
   type StyleModel,
   type StylePropsModel,
@@ -25,7 +25,7 @@ export type SFCModel<TProps = object, TStyle extends StyleModel = ViewStyleModel
 
 export type LFCPropsModel<TProps = object> = PropsModel<LFCModel<TProps>>;
 
-export type LFCModel<TProps = object> = FCModel<TProps & LayoutPropsModel>;
+export type LFCModel<TProps = object> = FCModel<TProps & LayoutStylePropsModel>;
 
 export type RSFCPropsModel<
   TType = undefined,
@@ -61,7 +61,7 @@ export type ProviderPropsModel<TType = undefined, TChildren = ReactNode | Array<
   value?: TType;
 } & ChildrenPropsModel<TChildren>;
 
-export type PagePropsModel<TType = undefined> = LayoutPropsModel &
+export type PagePropsModel<TType = undefined> = LayoutStylePropsModel &
   ChildrenPropsModel & { pageProps?: TType };
 
 export type ElementStateModel = `${ELEMENT_STATE}`;

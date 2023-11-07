@@ -10,6 +10,7 @@ import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexSt
 export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
   children,
   size = THEME_SIZE.MEDIUM,
+  topElement,
   ...props
 }) => {
   const { computedStyles, inheritedStyles, wrapperProps } = useLayoutStyles({ props });
@@ -18,15 +19,17 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
   const theme = useTheme();
   return (
     <Wrapper
-      align={FLEX_JUSTIFY.CENTER}
       flex
       isFullWidth={isFullWidthF}
       isVerticalScrollable
       isVerticalScrollableVisible
       justify={FLEX_JUSTIFY.START}
       style={inheritedStyles}>
+      {topElement}
+
       <Wrapper
         {...wrapperProps}
+        m="auto"
         style={computedStyles}
         width={isFullWidthF ? undefined : theme.layout.width[size]}>
         {children}

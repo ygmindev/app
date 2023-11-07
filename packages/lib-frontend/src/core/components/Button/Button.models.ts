@@ -11,12 +11,7 @@ import { type ThemeColorModel, type ThemeSizeModel } from '#lib-frontend/style/s
 
 export type ButtonTypeModel = `${BUTTON_TYPE}`;
 
-export type ButtonPropsModel = {
-  color?: ThemeColorModel;
-  leftElement?: ReactElement;
-  size?: ThemeSizeModel;
-  type?: ButtonTypeModel;
-} & ChildrenPropsModel<TranslatableTextModel> &
+export type ButtonPropsModel = ChildrenPropsModel<TranslatableTextModel> &
   WithIconPropsModel &
   Pick<WrapperPropsModel, 'isShadow'> &
   AnimatablePropsModel &
@@ -33,4 +28,10 @@ export type ButtonPropsModel = {
     | 'onPressIn'
     | 'onPressOut'
     | 'trigger'
-  >;
+  > & {
+    color?: ThemeColorModel;
+    leftElement?: ReactElement;
+    rightElement?: ReactElement;
+    size?: ThemeSizeModel;
+    type?: ButtonTypeModel;
+  };
