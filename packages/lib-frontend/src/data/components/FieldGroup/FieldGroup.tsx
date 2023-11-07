@@ -24,7 +24,7 @@ export const FieldGroup: LFCModel<FieldGroupPropsModel> = ({ fields, isVertical,
       isRow={!isVertical}
       onElementStateChange={elementStateSet}>
       {fields.map(({ element, id }, i) => (
-        <Fragment key={id}>
+        <Fragment key={i}>
           {i && (
             <Divider
               animation={{ states: ANIMATION_STATES_FOCUSABLE({ isError, theme }) }}

@@ -83,6 +83,7 @@ export const QuoteFormPage: LFCModel<QuoteFormPagePropsModel> = ({ ...props }) =
           },
         ]}
         data={data}
+        isAddable
         isDeletable
         isHeadless
         onChange={(value) => dataSet(value ?? [])}

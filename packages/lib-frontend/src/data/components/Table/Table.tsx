@@ -55,7 +55,6 @@ export const Table = forwardRef(
     const { wrapperProps } = useLayoutStyles({ props });
     const { headers, rows } = useTable(props);
     const validate = useValidator();
-
     const [errors, errorsSet] = useState<Record<string, FormErrorModel<TType>>>();
 
     useImperativeHandle(ref, () => ({
@@ -106,7 +105,7 @@ export const Table = forwardRef(
         )}
 
         <Wrapper
-          grow
+          flex
           isFullWidth={isFullWidth}
           s={THEME_SIZE.SMALL}>
           {rows.map((row, i) => (

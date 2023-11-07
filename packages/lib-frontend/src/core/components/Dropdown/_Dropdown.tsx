@@ -51,7 +51,6 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
       }),
     ],
     onOpenChange: onToggle,
-    open: isOpen,
     placement: direction,
     whileElementsMounted: autoUpdate,
   });

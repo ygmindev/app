@@ -21,12 +21,10 @@ export const FocusableWrapper: RLFCModel<FocusableRefModel, FocusableWrapperProp
       value: elementState,
     });
     const isError = !!error;
-
     useImperativeHandle(ref, () => ({
       blur: () => valueControlledSet(ELEMENT_STATE.INACTIVE),
       focus: () => valueControlledSet(ELEMENT_STATE.ACTIVE),
     }));
-
     return (
       <Wrapper
         {...wrapperProps}
