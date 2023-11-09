@@ -19,17 +19,17 @@ export const AppLayout: LFCModel<AppLayoutPropsModel> = ({ children, ...props })
         {...wrapperProps}
         backgroundColor={THEME_COLOR_MORE.SURFACE}
         flex>
-        <AppHeader />
+        <PortalHost>
+          <AppHeader />
 
-        <Wrapper
-          flex
-          position={SHAPE_POSITION.RELATIVE}>
-          <PortalHost>
+          <Wrapper
+            flex
+            position={SHAPE_POSITION.RELATIVE}>
             {children}
 
             {notifications?.length > 0 && <Notifications />}
-          </PortalHost>
-        </Wrapper>
+          </Wrapper>
+        </PortalHost>
       </Wrapper>
     </KeyboardContainer>
   );

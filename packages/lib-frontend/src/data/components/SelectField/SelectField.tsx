@@ -7,7 +7,6 @@ import { AnimatableView } from '#lib-frontend/animation/components/AnimatableVie
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { Menu } from '#lib-frontend/core/components/Menu/Menu';
 import { type MenuRefModel } from '#lib-frontend/core/components/Menu/Menu.models';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type LFCPropsModel } from '#lib-frontend/core/core.models';
 import { type SelectFieldPropsModel } from '#lib-frontend/data/components/SelectField/SelectField.models';
@@ -86,50 +85,47 @@ export const SelectField = <TType extends string = string>({
     : undefined;
 
   return (
-    <Wrapper {...wrapperProps}>
-      <Menu
-        anchor={(isOpen) => (
-          <TextField
-            defaultValue={defaultValue}
-            elementState={elementState}
-            error={error}
-            icon={icon}
-            isAutoFocus={isAutoFocus}
-            isNoClear
-            isTransparent={isTransparent}
-            label={label}
-            leftElement={
-              selectedOption && selectedOption.icon && <Icon icon={selectedOption.icon} />
-            }
-            onBlur={onBlur}
-            onChange={search}
-            onFocus={onFocus}
-            onSubmit={handleSelect}
-            rightElement={
-              <AnimatableView
-                animation={{
-                  states: {
-                    [ELEMENT_STATE.INACTIVE]: { transform: [{ rotateZ: '0deg' }] },
-                    [ELEMENT_STATE.ACTIVE]: { transform: [{ rotateZ: '-180deg' }] },
-                  },
-                }}
-                elementState={elementState}>
-                <Icon icon="chevronDown" />
-              </AnimatableView>
-            }
-            round={round}
-            value={isOpen ? query : t(selectedLabel)}
-            width={width}
-          />
-        )}
-        isFullWidth
-        onChange={valueControlledSet}
-        options={result}
-        ref={menuRef}
-        renderOption={renderOption}
-        value={valueControlled}
-      />
-    </Wrapper>
+    <Menu
+      anchor={(isOpen) => (
+        <TextField
+          {...wrapperProps}
+          defaultValue={defaultValue}
+          elementState={elementState}
+          error={error}
+          icon={icon}
+          isAutoFocus={isAutoFocus}
+          isNoClear
+          isTransparent={isTransparent}
+          label={label}
+          leftElement={selectedOption && selectedOption.icon && <Icon icon={selectedOption.icon} />}
+          onBlur={onBlur}
+          onChange={search}
+          onFocus={onFocus}
+          onSubmit={handleSelect}
+          rightElement={
+            <AnimatableView
+              animation={{
+                states: {
+                  [ELEMENT_STATE.INACTIVE]: { transform: [{ rotateZ: '0deg' }] },
+                  [ELEMENT_STATE.ACTIVE]: { transform: [{ rotateZ: '-180deg' }] },
+                },
+              }}
+              elementState={elementState}>
+              <Icon icon="chevronDown" />
+            </AnimatableView>
+          }
+          round={round}
+          value={isOpen ? query : t(selectedLabel)}
+          width={width}
+        />
+      )}
+      isFullWidth
+      onChange={valueControlledSet}
+      options={result}
+      ref={menuRef}
+      renderOption={renderOption}
+      value={valueControlled}
+    />
   );
 };
 

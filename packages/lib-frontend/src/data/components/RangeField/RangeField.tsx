@@ -32,6 +32,7 @@ export const RangeField = <TType extends NumberUnitModel>({
   error,
   label,
   onChange,
+  rangeType,
   type = SCALED_NUMBER_UNIT.AMOUNT,
   value,
   ...props
@@ -40,8 +41,8 @@ export const RangeField = <TType extends NumberUnitModel>({
 > => {
   const { t } = useTranslation([DATA]);
   const { wrapperProps } = useLayoutStyles({ props });
-  const [rangeType, rangeTypeSet] = useState<RangeTypeModel>(RANGE_TYPE.EXACT);
-  const isRange = rangeType === RANGE_TYPE.RANGE;
+  const [rangeTypeState, rangeTypeSet] = useState<RangeTypeModel>(rangeType ?? RANGE_TYPE.EXACT);
+  const isRange = rangeTypeState === RANGE_TYPE.RANGE;
   // TODO: adjust range
   const [range, rangeSet] = useState<[number, number]>([0, 1e3]);
   const { format } = useFormatter();
@@ -66,43 +67,28 @@ export const RangeField = <TType extends NumberUnitModel>({
     key?: keyof RangeModel<number>;
     rangeType?: RangeTypeModel;
   }): void => {
-    const rangeTypeFF = rangeTypeF ?? rangeType;
+    const rangeTypeFF = rangeTypeF ?? rangeTypeState;
     const { lowerF, upperF } = (() => {
       switch (unit ?? valueControlled?.unit) {
         case RELATIVE_DATE_UNIT.DAY:
-          return {
-            lowerF: 0,
-            upperF: 365,
-          };
+          return { lowerF: 0, upperF: 365 };
         case RELATIVE_DATE_UNIT.WEEK:
-          return {
-            lowerF: 0,
-            upperF: 52,
-          };
+          return { lowerF: 0, upperF: 52 };
         case RELATIVE_DATE_UNIT.MONTH:
-          return {
-            lowerF: 0,
-            upperF: 18,
-          };
+          return { lowerF: 0, upperF: 18 };
         case RELATIVE_DATE_UNIT.YEAR:
-          return {
-            lowerF: 0,
-            upperF: 1e2,
-          };
+          return { lowerF: 0, upperF: 1e2 };
         case AMOUNT_UNIT.BILLION:
-          return {
-            lowerF: 0,
-            upperF: 1e1,
-          };
+          return { lowerF: 0, upperF: 1e1 };
         default:
-          return {
-            lowerF: 10,
-            upperF: 1e3,
-          };
+          return { lowerF: 10, upperF: 1e3 };
       }
     })();
+
     rangeSet([lowerF, upperF]);
+
     rangeTypeSet(rangeTypeFF);
+
     valueControlledSet({
       ...valueControlled,
       max:
@@ -113,7 +99,6 @@ export const RangeField = <TType extends NumberUnitModel>({
       unit: unit ?? valueControlled?.unit,
     });
   };
-
   return (
     <Wrapper
       {...wrapperProps}
@@ -169,11 +154,13 @@ export const RangeField = <TType extends NumberUnitModel>({
         value={valueControlled}
       />
 
-      <Button
-        onPress={() => handleChange({ rangeType: isRange ? RANGE_TYPE.EXACT : RANGE_TYPE.RANGE })}
-        type={BUTTON_TYPE.INVISIBLE}>
-        {isRange ? t('data:exactMessage') : t('data:rangeMessage')}
-      </Button>
+      {!rangeType && (
+        <Button
+          onPress={() => handleChange({ rangeType: isRange ? RANGE_TYPE.EXACT : RANGE_TYPE.RANGE })}
+          type={BUTTON_TYPE.INVISIBLE}>
+          {isRange ? t('data:exactMessage') : t('data:rangeMessage')}
+        </Button>
+      )}
     </Wrapper>
   );
 };

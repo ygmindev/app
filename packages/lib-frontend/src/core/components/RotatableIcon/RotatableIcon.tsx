@@ -4,7 +4,6 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type DirectionModel, type LFCModel } from '#lib-frontend/core/core.models';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useTextStyles } from '#lib-frontend/style/hooks/useTextStyles/useTextStyles';
 
 const getRotation = (direction: DirectionModel): string => {
   switch (direction) {
@@ -22,13 +21,14 @@ const getRotation = (direction: DirectionModel): string => {
 };
 
 export const RotatableIcon: LFCModel<RotatableIconPropsModel> = ({
+  color,
+  colorRole,
   directionActive = DIRECTION.TOP,
   directionInactive = DIRECTION.BOTTOM,
   elementState,
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { textProps } = useTextStyles({ props });
   return (
     <Wrapper
       {...wrapperProps}
@@ -40,7 +40,8 @@ export const RotatableIcon: LFCModel<RotatableIconPropsModel> = ({
       }}
       elementState={elementState}>
       <Icon
-        {...textProps}
+        color={color}
+        colorRole={colorRole}
         icon="chevronUp"
       />
     </Wrapper>

@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
 
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCPropsModel } from '#lib-frontend/core/core.models';
+import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { type FilterContainerPropsModel } from '#lib-frontend/data/components/FilterContainer/FilterContainer.models';
 import { FilterGroup } from '#lib-frontend/data/components/FilterGroup/FilterGroup';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -14,9 +14,8 @@ export const FilterContainer = <TType,>({
 > => {
   const { wrapperProps } = useLayoutStyles({ props });
   return (
-    <Wrapper
+    <MainLayout
       {...wrapperProps}
-      isRowAlign
       s>
       {groups?.map((group) => (
         <FilterGroup
@@ -24,6 +23,6 @@ export const FilterContainer = <TType,>({
           {...group}
         />
       ))}
-    </Wrapper>
+    </MainLayout>
   );
 };

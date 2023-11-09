@@ -41,6 +41,7 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
       onChange,
       options,
       renderOption,
+      testID,
       topElement,
       width,
       ...props
@@ -152,7 +153,8 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
         <Modal
           isFullSize={false}
           isOpen={isOpen}
-          onToggle={handleToggle}>
+          onToggle={handleToggle}
+          testID={testID}>
           {children}
         </Modal>
       </>
@@ -165,6 +167,7 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
         onToggle={handleToggle}
         ref={dropdownRef}
         style={styles}
+        testID={testID}
         width={width}>
         {children}
       </Dropdown>

@@ -9,6 +9,7 @@ import {
   type ModalPropsModel,
   type ModalRefModel,
 } from '#lib-frontend/core/components/Modal/Modal.models';
+import { Portal } from '#lib-frontend/core/components/Portal/Portal';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type RLFCModel } from '#lib-frontend/core/core.models';
@@ -32,59 +33,61 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
     useImperativeHandle(ref, () => ({ toggle: valueControlledSet }));
 
     return (
-      <_Modal
-        deviceHeight={deviceHeight}
-        deviceWidth={deviceWidth}
-        elementState={elementState}
-        height={height}
-        isOpen={valueControlled}
-        onToggle={valueControlledSet}
-        style={{
-          justifyContent: 'flex-end',
-          margin: 0,
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          marginTop: 'auto',
-        }}
-        width={width}>
-        <Wrapper
-          backgroundColor={THEME_COLOR_MORE.SURFACE}
-          flex={isFullSize}
-          isFullWidth
-          isShadow
-          mTop
-          position={SHAPE_POSITION.RELATIVE}
+      <Portal>
+        <_Modal
+          deviceHeight={deviceHeight}
+          deviceWidth={deviceWidth}
+          elementState={elementState}
+          height={height}
+          isOpen={valueControlled}
+          onToggle={valueControlledSet}
           style={{
-            borderTopLeftRadius: theme.shape.borderRadius[THEME_SIZE.MEDIUM],
-            borderTopRightRadius: theme.shape.borderRadius[THEME_SIZE.MEDIUM],
-          }}>
-          <KeyboardContainer>
-            <Wrapper
-              flex
-              p>
-              <Wrapper isRowAlign>
-                <Wrapper
-                  flex
-                  isRowAlign>
-                  {isString(header) ? <Text type={FONT_TYPE.TITLE}>{header}</Text> : header}
-                </Wrapper>
-
-                <Button
-                  icon="times"
-                  onPress={() => valueControlledSet(false)}
-                  type={BUTTON_TYPE.INVISIBLE}
-                />
-              </Wrapper>
-
+            justifyContent: 'flex-end',
+            margin: 0,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            marginTop: 'auto',
+          }}
+          width={width}>
+          <Wrapper
+            backgroundColor={THEME_COLOR_MORE.SURFACE}
+            flex={isFullSize}
+            isFullWidth
+            isShadow
+            mTop
+            position={SHAPE_POSITION.RELATIVE}
+            style={{
+              borderTopLeftRadius: theme.shape.borderRadius[THEME_SIZE.MEDIUM],
+              borderTopRightRadius: theme.shape.borderRadius[THEME_SIZE.MEDIUM],
+            }}>
+            <KeyboardContainer>
               <Wrapper
                 flex
-                isCenter>
-                {children}
+                p>
+                <Wrapper isRowAlign>
+                  <Wrapper
+                    flex
+                    isRowAlign>
+                    {isString(header) ? <Text type={FONT_TYPE.TITLE}>{header}</Text> : header}
+                  </Wrapper>
+
+                  <Button
+                    icon="times"
+                    onPress={() => valueControlledSet(false)}
+                    type={BUTTON_TYPE.INVISIBLE}
+                  />
+                </Wrapper>
+
+                <Wrapper
+                  flex
+                  isCenter>
+                  {children}
+                </Wrapper>
               </Wrapper>
-            </Wrapper>
-          </KeyboardContainer>
-        </Wrapper>
-      </_Modal>
+            </KeyboardContainer>
+          </Wrapper>
+        </_Modal>
+      </Portal>
     );
   },
 );

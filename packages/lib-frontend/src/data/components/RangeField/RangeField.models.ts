@@ -6,6 +6,7 @@ import { type ScaledNumberRangeModel } from '#lib-shared/data/resources/ScaledNu
 export type RangeFieldPropsModel<TType extends NumberUnitModel> = FieldPropsModel<
   ScaledNumberRangeModel<TType>
 > & {
+  rangeType?: RangeTypeModel;
   type?: ScaledNumberUnitModel;
 };
 
