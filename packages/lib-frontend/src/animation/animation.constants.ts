@@ -10,19 +10,34 @@ export const ANIMATION_STATES_APPEARABLE: AnimationStatesModel<StyleModel> = {
   [ELEMENT_STATE.EXIT]: { opacity: 0 },
 };
 
+export const ANIMATION_STATES_APPEARABLE_OPAQUE: AnimationStatesModel<StyleModel> = {
+  [ELEMENT_STATE.ACTIVE]: { opacity: 0.5 },
+  [ELEMENT_STATE.INACTIVE]: { opacity: 0 },
+  [ELEMENT_STATE.EXIT]: { opacity: 0 },
+};
+
 export const ANIMATION_STATES_SCALABLE: AnimationStatesModel<StyleModel> = {
   [ELEMENT_STATE.ACTIVE]: { transform: [{ scale: 1.0 }] },
   [ELEMENT_STATE.INACTIVE]: { transform: [{ scale: 0.9 }] },
   [ELEMENT_STATE.EXIT]: { transform: [{ scale: 0.9 }] },
 };
 
-export const ANIMATION_STATES_SLIDABLE = ({
+export const ANIMATION_STATES_SLIDABLE_HORIZONTAL = ({
   isBack = false,
   width,
 }: { width?: number } & Pick<SlidePropsModel, 'isBack'>): AnimationStatesModel<StyleModel> => ({
   [ELEMENT_STATE.ACTIVE]: { left: 0 },
   [ELEMENT_STATE.INACTIVE]: width ? (isBack ? { left: -width } : { left: width }) : { left: 0 },
   [ELEMENT_STATE.EXIT]: width ? (isBack ? { left: width } : { left: -width }) : { left: 0 },
+});
+
+export const ANIMATION_STATES_SLIDABLE_VERTICAL = ({
+  height,
+}: {
+  height?: number;
+}): AnimationStatesModel<StyleModel> => ({
+  [ELEMENT_STATE.ACTIVE]: { bottom: 0 },
+  [ELEMENT_STATE.INACTIVE]: height ? { bottom: -height } : { bottom: 0 },
 });
 
 export const ANIMATION_STATES_FOCUSABLE = ({

@@ -1,5 +1,6 @@
 import { type CornerModel, type DirectionModel } from '#lib-frontend/core/core.models';
 import { type ThemeRoleModel, type ThemeSizeModel } from '#lib-frontend/style/style.models';
+import { type PartialModel } from '#lib-shared/core/core.models';
 
 export type BorderStylerParamsModel = {
   border?: DirectionModel | boolean;
@@ -8,7 +9,7 @@ export type BorderStylerParamsModel = {
   borderWidth?: number;
   isShadow?: boolean;
   round?:
-    | Record<CornerModel, ThemeSizeModel | boolean | number>
+    | PartialModel<Record<CornerModel, ThemeSizeModel | boolean | number>>
     | ThemeSizeModel
     | boolean
     | number;

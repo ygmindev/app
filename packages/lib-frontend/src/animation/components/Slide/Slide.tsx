@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import {
   ANIMATION_STATES_APPEARABLE,
-  ANIMATION_STATES_SLIDABLE,
+  ANIMATION_STATES_SLIDABLE_HORIZONTAL,
 } from '#lib-frontend/animation/animation.constants';
 import { type SlidePropsModel } from '#lib-frontend/animation/components/Slide/Slide.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
@@ -21,7 +21,10 @@ export const Slide: LFCModel<SlidePropsModel> = ({ children, isBack = false, ...
   const animation = useMemo(
     () => ({
       duration: theme.animation.transition,
-      states: merge([ANIMATION_STATES_APPEARABLE, ANIMATION_STATES_SLIDABLE({ isBack, width })]),
+      states: merge([
+        ANIMATION_STATES_APPEARABLE,
+        ANIMATION_STATES_SLIDABLE_HORIZONTAL({ isBack, width }),
+      ]),
     }),
     [width, theme, isBack],
   );
