@@ -2,12 +2,9 @@ import 'rc-slider/assets/index.css';
 
 import isArray from 'lodash/isArray';
 import Slider from 'rc-slider';
-import { cloneElement, type ReactElement } from 'react';
 
-import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { type _SliderPropsModel } from '#lib-frontend/core/components/Slider/_Slider.models';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { type ChildrenPropsModel, type SFCModel } from '#lib-frontend/core/core.models';
+import { type SFCModel } from '#lib-frontend/core/core.models';
 
 export const _Slider: SFCModel<_SliderPropsModel> = ({
   backgroundColor,
@@ -17,8 +14,6 @@ export const _Slider: SFCModel<_SliderPropsModel> = ({
   lower,
   markerColor,
   markerSize,
-  maxIcon,
-  minIcon,
   onChange,
   step = 1,
   upper,
@@ -28,22 +23,6 @@ export const _Slider: SFCModel<_SliderPropsModel> = ({
   <Slider
     allowCross={false}
     disabled={isDisabled}
-    handleRender={(original, { index }) =>
-      cloneElement<ChildrenPropsModel>(original as unknown as ReactElement<ChildrenPropsModel>, {
-        children: (
-          <Wrapper
-            isAbsoluteFill
-            isCenter
-            m="auto"
-            zIndex>
-            <Icon
-              color={fontColor}
-              icon={isRange ? (index ? maxIcon : minIcon) : valueIcon}
-            />
-          </Wrapper>
-        ),
-      })
-    }
     handleStyle={{
       backgroundColor: markerColor,
       border: 'none',

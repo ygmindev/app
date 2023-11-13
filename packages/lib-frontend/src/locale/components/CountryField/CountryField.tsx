@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
-import { SelectField } from '#lib-frontend/data/components/SelectField/SelectField';
+import { DropdownField } from '#lib-frontend/data/components/DropdownField/DropdownField';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { type CountryFieldPropsModel } from '#lib-frontend/locale/components/CountryField/CountryField.models';
 import { useCountries } from '#lib-frontend/locale/hooks/useCountries/useCountries';
@@ -47,7 +47,7 @@ export const CountryField: LFCModel<CountryFieldPropsModel> = ({
   );
 
   return (
-    <SelectField
+    <DropdownField
       {...props}
       icon="globe"
       label={t('core:country')}

@@ -9,7 +9,7 @@ import { Menu } from '#lib-frontend/core/components/Menu/Menu';
 import { type MenuRefModel } from '#lib-frontend/core/components/Menu/Menu.models';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type LFCPropsModel } from '#lib-frontend/core/core.models';
-import { type SelectFieldPropsModel } from '#lib-frontend/data/components/SelectField/SelectField.models';
+import { type DropdownFieldPropsModel } from '#lib-frontend/data/components/DropdownField/DropdownField.models';
 import { TextField } from '#lib-frontend/data/components/TextField/TextField';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -17,7 +17,7 @@ import { useSearch } from '#lib-frontend/search/hooks/useSearch/useSearch';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
-export const SelectField = <TType extends string = string>({
+export const DropdownField = <TType extends string = string>({
   defaultValue,
   elementState,
   error,
@@ -36,8 +36,8 @@ export const SelectField = <TType extends string = string>({
   value,
   width,
   ...props
-}: LFCPropsModel<SelectFieldPropsModel<TType>>): ReactElement<
-  LFCPropsModel<SelectFieldPropsModel<TType>>
+}: LFCPropsModel<DropdownFieldPropsModel<TType>>): ReactElement<
+  LFCPropsModel<DropdownFieldPropsModel<TType>>
 > => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation();
@@ -141,7 +141,7 @@ export const SelectField = <TType extends string = string>({
 // import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 // import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 // import { type LFCPropsModel } from '#lib-frontend/core/core.models';
-// import { type SelectFieldPropsModel } from '#lib-frontend/data/components/SelectField/SelectField.models';
+// import { type DropdownFieldPropsModel } from '#lib-frontend/data/components/DropdownField/DropdownField.models';
 // import { TextField } from '#lib-frontend/data/components/TextField/TextField';
 // import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 // import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -149,7 +149,7 @@ export const SelectField = <TType extends string = string>({
 // import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 // import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
-// export const SelectField = <TType extends string = string>({
+// export const DropdownField = <TType extends string = string>({
 //   defaultValue,
 //   elementState,
 //   error,
@@ -168,8 +168,8 @@ export const SelectField = <TType extends string = string>({
 //   value,
 //   width,
 //   ...props
-// }: LFCPropsModel<SelectFieldPropsModel<TType>>): ReactElement<
-//   LFCPropsModel<SelectFieldPropsModel<TType>>
+// }: LFCPropsModel<DropdownFieldPropsModel<TType>>): ReactElement<
+//   LFCPropsModel<DropdownFieldPropsModel<TType>>
 // > => {
 //   const { wrapperProps } = useLayoutStyles({ props });
 //   const { t } = useTranslation();

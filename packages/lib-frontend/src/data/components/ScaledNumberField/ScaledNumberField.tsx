@@ -1,6 +1,7 @@
 import { type ReactElement } from 'react';
 
 import { type LFCPropsModel, type TranslatableOptionModel } from '#lib-frontend/core/core.models';
+import { DropdownField } from '#lib-frontend/data/components/DropdownField/DropdownField';
 import { FieldGroup } from '#lib-frontend/data/components/FieldGroup/FieldGroup';
 import { NumberField } from '#lib-frontend/data/components/NumberField/NumberField';
 import {
@@ -9,7 +10,6 @@ import {
   RELATIVE_DATE_UNIT_OPTIONS,
 } from '#lib-frontend/data/components/ScaledNumberField/ScaledNumberField.constants';
 import { type ScaledNumberFieldPropsModel } from '#lib-frontend/data/components/ScaledNumberField/ScaledNumberField.models';
-import { SelectField } from '#lib-frontend/data/components/SelectField/SelectField';
 import { type NumberUnitModel } from '#lib-frontend/data/data.models';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -69,7 +69,7 @@ export const ScaledNumberField = <TType extends NumberUnitModel>({
         },
         {
           element: (
-            <SelectField<TType>
+            <DropdownField<TType>
               label={t('core:unit')}
               onChange={(v) => valueControlledSet({ ...valueControlled, unit: v as TType })}
               options={unitOptions(type)}

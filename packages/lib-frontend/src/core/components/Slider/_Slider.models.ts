@@ -10,8 +10,6 @@ export type _SliderPropsModel = ValuePropsModel<RangeModel<number>> & {
   lower?: number;
   markerColor: string;
   markerSize: number;
-  maxIcon: IconPropsModel['icon'];
-  minIcon: IconPropsModel['icon'];
   step?: number;
   upper?: number;
   valueIcon: IconPropsModel['icon'];

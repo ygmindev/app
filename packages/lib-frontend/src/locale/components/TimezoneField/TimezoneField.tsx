@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
-import { SelectField } from '#lib-frontend/data/components/SelectField/SelectField';
+import { DropdownField } from '#lib-frontend/data/components/DropdownField/DropdownField';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { type TimezoneFieldPropsModel } from '#lib-frontend/locale/components/TimezoneField/TimezoneField.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -41,7 +41,7 @@ export const TimezoneField: LFCModel<TimezoneFieldPropsModel> = ({
   );
 
   return (
-    <SelectField
+    <DropdownField
       {...props}
       icon="time"
       label={t('locale:timezone')}

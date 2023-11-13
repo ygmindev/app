@@ -1,3 +1,3 @@
-import { type SelectFieldPropsModel } from '#lib-frontend/data/components/SelectField/SelectField.models';
+import { type DropdownFieldPropsModel } from '#lib-frontend/data/components/DropdownField/DropdownField.models';
 
-export type CountryFieldPropsModel = Omit<SelectFieldPropsModel, 'options'>;
+export type CountryFieldPropsModel = Omit<DropdownFieldPropsModel, 'options'>;

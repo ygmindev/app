@@ -5,7 +5,7 @@ import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constan
 import { Slider } from '#lib-frontend/core/components/Slider/Slider';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCPropsModel } from '#lib-frontend/core/core.models';
-import { FieldGroup } from '#lib-frontend/data/components/FieldGroup/FieldGroup';
+import { DropdownField } from '#lib-frontend/data/components/DropdownField/DropdownField';
 import { NumberField } from '#lib-frontend/data/components/NumberField/NumberField';
 import {
   type RangeFieldPropsModel,
@@ -13,7 +13,6 @@ import {
 } from '#lib-frontend/data/components/RangeField/RangeField.models';
 import { RANGE_TYPE } from '#lib-frontend/data/components/RangeField/RangField.constants';
 import { unitOptions } from '#lib-frontend/data/components/ScaledNumberField/ScaledNumberField';
-import { SelectField } from '#lib-frontend/data/components/SelectField/SelectField';
 import { TEXT_FIELD_KEYBOARD } from '#lib-frontend/data/components/TextField/TextField.constants';
 import { AMOUNT_UNIT, DATA, RELATIVE_DATE_UNIT } from '#lib-frontend/data/data.constants';
 import { type NumberUnitModel } from '#lib-frontend/data/data.models';
@@ -22,7 +21,6 @@ import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { type RangeModel } from '#lib-shared/data/data.models';
 import { SCALED_NUMBER_UNIT } from '#lib-shared/data/resources/ScaledNumber/ScaledNumber.constants';
 import { type ScaledNumberRangeModel } from '#lib-shared/data/resources/ScaledNumberRange/ScaledNumberRange.models';
@@ -103,47 +101,36 @@ export const RangeField = <TType extends NumberUnitModel>({
     <Wrapper
       {...wrapperProps}
       s={THEME_SIZE.SMALL}>
-      <FieldGroup
-        fields={filterNil([
-          {
-            element: (
-              <NumberField
-                error={error}
-                keyboard={TEXT_FIELD_KEYBOARD.NUMBER_POSITIVE}
-                label={isRange ? t('data:min', { value: label }) : label}
-                onBlur={handleBlur}
-                onChange={(v) => handleChange({ min: v ?? null })}
-                value={valueControlled && valueControlled.min}
-              />
-            ),
-            id: 'min',
-          },
-          isRange && {
-            element: (
-              <NumberField
-                error={error}
-                keyboard={TEXT_FIELD_KEYBOARD.NUMBER_POSITIVE}
-                label={t('data:max', { value: label })}
-                onBlur={handleBlur}
-                onChange={(v) => handleChange({ max: v ?? null })}
-                value={valueControlled && valueControlled.max}
-              />
-            ),
-            id: 'max',
-          },
-          {
-            element: (
-              <SelectField<TType>
-                label={t('core:unit')}
-                onChange={(v) => handleChange({ unit: v as TType })}
-                options={unitOptions(type)}
-                value={valueControlled?.unit}
-              />
-            ),
-            id: 'unit',
-          },
-        ])}
+      <DropdownField<TType>
+        label={t('core:unit')}
+        onChange={(v) => handleChange({ unit: v as TType })}
+        options={unitOptions(type)}
+        value={valueControlled?.unit}
       />
+
+      <Wrapper isRowAlign>
+        <NumberField
+          error={error}
+          flex
+          keyboard={TEXT_FIELD_KEYBOARD.NUMBER_POSITIVE}
+          label={isRange ? t('data:min', { value: label }) : label}
+          onBlur={handleBlur}
+          onChange={(v) => handleChange({ min: v ?? null })}
+          value={valueControlled && valueControlled.min}
+        />
+
+        {isRange && (
+          <NumberField
+            error={error}
+            flex
+            keyboard={TEXT_FIELD_KEYBOARD.NUMBER_POSITIVE}
+            label={t('data:max', { value: label })}
+            onBlur={handleBlur}
+            onChange={(v) => handleChange({ max: v ?? null })}
+            value={valueControlled && valueControlled.max}
+          />
+        )}
+      </Wrapper>
 
       <Slider
         formatter={(v) => format(v, { isScale: false, unit: valueControlled?.unit })}

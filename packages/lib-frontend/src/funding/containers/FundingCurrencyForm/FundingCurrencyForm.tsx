@@ -1,7 +1,7 @@
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { type LFCModel } from '#lib-frontend/core/core.models';
+import { DropdownField } from '#lib-frontend/data/components/DropdownField/DropdownField';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
-import { SelectField } from '#lib-frontend/data/components/SelectField/SelectField';
 import { validateNotEmpty } from '#lib-frontend/data/utils/validateNotEmpty/validateNotEmpty';
 import { CURRENCY_FIELD_OPTIONS } from '#lib-frontend/funding/containers/FundingCurrencyForm/FundingCurrencyForm.constants';
 import { type FundingCurrencyFormPropsModel } from '#lib-frontend/funding/containers/FundingCurrencyForm/FundingCurrencyForm.models';
@@ -26,7 +26,7 @@ export const FundingCurrencyForm: LFCModel<FundingCurrencyFormPropsModel> = ({
       fields={[
         {
           element: (
-            <SelectField
+            <DropdownField
               label={t('funding:currency')}
               options={CURRENCY_FIELD_OPTIONS}
             />
