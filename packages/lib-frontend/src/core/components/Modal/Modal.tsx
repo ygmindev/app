@@ -59,10 +59,12 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
                 backgroundColor={THEME_COLOR_MORE.SURFACE}
                 elementState={elementStateF}
                 flex={isFullSize}
+                height={height}
                 isFullWidth
                 isShadow
                 position={SHAPE_POSITION.ABSOLUTE}
-                round={{ [CORNER.TOP_LEFT]: true, [CORNER.TOP_RIGHT]: true }}>
+                round={{ [CORNER.TOP_LEFT]: true, [CORNER.TOP_RIGHT]: true }}
+                width={width}>
                 <KeyboardContainer>
                   <Wrapper
                     flex
