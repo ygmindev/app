@@ -2,10 +2,11 @@ import { type ReactElement, useState } from 'react';
 
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
+import { RadioField } from '#lib-frontend/core/components/RadioField/RadioField';
 import { Slider } from '#lib-frontend/core/components/Slider/Slider';
+import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCPropsModel } from '#lib-frontend/core/core.models';
-import { DropdownField } from '#lib-frontend/data/components/DropdownField/DropdownField';
 import { NumberField } from '#lib-frontend/data/components/NumberField/NumberField';
 import {
   type RangeFieldPropsModel,
@@ -20,6 +21,7 @@ import { useFormatter } from '#lib-frontend/data/hooks/useFormatter/useFormatter
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { type RangeModel } from '#lib-shared/data/data.models';
 import { SCALED_NUMBER_UNIT } from '#lib-shared/data/resources/ScaledNumber/ScaledNumber.constants';
@@ -37,6 +39,7 @@ export const RangeField = <TType extends NumberUnitModel>({
 }: LFCPropsModel<RangeFieldPropsModel<TType>>): ReactElement<
   LFCPropsModel<RangeFieldPropsModel<TType>>
 > => {
+  const theme = useTheme();
   const { t } = useTranslation([DATA]);
   const { wrapperProps } = useLayoutStyles({ props });
   const [rangeTypeState, rangeTypeSet] = useState<RangeTypeModel>(rangeType ?? RANGE_TYPE.EXACT);
@@ -97,16 +100,21 @@ export const RangeField = <TType extends NumberUnitModel>({
       unit: unit ?? valueControlled?.unit,
     });
   };
+
   return (
     <Wrapper
       {...wrapperProps}
       s={THEME_SIZE.SMALL}>
-      <DropdownField<TType>
-        label={t('core:unit')}
-        onChange={(v) => handleChange({ unit: v as TType })}
+      <Text>{t('core:measureIn')}</Text>
+
+      <RadioField<TType>
+        isHorizontal
+        onChange={(v) => handleChange({ unit: v })}
         options={unitOptions(type)}
         value={valueControlled?.unit}
       />
+
+      {label && <Text>{t(label)}</Text>}
 
       <Wrapper isRowAlign>
         <NumberField
@@ -116,6 +124,7 @@ export const RangeField = <TType extends NumberUnitModel>({
           label={isRange ? t('data:min', { value: label }) : label}
           onBlur={handleBlur}
           onChange={(v) => handleChange({ min: v ?? null })}
+          rightElement={<Text color={theme.color.border}>{valueControlled?.unit}</Text>}
           value={valueControlled && valueControlled.min}
         />
 
@@ -127,6 +136,7 @@ export const RangeField = <TType extends NumberUnitModel>({
             label={t('data:max', { value: label })}
             onBlur={handleBlur}
             onChange={(v) => handleChange({ max: v ?? null })}
+            rightElement={<Text color={theme.color.border}>{valueControlled?.unit}</Text>}
             value={valueControlled && valueControlled.max}
           />
         )}

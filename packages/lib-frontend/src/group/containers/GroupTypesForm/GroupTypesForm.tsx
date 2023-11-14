@@ -1,7 +1,7 @@
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
-import { MultiSelectField } from '#lib-frontend/data/components/MultiSelectField/MultiSelectField';
+import { SelectField } from '#lib-frontend/data/components/SelectField/SelectField';
 import { validateNotEmpty } from '#lib-frontend/data/utils/validateNotEmpty/validateNotEmpty';
 import { GROUP_TYPES_OPTIONS } from '#lib-frontend/group/containers/GroupTypesForm/GroupTypesForm.constants';
 import { type GroupTypesFormPropsModel } from '#lib-frontend/group/containers/GroupTypesForm/GroupTypesForm.models';
@@ -25,7 +25,7 @@ export const GroupTypesForm: LFCModel<GroupTypesFormPropsModel> = ({
       {...wrapperProps}
       fields={[
         {
-          element: <MultiSelectField options={GROUP_TYPES_OPTIONS} />,
+          element: <SelectField options={GROUP_TYPES_OPTIONS} />,
           id: 'types',
         },
       ]}

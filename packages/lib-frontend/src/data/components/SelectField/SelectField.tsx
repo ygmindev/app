@@ -1,22 +1,29 @@
+import { type ReactElement } from 'react';
+
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
+import { Circle } from '#lib-frontend/core/components/Circle/Circle';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { type LFCModel } from '#lib-frontend/core/core.models';
-import { type MultiSelectFieldPropsModel } from '#lib-frontend/data/components/MultiSelectField/MultiSelectField.models';
+import { type LFCPropsModel } from '#lib-frontend/core/core.models';
+import { type SelectFieldPropsModel } from '#lib-frontend/data/components/SelectField/SelectField.models';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { SearchField } from '#lib-frontend/search/components/SearchField/SearchField';
 import { useSearch } from '#lib-frontend/search/hooks/useSearch/useSearch';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { THEME_SIZE } from '#lib-frontend/style/style.constants';
+import { THEME_COLOR, THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
 
-export const MultiSelectField: LFCModel<MultiSelectFieldPropsModel> = ({
+export const SelectField = <TType extends string | Array<string>>({
   defaultValue,
+  isMultiple,
+  isSearchable,
   onChange,
   options,
   value,
   ...props
-}) => {
+}: LFCPropsModel<SelectFieldPropsModel<TType>>): ReactElement<
+  LFCPropsModel<SelectFieldPropsModel<TType>>
+> => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
   const { valueControlled, valueControlledSet } = useValueControlled({
@@ -32,28 +39,41 @@ export const MultiSelectField: LFCModel<MultiSelectFieldPropsModel> = ({
     <Wrapper
       {...wrapperProps}
       s>
-      <SearchField
-        onChange={search}
-        value={query}
-      />
+      {isSearchable && (
+        <SearchField
+          onChange={search}
+          value={query}
+        />
+      )}
 
       <Wrapper
         isRowAlign
         isWrap>
         {result.map(({ id, label }) => {
-          const isActive = value?.includes(id);
+          const isActive = isMultiple ? value?.includes(id) : value === id;
           return (
             <Button
-              icon={isActive ? 'check' : 'add'}
+              icon={isActive ? 'checkCircle' : 'minusCircle'}
               key={id}
+              leftElement={
+                <Circle
+                  border
+                  borderColor={THEME_COLOR.PRIMARY}
+                  size={THEME_SIZE_MORE.XSMALL}
+                />
+              }
               mBottom={THEME_SIZE.SMALL}
               onPress={() => {
-                const valueF = isActive
-                  ? valueControlled?.filter((v) => v !== id)
-                  : [...(valueControlled ?? []), id];
-                (valueF ?? []).sort();
-                return valueControlledSet(valueF);
+                if (isMultiple) {
+                  const valueF = isActive
+                    ? (valueControlled as Array<string>)?.filter((v) => v !== id)
+                    : [...(valueControlled ?? []), id];
+                  (valueF ?? []).sort();
+                  return valueControlledSet(valueF as TType);
+                }
+                return valueControlledSet(id as TType);
               }}
+              size={THEME_SIZE.SMALL}
               type={isActive ? BUTTON_TYPE.FILLED : BUTTON_TYPE.TRANSPARENT}>
               {label}
             </Button>

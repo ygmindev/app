@@ -1,17 +1,17 @@
 import { type ReactElement } from 'react';
 
+import { type SizablePropsModel } from '#lib-frontend/core/core.models';
 import { type FocusableRefModel } from '#lib-frontend/data/components/FocusableWrapper/FocusableWrapper.models';
 import { type _TextFieldPropsModel } from '#lib-frontend/data/components/TextField/_TextField.models';
 import { type TEXT_FIELD_KEYBOARD } from '#lib-frontend/data/components/TextField/TextField.constants';
 import { type FieldPropsModel } from '#lib-frontend/data/data.models';
-import { type ThemeSizeModel } from '#lib-frontend/style/style.models';
 
 export type TextFieldPropsModel = FieldPropsModel &
+  SizablePropsModel &
   Omit<_TextFieldPropsModel, 'foregroundColor' | 'height'> & {
     isNoClear?: boolean;
     leftElement?: ReactElement;
     rightElement?: ReactElement;
-    size?: ThemeSizeModel;
   };
 
 export type TextFieldRefModel = FocusableRefModel;

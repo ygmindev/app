@@ -71,6 +71,7 @@ export const IONIC_ICONS = {
   location: 'location-outline',
   lock: 'lock-closed-outline',
   menu: 'menu-outline',
+  minusCircle: 'remove-circle-outline',
   notifications: 'notifications-outline',
   offline: 'cloud-offline-outline',
   people: 'people-circle-outline',

@@ -1,6 +1,6 @@
-import { type ChildrenPropsModel } from '#lib-frontend/core/core.models';
-import { type ThemeSizeModel } from '#lib-frontend/style/style.models';
+import {
+  type ChildrenPropsModel,
+  type SizableMorePropsModel,
+} from '#lib-frontend/core/core.models';
 
-export type CirclePropsModel = ChildrenPropsModel & {
-  size?: ThemeSizeModel | number;
-};
+export type CirclePropsModel = ChildrenPropsModel & SizableMorePropsModel;

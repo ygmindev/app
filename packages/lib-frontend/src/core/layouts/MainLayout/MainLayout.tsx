@@ -1,3 +1,5 @@
+import isNumber from 'lodash/isNumber';
+
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useIsMobile } from '#lib-frontend/core/hooks/useIsMobile/useIsMobile';
@@ -31,7 +33,7 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
         {...wrapperProps}
         m="auto"
         style={computedStyles}
-        width={isFullWidthF ? undefined : theme.layout.width[size]}>
+        width={isFullWidthF ? undefined : isNumber(size) ? size : theme.layout.width[size]}>
         {children}
       </Wrapper>
     </Wrapper>

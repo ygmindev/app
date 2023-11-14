@@ -1,3 +1,4 @@
+import isNumber from 'lodash/isNumber';
 import { useMemo } from 'react';
 
 import { type AnimationModel } from '#lib-frontend/animation/animation.models';
@@ -21,7 +22,7 @@ import {
   THEME_SIZE,
   THEME_SIZE_MORE,
 } from '#lib-frontend/style/style.constants';
-import { type ThemeRoleModel } from '#lib-frontend/style/style.models';
+import { type ThemeRoleModel, type ThemeSizeModel } from '#lib-frontend/style/style.models';
 import {
   FLEX_ALIGN,
   FLEX_JUSTIFY,
@@ -53,7 +54,7 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
     value: elementState,
   });
 
-  const heightF = height ?? theme.shape.size[size];
+  const heightF = isNumber(height) ? height : height ?? theme.shape.size[size as ThemeSizeModel];
   const isLoading = valueControlled === ELEMENT_STATE.LOADING;
   const isIconOnly = icon && !children;
   const typeF = type ?? (isIconOnly && !isShadow ? BUTTON_TYPE.INVISIBLE : BUTTON_TYPE.FILLED);

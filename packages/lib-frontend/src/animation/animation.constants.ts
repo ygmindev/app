@@ -3,6 +3,7 @@ import { type SlidePropsModel } from '#lib-frontend/animation/components/Slide/S
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { type StyleModel, type ThemeModel } from '#lib-frontend/style/style.models';
+import { merge } from '#lib-shared/core/utils/merge/merge';
 
 export const ANIMATION_STATES_APPEARABLE: AnimationStatesModel<StyleModel> = {
   [ELEMENT_STATE.ACTIVE]: { opacity: 1 },
@@ -21,6 +22,11 @@ export const ANIMATION_STATES_SCALABLE: AnimationStatesModel<StyleModel> = {
   [ELEMENT_STATE.INACTIVE]: { transform: [{ scale: 0.9 }] },
   [ELEMENT_STATE.EXIT]: { transform: [{ scale: 0.9 }] },
 };
+
+export const ANIMATION_STATES_APPEAR_SCALABLE: AnimationStatesModel<StyleModel> = merge([
+  ANIMATION_STATES_SCALABLE,
+  ANIMATION_STATES_APPEARABLE,
+]);
 
 export const ANIMATION_STATES_SLIDABLE_HORIZONTAL = ({
   isBack = false,

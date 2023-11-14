@@ -1,3 +1,4 @@
+import isNumber from 'lodash/isNumber';
 import { type RefObject, useState } from 'react';
 import { forwardRef, useRef } from 'react';
 
@@ -185,7 +186,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         {...wrapperProps}
         border={!isTransparent}
         elementState={elementStateF}
-        height={theme.shape.size[sizeF]}
+        height={isNumber(sizeF) ? sizeF : theme.shape.size[sizeF]}
         onElementStateChange={elementStateSet}
         pHorizontal
         position={SHAPE_POSITION.RELATIVE}

@@ -8,6 +8,8 @@ import { type LayoutStylePropsModel } from '#lib-frontend/style/hooks/useLayoutS
 import {
   type StyleModel,
   type StylePropsModel,
+  type ThemeSizeModel,
+  type ThemeSizeMoreModel,
   type ViewStyleModel,
 } from '#lib-frontend/style/style.models';
 import { type TestIdPropsModel } from '#lib-frontend/test/test.models';
@@ -100,3 +102,11 @@ export type DimensionModel = {
 export type CornerModel = `${CORNER}`;
 
 export type MeasureModel = PositionModel & DimensionModel;
+
+export type SizablePropsModel = {
+  size?: ThemeSizeModel | number;
+};
+
+export type SizableMorePropsModel = {
+  size?: ThemeSizeModel | ThemeSizeMoreModel | number;
+};

@@ -1,3 +1,5 @@
+import isNumber from 'lodash/isNumber';
+
 import { LOGO_SIZES } from '#lib-frontend/app/components/Logo/Logo.constants';
 import { type LogoPropsModel } from '#lib-frontend/app/components/Logo/Logo.models';
 import { Image } from '#lib-frontend/core/components/Image/Image';
@@ -11,7 +13,7 @@ export const Logo = composeComponent<LogoPropsModel, LinkPropsModel>({
   Component: Link,
 
   getProps: ({ size = THEME_SIZE.MEDIUM }) => {
-    const { height, width } = LOGO_SIZES[size];
+    const { height, width } = isNumber(size) ? { height: size, width: size } : LOGO_SIZES[size];
     return {
       children: (
         <Image
