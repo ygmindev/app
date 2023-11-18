@@ -43,7 +43,5 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
 
     lineHeight: isLineHeight && type === FONT_TYPE.BODY ? theme.font.lineHeight : undefined,
 
-    textAlign:
-      align ??
-      (type === FONT_TYPE.HEADLINE || type === FONT_TYPE.TITLE ? FONT_ALIGN.CENTER : undefined),
+    textAlign: align ?? (type === FONT_TYPE.HEADLINE ? FONT_ALIGN.CENTER : undefined),
   });

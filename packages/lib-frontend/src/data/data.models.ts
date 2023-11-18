@@ -6,6 +6,7 @@ import { type ElementStatePropsModel } from '#lib-frontend/core/core.models';
 import { type FocusableWrapperPropsModel } from '#lib-frontend/data/components/FocusableWrapper/FocusableWrapper.models';
 import {
   type AMOUNT_UNIT,
+  type NUMBER_UNIT_TYPE,
   type RATE_UNIT,
   type RELATIVE_DATE_UNIT,
 } from '#lib-frontend/data/data.constants';
@@ -16,6 +17,7 @@ import {
   type RequiredModel,
   type StringKeyModel,
 } from '#lib-shared/core/core.models';
+import { type RangeModel } from '#lib-shared/data/data.models';
 
 export type QueryContextModel = {
   client?: QueryClient;
@@ -39,6 +41,17 @@ export type RateUnitModel = `${RATE_UNIT}`;
 export type RelativeDateUnitModel = `${RELATIVE_DATE_UNIT}`;
 
 export type NumberUnitModel = AmountUnitModel | RateUnitModel | RelativeDateUnitModel;
+
+export type NumberUnitTypeModel = `${NUMBER_UNIT_TYPE}`;
+
+export type ScaledValueModel<TType extends NumberUnitModel> = {
+  unit?: TType;
+  value?: number;
+};
+
+export type ScaledRangeModel<TType extends NumberUnitModel> = RangeModel<number> & {
+  unit?: TType;
+};
 
 export type ValuePropsModel<TType = string> = {
   defaultValue?: TType;
@@ -74,6 +87,10 @@ export type FormValidatorsModel<TType> = {
   [TKey in keyof TType]?: TType[TKey] extends object
     ? FormValidatorsModel<TType[TKey]>
     : FormValidatorModel<TType[TKey], TType>;
+};
+
+export type FormInputModel<TType> = {
+  [TKey in keyof TType]: unknown;
 };
 
 export type SubmittablePropsModel<TType, TResult = void> = ElementStatePropsModel & {

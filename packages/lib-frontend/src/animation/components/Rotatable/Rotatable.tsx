@@ -1,5 +1,4 @@
-import { Icon } from '#lib-frontend/core/components/Icon/Icon';
-import { type RotatableIconPropsModel } from '#lib-frontend/core/components/RotatableIcon/RotatableIcon.models';
+import { type RotatablePropsModel } from '#lib-frontend/animation/components/Rotatable/Rotatable.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type DirectionModel, type LFCModel } from '#lib-frontend/core/core.models';
@@ -20,11 +19,10 @@ const getRotation = (direction: DirectionModel): string => {
   }
 };
 
-export const RotatableIcon: LFCModel<RotatableIconPropsModel> = ({
-  color,
-  colorRole,
-  directionActive = DIRECTION.TOP,
-  directionInactive = DIRECTION.BOTTOM,
+export const Rotatable: LFCModel<RotatablePropsModel> = ({
+  children,
+  directionActive = DIRECTION.BOTTOM,
+  directionInactive = DIRECTION.TOP,
   elementState,
   ...props
 }) => {
@@ -39,11 +37,7 @@ export const RotatableIcon: LFCModel<RotatableIconPropsModel> = ({
         },
       }}
       elementState={elementState}>
-      <Icon
-        color={color}
-        colorRole={colorRole}
-        icon="chevronUp"
-      />
+      {children}
     </Wrapper>
   );
 };

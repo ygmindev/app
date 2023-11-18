@@ -1,4 +1,4 @@
-import { type ReactElement, useState } from 'react';
+import { type ReactElement, useEffect, useState } from 'react';
 
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
@@ -15,8 +15,13 @@ import {
 import { RANGE_TYPE } from '#lib-frontend/data/components/RangeField/RangField.constants';
 import { unitOptions } from '#lib-frontend/data/components/ScaledNumberField/ScaledNumberField';
 import { TEXT_FIELD_KEYBOARD } from '#lib-frontend/data/components/TextField/TextField.constants';
-import { AMOUNT_UNIT, DATA, RELATIVE_DATE_UNIT } from '#lib-frontend/data/data.constants';
-import { type NumberUnitModel } from '#lib-frontend/data/data.models';
+import {
+  AMOUNT_UNIT,
+  DATA,
+  NUMBER_UNIT_TYPE,
+  RELATIVE_DATE_UNIT,
+} from '#lib-frontend/data/data.constants';
+import { type NumberUnitModel, type ScaledRangeModel } from '#lib-frontend/data/data.models';
 import { useFormatter } from '#lib-frontend/data/hooks/useFormatter/useFormatter';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -24,8 +29,6 @@ import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLa
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { type RangeModel } from '#lib-shared/data/data.models';
-import { SCALED_NUMBER_UNIT } from '#lib-shared/data/resources/ScaledNumber/ScaledNumber.constants';
-import { type ScaledNumberRangeModel } from '#lib-shared/data/resources/ScaledNumberRange/ScaledNumberRange.models';
 
 export const RangeField = <TType extends NumberUnitModel>({
   defaultValue,
@@ -33,7 +36,7 @@ export const RangeField = <TType extends NumberUnitModel>({
   label,
   onChange,
   rangeType,
-  type = SCALED_NUMBER_UNIT.AMOUNT,
+  type = NUMBER_UNIT_TYPE.AMOUNT,
   value,
   ...props
 }: LFCPropsModel<RangeFieldPropsModel<TType>>): ReactElement<
@@ -47,9 +50,18 @@ export const RangeField = <TType extends NumberUnitModel>({
   // TODO: adjust range
   const [range, rangeSet] = useState<[number, number]>([0, 1e3]);
   const { format } = useFormatter();
-  const { valueControlled, valueControlledSet } = useValueControlled<ScaledNumberRangeModel<TType>>(
-    { defaultValue, onChange, value },
-  );
+
+  const unitOptionsF = unitOptions(type);
+
+  const { valueControlled, valueControlledSet } = useValueControlled<ScaledRangeModel<TType>>({
+    defaultValue,
+    onChange,
+    value,
+  });
+
+  useEffect(() => {
+    !valueControlled?.unit && handleChange({ unit: unitOptionsF[0].id as TType });
+  }, []);
 
   const handleBlur = (): void => {
     isRange &&
@@ -64,7 +76,7 @@ export const RangeField = <TType extends NumberUnitModel>({
     min,
     rangeType: rangeTypeF,
     unit,
-  }: ScaledNumberRangeModel<TType> & {
+  }: ScaledRangeModel<TType> & {
     key?: keyof RangeModel<number>;
     rangeType?: RangeTypeModel;
   }): void => {
@@ -110,7 +122,7 @@ export const RangeField = <TType extends NumberUnitModel>({
       <RadioField<TType>
         isHorizontal
         onChange={(v) => handleChange({ unit: v })}
-        options={unitOptions(type)}
+        options={unitOptionsF}
         value={valueControlled?.unit}
       />
 

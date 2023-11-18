@@ -1,13 +1,14 @@
 import { type NumberFieldPropsModel } from '#lib-frontend/data/components/NumberField/NumberField.models';
-import { type FieldPropsModel, type NumberUnitModel } from '#lib-frontend/data/data.models';
 import {
-  type ScaledNumberModel,
-  type ScaledNumberUnitModel,
-} from '#lib-shared/data/resources/ScaledNumber/ScaledNumber.models';
+  type FieldPropsModel,
+  type NumberUnitModel,
+  type NumberUnitTypeModel,
+  type ScaledValueModel,
+} from '#lib-frontend/data/data.models';
 
 export type ScaledNumberFieldPropsModel<TType extends NumberUnitModel> = FieldPropsModel<
-  ScaledNumberModel<TType>
+  ScaledValueModel<TType>
 > &
   Pick<NumberFieldPropsModel, 'keyboard'> & {
-    type?: ScaledNumberUnitModel;
+    type?: NumberUnitTypeModel;
   };

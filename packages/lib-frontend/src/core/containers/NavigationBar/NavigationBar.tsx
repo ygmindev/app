@@ -9,7 +9,7 @@ import { ACTIVATABLE_TRIGGER } from '#lib-frontend/core/components/Activatable/A
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { Droppable } from '#lib-frontend/core/components/Droppable/Droppable';
-import { RotatableIcon } from '#lib-frontend/core/components/RotatableIcon/RotatableIcon';
+import { Rotatable } from '#lib-frontend/animation/components/Rotatable/Rotatable';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type NavigationBarPropsModel } from '#lib-frontend/core/containers/NavigationBar/NavigationBar.models';
 import { DIRECTION, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
@@ -83,7 +83,7 @@ export const NavigationBar = ({
                 anchor={(isOpen) => (
                   <Button
                     leftElement={
-                      <RotatableIcon
+                      <Rotatable
                         elementState={isOpen ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE}
                       />
                     }

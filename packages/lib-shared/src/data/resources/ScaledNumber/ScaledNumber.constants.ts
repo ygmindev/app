@@ -1,5 +1,0 @@
-export enum SCALED_NUMBER_UNIT {
-  AMOUNT = 'AMOUNT',
-  RATE = 'RATE',
-  RELATIVE_DATE = 'RELATIVE_DATE',
-}

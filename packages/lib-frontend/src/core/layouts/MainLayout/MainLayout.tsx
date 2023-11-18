@@ -10,6 +10,7 @@ import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 
 export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
+  bottomElement,
   children,
   size = THEME_SIZE.MEDIUM,
   topElement,
@@ -19,22 +20,33 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
   const isMobile = useIsMobile();
   const isFullWidthF = props.isFullWidth || isMobile;
   const theme = useTheme();
+  const widthF = isFullWidthF ? undefined : isNumber(size) ? size : theme.layout.width[size];
   return (
     <Wrapper
       flex
-      isFullWidth={isFullWidthF}
-      isVerticalScrollable
-      isVerticalScrollableVisible
-      justify={FLEX_JUSTIFY.START}
       style={inheritedStyles}>
-      {topElement}
+      <Wrapper
+        flex
+        isFullWidth={isFullWidthF}
+        isVerticalScrollable
+        isVerticalScrollableVisible
+        justify={FLEX_JUSTIFY.START}>
+        {topElement}
+
+        <Wrapper
+          {...wrapperProps}
+          m="auto"
+          style={computedStyles}
+          width={widthF}>
+          {children}
+        </Wrapper>
+      </Wrapper>
 
       <Wrapper
-        {...wrapperProps}
         m="auto"
-        style={computedStyles}
-        width={isFullWidthF ? undefined : isNumber(size) ? size : theme.layout.width[size]}>
-        {children}
+        pTop
+        width={widthF}>
+        {bottomElement}
       </Wrapper>
     </Wrapper>
   );

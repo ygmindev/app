@@ -8,8 +8,8 @@ export const FUNDING_FIELDS = [
   'currency',
   'created',
   'quoteCount',
-  { amount: ['min', 'max', 'unit'] },
-  { maturity: ['min', 'max', 'unit'] },
+  { amount: ['min', 'max'] },
+  { maturityDays: ['min', 'max'] },
   {
     [CREDIT_RATING_RESOURCE_NAME]: [
       '_id',

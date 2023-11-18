@@ -21,7 +21,7 @@ import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR } from '#lib-frontend/style/style.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
@@ -34,11 +34,10 @@ import { ACCOUNT } from '#lib-shared/user/user.constants';
 
 export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
   elementState,
-  testID,
   value,
   ...props
 }) => {
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation();
   const { push } = useRouter();
   const ref = useRef<MenuRefModel>(null);
@@ -100,7 +99,9 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
 
   return (
     <LineItem
-      button={(isActive) => (
+      {...wrapperProps}
+      onPress={() => ref.current?.toggle()}
+      rightElement={(isActive) => (
         <Skeleton>
           <Menu
             anchor={(isOpen) => (
@@ -146,10 +147,7 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
             ref={ref}
           />
         </Skeleton>
-      )}
-      onPress={() => ref.current?.toggle()}
-      style={styles}
-      testID={testID}>
+      )}>
       <Skeleton>
         <Wrapper isRowAlign>
           <Wrapper

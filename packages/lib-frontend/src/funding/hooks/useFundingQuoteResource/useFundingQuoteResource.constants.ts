@@ -7,8 +7,8 @@ import { type ResourceMethodTypeCrudModel } from '#lib-shared/resource/resource.
 export const FUNDING_QUOTE_FIELDS = [
   '_id',
   'created',
-  { maturity: ['unit', 'value'] },
-  { pricing: ['unit', 'value'] },
+  'maturityDays',
+  'pricing',
 ] satisfies GraphQlQueryParamsFieldsModel<FundingQuoteModel>;
 
 export const FUNDING_QUOTE_OUTPUT_FIELDS = [

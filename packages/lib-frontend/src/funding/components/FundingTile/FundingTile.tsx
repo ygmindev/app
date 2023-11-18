@@ -15,15 +15,17 @@ export const FundingTile: LFCModel<FundingTilePropsModel> = ({ funding, onPress,
     <Tile
       {...wrapperProps}
       image={funding?.Group?.logo}
+      label={t('funding:funding')}
       onPress={onPress}
       rightElement={
-        funding?.quoteCount ? (
-          <Chip color={THEME_COLOR.SECONDARY}>
-            {t('funding:quoteCount', { value: funding.quoteCount })}
-          </Chip>
-        ) : undefined
-      }
-      title={t('funding:funding')}>
+        funding?.quoteCount
+          ? () => (
+              <Chip color={THEME_COLOR.SECONDARY}>
+                {t('funding:quoteCount', { value: funding.quoteCount })}
+              </Chip>
+            )
+          : undefined
+      }>
       <FundingDetail funding={funding} />
     </Tile>
   );

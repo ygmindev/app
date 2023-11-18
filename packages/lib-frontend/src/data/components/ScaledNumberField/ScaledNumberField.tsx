@@ -10,22 +10,21 @@ import {
   RELATIVE_DATE_UNIT_OPTIONS,
 } from '#lib-frontend/data/components/ScaledNumberField/ScaledNumberField.constants';
 import { type ScaledNumberFieldPropsModel } from '#lib-frontend/data/components/ScaledNumberField/ScaledNumberField.models';
-import { type NumberUnitModel } from '#lib-frontend/data/data.models';
+import { NUMBER_UNIT_TYPE } from '#lib-frontend/data/data.constants';
+import { type NumberUnitModel, type NumberUnitTypeModel } from '#lib-frontend/data/data.models';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { SCALED_NUMBER_UNIT } from '#lib-shared/data/resources/ScaledNumber/ScaledNumber.constants';
-import { type ScaledNumberUnitModel } from '#lib-shared/data/resources/ScaledNumber/ScaledNumber.models';
 
 export const unitOptions = <TType extends NumberUnitModel>(
-  type: ScaledNumberUnitModel,
+  type: NumberUnitTypeModel,
 ): Array<TranslatableOptionModel<TType>> => {
   switch (type) {
-    case SCALED_NUMBER_UNIT.AMOUNT:
+    case NUMBER_UNIT_TYPE.AMOUNT:
       return AMOUNT_UNIT_OPTIONS as Array<TranslatableOptionModel<TType>>;
-    case SCALED_NUMBER_UNIT.RATE:
+    case NUMBER_UNIT_TYPE.RATE:
       return RATE_UNIT_OPTIONS as Array<TranslatableOptionModel<TType>>;
-    case SCALED_NUMBER_UNIT.RELATIVE_DATE:
+    case NUMBER_UNIT_TYPE.RELATIVE_DATE:
       return RELATIVE_DATE_UNIT_OPTIONS as Array<TranslatableOptionModel<TType>>;
     default:
       return [];
@@ -38,7 +37,7 @@ export const ScaledNumberField = <TType extends NumberUnitModel>({
   keyboard,
   label,
   onChange,
-  type = SCALED_NUMBER_UNIT.AMOUNT,
+  type = NUMBER_UNIT_TYPE.AMOUNT,
   value,
   ...props
 }: LFCPropsModel<ScaledNumberFieldPropsModel<TType>>): ReactElement<

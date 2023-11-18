@@ -16,8 +16,8 @@ export const SettingsLocale: SFCModel<SettingsLocalePropsModel> = ({ testID, ...
       testID={testID}
       title={t('locale:location')}>
       <LineItem
-        button={() => <TimezoneField />}
-        icon="time">
+        icon="time"
+        rightElement={() => <TimezoneField />}>
         <Text>{t('locale:timezone')}</Text>
       </LineItem>
     </LineGroup>

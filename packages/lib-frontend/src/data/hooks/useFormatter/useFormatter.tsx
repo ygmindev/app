@@ -6,7 +6,6 @@ import toString from 'lodash/toString';
 import moment from 'moment';
 
 import { AMOUNT_UNIT, RATE_UNIT, RELATIVE_DATE_UNIT } from '#lib-frontend/data/data.constants';
-import { type NumberUnitModel } from '#lib-frontend/data/data.models';
 import {
   type DateFormatterOptionsModel,
   type FormatterOptionsModel,
@@ -17,8 +16,11 @@ import {
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { DATA_TYPE, DATA_TYPE_MORE } from '#lib-shared/data/data.constants';
-import { type DataTypeModel, type DataTypeMoreModel } from '#lib-shared/data/data.models';
-import { type ScaledNumberRangeModel } from '#lib-shared/data/resources/ScaledNumberRange/ScaledNumberRange.models';
+import {
+  type DataTypeModel,
+  type DataTypeMoreModel,
+  type RangeModel,
+} from '#lib-shared/data/data.models';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 
 export const useFormatter = (): UseFormatterModel => {
@@ -182,19 +184,15 @@ export const useFormatter = (): UseFormatterModel => {
 
   return {
     format,
-    formatRange: <TType extends NumberUnitModel>(
-      value?: ScaledNumberRangeModel<TType>,
-      options?: NumberFormatterOptionsModel,
-    ): string => {
+
+    formatRange: (value?: RangeModel<number>, options?: NumberFormatterOptionsModel): string => {
       if (value) {
         const { max, min } = value;
-        return filterNil([
-          min && format(min, { ...options, unit: value.unit }),
-          max && format(max, { ...options, unit: value.unit }),
-        ]).join(' - ');
+        return filterNil([min && format(min, options), max && format(max, options)]).join(' - ');
       }
       return '';
     },
+
     unformat,
   };
 };

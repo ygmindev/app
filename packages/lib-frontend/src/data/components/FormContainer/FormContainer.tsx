@@ -1,9 +1,8 @@
 import map from 'lodash/map';
-import { cloneElement, type ForwardedRef, type ReactElement, useCallback } from 'react';
+import { cloneElement, type ForwardedRef, type ReactElement, type ReactNode } from 'react';
 import { forwardRef, useImperativeHandle } from 'react';
 
-import { Button } from '#lib-frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
+import { Accordion } from '#lib-frontend/animation/components/Accordion/Accordion';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { AsyncBoundary } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
 import { ERROR_MODE } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.constants';
@@ -19,23 +18,46 @@ import { Form } from '#lib-frontend/data/components/Form/Form';
 import {
   type FormContainerPropsModel,
   type FormFieldModel,
+  type FormFieldsModel,
   type FormRowModel,
+  type FormTileModel,
 } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
-import { type FieldPropsModel, type FormRefModel } from '#lib-frontend/data/data.models';
+import { SubmittableButtons } from '#lib-frontend/data/components/SubmittableButtons/SubmittableButtons';
+import {
+  type FieldPropsModel,
+  type FormInputModel,
+  type FormRefModel,
+} from '#lib-frontend/data/data.models';
 import { useForm } from '#lib-frontend/data/hooks/useForm/useForm';
-import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { type StringKeyModel } from '#lib-shared/core/core.models';
 
+const getValues = <TType, TInput extends FormInputModel<TType> = TType>(
+  data: TType,
+  fields?: Array<FormFieldsModel<TType, TInput>>,
+): TType =>
+  fields
+    ? fields.reduce((result, field) => {
+        const fieldsF = (field as FormTileModel<TType, TInput> | FormRowModel<TType, TInput>)
+          .fields;
+        return {
+          ...result,
+          ...(fieldsF ? getValues(data, fieldsF) : { [field.id]: data[field.id] }),
+        };
+      }, {} as TType)
+    : data;
+
 export const FormContainer = forwardRef(
-  <TType, TResult = void>(
-    { errorContextGet, ...props }: LFCPropsModel<FormContainerPropsModel<TType, TResult>>,
-    ref: ForwardedRef<FormRefModel<TType>>,
-  ): ReactElement<RLFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>> => {
+  <TType, TResult = void, TInput extends FormInputModel<TType> = TType>(
+    { errorContextGet, ...props }: LFCPropsModel<FormContainerPropsModel<TType, TResult, TInput>>,
+    ref: ForwardedRef<FormRefModel<TInput>>,
+  ): ReactElement<
+    RLFCPropsModel<FormRefModel<TInput>, FormContainerPropsModel<TType, TResult, TInput>>
+  > => {
     const Component = FormContainerF as RLFCModel<
-      FormRefModel<TType>,
-      FormContainerPropsModel<TType, TResult>
+      FormRefModel<TInput>,
+      FormContainerPropsModel<TType, TResult, TInput>
     >;
     return (
       <AsyncBoundary
@@ -48,12 +70,12 @@ export const FormContainer = forwardRef(
       </AsyncBoundary>
     );
   },
-) as <TType, TResult = void>(
-  props: RLFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>,
-) => ReactElement<RLFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>>;
+) as <TType, TResult = void, TInput extends FormInputModel<TType> = TType>(
+  props: RLFCPropsModel<FormRefModel<TInput>, FormContainerPropsModel<TType, TResult>>,
+) => ReactElement<RLFCPropsModel<FormRefModel<TInput>, FormContainerPropsModel<TType, TResult>>>;
 
 const FormContainerF = forwardRef(
-  <TType, TResult = void>(
+  <TType, TResult = void, TInput extends FormInputModel<TType> = TType>(
     {
       bottomElement,
       cancelLabel,
@@ -62,22 +84,23 @@ const FormContainerF = forwardRef(
       initialValues,
       isBlocking,
       isButton = true,
-      isGrouped,
       isValidateChanged,
       onCancel,
       onComplete,
       onError,
       onSubmit,
       onSuccess,
+      onTransform,
       submitLabel,
       topElement,
       validators,
       ...props
-    }: LFCPropsModel<FormContainerPropsModel<TType, TResult>>,
-    ref: ForwardedRef<FormRefModel<TType>>,
-  ): ReactElement<RLFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>> => {
+    }: LFCPropsModel<FormContainerPropsModel<TType, TResult, TInput>>,
+    ref: ForwardedRef<FormRefModel<TInput>>,
+  ): ReactElement<
+    RLFCPropsModel<FormRefModel<TInput>, FormContainerPropsModel<TType, TResult, TInput>>
+  > => {
     const isAppLoading = useStore((state) => state.app.isLoading);
-    const { t } = useTranslation();
     const { wrapperProps } = useLayoutStyles({ props });
 
     useImperativeHandle(ref, () => ({
@@ -86,28 +109,8 @@ const FormContainerF = forwardRef(
       valuesSet,
     }));
 
-    const getValues = useCallback(
-      (data: TType) =>
-        fields
-          ? fields.reduce((result, field) => {
-              const fieldsF = (field as FormRowModel<TType>).fields ?? [field];
-              return {
-                ...result,
-                ...fieldsF.reduce(
-                  (resultRow, { id }) => ({
-                    ...resultRow,
-                    [id]: data[id as StringKeyModel<TType>],
-                  }),
-                  {},
-                ),
-              };
-            }, {} as TType)
-          : data,
-      [fields],
-    );
-
     const onSubmitF = async (data: TType): Promise<TResult | null> => {
-      const dataF = getValues(data);
+      const dataF = getValues(data, fields);
       return (onSubmit && (await onSubmit(dataF))) ?? null;
     };
 
@@ -116,7 +119,7 @@ const FormContainerF = forwardRef(
     };
 
     const { errors, handleChange, handleReset, handleSubmit, isLoading, values, valuesSet } =
-      useForm<TType, TResult>({
+      useForm<TType, TResult, TInput>({
         initialValues,
         isBlocking,
         isValidateChanged,
@@ -124,6 +127,7 @@ const FormContainerF = forwardRef(
         onError,
         onSubmit: onSubmitF,
         onSuccess,
+        onTransform,
         validators,
       });
 
@@ -135,8 +139,8 @@ const FormContainerF = forwardRef(
     const getField = <TKey extends StringKeyModel<TType>>({
       element,
       id,
-    }: FormFieldModel<TType, TKey>): FormFieldModel<TType, TKey> => {
-      const fieldProps = {
+    }: FormFieldModel<TType, TInput, TKey>): FormFieldModel<TType, TInput, TKey> => ({
+      element: cloneElement(element, {
         defaultValue: initialValues ? initialValues[id] : undefined,
         elementState: elementStateF ?? element.props.elementState,
         error: errors ? errors[id] : undefined,
@@ -144,72 +148,78 @@ const FormContainerF = forwardRef(
         onChange: (v) => handleChange(id)(v),
         onSubmit: handleSubmitF,
         value: values[id],
-      } as FieldPropsModel<TType[TKey]>;
-      return { element: cloneElement(element, fieldProps), id };
+      } as FieldPropsModel<TInput[TKey]>),
+      id,
+    });
+
+    const getRow = (row: FormRowModel<TType, TInput>): ReactElement => {
+      const fieldsF = map(row.fields, getField);
+      return row.isGrouped ? (
+        <FieldGroup
+          fields={fieldsF}
+          key={row.id}
+        />
+      ) : (
+        <Wrapper
+          isDistribute
+          isRowAlign
+          key={row.id}>
+          {fieldsF.map(({ element }) => element)}
+        </Wrapper>
+      );
     };
 
-    const rows = map(fields, (field) => {
-      const fieldRow = field as FormRowModel<TType>;
-      if (fieldRow.fields) {
-        const fieldsF = map(fieldRow.fields, getField);
-        return {
-          element: fieldRow.isGrouped ? (
-            <FieldGroup
-              fields={fieldsF}
-              key={field.id}
-            />
-          ) : (
-            <Wrapper
-              isDistribute
-              isRowAlign
-              key={field.id}>
-              {fieldsF.map(({ element, id }) => cloneElement(element, { key: id }))}
-            </Wrapper>
-          ),
-          id: fieldRow.id,
-        };
-      }
-      return getField(field as FormFieldModel<TType>);
-    });
+    const getTile = (tile: FormTileModel<TType, TInput>): ReactElement => (
+      <Accordion
+        border
+        defaultValue={ELEMENT_STATE.ACTIVE}
+        key={tile.id}
+        label={tile.label}
+        round>
+        <Wrapper
+          p
+          s>
+          {map(tile.fields, (field) =>
+            (field as FormRowModel<TType, TInput>).fields
+              ? getRow(field as FormRowModel<TType, TInput>)
+              : getField(field as FormFieldModel<TType, TInput>).element,
+          )}
+        </Wrapper>
+      </Accordion>
+    );
+
+    const getFields = (): ReactNode =>
+      fields?.map((field) => {
+        const tile = field as FormTileModel<TType, TInput>;
+        if (tile.fields && tile.label) {
+          return getTile(tile);
+        }
+        const row = field as FormRowModel<TType, TInput>;
+        if (row.fields) {
+          return getRow(row);
+        }
+        return getField(field as FormFieldModel<TType, TInput>).element;
+      });
 
     return (
       <Form onSubmit={isDisabled ? undefined : async () => handleSubmitF()}>
         <MainLayout
           {...wrapperProps}
+          bottomElement={
+            isButton ? (
+              <SubmittableButtons
+                cancelLabel={cancelLabel}
+                onCancel={onCancel}
+                onSubmit={async () => handleSubmitF()}
+                submitLabel={submitLabel}
+              />
+            ) : undefined
+          }
+          flex
           s>
           {topElement && topElement({ elementState: elementStateF })}
 
-          {isGrouped ? (
-            <FieldGroup fields={rows} />
-          ) : (
-            rows.map(({ element, id }) => cloneElement(element, { key: id }))
-          )}
-
-          {isButton && (
-            <Wrapper
-              isDistribute
-              isRowAlign>
-              {onCancel && (
-                <Button
-                  elementState={elementStateF}
-                  icon="chevronLeft"
-                  onPress={onCancel}
-                  type={BUTTON_TYPE.TRANSPARENT}>
-                  {cancelLabel ?? t('core:cancel')}
-                </Button>
-              )}
-
-              {onSubmit && (
-                <Button
-                  elementState={elementStateF}
-                  icon="chevronRight"
-                  onPress={handleSubmitF}
-                  testID={props.testID ? `${props.testID}-submit` : undefined}>
-                  {submitLabel ?? t('core:continue')}
-                </Button>
-              )}
-            </Wrapper>
-          )}
+          {getFields()}
 
           {bottomElement && bottomElement({ elementState: elementStateF })}
         </MainLayout>

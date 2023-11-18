@@ -34,12 +34,12 @@ export const QuotesPage: SFCModel<QuotesPagePropsModel> = ({ testID, ...props })
       </Wrapper>
 
       <Tile
-        description={t('funding:quoted', {
-          value: format(yesterday, { isReadable: true }),
-        })}
+        // description={t('funding:quoted', {
+        //   value: format(yesterday, { isReadable: true }),
+        // })}
         image="https://companieslogo.com/img/orig/WF-f6e6a56c.png?t=1660034230"
-        onPress={() => null}
-        title="Woori Bank">
+        label="Woori Bank"
+        onPress={() => null}>
         <Table
           columns={[
             { formatter: ({ value }) => `${value.toFixed(0)} years`, id: 'tenor' },
@@ -59,12 +59,12 @@ export const QuotesPage: SFCModel<QuotesPagePropsModel> = ({ testID, ...props })
       </Tile>
 
       <Tile
-        description={t('funding:quoted', {
-          value: format(yesterday, { isReadable: true }),
-        })}
+        // description={t('funding:quoted', {
+        //   value: format(yesterday, { isReadable: true }),
+        // })}
         image="https://design.gs.com/downloads/Goldman_Sachs_Blue_Box.png"
-        onPress={() => null}
-        title="Goldman Sachs">
+        label="Goldman Sachs"
+        onPress={() => null}>
         <Table
           columns={[
             { formatter: ({ value }) => `${value.toFixed(0)} years`, id: 'tenor' },

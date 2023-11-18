@@ -196,6 +196,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
           align={label ? FLEX_ALIGN.END : FLEX_ALIGN.CENTER}
           flex
           isRow
+          position={SHAPE_POSITION.RELATIVE}
           s={THEME_SIZE.SMALL}>
           {leftElementF}
 

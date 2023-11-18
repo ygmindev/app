@@ -1,41 +1,30 @@
-import { useState } from 'react';
-
-import { Skeleton } from '#lib-frontend/animation/components/Skeleton/Skeleton';
 import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
-import { Icon } from '#lib-frontend/core/components/Icon/Icon';
-import { Image } from '#lib-frontend/core/components/Image/Image';
+import { Item } from '#lib-frontend/core/components/Item/Item';
 import { type LineItemPropsModel } from '#lib-frontend/core/components/LineItem/LineItem.models';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { DIRECTION, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type LFCModel } from '#lib-frontend/core/core.models';
-import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
-import { isTranslatableText } from '#lib-frontend/locale/utils/isTranslatableText/isTranslatableText';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { FLEX_ALIGN } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 export const LineItem: LFCModel<LineItemPropsModel> = ({
-  button,
   children,
+  color,
   elementState,
   icon,
   image,
-  isBorder = true,
   label,
   onPress,
   rightElement,
+  type = FONT_TYPE.TITLE,
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const theme = useTheme();
-  const [isActive, isActiveSet] = useState<boolean>();
 
   const rightElementF =
-    button ??
+    rightElement ??
     (onPress &&
       ((isActive) => (
         <Button
@@ -46,59 +35,22 @@ export const LineItem: LFCModel<LineItemPropsModel> = ({
       )));
 
   return (
-    <Activatable
-      onActive={() => isActiveSet(true)}
-      onInactive={() => isActiveSet(false)}>
-      <Wrapper
-        {...wrapperProps}
-        border={isBorder ? DIRECTION.TOP : undefined}
-        isRowAlign
-        onPress={onPress}
-        pHorizontal
-        pVertical={THEME_SIZE.SMALL}>
-        <Wrapper
-          flex
-          isRowAlign>
-          {image && (
-            <Skeleton>
-              <Image
-                isAutoSize
-                src={image}
-                width={theme.shape.size[THEME_SIZE.MEDIUM]}
-              />
-            </Skeleton>
-          )}
-
-          {icon && (
-            <Skeleton>
-              <Icon
-                icon={icon}
-                width={theme.shape.size[THEME_SIZE.SMALL]}
-              />
-            </Skeleton>
-          )}
-
-          <Wrapper
-            align={FLEX_ALIGN.START}
-            s={THEME_SIZE.SMALL}>
-            <Skeleton>
-              <TranslatableText type={FONT_TYPE.TITLE}>{label}</TranslatableText>
-            </Skeleton>
-
-            {isTranslatableText(children) ? (
-              <Skeleton>
-                <TranslatableText>{children}</TranslatableText>
-              </Skeleton>
-            ) : (
-              children
-            )}
-          </Wrapper>
-        </Wrapper>
-
-        {rightElement}
-
-        {rightElementF && rightElementF(isActive)}
-      </Wrapper>
+    <Activatable>
+      {(isActive) => (
+        <Item
+          {...wrapperProps}
+          color={color}
+          elementState={elementState}
+          icon={icon}
+          image={image}
+          label={label}
+          onPress={onPress}
+          pVertical={THEME_SIZE.SMALL}
+          rightElement={rightElementF && rightElementF(isActive)}
+          type={type}>
+          {children}
+        </Item>
+      )}
     </Activatable>
   );
 };

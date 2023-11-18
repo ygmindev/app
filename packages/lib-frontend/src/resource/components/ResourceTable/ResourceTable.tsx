@@ -54,7 +54,7 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
 
       <FloatingFooter>
         <ModalButton
-          element={
+          element={() => (
             <FormContainer<TForm>
               fields={columns?.map((column) => {
                 const element = (() => {
@@ -69,7 +69,7 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
                 await service.create({ form });
               }}
             />
-          }
+          )}
           icon="add"
           isShadow>
           {t('core:new', { value: title && t(title) })}

@@ -1,9 +1,9 @@
-import { RotatableIcon } from '#lib-frontend/core/components/RotatableIcon/RotatableIcon';
-import { type RotatableIconPropsModel } from '#lib-frontend/core/components/RotatableIcon/RotatableIcon.models';
+import { Item } from '#lib-frontend/core/components/Item/Item';
+import { type ItemPropsModel } from '#lib-frontend/core/components/Item/Item.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<RotatableIconPropsModel>({ target: RotatableIcon });
+const { Component, displayName, testID } = withTestComponent<ItemPropsModel>({ target: Item });
 
 describe(displayName, () => {
   test('works', async () => {

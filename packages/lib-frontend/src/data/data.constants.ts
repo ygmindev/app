@@ -21,3 +21,9 @@ export enum RELATIVE_DATE_UNIT {
   WEEK = 'week',
   YEAR = 'year',
 }
+
+export enum NUMBER_UNIT_TYPE {
+  AMOUNT = 'AMOUNT',
+  RATE = 'RATE',
+  RELATIVE_DATE = 'RELATIVE_DATE',
+}

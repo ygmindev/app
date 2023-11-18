@@ -6,6 +6,7 @@ import {
   type DimensionModel,
   type ElementStatePropsModel,
 } from '#lib-frontend/core/core.models';
+import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 
 export type ModalPropsModel = ChildrenPropsModel &
   DimensionModel &
@@ -13,10 +14,10 @@ export type ModalPropsModel = ChildrenPropsModel &
   Pick<AnimationModel, 'duration'> & {
     deviceHeight?: number;
     deviceWidth?: number;
-    header?: ReactNode | string;
     isFullSize?: boolean;
     isOpen?: boolean;
     onToggle?(value?: boolean): void;
+    title?: ReactNode | TranslatableTextModel;
   };
 
 export type ModalRefModel = {

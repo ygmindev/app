@@ -1,30 +1,34 @@
 import { useState } from 'react';
 
 import { type AccordionPropsModel } from '#lib-frontend/animation/components/Accordion/Accordion.models';
-import { RotatableIcon } from '#lib-frontend/core/components/RotatableIcon/RotatableIcon';
-import { Text } from '#lib-frontend/core/components/Text/Text';
+import { Rotatable } from '#lib-frontend/animation/components/Rotatable/Rotatable';
+import { Button } from '#lib-frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
+import { LineItem } from '#lib-frontend/core/components/LineItem/LineItem';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import {
   type ElementStateModel,
+  type LFCModel,
   type MeasureModel,
-  type SFCModel,
 } from '#lib-frontend/core/core.models';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
-export const Accordion: SFCModel<AccordionPropsModel> = ({
+export const Accordion: LFCModel<AccordionPropsModel> = ({
   children,
+  color,
   defaultValue,
+  elementState,
+  icon,
+  image,
   label,
   onChange,
-  testID,
+  type,
   value,
   ...props
 }) => {
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const [measure, measureSet] = useState<MeasureModel>();
   const { valueControlled, valueControlledSet } = useValueControlled<ElementStateModel>({
     defaultValue,
@@ -39,21 +43,29 @@ export const Accordion: SFCModel<AccordionPropsModel> = ({
 
   return (
     <Wrapper
-      s={THEME_SIZE.SMALL}
-      style={styles}
-      testID={testID}>
-      <Wrapper
-        isRowAlign
-        justify={FLEX_JUSTIFY.SPACE_BETWEEN}
-        onPress={handleToggle}>
-        {label && <Text fontSize={THEME_SIZE.LARGE}>{label}</Text>}
-
-        <RotatableIcon
-          directionActive={DIRECTION.BOTTOM}
-          directionInactive={DIRECTION.RIGHT}
-          elementState={valueControlled}
-        />
-      </Wrapper>
+      {...wrapperProps}
+      s>
+      <LineItem
+        border={DIRECTION.BOTTOM}
+        color={color}
+        elementState={elementState}
+        icon={icon}
+        image={image}
+        label={label}
+        mHorizontal
+        onPress={handleToggle}
+        rightElement={(isActive) => (
+          <Rotatable elementState={valueControlled}>
+            <Button
+              elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
+              icon="chevronDown"
+              isHidden
+              type={BUTTON_TYPE.INVISIBLE}
+            />
+          </Rotatable>
+        )}
+        type={type}
+      />
 
       <Wrapper
         animation={
@@ -68,7 +80,7 @@ export const Accordion: SFCModel<AccordionPropsModel> = ({
         }
         elementState={valueControlled}
         isOverflowHidden>
-        <Wrapper onMeasure={measure ? undefined : measureSet}>{children}</Wrapper>
+        <Wrapper onMeasure={measureSet}>{children}</Wrapper>
       </Wrapper>
     </Wrapper>
   );

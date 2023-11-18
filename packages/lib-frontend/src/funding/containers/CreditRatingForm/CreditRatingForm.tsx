@@ -81,7 +81,7 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
                     <Tile
                       image={agencyF.logo}
                       key={agencyF._id}
-                      title={agencyF.name}>
+                      label={agencyF.name}>
                       <ItemTable
                         items={[
                           {
@@ -109,7 +109,7 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
 
       <FloatingFooter>
         <ModalButton
-          element={<CreditRatingItemForm onSubmit={handleAdd} />}
+          element={() => <CreditRatingItemForm onSubmit={handleAdd} />}
           elementState={elementState}
           icon="add"
           ref={modalRef}>

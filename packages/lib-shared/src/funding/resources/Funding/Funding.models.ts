@@ -1,6 +1,5 @@
-import { type AmountUnitModel, type RelativeDateUnitModel } from '#lib-frontend/data/data.models';
 import { type ProtectedResourceModel } from '#lib-shared/auth/resources/ProtectedResource/ProtectedResource.models';
-import { type ScaledNumberRangeModel } from '#lib-shared/data/resources/ScaledNumberRange/ScaledNumberRange.models';
+import { type NumberRangeModel } from '#lib-shared/data/resources/NumberRange/NumberRange.models';
 import { type CREDIT_RATING_RESOURCE_NAME } from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
 import { type CreditRatingModel } from '#lib-shared/funding/resources/CreditRating/CreditRating.models';
 import { type FUNDING_QUOTE_RESOURCE_NAME } from '#lib-shared/funding/resources/FundingQuote/FundingQuote.constants';
@@ -12,11 +11,11 @@ export type FundingModel = ProtectedResourceModel & {
 
   [FUNDING_QUOTE_RESOURCE_NAME]?: Array<FundingQuoteModel>;
 
-  amount?: ScaledNumberRangeModel<AmountUnitModel>;
+  amount?: NumberRangeModel;
 
   currency?: string;
 
-  maturity?: ScaledNumberRangeModel<RelativeDateUnitModel>;
+  maturityDays?: NumberRangeModel;
 
   quoteCount?: number;
 };
