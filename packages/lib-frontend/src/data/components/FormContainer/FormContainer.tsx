@@ -23,24 +23,16 @@ import {
   type FormTileModel,
 } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
 import { SubmittableButtons } from '#lib-frontend/data/components/SubmittableButtons/SubmittableButtons';
-import {
-  type FieldPropsModel,
-  type FormInputModel,
-  type FormRefModel,
-} from '#lib-frontend/data/data.models';
+import { type FieldPropsModel, type FormRefModel } from '#lib-frontend/data/data.models';
 import { useForm } from '#lib-frontend/data/hooks/useForm/useForm';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { type StringKeyModel } from '#lib-shared/core/core.models';
 
-const getValues = <TType, TInput extends FormInputModel<TType> = TType>(
-  data: TType,
-  fields?: Array<FormFieldsModel<TType, TInput>>,
-): TType =>
+const getValues = <TType,>(data: TType, fields?: Array<FormFieldsModel<TType>>): TType =>
   fields
     ? fields.reduce((result, field) => {
-        const fieldsF = (field as FormTileModel<TType, TInput> | FormRowModel<TType, TInput>)
-          .fields;
+        const fieldsF = (field as FormTileModel<TType> | FormRowModel<TType>).fields;
         return {
           ...result,
           ...(fieldsF ? getValues(data, fieldsF) : { [field.id]: data[field.id] }),
@@ -49,15 +41,13 @@ const getValues = <TType, TInput extends FormInputModel<TType> = TType>(
     : data;
 
 export const FormContainer = forwardRef(
-  <TType, TResult = void, TInput extends FormInputModel<TType> = TType>(
-    { errorContextGet, ...props }: LFCPropsModel<FormContainerPropsModel<TType, TResult, TInput>>,
-    ref: ForwardedRef<FormRefModel<TInput>>,
-  ): ReactElement<
-    RLFCPropsModel<FormRefModel<TInput>, FormContainerPropsModel<TType, TResult, TInput>>
-  > => {
+  <TType, TResult = void>(
+    { errorContextGet, ...props }: LFCPropsModel<FormContainerPropsModel<TType, TResult>>,
+    ref: ForwardedRef<FormRefModel<TType>>,
+  ): ReactElement<RLFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>> => {
     const Component = FormContainerF as RLFCModel<
-      FormRefModel<TInput>,
-      FormContainerPropsModel<TType, TResult, TInput>
+      FormRefModel<TType>,
+      FormContainerPropsModel<TType, TResult>
     >;
     return (
       <AsyncBoundary
@@ -70,12 +60,12 @@ export const FormContainer = forwardRef(
       </AsyncBoundary>
     );
   },
-) as <TType, TResult = void, TInput extends FormInputModel<TType> = TType>(
-  props: RLFCPropsModel<FormRefModel<TInput>, FormContainerPropsModel<TType, TResult>>,
-) => ReactElement<RLFCPropsModel<FormRefModel<TInput>, FormContainerPropsModel<TType, TResult>>>;
+) as <TType, TResult = void>(
+  props: RLFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>,
+) => ReactElement<RLFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>>;
 
 const FormContainerF = forwardRef(
-  <TType, TResult = void, TInput extends FormInputModel<TType> = TType>(
+  <TType, TResult = void>(
     {
       bottomElement,
       cancelLabel,
@@ -90,16 +80,13 @@ const FormContainerF = forwardRef(
       onError,
       onSubmit,
       onSuccess,
-      onTransform,
       submitLabel,
       topElement,
       validators,
       ...props
-    }: LFCPropsModel<FormContainerPropsModel<TType, TResult, TInput>>,
-    ref: ForwardedRef<FormRefModel<TInput>>,
-  ): ReactElement<
-    RLFCPropsModel<FormRefModel<TInput>, FormContainerPropsModel<TType, TResult, TInput>>
-  > => {
+    }: LFCPropsModel<FormContainerPropsModel<TType, TResult>>,
+    ref: ForwardedRef<FormRefModel<TType>>,
+  ): ReactElement<RLFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>> => {
     const isAppLoading = useStore((state) => state.app.isLoading);
     const { wrapperProps } = useLayoutStyles({ props });
 
@@ -119,7 +106,7 @@ const FormContainerF = forwardRef(
     };
 
     const { errors, handleChange, handleReset, handleSubmit, isLoading, values, valuesSet } =
-      useForm<TType, TResult, TInput>({
+      useForm<TType, TResult>({
         initialValues,
         isBlocking,
         isValidateChanged,
@@ -127,7 +114,6 @@ const FormContainerF = forwardRef(
         onError,
         onSubmit: onSubmitF,
         onSuccess,
-        onTransform,
         validators,
       });
 
@@ -139,7 +125,7 @@ const FormContainerF = forwardRef(
     const getField = <TKey extends StringKeyModel<TType>>({
       element,
       id,
-    }: FormFieldModel<TType, TInput, TKey>): FormFieldModel<TType, TInput, TKey> => ({
+    }: FormFieldModel<TType, TKey>): FormFieldModel<TType, TKey> => ({
       element: cloneElement(element, {
         defaultValue: initialValues ? initialValues[id] : undefined,
         elementState: elementStateF ?? element.props.elementState,
@@ -148,11 +134,11 @@ const FormContainerF = forwardRef(
         onChange: (v) => handleChange(id)(v),
         onSubmit: handleSubmitF,
         value: values[id],
-      } as FieldPropsModel<TInput[TKey]>),
+      } as FieldPropsModel<TType[TKey]>),
       id,
     });
 
-    const getRow = (row: FormRowModel<TType, TInput>): ReactElement => {
+    const getRow = (row: FormRowModel<TType>): ReactElement => {
       const fieldsF = map(row.fields, getField);
       return row.isGrouped ? (
         <FieldGroup
@@ -169,7 +155,7 @@ const FormContainerF = forwardRef(
       );
     };
 
-    const getTile = (tile: FormTileModel<TType, TInput>): ReactElement => (
+    const getTile = (tile: FormTileModel<TType>): ReactElement => (
       <Accordion
         border
         defaultValue={ELEMENT_STATE.ACTIVE}
@@ -180,9 +166,9 @@ const FormContainerF = forwardRef(
           p
           s>
           {map(tile.fields, (field) =>
-            (field as FormRowModel<TType, TInput>).fields
-              ? getRow(field as FormRowModel<TType, TInput>)
-              : getField(field as FormFieldModel<TType, TInput>).element,
+            (field as FormRowModel<TType>).fields
+              ? getRow(field as FormRowModel<TType>)
+              : getField(field as FormFieldModel<TType>).element,
           )}
         </Wrapper>
       </Accordion>
@@ -190,15 +176,15 @@ const FormContainerF = forwardRef(
 
     const getFields = (): ReactNode =>
       fields?.map((field) => {
-        const tile = field as FormTileModel<TType, TInput>;
+        const tile = field as FormTileModel<TType>;
         if (tile.fields && tile.label) {
           return getTile(tile);
         }
-        const row = field as FormRowModel<TType, TInput>;
+        const row = field as FormRowModel<TType>;
         if (row.fields) {
           return getRow(row);
         }
-        return getField(field as FormFieldModel<TType, TInput>).element;
+        return getField(field as FormFieldModel<TType>).element;
       });
 
     return (
@@ -214,9 +200,7 @@ const FormContainerF = forwardRef(
                 submitLabel={submitLabel}
               />
             ) : undefined
-          }
-          flex
-          s>
+          }>
           {topElement && topElement({ elementState: elementStateF })}
 
           {getFields()}

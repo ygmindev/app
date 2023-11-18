@@ -22,7 +22,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
-    "outDir": "/Users/ygmin/Projects/mono_v2/app3/app/.dist/out-tsc",
+    "outDir": "/Users/yoongeemin/Developer/Projects/app/.dist/out-tsc",
     "paths": {
       "#dist/*": [
         ".dist/*"

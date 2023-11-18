@@ -398,10 +398,10 @@ type Funding {
   Group: Group
   User: User
   _id: String
-  amount: ScaledNumberRange
+  amount: NumberRange
   created: DateTime
   currency: String
-  maturity: ScaledNumberRange
+  maturityDays: NumberRange
   quoteCount: Float
 }
 
@@ -411,10 +411,10 @@ input FundingCreateFormInput {
   Group: GroupInput
   User: UserInput
   _id: String
-  amount: ScaledNumberRangeInput
+  amount: NumberRangeInput
   created: DateTime
   currency: String
-  maturity: ScaledNumberRangeInput
+  maturityDays: NumberRangeInput
   quoteCount: Float
 }
 
@@ -429,10 +429,10 @@ input FundingCreateManyFormInput {
   Group: GroupInput
   User: UserInput
   _id: String
-  amount: ScaledNumberRangeInput
+  amount: NumberRangeInput
   created: DateTime
   currency: String
-  maturity: ScaledNumberRangeInput
+  maturityDays: NumberRangeInput
   quoteCount: Float
 }
 
@@ -542,25 +542,25 @@ input FundingInput {
   Group: GroupInput
   User: UserInput
   _id: String
-  amount: ScaledNumberRangeInput
+  amount: NumberRangeInput
   created: DateTime
   currency: String
-  maturity: ScaledNumberRangeInput
+  maturityDays: NumberRangeInput
   quoteCount: Float
 }
 
 type FundingQuote {
   _id: String
   created: DateTime
-  maturity: ScaledNumber
-  pricing: ScaledNumber
+  maturityDays: Float
+  pricing: Float
 }
 
 input FundingQuoteCreateFormInput {
   _id: String
   created: DateTime
-  maturity: ScaledNumberInput
-  pricing: ScaledNumberInput
+  maturityDays: Float
+  pricing: Float
 }
 
 input FundingQuoteCreateInput {
@@ -571,8 +571,8 @@ input FundingQuoteCreateInput {
 input FundingQuoteCreateManyFormInput {
   _id: String
   created: DateTime
-  maturity: ScaledNumberInput
-  pricing: ScaledNumberInput
+  maturityDays: Float
+  pricing: Float
 }
 
 input FundingQuoteCreateManyInput {
@@ -684,8 +684,8 @@ type FundingQuoteGetOutputRoot {
 input FundingQuoteInput {
   _id: String
   created: DateTime
-  maturity: ScaledNumberInput
-  pricing: ScaledNumberInput
+  maturityDays: Float
+  pricing: Float
 }
 
 input FundingQuoteRemoveFilterInput {
@@ -740,8 +740,8 @@ type FundingQuoteUpdateOutputRoot {
 input FundingQuoteUpdateUpdateInput {
   _id: String
   created: DateTime
-  maturity: ScaledNumberInput
-  pricing: ScaledNumberInput
+  maturityDays: Float
+  pricing: Float
 }
 
 input FundingRemoveFilterInput {
@@ -789,10 +789,10 @@ input FundingUpdateUpdateInput {
   Group: GroupInput
   User: UserInput
   _id: String
-  amount: ScaledNumberRangeInput
+  amount: NumberRangeInput
   created: DateTime
   currency: String
-  maturity: ScaledNumberRangeInput
+  maturityDays: NumberRangeInput
   quoteCount: Float
 }
 
@@ -1017,6 +1017,16 @@ type Mutation {
   UserCreateMany(input: UserCreateManyInput): UserCreateManyOutput
   UserRemove(input: UserRemoveInput): UserRemoveOutput
   UserUpdate(input: UserUpdateInput): UserUpdateOutput
+}
+
+type NumberRange {
+  max: Float
+  min: Float
+}
+
+input NumberRangeInput {
+  max: Float
+  min: Float
 }
 
 type Otp {
@@ -1389,28 +1399,6 @@ input RatingAgencyUpdateUpdateInput {
   created: DateTime
   logo: String
   name: String
-}
-
-type ScaledNumber {
-  unit: String
-  value: Float
-}
-
-input ScaledNumberInput {
-  unit: String
-  value: Float
-}
-
-type ScaledNumberRange {
-  max: Float
-  min: Float
-  unit: String
-}
-
-input ScaledNumberRangeInput {
-  max: Float
-  min: Float
-  unit: String
 }
 
 type SignIn {

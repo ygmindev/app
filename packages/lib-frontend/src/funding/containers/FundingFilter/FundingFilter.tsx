@@ -3,21 +3,14 @@ import { FilterContainer } from '#lib-frontend/data/components/FilterContainer/F
 import { RangeField } from '#lib-frontend/data/components/RangeField/RangeField';
 import { RANGE_TYPE } from '#lib-frontend/data/components/RangeField/RangField.constants';
 import { NUMBER_UNIT_TYPE } from '#lib-frontend/data/data.constants';
-import { rangeToFilter } from '#lib-frontend/data/utils/rangeToFilter/rangeToFilter';
 import { type FundingFilterPropsModel } from '#lib-frontend/funding/containers/FundingFilter/FundingFilter.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
-export const FundingFilter: LFCModel<FundingFilterPropsModel> = ({
-  onCancel,
-  onSubmit,
-  ...props
-}) => {
+export const FundingFilter: LFCModel<FundingFilterPropsModel> = ({ ...props }) => {
   const { t } = useTranslation();
-  const { wrapperProps } = useLayoutStyles({ props });
   return (
     <FilterContainer
-      {...wrapperProps}
+      {...props}
       fields={[
         {
           fields: [
@@ -30,7 +23,7 @@ export const FundingFilter: LFCModel<FundingFilterPropsModel> = ({
                 />
               ),
               id: 'maturityDays',
-              toFilter: rangeToFilter,
+              // toFilter: rangeToFilter,
             },
           ],
           id: 'maturityDays',
@@ -47,15 +40,13 @@ export const FundingFilter: LFCModel<FundingFilterPropsModel> = ({
                 />
               ),
               id: 'amount',
-              toFilter: rangeToFilter,
+              // toFilter: rangeToFilter,
             },
           ],
           id: 'amount',
           label: t('funding:amount'),
         },
       ]}
-      onCancel={onCancel}
-      onSubmit={onSubmit}
     />
   );
 };

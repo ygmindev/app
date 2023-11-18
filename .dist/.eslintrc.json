@@ -14,7 +14,7 @@
     "plugin:typescript-sort-keys/recommended"
   ],
   "ignorePatterns": [
-    "!(/Users/ygmin/Projects/mono_v2/app3/app/src/**/*.tsx|/Users/ygmin/Projects/mono_v2/app3/app/src/**/*.ts|/Users/ygmin/Projects/mono_v2/app3/app/src/**/*.jsx|/Users/ygmin/Projects/mono_v2/app3/app/src/**/*.js)",
+    "!(/Users/yoongeemin/Developer/Projects/app/src/**/*.tsx|/Users/yoongeemin/Developer/Projects/app/src/**/*.ts|/Users/yoongeemin/Developer/Projects/app/src/**/*.jsx|/Users/yoongeemin/Developer/Projects/app/src/**/*.js)",
     "**/*..spec.*",
     "**/*..ete.*"
   ],
@@ -36,7 +36,7 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json",
-    "tsconfigRootDir": "/Users/ygmin/Projects/mono_v2/app3/app"
+    "tsconfigRootDir": "/Users/yoongeemin/Developer/Projects/app"
   },
   "plugins": [
     "@typescript-eslint",
@@ -100,21 +100,21 @@
       "error",
       {
         "packageDir": [
-          "/Users/ygmin/Projects/mono_v2/app3/app",
-          "/Users/ygmin/Projects/mono_v2/app3/app/packages/app-native",
-          "/Users/ygmin/Projects/mono_v2/app3/app/packages/app-web",
-          "/Users/ygmin/Projects/mono_v2/app3/app/packages/app-web-admin",
-          "/Users/ygmin/Projects/mono_v2/app3/app/packages/app-web-library",
-          "/Users/ygmin/Projects/mono_v2/app3/app/packages/backend-graphql-sandbox",
-          "/Users/ygmin/Projects/mono_v2/app3/app/packages/backend-lambda",
-          "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-backend",
-          "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-config",
-          "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-frontend",
-          "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-library",
-          "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-platform",
-          "/Users/ygmin/Projects/mono_v2/app3/app/packages/lib-shared",
-          "/Users/ygmin/Projects/mono_v2/app3/app/packages/tool-generate",
-          "/Users/ygmin/Projects/mono_v2/app3/app/packages/tool-task"
+          "/Users/yoongeemin/Developer/Projects/app",
+          "/Users/yoongeemin/Developer/Projects/app/packages/app-native",
+          "/Users/yoongeemin/Developer/Projects/app/packages/app-web",
+          "/Users/yoongeemin/Developer/Projects/app/packages/app-web-admin",
+          "/Users/yoongeemin/Developer/Projects/app/packages/app-web-library",
+          "/Users/yoongeemin/Developer/Projects/app/packages/backend-graphql-sandbox",
+          "/Users/yoongeemin/Developer/Projects/app/packages/backend-lambda",
+          "/Users/yoongeemin/Developer/Projects/app/packages/lib-backend",
+          "/Users/yoongeemin/Developer/Projects/app/packages/lib-config",
+          "/Users/yoongeemin/Developer/Projects/app/packages/lib-frontend",
+          "/Users/yoongeemin/Developer/Projects/app/packages/lib-library",
+          "/Users/yoongeemin/Developer/Projects/app/packages/lib-platform",
+          "/Users/yoongeemin/Developer/Projects/app/packages/lib-shared",
+          "/Users/yoongeemin/Developer/Projects/app/packages/tool-generate",
+          "/Users/yoongeemin/Developer/Projects/app/packages/tool-task"
         ]
       }
     ],

@@ -26,9 +26,9 @@ export const _viewParams: ComposeComponentParamsModel<
   getProps: (
     {
       isHorizontalScrollable,
-      isHorizontalScrollableVisible,
+      isHorizontalScrollableVisible = isHorizontalScrollable,
       isVerticalScrollable,
-      isVerticalScrollableVisible,
+      isVerticalScrollableVisible = isVerticalScrollable,
       onScroll,
       style,
       testID,

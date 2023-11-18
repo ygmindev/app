@@ -1,3 +1,4 @@
+import { fromExecutable } from '#lib-backend/file/utils/fromExecutable/fromExecutable';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
 import { type TaskParamsModel } from '#tool-task/core/core.models';
@@ -7,7 +8,7 @@ export const dev: TaskParamsModel<unknown> = {
 
   name: 'dev',
 
-  task: ['sls offline start --reloadHandler --verbose'],
+  task: [fromExecutable('sls offline start --reloadHandler --verbose')],
 
   variables: () => ({
     NODE_OPTIONS: `--require ${fromPackages('lib-config/src/tracking/telemetry/telemetry.js')}`,

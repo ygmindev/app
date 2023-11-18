@@ -20,7 +20,10 @@ export const FilterContainer = <TType, TResult = void>({
 }: LFCPropsModel<FilterContainerPropsModel<TType, TResult>>): ReactElement<
   FilterContainerPropsModel<TType, TResult>
 > => {
-  const getFilter = (field: FormFieldsModel<TType>, data: TType): Array<FilterModel<TType>> => {
+  const getFilter = (
+    field: FormFieldsModel<TType>,
+    data: TType,
+  ): Array<FilterModel<TType>> => {
     const fieldF = field as FormTileModel<TType> | FormRowModel<TType>;
     if (fieldF.fields) {
       return reduce(

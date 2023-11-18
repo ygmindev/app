@@ -2,18 +2,17 @@ import { type FormikErrors, type FormikValues } from 'formik';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 
-import { type FormErrorModel, type FormInputModel } from '#lib-frontend/data/data.models';
+import { type FormErrorModel } from '#lib-frontend/data/data.models';
 import {
   type _UseFormModel,
   type _UseFormParamsModel,
 } from '#lib-frontend/data/hooks/useForm/_useForm.models';
 
-export const _useForm = <TType, TResult = void, TInput extends FormInputModel<TType> = TType>({
+export const _useForm = <TType, TResult = void>({
   initialValues,
   onSubmit,
-  onTransform,
   onValidate,
-}: _UseFormParamsModel<TType, TResult, TInput>): _UseFormModel<TType, TResult, TInput> => {
+}: _UseFormParamsModel<TType, TResult>): _UseFormModel<TType, TResult> => {
   const [data, dataSet] = useState<TResult | null>();
 
   const {
@@ -26,11 +25,10 @@ export const _useForm = <TType, TResult = void, TInput extends FormInputModel<TT
     setFieldValue,
     setValues,
     values,
-  } = useFormik<TInput & FormikValues>({
-    initialValues: initialValues ?? ({} as TInput & FormikValues),
+  } = useFormik<TType & FormikValues>({
+    initialValues: initialValues ?? ({} as TType & FormikValues),
     onSubmit: async (data) => {
-      const dataF = onTransform ? onTransform(data) : (data as TType);
-      dataSet((onSubmit && (await onSubmit(dataF))) ?? null);
+      dataSet((onSubmit && (await onSubmit(data))) ?? null);
     },
     validate: onValidate,
     validateOnChange: false,
@@ -38,8 +36,8 @@ export const _useForm = <TType, TResult = void, TInput extends FormInputModel<TT
 
   return {
     data,
-    errors: errors as FormErrorModel<TInput>,
-    errorsSet: (error) => setErrors(error as unknown as FormikErrors<TInput & FormikValues>),
+    errors: errors as FormErrorModel<TType>,
+    errorsSet: (error) => setErrors(error as unknown as FormikErrors<TType & FormikValues>),
     handleChange: (id) => (value) => setFieldValue(id, value),
     handleReset: () => handleReset(null),
     handleSubmit: () => handleSubmit(),
@@ -47,7 +45,7 @@ export const _useForm = <TType, TResult = void, TInput extends FormInputModel<TT
     isValid,
     values,
     valuesSet: async (data) => {
-      await setValues(data as TInput & FormikValues);
+      await setValues(data as TType & FormikValues);
     },
   };
 };

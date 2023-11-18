@@ -7,16 +7,16 @@ import { type MainLayoutPropsModel } from '#lib-frontend/core/layouts/MainLayout
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 
 export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
   bottomElement,
   children,
+  isFullHeight,
   size = THEME_SIZE.MEDIUM,
   topElement,
   ...props
 }) => {
-  const { computedStyles, inheritedStyles, wrapperProps } = useLayoutStyles({ props });
+  const { computedStyles, inheritedStyles } = useLayoutStyles({ props });
   const isMobile = useIsMobile();
   const isFullWidthF = props.isFullWidth || isMobile;
   const theme = useTheme();
@@ -26,27 +26,24 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
       flex
       style={inheritedStyles}>
       <Wrapper
-        flex
         isFullWidth={isFullWidthF}
-        isVerticalScrollable
-        isVerticalScrollableVisible
-        justify={FLEX_JUSTIFY.START}>
+        isVerticalScrollable>
         {topElement}
 
         <Wrapper
-          {...wrapperProps}
+          flex={isFullHeight}
           m="auto"
           style={computedStyles}
           width={widthF}>
           {children}
         </Wrapper>
-      </Wrapper>
 
-      <Wrapper
-        m="auto"
-        pTop
-        width={widthF}>
-        {bottomElement}
+        <Wrapper
+          m="auto"
+          pTop
+          width={widthF}>
+          {bottomElement}
+        </Wrapper>
       </Wrapper>
     </Wrapper>
   );

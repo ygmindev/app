@@ -17,8 +17,7 @@ export const FUNDING_FIXTURES: Array<FundingModel> = getEntityResourceFixture({
     [GROUP_RESOURCE_NAME]: GROUP_FIXTURES[i],
 
     amount: {
-      min: 100,
-      unit: AMOUNT_UNIT.MILLION,
+      min: 100e6,
     },
 
     currency: 'USD',

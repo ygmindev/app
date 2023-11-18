@@ -35,7 +35,7 @@ export const FundingDetail: LFCModel<FundingDetailPropsModel> = ({ funding, ...p
           title: t('funding:amount'),
         },
         {
-          description: `${formatRange(funding.maturity, { isScale: false })}`,
+          description: `${formatRange(funding.maturityDays, { isScale: false })}`,
           icon: 'hourglass',
           id: 'maturity',
           title: t('funding:maturity'),

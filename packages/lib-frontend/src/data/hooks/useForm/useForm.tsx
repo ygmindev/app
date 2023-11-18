@@ -1,5 +1,4 @@
 import { useErrorContext } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext';
-import { type FormInputModel } from '#lib-frontend/data/data.models';
 import { _useForm } from '#lib-frontend/data/hooks/useForm/_useForm';
 import {
   type UseFormModel,
@@ -11,7 +10,7 @@ import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 import { error } from '#lib-shared/logging/utils/logger/logger';
 
-export const useForm = <TType, TResult = void, TInput extends FormInputModel<TType> = TType>({
+export const useForm = <TType, TResult = void>({
   initialValues,
   isBlocking = true,
   isValidateChanged,
@@ -19,9 +18,8 @@ export const useForm = <TType, TResult = void, TInput extends FormInputModel<TTy
   onError,
   onSubmit,
   onSuccess,
-  onTransform,
   validators,
-}: UseFormParamsModel<TType, TResult, TInput>): UseFormModel<TType, TResult, TInput> => {
+}: UseFormParamsModel<TType, TResult>): UseFormModel<TType, TResult> => {
   const { t } = useTranslation();
   const { handleError } = useErrorContext();
   const validate = useValidator();
@@ -46,10 +44,9 @@ export const useForm = <TType, TResult = void, TInput extends FormInputModel<TTy
     return null;
   };
 
-  return _useForm<TType, TResult, TInput>({
+  return _useForm<TType, TResult>({
     initialValues,
     onSubmit: handleSubmit,
-    onTransform,
     onValidate: async (data) => validate({ data, validators }),
   });
 };
