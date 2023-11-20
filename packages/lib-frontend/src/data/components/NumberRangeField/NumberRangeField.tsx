@@ -30,7 +30,7 @@ import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { type NumberRangeModel } from '#lib-shared/data/resources/NumberRange/NumberRange.models';
 
-export const RangeField = <TType extends NumberUnitModel>({
+export const NumberRangeField = <TType extends NumberUnitModel>({
   defaultUnit,
   defaultValue,
   error,
@@ -59,23 +59,23 @@ export const RangeField = <TType extends NumberUnitModel>({
   const {
     unit,
     unitSet: minUnitSet,
-    valueControlled: minValueControlled,
     valueControlledSet: minValueControlledSet,
+    valueScaled: minValueScaled,
   } = useValueScaled({
     defaultUnit,
     defaultValue: defaultValue?.min,
-    onChange: (v) => handleChange({ min: v }),
+    onChange: (v) => onChange && onChange({ min: v }),
     value: value?.min,
   });
 
   const {
     unitSet: maxUnitSet,
-    valueControlled: maxValueControlled,
     valueControlledSet: maxValueControlledSet,
+    valueScaled: maxValueScaled,
   } = useValueScaled({
     defaultUnit,
     defaultValue: defaultValue?.max,
-    onChange: (v) => handleChange({ max: v }),
+    onChange: (v) => onChange && onChange({ max: v }),
     value: value?.max,
   });
 
@@ -85,10 +85,10 @@ export const RangeField = <TType extends NumberUnitModel>({
 
   const handleBlur = (): void => {
     isRange &&
-      minValueControlled &&
-      maxValueControlled &&
-      minValueControlled > maxValueControlled &&
-      handleChange({ max: minValueControlled, min: maxValueControlled });
+      minValueScaled &&
+      maxValueScaled &&
+      minValueScaled > maxValueScaled &&
+      handleChange({ max: minValueScaled, min: maxValueScaled });
   };
 
   const handleChange = ({
@@ -123,14 +123,9 @@ export const RangeField = <TType extends NumberUnitModel>({
     rangeTypeSet(rangeTypeFF);
     minUnitSet(unitFF);
     maxUnitSet(unitFF);
-    minValueControlledSet(min === null ? undefined : min ?? minValueControlled);
-    maxValueControlledSet(
-      max === null
-        ? undefined
-        : max ??
-            maxValueControlled ??
-            (rangeTypeF === NUMBER_RANGE_TYPE.RANGE ? upperF : undefined),
-    );
+    min !== undefined && minValueControlledSet(min ?? undefined);
+    max !== undefined &&
+      maxValueControlledSet(max ?? (rangeTypeF === NUMBER_RANGE_TYPE.RANGE ? upperF : undefined));
   };
 
   return (
@@ -157,7 +152,7 @@ export const RangeField = <TType extends NumberUnitModel>({
           onBlur={handleBlur}
           onChange={(v) => handleChange({ min: v ?? null })}
           rightElement={<Text color={theme.color.border}>{unit}</Text>}
-          value={minValueControlled}
+          value={minValueScaled}
         />
 
         {isRange && (
@@ -169,7 +164,7 @@ export const RangeField = <TType extends NumberUnitModel>({
             onBlur={handleBlur}
             onChange={(v) => handleChange({ max: v ?? null })}
             rightElement={<Text color={theme.color.border}>{unit}</Text>}
-            value={maxValueControlled}
+            value={maxValueScaled}
           />
         )}
       </Wrapper>
@@ -180,7 +175,7 @@ export const RangeField = <TType extends NumberUnitModel>({
         lower={range[0]}
         onChange={handleChange}
         upper={range[1]}
-        value={{ max: maxValueControlled, min: minValueControlled }}
+        value={{ max: maxValueScaled, min: minValueScaled }}
       />
 
       {!rangeType && (

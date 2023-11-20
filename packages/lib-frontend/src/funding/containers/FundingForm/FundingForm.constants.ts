@@ -2,7 +2,7 @@ import { type FundingFormModel } from '#lib-shared/funding/resources/Funding/Fun
 
 export const FUNDING_FORM_INITIAL_VALUES: FundingFormModel = {
   amount: {
-    min: 10e6,
+    min: 1e2,
   },
   currency: 'USD',
   maturityDays: {

@@ -1,7 +1,7 @@
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
-import { RangeField } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField';
+import { NumberRangeField } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField';
 import { NUMBER_UNIT_TYPE } from '#lib-frontend/data/data.constants';
 import { validateRange } from '#lib-frontend/data/utils/validateRange/validateRange';
 import { type FundingAmountFormPropsModel } from '#lib-frontend/funding/containers/FundingAmountForm/FundingAmountForm.models';
@@ -26,7 +26,7 @@ export const FundingAmountForm: LFCModel<FundingAmountFormPropsModel> = ({
       fields={[
         {
           element: (
-            <RangeField
+            <NumberRangeField
               label={t('funding:amount')}
               type={NUMBER_UNIT_TYPE.AMOUNT}
             />

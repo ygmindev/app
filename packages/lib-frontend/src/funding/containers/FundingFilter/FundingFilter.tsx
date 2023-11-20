@@ -1,6 +1,6 @@
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { FilterContainer } from '#lib-frontend/data/components/FilterContainer/FilterContainer';
-import { RangeField } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField';
+import { NumberRangeField } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField';
 import { NUMBER_RANGE_TYPE } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField.constants';
 import { NUMBER_UNIT_TYPE } from '#lib-frontend/data/data.constants';
 import { type FundingFilterPropsModel } from '#lib-frontend/funding/containers/FundingFilter/FundingFilter.models';
@@ -16,7 +16,7 @@ export const FundingFilter: LFCModel<FundingFilterPropsModel> = ({ ...props }) =
           fields: [
             {
               element: (
-                <RangeField
+                <NumberRangeField
                   label={t('funding:maturity')}
                   rangeType={NUMBER_RANGE_TYPE.RANGE}
                   type={NUMBER_UNIT_TYPE.RELATIVE_DATE}
@@ -33,7 +33,7 @@ export const FundingFilter: LFCModel<FundingFilterPropsModel> = ({ ...props }) =
           fields: [
             {
               element: (
-                <RangeField
+                <NumberRangeField
                   label={t('funding:amount')}
                   rangeType={NUMBER_RANGE_TYPE.RANGE}
                   type={NUMBER_UNIT_TYPE.AMOUNT}

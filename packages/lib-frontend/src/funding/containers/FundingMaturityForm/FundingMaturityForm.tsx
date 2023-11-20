@@ -1,7 +1,7 @@
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
-import { RangeField } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField';
+import { NumberRangeField } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField';
 import { NUMBER_UNIT_TYPE } from '#lib-frontend/data/data.constants';
 import { type FundingMaturityFormPropsModel } from '#lib-frontend/funding/containers/FundingMaturityForm/FundingMaturityForm.models';
 import { FUNDING } from '#lib-frontend/funding/funding.constants';
@@ -25,7 +25,7 @@ export const FundingMaturityForm: LFCModel<FundingMaturityFormPropsModel> = ({
       fields={[
         {
           element: (
-            <RangeField
+            <NumberRangeField
               label={t('funding:maturity')}
               type={NUMBER_UNIT_TYPE.RELATIVE_DATE}
             />

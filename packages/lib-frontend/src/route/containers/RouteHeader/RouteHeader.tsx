@@ -52,12 +52,6 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, ...props }
             if ((previous as RouteDirectionModel) === ROUTE_DIRECTION.BACK) {
               return back();
             }
-            // const previousF =
-            //   (previous as RouteDirectionModel) === ROUTE_DIRECTION.UP
-            //     ? route.pathname === '/'
-            //       ? route.parent?.slice(0, route.parent.lastIndexOf('/'))
-            //       : route.parent
-            //     : previous;
             const previousF =
               (previous as RouteDirectionModel) === ROUTE_DIRECTION.UP
                 ? location.pathname.slice(0, location.pathname.lastIndexOf('/'))

@@ -1,4 +1,3 @@
-import { IN_PROGRESS } from '#lib-frontend/core/core.constants';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { StepForm } from '#lib-frontend/data/components/StepForm/StepForm';
 import { CreditRatingForm } from '#lib-frontend/funding/containers/CreditRatingForm/CreditRatingForm';
@@ -9,7 +8,6 @@ import { type FundingFormPropsModel } from '#lib-frontend/funding/containers/Fun
 import { FundingMaturityForm } from '#lib-frontend/funding/containers/FundingMaturityForm/FundingMaturityForm';
 import { FUNDING } from '#lib-frontend/funding/funding.constants';
 import { useFundingResource } from '#lib-frontend/funding/hooks/useFundingResource/useFundingResource';
-import { GROUP } from '#lib-frontend/group/group.constants';
 import { useCurrentGroup } from '#lib-frontend/group/hooks/useCurrentGroup/useCurrentGroup';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
@@ -20,17 +18,18 @@ export const FundingForm: LFCModel<FundingFormPropsModel> = ({ ...props }) => {
   const { create } = useFundingResource();
   const { replace } = useRouter();
   const currentGroup = useCurrentGroup();
+  console.warn(currentGroup);
   return (
     <StepForm
       {...props}
       initialValues={FUNDING_FORM_INITIAL_VALUES}
-      onSubmit={async (form) =>
+      onSubmit={async (form) => {
+        console.warn(currentGroup?._id);
+        console.warn(form);
         currentGroup?._id &&
-        create({ form: { ...form, [GROUP_RESOURCE_NAME]: { _id: currentGroup?._id } } })
-      }
-      onSuccess={async () =>
-        replace({ pathname: `/${GROUP}/${currentGroup?._id}/${FUNDING}/${IN_PROGRESS}` })
-      }
+          (await create({ form: { ...form, [GROUP_RESOURCE_NAME]: { _id: currentGroup._id } } }));
+      }}
+      onSuccess={async () => console.warn('success')}
       steps={[
         {
           element: <FundingCurrencyForm />,

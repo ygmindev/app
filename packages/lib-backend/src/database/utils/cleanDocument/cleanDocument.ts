@@ -18,12 +18,19 @@ const resolveObjectId = <TType extends unknown>(value: TType): TType =>
 
 export const cleanDocument = <TType extends unknown>(value: TType): TType =>
   cleanObject(value, {
-    keyValueTransformer: <TValue>(v: TValue, k: string) =>
-      (isPlainObject(v) && isEqual(Object.keys(v as object), ['_id'])
-        ? resolveObjectId((v as EntityResourceModel)._id)
-        : isString(v) && last(k.split('.'))?.startsWith('_')
-        ? isArray(v)
-          ? v.map(resolveObjectId)
-          : new ObjectId(v)
-        : v) as TValue,
+    keyValueTransformer: <TValue>(v: TValue, k: string) => {
+      let vF = v;
+      if ((vF as { entity: TValue }).entity) {
+        vF = (vF as { entity: TValue }).entity;
+      }
+      return (
+        isPlainObject(vF) && isEqual(Object.keys(vF as object), ['_id'])
+          ? resolveObjectId((vF as EntityResourceModel)._id)
+          : isString(vF) && last(k.split('.'))?.startsWith('_')
+          ? isArray(vF)
+            ? vF.map(resolveObjectId)
+            : new ObjectId(vF)
+          : vF
+      ) as TValue;
+    },
   });

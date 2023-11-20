@@ -16,24 +16,25 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
   topElement,
   ...props
 }) => {
-  const { computedStyles, inheritedStyles } = useLayoutStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const isMobile = useIsMobile();
   const isFullWidthF = props.isFullWidth || isMobile;
   const theme = useTheme();
   const widthF = isFullWidthF ? undefined : isNumber(size) ? size : theme.layout.width[size];
   return (
     <Wrapper
-      flex
-      style={inheritedStyles}>
+      {...wrapperProps}
+      flex>
       <Wrapper
         isFullWidth={isFullWidthF}
-        isVerticalScrollable>
+        isVerticalScrollable
+        s>
         {topElement}
 
         <Wrapper
           flex={isFullHeight}
           m="auto"
-          style={computedStyles}
+          s
           width={widthF}>
           {children}
         </Wrapper>

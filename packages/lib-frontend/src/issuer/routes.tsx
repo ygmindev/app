@@ -29,36 +29,41 @@ export const issuerRoutes: Array<RouteModel> = [
         title: ({ t }) => t('core:analytics'),
       },
       {
-        element: <FundingPage />,
         icon: 'dollar',
         navigator: <TabNavigator type={TABS_TYPE.CONTAINED} />,
         pathname: FUNDING,
         routes: [
-          getRouteGroup({
-            element: <FundingInProgressPage />,
-            icon: 'dotsCircle',
-            pathname: IN_PROGRESS,
+          {
+            element: <FundingFormPage />,
+            isFullScreen: true,
+            isNavigatable: false,
+            pathname: FORM,
+            title: ({ t }) => t('core:form'),
+          },
+          {
+            element: <FundingPage />,
+            pathname: '/',
             routes: [
+              getRouteGroup({
+                element: <FundingInProgressPage />,
+                icon: 'dotsCircle',
+                pathname: IN_PROGRESS,
+                routes: [
+                  {
+                    element: <QuotesPage />,
+                    isFullScreen: true,
+                    pathname: QUOTES,
+                    title: ({ t }) => t('core:quotes'),
+                  },
+                ],
+                title: ({ t }) => t('core:inProgress'),
+              }),
               {
-                element: <FundingFormPage />,
-                isFullScreen: true,
-                isNavigatable: false,
-                pathname: FORM,
-                title: ({ t }) => t('core:form'),
-              },
-              {
-                element: <QuotesPage />,
-                isFullScreen: true,
-                pathname: QUOTES,
-                title: ({ t }) => t('core:quotes'),
+                icon: 'checkCircle',
+                pathname: COMPLETED,
+                title: ({ t }) => t('core:completed'),
               },
             ],
-            title: ({ t }) => t('core:inProgress'),
-          }),
-          {
-            icon: 'checkCircle',
-            pathname: COMPLETED,
-            title: ({ t }) => t('core:completed'),
           },
         ],
         title: ({ t }) => t('funding:funding'),

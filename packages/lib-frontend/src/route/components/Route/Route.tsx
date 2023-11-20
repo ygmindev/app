@@ -14,6 +14,8 @@ import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { ROUTE_TRANSITION } from '#lib-frontend/route/route.constants';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
+import { THEME_COLOR_MORE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { useTracking } from '#lib-frontend/tracking/hooks/useTracking/useTracking';
 import {
@@ -22,6 +24,7 @@ import {
 } from '#lib-shared/tracking/resources/TrackingEvent/TrackingEvent.constants';
 
 export const Route: LFCModel<RoutePropsModel> = ({ depth, route, ...props }) => {
+  const theme = useTheme();
   const { wrapperProps } = useLayoutStyles({ props });
   const { isActive } = useRouter();
   const { track } = useTracking();
@@ -80,7 +83,10 @@ export const Route: LFCModel<RoutePropsModel> = ({ depth, route, ...props }) => 
     <Wrapper
       {...wrapperProps}
       {...route.layoutProps}
-      isAbsoluteFill>
+      backgroundColor={THEME_COLOR_MORE.SURFACE}
+      isAbsoluteFill
+      mTop={route.isFullScreen ? theme.layout.header.height : undefined}
+      zIndex>
       {route.routes &&
         route.navigator &&
         cloneElement(route.navigator, {
@@ -91,6 +97,8 @@ export const Route: LFCModel<RoutePropsModel> = ({ depth, route, ...props }) => 
       {element}
     </Wrapper>
   );
+
+  element = route.isFullScreen ? <Portal>{element}</Portal> : element;
 
   return (
     <>
