@@ -16,7 +16,7 @@ import {
   THEME_SIZE,
 } from '#lib-frontend/style/style.constants';
 import { FONT_ALIGN } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { type RangeModel } from '#lib-shared/data/data.models';
+import { type NumberRangeModel } from '#lib-shared/data/resources/NumberRange/NumberRange.models';
 
 export const Slider: LFCModel<SliderPropsModel> = ({
   defaultValue,
@@ -32,7 +32,7 @@ export const Slider: LFCModel<SliderPropsModel> = ({
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
-  const { valueControlled, valueControlledSet } = useValueControlled<RangeModel<number>>({
+  const { valueControlled, valueControlledSet } = useValueControlled<NumberRangeModel>({
     defaultValue,
     onChange,
     value,

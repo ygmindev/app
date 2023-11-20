@@ -19,7 +19,7 @@ import {
   type QuoteFormPagePropsModel,
 } from '#lib-frontend/underwriter/pages/QuoteFormPage/QuoteFormPage.models';
 import { NotFoundError } from '#lib-shared/core/errors/NotFoundError/NotFoundError';
-import { type RangeModel } from '#lib-shared/data/data.models';
+import { type NumberRangeModel } from '#lib-shared/data/resources/NumberRange/NumberRange.models';
 import { type FundingQuoteFormModel } from '#lib-shared/funding/resources/FundingQuote/FundingQuote.models';
 
 export const QuoteFormPage: LFCModel<QuoteFormPagePropsModel> = ({ ...props }) => {
@@ -31,7 +31,7 @@ export const QuoteFormPage: LFCModel<QuoteFormPagePropsModel> = ({ ...props }) =
 
   const tableRef = useRef<TableRefModel>(null);
 
-  const getMaturities = (): Array<RangeModel<number>> => {
+  const getMaturities = (): Array<NumberRangeModel> => {
     const min = funding?.maturityDays?.min;
     const max = funding?.maturityDays?.max;
     // const unit = funding?.maturityDays?.unit;

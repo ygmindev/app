@@ -1,15 +1,14 @@
 import { type NumberUnitModel } from '#lib-frontend/data/data.models';
 import { type DATA_TYPE } from '#lib-shared/data/data.constants';
-import {
-  type DataTypeModel,
-  type DataTypeMoreModel,
-  type RangeModel,
-} from '#lib-shared/data/data.models';
+import { type DataTypeModel, type DataTypeMoreModel } from '#lib-shared/data/data.models';
+import { type NumberRangeModel } from '#lib-shared/data/resources/NumberRange/NumberRange.models';
 
 export type UseFormatterModel = {
   format<TType>(value?: TType, options?: FormatterOptionsModel<TType>): string;
 
-  formatRange(value?: RangeModel<number>, options?: NumberFormatterOptionsModel): string;
+  formatRange(value?: NumberRangeModel, options?: NumberFormatterOptionsModel): string;
+
+  scale(value?: number, options?: NumberScaleOptionsModel): number | undefined;
 
   unformat<TType extends DataTypeModel>(
     type: TType,
@@ -23,11 +22,15 @@ export type FormatterOptionsModel<TType> = TType extends number
   ? DateFormatterOptionsModel
   : never;
 
-export type NumberFormatterOptionsModel = {
+export type NumberScaleOptionsModel = {
+  isUnscale?: boolean;
+  unit?: NumberUnitModel;
+};
+
+export type NumberFormatterOptionsModel = NumberScaleOptionsModel & {
   isScale?: boolean;
   isSeparated?: boolean;
   precision?: number;
-  unit?: NumberUnitModel;
 };
 
 export type DateFormatterOptionsModel = {

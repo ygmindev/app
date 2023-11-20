@@ -3,12 +3,10 @@ import {
   type FieldPropsModel,
   type NumberUnitModel,
   type NumberUnitTypeModel,
-  type ScaledValueModel,
 } from '#lib-frontend/data/data.models';
 
-export type ScaledNumberFieldPropsModel<TType extends NumberUnitModel> = FieldPropsModel<
-  ScaledValueModel<TType>
-> &
+export type ScaledNumberFieldPropsModel<TType extends NumberUnitModel> = FieldPropsModel<number> &
   Pick<NumberFieldPropsModel, 'keyboard'> & {
+    defaultUnit?: TType;
     type?: NumberUnitTypeModel;
   };

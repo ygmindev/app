@@ -8,11 +8,11 @@ import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCPropsModel } from '#lib-frontend/core/core.models';
 import { NumberField } from '#lib-frontend/data/components/NumberField/NumberField';
+import { NUMBER_RANGE_TYPE } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField.constants';
 import {
-  type RangeFieldPropsModel,
-  type RangeTypeModel,
-} from '#lib-frontend/data/components/RangeField/RangeField.models';
-import { RANGE_TYPE } from '#lib-frontend/data/components/RangeField/RangField.constants';
+  type NumberRangeFieldPropsModel,
+  type NumberRangeTypeModel,
+} from '#lib-frontend/data/components/NumberRangeField/NumberRangeField.models';
 import { unitOptions } from '#lib-frontend/data/components/ScaledNumberField/ScaledNumberField';
 import { TEXT_FIELD_KEYBOARD } from '#lib-frontend/data/components/TextField/TextField.constants';
 import {
@@ -21,16 +21,17 @@ import {
   NUMBER_UNIT_TYPE,
   RELATIVE_DATE_UNIT,
 } from '#lib-frontend/data/data.constants';
-import { type NumberUnitModel, type ScaledRangeModel } from '#lib-frontend/data/data.models';
+import { type NumberUnitModel } from '#lib-frontend/data/data.models';
 import { useFormatter } from '#lib-frontend/data/hooks/useFormatter/useFormatter';
-import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
+import { useValueScaled } from '#lib-frontend/data/hooks/useValueScaled/useValueScaled';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { type RangeModel } from '#lib-shared/data/data.models';
+import { type NumberRangeModel } from '#lib-shared/data/resources/NumberRange/NumberRange.models';
 
 export const RangeField = <TType extends NumberUnitModel>({
+  defaultUnit,
   defaultValue,
   error,
   label,
@@ -39,50 +40,70 @@ export const RangeField = <TType extends NumberUnitModel>({
   type = NUMBER_UNIT_TYPE.AMOUNT,
   value,
   ...props
-}: LFCPropsModel<RangeFieldPropsModel<TType>>): ReactElement<
-  LFCPropsModel<RangeFieldPropsModel<TType>>
+}: LFCPropsModel<NumberRangeFieldPropsModel<TType>>): ReactElement<
+  LFCPropsModel<NumberRangeFieldPropsModel<TType>>
 > => {
   const theme = useTheme();
   const { t } = useTranslation([DATA]);
   const { wrapperProps } = useLayoutStyles({ props });
-  const [rangeTypeState, rangeTypeSet] = useState<RangeTypeModel>(rangeType ?? RANGE_TYPE.EXACT);
-  const isRange = rangeTypeState === RANGE_TYPE.RANGE;
-  // TODO: adjust range
+  const [rangeTypeState, rangeTypeSet] = useState<NumberRangeTypeModel>(
+    rangeType ?? NUMBER_RANGE_TYPE.EXACT,
+  );
+  const isRange = rangeTypeState === NUMBER_RANGE_TYPE.RANGE;
+  // TODO: adjust default range
   const [range, rangeSet] = useState<[number, number]>([0, 1e3]);
   const { format } = useFormatter();
 
   const unitOptionsF = unitOptions(type);
 
-  const { valueControlled, valueControlledSet } = useValueControlled<ScaledRangeModel<TType>>({
-    defaultValue,
-    onChange,
-    value,
+  const {
+    unit,
+    unitSet: minUnitSet,
+    valueControlled: minValueControlled,
+    valueControlledSet: minValueControlledSet,
+  } = useValueScaled({
+    defaultUnit,
+    defaultValue: defaultValue?.min,
+    onChange: (v) => handleChange({ min: v }),
+    value: value?.min,
+  });
+
+  const {
+    unitSet: maxUnitSet,
+    valueControlled: maxValueControlled,
+    valueControlledSet: maxValueControlledSet,
+  } = useValueScaled({
+    defaultUnit,
+    defaultValue: defaultValue?.max,
+    onChange: (v) => handleChange({ max: v }),
+    value: value?.max,
   });
 
   useEffect(() => {
-    !valueControlled?.unit && handleChange({ unit: unitOptionsF[0].id as TType });
+    !unit && handleChange({ unit: unitOptionsF[0].id as TType });
   }, []);
 
   const handleBlur = (): void => {
     isRange &&
-      valueControlled?.min &&
-      valueControlled?.max &&
-      valueControlled?.min > valueControlled?.max &&
-      handleChange({ max: valueControlled.min, min: valueControlled.max });
+      minValueControlled &&
+      maxValueControlled &&
+      minValueControlled > maxValueControlled &&
+      handleChange({ max: minValueControlled, min: maxValueControlled });
   };
 
   const handleChange = ({
     max,
     min,
     rangeType: rangeTypeF,
-    unit,
-  }: ScaledRangeModel<TType> & {
-    key?: keyof RangeModel<number>;
-    rangeType?: RangeTypeModel;
+    unit: unitF,
+  }: NumberRangeModel & { unit?: TType } & {
+    rangeType?: NumberRangeTypeModel;
   }): void => {
     const rangeTypeFF = rangeTypeF ?? rangeTypeState;
+    const unitFF = unitF ?? unit;
+
     const { lowerF, upperF } = (() => {
-      switch (unit ?? valueControlled?.unit) {
+      switch (unitFF) {
         case RELATIVE_DATE_UNIT.DAY:
           return { lowerF: 0, upperF: 365 };
         case RELATIVE_DATE_UNIT.WEEK:
@@ -99,18 +120,17 @@ export const RangeField = <TType extends NumberUnitModel>({
     })();
 
     rangeSet([lowerF, upperF]);
-
     rangeTypeSet(rangeTypeFF);
-
-    valueControlledSet({
-      ...valueControlled,
-      max:
-        max === null
-          ? undefined
-          : max ?? valueControlled?.max ?? (rangeTypeF === RANGE_TYPE.RANGE ? upperF : undefined),
-      min: min === null ? undefined : min ?? valueControlled?.min,
-      unit: unit ?? valueControlled?.unit,
-    });
+    minUnitSet(unitFF);
+    maxUnitSet(unitFF);
+    minValueControlledSet(min === null ? undefined : min ?? minValueControlled);
+    maxValueControlledSet(
+      max === null
+        ? undefined
+        : max ??
+            maxValueControlled ??
+            (rangeTypeF === NUMBER_RANGE_TYPE.RANGE ? upperF : undefined),
+    );
   };
 
   return (
@@ -123,7 +143,7 @@ export const RangeField = <TType extends NumberUnitModel>({
         isHorizontal
         onChange={(v) => handleChange({ unit: v })}
         options={unitOptionsF}
-        value={valueControlled?.unit}
+        value={unit}
       />
 
       {label && <Text>{t(label)}</Text>}
@@ -136,8 +156,8 @@ export const RangeField = <TType extends NumberUnitModel>({
           label={isRange ? t('data:min', { value: label }) : label}
           onBlur={handleBlur}
           onChange={(v) => handleChange({ min: v ?? null })}
-          rightElement={<Text color={theme.color.border}>{valueControlled?.unit}</Text>}
-          value={valueControlled && valueControlled.min}
+          rightElement={<Text color={theme.color.border}>{unit}</Text>}
+          value={minValueControlled}
         />
 
         {isRange && (
@@ -148,24 +168,26 @@ export const RangeField = <TType extends NumberUnitModel>({
             label={t('data:max', { value: label })}
             onBlur={handleBlur}
             onChange={(v) => handleChange({ max: v ?? null })}
-            rightElement={<Text color={theme.color.border}>{valueControlled?.unit}</Text>}
-            value={valueControlled && valueControlled.max}
+            rightElement={<Text color={theme.color.border}>{unit}</Text>}
+            value={maxValueControlled}
           />
         )}
       </Wrapper>
 
       <Slider
-        formatter={(v) => format(v, { isScale: false, unit: valueControlled?.unit })}
+        formatter={(v) => format(v, { isScale: false, unit })}
         isRange={isRange}
         lower={range[0]}
         onChange={handleChange}
         upper={range[1]}
-        value={valueControlled}
+        value={{ max: maxValueControlled, min: minValueControlled }}
       />
 
       {!rangeType && (
         <Button
-          onPress={() => handleChange({ rangeType: isRange ? RANGE_TYPE.EXACT : RANGE_TYPE.RANGE })}
+          onPress={() =>
+            handleChange({ rangeType: isRange ? NUMBER_RANGE_TYPE.EXACT : NUMBER_RANGE_TYPE.RANGE })
+          }
           type={BUTTON_TYPE.INVISIBLE}>
           {isRange ? t('data:exactMessage') : t('data:rangeMessage')}
         </Button>

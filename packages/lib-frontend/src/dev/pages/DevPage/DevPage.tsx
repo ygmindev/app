@@ -1,5 +1,6 @@
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
+import { ScaledNumberField } from '#lib-frontend/data/components/ScaledNumberField/ScaledNumberField';
 import { TextField } from '#lib-frontend/data/components/TextField/TextField';
 import { type DevPagePropsModel } from '#lib-frontend/dev/pages/DevPage/DevPage.models';
 
@@ -12,15 +13,15 @@ export const DevPage: SFCModel<DevPagePropsModel> = ({ ...props }) => {
             fields: [
               {
                 fields: [
-                  { element: <TextField />, id: '1' },
-                  { element: <TextField />, id: '2' },
+                  { element: <TextField label="test" />, id: 'a' },
+                  { element: <TextField />, id: 'b' },
                 ],
                 id: '1',
               },
               {
                 fields: [
-                  { element: <TextField />, id: '2' },
-                  { element: <TextField />, id: '3' },
+                  { element: <ScaledNumberField label="test" />, id: 'c' },
+                  { element: <TextField />, id: 'd' },
                 ],
                 id: '2',
               },
@@ -29,6 +30,7 @@ export const DevPage: SFCModel<DevPagePropsModel> = ({ ...props }) => {
             label: 'tile',
           },
         ]}
+        onSubmit={async (data) => console.warn(data)}
         p
       />
     </>

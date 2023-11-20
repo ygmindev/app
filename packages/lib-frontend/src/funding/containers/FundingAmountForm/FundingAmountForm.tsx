@@ -1,7 +1,7 @@
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
-import { RangeField } from '#lib-frontend/data/components/RangeField/RangeField';
+import { RangeField } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField';
 import { NUMBER_UNIT_TYPE } from '#lib-frontend/data/data.constants';
 import { validateRange } from '#lib-frontend/data/utils/validateRange/validateRange';
 import { type FundingAmountFormPropsModel } from '#lib-frontend/funding/containers/FundingAmountForm/FundingAmountForm.models';

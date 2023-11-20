@@ -17,7 +17,6 @@ import {
   type RequiredModel,
   type StringKeyModel,
 } from '#lib-shared/core/core.models';
-import { type RangeModel } from '#lib-shared/data/data.models';
 
 export type QueryContextModel = {
   client?: QueryClient;
@@ -43,15 +42,6 @@ export type RelativeDateUnitModel = `${RELATIVE_DATE_UNIT}`;
 export type NumberUnitModel = AmountUnitModel | RateUnitModel | RelativeDateUnitModel;
 
 export type NumberUnitTypeModel = `${NUMBER_UNIT_TYPE}`;
-
-export type ScaledValueModel<TType extends NumberUnitModel> = {
-  unit?: TType;
-  value?: number;
-};
-
-export type ScaledRangeModel<TType extends NumberUnitModel> = RangeModel<number> & {
-  unit?: TType;
-};
 
 export type ValuePropsModel<TType = string> = {
   defaultValue?: TType;

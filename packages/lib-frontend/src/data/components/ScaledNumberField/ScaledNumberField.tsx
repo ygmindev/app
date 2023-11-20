@@ -12,7 +12,7 @@ import {
 import { type ScaledNumberFieldPropsModel } from '#lib-frontend/data/components/ScaledNumberField/ScaledNumberField.models';
 import { NUMBER_UNIT_TYPE } from '#lib-frontend/data/data.constants';
 import { type NumberUnitModel, type NumberUnitTypeModel } from '#lib-frontend/data/data.models';
-import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
+import { useValueScaled } from '#lib-frontend/data/hooks/useValueScaled/useValueScaled';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
@@ -32,6 +32,7 @@ export const unitOptions = <TType extends NumberUnitModel>(
 };
 
 export const ScaledNumberField = <TType extends NumberUnitModel>({
+  defaultUnit,
   defaultValue,
   error,
   keyboard,
@@ -45,7 +46,8 @@ export const ScaledNumberField = <TType extends NumberUnitModel>({
 > => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
-  const { valueControlled, valueControlledSet } = useValueControlled({
+  const { unit, unitSet, valueControlledSet, valueScaled } = useValueScaled({
+    defaultUnit,
     defaultValue,
     onChange,
     value,
@@ -60,8 +62,8 @@ export const ScaledNumberField = <TType extends NumberUnitModel>({
               error={error}
               keyboard={keyboard}
               label={label}
-              onChange={(v) => valueControlledSet({ ...valueControlled, value: v })}
-              value={valueControlled?.value}
+              onChange={valueControlledSet}
+              value={valueScaled}
             />
           ),
           id: 'value',
@@ -70,9 +72,12 @@ export const ScaledNumberField = <TType extends NumberUnitModel>({
           element: (
             <DropdownField<TType>
               label={t('core:unit')}
-              onChange={(v) => valueControlledSet({ ...valueControlled, unit: v as TType })}
+              onChange={(v: TType) => {
+                unitSet(v);
+                valueControlledSet(valueScaled, v);
+              }}
               options={unitOptions(type)}
-              value={valueControlled?.unit}
+              value={unit}
             />
           ),
           id: 'unit',

@@ -1,4 +1,4 @@
-export enum RANGE_TYPE {
+export enum NUMBER_RANGE_TYPE {
   EXACT = 'exact',
   RANGE = 'range',
 }
