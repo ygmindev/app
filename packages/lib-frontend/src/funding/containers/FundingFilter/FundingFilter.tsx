@@ -3,6 +3,7 @@ import { FilterContainer } from '#lib-frontend/data/components/FilterContainer/F
 import { NumberRangeField } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField';
 import { NUMBER_RANGE_TYPE } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField.constants';
 import { NUMBER_UNIT_TYPE } from '#lib-frontend/data/data.constants';
+import { rangeToFilter } from '#lib-frontend/data/utils/rangeToFilter/rangeToFilter';
 import { type FundingFilterPropsModel } from '#lib-frontend/funding/containers/FundingFilter/FundingFilter.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 
@@ -23,7 +24,7 @@ export const FundingFilter: LFCModel<FundingFilterPropsModel> = ({ ...props }) =
                 />
               ),
               id: 'maturityDays',
-              // toFilter: rangeToFilter,
+              toFilter: rangeToFilter,
             },
           ],
           id: 'maturityDays',
@@ -40,7 +41,7 @@ export const FundingFilter: LFCModel<FundingFilterPropsModel> = ({ ...props }) =
                 />
               ),
               id: 'amount',
-              // toFilter: rangeToFilter,
+              toFilter: rangeToFilter,
             },
           ],
           id: 'amount',
