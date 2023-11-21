@@ -7,7 +7,10 @@ import { type UseFormParamsModel } from '#lib-frontend/data/hooks/useForm/useFor
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { type StringKeyModel } from '#lib-shared/core/core.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
-import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
+import {
+  type FilterConditionModel,
+  type FilterModel,
+} from '#lib-shared/resource/utils/Filter/Filter.models';
 
 export type FormContainerPropsModel<TType, TResult = void> = UseFormParamsModel<TType, TResult> &
   SubmittablePropsModel<TType, TResult> &
@@ -46,7 +49,7 @@ export type FormFieldModel<
 export type FormToFilterModel<TType, TKey extends StringKeyModel<TType>> = (
   value: TType[TKey] | undefined,
   field: TKey,
-) => Array<FilterModel<TType>>;
+) => Array<FilterModel<TType>> | FilterConditionModel;
 
 export type FormFieldsModel<TType> =
   | FormTileModel<TType>
