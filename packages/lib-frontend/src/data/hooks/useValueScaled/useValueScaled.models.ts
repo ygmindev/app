@@ -4,17 +4,19 @@ import {
   type UseValueControlledParamsModel,
 } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled.models';
 
-export type UseValueScaledParamsModel<TType extends NumberUnitModel> =
-  UseValueControlledParamsModel<number> & {
-    defaultUnit?: TType;
-  };
+export type UseValueScaledParamsModel<
+  TType extends number | Record<string, number>,
+  TUnit extends NumberUnitModel,
+> = UseValueControlledParamsModel<TType> & {
+  defaultUnit?: TUnit;
+};
 
-export type UseValueScaledModel<TType extends NumberUnitModel> = Omit<
-  UseValueControlledModel<number>,
-  'valueControlledSet'
-> & {
-  unit?: TType;
-  unitSet(value?: TType): void;
-  valueControlledSet(value?: number, unit?: TType): void;
-  valueScaled?: number;
+export type UseValueScaledModel<
+  TType extends number | Record<string, number>,
+  TUnit extends NumberUnitModel,
+> = Omit<UseValueControlledModel<TType>, 'valueControlledSet'> & {
+  unit?: TUnit;
+  unitSet(value?: TUnit): void;
+  valueControlledSet(value?: TType, unit?: TUnit): void;
+  valueScaled?: TType;
 };

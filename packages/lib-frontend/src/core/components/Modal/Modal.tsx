@@ -14,7 +14,7 @@ import {
 } from '#lib-frontend/core/components/Modal/Modal.models';
 import { Portal } from '#lib-frontend/core/components/Portal/Portal';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { CORNER, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import { CORNER, DIRECTION, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type RLFCModel } from '#lib-frontend/core/core.models';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
@@ -72,28 +72,28 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
                 width={width}>
                 <KeyboardContainer>
                   <Wrapper
-                    flex
-                    p>
-                    <Wrapper isRowAlign>
-                      <Wrapper
-                        flex
-                        isRowAlign>
+                    border={DIRECTION.BOTTOM}
+                    isRowAlign
+                    pHorizontal
+                    pVertical={THEME_SIZE.SMALL}>
+                    {title && (
+                      <Wrapper flex>
                         {isTranslatableText(title) ? (
                           <TranslatableText type={FONT_TYPE.TITLE}>{title}</TranslatableText>
                         ) : (
                           title
                         )}
                       </Wrapper>
+                    )}
 
-                      <Button
-                        icon="times"
-                        onPress={() => valueControlledSet(false)}
-                        type={BUTTON_TYPE.INVISIBLE}
-                      />
-                    </Wrapper>
-
-                    <Wrapper flex>{children}</Wrapper>
+                    <Button
+                      icon="times"
+                      onPress={() => valueControlledSet(false)}
+                      type={BUTTON_TYPE.INVISIBLE}
+                    />
                   </Wrapper>
+
+                  <Wrapper flex>{children}</Wrapper>
                 </KeyboardContainer>
               </Wrapper>
             </>

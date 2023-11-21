@@ -14,6 +14,7 @@ import {
   THEME_COLOR_MORE,
   THEME_ROLE,
   THEME_SIZE,
+  THEME_SIZE_MORE,
 } from '#lib-frontend/style/style.constants';
 import { FONT_ALIGN } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { type NumberRangeModel } from '#lib-shared/data/resources/NumberRange/NumberRange.models';
@@ -48,7 +49,7 @@ export const Slider: LFCModel<SliderPropsModel> = ({
         isRange={isRange}
         lower={lower}
         markerColor={theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN]}
-        markerSize={theme.shape.size[THEME_SIZE.SMALL]}
+        markerSize={theme.shape.size[THEME_SIZE_MORE.XSMALL]}
         onChange={valueControlledSet}
         step={step}
         upper={upper}

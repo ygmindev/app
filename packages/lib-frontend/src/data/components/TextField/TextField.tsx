@@ -237,7 +237,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
 
         <Wrapper
           animation={containerAnimation}
-          elementState={elementStateF}
+          elementState={placeholder ? ELEMENT_STATE.ACTIVE : elementStateF}
           isCenter
           left={0}
           pHorizontal

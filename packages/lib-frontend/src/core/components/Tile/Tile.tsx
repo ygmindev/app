@@ -8,7 +8,8 @@ export const Tile: LFCModel<TilePropsModel> = ({ children, ...props }) => (
   <LineItem
     {...props}
     border
-    p>
+    p
+    round>
     {children ? (
       <Wrapper s>
         <Divider />
