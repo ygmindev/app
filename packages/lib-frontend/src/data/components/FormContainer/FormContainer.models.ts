@@ -45,7 +45,7 @@ export type FormFieldModel<
   element: ReactElement<FieldPropsModel<TType[TKey]>>;
   toFilter?: (
     value: TType[TKey] | undefined,
-    field: TKey,
+    key: TKey,
   ) => Array<FilterModel<TType>> | FilterConditionModel;
 };
 

@@ -1,11 +1,11 @@
-import { type PartialModel, type StringKeyModel } from '#lib-shared/core/core.models';
+import { type PartialModel } from '#lib-shared/core/core.models';
 import { type FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
 
 export type FilterModel<TType extends unknown> = {
   booleanValue?: boolean;
   condition?: FilterConditionModel;
   dateValue?: Date;
-  field: StringKeyModel<TType>;
+  field: string;
   numberValue?: number;
   resourceValue?: PartialModel<TType>;
   stringValue?: string;

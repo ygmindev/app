@@ -24,9 +24,9 @@ export const FundingPage: LFCModel<FundingPagePropsModel> = ({ ...props }) => {
   const { push } = useRouter();
   const { getConnection } = useFundingResource();
 
-  const handleFilter = async (filters: Array<FilterModel<FundingModel>>) => {
-    console.warn(filters);
-    // console.warn(await getConnection({ filter: data, pagination: { first: 10 } }));
+  const handleFilter = async (filter: Array<FilterModel<FundingModel>>): Promise<void> => {
+    console.warn(filter);
+    console.warn(await getConnection({ filter, pagination: { first: 10 } }));
   };
 
   return (

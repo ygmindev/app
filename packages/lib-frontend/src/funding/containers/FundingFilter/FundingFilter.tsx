@@ -24,7 +24,9 @@ export const FundingFilter: LFCModel<FundingFilterPropsModel> = ({ ...props }) =
                 />
               ),
               id: 'maturityDays',
-              toFilter: rangeToFilter,
+              // toFilter: (v?: NumberRangeModel, k?: StringKeyModel<FundingModel>) =>
+              //   rangeToFilter<FundingModel, StringKeyModel<FundingModel>>(v, k),
+              toFilter: rangeToFilter(NUMBER_RANGE_TYPE.RANGE),
             },
           ],
           id: 'maturityDays',
@@ -41,7 +43,7 @@ export const FundingFilter: LFCModel<FundingFilterPropsModel> = ({ ...props }) =
                 />
               ),
               id: 'amount',
-              toFilter: rangeToFilter,
+              toFilter: rangeToFilter(NUMBER_RANGE_TYPE.RANGE),
             },
           ],
           id: 'amount',
