@@ -5,6 +5,5 @@ import { type ChildrenPropsModel, type SizablePropsModel } from '#lib-frontend/c
 export type MainLayoutPropsModel = ChildrenPropsModel &
   SizablePropsModel & {
     bottomElement?: ReactElement;
-    isFullHeight?: boolean;
     topElement?: ReactElement;
   };

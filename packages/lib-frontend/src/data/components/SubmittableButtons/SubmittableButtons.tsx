@@ -12,6 +12,7 @@ import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexSt
 export const SubmittableButtons = <TType,>({
   cancelLabel,
   elementState,
+  isFullWidth,
   onCancel,
   onSubmit,
   submitLabel,
@@ -29,6 +30,7 @@ export const SubmittableButtons = <TType,>({
       {onCancel && (
         <Button
           elementState={elementState}
+          flex={isFullWidth}
           icon="chevronLeft"
           onPress={onCancel}
           type={BUTTON_TYPE.INVISIBLE}>
@@ -39,6 +41,7 @@ export const SubmittableButtons = <TType,>({
       {onSubmit && (
         <Button
           elementState={elementState}
+          flex={isFullWidth}
           icon="chevronRight"
           onPress={onSubmit}
           testID={props.testID ? `${props.testID}-submit` : undefined}>

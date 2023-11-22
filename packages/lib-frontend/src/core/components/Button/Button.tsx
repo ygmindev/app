@@ -176,6 +176,7 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
       borderRole={THEME_ROLE.MAIN}
       elementState={valueControlled}
       height={heightF}
+      isOverflowHidden
       justify={FLEX_JUSTIFY.CENTER}
       onElementStateChange={valueControlledSet}
       position={SHAPE_POSITION.RELATIVE}
@@ -184,6 +185,7 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
       <>
         <Appearable
           isActive={!isLoading}
+          isHidden={isLoading}
           isScalable={false}>
           {childrenF}
         </Appearable>

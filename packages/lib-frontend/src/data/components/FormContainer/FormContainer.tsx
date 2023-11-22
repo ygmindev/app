@@ -74,6 +74,8 @@ const FormContainerF = forwardRef(
       initialValues,
       isBlocking,
       isButton = true,
+      isFullHeight,
+      isFullWidth = true,
       isValidateChanged,
       onCancel,
       onComplete,
@@ -195,12 +197,15 @@ const FormContainerF = forwardRef(
             isButton ? (
               <SubmittableButtons
                 cancelLabel={cancelLabel}
+                elementState={elementStateF}
+                isFullWidth={isFullWidth}
                 onCancel={onCancel}
                 onSubmit={async () => handleSubmitF()}
                 submitLabel={submitLabel}
               />
             ) : undefined
           }
+          isFullHeight={isFullHeight}
           s>
           {topElement && topElement({ elementState: elementStateF })}
 

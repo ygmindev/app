@@ -10,7 +10,10 @@ import { FUNDING } from '#lib-frontend/funding/funding.constants';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR } from '#lib-frontend/style/style.constants';
-import { CREDIT_RATING_WATCH } from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
+import {
+  CREDIT_RATING_RESOURCE_NAME,
+  CREDIT_RATING_WATCH,
+} from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
 
 export const FundingDetail: LFCModel<FundingDetailPropsModel> = ({ funding, ...props }) => {
   const { t } = useTranslation([FUNDING]);
@@ -45,28 +48,30 @@ export const FundingDetail: LFCModel<FundingDetailPropsModel> = ({ funding, ...p
             <Wrapper
               isRow
               s>
-              {funding.CreditRating &&
+              {funding[CREDIT_RATING_RESOURCE_NAME] &&
                 withDivider(
-                  funding.CreditRating.map(({ _id, longTermRating, longTermWatch }) => ({
-                    element: (
-                      <Wrapper isRowAlign>
-                        <Text>{longTermRating}</Text>
+                  funding[CREDIT_RATING_RESOURCE_NAME].map(
+                    ({ _id, longTermRating, longTermWatch }) => ({
+                      element: (
+                        <Wrapper isRowAlign>
+                          <Text>{longTermRating}</Text>
 
-                        {longTermWatch && (
-                          <Chip
-                            color={
-                              longTermWatch === CREDIT_RATING_WATCH.POSITIVE
-                                ? THEME_COLOR.SUCCESS
-                                : THEME_COLOR.WARNING
-                            }
-                            icon="eye">
-                            {longTermWatch}
-                          </Chip>
-                        )}
-                      </Wrapper>
-                    ),
-                    id: _id ?? '',
-                  })),
+                          {longTermWatch && (
+                            <Chip
+                              color={
+                                longTermWatch === CREDIT_RATING_WATCH.POSITIVE
+                                  ? THEME_COLOR.SUCCESS
+                                  : THEME_COLOR.WARNING
+                              }
+                              icon="eye">
+                              {longTermWatch}
+                            </Chip>
+                          )}
+                        </Wrapper>
+                      ),
+                      id: _id ?? '',
+                    }),
+                  ),
                   { isVertical: true },
                 )}
             </Wrapper>

@@ -1,7 +1,6 @@
 import { Divider } from '#lib-frontend/core/components/Divider/Divider';
 import { LineItem } from '#lib-frontend/core/components/LineItem/LineItem';
 import { type TilePropsModel } from '#lib-frontend/core/components/Tile/Tile.models';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 
 export const Tile: LFCModel<TilePropsModel> = ({ children, ...props }) => (
@@ -11,11 +10,11 @@ export const Tile: LFCModel<TilePropsModel> = ({ children, ...props }) => (
     p
     round>
     {children ? (
-      <Wrapper s>
-        <Divider />
+      <>
+        <Divider key="divider" />
 
         {children}
-      </Wrapper>
+      </>
     ) : null}
   </LineItem>
 );

@@ -1,4 +1,4 @@
-import { AMOUNT_UNIT, RELATIVE_DATE_UNIT } from '#lib-frontend/data/data.constants';
+import { RELATIVE_DATE_UNIT } from '#lib-frontend/data/data.constants';
 import { CREDIT_RATING_RESOURCE_NAME } from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
 import { type FundingModel } from '#lib-shared/funding/resources/Funding/Funding.models';
 import { FUNDING_QUOTE_RESOURCE_NAME } from '#lib-shared/funding/resources/FundingQuote/FundingQuote.constants';

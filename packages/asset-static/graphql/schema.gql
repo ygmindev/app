@@ -61,7 +61,9 @@ input AccessGetConnectionFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [AccessInput]
   resourceValue: AccessInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -81,7 +83,9 @@ input AccessGetFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [AccessInput]
   resourceValue: AccessInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -96,7 +100,9 @@ input AccessGetManyFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [AccessInput]
   resourceValue: AccessInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -115,7 +121,9 @@ input AccessGetManyProtectedGetManyFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [AccessInput]
   resourceValue: AccessInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -146,7 +154,9 @@ input AccessRemoveFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [AccessInput]
   resourceValue: AccessInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -165,7 +175,9 @@ input AccessUpdateFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [AccessInput]
   resourceValue: AccessInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -255,7 +267,9 @@ input CreditRatingGetConnectionFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [CreditRatingInput]
   resourceValue: CreditRatingInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -280,7 +294,9 @@ input CreditRatingGetFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [CreditRatingInput]
   resourceValue: CreditRatingInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -295,7 +311,9 @@ input CreditRatingGetManyFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [CreditRatingInput]
   resourceValue: CreditRatingInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -336,7 +354,9 @@ input CreditRatingRemoveFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [CreditRatingInput]
   resourceValue: CreditRatingInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -360,7 +380,9 @@ input CreditRatingUpdateFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [CreditRatingInput]
   resourceValue: CreditRatingInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -465,7 +487,9 @@ input FundingGetConnectionFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [FundingInput]
   resourceValue: FundingInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -485,7 +509,9 @@ input FundingGetFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [FundingInput]
   resourceValue: FundingInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -500,7 +526,9 @@ input FundingGetManyFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [FundingInput]
   resourceValue: FundingInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -519,7 +547,9 @@ input FundingGetManyProtectedGetManyFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [FundingInput]
   resourceValue: FundingInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -614,7 +644,9 @@ input FundingQuoteGetConnectionFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [FundingQuoteInput]
   resourceValue: FundingQuoteInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -639,7 +671,9 @@ input FundingQuoteGetFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [FundingQuoteInput]
   resourceValue: FundingQuoteInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -654,7 +688,9 @@ input FundingQuoteGetManyFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [FundingQuoteInput]
   resourceValue: FundingQuoteInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -694,7 +730,9 @@ input FundingQuoteRemoveFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [FundingQuoteInput]
   resourceValue: FundingQuoteInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -718,7 +756,9 @@ input FundingQuoteUpdateFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [FundingQuoteInput]
   resourceValue: FundingQuoteInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -750,7 +790,9 @@ input FundingRemoveFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [FundingInput]
   resourceValue: FundingInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -769,7 +811,9 @@ input FundingUpdateFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [FundingInput]
   resourceValue: FundingInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -855,7 +899,9 @@ input GroupGetConnectionFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [GroupInput]
   resourceValue: GroupInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -875,7 +921,9 @@ input GroupGetFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [GroupInput]
   resourceValue: GroupInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -890,7 +938,9 @@ input GroupGetManyFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [GroupInput]
   resourceValue: GroupInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -909,7 +959,9 @@ input GroupGetManyProtectedGetManyFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [GroupInput]
   resourceValue: GroupInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -940,7 +992,9 @@ input GroupRemoveFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [GroupInput]
   resourceValue: GroupInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -959,7 +1013,9 @@ input GroupUpdateFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [GroupInput]
   resourceValue: GroupInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -1086,7 +1142,9 @@ input OtpGetConnectionFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [OtpInput]
   resourceValue: OtpInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -1106,7 +1164,9 @@ input OtpGetFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [OtpInput]
   resourceValue: OtpInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -1121,7 +1181,9 @@ input OtpGetManyFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [OtpInput]
   resourceValue: OtpInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -1153,7 +1215,9 @@ input OtpRemoveFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [OtpInput]
   resourceValue: OtpInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -1172,7 +1236,9 @@ input OtpUpdateFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [OtpInput]
   resourceValue: OtpInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -1296,7 +1362,9 @@ input RatingAgencyGetConnectionFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [RatingAgencyInput]
   resourceValue: RatingAgencyInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -1316,7 +1384,9 @@ input RatingAgencyGetFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [RatingAgencyInput]
   resourceValue: RatingAgencyInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -1331,7 +1401,9 @@ input RatingAgencyGetManyFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [RatingAgencyInput]
   resourceValue: RatingAgencyInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -1361,7 +1433,9 @@ input RatingAgencyRemoveFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [RatingAgencyInput]
   resourceValue: RatingAgencyInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -1380,7 +1454,9 @@ input RatingAgencyUpdateFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [RatingAgencyInput]
   resourceValue: RatingAgencyInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -1431,7 +1507,9 @@ input SignInUserUpdateFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [UserInput]
   resourceValue: UserInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -1484,7 +1562,9 @@ input SnapshotGetFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [SnapshotInput]
   resourceValue: SnapshotInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -1499,7 +1579,9 @@ input SnapshotGetManyFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [SnapshotInput]
   resourceValue: SnapshotInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -1591,7 +1673,9 @@ input UserGetConnectionFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [UserInput]
   resourceValue: UserInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -1611,7 +1695,9 @@ input UserGetFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [UserInput]
   resourceValue: UserInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -1626,7 +1712,9 @@ input UserGetManyFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [UserInput]
   resourceValue: UserInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -1661,7 +1749,9 @@ input UserRemoveFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [UserInput]
   resourceValue: UserInput
+  stringArrayValue: [String]
   stringValue: String
 }
 
@@ -1680,7 +1770,9 @@ input UserUpdateFilterInput {
   dateValue: DateTime
   field: String
   numberValue: Float
+  resourceArrayValue: [UserInput]
   resourceValue: UserInput
+  stringArrayValue: [String]
   stringValue: String
 }
 

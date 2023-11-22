@@ -74,7 +74,8 @@ export const StepForm = <TType, TResult = void>({
       <Wrapper
         {...wrapperProps}
         flex
-        isFullWidth>
+        isFullWidth
+        s>
         <Wrapper
           isRowAlign
           p>

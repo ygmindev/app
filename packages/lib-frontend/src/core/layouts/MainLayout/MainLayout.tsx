@@ -1,7 +1,7 @@
 import isNumber from 'lodash/isNumber';
 
+import { Divider } from '#lib-frontend/core/components/Divider/Divider';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { DIRECTION } from '#lib-frontend/core/core.constants';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useIsMobile } from '#lib-frontend/core/hooks/useIsMobile/useIsMobile';
 import { type MainLayoutPropsModel } from '#lib-frontend/core/layouts/MainLayout/MainLayout.models';
@@ -27,20 +27,14 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
       {...wrapperProps}
       flex
       s>
-      {topElement && (
-        <Wrapper
-          border={DIRECTION.BOTTOM}
-          p>
-          {topElement}
-        </Wrapper>
-      )}
+      {topElement && <Wrapper p>{topElement}</Wrapper>}
+
+      {isFullHeight && <Divider />}
 
       <Wrapper
-        flex
+        flex={isFullHeight}
         isFullWidth={isFullWidthF}
-        isVerticalScrollable
-        p
-        s>
+        isVerticalScrollable={isFullHeight}>
         <Wrapper
           flex={isFullHeight}
           m="auto"
@@ -50,11 +44,12 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
         </Wrapper>
       </Wrapper>
 
+      {isFullHeight && <Divider />}
+
       {bottomElement && (
         <Wrapper
-          border={DIRECTION.TOP}
-          pHorizontal
-          pVertical={THEME_SIZE.SMALL}>
+          mHorizontal="auto"
+          width={widthF}>
           {bottomElement}
         </Wrapper>
       )}

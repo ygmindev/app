@@ -4,9 +4,10 @@ import { type AccordionPropsModel } from '#lib-frontend/animation/components/Acc
 import { Rotatable } from '#lib-frontend/animation/components/Rotatable/Rotatable';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
+import { Divider } from '#lib-frontend/core/components/Divider/Divider';
 import { LineItem } from '#lib-frontend/core/components/LineItem/LineItem';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { DIRECTION, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import {
   type ElementStateModel,
   type LFCModel,
@@ -42,11 +43,8 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
     );
 
   return (
-    <Wrapper
-      {...wrapperProps}
-      s>
+    <Wrapper {...wrapperProps}>
       <LineItem
-        border={DIRECTION.BOTTOM}
         color={color}
         elementState={elementState}
         icon={icon}
@@ -80,7 +78,11 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
         }
         elementState={valueControlled}
         isOverflowHidden>
-        <Wrapper onMeasure={measureSet}>{children}</Wrapper>
+        <Wrapper onMeasure={measureSet}>
+          <Divider mHorizontal />
+
+          {children}
+        </Wrapper>
       </Wrapper>
     </Wrapper>
   );
