@@ -13,12 +13,22 @@ export const collapseFilter = <TType extends unknown>(
       dateValue,
       field,
       numberValue,
+      resourceArrayValue,
       resourceValue,
+      stringArrayValue,
       stringValue,
       value,
     }) => ({
       condition,
       field,
-      value: value ?? booleanValue ?? dateValue ?? numberValue ?? resourceValue ?? stringValue,
+      value:
+        value ??
+        booleanValue ??
+        dateValue ??
+        numberValue ??
+        resourceValue ??
+        resourceArrayValue ??
+        stringValue ??
+        stringArrayValue,
     }),
   );

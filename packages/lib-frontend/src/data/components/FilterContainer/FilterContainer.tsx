@@ -11,6 +11,7 @@ import {
   type FormRowModel,
   type FormTileModel,
 } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
+import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type StringKeyModel } from '#lib-shared/core/core.models';
 import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
@@ -20,6 +21,8 @@ export const FilterContainer = <TType, TResult = void>({
 }: LFCPropsModel<FilterContainerPropsModel<TType, TResult>>): ReactElement<
   FilterContainerPropsModel<TType, TResult>
 > => {
+  const { t } = useTranslation();
+
   const getFilter = (field: FormFieldsModel<TType>, data: TType): Array<FilterModel<TType>> => {
     const fieldF = field as FormTileModel<TType> | FormRowModel<TType>;
     if (fieldF.fields) {
@@ -59,6 +62,7 @@ export const FilterContainer = <TType, TResult = void>({
     <FormContainer
       {...props}
       onSubmit={handleSubmit}
+      submitLabel={t('core:apply')}
     />
   );
 };

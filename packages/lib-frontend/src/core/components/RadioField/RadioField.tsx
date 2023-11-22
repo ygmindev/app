@@ -56,9 +56,9 @@ export const RadioField = <TType extends string | Array<string> = string>({
                 isRowAlign
                 onPress={() => {
                   if (isMultiple) {
-                    const valueF = isActive
+                    const valueF = isValue
                       ? (valueControlled as Array<string>)?.filter((v) => v !== id)
-                      : [...(valueControlled ?? []), id];
+                      : [...(valueControlled || []), id];
                     (valueF ?? []).sort();
                     return valueControlledSet(valueF as TType);
                   }

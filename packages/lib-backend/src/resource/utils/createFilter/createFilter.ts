@@ -4,7 +4,11 @@ import {
 } from '#lib-backend/resource/utils/createFilter/createFilter.models';
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
-import { type PartialModel, type PrimitiveModel } from '#lib-shared/core/core.models';
+import {
+  type PartialModel,
+  type PrimitiveModel,
+  type StringKeyModel,
+} from '#lib-shared/core/core.models';
 import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 import {
   type FilterConditionModel,
@@ -27,13 +31,19 @@ export const createFilter = <TType extends unknown>({
     dateValue?: Date;
 
     @withField({ type: DATA_TYPE.STRING })
-    field!: keyof TType;
+    field!: StringKeyModel<TType>;
+
+    @withField({ Resource: () => Resource, isArray: true, type: PROPERTY_TYPE.RESOURCE })
+    resourceArrayValue?: Array<PartialModel<TType>>;
 
     @withField({ Resource: () => Resource, type: PROPERTY_TYPE.RESOURCE })
     resourceValue?: PartialModel<TType>;
 
     @withField({ type: DATA_TYPE.NUMBER })
     numberValue?: number;
+
+    @withField({ isArray: true, type: DATA_TYPE.STRING })
+    stringArrayValue?: Array<string>;
 
     @withField({ type: DATA_TYPE.STRING })
     stringValue?: string;

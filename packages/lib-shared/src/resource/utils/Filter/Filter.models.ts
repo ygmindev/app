@@ -7,7 +7,9 @@ export type FilterModel<TType extends unknown> = {
   dateValue?: Date;
   field: string;
   numberValue?: number;
+  resourceArrayValue?: Array<PartialModel<TType>>;
   resourceValue?: PartialModel<TType>;
+  stringArrayValue?: Array<string>;
   stringValue?: string;
   value?: unknown;
 };

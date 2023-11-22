@@ -1,3 +1,5 @@
+import { isArray } from 'lodash';
+
 import { type PartialModel } from '#lib-shared/core/core.models';
 import { trueTypeOf } from '#lib-shared/core/utils/trueTypeOf/trueTypeOf';
 import {
@@ -11,6 +13,14 @@ export const expandFilter = <TType extends unknown>(
 ): ExpandFilterModel<TType> =>
   params.map(({ condition, field, value }) => {
     const valueF = ((): Omit<FilterModel<TType>, 'condition' | 'field'> => {
+      if (isArray(value)) {
+        switch (trueTypeOf(value[0])) {
+          case 'String':
+            return { stringArrayValue: value as Array<string> };
+          default:
+            return { resourceArrayValue: value as Array<PartialModel<TType>> };
+        }
+      }
       switch (trueTypeOf(value)) {
         case 'Boolean':
           return { booleanValue: value as boolean };
