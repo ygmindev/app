@@ -3,6 +3,9 @@ import {
   type _UseQueryParamsModel,
 } from '#lib-frontend/data/hooks/useQuery/_useQuery.models';
 
-export type UseQueryParamsModel<TType> = _UseQueryParamsModel<TType>;
+export type UseQueryParamsModel<TParams = undefined, TResult = void> = _UseQueryParamsModel<
+  TParams,
+  TResult
+>;
 
-export type UseQueryModel<TType> = _UseQueryModel<TType>;
+export type UseQueryModel<TParams = undefined, TResult = void> = _UseQueryModel<TParams, TResult>;

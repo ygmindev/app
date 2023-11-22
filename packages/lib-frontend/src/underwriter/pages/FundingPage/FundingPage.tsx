@@ -1,8 +1,12 @@
+import { useRef } from 'react';
+
+import { type ModalRefModel } from '#lib-frontend/core/components/Modal/Modal.models';
 import { ModalButton } from '#lib-frontend/core/components/ModalButton/ModalButton';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBoundary';
+import { type QueryComponentRefModel } from '#lib-frontend/data/components/DataBoundary/DataBoundary.models';
 import { FundingTile } from '#lib-frontend/funding/components/FundingTile/FundingTile';
 import { FundingFilter } from '#lib-frontend/funding/containers/FundingFilter/FundingFilter';
 import { FUNDING } from '#lib-frontend/funding/funding.constants';
@@ -16,6 +20,7 @@ import { type FundingDetailPageParamsModel } from '#lib-frontend/underwriter/pag
 import { type FundingPagePropsModel } from '#lib-frontend/underwriter/pages/FundingPage/FundingPage.models';
 import { FUNDING_FIXTURES } from '#lib-shared/funding/resources/Funding/Funding.fixtures';
 import { type FundingModel } from '#lib-shared/funding/resources/Funding/Funding.models';
+import { type ConnectionModel } from '#lib-shared/resource/utils/Connection/Connection.models';
 import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
 export const FundingPage: LFCModel<FundingPagePropsModel> = ({ ...props }) => {
@@ -24,10 +29,25 @@ export const FundingPage: LFCModel<FundingPagePropsModel> = ({ ...props }) => {
   const { push } = useRouter();
   const { getConnection } = useFundingResource();
 
+  const modalRef = useRef<ModalRefModel>(null);
+  const dataRef =
+    useRef<QueryComponentRefModel<Array<FilterModel<FundingModel>>, ConnectionModel<FundingModel>>>(
+      null,
+    );
+
   const handleFilter = async (filter: Array<FilterModel<FundingModel>>): Promise<void> => {
-    console.warn(filter);
-    console.warn(await getConnection({ filter, pagination: { first: 10 } }));
+    modalRef.current?.toggle(false);
+    dataRef.current?.paramsSet(filter);
   };
+
+  const handleQuery = async (
+    params?: Array<FilterModel<FundingModel>>,
+  ): Promise<ConnectionModel<FundingModel> | undefined> =>
+    // TODO: pagination to config
+    {
+      const { result } = await getConnection({ filter: params ?? [], pagination: { first: 10 } });
+      return result;
+    };
 
   return (
     <MainLayout
@@ -45,6 +65,7 @@ export const FundingPage: LFCModel<FundingPagePropsModel> = ({ ...props }) => {
             />
           )}
           icon="filter"
+          ref={modalRef}
           size={THEME_SIZE.SMALL}
           title={t('core:filter')}>
           {t('core:filter_plural')}
@@ -53,21 +74,20 @@ export const FundingPage: LFCModel<FundingPagePropsModel> = ({ ...props }) => {
 
       <DataBoundary
         fallbackData={{
-          result: {
-            edges: FUNDING_FIXTURES.map((node) => ({ cursor: '', node })),
-            pageInfo: {
-              endCursor: '',
-              hasNextPage: false,
-              hasPreviousPage: false,
-              startCursor: '',
-            },
+          edges: FUNDING_FIXTURES.map((node) => ({ cursor: '', node })),
+          pageInfo: {
+            endCursor: '',
+            hasNextPage: false,
+            hasPreviousPage: false,
+            startCursor: '',
           },
         }}
         id="funding"
-        query={async () => getConnection({ filter: [], pagination: { first: 10 } })}>
+        query={handleQuery}
+        ref={dataRef}>
         {({ data }) => (
           <Wrapper s>
-            {data?.result?.edges.map(({ node }) => (
+            {data?.edges.map(({ node }) => (
               <FundingTile
                 funding={node}
                 key={node._id}

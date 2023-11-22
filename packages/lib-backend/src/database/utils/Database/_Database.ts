@@ -34,7 +34,7 @@ export const getFilter = <TType extends unknown>(
         const conditionF = v.condition ?? FILTER_CONDITION.EQUAL;
         return {
           ...result,
-          [prefix ? `${prefix}.${v.field as string}` : v.field]: (
+          [prefix ? `${prefix}.${v.field}` : v.field]: (
             [
               FILTER_CONDITION.CONTAINS,
               FILTER_CONDITION.NOT_CONTAINS,
@@ -43,7 +43,7 @@ export const getFilter = <TType extends unknown>(
             ? { $regex: new RegExp(v.value as string, 'i') }
             : {
                 [conditionF]:
-                  last((v.field as string).split('.'))?.startsWith('_') && isString(v.value)
+                  last(v.field.split('.'))?.startsWith('_') && isString(v.value)
                     ? new ObjectId(v.value)
                     : v.value,
               },
@@ -165,8 +165,6 @@ export class _Database implements _DatabaseModel {
         const em = this._getEntityManager();
         const collection = em.getCollection(name);
         const filterF = cleanDocument(getFilter<TType>(filter));
-        console.warn('@@@ filter');
-        console.warn(filterF);
         const result = await (options && options.aggregate
           ? collection
               .aggregate([

@@ -27,9 +27,17 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
       {...wrapperProps}
       flex
       s>
-      {topElement && <Wrapper p>{topElement}</Wrapper>}
+      {topElement && (
+        <>
+          <Wrapper
+            key="element-top"
+            p>
+            {topElement}
+          </Wrapper>
 
-      {isFullHeight && <Divider />}
+          {isFullHeight && <Divider key="divider-top" />}
+        </>
+      )}
 
       <Wrapper
         flex={isFullHeight}
@@ -44,14 +52,17 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
         </Wrapper>
       </Wrapper>
 
-      {isFullHeight && <Divider />}
-
       {bottomElement && (
-        <Wrapper
-          mHorizontal="auto"
-          width={widthF}>
-          {bottomElement}
-        </Wrapper>
+        <>
+          {isFullHeight && <Divider key="divider-bottom" />}
+
+          <Wrapper
+            key="element-bottom"
+            mHorizontal="auto"
+            width={widthF}>
+            {bottomElement}
+          </Wrapper>
+        </>
       )}
     </Wrapper>
   );

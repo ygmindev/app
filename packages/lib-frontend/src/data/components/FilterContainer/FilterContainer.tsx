@@ -61,8 +61,10 @@ export const FilterContainer = <TType, TResult = void>({
   return (
     <FormContainer
       {...props}
+      isFullHeight
       isFullWidth={false}
       onSubmit={handleSubmit}
+      p
       submitLabel={t('core:apply')}
     />
   );
