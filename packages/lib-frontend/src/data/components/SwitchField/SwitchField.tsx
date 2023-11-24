@@ -113,7 +113,7 @@ export const SwitchField: LFCModel<SwitchFieldPropsModel> = ({
           {iconInactive && (
             <Appearable
               isAbsoluteFill
-              isActive={valueControlled}>
+              isActive={!valueControlled}>
               <Icon
                 color={THEME_COLOR_MORE.SURFACE}
                 colorRole={THEME_ROLE.MUTED}

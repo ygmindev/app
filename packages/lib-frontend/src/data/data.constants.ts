@@ -4,6 +4,8 @@ export const FORM = 'form';
 
 export const DATA = 'data';
 
+export const EXACT = 'exact';
+
 export enum RATE_UNIT {
   SPREAD = 'spread',
   YIELD = 'yield',
@@ -11,6 +13,7 @@ export enum RATE_UNIT {
 
 export enum AMOUNT_UNIT {
   BILLION = 'billion',
+  EXACT = 'exact',
   MILLION = 'million',
   THOUSAND = 'thousand',
 }

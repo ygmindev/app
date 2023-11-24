@@ -7,9 +7,10 @@ import {
 } from '#lib-frontend/data/data.models';
 
 export const AMOUNT_UNIT_OPTIONS = [
-  { id: AMOUNT_UNIT.THOUSAND, label: ({ t }) => t('core:thousand') },
-  { id: AMOUNT_UNIT.MILLION, label: ({ t }) => t('core:million') },
-  { id: AMOUNT_UNIT.BILLION, label: ({ t }) => t('core:billion') },
+  { id: AMOUNT_UNIT.EXACT, label: ({ t }) => t('data:exact') },
+  { id: AMOUNT_UNIT.THOUSAND, label: ({ t }) => t('data:thousand') },
+  { id: AMOUNT_UNIT.MILLION, label: ({ t }) => t('data:million') },
+  { id: AMOUNT_UNIT.BILLION, label: ({ t }) => t('data:billion') },
 ] satisfies Array<TranslatableOptionModel<AmountUnitModel>>;
 
 export const RATE_UNIT_OPTIONS = [
