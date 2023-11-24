@@ -29,7 +29,9 @@ export const ConnectionBoundary = forwardRef(
         {...props}
         query={handleQuery}
         ref={ref}>
-        {({ data }) => (data?.result?.edges ? children && children({ data }) : null)}
+        {({ data }) =>
+          (data?.result?.edges?.length ?? 0) > 0 ? children && children({ data }) : null
+        }
       </DataBoundary>
     );
   },

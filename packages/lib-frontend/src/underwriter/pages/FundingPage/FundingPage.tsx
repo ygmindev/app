@@ -74,26 +74,24 @@ export const FundingPage: LFCModel<FundingPagePropsModel> = ({ ...props }) => {
         id="funding"
         query={async (input) => getConnection(input)}
         ref={dataRef}>
-        {({ data }) =>
-          (data?.result?.edges?.length ?? 0) > 0 && (
-            <Wrapper s>
-              {data?.result?.edges.map(({ node }) => (
-                <FundingTile
-                  funding={node}
-                  key={node._id}
-                  onPress={() =>
-                    node._id &&
-                    push<FundingDetailPageParamsModel>({
-                      params: { funding: node },
-                      pathname: node._id,
-                      root: true,
-                    })
-                  }
-                />
-              ))}
-            </Wrapper>
-          )
-        }
+        {({ data }) => (
+          <Wrapper s>
+            {data?.result?.edges.map(({ node }) => (
+              <FundingTile
+                funding={node}
+                key={node._id}
+                onPress={() =>
+                  node._id &&
+                  push<FundingDetailPageParamsModel>({
+                    params: { funding: node },
+                    pathname: node._id,
+                    root: true,
+                  })
+                }
+              />
+            ))}
+          </Wrapper>
+        )}
       </ConnectionBoundary>
     </MainLayout>
   );
