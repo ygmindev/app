@@ -1,3 +1,4 @@
+import isNil from 'lodash/isNil';
 import isString from 'lodash/isString';
 import reduce from 'lodash/reduce';
 import { type ReactElement } from 'react';
@@ -13,6 +14,7 @@ import {
 } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type StringKeyModel } from '#lib-shared/core/core.models';
+import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
 export const FilterContainer = <TType, TResult = void>({
@@ -35,6 +37,9 @@ export const FilterContainer = <TType, TResult = void>({
     const { toFilter } = field as FormFieldModel<TType>;
     const id = field.id as StringKeyModel<TType>;
     const value = data[id];
+    if (isNil(value) || isEmpty(value)) {
+      return [];
+    }
     const toFilterF = toFilter && toFilter(value, id);
     return toFilterF
       ? isString(toFilterF)

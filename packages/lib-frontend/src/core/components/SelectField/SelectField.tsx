@@ -1,4 +1,4 @@
-import { type ReactElement, useMemo } from 'react';
+import { type ReactElement, useMemo, useState } from 'react';
 
 import { ANIMATION_STATES_APPEAR_SCALABLE } from '#lib-frontend/animation/animation.constants';
 import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
@@ -21,6 +21,7 @@ import {
   THEME_SIZE_MORE,
 } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 import { sort } from '#lib-shared/core/utils/sort/sort';
 
@@ -38,25 +39,33 @@ export const SelectField = <TType extends string | Array<string> = string>({
   const theme = useTheme();
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
+  const ids = useMemo(() => sort(options.map(({ id }) => id)), options);
 
   const { valueControlled, valueControlledSet } = useValueControlled({
     defaultValue,
     onChange,
     value,
   });
+  const [values, valuesSet] = useState<Array<string> | undefined>(
+    isMultiple
+      ? isEmpty(valueControlled) || isEqual(valueControlled, [])
+        ? ids
+        : (valueControlled as Array<string>) ?? []
+      : undefined,
+  );
 
-  const handleChange = (id: string) => () => {
-    const isValue = isMultiple ? valueControlled?.includes(id) : valueControlled === id;
-    if (isMultiple) {
-      const valueF = isValue
-        ? (valueControlled as Array<string>)?.filter((v) => v !== id)
-        : [...(valueControlled || []), id];
-      return valueControlledSet(sort(valueF) as TType);
-    }
-    return valueControlledSet(id as TType);
+  const handleChange = (id: string) => () =>
+    isMultiple
+      ? handleChangeMultiple(
+          values?.includes(id) ? values?.filter((v) => v !== id) : [...(values || []), id],
+        )
+      : valueControlledSet(id as TType);
+
+  const handleChangeMultiple = (v: Array<string>): void => {
+    const idsF = sort(v);
+    valuesSet(idsF);
+    valueControlledSet((isEqual(idsF, ids) ? [] : idsF) as TType);
   };
-
-  const ids = useMemo(() => sort(options.map(({ id }) => id)), options);
 
   return (
     <Wrapper
@@ -66,8 +75,8 @@ export const SelectField = <TType extends string | Array<string> = string>({
       {isMultiple && (
         <SwitchField
           label={t('core:selectAll')}
-          onChange={(v) => valueControlledSet((v ? ids : []) as TType)}
-          value={isEqual(valueControlled, ids)}
+          onChange={(v) => handleChangeMultiple(v ? ids : [])}
+          value={isEqual(values, ids)}
         />
       )}
 
@@ -75,7 +84,7 @@ export const SelectField = <TType extends string | Array<string> = string>({
         isRowAlign={isHorizontal}
         s={THEME_SIZE.SMALL}>
         {options.map(({ icon, id, label }) => {
-          const isValue = isMultiple ? valueControlled?.includes(id) : valueControlled === id;
+          const isValue = isMultiple ? values?.includes(id) : valueControlled === id;
           return (
             <Activatable key={id}>
               {(isActive) => (
