@@ -24,7 +24,6 @@ export const ConnectionBoundary = forwardRef(
       params?: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot> | null> =>
       query ? query(params) : null;
-
     return (
       <DataBoundary
         {...props}
