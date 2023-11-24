@@ -1,4 +1,4 @@
-import { RadioField } from '#lib-frontend/core/components/RadioField/RadioField';
+import { SelectField } from '#lib-frontend/core/components/SelectField/SelectField';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { FilterContainer } from '#lib-frontend/data/components/FilterContainer/FilterContainer';
 import { NumberRangeField } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField';
@@ -19,7 +19,7 @@ export const FundingFilter: LFCModel<FundingFilterPropsModel> = ({ ...props }) =
           fields: [
             {
               element: (
-                <RadioField<Array<string>>
+                <SelectField<Array<string>>
                   isHorizontal
                   isMultiple
                   // TODO: From API

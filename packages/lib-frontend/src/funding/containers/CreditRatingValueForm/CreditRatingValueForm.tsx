@@ -2,6 +2,7 @@ import { type LFCModel } from '#lib-frontend/core/core.models';
 import { ItemStepForm } from '#lib-frontend/data/components/ItemStepForm/ItemStepForm';
 import { type CreditRatingCategoryFormPropsModel } from '#lib-frontend/funding/containers/CreditRatingValueForm/CreditRatingValueForm.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { sort } from '#lib-shared/core/utils/sort/sort';
 import {
   CREDIT_RATING_VALUE,
   CREDIT_RATING_VALUE_RANK,
@@ -25,12 +26,12 @@ export const CreditRatingCategoryForm: LFCModel<CreditRatingCategoryFormPropsMod
       onError={onError}
       onSubmit={onSubmit}
       onSuccess={onSuccess}
-      options={Object.values(CREDIT_RATING_VALUE)
-        .sort((x, y) => CREDIT_RATING_VALUE_RANK[x] - CREDIT_RATING_VALUE_RANK[y])
-        .map((id) => ({
+      options={sort(Object.values(CREDIT_RATING_VALUE), [(v) => CREDIT_RATING_VALUE_RANK[v]]).map(
+        (id) => ({
           id,
           label: id.replace('m', '-').replace('p', '+'),
-        }))}
+        }),
+      )}
     />
   );
 };

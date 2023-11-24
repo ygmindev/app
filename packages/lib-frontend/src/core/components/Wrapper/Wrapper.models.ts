@@ -4,15 +4,15 @@ import { type ViewPropsModel } from '#lib-frontend/core/components/View/View.mod
 import { type SpacingModel } from '#lib-frontend/style/utils/styler/spacingStyler/spacingStyler.models';
 import { type ViewStylerParamsModel } from '#lib-frontend/style/utils/styler/viewStyler/viewStyler.models';
 
-export type WrapperPropsModel = {
-  isCenter?: boolean;
-  isDistribute?: boolean;
-  isHorizontalCenter?: boolean;
-  isRowAlign?: boolean;
-  isVerticalCenter?: boolean;
-  s?: SpacingModel;
-} & ViewPropsModel &
+export type WrapperPropsModel = ViewPropsModel &
   ViewStylerParamsModel &
-  AnimatablePropsModel;
+  AnimatablePropsModel & {
+    isCenter?: boolean;
+    isDistribute?: boolean;
+    isHorizontalCenter?: boolean;
+    isRowAlign?: boolean;
+    isVerticalCenter?: boolean;
+    s?: SpacingModel;
+  };
 
 export type WrapperRefModel = AnimatableViewRefModel;

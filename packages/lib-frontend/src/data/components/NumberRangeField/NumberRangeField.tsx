@@ -2,7 +2,7 @@ import { type ReactElement, useEffect, useState } from 'react';
 
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
-import { RadioField } from '#lib-frontend/core/components/RadioField/RadioField';
+import { SelectField } from '#lib-frontend/core/components/SelectField/SelectField';
 import { Slider } from '#lib-frontend/core/components/Slider/Slider';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
@@ -118,7 +118,7 @@ export const NumberRangeField = <TType extends NumberUnitModel>({
       s={THEME_SIZE.SMALL}>
       <Text>{t('core:measureIn')}</Text>
 
-      <RadioField<TType>
+      <SelectField<TType>
         isHorizontal
         onChange={(v) => handleChange({ unit: v })}
         options={unitOptionsF}

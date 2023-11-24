@@ -1,4 +1,4 @@
-import { RadioField } from '#lib-frontend/core/components/RadioField/RadioField';
+import { SelectField } from '#lib-frontend/core/components/SelectField/SelectField';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type FCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
@@ -20,7 +20,7 @@ export const BrightnessFormPage: FCModel<BrightnessFormPagePropsModel> = ({ test
       <Wrapper
         grow
         isCenter>
-        <RadioField<StyleBrightnessStateModel>
+        <SelectField<StyleBrightnessStateModel>
           isHorizontal
           onChange={(value) => actions?.style.brightnessSet(value)}
           options={[

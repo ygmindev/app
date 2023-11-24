@@ -7,6 +7,7 @@ import { basename, join } from 'path';
 import { children } from '#lib-backend/file/utils/children/children';
 import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
 import { packages } from '#lib-backend/file/utils/packages/packages';
+import { sort } from '#lib-shared/core/utils/sort/sort';
 import { _boilerplate } from '#tool-generate/utils/boilerplate/_boilerplate';
 import { BOILERPLATE_TEMPLATE_VARIABLE_PATTERN } from '#tool-generate/utils/boilerplate/boilerplate.constants';
 import {
@@ -38,7 +39,7 @@ export const boilerplate = async ({
 }: BoilerplateParamsModel): Promise<BoilerplateModel> => {
   const templateDir = fromPackages('tool-generate/templates', template);
   let templateVariables = await getTemplateVariables(templateDir);
-  templateVariables = uniq(templateVariables).sort();
+  templateVariables = sort(uniq(templateVariables));
   templateVariables = variables
     ? pullAll(templateVariables, Object.keys(variables))
     : templateVariables;

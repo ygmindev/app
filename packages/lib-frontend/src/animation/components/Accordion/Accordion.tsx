@@ -66,18 +66,15 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
       />
 
       <Wrapper
-        animation={
-          measure
-            ? {
-                states: {
-                  [ELEMENT_STATE.ACTIVE]: { height: measure?.height },
-                  [ELEMENT_STATE.INACTIVE]: { height: 0 },
-                },
-              }
-            : undefined
-        }
+        animation={{
+          states: {
+            [ELEMENT_STATE.ACTIVE]: { height: measure?.height },
+            [ELEMENT_STATE.INACTIVE]: { height: 0 },
+          },
+        }}
         elementState={valueControlled}
-        isOverflowHidden>
+        isOverflowHidden
+        testID="XXX">
         <Wrapper onMeasure={measureSet}>
           <Divider mHorizontal />
 

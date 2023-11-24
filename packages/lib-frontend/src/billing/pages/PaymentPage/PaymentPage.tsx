@@ -36,10 +36,7 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
     const { result } = await getMany({ filter: [] });
     const resultF =
       result &&
-      sort({
-        by: [(x) => currentUser?.paymentMethodPrimary !== x._id, ['created', false]],
-        value: result,
-      });
+      sort(result, [(x) => currentUser?.paymentMethodPrimary !== x._id, ['created', false]]);
     resultF && actions?.billing.paymentMethodsSet(resultF);
     return resultF;
   };
