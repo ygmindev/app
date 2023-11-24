@@ -10,6 +10,6 @@ export type PaymentMethodServiceModel = Pick<
   'getMany'
 > & {
   createToken(
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, string, undefined>,
+    input?: InputModel<RESOURCE_METHOD_TYPE.CREATE, string, undefined>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, string, UserModel>>;
 };

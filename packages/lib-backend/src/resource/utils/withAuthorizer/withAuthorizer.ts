@@ -21,7 +21,7 @@ export const withAuthorizer =
   (_target, _propertyKey, descriptor) => {
     if (authorizer) {
       type AuthorizerModel = (
-        input: InputModel<TMethod, TType, TForm>,
+        input?: InputModel<TMethod, TType, TForm>,
         context?: ContextModel,
       ) => Promise<OutputModel<TMethod, TType, TRoot>>;
       const original = descriptor.value as AuthorizerModel;

@@ -37,7 +37,7 @@ export type UseResourceMethodModel<
   TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 > = {
-  query(input: InputModel<TMethod, TType, TForm>): Promise<OutputModel<TMethod, TType, TRoot>>;
+  query(input?: InputModel<TMethod, TType, TForm>): Promise<OutputModel<TMethod, TType, TRoot>>;
 };
 
 export type UseResourceMethodHookParamsModel = RootInputModel;

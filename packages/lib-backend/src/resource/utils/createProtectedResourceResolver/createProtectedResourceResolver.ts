@@ -41,7 +41,7 @@ export const createProtectedResourceResolver = <
         method: RESOURCE_METHOD_TYPE.GET_MANY,
         name: `${params.name}${RESOURCE_METHOD_TYPE.GET_MANY}Protected`,
       })
-      input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm>,
+      input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm> = {},
       @withContext()
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>> {

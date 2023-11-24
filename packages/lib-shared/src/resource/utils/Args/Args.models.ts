@@ -26,12 +26,12 @@ type CreateOptionsModel = CommonOptionsModel & {
 };
 
 type CreateArgsModel<TType> = {
-  form: TType;
+  form?: TType;
   options?: CreateOptionsModel;
 };
 
 type CreateManyArgsModel<TType> = {
-  form: Array<TType>;
+  form?: Array<TType>;
   options?: CreateOptionsModel;
 };
 
@@ -44,7 +44,7 @@ type GetOptionsModel<TType> = ProjectOptionsModel<TType> & {
 };
 
 type GetArgsModel<TType> = {
-  filter: Array<FilterModel<TType>>;
+  filter?: Array<FilterModel<TType>>;
   options?: GetOptionsModel<TType>;
 };
 
@@ -54,30 +54,31 @@ type GetManyOptionsModel<TType> = GetOptionsModel<TType> & {
 };
 
 type GetManyArgsModel<TType> = {
-  filter: Array<FilterModel<TType>>;
+  filter?: Array<FilterModel<TType>>;
   options?: GetManyOptionsModel<TType>;
 };
 
 type GetConnectionOptionsModel = CommonOptionsModel;
 
 type GetConnectionArgsModel<TType> = {
-  filter: Array<FilterModel<TType>>;
+  filter?: Array<FilterModel<TType>>;
   options?: GetConnectionOptionsModel;
-  pagination: PaginationModel;
+  pagination?: PaginationModel;
 };
+
 type RemoveOptionsModel = CommonOptionsModel;
 
 type RemoveArgsModel<TType> = {
-  filter: Array<FilterModel<TType>>;
+  filter?: Array<FilterModel<TType>>;
   options?: RemoveOptionsModel;
 };
 
 type UpdateOptionsModel<TType> = ProjectOptionsModel<TType>;
 
 type UpdateArgsModel<TType> = {
-  filter: Array<FilterModel<TType>>;
+  filter?: Array<FilterModel<TType>>;
   options?: UpdateOptionsModel<TType>;
-  update: UpdateModel<TType>;
+  update?: UpdateModel<TType>;
 };
 
 export type ArgsModel<TMethod extends ResourceMethodTypeModel, TType, TForm> = {

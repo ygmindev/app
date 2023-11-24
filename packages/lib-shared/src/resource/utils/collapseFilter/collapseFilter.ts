@@ -4,9 +4,9 @@ import {
 } from '#lib-shared/resource/utils/collapseFilter/collapseFilter.models';
 
 export const collapseFilter = <TType extends unknown>(
-  params: CollapseFilterParamsModel<TType>,
+  params?: CollapseFilterParamsModel<TType>,
 ): CollapseFilterModel<TType> =>
-  params.map(
+  params?.map(
     ({
       booleanValue,
       condition,
@@ -31,4 +31,4 @@ export const collapseFilter = <TType extends unknown>(
         stringValue ??
         stringArrayValue,
     }),
-  );
+  ) ?? [];

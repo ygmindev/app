@@ -12,39 +12,39 @@ export type ResourceServiceModel<
   TRoot = undefined,
 > = {
   create(
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>,
+    input?: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>>;
 
   createMany(
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TForm>,
+    input?: InputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TForm>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>>;
 
   decorators?: ResourceServiceDecoratorModel<TType, TForm, TRoot>;
 
   get(
-    input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm>,
+    input?: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>>;
 
   getConnection(
-    input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm>,
+    input?: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>>;
 
   getMany(
-    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm>,
+    input?: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>>;
 
   remove(
-    input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm>,
+    input?: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>>;
 
   update(
-    input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm>,
+    input?: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>>;
 };
@@ -54,7 +54,7 @@ export type ResourceServiceBeforeDecoratorModel<
   TType,
   TForm,
 > = (
-  params: { input: InputModel<TMethod, TType, TForm> },
+  params: { input?: InputModel<TMethod, TType, TForm> },
   context?: ContextModel,
 ) => Promise<InputModel<TMethod, TType, TForm>>;
 

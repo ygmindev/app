@@ -26,9 +26,11 @@ export type DataBoundaryPropsModel<TParams = undefined, TResult = void> = Omit<
     fallbackData?: TResult;
   };
 
-export type DataBoundaryRefModel<TParams = undefined, TResult = void> =
-  | QueryComponentRefModel<TParams, TResult>
-  | MutateComponentRefModel<TParams, TResult>;
+export type DataBoundaryRefModel<TParams = undefined, TResult = void> = QueryComponentRefModel<
+  TParams,
+  TResult
+> &
+  MutateComponentRefModel<TParams, TResult>;
 
 export type QueryComponentPropsModel<TParams = undefined, TResult = void> = WithIdModel &
   AsyncPropsModel &

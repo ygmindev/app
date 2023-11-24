@@ -46,7 +46,7 @@ export class PaymentMethodResolver
       method: RESOURCE_METHOD_TYPE.CREATE,
       name: `${PAYMENT_METHOD_RESOURCE_NAME}Token`,
     })
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, string>,
+    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, string> = {},
     @withContext()
     _context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, string, UserModel>> {

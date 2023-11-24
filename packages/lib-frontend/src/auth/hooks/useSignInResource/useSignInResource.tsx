@@ -77,7 +77,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
       return reset();
     },
 
-    userUpdate: async (input) => {
+    userUpdate: async (input = {}) => {
       const name = `${SIGN_IN_USER}${RESOURCE_METHOD_TYPE.UPDATE}`;
       const output = await query<
         { input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, UserModel, UserFormModel> },

@@ -23,12 +23,15 @@ export class AccessService
   implements AccessServiceModel
 {
   async getManyUser(
-    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, AccessModel, AccessFormModel>,
+    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, AccessModel, AccessFormModel> = {},
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, AccessModel>> {
     const userId = context?.user?._id;
     if (userId) {
-      input.filter = [...input.filter, { field: USER_RESOURCE_NAME, value: { _id: userId } }];
+      input.filter = [
+        ...(input.filter ?? []),
+        { field: USER_RESOURCE_NAME, value: { _id: userId } },
+      ];
       return this.getMany(input, context);
     }
     throw new UnauthenticatedError();

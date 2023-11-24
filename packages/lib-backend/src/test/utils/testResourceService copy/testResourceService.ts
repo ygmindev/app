@@ -14,14 +14,13 @@ import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.model
 // import { type FilterCombineModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 // import { type FilterCombineModel } from '#lib-shared/resource/utils/Filter/Filter.models';
-import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.constants';
 import {
   type TestableEntityResourceFormModel,
   type TestableEntityResourceModel,
 } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.models';
 
 const _getFilter = (
-  filters: Array<FilterModel<TestableEntityResourceModel>>,
+  filters: Array<FilterModel<TestableEntityResourceModel>> = [],
 ): Record<keyof TestableEntityResourceModel, unknown> =>
   reduce(
     filters,
@@ -30,14 +29,14 @@ const _getFilter = (
   );
 
 const _findAll = (
-  data: Array<TestableEntityResourceModel> | undefined,
-  filters: Array<FilterModel<TestableEntityResourceModel>>,
+  data: Array<TestableEntityResourceModel> = [],
+  filters: Array<FilterModel<TestableEntityResourceModel>> = [],
 ): Array<TestableEntityResourceModel> =>
   (_filter(data, _getFilter(filters)) as Array<TestableEntityResourceModel>) || [];
 
 const _find = (
-  data: Array<TestableEntityResourceModel> | undefined,
-  filters: Array<FilterModel<TestableEntityResourceModel>>,
+  data: Array<TestableEntityResourceModel> = [],
+  filters: Array<FilterModel<TestableEntityResourceModel>> = [],
 ): TestableEntityResourceModel | null =>
   (find(data, _getFilter(filters)) as TestableEntityResourceModel) ?? null;
 
@@ -60,19 +59,19 @@ export const testResourceService = async ({
   });
 
   beforeEach(async () => {
-    await seed({ names: [TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME] });
+    await seed();
     before && (await before(service));
     jest.clearAllMocks();
   });
 
   test('works with create', async () => {
-    const input: InputModel<
+    const input = {
+      form: { stringField: 'stringField1', stringFieldOptional: undefined },
+    } satisfies InputModel<
       RESOURCE_METHOD_TYPE.CREATE,
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
-    > = {
-      form: { stringField: 'stringField1', stringFieldOptional: undefined },
-    };
+    >;
     const { result } = await service.create(input);
     expect(result?._id).toBeDefined();
     expect(result?.created && new Date().getTime() - result?.created.getTime()).toBeLessThan(1000);
@@ -82,13 +81,13 @@ export const testResourceService = async ({
 
   test('works with get by id', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
-    const input: InputModel<
+    const input = {
+      filter: [{ field: '_id', value: data[0]._id }],
+    } satisfies InputModel<
       RESOURCE_METHOD_TYPE.GET,
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
-    > = {
-      filter: [{ field: '_id', value: data[0]._id }],
-    };
+    >;
     const { result } = await service.get(input);
     const expected = _find(data, input.filter);
     expect(result?._id).toStrictEqual(expected?._id);
@@ -96,13 +95,13 @@ export const testResourceService = async ({
 
   test('works with get by partial', async () => {
     const { result: data } = await service.getMany({ filter: [] });
-    const input: InputModel<
+    const input = {
+      filter: [{ field: 'stringField', value: 'stringField1' }],
+    } satisfies InputModel<
       RESOURCE_METHOD_TYPE.GET,
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
-    > = {
-      filter: [{ field: 'stringField', value: 'stringField1' }],
-    };
+    >;
     const { result } = await service.get(input);
     const expected = _find(data, input.filter);
     expect(result?._id).toStrictEqual(expected?._id);
@@ -158,16 +157,16 @@ export const testResourceService = async ({
 
   test('works with get with project', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
-    const input: InputModel<
-      RESOURCE_METHOD_TYPE.GET,
-      TestableEntityResourceModel,
-      TestableEntityResourceFormModel
-    > = {
+    const input = {
       filter: [{ field: '_id', value: data[0]._id }],
       options: {
         project: PROJECT_FIELDS.reduce((result, field) => ({ ...result, [field]: true }), {}),
       },
-    };
+    } satisfies InputModel<
+      RESOURCE_METHOD_TYPE.GET,
+      TestableEntityResourceModel,
+      TestableEntityResourceFormModel
+    >;
     const { result } = await service.get(input);
     const expected = _find(data, input.filter);
     expect(result?._id).toStrictEqual(expected?._id);
@@ -176,13 +175,13 @@ export const testResourceService = async ({
 
   test('works with getMany by partial', async () => {
     const { result: data } = await service.getMany({ filter: [] });
-    const input: InputModel<
+    const input = {
+      filter: [{ field: 'stringField', value: 'stringField1' }],
+    } satisfies InputModel<
       RESOURCE_METHOD_TYPE.GET_MANY,
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
-    > = {
-      filter: [{ field: 'stringField', value: 'stringField1' }],
-    };
+    >;
     const { result } = await service.getMany(input);
     const expected = _findAll(data, input.filter);
     expect(result).toStrictEqual(expected);
@@ -241,14 +240,14 @@ export const testResourceService = async ({
     const TAKE = 1;
 
     const { result: data } = await service.getMany({ filter: [] });
-    const input: InputModel<
+    const input = {
+      filter: [{ field: 'stringField', value: 'stringField1' }],
+      options: { skip: SKIP, take: TAKE },
+    } satisfies InputModel<
       RESOURCE_METHOD_TYPE.GET_MANY,
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
-    > = {
-      filter: [{ field: 'stringField', value: 'stringField1' }],
-      options: { skip: SKIP, take: TAKE },
-    };
+    >;
     const { result } = await service.getMany(input);
     let expected = _findAll(data, input.filter);
     expected = expected.slice(SKIP, SKIP + TAKE);
@@ -257,16 +256,16 @@ export const testResourceService = async ({
 
   test('works with getMany with project', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
-    const input: InputModel<
-      RESOURCE_METHOD_TYPE.GET_MANY,
-      TestableEntityResourceModel,
-      TestableEntityResourceFormModel
-    > = {
+    const input = {
       filter: [{ field: 'stringField', value: 'stringField1' }],
       options: {
         project: PROJECT_FIELDS.reduce((result, field) => ({ ...result, [field]: true }), {}),
       },
-    };
+    } satisfies InputModel<
+      RESOURCE_METHOD_TYPE.GET_MANY,
+      TestableEntityResourceModel,
+      TestableEntityResourceFormModel
+    >;
     const { result } = await service.getMany(input);
     const resultF = result && result[0];
     const expected = _find(data, input.filter);
@@ -289,14 +288,14 @@ export const testResourceService = async ({
 
   test('works with getConnection filtered result', async () => {
     const { result: data } = await service.getMany({ filter: [] });
-    const input: InputModel<
+    const input = {
+      filter: [{ field: 'stringField', value: 'stringField1' }],
+      pagination: {},
+    } satisfies InputModel<
       RESOURCE_METHOD_TYPE.GET_CONNECTION,
       TestableEntityResourceModel,
       undefined
-    > = {
-      filter: [{ field: 'stringField', value: 'stringField1' }],
-      pagination: {},
-    };
+    >;
     const { result } = await service.getConnection(input);
     const expected = _findAll(data, input.filter);
     expect(result?.edges.length).toStrictEqual(expected.length);
@@ -315,11 +314,11 @@ export const testResourceService = async ({
   test('works with getConnection paged result first', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
     const size = 2;
-    const input: InputModel<
+    const input = { filter: [], pagination: { first: size } } satisfies InputModel<
       RESOURCE_METHOD_TYPE.GET_CONNECTION,
       TestableEntityResourceModel,
       undefined
-    > = { filter: [], pagination: { first: size } };
+    >;
     const { result } = await service.getConnection(input);
 
     expect(result?.edges.length).toStrictEqual(size);
@@ -337,11 +336,14 @@ export const testResourceService = async ({
     const { result: data = [] } = await service.getMany({ filter: [] });
     const size = 2;
     const { result: allResult } = await service.getConnection({ filter: [], pagination: {} });
-    const input: InputModel<
+    const input = {
+      filter: [],
+      pagination: { after: allResult?.edges[size - 1].cursor, first: size },
+    } satisfies InputModel<
       RESOURCE_METHOD_TYPE.GET_CONNECTION,
       TestableEntityResourceModel,
       undefined
-    > = { filter: [], pagination: { after: allResult?.edges[size - 1].cursor, first: size } };
+    >;
     const { result } = await service.getConnection(input);
 
     expect(result?.edges.length).toStrictEqual(size);
@@ -358,11 +360,11 @@ export const testResourceService = async ({
   test('works with getConnection paged result last', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
     const size = 2;
-    const input: InputModel<
+    const input = { filter: [], pagination: { last: size } } satisfies InputModel<
       RESOURCE_METHOD_TYPE.GET_CONNECTION,
       TestableEntityResourceModel,
       undefined
-    > = { filter: [], pagination: { last: size } };
+    >;
     const { result } = await service.getConnection(input);
 
     expect(result?.edges.length).toStrictEqual(size);
@@ -380,11 +382,14 @@ export const testResourceService = async ({
     const { result: data = [] } = await service.getMany({ filter: [] });
     const size = 2;
     const { result: allResult } = await service.getConnection({ filter: [], pagination: {} });
-    const input: InputModel<
+    const input = {
+      filter: [],
+      pagination: { before: allResult?.edges[size].cursor, last: size },
+    } satisfies InputModel<
       RESOURCE_METHOD_TYPE.GET_CONNECTION,
       TestableEntityResourceModel,
       undefined
-    > = { filter: [], pagination: { before: allResult?.edges[size].cursor, last: size } };
+    >;
     const { result } = await service.getConnection(input);
 
     expect(result?.edges.length).toStrictEqual(size);
@@ -400,14 +405,14 @@ export const testResourceService = async ({
 
   test('works with update by partial', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
-    const input: InputModel<
+    const input = {
+      filter: [{ field: '_id', value: data[0]._id }],
+      update: { stringField: 'stringField2' },
+    } satisfies InputModel<
       RESOURCE_METHOD_TYPE.UPDATE,
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
-    > = {
-      filter: [{ field: '_id', value: data[0]._id }],
-      update: { stringField: 'stringField2' },
-    };
+    >;
     const { result } = await service.update(input);
 
     expect(result?.stringField).toStrictEqual('stringField2');
@@ -415,14 +420,14 @@ export const testResourceService = async ({
 
   test('works with update by push', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
-    const input: InputModel<
+    const input = {
+      filter: [{ field: '_id', value: data[0]._id }],
+      update: { $push: { stringArrayField: 'stringArrayFieldElement1' } },
+    } satisfies InputModel<
       RESOURCE_METHOD_TYPE.UPDATE,
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
-    > = {
-      filter: [{ field: '_id', value: data[0]._id }],
-      update: { $push: { stringArrayField: 'stringArrayFieldElement1' } },
-    };
+    >;
     const { result } = await service.update(input);
 
     expect(result?.stringArrayField).toStrictEqual([
@@ -433,14 +438,14 @@ export const testResourceService = async ({
 
   test('works with update by pull', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
-    const input: InputModel<
+    const input = {
+      filter: [{ field: '_id', value: data[0]._id }],
+      update: { $pull: { stringArrayField: 'stringArrayFieldElement1' } },
+    } satisfies InputModel<
       RESOURCE_METHOD_TYPE.UPDATE,
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
-    > = {
-      filter: [{ field: '_id', value: data[0]._id }],
-      update: { $pull: { stringArrayField: 'stringArrayFieldElement1' } },
-    };
+    >;
     const { result } = await service.update(input);
     const expected = _filter(data[0].stringArrayField, input.update.$pull);
     expect(result?.stringArrayField ?? []).toStrictEqual(expected);
@@ -448,29 +453,29 @@ export const testResourceService = async ({
 
   test('works with update with project', async () => {
     const { result: data = [] } = await service.getMany({ filter: [] });
-    const input: InputModel<
-      RESOURCE_METHOD_TYPE.UPDATE,
-      TestableEntityResourceModel,
-      TestableEntityResourceFormModel
-    > = {
+    const input = {
       filter: [{ field: '_id', value: data[0]._id }],
       options: {
         project: PROJECT_FIELDS.reduce((result, field) => ({ ...result, [field]: true }), {}),
       },
       update: { stringField: 'stringField2' },
-    };
+    } satisfies InputModel<
+      RESOURCE_METHOD_TYPE.UPDATE,
+      TestableEntityResourceModel,
+      TestableEntityResourceFormModel
+    >;
     const { result } = await service.update(input);
     expect(result && Object.keys(result)).toStrictEqual(PROJECT_FIELDS);
   });
 
   test('works with remove by id', async () => {
-    const input: InputModel<
+    const input = {
+      filter: [{ field: 'stringField', value: 'stringField1' }],
+    } satisfies InputModel<
       RESOURCE_METHOD_TYPE.REMOVE,
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
-    > = {
-      filter: [{ field: 'stringField', value: 'stringField1' }],
-    };
+    >;
     await service.remove(input);
     const { result } = await service.get(input);
     expect(result).toBeFalsy();

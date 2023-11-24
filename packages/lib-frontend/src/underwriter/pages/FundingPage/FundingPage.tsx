@@ -5,13 +5,13 @@ import { ModalButton } from '#lib-frontend/core/components/ModalButton/ModalButt
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
-import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBoundary';
-import { type QueryComponentRefModel } from '#lib-frontend/data/components/DataBoundary/DataBoundary.models';
 import { FundingTile } from '#lib-frontend/funding/components/FundingTile/FundingTile';
 import { FundingFilter } from '#lib-frontend/funding/containers/FundingFilter/FundingFilter';
 import { FUNDING } from '#lib-frontend/funding/funding.constants';
 import { useFundingResource } from '#lib-frontend/funding/hooks/useFundingResource/useFundingResource';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { ConnectionBoundary } from '#lib-frontend/resource/components/ConnectionBoundary/ConnectionBoundary';
+import { type ConnectionBoundaryRefModel } from '#lib-frontend/resource/components/ConnectionBoundary/ConnectionBoundary.models';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
@@ -20,7 +20,6 @@ import { type FundingDetailPageParamsModel } from '#lib-frontend/underwriter/pag
 import { type FundingPagePropsModel } from '#lib-frontend/underwriter/pages/FundingPage/FundingPage.models';
 import { FUNDING_FIXTURES } from '#lib-shared/funding/resources/Funding/Funding.fixtures';
 import { type FundingModel } from '#lib-shared/funding/resources/Funding/Funding.models';
-import { type ConnectionModel } from '#lib-shared/resource/utils/Connection/Connection.models';
 import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
 export const FundingPage: LFCModel<FundingPagePropsModel> = ({ ...props }) => {
@@ -30,24 +29,12 @@ export const FundingPage: LFCModel<FundingPagePropsModel> = ({ ...props }) => {
   const { getConnection } = useFundingResource();
 
   const modalRef = useRef<ModalRefModel>(null);
-  const dataRef =
-    useRef<QueryComponentRefModel<Array<FilterModel<FundingModel>>, ConnectionModel<FundingModel>>>(
-      null,
-    );
+  const dataRef = useRef<ConnectionBoundaryRefModel<FundingModel>>(null);
 
   const handleFilter = async (filter: Array<FilterModel<FundingModel>>): Promise<void> => {
     modalRef.current?.toggle(false);
-    dataRef.current?.paramsSet(filter);
+    dataRef.current?.paramsSet({ filter, pagination: { first: 10 } });
   };
-
-  const handleQuery = async (
-    params?: Array<FilterModel<FundingModel>>,
-  ): Promise<ConnectionModel<FundingModel> | undefined> =>
-    // TODO: pagination to config
-    {
-      const { result } = await getConnection({ filter: params ?? [], pagination: { first: 10 } });
-      return result;
-    };
 
   return (
     <MainLayout
@@ -72,22 +59,24 @@ export const FundingPage: LFCModel<FundingPagePropsModel> = ({ ...props }) => {
         </ModalButton>
       </Wrapper>
 
-      <DataBoundary
+      <ConnectionBoundary
         fallbackData={{
-          edges: FUNDING_FIXTURES.map((node) => ({ cursor: '', node })),
-          pageInfo: {
-            endCursor: '',
-            hasNextPage: false,
-            hasPreviousPage: false,
-            startCursor: '',
+          result: {
+            edges: FUNDING_FIXTURES.map((node) => ({ cursor: '', node })),
+            pageInfo: {
+              endCursor: '',
+              hasNextPage: false,
+              hasPreviousPage: false,
+              startCursor: '',
+            },
           },
         }}
         id="funding"
-        query={handleQuery}
+        query={async (input) => getConnection(input)}
         ref={dataRef}>
         {({ data }) => (
           <Wrapper s>
-            {data?.edges.map(({ node }) => (
+            {data?.result?.edges.map(({ node }) => (
               <FundingTile
                 funding={node}
                 key={node._id}
@@ -103,7 +92,7 @@ export const FundingPage: LFCModel<FundingPagePropsModel> = ({ ...props }) => {
             ))}
           </Wrapper>
         )}
-      </DataBoundary>
+      </ConnectionBoundary>
     </MainLayout>
   );
 };

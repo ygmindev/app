@@ -14,12 +14,12 @@ export type SignInServiceModel = Pick<
   'create'
 > & {
   userUpdate(
-    input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, UserModel, UserFormModel>,
+    input?: InputModel<RESOURCE_METHOD_TYPE.UPDATE, UserModel, UserFormModel>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>>;
 
   usernameUpdate(
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel>,
+    input?: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>>;
 };

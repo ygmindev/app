@@ -7,7 +7,7 @@ export type SelfAuthorizerParamsModel<
   TMethod extends ResourceMethodTypeModel = ResourceMethodTypeModel,
   TType = unknown,
   TForm = EntityResourceDataModel<TType>,
-> = (input: InputModel<TMethod, TType, TForm>) => string | undefined;
+> = (input?: InputModel<TMethod, TType, TForm>) => string | undefined;
 
 export type SelfAuthorizerModel<
   TMethod extends ResourceMethodTypeModel = ResourceMethodTypeModel,

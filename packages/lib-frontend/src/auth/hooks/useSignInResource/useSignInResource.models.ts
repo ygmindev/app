@@ -9,7 +9,7 @@ export type UseSignInResourceModel = {
   signOut(): Promise<void>;
 
   userUpdate(
-    input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, UserModel, UserFormModel>,
+    input?: InputModel<RESOURCE_METHOD_TYPE.UPDATE, UserModel, UserFormModel>,
   ): Promise<void>;
 
   usernameUpdate(form: SignInFormModel): Promise<void>;

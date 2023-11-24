@@ -31,7 +31,7 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
     after: afterGet,
     // TODO: solution until GraphQl oneOf / union input
     before: async ({ input }) => {
-      const inputF = { ...input, filter: expandFilter(input.filter) };
+      const inputF = { ...input, filter: expandFilter(input?.filter) };
       return beforeGet ? beforeGet({ input: inputF }) : inputF;
     },
     fields: fields as UseResourceMethodParamsModel<
@@ -81,7 +81,7 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
   const { query: getMany } = useResourceMethod<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot>({
     after: afterGetMany,
     before: async ({ input }) => {
-      const inputF = { ...input, filter: expandFilter(input.filter) };
+      const inputF = { ...input, filter: expandFilter(input?.filter) };
       return beforeGetMany ? beforeGetMany({ input: inputF }) : inputF;
     },
     fields: fields as UseResourceMethodParamsModel<
@@ -98,7 +98,7 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
   const { query: update } = useResourceMethod<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot>({
     after: afterUpdate,
     before: async ({ input }) => {
-      const inputF = { ...input, filter: expandFilter(input.filter) };
+      const inputF = { ...input, filter: expandFilter(input?.filter) };
       return beforeUpdate ? beforeUpdate({ input: inputF }) : inputF;
     },
     fields: fields as UseResourceMethodParamsModel<
@@ -114,7 +114,7 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
   const { query: remove } = useResourceMethod<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm, TRoot>({
     after: afterRemove,
     before: async ({ input }) => {
-      const inputF = { ...input, filter: expandFilter(input.filter) };
+      const inputF = { ...input, filter: expandFilter(input?.filter) };
       return beforeRemove ? beforeRemove({ input: inputF }) : inputF;
     },
     fields: fields as UseResourceMethodParamsModel<
@@ -135,7 +135,7 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
   >({
     after: afterGetConnection,
     before: async ({ input }) => {
-      const inputF = { ...input, filter: expandFilter(input.filter) };
+      const inputF = { ...input, filter: expandFilter(input?.filter) };
       return beforeGetConnection ? beforeGetConnection({ input: inputF }) : inputF;
     },
     fields: fields as UseResourceMethodParamsModel<

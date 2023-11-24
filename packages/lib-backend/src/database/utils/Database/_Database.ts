@@ -95,7 +95,7 @@ export class _Database implements _DatabaseModel {
 
       count: async () => this._getEntityManager().getRepository(name).count(),
 
-      create: async ({ form, options }) => {
+      create: async ({ form, options } = {}) => {
         try {
           const em = this._getEntityManager();
           const formF = cleanDocument(form);
@@ -112,10 +112,10 @@ export class _Database implements _DatabaseModel {
         }
       },
 
-      createMany: async ({ form }) => {
+      createMany: async ({ form } = {}) => {
         try {
           const em = this._getEntityManager();
-          const formF = form.map(cleanDocument);
+          const formF = form?.map(cleanDocument);
           const result = await em.insertMany(name, formF as Array<object>);
           return { result: result as Array<PartialModel<TType>> };
         } catch (e) {
@@ -128,7 +128,7 @@ export class _Database implements _DatabaseModel {
         }
       },
 
-      get: async ({ filter, options }) => {
+      get: async ({ filter, options } = {}) => {
         const em = this._getEntityManager();
         const filterF = cleanDocument(getFilter<TType>(filter));
         const collection = em.getCollection(name);
@@ -151,7 +151,7 @@ export class _Database implements _DatabaseModel {
         return { result: result ?? undefined };
       },
 
-      getConnection: async ({ filter, pagination }) => {
+      getConnection: async ({ filter, pagination } = {}) => {
         const { result } = await getConnection({
           count: await service.count(),
           getMany: service.getMany,
@@ -161,7 +161,7 @@ export class _Database implements _DatabaseModel {
         return { result: result ?? undefined };
       },
 
-      getMany: async ({ filter, options }) => {
+      getMany: async ({ filter, options } = {}) => {
         const em = this._getEntityManager();
         const collection = em.getCollection(name);
         const filterF = cleanDocument(getFilter<TType>(filter));
@@ -188,7 +188,7 @@ export class _Database implements _DatabaseModel {
         return { result: (result as Array<PartialModel<TType>>) ?? undefined };
       },
 
-      remove: async ({ filter }) => {
+      remove: async ({ filter } = {}) => {
         const em = this._getEntityManager();
         const filterF = getFilter<TType>(filter);
         const entity = await service.get({ filter });
@@ -196,20 +196,21 @@ export class _Database implements _DatabaseModel {
         return entity as unknown as OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType>;
       },
 
-      update: async ({ filter, options, update }) => {
+      update: async ({ filter, options, update } = {}) => {
         const em = this._getEntityManager();
         const filterF = getFilter<TType>(filter);
         const updateF = cleanDocument(update);
-        Object.keys(updateF).forEach((key) => {
-          const keyF = key as keyof UpdateModel<TType>;
-          if (!key.startsWith('$')) {
-            updateF['$set'] = {
-              ...((updateF['$set'] as object) ?? {}),
-              [key]: updateF[keyF],
-            } as EntityResourceDataModel<TType>;
-            delete updateF[keyF];
-          }
-        });
+        updateF &&
+          Object.keys(updateF).forEach((key) => {
+            const keyF = key as keyof UpdateModel<TType>;
+            if (!key.startsWith('$')) {
+              updateF['$set'] = {
+                ...((updateF['$set'] as object) ?? {}),
+                [key]: updateF[keyF],
+              } as EntityResourceDataModel<TType>;
+              delete updateF[keyF];
+            }
+          });
         const { value: result } = await em
           .getConnection()
           .getCollection(name)

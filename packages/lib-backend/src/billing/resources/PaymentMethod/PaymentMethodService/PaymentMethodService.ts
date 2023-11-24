@@ -29,18 +29,18 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
   @withInject(StripeAdminService) protected _stripeAdminService!: StripeAdminService;
 
   async getMany(
-    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel>,
+    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel> = {},
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>> {
     if (input.root) {
       const { result: banks } = await this._bankService.getMany({
         filter: [],
         options: { project: { _id: true, id: true, last4: true } },
-        root: { _id: input.root },
+        root: input.root,
       });
       const { result: cards } = await this._cardService.getMany({
         filter: [],
         options: { project: { _id: true, id: true, last4: true } },
-        root: { _id: input.root },
+        root: input.root,
       });
       return {
         result: [
@@ -53,20 +53,19 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
   }
 
   async createToken(
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, string>,
+    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, string> = {},
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, string, UserModel>> {
     if (input.root) {
-      const uid = input.root;
       let { result: linkedUser } = await this._linkedUserService.get({
         filter: [{ field: 'type', value: LINKED_USER_TYPE.STRIPE }],
         options: { project: { _id: true } },
-        root: { _id: uid },
+        root: input.root,
       });
       if (!linkedUser) {
         const id = await this._stripeAdminService.createCustomer();
         const { result: createdLinkedUser } = await this._linkedUserService.create({
           form: { id, type: LINKED_USER_TYPE.STRIPE },
-          root: { _id: uid },
+          root: input.root,
         });
         if (createdLinkedUser) {
           linkedUser = createdLinkedUser;
@@ -74,7 +73,8 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
       }
 
       if (linkedUser) {
-        const result = await this._stripeAdminService.createIntent(linkedUser.id);
+        const result =
+          linkedUser.id && (await this._stripeAdminService.createIntent(linkedUser.id));
         return { result };
       }
       throw new NotFoundError('linked user payment method');

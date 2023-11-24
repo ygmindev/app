@@ -60,7 +60,7 @@ export const createEmbeddedResourceService = <
     return rootService;
   };
 
-  const getForm = async (form: TForm): Promise<TType> => {
+  const getForm = async (form?: TForm): Promise<TType> => {
     const formF = new Resource();
     forEach(form as unknown as object, (v, k) => (formF[k as keyof typeof formF] = v));
     formF.beforeCreate && formF.beforeCreate();
@@ -68,7 +68,7 @@ export const createEmbeddedResourceService = <
   };
 
   const getAggregation = (
-    input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm>,
+    input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm> = {},
   ): Array<object> => {
     const nameF = `$${name}`;
     return filterNil([
@@ -91,7 +91,7 @@ export const createEmbeddedResourceService = <
   };
 
   const getMany = async (
-    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm>,
+    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm> = {},
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> => {
     if (input.root) {
       const skip = input.options?.skip ?? 0;
@@ -130,7 +130,7 @@ export const createEmbeddedResourceService = <
     beforeRemove,
     beforeUpdate,
     count: getCount,
-    create: async (input) => {
+    create: async (input = {}) => {
       if (input.root) {
         const formF = await getForm(input.form);
         const { result: rootResult } = await getRootService().update({
@@ -141,8 +141,8 @@ export const createEmbeddedResourceService = <
       }
       throw new InvalidArgumentError('root');
     },
-    createMany: async (input) => {
-      if (input.root) {
+    createMany: async (input = {}) => {
+      if (input.root && input.form) {
         const formF = await Promise.all(input.form.map((value) => getForm(value)));
         const { result: rootResult } = await getRootService().update({
           filter: [{ field: '_id', value: input.root }],
@@ -152,7 +152,7 @@ export const createEmbeddedResourceService = <
       }
       throw new InvalidArgumentError('root');
     },
-    get: async (input) => {
+    get: async (input = {}) => {
       if (input.root) {
         const { result: rootResult } = await getRootService().get({
           filter: [{ field: '_id', value: input.root }],
@@ -163,7 +163,7 @@ export const createEmbeddedResourceService = <
       }
       throw new InvalidArgumentError('root');
     },
-    getConnection: async (input) => {
+    getConnection: async (input = {}) => {
       if (input.root) {
         return getConnection({
           count: await getCount(input),
@@ -176,20 +176,19 @@ export const createEmbeddedResourceService = <
     },
     getMany,
     name,
-    remove: async (input) => {
+    remove: async (input = {}) => {
       const { result: rootResult } = await getRootService().update({
         filter: [{ field: '_id', value: input.root }],
         update: { $pull: { [name]: getFilter(input.filter) } } as UpdateModel<TRoot>,
       });
       return { root: rootResult };
     },
-    update: async (input) => {
+    update: async (input = {}) => {
       const { result: rootResult } = await getRootService().update({
         filter: [
           { field: '_id', value: input.root },
-          ...input.filter?.map(
-            (filter) =>
-              ({ ...filter, field: `${name}.${filter.field as string}` }) as FilterModel<TRoot>,
+          ...(input.filter ?? []).map(
+            (filter) => ({ ...filter, field: `${name}.${filter.field}` }) as FilterModel<TRoot>,
           ),
         ],
         options: {

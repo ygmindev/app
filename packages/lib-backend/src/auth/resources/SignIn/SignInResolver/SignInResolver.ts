@@ -53,7 +53,7 @@ export class SignInResolver
       method: RESOURCE_METHOD_TYPE.UPDATE,
       name: SIGN_IN_USER,
     })
-    input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, UserModel, UserFormModel>,
+    input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, UserModel, UserFormModel> = {},
     @withContext()
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
@@ -72,7 +72,7 @@ export class SignInResolver
       method: RESOURCE_METHOD_TYPE.CREATE,
       name: SIGN_IN_USERNAME,
     })
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel>,
+    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel> = {},
     @withContext()
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {

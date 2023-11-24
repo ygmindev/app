@@ -39,7 +39,7 @@ export const createProtectedResoureService = <
     @withInject(GroupService) protected _groupService!: GroupServiceModel;
 
     async getManyProtected(
-      input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm>,
+      input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm> = {},
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>> {
       const userId = context?.user?._id;
@@ -51,7 +51,7 @@ export const createProtectedResoureService = <
         ).result;
         if (accessAll) {
           input.filter = filterNil([
-            ...input.filter,
+            ...(input.filter ?? []),
             context.group && { field: GROUP_RESOURCE_NAME, value: new ObjectId(context.group) },
           ]);
           return this.getMany(input, context);

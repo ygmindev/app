@@ -8,8 +8,8 @@ import {
 export const getConnection = async <TType, TForm, TRoot = undefined>({
   count,
   getMany,
-  input,
-  pagination,
+  input = {},
+  pagination = {},
 }: GetConnectionParamsModel<TType, TForm, TRoot>): Promise<GetConnectionModel<TType, TRoot>> => {
   const { after, before, first, last } = pagination;
   const beforeOffset = getOffsetWithDefault(before, count);

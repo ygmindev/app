@@ -46,10 +46,10 @@ export class SignInService implements SignInServiceModel {
 
   async create({
     form,
-  }: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel>): Promise<
+  }: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel> = {}): Promise<
     OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>
   > {
-    if (form.otp) {
+    if (form?.otp) {
       const formF = cleanObject(pick(form, ['callingCode', 'email', 'phone']));
       await this.otpService.verify({ ...formF, otp: form.otp });
       delete (formF as Partial<SignInFormModel>).otp;
@@ -69,7 +69,7 @@ export class SignInService implements SignInServiceModel {
   }
 
   async userUpdate(
-    input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, UserModel, UserFormModel>,
+    input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, UserModel, UserFormModel> = {},
     _context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
     const result = await this.userService.update(input);
@@ -81,10 +81,10 @@ export class SignInService implements SignInServiceModel {
   }
 
   async usernameUpdate(
-    { form }: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel>,
+    { form }: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel> = {},
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
-    if (form.otp) {
+    if (form?.otp) {
       const formF = cleanObject(form);
       const otp = await this.otpService.verify(formF);
       const { result: user } = await this.userService.update({

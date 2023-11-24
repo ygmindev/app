@@ -8,10 +8,10 @@ import { type RootModel } from '#lib-shared/resource/utils/Root/Root.models';
 export type GetConnectionParamsModel<TType, TForm, TRoot = undefined> = {
   count: number;
   getMany(
-    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm>,
+    input?: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>>;
-  input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm>;
-  pagination: PaginationModel;
+  input?: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm>;
+  pagination?: PaginationModel;
 };
 
 export type GetConnectionModel<TType, TRoot = undefined> = RootModel<TRoot> & {

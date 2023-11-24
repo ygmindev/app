@@ -9,9 +9,9 @@ import {
 import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
 export const expandFilter = <TType extends unknown>(
-  params: ExpandFilterParamsModel<TType>,
+  params?: ExpandFilterParamsModel<TType>,
 ): ExpandFilterModel<TType> =>
-  params.map(({ condition, field, value }) => {
+  params?.map(({ condition, field, value }) => {
     const valueF = ((): Omit<FilterModel<TType>, 'condition' | 'field'> => {
       if (isArray(value)) {
         switch (trueTypeOf(value[0])) {
@@ -35,4 +35,4 @@ export const expandFilter = <TType extends unknown>(
       }
     })();
     return { ...valueF, condition, field };
-  });
+  }) ?? [];

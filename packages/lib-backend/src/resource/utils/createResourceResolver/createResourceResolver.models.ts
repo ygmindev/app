@@ -57,7 +57,7 @@ export type ResourceResolverAuthorizerParamsModel<
   TForm = EntityResourceDataModel<TType>,
 > = {
   context?: ContextModel;
-  input: InputModel<TMethod, TType, TForm>;
+  input?: InputModel<TMethod, TType, TForm>;
 };
 
 export type ResourceResolverAuthorizerModel<
