@@ -7,7 +7,7 @@ import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { AUTH } from '#lib-shared/auth/auth.constants';
 
-export const SignInButton: LFCModel<SignInButtonPropsModel> = ({ ...props }) => {
+export const SignInButton: LFCModel<SignInButtonPropsModel> = ({ onPress, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([AUTH]);
   const { push } = useRouter();
@@ -15,7 +15,10 @@ export const SignInButton: LFCModel<SignInButtonPropsModel> = ({ ...props }) => 
     <Button
       {...wrapperProps}
       icon="signin"
-      onPress={() => push({ pathname: SIGN_IN })}>
+      onPress={async () => {
+        onPress && (await onPress());
+        push({ pathname: SIGN_IN });
+      }}>
       {`${t('auth:signIn')} ${t('core:or')} ${t('auth:register')}`}
     </Button>
   );

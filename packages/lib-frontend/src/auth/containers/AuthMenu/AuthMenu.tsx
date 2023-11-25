@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import { SignInButton } from '#lib-frontend/auth/components/SignInButton/SignInButton';
 import { type AuthMenuOptionModel } from '#lib-frontend/auth/containers/AuthMenu/AuthMenu.constants';
 import { AUTH_MENU_OPTIONS } from '#lib-frontend/auth/containers/AuthMenu/AuthMenu.constants';
@@ -8,6 +10,7 @@ import { useSignInResource } from '#lib-frontend/auth/hooks/useSignInResource/us
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { Divider } from '#lib-frontend/core/components/Divider/Divider';
 import { Menu } from '#lib-frontend/core/components/Menu/Menu';
+import { type MenuRefModel } from '#lib-frontend/core/components/Menu/Menu.models';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
@@ -41,6 +44,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
         : [...result, merge<AuthMenuOptionModel>([optionsOverrides[option.id] ?? {}, option])],
     [] as Array<AuthMenuOptionModel>,
   );
+  const menuRef = useRef<MenuRefModel>(null);
 
   return (
     <Menu
@@ -51,6 +55,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
         />
       )}
       options={optionsF}
+      ref={menuRef}
       style={styles}
       topElement={
         currentUser ? (
@@ -66,7 +71,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
             <Divider />
           </Wrapper>
         ) : (
-          <SignInButton />
+          <SignInButton onPress={() => menuRef.current?.toggle(false)} />
         )
       }
     />
