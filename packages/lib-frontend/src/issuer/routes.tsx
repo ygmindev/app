@@ -12,6 +12,7 @@ import { FundingPage } from '#lib-frontend/issuer/pages/FundingPage/FundingPage'
 import { IssuerPage } from '#lib-frontend/issuer/pages/IssuerPage/IssuerPage';
 import { TabNavigator } from '#lib-frontend/route/components/TabNavigator/TabNavigator';
 import { type RouteModel } from '#lib-frontend/route/route.models';
+import { getRouteGroup } from '#lib-frontend/route/utils/getRouteGroup/getRouteGroup';
 import { SETTINGS } from '#lib-frontend/settings/settings.constants';
 import { GROUP_TYPE } from '#lib-shared/group/resources/Group/Group.constants';
 
@@ -43,7 +44,7 @@ export const issuerRoutes: Array<RouteModel> = [
             navigator: <TabNavigator type={TABS_TYPE.CONTAINED} />,
             pathname: '/',
             routes: [
-              {
+              getRouteGroup({
                 element: <FundingInProgressPage />,
                 icon: 'dotsCircle',
                 pathname: IN_PROGRESS,
@@ -56,7 +57,7 @@ export const issuerRoutes: Array<RouteModel> = [
                   },
                 ],
                 title: ({ t }) => t('core:inProgress'),
-              },
+              }),
               {
                 icon: 'checkCircle',
                 pathname: COMPLETED,
