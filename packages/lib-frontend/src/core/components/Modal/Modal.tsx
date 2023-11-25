@@ -46,7 +46,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
           {isOpen && (
             <>
               <Wrapper
-                animation={{ isInitial: true, states: ANIMATION_STATES_APPEARABLE_OPAQUE }}
+                animation={{ states: ANIMATION_STATES_APPEARABLE_OPAQUE }}
                 backgroundColor={THEME_COLOR_MORE.SURFACE}
                 backgroundRole={THEME_ROLE.CONTRAST}
                 elementState={elementStateF}

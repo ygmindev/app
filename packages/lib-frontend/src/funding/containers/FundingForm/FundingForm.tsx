@@ -18,7 +18,6 @@ export const FundingForm: LFCModel<FundingFormPropsModel> = ({ ...props }) => {
   const { create } = useFundingResource();
   const { replace } = useRouter();
   const currentGroup = useCurrentGroup();
-  console.warn(currentGroup);
   return (
     <StepForm
       {...props}

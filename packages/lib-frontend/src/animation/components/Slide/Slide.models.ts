@@ -1,5 +1,9 @@
-import { type ChildrenPropsModel } from '#lib-frontend/core/core.models';
+import {
+  type ChildrenPropsModel,
+  type ElementStatePropsModel,
+} from '#lib-frontend/core/core.models';
 
-export type SlidePropsModel = ChildrenPropsModel & {
-  isBack?: boolean;
-};
+export type SlidePropsModel = ChildrenPropsModel &
+  ElementStatePropsModel & {
+    isBack?: boolean;
+  };

@@ -77,11 +77,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
               ref={refs.setFloating}
               style={floatingStyles}
               {...getFloatingProps()}>
-              <Appearable
-                animation={{ isInitial: true }}
-                isActive={isOpen}>
-                {children}
-              </Appearable>
+              <Appearable isActive={isOpen}>{children}</Appearable>
             </div>
           </FloatingFocusManager>
         </FloatingPortal>

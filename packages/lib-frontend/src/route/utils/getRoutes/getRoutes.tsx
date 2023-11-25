@@ -6,8 +6,7 @@ import { PAYMENT, PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants
 import { PaymentMethodFormPage } from '#lib-frontend/billing/pages/PaymentMethodFormPage/PaymentMethodFormPage';
 import { PaymentPage } from '#lib-frontend/billing/pages/PaymentPage/PaymentPage';
 import { REDIRECT } from '#lib-frontend/core/core.constants';
-import { DEV } from '#lib-frontend/dev/dev.constants';
-import { DevPage } from '#lib-frontend/dev/pages/DevPage/DevPage';
+import { devRoutes } from '#lib-frontend/dev/routes';
 import { PingPage } from '#lib-frontend/http/pages/PingPage/PingPage';
 import { TIMEZONE } from '#lib-frontend/locale/locale.constants';
 import { TimezoneFormPage } from '#lib-frontend/locale/pages/TimezoneFormPage/TimezoneFormPage';
@@ -132,11 +131,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
           pathname: REDIRECT,
         },
 
-        {
-          element: <DevPage />,
-          isProtectable: true,
-          pathname: DEV,
-        },
+        ...devRoutes,
 
         {
           pathname: TEST,

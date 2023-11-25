@@ -30,42 +30,38 @@ export const issuerRoutes: Array<RouteModel> = [
       },
 
       {
+        element: <FundingPage />,
+        icon: 'dollar',
+        navigator: <TabNavigator type={TABS_TYPE.CONTAINED} />,
         pathname: FUNDING,
         routes: [
-          {
-            element: <FundingFormPage />,
-            isFullScreen: true,
-            pathname: FORM,
-            title: ({ t }) => t('core:form'),
-          },
-          {
-            element: <FundingPage />,
-            icon: 'dollar',
-            navigator: <TabNavigator type={TABS_TYPE.CONTAINED} />,
-            pathname: '/',
+          getRouteGroup({
+            element: <FundingInProgressPage />,
+            icon: 'dotsCircle',
+            pathname: IN_PROGRESS,
             routes: [
-              getRouteGroup({
-                element: <FundingInProgressPage />,
-                icon: 'dotsCircle',
-                pathname: IN_PROGRESS,
-                routes: [
-                  {
-                    element: <QuotesPage />,
-                    isFullScreen: true,
-                    pathname: QUOTES,
-                    title: ({ t }) => t('core:quotes'),
-                  },
-                ],
-                title: ({ t }) => t('core:inProgress'),
-              }),
               {
-                icon: 'checkCircle',
-                pathname: COMPLETED,
-                title: ({ t }) => t('core:completed'),
+                element: <QuotesPage />,
+                isFullScreen: true,
+                pathname: QUOTES,
+                title: ({ t }) => t('core:quotes'),
+              },
+              {
+                element: <FundingFormPage />,
+                isFullScreen: true,
+                pathname: FORM,
+                title: ({ t }) => t('core:form'),
               },
             ],
+            title: ({ t }) => t('core:inProgress'),
+          }),
+          {
+            icon: 'checkCircle',
+            pathname: COMPLETED,
+            title: ({ t }) => t('core:completed'),
           },
         ],
+
         title: ({ t }) => t('funding:funding'),
       },
 

@@ -4,6 +4,7 @@ import {
   ANIMATION_STATES_APPEARABLE,
   ANIMATION_STATES_SLIDABLE_HORIZONTAL,
 } from '#lib-frontend/animation/animation.constants';
+import { type AnimationModel } from '#lib-frontend/animation/animation.models';
 import { type SlidePropsModel } from '#lib-frontend/animation/components/Slide/Slide.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
@@ -14,11 +15,17 @@ import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 
-export const Slide: LFCModel<SlidePropsModel> = ({ children, isBack = false, ...props }) => {
+export const Slide: LFCModel<SlidePropsModel> = ({
+  children,
+  elementState = ELEMENT_STATE.ACTIVE,
+  isBack = false,
+  onElementStateChange,
+  ...props
+}) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
   const { width } = useStore((state) => state.app.dimension);
-  const animation = useMemo(
+  const animation: AnimationModel = useMemo(
     () => ({
       duration: theme.animation.transition,
       states: merge([
@@ -33,8 +40,9 @@ export const Slide: LFCModel<SlidePropsModel> = ({ children, isBack = false, ...
       {...wrapperProps}
       animation={animation}
       bottom={0}
-      elementState={ELEMENT_STATE.ACTIVE}
+      elementState={elementState}
       isFullWidth
+      onElementStateChange={onElementStateChange}
       position={SHAPE_POSITION.ABSOLUTE}
       top={0}>
       {children}

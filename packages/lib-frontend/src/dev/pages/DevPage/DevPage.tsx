@@ -1,38 +1,15 @@
+import { Button } from '#lib-frontend/core/components/Button/Button';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type SFCModel } from '#lib-frontend/core/core.models';
-import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
-import { ScaledNumberField } from '#lib-frontend/data/components/ScaledNumberField/ScaledNumberField';
-import { TextField } from '#lib-frontend/data/components/TextField/TextField';
+import { DEV, SCRATCH_PAD } from '#lib-frontend/dev/dev.constants';
 import { type DevPagePropsModel } from '#lib-frontend/dev/pages/DevPage/DevPage.models';
+import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 
 export const DevPage: SFCModel<DevPagePropsModel> = ({ ...props }) => {
+  const { push } = useRouter();
   return (
-    <>
-      <FormContainer
-        fields={[
-          {
-            fields: [
-              {
-                fields: [
-                  { element: <TextField label="test" />, id: 'a' },
-                  { element: <TextField />, id: 'b' },
-                ],
-                id: '1',
-              },
-              {
-                fields: [
-                  { element: <ScaledNumberField label="test" />, id: 'c' },
-                  { element: <TextField />, id: 'd' },
-                ],
-                id: '2',
-              },
-            ],
-            id: 'tile',
-            label: 'tile',
-          },
-        ]}
-        onSubmit={async (data) => console.warn(data)}
-        p
-      />
-    </>
+    <Wrapper flex>
+      <Button onPress={() => push({ pathname: `${DEV}/${SCRATCH_PAD}` })}>Go</Button>
+    </Wrapper>
   );
 };
