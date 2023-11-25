@@ -12,7 +12,6 @@ import { FundingPage } from '#lib-frontend/issuer/pages/FundingPage/FundingPage'
 import { IssuerPage } from '#lib-frontend/issuer/pages/IssuerPage/IssuerPage';
 import { TabNavigator } from '#lib-frontend/route/components/TabNavigator/TabNavigator';
 import { type RouteModel } from '#lib-frontend/route/route.models';
-import { getRouteGroup } from '#lib-frontend/route/utils/getRouteGroup/getRouteGroup';
 import { SETTINGS } from '#lib-frontend/settings/settings.constants';
 import { GROUP_TYPE } from '#lib-shared/group/resources/Group/Group.constants';
 
@@ -29,41 +28,45 @@ export const issuerRoutes: Array<RouteModel> = [
         title: ({ t }) => t('core:analytics'),
       },
 
-      getRouteGroup({
-        element: <FundingPage />,
-        icon: 'dollar',
-        navigator: <TabNavigator type={TABS_TYPE.CONTAINED} />,
+      {
         pathname: FUNDING,
         routes: [
           {
             element: <FundingFormPage />,
             isFullScreen: true,
-            isNavigatable: false,
             pathname: FORM,
             title: ({ t }) => t('core:form'),
           },
-          getRouteGroup({
-            element: <FundingInProgressPage />,
-            icon: 'dotsCircle',
-            pathname: IN_PROGRESS,
+          {
+            element: <FundingPage />,
+            icon: 'dollar',
+            navigator: <TabNavigator type={TABS_TYPE.CONTAINED} />,
+            pathname: '/',
             routes: [
               {
-                element: <QuotesPage />,
-                isFullScreen: true,
-                pathname: QUOTES,
-                title: ({ t }) => t('core:quotes'),
+                element: <FundingInProgressPage />,
+                icon: 'dotsCircle',
+                pathname: IN_PROGRESS,
+                routes: [
+                  {
+                    element: <QuotesPage />,
+                    isFullScreen: true,
+                    pathname: QUOTES,
+                    title: ({ t }) => t('core:quotes'),
+                  },
+                ],
+                title: ({ t }) => t('core:inProgress'),
+              },
+              {
+                icon: 'checkCircle',
+                pathname: COMPLETED,
+                title: ({ t }) => t('core:completed'),
               },
             ],
-            title: ({ t }) => t('core:inProgress'),
-          }),
-          {
-            icon: 'checkCircle',
-            pathname: COMPLETED,
-            title: ({ t }) => t('core:completed'),
           },
         ],
         title: ({ t }) => t('funding:funding'),
-      }),
+      },
 
       {
         element: <GroupFormPage />,
