@@ -7,12 +7,11 @@ import { composeComponent } from '#lib-frontend/core/utils/composeComponent/comp
 export const _Skeleton = composeComponent<_SkeletonPropsModel, PropsModel<typeof Skeleton>>({
   Component: Skeleton,
 
-  getProps: ({ backgroundColor, children, foregroundColor, height, radius, width }) => ({
+  getProps: ({ backgroundColor, children, foregroundColor, height, width }) => ({
     backgroundColor,
     children,
     colorMode: 'light',
     height,
-    radius,
     transition: { type: 'timing' },
     width,
   }),

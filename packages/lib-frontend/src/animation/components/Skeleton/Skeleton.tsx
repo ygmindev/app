@@ -10,11 +10,13 @@ export const Skeleton: LFCModel<SkeletonPropsModel> = ({ children, ...props }) =
   const theme = useTheme();
   const { wrapperProps } = useLayoutStyles({ props });
   return (
-    <Wrapper {...wrapperProps}>
+    <Wrapper
+      {...wrapperProps}
+      isOverflowHidden
+      round>
       <_Skeleton
         backgroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MUTED]}
-        foregroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.ACTIVE]}
-        radius={0}>
+        foregroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.ACTIVE]}>
         {children}
       </_Skeleton>
     </Wrapper>

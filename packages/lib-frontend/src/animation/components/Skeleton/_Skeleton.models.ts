@@ -6,5 +6,4 @@ export type _SkeletonPropsModel = ChildrenPropsModel<ReactElement> &
   DimensionModel & {
     backgroundColor: string;
     foregroundColor: string;
-    radius: number;
   };
