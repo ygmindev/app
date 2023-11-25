@@ -58,7 +58,7 @@ export type RouteContextModel<TType = object> = {
 
 export type RouteUpdateModel<TTypeNext = object> = LocationModel<TTypeNext> &
   Pick<RouteStateModel, 'isBack'> & {
-    root?: string | boolean;
+    root?: string | boolean | number;
   };
 
 export type RouteTransitionModel = `${ROUTE_TRANSITION}`;

@@ -13,7 +13,7 @@ export const AnalyticsPage: LFCModel<AnalyticsPagePropsModel> = ({ ...props }) =
   );
 };
 
-// import { toNumber } from 'lodash';
+// import toNumber from 'lodash/toNumber';
 // import range from 'lodash/range';
 // import reduce from 'lodash/reduce';
 // import moment from 'moment';

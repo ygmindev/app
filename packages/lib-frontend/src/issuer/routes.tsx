@@ -28,7 +28,9 @@ export const issuerRoutes: Array<RouteModel> = [
         pathname: ANALYTICS,
         title: ({ t }) => t('core:analytics'),
       },
-      {
+
+      getRouteGroup({
+        element: <FundingPage />,
         icon: 'dollar',
         navigator: <TabNavigator type={TABS_TYPE.CONTAINED} />,
         pathname: FUNDING,
@@ -40,34 +42,28 @@ export const issuerRoutes: Array<RouteModel> = [
             pathname: FORM,
             title: ({ t }) => t('core:form'),
           },
-          {
-            element: <FundingPage />,
-            pathname: '/',
+          getRouteGroup({
+            element: <FundingInProgressPage />,
+            icon: 'dotsCircle',
+            pathname: IN_PROGRESS,
             routes: [
-              getRouteGroup({
-                element: <FundingInProgressPage />,
-                icon: 'dotsCircle',
-                pathname: IN_PROGRESS,
-                routes: [
-                  {
-                    element: <QuotesPage />,
-                    isFullScreen: true,
-                    pathname: QUOTES,
-                    title: ({ t }) => t('core:quotes'),
-                  },
-                ],
-                title: ({ t }) => t('core:inProgress'),
-              }),
               {
-                icon: 'checkCircle',
-                pathname: COMPLETED,
-                title: ({ t }) => t('core:completed'),
+                element: <QuotesPage />,
+                isFullScreen: true,
+                pathname: QUOTES,
+                title: ({ t }) => t('core:quotes'),
               },
             ],
+            title: ({ t }) => t('core:inProgress'),
+          }),
+          {
+            icon: 'checkCircle',
+            pathname: COMPLETED,
+            title: ({ t }) => t('core:completed'),
           },
         ],
         title: ({ t }) => t('funding:funding'),
-      },
+      }),
 
       {
         element: <GroupFormPage />,

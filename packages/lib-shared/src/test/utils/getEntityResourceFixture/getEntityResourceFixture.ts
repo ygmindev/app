@@ -1,4 +1,4 @@
-import { range } from 'lodash';
+import range from 'lodash/range';
 
 import { uid } from '#lib-shared/core/utils/uid/uid';
 import { type EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';

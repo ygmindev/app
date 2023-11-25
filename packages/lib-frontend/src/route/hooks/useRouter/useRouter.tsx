@@ -1,3 +1,4 @@
+import isNumber from 'lodash/isNumber';
 import isString from 'lodash/isString';
 
 import { _useRouter } from '#lib-frontend/route/hooks/useRouter/_useRouter';
@@ -34,6 +35,17 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
     }
   };
 
+  const getRoot = (root?: string | boolean | number): string =>
+    root
+      ? isString(root)
+        ? `${root}/`
+        : isNumber(root)
+        ? `${location.pathname.split('/').slice(0, root).join('/')}/`
+        : root === true
+        ? `${location.pathname}/`
+        : ''
+      : '';
+
   return {
     back: () => {
       void update(back, { isBack: true });
@@ -63,11 +75,7 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
           push({
             context: { previous: location.pathname },
             params,
-            pathname: trimPathname(
-              `${
-                isString(root) ? `${root}/` : root === true ? `${location.pathname}/` : ''
-              }${pathname}`,
-            ),
+            pathname: trimPathname(`${getRoot(root)}${pathname}`),
           }),
         { isBack },
       );
@@ -84,11 +92,7 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
           replace({
             context: { previous: location.pathname },
             params,
-            pathname: trimPathname(
-              `${
-                isString(root) ? `${root}/` : root === true ? `${location.pathname}/` : ''
-              }${pathname}`,
-            ),
+            pathname: trimPathname(`${getRoot(root)}${pathname}`),
           }),
         { isBack },
       );
