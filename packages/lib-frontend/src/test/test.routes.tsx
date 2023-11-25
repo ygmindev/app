@@ -1,0 +1,28 @@
+import { type RouteModel } from '#lib-frontend/route/route.models';
+import { getRouteGroup } from '#lib-frontend/route/utils/getRouteGroup/getRouteGroup';
+import { ReportPage } from '#lib-frontend/test/pages/ReportPage/ReportPage';
+import { SnapshotPage } from '#lib-frontend/test/pages/SnapshotPage/SnapshotPage';
+import { REPORT } from '#lib-frontend/test/test.constants';
+import { TEST } from '#lib-shared/test/test.constants';
+
+export const testRoutes: Array<RouteModel> = [
+  {
+    pathname: TEST,
+    routes: [
+      getRouteGroup({
+        pathname: REPORT,
+        routes: [
+          {
+            element: <ReportPage />,
+            pathname: '/',
+          },
+          {
+            element: <SnapshotPage />,
+            pathname: ':snapshotid',
+            prerender: ['sign-in-works'],
+          },
+        ],
+      }),
+    ],
+  },
+];
