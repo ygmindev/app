@@ -1,7 +1,11 @@
-import { type ChildrenPropsModel } from '#lib-frontend/core/core.models';
+import {
+  type ChildrenPropsModel,
+  type ElementStatePropsModel,
+} from '#lib-frontend/core/core.models';
 
-export type _LinkPropsModel = {
-  isNewTab?: boolean;
-  onPress?(): void;
-  pathname?: string;
-} & ChildrenPropsModel;
+export type _LinkPropsModel = ChildrenPropsModel &
+  ElementStatePropsModel & {
+    isNewTab?: boolean;
+    onPress?(): void;
+    pathname?: string;
+  };

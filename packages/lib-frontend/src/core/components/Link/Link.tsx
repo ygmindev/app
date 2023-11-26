@@ -8,22 +8,21 @@ import { _Link } from '#lib-frontend/core/components/Link/_Link';
 import { type LinkPropsModel } from '#lib-frontend/core/components/Link/Link.models';
 import { View } from '#lib-frontend/core/components/View/View';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type SFCModel } from '#lib-frontend/core/core.models';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { type TFCModel } from '#lib-frontend/core/core.models';
+import { useTextStyles } from '#lib-frontend/style/hooks/useTextStyles/useTextStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 
-export const Link: SFCModel<LinkPropsModel> = ({ children, ...props }) => {
-  const { styles } = useStyles({ props });
+export const Link: TFCModel<LinkPropsModel> = ({ children, ...props }) => {
+  const { textProps } = useTextStyles({ props });
   const theme = useTheme();
   const ref = useRef<AnimatableRefModel>(null);
   return isString(children) ? (
     <Activatable
       onActive={() => ref?.current?.toState(ELEMENT_STATE.ACTIVE)}
-      onInactive={() => ref?.current?.toState(ELEMENT_STATE.INACTIVE)}
-      style={styles}>
+      onInactive={() => ref?.current?.toState(ELEMENT_STATE.INACTIVE)}>
       <View>
         <AnimatableText
-          {...props}
+          {...textProps}
           animation={{
             states: {
               [ELEMENT_STATE.ACTIVE]: { color: theme.color.palette.primary.active },
@@ -36,6 +35,6 @@ export const Link: SFCModel<LinkPropsModel> = ({ children, ...props }) => {
       </View>
     </Activatable>
   ) : (
-    <_Link {...props}>{children}</_Link>
+    <_Link {...textProps}>{children}</_Link>
   );
 };

@@ -4,7 +4,7 @@ import {
   OTP_FORM_VALIDATORS,
 } from '#lib-frontend/auth/containers/OtpForm/OtpForm.constants';
 import { type OtpFormPropsModel } from '#lib-frontend/auth/containers/OtpForm/OtpForm.models';
-import { Button } from '#lib-frontend/core/components/Button/Button';
+import { Link } from '#lib-frontend/core/components/Link/Link';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
@@ -12,6 +12,8 @@ import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormC
 import { Trans } from '#lib-frontend/locale/components/Trans/Trans';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { FONT_ALIGN } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { AUTH } from '#lib-shared/auth/auth.constants';
 import { type HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
 
@@ -25,23 +27,16 @@ export const OtpForm: LFCModel<OtpFormPropsModel> = ({
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { t } = useTranslation();
+  const { t } = useTranslation([AUTH]);
   return (
     <FormContainer
       {...wrapperProps}
-      bottomElement={({ elementState }) => (
-        <Wrapper
-          isCenter
-          isRowAlign>
-          <Text>{t('auth:otpDidntGet')}</Text>
-
-          <Button
-            elementState={elementState}
-            icon="refresh"
-            onPress={onBack}>
-            {t('core:tryAgain')}
-          </Button>
-        </Wrapper>
+      bottomElement={() => (
+        <Link
+          align={FONT_ALIGN.CENTER}
+          onPress={onBack}>
+          {t('auth:otpDidntGet')}
+        </Link>
       )}
       errorContextGet={(e) =>
         (e as HttpError).statusCode === HTTP_STATUS_CODE.UNAUTHORIZED

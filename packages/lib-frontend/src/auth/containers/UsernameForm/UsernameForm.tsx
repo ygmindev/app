@@ -13,6 +13,7 @@ import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { Divider } from '#lib-frontend/core/components/Divider/Divider';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { type FormFieldModel } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
@@ -95,31 +96,38 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
       bottomElement={
         mode === FORM_MODE.UPDATE
           ? undefined
-          : ({ elementState }) => (
-              <Wrapper s>
-                <Divider>{t('core:or')}</Divider>
+          : ({ elementState }) => {
+              const elementStateF =
+                elementState === ELEMENT_STATE.LOADING || elementState === ELEMENT_STATE.DISABLED
+                  ? ELEMENT_STATE.DISABLED
+                  : elementState;
+              return (
+                <Wrapper s>
+                  <Divider>{t('core:or')}</Divider>
 
-                {valueControlled === SIGN_IN_METHOD.EMAIL && (
-                  <Button
-                    elementState={elementState}
-                    icon="phone"
-                    onPress={() => valueControlledSet(SIGN_IN_METHOD.PHONE)}
-                    type={BUTTON_TYPE.TRANSPARENT}>
-                    {t('core:continueWith', { value: t('user:phone') })}
-                  </Button>
-                )}
+                  {valueControlled === SIGN_IN_METHOD.EMAIL && (
+                    <Button
+                      elementState={elementStateF}
+                      icon="phone"
+                      onPress={() => valueControlledSet(SIGN_IN_METHOD.PHONE)}
+                      testID="XXX"
+                      type={BUTTON_TYPE.TRANSPARENT}>
+                      {t('core:continueWith', { value: t('user:phone') })}
+                    </Button>
+                  )}
 
-                {valueControlled === SIGN_IN_METHOD.PHONE && (
-                  <Button
-                    elementState={elementState}
-                    icon="email"
-                    onPress={() => valueControlledSet(SIGN_IN_METHOD.EMAIL)}
-                    type={BUTTON_TYPE.TRANSPARENT}>
-                    {t('core:continueWith', { value: t('user:email') })}
-                  </Button>
-                )}
-              </Wrapper>
-            )
+                  {valueControlled === SIGN_IN_METHOD.PHONE && (
+                    <Button
+                      elementState={elementStateF}
+                      icon="email"
+                      onPress={() => valueControlledSet(SIGN_IN_METHOD.EMAIL)}
+                      type={BUTTON_TYPE.TRANSPARENT}>
+                      {t('core:continueWith', { value: t('user:email') })}
+                    </Button>
+                  )}
+                </Wrapper>
+              );
+            }
       }
       errorContextGet={(e) =>
         checkExists && (e as HttpError).statusCode === HTTP_STATUS_CODE.CONFLICT

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
 import { type OtpFieldPropsModel } from '#lib-frontend/auth/components/OtpField/OtpField.models';
 import { Button } from '#lib-frontend/core/components/Button/Button';
+import { Loading } from '#lib-frontend/core/components/Loading/Loading';
 import { Tooltip } from '#lib-frontend/core/components/Tooltip/Tooltip';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
@@ -42,6 +43,7 @@ export const OtpField: LFCModel<OtpFieldPropsModel> = ({
   });
   const [measure, measureSet] = useState<MeasureModel>();
   const [isFocused, isFocusedSet] = useState<boolean>(false);
+
   return (
     <Wrapper
       {...wrapperProps}
@@ -84,7 +86,7 @@ export const OtpField: LFCModel<OtpFieldPropsModel> = ({
                 ? ELEMENT_STATE.ACTIVE
                 : elementState
             }
-            error={error !== undefined}
+            error={!!error}
             isCenter
             isNoClear
             key={id}
@@ -96,21 +98,37 @@ export const OtpField: LFCModel<OtpFieldPropsModel> = ({
 
         <Wrapper
           isRowAlign
-          left={measure?.width && measure.width + theme.shape.spacing.s}
+          left={(measure?.width ?? 0) + theme.shape.spacing[THEME_SIZE.SMALL]}
           position={SHAPE_POSITION.ABSOLUTE}
           zIndex>
           {isTranslatableText(error) && <Tooltip color={THEME_COLOR.ERROR}>{error}</Tooltip>}
 
-          {elementState !== ELEMENT_STATE.DISABLED && (
+          <Wrapper position={SHAPE_POSITION.RELATIVE}>
             <Appearable
-              isActive={valueControlled ? valueControlled?.length > 0 : undefined}
-              isCenter>
+              bottom={0}
+              isActive={
+                elementState !== ELEMENT_STATE.LOADING && (valueControlled?.length ?? 0) > 0
+              }
+              isCenter
+              left={0}
+              position={SHAPE_POSITION.ABSOLUTE}
+              top={0}>
               <Button
                 icon="times"
                 onPress={() => valueControlledSet('')}
               />
             </Appearable>
-          )}
+
+            <Appearable
+              bottom={0}
+              isActive={elementState === ELEMENT_STATE.LOADING}
+              isCenter
+              left={0}
+              position={SHAPE_POSITION.ABSOLUTE}
+              top={0}>
+              <Loading size={THEME_SIZE.SMALL} />
+            </Appearable>
+          </Wrapper>
         </Wrapper>
       </Wrapper>
     </Wrapper>

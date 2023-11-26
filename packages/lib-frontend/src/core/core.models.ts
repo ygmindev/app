@@ -5,6 +5,7 @@ import { type WithIconPropsModel } from '#lib-frontend/core/components/Icon/Icon
 import { type CORNER, type DIRECTION, type ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { type LayoutStylePropsModel } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles.models';
+import { type TextStylePropsModel } from '#lib-frontend/style/hooks/useTextStyles/useTextStyles.models';
 import {
   type StyleModel,
   type StylePropsModel,
@@ -28,6 +29,8 @@ export type SFCModel<TProps = object, TStyle extends StyleModel = ViewStyleModel
 export type LFCPropsModel<TProps = object> = PropsModel<LFCModel<TProps>>;
 
 export type LFCModel<TProps = object> = FCModel<TProps & LayoutStylePropsModel>;
+
+export type TFCModel<TProps = object> = FCModel<TProps & TextStylePropsModel>;
 
 export type RSFCPropsModel<
   TType = undefined,

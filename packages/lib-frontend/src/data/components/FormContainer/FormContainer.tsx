@@ -193,25 +193,23 @@ const FormContainerF = forwardRef(
       <Form onSubmit={isDisabled ? undefined : async () => handleSubmitF()}>
         <MainLayout
           {...wrapperProps}
-          bottomElement={
-            isButton ? (
-              <SubmittableButtons
-                cancelLabel={cancelLabel}
-                elementState={elementStateF}
-                isFullWidth={isFullWidth}
-                onCancel={onCancel}
-                onSubmit={async () => handleSubmitF()}
-                submitLabel={submitLabel}
-              />
-            ) : undefined
-          }
+          bottomElement={bottomElement && bottomElement({ elementState: elementStateF })}
           isFullHeight={isFullHeight}
           s>
           {topElement && topElement({ elementState: elementStateF })}
 
           {getFields()}
 
-          {bottomElement && bottomElement({ elementState: elementStateF })}
+          {isButton ? (
+            <SubmittableButtons
+              cancelLabel={cancelLabel}
+              elementState={elementStateF}
+              isFullWidth={isFullWidth}
+              onCancel={onCancel}
+              onSubmit={async () => handleSubmitF()}
+              submitLabel={submitLabel}
+            />
+          ) : undefined}
         </MainLayout>
       </Form>
     );

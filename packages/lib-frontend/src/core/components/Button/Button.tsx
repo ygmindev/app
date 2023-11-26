@@ -165,7 +165,6 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
   ) : (
     iconF
   );
-
   return (
     <Pressable
       {...props}
@@ -183,12 +182,7 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
       round={isIconOnly ? heightF / 2 : true}
       width={props.width ?? (children ? undefined : heightF)}>
       <>
-        <Appearable
-          isActive={!isLoading}
-          isHidden={isLoading}
-          isScalable={false}>
-          {childrenF}
-        </Appearable>
+        <Appearable isActive={!isLoading}>{childrenF}</Appearable>
 
         <Appearable
           isAbsoluteFill

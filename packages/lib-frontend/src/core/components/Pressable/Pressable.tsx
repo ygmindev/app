@@ -17,8 +17,6 @@ import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { isPromise } from '#lib-shared/core/utils/isPromise/isPromise';
 
-// const { Button } = lazy(() => import('#lib-frontend/core/components/Button/Button'));
-
 export const Pressable: RLFCModel<WrapperRefModel, PressablePropsModel> = ({
   animation,
   children,
@@ -69,6 +67,10 @@ export const Pressable: RLFCModel<WrapperRefModel, PressablePropsModel> = ({
     }
   };
 
+  if (props.testID) {
+    console.warn(animation);
+  }
+
   return (
     <>
       <Activatable
@@ -85,6 +87,7 @@ export const Pressable: RLFCModel<WrapperRefModel, PressablePropsModel> = ({
           {...wrapperProps}
           animation={{
             states: {
+              ...animation?.states,
               [ELEMENT_STATE.ACTIVE]: animation?.states?.active ?? {
                 backgroundColor: theme.color.border,
               },
