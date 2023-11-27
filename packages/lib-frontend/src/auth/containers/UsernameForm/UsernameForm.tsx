@@ -72,6 +72,7 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
             element: (
               <TextField
                 autoComplete="email"
+                icon="email"
                 isAutoFocus
                 label={t('user:email')}
               />

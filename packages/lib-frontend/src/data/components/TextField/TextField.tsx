@@ -235,10 +235,12 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
           {rightElementF}
         </Wrapper>
 
+        {/* TODO: to item? */}
         <Wrapper
           animation={containerAnimation}
           elementState={placeholder ? ELEMENT_STATE.ACTIVE : elementStateF}
           isCenter
+          isRowAlign
           left={0}
           pHorizontal
           position={SHAPE_POSITION.ABSOLUTE}

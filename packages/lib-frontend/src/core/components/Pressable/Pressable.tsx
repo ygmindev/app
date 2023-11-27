@@ -67,10 +67,6 @@ export const Pressable: RLFCModel<WrapperRefModel, PressablePropsModel> = ({
     }
   };
 
-  if (props.testID) {
-    console.warn(animation);
-  }
-
   return (
     <>
       <Activatable
