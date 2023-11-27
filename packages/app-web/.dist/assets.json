@@ -1,18 +1,18 @@
 {
   "\u0000virtual:vike:pageConfigValuesAll:client:/src/pages.css": {
-    "file": "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/static/pages.3a0c3634.css",
+    "file": "Users/yoongeemin/Developer/Projects/app/packages/app-web/assets/static/pages.3a0c3634.css",
     "src": "\u0000virtual:vike:pageConfigValuesAll:client:/src/pages.css"
   },
   "../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf": {
-    "file": "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/static/FontAwesome.aa58f33f.ttf",
+    "file": "Users/yoongeemin/Developer/Projects/app/packages/app-web/assets/static/FontAwesome.aa58f33f.ttf",
     "src": "../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"
   },
   "../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf": {
-    "file": "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/static/Ionicons.eeb002b2.ttf",
+    "file": "Users/yoongeemin/Developer/Projects/app/packages/app-web/assets/static/Ionicons.eeb002b2.ttf",
     "src": "../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"
   },
   "../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf": {
-    "file": "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/static/MaterialIcons.c6b161a3.ttf",
+    "file": "Users/yoongeemin/Developer/Projects/app/packages/app-web/assets/static/MaterialIcons.c6b161a3.ttf",
     "src": "../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"
   },
   "../../node_modules/vike/dist/esm/client/server-routing-runtime/entry.js": {
@@ -36,12 +36,12 @@
   },
   "virtual:vike:pageConfigValuesAll:client:/src/pages": {
     "assets": [
-      "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/static/FontAwesome.aa58f33f.ttf",
-      "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/static/Ionicons.eeb002b2.ttf",
-      "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/static/MaterialIcons.c6b161a3.ttf"
+      "Users/yoongeemin/Developer/Projects/app/packages/app-web/assets/static/FontAwesome.aa58f33f.ttf",
+      "Users/yoongeemin/Developer/Projects/app/packages/app-web/assets/static/Ionicons.eeb002b2.ttf",
+      "Users/yoongeemin/Developer/Projects/app/packages/app-web/assets/static/MaterialIcons.c6b161a3.ttf"
     ],
     "css": [
-      "Users/ygmin/Projects/mono_v2/app3/app/packages/app-web/assets/static/pages.3a0c3634.css"
+      "Users/yoongeemin/Developer/Projects/app/packages/app-web/assets/static/pages.3a0c3634.css"
     ],
     "dynamicImports": [
       "../lib-frontend/src/locale/utils/currentCountry/_currentCountry.ts"

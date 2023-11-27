@@ -1,6 +1,10 @@
 {
+  "billion": "billion",
+  "exact": "exact",
   "exactMessage": "enter exact value instead",
   "max": "max {{value}}",
+  "million": "million",
   "min": "min {{value}}",
-  "rangeMessage": "enter range instead"
+  "rangeMessage": "enter range instead",
+  "thousand": "thousand"
 }
