@@ -8,7 +8,7 @@ import {
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
-export const useValueDelayed = <TType>(
+export const useValueDelayed = <TType,>(
   ...[value, delay]: UseValueDelayedParamsModel<TType>
 ): UseValueDelayedModel<TType> => {
   const theme = useTheme();
