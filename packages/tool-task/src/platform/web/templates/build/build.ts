@@ -12,9 +12,9 @@ export const build: TaskParamsModel<unknown> = {
   name: 'build',
 
   task: [
-    // 'build-json-typescript',
+    'build-json-typescript',
 
-    // 'build-json-lint',
+    'build-json-lint',
 
     ({ root }) => fromExecutable(`vite build --config ${joinPaths([root, config().configFile])}`),
 
