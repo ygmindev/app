@@ -38,8 +38,8 @@ export const QuotesPage: SFCModel<QuotesPagePropsModel> = ({ testID, ...props })
         //   value: format(yesterday, { isReadable: true }),
         // })}
         image="https://companieslogo.com/img/orig/WF-f6e6a56c.png?t=1660034230"
-        label="Woori Bank"
-        onPress={() => null}>
+        onPress={() => null}
+        title="Woori Bank">
         <Table
           columns={[
             { formatter: ({ value }) => `${value.toFixed(0)} years`, id: 'tenor' },
@@ -63,8 +63,8 @@ export const QuotesPage: SFCModel<QuotesPagePropsModel> = ({ testID, ...props })
         //   value: format(yesterday, { isReadable: true }),
         // })}
         image="https://design.gs.com/downloads/Goldman_Sachs_Blue_Box.png"
-        label="Goldman Sachs"
-        onPress={() => null}>
+        onPress={() => null}
+        title="Goldman Sachs">
         <Table
           columns={[
             { formatter: ({ value }) => `${value.toFixed(0)} years`, id: 'tenor' },

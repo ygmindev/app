@@ -19,7 +19,6 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
     },
     {
       element: <AppLayout />,
-      isRoot: true,
       pathname: '/',
       routes: [
         ...appRoutes,

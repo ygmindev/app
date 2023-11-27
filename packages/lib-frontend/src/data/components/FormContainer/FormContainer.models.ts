@@ -28,7 +28,7 @@ export type FormTileModel<TType> = WithIdModel<StringKeyModel<TType>> & {
     | FormRowModel<TType>
     | { [TKey in StringKeyModel<TType>]: FormFieldModel<TType, TKey> }[StringKeyModel<TType>]
   >;
-  label?: TranslatableTextModel;
+  title?: TranslatableTextModel;
 };
 
 export type FormRowModel<TType> = WithIdModel<StringKeyModel<TType>> & {

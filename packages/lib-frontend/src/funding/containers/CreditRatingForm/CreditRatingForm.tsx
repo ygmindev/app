@@ -81,7 +81,7 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
                     <Tile
                       image={agencyF.logo}
                       key={agencyF._id}
-                      label={agencyF.name}>
+                      title={agencyF.name}>
                       <ItemTable
                         items={[
                           {

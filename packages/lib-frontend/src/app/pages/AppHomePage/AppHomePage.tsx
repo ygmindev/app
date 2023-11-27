@@ -41,9 +41,9 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
               {data?.result?.map(({ _id, name, types }) => (
                 <RouteLineItem
                   key={_id}
-                  label={name}
                   root={GROUP}
-                  route={{ pathname: _id ?? '' }}>
+                  route={{ pathname: _id ?? '' }}
+                  title={name}>
                   <Wrapper isRowAlign>
                     {types?.map((type) => <Chip key={type}>{type}</Chip>)}
                   </Wrapper>

@@ -8,7 +8,6 @@ import { BRIGHTNESS } from '#lib-shared/style/style.constants';
 export const SETTINGS_GROUPS = withId([
   {
     id: APPEARANCE,
-    label: ({ t }) => t('settings:appearance'),
     routes: [
       {
         icon: 'brightness',
@@ -16,10 +15,10 @@ export const SETTINGS_GROUPS = withId([
         label: ({ t }) => t('settings:brightness'),
       },
     ],
+    title: ({ t }) => t('settings:appearance'),
   },
   {
     id: LOCATION,
-    label: ({ t }) => t('locale:location'),
     routes: [
       {
         icon: 'time',
@@ -27,5 +26,6 @@ export const SETTINGS_GROUPS = withId([
         label: ({ t }) => t('locale:timezone'),
       },
     ],
+    title: ({ t }) => t('locale:location'),
   },
 ]) satisfies WithIdResultModel<Array<RouteGroupPropsModel>>;

@@ -9,7 +9,6 @@ import { ACCOUNT } from '#lib-shared/user/user.constants';
 export const ACCOUNT_GROUPS = withId([
   {
     id: ACCOUNT,
-    label: ({ t }) => t('user:account'),
     root: ACCOUNT,
     routes: [
       {
@@ -30,5 +29,6 @@ export const ACCOUNT_GROUPS = withId([
         label: ({ t }) => t('settings:preferences'),
       },
     ],
+    title: ({ t }) => t('user:account'),
   },
 ]) satisfies WithIdResultModel<Array<RouteGroupPropsModel>>;

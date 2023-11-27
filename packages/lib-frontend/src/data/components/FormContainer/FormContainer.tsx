@@ -162,8 +162,8 @@ const FormContainerF = forwardRef(
         border
         defaultValue={ELEMENT_STATE.ACTIVE}
         key={tile.id}
-        label={tile.label}
-        round>
+        round
+        title={tile.title}>
         <Wrapper
           p
           s>
@@ -179,7 +179,7 @@ const FormContainerF = forwardRef(
     const getFields = (): ReactNode =>
       fields?.map((field) => {
         const tile = field as FormTileModel<TType>;
-        if (tile.fields && tile.label) {
+        if (tile.fields && tile.title) {
           return getTile(tile);
         }
         const row = field as FormRowModel<TType>;

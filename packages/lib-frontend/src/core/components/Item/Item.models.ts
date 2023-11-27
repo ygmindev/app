@@ -9,6 +9,6 @@ export type ItemPropsModel = ChildrenPropsModel<ReactElement | TranslatableTextM
   WithIconPropsModel &
   Pick<TextPropsModel, 'color' | 'type'> & {
     image?: string;
-    label?: ReactElement | TranslatableTextModel;
     rightElement?: ReactElement;
+    title?: ReactElement | TranslatableTextModel;
   };

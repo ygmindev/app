@@ -21,7 +21,6 @@ export type RouteModel<TProps extends ChildrenPropsModel = ChildrenPropsModel> =
   isIndex?: boolean;
   isNavigatable?: boolean;
   isProtectable?: boolean;
-  isRoot?: string;
   layoutProps?: LayoutStylePropsModel;
   navigator?: ReactElement<NavigatorPropsModel>;
   parent?: string;

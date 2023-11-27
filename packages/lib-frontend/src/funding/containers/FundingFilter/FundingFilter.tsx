@@ -34,7 +34,7 @@ export const FundingFilter: LFCModel<FundingFilterPropsModel> = ({ ...props }) =
             },
           ],
           id: 'currency',
-          label: t('funding:currency'),
+          title: t('funding:currency'),
         },
         {
           fields: [
@@ -51,7 +51,7 @@ export const FundingFilter: LFCModel<FundingFilterPropsModel> = ({ ...props }) =
             },
           ],
           id: 'maturityDays',
-          label: t('funding:maturity'),
+          title: t('funding:maturity'),
         },
         {
           fields: [
@@ -68,7 +68,7 @@ export const FundingFilter: LFCModel<FundingFilterPropsModel> = ({ ...props }) =
             },
           ],
           id: 'amount',
-          label: t('funding:amount'),
+          title: t('funding:amount'),
         },
       ]}
     />

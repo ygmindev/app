@@ -23,8 +23,8 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
   elementState,
   icon,
   image,
-  label,
   onChange,
+  title,
   type,
   value,
   ...props
@@ -49,7 +49,6 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
         elementState={elementState}
         icon={icon}
         image={image}
-        label={label}
         mHorizontal
         onPress={handleToggle}
         rightElement={(isActive) => (
@@ -62,6 +61,7 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
             />
           </Rotatable>
         )}
+        title={title}
         type={type}
       />
 

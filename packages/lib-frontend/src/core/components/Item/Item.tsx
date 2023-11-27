@@ -15,8 +15,8 @@ export const Item: LFCModel<ItemPropsModel> = ({
   color,
   icon,
   image,
-  label,
   rightElement,
+  title,
   type,
   ...props
 }) => {
@@ -52,14 +52,14 @@ export const Item: LFCModel<ItemPropsModel> = ({
           flex
           s={THEME_SIZE.SMALL}>
           <Skeleton>
-            {isTranslatableText(label) ? (
+            {isTranslatableText(title) ? (
               <TranslatableText
                 color={color}
                 type={type}>
-                {label}
+                {title}
               </TranslatableText>
             ) : (
-              label
+              title
             )}
           </Skeleton>
         </Wrapper>

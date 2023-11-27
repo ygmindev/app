@@ -6,8 +6,6 @@ import { type LineItemPropsModel } from '#lib-frontend/core/components/LineItem/
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 export const LineItem: LFCModel<LineItemPropsModel> = ({
   children,
@@ -15,10 +13,10 @@ export const LineItem: LFCModel<LineItemPropsModel> = ({
   elementState,
   icon,
   image,
-  label,
   onPress,
   rightElement,
-  type = FONT_TYPE.TITLE,
+  title,
+  type,
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -43,10 +41,9 @@ export const LineItem: LFCModel<LineItemPropsModel> = ({
           elementState={elementState}
           icon={icon}
           image={image}
-          label={label}
           onPress={onPress}
-          pVertical={THEME_SIZE.SMALL}
           rightElement={rightElementF && rightElementF(isActive)}
+          title={title}
           type={type}>
           {children}
         </Item>

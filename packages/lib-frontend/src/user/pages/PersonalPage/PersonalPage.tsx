@@ -1,21 +1,20 @@
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { RouteGroup } from '#lib-frontend/route/components/RouteGroup/RouteGroup';
-import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { type PersonalPagePropsModel } from '#lib-frontend/user/pages/PersonalPage/PersonalPage.models';
 import { EMAIL, NAME, PHONE } from '#lib-frontend/user/user.constants';
 import { phoneFormat } from '#lib-shared/locale/utils/phoneFormat/phoneFormat';
 
-export const PersonalPage: SFCModel<PersonalPagePropsModel> = ({ testID, ...props }) => {
-  const { styles } = useStyles({ props });
-  const currentUser = useStore((state) => state.user.currentUser);
+export const PersonalPage: LFCModel<PersonalPagePropsModel> = ({ ...props }) => {
+  const { wrapperProps } = useLayoutStyles({ props });
+  const currentUser = useCurrentUser();
   return (
     <MainLayout
-      style={styles}
-      testID={testID}>
+      {...wrapperProps}
+      p>
       <RouteGroup
-        label={({ t }) => t('user:personal')}
         root
         routes={[
           {
@@ -43,6 +42,7 @@ export const PersonalPage: SFCModel<PersonalPagePropsModel> = ({ testID, ...prop
             value: currentUser?.email ?? undefined,
           },
         ]}
+        title={({ t }) => t('user:personal')}
       />
     </MainLayout>
   );
