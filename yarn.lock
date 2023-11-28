@@ -12819,7 +12819,7 @@ __metadata:
     typeorm: "npm:^0.3.17"
     typescript: "npm:5.0.2"
     uuid: "npm:^9.0.0"
-    vike: "npm:^0.4.142"
+    vike: "npm:0.4.147"
     vite: "npm:^4.4.6"
     vite-plugin-checker: "npm:^0.6.1"
     vite-plugin-circular-dependency: "npm:^0.2.1"
@@ -35151,7 +35151,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vike@npm:^0.4.142":
+"vike@npm:0.4.147":
   version: 0.4.147
   resolution: "vike@npm:0.4.147"
   dependencies:

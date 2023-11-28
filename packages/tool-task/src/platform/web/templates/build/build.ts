@@ -9,13 +9,9 @@ export const build: TaskParamsModel<unknown> = {
 
   name: 'build',
 
+  onBefore: ['node-post-install', 'build-json-typescript', 'build-json-lint'],
+
   task: [
-    'node-post-install',
-
-    'build-json-typescript',
-
-    'build-json-lint',
-
     ({ root }) => fromExecutable(`vite build --config ${joinPaths([root, config().configFile])}`),
 
     // ({ root }) => runServer({ pathname: joinPaths([root, fileConfig.distPath, 'client']) }),

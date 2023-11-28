@@ -305,7 +305,7 @@
     "tsconfig-paths": "^4.2.0",
     "type-fest": "4.0.0",
     "typescript": "5.0.2",
-    "vike": "^0.4.142",
+    "vike": "0.4.147",
     "vite": "^4.4.6",
     "vite-plugin-checker": "^0.6.1",
     "vite-plugin-circular-dependency": "^0.2.1",

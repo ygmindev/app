@@ -1,4 +1,4 @@
-import { render } from '#lib-fron#lib-frontend/underwriter/pages/UnderwriterPage/UnderwriterPage
+import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 import { UnderwriterPage } from '#lib-frontend/underwriter/pages/UnderwriterPage/UnderwriterPage';
 import { type UnderwriterPagePropsModel } from '#lib-frontend/underwriter/pages/UnderwriterPage/UnderwriterPage.models';

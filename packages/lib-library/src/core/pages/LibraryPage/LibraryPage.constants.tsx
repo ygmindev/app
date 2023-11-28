@@ -1,8 +1,8 @@
+import { props as accordionProps } from '#lib-frontend/animation/components/Accordion/Accordion.library';
 import { props as appearableProps } from '#lib-frontend/animation/components/Appearable/Appearable.library';
 import { props as slidesProps } from '#lib-frontend/animation/components/Slides/Slides.library';
 import { props as logoProps } from '#lib-frontend/app/components/Logo/Logo.library';
 import { props as otpFieldProps } from '#lib-frontend/auth/components/OtpField/OtpField.library';
-import { props as accordionProps } from '#lib-frontend/animation/components/Accordion/Accordion.library';
 import { props as activatableProps } from '#lib-frontend/core/components/Activatable/Activatable.library';
 import { props as buttonProps } from '#lib-frontend/core/components/Button/Button.library';
 import { props as chilProps } from '#lib-frontend/core/components/Chip/Chip.library';
@@ -16,7 +16,6 @@ import { props as textProps } from '#lib-frontend/core/components/Text/Text.libr
 import { props as tileProps } from '#lib-frontend/core/components/Tile/Tile.library';
 import { props as tooltipProps } from '#lib-frontend/core/components/Tooltip/Tooltip.library';
 import { props as wrapperProps } from '#lib-frontend/core/components/Wrapper/Wrapper.library';
-import { props as selectFieldProps } from '#lib-frontend/data/components/SelectField/SelectField.library';
 import { props as switchFieldProps } from '#lib-frontend/data/components/SwitchField/SwitchField.library';
 import { props as textFieldProps } from '#lib-frontend/data/components/TextField/TextField.library';
 import { props as notificationProps } from '#lib-frontend/notification/components/Notification/Notification.library';
@@ -40,7 +39,6 @@ export const LIBRARY_PROPS = [
   notificationsProps,
   otpFieldProps,
   searchFieldProps,
-  selectFieldProps,
   slidesProps,
   switchFieldProps,
   textFieldProps,

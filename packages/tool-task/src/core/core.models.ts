@@ -26,16 +26,17 @@ export type TaskResultModel = {
   status: TaskStatusModel;
 };
 
-export type TaskParamsModel<TType extends unknown> = Omit<TaskContextModel<TType>, 'options'> & {
-  onBefore?: Array<TaskModel<TType>>;
-  onFinish?: Array<TaskModel<TType>>;
-  options?:
-    | PromptParamsModel<TType>
-    | ((
-        context: Pick<TaskContextModel<TType>, 'name' | 'root' | 'overrides'>,
-      ) => PromptParamsModel<TType>);
-  task: Array<TaskModel<TType>>;
-} & EnvironmentOverrideParamsModel;
+export type TaskParamsModel<TType extends unknown> = Omit<TaskContextModel<TType>, 'options'> &
+  EnvironmentOverrideParamsModel & {
+    onBefore?: Array<TaskModel<TType>>;
+    onFinish?: Array<TaskModel<TType>>;
+    options?:
+      | PromptParamsModel<TType>
+      | ((
+          context: Pick<TaskContextModel<TType>, 'name' | 'root' | 'overrides'>,
+        ) => PromptParamsModel<TType>);
+    task: Array<TaskModel<TType>>;
+  };
 
 export type TaskContextModel<TType> = {
   name: string;

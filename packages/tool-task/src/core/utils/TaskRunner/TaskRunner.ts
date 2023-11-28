@@ -102,9 +102,6 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     task,
     variables,
   }: TaskParamsModel<TType>): Promise<void> => {
-    process.chdir(root ?? fromRoot());
-    setEnvironment({ environment, variables });
-
     let optionsF = { ...parseArgs(), ...overrides } as TType;
     if (options) {
       const optionsPromps = isFunction(options) ? options({ name, overrides, root }) : options;
@@ -118,6 +115,10 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     try {
       info('running', name);
       onBefore && (await this.runTasks(onBefore, context));
+
+      process.chdir(root ?? fromRoot());
+      setEnvironment({ environment, variables });
+
       await this.runTasks(task, context);
     } catch (e) {
       error(name, (e as Error).stack);

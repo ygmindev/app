@@ -2,7 +2,6 @@ import { AppLayout } from '#lib-frontend/app/layouts/AppLayout/AppLayout';
 import { authRoutes } from '#lib-frontend/auth/auth.routes';
 import { devRoutes } from '#lib-frontend/dev/dev.routes';
 import { PingPage } from '#lib-frontend/http/pages/PingPage/PingPage';
-import { NotFoundPage } from '#lib-frontend/route/pages/NotFoundPage/NotFoundPage';
 import { type RouteModel } from '#lib-frontend/route/route.models';
 import {
   type GetRoutesModel,
@@ -29,10 +28,11 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
 
         ...devRoutes,
 
-        {
-          element: <NotFoundPage />,
-          pathname: '*',
-        },
+        // TODO: fix after build
+        // {
+        //   element: <NotFoundPage />,
+        //   pathname: '*',
+        // },
       ],
     },
   ] as Array<RouteModel>;

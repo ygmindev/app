@@ -62,9 +62,9 @@ function vitePluginIsomorphicImport(serverExtension: string): Plugin {
 export const _bundle = ({
   aliases,
   babelConfig,
+  buildPath,
   cachePath,
   define,
-  distPath,
   entry,
   envPrefix,
   extensions,
@@ -111,7 +111,7 @@ export const _bundle = ({
 
       minify: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION,
 
-      outDir: joinPaths([fromWorking(), distPath]),
+      outDir: joinPaths([fromWorking(), buildPath]),
 
       rollupOptions: {
         external: externals,

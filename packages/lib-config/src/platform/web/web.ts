@@ -9,14 +9,14 @@ const { _config, config } = defineConfig({
 
   config: () =>
     ({
+      ...WEB_CONFIG,
+
       bundleConfig: _bundleConfig,
 
       configFile: 'web.js',
 
       isSsr: true,
-
-      ...WEB_CONFIG,
-    } satisfies WebConfigModel),
+    }) satisfies WebConfigModel,
 });
 
 export { _config, config };
