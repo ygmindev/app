@@ -12,6 +12,8 @@ import { ROUTE } from '#lib-shared/route/route.constants';
 export const _prerender =
   ({ languageDefault, languages }: _PrerenderParamsModel): _PrerenderModel =>
   async ({ pageContexts }) => {
+    console.warn('@@@CONTEXTS:');
+    console.warn(pageContexts);
     const pageContextPromises: Array<() => Promise<(typeof pageContexts)[number]>> = [];
     languages.forEach((lang) =>
       pageContexts.forEach(({ context, urlOriginal, ...pageContext }) =>
@@ -22,6 +24,7 @@ export const _prerender =
           const pathname = trimPathname(
             isLanguageDefault ? urlOriginal : `/${lang}/${urlOriginal}`,
           );
+          console.warn(pathname);
           return {
             ...pageContext,
             context: merge([
