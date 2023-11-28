@@ -16,16 +16,8 @@ export const build: TaskParamsModel<unknown> = {
   task: [
     ({ root }) => fromExecutable(`vite build --config ${joinPaths([root, config().configFile])}`),
 
-    // ({ root }) =>
-    //   process.env.APP_IS_STATIC_SERVER &&
-    //   runServer({ pathname: joinPaths([root, fileConfig.buildPath, 'client']) }),
-    ({ root }) => {
-      console.warn(process.env);
-      console.warn(process.env.APP_IS_STATIC_SERVER);
-      return (
-        process.env.APP_IS_STATIC_SERVER &&
-        runServer({ pathname: joinPaths([root, fileConfig.buildPath, 'client']) })
-      );
-    },
+    ({ root }) =>
+      process.env.APP_IS_STATIC_SERVER &&
+      runServer({ pathname: joinPaths([root, fileConfig.buildPath, 'client']) }),
   ],
 };
