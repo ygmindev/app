@@ -11,7 +11,8 @@ import { type TestIdPropsModel } from '#lib-frontend/test/test.models';
 export type _UseAnimationStateParamsModel<TStyle extends StyleModel = ViewStyleModel> =
   RefPropsModel<AnimatableRefModel> & AnimatablePropsModel<TStyle> & TestIdPropsModel;
 
-export type _UseAnimationStateModel<TStyle extends StyleModel = ViewStyleModel> = {
-  animationProps: MotiProps<TStyle>;
-  animationState: UseDynamicAnimationState;
-} & AnimatableRefModel<TStyle>;
+export type _UseAnimationStateModel<TStyle extends StyleModel = ViewStyleModel> =
+  AnimatableRefModel<TStyle> & {
+    animationProps: MotiProps<TStyle>;
+    animationState: UseDynamicAnimationState;
+  };

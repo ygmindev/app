@@ -1,4 +1,5 @@
 import { Skeleton } from 'moti/skeleton';
+import { ReduceMotion } from 'react-native-reanimated';
 
 import { type _SkeletonPropsModel } from '#lib-frontend/animation/components/Skeleton/_Skeleton.models';
 import { type PropsModel } from '#lib-frontend/core/core.models';
@@ -12,7 +13,7 @@ export const _Skeleton = composeComponent<_SkeletonPropsModel, PropsModel<typeof
     children,
     colorMode: 'light',
     height,
-    transition: { type: 'timing' },
+    transition: { reduceMotion: ReduceMotion.Always, type: 'timing' },
     width,
   }),
 });

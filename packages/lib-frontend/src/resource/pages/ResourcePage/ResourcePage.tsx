@@ -24,7 +24,7 @@ export const ResourcePage: SFCModel<ResourcePagePropsModel> = ({ testID, ...prop
   const handleChange = (value: string): void => {
     void push({ pathname: `${RESOURCE}/${value}` });
   };
-  const id = location?.params?.id && trimPathname(location.params.id);
+  const resourceid = location?.params?.resourceid && trimPathname(location.params.resourceid);
   return (
     <Wrapper
       grow
@@ -39,10 +39,10 @@ export const ResourcePage: SFCModel<ResourcePagePropsModel> = ({ testID, ...prop
           (result, v, k) => [...result, { id: k, label: t(v.label) }],
           [] as Array<TabModel>,
         )}
-        value={id}
+        value={resourceid}
       />
 
-      {id ? RESOURCE_ITEMS[id].element : <NotFoundPage />}
+      {resourceid ? RESOURCE_ITEMS[resourceid].element : <NotFoundPage />}
     </Wrapper>
   );
 };

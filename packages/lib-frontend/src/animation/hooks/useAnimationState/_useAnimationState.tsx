@@ -1,5 +1,6 @@
 import { type DynamicStyleProp, type MotiTranformProps, type UseDynamicAnimationState } from 'moti';
 import { useDynamicAnimation } from 'moti';
+import { ReduceMotion } from 'react-native-reanimated';
 
 import {
   type _UseAnimationStateModel,
@@ -23,7 +24,13 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
       animateInitialState: isInitial,
       exit: states?.exit ?? states?.inactive,
       from: ref ? states && elementStateF : (states?.inactive as never),
-      transition: { delay, duration, loop: isInfinite, type: 'timing' },
+      transition: {
+        delay,
+        duration,
+        loop: isInfinite,
+        reduceMotion: ReduceMotion.Always,
+        type: 'timing',
+      },
     },
     animationState: animationState as UseDynamicAnimationState,
     to: (params) => {
