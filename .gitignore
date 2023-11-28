@@ -10,6 +10,9 @@ npm-debug.log*
 .swc/
 *.tsbuildinfo
 
+# Environments
+**/.env.*
+
 # Ndoe (yarn)
 .pnp.*
 .yarn/*
