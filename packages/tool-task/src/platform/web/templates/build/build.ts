@@ -18,6 +18,6 @@ export const build: TaskParamsModel<unknown> = {
 
     ({ root }) =>
       process.env.APP_IS_STATIC_SERVER &&
-      runServer({ pathname: joinPaths([root, fileConfig.distPath, 'client']) }),
+      runServer({ pathname: joinPaths([root, fileConfig.buildPath, 'client']) }),
   ],
 };
