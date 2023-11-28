@@ -6,6 +6,7 @@ import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useTracking } from '#lib-frontend/tracking/hooks/useTracking/useTracking';
 import { type TrackingProviderPropsModel } from '#lib-frontend/tracking/providers/TrackingProvider/TrackingProvider.models';
 import { isServer } from '#lib-platform/core/utils/isServer/isServer';
+import { warn } from '#lib-shared/logging/utils/logger/logger';
 
 export const TrackingProvider: SFCModel<TrackingProviderPropsModel> = ({ children }) => {
   const { identify, initialize } = useTracking();
@@ -13,7 +14,9 @@ export const TrackingProvider: SFCModel<TrackingProviderPropsModel> = ({ childre
 
   useEffect(() => {
     if (!isServer) {
-      void initialize(process.env.APP_AMPLITUDE_API_KEY);
+      process.env.APP_AMPLITUDE_API_KEY
+        ? void initialize(process.env.APP_AMPLITUDE_API_KEY)
+        : warn('Tracking API key is missing');
     }
   }, [initialize]);
 
