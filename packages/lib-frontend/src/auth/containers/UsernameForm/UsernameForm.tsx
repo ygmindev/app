@@ -23,7 +23,7 @@ import { CountryField } from '#lib-frontend/locale/components/CountryField/Count
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { PhoneField } from '#lib-frontend/user/components/PhoneField/PhoneField';
-import { SIGN_IN_METHOD } from '#lib-shared/auth/auth.constants';
+import { AUTH, SIGN_IN_METHOD } from '#lib-shared/auth/auth.constants';
 import { type SignInMethodModel } from '#lib-shared/auth/auth.models';
 import { type OtpFormModel, type OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
 import { pick } from '#lib-shared/core/utils/pick/pick';
@@ -41,7 +41,7 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
   onSuccess,
   ...props
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation([AUTH]);
   const { wrapperProps } = useLayoutStyles({ props });
   const { create } = useOtpResource();
   const { valueControlled, valueControlledSet } = useValueControlled<SignInMethodModel>({

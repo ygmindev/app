@@ -10,6 +10,7 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { AUTH } from '#lib-shared/auth/auth.constants';
 import { type SignInFormModel } from '#lib-shared/auth/resources/SignIn/SignIn.models';
 import { FORM_MODE } from '#lib-shared/data/data.constants';
 
@@ -19,7 +20,7 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
   redirectTo,
   ...props
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation([AUTH]);
   const { replace } = useRouter();
   const { signIn, usernameUpdate } = useSignInResource();
 
