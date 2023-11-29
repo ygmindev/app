@@ -4,10 +4,8 @@ import { FilterContainer } from '#lib-frontend/data/components/FilterContainer/F
 import { NumberRangeField } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField';
 import { NUMBER_RANGE_TYPE } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField.constants';
 import { NUMBER_UNIT_TYPE } from '#lib-frontend/data/data.constants';
-import { rangeToFilter } from '#lib-frontend/data/utils/rangeToFilter/rangeToFilter';
 import { type FundingFilterPropsModel } from '#lib-frontend/funding/containers/FundingFilter/FundingFilter.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
 
 export const FundingFilter: LFCModel<FundingFilterPropsModel> = ({ ...props }) => {
   const { t } = useTranslation();
@@ -30,7 +28,6 @@ export const FundingFilter: LFCModel<FundingFilterPropsModel> = ({ ...props }) =
                 />
               ),
               id: 'currency',
-              toFilter: () => FILTER_CONDITION.IN,
             },
           ],
           id: 'currency',

@@ -79,8 +79,8 @@ export const NumberRangeField = forwardRef(
     }, []);
 
     useImperativeHandle(ref, () => ({
-      blur: () => null,
-      focus: () => null,
+      blur: () => undefined,
+      focus: () => undefined,
       toFilter: (id: string) =>
         filterNil([
           !!valueControlled?.min && {

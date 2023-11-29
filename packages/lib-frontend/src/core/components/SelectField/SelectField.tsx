@@ -1,13 +1,23 @@
-import { type ReactElement, useMemo, useState } from 'react';
+import {
+  type ForwardedRef,
+  forwardRef,
+  type ReactElement,
+  useImperativeHandle,
+  useMemo,
+  useState,
+} from 'react';
 
 import { ANIMATION_STATES_APPEAR_SCALABLE } from '#lib-frontend/animation/animation.constants';
 import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
 import { Circle } from '#lib-frontend/core/components/Circle/Circle';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
-import { type SelectFieldPropsModel } from '#lib-frontend/core/components/SelectField/SelectField.models';
+import {
+  type SelectFieldPropsModel,
+  type SelectFieldRefModel,
+} from '#lib-frontend/core/components/SelectField/SelectField.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type LFCPropsModel } from '#lib-frontend/core/core.models';
+import { type LFCPropsModel, type RLFCPropsModel } from '#lib-frontend/core/core.models';
 import { SwitchField } from '#lib-frontend/data/components/SwitchField/SwitchField';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
@@ -24,116 +34,129 @@ import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/sha
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 import { sort } from '#lib-shared/core/utils/sort/sort';
+import { FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
 
-export const SelectField = <TType extends string | Array<string> = string>({
-  defaultValue,
-  isHorizontal,
-  isMultiple,
-  onChange,
-  options,
-  value,
-  ...props
-}: LFCPropsModel<SelectFieldPropsModel<TType>>): ReactElement<
-  LFCPropsModel<SelectFieldPropsModel<TType>>
-> => {
-  const theme = useTheme();
-  const { t } = useTranslation();
-  const { wrapperProps } = useLayoutStyles({ props });
-  const ids = useMemo(() => sort(options.map(({ id }) => id)), options);
+export const SelectField = forwardRef(
+  <TType extends string | Array<string> = string>(
+    {
+      defaultValue,
+      isHorizontal,
+      isMultiple,
+      onChange,
+      options,
+      value,
+      ...props
+    }: LFCPropsModel<SelectFieldPropsModel<TType>>,
+    ref: ForwardedRef<SelectFieldRefModel>,
+  ): ReactElement<RLFCPropsModel<SelectFieldRefModel, SelectFieldPropsModel<TType>>> => {
+    const theme = useTheme();
+    const { t } = useTranslation();
+    const { wrapperProps } = useLayoutStyles({ props });
+    const ids = useMemo(() => sort(options.map(({ id }) => id)), options);
 
-  const { valueControlled, valueControlledSet } = useValueControlled({
-    defaultValue,
-    onChange,
-    value,
-  });
-  const [values, valuesSet] = useState<Array<string> | undefined>(
-    isMultiple
-      ? isEmpty(valueControlled) || isEqual(valueControlled, [])
-        ? ids
-        : (valueControlled as Array<string>) ?? []
-      : undefined,
-  );
+    const { valueControlled, valueControlledSet } = useValueControlled({
+      defaultValue,
+      onChange,
+      value,
+    });
 
-  const handleChange = (id: string) => () =>
-    isMultiple
-      ? handleChangeMultiple(
-          values?.includes(id) ? values?.filter((v) => v !== id) : [...(values || []), id],
-        )
-      : valueControlledSet(id as TType);
+    const [values, valuesSet] = useState<Array<string> | undefined>(
+      isMultiple
+        ? isEmpty(valueControlled) || isEqual(valueControlled, [])
+          ? ids
+          : (valueControlled as Array<string>) ?? []
+        : undefined,
+    );
 
-  const handleChangeMultiple = (v: Array<string>): void => {
-    const idsF = sort(v);
-    valuesSet(idsF);
-    valueControlledSet((isEqual(idsF, ids) ? [] : idsF) as TType);
-  };
+    useImperativeHandle(ref, () => ({
+      blur: () => undefined,
+      focus: () => undefined,
+      toFilter: () => FILTER_CONDITION.IN,
+    }));
 
-  return (
-    <Wrapper
-      {...wrapperProps}
-      p={THEME_SIZE.SMALL}
-      s>
-      {isMultiple && (
-        <SwitchField
-          label={t('core:selectAll')}
-          onChange={(v) => handleChangeMultiple(v ? ids : [])}
-          value={isEqual(values, ids)}
-        />
-      )}
+    const handleChange = (id: string) => () =>
+      isMultiple
+        ? handleChangeMultiple(
+            values?.includes(id) ? values?.filter((v) => v !== id) : [...(values || []), id],
+          )
+        : valueControlledSet(id as TType);
 
+    const handleChangeMultiple = (v: Array<string>): void => {
+      const idsF = sort(v);
+      valuesSet(idsF);
+      valueControlledSet((isEqual(idsF, ids) ? [] : idsF) as TType);
+    };
+
+    return (
       <Wrapper
-        isRowAlign={isHorizontal}
-        s={THEME_SIZE.SMALL}>
-        {options.map(({ icon, id, label }) => {
-          const isValue = isMultiple ? values?.includes(id) : valueControlled === id;
-          return (
-            <Activatable key={id}>
-              {(isActive) => (
-                <Wrapper
-                  border
-                  borderColor={THEME_COLOR.PRIMARY}
-                  isRowAlign
-                  onPress={handleChange(id)}
-                  p={THEME_SIZE.SMALL}
-                  round>
-                  {icon && (
-                    <Icon
-                      color={THEME_COLOR.PRIMARY}
-                      icon={icon}
-                    />
-                  )}
+        {...wrapperProps}
+        p={THEME_SIZE.SMALL}
+        s>
+        {isMultiple && (
+          <SwitchField
+            label={t('core:selectAll')}
+            onChange={(v) => handleChangeMultiple(v ? ids : [])}
+            value={isEqual(values, ids)}
+          />
+        )}
 
-                  <Circle
-                    backgroundColor={isValue ? THEME_COLOR.PRIMARY : undefined}
+        <Wrapper
+          isRowAlign={isHorizontal}
+          s={THEME_SIZE.SMALL}>
+          {options.map(({ icon, id, label }) => {
+            const isValue = isMultiple ? values?.includes(id) : valueControlled === id;
+            return (
+              <Activatable key={id}>
+                {(isActive) => (
+                  <Wrapper
                     border
                     borderColor={THEME_COLOR.PRIMARY}
-                    position={SHAPE_POSITION.RELATIVE}
-                    size={THEME_SIZE_MORE.XSMALL}>
-                    {isValue ? (
+                    isRowAlign
+                    onPress={handleChange(id)}
+                    p={THEME_SIZE.SMALL}
+                    round>
+                    {icon && (
                       <Icon
-                        color={THEME_COLOR_MORE.SURFACE}
-                        icon="check"
-                      />
-                    ) : (
-                      <Circle
-                        animation={{ states: ANIMATION_STATES_APPEAR_SCALABLE }}
-                        backgroundColor={THEME_COLOR.PRIMARY}
-                        elementState={isActive ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE}
-                        position={SHAPE_POSITION.ABSOLUTE}
-                        size={
-                          theme.shape.size[THEME_SIZE_MORE.XSMALL] -
-                          theme.shape.spacing[THEME_SIZE.SMALL]
-                        }
+                        color={THEME_COLOR.PRIMARY}
+                        icon={icon}
                       />
                     )}
-                  </Circle>
 
-                  <TranslatableText>{label}</TranslatableText>
-                </Wrapper>
-              )}
-            </Activatable>
-          );
-        })}
+                    <Circle
+                      backgroundColor={isValue ? THEME_COLOR.PRIMARY : undefined}
+                      border
+                      borderColor={THEME_COLOR.PRIMARY}
+                      position={SHAPE_POSITION.RELATIVE}
+                      size={THEME_SIZE_MORE.XSMALL}>
+                      {isValue ? (
+                        <Icon
+                          color={THEME_COLOR_MORE.SURFACE}
+                          icon="check"
+                        />
+                      ) : (
+                        <Circle
+                          animation={{ states: ANIMATION_STATES_APPEAR_SCALABLE }}
+                          backgroundColor={THEME_COLOR.PRIMARY}
+                          elementState={isActive ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE}
+                          position={SHAPE_POSITION.ABSOLUTE}
+                          size={
+                            theme.shape.size[THEME_SIZE_MORE.XSMALL] -
+                            theme.shape.spacing[THEME_SIZE.SMALL]
+                          }
+                        />
+                      )}
+                    </Circle>
+
+                    <TranslatableText>{label}</TranslatableText>
+                  </Wrapper>
+                )}
+              </Activatable>
+            );
+          })}
+        </Wrapper>
       </Wrapper>
-    </Wrapper>
-  );
-};
+    );
+  },
+) as <TType extends string | Array<string> = string>(
+  props: RLFCPropsModel<SelectFieldRefModel, SelectFieldPropsModel<TType>>,
+) => ReactElement<RLFCPropsModel<SelectFieldRefModel, SelectFieldPropsModel<TType>>>;
