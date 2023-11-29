@@ -25,6 +25,9 @@ import { STATE } from '#lib-shared/state/state.constants';
 
 export const _server = async ({
   config,
+  host,
+  onError,
+  onStart,
   port,
   root,
 }: _ServerParamsModel): Promise<_ServerModel> => {
@@ -81,5 +84,10 @@ export const _server = async ({
     }
   });
 
-  await app.listen({ port: toNumber(port) });
+  try {
+    await app.listen({ port: toNumber(port) });
+    onStart();
+  } catch (e) {
+    e && onError(e as Error);
+  }
 };

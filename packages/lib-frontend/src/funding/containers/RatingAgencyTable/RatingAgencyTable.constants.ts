@@ -1,4 +1,5 @@
 import { type ResourceTablePropsModel } from '#lib-frontend/resource/components/ResourceTable/ResourceTable.models';
+import { RATING_AGENCY_RESOURCE_NAME } from '#lib-shared/funding/resources/RatingAgency/RatingAgency.constants';
 import {
   type RatingAgencyFormModel,
   type RatingAgencyModel,
@@ -11,5 +12,5 @@ export const RATING_AGENCY_TABLE_PROPS = {
     //   .sort((x, y) => CREDIT_RATING_VALUE_RANK[x] - CREDIT_RATING_VALUE_RANK[y])
     //   .map((id) => ({ id })),
   ],
-  title: ({ t }) => t('funding:ratingAgency'),
+  name: RATING_AGENCY_RESOURCE_NAME,
 } satisfies Omit<ResourceTablePropsModel<RatingAgencyModel, RatingAgencyFormModel>, 'service'>;

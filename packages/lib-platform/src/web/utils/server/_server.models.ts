@@ -1,8 +1,10 @@
 import { type _WebConfigModel } from '#lib-config/platform/web/web.models';
+import { type UriModel } from '#lib-frontend/route/route.models';
 
-export type _ServerParamsModel = {
+export type _ServerParamsModel = UriModel & {
   config: _WebConfigModel;
-  port: string;
+  onError(error: Error): void;
+  onStart(): void;
   root?: string;
 };
 

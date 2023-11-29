@@ -8,5 +8,13 @@ export const dev: TaskParamsModel<unknown> = {
 
   name: 'dev',
 
-  task: [async ({ root }) => server({ config: _config(), port: process.env.APP_PORT ?? '', root })],
+  task: [
+    async ({ root }) =>
+      server({
+        config: _config(),
+        host: process.env.APP_HOST ?? '',
+        port: process.env.APP_PORT ?? '',
+        root,
+      }),
+  ],
 };

@@ -1,9 +1,12 @@
 import { type QueryClient } from '@tanstack/react-query';
-import { type ReactNode } from 'react';
+import { type ReactElement } from 'react';
 
 import { type WithIconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
 import { type ElementStatePropsModel } from '#lib-frontend/core/core.models';
-import { type FocusableWrapperPropsModel } from '#lib-frontend/data/components/FocusableWrapper/FocusableWrapper.models';
+import {
+  type FocusableRefModel,
+  type FocusableWrapperPropsModel,
+} from '#lib-frontend/data/components/FocusableWrapper/FocusableWrapper.models';
 import {
   type AMOUNT_UNIT,
   type NUMBER_UNIT_TYPE,
@@ -17,6 +20,10 @@ import {
   type RequiredModel,
   type StringKeyModel,
 } from '#lib-shared/core/core.models';
+import {
+  type FilterConditionModel,
+  type FilterModel,
+} from '#lib-shared/resource/utils/Filter/Filter.models';
 
 export type QueryContextModel = {
   client?: QueryClient;
@@ -26,7 +33,7 @@ export type QueryContextModel = {
 export type DataRendererModel<
   TType,
   TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
-> = (params: { row: TType; value?: TType[TKey] }) => ReactNode;
+> = (params: { row: TType; value?: TType[TKey] }) => ReactElement;
 
 export type DataFormatterModel<
   TType,
@@ -59,6 +66,10 @@ export type FieldPropsModel<TType = string> = FocusableWrapperPropsModel &
     onFocus?(): void;
     onSubmit?(): void;
   };
+
+export type FieldRefModel<TType = string, TFilter = unknown> = FocusableRefModel & {
+  toFilter?(value?: TType): Array<FilterModel<TFilter>> | FilterConditionModel;
+};
 
 export type FormErrorModel<TType> =
   | {

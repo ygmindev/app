@@ -10,6 +10,7 @@ import { type FieldGroupPropsModel } from '#lib-frontend/data/components/FieldGr
 import { FocusableWrapper } from '#lib-frontend/data/components/FocusableWrapper/FocusableWrapper';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
+import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 
 export const FieldGroup: LFCModel<FieldGroupPropsModel> = ({ fields, isVertical, ...props }) => {
   const theme = useTheme();
@@ -36,6 +37,7 @@ export const FieldGroup: LFCModel<FieldGroupPropsModel> = ({ fields, isVertical,
 
           <Wrapper
             flex
+            justify={FLEX_JUSTIFY.CENTER}
             key={`${id}-field`}>
             {cloneElement(element, {
               isTransparent: true,

@@ -80,8 +80,8 @@ export const DropdownField = <TType extends string = string>({
     ? renderValue
       ? renderValue(selectedOption)
       : renderOption
-      ? renderOption(selectedOption)
-      : selectedOption.label ?? selectedOption.id
+        ? renderOption(selectedOption)
+        : selectedOption.label ?? selectedOption.id
     : undefined;
 
   return (

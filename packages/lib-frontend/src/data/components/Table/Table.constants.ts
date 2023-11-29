@@ -1,1 +1,1 @@
-export const TABLE_CELL_WIDTH_DEFAULT = 250;
+export const TABLE_CELL_WIDTH_DEFAULT = 120;
