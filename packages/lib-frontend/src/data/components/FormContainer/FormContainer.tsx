@@ -1,5 +1,5 @@
 import map from 'lodash/map';
-import { cloneElement, type ForwardedRef, type ReactElement, type ReactNode } from 'react';
+import { cloneElement, type ForwardedRef, type ReactElement, type ReactNode, useRef } from 'react';
 import { forwardRef, useImperativeHandle } from 'react';
 
 import { Accordion } from '#lib-frontend/animation/components/Accordion/Accordion';
@@ -17,13 +17,15 @@ import { FieldGroup } from '#lib-frontend/data/components/FieldGroup/FieldGroup'
 import { Form } from '#lib-frontend/data/components/Form/Form';
 import {
   type FormContainerPropsModel,
+  type FormContainerRefModel,
   type FormFieldModel,
   type FormFieldsModel,
+  type FormFieldsRefModel,
   type FormRowModel,
   type FormTileModel,
 } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
 import { SubmittableButtons } from '#lib-frontend/data/components/SubmittableButtons/SubmittableButtons';
-import { type FieldPropsModel, type FormRefModel } from '#lib-frontend/data/data.models';
+import { type FieldPropsModel, type FieldRefModel } from '#lib-frontend/data/data.models';
 import { useForm } from '#lib-frontend/data/hooks/useForm/useForm';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -43,10 +45,12 @@ const getValues = <TType,>(data: TType, fields?: Array<FormFieldsModel<TType>>):
 export const FormContainer = forwardRef(
   <TType, TResult = void>(
     { errorContextGet, ...props }: LFCPropsModel<FormContainerPropsModel<TType, TResult>>,
-    ref: ForwardedRef<FormRefModel<TType>>,
-  ): ReactElement<RLFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>> => {
+    ref: ForwardedRef<FormContainerRefModel<TType>>,
+  ): ReactElement<
+    RLFCPropsModel<FormContainerRefModel<TType>, FormContainerPropsModel<TType, TResult>>
+  > => {
     const Component = FormContainerF as RLFCModel<
-      FormRefModel<TType>,
+      FormContainerRefModel<TType>,
       FormContainerPropsModel<TType, TResult>
     >;
     return (
@@ -61,8 +65,10 @@ export const FormContainer = forwardRef(
     );
   },
 ) as <TType, TResult = void>(
-  props: RLFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>,
-) => ReactElement<RLFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>>;
+  props: RLFCPropsModel<FormContainerRefModel<TType>, FormContainerPropsModel<TType, TResult>>,
+) => ReactElement<
+  RLFCPropsModel<FormContainerRefModel<TType>, FormContainerPropsModel<TType, TResult>>
+>;
 
 const FormContainerF = forwardRef(
   <TType, TResult = void>(
@@ -87,12 +93,17 @@ const FormContainerF = forwardRef(
       validators,
       ...props
     }: LFCPropsModel<FormContainerPropsModel<TType, TResult>>,
-    ref: ForwardedRef<FormRefModel<TType>>,
-  ): ReactElement<RLFCPropsModel<FormRefModel<TType>, FormContainerPropsModel<TType, TResult>>> => {
+    ref: ForwardedRef<FormContainerRefModel<TType>>,
+  ): ReactElement<
+    RLFCPropsModel<FormContainerRefModel<TType>, FormContainerPropsModel<TType, TResult>>
+  > => {
     const isAppLoading = useStore((state) => state.app.isLoading);
     const { wrapperProps } = useLayoutStyles({ props });
 
+    const fieldRefs = useRef<FormFieldsRefModel<TType>>({});
+
     useImperativeHandle(ref, () => ({
+      fieldRefs,
       reset: handleReset,
       submit: async () => handleSubmitF(),
       valuesSet,
@@ -135,6 +146,8 @@ const FormContainerF = forwardRef(
         key: id,
         onChange: (v) => handleChange(id)(v),
         onSubmit: handleSubmitF,
+        ref: (elementF: FieldRefModel<TType, TKey>) =>
+          fieldRefs.current && (fieldRefs.current[id] = elementF),
         value: values[id],
       } as FieldPropsModel<TType[TKey]>),
       id,

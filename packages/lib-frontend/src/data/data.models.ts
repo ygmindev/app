@@ -67,8 +67,11 @@ export type FieldPropsModel<TType = string> = FocusableWrapperPropsModel &
     onSubmit?(): void;
   };
 
-export type FieldRefModel<TType = string, TFilter = unknown> = FocusableRefModel & {
-  toFilter?(value?: TType): Array<FilterModel<TFilter>> | FilterConditionModel;
+export type FieldRefModel<
+  TType = unknown,
+  TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
+> = FocusableRefModel & {
+  toFilter?(id: TKey): Array<FilterModel<TType>> | FilterConditionModel;
 };
 
 export type FormErrorModel<TType> =

@@ -31,6 +31,7 @@ export const ResourceFilter = <TType,>({
     <FilterContainer
       {...props}
       fields={fields}
+      onSubmit={async (data) => console.warn(data)}
     />
   );
 };

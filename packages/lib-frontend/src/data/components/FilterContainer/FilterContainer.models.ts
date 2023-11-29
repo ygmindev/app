@@ -1,4 +1,7 @@
-import { type FormContainerPropsModel } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
+import {
+  type FormContainerPropsModel,
+  type FormContainerRefModel,
+} from '#lib-frontend/data/components/FormContainer/FormContainer.models';
 import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
 export type FilterContainerPropsModel<TType, TResult = void> = Omit<
@@ -7,3 +10,5 @@ export type FilterContainerPropsModel<TType, TResult = void> = Omit<
 > & {
   onSubmit?(data: Array<FilterModel<TType>>): Promise<TResult | null>;
 };
+
+export type FilterContainerRefModel<TType> = FormContainerRefModel<TType>;

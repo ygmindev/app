@@ -1,16 +1,17 @@
-import { type ReactElement, type ReactNode } from 'react';
+import { type ReactElement, type ReactNode, type RefObject } from 'react';
 
 import { type AsyncBoundaryContextModel } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import { type ElementStatePropsModel } from '#lib-frontend/core/core.models';
-import { type FieldPropsModel, type SubmittablePropsModel } from '#lib-frontend/data/data.models';
+import {
+  type FieldPropsModel,
+  type FieldRefModel,
+  type FormRefModel,
+  type SubmittablePropsModel,
+} from '#lib-frontend/data/data.models';
 import { type UseFormParamsModel } from '#lib-frontend/data/hooks/useForm/useForm.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { type StringKeyModel } from '#lib-shared/core/core.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
-import {
-  type FilterConditionModel,
-  type FilterModel,
-} from '#lib-shared/resource/utils/Filter/Filter.models';
 
 export type FormContainerPropsModel<TType, TResult = void> = UseFormParamsModel<TType, TResult> &
   SubmittablePropsModel<TType, TResult> &
@@ -43,10 +44,6 @@ export type FormFieldModel<
   TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
 > = WithIdModel<TKey> & {
   element: ReactElement<FieldPropsModel<TType[TKey]>>;
-  toFilter?: (
-    value: TType[TKey] | undefined,
-    key: TKey,
-  ) => Array<FilterModel<TType>> | FilterConditionModel;
 };
 
 export type FormFieldsModel<TType> =
@@ -54,3 +51,11 @@ export type FormFieldsModel<TType> =
   | FormRowModel<TType>
   | FormFieldModel<TType>
   | { [TKey in StringKeyModel<TType>]: FormFieldModel<TType, TKey> }[StringKeyModel<TType>];
+
+export type FormFieldsRefModel<TType> = {
+  [TKey in StringKeyModel<TType>]?: FieldRefModel<TType, TKey>;
+};
+
+export type FormContainerRefModel<TType> = FormRefModel<TType> & {
+  fieldRefs: RefObject<FormFieldsRefModel<TType>>;
+};

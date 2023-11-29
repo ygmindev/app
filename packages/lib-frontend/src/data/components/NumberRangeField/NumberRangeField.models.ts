@@ -1,6 +1,7 @@
 import { type NUMBER_RANGE_TYPE } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField.constants';
 import {
   type FieldPropsModel,
+  type FieldRefModel,
   type NumberUnitModel,
   type NumberUnitTypeModel,
 } from '#lib-frontend/data/data.models';
@@ -14,3 +15,5 @@ export type NumberRangeFieldPropsModel<TType extends NumberUnitModel> =
   };
 
 export type NumberRangeTypeModel = `${NUMBER_RANGE_TYPE}`;
+
+export type NumberRangeFieldRefModel = FieldRefModel;

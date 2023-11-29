@@ -47,7 +47,6 @@ export const FundingFilter: LFCModel<FundingFilterPropsModel> = ({ ...props }) =
                 />
               ),
               id: 'maturityDays',
-              toFilter: rangeToFilter(NUMBER_RANGE_TYPE.RANGE),
             },
           ],
           id: 'maturityDays',
@@ -64,7 +63,6 @@ export const FundingFilter: LFCModel<FundingFilterPropsModel> = ({ ...props }) =
                 />
               ),
               id: 'amount',
-              toFilter: rangeToFilter(NUMBER_RANGE_TYPE.RANGE),
             },
           ],
           id: 'amount',

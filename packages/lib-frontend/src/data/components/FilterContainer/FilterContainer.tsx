@@ -1,13 +1,13 @@
 import isNil from 'lodash/isNil';
 import isString from 'lodash/isString';
 import reduce from 'lodash/reduce';
-import { type ReactElement } from 'react';
+import { type ReactElement, useRef } from 'react';
 
 import { type LFCPropsModel } from '#lib-frontend/core/core.models';
 import { type FilterContainerPropsModel } from '#lib-frontend/data/components/FilterContainer/FilterContainer.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import {
-  type FormFieldModel,
+  type FormContainerRefModel,
   type FormFieldsModel,
   type FormRowModel,
   type FormTileModel,
@@ -24,6 +24,7 @@ export const FilterContainer = <TType, TResult = void>({
   FilterContainerPropsModel<TType, TResult>
 > => {
   const { t } = useTranslation();
+  const ref = useRef<FormContainerRefModel<TType>>(null);
 
   const getFilter = (field: FormFieldsModel<TType>, data: TType): Array<FilterModel<TType>> => {
     const fieldF = field as FormTileModel<TType> | FormRowModel<TType>;
@@ -34,13 +35,13 @@ export const FilterContainer = <TType, TResult = void>({
         [] as Array<FilterModel<TType>>,
       );
     }
-    const { toFilter } = field as FormFieldModel<TType>;
     const id = field.id as StringKeyModel<TType>;
     const value = data[id];
     if (isNil(value) || isEmpty(value)) {
       return [];
     }
-    const toFilterF = toFilter && toFilter(value, id);
+    const toFilter = ref.current?.fieldRefs.current?.[id]?.toFilter;
+    const toFilterF = toFilter && toFilter(id);
     return toFilterF
       ? isString(toFilterF)
         ? [{ condition: toFilterF, field: id, value }]
@@ -70,6 +71,7 @@ export const FilterContainer = <TType, TResult = void>({
       isFullWidth={false}
       onSubmit={handleSubmit}
       p
+      ref={ref}
       submitLabel={t('core:apply')}
     />
   );
