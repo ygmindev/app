@@ -77,7 +77,7 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
           linkedUser.id && (await this._stripeAdminService.createIntent(linkedUser.id));
         return { result };
       }
-      throw new NotFoundError('linked user payment method');
+      throw new NotFoundError('linked user');
     }
     throw new UnauthenticatedError();
   }
