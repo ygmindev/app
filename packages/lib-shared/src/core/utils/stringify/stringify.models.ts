@@ -1,3 +1,3 @@
-export type StringifyParamsModel = object;
+export type StringifyParamsModel = unknown;
 
 export type StringifyModel = string;

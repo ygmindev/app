@@ -42,8 +42,8 @@ export const _textParams: ComposeComponentParamsModel<_TextPropsModel, TextProps
         children: isArray(children)
           ? children
           : children
-          ? capitalize(children, casing)
-          : undefined,
+            ? capitalize(children, casing)
+            : undefined,
         ellipsizeMode: isEllipsis ? 'tail' : undefined,
         numberOfLines: isEllipsis ? 1 : undefined,
         onPress,

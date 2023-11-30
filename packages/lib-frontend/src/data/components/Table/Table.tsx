@@ -1,4 +1,5 @@
 import cloneDeep from 'lodash/cloneDeep';
+import isNil from 'lodash/isNil';
 import {
   cloneElement,
   type ForwardedRef,
@@ -39,6 +40,7 @@ import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/sha
 import { type StringKeyModel } from '#lib-shared/core/core.models';
 import { getValue } from '#lib-shared/core/utils/getValue/getValue';
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
+import { stringify } from '#lib-shared/core/utils/stringify/stringify';
 
 export const Table = forwardRef(
   <TType,>(
@@ -163,7 +165,7 @@ export const Table = forwardRef(
                     <TranslatableText
                       align={cell.align}
                       isEllipsis>
-                      {(cell.value as string) ?? emptyCell}
+                      {isNil(cell.value) ? emptyCell : stringify(cell.value)}
                     </TranslatableText>
                   )}
                 </Skeleton>
