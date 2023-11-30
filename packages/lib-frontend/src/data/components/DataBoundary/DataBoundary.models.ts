@@ -26,23 +26,20 @@ export type DataBoundaryPropsModel<TParams = undefined, TResult = void> = Omit<
     fallbackData?: TResult;
   };
 
-export type DataBoundaryRefModel<TParams = undefined, TResult = void> = QueryComponentRefModel<
-  TParams,
-  TResult
-> &
-  MutateComponentRefModel<TParams, TResult>;
+export type DataBoundaryRefModel<
+  TParams = undefined,
+  TResult = void,
+> = QueryComponentRefModel<TResult> & MutateComponentRefModel<TParams, TResult>;
 
 export type QueryComponentPropsModel<TParams = undefined, TResult = void> = WithIdModel &
   AsyncPropsModel &
   ChildrenPropsModel<(props: { data?: TResult | null }) => ReactElement | NilModel> & {
     emptyMessage?: TranslatableTextModel;
+    params?: TParams;
     query: UseQueryParamsModel<TParams, TResult>[1];
   };
 
-export type QueryComponentRefModel<TParams = undefined, TResult = void> = Pick<
-  UseQueryModel<TParams, TResult>,
-  'query' | 'paramsSet'
->;
+export type QueryComponentRefModel<TResult = void> = Pick<UseQueryModel<TResult>, 'query'>;
 
 export type MutateComponentPropsModel<TParams = undefined, TResult = void> = WithIdModel &
   AsyncPropsModel &

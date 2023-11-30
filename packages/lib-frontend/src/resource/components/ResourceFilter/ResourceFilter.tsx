@@ -13,6 +13,7 @@ import { DATA_TYPE, DATA_TYPE_MORE } from '#lib-shared/data/data.constants';
 
 export const ResourceFilter = <TType,>({
   columns,
+  onSubmit,
   ...props
 }: LFCPropsModel<ResourceFilterPropsModel<TType>>): ReactElement<
   LFCPropsModel<ResourceFilterPropsModel<TType>>
@@ -53,7 +54,7 @@ export const ResourceFilter = <TType,>({
     <FilterContainer
       {...props}
       fields={fields}
-      onSubmit={async (data) => console.warn(data)}
+      onSubmit={onSubmit}
     />
   );
 };

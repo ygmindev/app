@@ -27,22 +27,16 @@ const QueryComponent = forwardRef(
       emptyMessage,
       id,
       isBlocking,
+      params,
       query,
     }: LFCPropsModel<QueryComponentPropsModel<TParams, TResult>>,
-    ref: ForwardedRef<QueryComponentRefModel<TParams, TResult>>,
+    ref: ForwardedRef<QueryComponentRefModel<TResult>>,
   ): ReactElement<
-    RLFCPropsModel<
-      QueryComponentRefModel<TParams, TResult>,
-      QueryComponentPropsModel<TParams, TResult>
-    >
+    RLFCPropsModel<QueryComponentRefModel<TResult>, QueryComponentPropsModel<TParams, TResult>>
   > => {
-    const {
-      data,
-      paramsSet,
-      query: queryF,
-    } = useQuery<TParams, TResult>(id, query, { isBlocking });
+    const { data, query: queryF } = useQuery<TParams, TResult>(id, query, { isBlocking }, params);
 
-    useImperativeHandle(ref, () => ({ paramsSet, query: queryF }));
+    useImperativeHandle(ref, () => ({ query: queryF }));
 
     return (
       (children && children({ data })) || (
@@ -60,14 +54,11 @@ const QueryComponent = forwardRef(
   },
 ) as <TParams = undefined, TResult = void>(
   props: RLFCPropsModel<
-    QueryComponentRefModel<TParams, TResult>,
+    QueryComponentRefModel<TResult>,
     QueryComponentPropsModel<TParams, TResult>
   >,
 ) => ReactElement<
-  RLFCPropsModel<
-    QueryComponentRefModel<TParams, TResult>,
-    QueryComponentPropsModel<TParams, TResult>
-  >
+  RLFCPropsModel<QueryComponentRefModel<TResult>, QueryComponentPropsModel<TParams, TResult>>
 >;
 
 const MutateComponent = forwardRef(
@@ -127,6 +118,7 @@ export const DataBoundary = forwardRef(
       id,
       isBlocking,
       mutate,
+      params,
       query,
       ...props
     }: LFCPropsModel<DataBoundaryPropsModel<TParams, TResult>>,
@@ -150,8 +142,9 @@ export const DataBoundary = forwardRef(
             emptyMessage={emptyMessage}
             id={id}
             isBlocking={isBlocking}
+            params={params}
             query={query}
-            ref={ref as ForwardedRef<QueryComponentRefModel<TParams, TResult>>}>
+            ref={ref as ForwardedRef<QueryComponentRefModel<TResult>>}>
             {children}
           </QueryComponent>
         ) : mutate ? (

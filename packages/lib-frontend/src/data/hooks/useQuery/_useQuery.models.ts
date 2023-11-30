@@ -1,19 +1,18 @@
 import { type AsyncPropsModel } from '#lib-frontend/data/data.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
-export type _UseQueryOptionsModel<TParams = undefined> = AsyncPropsModel & {
+export type _UseQueryOptionsModel = AsyncPropsModel & {
   cache?: boolean | number;
-  defaultParams?: TParams;
 };
 
 export type _UseQueryParamsModel<TParams = undefined, TResult = void> = [
   id: string,
   query: (params?: TParams) => Promise<TResult | null>,
-  options?: _UseQueryOptionsModel<TParams>,
+  options?: _UseQueryOptionsModel,
+  params?: TParams,
 ];
 
-export type _UseQueryModel<TParams = undefined, TResult = void> = WithIdModel & {
+export type _UseQueryModel<TResult = void> = WithIdModel & {
   data?: TResult | null;
-  paramsSet(params?: TParams): void;
   query(): Promise<TResult | null>;
 };

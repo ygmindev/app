@@ -8,4 +8,4 @@ export type UseQueryParamsModel<TParams = undefined, TResult = void> = _UseQuery
   TResult
 >;
 
-export type UseQueryModel<TParams = undefined, TResult = void> = _UseQueryModel<TParams, TResult>;
+export type UseQueryModel<TResult = void> = _UseQueryModel<TResult>;

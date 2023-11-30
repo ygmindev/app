@@ -48,7 +48,7 @@ export const FundingPage: LFCModel<FundingPagePropsModel> = ({ ...props }) => {
           },
         }}
         id="funding"
-        query={async (input) => getConnection(input)}
+        query={getConnection}
         ref={dataRef}>
         {({ data }) => (
           <Wrapper s>

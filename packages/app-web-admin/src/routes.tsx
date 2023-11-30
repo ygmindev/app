@@ -13,6 +13,7 @@ export const routes: Array<RouteModel> = getRoutes({
 
     {
       element: <ResourcePage />,
+      isProtectable: true,
       pathname: `${RESOURCE}/:resourceid?`,
     },
   ],

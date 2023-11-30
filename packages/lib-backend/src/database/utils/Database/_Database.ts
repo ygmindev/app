@@ -40,7 +40,13 @@ export const getFilter = <TType extends unknown>(
               FILTER_CONDITION.NOT_CONTAINS,
             ] as Array<FilterConditionModel>
           ).includes(conditionF)
-            ? { $regex: new RegExp(v.value as string, 'i') }
+            ? {
+                $options: 'i',
+                $regex:
+                  conditionF === FILTER_CONDITION.CONTAINS
+                    ? `${v.value as string}`
+                    : `^((?!${v.value as string}).)*\$`,
+              }
             : {
                 [conditionF]:
                   last(v.field.split('.'))?.startsWith('_') && isString(v.value)

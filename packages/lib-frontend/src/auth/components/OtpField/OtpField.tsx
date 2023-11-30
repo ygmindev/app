@@ -1,15 +1,18 @@
 import range from 'lodash/range';
 import toNumber from 'lodash/toNumber';
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 
 import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
-import { type OtpFieldPropsModel } from '#lib-frontend/auth/components/OtpField/OtpField.models';
+import {
+  type OtpFieldPropsModel,
+  type OtpFieldRefModel,
+} from '#lib-frontend/auth/components/OtpField/OtpField.models';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { Loading } from '#lib-frontend/core/components/Loading/Loading';
 import { Tooltip } from '#lib-frontend/core/components/Tooltip/Tooltip';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type LFCModel, type MeasureModel } from '#lib-frontend/core/core.models';
+import { type MeasureModel, type RLFCModel } from '#lib-frontend/core/core.models';
 import { TextField } from '#lib-frontend/data/components/TextField/TextField';
 import { TEXT_FIELD_KEYBOARD } from '#lib-frontend/data/components/TextField/TextField.constants';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
@@ -25,112 +28,107 @@ const otpLength = toNumber(process.env.SERVER_OTP_LENGTH);
 
 const IDS = withId(range(otpLength));
 
-export const OtpField: LFCModel<OtpFieldPropsModel> = ({
-  elementState,
-  error,
-  isAutoFocus,
-  onChange,
-  onSubmit,
-  value,
-  ...props
-}) => {
-  const { wrapperProps } = useLayoutStyles({ props });
-  const theme = useTheme();
-  const { valueControlled, valueControlledSet } = useValueControlled({
-    defaultValue: '',
-    onChange,
-    value,
-  });
-  const [measure, measureSet] = useState<MeasureModel>();
-  const [isFocused, isFocusedSet] = useState<boolean>(false);
+export const OtpField: RLFCModel<OtpFieldRefModel, OtpFieldPropsModel> = forwardRef(
+  ({ elementState, error, isAutoFocus, onChange, onSubmit, value, ...props }, ref) => {
+    const { wrapperProps } = useLayoutStyles({ props });
+    const theme = useTheme();
+    const { valueControlled, valueControlledSet } = useValueControlled({
+      defaultValue: '',
+      onChange,
+      value,
+    });
+    const [measure, measureSet] = useState<MeasureModel>();
+    const [isFocused, isFocusedSet] = useState<boolean>(false);
 
-  return (
-    <Wrapper
-      {...wrapperProps}
-      isCenter
-      isFullWidth>
+    return (
       <Wrapper
-        isRowAlign
-        onMeasure={measureSet}
-        position={SHAPE_POSITION.RELATIVE}>
-        <Wrapper
-          isAbsoluteFill
-          opacity={0}
-          zIndex={1}>
-          <TextField
-            defaultValue=""
-            elementState={elementState}
-            isAutoFocus={isAutoFocus}
-            isNoClear
-            keyboard={TEXT_FIELD_KEYBOARD.NUMBER}
-            maxLength={otpLength}
-            onBlur={() => isFocusedSet(false)}
-            onChange={(value) => {
-              valueControlledSet(value);
-              if (value?.length === otpLength) {
-                void sleep().then(onSubmit);
-              }
-            }}
-            onFocus={() => isFocusedSet(true)}
-            size={THEME_SIZE.MEDIUM}
-            value={valueControlled}
-          />
-        </Wrapper>
-
-        {IDS.map(({ id }, i) => (
-          <TextField
-            elementState={
-              isFocused &&
-              i === Math.min((valueControlled ?? '').length, otpLength - 1) &&
-              elementState !== ELEMENT_STATE.DISABLED
-                ? ELEMENT_STATE.ACTIVE
-                : elementState
-            }
-            error={!!error}
-            isCenter
-            isNoClear
-            key={id}
-            size={THEME_SIZE.MEDIUM}
-            value={(valueControlled && valueControlled[i]) ?? ''}
-            width={theme.shape.size[THEME_SIZE.MEDIUM]}
-          />
-        ))}
-
+        {...wrapperProps}
+        isCenter
+        isFullWidth>
         <Wrapper
           isRowAlign
-          left={(measure?.width ?? 0) + theme.shape.spacing[THEME_SIZE.SMALL]}
-          position={SHAPE_POSITION.ABSOLUTE}
-          zIndex>
-          {isTranslatableText(error) && <Tooltip color={THEME_COLOR.ERROR}>{error}</Tooltip>}
+          onMeasure={measureSet}
+          position={SHAPE_POSITION.RELATIVE}>
+          <Wrapper
+            isAbsoluteFill
+            opacity={0}
+            zIndex={1}>
+            <TextField
+              defaultValue=""
+              elementState={elementState}
+              isAutoFocus={isAutoFocus}
+              isNoClear
+              keyboard={TEXT_FIELD_KEYBOARD.NUMBER}
+              maxLength={otpLength}
+              onBlur={() => isFocusedSet(false)}
+              onChange={(value) => {
+                valueControlledSet(value);
+                if (value?.length === otpLength) {
+                  void sleep().then(onSubmit);
+                }
+              }}
+              onFocus={() => isFocusedSet(true)}
+              ref={ref}
+              size={THEME_SIZE.MEDIUM}
+              value={valueControlled}
+            />
+          </Wrapper>
 
-          <Wrapper position={SHAPE_POSITION.RELATIVE}>
-            <Appearable
-              bottom={0}
-              isActive={
-                elementState !== ELEMENT_STATE.LOADING && (valueControlled?.length ?? 0) > 0
+          {IDS.map(({ id }, i) => (
+            <TextField
+              elementState={
+                isFocused &&
+                i === Math.min((valueControlled ?? '').length, otpLength - 1) &&
+                elementState !== ELEMENT_STATE.DISABLED
+                  ? ELEMENT_STATE.ACTIVE
+                  : elementState
               }
+              error={!!error}
               isCenter
-              left={0}
-              position={SHAPE_POSITION.ABSOLUTE}
-              top={0}>
-              <Button
-                icon="times"
-                onPress={() => valueControlledSet('')}
-              />
-            </Appearable>
+              isNoClear
+              key={id}
+              size={THEME_SIZE.MEDIUM}
+              value={(valueControlled && valueControlled[i]) ?? ''}
+              width={theme.shape.size[THEME_SIZE.MEDIUM]}
+            />
+          ))}
 
-            <Appearable
-              bottom={0}
-              isActive={elementState === ELEMENT_STATE.LOADING}
-              isCenter
-              left={0}
-              position={SHAPE_POSITION.ABSOLUTE}
-              top={0}>
-              <Loading size={THEME_SIZE.SMALL} />
-            </Appearable>
+          <Wrapper
+            isRowAlign
+            left={(measure?.width ?? 0) + theme.shape.spacing[THEME_SIZE.SMALL]}
+            position={SHAPE_POSITION.ABSOLUTE}
+            zIndex>
+            {isTranslatableText(error) && <Tooltip color={THEME_COLOR.ERROR}>{error}</Tooltip>}
+
+            <Wrapper position={SHAPE_POSITION.RELATIVE}>
+              <Appearable
+                bottom={0}
+                isActive={
+                  elementState !== ELEMENT_STATE.LOADING && (valueControlled?.length ?? 0) > 0
+                }
+                isCenter
+                left={0}
+                position={SHAPE_POSITION.ABSOLUTE}
+                top={0}>
+                <Button
+                  icon="times"
+                  onPress={() => valueControlledSet('')}
+                />
+              </Appearable>
+
+              <Appearable
+                bottom={0}
+                isActive={elementState === ELEMENT_STATE.LOADING}
+                isCenter
+                left={0}
+                position={SHAPE_POSITION.ABSOLUTE}
+                top={0}>
+                <Loading size={THEME_SIZE.SMALL} />
+              </Appearable>
+            </Wrapper>
           </Wrapper>
         </Wrapper>
       </Wrapper>
-    </Wrapper>
-  );
-};
+    );
+  },
+);

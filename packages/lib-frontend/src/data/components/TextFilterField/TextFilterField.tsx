@@ -16,19 +16,25 @@ import { FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.const
 import { type FilterConditionModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
 export const TextFilterField: RLFCModel<TextFilterFieldRefModel, TextFilterFieldPropsModel> =
-  forwardRef(({ ...props }, ref) => {
+  forwardRef(({ defaultValue, onChange, value, ...props }, ref) => {
     const { t } = useTranslation();
     const { wrapperProps } = useLayoutStyles({ props });
     const { style: _, ...propsF } = props;
-    const { valueControlled, valueControlledSet } = useValueControlled<FilterConditionModel>({
-      defaultValue: FILTER_CONDITION.CONTAINS,
+    const { valueControlled, valueControlledSet } = useValueControlled({
+      defaultValue,
+      onChange,
+      value,
     });
+    const { valueControlled: condition, valueControlledSet: conditionSet } =
+      useValueControlled<FilterConditionModel>({
+        defaultValue: FILTER_CONDITION.CONTAINS,
+      });
     const fieldRef = useRef<FieldRefModel>(null);
 
     useImperativeHandle(ref, () => ({
       blur: () => fieldRef.current?.blur(),
       focus: () => fieldRef.current?.focus(),
-      toFilter: (id) => [{ condition: valueControlled, field: id, value: valueControlled }],
+      toFilter: (id) => [{ condition, field: id, value: valueControlled }],
     }));
 
     return (
@@ -36,14 +42,20 @@ export const TextFilterField: RLFCModel<TextFilterFieldRefModel, TextFilterField
         {...wrapperProps}
         fields={[
           {
-            element: <TextField {...propsF} />,
+            element: (
+              <TextField
+                {...propsF}
+                onChange={valueControlledSet}
+                value={valueControlled}
+              />
+            ),
             id: 'value',
           },
           {
             element: (
               <DropdownField
                 label={t('core:condition')}
-                onChange={(value) => valueControlledSet(value as FilterConditionModel)}
+                onChange={(value) => conditionSet(value as FilterConditionModel)}
                 options={[
                   { id: FILTER_CONDITION.EQUAL, label: t('data:equal') },
                   { id: FILTER_CONDITION.NOT_EQUAL, label: t('data:notEqual') },

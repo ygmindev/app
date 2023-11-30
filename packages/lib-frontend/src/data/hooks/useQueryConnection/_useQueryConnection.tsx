@@ -10,12 +10,12 @@ import { debounce } from '#lib-shared/core/utils/debounce/debounce';
 import { type ConnectionModel } from '#lib-shared/resource/utils/Connection/Connection.models';
 import { type PaginationModel } from '#lib-shared/resource/utils/Pagination/Pagination.models';
 
-export const _useQueryConnection = <TType,>(
-  ...[id, callback, options]: _UseQueryConnectionParamsModel<TType>
-): _UseQueryConnectionModel<TType> => {
+export const _useQueryConnection = <TParams = undefined, TResult = void>(
+  ...[id, callback, options]: _UseQueryConnectionParamsModel<TParams, TResult>
+): _UseQueryConnectionModel<TResult> => {
   const limit = options?.limit || USE_QUERY_CONNECTION_LIMIT_DEFAULT;
   const cache = isNumber(options?.cache) ? options?.cache : 0;
-  const { data, fetchNextPage } = useInfiniteQuery<ConnectionModel<TType> | null, Error>(
+  const { data, fetchNextPage } = useInfiniteQuery<ConnectionModel<TResult> | null, Error>(
     [id],
     async ({ pageParam }) => callback(pageParam as PaginationModel),
     {

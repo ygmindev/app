@@ -91,7 +91,6 @@ export const SelectField = forwardRef(
     return (
       <Wrapper
         {...wrapperProps}
-        p={THEME_SIZE.SMALL}
         s>
         <Wrapper
           isRowAlign={isHorizontal}

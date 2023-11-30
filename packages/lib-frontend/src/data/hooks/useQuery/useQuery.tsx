@@ -7,8 +7,8 @@ import {
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 
 export const useQuery = <TParams = undefined, TResult = void>(
-  ...[id, callback, options]: UseQueryParamsModel<TParams, TResult>
-): UseQueryModel<TParams, TResult> => {
+  ...[id, callback, options, params]: UseQueryParamsModel<TParams, TResult>
+): UseQueryModel<TResult> => {
   const actions = useActions();
   const cache = options?.cache;
   const cacheF = (cache === true ? config.cacheTime : cache) ?? config.cacheTimeDefault;
@@ -23,5 +23,6 @@ export const useQuery = <TParams = undefined, TResult = void>(
         }
       : callback,
     { ...options, cache: cacheF },
+    params,
   );
 };
