@@ -1,6 +1,4 @@
 import cloneDeep from 'lodash/cloneDeep';
-import isNil from 'lodash/isNil';
-import toString from 'lodash/toString';
 import {
   cloneElement,
   type ForwardedRef,
@@ -25,6 +23,7 @@ import {
 import { type FormErrorModel } from '#lib-frontend/data/data.models';
 import { useTable } from '#lib-frontend/data/hooks/useTable/useTable';
 import { useValidator } from '#lib-frontend/data/hooks/useValidator/useValidator';
+import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
@@ -44,12 +43,12 @@ import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 export const Table = forwardRef(
   <TType,>(
     {
+      emptyCell = '-',
       emptyElement,
       isAddable,
       isDeletable,
       isFullWidth,
       isHeadless,
-      nilString,
       onChange,
       validators,
       ...props
@@ -161,11 +160,11 @@ export const Table = forwardRef(
                       value: cell.value,
                     })
                   ) : (
-                    <Text
+                    <TranslatableText
                       align={cell.align}
                       isEllipsis>
-                      {isNil(cell.value) ? nilString : toString(cell.value)}
-                    </Text>
+                      {(cell.value as string) ?? emptyCell}
+                    </TranslatableText>
                   )}
                 </Skeleton>
               ))}

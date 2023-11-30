@@ -44,6 +44,7 @@ export const TextFilterField: RLFCModel<TextFilterFieldRefModel, TextFilterField
           {
             element: (
               <TextField
+                placeholder={t('core:any')}
                 {...propsF}
                 onChange={valueControlledSet}
                 value={valueControlled}
@@ -54,6 +55,7 @@ export const TextFilterField: RLFCModel<TextFilterFieldRefModel, TextFilterField
           {
             element: (
               <DropdownField
+                defaultValue={FILTER_CONDITION.CONTAINS}
                 label={t('core:condition')}
                 onChange={(value) => conditionSet(value as FilterConditionModel)}
                 options={[
