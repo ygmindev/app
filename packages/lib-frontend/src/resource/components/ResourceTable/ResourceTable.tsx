@@ -30,7 +30,9 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
   const { getConnection } = service;
 
   return (
-    <Wrapper {...wrapperProps}>
+    <Wrapper
+      {...wrapperProps}
+      s>
       <FilterButton element={<ResourceFilter columns={columns} />} />
 
       <ConnectionBoundary

@@ -5,7 +5,12 @@ import toNumber from 'lodash/toNumber';
 import toString from 'lodash/toString';
 import moment from 'moment';
 
-import { AMOUNT_UNIT, RATE_UNIT, RELATIVE_DATE_UNIT } from '#lib-frontend/data/data.constants';
+import {
+  AMOUNT_UNIT,
+  NUMBER_UNIT_TYPE,
+  RATE_UNIT,
+  RELATIVE_DATE_UNIT,
+} from '#lib-frontend/data/data.constants';
 import {
   type DateFormatterOptionsModel,
   type FormatterOptionsModel,
@@ -16,8 +21,8 @@ import {
 } from '#lib-frontend/data/hooks/useFormatter/useFormatter.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
-import { DATA_TYPE, DATA_TYPE_MORE } from '#lib-shared/data/data.constants';
-import { type DataTypeModel, type DataTypeMoreModel } from '#lib-shared/data/data.models';
+import { DATA_TYPE } from '#lib-shared/data/data.constants';
+import { type FormattableTypeModel } from '#lib-shared/data/data.models';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 
 export const useFormatter = (): UseFormatterModel => {
@@ -131,8 +136,8 @@ export const useFormatter = (): UseFormatterModel => {
                   : { maximumFractionDigits: precision, minimumFractionDigits: precision },
               )
             : isNil(precision)
-            ? toString(valueF)
-            : valueF.toFixed(precision)
+              ? toString(valueF)
+              : valueF.toFixed(precision)
         }${postfix}`;
       }
       return '';
@@ -153,7 +158,7 @@ export const useFormatter = (): UseFormatterModel => {
     return toString(value);
   };
 
-  const unformat = <TType extends DataTypeModel | DataTypeMoreModel>(
+  const unformat = <TType extends FormattableTypeModel>(
     type: TType,
     value?: string,
     options?: FormatterOptionsModel<UnformatModel<TType>>,
@@ -161,10 +166,10 @@ export const useFormatter = (): UseFormatterModel => {
     if (!value) {
       return undefined;
     }
-
     switch (type) {
       case DATA_TYPE.NUMBER:
-      case DATA_TYPE_MORE.RELATIVE_DATE: {
+      case NUMBER_UNIT_TYPE.AMOUNT:
+      case NUMBER_UNIT_TYPE.RELATIVE_DATE: {
         const {
           isScale = true,
           isUnscale = true,

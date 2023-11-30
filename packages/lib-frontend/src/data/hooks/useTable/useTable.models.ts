@@ -1,5 +1,6 @@
 import { type ReactElement } from 'react';
 
+import { type TranslatableOptionModel } from '#lib-frontend/core/core.models';
 import {
   type DataFormatterModel,
   type DataRendererModel,
@@ -17,7 +18,7 @@ import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { type FontAlignModel } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.models';
 import { type StringKeyModel } from '#lib-shared/core/core.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
-import { type DataTypeModel, type FieldTypeModel } from '#lib-shared/data/data.models';
+import { type FormattableTypeModel } from '#lib-shared/data/data.models';
 
 export type UseTableParamsModel<TType> = _UseTableParamsModel<TType>;
 
@@ -35,9 +36,10 @@ export type TableColumnModel<
   field?(params: { row: TType; value?: TType[TKey] }): ReactElement<FieldPropsModel<TType[TKey]>>;
   formatter?: DataFormatterModel<TType, TKey>;
   label?: TranslatableTextModel;
+  options?: Array<TranslatableOptionModel>;
   renderer?: DataRendererModel<TType, TKey>;
   sort?: TableSortTypeModel | boolean;
-  type?: DataTypeModel | FieldTypeModel;
+  type?: FormattableTypeModel;
   width?: number;
 };
 

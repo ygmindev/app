@@ -42,6 +42,7 @@ export const SelectField = forwardRef(
       defaultValue,
       isHorizontal,
       isMultiple,
+      label,
       onChange,
       options,
       value,
@@ -92,17 +93,19 @@ export const SelectField = forwardRef(
         {...wrapperProps}
         p={THEME_SIZE.SMALL}
         s>
-        {isMultiple && (
-          <SwitchField
-            label={t('core:selectAll')}
-            onChange={(v) => handleChangeMultiple(v ? ids : [])}
-            value={isEqual(values, ids)}
-          />
-        )}
-
         <Wrapper
           isRowAlign={isHorizontal}
           s={THEME_SIZE.SMALL}>
+          {label && <TranslatableText isBold>{label}</TranslatableText>}
+
+          {isMultiple && (
+            <SwitchField
+              label={t('core:selectAll')}
+              onChange={(v) => handleChangeMultiple(v ? ids : [])}
+              value={isEqual(values, ids)}
+            />
+          )}
+
           {options.map(({ icon, id, label }) => {
             const isValue = isMultiple ? values?.includes(id) : valueControlled === id;
             return (

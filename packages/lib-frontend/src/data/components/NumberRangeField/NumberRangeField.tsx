@@ -85,12 +85,12 @@ export const NumberRangeField = forwardRef(
         filterNil([
           !!valueControlled?.min && {
             condition: FILTER_CONDITION.GRATER_THAN_EQUAL,
-            field: `${id}.min`,
+            field: rangeType === NUMBER_RANGE_TYPE.EXACT ? id : `${id}.min`,
             value: valueControlled.min,
           },
           !!valueControlled?.max && {
             condition: FILTER_CONDITION.LESS_THAN_EQUAL,
-            field: `${id}.max`,
+            field: rangeType === NUMBER_RANGE_TYPE.EXACT ? id : `${id}.max`,
             value: valueControlled.max,
           },
         ]),
@@ -145,6 +145,8 @@ export const NumberRangeField = forwardRef(
       <Wrapper
         {...wrapperProps}
         s={THEME_SIZE.SMALL}>
+        {label && <Text isBold>{t(label)}</Text>}
+
         <Text>{t('core:measureIn')}</Text>
 
         <SelectField<TType>
@@ -153,8 +155,6 @@ export const NumberRangeField = forwardRef(
           options={unitOptionsF}
           value={unit}
         />
-
-        {label && <Text>{t(label)}</Text>}
 
         <Wrapper isRowAlign>
           <NumberField

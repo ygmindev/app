@@ -11,10 +11,8 @@ export enum DATA_TYPE {
 }
 
 export enum DATA_TYPE_MORE {
-  AMOUNT = 'amount',
   NUMBER_POSITIVE = 'numberPositive',
-  RATE = 'rate',
-  RELATIVE_DATE = 'relativeDate',
+  STRING_LIST = 'stringList',
 }
 
 export enum PROPERTY_TYPE {

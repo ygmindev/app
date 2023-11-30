@@ -1,7 +1,4 @@
-import reduce from 'lodash/reduce';
-
 import { Tabs } from '#lib-frontend/core/components/Tabs/Tabs';
-import { type TabModel } from '#lib-frontend/core/components/Tabs/Tabs.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { RESOURCE_ITEMS } from '#lib-frontend/resource/pages/ResourcePage/ResourcePage.constants';
@@ -14,6 +11,7 @@ import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { NotFoundPage } from '#lib-frontend/route/pages/NotFoundPage/NotFoundPage';
 import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { transformKeys } from '#lib-shared/core/utils/transformKeys/transformKeys';
 
 export const ResourcePage: LFCModel<ResourcePagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -31,15 +29,15 @@ export const ResourcePage: LFCModel<ResourcePagePropsModel> = ({ ...props }) => 
       s>
       <Tabs
         onChange={handleChange}
-        tabs={reduce(
-          RESOURCE_ITEMS,
-          (result, v, k) => [...result, { id: k, label: v.label }],
-          [] as Array<TabModel>,
-        )}
+        tabs={Object.keys(RESOURCE_ITEMS).map((id) => ({ id: trimPathname(id), label: id }))}
         value={resourceid}
       />
 
-      {resourceid ? RESOURCE_ITEMS[resourceid].element : <NotFoundPage />}
+      {resourceid ? (
+        transformKeys(RESOURCE_ITEMS, trimPathname)[resourceid]?.element ?? <NotFoundPage />
+      ) : (
+        <NotFoundPage />
+      )}
     </Wrapper>
   );
 };

@@ -1,6 +1,6 @@
 import { type NumberUnitModel } from '#lib-frontend/data/data.models';
 import { type DATA_TYPE } from '#lib-shared/data/data.constants';
-import { type DataTypeModel, type DataTypeMoreModel } from '#lib-shared/data/data.models';
+import { type FormattableTypeModel } from '#lib-shared/data/data.models';
 import { type NumberRangeModel } from '#lib-shared/data/resources/NumberRange/NumberRange.models';
 
 export type UseFormatterModel = {
@@ -10,7 +10,7 @@ export type UseFormatterModel = {
 
   scale(value?: number, options?: NumberScaleOptionsModel): number | undefined;
 
-  unformat<TType extends DataTypeModel>(
+  unformat<TType extends FormattableTypeModel>(
     type: TType,
     value?: string,
     options?: FormatterOptionsModel<UnformatModel<TType>>,
@@ -19,8 +19,8 @@ export type UseFormatterModel = {
 export type FormatterOptionsModel<TType> = TType extends number
   ? NumberFormatterOptionsModel
   : TType extends Date
-  ? DateFormatterOptionsModel
-  : never;
+    ? DateFormatterOptionsModel
+    : never;
 
 export type NumberScaleOptionsModel = {
   isUnscale?: boolean;
@@ -38,5 +38,8 @@ export type DateFormatterOptionsModel = {
   isReadable?: boolean;
 };
 
-export type UnformatModel<TType extends DataTypeModel | DataTypeMoreModel> =
-  TType extends DATA_TYPE.NUMBER ? number : TType extends DATA_TYPE.DATE ? Date : never;
+export type UnformatModel<TType extends FormattableTypeModel> = TType extends DATA_TYPE.NUMBER
+  ? number
+  : TType extends DATA_TYPE.DATE
+    ? Date
+    : never;
