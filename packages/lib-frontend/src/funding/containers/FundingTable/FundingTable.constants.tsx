@@ -9,8 +9,6 @@ import {
 
 export const FUNDING_TABLE_PROPS = {
   columns: [
-    { id: 'amount', type: NUMBER_UNIT_TYPE.AMOUNT },
-    { id: 'maturityDays', type: NUMBER_UNIT_TYPE.RELATIVE_DATE },
     {
       id: 'currency',
       // TODO: from locale
@@ -20,6 +18,8 @@ export const FUNDING_TABLE_PROPS = {
       ],
       type: DATA_TYPE_MORE.STRING_LIST,
     },
+    { id: 'amount', type: NUMBER_UNIT_TYPE.AMOUNT },
+    { id: 'maturityDays', type: NUMBER_UNIT_TYPE.RELATIVE_DATE },
   ],
   name: FUNDING_RESOURCE_NAME,
 } satisfies Omit<ResourceTablePropsModel<FundingModel, FundingFormModel>, 'service'>;

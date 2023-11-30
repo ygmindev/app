@@ -3,7 +3,7 @@ import { type ReactElement, useMemo } from 'react';
 import { SelectField } from '#lib-frontend/core/components/SelectField/SelectField';
 import { type LFCPropsModel } from '#lib-frontend/core/core.models';
 import { FilterContainer } from '#lib-frontend/data/components/FilterContainer/FilterContainer';
-import { type FormFieldModel } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
+import { type FormTileModel } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
 import { NumberRangeField } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField';
 import { NUMBER_RANGE_TYPE } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField.constants';
 import { TextFilterField } from '#lib-frontend/data/components/TextFilterField/TextFilterField';
@@ -17,7 +17,7 @@ export const ResourceFilter = <TType,>({
 }: LFCPropsModel<ResourceFilterPropsModel<TType>>): ReactElement<
   LFCPropsModel<ResourceFilterPropsModel<TType>>
 > => {
-  const fields = useMemo<Array<FormFieldModel<TType>> | undefined>(
+  const fields = useMemo<Array<FormTileModel<TType>> | undefined>(
     () =>
       columns?.map(({ id, label, options, type }) => {
         const labelF = label ?? id;
@@ -28,22 +28,15 @@ export const ResourceFilter = <TType,>({
                 <SelectField
                   isHorizontal
                   isMultiple
-                  label={labelF}
                   options={options ?? []}
                 />
               );
             case DATA_TYPE.NUMBER:
-              return (
-                <NumberRangeField
-                  label={labelF}
-                  rangeType={NUMBER_RANGE_TYPE.RANGE}
-                />
-              );
+              return <NumberRangeField rangeType={NUMBER_RANGE_TYPE.RANGE} />;
             case NUMBER_UNIT_TYPE.AMOUNT:
             case NUMBER_UNIT_TYPE.RELATIVE_DATE:
               return (
                 <NumberRangeField
-                  label={labelF}
                   rangeType={NUMBER_RANGE_TYPE.RANGE}
                   type={type}
                 />
@@ -52,7 +45,7 @@ export const ResourceFilter = <TType,>({
               return <TextFilterField label={labelF} />;
           }
         })();
-        return { element, id };
+        return { fields: [{ element, id }], id, title: id };
       }),
     [columns],
   );
