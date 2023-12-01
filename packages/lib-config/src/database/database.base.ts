@@ -1,3 +1,4 @@
+import { Utility } from '#lib-backend/admin/resources/Utility/Utility';
 import { Vendor } from '#lib-backend/admin/resources/Vendor/Vendor';
 import { Access } from '#lib-backend/auth/resources/Access/Access';
 import { Otp } from '#lib-backend/auth/resources/Otp/Otp';
@@ -31,6 +32,7 @@ const { _config, config } = defineConfig({
       Otp,
       RatingAgency,
       User,
+      Utility,
       Vendor,
       process.env.NODE_ENV !== 'production' && TestableEntityResource,
     ]),

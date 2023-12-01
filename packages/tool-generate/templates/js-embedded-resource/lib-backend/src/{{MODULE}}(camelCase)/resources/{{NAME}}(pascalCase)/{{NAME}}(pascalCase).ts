@@ -7,6 +7,7 @@ import { {{NAME}}(constantCase)_RESOURCE_NAME } from '#lib-shared/{{MODULE}}(cam
 import { {{NAME_ROOT}}(constantCase)_RESOURCE_NAME } from '#lib-shared/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase).constants';
 import { type {{NAME}}(pascalCase)Model } from '#lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
 import { {{NAME_ROOT}}(pascalCase) } from '#lib-backend/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase)';
+import { type {{NAME_ROOT}}(pascalCase)Model } from '#lib-shared/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase).models';
 
 @withEntity({ isEmbeddable: true, isRepository: true, name: {{NAME}}(constantCase)_RESOURCE_NAME })
 export class {{NAME}}(pascalCase) extends EmbeddedResource implements {{NAME}}(pascalCase)Model {
@@ -19,6 +20,6 @@ export class {{NAME}}(pascalCase) extends EmbeddedResource implements {{NAME}}(p
   })
   [{{NAME_ROOT}}(constantCase)_RESOURCE_NAME]?: {{NAME_ROOT}}(pascalCase)Model;
 
-  @withField({ isOptional: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   name?: string;
 }

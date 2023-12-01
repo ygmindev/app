@@ -9,7 +9,7 @@ import {
 import { type {{NAME_ROOT}}(pascalCase)Model } from '#lib-shared/{{MODULE_ROOT}}(camelCase)/resources/Funding/Funding.models';
 
 export const use{{NAME}}(pascalCase)Resource = (): Use{{NAME}}(pascalCase)ResourceModel =>
-  useResource<{{NAME}}(pascalCase)Model, {{NAME}}(pascalCase)FormModel, FundingModel>({
+  useResource<{{NAME}}(pascalCase)Model, {{NAME}}(pascalCase)FormModel, {{NAME_ROOT}}(pascalCase)Model>({
     fields: [{ result: {{NAME}}(constantCase)_FIELDS }],
     name: {{NAME}}(constantCase)_RESOURCE_NAME,
   });

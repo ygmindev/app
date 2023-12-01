@@ -12,7 +12,6 @@ import {
   type RLFCModel,
   type RLFCPropsModel,
 } from '#lib-frontend/core/core.models';
-import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { FieldGroup } from '#lib-frontend/data/components/FieldGroup/FieldGroup';
 import { Form } from '#lib-frontend/data/components/Form/Form';
 import {
@@ -204,10 +203,10 @@ const FormContainerF = forwardRef(
 
     return (
       <Form onSubmit={isDisabled ? undefined : async () => handleSubmitF()}>
-        <MainLayout
+        <Wrapper
           {...wrapperProps}
-          bottomElement={bottomElement && bottomElement({ elementState: elementStateF })}
           isFullHeight={isFullHeight}
+          isFullWidth
           s>
           {topElement && topElement({ elementState: elementStateF })}
 
@@ -223,7 +222,9 @@ const FormContainerF = forwardRef(
               submitLabel={submitLabel}
             />
           ) : undefined}
-        </MainLayout>
+
+          {bottomElement && bottomElement({ elementState: elementStateF })}
+        </Wrapper>
       </Form>
     );
   },
