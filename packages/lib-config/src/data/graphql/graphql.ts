@@ -1,3 +1,4 @@
+import { VendorResolver } from '#lib-backend/admin/resources/Vendor/VendorResolver/VendorResolver';
 import { AccessResolver } from '#lib-backend/auth/resources/Access/AccessResolver/AccessResolver';
 import { OtpResolver } from '#lib-backend/auth/resources/Otp/OtpResolver/OtpResolver';
 import { SignInResolver } from '#lib-backend/auth/resources/SignIn/SignInResolver/SignInResolver';
@@ -39,6 +40,7 @@ const { _config, config } = defineConfig({
         SignInResolver,
         UserResolver,
         SnapshotResolver,
+        VendorResolver,
       ],
 
       schemaDir: fromStatic('graphql/schema.gql'),

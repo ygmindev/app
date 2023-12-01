@@ -1073,6 +1073,10 @@ type Mutation {
   UserCreateMany(input: UserCreateManyInput): UserCreateManyOutput
   UserRemove(input: UserRemoveInput): UserRemoveOutput
   UserUpdate(input: UserUpdateInput): UserUpdateOutput
+  VendorCreate(input: VendorCreateInput): VendorCreateOutput
+  VendorCreateMany(input: VendorCreateManyInput): VendorCreateManyOutput
+  VendorRemove(input: VendorRemoveInput): VendorRemoveOutput
+  VendorUpdate(input: VendorUpdateInput): VendorUpdateOutput
 }
 
 type NumberRange {
@@ -1305,6 +1309,9 @@ type Query {
   UserGet(input: UserGetInput): UserGetOutput
   UserGetConnection(input: UserGetConnectionInput): UserGetConnectionOutput
   UserGetMany(input: UserGetManyInput): UserGetManyOutput
+  VendorGet(input: VendorGetInput): VendorGetOutput
+  VendorGetConnection(input: VendorGetConnectionInput): VendorGetConnectionOutput
+  VendorGetMany(input: VendorGetManyInput): VendorGetManyOutput
 }
 
 type RatingAgency {
@@ -1796,4 +1803,169 @@ input UserUpdateUpdateInput {
   last: String
   paymentMethodPrimary: String
   phone: String
+}
+
+type Vendor {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input VendorCreateFormInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input VendorCreateInput {
+  form: VendorCreateFormInput
+  root: String
+}
+
+input VendorCreateManyFormInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input VendorCreateManyInput {
+  form: [VendorCreateManyFormInput]
+  root: String
+}
+
+type VendorCreateManyOutput {
+  result: Vendor
+}
+
+type VendorCreateOutput {
+  result: Vendor
+}
+
+type VendorGetConnectionConnection {
+  edges: [VendorGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type VendorGetConnectionEdge {
+  cursor: String
+  node: Vendor
+}
+
+input VendorGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [VendorInput]
+  resourceValue: VendorInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input VendorGetConnectionInput {
+  filter: [VendorGetConnectionFilterInput]
+  pagination: PaginationInput
+  root: String
+}
+
+type VendorGetConnectionOutput {
+  result: VendorGetConnectionConnection
+}
+
+input VendorGetFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [VendorInput]
+  resourceValue: VendorInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input VendorGetInput {
+  filter: [VendorGetFilterInput]
+  root: String
+}
+
+input VendorGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [VendorInput]
+  resourceValue: VendorInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input VendorGetManyInput {
+  filter: [VendorGetManyFilterInput]
+  root: String
+}
+
+type VendorGetManyOutput {
+  result: [Vendor]
+}
+
+type VendorGetOutput {
+  result: Vendor
+}
+
+input VendorInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input VendorRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [VendorInput]
+  resourceValue: VendorInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input VendorRemoveInput {
+  filter: [VendorRemoveFilterInput]
+  root: String
+}
+
+type VendorRemoveOutput {
+  result: Vendor
+}
+
+input VendorUpdateFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [VendorInput]
+  resourceValue: VendorInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input VendorUpdateInput {
+  filter: [VendorUpdateFilterInput]
+  root: String
+  update: VendorUpdateUpdateInput
+}
+
+type VendorUpdateOutput {
+  result: Vendor
+}
+
+input VendorUpdateUpdateInput {
+  _id: String
+  created: DateTime
+  name: String
 }

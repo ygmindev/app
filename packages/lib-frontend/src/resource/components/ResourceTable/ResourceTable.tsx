@@ -6,13 +6,12 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { WrapperFixture } from '#lib-frontend/core/components/Wrapper/Wrapper.fixtures';
 import { type LFCPropsModel } from '#lib-frontend/core/core.models';
 import { FilterButton } from '#lib-frontend/data/components/FilterButton/FilterButton';
-import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { Table } from '#lib-frontend/data/components/Table/Table';
-import { TextField } from '#lib-frontend/data/components/TextField/TextField';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { ConnectionBoundary } from '#lib-frontend/resource/components/ConnectionBoundary/ConnectionBoundary';
 import { ResourceFilter } from '#lib-frontend/resource/components/ResourceFilter/ResourceFilter';
 import { type ResourceTablePropsModel } from '#lib-frontend/resource/components/ResourceTable/ResourceTable.models';
+import { ResourceForm } from '#lib-frontend/resource/containers/ResourceForm/ResourceForm';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { type PartialModel } from '#lib-shared/core/core.models';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
@@ -29,8 +28,13 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
 > => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
-  const { getConnection } = service;
+  const { create, getConnection } = service;
   const [params, paramsSet] = useState<InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>>();
+
+  const handleSubmit = async (data: TType): Promise<void | null> => {
+    await create({ form: data as unknown as TForm });
+  };
+
   return (
     <Wrapper
       {...wrapperProps}
@@ -92,20 +96,9 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
       <FloatingFooter>
         <ModalButton
           element={() => (
-            <FormContainer
-              fields={columns?.map((column) => {
-                const element = (() => {
-                  switch (column.type) {
-                    default:
-                      return <TextField label={column.label ?? column.id} />;
-                  }
-                })();
-                return { element, id: column.id };
-              })}
-              onSubmit={async (form) => {
-                // TODO: type form better?
-                await service.create({ form: form as unknown as TForm });
-              }}
+            <ResourceForm
+              columns={columns}
+              onSubmit={handleSubmit}
             />
           )}
           icon="add"

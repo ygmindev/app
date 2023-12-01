@@ -3,8 +3,8 @@ import {
   type EntityResourceModel,
 } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
-export type {{NAME}}(pascalCase)Model = EntityResourceModel & {
+export type VendorModel = EntityResourceModel & {
   name: string;
 };
 
-export type {{NAME}}(pascalCase)FormModel = EntityResourceDataModel<{{NAME}}(pascalCase)Model>;
+export type VendorFormModel = EntityResourceDataModel<VendorModel>;

@@ -1,3 +1,4 @@
+import { Vendor } from '#lib-backend/admin/resources/Vendor/Vendor';
 import { Access } from '#lib-backend/auth/resources/Access/Access';
 import { Otp } from '#lib-backend/auth/resources/Otp/Otp';
 import { CreditRating } from '#lib-backend/funding/resources/CreditRating/CreditRating';
@@ -30,6 +31,7 @@ const { _config, config } = defineConfig({
       Otp,
       RatingAgency,
       User,
+      Vendor,
       process.env.NODE_ENV !== 'production' && TestableEntityResource,
     ]),
 
