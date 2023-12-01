@@ -1,6 +1,7 @@
 import { type GraphQlQueryParamsFieldsModel } from '#lib-frontend/data/utils/graphQlQuery/graphQlQuery.models';
 import { CREDIT_RATING_RESOURCE_NAME } from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
 import { type FundingModel } from '#lib-shared/funding/resources/Funding/Funding.models';
+import { RATING_AGENCY_RESOURCE_NAME } from '#lib-shared/funding/resources/RatingAgency/RatingAgency.constants';
 
 export const FUNDING_FIELDS = [
   '_id',
@@ -12,7 +13,7 @@ export const FUNDING_FIELDS = [
   {
     [CREDIT_RATING_RESOURCE_NAME]: [
       '_id',
-      { agency: ['_id', 'name'] },
+      { [RATING_AGENCY_RESOURCE_NAME]: ['_id', 'name'] },
       'longTermRating',
       'longTermWatch',
     ],

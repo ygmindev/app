@@ -10,6 +10,7 @@ import {
   type CreditRatingValueModel,
   type CreditRatingWatchModel,
 } from '#lib-shared/funding/resources/CreditRating/CreditRating.models';
+import { RATING_AGENCY_RESOURCE_NAME } from '#lib-shared/funding/resources/RatingAgency/RatingAgency.constants';
 import { type RatingAgencyModel } from '#lib-shared/funding/resources/RatingAgency/RatingAgency.models';
 
 @withEntity({ isEmbeddable: true, isRepository: true, name: CREDIT_RATING_RESOURCE_NAME })
@@ -21,7 +22,7 @@ export class CreditRating extends EmbeddedResource implements CreditRatingModel 
     relation: FIELD_RELATION.MANY_TO_ONE,
     type: PROPERTY_TYPE.RESOURCE,
   })
-  agency?: RatingAgencyModel;
+  [RATING_AGENCY_RESOURCE_NAME]?: RatingAgencyModel;
 
   @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   longTermRating?: CreditRatingValueModel;
