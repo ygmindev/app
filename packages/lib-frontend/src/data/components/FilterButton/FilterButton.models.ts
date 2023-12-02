@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
 
-import { type FilterContainerPropsModel } from '#lib-frontend/data/components/FilterContainer/FilterContainer.models';
+import { type FormContainerPropsModel } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
 
 export type FilterButtonPropsModel = {
-  element: ReactElement<FilterContainerPropsModel<unknown>>;
+  element: ReactElement<FormContainerPropsModel<unknown>>;
 };

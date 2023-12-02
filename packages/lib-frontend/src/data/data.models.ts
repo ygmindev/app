@@ -20,10 +20,6 @@ import {
   type RequiredModel,
   type StringKeyModel,
 } from '#lib-shared/core/core.models';
-import {
-  type FilterConditionModel,
-  type FilterModel,
-} from '#lib-shared/resource/utils/Filter/Filter.models';
 
 export type QueryContextModel = {
   client?: QueryClient;
@@ -59,6 +55,7 @@ export type ValuePropsModel<TType = string> = {
 export type FieldPropsModel<TType = string> = FocusableWrapperPropsModel &
   WithIconPropsModel &
   ValuePropsModel<TType> & {
+    beforeSubmit?(value?: TType, id?: string): unknown;
     isAutoFocus?: boolean;
     isTransparent?: boolean;
     label?: TranslatableTextModel;
@@ -70,9 +67,7 @@ export type FieldPropsModel<TType = string> = FocusableWrapperPropsModel &
 export type FieldRefModel<
   TType = unknown,
   TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
-> = FocusableRefModel & {
-  toFilter?(id: TKey): Array<FilterModel<TType>> | FilterConditionModel;
-};
+> = FocusableRefModel & Pick<FieldPropsModel<TType[TKey]>, 'beforeSubmit'>;
 
 export type FormErrorModel<TType> =
   | {

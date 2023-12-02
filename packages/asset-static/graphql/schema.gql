@@ -200,16 +200,16 @@ input AccessUpdateUpdateInput {
 }
 
 type CreditRating {
+  RatingAgency: RatingAgency
   _id: String
-  agency: RatingAgency
   created: DateTime
   longTermRating: String
   longTermWatch: String
 }
 
 input CreditRatingCreateFormInput {
+  RatingAgency: RatingAgencyInput
   _id: String
-  agency: RatingAgencyInput
   created: DateTime
   longTermRating: String
   longTermWatch: String
@@ -221,8 +221,8 @@ input CreditRatingCreateInput {
 }
 
 input CreditRatingCreateManyFormInput {
+  RatingAgency: RatingAgencyInput
   _id: String
-  agency: RatingAgencyInput
   created: DateTime
   longTermRating: String
   longTermWatch: String
@@ -341,8 +341,8 @@ type CreditRatingGetOutputRoot {
 }
 
 input CreditRatingInput {
+  RatingAgency: RatingAgencyInput
   _id: String
-  agency: RatingAgencyInput
   created: DateTime
   longTermRating: String
   longTermWatch: String
@@ -402,8 +402,8 @@ type CreditRatingUpdateOutputRoot {
 }
 
 input CreditRatingUpdateUpdateInput {
+  RatingAgency: RatingAgencyInput
   _id: String
-  agency: RatingAgencyInput
   created: DateTime
   longTermRating: String
   longTermWatch: String
@@ -1073,6 +1073,10 @@ type Mutation {
   UserCreateMany(input: UserCreateManyInput): UserCreateManyOutput
   UserRemove(input: UserRemoveInput): UserRemoveOutput
   UserUpdate(input: UserUpdateInput): UserUpdateOutput
+  UtilityCreate(input: UtilityCreateInput): UtilityCreateOutput
+  UtilityCreateMany(input: UtilityCreateManyInput): UtilityCreateManyOutput
+  UtilityRemove(input: UtilityRemoveInput): UtilityRemoveOutput
+  UtilityUpdate(input: UtilityUpdateInput): UtilityUpdateOutput
   VendorCreate(input: VendorCreateInput): VendorCreateOutput
   VendorCreateMany(input: VendorCreateManyInput): VendorCreateManyOutput
   VendorRemove(input: VendorRemoveInput): VendorRemoveOutput
@@ -1309,6 +1313,9 @@ type Query {
   UserGet(input: UserGetInput): UserGetOutput
   UserGetConnection(input: UserGetConnectionInput): UserGetConnectionOutput
   UserGetMany(input: UserGetManyInput): UserGetManyOutput
+  UtilityGet(input: UtilityGetInput): UtilityGetOutput
+  UtilityGetConnection(input: UtilityGetConnectionInput): UtilityGetConnectionOutput
+  UtilityGetMany(input: UtilityGetManyInput): UtilityGetManyOutput
   VendorGet(input: VendorGetInput): VendorGetOutput
   VendorGetConnection(input: VendorGetConnectionInput): VendorGetConnectionOutput
   VendorGetMany(input: VendorGetManyInput): VendorGetManyOutput
@@ -1805,13 +1812,235 @@ input UserUpdateUpdateInput {
   phone: String
 }
 
+type Utility {
+  Vendor: Vendor
+  _id: String
+  created: DateTime
+  description: String
+  name: String
+  type: String
+  usage: String
+}
+
+input UtilityCreateFormInput {
+  Vendor: VendorInput
+  _id: String
+  created: DateTime
+  description: String
+  name: String
+  type: String
+  usage: String
+}
+
+input UtilityCreateInput {
+  form: UtilityCreateFormInput
+  root: String
+}
+
+input UtilityCreateManyFormInput {
+  Vendor: VendorInput
+  _id: String
+  created: DateTime
+  description: String
+  name: String
+  type: String
+  usage: String
+}
+
+input UtilityCreateManyInput {
+  form: [UtilityCreateManyFormInput]
+  root: String
+}
+
+type UtilityCreateManyOutput {
+  result: Utility
+  root: UtilityCreateManyOutputRoot
+}
+
+type UtilityCreateManyOutputRoot {
+  root: UtilityCreateManyOutputRoot
+}
+
+type UtilityCreateOutput {
+  result: Utility
+  root: UtilityCreateOutputRoot
+}
+
+type UtilityCreateOutputRoot {
+  root: UtilityCreateOutputRoot
+}
+
+type UtilityGetConnectionConnection {
+  edges: [UtilityGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type UtilityGetConnectionEdge {
+  cursor: String
+  node: Utility
+}
+
+input UtilityGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [UtilityInput]
+  resourceValue: UtilityInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input UtilityGetConnectionInput {
+  filter: [UtilityGetConnectionFilterInput]
+  pagination: PaginationInput
+  root: String
+}
+
+type UtilityGetConnectionOutput {
+  result: UtilityGetConnectionConnection
+  root: UtilityGetConnectionOutputRoot
+}
+
+type UtilityGetConnectionOutputRoot {
+  root: UtilityGetConnectionOutputRoot
+}
+
+input UtilityGetFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [UtilityInput]
+  resourceValue: UtilityInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input UtilityGetInput {
+  filter: [UtilityGetFilterInput]
+  root: String
+}
+
+input UtilityGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [UtilityInput]
+  resourceValue: UtilityInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input UtilityGetManyInput {
+  filter: [UtilityGetManyFilterInput]
+  root: String
+}
+
+type UtilityGetManyOutput {
+  result: [Utility]
+  root: UtilityGetManyOutputRoot
+}
+
+type UtilityGetManyOutputRoot {
+  root: UtilityGetManyOutputRoot
+}
+
+type UtilityGetOutput {
+  result: Utility
+  root: UtilityGetOutputRoot
+}
+
+type UtilityGetOutputRoot {
+  root: UtilityGetOutputRoot
+}
+
+input UtilityInput {
+  Vendor: VendorInput
+  _id: String
+  created: DateTime
+  description: String
+  name: String
+  type: String
+  usage: String
+}
+
+input UtilityRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [UtilityInput]
+  resourceValue: UtilityInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input UtilityRemoveInput {
+  filter: [UtilityRemoveFilterInput]
+  root: String
+}
+
+type UtilityRemoveOutput {
+  result: Utility
+  root: UtilityRemoveOutputRoot
+}
+
+type UtilityRemoveOutputRoot {
+  root: UtilityRemoveOutputRoot
+}
+
+input UtilityUpdateFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [UtilityInput]
+  resourceValue: UtilityInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input UtilityUpdateInput {
+  filter: [UtilityUpdateFilterInput]
+  root: String
+  update: UtilityUpdateUpdateInput
+}
+
+type UtilityUpdateOutput {
+  result: Utility
+  root: UtilityUpdateOutputRoot
+}
+
+type UtilityUpdateOutputRoot {
+  root: UtilityUpdateOutputRoot
+}
+
+input UtilityUpdateUpdateInput {
+  Vendor: VendorInput
+  _id: String
+  created: DateTime
+  description: String
+  name: String
+  type: String
+  usage: String
+}
+
 type Vendor {
+  Utility: [Utility]
   _id: String
   created: DateTime
   name: String
 }
 
 input VendorCreateFormInput {
+  Utility: [UtilityInput]
   _id: String
   created: DateTime
   name: String
@@ -1823,6 +2052,7 @@ input VendorCreateInput {
 }
 
 input VendorCreateManyFormInput {
+  Utility: [UtilityInput]
   _id: String
   created: DateTime
   name: String
@@ -1916,6 +2146,7 @@ type VendorGetOutput {
 }
 
 input VendorInput {
+  Utility: [UtilityInput]
   _id: String
   created: DateTime
   name: String
@@ -1965,6 +2196,7 @@ type VendorUpdateOutput {
 }
 
 input VendorUpdateUpdateInput {
+  Utility: [UtilityInput]
   _id: String
   created: DateTime
   name: String

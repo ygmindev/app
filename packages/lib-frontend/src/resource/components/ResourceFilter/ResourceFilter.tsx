@@ -2,7 +2,7 @@ import { type ReactElement, useMemo } from 'react';
 
 import { SelectField } from '#lib-frontend/core/components/SelectField/SelectField';
 import { type LFCPropsModel } from '#lib-frontend/core/core.models';
-import { FilterContainer } from '#lib-frontend/data/components/FilterContainer/FilterContainer';
+import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { type FormTileModel } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
 import { NumberRangeField } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField';
 import { NUMBER_RANGE_TYPE } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField.constants';
@@ -51,7 +51,7 @@ export const ResourceFilter = <TType,>({
     [columns],
   );
   return (
-    <FilterContainer
+    <FormContainer
       {...props}
       fields={fields}
       onSubmit={onSubmit}

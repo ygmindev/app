@@ -7,7 +7,7 @@ import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormC
 import { TextField } from '#lib-frontend/data/components/TextField/TextField';
 import { type ResourceFormPropsModel } from '#lib-frontend/resource/containers/ResourceForm/ResourceForm.models';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { DATA_TYPE_MORE } from '#lib-shared/data/data.constants';
+import { DATA_TYPE_MORE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 
 export const ResourceForm = <TType,>({
   columns,
@@ -33,6 +33,14 @@ export const ResourceForm = <TType,>({
                   options={options ?? []}
                 />
               );
+            case PROPERTY_TYPE.RESOURCE: {
+              return (
+                <TextField
+                  beforeSubmit={(v) => ({ _id: v })}
+                  label={labelF}
+                />
+              );
+            }
             default:
               return options ? (
                 <DropdownField

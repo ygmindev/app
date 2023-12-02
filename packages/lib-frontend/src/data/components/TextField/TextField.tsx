@@ -1,5 +1,5 @@
 import isNumber from 'lodash/isNumber';
-import { type RefObject, useState } from 'react';
+import { type RefObject, useImperativeHandle, useState } from 'react';
 import { forwardRef, useRef } from 'react';
 
 import { ANIMATION_STATES_FOCUSABLE } from '#lib-frontend/animation/animation.constants';
@@ -43,6 +43,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
   (
     {
       autoComplete,
+      beforeSubmit,
       defaultValue,
       icon,
       isAutoFocus,
@@ -76,6 +77,13 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
     const focusableRef = useRef<FocusableRefModel>(null);
     const inputRef = useRef<TextFieldRefModel>(null);
     const inputRefF = ref ?? inputRef;
+
+    useImperativeHandle(ref, () => ({
+      beforeSubmit,
+      blur: () => (inputRefF as RefObject<TextFieldRefModel>).current?.blur(),
+      focus: () => (inputRefF as RefObject<TextFieldRefModel>).current?.focus(),
+    }));
+
     const [elementState, elementStateSet] = useState<ElementStateModel>();
     const elementStateF = props.elementState ?? elementState;
     const sizeF = size ?? (label ? THEME_SIZE.MEDIUM : THEME_SIZE.SMALL);

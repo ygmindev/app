@@ -32,9 +32,9 @@ export const TextFilterField: RLFCModel<TextFilterFieldRefModel, TextFilterField
     const fieldRef = useRef<FieldRefModel>(null);
 
     useImperativeHandle(ref, () => ({
+      beforeSubmit: (v, k) => (k && v ? [{ condition, field: k, value: v }] : undefined),
       blur: () => fieldRef.current?.blur(),
       focus: () => fieldRef.current?.focus(),
-      toFilter: (id) => [{ condition, field: id, value: valueControlled }],
     }));
 
     return (
@@ -44,9 +44,10 @@ export const TextFilterField: RLFCModel<TextFilterFieldRefModel, TextFilterField
           {
             element: (
               <TextField
-                placeholder={t('core:any')}
                 {...propsF}
                 onChange={valueControlledSet}
+                placeholder={t('core:any')}
+                ref={ref}
                 value={valueControlled}
               />
             ),
@@ -57,13 +58,13 @@ export const TextFilterField: RLFCModel<TextFilterFieldRefModel, TextFilterField
               <DropdownField
                 defaultValue={FILTER_CONDITION.CONTAINS}
                 label={t('core:condition')}
-                onChange={(value) => conditionSet(value as FilterConditionModel)}
+                onChange={(v) => conditionSet(v as FilterConditionModel)}
                 options={[
                   { id: FILTER_CONDITION.EQUAL, label: t('data:equal') },
                   { id: FILTER_CONDITION.NOT_EQUAL, label: t('data:notEqual') },
                   { id: FILTER_CONDITION.CONTAINS, label: t('data:contains') },
                 ]}
-                value={valueControlled}
+                value={condition}
               />
             ),
             id: 'condition',

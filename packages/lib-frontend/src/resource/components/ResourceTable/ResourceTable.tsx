@@ -43,7 +43,8 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
         element={
           <ResourceFilter
             columns={columns}
-            onSubmit={async (filter) => paramsSet({ filter })}
+            // onSubmit={async (filter) => paramsSet({ filter })}
+            onSubmit={async (filter) => console.warn(filter)}
           />
         }
       />

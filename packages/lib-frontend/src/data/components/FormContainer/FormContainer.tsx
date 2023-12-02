@@ -30,17 +30,7 @@ import { useForm } from '#lib-frontend/data/hooks/useForm/useForm';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { type StringKeyModel } from '#lib-shared/core/core.models';
-
-const getValues = <TType,>(data: TType, fields?: Array<FormFieldsModel<TType>>): TType =>
-  fields
-    ? fields.reduce((result, field) => {
-        const fieldsF = (field as FormTileModel<TType> | FormRowModel<TType>).fields;
-        return {
-          ...result,
-          ...(fieldsF ? getValues(data, fieldsF) : { [field.id]: data[field.id] }),
-        };
-      }, {} as TType)
-    : data;
+import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 
 export const FormContainer = forwardRef(
   <TType, TResult = void>(
@@ -108,6 +98,20 @@ const FormContainerF = forwardRef(
       submit: async () => handleSubmitF(),
       valuesSet,
     }));
+
+    const getValues = (data: TType, fields?: Array<FormFieldsModel<TType>>): TType =>
+      fields
+        ? fields.reduce((result, field) => {
+            const fieldsF = (field as FormTileModel<TType> | FormRowModel<TType>).fields;
+            if (fieldsF) {
+              return { ...result, ...getValues(data, fieldsF) };
+            }
+            const value = data[field.id];
+            const beforeSubmit = fieldRefs.current[field.id]?.beforeSubmit;
+            const valueF = beforeSubmit ? beforeSubmit(value, field.id) : value;
+            return isEmpty(valueF) ? result : { ...result, ...{ [field.id]: valueF } };
+          }, {} as TType)
+        : data;
 
     const onSubmitF = async (data: TType): Promise<TResult | null> => {
       const dataF = getValues(data, fields);
