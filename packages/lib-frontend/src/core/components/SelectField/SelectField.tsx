@@ -1,11 +1,4 @@
-import {
-  type ForwardedRef,
-  forwardRef,
-  type ReactElement,
-  useImperativeHandle,
-  useMemo,
-  useState,
-} from 'react';
+import { type ForwardedRef, forwardRef, type ReactElement, useMemo, useState } from 'react';
 
 import { ANIMATION_STATES_APPEAR_SCALABLE } from '#lib-frontend/animation/animation.constants';
 import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
@@ -34,7 +27,6 @@ import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/sha
 import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 import { sort } from '#lib-shared/core/utils/sort/sort';
-import { FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
 
 export const SelectField = forwardRef(
   <TType extends string | Array<string> = string>(
@@ -48,7 +40,7 @@ export const SelectField = forwardRef(
       value,
       ...props
     }: LFCPropsModel<SelectFieldPropsModel<TType>>,
-    ref: ForwardedRef<SelectFieldRefModel>,
+    _ref: ForwardedRef<SelectFieldRefModel>,
   ): ReactElement<RLFCPropsModel<SelectFieldRefModel, SelectFieldPropsModel<TType>>> => {
     const theme = useTheme();
     const { t } = useTranslation();
@@ -68,12 +60,6 @@ export const SelectField = forwardRef(
           : (valueControlled as Array<string>) ?? []
         : undefined,
     );
-
-    useImperativeHandle(ref, () => ({
-      blur: () => undefined,
-      focus: () => undefined,
-      toFilter: () => FILTER_CONDITION.IN,
-    }));
 
     const handleChange = (id: string) => () =>
       isMultiple

@@ -55,7 +55,7 @@ export type ValuePropsModel<TType = string> = {
 export type FieldPropsModel<TType = string> = FocusableWrapperPropsModel &
   WithIconPropsModel &
   ValuePropsModel<TType> & {
-    beforeSubmit?(value?: TType, id?: string): unknown;
+    beforeSubmit?(value: TType, id: string): unknown;
     isAutoFocus?: boolean;
     isTransparent?: boolean;
     label?: TranslatableTextModel;

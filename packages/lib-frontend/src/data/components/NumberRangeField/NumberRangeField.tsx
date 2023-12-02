@@ -1,11 +1,4 @@
-import {
-  type ForwardedRef,
-  forwardRef,
-  type ReactElement,
-  useEffect,
-  useImperativeHandle,
-  useState,
-} from 'react';
+import { type ForwardedRef, forwardRef, type ReactElement, useEffect, useState } from 'react';
 
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
@@ -36,9 +29,7 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { type NumberRangeModel } from '#lib-shared/data/resources/NumberRange/NumberRange.models';
-import { FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
 
 export const NumberRangeField = forwardRef(
   <TType extends NumberUnitModel>(
@@ -77,24 +68,6 @@ export const NumberRangeField = forwardRef(
     useEffect(() => {
       !unit && handleChange({ unit: unitOptionsF[0].id as TType });
     }, []);
-
-    useImperativeHandle(ref, () => ({
-      blur: () => undefined,
-      focus: () => undefined,
-      toFilter: (id: string) =>
-        filterNil([
-          !!valueControlled?.min && {
-            condition: FILTER_CONDITION.GRATER_THAN_EQUAL,
-            field: rangeType === NUMBER_RANGE_TYPE.EXACT ? id : `${id}.min`,
-            value: valueControlled.min,
-          },
-          !!valueControlled?.max && {
-            condition: FILTER_CONDITION.LESS_THAN_EQUAL,
-            field: rangeType === NUMBER_RANGE_TYPE.EXACT ? id : `${id}.max`,
-            value: valueControlled.max,
-          },
-        ]),
-    }));
 
     const handleBlur = (): void => {
       isRange &&
@@ -165,6 +138,7 @@ export const NumberRangeField = forwardRef(
             onBlur={handleBlur}
             onChange={(v) => handleChange({ min: v ?? null })}
             placeholder={t('core:any')}
+            ref={ref}
             rightElement={<Text color={theme.color.border}>{unit}</Text>}
             value={valueScaled?.min}
           />

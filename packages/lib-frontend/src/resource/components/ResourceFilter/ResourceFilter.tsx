@@ -9,7 +9,10 @@ import { NUMBER_RANGE_TYPE } from '#lib-frontend/data/components/NumberRangeFiel
 import { TextFilterField } from '#lib-frontend/data/components/TextFilterField/TextFilterField';
 import { NUMBER_UNIT_TYPE } from '#lib-frontend/data/data.constants';
 import { type ResourceFilterPropsModel } from '#lib-frontend/resource/components/ResourceFilter/ResourceFilter.models';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { DATA_TYPE, DATA_TYPE_MORE } from '#lib-shared/data/data.constants';
+import { type NumberRangeModel } from '#lib-shared/data/resources/NumberRange/NumberRange.models';
+import { FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
 import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
 export const ResourceFilter = <TType, TResult = void>({
@@ -19,6 +22,20 @@ export const ResourceFilter = <TType, TResult = void>({
 }: LFCPropsModel<ResourceFilterPropsModel<TType, TResult>>): ReactElement<
   LFCPropsModel<ResourceFilterPropsModel<TType, TResult>>
 > => {
+  const beforeSubmitRange = (value: NumberRangeModel, field: string): Array<FilterModel<TType>> =>
+    filterNil([
+      !!value?.min && {
+        condition: FILTER_CONDITION.GRATER_THAN_EQUAL,
+        field,
+        value: value.min,
+      },
+      !!value?.max && {
+        condition: FILTER_CONDITION.LESS_THAN_EQUAL,
+        field,
+        value: value.max,
+      },
+    ]);
+
   const fields = useMemo<Array<FormTileModel<TType>> | undefined>(
     () =>
       columns?.map(({ id, label, options, type }) => {
@@ -28,19 +45,21 @@ export const ResourceFilter = <TType, TResult = void>({
             case DATA_TYPE_MORE.STRING_LIST:
               return (
                 <SelectField
+                  beforeSubmit={(v, k) => [{ condition: FILTER_CONDITION.IN, field: k, value: v }]}
                   isHorizontal
                   isMultiple
                   options={options ?? []}
                 />
               );
+
             case DATA_TYPE.NUMBER:
-              return <NumberRangeField rangeType={NUMBER_RANGE_TYPE.RANGE} />;
             case NUMBER_UNIT_TYPE.AMOUNT:
             case NUMBER_UNIT_TYPE.RELATIVE_DATE:
               return (
                 <NumberRangeField
+                  beforeSubmit={beforeSubmitRange}
                   rangeType={NUMBER_RANGE_TYPE.RANGE}
-                  type={type}
+                  type={type === DATA_TYPE.NUMBER ? undefined : type}
                 />
               );
             default:
@@ -67,7 +86,9 @@ export const ResourceFilter = <TType, TResult = void>({
     <FormContainer
       {...props}
       fields={fields}
+      isFullHeight
       onSubmit={handleSubmit}
+      p
     />
   );
 };

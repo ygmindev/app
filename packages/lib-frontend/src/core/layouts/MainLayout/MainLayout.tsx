@@ -14,6 +14,7 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
   bottomElement,
   children,
   isFullHeight,
+  isFullWidth,
   size = THEME_SIZE.MEDIUM,
   topElement,
   ...props
@@ -21,7 +22,7 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
   const { wrapperProps } = useLayoutStyles({ props });
   const { width } = useStore((state) => state.app.dimension);
   const isMobile = useIsMobile();
-  const isFullWidthF = props.isFullWidth || isMobile;
+  const isFullWidthF = isFullWidth || isMobile;
   const theme = useTheme();
   const widthF = isFullWidthF ? width : isNumber(size) ? size : theme.layout.width[size];
   return (
@@ -43,12 +44,12 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
 
       <Wrapper
         flex={isFullHeight}
+        isFullWidth
         isVerticalScrollable={isFullHeight}>
         <Wrapper
           flex={isFullHeight}
           isFullWidth={isFullWidthF}
           m="auto"
-          p
           s
           width={widthF}>
           {children}

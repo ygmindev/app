@@ -32,7 +32,7 @@ export const TextFilterField: RLFCModel<TextFilterFieldRefModel, TextFilterField
     const fieldRef = useRef<FieldRefModel>(null);
 
     useImperativeHandle(ref, () => ({
-      beforeSubmit: (v, k) => (k && v ? [{ condition, field: k, value: v }] : undefined),
+      beforeSubmit: (v, k) => [{ condition, field: k, value: v }],
       blur: () => fieldRef.current?.blur(),
       focus: () => fieldRef.current?.focus(),
     }));

@@ -1,3 +1,4 @@
+import isNil from 'lodash/isNil';
 import map from 'lodash/map';
 import { cloneElement, type ForwardedRef, type ReactElement, type ReactNode, useRef } from 'react';
 import { forwardRef, useImperativeHandle } from 'react';
@@ -30,7 +31,6 @@ import { useForm } from '#lib-frontend/data/hooks/useForm/useForm';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { type StringKeyModel } from '#lib-shared/core/core.models';
-import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 
 export const FormContainer = forwardRef(
   <TType, TResult = void>(
@@ -108,8 +108,12 @@ const FormContainerF = forwardRef(
             }
             const value = data[field.id];
             const beforeSubmit = fieldRefs.current[field.id]?.beforeSubmit;
-            const valueF = beforeSubmit ? beforeSubmit(value, field.id) : value;
-            return isEmpty(valueF) ? result : { ...result, ...{ [field.id]: valueF } };
+            return isNil(value)
+              ? result
+              : {
+                  ...result,
+                  ...{ [field.id]: beforeSubmit ? beforeSubmit(value, field.id) : value },
+                };
           }, {} as TType)
         : data;
 
@@ -210,24 +214,25 @@ const FormContainerF = forwardRef(
       <Form onSubmit={isDisabled ? undefined : async () => handleSubmitF()}>
         <MainLayout
           {...wrapperProps}
-          bottomElement={bottomElement && bottomElement({ elementState: elementStateF })}
+          bottomElement={
+            isButton ? (
+              <SubmittableButtons
+                cancelLabel={cancelLabel}
+                elementState={elementStateF}
+                onCancel={onCancel}
+                onSubmit={async () => handleSubmitF()}
+                submitLabel={submitLabel}
+              />
+            ) : undefined
+          }
           isFullHeight={isFullHeight}
           isFullWidth={isFullWidth}
-          p
           s>
           {topElement && topElement({ elementState: elementStateF })}
 
           {getFields()}
 
-          {isButton ? (
-            <SubmittableButtons
-              cancelLabel={cancelLabel}
-              elementState={elementStateF}
-              onCancel={onCancel}
-              onSubmit={async () => handleSubmitF()}
-              submitLabel={submitLabel}
-            />
-          ) : undefined}
+          {bottomElement && bottomElement({ elementState: elementStateF })}
         </MainLayout>
       </Form>
     );

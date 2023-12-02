@@ -41,6 +41,14 @@ export const ResourceForm = <TType,>({
                 />
               );
             }
+            case DATA_TYPE_MORE.ROOT: {
+              return (
+                <TextField
+                  beforeSubmit={(v) => ({ root: v })}
+                  label={labelF}
+                />
+              );
+            }
             default:
               return options ? (
                 <DropdownField
@@ -55,6 +63,7 @@ export const ResourceForm = <TType,>({
         return { element, id };
       })}
       onSubmit={onSubmit}
+      p
     />
   );
 };

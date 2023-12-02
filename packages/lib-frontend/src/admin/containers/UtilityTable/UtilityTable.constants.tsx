@@ -9,11 +9,11 @@ import {
   type UtilityModel,
 } from '#lib-shared/admin/resources/Utility/Utility.models';
 import { VENDOR_RESOURCE_NAME } from '#lib-shared/admin/resources/Vendor/Vendor.constants';
-import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
+import { DATA_TYPE, DATA_TYPE_MORE } from '#lib-shared/data/data.constants';
 
 export const UTILITY_TABLE_PROPS = {
   columns: [
-    { id: VENDOR_RESOURCE_NAME, type: PROPERTY_TYPE.RESOURCE },
+    { id: VENDOR_RESOURCE_NAME, type: DATA_TYPE_MORE.ROOT },
     { id: 'name', type: DATA_TYPE.STRING },
     { id: 'description', type: DATA_TYPE.STRING },
     {
