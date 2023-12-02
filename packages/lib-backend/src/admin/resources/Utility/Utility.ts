@@ -6,8 +6,8 @@ import { FIELD_RELATION } from '#lib-backend/resource/utils/withField/withField.
 import { UTILITY_RESOURCE_NAME } from '#lib-shared/admin/resources/Utility/Utility.constants';
 import {
   type UtilityModel,
-  UtilityTypeModel,
-  UtilityUsageModel,
+  type UtilityTypeModel,
+  type UtilityUsageModel,
 } from '#lib-shared/admin/resources/Utility/Utility.models';
 import { VENDOR_RESOURCE_NAME } from '#lib-shared/admin/resources/Vendor/Vendor.constants';
 import { type VendorModel } from '#lib-shared/admin/resources/Vendor/Vendor.models';

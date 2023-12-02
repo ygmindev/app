@@ -38,7 +38,6 @@ import { FLEX_ALIGN } from '#lib-frontend/style/utils/styler/flexStyler/flexStyl
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
-import { variableName } from '#lib-shared/core/utils/variableName/variableName';
 
 export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forwardRef(
   (
@@ -265,5 +264,3 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
     );
   },
 );
-
-process.env.APP_IS_DEBUG && (TextField.displayName = variableName({ TextField }));

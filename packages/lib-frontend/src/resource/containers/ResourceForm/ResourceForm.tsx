@@ -2,6 +2,7 @@ import { type ReactElement } from 'react';
 
 import { SelectField } from '#lib-frontend/core/components/SelectField/SelectField';
 import { type LFCPropsModel } from '#lib-frontend/core/core.models';
+import { DropdownField } from '#lib-frontend/data/components/DropdownField/DropdownField';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { TextField } from '#lib-frontend/data/components/TextField/TextField';
 import { type ResourceFormPropsModel } from '#lib-frontend/resource/containers/ResourceForm/ResourceForm.models';
@@ -21,17 +22,26 @@ export const ResourceForm = <TType,>({
       {...wrapperProps}
       fields={columns?.map(({ id, label, options, type }) => {
         const element = (() => {
+          const labelF = label ?? id;
           switch (type) {
             case DATA_TYPE_MORE.STRING_LIST:
               return (
                 <SelectField
                   isHorizontal
                   isMultiple
+                  label={labelF}
                   options={options ?? []}
                 />
               );
             default:
-              return <TextField label={label ?? id} />;
+              return options ? (
+                <DropdownField
+                  label={labelF}
+                  options={options}
+                />
+              ) : (
+                <TextField label={labelF} />
+              );
           }
         })();
         return { element, id };
