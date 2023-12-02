@@ -10,13 +10,14 @@ import { TextFilterField } from '#lib-frontend/data/components/TextFilterField/T
 import { NUMBER_UNIT_TYPE } from '#lib-frontend/data/data.constants';
 import { type ResourceFilterPropsModel } from '#lib-frontend/resource/components/ResourceFilter/ResourceFilter.models';
 import { DATA_TYPE, DATA_TYPE_MORE } from '#lib-shared/data/data.constants';
+import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
-export const ResourceFilter = <TType,>({
+export const ResourceFilter = <TType, TResult = void>({
   columns,
   onSubmit,
   ...props
-}: LFCPropsModel<ResourceFilterPropsModel<TType>>): ReactElement<
-  LFCPropsModel<ResourceFilterPropsModel<TType>>
+}: LFCPropsModel<ResourceFilterPropsModel<TType, TResult>>): ReactElement<
+  LFCPropsModel<ResourceFilterPropsModel<TType, TResult>>
 > => {
   const fields = useMemo<Array<FormTileModel<TType>> | undefined>(
     () =>
@@ -50,11 +51,23 @@ export const ResourceFilter = <TType,>({
       }),
     [columns],
   );
+
+  // TODO: better typing for TType -> filters?
+  const handleSubmit = onSubmit
+    ? async (filters: TType): Promise<TResult | null> =>
+        onSubmit(
+          Object.values(filters as Record<string, Array<FilterModel<TType>>>).reduce(
+            (result, v) => [...result, ...v],
+            [] as Array<FilterModel<TType>>,
+          ),
+        )
+    : undefined;
+
   return (
     <FormContainer
       {...props}
       fields={fields}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
     />
   );
 };
