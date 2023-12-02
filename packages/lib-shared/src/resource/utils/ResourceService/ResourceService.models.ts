@@ -56,7 +56,7 @@ export type ResourceServiceBeforeDecoratorModel<
 > = (
   params: { input?: InputModel<TMethod, TType, TForm> },
   context?: ContextModel,
-) => Promise<InputModel<TMethod, TType, TForm>>;
+) => Promise<InputModel<TMethod, TType, TForm> | undefined>;
 
 export type ResourceServiceAfterDecoratorModel<
   TMethod extends ResourceMethodTypeModel,

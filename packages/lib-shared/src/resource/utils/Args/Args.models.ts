@@ -10,10 +10,10 @@ import { type UpdateModel } from '#lib-shared/resource/utils/Update/Update.model
 type ProjectPropertyModel<TType> = TType extends Array<infer TElement>
   ? ProjectPropertyModel<TElement> | boolean
   : TType extends PrimitiveModel | ObjectId
-  ? boolean
-  : TType extends object
-  ? ProjectModel<TType>
-  : boolean;
+    ? boolean
+    : TType extends object
+      ? ProjectModel<TType>
+      : boolean;
 
 export type ProjectModel<TType> = {
   [TKey in keyof TType]?: ProjectPropertyModel<TType[TKey]>;
@@ -86,15 +86,15 @@ export type ArgsModel<TMethod extends ResourceMethodTypeModel, TType, TForm> = {
 } & (TMethod extends RESOURCE_METHOD_TYPE.CREATE
   ? CreateArgsModel<TForm>
   : TMethod extends RESOURCE_METHOD_TYPE.CREATE_MANY
-  ? CreateManyArgsModel<TForm>
-  : TMethod extends RESOURCE_METHOD_TYPE.GET
-  ? GetArgsModel<TType>
-  : TMethod extends RESOURCE_METHOD_TYPE.GET_MANY
-  ? GetManyArgsModel<TType>
-  : TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION
-  ? GetConnectionArgsModel<TType>
-  : TMethod extends RESOURCE_METHOD_TYPE.REMOVE
-  ? RemoveArgsModel<TType>
-  : TMethod extends RESOURCE_METHOD_TYPE.UPDATE
-  ? UpdateArgsModel<TType>
-  : never);
+    ? CreateManyArgsModel<TForm>
+    : TMethod extends RESOURCE_METHOD_TYPE.GET
+      ? GetArgsModel<TType>
+      : TMethod extends RESOURCE_METHOD_TYPE.GET_MANY
+        ? GetManyArgsModel<TType>
+        : TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION
+          ? GetConnectionArgsModel<TType>
+          : TMethod extends RESOURCE_METHOD_TYPE.REMOVE
+            ? RemoveArgsModel<TType>
+            : TMethod extends RESOURCE_METHOD_TYPE.UPDATE
+              ? UpdateArgsModel<TType>
+              : never);

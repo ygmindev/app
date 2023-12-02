@@ -12,7 +12,6 @@ export enum DATA_TYPE {
 
 export enum DATA_TYPE_MORE {
   NUMBER_POSITIVE = 'numberPositive',
-  ROOT = 'root',
   STRING_LIST = 'stringList',
 }
 

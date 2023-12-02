@@ -6,10 +6,12 @@ import {
   type UtilityFormModel,
   type UtilityModel,
 } from '#lib-shared/admin/resources/Utility/Utility.models';
+import { VENDOR_RESOURCE_NAME } from '#lib-shared/admin/resources/Vendor/Vendor.constants';
 import { type VendorModel } from '#lib-shared/admin/resources/Vendor/Vendor.models';
 
 export const useUtilityResource = (): UseUtilityResourceModel =>
   useResource<UtilityModel, UtilityFormModel, VendorModel>({
     fields: [{ result: UTILITY_FIELDS }],
     name: UTILITY_RESOURCE_NAME,
+    root: VENDOR_RESOURCE_NAME,
   });

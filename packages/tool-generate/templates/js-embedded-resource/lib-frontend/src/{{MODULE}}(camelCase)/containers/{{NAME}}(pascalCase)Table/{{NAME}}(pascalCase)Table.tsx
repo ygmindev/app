@@ -8,12 +8,13 @@ import {
   type {{NAME}}(pascalCase)FormModel,
   type {{NAME}}(pascalCase)Model,
 } from '#lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
+import { type {{NAME_ROOT}}(pascalCase)Model } from '#lib-shared/{{MODULE_ROOT}}(camelCase)/resources/Funding/Funding.models';
 
 export const {{NAME}}(pascalCase)Table: LFCModel<{{NAME}}(pascalCase)TablePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const service = use{{NAME}}(pascalCase)Resource();
   return (
-    <ResourceTable<{{NAME}}(pascalCase)Model, {{NAME}}(pascalCase)FormModel>
+    <ResourceTable<{{NAME}}(pascalCase)Model, {{NAME}}(pascalCase)FormModel, {{NAME_ROOT}}(pascalCase)Model>
       {...wrapperProps}
       {...{{NAME}}(constantCase)_TABLE_PROPS}
       service={service}
