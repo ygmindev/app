@@ -17,7 +17,11 @@ export const getRouteList = ({
     ...params,
     routes: [
       { element, isNavigatable: false, pathname: '/', title },
-      ...(routes ? routes.map((route) => merge([route, { header: headerF }])) : []),
+      ...(routes
+        ? routes.map((route) =>
+            merge([route, { header: headerF, title: route.title ?? route.pathname }]),
+          )
+        : []),
     ],
     title,
     transition: ROUTE_TRANSITION.SLIDE,
