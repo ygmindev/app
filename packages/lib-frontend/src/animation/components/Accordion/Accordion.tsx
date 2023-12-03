@@ -5,7 +5,7 @@ import { Rotatable } from '#lib-frontend/animation/components/Rotatable/Rotatabl
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { Divider } from '#lib-frontend/core/components/Divider/Divider';
-import { LineItem } from '#lib-frontend/core/components/LineItem/LineItem';
+import { PressableItem } from '#lib-frontend/core/components/PressableItem/PressableItem';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import {
@@ -44,7 +44,7 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
 
   return (
     <Wrapper {...wrapperProps}>
-      <LineItem
+      <PressableItem
         color={color}
         elementState={elementState}
         icon={icon}

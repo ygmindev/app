@@ -1,5 +1,5 @@
 import { type RouteModel } from '#lib-frontend/route/route.models';
-import { getRouteGroup } from '#lib-frontend/route/utils/getRouteGroup/getRouteGroup';
+import { getRouteList } from '#lib-frontend/route/utils/getRouteList/getRouteList';
 import { ReportPage } from '#lib-frontend/test/pages/ReportPage/ReportPage';
 import { SnapshotPage } from '#lib-frontend/test/pages/SnapshotPage/SnapshotPage';
 import { REPORT } from '#lib-frontend/test/test.constants';
@@ -9,7 +9,7 @@ export const testRoutes: Array<RouteModel> = [
   {
     pathname: TEST,
     routes: [
-      getRouteGroup({
+      getRouteList({
         pathname: REPORT,
         routes: [
           {

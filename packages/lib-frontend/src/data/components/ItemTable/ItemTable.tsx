@@ -13,7 +13,7 @@ import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 
-export const ItemTable: LFCModel<ItemTablePropsModel> = ({ items, ...props }) => {
+export const ItemTable: LFCModel<ItemTablePropsModel> = ({ elementState, items, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
   return (
@@ -25,7 +25,7 @@ export const ItemTable: LFCModel<ItemTablePropsModel> = ({ items, ...props }) =>
           isRowAlign
           key={id}>
           {image && (
-            <Skeleton>
+            <Skeleton elementState={elementState}>
               <Image
                 isAutoSize
                 src={image}
@@ -35,7 +35,7 @@ export const ItemTable: LFCModel<ItemTablePropsModel> = ({ items, ...props }) =>
           )}
 
           {icon && (
-            <Skeleton>
+            <Skeleton elementState={elementState}>
               <Icon
                 icon={icon}
                 width={theme.shape.size[THEME_SIZE.SMALL]}
@@ -45,16 +45,15 @@ export const ItemTable: LFCModel<ItemTablePropsModel> = ({ items, ...props }) =>
 
           {title && <TranslatableText isEllipsis>{title}</TranslatableText>}
 
-          <Skeleton>
-            <Wrapper
-              align={FLEX_JUSTIFY.END}
-              flex>
-              {isString(description) ? (
-                <TranslatableText>{description}</TranslatableText>
-              ) : (
-                description
-              )}
-            </Wrapper>
+          <Skeleton
+            align={FLEX_JUSTIFY.END}
+            elementState={elementState}
+            flex>
+            {isString(description) ? (
+              <TranslatableText>{description}</TranslatableText>
+            ) : (
+              description
+            )}
           </Skeleton>
         </Wrapper>
       ))}

@@ -2,12 +2,12 @@ import { Activatable } from '#lib-frontend/core/components/Activatable/Activatab
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { Item } from '#lib-frontend/core/components/Item/Item';
-import { type LineItemPropsModel } from '#lib-frontend/core/components/LineItem/LineItem.models';
+import { type PressableItemPropsModel } from '#lib-frontend/core/components/PressableItem/PressableItem.models';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
-export const LineItem: LFCModel<LineItemPropsModel> = ({
+export const PressableItem: LFCModel<PressableItemPropsModel> = ({
   children,
   color,
   elementState,

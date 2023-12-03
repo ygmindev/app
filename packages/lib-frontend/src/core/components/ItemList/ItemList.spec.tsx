@@ -1,10 +1,10 @@
-import { LineItem } from '#lib-frontend/core/components/LineItem/LineItem';
-import { type LineItemPropsModel } from '#lib-frontend/core/components/LineItem/LineItem.models';
+import { ItemList } from '#lib-frontend/core/components/ItemList/ItemList';
+import { type ItemListPropsModel } from '#lib-frontend/core/components/ItemList/ItemList.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<LineItemPropsModel>({
-  target: LineItem,
+const { Component, displayName, testID } = withTestComponent<ItemListPropsModel>({
+  target: ItemList,
 });
 
 describe(displayName, () => {

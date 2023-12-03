@@ -1,10 +1,10 @@
-import { RouteGroup } from '#lib-frontend/route/components/RouteGroup/RouteGroup';
-import { type RouteGroupPropsModel } from '#lib-frontend/route/components/RouteGroup/RouteGroup.models';
+import { ResourceDetailPage } from '#lib-frontend/resource/pages/ResourceDetailPage/ResourceDetailPage';
+import { type ResourceDetailPagePropsModel } from '#lib-frontend/resource/pages/ResourceDetailPage/ResourceDetailPage.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<RouteGroupPropsModel>({
-  target: RouteGroup,
+const { Component, displayName, testID } = withTestComponent<ResourceDetailPagePropsModel>({
+  target: ResourceDetailPage,
 });
 
 describe(displayName, () => {

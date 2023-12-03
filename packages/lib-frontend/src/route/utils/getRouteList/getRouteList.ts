@@ -1,17 +1,17 @@
 import { ROUTE_DIRECTION, ROUTE_TRANSITION } from '#lib-frontend/route/route.constants';
 import {
-  type GetRouteGroupModel,
-  type GetRouteGroupParamsModel,
-} from '#lib-frontend/route/utils/getRouteGroup/getRouteGroup.models';
+  type GetRouteListModel,
+  type GetRouteListParamsModel,
+} from '#lib-frontend/route/utils/getRouteList/getRouteList.models';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 
-export const getRouteGroup = ({
+export const getRouteList = ({
   element,
   header,
   routes,
   title,
   ...params
-}: GetRouteGroupParamsModel): GetRouteGroupModel => {
+}: GetRouteListParamsModel): GetRouteListModel => {
   const headerF = merge([header, { previous: ROUTE_DIRECTION.UP }]);
   return {
     ...params,

@@ -1,5 +1,5 @@
-import { LineGroup } from '#lib-frontend/core/components/LineGroup/LineGroup';
-import { LineItem } from '#lib-frontend/core/components/LineItem/LineItem';
+import { ItemList } from '#lib-frontend/core/components/ItemList/ItemList';
+import { PressableItem } from '#lib-frontend/core/components/PressableItem/PressableItem';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { TimezoneField } from '#lib-frontend/locale/components/TimezoneField/TimezoneField';
@@ -11,15 +11,15 @@ export const SettingsLocale: SFCModel<SettingsLocalePropsModel> = ({ testID, ...
   const { t } = useTranslation();
   const { styles } = useStyles({ props });
   return (
-    <LineGroup
+    <ItemList
       style={styles}
       testID={testID}
       title={t('locale:location')}>
-      <LineItem
+      <PressableItem
         icon="time"
         rightElement={() => <TimezoneField />}>
         <Text>{t('locale:timezone')}</Text>
-      </LineItem>
-    </LineGroup>
+      </PressableItem>
+    </ItemList>
   );
 };

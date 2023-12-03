@@ -40,10 +40,10 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
       ? isString(root)
         ? `${root}/`
         : isNumber(root)
-        ? `${location.pathname.split('/').slice(0, root).join('/')}/`
-        : root === true
-        ? `${location.pathname}/`
-        : ''
+          ? `${location.pathname.split('/').slice(0, root).join('/')}/`
+          : root === true
+            ? `${location.pathname}/`
+            : ''
       : '';
 
   return {

@@ -1,12 +1,11 @@
 import range from 'lodash/range';
 
-import { SkeletonGroup } from '#lib-frontend/animation/components/SkeletonGroup/SkeletonGroup';
 import { PAYMENT, PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants';
 import { PaymentMethodItem } from '#lib-frontend/billing/components/PaymentMethodItem/PaymentMethodItem';
 import { usePaymentMethodResource } from '#lib-frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
 import { type PaymentPagePropsModel } from '#lib-frontend/billing/pages/PaymentPage/PaymentPage.models';
 import { Button } from '#lib-frontend/core/components/Button/Button';
-import { LineGroup } from '#lib-frontend/core/components/LineGroup/LineGroup';
+import { ItemList } from '#lib-frontend/core/components/ItemList/ItemList';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
@@ -47,28 +46,29 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
       testID={testID}>
       <DataBoundary
         fallback={
-          <SkeletonGroup>
-            <LineGroup title={t('billing:paymentMethod_plural')}>
-              {range(5).map((i) => (
+          <ItemList
+            items={range(5).map((i) => ({
+              children: (
                 <PaymentMethodItem
                   elementState={ELEMENT_STATE.LOADING}
                   key={i}
                 />
-              ))}
-            </LineGroup>
-          </SkeletonGroup>
+              ),
+              id: `${i}`,
+            }))}
+            title={t('billing:paymentMethod_plural')}
+          />
         }
         id="paymentMethods"
         query={query}>
         {({ data }) => (
-          <LineGroup title={t('billing:paymentMethod_plural')}>
-            {data?.map((value) => (
-              <PaymentMethodItem
-                key={value._id}
-                value={value}
-              />
-            ))}
-          </LineGroup>
+          <ItemList
+            items={data?.map((value) => ({
+              children: <PaymentMethodItem value={value} />,
+              id: value._id ?? '',
+            }))}
+            title={t('billing:paymentMethod_plural')}
+          />
         )}
       </DataBoundary>
 

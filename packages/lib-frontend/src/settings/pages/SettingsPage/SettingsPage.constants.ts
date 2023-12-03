@@ -1,5 +1,5 @@
 import { LOCATION, TIMEZONE } from '#lib-frontend/locale/locale.constants';
-import { type RouteGroupPropsModel } from '#lib-frontend/route/components/RouteGroup/RouteGroup.models';
+import { type RouteListPropsModel } from '#lib-frontend/route/components/RouteList/RouteList.models';
 import { APPEARANCE } from '#lib-frontend/settings/settings.constants';
 import { withId } from '#lib-shared/core/utils/withId/withId';
 import { type WithIdResultModel } from '#lib-shared/core/utils/withId/withId.models';
@@ -11,8 +11,8 @@ export const SETTINGS_GROUPS = withId([
     routes: [
       {
         icon: 'brightness',
-        id: BRIGHTNESS,
-        label: ({ t }) => t('settings:brightness'),
+        pathname: BRIGHTNESS,
+        title: ({ t }) => t('settings:brightness'),
       },
     ],
     title: ({ t }) => t('settings:appearance'),
@@ -22,10 +22,10 @@ export const SETTINGS_GROUPS = withId([
     routes: [
       {
         icon: 'time',
-        id: TIMEZONE,
-        label: ({ t }) => t('locale:timezone'),
+        pathname: TIMEZONE,
+        title: ({ t }) => t('locale:timezone'),
       },
     ],
     title: ({ t }) => t('locale:location'),
   },
-]) satisfies WithIdResultModel<Array<RouteGroupPropsModel>>;
+]) satisfies WithIdResultModel<Array<RouteListPropsModel>>;

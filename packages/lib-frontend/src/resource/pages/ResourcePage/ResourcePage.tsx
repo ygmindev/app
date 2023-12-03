@@ -1,43 +1,24 @@
-import { Tabs } from '#lib-frontend/core/components/Tabs/Tabs';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
+import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
+import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { RESOURCE_ITEMS } from '#lib-frontend/resource/pages/ResourcePage/ResourcePage.constants';
-import {
-  type ResourcePageParamsModel,
-  type ResourcePagePropsModel,
-} from '#lib-frontend/resource/pages/ResourcePage/ResourcePage.models';
-import { RESOURCE } from '#lib-frontend/resource/resource.constants';
-import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
-import { NotFoundPage } from '#lib-frontend/route/pages/NotFoundPage/NotFoundPage';
-import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
+import { type ResourcePagePropsModel } from '#lib-frontend/resource/pages/ResourcePage/ResourcePage.models';
+import { RouteList } from '#lib-frontend/route/components/RouteList/RouteList';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { transformKeys } from '#lib-shared/core/utils/transformKeys/transformKeys';
+import { RESOURCE } from '#lib-shared/resource/resource.constants';
 
 export const ResourcePage: LFCModel<ResourcePagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { location, push } = useRouter<ResourcePageParamsModel>();
-
-  const handleChange = (value: string): void => {
-    void push({ pathname: `${RESOURCE}/${value}` });
-  };
-  const resourceid = location?.params?.resourceid && trimPathname(location.params.resourceid);
+  const { t } = useTranslation([RESOURCE]);
   return (
-    <Wrapper
+    <MainLayout
       {...wrapperProps}
-      flex
-      p
-      s>
-      <Tabs
-        onChange={handleChange}
-        tabs={Object.keys(RESOURCE_ITEMS).map((id) => ({ id: trimPathname(id), label: id }))}
-        value={resourceid}
+      p>
+      <RouteList
+        root
+        routes={Object.keys(RESOURCE_ITEMS).map((id) => ({ pathname: id }))}
+        title={t('resource:resource_plural')}
       />
-
-      {resourceid ? (
-        transformKeys(RESOURCE_ITEMS, trimPathname)[resourceid]?.element ?? <NotFoundPage />
-      ) : (
-        <NotFoundPage />
-      )}
-    </Wrapper>
+    </MainLayout>
   );
 };

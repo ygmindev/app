@@ -1,18 +1,16 @@
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
-import { RouteGroup } from '#lib-frontend/route/components/RouteGroup/RouteGroup';
+import { RouteList } from '#lib-frontend/route/components/RouteList/RouteList';
 import { SETTINGS_GROUPS } from '#lib-frontend/settings/pages/SettingsPage/SettingsPage.constants';
 import { type SettingsPagePropsModel } from '#lib-frontend/settings/pages/SettingsPage/SettingsPage.models';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
-export const SettingsPage: SFCModel<SettingsPagePropsModel> = ({ testID, ...props }) => {
-  const { styles } = useStyles({ props });
+export const SettingsPage: LFCModel<SettingsPagePropsModel> = ({ ...props }) => {
+  const { wrapperProps } = useLayoutStyles({ props });
   return (
-    <MainLayout
-      style={styles}
-      testID={testID}>
+    <MainLayout {...wrapperProps}>
       {SETTINGS_GROUPS.map(({ id, routes, title }) => (
-        <RouteGroup
+        <RouteList
           key={id}
           root
           routes={routes}

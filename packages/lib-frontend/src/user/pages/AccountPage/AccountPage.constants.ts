@@ -1,5 +1,5 @@
 import { PAYMENT } from '#lib-frontend/billing/billing.constants';
-import { type RouteGroupPropsModel } from '#lib-frontend/route/components/RouteGroup/RouteGroup.models';
+import { type RouteListPropsModel } from '#lib-frontend/route/components/RouteList/RouteList.models';
 import { SETTINGS } from '#lib-frontend/settings/settings.constants';
 import { PERSONAL } from '#lib-frontend/user/user.constants';
 import { withId } from '#lib-shared/core/utils/withId/withId';
@@ -13,22 +13,22 @@ export const ACCOUNT_GROUPS = withId([
     routes: [
       {
         icon: 'person',
-        id: PERSONAL,
-        label: ({ t }) => t('user:personal'),
+        pathname: PERSONAL,
+        title: ({ t }) => t('user:personal'),
       },
 
       {
         icon: 'dollar',
-        id: PAYMENT,
-        label: ({ t }) => t('billing:payment'),
+        pathname: PAYMENT,
+        title: ({ t }) => t('billing:payment'),
       },
 
       {
         icon: 'settings',
-        id: SETTINGS,
-        label: ({ t }) => t('settings:preferences'),
+        pathname: SETTINGS,
+        title: ({ t }) => t('settings:preferences'),
       },
     ],
     title: ({ t }) => t('user:account'),
   },
-]) satisfies WithIdResultModel<Array<RouteGroupPropsModel>>;
+]) satisfies WithIdResultModel<Array<RouteListPropsModel>>;

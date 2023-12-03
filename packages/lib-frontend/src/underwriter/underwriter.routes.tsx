@@ -4,7 +4,7 @@ import { ANALYTICS } from '#lib-frontend/core/core.constants';
 import { FUNDING, QUOTE } from '#lib-frontend/funding/funding.constants';
 import { TabNavigator } from '#lib-frontend/route/components/TabNavigator/TabNavigator';
 import { type RouteModel } from '#lib-frontend/route/route.models';
-import { getRouteGroup } from '#lib-frontend/route/utils/getRouteGroup/getRouteGroup';
+import { getRouteList } from '#lib-frontend/route/utils/getRouteList/getRouteList';
 import { SETTINGS } from '#lib-frontend/settings/settings.constants';
 import { AnalyticsPage } from '#lib-frontend/underwriter/pages/AnalyticsPage/AnalyticsPage';
 import { FundingDetailPage } from '#lib-frontend/underwriter/pages/FundingDetailPage/FundingDetailPage';
@@ -25,12 +25,12 @@ export const underwriterRoutes: Array<RouteModel> = [
         pathname: ANALYTICS,
         title: ({ t }) => t('core:analytics'),
       },
-      getRouteGroup({
+      getRouteList({
         element: <FundingPage />,
         icon: 'dollar',
         pathname: FUNDING,
         routes: [
-          getRouteGroup({
+          getRouteList({
             element: <FundingDetailPage />,
             pathname: ':fundingid',
             prerender: false,

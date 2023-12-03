@@ -3,7 +3,7 @@ import range from 'lodash/range';
 
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { type ItemFieldPropsModel } from '#lib-frontend/core/components/ItemField/ItemField.models';
-import { LineItem } from '#lib-frontend/core/components/LineItem/LineItem';
+import { PressableItem } from '#lib-frontend/core/components/PressableItem/PressableItem';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel, type TranslatableOptionModel } from '#lib-frontend/core/core.models';
 import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBoundary';
@@ -68,7 +68,7 @@ const ItemFieldResult: LFCModel<
           emptyLabel && ({ icon: 'times', id: '', label: emptyLabel } as TranslatableOptionModel),
           ...result,
         ]).map(({ icon, id, image, label }) => (
-          <LineItem
+          <PressableItem
             icon={icon}
             image={image}
             key={id}
@@ -81,7 +81,7 @@ const ItemFieldResult: LFCModel<
 
               {valueControlled === id && <Icon icon="check" />}
             </Wrapper>
-          </LineItem>
+          </PressableItem>
         ))}
       </Wrapper>
     </Wrapper>

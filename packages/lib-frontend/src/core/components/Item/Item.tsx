@@ -13,6 +13,7 @@ import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 export const Item: LFCModel<ItemPropsModel> = ({
   children,
   color,
+  elementState,
   icon,
   image,
   rightElement,
@@ -28,7 +29,7 @@ export const Item: LFCModel<ItemPropsModel> = ({
       s={THEME_SIZE.SMALL}>
       <Wrapper isRowAlign>
         {image && (
-          <Skeleton>
+          <Skeleton elementState={elementState}>
             <Image
               isAutoSize
               src={image}
@@ -38,7 +39,7 @@ export const Item: LFCModel<ItemPropsModel> = ({
         )}
 
         {icon && (
-          <Skeleton>
+          <Skeleton elementState={elementState}>
             <Icon
               color={color}
               icon={icon}
@@ -48,23 +49,25 @@ export const Item: LFCModel<ItemPropsModel> = ({
           </Skeleton>
         )}
 
-        <Wrapper
-          flex
-          s={THEME_SIZE.SMALL}>
-          <Skeleton>
-            {isTranslatableText(title) ? (
-              <TranslatableText
-                color={color}
-                type={type}>
-                {title}
-              </TranslatableText>
-            ) : (
-              title
-            )}
-          </Skeleton>
-        </Wrapper>
+        {title && (
+          <Wrapper
+            flex
+            s={THEME_SIZE.SMALL}>
+            <Skeleton elementState={elementState}>
+              {isTranslatableText(title) ? (
+                <TranslatableText
+                  color={color}
+                  type={type}>
+                  {title}
+                </TranslatableText>
+              ) : (
+                title
+              )}
+            </Skeleton>
+          </Wrapper>
+        )}
 
-        {rightElement && <Skeleton>{rightElement}</Skeleton>}
+        {rightElement && <Skeleton elementState={elementState}>{rightElement}</Skeleton>}
       </Wrapper>
 
       {isTranslatableText(children) ? <TranslatableText>{children}</TranslatableText> : children}

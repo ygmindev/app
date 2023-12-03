@@ -5,7 +5,7 @@ import { PaymentPage } from '#lib-frontend/billing/pages/PaymentPage/PaymentPage
 import { TIMEZONE } from '#lib-frontend/locale/locale.constants';
 import { TimezoneFormPage } from '#lib-frontend/locale/pages/TimezoneFormPage/TimezoneFormPage';
 import { type RouteModel } from '#lib-frontend/route/route.models';
-import { getRouteGroup } from '#lib-frontend/route/utils/getRouteGroup/getRouteGroup';
+import { getRouteList } from '#lib-frontend/route/utils/getRouteList/getRouteList';
 import { SettingsPage } from '#lib-frontend/settings/pages/SettingsPage/SettingsPage';
 import { SETTINGS } from '#lib-frontend/settings/settings.constants';
 import { BrightnessFormPage } from '#lib-frontend/style/pages/BrightnessFormPage/BrightnessFormPage';
@@ -19,13 +19,13 @@ import { BRIGHTNESS } from '#lib-shared/style/style.constants';
 import { ACCOUNT } from '#lib-shared/user/user.constants';
 
 export const userRoutes: Array<RouteModel> = [
-  getRouteGroup({
+  getRouteList({
     element: <AccountPage />,
     header: { previous: '/' },
     isProtectable: true,
     pathname: ACCOUNT,
     routes: [
-      getRouteGroup({
+      getRouteList({
         element: <PersonalPage />,
         pathname: PERSONAL,
         routes: [
@@ -58,7 +58,7 @@ export const userRoutes: Array<RouteModel> = [
         title: ({ t }) => t('user:personal'),
       }),
 
-      getRouteGroup({
+      getRouteList({
         element: <PaymentPage />,
         pathname: PAYMENT,
         routes: [
@@ -71,7 +71,7 @@ export const userRoutes: Array<RouteModel> = [
         title: ({ t }) => t('billing:payment'),
       }),
 
-      getRouteGroup({
+      getRouteList({
         element: <SettingsPage />,
         pathname: SETTINGS,
         routes: [

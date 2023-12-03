@@ -1,4 +1,4 @@
-import { type LineItemPropsModel } from '#lib-frontend/core/components/LineItem/LineItem.models';
+import { type PressableItemPropsModel } from '#lib-frontend/core/components/PressableItem/PressableItem.models';
 import { type ChildrenPropsModel } from '#lib-frontend/core/core.models';
 
-export type TilePropsModel = ChildrenPropsModel & Omit<LineItemPropsModel, 'children'>;
+export type TilePropsModel = ChildrenPropsModel & Omit<PressableItemPropsModel, 'children'>;

@@ -3,7 +3,6 @@ import { type ReactElement, useState } from 'react';
 import { FloatingFooter } from '#lib-frontend/app/components/FloatingFooter/FloatingFooter';
 import { ModalButton } from '#lib-frontend/core/components/ModalButton/ModalButton';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { WrapperFixture } from '#lib-frontend/core/components/Wrapper/Wrapper.fixtures';
 import { type LFCPropsModel } from '#lib-frontend/core/core.models';
 import { FilterButton } from '#lib-frontend/data/components/FilterButton/FilterButton';
 import { Table } from '#lib-frontend/data/components/Table/Table';
@@ -52,50 +51,46 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
         }
       />
 
-      {params ? (
-        <ConnectionBoundary
-          fallbackData={
-            columns && {
-              result: {
-                edges: [
-                  {
-                    cursor: '',
-                    node: columns.reduce(
-                      (result, column) => ({ ...result, [column.id]: 'test' }),
-                      {} as PartialModel<TType>,
-                    ),
-                  },
-                  {
-                    cursor: '',
-                    node: columns.reduce(
-                      (result, column) => ({ ...result, [column.id]: 'test' }),
-                      {} as PartialModel<TType>,
-                    ),
-                  },
-                ],
-                pageInfo: {
-                  endCursor: '',
-                  hasNextPage: false,
-                  hasPreviousPage: false,
-                  startCursor: '',
+      <ConnectionBoundary
+        fallbackData={
+          columns && {
+            result: {
+              edges: [
+                {
+                  cursor: '',
+                  node: columns.reduce(
+                    (result, column) => ({ ...result, [column.id]: 'test' }),
+                    {} as PartialModel<TType>,
+                  ),
                 },
+                {
+                  cursor: '',
+                  node: columns.reduce(
+                    (result, column) => ({ ...result, [column.id]: 'test' }),
+                    {} as PartialModel<TType>,
+                  ),
+                },
+              ],
+              pageInfo: {
+                endCursor: '',
+                hasNextPage: false,
+                hasPreviousPage: false,
+                startCursor: '',
               },
-            }
+            },
           }
-          flex
-          id={name}
-          params={params}
-          query={getConnection}>
-          {({ data }) => (
-            <Table<PartialModel<TType>>
-              columns={columns}
-              data={data?.result?.edges.map((edge) => edge.node)}
-            />
-          )}
-        </ConnectionBoundary>
-      ) : (
-        <WrapperFixture />
-      )}
+        }
+        flex
+        id={name}
+        params={params}
+        query={getConnection}>
+        {({ data }) => (
+          <Table<PartialModel<TType>>
+            columns={columns}
+            data={data?.result?.edges.map((edge) => edge.node)}
+          />
+        )}
+      </ConnectionBoundary>
 
       <FloatingFooter>
         <ModalButton

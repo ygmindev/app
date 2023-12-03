@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react';
 
-import { type IconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
+import { type WithIconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
 import { type ChildrenPropsModel } from '#lib-frontend/core/core.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { type ROUTE_DIRECTION, type ROUTE_TRANSITION } from '#lib-frontend/route/route.constants';
@@ -10,26 +10,24 @@ import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
 export type RouteIdParamsModel = WithIdModel;
 
-export type RouteModel<TProps extends ChildrenPropsModel = ChildrenPropsModel> = Pick<
-  IconPropsModel,
-  'icon'
-> & {
-  element?: ReactElement<TProps>;
-  fullpath?: string;
-  header?: { previous?: string };
-  isFullScreen?: boolean;
-  isIndex?: boolean;
-  isNavigatable?: boolean;
-  isProtectable?: boolean;
-  layoutProps?: LayoutStylePropsModel;
-  navigator?: ReactElement<NavigatorPropsModel>;
-  parent?: string;
-  pathname: string;
-  prerender?: false | Array<string>;
-  routes?: Array<RouteModel>;
-  title?: TranslatableTextModel;
-  transition?: RouteTransitionModel;
-};
+export type RouteModel<TProps extends ChildrenPropsModel = ChildrenPropsModel> =
+  WithIconPropsModel & {
+    element?: ReactElement<TProps>;
+    fullpath?: string;
+    header?: { previous?: string };
+    isFullScreen?: boolean;
+    isIndex?: boolean;
+    isNavigatable?: boolean;
+    isProtectable?: boolean;
+    layoutProps?: LayoutStylePropsModel;
+    navigator?: ReactElement<NavigatorPropsModel>;
+    parent?: string;
+    pathname: string;
+    prerender?: false | Array<string>;
+    routes?: Array<RouteModel>;
+    title?: TranslatableTextModel;
+    transition?: RouteTransitionModel;
+  };
 
 export type UriModel<TType = object> = {
   host?: string;

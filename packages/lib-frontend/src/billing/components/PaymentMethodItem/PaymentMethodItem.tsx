@@ -12,9 +12,9 @@ import { getPaymentMethodTitle } from '#lib-frontend/billing/utils/getPaymentMet
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { Image } from '#lib-frontend/core/components/Image/Image';
-import { LineItem } from '#lib-frontend/core/components/LineItem/LineItem';
 import { Menu } from '#lib-frontend/core/components/Menu/Menu';
 import { type MenuRefModel } from '#lib-frontend/core/components/Menu/Menu.models';
+import { PressableItem } from '#lib-frontend/core/components/PressableItem/PressableItem';
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
@@ -98,7 +98,7 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
   }, [value?.type, (value as CardModel)?.brand]);
 
   return (
-    <LineItem
+    <PressableItem
       {...wrapperProps}
       onPress={() => ref.current?.toggle()}
       rightElement={(isActive) => (
@@ -166,6 +166,6 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
           )}
         </Wrapper>
       </Skeleton>
-    </LineItem>
+    </PressableItem>
   );
 };

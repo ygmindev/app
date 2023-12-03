@@ -1,10 +1,10 @@
-import { LineGroup } from '#lib-frontend/core/components/LineGroup/LineGroup';
-import { type LineGroupPropsModel } from '#lib-frontend/core/components/LineGroup/LineGroup.models';
+import { RouteList } from '#lib-frontend/route/components/RouteList/RouteList';
+import { type RouteListPropsModel } from '#lib-frontend/route/components/RouteList/RouteList.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<LineGroupPropsModel>({
-  target: LineGroup,
+const { Component, displayName, testID } = withTestComponent<RouteListPropsModel>({
+  target: RouteList,
 });
 
 describe(displayName, () => {
