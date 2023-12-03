@@ -45,6 +45,7 @@ import { stringify } from '#lib-shared/core/utils/stringify/stringify';
 export const Table = forwardRef(
   <TType,>(
     {
+      elementState,
       emptyCell = '-',
       emptyElement,
       isAddable,
@@ -143,6 +144,7 @@ export const Table = forwardRef(
 
               {row.cells.map((cell) => (
                 <Skeleton
+                  elementState={elementState}
                   key={cell.id}
                   width={cell.width || TABLE_CELL_WIDTH_DEFAULT}>
                   {cell.renderer ? (

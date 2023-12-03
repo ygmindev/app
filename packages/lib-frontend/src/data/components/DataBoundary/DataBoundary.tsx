@@ -3,6 +3,7 @@ import { type ForwardedRef, forwardRef, type ReactElement, useImperativeHandle }
 import { SkeletonGroup } from '#lib-frontend/animation/components/SkeletonGroup/SkeletonGroup';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { AsyncBoundary } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
+import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type LFCPropsModel, type RLFCPropsModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import {
@@ -113,6 +114,7 @@ export const DataBoundary = forwardRef(
   <TParams = undefined, TResult = void>(
     {
       children,
+      elementState,
       emptyMessage = ({ t }) => t('core:nothingToShow'),
       fallbackData,
       id,
@@ -133,12 +135,13 @@ export const DataBoundary = forwardRef(
         fallback={
           props.fallback ?? fallbackData ? (
             <SkeletonGroup {...wrapperProps}>
-              {children && children({ data: fallbackData })}
+              {children && children({ data: fallbackData, elementState: ELEMENT_STATE.LOADING })}
             </SkeletonGroup>
           ) : undefined
         }>
         {query ? (
           <QueryComponent<TParams, TResult>
+            elementState={elementState}
             emptyMessage={emptyMessage}
             id={id}
             isBlocking={isBlocking}
@@ -149,6 +152,7 @@ export const DataBoundary = forwardRef(
           </QueryComponent>
         ) : mutate ? (
           <MutateComponent<TParams, TResult>
+            elementState={elementState}
             emptyMessage={emptyMessage}
             id={id}
             isBlocking={isBlocking}

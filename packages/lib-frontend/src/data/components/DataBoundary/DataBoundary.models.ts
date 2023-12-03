@@ -1,7 +1,10 @@
 import { type ReactElement } from 'react';
 
 import { type AsyncBoundaryPropsModel } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
-import { type ChildrenPropsModel } from '#lib-frontend/core/core.models';
+import {
+  type ChildrenPropsModel,
+  type ElementStatePropsModel,
+} from '#lib-frontend/core/core.models';
 import { type AsyncPropsModel } from '#lib-frontend/data/data.models';
 import {
   type UseMutationModel,
@@ -33,7 +36,9 @@ export type DataBoundaryRefModel<
 
 export type QueryComponentPropsModel<TParams = undefined, TResult = void> = WithIdModel &
   AsyncPropsModel &
-  ChildrenPropsModel<(props: { data?: TResult | null }) => ReactElement | NilModel> & {
+  ChildrenPropsModel<
+    (props: ElementStatePropsModel & { data?: TResult | null }) => ReactElement | NilModel
+  > & {
     emptyMessage?: TranslatableTextModel;
     params?: TParams;
     query: UseQueryParamsModel<TParams, TResult>[1];
@@ -43,7 +48,9 @@ export type QueryComponentRefModel<TResult = void> = Pick<UseQueryModel<TResult>
 
 export type MutateComponentPropsModel<TParams = undefined, TResult = void> = WithIdModel &
   AsyncPropsModel &
-  ChildrenPropsModel<(props: { data?: TResult | null }) => ReactElement | NilModel> & {
+  ChildrenPropsModel<
+    (props: ElementStatePropsModel & { data?: TResult | null }) => ReactElement | NilModel
+  > & {
     emptyMessage?: TranslatableTextModel;
     mutate: UseMutationParamsModel<TParams, TResult>[1];
   };

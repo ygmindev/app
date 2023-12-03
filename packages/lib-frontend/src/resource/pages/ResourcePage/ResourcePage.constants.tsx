@@ -3,7 +3,7 @@ import { VendorTable } from '#lib-frontend/admin/containers/VendorTable/VendorTa
 import { OtpTable } from '#lib-frontend/auth/containers/OtpTable/OtpTable';
 import { FundingTable } from '#lib-frontend/funding/containers/FundingTable/FundingTable';
 import { RatingAgencyTable } from '#lib-frontend/funding/containers/RatingAgencyTable/RatingAgencyTable';
-import { type ResourcePageItemModel } from '#lib-frontend/resource/pages/ResourcePage/ResourcePage.models';
+import { type RouteModel } from '#lib-frontend/route/route.models';
 import { UserTable } from '#lib-frontend/user/containers/UserTable/UserTable';
 import { UTILITY_RESOURCE_NAME } from '#lib-shared/admin/resources/Utility/Utility.constants';
 import { VENDOR_RESOURCE_NAME } from '#lib-shared/admin/resources/Vendor/Vendor.constants';
@@ -12,23 +12,29 @@ import { FUNDING_RESOURCE_NAME } from '#lib-shared/funding/resources/Funding/Fun
 import { RATING_AGENCY_RESOURCE_NAME } from '#lib-shared/funding/resources/RatingAgency/RatingAgency.constants';
 import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
 
-export const RESOURCE_ITEMS: Record<string, ResourcePageItemModel<unknown, unknown, unknown>> = {
-  [FUNDING_RESOURCE_NAME]: {
+export const RESOURCE_PAGE_ROUTES: Array<RouteModel> = [
+  {
     element: <FundingTable />,
+    pathname: FUNDING_RESOURCE_NAME,
   },
-  [OTP_RESOURCE_NAME]: {
+  {
     element: <OtpTable />,
+    pathname: OTP_RESOURCE_NAME,
   },
-  [RATING_AGENCY_RESOURCE_NAME]: {
+  {
     element: <RatingAgencyTable />,
+    pathname: RATING_AGENCY_RESOURCE_NAME,
   },
-  [USER_RESOURCE_NAME]: {
+  {
     element: <UserTable />,
+    pathname: USER_RESOURCE_NAME,
   },
-  [UTILITY_RESOURCE_NAME]: {
+  {
     element: <UtilityTable />,
+    pathname: UTILITY_RESOURCE_NAME,
   },
-  [VENDOR_RESOURCE_NAME]: {
+  {
     element: <VendorTable />,
+    pathname: VENDOR_RESOURCE_NAME,
   },
-};
+];

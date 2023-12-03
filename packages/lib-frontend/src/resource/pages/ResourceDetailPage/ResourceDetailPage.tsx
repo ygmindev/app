@@ -9,7 +9,7 @@ export const ResourceDetailPage: LFCModel<ResourceDetailPagePropsModel> = ({ ...
   return (
     <Wrapper
       {...wrapperProps}
-      flex>
+      p>
       <Text>ResourceDetailPage</Text>
     </Wrapper>
   );

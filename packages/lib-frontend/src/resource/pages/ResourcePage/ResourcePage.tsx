@@ -1,7 +1,7 @@
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { RESOURCE_ITEMS } from '#lib-frontend/resource/pages/ResourcePage/ResourcePage.constants';
+import { RESOURCE_PAGE_ROUTES } from '#lib-frontend/resource/pages/ResourcePage/ResourcePage.constants';
 import { type ResourcePagePropsModel } from '#lib-frontend/resource/pages/ResourcePage/ResourcePage.models';
 import { RouteList } from '#lib-frontend/route/components/RouteList/RouteList';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -16,7 +16,7 @@ export const ResourcePage: LFCModel<ResourcePagePropsModel> = ({ ...props }) => 
       p>
       <RouteList
         root
-        routes={Object.keys(RESOURCE_ITEMS).map((id) => ({ pathname: id }))}
+        routes={RESOURCE_PAGE_ROUTES}
         title={t('resource:resource_plural')}
       />
     </MainLayout>

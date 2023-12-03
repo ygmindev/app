@@ -36,7 +36,6 @@ export const AsyncBoundary: LFCModel<AsyncBoundaryPropsModel> = ({
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
   const [errorContext, errorContextSet] = useState<ErrorContextModel | undefined>();
-
   const { reset } = useQueryContext();
   return (
     <asyncBoundaryContext.Provider

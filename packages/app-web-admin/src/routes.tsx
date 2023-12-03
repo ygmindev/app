@@ -1,8 +1,8 @@
 import { DEPENDENCY } from '#lib-frontend/admin/admin.constants';
 import { AdminHomePage } from '#lib-frontend/admin/pages/AdminHomePage/AdminHomePage';
 import { DependenciesPage } from '#lib-frontend/admin/pages/DependenciesPage/DependenciesPage';
-import { ResourceDetailPage } from '#lib-frontend/resource/pages/ResourceDetailPage/ResourceDetailPage';
 import { ResourcePage } from '#lib-frontend/resource/pages/ResourcePage/ResourcePage';
+import { RESOURCE_PAGE_ROUTES } from '#lib-frontend/resource/pages/ResourcePage/ResourcePage.constants';
 import { RESOURCE } from '#lib-frontend/resource/resource.constants';
 import { type RouteModel } from '#lib-frontend/route/route.models';
 import { getRouteList } from '#lib-frontend/route/utils/getRouteList/getRouteList';
@@ -19,12 +19,7 @@ export const routes: Array<RouteModel> = getRoutes({
       element: <ResourcePage />,
       isProtectable: true,
       pathname: RESOURCE,
-      routes: [
-        {
-          element: <ResourceDetailPage />,
-          pathname: 'vendor',
-        },
-      ],
+      routes: RESOURCE_PAGE_ROUTES,
     }),
 
     getRouteList({
