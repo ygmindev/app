@@ -10,11 +10,9 @@ import {
 } from '#lib-shared/admin/resources/Utility/Utility.models';
 import { VENDOR_RESOURCE_NAME } from '#lib-shared/admin/resources/Vendor/Vendor.constants';
 import { type VendorModel } from '#lib-shared/admin/resources/Vendor/Vendor.models';
-import { PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 
 export const UTILITY_TABLE_PROPS = {
   columns: [
-    { id: VENDOR_RESOURCE_NAME, type: PROPERTY_TYPE.RESOURCE },
     { id: 'name' },
     { id: 'description' },
     {
@@ -32,4 +30,5 @@ export const UTILITY_TABLE_PROPS = {
     },
   ],
   name: UTILITY_RESOURCE_NAME,
+  root: VENDOR_RESOURCE_NAME,
 } satisfies Omit<ResourceTablePropsModel<UtilityModel, UtilityFormModel, VendorModel>, 'service'>;

@@ -204,7 +204,7 @@ export class _Database implements _DatabaseModel {
 
       update: async ({ filter, options, update } = {}) => {
         const em = this._getEntityManager();
-        const filterF = getFilter<TType>(filter);
+        const filterF = cleanDocument(getFilter<TType>(filter));
         const updateF = cleanDocument(update);
         updateF &&
           Object.keys(updateF).forEach((key) => {

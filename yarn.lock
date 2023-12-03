@@ -12645,7 +12645,7 @@ __metadata:
     minimist: "npm:^1.2.8"
     moment: "npm:^2.29.4"
     moment-timezone: "npm:^0.5.43"
-    mongodb: "npm:^6.3.0"
+    mongodb: "npm:^5.9.1"
     mongodb-memory-server: "npm:^8.13.0"
     moti: "npm:^0.25.3"
     next-i18next: "npm:^14.0.0"
@@ -14092,7 +14092,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bson@npm:^5.4.0":
+"bson@npm:^5.4.0, bson@npm:^5.5.0":
   version: 5.5.1
   resolution: "bson@npm:5.5.1"
   checksum: 00fabdafe98d20609bd76f607cada03ec544b90225103f7ae859fba7674bd96cae56432b0516e30291af0c40634d306f8a45b63b706a034e95fe583c749ef5b3
@@ -26245,7 +26245,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:*, mongodb@npm:^6.3.0":
+"mongodb@npm:*":
   version: 6.3.0
   resolution: "mongodb@npm:6.3.0"
   dependencies:
@@ -26326,6 +26326,38 @@ __metadata:
     "@mongodb-js/saslprep":
       optional: true
   checksum: 63f5487a54ca8c1c5cbb508383d1977900e4a71bac92c2ec5e0896caf5978ebe3a8bfa4c115bbe602e363a1edf1cce432cf110f0f5d71f3d88a3949fd85090bc
+  languageName: node
+  linkType: hard
+
+"mongodb@npm:^5.9.1":
+  version: 5.9.1
+  resolution: "mongodb@npm:5.9.1"
+  dependencies:
+    "@mongodb-js/saslprep": "npm:^1.1.0"
+    bson: "npm:^5.5.0"
+    mongodb-connection-string-url: "npm:^2.6.0"
+    socks: "npm:^2.7.1"
+  peerDependencies:
+    "@aws-sdk/credential-providers": ^3.188.0
+    "@mongodb-js/zstd": ^1.0.0
+    kerberos: ^1.0.0 || ^2.0.0
+    mongodb-client-encryption: ">=2.3.0 <3"
+    snappy: ^7.2.2
+  dependenciesMeta:
+    "@mongodb-js/saslprep":
+      optional: true
+  peerDependenciesMeta:
+    "@aws-sdk/credential-providers":
+      optional: true
+    "@mongodb-js/zstd":
+      optional: true
+    kerberos:
+      optional: true
+    mongodb-client-encryption:
+      optional: true
+    snappy:
+      optional: true
+  checksum: a77a661d5b2042f693d7c0a33c07dc1758a7a5b176000cd82ffb0282e93421abd6f9deb3130770c8fed276de3c1707355ead0673f2611439e3f620849c10d869
   languageName: node
   linkType: hard
 
