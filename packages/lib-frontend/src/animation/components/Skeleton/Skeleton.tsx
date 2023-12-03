@@ -10,18 +10,20 @@ import { THEME_COLOR_MORE, THEME_ROLE } from '#lib-frontend/style/style.constant
 export const Skeleton: LFCModel<SkeletonPropsModel> = ({ children, elementState, ...props }) => {
   const theme = useTheme();
   const { wrapperProps } = useLayoutStyles({ props });
-  return elementState === ELEMENT_STATE.LOADING ? (
+  return (
     <Wrapper
       {...wrapperProps}
       isOverflowHidden
       round>
-      <_Skeleton
-        backgroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MUTED]}
-        foregroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.ACTIVE]}>
-        {children}
-      </_Skeleton>
+      {elementState === ELEMENT_STATE.LOADING ? (
+        <_Skeleton
+          backgroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MUTED]}
+          foregroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.ACTIVE]}>
+          {children}
+        </_Skeleton>
+      ) : (
+        children
+      )}
     </Wrapper>
-  ) : (
-    children
   );
 };

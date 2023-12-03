@@ -17,5 +17,6 @@ export type FlexStylerParamsModel = {
   isRow?: boolean;
   isWrap?: boolean;
   justify?: FlexJustifyModel;
+  justifySelf?: FlexJustifyModel;
   shrink?: boolean | number;
 };

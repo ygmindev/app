@@ -17,8 +17,8 @@ export const TranslatableText: SFCModel<TranslatableTextPropsModel> = ({
       {isString(children)
         ? translation.t(children)
         : isFunction(children)
-        ? children(translation)
-        : (children as unknown as string)}
+          ? children(translation)
+          : (children as unknown as string)}
     </AnimatableText>
   ) : null;
 };

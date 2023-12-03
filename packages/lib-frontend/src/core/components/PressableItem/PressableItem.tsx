@@ -6,14 +6,16 @@ import { type PressableItemPropsModel } from '#lib-frontend/core/components/Pres
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { THEME_SIZE } from '#lib-frontend/style/style.constants';
+import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 
 export const PressableItem: LFCModel<PressableItemPropsModel> = ({
-  children,
   color,
   elementState,
   icon,
   image,
   onPress,
+  pVertical = THEME_SIZE.SMALL,
   rightElement,
   title,
   type,
@@ -28,6 +30,7 @@ export const PressableItem: LFCModel<PressableItemPropsModel> = ({
         <Button
           elementState={elementState ?? (isActive ? ELEMENT_STATE.ACTIVE : undefined)}
           icon="chevronRight"
+          justifySelf={FLEX_JUSTIFY.END}
           type={BUTTON_TYPE.INVISIBLE}
         />
       )));
@@ -42,11 +45,11 @@ export const PressableItem: LFCModel<PressableItemPropsModel> = ({
           icon={icon}
           image={image}
           onPress={onPress}
+          pVertical={pVertical}
           rightElement={rightElementF && rightElementF(isActive)}
           title={title}
-          type={type}>
-          {children}
-        </Item>
+          type={type}
+        />
       )}
     </Activatable>
   );

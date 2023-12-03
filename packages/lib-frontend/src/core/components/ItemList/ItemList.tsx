@@ -5,12 +5,13 @@ import { Tile } from '#lib-frontend/core/components/Tile/Tile';
 import { DIRECTION } from '#lib-frontend/core/core.constants';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
-import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { SearchField } from '#lib-frontend/search/components/SearchField/SearchField';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
 export const ItemList: LFCModel<ItemListPropsModel> = ({
   emptyString = ({ t }) => t('core:nothingToShow'),
+  isSearchable = true,
   items,
   title,
   ...props
@@ -23,19 +24,22 @@ export const ItemList: LFCModel<ItemListPropsModel> = ({
       <MainLayout
         {...wrapperProps}
         isVerticalScrollable>
-        <Tile title={title}>
+        <Tile
+          rightElement={isSearchable ? () => <SearchField flex /> : undefined}
+          title={title}>
           {itemsF ? (
-            itemsF.map(({ id, ...item }, i) => (
+            itemsF.map(({ id, ...item }) => (
               <PressableItem
                 {...item}
-                border={i > 0 ? DIRECTION.TOP : undefined}
+                border={DIRECTION.TOP}
                 key={id}
               />
             ))
           ) : (
-            <PressableItem icon="empty">
-              <TranslatableText>{emptyString}</TranslatableText>
-            </PressableItem>
+            <PressableItem
+              icon="empty"
+              title={emptyString}
+            />
           )}
         </Tile>
       </MainLayout>

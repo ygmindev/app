@@ -12,6 +12,7 @@ export const flexStyler: StylerModel<FlexStylerParamsModel> = ({
   isRow,
   isWrap,
   justify,
+  justifySelf,
   shrink,
 }) =>
   cleanObject({
@@ -25,10 +26,11 @@ export const flexStyler: StylerModel<FlexStylerParamsModel> = ({
         ? 'row-reverse'
         : 'row'
       : isReverse
-      ? 'column-reverse'
-      : 'column',
+        ? 'column-reverse'
+        : 'column',
     flexGrow: grow === true ? 1 : grow === false ? undefined : grow,
     flexShrink: shrink === true ? 1 : shrink === false ? undefined : shrink,
     flexWrap: isWrap ? 'wrap' : undefined,
     justifyContent: justify,
+    justifySelf,
   });

@@ -15,15 +15,12 @@ import { Image } from '#lib-frontend/core/components/Image/Image';
 import { Menu } from '#lib-frontend/core/components/Menu/Menu';
 import { type MenuRefModel } from '#lib-frontend/core/components/Menu/Menu.models';
 import { PressableItem } from '#lib-frontend/core/components/PressableItem/PressableItem';
-import { Text } from '#lib-frontend/core/components/Text/Text';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR } from '#lib-frontend/style/style.constants';
-import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { useUserResource } from '#lib-frontend/user/hooks/useUserResource/useUserResource';
 import { CARD_BRAND } from '#lib-shared/billing/resources/Card/Card.constants';
@@ -148,7 +145,7 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
           />
         </Skeleton>
       )}>
-      <Skeleton>
+      {/* <Skeleton>
         <Wrapper isRowAlign>
           <Wrapper
             isCenter
@@ -165,7 +162,7 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
             />
           )}
         </Wrapper>
-      </Skeleton>
+      </Skeleton> */}
     </PressableItem>
   );
 };

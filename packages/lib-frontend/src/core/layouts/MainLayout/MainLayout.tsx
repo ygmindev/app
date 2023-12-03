@@ -28,15 +28,10 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
   return (
     <Wrapper
       {...wrapperProps}
-      flex
-      s>
+      flex>
       {topElement && (
         <>
-          <Wrapper
-            key="element-top"
-            p>
-            {topElement}
-          </Wrapper>
+          <Wrapper key="element-top">{topElement}</Wrapper>
 
           {isFullHeight && <Divider key="divider-top" />}
         </>

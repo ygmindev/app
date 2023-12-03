@@ -167,7 +167,6 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
   );
   return (
     <Pressable
-      {...props}
       {...wrapperProps}
       align={align}
       animation={animation}

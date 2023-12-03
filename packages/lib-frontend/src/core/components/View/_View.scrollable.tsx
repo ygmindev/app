@@ -40,7 +40,7 @@ export const _viewParams: ComposeComponentParamsModel<
     const [stylesView, stylesContainer] = partionObject(
       StyleSheet.flatten(style) as Record<string, unknown>,
       (_, k) =>
-        ['height', 'width', 'alignSelf', 'flex'].includes(k) ||
+        ['height', 'width', 'alignSelf', 'justifySelf', 'flex'].includes(k) ||
         k.startsWith('margin') ||
         k.startsWith('border'),
     );
@@ -67,8 +67,8 @@ export const _viewParams: ComposeComponentParamsModel<
               stylesView.width || stylesView.height
                 ? undefined
                 : isVerticalScrollable
-                ? 1
-                : undefined,
+                  ? 1
+                  : undefined,
             position: 'relative',
             ...stylesView,
           }}
