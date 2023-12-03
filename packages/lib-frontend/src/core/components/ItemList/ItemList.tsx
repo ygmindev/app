@@ -7,6 +7,7 @@ import { type LFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { SearchField } from '#lib-frontend/search/components/SearchField/SearchField';
+import { useSearch } from '#lib-frontend/search/hooks/useSearch/useSearch';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
 export const ItemList: LFCModel<ItemListPropsModel> = ({
@@ -18,31 +19,43 @@ export const ItemList: LFCModel<ItemListPropsModel> = ({
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation();
-  const itemsF = items?.map((item) => ({ ...item, title: item.title ? t(item.title) : item.id }));
+  const { query, result, search } = useSearch({
+    keys: ['title', 'id'],
+    list: items?.map((item) => ({ ...item, title: item.title ? t(item.title) : item.id })) ?? [],
+  });
+
   return (
-    <SkeletonGroup>
-      <MainLayout
-        {...wrapperProps}
-        isVerticalScrollable>
+    <MainLayout
+      {...wrapperProps}
+      isVerticalScrollable>
+      <SkeletonGroup>
         <Tile
-          rightElement={isSearchable ? () => <SearchField flex /> : undefined}
+          rightElement={
+            isSearchable
+              ? () => (
+                  <SearchField
+                    flex
+                    onChange={search}
+                    value={query}
+                  />
+                )
+              : undefined
+          }
           title={title}>
-          {itemsF ? (
-            itemsF.map(({ id, ...item }) => (
-              <PressableItem
-                {...item}
-                border={DIRECTION.TOP}
-                key={id}
-              />
-            ))
-          ) : (
+          {result?.map(({ id, ...item }) => (
+            <PressableItem
+              {...item}
+              border={DIRECTION.TOP}
+              key={id}
+            />
+          )) ?? (
             <PressableItem
               icon="empty"
               title={emptyString}
             />
           )}
         </Tile>
-      </MainLayout>
-    </SkeletonGroup>
+      </SkeletonGroup>
+    </MainLayout>
   );
 };

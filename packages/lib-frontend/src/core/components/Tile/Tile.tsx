@@ -7,7 +7,14 @@ import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
-export const Tile: LFCModel<TilePropsModel> = ({ children, icon, image, title, ...props }) => {
+export const Tile: LFCModel<TilePropsModel> = ({
+  children,
+  icon,
+  image,
+  rightElement,
+  title,
+  ...props
+}) => {
   const { wrapperProps } = useLayoutStyles({ props });
   return (
     <Activatable>
@@ -22,6 +29,7 @@ export const Tile: LFCModel<TilePropsModel> = ({ children, icon, image, title, .
             icon={icon}
             image={image}
             pVertical
+            rightElement={rightElement}
             title={title}
             type={FONT_TYPE.TITLE}
           />
