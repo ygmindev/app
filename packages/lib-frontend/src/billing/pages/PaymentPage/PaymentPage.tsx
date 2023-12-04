@@ -26,13 +26,13 @@ export const PaymentPage: SFCModel<PaymentPagePropsModel> = ({ testID, ...props 
   const currentUser = useCurrentUser();
   const { styles } = useStyles({ props });
   const { push } = useRouter();
-  const { getMany } = usePaymentMethodResource({ root: currentUser?._id });
+  const { getMany } = usePaymentMethodResource();
 
   const tPaymentMethod = t('billing:paymentMethod');
   const tPaymentMethodAdd = t('core:new', { value: tPaymentMethod });
 
   const query = async (): Promise<Array<PartialModel<PaymentMethodModel>> | undefined> => {
-    const { result } = await getMany({ filter: [] });
+    const { result } = await getMany({ filter: [], root: currentUser?._id });
     const resultF =
       result &&
       sort(result, [(x) => currentUser?.paymentMethodPrimary !== x._id, ['created', false]]);

@@ -1,8 +1,5 @@
-import { PAYMENT_METHOD_OUTPUT_FIELDS } from '#lib-frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource.constants';
-import {
-  type UsePaymentMethodResourceModel,
-  type UsePaymentMethodResourceParamsModel,
-} from '#lib-frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource.models';
+import { type UsePaymentMethodResourceModel } from '#lib-frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource.models';
+import { PAYMENT_METHOD_RESOURCE_PARAMS } from '#lib-frontend/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { useResource } from '#lib-frontend/resource/hooks/useResource/useResource';
 import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { PAYMENT_METHOD_RESOURCE_NAME } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
@@ -11,15 +8,10 @@ import {
   type PaymentMethodModel,
 } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
+import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
-export const usePaymentMethodResource = ({
-  root,
-}: UsePaymentMethodResourceParamsModel = {}): UsePaymentMethodResourceModel => {
-  const result = useResource<PaymentMethodModel, PaymentMethodFormModel, UserModel>({
-    fields: [{ result: PAYMENT_METHOD_OUTPUT_FIELDS }],
-    name: PAYMENT_METHOD_RESOURCE_NAME,
-  });
+export const usePaymentMethodResource = (): UsePaymentMethodResourceModel => {
   const { query: createToken } = useResourceMethod<
     RESOURCE_METHOD_TYPE.CREATE,
     string,
@@ -29,11 +21,12 @@ export const usePaymentMethodResource = ({
     fields: ['result'],
     method: RESOURCE_METHOD_TYPE.CREATE,
     name: `${PAYMENT_METHOD_RESOURCE_NAME}Token`,
-    root,
+    root: USER_RESOURCE_NAME,
   });
-
   return {
-    ...result,
+    ...useResource<PaymentMethodModel, PaymentMethodFormModel, UserModel>({
+      ...PAYMENT_METHOD_RESOURCE_PARAMS,
+    }),
     createToken,
   };
 };

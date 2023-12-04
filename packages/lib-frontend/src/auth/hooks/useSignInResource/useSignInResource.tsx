@@ -6,7 +6,7 @@ import { useNotification } from '#lib-frontend/notification/hooks/useNotificatio
 import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { useTracking } from '#lib-frontend/tracking/hooks/useTracking/useTracking';
-import { USER_FIELDS } from '#lib-frontend/user/hooks/useUserResource/useUserResource.constants';
+import { USER_RESOURCE_PARAMS } from '#lib-frontend/user/resources/User/User.constants';
 import { UnauthorizedError } from '#lib-shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import {
   SIGN_IN_RESOURCE_NAME,
@@ -23,6 +23,8 @@ import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type UserFormModel, type UserModel } from '#lib-shared/user/resources/User/User.models';
+
+const userFields = USER_RESOURCE_PARAMS.fields.map(({ id }) => id);
 
 export const useSignInResource = (): UseSignInResourceModel => {
   const actions = useActions();
@@ -49,7 +51,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
     SignInModel,
     SignInFormModel
   >({
-    fields: [{ result: ['token', 'isNew', { user: USER_FIELDS }] }],
+    fields: [{ result: ['token', 'isNew', { user: userFields }] }],
     method: RESOURCE_METHOD_TYPE.CREATE,
     name: SIGN_IN_RESOURCE_NAME,
   });
@@ -59,7 +61,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
     SignInModel,
     SignInFormModel
   >({
-    fields: [{ result: ['token', { user: USER_FIELDS }] }],
+    fields: [{ result: ['token', { user: userFields }] }],
     method: RESOURCE_METHOD_TYPE.CREATE,
     name: SIGN_IN_USERNAME,
   });
@@ -83,7 +85,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
         { input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, UserModel, UserFormModel> },
         OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>
       >({
-        fields: [{ result: ['token', { user: USER_FIELDS }] }],
+        fields: [{ result: ['token', { user: userFields }] }],
         name,
         params: { input: `${name}Input` },
         type: GRAPHQL_OPERATION_TYPE.MUTATION,

@@ -1,8 +1,5 @@
-import { type UseResourceMethodParamsFieldsModel } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
-import {
-  type ResourceMethodTypeCrudModel,
-  type ResourceNameParamsModel,
-} from '#lib-shared/resource/resource.models';
+import { type ResourceParamsModel } from '#lib-frontend/resource/resource.models';
+import { type ResourceNameParamsModel } from '#lib-shared/resource/resource.models';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 import {
   type ResourceServiceDecoratorModel,
@@ -16,9 +13,8 @@ export type UseResourceParamsModel<
   TRoot = undefined,
 > = ResourceNameParamsModel<TRoot> &
   RootModel<TRoot> &
-  ResourceServiceDecoratorModel<TType, TForm, TRoot> & {
-    fields: UseResourceMethodParamsFieldsModel<ResourceMethodTypeCrudModel, TType, TRoot>;
-  };
+  ResourceServiceDecoratorModel<TType, TForm, TRoot> &
+  ResourceParamsModel<TType, TRoot>;
 
 export type UseResourceModel<
   TType,

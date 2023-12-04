@@ -2,9 +2,8 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
 import { useResource } from '#lib-frontend/resource/hooks/useResource/useResource';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
-import { USER_FIELDS } from '#lib-frontend/user/hooks/useUserResource/useUserResource.constants';
 import { type UseUserResourceModel } from '#lib-frontend/user/hooks/useUserResource/useUserResource.models';
-import { USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
+import { USER_RESOURCE_PARAMS } from '#lib-frontend/user/resources/User/User.constants';
 import { type UserFormModel, type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 export const useUserResource = (): UseUserResourceModel => {
@@ -12,6 +11,7 @@ export const useUserResource = (): UseUserResourceModel => {
   const actions = useActions();
   const { success } = useNotification();
   return useResource<UserModel, UserFormModel>({
+    ...USER_RESOURCE_PARAMS,
     afterUpdate: async ({ output }) => {
       if (output.result) {
         success({ message: t('core:updateSuccess') });
@@ -19,7 +19,5 @@ export const useUserResource = (): UseUserResourceModel => {
       }
       return output;
     },
-    fields: [{ result: USER_FIELDS }],
-    name: USER_RESOURCE_NAME,
   });
 };

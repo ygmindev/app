@@ -1,72 +1,10 @@
-import { CARD_FIELDS } from '#lib-frontend/billing/hooks/useCardResource/useCardResource.constants';
-import {
-  type UseCardResourceModel,
-  type UseCardResourceParamsModel,
-} from '#lib-frontend/billing/hooks/useCardResource/useCardResource.models';
-import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
-import { CARD_RESOURCE_NAME } from '#lib-shared/billing/resources/Card/Card.constants';
+import { type UseCardResourceModel } from '#lib-frontend/billing/hooks/useCardResource/useCardResource.models';
+import { CARD_RESOURCE_PARAMS } from '#lib-frontend/billing/resources/Card/Card.constants';
+import { useResource } from '#lib-frontend/resource/hooks/useResource/useResource';
 import { type CardFormModel, type CardModel } from '#lib-shared/billing/resources/Card/Card.models';
-import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
-export const useCardResource = ({
-  root,
-}: UseCardResourceParamsModel = {}): UseCardResourceModel => {
-  const { query: get } = useResourceMethod<
-    RESOURCE_METHOD_TYPE.GET,
-    CardModel,
-    CardFormModel,
-    UserModel
-  >({
-    fields: [{ result: CARD_FIELDS }],
-    method: RESOURCE_METHOD_TYPE.GET,
-    name: CARD_RESOURCE_NAME,
-    root,
+export const useCardResource = (): UseCardResourceModel =>
+  useResource<CardModel, CardFormModel, UserModel>({
+    ...CARD_RESOURCE_PARAMS,
   });
-
-  const { query: create } = useResourceMethod<
-    RESOURCE_METHOD_TYPE.CREATE,
-    CardModel,
-    CardFormModel,
-    UserModel
-  >({
-    fields: [{ result: CARD_FIELDS }],
-    method: RESOURCE_METHOD_TYPE.CREATE,
-    name: CARD_RESOURCE_NAME,
-    root,
-  });
-
-  const { query: update } = useResourceMethod<
-    RESOURCE_METHOD_TYPE.UPDATE,
-    CardModel,
-    CardFormModel,
-    UserModel
-  >({
-    fields: [{ result: CARD_FIELDS }],
-    method: RESOURCE_METHOD_TYPE.UPDATE,
-    name: CARD_RESOURCE_NAME,
-    root,
-  });
-
-  const { query: remove } = useResourceMethod<
-    RESOURCE_METHOD_TYPE.REMOVE,
-    CardModel,
-    CardFormModel,
-    UserModel
-  >({
-    fields: [{ result: CARD_FIELDS }],
-    method: RESOURCE_METHOD_TYPE.REMOVE,
-    name: CARD_RESOURCE_NAME,
-    root,
-  });
-
-  return {
-    create,
-
-    get,
-
-    remove,
-
-    update,
-  };
-};

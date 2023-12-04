@@ -41,17 +41,17 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
 
   const currentUser = useCurrentUser();
   const { update } = useUserResource();
-  const { remove: bankRemove } = useBankResource({ root: currentUser?._id });
-  const { remove: cardRemove } = useCardResource({ root: currentUser?._id });
+  const { remove: bankRemove } = useBankResource();
+  const { remove: cardRemove } = useCardResource();
 
   const handleRemove = async (): Promise<void> => {
     switch (value?.type) {
       case PAYMENT_METHOD_TYPE.BANK: {
-        await bankRemove({ filter: [{ field: 'id', value: value._id }] });
+        await bankRemove({ filter: [{ field: 'id', value: value._id }], root: currentUser?._id });
         break;
       }
       case PAYMENT_METHOD_TYPE.CARD: {
-        await cardRemove({ filter: [{ field: 'id', value: value._id }] });
+        await cardRemove({ filter: [{ field: 'id', value: value._id }], root: currentUser?._id });
         break;
       }
     }

@@ -1,7 +1,6 @@
-import { CREDIT_RATING_FIELDS } from '#lib-frontend/funding/hooks/useCreditRatingResource/useCreditRatingResource.constants';
 import { type UseCreditRatingResourceModel } from '#lib-frontend/funding/hooks/useCreditRatingResource/useCreditRatingResource.models';
+import { CREDIT_RATING_RESOURCE_PARAMS } from '#lib-frontend/funding/resources/CreditRating/CreditRating.constants';
 import { useResource } from '#lib-frontend/resource/hooks/useResource/useResource';
-import { CREDIT_RATING_RESOURCE_NAME } from '#lib-shared/funding/resources/CreditRating/CreditRating.constants';
 import {
   type CreditRatingFormModel,
   type CreditRatingModel,
@@ -10,6 +9,5 @@ import { type FundingModel } from '#lib-shared/funding/resources/Funding/Funding
 
 export const useCreditRatingResource = (): UseCreditRatingResourceModel =>
   useResource<CreditRatingModel, CreditRatingFormModel, FundingModel>({
-    fields: [{ result: CREDIT_RATING_FIELDS }],
-    name: CREDIT_RATING_RESOURCE_NAME,
+    ...CREDIT_RATING_RESOURCE_PARAMS,
   });
