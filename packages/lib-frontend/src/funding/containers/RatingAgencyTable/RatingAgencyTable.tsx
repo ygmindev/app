@@ -1,7 +1,7 @@
 import { type LFCModel } from '#lib-frontend/core/core.models';
-import { RATING_AGENCY_TABLE_PROPS } from '#lib-frontend/funding/containers/RatingAgencyTable/RatingAgencyTable.constants';
 import { type RatingAgencyTablePropsModel } from '#lib-frontend/funding/containers/RatingAgencyTable/RatingAgencyTable.models';
 import { useRatingAgencyResource } from '#lib-frontend/funding/hooks/useRatingAgencyResource/useRatingAgencyResource';
+import { RATING_AGENCY_RESOURCE_PARAMS } from '#lib-frontend/funding/resources/RatingAgency/RatingAgency.constants';
 import { ResourceTable } from '#lib-frontend/resource/components/ResourceTable/ResourceTable';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import {
@@ -15,7 +15,7 @@ export const RatingAgencyTable: LFCModel<RatingAgencyTablePropsModel> = ({ ...pr
   return (
     <ResourceTable<RatingAgencyModel, RatingAgencyFormModel>
       {...wrapperProps}
-      {...RATING_AGENCY_TABLE_PROPS}
+      {...RATING_AGENCY_RESOURCE_PARAMS}
       service={service}
     />
   );

@@ -8,6 +8,8 @@ import {
 export type VendorModel = EntityResourceModel & {
   [UTILITY_RESOURCE_NAME]?: Array<UtilityModel>;
 
+  imageSrc?: string;
+
   name: string;
 };
 

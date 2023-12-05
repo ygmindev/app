@@ -4,10 +4,10 @@ import {
   type TableRowModel,
   type TableSelectTypeModel,
 } from '#lib-frontend/data/hooks/useTable/useTable.models';
-import { type PartialModel, type StringKeyModel } from '#lib-shared/core/core.models';
+import { type StringKeyModel } from '#lib-shared/core/core.models';
 
 export type _UseTableParamsModel<TType> = {
-  columns?: Array<TableColumnModel<PartialModel<TType>, Array<StringKeyModel<TType>>[number]>>;
+  columns?: Array<TableColumnModel<TType, StringKeyModel<TType>>>;
   data?: Array<TType>;
   isFullWidth?: boolean;
   onSelect?(rows?: Array<TType>): void;

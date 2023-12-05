@@ -1,6 +1,6 @@
-import { OTP_TABLE_PROPS } from '#lib-frontend/auth/containers/OtpTable/OtpTable.constants';
 import { type OtpTablePropsModel } from '#lib-frontend/auth/containers/OtpTable/OtpTable.models';
 import { useOtpResource } from '#lib-frontend/auth/hooks/useOtpResource/useOtpResource';
+import { OTP_RESOURCE_PARAMS } from '#lib-frontend/auth/resources/Otp/Otp.constants';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { ResourceTable } from '#lib-frontend/resource/components/ResourceTable/ResourceTable';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -12,7 +12,7 @@ export const OtpTable: LFCModel<OtpTablePropsModel> = ({ ...props }) => {
   return (
     <ResourceTable<OtpModel, OtpFormModel>
       {...wrapperProps}
-      {...OTP_TABLE_PROPS}
+      {...OTP_RESOURCE_PARAMS}
       service={service}
     />
   );

@@ -19,7 +19,7 @@ export type PrototypeModel<TType> = TType extends ClassModel<infer TPrototype> ?
 
 export type PrimitiveModel = Primitive | Date;
 
-export type PartialModel<TType> = Partial<TType>;
+export type PartialModel<TType> = Partial<NonNullable<TType>>;
 
 export type PartialDeepModel<TType> = PartialDeep<TType>;
 

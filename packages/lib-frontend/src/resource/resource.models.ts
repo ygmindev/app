@@ -14,8 +14,8 @@ export type ResourceParamsModel<TType, TRoot = undefined> = ResourceNameParamsMo
 
 export type ResourceFieldsModel<TType> = Array<
   {
-    [TKey in StringKeyModel<NonNullable<TType>>]: ResourceFieldModel<NonNullable<TType>, TKey>;
-  }[StringKeyModel<NonNullable<TType>>]
+    [TKey in StringKeyModel<TType>]: ResourceFieldModel<TType, TKey>;
+  }[StringKeyModel<TType>]
 >;
 
 export type ResourceFieldModel<TType, TKey extends StringKeyModel<TType>> = TableColumnModel<

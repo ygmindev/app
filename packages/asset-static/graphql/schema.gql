@@ -2036,6 +2036,7 @@ type Vendor {
   Utility: [Utility]
   _id: String
   created: DateTime
+  imageSrc: String
   name: String
 }
 
@@ -2043,6 +2044,7 @@ input VendorCreateFormInput {
   Utility: [UtilityInput]
   _id: String
   created: DateTime
+  imageSrc: String
   name: String
 }
 
@@ -2055,6 +2057,7 @@ input VendorCreateManyFormInput {
   Utility: [UtilityInput]
   _id: String
   created: DateTime
+  imageSrc: String
   name: String
 }
 
@@ -2149,6 +2152,7 @@ input VendorInput {
   Utility: [UtilityInput]
   _id: String
   created: DateTime
+  imageSrc: String
   name: String
 }
 
@@ -2199,5 +2203,6 @@ input VendorUpdateUpdateInput {
   Utility: [UtilityInput]
   _id: String
   created: DateTime
+  imageSrc: String
   name: String
 }

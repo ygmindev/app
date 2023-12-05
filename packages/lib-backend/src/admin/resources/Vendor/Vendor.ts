@@ -26,6 +26,9 @@ export class Vendor extends EntityResource implements VendorModel {
   [UTILITY_RESOURCE_NAME]?: Array<UtilityModel>;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  imageSrc?: string;
+
+  @withField({ isRepository: true, type: DATA_TYPE.STRING })
   name!: string;
 }
 

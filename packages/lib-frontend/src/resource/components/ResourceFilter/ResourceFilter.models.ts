@@ -1,12 +1,11 @@
 import { type FormContainerPropsModel } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
-import { type TablePropsModel } from '#lib-frontend/data/components/Table/Table.models';
+import { type ResourceParamsModel } from '#lib-frontend/resource/resource.models';
 import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
-import { type RootInputModel } from '#lib-shared/resource/utils/Root/Root.models';
 
-export type ResourceFilterPropsModel<TType, TResult = void> = Omit<
+export type ResourceFilterPropsModel<TType, TResult = void, TRoot = undefined> = Omit<
   FormContainerPropsModel<TType, TResult>,
   'fields' | 'onSubmit'
 > &
-  Pick<TablePropsModel<TType>, 'columns'> & {
+  ResourceParamsModel<TType, TRoot> & {
     onSubmit?(data: Array<FilterModel<TType>>): Promise<TResult | null>;
-  } & RootInputModel;
+  };

@@ -1,6 +1,6 @@
-import { UTILITY_TABLE_PROPS } from '#lib-frontend/admin/containers/UtilityTable/UtilityTable.constants';
 import { type UtilityTablePropsModel } from '#lib-frontend/admin/containers/UtilityTable/UtilityTable.models';
 import { useUtilityResource } from '#lib-frontend/admin/hooks/useUtilityResource/useUtilityResource';
+import { UTILITY_RESOURCE_PARAMS } from '#lib-frontend/admin/resources/Utility/Utility.constants';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { ResourceTable } from '#lib-frontend/resource/components/ResourceTable/ResourceTable';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -16,7 +16,7 @@ export const UtilityTable: LFCModel<UtilityTablePropsModel> = ({ ...props }) => 
   return (
     <ResourceTable<UtilityModel, UtilityFormModel, VendorModel>
       {...wrapperProps}
-      {...UTILITY_TABLE_PROPS}
+      {...UTILITY_RESOURCE_PARAMS}
       service={service}
     />
   );

@@ -8,6 +8,7 @@ import { TEST_TEXT_SHORT } from '#lib-frontend/core/core.constants';
 import { type LFCPropsModel } from '#lib-frontend/core/core.models';
 import { FilterButton } from '#lib-frontend/data/components/FilterButton/FilterButton';
 import { Table } from '#lib-frontend/data/components/Table/Table';
+import { type TableColumnModel } from '#lib-frontend/data/hooks/useTable/useTable.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { ConnectionBoundary } from '#lib-frontend/resource/components/ConnectionBoundary/ConnectionBoundary';
 import { ResourceFilter } from '#lib-frontend/resource/components/ResourceFilter/ResourceFilter';
@@ -20,7 +21,7 @@ import { type EntityResourceDataModel } from '#lib-shared/resource/resources/Ent
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 
 export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRoot = undefined>({
-  columns,
+  fields,
   name,
   root,
   service,
@@ -39,6 +40,10 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
     await create(data);
   };
 
+  const columns = fields?.map(({ id, label, renderer }) => ({ id, label, renderer })) as Array<
+    TableColumnModel<PartialModel<TType>>
+  >;
+
   return (
     <Wrapper
       {...wrapperProps}
@@ -47,7 +52,8 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
       <FilterButton
         element={
           <ResourceFilter
-            columns={columns}
+            fields={fields}
+            name={name}
             onSubmit={async (filter) => paramsSet({ filter })}
             root={root}
           />
@@ -91,7 +97,8 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
         <ModalButton
           element={() => (
             <ResourceForm<TType, TForm>
-              columns={columns}
+              fields={fields}
+              name={name}
               onSubmit={async (input) => {
                 await handleSubmit(input);
               }}

@@ -17,7 +17,6 @@ import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import {
   type InferModel,
   type PrimitiveModel,
-  type RequiredModel,
   type StringKeyModel,
 } from '#lib-shared/core/core.models';
 
@@ -29,12 +28,12 @@ export type QueryContextModel = {
 export type DataRendererModel<
   TType,
   TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
-> = (params: { row: TType; value?: TType[TKey] }) => ReactElement;
+> = (params: { row: TType; value?: TType[TKey] }) => ReactElement | null;
 
 export type DataFormatterModel<
   TType,
   TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
-> = (params: { row: TType; value: RequiredModel<TType>[TKey] }) => string;
+> = (params: { row: TType; value: TType[TKey] }) => string;
 
 export type AmountUnitModel = `${AMOUNT_UNIT}`;
 

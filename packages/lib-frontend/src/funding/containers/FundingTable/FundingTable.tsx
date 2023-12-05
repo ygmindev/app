@@ -1,7 +1,7 @@
 import { type LFCModel } from '#lib-frontend/core/core.models';
-import { FUNDING_TABLE_PROPS } from '#lib-frontend/funding/containers/FundingTable/FundingTable.constants';
 import { type FundingTablePropsModel } from '#lib-frontend/funding/containers/FundingTable/FundingTable.models';
 import { useFundingResource } from '#lib-frontend/funding/hooks/useFundingResource/useFundingResource';
+import { FUNDING_RESOURCE_PARAMS } from '#lib-frontend/funding/resources/Funding/Funding.constants';
 import { ResourceTable } from '#lib-frontend/resource/components/ResourceTable/ResourceTable';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import {
@@ -15,7 +15,7 @@ export const FundingTable: LFCModel<FundingTablePropsModel> = ({ ...props }) => 
   return (
     <ResourceTable<FundingModel, FundingFormModel>
       {...wrapperProps}
-      {...FUNDING_TABLE_PROPS}
+      {...FUNDING_RESOURCE_PARAMS}
       service={service}
     />
   );

@@ -1,6 +1,6 @@
-import { VENDOR_TABLE_PROPS } from '#lib-frontend/admin/containers/VendorTable/VendorTable.constants';
 import { type VendorTablePropsModel } from '#lib-frontend/admin/containers/VendorTable/VendorTable.models';
 import { useVendorResource } from '#lib-frontend/admin/hooks/useVendorResource/useVendorResource';
+import { VENDOR_RESOURCE_PARAMS } from '#lib-frontend/admin/resources/Vendor/Vendor.constants';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { ResourceTable } from '#lib-frontend/resource/components/ResourceTable/ResourceTable';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -15,7 +15,7 @@ export const VendorTable: LFCModel<VendorTablePropsModel> = ({ ...props }) => {
   return (
     <ResourceTable<VendorModel, VendorFormModel>
       {...wrapperProps}
-      {...VENDOR_TABLE_PROPS}
+      {...VENDOR_RESOURCE_PARAMS}
       service={service}
     />
   );

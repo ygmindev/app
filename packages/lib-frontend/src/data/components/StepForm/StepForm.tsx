@@ -94,9 +94,9 @@ export const StepForm = <TType, TResult = void>({
           current={current}
           slides={steps.map((step) => ({
             element: cloneElement(step.element, {
-              data: values,
+              data: values as PartialModel<TType>,
               elementState: isLoadingFF ? ELEMENT_STATE.LOADING : undefined,
-              initialValues,
+              initialValues: initialValues as PartialModel<TType>,
               key: step.id,
               onBack: () => {
                 step.element.props.onBack && step.element.props.onBack();

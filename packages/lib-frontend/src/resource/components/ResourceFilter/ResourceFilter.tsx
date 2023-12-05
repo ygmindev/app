@@ -16,7 +16,7 @@ import { FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.const
 import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
 export const ResourceFilter = <TType, TResult = void>({
-  columns,
+  fields,
   onSubmit,
   ...props
 }: LFCPropsModel<ResourceFilterPropsModel<TType, TResult>>): ReactElement<
@@ -36,9 +36,9 @@ export const ResourceFilter = <TType, TResult = void>({
       },
     ]);
 
-  const fields = useMemo<Array<FormTileModel<TType>> | undefined>(
+  const fieldsF = useMemo<Array<FormTileModel<TType>>>(
     () =>
-      columns?.map(({ id, label, options, type }) => {
+      fields?.map(({ id, label, options, type }) => {
         const labelF = label ?? id;
         const element = (() => {
           switch (type) {
@@ -67,8 +67,8 @@ export const ResourceFilter = <TType, TResult = void>({
           }
         })();
         return { fields: [{ element, id }], id, title: id };
-      }),
-    [columns],
+      }) ?? [],
+    [fields],
   );
 
   // TODO: better typing for TType -> filters?
@@ -85,7 +85,7 @@ export const ResourceFilter = <TType, TResult = void>({
   return (
     <FormContainer
       {...props}
-      fields={fields}
+      fields={fieldsF}
       isFullHeight
       onSubmit={handleSubmit}
       p

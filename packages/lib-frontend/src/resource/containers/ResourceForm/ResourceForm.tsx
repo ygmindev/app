@@ -10,20 +10,20 @@ import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLa
 import { DATA_TYPE_MORE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
-export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>>({
-  columns,
+export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoot = undefined>({
+  fields,
   onSubmit,
   root,
   ...props
-}: LFCPropsModel<ResourceFormPropsModel<TType, TForm>>): ReactElement<
-  LFCPropsModel<ResourceFormPropsModel<TType, TForm>>
+}: LFCPropsModel<ResourceFormPropsModel<TType, TForm, TRoot>>): ReactElement<
+  LFCPropsModel<ResourceFormPropsModel<TType, TForm, TRoot>>
 > => {
   const { wrapperProps } = useLayoutStyles({ props });
   const [rootValue, rootValueSet] = useState<string>();
   return (
     <FormContainer
       {...wrapperProps}
-      fields={columns?.map(({ id, label, options, type }) => {
+      fields={fields?.map(({ id, label, options, type }) => {
         const element = (() => {
           const labelF = label ?? id;
           switch (type) {
