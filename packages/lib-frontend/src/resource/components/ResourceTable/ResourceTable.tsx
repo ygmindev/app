@@ -47,6 +47,7 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
   return (
     <Wrapper
       {...wrapperProps}
+      flex
       p
       s>
       <FilterButton

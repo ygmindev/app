@@ -34,7 +34,6 @@ import {
   THEME_SIZE,
   THEME_SIZE_MORE,
 } from '#lib-frontend/style/style.constants';
-import { FLEX_ALIGN } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { FONT_ALIGN } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { type StringKeyModel } from '#lib-shared/core/core.models';
@@ -50,7 +49,7 @@ export const Table = forwardRef(
       emptyElement,
       isAddable,
       isDeletable,
-      isFullWidth,
+      isFullWidth = true,
       isHeadless,
       onChange,
       validators,
@@ -82,11 +81,10 @@ export const Table = forwardRef(
     return rows?.length ? (
       <Wrapper
         {...wrapperProps}
-        align={FLEX_ALIGN.START}
         border
         flex
+        isFullWidth
         isHorizontalScrollable
-        isVerticalScrollable
         p
         position={SHAPE_POSITION.RELATIVE}
         round>
@@ -115,7 +113,8 @@ export const Table = forwardRef(
 
         <Wrapper
           flex
-          isFullWidth={isFullWidth}>
+          isFullWidth={isFullWidth}
+          isVerticalScrollable>
           {rows.map((row, i) => (
             <Wrapper
               border={DIRECTION.BOTTOM}
