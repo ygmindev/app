@@ -8,5 +8,5 @@ import { RATING_AGENCY_RESOURCE_NAME } from '#lib-shared/funding/resources/Ratin
 export const CREDIT_RATING_RESOURCE_PARAMS = {
   fields: [{ id: '_id' }, { fields: [{ id: '_id' }], id: RATING_AGENCY_RESOURCE_NAME }],
   name: CREDIT_RATING_RESOURCE_NAME,
-  root: FUNDING_RESOURCE_NAME,
+  rootName: FUNDING_RESOURCE_NAME,
 } satisfies ResourceParamsModel<CreditRatingModel, FundingModel>;

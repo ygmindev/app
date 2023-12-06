@@ -16,5 +16,5 @@ export const CARD_RESOURCE_PARAMS = {
     { id: 'type' },
   ],
   name: CARD_RESOURCE_NAME,
-  root: USER_RESOURCE_NAME,
+  rootName: USER_RESOURCE_NAME,
 } satisfies ResourceParamsModel<CardModel, UserModel>;

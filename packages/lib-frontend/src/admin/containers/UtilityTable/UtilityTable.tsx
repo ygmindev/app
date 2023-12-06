@@ -10,7 +10,7 @@ import {
 } from '#lib-shared/admin/resources/Utility/Utility.models';
 import { type VendorModel } from '#lib-shared/admin/resources/Vendor/Vendor.models';
 
-export const UtilityTable: LFCModel<UtilityTablePropsModel> = ({ ...props }) => {
+export const UtilityTable: LFCModel<UtilityTablePropsModel> = ({ root, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const service = useUtilityResource();
   return (

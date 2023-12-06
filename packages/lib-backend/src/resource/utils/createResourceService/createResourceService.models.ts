@@ -15,7 +15,7 @@ export type CreateResourceServiceParamsModel<
   ResourceServiceModel<TType, TForm, TRoot> &
   ResourceServiceDecoratorModel<TType, TForm, TRoot> & {
     Resource: ClassModel<TType>;
-    count(input: RootInputModel): Promise<number>;
+    count(input: RootInputModel<TRoot>): Promise<number>;
   };
 
 export type CreateResourceServiceModel<

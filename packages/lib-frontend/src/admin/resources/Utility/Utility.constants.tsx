@@ -7,5 +7,5 @@ import { type VendorModel } from '#lib-shared/admin/resources/Vendor/Vendor.mode
 export const UTILITY_RESOURCE_PARAMS = {
   fields: [{ id: 'name' }, { id: 'description' }, { id: 'type' }, { id: 'usage' }],
   name: UTILITY_RESOURCE_NAME,
-  root: VENDOR_RESOURCE_NAME,
+  rootName: VENDOR_RESOURCE_NAME,
 } satisfies ResourceParamsModel<UtilityModel, VendorModel>;

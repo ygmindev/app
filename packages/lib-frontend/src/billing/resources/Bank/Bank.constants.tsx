@@ -7,5 +7,5 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 export const BANK_RESOURCE_PARAMS = {
   fields: [{ id: '_id' }, { id: 'bank' }, { id: 'id' }, { id: 'last4' }, { id: 'type' }],
   name: BANK_RESOURCE_NAME,
-  root: USER_RESOURCE_NAME,
+  rootName: USER_RESOURCE_NAME,
 } satisfies ResourceParamsModel<BankModel, UserModel>;

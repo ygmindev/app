@@ -68,7 +68,7 @@ export const createEmbeddedResourceService = <
   };
 
   const getAggregation = (
-    input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm> = {},
+    input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot> = {},
   ): Array<object> => {
     const nameF = `$${name}`;
     return filterNil([
@@ -79,7 +79,7 @@ export const createEmbeddedResourceService = <
     ]);
   };
 
-  const getCount = async (input: RootInputModel): Promise<number> => {
+  const getCount = async (input: RootInputModel<TRoot>): Promise<number> => {
     if (input.root) {
       const { result: rootResult } = await getRootService().get({
         filter: [{ field: '_id', value: input.root }],

@@ -5,6 +5,7 @@ import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constan
 import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
 import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 import { type PaginationModel } from '#lib-shared/resource/utils/Pagination/Pagination.models';
+import { type RootInputModel } from '#lib-shared/resource/utils/Root/Root.models';
 import { type UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
 
 type ProjectPropertyModel<TType> = TType extends Array<infer TElement>
@@ -81,20 +82,24 @@ type UpdateArgsModel<TType> = {
   update?: UpdateModel<TType>;
 };
 
-export type ArgsModel<TMethod extends ResourceMethodTypeModel, TType, TForm> = {
-  root?: string;
-} & (TMethod extends RESOURCE_METHOD_TYPE.CREATE
-  ? CreateArgsModel<TForm>
-  : TMethod extends RESOURCE_METHOD_TYPE.CREATE_MANY
-    ? CreateManyArgsModel<TForm>
-    : TMethod extends RESOURCE_METHOD_TYPE.GET
-      ? GetArgsModel<TType>
-      : TMethod extends RESOURCE_METHOD_TYPE.GET_MANY
-        ? GetManyArgsModel<TType>
-        : TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION
-          ? GetConnectionArgsModel<TType>
-          : TMethod extends RESOURCE_METHOD_TYPE.REMOVE
-            ? RemoveArgsModel<TType>
-            : TMethod extends RESOURCE_METHOD_TYPE.UPDATE
-              ? UpdateArgsModel<TType>
-              : never);
+export type ArgsModel<
+  TMethod extends ResourceMethodTypeModel,
+  TType,
+  TForm,
+  TRoot = undefined,
+> = RootInputModel<TRoot> &
+  (TMethod extends RESOURCE_METHOD_TYPE.CREATE
+    ? CreateArgsModel<TForm>
+    : TMethod extends RESOURCE_METHOD_TYPE.CREATE_MANY
+      ? CreateManyArgsModel<TForm>
+      : TMethod extends RESOURCE_METHOD_TYPE.GET
+        ? GetArgsModel<TType>
+        : TMethod extends RESOURCE_METHOD_TYPE.GET_MANY
+          ? GetManyArgsModel<TType>
+          : TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION
+            ? GetConnectionArgsModel<TType>
+            : TMethod extends RESOURCE_METHOD_TYPE.REMOVE
+              ? RemoveArgsModel<TType>
+              : TMethod extends RESOURCE_METHOD_TYPE.UPDATE
+                ? UpdateArgsModel<TType>
+                : never);

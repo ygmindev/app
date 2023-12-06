@@ -7,5 +7,5 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 export const PAYMENT_METHOD_RESOURCE_PARAMS = {
   fields: [{ id: '_id' }],
   name: PAYMENT_METHOD_RESOURCE_NAME,
-  root: USER_RESOURCE_NAME,
+  rootName: USER_RESOURCE_NAME,
 } satisfies ResourceParamsModel<PaymentMethodModel, UserModel>;

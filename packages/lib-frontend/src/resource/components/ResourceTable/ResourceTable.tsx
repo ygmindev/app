@@ -23,7 +23,7 @@ import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRoot = undefined>({
   fields,
   name,
-  root,
+  rootName,
   service,
   ...props
 }: LFCPropsModel<ResourceTablePropsModel<TType, TForm, TRoot>>): ReactElement<
@@ -35,7 +35,7 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
   const [params, paramsSet] = useState<InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>>();
 
   const handleSubmit = async (
-    data: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>,
+    data: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
   ): Promise<void> => {
     await create(data);
   };
@@ -60,7 +60,7 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
             fields={fields}
             name={name}
             onSubmit={async (filter) => paramsSet({ filter })}
-            root={root}
+            rootName={rootName}
           />
         }
       />
@@ -101,13 +101,13 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
       <FloatingFooter>
         <ModalButton
           element={() => (
-            <ResourceForm<TType, TForm>
+            <ResourceForm<TType, TForm, TRoot>
               fields={fields}
               name={name}
               onSubmit={async (input) => {
                 await handleSubmit(input);
               }}
-              root={root}
+              rootName={rootName}
             />
           )}
           icon="add"

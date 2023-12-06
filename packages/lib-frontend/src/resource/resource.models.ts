@@ -5,12 +5,13 @@ import {
   type StringKeyModel,
 } from '#lib-shared/core/core.models';
 import { type ResourceNameParamsModel } from '#lib-shared/resource/resource.models';
+import { type RootNameInputModel } from '#lib-shared/resource/utils/Root/Root.models';
 
-export type ResourceParamsModel<TType, TRoot = undefined> = ResourceNameParamsModel<TRoot> & {
-  fields?: ResourceFieldsModel<TType>;
-  name: string;
-  root?: string;
-};
+export type ResourceParamsModel<TType, TRoot = undefined> = ResourceNameParamsModel<TRoot> &
+  RootNameInputModel<TRoot> & {
+    fields?: ResourceFieldsModel<TType>;
+    name: string;
+  };
 
 export type ResourceFieldsModel<TType> = Array<
   {

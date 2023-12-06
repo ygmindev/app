@@ -1,3 +1,3 @@
-import { type EmptyObjectModel } from '#lib-shared/core/core.models';
+import { type RootInputModel } from '#lib-shared/resource/utils/Root/Root.models';
 
-export type UtilityTablePropsModel = EmptyObjectModel;
+export type UtilityTablePropsModel = RootInputModel;

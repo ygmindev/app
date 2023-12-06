@@ -15,12 +15,13 @@ import { type NumberRangeModel } from '#lib-shared/data/resources/NumberRange/Nu
 import { FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
 import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
-export const ResourceFilter = <TType, TResult = void>({
+export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
   fields,
   onSubmit,
+  rootName,
   ...props
-}: LFCPropsModel<ResourceFilterPropsModel<TType, TResult>>): ReactElement<
-  LFCPropsModel<ResourceFilterPropsModel<TType, TResult>>
+}: LFCPropsModel<ResourceFilterPropsModel<TType, TResult, TRoot>>): ReactElement<
+  LFCPropsModel<ResourceFilterPropsModel<TType, TResult, TRoot>>
 > => {
   const beforeSubmitRange = (value: NumberRangeModel, field: string): Array<FilterModel<TType>> =>
     filterNil([

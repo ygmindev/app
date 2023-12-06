@@ -5,14 +5,14 @@ import {
   type ResourceServiceDecoratorModel,
   type ResourceServiceModel,
 } from '#lib-shared/resource/utils/ResourceService/ResourceService.models';
-import { type RootModel } from '#lib-shared/resource/utils/Root/Root.models';
+import { type RootInputModel } from '#lib-shared/resource/utils/Root/Root.models';
 
 export type UseResourceParamsModel<
   TType,
   TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
-> = ResourceNameParamsModel<TRoot> &
-  RootModel<TRoot> &
+> = RootInputModel &
+  ResourceNameParamsModel<TRoot> &
   ResourceServiceDecoratorModel<TType, TForm, TRoot> &
   ResourceParamsModel<TType, TRoot>;
 

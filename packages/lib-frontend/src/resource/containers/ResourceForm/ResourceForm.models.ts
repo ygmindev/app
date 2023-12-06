@@ -10,5 +10,5 @@ export type ResourceFormPropsModel<
   TRoot = undefined,
 > = Omit<FormContainerPropsModel<TType>, 'fields' | 'onSubmit'> &
   ResourceParamsModel<TType, TRoot> & {
-    onSubmit(input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>): Promise<void>;
+    onSubmit(input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>): Promise<void>;
   };

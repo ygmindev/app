@@ -12,39 +12,39 @@ export type ResourceServiceModel<
   TRoot = undefined,
 > = {
   create(
-    input?: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>,
+    input?: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>>;
 
   createMany(
-    input?: InputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TForm>,
+    input?: InputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TForm, TRoot>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>>;
 
   decorators?: ResourceServiceDecoratorModel<TType, TForm, TRoot>;
 
   get(
-    input?: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm>,
+    input?: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>>;
 
   getConnection(
-    input?: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm>,
+    input?: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm, TRoot>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>>;
 
   getMany(
-    input?: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm>,
+    input?: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>>;
 
   remove(
-    input?: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm>,
+    input?: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm, TRoot>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>>;
 
   update(
-    input?: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm>,
+    input?: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot>,
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>>;
 };
@@ -53,8 +53,9 @@ export type ResourceServiceBeforeDecoratorModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
   TForm,
+  TRoot = undefined,
 > = (
-  params: { input?: InputModel<TMethod, TType, TForm> },
+  params: { input?: InputModel<TMethod, TType, TForm, TRoot> },
   context?: ContextModel,
 ) => Promise<InputModel<TMethod, TType, TForm> | undefined>;
 
@@ -67,7 +68,11 @@ export type ResourceServiceAfterDecoratorModel<
   context?: ContextModel,
 ) => Promise<OutputModel<TMethod, TType, TRoot>>;
 
-export type ResourceServiceDecoratorModel<TType, TForm, TRoot = undefined> = RootInputModel & {
+export type ResourceServiceDecoratorModel<
+  TType,
+  TForm,
+  TRoot = undefined,
+> = RootInputModel<TRoot> & {
   afterCreate?: ResourceServiceAfterDecoratorModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>;
   afterCreateMany?: ResourceServiceAfterDecoratorModel<
     RESOURCE_METHOD_TYPE.CREATE_MANY,
@@ -87,15 +92,32 @@ export type ResourceServiceDecoratorModel<TType, TForm, TRoot = undefined> = Roo
   beforeCreateMany?: ResourceServiceBeforeDecoratorModel<
     RESOURCE_METHOD_TYPE.CREATE_MANY,
     TType,
-    TForm
+    TForm,
+    TRoot
   >;
   beforeGet?: ResourceServiceBeforeDecoratorModel<RESOURCE_METHOD_TYPE.GET, TType, TForm>;
   beforeGetConnection?: ResourceServiceBeforeDecoratorModel<
     RESOURCE_METHOD_TYPE.GET_CONNECTION,
     TType,
-    TForm
+    TForm,
+    TRoot
   >;
-  beforeGetMany?: ResourceServiceBeforeDecoratorModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm>;
-  beforeRemove?: ResourceServiceBeforeDecoratorModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm>;
-  beforeUpdate?: ResourceServiceBeforeDecoratorModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm>;
+  beforeGetMany?: ResourceServiceBeforeDecoratorModel<
+    RESOURCE_METHOD_TYPE.GET_MANY,
+    TType,
+    TForm,
+    TRoot
+  >;
+  beforeRemove?: ResourceServiceBeforeDecoratorModel<
+    RESOURCE_METHOD_TYPE.REMOVE,
+    TType,
+    TForm,
+    TRoot
+  >;
+  beforeUpdate?: ResourceServiceBeforeDecoratorModel<
+    RESOURCE_METHOD_TYPE.UPDATE,
+    TType,
+    TForm,
+    TRoot
+  >;
 };

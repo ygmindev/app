@@ -13,13 +13,13 @@ import { type EntityResourceDataModel } from '#lib-shared/resource/resources/Ent
 export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoot = undefined>({
   fields,
   onSubmit,
-  root,
+  rootName,
   ...props
 }: LFCPropsModel<ResourceFormPropsModel<TType, TForm, TRoot>>): ReactElement<
   LFCPropsModel<ResourceFormPropsModel<TType, TForm, TRoot>>
 > => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const [rootValue, rootValueSet] = useState<string>();
+  const [rootValue, rootValueSet] = useState<TRoot extends undefined ? never : string>();
   return (
     <FormContainer
       {...wrapperProps}
@@ -64,11 +64,11 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
       }
       p
       topElement={
-        root
+        rootName
           ? () => (
               <TextField
-                label={root}
-                onChange={rootValueSet}
+                label={rootName}
+                onChange={(v: TRoot extends undefined ? never : string) => rootValueSet(v)}
                 value={rootValue}
               />
             )
