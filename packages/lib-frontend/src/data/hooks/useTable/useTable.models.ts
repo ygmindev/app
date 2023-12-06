@@ -35,15 +35,15 @@ export type TableColumnModel<
   align?: FontAlignModel;
   field?(params: { row: TType; value?: TType[TKey] }): ReactElement<FieldPropsModel<TType[TKey]>>;
   formatter?: DataFormatterModel<TType, TKey>;
+  isHidden?: boolean;
   label?: TranslatableTextModel;
   options?: Array<TranslatableOptionModel>;
   renderer?: DataRendererModel<TType, TKey>;
-  sort?: TableSortTypeModel | boolean;
   type?: FormattableTypeModel;
   width?: number;
 };
 
-export type TableRenderModel<TType> = Pick<TableColumnModel<TType>, 'align' | 'width'>;
+export type TableRenderModel<TType> = Pick<TableColumnModel<TType>, 'align' | 'width' | 'isHidden'>;
 
 export type TableHeaderModel<TType> = WithIdModel<StringKeyModel<TType>> &
   TableRenderModel<TType> & {

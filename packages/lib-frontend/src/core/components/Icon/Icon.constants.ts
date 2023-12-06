@@ -74,6 +74,7 @@ export const IONIC_ICONS = {
   minusCircle: 'remove-circle-outline',
   notifications: 'notifications-outline',
   offline: 'cloud-offline-outline',
+  open: 'open-outline',
   people: 'people-circle-outline',
   person: 'person-outline',
   personCircle: 'person-circle-outline',

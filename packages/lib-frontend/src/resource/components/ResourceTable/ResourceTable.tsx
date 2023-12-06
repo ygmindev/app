@@ -40,9 +40,13 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
     await create(data);
   };
 
-  const columns = fields?.map(({ id, label, renderer }) => ({ id, label, renderer })) as Array<
-    TableColumnModel<PartialModel<TType>>
-  >;
+  const columns = fields?.map(({ id, isHidden, label, renderer, width }) => ({
+    id,
+    isHidden,
+    label,
+    renderer,
+    width,
+  })) as Array<TableColumnModel<PartialModel<TType>>>;
 
   return (
     <Wrapper

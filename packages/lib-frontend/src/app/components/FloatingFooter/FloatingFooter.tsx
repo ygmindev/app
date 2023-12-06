@@ -15,8 +15,8 @@ export const FloatingFooter: LFCModel<FloatingFooterPropsModel> = ({ children, .
       <Wrapper
         {...wrapperProps}
         bottom={theme.shape.spacing[THEME_SIZE.MEDIUM]}
-        left={theme.shape.spacing[THEME_SIZE.MEDIUM]}
         position={SHAPE_POSITION.ABSOLUTE}
+        right={theme.shape.spacing[THEME_SIZE.MEDIUM]}
         zIndex>
         {children}
       </Wrapper>

@@ -95,19 +95,22 @@ export const Table = forwardRef(
             isRowAlign>
             {isDeletable && <Wrapper width={theme.shape.size[THEME_SIZE.MEDIUM]} />}
 
-            {headers.map(({ align, id, label, width }) => (
-              <Wrapper
-                key={id}
-                pVertical={THEME_SIZE.SMALL}
-                width={width || TABLE_CELL_WIDTH_DEFAULT}>
-                <Text
-                  align={align}
-                  isBold
-                  isEllipsis>
-                  {label}
-                </Text>
-              </Wrapper>
-            ))}
+            {headers.map(
+              ({ align, id, isHidden, label, width }) =>
+                !isHidden && (
+                  <Wrapper
+                    key={id}
+                    pVertical={THEME_SIZE.SMALL}
+                    width={width || TABLE_CELL_WIDTH_DEFAULT}>
+                    <Text
+                      align={align}
+                      isBold
+                      isEllipsis>
+                      {label}
+                    </Text>
+                  </Wrapper>
+                ),
+            )}
           </Wrapper>
         )}
 
@@ -141,36 +144,41 @@ export const Table = forwardRef(
                 />
               )}
 
-              {row.cells.map((cell) => (
-                <Skeleton
-                  elementState={elementState}
-                  key={cell.id}
-                  width={cell.width || TABLE_CELL_WIDTH_DEFAULT}>
-                  {cell.renderer ? (
-                    cell.renderer({ row: row.value, value: cell.value })
-                  ) : cell.field ? (
-                    cloneElement(cell.field({ row: row.value, value: cell.value }), {
-                      error:
-                        row.id && cell.columnId && getValue(errors, `${row.id}.${cell.columnId}`),
-                      label: cell.label,
-                      onChange: onChange
-                        ? <TKey extends StringKeyModel<TType>>(value: TType[TKey]) => {
-                            const newValue = cloneDeep(props.data);
-                            cell.columnId && newValue && (newValue[i][cell.columnId] = value);
-                            onChange(newValue);
-                          }
-                        : undefined,
-                      value: cell.value,
-                    })
-                  ) : (
-                    <TranslatableText
-                      align={cell.align}
-                      isEllipsis>
-                      {isNil(cell.value) ? emptyCell : stringify(cell.value)}
-                    </TranslatableText>
-                  )}
-                </Skeleton>
-              ))}
+              {row.cells.map(
+                (cell) =>
+                  !cell.isHidden && (
+                    <Skeleton
+                      elementState={elementState}
+                      key={cell.id}
+                      width={cell.width || TABLE_CELL_WIDTH_DEFAULT}>
+                      {cell.renderer ? (
+                        cell.renderer({ row: row.value, value: cell.value })
+                      ) : cell.field ? (
+                        cloneElement(cell.field({ row: row.value, value: cell.value }), {
+                          error:
+                            row.id &&
+                            cell.columnId &&
+                            getValue(errors, `${row.id}.${cell.columnId}`),
+                          label: cell.label,
+                          onChange: onChange
+                            ? <TKey extends StringKeyModel<TType>>(value: TType[TKey]) => {
+                                const newValue = cloneDeep(props.data);
+                                cell.columnId && newValue && (newValue[i][cell.columnId] = value);
+                                onChange(newValue);
+                              }
+                            : undefined,
+                          value: cell.value,
+                        })
+                      ) : (
+                        <TranslatableText
+                          align={cell.align}
+                          isEllipsis>
+                          {isNil(cell.value) ? emptyCell : stringify(cell.value)}
+                        </TranslatableText>
+                      )}
+                    </Skeleton>
+                  ),
+              )}
             </Wrapper>
           ))}
 

@@ -34,7 +34,7 @@ export const _useTable = <TType,>({
             id: header.id as StringKeyModel<TType>,
             label: header.column.columnDef.header as string,
             width: header.getSize() ?? undefined,
-            ...(column ? { align: column.align } : {}),
+            ...(column ? { align: column.align, isHidden: column.isHidden } : {}),
           };
         }),
       ],
@@ -59,6 +59,7 @@ export const _useTable = <TType,>({
                   align: column.align,
                   columnId: column.id,
                   field: column.field,
+                  isHidden: column.isHidden,
                   label: column.label,
                   renderer: column.renderer,
                 }

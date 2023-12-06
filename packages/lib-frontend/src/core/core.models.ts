@@ -50,6 +50,8 @@ export type RLFCPropsModel<TType = undefined, TProps = object> = PropsModel<
 
 export type RLFCModel<TType = undefined, TProps = object> = LFCModel<TProps & RefPropsModel<TType>>;
 
+export type RTFCModel<TType = undefined, TProps = object> = TFCModel<TProps & RefPropsModel<TType>>;
+
 export type PropsModel<TType> = TType extends ComponentType<infer TProps> ? TProps : never;
 
 export type RefPropsModel<TType = unknown> = {
