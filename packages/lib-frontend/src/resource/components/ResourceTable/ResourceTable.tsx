@@ -72,7 +72,10 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
               edges: range(5).map((i) => ({
                 cursor: `${i}`,
                 node: columns.reduce(
-                  (result, column) => ({ ...result, [column.id]: TEST_TEXT_SHORT }),
+                  (result, column) => ({
+                    ...result,
+                    [column.id]: column.renderer ? undefined : TEST_TEXT_SHORT,
+                  }),
                   {} as PartialModel<TType>,
                 ),
               })),

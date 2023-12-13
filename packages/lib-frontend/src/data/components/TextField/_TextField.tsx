@@ -82,6 +82,7 @@ export const _TextField = composeComponent<_TextFieldPropsModel, TextInputProps>
     autoCapitalize: 'none',
     autoComplete: getAutoCompleteType(autoComplete, keyboard),
     autoCorrect: false,
+    editable: !isDisabled,
     keyboardType: getKeyboardType(keyboard),
     maxLength,
     multiline: numberOfLines ? numberOfLines > 1 : undefined,

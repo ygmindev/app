@@ -1,6 +1,5 @@
 import isNumber from 'lodash/isNumber';
-import { type RefObject, useImperativeHandle, useState } from 'react';
-import { forwardRef, useRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 
 import { ANIMATION_STATES_FOCUSABLE } from '#lib-frontend/animation/animation.constants';
 import { type AnimationModel } from '#lib-frontend/animation/animation.models';
@@ -48,7 +47,6 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       icon,
       isAutoFocus,
       isCenter,
-      isDisabled,
       isNoClear,
       isTransparent,
       keyboard,
@@ -76,12 +74,11 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
     const { wrapperProps } = useLayoutStyles({ props });
     const focusableRef = useRef<FocusableRefModel>(null);
     const inputRef = useRef<TextFieldRefModel>(null);
-    const inputRefF = ref ?? inputRef;
 
     useImperativeHandle(ref, () => ({
       beforeSubmit,
-      blur: () => (inputRefF as RefObject<TextFieldRefModel>).current?.blur(),
-      focus: () => (inputRefF as RefObject<TextFieldRefModel>).current?.focus(),
+      blur: () => inputRef.current?.blur(),
+      focus: () => inputRef.current?.focus(),
     }));
 
     const [elementState, elementStateSet] = useState<ElementStateModel>();
@@ -99,7 +96,6 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       if (isAutoFocus) {
         await sleep(theme.animation.transition);
         if (isMounted()) {
-          const inputRef = inputRefF as RefObject<TextFieldRefModel>;
           inputRef.current && inputRef.current.focus();
         }
       }
@@ -188,6 +184,9 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         ANIMATION_STATES_FOCUSABLE({ isError, isText: true, theme }),
       ]),
     };
+
+    const isDisabled = elementStateF === ELEMENT_STATE.DISABLED;
+
     return (
       <FocusableWrapper
         {...wrapperProps}
@@ -218,8 +217,10 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
             maxLength={maxLength}
             numberOfLines={numberOfLines}
             onBlur={() => {
-              onBlur && onBlur();
-              void sleep(100).then(() => focusableRef?.current?.blur());
+              if (!isDisabled) {
+                onBlur && onBlur();
+                void sleep(100).then(() => focusableRef?.current?.blur());
+              }
             }}
             onChange={handleChange}
             onEscape={() => {
@@ -229,13 +230,15 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
               }
             }}
             onFocus={() => {
-              onFocus && onFocus();
-              focusableRef?.current?.focus();
+              if (!isDisabled) {
+                onFocus && onFocus();
+                focusableRef?.current?.focus();
+              }
             }}
             onRemove={onRemove}
             onSubmit={onSubmit}
             placeholder={placeholder}
-            ref={inputRefF}
+            ref={inputRef}
             value={valueControlled}
           />
 

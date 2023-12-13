@@ -19,6 +19,7 @@ export type FormContainerPropsModel<TType, TResult = void> = UseFormParamsModel<
     bottomElement?(params: Pick<ElementStatePropsModel, 'elementState'>): ReactNode;
     cancelLabel?: TranslatableTextModel;
     fields?: Array<FormFieldsModel<TType>>;
+    isAutoFocus?: boolean;
     isButton?: boolean;
     submitLabel?: TranslatableTextModel;
     topElement?(params: Pick<ElementStatePropsModel, 'elementState'>): ReactNode;

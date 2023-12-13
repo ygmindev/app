@@ -8,24 +8,21 @@ import { type TimezoneFieldPropsModel } from '#lib-frontend/locale/components/Ti
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { timezones } from '#lib-frontend/locale/utils/timezones/timezones';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { timezoneFormat } from '#lib-shared/data/utils/timezoneFormat/timezoneFormat';
 
 export const TimezoneField: LFCModel<TimezoneFieldPropsModel> = ({
   defaultValue,
   onChange,
-  testID,
   value,
   ...props
 }) => {
   const { t } = useTranslation();
-  const { styles } = useStyles({ props });
+  const timezone = useStore((state) => state.locale.timezone);
   const { valueControlled, valueControlledSet } = useValueControlled({
     defaultValue,
     onChange,
     value,
   });
-  const timezone = useStore((state) => state.locale.timezone);
 
   useAsync(async () => {
     timezone && valueControlledSet(timezone.name);
@@ -47,8 +44,6 @@ export const TimezoneField: LFCModel<TimezoneFieldPropsModel> = ({
       label={t('locale:timezone')}
       onChange={valueControlledSet}
       options={options}
-      style={styles}
-      testID={testID}
       value={valueControlled}
     />
   );

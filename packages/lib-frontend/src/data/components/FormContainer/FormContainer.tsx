@@ -68,6 +68,7 @@ const FormContainerF = forwardRef(
       elementState,
       fields,
       initialValues,
+      isAutoFocus = true,
       isBlocking,
       isButton = true,
       isFullHeight,
@@ -143,14 +144,15 @@ const FormContainerF = forwardRef(
     const isDisabled =
       elementStateF === ELEMENT_STATE.DISABLED || elementStateF === ELEMENT_STATE.LOADING;
 
-    const getField = <TKey extends StringKeyModel<TType>>({
-      element,
-      id,
-    }: FormFieldModel<TType, TKey>): FormFieldModel<TType, TKey> => ({
+    const getField = <TKey extends StringKeyModel<TType>>(
+      { element, id }: FormFieldModel<TType, TKey>,
+      isFirst?: boolean,
+    ): FormFieldModel<TType, TKey> => ({
       element: cloneElement(element, {
         defaultValue: initialValues ? initialValues[id] : undefined,
         elementState: elementStateF ?? element.props.elementState,
         error: errors ? errors[id] : undefined,
+        isAutoFocus: isAutoFocus && isFirst,
         key: id,
         onChange: (v) => handleChange(id)(v),
         onSubmit: handleSubmitF,
@@ -161,8 +163,8 @@ const FormContainerF = forwardRef(
       id,
     });
 
-    const getRow = (row: FormRowModel<TType>): ReactElement => {
-      const fieldsF = map(row.fields, getField);
+    const getRow = (row: FormRowModel<TType>, isFirst?: boolean): ReactElement => {
+      const fieldsF = map(row.fields, (field, j) => getField(field, isFirst && j === 0));
       return row.isGrouped ? (
         <FieldGroup
           fields={fieldsF}
@@ -178,7 +180,7 @@ const FormContainerF = forwardRef(
       );
     };
 
-    const getTile = (tile: FormTileModel<TType>): ReactElement => (
+    const getTile = (tile: FormTileModel<TType>, isFirst?: boolean): ReactElement => (
       <Accordion
         border
         defaultValue={ELEMENT_STATE.ACTIVE}
@@ -188,26 +190,28 @@ const FormContainerF = forwardRef(
         <Wrapper
           p
           s>
-          {map(tile.fields, (field) =>
-            (field as FormRowModel<TType>).fields
-              ? getRow(field as FormRowModel<TType>)
-              : getField(field as FormFieldModel<TType>).element,
-          )}
+          {map(tile.fields, (field, j) => {
+            const isFirstF = isFirst && j === 0;
+            return (field as FormRowModel<TType>).fields
+              ? getRow(field as FormRowModel<TType>, isFirstF)
+              : getField(field as FormFieldModel<TType>, isFirstF).element;
+          })}
         </Wrapper>
       </Accordion>
     );
 
     const getFields = (): ReactNode =>
-      fields?.map((field) => {
+      fields?.map((field, i) => {
+        const isFirst = i === 0;
         const tile = field as FormTileModel<TType>;
         if (tile.fields && tile.title) {
-          return getTile(tile);
+          return getTile(tile, isFirst);
         }
         const row = field as FormRowModel<TType>;
         if (row.fields) {
-          return getRow(row);
+          return getRow(row, isFirst);
         }
-        return getField(field as FormFieldModel<TType>).element;
+        return getField(field as FormFieldModel<TType>, isFirst).element;
       });
 
     return (

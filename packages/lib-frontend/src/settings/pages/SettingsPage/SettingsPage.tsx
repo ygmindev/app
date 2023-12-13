@@ -8,7 +8,9 @@ import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLa
 export const SettingsPage: LFCModel<SettingsPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   return (
-    <MainLayout {...wrapperProps}>
+    <MainLayout
+      {...wrapperProps}
+      p>
       {SETTINGS_GROUPS.map(({ id, routes, title }) => (
         <RouteList
           key={id}

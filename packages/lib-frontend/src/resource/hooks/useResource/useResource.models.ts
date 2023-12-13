@@ -11,7 +11,7 @@ export type UseResourceParamsModel<
   TType,
   TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
-> = RootInputModel &
+> = RootInputModel<TRoot> &
   ResourceNameParamsModel<TRoot> &
   ResourceServiceDecoratorModel<TType, TForm, TRoot> &
   ResourceParamsModel<TType, TRoot>;

@@ -127,6 +127,7 @@ export const DropdownField = forwardRef(
             width={width}
           />
         )}
+        elementState={elementState}
         isFullWidth
         onChange={valueControlledSet}
         options={result}

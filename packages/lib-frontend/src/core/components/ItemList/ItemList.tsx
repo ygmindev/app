@@ -12,7 +12,7 @@ import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLa
 
 export const ItemList: LFCModel<ItemListPropsModel> = ({
   emptyString = ({ t }) => t('core:nothingToShow'),
-  isSearchable = true,
+  isSearchable,
   items,
   title,
   ...props

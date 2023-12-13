@@ -103,13 +103,6 @@ export const SelectField = forwardRef(
                     onPress={handleChange(id)}
                     p={THEME_SIZE.SMALL}
                     round>
-                    {icon && (
-                      <Icon
-                        color={THEME_COLOR.PRIMARY}
-                        icon={icon}
-                      />
-                    )}
-
                     <Circle
                       backgroundColor={isValue ? THEME_COLOR.PRIMARY : undefined}
                       border
@@ -134,6 +127,13 @@ export const SelectField = forwardRef(
                         />
                       )}
                     </Circle>
+
+                    {icon && (
+                      <Icon
+                        color={THEME_COLOR.PRIMARY}
+                        icon={icon}
+                      />
+                    )}
 
                     <TranslatableText>{label}</TranslatableText>
                   </Wrapper>

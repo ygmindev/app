@@ -27,17 +27,18 @@ import { VirtualizedList } from '#lib-frontend/core/components/VirtualizedList/V
 import { type VirtualizedListRefModel } from '#lib-frontend/core/components/VirtualizedList/VirtualizedList.models';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type RSFCModel } from '#lib-frontend/core/core.models';
+import { type RLFCModel } from '#lib-frontend/core/core.models';
 import { useIsMobile } from '#lib-frontend/core/hooks/useIsMobile/useIsMobile';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { FLEX_ALIGN } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 
-export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
+export const Menu: RLFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
   (
     {
       anchor,
       direction,
+      elementState,
       isFullWidth,
       onChange,
       options,
@@ -90,12 +91,15 @@ export const Menu: RSFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
       handleToggle(false);
     };
 
+    const isDisabled = elementState === ELEMENT_STATE.DISABLED;
     let anchorF: ReactElement<PressablePropsModel> = anchor(isOpen);
     const { onPress } = anchorF.props;
     anchorF = cloneElement(anchorF, {
       onPress: async () => {
-        onPress && (await onPress());
-        handleToggle(!isOpen);
+        if (!isDisabled) {
+          onPress && (await onPress());
+          handleToggle(!isOpen);
+        }
       },
     });
 

@@ -12,7 +12,7 @@ import { type VendorModel } from '#lib-shared/admin/resources/Vendor/Vendor.mode
 
 export const UtilityTable: LFCModel<UtilityTablePropsModel> = ({ root, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const service = useUtilityResource();
+  const service = useUtilityResource({ root });
   return (
     <ResourceTable<UtilityModel, UtilityFormModel, VendorModel>
       {...wrapperProps}

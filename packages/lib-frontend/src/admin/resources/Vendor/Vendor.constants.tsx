@@ -2,6 +2,8 @@ import { UtilityTable } from '#lib-frontend/admin/containers/UtilityTable/Utilit
 import { Logo } from '#lib-frontend/app/components/Logo/Logo';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
 import { ModalButton } from '#lib-frontend/core/components/ModalButton/ModalButton';
+import { Text } from '#lib-frontend/core/components/Text/Text';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type ResourceParamsModel } from '#lib-frontend/resource/resource.models';
 import { UTILITY_RESOURCE_NAME } from '#lib-shared/admin/resources/Utility/Utility.constants';
 import { VENDOR_RESOURCE_NAME } from '#lib-shared/admin/resources/Vendor/Vendor.constants';
@@ -17,16 +19,22 @@ export const VENDOR_RESOURCE_PARAMS = {
     },
     { id: 'name' },
     {
-      fields: [{ id: '_id' }],
+      fields: [{ id: '_id' }, { id: 'name' }],
       id: UTILITY_RESOURCE_NAME,
-      renderer: ({ value }) => (
-        <ModalButton
-          element={() => <UtilityTable />}
-          icon="open"
-          iconText={({ t }) => t('core:open')}
-          type={BUTTON_TYPE.INVISIBLE}
-        />
+      renderer: ({ row, value }) => (
+        <Wrapper isRowAlign>
+          <ModalButton
+            element={() => <UtilityTable root={row._id} />}
+            icon="open"
+            iconText={({ t }) => t('core:open')}
+            title={UTILITY_RESOURCE_NAME}
+            type={BUTTON_TYPE.INVISIBLE}
+          />
+
+          {value?.map(({ _id, name }) => <Text key={_id}>{name}</Text>)}
+        </Wrapper>
       ),
+      width: 220,
     },
   ],
   name: VENDOR_RESOURCE_NAME,

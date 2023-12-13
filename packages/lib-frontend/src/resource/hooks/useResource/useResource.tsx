@@ -120,6 +120,7 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
     >['fields'],
     method: RESOURCE_METHOD_TYPE.UPDATE,
     name,
+    root,
   });
 
   const { query: remove } = useResourceMethod<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm, TRoot>({
@@ -136,6 +137,7 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
     >['fields'],
     method: RESOURCE_METHOD_TYPE.REMOVE,
     name,
+    root,
   });
 
   const { query: getConnection } = useResourceMethod<
@@ -157,6 +159,7 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
     >['fields'],
     method: RESOURCE_METHOD_TYPE.GET_CONNECTION,
     name,
+    root,
   });
 
   return {

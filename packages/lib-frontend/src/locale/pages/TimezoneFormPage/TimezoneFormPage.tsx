@@ -1,5 +1,5 @@
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { SwitchField } from '#lib-frontend/data/components/SwitchField/SwitchField';
 import { TimezoneField } from '#lib-frontend/locale/components/TimezoneField/TimezoneField';
@@ -7,18 +7,17 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { type TimezoneFormPagePropsModel } from '#lib-frontend/locale/pages/TimezoneFormPage/TimezoneFormPage.models';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
-export const TimezoneFormPage: SFCModel<TimezoneFormPagePropsModel> = ({ testID, ...props }) => {
+export const TimezoneFormPage: LFCModel<TimezoneFormPagePropsModel> = ({ ...props }) => {
   const { t } = useTranslation();
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const actions = useActions();
   const isTimezoneAutomatic = useStore((state) => state.locale.isTimezoneAutomatic);
-
   return (
     <MainLayout
-      style={styles}
-      testID={testID}>
+      {...wrapperProps}
+      p>
       <SwitchField
         label={t('settings:setAutomatically')}
         onChange={(value) => actions?.locale.isTimezoneAutomaticSet(value)}

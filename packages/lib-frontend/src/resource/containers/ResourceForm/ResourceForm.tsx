@@ -19,7 +19,9 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
   LFCPropsModel<ResourceFormPropsModel<TType, TForm, TRoot>>
 > => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const [rootValue, rootValueSet] = useState<TRoot extends undefined ? never : string>();
+  const [rootValue, rootValueSet] = useState<
+    (TRoot extends undefined ? never : string) | undefined
+  >();
   return (
     <FormContainer
       {...wrapperProps}
