@@ -21,7 +21,6 @@ import { ACCOUNT } from '#lib-shared/user/user.constants';
 export const userRoutes: Array<RouteModel> = [
   getRouteList({
     element: <AccountPage />,
-    header: { previous: '/' },
     isProtectable: true,
     pathname: ACCOUNT,
     routes: [

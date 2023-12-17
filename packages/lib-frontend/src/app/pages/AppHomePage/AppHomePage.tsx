@@ -37,7 +37,7 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
         {({ data }) => (
           <ItemList
             items={data?.result?.map(({ _id, name, types }) => ({
-              id: _id,
+              id: _id ?? '',
             }))}
             title={t('group:group_plural', { value: currentUser?.email })}>
             {data?.result?.map(({ _id, name, types }) => (

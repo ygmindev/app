@@ -3,6 +3,6 @@ import { type RouteModel } from '#lib-frontend/route/route.models';
 
 export type RouteListPropsModel = {
   root?: string | boolean | number;
-  routes?: Array<RouteModel>;
+  routes?: Array<RouteModel & { description?: TranslatableTextModel }>;
   title?: TranslatableTextModel;
 };

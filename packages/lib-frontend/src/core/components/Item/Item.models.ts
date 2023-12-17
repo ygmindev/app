@@ -8,6 +8,7 @@ import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 export type ItemPropsModel = ElementStatePropsModel &
   WithIconPropsModel &
   Pick<TextPropsModel, 'color' | 'type'> & {
+    description?: TranslatableTextModel;
     image?: string;
     rightElement?: ReactElement;
     title?: TranslatableTextModel;

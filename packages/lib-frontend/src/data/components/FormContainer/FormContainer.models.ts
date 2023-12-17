@@ -25,7 +25,7 @@ export type FormContainerPropsModel<TType, TResult = void> = UseFormParamsModel<
     topElement?(params: Pick<ElementStatePropsModel, 'elementState'>): ReactNode;
   };
 
-export type FormTileModel<TType> = WithIdModel<StringKeyModel<TType>> & {
+export type FormTileModel<TType> = WithIdModel & {
   fields?: Array<
     | FormRowModel<TType>
     | { [TKey in StringKeyModel<TType>]: FormFieldModel<TType, TKey> }[StringKeyModel<TType>]
@@ -33,7 +33,7 @@ export type FormTileModel<TType> = WithIdModel<StringKeyModel<TType>> & {
   title?: TranslatableTextModel;
 };
 
-export type FormRowModel<TType> = WithIdModel<StringKeyModel<TType>> & {
+export type FormRowModel<TType> = WithIdModel & {
   fields?: Array<
     { [TKey in StringKeyModel<TType>]: FormFieldModel<TType, TKey> }[StringKeyModel<TType>]
   >;

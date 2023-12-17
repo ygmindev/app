@@ -11,6 +11,7 @@ import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 
 export const Item: LFCModel<ItemPropsModel> = ({
   color,
+  description,
   elementState,
   icon,
   image,
@@ -46,17 +47,29 @@ export const Item: LFCModel<ItemPropsModel> = ({
         </Skeleton>
       )}
 
-      {title && (
-        <Skeleton
-          elementState={elementState}
-          flex>
-          <TranslatableText
-            color={color}
-            type={type}>
-            {title}
-          </TranslatableText>
-        </Skeleton>
-      )}
+      <Wrapper
+        flex
+        s={THEME_SIZE.SMALL}>
+        {title && (
+          <Skeleton
+            elementState={elementState}
+            flex>
+            <TranslatableText
+              color={color}
+              type={type}>
+              {title}
+            </TranslatableText>
+          </Skeleton>
+        )}
+
+        {description && (
+          <Skeleton
+            elementState={elementState}
+            flex>
+            <TranslatableText color={color}>{description}</TranslatableText>
+          </Skeleton>
+        )}
+      </Wrapper>
 
       {rightElement && <Skeleton elementState={elementState}>{rightElement}</Skeleton>}
     </Wrapper>

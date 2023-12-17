@@ -2,7 +2,7 @@ import { SkeletonGroup } from '#lib-frontend/animation/components/SkeletonGroup/
 import { type ItemListPropsModel } from '#lib-frontend/core/components/ItemList/ItemList.models';
 import { PressableItem } from '#lib-frontend/core/components/PressableItem/PressableItem';
 import { Tile } from '#lib-frontend/core/components/Tile/Tile';
-import { DIRECTION } from '#lib-frontend/core/core.constants';
+import { DIRECTION, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -12,7 +12,7 @@ import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLa
 
 export const ItemList: LFCModel<ItemListPropsModel> = ({
   emptyString = ({ t }) => t('core:nothingToShow'),
-  isSearchable,
+  isSearchable = true,
   items,
   title,
   ...props
@@ -23,7 +23,6 @@ export const ItemList: LFCModel<ItemListPropsModel> = ({
     keys: ['title', 'id'],
     list: items?.map((item) => ({ ...item, title: item.title ? t(item.title) : item.id })) ?? [],
   });
-
   return (
     <MainLayout
       {...wrapperProps}
@@ -31,7 +30,7 @@ export const ItemList: LFCModel<ItemListPropsModel> = ({
       <SkeletonGroup>
         <Tile
           rightElement={
-            isSearchable
+            isSearchable && items?.length
               ? () => (
                   <SearchField
                     flex
@@ -48,8 +47,9 @@ export const ItemList: LFCModel<ItemListPropsModel> = ({
               border={DIRECTION.TOP}
               key={id}
             />
-          )) ?? (
+          )) || (
             <PressableItem
+              elementState={ELEMENT_STATE.DISABLED}
               icon="empty"
               title={emptyString}
             />

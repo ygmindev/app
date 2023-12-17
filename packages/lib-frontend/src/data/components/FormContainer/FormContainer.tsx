@@ -107,7 +107,7 @@ const FormContainerF = forwardRef(
             if (fieldsF) {
               return { ...result, ...getValues(data, fieldsF) };
             }
-            const value = data[field.id];
+            const value = data[field.id as StringKeyModel<TType>];
             const beforeSubmit = fieldRefs.current[field.id]?.beforeSubmit;
             return isNil(value)
               ? result

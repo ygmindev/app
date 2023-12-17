@@ -1,10 +1,10 @@
 import { useSignInResource } from '#lib-frontend/auth/hooks/useSignInResource/useSignInResource';
-import { type SFCModel } from '#lib-frontend/core/core.models';
+import { type LFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { TextField } from '#lib-frontend/data/components/TextField/TextField';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
 import {
   type NameFormModel,
@@ -13,9 +13,9 @@ import {
 import { PERSONAL } from '#lib-frontend/user/user.constants';
 import { ACCOUNT } from '#lib-shared/user/user.constants';
 
-export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...props }) => {
+export const NameFormPage: LFCModel<NameFormPagePropsModel> = ({ ...props }) => {
   const { t } = useTranslation();
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const currentUser = useCurrentUser();
   const { replace } = useRouter();
   const { userUpdate } = useSignInResource();
@@ -26,32 +26,37 @@ export const NameFormPage: SFCModel<NameFormPagePropsModel> = ({ testID, ...prop
 
   return currentUser ? (
     <FormContainer
+      {...wrapperProps}
       fields={[
         {
-          element: (
-            <TextField
-              isAutoFocus
-              label={t('user:first')}
-            />
-          ),
-          id: 'first',
-        },
-        {
-          element: <TextField label={t('user:last')} />,
-          id: 'last',
+          fields: [
+            {
+              element: (
+                <TextField
+                  isAutoFocus
+                  label={t('user:first')}
+                />
+              ),
+              id: 'first',
+            },
+            {
+              element: <TextField label={t('user:last')} />,
+              id: 'last',
+            },
+          ],
+          id: 'name',
         },
       ]}
       initialValues={{ first: currentUser.first, last: currentUser.last }}
       onCancel={handleBack}
       onSubmit={async ({ first, last }: NameFormModel) => {
         await userUpdate({
-          filter: [{ field: '_id', value: currentUser._id }],
+          filter: [{ field: '_id', stringValue: currentUser._id }],
           update: { first, last },
         });
         handleBack();
       }}
-      style={styles}
-      testID={testID}
+      p
     />
   ) : null;
 };

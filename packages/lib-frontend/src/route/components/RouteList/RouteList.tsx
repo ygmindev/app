@@ -10,7 +10,8 @@ export const RouteList: LFCModel<RouteListPropsModel> = ({ root, routes, title, 
   return (
     <ItemList
       {...wrapperProps}
-      items={routes?.map(({ icon, pathname, title }) => ({
+      items={routes?.map(({ description, icon, pathname, title }) => ({
+        description,
         icon,
         id: pathname,
         onPress: () => push({ pathname, root }),

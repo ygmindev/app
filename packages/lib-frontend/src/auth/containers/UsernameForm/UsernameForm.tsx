@@ -21,6 +21,7 @@ import { TextField } from '#lib-frontend/data/components/TextField/TextField';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { CountryField } from '#lib-frontend/locale/components/CountryField/CountryField';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { PhoneField } from '#lib-frontend/user/components/PhoneField/PhoneField';
 import { AUTH, SIGN_IN_METHOD } from '#lib-shared/auth/auth.constants';
@@ -49,6 +50,7 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
     onChange: onMethodChange,
     value: method,
   });
+  const currentUser = useStore((state) => state.user.currentUser);
 
   const checkExists = mode === FORM_MODE.UPDATE;
 
@@ -135,6 +137,15 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
           : undefined
       }
       fields={fields}
+      initialValues={
+        currentUser
+          ? {
+              callingCode: currentUser.callingCode,
+              email: currentUser.email,
+              phone: currentUser.phone,
+            }
+          : undefined
+      }
       isVerticalCenter
       onComplete={onComplete}
       onSubmit={handleSubmit}
