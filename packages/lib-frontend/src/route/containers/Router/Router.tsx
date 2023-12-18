@@ -24,17 +24,13 @@ const getNavigatableRoute = (route: RouteModel): RouteModel => {
     case ROUTE_NAVIGATION.TRANSITION: {
       const { element, header, routes, title, ...routeF } = route;
       const headerF = merge([header, { previous: ROUTE_DIRECTION.UP }]);
-      return {
+      const elementF =
+        element ??
+        (route.navigation === ROUTE_NAVIGATION.LIST ? <RouteList route={route} /> : undefined);
+      const routeFF = {
         ...routeF,
         routes: [
-          {
-            element:
-              route.navigation === ROUTE_NAVIGATION.LIST ? <RouteList route={route} /> : element,
-            header: headerF,
-            isNavigatable: false,
-            pathname: '/',
-            title,
-          },
+          { element: elementF, header: headerF, isNavigatable: false, pathname: '/', title },
           ...(routes?.map((child) =>
             merge([child, { header: headerF, title: child.title ?? child.pathname }]),
           ) ?? []),
@@ -42,6 +38,8 @@ const getNavigatableRoute = (route: RouteModel): RouteModel => {
         title,
         transition: ROUTE_TRANSITION.SLIDE,
       };
+
+      return routeFF;
     }
     default:
       return route;
