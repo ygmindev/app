@@ -3,7 +3,11 @@ import { type ReactElement } from 'react';
 import { type WithIconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
 import { type ChildrenPropsModel } from '#lib-frontend/core/core.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
-import { type ROUTE_DIRECTION, type ROUTE_TRANSITION } from '#lib-frontend/route/route.constants';
+import {
+  type ROUTE_DIRECTION,
+  type ROUTE_NAVIGATION,
+  type ROUTE_TRANSITION,
+} from '#lib-frontend/route/route.constants';
 import { type RouteStateModel } from '#lib-frontend/route/stores/routeStore/routeStore.models';
 import { type LayoutStylePropsModel } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
@@ -12,6 +16,7 @@ export type RouteIdParamsModel = WithIdModel;
 
 export type RouteModel<TProps extends ChildrenPropsModel = ChildrenPropsModel> =
   WithIconPropsModel & {
+    description?: TranslatableTextModel;
     element?: ReactElement<TProps>;
     fullpath?: string;
     header?: { previous?: string };
@@ -20,6 +25,7 @@ export type RouteModel<TProps extends ChildrenPropsModel = ChildrenPropsModel> =
     isNavigatable?: boolean;
     isProtectable?: boolean;
     layoutProps?: LayoutStylePropsModel;
+    navigation?: RouteNavigationModel;
     navigator?: ReactElement<NavigatorPropsModel>;
     parent?: string;
     pathname: string;
@@ -62,6 +68,6 @@ export type RouteTransitionModel = `${ROUTE_TRANSITION}`;
 
 export type RouteDirectionModel = `${ROUTE_DIRECTION}`;
 
-export type NavigatorPropsModel = {
-  routes?: Array<RouteModel>;
-};
+export type RouteNavigationModel = `${ROUTE_NAVIGATION}`;
+
+export type NavigatorPropsModel = Pick<RouteModel, 'routes'>;

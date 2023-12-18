@@ -1,4 +1,4 @@
-import ssr from 'vike/plugin';
+import vike from 'vike/plugin';
 import { type WatchOptions } from 'vite';
 
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
@@ -15,7 +15,7 @@ export const _web = ({ bundleConfig, isSsr, publicPath }: WebConfigModel): _WebC
     [
       {
         plugins: filterNil([
-          isSsr && ssr({ includeAssetsImportedByServer: true, prerender: { partial: true } }),
+          isSsr && vike({ includeAssetsImportedByServer: true, prerender: { partial: true } }),
         ]),
 
         publicDir: toRelative({ from: fromWorking(), to: fromStatic(publicPath) }),

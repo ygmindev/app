@@ -28,10 +28,11 @@ export const Route: LFCModel<RoutePropsModel> = ({ depth, route, ...props }) => 
   const { wrapperProps } = useLayoutStyles({ props });
   const { isActive } = useRouter();
   const { track } = useTracking();
-  const isBack = useStore((state) => state.route.isBack);
+
   const isLeaf = !route.routes;
   const isActiveF = isActive({ pathname: route.fullpath });
   const isActiveLeaf = isLeaf && isActive({ isExact: true, pathname: route.fullpath });
+  const isBack = useStore((state) => state.route.isBack);
 
   useAsync(async () => {
     isActiveLeaf &&
@@ -86,19 +87,15 @@ export const Route: LFCModel<RoutePropsModel> = ({ depth, route, ...props }) => 
       isAbsoluteFill
       mTop={route.isFullScreen ? theme.layout.header.height : undefined}
       zIndex>
-      {route.routes &&
-        route.navigator &&
-        cloneElement(route.navigator, {
-          key: 'navigator',
-          routes: route.routes,
-        })}
+      {route.navigator &&
+        route.routes &&
+        cloneElement(route.navigator, { key: 'navigator', routes: route.routes })}
 
       {element}
     </Wrapper>
   );
 
   element = route.isFullScreen ? <Portal>{element}</Portal> : element;
-
   return (
     <>
       {isActiveF && route.header && (

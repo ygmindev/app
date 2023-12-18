@@ -11,8 +11,8 @@ import { FundingInProgressPage } from '#lib-frontend/issuer/pages/FundingInProgr
 import { FundingPage } from '#lib-frontend/issuer/pages/FundingPage/FundingPage';
 import { IssuerPage } from '#lib-frontend/issuer/pages/IssuerPage/IssuerPage';
 import { TabNavigator } from '#lib-frontend/route/components/TabNavigator/TabNavigator';
+import { ROUTE_NAVIGATION } from '#lib-frontend/route/route.constants';
 import { type RouteModel } from '#lib-frontend/route/route.models';
-import { getRouteList } from '#lib-frontend/route/utils/getRouteList/getRouteList';
 import { SETTINGS } from '#lib-frontend/settings/settings.constants';
 import { GROUP_TYPE } from '#lib-shared/group/resources/Group/Group.constants';
 
@@ -35,9 +35,10 @@ export const issuerRoutes: Array<RouteModel> = [
         navigator: <TabNavigator type={TABS_TYPE.CONTAINED} />,
         pathname: FUNDING,
         routes: [
-          getRouteList({
+          {
             element: <FundingInProgressPage />,
             icon: 'dotsCircle',
+            navigation: ROUTE_NAVIGATION.TRANSITION,
             pathname: IN_PROGRESS,
             routes: [
               {
@@ -54,7 +55,7 @@ export const issuerRoutes: Array<RouteModel> = [
               },
             ],
             title: ({ t }) => t('core:inProgress'),
-          }),
+          },
           {
             icon: 'checkCircle',
             pathname: COMPLETED,
@@ -83,7 +84,7 @@ export const issuerRoutes: Array<RouteModel> = [
         element: <GroupFormPage />,
         icon: 'preferences',
         pathname: SETTINGS,
-        title: ({ t }) => t('settings:preferences'),
+        title: ({ t }) => t('settings:settings'),
       },
     ],
     title: ({ t }) => t('funding:issuer'),

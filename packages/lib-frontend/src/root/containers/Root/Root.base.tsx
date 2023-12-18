@@ -40,6 +40,7 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
       <AsyncBoundary errorMode={ERROR_MODE.NOTIFICATION} />,
       <QueryProvider value={context?.query} />,
       <AuthProvider />,
+      <AsyncBoundary />,
       <StyleProvider />,
       <LocaleProvider value={context?.locale} />,
       <AppProvider />,

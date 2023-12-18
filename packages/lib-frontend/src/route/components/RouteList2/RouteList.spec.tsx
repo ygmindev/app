@@ -1,10 +1,10 @@
+import { RouteList } from '#lib-frontend/route/components/RouteList2/RouteList';
+import { type RouteListPropsModel } from '#lib-frontend/route/components/RouteList2/RouteList.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
-import { AccountPage } from '#lib-frontend/user/pages/AccountPage/AccountPage';
-import { type AccountPagePropsModel } from '#lib-frontend/user/pages/AccountPage/AccountPage.models';
 
-const { Component, displayName, testID } = withTestComponent<AccountPagePropsModel>({
-  target: AccountPage,
+const { Component, displayName, testID } = withTestComponent<RouteListPropsModel>({
+  target: RouteList,
 });
 
 describe(displayName, () => {

@@ -4,22 +4,60 @@ import { useMemo } from 'react';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { Route } from '#lib-frontend/route/components/Route/Route';
+import { RouteList } from '#lib-frontend/route/components/RouteList/RouteList';
 import { type RouterPropsModel } from '#lib-frontend/route/containers/Router/Router.models';
 import { Routes } from '#lib-frontend/route/containers/Routes/Routes';
+import {
+  ROUTE_DIRECTION,
+  ROUTE_NAVIGATION,
+  ROUTE_TRANSITION,
+} from '#lib-frontend/route/route.constants';
 import { type RouteModel } from '#lib-frontend/route/route.models';
 import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { merge } from '#lib-shared/core/utils/merge/merge';
 
-const getRoute = ({ pathname = '/', ...route }: RouteModel, depth = 0): RouteModel => {
-  const pathnameF = trimPathname(trimEnd(pathname, '/*'));
+const getNavigatableRoute = (route: RouteModel): RouteModel => {
+  switch (route.navigation) {
+    case ROUTE_NAVIGATION.LIST:
+    case ROUTE_NAVIGATION.TRANSITION: {
+      const { element, header, routes, title, ...routeF } = route;
+      const headerF = merge([header, { previous: ROUTE_DIRECTION.UP }]);
+      return {
+        ...routeF,
+        routes: [
+          {
+            element:
+              route.navigation === ROUTE_NAVIGATION.LIST ? <RouteList route={route} /> : element,
+            header: headerF,
+            isNavigatable: false,
+            pathname: '/',
+            title,
+          },
+          ...(routes?.map((child) =>
+            merge([child, { header: headerF, title: child.title ?? child.pathname }]),
+          ) ?? []),
+        ],
+        title,
+        transition: ROUTE_TRANSITION.SLIDE,
+      };
+    }
+    default:
+      return route;
+  }
+};
+
+const getRoute = (route: RouteModel, depth = 0): RouteModel => {
+  let routeF = getNavigatableRoute(route);
+  const pathnameF = trimPathname(trimEnd(routeF.pathname, '/*'));
   const depthF = pathnameF === '/' ? depth : depth + 1;
-  const parentF = trimPathname(`${route.parent ?? ''}${pathnameF}`);
-  const routeF: RouteModel = {
-    ...route,
-    fullpath: trimPathname(`${route.parent ?? ''}/${pathnameF}`),
-    pathname: trimPathname(route.routes ? `${pathnameF}/*` : pathnameF),
-    routes: route.routes?.reduce((result, child) => {
+  const parentF = trimPathname(`${routeF.parent ?? ''}${pathnameF}`);
+  routeF = {
+    ...routeF,
+    fullpath: trimPathname(`${routeF.parent ?? ''}/${pathnameF}`),
+    pathname: trimPathname(routeF.routes ? `${pathnameF}/*` : pathnameF),
+    routes: routeF.routes?.reduce((result, child) => {
       return [...result, getRoute({ ...child, parent: parentF }, depthF)];
     }, [] as Array<RouteModel>),
   };

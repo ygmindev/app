@@ -1,4 +1,4 @@
-import { range } from 'lodash';
+import range from 'lodash/range';
 import { type ReactElement, useState } from 'react';
 
 import { FloatingFooter } from '#lib-frontend/app/components/FloatingFooter/FloatingFooter';

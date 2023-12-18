@@ -17,7 +17,7 @@ export const THEME_CONFIG = {
   animation: {
     effect: 150,
 
-    transition: 400,
+    transition: 250,
   },
 
   font: {

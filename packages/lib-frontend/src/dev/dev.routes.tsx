@@ -21,22 +21,3 @@ export const devRoutes: Array<RouteModel> = [
     transition: 'slide',
   },
 ];
-
-// import { DEV, SCRATCH_PAD } from '#lib-frontend/dev/dev.constants';
-// import { DevPage } from '#lib-frontend/dev/pages/DevPage/DevPage';
-// import { ScratchPadPage } from '#lib-frontend/dev/pages/ScratchPadPage/ScratchPadPage';
-// import { type RouteModel } from '#lib-frontend/route/route.models';
-// import { getRouteList } from '#lib-frontend/route/utils/getRouteList/getRouteList';
-
-// export const devRoutes: Array<RouteModel> = [
-//   getRouteList({
-//     element: <DevPage />,
-//     pathname: DEV,
-//     routes: [
-//       {
-//         element: <ScratchPadPage />,
-//         pathname: SCRATCH_PAD,
-//       },
-//     ],
-//   }),
-// ];

@@ -3,8 +3,8 @@ import { TABS_TYPE } from '#lib-frontend/core/components/Tabs/Tabs.constants';
 import { ANALYTICS } from '#lib-frontend/core/core.constants';
 import { FUNDING, QUOTE } from '#lib-frontend/funding/funding.constants';
 import { TabNavigator } from '#lib-frontend/route/components/TabNavigator/TabNavigator';
+import { ROUTE_NAVIGATION } from '#lib-frontend/route/route.constants';
 import { type RouteModel } from '#lib-frontend/route/route.models';
-import { getRouteList } from '#lib-frontend/route/utils/getRouteList/getRouteList';
 import { SETTINGS } from '#lib-frontend/settings/settings.constants';
 import { AnalyticsPage } from '#lib-frontend/underwriter/pages/AnalyticsPage/AnalyticsPage';
 import { FundingDetailPage } from '#lib-frontend/underwriter/pages/FundingDetailPage/FundingDetailPage';
@@ -25,13 +25,15 @@ export const underwriterRoutes: Array<RouteModel> = [
         pathname: ANALYTICS,
         title: ({ t }) => t('core:analytics'),
       },
-      getRouteList({
+      {
         element: <FundingPage />,
         icon: 'dollar',
+        navigation: ROUTE_NAVIGATION.TRANSITION,
         pathname: FUNDING,
         routes: [
-          getRouteList({
+          {
             element: <FundingDetailPage />,
+            navigation: ROUTE_NAVIGATION.TRANSITION,
             pathname: ':fundingid',
             prerender: false,
             routes: [
@@ -42,10 +44,10 @@ export const underwriterRoutes: Array<RouteModel> = [
               },
             ],
             title: ({ t }) => t('funding:fundingDetail'),
-          }),
+          },
         ],
         title: ({ t }) => t('funding:funding_plural'),
-      }),
+      },
       {
         element: <FundingPage />,
         icon: 'document',
@@ -63,7 +65,7 @@ export const underwriterRoutes: Array<RouteModel> = [
         element: <FundingPage />,
         icon: 'preferences',
         pathname: SETTINGS,
-        title: ({ t }) => t('settings:preferences'),
+        title: ({ t }) => t('settings:settings'),
       },
     ],
   },

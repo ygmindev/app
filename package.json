@@ -135,6 +135,7 @@
     "react-ssr-prepass": "^1.5.0",
     "react-streaming": "^0.3.14",
     "react-use": "^17.4.0",
+    "react-use-websocket": "^4.5.0",
     "recharts": "^2.7.3",
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",

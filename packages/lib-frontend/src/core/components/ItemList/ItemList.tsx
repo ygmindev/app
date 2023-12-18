@@ -12,7 +12,7 @@ import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLa
 
 export const ItemList: LFCModel<ItemListPropsModel> = ({
   emptyString = ({ t }) => t('core:nothingToShow'),
-  isSearchable = true,
+  isSearchable,
   items,
   title,
   ...props
@@ -24,23 +24,21 @@ export const ItemList: LFCModel<ItemListPropsModel> = ({
     list: items?.map((item) => ({ ...item, title: item.title ? t(item.title) : item.id })) ?? [],
   });
   return (
-    <MainLayout
-      {...wrapperProps}
-      isVerticalScrollable>
-      <SkeletonGroup>
-        <Tile
-          rightElement={
-            isSearchable && items?.length
-              ? () => (
-                  <SearchField
-                    flex
-                    onChange={search}
-                    value={query}
-                  />
-                )
-              : undefined
-          }
-          title={title}>
+    <MainLayout {...wrapperProps}>
+      <Tile
+        rightElement={
+          isSearchable && items?.length
+            ? () => (
+                <SearchField
+                  flex
+                  onChange={search}
+                  value={query}
+                />
+              )
+            : undefined
+        }
+        title={title}>
+        <SkeletonGroup>
           {result?.map(({ id, ...item }) => (
             <PressableItem
               {...item}
@@ -54,8 +52,8 @@ export const ItemList: LFCModel<ItemListPropsModel> = ({
               title={emptyString}
             />
           )}
-        </Tile>
-      </SkeletonGroup>
+        </SkeletonGroup>
+      </Tile>
     </MainLayout>
   );
 };
