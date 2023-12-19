@@ -31,7 +31,7 @@ const { _config, config } = defineConfig({
 
       modulePaths: [fromModules()],
 
-      publicPath: 'assets',
+      publicPath: fileConfig.publicPath,
 
       tsconfigPath: 'tsconfig.json',
 

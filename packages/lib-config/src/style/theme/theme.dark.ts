@@ -4,7 +4,7 @@ import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _theme } from '#lib-config/style/theme/_theme';
 import { config as configBase } from '#lib-config/style/theme/theme.base';
 import { THEME_COLOR_TONES } from '#lib-config/style/theme/theme.constants';
-import { THEME_COLOR, THEME_ROLE } from '#lib-frontend/style/style.constants';
+import { THEME_COLOR, THEME_COLOR_MORE, THEME_ROLE } from '#lib-frontend/style/style.constants';
 import { type ThemeColorModel, type ThemeRoleModel } from '#lib-frontend/style/style.models';
 import { palette } from '#lib-frontend/style/utils/palette/palette';
 
@@ -30,7 +30,7 @@ const { _config, config } = defineConfig({
         isDark: true,
 
         palette: {
-          surface: {
+          [THEME_COLOR_MORE.SURFACE]: {
             [THEME_ROLE.ACTIVE]: palette(COLOR_SURFACE_BASE, { lightness: LIGHTNESS_ACTIVE }),
             [THEME_ROLE.MAIN]: COLOR_SURFACE_BASE,
             [THEME_ROLE.CONTRAST]: COLOR_SURFACE_CONTRAST,

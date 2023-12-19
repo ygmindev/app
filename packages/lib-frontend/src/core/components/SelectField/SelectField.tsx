@@ -77,12 +77,12 @@ export const SelectField = forwardRef(
     return (
       <Wrapper
         {...wrapperProps}
-        s>
+        s={THEME_SIZE.SMALL}>
+        {label && <TranslatableText>{label}</TranslatableText>}
+
         <Wrapper
           isRowAlign={isHorizontal}
           s={THEME_SIZE.SMALL}>
-          {label && <TranslatableText isBold>{label}</TranslatableText>}
-
           {isMultiple && (
             <SwitchField
               label={t('core:selectAll')}

@@ -31,11 +31,11 @@ export const _server = async ({
   port,
   root,
 }: _ServerParamsModel): Promise<_ServerModel> => {
-  const { publicPath: publicDir } = webConfig();
+  const { publicPath } = webConfig();
   const app = fastify();
   await app.register(fastifyMiddie);
   await app.register(fastifyCompress);
-  await app.register(fastifyStatic, { prefix: `/${publicDir}/`, root: fromStatic(publicDir) });
+  await app.register(fastifyStatic, { prefix: `/${publicPath}/`, root: fromStatic(publicPath) });
   await app.register(fastifyCookie, {
     secret: process.env.SERVER_APP_SECRET,
   } as FastifyCookieOptions);

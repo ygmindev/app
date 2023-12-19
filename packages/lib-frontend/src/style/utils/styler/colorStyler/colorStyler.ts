@@ -12,11 +12,11 @@ export const colorStyler: StylerModel<ColorStylerParamsModel, TextStyleModel> = 
   { color, colorRole },
   theme,
 ) => {
-  const colorF =
-    theme.color.palette[
-      (color ?? (colorRole ? THEME_COLOR_MORE.SURFACE : color)) as
-        | ThemeColorModel
-        | ThemeColorMoreModel
-    ];
-  return cleanObject({ color: colorF ? colorF[colorRole ?? THEME_ROLE.MAIN] : color });
+  let colorF = color ?? THEME_COLOR_MORE.SURFACE;
+  const isSurface = (colorF as ThemeColorModel | ThemeColorMoreModel) === THEME_COLOR_MORE.SURFACE;
+  const palette = theme.color.palette[colorF as ThemeColorModel | ThemeColorMoreModel];
+  colorF = palette
+    ? palette[colorRole ?? (isSurface ? THEME_ROLE.CONTRAST : THEME_ROLE.MAIN)]
+    : colorF;
+  return cleanObject({ color: colorF });
 };

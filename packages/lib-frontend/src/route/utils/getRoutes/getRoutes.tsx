@@ -31,7 +31,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
         // TODO: fix after build
         // {
         //   element: <NotFoundPage />,
-        //   pathname: '*',
+        //   pathname: '/',
         // },
       ],
     },
