@@ -32,8 +32,8 @@ export type _ActionProviderPropsModel<
   TKeys extends Array<string>,
   TType extends Record<TKeys[number], object>,
   TParams extends Record<TKeys[number], object>,
-> = {
+> = StateProviderPropsModel<TKeys, TType, TParams> & {
   actions: {
     [TKey in TKeys[number]]: CaseReducerActions<SliceCaseReducers<TType[TKey]>, TKey>;
   };
-} & StateProviderPropsModel<TKeys, TType, TParams>;
+};

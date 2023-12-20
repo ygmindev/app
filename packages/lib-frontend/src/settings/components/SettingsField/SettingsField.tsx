@@ -8,8 +8,10 @@ import { SwitchField } from '#lib-frontend/data/components/SwitchField/SwitchFie
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type SettingsFieldPropsModel } from '#lib-frontend/settings/components/SettingsField/SettingsField.models';
 import { SETTINGS } from '#lib-frontend/settings/settings.constants';
+import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { type CallableModel } from '#lib-shared/core/core.models';
 import { getValue } from '#lib-shared/core/utils/getValue/getValue';
 
 export const SettingsField = <TType = string,>({
@@ -22,8 +24,15 @@ export const SettingsField = <TType = string,>({
 > => {
   const { t } = useTranslation([SETTINGS]);
   const { wrapperProps } = useLayoutStyles({ props });
-  const [isAutomatic, isAutomaticSet] = useState<boolean>();
+
+  const actions = useActions();
   const x = useStore((state) => getValue(state, id));
+  const [isAutomatic, isAutomaticSet] = useState<boolean>();
+
+  const isAutomaticSetF = (value: boolean): void => {
+    isAutomaticSet(value);
+    value && void (getValue(actions, `${id}Unset`) as CallableModel)();
+  };
   console.warn(`${id}: ${x as string}`);
 
   return (
@@ -37,7 +46,7 @@ export const SettingsField = <TType = string,>({
         s>
         <SwitchField
           label={t('settings:setAutomatically')}
-          onChange={isAutomaticSet}
+          onChange={isAutomaticSetF}
           value={isAutomatic}
         />
 

@@ -1,14 +1,14 @@
 import {
-  type _StorageModel,
-  type _StorageParamsModel,
-} from '#lib-frontend/state/utils/Storage/_Storage.models';
-import { type StorageModel } from '#lib-frontend/state/utils/Storage/Storage.models';
+  type StorageBaseParamsModel,
+  type StorageModel,
+} from '#lib-frontend/state/utils/Storage/Storage.models';
+import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import { debug } from '#lib-shared/logging/utils/logger/_logger';
 
-export class _Storage implements _StorageModel {
+export class StorageBase implements StorageModel {
   protected storages?: Array<StorageModel>;
 
-  constructor({ storages }: _StorageParamsModel) {
+  constructor({ storages }: StorageBaseParamsModel) {
     this.storages = storages;
   }
 
@@ -40,7 +40,7 @@ export class _Storage implements _StorageModel {
             await storage.removeItem(key);
             process.env.NODE_ENV === 'development' && debug('storage remove', key);
             break;
-          } catch {
+          } catch (e) {
             continue;
           }
         }
@@ -49,7 +49,7 @@ export class _Storage implements _StorageModel {
   }
 
   async setItem<TType extends string = string>(key: string, value: TType): Promise<void> {
-    if (this.storages) {
+    if (!isEmpty(value) && this.storages) {
       for (let i = 0; i < this.storages.length; ++i) {
         const storage = this.storages[i];
         if (storage) {

@@ -92,6 +92,8 @@ export class _Store<
     } = reduce(
       reducers,
       (result, reducer, name) => {
+        const storage = new Storage({ cookies });
+
         // TODO: better typing
         const reducerActions = reduce(
           reducer.initialState,
@@ -100,6 +102,10 @@ export class _Store<
             const kS = k as keyof TType[TKeys[number]];
             actionsResult[k as TKey] = (store, value) => {
               store.set(kS, value as never);
+            };
+            actionsResult[`${k}Unset` as TKey] = (store) => {
+              store.set(kS, reducer.initialState[kS] as never);
+              void storage.removeItem(k);
             };
             if (isArray(v)) {
               actionsResult[`${k}Add` as TKey] = (store, value) => {
@@ -162,7 +168,7 @@ export class _Store<
           ? {
               key: name,
               stateReconciler: isServer ? (_, original) => original : undefined,
-              storage: new Storage({ cookies }),
+              storage,
             }
           : undefined;
 

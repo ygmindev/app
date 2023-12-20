@@ -85,4 +85,4 @@ export type DeepKeyModel<TType, TDepth extends number = 10> = [TDepth] extends [
             : `${TKey}`;
         }[keyof RequiredModel<TType> & (string | number)];
 
-export type StringKeyModel<TType> = Extract<keyof TType, string>;
+export type StringKeyModel<TType> = Extract<keyof RequiredModel<TType>, string>;

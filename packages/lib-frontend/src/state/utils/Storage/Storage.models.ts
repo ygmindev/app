@@ -1,6 +1,13 @@
 import { type CookiesModel } from '#lib-frontend/state/state.models';
-import { type _StorageModel } from '#lib-frontend/state/utils/Storage/_Storage.models';
 
 export type StorageParamsModel = { cookies?: CookiesModel };
 
-export type StorageModel = _StorageModel;
+export type StorageBaseParamsModel = { storages?: Array<StorageModel> };
+
+export type StorageModel = {
+  getItem<TType extends string = string>(key: string): Promise<TType | null>;
+
+  removeItem(key: string): Promise<void>;
+
+  setItem<TType extends string = string>(key: string, value: TType): Promise<void>;
+};
