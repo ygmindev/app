@@ -22,15 +22,15 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
   ): Promise<void> => {
     if (!isLoading) {
       await sleep(100);
-      actions?.route.previousSet({ pathname: location.pathname });
+      actions?.route.previous({ pathname: location.pathname });
       if (isBack) {
-        actions?.route.isBackSet(true);
+        actions?.route.isBack(true);
         await sleep();
       }
       callback();
       if (isBack) {
         await sleep(theme.animation.transition);
-        actions?.route.isBackSet(false);
+        actions?.route.isBack(false);
       }
     }
   };

@@ -1,11 +1,9 @@
-import { BrightnessFormPage } from '#lib-frontend/style/pages/BrightnessFormPage/BrightnessFormPage';
-import { type BrightnessFormPagePropsModel } from '#lib-frontend/style/pages/BrightnessFormPage/BrightnessFormPage.models';
+import { SettingsField } from '#lib-frontend/settings/components/SettingsField/SettingsField';
+import { type SettingsFieldPropsModel } from '#lib-frontend/settings/components/SettingsField/SettingsField.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<BrightnessFormPagePropsModel>({
-  target: BrightnessFormPage,
-});
+const { Component, displayName, testID } = withTestComponent<SettingsFieldPropsModel>({ target: SettingsField });
 
 describe(displayName, () => {
   test('works', async () => {

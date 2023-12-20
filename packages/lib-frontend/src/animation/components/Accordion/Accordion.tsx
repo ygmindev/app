@@ -20,7 +20,6 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
   children,
   color,
   defaultValue,
-  elementState,
   icon,
   image,
   onChange,
@@ -43,10 +42,13 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
     );
 
   return (
-    <Wrapper {...wrapperProps}>
+    <Wrapper
+      {...wrapperProps}
+      border
+      round>
       <PressableItem
         color={color}
-        elementState={elementState}
+        elementState={valueControlled}
         icon={icon}
         image={image}
         mHorizontal

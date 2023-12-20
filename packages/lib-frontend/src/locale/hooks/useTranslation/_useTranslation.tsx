@@ -12,6 +12,9 @@ export const _useTranslation = (ns: _UseTranslationParamsModel = []): _UseTransl
   const { i18n, ready, t } = useTranslation(ns);
   return {
     currentLanguage: i18n.resolvedLanguage ?? languageDefault,
+    currentLanguageSet: async (value) => {
+      void i18n.changeLanguage(value);
+    },
     isInitialized: ready,
     t: t as <TParams = undefined>(key: string, params?: TParams) => string,
   };

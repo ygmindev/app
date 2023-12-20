@@ -1,17 +1,29 @@
 import { type StorageBackendModel } from '#lib-frontend/state/utils/Storage/_Storage.models';
+import {
+  type EmptyObjectModel,
+  type InferModel,
+  type PartialModel,
+  type PrimitiveModel,
+  type RequiredModel,
+  type StringKeyModel,
+} from '#lib-shared/core/core.models';
 
 export type ReducerModel<TType extends object, TParams extends object> = {
   actions: {
-    [TKeyParam in keyof TParams]: ActionModel<TType, TParams[TKeyParam]>;
+    [TKey in keyof TParams]: ActionModel<TType, TParams[TKey]>;
   };
 
-  initialState: TType;
+  initialState: {
+    [TKey in keyof RequiredModel<TType>]:
+      | RequiredModel<TType>[TKey]
+      | (RequiredModel<TType>[TKey] extends PrimitiveModel
+          ? undefined
+          : RequiredModel<TType>[TKey] extends Array<unknown>
+            ? []
+            : EmptyObjectModel);
+  };
 
   storage?: Array<StorageBackendModel>;
-};
-
-export type ActionsModel<TParams extends object> = {
-  [TKeyParam in keyof TParams]: (params?: TParams[TKeyParam]) => void;
 };
 
 export type NestedReducerModel<
@@ -22,26 +34,49 @@ export type NestedReducerModel<
   [TKey in TKeys[number]]: ReducerModel<TType[TKey], TParams[TKey]>;
 };
 
+export type ActionsModel<TType extends object> = {
+  [TKey in keyof RequiredModel<TType>]: (params?: TType[TKey]) => void;
+};
+
 export type NestedActionsModel<
   TKeys extends Array<string>,
+  TType extends Record<TKeys[number], object>,
   TParams extends Record<TKeys[number], object>,
 > = {
-  [TKey in TKeys[number]]: ActionsModel<TParams[TKey]>;
+  [TKey in TKeys[number]]: StateActionsModel<TType[TKey], TParams[TKey]>;
+};
+
+export type StateActionsModel<
+  TType extends object,
+  TParams extends object,
+> = ArrayActionsModel<TType> &
+  NonPrimitiveActionsModel<TType> &
+  ActionsModel<TType> &
+  ActionsModel<TParams>;
+
+export type InitialStateModel<TType extends object> = {
+  [TKey in keyof RequiredModel<TType>]:
+    | TType[TKey]
+    | (TType[TKey] extends PrimitiveModel
+        ? undefined
+        : TType[TKey] extends Array<unknown>
+          ? []
+          : EmptyObjectModel);
 };
 
 export type NestedInitialStateModel<
   TKeys extends Array<string>,
   TType extends Record<TKeys[number], object>,
 > = {
-  [TKey in TKeys[number]]: TType[TKey];
+  [TKey in TKeys[number]]: InitialStateModel<TType[TKey]>;
 };
 
-export type ActionModel<TType extends object, TParam> = (
+export type ActionModel<TType extends object, TValue> = (
   store: {
     get<TKey extends keyof TType>(key: TKey): TType[TKey];
     set<TKey extends keyof TType>(key: TKey, value: TType[TKey]): void;
   },
-  value: TParam,
+  value: TValue,
 ) => void;
 
 export type CookieOptionModel = {
@@ -58,3 +93,22 @@ export type CookiesModel = {
 
   set<TType extends string = string>(key: string, value: TType, options?: CookieOptionModel): void;
 };
+
+export type ArrayActionsModel<TType> = {
+  [TKey in StringKeyModel<TType>]: RequiredModel<TType>[TKey] extends Array<unknown>
+    ? ActionsModel<
+        Record<`${TKey}Add`, InferModel<TType[TKey]>> &
+          Record<`${TKey}Remove`, InferModel<TType[TKey]>> &
+          Record<
+            `${TKey}Update`,
+            [filter: PartialModel<InferModel<TType[TKey]>>, value: InferModel<TType[TKey]>]
+          >
+      >
+    : unknown;
+}[StringKeyModel<TType>];
+
+export type NonPrimitiveActionsModel<TType> = {
+  [TKey in StringKeyModel<TType>]: RequiredModel<TType>[TKey] extends PrimitiveModel
+    ? unknown
+    : ActionsModel<Record<`${TKey}Update`, PartialModel<TType[TKey]>>>;
+}[StringKeyModel<TType>];

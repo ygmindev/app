@@ -1,10 +1,10 @@
-import { TimezoneFormPage } from '#lib-frontend/locale/pages/TimezoneFormPage/TimezoneFormPage';
-import { type TimezoneFormPagePropsModel } from '#lib-frontend/locale/pages/TimezoneFormPage/TimezoneFormPage.models';
+import { LocaleSettingsPage } from '#lib-frontend/locale/pages/LocaleSettingsPage/LocaleSettingsPage';
+import { type LocaleSettingsPagePropsModel } from '#lib-frontend/locale/pages/LocaleSettingsPage/LocaleSettingsPage.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<TimezoneFormPagePropsModel>({
-  target: TimezoneFormPage,
+const { Component, displayName, testID } = withTestComponent<LocaleSettingsPagePropsModel>({
+  target: LocaleSettingsPage,
 });
 
 describe(displayName, () => {

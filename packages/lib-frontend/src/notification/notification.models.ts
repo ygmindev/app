@@ -1,19 +1,14 @@
 import { type WithIconPropsModel } from '#lib-frontend/core/components/Icon/Icon.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { type ThemeColorModel } from '#lib-frontend/style/style.models';
-import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
-export type NotificationModel = WithIdModel &
-  WithIconPropsModel & {
-    color?: ThemeColorModel;
-    isInfinite?: boolean;
-    message?: string;
-    title?: string;
-  };
-
-export type NotificationDataModel = {
+export type NotificationModel = WithIconPropsModel & {
+  color?: ThemeColorModel;
   id?: string;
-} & Omit<NotificationModel, 'id'>;
+  isInfinite?: boolean;
+  message?: string;
+  title?: string;
+};
 
 export type TranslatableNotificationModel = Omit<NotificationModel, 'title' | 'message'> & {
   message?: TranslatableTextModel;

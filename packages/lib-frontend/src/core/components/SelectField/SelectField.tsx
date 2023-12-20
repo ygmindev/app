@@ -32,6 +32,7 @@ export const SelectField = forwardRef(
   <TType extends string | Array<string> = string>(
     {
       defaultValue,
+      elementState,
       isHorizontal,
       isMultiple,
       label,
@@ -74,17 +75,22 @@ export const SelectField = forwardRef(
       valueControlledSet((isEqual(idsF, ids) ? [] : idsF) as TType);
     };
 
+    const isDisabled = elementState === ELEMENT_STATE.DISABLED;
+
     return (
       <Wrapper
         {...wrapperProps}
+        opacity={isDisabled ? theme.opaque[THEME_SIZE.LARGE] : undefined}
+        position={SHAPE_POSITION.RELATIVE}
         s={THEME_SIZE.SMALL}>
-        {label && <TranslatableText>{label}</TranslatableText>}
+        {label && <TranslatableText isBold>{label}</TranslatableText>}
 
         <Wrapper
           isRowAlign={isHorizontal}
           s={THEME_SIZE.SMALL}>
           {isMultiple && (
             <SwitchField
+              elementState={elementState}
               label={t('core:selectAll')}
               onChange={(v) => handleChangeMultiple(v ? ids : [])}
               value={isEqual(values, ids)}
@@ -142,6 +148,13 @@ export const SelectField = forwardRef(
             );
           })}
         </Wrapper>
+
+        {isDisabled && (
+          <Wrapper
+            isAbsoluteFill
+            zIndex
+          />
+        )}
       </Wrapper>
     );
   },

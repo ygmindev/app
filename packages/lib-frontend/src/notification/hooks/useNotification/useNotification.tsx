@@ -1,6 +1,6 @@
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type UseNotificationModel } from '#lib-frontend/notification/hooks/useNotification/useNotification.models';
-import { type NotificationDataModel } from '#lib-frontend/notification/notification.models';
+import { type NotificationModel } from '#lib-frontend/notification/notification.models';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { THEME_COLOR } from '#lib-frontend/style/style.constants';
 
@@ -8,8 +8,8 @@ export const useNotification = (): UseNotificationModel => {
   const actions = useActions();
   const { t } = useTranslation();
 
-  const notify = (alert: NotificationDataModel): void =>
-    actions?.notification.add({
+  const notify = (alert: NotificationModel): void =>
+    actions?.notification.notificationsAdd({
       ...alert,
       message: t(alert.message),
       title: t(alert.title),
@@ -21,7 +21,7 @@ export const useNotification = (): UseNotificationModel => {
     error: (alert) =>
       notify({ ...alert, color: THEME_COLOR.ERROR, icon: alert.icon ?? 'exclamationCircle' }),
 
-    remove: (id) => actions?.notification.remove(id),
+    remove: (id) => actions?.notification.notificationsRemove({ id }),
 
     success: (alert) =>
       notify({ ...alert, color: THEME_COLOR.SUCCESS, icon: alert.icon ?? 'checkCircle' }),

@@ -3,11 +3,7 @@ import { type StyleReducerModel } from '#lib-frontend/style/stores/styleStore/st
 import { STYLE_BRIGHTNESS } from '#lib-frontend/style/style.constants';
 
 export const STYLE_REDUCER: StyleReducerModel = {
-  actions: {
-    brightnessSet: (store, value) => {
-      store.set('brightness', value);
-    },
-  },
+  actions: {},
 
   initialState: {
     brightness: STYLE_BRIGHTNESS.LIGHT,

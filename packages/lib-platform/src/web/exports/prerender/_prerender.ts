@@ -13,20 +13,18 @@ export const _prerender =
   ({ languageDefault, languages }: _PrerenderParamsModel): _PrerenderModel =>
   async ({ pageContexts }) => {
     const pageContextPromises: Array<() => Promise<(typeof pageContexts)[number]>> = [];
-    languages.forEach((lang) =>
+    languages.forEach(({ id }) =>
       pageContexts.forEach(({ context, urlOriginal, ...pageContext }) =>
         pageContextPromises.push(async () => {
           const i18n = _config();
-          await i18n.changeLanguage(lang);
-          const isLanguageDefault = lang === languageDefault;
-          const pathname = trimPathname(
-            isLanguageDefault ? urlOriginal : `/${lang}/${urlOriginal}`,
-          );
+          await i18n.changeLanguage(id);
+          const isLanguageDefault = id === languageDefault;
+          const pathname = trimPathname(isLanguageDefault ? urlOriginal : `/${id}/${urlOriginal}`);
           return {
             ...pageContext,
             context: merge([
               {
-                [LOCALE]: { i18n, lang },
+                [LOCALE]: { i18n, lang: id },
                 [ROUTE]: { location: { pathname: trimPathname(urlOriginal) } },
               },
               context,

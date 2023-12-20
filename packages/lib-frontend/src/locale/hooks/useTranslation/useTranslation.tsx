@@ -10,17 +10,22 @@ import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { CORE } from '#lib-shared/core/core.constants';
 
 export const useTranslation = (ns: UseTranslationParamsModel = []): UseTranslationModel => {
-  const { currentLanguage, isInitialized, t: _t } = _useTranslation([CORE, ...ns]);
+  const {
+    currentLanguage,
+    currentLanguageSet,
+    isInitialized,
+    t: _t,
+  } = _useTranslation([CORE, ...ns]);
 
   const t = useCallback(
     <TParams = undefined,>(key?: TranslatableTextModel, params?: TParams): string =>
       key && isInitialized
         ? isFunction(key)
-          ? key({ currentLanguage, isInitialized, t })
+          ? key({ currentLanguage, currentLanguageSet, isInitialized, t })
           : _t(key, params ? params : { count: '', value: '' })
         : '',
     [isInitialized, currentLanguage, _t],
   );
 
-  return { currentLanguage, isInitialized, t };
+  return { currentLanguage, currentLanguageSet, isInitialized, t };
 };

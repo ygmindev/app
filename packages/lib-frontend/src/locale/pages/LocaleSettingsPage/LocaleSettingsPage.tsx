@@ -1,13 +1,11 @@
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
+import { LOCALE_SETTINGS_PAGE_FIELDS } from '#lib-frontend/locale/pages/LocaleSettingsPage/LocaleSettingsPage.constants';
+import { type LocaleSettingsPagePropsModel } from '#lib-frontend/locale/pages/LocaleSettingsPage/LocaleSettingsPage.models';
 import { SettingsField } from '#lib-frontend/settings/components/SettingsField/SettingsField';
-import { APPEARANCE_SETTINGS_PAGE_FIELDS } from '#lib-frontend/settings/pages/AppearanceSettingsPage/AppearanceSettingsPage.constants';
-import { type AppearanceSettingsPagePropsModel } from '#lib-frontend/settings/pages/AppearanceSettingsPage/AppearanceSettingsPage.models';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
-export const AppearanceSettingsPage: LFCModel<AppearanceSettingsPagePropsModel> = ({
-  ...props
-}) => {
+export const LocaleSettingsPage: LFCModel<LocaleSettingsPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   return (
     <MainLayout
@@ -15,7 +13,7 @@ export const AppearanceSettingsPage: LFCModel<AppearanceSettingsPagePropsModel> 
       flex
       p
       s>
-      {APPEARANCE_SETTINGS_PAGE_FIELDS.map(({ element, id, title }) => (
+      {LOCALE_SETTINGS_PAGE_FIELDS.map(({ element, id, title }) => (
         <SettingsField
           element={element}
           id={id}

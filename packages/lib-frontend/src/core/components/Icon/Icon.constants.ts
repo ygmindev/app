@@ -67,6 +67,7 @@ export const IONIC_ICONS = {
   info: 'information-circle',
   internet: 'wifi-outline',
   invest: 'trending-up-outline',
+  language: 'language-outline',
   light: 'sunny-outline',
   location: 'location-outline',
   lock: 'lock-closed-outline',

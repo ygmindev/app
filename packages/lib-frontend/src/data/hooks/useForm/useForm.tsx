@@ -30,7 +30,7 @@ export const useForm = <TType, TResult = void>({
       isValidateChanged &&
         isEqual(values, initialValues) &&
         handleError(Error(t('core:validateChanged')));
-      isBlocking && actions?.app.isLoadingSet(true);
+      isBlocking && actions?.app.isLoading(true);
       const data = onSubmit && (await onSubmit(values));
       onSuccess && (await onSuccess(values, data));
       return data ?? null;
@@ -38,7 +38,7 @@ export const useForm = <TType, TResult = void>({
       error(e);
       onError ? onError(e as Error) : handleError(e as Error);
     } finally {
-      isBlocking && actions?.app.isLoadingSet(false);
+      isBlocking && actions?.app.isLoading(false);
       onComplete && onComplete();
     }
     return null;

@@ -8,8 +8,14 @@ import {
   type SliceCaseReducers,
 } from '@reduxjs/toolkit';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
+import cloneDeep from 'lodash/cloneDeep';
+import filter from 'lodash/filter';
+import findIndex from 'lodash/findIndex';
+import isArray from 'lodash/isArray';
+import isPlainObject from 'lodash/isPlainObject';
 import mapValues from 'lodash/mapValues';
 import reduce from 'lodash/reduce';
+import uniq from 'lodash/uniq';
 import { type ComponentType, type ReactElement } from 'react';
 import { type NoInfer, Provider as _Provider, useDispatch } from 'react-redux';
 import { type PersistConfig, type Persistor } from 'redux-persist';
@@ -35,6 +41,7 @@ import {
 import { type StateProviderPropsModel } from '#lib-frontend/state/utils/Store/Store.models';
 import { isServer } from '#lib-platform/core/utils/isServer/isServer';
 import { mapValuesAsync } from '#lib-shared/core/utils/mapValuesAsync/mapValuesAsync';
+import { merge } from '#lib-shared/core/utils/merge/merge';
 
 const ActionProvider = <
   TKeys extends Array<string>,
@@ -50,7 +57,7 @@ const ActionProvider = <
   const dispatch = useDispatch();
   const actionsF = mapValues(actions, (actions) =>
     mapValues(actions, (action) => (value: unknown) => dispatch(action(value))),
-  ) as NestedActionsModel<TKeys, TParams>;
+  ) as NestedActionsModel<TKeys, TType, TParams>;
   return (
     <>
       {value?.actionContext ? (
@@ -68,14 +75,14 @@ export class _Store<
   TParams extends Record<TKeys[number], object>,
 > implements _StoreModel<TKeys, TType, TParams>
 {
-  protected _store: EnhancedStore<TType>;
-  protected _actions: {
+  protected store: EnhancedStore<TType>;
+  protected actions: {
     [TKey in TKeys[number]]: CaseReducerActions<SliceCaseReducers<TType[TKey]>, TKey>;
   };
-  protected _persistors: {
+  protected persistors: {
     [TKey in TKeys[number]]?: PersistConfig<TType[TKey]>;
   };
-  protected _persistor: Persistor;
+  protected persistor: Persistor;
 
   constructor({ cookies, initialState, reducers }: _StoreParamsModel<TKeys, TType, TParams>) {
     const {
@@ -85,15 +92,54 @@ export class _Store<
     } = reduce(
       reducers,
       (result, reducer, name) => {
+        // TODO: better typing
+        const reducerActions = reduce(
+          reducer.initialState,
+          (actionsResult, v, k) => {
+            type TKey = keyof typeof actionsResult;
+            const kS = k as keyof TType[TKeys[number]];
+            actionsResult[k as TKey] = (store, value) => {
+              store.set(kS, value as never);
+            };
+            if (isArray(v)) {
+              actionsResult[`${k}Add` as TKey] = (store, value) => {
+                store.set(kS, uniq([...((store.get(kS) as Array<never>) ?? []), value]) as never);
+              };
+              actionsResult[`${k}Remove` as TKey] = (store, value) => {
+                store.set(
+                  kS,
+                  filter((store.get(kS) as Array<never>) ?? [], value as never) as never,
+                );
+              };
+              actionsResult[`${k}Update` as TKey] = (store, value) => {
+                const [filter, update] = value as [never, object];
+                const values = cloneDeep(store.get(kS) as Array<never>);
+                const i = findIndex(values, filter);
+                if (i >= 0) {
+                  values[i] = (
+                    isPlainObject(values[i]) ? { ...(values[i] as object), ...update } : update
+                  ) as never;
+                }
+              };
+            } else if (isPlainObject(v)) {
+              actionsResult[`${k}Update` as TKey] = (store, value) => {
+                store.set(kS, merge([store.get(kS), value as never]));
+              };
+            }
+            return actionsResult;
+          },
+          reducer.actions,
+        );
+
         type StateModel = TType[TKeys[number]];
-        const { actions, reducer: _reducer } = createSlice<
+        const { actions, reducer: reducerF } = createSlice<
           StateModel,
           SliceCaseReducers<StateModel>
         >({
           initialState: reducer.initialState as StateModel,
           name,
           reducers: mapValues(
-            reducer.actions,
+            reducerActions,
             (action): CaseReducer<StateModel> =>
               (state, { payload }) => {
                 (action as ActionModel<StateModel, unknown>)(
@@ -128,7 +174,7 @@ export class _Store<
             : result.persistors,
           reducers: {
             ...result.reducers,
-            [name]: persistConfig ? persistReducer(persistConfig, _reducer) : _reducer,
+            [name]: persistConfig ? persistReducer(persistConfig, reducerF) : reducerF,
           } as Reducer<TType>,
         };
       },
@@ -143,9 +189,9 @@ export class _Store<
       },
     );
 
-    this._actions = actionsF;
-    this._persistors = persistorsF;
-    this._store = configureStore({
+    this.actions = actionsF;
+    this.persistors = persistorsF;
+    this.store = configureStore({
       middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
           serializableCheck: {
@@ -155,22 +201,22 @@ export class _Store<
       preloadedState: initialState as PreloadedState<CombinedState<NoInfer<TType>>>,
       reducer: reducersF,
     });
-    this._persistor = persistStore(this._store);
+    this.persistor = persistStore(this.store);
     // this._persistor.subscribe(() => {
     //   const { bootstrapped } = this._persistor.getState();
     //   console.warn(bootstrapped);
     // });
   }
   getState = async (): Promise<TType> =>
-    mapValuesAsync(this._persistors, async (v) =>
+    mapValuesAsync(this.persistors, async (v) =>
       getStoredState(v as PersistConfig<TType[TKeys[number]]>),
     ) as Promise<TType>;
 
   get Provider(): ComponentType<StateProviderPropsModel<TKeys, TType, TParams>> {
     return ({ children, value }) => (
-      <_Provider store={this._store}>
+      <_Provider store={this.store}>
         <ActionProvider
-          actions={this._actions}
+          actions={this.actions}
           value={value}>
           {children}
         </ActionProvider>

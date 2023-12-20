@@ -64,7 +64,8 @@ export type RootActionsParamsModel = {
 };
 
 export type RootActionsModel = NestedActionsModel<
-  Array<keyof RootActionsParamsModel>,
+  Array<keyof RootStateModel>,
+  RootStateModel,
   RootActionsParamsModel
 >;
 

@@ -10,7 +10,7 @@ import { debounce } from '#lib-shared/core/utils/debounce/debounce';
 export const AppProvider: SFCModel<AppProviderPropsModel> = ({ children }) => {
   const actions = useActions();
 
-  const update = debounce(() => actions?.app.dimensionSet(display.getDimension()), {
+  const update = debounce(() => actions?.app.dimension(display.getDimension()), {
     duration: USE_DIMENSION_DELAY,
   });
 

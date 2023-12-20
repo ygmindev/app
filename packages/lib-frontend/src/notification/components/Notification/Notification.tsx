@@ -13,7 +13,7 @@ import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type NotificationPropsModel } from '#lib-frontend/notification/components/Notification/Notification.models';
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
@@ -25,11 +25,10 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
   id,
   isInfinite,
   message,
-  testID,
   title,
   ...props
 }) => {
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation();
   const { remove } = useNotification();
   const theme = useTheme();
@@ -40,7 +39,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
       if (!isInfinite) {
         barRef.current?.toState(ELEMENT_STATE.ACTIVE);
         await sleep(theme.notification.duration);
-        isMounted() && remove(id);
+        id && isMounted() && remove(id);
       }
     },
     [isInfinite, remove, id],
@@ -48,6 +47,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
 
   return (
     <Wrapper
+      {...wrapperProps}
       animation={{ states: ANIMATION_STATES_APPEARABLE }}
       backgroundColor={color}
       elementState={ELEMENT_STATE.ACTIVE}
@@ -56,8 +56,6 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
       mTop={THEME_SIZE.SMALL}
       position={SHAPE_POSITION.RELATIVE}
       round
-      style={styles}
-      testID={testID}
       width={theme.notification.width}>
       {!isInfinite && (
         <Wrapper
@@ -117,7 +115,7 @@ export const Notification: SFCModel<NotificationPropsModel> = ({
         <Button
           color={color}
           icon="times"
-          onPress={() => remove(id)}
+          onPress={() => id && remove(id)}
           type={BUTTON_TYPE.FILLED}
         />
       </Wrapper>

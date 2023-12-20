@@ -37,7 +37,7 @@ export const _internationalize = ({
 
     react: { defaultTransParent: 'div', useSuspense: true },
 
-    supportedLngs: languages,
+    supportedLngs: languages.map(({ id }) => id),
   };
 
   if (path) {

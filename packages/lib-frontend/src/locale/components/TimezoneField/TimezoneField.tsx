@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { DropdownField } from '#lib-frontend/data/components/DropdownField/DropdownField';
@@ -8,15 +9,18 @@ import { type TimezoneFieldPropsModel } from '#lib-frontend/locale/components/Ti
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { timezones } from '#lib-frontend/locale/utils/timezones/timezones';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { timezoneFormat } from '#lib-shared/data/utils/timezoneFormat/timezoneFormat';
 
 export const TimezoneField: LFCModel<TimezoneFieldPropsModel> = ({
   defaultValue,
+  elementState,
   onChange,
   value,
   ...props
 }) => {
   const { t } = useTranslation();
+  const { wrapperProps } = useLayoutStyles({ props });
   const timezone = useStore((state) => state.locale.timezone);
   const { valueControlled, valueControlledSet } = useValueControlled({
     defaultValue,
@@ -38,13 +42,16 @@ export const TimezoneField: LFCModel<TimezoneFieldPropsModel> = ({
   );
 
   return (
-    <DropdownField
-      {...props}
-      icon="time"
-      label={t('locale:timezone')}
-      onChange={valueControlledSet}
-      options={options}
-      value={valueControlled}
-    />
+    <Wrapper s>
+      <DropdownField
+        {...wrapperProps}
+        elementState={elementState}
+        icon="time"
+        label={t('locale:timezone')}
+        onChange={valueControlledSet}
+        options={options}
+        value={valueControlled}
+      />
+    </Wrapper>
   );
 };

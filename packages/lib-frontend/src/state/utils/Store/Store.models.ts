@@ -24,6 +24,6 @@ export type StateProviderPropsModel<
   TType extends Record<TKeys[number], object>,
   TParams extends Record<TKeys[number], object>,
 > = ProviderPropsModel<{
-  actionContext: Context<NestedActionsModel<TKeys, TParams> | undefined>;
+  actionContext: Context<NestedActionsModel<TKeys, TType, TParams> | undefined>;
   store: StoreModel<TKeys, TType, TParams>;
 }>;

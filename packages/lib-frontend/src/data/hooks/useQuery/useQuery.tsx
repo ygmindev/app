@@ -16,9 +16,9 @@ export const useQuery = <TParams = undefined, TResult = void>(
     id,
     options?.isBlocking
       ? async () => {
-          actions?.app.isLoadingSet(true);
+          actions?.app.isLoading(true);
           const result = await callback();
-          actions?.app.isLoadingSet(false);
+          actions?.app.isLoading(false);
           return result;
         }
       : callback,

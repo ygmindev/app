@@ -33,7 +33,7 @@ export const PaymentPage: LFCModel<PaymentPagePropsModel> = ({ ...props }) => {
     const resultF =
       result &&
       sort(result, [(x) => currentUser?.paymentMethodPrimary !== x._id, ['created', false]]);
-    resultF && actions?.billing.paymentMethodsSet(resultF);
+    resultF && actions?.billing.PaymentMethod(resultF);
     return resultF;
   };
 

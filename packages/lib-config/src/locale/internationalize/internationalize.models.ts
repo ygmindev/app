@@ -1,5 +1,7 @@
 import { type i18n, type Module } from 'i18next';
 
+import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
+
 export type InternationalizeConfigModel = {
   isPreload: boolean;
 
@@ -7,7 +9,7 @@ export type InternationalizeConfigModel = {
 
   languageDefault: string;
 
-  languages: Array<string>;
+  languages: Array<WithIdModel & { label: string }>;
 
   modules?: Array<Module>;
 

@@ -4,5 +4,8 @@ import { type PartialModel } from '#lib-shared/core/core.models';
 export const INTERNATIONALIZE_CONFIG = {
   languageDefault: 'en',
 
-  languages: ['en', 'kr'],
+  languages: [
+    { id: 'en', label: 'English' },
+    { id: 'kr', label: '한국어' },
+  ],
 } satisfies PartialModel<InternationalizeConfigModel>;

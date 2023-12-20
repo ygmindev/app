@@ -38,7 +38,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
   const signIn = async (signIn?: PartialModel<SignInModel>): Promise<void> => {
     if (signIn) {
       const { token, user } = signIn;
-      actions?.user.currentUserSet(user ?? null);
+      actions?.user.currentUser(user ?? null);
       token && (await signInWithToken(token));
       user?._id && void identify(user._id);
     } else {

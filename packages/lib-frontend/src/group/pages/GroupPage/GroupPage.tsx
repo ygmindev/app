@@ -23,7 +23,7 @@ export const GroupPage: LFCModel<GroupPagePropsModel> = ({ children }) => {
       id="group"
       query={async () => {
         const { result } = await get({ filter: [{ field: '_id', value: groupid }] });
-        actions?.group.currentGroupSet(result);
+        actions?.group.currentGroup(result);
         return result;
       }}>
       {() => (
