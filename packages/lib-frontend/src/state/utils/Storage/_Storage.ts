@@ -1,30 +1,67 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { CookieStorage, NodeCookiesWrapper } from 'redux-persist-cookie-storage';
-
-import { _Storage as _StorageBase } from '#lib-frontend/state/utils/Storage/_Storage.base';
-import { type _StorageParamsModel } from '#lib-frontend/state/utils/Storage/_Storage.models';
-import { STORAGE_BACKEND } from '#lib-frontend/state/utils/Storage/Storage.constants';
+import {
+  type _StorageModel,
+  type _StorageParamsModel,
+} from '#lib-frontend/state/utils/Storage/_Storage.models';
 import { type StorageModel } from '#lib-frontend/state/utils/Storage/Storage.models';
-import { isServer } from '#lib-platform/core/utils/isServer/isServer';
-import { type ClassModel } from '#lib-shared/core/core.models';
+import { debug } from '#lib-shared/logging/utils/logger/_logger';
 
-export class _Storage extends _StorageBase {
-  constructor({ backends = [STORAGE_BACKEND.ASYNC], cookies }: _StorageParamsModel) {
-    super({ backends });
+export class _Storage implements _StorageModel {
+  protected storages?: Array<StorageModel>;
 
-    this._storages = backends.map((backend) => {
-      switch (backend) {
-        case STORAGE_BACKEND.COOKIES: {
-          const CookeStorageF = CookieStorage as ClassModel<StorageModel>;
-          const NodeCookiesWrapperF = NodeCookiesWrapper as ClassModel<StorageModel>;
-          const cookiesF = isServer ? new NodeCookiesWrapperF(cookies) : cookies;
-          return cookies ? new CookeStorageF(cookiesF) : null;
+  constructor({ storages }: _StorageParamsModel) {
+    this.storages = storages;
+  }
+
+  async getItem<TType extends string = string>(key: string): Promise<TType | null> {
+    if (this.storages) {
+      for (let i = 0; i < this.storages.length; ++i) {
+        const storage = this.storages[i];
+        if (storage) {
+          try {
+            const value = await storage.getItem<TType>(key);
+            process.env.NODE_ENV === 'development' && value && debug('storage get', key, value);
+            return value;
+          } catch {
+            continue;
+          }
         }
-        case STORAGE_BACKEND.ASYNC:
-          return AsyncStorage as StorageModel;
-        default:
-          return null;
       }
-    });
+    }
+
+    return null;
+  }
+
+  async removeItem(key: string): Promise<void> {
+    if (this.storages) {
+      for (let i = 0; i < this.storages.length; ++i) {
+        const storage = this.storages[i];
+        if (storage) {
+          try {
+            await storage.removeItem(key);
+            process.env.NODE_ENV === 'development' && debug('storage remove', key);
+            break;
+          } catch {
+            continue;
+          }
+        }
+      }
+    }
+  }
+
+  async setItem<TType extends string = string>(key: string, value: TType): Promise<void> {
+    if (this.storages) {
+      for (let i = 0; i < this.storages.length; ++i) {
+        const storage = this.storages[i];
+        if (storage) {
+          try {
+            await storage.setItem<TType>(key, value);
+            process.env.NODE_ENV === 'development' && value && debug('storage set', key, value);
+            break;
+          } catch {
+            continue;
+          }
+        }
+      }
+    }
   }
 }

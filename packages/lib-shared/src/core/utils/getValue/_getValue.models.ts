@@ -7,12 +7,12 @@ export type _GetValueParamsModel<
 type GetIndexedField<TType, TPath extends string> = TPath extends keyof TType
   ? TType[TPath]
   : TPath extends `${number}`
-  ? '0' extends keyof TType
-    ? undefined
-    : number extends keyof TType
-    ? TType[number]
-    : undefined
-  : undefined;
+    ? '0' extends keyof TType
+      ? undefined
+      : number extends keyof TType
+        ? TType[number]
+        : undefined
+    : undefined;
 
 type FieldWithPossiblyUndefined<TType, TPath extends string> =
   | _GetValueModel<Exclude<TType, undefined>, TPath>
@@ -29,17 +29,17 @@ export type _GetValueModel<
   ? TLeft extends keyof TType
     ? FieldWithPossiblyUndefined<TType[TLeft], TRight>
     : TLeft extends `${infer FieldKey}[${infer IndexKey}]`
-    ? FieldKey extends keyof TType
-      ? FieldWithPossiblyUndefined<
-          IndexedFieldWithPossiblyUndefined<TType[FieldKey], IndexKey>,
-          TRight
-        >
+      ? FieldKey extends keyof TType
+        ? FieldWithPossiblyUndefined<
+            IndexedFieldWithPossiblyUndefined<TType[FieldKey], IndexKey>,
+            TRight
+          >
+        : undefined
       : undefined
-    : undefined
   : TPath extends keyof TType
-  ? TType[TPath]
-  : TPath extends `${infer FieldKey}[${infer IndexKey}]`
-  ? FieldKey extends keyof TType
-    ? IndexedFieldWithPossiblyUndefined<TType[FieldKey], IndexKey>
-    : undefined
-  : undefined;
+    ? TType[TPath]
+    : TPath extends `${infer FieldKey}[${infer IndexKey}]`
+      ? FieldKey extends keyof TType
+        ? IndexedFieldWithPossiblyUndefined<TType[FieldKey], IndexKey>
+        : undefined
+      : undefined;

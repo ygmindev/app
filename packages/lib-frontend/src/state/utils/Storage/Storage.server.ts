@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CookieStorage, NodeCookiesWrapper } from 'redux-persist-cookie-storage';
 
 import { _Storage } from '#lib-frontend/state/utils/Storage/_Storage';
@@ -18,7 +17,6 @@ export class Storage extends _Storage implements StorageModel {
           new (CookieStorage as ClassModel<StorageModel>)(
             isServer ? new (NodeCookiesWrapper as ClassModel<StorageModel>)(cookies) : cookies,
           ),
-        AsyncStorage as StorageModel,
       ]),
     });
   }

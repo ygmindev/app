@@ -1,11 +1,7 @@
-import { type CookiesModel } from '#lib-frontend/state/state.models';
-import { type STORAGE_BACKEND } from '#lib-frontend/state/utils/Storage/Storage.constants';
-
-export type StorageBackendModel = `${STORAGE_BACKEND}`;
+import { type StorageModel } from '#lib-frontend/state/utils/Storage/Storage.models';
 
 export type _StorageParamsModel = {
-  backends?: Array<StorageBackendModel>;
-  cookies?: CookiesModel;
+  storages?: Array<StorageModel>;
 };
 
 export type _StorageModel = {

@@ -8,7 +8,9 @@ import { SwitchField } from '#lib-frontend/data/components/SwitchField/SwitchFie
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type SettingsFieldPropsModel } from '#lib-frontend/settings/components/SettingsField/SettingsField.models';
 import { SETTINGS } from '#lib-frontend/settings/settings.constants';
+import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { getValue } from '#lib-shared/core/utils/getValue/getValue';
 
 export const SettingsField = <TType = string,>({
   element,
@@ -21,6 +23,8 @@ export const SettingsField = <TType = string,>({
   const { t } = useTranslation([SETTINGS]);
   const { wrapperProps } = useLayoutStyles({ props });
   const [isAutomatic, isAutomaticSet] = useState<boolean>();
+  const x = useStore((state) => getValue(state, id));
+  console.warn(`${id}: ${x as string}`);
 
   return (
     <Accordion

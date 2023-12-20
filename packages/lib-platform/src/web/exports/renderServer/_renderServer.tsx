@@ -32,7 +32,7 @@ export const _renderServer =
     const contextF: RootContextModel = merge([
       {
         [QUERY]: { client: queryClient.client },
-        [STATE]: { initialState: await store.getState() } as RootStateContextModel,
+        [STATE]: { initialState: await store.getStatePersisted() } as RootStateContextModel,
       },
       context,
     ]);

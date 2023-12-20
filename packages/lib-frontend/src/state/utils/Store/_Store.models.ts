@@ -25,7 +25,7 @@ export type _StoreModel<
 > = {
   Provider: ComponentType<StateProviderPropsModel<TKeys, TType, TParams>>;
 
-  getState(): Promise<TType>;
+  getStatePersisted(): Promise<TType>;
 };
 
 export type _ActionProviderPropsModel<

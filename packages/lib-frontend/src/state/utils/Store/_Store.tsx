@@ -158,11 +158,11 @@ export class _Store<
           ),
         });
 
-        const persistConfig: PersistConfig<StateModel> | undefined = reducer.storage
+        const persistConfig: PersistConfig<StateModel> | undefined = reducer.isPersisted
           ? {
               key: name,
               stateReconciler: isServer ? (_, original) => original : undefined,
-              storage: new Storage({ backends: reducer.storage, cookies }),
+              storage: new Storage({ cookies }),
             }
           : undefined;
 
@@ -207,7 +207,8 @@ export class _Store<
     //   console.warn(bootstrapped);
     // });
   }
-  getState = async (): Promise<TType> =>
+
+  getStatePersisted = async (): Promise<TType> =>
     mapValuesAsync(this.persistors, async (v) =>
       getStoredState(v as PersistConfig<TType[TKeys[number]]>),
     ) as Promise<TType>;
