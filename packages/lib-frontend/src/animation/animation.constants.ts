@@ -74,7 +74,7 @@ export const ANIMATION_STATES_FOCUSABLE = ({
     [ELEMENT_STATE.DISABLED]: {
       backgroundColor: theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MUTED],
       [colorField]: inactiveColor,
-      opacity: theme.opaque[THEME_SIZE.MEDIUM],
+      opacity: theme.opaque[THEME_SIZE.LARGE],
     },
     [ELEMENT_STATE.LOADING]: {
       backgroundColor: theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MUTED],

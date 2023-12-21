@@ -90,7 +90,7 @@ export const THEME_CONFIG = {
   },
 
   opaque: {
-    [THEME_SIZE.LARGE]: 0.7,
+    [THEME_SIZE.LARGE]: 0.65,
 
     [THEME_SIZE.MEDIUM]: 0.4,
 
