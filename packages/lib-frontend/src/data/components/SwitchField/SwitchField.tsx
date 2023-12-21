@@ -42,8 +42,8 @@ export const SwitchField: LFCModel<SwitchFieldPropsModel> = ({
   const elementStateF = valueControlled
     ? ELEMENT_STATE.ACTIVE
     : elementState === ELEMENT_STATE.DISABLED || elementState === ELEMENT_STATE.LOADING
-    ? ELEMENT_STATE.DISABLED
-    : ELEMENT_STATE.INACTIVE;
+      ? ELEMENT_STATE.DISABLED
+      : ELEMENT_STATE.INACTIVE;
 
   const {
     childActiveLeft,

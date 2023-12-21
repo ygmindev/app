@@ -7,7 +7,7 @@ export const {{NAME}}(constantCase)_REDUCER: {{NAME}}(pascalCase)ReducerModel = 
     },
   },
 
-  initialState: {
+  defaultState: {
     value: undefined,
   },
 };

@@ -4,7 +4,7 @@ import { PAYMENT_METHOD_RESOURCE_NAME } from '#lib-shared/billing/resources/Paym
 export const BILLING_REDUCER: BillingReducerModel = {
   actions: {},
 
-  initialState: {
+  defaultState: {
     [PAYMENT_METHOD_RESOURCE_NAME]: [],
   },
 };

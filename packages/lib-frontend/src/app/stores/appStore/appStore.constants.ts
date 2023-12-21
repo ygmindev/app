@@ -3,7 +3,7 @@ import { type AppReducerModel } from '#lib-frontend/app/stores/appStore/appStore
 export const APP_REDUCER: AppReducerModel = {
   actions: {},
 
-  initialState: {
+  defaultState: {
     dimension: { height: undefined, width: undefined },
 
     isLoading: false,

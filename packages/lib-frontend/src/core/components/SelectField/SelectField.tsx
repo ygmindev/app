@@ -20,6 +20,7 @@ import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import {
   THEME_COLOR,
   THEME_COLOR_MORE,
+  THEME_ROLE,
   THEME_SIZE,
   THEME_SIZE_MORE,
 } from '#lib-frontend/style/style.constants';
@@ -118,6 +119,7 @@ export const SelectField = forwardRef(
                       {isValue ? (
                         <Icon
                           color={THEME_COLOR_MORE.SURFACE}
+                          colorRole={THEME_ROLE.MAIN}
                           icon="check"
                         />
                       ) : (

@@ -3,7 +3,7 @@ import { type GroupReducerModel } from '#lib-frontend/group/stores/groupStore/gr
 export const GROUP_REDUCER: GroupReducerModel = {
   actions: {},
 
-  initialState: {
+  defaultState: {
     currentGroup: {},
   },
 };

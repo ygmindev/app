@@ -24,7 +24,10 @@ import {
   type RouteActionsParamsModel,
   type RouteStateModel,
 } from '#lib-frontend/route/stores/routeStore/routeStore.models';
-import { type NestedActionsModel } from '#lib-frontend/state/state.models';
+import {
+  type NestedActionsModel,
+  type NestedDefaultStateModel,
+} from '#lib-frontend/state/state.models';
 import { type StoreParamsModel } from '#lib-frontend/state/utils/Store/Store.models';
 import {
   type StyleActionsParamsModel,
@@ -67,6 +70,11 @@ export type RootActionsModel = NestedActionsModel<
   Array<keyof RootStateModel>,
   RootStateModel,
   RootActionsParamsModel
+>;
+
+export type RootDefaultStateModel = NestedDefaultStateModel<
+  Array<keyof RootStateModel>,
+  RootStateModel
 >;
 
 export type RootStateContextModel = Omit<

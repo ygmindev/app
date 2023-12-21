@@ -12,17 +12,19 @@ export type ReducerModel<TType extends object, TParams extends object> = {
     [TKey in keyof TParams]: ActionModel<TType, TParams[TKey]>;
   };
 
-  initialState: {
-    [TKey in keyof RequiredModel<TType>]:
-      | RequiredModel<TType>[TKey]
-      | (RequiredModel<TType>[TKey] extends PrimitiveModel
-          ? undefined
-          : RequiredModel<TType>[TKey] extends Array<unknown>
-            ? []
-            : EmptyObjectModel);
-  };
+  defaultState: DefaultStateModel<TType>;
 
-  isPersisted?: boolean;
+  persist?: Array<StringKeyModel<TType>> | boolean;
+};
+
+export type DefaultStateModel<TType extends object> = {
+  [TKey in keyof RequiredModel<TType>]:
+    | RequiredModel<TType>[TKey]
+    | (RequiredModel<TType>[TKey] extends PrimitiveModel
+        ? undefined
+        : RequiredModel<TType>[TKey] extends Array<unknown>
+          ? []
+          : EmptyObjectModel);
 };
 
 export type NestedReducerModel<
@@ -43,6 +45,13 @@ export type NestedActionsModel<
   TParams extends Record<TKeys[number], object>,
 > = {
   [TKey in TKeys[number]]: StateActionsModel<TType[TKey], TParams[TKey]>;
+};
+
+export type NestedDefaultStateModel<
+  TKeys extends Array<string>,
+  TType extends Record<TKeys[number], object>,
+> = {
+  [TKey in TKeys[number]]: DefaultStateModel<TType[TKey]>;
 };
 
 export type StateActionsModel<
@@ -75,6 +84,7 @@ export type ActionModel<TType extends object, TValue> = (
   store: {
     get<TKey extends keyof TType>(key: TKey): TType[TKey];
     set<TKey extends keyof TType>(key: TKey, value: TType[TKey]): void;
+    unset<TKey extends keyof TType>(key: TKey): void;
   },
   value: TValue,
 ) => void;

@@ -3,7 +3,7 @@ import { type UserReducerModel } from '#lib-frontend/user/stores/userStore/userS
 export const USER_REDUCER: UserReducerModel = {
   actions: {},
 
-  initialState: {
+  defaultState: {
     currentUser: {},
   },
 };

@@ -3,7 +3,7 @@ import { type LocaleReducerModel } from '#lib-frontend/locale/stores/localeStore
 export const LOCALE_REDUCER: LocaleReducerModel = {
   actions: {},
 
-  initialState: {
+  defaultState: {
     language: undefined,
     timezone: {},
   },

@@ -14,6 +14,7 @@ import { ROOT_REDUCERS } from '#lib-frontend/root/stores/rootStore.constants';
 import {
   type RootActionsModel,
   type RootActionsParamsModel,
+  type RootDefaultStateModel,
   type RootStateModel,
 } from '#lib-frontend/root/stores/rootStore.models';
 import { Store } from '#lib-frontend/state/utils/Store/Store';
@@ -21,6 +22,8 @@ import { StyleProvider } from '#lib-frontend/style/providers/StyleProvider/Style
 import { TrackingProvider } from '#lib-frontend/tracking/providers/TrackingProvider/TrackingProvider';
 
 export const actionContext = createContext<RootActionsModel | undefined>(undefined);
+
+export const defaultStateContext = createContext<RootDefaultStateModel | undefined>(undefined);
 
 export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, context }) => {
   const store = useMemo(
@@ -44,7 +47,7 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
       <StyleProvider />,
       <LocaleProvider value={context?.locale} />,
       <AppProvider />,
-      <store.Provider value={{ ...context?.state, actionContext, store }} />,
+      <store.Provider value={{ ...context?.state, actionContext, defaultStateContext, store }} />,
       <Suspense />,
     ],
     [additionalProviders, context],

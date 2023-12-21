@@ -29,7 +29,7 @@ export const NOTIFICATION_REDUCER: NotificationReducerModel = {
     // },
   },
 
-  initialState: {
+  defaultState: {
     notifications: [],
   },
 };

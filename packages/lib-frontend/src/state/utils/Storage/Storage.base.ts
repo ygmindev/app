@@ -2,10 +2,9 @@ import {
   type StorageBaseParamsModel,
   type StorageModel,
 } from '#lib-frontend/state/utils/Storage/Storage.models';
-import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 import { debug } from '#lib-shared/logging/utils/logger/_logger';
 
-export class StorageBase implements StorageModel {
+export class Storage implements StorageModel {
   protected storages?: Array<StorageModel>;
 
   constructor({ storages }: StorageBaseParamsModel) {
@@ -14,12 +13,12 @@ export class StorageBase implements StorageModel {
 
   async getItem<TType extends string = string>(key: string): Promise<TType | null> {
     if (this.storages) {
+      process.env.NODE_ENV === 'development' && debug('storage get', key);
       for (let i = 0; i < this.storages.length; ++i) {
         const storage = this.storages[i];
         if (storage) {
           try {
             const value = await storage.getItem<TType>(key);
-            process.env.NODE_ENV === 'development' && value && debug('storage get', key, value);
             return value;
           } catch {
             continue;
@@ -33,13 +32,12 @@ export class StorageBase implements StorageModel {
 
   async removeItem(key: string): Promise<void> {
     if (this.storages) {
+      process.env.NODE_ENV === 'development' && console.warn('storage remove', key);
       for (let i = 0; i < this.storages.length; ++i) {
         const storage = this.storages[i];
         if (storage) {
           try {
             await storage.removeItem(key);
-            process.env.NODE_ENV === 'development' && debug('storage remove', key);
-            break;
           } catch (e) {
             continue;
           }
@@ -49,14 +47,13 @@ export class StorageBase implements StorageModel {
   }
 
   async setItem<TType extends string = string>(key: string, value: TType): Promise<void> {
-    if (!isEmpty(value) && this.storages) {
+    if (this.storages) {
+      process.env.NODE_ENV === 'development' && value && console.warn('storage set', key, value);
       for (let i = 0; i < this.storages.length; ++i) {
         const storage = this.storages[i];
         if (storage) {
           try {
             await storage.setItem<TType>(key, value);
-            process.env.NODE_ENV === 'development' && value && debug('storage set', key, value);
-            break;
           } catch {
             continue;
           }

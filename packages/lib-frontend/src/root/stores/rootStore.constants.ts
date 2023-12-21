@@ -20,9 +20,7 @@ import { ROUTE } from '#lib-shared/route/route.constants';
 import { STYLE } from '#lib-shared/style/style.constants';
 import { USER } from '#lib-shared/user/user.constants';
 
-export const ROOT_REDUCERS: {
-  [TKey in keyof RootStateModel]: ReducerModel<RootStateModel[TKey], RootActionsParamsModel[TKey]>;
-} = {
+export const ROOT_REDUCERS = {
   [APP]: APP_REDUCER,
   [BILLING]: BILLING_REDUCER,
   [GROUP]: GROUP_REDUCER,
@@ -31,4 +29,6 @@ export const ROOT_REDUCERS: {
   [ROUTE]: ROUTE_REDUCER,
   [STYLE]: STYLE_REDUCER,
   [USER]: USER_REDUCER,
+} satisfies {
+  [TKey in keyof RootStateModel]: ReducerModel<RootStateModel[TKey], RootActionsParamsModel[TKey]>;
 };

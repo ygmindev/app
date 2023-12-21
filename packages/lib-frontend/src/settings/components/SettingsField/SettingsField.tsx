@@ -24,16 +24,16 @@ export const SettingsField = <TType = string,>({
 > => {
   const { t } = useTranslation([SETTINGS]);
   const { wrapperProps } = useLayoutStyles({ props });
+  const value = useStore((state) => getValue(state, id));
+  console.warn(`${id}: ${value as string}`);
 
   const actions = useActions();
-  const x = useStore((state) => getValue(state, id));
   const [isAutomatic, isAutomaticSet] = useState<boolean>();
 
   const isAutomaticSetF = (value: boolean): void => {
     isAutomaticSet(value);
     value && void (getValue(actions, `${id}Unset`) as CallableModel)();
   };
-  console.warn(`${id}: ${x as string}`);
 
   return (
     <Accordion
@@ -50,7 +50,7 @@ export const SettingsField = <TType = string,>({
           value={isAutomatic}
         />
 
-        {isAutomatic ? element : cloneElement(element, { elementState: ELEMENT_STATE.DISABLED })}
+        {isAutomatic ? cloneElement(element, { elementState: ELEMENT_STATE.DISABLED }) : element}
       </Wrapper>
     </Accordion>
   );

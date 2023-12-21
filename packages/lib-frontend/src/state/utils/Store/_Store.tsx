@@ -16,7 +16,7 @@ import isPlainObject from 'lodash/isPlainObject';
 import mapValues from 'lodash/mapValues';
 import reduce from 'lodash/reduce';
 import uniq from 'lodash/uniq';
-import { type ComponentType, type ReactElement } from 'react';
+import { cloneElement, type ComponentType, type ReactElement, useMemo } from 'react';
 import { type NoInfer, Provider as _Provider, useDispatch } from 'react-redux';
 import { type PersistConfig, type Persistor } from 'redux-persist';
 import {
@@ -31,42 +31,52 @@ import {
   REHYDRATE,
 } from 'redux-persist';
 
-import { type ActionModel, type NestedActionsModel } from '#lib-frontend/state/state.models';
+import {
+  type ActionModel,
+  type NestedActionsModel,
+  type NestedDefaultStateModel,
+} from '#lib-frontend/state/state.models';
 import { Storage } from '#lib-frontend/state/utils/Storage/Storage';
 import {
-  type _ActionProviderPropsModel,
+  type _StoreContextProviderPropsModel,
   type _StoreModel,
   type _StoreParamsModel,
 } from '#lib-frontend/state/utils/Store/_Store.models';
 import { type StateProviderPropsModel } from '#lib-frontend/state/utils/Store/Store.models';
 import { isServer } from '#lib-platform/core/utils/isServer/isServer';
+import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { mapValuesAsync } from '#lib-shared/core/utils/mapValuesAsync/mapValuesAsync';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 
-const ActionProvider = <
+const StoreContextProvider = <
   TKeys extends Array<string>,
   TType extends Record<TKeys[number], object>,
   TParams extends Record<TKeys[number], object>,
 >({
   actions,
   children,
+  defaultState,
   value,
-}: _ActionProviderPropsModel<TKeys, TType, TParams>): ReactElement<
-  _ActionProviderPropsModel<TKeys, TType, TParams>
+}: _StoreContextProviderPropsModel<TKeys, TType, TParams>): ReactElement<
+  _StoreContextProviderPropsModel<TKeys, TType, TParams>
 > => {
   const dispatch = useDispatch();
   const actionsF = mapValues(actions, (actions) =>
     mapValues(actions, (action) => (value: unknown) => dispatch(action(value))),
   ) as NestedActionsModel<TKeys, TType, TParams>;
-  return (
-    <>
-      {value?.actionContext ? (
-        <value.actionContext.Provider value={actionsF}>{children}</value.actionContext.Provider>
-      ) : (
-        children
-      )}
-    </>
+
+  const providers = useMemo<Array<ReactElement>>(
+    () =>
+      filterNil([
+        value?.actionContext.Provider && <value.actionContext.Provider value={actionsF} />,
+        value?.defaultStateContext.Provider && (
+          <value.defaultStateContext.Provider value={defaultState} />
+        ),
+      ]),
+    [],
   );
+
+  return <>{providers.reduce((result, element) => cloneElement(element, {}, result), children)}</>;
 };
 
 export class _Store<
@@ -79,6 +89,7 @@ export class _Store<
   protected actions: {
     [TKey in TKeys[number]]: CaseReducerActions<SliceCaseReducers<TType[TKey]>, TKey>;
   };
+  protected defaultState: NestedDefaultStateModel<TKeys, TType>;
   protected persistors: {
     [TKey in TKeys[number]]?: PersistConfig<TType[TKey]>;
   };
@@ -87,37 +98,41 @@ export class _Store<
   constructor({ cookies, initialState, reducers }: _StoreParamsModel<TKeys, TType, TParams>) {
     const {
       actions: actionsF,
+      defaultState: defaultStateF,
       persistors: persistorsF,
       reducers: reducersF,
     } = reduce(
       reducers,
       (result, reducer, name) => {
+        type StateModel = TType[TKeys[number]];
+
         const storage = new Storage({ cookies });
 
         // TODO: better typing
-        const reducerActions = reduce(
-          reducer.initialState,
-          (actionsResult, v, k) => {
-            type TKey = keyof typeof actionsResult;
-            const kS = k as keyof TType[TKeys[number]];
-            actionsResult[k as TKey] = (store, value) => {
+        const { storeActions, storeInitialState } = reduce(
+          reducer.defaultState,
+          ({ storeActions, storeInitialState }, v, k) => {
+            type TKey = keyof typeof storeActions;
+            const kS = k as keyof StateModel;
+            storeActions[k as TKey] = (store, value) => {
               store.set(kS, value as never);
             };
-            actionsResult[`${k}Unset` as TKey] = (store) => {
-              store.set(kS, reducer.initialState[kS] as never);
+            storeActions[`${k}Unset` as TKey] = (store) => {
+              store.unset(kS);
               void storage.removeItem(k);
             };
             if (isArray(v)) {
-              actionsResult[`${k}Add` as TKey] = (store, value) => {
+              storeInitialState[kS] = [] as StateModel[keyof StateModel];
+              storeActions[`${k}Add` as TKey] = (store, value) => {
                 store.set(kS, uniq([...((store.get(kS) as Array<never>) ?? []), value]) as never);
               };
-              actionsResult[`${k}Remove` as TKey] = (store, value) => {
+              storeActions[`${k}Remove` as TKey] = (store, value) => {
                 store.set(
                   kS,
                   filter((store.get(kS) as Array<never>) ?? [], value as never) as never,
                 );
               };
-              actionsResult[`${k}Update` as TKey] = (store, value) => {
+              storeActions[`${k}Update` as TKey] = (store, value) => {
                 const [filter, update] = value as [never, object];
                 const values = cloneDeep(store.get(kS) as Array<never>);
                 const i = findIndex(values, filter);
@@ -128,24 +143,29 @@ export class _Store<
                 }
               };
             } else if (isPlainObject(v)) {
-              actionsResult[`${k}Update` as TKey] = (store, value) => {
+              storeInitialState[kS] = {} as StateModel[keyof StateModel];
+              storeActions[`${k}Update` as TKey] = (store, value) => {
                 store.set(kS, merge([store.get(kS), value as never]));
               };
+            } else {
+              storeInitialState[kS] = undefined as StateModel[keyof StateModel];
             }
-            return actionsResult;
+            return { storeActions, storeInitialState };
           },
-          reducer.actions,
+          {
+            storeActions: reducer.actions,
+            storeInitialState: {} as StateModel,
+          },
         );
 
-        type StateModel = TType[TKeys[number]];
         const { actions, reducer: reducerF } = createSlice<
           StateModel,
           SliceCaseReducers<StateModel>
         >({
-          initialState: reducer.initialState as StateModel,
+          initialState: storeInitialState,
           name,
           reducers: mapValues(
-            reducerActions,
+            storeActions,
             (action): CaseReducer<StateModel> =>
               (state, { payload }) => {
                 (action as ActionModel<StateModel, unknown>)(
@@ -157,6 +177,9 @@ export class _Store<
                     ): void => {
                       (state as StateModel)[key] = value;
                     },
+                    unset: <TKey extends keyof StateModel>(key: TKey): void => {
+                      delete (state as StateModel)[key];
+                    },
                   },
                   payload,
                 );
@@ -164,17 +187,19 @@ export class _Store<
           ),
         });
 
-        const persistConfig: PersistConfig<StateModel> | undefined = reducer.isPersisted
+        const persistConfig: PersistConfig<StateModel> | undefined = reducer.persist
           ? {
               key: name,
               stateReconciler: isServer ? (_, original) => original : undefined,
               storage,
+              whitelist: isArray(reducer.persist) ? reducer.persist : undefined,
             }
           : undefined;
 
         return {
           ...result,
           actions: { ...result.actions, [name]: actions },
+          defaultState: { ...result.defaultState, [name]: reducer.defaultState },
           persistors: persistConfig
             ? { ...result.persistors, [name]: persistConfig }
             : result.persistors,
@@ -188,6 +213,7 @@ export class _Store<
         actions: {} as {
           [TKey in TKeys[number]]: CaseReducerActions<SliceCaseReducers<TType[TKey]>, TKey>;
         },
+        defaultState: {} as NestedDefaultStateModel<TKeys, TType>,
         persistors: {} as {
           [TKey in TKeys[number]]?: PersistConfig<TType[TKey]>;
         },
@@ -195,6 +221,7 @@ export class _Store<
       },
     );
 
+    this.defaultState = defaultStateF;
     this.actions = actionsF;
     this.persistors = persistorsF;
     this.store = configureStore({
@@ -222,11 +249,12 @@ export class _Store<
   get Provider(): ComponentType<StateProviderPropsModel<TKeys, TType, TParams>> {
     return ({ children, value }) => (
       <_Provider store={this.store}>
-        <ActionProvider
+        <StoreContextProvider
           actions={this.actions}
+          defaultState={this.defaultState}
           value={value}>
           {children}
-        </ActionProvider>
+        </StoreContextProvider>
       </_Provider>
     );
   }

@@ -3,7 +3,7 @@ import { type RouteReducerModel } from '#lib-frontend/route/stores/routeStore/ro
 export const ROUTE_REDUCER: RouteReducerModel = {
   actions: {},
 
-  initialState: {
+  defaultState: {
     isBack: false,
     previous: {},
   },

@@ -1,7 +1,10 @@
 import { type Context } from 'react';
 
 import { type ProviderPropsModel } from '#lib-frontend/core/core.models';
-import { type NestedActionsModel } from '#lib-frontend/state/state.models';
+import {
+  type NestedActionsModel,
+  type NestedDefaultStateModel,
+} from '#lib-frontend/state/state.models';
 import {
   type _StoreModel,
   type _StoreParamsModel,
@@ -25,5 +28,6 @@ export type StateProviderPropsModel<
   TParams extends Record<TKeys[number], object>,
 > = ProviderPropsModel<{
   actionContext: Context<NestedActionsModel<TKeys, TType, TParams> | undefined>;
+  defaultStateContext: Context<NestedDefaultStateModel<TKeys, TType> | undefined>;
   store: StoreModel<TKeys, TType, TParams>;
 }>;

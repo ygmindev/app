@@ -4,7 +4,11 @@ import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vike/server';
 import { QueryClient } from '#lib-frontend/data/utils/QueryClient/QueryClient';
 import { type RootContextModel } from '#lib-frontend/root/root.models';
 import { ROOT_REDUCERS } from '#lib-frontend/root/stores/rootStore.constants';
-import { type RootStateContextModel } from '#lib-frontend/root/stores/rootStore.models';
+import {
+  type RootActionsParamsModel,
+  type RootStateContextModel,
+  type RootStateModel,
+} from '#lib-frontend/root/stores/rootStore.models';
 import { Store } from '#lib-frontend/state/utils/Store/Store';
 import { getLocaleStoreFromI18n } from '#lib-platform/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
 import {
@@ -28,11 +32,18 @@ export const _renderServer =
   async ({ Page, context, pageProps }) => {
     initialize && (await initialize());
     const queryClient = new QueryClient();
-    const store = new Store({ cookies: context?.state?.cookies, reducers: ROOT_REDUCERS });
+    const store = new Store<Array<keyof RootStateModel>, RootStateModel, RootActionsParamsModel>({
+      cookies: context?.state?.cookies,
+      reducers: ROOT_REDUCERS,
+    });
     const contextF: RootContextModel = merge([
       {
-        [QUERY]: { client: queryClient.client },
-        [STATE]: { initialState: await store.getStatePersisted() } as RootStateContextModel,
+        [QUERY]: {
+          client: queryClient.client,
+        },
+        [STATE]: {
+          initialState: await store.getStatePersisted(),
+        } as RootStateContextModel,
       },
       context,
     ]);

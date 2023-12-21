@@ -3,6 +3,7 @@ import { type ComponentType } from 'react';
 
 import {
   type CookiesModel,
+  type NestedDefaultStateModel,
   type NestedInitialStateModel,
   type NestedReducerModel,
 } from '#lib-frontend/state/state.models';
@@ -28,7 +29,7 @@ export type _StoreModel<
   getStatePersisted(): Promise<TType>;
 };
 
-export type _ActionProviderPropsModel<
+export type _StoreContextProviderPropsModel<
   TKeys extends Array<string>,
   TType extends Record<TKeys[number], object>,
   TParams extends Record<TKeys[number], object>,
@@ -36,4 +37,5 @@ export type _ActionProviderPropsModel<
   actions: {
     [TKey in TKeys[number]]: CaseReducerActions<SliceCaseReducers<TType[TKey]>, TKey>;
   };
+  defaultState: NestedDefaultStateModel<TKeys, TType>;
 };
