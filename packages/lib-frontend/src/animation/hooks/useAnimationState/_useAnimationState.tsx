@@ -22,7 +22,7 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
     animationProps: {
       animate: ref ? undefined : states && elementStateF,
       animateInitialState: isInitial,
-      exit: states?.exit ?? states?.inactive,
+      exit: states?.exit,
       from: ref ? states && elementStateF : (states?.inactive as never),
       transition: {
         delay,

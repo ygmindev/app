@@ -75,7 +75,8 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
           },
         }}
         elementState={valueControlled}
-        isOverflowHidden>
+        isOverflowHidden
+        testID="aaa">
         <Wrapper onMeasure={measureSet}>
           <Divider mHorizontal />
 

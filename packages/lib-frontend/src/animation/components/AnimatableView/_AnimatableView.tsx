@@ -20,7 +20,6 @@ export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewP
   forwardRef(({ animation, children, elementState, testID, ...props }, ref) => {
     const theme = useTheme();
     const { styles } = useStyles({ props });
-
     const { animationProps, animationState, to, toState } = useAnimationState({
       animation,
       elementState,
@@ -40,8 +39,8 @@ export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewP
       props.onPress || props.onPressIn || props.onPressOut
         ? (PressableAnimatable as ComponentType)
         : props.isHorizontalScrollable || props.isVerticalScrollable || props.onScroll
-        ? MotiScrollView
-        : MotiView;
+          ? MotiScrollView
+          : MotiView;
 
     return (
       <Component
