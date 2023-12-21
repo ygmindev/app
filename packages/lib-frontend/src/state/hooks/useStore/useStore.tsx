@@ -14,6 +14,7 @@ import {
 import { type DeepKeyModel } from '#lib-shared/core/core.models';
 import { type _GetValueModel } from '#lib-shared/core/utils/getValue/_getValue.models';
 import { getValue } from '#lib-shared/core/utils/getValue/getValue';
+import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 
 export const useStore = <TKey extends DeepKeyModel<RootStateModel>>(
   key: UseStoreParamsModel<TKey>,
@@ -24,7 +25,7 @@ export const useStore = <TKey extends DeepKeyModel<RootStateModel>>(
   const actions = useActions();
   const defaultValue = getValue(defaultState, key);
   return [
-    value ?? defaultValue,
+    isEmpty(value) ? defaultValue : value,
     getValue(actions, `${key}Set`) as (params?: _GetValueModel<RootStateModel, TKey>) => void,
     getValue(persistedState, key),
   ];

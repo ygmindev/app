@@ -1,16 +1,7 @@
-import { type SFCModel } from '#lib-frontend/core/core.models';
-import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
+import { type FCModel } from '#lib-frontend/core/core.models';
 import { _LocaleProvider } from '#lib-frontend/locale/providers/LocaleProvider/_LocaleProvider';
 import { type LocaleProviderPropsModel } from '#lib-frontend/locale/providers/LocaleProvider/LocaleProvider.models';
-import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 
-export const LocaleProvider: SFCModel<LocaleProviderPropsModel> = ({ children, value }) => {
-  const [timezone] = useStore('locale.timezone');
-  useAsync(
-    async (isMounted) => {
-      // isMounted() && isTimezoneAutomatic && actions?.locale.timezone(currentTimezone());
-    },
-    [timezone],
-  );
+export const LocaleProvider: FCModel<LocaleProviderPropsModel> = ({ children, value }) => {
   return <_LocaleProvider value={value}>{children}</_LocaleProvider>;
 };

@@ -1,7 +1,12 @@
 import { type AnimationStatesModel } from '#lib-frontend/animation/animation.models';
 import { type SlidePropsModel } from '#lib-frontend/animation/components/Slide/Slide.models';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
+import {
+  THEME_COLOR,
+  THEME_COLOR_MORE,
+  THEME_ROLE,
+  THEME_SIZE,
+} from '#lib-frontend/style/style.constants';
 import { type StyleModel, type ThemeModel } from '#lib-frontend/style/style.models';
 import { merge } from '#lib-shared/core/utils/merge/merge';
 
@@ -66,6 +71,7 @@ export const ANIMATION_STATES_FOCUSABLE = ({
     [ELEMENT_STATE.INACTIVE]: { [colorField]: inactiveColor, opacity: 1.0 },
     [ELEMENT_STATE.ACTIVE]: { [colorField]: activeColor, opacity: 1.0 },
     [ELEMENT_STATE.DISABLED]: {
+      backgroundColor: theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MUTED],
       [colorField]: activeColor,
       opacity: theme.opaque[THEME_SIZE.LARGE],
     },
