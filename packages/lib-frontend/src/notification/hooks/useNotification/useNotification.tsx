@@ -3,19 +3,22 @@ import { type UseNotificationModel } from '#lib-frontend/notification/hooks/useN
 import { type NotificationModel } from '#lib-frontend/notification/notification.models';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { THEME_COLOR } from '#lib-frontend/style/style.constants';
+import { debounce } from '#lib-shared/core/utils/debounce/debounce';
 import { uid } from '#lib-shared/core/utils/uid/uid';
 
 export const useNotification = (): UseNotificationModel => {
   const actions = useActions();
   const { t } = useTranslation();
 
-  const notify = (alert: NotificationModel): void =>
-    actions?.notification.notificationsAdd({
-      ...alert,
-      id: alert.id ?? uid(),
-      message: t(alert.message),
-      title: t(alert.title),
-    });
+  const notify = debounce(
+    (alert: NotificationModel): void =>
+      actions?.notification.notificationsAdd({
+        ...alert,
+        id: alert.id ?? uid(),
+        message: t(alert.message),
+        title: t(alert.title),
+      }),
+  );
 
   return {
     add: notify,

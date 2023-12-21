@@ -3,15 +3,16 @@ import {
   type CaseReducerActions,
   type CombinedState,
   type EnhancedStore,
+  original,
   type PreloadedState,
   type Reducer,
   type SliceCaseReducers,
 } from '@reduxjs/toolkit';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import cloneDeep from 'lodash/cloneDeep';
-import filter from 'lodash/filter';
 import findIndex from 'lodash/findIndex';
 import isArray from 'lodash/isArray';
+import isMatch from 'lodash/isMatch';
 import isPlainObject from 'lodash/isPlainObject';
 import mapValues from 'lodash/mapValues';
 import reduce from 'lodash/reduce';
@@ -134,7 +135,8 @@ export class _Store<
               storeActions[`${k}Remove` as TKey] = (store, value) => {
                 store.set(
                   kS,
-                  filter((store.get(kS) as Array<never>) ?? [], value as never) as never,
+                  ((store.get(kS) as Array<never>).filter((v) => !isMatch(v, value as object)) ??
+                    []) as never,
                 );
               };
               storeActions[`${k}Update` as TKey] = (store, value) => {
@@ -175,7 +177,8 @@ export class _Store<
               (state, { payload }) => {
                 (action as ActionModel<StateModel, unknown>)(
                   {
-                    get: <TKey extends keyof StateModel>(key: TKey) => (state as StateModel)[key],
+                    get: <TKey extends keyof StateModel>(key: TKey) =>
+                      original(state as StateModel)?.[key] as StateModel[TKey],
                     set: <TKey extends keyof StateModel>(
                       key: TKey,
                       value: StateModel[TKey],
@@ -244,12 +247,6 @@ export class _Store<
     void this.getStatePersisted().then((persistedState) => {
       this.persistedState = persistedState;
     });
-
-    // this.persistor.subscribe(() => {
-    //   const { bootstrapped, ...x } = this.persistor.getState();
-    //   console.warn(`BOOTSTRAP ${bootstrapped}`);
-    //   console.warn(x);
-    // });
   }
 
   getStatePersisted = async (): Promise<TType> =>
