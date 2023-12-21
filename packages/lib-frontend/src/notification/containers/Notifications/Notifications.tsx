@@ -9,7 +9,7 @@ import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const Notifications: SFCModel<NotificationsPropsModel> = () => {
-  const notifications = useStore((state) => state.notification.notifications);
+  const [notifications] = useStore('notification.notifications');
   const theme = useTheme();
   return (
     <Portal>
@@ -23,7 +23,7 @@ export const Notifications: SFCModel<NotificationsPropsModel> = () => {
         width={theme.notification.width}
         zIndex>
         <Exitable>
-          {notifications.map((notification) => (
+          {notifications?.map((notification) => (
             <Notification
               key={notification.id}
               {...notification}

@@ -32,7 +32,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
   const { signOut } = useSignInResource();
   const { push } = useRouter();
   const authState = useAuthState();
-  const currentUser = useStore((state) => state.user.currentUser);
+  const [currentUser] = useStore('user.currentUser');
   const optionsOverrides: Record<string, PartialModel<AuthMenuOptionModel>> = {
     [ACCOUNT]: { onPress: () => push({ pathname: ACCOUNT }) },
     [SIGN_OUT]: { onPress: signOut },

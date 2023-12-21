@@ -18,7 +18,7 @@ export const useApi = ({
   port,
 }: UseApiParamsModel): UseApiModel => {
   const { getToken } = useSession();
-  const currentGroup = useStore((state) => state.group.currentGroup);
+  const [currentGroup] = useStore('group.currentGroup');
   return useHttp({
     baseUri: { host: host ?? '', pathname, port: port ? toNumber(port) : undefined },
     onRequest: async (config) => {

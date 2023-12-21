@@ -10,7 +10,7 @@ import { type StyleProviderPropsModel } from '#lib-frontend/style/providers/Styl
 
 export const StyleProvider: FCModel<StyleProviderPropsModel> = ({ children }) => {
   const theme = useTheme();
-  const brightness = useStore((state) => state.style.brightness);
+  const [brightness] = useStore('style.brightness');
   const sheet = useMemo(() => config.stylesheet(theme), [config, theme]);
   return (
     <_StyleProvider value={{ brightness }}>

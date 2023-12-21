@@ -24,7 +24,7 @@ export const Slide: LFCModel<SlidePropsModel> = ({
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
-  const { width } = useStore((state) => state.app.dimension);
+  const [width] = useStore('app.dimension.width');
   const animation: AnimationModel = useMemo(
     () => ({
       duration: theme.animation.transition,

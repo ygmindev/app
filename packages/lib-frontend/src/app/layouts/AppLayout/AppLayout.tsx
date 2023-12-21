@@ -14,7 +14,7 @@ import { AUTH } from '#lib-shared/auth/auth.constants';
 
 export const AppLayout: LFCModel<AppLayoutPropsModel> = ({ children, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const notifications = useStore((state) => state.notification.notifications);
+  const [notifications] = useStore('notification.notifications');
   useTranslation([AUTH]);
   return (
     <KeyboardContainer>
@@ -30,7 +30,7 @@ export const AppLayout: LFCModel<AppLayoutPropsModel> = ({ children, ...props })
             position={SHAPE_POSITION.RELATIVE}>
             {children}
 
-            {notifications?.length > 0 && <Notifications />}
+            {notifications && notifications.length > 0 && <Notifications />}
           </Wrapper>
         </PortalHost>
       </Wrapper>

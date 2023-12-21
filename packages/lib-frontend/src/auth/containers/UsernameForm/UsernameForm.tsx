@@ -50,8 +50,7 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
     onChange: onMethodChange,
     value: method,
   });
-  const currentUser = useStore((state) => state.user.currentUser);
-
+  const [currentUser] = useStore('user.currentUser');
   const checkExists = mode === FORM_MODE.UPDATE;
 
   const handleSubmit = async (

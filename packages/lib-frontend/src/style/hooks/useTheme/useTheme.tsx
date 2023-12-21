@@ -7,7 +7,7 @@ import { type UseThemeModel } from '#lib-frontend/style/hooks/useTheme/useTheme.
 import { STYLE_BRIGHTNESS } from '#lib-frontend/style/style.constants';
 
 export const useTheme = (): UseThemeModel => {
-  const brightness = useStore((state) => state.style.brightness);
+  const [brightness] = useStore('style.brightness');
   return useMemo<UseThemeModel>(() => {
     switch (brightness) {
       case STYLE_BRIGHTNESS.DARK:

@@ -32,7 +32,7 @@ export const Route: LFCModel<RoutePropsModel> = ({ depth, route, ...props }) => 
   const isLeaf = !route.routes;
   const isActiveF = isActive({ pathname: route.fullpath });
   const isActiveLeaf = isLeaf && isActive({ isExact: true, pathname: route.fullpath });
-  const isBack = useStore((state) => state.route.isBack);
+  const [isBack] = useStore('route.isBack');
 
   useAsync(async () => {
     isActiveLeaf &&

@@ -6,9 +6,8 @@ import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { type UseCurrentUserModel } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser.models';
 
 export const useCurrentUser = (): UseCurrentUserModel => {
-  const currentUser = useStore((state) => state.user.currentUser);
+  const [currentUser] = useStore('user.currentUser');
   const { replace } = useRouter();
-
   useEffect(() => {
     if (currentUser === null) {
       void replace({ pathname: SIGN_IN });

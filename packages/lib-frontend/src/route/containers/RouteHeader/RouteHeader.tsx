@@ -28,7 +28,7 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, ...props }
   const { back, getPath, location, push } = useRouter();
   const previous = route.header?.previous;
   const ref = useRef<WrapperRefModel>(null);
-  const isLoading = useStore((state) => state.app.isLoading);
+  const [isLoading] = useStore('app.isLoading');
   return (
     <Wrapper
       {...wrapperProps}

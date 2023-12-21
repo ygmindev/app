@@ -13,7 +13,7 @@ import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
   const { back, getPath, isActive, location, push, replace } = _useRouter<TType>();
   const actions = useActions();
-  const isLoading = useStore((state) => state.app.isLoading);
+  const [isLoading] = useStore('app.isLoading');
   const theme = useTheme();
 
   const update = async <TTypeNext = undefined,>(

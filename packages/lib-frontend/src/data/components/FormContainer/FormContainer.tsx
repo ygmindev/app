@@ -88,7 +88,7 @@ const FormContainerF = forwardRef(
   ): ReactElement<
     RLFCPropsModel<FormContainerRefModel<TType>, FormContainerPropsModel<TType, TResult>>
   > => {
-    const isAppLoading = useStore((state) => state.app.isLoading);
+    const [isAppLoading] = useStore('app.isLoading');
     const { wrapperProps } = useLayoutStyles({ props });
 
     const fieldRefs = useRef<FormFieldsRefModel<TType>>({});

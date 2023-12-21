@@ -27,7 +27,7 @@ import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/sha
 
 export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
   ({ children, height, isFullSize, isOpen, onToggle, title, width }, ref) => {
-    const { height: deviceHeight } = useStore((state) => state.app.dimension);
+    const [deviceHeight] = useStore('app.dimension.height');
     const { valueControlled, valueControlledSet } = useValueControlled({
       defaultValue: false,
       onChange: onToggle,

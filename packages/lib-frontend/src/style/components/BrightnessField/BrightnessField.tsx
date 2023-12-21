@@ -1,7 +1,6 @@
 import { SelectField } from '#lib-frontend/core/components/SelectField/SelectField';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { type BrightnessFieldPropsModel } from '#lib-frontend/style/components/BrightnessField/BrightnessField.models';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -15,14 +14,13 @@ export const BrightnessField: LFCModel<BrightnessFieldPropsModel> = ({
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([STYLE]);
-  const actions = useActions();
-  const brightness = useStore((state) => state.style.brightness);
+  const [brightness, brightnessSet] = useStore('style.brightness');
   return (
     <SelectField<StyleBrightnessStateModel>
       {...wrapperProps}
       elementState={elementState}
       isHorizontal
-      onChange={(value) => actions?.style.brightness(value)}
+      onChange={brightnessSet}
       options={[
         {
           icon: 'light',

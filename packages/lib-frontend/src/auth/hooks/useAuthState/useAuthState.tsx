@@ -3,7 +3,7 @@ import { type UseAuthStateModel } from '#lib-frontend/auth/hooks/useAuthState/us
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 
 export const useAuthState = (): UseAuthStateModel => {
-  const currentUser = useStore((state) => state.user.currentUser);
+  const [currentUser] = useStore('user.currentUser');
   switch (currentUser) {
     case undefined:
       return AUTH_STATE.UNKNOWN;

@@ -3,7 +3,7 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 
 export const useIsInitialized = (): UseIsInitializedModel => {
-  const currentUser = useStore((state) => state.user.currentUser);
+  const [currentUser] = useStore('user.currentUser');
   const { isInitialized: isTranslationInitialized } = useTranslation();
   return currentUser !== undefined && isTranslationInitialized;
 };

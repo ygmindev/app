@@ -10,12 +10,12 @@ export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
   const actions = useActions();
   const { initialize } = useSession();
   const { get } = useUserResource();
-  const user = useStore((state) => state.user.currentUser);
+  const [currentUser] = useStore('user.currentUser');
 
   useAsync(async (isMounted) => {
     void initialize(async (signInToken) => {
       if (isMounted()) {
-        if (signInToken && user?._id !== signInToken._id) {
+        if (signInToken && currentUser?._id !== signInToken._id) {
           actions?.user.currentUser({ ...signInToken.claims, _id: signInToken._id });
           // const { result } = await get({ filter: [{ field: '_id', value: signInToken._id }] });
           // result && actions?.user.currentUserSet(result);

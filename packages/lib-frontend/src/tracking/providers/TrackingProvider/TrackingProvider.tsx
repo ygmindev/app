@@ -10,7 +10,7 @@ import { warn } from '#lib-shared/logging/utils/logger/logger';
 
 export const TrackingProvider: SFCModel<TrackingProviderPropsModel> = ({ children }) => {
   const { identify, initialize } = useTracking();
-  const currentUser = useStore((state) => state.user.currentUser);
+  const [currentUser] = useStore('user.currentUser');
 
   useEffect(() => {
     if (!isServer) {

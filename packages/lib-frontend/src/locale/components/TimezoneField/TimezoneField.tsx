@@ -21,7 +21,7 @@ export const TimezoneField: LFCModel<TimezoneFieldPropsModel> = ({
 }) => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
-  const timezone = useStore((state) => state.locale.timezone);
+  const [timezone] = useStore('locale.timezone');
   const { valueControlled, valueControlledSet } = useValueControlled({
     defaultValue,
     onChange,
