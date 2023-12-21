@@ -3,6 +3,7 @@ import { type UseNotificationModel } from '#lib-frontend/notification/hooks/useN
 import { type NotificationModel } from '#lib-frontend/notification/notification.models';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
 import { THEME_COLOR } from '#lib-frontend/style/style.constants';
+import { uid } from '#lib-shared/core/utils/uid/uid';
 
 export const useNotification = (): UseNotificationModel => {
   const actions = useActions();
@@ -11,6 +12,7 @@ export const useNotification = (): UseNotificationModel => {
   const notify = (alert: NotificationModel): void =>
     actions?.notification.notificationsAdd({
       ...alert,
+      id: alert.id ?? uid(),
       message: t(alert.message),
       title: t(alert.title),
     });
