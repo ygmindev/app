@@ -13,6 +13,7 @@ import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { type CallableModel } from '#lib-shared/core/core.models';
 import { getValue } from '#lib-shared/core/utils/getValue/getValue';
+import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
 
 export const SettingsField = <TType = string,>({
   element,
@@ -24,14 +25,15 @@ export const SettingsField = <TType = string,>({
 > => {
   const { t } = useTranslation([SETTINGS]);
   const { wrapperProps } = useLayoutStyles({ props });
-  const [value, _, persistedValue] = useStore(id);
+  const [value, valueSet, persistedValue] = useStore(id);
 
   const actions = useActions();
-  const [isAutomatic, isAutomaticSet] = useState<boolean>(value === persistedValue);
+  const [isAutomatic, isAutomaticSet] = useState<boolean>(isEmpty(persistedValue));
 
-  const isAutomaticSetF = (params: boolean): void => {
-    isAutomaticSet(params);
-    params && void (getValue(actions, `${id}Unset`) as CallableModel)();
+  const isAutomaticSetF = (isAutomatic: boolean): void => {
+    isAutomaticSet(isAutomatic);
+    const unset = getValue(actions, `${id}Unset`) as CallableModel;
+    isAutomatic ? unset && void unset() : valueSet(value);
   };
 
   return (

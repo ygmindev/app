@@ -59,9 +59,8 @@ export type StateActionsModel<
   TParams extends object,
 > = ArrayActionsModel<TType> &
   NonPrimitiveActionsModel<TType> &
-  ActionsModel<TType> &
   ActionsModel<TParams> &
-  UnsetActionsModel<TType>;
+  SetActionsModel<TType>;
 
 export type InitialStateModel<TType extends object> = {
   [TKey in keyof RequiredModel<TType>]:
@@ -123,6 +122,7 @@ export type NonPrimitiveActionsModel<TType> = {
     : ActionsModel<Record<`${TKey}Update`, PartialModel<TType[TKey]>>>;
 }[StringKeyModel<TType>];
 
-export type UnsetActionsModel<TType> = {
-  [TKey in StringKeyModel<TType>]: ActionsModel<Record<`${TKey}Unset`, never>>;
+export type SetActionsModel<TType> = {
+  [TKey in StringKeyModel<TType>]: ActionsModel<Record<`${TKey}Unset`, never>> &
+    ActionsModel<Record<`${TKey}Set`, TType[TKey]>>;
 }[StringKeyModel<TType>];

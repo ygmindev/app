@@ -10,11 +10,11 @@ import {
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { NotFoundPage } from '#lib-frontend/route/pages/NotFoundPage/NotFoundPage';
-import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
+import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 
 export const GroupPage: LFCModel<GroupPagePropsModel> = ({ children }) => {
   useTranslation([FUNDING]);
-  const actions = useActions();
+  const [, currentGroupSet] = useStore('group.currentGroup');
   const { location } = useRouter<GroupPageParamsModel>();
   const { get } = useGroupResource();
   const groupid = location.params?.groupid;
@@ -23,7 +23,7 @@ export const GroupPage: LFCModel<GroupPagePropsModel> = ({ children }) => {
       id="group"
       query={async () => {
         const { result } = await get({ filter: [{ field: '_id', value: groupid }] });
-        actions?.group.currentGroup(result);
+        currentGroupSet(result);
         return result;
       }}>
       {() => (

@@ -9,7 +9,7 @@ import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBoundary';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
-import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
+import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { PAYMENT_METHOD_RESOURCE_NAME } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
@@ -19,7 +19,7 @@ import { sort } from '#lib-shared/core/utils/sort/sort';
 
 export const PaymentPage: LFCModel<PaymentPagePropsModel> = ({ ...props }) => {
   const { t } = useTranslation();
-  const actions = useActions();
+  const [, paymentMethodSet] = useStore('billing.PaymentMethod');
   const currentUser = useCurrentUser();
   const { wrapperProps } = useLayoutStyles({ props });
   const { push } = useRouter();
@@ -33,7 +33,7 @@ export const PaymentPage: LFCModel<PaymentPagePropsModel> = ({ ...props }) => {
     const resultF =
       result &&
       sort(result, [(x) => currentUser?.paymentMethodPrimary !== x._id, ['created', false]]);
-    resultF && actions?.billing.PaymentMethod(resultF);
+    resultF && paymentMethodSet(resultF);
     return resultF;
   };
 

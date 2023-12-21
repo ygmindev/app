@@ -25,7 +25,7 @@ export const useStore = <TKey extends DeepKeyModel<RootStateModel>>(
   const defaultValue = getValue(defaultState, key);
   return [
     value ?? defaultValue,
-    getValue(actions, key) as (params?: _GetValueModel<RootStateModel, TKey>) => void,
+    getValue(actions, `${key}Set`) as (params?: _GetValueModel<RootStateModel, TKey>) => void,
     getValue(persistedState, key),
   ];
 };

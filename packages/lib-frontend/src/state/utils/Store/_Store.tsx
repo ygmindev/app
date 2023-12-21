@@ -119,7 +119,7 @@ export class _Store<
           ({ storeActions, storeInitialState }, v, k) => {
             type TKey = keyof typeof storeActions;
             const kS = k as keyof StateModel;
-            storeActions[k as TKey] = (store, value) => {
+            storeActions[`${k}Set` as TKey] = (store, value) => {
               store.set(kS, value as never);
             };
             storeActions[`${k}Unset` as TKey] = (store) => {

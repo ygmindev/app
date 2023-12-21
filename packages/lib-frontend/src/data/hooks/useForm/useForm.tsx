@@ -6,7 +6,7 @@ import {
 } from '#lib-frontend/data/hooks/useForm/useForm.models';
 import { useValidator } from '#lib-frontend/data/hooks/useValidator/useValidator';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
+import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
 import { error } from '#lib-shared/logging/utils/logger/logger';
 
@@ -23,14 +23,14 @@ export const useForm = <TType, TResult = void>({
   const { t } = useTranslation();
   const { handleError } = useErrorContext();
   const validate = useValidator();
-  const actions = useActions();
+  const [, isLoadingSet] = useStore('app.isLoading');
 
   const handleSubmit = async (values: TType): Promise<TResult | null> => {
     try {
       isValidateChanged &&
         isEqual(values, initialValues) &&
         handleError(Error(t('core:validateChanged')));
-      isBlocking && actions?.app.isLoading(true);
+      isBlocking && isLoadingSet(true);
       const data = onSubmit && (await onSubmit(values));
       onSuccess && (await onSuccess(values, data));
       return data ?? null;
@@ -38,7 +38,7 @@ export const useForm = <TType, TResult = void>({
       error(e);
       onError ? onError(e as Error) : handleError(e as Error);
     } finally {
-      isBlocking && actions?.app.isLoading(false);
+      isBlocking && isLoadingSet(false);
       onComplete && onComplete();
     }
     return null;

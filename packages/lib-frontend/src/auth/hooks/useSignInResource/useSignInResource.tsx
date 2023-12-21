@@ -5,6 +5,7 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
 import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
+import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useTracking } from '#lib-frontend/tracking/hooks/useTracking/useTracking';
 import { USER_RESOURCE_PARAMS } from '#lib-frontend/user/resources/User/User.constants';
 import { UnauthorizedError } from '#lib-shared/auth/errors/UnauthorizedError/UnauthorizedError';
@@ -28,6 +29,7 @@ const userFields = USER_RESOURCE_PARAMS.fields.map(({ id }) => id);
 
 export const useSignInResource = (): UseSignInResourceModel => {
   const actions = useActions();
+  const [, currentUserSet] = useStore('user.currentUser');
   const { identify, reset } = useTracking();
   const { signInWithToken, signOut } = useSession();
   const { success } = useNotification();
@@ -38,7 +40,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
   const signIn = async (signIn?: PartialModel<SignInModel>): Promise<void> => {
     if (signIn) {
       const { token, user } = signIn;
-      actions?.user.currentUser(user ?? null);
+      currentUserSet(user ?? null);
       token && (await signInWithToken(token));
       user?._id && void identify(user._id);
     } else {

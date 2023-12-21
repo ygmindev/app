@@ -3,19 +3,19 @@ import {
   type UseMutationModel,
   type UseMutationParamsModel,
 } from '#lib-frontend/data/hooks/useMutation/useMutation.models';
-import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
+import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 
 export const useMutation = <TParams = undefined, TResult = void>(
   ...[id, callback, options]: UseMutationParamsModel<TParams, TResult>
 ): UseMutationModel<TParams, TResult> => {
-  const actions = useActions();
+  const [, isLoadingSet] = useStore('app.isLoading');
   return _useMutation<TParams, TResult>(
     id,
     options?.isBlocking
       ? async () => {
-          actions?.app.isLoading(true);
+          isLoadingSet(true);
           const result = await callback();
-          actions?.app.isLoading(false);
+          isLoadingSet(false);
           return result;
         }
       : callback,

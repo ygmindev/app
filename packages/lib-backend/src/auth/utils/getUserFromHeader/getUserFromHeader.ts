@@ -9,7 +9,7 @@ export const getUserFromHeader = async (
   params: GetUserFromHeaderParamsModel,
 ): Promise<GetUserFromHeaderModel> => {
   if (params) {
-    const [_, token] = params.split(' ');
+    const [, token] = params.split(' ');
     return token && token !== 'null' ? Container.get(JwtService).verifyToken(token) : null;
   }
   return null;

@@ -4,21 +4,21 @@ import {
   type UseQueryModel,
   type UseQueryParamsModel,
 } from '#lib-frontend/data/hooks/useQuery/useQuery.models';
-import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
+import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 
 export const useQuery = <TParams = undefined, TResult = void>(
   ...[id, callback, options, params]: UseQueryParamsModel<TParams, TResult>
 ): UseQueryModel<TResult> => {
-  const actions = useActions();
+  const [, isLoadingSet] = useStore('app.isLoading');
   const cache = options?.cache;
   const cacheF = (cache === true ? config.cacheTime : cache) ?? config.cacheTimeDefault;
   return _useQuery(
     id,
     options?.isBlocking
       ? async () => {
-          actions?.app.isLoading(true);
+          isLoadingSet(true);
           const result = await callback();
-          actions?.app.isLoading(false);
+          isLoadingSet(false);
           return result;
         }
       : callback,
