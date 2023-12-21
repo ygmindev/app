@@ -67,14 +67,19 @@ export const ANIMATION_STATES_FOCUSABLE = ({
     ? theme.color.palette[THEME_COLOR.ERROR][THEME_ROLE.MAIN]
     : theme.color.border;
   const colorField = isText ? 'color' : 'borderColor';
+  const backgroundColor = theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MAIN];
   return {
-    [ELEMENT_STATE.INACTIVE]: { [colorField]: inactiveColor, opacity: 1.0 },
-    [ELEMENT_STATE.ACTIVE]: { [colorField]: activeColor, opacity: 1.0 },
+    [ELEMENT_STATE.INACTIVE]: { backgroundColor, [colorField]: inactiveColor, opacity: 1.0 },
+    [ELEMENT_STATE.ACTIVE]: { backgroundColor, [colorField]: activeColor, opacity: 1.0 },
     [ELEMENT_STATE.DISABLED]: {
       backgroundColor: theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MUTED],
-      [colorField]: activeColor,
+      [colorField]: inactiveColor,
+      opacity: theme.opaque[THEME_SIZE.MEDIUM],
+    },
+    [ELEMENT_STATE.LOADING]: {
+      backgroundColor: theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MUTED],
+      [colorField]: inactiveColor,
       opacity: theme.opaque[THEME_SIZE.LARGE],
     },
-    [ELEMENT_STATE.LOADING]: { [colorField]: activeColor, opacity: theme.opaque[THEME_SIZE.LARGE] },
   };
 };
