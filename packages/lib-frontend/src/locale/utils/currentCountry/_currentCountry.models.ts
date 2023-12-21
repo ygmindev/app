@@ -1,1 +1,1 @@
-export type _CurrentCountryModel = string | null;
+export type _CurrentCountryModel = string | undefined;

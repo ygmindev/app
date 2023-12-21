@@ -1,8 +1,7 @@
 import find from 'lodash/find';
-import { forwardRef, useMemo } from 'react';
+import { forwardRef, useEffect, useMemo } from 'react';
 
 import { type RLFCModel } from '#lib-frontend/core/core.models';
-import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { DropdownField } from '#lib-frontend/data/components/DropdownField/DropdownField';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import {
@@ -11,12 +10,13 @@ import {
 } from '#lib-frontend/locale/components/CountryField/CountryField.models';
 import { useCountries } from '#lib-frontend/locale/hooks/useCountries/useCountries';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { currentCountry } from '#lib-frontend/locale/utils/currentCountry/currentCountry';
+import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
 export const CountryField: RLFCModel<CountryFieldRefModel, CountryFieldPropsModel> = forwardRef(
   ({ defaultValue, onChange, value, ...props }, ref) => {
     const { t } = useTranslation();
+    const [countryCode] = useStore('locale.countryCode');
     const { wrapperProps } = useLayoutStyles({ props });
     const { valueControlled, valueControlledSet } = useValueControlled({
       defaultValue,
@@ -35,14 +35,13 @@ export const CountryField: RLFCModel<CountryFieldRefModel, CountryFieldPropsMode
       [countries],
     );
 
-    useAsync(
-      async (isMounted) => {
-        const country = isMounted() && (await currentCountry());
-        const value = country && find(options, ({ code }) => code.includes(country));
-        isMounted() && value && valueControlledSet(value.id);
-      },
-      [options],
-    );
+    useEffect(() => {
+      // TODO: better workflow?
+      if (!valueControlled && countryCode) {
+        const option = find(options, ({ code }) => code.includes(countryCode));
+        option && valueControlledSet(option.id);
+      }
+    }, [countryCode, options, valueControlled]);
 
     return (
       <DropdownField

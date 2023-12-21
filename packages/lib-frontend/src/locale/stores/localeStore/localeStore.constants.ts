@@ -5,6 +5,7 @@ export const LOCALE_REDUCER: LocaleReducerModel = {
   actions: {},
 
   defaultState: {
+    countryCode: 'US',
     language: undefined,
     timezone: currentTimezone(),
   },
