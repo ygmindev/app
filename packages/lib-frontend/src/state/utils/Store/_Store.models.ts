@@ -38,4 +38,5 @@ export type _StoreContextProviderPropsModel<
     [TKey in TKeys[number]]: CaseReducerActions<SliceCaseReducers<TType[TKey]>, TKey>;
   };
   defaultState: NestedDefaultStateModel<TKeys, TType>;
+  persistedState?: NestedDefaultStateModel<TKeys, TType>;
 };

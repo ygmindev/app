@@ -29,5 +29,6 @@ export type StateProviderPropsModel<
 > = ProviderPropsModel<{
   actionContext: Context<NestedActionsModel<TKeys, TType, TParams> | undefined>;
   defaultStateContext: Context<NestedDefaultStateModel<TKeys, TType> | undefined>;
+  persistedStateContext: Context<NestedDefaultStateModel<TKeys, TType> | undefined>;
   store: StoreModel<TKeys, TType, TParams>;
 }>;

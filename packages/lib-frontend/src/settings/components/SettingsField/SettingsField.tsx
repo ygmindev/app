@@ -24,10 +24,10 @@ export const SettingsField = <TType = string,>({
 > => {
   const { t } = useTranslation([SETTINGS]);
   const { wrapperProps } = useLayoutStyles({ props });
-  const [value, _, defaultValue] = useStore(id);
+  const [value, _, persistedValue] = useStore(id);
 
   const actions = useActions();
-  const [isAutomatic, isAutomaticSet] = useState<boolean>(value === defaultValue);
+  const [isAutomatic, isAutomaticSet] = useState<boolean>(value === persistedValue);
 
   const isAutomaticSetF = (params: boolean): void => {
     isAutomaticSet(params);

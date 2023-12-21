@@ -56,6 +56,7 @@ const StoreContextProvider = <
   actions,
   children,
   defaultState,
+  persistedState,
   value,
 }: _StoreContextProviderPropsModel<TKeys, TType, TParams>): ReactElement<
   _StoreContextProviderPropsModel<TKeys, TType, TParams>
@@ -71,6 +72,9 @@ const StoreContextProvider = <
         value?.actionContext.Provider && <value.actionContext.Provider value={actionsF} />,
         value?.defaultStateContext.Provider && (
           <value.defaultStateContext.Provider value={defaultState} />
+        ),
+        value?.persistedStateContext.Provider && (
+          <value.persistedStateContext.Provider value={persistedState} />
         ),
       ]),
     [],
@@ -90,6 +94,7 @@ export class _Store<
     [TKey in TKeys[number]]: CaseReducerActions<SliceCaseReducers<TType[TKey]>, TKey>;
   };
   protected defaultState: NestedDefaultStateModel<TKeys, TType>;
+  protected persistedState?: NestedDefaultStateModel<TKeys, TType>;
   protected persistors: {
     [TKey in TKeys[number]]?: PersistConfig<TType[TKey]>;
   };
@@ -235,9 +240,15 @@ export class _Store<
       reducer: reducersF,
     });
     this.persistor = persistStore(this.store);
-    // this._persistor.subscribe(() => {
-    //   const { bootstrapped } = this._persistor.getState();
-    //   console.warn(bootstrapped);
+
+    void this.getStatePersisted().then((persistedState) => {
+      this.persistedState = persistedState;
+    });
+
+    // this.persistor.subscribe(() => {
+    //   const { bootstrapped, ...x } = this.persistor.getState();
+    //   console.warn(`BOOTSTRAP ${bootstrapped}`);
+    //   console.warn(x);
     // });
   }
 
@@ -252,6 +263,7 @@ export class _Store<
         <StoreContextProvider
           actions={this.actions}
           defaultState={this.defaultState}
+          persistedState={this.persistedState}
           value={value}>
           {children}
         </StoreContextProvider>

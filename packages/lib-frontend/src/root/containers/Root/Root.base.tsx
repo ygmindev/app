@@ -25,6 +25,8 @@ export const actionContext = createContext<RootActionsModel | undefined>(undefin
 
 export const defaultStateContext = createContext<RootDefaultStateModel | undefined>(undefined);
 
+export const persistedStateContext = createContext<RootDefaultStateModel | undefined>(undefined);
+
 export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, context }) => {
   const store = useMemo(
     () =>
@@ -47,7 +49,15 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
       <StyleProvider />,
       <LocaleProvider value={context?.locale} />,
       <AppProvider />,
-      <store.Provider value={{ ...context?.state, actionContext, defaultStateContext, store }} />,
+      <store.Provider
+        value={{
+          ...context?.state,
+          actionContext,
+          defaultStateContext,
+          persistedStateContext,
+          store,
+        }}
+      />,
       <Suspense />,
     ],
     [additionalProviders, context],
