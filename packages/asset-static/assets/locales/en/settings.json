@@ -1,6 +1,5 @@
 {
   "appearance": "appearance",
-  "brightness": "brightness",
-  "preferences": "preferences",
-  "setAutomatically": "set automatically"
+  "setAutomatically": "set automatically",
+  "settings": "TRANSLATION_MISSING"
 }

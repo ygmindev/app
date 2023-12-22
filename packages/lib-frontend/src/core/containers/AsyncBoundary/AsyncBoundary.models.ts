@@ -1,33 +1,18 @@
 import { type ReactElement } from 'react';
 
-import { type ERROR_MODE } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.constants';
+import { type ItemPropsModel } from '#lib-frontend/core/components/Item/Item.models';
 import { type ChildrenPropsModel } from '#lib-frontend/core/core.models';
-import {
-  type NotificationModel,
-  type TranslatableNotificationModel,
-} from '#lib-frontend/notification/notification.models';
 
-export type ErrorModeModel = `${ERROR_MODE}`;
-
-export type ErrorContextModel = {
-  errorMode?: ErrorModeModel;
-} & Pick<NotificationModel, 'icon' | 'title' | 'message'>;
-
-export type TranslatableErrorContextModel = Pick<
-  TranslatableNotificationModel,
-  'icon' | 'title' | 'message'
-> &
-  Pick<ErrorContextModel, 'errorMode'>;
+export type ErrorContextModel = Omit<ItemPropsModel, 'color'>;
 
 export type AsyncBoundaryContextModel = {
-  errorContextGet?(error: Error): TranslatableErrorContextModel | undefined;
+  errorContextGet?(error: Error): ItemPropsModel | undefined;
   errorContextSet(value: ErrorContextModel): void;
-  errorMode?: ErrorModeModel;
   handleRefresh(): void;
 };
 
 export type AsyncBoundaryPropsModel = ChildrenPropsModel &
-  Pick<AsyncBoundaryContextModel, 'errorMode' | 'errorContextGet'> & {
+  Pick<AsyncBoundaryContextModel, 'errorContextGet'> & {
     fallback?: ReactElement;
     onRefresh?(): Promise<void>;
   };

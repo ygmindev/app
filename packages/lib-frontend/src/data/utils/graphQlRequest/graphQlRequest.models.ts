@@ -7,6 +7,7 @@ export type GraphQlRequestParamsModel<
   TResult,
   TName extends string = string,
 > = GraphQlQueryHttpParamsModel<TParams, TResult, TName> & {
+  onError?(error: Error): void;
   onRequest(params: {
     query: string;
     variables?: TParams;

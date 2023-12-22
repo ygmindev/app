@@ -13,7 +13,7 @@ const { _config, config } = defineConfig({
   config: {
     distDir: fromStatic('assets/locales'),
 
-    languages,
+    languages: languages.map(({ id }) => id),
 
     missingValue: 'TRANSLATION_MISSING',
   } satisfies ParserConfigModel,

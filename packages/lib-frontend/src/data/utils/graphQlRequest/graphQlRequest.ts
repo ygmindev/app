@@ -12,6 +12,7 @@ import { error } from '#lib-shared/logging/utils/logger/logger';
 export const graphQlRequest = async <TParams, TResult, TName extends string = string>({
   fields,
   name,
+  onError,
   onRequest,
   params,
   type,
@@ -30,7 +31,12 @@ export const graphQlRequest = async <TParams, TResult, TName extends string = st
   if (graphQlError) {
     error(graphQlError);
     // TODO: fix statuscode
-    throw new HttpError(HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR, graphQlError.message);
+    const e = new HttpError(HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR, graphQlError.message);
+    if (onError) {
+      onError(e);
+    } else {
+      throw e;
+    }
   }
   return (result && result.data && (result.data[name] as TResult)) ?? null;
 };

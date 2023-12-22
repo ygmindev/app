@@ -7,6 +7,7 @@ export type _UseMutationParamsModel<TParams = undefined, TResult = void> = [
   id: string,
   callback: (params?: TParams) => Promise<TResult | null>,
   options?: _UseMutationOptionsModel,
+  params?: TParams,
 ];
 
 export type _UseMutationModel<TParams = undefined, TResult = void> = WithIdModel & {

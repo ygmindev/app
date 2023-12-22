@@ -4,7 +4,7 @@ import { AppearanceSettingsPage } from '#lib-frontend/settings/pages/AppearanceS
 import { APPEARANCE } from '#lib-frontend/settings/settings.constants';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 
-export const settingRoutes = [
+export const settingsRoutes = [
   {
     element: <AppearanceSettingsPage />,
     icon: 'eye',

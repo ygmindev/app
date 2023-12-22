@@ -8,7 +8,6 @@ import { type LFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBoundary';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
@@ -22,11 +21,7 @@ export const PaymentPage: LFCModel<PaymentPagePropsModel> = ({ ...props }) => {
   const [, paymentMethodSet] = useStore('billing.PaymentMethod');
   const currentUser = useCurrentUser();
   const { wrapperProps } = useLayoutStyles({ props });
-  const { push } = useRouter();
   const { getMany } = usePaymentMethodResource();
-
-  const tPaymentMethod = t('billing:paymentMethod');
-  const tPaymentMethodAdd = t('core:new', { value: tPaymentMethod });
 
   const query = async (): Promise<Array<PartialModel<PaymentMethodModel>> | undefined> => {
     const { result } = await getMany({ filter: [], root: currentUser?._id });

@@ -1,7 +1,7 @@
-import { type ClassModel } from '#lib-shared/core/core.models';
+import { type ResourceClassModel } from '#lib-backend/resource/resource.models';
 
 export type _WithResolverParamsModel<TType> = {
-  Resource?(): ClassModel<TType>;
+  Resource?(): ResourceClassModel<TType>;
 };
 
 export type _WithResolverModel = ClassDecorator;

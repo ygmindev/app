@@ -4,5 +4,5 @@ import { type _UseQueryContextModel } from '#lib-frontend/data/hooks/useQueryCon
 
 export const _useQueryContext = (): _UseQueryContextModel => {
   const { reset } = useQueryErrorResetBoundary();
-  return { reset };
+  return { handleRefresh: reset };
 };

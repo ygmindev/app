@@ -1,6 +1,6 @@
 import isNumber from 'lodash/isNumber';
 
-import { THEME_SIZE, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
+import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { type TextStyleModel } from '#lib-frontend/style/style.models';
 import {
   FONT_ALIGN,
@@ -29,9 +29,7 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
     fontSize: isNumber(fontSize)
       ? fontSize
       : theme.font.size[
-          type === FONT_TYPE.HEADLINE
-            ? THEME_SIZE_MORE.XLARGE
-            : type === FONT_TYPE.TITLE || type === FONT_TYPE.SUBTITLE
+          type === FONT_TYPE.HEADLINE || type === FONT_TYPE.TITLE || type === FONT_TYPE.SUBTITLE
             ? THEME_SIZE.LARGE
             : fontSize
         ],

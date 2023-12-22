@@ -1,7 +1,6 @@
 {
   "billing": "TRANSLATION_MISSING",
   "endingIn": "{{type}} ending in {{value}}",
-  "payment": "payment",
   "paymentMethod": "payment method",
   "paymentMethod_plural": "{{count}} payment methods"
 }

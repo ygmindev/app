@@ -6,14 +6,8 @@ import {
   type ElementStatePropsModel,
 } from '#lib-frontend/core/core.models';
 import { type AsyncPropsModel } from '#lib-frontend/data/data.models';
-import {
-  type UseMutationModel,
-  type UseMutationParamsModel,
-} from '#lib-frontend/data/hooks/useMutation/useMutation.models';
-import {
-  type UseQueryModel,
-  type UseQueryParamsModel,
-} from '#lib-frontend/data/hooks/useQuery/useQuery.models';
+import { type UseMutationParamsModel } from '#lib-frontend/data/hooks/useMutation/useMutation.models';
+import { type UseQueryParamsModel } from '#lib-frontend/data/hooks/useQuery/useQuery.models';
 import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 import { type NilModel, type PartialModel } from '#lib-shared/core/core.models';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
@@ -29,10 +23,7 @@ export type DataBoundaryPropsModel<TParams = undefined, TResult = void> = Omit<
     fallbackData?: TResult;
   };
 
-export type DataBoundaryRefModel<
-  TParams = undefined,
-  TResult = void,
-> = QueryComponentRefModel<TResult> & MutateComponentRefModel<TParams, TResult>;
+export type DataBoundaryRefModel = QueryComponentRefModel & MutateComponentRefModel;
 
 export type QueryComponentPropsModel<TParams = undefined, TResult = void> = WithIdModel &
   AsyncPropsModel &
@@ -44,7 +35,9 @@ export type QueryComponentPropsModel<TParams = undefined, TResult = void> = With
     query: UseQueryParamsModel<TParams, TResult>[1];
   };
 
-export type QueryComponentRefModel<TResult = void> = Pick<UseQueryModel<TResult>, 'query'>;
+export type QueryComponentRefModel = {
+  query?(): Promise<void>;
+};
 
 export type MutateComponentPropsModel<TParams = undefined, TResult = void> = WithIdModel &
   AsyncPropsModel &
@@ -53,9 +46,9 @@ export type MutateComponentPropsModel<TParams = undefined, TResult = void> = Wit
   > & {
     emptyMessage?: TranslatableTextModel;
     mutate: UseMutationParamsModel<TParams, TResult>[1];
+    params?: TParams;
   };
 
-export type MutateComponentRefModel<TParams = undefined, TResult = void> = Pick<
-  UseMutationModel<TParams, TResult>,
-  'mutate'
->;
+export type MutateComponentRefModel = {
+  mutate?(): Promise<void>;
+};

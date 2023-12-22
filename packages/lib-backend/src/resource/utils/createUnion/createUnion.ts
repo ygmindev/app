@@ -4,6 +4,7 @@ import {
   type CreateUnionModel,
   type CreateUnionParamsModel,
 } from '#lib-backend/resource/utils/createUnion/createUnion.models';
+import { type ClassModel } from '#lib-shared/core/core.models';
 
 export const createUnion = <TType extends unknown>({
   Resource,
@@ -13,5 +14,5 @@ export const createUnion = <TType extends unknown>({
   createUnionType({
     name,
     resolveType: resolve ? (value) => resolve(value as TType) : undefined,
-    types: () => Resource,
-  }) as CreateUnionModel<TType>;
+    types: () => Resource as Array<ClassModel>,
+  }) as unknown as CreateUnionModel<TType>;

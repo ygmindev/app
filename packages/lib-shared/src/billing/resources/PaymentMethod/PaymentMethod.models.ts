@@ -1,9 +1,16 @@
-import { type BankFormModel, type BankModel } from '#lib-shared/billing/resources/Bank/Bank.models';
-import { type CardFormModel, type CardModel } from '#lib-shared/billing/resources/Card/Card.models';
 import { type PAYMENT_METHOD_TYPE } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import { type EmbeddedResourceModel } from '#lib-shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
+import { type USER_RESOURCE_NAME } from '#lib-shared/user/resources/User/User.constants';
+import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
-export type PaymentMethodModel = CardModel | BankModel;
+export type PaymentMethodModel = EmbeddedResourceModel & {
+  [USER_RESOURCE_NAME]: UserModel;
 
-export type PaymentMethodFormModel = CardFormModel | BankFormModel;
+  last4: string;
+
+  type: PaymentMethodTypeModel;
+};
+
+// export type PaymentMethodModel = BankModel | CardModel;
 
 export type PaymentMethodTypeModel = `${PAYMENT_METHOD_TYPE}`;

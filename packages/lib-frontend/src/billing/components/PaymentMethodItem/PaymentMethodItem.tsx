@@ -58,7 +58,7 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
   };
 
   const title = t(getPaymentMethodTitle(value));
-  const isPrimary = currentUser?.paymentMethodPrimary === value?.id;
+  const isPrimary = currentUser?.paymentMethodPrimary === value?._id;
 
   const getIcon = useCallback((): ReactElement | null => {
     switch (value?.type) {
@@ -128,7 +128,7 @@ export const PaymentMethodItem: SFCModel<PaymentMethodItemPropsModel> = ({
                   currentUser &&
                   update({
                     filter: [{ field: '_id', value: currentUser._id }],
-                    update: { paymentMethodPrimary: value?.id },
+                    update: { paymentMethodPrimary: value?._id },
                   }),
               },
               { id: 'div', isDivider: true },

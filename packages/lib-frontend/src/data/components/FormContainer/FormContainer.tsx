@@ -6,7 +6,6 @@ import { forwardRef, useImperativeHandle } from 'react';
 import { Accordion } from '#lib-frontend/animation/components/Accordion/Accordion';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { AsyncBoundary } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
-import { ERROR_MODE } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.constants';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import {
   type LFCPropsModel,
@@ -44,9 +43,7 @@ export const FormContainer = forwardRef(
       FormContainerPropsModel<TType, TResult>
     >;
     return (
-      <AsyncBoundary
-        errorContextGet={errorContextGet}
-        errorMode={ERROR_MODE.NOTIFICATION}>
+      <AsyncBoundary errorContextGet={errorContextGet}>
         <Component
           {...props}
           ref={ref}

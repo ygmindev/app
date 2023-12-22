@@ -41,8 +41,8 @@ export const OtpForm: LFCModel<OtpFormPropsModel> = ({
       errorContextGet={(e) =>
         (e as HttpError).statusCode === HTTP_STATUS_CODE.UNAUTHORIZED
           ? {
+              description: ({ t }) => t('auth:wrongOtp'),
               icon: 'ban',
-              message: ({ t }) => t('auth:wrongOtp'),
               title: ({ t }) => t('auth:wrongOtp'),
             }
           : undefined

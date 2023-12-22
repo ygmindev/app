@@ -58,7 +58,7 @@ export class _HttpService implements _HttpServiceModel {
       );
   }
 
-  _request = async <TParams, TResult>(
+  request = async <TParams, TResult>(
     method: HttpMethodModel,
     { params, path, request }: _HttpRequestParamsModel<TParams>,
   ): Promise<TResult | null> => {
@@ -83,7 +83,7 @@ export class _HttpService implements _HttpServiceModel {
     path,
     request,
   }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
-    this._request<TParams, TResult>(HTTP_METHOD.GET, {
+    this.request<TParams, TResult>(HTTP_METHOD.GET, {
       path: uri<TParams>({ host: path, params }),
       request,
     });
@@ -93,7 +93,7 @@ export class _HttpService implements _HttpServiceModel {
     path,
     request,
   }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
-    this._request<TParams, TResult>(HTTP_METHOD.DELETE, {
+    this.request<TParams, TResult>(HTTP_METHOD.DELETE, {
       path: uri<TParams>({ host: path, params }),
       request,
     });
@@ -103,12 +103,12 @@ export class _HttpService implements _HttpServiceModel {
     path,
     request,
   }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
-    this._request<TParams, TResult>(HTTP_METHOD.POST, { params, path, request });
+    this.request<TParams, TResult>(HTTP_METHOD.POST, { params, path, request });
 
   put = async <TParams, TResult>({
     params,
     path,
     request,
   }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
-    this._request<TParams, TResult>(HTTP_METHOD.PUT, { params, path, request });
+    this.request<TParams, TResult>(HTTP_METHOD.PUT, { params, path, request });
 }

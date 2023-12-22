@@ -16,5 +16,9 @@ export const selfAuthorizer =
   >(
     self: SelfAuthorizerParamsModel<TMethod, TType, TForm> = (input) => input?.root,
   ): SelfAuthorizerModel<TMethod, TType, TForm> =>
-  ({ context, input }) =>
-    isEqual(context?.user?._id, self(input));
+  // ({ context, input }) =>
+  //   isEqual(context?.user?._id, self(input));
+  ({ context, input }) => {
+    console.warn(`@@@ ${context?.user?._id} ${input?.root} ${self(input)}`);
+    return isEqual(context?.user?._id, self(input));
+  };

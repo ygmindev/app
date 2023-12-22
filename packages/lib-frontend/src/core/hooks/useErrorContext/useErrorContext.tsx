@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 
 import { asyncBoundaryContext } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
-import { ERROR_MODE } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.constants';
 import { type ErrorContextModel } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
+import { ERROR_TYPE } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext.constants';
 import { type UseErrorContextModel } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
@@ -13,7 +13,7 @@ import { error } from '#lib-shared/logging/utils/logger/logger';
 export const useErrorContext = (): UseErrorContextModel => {
   const { t } = useTranslation();
   const { error: notify } = useNotification();
-  const { errorContextGet, errorContextSet, errorMode } = useContext(asyncBoundaryContext);
+  const { errorContextGet, errorContextSet } = useContext(asyncBoundaryContext);
 
   const errorContextGetF = (e: Error): ErrorContextModel => {
     let errorContext = errorContextGet && errorContextGet(e);
@@ -21,44 +21,47 @@ export const useErrorContext = (): UseErrorContextModel => {
       error(e);
       switch ((e as HttpError).statusCode) {
         case HTTP_STATUS_CODE.FORBIDDEN: {
-          errorContext = { icon: 'ban', message: ({ t }) => t('core:errorForbidden') };
+          errorContext = { description: ({ t }) => t('core:errorForbidden'), icon: 'ban' };
           break;
         }
         case HTTP_STATUS_CODE.NETWORK_CONNECT_TIMEOUT: {
           errorContext = {
-            errorMode: ERROR_MODE.FALLBACK,
+            description: ({ t }) => t('core:errorOffline'),
             icon: 'offline',
-            message: ({ t }) => t('core:errorOffline'),
           };
           break;
         }
         case HTTP_STATUS_CODE.UNAUTHORIZED: {
           errorContext = {
+            description: ({ t }) => t('core:errorUnauthorized'),
             icon: 'lock',
-            message: ({ t }) => t('core:errorUnauthorized'),
           };
           break;
         }
         default: {
-          errorContext = { icon: 'sad', message: ({ t }) => t('core:errorGeneric') };
+          errorContext = {
+            description: ({ t }) => t('core:errorGeneric'),
+            icon: 'sad',
+            title: ({ t }) => t('core:somethingWentWrong'),
+          };
           break;
         }
       }
     }
-    const { errorMode, icon, message, title } = errorContext;
-    return { errorMode, icon, message: message && t(message), title: title && t(title) };
+    const { description, icon, title } = errorContext;
+    return { description: description && t(description), icon, title: title && t(title) };
   };
 
-  const handleError = (error: Error): void => {
-    const errorContext = errorContextGetF(error);
-    [errorMode, errorContext.errorMode].includes(ERROR_MODE.FALLBACK)
-      ? errorContextSet(errorContext)
-      : notify({
-          icon: errorContext.icon,
-          message: errorContext.message ? t(errorContext.message) : undefined,
-          title: errorContext.title ? t(errorContext.title) : undefined,
-        });
+  return {
+    handleError: (error, type = ERROR_TYPE.FALLBACK): void => {
+      const errorContext = errorContextGetF(error);
+      type === ERROR_TYPE.FALLBACK
+        ? errorContextSet(errorContext)
+        : notify({
+            description: errorContext.description ? t(errorContext.description) : undefined,
+            icon: errorContext.icon,
+            title: errorContext.title ? t(errorContext.title) : undefined,
+          });
+    },
   };
-
-  return { handleError };
 };

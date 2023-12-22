@@ -14,8 +14,8 @@ export const useNotification = (): UseNotificationModel => {
     (alert: NotificationModel): void =>
       actions?.notification.notificationsAdd({
         ...alert,
+        description: t(alert.description),
         id: alert.id ?? uid(),
-        message: t(alert.message),
         title: t(alert.title),
       }),
   );

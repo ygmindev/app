@@ -199,6 +199,461 @@ input AccessUpdateUpdateInput {
   role: [String]
 }
 
+type Bank {
+  User: User
+  _id: String
+  bank: String
+  created: DateTime
+  id: String
+  last4: String
+  type: String
+}
+
+input BankCreateFormInput {
+  User: UserInput
+  _id: String
+  bank: String
+  created: DateTime
+  id: String
+  last4: String
+  type: String
+}
+
+input BankCreateInput {
+  form: BankCreateFormInput
+  root: String
+}
+
+input BankCreateManyFormInput {
+  User: UserInput
+  _id: String
+  bank: String
+  created: DateTime
+  id: String
+  last4: String
+  type: String
+}
+
+input BankCreateManyInput {
+  form: [BankCreateManyFormInput]
+  root: String
+}
+
+type BankCreateManyOutput {
+  result: Bank
+  root: BankCreateManyOutputRoot
+}
+
+type BankCreateManyOutputRoot {
+  root: BankCreateManyOutputRoot
+}
+
+type BankCreateOutput {
+  result: Bank
+  root: BankCreateOutputRoot
+}
+
+type BankCreateOutputRoot {
+  root: BankCreateOutputRoot
+}
+
+type BankGetConnectionConnection {
+  edges: [BankGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type BankGetConnectionEdge {
+  cursor: String
+  node: Bank
+}
+
+input BankGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [BankInput]
+  resourceValue: BankInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input BankGetConnectionInput {
+  filter: [BankGetConnectionFilterInput]
+  pagination: PaginationInput
+  root: String
+}
+
+type BankGetConnectionOutput {
+  result: BankGetConnectionConnection
+  root: BankGetConnectionOutputRoot
+}
+
+type BankGetConnectionOutputRoot {
+  root: BankGetConnectionOutputRoot
+}
+
+input BankGetFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [BankInput]
+  resourceValue: BankInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input BankGetInput {
+  filter: [BankGetFilterInput]
+  root: String
+}
+
+input BankGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [BankInput]
+  resourceValue: BankInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input BankGetManyInput {
+  filter: [BankGetManyFilterInput]
+  root: String
+}
+
+type BankGetManyOutput {
+  result: [Bank]
+  root: BankGetManyOutputRoot
+}
+
+type BankGetManyOutputRoot {
+  root: BankGetManyOutputRoot
+}
+
+type BankGetOutput {
+  result: Bank
+  root: BankGetOutputRoot
+}
+
+type BankGetOutputRoot {
+  root: BankGetOutputRoot
+}
+
+input BankInput {
+  User: UserInput
+  _id: String
+  bank: String
+  created: DateTime
+  id: String
+  last4: String
+  type: String
+}
+
+input BankRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [BankInput]
+  resourceValue: BankInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input BankRemoveInput {
+  filter: [BankRemoveFilterInput]
+  root: String
+}
+
+type BankRemoveOutput {
+  result: Bank
+  root: BankRemoveOutputRoot
+}
+
+type BankRemoveOutputRoot {
+  root: BankRemoveOutputRoot
+}
+
+input BankUpdateFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [BankInput]
+  resourceValue: BankInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input BankUpdateInput {
+  filter: [BankUpdateFilterInput]
+  root: String
+  update: BankUpdateUpdateInput
+}
+
+type BankUpdateOutput {
+  result: Bank
+  root: BankUpdateOutputRoot
+}
+
+type BankUpdateOutputRoot {
+  root: BankUpdateOutputRoot
+}
+
+input BankUpdateUpdateInput {
+  User: UserInput
+  _id: String
+  bank: String
+  created: DateTime
+  id: String
+  last4: String
+  type: String
+}
+
+type Card {
+  User: User
+  _id: String
+  brand: String
+  created: DateTime
+  expMonth: Float
+  expYear: Float
+  funding: String
+  id: String
+  last4: String
+  type: String
+}
+
+input CardCreateFormInput {
+  User: UserInput
+  _id: String
+  brand: String
+  created: DateTime
+  expMonth: Float
+  expYear: Float
+  funding: String
+  id: String
+  last4: String
+  type: String
+}
+
+input CardCreateInput {
+  form: CardCreateFormInput
+  root: String
+}
+
+input CardCreateManyFormInput {
+  User: UserInput
+  _id: String
+  brand: String
+  created: DateTime
+  expMonth: Float
+  expYear: Float
+  funding: String
+  id: String
+  last4: String
+  type: String
+}
+
+input CardCreateManyInput {
+  form: [CardCreateManyFormInput]
+  root: String
+}
+
+type CardCreateManyOutput {
+  result: Card
+  root: CardCreateManyOutputRoot
+}
+
+type CardCreateManyOutputRoot {
+  root: CardCreateManyOutputRoot
+}
+
+type CardCreateOutput {
+  result: Card
+  root: CardCreateOutputRoot
+}
+
+type CardCreateOutputRoot {
+  root: CardCreateOutputRoot
+}
+
+type CardGetConnectionConnection {
+  edges: [CardGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type CardGetConnectionEdge {
+  cursor: String
+  node: Card
+}
+
+input CardGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [CardInput]
+  resourceValue: CardInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input CardGetConnectionInput {
+  filter: [CardGetConnectionFilterInput]
+  pagination: PaginationInput
+  root: String
+}
+
+type CardGetConnectionOutput {
+  result: CardGetConnectionConnection
+  root: CardGetConnectionOutputRoot
+}
+
+type CardGetConnectionOutputRoot {
+  root: CardGetConnectionOutputRoot
+}
+
+input CardGetFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [CardInput]
+  resourceValue: CardInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input CardGetInput {
+  filter: [CardGetFilterInput]
+  root: String
+}
+
+input CardGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [CardInput]
+  resourceValue: CardInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input CardGetManyInput {
+  filter: [CardGetManyFilterInput]
+  root: String
+}
+
+type CardGetManyOutput {
+  result: [Card]
+  root: CardGetManyOutputRoot
+}
+
+type CardGetManyOutputRoot {
+  root: CardGetManyOutputRoot
+}
+
+type CardGetOutput {
+  result: Card
+  root: CardGetOutputRoot
+}
+
+type CardGetOutputRoot {
+  root: CardGetOutputRoot
+}
+
+input CardInput {
+  User: UserInput
+  _id: String
+  brand: String
+  created: DateTime
+  expMonth: Float
+  expYear: Float
+  funding: String
+  id: String
+  last4: String
+  type: String
+}
+
+input CardRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [CardInput]
+  resourceValue: CardInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input CardRemoveInput {
+  filter: [CardRemoveFilterInput]
+  root: String
+}
+
+type CardRemoveOutput {
+  result: Card
+  root: CardRemoveOutputRoot
+}
+
+type CardRemoveOutputRoot {
+  root: CardRemoveOutputRoot
+}
+
+input CardUpdateFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [CardInput]
+  resourceValue: CardInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input CardUpdateInput {
+  filter: [CardUpdateFilterInput]
+  root: String
+  update: CardUpdateUpdateInput
+}
+
+type CardUpdateOutput {
+  result: Card
+  root: CardUpdateOutputRoot
+}
+
+type CardUpdateOutputRoot {
+  root: CardUpdateOutputRoot
+}
+
+input CardUpdateUpdateInput {
+  User: UserInput
+  _id: String
+  brand: String
+  created: DateTime
+  expMonth: Float
+  expYear: Float
+  funding: String
+  id: String
+  last4: String
+  type: String
+}
+
 type CreditRating {
   RatingAgency: RatingAgency
   _id: String
@@ -1042,6 +1497,14 @@ type Mutation {
   AccessCreateMany(input: AccessCreateManyInput): AccessCreateManyOutput
   AccessRemove(input: AccessRemoveInput): AccessRemoveOutput
   AccessUpdate(input: AccessUpdateInput): AccessUpdateOutput
+  BankCreate(input: BankCreateInput): BankCreateOutput
+  BankCreateMany(input: BankCreateManyInput): BankCreateManyOutput
+  BankRemove(input: BankRemoveInput): BankRemoveOutput
+  BankUpdate(input: BankUpdateInput): BankUpdateOutput
+  CardCreate(input: CardCreateInput): CardCreateOutput
+  CardCreateMany(input: CardCreateManyInput): CardCreateManyOutput
+  CardRemove(input: CardRemoveInput): CardRemoveOutput
+  CardUpdate(input: CardUpdateInput): CardUpdateOutput
   CreditRatingCreate(input: CreditRatingCreateInput): CreditRatingCreateOutput
   CreditRatingCreateMany(input: CreditRatingCreateManyInput): CreditRatingCreateManyOutput
   CreditRatingRemove(input: CreditRatingRemoveInput): CreditRatingRemoveOutput
@@ -1081,6 +1544,10 @@ type Mutation {
   VendorCreateMany(input: VendorCreateManyInput): VendorCreateManyOutput
   VendorRemove(input: VendorRemoveInput): VendorRemoveOutput
   VendorUpdate(input: VendorUpdateInput): VendorUpdateOutput
+  linkedUserCreate(input: linkedUserCreateInput): linkedUserCreateOutput
+  linkedUserCreateMany(input: linkedUserCreateManyInput): linkedUserCreateManyOutput
+  linkedUserRemove(input: linkedUserRemoveInput): linkedUserRemoveOutput
+  linkedUserUpdate(input: linkedUserUpdateInput): linkedUserUpdateOutput
 }
 
 type NumberRange {
@@ -1283,11 +1750,59 @@ input PaginationInput {
   last: Float
 }
 
+type PaymentMethod {
+  User: User
+  _id: String
+  created: DateTime
+  last4: String
+  type: String
+}
+
+input PaymentMethodGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [PaymentMethodInput]
+  resourceValue: PaymentMethodInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input PaymentMethodGetManyInput {
+  filter: [PaymentMethodGetManyFilterInput]
+  root: String
+}
+
+type PaymentMethodGetManyOutput {
+  result: [PaymentMethod]
+  root: PaymentMethodGetManyOutputRoot
+}
+
+type PaymentMethodGetManyOutputRoot {
+  root: PaymentMethodGetManyOutputRoot
+}
+
+input PaymentMethodInput {
+  User: UserInput
+  _id: String
+  created: DateTime
+  last4: String
+  type: String
+}
+
 type Query {
   AccessGet(input: AccessGetInput): AccessGetOutput
   AccessGetConnection(input: AccessGetConnectionInput): AccessGetConnectionOutput
   AccessGetMany(input: AccessGetManyInput): AccessGetManyOutput
   AccessGetManyProtectedGetMany(input: AccessGetManyProtectedGetManyInput): AccessGetManyProtectedGetManyOutput
+  BankGet(input: BankGetInput): BankGetOutput
+  BankGetConnection(input: BankGetConnectionInput): BankGetConnectionOutput
+  BankGetMany(input: BankGetManyInput): BankGetManyOutput
+  CardGet(input: CardGetInput): CardGetOutput
+  CardGetConnection(input: CardGetConnectionInput): CardGetConnectionOutput
+  CardGetMany(input: CardGetManyInput): CardGetManyOutput
   CreditRatingGet(input: CreditRatingGetInput): CreditRatingGetOutput
   CreditRatingGetConnection(input: CreditRatingGetConnectionInput): CreditRatingGetConnectionOutput
   CreditRatingGetMany(input: CreditRatingGetManyInput): CreditRatingGetManyOutput
@@ -1305,6 +1820,7 @@ type Query {
   OtpGet(input: OtpGetInput): OtpGetOutput
   OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
   OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput
+  PaymentMethodGetMany(input: PaymentMethodGetManyInput): PaymentMethodGetManyOutput
   RatingAgencyGet(input: RatingAgencyGetInput): RatingAgencyGetOutput
   RatingAgencyGetConnection(input: RatingAgencyGetConnectionInput): RatingAgencyGetConnectionOutput
   RatingAgencyGetMany(input: RatingAgencyGetManyInput): RatingAgencyGetManyOutput
@@ -1319,6 +1835,9 @@ type Query {
   VendorGet(input: VendorGetInput): VendorGetOutput
   VendorGetConnection(input: VendorGetConnectionInput): VendorGetConnectionOutput
   VendorGetMany(input: VendorGetManyInput): VendorGetManyOutput
+  linkedUserGet(input: linkedUserGetInput): linkedUserGetOutput
+  linkedUserGetConnection(input: linkedUserGetConnectionInput): linkedUserGetConnectionOutput
+  linkedUserGetMany(input: linkedUserGetManyInput): linkedUserGetManyOutput
 }
 
 type RatingAgency {
@@ -1539,12 +2058,16 @@ type SignInUserUpdateOutput {
 
 input SignInUserUpdateUpdateInput {
   Access: [AccessInput] = []
+  Bank: [BankInput]
+  Card: [CardInput]
+  PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
   created: DateTime
   email: String
   first: String
   last: String
+  linkedUser: [linkedUserInput]
   paymentMethodPrimary: String
   phone: String
 }
@@ -1619,24 +2142,32 @@ input SnapshotInput {
 
 type User {
   Access: [Access]
+  Bank: [Bank]
+  Card: [Card]
+  PaymentMethod: [PaymentMethod]
   _id: String
   callingCode: String
   created: DateTime
   email: String
   first: String
   last: String
+  linkedUser: [linkedUser]
   paymentMethodPrimary: String
   phone: String
 }
 
 input UserCreateFormInput {
   Access: [AccessInput] = []
+  Bank: [BankInput]
+  Card: [CardInput]
+  PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
   created: DateTime
   email: String
   first: String
   last: String
+  linkedUser: [linkedUserInput]
   paymentMethodPrimary: String
   phone: String
 }
@@ -1648,12 +2179,16 @@ input UserCreateInput {
 
 input UserCreateManyFormInput {
   Access: [AccessInput] = []
+  Bank: [BankInput]
+  Card: [CardInput]
+  PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
   created: DateTime
   email: String
   first: String
   last: String
+  linkedUser: [linkedUserInput]
   paymentMethodPrimary: String
   phone: String
 }
@@ -1747,12 +2282,16 @@ type UserGetOutput {
 
 input UserInput {
   Access: [AccessInput] = []
+  Bank: [BankInput]
+  Card: [CardInput]
+  PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
   created: DateTime
   email: String
   first: String
   last: String
+  linkedUser: [linkedUserInput]
   paymentMethodPrimary: String
   phone: String
 }
@@ -1802,12 +2341,16 @@ type UserUpdateOutput {
 
 input UserUpdateUpdateInput {
   Access: [AccessInput] = []
+  Bank: [BankInput]
+  Card: [CardInput]
+  PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
   created: DateTime
   email: String
   first: String
   last: String
+  linkedUser: [linkedUserInput]
   paymentMethodPrimary: String
   phone: String
 }
@@ -2205,4 +2748,214 @@ input VendorUpdateUpdateInput {
   created: DateTime
   imageSrc: String
   name: String
+}
+
+type linkedUser {
+  User: User
+  _id: String
+  created: DateTime
+  id: String
+  type: String
+}
+
+input linkedUserCreateFormInput {
+  User: UserInput
+  _id: String
+  created: DateTime
+  id: String
+  type: String
+}
+
+input linkedUserCreateInput {
+  form: linkedUserCreateFormInput
+  root: String
+}
+
+input linkedUserCreateManyFormInput {
+  User: UserInput
+  _id: String
+  created: DateTime
+  id: String
+  type: String
+}
+
+input linkedUserCreateManyInput {
+  form: [linkedUserCreateManyFormInput]
+  root: String
+}
+
+type linkedUserCreateManyOutput {
+  result: linkedUser
+  root: linkedUserCreateManyOutputRoot
+}
+
+type linkedUserCreateManyOutputRoot {
+  root: linkedUserCreateManyOutputRoot
+}
+
+type linkedUserCreateOutput {
+  result: linkedUser
+  root: linkedUserCreateOutputRoot
+}
+
+type linkedUserCreateOutputRoot {
+  root: linkedUserCreateOutputRoot
+}
+
+type linkedUserGetConnectionConnection {
+  edges: [linkedUserGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type linkedUserGetConnectionEdge {
+  cursor: String
+  node: linkedUser
+}
+
+input linkedUserGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [linkedUserInput]
+  resourceValue: linkedUserInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input linkedUserGetConnectionInput {
+  filter: [linkedUserGetConnectionFilterInput]
+  pagination: PaginationInput
+  root: String
+}
+
+type linkedUserGetConnectionOutput {
+  result: linkedUserGetConnectionConnection
+  root: linkedUserGetConnectionOutputRoot
+}
+
+type linkedUserGetConnectionOutputRoot {
+  root: linkedUserGetConnectionOutputRoot
+}
+
+input linkedUserGetFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [linkedUserInput]
+  resourceValue: linkedUserInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input linkedUserGetInput {
+  filter: [linkedUserGetFilterInput]
+  root: String
+}
+
+input linkedUserGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [linkedUserInput]
+  resourceValue: linkedUserInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input linkedUserGetManyInput {
+  filter: [linkedUserGetManyFilterInput]
+  root: String
+}
+
+type linkedUserGetManyOutput {
+  result: [linkedUser]
+  root: linkedUserGetManyOutputRoot
+}
+
+type linkedUserGetManyOutputRoot {
+  root: linkedUserGetManyOutputRoot
+}
+
+type linkedUserGetOutput {
+  result: linkedUser
+  root: linkedUserGetOutputRoot
+}
+
+type linkedUserGetOutputRoot {
+  root: linkedUserGetOutputRoot
+}
+
+input linkedUserInput {
+  User: UserInput
+  _id: String
+  created: DateTime
+  id: String
+  type: String
+}
+
+input linkedUserRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [linkedUserInput]
+  resourceValue: linkedUserInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input linkedUserRemoveInput {
+  filter: [linkedUserRemoveFilterInput]
+  root: String
+}
+
+type linkedUserRemoveOutput {
+  result: linkedUser
+  root: linkedUserRemoveOutputRoot
+}
+
+type linkedUserRemoveOutputRoot {
+  root: linkedUserRemoveOutputRoot
+}
+
+input linkedUserUpdateFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [linkedUserInput]
+  resourceValue: linkedUserInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input linkedUserUpdateInput {
+  filter: [linkedUserUpdateFilterInput]
+  root: String
+  update: linkedUserUpdateUpdateInput
+}
+
+type linkedUserUpdateOutput {
+  result: linkedUser
+  root: linkedUserUpdateOutputRoot
+}
+
+type linkedUserUpdateOutputRoot {
+  root: linkedUserUpdateOutputRoot
+}
+
+input linkedUserUpdateUpdateInput {
+  User: UserInput
+  _id: String
+  created: DateTime
+  id: String
+  type: String
 }

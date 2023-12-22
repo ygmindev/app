@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 
 import { type PaymentMethodFormPropsModel } from '#lib-frontend/billing/containers/PaymentMethodForm/PaymentMethodForm.models';
-import { usePaymentMethodResource } from '#lib-frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
 import { type SFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { type FormRefModel } from '#lib-frontend/data/data.models';
@@ -21,7 +20,7 @@ export const PaymentMethodForm: SFCModel<PaymentMethodFormPropsModel> = ({
   const { styles } = useStyles({ props });
   const theme = useTheme();
   const currentUser = useCurrentUser();
-  const { createToken } = usePaymentMethodResource();
+  // const { createToken } = usePaymentMethodResource();
   // TODO: fix
   const ref = useRef<FormRefModel<undefined>>(null);
   return (

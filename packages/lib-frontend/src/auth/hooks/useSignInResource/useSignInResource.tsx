@@ -35,7 +35,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
   const { success } = useNotification();
   const { t } = useTranslation();
 
-  const handleUpdateSuccess = (): void => success({ message: t('core:updateSuccess') });
+  const handleUpdateSuccess = (): void => success({ description: t('core:updateSuccess') });
 
   const signIn = async (signIn?: PartialModel<SignInModel>): Promise<void> => {
     if (signIn) {

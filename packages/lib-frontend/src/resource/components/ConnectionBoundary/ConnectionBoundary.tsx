@@ -13,12 +13,9 @@ import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.model
 export const ConnectionBoundary = forwardRef(
   <TType, TRoot = undefined>(
     { children, query, ...props }: LFCPropsModel<ConnectionBoundaryPropsModel<TType, TRoot>>,
-    ref: ForwardedRef<ConnectionBoundaryRefModel<TType, TRoot>>,
+    ref: ForwardedRef<ConnectionBoundaryRefModel>,
   ): ReactElement<
-    RLFCPropsModel<
-      ConnectionBoundaryRefModel<TType, TRoot>,
-      ConnectionBoundaryPropsModel<TType, TRoot>
-    >
+    RLFCPropsModel<ConnectionBoundaryRefModel, ConnectionBoundaryPropsModel<TType, TRoot>>
   > => {
     const handleQuery = async (
       params?: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>,
@@ -38,13 +35,7 @@ export const ConnectionBoundary = forwardRef(
     );
   },
 ) as <TType, TRoot = undefined>(
-  props: RLFCPropsModel<
-    ConnectionBoundaryRefModel<TType, TRoot>,
-    ConnectionBoundaryPropsModel<TType, TRoot>
-  >,
+  props: RLFCPropsModel<ConnectionBoundaryRefModel, ConnectionBoundaryPropsModel<TType, TRoot>>,
 ) => ReactElement<
-  RLFCPropsModel<
-    ConnectionBoundaryRefModel<TType, TRoot>,
-    ConnectionBoundaryPropsModel<TType, TRoot>
-  >
+  RLFCPropsModel<ConnectionBoundaryRefModel, ConnectionBoundaryPropsModel<TType, TRoot>>
 >;

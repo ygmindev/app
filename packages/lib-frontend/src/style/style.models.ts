@@ -35,3 +35,7 @@ export type StylePropsModel<TType extends StyleModel = ViewStyleModel> = {
 export type BrightnessModel = `${STYLE_BRIGHTNESS}`;
 
 export type ThemeModel = ThemeConfigModel;
+
+export type ThemeColorPropsModel = {
+  color?: ThemeColorModel;
+};

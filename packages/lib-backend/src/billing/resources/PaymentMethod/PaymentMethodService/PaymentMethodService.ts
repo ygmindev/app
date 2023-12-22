@@ -44,8 +44,12 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
       });
       return {
         result: [
-          ...(banks ? banks.map((value) => ({ ...value, type: PAYMENT_METHOD_TYPE.BANK })) : []),
-          ...(cards ? cards.map((value) => ({ ...value, type: PAYMENT_METHOD_TYPE.CARD })) : []),
+          ...(banks
+            ? banks.map(({ _id, last4 }) => ({ _id, last4, type: PAYMENT_METHOD_TYPE.BANK }))
+            : []),
+          ...(cards
+            ? cards.map(({ _id, last4 }) => ({ _id, last4, type: PAYMENT_METHOD_TYPE.CARD }))
+            : []),
         ],
       };
     }
@@ -71,7 +75,6 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
           linkedUser = createdLinkedUser;
         }
       }
-
       if (linkedUser) {
         const result =
           linkedUser.id && (await this._stripeAdminService.createIntent(linkedUser.id));

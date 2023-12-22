@@ -11,7 +11,4 @@ export type ConnectionBoundaryPropsModel<TType, TRoot = undefined> = DataBoundar
   OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>
 >;
 
-export type ConnectionBoundaryRefModel<TType, TRoot = undefined> = DataBoundaryRefModel<
-  InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>,
-  OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>
->;
+export type ConnectionBoundaryRefModel = DataBoundaryRefModel;

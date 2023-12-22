@@ -1,4 +1,11 @@
-import { type ForwardedRef, forwardRef, type ReactElement, useImperativeHandle } from 'react';
+import {
+  type ForwardedRef,
+  forwardRef,
+  type ReactElement,
+  type RefObject,
+  useImperativeHandle,
+  useRef,
+} from 'react';
 
 import { SkeletonGroup } from '#lib-frontend/animation/components/SkeletonGroup/SkeletonGroup';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
@@ -30,18 +37,25 @@ const QueryComponent = forwardRef(
       isBlocking,
       params,
       query,
+      ...props
     }: LFCPropsModel<QueryComponentPropsModel<TParams, TResult>>,
-    ref: ForwardedRef<QueryComponentRefModel<TResult>>,
+    ref: ForwardedRef<QueryComponentRefModel>,
   ): ReactElement<
-    RLFCPropsModel<QueryComponentRefModel<TResult>, QueryComponentPropsModel<TParams, TResult>>
+    RLFCPropsModel<QueryComponentRefModel, QueryComponentPropsModel<TParams, TResult>>
   > => {
+    const { wrapperProps } = useLayoutStyles({ props });
     const { data, query: queryF } = useQuery<TParams, TResult>(id, query, { isBlocking }, params);
 
-    useImperativeHandle(ref, () => ({ query: queryF }));
+    useImperativeHandle(ref, () => ({
+      query: async () => {
+        await queryF();
+      },
+    }));
 
     return (
       (children && children({ data })) || (
         <Wrapper
+          {...wrapperProps}
           flex
           isCenter>
           <TranslatableText
@@ -54,12 +68,9 @@ const QueryComponent = forwardRef(
     );
   },
 ) as <TParams = undefined, TResult = void>(
-  props: RLFCPropsModel<
-    QueryComponentRefModel<TResult>,
-    QueryComponentPropsModel<TParams, TResult>
-  >,
+  props: RLFCPropsModel<QueryComponentRefModel, QueryComponentPropsModel<TParams, TResult>>,
 ) => ReactElement<
-  RLFCPropsModel<QueryComponentRefModel<TResult>, QueryComponentPropsModel<TParams, TResult>>
+  RLFCPropsModel<QueryComponentRefModel, QueryComponentPropsModel<TParams, TResult>>
 >;
 
 const MutateComponent = forwardRef(
@@ -70,15 +81,20 @@ const MutateComponent = forwardRef(
       id,
       isBlocking,
       mutate,
+      params,
+      ...props
     }: LFCPropsModel<MutateComponentPropsModel<TParams, TResult>>,
-    ref: ForwardedRef<MutateComponentRefModel<TParams, TResult>>,
+    ref: ForwardedRef<MutateComponentRefModel>,
   ): ReactElement<
-    RLFCPropsModel<
-      MutateComponentRefModel<TParams, TResult>,
-      MutateComponentPropsModel<TParams, TResult>
-    >
+    RLFCPropsModel<MutateComponentRefModel, MutateComponentPropsModel<TParams, TResult>>
   > => {
-    const { data, mutate: mutateF } = useMutation<TParams, TResult>(id, mutate, { isBlocking });
+    const { wrapperProps } = useLayoutStyles({ props });
+    const { data, mutate: mutateF } = useMutation<TParams, TResult>(
+      id,
+      mutate,
+      { isBlocking },
+      params,
+    );
 
     useAsync(async () => mutateF());
 
@@ -87,6 +103,7 @@ const MutateComponent = forwardRef(
     return (
       (children && children({ data })) || (
         <Wrapper
+          {...wrapperProps}
           flex
           isCenter>
           <TranslatableText
@@ -99,15 +116,9 @@ const MutateComponent = forwardRef(
     );
   },
 ) as <TParams = undefined, TResult = void>(
-  props: RLFCPropsModel<
-    MutateComponentRefModel<TParams, TResult>,
-    MutateComponentPropsModel<TParams, TResult>
-  >,
+  props: RLFCPropsModel<MutateComponentRefModel, MutateComponentPropsModel<TParams, TResult>>,
 ) => ReactElement<
-  RLFCPropsModel<
-    MutateComponentRefModel<TParams, TResult>,
-    MutateComponentPropsModel<TParams, TResult>
-  >
+  RLFCPropsModel<MutateComponentRefModel, MutateComponentPropsModel<TParams, TResult>>
 >;
 
 export const DataBoundary = forwardRef(
@@ -124,11 +135,19 @@ export const DataBoundary = forwardRef(
       query,
       ...props
     }: LFCPropsModel<DataBoundaryPropsModel<TParams, TResult>>,
-    ref?: ForwardedRef<DataBoundaryRefModel<TParams, TResult>>,
+    ref?: ForwardedRef<DataBoundaryRefModel>,
   ): ReactElement<
-    RLFCPropsModel<DataBoundaryRefModel<TParams, TResult>, DataBoundaryPropsModel<TParams, TResult>>
+    RLFCPropsModel<DataBoundaryRefModel, DataBoundaryPropsModel<TParams, TResult>>
   > => {
     const { wrapperProps } = useLayoutStyles({ props });
+    const refF = useRef<DataBoundaryRefModel>(null);
+    const refFF = (ref ?? refF) as RefObject<DataBoundaryRefModel>;
+
+    const handleRefresh = async (): Promise<void> => {
+      const onRefresh = refFF.current?.query ?? refFF.current?.mutate;
+      onRefresh && (await onRefresh());
+    };
+
     return (
       <AsyncBoundary
         {...props}
@@ -138,7 +157,9 @@ export const DataBoundary = forwardRef(
               {children && children({ data: fallbackData, elementState: ELEMENT_STATE.LOADING })}
             </SkeletonGroup>
           ) : undefined
-        }>
+        }
+        flex
+        onRefresh={handleRefresh}>
         {query ? (
           <QueryComponent<TParams, TResult>
             elementState={elementState}
@@ -147,7 +168,7 @@ export const DataBoundary = forwardRef(
             isBlocking={isBlocking}
             params={params}
             query={query}
-            ref={ref as ForwardedRef<QueryComponentRefModel<TResult>>}>
+            ref={refFF as ForwardedRef<QueryComponentRefModel>}>
             {children}
           </QueryComponent>
         ) : mutate ? (
@@ -157,7 +178,8 @@ export const DataBoundary = forwardRef(
             id={id}
             isBlocking={isBlocking}
             mutate={mutate}
-            ref={ref as ForwardedRef<MutateComponentRefModel<TParams, TResult>>}>
+            params={params}
+            ref={refFF as ForwardedRef<MutateComponentRefModel>}>
             {children}
           </MutateComponent>
         ) : null}
@@ -165,10 +187,5 @@ export const DataBoundary = forwardRef(
     );
   },
 ) as <TParams = undefined, TResult = void>(
-  props: RLFCPropsModel<
-    DataBoundaryRefModel<TParams, TResult>,
-    DataBoundaryPropsModel<TParams, TResult>
-  >,
-) => ReactElement<
-  RLFCPropsModel<DataBoundaryRefModel<TParams, TResult>, DataBoundaryPropsModel<TParams, TResult>>
->;
+  props: RLFCPropsModel<DataBoundaryRefModel, DataBoundaryPropsModel<TParams, TResult>>,
+) => ReactElement<RLFCPropsModel<DataBoundaryRefModel, DataBoundaryPropsModel<TParams, TResult>>>;
