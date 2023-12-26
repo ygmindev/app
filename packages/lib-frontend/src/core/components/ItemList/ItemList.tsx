@@ -1,7 +1,7 @@
 import { type ItemListPropsModel } from '#lib-frontend/core/components/ItemList/ItemList.models';
 import { PressableItem } from '#lib-frontend/core/components/PressableItem/PressableItem';
 import { Tile } from '#lib-frontend/core/components/Tile/Tile';
-import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import { DIRECTION, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -39,9 +39,10 @@ export const ItemList: LFCModel<ItemListPropsModel> = ({
         }
         title={title}>
         {result?.length > 0 ? (
-          result.map(({ id, ...item }) => (
+          result.map(({ id, ...item }, i) => (
             <PressableItem
               {...item}
+              border={i > 0 ? DIRECTION.TOP : undefined}
               elementState={elementState}
               key={id}
             />
