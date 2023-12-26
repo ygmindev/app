@@ -7,7 +7,7 @@ import { PAYMENT_METHOD_ITEM_ICON_WIDTH } from '#lib-frontend/billing/components
 import { type PaymentMethodItemPropsModel } from '#lib-frontend/billing/components/PaymentMethodItem/PaymentMethodItem.models';
 import { useBankResource } from '#lib-frontend/billing/hooks/useBankResource/useBankResource';
 import { useCardResource } from '#lib-frontend/billing/hooks/useCardResource/useCardResource';
-import { type PaymentMethodFormPageParamsModel } from '#lib-frontend/billing/pages/PaymentMethodFormPage/PaymentMethodFormPage.models';
+import { type PaymentMethodFormPageParamsModel } from '#lib-frontend/billing/pages/PaymentMethodFormPage2/PaymentMethodFormPage.models';
 import { getPaymentMethodTitle } from '#lib-frontend/billing/utils/getPaymentMethodTitle/getPaymentMethodTitle';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';

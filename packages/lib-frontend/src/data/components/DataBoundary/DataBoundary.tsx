@@ -1,4 +1,5 @@
 import {
+  cloneElement,
   type ForwardedRef,
   forwardRef,
   type ReactElement,
@@ -139,7 +140,6 @@ export const DataBoundary = forwardRef(
   ): ReactElement<
     RLFCPropsModel<DataBoundaryRefModel, DataBoundaryPropsModel<TParams, TResult>>
   > => {
-    const { wrapperProps } = useLayoutStyles({ props });
     const refF = useRef<DataBoundaryRefModel>(null);
     const refFF = (ref ?? refF) as RefObject<DataBoundaryRefModel>;
 
@@ -148,15 +148,19 @@ export const DataBoundary = forwardRef(
       onRefresh && (await onRefresh());
     };
 
+    const childrenF =
+      props.fallback ?? (fallbackData && children && children({ data: fallbackData }));
+
     return (
       <AsyncBoundary
         {...props}
         fallback={
-          props.fallback ?? fallbackData ? (
-            <SkeletonGroup {...wrapperProps}>
-              {children && children({ data: fallbackData, elementState: ELEMENT_STATE.LOADING })}
-            </SkeletonGroup>
-          ) : undefined
+          <SkeletonGroup>
+            {childrenF &&
+              cloneElement(childrenF, {
+                elementState: ELEMENT_STATE.LOADING,
+              })}
+          </SkeletonGroup>
         }
         flex
         onRefresh={handleRefresh}>

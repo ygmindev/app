@@ -3,7 +3,7 @@ import { type EmptyObjectModel, type PartialModel } from '#lib-shared/core/core.
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 export type UserStateModel = {
-  currentUser?: PartialModel<UserModel> | null;
+  currentUser?: PartialModel<UserModel>;
 };
 
 export type UserActionsParamsModel = EmptyObjectModel;

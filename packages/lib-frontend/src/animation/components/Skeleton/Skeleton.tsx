@@ -13,7 +13,8 @@ export const Skeleton: LFCModel<SkeletonPropsModel> = ({ children, elementState,
   return (
     <Wrapper
       {...wrapperProps}
-      isOverflowHidden>
+      isOverflowHidden
+      round>
       {elementState === ELEMENT_STATE.LOADING ? (
         <_Skeleton
           backgroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MUTED]}

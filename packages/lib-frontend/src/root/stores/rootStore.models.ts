@@ -2,6 +2,10 @@ import {
   type AppActionsParamsModel,
   type AppStateModel,
 } from '#lib-frontend/app/stores/appStore/appStore.models';
+import {
+  type AuthActionsParamsModel,
+  type AuthStateModel,
+} from '#lib-frontend/auth/stores/authStore/authStore.models';
 import { type BILLING } from '#lib-frontend/billing/billing.constants';
 import {
   type BillingActionsParamsModel,
@@ -38,6 +42,7 @@ import {
   type UserStateModel,
 } from '#lib-frontend/user/stores/userStore/userStore.models';
 import { type APP } from '#lib-shared/app/app.constants';
+import { type AUTH } from '#lib-shared/auth/auth.constants';
 import { type LOCALE } from '#lib-shared/locale/locale.constants';
 import { type NOTIFICATION } from '#lib-shared/notification/notification.constants';
 import { type ROUTE } from '#lib-shared/route/route.constants';
@@ -46,6 +51,7 @@ import { type USER } from '#lib-shared/user/user.constants';
 
 export type RootStateModel = {
   [APP]: AppStateModel;
+  [AUTH]: AuthStateModel;
   [BILLING]: BillingStateModel;
   [GROUP]: GroupStateModel;
   [LOCALE]: LocaleStateModel;
@@ -57,6 +63,7 @@ export type RootStateModel = {
 
 export type RootActionsParamsModel = {
   [APP]: AppActionsParamsModel;
+  [AUTH]: AuthActionsParamsModel;
   [BILLING]: BillingActionsParamsModel;
   [GROUP]: GroupActionsParamsModel;
   [LOCALE]: LocaleActionsParamsModel;

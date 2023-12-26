@@ -4,9 +4,8 @@ import { SignInButton } from '#lib-frontend/auth/components/SignInButton/SignInB
 import { type AuthMenuOptionModel } from '#lib-frontend/auth/containers/AuthMenu/AuthMenu.constants';
 import { AUTH_MENU_OPTIONS } from '#lib-frontend/auth/containers/AuthMenu/AuthMenu.constants';
 import { type AuthMenuPropsModel } from '#lib-frontend/auth/containers/AuthMenu/AuthMenu.models';
-import { useAuthState } from '#lib-frontend/auth/hooks/useAuthState/useAuthState';
-import { AUTH_STATE } from '#lib-frontend/auth/hooks/useAuthState/useAuthState.constants';
 import { useSignInResource } from '#lib-frontend/auth/hooks/useSignInResource/useSignInResource';
+import { AUTH_STATUS } from '#lib-frontend/auth/stores/authStore/authStore.constants';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { Divider } from '#lib-frontend/core/components/Divider/Divider';
 import { Menu } from '#lib-frontend/core/components/Menu/Menu';
@@ -31,15 +30,16 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
   const { styles } = useStyles({ props });
   const { signOut } = useSignInResource();
   const { push } = useRouter();
-  const authState = useAuthState();
+  const [authStatus] = useStore('auth.status');
   const [currentUser] = useStore('user.currentUser');
+  const isNotAuthenticated = authStatus !== AUTH_STATUS.AUTHENTICATED;
   const optionsOverrides: Record<string, PartialModel<AuthMenuOptionModel>> = {
     [ACCOUNT]: { onPress: () => push({ pathname: ACCOUNT }) },
     [SIGN_OUT]: { onPress: signOut },
   };
   const optionsF = AUTH_MENU_OPTIONS.reduce(
     (result, option) =>
-      option.isProtected && authState !== AUTH_STATE.AUTHENTICATED
+      option.isProtected && isNotAuthenticated
         ? result
         : [...result, merge<AuthMenuOptionModel>([optionsOverrides[option.id] ?? {}, option])],
     [] as Array<AuthMenuOptionModel>,
@@ -58,20 +58,20 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
       ref={menuRef}
       style={styles}
       topElement={
-        currentUser ? (
+        isNotAuthenticated ? (
+          <SignInButton onPress={() => menuRef.current?.toggle(false)} />
+        ) : (
           <Wrapper s={THEME_SIZE.SMALL}>
             <Text
               align={FONT_ALIGN.CENTER}
               isEllipsis
               isFullWidth
               p={THEME_SIZE.SMALL}>
-              {currentUser.email}
+              {currentUser?.email}
             </Text>
 
             <Divider />
           </Wrapper>
-        ) : (
-          <SignInButton onPress={() => menuRef.current?.toggle(false)} />
         )
       }
     />

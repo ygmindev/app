@@ -1,11 +1,9 @@
-import { PaymentMethodPage } from '#lib-frontend/billing/pages/PaymentMethodPage2/PaymentMethodPage';
-import { type PaymentMethodPagePropsModel } from '#lib-frontend/billing/pages/PaymentMethodPage2/PaymentMethodPage.models';
+import { CreditCardForm } from '#lib-frontend/billing/containers/CreditCardForm/CreditCardForm';
+import { type CreditCardFormPropsModel } from '#lib-frontend/billing/containers/CreditCardForm/CreditCardForm.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<PaymentMethodPagePropsModel>({
-  target: PaymentMethodPage,
-});
+const { Component, displayName, testID } = withTestComponent<CreditCardFormPropsModel>({ target: CreditCardForm });
 
 describe(displayName, () => {
   test('works', async () => {
