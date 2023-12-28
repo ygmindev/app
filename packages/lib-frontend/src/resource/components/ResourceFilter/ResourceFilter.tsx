@@ -11,7 +11,6 @@ import { NUMBER_UNIT_TYPE } from '#lib-frontend/data/data.constants';
 import { type ResourceFilterPropsModel } from '#lib-frontend/resource/components/ResourceFilter/ResourceFilter.models';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { DATA_TYPE, DATA_TYPE_MORE } from '#lib-shared/data/data.constants';
-import { type NumberRangeModel } from '#lib-shared/data/resources/NumberRange/NumberRange.models';
 import { FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
 import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
 
@@ -23,20 +22,6 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
 }: LFCPropsModel<ResourceFilterPropsModel<TType, TResult, TRoot>>): ReactElement<
   LFCPropsModel<ResourceFilterPropsModel<TType, TResult, TRoot>>
 > => {
-  const beforeSubmitRange = (value: NumberRangeModel, field: string): Array<FilterModel<TType>> =>
-    filterNil([
-      !!value?.min && {
-        condition: FILTER_CONDITION.GRATER_THAN_EQUAL,
-        field,
-        value: value.min,
-      },
-      !!value?.max && {
-        condition: FILTER_CONDITION.LESS_THAN_EQUAL,
-        field,
-        value: value.max,
-      },
-    ]);
-
   const fieldsF = useMemo<Array<FormTileModel<TType>>>(
     () =>
       fields?.map(({ id, label, options, type }) => {
@@ -46,7 +31,9 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
             case DATA_TYPE_MORE.STRING_LIST:
               return (
                 <SelectField
-                  beforeSubmit={(v, k) => [{ condition: FILTER_CONDITION.IN, field: k, value: v }]}
+                  beforeSubmit={async (v, k) => [
+                    { condition: FILTER_CONDITION.IN, field: k, value: v },
+                  ]}
                   isHorizontal
                   isMultiple
                   options={options ?? []}
@@ -58,7 +45,20 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
             case NUMBER_UNIT_TYPE.RELATIVE_DATE:
               return (
                 <NumberRangeField
-                  beforeSubmit={beforeSubmitRange}
+                  beforeSubmit={async (value, field) =>
+                    filterNil([
+                      !!value?.min && {
+                        condition: FILTER_CONDITION.GRATER_THAN_EQUAL,
+                        field,
+                        value: value.min,
+                      },
+                      !!value?.max && {
+                        condition: FILTER_CONDITION.LESS_THAN_EQUAL,
+                        field,
+                        value: value.max,
+                      },
+                    ])
+                  }
                   rangeType={NUMBER_RANGE_TYPE.RANGE}
                   type={type === DATA_TYPE.NUMBER ? undefined : type}
                 />

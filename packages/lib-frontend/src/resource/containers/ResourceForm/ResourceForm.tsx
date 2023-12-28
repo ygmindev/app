@@ -41,7 +41,7 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
             case PROPERTY_TYPE.RESOURCE: {
               return (
                 <TextField
-                  beforeSubmit={(v) => ({ _id: v })}
+                  beforeSubmit={async (v) => ({ _id: v })}
                   label={labelF}
                 />
               );
