@@ -91,7 +91,7 @@ export const createEmbeddedResourceService = <
   };
 
   const getMany = async (
-    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm> = {},
+    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot> = {},
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> => {
     if (input.root) {
       const skip = input.options?.skip ?? 0;

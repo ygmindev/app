@@ -51,6 +51,7 @@ export const ItemList: LFCModel<ItemListPropsModel> = ({
           <PressableItem
             elementState={ELEMENT_STATE.DISABLED}
             icon="empty"
+            pVertical
             title={emptyString}
           />
         )}

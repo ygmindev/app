@@ -10,6 +10,6 @@ export const createUpdate = <TType extends unknown>({
   name,
 }: CreateUpdateParamsModel<TType>): CreateUpdateModel<TType> => {
   @withEntity({ name: `${name}Update` })
-  class Update extends (Resource as unknown as ClassModel) {}
-  return Update;
+  class Update extends (Resource() as unknown as ClassModel) {}
+  return Update as CreateUpdateModel<TType>;
 };

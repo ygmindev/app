@@ -14,7 +14,7 @@ import {
 @withResolver({ Resource: () => Access })
 export class AccessResolver
   extends createProtectedResourceResolver<AccessModel, AccessFormModel>({
-    Resource: Access,
+    Resource: () => Access,
     ResourceService: AccessService,
     name: ACCESS_RESOURCE_NAME,
   })

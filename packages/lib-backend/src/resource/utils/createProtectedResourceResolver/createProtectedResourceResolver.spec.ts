@@ -20,7 +20,7 @@ describe(displayName, () => {
     TestableEntityResourceModel,
     TestableEntityResourceFormModel
   >({
-    Resource: TestableEntityResource,
+    Resource: () => TestableEntityResource,
     ResourceService: TestableEntityResourceService,
     name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
   }) {}

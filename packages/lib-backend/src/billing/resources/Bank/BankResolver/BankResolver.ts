@@ -14,9 +14,9 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 @withResolver({ Resource: () => Bank })
 export class BankResolver
   extends createEmbeddedResourceResolver<BankModel, BankFormModel, UserModel>({
-    Resource: Bank,
+    Resource: () => Bank,
     ResourceService: BankService,
-    RootResource: User,
+    RootResource: () => User,
     authorizer: { default: selfAuthorizer() },
     name: BANK_RESOURCE_NAME,
   })

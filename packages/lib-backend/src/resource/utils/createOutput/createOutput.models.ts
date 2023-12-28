@@ -8,7 +8,7 @@ export type CreateOutputParamsModel<
   TType,
   TRoot = undefined,
 > = CreateRootParamsModel<TRoot> & {
-  Resource: ResourceClassModel<TType>;
+  Resource(): ResourceClassModel<TType>;
   method: TMethod;
   name: string;
 };

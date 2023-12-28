@@ -17,9 +17,9 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 @withResolver({ Resource: () => LinkedUser })
 export class LinkedUserResolver
   extends createEmbeddedResourceResolver<LinkedUserModel, LinkedUserFormModel, UserModel>({
-    Resource: LinkedUser,
+    Resource: () => LinkedUser,
     ResourceService: LinkedUserService,
-    RootResource: User,
+    RootResource: () => User,
     authorizer: { default: selfAuthorizer() },
     name: LINKED_USER_RESOURCE_NAME,
   })

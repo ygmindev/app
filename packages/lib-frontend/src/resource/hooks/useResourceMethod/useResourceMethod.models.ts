@@ -26,7 +26,7 @@ export type UseResourceMethodParamsModel<
 > = ResourceNameParamsModel &
   RootInputModel<TRoot> & {
     after?: ResourceServiceAfterDecoratorModel<TMethod, TType, TRoot>;
-    before?: ResourceServiceBeforeDecoratorModel<TMethod, TType, TForm>;
+    before?: ResourceServiceBeforeDecoratorModel<TMethod, TType, TForm, TRoot>;
     fields: UseResourceMethodParamsFieldsModel<TMethod, TType, TRoot>;
     method: TMethod;
   };
@@ -37,7 +37,9 @@ export type UseResourceMethodModel<
   TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 > = {
-  query(input?: InputModel<TMethod, TType, TForm>): Promise<OutputModel<TMethod, TType, TRoot>>;
+  query(
+    input?: InputModel<TMethod, TType, TForm, TRoot>,
+  ): Promise<OutputModel<TMethod, TType, TRoot>>;
 };
 
 export type UseResourceMethodHookParamsModel<TRoot = undefined> = RootInputModel<TRoot>;

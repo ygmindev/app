@@ -1,14 +1,12 @@
 import isFunction from 'lodash/isFunction';
 import range from 'lodash/range';
 
-import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { type ItemFieldPropsModel } from '#lib-frontend/core/components/ItemField/ItemField.models';
 import { PressableItem } from '#lib-frontend/core/components/PressableItem/PressableItem';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel, type TranslatableOptionModel } from '#lib-frontend/core/core.models';
 import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBoundary';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
-import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { SearchField } from '#lib-frontend/search/components/SearchField/SearchField';
 import { useSearch } from '#lib-frontend/search/hooks/useSearch/useSearch';
@@ -75,13 +73,9 @@ const ItemFieldResult: LFCModel<
             onPress={() => {
               id && valueControlledSet(id);
               onSubmit && onSubmit();
-            }}>
-            <Wrapper isRowAlign>
-              <TranslatableText>{label}</TranslatableText>
-
-              {valueControlled === id && <Icon icon="check" />}
-            </Wrapper>
-          </PressableItem>
+            }}
+            title={label}
+          />
         ))}
       </Wrapper>
     </Wrapper>

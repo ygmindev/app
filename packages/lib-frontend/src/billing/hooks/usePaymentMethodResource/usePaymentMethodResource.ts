@@ -29,6 +29,6 @@ export const usePaymentMethodResource = ({
       ...PAYMENT_METHOD_RESOURCE_PARAMS,
       root,
     }),
-    // createToken,
+    createToken,
   };
 };

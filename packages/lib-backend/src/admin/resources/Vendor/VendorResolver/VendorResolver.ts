@@ -14,7 +14,7 @@ import {
 @withResolver({ Resource: () => Vendor })
 export class VendorResolver
   extends createEntityResourceResolver<VendorModel, VendorFormModel>({
-    Resource: Vendor,
+    Resource: () => Vendor,
     ResourceService: VendorService,
     name: VENDOR_RESOURCE_NAME,
   })

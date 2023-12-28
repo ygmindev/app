@@ -1,10 +1,6 @@
-import { type FieldPropsModel, type SubmittablePropsModel } from '#lib-frontend/data/data.models';
-import { type BankFormModel } from '#lib-shared/billing/resources/Bank/Bank.models';
+import { type FieldPropsModel } from '#lib-frontend/data/data.models';
 import { type CardFormModel } from '#lib-shared/billing/resources/Card/Card.models';
-import { type PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
-import { type PartialModel } from '#lib-shared/core/core.models';
 
-export type _PaymentMethodFieldPropsModel = {
+export type _PaymentMethodFieldPropsModel = FieldPropsModel<CardFormModel> & {
   token?: string;
-} & Omit<FieldPropsModel<PartialModel<PaymentMethodModel>>, 'onSubmit'> &
-  SubmittablePropsModel<BankFormModel | CardFormModel>;
+};

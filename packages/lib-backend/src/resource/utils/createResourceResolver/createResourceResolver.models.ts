@@ -18,13 +18,13 @@ export type CreateResourceResolverParamsModel<
   TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 > = ResourceNameParamsModel<TRoot> & {
-  Resource: ResourceClassModel<TType>;
+  Resource(): ResourceClassModel<TType>;
 
-  ResourceData?: ResourceClassModel<TForm>;
+  ResourceData?(): ResourceClassModel<TForm>;
 
   ResourceService: ResourceClassModel<PartialModel<ResourceServiceModel<TType, TForm, TRoot>>>;
 
-  RootResource?: TRoot extends undefined ? never : ResourceClassModel<TRoot>;
+  RootResource?(): TRoot extends undefined ? never : ResourceClassModel<TRoot>;
 
   access?: PartialModel<Record<ResourceResolverAccessTypeModel, AccessLevelModel>>;
 

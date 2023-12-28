@@ -14,7 +14,7 @@ import {
 @withResolver({ Resource: () => RatingAgency })
 export class RatingAgencyResolver
   extends createEntityResourceResolver<RatingAgencyModel, RatingAgencyFormModel>({
-    Resource: RatingAgency,
+    Resource: () => RatingAgency,
     ResourceService: RatingAgencyService,
     name: RATING_AGENCY_RESOURCE_NAME,
   })

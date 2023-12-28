@@ -23,7 +23,7 @@ export const createOutput = <TMethod extends ResourceMethodTypeModel, TType, TRo
   const Result =
     (method === RESOURCE_METHOD_TYPE.GET_CONNECTION
       ? createConnection({ Resource, name })
-      : Resource) ?? Boolean;
+      : Resource()) ?? Boolean;
 
   @withEntity({ name: nameF })
   class Output extends (Root ?? class {}) implements OutputModel<TMethod, TType, TRoot> {

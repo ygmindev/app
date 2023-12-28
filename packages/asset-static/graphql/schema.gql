@@ -241,20 +241,12 @@ input BankCreateManyInput {
 
 type BankCreateManyOutput {
   result: Bank
-  root: BankCreateManyOutputRoot
-}
-
-type BankCreateManyOutputRoot {
-  root: BankCreateManyOutputRoot
+  root: User
 }
 
 type BankCreateOutput {
   result: Bank
-  root: BankCreateOutputRoot
-}
-
-type BankCreateOutputRoot {
-  root: BankCreateOutputRoot
+  root: User
 }
 
 type BankGetConnectionConnection {
@@ -287,11 +279,7 @@ input BankGetConnectionInput {
 
 type BankGetConnectionOutput {
   result: BankGetConnectionConnection
-  root: BankGetConnectionOutputRoot
-}
-
-type BankGetConnectionOutputRoot {
-  root: BankGetConnectionOutputRoot
+  root: User
 }
 
 input BankGetFilterInput {
@@ -330,20 +318,12 @@ input BankGetManyInput {
 
 type BankGetManyOutput {
   result: [Bank]
-  root: BankGetManyOutputRoot
-}
-
-type BankGetManyOutputRoot {
-  root: BankGetManyOutputRoot
+  root: User
 }
 
 type BankGetOutput {
   result: Bank
-  root: BankGetOutputRoot
-}
-
-type BankGetOutputRoot {
-  root: BankGetOutputRoot
+  root: User
 }
 
 input BankInput {
@@ -375,11 +355,7 @@ input BankRemoveInput {
 
 type BankRemoveOutput {
   result: Bank
-  root: BankRemoveOutputRoot
-}
-
-type BankRemoveOutputRoot {
-  root: BankRemoveOutputRoot
+  root: User
 }
 
 input BankUpdateFilterInput {
@@ -402,11 +378,7 @@ input BankUpdateInput {
 
 type BankUpdateOutput {
   result: Bank
-  root: BankUpdateOutputRoot
-}
-
-type BankUpdateOutputRoot {
-  root: BankUpdateOutputRoot
+  root: User
 }
 
 input BankUpdateUpdateInput {
@@ -470,20 +442,12 @@ input CardCreateManyInput {
 
 type CardCreateManyOutput {
   result: Card
-  root: CardCreateManyOutputRoot
-}
-
-type CardCreateManyOutputRoot {
-  root: CardCreateManyOutputRoot
+  root: User
 }
 
 type CardCreateOutput {
   result: Card
-  root: CardCreateOutputRoot
-}
-
-type CardCreateOutputRoot {
-  root: CardCreateOutputRoot
+  root: User
 }
 
 type CardGetConnectionConnection {
@@ -516,11 +480,7 @@ input CardGetConnectionInput {
 
 type CardGetConnectionOutput {
   result: CardGetConnectionConnection
-  root: CardGetConnectionOutputRoot
-}
-
-type CardGetConnectionOutputRoot {
-  root: CardGetConnectionOutputRoot
+  root: User
 }
 
 input CardGetFilterInput {
@@ -559,20 +519,12 @@ input CardGetManyInput {
 
 type CardGetManyOutput {
   result: [Card]
-  root: CardGetManyOutputRoot
-}
-
-type CardGetManyOutputRoot {
-  root: CardGetManyOutputRoot
+  root: User
 }
 
 type CardGetOutput {
   result: Card
-  root: CardGetOutputRoot
-}
-
-type CardGetOutputRoot {
-  root: CardGetOutputRoot
+  root: User
 }
 
 input CardInput {
@@ -607,11 +559,7 @@ input CardRemoveInput {
 
 type CardRemoveOutput {
   result: Card
-  root: CardRemoveOutputRoot
-}
-
-type CardRemoveOutputRoot {
-  root: CardRemoveOutputRoot
+  root: User
 }
 
 input CardUpdateFilterInput {
@@ -634,11 +582,7 @@ input CardUpdateInput {
 
 type CardUpdateOutput {
   result: Card
-  root: CardUpdateOutputRoot
-}
-
-type CardUpdateOutputRoot {
-  root: CardUpdateOutputRoot
+  root: User
 }
 
 input CardUpdateUpdateInput {
@@ -690,20 +634,12 @@ input CreditRatingCreateManyInput {
 
 type CreditRatingCreateManyOutput {
   result: CreditRating
-  root: CreditRatingCreateManyOutputRoot
-}
-
-type CreditRatingCreateManyOutputRoot {
-  root: CreditRatingCreateManyOutputRoot
+  root: Funding
 }
 
 type CreditRatingCreateOutput {
   result: CreditRating
-  root: CreditRatingCreateOutputRoot
-}
-
-type CreditRatingCreateOutputRoot {
-  root: CreditRatingCreateOutputRoot
+  root: Funding
 }
 
 type CreditRatingGetConnectionConnection {
@@ -736,11 +672,7 @@ input CreditRatingGetConnectionInput {
 
 type CreditRatingGetConnectionOutput {
   result: CreditRatingGetConnectionConnection
-  root: CreditRatingGetConnectionOutputRoot
-}
-
-type CreditRatingGetConnectionOutputRoot {
-  root: CreditRatingGetConnectionOutputRoot
+  root: Funding
 }
 
 input CreditRatingGetFilterInput {
@@ -779,20 +711,12 @@ input CreditRatingGetManyInput {
 
 type CreditRatingGetManyOutput {
   result: [CreditRating]
-  root: CreditRatingGetManyOutputRoot
-}
-
-type CreditRatingGetManyOutputRoot {
-  root: CreditRatingGetManyOutputRoot
+  root: Funding
 }
 
 type CreditRatingGetOutput {
   result: CreditRating
-  root: CreditRatingGetOutputRoot
-}
-
-type CreditRatingGetOutputRoot {
-  root: CreditRatingGetOutputRoot
+  root: Funding
 }
 
 input CreditRatingInput {
@@ -822,11 +746,7 @@ input CreditRatingRemoveInput {
 
 type CreditRatingRemoveOutput {
   result: CreditRating
-  root: CreditRatingRemoveOutputRoot
-}
-
-type CreditRatingRemoveOutputRoot {
-  root: CreditRatingRemoveOutputRoot
+  root: Funding
 }
 
 input CreditRatingUpdateFilterInput {
@@ -849,11 +769,7 @@ input CreditRatingUpdateInput {
 
 type CreditRatingUpdateOutput {
   result: CreditRating
-  root: CreditRatingUpdateOutputRoot
-}
-
-type CreditRatingUpdateOutputRoot {
-  root: CreditRatingUpdateOutputRoot
+  root: Funding
 }
 
 input CreditRatingUpdateUpdateInput {
@@ -1067,20 +983,12 @@ input FundingQuoteCreateManyInput {
 
 type FundingQuoteCreateManyOutput {
   result: FundingQuote
-  root: FundingQuoteCreateManyOutputRoot
-}
-
-type FundingQuoteCreateManyOutputRoot {
-  root: FundingQuoteCreateManyOutputRoot
+  root: Funding
 }
 
 type FundingQuoteCreateOutput {
   result: FundingQuote
-  root: FundingQuoteCreateOutputRoot
-}
-
-type FundingQuoteCreateOutputRoot {
-  root: FundingQuoteCreateOutputRoot
+  root: Funding
 }
 
 type FundingQuoteGetConnectionConnection {
@@ -1113,11 +1021,7 @@ input FundingQuoteGetConnectionInput {
 
 type FundingQuoteGetConnectionOutput {
   result: FundingQuoteGetConnectionConnection
-  root: FundingQuoteGetConnectionOutputRoot
-}
-
-type FundingQuoteGetConnectionOutputRoot {
-  root: FundingQuoteGetConnectionOutputRoot
+  root: Funding
 }
 
 input FundingQuoteGetFilterInput {
@@ -1156,20 +1060,12 @@ input FundingQuoteGetManyInput {
 
 type FundingQuoteGetManyOutput {
   result: [FundingQuote]
-  root: FundingQuoteGetManyOutputRoot
-}
-
-type FundingQuoteGetManyOutputRoot {
-  root: FundingQuoteGetManyOutputRoot
+  root: Funding
 }
 
 type FundingQuoteGetOutput {
   result: FundingQuote
-  root: FundingQuoteGetOutputRoot
-}
-
-type FundingQuoteGetOutputRoot {
-  root: FundingQuoteGetOutputRoot
+  root: Funding
 }
 
 input FundingQuoteInput {
@@ -1198,11 +1094,7 @@ input FundingQuoteRemoveInput {
 
 type FundingQuoteRemoveOutput {
   result: FundingQuote
-  root: FundingQuoteRemoveOutputRoot
-}
-
-type FundingQuoteRemoveOutputRoot {
-  root: FundingQuoteRemoveOutputRoot
+  root: Funding
 }
 
 input FundingQuoteUpdateFilterInput {
@@ -1225,11 +1117,7 @@ input FundingQuoteUpdateInput {
 
 type FundingQuoteUpdateOutput {
   result: FundingQuote
-  root: FundingQuoteUpdateOutputRoot
-}
-
-type FundingQuoteUpdateOutputRoot {
-  root: FundingQuoteUpdateOutputRoot
+  root: Funding
 }
 
 input FundingQuoteUpdateUpdateInput {
@@ -1525,6 +1413,7 @@ type Mutation {
   OtpCreateMany(input: OtpCreateManyInput): OtpCreateManyOutput
   OtpRemove(input: OtpRemoveInput): OtpRemoveOutput
   OtpUpdate(input: OtpUpdateInput): OtpUpdateOutput
+  PaymentMethodTokenCreate(input: PaymentMethodTokenCreateInput): PaymentMethodTokenCreateOutput
   RatingAgencyCreate(input: RatingAgencyCreateInput): RatingAgencyCreateOutput
   RatingAgencyCreateMany(input: RatingAgencyCreateManyInput): RatingAgencyCreateManyOutput
   RatingAgencyRemove(input: RatingAgencyRemoveInput): RatingAgencyRemoveOutput
@@ -1777,11 +1666,7 @@ input PaymentMethodGetManyInput {
 
 type PaymentMethodGetManyOutput {
   result: [PaymentMethod]
-  root: PaymentMethodGetManyOutputRoot
-}
-
-type PaymentMethodGetManyOutputRoot {
-  root: PaymentMethodGetManyOutputRoot
+  root: User
 }
 
 input PaymentMethodInput {
@@ -1790,6 +1675,14 @@ input PaymentMethodInput {
   created: DateTime
   last4: String
   type: String
+}
+
+input PaymentMethodTokenCreateInput {
+  root: String
+}
+
+type PaymentMethodTokenCreateOutput {
+  result: String
 }
 
 type Query {
@@ -2397,20 +2290,12 @@ input UtilityCreateManyInput {
 
 type UtilityCreateManyOutput {
   result: Utility
-  root: UtilityCreateManyOutputRoot
-}
-
-type UtilityCreateManyOutputRoot {
-  root: UtilityCreateManyOutputRoot
+  root: Vendor
 }
 
 type UtilityCreateOutput {
   result: Utility
-  root: UtilityCreateOutputRoot
-}
-
-type UtilityCreateOutputRoot {
-  root: UtilityCreateOutputRoot
+  root: Vendor
 }
 
 type UtilityGetConnectionConnection {
@@ -2443,11 +2328,7 @@ input UtilityGetConnectionInput {
 
 type UtilityGetConnectionOutput {
   result: UtilityGetConnectionConnection
-  root: UtilityGetConnectionOutputRoot
-}
-
-type UtilityGetConnectionOutputRoot {
-  root: UtilityGetConnectionOutputRoot
+  root: Vendor
 }
 
 input UtilityGetFilterInput {
@@ -2486,20 +2367,12 @@ input UtilityGetManyInput {
 
 type UtilityGetManyOutput {
   result: [Utility]
-  root: UtilityGetManyOutputRoot
-}
-
-type UtilityGetManyOutputRoot {
-  root: UtilityGetManyOutputRoot
+  root: Vendor
 }
 
 type UtilityGetOutput {
   result: Utility
-  root: UtilityGetOutputRoot
-}
-
-type UtilityGetOutputRoot {
-  root: UtilityGetOutputRoot
+  root: Vendor
 }
 
 input UtilityInput {
@@ -2531,11 +2404,7 @@ input UtilityRemoveInput {
 
 type UtilityRemoveOutput {
   result: Utility
-  root: UtilityRemoveOutputRoot
-}
-
-type UtilityRemoveOutputRoot {
-  root: UtilityRemoveOutputRoot
+  root: Vendor
 }
 
 input UtilityUpdateFilterInput {
@@ -2558,11 +2427,7 @@ input UtilityUpdateInput {
 
 type UtilityUpdateOutput {
   result: Utility
-  root: UtilityUpdateOutputRoot
-}
-
-type UtilityUpdateOutputRoot {
-  root: UtilityUpdateOutputRoot
+  root: Vendor
 }
 
 input UtilityUpdateUpdateInput {
@@ -2786,20 +2651,12 @@ input linkedUserCreateManyInput {
 
 type linkedUserCreateManyOutput {
   result: linkedUser
-  root: linkedUserCreateManyOutputRoot
-}
-
-type linkedUserCreateManyOutputRoot {
-  root: linkedUserCreateManyOutputRoot
+  root: User
 }
 
 type linkedUserCreateOutput {
   result: linkedUser
-  root: linkedUserCreateOutputRoot
-}
-
-type linkedUserCreateOutputRoot {
-  root: linkedUserCreateOutputRoot
+  root: User
 }
 
 type linkedUserGetConnectionConnection {
@@ -2832,11 +2689,7 @@ input linkedUserGetConnectionInput {
 
 type linkedUserGetConnectionOutput {
   result: linkedUserGetConnectionConnection
-  root: linkedUserGetConnectionOutputRoot
-}
-
-type linkedUserGetConnectionOutputRoot {
-  root: linkedUserGetConnectionOutputRoot
+  root: User
 }
 
 input linkedUserGetFilterInput {
@@ -2875,20 +2728,12 @@ input linkedUserGetManyInput {
 
 type linkedUserGetManyOutput {
   result: [linkedUser]
-  root: linkedUserGetManyOutputRoot
-}
-
-type linkedUserGetManyOutputRoot {
-  root: linkedUserGetManyOutputRoot
+  root: User
 }
 
 type linkedUserGetOutput {
   result: linkedUser
-  root: linkedUserGetOutputRoot
-}
-
-type linkedUserGetOutputRoot {
-  root: linkedUserGetOutputRoot
+  root: User
 }
 
 input linkedUserInput {
@@ -2918,11 +2763,7 @@ input linkedUserRemoveInput {
 
 type linkedUserRemoveOutput {
   result: linkedUser
-  root: linkedUserRemoveOutputRoot
-}
-
-type linkedUserRemoveOutputRoot {
-  root: linkedUserRemoveOutputRoot
+  root: User
 }
 
 input linkedUserUpdateFilterInput {
@@ -2945,11 +2786,7 @@ input linkedUserUpdateInput {
 
 type linkedUserUpdateOutput {
   result: linkedUser
-  root: linkedUserUpdateOutputRoot
-}
-
-type linkedUserUpdateOutputRoot {
-  root: linkedUserUpdateOutputRoot
+  root: User
 }
 
 input linkedUserUpdateUpdateInput {

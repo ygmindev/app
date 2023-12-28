@@ -14,7 +14,7 @@ describe(displayName, () => {
 
   test('works', async () => {
     const Root = createRoot({
-      RootResource: RootEntity,
+      RootResource: () => RootEntity,
       name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
     });
     const result = new Root();

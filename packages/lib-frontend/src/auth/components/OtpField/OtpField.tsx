@@ -64,7 +64,7 @@ export const OtpField: RLFCModel<OtpFieldRefModel, OtpFieldPropsModel> = forward
               onChange={(value) => {
                 valueControlledSet(value);
                 if (value?.length === otpLength) {
-                  void sleep().then(onSubmit);
+                  void sleep().then(() => onSubmit && onSubmit(value));
                 }
               }}
               onFocus={() => isFocusedSet(true)}

@@ -7,7 +7,7 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 export const useBankResource = ({
   root,
-}: UseResourceMethodHookParamsModel = {}): UseBankResourceModel =>
+}: UseResourceMethodHookParamsModel<UserModel> = {}): UseBankResourceModel =>
   useResource<BankModel, BankFormModel, UserModel>({
     ...BANK_RESOURCE_PARAMS,
     root,

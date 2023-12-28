@@ -151,8 +151,10 @@ const FormContainerF = forwardRef(
         key: id,
         onChange: (v) => handleChange(id)(v),
         onSubmit: handleSubmitF,
-        ref: (elementF: FieldRefModel<TType, TKey>) =>
-          fieldRefs.current && (fieldRefs.current[id] = elementF),
+        ref:
+          element.ref ??
+          ((elementF: FieldRefModel<TType, TKey>) =>
+            fieldRefs.current && (fieldRefs.current[id] = elementF)),
         value: values[id],
       } as FieldPropsModel<TType[TKey]>),
       id,

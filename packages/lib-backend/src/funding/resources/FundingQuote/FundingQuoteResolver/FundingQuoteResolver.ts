@@ -16,9 +16,9 @@ import {
 @withResolver({ Resource: () => FundingQuote })
 export class FundingQuoteResolver
   extends createEmbeddedResourceResolver<FundingQuoteModel, FundingQuoteFormModel, FundingModel>({
-    Resource: FundingQuote,
+    Resource: () => FundingQuote,
     ResourceService: FundingQuoteService,
-    RootResource: Funding,
+    RootResource: () => Funding,
     name: FUNDING_QUOTE_RESOURCE_NAME,
   })
   implements FundingQuoteResolverModel {}

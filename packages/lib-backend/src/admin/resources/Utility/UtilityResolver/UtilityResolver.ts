@@ -16,9 +16,9 @@ import { type VendorModel } from '#lib-shared/admin/resources/Vendor/Vendor.mode
 @withResolver({ Resource: () => Utility })
 export class UtilityResolver
   extends createEmbeddedResourceResolver<UtilityModel, UtilityFormModel, VendorModel>({
-    Resource: Utility,
+    Resource: () => Utility,
     ResourceService: UtilityService,
-    RootResource: Vendor,
+    RootResource: () => Vendor,
     name: UTILITY_RESOURCE_NAME,
   })
   implements UtilityResolverModel {}

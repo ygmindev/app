@@ -15,7 +15,7 @@ export type _TextFieldPropsModel = {
   onEscape?(): void;
   onFocus?(): void;
   onRemove?(): void;
-  onSubmit?(): void;
+  onSubmit?(value?: string): void;
   placeholder?: string;
   value?: string;
 };

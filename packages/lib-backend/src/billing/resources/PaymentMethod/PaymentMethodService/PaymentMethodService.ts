@@ -20,24 +20,24 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withContainer({ name: `${PAYMENT_METHOD_RESOURCE_NAME}Service` })
 export class PaymentMethodService implements PaymentMethodServiceModel {
-  @withInject(LinkedUserService) protected _linkedUserService!: LinkedUserService;
+  @withInject(LinkedUserService) protected linkedUserService!: LinkedUserService;
 
-  @withInject(CardService) protected _cardService!: CardService;
+  @withInject(CardService) protected cardService!: CardService;
 
-  @withInject(BankService) protected _bankService!: BankService;
+  @withInject(BankService) protected bankService!: BankService;
 
-  @withInject(StripeAdminService) protected _stripeAdminService!: StripeAdminService;
+  @withInject(StripeAdminService) protected stripeAdminService!: StripeAdminService;
 
   async getMany(
     input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel> = {},
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>> {
     if (input.root) {
-      const { result: banks } = await this._bankService.getMany({
+      const { result: banks } = await this.bankService.getMany({
         filter: [],
         options: { project: { _id: true, id: true, last4: true } },
         root: input.root,
       });
-      const { result: cards } = await this._cardService.getMany({
+      const { result: cards } = await this.cardService.getMany({
         filter: [],
         options: { project: { _id: true, id: true, last4: true } },
         root: input.root,
@@ -57,27 +57,24 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
   }
 
   async createToken(
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, string> = {},
+    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, string, undefined, UserModel>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, string, UserModel>> {
-    if (input.root) {
-      let { result: linkedUser } = await this._linkedUserService.get({
+    if (input?.root) {
+      let { result: linkedUser } = await this.linkedUserService.get({
         filter: [{ field: 'type', value: LINKED_USER_TYPE.STRIPE }],
-        options: { project: { _id: true } },
+        options: { project: { _id: true, id: true } },
         root: input.root,
       });
       if (!linkedUser) {
-        const id = await this._stripeAdminService.createCustomer();
-        const { result: createdLinkedUser } = await this._linkedUserService.create({
+        const id = await this.stripeAdminService.createCustomer();
+        const { result: linkedUserNew } = await this.linkedUserService.create({
           form: { id, type: LINKED_USER_TYPE.STRIPE },
           root: input.root,
         });
-        if (createdLinkedUser) {
-          linkedUser = createdLinkedUser;
-        }
+        linkedUserNew && (linkedUser = linkedUserNew);
       }
       if (linkedUser) {
-        const result =
-          linkedUser.id && (await this._stripeAdminService.createIntent(linkedUser.id));
+        const result = linkedUser.id && (await this.stripeAdminService.createIntent(linkedUser.id));
         return { result };
       }
       throw new NotFoundError('linked user');

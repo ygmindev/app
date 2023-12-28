@@ -1,15 +1,13 @@
 import { Elements, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { type PaymentMethod, type StripePaymentElementOptions } from '@stripe/stripe-js';
 import { loadStripe } from '@stripe/stripe-js/pure';
-import get from 'lodash/get';
 import { forwardRef, useImperativeHandle } from 'react';
 
 import { STRIPE_ELEMENTS_STYLE } from '#lib-frontend/billing/components/PaymentMethodField/_PaymentMethodField.constants';
 import { type _PaymentMethodFieldPropsModel } from '#lib-frontend/billing/components/PaymentMethodField/_PaymentMethodField.models';
+import { type PaymentMethodFieldRefModel } from '#lib-frontend/billing/components/PaymentMethodField/PaymentMethodField.models';
 import { REDIRECT } from '#lib-frontend/core/core.constants';
-import { type RSFCModel } from '#lib-frontend/core/core.models';
-import { useErrorContext } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext';
-import { type FormRefModel } from '#lib-frontend/data/data.models';
+import { type RLFCModel } from '#lib-frontend/core/core.models';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import {
   type CardBrandModel,
@@ -21,71 +19,35 @@ import { uri } from '#lib-shared/http/utils/uri/uri';
 
 const stripe = loadStripe(process.env.APP_STRIPE_TOKEN);
 
-export const _PaymentMethodField: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> =
-  forwardRef(({ token, ...props }, ref) => {
-    const theme = useTheme();
-    return token ? (
-      <Elements
-        options={{ ...STRIPE_ELEMENTS_STYLE(theme), clientSecret: token }}
-        stripe={stripe}>
-        <StripeForm
-          {...props}
-          ref={ref}
-        />
-      </Elements>
-    ) : null;
-  });
+export const _PaymentMethodField: RLFCModel<
+  PaymentMethodFieldRefModel,
+  _PaymentMethodFieldPropsModel
+> = forwardRef(({ token, ...props }, ref) => {
+  const theme = useTheme();
+  return (
+    <Elements
+      options={{ ...STRIPE_ELEMENTS_STYLE(theme), clientSecret: token }}
+      stripe={stripe}>
+      <StripeField
+        {...props}
+        ref={ref}
+        token={token}
+      />
+    </Elements>
+  );
+});
 
-const StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forwardRef(
-  ({ defaultValue, onSubmit }, ref) => {
+const StripeField: RLFCModel<PaymentMethodFieldRefModel, _PaymentMethodFieldPropsModel> =
+  forwardRef(({ defaultValue, onSubmit }, ref) => {
     const stripeClient = useStripe();
     const elements = useElements();
-    const { handleError } = useErrorContext();
 
     useImperativeHandle(ref, () => ({
+      blur: () => elements?.getElement('cardNumber')?.blur(),
+      focus: () => elements?.getElement('cardNumber')?.focus(),
       reset: () => null,
       submit: handleSubmit,
-      values: () => {
-        return undefined;
-      },
-      valuesSet: async () => {
-        return;
-      },
     }));
-
-    const onSubmitF = async (data: PaymentMethod): Promise<void> => {
-      const { card, id, type, us_bank_account } = data;
-      switch (type) {
-        case 'us_bank_account': {
-          us_bank_account &&
-            onSubmit &&
-            (await onSubmit({
-              bank: get(us_bank_account, 'bank_name') || '',
-              id,
-              last4: get(us_bank_account, 'last4') || '',
-              type: PAYMENT_METHOD_TYPE.BANK,
-            }));
-
-          break;
-        }
-        case 'card': {
-          card &&
-            onSubmit &&
-            (await onSubmit({
-              brand: card.brand as CardBrandModel,
-              expMonth: card.exp_month,
-              expYear: card.exp_year,
-              funding: card.funding as CardFundingModel,
-              id,
-              last4: card.last4,
-              type: PAYMENT_METHOD_TYPE.CARD,
-            }));
-          break;
-        }
-        default:
-          throw new InvalidTypeError(type, 'payment method type');
-      }
-    };
 
     const handleSubmit = async (): Promise<void> => {
       if (stripeClient && elements) {
@@ -102,11 +64,41 @@ const StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forwa
           redirect: 'if_required',
         });
         if (error) {
-          handleError(new Error(error.message));
+          throw new Error(error.message);
         } else if (setupIntent) {
           const { payment_method, status } = setupIntent;
           if (status === 'succeeded') {
-            await onSubmitF(payment_method as PaymentMethod);
+            const { card, id, type, us_bank_account } = payment_method as PaymentMethod;
+            switch (type) {
+              // case 'us_bank_account': {
+              //   us_bank_account &&
+              //     onSubmit &&
+              //     onSubmit({
+              //       bank: get(us_bank_account, 'bank_name') || '',
+              //       id,
+              //       last4: get(us_bank_account, 'last4') || '',
+              //       type: PAYMENT_METHOD_TYPE.BANK,
+              //     });
+
+              //   break;
+              // }
+              case 'card': {
+                card &&
+                  onSubmit &&
+                  onSubmit({
+                    brand: card.brand as CardBrandModel,
+                    expMonth: card.exp_month,
+                    expYear: card.exp_year,
+                    funding: card.funding as CardFundingModel,
+                    id,
+                    last4: card.last4,
+                    type: PAYMENT_METHOD_TYPE.CARD,
+                  });
+                break;
+              }
+              default:
+                throw new InvalidTypeError(type, 'payment method type');
+            }
           }
         }
       }
@@ -118,5 +110,4 @@ const StripeForm: RSFCModel<FormRefModel, _PaymentMethodFieldPropsModel> = forwa
         options={{ layout: { type: 'tabs' } } as StripePaymentElementOptions}
       />
     );
-  },
-);
+  });

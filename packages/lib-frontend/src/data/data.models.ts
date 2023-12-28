@@ -60,13 +60,16 @@ export type FieldPropsModel<TType = string> = FocusableWrapperPropsModel &
     label?: TranslatableTextModel;
     onBlur?(): void;
     onFocus?(): void;
-    onSubmit?(): void;
+    onSubmit?(value?: TType): void;
   };
 
 export type FieldRefModel<
   TType = unknown,
   TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
-> = FocusableRefModel & Pick<FieldPropsModel<TType[TKey]>, 'beforeSubmit'>;
+> = FocusableRefModel &
+  Pick<FieldPropsModel<TType[TKey]>, 'beforeSubmit'> & {
+    submit?(): Promise<void>;
+  };
 
 export type FormErrorModel<TType> =
   | {

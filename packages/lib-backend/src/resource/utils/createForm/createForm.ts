@@ -10,6 +10,6 @@ export const createForm = <TType extends unknown>({
   name,
 }: CreateFormParamsModel<TType>): CreateFormModel<TType> => {
   @withEntity({ name: `${name}Form` })
-  class FormF extends (Resource as unknown as ClassModel) {}
+  class FormF extends (Resource() as unknown as ClassModel) {}
   return FormF as CreateFormModel<TType>;
 };

@@ -26,7 +26,7 @@ export const createProtectedResourceResolver = <
 >(
   params: CreateProtectedResourceResolverParamsModel<TType, TForm>,
 ): CreateProtectedResourceResolverModel<TType, TForm> => {
-  @withResolver({ Resource: () => params.Resource })
+  @withResolver({ Resource: params.Resource })
   class ProtectedResourceResolver extends createResourceResolver<TType, TForm>(params) {
     protected _service = Container.get(params.ResourceService);
 

@@ -19,7 +19,7 @@ export class TestableEmbeddedResourceResolver
     TestableEmbeddedResourceFormModel,
     TestableEntityResourceModel
   >({
-    Resource: TestableEmbeddedResource,
+    Resource: () => TestableEmbeddedResource,
     ResourceService: TestableEmbeddedResourceService,
     name: TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME,
   })

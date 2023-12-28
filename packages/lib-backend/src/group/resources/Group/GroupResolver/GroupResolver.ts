@@ -14,7 +14,7 @@ import {
 @withResolver({ Resource: () => Group })
 export class GroupResolver
   extends createProtectedResourceResolver<GroupModel, GroupFormModel>({
-    Resource: Group,
+    Resource: () => Group,
     ResourceService: GroupService,
     name: GROUP_RESOURCE_NAME,
   })

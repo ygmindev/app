@@ -1,4 +1,4 @@
-import { type ReactElement, type ReactNode, type RefObject } from 'react';
+import { type FunctionComponentElement, type ReactNode, type RefObject } from 'react';
 
 import { type AsyncBoundaryContextModel } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import { type ElementStatePropsModel } from '#lib-frontend/core/core.models';
@@ -43,7 +43,7 @@ export type FormFieldModel<
   TType,
   TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
 > = WithIdModel<TKey> & {
-  element: ReactElement<FieldPropsModel<TType[TKey]>>;
+  element: FunctionComponentElement<FieldPropsModel<TType[TKey]>>;
 };
 
 export type FormFieldsModel<TType> =

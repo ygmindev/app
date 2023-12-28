@@ -57,7 +57,7 @@ export type ResourceServiceBeforeDecoratorModel<
 > = (
   params: { input?: InputModel<TMethod, TType, TForm, TRoot> },
   context?: ContextModel,
-) => Promise<InputModel<TMethod, TType, TForm> | undefined>;
+) => Promise<InputModel<TMethod, TType, TForm, TRoot> | undefined>;
 
 export type ResourceServiceAfterDecoratorModel<
   TMethod extends ResourceMethodTypeModel,
@@ -88,14 +88,19 @@ export type ResourceServiceDecoratorModel<
   afterGetMany?: ResourceServiceAfterDecoratorModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>;
   afterRemove?: ResourceServiceAfterDecoratorModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>;
   afterUpdate?: ResourceServiceAfterDecoratorModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>;
-  beforeCreate?: ResourceServiceBeforeDecoratorModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm>;
+  beforeCreate?: ResourceServiceBeforeDecoratorModel<
+    RESOURCE_METHOD_TYPE.CREATE,
+    TType,
+    TForm,
+    TRoot
+  >;
   beforeCreateMany?: ResourceServiceBeforeDecoratorModel<
     RESOURCE_METHOD_TYPE.CREATE_MANY,
     TType,
     TForm,
     TRoot
   >;
-  beforeGet?: ResourceServiceBeforeDecoratorModel<RESOURCE_METHOD_TYPE.GET, TType, TForm>;
+  beforeGet?: ResourceServiceBeforeDecoratorModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>;
   beforeGetConnection?: ResourceServiceBeforeDecoratorModel<
     RESOURCE_METHOD_TYPE.GET_CONNECTION,
     TType,

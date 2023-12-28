@@ -16,9 +16,9 @@ import { type {{NAME_ROOT}}(pascalCase)Model } from '#lib-shared/{{MODULE_ROOT}}
 @withResolver({ Resource: () => {{NAME}}(pascalCase) })
 export class {{NAME}}(pascalCase)Resolver
   extends createEmbeddedResourceResolver<{{NAME}}(pascalCase)Model, {{NAME}}(pascalCase)FormModel, {{NAME_ROOT}}(pascalCase)Model>({
-    Resource: {{NAME}}(pascalCase),
+    Resource: () => {{NAME}}(pascalCase),
     ResourceService: {{NAME}}(pascalCase)Service,
-    RootResource: {{NAME_ROOT}}(pascalCase),
+    RootResource: () => {{NAME_ROOT}}(pascalCase),
     name: {{NAME}}(constantCase)_RESOURCE_NAME,
   })
   implements {{NAME}}(pascalCase)ResolverModel {}

@@ -100,7 +100,7 @@ export const _TextField = composeComponent<_TextFieldPropsModel, TextInputProps>
           return null;
       }
     },
-    onSubmitEditing: onSubmit,
+    onSubmitEditing: onSubmit ? () => onSubmit(value) : undefined,
     placeholder,
     placeholderTextColor: theme.color.border,
     secureTextEntry: keyboard === TEXT_FIELD_KEYBOARD.PASSWORD,

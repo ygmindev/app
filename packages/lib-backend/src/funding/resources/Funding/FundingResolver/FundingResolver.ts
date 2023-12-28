@@ -17,7 +17,7 @@ import { FUNDING_QUOTE_RESOURCE_NAME } from '#lib-shared/funding/resources/Fundi
 @withResolver({ Resource: () => Funding })
 export class FundingResolver
   extends createProtectedResourceResolver<FundingModel, FundingFormModel>({
-    Resource: Funding,
+    Resource: () => Funding,
     ResourceService: FundingService,
     name: FUNDING_RESOURCE_NAME,
   })

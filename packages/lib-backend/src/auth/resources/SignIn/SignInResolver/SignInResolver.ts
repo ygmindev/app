@@ -29,8 +29,8 @@ import { type UserFormModel, type UserModel } from '#lib-shared/user/resources/U
 @withResolver({ Resource: () => SignIn })
 export class SignInResolver
   extends createEntityResourceResolver<SignInModel, SignInFormModel>({
-    Resource: SignIn,
-    ResourceData: SignInForm,
+    Resource: () => SignIn,
+    ResourceData: () => SignInForm,
     ResourceService: SignInService,
     access: {
       [RESOURCE_METHOD_TYPE.CREATE]: ACCESS_LEVEL.PUBLIC,
@@ -42,14 +42,14 @@ export class SignInResolver
   @withInject(SignInService) protected signInService!: SignInService;
 
   @withOutput({
-    Resource: SignIn,
+    Resource: () => SignIn,
     level: ACCESS_LEVEL.PROTECTED,
     method: RESOURCE_METHOD_TYPE.UPDATE,
     name: SIGN_IN_USER,
   })
   async userUpdate(
     @withInput({
-      Resource: User,
+      Resource: () => User,
       method: RESOURCE_METHOD_TYPE.UPDATE,
       name: SIGN_IN_USER,
     })
@@ -61,14 +61,14 @@ export class SignInResolver
   }
 
   @withOutput({
-    Resource: SignIn,
+    Resource: () => SignIn,
     level: ACCESS_LEVEL.PROTECTED,
     method: RESOURCE_METHOD_TYPE.CREATE,
     name: SIGN_IN_USERNAME,
   })
   async usernameUpdate(
     @withInput({
-      Resource: SignInForm,
+      Resource: () => SignInForm,
       method: RESOURCE_METHOD_TYPE.CREATE,
       name: SIGN_IN_USERNAME,
     })

@@ -13,8 +13,8 @@ import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 @withResolver({ Resource: () => Otp })
 export class OtpResolver
   extends createEntityResourceResolver<OtpModel, OtpFormModel>({
-    Resource: Otp,
-    ResourceData: OtpForm,
+    Resource: () => Otp,
+    ResourceData: () => OtpForm,
     ResourceService: OtpService,
     access: {
       [RESOURCE_METHOD_TYPE.CREATE]: ACCESS_LEVEL.PUBLIC,

@@ -16,9 +16,9 @@ import { type FundingModel } from '#lib-shared/funding/resources/Funding/Funding
 @withResolver({ Resource: () => CreditRating })
 export class CreditRatingResolver
   extends createEmbeddedResourceResolver<CreditRatingModel, CreditRatingFormModel, FundingModel>({
-    Resource: CreditRating,
+    Resource: () => CreditRating,
     ResourceService: CreditRatingService,
-    RootResource: Funding,
+    RootResource: () => Funding,
     name: CREDIT_RATING_RESOURCE_NAME,
   })
   implements CreditRatingResolverModel {}

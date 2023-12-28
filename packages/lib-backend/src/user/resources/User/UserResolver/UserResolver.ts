@@ -13,7 +13,7 @@ import { type UserFormModel, type UserModel } from '#lib-shared/user/resources/U
 @withResolver({ Resource: () => User })
 export class UserResolver
   extends createEntityResourceResolver<UserModel, UserFormModel>({
-    Resource: User,
+    Resource: () => User,
     ResourceService: UserService,
     authorizer: {
       Update: ({ context, input }) => isEqual(context?.user?._id, input.filter._id),
