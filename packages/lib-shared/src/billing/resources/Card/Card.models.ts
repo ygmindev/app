@@ -15,8 +15,6 @@ export type CardBrandModel = `${CARD_BRAND}`;
 export type CardModel = EmbeddedResourceModel & {
   [USER_RESOURCE_NAME]: UserModel;
 
-  brand: CardBrandModel;
-
   expMonth: number;
 
   expYear: number;
@@ -26,6 +24,8 @@ export type CardModel = EmbeddedResourceModel & {
   id: string;
 
   last4: string;
+
+  name: CardBrandModel;
 
   type: PAYMENT_METHOD_TYPE.CARD;
 };

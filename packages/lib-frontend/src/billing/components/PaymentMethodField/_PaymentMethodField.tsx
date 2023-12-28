@@ -11,10 +11,10 @@ import { type RLFCModel } from '#lib-frontend/core/core.models';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import {
   type CardBrandModel,
-  type CardFormModel,
   type CardFundingModel,
 } from '#lib-shared/billing/resources/Card/Card.models';
 import { PAYMENT_METHOD_TYPE } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import { type PaymentMethodFormModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { uri } from '#lib-shared/http/utils/uri/uri';
 
@@ -50,7 +50,7 @@ const StripeField: RLFCModel<PaymentMethodFieldRefModel, _PaymentMethodFieldProp
       reset: () => null,
     }));
 
-    const beforeSubmit = async (): Promise<CardFormModel | null | undefined> => {
+    const beforeSubmit = async (): Promise<PaymentMethodFormModel | undefined> => {
       if (stripeClient && elements) {
         const { error, setupIntent } = await stripeClient.confirmSetup({
           confirmParams: {
@@ -71,27 +71,25 @@ const StripeField: RLFCModel<PaymentMethodFieldRefModel, _PaymentMethodFieldProp
           if (status === 'succeeded') {
             const { card, id, type, us_bank_account } = payment_method as PaymentMethod;
             switch (type) {
-              // case 'us_bank_account': {
-              //   us_bank_account  &&
-              //     onSubmit &&
-              //     onSubmit({
-              //       bank: get(us_bank_account, 'bank_name') || '',
-              //       id,
-              //       last4: get(us_bank_account, 'last4') || '',
-              //       type: PAYMENT_METHOD_TYPE.BANK,
-              //     });
-
-              //   break;
-              // }
+              case 'us_bank_account': {
+                return (
+                  us_bank_account && {
+                    id,
+                    last4: us_bank_account.last4,
+                    name: us_bank_account.bank_name,
+                    type: PAYMENT_METHOD_TYPE.BANK,
+                  }
+                );
+              }
               case 'card': {
                 return (
                   card && {
-                    brand: card.brand as CardBrandModel,
                     expMonth: card.exp_month,
                     expYear: card.exp_year,
                     funding: card.funding as CardFundingModel,
                     id,
                     last4: card.last4,
+                    name: card.brand as CardBrandModel,
                     type: PAYMENT_METHOD_TYPE.CARD,
                   }
                 );

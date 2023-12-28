@@ -7,11 +7,11 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 export type BankModel = EmbeddedResourceModel & {
   [USER_RESOURCE_NAME]: UserModel;
 
-  bank: string;
-
   id: string;
 
   last4: string;
+
+  name: string;
 
   type: PAYMENT_METHOD_TYPE.BANK;
 };

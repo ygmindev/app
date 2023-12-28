@@ -3,10 +3,10 @@ import { nodeTasks } from '#tool-task/node/utils/nodeTasks/nodeTasks';
 import { build } from '#tool-task/platform/web/templates/build/build';
 import { dev } from '#tool-task/platform/web/templates/dev/dev';
 
-const tasks: Array<TaskParamsModel<unknown>> = nodeTasks({
+const tasks = nodeTasks({
   additionalTasks: [dev, build],
 
   eteTasks: ['run bld', 'run awd'],
-});
+}) satisfies Array<TaskParamsModel<unknown>>;
 
 export default tasks;

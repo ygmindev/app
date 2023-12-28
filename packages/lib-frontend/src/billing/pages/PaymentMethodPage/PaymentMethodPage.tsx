@@ -12,7 +12,10 @@ import { RouteList } from '#lib-frontend/route/components/RouteList2/RouteList';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
-import { PAYMENT_METHOD_RESOURCE_NAME } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import {
+  PAYMENT_METHOD_RESOURCE_NAME,
+  PAYMENT_METHOD_TYPE,
+} from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { getEntityResourceFixture } from '#lib-shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
 
 export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...props }) => {
@@ -39,10 +42,16 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
         {({ data }) => (
           <RouteList
             root
-            routes={data?.result?.map(({ _id }) => ({
+            routes={data?.result?.map(({ _id, last4, name, type }) => ({
+              icon:
+                type === PAYMENT_METHOD_TYPE.BANK
+                  ? 'bank'
+                  : type === PAYMENT_METHOD_TYPE.CARD
+                    ? 'card'
+                    : undefined,
               id: _id,
               pathname: _id ?? '',
-              title: _id,
+              title: t('billing:paymentMethodTitle', { last4, name }),
             }))}
             title={t('billing:paymentMethod_plural')}
           />

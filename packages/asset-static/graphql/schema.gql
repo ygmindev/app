@@ -202,20 +202,20 @@ input AccessUpdateUpdateInput {
 type Bank {
   User: User
   _id: String
-  bank: String
   created: DateTime
   id: String
   last4: String
+  name: String
   type: String
 }
 
 input BankCreateFormInput {
   User: UserInput
   _id: String
-  bank: String
   created: DateTime
   id: String
   last4: String
+  name: String
   type: String
 }
 
@@ -227,10 +227,10 @@ input BankCreateInput {
 input BankCreateManyFormInput {
   User: UserInput
   _id: String
-  bank: String
   created: DateTime
   id: String
   last4: String
+  name: String
   type: String
 }
 
@@ -329,10 +329,10 @@ type BankGetOutput {
 input BankInput {
   User: UserInput
   _id: String
-  bank: String
   created: DateTime
   id: String
   last4: String
+  name: String
   type: String
 }
 
@@ -384,36 +384,36 @@ type BankUpdateOutput {
 input BankUpdateUpdateInput {
   User: UserInput
   _id: String
-  bank: String
   created: DateTime
   id: String
   last4: String
+  name: String
   type: String
 }
 
 type Card {
   User: User
   _id: String
-  brand: String
   created: DateTime
   expMonth: Float
   expYear: Float
   funding: String
   id: String
   last4: String
+  name: String
   type: String
 }
 
 input CardCreateFormInput {
   User: UserInput
   _id: String
-  brand: String
   created: DateTime
   expMonth: Float
   expYear: Float
   funding: String
   id: String
   last4: String
+  name: String
   type: String
 }
 
@@ -425,13 +425,13 @@ input CardCreateInput {
 input CardCreateManyFormInput {
   User: UserInput
   _id: String
-  brand: String
   created: DateTime
   expMonth: Float
   expYear: Float
   funding: String
   id: String
   last4: String
+  name: String
   type: String
 }
 
@@ -530,13 +530,13 @@ type CardGetOutput {
 input CardInput {
   User: UserInput
   _id: String
-  brand: String
   created: DateTime
   expMonth: Float
   expYear: Float
   funding: String
   id: String
   last4: String
+  name: String
   type: String
 }
 
@@ -588,13 +588,13 @@ type CardUpdateOutput {
 input CardUpdateUpdateInput {
   User: UserInput
   _id: String
-  brand: String
   created: DateTime
   expMonth: Float
   expYear: Float
   funding: String
   id: String
   last4: String
+  name: String
   type: String
 }
 
@@ -1644,6 +1644,7 @@ type PaymentMethod {
   _id: String
   created: DateTime
   last4: String
+  name: String
   type: String
 }
 
@@ -1674,6 +1675,7 @@ input PaymentMethodInput {
   _id: String
   created: DateTime
   last4: String
+  name: String
   type: String
 }
 

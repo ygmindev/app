@@ -7,7 +7,7 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 export const CARD_RESOURCE_PARAMS = {
   fields: [
     { id: '_id' },
-    { id: 'brand' },
+    { id: 'name' },
     { id: 'expMonth' },
     { id: 'expYear' },
     { id: 'funding' },

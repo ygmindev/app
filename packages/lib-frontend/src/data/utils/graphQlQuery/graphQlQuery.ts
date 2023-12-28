@@ -20,7 +20,7 @@ const getGraphQlFields = <TType extends unknown>(
       ? map(
           fields as GraphQlFragmentFieldModel<TType>,
           (v, k) => `... on ${k} ${getGraphQlFields(v)}`,
-        ).join('\n')
+        ).join(' ')
       : (fields as GraphQlQueryParamsFieldsModel<TType>)
           .map((field) =>
             isPlainObject(field)

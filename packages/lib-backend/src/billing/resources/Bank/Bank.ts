@@ -16,13 +16,13 @@ export class Bank extends EmbeddedResource implements BankModel {
   [USER_RESOURCE_NAME]!: UserModel;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  bank!: string;
-
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
   id!: string;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   last4!: string;
+
+  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  name!: string;
 
   @withField({ type: DATA_TYPE.STRING })
   type!: PAYMENT_METHOD_TYPE.BANK;

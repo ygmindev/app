@@ -1,6 +1,6 @@
 {
   "billing": "billing",
-  "endingIn": "{{type}} ending in {{value}}",
   "paymentMethod": "payment method",
-  "paymentMethod_plural": "payment methods"
+  "paymentMethod_plural": "payment methods",
+  "paymentMethodTitle": "{{name}} ending in {{last4}}"
 }

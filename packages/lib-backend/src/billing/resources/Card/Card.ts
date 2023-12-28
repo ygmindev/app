@@ -19,9 +19,6 @@ export class Card extends EmbeddedResource implements CardModel {
   @withEmbeddableRootField({ Resource: () => User, name: USER_RESOURCE_NAME })
   [USER_RESOURCE_NAME]!: UserModel;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  brand!: CardBrandModel;
-
   @withField({ isRepository: true, type: DATA_TYPE.NUMBER })
   expMonth!: number;
 
@@ -36,6 +33,9 @@ export class Card extends EmbeddedResource implements CardModel {
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   last4!: string;
+
+  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  name!: CardBrandModel;
 
   @withField({ type: DATA_TYPE.STRING })
   type!: PAYMENT_METHOD_TYPE.CARD;

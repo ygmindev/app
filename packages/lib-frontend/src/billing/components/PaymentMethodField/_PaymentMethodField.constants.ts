@@ -25,6 +25,9 @@ export const STRIPE_ELEMENTS_STYLE: (theme: UseThemeModel) => BaseStripeElements
       '.Label--floating': {
         color: theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN],
       },
+      '.Label--resting': {
+        color: theme.color.border,
+      },
       '.Tab': {
         backgroundColor: 'transparent',
         border: `1px solid ${theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN]}`,
@@ -37,6 +40,7 @@ export const STRIPE_ELEMENTS_STYLE: (theme: UseThemeModel) => BaseStripeElements
       },
       '.Tab--selected:hover': {
         backgroundColor: theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.ACTIVE],
+        border: `1px solid ${theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.ACTIVE]}`,
         color: theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MAIN],
       },
       '.Tab:hover': {
