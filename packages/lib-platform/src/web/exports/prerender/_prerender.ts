@@ -4,8 +4,8 @@ import {
   type _PrerenderModel,
   type _PrerenderParamsModel,
 } from '#lib-platform/web/exports/prerender/_prerender.models';
+import { mapSequence } from '#lib-shared/core/utils/mapSequence/mapSequence';
 import { merge } from '#lib-shared/core/utils/merge/merge';
-import { sequence } from '#lib-shared/core/utils/sequence/sequence';
 import { LOCALE } from '#lib-shared/locale/locale.constants';
 import { ROUTE } from '#lib-shared/route/route.constants';
 
@@ -34,5 +34,5 @@ export const _prerender =
         }),
       ),
     );
-    return { prerenderContext: { pageContexts: await sequence(pageContextPromises) } };
+    return { prerenderContext: { pageContexts: await mapSequence(pageContextPromises) } };
   };

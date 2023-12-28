@@ -11,6 +11,7 @@ import { type RLFCModel } from '#lib-frontend/core/core.models';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import {
   type CardBrandModel,
+  type CardFormModel,
   type CardFundingModel,
 } from '#lib-shared/billing/resources/Card/Card.models';
 import { PAYMENT_METHOD_TYPE } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
@@ -38,18 +39,18 @@ export const _PaymentMethodField: RLFCModel<
 });
 
 const StripeField: RLFCModel<PaymentMethodFieldRefModel, _PaymentMethodFieldPropsModel> =
-  forwardRef(({ defaultValue, onSubmit }, ref) => {
+  forwardRef(({ defaultValue }, ref) => {
     const stripeClient = useStripe();
     const elements = useElements();
 
     useImperativeHandle(ref, () => ({
+      beforeSubmit,
       blur: () => elements?.getElement('cardNumber')?.blur(),
       focus: () => elements?.getElement('cardNumber')?.focus(),
       reset: () => null,
-      submit: handleSubmit,
     }));
 
-    const handleSubmit = async (): Promise<void> => {
+    const beforeSubmit = async (): Promise<CardFormModel | null | undefined> => {
       if (stripeClient && elements) {
         const { error, setupIntent } = await stripeClient.confirmSetup({
           confirmParams: {
@@ -71,7 +72,7 @@ const StripeField: RLFCModel<PaymentMethodFieldRefModel, _PaymentMethodFieldProp
             const { card, id, type, us_bank_account } = payment_method as PaymentMethod;
             switch (type) {
               // case 'us_bank_account': {
-              //   us_bank_account &&
+              //   us_bank_account  &&
               //     onSubmit &&
               //     onSubmit({
               //       bank: get(us_bank_account, 'bank_name') || '',
@@ -83,9 +84,8 @@ const StripeField: RLFCModel<PaymentMethodFieldRefModel, _PaymentMethodFieldProp
               //   break;
               // }
               case 'card': {
-                card &&
-                  onSubmit &&
-                  onSubmit({
+                return (
+                  card && {
                     brand: card.brand as CardBrandModel,
                     expMonth: card.exp_month,
                     expYear: card.exp_year,
@@ -93,8 +93,8 @@ const StripeField: RLFCModel<PaymentMethodFieldRefModel, _PaymentMethodFieldProp
                     id,
                     last4: card.last4,
                     type: PAYMENT_METHOD_TYPE.CARD,
-                  });
-                break;
+                  }
+                );
               }
               default:
                 throw new InvalidTypeError(type, 'payment method type');

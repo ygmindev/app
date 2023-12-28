@@ -9,7 +9,7 @@ import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages'
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/DuplicateError';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
-import { sequence } from '#lib-shared/core/utils/sequence/sequence';
+import { mapSequence } from '#lib-shared/core/utils/mapSequence/mapSequence';
 import { setEnvironment } from '#lib-shared/environment/utils/setEnvironment/setEnvironment';
 import { error, info } from '#lib-shared/logging/utils/logger/logger';
 import {
@@ -17,7 +17,7 @@ import {
   type TaskModel,
   type TaskParamsModel,
 } from '#tool-task/core/core.models';
-import { parallel } from '#tool-task/core/utils/parallel/parallel';
+import { mapParallel } from '#tool-task/core/utils/mapParallel/mapParallel';
 import { parseArgs } from '#tool-task/core/utils/parseArgs/parseArgs';
 import { prompt } from '#tool-task/core/utils/prompt/prompt';
 import { _TaskRunner } from '#tool-task/core/utils/TaskRunner/_TaskRunner';
@@ -57,7 +57,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
   ): Promise<void> => {
     if (value) {
       if (isArray(value)) {
-        await parallel(
+        await mapParallel(
           filterNil(value[0].map((v) => (isFunction(v) ? v(context) : v))),
           value[1],
           value[2],
@@ -82,7 +82,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     value: Array<TaskModel<TType>>,
     context: TaskContextModel<TType>,
   ): Promise<void> => {
-    await sequence(value.map((v) => async () => this.resolveTask(v, context)));
+    await mapSequence(value.map((v) => async () => this.resolveTask(v, context)));
   };
 
   handleClose = async (): Promise<void> => {

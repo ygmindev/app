@@ -1,7 +1,7 @@
-import { sequence } from '#lib-shared/core/utils/sequence/sequence';
+import { mapSequence } from '#lib-shared/core/utils/mapSequence/mapSequence';
 import { withTest } from '#lib-shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ sequence });
+const { displayName } = withTest({ mapSequence });
 
 describe(displayName, () => {
   test('works', async () => {
@@ -10,7 +10,7 @@ describe(displayName, () => {
       async () => Promise.resolve(2),
       async () => Promise.resolve(3),
     ];
-    const result = await sequence(PROMISES);
+    const result = await mapSequence(PROMISES);
     expect(result).toStrictEqual([1, 2, 3]);
   });
 });

@@ -76,7 +76,7 @@ export const DropdownField = forwardRef(
       const selectedValue = selected.id;
       if (selectedValue) {
         valueControlledSet(selectedValue);
-        onSubmit && onSubmit(selectedValue);
+        onSubmit && onSubmit();
       }
       handleToggle(false);
     };

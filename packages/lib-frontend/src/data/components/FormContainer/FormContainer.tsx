@@ -1,4 +1,3 @@
-import isNil from 'lodash/isNil';
 import map from 'lodash/map';
 import { cloneElement, type ForwardedRef, type ReactElement, type ReactNode, useRef } from 'react';
 import { forwardRef, useImperativeHandle } from 'react';
@@ -30,6 +29,7 @@ import { useForm } from '#lib-frontend/data/hooks/useForm/useForm';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { type StringKeyModel } from '#lib-shared/core/core.models';
+import { reduceSequence } from '#lib-shared/core/utils/reduceSequence/reduceSequence';
 
 export const FormContainer = forwardRef(
   <TType, TResult = void>(
@@ -96,26 +96,33 @@ const FormContainerF = forwardRef(
       valuesSet,
     }));
 
-    const getValues = (data: TType, fields?: Array<FormFieldsModel<TType>>): TType =>
-      fields
-        ? fields.reduce((result, field) => {
+    const getValues = async (
+      data: TType,
+      fields?: Array<FormFieldsModel<TType>>,
+    ): Promise<TType> => {
+      if (fields) {
+        return reduceSequence(
+          fields,
+          async (result, field) => {
             const fieldsF = (field as FormTileModel<TType> | FormRowModel<TType>).fields;
             if (fieldsF) {
-              return { ...result, ...getValues(data, fieldsF) };
+              return { ...result, ...(await getValues(data, fieldsF)) };
             }
             const value = data[field.id as StringKeyModel<TType>];
             const beforeSubmit = fieldRefs.current[field.id]?.beforeSubmit;
-            return isNil(value)
-              ? result
-              : {
-                  ...result,
-                  ...{ [field.id]: beforeSubmit ? beforeSubmit(value, field.id) : value },
-                };
-          }, {} as TType)
-        : data;
+            return {
+              ...result,
+              ...{ [field.id]: beforeSubmit ? await beforeSubmit(value, field.id) : value },
+            };
+          },
+          {} as TType,
+        );
+      }
+      return data;
+    };
 
     const onSubmitF = async (data: TType): Promise<TResult | null> => {
-      const dataF = getValues(data, fields);
+      const dataF = await getValues(data, fields);
       return (onSubmit && (await onSubmit(dataF))) ?? null;
     };
 
