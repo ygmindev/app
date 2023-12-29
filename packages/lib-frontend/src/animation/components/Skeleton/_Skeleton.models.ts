@@ -5,5 +5,6 @@ import { type ChildrenPropsModel, type DimensionModel } from '#lib-frontend/core
 export type _SkeletonPropsModel = ChildrenPropsModel<ReactElement> &
   DimensionModel & {
     backgroundColor: string;
+    borderRadius: number;
     foregroundColor: string;
   };

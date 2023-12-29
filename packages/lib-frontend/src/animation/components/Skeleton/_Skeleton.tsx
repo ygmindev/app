@@ -8,11 +8,12 @@ import { composeComponent } from '#lib-frontend/core/utils/composeComponent/comp
 export const _Skeleton = composeComponent<_SkeletonPropsModel, PropsModel<typeof Skeleton>>({
   Component: Skeleton,
 
-  getProps: ({ backgroundColor, children, foregroundColor, height, width }) => ({
+  getProps: ({ backgroundColor, borderRadius, children, foregroundColor, height, width }) => ({
     backgroundColor,
     children,
     colorMode: 'light',
     height,
+    radius: borderRadius,
     transition: { reduceMotion: ReduceMotion.Always, type: 'timing' },
     width,
   }),

@@ -2,5 +2,5 @@ import { type _SkeletonPropsModel } from '#lib-frontend/animation/components/Ske
 
 export type SkeletonPropsModel = Omit<
   _SkeletonPropsModel,
-  'backgroundColor' | 'foregroundColor' | 'radius'
+  'backgroundColor' | 'borderRadius' | 'foregroundColor' | 'radius'
 >;

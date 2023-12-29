@@ -1,4 +1,4 @@
-import { PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants';
+import { BILLING, PAYMENT_METHOD } from '#lib-frontend/billing/billing.constants';
 import { PaymentMethodFormPage } from '#lib-frontend/billing/pages/PaymentMethodFormPage/PaymentMethodFormPage';
 import { PaymentMethodPage } from '#lib-frontend/billing/pages/PaymentMethodPage/PaymentMethodPage';
 import { FORM } from '#lib-frontend/data/data.constants';
@@ -7,16 +7,24 @@ import { type RouteModel } from '#lib-frontend/route/route.models';
 
 export const billingRoutes = [
   {
-    element: <PaymentMethodPage />,
+    icon: 'dollar',
     navigation: ROUTE_NAVIGATION.LIST,
-    pathname: PAYMENT_METHOD,
+    pathname: BILLING,
     routes: [
       {
-        element: <PaymentMethodFormPage />,
-        pathname: `${FORM}/:id?`,
+        element: <PaymentMethodPage />,
+        navigation: ROUTE_NAVIGATION.LIST,
+        pathname: PAYMENT_METHOD,
+        routes: [
+          {
+            element: <PaymentMethodFormPage />,
+            pathname: `${FORM}/:id?`,
+            title: ({ t }) => t('billing:paymentMethod'),
+          },
+        ],
         title: ({ t }) => t('billing:paymentMethod'),
       },
     ],
-    title: ({ t }) => t('billing:paymentMethod'),
+    title: ({ t }) => t('billing:billing'),
   },
 ] satisfies Array<RouteModel>;
