@@ -2,8 +2,6 @@ import { type _PaymentMethodFieldPropsModel } from '#lib-frontend/billing/compon
 import { type FieldRefModel } from '#lib-frontend/data/data.models';
 import { type PaymentMethodFormModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
 
-export type PaymentMethodFieldPropsModel = Omit<_PaymentMethodFieldPropsModel, 'token'> & {
-  id?: string;
-};
+export type PaymentMethodFieldPropsModel = Omit<_PaymentMethodFieldPropsModel, 'onError' | 'token'>;
 
 export type PaymentMethodFieldRefModel = FieldRefModel<PaymentMethodFormModel>;

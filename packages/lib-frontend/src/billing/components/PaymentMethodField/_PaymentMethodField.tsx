@@ -36,7 +36,7 @@ export const _PaymentMethodField: RLFCModel<
 });
 
 const StripeField: RLFCModel<PaymentMethodFieldRefModel, _PaymentMethodFieldPropsModel> =
-  forwardRef(({ defaultValue }, ref) => {
+  forwardRef(({ defaultValue, onError }, ref) => {
     const stripeClient = useStripe();
     const elements = useElements();
 
@@ -62,7 +62,7 @@ const StripeField: RLFCModel<PaymentMethodFieldRefModel, _PaymentMethodFieldProp
           redirect: 'if_required',
         });
         if (error) {
-          throw new Error(error.message);
+          onError(new Error(error.message));
         } else if (setupIntent) {
           const { payment_method, status } = setupIntent;
           if (status === 'succeeded') {

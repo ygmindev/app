@@ -7,6 +7,8 @@ import {
 } from '#lib-frontend/billing/components/PaymentMethodField/PaymentMethodField.models';
 import { usePaymentMethodResource } from '#lib-frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
 import { type RLFCModel } from '#lib-frontend/core/core.models';
+import { useErrorContext } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext';
+import { ERROR_TYPE } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext.constants';
 import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBoundary';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { type PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
@@ -14,9 +16,10 @@ import { type PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMe
 export const PaymentMethodField: RLFCModel<
   PaymentMethodFieldRefModel,
   PaymentMethodFieldPropsModel
-> = forwardRef(({ id, ...props }, ref) => {
+> = forwardRef(({ ...props }, ref) => {
   const currentUser = useCurrentUser();
   const { createToken } = usePaymentMethodResource();
+  const { handleError } = useErrorContext();
 
   const query = async (): Promise<{ data?: PaymentMethodModel; token?: string }> => ({
     token: (await createToken({ root: currentUser?._id })).result,
@@ -30,6 +33,7 @@ export const PaymentMethodField: RLFCModel<
       {({ data }) => (
         <_PaymentMethodField
           {...props}
+          onError={(e) => handleError(e, ERROR_TYPE.NOTIFICATION)}
           ref={ref}
           token={data?.token}
         />
