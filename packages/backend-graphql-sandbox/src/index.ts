@@ -1,3 +1,3 @@
-import { graphql } from '#backend-graphql-sandbox/functions/graphql/graphql';
+import { sandbox } from '#backend-graphql-sandbox/functions/sandbox/sandbox';
 
-void graphql();
+void sandbox();

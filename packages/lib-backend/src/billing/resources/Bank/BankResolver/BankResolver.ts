@@ -1,4 +1,3 @@
-import { selfAuthorizer } from '#lib-backend/auth/utils/selfAuthorizer/selfAuthorizer';
 import { Bank } from '#lib-backend/billing/resources/Bank/Bank';
 import { type BankResolverModel } from '#lib-backend/billing/resources/Bank/BankResolver/BankResolver.models';
 import { BankService } from '#lib-backend/billing/resources/Bank/BankService/BankService';
@@ -6,6 +5,7 @@ import { withContainer } from '#lib-backend/core/utils/withContainer/withContain
 import { withResolver } from '#lib-backend/http/utils/withResolver/withResolver';
 import { createEmbeddedResourceResolver } from '#lib-backend/resource/utils/createEmbeddedResourceResolver/createEmbeddedResourceResolver';
 import { User } from '#lib-backend/user/resources/User/User';
+import { ACCESS_LEVEL } from '#lib-shared/auth/resources/Access/Access.constants';
 import { BANK_RESOURCE_NAME } from '#lib-shared/billing/resources/Bank/Bank.constants';
 import { type BankFormModel, type BankModel } from '#lib-shared/billing/resources/Bank/Bank.models';
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
@@ -17,7 +17,8 @@ export class BankResolver
     Resource: () => Bank,
     ResourceService: BankService,
     RootResource: () => User,
-    authorizer: { default: selfAuthorizer() },
+    // authorizer: { default: selfAuthorizer() },
+    access: { default: ACCESS_LEVEL.PUBLIC },
     name: BANK_RESOURCE_NAME,
   })
   implements BankResolverModel {}

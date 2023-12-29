@@ -1,4 +1,3 @@
-import { selfAuthorizer } from '#lib-backend/auth/utils/selfAuthorizer/selfAuthorizer';
 import { PaymentMethod } from '#lib-backend/billing/resources/PaymentMethod/PaymentMethod';
 import { type PaymentMethodResolverModel } from '#lib-backend/billing/resources/PaymentMethod/PaymentMethodResolver/PaymentMethodResolver.models';
 import { PaymentMethodService } from '#lib-backend/billing/resources/PaymentMethod/PaymentMethodService/PaymentMethodService';
@@ -9,6 +8,7 @@ import { createEmbeddedResourceResolver } from '#lib-backend/resource/utils/crea
 import { withInput } from '#lib-backend/resource/utils/withInput/withInput';
 import { withOutput } from '#lib-backend/resource/utils/withOutput/withOutput';
 import { User } from '#lib-backend/user/resources/User/User';
+import { ACCESS_LEVEL } from '#lib-shared/auth/resources/Access/Access.constants';
 import { PAYMENT_METHOD_RESOURCE_NAME } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
@@ -23,7 +23,8 @@ export class PaymentMethodResolver
     Resource: () => PaymentMethod,
     ResourceService: PaymentMethodService,
     RootResource: () => User,
-    authorizer: { default: selfAuthorizer() },
+    // authorizer: { default: selfAuthorizer() },
+    access: { default: ACCESS_LEVEL.PUBLIC },
     name: PAYMENT_METHOD_RESOURCE_NAME,
   })
   implements PaymentMethodResolverModel

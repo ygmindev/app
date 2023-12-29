@@ -12,6 +12,7 @@ export const initialize = async (): Promise<InitializeModel> => {
   const { database } = await initializeBackend();
 
   const server = new ApolloServer({
+    allowBatchedHttpRequests: true,
     formatError: (e, originalError) => {
       const originalErrorF = (originalError as GraphQLError)?.originalError as HttpError;
       const errorF = new HttpError(

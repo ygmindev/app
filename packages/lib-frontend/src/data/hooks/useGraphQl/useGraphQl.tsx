@@ -26,7 +26,7 @@ export const useGraphQl = (params: UseGraphQlParamsModel = {}): UseGraphQlModel 
         name,
         onRequest: async ({ query, variables: variablesF }) =>
           post<GraphQlParamsModel<TParams>, GraphQlHttpResponseModel<TResult, TName>>({
-            params: { query, variables: variablesF },
+            params: [{ query, variables: variablesF }] as never,
             path: '',
           }),
         params: paramsF,

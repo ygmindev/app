@@ -26,7 +26,7 @@ export type TaskResultModel = {
   status: TaskStatusModel;
 };
 
-export type TaskParamsModel<TType extends unknown> = Omit<TaskContextModel<TType>, 'options'> &
+export type TaskParamsModel<TType> = Omit<TaskContextModel<TType>, 'options'> &
   EnvironmentOverrideParamsModel & {
     onBefore?: Array<TaskModel<TType>>;
     onFinish?: Array<TaskModel<TType>>;

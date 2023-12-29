@@ -22,11 +22,11 @@ import {
   type NodeTasksParamsModel,
 } from '#tool-task/node/utils/nodeTasks/nodeTasks.models';
 
-export const nodeTasks = <TType extends Array<TaskParamsModel<unknown>>>({
+export const nodeTasks = ({
   additionalTasks,
   eteTasks,
   testParams,
-}: NodeTasksParamsModel<TType> = {}): NodeTasksMdoel => {
+}: NodeTasksParamsModel = {}): NodeTasksMdoel => {
   const { outputPath } = testConfig();
   const { publicPath } = webConfig();
 
@@ -81,5 +81,5 @@ export const nodeTasks = <TType extends Array<TaskParamsModel<unknown>>>({
       overrides: { isPrompt: true, isWatch: true },
     }),
     ...(additionalTasks ?? []),
-  ] as Array<TaskParamsModel<unknown>>;
+  ] as NodeTasksMdoel;
 };
