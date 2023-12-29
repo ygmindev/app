@@ -1,16 +1,17 @@
+import reduce from 'lodash/reduce';
+
 import { BankService } from '#lib-backend/billing/resources/Bank/BankService/BankService';
 import { CardService } from '#lib-backend/billing/resources/Card/CardService/CardService';
 import { StripeAdminService } from '#lib-backend/billing/utils/StripeAdminService/StripeAdminService';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { LinkedUserService } from '#lib-backend/user/resources/LinkedUser/LinkedUserService/LinkedUserService';
 import { UnauthenticatedError } from '#lib-shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
-import {
-  PAYMENT_METHOD_RESOURCE_NAME,
-  PAYMENT_METHOD_TYPE,
-} from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import { PAYMENT_METHOD_RESOURCE_NAME } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type PaymentMethodServiceModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethodService/PaymentMethodService.models';
+import { type StringKeyModel } from '#lib-shared/core/core.models';
 import { NotFoundError } from '#lib-shared/core/errors/NotFoundError/NotFoundError';
+import { pick } from '#lib-shared/core/utils/pick/pick';
 import { withInject } from '#lib-shared/core/utils/withInject/withInject';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
@@ -32,24 +33,28 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
     input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel> = {},
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>> {
     if (input.root) {
+      const fields: Array<StringKeyModel<PaymentMethodModel>> = [
+        '_id',
+        'id',
+        'last4',
+        'name',
+        'type',
+      ];
+      const project = reduce(fields, (result, v) => ({ ...result, [v]: true }), {});
       const { result: banks } = await this.bankService.getMany({
         filter: [],
-        options: { project: { _id: true, id: true, last4: true } },
+        options: { project },
         root: input.root,
       });
       const { result: cards } = await this.cardService.getMany({
         filter: [],
-        options: { project: { _id: true, id: true, last4: true } },
+        options: { project },
         root: input.root,
       });
       return {
         result: [
-          ...(banks
-            ? banks.map(({ _id, last4 }) => ({ _id, last4, type: PAYMENT_METHOD_TYPE.BANK }))
-            : []),
-          ...(cards
-            ? cards.map(({ _id, last4 }) => ({ _id, last4, type: PAYMENT_METHOD_TYPE.CARD }))
-            : []),
+          ...(banks?.map((value) => pick(value, fields)) ?? []),
+          ...(cards?.map((value) => pick(value, fields)) ?? []),
         ],
       };
     }

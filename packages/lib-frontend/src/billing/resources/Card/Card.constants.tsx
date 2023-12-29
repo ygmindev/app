@@ -13,7 +13,6 @@ export const CARD_RESOURCE_PARAMS = {
     { id: 'funding' },
     { id: 'id' },
     { id: 'last4' },
-    { id: 'type' },
   ],
   name: CARD_RESOURCE_NAME,
   rootName: USER_RESOURCE_NAME,

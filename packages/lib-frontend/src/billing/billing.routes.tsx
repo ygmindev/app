@@ -13,7 +13,8 @@ export const billingRoutes = [
     routes: [
       {
         element: <PaymentMethodFormPage />,
-        pathname: FORM,
+        pathname: `${FORM}/:id?`,
+        title: ({ t }) => t('billing:paymentMethod'),
       },
     ],
     title: ({ t }) => t('billing:paymentMethod'),

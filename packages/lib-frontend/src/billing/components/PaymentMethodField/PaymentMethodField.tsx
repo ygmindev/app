@@ -9,23 +9,29 @@ import { usePaymentMethodResource } from '#lib-frontend/billing/hooks/usePayment
 import { type RLFCModel } from '#lib-frontend/core/core.models';
 import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBoundary';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
+import { type PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
 
 export const PaymentMethodField: RLFCModel<
   PaymentMethodFieldRefModel,
   PaymentMethodFieldPropsModel
-> = forwardRef(({ defaultValue, ...props }, ref) => {
+> = forwardRef(({ id, ...props }, ref) => {
   const currentUser = useCurrentUser();
   const { createToken } = usePaymentMethodResource();
+
+  const query = async (): Promise<{ data?: PaymentMethodModel; token?: string }> => ({
+    token: (await createToken({ root: currentUser?._id })).result,
+  });
+
   return (
     <DataBoundary
+      flex
       id="cardToken"
-      query={async () => createToken({ root: currentUser?._id })}>
+      query={query}>
       {({ data }) => (
         <_PaymentMethodField
           {...props}
-          defaultValue={defaultValue}
           ref={ref}
-          token={data?.result}
+          token={data?.token}
         />
       )}
     </DataBoundary>

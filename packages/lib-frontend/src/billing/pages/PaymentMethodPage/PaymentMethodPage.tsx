@@ -50,7 +50,7 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
                     ? 'card'
                     : undefined,
               id: _id,
-              pathname: _id ?? '',
+              pathname: `${FORM}/${_id}`,
               title: t('billing:paymentMethodTitle', { last4, name }),
             }))}
             title={t('billing:paymentMethod_plural')}

@@ -4,6 +4,7 @@ import { useCardResource } from '#lib-frontend/billing/hooks/useCardResource/use
 import { type PaymentMethodFormPagePropsModel } from '#lib-frontend/billing/pages/PaymentMethodFormPage/PaymentMethodFormPage.models';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
+import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
 import {
@@ -11,9 +12,12 @@ import {
   PAYMENT_METHOD_TYPE,
 } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodFormModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
 export const PaymentMethodFormPage: LFCModel<PaymentMethodFormPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
+  const { location } = useRouter<WithIdModel>();
+  const id = location.params?.id;
 
   const currentUser = useCurrentUser();
   const { create: bankCreate, update: bankUpdate } = useBankResource({
@@ -28,10 +32,11 @@ export const PaymentMethodFormPage: LFCModel<PaymentMethodFormPagePropsModel> = 
       {...wrapperProps}
       fields={[
         {
-          element: <PaymentMethodField />,
+          element: <PaymentMethodField id={id} />,
           id: PAYMENT_METHOD_RESOURCE_NAME,
         },
       ]}
+      isFullHeight
       onSubmit={async (data: { [PAYMENT_METHOD_RESOURCE_NAME]: PaymentMethodFormModel }) => {
         const form = data[PAYMENT_METHOD_RESOURCE_NAME];
         switch (form.type) {

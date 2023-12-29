@@ -24,6 +24,6 @@ export class Bank extends EmbeddedResource implements BankModel {
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   name!: string;
 
-  @withField({ type: DATA_TYPE.STRING })
+  @withField({ isRepository: true, type: DATA_TYPE.STRING })
   type!: PAYMENT_METHOD_TYPE.BANK;
 }

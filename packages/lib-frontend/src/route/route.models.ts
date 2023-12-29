@@ -14,26 +14,29 @@ import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
 export type RouteIdParamsModel = WithIdModel;
 
-export type RouteModel<TProps extends ChildrenPropsModel = ChildrenPropsModel> =
-  WithIconPropsModel & {
-    description?: TranslatableTextModel;
-    element?: ReactElement<TProps>;
-    fullpath?: string;
-    header?: { previous?: string };
-    isFullScreen?: boolean;
-    isIndex?: boolean;
-    isNavigatable?: boolean;
-    isProtectable?: boolean;
-    layoutProps?: LayoutStylePropsModel;
-    navigation?: RouteNavigationModel;
-    navigator?: ReactElement<NavigatorPropsModel>;
-    parent?: string;
-    pathname: string;
-    prerender?: false | Array<string>;
-    routes?: Array<RouteModel>;
-    title?: TranslatableTextModel;
-    transition?: RouteTransitionModel;
-  };
+export type RouteModel<
+  TProps extends ChildrenPropsModel = ChildrenPropsModel,
+  TParams = undefined,
+> = WithIconPropsModel & {
+  description?: TranslatableTextModel;
+  element?: ReactElement<TProps>;
+  fullpath?: string;
+  header?: { previous?: string };
+  isFullScreen?: boolean;
+  isIndex?: boolean;
+  isNavigatable?: boolean;
+  isProtectable?: boolean;
+  layoutProps?: LayoutStylePropsModel;
+  navigation?: RouteNavigationModel;
+  navigator?: ReactElement<NavigatorPropsModel>;
+  params?: TParams;
+  parent?: string;
+  pathname: string;
+  prerender?: false | Array<string>;
+  routes?: Array<RouteModel>;
+  title?: TranslatableTextModel;
+  transition?: RouteTransitionModel;
+};
 
 export type UriModel<TType = object> = {
   host?: string;
@@ -70,4 +73,6 @@ export type RouteDirectionModel = `${ROUTE_DIRECTION}`;
 
 export type RouteNavigationModel = `${ROUTE_NAVIGATION}`;
 
-export type NavigatorPropsModel = Pick<RouteModel, 'routes'>;
+export type NavigatorPropsModel = {
+  routes?: Array<RouteModel>;
+};

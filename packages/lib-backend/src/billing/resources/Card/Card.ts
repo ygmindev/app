@@ -5,7 +5,6 @@ import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { User } from '#lib-backend/user/resources/User/User';
 import { CARD_RESOURCE_NAME } from '#lib-shared/billing/resources/Card/Card.constants';
 import {
-  type CardBrandModel,
   type CardFundingModel,
   type CardModel,
 } from '#lib-shared/billing/resources/Card/Card.models';
@@ -35,8 +34,8 @@ export class Card extends EmbeddedResource implements CardModel {
   last4!: string;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  name!: CardBrandModel;
+  name!: string;
 
-  @withField({ type: DATA_TYPE.STRING })
+  @withField({ isRepository: true, type: DATA_TYPE.STRING })
   type!: PAYMENT_METHOD_TYPE.CARD;
 }

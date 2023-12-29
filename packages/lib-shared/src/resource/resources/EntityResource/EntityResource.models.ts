@@ -19,8 +19,8 @@ export type EntityResourceDataModel<TType> = TType extends PrimitiveModel
       >]?: RequiredModel<TType>[TKey] extends EntityResourceModel
         ? Pick<EntityResourceModel, '_id'>
         : RequiredModel<TType>[TKey] extends Array<infer TElement>
-        ? Array<EntityResourceDataModel<TElement>>
-        : RequiredModel<TType>[TKey];
+          ? Array<EntityResourceDataModel<TElement>>
+          : RequiredModel<TType>[TKey];
     };
 
 // export type EntityResourceDataModel<TType> = TType extends PrimitiveModel
@@ -47,9 +47,9 @@ export type EntityResourceDataModel<TType> = TType extends PrimitiveModel
 export type EntityResourcePartialModel<TType> = TType extends PrimitiveModel
   ? TType
   : TType extends Array<infer TElement>
-  ? Array<EntityResourcePartialModel<TElement>>
-  : (TType extends EntityResourceModel ? { _id: string } : PartialModel<Omit<TType, '_id'>>) & {
-      [TKey in keyof Omit<RequiredModel<TType>, '_id'>]?: EntityResourcePartialModel<
-        RequiredModel<TType>[TKey]
-      >;
-    };
+    ? Array<EntityResourcePartialModel<TElement>>
+    : (TType extends EntityResourceModel ? { _id: string } : PartialModel<Omit<TType, '_id'>>) & {
+        [TKey in keyof Omit<RequiredModel<TType>, '_id'>]?: EntityResourcePartialModel<
+          RequiredModel<TType>[TKey]
+        >;
+      };

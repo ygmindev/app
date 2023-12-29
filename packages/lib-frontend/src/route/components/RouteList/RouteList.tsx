@@ -13,12 +13,13 @@ export const RouteList: LFCModel<RouteListPropsModel> = ({ route, ...props }) =>
       {...wrapperProps}
       items={filterNil(
         route?.routes?.map(
-          ({ description, icon, isNavigatable = true, pathname, title }) =>
+          ({ description, icon, isNavigatable = true, params, pathname, title }) =>
             isNavigatable && {
               description,
               icon,
               id: pathname,
               onPress: () => push({ pathname, root: true }),
+              params,
               title,
             },
         ),

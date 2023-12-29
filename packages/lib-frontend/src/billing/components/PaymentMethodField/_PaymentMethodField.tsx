@@ -9,10 +9,7 @@ import { type PaymentMethodFieldRefModel } from '#lib-frontend/billing/component
 import { REDIRECT } from '#lib-frontend/core/core.constants';
 import { type RLFCModel } from '#lib-frontend/core/core.models';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import {
-  type CardBrandModel,
-  type CardFundingModel,
-} from '#lib-shared/billing/resources/Card/Card.models';
+import { type CardFundingModel } from '#lib-shared/billing/resources/Card/Card.models';
 import { PAYMENT_METHOD_TYPE } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodFormModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
@@ -89,7 +86,7 @@ const StripeField: RLFCModel<PaymentMethodFieldRefModel, _PaymentMethodFieldProp
                     funding: card.funding as CardFundingModel,
                     id,
                     last4: card.last4,
-                    name: card.brand as CardBrandModel,
+                    name: card.brand,
                     type: PAYMENT_METHOD_TYPE.CARD,
                   }
                 );

@@ -1643,6 +1643,7 @@ type PaymentMethod {
   User: User
   _id: String
   created: DateTime
+  id: String
   last4: String
   name: String
   type: String
@@ -1674,6 +1675,7 @@ input PaymentMethodInput {
   User: UserInput
   _id: String
   created: DateTime
+  id: String
   last4: String
   name: String
   type: String
