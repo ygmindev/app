@@ -7,4 +7,12 @@ export type UseGraphQlModel = {
   query<TParams, TResult, TName extends string = string>(
     params: GraphQlQueryHttpParamsModel<TParams, TResult, TName>,
   ): Promise<TResult | null>;
+
+  queryBatches<
+    TParams extends Array<unknown>,
+    TResult extends Array<unknown>,
+    TName extends Array<string> = Array<string>,
+  >(
+    params: Array<GraphQlQueryHttpParamsModel<TParams[number], TResult[number], TName[number]>>,
+  ): Promise<Array<TResult[number]>>;
 };
