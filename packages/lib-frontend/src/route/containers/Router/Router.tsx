@@ -28,13 +28,21 @@ const getNavigatableRoute = (route: RouteModel): RouteModel => {
             return element;
         }
       })();
-      const headerF = merge([header, { previous: 1 }]);
       const routeFF = {
         ...routeF,
         routes: [
-          { element: elementF, header: headerF, isNavigatable: false, pathname: '/', title },
+          {
+            element: elementF,
+            header: merge([header, { previous: 1 }]),
+            isNavigatable: false,
+            pathname: '/',
+            title,
+          },
           ...(routes?.map((child) =>
-            merge([child, { header: headerF, title: child.title ?? child.pathname }]),
+            merge([
+              child,
+              { header: merge([header, { previous: 2 }]), title: child.title ?? child.pathname },
+            ]),
           ) ?? []),
         ],
         title,

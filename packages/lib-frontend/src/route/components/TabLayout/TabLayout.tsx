@@ -1,9 +1,13 @@
+import find from 'lodash/find';
+import { useEffect } from 'react';
+
 import { Tabs } from '#lib-frontend/core/components/Tabs/Tabs';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type TabLayoutPropsModel } from '#lib-frontend/route/components/TabLayout/TabLayout.models';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
+import { type RouteModel } from '#lib-frontend/route/route.models';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 
@@ -12,9 +16,22 @@ export const TabLayout: LFCModel<TabLayoutPropsModel> = ({ children, route, type
   const { wrapperProps } = useLayoutStyles({ props });
   const { getPath, isActive, location, push } = useRouter();
 
-  const isActiveF = route?.routes?.find(({ fullpath, pathname }) =>
-    isActive({ isExact: true, pathname: fullpath ?? pathname }),
+  const isActiveF = route?.routes?.find(
+    ({ fullpath, isNavigatable = true, pathname }) =>
+      isNavigatable && isActive({ isExact: true, pathname: fullpath ?? pathname }),
   );
+
+  const isMountedF = isActive({ isExact: true, pathname: route?.fullpath });
+
+  useEffect(() => {
+    if (isMountedF && !isActiveF && route?.routes) {
+      const child = find<RouteModel>(route.routes, ({ isNavigatable = true }) => isNavigatable);
+      if (child) {
+        const pathname = getPath(child.fullpath ?? child.pathname, location.params);
+        push({ pathname });
+      }
+    }
+  }, [isActiveF, isMountedF]);
 
   return (
     <Wrapper
