@@ -7,11 +7,7 @@ import { Route } from '#lib-frontend/route/components/Route/Route';
 import { RouteList } from '#lib-frontend/route/components/RouteList/RouteList';
 import { type RouterPropsModel } from '#lib-frontend/route/containers/Router/Router.models';
 import { Routes } from '#lib-frontend/route/containers/Routes/Routes';
-import {
-  ROUTE_DIRECTION,
-  ROUTE_NAVIGATION,
-  ROUTE_TRANSITION,
-} from '#lib-frontend/route/route.constants';
+import { ROUTE_NAVIGATION, ROUTE_TRANSITION } from '#lib-frontend/route/route.constants';
 import { type RouteModel } from '#lib-frontend/route/route.models';
 import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -23,16 +19,27 @@ const getNavigatableRoute = (route: RouteModel): RouteModel => {
     case ROUTE_NAVIGATION.LIST:
     case ROUTE_NAVIGATION.TRANSITION: {
       const { element, header, routes, title, ...routeF } = route;
-      const headerF = merge([header, { previous: ROUTE_DIRECTION.UP }]);
       const elementF =
         element ??
         (route.navigation === ROUTE_NAVIGATION.LIST ? <RouteList route={route} /> : undefined);
       const routeFF = {
         ...routeF,
         routes: [
-          { element: elementF, header: headerF, isNavigatable: false, pathname: '/', title },
+          {
+            element: elementF,
+            header: merge([header, { previous: 1 }]),
+            isNavigatable: false,
+            pathname: '/',
+            title,
+          },
           ...(routes?.map((child) =>
-            merge([child, { header: headerF, title: child.title ?? child.pathname }]),
+            merge([
+              child,
+              {
+                header: merge([header, { previous: 2 }]),
+                title: child.title ?? child.pathname,
+              },
+            ]),
           ) ?? []),
         ],
         title,

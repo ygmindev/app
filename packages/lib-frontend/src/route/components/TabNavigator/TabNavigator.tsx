@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import { Tabs } from '#lib-frontend/core/components/Tabs/Tabs';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -17,12 +15,12 @@ export const TabNavigator: LFCModel<TabNavigatorPropsModel> = ({ routes, type, .
     isActive({ pathname: fullpath ?? pathname }),
   );
 
-  useEffect(() => {
-    if (!isActiveF && routes) {
-      const pathnameF = getPath(routes[0].fullpath ?? routes[0].pathname, location.params);
-      void push({ pathname: pathnameF });
-    }
-  }, [isActiveF]);
+  // useEffect(() => {
+  //   if (!isActiveF && routes) {
+  //     const pathnameF = getPath(routes[0].fullpath ?? routes[0].pathname, location.params);
+  //     void push({ pathname: pathnameF });
+  //   }
+  // }, [isActiveF]);
 
   return (
     <Tabs

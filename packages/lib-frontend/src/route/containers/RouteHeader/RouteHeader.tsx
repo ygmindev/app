@@ -12,8 +12,6 @@ import { type SFCModel } from '#lib-frontend/core/core.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type RouteHeaderPropsModel } from '#lib-frontend/route/containers/RouteHeader/RouteHeader.models';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
-import { ROUTE_DIRECTION } from '#lib-frontend/route/route.constants';
-import { type RouteDirectionModel } from '#lib-frontend/route/route.models';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
@@ -25,7 +23,7 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, ...props }
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
-  const { back, getPath, location, push } = useRouter();
+  const { getPath, location, push } = useRouter();
   const previous = route.header?.previous;
   const ref = useRef<WrapperRefModel>(null);
   const [isLoading] = useStore('app.isLoading');
@@ -43,22 +41,15 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, ...props }
       position={SHAPE_POSITION.RELATIVE}
       ref={ref}
       s>
-      {previous && (
+      {!!previous && (
         <Button
           elementState={isLoading ? ELEMENT_STATE.DISABLED : undefined}
           icon="chevronLeft"
           onPress={async () => {
             ref.current?.toState(ELEMENT_STATE.INACTIVE);
-            if ((previous as RouteDirectionModel) === ROUTE_DIRECTION.BACK) {
-              return back();
-            }
-            const previousF =
-              (previous as RouteDirectionModel) === ROUTE_DIRECTION.UP
-                ? location.pathname.slice(0, location.pathname.lastIndexOf('/'))
-                : previous;
-            return (
-              previousF && push({ isBack: true, pathname: getPath(previousF, location.params) })
-            );
+            const pathnames = location.pathname.split('/');
+            pathnames.splice(pathnames.length - previous, previous);
+            return push({ isBack: true, pathname: getPath(pathnames.join('/'), location.params) });
           }}
           type={BUTTON_TYPE.INVISIBLE}
         />

@@ -14,7 +14,7 @@ export const STRIPE_ELEMENTS_STYLE: (theme: UseThemeModel) => BaseStripeElements
   appearance: {
     labels: 'floating',
     rules: {
-      '.Input, .Block': {
+      '.Input, .Block, .PickerItem	': {
         backgroundColor: 'transparent',
         border: `1px solid ${theme.color.border}`,
         paddingBottom: `${theme.shape.spacing[THEME_SIZE.SMALL]}px`,
