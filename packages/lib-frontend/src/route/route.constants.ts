@@ -4,5 +4,6 @@ export enum ROUTE_TRANSITION {
 
 export enum ROUTE_NAVIGATION {
   LIST = 'list',
+  TAB = 'tab',
   TRANSITION = 'transition',
 }

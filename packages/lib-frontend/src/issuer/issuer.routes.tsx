@@ -10,7 +10,7 @@ import { FundingFormPage } from '#lib-frontend/issuer/pages/FundingFormPage/Fund
 import { FundingInProgressPage } from '#lib-frontend/issuer/pages/FundingInProgressPage/FundingInProgressPage';
 import { FundingPage } from '#lib-frontend/issuer/pages/FundingPage/FundingPage';
 import { IssuerPage } from '#lib-frontend/issuer/pages/IssuerPage/IssuerPage';
-import { TabNavigator } from '#lib-frontend/route/components/TabNavigator/TabNavigator';
+import { TabLayout } from '#lib-frontend/route/components/TabLayout/TabLayout';
 import { ROUTE_NAVIGATION } from '#lib-frontend/route/route.constants';
 import { type RouteModel } from '#lib-frontend/route/route.models';
 import { SETTINGS } from '#lib-frontend/settings/settings.constants';
@@ -19,7 +19,7 @@ import { GROUP_TYPE } from '#lib-shared/group/resources/Group/Group.constants';
 export const issuerRoutes: Array<RouteModel> = [
   {
     element: <IssuerPage />,
-    navigator: <TabNavigator type={TABS_TYPE.UNDERLINE} />,
+    navigator: <TabLayout type={TABS_TYPE.UNDERLINE} />,
     pathname: GROUP_TYPE.ISSUER,
     routes: [
       {
@@ -32,7 +32,7 @@ export const issuerRoutes: Array<RouteModel> = [
       {
         element: <FundingPage />,
         icon: 'dollar',
-        navigator: <TabNavigator type={TABS_TYPE.CONTAINED} />,
+        navigator: <TabLayout type={TABS_TYPE.CONTAINED} />,
         pathname: FUNDING,
         routes: [
           {

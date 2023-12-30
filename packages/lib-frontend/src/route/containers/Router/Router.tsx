@@ -17,35 +17,29 @@ import { merge } from '#lib-shared/core/utils/merge/merge';
 const getNavigatableRoute = (route: RouteModel): RouteModel => {
   switch (route.navigation) {
     case ROUTE_NAVIGATION.LIST:
+    case ROUTE_NAVIGATION.TAB:
     case ROUTE_NAVIGATION.TRANSITION: {
       const { element, header, routes, title, ...routeF } = route;
-      const elementF =
-        element ??
-        (route.navigation === ROUTE_NAVIGATION.LIST ? <RouteList route={route} /> : undefined);
+      const elementF = (() => {
+        switch (routeF.navigation) {
+          case ROUTE_NAVIGATION.LIST:
+            return <RouteList route={route} />;
+          default:
+            return element;
+        }
+      })();
+      const headerF = merge([header, { previous: 1 }]);
       const routeFF = {
         ...routeF,
         routes: [
-          {
-            element: elementF,
-            header: merge([header, { previous: 1 }]),
-            isNavigatable: false,
-            pathname: '/',
-            title,
-          },
+          { element: elementF, header: headerF, isNavigatable: false, pathname: '/', title },
           ...(routes?.map((child) =>
-            merge([
-              child,
-              {
-                header: merge([header, { previous: 2 }]),
-                title: child.title ?? child.pathname,
-              },
-            ]),
+            merge([child, { header: headerF, title: child.title ?? child.pathname }]),
           ) ?? []),
         ],
         title,
         transition: ROUTE_TRANSITION.SLIDE,
       };
-
       return routeFF;
     }
     default:

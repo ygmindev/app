@@ -67,6 +67,7 @@ export const _serverless = ({
         [k]: {
           events: [{ httpApi: { method: v.method, path: trimPathname(v.pathname) } }],
           handler: v.handler,
+          timeout: server.timeout,
         },
       }),
       {},

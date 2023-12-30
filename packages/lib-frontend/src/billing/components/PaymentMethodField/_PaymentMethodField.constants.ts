@@ -15,7 +15,7 @@ export const STRIPE_ELEMENTS_STYLE: (theme: UseThemeModel) => BaseStripeElements
     labels: 'floating',
     rules: {
       '.Input, .Block, .PickerItem	': {
-        backgroundColor: 'transparent',
+        backgroundColor: theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MAIN],
         border: `1px solid ${theme.color.border}`,
         paddingBottom: `${theme.shape.spacing[THEME_SIZE.SMALL]}px`,
         paddingLeft: `${theme.shape.spacing[THEME_SIZE.MEDIUM]}px`,
@@ -29,7 +29,7 @@ export const STRIPE_ELEMENTS_STYLE: (theme: UseThemeModel) => BaseStripeElements
         color: theme.color.border,
       },
       '.Tab': {
-        backgroundColor: 'transparent',
+        backgroundColor: theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MAIN],
         border: `1px solid ${theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN]}`,
         borderColor: theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN],
         color: theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN],

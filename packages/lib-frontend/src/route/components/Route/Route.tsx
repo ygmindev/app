@@ -8,10 +8,11 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import { type RoutePropsModel } from '#lib-frontend/route/components/Route/Route.models';
+import { TabLayout } from '#lib-frontend/route/components/TabLayout/TabLayout';
 import { RouteHeader } from '#lib-frontend/route/containers/RouteHeader/RouteHeader';
 import { Routes } from '#lib-frontend/route/containers/Routes/Routes';
 import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
-import { ROUTE_TRANSITION } from '#lib-frontend/route/route.constants';
+import { ROUTE_NAVIGATION, ROUTE_TRANSITION } from '#lib-frontend/route/route.constants';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
@@ -77,6 +78,9 @@ export const Route: LFCModel<RoutePropsModel> = ({ depth, route, ...props }) => 
     },
   );
 
+  route.navigation === ROUTE_NAVIGATION.TAB &&
+    (element = <TabLayout route={route}>{element}</TabLayout>);
+
   route.isProtectable && (element = <Protectable>{element}</Protectable>);
 
   element = (
@@ -87,15 +91,12 @@ export const Route: LFCModel<RoutePropsModel> = ({ depth, route, ...props }) => 
       isAbsoluteFill
       mTop={route.isFullScreen ? theme.layout.header.height : undefined}
       zIndex>
-      {route.navigator &&
-        route.routes &&
-        cloneElement(route.navigator, { key: 'navigator', routes: route.routes })}
-
       {element}
     </Wrapper>
   );
 
   element = route.isFullScreen ? <Portal>{element}</Portal> : element;
+
   return (
     <>
       {isActiveF && route.header && (

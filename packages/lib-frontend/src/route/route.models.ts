@@ -24,7 +24,6 @@ export type RouteModel<
   isProtectable?: boolean;
   layoutProps?: LayoutStylePropsModel;
   navigation?: RouteNavigationModel;
-  navigator?: ReactElement<NavigatorPropsModel>;
   params?: TParams;
   parent?: string;
   pathname: string;
@@ -66,7 +65,3 @@ export type RouteUpdateModel<TTypeNext = object> = LocationModel<TTypeNext> &
 export type RouteTransitionModel = `${ROUTE_TRANSITION}`;
 
 export type RouteNavigationModel = `${ROUTE_NAVIGATION}`;
-
-export type NavigatorPropsModel = {
-  routes?: Array<RouteModel>;
-};
