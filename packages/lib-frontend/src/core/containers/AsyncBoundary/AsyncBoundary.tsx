@@ -4,6 +4,7 @@ import { createContext, Suspense, useState } from 'react';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { Loading } from '#lib-frontend/core/components/Loading/Loading';
+import { Portal } from '#lib-frontend/core/components/Portal/Portal';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import {
   type AsyncBoundaryContextModel,
@@ -42,35 +43,37 @@ export const AsyncBoundary: LFCModel<AsyncBoundaryPropsModel> = ({
         flex
         position={SHAPE_POSITION.RELATIVE}>
         {errorContext && (
-          <Wrapper
-            backgroundColor={THEME_COLOR_MORE.SURFACE}
-            isAbsoluteFill
-            isCenter
-            s={THEME_SIZE.SMALL}
-            zIndex>
-            <Icon
-              fontSize={THEME_SIZE_MORE.XLARGE}
-              icon={errorContext.icon ?? 'sad'}
-            />
+          <Portal>
+            <Wrapper
+              backgroundColor={THEME_COLOR_MORE.SURFACE}
+              isAbsoluteFill
+              isCenter
+              s={THEME_SIZE.SMALL}
+              zIndex>
+              <Icon
+                fontSize={THEME_SIZE_MORE.XLARGE}
+                icon={errorContext.icon ?? 'sad'}
+              />
 
-            {errorContext.title && (
-              <TranslatableText type={FONT_TYPE.HEADLINE}>{errorContext.title}</TranslatableText>
-            )}
+              {errorContext.title && (
+                <TranslatableText type={FONT_TYPE.HEADLINE}>{errorContext.title}</TranslatableText>
+              )}
 
-            {errorContext.description && (
-              <TranslatableText>{errorContext.description}</TranslatableText>
-            )}
+              {errorContext.description && (
+                <TranslatableText>{errorContext.description}</TranslatableText>
+              )}
 
-            <Button
-              icon="refresh"
-              onPress={() => {
-                errorContextSet(undefined);
-                handleRefresh();
-                onRefresh && void onRefresh();
-              }}>
-              {t('core:tryAgain')}
-            </Button>
-          </Wrapper>
+              <Button
+                icon="refresh"
+                onPress={() => {
+                  errorContextSet(undefined);
+                  handleRefresh();
+                  onRefresh && void onRefresh();
+                }}>
+                {t('core:tryAgain')}
+              </Button>
+            </Wrapper>
+          </Portal>
         )}
 
         <Suspense

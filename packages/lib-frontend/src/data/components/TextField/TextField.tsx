@@ -185,7 +185,8 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       ]),
     };
 
-    const isDisabled = elementStateF === ELEMENT_STATE.DISABLED;
+    const isDisabled =
+      elementStateF === ELEMENT_STATE.DISABLED || elementStateF === ELEMENT_STATE.LOADING;
 
     return (
       <FocusableWrapper

@@ -39,6 +39,8 @@ export const OtpField: RLFCModel<OtpFieldRefModel, OtpFieldPropsModel> = forward
     });
     const [measure, measureSet] = useState<MeasureModel>();
     const [isFocused, isFocusedSet] = useState<boolean>(false);
+    const isDisabled =
+      elementState === ELEMENT_STATE.DISABLED || elementState === ELEMENT_STATE.LOADING;
 
     return (
       <Wrapper
@@ -77,9 +79,9 @@ export const OtpField: RLFCModel<OtpFieldRefModel, OtpFieldPropsModel> = forward
           {IDS.map(({ id }, i) => (
             <TextField
               elementState={
+                !isDisabled &&
                 isFocused &&
-                i === Math.min((valueControlled ?? '').length, otpLength - 1) &&
-                elementState !== ELEMENT_STATE.DISABLED
+                i === Math.min((valueControlled ?? '').length, otpLength - 1)
                   ? ELEMENT_STATE.ACTIVE
                   : elementState
               }

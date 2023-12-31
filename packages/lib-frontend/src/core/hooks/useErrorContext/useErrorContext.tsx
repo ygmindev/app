@@ -53,10 +53,14 @@ export const useErrorContext = (): UseErrorContextModel => {
   };
 
   return {
-    handleError: (error, type = ERROR_TYPE.NOTIFICATION): void => {
+    handleError: (error, type): void => {
       const errorContext = errorContextGetF(error);
-      console.warn(error as HttpError);
-      type === ERROR_TYPE.FALLBACK
+      const typeF =
+        type ??
+        ((error as HttpError).statusCode === HTTP_STATUS_CODE.NETWORK_CONNECT_TIMEOUT
+          ? ERROR_TYPE.FALLBACK
+          : ERROR_TYPE.NOTIFICATION);
+      typeF === ERROR_TYPE.FALLBACK
         ? errorContextSet(errorContext)
         : notify({
             description: errorContext.description ? t(errorContext.description) : undefined,
