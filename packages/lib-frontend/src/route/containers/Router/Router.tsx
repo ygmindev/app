@@ -41,7 +41,13 @@ const getNavigatableRoute = (route: RouteModel): RouteModel => {
           ...(routes?.map((child) =>
             merge([
               child,
-              { header: merge([header, { previous: 2 }]), title: child.title ?? child.pathname },
+              {
+                header: merge([
+                  { previous: route.navigation === ROUTE_NAVIGATION.TAB ? 2 : 1 },
+                  header,
+                ]),
+                title: child.title ?? child.pathname,
+              },
             ]),
           ) ?? []),
         ],
