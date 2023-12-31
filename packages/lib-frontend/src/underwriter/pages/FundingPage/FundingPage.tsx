@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
@@ -15,17 +15,25 @@ import { type FundingDetailPageParamsModel } from '#lib-frontend/underwriter/pag
 import { type FundingPagePropsModel } from '#lib-frontend/underwriter/pages/FundingPage/FundingPage.models';
 import { FUNDING_FIXTURES } from '#lib-shared/funding/resources/Funding/Funding.fixtures';
 import { type FundingModel } from '#lib-shared/funding/resources/Funding/Funding.models';
-import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
+import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
+import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 
 export const FundingPage: LFCModel<FundingPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { push } = useRouter();
   const { getConnection } = useFundingResource();
+  const [params, paramsSet] =
+    useState<InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, FundingModel>>();
 
-  const dataRef = useRef<ConnectionBoundaryRefModel<FundingModel>>(null);
+  const dataRef = useRef<ConnectionBoundaryRefModel>(null);
 
-  const handleFilter = async (filter: Array<FilterModel<FundingModel>>): Promise<void> => {
-    dataRef.current?.paramsSet({ filter, pagination: { first: 10 } });
+  // const handleFilter = async (filter: Array<FilterModel<FundingModel>>): Promise<void> => {
+  //   paramsSet({ filter, pagination: { first: 10 } });
+  // };
+
+  const handleFilter = async (data: unknown): Promise<void> => {
+    console.warn(data);
+    // paramsSet({ filter, pagination: { first: 10 } });
   };
 
   return (
@@ -48,6 +56,7 @@ export const FundingPage: LFCModel<FundingPagePropsModel> = ({ ...props }) => {
           },
         }}
         id="funding"
+        params={params}
         query={getConnection}
         ref={dataRef}>
         {({ data }) => (

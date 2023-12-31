@@ -221,15 +221,19 @@ const FormContainerF = forwardRef(
         <MainLayout
           {...wrapperProps}
           bottomElement={
-            isButton ? (
-              <SubmittableButtons
-                cancelLabel={cancelLabel}
-                elementState={elementStateF}
-                onCancel={onCancel}
-                onSubmit={async () => handleSubmitF()}
-                submitLabel={submitLabel}
-              />
-            ) : undefined
+            <Wrapper s>
+              {isButton && (
+                <SubmittableButtons
+                  cancelLabel={cancelLabel}
+                  elementState={elementStateF}
+                  onCancel={onCancel}
+                  onSubmit={async () => handleSubmitF()}
+                  submitLabel={submitLabel}
+                />
+              )}
+
+              {bottomElement && bottomElement({ elementState: elementStateF })}
+            </Wrapper>
           }
           isFullHeight={isFullHeight}
           isFullWidth={isFullWidth}
@@ -237,8 +241,6 @@ const FormContainerF = forwardRef(
           {topElement && topElement({ elementState: elementStateF })}
 
           {getFields()}
-
-          {bottomElement && bottomElement({ elementState: elementStateF })}
         </MainLayout>
       </Form>
     );

@@ -27,7 +27,7 @@ export const FundingAgencyForm: LFCModel<FundingAgencyFormPropsModel> = ({
       onComplete={onComplete}
       onError={onError}
       onSubmit={async (values) => {
-        values._agency && onSubmit && (await onSubmit({ agency: { _id: values._agency } }));
+        values._agency && onSubmit && (await onSubmit({ RatingAgency: { _id: values._agency } }));
       }}
       onSuccess={onSuccess}
       options={async () =>

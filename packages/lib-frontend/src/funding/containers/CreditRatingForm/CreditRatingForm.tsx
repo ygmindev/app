@@ -46,9 +46,12 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
   const modalRef = useRef<ModalRefModel>(null);
 
   const handleAdd = async (value: CreditRatingModel): Promise<void> => {
-    const agencyF = find(values, ({ agency }) => agency?._id === value.agency?._id);
+    const agencyF = find(
+      values,
+      ({ RatingAgency }) => RatingAgency?._id === value.RatingAgency?._id,
+    );
     agencyF
-      ? error({ message: t('core:alreadyExists', { value: t('funding:ratingAgency') }) })
+      ? error({ title: t('core:alreadyExists', { value: t('funding:ratingAgency') }) })
       : valuesSet([...values, value]);
     modalRef.current?.toggle(false);
   };
@@ -74,14 +77,14 @@ export const CreditRatingForm: LFCModel<CreditRatingFormPropsModel> = ({
         topElement={() =>
           values.length ? (
             <Wrapper s>
-              {values.map(({ agency, longTermRating, longTermWatch }) => {
-                const agencyF = find(agencies?.result, ({ _id }) => _id === agency?._id);
+              {values.map(({ RatingAgency, longTermRating, longTermWatch }) => {
+                const agency = find(agencies?.result, ({ _id }) => _id === RatingAgency?._id);
                 return (
-                  agencyF && (
+                  agency && (
                     <Tile
-                      image={agencyF.logo}
-                      key={agencyF._id}
-                      title={agencyF.name}>
+                      image={agency.logo}
+                      key={agency._id}
+                      title={agency.name}>
                       <ItemTable
                         items={[
                           {

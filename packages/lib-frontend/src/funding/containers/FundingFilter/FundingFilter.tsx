@@ -1,6 +1,6 @@
 import { SelectField } from '#lib-frontend/core/components/SelectField/SelectField';
 import { type LFCModel } from '#lib-frontend/core/core.models';
-import { FilterContainer } from '#lib-frontend/data/components/FilterContainer/FilterContainer';
+import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { NumberRangeField } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField';
 import { NUMBER_RANGE_TYPE } from '#lib-frontend/data/components/NumberRangeField/NumberRangeField.constants';
 import { NUMBER_UNIT_TYPE } from '#lib-frontend/data/data.constants';
@@ -10,7 +10,7 @@ import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTra
 export const FundingFilter: LFCModel<FundingFilterPropsModel> = ({ ...props }) => {
   const { t } = useTranslation();
   return (
-    <FilterContainer
+    <FormContainer
       {...props}
       fields={[
         {

@@ -1,14 +1,7 @@
-import range from 'lodash/range';
-
 import { type AppHomePagePropsModel } from '#lib-frontend/app/pages/AppHomePage/AppHomePage.models';
-import { Chip } from '#lib-frontend/core/components/Chip/Chip';
-import { ItemList } from '#lib-frontend/core/components/ItemList/ItemList';
 import { Text } from '#lib-frontend/core/components/Text/Text';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { TEST_TEXT_LONG } from '#lib-frontend/core/core.constants';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
-import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBoundary';
 import { useGroupResource } from '#lib-frontend/funding/hooks/useGroupResource/useGroupResource';
 import { GROUP } from '#lib-frontend/group/group.constants';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
@@ -28,7 +21,7 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
       s>
       <Text type={FONT_TYPE.HEADLINE}>{t('core:welcomeBack')}</Text>
 
-      <DataBoundary
+      {/* <DataBoundary
         fallbackData={{
           result: range(3).map((i) => ({ _id: `${i}`, name: TEST_TEXT_LONG })),
         }}
@@ -51,7 +44,7 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
             ))}
           </ItemList>
         )}
-      </DataBoundary>
+      </DataBoundary> */}
     </MainLayout>
   );
 };

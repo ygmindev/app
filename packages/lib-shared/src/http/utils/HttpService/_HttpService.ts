@@ -71,10 +71,10 @@ export class _HttpService implements _HttpServiceModel {
       } as AxiosRequestConfig);
       return (response && (response.data as TResult)) ?? null;
     } catch (e) {
-      const eF =
-        (await getConnectivity()) === CONNECTIVITY.OFFLINE ? new OfflineError() : (e as Error);
-      this._onError && this._onError(eF);
-      return null;
+      throw (e as Error).message === 'Network Error' ||
+        (await getConnectivity()) === CONNECTIVITY.OFFLINE
+        ? new OfflineError()
+        : (e as Error);
     }
   };
 

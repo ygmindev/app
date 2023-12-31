@@ -66,7 +66,6 @@ export const AsyncBoundary: LFCModel<AsyncBoundaryPropsModel> = ({
               onPress={() => {
                 errorContextSet(undefined);
                 handleRefresh();
-                console.warn(onRefresh);
                 onRefresh && void onRefresh();
               }}>
               {t('core:tryAgain')}

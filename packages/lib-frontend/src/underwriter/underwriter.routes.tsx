@@ -1,8 +1,6 @@
 import { BILLING } from '#lib-frontend/billing/billing.constants';
-import { TABS_TYPE } from '#lib-frontend/core/components/Tabs/Tabs.constants';
 import { ANALYTICS } from '#lib-frontend/core/core.constants';
 import { FUNDING, QUOTE } from '#lib-frontend/funding/funding.constants';
-import { TabLayout } from '#lib-frontend/route/components/TabLayout/TabLayout';
 import { ROUTE_NAVIGATION } from '#lib-frontend/route/route.constants';
 import { type RouteModel } from '#lib-frontend/route/route.models';
 import { SETTINGS } from '#lib-frontend/settings/settings.constants';
@@ -16,7 +14,7 @@ import { GROUP_TYPE } from '#lib-shared/group/resources/Group/Group.constants';
 export const underwriterRoutes: Array<RouteModel> = [
   {
     element: <UnderwriterPage />,
-    navigator: <TabLayout type={TABS_TYPE.UNDERLINE} />,
+    navigation: ROUTE_NAVIGATION.TAB,
     pathname: GROUP_TYPE.UNDERWRITER,
     routes: [
       {

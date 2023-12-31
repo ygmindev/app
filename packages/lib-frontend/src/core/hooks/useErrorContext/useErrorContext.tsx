@@ -53,8 +53,9 @@ export const useErrorContext = (): UseErrorContextModel => {
   };
 
   return {
-    handleError: (error, type = ERROR_TYPE.FALLBACK): void => {
+    handleError: (error, type = ERROR_TYPE.NOTIFICATION): void => {
       const errorContext = errorContextGetF(error);
+      console.warn(error as HttpError);
       type === ERROR_TYPE.FALLBACK
         ? errorContextSet(errorContext)
         : notify({

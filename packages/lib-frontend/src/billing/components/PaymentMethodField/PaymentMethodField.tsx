@@ -8,7 +8,6 @@ import {
 import { usePaymentMethodResource } from '#lib-frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
 import { type RLFCModel } from '#lib-frontend/core/core.models';
 import { useErrorContext } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext';
-import { ERROR_TYPE } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext.constants';
 import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBoundary';
 import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { type PaymentMethodModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
@@ -33,7 +32,7 @@ export const PaymentMethodField: RLFCModel<
       {({ data }) => (
         <_PaymentMethodField
           {...props}
-          onError={(e) => handleError(e, ERROR_TYPE.NOTIFICATION)}
+          onError={handleError}
           ref={ref}
           token={data?.token}
         />

@@ -27,7 +27,6 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, ...props }
   const previous = route.header?.previous;
   const ref = useRef<WrapperRefModel>(null);
   const [isLoading] = useStore('app.isLoading');
-  console.warn(`@@@${route.fullpath}: ${previous}`);
   return (
     <Wrapper
       {...wrapperProps}
