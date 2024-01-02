@@ -11,12 +11,12 @@ import {
 import { createResourceResolver } from '#lib-backend/resource/utils/createResourceResolver/createResourceResolver';
 import { withInput } from '#lib-backend/resource/utils/withInput/withInput';
 import { withOutput } from '#lib-backend/resource/utils/withOutput/withOutput';
+import { type ContextModel } from '#lib-platform/core/core.models';
 import { type ProtectedResourceModel } from '#lib-shared/auth/resources/ProtectedResource/ProtectedResource.models';
 import { type PartialModel } from '#lib-shared/core/core.models';
 import { type GroupModel } from '#lib-shared/group/resources/Group/Group.models';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
-import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 

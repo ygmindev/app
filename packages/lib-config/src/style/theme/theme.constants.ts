@@ -75,7 +75,7 @@ export const THEME_CONFIG = {
     },
 
     width: {
-      [THEME_SIZE.SMALL]: 170,
+      [THEME_SIZE.SMALL]: 350,
 
       [THEME_SIZE.MEDIUM]: 500,
 

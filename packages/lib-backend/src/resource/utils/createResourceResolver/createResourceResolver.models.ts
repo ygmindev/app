@@ -1,4 +1,5 @@
 import { type ResourceClassModel } from '#lib-backend/resource/resource.models';
+import { type ContextModel } from '#lib-platform/core/core.models';
 import { type AccessLevelModel } from '#lib-shared/auth/resources/Access/Access.models';
 import { type PartialModel } from '#lib-shared/core/core.models';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
@@ -9,7 +10,6 @@ import {
   type ResourceWriteMethodTypeModel,
 } from '#lib-shared/resource/resource.models';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
-import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type ResourceServiceModel } from '#lib-shared/resource/utils/ResourceService/ResourceService.models';
 

@@ -2,13 +2,13 @@ import { ApolloServer } from '@apollo/server';
 import { handlers, startServerAndCreateLambdaHandler } from '@as-integrations/aws-lambda';
 import { type GraphQLError } from 'graphql';
 
-import { type InitializeModel } from '#backend-lambda/setup/utils/initialize/initialize.models';
-import { getContext } from '#lib-backend/serverless/utils/getContext/getContext';
+import { type GetGraphQlHandlerModel } from '#backend-lambda/setup/utils/getGraphQlHandler/getGraphQlHandler.models';
+import { getRequestContext } from '#lib-backend/serverless/utils/getRequestContext/getRequestContext';
 import { initialize as initializeBackend } from '#lib-backend/setup/utils/initialize/initialize';
 import { _config } from '#lib-config/data/graphql/graphql';
 import { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
 
-export const initialize = async (): Promise<InitializeModel> => {
+export const getGraphQlHandler = async (): Promise<GetGraphQlHandlerModel> => {
   const { database } = await initializeBackend();
 
   const server = new ApolloServer({
@@ -26,10 +26,11 @@ export const initialize = async (): Promise<InitializeModel> => {
     },
     schema: _config(),
   });
+
   const handler = startServerAndCreateLambdaHandler(
     server,
     handlers.createAPIGatewayProxyEventV2RequestHandler(),
-    { context: async ({ context, event }) => getContext({ context, event }) },
+    { context: async ({ context, event }) => getRequestContext({ context, event }) },
   );
   return { database, handler };
 };

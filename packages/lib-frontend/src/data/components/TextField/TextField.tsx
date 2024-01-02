@@ -44,6 +44,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       autoComplete,
       beforeSubmit,
       defaultValue,
+      height,
       icon,
       isAutoFocus,
       isCenter,
@@ -110,7 +111,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         position={SHAPE_POSITION.ABSOLUTE}
         right={0}
         top={0}>
-        {!isNoClear && (
+        {!isNoClear && valueControlled && valueControlled.length > 0 && (
           <Appearable
             elementState={elementStateF}
             isActive={elementStateF === ELEMENT_STATE.ACTIVE}
@@ -193,7 +194,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
         {...wrapperProps}
         border={!isTransparent}
         elementState={elementStateF}
-        height={isNumber(sizeF) ? sizeF : theme.shape.size[sizeF]}
+        height={height ?? (isNumber(sizeF) ? sizeF : theme.shape.size[sizeF])}
         onElementStateChange={elementStateSet}
         pHorizontal
         position={SHAPE_POSITION.RELATIVE}

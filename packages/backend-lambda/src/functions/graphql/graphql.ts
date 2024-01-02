@@ -1,15 +1,10 @@
-import { initialize } from '#backend-lambda/setup/utils/initialize/initialize';
-import { type InitializeModel } from '#backend-lambda/setup/utils/initialize/initialize.models';
-import { createHandler } from '#lib-backend/serverless/utils/createHandler/createHandler';
+import { createLambdaHandler } from '#lib-backend/serverless/utils/createLambdaHandler/createLambdaHandler';
+import { LAMBDA_PLUGIN } from '#lib-backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
+import { type ContextModel } from '#lib-platform/core/core.models';
 
-let isInitialized: InitializeModel;
+const context: ContextModel = {};
 
-const getInitialized = async (): Promise<InitializeModel> => {
-  isInitialized = isInitialized ?? (await initialize());
-  return isInitialized;
-};
-
-export const main = createHandler(async (event, context, callback) => {
-  const { handler } = await getInitialized();
-  return handler(event, context, callback);
+export const main = createLambdaHandler({
+  context,
+  plugins: [LAMBDA_PLUGIN.DATABASE, LAMBDA_PLUGIN.GRAPHQL],
 });

@@ -8,6 +8,7 @@ import { createEntityResourceResolver } from '#lib-backend/resource/utils/create
 import { withInput } from '#lib-backend/resource/utils/withInput/withInput';
 import { withOutput } from '#lib-backend/resource/utils/withOutput/withOutput';
 import { User } from '#lib-backend/user/resources/User/User';
+import { type ContextModel } from '#lib-platform/core/core.models';
 import { ACCESS_LEVEL } from '#lib-shared/auth/resources/Access/Access.constants';
 import {
   SIGN_IN_RESOURCE_NAME,
@@ -20,7 +21,6 @@ import {
 } from '#lib-shared/auth/resources/SignIn/SignIn.models';
 import { withInject } from '#lib-shared/core/utils/withInject/withInject';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type UserFormModel, type UserModel } from '#lib-shared/user/resources/User/User.models';

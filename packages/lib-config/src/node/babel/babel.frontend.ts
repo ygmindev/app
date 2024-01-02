@@ -10,6 +10,8 @@ const { _config, config } = defineConfig({
   overrides: [
     {
       plugins: [['transform-react-remove-prop-types', { removeImport: true }]],
+
+      presets: ['@babel/preset-react'],
     },
   ],
 });

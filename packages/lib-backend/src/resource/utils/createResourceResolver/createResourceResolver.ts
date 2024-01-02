@@ -9,6 +9,7 @@ import {
 import { withAuthorizer } from '#lib-backend/resource/utils/withAuthorizer/withAuthorizer';
 import { withInput } from '#lib-backend/resource/utils/withInput/withInput';
 import { withOutput } from '#lib-backend/resource/utils/withOutput/withOutput';
+import { type ContextModel } from '#lib-platform/core/core.models';
 import { ACCESS_LEVEL } from '#lib-shared/auth/resources/Access/Access.constants';
 import { type PrototypeModel } from '#lib-shared/core/core.models';
 import { NotImplementedError } from '#lib-shared/core/errors/NotImplementedError/NotImplementedError';
@@ -16,7 +17,6 @@ import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
 import { withCondition } from '#lib-shared/core/utils/withCondition/withCondition';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
-import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 

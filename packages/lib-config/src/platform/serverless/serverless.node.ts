@@ -3,7 +3,7 @@ import { _serverless } from '#lib-config/platform/serverless/_serverless';
 import { config as configBase } from '#lib-config/platform/serverless/serverless.base';
 import { PLATFORM } from '#lib-platform/core/core.constants';
 import { GRAPHQL } from '#lib-shared/graphql/graphql.constants';
-import { HTTP_METHOD, PING } from '#lib-shared/http/http.constants';
+import { HTTP_METHOD, PING, WEBSOCKET_METHOD } from '#lib-shared/http/http.constants';
 
 const { _config, config } = defineConfig({
   _config: _serverless,
@@ -23,6 +23,21 @@ const { _config, config } = defineConfig({
           handler: 'src/functions/ping/ping.main',
           method: HTTP_METHOD.GET,
           pathname: PING,
+        },
+
+        [WEBSOCKET_METHOD.CONNECT]: {
+          handler: 'src/functions/websocket/websocket.connect',
+          websocket: '$connect',
+        },
+
+        [WEBSOCKET_METHOD.DISCONNECT]: {
+          handler: 'src/functions/websocket/websocket.disconnect',
+          websocket: '$disconnect',
+        },
+
+        [WEBSOCKET_METHOD.DEFAULT]: {
+          handler: 'src/functions/websocket/websocket.main',
+          websocket: '$default',
         },
       },
 

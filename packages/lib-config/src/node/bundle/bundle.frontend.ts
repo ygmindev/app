@@ -33,12 +33,14 @@ const { _config, config } = defineConfig({
       externals: ['raf/polyfill.js', 'setimmediate'],
 
       transpiles: [
+        '@expo/react-native-action-sheet',
         'countries-list',
         'css-in-js-utils',
         'moti',
         'inline-style-prefixer',
         'react/jsx-runtime',
         'react-native',
+        'react-native-gifted-chat',
         'redux-persist',
         'react-use',
         'thenby',

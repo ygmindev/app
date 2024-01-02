@@ -18,8 +18,9 @@ export type ServerlessConfigModel = Pick<UriParamsModel, 'host' | 'port'> & {
     string,
     {
       handler: string;
-      method: HttpMethodModel;
+      method?: HttpMethodModel;
       pathname: string;
+      websocket?: string;
     }
   >;
 

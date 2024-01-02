@@ -3,6 +3,7 @@ import { JwtService } from '#lib-backend/auth/utils/JwtService/JwtService';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { objectToEquality } from '#lib-backend/resource/utils/objectToEquality/objectToEquality';
 import { UserService } from '#lib-backend/user/resources/User/UserService/UserService';
+import { type ContextModel } from '#lib-platform/core/core.models';
 import { UnauthorizedError } from '#lib-shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import {
   SIGN_IN_RESOURCE_NAME,
@@ -22,7 +23,6 @@ import { withInject } from '#lib-shared/core/utils/withInject/withInject';
 import { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
 import { type UserFormModel, type UserModel } from '#lib-shared/user/resources/User/User.models';

@@ -9,7 +9,8 @@ const { _config, config } = defineConfig({
     plugins: [
       // '@babel/plugin-transform-runtime',
       // ['@babel/plugin-proposal-decorators', { legacy: true }],
-      // ['@babel/plugin-proposal-class-properties', { loose: true }],
+      '@babel/plugin-transform-class-static-block',
+      ['@babel/plugin-proposal-class-properties', { loose: true }],
     ],
   } satisfies BabelConfigModel,
 });

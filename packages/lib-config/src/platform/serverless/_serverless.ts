@@ -39,6 +39,7 @@ export const _serverless = ({
         ignoreJWTSignature: true,
         lambdaPort: null,
         noPrependStageInUrl: true,
+        websocketPort: process.env.SERVER_WEBSOCKET_PORT,
       },
 
       ...(platform === PLATFORM.NODE
@@ -65,7 +66,11 @@ export const _serverless = ({
       (result, v, k) => ({
         ...result,
         [k]: {
-          events: [{ httpApi: { method: v.method, path: trimPathname(v.pathname) } }],
+          events: v.method
+            ? [{ httpApi: { method: v.method, path: trimPathname(v.pathname) } }]
+            : v.websocket
+              ? [{ websocket: { route: v.websocket } }]
+              : [],
           handler: v.handler,
           timeout: server.timeout,
         },

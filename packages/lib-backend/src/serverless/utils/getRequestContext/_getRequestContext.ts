@@ -1,14 +1,14 @@
 import { getUserFromHeader } from '#lib-backend/auth/utils/getUserFromHeader/getUserFromHeader';
 import {
-  type _GetContextModel,
-  type _GetContextParamsModel,
-} from '#lib-backend/serverless/utils/getContext/_getContext.models';
-import { type ContextModel } from '#lib-shared/resource/utils/Context/Context.models';
+  type _GetRequestContextModel,
+  type _GetRequestContextParamsModel,
+} from '#lib-backend/serverless/utils/getRequestContext/_getRequestContext.models';
+import { type ContextModel } from '#lib-platform/core/core.models';
 
-export const _getContext = async ({
+export const _getRequestContext = async ({
   context,
   event,
-}: _GetContextParamsModel): Promise<_GetContextModel> => {
+}: _GetRequestContextParamsModel): Promise<_GetRequestContextModel> => {
   const { authorization } = event.headers;
   const user = await getUserFromHeader(authorization);
   user && ((context as unknown as ContextModel).user = user);
