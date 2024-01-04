@@ -39,6 +39,7 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
   }): Promise<Context & ContextModel> => {
     const contextF: Context & ContextModel = { ...contextDefault, ...context };
     contextF.callbackWaitsForEmptyEventLoop = false;
+    contextF.pathname = event.requestContext.routeKey;
 
     if (plugins?.includes(LAMBDA_PLUGIN.AUTHENTICATION)) {
       if (type !== LAMBDA_TYPE.WEBSOCKET) {

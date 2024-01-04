@@ -15,7 +15,7 @@ const { _config, config } = defineConfig({
     {
       functions: {
         [CHAT]: {
-          handler: 'src/functions/chat/chat',
+          handler: 'src/functions/chat/chat.main',
           method: HTTP_METHOD.WEBSOCKET,
         },
 

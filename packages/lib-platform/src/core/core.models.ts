@@ -7,6 +7,7 @@ export type PlatformModel = `${PLATFORM}`;
 export type ContextModel = {
   database?: DatabaseModel;
   group?: string;
+  pathname?: string;
   sessionId?: string;
   user?: SignInTokenModel;
 };

@@ -4,7 +4,6 @@ export enum LAMBDA_PLUGIN {
 }
 
 export enum LAMBDA_TYPE {
-  EVENT = 'event',
   GRAPHQL = 'graphql',
   WEBSOCKET = 'websocket',
 }

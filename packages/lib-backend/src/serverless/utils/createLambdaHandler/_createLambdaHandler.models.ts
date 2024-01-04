@@ -13,17 +13,12 @@ import { type ContextModel } from '#lib-platform/core/core.models';
 
 export type _CreateLambdaHandlerParamsModel<TType extends LambdaTypeModel> = {
   context?: ContextModel;
-  handler?({
-    body,
-    context,
-  }: {
-    body?: string;
-    context: ContextModel;
-  }): Promise<
-    TType extends LAMBDA_TYPE.EVENT
-      ? { body?: Buffer; sessionId: string }
-      : { body?: unknown; headers?: object; statusCode?: number }
-  >;
+  handler?({ body, context }: { body?: string; context: ContextModel }): Promise<{
+    body?: unknown;
+    headers?: object;
+    sessionId?: string;
+    statusCode?: number;
+  }>;
   plugins?: Array<LambdaPluginModel>;
   type?: TType;
 };
