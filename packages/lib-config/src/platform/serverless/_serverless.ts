@@ -11,6 +11,7 @@ import {
 import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
 import { PLATFORM } from '#lib-platform/core/core.constants';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
+import { HTTP_METHOD } from '#lib-shared/http/http.constants';
 
 export const _serverless = ({
   bundleConfig,
@@ -66,11 +67,14 @@ export const _serverless = ({
       (result, v, k) => ({
         ...result,
         [k]: {
-          events: v.method
-            ? [{ httpApi: { method: v.method, path: trimPathname(v.pathname) } }]
-            : v.websocket
-              ? [{ websocket: { route: v.websocket } }]
-              : [],
+          events:
+            v.method === HTTP_METHOD.WEBSOCKET
+              ? [
+                  { websocket: { route: '$connect' } },
+                  { websocket: { route: '$disconnect' } },
+                  { websocket: { route: '$default' } },
+                ]
+              : [{ httpApi: { method: v.method, path: trimPathname(v.pathname) } }],
           handler: v.handler,
           timeout: server.timeout,
         },

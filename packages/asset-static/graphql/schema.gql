@@ -598,6 +598,176 @@ input CardUpdateUpdateInput {
   type: String
 }
 
+type Chat {
+  Socket: [Socket]
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input ChatCreateFormInput {
+  Socket: [SocketInput]
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input ChatCreateInput {
+  form: ChatCreateFormInput
+  root: String
+}
+
+input ChatCreateManyFormInput {
+  Socket: [SocketInput]
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input ChatCreateManyInput {
+  form: [ChatCreateManyFormInput]
+  root: String
+}
+
+type ChatCreateManyOutput {
+  result: Chat
+}
+
+type ChatCreateOutput {
+  result: Chat
+}
+
+type ChatGetConnectionConnection {
+  edges: [ChatGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type ChatGetConnectionEdge {
+  cursor: String
+  node: Chat
+}
+
+input ChatGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [ChatInput]
+  resourceValue: ChatInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input ChatGetConnectionInput {
+  filter: [ChatGetConnectionFilterInput]
+  pagination: PaginationInput
+  root: String
+}
+
+type ChatGetConnectionOutput {
+  result: ChatGetConnectionConnection
+}
+
+input ChatGetFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [ChatInput]
+  resourceValue: ChatInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input ChatGetInput {
+  filter: [ChatGetFilterInput]
+  root: String
+}
+
+input ChatGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [ChatInput]
+  resourceValue: ChatInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input ChatGetManyInput {
+  filter: [ChatGetManyFilterInput]
+  root: String
+}
+
+type ChatGetManyOutput {
+  result: [Chat]
+}
+
+type ChatGetOutput {
+  result: Chat
+}
+
+input ChatInput {
+  Socket: [SocketInput]
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input ChatRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [ChatInput]
+  resourceValue: ChatInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input ChatRemoveInput {
+  filter: [ChatRemoveFilterInput]
+  root: String
+}
+
+type ChatRemoveOutput {
+  result: Chat
+}
+
+input ChatUpdateFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [ChatInput]
+  resourceValue: ChatInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input ChatUpdateInput {
+  filter: [ChatUpdateFilterInput]
+  root: String
+  update: ChatUpdateUpdateInput
+}
+
+type ChatUpdateOutput {
+  result: Chat
+}
+
+input ChatUpdateUpdateInput {
+  Socket: [SocketInput]
+  _id: String
+  created: DateTime
+  name: String
+}
+
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
@@ -813,6 +983,10 @@ type Mutation {
   CardCreateMany(input: CardCreateManyInput): CardCreateManyOutput
   CardRemove(input: CardRemoveInput): CardRemoveOutput
   CardUpdate(input: CardUpdateInput): CardUpdateOutput
+  ChatCreate(input: ChatCreateInput): ChatCreateOutput
+  ChatCreateMany(input: ChatCreateManyInput): ChatCreateManyOutput
+  ChatRemove(input: ChatRemoveInput): ChatRemoveOutput
+  ChatUpdate(input: ChatUpdateInput): ChatUpdateOutput
   GroupCreate(input: GroupCreateInput): GroupCreateOutput
   GroupCreateMany(input: GroupCreateManyInput): GroupCreateManyOutput
   GroupRemove(input: GroupRemoveInput): GroupRemoveOutput
@@ -825,6 +999,10 @@ type Mutation {
   SignInCreate(input: SignInCreateInput): SignInCreateOutput
   SignInUserUpdate(input: SignInUserUpdateInput): SignInUserUpdateOutput
   SignInUsernameCreate(input: SignInUsernameCreateInput): SignInUsernameCreateOutput
+  SocketCreate(input: SocketCreateInput): SocketCreateOutput
+  SocketCreateMany(input: SocketCreateManyInput): SocketCreateManyOutput
+  SocketRemove(input: SocketRemoveInput): SocketRemoveOutput
+  SocketUpdate(input: SocketUpdateInput): SocketUpdateOutput
   UserCreate(input: UserCreateInput): UserCreateOutput
   UserCreateMany(input: UserCreateManyInput): UserCreateManyOutput
   UserRemove(input: UserRemoveInput): UserRemoveOutput
@@ -1094,6 +1272,9 @@ type Query {
   CardGet(input: CardGetInput): CardGetOutput
   CardGetConnection(input: CardGetConnectionInput): CardGetConnectionOutput
   CardGetMany(input: CardGetManyInput): CardGetManyOutput
+  ChatGet(input: ChatGetInput): ChatGetOutput
+  ChatGetConnection(input: ChatGetConnectionInput): ChatGetConnectionOutput
+  ChatGetMany(input: ChatGetManyInput): ChatGetManyOutput
   GroupGet(input: GroupGetInput): GroupGetOutput
   GroupGetConnection(input: GroupGetConnectionInput): GroupGetConnectionOutput
   GroupGetMany(input: GroupGetManyInput): GroupGetManyOutput
@@ -1104,6 +1285,9 @@ type Query {
   PaymentMethodGetMany(input: PaymentMethodGetManyInput): PaymentMethodGetManyOutput
   SnapshotGet(input: SnapshotGetInput): SnapshotGetOutput
   SnapshotGetMany(input: SnapshotGetManyInput): SnapshotGetManyOutput
+  SocketGet(input: SocketGetInput): SocketGetOutput
+  SocketGetConnection(input: SocketGetConnectionInput): SocketGetConnectionOutput
+  SocketGetMany(input: SocketGetManyInput): SocketGetManyOutput
   UserGet(input: UserGetInput): UserGetOutput
   UserGetConnection(input: UserGetConnectionInput): UserGetConnectionOutput
   UserGetMany(input: UserGetManyInput): UserGetManyOutput
@@ -1245,6 +1429,188 @@ type SnapshotGetOutput {
 
 input SnapshotInput {
   images: [String]
+  name: String
+}
+
+type Socket {
+  Chat: Chat
+  _id: String
+  created: DateTime
+  id: String
+  name: String
+}
+
+input SocketCreateFormInput {
+  Chat: ChatInput
+  _id: String
+  created: DateTime
+  id: String
+  name: String
+}
+
+input SocketCreateInput {
+  form: SocketCreateFormInput
+  root: String
+}
+
+input SocketCreateManyFormInput {
+  Chat: ChatInput
+  _id: String
+  created: DateTime
+  id: String
+  name: String
+}
+
+input SocketCreateManyInput {
+  form: [SocketCreateManyFormInput]
+  root: String
+}
+
+type SocketCreateManyOutput {
+  result: Socket
+  root: Chat
+}
+
+type SocketCreateOutput {
+  result: Socket
+  root: Chat
+}
+
+type SocketGetConnectionConnection {
+  edges: [SocketGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type SocketGetConnectionEdge {
+  cursor: String
+  node: Socket
+}
+
+input SocketGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [SocketInput]
+  resourceValue: SocketInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input SocketGetConnectionInput {
+  filter: [SocketGetConnectionFilterInput]
+  pagination: PaginationInput
+  root: String
+}
+
+type SocketGetConnectionOutput {
+  result: SocketGetConnectionConnection
+  root: Chat
+}
+
+input SocketGetFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [SocketInput]
+  resourceValue: SocketInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input SocketGetInput {
+  filter: [SocketGetFilterInput]
+  root: String
+}
+
+input SocketGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [SocketInput]
+  resourceValue: SocketInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input SocketGetManyInput {
+  filter: [SocketGetManyFilterInput]
+  root: String
+}
+
+type SocketGetManyOutput {
+  result: [Socket]
+  root: Chat
+}
+
+type SocketGetOutput {
+  result: Socket
+  root: Chat
+}
+
+input SocketInput {
+  Chat: ChatInput
+  _id: String
+  created: DateTime
+  id: String
+  name: String
+}
+
+input SocketRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [SocketInput]
+  resourceValue: SocketInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input SocketRemoveInput {
+  filter: [SocketRemoveFilterInput]
+  root: String
+}
+
+type SocketRemoveOutput {
+  result: Socket
+  root: Chat
+}
+
+input SocketUpdateFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [SocketInput]
+  resourceValue: SocketInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input SocketUpdateInput {
+  filter: [SocketUpdateFilterInput]
+  root: String
+  update: SocketUpdateUpdateInput
+}
+
+type SocketUpdateOutput {
+  result: Socket
+  root: Chat
+}
+
+input SocketUpdateUpdateInput {
+  Chat: ChatInput
+  _id: String
+  created: DateTime
+  id: String
   name: String
 }
 

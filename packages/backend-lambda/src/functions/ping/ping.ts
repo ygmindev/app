@@ -3,14 +3,17 @@ import { LAMBDA_PLUGIN } from '#lib-backend/serverless/utils/createLambdaHandler
 import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
 
 export const main = createLambdaHandler({
-  handler: async ({ context }) => ({
-    body: {
-      message: 'success',
-      session: context.session?.id,
-      user: context.user?.claims.email,
-    },
-    headers: { 'Access-Control-Allow-Origin': '*' },
-    statusCode: HTTP_STATUS_CODE.SUCCESS,
-  }),
+  handler: async ({ context }) => {
+    const { sessionId, user } = context;
+    return {
+      body: {
+        message: 'success',
+        sessionId,
+        user: user?.claims.email,
+      },
+      headers: { 'Access-Control-Allow-Origin': '*' },
+      statusCode: HTTP_STATUS_CODE.SUCCESS,
+    };
+  },
   plugins: [LAMBDA_PLUGIN.AUTHENTICATION],
 });

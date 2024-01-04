@@ -8,7 +8,6 @@ import {
 import { type GraphQLError } from 'graphql';
 
 import { getUserFromHeader } from '#lib-backend/auth/utils/getUserFromHeader/getUserFromHeader';
-import { type SessionFormModel } from '#lib-backend/serverless/resources/Session/Session.models';
 import {
   type _CreateLambdaHandlerModel,
   type _CreateLambdaHandlerParamsModel,
@@ -56,14 +55,10 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
       database && (contextDefault.database = database);
     }
 
-    const session: SessionFormModel = {
-      id:
-        type === LAMBDA_TYPE.WEBSOCKET
-          ? (event as APIGatewayProxyWebsocketEventV2).requestContext.connectionId
-          : context.awsRequestId,
-    };
-    // TODO: create websocket session in database?
-    contextF.session = session;
+    contextF.sessionId =
+      type === LAMBDA_TYPE.WEBSOCKET
+        ? (event as APIGatewayProxyWebsocketEventV2).requestContext.connectionId
+        : context.awsRequestId;
 
     return { ...contextDefault, ...contextF };
   };

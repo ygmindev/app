@@ -4,12 +4,12 @@ import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.co
 
 export const connect = createLambdaHandler({
   handler: async ({ context }) => {
-    const sessionId = context.session?.id;
+    const { sessionId, user } = context;
     return {
       body: {
         message: 'success',
         sessionId,
-        user: context.user?.claims.email,
+        user: user?.claims.email,
       },
       headers: { 'Access-Control-Allow-Origin': '*' },
       statusCode: HTTP_STATUS_CODE.SUCCESS,
@@ -19,15 +19,18 @@ export const connect = createLambdaHandler({
 });
 
 export const disconnect = createLambdaHandler({
-  handler: async ({ context }) => ({
-    body: {
-      message: 'success',
-      session: context.session?.id,
-      user: context.user?.claims.email,
-    },
-    headers: { 'Access-Control-Allow-Origin': '*' },
-    statusCode: HTTP_STATUS_CODE.SUCCESS,
-  }),
+  handler: async ({ context }) => {
+    const { sessionId, user } = context;
+    return {
+      body: {
+        message: 'success',
+        sessionId,
+        user: user?.claims.email,
+      },
+      headers: { 'Access-Control-Allow-Origin': '*' },
+      statusCode: HTTP_STATUS_CODE.SUCCESS,
+    };
+  },
   type: LAMBDA_TYPE.WEBSOCKET,
 });
 

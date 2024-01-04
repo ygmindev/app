@@ -1,13 +1,6 @@
+import { type HttpResponseTypeModel } from '#lib-shared/http/http.models';
 import { type _HttpServiceModel } from '#lib-shared/http/utils/HttpService/_HttpService.models';
-import {
-  type HTTP_METHOD,
-  type HTTP_RESPONSE_TYPE,
-} from '#lib-shared/http/utils/HttpService/HttpService.constants';
 import { type UriParamsModel } from '#lib-shared/http/utils/uri/uri.models';
-
-export type HttpMethodModel = `${HTTP_METHOD}`;
-
-export type HttpResponseTypeModel = `${HTTP_RESPONSE_TYPE}`;
 
 export type HttpRequestParamsModel = {
   headers?: object;

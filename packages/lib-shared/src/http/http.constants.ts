@@ -6,7 +6,15 @@ export enum HTTP_METHOD {
   DELETE = 'delete',
   GET = 'get',
   POST = 'post',
-  UPDATe = 'update',
+  PUT = 'put',
+  UPDATE = 'update',
+  WEBSOCKET = 'websocket',
+}
+
+export enum HTTP_RESPONSE_TYPE {
+  ARRAYBUFFER = 'arraybuffer',
+  BLOB = 'blob',
+  JSON = 'json',
 }
 
 export enum WEBSOCKET_METHOD {

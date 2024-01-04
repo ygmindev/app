@@ -9,16 +9,13 @@ import axios from 'axios';
 import { CONNECTIVITY } from '#lib-frontend/http/http.constants';
 import { getConnectivity } from '#lib-frontend/http/utils/getConnectivity/getConnectivity';
 import { OfflineError } from '#lib-shared/http/errors/OfflineError/OfflineError';
+import { HTTP_METHOD } from '#lib-shared/http/http.constants';
+import { type HttpMethodModel, type HttpResponseTypeModel } from '#lib-shared/http/http.models';
 import {
   type _HttpRequestParamsModel,
   type _HttpServiceModel,
 } from '#lib-shared/http/utils/HttpService/_HttpService.models';
-import { HTTP_METHOD } from '#lib-shared/http/utils/HttpService/HttpService.constants';
-import {
-  type HttpMethodModel,
-  type HttpResponseTypeModel,
-  type HttpServiceParamsModel,
-} from '#lib-shared/http/utils/HttpService/HttpService.models';
+import { type HttpServiceParamsModel } from '#lib-shared/http/utils/HttpService/HttpService.models';
 import { uri } from '#lib-shared/http/utils/uri/uri';
 
 export class _HttpService implements _HttpServiceModel {
