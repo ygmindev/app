@@ -69,36 +69,41 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
   };
 
   return async (event: _LambdaEventModel<TType>, context, callback) => {
+    if (type === LAMBDA_TYPE.GRAPHQL) {
+      const server = new ApolloServer({
+        allowBatchedHttpRequests: true,
+        formatError: (e, originalError) => {
+          const originalErrorF = (originalError as GraphQLError)?.originalError as HttpError;
+          const errorF = new HttpError(
+            originalErrorF?.statusCode,
+            e.message ?? originalErrorF?.message,
+            (e.extensions?.stacktrace as string) ?? (e as Error)?.stack ?? originalErrorF.stack,
+          );
+          console.error(e);
+          console.error(errorF);
+          return errorF;
+        },
+        schema: _config(),
+      });
+      const handlerF = startServerAndCreateLambdaHandler(
+        server,
+        handlers.createAPIGatewayProxyEventV2RequestHandler(),
+        {
+          context: async ({ context, event }) =>
+            getContext({ context, event: event as _LambdaEventModel<TType> }),
+        },
+      );
+      return handlerF(event as APIGatewayProxyEventV2, context, callback);
+    }
+
+    const result =
+      handler &&
+      (await handler({ body: event.body, context: await getContext({ context, event }) }));
+
     switch (type) {
-      case LAMBDA_TYPE.GRAPHQL: {
-        const server = new ApolloServer({
-          allowBatchedHttpRequests: true,
-          formatError: (e, originalError) => {
-            const originalErrorF = (originalError as GraphQLError)?.originalError as HttpError;
-            const errorF = new HttpError(
-              originalErrorF?.statusCode,
-              e.message ?? originalErrorF?.message,
-              (e.extensions?.stacktrace as string) ?? (e as Error)?.stack ?? originalErrorF.stack,
-            );
-            console.error(e);
-            console.error(errorF);
-            return errorF;
-          },
-          schema: _config(),
-        });
-        const handlerF = startServerAndCreateLambdaHandler(
-          server,
-          handlers.createAPIGatewayProxyEventV2RequestHandler(),
-          {
-            context: async ({ context, event }) =>
-              getContext({ context, event: event as _LambdaEventModel<TType> }),
-          },
-        );
-        return handlerF(event as APIGatewayProxyEventV2, context, callback);
-      }
+      case LAMBDA_TYPE.WEBSOCKET:
+        return result;
       default: {
-        const result =
-          handler && (await handler({ context: await getContext({ context, event }) }));
         result?.body && (result.body = stringify(result.body));
         return result;
       }

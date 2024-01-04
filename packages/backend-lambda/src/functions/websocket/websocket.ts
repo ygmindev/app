@@ -3,15 +3,18 @@ import { LAMBDA_TYPE } from '#lib-backend/serverless/utils/createLambdaHandler/c
 import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
 
 export const connect = createLambdaHandler({
-  handler: async ({ context }) => ({
-    body: {
-      message: 'success',
-      session: context.session?.id,
-      user: context.user?.claims.email,
-    },
-    headers: { 'Access-Control-Allow-Origin': '*' },
-    statusCode: HTTP_STATUS_CODE.SUCCESS,
-  }),
+  handler: async ({ context }) => {
+    const sessionId = context.session?.id;
+    return {
+      body: {
+        message: 'success',
+        sessionId,
+        user: context.user?.claims.email,
+      },
+      headers: { 'Access-Control-Allow-Origin': '*' },
+      statusCode: HTTP_STATUS_CODE.SUCCESS,
+    };
+  },
   type: LAMBDA_TYPE.WEBSOCKET,
 });
 
@@ -29,12 +32,11 @@ export const disconnect = createLambdaHandler({
 });
 
 export const main = createLambdaHandler({
-  handler: async () => {
+  handler: async ({ body }) => {
     return {
-      body: 'success',
-      headers: { 'Access-Control-Allow-Origin': '*' },
-      statusCode: 200,
+      body: body ? Buffer.from(body) : undefined,
+      sessionId: '',
     };
   },
-  type: LAMBDA_TYPE.WEBSOCKET,
+  type: LAMBDA_TYPE.EVENT,
 });

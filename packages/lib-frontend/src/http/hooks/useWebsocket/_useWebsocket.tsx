@@ -1,9 +1,11 @@
 import useWebSocket from 'react-use-websocket';
 
+import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import {
   type _UseWebsocketModel,
   type _UseWebsocketParamsModel,
 } from '#lib-frontend/http/hooks/useWebsocket/_useWebsocket.models';
+import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 import { WEBSOCKET_STATUS } from '#lib-shared/http/http.constants';
 
 export const _useWebsocket = ({
@@ -18,6 +20,12 @@ export const _useWebsocket = ({
     },
     onOpen: console.warn,
   });
+
+  useAsync(async (isActive) => {
+    await sleep(5000);
+    isActive() && sendMessage('test');
+  }, []);
+
   const status = (() => {
     switch (readyState as number) {
       case 0:
