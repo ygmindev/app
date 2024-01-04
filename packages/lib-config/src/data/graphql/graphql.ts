@@ -9,10 +9,6 @@ import { CardResolver } from '#lib-backend/billing/resources/Card/CardResolver/C
 import { PaymentMethodResolver } from '#lib-backend/billing/resources/PaymentMethod/PaymentMethodResolver/PaymentMethodResolver';
 import { Container } from '#lib-backend/core/utils/Container/Container';
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
-import { CreditRatingResolver } from '#lib-backend/funding/resources/CreditRating/CreditRatingResolver/CreditRatingResolver';
-import { FundingResolver } from '#lib-backend/funding/resources/Funding/FundingResolver/FundingResolver';
-import { FundingQuoteResolver } from '#lib-backend/funding/resources/FundingQuote/FundingQuoteResolver/FundingQuoteResolver';
-import { RatingAgencyResolver } from '#lib-backend/funding/resources/RatingAgency/RatingAgencyResolver/RatingAgencyResolver';
 import { GroupResolver } from '#lib-backend/group/resources/Group/GroupResolver/GroupResolver';
 import { SnapshotResolver } from '#lib-backend/test/resources/Snapshot/SnapshotResolver/SnapshotResolver';
 import { LinkedUserResolver } from '#lib-backend/user/resources/LinkedUser/LinkedUserResolver/LinkedUserResolver';
@@ -34,14 +30,10 @@ const { _config, config } = defineConfig({
         AccessResolver,
         BankResolver,
         CardResolver,
-        CreditRatingResolver,
-        FundingResolver,
-        FundingQuoteResolver,
         GroupResolver,
         LinkedUserResolver,
         OtpResolver,
         PaymentMethodResolver,
-        RatingAgencyResolver,
         SignInResolver,
         UserResolver,
         SnapshotResolver,

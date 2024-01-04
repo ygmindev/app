@@ -15,7 +15,7 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withEntity({ isRepository: true, name: CARD_RESOURCE_NAME })
 export class Card extends EmbeddedResource implements CardModel {
-  @withEmbeddableRootField({ Resource: () => User, name: USER_RESOURCE_NAME })
+  @withEmbeddableRootField({ Resource: () => User })
   [USER_RESOURCE_NAME]!: UserModel;
 
   @withField({ isRepository: true, type: DATA_TYPE.NUMBER })

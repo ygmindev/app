@@ -2,7 +2,6 @@ import { type AppHomePagePropsModel } from '#lib-frontend/app/pages/AppHomePage/
 import { Text } from '#lib-frontend/core/components/Text/Text';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
-import { useGroupResource } from '#lib-frontend/funding/hooks/useGroupResource/useGroupResource';
 import { GROUP } from '#lib-frontend/group/group.constants';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -13,7 +12,6 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
   const { t } = useTranslation([GROUP]);
   const { wrapperProps } = useLayoutStyles({ props });
   const currentUser = useCurrentUser();
-  const { getMany } = useGroupResource();
   return (
     <MainLayout
       {...wrapperProps}

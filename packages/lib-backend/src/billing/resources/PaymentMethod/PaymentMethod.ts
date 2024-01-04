@@ -11,7 +11,7 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withEntity({ name: PAYMENT_METHOD_RESOURCE_NAME })
 export class PaymentMethod extends EmbeddedResource {
-  @withEmbeddableRootField({ Resource: () => User, name: USER_RESOURCE_NAME })
+  @withEmbeddableRootField({ Resource: () => User })
   [USER_RESOURCE_NAME]!: UserModel;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })

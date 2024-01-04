@@ -15,7 +15,7 @@ import { DATA_TYPE } from '#lib-shared/data/data.constants';
 
 @withEntity({ isEmbeddable: true, isRepository: true, name: UTILITY_RESOURCE_NAME })
 export class Utility extends EmbeddedResource implements UtilityModel {
-  @withEmbeddableRootField({ Resource: () => Vendor, name: VENDOR_RESOURCE_NAME })
+  @withEmbeddableRootField({ Resource: () => Vendor })
   [VENDOR_RESOURCE_NAME]?: VendorModel;
 
   @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })

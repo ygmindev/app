@@ -1,10 +1,6 @@
 import { type TranslatableOptionModel } from '#lib-frontend/core/core.models';
-import { AMOUNT_UNIT, RATE_UNIT, RELATIVE_DATE_UNIT } from '#lib-frontend/data/data.constants';
-import {
-  type AmountUnitModel,
-  type NumberUnitModel,
-  type RateUnitModel,
-} from '#lib-frontend/data/data.models';
+import { AMOUNT_UNIT, RELATIVE_DATE_UNIT } from '#lib-frontend/data/data.constants';
+import { type AmountUnitModel, type NumberUnitModel } from '#lib-frontend/data/data.models';
 
 export const AMOUNT_UNIT_OPTIONS = [
   { id: AMOUNT_UNIT.EXACT, label: ({ t }) => t('data:exact') },
@@ -12,11 +8,6 @@ export const AMOUNT_UNIT_OPTIONS = [
   { id: AMOUNT_UNIT.MILLION, label: ({ t }) => t('data:million') },
   { id: AMOUNT_UNIT.BILLION, label: ({ t }) => t('data:billion') },
 ] satisfies Array<TranslatableOptionModel<AmountUnitModel>>;
-
-export const RATE_UNIT_OPTIONS = [
-  { id: RATE_UNIT.SPREAD, label: ({ t }) => t('funding:spread') },
-  { id: RATE_UNIT.YIELD, label: ({ t }) => t('funding:yield') },
-] satisfies Array<TranslatableOptionModel<RateUnitModel>>;
 
 export const RELATIVE_DATE_UNIT_OPTIONS = [
   { id: RELATIVE_DATE_UNIT.DAY, label: ({ t }) => t('locale:day') },

@@ -8,7 +8,7 @@ import {
   type {{NAME}}(pascalCase)FormModel,
   type {{NAME}}(pascalCase)Model,
 } from '#lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
-import { type {{NAME_ROOT}}(pascalCase)Model } from '#lib-shared/{{MODULE_ROOT}}(camelCase)/resources/Funding/Funding.models';
+import { type {{NAME_ROOT}}(pascalCase)Model } from '#lib-shared/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase).models';
 
 export const {{NAME}}(pascalCase)Table: LFCModel<{{NAME}}(pascalCase)TablePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });

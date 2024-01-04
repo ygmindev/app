@@ -12,7 +12,7 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withEntity({ isRepository: true, name: BANK_RESOURCE_NAME })
 export class Bank extends EmbeddedResource implements BankModel {
-  @withEmbeddableRootField({ Resource: () => User, name: USER_RESOURCE_NAME })
+  @withEmbeddableRootField({ Resource: () => User })
   [USER_RESOURCE_NAME]!: UserModel;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
