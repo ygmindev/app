@@ -1,28 +1,28 @@
 import { createEmbeddedResourceService } from '#lib-backend/resource/utils/createEmbeddedResourceService/createEmbeddedResourceService';
 import { ChatService } from '#lib-backend/chat/resources/Chat/ChatService/ChatService';
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
-import { SESSION_RESOURCE_NAME } from '#lib-shared/chat/resources/Session/Session.constants';
+import { SOCKET_RESOURCE_NAME } from '#lib-shared/http/resources/Socket/Socket.constants';
 import {
-type  SessionFormModel,
-  SessionModel,
-} from '#lib-shared/chat/resources/Session/Session.models';
-import { type SessionServiceModel } from '#lib-shared/chat/resources/Session/SessionService/SessionService.models';
-import { Session } from '#lib-backend/chat/resources/Session/Session';
+type  SocketFormModel,
+  SocketModel,
+} from '#lib-shared/http/resources/Socket/Socket.models';
+import { type SocketServiceModel } from '#lib-shared/http/resources/Socket/SocketService/SocketService.models';
+import { Socket } from '#lib-backend/http/resources/Socket/Socket';
 import {
 type  ChatFormModel,
   ChatModel,
 } from '#lib-shared/chat/resources/Chat/Chat.models';
 
 @withContainer()
-export class SessionService
+export class SocketService
   extends createEmbeddedResourceService<
-    SessionModel,
-    SessionFormModel,
+    SocketModel,
+    SocketFormModel,
     ChatModel,
     ChatFormModel,
   >({
-    Resource: Session,
+    Resource: Socket,
     RootService: ChatService,
-    name: SESSION_RESOURCE_NAME,
+    name: SOCKET_RESOURCE_NAME,
   })
-  implements SessionServiceModel {}
+  implements SocketServiceModel {}

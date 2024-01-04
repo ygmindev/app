@@ -1,5 +1,4 @@
 import { type ResourceParamsModel } from '#lib-frontend/resource/resource.models';
-import { UTILITY_RESOURCE_NAME } from '#lib-shared/chat/resources/Utility/Utility.constants';
 import { CHAT_RESOURCE_NAME } from '#lib-shared/chat/resources/Chat/Chat.constants';
 import { type ChatModel } from '#lib-shared/chat/resources/Chat/Chat.models';
 

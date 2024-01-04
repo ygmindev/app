@@ -1,10 +1,10 @@
-import { SessionTable } from '#lib-frontend/chat/containers/SessionTable/SessionTable';
-import { type SessionTablePropsModel } from '#lib-frontend/chat/containers/SessionTable/SessionTable.models';
+import { SocketTable } from '#lib-frontend/http/containers/SocketTable/SocketTable';
+import { type SocketTablePropsModel } from '#lib-frontend/http/containers/SocketTable/SocketTable.models';
 import { render } from '#lib-frontend/test/utils/render/render';
 import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<SessionTablePropsModel>({
-  target: SessionTable,
+const { Component, displayName, testID } = withTestComponent<SocketTablePropsModel>({
+  target: SocketTable,
 });
 
 describe(displayName, () => {

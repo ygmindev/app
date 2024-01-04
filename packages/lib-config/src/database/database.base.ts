@@ -6,6 +6,7 @@ import { Bank } from '#lib-backend/billing/resources/Bank/Bank';
 import { Card } from '#lib-backend/billing/resources/Card/Card';
 import { Chat } from '#lib-backend/chat/resources/Chat/Chat';
 import { Group } from '#lib-backend/group/resources/Group/Group';
+import { Socket } from '#lib-backend/http/resources/Socket/Socket';
 import { TestableEntityResource } from '#lib-backend/test/resources/TestableEntityResource/TestableEntityResource';
 import { LinkedUser } from '#lib-backend/user/resources/LinkedUser/LinkedUser';
 import { User } from '#lib-backend/user/resources/User/User';
@@ -25,6 +26,7 @@ const { _config, config } = defineConfig({
       LinkedUser,
       Group,
       Otp,
+      Socket,
       User,
       Utility,
       Vendor,

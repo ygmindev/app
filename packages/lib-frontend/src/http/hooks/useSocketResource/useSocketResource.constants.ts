@@ -1,17 +1,17 @@
 import { type GraphQlQueryParamsFieldsModel } from '#lib-frontend/data/utils/graphQlQuery/graphQlQuery.models';
 import { type UseResourceMethodParamsFieldsModel } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
-import { type SessionModel } from '#lib-shared/chat/resources/Session/Session.models';
+import { type SocketModel } from '#lib-shared/http/resources/Socket/Socket.models';
 import { type ChatModel } from '#lib-shared/chat/resources/Chat/Chat.models';
 import { type ResourceMethodTypeCrudModel } from '#lib-shared/resource/resource.models';
 
-export const SESSION_FIELDS = [
+export const SOCKET_FIELDS = [
   'name',
-] satisfies GraphQlQueryParamsFieldsModel<SessionModel>;
+] satisfies GraphQlQueryParamsFieldsModel<SocketModel>;
 
-export const SESSION_OUTPUT_FIELDS = [
-  { result: SESSION_FIELDS },
+export const SOCKET_OUTPUT_FIELDS = [
+  { result: SOCKET_FIELDS },
 ] satisfies UseResourceMethodParamsFieldsModel<
   ResourceMethodTypeCrudModel,
-  SessionModel,
+  SocketModel,
   ChatModel
 >;

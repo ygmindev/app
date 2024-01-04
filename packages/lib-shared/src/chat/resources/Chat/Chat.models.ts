@@ -1,12 +1,12 @@
-import { type SESSION_RESOURCE_NAME } from '#lib-shared/chat/resources/Session/Session.constants';
-import { type SessionModel } from '#lib-shared/chat/resources/Session/Session.models';
+import { type SOCKET_RESOURCE_NAME } from '#lib-shared/http/resources/Socket/Socket.constants';
+import { type SocketModel } from '#lib-shared/http/resources/Socket/Socket.models';
 import {
   type EntityResourceDataModel,
   type EntityResourceModel,
 } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export type ChatModel = EntityResourceModel & {
-  [SESSION_RESOURCE_NAME]?: Array<SessionModel>;
+  [SOCKET_RESOURCE_NAME]?: Array<SocketModel>;
 
   name?: string;
 };
