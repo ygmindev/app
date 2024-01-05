@@ -6,6 +6,9 @@ export type AuthStatusModel = `${AUTH_STATUS}`;
 
 export type AuthStateModel = {
   status?: AuthStatusModel;
+  token?: {
+    access?: string;
+  };
 };
 
 export type AuthActionsParamsModel = EmptyObjectModel;

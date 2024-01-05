@@ -12,31 +12,33 @@ import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.co
 let auth: FirebaseAuthTypes.Module;
 
 export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionModel => ({
-  getToken: async (): Promise<string | null> => {
-    const { currentUser } = auth;
-    return currentUser && currentUser.getIdToken(true);
-  },
-
-  initialize: async (onAuth): Promise<void> => {
+  initialize: async ({ onAuthenticate, onTokenRefresh }): Promise<void> => {
     auth = firebaseAuth();
-    // process.env.APP_FIREBASE_USE_EMULATOR && auth.useEmulator('http://127.0.0.1:9099');
+    // process.env.APP_FIREBASE_USE_EMULATOR && auth.useEmulator('http://localhost:9099');
+    if (auth) {
+      auth.onAuthStateChanged((user: FirebaseAuthTypes.User | null) => {
+        if (user) {
+          user
+            .getIdTokenResult()
+            .then(({ claims }) => onAuthenticate({ _id: user.uid, claims }))
+            .catch((e) => {
+              const error =
+                (e as AuthError).code === 'auth/network-request-failed'
+                  ? new HttpError(HTTP_STATUS_CODE.SERVICE_UNAVAILABLE, 'Network Error')
+                  : (e as Error);
+              onError && onError(error);
+            });
+        } else {
+          void onAuthenticate(null);
+        }
+      });
 
-    auth.onAuthStateChanged((user: FirebaseAuthTypes.User | null) => {
-      if (user) {
-        user
-          .getIdTokenResult()
-          .then(({ claims }) => onAuth({ _id: user.uid, claims }))
-          .catch((e) => {
-            const error =
-              (e as AuthError).code === 'auth/network-request-failed'
-                ? new HttpError(HTTP_STATUS_CODE.SERVICE_UNAVAILABLE, 'Network Error')
-                : (e as Error);
-            onError && onError(error);
-          });
-      } else {
-        void onAuth(null);
-      }
-    });
+      auth.onIdTokenChanged((user: FirebaseAuthTypes.User | null) => {
+        if (user) {
+          void user.getIdToken().then(onTokenRefresh);
+        }
+      });
+    }
   },
 
   signInWithToken: async (token: string): Promise<void> => {

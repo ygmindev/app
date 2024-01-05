@@ -5,8 +5,10 @@ export type _UseSessionParamsModel = {
 };
 
 export type _UseSessionModel = {
-  getToken(): Promise<string | null>;
-  initialize(onAuth: (signInToken: SignInTokenModel | null) => Promise<void>): Promise<void>;
+  initialize(params: {
+    onAuthenticate: (signInToken: SignInTokenModel | null) => Promise<void>;
+    onTokenRefresh: (token: string) => Promise<void>;
+  }): Promise<void>;
   signInWithToken(token: string): Promise<void>;
   signOut(): Promise<void>;
 };

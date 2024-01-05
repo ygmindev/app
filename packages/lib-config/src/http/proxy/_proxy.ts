@@ -1,5 +1,6 @@
 import { PROXY_HANDLER } from '#lib-config/http/proxy/proxy.constants';
 import { type _ProxyConfigModel, type ProxyConfigModel } from '#lib-config/http/proxy/proxy.models';
+import { uri } from '#lib-shared/http/utils/uri/uri';
 
 export const _proxy = ({ listen, routes }: ProxyConfigModel): _ProxyConfigModel => ({
   apps: {
@@ -15,11 +16,18 @@ export const _proxy = ({ listen, routes }: ProxyConfigModel): _ProxyConfigModel 
               }
             })();
             return {
-              handle: {
-                handler,
-                upstreams: [{ dial: to.pathname }],
-              },
-              match: match.map((value) => ({ path: value })),
+              handle: [
+                {
+                  handler,
+                  upstreams: [
+                    { dial: uri({ host: to.host, pathname: to.pathname, port: to.port }) },
+                  ],
+                },
+              ],
+              match: match.map(({ host, pathname, port }) => ({
+                host: [uri({ host: host ?? 'localhost', port })],
+                path: [pathname],
+              })),
             };
           }),
         },

@@ -42,13 +42,12 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
     contextF.pathname = event.requestContext.routeKey;
 
     if (plugins?.includes(LAMBDA_PLUGIN.AUTHENTICATION)) {
-      if (type !== LAMBDA_TYPE.WEBSOCKET) {
-        const eventF = event as APIGatewayProxyEventV2;
-        const { authorization } = eventF.headers;
-        const user = await getUserFromHeader(authorization);
-        user && (contextF.user = user);
-        eventF.headers.group && (contextF.group = eventF.headers.group);
-      }
+      const eventF = event as APIGatewayProxyEventV2;
+      const authorization =
+        eventF.headers?.authorization ?? eventF.queryStringParameters?.Authorization;
+      const user = await getUserFromHeader(authorization);
+      user && (contextF.user = user);
+      eventF.headers?.group && (contextF.group = eventF.headers.group);
     }
 
     if (plugins?.includes(LAMBDA_PLUGIN.DATABASE) && !contextF.database) {

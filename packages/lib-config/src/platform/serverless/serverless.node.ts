@@ -2,9 +2,8 @@ import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _serverless } from '#lib-config/platform/serverless/_serverless';
 import { config as configBase } from '#lib-config/platform/serverless/serverless.base';
 import { PLATFORM } from '#lib-platform/core/core.constants';
-import { CHAT } from '#lib-shared/chat/resources/Chat/Chat.constants';
 import { GRAPHQL } from '#lib-shared/graphql/graphql.constants';
-import { HTTP_METHOD, PING } from '#lib-shared/http/http.constants';
+import { HTTP_METHOD, PING, WEBSOCKET } from '#lib-shared/http/http.constants';
 
 const { _config, config } = defineConfig({
   _config: _serverless,
@@ -14,11 +13,6 @@ const { _config, config } = defineConfig({
   overrides: () => [
     {
       functions: {
-        [CHAT]: {
-          handler: 'src/functions/chat/chat.main',
-          method: HTTP_METHOD.WEBSOCKET,
-        },
-
         [GRAPHQL]: {
           handler: 'src/functions/graphql/graphql.main',
           method: HTTP_METHOD.POST,
@@ -29,6 +23,11 @@ const { _config, config } = defineConfig({
           handler: 'src/functions/ping/ping.main',
           method: HTTP_METHOD.GET,
           pathname: `/api/${PING}`,
+        },
+
+        [WEBSOCKET]: {
+          handler: 'src/functions/websocket/websocket.main',
+          method: HTTP_METHOD.WEBSOCKET,
         },
       },
 

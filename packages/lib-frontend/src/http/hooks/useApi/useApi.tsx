@@ -1,13 +1,13 @@
 import toNumber from 'lodash/toNumber';
+import { useRef } from 'react';
 
-import { useSession } from '#lib-frontend/auth/hooks/useSession/useSession';
+import { useCredentials } from '#lib-frontend/auth/hooks/useCredentials/useCredentials';
 import {
   type UseApiModel,
   type UseApiParamsModel,
 } from '#lib-frontend/http/hooks/useApi/useApi.models';
 import { useHttp } from '#lib-frontend/http/hooks/useHttp/useHttp';
-import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
-import { GROUP_RESOURCE_NAME } from '#lib-shared/group/resources/Group/Group.constants';
+import { type CredentialsModel } from '#lib-shared/auth/auth.models';
 
 export const useApi = ({
   host,
@@ -17,20 +17,13 @@ export const useApi = ({
   pathname,
   port,
 }: UseApiParamsModel): UseApiModel => {
-  const { getToken } = useSession();
-  const [currentGroup] = useStore('group.currentGroup');
+  const credentials = useCredentials();
+  const credentialsRef = useRef<CredentialsModel>();
+  credentialsRef.current = credentials;
   return useHttp({
     baseUri: { host: host ?? '', pathname, port: port ? toNumber(port) : undefined },
     onRequest: async (config) => {
-      if (isCredentials) {
-        const token = await getToken();
-        token &&
-          (config.headers = {
-            ...config.headers,
-            Authorization: `Bearer ${token}`,
-            [GROUP_RESOURCE_NAME]: currentGroup?._id,
-          });
-      }
+      isCredentials && (config.headers = { ...config.headers, ...credentialsRef.current });
       return onRequest ? onRequest(config) : config;
     },
     onResponse,

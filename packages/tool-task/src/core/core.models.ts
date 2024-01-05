@@ -26,7 +26,7 @@ export type TaskResultModel = {
   status: TaskStatusModel;
 };
 
-export type TaskParamsModel<TType> = Omit<TaskContextModel<TType>, 'options'> &
+export type TaskParamsModel<TType> = Omit<TaskContextModel<TType>, 'options' | 'overrides'> &
   EnvironmentOverrideParamsModel & {
     onBefore?: Array<TaskModel<TType>>;
     onFinish?: Array<TaskModel<TType>>;
@@ -35,6 +35,7 @@ export type TaskParamsModel<TType> = Omit<TaskContextModel<TType>, 'options'> &
       | ((
           context: Pick<TaskContextModel<TType>, 'name' | 'root' | 'overrides'>,
         ) => PromptParamsModel<TType>);
+    overrides?: PartialModel<TType> | (() => PartialModel<TType>);
     task: Array<TaskModel<TType>>;
   };
 

@@ -1,5 +1,5 @@
 import { getApps, initializeApp } from 'firebase/app';
-import { type Auth, type AuthError, type User } from 'firebase/auth';
+import { type Auth, type AuthError, onIdTokenChanged, type User } from 'firebase/auth';
 import { getAuth, onAuthStateChanged, signInWithCustomToken, signOut } from 'firebase/auth';
 
 import {
@@ -14,12 +14,7 @@ import { warn } from '#lib-shared/logging/utils/logger/logger';
 let auth: Auth;
 
 export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionModel => ({
-  getToken: async (): Promise<string | null> => {
-    const currentUser = auth && auth.currentUser;
-    return currentUser ? currentUser.getIdToken() : null;
-  },
-
-  initialize: async (onAuth): Promise<void> => {
+  initialize: async ({ onAuthenticate, onTokenRefresh }): Promise<void> => {
     if (!isServer && !getApps().length) {
       if (process.env.APP_FIREBASE_API_KEY) {
         initializeApp({
@@ -33,19 +28,18 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
 
         auth = getAuth();
 
-        // auth &&
-        //   process.env.APP_FIREBASE_USE_EMULATOR &&
-        //   connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true });
+        if (auth) {
+          //   process.env.APP_FIREBASE_USE_EMULATOR &&
+          //   connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
 
-        // TODO: from locale
-        // _auth && useDeviceLanguage(_auth);
+          // TODO: from locale
+          // useDeviceLanguage(_auth);
 
-        auth &&
           onAuthStateChanged(auth, (user: User | null) => {
             if (user) {
               user
                 .getIdTokenResult()
-                .then(({ claims }) => onAuth({ _id: user.uid, claims } as SignInTokenModel))
+                .then(({ claims }) => onAuthenticate({ _id: user.uid, claims } as SignInTokenModel))
                 .catch((e) => {
                   const error =
                     (e as AuthError).code === 'auth/network-request-failed'
@@ -54,9 +48,16 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
                   onError && onError(error);
                 });
             } else {
-              void onAuth(null);
+              void onAuthenticate(null);
             }
           });
+
+          onIdTokenChanged(auth, (user: User | null) => {
+            if (user) {
+              void user.getIdToken().then(onTokenRefresh);
+            }
+          });
+        }
       } else {
         warn('Auth API key is missing');
       }

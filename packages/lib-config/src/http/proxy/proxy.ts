@@ -1,3 +1,4 @@
+import { fromDist } from '#lib-backend/file/utils/fromDist/fromDist';
 import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
 import { _proxy } from '#lib-config/http/proxy/_proxy';
 import { PROXY_HANDLER } from '#lib-config/http/proxy/proxy.constants';
@@ -9,30 +10,42 @@ const { _config, config } = defineConfig({
 
   config: () =>
     ({
+      configFile: fromDist('proxy.json'),
+
       listen: [80, 443],
+
       routes: [
         {
-          match: ['/api/*'],
+          match: [{ pathname: '/api/*' }],
           to: {
             handler: PROXY_HANDLER.REVERSE_PROXY,
-            pathname: uri({ host: process.env.SERVER_HOST, port: process.env.SERVER_PORT }),
+            host: uri({
+              host: process.env.SERVER_HOST,
+              isProtocol: false,
+              port: process.env.SERVER_PORT,
+            }),
           },
         },
         {
-          match: ['/ws/*'],
+          match: [{ pathname: '/ws' }],
           to: {
             handler: PROXY_HANDLER.REVERSE_PROXY,
-            pathname: uri({
+            host: uri({
               host: process.env.SERVER_WEBSOCKET_HOST,
+              isProtocol: false,
               port: process.env.SERVER_WEBSOCKET_PORT,
             }),
           },
         },
         {
-          match: ['/*'],
+          match: [{ pathname: '/*' }],
           to: {
             handler: PROXY_HANDLER.REVERSE_PROXY,
-            pathname: uri({ host: process.env.APP_HOST, port: process.env.APP_PORT }),
+            host: uri({
+              host: process.env.APP_HOST,
+              isProtocol: false,
+              port: process.env.APP_PORT,
+            }),
           },
         },
       ],

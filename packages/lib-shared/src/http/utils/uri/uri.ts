@@ -3,6 +3,7 @@ import { type UriParamsModel } from '#lib-shared/http/utils/uri/uri.models';
 
 export const uri = <TType extends unknown>({
   host = '',
+  isProtocol = true,
   params,
   pathname,
   port,
@@ -14,5 +15,6 @@ export const uri = <TType extends unknown>({
       .join('&');
     uri = `${uri}?${queryParams}`;
   }
+  !isProtocol && ([, uri] = uri.split('://'));
   return uri;
 };

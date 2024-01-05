@@ -11,5 +11,8 @@ export const AUTH_REDUCER: AuthReducerModel = {
 
   defaultState: {
     status: AUTH_STATUS.UNKNOWN,
+    token: {
+      access: undefined,
+    },
   },
 };

@@ -13,6 +13,7 @@ export const main = createLambdaHandler({
       case '$connect': {
         return {
           body: { message: 'success' },
+          headers: { 'sec-websocket-protocol': 'success' },
           statusCode: HTTP_STATUS_CODE.SUCCESS,
         };
       }
@@ -34,6 +35,6 @@ export const main = createLambdaHandler({
       sessionId: '',
     };
   },
-  plugins: [LAMBDA_PLUGIN.DATABASE],
+  plugins: [LAMBDA_PLUGIN.AUTHENTICATION, LAMBDA_PLUGIN.DATABASE],
   type: LAMBDA_TYPE.WEBSOCKET,
 });
