@@ -203,7 +203,7 @@ type Bank {
   User: User
   _id: String
   created: DateTime
-  id: String
+  externalId: String
   last4: String
   name: String
   type: String
@@ -213,7 +213,7 @@ input BankCreateFormInput {
   User: UserInput
   _id: String
   created: DateTime
-  id: String
+  externalId: String
   last4: String
   name: String
   type: String
@@ -228,7 +228,7 @@ input BankCreateManyFormInput {
   User: UserInput
   _id: String
   created: DateTime
-  id: String
+  externalId: String
   last4: String
   name: String
   type: String
@@ -330,7 +330,7 @@ input BankInput {
   User: UserInput
   _id: String
   created: DateTime
-  id: String
+  externalId: String
   last4: String
   name: String
   type: String
@@ -385,7 +385,7 @@ input BankUpdateUpdateInput {
   User: UserInput
   _id: String
   created: DateTime
-  id: String
+  externalId: String
   last4: String
   name: String
   type: String
@@ -397,8 +397,8 @@ type Card {
   created: DateTime
   expMonth: Float
   expYear: Float
+  externalId: String
   funding: String
-  id: String
   last4: String
   name: String
   type: String
@@ -410,8 +410,8 @@ input CardCreateFormInput {
   created: DateTime
   expMonth: Float
   expYear: Float
+  externalId: String
   funding: String
-  id: String
   last4: String
   name: String
   type: String
@@ -428,8 +428,8 @@ input CardCreateManyFormInput {
   created: DateTime
   expMonth: Float
   expYear: Float
+  externalId: String
   funding: String
-  id: String
   last4: String
   name: String
   type: String
@@ -533,8 +533,8 @@ input CardInput {
   created: DateTime
   expMonth: Float
   expYear: Float
+  externalId: String
   funding: String
-  id: String
   last4: String
   name: String
   type: String
@@ -591,22 +591,20 @@ input CardUpdateUpdateInput {
   created: DateTime
   expMonth: Float
   expYear: Float
+  externalId: String
   funding: String
-  id: String
   last4: String
   name: String
   type: String
 }
 
 type Chat {
-  Socket: [Socket]
   _id: String
   created: DateTime
   name: String
 }
 
 input ChatCreateFormInput {
-  Socket: [SocketInput]
   _id: String
   created: DateTime
   name: String
@@ -618,7 +616,6 @@ input ChatCreateInput {
 }
 
 input ChatCreateManyFormInput {
-  Socket: [SocketInput]
   _id: String
   created: DateTime
   name: String
@@ -712,7 +709,6 @@ type ChatGetOutput {
 }
 
 input ChatInput {
-  Socket: [SocketInput]
   _id: String
   created: DateTime
   name: String
@@ -762,7 +758,6 @@ type ChatUpdateOutput {
 }
 
 input ChatUpdateUpdateInput {
-  Socket: [SocketInput]
   _id: String
   created: DateTime
   name: String
@@ -1215,7 +1210,7 @@ type PaymentMethod {
   User: User
   _id: String
   created: DateTime
-  id: String
+  externalId: String
   last4: String
   name: String
   type: String
@@ -1247,7 +1242,7 @@ input PaymentMethodInput {
   User: UserInput
   _id: String
   created: DateTime
-  id: String
+  externalId: String
   last4: String
   name: String
   type: String
@@ -1433,18 +1428,16 @@ input SnapshotInput {
 }
 
 type Socket {
-  Chat: Chat
   _id: String
   created: DateTime
-  id: String
+  externalId: String
   name: String
 }
 
 input SocketCreateFormInput {
-  Chat: ChatInput
   _id: String
   created: DateTime
-  id: String
+  externalId: String
   name: String
 }
 
@@ -1454,10 +1447,9 @@ input SocketCreateInput {
 }
 
 input SocketCreateManyFormInput {
-  Chat: ChatInput
   _id: String
   created: DateTime
-  id: String
+  externalId: String
   name: String
 }
 
@@ -1468,12 +1460,10 @@ input SocketCreateManyInput {
 
 type SocketCreateManyOutput {
   result: Socket
-  root: Chat
 }
 
 type SocketCreateOutput {
   result: Socket
-  root: Chat
 }
 
 type SocketGetConnectionConnection {
@@ -1506,7 +1496,6 @@ input SocketGetConnectionInput {
 
 type SocketGetConnectionOutput {
   result: SocketGetConnectionConnection
-  root: Chat
 }
 
 input SocketGetFilterInput {
@@ -1545,19 +1534,16 @@ input SocketGetManyInput {
 
 type SocketGetManyOutput {
   result: [Socket]
-  root: Chat
 }
 
 type SocketGetOutput {
   result: Socket
-  root: Chat
 }
 
 input SocketInput {
-  Chat: ChatInput
   _id: String
   created: DateTime
-  id: String
+  externalId: String
   name: String
 }
 
@@ -1580,7 +1566,6 @@ input SocketRemoveInput {
 
 type SocketRemoveOutput {
   result: Socket
-  root: Chat
 }
 
 input SocketUpdateFilterInput {
@@ -1603,14 +1588,12 @@ input SocketUpdateInput {
 
 type SocketUpdateOutput {
   result: Socket
-  root: Chat
 }
 
 input SocketUpdateUpdateInput {
-  Chat: ChatInput
   _id: String
   created: DateTime
-  id: String
+  externalId: String
   name: String
 }
 
@@ -2200,7 +2183,7 @@ type linkedUser {
   User: User
   _id: String
   created: DateTime
-  id: String
+  externalId: String
   type: String
 }
 
@@ -2208,7 +2191,7 @@ input linkedUserCreateFormInput {
   User: UserInput
   _id: String
   created: DateTime
-  id: String
+  externalId: String
   type: String
 }
 
@@ -2221,7 +2204,7 @@ input linkedUserCreateManyFormInput {
   User: UserInput
   _id: String
   created: DateTime
-  id: String
+  externalId: String
   type: String
 }
 
@@ -2321,7 +2304,7 @@ input linkedUserInput {
   User: UserInput
   _id: String
   created: DateTime
-  id: String
+  externalId: String
   type: String
 }
 
@@ -2374,6 +2357,6 @@ input linkedUserUpdateUpdateInput {
   User: UserInput
   _id: String
   created: DateTime
-  id: String
+  externalId: String
   type: String
 }

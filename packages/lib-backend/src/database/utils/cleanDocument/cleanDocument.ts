@@ -13,8 +13,8 @@ const resolveObjectId = <TType extends unknown>(value: TType): TType =>
   (isString(value)
     ? new ObjectId(value)
     : isPlainObject(value)
-    ? reduce(value as object, (result, v, k) => ({ ...result, [k]: resolveObjectId(v) }), {})
-    : value) as TType;
+      ? reduce(value as object, (result, v, k) => ({ ...result, [k]: resolveObjectId(v) }), {})
+      : value) as TType;
 
 export const cleanDocument = <TType extends unknown>(value: TType): TType =>
   cleanObject(value, {
@@ -27,10 +27,10 @@ export const cleanDocument = <TType extends unknown>(value: TType): TType =>
         isPlainObject(vF) && isEqual(Object.keys(vF as object), ['_id'])
           ? resolveObjectId((vF as EntityResourceModel)._id)
           : isString(vF) && last(k.split('.'))?.startsWith('_')
-          ? isArray(vF)
-            ? vF.map(resolveObjectId)
-            : new ObjectId(vF)
-          : vF
+            ? isArray(vF)
+              ? vF.map(resolveObjectId)
+              : new ObjectId(vF)
+            : vF
       ) as TValue;
     },
   });

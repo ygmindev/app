@@ -8,7 +8,9 @@ export type LinkedUserTypeModel = `${LINKED_USER_TYPE}`;
 
 export type LinkedUserModel = EmbeddedResourceModel & {
   [USER_RESOURCE_NAME]?: UserModel;
-  id: string;
+
+  externalId: string;
+
   type: LinkedUserTypeModel;
 };
 

@@ -15,7 +15,7 @@ import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLa
 import { FONT_ALIGN } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { AUTH } from '#lib-shared/auth/auth.constants';
 import { type HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
-import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
+import { HTTP_STATUS_CODE } from '#lib-shared/http/http.constants';
 
 export const OtpForm: LFCModel<OtpFormPropsModel> = ({
   data,

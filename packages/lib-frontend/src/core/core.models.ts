@@ -85,7 +85,6 @@ export type OptionModel<TType extends string = string> = WithIdModel<TType> &
   Pick<ButtonPropsModel, 'color' | 'onPress' | 'elementState' | 'confirmMessage'> & {
     category?: string;
     image?: string;
-    isDivider?: boolean;
     label?: string;
   };
 

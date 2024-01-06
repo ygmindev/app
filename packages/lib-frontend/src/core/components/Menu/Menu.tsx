@@ -1,18 +1,9 @@
-import { type ReactElement, type RefObject } from 'react';
-import {
-  cloneElement,
-  createRef,
-  forwardRef,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { type ReactElement } from 'react';
+import { cloneElement, forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { type ScrollView } from 'react-native';
 
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
-import { Divider } from '#lib-frontend/core/components/Divider/Divider';
 import { Dropdown } from '#lib-frontend/core/components/Dropdown/Dropdown';
 import { type DropdownRefModel } from '#lib-frontend/core/components/Dropdown/Dropdown.models';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
@@ -29,9 +20,10 @@ import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type RLFCModel } from '#lib-frontend/core/core.models';
 import { useIsMobile } from '#lib-frontend/core/hooks/useIsMobile/useIsMobile';
+import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { FLEX_ALIGN } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import { FONT_ALIGN } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 export const Menu: RLFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
   (
@@ -43,7 +35,7 @@ export const Menu: RLFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
       onChange,
       options,
       renderOption,
-      topElement,
+      title,
       value,
       width,
       ...props
@@ -63,31 +55,10 @@ export const Menu: RLFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
       toggle: (params) => dropdownRef.current?.toggle(params),
     }));
 
-    const subMenuRefs = useMemo(
-      () =>
-        options.reduce(
-          (result, option) =>
-            option.subOptions ? { ...result, [option.id]: createRef<MenuRefModel>() } : result,
-          {} as Record<string, RefObject<MenuRefModel>>,
-        ),
-      [options],
-    );
+    const handleToggle = (isActive?: boolean): void => isOpenSet(!!isActive);
 
-    const handleToggle = (isActive?: boolean): void => {
-      Object.values(subMenuRefs).forEach((v) => v.current?.toggle(false));
-      isOpenSet(!!isActive);
-    };
-
-    const handlePressOption = async ({
-      id,
-      onPress,
-      subOptions,
-    }: MenuOptionModel): Promise<void> => {
-      if (subOptions) {
-        subMenuRefs[id].current?.toggle(true);
-      } else {
-        (onPress && (await onPress())) || (onChange && onChange(id));
-      }
+    const handlePressOption = async ({ id, onPress }: MenuOptionModel): Promise<void> => {
+      (onPress && (await onPress())) || (onChange && onChange(id));
       handleToggle(false);
     };
 
@@ -104,51 +75,29 @@ export const Menu: RLFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
     });
 
     const children = (
-      <Wrapper
-        flex
-        isFullWidth
-        s={THEME_SIZE.SMALL}>
-        {topElement}
-
-        {options.length && (
-          <VirtualizedList
-            items={options}
-            ref={virtualizedListRef}
-            render={(option: MenuOptionModel) => {
-              if (option.isDivider) {
-                return <Divider key={option.id} />;
-              }
-              const { color, confirmMessage, elementState, icon, id, label, subOptions } = option;
-              const optionF = (isActive?: boolean): ReactElement => (
-                <Button
-                  align={FLEX_ALIGN.START}
-                  color={color}
-                  confirmMessage={confirmMessage}
-                  elementState={isActive ? ELEMENT_STATE.ACTIVE : elementState}
-                  icon={icon}
-                  isFullWidth
-                  key={id}
-                  onPress={subOptions ? undefined : async () => handlePressOption(option)}
-                  onPressOut={() => confirmMessage && handleToggle(false)}
-                  rightElement={value && id === value ? <Icon icon="check" /> : undefined}
-                  type={BUTTON_TYPE.INVISIBLE}>
-                  {(renderOption ? renderOption(option) : label) ?? id}
-                </Button>
-              );
-              return subOptions ? (
-                <Menu
-                  anchor={optionF}
-                  direction={DIRECTION.LEFT}
-                  key={id}
-                  options={subOptions}
-                  ref={subMenuRefs[id]}
-                />
-              ) : (
-                optionF()
-              );
-            }}
-          />
-        )}
+      <Wrapper pVertical={THEME_SIZE.SMALL}>
+        <VirtualizedList
+          items={options}
+          ref={virtualizedListRef}
+          render={(option: MenuOptionModel) => {
+            const { color, confirmMessage, icon, id, label } = option;
+            return (
+              <Button
+                color={color}
+                confirmMessage={confirmMessage}
+                elementState={option.elementState}
+                icon={icon}
+                isFullWidth
+                key={id}
+                onPress={() => handlePressOption(option)}
+                rightElement={value && id === value ? <Icon icon="check" /> : undefined}
+                type={BUTTON_TYPE.INVISIBLE}>
+                {(renderOption ? renderOption(option) : label) ?? id}
+              </Button>
+            );
+          }}
+          s={THEME_SIZE.SMALL}
+        />
       </Wrapper>
     );
 
@@ -160,7 +109,8 @@ export const Menu: RLFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
           {...wrapperProps}
           isFullSize={false}
           isOpen={isOpen}
-          onToggle={handleToggle}>
+          onToggle={handleToggle}
+          title={title}>
           {children}
         </Modal>
       </>
@@ -174,6 +124,14 @@ export const Menu: RLFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
         onToggle={handleToggle}
         ref={dropdownRef}
         width={width}>
+        {title && (
+          <Wrapper
+            border={DIRECTION.BOTTOM}
+            p>
+            <TranslatableText align={FONT_ALIGN.CENTER}>{title}</TranslatableText>
+          </Wrapper>
+        )}
+
         {children}
       </Dropdown>
     );

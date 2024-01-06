@@ -1,4 +1,4 @@
-import { type ReactElement, type ReactNode } from 'react';
+import { type ReactElement } from 'react';
 
 import {
   type DropdownPropsModel,
@@ -12,7 +12,7 @@ import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 export type MenuRefModel = DropdownRefModel;
 
 export type MenuOptionModel<TType extends string = string> = TranslatableOptionModel<TType> & {
-  subOptions?: Array<MenuOptionModel>;
+  isDivider?: boolean;
 };
 
 export type MenuPropsModel<TType extends string = string> = Pick<
@@ -23,5 +23,5 @@ export type MenuPropsModel<TType extends string = string> = Pick<
     anchor(isOpen?: boolean): ReactElement<PressablePropsModel>;
     options: Array<MenuOptionModel<TType>>;
     renderOption?(option: MenuOptionModel<TType>): TranslatableTextModel;
-    topElement?: ReactNode;
+    title?: TranslatableTextModel;
   };

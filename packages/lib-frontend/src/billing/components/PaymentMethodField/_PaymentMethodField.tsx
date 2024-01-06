@@ -71,7 +71,7 @@ const StripeField: RLFCModel<PaymentMethodFieldRefModel, _PaymentMethodFieldProp
               case 'us_bank_account': {
                 return (
                   us_bank_account && {
-                    id,
+                    externalId: id,
                     last4: us_bank_account.last4,
                     name: us_bank_account.bank_name,
                     type: PAYMENT_METHOD_TYPE.BANK,
@@ -83,8 +83,8 @@ const StripeField: RLFCModel<PaymentMethodFieldRefModel, _PaymentMethodFieldProp
                   card && {
                     expMonth: card.exp_month,
                     expYear: card.exp_year,
+                    externalId: id,
                     funding: card.funding as CardFundingModel,
-                    id,
                     last4: card.last4,
                     name: card.brand,
                     type: PAYMENT_METHOD_TYPE.CARD,
@@ -101,7 +101,7 @@ const StripeField: RLFCModel<PaymentMethodFieldRefModel, _PaymentMethodFieldProp
 
     return (
       <PaymentElement
-        id={defaultValue?.id}
+        id={defaultValue?.externalId}
         options={{ layout: { type: 'tabs' } } as StripePaymentElementOptions}
       />
     );

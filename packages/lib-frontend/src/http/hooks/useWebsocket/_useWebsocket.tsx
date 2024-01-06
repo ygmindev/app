@@ -1,30 +1,27 @@
-import useWebSocket from 'react-use-websocket';
+import { useSocketIO } from 'react-use-websocket';
 
-import { useAsync } from '#lib-frontend/core/hooks/useAsync/useAsync';
 import {
   type _UseWebsocketModel,
   type _UseWebsocketParamsModel,
 } from '#lib-frontend/http/hooks/useWebsocket/_useWebsocket.models';
-import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 import { WEBSOCKET_STATUS } from '#lib-shared/http/http.constants';
 
-export const _useWebsocket = ({
+export const _useWebsocket = <TType,>({
   onClose,
+  onMessage,
   onOpen,
   url,
-}: _UseWebsocketParamsModel): _UseWebsocketModel => {
-  const { lastMessage, readyState, sendMessage } = useWebSocket(url, {
+}: _UseWebsocketParamsModel<TType>): _UseWebsocketModel<TType> => {
+  const { getWebSocket, readyState, sendMessage } = useSocketIO(url, {
     onClose,
     onMessage: (event) => {
       console.warn(event);
     },
     onOpen: console.warn,
+    reconnectAttempts: 0,
+    retryOnError: false,
+    shouldReconnect: () => false,
   });
-
-  useAsync(async (isActive) => {
-    await sleep(5000);
-    isActive() && sendMessage('test');
-  }, []);
 
   const status = (() => {
     switch (readyState as number) {
@@ -36,5 +33,6 @@ export const _useWebsocket = ({
         return WEBSOCKET_STATUS.CLOSED;
     }
   })();
-  return { send: sendMessage, status };
+
+  return { getWebSocket, send: sendMessage, status };
 };

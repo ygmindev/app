@@ -30,7 +30,7 @@ import { type OtpFormModel, type OtpModel } from '#lib-shared/auth/resources/Otp
 import { pick } from '#lib-shared/core/utils/pick/pick';
 import { FORM_MODE } from '#lib-shared/data/data.constants';
 import { type HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
-import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
+import { HTTP_STATUS_CODE } from '#lib-shared/http/http.constants';
 import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({

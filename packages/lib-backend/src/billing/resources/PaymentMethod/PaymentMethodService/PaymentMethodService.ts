@@ -35,7 +35,7 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
     if (input.root) {
       const fields: Array<StringKeyModel<PaymentMethodModel>> = [
         '_id',
-        'id',
+        'externalId',
         'last4',
         'name',
         'type',
@@ -67,7 +67,7 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
     if (input?.root) {
       let { result: linkedUser } = await this.linkedUserService.get({
         filter: [{ field: 'type', value: LINKED_USER_TYPE.STRIPE }],
-        options: { project: { _id: true, id: true } },
+        options: { project: { _id: true, externalId: true } },
         root: input.root,
       });
       if (!linkedUser) {
@@ -79,7 +79,9 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
         linkedUserNew && (linkedUser = linkedUserNew);
       }
       if (linkedUser) {
-        const result = linkedUser.id && (await this.stripeAdminService.createIntent(linkedUser.id));
+        const result =
+          linkedUser.externalId &&
+          (await this.stripeAdminService.createIntent(linkedUser.externalId));
         return { result };
       }
       throw new NotFoundError('linked user');

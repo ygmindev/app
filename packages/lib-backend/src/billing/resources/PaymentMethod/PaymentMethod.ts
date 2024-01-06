@@ -15,7 +15,7 @@ export class PaymentMethod extends EmbeddedResource {
   [USER_RESOURCE_NAME]!: UserModel;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  id!: string;
+  externalId!: string;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   last4!: string;

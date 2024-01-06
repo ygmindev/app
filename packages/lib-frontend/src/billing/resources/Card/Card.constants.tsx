@@ -11,7 +11,7 @@ export const CARD_RESOURCE_PARAMS = {
     { id: 'expMonth' },
     { id: 'expYear' },
     { id: 'funding' },
-    { id: 'id' },
+    { id: 'externalId' },
     { id: 'last4' },
   ],
   name: CARD_RESOURCE_NAME,

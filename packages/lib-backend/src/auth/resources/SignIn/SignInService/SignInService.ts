@@ -21,7 +21,7 @@ import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 import { pick } from '#lib-shared/core/utils/pick/pick';
 import { withInject } from '#lib-shared/core/utils/withInject/withInject';
 import { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
-import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
+import { HTTP_STATUS_CODE } from '#lib-shared/http/http.constants';
 import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';

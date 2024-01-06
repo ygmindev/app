@@ -105,6 +105,7 @@ export class _Database implements _DatabaseModel {
         try {
           const em = this._getEntityManager();
           const formF = cleanDocument(form);
+          console.warn(formF);
           const result = em.create(name, formF as object);
           !options?.isCommitted && (await em.persistAndFlush(result));
           return { result: result as PartialModel<TType> };

@@ -15,3 +15,10 @@ export type CreateLambdaHandlerModel = _CreateLambdaHandlerModel;
 export type LambdaTypeModel = `${LAMBDA_TYPE}`;
 
 export type LambdaPluginModel = `${LAMBDA_PLUGIN}`;
+
+export type LambdaResponseModel = {
+  body?: unknown;
+  headers?: object;
+  requestId?: string;
+  statusCode?: number;
+};

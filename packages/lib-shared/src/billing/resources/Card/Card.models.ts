@@ -14,9 +14,9 @@ export type CardModel = EmbeddedResourceModel & {
 
   expYear: number;
 
-  funding: CardFundingModel;
+  externalId: string;
 
-  id: string;
+  funding: CardFundingModel;
 
   last4: string;
 

@@ -10,17 +10,12 @@ import {
 import { type RSFCPropsModel, type SFCPropsModel } from '#lib-frontend/core/core.models';
 import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { getSpacing } from '#lib-frontend/style/utils/styler/spacingStyler/spacingStyler';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
 export const VirtualizedList = forwardRef(
   <TType extends WithIdModel>(
-    {
-      isHorizontal,
-      s = THEME_SIZE.SMALL,
-      ...props
-    }: SFCPropsModel<VirtualizedListPropsModel<TType>>,
+    { isHorizontal, s, ...props }: SFCPropsModel<VirtualizedListPropsModel<TType>>,
     ref: ForwardedRef<VirtualizedListRefModel>,
   ): ReactElement<RSFCPropsModel<VirtualizedListPropsModel<TType>>> => {
     const { styles } = useStyles({ props });

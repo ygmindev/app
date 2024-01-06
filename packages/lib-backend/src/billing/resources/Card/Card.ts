@@ -25,10 +25,10 @@ export class Card extends EmbeddedResource implements CardModel {
   expYear!: number;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  funding!: CardFundingModel;
+  externalId!: string;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  id!: string;
+  funding!: CardFundingModel;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   last4!: string;

@@ -7,7 +7,7 @@ import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 export type BankModel = EmbeddedResourceModel & {
   [USER_RESOURCE_NAME]: UserModel;
 
-  id: string;
+  externalId: string;
 
   last4: string;
 

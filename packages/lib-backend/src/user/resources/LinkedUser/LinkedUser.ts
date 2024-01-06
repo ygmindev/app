@@ -18,7 +18,7 @@ export class LinkedUser extends EmbeddedResource implements LinkedUserModel {
   [USER_RESOURCE_NAME]!: UserModel;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  id!: string;
+  externalId!: string;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   type!: LinkedUserTypeModel;

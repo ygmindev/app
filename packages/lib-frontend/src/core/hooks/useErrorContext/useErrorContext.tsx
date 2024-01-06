@@ -7,7 +7,7 @@ import { type UseErrorContextModel } from '#lib-frontend/core/hooks/useErrorCont
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
 import { type HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
-import { HTTP_STATUS_CODE } from '#lib-shared/http/errors/HttpError/HttpError.constants';
+import { HTTP_STATUS_CODE } from '#lib-shared/http/http.constants';
 import { error } from '#lib-shared/logging/utils/logger/logger';
 
 export const useErrorContext = (): UseErrorContextModel => {

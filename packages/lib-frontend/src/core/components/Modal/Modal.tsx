@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle } from 'react';
+import { forwardRef, useImperativeHandle, useState } from 'react';
 
 import {
   ANIMATION_STATES_APPEARABLE_OPAQUE,
@@ -15,19 +15,20 @@ import {
 import { Portal } from '#lib-frontend/core/components/Portal/Portal';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { CORNER, DIRECTION, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type RLFCModel } from '#lib-frontend/core/core.models';
+import { type MeasureModel, type RLFCModel } from '#lib-frontend/core/core.models';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { isTranslatableText } from '#lib-frontend/locale/utils/isTranslatableText/isTranslatableText';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR_MORE, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { FONT_TYPE } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
   ({ children, height, isFullSize, isOpen, onToggle, title, width }, ref) => {
     const [deviceHeight] = useStore('app.dimension.height');
+    const [measure, measureSet] = useState<MeasureModel>();
+
     const { valueControlled, valueControlledSet } = useValueControlled({
       defaultValue: false,
       onChange: onToggle,
@@ -35,11 +36,12 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
     });
 
     const theme = useTheme();
+    const heightF = isFullSize
+      ? (deviceHeight ?? 0) - theme.shape.spacing[THEME_SIZE.MEDIUM]
+      : height ?? measure?.height;
 
     useImperativeHandle(ref, () => ({ toggle: valueControlledSet }));
-
     const elementStateF = valueControlled ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE;
-
     return (
       <Portal>
         <Exitable>
@@ -54,48 +56,50 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
                 onPress={() => valueControlledSet(false)}
               />
 
-              <Wrapper
-                animation={{
-                  isInitial: true,
-                  states: ANIMATION_STATES_SLIDABLE_VERTICAL({ height: deviceHeight }),
-                }}
-                backgroundColor={THEME_COLOR_MORE.SURFACE}
-                elementState={elementStateF}
-                flex={isFullSize}
-                height={
-                  isFullSize ? (deviceHeight ?? 0) - theme.shape.spacing[THEME_SIZE.MEDIUM] : height
-                }
-                isFullWidth
-                isShadow
-                position={SHAPE_POSITION.ABSOLUTE}
-                round={{ [CORNER.TOP_LEFT]: true, [CORNER.TOP_RIGHT]: true }}
-                width={width}>
-                <KeyboardContainer>
-                  <Wrapper
-                    border={DIRECTION.BOTTOM}
-                    isRowAlign
-                    pHorizontal
-                    pVertical={THEME_SIZE.SMALL}>
-                    {title && (
-                      <Wrapper flex>
-                        {isTranslatableText(title) ? (
-                          <TranslatableText type={FONT_TYPE.TITLE}>{title}</TranslatableText>
-                        ) : (
-                          title
-                        )}
-                      </Wrapper>
-                    )}
+              {deviceHeight && (
+                <Wrapper
+                  animation={{
+                    isInitial: true,
+                    states: ANIMATION_STATES_SLIDABLE_VERTICAL({ deviceHeight, height: heightF }),
+                  }}
+                  backgroundColor={THEME_COLOR_MORE.SURFACE}
+                  elementState={elementStateF}
+                  flex={isFullSize}
+                  height={heightF}
+                  isFullWidth
+                  isShadow
+                  onMeasure={measureSet}
+                  p
+                  position={SHAPE_POSITION.ABSOLUTE}
+                  round={{ [CORNER.TOP_LEFT]: true, [CORNER.TOP_RIGHT]: true }}
+                  width={width}>
+                  <KeyboardContainer>
+                    <Wrapper
+                      border={DIRECTION.BOTTOM}
+                      isRowAlign
+                      pHorizontal
+                      pVertical={THEME_SIZE.SMALL}>
+                      {title && (
+                        <Wrapper flex>
+                          {isTranslatableText(title) ? (
+                            <TranslatableText>{title}</TranslatableText>
+                          ) : (
+                            title
+                          )}
+                        </Wrapper>
+                      )}
 
-                    <Button
-                      icon="times"
-                      onPress={() => valueControlledSet(false)}
-                      type={BUTTON_TYPE.INVISIBLE}
-                    />
-                  </Wrapper>
+                      <Button
+                        icon="times"
+                        onPress={() => valueControlledSet(false)}
+                        type={BUTTON_TYPE.INVISIBLE}
+                      />
+                    </Wrapper>
 
-                  <Wrapper flex>{children}</Wrapper>
-                </KeyboardContainer>
-              </Wrapper>
+                    <Wrapper flex>{children}</Wrapper>
+                  </KeyboardContainer>
+                </Wrapper>
+              )}
             </>
           )}
         </Exitable>
