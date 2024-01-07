@@ -1,12 +1,11 @@
 import {
   type CaseReducer,
   type CaseReducerActions,
-  type CombinedState,
   type EnhancedStore,
   original,
-  type PreloadedState,
   type Reducer,
   type SliceCaseReducers,
+  type UnknownAction,
 } from '@reduxjs/toolkit';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import cloneDeep from 'lodash/cloneDeep';
@@ -18,7 +17,7 @@ import mapValues from 'lodash/mapValues';
 import reduce from 'lodash/reduce';
 import uniq from 'lodash/uniq';
 import { cloneElement, type ComponentType, type ReactElement, useMemo } from 'react';
-import { type NoInfer, Provider as _Provider, useDispatch } from 'react-redux';
+import { Provider as _Provider, useDispatch } from 'react-redux';
 import { type PersistConfig, type Persistor } from 'redux-persist';
 import {
   FLUSH,
@@ -64,7 +63,7 @@ const StoreContextProvider = <
 > => {
   const dispatch = useDispatch();
   const actionsF = mapValues(actions, (actions) =>
-    mapValues(actions, (action) => (value: unknown) => dispatch(action(value))),
+    mapValues(actions, (action) => (value: unknown) => dispatch(action(value) as UnknownAction)),
   ) as NestedActionsModel<TKeys, TType, TParams>;
 
   const providers = useMemo<Array<ReactElement>>(
@@ -165,10 +164,7 @@ export class _Store<
           },
         );
 
-        const { actions, reducer: reducerF } = createSlice<
-          StateModel,
-          SliceCaseReducers<StateModel>
-        >({
+        const { actions, reducer: reducerF } = createSlice({
           initialState: storeInitialState,
           name,
           reducers: mapValues(
@@ -239,7 +235,7 @@ export class _Store<
             ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
           },
         }),
-      preloadedState: initialState as PreloadedState<CombinedState<NoInfer<TType>>>,
+      preloadedState: initialState as TType,
       reducer: reducersF,
     });
     this.persistor = persistStore(this.store);

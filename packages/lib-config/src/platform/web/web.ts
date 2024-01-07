@@ -13,7 +13,7 @@ const { _config, config } = defineConfig({
 
       bundleConfig: _bundleConfig,
 
-      configFile: 'web.js',
+      configFile: 'web.ts',
 
       isSsr: true,
     }) satisfies WebConfigModel,

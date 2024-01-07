@@ -9,7 +9,13 @@ const { _config, config } = defineConfig({
 
   overrides: [
     {
-      plugins: [],
+      plugins: [
+        'react-native-web',
+        // For react-native-reanimated
+        // https://docs.swmansion.com/react-native-reanimated/docs/guides/web-support
+        '@babel/plugin-proposal-export-namespace-from',
+        // 'react-native-reanimated/plugin',
+      ],
     },
   ],
 });

@@ -19,7 +19,7 @@ const { _config, config } = defineConfig({
         // 'react-dom': 'preact/compat',
         // 'react-dom/test-utils': 'preact/test-utils',
         // 'react/jsx-runtime': 'preact/jsx-runtime',
-        'react/jsx-runtime': fromModules('react/cjs/react-jsx-runtime.production.min.js'),
+        // 'react/jsx-runtime': fromModules('react/cjs/react-jsx-runtime.production.min.js'),
       },
 
       babelConfig: _babelConfig,
@@ -40,7 +40,6 @@ const { _config, config } = defineConfig({
         'inline-style-prefixer',
         'react/jsx-runtime',
         'react-native',
-        'react-native-gifted-chat',
         'redux-persist',
         'react-use',
         'thenby',

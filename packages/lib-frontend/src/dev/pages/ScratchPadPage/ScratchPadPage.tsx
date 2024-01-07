@@ -1,9 +1,8 @@
-import { Button } from '#lib-frontend/core/components/Button/Button';
+import { RoutesField } from '#lib-frontend/aroom/components/RoutesField/RoutesField';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '#lib-frontend/core/core.models';
 import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
 import { StepForm } from '#lib-frontend/data/components/StepForm/StepForm';
-import { TextField } from '#lib-frontend/data/components/TextField/TextField';
 import { type ScratchPadPagePropsModel } from '#lib-frontend/dev/pages/ScratchPadPage/ScratchPadPage.models';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -21,16 +20,10 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
           {
             element: (
               <FormContainer
-                bottomElement={() => <Button>{t('core:addStop')}</Button>}
                 fields={[
                   {
-                    element: (
-                      <TextField
-                        icon="location"
-                        label={t('Stop')}
-                      />
-                    ),
-                    id: 'from',
+                    element: <RoutesField />,
+                    id: 'stops',
                   },
                 ]}
               />

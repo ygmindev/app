@@ -9,8 +9,10 @@ export const _useMutation = <TParams = undefined, TResult = void>(
   ...[id, callback]: _UseMutationParamsModel<TParams, TResult>
 ): _UseMutationModel<TParams, TResult> => {
   const queryClient = useQueryClient();
-  const { data, mutate } = useMutation([id], callback, {
-    onMutate: async () => queryClient.cancelQueries([id]),
+  const { data, mutate } = useMutation({
+    mutationFn: callback,
+    mutationKey: [id],
+    onMutate: async () => queryClient.cancelQueries({ queryKey: [id] }),
   });
   return {
     data,

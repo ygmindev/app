@@ -15,10 +15,11 @@ export class _QueryClient implements _QueryClientModel {
 
     if (!isServer) {
       const persister = createAsyncStoragePersister({ storage: AsyncStorage });
-      persistQueryClient({
+      void persistQueryClient({
         dehydrateOptions: {
-          shouldDehydrateMutation: ({ cacheTime }) => cacheTime > 0,
-          shouldDehydrateQuery: ({ cacheTime }) => cacheTime > 0,
+          // TODO: fix
+          // shouldDehydrateMutation: ({ cacheTime }) => cacheTime > 0,
+          // shouldDehydrateQuery: ({ cacheTime }) => cacheTime > 0,
         },
         persister,
         queryClient: this._client,

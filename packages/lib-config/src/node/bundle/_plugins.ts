@@ -1,4 +1,5 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
+// import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
 import { type UserConfig } from 'vite';
 
@@ -15,6 +16,8 @@ export const _plugins = ({
 }: Pick<BundleConfigModel, 'transpiles'> = {}): PluginsModel =>
   filterNil([
     esbuildDecorators({ tsconfig: fromWorking('tsconfig.json') }),
+
+    // transpiles && esbuildCommonjs(transpiles),
 
     process.env.ENV_PLATFORM === PLATFORM.NODE &&
       nodeExternalsPlugin({ allowList: transpiles, packagePath: fromRoot('package.json') }),
