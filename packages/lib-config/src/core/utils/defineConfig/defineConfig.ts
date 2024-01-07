@@ -53,11 +53,14 @@ export const defineConfig = <
                   ...(overrides ? (overrides as () => Array<PartialDeepModel<TParams>>)() : []),
                 ],
                 strategy,
-              } as Pick<DefineConfigParamsModel<TParams, TParamsConfig, TResult>, 'config' | 'overrides' | 'strategy'>),
+              } as Pick<
+                DefineConfigParamsModel<TParams, TParamsConfig, TResult>,
+                'config' | 'overrides' | 'strategy'
+              >),
             )
         : _config(getConfigs({ config, overrides, strategy }))
       : undefined,
     config: isFunction(config)
       ? () => getConfigs({ config, overrides, strategy })
       : getConfigs({ config, overrides, strategy }),
-  } as DefineConfigModel<TParams, TParamsConfig, TResult>);
+  }) as DefineConfigModel<TParams, TParamsConfig, TResult>;

@@ -1,32 +1,55 @@
-import { type ForwardedRef, type ReactElement } from 'react';
-import { forwardRef } from 'react';
-import { View } from 'react-native';
+import { type ReactElement } from 'react';
 
+import { Button } from '#lib-frontend/core/components/Button/Button';
 import { _DraggableList } from '#lib-frontend/core/components/DraggableList/_DraggableList';
-import {
-  type DraggableListPropsModel,
-  type DraggableListRefModel,
-} from '#lib-frontend/core/components/DraggableList/DraggableList.models';
-import { type RLFCPropsModel } from '#lib-frontend/core/core.models';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { type DraggableListPropsModel } from '#lib-frontend/core/components/DraggableList/DraggableList.models';
+import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import { type LFCPropsModel } from '#lib-frontend/core/core.models';
+import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
+import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { getSpacing } from '#lib-frontend/style/utils/styler/spacingStyler/spacingStyler';
+import { THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
 
-export const DraggableList = forwardRef(
-  <TType extends WithIdModel>(
-    { s, ...props }: RLFCPropsModel<DraggableListRefModel, DraggableListPropsModel<TType>>,
-    ref: ForwardedRef<DraggableListRefModel>,
-  ): ReactElement<RLFCPropsModel<DraggableListRefModel, DraggableListPropsModel<TType>>> => {
-    const { styles } = useStyles({ props });
-    const theme = useTheme();
-    return (
+export const DraggableList = <TType extends WithIdModel>({
+  defaultValue,
+  element,
+  onChange,
+  value,
+  ...props
+}: LFCPropsModel<DraggableListPropsModel<TType>>): ReactElement<
+  LFCPropsModel<DraggableListPropsModel<TType>>
+> => {
+  const { wrapperProps } = useLayoutStyles({ props });
+  const { valueControlled, valueControlledSet } = useValueControlled({
+    defaultValue,
+    onChange,
+    value,
+  });
+  const theme = useTheme();
+  return (
+    <Wrapper {...wrapperProps}>
       <_DraggableList
-        {...props}
-        divider={s ? <View style={{ height: getSpacing(s, theme) }} /> : undefined}
-        ref={ref}
-        style={styles}
+        anchor={(isActive) => (
+          <Button
+            elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
+            icon={isActive ? 'fist' : 'hand'}
+          />
+        )}
+        onChange={valueControlledSet}
+        render={({ anchor, isActive, item }) => (
+          <Wrapper
+            isRowAlign
+            opacity={isActive ? theme.opaque[THEME_SIZE.MEDIUM] : 1}>
+            {anchor}
+
+            {element({ isActive, item })}
+          </Wrapper>
+        )}
+        spacing={theme.shape.spacing[THEME_SIZE.MEDIUM]}
+        value={valueControlled}
       />
-    );
-  },
-);
+    </Wrapper>
+  );
+};

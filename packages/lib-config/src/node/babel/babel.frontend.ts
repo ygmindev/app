@@ -9,7 +9,10 @@ const { _config, config } = defineConfig({
 
   overrides: [
     {
-      plugins: [['transform-react-remove-prop-types', { removeImport: false }]],
+      plugins: [
+        ['transform-react-remove-prop-types', { removeImport: true }],
+        // 'react-native-reanimated/plugin',
+      ],
 
       presets: ['@babel/preset-react', '@babel/preset-flow', '@babel/preset-typescript'],
       // presets: ['module:metro-react-native-babel-preset'],

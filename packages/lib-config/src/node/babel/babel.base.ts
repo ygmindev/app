@@ -7,7 +7,6 @@ const { _config, config } = defineConfig({
 
   config: {
     plugins: [
-      // ['@babel/plugin-proposal-decorators', { legacy: true }],
       '@babel/plugin-transform-runtime',
       ['@babel/plugin-transform-private-methods', { loose: true }],
       '@babel/plugin-transform-class-static-block',
@@ -15,12 +14,7 @@ const { _config, config } = defineConfig({
       ['@babel/plugin-proposal-object-rest-spread', { loose: true }],
     ],
 
-    presets: [
-      [
-        '@babel/preset-env',
-        { loose: true, modules: false, targets: { node: 'current' }, useBuiltIns: 'usage' },
-      ],
-    ],
+    presets: [['@babel/preset-env', { loose: true, targets: { node: 'current' } }]],
   } satisfies BabelConfigModel,
 });
 

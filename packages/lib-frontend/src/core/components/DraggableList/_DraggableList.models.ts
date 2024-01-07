@@ -1,10 +1,9 @@
 import { type ReactElement } from 'react';
-import { type FlatList } from 'react-native-gesture-handler';
 
-export type _DraggableListPropsModel<TType> = {
-  divider?: ReactElement;
-  items: Array<TType>;
-  render(params: { handleDrag: () => void; isActive: boolean; item: TType }): ReactElement;
+import { type ValuePropsModel } from '#lib-frontend/data/data.models';
+
+export type _DraggableListPropsModel<TType> = ValuePropsModel<Array<TType>> & {
+  anchor(isActive: boolean): ReactElement;
+  render(params: { anchor?: ReactElement; isActive?: boolean; item: TType }): ReactElement;
+  spacing: number;
 };
-
-export type _DraggableListRefModel = FlatList;

@@ -96,6 +96,7 @@ export const _bundle = ({
     process.env.ENV_PLATFORM,
   );
   const tsconfigDir = fromWorking(tsconfigPath);
+
   const config: _BundleConfigModel = {
     build: {
       assetsDir: joinPaths([fromWorking(), publicPath]),

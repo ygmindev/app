@@ -6,8 +6,10 @@ import {
 } from '#lib-frontend/aroom/components/RoutesField/RoutesField.models';
 import { Button } from '#lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
+import { DraggableList } from '#lib-frontend/core/components/DraggableList/DraggableList';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type RLFCModel } from '#lib-frontend/core/core.models';
+import { TextField } from '#lib-frontend/data/components/TextField/TextField';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -21,26 +23,21 @@ export const RoutesField: RLFCModel<RoutesFieldRefModel, RoutesFieldPropsModel> 
       onChange,
       value,
     });
-
     return (
       <Wrapper
         {...wrapperProps}
         s>
-        {/* <DraggableList
-          items={valueControlled ?? []}
-          render={({ handleDrag, isActive, item }) => (
-            <TouchableOpacity
-              disabled={isActive}
-              onLongPress={handleDrag}>
-              <TextField
-                elementState={isActive ? ELEMENT_STATE.DISABLED : undefined}
-                icon="location"
-                key={item.id}
-                label={item.id}
-              />
-            </TouchableOpacity>
+        <DraggableList
+          element={({ item }) => (
+            <TextField
+              icon="location"
+              key={item.id}
+              label={item.id}
+            />
           )}
-        /> */}
+          s
+          value={valueControlled ?? []}
+        />
 
         <Button
           icon="add"

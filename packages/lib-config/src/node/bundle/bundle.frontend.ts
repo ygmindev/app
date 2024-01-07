@@ -36,6 +36,7 @@ const { _config, config } = defineConfig({
         '@expo/react-native-action-sheet',
         'countries-list',
         'css-in-js-utils',
+        'moti_skeleton',
         'moti',
         'inline-style-prefixer',
         'react/jsx-runtime',
