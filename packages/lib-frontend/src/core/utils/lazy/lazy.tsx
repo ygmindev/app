@@ -1,16 +1,5 @@
-import { type ComponentType } from 'react';
-import { lazy as _lazy } from 'react';
+import { _lazy } from '#lib-frontend/core/utils/lazy/_lazy';
+import { type LazyModel, type LazyParamsModel } from '#lib-frontend/core/utils/lazy/lazy.models';
 
-import { type LazyParamsModel } from '#lib-frontend/core/utils/lazy/lazy.models';
-
-export const lazy = <TType extends object, TName extends keyof TType & string>(
-  loader: LazyParamsModel<TType>,
-): TType =>
-  new Proxy({} as unknown as TType, {
-    get: (_target: TType, name: TName) =>
-      typeof name === 'string'
-        ? _lazy(() =>
-            loader(name).then((module) => ({ default: module[name] as unknown as ComponentType })),
-          )
-        : null,
-  });
+export const lazy = <TType,>(params: LazyParamsModel<TType>): LazyModel<TType> =>
+  _lazy<TType>(params);

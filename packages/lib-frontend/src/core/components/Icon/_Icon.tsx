@@ -22,10 +22,10 @@ export const _Icon: SFCModel<_IconPropsModel, TextStyleModel> = forwardRef(
       const Component = (IONIC_ICONS as Record<string, string>)[icon]
         ? Ionicons
         : (FONTAWESOME_ICONS as Record<string, string>)[icon]
-        ? FontAwesome
-        : (MATERIAL_ICONS as Record<string, string>)[icon]
-        ? MaterialIcons
-        : null;
+          ? FontAwesome
+          : (MATERIAL_ICONS as Record<string, string>)[icon]
+            ? MaterialIcons
+            : null;
       return (
         Component && (
           <Component

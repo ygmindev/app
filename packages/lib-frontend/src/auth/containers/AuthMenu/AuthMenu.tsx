@@ -50,7 +50,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
         {
           icon: 'signin',
           id: SIGN_IN,
-          label: t('core:or', { value1: t('auth:signIn'), value2: t('auth:register') }),
+          label: `${t('auth:signIn')} ${t('core:or')} ${t('auth:register')}`,
           onPress: () => push({ pathname: SIGN_IN }),
         },
       ];

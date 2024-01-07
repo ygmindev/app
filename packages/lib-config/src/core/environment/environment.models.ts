@@ -5,12 +5,14 @@ import { type EnvironmentModel } from '#lib-shared/environment/environment.model
 
 export type EnvironmentConfigModel = {
   APP_AMPLITUDE_API_KEY: string;
+  APP_BINGMAPS_API_KEY: string;
   APP_FIREBASE_API_KEY: string;
   APP_FIREBASE_APP_ID: string;
   APP_FIREBASE_AUTH_DOMAIN: string;
   APP_FIREBASE_PROJECT_ID: string;
   APP_FIREBASE_SENDER_ID: string;
   APP_FIREBASE_STORAGE_BUCKET: string;
+  APP_GOOGLE_API_KEY: string;
   APP_HOST: string;
   APP_IS_DEBUG: BooleanStringModel;
   APP_IS_STATIC_SERVER: BooleanStringModel;
