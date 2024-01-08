@@ -75,29 +75,34 @@ export const Menu: RLFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
     });
 
     const children = (
-      <Wrapper pVertical={THEME_SIZE.SMALL}>
-        <VirtualizedList
-          items={options}
-          ref={virtualizedListRef}
-          render={(option: MenuOptionModel) => {
-            const { color, confirmMessage, icon, id, label } = option;
-            return (
-              <Button
-                color={color}
-                confirmMessage={confirmMessage}
-                elementState={option.elementState}
-                icon={icon}
-                isFullWidth
-                key={id}
-                onPress={() => handlePressOption(option)}
-                rightElement={value && id === value ? <Icon icon="check" /> : undefined}
-                type={BUTTON_TYPE.INVISIBLE}>
-                {(renderOption ? renderOption(option) : label) ?? id}
-              </Button>
-            );
-          }}
-          s={THEME_SIZE.SMALL}
-        />
+      <Wrapper
+        flex
+        isFullWidth
+        pVertical={THEME_SIZE.SMALL}>
+        {options.length && (
+          <VirtualizedList
+            items={options}
+            ref={virtualizedListRef}
+            render={(option: MenuOptionModel) => {
+              const { color, confirmMessage, icon, id, label } = option;
+              return (
+                <Button
+                  color={color}
+                  confirmMessage={confirmMessage}
+                  elementState={option.elementState}
+                  icon={icon}
+                  isFullWidth
+                  key={id}
+                  onPress={() => handlePressOption(option)}
+                  rightElement={value && id === value ? <Icon icon="check" /> : undefined}
+                  type={BUTTON_TYPE.INVISIBLE}>
+                  {(renderOption ? renderOption(option) : label) ?? id}
+                </Button>
+              );
+            }}
+            s={THEME_SIZE.SMALL}
+          />
+        )}
       </Wrapper>
     );
 
@@ -124,15 +129,17 @@ export const Menu: RLFCModel<MenuRefModel, MenuPropsModel> = forwardRef(
         onToggle={handleToggle}
         ref={dropdownRef}
         width={width}>
-        {title && (
-          <Wrapper
-            border={DIRECTION.BOTTOM}
-            p>
-            <TranslatableText align={FONT_ALIGN.CENTER}>{title}</TranslatableText>
-          </Wrapper>
-        )}
+        <Wrapper flex>
+          {title && (
+            <Wrapper
+              border={DIRECTION.BOTTOM}
+              p>
+              <TranslatableText align={FONT_ALIGN.CENTER}>{title}</TranslatableText>
+            </Wrapper>
+          )}
 
-        {children}
+          {children}
+        </Wrapper>
       </Dropdown>
     );
   },

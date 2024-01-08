@@ -54,7 +54,6 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
     placement: direction,
     whileElementsMounted: autoUpdate,
   });
-
   const click = useClick(context);
   const dismiss = useDismiss(context);
   const role = useRole(context);

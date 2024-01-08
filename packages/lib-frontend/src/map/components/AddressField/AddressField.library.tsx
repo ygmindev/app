@@ -1,0 +1,9 @@
+import { type LibraryPropsModel } from '#lib-library/core/components/Library/Library.models';
+import { AddressField } from '#lib-frontend/map/components/AddressField/AddressField';
+import { type AddressFieldPropsModel } from '#lib-frontend/map/components/AddressField/AddressField.models';
+
+export const props: LibraryPropsModel<AddressFieldPropsModel> = {
+  Component: AddressField,
+  defaultProps: {},
+  variants: [],
+};

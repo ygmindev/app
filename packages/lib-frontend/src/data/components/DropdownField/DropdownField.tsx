@@ -34,10 +34,12 @@ export const DropdownField = forwardRef(
       onChange,
       onFocus,
       onSubmit,
+      onTextChange,
       options,
       renderOption,
       renderValue,
       round,
+      textValue,
       value,
       width,
       ...props
@@ -63,6 +65,8 @@ export const DropdownField = forwardRef(
       onChange: () => menuRef.current?.scrollTo({ x: 0, y: 0 }),
     });
 
+    const optionsF = textValue ? result : options;
+
     const handleToggle = (isOpen?: boolean): void => {
       void sleep(100).then(() => {
         menuRef.current?.toggle(isOpen);
@@ -71,8 +75,8 @@ export const DropdownField = forwardRef(
     };
 
     const handleSelect = (): void => {
-      const queryValue = find(result, ({ id }) => lowerCase(query) === lowerCase(id));
-      const selected = queryValue ?? (result && result[0]);
+      const queryValue = find(optionsF, ({ id }) => lowerCase(query) === lowerCase(id));
+      const selected = queryValue ?? (optionsF && optionsF[0]);
       const selectedValue = selected.id;
       if (selectedValue) {
         valueControlledSet(selectedValue);
@@ -107,7 +111,7 @@ export const DropdownField = forwardRef(
               selectedOption && selectedOption.icon && <Icon icon={selectedOption.icon} />
             }
             onBlur={onBlur}
-            onChange={search}
+            onChange={onTextChange ?? search}
             onFocus={onFocus}
             onSubmit={handleSelect}
             ref={ref}
@@ -124,14 +128,14 @@ export const DropdownField = forwardRef(
               </AnimatableView>
             }
             round={round}
-            value={isOpen ? query : t(selectedLabel)}
+            value={isOpen ? textValue ?? query : t(selectedLabel)}
             width={width}
           />
         )}
         elementState={elementState}
         isFullWidth
         onChange={valueControlledSet}
-        options={result}
+        options={optionsF}
         ref={menuRef}
         renderOption={renderOption}
         value={valueControlled}

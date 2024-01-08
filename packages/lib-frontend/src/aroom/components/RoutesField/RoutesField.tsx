@@ -9,9 +9,9 @@ import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constan
 import { DraggableList } from '#lib-frontend/core/components/DraggableList/DraggableList';
 import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
 import { type RLFCModel } from '#lib-frontend/core/core.models';
-import { TextField } from '#lib-frontend/data/components/TextField/TextField';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { AddressField } from '#lib-frontend/map/components/AddressField/AddressField';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
 export const RoutesField: RLFCModel<RoutesFieldRefModel, RoutesFieldPropsModel> = forwardRef(
@@ -29,8 +29,7 @@ export const RoutesField: RLFCModel<RoutesFieldRefModel, RoutesFieldPropsModel> 
         s>
         <DraggableList
           element={({ item }, i) => (
-            <TextField
-              flex
+            <AddressField
               icon="location"
               key={item.id}
               label={

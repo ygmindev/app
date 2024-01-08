@@ -7,7 +7,9 @@ import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
 export type DropdownFieldPropsModel<TType extends string = string> = TextFieldPropsModel &
   Pick<MenuPropsModel<TType>, 'options' | 'renderOption'> &
   Omit<FieldPropsModel, 'label' | 'error'> & {
+    onTextChange?(value?: string): void;
     renderValue?(option: TranslatableOptionModel): TranslatableTextModel;
+    textValue?: string;
   };
 
 export type DropdownFieldRefModel<TType extends string = string> = FieldRefModel<TType>;
