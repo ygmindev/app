@@ -1,6 +1,6 @@
 import {
-type  _{{NAME}}(pascalCase)Model,
-  _{{NAME}}(pascalCase)ParamsModel,
+  type _{{NAME}}(pascalCase)Model,
+  type _{{NAME}}(pascalCase)ParamsModel,
 } from '{{PATH}}/{{NAME}}/_{{NAME}}.models';
 
 export type {{NAME}}(pascalCase)ParamsModel = _{{NAME}}(pascalCase)ParamsModel;

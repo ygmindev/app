@@ -1,0 +1,1 @@
+export const USE_MAP_QUERY_DEBOUNCE_DURATION = 2000;

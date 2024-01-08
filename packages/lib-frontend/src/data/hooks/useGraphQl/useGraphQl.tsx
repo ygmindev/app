@@ -20,7 +20,7 @@ export const useGraphQl = (params: UseGraphQlParamsModel = {}): UseGraphQlModel 
   const postF = async <TParams, TResult, TName extends string = string>(
     params: TParams,
   ): Promise<Record<TName, TResult> | undefined> => {
-    const result = (await post({ params, path: '' })) as GraphQlHttpResponseModel<TResult, TName>;
+    const result = (await post({ params, url: '' })) as GraphQlHttpResponseModel<TResult, TName>;
     const graphQlError = result?.errors?.at(0);
     if (graphQlError) {
       error(new HttpError(HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR, graphQlError.message));

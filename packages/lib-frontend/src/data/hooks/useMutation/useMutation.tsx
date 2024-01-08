@@ -1,3 +1,4 @@
+import { config } from '#lib-config/data/query/query';
 import { useErrorContext } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext';
 import { ERROR_TYPE } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext.constants';
 import { _useMutation } from '#lib-frontend/data/hooks/useMutation/_useMutation';
@@ -8,13 +9,15 @@ import {
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 
 export const useMutation = <TParams = undefined, TResult = void>(
-  ...[id, callback, options, params]: UseMutationParamsModel<TParams, TResult>
+  ...[id, callback, options]: UseMutationParamsModel<TParams, TResult>
 ): UseMutationModel<TParams, TResult> => {
   const { handleError } = useErrorContext();
   const [, isLoadingSet] = useStore('app.isLoading');
+  const cache = options?.cache;
+  const cacheF = (cache === true ? config.cacheTime : cache) ?? config.cacheTimeDefault;
   return _useMutation<TParams, TResult>(
     id,
-    async () => {
+    async (params) => {
       options?.isBlocking && isLoadingSet(true);
       try {
         return await callback(params);
@@ -25,6 +28,6 @@ export const useMutation = <TParams = undefined, TResult = void>(
         options?.isBlocking && isLoadingSet(false);
       }
     },
-    options,
+    { ...options, cache: cacheF },
   );
 };

@@ -20,7 +20,7 @@ describe(displayName, () => {
   test('works with get', async () => {
     const scope = nock(uri(URI_PARAMS)).get('').reply(200, SUCCESS);
     const { result, unmount } = renderHook(() => useApi(URI_PARAMS));
-    await result.current.get({ path: '' });
+    await result.current.get({ url: '' });
     scope.done();
 
     unmount();

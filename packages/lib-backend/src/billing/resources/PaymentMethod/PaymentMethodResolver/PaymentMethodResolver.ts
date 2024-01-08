@@ -17,7 +17,7 @@ import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.model
 import { type UserModel } from '#lib-shared/user/resources/User/User.models';
 
 @withContainer()
-@withResolver<PaymentMethodModel>({ Resource: () => PaymentMethod })
+@withResolver<PaymentMethodModel>()
 export class PaymentMethodResolver
   extends createEmbeddedResourceResolver<PaymentMethodModel, undefined, UserModel>({
     Resource: () => PaymentMethod,

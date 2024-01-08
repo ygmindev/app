@@ -57,14 +57,14 @@ export class _HttpService implements _HttpServiceModel {
 
   request = async <TParams, TResult>(
     method: HttpMethodModel,
-    { params, path, request }: _HttpRequestParamsModel<TParams>,
+    { params, request, url }: _HttpRequestParamsModel<TParams>,
   ): Promise<TResult | null> => {
     try {
       const response = await this._instance.request({
         ...request,
         data: params,
         method,
-        url: path ?? '',
+        url: url ?? '',
       } as AxiosRequestConfig);
       return (response && (response.data as TResult)) ?? null;
     } catch (e) {
@@ -77,35 +77,35 @@ export class _HttpService implements _HttpServiceModel {
 
   get = async <TParams, TResult>({
     params,
-    path,
     request,
+    url,
   }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
     this.request<TParams, TResult>(HTTP_METHOD.GET, {
-      path: uri<TParams>({ host: path, params }),
       request,
+      url: uri<TParams>({ host: url, params }),
     });
 
   delete = async <TParams, TResult>({
     params,
-    path,
     request,
+    url,
   }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
     this.request<TParams, TResult>(HTTP_METHOD.DELETE, {
-      path: uri<TParams>({ host: path, params }),
       request,
+      url: uri<TParams>({ host: url, params }),
     });
 
   post = async <TParams, TResult>({
     params,
-    path,
     request,
+    url,
   }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
-    this.request<TParams, TResult>(HTTP_METHOD.POST, { params, path, request });
+    this.request<TParams, TResult>(HTTP_METHOD.POST, { params, request, url });
 
   put = async <TParams, TResult>({
     params,
-    path,
     request,
+    url,
   }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
-    this.request<TParams, TResult>(HTTP_METHOD.PUT, { params, path, request });
+    this.request<TParams, TResult>(HTTP_METHOD.PUT, { params, request, url });
 }

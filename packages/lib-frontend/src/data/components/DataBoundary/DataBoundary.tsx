@@ -91,14 +91,9 @@ const MutateComponent = forwardRef(
     RLFCPropsModel<MutateComponentRefModel, MutateComponentPropsModel<TParams, TResult>>
   > => {
     const { wrapperProps } = useLayoutStyles({ props });
-    const { data, mutate: mutateF } = useMutation<TParams, TResult>(
-      id,
-      mutate,
-      { isBlocking },
-      params,
-    );
+    const { data, mutate: mutateF } = useMutation<TParams, TResult>(id, mutate, { isBlocking });
 
-    useAsync(async () => mutateF());
+    useAsync(async () => mutateF(params));
 
     useImperativeHandle(ref, () => ({ mutate: mutateF }));
 

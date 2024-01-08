@@ -2,8 +2,8 @@ import { type HttpRequestParamsModel } from '#lib-shared/http/utils/HttpService/
 
 export type _HttpRequestParamsModel<TParams> = {
   params?: TParams;
-  path: string;
   request?: HttpRequestParamsModel;
+  url: string;
 };
 
 export type _HttpServiceModel = {

@@ -65,7 +65,9 @@ export const ANIMATION_STATES_FOCUSABLE = ({
     ? theme.color.palette[THEME_COLOR.ERROR][THEME_ROLE.MAIN]
     : theme.color.border;
   const colorField = isText ? 'color' : 'borderColor';
-  const backgroundColor = theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MAIN];
+  const backgroundColor = isText
+    ? undefined
+    : theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MAIN];
   return {
     [ELEMENT_STATE.INACTIVE]: { backgroundColor, [colorField]: inactiveColor, opacity: 1.0 },
     [ELEMENT_STATE.ACTIVE]: { backgroundColor, [colorField]: activeColor, opacity: 1.0 },
