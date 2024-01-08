@@ -6,5 +6,5 @@ export type DraggableListPropsModel<TType> = Omit<
   _DraggableListPropsModel<TType>,
   'anchor' | 'render' | 'spacing'
 > & {
-  element(params: { isActive?: boolean; item: TType }): ReactElement;
+  element(params: { isActive?: boolean; item: TType }, i: number): ReactElement;
 };

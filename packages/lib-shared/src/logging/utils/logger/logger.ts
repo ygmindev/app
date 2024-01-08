@@ -16,8 +16,8 @@ const stringifyF = (params: Array<unknown>): string =>
       isPlainObject(value)
         ? stringify(value as object)
         : isArray(value)
-        ? value.map((v) => stringifyF([v]))
-        : value,
+          ? value.map((v) => stringifyF([v]))
+          : value,
     )
     .join(' ');
 

@@ -16,6 +16,7 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
       flex
       p>
       <StepForm
+        onSubmit={async (data) => console.warn(data)}
         steps={[
           {
             element: (

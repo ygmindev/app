@@ -58,6 +58,7 @@ export const _DraggableList = <TType extends WithIdModel>({
                         anchor: (
                           <div {...provided.dragHandleProps}>{anchor(snapshot.isDragging)}</div>
                         ),
+                        i: index,
                         isActive: snapshot.isDragging,
                         item,
                       })}

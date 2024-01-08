@@ -1,4 +1,4 @@
-import { type TextInputProps } from 'react-native';
+import { type InputModeOptions, type TextInputProps } from 'react-native';
 import { TextInput } from 'react-native';
 
 import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
@@ -6,18 +6,18 @@ import { type _TextFieldPropsModel } from '#lib-frontend/data/components/TextFie
 import { TEXT_FIELD_KEYBOARD } from '#lib-frontend/data/components/TextField/TextField.constants';
 import { type TextFieldKeyboardModel } from '#lib-frontend/data/components/TextField/TextField.models';
 
-const getKeyboardType = (type?: TextFieldKeyboardModel): TextInputProps['keyboardType'] => {
+const getKeyboardType = (type?: TextFieldKeyboardModel): InputModeOptions => {
   switch (type) {
     case TEXT_FIELD_KEYBOARD.NUMBER:
     case TEXT_FIELD_KEYBOARD.NUMBER_POSITIVE:
     case TEXT_FIELD_KEYBOARD.DECIMAL:
       return 'numeric';
     case TEXT_FIELD_KEYBOARD.EMAIL:
-      return 'email-address';
+      return 'email';
     case TEXT_FIELD_KEYBOARD.TEL:
-      return 'phone-pad';
+      return 'tel';
     default:
-      return 'default';
+      return 'none';
   }
 };
 
@@ -83,7 +83,7 @@ export const _TextField = composeComponent<_TextFieldPropsModel, TextInputProps>
     autoComplete: getAutoCompleteType(autoComplete, keyboard),
     autoCorrect: false,
     editable: !isDisabled,
-    keyboardType: getKeyboardType(keyboard),
+    inputMode: getKeyboardType(keyboard),
     maxLength,
     multiline: numberOfLines ? numberOfLines > 1 : undefined,
     numberOfLines,

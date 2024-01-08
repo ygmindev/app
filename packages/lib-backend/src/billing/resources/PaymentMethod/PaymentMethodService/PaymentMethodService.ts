@@ -73,7 +73,7 @@ export class PaymentMethodService implements PaymentMethodServiceModel {
       if (!linkedUser) {
         const id = await this.stripeAdminService.createCustomer();
         const { result: linkedUserNew } = await this.linkedUserService.create({
-          form: { id, type: LINKED_USER_TYPE.STRIPE },
+          form: { externalId: id, type: LINKED_USER_TYPE.STRIPE },
           root: input.root,
         });
         linkedUserNew && (linkedUser = linkedUserNew);

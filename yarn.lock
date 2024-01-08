@@ -12730,7 +12730,7 @@ __metadata:
     minimist: "npm:^1.2.8"
     moment: "npm:^2.30.1"
     moment-timezone: "npm:^0.5.44"
-    mongodb: "npm:^6.3.0"
+    mongodb: "npm:5.9.2"
     mongodb-memory-server: "npm:^9.1.4"
     moti: "npm:^0.27.2"
     next-i18next: "npm:^15.2.0"
@@ -27180,7 +27180,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:*, mongodb@npm:^6.3.0":
+"mongodb@npm:*":
   version: 6.3.0
   resolution: "mongodb@npm:6.3.0"
   dependencies:
@@ -27246,7 +27246,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:^5.9.1":
+"mongodb@npm:5.9.2, mongodb@npm:^5.9.1":
   version: 5.9.2
   resolution: "mongodb@npm:5.9.2"
   dependencies:

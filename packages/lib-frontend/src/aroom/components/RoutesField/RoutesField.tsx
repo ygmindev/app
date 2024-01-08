@@ -28,11 +28,14 @@ export const RoutesField: RLFCModel<RoutesFieldRefModel, RoutesFieldPropsModel> 
         {...wrapperProps}
         s>
         <DraggableList
-          element={({ item }) => (
+          element={({ item }, i) => (
             <TextField
+              flex
               icon="location"
               key={item.id}
-              label={item.id}
+              label={
+                i === 0 ? 'From' : i === (valueControlled?.length ?? 0) - 1 ? 'To' : `Stop ${i}`
+              }
             />
           )}
           s

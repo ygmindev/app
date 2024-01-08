@@ -38,13 +38,13 @@ export const DraggableList = <TType extends WithIdModel>({
           />
         )}
         onChange={valueControlledSet}
-        render={({ anchor, isActive, item }) => (
+        render={({ anchor, i, isActive, item }) => (
           <Wrapper
             isRowAlign
             opacity={isActive ? theme.opaque[THEME_SIZE.MEDIUM] : 1}>
             {anchor}
 
-            {element({ isActive, item })}
+            {element({ isActive, item }, i)}
           </Wrapper>
         )}
         spacing={theme.shape.spacing[THEME_SIZE.MEDIUM]}
