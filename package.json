@@ -3,6 +3,11 @@
   "bin": {
     "run": "./packages/tool-task/src/index.js"
   },
+  "workspaces": [
+    "packages/app-web/*",
+    "packages/app-web-admin/*",
+    "packages/backend-lambda/*"
+  ],
   "bundledDependencies": [
     "#app-native",
     "#app-web",

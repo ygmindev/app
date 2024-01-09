@@ -5,6 +5,24 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
+"#app-web-admin@workspace:packages/app-web-admin":
+  version: 0.0.0-use.local
+  resolution: "#app-web-admin@workspace:packages/app-web-admin"
+  languageName: unknown
+  linkType: soft
+
+"#app-web@workspace:packages/app-web":
+  version: 0.0.0-use.local
+  resolution: "#app-web@workspace:packages/app-web"
+  languageName: unknown
+  linkType: soft
+
+"#backend-lambda@workspace:packages/backend-lambda":
+  version: 0.0.0-use.local
+  resolution: "#backend-lambda@workspace:packages/backend-lambda"
+  languageName: unknown
+  linkType: soft
+
 "2-thenable@npm:^1.0.0":
   version: 1.0.0
   resolution: "2-thenable@npm:1.0.0"
