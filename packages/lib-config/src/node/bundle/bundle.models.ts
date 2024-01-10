@@ -7,7 +7,7 @@ export type BundleConfigModel = Pick<
   FileConfigModel,
   'buildPath' | 'cachePath' | 'distPath' | 'publicPath'
 > & {
-  aliases?: Record<string, string>;
+  aliases?: Array<{ from: RegExp | string; to: string }>;
 
   babelConfig?: _BabelConfigModel;
 
@@ -26,6 +26,8 @@ export type BundleConfigModel = Pick<
   mainFields?: Array<string>;
 
   modulePaths: Array<string>;
+
+  packager: string;
 
   provide?: Record<string, string>;
 

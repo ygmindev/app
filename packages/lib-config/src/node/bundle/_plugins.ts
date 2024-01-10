@@ -1,7 +1,11 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
+import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
+import { type Plugin } from 'esbuild';
 // import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
-import { type UserConfig } from 'vite';
+import { readFileSync } from 'fs';
+import { sep } from 'path';
+import posix from 'path/posix';
 
 import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
@@ -9,16 +13,37 @@ import { type BundleConfigModel } from '#lib-config/node/bundle/bundle.models';
 import { PLATFORM } from '#lib-platform/core/core.constants';
 import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
 
-type PluginsModel = Required<Required<UserConfig>['optimizeDeps']>['esbuildOptions']['plugins'];
+const excludeVendorFromSourceMap = (includes = []): Plugin => ({
+  name: 'excludeVendorFromSourceMap',
+  setup(build) {
+    const emptySourceMap =
+      '\n//# sourceMappingURL=data:application/json;base64,' +
+      Buffer.from(JSON.stringify({ mappings: 'A', sources: [''], version: 3 })).toString('base64');
+
+    build.onLoad({ filter: /node_modules/u }, async (args) => {
+      if (
+        /\.[mc]?js$/.test(args.path) &&
+        !new RegExp(includes.join('|'), 'u').test(args.path.split(sep).join(posix.sep))
+      ) {
+        return {
+          contents: `${readFileSync(args.path, 'utf8')}${emptySourceMap}`,
+          loader: 'default',
+        };
+      }
+    });
+  },
+});
 
 export const _plugins = ({
   transpiles = [],
-}: Pick<BundleConfigModel, 'transpiles'> = {}): PluginsModel =>
+}: Pick<BundleConfigModel, 'transpiles'> = {}): Array<Plugin> =>
   filterNil([
     esbuildDecorators({ tsconfig: fromWorking('tsconfig.json') }),
 
-    // transpiles && esbuildCommonjs(transpiles),
+    transpiles && esbuildCommonjs(transpiles),
+
+    excludeVendorFromSourceMap(),
 
     process.env.ENV_PLATFORM === PLATFORM.NODE &&
       nodeExternalsPlugin({ allowList: transpiles, packagePath: fromRoot('package.json') }),
-  ]) as PluginsModel;
+  ]) as Array<Plugin>;

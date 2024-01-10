@@ -9,7 +9,7 @@ import { getTsconfig } from 'get-tsconfig';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { createLogger, type Logger, type Plugin } from 'vite';
+import { type Alias, createLogger, type Logger, type Plugin } from 'vite';
 import { searchForWorkspaceRoot } from 'vite';
 import { checker } from 'vite-plugin-checker';
 import circleDependency from 'vite-plugin-circular-dependency';
@@ -127,8 +127,6 @@ export const _bundle = ({
         process.env.NODE_ENV === ENVIRONMENT.DEVELOPMENT && watch ? { include: watch } : undefined,
     },
 
-    // cacheDir: joinPaths([fromWorking(), cachePath]),
-
     customLogger,
 
     define,
@@ -137,6 +135,7 @@ export const _bundle = ({
 
     esbuild: {
       loader: 'tsx',
+
       sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : 'linked',
     },
 
@@ -199,17 +198,21 @@ export const _bundle = ({
     ]),
 
     resolve: {
-      alias: {
-        ...aliases,
+      alias: [
+        ...(aliases?.map(({ from, to }) => ({
+          find: from,
+          replacement: to,
+        })) ?? []),
+
         ...reduce(
           getTsconfig(tsconfigDir)?.config?.compilerOptions?.paths,
-          (result, v, k) => ({
+          (result, v, k) => [
             ...result,
-            [k.replaceAll('*', '')]: fromRoot(v[0].replaceAll('*', '')),
-          }),
-          {},
+            { find: k.replaceAll('*', ''), replacement: fromRoot(v[0].replaceAll('*', '')) },
+          ],
+          [] as Array<Alias>,
         ),
-      },
+      ],
 
       extensions,
 

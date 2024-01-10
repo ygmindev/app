@@ -29,7 +29,7 @@ const { _config, config } = defineConfig({
 
       mainFields: ['module', 'main'],
 
-      modulePaths: [fromModules()],
+      modulePaths: [fromModules(), fromWorking('node_modules')],
 
       publicPath: fileConfig.publicPath,
 

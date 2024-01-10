@@ -7,5 +7,5 @@ export const build: TaskParamsModel<unknown> = {
 
   name: 'build',
 
-  task: [fromExecutable('sls package')],
+  task: [fromExecutable('sls package --verbose')],
 };

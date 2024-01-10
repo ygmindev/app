@@ -13,14 +13,14 @@ const { _config, config } = defineConfig({
 
   overrides: () => [
     {
-      aliases: {
-        // TODO: preact missing renderToPipeableStream
-        // react: 'preact/compat',
-        // 'react-dom': 'preact/compat',
-        // 'react-dom/test-utils': 'preact/test-utils',
-        // 'react/jsx-runtime': 'preact/jsx-runtime',
-        // 'react/jsx-runtime': fromModules('react/cjs/react-jsx-runtime.production.min.js'),
-      },
+      // aliases: {
+      //   // TODO: preact missing renderToPipeableStream
+      //   // react: 'preact/compat',
+      //   // 'react-dom': 'preact/compat',
+      //   // 'react-dom/test-utils': 'preact/test-utils',
+      //   // 'react/jsx-runtime': 'preact/jsx-runtime',
+      //   // 'react/jsx-runtime': fromModules('react/cjs/react-jsx-runtime.production.min.js'),
+      // },
 
       babelConfig: _babelConfig,
 
@@ -33,18 +33,17 @@ const { _config, config } = defineConfig({
       externals: ['raf/polyfill.js', 'setimmediate'],
 
       transpiles: [
-        '@expo/react-native-action-sheet',
         'countries-list',
         'css-in-js-utils',
-        'moti_skeleton',
-        'moti',
+        'expo-linear-gradient',
         'inline-style-prefixer',
-        'react/jsx-runtime',
+        'moti',
         'react-native',
-        'redux-persist',
         'react-use',
+        'react/jsx-runtime',
+        'redux-persist',
         'thenby',
-        ...fromGlobs(['@expo', 'expo-*', 'react-native-!(codegen|gradle-plugin)'], {
+        ...fromGlobs(['react-native-!(codegen|gradle-plugin)'], {
           root: fromModules(),
         }),
       ],

@@ -39,9 +39,7 @@ export const _server = async ({
   await app.register(fastifyCookie, {
     secret: process.env.SERVER_APP_SECRET,
   } as FastifyCookieOptions);
-
   const { middlewares } = await createServer({ ...config, root, server: { middlewareMode: true } });
-
   await app.use(middlewares);
 
   await app.register(
