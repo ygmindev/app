@@ -6,7 +6,10 @@ import { useRef } from 'react';
 import { AnimatableView } from '#lib-frontend/animation/components/AnimatableView/AnimatableView';
 import { Icon } from '#lib-frontend/core/components/Icon/Icon';
 import { Menu } from '#lib-frontend/core/components/Menu/Menu';
-import { type MenuRefModel } from '#lib-frontend/core/components/Menu/Menu.models';
+import {
+  type MenuOptionModel,
+  type MenuRefModel,
+} from '#lib-frontend/core/components/Menu/Menu.models';
 import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
 import { type LFCPropsModel, type RLFCPropsModel } from '#lib-frontend/core/core.models';
 import {
@@ -21,7 +24,7 @@ import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLa
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 export const DropdownField = forwardRef(
-  <TType extends string = string>(
+  <TType extends MenuOptionModel = MenuOptionModel>(
     {
       defaultValue,
       elementState,
@@ -44,8 +47,8 @@ export const DropdownField = forwardRef(
       width,
       ...props
     }: LFCPropsModel<DropdownFieldPropsModel<TType>>,
-    ref: ForwardedRef<DropdownFieldRefModel<TType>>,
-  ): ReactElement<RLFCPropsModel<DropdownFieldRefModel<TType>, DropdownFieldPropsModel<TType>>> => {
+    ref: ForwardedRef<DropdownFieldRefModel>,
+  ): ReactElement<RLFCPropsModel<DropdownFieldRefModel, DropdownFieldPropsModel<TType>>> => {
     const { wrapperProps } = useLayoutStyles({ props });
     const { t } = useTranslation();
     const { valueControlled, valueControlledSet } = useValueControlled({
@@ -56,12 +59,12 @@ export const DropdownField = forwardRef(
 
     const menuRef = useRef<MenuRefModel>(null);
 
-    const { query, result, search } = useSearch({
+    const { query, result, search } = useSearch<TType>({
       keys: ['label', 'id'],
       list: options.map(({ label, ...option }) => ({
         ...option,
         label: label ? t(label) : undefined,
-      })),
+      })) as Array<TType>,
       onChange: () => menuRef.current?.scrollTo({ x: 0, y: 0 }),
     });
 
@@ -70,6 +73,7 @@ export const DropdownField = forwardRef(
     const handleToggle = (isOpen?: boolean): void => {
       void sleep(100).then(() => {
         menuRef.current?.toggle(isOpen);
+        onTextChange && onTextChange('');
         search('');
       });
     };
@@ -83,11 +87,6 @@ export const DropdownField = forwardRef(
         onSubmit && onSubmit();
       }
       handleToggle(false);
-    };
-
-    const handleBlur = (): void => {
-      onTextChange && onTextChange('');
-      onBlur && onBlur();
     };
 
     const selectedOption = options.find(({ id }) => id === valueControlled);
@@ -115,7 +114,7 @@ export const DropdownField = forwardRef(
             leftElement={
               selectedOption && selectedOption.icon && <Icon icon={selectedOption.icon} />
             }
-            onBlur={handleBlur}
+            onBlur={onBlur}
             onChange={onTextChange ?? search}
             onFocus={onFocus}
             onSubmit={handleSelect}
@@ -147,6 +146,6 @@ export const DropdownField = forwardRef(
       />
     );
   },
-) as <TType extends string = string>(
-  props: RLFCPropsModel<DropdownFieldRefModel<TType>, DropdownFieldPropsModel<TType>>,
-) => ReactElement<RLFCPropsModel<DropdownFieldRefModel<TType>, DropdownFieldPropsModel<TType>>>;
+) as <TType extends MenuOptionModel = MenuOptionModel>(
+  props: RLFCPropsModel<DropdownFieldRefModel, DropdownFieldPropsModel<TType>>,
+) => ReactElement<RLFCPropsModel<DropdownFieldRefModel, DropdownFieldPropsModel<TType>>>;
