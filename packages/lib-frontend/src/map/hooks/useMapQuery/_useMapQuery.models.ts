@@ -1,7 +1,8 @@
-import { type MapCoordinateModel, type MapLocationModel } from '#lib-shared/map/map.models';
+import { type MapQueryResultModel } from '#lib-frontend/map/hooks/useMapQuery/useMapQuery.models';
+import { type CoordinateModel } from '#lib-shared/map/map.models';
 
 export type _UseMapQueryModel = {
-  data: Array<MapLocationModel>;
+  data: Array<MapQueryResultModel>;
   query(params?: string): Promise<void>;
 };
 
@@ -11,7 +12,7 @@ export type _UseMapQueryApiParamsModel = {
 };
 
 export type _UseMapQueryApiResultModel = Array<
-  MapCoordinateModel & {
+  CoordinateModel & {
     display_name: string;
     importance?: number;
     lat: string;

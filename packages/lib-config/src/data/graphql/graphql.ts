@@ -12,6 +12,7 @@ import { Container } from '#lib-backend/core/utils/Container/Container';
 import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
 import { GroupResolver } from '#lib-backend/group/resources/Group/GroupResolver/GroupResolver';
 import { SocketResolver } from '#lib-backend/http/resources/Socket/SocketResolver/SocketResolver';
+import { MapRouteResolver } from '#lib-backend/map/resources/MapRoute/MapRouteResolver/MapRouteResolver';
 import { SnapshotResolver } from '#lib-backend/test/resources/Snapshot/SnapshotResolver/SnapshotResolver';
 import { LinkedUserResolver } from '#lib-backend/user/resources/LinkedUser/LinkedUserResolver/LinkedUserResolver';
 import { UserResolver } from '#lib-backend/user/resources/User/UserResolver/UserResolver';
@@ -43,6 +44,8 @@ const { _config, config } = defineConfig({
         SnapshotResolver,
         VendorResolver,
         UtilityResolver,
+
+        MapRouteResolver,
       ],
 
       schemaDir: fromStatic('graphql/schema.gql'),

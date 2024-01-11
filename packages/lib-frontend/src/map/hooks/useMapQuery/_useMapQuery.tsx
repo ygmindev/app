@@ -7,12 +7,12 @@ import {
   type _UseMapQueryApiResultModel,
   type _UseMapQueryModel,
 } from '#lib-frontend/map/hooks/useMapQuery/_useMapQuery.models';
+import { type MapQueryResultModel } from '#lib-frontend/map/hooks/useMapQuery/useMapQuery.models';
 import { sort } from '#lib-shared/core/utils/sort/sort';
-import { type MapLocationModel } from '#lib-shared/map/map.models';
 
 export const _useMapQuery = (): _UseMapQueryModel => {
   const { get } = useHttp();
-  const [data, dataSet] = useState<Array<MapLocationModel>>([]);
+  const [data, dataSet] = useState<Array<MapQueryResultModel>>([]);
   return {
     data,
     query: async (params) => {

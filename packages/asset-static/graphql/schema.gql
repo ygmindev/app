@@ -763,10 +763,19 @@ input ChatUpdateUpdateInput {
   name: String
 }
 
+input CoordinateInput {
+  latitude: Float
+  longitude: Float
+}
+
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
 scalar DateTime
+
+input GetRouteInputInput {
+  coordinates: [CoordinateInput]
+}
 
 type Group {
   Group: Group
@@ -963,6 +972,10 @@ input GroupUpdateUpdateInput {
   logo: String
   name: String
   types: [String]
+}
+
+type MapRoute {
+  price: Float
 }
 
 type Mutation {
@@ -1274,6 +1287,7 @@ type Query {
   GroupGetConnection(input: GroupGetConnectionInput): GroupGetConnectionOutput
   GroupGetMany(input: GroupGetManyInput): GroupGetManyOutput
   GroupGetManyProtectedGetMany(input: GroupGetManyProtectedGetManyInput): GroupGetManyProtectedGetManyOutput
+  MapRoute(input: GetRouteInputInput): MapRoute
   OtpGet(input: OtpGetInput): OtpGetOutput
   OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
   OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput

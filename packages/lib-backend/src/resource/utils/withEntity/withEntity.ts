@@ -13,7 +13,7 @@ export const withEntity = <TType extends unknown>({
   isSchema = true,
   isSchemaInput = true,
   name,
-}: WithEntityParamsModel<TType>): ClassDecorator => {
+}: WithEntityParamsModel<TType> = {}): ClassDecorator => {
   if (!name && !isAbstract) {
     throw new NotImplementedError('name for non-abstract entity');
   }

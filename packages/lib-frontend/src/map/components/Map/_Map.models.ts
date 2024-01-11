@@ -1,6 +1,6 @@
-import { type MapCoordinateModel } from '#lib-shared/map/map.models';
+import { type CoordinateModel } from '#lib-shared/map/map.models';
 
-export type _MapPropsModel = MapCoordinateModel & {
+export type _MapPropsModel = CoordinateModel & {
   styling: {
     borderColor: string;
     color: string;

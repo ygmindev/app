@@ -1,0 +1,10 @@
+import { type MapRouteModel } from '#lib-shared/map/resources/MapRoute/MapRoute.models';
+import { type CoordinateModel } from '#lib-shared/map/utils/Coordinate/Coordinate.models';
+
+export type MapRouteServiceModel = {
+  getRoute(input: GetRouteInputModel): Promise<MapRouteModel>;
+};
+
+export type GetRouteInputModel = {
+  coordinates: Array<CoordinateModel>;
+};
