@@ -340,7 +340,7 @@ importers:
         version: 13.0.1(react-native@0.73.2)(react@18.2.0)
       react-native-paper:
         specifier: ^5.11.6
-        version: 5.12.0(react-native-safe-area-context@4.8.2)(react-native-vector-icons@10.0.3)(react-native@0.73.2)(react@18.2.0)
+        version: 5.12.0(react-native-safe-area-context@4.8.2)(react-native-vector-icons@9.2.0)(react-native@0.73.2)(react@18.2.0)
       react-native-reanimated:
         specifier: ^3.6.1
         version: 3.6.1(@babel/core@7.23.7)(@babel/plugin-proposal-nullish-coalescing-operator@7.18.6)(@babel/plugin-proposal-optional-chaining@7.21.0)(@babel/plugin-transform-arrow-functions@7.23.3)(@babel/plugin-transform-shorthand-properties@7.23.3)(@babel/plugin-transform-template-literals@7.23.3)(react-native@0.73.2)(react@18.2.0)
@@ -351,11 +351,11 @@ importers:
         specifier: ^14.1.0
         version: 14.1.0(react-native@0.73.2)(react@18.2.0)
       react-native-vector-icons:
-        specifier: ^10.0.3
-        version: 10.0.3
+        specifier: ^9.2.0
+        version: 9.2.0
       react-native-web:
-        specifier: ^0.19.10
-        version: 0.19.10(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.18.12
+        version: 0.18.12(react-dom@18.2.0)(react@18.2.0)
       react-redux:
         specifier: ^9.0.4
         version: 9.0.4(@types/react@18.2.47)(react-native@0.73.2)(react@18.2.0)(redux@5.0.1)
@@ -982,6 +982,435 @@ importers:
       '#lib-shared':
         specifier: workspace:*
         version: link:../lib-shared
+
+  packages/backend-lambda/.esbuild/.build:
+    dependencies:
+      '@amplitude/react-native':
+        specifier: ^2.17.2
+        version: 2.17.2(react-native@0.73.2)(react@18.2.0)
+      '@apollo/server':
+        specifier: ^4.10.0
+        version: 4.10.0(graphql@16.8.1)
+      '@as-integrations/aws-lambda':
+        specifier: ^3.1.0
+        version: 3.1.0(@apollo/server@4.10.0)
+      '@babel/core':
+        specifier: ^7.23.7
+        version: 7.23.7
+      '@emotion/react':
+        specifier: ^11.11.3
+        version: 11.11.3(react@18.2.0)
+      '@fastify/compress':
+        specifier: ^6.5.0
+        version: 6.5.0
+      '@fastify/cookie':
+        specifier: ^9.2.0
+        version: 9.2.0
+      '@fastify/middie':
+        specifier: ^8.3.0
+        version: 8.3.0
+      '@fastify/static':
+        specifier: ^6.12.0
+        version: 6.12.0
+      '@floating-ui/react':
+        specifier: ^0.26.5
+        version: 0.26.5(react-dom@18.2.0)(react@18.2.0)
+      '@floating-ui/react-dom':
+        specifier: ^2.0.5
+        version: 2.0.5(react-dom@18.2.0)(react@18.2.0)
+      '@floating-ui/react-native':
+        specifier: ^0.10.2
+        version: 0.10.2(react-native@0.73.2)(react@18.2.0)
+      '@loadable/component':
+        specifier: ^5.16.3
+        version: 5.16.3(react@18.2.0)
+      '@mikro-orm/core':
+        specifier: ^5.9.7
+        version: 5.9.7(@mikro-orm/mongodb@5.9.7)
+      '@mikro-orm/mongodb':
+        specifier: ^5.9.7
+        version: 5.9.7(@mikro-orm/core@5.9.7)
+      '@opentelemetry/api':
+        specifier: ^1.7.0
+        version: 1.7.0
+      '@opentelemetry/auto-instrumentations-node':
+        specifier: ^0.40.3
+        version: 0.40.3(@opentelemetry/api@1.7.0)
+      '@opentelemetry/exporter-trace-otlp-http':
+        specifier: ^0.46.0
+        version: 0.46.0(@opentelemetry/api@1.7.0)
+      '@opentelemetry/instrumentation':
+        specifier: ^0.46.0
+        version: 0.46.0(@opentelemetry/api@1.7.0)
+      '@opentelemetry/instrumentation-aws-lambda':
+        specifier: ^0.37.4
+        version: 0.37.4(@opentelemetry/api@1.7.0)
+      '@opentelemetry/otlp-exporter-base':
+        specifier: ^0.46.0
+        version: 0.46.0(@opentelemetry/api@1.7.0)
+      '@opentelemetry/resources':
+        specifier: ^1.19.0
+        version: 1.19.0(@opentelemetry/api@1.7.0)
+      '@opentelemetry/sdk-node':
+        specifier: ^0.46.0
+        version: 0.46.0(@opentelemetry/api@1.7.0)
+      '@opentelemetry/sdk-trace-base':
+        specifier: ^1.19.0
+        version: 1.19.0(@opentelemetry/api@1.7.0)
+      '@opentelemetry/sdk-trace-node':
+        specifier: ^1.19.0
+        version: 1.19.0(@opentelemetry/api@1.7.0)
+      '@ptomasroos/react-native-multi-slider':
+        specifier: ^2.2.2
+        version: 2.2.2(react-native@0.73.2)(react@18.2.0)
+      '@react-native-async-storage/async-storage':
+        specifier: ^1.21.0
+        version: 1.21.0(react-native@0.73.2)
+      '@react-native-firebase/app':
+        specifier: ^18.7.3
+        version: 18.7.3(expo@49.0.21)(react-native@0.73.2)(react@18.2.0)
+      '@react-native-firebase/auth':
+        specifier: ^18.7.3
+        version: 18.7.3(@react-native-firebase/app@18.7.3)(expo@49.0.21)
+      '@reduxjs/toolkit':
+        specifier: 2.0.1
+        version: 2.0.1(react-redux@9.0.4)(react@18.2.0)
+      '@serverless/typescript':
+        specifier: ^3.38.0
+        version: 3.38.0
+      '@stripe/react-stripe-js':
+        specifier: ^2.4.0
+        version: 2.4.0(@stripe/stripe-js@2.3.0)(react-dom@18.2.0)(react@18.2.0)
+      '@stripe/stripe-js':
+        specifier: ^2.2.2
+        version: 2.3.0
+      '@tanstack/query-async-storage-persister':
+        specifier: ^5.17.8
+        version: 5.17.9
+      '@tanstack/react-query':
+        specifier: ^5.17.8
+        version: 5.17.9(react@18.2.0)
+      '@tanstack/react-query-persist-client':
+        specifier: ^5.17.8
+        version: 5.17.9(@tanstack/react-query@5.17.9)(react@18.2.0)
+      '@tanstack/react-table':
+        specifier: ^8.11.3
+        version: 8.11.3(react-dom@18.2.0)(react@18.2.0)
+      '@uptrace/core':
+        specifier: ^1.18.1
+        version: 1.18.1
+      '@uptrace/node':
+        specifier: ^1.18.1
+        version: 1.18.1
+      '@vitejs/plugin-react':
+        specifier: ^4.2.1
+        version: 4.2.1(vite@5.0.11)
+      ag-grid-community:
+        specifier: ^31.0.1
+        version: 31.0.1
+      ag-grid-react:
+        specifier: ^31.0.1
+        version: 31.0.1(react-dom@18.2.0)(react@18.2.0)
+      amplitude-js:
+        specifier: ^8.21.9
+        version: 8.21.9
+      apollo-server-lambda:
+        specifier: ^3.13.0
+        version: 3.13.0(graphql@16.8.1)
+      aws-lambda:
+        specifier: ^1.0.7
+        version: 1.0.7
+      axios:
+        specifier: ^1.6.5
+        version: 1.6.5
+      bingmaps-react:
+        specifier: ^1.2.10
+        version: 1.2.10(react@18.2.0)
+      class-validator:
+        specifier: ^0.14.0
+        version: 0.14.0
+      close-with-grace:
+        specifier: ^1.2.0
+        version: 1.2.0
+      color:
+        specifier: ^4.2.3
+        version: 4.2.3
+      cookies-js:
+        specifier: ^1.2.3
+        version: 1.2.3
+      core-js:
+        specifier: ^3.35.0
+        version: 3.35.0
+      countries-list:
+        specifier: ^3.0.6
+        version: 3.0.6
+      dataloader:
+        specifier: ^2.2.2
+        version: 2.2.2
+      ejs:
+        specifier: ^3.1.9
+        version: 3.1.9
+      email-templates:
+        specifier: ^11.1.1
+        version: 11.1.1(@babel/core@7.23.7)(ejs@3.1.9)(react-dom@18.2.0)(react@18.2.0)(underscore@1.13.6)
+      expo-linear-gradient:
+        specifier: ^12.5.0
+        version: 12.5.0(expo@49.0.21)
+      expo-localization:
+        specifier: ^14.5.0
+        version: 14.5.0(expo@49.0.21)
+      expo-network:
+        specifier: ^5.6.0
+        version: 5.6.0(expo@49.0.21)
+      fastify:
+        specifier: ^4.25.2
+        version: 4.25.2
+      firebase:
+        specifier: ^10.7.1
+        version: 10.7.1(@react-native-async-storage/async-storage@1.21.0)
+      firebase-admin:
+        specifier: ^12.0.0
+        version: 12.0.0
+      formik:
+        specifier: ^2.4.5
+        version: 2.4.5(react@18.2.0)
+      framer-motion:
+        specifier: ^10.17.9
+        version: 10.18.0(react-dom@18.2.0)(react@18.2.0)
+      fuse.js:
+        specifier: ^7.0.0
+        version: 7.0.0
+      geolocator:
+        specifier: ^2.1.5
+        version: 2.1.5
+      glob:
+        specifier: ^10.3.10
+        version: 10.3.10
+      google-map-react:
+        specifier: ^2.2.1
+        version: 2.2.1(react-dom@18.2.0)(react@18.2.0)
+      graphql:
+        specifier: ^16.8.1
+        version: 16.8.1
+      graphql-relay:
+        specifier: ^0.10.0
+        version: 0.10.0(graphql@16.8.1)
+      graphql-tag:
+        specifier: ^2.12.6
+        version: 2.12.6(graphql@16.8.1)
+      http-errors:
+        specifier: ^2.0.0
+        version: 2.0.0
+      i18next:
+        specifier: ^23.7.16
+        version: 23.7.16
+      i18next-browser-languagedetector:
+        specifier: ^7.2.0
+        version: 7.2.0
+      i18next-http-backend:
+        specifier: ^2.4.2
+        version: 2.4.2
+      i18next-http-middleware:
+        specifier: ^3.5.0
+        version: 3.5.0
+      inversify:
+        specifier: ^6.0.2
+        version: 6.0.2
+      isbot:
+        specifier: ^4.3.0
+        version: 4.3.0
+      leaflet:
+        specifier: ^1.9.4
+        version: 1.9.4
+      libphonenumber-js:
+        specifier: ^1.10.53
+        version: 1.10.53
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+      moment:
+        specifier: ^2.30.1
+        version: 2.30.1
+      moment-timezone:
+        specifier: ^0.5.44
+        version: 0.5.44
+      mongodb:
+        specifier: 5.9.2
+        version: 5.9.2
+      moti:
+        specifier: ^0.27.2
+        version: 0.27.2(react-dom@18.2.0)(react-native-reanimated@3.6.1)(react@18.2.0)
+      next-i18next:
+        specifier: ^15.2.0
+        version: 15.2.0(i18next@23.7.16)(next@14.0.4)(react-i18next@14.0.0)(react@18.2.0)
+      nodemailer:
+        specifier: ^6.9.8
+        version: 6.9.8
+      opentelemetry-node-metrics:
+        specifier: ^3.0.0
+        version: 3.0.0
+      parcel:
+        specifier: ^2.11.0
+        version: 2.11.0
+      preact:
+        specifier: ^10.19.3
+        version: 10.19.3
+      preact-render-to-string:
+        specifier: ^6.3.1
+        version: 6.3.1(preact@10.19.3)
+      puppeteer:
+        specifier: ^21.7.0
+        version: 21.7.0
+      raf:
+        specifier: ^3.4.1
+        version: 3.4.1
+      random-js:
+        specifier: ^2.1.0
+        version: 2.1.0
+      rc-slider:
+        specifier: ^10.5.0
+        version: 10.5.0(react-dom@18.2.0)(react@18.2.0)
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-beautiful-dnd:
+        specifier: ^13.1.1
+        version: 13.1.1(react-dom@18.2.0)(react-native@0.73.2)(react@18.2.0)
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
+      react-error-boundary:
+        specifier: ^4.0.12
+        version: 4.0.12(react@18.2.0)
+      react-fast-compare:
+        specifier: ^3.2.2
+        version: 3.2.2
+      react-i18next:
+        specifier: ^14.0.0
+        version: 14.0.0(i18next@23.7.16)(react-dom@18.2.0)(react-native@0.73.2)(react@18.2.0)
+      react-leaflet:
+        specifier: ^4.2.1
+        version: 4.2.1(leaflet@1.9.4)(react-dom@18.2.0)(react@18.2.0)
+      react-native:
+        specifier: ^0.73.1
+        version: 0.73.2(@babel/core@7.23.7)(@babel/preset-env@7.23.8)(react@18.2.0)
+      react-native-animated-spinkit:
+        specifier: ^1.5.2
+        version: 1.5.2(react-native@0.73.2)(react@18.2.0)
+      react-native-draglist:
+        specifier: ^3.5.1
+        version: 3.5.1(react-native@0.73.2)(react@18.2.0)
+      react-native-gesture-handler:
+        specifier: ^2.14.0
+        version: 2.14.0(react-native@0.73.2)(react@18.2.0)
+      react-native-gifted-chat:
+        specifier: ^2.4.0
+        version: 2.4.0(react-native@0.73.2)(react@18.2.0)
+      react-native-mask-input:
+        specifier: ^1.2.3
+        version: 1.2.3(react-native@0.73.2)(react@18.2.0)
+      react-native-modal:
+        specifier: ^13.0.1
+        version: 13.0.1(react-native@0.73.2)(react@18.2.0)
+      react-native-paper:
+        specifier: ^5.11.6
+        version: 5.12.0(react-native-safe-area-context@4.8.2)(react-native-vector-icons@9.2.0)(react-native@0.73.2)(react@18.2.0)
+      react-native-reanimated:
+        specifier: ^3.6.1
+        version: 3.6.1(@babel/core@7.23.7)(@babel/plugin-proposal-nullish-coalescing-operator@7.18.6)(@babel/plugin-proposal-optional-chaining@7.21.0)(@babel/plugin-transform-arrow-functions@7.23.3)(@babel/plugin-transform-shorthand-properties@7.23.3)(@babel/plugin-transform-template-literals@7.23.3)(react-native@0.73.2)(react@18.2.0)
+      react-native-safe-area-context:
+        specifier: ^4.8.2
+        version: 4.8.2(react-native@0.73.2)(react@18.2.0)
+      react-native-svg:
+        specifier: ^14.1.0
+        version: 14.1.0(react-native@0.73.2)(react@18.2.0)
+      react-native-vector-icons:
+        specifier: ^9.2.0
+        version: 9.2.0
+      react-native-web:
+        specifier: ^0.18.12
+        version: 0.18.12(react-dom@18.2.0)(react@18.2.0)
+      react-redux:
+        specifier: ^9.0.4
+        version: 9.0.4(react-native@0.73.2)(react@18.2.0)(redux@5.0.1)
+      react-router:
+        specifier: ^6.21.1
+        version: 6.21.1(react@18.2.0)
+      react-router-dom:
+        specifier: ^6.21.1
+        version: 6.21.1(react-dom@18.2.0)(react@18.2.0)
+      react-router-native:
+        specifier: ^6.21.1
+        version: 6.21.1(react-native@0.73.2)(react@18.2.0)
+      react-spinners:
+        specifier: ^0.13.8
+        version: 0.13.8(react-dom@18.2.0)(react@18.2.0)
+      react-ssr-prepass:
+        specifier: ^1.5.0
+        version: 1.5.0(react@18.2.0)
+      react-streaming:
+        specifier: ^0.3.19
+        version: 0.3.19(react-dom@18.2.0)(react@18.2.0)
+      react-use:
+        specifier: ^17.4.2
+        version: 17.4.2(react-dom@18.2.0)(react@18.2.0)
+      react-use-websocket:
+        specifier: ^4.5.0
+        version: 4.5.0(react-dom@18.2.0)(react@18.2.0)
+      recharts:
+        specifier: ^2.10.3
+        version: 2.10.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
+      redux:
+        specifier: ^5.0.1
+        version: 5.0.1
+      redux-persist:
+        specifier: ^6.0.0
+        version: 6.0.0(react@18.2.0)(redux@5.0.1)
+      redux-persist-cookie-storage:
+        specifier: ^1.0.0
+        version: 1.0.0
+      serverless:
+        specifier: ^3.38.0
+        version: 3.38.0
+      setimmediate:
+        specifier: ^1.0.5
+        version: 1.0.5
+      socket.io:
+        specifier: ^4.7.3
+        version: 4.7.3
+      spacetime:
+        specifier: ^7.5.0
+        version: 7.5.0
+      stripe:
+        specifier: ^14.11.0
+        version: 14.11.0
+      thenby:
+        specifier: ^1.3.4
+        version: 1.3.4
+      tslib:
+        specifier: ^2.6.2
+        version: 2.6.2
+      twilio:
+        specifier: ^4.20.0
+        version: 4.20.0
+      type-graphql:
+        specifier: 2.0.0-beta.2
+        version: 2.0.0-beta.2(class-validator@0.14.0)(graphql@16.8.1)
+      typedi:
+        specifier: ^0.10.0
+        version: 0.10.0
+      typeorm:
+        specifier: ^0.3.19
+        version: 0.3.19(mongodb@5.9.2)
+      uuid:
+        specifier: ^9.0.1
+        version: 9.0.1
+      vite:
+        specifier: ^5.0.11
+        version: 5.0.11
+      winston:
+        specifier: ^3.11.0
+        version: 3.11.0
 
   packages/lib-backend:
     dependencies:
@@ -3492,6 +3921,26 @@ packages:
       '@emotion/utils': 1.2.1
       '@emotion/weak-memoize': 0.3.1
       '@types/react': 18.2.47
+      hoist-non-react-statics: 3.3.2
+      react: 18.2.0
+    dev: false
+
+  /@emotion/react@11.11.3(react@18.2.0):
+    resolution: {integrity: sha512-Cnn0kuq4DoONOMcnoVsTOR8E+AdnKFf//6kUWc4LCdnxj31pZWn7rIULd6Y7/Js1PiPHzn7SKCM9vB/jBni8eA==}
+    peerDependencies:
+      '@types/react': '*'
+      react: '>=16.8.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.23.8
+      '@emotion/babel-plugin': 11.11.0
+      '@emotion/cache': 11.11.0
+      '@emotion/serialize': 1.1.3
+      '@emotion/use-insertion-effect-with-fallbacks': 1.0.1(react@18.2.0)
+      '@emotion/utils': 1.2.1
+      '@emotion/weak-memoize': 0.3.1
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
     dev: false
@@ -7438,7 +7887,7 @@ packages:
       '@opentelemetry/api': ^1.0.0
     dependencies:
       '@opentelemetry/api': 1.7.0
-      '@opentelemetry/core': 1.18.1(@opentelemetry/api@1.7.0)
+      '@opentelemetry/core': 1.19.0(@opentelemetry/api@1.7.0)
     dev: false
 
   /@opentelemetry/instrumentation-amqplib@0.33.5(@opentelemetry/api@1.7.0):
@@ -7478,7 +7927,7 @@ packages:
       '@opentelemetry/api': ^1.3.0
     dependencies:
       '@opentelemetry/api': 1.7.0
-      '@opentelemetry/core': 1.18.1(@opentelemetry/api@1.7.0)
+      '@opentelemetry/core': 1.19.0(@opentelemetry/api@1.7.0)
       '@opentelemetry/instrumentation': 0.45.1(@opentelemetry/api@1.7.0)
       '@opentelemetry/propagation-utils': 0.30.5(@opentelemetry/api@1.7.0)
       '@opentelemetry/semantic-conventions': 1.19.0
@@ -7628,7 +8077,7 @@ packages:
       '@opentelemetry/api': ^1.3.0
     dependencies:
       '@opentelemetry/api': 1.7.0
-      '@opentelemetry/core': 1.18.1(@opentelemetry/api@1.7.0)
+      '@opentelemetry/core': 1.19.0(@opentelemetry/api@1.7.0)
       '@opentelemetry/instrumentation': 0.45.1(@opentelemetry/api@1.7.0)
       '@opentelemetry/semantic-conventions': 1.19.0
       '@types/express': 4.17.18
@@ -7879,7 +8328,7 @@ packages:
     dependencies:
       '@opentelemetry/api': 1.7.0
       '@opentelemetry/instrumentation': 0.45.1(@opentelemetry/api@1.7.0)
-      '@opentelemetry/sdk-metrics': 1.18.1(@opentelemetry/api@1.7.0)
+      '@opentelemetry/sdk-metrics': 1.19.0(@opentelemetry/api@1.7.0)
       '@opentelemetry/semantic-conventions': 1.19.0
     transitivePeerDependencies:
       - supports-color
@@ -7906,7 +8355,7 @@ packages:
       '@opentelemetry/api': ^1.3.0
     dependencies:
       '@opentelemetry/api': 1.7.0
-      '@opentelemetry/core': 1.18.1(@opentelemetry/api@1.7.0)
+      '@opentelemetry/core': 1.19.0(@opentelemetry/api@1.7.0)
       '@opentelemetry/instrumentation': 0.45.1(@opentelemetry/api@1.7.0)
       '@opentelemetry/semantic-conventions': 1.19.0
     transitivePeerDependencies:
@@ -7988,7 +8437,7 @@ packages:
       '@opentelemetry/api': ^1.3.0
     dependencies:
       '@opentelemetry/api': 1.7.0
-      '@opentelemetry/core': 1.18.1(@opentelemetry/api@1.7.0)
+      '@opentelemetry/core': 1.19.0(@opentelemetry/api@1.7.0)
       '@opentelemetry/instrumentation': 0.44.0(@opentelemetry/api@1.7.0)
       '@opentelemetry/semantic-conventions': 1.19.0
       '@opentelemetry/sql-common': 0.40.0(@opentelemetry/api@1.7.0)
@@ -8814,6 +9263,55 @@ packages:
       - '@parcel/core'
     dev: false
 
+  /@parcel/config-default@2.11.0(@parcel/core@2.11.0):
+    resolution: {integrity: sha512-1e2+qcZkm5/0f4eI20p/DemcYiSxq9d/eyjpTXA7PulJaHbL1wonwUAuy3mvnAvDnLOJmAk/obDVgX1ZfxMGtg==}
+    peerDependencies:
+      '@parcel/core': ^2.11.0
+    dependencies:
+      '@parcel/bundler-default': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/compressor-raw': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/core': 2.11.0
+      '@parcel/namer-default': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/optimizer-css': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/optimizer-htmlnano': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/optimizer-image': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/optimizer-svgo': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/optimizer-swc': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/packager-css': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/packager-html': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/packager-js': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/packager-raw': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/packager-svg': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/packager-wasm': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/reporter-dev-server': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/resolver-default': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/runtime-browser-hmr': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/runtime-js': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/runtime-react-refresh': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/runtime-service-worker': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/transformer-babel': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/transformer-css': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/transformer-html': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/transformer-image': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/transformer-js': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/transformer-json': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/transformer-postcss': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/transformer-posthtml': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/transformer-raw': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/transformer-react-refresh-wrap': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/transformer-svg': 2.11.0(@parcel/core@2.11.0)
+    transitivePeerDependencies:
+      - '@swc/helpers'
+      - cssnano
+      - postcss
+      - purgecss
+      - relateurl
+      - srcset
+      - terser
+      - typescript
+      - uncss
+    dev: false
+
   /@parcel/config-default@2.11.0(@parcel/core@2.11.0)(@swc/helpers@0.5.3)(postcss@8.4.33)(typescript@5.3.3):
     resolution: {integrity: sha512-1e2+qcZkm5/0f4eI20p/DemcYiSxq9d/eyjpTXA7PulJaHbL1wonwUAuy3mvnAvDnLOJmAk/obDVgX1ZfxMGtg==}
     peerDependencies:
@@ -8984,6 +9482,27 @@ packages:
       - '@parcel/core'
     dev: false
 
+  /@parcel/optimizer-htmlnano@2.11.0(@parcel/core@2.11.0):
+    resolution: {integrity: sha512-c20pz4EFF5DNFmqYgptlIj49eT6xjGLkDTdHH3RRzxKovuSXWfYSPs3GED3ZsjVuQyjNQif+/MAk9547F7hrdQ==}
+    engines: {node: '>= 12.0.0', parcel: ^2.11.0}
+    dependencies:
+      '@parcel/plugin': 2.11.0(@parcel/core@2.11.0)
+      htmlnano: 2.1.0(svgo@2.8.0)
+      nullthrows: 1.1.1
+      posthtml: 0.16.6
+      svgo: 2.8.0
+    transitivePeerDependencies:
+      - '@parcel/core'
+      - cssnano
+      - postcss
+      - purgecss
+      - relateurl
+      - srcset
+      - terser
+      - typescript
+      - uncss
+    dev: false
+
   /@parcel/optimizer-htmlnano@2.11.0(@parcel/core@2.11.0)(postcss@8.4.33)(typescript@5.3.3):
     resolution: {integrity: sha512-c20pz4EFF5DNFmqYgptlIj49eT6xjGLkDTdHH3RRzxKovuSXWfYSPs3GED3ZsjVuQyjNQif+/MAk9547F7hrdQ==}
     engines: {node: '>= 12.0.0', parcel: ^2.11.0}
@@ -9029,6 +9548,21 @@ packages:
       svgo: 2.8.0
     transitivePeerDependencies:
       - '@parcel/core'
+    dev: false
+
+  /@parcel/optimizer-swc@2.11.0(@parcel/core@2.11.0):
+    resolution: {integrity: sha512-ftf42F3JyZxJb6nnLlgNGyNQ273YOla4dFGH/tWC8iTwObHUpWe7cMbCGcrSJBvAlsLkZfLpFNAXFxUgxdKyHQ==}
+    engines: {node: '>= 12.0.0', parcel: ^2.11.0}
+    dependencies:
+      '@parcel/diagnostic': 2.11.0
+      '@parcel/plugin': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/source-map': 2.1.1
+      '@parcel/utils': 2.11.0
+      '@swc/core': 1.3.102
+      nullthrows: 1.1.1
+    transitivePeerDependencies:
+      - '@parcel/core'
+      - '@swc/helpers'
     dev: false
 
   /@parcel/optimizer-swc@2.11.0(@parcel/core@2.11.0)(@swc/helpers@0.5.3):
@@ -10352,7 +10886,7 @@ packages:
     dependencies:
       immer: 10.0.3
       react: 18.2.0
-      react-redux: 9.0.4(@types/react@18.2.47)(react-native@0.73.2)(react@18.2.0)(redux@5.0.1)
+      react-redux: 9.0.4(react-native@0.73.2)(react@18.2.0)(redux@5.0.1)
       redux: 5.0.1
       redux-thunk: 3.1.0(redux@5.0.1)
       reselect: 5.1.0
@@ -11229,6 +11763,31 @@ packages:
     requiresBuild: true
     optional: true
 
+  /@swc/core@1.3.102:
+    resolution: {integrity: sha512-OAjNLY/f6QWKSDzaM3bk31A+OYHu6cPa9P/rFIx8X5d24tHXUpRiiq6/PYI6SQRjUPlB72GjsjoEU8F+ALadHg==}
+    engines: {node: '>=10'}
+    requiresBuild: true
+    peerDependencies:
+      '@swc/helpers': ^0.5.0
+    peerDependenciesMeta:
+      '@swc/helpers':
+        optional: true
+    dependencies:
+      '@swc/counter': 0.1.2
+      '@swc/types': 0.1.5
+    optionalDependencies:
+      '@swc/core-darwin-arm64': 1.3.102
+      '@swc/core-darwin-x64': 1.3.102
+      '@swc/core-linux-arm-gnueabihf': 1.3.102
+      '@swc/core-linux-arm64-gnu': 1.3.102
+      '@swc/core-linux-arm64-musl': 1.3.102
+      '@swc/core-linux-x64-gnu': 1.3.102
+      '@swc/core-linux-x64-musl': 1.3.102
+      '@swc/core-win32-arm64-msvc': 1.3.102
+      '@swc/core-win32-ia32-msvc': 1.3.102
+      '@swc/core-win32-x64-msvc': 1.3.102
+    dev: false
+
   /@swc/core@1.3.102(@swc/helpers@0.5.3):
     resolution: {integrity: sha512-OAjNLY/f6QWKSDzaM3bk31A+OYHu6cPa9P/rFIx8X5d24tHXUpRiiq6/PYI6SQRjUPlB72GjsjoEU8F+ALadHg==}
     engines: {node: '>=10'}
@@ -11453,6 +12012,7 @@ packages:
   /@tootallnate/once@2.0.0:
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
     engines: {node: '>= 10'}
+    requiresBuild: true
 
   /@tootallnate/quickjs-emscripten@0.23.0:
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
@@ -12256,6 +12816,7 @@ packages:
 
   /@types/tough-cookie@4.0.5:
     resolution: {integrity: sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==}
+    requiresBuild: true
 
   /@types/triple-beam@1.3.5:
     resolution: {integrity: sha512-6WaYesThRMCl19iryMYP7/x2OVgCtbIVflDGFpWnb9irXI3UjYE4AzmYuiUKY1AJstGijoY+MgUszMgRxIYTYw==}
@@ -12708,7 +13269,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.23.3(@babel/core@7.23.7)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.0
-      vite: 5.0.11(@types/node@20.10.7)
+      vite: 5.0.11
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -13870,7 +14431,7 @@ packages:
   /axios@1.6.5:
     resolution: {integrity: sha512-Ii012v05KEVuUoFWmMW/UQv9aRIc3ZwkWDcM+h5Il8izZCtRVpDUfwpoFf7eOtajT3QiGR4yDUx7lPqHJULgbg==}
     dependencies:
-      follow-redirects: 1.15.4(debug@4.3.4)
+      follow-redirects: 1.15.4
       form-data: 4.0.0
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -14485,7 +15046,7 @@ packages:
     resolution: {integrity: sha512-xq+q3SRMOxGivLhBNaUdC64hDTQwejJ+H0T/NB1XMtTVEwNTrfFF3gAxiyW0Bu/xWEGhjVKgUcMhCrUy2+uCWg==}
     dependencies:
       base64-js: 1.5.1
-      ieee754: 1.1.13
+      ieee754: 1.2.1
       isarray: 1.0.0
 
   /buffer@5.7.1:
@@ -15565,6 +16126,21 @@ packages:
       path-type: 4.0.0
       yaml: 1.10.2
 
+  /cosmiconfig@8.3.6:
+    resolution: {integrity: sha512-kcZ6+W5QzcJ3P1Mt+83OUv/oHFqZHIx8DuxG6eZ5RGMERoLqp4BuGjhHLYGK+Kf5XVkQvqBSmAy/nGWN3qDgEA==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      typescript: '>=4.9.5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      import-fresh: 3.3.0
+      js-yaml: 4.1.0
+      parse-json: 5.2.0
+      path-type: 4.0.0
+    dev: false
+
   /cosmiconfig@8.3.6(typescript@5.3.3):
     resolution: {integrity: sha512-kcZ6+W5QzcJ3P1Mt+83OUv/oHFqZHIx8DuxG6eZ5RGMERoLqp4BuGjhHLYGK+Kf5XVkQvqBSmAy/nGWN3qDgEA==}
     engines: {node: '>=14'}
@@ -15615,6 +16191,13 @@ packages:
       - supports-color
       - ts-node
     dev: true
+
+  /create-react-class@15.7.0:
+    resolution: {integrity: sha512-QZv4sFWG9S5RUvkTYWbflxeZX+JG7Cz0Tn33rQBJ+WFQTqTfUTjMjiv9tnfXazjsO5r0KhPs+AqCjyrQX6h2ng==}
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+    dev: false
 
   /create-require@1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
@@ -18134,6 +18717,7 @@ packages:
 
   /extend@3.0.2:
     resolution: {integrity: sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==}
+    requiresBuild: true
 
   /external-editor@1.1.1:
     resolution: {integrity: sha512-0XYlP43jzxMgJjugDJ85Z0UDPnowkUbfFztNvsSGC9sJVIk97MZbGEb9WAhIVH0UgNxoLj/9ZQgB4CHJyz2GGQ==}
@@ -18873,6 +19457,15 @@ packages:
     resolution: {integrity: sha512-GRnmB5gPyJpAhTQdSZTSp9uaPSvl09KoYcMQtsB9rQoOmzs9dH6ffeccH+Z+cv6P68Hu5bC6JjRh4Ah/mHSNRw==}
     dev: false
 
+  /follow-redirects@1.15.4:
+    resolution: {integrity: sha512-Cr4D/5wlrb0z9dgERpUL3LrmPKVDsETIJhaCMeDfuFYcqa5bldGV6wBsAN6X/vxlXQtFBMrXdXxdL8CbDTGniw==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+
   /follow-redirects@1.15.4(debug@4.3.4):
     resolution: {integrity: sha512-Cr4D/5wlrb0z9dgERpUL3LrmPKVDsETIJhaCMeDfuFYcqa5bldGV6wBsAN6X/vxlXQtFBMrXdXxdL8CbDTGniw==}
     engines: {node: '>=4.0'}
@@ -18883,6 +19476,7 @@ packages:
         optional: true
     dependencies:
       debug: 4.3.4(supports-color@8.1.1)
+    dev: true
 
   /fontfaceobserver@2.3.0:
     resolution: {integrity: sha512-6FPvD/IVyT4ZlNe7Wcn5Fb/4ChigpucKYSvD6a+0iMoLn2inpo711eyIcKjmDtE5XNcgAkSH9uN/nfAeZzHEfg==}
@@ -20165,6 +20759,43 @@ packages:
       - typescript
     dev: false
 
+  /htmlnano@2.1.0(svgo@2.8.0):
+    resolution: {integrity: sha512-jVGRE0Ep9byMBKEu0Vxgl8dhXYOUk0iNQ2pjsG+BcRB0u0oDF5A9p/iBGMg/PGKYUyMD0OAGu8dVT5Lzj8S58g==}
+    peerDependencies:
+      cssnano: ^6.0.0
+      postcss: ^8.3.11
+      purgecss: ^5.0.0
+      relateurl: ^0.2.7
+      srcset: 4.0.0
+      svgo: ^3.0.2
+      terser: ^5.10.0
+      uncss: ^0.17.3
+    peerDependenciesMeta:
+      cssnano:
+        optional: true
+      postcss:
+        optional: true
+      purgecss:
+        optional: true
+      relateurl:
+        optional: true
+      srcset:
+        optional: true
+      svgo:
+        optional: true
+      terser:
+        optional: true
+      uncss:
+        optional: true
+    dependencies:
+      cosmiconfig: 8.3.6
+      posthtml: 0.16.6
+      svgo: 2.8.0
+      timsort: 0.3.0
+    transitivePeerDependencies:
+      - typescript
+    dev: false
+
   /htmlparser2@5.0.1:
     resolution: {integrity: sha512-vKZZra6CSe9qsJzh0BjBGXo8dvzNsq/oGvsjfRdOrrryfeD9UOBEEQdeoqCRmKZchF5h2zOBMQ6YuQ0uRUmdbQ==}
     dependencies:
@@ -20209,7 +20840,7 @@ packages:
       depd: 1.1.2
       inherits: 2.0.3
       setprototypeof: 1.1.0
-      statuses: 1.4.0
+      statuses: 1.5.0
     dev: false
 
   /http-errors@1.8.1:
@@ -20240,6 +20871,7 @@ packages:
   /http-proxy-agent@5.0.0:
     resolution: {integrity: sha512-n2hY8YdoRE1i7r6M0w9DIw5GgZN0G25P8zLCRQ8rjXtTU3vsNFBI/vWK/UIeE6g5MUUz6avwAPXmL6Fy9D/90w==}
     engines: {node: '>= 6'}
+    requiresBuild: true
     dependencies:
       '@tootallnate/once': 2.0.0
       agent-base: 6.0.2(supports-color@8.1.1)
@@ -23307,10 +23939,6 @@ packages:
   /memoize-one@5.2.1:
     resolution: {integrity: sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==}
 
-  /memoize-one@6.0.0:
-    resolution: {integrity: sha512-rkpe71W0N0c0Xz6QD0eJETuWAJGnJ9afsl1srmwPrI+yBCkge5EycXXbYRyvL29zZVUWQCY7InPRCv3GDXuZNw==}
-    dev: false
-
   /memoizee@0.4.15:
     resolution: {integrity: sha512-UBWmJpLZd5STPm7PMUlOw/TSy972M+z8gcyQ5veOnSDRREz/0bmpyTfKt3/51DhEBqCZQn1udM/5flcSPYhkdQ==}
     dependencies:
@@ -24534,6 +25162,10 @@ packages:
       abbrev: 1.1.1
     dev: true
 
+  /normalize-css-color@1.0.2:
+    resolution: {integrity: sha512-jPJ/V7Cp1UytdidsPqviKEElFQJs22hUUgK5BOPHTwOonNCk7/2qOxhhqzEajmFrWJowADFfOFh1V+aWkRfy+w==}
+    dev: false
+
   /normalize-package-data@2.5.0:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
     dependencies:
@@ -25469,6 +26101,40 @@ packages:
 
   /pako@1.0.11:
     resolution: {integrity: sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==}
+
+  /parcel@2.11.0:
+    resolution: {integrity: sha512-H/RI1/DmuOkL8RuG/EpNPvtzrbF+7jA/R56ydEEm+lqFbYktKB4COR7JXdHkZXRgbSJyimrFB8d0r9+SaRnj0Q==}
+    engines: {node: '>= 12.0.0'}
+    hasBin: true
+    peerDependenciesMeta:
+      '@parcel/core':
+        optional: true
+    dependencies:
+      '@parcel/config-default': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/core': 2.11.0
+      '@parcel/diagnostic': 2.11.0
+      '@parcel/events': 2.11.0
+      '@parcel/fs': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/logger': 2.11.0
+      '@parcel/package-manager': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/reporter-cli': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/reporter-dev-server': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/reporter-tracer': 2.11.0(@parcel/core@2.11.0)
+      '@parcel/utils': 2.11.0
+      chalk: 4.1.2
+      commander: 7.2.0
+      get-port: 4.2.0
+    transitivePeerDependencies:
+      - '@swc/helpers'
+      - cssnano
+      - postcss
+      - purgecss
+      - relateurl
+      - srcset
+      - terser
+      - typescript
+      - uncss
+    dev: false
 
   /parcel@2.11.0(@swc/helpers@0.5.3)(postcss@8.4.33)(typescript@5.3.3):
     resolution: {integrity: sha512-H/RI1/DmuOkL8RuG/EpNPvtzrbF+7jA/R56ydEEm+lqFbYktKB4COR7JXdHkZXRgbSJyimrFB8d0r9+SaRnj0Q==}
@@ -26539,6 +27205,23 @@ packages:
       - utf-8-validate
     dev: false
 
+  /puppeteer@21.7.0:
+    resolution: {integrity: sha512-Yy+UUy0b9siJezbhHO/heYUoZQUwyqDK1yOQgblTt0l97tspvDVFkcW9toBlnSvSfkDmMI3Dx9cZL6R8bDArHA==}
+    engines: {node: '>=16.13.2'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@puppeteer/browsers': 1.9.1
+      cosmiconfig: 8.3.6
+      puppeteer-core: 21.7.0
+    transitivePeerDependencies:
+      - bufferutil
+      - encoding
+      - supports-color
+      - typescript
+      - utf-8-validate
+    dev: false
+
   /puppeteer@21.7.0(typescript@5.3.3):
     resolution: {integrity: sha512-Yy+UUy0b9siJezbhHO/heYUoZQUwyqDK1yOQgblTt0l97tspvDVFkcW9toBlnSvSfkDmMI3Dx9cZL6R8bDArHA==}
     engines: {node: '>=16.13.2'}
@@ -26944,7 +27627,7 @@ packages:
       react-native-animatable: 1.3.3
     dev: false
 
-  /react-native-paper@5.12.0(react-native-safe-area-context@4.8.2)(react-native-vector-icons@10.0.3)(react-native@0.73.2)(react@18.2.0):
+  /react-native-paper@5.12.0(react-native-safe-area-context@4.8.2)(react-native-vector-icons@9.2.0)(react-native@0.73.2)(react@18.2.0):
     resolution: {integrity: sha512-yL69kB/NqLoVjieEQ/a6caPXOzegHz0CEex6VMRYOiGFzOiPlIrD8gNCwowj6kcCesxJ0vsKb0zmqSFeS2bErg==}
     peerDependencies:
       react: '*'
@@ -26957,7 +27640,7 @@ packages:
       react: 18.2.0
       react-native: 0.73.2(@babel/core@7.23.7)(@babel/preset-env@7.23.8)(react@18.2.0)
       react-native-safe-area-context: 4.8.2(react-native@0.73.2)(react@18.2.0)
-      react-native-vector-icons: 10.0.3
+      react-native-vector-icons: 9.2.0
       use-latest-callback: 0.1.9(react@18.2.0)
     dev: false
 
@@ -26967,7 +27650,7 @@ packages:
       react: '*'
       react-native: '*'
     dependencies:
-      prop-types: 15.7.2
+      prop-types: 15.8.1
       react: 18.2.0
       react-native: 0.73.2(@babel/core@7.23.7)(@babel/preset-env@7.23.8)(react@18.2.0)
     dev: false
@@ -27032,26 +27715,25 @@ packages:
       react-native: 0.73.2(@babel/core@7.23.7)(@babel/preset-env@7.23.8)(react@18.2.0)
     dev: false
 
-  /react-native-vector-icons@10.0.3:
-    resolution: {integrity: sha512-ZgVlV5AdQgnPHHvBEihGf2xwyziT1acpXV1U+WfCgCv3lcEeCRsmwAsBU+kUSNsU+8TcWVsX04kdI6qUaS8D7w==}
+  /react-native-vector-icons@9.2.0:
+    resolution: {integrity: sha512-wKYLaFuQST/chH3AJRjmOLoLy3JEs1JR6zMNgTaemFpNoXs0ztRnTxcxFD9xhX7cJe1/zoN5BpQYe7kL0m5yyA==}
     hasBin: true
     dependencies:
       prop-types: 15.8.1
       yargs: 16.2.0
     dev: false
 
-  /react-native-web@0.19.10(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-IQoHiTQq8egBCVVwmTrYcFLgEFyb4LMZYEktHn4k22JMk9+QTCEz5WTfvr+jdNoeqj/7rtE81xgowKbfGO74qg==}
+  /react-native-web@0.18.12(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-fboP7yqobJ8InSr4fP+bQ3scOtSQtUoPcR+HWasH8b/fk/RO+mWcJs/8n+lewy9WTZc2D68ha7VwRDviUshEWA==}
     peerDependencies:
-      react: ^18.0.0
-      react-dom: ^18.0.0
+      react: ^17.0.2 || ^18.0.0
+      react-dom: ^17.0.2 || ^18.0.0
     dependencies:
       '@babel/runtime': 7.23.8
-      '@react-native/normalize-color': 2.1.0
+      create-react-class: 15.7.0
       fbjs: 3.0.5
       inline-style-prefixer: 6.0.4
-      memoize-one: 6.0.0
-      nullthrows: 1.1.1
+      normalize-css-color: 1.0.2
       postcss-value-parser: 4.2.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -27152,6 +27834,28 @@ packages:
         optional: true
     dependencies:
       '@types/react': 18.2.47
+      '@types/use-sync-external-store': 0.0.3
+      react: 18.2.0
+      react-native: 0.73.2(@babel/core@7.23.7)(@babel/preset-env@7.23.8)(react@18.2.0)
+      redux: 5.0.1
+      use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
+
+  /react-redux@9.0.4(react-native@0.73.2)(react@18.2.0)(redux@5.0.1):
+    resolution: {integrity: sha512-9J1xh8sWO0vYq2sCxK2My/QO7MzUMRi3rpiILP/+tDr8krBHixC6JMM17fMK88+Oh3e4Ae6/sHIhNBgkUivwFA==}
+    peerDependencies:
+      '@types/react': ^18.2.25
+      react: ^18.0
+      react-native: '>=0.69'
+      redux: ^5.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react-native:
+        optional: true
+      redux:
+        optional: true
+    dependencies:
       '@types/use-sync-external-store': 0.0.3
       react: 18.2.0
       react-native: 0.73.2(@babel/core@7.23.7)(@babel/preset-env@7.23.8)(react@18.2.0)
@@ -28133,7 +28837,6 @@ packages:
 
   /sax@1.3.0:
     resolution: {integrity: sha512-0s+oAmw9zLl1V1cS9BtZN7JAd0cW5e0QH4W3LWEK6a4LaLEA2OTpGYWDY+6XasBLtz6wkm3u1xRw95mRuJ59WA==}
-    dev: false
 
   /saxes@6.0.0:
     resolution: {integrity: sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==}
@@ -30506,6 +31209,84 @@ packages:
     resolution: {integrity: sha512-v3UJF8xm68BBj6AF4oQML3ikrfK2c9EmZUyLOfShpJuItAqVBHWP/KtpGinkSsIiP6EZyyb6Z3NXyW9dgS9X1w==}
     dev: false
 
+  /typeorm@0.3.19(mongodb@5.9.2):
+    resolution: {integrity: sha512-OGelrY5qEoAU80mR1iyvmUHiKCPUydL6xp6bebXzS7jyv/X70Gp/jBWRAfF4qGOfy2A7orMiGRfwsBUNbEL65g==}
+    engines: {node: '>= 12.9.0'}
+    hasBin: true
+    peerDependencies:
+      '@google-cloud/spanner': ^5.18.0
+      '@sap/hana-client': ^2.12.25
+      better-sqlite3: ^7.1.2 || ^8.0.0 || ^9.0.0
+      hdb-pool: ^0.1.6
+      ioredis: ^5.0.4
+      mongodb: ^5.8.0
+      mssql: ^9.1.1 || ^10.0.1
+      mysql2: ^2.2.5 || ^3.0.1
+      oracledb: ^6.3.0
+      pg: ^8.5.1
+      pg-native: ^3.0.0
+      pg-query-stream: ^4.0.0
+      redis: ^3.1.1 || ^4.0.0
+      sql.js: ^1.4.0
+      sqlite3: ^5.0.3
+      ts-node: ^10.7.0
+      typeorm-aurora-data-api-driver: ^2.0.0
+    peerDependenciesMeta:
+      '@google-cloud/spanner':
+        optional: true
+      '@sap/hana-client':
+        optional: true
+      better-sqlite3:
+        optional: true
+      hdb-pool:
+        optional: true
+      ioredis:
+        optional: true
+      mongodb:
+        optional: true
+      mssql:
+        optional: true
+      mysql2:
+        optional: true
+      oracledb:
+        optional: true
+      pg:
+        optional: true
+      pg-native:
+        optional: true
+      pg-query-stream:
+        optional: true
+      redis:
+        optional: true
+      sql.js:
+        optional: true
+      sqlite3:
+        optional: true
+      ts-node:
+        optional: true
+      typeorm-aurora-data-api-driver:
+        optional: true
+    dependencies:
+      '@sqltools/formatter': 1.2.5
+      app-root-path: 3.1.0
+      buffer: 6.0.3
+      chalk: 4.1.2
+      cli-highlight: 2.1.11
+      dayjs: 1.11.10
+      debug: 4.3.4(supports-color@8.1.1)
+      dotenv: 16.3.1
+      glob: 10.3.10
+      mkdirp: 2.1.6
+      mongodb: 5.9.2
+      reflect-metadata: 0.1.14
+      sha.js: 2.4.11
+      tslib: 2.6.2
+      uuid: 9.0.1
+      yargs: 17.7.2
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /typeorm@0.3.19(mongodb@5.9.2)(ts-node@10.9.2):
     resolution: {integrity: sha512-OGelrY5qEoAU80mR1iyvmUHiKCPUydL6xp6bebXzS7jyv/X70Gp/jBWRAfF4qGOfy2A7orMiGRfwsBUNbEL65g==}
     engines: {node: '>= 12.9.0'}
@@ -31319,6 +32100,41 @@ packages:
       - typescript
     dev: true
 
+  /vite@5.0.11:
+    resolution: {integrity: sha512-XBMnDjZcNAw/G1gEiskiM1v6yzM4GE5aMGvhWTlHAYYhxb7S3/V1s3m2LDHa8Vh6yIWYYB0iJwsEaS523c4oYA==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': ^18.0.0 || >=20.0.0
+      less: '*'
+      lightningcss: ^1.21.0
+      sass: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.4.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      less:
+        optional: true
+      lightningcss:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+    dependencies:
+      esbuild: 0.19.11
+      postcss: 8.4.33
+      rollup: 4.9.4
+    optionalDependencies:
+      fsevents: 2.3.3
+    dev: false
+
   /vite@5.0.11(@types/node@20.10.7):
     resolution: {integrity: sha512-XBMnDjZcNAw/G1gEiskiM1v6yzM4GE5aMGvhWTlHAYYhxb7S3/V1s3m2LDHa8Vh6yIWYYB0iJwsEaS523c4oYA==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -31925,7 +32741,7 @@ packages:
     resolution: {integrity: sha512-drPFnkQJik/O+uPKpqSgr22mpuFHqKdbS835iAQrUC73L2F5WkboIRd63ai/2Yg6I1jzifPFKH2NTK+cfglkIA==}
     engines: {node: '>=4.0.0'}
     dependencies:
-      sax: 1.2.1
+      sax: 1.3.0
       xmlbuilder: 11.0.1
 
   /xml2js@0.6.0:

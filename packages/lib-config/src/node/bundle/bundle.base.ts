@@ -13,6 +13,13 @@ const { _config, config } = defineConfig({
 
   config: () =>
     ({
+      aliases: [
+        {
+          from: /^uuid$/,
+          to: fromModules('uuid/dist/index.js'),
+        },
+      ],
+
       babelConfig: _babelConfig,
 
       buildPath: fileConfig.buildPath,
@@ -30,6 +37,8 @@ const { _config, config } = defineConfig({
       mainFields: ['module', 'main'],
 
       modulePaths: [fromModules(), fromWorking('node_modules')],
+
+      packager: 'pnpm',
 
       publicPath: fileConfig.publicPath,
 

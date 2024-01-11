@@ -65,7 +65,7 @@ export const DropdownField = forwardRef(
       onChange: () => menuRef.current?.scrollTo({ x: 0, y: 0 }),
     });
 
-    const optionsF = textValue ? result : options;
+    const optionsF = textValue ? options : result;
 
     const handleToggle = (isOpen?: boolean): void => {
       void sleep(100).then(() => {
@@ -83,6 +83,11 @@ export const DropdownField = forwardRef(
         onSubmit && onSubmit();
       }
       handleToggle(false);
+    };
+
+    const handleBlur = (): void => {
+      onTextChange && onTextChange('');
+      onBlur && onBlur();
     };
 
     const selectedOption = options.find(({ id }) => id === valueControlled);
@@ -110,7 +115,7 @@ export const DropdownField = forwardRef(
             leftElement={
               selectedOption && selectedOption.icon && <Icon icon={selectedOption.icon} />
             }
-            onBlur={onBlur}
+            onBlur={handleBlur}
             onChange={onTextChange ?? search}
             onFocus={onFocus}
             onSubmit={handleSelect}

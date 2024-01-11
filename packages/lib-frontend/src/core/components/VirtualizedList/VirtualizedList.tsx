@@ -21,9 +21,7 @@ export const VirtualizedList = forwardRef(
       ...props
     }: RLFCPropsModel<VirtualizedListRefModel, VirtualizedListPropsModel<TType>>,
     ref: ForwardedRef<VirtualizedListRefModel>,
-  ): ReactElement<
-    RLFCPropsModel<VirtualizedListRefModel, VirtualizedListPropsModel<TType>>
-  > => {
+  ): ReactElement<RLFCPropsModel<VirtualizedListRefModel, VirtualizedListPropsModel<TType>>> => {
     const { styles } = useStyles({ props });
     const theme = useTheme();
     return (

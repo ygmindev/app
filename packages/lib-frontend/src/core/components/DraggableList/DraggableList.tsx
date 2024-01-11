@@ -44,7 +44,7 @@ export const DraggableList = <TType extends WithIdModel>({
             opacity={isActive ? theme.opaque[THEME_SIZE.MEDIUM] : 1}>
             {anchor}
 
-            {element({ isActive, item }, i)}
+            <Wrapper flex>{element({ isActive, item }, i)}</Wrapper>
           </Wrapper>
         )}
         spacing={theme.shape.spacing[THEME_SIZE.MEDIUM]}
