@@ -5,6 +5,7 @@ export type DropdownPropsModel = Omit<
   _DropdownPropsModel,
   'delay' | 'maxWidth' | 'maxHeight' | 'offset'
 > & {
+  isHidden?: boolean;
   width?: number;
 };
 

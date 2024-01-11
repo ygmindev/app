@@ -32,7 +32,7 @@ export const shapeStyler: StylerModel<ShapeStylerParamsModel> = ({
     maxWidth,
     minHeight,
     minWidth,
-    opacity,
+    opacity: isHidden ? 0 : opacity,
     overflow: isOverflowHidden ? 'hidden' : undefined,
     pointerEvents: isHidden ? 'none' : undefined,
     position: isAbsoluteFill ? SHAPE_POSITION.ABSOLUTE : position,

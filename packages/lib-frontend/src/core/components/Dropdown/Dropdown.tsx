@@ -19,6 +19,7 @@ export const Dropdown: RLFCModel<DropdownRefModel, DropdownPropsModel> = forward
       children,
       direction,
       isFullWidth,
+      isHidden,
       isOpen,
       maxHeight,
       maxWidth,
@@ -52,6 +53,7 @@ export const Dropdown: RLFCModel<DropdownRefModel, DropdownPropsModel> = forward
           backgroundColor={THEME_COLOR_MORE.SURFACE}
           border
           isFullWidth={width ? undefined : true}
+          isHidden={isHidden}
           isShadow
           maxWidth={maxWidth}
           round
