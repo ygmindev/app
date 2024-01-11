@@ -18,7 +18,7 @@ export type HttpReponseModel<TResult> = {
 
 export type HttpServiceParamsModel = {
   baseUri?: UriParamsModel;
-  onError?(error: Error): void;
+  onError?(error: Error): Promise<void>;
   onRequest?(request: HttpRequestParamsModel): Promise<HttpRequestParamsModel>;
   onResponse?<TResult>(response: HttpReponseModel<TResult>): Promise<HttpReponseModel<TResult>>;
   request?: HttpRequestParamsModel;

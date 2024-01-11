@@ -6,9 +6,6 @@ import {
 } from 'axios';
 import axios from 'axios';
 
-import { CONNECTIVITY } from '#lib-frontend/http/http.constants';
-import { getConnectivity } from '#lib-frontend/http/utils/getConnectivity/getConnectivity';
-import { OfflineError } from '#lib-shared/http/errors/OfflineError/OfflineError';
 import { HTTP_METHOD } from '#lib-shared/http/http.constants';
 import { type HttpMethodModel, type HttpResponseTypeModel } from '#lib-shared/http/http.models';
 import {
@@ -20,7 +17,7 @@ import { uri } from '#lib-shared/http/utils/uri/uri';
 
 export class _HttpService implements _HttpServiceModel {
   protected _instance: AxiosInstance;
-  protected _onError?(error: Error): void;
+  protected _onError?(error: Error): Promise<void>;
 
   constructor({ baseUri, onError, onRequest, onResponse, request }: HttpServiceParamsModel = {}) {
     this._instance = axios.create({
@@ -68,10 +65,8 @@ export class _HttpService implements _HttpServiceModel {
       } as AxiosRequestConfig);
       return (response && (response.data as TResult)) ?? null;
     } catch (e) {
-      throw (e as Error).message === 'Network Error' ||
-        (await getConnectivity()) === CONNECTIVITY.OFFLINE
-        ? new OfflineError()
-        : (e as Error);
+      this._onError && (await this._onError(e as Error));
+      return null;
     }
   };
 

@@ -1,4 +1,5 @@
 import { type MapRouteModel } from '#lib-shared/map/resources/MapRoute/MapRoute.models';
+import { type MAP_ROUTE_TIER } from '#lib-shared/map/resources/MapRoute/MapRouteService/MapRouteService.constants';
 import { type CoordinateModel } from '#lib-shared/map/utils/Coordinate/Coordinate.models';
 
 export type MapRouteServiceModel = {
@@ -7,4 +8,7 @@ export type MapRouteServiceModel = {
 
 export type GetRouteInputModel = {
   coordinates: Array<CoordinateModel>;
+  tier: MapRouteTierModel;
 };
+
+export type MapRouteTierModel = `${MAP_ROUTE_TIER}`;

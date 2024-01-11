@@ -40,6 +40,7 @@ export type EnvironmentConfigModel = {
   SERVER_FIREBASE_ADMIN_EMAIL: string;
   SERVER_FIREBASE_ADMIN_PROJECT_ID: string;
   SERVER_FIREBASE_ADMIN_SECRET: string;
+  SERVER_GOOGLE_API_KEY: string;
   SERVER_HOST: string;
   SERVER_IV_LENGTH: string;
   SERVER_KEY_LENGTH: string;
