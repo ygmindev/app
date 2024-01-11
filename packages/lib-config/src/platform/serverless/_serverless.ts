@@ -52,6 +52,7 @@ export const _serverless = ({
               bundle: true,
               exclude: ['aws-sdk'],
               format: 'cjs',
+              installExtraArgs: ['--shamefully-hoist', '--force'],
               keepOutputDirectory: true,
               packagePath: fromRoot('package.json'),
               packager: 'pnpm',

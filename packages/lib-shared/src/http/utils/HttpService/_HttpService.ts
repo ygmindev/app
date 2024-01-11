@@ -1,4 +1,5 @@
 import {
+  type AxiosError,
   type AxiosInstance,
   type AxiosRequestConfig,
   type AxiosResponse,
@@ -6,7 +7,9 @@ import {
 } from 'axios';
 import axios from 'axios';
 
-import { HTTP_METHOD } from '#lib-shared/http/http.constants';
+import { stringify } from '#lib-shared/core/utils/stringify/stringify';
+import { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
+import { HTTP_METHOD, HTTP_STATUS_CODE } from '#lib-shared/http/http.constants';
 import { type HttpMethodModel, type HttpResponseTypeModel } from '#lib-shared/http/http.models';
 import {
   type _HttpRequestParamsModel,
@@ -65,8 +68,16 @@ export class _HttpService implements _HttpServiceModel {
       } as AxiosRequestConfig);
       return (response && (response.data as TResult)) ?? null;
     } catch (e) {
-      this._onError && (await this._onError(e as Error));
-      return null;
+      const eF = new HttpError(
+        (e as AxiosError).response?.status ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR,
+        stringify((e as AxiosError).response?.data),
+        (e as AxiosError).stack,
+      );
+      if (this._onError) {
+        await this._onError(eF);
+        return null;
+      }
+      throw eF;
     }
   };
 
