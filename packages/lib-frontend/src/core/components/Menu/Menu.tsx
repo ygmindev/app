@@ -60,7 +60,6 @@ export const Menu = forwardRef(
     const handlePressOption = async ({ id, onPress }: MenuOptionModel): Promise<void> => {
       onPress && (await onPress());
       onChange && onChange(id);
-      handleToggle(false);
     };
 
     const isDisabled = elementState === ELEMENT_STATE.DISABLED;

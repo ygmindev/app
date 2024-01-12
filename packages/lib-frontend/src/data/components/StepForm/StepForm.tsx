@@ -14,7 +14,7 @@ import { useForm } from '#lib-frontend/data/hooks/useForm/useForm';
 import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR } from '#lib-frontend/style/style.constants';
+import { THEME_COLOR, THEME_SIZE } from '#lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { type PartialModel } from '#lib-shared/core/core.models';
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
@@ -78,7 +78,8 @@ export const StepForm = <TType, TResult = void>({
         s>
         <Wrapper
           isRowAlign
-          p>
+          pHorizontal
+          pVertical={THEME_SIZE.SMALL}>
           <Appearable isActive={current > 0}>
             <Button
               elementState={current <= 0 || isLoading ? ELEMENT_STATE.DISABLED : undefined}

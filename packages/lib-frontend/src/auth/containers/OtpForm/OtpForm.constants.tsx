@@ -5,7 +5,7 @@ import { validateLength } from '#lib-frontend/data/utils/validateLength/validate
 import { type OtpFormModel } from '#lib-shared/auth/resources/Otp/Otp.models';
 
 export const OTP_FORM_VALIDATORS: FormValidatorsModel<OtpFormModel> = {
-  otp: validateLength(toNumber(process.env.SERVER_OTP_LENGTH)),
+  otp: validateLength(toNumber(process.env.SERVER_APP_OTP_LENGTH)),
 };
 
 export const OTP_FORM_TEST_ID = 'otp';

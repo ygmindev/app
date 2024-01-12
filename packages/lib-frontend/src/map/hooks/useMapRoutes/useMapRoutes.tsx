@@ -1,9 +1,23 @@
-import {
-  type UseMapRoutesModel,
-  type UseMapRoutesParamsModel,
-} from '#lib-frontend/map/hooks/useMapRoutes/useMapRoutes.models';
-import { _useMapRoutes } from '#lib-frontend/map/hooks/useMapRoutes/_useMapRoutes';
+import { useAppGraphQl } from '#lib-frontend/data/hooks/useAppGraphQl/useAppGraphQl';
+import { type UseMapRoutesModel } from '#lib-frontend/map/hooks/useMapRoutes/useMapRoutes.models';
+import { GRAPHQL_OPERATION_TYPE } from '#lib-shared/graphql/graphql.constants';
+import { MAP_ROUTE_RESOURCE } from '#lib-shared/map/resources/MapRoute/MapRoute.constants';
+import { type MapRouteModel } from '#lib-shared/map/resources/MapRoute/MapRoute.models';
+import { type GetRouteInputModel } from '#lib-shared/map/resources/MapRoute/MapRouteService/MapRouteService.models';
+import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 
-export const useMapRoutes = (
-  { ...props }: UseMapRoutesParamsModel,
-): UseMapRoutesModel => _useMapRoutes({ ...props });
+export const useMapRoutes = (): UseMapRoutesModel => {
+  const { query } = useAppGraphQl();
+  return {
+    getRoute: async (input) => {
+      const output = await query<{ input: GetRouteInputModel }, MapRouteModel>({
+        fields: [],
+        name: `${RESOURCE_METHOD_TYPE.GET}${MAP_ROUTE_RESOURCE}`,
+        params: { input: 'GetRouteInput' },
+        type: GRAPHQL_OPERATION_TYPE.QUERY,
+        variables: { input },
+      });
+      return output;
+    },
+  };
+};

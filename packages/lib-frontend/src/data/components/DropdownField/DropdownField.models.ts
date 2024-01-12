@@ -11,9 +11,8 @@ export type DropdownFieldPropsModel<TType extends MenuOptionModel = MenuOptionMo
   TextFieldPropsModel &
     Pick<MenuPropsModel<TType>, 'options' | 'renderOption'> &
     Omit<FieldPropsModel, 'label' | 'error'> & {
-      onTextChange?(value?: string): void;
+      onSearch?(value?: string): void;
       renderValue?(option: TranslatableOptionModel): TranslatableTextModel;
-      textValue?: string;
     };
 
 export type DropdownFieldRefModel = FieldRefModel;

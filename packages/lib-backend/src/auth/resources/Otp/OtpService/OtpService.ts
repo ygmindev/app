@@ -63,7 +63,7 @@ export class OtpService
       await otpService.remove({ filter: objectToEquality(formF) });
       input.form.otp =
         process.env.SERVER_OTP_STATIC ??
-        randomInt(toNumber(process.env.SERVER_OTP_LENGTH)).toString();
+        randomInt(toNumber(process.env.SERVER_APP_OTP_LENGTH)).toString();
       return input;
     },
 

@@ -20,9 +20,9 @@ const { _config, config } = defineConfig({
           to: {
             handler: PROXY_HANDLER.REVERSE_PROXY,
             host: uri({
-              host: process.env.SERVER_HOST,
+              host: process.env.SERVER_APP_HOST,
               isProtocol: false,
-              port: process.env.SERVER_PORT,
+              port: process.env.SERVER_APP_PORT,
             }),
           },
         },
@@ -31,9 +31,9 @@ const { _config, config } = defineConfig({
           to: {
             handler: PROXY_HANDLER.REVERSE_PROXY,
             host: uri({
-              host: process.env.SERVER_WEBSOCKET_HOST,
+              host: process.env.SERVER_APP_WEBSOCKET_HOST,
               isProtocol: false,
-              port: process.env.SERVER_WEBSOCKET_PORT,
+              port: process.env.SERVER_APP_WEBSOCKET_PORT,
             }),
           },
         },

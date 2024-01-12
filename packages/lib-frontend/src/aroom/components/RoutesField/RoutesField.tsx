@@ -1,3 +1,4 @@
+import cloneDeep from 'lodash/cloneDeep';
 import { forwardRef } from 'react';
 
 import {
@@ -13,13 +14,18 @@ import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { AddressField } from '#lib-frontend/map/components/AddressField/AddressField';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
+import { type CoordinateModel } from '#lib-shared/map/utils/Coordinate/Coordinate.models';
 
 export const RoutesField: RLFCModel<RoutesFieldRefModel, RoutesFieldPropsModel> = forwardRef(
   ({ onChange, value, ...props }, _) => {
     const { wrapperProps } = useLayoutStyles({ props });
     const { t } = useTranslation();
     const { valueControlled, valueControlledSet } = useValueControlled({
-      defaultValue: [{ id: 'from' }, { id: 'to' }],
+      defaultValue: [
+        { latitude: 0, longitude: 0 },
+        { latitude: 1, longitude: 1 },
+      ],
       onChange,
       value,
     });
@@ -27,7 +33,7 @@ export const RoutesField: RLFCModel<RoutesFieldRefModel, RoutesFieldPropsModel> 
       <Wrapper
         {...wrapperProps}
         s>
-        <DraggableList
+        <DraggableList<CoordinateModel & WithIdModel>
           element={({ item }, i) => (
             <AddressField
               icon="location"
@@ -35,10 +41,21 @@ export const RoutesField: RLFCModel<RoutesFieldRefModel, RoutesFieldPropsModel> 
               label={
                 i === 0 ? 'From' : i === (valueControlled?.length ?? 0) - 1 ? 'To' : `Stop ${i}`
               }
+              onChange={(v) => {
+                const valueNew = cloneDeep(valueControlled) ?? [];
+                valueNew[i] = v;
+                valueControlledSet(valueNew);
+              }}
+              value={valueControlled?.[i]}
             />
           )}
+          onChange={valueControlledSet}
           s
-          value={valueControlled ?? []}
+          value={valueControlled?.map(({ latitude, longitude }) => ({
+            id: `${longitude},${latitude}`,
+            latitude,
+            longitude,
+          }))}
         />
 
         <Button
@@ -46,7 +63,10 @@ export const RoutesField: RLFCModel<RoutesFieldRefModel, RoutesFieldPropsModel> 
           onPress={() =>
             valueControlledSet([
               ...(valueControlled ?? []),
-              { id: `stop-${valueControlled?.length}` },
+              {
+                latitude: valueControlled?.length ?? 0,
+                longitude: valueControlled?.length ?? 0,
+              },
             ])
           }
           type={BUTTON_TYPE.INVISIBLE}>

@@ -775,6 +775,8 @@ scalar DateTime
 
 input GetRouteInputInput {
   coordinates: [CoordinateInput]
+  timing: String
+  vehicle: String
 }
 
 type Group {
@@ -975,7 +977,10 @@ input GroupUpdateUpdateInput {
 }
 
 type MapRoute {
-  price: Float
+  distance: Float
+  duration: Float
+  polyline: String
+  priceTiers: [PriceTier]
 }
 
 type Mutation {
@@ -1269,6 +1274,11 @@ type PaymentMethodTokenCreateOutput {
   result: String
 }
 
+type PriceTier {
+  price: Float
+  timing: String
+}
+
 type Query {
   AccessGet(input: AccessGetInput): AccessGetOutput
   AccessGetConnection(input: AccessGetConnectionInput): AccessGetConnectionOutput
@@ -1283,11 +1293,11 @@ type Query {
   ChatGet(input: ChatGetInput): ChatGetOutput
   ChatGetConnection(input: ChatGetConnectionInput): ChatGetConnectionOutput
   ChatGetMany(input: ChatGetManyInput): ChatGetManyOutput
+  GetMapRoute(input: GetRouteInputInput): MapRoute
   GroupGet(input: GroupGetInput): GroupGetOutput
   GroupGetConnection(input: GroupGetConnectionInput): GroupGetConnectionOutput
   GroupGetMany(input: GroupGetManyInput): GroupGetManyOutput
   GroupGetManyProtectedGetMany(input: GroupGetManyProtectedGetManyInput): GroupGetManyProtectedGetManyOutput
-  MapRoute(input: GetRouteInputInput): MapRoute
   OtpGet(input: OtpGetInput): OtpGetOutput
   OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
   OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput

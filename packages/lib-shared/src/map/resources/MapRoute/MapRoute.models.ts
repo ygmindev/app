@@ -1,6 +1,8 @@
+import { type PriceTierModel } from '#lib-shared/aroom/utils/PriceTier/PriceTier.models';
+
 export type MapRouteModel = {
   distance: number;
-  duration: string;
+  duration: number;
   polyline: string;
-  price: number;
+  priceTiers: Array<PriceTierModel>;
 };

@@ -5,7 +5,6 @@ import { type EnvironmentModel } from '#lib-shared/environment/environment.model
 
 export type EnvironmentConfigModel = {
   APP_AMPLITUDE_API_KEY: string;
-  APP_BINGMAPS_API_KEY: string;
   APP_FIREBASE_API_KEY: string;
   APP_FIREBASE_APP_ID: string;
   APP_FIREBASE_AUTH_DOMAIN: string;
@@ -13,7 +12,6 @@ export type EnvironmentConfigModel = {
   APP_FIREBASE_SENDER_ID: string;
   APP_FIREBASE_STORAGE_BUCKET: string;
   APP_GEOCODING_API_KEY: string;
-  APP_GOOGLE_API_KEY: string;
   APP_HOST: string;
   APP_IS_DEBUG: BooleanStringModel;
   APP_IS_STATIC_SERVER: BooleanStringModel;
@@ -27,7 +25,13 @@ export type EnvironmentConfigModel = {
   ENV_PLATFORM: PlatformModel;
   NODE_ENV: EnvironmentModel;
   NODE_OPTIONS?: string;
+  SERVER_APP_GOOGLE_API_KEY: string;
+  SERVER_APP_HOST: string;
+  SERVER_APP_OTP_LENGTH: string;
+  SERVER_APP_PORT: string;
   SERVER_APP_SECRET: string;
+  SERVER_APP_WEBSOCKET_HOST: string;
+  SERVER_APP_WEBSOCKET_PORT: number;
   SERVER_DB_MONGO_NAME: string;
   SERVER_DB_MONGO_PASSWORD: string;
   SERVER_DB_MONGO_URL: string;
@@ -40,11 +44,8 @@ export type EnvironmentConfigModel = {
   SERVER_FIREBASE_ADMIN_EMAIL: string;
   SERVER_FIREBASE_ADMIN_PROJECT_ID: string;
   SERVER_FIREBASE_ADMIN_SECRET: string;
-  SERVER_GOOGLE_API_KEY: string;
-  SERVER_HOST: string;
   SERVER_IV_LENGTH: string;
   SERVER_KEY_LENGTH: string;
-  SERVER_OTP_LENGTH: string;
   SERVER_OTP_STATIC?: string;
   SERVER_PLAID_CLIENT_ID: string;
   SERVER_PLAID_COUNTRY_CODES: string;
@@ -53,7 +54,6 @@ export type EnvironmentConfigModel = {
   SERVER_PLAID_REDIRECT_URI: string;
   SERVER_PLAID_SECRET: string;
   SERVER_PLAID_VERSION: string;
-  SERVER_PORT: string;
   SERVER_REGION: string;
   SERVER_SALT_LENGTH: string;
   SERVER_STRIPE_TOKEN: string;
@@ -61,8 +61,6 @@ export type EnvironmentConfigModel = {
   SERVER_TWILIO_FROM: string;
   SERVER_TWILIO_SID: string;
   SERVER_TWILIO_TOKEN: string;
-  SERVER_WEBSOCKET_HOST: string;
-  SERVER_WEBSOCKET_PORT: number;
   STATIC_HOST: string;
   STATIC_PORT: number;
   TEST_IS_ETE?: BooleanStringModel;

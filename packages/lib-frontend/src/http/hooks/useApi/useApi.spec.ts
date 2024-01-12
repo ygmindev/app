@@ -11,9 +11,9 @@ const { displayName } = withTest({ useApi });
 
 describe(displayName, () => {
   const URI_PARAMS: UriParamsModel = {
-    host: process.env.SERVER_HOST,
+    host: process.env.SERVER_APP_HOST,
     pathname: 'api',
-    port: process.env.SERVER_PORT ? toNumber(process.env.SERVER_PORT) : undefined,
+    port: process.env.SERVER_APP_PORT ? toNumber(process.env.SERVER_APP_PORT) : undefined,
   };
   const SUCCESS = 'success';
 

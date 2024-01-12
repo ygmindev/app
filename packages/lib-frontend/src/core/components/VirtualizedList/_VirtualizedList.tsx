@@ -24,7 +24,6 @@ export const _VirtualizedList = forwardRef(
     ref: ForwardedRef<_VirtualizedListRefModel>,
   ): ReactElement<RSFCPropsModel<_VirtualizedListRefModel, _VirtualizedListPropsModel<TType>>> => {
     const { styles } = useStyles({ props });
-    console.warn(items);
     const renderItem = useCallback<ListRenderItem<TType>>(({ item }) => render(item), [items]);
     return (
       <FlatList<TType>

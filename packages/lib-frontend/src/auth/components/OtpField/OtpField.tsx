@@ -24,7 +24,7 @@ import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/sha
 import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 import { withId } from '#lib-shared/core/utils/withId/withId';
 
-const otpLength = toNumber(process.env.SERVER_OTP_LENGTH);
+const otpLength = toNumber(process.env.SERVER_APP_OTP_LENGTH);
 
 const IDS = withId(range(otpLength));
 

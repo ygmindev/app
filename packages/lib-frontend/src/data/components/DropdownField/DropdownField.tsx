@@ -1,6 +1,6 @@
 import find from 'lodash/find';
 import lowerCase from 'lodash/lowerCase';
-import { type ForwardedRef, forwardRef, type ReactElement } from 'react';
+import { type ForwardedRef, forwardRef, type ReactElement, useState } from 'react';
 import { useRef } from 'react';
 
 import { AnimatableView } from '#lib-frontend/animation/components/AnimatableView/AnimatableView';
@@ -21,7 +21,6 @@ import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useSearch } from '#lib-frontend/search/hooks/useSearch/useSearch';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { sleep } from '#lib-shared/core/utils/sleep/sleep';
 
 export const DropdownField = forwardRef(
   <TType extends MenuOptionModel = MenuOptionModel>(
@@ -36,13 +35,12 @@ export const DropdownField = forwardRef(
       onBlur,
       onChange,
       onFocus,
+      onSearch,
       onSubmit,
-      onTextChange,
       options,
       renderOption,
       renderValue,
       round,
-      textValue,
       value,
       width,
       ...props
@@ -67,15 +65,13 @@ export const DropdownField = forwardRef(
       })) as Array<TType>,
       onChange: () => menuRef.current?.scrollTo({ x: 0, y: 0 }),
     });
-
-    const optionsF = textValue ? options : result;
+    const optionsF = result.length > 0 ? result : options;
+    const [textValue, textValueSet] = useState<string>();
 
     const handleToggle = (isOpen?: boolean): void => {
-      void sleep(100).then(() => {
-        menuRef.current?.toggle(isOpen);
-        onTextChange && onTextChange('');
-        search('');
-      });
+      menuRef.current?.toggle(isOpen);
+      onSearch && onSearch('');
+      search('');
     };
 
     const handleSelect = (): void => {
@@ -98,6 +94,16 @@ export const DropdownField = forwardRef(
           : selectedOption.label ?? selectedOption.id
       : undefined;
 
+    const handleSearch = (v: string): void => {
+      onSearch && onSearch(v);
+      textValueSet(v);
+    };
+
+    const handleChange = (v: string): void => {
+      valueControlledSet(v);
+      handleToggle(false);
+    };
+
     return (
       <Menu
         anchor={(isOpen) => (
@@ -115,7 +121,7 @@ export const DropdownField = forwardRef(
               selectedOption && selectedOption.icon && <Icon icon={selectedOption.icon} />
             }
             onBlur={onBlur}
-            onChange={onTextChange ?? search}
+            onChange={handleSearch}
             onFocus={onFocus}
             onSubmit={handleSelect}
             ref={ref}
@@ -132,13 +138,13 @@ export const DropdownField = forwardRef(
               </AnimatableView>
             }
             round={round}
-            value={isOpen ? textValue ?? query : t(selectedLabel)}
+            value={isOpen ? textValue : t(selectedLabel)}
             width={width}
           />
         )}
         elementState={elementState}
         isFullWidth
-        onChange={valueControlledSet}
+        onChange={handleChange}
         options={optionsF}
         ref={menuRef}
         renderOption={renderOption}

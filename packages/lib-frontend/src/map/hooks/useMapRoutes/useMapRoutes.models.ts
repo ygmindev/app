@@ -1,3 +1,3 @@
-import { type _UseMapRoutesModel } from '#lib-frontend/map/hooks/useMapRoutes/_useMapRoutes.models';
+import { type MapRouteServiceModel } from '#lib-shared/map/resources/MapRoute/MapRouteService/MapRouteService.models';
 
-export type UseMapRoutesModel = _UseMapRoutesModel;
+export type UseMapRoutesModel = MapRouteServiceModel;

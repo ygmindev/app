@@ -1,26 +1,36 @@
+import round from 'lodash/round';
+import toNumber from 'lodash/toNumber';
+
 import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
 import { HttpService } from '#lib-backend/http/utils/HttpService/HttpService';
-import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject.base';
-import { stringify } from '#lib-shared/core/utils/stringify/stringify';
+import { PRICING_TABLE } from '#lib-backend/map/resources/MapRoute/MapRouteService/MapRouteService.constants';
+import { TIMING } from '#lib-shared/aroom/aroom.constants';
+import { type TimingModel, type VehicleTypeModel } from '#lib-shared/aroom/aroom.models';
+import { type PriceTierModel } from '#lib-shared/aroom/utils/PriceTier/PriceTier.models';
 import { withInject } from '#lib-shared/core/utils/withInject/withInject';
 import { type MapRouteModel } from '#lib-shared/map/resources/MapRoute/MapRoute.models';
-import { MAP_ROUTE_TIER } from '#lib-shared/map/resources/MapRoute/MapRouteService/MapRouteService.constants';
 import {
   type GetRouteInputModel,
   type MapRouteServiceModel,
-  type MapRouteTierModel,
 } from '#lib-shared/map/resources/MapRoute/MapRouteService/MapRouteService.models';
 import { type CoordinateModel } from '#lib-shared/map/utils/Coordinate/Coordinate.models';
 
-const CONFIG: Record<MapRouteTierModel, { minRate: number; ratePerMile: number }> = {
-  [MAP_ROUTE_TIER.RUSH]: {
-    minRate: 30,
-    ratePerMile: 10,
-  },
-  [MAP_ROUTE_TIER.SAME_DAY]: {
-    minRate: 30,
-    ratePerMile: 10,
-  },
+const getPrice = ({
+  distanceMeters,
+  durationSeconds,
+  timing,
+  vehicle,
+}: {
+  distanceMeters: number;
+  durationSeconds: number;
+  timing: TimingModel;
+  vehicle: VehicleTypeModel;
+}): number => {
+  const { base, min, perMile, perMinute } = PRICING_TABLE[vehicle][timing];
+  const miles = distanceMeters / 1609.34;
+  const minutes = durationSeconds / 60;
+  const price = Math.max(min, base + perMile * miles + perMinute * minutes);
+  return round(price, 2);
 };
 
 @withContainer()
@@ -28,8 +38,10 @@ export class MapRouteService implements MapRouteServiceModel {
   @withInject(HttpService) protected httpService!: HttpService;
 
   async getRoute(input: GetRouteInputModel): Promise<MapRouteModel> {
-    const { coordinates } = input;
+    const { coordinates, timing, vehicle } = input;
+
     // const [origin, destination] = [coordinates[0], coordinates[coordinates.length - 1]];
+
     const origin: CoordinateModel = {
       latitude: 40.71486,
       longitude: -74.0142,
@@ -47,25 +59,64 @@ export class MapRouteService implements MapRouteServiceModel {
     };
     intermediates?.length &&
       (params.intermediates = intermediates.map((value) => ({ latLng: value })));
-    const result = await this.httpService.post({
-      params: cleanObject(params),
-      request: {
-        headers: {
-          'X-Goog-Api-Key': process.env.SERVER_GOOGLE_API_KEY,
-          'X-Goog-FieldMask':
-            'routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline',
+    // const result = await this.httpService.post<
+    //   unknown,
+    //   {
+    //     routes: Array<{
+    //       distanceMeters: number;
+    //       duration: string;
+    //       polyline: { encodedPolyline: string };
+    //     }>;
+    //   }
+    // >({
+    //   params: cleanObject(params),
+    //   request: {
+    //     headers: {
+    //       'X-Goog-Api-Key': process.env.SERVER_APP_GOOGLE_API_KEY,
+    //       'X-Goog-FieldMask':
+    //         'routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline',
+    //     },
+    //   },
+    //   url: 'https://routes.googleapis.com/directions/v2:computeRoutes',
+    // });
+    const result = {
+      routes: [
+        {
+          distanceMeters: 6800,
+          duration: '1805s',
+          polyline: {
+            encodedPolyline:
+              'kbowFlxvbMhCd@x@TsA|DqB|FwCuBZcDEg@j@oGc@K}YcEae@yFuDWmIe@oDMk\\}AwTu@_CHcCNoAEk@IiAa@qCuA}@]{E}@y@Og@ABSAa@Ky@IWMUkBiAeEsCy@e@eHyEWMgm@w`@{DmCaKqGw@k@}BuAuFuDcOyJ|Mqb@sFqD',
+          },
         },
-      },
-      url: 'https://routes.googleapis.com/directions/v2:computeRoutes',
-    });
-    console.warn('DONE!');
-    console.warn(stringify(result));
+      ],
+    };
 
+    const route = result?.routes?.[0];
+    if (route) {
+      const seconds = toNumber(route.duration.replace('s', ''));
+      const priceTiers: Array<PriceTierModel> = [TIMING.RUSH, TIMING.SAME_DAY].map((timing) => ({
+        price: getPrice({
+          distanceMeters: route.distanceMeters,
+          durationSeconds: seconds,
+          timing,
+          vehicle,
+        }),
+        timing,
+      }));
+
+      return {
+        distance: route.distanceMeters,
+        duration: seconds,
+        polyline: route.polyline.encodedPolyline,
+        priceTiers,
+      };
+    }
     return {
-      distance: 100,
-      duration: '',
+      distance: 0,
+      duration: 0,
       polyline: '',
-      price: 100,
+      priceTiers: [],
     };
   }
 }

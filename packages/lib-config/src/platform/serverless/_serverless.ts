@@ -40,7 +40,7 @@ export const _serverless = ({
         ignoreJWTSignature: true,
         lambdaPort: null,
         noPrependStageInUrl: true,
-        websocketPort: process.env.SERVER_WEBSOCKET_PORT,
+        websocketPort: process.env.SERVER_APP_WEBSOCKET_PORT,
       },
 
       ...(platform === PLATFORM.NODE
@@ -52,7 +52,10 @@ export const _serverless = ({
               bundle: true,
               exclude: ['aws-sdk'],
               format: 'cjs',
-              installExtraArgs: ['--shamefully-hoist', '--force'],
+              installExtraArgs: [
+                '--shamefully-hoist',
+                // '--force'
+              ],
               keepOutputDirectory: true,
               packagePath: fromRoot('package.json'),
               packager: 'pnpm',

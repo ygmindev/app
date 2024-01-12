@@ -17,7 +17,7 @@ export const useWebsocket = <TType = unknown,>({
   const result = _useWebsocket<TType>({
     ...params,
     url: uri({
-      host: process.env.SERVER_WEBSOCKET_HOST,
+      host: process.env.SERVER_APP_WEBSOCKET_HOST,
       params: isCredentials
         ? credentials.Authorization && { Authorization: credentials.Authorization }
         : undefined,

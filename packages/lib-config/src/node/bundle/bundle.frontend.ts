@@ -28,7 +28,7 @@ const { _config, config } = defineConfig({
         __DEV__: `${process.env.NODE_ENV === 'development'}`,
       },
 
-      envPrefix: ['APP_', 'SERVER_'],
+      envPrefix: ['APP_', 'SERVER_APP_'],
 
       externals: ['raf/polyfill.js', 'setimmediate'],
 

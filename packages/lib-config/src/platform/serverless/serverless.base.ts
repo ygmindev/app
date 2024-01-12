@@ -19,13 +19,13 @@ const { _config, config } = defineConfig({
 
       environment: process.env.NODE_ENV,
 
-      host: process.env.SERVER_HOST,
+      host: process.env.SERVER_APP_HOST,
 
       name: 'serverless',
 
       platform: PLATFORM.BASE,
 
-      port: toNumber(process.env.SERVER_PORT),
+      port: toNumber(process.env.SERVER_APP_PORT),
 
       provider: SERVERLESS_PROVIDER.AWS,
 
