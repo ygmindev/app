@@ -1,5 +1,5 @@
 import cloneDeep from 'lodash/cloneDeep';
-import { forwardRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import {
   type RoutesFieldPropsModel,
@@ -13,27 +13,43 @@ import { type RLFCModel } from '#lib-frontend/core/core.models';
 import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { AddressField } from '#lib-frontend/map/components/AddressField/AddressField';
+import {
+  type AddressFieldRefModel,
+  type AddressOptionModel,
+} from '#lib-frontend/map/components/AddressField/AddressField.models';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
-import { type CoordinateModel } from '#lib-shared/map/utils/Coordinate/Coordinate.models';
+import { uid } from '#lib-shared/core/utils/uid/uid';
 
 export const RoutesField: RLFCModel<RoutesFieldRefModel, RoutesFieldPropsModel> = forwardRef(
-  ({ onChange, value, ...props }, _) => {
+  ({ onChange, value, ...props }, ref) => {
     const { wrapperProps } = useLayoutStyles({ props });
     const { t } = useTranslation();
+    const fieldRef = useRef<AddressFieldRefModel>(null);
     const { valueControlled, valueControlledSet } = useValueControlled({
       defaultValue: [
-        { latitude: 0, longitude: 0 },
-        { latitude: 1, longitude: 1 },
+        { id: '0', label: '', latitude: 0, longitude: 0 },
+        { id: '1', label: '', latitude: 1, longitude: 1 },
       ],
       onChange,
       value,
     });
+
+    useImperativeHandle(ref, () => ({
+      beforeSubmit: async () =>
+        valueControlled?.map(({ latitude, longitude }) => ({
+          latitude,
+          longitude,
+        })),
+      blur: () => fieldRef.current?.blur(),
+      focus: () => fieldRef.current?.focus(),
+      reset: () => null,
+    }));
+
     return (
       <Wrapper
         {...wrapperProps}
         s>
-        <DraggableList<CoordinateModel & WithIdModel>
+        <DraggableList<AddressOptionModel>
           element={({ item }, i) => (
             <AddressField
               icon="location"
@@ -46,16 +62,13 @@ export const RoutesField: RLFCModel<RoutesFieldRefModel, RoutesFieldPropsModel> 
                 valueNew[i] = v;
                 valueControlledSet(valueNew);
               }}
+              ref={fieldRef}
               value={valueControlled?.[i]}
             />
           )}
           onChange={valueControlledSet}
           s
-          value={valueControlled?.map(({ latitude, longitude }) => ({
-            id: `${longitude},${latitude}`,
-            latitude,
-            longitude,
-          }))}
+          value={valueControlled}
         />
 
         <Button
@@ -64,6 +77,8 @@ export const RoutesField: RLFCModel<RoutesFieldRefModel, RoutesFieldPropsModel> 
             valueControlledSet([
               ...(valueControlled ?? []),
               {
+                id: uid(),
+                label: '',
                 latitude: valueControlled?.length ?? 0,
                 longitude: valueControlled?.length ?? 0,
               },

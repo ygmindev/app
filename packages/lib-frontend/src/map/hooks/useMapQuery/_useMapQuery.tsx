@@ -7,6 +7,7 @@ import {
   type _UseMapQueryApiResultModel,
   type _UseMapQueryModel,
 } from '#lib-frontend/map/hooks/useMapQuery/_useMapQuery.models';
+import { serializeAddress } from '#lib-frontend/map/hooks/useMapQuery/useMapQuery';
 import { type MapQueryResultModel } from '#lib-frontend/map/hooks/useMapQuery/useMapQuery.models';
 import { sort } from '#lib-shared/core/utils/sort/sort';
 
@@ -23,11 +24,11 @@ export const _useMapQuery = (): _UseMapQueryModel => {
         });
         dataSet(
           result
-            ? sort(result, [['importance', false]]).map(({ display_name, lat, lon }) => ({
-                label: display_name,
-                latitude: toNumber(lat),
-                longitude: toNumber(lon),
-              }))
+            ? sort(result, [['importance', false]]).map(({ display_name, lat, lon }) => {
+                const [label, latitude, longitude] = [display_name, toNumber(lat), toNumber(lon)];
+                const id = serializeAddress({ label, latitude, longitude });
+                return { id, label, latitude, longitude };
+              })
             : [],
         );
       } else {

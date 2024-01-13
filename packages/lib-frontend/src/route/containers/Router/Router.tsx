@@ -33,7 +33,7 @@ const getNavigatableRoute = (route: RouteModel): RouteModel => {
         routes: [
           {
             element: elementF,
-            header: merge([header, { previous: 1 }]),
+            // header: merge([header, { previous: 1 }]),
             isNavigatable: false,
             pathname: '/',
             title,

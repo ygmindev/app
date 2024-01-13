@@ -1,6 +1,6 @@
 import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
-import { TimingModel } from '#lib-shared/aroom/aroom.models';
+import { type TimingModel } from '#lib-shared/aroom/aroom.models';
 import { type PriceTierModel } from '#lib-shared/aroom/utils/PriceTier/PriceTier.models';
 import { DATA_TYPE } from '#lib-shared/data/data.constants';
 

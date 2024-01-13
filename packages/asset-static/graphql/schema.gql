@@ -773,7 +773,7 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
-input GetRouteInputInput {
+input GetRouteInput {
   coordinates: [CoordinateInput]
   timing: String
   vehicle: String
@@ -1293,7 +1293,7 @@ type Query {
   ChatGet(input: ChatGetInput): ChatGetOutput
   ChatGetConnection(input: ChatGetConnectionInput): ChatGetConnectionOutput
   ChatGetMany(input: ChatGetManyInput): ChatGetManyOutput
-  GetMapRoute(input: GetRouteInputInput): MapRoute
+  GetMapRoute(input: GetRouteInput): MapRoute
   GroupGet(input: GroupGetInput): GroupGetOutput
   GroupGetConnection(input: GroupGetConnectionInput): GroupGetConnectionOutput
   GroupGetMany(input: GroupGetManyInput): GroupGetManyOutput

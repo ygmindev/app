@@ -8,7 +8,7 @@ import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
 import { withField } from '#lib-backend/resource/utils/withField/withField';
 import { withParams } from '#lib-backend/resource/utils/withParams/withParams';
 import { withResult } from '#lib-backend/resource/utils/withResult/withResult';
-import { TimingModel, VehicleTypeModel } from '#lib-shared/aroom/aroom.models';
+import { type TimingModel, type VehicleTypeModel } from '#lib-shared/aroom/aroom.models';
 import { withInject } from '#lib-shared/core/utils/withInject/withInject';
 import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
 import { MAP_ROUTE_RESOURCE } from '#lib-shared/map/resources/MapRoute/MapRoute.constants';
@@ -17,7 +17,7 @@ import { type GetRouteInputModel } from '#lib-shared/map/resources/MapRoute/MapR
 import { type CoordinateModel } from '#lib-shared/map/utils/Coordinate/Coordinate.models';
 import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
 
-@withEntity({ name: 'GetRouteInput' })
+@withEntity({ name: 'GetRoute' })
 export class GetRouteInput implements GetRouteInputModel {
   @withField({ Resource: () => Coordinate, isArray: true, type: PROPERTY_TYPE.RESOURCE })
   coordinates!: Array<CoordinateModel>;

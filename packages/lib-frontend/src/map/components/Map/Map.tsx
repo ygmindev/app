@@ -18,6 +18,7 @@ export const Map: LFCModel<MapPropsModel> = ({
   return (
     <Wrapper
       {...wrapperProps}
+      border
       height={height}
       isOverflowHidden
       round

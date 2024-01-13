@@ -11,7 +11,7 @@ export const useMapRoutes = (): UseMapRoutesModel => {
   return {
     getRoute: async (input) => {
       const output = await query<{ input: GetRouteInputModel }, MapRouteModel>({
-        fields: [],
+        fields: ['distance', 'duration', 'polyline', { priceTiers: ['price', 'timing'] }],
         name: `${RESOURCE_METHOD_TYPE.GET}${MAP_ROUTE_RESOURCE}`,
         params: { input: 'GetRouteInput' },
         type: GRAPHQL_OPERATION_TYPE.QUERY,

@@ -1,7 +1,6 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
 import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 import { type Plugin } from 'esbuild';
-// import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
 import { readFileSync } from 'fs';
 import { sep } from 'path';

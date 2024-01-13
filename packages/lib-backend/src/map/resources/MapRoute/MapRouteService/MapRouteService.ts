@@ -59,6 +59,7 @@ export class MapRouteService implements MapRouteServiceModel {
     };
     intermediates?.length &&
       (params.intermediates = intermediates.map((value) => ({ latLng: value })));
+
     // const result = await this.httpService.post<
     //   unknown,
     //   {

@@ -169,6 +169,7 @@ export const _bundle = ({
       force: true,
 
       include: transpiles,
+
     },
 
     plugins: filterNil([

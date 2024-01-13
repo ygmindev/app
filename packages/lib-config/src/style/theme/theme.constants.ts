@@ -7,7 +7,8 @@ import { type PartialDeepModel } from '#lib-shared/core/core.models';
 
 export const THEME_COLOR_TONES: Record<ThemeColorModel, string> = {
   [THEME_COLOR.ERROR]: '#f44336',
-  [THEME_COLOR.PRIMARY]: '#151c6d',
+  // [THEME_COLOR.PRIMARY]: '#151c6d',
+  [THEME_COLOR.PRIMARY]: '#000000',
   [THEME_COLOR.SECONDARY]: '#00DCDC',
   [THEME_COLOR.SUCCESS]: '#28a745',
   [THEME_COLOR.WARNING]: '#ffb52e',
@@ -38,7 +39,7 @@ export const THEME_CONFIG = {
       [THEME_SIZE.LARGE]: 20,
       [THEME_SIZE.MEDIUM]: 14,
       [THEME_SIZE.SMALL]: 12,
-      [THEME_SIZE_MORE.XLARGE]: 34,
+      [THEME_SIZE_MORE.XLARGE]: 38,
       [THEME_SIZE_MORE.XSMALL]: 10,
     },
 

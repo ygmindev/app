@@ -86,13 +86,13 @@ export const DropdownField = forwardRef(
     };
 
     const selectedOption = options.find(({ id }) => id === valueControlled);
-    const selectedLabel = selectedOption
-      ? renderValue
-        ? renderValue(selectedOption)
-        : renderOption
+    const displayLabel = renderValue
+      ? renderValue(valueControlled)
+      : selectedOption
+        ? renderOption
           ? renderOption(selectedOption)
           : selectedOption.label ?? selectedOption.id
-      : undefined;
+        : undefined;
 
     const handleSearch = (v: string): void => {
       onSearch && onSearch(v);
@@ -138,7 +138,7 @@ export const DropdownField = forwardRef(
               </AnimatableView>
             }
             round={round}
-            value={isOpen ? textValue : t(selectedLabel)}
+            value={isOpen ? textValue : t(displayLabel)}
             width={width}
           />
         )}

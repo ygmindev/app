@@ -1,6 +1,6 @@
 import { type FieldPropsModel, type FieldRefModel } from '#lib-frontend/data/data.models';
-import { type CoordinateModel } from '#lib-shared/map/utils/Coordinate/Coordinate.models';
+import { type AddressOptionModel } from '#lib-frontend/map/components/AddressField/AddressField.models';
 
-export type RoutesFieldPropsModel = FieldPropsModel<Array<CoordinateModel>>;
+export type RoutesFieldPropsModel = FieldPropsModel<Array<AddressOptionModel>>;
 
-export type RoutesFieldRefModel = FieldRefModel<Array<CoordinateModel>>;
+export type RoutesFieldRefModel = FieldRefModel<Array<AddressOptionModel>>;

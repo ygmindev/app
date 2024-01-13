@@ -1,4 +1,3 @@
-import toNumber from 'lodash/toNumber';
 import { forwardRef } from 'react';
 
 import { type RLFCModel } from '#lib-frontend/core/core.models';
@@ -9,7 +8,11 @@ import {
   type AddressFieldRefModel,
   type AddressOptionModel,
 } from '#lib-frontend/map/components/AddressField/AddressField.models';
-import { useMapQuery } from '#lib-frontend/map/hooks/useMapQuery/useMapQuery';
+import {
+  deserializeAddress,
+  serializeAddress,
+  useMapQuery,
+} from '#lib-frontend/map/hooks/useMapQuery/useMapQuery';
 import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
 export const AddressField: RLFCModel<AddressFieldRefModel, AddressFieldPropsModel> = forwardRef(
@@ -22,16 +25,8 @@ export const AddressField: RLFCModel<AddressFieldRefModel, AddressFieldPropsMode
       value,
     });
 
-    const serialize = ({ latitude, longitude }: Omit<AddressOptionModel, 'id'>): string =>
-      `${longitude},${latitude}`;
-
-    const deserialize = (v: string): Omit<AddressOptionModel, 'id'> => {
-      const [longitude, latitude] = v.split(',');
-      return { latitude: toNumber(latitude), longitude: toNumber(longitude) };
-    };
-
     const optionsF = data.map(({ label, latitude, longitude }) => ({
-      id: serialize({ latitude, longitude }),
+      id: serializeAddress({ label, latitude, longitude }),
       label,
       latitude,
       longitude,
@@ -48,13 +43,14 @@ export const AddressField: RLFCModel<AddressFieldRefModel, AddressFieldPropsMode
         label={label}
         onChange={(v) => {
           if (v) {
-            const { latitude, longitude } = deserialize(v);
-            valueControlledSet({ latitude, longitude });
+            const { label, latitude, longitude } = deserializeAddress(v);
+            valueControlledSet({ id: v, label, latitude, longitude });
           }
         }}
         onSearch={handleSearch}
         options={optionsF}
-        value={valueControlled ? serialize(valueControlled) : undefined}
+        renderValue={(v) => v && deserializeAddress(v).label}
+        value={valueControlled ? serializeAddress(valueControlled) : undefined}
       />
     );
   },
