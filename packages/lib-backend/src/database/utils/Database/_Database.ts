@@ -4,26 +4,26 @@ import isString from 'lodash/isString';
 import last from 'lodash/last';
 import { type Document, type Filter, type MongoError, ObjectId, type UpdateFilter } from 'mongodb';
 
-import { cleanDocument } from '#lib-backend/database/utils/cleanDocument/cleanDocument';
-import { type _DatabaseModel } from '#lib-backend/database/utils/Database/_Database.models';
-import { type RepositoryModel } from '#lib-backend/database/utils/Database/Database.models';
-import { getConnection } from '#lib-backend/database/utils/getConnection/getConnection';
-import { type _DatabaseConfigModel } from '#lib-config/database/database.models';
-import { type PartialModel } from '#lib-shared/core/core.models';
-import { DuplicateError } from '#lib-shared/core/errors/DuplicateError/DuplicateError';
-import { UninitializedError } from '#lib-shared/core/errors/UninitializedError/UninitializedError';
-import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
-import { debug, info } from '#lib-shared/logging/utils/logger/logger';
-import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-import { type ResourceNameParamsModel } from '#lib-shared/resource/resource.models';
-import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
-import { FILTER_CONDITION } from '#lib-shared/resource/utils/Filter/Filter.constants';
+import { cleanDocument } from '@lib-backend/database/utils/cleanDocument/cleanDocument';
+import { type _DatabaseModel } from '@lib-backend/database/utils/Database/_Database.models';
+import { type RepositoryModel } from '@lib-backend/database/utils/Database/Database.models';
+import { getConnection } from '@lib-backend/database/utils/getConnection/getConnection';
+import { type _DatabaseConfigModel } from '@lib-config/database/database.models';
+import { type PartialModel } from '@lib-shared/core/core.models';
+import { DuplicateError } from '@lib-shared/core/errors/DuplicateError/DuplicateError';
+import { UninitializedError } from '@lib-shared/core/errors/UninitializedError/UninitializedError';
+import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
+import { debug, info } from '@lib-shared/logging/utils/logger/logger';
+import { type RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
+import { type ResourceNameParamsModel } from '@lib-shared/resource/resource.models';
+import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { FILTER_CONDITION } from '@lib-shared/resource/utils/Filter/Filter.constants';
 import {
   type FilterConditionModel,
   type FilterModel,
-} from '#lib-shared/resource/utils/Filter/Filter.models';
-import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
-import { type UpdateModel } from '#lib-shared/resource/utils/Update/Update.models';
+} from '@lib-shared/resource/utils/Filter/Filter.models';
+import { type OutputModel } from '@lib-shared/resource/utils/Output/Output.models';
+import { type UpdateModel } from '@lib-shared/resource/utils/Update/Update.models';
 
 export const getFilter = <TType extends unknown>(
   filters?: Array<FilterModel<TType>>,

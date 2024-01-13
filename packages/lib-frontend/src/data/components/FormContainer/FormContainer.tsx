@@ -2,18 +2,18 @@ import map from 'lodash/map';
 import { cloneElement, type ForwardedRef, type ReactElement, type ReactNode, useRef } from 'react';
 import { forwardRef, useImperativeHandle } from 'react';
 
-import { Accordion } from '#lib-frontend/animation/components/Accordion/Accordion';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { AsyncBoundary } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
-import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import { Accordion } from '@lib-frontend/animation/components/Accordion/Accordion';
+import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
+import { AsyncBoundary } from '@lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
+import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
 import {
   type LFCPropsModel,
   type RLFCModel,
   type RLFCPropsModel,
-} from '#lib-frontend/core/core.models';
-import { MainLayout } from '#lib-frontend/core/layouts/MainLayout/MainLayout';
-import { FieldGroup } from '#lib-frontend/data/components/FieldGroup/FieldGroup';
-import { Form } from '#lib-frontend/data/components/Form/Form';
+} from '@lib-frontend/core/core.models';
+import { MainLayout } from '@lib-frontend/core/layouts/MainLayout/MainLayout';
+import { FieldGroup } from '@lib-frontend/data/components/FieldGroup/FieldGroup';
+import { Form } from '@lib-frontend/data/components/Form/Form';
 import {
   type FormContainerPropsModel,
   type FormContainerRefModel,
@@ -22,14 +22,14 @@ import {
   type FormFieldsRefModel,
   type FormRowModel,
   type FormTileModel,
-} from '#lib-frontend/data/components/FormContainer/FormContainer.models';
-import { SubmittableButtons } from '#lib-frontend/data/components/SubmittableButtons/SubmittableButtons';
-import { type FieldPropsModel, type FieldRefModel } from '#lib-frontend/data/data.models';
-import { useForm } from '#lib-frontend/data/hooks/useForm/useForm';
-import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
-import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { type StringKeyModel } from '#lib-shared/core/core.models';
-import { reduceSequence } from '#lib-shared/core/utils/reduceSequence/reduceSequence';
+} from '@lib-frontend/data/components/FormContainer/FormContainer.models';
+import { SubmittableButtons } from '@lib-frontend/data/components/SubmittableButtons/SubmittableButtons';
+import { type FieldPropsModel, type FieldRefModel } from '@lib-frontend/data/data.models';
+import { useForm } from '@lib-frontend/data/hooks/useForm/useForm';
+import { useStore } from '@lib-frontend/state/hooks/useStore/useStore';
+import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { type StringKeyModel } from '@lib-shared/core/core.models';
+import { reduceSequence } from '@lib-shared/core/utils/reduceSequence/reduceSequence';
 
 export const FormContainer = forwardRef(
   <TType, TResult = void>(

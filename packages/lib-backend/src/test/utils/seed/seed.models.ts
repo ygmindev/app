@@ -1,4 +1,4 @@
-import { type ResourceNameParamsModel } from '#lib-shared/resource/resource.models';
+import { type ResourceNameParamsModel } from '@lib-shared/resource/resource.models';
 
 export type SeedModel = void;
 

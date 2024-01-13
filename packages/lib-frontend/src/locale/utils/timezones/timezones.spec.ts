@@ -1,5 +1,5 @@
-import { timezones } from '#lib-frontend/locale/utils/timezones/timezones';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { timezones } from '@lib-frontend/locale/utils/timezones/timezones';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ timezones });
 

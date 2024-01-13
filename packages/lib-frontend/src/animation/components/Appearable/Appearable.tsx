@@ -1,11 +1,11 @@
 import {
   ANIMATION_STATES_APPEAR_SCALABLE,
   ANIMATION_STATES_SCALABLE,
-} from '#lib-frontend/animation/animation.constants';
-import { type AppearablePropsModel } from '#lib-frontend/animation/components/Appearable/Appearable.models';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type LFCModel } from '#lib-frontend/core/core.models';
+} from '@lib-frontend/animation/animation.constants';
+import { type AppearablePropsModel } from '@lib-frontend/animation/components/Appearable/Appearable.models';
+import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
+import { type LFCModel } from '@lib-frontend/core/core.models';
 
 export const Appearable: LFCModel<AppearablePropsModel> = ({
   animation,

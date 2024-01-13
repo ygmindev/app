@@ -1,9 +1,9 @@
-import { Button } from '#lib-frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
-import { type ButtonPropsModel } from '#lib-frontend/core/components/Button/Button.models';
-import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { THEME_COLOR, THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { type LibraryPropsModel } from '#lib-library/core/components/Library/Library.models';
+import { Button } from '@lib-frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib-frontend/core/components/Button/Button.constants';
+import { type ButtonPropsModel } from '@lib-frontend/core/components/Button/Button.models';
+import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
+import { THEME_COLOR, THEME_SIZE } from '@lib-frontend/style/style.constants';
+import { type LibraryPropsModel } from '@lib-library/core/components/Library/Library.models';
 
 export const props: LibraryPropsModel<ButtonPropsModel> = {
   Component: Button,

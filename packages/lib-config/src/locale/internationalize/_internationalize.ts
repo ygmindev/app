@@ -4,7 +4,7 @@ import { createInstance } from 'i18next';
 import {
   type _InternationalizeConfigModel,
   type InternationalizeConfigModel,
-} from '#lib-config/locale/internationalize/internationalize.models';
+} from '@lib-config/locale/internationalize/internationalize.models';
 
 let instanceGlobal: i18n;
 

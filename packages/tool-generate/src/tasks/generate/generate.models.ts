@@ -1,4 +1,4 @@
-import { type BoilerplateParamsModel } from '#tool-generate/utils/boilerplate/boilerplate.models';
+import { type BoilerplateParamsModel } from '@tool-generate/utils/boilerplate/boilerplate.models';
 
 export type GenerateParamsModel = {
   template: string;

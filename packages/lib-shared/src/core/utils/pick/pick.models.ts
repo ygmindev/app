@@ -1,4 +1,4 @@
-import { type _PickModel, type _PickParamsModel } from '#lib-shared/core/utils/pick/_pick.models';
+import { type _PickModel, type _PickParamsModel } from '@lib-shared/core/utils/pick/_pick.models';
 
 export type PickParamsModel<TType extends object, TKey extends string> = _PickParamsModel<
   TType,

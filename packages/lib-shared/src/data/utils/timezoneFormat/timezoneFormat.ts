@@ -4,7 +4,7 @@ import startCase from 'lodash/startCase';
 import {
   type TimezoneFormatModel,
   type TimezoneFormatParamsModel,
-} from '#lib-shared/data/utils/timezoneFormat/timezoneFormat.models';
+} from '@lib-shared/data/utils/timezoneFormat/timezoneFormat.models';
 
 export const timezoneFormat = (params: TimezoneFormatParamsModel): TimezoneFormatModel =>
   isString(params)

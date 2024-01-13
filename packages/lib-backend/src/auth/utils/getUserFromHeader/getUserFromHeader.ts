@@ -1,9 +1,9 @@
 import {
   type GetUserFromHeaderModel,
   type GetUserFromHeaderParamsModel,
-} from '#lib-backend/auth/utils/getUserFromHeader/getUserFromHeader.models';
-import { JwtService } from '#lib-backend/auth/utils/JwtService/JwtService';
-import { Container } from '#lib-backend/core/utils/Container/Container';
+} from '@lib-backend/auth/utils/getUserFromHeader/getUserFromHeader.models';
+import { JwtService } from '@lib-backend/auth/utils/JwtService/JwtService';
+import { Container } from '@lib-backend/core/utils/Container/Container';
 
 export const getUserFromHeader = async (
   params: GetUserFromHeaderParamsModel,

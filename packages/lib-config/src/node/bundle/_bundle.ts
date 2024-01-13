@@ -14,20 +14,20 @@ import { searchForWorkspaceRoot } from 'vite';
 import { checker } from 'vite-plugin-checker';
 import circleDependency from 'vite-plugin-circular-dependency';
 
-import { fromModules } from '#lib-backend/file/utils/fromModules/fromModules';
-import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
-import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
-import { joinPaths } from '#lib-backend/file/utils/joinPaths/joinPaths';
-import { _plugins } from '#lib-config/node/bundle/_plugins';
+import { fromModules } from '@lib-backend/file/utils/fromModules/fromModules';
+import { fromRoot } from '@lib-backend/file/utils/fromRoot/fromRoot';
+import { fromWorking } from '@lib-backend/file/utils/fromWorking/fromWorking';
+import { joinPaths } from '@lib-backend/file/utils/joinPaths/joinPaths';
+import { _plugins } from '@lib-config/node/bundle/_plugins';
 import {
   type _BundleConfigModel,
   type BundleConfigModel,
-} from '#lib-config/node/bundle/bundle.models';
-import { lintCommand } from '#lib-config/node/lint/lint';
-import { PLATFORM } from '#lib-platform/core/core.constants';
-import { type PlatformModel } from '#lib-platform/core/core.models';
-import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
-import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
+} from '@lib-config/node/bundle/bundle.models';
+import { lintCommand } from '@lib-config/node/lint/lint';
+import { PLATFORM } from '@lib-platform/core/core.constants';
+import { type PlatformModel } from '@lib-platform/core/core.models';
+import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
+import { ENVIRONMENT } from '@lib-shared/environment/environment.constants';
 
 function vitePluginIsomorphicImport(serverExtension: string): Plugin {
   return {

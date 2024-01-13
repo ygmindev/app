@@ -4,7 +4,7 @@ import reduce from 'lodash/reduce';
 import {
   type PartionObjectModel,
   type PartionObjectParamsModel,
-} from '#lib-shared/core/utils/partionObject/partionObject.models';
+} from '@lib-shared/core/utils/partionObject/partionObject.models';
 
 export const partionObject = <TType extends Record<string, unknown>>(
   ...[value, fn]: PartionObjectParamsModel<TType>

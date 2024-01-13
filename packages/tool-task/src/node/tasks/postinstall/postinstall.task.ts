@@ -1,7 +1,7 @@
-import { config } from '#lib-config/node/packageManager/packageManager';
-import { type TaskParamsModel } from '#tool-task/core/core.models';
-import { rename } from '#tool-task/core/utils/rename/rename';
-import { type PostInstallParamsModel } from '#tool-task/node/tasks/postInstall/postInstall.models';
+import { config } from '@lib-config/node/packageManager/packageManager';
+import { type TaskParamsModel } from '@tool-task/core/core.models';
+import { rename } from '@tool-task/core/utils/rename/rename';
+import { type PostInstallParamsModel } from '@tool-task/node/tasks/postInstall/postInstall.models';
 
 const postInstall: TaskParamsModel<PostInstallParamsModel> = {
   name: 'node-post-install',

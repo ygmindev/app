@@ -1,7 +1,7 @@
 // COMPLETE
-import { type PlatformModel } from '#lib-platform/core/core.models';
-import { type BooleanStringModel } from '#lib-shared/core/core.models';
-import { type EnvironmentModel } from '#lib-shared/environment/environment.models';
+import { type PlatformModel } from '@lib-platform/core/core.models';
+import { type BooleanStringModel } from '@lib-shared/core/core.models';
+import { type EnvironmentModel } from '@lib-shared/environment/environment.models';
 
 export type EnvironmentConfigModel = {
   APP_AMPLITUDE_API_KEY: string;

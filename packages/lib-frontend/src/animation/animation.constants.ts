@@ -1,9 +1,9 @@
-import { type AnimationStatesModel } from '#lib-frontend/animation/animation.models';
-import { type SlidePropsModel } from '#lib-frontend/animation/components/Slide/Slide.models';
-import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { THEME_COLOR, THEME_COLOR_MORE, THEME_ROLE } from '#lib-frontend/style/style.constants';
-import { type StyleModel, type ThemeModel } from '#lib-frontend/style/style.models';
-import { merge } from '#lib-shared/core/utils/merge/merge';
+import { type AnimationStatesModel } from '@lib-frontend/animation/animation.models';
+import { type SlidePropsModel } from '@lib-frontend/animation/components/Slide/Slide.models';
+import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
+import { THEME_COLOR, THEME_COLOR_MORE, THEME_ROLE } from '@lib-frontend/style/style.constants';
+import { type StyleModel, type ThemeModel } from '@lib-frontend/style/style.models';
+import { merge } from '@lib-shared/core/utils/merge/merge';
 
 export const ANIMATION_STATES_APPEARABLE: AnimationStatesModel<StyleModel> = {
   [ELEMENT_STATE.ACTIVE]: { opacity: 1 },

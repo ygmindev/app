@@ -1,12 +1,12 @@
-import { SelectField } from '#lib-frontend/core/components/SelectField/SelectField';
-import { type LFCModel } from '#lib-frontend/core/core.models';
-import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
-import { type BrightnessFieldPropsModel } from '#lib-frontend/style/components/BrightnessField/BrightnessField.models';
-import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { type StyleBrightnessStateModel } from '#lib-frontend/style/stores/styleStore/styleStore.models';
-import { STYLE_BRIGHTNESS } from '#lib-frontend/style/style.constants';
-import { STYLE } from '#lib-shared/style/style.constants';
+import { SelectField } from '@lib-frontend/core/components/SelectField/SelectField';
+import { type LFCModel } from '@lib-frontend/core/core.models';
+import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useStore } from '@lib-frontend/state/hooks/useStore/useStore';
+import { type BrightnessFieldPropsModel } from '@lib-frontend/style/components/BrightnessField/BrightnessField.models';
+import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { type StyleBrightnessStateModel } from '@lib-frontend/style/stores/styleStore/styleStore.models';
+import { STYLE_BRIGHTNESS } from '@lib-frontend/style/style.constants';
+import { STYLE } from '@lib-shared/style/style.constants';
 
 export const BrightnessField: LFCModel<BrightnessFieldPropsModel> = ({
   elementState,

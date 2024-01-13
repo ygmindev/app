@@ -188,6 +188,9 @@ importers:
       expo-localization:
         specifier: ^14.5.0
         version: 14.5.0(expo@49.0.21)
+      expo-modules-core:
+        specifier: 1.5.12
+        version: 1.5.12
       expo-network:
         specifier: ^5.6.0
         version: 5.6.0(expo@49.0.21)
@@ -218,6 +221,9 @@ importers:
       google-map-react:
         specifier: ^2.2.1
         version: 2.2.1(react-dom@18.2.0)(react@18.2.0)
+      graceful-fs:
+        specifier: ^4.2.11
+        version: 4.2.11
       graphql:
         specifier: ^16.8.1
         version: 16.8.1
@@ -293,6 +299,9 @@ importers:
       preact-render-to-string:
         specifier: ^6.3.1
         version: 6.3.1(preact@10.19.3)
+      prop-types:
+        specifier: ^15.8.1
+        version: 15.8.1
       puppeteer:
         specifier: ^21.7.0
         version: 21.7.0(typescript@5.3.3)
@@ -359,6 +368,9 @@ importers:
       react-native-svg:
         specifier: ^14.1.0
         version: 14.1.0(react-native@0.73.2)(react@18.2.0)
+      react-native-typing-animation:
+        specifier: ^0.1.7
+        version: 0.1.7(prop-types@15.8.1)(react-native@0.73.2)(react@18.2.0)
       react-native-vector-icons:
         specifier: ^9.2.0
         version: 9.2.0
@@ -405,7 +417,7 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
       serverless:
-        specifier: ^3.38.0
+        specifier: 3.38.0
         version: 3.38.0
       setimmediate:
         specifier: ^1.0.5
@@ -481,7 +493,7 @@ importers:
         specifier: ^7.23.7
         version: 7.23.7(@babel/core@7.23.7)
       '@babel/preset-env':
-        specifier: ^7.23.7
+        specifier: ^7.23.8
         version: 7.23.8(@babel/core@7.23.7)
       '@babel/preset-flow':
         specifier: ^7.23.3
@@ -493,7 +505,7 @@ importers:
         specifier: ^7.23.3
         version: 7.23.3(@babel/core@7.23.7)
       '@babel/runtime':
-        specifier: ^7.23.7
+        specifier: ^7.23.8
         version: 7.23.8
       '@callstack/repack':
         specifier: ^3.7.0
@@ -609,6 +621,9 @@ importers:
       '@types/google-map-react':
         specifier: ^2
         version: 2.1.10
+      '@types/graceful-fs':
+        specifier: ^4
+        version: 4.1.9
       '@types/gulp':
         specifier: ^4.0.17
         version: 4.0.17
@@ -648,6 +663,9 @@ importers:
       '@types/nodemailer':
         specifier: ^6.4.14
         version: 6.4.14
+      '@types/prop-types':
+        specifier: ^15
+        version: 15.7.11
       '@types/react':
         specifier: ^18.2.47
         version: 18.2.47
@@ -660,12 +678,18 @@ importers:
       '@types/react-native':
         specifier: ^0.72.8
         version: 0.72.8(react-native@0.73.2)
+      '@types/react-native-typing-animation':
+        specifier: ^0
+        version: 0.1.5(@babel/core@7.23.7)(@babel/preset-env@7.23.8)(react@18.2.0)
       '@types/react-native-vector-icons':
         specifier: ^6.4.18
         version: 6.4.18
       '@types/react-test-renderer':
         specifier: ^18.0.7
         version: 18.0.7
+      '@types/serverless':
+        specifier: ^3
+        version: 3.12.20
       '@types/source-map-support':
         specifier: ^0.5.10
         version: 0.5.10
@@ -855,9 +879,6 @@ importers:
       npm-check-updates:
         specifier: ^16.14.12
         version: 16.14.12
-      npx:
-        specifier: ^10.2.2
-        version: 10.2.2
       nx:
         specifier: 17.2.8
         version: 17.2.8(@swc/core@1.3.102)
@@ -960,17 +981,7 @@ importers:
 
   packages/app-native: {}
 
-  packages/app-web:
-    dependencies:
-      '#lib-config':
-        specifier: workspace:*
-        version: link:../lib-config
-      '#lib-platform':
-        specifier: workspace:*
-        version: link:../lib-platform
-      '#lib-shared':
-        specifier: workspace:*
-        version: link:../lib-shared
+  packages/app-web: {}
 
   packages/app-web-admin: {}
 
@@ -980,38 +991,11 @@ importers:
 
   packages/backend-graphql-sandbox: {}
 
-  packages/backend-lambda:
-    dependencies:
-      '#lib-backend':
-        specifier: workspace:*
-        version: link:../lib-backend
-      '#lib-config':
-        specifier: workspace:*
-        version: link:../lib-config
-      '#lib-shared':
-        specifier: workspace:*
-        version: link:../lib-shared
+  packages/backend-lambda: {}
 
-  packages/lib-backend:
-    dependencies:
-      '#lib-config':
-        specifier: workspace:*
-        version: link:../lib-config
-      '#lib-platform':
-        specifier: workspace:*
-        version: link:../lib-platform
-      '#lib-shared':
-        specifier: workspace:*
-        version: link:../lib-shared
-      '#tool-task':
-        specifier: workspace:*
-        version: link:../tool-task
+  packages/lib-backend: {}
 
-  packages/lib-config:
-    dependencies:
-      '#lib-shared':
-        specifier: workspace:*
-        version: link:../lib-shared
+  packages/lib-config: {}
 
   packages/lib-frontend: {}
 
@@ -7451,7 +7435,7 @@ packages:
       '@opentelemetry/api': ^1.0.0
     dependencies:
       '@opentelemetry/api': 1.7.0
-      '@opentelemetry/core': 1.18.1(@opentelemetry/api@1.7.0)
+      '@opentelemetry/core': 1.19.0(@opentelemetry/api@1.7.0)
     dev: false
 
   /@opentelemetry/instrumentation-amqplib@0.33.5(@opentelemetry/api@1.7.0):
@@ -7491,7 +7475,7 @@ packages:
       '@opentelemetry/api': ^1.3.0
     dependencies:
       '@opentelemetry/api': 1.7.0
-      '@opentelemetry/core': 1.18.1(@opentelemetry/api@1.7.0)
+      '@opentelemetry/core': 1.19.0(@opentelemetry/api@1.7.0)
       '@opentelemetry/instrumentation': 0.45.1(@opentelemetry/api@1.7.0)
       '@opentelemetry/propagation-utils': 0.30.5(@opentelemetry/api@1.7.0)
       '@opentelemetry/semantic-conventions': 1.19.0
@@ -7641,7 +7625,7 @@ packages:
       '@opentelemetry/api': ^1.3.0
     dependencies:
       '@opentelemetry/api': 1.7.0
-      '@opentelemetry/core': 1.18.1(@opentelemetry/api@1.7.0)
+      '@opentelemetry/core': 1.19.0(@opentelemetry/api@1.7.0)
       '@opentelemetry/instrumentation': 0.45.1(@opentelemetry/api@1.7.0)
       '@opentelemetry/semantic-conventions': 1.19.0
       '@types/express': 4.17.18
@@ -7892,7 +7876,7 @@ packages:
     dependencies:
       '@opentelemetry/api': 1.7.0
       '@opentelemetry/instrumentation': 0.45.1(@opentelemetry/api@1.7.0)
-      '@opentelemetry/sdk-metrics': 1.18.1(@opentelemetry/api@1.7.0)
+      '@opentelemetry/sdk-metrics': 1.19.0(@opentelemetry/api@1.7.0)
       '@opentelemetry/semantic-conventions': 1.19.0
     transitivePeerDependencies:
       - supports-color
@@ -7919,7 +7903,7 @@ packages:
       '@opentelemetry/api': ^1.3.0
     dependencies:
       '@opentelemetry/api': 1.7.0
-      '@opentelemetry/core': 1.18.1(@opentelemetry/api@1.7.0)
+      '@opentelemetry/core': 1.19.0(@opentelemetry/api@1.7.0)
       '@opentelemetry/instrumentation': 0.45.1(@opentelemetry/api@1.7.0)
       '@opentelemetry/semantic-conventions': 1.19.0
     transitivePeerDependencies:
@@ -8001,7 +7985,7 @@ packages:
       '@opentelemetry/api': ^1.3.0
     dependencies:
       '@opentelemetry/api': 1.7.0
-      '@opentelemetry/core': 1.18.1(@opentelemetry/api@1.7.0)
+      '@opentelemetry/core': 1.19.0(@opentelemetry/api@1.7.0)
       '@opentelemetry/instrumentation': 0.44.0(@opentelemetry/api@1.7.0)
       '@opentelemetry/semantic-conventions': 1.19.0
       '@opentelemetry/sql-common': 0.40.0(@opentelemetry/api@1.7.0)
@@ -11466,6 +11450,7 @@ packages:
   /@tootallnate/once@2.0.0:
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
     engines: {node: '>= 10'}
+    requiresBuild: true
 
   /@tootallnate/quickjs-emscripten@0.23.0:
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
@@ -12126,6 +12111,21 @@ packages:
       '@types/react': 18.2.47
     dev: true
 
+  /@types/react-native-typing-animation@0.1.5(@babel/core@7.23.7)(@babel/preset-env@7.23.8)(react@18.2.0):
+    resolution: {integrity: sha512-S9hq1wpwroMg+Q5aPGrvzqGY7VCHt28jRhEzrVY2xHP0khSRmAWIw1qXE0/qXF0rCmnhOuqvLjzWYxkqZnPXng==}
+    dependencies:
+      '@types/react': 18.2.47
+      react-native: 0.73.2(@babel/core@7.23.7)(@babel/preset-env@7.23.8)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@babel/preset-env'
+      - bufferutil
+      - encoding
+      - react
+      - supports-color
+      - utf-8-validate
+    dev: true
+
   /@types/react-native-vector-icons@6.4.18:
     resolution: {integrity: sha512-YGlNWb+k5laTBHd7+uZowB9DpIK3SXUneZqAiKQaj1jnJCZM0x71GDim5JCTMi4IFkhc9m8H/Gm28T5BjyivUw==}
     dependencies:
@@ -12213,6 +12213,10 @@ packages:
       '@types/mime': 3.0.4
       '@types/node': 20.10.7
 
+  /@types/serverless@3.12.20:
+    resolution: {integrity: sha512-DeUD85ipwSNyotiICUBSMoHTqIxpSv1W5ZVhoLg0HE3w/0goiX9gHQKN32fIv4KMoIjWNHxGRmHOvBnZCZm1rQ==}
+    dev: true
+
   /@types/shimmer@1.0.5:
     resolution: {integrity: sha512-9Hp0ObzwwO57DpLFF0InUjUm/II8GmKAvzbefxQTihCb7KI6yc9yzf0nLc4mVdby5N4DRCgQM2wCup9KTieeww==}
     dev: false
@@ -12273,6 +12277,7 @@ packages:
 
   /@types/tough-cookie@4.0.5:
     resolution: {integrity: sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==}
+    requiresBuild: true
 
   /@types/triple-beam@1.3.5:
     resolution: {integrity: sha512-6WaYesThRMCl19iryMYP7/x2OVgCtbIVflDGFpWnb9irXI3UjYE4AzmYuiUKY1AJstGijoY+MgUszMgRxIYTYw==}
@@ -14502,7 +14507,7 @@ packages:
     resolution: {integrity: sha512-xq+q3SRMOxGivLhBNaUdC64hDTQwejJ+H0T/NB1XMtTVEwNTrfFF3gAxiyW0Bu/xWEGhjVKgUcMhCrUy2+uCWg==}
     dependencies:
       base64-js: 1.5.1
-      ieee754: 1.1.13
+      ieee754: 1.2.1
       isarray: 1.0.0
 
   /buffer@5.7.1:
@@ -14571,7 +14576,7 @@ packages:
       glob: 7.2.3
       infer-owner: 1.0.4
       lru-cache: 6.0.0
-      minipass: 3.1.6
+      minipass: 3.3.6
       minipass-collect: 1.0.2
       minipass-flush: 1.0.5
       minipass-pipeline: 1.2.4
@@ -15639,6 +15644,7 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
     dev: false
+    bundledDependencies: false
 
   /create-require@1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
@@ -18158,6 +18164,7 @@ packages:
 
   /extend@3.0.2:
     resolution: {integrity: sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==}
+    requiresBuild: true
 
   /external-editor@1.1.1:
     resolution: {integrity: sha512-0XYlP43jzxMgJjugDJ85Z0UDPnowkUbfFztNvsSGC9sJVIk97MZbGEb9WAhIVH0UgNxoLj/9ZQgB4CHJyz2GGQ==}
@@ -20233,7 +20240,7 @@ packages:
       depd: 1.1.2
       inherits: 2.0.3
       setprototypeof: 1.1.0
-      statuses: 1.4.0
+      statuses: 1.5.0
     dev: false
 
   /http-errors@1.8.1:
@@ -20264,6 +20271,7 @@ packages:
   /http-proxy-agent@5.0.0:
     resolution: {integrity: sha512-n2hY8YdoRE1i7r6M0w9DIw5GgZN0G25P8zLCRQ8rjXtTU3vsNFBI/vWK/UIeE6g5MUUz6avwAPXmL6Fy9D/90w==}
     engines: {node: '>= 6'}
+    requiresBuild: true
     dependencies:
       '@tootallnate/once': 2.0.0
       agent-base: 6.0.2(supports-color@8.1.1)
@@ -24775,14 +24783,6 @@ packages:
       set-blocking: 2.0.0
     dev: true
 
-  /npx@10.2.2:
-    resolution: {integrity: sha512-eImmySusyeWphzs5iNh791XbZnZG0FSNvM4KSah34pdQQIDsdTDhIwg1sjN3AIVcjGLpbQ/YcfqHPshKZQK1fA==}
-    hasBin: true
-    dev: true
-    bundledDependencies:
-      - npm
-      - libnpx
-
   /nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
     dependencies:
@@ -26990,7 +26990,7 @@ packages:
       react: '*'
       react-native: '*'
     dependencies:
-      prop-types: 15.7.2
+      prop-types: 15.8.1
       react: 18.2.0
       react-native: 0.73.2(@babel/core@7.23.7)(@babel/preset-env@7.23.8)(react@18.2.0)
     dev: false
@@ -27051,6 +27051,18 @@ packages:
       react-native: '*'
     dependencies:
       prop-types: 15.7.2
+      react: 18.2.0
+      react-native: 0.73.2(@babel/core@7.23.7)(@babel/preset-env@7.23.8)(react@18.2.0)
+    dev: false
+
+  /react-native-typing-animation@0.1.7(prop-types@15.8.1)(react-native@0.73.2)(react@18.2.0):
+    resolution: {integrity: sha512-4H3rF9M+I2yAZpYJcY0Mb29TXkn98QK12rrKSY6LZj1BQD9NNmRZuNXzwX4XHapsIz+N/J8M3p27FOQPbfzqeg==}
+    peerDependencies:
+      prop-types: '*'
+      react: '*'
+      react-native: '*'
+    dependencies:
+      prop-types: 15.8.1
       react: 18.2.0
       react-native: 0.73.2(@babel/core@7.23.7)(@babel/preset-env@7.23.8)(react@18.2.0)
     dev: false
@@ -28155,7 +28167,6 @@ packages:
 
   /sax@1.3.0:
     resolution: {integrity: sha512-0s+oAmw9zLl1V1cS9BtZN7JAd0cW5e0QH4W3LWEK6a4LaLEA2OTpGYWDY+6XasBLtz6wkm3u1xRw95mRuJ59WA==}
-    dev: false
 
   /saxes@6.0.0:
     resolution: {integrity: sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==}
@@ -29067,7 +29078,7 @@ packages:
     resolution: {integrity: sha512-97qShzy1AiyxvPNIkLWoGua7xoQzzPjQ0HAH4B0rWKo7SZ6USuPcrUiAFrws0UH8RrbWmgq3LMTObhPIHbbBeQ==}
     engines: {node: '>= 8'}
     dependencies:
-      minipass: 3.1.6
+      minipass: 3.3.6
     dev: false
 
   /ssri@9.0.1:
@@ -31947,7 +31958,7 @@ packages:
     resolution: {integrity: sha512-drPFnkQJik/O+uPKpqSgr22mpuFHqKdbS835iAQrUC73L2F5WkboIRd63ai/2Yg6I1jzifPFKH2NTK+cfglkIA==}
     engines: {node: '>=4.0.0'}
     dependencies:
-      sax: 1.2.1
+      sax: 1.3.0
       xmlbuilder: 11.0.1
 
   /xml2js@0.6.0:

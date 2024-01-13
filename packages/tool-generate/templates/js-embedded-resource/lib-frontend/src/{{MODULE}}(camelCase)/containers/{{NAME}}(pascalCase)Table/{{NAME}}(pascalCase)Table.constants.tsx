@@ -1,11 +1,11 @@
-import { NUMBER_UNIT_TYPE } from '#lib-frontend/data/data.constants';
-import { type ResourceTablePropsModel } from '#lib-frontend/resource/components/ResourceTable/ResourceTable.models';
-import { DATA_TYPE } from '#lib-shared/data/data.constants';
-import { {{NAME}}(constantCase)_RESOURCE_NAME } from '#lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).constants';
+import { NUMBER_UNIT_TYPE } from '@lib-frontend/data/data.constants';
+import { type ResourceTablePropsModel } from '@lib-frontend/resource/components/ResourceTable/ResourceTable.models';
+import { DATA_TYPE } from '@lib-shared/data/data.constants';
+import { {{NAME}}(constantCase)_RESOURCE_NAME } from '@lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).constants';
 import {
   type {{NAME}}(pascalCase)FormModel,
   type {{NAME}}(pascalCase)Model,
-} from '#lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
+} from '@lib-shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
 
 export const {{NAME}}(constantCase)_TABLE_PROPS = {
   columns: [

@@ -2,28 +2,28 @@ import { type ForwardedRef, type ReactElement } from 'react';
 import { cloneElement, forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { type ScrollView } from 'react-native';
 
-import { Button } from '#lib-frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
-import { Dropdown } from '#lib-frontend/core/components/Dropdown/Dropdown';
-import { type DropdownRefModel } from '#lib-frontend/core/components/Dropdown/Dropdown.models';
-import { Icon } from '#lib-frontend/core/components/Icon/Icon';
+import { Button } from '@lib-frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib-frontend/core/components/Button/Button.constants';
+import { Dropdown } from '@lib-frontend/core/components/Dropdown/Dropdown';
+import { type DropdownRefModel } from '@lib-frontend/core/components/Dropdown/Dropdown.models';
+import { Icon } from '@lib-frontend/core/components/Icon/Icon';
 import {
   type MenuOptionModel,
   type MenuPropsModel,
   type MenuRefModel,
-} from '#lib-frontend/core/components/Menu/Menu.models';
-import { Modal } from '#lib-frontend/core/components/Modal/Modal';
-import { type PressablePropsModel } from '#lib-frontend/core/components/Pressable/Pressable.models';
-import { VirtualizedList } from '#lib-frontend/core/components/VirtualizedList/VirtualizedList';
-import { type VirtualizedListRefModel } from '#lib-frontend/core/components/VirtualizedList/VirtualizedList.models';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { DIRECTION, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type RLFCPropsModel } from '#lib-frontend/core/core.models';
-import { useIsMobile } from '#lib-frontend/core/hooks/useIsMobile/useIsMobile';
-import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
-import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { FONT_ALIGN } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+} from '@lib-frontend/core/components/Menu/Menu.models';
+import { Modal } from '@lib-frontend/core/components/Modal/Modal';
+import { type PressablePropsModel } from '@lib-frontend/core/components/Pressable/Pressable.models';
+import { VirtualizedList } from '@lib-frontend/core/components/VirtualizedList/VirtualizedList';
+import { type VirtualizedListRefModel } from '@lib-frontend/core/components/VirtualizedList/VirtualizedList.models';
+import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
+import { DIRECTION, ELEMENT_STATE } from '@lib-frontend/core/core.constants';
+import { type RLFCPropsModel } from '@lib-frontend/core/core.models';
+import { useIsMobile } from '@lib-frontend/core/hooks/useIsMobile/useIsMobile';
+import { TranslatableText } from '@lib-frontend/locale/components/TranslatableText/TranslatableText';
+import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { THEME_SIZE } from '@lib-frontend/style/style.constants';
+import { FONT_ALIGN } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 export const Menu = forwardRef(
   <TType extends MenuOptionModel = MenuOptionModel>(

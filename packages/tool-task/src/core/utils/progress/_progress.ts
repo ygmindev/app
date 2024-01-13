@@ -3,7 +3,7 @@ import { SingleBar } from 'cli-progress';
 import {
   type _ProgressModel,
   type _ProgressParamsModel,
-} from '#tool-task/core/utils/progress/_progress.models';
+} from '@tool-task/core/utils/progress/_progress.models';
 
 export const _progress = ({ name }: _ProgressParamsModel): _ProgressModel => {
   const bar = new SingleBar({

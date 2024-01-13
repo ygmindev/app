@@ -1,13 +1,13 @@
-import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
-import { children } from '#lib-backend/file/utils/children/children';
-import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
-import { config as testConfig } from '#lib-config/node/test/test.base';
-import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
-import { SNAPSHOT_RESOURCE_NAME } from '#lib-shared/test/resources/Snapshot/Snapshot.constants';
-import { type SnapshotModel } from '#lib-shared/test/resources/Snapshot/Snapshot.models';
-import { type SnapshotServiceModel } from '#lib-shared/test/resources/Snapshot/SnapshotService/SnapshotService.models';
+import { withContainer } from '@lib-backend/core/utils/withContainer/withContainer';
+import { children } from '@lib-backend/file/utils/children/children';
+import { fromPackages } from '@lib-backend/file/utils/fromPackages/fromPackages';
+import { config as testConfig } from '@lib-config/node/test/test.base';
+import { type RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
+import { type InputModel } from '@lib-shared/resource/utils/Input/Input.models';
+import { type OutputModel } from '@lib-shared/resource/utils/Output/Output.models';
+import { SNAPSHOT_RESOURCE_NAME } from '@lib-shared/test/resources/Snapshot/Snapshot.constants';
+import { type SnapshotModel } from '@lib-shared/test/resources/Snapshot/Snapshot.models';
+import { type SnapshotServiceModel } from '@lib-shared/test/resources/Snapshot/SnapshotService/SnapshotService.models';
 
 @withContainer({ name: `${SNAPSHOT_RESOURCE_NAME}Service` })
 export class SnapshotService implements SnapshotServiceModel {

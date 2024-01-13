@@ -1,7 +1,7 @@
-import { type WrapperPropsModel } from '#lib-frontend/core/components/Wrapper/Wrapper.models';
-import { type LFCPropsModel } from '#lib-frontend/core/core.models';
-import { type UseStylesModel } from '#lib-frontend/style/hooks/useStyles/useStyles.models';
-import { type StylePropsModel, type ViewStyleModel } from '#lib-frontend/style/style.models';
+import { type WrapperPropsModel } from '@lib-frontend/core/components/Wrapper/Wrapper.models';
+import { type LFCPropsModel } from '@lib-frontend/core/core.models';
+import { type UseStylesModel } from '@lib-frontend/style/hooks/useStyles/useStyles.models';
+import { type StylePropsModel, type ViewStyleModel } from '@lib-frontend/style/style.models';
 
 export type LayoutStylePropsModel = StylePropsModel<ViewStyleModel> &
   Omit<WrapperPropsModel, 'children'>;

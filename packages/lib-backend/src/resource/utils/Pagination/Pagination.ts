@@ -1,7 +1,7 @@
-import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
-import { withField } from '#lib-backend/resource/utils/withField/withField';
-import { DATA_TYPE } from '#lib-shared/data/data.constants';
-import { type PaginationModel } from '#lib-shared/resource/utils/Pagination/Pagination.models';
+import { withEntity } from '@lib-backend/resource/utils/withEntity/withEntity';
+import { withField } from '@lib-backend/resource/utils/withField/withField';
+import { DATA_TYPE } from '@lib-shared/data/data.constants';
+import { type PaginationModel } from '@lib-shared/resource/utils/Pagination/Pagination.models';
 
 @withEntity({ name: 'Pagination' })
 export class Pagination implements PaginationModel {

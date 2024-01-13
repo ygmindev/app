@@ -1,6 +1,6 @@
-import { PROXY_HANDLER } from '#lib-config/http/proxy/proxy.constants';
-import { type _ProxyConfigModel, type ProxyConfigModel } from '#lib-config/http/proxy/proxy.models';
-import { uri } from '#lib-shared/http/utils/uri/uri';
+import { PROXY_HANDLER } from '@lib-config/http/proxy/proxy.constants';
+import { type _ProxyConfigModel, type ProxyConfigModel } from '@lib-config/http/proxy/proxy.models';
+import { uri } from '@lib-shared/http/utils/uri/uri';
 
 export const _proxy = ({ listen, routes }: ProxyConfigModel): _ProxyConfigModel => ({
   apps: {

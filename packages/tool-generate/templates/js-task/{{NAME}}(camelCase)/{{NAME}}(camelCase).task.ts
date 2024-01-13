@@ -1,4 +1,4 @@
-import { type TaskParamsModel } from '#tool-task/core/core.models';
+import { type TaskParamsModel } from '@tool-task/core/core.models';
 import { type {{NAME}}(pascalCase)ParamsModel } from '{{PATH}}/{{NAME}}/{{NAME}}.models';
 
 const {{NAME}}(camelCase): TaskParamsModel<{{NAME}}(pascalCase)ParamsModel> = {

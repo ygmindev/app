@@ -1,6 +1,6 @@
-import { dateTimeFormat } from '#lib-shared/data/utils/dateTimeFormat/dateTimeFormat';
-import { DATE_TIME_FORMAT_TYPE } from '#lib-shared/data/utils/dateTimeFormat/dateTimeFormat.constants';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { dateTimeFormat } from '@lib-shared/data/utils/dateTimeFormat/dateTimeFormat';
+import { DATE_TIME_FORMAT_TYPE } from '@lib-shared/data/utils/dateTimeFormat/dateTimeFormat.constants';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ dateTimeFormat });
 

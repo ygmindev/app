@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 
-import { type SFCModel } from '#lib-frontend/core/core.models';
-import { useChange } from '#lib-frontend/core/hooks/useChange/useChange';
-import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
-import { useTracking } from '#lib-frontend/tracking/hooks/useTracking/useTracking';
-import { type TrackingProviderPropsModel } from '#lib-frontend/tracking/providers/TrackingProvider/TrackingProvider.models';
-import { isServer } from '#lib-platform/core/utils/isServer/isServer';
-import { warn } from '#lib-shared/logging/utils/logger/logger';
+import { type SFCModel } from '@lib-frontend/core/core.models';
+import { useChange } from '@lib-frontend/core/hooks/useChange/useChange';
+import { useStore } from '@lib-frontend/state/hooks/useStore/useStore';
+import { useTracking } from '@lib-frontend/tracking/hooks/useTracking/useTracking';
+import { type TrackingProviderPropsModel } from '@lib-frontend/tracking/providers/TrackingProvider/TrackingProvider.models';
+import { isServer } from '@lib-platform/core/utils/isServer/isServer';
+import { warn } from '@lib-shared/logging/utils/logger/logger';
 
 export const TrackingProvider: SFCModel<TrackingProviderPropsModel> = ({ children }) => {
   const { identify, initialize } = useTracking();

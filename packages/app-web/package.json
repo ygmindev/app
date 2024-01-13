@@ -1,10 +1,4 @@
 {
-  "name": "#app-web",
   "version": "0.0.1",
-  "type": "commonjs",
-  "dependencies": {
-    "#lib-config": "workspace:*",
-    "#lib-platform": "workspace:*",
-    "#lib-shared": "workspace:*"
-  }
+  "type": "commonjs"
 }

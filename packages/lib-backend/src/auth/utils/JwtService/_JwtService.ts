@@ -1,12 +1,12 @@
 import admin from 'firebase-admin';
 import toString from 'lodash/toString';
 
-import { type _JwtServiceModel } from '#lib-backend/auth/utils/JwtService/_JwtService.models';
-import { SIGN_IN_TOKEN_CLAIM_KEYS } from '#lib-shared/auth/resources/SignIn/SignIn.constants';
-import { type SignInTokenModel } from '#lib-shared/auth/resources/SignIn/SignIn.models';
-import { pick } from '#lib-shared/core/utils/pick/pick';
-import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
-import { type UserModel } from '#lib-shared/user/resources/User/User.models';
+import { type _JwtServiceModel } from '@lib-backend/auth/utils/JwtService/_JwtService.models';
+import { SIGN_IN_TOKEN_CLAIM_KEYS } from '@lib-shared/auth/resources/SignIn/SignIn.constants';
+import { type SignInTokenModel } from '@lib-shared/auth/resources/SignIn/SignIn.models';
+import { pick } from '@lib-shared/core/utils/pick/pick';
+import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type UserModel } from '@lib-shared/user/resources/User/User.models';
 
 export class _JwtService implements _JwtServiceModel {
   constructor() {

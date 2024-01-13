@@ -1,13 +1,13 @@
 import isNumber from 'lodash/isNumber';
 import isPlainObject from 'lodash/isPlainObject';
 
-import { CORNER, DIRECTION } from '#lib-frontend/core/core.constants';
-import { type CornerModel } from '#lib-frontend/core/core.models';
-import { THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { type ThemeColorModel, type ThemeSizeModel } from '#lib-frontend/style/style.models';
-import { type BorderStylerParamsModel } from '#lib-frontend/style/utils/styler/borderStyler/borderStyler.models';
-import { type StylerModel } from '#lib-frontend/style/utils/styler/styler.models';
-import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
+import { CORNER, DIRECTION } from '@lib-frontend/core/core.constants';
+import { type CornerModel } from '@lib-frontend/core/core.models';
+import { THEME_ROLE, THEME_SIZE } from '@lib-frontend/style/style.constants';
+import { type ThemeColorModel, type ThemeSizeModel } from '@lib-frontend/style/style.models';
+import { type BorderStylerParamsModel } from '@lib-frontend/style/utils/styler/borderStyler/borderStyler.models';
+import { type StylerModel } from '@lib-frontend/style/utils/styler/styler.models';
+import { cleanObject } from '@lib-shared/core/utils/cleanObject/cleanObject';
 
 export const borderStyler: StylerModel<BorderStylerParamsModel> = (
   { border, borderColor, borderRole = THEME_ROLE.MAIN, borderWidth = 1, isShadow, round },

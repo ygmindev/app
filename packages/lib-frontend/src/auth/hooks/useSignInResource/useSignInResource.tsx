@@ -1,29 +1,29 @@
-import { useSession } from '#lib-frontend/auth/hooks/useSession/useSession';
-import { type UseSignInResourceModel } from '#lib-frontend/auth/hooks/useSignInResource/useSignInResource.models';
-import { useAppGraphQl } from '#lib-frontend/data/hooks/useAppGraphQl/useAppGraphQl';
-import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useNotification } from '#lib-frontend/notification/hooks/useNotification/useNotification';
-import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
-import { useActions } from '#lib-frontend/state/hooks/useActions/useActions';
-import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
-import { useTracking } from '#lib-frontend/tracking/hooks/useTracking/useTracking';
-import { USER_RESOURCE_PARAMS } from '#lib-frontend/user/resources/User/User.constants';
-import { UnauthorizedError } from '#lib-shared/auth/errors/UnauthorizedError/UnauthorizedError';
+import { useSession } from '@lib-frontend/auth/hooks/useSession/useSession';
+import { type UseSignInResourceModel } from '@lib-frontend/auth/hooks/useSignInResource/useSignInResource.models';
+import { useAppGraphQl } from '@lib-frontend/data/hooks/useAppGraphQl/useAppGraphQl';
+import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useNotification } from '@lib-frontend/notification/hooks/useNotification/useNotification';
+import { useResourceMethod } from '@lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
+import { useActions } from '@lib-frontend/state/hooks/useActions/useActions';
+import { useStore } from '@lib-frontend/state/hooks/useStore/useStore';
+import { useTracking } from '@lib-frontend/tracking/hooks/useTracking/useTracking';
+import { USER_RESOURCE_PARAMS } from '@lib-frontend/user/resources/User/User.constants';
+import { UnauthorizedError } from '@lib-shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import {
   SIGN_IN_RESOURCE_NAME,
   SIGN_IN_USER,
   SIGN_IN_USERNAME,
-} from '#lib-shared/auth/resources/SignIn/SignIn.constants';
+} from '@lib-shared/auth/resources/SignIn/SignIn.constants';
 import {
   type SignInFormModel,
   type SignInModel,
-} from '#lib-shared/auth/resources/SignIn/SignIn.models';
-import { type PartialModel } from '#lib-shared/core/core.models';
-import { GRAPHQL_OPERATION_TYPE } from '#lib-shared/graphql/graphql.constants';
-import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
-import { type UserFormModel, type UserModel } from '#lib-shared/user/resources/User/User.models';
+} from '@lib-shared/auth/resources/SignIn/SignIn.models';
+import { type PartialModel } from '@lib-shared/core/core.models';
+import { GRAPHQL_OPERATION_TYPE } from '@lib-shared/graphql/graphql.constants';
+import { RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
+import { type InputModel } from '@lib-shared/resource/utils/Input/Input.models';
+import { type OutputModel } from '@lib-shared/resource/utils/Output/Output.models';
+import { type UserFormModel, type UserModel } from '@lib-shared/user/resources/User/User.models';
 
 const userFields = USER_RESOURCE_PARAMS.fields.map(({ id }) => id);
 

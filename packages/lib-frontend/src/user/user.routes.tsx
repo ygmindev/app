@@ -1,15 +1,15 @@
-import { SignInPage } from '#lib-frontend/auth/pages/SignInPage/SignInPage';
-import { BILLING } from '#lib-frontend/billing/billing.constants';
-import { billingRoutes } from '#lib-frontend/billing/billing.routes';
-import { ROUTE_NAVIGATION } from '#lib-frontend/route/route.constants';
-import { type RouteModel } from '#lib-frontend/route/route.models';
-import { SETTINGS } from '#lib-frontend/settings/settings.constants';
-import { settingsRoutes } from '#lib-frontend/settings/settings.routes';
-import { NameFormPage } from '#lib-frontend/user/pages/NameFormPage/NameFormPage';
-import { EMAIL, NAME, PERSONAL, PHONE } from '#lib-frontend/user/user.constants';
-import { SIGN_IN_METHOD } from '#lib-shared/auth/auth.constants';
-import { FORM_MODE } from '#lib-shared/data/data.constants';
-import { ACCOUNT } from '#lib-shared/user/user.constants';
+import { SignInPage } from '@lib-frontend/auth/pages/SignInPage/SignInPage';
+import { BILLING } from '@lib-frontend/billing/billing.constants';
+import { billingRoutes } from '@lib-frontend/billing/billing.routes';
+import { ROUTE_NAVIGATION } from '@lib-frontend/route/route.constants';
+import { type RouteModel } from '@lib-frontend/route/route.models';
+import { SETTINGS } from '@lib-frontend/settings/settings.constants';
+import { settingsRoutes } from '@lib-frontend/settings/settings.routes';
+import { NameFormPage } from '@lib-frontend/user/pages/NameFormPage/NameFormPage';
+import { EMAIL, NAME, PERSONAL, PHONE } from '@lib-frontend/user/user.constants';
+import { SIGN_IN_METHOD } from '@lib-shared/auth/auth.constants';
+import { FORM_MODE } from '@lib-shared/data/data.constants';
+import { ACCOUNT } from '@lib-shared/user/user.constants';
 
 export const userRoutes: Array<RouteModel> = [
   {

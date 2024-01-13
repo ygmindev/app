@@ -1,13 +1,13 @@
 import { type ReactElement } from 'react';
 
-import { Button } from '#lib-frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { type LFCPropsModel } from '#lib-frontend/core/core.models';
-import { type SubmittableButtonsPropsModel } from '#lib-frontend/data/components/SubmittableButtons/SubmittableButtons.models';
-import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import { Button } from '@lib-frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib-frontend/core/components/Button/Button.constants';
+import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
+import { type LFCPropsModel } from '@lib-frontend/core/core.models';
+import { type SubmittableButtonsPropsModel } from '@lib-frontend/data/components/SubmittableButtons/SubmittableButtons.models';
+import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { FLEX_JUSTIFY } from '@lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 
 export const SubmittableButtons = <TType,>({
   cancelLabel,

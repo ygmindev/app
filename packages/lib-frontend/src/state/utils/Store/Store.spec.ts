@@ -1,5 +1,5 @@
-import { Store as Store } from '#lib-frontend/state/utils/Store/Store';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { Store as Store } from '@lib-frontend/state/utils/Store/Store';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ Store });
 

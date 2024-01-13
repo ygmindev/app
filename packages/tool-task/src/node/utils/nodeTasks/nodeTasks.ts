@@ -1,26 +1,26 @@
 import range from 'lodash/range';
 
-import { fromStatic } from '#lib-backend/file/utils/fromStatic/fromStatic';
-import { joinPaths } from '#lib-backend/file/utils/joinPaths/joinPaths';
-import { config } from '#lib-config/core/file/file';
-import { config as testConfig } from '#lib-config/node/test/test.base';
-import { config as webConfig } from '#lib-config/platform/web/web';
-import { PLATFORM } from '#lib-platform/core/core.constants';
-import { BOOLEAN_STRING } from '#lib-shared/core/core.constants';
-import { type PartialModel } from '#lib-shared/core/core.models';
-import { merge } from '#lib-shared/core/utils/merge/merge';
-import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
-import { type TaskParamsModel } from '#tool-task/core/core.models';
-import clean from '#tool-task/core/templates/clean/clean';
-import { PARALLEL_CONDITION } from '#tool-task/core/utils/mapParallel/mapParallel.constants';
-import { copy } from '#tool-task/file/utils/copy/copy';
-import { lint } from '#tool-task/node/templates/lint/lint';
-import { test } from '#tool-task/node/templates/test/test';
-import { type TestParamsModel } from '#tool-task/node/templates/test/test.models';
+import { fromStatic } from '@lib-backend/file/utils/fromStatic/fromStatic';
+import { joinPaths } from '@lib-backend/file/utils/joinPaths/joinPaths';
+import { config } from '@lib-config/core/file/file';
+import { config as testConfig } from '@lib-config/node/test/test.base';
+import { config as webConfig } from '@lib-config/platform/web/web';
+import { PLATFORM } from '@lib-platform/core/core.constants';
+import { BOOLEAN_STRING } from '@lib-shared/core/core.constants';
+import { type PartialModel } from '@lib-shared/core/core.models';
+import { merge } from '@lib-shared/core/utils/merge/merge';
+import { ENVIRONMENT } from '@lib-shared/environment/environment.constants';
+import { type TaskParamsModel } from '@tool-task/core/core.models';
+import clean from '@tool-task/core/templates/clean/clean';
+import { PARALLEL_CONDITION } from '@tool-task/core/utils/mapParallel/mapParallel.constants';
+import { copy } from '@tool-task/file/utils/copy/copy';
+import { lint } from '@tool-task/node/templates/lint/lint';
+import { test } from '@tool-task/node/templates/test/test';
+import { type TestParamsModel } from '@tool-task/node/templates/test/test.models';
 import {
   type NodeTasksMdoel,
   type NodeTasksParamsModel,
-} from '#tool-task/node/utils/nodeTasks/nodeTasks.models';
+} from '@tool-task/node/utils/nodeTasks/nodeTasks.models';
 
 export const nodeTasks = ({
   additionalTasks,

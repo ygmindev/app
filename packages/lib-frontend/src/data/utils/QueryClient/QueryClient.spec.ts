@@ -1,5 +1,5 @@
-import { QueryClient } from '#lib-frontend/data/utils/QueryClient/QueryClient';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { QueryClient } from '@lib-frontend/data/utils/QueryClient/QueryClient';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ QueryClient });
 

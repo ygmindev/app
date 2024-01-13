@@ -3,13 +3,13 @@ import { Authorized } from 'type-graphql';
 import {
   type WithAccessModel,
   type WithAccessParamsModel,
-} from '#lib-backend/resource/utils/withAccess/withAccess.models';
-import { ACCESS_LEVEL, ACCESS_ROLE } from '#lib-shared/auth/resources/Access/Access.constants';
+} from '@lib-backend/resource/utils/withAccess/withAccess.models';
+import { ACCESS_LEVEL, ACCESS_ROLE } from '@lib-shared/auth/resources/Access/Access.constants';
 import {
   type AccessLevelModel,
   type AccessRoleModel,
-} from '#lib-shared/auth/resources/Access/Access.models';
-import { withCondition } from '#lib-shared/core/utils/withCondition/withCondition';
+} from '@lib-shared/auth/resources/Access/Access.models';
+import { withCondition } from '@lib-shared/core/utils/withCondition/withCondition';
 
 // TODO: should come from database
 export const getAccessRole = (level: AccessLevelModel): Array<AccessRoleModel> => {

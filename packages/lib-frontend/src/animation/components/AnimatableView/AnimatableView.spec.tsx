@@ -1,6 +1,6 @@
-import { AnimatableView } from '#lib-frontend/animation/components/AnimatableView/AnimatableView';
-import { render } from '#lib-frontend/test/utils/render/render';
-import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
+import { AnimatableView } from '@lib-frontend/animation/components/AnimatableView/AnimatableView';
+import { render } from '@lib-frontend/test/utils/render/render';
+import { withTestComponent } from '@lib-frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent({ target: AnimatableView });
 

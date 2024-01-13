@@ -1,11 +1,11 @@
-import { NUMBER_UNIT_TYPE } from '#lib-frontend/data/data.constants';
-import { type ResourceTablePropsModel } from '#lib-frontend/resource/components/ResourceTable/ResourceTable.models';
-import { DATA_TYPE } from '#lib-shared/data/data.constants';
-import { SOCKET_RESOURCE_NAME } from '#lib-shared/http/resources/Socket/Socket.constants';
+import { NUMBER_UNIT_TYPE } from '@lib-frontend/data/data.constants';
+import { type ResourceTablePropsModel } from '@lib-frontend/resource/components/ResourceTable/ResourceTable.models';
+import { DATA_TYPE } from '@lib-shared/data/data.constants';
+import { SOCKET_RESOURCE_NAME } from '@lib-shared/http/resources/Socket/Socket.constants';
 import {
   type SocketFormModel,
   type SocketModel,
-} from '#lib-shared/http/resources/Socket/Socket.models';
+} from '@lib-shared/http/resources/Socket/Socket.models';
 
 export const SOCKET_TABLE_PROPS = {
   columns: [

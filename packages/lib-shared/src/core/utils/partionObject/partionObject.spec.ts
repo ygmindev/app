@@ -1,6 +1,6 @@
 // COMPLETE
-import { partionObject } from '#lib-shared/core/utils/partionObject/partionObject';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { partionObject } from '@lib-shared/core/utils/partionObject/partionObject';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ partionObject });
 

@@ -1,8 +1,8 @@
-import { type UriModel } from '#lib-frontend/route/route.models';
+import { type UriModel } from '@lib-frontend/route/route.models';
 import {
   type _WithScreenModel,
   type _WithScreenParamsModel,
-} from '#lib-frontend/test/utils/withScreen/_withScreen.models';
+} from '@lib-frontend/test/utils/withScreen/_withScreen.models';
 
 export type WithScreenParamsModel = _WithScreenParamsModel;
 

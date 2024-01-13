@@ -4,15 +4,15 @@ import map from 'lodash/map';
 import reduce from 'lodash/reduce';
 import toString from 'lodash/toString';
 
-import { fromConfig } from '#lib-backend/file/utils/fromConfig/fromConfig';
-import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
-import { writeFile } from '#lib-backend/file/utils/writeFile/writeFile';
-import { NotFoundError } from '#lib-shared/core/errors/NotFoundError/NotFoundError';
-import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
+import { fromConfig } from '@lib-backend/file/utils/fromConfig/fromConfig';
+import { fromWorking } from '@lib-backend/file/utils/fromWorking/fromWorking';
+import { writeFile } from '@lib-backend/file/utils/writeFile/writeFile';
+import { NotFoundError } from '@lib-shared/core/errors/NotFoundError/NotFoundError';
+import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
 import {
   type SetEnvironmentModel,
   type SetEnvironmentParamsModel,
-} from '#lib-shared/environment/utils/setEnvironment/setEnvironment.models';
+} from '@lib-shared/environment/utils/setEnvironment/setEnvironment.models';
 
 export const setEnvironment = ({
   environment,

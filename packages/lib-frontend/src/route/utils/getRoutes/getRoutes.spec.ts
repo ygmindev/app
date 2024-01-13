@@ -1,5 +1,5 @@
-import { getRoutes } from '#lib-frontend/route/utils/getRoutes/getRoutes';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { getRoutes } from '@lib-frontend/route/utils/getRoutes/getRoutes';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ getRoutes });
 

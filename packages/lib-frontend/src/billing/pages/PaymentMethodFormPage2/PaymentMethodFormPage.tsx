@@ -1,14 +1,14 @@
-import { PAYMENT } from '#lib-frontend/billing/billing.constants';
-import { PaymentMethodForm } from '#lib-frontend/billing/containers/PaymentMethodForm/PaymentMethodForm';
+import { PAYMENT } from '@lib-frontend/billing/billing.constants';
+import { PaymentMethodForm } from '@lib-frontend/billing/containers/PaymentMethodForm/PaymentMethodForm';
 import {
   type PaymentMethodFormPageParamsModel,
   type PaymentMethodFormPagePropsModel,
-} from '#lib-frontend/billing/pages/PaymentMethodFormPage2/PaymentMethodFormPage.models';
-import { type SFCModel } from '#lib-frontend/core/core.models';
-import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { useCurrentUser } from '#lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
-import { ACCOUNT } from '#lib-shared/user/user.constants';
+} from '@lib-frontend/billing/pages/PaymentMethodFormPage2/PaymentMethodFormPage.models';
+import { type SFCModel } from '@lib-frontend/core/core.models';
+import { useRouter } from '@lib-frontend/route/hooks/useRouter/useRouter';
+import { useStyles } from '@lib-frontend/style/hooks/useStyles/useStyles';
+import { useCurrentUser } from '@lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
+import { ACCOUNT } from '@lib-shared/user/user.constants';
 
 export const PaymentMethodFormPage: SFCModel<PaymentMethodFormPagePropsModel> = ({
   testID,

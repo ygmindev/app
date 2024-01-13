@@ -1,6 +1,6 @@
-import { createUpdate } from '#lib-backend/resource/utils/createUpdate/createUpdate';
-import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.constants';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { createUpdate } from '@lib-backend/resource/utils/createUpdate/createUpdate';
+import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib-shared/test/resources/TestableEntityResource/TestableEntityResource.constants';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ createUpdate });
 

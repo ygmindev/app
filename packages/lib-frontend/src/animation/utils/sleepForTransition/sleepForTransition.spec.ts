@@ -1,5 +1,5 @@
-import { sleepForTransition } from '#lib-frontend/animation/utils/sleepForTransition/sleepForTransition';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { sleepForTransition } from '@lib-frontend/animation/utils/sleepForTransition/sleepForTransition';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ sleepForTransition });
 

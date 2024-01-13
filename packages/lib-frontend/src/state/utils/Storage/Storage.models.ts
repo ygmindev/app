@@ -1,4 +1,4 @@
-import { type CookiesModel } from '#lib-frontend/state/state.models';
+import { type CookiesModel } from '@lib-frontend/state/state.models';
 
 export type StorageParamsModel = { cookies?: CookiesModel };
 

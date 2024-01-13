@@ -1,6 +1,6 @@
-import { fromModules } from '#lib-backend/file/utils/fromModules/fromModules';
-import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { fromModules } from '@lib-backend/file/utils/fromModules/fromModules';
+import { fromWorking } from '@lib-backend/file/utils/fromWorking/fromWorking';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ fromModules });
 

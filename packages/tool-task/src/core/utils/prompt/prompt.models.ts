@@ -1,8 +1,8 @@
 import {
   type _PromptModel,
   type _PromptParamsModel,
-} from '#tool-task/core/utils/prompt/_prompt.models';
-import { type PROMPT_TYPE } from '#tool-task/core/utils/prompt/prompt.constants';
+} from '@tool-task/core/utils/prompt/_prompt.models';
+import { type PROMPT_TYPE } from '@tool-task/core/utils/prompt/prompt.constants';
 
 export type PromptParamsModel<TType> = _PromptParamsModel<TType>;
 

@@ -1,6 +1,6 @@
-import { Container } from '#lib-backend/core/utils/Container/Container';
-import { DatabaseInMemory } from '#lib-backend/database/utils/DatabaseInMemory/DatabaseInMemory';
-import { type TaskParamsModel } from '#tool-task/core/core.models';
+import { Container } from '@lib-backend/core/utils/Container/Container';
+import { DatabaseInMemory } from '@lib-backend/database/utils/DatabaseInMemory/DatabaseInMemory';
+import { type TaskParamsModel } from '@tool-task/core/core.models';
 
 const start: TaskParamsModel<unknown> = {
   name: 'database-start',

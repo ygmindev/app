@@ -1,4 +1,4 @@
-import { type _SortModel, type _SortParamsModel } from '#lib-shared/core/utils/sort/_sort.models';
+import { type _SortModel, type _SortParamsModel } from '@lib-shared/core/utils/sort/_sort.models';
 
 export type SortParamsModel<TType> = _SortParamsModel<TType>;
 

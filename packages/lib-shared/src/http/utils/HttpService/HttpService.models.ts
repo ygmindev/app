@@ -1,6 +1,6 @@
-import { type HttpResponseTypeModel } from '#lib-shared/http/http.models';
-import { type _HttpServiceModel } from '#lib-shared/http/utils/HttpService/_HttpService.models';
-import { type UriParamsModel } from '#lib-shared/http/utils/uri/uri.models';
+import { type HttpResponseTypeModel } from '@lib-shared/http/http.models';
+import { type _HttpServiceModel } from '@lib-shared/http/utils/HttpService/_HttpService.models';
+import { type UriParamsModel } from '@lib-shared/http/utils/uri/uri.models';
 
 export type HttpRequestParamsModel = {
   headers?: object;

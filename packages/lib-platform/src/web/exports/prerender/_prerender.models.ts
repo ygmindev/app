@@ -1,7 +1,7 @@
 import { type PageContextBuiltIn } from 'vike/types';
 
-import { type InternationalizeConfigModel } from '#lib-config/locale/internationalize/internationalize.models';
-import { type RootContextModel } from '#lib-frontend/root/root.models';
+import { type InternationalizeConfigModel } from '@lib-config/locale/internationalize/internationalize.models';
+import { type RootContextModel } from '@lib-frontend/root/root.models';
 
 export type _PrerenderParamsModel = Pick<
   InternationalizeConfigModel,

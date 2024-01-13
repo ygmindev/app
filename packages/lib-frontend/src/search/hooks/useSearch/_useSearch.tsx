@@ -4,13 +4,13 @@ import { useMemo, useState } from 'react';
 import {
   type _UseSearchModel,
   type _UseSearchParamsModel,
-} from '#lib-frontend/search/hooks/useSearch/_useSearch.models';
+} from '@lib-frontend/search/hooks/useSearch/_useSearch.models';
 import {
   SEARCH_DELAY,
   SEARCH_LIMIT,
   SEARCH_THRESHOLD,
-} from '#lib-frontend/search/hooks/useSearch/useSearch.constants';
-import { debounce } from '#lib-shared/core/utils/debounce/debounce';
+} from '@lib-frontend/search/hooks/useSearch/useSearch.constants';
+import { debounce } from '@lib-shared/core/utils/debounce/debounce';
 
 export const _useSearch = <TType,>({
   delay = SEARCH_DELAY,

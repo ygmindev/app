@@ -6,8 +6,8 @@ import {
   type NestedDefaultStateModel,
   type NestedInitialStateModel,
   type NestedReducerModel,
-} from '#lib-frontend/state/state.models';
-import { type StateProviderPropsModel } from '#lib-frontend/state/utils/Store/Store.models';
+} from '@lib-frontend/state/state.models';
+import { type StateProviderPropsModel } from '@lib-frontend/state/utils/Store/Store.models';
 
 export type _StoreParamsModel<
   TKeys extends Array<string>,

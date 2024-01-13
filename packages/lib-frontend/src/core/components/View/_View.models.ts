@@ -4,8 +4,8 @@ import {
   type ChildrenPropsModel,
   type MeasureModel,
   type PositionModel,
-} from '#lib-frontend/core/core.models';
-import { type StylePropsModel, type ViewStyleModel } from '#lib-frontend/style/style.models';
+} from '@lib-frontend/core/core.models';
+import { type StylePropsModel, type ViewStyleModel } from '@lib-frontend/style/style.models';
 
 export type _ViewPropsModel = ChildrenPropsModel &
   StylePropsModel<ViewStyleModel> & {

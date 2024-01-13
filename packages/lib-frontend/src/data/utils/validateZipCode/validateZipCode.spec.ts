@@ -1,5 +1,5 @@
-import { validateZipCode } from '#lib-frontend/data/utils/validateZipCode/validateZipCode';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { validateZipCode } from '@lib-frontend/data/utils/validateZipCode/validateZipCode';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ validateZipCode });
 

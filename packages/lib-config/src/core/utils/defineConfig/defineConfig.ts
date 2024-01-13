@@ -4,10 +4,10 @@ import isFunction from 'lodash/isFunction';
 import {
   type DefineConfigModel,
   type DefineConfigParamsModel,
-} from '#lib-config/core/utils/defineConfig/defineConfig.models';
-import { type PartialDeepModel } from '#lib-shared/core/core.models';
-import { merge } from '#lib-shared/core/utils/merge/merge';
-import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
+} from '@lib-config/core/utils/defineConfig/defineConfig.models';
+import { type PartialDeepModel } from '@lib-shared/core/core.models';
+import { merge } from '@lib-shared/core/utils/merge/merge';
+import { MERGE_STRATEGY } from '@lib-shared/core/utils/merge/merge.constants';
 
 const getConfigs = <TParams, TParamsConfig extends TParams | (() => TParams), TResult = undefined>({
   config,

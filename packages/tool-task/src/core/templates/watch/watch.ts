@@ -1,11 +1,11 @@
 import trimStart from 'lodash/trimStart';
 
-import { fromExecutable } from '#lib-backend/file/utils/fromExecutable/fromExecutable';
-import { extensions } from '#lib-platform/core/utils/extensions/extensions';
-import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
-import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
-import { type TaskParamsModel } from '#tool-task/core/core.models';
-import { type WatchParamsModel } from '#tool-task/core/templates/watch/watch.models';
+import { fromExecutable } from '@lib-backend/file/utils/fromExecutable/fromExecutable';
+import { extensions } from '@lib-platform/core/utils/extensions/extensions';
+import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
+import { ENVIRONMENT } from '@lib-shared/environment/environment.constants';
+import { type TaskParamsModel } from '@tool-task/core/core.models';
+import { type WatchParamsModel } from '@tool-task/core/templates/watch/watch.models';
 
 export const watch: TaskParamsModel<WatchParamsModel> = {
   environment: ENVIRONMENT.DEVELOPMENT,

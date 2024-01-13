@@ -1,17 +1,17 @@
 import isString from 'lodash/isString';
 
-import { Skeleton } from '#lib-frontend/animation/components/Skeleton/Skeleton';
-import { Icon } from '#lib-frontend/core/components/Icon/Icon';
-import { Image } from '#lib-frontend/core/components/Image/Image';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { type LFCModel } from '#lib-frontend/core/core.models';
-import { type ItemTablePropsModel } from '#lib-frontend/data/components/ItemTable/ItemTable.models';
-import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
-import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { FLEX_JUSTIFY } from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
-import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
+import { Skeleton } from '@lib-frontend/animation/components/Skeleton/Skeleton';
+import { Icon } from '@lib-frontend/core/components/Icon/Icon';
+import { Image } from '@lib-frontend/core/components/Image/Image';
+import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
+import { type LFCModel } from '@lib-frontend/core/core.models';
+import { type ItemTablePropsModel } from '@lib-frontend/data/components/ItemTable/ItemTable.models';
+import { TranslatableText } from '@lib-frontend/locale/components/TranslatableText/TranslatableText';
+import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
+import { THEME_SIZE } from '@lib-frontend/style/style.constants';
+import { FLEX_JUSTIFY } from '@lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
 
 export const ItemTable: LFCModel<ItemTablePropsModel> = ({ elementState, items, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });

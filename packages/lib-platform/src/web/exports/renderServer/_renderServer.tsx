@@ -1,25 +1,25 @@
 import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
 import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vike/server';
 
-import { QueryClient } from '#lib-frontend/data/utils/QueryClient/QueryClient';
-import { type RootContextModel } from '#lib-frontend/root/root.models';
-import { ROOT_REDUCERS } from '#lib-frontend/root/stores/rootStore.constants';
+import { QueryClient } from '@lib-frontend/data/utils/QueryClient/QueryClient';
+import { type RootContextModel } from '@lib-frontend/root/root.models';
+import { ROOT_REDUCERS } from '@lib-frontend/root/stores/rootStore.constants';
 import {
   type RootActionsParamsModel,
   type RootStateContextModel,
   type RootStateModel,
-} from '#lib-frontend/root/stores/rootStore.models';
-import { Store } from '#lib-frontend/state/utils/Store/Store';
-import { getLocaleStoreFromI18n } from '#lib-platform/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
+} from '@lib-frontend/root/stores/rootStore.models';
+import { Store } from '@lib-frontend/state/utils/Store/Store';
+import { getLocaleStoreFromI18n } from '@lib-platform/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
 import {
   type _RenderServerModel,
   type _RenderServerParamsModel,
-} from '#lib-platform/web/exports/renderServer/_renderServer.models';
-import { merge } from '#lib-shared/core/utils/merge/merge';
-import { pick } from '#lib-shared/core/utils/pick/pick';
-import { LOCALE } from '#lib-shared/locale/locale.constants';
-import { QUERY } from '#lib-shared/query/query.constants';
-import { STATE } from '#lib-shared/state/state.constants';
+} from '@lib-platform/web/exports/renderServer/_renderServer.models';
+import { merge } from '@lib-shared/core/utils/merge/merge';
+import { pick } from '@lib-shared/core/utils/pick/pick';
+import { LOCALE } from '@lib-shared/locale/locale.constants';
+import { QUERY } from '@lib-shared/query/query.constants';
+import { STATE } from '@lib-shared/state/state.constants';
 
 export const _renderServer =
   ({

@@ -4,7 +4,7 @@ import { join, normalize } from 'path';
 import {
   type ChildrenModel,
   type ChildrenParamsModel,
-} from '#lib-backend/file/utils/children/children.models';
+} from '@lib-backend/file/utils/children/children.models';
 
 export const children = (...[from, options]: ChildrenParamsModel): ChildrenModel => {
   const root = `/${normalize(from)}`;

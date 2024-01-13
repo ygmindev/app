@@ -4,18 +4,18 @@ import trim from 'lodash/trim';
 import uniq from 'lodash/uniq';
 import { basename, join } from 'path';
 
-import { children } from '#lib-backend/file/utils/children/children';
-import { fromPackages } from '#lib-backend/file/utils/fromPackages/fromPackages';
-import { packages } from '#lib-backend/file/utils/packages/packages';
-import { sort } from '#lib-shared/core/utils/sort/sort';
-import { _boilerplate } from '#tool-generate/utils/boilerplate/_boilerplate';
-import { BOILERPLATE_TEMPLATE_VARIABLE_PATTERN } from '#tool-generate/utils/boilerplate/boilerplate.constants';
+import { children } from '@lib-backend/file/utils/children/children';
+import { fromPackages } from '@lib-backend/file/utils/fromPackages/fromPackages';
+import { packages } from '@lib-backend/file/utils/packages/packages';
+import { sort } from '@lib-shared/core/utils/sort/sort';
+import { _boilerplate } from '@tool-generate/utils/boilerplate/_boilerplate';
+import { BOILERPLATE_TEMPLATE_VARIABLE_PATTERN } from '@tool-generate/utils/boilerplate/boilerplate.constants';
 import {
   type BoilerplateModel,
   type BoilerplateParamsModel,
-} from '#tool-generate/utils/boilerplate/boilerplate.models';
-import { prompt } from '#tool-task/core/utils/prompt/prompt';
-import { PROMPT_TYPE } from '#tool-task/core/utils/prompt/prompt.constants';
+} from '@tool-generate/utils/boilerplate/boilerplate.models';
+import { prompt } from '@tool-task/core/utils/prompt/prompt';
+import { PROMPT_TYPE } from '@tool-task/core/utils/prompt/prompt.constants';
 
 const getTemplateVariables = async (from: string): Promise<Array<string>> => {
   const base = basename(from);

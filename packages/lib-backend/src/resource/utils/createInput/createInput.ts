@@ -1,10 +1,10 @@
-import { createArgs } from '#lib-backend/resource/utils/createArgs/createArgs';
+import { createArgs } from '@lib-backend/resource/utils/createArgs/createArgs';
 import {
   type CreateInputModel,
   type CreateInputParamsModel,
-} from '#lib-backend/resource/utils/createInput/createInput.models';
-import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
-import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
+} from '@lib-backend/resource/utils/createInput/createInput.models';
+import { withEntity } from '@lib-backend/resource/utils/withEntity/withEntity';
+import { type ResourceMethodTypeModel } from '@lib-shared/resource/resource.models';
 
 export const createInput = <TMethod extends ResourceMethodTypeModel, TType, TForm, TRoot>({
   Resource,

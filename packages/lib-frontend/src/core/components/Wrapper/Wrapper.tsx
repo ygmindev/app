@@ -3,20 +3,20 @@ import { type ReactElement, type ReactNode } from 'react';
 import { Children, cloneElement, createElement, forwardRef, isValidElement, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { AnimatableView } from '#lib-frontend/animation/components/AnimatableView/AnimatableView';
-import { View } from '#lib-frontend/core/components/View/View';
+import { AnimatableView } from '@lib-frontend/animation/components/AnimatableView/AnimatableView';
+import { View } from '@lib-frontend/core/components/View/View';
 import {
   type WrapperPropsModel,
   type WrapperRefModel,
-} from '#lib-frontend/core/components/Wrapper/Wrapper.models';
-import { type ChildrenPropsModel, type RLFCModel } from '#lib-frontend/core/core.models';
-import { isFragment } from '#lib-frontend/core/utils/isFragment/isFragment';
-import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { spacingStyler } from '#lib-frontend/style/utils/styler/spacingStyler/spacingStyler';
-import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
-import { variableName } from '#lib-shared/core/utils/variableName/variableName';
+} from '@lib-frontend/core/components/Wrapper/Wrapper.models';
+import { type ChildrenPropsModel, type RLFCModel } from '@lib-frontend/core/core.models';
+import { isFragment } from '@lib-frontend/core/utils/isFragment/isFragment';
+import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
+import { THEME_SIZE } from '@lib-frontend/style/style.constants';
+import { spacingStyler } from '@lib-frontend/style/utils/styler/spacingStyler/spacingStyler';
+import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
+import { variableName } from '@lib-shared/core/utils/variableName/variableName';
 
 export const Wrapper: RLFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef(
   ({ animation, children, isDistribute, ...props }, ref) => {

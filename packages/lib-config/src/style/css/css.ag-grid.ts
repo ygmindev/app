@@ -1,8 +1,8 @@
-import { type CssConfigModel } from '#lib-config/style/css/css.models';
+import { type CssConfigModel } from '@lib-config/style/css/css.models';
 
 export const AG_GRID_THEME = 'ag-theme-material';
 
-import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
+import { defineConfig } from '@lib-config/core/utils/defineConfig/defineConfig';
 
 const { _config, config } = defineConfig({
   config: {

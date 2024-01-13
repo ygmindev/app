@@ -1,11 +1,11 @@
-import { SignInForm } from '#lib-frontend/auth/containers/SignInForm/SignInForm';
+import { SignInForm } from '@lib-frontend/auth/containers/SignInForm/SignInForm';
 import {
   type SignInPageParamsModel,
   type SignInPagePropsModel,
-} from '#lib-frontend/auth/pages/SignInPage/SignInPage.models';
-import { type LFCModel } from '#lib-frontend/core/core.models';
-import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
-import { FORM_MODE } from '#lib-shared/data/data.constants';
+} from '@lib-frontend/auth/pages/SignInPage/SignInPage.models';
+import { type LFCModel } from '@lib-frontend/core/core.models';
+import { useRouter } from '@lib-frontend/route/hooks/useRouter/useRouter';
+import { FORM_MODE } from '@lib-shared/data/data.constants';
 
 export const SignInPage: LFCModel<SignInPagePropsModel> = ({
   method,

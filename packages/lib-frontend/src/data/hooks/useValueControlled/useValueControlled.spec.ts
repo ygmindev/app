@@ -1,7 +1,7 @@
-import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
-import { act } from '#lib-frontend/test/utils/act/act';
-import { renderHook } from '#lib-frontend/test/utils/renderHook/renderHook';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { useValueControlled } from '@lib-frontend/data/hooks/useValueControlled/useValueControlled';
+import { act } from '@lib-frontend/test/utils/act/act';
+import { renderHook } from '@lib-frontend/test/utils/renderHook/renderHook';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ useValueControlled });
 

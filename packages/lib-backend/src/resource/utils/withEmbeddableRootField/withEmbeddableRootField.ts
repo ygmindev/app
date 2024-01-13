@@ -1,10 +1,10 @@
 import {
   type WithEmbeddableRootFieldModel,
   type WithEmbeddableRootFieldParamsModel,
-} from '#lib-backend/resource/utils/withEmbeddableRootField/withEmbeddableRootField.models';
-import { withField } from '#lib-backend/resource/utils/withField/withField';
-import { FIELD_RELATION } from '#lib-backend/resource/utils/withField/withField.constants';
-import { PROPERTY_TYPE } from '#lib-shared/data/data.constants';
+} from '@lib-backend/resource/utils/withEmbeddableRootField/withEmbeddableRootField.models';
+import { withField } from '@lib-backend/resource/utils/withField/withField';
+import { FIELD_RELATION } from '@lib-backend/resource/utils/withField/withField.constants';
+import { PROPERTY_TYPE } from '@lib-shared/data/data.constants';
 
 export const withEmbeddableRootField =
   <TType>({

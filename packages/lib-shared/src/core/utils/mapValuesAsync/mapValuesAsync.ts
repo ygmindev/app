@@ -3,7 +3,7 @@ import map from 'lodash/map';
 import {
   type MapValuesAsyncModel,
   type MapValuesAsyncParamsModel,
-} from '#lib-shared/core/utils/mapValuesAsync/mapValuesAsync.models';
+} from '@lib-shared/core/utils/mapValuesAsync/mapValuesAsync.models';
 
 export const mapValuesAsync = async <TType extends object, TResult>(
   ...[value, callback]: MapValuesAsyncParamsModel<TType, TResult>

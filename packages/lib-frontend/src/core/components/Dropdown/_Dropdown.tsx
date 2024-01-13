@@ -14,11 +14,11 @@ import {
 } from '@floating-ui/react';
 import { type CSSProperties } from 'react';
 
-import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
-import { type _DropdownPropsModel } from '#lib-frontend/core/components/Dropdown/_Dropdown.models';
-import { type SFCModel } from '#lib-frontend/core/core.models';
-import { useValueDelayed } from '#lib-frontend/core/hooks/useValueDelayed/useValueDelayed';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
+import { Appearable } from '@lib-frontend/animation/components/Appearable/Appearable';
+import { type _DropdownPropsModel } from '@lib-frontend/core/components/Dropdown/_Dropdown.models';
+import { type SFCModel } from '@lib-frontend/core/core.models';
+import { useValueDelayed } from '@lib-frontend/core/hooks/useValueDelayed/useValueDelayed';
+import { useStyles } from '@lib-frontend/style/hooks/useStyles/useStyles';
 
 export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   anchor,

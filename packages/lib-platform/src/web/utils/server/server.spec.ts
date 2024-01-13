@@ -1,5 +1,5 @@
-import { server } from '#lib-platform/web/utils/server/server';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { server } from '@lib-platform/web/utils/server/server';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ server });
 

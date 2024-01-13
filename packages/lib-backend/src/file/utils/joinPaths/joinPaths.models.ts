@@ -1,4 +1,4 @@
-import { type FilterNilParamsModel } from '#lib-shared/core/utils/filterNil/filterNil.models';
+import { type FilterNilParamsModel } from '@lib-shared/core/utils/filterNil/filterNil.models';
 
 export type JoinPathsParamsModel = [
   paths: FilterNilParamsModel<string>,

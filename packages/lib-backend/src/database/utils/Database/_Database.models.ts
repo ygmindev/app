@@ -1,6 +1,6 @@
-import { type RepositoryModel } from '#lib-backend/database/utils/Database/Database.models';
-import { type ResourceNameParamsModel } from '#lib-shared/resource/resource.models';
-import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type RepositoryModel } from '@lib-backend/database/utils/Database/Database.models';
+import { type ResourceNameParamsModel } from '@lib-shared/resource/resource.models';
+import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export type _DatabaseModel = {
   close(): Promise<void>;

@@ -3,23 +3,23 @@ import toString from 'lodash/toString';
 import { type ReactElement } from 'react';
 import { useMemo } from 'react';
 
-import { Accordion } from '#lib-frontend/animation/components/Accordion/Accordion';
-import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
-import { ACTIVATABLE_TRIGGER } from '#lib-frontend/core/components/Activatable/Activatable.constants';
-import { Button } from '#lib-frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
-import { Droppable } from '#lib-frontend/core/components/Droppable/Droppable';
-import { Rotatable } from '#lib-frontend/animation/components/Rotatable/Rotatable';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { type NavigationBarPropsModel } from '#lib-frontend/core/containers/NavigationBar/NavigationBar.models';
-import { DIRECTION, ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type SFCPropsModel } from '#lib-frontend/core/core.models';
-import { useIsMobile } from '#lib-frontend/core/hooks/useIsMobile/useIsMobile';
-import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { groupBy } from '#lib-shared/core/utils/groupBy/groupBy';
+import { Accordion } from '@lib-frontend/animation/components/Accordion/Accordion';
+import { Activatable } from '@lib-frontend/core/components/Activatable/Activatable';
+import { ACTIVATABLE_TRIGGER } from '@lib-frontend/core/components/Activatable/Activatable.constants';
+import { Button } from '@lib-frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib-frontend/core/components/Button/Button.constants';
+import { Droppable } from '@lib-frontend/core/components/Droppable/Droppable';
+import { Rotatable } from '@lib-frontend/animation/components/Rotatable/Rotatable';
+import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
+import { type NavigationBarPropsModel } from '@lib-frontend/core/containers/NavigationBar/NavigationBar.models';
+import { DIRECTION, ELEMENT_STATE } from '@lib-frontend/core/core.constants';
+import { type SFCPropsModel } from '@lib-frontend/core/core.models';
+import { useIsMobile } from '@lib-frontend/core/hooks/useIsMobile/useIsMobile';
+import { trimPathname } from '@lib-frontend/route/utils/trimPathname/trimPathname';
+import { useStyles } from '@lib-frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
+import { THEME_SIZE } from '@lib-frontend/style/style.constants';
+import { groupBy } from '@lib-shared/core/utils/groupBy/groupBy';
 
 export const NavigationBar = ({
   isHorizontal,

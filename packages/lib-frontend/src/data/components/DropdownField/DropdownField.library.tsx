@@ -1,8 +1,8 @@
-import { MENU_FIXTURE_OPTIONS } from '#lib-frontend/core/components/Menu/Menu.fixtures';
-import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { DropdownField } from '#lib-frontend/data/components/DropdownField/DropdownField';
-import { type DropdownFieldPropsModel } from '#lib-frontend/data/components/DropdownField/DropdownField.models';
-import { type LibraryPropsModel } from '#lib-library/core/components/Library/Library.models';
+import { MENU_FIXTURE_OPTIONS } from '@lib-frontend/core/components/Menu/Menu.fixtures';
+import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
+import { DropdownField } from '@lib-frontend/data/components/DropdownField/DropdownField';
+import { type DropdownFieldPropsModel } from '@lib-frontend/data/components/DropdownField/DropdownField.models';
+import { type LibraryPropsModel } from '@lib-library/core/components/Library/Library.models';
 
 export const props: LibraryPropsModel<DropdownFieldPropsModel> = {
   Component: DropdownField,

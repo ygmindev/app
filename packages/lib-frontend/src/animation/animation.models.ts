@@ -1,13 +1,13 @@
-import { type ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import { type ELEMENT_STATE } from '@lib-frontend/core/core.constants';
 import {
   type ElementStateModel,
   type ElementStatePropsModel,
-} from '#lib-frontend/core/core.models';
+} from '@lib-frontend/core/core.models';
 import {
   type StyleModel,
   type StylePropsModel,
   type ViewStyleModel,
-} from '#lib-frontend/style/style.models';
+} from '@lib-frontend/style/style.models';
 
 export type AnimationModel<
   TStyle extends StyleModel = ViewStyleModel,

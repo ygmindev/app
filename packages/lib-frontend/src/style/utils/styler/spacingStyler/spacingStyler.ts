@@ -1,14 +1,14 @@
 import isNumber from 'lodash/isNumber';
 
-import { type UseThemeModel } from '#lib-frontend/style/hooks/useTheme/useTheme.models';
-import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { type ThemeSizeModel } from '#lib-frontend/style/style.models';
+import { type UseThemeModel } from '@lib-frontend/style/hooks/useTheme/useTheme.models';
+import { THEME_SIZE } from '@lib-frontend/style/style.constants';
+import { type ThemeSizeModel } from '@lib-frontend/style/style.models';
 import {
   type SpacingModel,
   type SpacingStylerParamsModel,
-} from '#lib-frontend/style/utils/styler/spacingStyler/spacingStyler.models';
-import { type StylerModel } from '#lib-frontend/style/utils/styler/styler.models';
-import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
+} from '@lib-frontend/style/utils/styler/spacingStyler/spacingStyler.models';
+import { type StylerModel } from '@lib-frontend/style/utils/styler/styler.models';
+import { cleanObject } from '@lib-shared/core/utils/cleanObject/cleanObject';
 
 export const getSpacing = (
   value: SpacingModel | 'auto' | number | undefined,

@@ -1,16 +1,16 @@
 import {
   type UseProtectedResourceModel,
   type UseProtectedResourceParamsModel,
-} from '#lib-frontend/auth/hooks/useProtectedResource/useProtectedResource.models';
+} from '@lib-frontend/auth/hooks/useProtectedResource/useProtectedResource.models';
 import {
   toGraphQlParamsFields,
   useResource,
-} from '#lib-frontend/resource/hooks/useResource/useResource';
-import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
-import { type UseResourceMethodParamsFieldsModel } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
-import { type ProtectedResourceModel } from '#lib-shared/auth/resources/ProtectedResource/ProtectedResource.models';
-import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+} from '@lib-frontend/resource/hooks/useResource/useResource';
+import { useResourceMethod } from '@lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
+import { type UseResourceMethodParamsFieldsModel } from '@lib-frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
+import { type ProtectedResourceModel } from '@lib-shared/auth/resources/ProtectedResource/ProtectedResource.models';
+import { RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
+import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export const useProtectedResource = <
   TType extends ProtectedResourceModel,

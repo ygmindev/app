@@ -1,5 +1,5 @@
-import { render } from '#lib-platform/web/utils/render/render';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { render } from '@lib-platform/web/utils/render/render';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ renderPage: render });
 

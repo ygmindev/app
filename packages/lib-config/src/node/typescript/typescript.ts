@@ -1,9 +1,9 @@
-import { fromDist } from '#lib-backend/file/utils/fromDist/fromDist';
-import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
-import { toRelative } from '#lib-backend/file/utils/toRelative/toRelative';
-import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
-import { _typescript } from '#lib-config/node/typescript/_typescript';
-import { type TypescriptConfigModel } from '#lib-config/node/typescript/typescript.models';
+import { fromDist } from '@lib-backend/file/utils/fromDist/fromDist';
+import { fromRoot } from '@lib-backend/file/utils/fromRoot/fromRoot';
+import { toRelative } from '@lib-backend/file/utils/toRelative/toRelative';
+import { defineConfig } from '@lib-config/core/utils/defineConfig/defineConfig';
+import { _typescript } from '@lib-config/node/typescript/_typescript';
+import { type TypescriptConfigModel } from '@lib-config/node/typescript/typescript.models';
 
 const { _config, config } = defineConfig({
   _config: _typescript,

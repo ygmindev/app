@@ -1,5 +1,5 @@
-import { toComponentClass } from '#lib-frontend/core/utils/toComponentClass/toComponentClass';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { toComponentClass } from '@lib-frontend/core/utils/toComponentClass/toComponentClass';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ toComponentClass });
 

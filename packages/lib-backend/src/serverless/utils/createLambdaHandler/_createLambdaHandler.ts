@@ -8,26 +8,26 @@ import {
 import { ApiGatewayManagementApi } from 'aws-sdk';
 import { type GraphQLError } from 'graphql';
 
-import { getUserFromHeader } from '#lib-backend/auth/utils/getUserFromHeader/getUserFromHeader';
+import { getUserFromHeader } from '@lib-backend/auth/utils/getUserFromHeader/getUserFromHeader';
 import {
   type _CreateLambdaHandlerModel,
   type _CreateLambdaHandlerParamsModel,
   type _LambdaEventModel,
-} from '#lib-backend/serverless/utils/createLambdaHandler/_createLambdaHandler.models';
+} from '@lib-backend/serverless/utils/createLambdaHandler/_createLambdaHandler.models';
 import {
   LAMBDA_PLUGIN,
   LAMBDA_TYPE,
-} from '#lib-backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
+} from '@lib-backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
 import {
   type LambdaResponseModel,
   type LambdaTypeModel,
-} from '#lib-backend/serverless/utils/createLambdaHandler/createLambdaHandler.models';
-import { initialize as initializeBackend } from '#lib-backend/setup/utils/initialize/initialize';
-import { _config } from '#lib-config/data/graphql/graphql';
-import { type ContextModel } from '#lib-platform/core/core.models';
-import { stringify } from '#lib-shared/core/utils/stringify/stringify';
-import { HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
-import { HTTP_STATUS_CODE } from '#lib-shared/http/http.constants';
+} from '@lib-backend/serverless/utils/createLambdaHandler/createLambdaHandler.models';
+import { initialize as initializeBackend } from '@lib-backend/setup/utils/initialize/initialize';
+import { _config } from '@lib-config/data/graphql/graphql';
+import { type ContextModel } from '@lib-platform/core/core.models';
+import { stringify } from '@lib-shared/core/utils/stringify/stringify';
+import { HttpError } from '@lib-shared/http/errors/HttpError/HttpError';
+import { HTTP_STATUS_CODE } from '@lib-shared/http/http.constants';
 
 export const _createLambdaHandler = <TType extends LambdaTypeModel>({
   context: contextDefault = {},

@@ -1,4 +1,4 @@
-import { nodeTasks } from '#tool-task/node/utils/nodeTasks/nodeTasks';
+import { nodeTasks } from '@tool-task/node/utils/nodeTasks/nodeTasks';
 
 // TODO: get rid of testOverrides?
 const tasks = nodeTasks({

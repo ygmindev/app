@@ -1,14 +1,14 @@
 import { type Context } from 'react';
 
-import { type ProviderPropsModel } from '#lib-frontend/core/core.models';
+import { type ProviderPropsModel } from '@lib-frontend/core/core.models';
 import {
   type NestedActionsModel,
   type NestedDefaultStateModel,
-} from '#lib-frontend/state/state.models';
+} from '@lib-frontend/state/state.models';
 import {
   type _StoreModel,
   type _StoreParamsModel,
-} from '#lib-frontend/state/utils/Store/_Store.models';
+} from '@lib-frontend/state/utils/Store/_Store.models';
 
 export type StoreParamsModel<
   TKeys extends Array<string>,

@@ -1,14 +1,14 @@
-import { type GraphQlQueryParamsFieldsModel } from '#lib-frontend/data/utils/graphQlQuery/graphQlQuery.models';
+import { type GraphQlQueryParamsFieldsModel } from '@lib-frontend/data/utils/graphQlQuery/graphQlQuery.models';
 import {
   type UseResourceModel,
   type UseResourceParamsModel,
-} from '#lib-frontend/resource/hooks/useResource/useResource.models';
-import { useResourceMethod } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
-import { type UseResourceMethodParamsModel } from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
-import { type ResourceFieldsModel } from '#lib-frontend/resource/resource.models';
-import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
-import { expandFilter } from '#lib-shared/resource/utils/expandFilter/expandFilter';
+} from '@lib-frontend/resource/hooks/useResource/useResource.models';
+import { useResourceMethod } from '@lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
+import { type UseResourceMethodParamsModel } from '@lib-frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
+import { type ResourceFieldsModel } from '@lib-frontend/resource/resource.models';
+import { RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
+import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { expandFilter } from '@lib-shared/resource/utils/expandFilter/expandFilter';
 
 export const toGraphQlParamsFields = <TType,>(
   fields?: ResourceFieldsModel<TType>,

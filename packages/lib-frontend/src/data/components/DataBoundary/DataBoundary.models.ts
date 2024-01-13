@@ -1,16 +1,16 @@
 import { type ReactElement } from 'react';
 
-import { type AsyncBoundaryPropsModel } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
+import { type AsyncBoundaryPropsModel } from '@lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import {
   type ChildrenPropsModel,
   type ElementStatePropsModel,
-} from '#lib-frontend/core/core.models';
-import { type AsyncPropsModel } from '#lib-frontend/data/data.models';
-import { type UseMutationParamsModel } from '#lib-frontend/data/hooks/useMutation/useMutation.models';
-import { type UseQueryParamsModel } from '#lib-frontend/data/hooks/useQuery/useQuery.models';
-import { type TranslatableTextModel } from '#lib-frontend/locale/locale.models';
-import { type NilModel, type PartialModel } from '#lib-shared/core/core.models';
-import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
+} from '@lib-frontend/core/core.models';
+import { type AsyncPropsModel } from '@lib-frontend/data/data.models';
+import { type UseMutationParamsModel } from '@lib-frontend/data/hooks/useMutation/useMutation.models';
+import { type UseQueryParamsModel } from '@lib-frontend/data/hooks/useQuery/useQuery.models';
+import { type TranslatableTextModel } from '@lib-frontend/locale/locale.models';
+import { type NilModel, type PartialModel } from '@lib-shared/core/core.models';
+import { type WithIdModel } from '@lib-shared/core/utils/withId/withId.models';
 
 export type DataBoundaryPropsModel<TParams = undefined, TResult = void> = Omit<
   AsyncBoundaryPropsModel,

@@ -1,7 +1,7 @@
 import trim from 'lodash/trim';
 
-import { slug } from '#lib-frontend/route/utils/slug/slug';
-import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
+import { slug } from '@lib-frontend/route/utils/slug/slug';
+import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
 
 export const trimPathname = (value: string): string => {
   const pathname = filterNil(value.split('/'))

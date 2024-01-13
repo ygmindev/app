@@ -5,10 +5,10 @@ import DragList from 'react-native-draglist';
 import {
   type _DraggableListPropsModel,
   type _DraggableListRefModel,
-} from '#lib-frontend/core/components/DraggableList/_DraggableList.models';
-import { type RSFCPropsModel } from '#lib-frontend/core/core.models';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { type WithIdModel } from '#lib-shared/core/utils/withId/withId.models';
+} from '@lib-frontend/core/components/DraggableList/_DraggableList.models';
+import { type RSFCPropsModel } from '@lib-frontend/core/core.models';
+import { useStyles } from '@lib-frontend/style/hooks/useStyles/useStyles';
+import { type WithIdModel } from '@lib-shared/core/utils/withId/withId.models';
 
 export const _DraggableList = forwardRef(
   <TType extends WithIdModel>(

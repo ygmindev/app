@@ -1,7 +1,7 @@
-import { Loading } from '#lib-frontend/core/components/Loading/Loading';
-import { type LoadingPropsModel } from '#lib-frontend/core/components/Loading/Loading.models';
-import { THEME_COLOR, THEME_SIZE_MORE } from '#lib-frontend/style/style.constants';
-import { type LibraryPropsModel } from '#lib-library/core/components/Library/Library.models';
+import { Loading } from '@lib-frontend/core/components/Loading/Loading';
+import { type LoadingPropsModel } from '@lib-frontend/core/components/Loading/Loading.models';
+import { THEME_COLOR, THEME_SIZE_MORE } from '@lib-frontend/style/style.constants';
+import { type LibraryPropsModel } from '@lib-library/core/components/Library/Library.models';
 
 export const props: LibraryPropsModel<LoadingPropsModel> = {
   Component: Loading,

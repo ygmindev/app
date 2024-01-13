@@ -6,11 +6,11 @@ import { readFileSync } from 'fs';
 import { sep } from 'path';
 import posix from 'path/posix';
 
-import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
-import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
-import { type BundleConfigModel } from '#lib-config/node/bundle/bundle.models';
-import { PLATFORM } from '#lib-platform/core/core.constants';
-import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
+import { fromRoot } from '@lib-backend/file/utils/fromRoot/fromRoot';
+import { fromWorking } from '@lib-backend/file/utils/fromWorking/fromWorking';
+import { type BundleConfigModel } from '@lib-config/node/bundle/bundle.models';
+import { PLATFORM } from '@lib-platform/core/core.constants';
+import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
 
 const excludeVendorFromSourceMap = (includes = []): Plugin => ({
   name: 'excludeVendorFromSourceMap',

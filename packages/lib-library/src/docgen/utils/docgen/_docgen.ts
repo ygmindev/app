@@ -14,11 +14,11 @@ import {
   sys,
 } from 'typescript';
 
-import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
+import { fromWorking } from '@lib-backend/file/utils/fromWorking/fromWorking';
 import {
   type _DocgenModel,
   type _DocgenParamsModel,
-} from '#lib-library/docgen/utils/docgen/_docgen.models';
+} from '@lib-library/docgen/utils/docgen/_docgen.models';
 
 const fileCache = new Map<string, { text: string; version: number }>();
 

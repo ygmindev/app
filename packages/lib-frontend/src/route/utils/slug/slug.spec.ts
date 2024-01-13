@@ -1,5 +1,5 @@
-import { slug } from '#lib-frontend/route/utils/slug/slug';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { slug } from '@lib-frontend/route/utils/slug/slug';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ slug });
 

@@ -4,10 +4,10 @@ import { View } from 'react-native';
 import {
   type _ViewPropsModel,
   type _ViewRefModel,
-} from '#lib-frontend/core/components/View/_View.models';
-import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
-import { type ComposeComponentParamsModel } from '#lib-frontend/core/utils/composeComponent/composeComponent.models';
-import { type ViewStyleModel } from '#lib-frontend/style/style.models';
+} from '@lib-frontend/core/components/View/_View.models';
+import { composeComponent } from '@lib-frontend/core/utils/composeComponent/composeComponent';
+import { type ComposeComponentParamsModel } from '@lib-frontend/core/utils/composeComponent/composeComponent.models';
+import { type ViewStyleModel } from '@lib-frontend/style/style.models';
 
 export const _viewParams: ComposeComponentParamsModel<
   _ViewPropsModel,

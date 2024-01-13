@@ -1,14 +1,14 @@
-import { useErrorContext } from '#lib-frontend/core/hooks/useErrorContext/useErrorContext';
-import { _useForm } from '#lib-frontend/data/hooks/useForm/_useForm';
+import { useErrorContext } from '@lib-frontend/core/hooks/useErrorContext/useErrorContext';
+import { _useForm } from '@lib-frontend/data/hooks/useForm/_useForm';
 import {
   type UseFormModel,
   type UseFormParamsModel,
-} from '#lib-frontend/data/hooks/useForm/useForm.models';
-import { useValidator } from '#lib-frontend/data/hooks/useValidator/useValidator';
-import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
-import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
-import { error } from '#lib-shared/logging/utils/logger/logger';
+} from '@lib-frontend/data/hooks/useForm/useForm.models';
+import { useValidator } from '@lib-frontend/data/hooks/useValidator/useValidator';
+import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useStore } from '@lib-frontend/state/hooks/useStore/useStore';
+import { isEqual } from '@lib-shared/core/utils/isEqual/isEqual';
+import { error } from '@lib-shared/logging/utils/logger/logger';
 
 export const useForm = <TType, TResult = void>({
   initialValues,

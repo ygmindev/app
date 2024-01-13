@@ -1,5 +1,5 @@
-import { groupBy } from '#lib-shared/core/utils/groupBy/groupBy';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { groupBy } from '@lib-shared/core/utils/groupBy/groupBy';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ groupBy });
 

@@ -3,8 +3,8 @@ import { useSocketIO } from 'react-use-websocket';
 import {
   type _UseWebsocketModel,
   type _UseWebsocketParamsModel,
-} from '#lib-frontend/http/hooks/useWebsocket/_useWebsocket.models';
-import { WEBSOCKET_STATUS } from '#lib-shared/http/http.constants';
+} from '@lib-frontend/http/hooks/useWebsocket/_useWebsocket.models';
+import { WEBSOCKET_STATUS } from '@lib-shared/http/http.constants';
 
 export const _useWebsocket = <TType,>({
   onClose,

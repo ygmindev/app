@@ -1,24 +1,24 @@
 import { type ReactElement, Suspense } from 'react';
 import { cloneElement, createContext, useMemo } from 'react';
 
-import { AppProvider } from '#lib-frontend/app/containers/AppProvider/AppProvider';
-import { AuthProvider } from '#lib-frontend/auth/providers/AuthProvider/AuthProvider';
-import { AsyncBoundary } from '#lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
-import { type FCModel } from '#lib-frontend/core/core.models';
-import { QueryProvider } from '#lib-frontend/data/providers/QueryProvider/QueryProvider';
-import { LocaleProvider } from '#lib-frontend/locale/providers/LocaleProvider/LocaleProvider';
-import { type RootPropsModel } from '#lib-frontend/root/containers/Root/Root.models';
-import { ContextProvider } from '#lib-frontend/root/providers/ContextProvider/ContextProvider';
-import { ROOT_REDUCERS } from '#lib-frontend/root/stores/rootStore.constants';
+import { AppProvider } from '@lib-frontend/app/containers/AppProvider/AppProvider';
+import { AuthProvider } from '@lib-frontend/auth/providers/AuthProvider/AuthProvider';
+import { AsyncBoundary } from '@lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
+import { type FCModel } from '@lib-frontend/core/core.models';
+import { QueryProvider } from '@lib-frontend/data/providers/QueryProvider/QueryProvider';
+import { LocaleProvider } from '@lib-frontend/locale/providers/LocaleProvider/LocaleProvider';
+import { type RootPropsModel } from '@lib-frontend/root/containers/Root/Root.models';
+import { ContextProvider } from '@lib-frontend/root/providers/ContextProvider/ContextProvider';
+import { ROOT_REDUCERS } from '@lib-frontend/root/stores/rootStore.constants';
 import {
   type RootActionsModel,
   type RootActionsParamsModel,
   type RootDefaultStateModel,
   type RootStateModel,
-} from '#lib-frontend/root/stores/rootStore.models';
-import { Store } from '#lib-frontend/state/utils/Store/Store';
-import { StyleProvider } from '#lib-frontend/style/providers/StyleProvider/StyleProvider';
-import { TrackingProvider } from '#lib-frontend/tracking/providers/TrackingProvider/TrackingProvider';
+} from '@lib-frontend/root/stores/rootStore.models';
+import { Store } from '@lib-frontend/state/utils/Store/Store';
+import { StyleProvider } from '@lib-frontend/style/providers/StyleProvider/StyleProvider';
+import { TrackingProvider } from '@lib-frontend/tracking/providers/TrackingProvider/TrackingProvider';
 
 export const actionContext = createContext<RootActionsModel | undefined>(undefined);
 

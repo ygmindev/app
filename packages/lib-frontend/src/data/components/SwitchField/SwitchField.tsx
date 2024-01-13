@@ -1,26 +1,26 @@
 import { useMemo } from 'react';
 
-import { Appearable } from '#lib-frontend/animation/components/Appearable/Appearable';
-import { Icon } from '#lib-frontend/core/components/Icon/Icon';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type LFCModel } from '#lib-frontend/core/core.models';
+import { Appearable } from '@lib-frontend/animation/components/Appearable/Appearable';
+import { Icon } from '@lib-frontend/core/components/Icon/Icon';
+import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
+import { type LFCModel } from '@lib-frontend/core/core.models';
 import {
   SWITCH_FIELD_OFFSET,
   SWITCH_FIELD_WIDTH,
-} from '#lib-frontend/data/components/SwitchField/SwitchField.constants';
-import { type SwitchFieldPropsModel } from '#lib-frontend/data/components/SwitchField/SwitchField.models';
-import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
-import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
-import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
+} from '@lib-frontend/data/components/SwitchField/SwitchField.constants';
+import { type SwitchFieldPropsModel } from '@lib-frontend/data/components/SwitchField/SwitchField.models';
+import { useValueControlled } from '@lib-frontend/data/hooks/useValueControlled/useValueControlled';
+import { TranslatableText } from '@lib-frontend/locale/components/TranslatableText/TranslatableText';
+import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
 import {
   THEME_COLOR,
   THEME_COLOR_MORE,
   THEME_ROLE,
   THEME_SIZE,
-} from '#lib-frontend/style/style.constants';
-import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+} from '@lib-frontend/style/style.constants';
+import { SHAPE_POSITION } from '@lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const SwitchField: LFCModel<SwitchFieldPropsModel> = ({
   defaultValue,

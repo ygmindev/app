@@ -2,7 +2,7 @@ import isArray from 'lodash/isArray';
 import reduce from 'lodash/reduce';
 import { firstBy } from 'thenby';
 
-import { type _SortModel, type _SortParamsModel } from '#lib-shared/core/utils/sort/_sort.models';
+import { type _SortModel, type _SortParamsModel } from '@lib-shared/core/utils/sort/_sort.models';
 
 export const _sort = <TType extends unknown>(
   ...[value, by]: _SortParamsModel<TType>

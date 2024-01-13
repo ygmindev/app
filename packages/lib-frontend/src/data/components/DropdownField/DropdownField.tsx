@@ -3,24 +3,24 @@ import lowerCase from 'lodash/lowerCase';
 import { type ForwardedRef, forwardRef, type ReactElement, useState } from 'react';
 import { useRef } from 'react';
 
-import { AnimatableView } from '#lib-frontend/animation/components/AnimatableView/AnimatableView';
-import { Icon } from '#lib-frontend/core/components/Icon/Icon';
-import { Menu } from '#lib-frontend/core/components/Menu/Menu';
+import { AnimatableView } from '@lib-frontend/animation/components/AnimatableView/AnimatableView';
+import { Icon } from '@lib-frontend/core/components/Icon/Icon';
+import { Menu } from '@lib-frontend/core/components/Menu/Menu';
 import {
   type MenuOptionModel,
   type MenuRefModel,
-} from '#lib-frontend/core/components/Menu/Menu.models';
-import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type LFCPropsModel, type RLFCPropsModel } from '#lib-frontend/core/core.models';
+} from '@lib-frontend/core/components/Menu/Menu.models';
+import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
+import { type LFCPropsModel, type RLFCPropsModel } from '@lib-frontend/core/core.models';
 import {
   type DropdownFieldPropsModel,
   type DropdownFieldRefModel,
-} from '#lib-frontend/data/components/DropdownField/DropdownField.models';
-import { TextField } from '#lib-frontend/data/components/TextField/TextField';
-import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
-import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useSearch } from '#lib-frontend/search/hooks/useSearch/useSearch';
-import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+} from '@lib-frontend/data/components/DropdownField/DropdownField.models';
+import { TextField } from '@lib-frontend/data/components/TextField/TextField';
+import { useValueControlled } from '@lib-frontend/data/hooks/useValueControlled/useValueControlled';
+import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useSearch } from '@lib-frontend/search/hooks/useSearch/useSearch';
+import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
 export const DropdownField = forwardRef(
   <TType extends MenuOptionModel = MenuOptionModel>(

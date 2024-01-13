@@ -1,4 +1,4 @@
-import { type WebsocketStatusModel } from '#lib-shared/http/http.models';
+import { type WebsocketStatusModel } from '@lib-shared/http/http.models';
 
 export type _UseWebsocketParamsModel<TType = unknown> = {
   onClose?(): void;

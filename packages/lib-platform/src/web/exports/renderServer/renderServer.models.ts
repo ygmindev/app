@@ -1,7 +1,7 @@
 import {
   type _RenderServerModel,
   type _RenderServerParamsModel,
-} from '#lib-platform/web/exports/renderServer/_renderServer.models';
+} from '@lib-platform/web/exports/renderServer/_renderServer.models';
 
 export type RenderServerParamsModel = Pick<_RenderServerParamsModel, 'initialize'>;
 

@@ -1,7 +1,7 @@
 import {
   type _WithFieldResolverModel,
   type _WithFieldResolverParamsModel,
-} from '#lib-backend/http/utils/withFieldResolver/_withFieldResolver.models';
+} from '@lib-backend/http/utils/withFieldResolver/_withFieldResolver.models';
 
 export type WithFieldResolverParamsModel<TType> = _WithFieldResolverParamsModel<TType>;
 

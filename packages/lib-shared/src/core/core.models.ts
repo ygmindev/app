@@ -11,7 +11,7 @@ import {
   type ValueOf,
 } from 'type-fest';
 
-import { type BOOLEAN_STRING } from '#lib-shared/core/core.constants';
+import { type BOOLEAN_STRING } from '@lib-shared/core/core.constants';
 
 export type ClassModel<TType = object> = Class<TType>;
 

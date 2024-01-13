@@ -1,11 +1,11 @@
-import { Container } from '#lib-backend/core/utils/Container/Container';
+import { Container } from '@lib-backend/core/utils/Container/Container';
 import {
   WITH_CONTAINER_PROPERTY,
   WithContainerChildFixture,
   WithContainerFixture,
   WithoutContainerFixture,
-} from '#lib-backend/core/utils/Container/Container.fixtures';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+} from '@lib-backend/core/utils/Container/Container.fixtures';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ Container });
 

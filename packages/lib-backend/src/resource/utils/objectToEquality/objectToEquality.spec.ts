@@ -1,5 +1,5 @@
-import { objectToEquality } from '#lib-backend/resource/utils/objectToEquality/objectToEquality';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { objectToEquality } from '@lib-backend/resource/utils/objectToEquality/objectToEquality';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ objectToEquality });
 

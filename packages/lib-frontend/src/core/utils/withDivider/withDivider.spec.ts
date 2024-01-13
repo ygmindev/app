@@ -1,5 +1,5 @@
-import { withDivider } from '#lib-frontend/core/utils/withDivider/withDivider';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { withDivider } from '@lib-frontend/core/utils/withDivider/withDivider';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ withDivider });
 

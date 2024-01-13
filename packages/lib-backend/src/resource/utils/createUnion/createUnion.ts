@@ -3,8 +3,8 @@ import { createUnionType } from 'type-graphql';
 import {
   type CreateUnionModel,
   type CreateUnionParamsModel,
-} from '#lib-backend/resource/utils/createUnion/createUnion.models';
-import { type ClassModel } from '#lib-shared/core/core.models';
+} from '@lib-backend/resource/utils/createUnion/createUnion.models';
+import { type ClassModel } from '@lib-shared/core/core.models';
 
 export const createUnion = <TType extends unknown>({
   Resource,

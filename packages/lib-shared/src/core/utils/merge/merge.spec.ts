@@ -1,8 +1,8 @@
 import cloneDeep from 'lodash/cloneDeep';
 
-import { merge } from '#lib-shared/core/utils/merge/merge';
-import { MERGE_STRATEGY } from '#lib-shared/core/utils/merge/merge.constants';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { merge } from '@lib-shared/core/utils/merge/merge';
+import { MERGE_STRATEGY } from '@lib-shared/core/utils/merge/merge.constants';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ merge });
 

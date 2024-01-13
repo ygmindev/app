@@ -1,9 +1,9 @@
-import { type ThemeSizeModel, type ThemeSizeMoreModel } from '#lib-frontend/style/style.models';
+import { type ThemeSizeModel, type ThemeSizeMoreModel } from '@lib-frontend/style/style.models';
 import {
   type FONT_ALIGN,
   type FONT_FAMILY,
   type FONT_TYPE,
-} from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+} from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 export type FontAlignModel = `${FONT_ALIGN}`;
 

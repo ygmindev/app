@@ -1,12 +1,11 @@
-import isFunction from 'lodash/isFunction';
-
-import { fromConfig } from '#lib-backend/file/utils/fromConfig/fromConfig';
+import { fromConfig } from '@lib-backend/file/utils/fromConfig/fromConfig';
 import {
   type ImportConfigModel,
   type ImportConfigParamsModel,
-} from '#lib-config/core/utils/importConfig/importConfig.models';
-import { importFromEnv } from '#lib-shared/core/utils/importFromEnv/importFromEnv';
-import { merge } from '#lib-shared/core/utils/merge/merge';
+} from '@lib-config/core/utils/importConfig/importConfig.models';
+import { importFromEnv } from '@lib-shared/core/utils/importFromEnv/importFromEnv';
+import { merge } from '@lib-shared/core/utils/merge/merge';
+import isFunction from 'lodash/isFunction';
 
 export const importConfig = async <TParams, TResult = undefined>(
   ...[name, overrides]: ImportConfigParamsModel<TParams>

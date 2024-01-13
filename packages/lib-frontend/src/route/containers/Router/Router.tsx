@@ -1,18 +1,18 @@
 import trimEnd from 'lodash/trimEnd';
 import { useMemo } from 'react';
 
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { type LFCModel } from '#lib-frontend/core/core.models';
-import { Route } from '#lib-frontend/route/components/Route/Route';
-import { RouteList } from '#lib-frontend/route/components/RouteList/RouteList';
-import { type RouterPropsModel } from '#lib-frontend/route/containers/Router/Router.models';
-import { Routes } from '#lib-frontend/route/containers/Routes/Routes';
-import { ROUTE_NAVIGATION, ROUTE_TRANSITION } from '#lib-frontend/route/route.constants';
-import { type RouteModel } from '#lib-frontend/route/route.models';
-import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
-import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { merge } from '#lib-shared/core/utils/merge/merge';
+import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
+import { type LFCModel } from '@lib-frontend/core/core.models';
+import { Route } from '@lib-frontend/route/components/Route/Route';
+import { RouteList } from '@lib-frontend/route/components/RouteList/RouteList';
+import { type RouterPropsModel } from '@lib-frontend/route/containers/Router/Router.models';
+import { Routes } from '@lib-frontend/route/containers/Routes/Routes';
+import { ROUTE_NAVIGATION, ROUTE_TRANSITION } from '@lib-frontend/route/route.constants';
+import { type RouteModel } from '@lib-frontend/route/route.models';
+import { trimPathname } from '@lib-frontend/route/utils/trimPathname/trimPathname';
+import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { SHAPE_POSITION } from '@lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { merge } from '@lib-shared/core/utils/merge/merge';
 
 const getNavigatableRoute = (route: RouteModel): RouteModel => {
   switch (route.navigation) {

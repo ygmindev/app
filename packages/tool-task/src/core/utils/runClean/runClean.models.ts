@@ -1,4 +1,4 @@
-import { type _RunCleanParamsModel } from '#tool-task/core/utils/runClean/_runClean.models';
+import { type _RunCleanParamsModel } from '@tool-task/core/utils/runClean/_runClean.models';
 
 export type RunCleanParamsModel = _RunCleanParamsModel;
 

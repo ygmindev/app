@@ -3,7 +3,7 @@ import {
   type HTTP_RESPONSE_TYPE,
   type WEBSOCKET_METHOD,
   type WEBSOCKET_STATUS,
-} from '#lib-shared/http/http.constants';
+} from '@lib-shared/http/http.constants';
 
 export type HttpMethodModel = `${HTTP_METHOD}`;
 

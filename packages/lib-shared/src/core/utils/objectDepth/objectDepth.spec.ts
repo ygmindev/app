@@ -1,5 +1,5 @@
-import { objectDepth } from '#lib-shared/core/utils/objectDepth/objectDepth';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { objectDepth } from '@lib-shared/core/utils/objectDepth/objectDepth';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ objectDepth });
 

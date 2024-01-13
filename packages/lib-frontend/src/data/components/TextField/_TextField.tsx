@@ -1,10 +1,10 @@
 import { type InputModeOptions, type TextInputProps } from 'react-native';
 import { TextInput } from 'react-native';
 
-import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
-import { type _TextFieldPropsModel } from '#lib-frontend/data/components/TextField/_TextField.models';
-import { TEXT_FIELD_KEYBOARD } from '#lib-frontend/data/components/TextField/TextField.constants';
-import { type TextFieldKeyboardModel } from '#lib-frontend/data/components/TextField/TextField.models';
+import { composeComponent } from '@lib-frontend/core/utils/composeComponent/composeComponent';
+import { type _TextFieldPropsModel } from '@lib-frontend/data/components/TextField/_TextField.models';
+import { TEXT_FIELD_KEYBOARD } from '@lib-frontend/data/components/TextField/TextField.constants';
+import { type TextFieldKeyboardModel } from '@lib-frontend/data/components/TextField/TextField.models';
 
 const getKeyboardType = (type?: TextFieldKeyboardModel): InputModeOptions => {
   switch (type) {

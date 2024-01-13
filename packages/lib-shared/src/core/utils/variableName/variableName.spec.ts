@@ -1,5 +1,5 @@
-import { variableName } from '#lib-shared/core/utils/variableName/variableName';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { variableName } from '@lib-shared/core/utils/variableName/variableName';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ variableName });
 

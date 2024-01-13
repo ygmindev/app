@@ -1,15 +1,15 @@
 import { launch } from 'puppeteer';
 
-import { fromWorking } from '#lib-backend/file/utils/fromWorking/fromWorking';
-import { joinPaths } from '#lib-backend/file/utils/joinPaths/joinPaths';
-import { sleepForEffect } from '#lib-frontend/animation/utils/sleepForEffect/sleepForEffect';
-import { sleepForTransition } from '#lib-frontend/animation/utils/sleepForTransition/sleepForTransition';
-import { slug } from '#lib-frontend/route/utils/slug/slug';
+import { fromWorking } from '@lib-backend/file/utils/fromWorking/fromWorking';
+import { joinPaths } from '@lib-backend/file/utils/joinPaths/joinPaths';
+import { sleepForEffect } from '@lib-frontend/animation/utils/sleepForEffect/sleepForEffect';
+import { sleepForTransition } from '@lib-frontend/animation/utils/sleepForTransition/sleepForTransition';
+import { slug } from '@lib-frontend/route/utils/slug/slug';
 import {
   type _WithScreenModel,
   type _WithScreenParamsModel,
-} from '#lib-frontend/test/utils/withScreen/_withScreen.models';
-import { type ScreenModel } from '#lib-frontend/test/utils/withScreen/withScreen.models';
+} from '@lib-frontend/test/utils/withScreen/_withScreen.models';
+import { type ScreenModel } from '@lib-frontend/test/utils/withScreen/withScreen.models';
 
 export const _withScreen = async (
   ...[

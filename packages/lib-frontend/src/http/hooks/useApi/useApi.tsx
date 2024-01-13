@@ -1,13 +1,13 @@
 import toNumber from 'lodash/toNumber';
 import { useRef } from 'react';
 
-import { useCredentials } from '#lib-frontend/auth/hooks/useCredentials/useCredentials';
+import { useCredentials } from '@lib-frontend/auth/hooks/useCredentials/useCredentials';
 import {
   type UseApiModel,
   type UseApiParamsModel,
-} from '#lib-frontend/http/hooks/useApi/useApi.models';
-import { useHttp } from '#lib-frontend/http/hooks/useHttp/useHttp';
-import { type CredentialsModel } from '#lib-shared/auth/auth.models';
+} from '@lib-frontend/http/hooks/useApi/useApi.models';
+import { useHttp } from '@lib-frontend/http/hooks/useHttp/useHttp';
+import { type CredentialsModel } from '@lib-shared/auth/auth.models';
 
 export const useApi = ({
   host,

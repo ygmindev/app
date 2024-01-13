@@ -1,5 +1,5 @@
 // COMPLETE
-import { type PartialModel } from '#lib-shared/core/core.models';
+import { type PartialModel } from '@lib-shared/core/core.models';
 
 export type PartionObjectParamsModel<TType extends Record<string, unknown>> = [
   value: TType,

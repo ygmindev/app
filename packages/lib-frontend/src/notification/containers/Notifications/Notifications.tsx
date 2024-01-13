@@ -1,12 +1,12 @@
-import { Exitable } from '#lib-frontend/animation/components/Exitable/Exitable';
-import { Portal } from '#lib-frontend/core/components/Portal/Portal';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { type SFCModel } from '#lib-frontend/core/core.models';
-import { Notification } from '#lib-frontend/notification/components/Notification/Notification';
-import { type NotificationsPropsModel } from '#lib-frontend/notification/containers/Notifications/Notifications.models';
-import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
-import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { Exitable } from '@lib-frontend/animation/components/Exitable/Exitable';
+import { Portal } from '@lib-frontend/core/components/Portal/Portal';
+import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
+import { type SFCModel } from '@lib-frontend/core/core.models';
+import { Notification } from '@lib-frontend/notification/components/Notification/Notification';
+import { type NotificationsPropsModel } from '@lib-frontend/notification/containers/Notifications/Notifications.models';
+import { useStore } from '@lib-frontend/state/hooks/useStore/useStore';
+import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
+import { SHAPE_POSITION } from '@lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const Notifications: SFCModel<NotificationsPropsModel> = () => {
   const [notifications] = useStore('notification.notifications');

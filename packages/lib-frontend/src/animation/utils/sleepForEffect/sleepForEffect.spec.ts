@@ -1,5 +1,5 @@
-import { sleepForEffect } from '#lib-frontend/animation/utils/sleepForEffect/sleepForEffect';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { sleepForEffect } from '@lib-frontend/animation/utils/sleepForEffect/sleepForEffect';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ sleepForEffect });
 

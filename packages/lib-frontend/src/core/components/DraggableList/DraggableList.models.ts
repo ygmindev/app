@@ -1,6 +1,5 @@
+import { type _DraggableListPropsModel } from '@lib-frontend/core/components/DraggableList/_DraggableList.models';
 import { type ReactElement } from 'react';
-
-import { type _DraggableListPropsModel } from '#lib-frontend/core/components/DraggableList/_DraggableList.models';
 
 export type DraggableListPropsModel<TType> = Omit<
   _DraggableListPropsModel<TType>,

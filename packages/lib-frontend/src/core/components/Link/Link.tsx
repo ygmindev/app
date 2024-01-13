@@ -1,16 +1,16 @@
 import isString from 'lodash/isString';
 import { useRef } from 'react';
 
-import { type AnimatableRefModel } from '#lib-frontend/animation/animation.models';
-import { AnimatableText } from '#lib-frontend/animation/components/AnimatableText/AnimatableText';
-import { Activatable } from '#lib-frontend/core/components/Activatable/Activatable';
-import { _Link } from '#lib-frontend/core/components/Link/_Link';
-import { type LinkPropsModel } from '#lib-frontend/core/components/Link/Link.models';
-import { View } from '#lib-frontend/core/components/View/View';
-import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type TFCModel } from '#lib-frontend/core/core.models';
-import { useTextStyles } from '#lib-frontend/style/hooks/useTextStyles/useTextStyles';
-import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
+import { type AnimatableRefModel } from '@lib-frontend/animation/animation.models';
+import { AnimatableText } from '@lib-frontend/animation/components/AnimatableText/AnimatableText';
+import { Activatable } from '@lib-frontend/core/components/Activatable/Activatable';
+import { _Link } from '@lib-frontend/core/components/Link/_Link';
+import { type LinkPropsModel } from '@lib-frontend/core/components/Link/Link.models';
+import { View } from '@lib-frontend/core/components/View/View';
+import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
+import { type TFCModel } from '@lib-frontend/core/core.models';
+import { useTextStyles } from '@lib-frontend/style/hooks/useTextStyles/useTextStyles';
+import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
 
 export const Link: TFCModel<LinkPropsModel> = ({ children, ...props }) => {
   const { textProps } = useTextStyles({ props });

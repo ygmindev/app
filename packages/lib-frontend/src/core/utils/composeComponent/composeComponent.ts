@@ -5,15 +5,15 @@ import { unstable_createElement } from 'react-native-web';
 import {
   type ComposeComponentModel,
   type ComposeComponentParamsModel,
-} from '#lib-frontend/core/utils/composeComponent/composeComponent.models';
-import { isFragment } from '#lib-frontend/core/utils/isFragment/isFragment';
-import { useStyles } from '#lib-frontend/style/hooks/useStyles/useStyles';
-import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
+} from '@lib-frontend/core/utils/composeComponent/composeComponent.models';
+import { isFragment } from '@lib-frontend/core/utils/isFragment/isFragment';
+import { useStyles } from '@lib-frontend/style/hooks/useStyles/useStyles';
+import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
 import {
   type StyleModel,
   type StylePropsModel,
   type ViewStyleModel,
-} from '#lib-frontend/style/style.models';
+} from '@lib-frontend/style/style.models';
 
 export const composeComponent = <
   TProps,

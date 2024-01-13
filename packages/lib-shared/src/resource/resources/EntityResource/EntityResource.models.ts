@@ -2,7 +2,7 @@ import {
   type PartialModel,
   type PrimitiveModel,
   type RequiredModel,
-} from '#lib-shared/core/core.models';
+} from '@lib-shared/core/core.models';
 
 export type EntityResourceModel = {
   _id: string;

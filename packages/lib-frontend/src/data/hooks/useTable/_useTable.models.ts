@@ -3,8 +3,8 @@ import {
   type TableHeaderModel,
   type TableRowModel,
   type TableSelectTypeModel,
-} from '#lib-frontend/data/hooks/useTable/useTable.models';
-import { type StringKeyModel } from '#lib-shared/core/core.models';
+} from '@lib-frontend/data/hooks/useTable/useTable.models';
+import { type StringKeyModel } from '@lib-shared/core/core.models';
 
 export type _UseTableParamsModel<TType> = {
   columns?: Array<TableColumnModel<TType, StringKeyModel<TType>>>;

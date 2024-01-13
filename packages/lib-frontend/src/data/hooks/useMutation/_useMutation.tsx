@@ -1,10 +1,9 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import isNumber from 'lodash/isNumber';
-
 import {
   type _UseMutationModel,
   type _UseMutationParamsModel,
-} from '#lib-frontend/data/hooks/useMutation/_useMutation.models';
+} from '@lib-frontend/data/hooks/useMutation/_useMutation.models';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import isNumber from 'lodash/isNumber';
 
 export const _useMutation = <TParams = undefined, TResult = void>(
   ...[id, callback, options]: _UseMutationParamsModel<TParams, TResult>

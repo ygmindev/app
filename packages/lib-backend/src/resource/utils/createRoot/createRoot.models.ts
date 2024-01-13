@@ -1,5 +1,5 @@
-import { type ResourceClassModel } from '#lib-backend/resource/resource.models';
-import { type RootModel } from '#lib-shared/resource/utils/Root/Root.models';
+import { type ResourceClassModel } from '@lib-backend/resource/resource.models';
+import { type RootModel } from '@lib-shared/resource/utils/Root/Root.models';
 
 export type CreateRootParamsModel<TRoot = undefined> = {
   RootResource?(): ResourceClassModel<TRoot>;

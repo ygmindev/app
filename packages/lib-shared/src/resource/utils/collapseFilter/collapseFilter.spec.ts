@@ -1,5 +1,5 @@
-import { collapseFilter } from '#lib-shared/resource/utils/collapseFilter/collapseFilter';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { collapseFilter } from '@lib-shared/resource/utils/collapseFilter/collapseFilter';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ collapseFilter });
 

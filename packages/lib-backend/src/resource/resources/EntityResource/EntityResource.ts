@@ -1,11 +1,11 @@
 import forEach from 'lodash/forEach';
 
-import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
-import { withField } from '#lib-backend/resource/utils/withField/withField';
-import { withHook } from '#lib-backend/resource/utils/withHook/withHook';
-import { HOOK_TYPE } from '#lib-backend/resource/utils/withHook/withHook.constants';
-import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
-import { type EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { withEntity } from '@lib-backend/resource/utils/withEntity/withEntity';
+import { withField } from '@lib-backend/resource/utils/withField/withField';
+import { withHook } from '@lib-backend/resource/utils/withHook/withHook';
+import { HOOK_TYPE } from '@lib-backend/resource/utils/withHook/withHook.constants';
+import { DATA_TYPE, PROPERTY_TYPE } from '@lib-shared/data/data.constants';
+import { type EntityResourceModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 @withEntity({ isAbstract: true })
 export class EntityResource implements EntityResourceModel {

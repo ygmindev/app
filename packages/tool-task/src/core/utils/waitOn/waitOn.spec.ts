@@ -1,5 +1,5 @@
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
-import { waitOn } from '#tool-task/core/utils/waitOn/waitOn';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { waitOn } from '@tool-task/core/utils/waitOn/waitOn';
 
 const { displayName } = withTest({ waitOn });
 

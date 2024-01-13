@@ -1,20 +1,20 @@
 import { useState } from 'react';
 
-import { type AccordionPropsModel } from '#lib-frontend/animation/components/Accordion/Accordion.models';
-import { Rotatable } from '#lib-frontend/animation/components/Rotatable/Rotatable';
-import { Button } from '#lib-frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
-import { Divider } from '#lib-frontend/core/components/Divider/Divider';
-import { PressableItem } from '#lib-frontend/core/components/PressableItem/PressableItem';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
+import { type AccordionPropsModel } from '@lib-frontend/animation/components/Accordion/Accordion.models';
+import { Rotatable } from '@lib-frontend/animation/components/Rotatable/Rotatable';
+import { Button } from '@lib-frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib-frontend/core/components/Button/Button.constants';
+import { Divider } from '@lib-frontend/core/components/Divider/Divider';
+import { PressableItem } from '@lib-frontend/core/components/PressableItem/PressableItem';
+import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
 import {
   type ElementStateModel,
   type LFCModel,
   type MeasureModel,
-} from '#lib-frontend/core/core.models';
-import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
-import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+} from '@lib-frontend/core/core.models';
+import { useValueControlled } from '@lib-frontend/data/hooks/useValueControlled/useValueControlled';
+import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
 export const Accordion: LFCModel<AccordionPropsModel> = ({
   children,

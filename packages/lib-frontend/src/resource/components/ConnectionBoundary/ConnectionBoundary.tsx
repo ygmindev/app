@@ -1,14 +1,14 @@
 import { type ForwardedRef, forwardRef, type ReactElement } from 'react';
 
-import { type LFCPropsModel, type RLFCPropsModel } from '#lib-frontend/core/core.models';
-import { DataBoundary } from '#lib-frontend/data/components/DataBoundary/DataBoundary';
+import { type LFCPropsModel, type RLFCPropsModel } from '@lib-frontend/core/core.models';
+import { DataBoundary } from '@lib-frontend/data/components/DataBoundary/DataBoundary';
 import {
   type ConnectionBoundaryPropsModel,
   type ConnectionBoundaryRefModel,
-} from '#lib-frontend/resource/components/ConnectionBoundary/ConnectionBoundary.models';
-import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
+} from '@lib-frontend/resource/components/ConnectionBoundary/ConnectionBoundary.models';
+import { type RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
+import { type InputModel } from '@lib-shared/resource/utils/Input/Input.models';
+import { type OutputModel } from '@lib-shared/resource/utils/Output/Output.models';
 
 export const ConnectionBoundary = forwardRef(
   <TType, TRoot = undefined>(

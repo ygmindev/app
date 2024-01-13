@@ -4,8 +4,8 @@ import isNumber from 'lodash/isNumber';
 import {
   type _UseQueryModel,
   type _UseQueryParamsModel,
-} from '#lib-frontend/data/hooks/useQuery/_useQuery.models';
-import { debounce } from '#lib-shared/core/utils/debounce/debounce';
+} from '@lib-frontend/data/hooks/useQuery/_useQuery.models';
+import { debounce } from '@lib-shared/core/utils/debounce/debounce';
 
 export const _useQuery = <TParams = undefined, TResult = void>(
   ...[id, callback, options, params]: _UseQueryParamsModel<TParams, TResult>

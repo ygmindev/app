@@ -1,13 +1,13 @@
-import { Container } from '#lib-backend/core/utils/Container/Container';
-import { DATABASE_TYPE } from '#lib-backend/database/database.constants';
-import { Database } from '#lib-backend/database/utils/Database/Database';
-import { type RepositoryModel } from '#lib-backend/database/utils/Database/Database.models';
+import { Container } from '@lib-backend/core/utils/Container/Container';
+import { DATABASE_TYPE } from '@lib-backend/database/database.constants';
+import { Database } from '@lib-backend/database/utils/Database/Database';
+import { type RepositoryModel } from '@lib-backend/database/utils/Database/Database.models';
 import {
   type CreateEntityResourceServiceModel,
   type CreateEntityResourceServiceParamsModel,
-} from '#lib-backend/resource/utils/createEntityResourceService/createEntityResourceService.models';
-import { createResourceService } from '#lib-backend/resource/utils/createResourceService/createResourceService';
-import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+} from '@lib-backend/resource/utils/createEntityResourceService/createEntityResourceService.models';
+import { createResourceService } from '@lib-backend/resource/utils/createResourceService/createResourceService';
+import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export const createEntityResourceService = <TType, TForm = EntityResourceDataModel<TType>>({
   Resource,

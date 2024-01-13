@@ -1,9 +1,9 @@
-import { waitFor } from '#lib-shared/core/utils/waitFor/waitFor';
+import { waitFor } from '@lib-shared/core/utils/waitFor/waitFor';
 import {
   WAIT_FOR_INTERVAL_DEFAULT_MILLISECONDS,
   WAIT_FOR_TIMEOUT_DEFAULT_MILLISECONDS,
-} from '#lib-shared/core/utils/waitFor/waitFor.constants';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+} from '@lib-shared/core/utils/waitFor/waitFor.constants';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ waitFor });
 

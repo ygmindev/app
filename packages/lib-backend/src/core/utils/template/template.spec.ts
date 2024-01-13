@@ -1,5 +1,5 @@
-import { template } from '#lib-backend/core/utils/template/template';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { template } from '@lib-backend/core/utils/template/template';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ template });
 

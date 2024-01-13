@@ -1,7 +1,7 @@
-import { RoutesField } from '#lib-frontend/aroom/components/RoutesField/RoutesField';
-import { type RoutesFieldPropsModel } from '#lib-frontend/aroom/components/RoutesField/RoutesField.models';
-import { render } from '#lib-frontend/test/utils/render/render';
-import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
+import { RoutesField } from '@lib-frontend/aroom/components/RoutesField/RoutesField';
+import { type RoutesFieldPropsModel } from '@lib-frontend/aroom/components/RoutesField/RoutesField.models';
+import { render } from '@lib-frontend/test/utils/render/render';
+import { withTestComponent } from '@lib-frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<RoutesFieldPropsModel>({
   target: RoutesField,

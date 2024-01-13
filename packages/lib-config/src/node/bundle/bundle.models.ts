@@ -1,7 +1,7 @@
 import { type UserConfig } from 'vite';
 
-import { type FileConfigModel } from '#lib-config/core/file/file.models';
-import { type _BabelConfigModel } from '#lib-config/node/babel/babel.models';
+import { type FileConfigModel } from '@lib-config/core/file/file.models';
+import { type _BabelConfigModel } from '@lib-config/node/babel/babel.models';
 
 export type BundleConfigModel = Pick<
   FileConfigModel,

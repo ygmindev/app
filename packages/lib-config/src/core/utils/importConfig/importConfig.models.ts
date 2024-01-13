@@ -1,4 +1,4 @@
-import { type PartialDeepModel } from '#lib-shared/core/core.models';
+import { type PartialDeepModel } from '@lib-shared/core/core.models';
 
 export type ImportConfigParamsModel<TParams> = [
   name: string,

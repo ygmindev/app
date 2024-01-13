@@ -1,16 +1,16 @@
 import Cookies from 'cookies-js';
 import { hydrateRoot } from 'react-dom/client';
 
-import { _config } from '#lib-config/locale/internationalize/internationalize.web';
-import { type RootContextModel } from '#lib-frontend/root/root.models';
-import { type CookiesModel } from '#lib-frontend/state/state.models';
+import { _config } from '@lib-config/locale/internationalize/internationalize.web';
+import { type RootContextModel } from '@lib-frontend/root/root.models';
+import { type CookiesModel } from '@lib-frontend/state/state.models';
 import {
   type _RenderClientModel,
   type _RenderClientParamsModel,
-} from '#lib-platform/web/exports/renderClient/_renderClient.models';
-import { merge } from '#lib-shared/core/utils/merge/merge';
-import { LOCALE } from '#lib-shared/locale/locale.constants';
-import { STATE } from '#lib-shared/state/state.constants';
+} from '@lib-platform/web/exports/renderClient/_renderClient.models';
+import { merge } from '@lib-shared/core/utils/merge/merge';
+import { LOCALE } from '@lib-shared/locale/locale.constants';
+import { STATE } from '@lib-shared/state/state.constants';
 
 export const _renderClient =
   ({ initialize, render, rootId }: _RenderClientParamsModel): _RenderClientModel =>

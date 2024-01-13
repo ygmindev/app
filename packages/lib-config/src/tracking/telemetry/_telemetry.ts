@@ -8,7 +8,7 @@ import { configureOpentelemetry } from '@uptrace/node';
 import {
   type _TelemetryConfigModel,
   type TelemetryConfigModel,
-} from '#lib-config/tracking/telemetry/telemetry.models';
+} from '@lib-config/tracking/telemetry/telemetry.models';
 
 export const _telemetry = ({
   batchSize,

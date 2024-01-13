@@ -3,35 +3,35 @@ import { useMemo } from 'react';
 import {
   USERNAME_FORM_TEST_ID,
   USERNAME_FORM_VALIDATORS,
-} from '#lib-frontend/auth/containers/UsernameForm/UsernameForm.constants';
+} from '@lib-frontend/auth/containers/UsernameForm/UsernameForm.constants';
 import {
   type UsernameFormModel,
   type UsernameFormPropsModel,
-} from '#lib-frontend/auth/containers/UsernameForm/UsernameForm.models';
-import { useOtpResource } from '#lib-frontend/auth/hooks/useOtpResource/useOtpResource';
-import { Button } from '#lib-frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '#lib-frontend/core/components/Button/Button.constants';
-import { Divider } from '#lib-frontend/core/components/Divider/Divider';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type LFCModel } from '#lib-frontend/core/core.models';
-import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
-import { type FormFieldModel } from '#lib-frontend/data/components/FormContainer/FormContainer.models';
-import { TextField } from '#lib-frontend/data/components/TextField/TextField';
-import { useValueControlled } from '#lib-frontend/data/hooks/useValueControlled/useValueControlled';
-import { CountryField } from '#lib-frontend/locale/components/CountryField/CountryField';
-import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useStore } from '#lib-frontend/state/hooks/useStore/useStore';
-import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { PhoneField } from '#lib-frontend/user/components/PhoneField/PhoneField';
-import { AUTH, SIGN_IN_METHOD } from '#lib-shared/auth/auth.constants';
-import { type SignInMethodModel } from '#lib-shared/auth/auth.models';
-import { type OtpFormModel, type OtpModel } from '#lib-shared/auth/resources/Otp/Otp.models';
-import { pick } from '#lib-shared/core/utils/pick/pick';
-import { FORM_MODE } from '#lib-shared/data/data.constants';
-import { type HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
-import { HTTP_STATUS_CODE } from '#lib-shared/http/http.constants';
-import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+} from '@lib-frontend/auth/containers/UsernameForm/UsernameForm.models';
+import { useOtpResource } from '@lib-frontend/auth/hooks/useOtpResource/useOtpResource';
+import { Button } from '@lib-frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib-frontend/core/components/Button/Button.constants';
+import { Divider } from '@lib-frontend/core/components/Divider/Divider';
+import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
+import { type LFCModel } from '@lib-frontend/core/core.models';
+import { FormContainer } from '@lib-frontend/data/components/FormContainer/FormContainer';
+import { type FormFieldModel } from '@lib-frontend/data/components/FormContainer/FormContainer.models';
+import { TextField } from '@lib-frontend/data/components/TextField/TextField';
+import { useValueControlled } from '@lib-frontend/data/hooks/useValueControlled/useValueControlled';
+import { CountryField } from '@lib-frontend/locale/components/CountryField/CountryField';
+import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useStore } from '@lib-frontend/state/hooks/useStore/useStore';
+import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { PhoneField } from '@lib-frontend/user/components/PhoneField/PhoneField';
+import { AUTH, SIGN_IN_METHOD } from '@lib-shared/auth/auth.constants';
+import { type SignInMethodModel } from '@lib-shared/auth/auth.models';
+import { type OtpFormModel, type OtpModel } from '@lib-shared/auth/resources/Otp/Otp.models';
+import { pick } from '@lib-shared/core/utils/pick/pick';
+import { FORM_MODE } from '@lib-shared/data/data.constants';
+import { type HttpError } from '@lib-shared/http/errors/HttpError/HttpError';
+import { HTTP_STATUS_CODE } from '@lib-shared/http/http.constants';
+import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
   method,

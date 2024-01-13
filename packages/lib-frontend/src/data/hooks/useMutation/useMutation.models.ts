@@ -1,7 +1,7 @@
 import {
   type _UseMutationModel,
   type _UseMutationParamsModel,
-} from '#lib-frontend/data/hooks/useMutation/_useMutation.models';
+} from '@lib-frontend/data/hooks/useMutation/_useMutation.models';
 
 export type UseMutationParamsModel<TParams = undefined, TResult = void> = _UseMutationParamsModel<
   TParams,

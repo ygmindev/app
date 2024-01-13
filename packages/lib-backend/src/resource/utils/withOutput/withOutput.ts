@@ -1,15 +1,15 @@
 // import { Mutation, Query } from 'type-graphql';
 
-// import { createOutput } from '#lib-backend/resource/utils/createOutput/createOutput';
-// import { withAccess } from '#lib-backend/resource/utils/withAccess/withAccess';
+// import { createOutput } from '@lib-backend/resource/utils/createOutput/createOutput';
+// import { withAccess } from '@lib-backend/resource/utils/withAccess/withAccess';
 // import {
 //   type WithOutputModel,
 //   type WithOutputParamsModel,
-// } from '#lib-backend/resource/utils/withOutput/withOutput.models';
-// import { ACCESS_LEVEL } from '#lib-shared/auth/resources/Access/Access.constants';
-// import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
-// import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-// import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
+// } from '@lib-backend/resource/utils/withOutput/withOutput.models';
+// import { ACCESS_LEVEL } from '@lib-shared/auth/resources/Access/Access.constants';
+// import { InvalidTypeError } from '@lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
+// import { RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
+// import { type ResourceMethodTypeModel } from '@lib-shared/resource/resource.models';
 
 // const getOperation = (method: ResourceMethodTypeModel): typeof Mutation | typeof Query => {
 //   switch (method) {
@@ -46,18 +46,18 @@
 //     );
 //   };
 
-import { createOutput } from '#lib-backend/resource/utils/createOutput/createOutput';
+import { createOutput } from '@lib-backend/resource/utils/createOutput/createOutput';
 import {
   type WithOutputModel,
   type WithOutputParamsModel,
-} from '#lib-backend/resource/utils/withOutput/withOutput.models';
-import { withResult } from '#lib-backend/resource/utils/withResult/withResult';
-import { ACCESS_LEVEL } from '#lib-shared/auth/resources/Access/Access.constants';
-import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
-import { GRAPHQL_OPERATION_TYPE } from '#lib-shared/graphql/graphql.constants';
-import { type GraphQlOperationTypeModel } from '#lib-shared/graphql/graphql.models';
-import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
+} from '@lib-backend/resource/utils/withOutput/withOutput.models';
+import { withResult } from '@lib-backend/resource/utils/withResult/withResult';
+import { ACCESS_LEVEL } from '@lib-shared/auth/resources/Access/Access.constants';
+import { InvalidTypeError } from '@lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
+import { GRAPHQL_OPERATION_TYPE } from '@lib-shared/graphql/graphql.constants';
+import { type GraphQlOperationTypeModel } from '@lib-shared/graphql/graphql.models';
+import { RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
+import { type ResourceMethodTypeModel } from '@lib-shared/resource/resource.models';
 
 const getOperation = (method: ResourceMethodTypeModel): GraphQlOperationTypeModel => {
   switch (method) {

@@ -4,7 +4,7 @@ import { renderFile } from 'ejs';
 import {
   type _TemplateModel,
   type _TemplateParamsModel,
-} from '#lib-backend/core/utils/template/_template.models';
+} from '@lib-backend/core/utils/template/_template.models';
 
 export const _template = async <TParams>({
   params,

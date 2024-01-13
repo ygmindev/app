@@ -1,6 +1,6 @@
-import { fromDist } from '#lib-backend/file/utils/fromDist/fromDist';
-import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { fromDist } from '@lib-backend/file/utils/fromDist/fromDist';
+import { fromRoot } from '@lib-backend/file/utils/fromRoot/fromRoot';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ fromDist });
 

@@ -1,19 +1,19 @@
-import { useAppGraphQl } from '#lib-frontend/data/hooks/useAppGraphQl/useAppGraphQl';
+import { useAppGraphQl } from '@lib-frontend/data/hooks/useAppGraphQl/useAppGraphQl';
 import {
   type GraphQlFieldModel,
   type GraphQlQueryParamsFieldsModel,
-} from '#lib-frontend/data/utils/graphQlQuery/graphQlQuery.models';
+} from '@lib-frontend/data/utils/graphQlQuery/graphQlQuery.models';
 import {
   type UseResourceMethodModel,
   type UseResourceMethodParamsModel,
-} from '#lib-frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
-import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
-import { GRAPHQL_OPERATION_TYPE } from '#lib-shared/graphql/graphql.constants';
-import { RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-import { type ResourceMethodTypeModel } from '#lib-shared/resource/resource.models';
-import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
-import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '#lib-shared/resource/utils/Output/Output.models';
+} from '@lib-frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
+import { InvalidTypeError } from '@lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
+import { GRAPHQL_OPERATION_TYPE } from '@lib-shared/graphql/graphql.constants';
+import { RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
+import { type ResourceMethodTypeModel } from '@lib-shared/resource/resource.models';
+import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type InputModel } from '@lib-shared/resource/utils/Input/Input.models';
+import { type OutputModel } from '@lib-shared/resource/utils/Output/Output.models';
 
 const getConnectionFields = <TType, TRoot = undefined>(
   fields: GraphQlQueryParamsFieldsModel<TType>,

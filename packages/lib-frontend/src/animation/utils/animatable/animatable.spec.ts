@@ -1,5 +1,5 @@
-import { animatable } from '#lib-frontend/animation/utils/animatable/animatable';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { animatable } from '@lib-frontend/animation/utils/animatable/animatable';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ animatable });
 

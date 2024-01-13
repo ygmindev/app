@@ -1,21 +1,21 @@
-import { OtpField } from '#lib-frontend/auth/components/OtpField/OtpField';
+import { OtpField } from '@lib-frontend/auth/components/OtpField/OtpField';
 import {
   OTP_FORM_TEST_ID,
   OTP_FORM_VALIDATORS,
-} from '#lib-frontend/auth/containers/OtpForm/OtpForm.constants';
-import { type OtpFormPropsModel } from '#lib-frontend/auth/containers/OtpForm/OtpForm.models';
-import { Link } from '#lib-frontend/core/components/Link/Link';
-import { Text } from '#lib-frontend/core/components/Text/Text';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { type LFCModel } from '#lib-frontend/core/core.models';
-import { FormContainer } from '#lib-frontend/data/components/FormContainer/FormContainer';
-import { Trans } from '#lib-frontend/locale/components/Trans/Trans';
-import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { FONT_ALIGN } from '#lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { AUTH } from '#lib-shared/auth/auth.constants';
-import { type HttpError } from '#lib-shared/http/errors/HttpError/HttpError';
-import { HTTP_STATUS_CODE } from '#lib-shared/http/http.constants';
+} from '@lib-frontend/auth/containers/OtpForm/OtpForm.constants';
+import { type OtpFormPropsModel } from '@lib-frontend/auth/containers/OtpForm/OtpForm.models';
+import { Link } from '@lib-frontend/core/components/Link/Link';
+import { Text } from '@lib-frontend/core/components/Text/Text';
+import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
+import { type LFCModel } from '@lib-frontend/core/core.models';
+import { FormContainer } from '@lib-frontend/data/components/FormContainer/FormContainer';
+import { Trans } from '@lib-frontend/locale/components/Trans/Trans';
+import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { FONT_ALIGN } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { AUTH } from '@lib-shared/auth/auth.constants';
+import { type HttpError } from '@lib-shared/http/errors/HttpError/HttpError';
+import { HTTP_STATUS_CODE } from '@lib-shared/http/http.constants';
 
 export const OtpForm: LFCModel<OtpFormPropsModel> = ({
   data,

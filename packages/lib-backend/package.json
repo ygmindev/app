@@ -1,11 +1,5 @@
 {
-  "name": "#lib-backend",
+  "name": "@lib-backend",
   "version": "0.0.1",
-  "type": "commonjs",
-  "dependencies": {
-    "#lib-config": "workspace:*",
-    "#lib-platform": "workspace:*",
-    "#lib-shared": "workspace:*",
-    "#tool-task": "workspace:*"
-  }
+  "type": "commonjs"
 }

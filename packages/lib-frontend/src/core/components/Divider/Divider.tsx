@@ -1,11 +1,11 @@
-import { type DividerPropsModel } from '#lib-frontend/core/components/Divider/Divider.models';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { DIRECTION } from '#lib-frontend/core/core.constants';
-import { type LFCModel } from '#lib-frontend/core/core.models';
-import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
-import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { THEME_COLOR_MORE, THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { SHAPE_POSITION } from '#lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { type DividerPropsModel } from '@lib-frontend/core/components/Divider/Divider.models';
+import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
+import { DIRECTION } from '@lib-frontend/core/core.constants';
+import { type LFCModel } from '@lib-frontend/core/core.models';
+import { TranslatableText } from '@lib-frontend/locale/components/TranslatableText/TranslatableText';
+import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { THEME_COLOR_MORE, THEME_SIZE } from '@lib-frontend/style/style.constants';
+import { SHAPE_POSITION } from '@lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const Divider: LFCModel<DividerPropsModel> = ({ children, isVertical, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });

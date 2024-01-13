@@ -1,12 +1,12 @@
 import isArray from 'lodash/isArray';
 
-import { type PartialModel } from '#lib-shared/core/core.models';
-import { trueTypeOf } from '#lib-shared/core/utils/trueTypeOf/trueTypeOf';
+import { type PartialModel } from '@lib-shared/core/core.models';
+import { trueTypeOf } from '@lib-shared/core/utils/trueTypeOf/trueTypeOf';
 import {
   type ExpandFilterModel,
   type ExpandFilterParamsModel,
-} from '#lib-shared/resource/utils/expandFilter/expandFilter.models';
-import { type FilterModel } from '#lib-shared/resource/utils/Filter/Filter.models';
+} from '@lib-shared/resource/utils/expandFilter/expandFilter.models';
+import { type FilterModel } from '@lib-shared/resource/utils/Filter/Filter.models';
 
 export const expandFilter = <TType extends unknown>(
   params?: ExpandFilterParamsModel<TType>,

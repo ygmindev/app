@@ -1,5 +1,5 @@
-import { type RootContextModel } from '#lib-frontend/root/root.models';
-import { type PartialDeepModel } from '#lib-shared/core/core.models';
+import { type RootContextModel } from '@lib-frontend/root/root.models';
+import { type PartialDeepModel } from '@lib-shared/core/core.models';
 
 export type _RenderParamsModel = {
   context?: PartialDeepModel<RootContextModel>;

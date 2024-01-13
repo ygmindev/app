@@ -1,24 +1,24 @@
 import range from 'lodash/range';
 import { type ReactElement, useState } from 'react';
 
-import { FloatingFooter } from '#lib-frontend/app/components/FloatingFooter/FloatingFooter';
-import { ModalButton } from '#lib-frontend/core/components/ModalButton/ModalButton';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { TEST_TEXT_SHORT } from '#lib-frontend/core/core.constants';
-import { type LFCPropsModel } from '#lib-frontend/core/core.models';
-import { FilterButton } from '#lib-frontend/data/components/FilterButton/FilterButton';
-import { Table } from '#lib-frontend/data/components/Table/Table';
-import { type TableColumnModel } from '#lib-frontend/data/hooks/useTable/useTable.models';
-import { useTranslation } from '#lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { ConnectionBoundary } from '#lib-frontend/resource/components/ConnectionBoundary/ConnectionBoundary';
-import { ResourceFilter } from '#lib-frontend/resource/components/ResourceFilter/ResourceFilter';
-import { type ResourceTablePropsModel } from '#lib-frontend/resource/components/ResourceTable/ResourceTable.models';
-import { ResourceForm } from '#lib-frontend/resource/containers/ResourceForm/ResourceForm';
-import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { type PartialModel } from '#lib-shared/core/core.models';
-import { type RESOURCE_METHOD_TYPE } from '#lib-shared/resource/resource.constants';
-import { type EntityResourceDataModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
-import { type InputModel } from '#lib-shared/resource/utils/Input/Input.models';
+import { FloatingFooter } from '@lib-frontend/app/components/FloatingFooter/FloatingFooter';
+import { ModalButton } from '@lib-frontend/core/components/ModalButton/ModalButton';
+import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
+import { TEST_TEXT_SHORT } from '@lib-frontend/core/core.constants';
+import { type LFCPropsModel } from '@lib-frontend/core/core.models';
+import { FilterButton } from '@lib-frontend/data/components/FilterButton/FilterButton';
+import { Table } from '@lib-frontend/data/components/Table/Table';
+import { type TableColumnModel } from '@lib-frontend/data/hooks/useTable/useTable.models';
+import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { ConnectionBoundary } from '@lib-frontend/resource/components/ConnectionBoundary/ConnectionBoundary';
+import { ResourceFilter } from '@lib-frontend/resource/components/ResourceFilter/ResourceFilter';
+import { type ResourceTablePropsModel } from '@lib-frontend/resource/components/ResourceTable/ResourceTable.models';
+import { ResourceForm } from '@lib-frontend/resource/containers/ResourceForm/ResourceForm';
+import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { type PartialModel } from '@lib-shared/core/core.models';
+import { type RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
+import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type InputModel } from '@lib-shared/resource/utils/Input/Input.models';
 
 export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRoot = undefined>({
   fields,

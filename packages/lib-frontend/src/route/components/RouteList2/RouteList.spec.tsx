@@ -1,7 +1,7 @@
-import { RouteList } from '#lib-frontend/route/components/RouteList2/RouteList';
-import { type RouteListPropsModel } from '#lib-frontend/route/components/RouteList2/RouteList.models';
-import { render } from '#lib-frontend/test/utils/render/render';
-import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
+import { RouteList } from '@lib-frontend/route/components/RouteList2/RouteList';
+import { type RouteListPropsModel } from '@lib-frontend/route/components/RouteList2/RouteList.models';
+import { render } from '@lib-frontend/test/utils/render/render';
+import { withTestComponent } from '@lib-frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<RouteListPropsModel>({
   target: RouteList,

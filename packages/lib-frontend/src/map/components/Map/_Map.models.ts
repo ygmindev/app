@@ -1,4 +1,4 @@
-import { type CoordinateModel } from '#lib-shared/map/map.models';
+import { type CoordinateModel } from '@lib-shared/map/map.models';
 
 export type _MapPropsModel = CoordinateModel & {
   styling: {

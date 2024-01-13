@@ -1,11 +1,11 @@
 import isString from 'lodash/isString';
 
-import { Container } from '#lib-backend/core/utils/Container/Container';
-import { mapSequence } from '#lib-shared/core/utils/mapSequence/mapSequence';
-import { type TaskParamsModel } from '#tool-task/core/core.models';
-import { type RunAllParamsModel } from '#tool-task/core/templates/runAll/runAll.models';
-import { PROMPT_TYPE } from '#tool-task/core/utils/prompt/prompt.constants';
-import { TaskRunner } from '#tool-task/core/utils/TaskRunner/TaskRunner';
+import { Container } from '@lib-backend/core/utils/Container/Container';
+import { mapSequence } from '@lib-shared/core/utils/mapSequence/mapSequence';
+import { type TaskParamsModel } from '@tool-task/core/core.models';
+import { type RunAllParamsModel } from '@tool-task/core/templates/runAll/runAll.models';
+import { PROMPT_TYPE } from '@tool-task/core/utils/prompt/prompt.constants';
+import { TaskRunner } from '@tool-task/core/utils/TaskRunner/TaskRunner';
 
 export const runAll: TaskParamsModel<RunAllParamsModel> = {
   name: 'run-all',

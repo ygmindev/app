@@ -1,5 +1,5 @@
-import { requireInterop } from '#lib-shared/core/utils/requireInterop/requireInterop';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { requireInterop } from '@lib-shared/core/utils/requireInterop/requireInterop';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ requireInterop });
 

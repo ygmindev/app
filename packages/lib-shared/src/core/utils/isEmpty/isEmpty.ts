@@ -1,4 +1,4 @@
-import { isEqual } from '#lib-shared/core/utils/isEqual/isEqual';
+import { isEqual } from '@lib-shared/core/utils/isEqual/isEqual';
 
 export const isEmpty = (value: unknown): boolean =>
   value === '' ||

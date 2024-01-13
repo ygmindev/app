@@ -1,7 +1,7 @@
-import { GroupTypesForm } from '#lib-frontend/group/containers/GroupTypesForm/GroupTypesForm';
-import { type GroupTypesFormPropsModel } from '#lib-frontend/group/containers/GroupTypesForm/GroupTypesForm.models';
-import { render } from '#lib-frontend/test/utils/render/render';
-import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
+import { GroupTypesForm } from '@lib-frontend/group/containers/GroupTypesForm/GroupTypesForm';
+import { type GroupTypesFormPropsModel } from '@lib-frontend/group/containers/GroupTypesForm/GroupTypesForm.models';
+import { render } from '@lib-frontend/test/utils/render/render';
+import { withTestComponent } from '@lib-frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<GroupTypesFormPropsModel>({
   target: GroupTypesForm,

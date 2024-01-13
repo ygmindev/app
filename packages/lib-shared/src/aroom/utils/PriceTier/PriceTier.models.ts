@@ -1,4 +1,4 @@
-import { type TimingModel } from '#lib-shared/aroom/aroom.models';
+import { type TimingModel } from '@lib-shared/aroom/aroom.models';
 
 export type PriceTierModel = {
   price: number;

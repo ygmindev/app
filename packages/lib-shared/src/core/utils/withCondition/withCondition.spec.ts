@@ -1,5 +1,5 @@
-import { withCondition } from '#lib-shared/core/utils/withCondition/withCondition';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { withCondition } from '@lib-shared/core/utils/withCondition/withCondition';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ withCondition });
 

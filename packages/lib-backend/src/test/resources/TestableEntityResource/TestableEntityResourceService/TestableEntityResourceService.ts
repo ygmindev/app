@@ -1,12 +1,12 @@
-import { withContainer } from '#lib-backend/core/utils/withContainer/withContainer';
-import { createEntityResourceService } from '#lib-backend/resource/utils/createEntityResourceService/createEntityResourceService';
-import { TestableEntityResource } from '#lib-backend/test/resources/TestableEntityResource/TestableEntityResource';
-import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.constants';
+import { withContainer } from '@lib-backend/core/utils/withContainer/withContainer';
+import { createEntityResourceService } from '@lib-backend/resource/utils/createEntityResourceService/createEntityResourceService';
+import { TestableEntityResource } from '@lib-backend/test/resources/TestableEntityResource/TestableEntityResource';
+import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib-shared/test/resources/TestableEntityResource/TestableEntityResource.constants';
 import {
   type TestableEntityResourceFormModel,
   type TestableEntityResourceModel,
-} from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResource.models';
-import { type TestableEntityResourceServiceModel } from '#lib-shared/test/resources/TestableEntityResource/TestableEntityResourceService/TestableEntityResourceService.models';
+} from '@lib-shared/test/resources/TestableEntityResource/TestableEntityResource.models';
+import { type TestableEntityResourceServiceModel } from '@lib-shared/test/resources/TestableEntityResource/TestableEntityResourceService/TestableEntityResourceService.models';
 
 @withContainer({ name: `${TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME}Service` })
 export class TestableEntityResourceService

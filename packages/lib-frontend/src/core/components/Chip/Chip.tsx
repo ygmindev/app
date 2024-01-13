@@ -1,14 +1,14 @@
-import { type ChipPropsModel } from '#lib-frontend/core/components/Chip/Chip.models';
-import { Icon } from '#lib-frontend/core/components/Icon/Icon';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { type LFCModel } from '#lib-frontend/core/core.models';
-import { TranslatableText } from '#lib-frontend/locale/components/TranslatableText/TranslatableText';
-import { useLayoutStyles } from '#lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '#lib-frontend/style/style.constants';
+import { type ChipPropsModel } from '@lib-frontend/core/components/Chip/Chip.models';
+import { Icon } from '@lib-frontend/core/components/Icon/Icon';
+import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
+import { type LFCModel } from '@lib-frontend/core/core.models';
+import { TranslatableText } from '@lib-frontend/locale/components/TranslatableText/TranslatableText';
+import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '@lib-frontend/style/style.constants';
 import {
   FLEX_ALIGN,
   FLEX_JUSTIFY,
-} from '#lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
+} from '@lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
 
 export const Chip: LFCModel<ChipPropsModel> = ({
   children,

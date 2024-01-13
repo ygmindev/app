@@ -1,5 +1,5 @@
-import { isEmpty } from '#lib-shared/core/utils/isEmpty/isEmpty';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { isEmpty } from '@lib-shared/core/utils/isEmpty/isEmpty';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ isEmpty });
 

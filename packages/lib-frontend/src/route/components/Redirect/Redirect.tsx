@@ -1,8 +1,8 @@
 import { type ReactElement, useEffect } from 'react';
 
-import { type SFCPropsModel } from '#lib-frontend/core/core.models';
-import { type RedirectPropsModel } from '#lib-frontend/route/components/Redirect/Redirect.models';
-import { useRouter } from '#lib-frontend/route/hooks/useRouter/useRouter';
+import { type SFCPropsModel } from '@lib-frontend/core/core.models';
+import { type RedirectPropsModel } from '@lib-frontend/route/components/Redirect/Redirect.models';
+import { useRouter } from '@lib-frontend/route/hooks/useRouter/useRouter';
 
 export const Redirect = <TType,>({
   isBack,

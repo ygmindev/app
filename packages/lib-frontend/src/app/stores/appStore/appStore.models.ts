@@ -1,6 +1,6 @@
-import { type DimensionModel } from '#lib-frontend/core/core.models';
-import { type ReducerModel } from '#lib-frontend/state/state.models';
-import { type EmptyObjectModel } from '#lib-shared/core/core.models';
+import { type DimensionModel } from '@lib-frontend/core/core.models';
+import { type ReducerModel } from '@lib-frontend/state/state.models';
+import { type EmptyObjectModel } from '@lib-shared/core/core.models';
 
 export type AppStateModel = {
   dimension: DimensionModel;

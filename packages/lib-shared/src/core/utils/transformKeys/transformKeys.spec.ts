@@ -1,5 +1,5 @@
-import { transformKeys } from '#lib-shared/core/utils/transformKeys/transformKeys';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { transformKeys } from '@lib-shared/core/utils/transformKeys/transformKeys';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ transformKeys });
 

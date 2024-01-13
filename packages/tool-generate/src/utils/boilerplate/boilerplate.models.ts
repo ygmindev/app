@@ -1,7 +1,7 @@
 import {
   type _BoilerplateModel,
   type _BoilerplateParamsModel,
-} from '#tool-generate/utils/boilerplate/_boilerplate.models';
+} from '@tool-generate/utils/boilerplate/_boilerplate.models';
 
 export type BoilerplateParamsModel = {
   onSuccess?(params: BoilerplateParamsModel): Promise<void>;

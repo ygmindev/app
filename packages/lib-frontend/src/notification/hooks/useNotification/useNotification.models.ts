@@ -1,4 +1,4 @@
-import { type NotificationModel } from '#lib-frontend/notification/notification.models';
+import { type NotificationModel } from '@lib-frontend/notification/notification.models';
 
 export type UseNotificationModel = {
   add(alert: NotificationModel): void;

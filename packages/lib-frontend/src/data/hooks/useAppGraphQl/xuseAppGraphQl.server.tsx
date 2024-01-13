@@ -1,13 +1,12 @@
-import { type ExecutionResult, type GraphQLArgs } from 'graphql';
-import { graphql } from 'graphql';
-
-import { _config } from '#lib-config/data/graphql/graphql';
+import { _config } from '@lib-config/data/graphql/graphql';
 import {
   type UseAppGraphQlModel,
   type UseAppGraphQlParamsModel,
-} from '#lib-frontend/data/hooks/useAppGraphQl/useAppGraphQl.models';
-import { type GraphQlQueryHttpParamsModel } from '#lib-frontend/data/utils/graphQlQuery/graphQlQuery.models';
-import { graphQlRequest } from '#lib-frontend/data/utils/graphQlRequest/graphQlRequest';
+} from '@lib-frontend/data/hooks/useAppGraphQl/useAppGraphQl.models';
+import { type GraphQlQueryHttpParamsModel } from '@lib-frontend/data/utils/graphQlQuery/graphQlQuery.models';
+import { graphQlRequest } from '@lib-frontend/data/utils/graphQlRequest/graphQlRequest';
+import { type ExecutionResult, type GraphQLArgs } from 'graphql';
+import { graphql } from 'graphql';
 
 const schema = _config();
 

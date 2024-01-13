@@ -1,6 +1,6 @@
-import { defineConfig } from '#lib-config/core/utils/defineConfig/defineConfig';
-import { _telemetry } from '#lib-config/tracking/telemetry/_telemetry';
-import { type TelemetryConfigModel } from '#lib-config/tracking/telemetry/telemetry.models';
+import { defineConfig } from '@lib-config/core/utils/defineConfig/defineConfig';
+import { _telemetry } from '@lib-config/tracking/telemetry/_telemetry';
+import { type TelemetryConfigModel } from '@lib-config/tracking/telemetry/telemetry.models';
 
 const { _config, config } = defineConfig({
   _config: _telemetry,

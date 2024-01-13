@@ -3,7 +3,7 @@ import debounceF from 'lodash/debounce';
 import {
   type DebounceModel,
   type DebounceParamsModel,
-} from '#lib-shared/core/utils/debounce/debounce.models';
+} from '@lib-shared/core/utils/debounce/debounce.models';
 
 export const debounce = <TResult = void, TParams extends Array<unknown> = Array<unknown>>(
   ...[callback, { duration = 0, isLeading = false } = {}]: DebounceParamsModel<TResult, TParams>

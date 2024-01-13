@@ -1,6 +1,6 @@
-import { _config } from '#lib-config/http/proxy/proxy';
-import { ENVIRONMENT } from '#lib-shared/environment/environment.constants';
-import { type TaskParamsModel } from '#tool-task/core/core.models';
+import { _config } from '@lib-config/http/proxy/proxy';
+import { ENVIRONMENT } from '@lib-shared/environment/environment.constants';
+import { type TaskParamsModel } from '@tool-task/core/core.models';
 
 export const proxy: TaskParamsModel<unknown> = {
   environment: ENVIRONMENT.DEVELOPMENT,

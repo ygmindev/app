@@ -1,10 +1,10 @@
 import _concurrently from 'concurrently';
 
-import { setEnvironment } from '#lib-shared/environment/utils/setEnvironment/setEnvironment';
+import { setEnvironment } from '@lib-shared/environment/utils/setEnvironment/setEnvironment';
 import {
   type _mapMapParallelModel,
   type _mapMapParallelParamsModel,
-} from '#tool-task/core/utils/mapParallel/_mapParallel.models';
+} from '@tool-task/core/utils/mapParallel/_mapParallel.models';
 
 export const _mapParallel = async (
   ...[tasks, options, environment]: _mapMapParallelParamsModel

@@ -6,8 +6,8 @@ import last from 'lodash/last';
 import reduce from 'lodash/reduce';
 import { ObjectId } from 'mongodb';
 
-import { cleanObject } from '#lib-shared/core/utils/cleanObject/cleanObject';
-import { type EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { cleanObject } from '@lib-shared/core/utils/cleanObject/cleanObject';
+import { type EntityResourceModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
 
 const resolveObjectId = <TType extends unknown>(value: TType): TType =>
   (isString(value)

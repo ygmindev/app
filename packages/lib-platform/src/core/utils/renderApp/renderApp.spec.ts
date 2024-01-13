@@ -1,5 +1,5 @@
-import { renderApp } from '#lib-platform/core/utils/renderApp/renderApp';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { renderApp } from '@lib-platform/core/utils/renderApp/renderApp';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ renderApp });
 

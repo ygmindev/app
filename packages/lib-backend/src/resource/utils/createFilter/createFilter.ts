@@ -1,19 +1,19 @@
 import {
   type CreateFilterModel,
   type CreateFilterParamsModel,
-} from '#lib-backend/resource/utils/createFilter/createFilter.models';
-import { withEntity } from '#lib-backend/resource/utils/withEntity/withEntity';
-import { withField } from '#lib-backend/resource/utils/withField/withField';
+} from '@lib-backend/resource/utils/createFilter/createFilter.models';
+import { withEntity } from '@lib-backend/resource/utils/withEntity/withEntity';
+import { withField } from '@lib-backend/resource/utils/withField/withField';
 import {
   type PartialModel,
   type PrimitiveModel,
   type StringKeyModel,
-} from '#lib-shared/core/core.models';
-import { DATA_TYPE, PROPERTY_TYPE } from '#lib-shared/data/data.constants';
+} from '@lib-shared/core/core.models';
+import { DATA_TYPE, PROPERTY_TYPE } from '@lib-shared/data/data.constants';
 import {
   type FilterConditionModel,
   type FilterModel,
-} from '#lib-shared/resource/utils/Filter/Filter.models';
+} from '@lib-shared/resource/utils/Filter/Filter.models';
 
 export const createFilter = <TType extends unknown>({
   Resource,

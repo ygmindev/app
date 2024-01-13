@@ -3,17 +3,17 @@ import { type PaymentMethod, type StripePaymentElementOptions } from '@stripe/st
 import { loadStripe } from '@stripe/stripe-js/pure';
 import { forwardRef, useImperativeHandle } from 'react';
 
-import { STRIPE_ELEMENTS_STYLE } from '#lib-frontend/billing/components/PaymentMethodField/_PaymentMethodField.constants';
-import { type _PaymentMethodFieldPropsModel } from '#lib-frontend/billing/components/PaymentMethodField/_PaymentMethodField.models';
-import { type PaymentMethodFieldRefModel } from '#lib-frontend/billing/components/PaymentMethodField/PaymentMethodField.models';
-import { REDIRECT } from '#lib-frontend/core/core.constants';
-import { type RLFCModel } from '#lib-frontend/core/core.models';
-import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { type CardFundingModel } from '#lib-shared/billing/resources/Card/Card.models';
-import { PAYMENT_METHOD_TYPE } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import { type PaymentMethodFormModel } from '#lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
-import { InvalidTypeError } from '#lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
-import { uri } from '#lib-shared/http/utils/uri/uri';
+import { STRIPE_ELEMENTS_STYLE } from '@lib-frontend/billing/components/PaymentMethodField/_PaymentMethodField.constants';
+import { type _PaymentMethodFieldPropsModel } from '@lib-frontend/billing/components/PaymentMethodField/_PaymentMethodField.models';
+import { type PaymentMethodFieldRefModel } from '@lib-frontend/billing/components/PaymentMethodField/PaymentMethodField.models';
+import { REDIRECT } from '@lib-frontend/core/core.constants';
+import { type RLFCModel } from '@lib-frontend/core/core.models';
+import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
+import { type CardFundingModel } from '@lib-shared/billing/resources/Card/Card.models';
+import { PAYMENT_METHOD_TYPE } from '@lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import { type PaymentMethodFormModel } from '@lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { InvalidTypeError } from '@lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
+import { uri } from '@lib-shared/http/utils/uri/uri';
 
 const stripe = loadStripe(process.env.APP_STRIPE_TOKEN);
 

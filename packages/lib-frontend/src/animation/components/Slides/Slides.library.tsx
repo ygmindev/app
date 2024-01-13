@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-import { Slides } from '#lib-frontend/animation/components/Slides/Slides';
-import { type SlidesPropsModel } from '#lib-frontend/animation/components/Slides/Slides.models';
-import { Button } from '#lib-frontend/core/components/Button/Button';
-import { Wrapper } from '#lib-frontend/core/components/Wrapper/Wrapper';
-import { WrapperFixture } from '#lib-frontend/core/components/Wrapper/Wrapper.fixtures';
-import { ELEMENT_STATE } from '#lib-frontend/core/core.constants';
-import { type LibraryPropsModel } from '#lib-library/core/components/Library/Library.models';
-import { withId } from '#lib-shared/core/utils/withId/withId';
+import { Slides } from '@lib-frontend/animation/components/Slides/Slides';
+import { type SlidesPropsModel } from '@lib-frontend/animation/components/Slides/Slides.models';
+import { Button } from '@lib-frontend/core/components/Button/Button';
+import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
+import { WrapperFixture } from '@lib-frontend/core/components/Wrapper/Wrapper.fixtures';
+import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
+import { type LibraryPropsModel } from '@lib-library/core/components/Library/Library.models';
+import { withId } from '@lib-shared/core/utils/withId/withId';
 
 export const props: LibraryPropsModel<SlidesPropsModel> = {
   Component: Slides,

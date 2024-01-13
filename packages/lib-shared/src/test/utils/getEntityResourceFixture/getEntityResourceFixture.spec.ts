@@ -1,5 +1,5 @@
-import { getEntityResourceFixture } from '#lib-shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { getEntityResourceFixture } from '@lib-shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ getEntityResourceFixture });
 

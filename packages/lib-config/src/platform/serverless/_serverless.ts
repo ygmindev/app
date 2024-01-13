@@ -1,17 +1,16 @@
-import { type AWS } from '@serverless/typescript';
-import reduce from 'lodash/reduce';
-
-import { fromConfig } from '#lib-backend/file/utils/fromConfig/fromConfig';
-import { fromRoot } from '#lib-backend/file/utils/fromRoot/fromRoot';
-import { toRelative } from '#lib-backend/file/utils/toRelative/toRelative';
+import { fromConfig } from '@lib-backend/file/utils/fromConfig/fromConfig';
+import { fromRoot } from '@lib-backend/file/utils/fromRoot/fromRoot';
+import { toRelative } from '@lib-backend/file/utils/toRelative/toRelative';
 import {
   type _ServerlessConfigModel,
   type ServerlessConfigModel,
-} from '#lib-config/platform/serverless/serverless.models';
-import { trimPathname } from '#lib-frontend/route/utils/trimPathname/trimPathname';
-import { PLATFORM } from '#lib-platform/core/core.constants';
-import { filterNil } from '#lib-shared/core/utils/filterNil/filterNil';
-import { HTTP_METHOD } from '#lib-shared/http/http.constants';
+} from '@lib-config/platform/serverless/serverless.models';
+import { trimPathname } from '@lib-frontend/route/utils/trimPathname/trimPathname';
+import { PLATFORM } from '@lib-platform/core/core.constants';
+import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
+import { HTTP_METHOD } from '@lib-shared/http/http.constants';
+import { type AWS, type AwsLambdaRuntime } from '@serverless/typescript';
+import reduce from 'lodash/reduce';
 
 export const _serverless = ({
   bundleConfig,
@@ -50,10 +49,10 @@ export const _serverless = ({
               ...bundleConfigF.esbuild,
               ...bundleConfigF.optimizeDeps?.esbuildOptions,
               bundle: true,
-              exclude: ['aws-sdk'],
+              // exclude: ['aws-sdk'],
+              exclude: ['*'],
               format: 'cjs',
-              // installExtraArgs: ['--force', '--shamefully-hoist'],
-              installExtraArgs: ['--force'],
+              installExtraArgs: ['--force', '--shamefully-hoist'],
               keepOutputDirectory: true,
               packagePath: fromRoot('package.json'),
               packager: 'pnpm',
@@ -78,11 +77,23 @@ export const _serverless = ({
                 ]
               : [{ httpApi: { method: v.method, path: trimPathname(v.pathname) } }],
           handler: v.handler,
+          layers: ['arn:aws:lambda:region:us-east-1:layer:CustomLambdaLayer:Y'],
           timeout: server.timeout,
         },
       }),
       {},
     ),
+
+    layers: {
+      CustomLambdaLayer: {
+        compatibleRuntimes: ['nodejs18.x' as AwsLambdaRuntime],
+        package: {
+          include: ['**'],
+        },
+        path: toRelative({ to: fromRoot() }),
+        retain: true,
+      },
+    },
 
     package: {
       excludeDevDependencies: false,

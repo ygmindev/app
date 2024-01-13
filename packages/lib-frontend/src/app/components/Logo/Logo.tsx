@@ -1,12 +1,12 @@
 import isNumber from 'lodash/isNumber';
 
-import { type LogoPropsModel } from '#lib-frontend/app/components/Logo/Logo.models';
-import { Image } from '#lib-frontend/core/components/Image/Image';
-import { Link } from '#lib-frontend/core/components/Link/Link';
-import { type LinkPropsModel } from '#lib-frontend/core/components/Link/Link.models';
-import { composeComponent } from '#lib-frontend/core/utils/composeComponent/composeComponent';
-import { THEME_SIZE } from '#lib-frontend/style/style.constants';
-import { variableName } from '#lib-shared/core/utils/variableName/variableName';
+import { type LogoPropsModel } from '@lib-frontend/app/components/Logo/Logo.models';
+import { Image } from '@lib-frontend/core/components/Image/Image';
+import { Link } from '@lib-frontend/core/components/Link/Link';
+import { type LinkPropsModel } from '@lib-frontend/core/components/Link/Link.models';
+import { composeComponent } from '@lib-frontend/core/utils/composeComponent/composeComponent';
+import { THEME_SIZE } from '@lib-frontend/style/style.constants';
+import { variableName } from '@lib-shared/core/utils/variableName/variableName';
 
 export const Logo = composeComponent<LogoPropsModel, LinkPropsModel>({
   Component: Link,

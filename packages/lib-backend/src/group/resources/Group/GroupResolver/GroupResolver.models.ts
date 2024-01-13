@@ -1,3 +1,3 @@
-import { type GroupServiceModel } from '#lib-shared/group/resources/Group/GroupService/GroupService.models';
+import { type GroupServiceModel } from '@lib-shared/group/resources/Group/GroupService/GroupService.models';
 
 export type GroupResolverModel = GroupServiceModel;

@@ -1,4 +1,4 @@
-import { type PartialModel } from '#lib-shared/core/core.models';
+import { type PartialModel } from '@lib-shared/core/core.models';
 
 export type RootModel<TRoot = undefined> = {
   root?: PartialModel<TRoot>;

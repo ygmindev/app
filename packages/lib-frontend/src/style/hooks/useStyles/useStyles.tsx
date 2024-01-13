@@ -5,9 +5,9 @@ import { StyleSheet } from 'react-native';
 import {
   type UseStylesModel,
   type UseStylesParamsModel,
-} from '#lib-frontend/style/hooks/useStyles/useStyles.models';
-import { useTheme } from '#lib-frontend/style/hooks/useTheme/useTheme';
-import { type StyleModel, type ViewStyleModel } from '#lib-frontend/style/style.models';
+} from '@lib-frontend/style/hooks/useStyles/useStyles.models';
+import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
+import { type StyleModel, type ViewStyleModel } from '@lib-frontend/style/style.models';
 
 export const useStyles = <TType, TStyle extends StyleModel = ViewStyleModel>({
   props,

@@ -5,7 +5,7 @@ import map from 'lodash/map';
 import {
   type _BoilerplateModel,
   type _BoilerplateParamsModel,
-} from '#tool-generate/utils/boilerplate/_boilerplate.models';
+} from '@tool-generate/utils/boilerplate/_boilerplate.models';
 
 export const _boilerplate = async ({
   input,

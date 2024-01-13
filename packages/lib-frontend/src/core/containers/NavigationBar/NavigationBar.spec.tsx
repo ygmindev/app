@@ -1,7 +1,7 @@
-import { NavigationBar } from '#lib-frontend/core/containers/NavigationBar/NavigationBar';
-import { type NavigationBarPropsModel } from '#lib-frontend/core/containers/NavigationBar/NavigationBar.models';
-import { render } from '#lib-frontend/test/utils/render/render';
-import { withTestComponent } from '#lib-frontend/test/utils/withTestComponent/withTestComponent';
+import { NavigationBar } from '@lib-frontend/core/containers/NavigationBar/NavigationBar';
+import { type NavigationBarPropsModel } from '@lib-frontend/core/containers/NavigationBar/NavigationBar.models';
+import { render } from '@lib-frontend/test/utils/render/render';
+import { withTestComponent } from '@lib-frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<NavigationBarPropsModel>({
   target: NavigationBar,

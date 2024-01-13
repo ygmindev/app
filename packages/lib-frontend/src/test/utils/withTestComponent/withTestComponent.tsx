@@ -2,14 +2,14 @@ import trim from 'lodash/trim';
 import { type ComponentType } from 'react';
 import { createElement } from 'react';
 
-import { getComponentDisplayName } from '#lib-frontend/core/utils/getComponentDisplayName/getComponentDisplayName';
+import { getComponentDisplayName } from '@lib-frontend/core/utils/getComponentDisplayName/getComponentDisplayName';
 import {
   type TestComponentModel,
   type WithTestComponentModel,
   type WithTestComponentParamsModel,
-} from '#lib-frontend/test/utils/withTestComponent/withTestComponent.models';
-import { type PartialModel } from '#lib-shared/core/core.models';
-import { uid } from '#lib-shared/core/utils/uid/uid';
+} from '@lib-frontend/test/utils/withTestComponent/withTestComponent.models';
+import { type PartialModel } from '@lib-shared/core/core.models';
+import { uid } from '@lib-shared/core/utils/uid/uid';
 
 export const withTestComponent = <
   TProps,

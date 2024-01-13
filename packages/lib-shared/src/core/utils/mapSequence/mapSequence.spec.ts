@@ -1,5 +1,5 @@
-import { mapSequence } from '#lib-shared/core/utils/mapSequence/mapSequence';
-import { withTest } from '#lib-shared/test/utils/withTest/withTest';
+import { mapSequence } from '@lib-shared/core/utils/mapSequence/mapSequence';
+import { withTest } from '@lib-shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ mapSequence });
 

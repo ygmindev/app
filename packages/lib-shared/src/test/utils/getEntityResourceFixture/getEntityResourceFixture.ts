@@ -1,11 +1,11 @@
 import range from 'lodash/range';
 
-import { uid } from '#lib-shared/core/utils/uid/uid';
-import { type EntityResourceModel } from '#lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { uid } from '@lib-shared/core/utils/uid/uid';
+import { type EntityResourceModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
 import {
   type GetEntityResourceFixtureModel,
   type GetEntityResourceFixtureParamsModel,
-} from '#lib-shared/test/utils/getEntityResourceFixture/getEntityResourceFixture.models';
+} from '@lib-shared/test/utils/getEntityResourceFixture/getEntityResourceFixture.models';
 
 export const getEntityResourceFixture = <
   TType extends EntityResourceModel,

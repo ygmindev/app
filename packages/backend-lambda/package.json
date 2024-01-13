@@ -1,10 +1,4 @@
 {
-  "name": "#backend-lambda",
   "version": "0.0.1",
-  "type": "commonjs",
-  "dependencies": {
-    "#lib-backend": "workspace:*",
-    "#lib-config": "workspace:*",
-    "#lib-shared": "workspace:*"
-  }
+  "type": "commonjs"
 }
