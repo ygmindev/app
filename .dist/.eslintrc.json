@@ -13,9 +13,9 @@
     "plugin:typescript-sort-keys/recommended"
   ],
   "ignorePatterns": [
-    "!(/Users/yoongeemin/Developer/Projects/app/src/**/*.tsx|/Users/yoongeemin/Developer/Projects/app/src/**/*.ts|/Users/yoongeemin/Developer/Projects/app/src/**/*.jsx|/Users/yoongeemin/Developer/Projects/app/src/**/*.js)",
-    "**/*..spec.*",
-    "**/*..ete.*"
+    "!(../packages/*/src/**/*.tsx|../packages/*/src/**/*.ts|../packages/*/src/**/*.jsx|../packages/*/src/**/*.js)",
+    "**/*.spec.*",
+    "**/*.ete.*"
   ],
   "overrides": [
     {
@@ -35,7 +35,7 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json",
-    "tsconfigRootDir": "/Users/yoongeemin/Developer/Projects/app"
+    "tsconfigRootDir": "./"
   },
   "plugins": [
     "@typescript-eslint",
@@ -99,21 +99,21 @@
       "error",
       {
         "packageDir": [
-          "/Users/yoongeemin/Developer/Projects/app",
-          "/Users/yoongeemin/Developer/Projects/app/packages/app-native",
-          "/Users/yoongeemin/Developer/Projects/app/packages/app-web",
-          "/Users/yoongeemin/Developer/Projects/app/packages/app-web-admin",
-          "/Users/yoongeemin/Developer/Projects/app/packages/app-web-library",
-          "/Users/yoongeemin/Developer/Projects/app/packages/backend-graphql-sandbox",
-          "/Users/yoongeemin/Developer/Projects/app/packages/backend-lambda",
-          "/Users/yoongeemin/Developer/Projects/app/packages/lib-backend",
-          "/Users/yoongeemin/Developer/Projects/app/packages/lib-config",
-          "/Users/yoongeemin/Developer/Projects/app/packages/lib-frontend",
-          "/Users/yoongeemin/Developer/Projects/app/packages/lib-library",
-          "/Users/yoongeemin/Developer/Projects/app/packages/lib-platform",
-          "/Users/yoongeemin/Developer/Projects/app/packages/lib-shared",
-          "/Users/yoongeemin/Developer/Projects/app/packages/tool-generate",
-          "/Users/yoongeemin/Developer/Projects/app/packages/tool-task"
+          "..",
+          "../packages/app-native",
+          "../packages/app-web",
+          "../packages/app-web-admin",
+          "../packages/app-web-library",
+          "../packages/backend-graphql-sandbox",
+          "../packages/backend-lambda",
+          "../packages/lib-backend",
+          "../packages/lib-config",
+          "../packages/lib-frontend",
+          "../packages/lib-library",
+          "../packages/lib-platform",
+          "../packages/lib-shared",
+          "../packages/tool-generate",
+          "../packages/tool-task"
         ]
       }
     ],

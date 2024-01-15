@@ -14,5 +14,7 @@ export type FileConfigModel = {
 
   packagePrefixes: Array<string>;
 
+  prunePatterns: Array<string>;
+
   publicPath: string;
 };

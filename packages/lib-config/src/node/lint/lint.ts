@@ -1,8 +1,8 @@
 import { fromDist } from '@lib-backend/file/utils/fromDist/fromDist';
 import { fromPackages } from '@lib-backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '@lib-backend/file/utils/fromRoot/fromRoot';
-import { fromWorking } from '@lib-backend/file/utils/fromWorking/fromWorking';
 import { packages } from '@lib-backend/file/utils/packages/packages';
+import { toRelative } from '@lib-backend/file/utils/toRelative/toRelative';
 import { defineConfig } from '@lib-config/core/utils/defineConfig/defineConfig';
 import { _lint } from '@lib-config/node/lint/_lint';
 import { type LintConfigModel } from '@lib-config/node/lint/lint.models';
@@ -23,11 +23,14 @@ const { _config, config } = defineConfig({
   config: {
     configFile: fromDist('.eslintrc.json'),
 
-    exclude: [`**/*.${TEST_CONFIG.specExtension}.*`, `**/*.${TEST_CONFIG.eteExtension}.*`],
+    exclude: [`**/*${TEST_CONFIG.specExtension}.*`, `**/*${TEST_CONFIG.eteExtension}.*`],
 
     extensions: EXTENSIONS_BASE,
 
-    include: permuteString([fromWorking('src/**/*')], EXTENSIONS_BASE),
+    include: permuteString(
+      [toRelative({ from: fromDist(), to: fromPackages('*/src/**/*') })],
+      EXTENSIONS_BASE,
+    ),
 
     indentWidth: 2,
 
@@ -43,7 +46,9 @@ const { _config, config } = defineConfig({
 
     printWidth: 100,
 
-    roots: [fromRoot(), ...packages.map((pkg) => fromPackages(pkg))],
+    roots: [fromRoot(), ...packages.map((pkg) => fromPackages(pkg))].map((to) =>
+      toRelative({ from: fromDist(), to }),
+    ),
 
     unusedIgnore: '^_',
   } satisfies LintConfigModel,

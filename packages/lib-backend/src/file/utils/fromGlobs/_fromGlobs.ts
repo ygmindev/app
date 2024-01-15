@@ -1,10 +1,9 @@
-import { globSync } from 'glob';
-
 import {
   type _FromGlobsModel,
   type _FromGlobsParamsModel,
 } from '@lib-backend/file/utils/fromGlobs/_fromGlobs.models';
 import { fromWorking } from '@lib-backend/file/utils/fromWorking/fromWorking';
+import { globSync } from 'glob';
 
 export const _fromGlobs = (
   ...[globs, { isAbsolute = false, root = fromWorking() } = {}]: _FromGlobsParamsModel

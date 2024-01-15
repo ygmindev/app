@@ -10,12 +10,13 @@ import { join } from 'path';
 export const copy = async ({
   excludes = config.excludePatterns,
   from,
+  includes,
   isOverwrite,
   overrides,
   to,
 }: CopyParamsModel): Promise<void> => {
   let toF = to;
-  if (!excludes || every(excludes.map((pattern) => !minimatch(toF, pattern)))) {
+  if ((!excludes && !includes) || every(excludes.map((pattern) => !minimatch(toF, pattern)))) {
     overrides && forEach(overrides, (v, k) => (toF = toF.replaceAll(k, v)));
     if (statSync(from).isDirectory()) {
       existsSync(toF) && isOverwrite && rmSync(toF, { force: true, recursive: true });

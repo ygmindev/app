@@ -14,7 +14,7 @@ export const _runClean = async ({
   root = fromWorking(),
 }: _RunCleanParamsModel): Promise<_RunCleanModel> => {
   await rimraf(
-    patterns ||
+    patterns ??
       config.cleanPatterns
         .map((pattern) => [resolve(root, pattern), join(root, '**', pattern)])
         .flat(),

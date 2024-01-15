@@ -13,12 +13,13 @@ import { fromStatic } from '@lib-backend/file/utils/fromStatic/fromStatic';
 import { GroupResolver } from '@lib-backend/group/resources/Group/GroupResolver/GroupResolver';
 import { SocketResolver } from '@lib-backend/http/resources/Socket/SocketResolver/SocketResolver';
 import { MapRouteResolver } from '@lib-backend/map/resources/MapRoute/MapRouteResolver/MapRouteResolver';
-import { SnapshotResolver } from '@lib-backend/test/resources/Snapshot/SnapshotResolver/SnapshotResolver';
+// import { SnapshotResolver } from '@lib-backend/test/resources/Snapshot/SnapshotResolver/SnapshotResolver';
 import { LinkedUserResolver } from '@lib-backend/user/resources/LinkedUser/LinkedUserResolver/LinkedUserResolver';
 import { UserResolver } from '@lib-backend/user/resources/User/UserResolver/UserResolver';
 import { defineConfig } from '@lib-config/core/utils/defineConfig/defineConfig';
 import { _graphql } from '@lib-config/data/graphql/_graphql';
 import { type GraphqlConfigModel } from '@lib-config/data/graphql/graphql.models';
+import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
 
 const { _config, config } = defineConfig({
   _config: _graphql,
@@ -29,7 +30,7 @@ const { _config, config } = defineConfig({
 
       container: Container,
 
-      resolvers: [
+      resolvers: filterNil([
         AccessResolver,
         BankResolver,
         CardResolver,
@@ -41,12 +42,14 @@ const { _config, config } = defineConfig({
         SignInResolver,
         SocketResolver,
         UserResolver,
-        SnapshotResolver,
+
         VendorResolver,
         UtilityResolver,
 
         MapRouteResolver,
-      ],
+
+        // process.env.NODE_ENV === 'test' && SnapshotResolver,
+      ]),
 
       schemaDir: fromStatic('graphql/schema.gql'),
     }) satisfies GraphqlConfigModel,

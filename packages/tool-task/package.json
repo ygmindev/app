@@ -108,8 +108,6 @@
     "serverless-dotenv-plugin": "^6.0.0",
     "serverless-esbuild": "^1.50.1",
     "serverless-offline": "^13.3.2",
-    "serverless-plugin-common-excludes": "^4.0.0",
-    "serverless-plugin-include-dependencies": "^5.1.0",
     "source-map-support": "^0.5.21",
     "style-loader": "^3.3.3",
     "supertest": "^6.3.3",
@@ -128,5 +126,8 @@
     "vite-tsconfig-paths": "^4.2.3",
     "vitest-react-native": "^0.1.4",
     "wait-on": "^7.2.0"
+  },
+  "dependencies": {
+    "serverless-plugin-layer-manager": "^1.1.1"
   }
 }

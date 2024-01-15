@@ -1,5 +1,6 @@
 import { fromConfig } from '@lib-backend/file/utils/fromConfig/fromConfig';
 import { toRelative } from '@lib-backend/file/utils/toRelative/toRelative';
+import { config as fileConfig } from '@lib-config/core/file/file';
 import {
   type _ServerlessConfigModel,
   type ServerlessConfigModel,
@@ -48,14 +49,21 @@ export const _serverless = ({
               ...bundleConfigF.esbuild,
               ...bundleConfigF.optimizeDeps?.esbuildOptions,
               bundle: true,
-              exclude: ['aws-sdk'],
-              // exclude: ['*'],
+              exclude: ['*'],
               format: 'cjs',
               installExtraArgs: ['--shamefully-hoist'],
               keepOutputDirectory: true,
               packager: 'pnpm',
               plugins: toRelative({ to: fromConfig('platform/serverless/_plugins.js') }),
               watch: { pattern: bundleConfigF.build?.watch?.include },
+            },
+
+            plugin: {
+              layerManager: {
+                custom: {
+                  unsafePermissions: true,
+                },
+              },
             },
           }
         : {}),
@@ -75,33 +83,33 @@ export const _serverless = ({
                 ]
               : [{ httpApi: { method: v.method, path: trimPathname(v.pathname) } }],
           handler: v.handler,
-          // layers: ['arn:aws:lambda:region:us-east-1:layer:CustomLambdaLayer:Y'],
+          layers: [{ Ref: 'CustomLambdaLayer' }],
           timeout: server.timeout,
         },
       }),
       {},
     ),
 
-    // layers: {
-    //   CustomLambdaLayer: {
-    //     compatibleRuntimes: ['nodejs18.x' as AwsLambdaRuntime],
-    //     package: {
-    //       include: ['**'],
-    //     },
-    //     path: toRelative({ to: fromRoot() }),
-    //     retain: true,
-    //   },
-    // },
+    layers: {
+      custom: {
+        compatibleRuntimes: ['nodejs18.x'],
+        package: {
+          patterns: fileConfig.prunePatterns.map((pattern) => `!nodejs/${pattern}`),
+        },
+        // TODO: move all layers to config
+        path: './.build/layers',
+        retain: true,
+      },
+    },
 
     package: {
-      excludeDevDependencies: false,
+      excludeDevDependencies: true,
       individually: true,
     },
 
     plugins: filterNil([
       'serverless-dotenv-plugin',
-      platform === PLATFORM.NODE && 'serverless-plugin-common-excludes',
-      platform === PLATFORM.NODE && 'serverless-plugin-include-dependencies',
+      platform === PLATFORM.NODE && 'serverless-plugin-layer-manager',
       platform === PLATFORM.NODE && 'serverless-esbuild',
       process.env.NODE_ENV === 'development' && 'serverless-offline',
     ]),

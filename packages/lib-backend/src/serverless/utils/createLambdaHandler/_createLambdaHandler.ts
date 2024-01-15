@@ -1,13 +1,9 @@
 import { ApolloServer } from '@apollo/server';
 import { handlers, startServerAndCreateLambdaHandler } from '@as-integrations/aws-lambda';
 import {
-  type APIGatewayProxyEventV2,
-  type APIGatewayProxyWebsocketEventV2,
-  type Context,
-} from 'aws-lambda';
-import { ApiGatewayManagementApi } from 'aws-sdk';
-import { type GraphQLError } from 'graphql';
-
+  ApiGatewayManagementApiClient,
+  PostToConnectionCommand,
+} from '@aws-sdk/client-apigatewaymanagementapi';
 import { getUserFromHeader } from '@lib-backend/auth/utils/getUserFromHeader/getUserFromHeader';
 import {
   type _CreateLambdaHandlerModel,
@@ -28,6 +24,12 @@ import { type ContextModel } from '@lib-platform/core/core.models';
 import { stringify } from '@lib-shared/core/utils/stringify/stringify';
 import { HttpError } from '@lib-shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib-shared/http/http.constants';
+import {
+  type APIGatewayProxyEventV2,
+  type APIGatewayProxyWebsocketEventV2,
+  type Context,
+} from 'aws-lambda';
+import { type GraphQLError } from 'graphql';
 
 export const _createLambdaHandler = <TType extends LambdaTypeModel>({
   context: contextDefault = {},
@@ -109,13 +111,14 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
       case LAMBDA_TYPE.WEBSOCKET:
         if (contextF.pathname === '$default' && result.requestId && result.body) {
           try {
-            const api = new ApiGatewayManagementApi({ endpoint: event.requestContext.domainName });
-            await api
-              .postToConnection({
-                ConnectionId: result.requestId,
-                Data: Buffer.from(result.body as string),
-              })
-              .promise();
+            const api = new ApiGatewayManagementApiClient({
+              endpoint: event.requestContext.domainName,
+            });
+            const command = new PostToConnectionCommand({
+              ConnectionId: result.requestId,
+              Data: Buffer.from(result.body as string),
+            });
+            await api.send(command);
             return { statusCode: HTTP_STATUS_CODE.SUCCESS };
           } catch (e) {
             console.warn('@@@ERROR');
