@@ -13,6 +13,8 @@ export const _runClean = async ({
   patterns,
   root = fromWorking(),
 }: _RunCleanParamsModel): Promise<_RunCleanModel> => {
+  const pwd = fromWorking();
+  root && process.chdir(root);
   await rimraf(
     patterns ??
       config.cleanPatterns
@@ -21,6 +23,8 @@ export const _runClean = async ({
     {
       filter: excludes ? (path) => some(excludes, (exc) => !path.includes(exc)) : undefined,
       glob: true,
+      preserveRoot: false,
     },
   );
+  root && process.chdir(pwd);
 };

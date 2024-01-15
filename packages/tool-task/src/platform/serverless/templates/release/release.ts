@@ -14,25 +14,33 @@ export const release: TaskParamsModel<unknown> = {
   task: [
     async () => {
       const root = fromWorking(fileConfig.buildPath, 'layers', 'nodejs');
-      await copy({
+      return copy({
         from: fromWorking('package.json'),
         isOverwrite: true,
         to: joinPaths([root, 'package.json']),
       });
     },
 
-    'npm install --unsafe-perm',
+    () => {
+      const root = fromWorking(fileConfig.buildPath, 'layers', 'nodejs');
+      return `cd ${root} && npm install --unsafe-perm --production`;
+    },
 
     async () => {
       const root = fromWorking(fileConfig.buildPath, 'layers', 'nodejs');
-      await runClean({
-        patterns: fileConfig.prunePatterns,
-        root: joinPaths([root, 'node_modules']),
-      });
+      await runClean({ patterns: fileConfig.prunePatterns, root });
     },
 
-    // async () => {},
+    () => {
+      const root = fromWorking(fileConfig.buildPath, 'layers', 'nodejs');
+      return `npx node-prune ${root}`;
+    },
 
-    // 'npx sls deploy --aws-profile default --verbose',
+    () => {
+      const root = fromWorking(fileConfig.buildPath, 'layers', 'nodejs');
+      return `npx modclean -p ${root} -r`;
+    },
+
+    'npx sls deploy --aws-profile default --verbose',
   ],
 };
