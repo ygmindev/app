@@ -1,20 +1,3 @@
-import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
-import { type RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
-import { babel } from '@rollup/plugin-babel';
-import inject from '@rollup/plugin-inject';
-import resolve from '@rollup/plugin-node-resolve';
-import react from '@vitejs/plugin-react-swc';
-import { existsSync } from 'fs';
-import { getTsconfig } from 'get-tsconfig';
-import reduce from 'lodash/reduce';
-import some from 'lodash/some';
-import { visualizer } from 'rollup-plugin-visualizer';
-import { type Alias, createLogger, type Logger, type Plugin } from 'vite';
-import { searchForWorkspaceRoot } from 'vite';
-import { checker } from 'vite-plugin-checker';
-import circleDependency from 'vite-plugin-circular-dependency';
-
-import { fromModules } from '@lib-backend/file/utils/fromModules/fromModules';
 import { fromRoot } from '@lib-backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib-backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib-backend/file/utils/joinPaths/joinPaths';
@@ -28,6 +11,20 @@ import { PLATFORM } from '@lib-platform/core/core.constants';
 import { type PlatformModel } from '@lib-platform/core/core.models';
 import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
 import { ENVIRONMENT } from '@lib-shared/environment/environment.constants';
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
+import { type RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
+import { babel } from '@rollup/plugin-babel';
+import inject from '@rollup/plugin-inject';
+import resolve from '@rollup/plugin-node-resolve';
+import react from '@vitejs/plugin-react-swc';
+import { existsSync } from 'fs';
+import { getTsconfig } from 'get-tsconfig';
+import reduce from 'lodash/reduce';
+import some from 'lodash/some';
+import { visualizer } from 'rollup-plugin-visualizer';
+import { type Alias, createLogger, type Logger, type Plugin } from 'vite';
+import { checker } from 'vite-plugin-checker';
+import circleDependency from 'vite-plugin-circular-dependency';
 
 function vitePluginIsomorphicImport(serverExtension: string): Plugin {
   return {
@@ -71,9 +68,9 @@ export const _bundle = ({
   externals,
   logSuppressPatterns,
   mainFields,
-  modulePaths,
   provide,
   publicPath,
+  rootDirs,
   serverExtension,
   transpiles,
   tsconfigPath,
@@ -155,9 +152,9 @@ export const _bundle = ({
 
         minify: process.env.NODE_ENV === 'production',
 
-        nodePaths: modulePaths,
+        nodePaths: rootDirs.map((root) => joinPaths([root, 'node_modules'])),
 
-        plugins: _plugins({ transpiles }),
+        plugins: _plugins({ rootDirs, transpiles }),
 
         resolveExtensions: extensions,
 
@@ -169,7 +166,6 @@ export const _bundle = ({
       force: true,
 
       include: transpiles,
-
     },
 
     plugins: filterNil([
@@ -222,11 +218,11 @@ export const _bundle = ({
 
     root: fromWorking(),
 
-    server: {
-      fs: {
-        allow: [searchForWorkspaceRoot(fromRoot()), fromModules()],
-      },
-    },
+    // server: {
+    //   fs: {
+    //     allow: [searchForWorkspaceRoot(fromRoot()), fromModules()],
+    //   },
+    // },
 
     ssr: {
       noExternal: transpiles,

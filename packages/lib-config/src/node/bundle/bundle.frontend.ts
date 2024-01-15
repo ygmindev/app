@@ -22,6 +22,11 @@ const { _config, config } = defineConfig({
       //   // 'react/jsx-runtime': fromModules('react/cjs/react-jsx-runtime.production.min.js'),
       // },
 
+      aliases: [
+        { from: 'react', to: fromModules('react') },
+        { from: 'react-dom', to: fromModules('react-dom') },
+      ],
+
       babelConfig: _babelConfig,
 
       define: {

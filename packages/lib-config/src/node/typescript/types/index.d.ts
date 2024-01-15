@@ -1,4 +1,3 @@
-declare module 'esbuild-plugin-fileloc';
 declare module 'geolocator';
 declare module 'i18next-parser';
 declare module 'inquirer-directory';

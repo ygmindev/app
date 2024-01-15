@@ -1,9 +1,3 @@
-import { readFileSync } from 'fs';
-import pullAll from 'lodash/pullAll';
-import trim from 'lodash/trim';
-import uniq from 'lodash/uniq';
-import { basename, join } from 'path';
-
 import { children } from '@lib-backend/file/utils/children/children';
 import { fromPackages } from '@lib-backend/file/utils/fromPackages/fromPackages';
 import { packages } from '@lib-backend/file/utils/packages/packages';
@@ -16,6 +10,11 @@ import {
 } from '@tool-generate/utils/boilerplate/boilerplate.models';
 import { prompt } from '@tool-task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '@tool-task/core/utils/prompt/prompt.constants';
+import { readFileSync } from 'fs';
+import pullAll from 'lodash/pullAll';
+import trim from 'lodash/trim';
+import uniq from 'lodash/uniq';
+import { basename, join } from 'path';
 
 const getTemplateVariables = async (from: string): Promise<Array<string>> => {
   const base = basename(from);
@@ -72,7 +71,7 @@ export const boilerplate = async ({
       }
       case '{{TARGET}}': {
         const root = await resolveVariable('{{ROOT}}');
-        value = `#${root}`;
+        value = `@${root}`;
         break;
       }
       default: {

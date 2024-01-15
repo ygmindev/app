@@ -1,6 +1,5 @@
 import { fromDist } from '@lib-backend/file/utils/fromDist/fromDist';
 import { fromRoot } from '@lib-backend/file/utils/fromRoot/fromRoot';
-import { toRelative } from '@lib-backend/file/utils/toRelative/toRelative';
 import { defineConfig } from '@lib-config/core/utils/defineConfig/defineConfig';
 import { _typescript } from '@lib-config/node/typescript/_typescript';
 import { type TypescriptConfigModel } from '@lib-config/node/typescript/typescript.models';
@@ -14,7 +13,6 @@ const { _config, config } = defineConfig({
     outDir: fromDist('out-tsc'),
 
     paths: {
-      '#dist/*': toRelative({ from: fromRoot(), to: fromDist('/*') }),
       'css-in-js-utils/lib/*': 'node_modules/css-in-js-utils/es/*',
       'inline-style-prefixer/lib/*': 'node_modules/inline-style-prefixer/es/*',
       'redux-persist/integration/*': 'node_modules/redux-persist/types/integration/*',

@@ -1,6 +1,8 @@
 import { fromModules } from '@lib-backend/file/utils/fromModules/fromModules';
 import { fromPackages } from '@lib-backend/file/utils/fromPackages/fromPackages';
+import { fromRoot } from '@lib-backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib-backend/file/utils/fromWorking/fromWorking';
+import { packages } from '@lib-backend/file/utils/packages/packages';
 import { config as fileConfig } from '@lib-config/core/file/file';
 import { defineConfig } from '@lib-config/core/utils/defineConfig/defineConfig';
 import { _config as _babelConfig } from '@lib-config/node/babel/babel.base';
@@ -36,11 +38,11 @@ const { _config, config } = defineConfig({
 
       mainFields: ['module', 'main'],
 
-      modulePaths: [fromModules(), fromWorking('node_modules')],
-
       packager: 'pnpm',
 
       publicPath: fileConfig.publicPath,
+
+      rootDirs: [fromRoot(), ...packages.map((path) => fromPackages(path))],
 
       tsconfigPath: 'tsconfig.json',
 

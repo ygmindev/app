@@ -1,12 +1,3 @@
-import { readFileSync } from 'fs';
-import reduce from 'lodash/reduce';
-import {
-  type JsxEmit,
-  type ModuleKind,
-  type ModuleResolutionKind,
-  type ScriptTarget,
-} from 'typescript';
-
 import { fromDist } from '@lib-backend/file/utils/fromDist/fromDist';
 import { fromPackages } from '@lib-backend/file/utils/fromPackages/fromPackages';
 import { packages } from '@lib-backend/file/utils/packages/packages';
@@ -15,6 +6,14 @@ import {
   type _TypescriptConfigModel,
   type TypescriptConfigModel,
 } from '@lib-config/node/typescript/typescript.models';
+import { readFileSync } from 'fs';
+import reduce from 'lodash/reduce';
+import {
+  type JsxEmit,
+  type ModuleKind,
+  type ModuleResolutionKind,
+  type ScriptTarget,
+} from 'typescript';
 
 export const _typescript = ({
   outDir,

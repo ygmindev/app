@@ -24,9 +24,6 @@
     "noEmit": true,
     "outDir": "/Users/yoongeemin/Developer/Projects/app/.dist/out-tsc",
     "paths": {
-      "#dist/*": [
-        ".dist/*"
-      ],
       "css-in-js-utils/lib/*": [
         "node_modules/css-in-js-utils/es/*"
       ],

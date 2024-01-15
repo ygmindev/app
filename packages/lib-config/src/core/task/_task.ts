@@ -1,6 +1,4 @@
 // COMPLETE
-import { existsSync } from 'fs';
-
 import { Container } from '@lib-backend/core/utils/Container/Container';
 import { fromGlobs } from '@lib-backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib-backend/file/utils/fromPackages/fromPackages';
@@ -13,6 +11,7 @@ import { type TaskParamsModel } from '@tool-task/core/core.models';
 import { prompt } from '@tool-task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '@tool-task/core/utils/prompt/prompt.constants';
 import { TaskRunner } from '@tool-task/core/utils/TaskRunner/TaskRunner';
+import { existsSync } from 'fs';
 
 export const _task = ({ packageFilename, taskExtension }: TaskConfigModel): _TaskConfigModel => {
   const taskRunner = Container.get(TaskRunner);

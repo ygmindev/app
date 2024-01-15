@@ -1,5 +1,4 @@
 import { fromDist } from '@lib-backend/file/utils/fromDist/fromDist';
-import { fromExecutable } from '@lib-backend/file/utils/fromExecutable/fromExecutable';
 import { fromPackages } from '@lib-backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '@lib-backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib-backend/file/utils/fromWorking/fromWorking';
@@ -12,13 +11,11 @@ import { EXTENSIONS_BASE } from '@lib-platform/core/utils/extensions/extensions.
 import { permuteString } from '@lib-shared/core/utils/permuteString/permuteString';
 
 export const lintCommand = (fix?: boolean): string =>
-  fromExecutable(
-    `eslint --config ${config.configFile} ${
-      fix ? '--fix' : ''
-    } --no-error-on-unmatched-pattern ${config.exclude
-      .map((pattern) => `--ignore-pattern "${pattern}"`)
-      .join(' ')} ${config.include.join(' ')}`,
-  );
+  `npx eslint --config ${config.configFile} ${
+    fix ? '--fix' : ''
+  } --no-error-on-unmatched-pattern ${config.exclude
+    .map((pattern) => `--ignore-pattern "${pattern}"`)
+    .join(' ')} ${config.include.join(' ')}`;
 
 const { _config, config } = defineConfig({
   _config: _lint,

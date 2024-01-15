@@ -7,7 +7,7 @@ const upgrade: TaskParamsModel<unknown> = {
 
   onFinish: [() => 'node-post-install'],
 
-  task: [`${fromExecutable('ncu')} -i -p yarn -x ${Object.keys(config.fixedVersions).join(',')}`],
+  task: [`npx ncu -i -p yarn -x ${Object.keys(config.fixedVersions).join(',')}`],
 };
 
 export default upgrade;

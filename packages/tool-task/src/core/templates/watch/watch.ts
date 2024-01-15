@@ -1,6 +1,5 @@
 import trimStart from 'lodash/trimStart';
 
-import { fromExecutable } from '@lib-backend/file/utils/fromExecutable/fromExecutable';
 import { extensions } from '@lib-platform/core/utils/extensions/extensions';
 import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
 import { ENVIRONMENT } from '@lib-shared/environment/environment.constants';
@@ -22,7 +21,7 @@ export const watch: TaskParamsModel<WatchParamsModel> = {
         executable && `--exec "${executable}"`,
         script,
       ]).join(' ');
-      return fromExecutable(`nodemon ${params}`);
+      return 'npx nodemon ${params}';
     },
   ],
 };
