@@ -434,7 +434,167 @@ importers:
 
   packages/asset-static: {}
 
-  packages/backend-graphql-sandbox: {}
+  packages/backend-graphql-sandbox:
+    dependencies:
+      '@apollo/server':
+        specifier: ^4.10.0
+        version: 4.10.0(graphql@16.8.1)
+      '@as-integrations/aws-lambda':
+        specifier: ^3.1.0
+        version: 3.1.0(@apollo/server@4.10.0)
+      '@aws-sdk/client-apigatewaymanagementapi':
+        specifier: ^3.490.0
+        version: 3.490.0
+      '@babel/core':
+        specifier: ^7.23.7
+        version: 7.23.7
+      '@fastify/compress':
+        specifier: ^6.5.0
+        version: 6.5.0
+      '@fastify/cookie':
+        specifier: ^9.2.0
+        version: 9.3.0
+      '@fastify/middie':
+        specifier: ^8.3.0
+        version: 8.3.0
+      '@fastify/static':
+        specifier: ^6.12.0
+        version: 6.12.0
+      '@mikro-orm/core':
+        specifier: ^5.9.7
+        version: 5.9.7(@mikro-orm/mongodb@5.9.7)
+      '@mikro-orm/mongodb':
+        specifier: ^5.9.7
+        version: 5.9.7(@mikro-orm/core@5.9.7)
+      '@opentelemetry/api':
+        specifier: ^1.7.0
+        version: 1.7.0
+      '@opentelemetry/auto-instrumentations-node':
+        specifier: ^0.40.3
+        version: 0.40.3(@opentelemetry/api@1.7.0)
+      '@opentelemetry/exporter-trace-otlp-http':
+        specifier: ^0.46.0
+        version: 0.46.0(@opentelemetry/api@1.7.0)
+      '@opentelemetry/instrumentation':
+        specifier: ^0.46.0
+        version: 0.46.0(@opentelemetry/api@1.7.0)
+      '@opentelemetry/instrumentation-aws-lambda':
+        specifier: ^0.37.4
+        version: 0.37.4(@opentelemetry/api@1.7.0)
+      '@opentelemetry/otlp-exporter-base':
+        specifier: ^0.46.0
+        version: 0.46.0(@opentelemetry/api@1.7.0)
+      '@opentelemetry/resources':
+        specifier: ^1.19.0
+        version: 1.19.0(@opentelemetry/api@1.7.0)
+      '@opentelemetry/sdk-node':
+        specifier: ^0.46.0
+        version: 0.46.0(@opentelemetry/api@1.7.0)
+      '@opentelemetry/sdk-trace-base':
+        specifier: ^1.19.0
+        version: 1.19.0(@opentelemetry/api@1.7.0)
+      '@opentelemetry/sdk-trace-node':
+        specifier: ^1.19.0
+        version: 1.19.0(@opentelemetry/api@1.7.0)
+      '@uptrace/core':
+        specifier: ^1.18.1
+        version: 1.18.1
+      '@uptrace/node':
+        specifier: ^1.18.1
+        version: 1.18.1
+      apollo-server-lambda:
+        specifier: ^3.13.0
+        version: 3.13.0(graphql@16.8.1)
+      aws-lambda:
+        specifier: ^1.0.7
+        version: 1.0.7
+      axios:
+        specifier: ^1.6.5
+        version: 1.6.5
+      class-validator:
+        specifier: ^0.14.0
+        version: 0.14.1
+      close-with-grace:
+        specifier: ^1.2.0
+        version: 1.2.0
+      color:
+        specifier: ^4.2.3
+        version: 4.2.3
+      core-js:
+        specifier: ^3.35.0
+        version: 3.35.0
+      ejs:
+        specifier: ^3.1.9
+        version: 3.1.9
+      email-templates:
+        specifier: ^11.1.1
+        version: 11.1.1(@babel/core@7.23.7)(ejs@3.1.9)(underscore@1.13.6)
+      fastify:
+        specifier: ^4.25.2
+        version: 4.25.2
+      firebase-admin:
+        specifier: ^12.0.0
+        version: 12.0.0
+      graphql:
+        specifier: ^16.8.1
+        version: 16.8.1
+      graphql-relay:
+        specifier: ^0.10.0
+        version: 0.10.0(graphql@16.8.1)
+      http-errors:
+        specifier: ^2.0.0
+        version: 2.0.0
+      i18next-http-middleware:
+        specifier: ^3.5.0
+        version: 3.5.0
+      inversify:
+        specifier: ^6.0.2
+        version: 6.0.2
+      json-stringify-safe:
+        specifier: ^5.0.1
+        version: 5.0.1
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+      moment:
+        specifier: ^2.30.1
+        version: 2.30.1
+      moment-timezone:
+        specifier: ^0.5.44
+        version: 0.5.44
+      mongodb:
+        specifier: 5.9.2
+        version: 5.9.2
+      nodemailer:
+        specifier: ^6.9.8
+        version: 6.9.8
+      reflect-metadata:
+        specifier: ^0.2.1
+        version: 0.2.1
+      serverless:
+        specifier: 3.38.0
+        version: 3.38.0
+      stripe:
+        specifier: ^14.11.0
+        version: 14.12.0
+      thenby:
+        specifier: ^1.3.4
+        version: 1.3.4
+      twilio:
+        specifier: ^4.20.0
+        version: 4.20.1
+      type-graphql:
+        specifier: 2.0.0-beta.2
+        version: 2.0.0-beta.2(class-validator@0.14.1)(graphql@16.8.1)
+      typedi:
+        specifier: ^0.10.0
+        version: 0.10.0
+      typeorm:
+        specifier: ^0.3.19
+        version: 0.3.19(mongodb@5.9.2)
+      winston:
+        specifier: ^3.11.0
+        version: 3.11.0
 
   packages/backend-lambda:
     dependencies:
@@ -17801,7 +17961,7 @@ packages:
       depd: 1.1.2
       inherits: 2.0.3
       setprototypeof: 1.1.0
-      statuses: 1.4.0
+      statuses: 1.5.0
     dev: false
 
   /http-errors@1.8.1:

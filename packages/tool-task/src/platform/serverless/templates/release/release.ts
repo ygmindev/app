@@ -12,17 +12,27 @@ export const release: TaskParamsModel<unknown> = {
   name: 'release',
 
   task: [
-    async () =>
-      {
-        const root = fromWorking(fileConfig.buildPath, 'layers', 'nodejs');
-        await copy({ isOverwrite: true, from: fromWorking('package.json'), to: joinPaths([root, 'package.json']) });
-        await runClean({ root: joinPaths([root, 'node_modules']), patterns: fileConfig.prunePatterns });
-      },
+    async () => {
+      const root = fromWorking(fileConfig.buildPath, 'layers', 'nodejs');
+      await copy({
+        from: fromWorking('package.json'),
+        isOverwrite: true,
+        to: joinPaths([root, 'package.json']),
+      });
+    },
 
-      async () => {
-        
-      },
+    'npm install --unsafe-perm',
 
-      // 'npx sls deploy --aws-profile default --verbose',
+    async () => {
+      const root = fromWorking(fileConfig.buildPath, 'layers', 'nodejs');
+      await runClean({
+        patterns: fileConfig.prunePatterns,
+        root: joinPaths([root, 'node_modules']),
+      });
+    },
+
+    // async () => {},
+
+    // 'npx sls deploy --aws-profile default --verbose',
   ],
 };

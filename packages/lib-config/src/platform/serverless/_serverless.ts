@@ -58,12 +58,8 @@ export const _serverless = ({
               watch: { pattern: bundleConfigF.build?.watch?.include },
             },
 
-            plugin: {
-              layerManager: {
-                custom: {
-                  unsafePermissions: true,
-                },
-              },
+            layerConfig: {
+              installLayers: false,
             },
           }
         : {}),

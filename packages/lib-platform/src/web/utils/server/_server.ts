@@ -3,12 +3,6 @@ import { type FastifyCookieOptions } from '@fastify/cookie';
 import { fastifyCookie } from '@fastify/cookie';
 import { fastifyMiddie } from '@fastify/middie';
 import { fastifyStatic } from '@fastify/static';
-import { type FastifyPluginCallback, type FastifyRegisterOptions } from 'fastify';
-import { fastify } from 'fastify';
-import { plugin as i18nextMiddleware } from 'i18next-http-middleware';
-import toNumber from 'lodash/toNumber';
-import { createServer } from 'vite';
-
 import { fromStatic } from '@lib-backend/file/utils/fromStatic/fromStatic';
 import { _config } from '@lib-config/locale/internationalize/internationalize.server';
 import { config as webConfig } from '@lib-config/platform/web/web';
@@ -22,6 +16,11 @@ import { LOCALE } from '@lib-shared/locale/locale.constants';
 import { info } from '@lib-shared/logging/utils/logger/logger';
 import { ROUTE } from '@lib-shared/route/route.constants';
 import { STATE } from '@lib-shared/state/state.constants';
+import { type FastifyPluginCallback, type FastifyRegisterOptions } from 'fastify';
+import { fastify } from 'fastify';
+import { plugin as i18nextMiddleware } from 'i18next-http-middleware';
+import toNumber from 'lodash/toNumber';
+import { createServer } from 'vite';
 
 export const _server = async ({
   config,

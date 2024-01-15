@@ -1,10 +1,9 @@
-import trimStart from 'lodash/trimStart';
-
 import { extensions } from '@lib-platform/core/utils/extensions/extensions';
 import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
 import { ENVIRONMENT } from '@lib-shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool-task/core/core.models';
 import { type WatchParamsModel } from '@tool-task/core/templates/watch/watch.models';
+import trimStart from 'lodash/trimStart';
 
 export const watch: TaskParamsModel<WatchParamsModel> = {
   environment: ENVIRONMENT.DEVELOPMENT,
@@ -21,7 +20,7 @@ export const watch: TaskParamsModel<WatchParamsModel> = {
         executable && `--exec "${executable}"`,
         script,
       ]).join(' ');
-      return 'npx nodemon ${params}';
+      return `nodemon ${params}`;
     },
   ],
 };
