@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "type": "commonjs",
   "private": true,
-  "dependencies": {
+  "devDependencies": {
     "@anatine/esbuild-decorators": "^0.2.19",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/plugin-proposal-decorators": "^7.23.7",
@@ -108,6 +108,8 @@
     "serverless-dotenv-plugin": "^6.0.0",
     "serverless-esbuild": "^1.50.1",
     "serverless-offline": "^13.3.2",
+    "serverless-plugin-common-excludes": "^4.0.0",
+    "serverless-plugin-include-dependencies": "^5.1.0",
     "source-map-support": "^0.5.21",
     "style-loader": "^3.3.3",
     "supertest": "^6.3.3",

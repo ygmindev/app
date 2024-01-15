@@ -1,5 +1,4 @@
 import { fromConfig } from '@lib-backend/file/utils/fromConfig/fromConfig';
-import { fromRoot } from '@lib-backend/file/utils/fromRoot/fromRoot';
 import { toRelative } from '@lib-backend/file/utils/toRelative/toRelative';
 import {
   type _ServerlessConfigModel,
@@ -9,7 +8,7 @@ import { trimPathname } from '@lib-frontend/route/utils/trimPathname/trimPathnam
 import { PLATFORM } from '@lib-platform/core/core.constants';
 import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
 import { HTTP_METHOD } from '@lib-shared/http/http.constants';
-import { type AWS, type AwsLambdaRuntime } from '@serverless/typescript';
+import { type AWS } from '@serverless/typescript';
 import reduce from 'lodash/reduce';
 
 export const _serverless = ({
@@ -52,9 +51,8 @@ export const _serverless = ({
               exclude: ['aws-sdk'],
               // exclude: ['*'],
               format: 'cjs',
-              // installExtraArgs: ['--force', '--shamefully-hoist'],
+              installExtraArgs: ['--shamefully-hoist'],
               keepOutputDirectory: true,
-              // packagePath: fromRoot('package.json'),
               packager: 'pnpm',
               plugins: toRelative({ to: fromConfig('platform/serverless/_plugins.js') }),
               watch: { pattern: bundleConfigF.build?.watch?.include },
@@ -77,23 +75,23 @@ export const _serverless = ({
                 ]
               : [{ httpApi: { method: v.method, path: trimPathname(v.pathname) } }],
           handler: v.handler,
-          layers: ['arn:aws:lambda:region:us-east-1:layer:CustomLambdaLayer:Y'],
+          // layers: ['arn:aws:lambda:region:us-east-1:layer:CustomLambdaLayer:Y'],
           timeout: server.timeout,
         },
       }),
       {},
     ),
 
-    layers: {
-      CustomLambdaLayer: {
-        compatibleRuntimes: ['nodejs18.x' as AwsLambdaRuntime],
-        package: {
-          include: ['**'],
-        },
-        path: toRelative({ to: fromRoot() }),
-        retain: true,
-      },
-    },
+    // layers: {
+    //   CustomLambdaLayer: {
+    //     compatibleRuntimes: ['nodejs18.x' as AwsLambdaRuntime],
+    //     package: {
+    //       include: ['**'],
+    //     },
+    //     path: toRelative({ to: fromRoot() }),
+    //     retain: true,
+    //   },
+    // },
 
     package: {
       excludeDevDependencies: false,
@@ -102,8 +100,10 @@ export const _serverless = ({
 
     plugins: filterNil([
       'serverless-dotenv-plugin',
+      platform === PLATFORM.NODE && 'serverless-plugin-common-excludes',
+      platform === PLATFORM.NODE && 'serverless-plugin-include-dependencies',
       platform === PLATFORM.NODE && 'serverless-esbuild',
-      'serverless-offline',
+      process.env.NODE_ENV === 'development' && 'serverless-offline',
     ]),
 
     provider: {
