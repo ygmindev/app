@@ -6,6 +6,8 @@ import {
 } from '@lib-frontend/data/hooks/useForm/useForm.models';
 import { useValidator } from '@lib-frontend/data/hooks/useValidator/useValidator';
 import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useNotification } from '@lib-frontend/notification/hooks/useNotification/useNotification';
+import { useRouter } from '@lib-frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '@lib-frontend/state/hooks/useStore/useStore';
 import { isEqual } from '@lib-shared/core/utils/isEqual/isEqual';
 import { error } from '@lib-shared/logging/utils/logger/logger';
@@ -18,11 +20,15 @@ export const useForm = <TType, TResult = void>({
   onError,
   onSubmit,
   onSuccess,
+  redirect,
+  successMessage,
   validators,
 }: UseFormParamsModel<TType, TResult>): UseFormModel<TType, TResult> => {
   const { t } = useTranslation();
   const { handleError } = useErrorContext();
   const validate = useValidator();
+  const { success } = useNotification();
+  const { replace } = useRouter();
   const [, isLoadingSet] = useStore('app.isLoading');
 
   const handleSubmit = async (values: TType): Promise<TResult | null> => {
@@ -33,6 +39,8 @@ export const useForm = <TType, TResult = void>({
       isBlocking && isLoadingSet(true);
       const data = onSubmit && (await onSubmit(values));
       onSuccess && (await onSuccess(values, data));
+      successMessage && success({ description: t('core:updateSuccess') });
+      redirect && replace(redirect);
       return data ?? null;
     } catch (e) {
       error(e);

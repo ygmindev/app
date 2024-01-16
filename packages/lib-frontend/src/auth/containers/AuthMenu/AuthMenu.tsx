@@ -1,5 +1,3 @@
-import { useRef } from 'react';
-
 import { SIGN_IN, SIGN_OUT } from '@lib-frontend/auth/auth.constants';
 import { type AuthMenuPropsModel } from '@lib-frontend/auth/containers/AuthMenu/AuthMenu.models';
 import { useSignInResource } from '@lib-frontend/auth/hooks/useSignInResource/useSignInResource';
@@ -19,6 +17,7 @@ import { useStyles } from '@lib-frontend/style/hooks/useStyles/useStyles';
 import { THEME_COLOR } from '@lib-frontend/style/style.constants';
 import { AUTH } from '@lib-shared/auth/auth.constants';
 import { ACCOUNT } from '@lib-shared/user/user.constants';
+import { useRef } from 'react';
 
 export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
   const { t } = useTranslation([AUTH]);
@@ -37,7 +36,6 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
           label: t('user:account'),
           onPress: () => push({ pathname: ACCOUNT }),
         },
-
         {
           color: THEME_COLOR.ERROR,
           icon: 'signout',

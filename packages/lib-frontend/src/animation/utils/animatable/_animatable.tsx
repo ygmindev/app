@@ -1,6 +1,3 @@
-import { motify } from 'moti';
-import { createElement, forwardRef, useImperativeHandle } from 'react';
-
 import { type AnimatableRefModel } from '@lib-frontend/animation/animation.models';
 import { useAnimationState } from '@lib-frontend/animation/hooks/useAnimationState/useAnimationState';
 import {
@@ -10,6 +7,8 @@ import {
 import { type PropsModel } from '@lib-frontend/core/core.models';
 import { useStyles } from '@lib-frontend/style/hooks/useStyles/useStyles';
 import { type StyleModel, type ViewStyleModel } from '@lib-frontend/style/style.models';
+import { motify } from 'moti';
+import { createElement, forwardRef, useImperativeHandle } from 'react';
 
 export const _animatable = <TProps, TStyle extends StyleModel = ViewStyleModel>({
   Component,

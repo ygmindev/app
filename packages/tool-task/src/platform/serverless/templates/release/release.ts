@@ -1,3 +1,4 @@
+import { fromExecutable } from '@lib-backend/file/utils/fromExecutable/fromExecutable';
 import { fromWorking } from '@lib-backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib-backend/file/utils/joinPaths/joinPaths';
 import { config as fileConfig } from '@lib-config/core/file/file';
@@ -41,6 +42,6 @@ export const release: TaskParamsModel<unknown> = {
       return `npx modclean -p ${root} -r`;
     },
 
-    'npx sls deploy --aws-profile default --verbose',
+    fromExecutable('sls deploy --aws-profile default --verbose'),
   ],
 };

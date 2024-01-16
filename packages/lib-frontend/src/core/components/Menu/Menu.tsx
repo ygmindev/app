@@ -1,7 +1,3 @@
-import { type ForwardedRef, type ReactElement } from 'react';
-import { cloneElement, forwardRef, useImperativeHandle, useRef, useState } from 'react';
-import { type ScrollView } from 'react-native';
-
 import { Button } from '@lib-frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib-frontend/core/components/Button/Button.constants';
 import { Dropdown } from '@lib-frontend/core/components/Dropdown/Dropdown';
@@ -24,6 +20,9 @@ import { TranslatableText } from '@lib-frontend/locale/components/TranslatableTe
 import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '@lib-frontend/style/style.constants';
 import { FONT_ALIGN } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { type ForwardedRef, type ReactElement } from 'react';
+import { cloneElement, forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import { type ScrollView } from 'react-native';
 
 export const Menu = forwardRef(
   <TType extends MenuOptionModel = MenuOptionModel>(
@@ -60,6 +59,7 @@ export const Menu = forwardRef(
     const handlePressOption = async ({ id, onPress }: MenuOptionModel): Promise<void> => {
       onPress && (await onPress());
       onChange && onChange(id);
+      handleToggle(false);
     };
 
     const isDisabled = elementState === ELEMENT_STATE.DISABLED;

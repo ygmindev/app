@@ -1,6 +1,3 @@
-import isNumber from 'lodash/isNumber';
-import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
-
 import { ANIMATION_STATES_FOCUSABLE } from '@lib-frontend/animation/animation.constants';
 import { type AnimationModel } from '@lib-frontend/animation/animation.models';
 import { Appearable } from '@lib-frontend/animation/components/Appearable/Appearable';
@@ -37,6 +34,8 @@ import { FLEX_ALIGN } from '@lib-frontend/style/utils/styler/flexStyler/flexStyl
 import { SHAPE_POSITION } from '@lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { merge } from '@lib-shared/core/utils/merge/merge';
 import { sleep } from '@lib-shared/core/utils/sleep/sleep';
+import isNumber from 'lodash/isNumber';
+import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 
 export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forwardRef(
   (
@@ -97,7 +96,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
       if (isAutoFocus) {
         await sleep(theme.animation.transition);
         if (isMounted()) {
-          inputRef.current && inputRef.current.focus();
+          inputRef.current?.focus();
         }
       }
     });
@@ -221,7 +220,7 @@ export const TextField: RLFCModel<TextFieldRefModel, TextFieldPropsModel> = forw
             onBlur={() => {
               if (!isDisabled) {
                 onBlur && onBlur();
-                void sleep(100).then(() => focusableRef?.current?.blur());
+                void sleep(100).then(() => focusableRef.current?.blur());
               }
             }}
             onChange={handleChange}

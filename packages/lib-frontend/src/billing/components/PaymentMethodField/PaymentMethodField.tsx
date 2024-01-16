@@ -1,5 +1,3 @@
-import { forwardRef } from 'react';
-
 import { _PaymentMethodField } from '@lib-frontend/billing/components/PaymentMethodField/_PaymentMethodField';
 import {
   type PaymentMethodFieldPropsModel,
@@ -11,6 +9,7 @@ import { useErrorContext } from '@lib-frontend/core/hooks/useErrorContext/useErr
 import { DataBoundary } from '@lib-frontend/data/components/DataBoundary/DataBoundary';
 import { useCurrentUser } from '@lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { type PaymentMethodModel } from '@lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { forwardRef } from 'react';
 
 export const PaymentMethodField: RLFCModel<
   PaymentMethodFieldRefModel,

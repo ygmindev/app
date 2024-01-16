@@ -178,14 +178,14 @@
         }
       }
     },
-    "CustomLambdaLayer2323a7a73915476ca1d5e4d2c56a0c5613b164dc": {
+    "CustomLambdaLayera1b548088c4ca0992864a58fefacab102dbf33ed": {
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
         "Content": {
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless/production/1705302233903-2024-01-15T07:03:53.903Z/custom.zip"
+          "S3Key": "serverless/serverless/production/1705341995192-2024-01-15T18:06:35.192Z/custom.zip"
         },
         "LayerName": "custom",
         "CompatibleRuntimes": [
@@ -201,7 +201,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless/production/1705328916007-2024-01-15T14:28:36.007Z/graphql.zip"
+          "S3Key": "serverless/serverless/production/1705349577075-2024-01-15T20:12:57.075Z/graphql.zip"
         },
         "Handler": "src/functions/graphql/graphql.main",
         "Runtime": "nodejs18.x",
@@ -237,7 +237,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless/production/1705328916007-2024-01-15T14:28:36.007Z/ping.zip"
+          "S3Key": "serverless/serverless/production/1705349577075-2024-01-15T20:12:57.075Z/ping.zip"
         },
         "Handler": "src/functions/ping/ping.main",
         "Runtime": "nodejs18.x",
@@ -273,7 +273,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless/production/1705328916007-2024-01-15T14:28:36.007Z/websocket.zip"
+          "S3Key": "serverless/serverless/production/1705349577075-2024-01-15T20:12:57.075Z/websocket.zip"
         },
         "Handler": "src/functions/websocket/websocket.main",
         "Runtime": "nodejs18.x",
@@ -646,7 +646,7 @@
     "CustomLambdaLayerQualifiedArn": {
       "Description": "Current Lambda layer version",
       "Value": {
-        "Ref": "CustomLambdaLayer2323a7a73915476ca1d5e4d2c56a0c5613b164dc"
+        "Ref": "CustomLambdaLayera1b548088c4ca0992864a58fefacab102dbf33ed"
       },
       "Export": {
         "Name": "sls-serverless-production-CustomLambdaLayerQualifiedArn"
@@ -654,14 +654,14 @@
     },
     "CustomLambdaLayerHash": {
       "Description": "Current Lambda layer hash",
-      "Value": "2323a7a73915476ca1d5e4d2c56a0c5613b164dc",
+      "Value": "a1b548088c4ca0992864a58fefacab102dbf33ed",
       "Export": {
         "Name": "sls-serverless-production-CustomLambdaLayerHash"
       }
     },
     "CustomLambdaLayerS3Key": {
       "Description": "Current Lambda layer S3Key",
-      "Value": "serverless/serverless/production/1705302233903-2024-01-15T07:03:53.903Z/custom.zip",
+      "Value": "serverless/serverless/production/1705341995192-2024-01-15T18:06:35.192Z/custom.zip",
       "Export": {
         "Name": "sls-serverless-production-CustomLambdaLayerS3Key"
       }

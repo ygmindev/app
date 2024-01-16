@@ -121,7 +121,7 @@ export const _lint = ({
 
   settings: {
     'import/resolver': {
-      typescript: { alwaysTryTypes: true },
+      typescript: { alwaysTryTypes: true, project: './tsconfig.json' },
     },
   },
 });

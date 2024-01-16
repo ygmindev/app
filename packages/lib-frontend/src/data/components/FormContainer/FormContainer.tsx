@@ -1,7 +1,3 @@
-import map from 'lodash/map';
-import { cloneElement, type ForwardedRef, type ReactElement, type ReactNode, useRef } from 'react';
-import { forwardRef, useImperativeHandle } from 'react';
-
 import { Accordion } from '@lib-frontend/animation/components/Accordion/Accordion';
 import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
 import { AsyncBoundary } from '@lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
@@ -30,6 +26,9 @@ import { useStore } from '@lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { type StringKeyModel } from '@lib-shared/core/core.models';
 import { reduceSequence } from '@lib-shared/core/utils/reduceSequence/reduceSequence';
+import map from 'lodash/map';
+import { cloneElement, type ForwardedRef, type ReactElement, type ReactNode, useRef } from 'react';
+import { forwardRef, useImperativeHandle } from 'react';
 
 export const FormContainer = forwardRef(
   <TType, TResult = void>(
@@ -75,7 +74,9 @@ const FormContainerF = forwardRef(
       onError,
       onSubmit,
       onSuccess,
+      redirect,
       submitLabel,
+      successMessage,
       topElement,
       validators,
       ...props
@@ -139,6 +140,8 @@ const FormContainerF = forwardRef(
         onError,
         onSubmit: onSubmitF,
         onSuccess,
+        redirect,
+        successMessage,
         validators,
       });
 

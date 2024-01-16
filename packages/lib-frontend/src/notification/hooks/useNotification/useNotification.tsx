@@ -10,14 +10,13 @@ export const useNotification = (): UseNotificationModel => {
   const actions = useActions();
   const { t } = useTranslation();
 
-  const notify = debounce(
-    (alert: NotificationModel): void =>
-      actions?.notification.notificationsAdd({
-        ...alert,
-        description: t(alert.description),
-        id: alert.id ?? uid(),
-        title: t(alert.title),
-      }),
+  const notify = debounce((alert: NotificationModel): void =>
+    actions?.notification.notificationsAdd({
+      ...alert,
+      description: t(alert.description),
+      id: alert.id ?? uid(),
+      title: t(alert.title),
+    }),
   );
 
   return {
