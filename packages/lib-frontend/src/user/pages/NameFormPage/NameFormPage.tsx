@@ -17,13 +17,8 @@ export const NameFormPage: LFCModel<NameFormPagePropsModel> = ({ ...props }) => 
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
   const currentUser = useCurrentUser();
-  const { replace } = useRouter();
+  const { back } = useRouter();
   const { userUpdate } = useSignInResource();
-
-  const handleBack = (): void => {
-    void replace({ pathname: `/${ACCOUNT}/${PERSONAL}` });
-  };
-
   return currentUser ? (
     <FormContainer
       {...wrapperProps}
@@ -48,15 +43,16 @@ export const NameFormPage: LFCModel<NameFormPagePropsModel> = ({ ...props }) => 
         },
       ]}
       initialValues={{ first: currentUser.first, last: currentUser.last }}
-      onCancel={handleBack}
-      onSubmit={async ({ first, last }: NameFormModel) => {
-        await userUpdate({
+      onCancel={back}
+      onSubmit={async ({ first, last }: NameFormModel) =>
+        userUpdate({
           filter: [{ field: '_id', stringValue: currentUser._id }],
           update: { first, last },
-        });
-        handleBack();
-      }}
+        })
+      }
       p
+      redirectTo={{ pathname: `/${ACCOUNT}/${PERSONAL}` }}
+      successMessage={t('core:updateSuccess', { value: t('user:name') })}
     />
   ) : null;
 };

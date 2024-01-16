@@ -1,5 +1,3 @@
-import { type ComponentType, type FC as _FC, type ReactNode, type Ref } from 'react';
-
 import { type ButtonPropsModel } from '@lib-frontend/core/components/Button/Button.models';
 import { type WithIconPropsModel } from '@lib-frontend/core/components/Icon/Icon.models';
 import { type CORNER, type DIRECTION, type ELEMENT_STATE } from '@lib-frontend/core/core.constants';
@@ -15,8 +13,11 @@ import {
 } from '@lib-frontend/style/style.models';
 import { type TestIdPropsModel } from '@lib-frontend/test/test.models';
 import { type WithIdModel } from '@lib-shared/core/utils/withId/withId.models';
+import { type ComponentType, type FC as _FC, type ReactNode, type Ref } from 'react';
 
 export type FCModel<TProps = object> = _FC<TProps & TestIdPropsModel & { nativeID?: string }>;
+
+export type FCPropsModel<TProps = object> = PropsModel<FCModel<TProps>>;
 
 export type SFCPropsModel<TProps = object, TStyle extends StyleModel = ViewStyleModel> = PropsModel<
   SFCModel<TProps, TStyle>

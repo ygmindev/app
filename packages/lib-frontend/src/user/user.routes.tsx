@@ -33,6 +33,7 @@ export const userRoutes: Array<RouteModel> = [
               <SignInPage
                 method={SIGN_IN_METHOD.EMAIL}
                 mode={FORM_MODE.UPDATE}
+                redirectTo={{ pathname: `${ACCOUNT}/${PERSONAL}` }}
               />
             ),
             icon: 'email',
@@ -44,6 +45,7 @@ export const userRoutes: Array<RouteModel> = [
               <SignInPage
                 method={SIGN_IN_METHOD.PHONE}
                 mode={FORM_MODE.UPDATE}
+                redirectTo={{ pathname: `${ACCOUNT}/${PERSONAL}` }}
               />
             ),
             icon: 'phone',

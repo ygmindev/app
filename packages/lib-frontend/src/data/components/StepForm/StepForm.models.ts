@@ -1,10 +1,9 @@
-import { type ReactElement } from 'react';
-
 import { type FormContainerPropsModel } from '@lib-frontend/data/components/FormContainer/FormContainer.models';
 import { type UseFormParamsModel } from '@lib-frontend/data/hooks/useForm/useForm.models';
 import { type TranslatableTextModel } from '@lib-frontend/locale/locale.models';
 import { type PartialModel } from '@lib-shared/core/core.models';
 import { type WithIdModel } from '@lib-shared/core/utils/withId/withId.models';
+import { type ReactElement } from 'react';
 
 export type StepFormPropsModel<TType, TResult = void> = UseFormParamsModel<TType, TResult> & {
   steps: Array<FormStepModel<TType, PartialModel<TType>>>;

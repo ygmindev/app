@@ -1,5 +1,3 @@
-import { cloneElement, type ReactElement, useState } from 'react';
-
 import { Accordion } from '@lib-frontend/animation/components/Accordion/Accordion';
 import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
@@ -14,6 +12,7 @@ import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLa
 import { type CallableModel } from '@lib-shared/core/core.models';
 import { getValue } from '@lib-shared/core/utils/getValue/getValue';
 import { isEmpty } from '@lib-shared/core/utils/isEmpty/isEmpty';
+import { cloneElement, type ReactElement, useState } from 'react';
 
 export const SettingsField = <TType = string,>({
   element,

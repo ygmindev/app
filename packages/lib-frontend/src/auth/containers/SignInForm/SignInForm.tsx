@@ -7,7 +7,6 @@ import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib-frontend/core/core.models';
 import { StepForm } from '@lib-frontend/data/components/StepForm/StepForm';
 import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useRouter } from '@lib-frontend/route/hooks/useRouter/useRouter';
 import { THEME_SIZE } from '@lib-frontend/style/style.constants';
 import { FONT_TYPE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { AUTH } from '@lib-shared/auth/auth.constants';
@@ -18,10 +17,10 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
   method,
   mode = FORM_MODE.NEW,
   redirectTo,
+  successMessage,
   ...props
 }) => {
   const { t } = useTranslation([AUTH]);
-  const { replace } = useRouter();
   const { signIn, usernameUpdate } = useSignInResource();
 
   const handleSubmit = async (form: SignInFormModel): Promise<void> =>
@@ -31,7 +30,7 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
     <StepForm
       {...props}
       onSubmit={handleSubmit}
-      onSuccess={async () => replace({ pathname: redirectTo ?? '/' })}
+      redirectTo={redirectTo}
       steps={[
         {
           element: (
@@ -45,6 +44,7 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
         },
         { element: <OtpForm />, id: 'otp', title: t('auth:otp') },
       ]}
+      successMessage={successMessage}
       topElement={
         mode === FORM_MODE.UPDATE ? undefined : (
           <Wrapper

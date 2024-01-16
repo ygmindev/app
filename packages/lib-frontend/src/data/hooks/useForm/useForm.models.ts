@@ -12,7 +12,7 @@ export type UseFormParamsModel<TType, TResult = void> = AsyncPropsModel &
     'initialValues' | 'onSubmit' | 'onSuccess' | 'onComplete' | 'onError'
   > & {
     isValidateChanged?: boolean;
-    redirect?: LocationModel;
+    redirectTo?: LocationModel;
     successMessage?: TranslatableTextModel;
     validators?: FormValidatorsModel<TType>;
   };

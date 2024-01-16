@@ -74,7 +74,7 @@ const FormContainerF = forwardRef(
       onError,
       onSubmit,
       onSuccess,
-      redirect,
+      redirectTo,
       submitLabel,
       successMessage,
       topElement,
@@ -140,7 +140,7 @@ const FormContainerF = forwardRef(
         onError,
         onSubmit: onSubmitF,
         onSuccess,
-        redirect,
+        redirectTo,
         successMessage,
         validators,
       });

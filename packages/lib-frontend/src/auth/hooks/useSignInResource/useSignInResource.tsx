@@ -1,8 +1,6 @@
 import { useSession } from '@lib-frontend/auth/hooks/useSession/useSession';
 import { type UseSignInResourceModel } from '@lib-frontend/auth/hooks/useSignInResource/useSignInResource.models';
 import { useAppGraphQl } from '@lib-frontend/data/hooks/useAppGraphQl/useAppGraphQl';
-import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useNotification } from '@lib-frontend/notification/hooks/useNotification/useNotification';
 import { useResourceMethod } from '@lib-frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { useActions } from '@lib-frontend/state/hooks/useActions/useActions';
 import { useStore } from '@lib-frontend/state/hooks/useStore/useStore';
@@ -32,10 +30,6 @@ export const useSignInResource = (): UseSignInResourceModel => {
   const [, currentUserSet] = useStore('user.currentUser');
   const { identify, reset } = useTracking();
   const { signInWithToken, signOut } = useSession();
-  const { success } = useNotification();
-  const { t } = useTranslation();
-
-  const handleUpdateSuccess = (): void => success({ description: t('core:updateSuccess') });
 
   const signIn = async (signIn?: PartialModel<SignInModel>): Promise<void> => {
     if (signIn) {
@@ -96,7 +90,6 @@ export const useSignInResource = (): UseSignInResourceModel => {
       if (output?.result) {
         await signIn(output.result);
         actions?.user.currentUserUpdate(output.result.user);
-        handleUpdateSuccess();
       } else {
         throw new UnauthorizedError();
       }
@@ -105,7 +98,6 @@ export const useSignInResource = (): UseSignInResourceModel => {
     usernameUpdate: async (form) => {
       const { result } = await usernameUpdate({ form });
       await signIn(result);
-      handleUpdateSuccess();
     },
   };
 };

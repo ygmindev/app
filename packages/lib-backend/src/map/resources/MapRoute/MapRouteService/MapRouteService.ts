@@ -1,6 +1,3 @@
-import round from 'lodash/round';
-import toNumber from 'lodash/toNumber';
-
 import { withContainer } from '@lib-backend/core/utils/withContainer/withContainer';
 import { HttpService } from '@lib-backend/http/utils/HttpService/HttpService';
 import { PRICING_TABLE } from '@lib-backend/map/resources/MapRoute/MapRouteService/MapRouteService.constants';
@@ -14,6 +11,8 @@ import {
   type MapRouteServiceModel,
 } from '@lib-shared/map/resources/MapRoute/MapRouteService/MapRouteService.models';
 import { type CoordinateModel } from '@lib-shared/map/utils/Coordinate/Coordinate.models';
+import round from 'lodash/round';
+import toNumber from 'lodash/toNumber';
 
 const getPrice = ({
   distanceMeters,
