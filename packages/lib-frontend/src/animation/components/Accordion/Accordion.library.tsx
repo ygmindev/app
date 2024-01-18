@@ -8,7 +8,7 @@ export const props: LibraryPropsModel<AccordionPropsModel> = {
   Component: Accordion,
   defaultProps: {
     children: <WrapperFixture />,
-    label: 'label',
+    description: 'label',
   },
   variants: [{ props: { defaultValue: ELEMENT_STATE.ACTIVE } }],
 };

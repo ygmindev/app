@@ -16,7 +16,7 @@ export const props: LibraryPropsModel<NotificationsPropsModel> = {
           <Button
             color={color}
             key={color}
-            onPress={() => add({ color, message: color })}>
+            onPress={() => add({ color, description: color })}>
             Notify
           </Button>
         ))}

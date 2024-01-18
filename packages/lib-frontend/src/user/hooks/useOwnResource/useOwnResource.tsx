@@ -5,6 +5,7 @@ import {
   type UseOwnResourceParamsModel,
 } from '@lib-frontend/user/hooks/useOwnResource/useOwnResource.models';
 import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { collapseFilter } from '@lib-shared/resource/utils/collapseFilter/collapseFilter';
 import { USER_RESOURCE_NAME } from '@lib-shared/user/resources/User/User.constants';
 import filter from 'lodash/filter';
 
@@ -32,7 +33,10 @@ export const useOwnResource = <TType, TForm = EntityResourceDataModel<TType>>({
         params.output.result &&
         currentUserSet({
           ...currentUser,
-          [name]: filter((currentUser[name] as Array<unknown>) ?? [], params.output.result),
+          [name]: filter(
+            (currentUser[name] as Array<unknown>) ?? [],
+            collapseFilter(params.input?.filter),
+          ),
         });
       return afterRemove ? afterRemove(params) : params.output;
     },

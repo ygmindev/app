@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-
 import {
   USERNAME_FORM_TEST_ID,
   USERNAME_FORM_VALIDATORS,
@@ -26,12 +24,12 @@ import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLa
 import { PhoneField } from '@lib-frontend/user/components/PhoneField/PhoneField';
 import { AUTH, SIGN_IN_METHOD } from '@lib-shared/auth/auth.constants';
 import { type SignInMethodModel } from '@lib-shared/auth/auth.models';
-import { type OtpFormModel, type OtpModel } from '@lib-shared/auth/resources/Otp/Otp.models';
+import { type OtpFormModel } from '@lib-shared/auth/resources/Otp/Otp.models';
 import { pick } from '@lib-shared/core/utils/pick/pick';
 import { FORM_MODE } from '@lib-shared/data/data.constants';
 import { type HttpError } from '@lib-shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib-shared/http/http.constants';
-import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { useMemo } from 'react';
 
 export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
   method,
@@ -53,16 +51,14 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
   const [currentUser] = useStore('user.currentUser');
   const checkExists = mode === FORM_MODE.UPDATE;
 
-  const handleSubmit = async (
-    data: UsernameFormModel,
-  ): Promise<EntityResourceDataModel<OtpModel> | null> => {
+  const handleSubmit = async (data: UsernameFormModel): Promise<void> => {
     onSubmit && (await onSubmit(data));
     const form: OtpFormModel = pick(data, ['callingCode', 'phone', 'email']);
     if (checkExists) {
       form.checkExists = true;
     }
     const { result } = await create({ form });
-    return result ?? null;
+    result && onSuccess && (await onSuccess());
   };
 
   const fields: Array<FormFieldModel<UsernameFormModel>> = useMemo(() => {
@@ -149,7 +145,6 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
       isVerticalCenter
       onComplete={onComplete}
       onSubmit={handleSubmit}
-      onSuccess={onSuccess}
       testID={USERNAME_FORM_TEST_ID}
       validators={USERNAME_FORM_VALIDATORS}
     />

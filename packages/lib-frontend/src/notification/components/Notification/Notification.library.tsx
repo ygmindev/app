@@ -6,7 +6,7 @@ import { type LibraryPropsModel } from '@lib-library/core/components/Library/Lib
 export const props: LibraryPropsModel<NotificationPropsModel> = {
   Component: Notification,
   category: 'notification',
-  defaultProps: { id: 'id', isInfinite: true, message: 'message' },
+  defaultProps: { description: 'message', id: 'id', isInfinite: true },
   variants: [
     ...Object.values(THEME_COLOR).map((color) => ({ props: { color } })),
     { props: { icon: 'personCircle' } },

@@ -20,7 +20,6 @@ export const props: LibraryPropsModel<TextFieldPropsModel> = {
     { props: { label: 'label', rightElement: <Icon icon="personCircle" /> } },
     { props: { error: true } },
     { props: { error: 'error' } },
-    { props: { mask: 'XXX-XXX' } },
     ...Object.values(ELEMENT_STATE).map((elementState) => ({ props: { elementState } })),
   ],
 };

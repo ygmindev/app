@@ -7,7 +7,6 @@ import { type PartialModel } from '@lib-shared/core/core.models';
 import { DuplicateError } from '@lib-shared/core/errors/DuplicateError/DuplicateError';
 import { UninitializedError } from '@lib-shared/core/errors/UninitializedError/UninitializedError';
 import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
-import { stringify } from '@lib-shared/core/utils/stringify/stringify';
 import { debug, info } from '@lib-shared/logging/utils/logger/logger';
 import { type RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
 import { type ResourceNameParamsModel } from '@lib-shared/resource/resource.models';
@@ -200,6 +199,7 @@ export class _Database implements _DatabaseModel {
         const filterF = getFilter<TType>(filter);
         const entity = await service.get({ filter });
         await em.getRepository(name).nativeDelete(filterF);
+        // TODO: don't return for remove?
         return entity as unknown as OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType>;
       },
 
@@ -218,10 +218,6 @@ export class _Database implements _DatabaseModel {
               delete updateF[keyF];
             }
           });
-        console.warn(filterF);
-        console.warn(stringify(update));
-        console.warn(stringify(updateF));
-        console.warn('\n\n');
         const { value: result } = await em
           .getConnection()
           .getCollection(name)

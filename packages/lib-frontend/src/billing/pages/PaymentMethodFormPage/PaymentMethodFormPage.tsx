@@ -1,4 +1,4 @@
-import { PAYMENT_METHOD } from '@lib-frontend/billing/billing.constants';
+import { BILLING, PAYMENT_METHOD } from '@lib-frontend/billing/billing.constants';
 import { PaymentMethodField } from '@lib-frontend/billing/components/PaymentMethodField/PaymentMethodField';
 import { useBankResource } from '@lib-frontend/billing/hooks/useBankResource/useBankResource';
 import { useCardResource } from '@lib-frontend/billing/hooks/useCardResource/useCardResource';
@@ -13,6 +13,7 @@ import {
   PAYMENT_METHOD_TYPE,
 } from '@lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodFormModel } from '@lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { ACCOUNT } from '@lib-shared/user/user.constants';
 
 export const PaymentMethodFormPage: LFCModel<PaymentMethodFormPagePropsModel> = ({ ...props }) => {
   const { t } = useTranslation();
@@ -42,7 +43,7 @@ export const PaymentMethodFormPage: LFCModel<PaymentMethodFormPagePropsModel> = 
         }
       }}
       p
-      redirectTo={{ pathname: PAYMENT_METHOD }}
+      redirectTo={{ pathname: `${ACCOUNT}/${BILLING}/${PAYMENT_METHOD}` }}
       successMessage={t()}
     />
   );

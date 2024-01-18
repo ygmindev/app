@@ -7,7 +7,12 @@ import { FORM_MODE } from '@lib-shared/data/data.constants';
 
 export const authRoutes: Array<RouteModel> = [
   {
-    element: <SignInPage mode={FORM_MODE.NEW} />,
+    element: (
+      <SignInPage
+        mode={FORM_MODE.NEW}
+        redirectTo={{ pathname: '/' }}
+      />
+    ),
     pathname: SIGN_IN,
   },
 

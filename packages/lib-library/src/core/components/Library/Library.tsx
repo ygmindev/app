@@ -1,9 +1,9 @@
 import { Text } from '@lib-frontend/core/components/Text/Text';
 import { VirtualizedList } from '@lib-frontend/core/components/VirtualizedList/VirtualizedList';
 import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { type SFCPropsModel } from '@lib-frontend/core/core.models';
+import { type LFCPropsModel } from '@lib-frontend/core/core.models';
 import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useStyles } from '@lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '@lib-frontend/style/style.constants';
 import { FONT_STYLE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import {
@@ -21,8 +21,14 @@ import keys from 'lodash/keys';
 import map from 'lodash/map';
 import mapValues from 'lodash/mapValues';
 import toString from 'lodash/toString';
-import { type Attributes, type ComponentType, type ReactElement } from 'react';
-import { createElement, isValidElement, useMemo } from 'react';
+import {
+  type Attributes,
+  type ComponentType,
+  createElement,
+  isValidElement,
+  type ReactElement,
+  useMemo,
+} from 'react';
 
 export const Library = <TProps,>({
   Component,
@@ -31,13 +37,12 @@ export const Library = <TProps,>({
   minWidth,
   name,
   propTypes,
-  testID,
   variants,
   ...props
-}: SFCPropsModel<LibraryPropsModel<TProps>>): ReactElement<
-  SFCPropsModel<LibraryPropsModel<TProps>>
+}: LFCPropsModel<LibraryPropsModel<TProps>>): ReactElement<
+  LFCPropsModel<LibraryPropsModel<TProps>>
 > => {
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation();
 
   const categories = useMemo(
@@ -56,7 +61,7 @@ export const Library = <TProps,>({
       : isValidElement(value)
         ? 'Element'
         : isFunction(value)
-          ? value?.prototype?.isReactComponent ||
+          ? (value?.prototype as { isReactComponent: boolean })?.isReactComponent ||
             toString(value).includes('return React.createElement')
             ? 'Element'
             : 'function'
@@ -66,10 +71,9 @@ export const Library = <TProps,>({
 
   return (
     <Wrapper
+      {...wrapperProps}
       grow
-      s
-      style={styles}
-      testID={testID}>
+      s>
       {name && <Text fontStyle={FONT_STYLE.HEADLINE}>{name}</Text>}
 
       {propTypes && (
@@ -117,12 +121,12 @@ export const Library = <TProps,>({
             isHorizontal
             items={v}
             render={({
-              _id,
+              id,
               name: variantName,
               props: variantProps,
             }: LibraryVariantModel<TProps> & WithIdModel<string>) => (
               <Wrapper
-                key={_id}
+                key={id}
                 pBottom
                 s={THEME_SIZE.SMALL}>
                 <Wrapper

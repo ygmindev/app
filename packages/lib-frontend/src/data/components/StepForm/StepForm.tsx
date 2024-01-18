@@ -1,6 +1,3 @@
-import { type ReactElement, useEffect, useRef } from 'react';
-import { cloneElement, useState } from 'react';
-
 import { Appearable } from '@lib-frontend/animation/components/Appearable/Appearable';
 import { Slides } from '@lib-frontend/animation/components/Slides/Slides';
 import { Button } from '@lib-frontend/core/components/Button/Button';
@@ -18,11 +15,14 @@ import { THEME_COLOR, THEME_SIZE } from '@lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { type PartialModel } from '@lib-shared/core/core.models';
 import { sleep } from '@lib-shared/core/utils/sleep/sleep';
+import { type ReactElement, useEffect, useRef } from 'react';
+import { cloneElement, useState } from 'react';
 
 export const StepForm = <TType, TResult = void>({
   initialValues,
   onSubmit,
   onSuccess,
+  redirectTo,
   steps,
   topElement,
   ...props
@@ -41,7 +41,7 @@ export const StepForm = <TType, TResult = void>({
     isLoading: isLoadingF,
     values,
     valuesSet,
-  } = useForm<TType, TResult>({ initialValues, onSubmit, onSuccess });
+  } = useForm<TType, TResult>({ initialValues, onSubmit, onSuccess, redirectTo });
 
   const handleCurrentSet = async (value: number): Promise<void> => {
     currentSet(value);

@@ -1,4 +1,3 @@
-import { Logo } from '@lib-frontend/app/components/Logo/Logo';
 import { Tile } from '@lib-frontend/core/components/Tile/Tile';
 import { type TilePropsModel } from '@lib-frontend/core/components/Tile/Tile.models';
 import { WrapperFixture } from '@lib-frontend/core/components/Wrapper/Wrapper.fixtures';
@@ -9,7 +8,6 @@ export const props: LibraryPropsModel<TilePropsModel> = {
   defaultProps: {
     description: 'description',
     icon: 'personCircle',
-    preview: <Logo />,
     title: 'title',
   },
   variants: [

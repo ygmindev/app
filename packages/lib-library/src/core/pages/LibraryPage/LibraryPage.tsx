@@ -1,10 +1,10 @@
-import { type OptionModel, type SFCModel } from '@lib-frontend/core/core.models';
+import { type LFCModel, type OptionModel } from '@lib-frontend/core/core.models';
 import { NavigationLayout } from '@lib-frontend/core/layouts/NavigationLayout/NavigationLayout';
 import { getComponentDisplayName } from '@lib-frontend/core/utils/getComponentDisplayName/getComponentDisplayName';
 import { useRouter } from '@lib-frontend/route/hooks/useRouter/useRouter';
 import { NotFoundPage } from '@lib-frontend/route/pages/NotFoundPage/NotFoundPage';
 import { trimPathname } from '@lib-frontend/route/utils/trimPathname/trimPathname';
-import { useStyles } from '@lib-frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { Library } from '@lib-library/core/components/Library/Library';
 import { type LibraryPropsModel } from '@lib-library/core/components/Library/Library.models';
 import { LIBRARY_PROPS } from '@lib-library/core/pages/LibraryPage/LibraryPage.constants';
@@ -21,24 +21,23 @@ const libraries = LIBRARY_PROPS.map(({ name, ...props }) => {
   return { _id: id, name: id, pathname: trimPathname(id), ...props };
 });
 
-export const LibraryPage: SFCModel<LibraryPagePropsModel> = ({ testID, ...props }) => {
-  const { styles } = useStyles({ props });
+export const LibraryPage: LFCModel<LibraryPagePropsModel> = ({ ...props }) => {
+  const { wrapperProps } = useLayoutStyles({ props });
   const { location, push } = useRouter<LibraryPageParamsModel>();
-  const value = location.params?._id;
+  const value = location.params?.id;
   const valueF = value && trimPathname(value);
-
-  const options: Array<OptionModel> = libraries.map((params) => ({
-    ...params,
-    label: params._id,
-    onPress: () => push({ pathname: params._id }),
+  const library = valueF && find(libraries, { pathname: valueF });
+  const options: Array<OptionModel> = libraries.map((library) => ({
+    ...library,
+    id: library._id,
+    label: library._id,
+    onPress: () => push({ pathname: library._id }),
   }));
 
-  const library = valueF && find(libraries, { pathname: valueF });
   return (
     <NavigationLayout
+      {...wrapperProps}
       options={options}
-      style={styles}
-      testID={testID}
       value={value}>
       {library ? (
         <Library<unknown> {...(library as LibraryPropsModel<unknown>)} />

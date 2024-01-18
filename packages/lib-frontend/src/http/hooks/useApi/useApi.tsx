@@ -1,6 +1,3 @@
-import toNumber from 'lodash/toNumber';
-import { useRef } from 'react';
-
 import { useCredentials } from '@lib-frontend/auth/hooks/useCredentials/useCredentials';
 import {
   type UseApiModel,
@@ -8,6 +5,8 @@ import {
 } from '@lib-frontend/http/hooks/useApi/useApi.models';
 import { useHttp } from '@lib-frontend/http/hooks/useHttp/useHttp';
 import { type CredentialsModel } from '@lib-shared/auth/auth.models';
+import toNumber from 'lodash/toNumber';
+import { useRef } from 'react';
 
 export const useApi = ({
   host,
