@@ -1,5 +1,3 @@
-import { type ReactElement } from 'react';
-
 import { type AsyncBoundaryPropsModel } from '@lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import {
   type ChildrenPropsModel,
@@ -11,6 +9,7 @@ import { type UseQueryParamsModel } from '@lib-frontend/data/hooks/useQuery/useQ
 import { type TranslatableTextModel } from '@lib-frontend/locale/locale.models';
 import { type NilModel, type PartialModel } from '@lib-shared/core/core.models';
 import { type WithIdModel } from '@lib-shared/core/utils/withId/withId.models';
+import { type ReactElement } from 'react';
 
 export type DataBoundaryPropsModel<TParams = undefined, TResult = void> = Omit<
   AsyncBoundaryPropsModel,
@@ -37,6 +36,7 @@ export type QueryComponentPropsModel<TParams = undefined, TResult = void> = With
 
 export type QueryComponentRefModel = {
   query?(): Promise<void>;
+  reset?(): Promise<void>;
 };
 
 export type MutateComponentPropsModel<TParams = undefined, TResult = void> = WithIdModel &
@@ -51,4 +51,5 @@ export type MutateComponentPropsModel<TParams = undefined, TResult = void> = Wit
 
 export type MutateComponentRefModel = {
   mutate?(): Promise<void>;
+  reset?(): Promise<void>;
 };

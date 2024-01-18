@@ -1,6 +1,3 @@
-import forEach from 'lodash/forEach';
-import reduce from 'lodash/reduce';
-
 import { Container } from '@lib-backend/core/utils/Container/Container';
 import { getFilter } from '@lib-backend/database/utils/Database/_Database';
 import { getConnection } from '@lib-backend/database/utils/getConnection/getConnection';
@@ -24,6 +21,8 @@ import { type InputModel } from '@lib-shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib-shared/resource/utils/Output/Output.models';
 import { type RootInputModel } from '@lib-shared/resource/utils/Root/Root.models';
 import { type UpdateModel } from '@lib-shared/resource/utils/Update/Update.models';
+import forEach from 'lodash/forEach';
+import reduce from 'lodash/reduce';
 
 export const createEmbeddedResourceService = <
   TType extends EmbeddedResourceModel,

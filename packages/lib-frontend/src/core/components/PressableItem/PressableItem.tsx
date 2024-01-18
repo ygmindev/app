@@ -12,13 +12,13 @@ import { FLEX_JUSTIFY } from '@lib-frontend/style/utils/styler/flexStyler/flexSt
 export const PressableItem: LFCModel<PressableItemPropsModel> = ({
   color,
   elementState,
+  fontStyle,
   icon,
   image,
   onPress,
   pVertical = THEME_SIZE.SMALL,
   rightElement,
   title,
-  type,
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -42,13 +42,13 @@ export const PressableItem: LFCModel<PressableItemPropsModel> = ({
           {...wrapperProps}
           color={color}
           elementState={elementState}
+          fontStyle={fontStyle}
           icon={icon}
           image={image}
           onPress={onPress}
           pVertical={pVertical}
           rightElement={rightElementF && rightElementF(isActive)}
           title={title}
-          type={type}
         />
       )}
     </Activatable>

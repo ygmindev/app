@@ -112,7 +112,7 @@ export const createResourceService = <
         context,
       );
       return this.decorators.afterCreate
-        ? this.decorators.afterCreate({ output }, context)
+        ? this.decorators.afterCreate({ input: inputF, output }, context)
         : output;
     }
 
@@ -132,7 +132,7 @@ export const createResourceService = <
         context,
       );
       return this.decorators.afterCreateMany
-        ? this.decorators.afterCreateMany({ output }, context)
+        ? this.decorators.afterCreateMany({ input: inputF, output }, context)
         : output;
     }
 
@@ -149,7 +149,9 @@ export const createResourceService = <
         inputF,
         context,
       );
-      return this.decorators.afterGet ? this.decorators.afterGet({ output }, context) : output;
+      return this.decorators.afterGet
+        ? this.decorators.afterGet({ input: inputF, output }, context)
+        : output;
     }
 
     async getMany(
@@ -168,7 +170,7 @@ export const createResourceService = <
         context,
       );
       return this.decorators.afterGetMany
-        ? this.decorators.afterGetMany({ output }, context)
+        ? this.decorators.afterGetMany({ input: inputF, output }, context)
         : output;
     }
 
@@ -186,7 +188,7 @@ export const createResourceService = <
       const output: OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot> =
         await getConnection(inputF, context);
       return this.decorators.afterGetConnection
-        ? this.decorators.afterGetConnection({ output }, context)
+        ? this.decorators.afterGetConnection({ input: inputF, output }, context)
         : output;
     }
 
@@ -206,7 +208,7 @@ export const createResourceService = <
         context,
       );
       return this.decorators.afterUpdate
-        ? this.decorators.afterUpdate({ output }, context)
+        ? this.decorators.afterUpdate({ input: inputF, output }, context)
         : output;
     }
 
@@ -226,7 +228,7 @@ export const createResourceService = <
         context,
       );
       return this.decorators.afterRemove
-        ? this.decorators.afterRemove({ output }, context)
+        ? this.decorators.afterRemove({ input: inputF, output }, context)
         : output;
     }
 

@@ -1,9 +1,3 @@
-import { MikroORM } from '@mikro-orm/core';
-import { type EntityManager } from '@mikro-orm/mongodb';
-import isString from 'lodash/isString';
-import last from 'lodash/last';
-import { type Document, type Filter, type MongoError, ObjectId, type UpdateFilter } from 'mongodb';
-
 import { cleanDocument } from '@lib-backend/database/utils/cleanDocument/cleanDocument';
 import { type _DatabaseModel } from '@lib-backend/database/utils/Database/_Database.models';
 import { type RepositoryModel } from '@lib-backend/database/utils/Database/Database.models';
@@ -13,6 +7,7 @@ import { type PartialModel } from '@lib-shared/core/core.models';
 import { DuplicateError } from '@lib-shared/core/errors/DuplicateError/DuplicateError';
 import { UninitializedError } from '@lib-shared/core/errors/UninitializedError/UninitializedError';
 import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
+import { stringify } from '@lib-shared/core/utils/stringify/stringify';
 import { debug, info } from '@lib-shared/logging/utils/logger/logger';
 import { type RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
 import { type ResourceNameParamsModel } from '@lib-shared/resource/resource.models';
@@ -24,6 +19,11 @@ import {
 } from '@lib-shared/resource/utils/Filter/Filter.models';
 import { type OutputModel } from '@lib-shared/resource/utils/Output/Output.models';
 import { type UpdateModel } from '@lib-shared/resource/utils/Update/Update.models';
+import { MikroORM } from '@mikro-orm/core';
+import { type EntityManager } from '@mikro-orm/mongodb';
+import isString from 'lodash/isString';
+import last from 'lodash/last';
+import { type Document, type Filter, type MongoError, ObjectId, type UpdateFilter } from 'mongodb';
 
 export const getFilter = <TType extends unknown>(
   filters?: Array<FilterModel<TType>>,
@@ -218,6 +218,10 @@ export class _Database implements _DatabaseModel {
               delete updateF[keyF];
             }
           });
+        console.warn(filterF);
+        console.warn(stringify(update));
+        console.warn(stringify(updateF));
+        console.warn('\n\n');
         const { value: result } = await em
           .getConnection()
           .getCollection(name)

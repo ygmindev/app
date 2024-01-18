@@ -8,7 +8,7 @@ import { type GroupTypesFormPropsModel } from '@lib-frontend/group/containers/Gr
 import { GROUP } from '@lib-frontend/group/group.constants';
 import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { FONT_TYPE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { FONT_STYLE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 export const GroupTypesForm: LFCModel<GroupTypesFormPropsModel> = ({
   initialValues,
@@ -35,7 +35,7 @@ export const GroupTypesForm: LFCModel<GroupTypesFormPropsModel> = ({
       onError={onError}
       onSubmit={onSubmit}
       onSuccess={onSuccess}
-      topElement={() => <Text type={FONT_TYPE.HEADLINE}>{t('group:nameFormMessage')}</Text>}
+      topElement={() => <Text fontStyle={FONT_STYLE.HEADLINE}>{t('group:nameFormMessage')}</Text>}
       validators={{ types: validateNotEmpty }}
     />
   );

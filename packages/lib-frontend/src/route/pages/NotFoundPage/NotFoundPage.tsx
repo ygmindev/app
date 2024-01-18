@@ -4,7 +4,7 @@ import { type SFCModel } from '@lib-frontend/core/core.models';
 import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { type NotFoundPagePropsModel } from '@lib-frontend/route/pages/NotFoundPage/NotFoundPage.models';
 import { useStyles } from '@lib-frontend/style/hooks/useStyles/useStyles';
-import { FONT_TYPE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { FONT_STYLE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 export const NotFoundPage: SFCModel<NotFoundPagePropsModel> = ({ testID, ...props }) => {
   const { styles } = useStyles({ props });
@@ -15,7 +15,7 @@ export const NotFoundPage: SFCModel<NotFoundPagePropsModel> = ({ testID, ...prop
       isCenter
       style={styles}
       testID={testID}>
-      <Text type={FONT_TYPE.TITLE}>{t('core:notFound')}</Text>
+      <Text fontStyle={FONT_STYLE.TITLE}>{t('core:notFound')}</Text>
     </Wrapper>
   );
 };

@@ -1,5 +1,3 @@
-import { useRef } from 'react';
-
 import { ANIMATION_STATES_APPEARABLE } from '@lib-frontend/animation/animation.constants';
 import { Appearable } from '@lib-frontend/animation/components/Appearable/Appearable';
 import { Button } from '@lib-frontend/core/components/Button/Button';
@@ -16,8 +14,9 @@ import { useStore } from '@lib-frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR_MORE } from '@lib-frontend/style/style.constants';
-import { FONT_TYPE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { FONT_STYLE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { useRef } from 'react';
 
 export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, ...props }) => {
   const { t } = useTranslation();
@@ -56,7 +55,7 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, ...props }
       )}
 
       <Appearable isActive={!!route.title}>
-        <Text type={FONT_TYPE.SUBTITLE}>{t(route.title)}</Text>
+        <Text fontStyle={FONT_STYLE.SUBTITLE}>{t(route.title)}</Text>
       </Appearable>
     </Wrapper>
   );

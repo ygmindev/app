@@ -2,9 +2,11 @@ import { type PressableItemPropsModel } from '@lib-frontend/core/components/Pres
 import { type TilePropsModel } from '@lib-frontend/core/components/Tile/Tile.models';
 import { type TranslatableTextModel } from '@lib-frontend/locale/locale.models';
 import { type WithIdModel } from '@lib-shared/core/utils/withId/withId.models';
+import { type ReactElement } from 'react';
 
-export type ItemListPropsModel = Pick<TilePropsModel, 'title'> & {
+export type ItemListPropsModel<TType extends WithIdModel> = Pick<TilePropsModel, 'title'> & {
   emptyString?: TranslatableTextModel;
   isSearchable?: boolean;
-  items?: Array<WithIdModel & PressableItemPropsModel>;
+  items?: Array<TType & PressableItemPropsModel>;
+  rightElement?(params: { isActive?: boolean; item: TType }): ReactElement;
 };

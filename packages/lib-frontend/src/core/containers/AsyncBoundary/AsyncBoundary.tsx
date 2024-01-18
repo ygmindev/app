@@ -1,6 +1,3 @@
-import noop from 'lodash/noop';
-import { createContext, Suspense, useState } from 'react';
-
 import { Button } from '@lib-frontend/core/components/Button/Button';
 import { Icon } from '@lib-frontend/core/components/Icon/Icon';
 import { Loading } from '@lib-frontend/core/components/Loading/Loading';
@@ -17,8 +14,10 @@ import { TranslatableText } from '@lib-frontend/locale/components/TranslatableTe
 import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR_MORE, THEME_SIZE, THEME_SIZE_MORE } from '@lib-frontend/style/style.constants';
-import { FONT_TYPE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { FONT_STYLE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import noop from 'lodash/noop';
+import { createContext, Suspense, useState } from 'react';
 
 export const asyncBoundaryContext = createContext<AsyncBoundaryContextModel>({
   errorContextSet: noop,
@@ -56,7 +55,9 @@ export const AsyncBoundary: LFCModel<AsyncBoundaryPropsModel> = ({
               />
 
               {errorContext.title && (
-                <TranslatableText type={FONT_TYPE.HEADLINE}>{errorContext.title}</TranslatableText>
+                <TranslatableText fontStyle={FONT_STYLE.HEADLINE}>
+                  {errorContext.title}
+                </TranslatableText>
               )}
 
               {errorContext.description && (

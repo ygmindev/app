@@ -1,8 +1,3 @@
-import find from 'lodash/find';
-import lowerCase from 'lodash/lowerCase';
-import { type ForwardedRef, forwardRef, type ReactElement, useState } from 'react';
-import { useRef } from 'react';
-
 import { AnimatableView } from '@lib-frontend/animation/components/AnimatableView/AnimatableView';
 import { Icon } from '@lib-frontend/core/components/Icon/Icon';
 import { Menu } from '@lib-frontend/core/components/Menu/Menu';
@@ -21,6 +16,10 @@ import { useValueControlled } from '@lib-frontend/data/hooks/useValueControlled/
 import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useSearch } from '@lib-frontend/search/hooks/useSearch/useSearch';
 import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import find from 'lodash/find';
+import lowerCase from 'lodash/lowerCase';
+import { type ForwardedRef, forwardRef, type ReactElement, useState } from 'react';
+import { useRef } from 'react';
 
 export const DropdownField = forwardRef(
   <TType extends MenuOptionModel = MenuOptionModel>(
@@ -58,11 +57,11 @@ export const DropdownField = forwardRef(
     const menuRef = useRef<MenuRefModel>(null);
 
     const { query, result, search } = useSearch<TType>({
-      keys: ['label', 'id'],
-      list: options.map(({ label, ...option }) => ({
+      items: options.map(({ label, ...option }) => ({
         ...option,
         label: label ? t(label) : undefined,
       })) as Array<TType>,
+      keys: ['label', 'id'],
       onChange: () => menuRef.current?.scrollTo({ x: 0, y: 0 }),
     });
     const optionsF = result.length > 0 ? result : options;

@@ -62,9 +62,13 @@ export type ResourceServiceBeforeDecoratorModel<
 export type ResourceServiceAfterDecoratorModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
+  TForm,
   TRoot = undefined,
 > = (
-  params: { output: OutputModel<TMethod, TType, TRoot> },
+  params: {
+    input?: InputModel<TMethod, TType, TForm, TRoot>;
+    output: OutputModel<TMethod, TType, TRoot>;
+  },
   context?: ContextModel,
 ) => Promise<OutputModel<TMethod, TType, TRoot>>;
 
@@ -73,21 +77,43 @@ export type ResourceServiceDecoratorModel<
   TForm,
   TRoot = undefined,
 > = RootInputModel<TRoot> & {
-  afterCreate?: ResourceServiceAfterDecoratorModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>;
+  afterCreate?: ResourceServiceAfterDecoratorModel<
+    RESOURCE_METHOD_TYPE.CREATE,
+    TType,
+    TForm,
+    TRoot
+  >;
   afterCreateMany?: ResourceServiceAfterDecoratorModel<
     RESOURCE_METHOD_TYPE.CREATE_MANY,
     TType,
+    TForm,
     TRoot
   >;
-  afterGet?: ResourceServiceAfterDecoratorModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>;
+  afterGet?: ResourceServiceAfterDecoratorModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>;
   afterGetConnection?: ResourceServiceAfterDecoratorModel<
     RESOURCE_METHOD_TYPE.GET_CONNECTION,
     TType,
+    TForm,
     TRoot
   >;
-  afterGetMany?: ResourceServiceAfterDecoratorModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>;
-  afterRemove?: ResourceServiceAfterDecoratorModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>;
-  afterUpdate?: ResourceServiceAfterDecoratorModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>;
+  afterGetMany?: ResourceServiceAfterDecoratorModel<
+    RESOURCE_METHOD_TYPE.GET_MANY,
+    TType,
+    TForm,
+    TRoot
+  >;
+  afterRemove?: ResourceServiceAfterDecoratorModel<
+    RESOURCE_METHOD_TYPE.REMOVE,
+    TType,
+    TForm,
+    TRoot
+  >;
+  afterUpdate?: ResourceServiceAfterDecoratorModel<
+    RESOURCE_METHOD_TYPE.UPDATE,
+    TType,
+    TForm,
+    TRoot
+  >;
   beforeCreate?: ResourceServiceBeforeDecoratorModel<
     RESOURCE_METHOD_TYPE.CREATE,
     TType,

@@ -1,3 +1,19 @@
+import { Text } from '@lib-frontend/core/components/Text/Text';
+import { VirtualizedList } from '@lib-frontend/core/components/VirtualizedList/VirtualizedList';
+import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
+import { type SFCPropsModel } from '@lib-frontend/core/core.models';
+import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
+import { useStyles } from '@lib-frontend/style/hooks/useStyles/useStyles';
+import { THEME_SIZE } from '@lib-frontend/style/style.constants';
+import { FONT_STYLE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import {
+  type LibraryPropsModel,
+  type LibraryVariantModel,
+} from '@lib-library/core/components/Library/Library.models';
+import { groupBy } from '@lib-shared/core/utils/groupBy/groupBy';
+import { stringify } from '@lib-shared/core/utils/stringify/stringify';
+import { withId } from '@lib-shared/core/utils/withId/withId';
+import { type WithIdModel } from '@lib-shared/core/utils/withId/withId.models';
 import isArray from 'lodash/isArray';
 import isFunction from 'lodash/isFunction';
 import isPlainObject from 'lodash/isPlainObject';
@@ -7,23 +23,6 @@ import mapValues from 'lodash/mapValues';
 import toString from 'lodash/toString';
 import { type Attributes, type ComponentType, type ReactElement } from 'react';
 import { createElement, isValidElement, useMemo } from 'react';
-
-import { Text } from '@lib-frontend/core/components/Text/Text';
-import { VirtualizedList } from '@lib-frontend/core/components/VirtualizedList/VirtualizedList';
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { type SFCPropsModel } from '@lib-frontend/core/core.models';
-import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useStyles } from '@lib-frontend/style/hooks/useStyles/useStyles';
-import { THEME_SIZE } from '@lib-frontend/style/style.constants';
-import { FONT_TYPE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import {
-  type LibraryPropsModel,
-  type LibraryVariantModel,
-} from '@lib-library/core/components/Library/Library.models';
-import { groupBy } from '@lib-shared/core/utils/groupBy/groupBy';
-import { stringify } from '@lib-shared/core/utils/stringify/stringify';
-import { withId } from '@lib-shared/core/utils/withId/withId';
-import { type WithIdModel } from '@lib-shared/core/utils/withId/withId.models';
 
 export const Library = <TProps,>({
   Component,
@@ -55,14 +54,15 @@ export const Library = <TProps,>({
     isArray(value)
       ? `[${value.map(typeToString).join(', ')}]`
       : isValidElement(value)
-      ? 'Element'
-      : isFunction(value)
-      ? value?.prototype?.isReactComponent || toString(value).includes('return React.createElement')
         ? 'Element'
-        : 'function'
-      : isPlainObject(value)
-      ? stringify(mapValues(value as object, typeToString))
-      : toString(value);
+        : isFunction(value)
+          ? value?.prototype?.isReactComponent ||
+            toString(value).includes('return React.createElement')
+            ? 'Element'
+            : 'function'
+          : isPlainObject(value)
+            ? stringify(mapValues(value as object, typeToString))
+            : toString(value);
 
   return (
     <Wrapper
@@ -70,11 +70,11 @@ export const Library = <TProps,>({
       s
       style={styles}
       testID={testID}>
-      {name && <Text type={FONT_TYPE.HEADLINE}>{name}</Text>}
+      {name && <Text fontStyle={FONT_STYLE.HEADLINE}>{name}</Text>}
 
       {propTypes && (
         <Wrapper>
-          <Text type={FONT_TYPE.TITLE}>{t('library:propTypes')}</Text>
+          <Text fontStyle={FONT_STYLE.TITLE}>{t('library:propTypes')}</Text>
 
           {/* <Table
             columns={[
@@ -111,7 +111,7 @@ export const Library = <TProps,>({
           key={toString(k)}
           p
           s>
-          {k && <Text type={FONT_TYPE.TITLE}>{k}</Text>}
+          {k && <Text fontStyle={FONT_STYLE.TITLE}>{k}</Text>}
 
           <VirtualizedList
             isHorizontal

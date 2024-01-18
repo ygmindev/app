@@ -1,8 +1,8 @@
 export type _UseSearchParamsModel<TType> = {
   delay?: number;
+  items: Array<TType>;
   keys: Array<string>;
   limit?: number;
-  list: Array<TType>;
   onChange?(value: string): void;
 };
 

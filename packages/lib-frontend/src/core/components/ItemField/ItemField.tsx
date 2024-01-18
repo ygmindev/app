@@ -1,6 +1,3 @@
-import isFunction from 'lodash/isFunction';
-import range from 'lodash/range';
-
 import { type ItemFieldPropsModel } from '@lib-frontend/core/components/ItemField/ItemField.models';
 import { PressableItem } from '@lib-frontend/core/components/PressableItem/PressableItem';
 import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
@@ -12,6 +9,8 @@ import { SearchField } from '@lib-frontend/search/components/SearchField/SearchF
 import { useSearch } from '@lib-frontend/search/hooks/useSearch/useSearch';
 import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
+import isFunction from 'lodash/isFunction';
+import range from 'lodash/range';
 
 export const ItemField: LFCModel<ItemFieldPropsModel> = ({ id, options, ...props }) =>
   isFunction(options) ? (
@@ -45,8 +44,8 @@ const ItemFieldResult: LFCModel<
     value,
   });
   const { query, result, search } = useSearch({
+    items: options ? options.map(({ label, ...option }) => ({ ...option, label: t(label) })) : [],
     keys: ['label', 'id'],
-    list: options ? options.map(({ label, ...option }) => ({ ...option, label: t(label) })) : [],
   });
 
   return (

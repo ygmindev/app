@@ -1,5 +1,3 @@
-import { forwardRef, useImperativeHandle, useState } from 'react';
-
 import {
   ANIMATION_STATES_APPEARABLE_OPAQUE,
   ANIMATION_STATES_SLIDABLE_VERTICAL,
@@ -23,6 +21,7 @@ import { useStore } from '@lib-frontend/state/hooks/useStore/useStore';
 import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR_MORE, THEME_ROLE, THEME_SIZE } from '@lib-frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { forwardRef, useImperativeHandle, useState } from 'react';
 
 export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
   ({ children, height, isFullSize, isOpen, onToggle, title, width }, ref) => {
@@ -69,7 +68,6 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
                   isFullWidth
                   isShadow
                   onMeasure={measureSet}
-                  p
                   position={SHAPE_POSITION.ABSOLUTE}
                   round={{ [CORNER.TOP_LEFT]: true, [CORNER.TOP_RIGHT]: true }}
                   width={width}>
@@ -96,7 +94,11 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
                       />
                     </Wrapper>
 
-                    <Wrapper flex>{children}</Wrapper>
+                    <Wrapper
+                      flex
+                      p>
+                      {children}
+                    </Wrapper>
                   </KeyboardContainer>
                 </Wrapper>
               )}

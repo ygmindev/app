@@ -1,6 +1,3 @@
-import Fuse from 'fuse.js';
-import { useMemo, useState } from 'react';
-
 import {
   type _UseSearchModel,
   type _UseSearchParamsModel,
@@ -11,25 +8,27 @@ import {
   SEARCH_THRESHOLD,
 } from '@lib-frontend/search/hooks/useSearch/useSearch.constants';
 import { debounce } from '@lib-shared/core/utils/debounce/debounce';
+import Fuse from 'fuse.js';
+import { useMemo, useState } from 'react';
 
 export const _useSearch = <TType,>({
   delay = SEARCH_DELAY,
+  items,
   keys,
   limit = SEARCH_LIMIT,
-  list,
 }: _UseSearchParamsModel<TType>): _UseSearchModel<TType> => {
   const [query, querySet] = useState<string>();
-  const [result, resultSet] = useState<Array<TType>>(list);
+  const [result, resultSet] = useState<Array<TType>>(items);
 
   const searchF = debounce(
     (value: string) => {
-      const resultF = value ? fuse.search(value, { limit }).map(({ item }) => item) : list;
+      const resultF = value ? fuse.search(value, { limit }).map(({ item }) => item) : items;
       resultSet(resultF);
     },
     { duration: delay },
   );
 
-  const fuse = useMemo(() => new Fuse(list, { keys, threshold: SEARCH_THRESHOLD }), [list]);
+  const fuse = useMemo(() => new Fuse(items, { keys, threshold: SEARCH_THRESHOLD }), [items]);
   const search = (value: string): void => {
     querySet(value);
     searchF(value);

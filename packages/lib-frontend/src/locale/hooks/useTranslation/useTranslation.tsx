@@ -1,6 +1,3 @@
-import isFunction from 'lodash/isFunction';
-import { useCallback } from 'react';
-
 import { _useTranslation } from '@lib-frontend/locale/hooks/useTranslation/_useTranslation';
 import {
   type UseTranslationModel,
@@ -8,6 +5,8 @@ import {
 } from '@lib-frontend/locale/hooks/useTranslation/useTranslation.models';
 import { type TranslatableTextModel } from '@lib-frontend/locale/locale.models';
 import { CORE } from '@lib-shared/core/core.constants';
+import isFunction from 'lodash/isFunction';
+import { useCallback } from 'react';
 
 export const useTranslation = (ns: UseTranslationParamsModel = []): UseTranslationModel => {
   const {

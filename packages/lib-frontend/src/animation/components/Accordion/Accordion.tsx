@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { type AccordionPropsModel } from '@lib-frontend/animation/components/Accordion/Accordion.models';
 import { Rotatable } from '@lib-frontend/animation/components/Rotatable/Rotatable';
 import { Button } from '@lib-frontend/core/components/Button/Button';
@@ -15,16 +13,17 @@ import {
 } from '@lib-frontend/core/core.models';
 import { useValueControlled } from '@lib-frontend/data/hooks/useValueControlled/useValueControlled';
 import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useState } from 'react';
 
 export const Accordion: LFCModel<AccordionPropsModel> = ({
   children,
   color,
   defaultValue,
+  fontStyle,
   icon,
   image,
   onChange,
   title,
-  type,
   value,
   ...props
 }) => {
@@ -49,6 +48,7 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
       <PressableItem
         color={color}
         elementState={valueControlled}
+        fontStyle={fontStyle}
         icon={icon}
         image={image}
         mHorizontal
@@ -64,7 +64,6 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
           </Rotatable>
         )}
         title={title}
-        type={type}
       />
 
       <Wrapper

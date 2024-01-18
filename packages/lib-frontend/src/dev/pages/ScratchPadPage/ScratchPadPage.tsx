@@ -8,7 +8,7 @@ import { StepForm } from '@lib-frontend/data/components/StepForm/StepForm';
 import { type ScratchPadPagePropsModel } from '@lib-frontend/dev/pages/ScratchPadPage/ScratchPadPage.models';
 import { useMapRoutes } from '@lib-frontend/map/hooks/useMapRoutes/useMapRoutes';
 import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { FONT_TYPE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { FONT_STYLE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { VEHICLE_TYPE } from '@lib-shared/aroom/aroom.constants';
 import { type GetRouteInputModel } from '@lib-shared/map/resources/MapRoute/MapRouteService/MapRouteService.models';
 
@@ -32,7 +32,7 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
                     id: 'coordinates',
                   },
                 ]}
-                topElement={() => <Text type={FONT_TYPE.HEADLINE}>Add your stops</Text>}
+                topElement={() => <Text fontStyle={FONT_STYLE.HEADLINE}>Add your stops</Text>}
               />
             ),
             id: 'location',
@@ -55,7 +55,7 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
                     id: 'test',
                   },
                 ]}
-                topElement={() => <Text type={FONT_TYPE.HEADLINE}>Choose your vehical type</Text>}
+                topElement={() => <Text fontStyle={FONT_STYLE.HEADLINE}>Choose your vehical type</Text>}
               />
             ),
             id: 'test',

@@ -25,7 +25,7 @@ export type UseResourceMethodParamsModel<
   TRoot = undefined,
 > = ResourceNameParamsModel &
   RootInputModel<TRoot> & {
-    after?: ResourceServiceAfterDecoratorModel<TMethod, TType, TRoot>;
+    after?: ResourceServiceAfterDecoratorModel<TMethod, TType, TForm, TRoot>;
     before?: ResourceServiceBeforeDecoratorModel<TMethod, TType, TForm, TRoot>;
     fields: UseResourceMethodParamsFieldsModel<TMethod, TType, TRoot>;
     method: TMethod;

@@ -13,11 +13,11 @@ export const Item: LFCModel<ItemPropsModel> = ({
   color,
   description,
   elementState,
+  fontStyle,
   icon,
   image,
   rightElement,
   title,
-  type,
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -40,8 +40,8 @@ export const Item: LFCModel<ItemPropsModel> = ({
         <Skeleton elementState={elementState}>
           <Icon
             color={color}
+            fontStyle={fontStyle}
             icon={icon}
-            type={type}
             width={theme.shape.size[THEME_SIZE.SMALL]}
           />
         </Skeleton>
@@ -56,7 +56,7 @@ export const Item: LFCModel<ItemPropsModel> = ({
             flex>
             <TranslatableText
               color={color}
-              type={type}>
+              fontStyle={fontStyle}>
               {title}
             </TranslatableText>
           </Skeleton>
@@ -66,7 +66,11 @@ export const Item: LFCModel<ItemPropsModel> = ({
           <Skeleton
             elementState={elementState}
             flex>
-            <TranslatableText color={color}>{description}</TranslatableText>
+            <TranslatableText
+              color={color}
+              fontStyle={fontStyle}>
+              {description}
+            </TranslatableText>
           </Skeleton>
         )}
       </Wrapper>

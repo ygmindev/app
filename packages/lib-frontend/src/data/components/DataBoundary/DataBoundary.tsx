@@ -1,13 +1,3 @@
-import {
-  cloneElement,
-  type ForwardedRef,
-  forwardRef,
-  type ReactElement,
-  type RefObject,
-  useImperativeHandle,
-  useRef,
-} from 'react';
-
 import { SkeletonGroup } from '@lib-frontend/animation/components/SkeletonGroup/SkeletonGroup';
 import { Loading } from '@lib-frontend/core/components/Loading/Loading';
 import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
@@ -28,7 +18,16 @@ import { useQuery } from '@lib-frontend/data/hooks/useQuery/useQuery';
 import { TranslatableText } from '@lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_ROLE } from '@lib-frontend/style/style.constants';
-import { FONT_TYPE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { FONT_STYLE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import {
+  cloneElement,
+  type ForwardedRef,
+  forwardRef,
+  type ReactElement,
+  type RefObject,
+  useImperativeHandle,
+  useRef,
+} from 'react';
 
 const QueryComponent = forwardRef(
   <TParams = undefined, TResult = void>(
@@ -46,12 +45,17 @@ const QueryComponent = forwardRef(
     RLFCPropsModel<QueryComponentRefModel, QueryComponentPropsModel<TParams, TResult>>
   > => {
     const { wrapperProps } = useLayoutStyles({ props });
-    const { data, query: queryF } = useQuery<TParams, TResult>(id, query, { isBlocking }, params);
+    const {
+      data,
+      query: queryF,
+      reset,
+    } = useQuery<TParams, TResult>(id, query, { isBlocking }, params);
 
     useImperativeHandle(ref, () => ({
       query: async () => {
         await queryF();
       },
+      reset,
     }));
 
     return (
@@ -62,7 +66,7 @@ const QueryComponent = forwardRef(
           isCenter>
           <TranslatableText
             colorRole={THEME_ROLE.MUTED}
-            type={FONT_TYPE.HEADLINE}>
+            fontStyle={FONT_STYLE.HEADLINE}>
             {emptyMessage}
           </TranslatableText>
         </Wrapper>
@@ -105,7 +109,7 @@ const MutateComponent = forwardRef(
           isCenter>
           <TranslatableText
             colorRole={THEME_ROLE.MUTED}
-            type={FONT_TYPE.HEADLINE}>
+            fontStyle={FONT_STYLE.HEADLINE}>
             {emptyMessage}
           </TranslatableText>
         </Wrapper>

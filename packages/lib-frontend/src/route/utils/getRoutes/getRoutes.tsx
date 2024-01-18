@@ -1,6 +1,5 @@
 import { AppLayout } from '@lib-frontend/app/layouts/AppLayout/AppLayout';
 import { authRoutes } from '@lib-frontend/auth/auth.routes';
-import { billingRoutes } from '@lib-frontend/billing/billing.routes';
 import { devRoutes } from '@lib-frontend/dev/dev.routes';
 import { PingPage } from '@lib-frontend/http/pages/PingPage/PingPage';
 import { type RouteModel } from '@lib-frontend/route/route.models';
@@ -22,8 +21,6 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
       pathname: '/',
       routes: [
         ...appRoutes,
-
-        ...billingRoutes,
 
         ...userRoutes,
 

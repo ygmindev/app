@@ -1,13 +1,12 @@
-import { type ReactElement } from 'react';
-
 import { ItemField } from '@lib-frontend/core/components/ItemField/ItemField';
 import { type LFCPropsModel } from '@lib-frontend/core/core.models';
 import { FormContainer } from '@lib-frontend/data/components/FormContainer/FormContainer';
 import { type ItemStepFormPropsModel } from '@lib-frontend/data/components/ItemStepForm/ItemStepForm.models';
 import { TranslatableText } from '@lib-frontend/locale/components/TranslatableText/TranslatableText';
 import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { FONT_TYPE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { FONT_STYLE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { type PartialModel } from '@lib-shared/core/core.models';
+import { type ReactElement } from 'react';
 
 export const ItemStepForm = <TType, TStep extends PartialModel<TType>>({
   emptyLabel,
@@ -47,7 +46,7 @@ export const ItemStepForm = <TType, TStep extends PartialModel<TType>>({
       onSubmit={onSubmit}
       onSuccess={onSuccess}
       topElement={() =>
-        message && <TranslatableText type={FONT_TYPE.HEADLINE}>{message}</TranslatableText>
+        message && <TranslatableText fontStyle={FONT_STYLE.HEADLINE}>{message}</TranslatableText>
       }
     />
   );

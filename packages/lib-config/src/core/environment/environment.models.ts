@@ -56,6 +56,8 @@ export type EnvironmentConfigModel = {
   SERVER_PLAID_VERSION: string;
   SERVER_REGION: string;
   SERVER_SALT_LENGTH: string;
+  SERVER_SSL_PRIVATE_KEY: string;
+  SERVER_SSL_PUBLIC_KEY: string;
   SERVER_STRIPE_TOKEN: string;
   SERVER_TEST_MATCH?: string;
   SERVER_TWILIO_FROM: string;

@@ -96,3 +96,6 @@ buck-out/
 # Ruby / CocoaPods
 /ios/Pods/
 /vendor/bundle/
+
+# Certificates
+**/*.pem

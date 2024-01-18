@@ -4,7 +4,7 @@ import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION } from '@lib-frontend/core/core.constants';
 import { type LFCModel } from '@lib-frontend/core/core.models';
 import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { FONT_TYPE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { FONT_STYLE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 export const Tile: LFCModel<TilePropsModel> = ({
   children,
@@ -26,12 +26,12 @@ export const Tile: LFCModel<TilePropsModel> = ({
       {title && (
         <PressableItem
           border={DIRECTION.BOTTOM}
+          fontStyle={FONT_STYLE.TITLE}
           icon={icon}
           image={image}
           pVertical
           rightElement={rightElement}
           title={title}
-          type={FONT_TYPE.TITLE}
         />
       )}
 

@@ -91,7 +91,7 @@ export const useResourceMethod = <
           input: { ...(inputF ?? {}), root: rootF } as InputModel<TMethod, TType, TForm>,
         },
       })) ?? { result: undefined };
-      return after ? after({ output }) : output;
+      return after ? after({ input: inputF, output }) : output;
     },
   };
 };

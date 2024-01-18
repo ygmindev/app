@@ -15,7 +15,6 @@
     "@babel/preset-flow": "^7.23.3",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
-    "@callstack/repack": "^3.7.0",
     "@inquirer/checkbox": "^1.5.0",
     "@jest/globals": "^29.7.0",
     "@jest/types": "^29.6.3",

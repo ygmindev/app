@@ -1,5 +1,3 @@
-import { cloneElement } from 'react';
-
 import { Appearable } from '@lib-frontend/animation/components/Appearable/Appearable';
 import { Slide } from '@lib-frontend/animation/components/Slide/Slide';
 import { Protectable } from '@lib-frontend/auth/components/Protectable/Protectable';
@@ -23,6 +21,7 @@ import {
   TRACKING_EVENT_ACTION,
   TRACKING_EVENT_OBJECT,
 } from '@lib-shared/tracking/resources/TrackingEvent/TrackingEvent.constants';
+import { cloneElement } from 'react';
 
 export const Route: LFCModel<RoutePropsModel> = ({ depth, route, ...props }) => {
   const theme = useTheme();

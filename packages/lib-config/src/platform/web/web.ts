@@ -1,3 +1,4 @@
+import { fromStatic } from '@lib-backend/file/utils/fromStatic/fromStatic';
 import { defineConfig } from '@lib-config/core/utils/defineConfig/defineConfig';
 import { _config as _bundleConfig } from '@lib-config/node/bundle/bundle.web';
 import { _web } from '@lib-config/platform/web/_web';
@@ -12,6 +13,14 @@ const { _config, config } = defineConfig({
       ...WEB_CONFIG,
 
       bundleConfig: _bundleConfig,
+
+      certificate: {
+        certificateDir: fromStatic('certificates'),
+
+        privateKeyFile: process.env.SERVER_SSL_PRIVATE_KEY,
+
+        publicKeyFile: process.env.SERVER_SSL_PUBLIC_KEY,
+      },
 
       configFile: 'web.js',
 

@@ -5,5 +5,5 @@ import {
 } from '@lib-shared/core/utils/cleanObject/cleanObject.models';
 
 export const cleanObject = <TType extends unknown>(
-  ...[value, options]: CleanObjectParamsModel<TType>
-): CleanObjectModel<TType> => cleanObjectBase(value, options);
+  ...[value, options, depth]: CleanObjectParamsModel<TType>
+): CleanObjectModel<TType> => cleanObjectBase(value, options, depth);

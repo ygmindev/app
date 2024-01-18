@@ -5,7 +5,7 @@ import { MainLayout } from '@lib-frontend/core/layouts/MainLayout/MainLayout';
 import { GROUP } from '@lib-frontend/group/group.constants';
 import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { FONT_TYPE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { FONT_STYLE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { useCurrentUser } from '@lib-frontend/user/hooks/useCurrentUser/useCurrentUser';
 
 export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
@@ -17,7 +17,7 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
       {...wrapperProps}
       p
       s>
-      <Text type={FONT_TYPE.HEADLINE}>{t('core:welcomeBack')}</Text>
+      <Text fontStyle={FONT_STYLE.HEADLINE}>{t('core:welcomeBack')}</Text>
 
       {/* <DataBoundary
         fallbackData={{

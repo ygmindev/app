@@ -1,5 +1,3 @@
-import { type ReactElement } from 'react';
-
 import {
   type DropdownPropsModel,
   type DropdownRefModel,
@@ -8,6 +6,7 @@ import { type PressablePropsModel } from '@lib-frontend/core/components/Pressabl
 import { type TranslatableOptionModel } from '@lib-frontend/core/core.models';
 import { type FieldPropsModel } from '@lib-frontend/data/data.models';
 import { type TranslatableTextModel } from '@lib-frontend/locale/locale.models';
+import { type ReactElement } from 'react';
 
 export type MenuRefModel = DropdownRefModel;
 

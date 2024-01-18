@@ -11,7 +11,7 @@ import { Map } from '@lib-frontend/map/components/Map/Map';
 import { useRouter } from '@lib-frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR, THEME_SIZE } from '@lib-frontend/style/style.constants';
-import { FONT_TYPE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { FONT_STYLE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 export const TimingFormPage: LFCModel<TimingFormPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -22,7 +22,7 @@ export const TimingFormPage: LFCModel<TimingFormPagePropsModel> = ({ ...props })
       flex
       p
       s>
-      <Text type={FONT_TYPE.HEADLINE}>Choose delivery timing</Text>
+      <Text fontStyle={FONT_STYLE.HEADLINE}>Choose delivery timing</Text>
 
       {location.params?.priceTiers.map(({ price, timing }) => (
         <Wrapper
@@ -43,7 +43,7 @@ export const TimingFormPage: LFCModel<TimingFormPagePropsModel> = ({ ...props })
 
           <Text
             color={THEME_COLOR.SUCCESS}
-            type={FONT_TYPE.TITLE}>{`$${price}`}</Text>
+            fontStyle={FONT_STYLE.TITLE}>{`$${price}`}</Text>
         </Wrapper>
       ))}
 

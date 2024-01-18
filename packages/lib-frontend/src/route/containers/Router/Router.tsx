@@ -1,6 +1,3 @@
-import trimEnd from 'lodash/trimEnd';
-import { useMemo } from 'react';
-
 import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib-frontend/core/core.models';
 import { Route } from '@lib-frontend/route/components/Route/Route';
@@ -13,6 +10,8 @@ import { trimPathname } from '@lib-frontend/route/utils/trimPathname/trimPathnam
 import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { SHAPE_POSITION } from '@lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { merge } from '@lib-shared/core/utils/merge/merge';
+import trimEnd from 'lodash/trimEnd';
+import { useMemo } from 'react';
 
 const getNavigatableRoute = (route: RouteModel): RouteModel => {
   switch (route.navigation) {
@@ -23,7 +22,12 @@ const getNavigatableRoute = (route: RouteModel): RouteModel => {
       const elementF = (() => {
         switch (routeF.navigation) {
           case ROUTE_NAVIGATION.LIST:
-            return <RouteList route={route} />;
+            return (
+              <RouteList
+                root
+                routes={route.routes}
+              />
+            );
           default:
             return element;
         }
@@ -33,7 +37,7 @@ const getNavigatableRoute = (route: RouteModel): RouteModel => {
         routes: [
           {
             element: elementF,
-            // header: merge([header, { previous: 1 }]),
+            header: merge([header, { previous: 1 }]),
             isNavigatable: false,
             pathname: '/',
             title,

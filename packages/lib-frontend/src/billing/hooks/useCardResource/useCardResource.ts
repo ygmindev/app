@@ -1,14 +1,13 @@
-import { type UseCardResourceModel } from '@lib-frontend/billing/hooks/useCardResource/useCardResource.models';
+import {
+  type UseCardResourceModel,
+  type UseCardResourceParamsModel,
+} from '@lib-frontend/billing/hooks/useCardResource/useCardResource.models';
 import { CARD_RESOURCE_PARAMS } from '@lib-frontend/billing/resources/Card/Card.constants';
-import { useResource } from '@lib-frontend/resource/hooks/useResource/useResource';
-import { type UseResourceMethodHookParamsModel } from '@lib-frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
+import { useOwnResource } from '@lib-frontend/user/hooks/useOwnResource/useOwnResource';
 import { type CardFormModel, type CardModel } from '@lib-shared/billing/resources/Card/Card.models';
-import { type UserModel } from '@lib-shared/user/resources/User/User.models';
 
-export const useCardResource = ({
-  root,
-}: UseResourceMethodHookParamsModel<UserModel> = {}): UseCardResourceModel =>
-  useResource<CardModel, CardFormModel, UserModel>({
+export const useCardResource = ({ root }: UseCardResourceParamsModel = {}): UseCardResourceModel =>
+  useOwnResource<CardModel, CardFormModel>({
     ...CARD_RESOURCE_PARAMS,
     root,
   });

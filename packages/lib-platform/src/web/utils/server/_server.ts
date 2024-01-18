@@ -18,6 +18,7 @@ import { ROUTE } from '@lib-shared/route/route.constants';
 import { STATE } from '@lib-shared/state/state.constants';
 import { type FastifyPluginCallback, type FastifyRegisterOptions } from 'fastify';
 import { fastify } from 'fastify';
+import { type SecureServerOptions } from 'http2';
 import { plugin as i18nextMiddleware } from 'i18next-http-middleware';
 import toNumber from 'lodash/toNumber';
 import { createServer } from 'vite';
@@ -31,14 +32,15 @@ export const _server = async ({
   root,
 }: _ServerParamsModel): Promise<_ServerModel> => {
   const { publicPath } = webConfig();
-  const app = fastify();
+  const app = fastify({ https: config.server?.https as SecureServerOptions });
   await app.register(fastifyMiddie);
   await app.register(fastifyCompress);
   await app.register(fastifyStatic, { prefix: `/${publicPath}/`, root: fromStatic(publicPath) });
   await app.register(fastifyCookie, {
     secret: process.env.SERVER_APP_SECRET,
   } as FastifyCookieOptions);
-  const { middlewares } = await createServer({ ...config, root, server: { middlewareMode: true } });
+
+  const { middlewares } = await createServer({ ...config, root });
   await app.use(middlewares);
 
   await app.register(

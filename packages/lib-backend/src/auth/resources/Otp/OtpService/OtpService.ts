@@ -1,5 +1,3 @@
-import toNumber from 'lodash/toNumber';
-
 import { Otp } from '@lib-backend/auth/resources/Otp/Otp';
 import { Container } from '@lib-backend/core/utils/Container/Container';
 import { withContainer } from '@lib-backend/core/utils/withContainer/withContainer';
@@ -18,6 +16,7 @@ import { cleanObject } from '@lib-shared/core/utils/cleanObject/cleanObject';
 import { pick } from '@lib-shared/core/utils/pick/pick';
 import { randomInt } from '@lib-shared/crypto/utils/randomInt/randomInt';
 import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
+import toNumber from 'lodash/toNumber';
 
 @withContainer()
 export class OtpService

@@ -95,28 +95,6 @@
       "in-try-catch"
     ],
     "@typescript-eslint/unbound-method": "off",
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "packageDir": [
-          "..",
-          "../packages/app-native",
-          "../packages/app-web",
-          "../packages/app-web-admin",
-          "../packages/app-web-library",
-          "../packages/backend-graphql-sandbox",
-          "../packages/backend-lambda",
-          "../packages/lib-backend",
-          "../packages/lib-config",
-          "../packages/lib-frontend",
-          "../packages/lib-library",
-          "../packages/lib-platform",
-          "../packages/lib-shared",
-          "../packages/tool-generate",
-          "../packages/tool-task"
-        ]
-      }
-    ],
     "no-param-reassign": "error",
     "no-return-await": "off",
     "no-unused-expressions": "off",

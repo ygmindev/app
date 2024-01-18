@@ -20,5 +20,8 @@ export const _useMutation = <TParams = undefined, TResult = void>(
     data,
     id,
     mutate: async (params) => mutate(params),
+    reset: async () => {
+      void queryClient.invalidateQueries({ queryKey: [id] });
+    },
   };
 };
