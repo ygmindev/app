@@ -9,7 +9,7 @@ import { type ReactElement } from 'react';
 
 export const NavigationLayout = <TOption extends TranslatableOptionModel>({
   children,
-  isHorizontal,
+  isHorizontal = true,
   onChange,
   options,
   title,

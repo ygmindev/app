@@ -55,6 +55,7 @@
     "react-fast-compare": "^3.2.2",
     "react-i18next": "^14.0.0",
     "react-native-animated-spinkit": "^1.5.2",
+    "react-native-calendar-picker": "^8.0.0",
     "react-native-gesture-handler": "^2.14.0",
     "react-native-gifted-chat": "^2.4.0",
     "react-native-modal": "^13.0.1",
