@@ -1,5 +1,6 @@
 import { children } from '@lib-backend/file/utils/children/children';
 import { fromPackages } from '@lib-backend/file/utils/fromPackages/fromPackages';
+import { config } from '@lib-config/node/packageManager/packageManager';
 import { type TaskParamsModel } from '@tool-task/core/core.models';
 import { PROMPT_TYPE } from '@tool-task/core/utils/prompt/prompt.constants';
 import { type InstallParamsModel } from '@tool-task/node/tasks/install/install.models';
@@ -14,7 +15,9 @@ const install: TaskParamsModel<InstallParamsModel> = {
       key: 'packages',
       options: children(fromPackages(), { isDirectory: true }).reduce(
         (result, { name }) =>
-          name.startsWith('app-') || name.startsWith('backend-') ? [...result, name] : result,
+          name.startsWith('app-') || name.startsWith('backend-') || name.startsWith('backend-')
+            ? [...result, name]
+            : result,
         [] as Array<string>,
       ),
       type: PROMPT_TYPE.MULTIPLE,
@@ -25,12 +28,11 @@ const install: TaskParamsModel<InstallParamsModel> = {
   ],
 
   task: [
-    ({ options }) =>
-      options?.install === '*' ? 'yarn' : options?.install ? `yarn add ${options.install}` : null,
+    ({ options }) => config.installCommand(options?.install, options?.packages),
 
-    ({ options }) => options?.installDev && `yarn add  --dev ${options.installDev}`,
+    ({ options }) => config.installCommand(options?.installDev, options?.packages, { isDev: true }),
 
-    ({ options }) => options?.remove && `yarn remove ${options.remove}`,
+    ({ options }) => config.removeCommand(options?.remove),
   ],
 };
 

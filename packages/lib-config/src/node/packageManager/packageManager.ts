@@ -10,6 +10,15 @@ const { _config, config } = defineConfig({
       typescript: '4.7.4',
     },
 
+    installCommand: (names, packages, options = {}) =>
+      names && packages
+        ? `pnpm add ${packages ? packages.map((v) => `--filter ${v}`).join(' ') : ''} ${options.isDev ? '-D' : ''} ${names}`
+        : 'pnpm install --shamefully-hoist',
+
+    name: 'pnpm',
+
+    removeCommand: (names) => `pnpm remove ${names}`,
+
     toJsx: [
       fromModules('react-native-animatable/createAnimatableComponent.js'),
       fromModules('react-native-gifted-chat/lib/Actions.js'),
