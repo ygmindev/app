@@ -2,7 +2,9 @@
   "[python]": {
     "editor.formatOnType": true
   },
-
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.minimap.enabled": false,
   "eslint.debug": true,
