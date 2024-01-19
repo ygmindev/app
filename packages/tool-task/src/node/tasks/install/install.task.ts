@@ -15,7 +15,7 @@ const install: TaskParamsModel<InstallParamsModel> = {
       key: 'packages',
       options: children(fromPackages(), { isDirectory: true }).reduce(
         (result, { name }) =>
-          name.startsWith('app-') || name.startsWith('backend-') || name.startsWith('backend-')
+          name.startsWith('app-') || name.startsWith('backend-') || name.startsWith('tool-')
             ? [...result, name]
             : result,
         [] as Array<string>,
@@ -28,11 +28,13 @@ const install: TaskParamsModel<InstallParamsModel> = {
   ],
 
   task: [
-    ({ options }) => config.installCommand(options?.install, options?.packages),
+    ({ options }) => options?.install && config.installCommand(options?.install, options?.packages),
 
-    ({ options }) => config.installCommand(options?.installDev, options?.packages, { isDev: true }),
+    ({ options }) =>
+      options?.installDev &&
+      config.installCommand(options?.installDev, options?.packages, { isDev: true }),
 
-    ({ options }) => config.removeCommand(options?.remove),
+    ({ options }) => options?.remove && config.removeCommand(options?.remove, options?.packages),
   ],
 };
 

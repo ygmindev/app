@@ -1,4 +1,4 @@
-import { type LFCModel, type OptionModel } from '@lib-frontend/core/core.models';
+import { type LFCModel, type TranslatableOptionModel } from '@lib-frontend/core/core.models';
 import { NavigationLayout } from '@lib-frontend/core/layouts/NavigationLayout/NavigationLayout';
 import { getComponentDisplayName } from '@lib-frontend/core/utils/getComponentDisplayName/getComponentDisplayName';
 import { useRouter } from '@lib-frontend/route/hooks/useRouter/useRouter';
@@ -27,13 +27,12 @@ export const LibraryPage: LFCModel<LibraryPagePropsModel> = ({ ...props }) => {
   const value = location.params?.id;
   const valueF = value && trimPathname(value);
   const library = valueF && find(libraries, { pathname: valueF });
-  const options: Array<OptionModel> = libraries.map((library) => ({
+  const options: Array<TranslatableOptionModel> = libraries.map((library) => ({
     ...library,
     id: library._id,
     label: library._id,
     onPress: () => push({ pathname: library._id }),
   }));
-
   return (
     <NavigationLayout
       {...wrapperProps}

@@ -12,16 +12,18 @@ const { _config, config } = defineConfig({
 
     installCommand: (names, packages, options = {}) =>
       names && packages
-        ? `pnpm add ${packages ? packages.map((v) => `--filter ${v}`).join(' ') : ''} ${options.isDev ? '-D' : ''} ${names}`
+        ? `pnpm add ${packages ? packages.map((v) => `--filter @${v}`).join(' ') : ''} ${options.isDev ? '-D' : ''} ${names}`
         : 'pnpm install --shamefully-hoist',
 
     name: 'pnpm',
 
-    removeCommand: (names) => `pnpm remove ${names}`,
+    removeCommand: (names, packages) =>
+      `pnpm remove ${packages ? packages.map((v) => `--filter @${v}`).join(' ') : ''} ${names}`,
 
     toJsx: [
       fromModules('react-native-animatable/createAnimatableComponent.js'),
       fromModules('react-native-gifted-chat/lib/Actions.js'),
+      fromModules('react-native-calendar-picker/CalendarPicker/Scroller.js'),
       fromModules('react-native-gifted-chat/lib/Composer.js'),
       fromModules('react-native-gifted-chat/lib/Day.js'),
       fromModules('react-native-gifted-chat/lib/GiftedChat.js'),

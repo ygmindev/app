@@ -1,5 +1,3 @@
-import { forwardRef } from 'react';
-
 import { type RLFCModel } from '@lib-frontend/core/core.models';
 import { DropdownField } from '@lib-frontend/data/components/DropdownField/DropdownField';
 import { useValueControlled } from '@lib-frontend/data/hooks/useValueControlled/useValueControlled';
@@ -14,6 +12,7 @@ import {
   useMapQuery,
 } from '@lib-frontend/map/hooks/useMapQuery/useMapQuery';
 import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { forwardRef } from 'react';
 
 export const AddressField: RLFCModel<AddressFieldRefModel, AddressFieldPropsModel> = forwardRef(
   ({ defaultValue, label, onChange, value, ...props }, _) => {

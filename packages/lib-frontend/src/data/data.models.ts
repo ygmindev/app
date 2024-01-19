@@ -1,6 +1,3 @@
-import { type QueryClient } from '@tanstack/react-query';
-import { type ReactElement } from 'react';
-
 import { type WithIconPropsModel } from '@lib-frontend/core/components/Icon/Icon.models';
 import { type ElementStatePropsModel } from '@lib-frontend/core/core.models';
 import {
@@ -19,6 +16,8 @@ import {
   type PrimitiveModel,
   type StringKeyModel,
 } from '@lib-shared/core/core.models';
+import { type QueryClient } from '@tanstack/react-query';
+import { type ReactElement } from 'react';
 
 export type QueryContextModel = {
   client?: QueryClient;

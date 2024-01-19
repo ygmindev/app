@@ -1,4 +1,5 @@
 import { AppHomePage } from '@lib-frontend/app/pages/AppHomePage/AppHomePage';
+import { aroomRoutes } from '@lib-frontend/aroom/aroom.routes';
 import { HOME } from '@lib-frontend/core/core.constants';
 import { FORM } from '@lib-frontend/data/data.constants';
 import { GROUP } from '@lib-frontend/group/group.constants';
@@ -13,6 +14,10 @@ export const routes: Array<RouteModel> = getRoutes({
       element: <AppHomePage />,
       isProtectable: true,
       pathname: HOME,
+    },
+    {
+      pathname: 'aroom',
+      routes: aroomRoutes,
     },
     {
       isProtectable: true,

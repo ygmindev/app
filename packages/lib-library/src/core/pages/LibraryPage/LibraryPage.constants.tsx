@@ -5,7 +5,7 @@ import { props as logoProps } from '@lib-frontend/app/components/Logo/Logo.libra
 import { props as otpFieldProps } from '@lib-frontend/auth/components/OtpField/OtpField.library';
 import { props as activatableProps } from '@lib-frontend/core/components/Activatable/Activatable.library';
 import { props as buttonProps } from '@lib-frontend/core/components/Button/Button.library';
-import { props as chilProps } from '@lib-frontend/core/components/Chip/Chip.library';
+import { props as chipProps } from '@lib-frontend/core/components/Chip/Chip.library';
 import { props as dividerProps } from '@lib-frontend/core/components/Divider/Divider.library';
 import { props as droppableProps } from '@lib-frontend/core/components/Droppable/Droppable.library';
 import { props as iconProps } from '@lib-frontend/core/components/Icon/Icon.library';
@@ -16,6 +16,7 @@ import { props as textProps } from '@lib-frontend/core/components/Text/Text.libr
 import { props as tileProps } from '@lib-frontend/core/components/Tile/Tile.library';
 import { props as tooltipProps } from '@lib-frontend/core/components/Tooltip/Tooltip.library';
 import { props as wrapperProps } from '@lib-frontend/core/components/Wrapper/Wrapper.library';
+import { props as calendarPickerProps } from '@lib-frontend/data/components/CalendarPicker/CalendarPicker.library';
 import { props as switchFieldProps } from '@lib-frontend/data/components/SwitchField/SwitchField.library';
 import { props as textFieldProps } from '@lib-frontend/data/components/TextField/TextField.library';
 import { props as notificationProps } from '@lib-frontend/notification/components/Notification/Notification.library';
@@ -27,7 +28,8 @@ export const LIBRARY_PROPS = [
   activatableProps,
   appearableProps,
   buttonProps,
-  chilProps,
+  calendarPickerProps,
+  chipProps,
   dividerProps,
   droppableProps,
   iconProps,

@@ -1,13 +1,22 @@
-import GoogleMapReact from 'google-map-react';
-
 import { type FCModel } from '@lib-frontend/core/core.models';
 import { type _MapPropsModel } from '@lib-frontend/map/components/Map/_Map.models';
+import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 
-export const _Map: FCModel<_MapPropsModel> = ({ latitude, longitude, styling, zoom }) => {
+export const _Map: FCModel<_MapPropsModel> = ({ latitude, longitude, markers, zoom }) => {
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: process.env.SERVER_APP_GOOGLE_API_KEY,
+    id: 'map',
+  });
   return (
-    <GoogleMapReact
-      bootstrapURLKeys={{ key: process.env.SERVER_APP_GOOGLE_API_KEY }}
-      defaultCenter={{ lat: latitude, lng: longitude }}
-      defaultZoom={zoom}></GoogleMapReact>
+    isLoaded && (
+      <GoogleMap
+        center={{ lat: latitude, lng: longitude }}
+        mapContainerStyle={{ flex: 1 }}
+        zoom={zoom}>
+        {markers?.map((marker) => (
+          <Marker position={{ lat: marker.latitude, lng: marker.longitude }} />
+        ))}
+      </GoogleMap>
+    )
   );
 };

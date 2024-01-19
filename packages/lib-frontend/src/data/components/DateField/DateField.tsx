@@ -1,15 +1,15 @@
-import { _DateField } from '@lib-frontend/data/components/DateField/_DateField';
-import { type _DateFieldPropsModel } from '@lib-frontend/data/components/DateField/_DateField.models';
-import { type DateFieldPropsModel } from '@lib-frontend/data/components/DateField/DateField.models';
-import { composeComponent } from '@lib-frontend/core/utils/composeComponent/composeComponent';
-import { variableName } from '@lib-shared/core/utils/variableName/variableName';
+import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
+import { type RLFCModel } from '@lib-frontend/core/core.models';
+import {
+  type DateFieldPropsModel,
+  type DateFieldRefModel,
+} from '@lib-frontend/data/components/DateField/DateField.models';
+import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { forwardRef } from 'react';
 
-export const DateField = composeComponent<DateFieldPropsModel, _DateFieldPropsModel>({
-  Component: _DateField,
-
-  getProps: ({ children }) => ({
-    children,
-  }),
-});
-
-process.env.APP_IS_DEBUG && (DateField.displayName = variableName({ DateField }));
+export const DateField: RLFCModel<DateFieldRefModel, DateFieldPropsModel> = forwardRef(
+  ({ ...props }, _) => {
+    const { wrapperProps } = useLayoutStyles({ props });
+    return <Wrapper {...wrapperProps}></Wrapper>;
+  },
+);

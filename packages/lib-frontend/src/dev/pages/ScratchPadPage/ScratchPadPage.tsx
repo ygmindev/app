@@ -55,24 +55,15 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
                     id: 'test',
                   },
                 ]}
-                topElement={() => <Text fontStyle={FONT_STYLE.HEADLINE}>Choose your vehical type</Text>}
+                topElement={() => (
+                  <Text fontStyle={FONT_STYLE.HEADLINE}>Choose your vehical type</Text>
+                )}
               />
             ),
             id: 'test',
             title: 'test',
           },
         ]}
-        // topElement={
-        //   <Wrapper isCenter>
-        //     <Map
-        //       height={200}
-        //       latitude={40.71486}
-        //       longitude={-74.0142}
-        //       width={300}
-        //       zoom={11}
-        //     />
-        //   </Wrapper>
-        // }
       />
     </Wrapper>
   );

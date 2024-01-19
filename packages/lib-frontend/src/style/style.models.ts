@@ -1,5 +1,3 @@
-import { type ImageStyle, type TextStyle, type ViewStyle } from 'react-native';
-
 import { type ThemeConfigModel } from '@lib-config/style/theme/theme.models';
 import {
   type STYLE_BRIGHTNESS,
@@ -9,6 +7,7 @@ import {
   type THEME_SIZE,
   type THEME_SIZE_MORE,
 } from '@lib-frontend/style/style.constants';
+import { type ImageStyle, type TextStyle, type ViewStyle } from 'react-native';
 
 export type ViewStyleModel = ViewStyle;
 
@@ -38,4 +37,10 @@ export type ThemeModel = ThemeConfigModel;
 
 export type ThemeColorPropsModel = {
   color?: ThemeColorModel;
+};
+
+export type ThemePresetsModel = {
+  shapePrimaryMainStyle?: ViewStyleModel;
+
+  textMainStyle?: TextStyleModel;
 };

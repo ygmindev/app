@@ -9,7 +9,7 @@ export type PackageManagerConfigModel = {
 
   name: string;
 
-  removeCommand(names?: string): string;
+  removeCommand(names?: string, packages?: Array<string>): string;
 
   toJsx: Array<string>;
 };

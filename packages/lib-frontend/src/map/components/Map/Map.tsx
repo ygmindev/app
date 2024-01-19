@@ -26,12 +26,6 @@ export const Map: LFCModel<MapPropsModel> = ({
       <_Map
         latitude={latitude}
         longitude={longitude}
-        styling={{
-          // borderColor: theme.color.palette[THEME_COLOR.SECONDARY][THEME_ROLE.MAIN],
-          // color: theme.color.palette[THEME_COLOR.SECONDARY][THEME_ROLE.MAIN],
-          borderColor: theme.color.border,
-          color: theme.color.border,
-        }}
         zoom={zoom}></_Map>
     </Wrapper>
   );

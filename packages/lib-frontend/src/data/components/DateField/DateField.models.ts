@@ -1,3 +1,5 @@
-import { type _DateFieldPropsModel } from '@lib-frontend/data/components/DateField/_DateField.models';
+import { type FieldPropsModel, type FieldRefModel } from '@lib-frontend/data/data.models';
 
-export type DateFieldPropsModel = _DateFieldPropsModel;
+export type DateFieldPropsModel = FieldPropsModel<Date>;
+
+export type DateFieldRefModel = FieldRefModel<Date>;
