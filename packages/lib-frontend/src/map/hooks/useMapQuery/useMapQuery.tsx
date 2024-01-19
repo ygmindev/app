@@ -3,7 +3,7 @@ import toNumber from 'lodash/toNumber';
 import { useCallback } from 'react';
 
 import { useMutation } from '@lib/frontend/data/hooks/useMutation/useMutation';
-import { type AddressOptionModel } from '@lib/frontend/map/components/AddressField/AddressField.models';
+import { type AddressOptionModel } from '@lib/frontend/map/components/AddressInput/AddressInput.models';
 import { _useMapQuery } from '@lib/frontend/map/hooks/useMapQuery/_useMapQuery';
 import { USE_MAP_QUERY_DEBOUNCE_DURATION } from '@lib/frontend/map/hooks/useMapQuery/useMapQuery.constants';
 import { type UseMapQueryModel } from '@lib/frontend/map/hooks/useMapQuery/useMapQuery.models';

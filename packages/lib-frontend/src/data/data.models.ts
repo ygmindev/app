@@ -50,7 +50,7 @@ export type ValuePropsModel<TType = string> = {
   value?: TType;
 };
 
-export type FieldPropsModel<TType = string> = FocusableWrapperPropsModel &
+export type InputPropsModel<TType = string> = FocusableWrapperPropsModel &
   WithIconPropsModel &
   ValuePropsModel<TType> & {
     beforeSubmit?(value: TType, id: string): Promise<unknown>;
@@ -62,11 +62,11 @@ export type FieldPropsModel<TType = string> = FocusableWrapperPropsModel &
     onSubmit?(): void;
   };
 
-export type FieldRefModel<
+export type InputRefModel<
   TType = unknown,
   TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
 > = FocusableRefModel &
-  Pick<FieldPropsModel<TType[TKey]>, 'beforeSubmit'> & {
+  Pick<InputPropsModel<TType[TKey]>, 'beforeSubmit'> & {
     submit?(): Promise<void>;
   };
 

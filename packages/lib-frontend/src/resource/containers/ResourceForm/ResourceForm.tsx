@@ -1,10 +1,10 @@
 import { type ReactElement, useState } from 'react';
 
-import { SelectField } from '@lib/frontend/core/components/SelectField/SelectField';
+import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
-import { DropdownField } from '@lib/frontend/data/components/DropdownField/DropdownField';
+import { DropdownInput } from '@lib/frontend/data/components/DropdownInput/DropdownInput';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
-import { TextField } from '@lib/frontend/data/components/TextField/TextField';
+import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { type ResourceFormPropsModel } from '@lib/frontend/resource/containers/ResourceForm/ResourceForm.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { DATA_TYPE_MORE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
@@ -31,7 +31,7 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
           switch (type) {
             case DATA_TYPE_MORE.STRING_LIST:
               return (
-                <SelectField
+                <SelectInput
                   isHorizontal
                   isMultiple
                   label={labelF}
@@ -40,7 +40,7 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
               );
             case PROPERTY_TYPE.RESOURCE: {
               return (
-                <TextField
+                <TextInput
                   beforeSubmit={async (v) => ({ _id: v })}
                   label={labelF}
                 />
@@ -48,12 +48,12 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
             }
             default:
               return options ? (
-                <DropdownField
+                <DropdownInput
                   label={labelF}
                   options={options}
                 />
               ) : (
-                <TextField label={labelF} />
+                <TextInput label={labelF} />
               );
           }
         })();
@@ -68,7 +68,7 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
       topElement={
         rootName
           ? () => (
-              <TextField
+              <TextInput
                 label={rootName}
                 onChange={(v: TRoot extends undefined ? never : string) => rootValueSet(v)}
                 value={rootValue}

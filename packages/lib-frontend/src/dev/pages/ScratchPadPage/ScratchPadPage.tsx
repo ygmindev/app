@@ -1,5 +1,5 @@
-import { RoutesField } from '@lib/frontend/aroom/components/RoutesField/RoutesField';
-import { SelectField } from '@lib/frontend/core/components/SelectField/SelectField';
+import { RoutesInput } from '@lib/frontend/aroom/components/RoutesInput/RoutesInput';
+import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
@@ -28,7 +28,7 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
               <FormContainer
                 fields={[
                   {
-                    element: <RoutesField />,
+                    element: <RoutesInput />,
                     id: 'coordinates',
                   },
                 ]}
@@ -44,7 +44,7 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
                 fields={[
                   {
                     element: (
-                      <SelectField
+                      <SelectInput
                         options={[
                           { id: VEHICLE_TYPE.CAR, label: 'Car' },
                           { id: VEHICLE_TYPE.CARGO_VAN, label: 'Cargo Van' },

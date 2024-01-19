@@ -1,5 +1,5 @@
 import { BILLING, PAYMENT_METHOD } from '@lib/frontend/billing/billing.constants';
-import { PaymentMethodField } from '@lib/frontend/billing/components/PaymentMethodField/PaymentMethodField';
+import { PaymentMethodInput } from '@lib/frontend/billing/components/PaymentMethodInput/PaymentMethodInput';
 import { useBankResource } from '@lib/frontend/billing/hooks/useBankResource/useBankResource';
 import { useCardResource } from '@lib/frontend/billing/hooks/useCardResource/useCardResource';
 import { type PaymentMethodFormPagePropsModel } from '@lib/frontend/billing/pages/PaymentMethodFormPage/PaymentMethodFormPage.models';
@@ -29,7 +29,7 @@ export const PaymentMethodFormPage: LFCModel<PaymentMethodFormPagePropsModel> = 
   return (
     <FormContainer
       {...wrapperProps}
-      fields={[{ element: <PaymentMethodField />, id: PAYMENT_METHOD_RESOURCE_NAME }]}
+      fields={[{ element: <PaymentMethodInput />, id: PAYMENT_METHOD_RESOURCE_NAME }]}
       isFullHeight
       onSubmit={async (data: { [PAYMENT_METHOD_RESOURCE_NAME]?: PaymentMethodFormModel }) => {
         const form = data[PAYMENT_METHOD_RESOURCE_NAME];

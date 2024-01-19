@@ -1,4 +1,4 @@
-import { OtpField } from '@lib/frontend/auth/components/OtpField/OtpField';
+import { OtpInput } from '@lib/frontend/auth/components/OtpInput/OtpInput';
 import {
   OTP_FORM_TEST_ID,
   OTP_FORM_VALIDATORS,
@@ -47,7 +47,7 @@ export const OtpForm: LFCModel<OtpFormPropsModel> = ({
             }
           : undefined
       }
-      fields={[{ element: <OtpField isAutoFocus />, id: 'otp' }]}
+      fields={[{ element: <OtpInput isAutoFocus />, id: 'otp' }]}
       flex
       isButton={false}
       isCenter

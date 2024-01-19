@@ -1,7 +1,7 @@
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
-import { TextField } from '@lib/frontend/data/components/TextField/TextField';
+import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { validateNotEmpty } from '@lib/frontend/data/utils/validateNotEmpty/validateNotEmpty';
 import { type GroupNameFormPropsModel } from '@lib/frontend/group/containers/GroupNameForm/GroupNameForm.models';
 import { GROUP } from '@lib/frontend/group/group.constants';
@@ -25,7 +25,7 @@ export const GroupNameForm: LFCModel<GroupNameFormPropsModel> = ({
       fields={[
         {
           element: (
-            <TextField
+            <TextInput
               isAutoFocus
               label={t('core:name')}
             />

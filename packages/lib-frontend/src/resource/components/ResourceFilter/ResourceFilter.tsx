@@ -1,12 +1,12 @@
 import { type ReactElement, useMemo } from 'react';
 
-import { SelectField } from '@lib/frontend/core/components/SelectField/SelectField';
+import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { type FormTileModel } from '@lib/frontend/data/components/FormContainer/FormContainer.models';
-import { NumberRangeField } from '@lib/frontend/data/components/NumberRangeField/NumberRangeField';
-import { NUMBER_RANGE_TYPE } from '@lib/frontend/data/components/NumberRangeField/NumberRangeField.constants';
-import { TextFilterField } from '@lib/frontend/data/components/TextFilterField/TextFilterField';
+import { NumberRangeInput } from '@lib/frontend/data/components/NumberRangeInput/NumberRangeInput';
+import { NUMBER_RANGE_TYPE } from '@lib/frontend/data/components/NumberRangeInput/NumberRangeInput.constants';
+import { TextFilterInput } from '@lib/frontend/data/components/TextFilterInput/TextFilterInput';
 import { NUMBER_UNIT_TYPE } from '@lib/frontend/data/data.constants';
 import { type ResourceFilterPropsModel } from '@lib/frontend/resource/components/ResourceFilter/ResourceFilter.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
@@ -30,7 +30,7 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
           switch (type) {
             case DATA_TYPE_MORE.STRING_LIST:
               return (
-                <SelectField
+                <SelectInput
                   beforeSubmit={async (v, k) => [
                     { condition: FILTER_CONDITION.IN, field: k, value: v },
                   ]}
@@ -44,7 +44,7 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
             case NUMBER_UNIT_TYPE.AMOUNT:
             case NUMBER_UNIT_TYPE.RELATIVE_DATE:
               return (
-                <NumberRangeField
+                <NumberRangeInput
                   beforeSubmit={async (value, field) =>
                     filterNil([
                       !!value?.min && {
@@ -64,7 +64,7 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
                 />
               );
             default:
-              return <TextFilterField label={labelF} />;
+              return <TextFilterInput label={labelF} />;
           }
         })();
         return { fields: [{ element, id }], id, title: id };

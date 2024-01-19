@@ -1,8 +1,8 @@
 import { type CategoryFieldDefinitionModel } from '@lib/frontend/openapi/resources/CategoryProperty/CategoryProperty.models';
-import { type DateFieldDefinitionModel } from '@lib/frontend/openapi/resources/DateProperty/DateProperty.models';
+import { type DateInputDefinitionModel } from '@lib/frontend/openapi/resources/DateProperty/DateProperty.models';
 import { type FIELD_DEFINITION_TYPE } from '@lib/frontend/openapi/resources/FieldDefinition/FieldDefinition.constants';
 import { type PropertyFieldDefinitionModel } from '@lib/frontend/openapi/resources/FieldProprety/FieldProperty.models';
-import { type NumberFieldDefinitionModel } from '@lib/frontend/openapi/resources/NumberProperty/NumberProperty.models';
+import { type NumberInputDefinitionModel } from '@lib/frontend/openapi/resources/NumberProperty/NumberProperty.models';
 import { type StringFieldDefinitionModel } from '@lib/frontend/openapi/resources/StringProperty/StringProperty.models';
 
 export type FieldDefinitionTypeModel = `${FIELD_DEFINITION_TYPE}`;
@@ -17,8 +17,8 @@ export type BaseFieldDefinitionModel = {
 export type FieldDefinitionModel = BaseFieldDefinitionModel &
   (
     | CategoryFieldDefinitionModel
-    | DateFieldDefinitionModel
-    | NumberFieldDefinitionModel
+    | DateInputDefinitionModel
+    | NumberInputDefinitionModel
     | PropertyFieldDefinitionModel
     | StringFieldDefinitionModel
   );

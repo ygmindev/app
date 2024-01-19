@@ -1,8 +1,8 @@
 import { type AsyncBoundaryContextModel } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import { type ElementStatePropsModel } from '@lib/frontend/core/core.models';
 import {
-  type FieldPropsModel,
-  type FieldRefModel,
+  type InputPropsModel,
+  type InputRefModel,
   type FormRefModel,
   type SubmittablePropsModel,
 } from '@lib/frontend/data/data.models';
@@ -42,7 +42,7 @@ export type FormFieldModel<
   TType,
   TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
 > = WithIdModel<TKey> & {
-  element: FunctionComponentElement<FieldPropsModel<TType[TKey]>>;
+  element: FunctionComponentElement<InputPropsModel<TType[TKey]>>;
 };
 
 export type FormFieldsModel<TType> =
@@ -52,7 +52,7 @@ export type FormFieldsModel<TType> =
   | { [TKey in StringKeyModel<TType>]: FormFieldModel<TType, TKey> }[StringKeyModel<TType>];
 
 export type FormFieldsRefModel<TType> = {
-  [TKey in StringKeyModel<TType>]?: FieldRefModel<TType, TKey>;
+  [TKey in StringKeyModel<TType>]?: InputRefModel<TType, TKey>;
 };
 
 export type FormContainerRefModel<TType> = FormRefModel<TType> & {

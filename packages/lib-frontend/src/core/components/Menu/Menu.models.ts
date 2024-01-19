@@ -4,7 +4,7 @@ import {
 } from '@lib/frontend/core/components/Dropdown/Dropdown.models';
 import { type PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
 import { type TranslatableOptionModel } from '@lib/frontend/core/core.models';
-import { type FieldPropsModel } from '@lib/frontend/data/data.models';
+import { type InputPropsModel } from '@lib/frontend/data/data.models';
 import { type TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 import { type ReactElement } from 'react';
 
@@ -18,7 +18,7 @@ export type MenuPropsModel<TType extends MenuOptionModel = MenuOptionModel> = Pi
   DropdownPropsModel,
   'width' | 'isFullWidth' | 'direction'
 > &
-  Omit<FieldPropsModel, 'id'> & {
+  Omit<InputPropsModel, 'id'> & {
     anchor(isOpen?: boolean): ReactElement<PressablePropsModel>;
     options: Array<TType>;
     renderOption?(option: TType): TranslatableTextModel;

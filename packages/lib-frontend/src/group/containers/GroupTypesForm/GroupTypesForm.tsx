@@ -1,4 +1,4 @@
-import { SelectField } from '@lib/frontend/core/components/SelectField/SelectField';
+import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
@@ -25,7 +25,7 @@ export const GroupTypesForm: LFCModel<GroupTypesFormPropsModel> = ({
       {...wrapperProps}
       fields={[
         {
-          element: <SelectField options={GROUP_TYPES_OPTIONS} />,
+          element: <SelectInput options={GROUP_TYPES_OPTIONS} />,
           id: 'types',
         },
       ]}

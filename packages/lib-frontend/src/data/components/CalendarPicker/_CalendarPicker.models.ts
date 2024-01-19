@@ -1,11 +1,11 @@
-import { type FieldPropsModel, type FieldRefModel } from '@lib/frontend/data/data.models';
+import { type InputRefModel, type InputPropsModel } from '@lib/frontend/data/data.models';
 import { type ThemePresetsModel } from '@lib/frontend/style/style.models';
 import { type RangeModel } from '@lib/shared/data/data.models';
 
 export type _CalendarPickerPropsModel = ThemePresetsModel &
   (
-    | ({ isRange?: true } & FieldPropsModel<RangeModel<Date>>)
-    | ({ isRange?: false } & FieldPropsModel<Date>)
+    | ({ isRange?: true } & InputPropsModel<RangeModel<Date>>)
+    | ({ isRange?: false } & InputPropsModel<Date>)
   );
 
-export type _CalendarPickerRefModel = FieldRefModel;
+export type _CalendarPickerRefModel = InputRefModel;

@@ -1,5 +1,5 @@
 import { type FIELD_DEFINITION_TYPE } from '@lib/frontend/openapi/resources/FieldDefinition/FieldDefinition.constants';
 
-export type DateFieldDefinitionModel = {
+export type DateInputDefinitionModel = {
   type: FIELD_DEFINITION_TYPE.DATE;
 };

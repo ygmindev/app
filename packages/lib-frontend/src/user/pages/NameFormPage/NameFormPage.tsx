@@ -1,7 +1,7 @@
 import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
-import { TextField } from '@lib/frontend/data/components/TextField/TextField';
+import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -27,7 +27,7 @@ export const NameFormPage: LFCModel<NameFormPagePropsModel> = ({ ...props }) => 
           fields: [
             {
               element: (
-                <TextField
+                <TextInput
                   isAutoFocus
                   label={t('user:first')}
                 />
@@ -35,7 +35,7 @@ export const NameFormPage: LFCModel<NameFormPagePropsModel> = ({ ...props }) => 
               id: 'first',
             },
             {
-              element: <TextField label={t('user:last')} />,
+              element: <TextInput label={t('user:last')} />,
               id: 'last',
             },
           ],

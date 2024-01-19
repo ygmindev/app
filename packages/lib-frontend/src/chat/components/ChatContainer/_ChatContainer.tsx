@@ -9,7 +9,7 @@ import { InputToolbar } from 'react-native-gifted-chat';
 
 import { type _ChatContainerPropsModel } from '@lib/frontend/chat/components/ChatContainer/_ChatContainer.models';
 import { type LFCModel } from '@lib/frontend/core/core.models';
-import { TextField } from '@lib/frontend/data/components/TextField/TextField';
+import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { type ChatMessageModel } from '@lib/shared/chat/chat.models';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 
@@ -70,7 +70,7 @@ export const _ChatContainer: LFCModel<_ChatContainerPropsModel> = ({
         onTextChanged,
         text,
       }: ComposerProps & { onSend: SendProps<IMessage>['onSend'] }) => (
-        <TextField
+        <TextInput
           flex
           height={inputHeight}
           isTransparent

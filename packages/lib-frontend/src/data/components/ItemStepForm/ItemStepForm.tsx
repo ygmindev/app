@@ -1,4 +1,4 @@
-import { ItemField } from '@lib/frontend/core/components/ItemField/ItemField';
+import { CategoryInput } from '@lib/frontend/core/components/CategoryInput/CategoryInput';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { type ItemStepFormPropsModel } from '@lib/frontend/data/components/ItemStepForm/ItemStepForm.models';
@@ -29,7 +29,7 @@ export const ItemStepForm = <TType, TStep extends PartialModel<TType>>({
       fields={[
         {
           element: (
-            <ItemField
+            <CategoryInput
               emptyLabel={emptyLabel}
               id={id}
               options={options}

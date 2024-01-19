@@ -1,17 +1,17 @@
-import { LanguageField } from '@lib/frontend/locale/components/LanguageField/LanguageField';
-import { TimezoneField } from '@lib/frontend/locale/components/TimezoneField/TimezoneField';
-import { type SettingsFieldPropsModel } from '@lib/frontend/settings/components/SettingsField/SettingsField.models';
+import { LanguageInput } from '@lib/frontend/locale/components/LanguageInput/LanguageInput';
+import { TimezoneInput } from '@lib/frontend/locale/components/TimezoneInput/TimezoneInput';
+import { type SettingsInputPropsModel } from '@lib/frontend/settings/components/SettingsInput/SettingsInput.models';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 
 export const LOCALE_SETTINGS_PAGE_FIELDS = [
   {
-    element: <TimezoneField />,
+    element: <TimezoneInput />,
     id: `${LOCALE}.timezone`,
     title: ({ t }) => t('locale:timezone'),
   },
   {
-    element: <LanguageField />,
+    element: <LanguageInput />,
     id: `${LOCALE}.language`,
     title: ({ t }) => t('locale:language'),
   },
-] satisfies Array<SettingsFieldPropsModel>;
+] satisfies Array<SettingsInputPropsModel>;

@@ -1,7 +1,7 @@
-import { RoutesField } from '@lib/frontend/aroom/components/RoutesField/RoutesField';
+import { RoutesInput } from '@lib/frontend/aroom/components/RoutesInput/RoutesInput';
 import { type RequestFormPagePropsModel } from '@lib/frontend/aroom/pages/RequestForm/RequestForm.models';
 import { type TimingFormPageParamsModel } from '@lib/frontend/aroom/pages/TimingFormPage/TimingFormPage.models';
-import { SelectField } from '@lib/frontend/core/components/SelectField/SelectField';
+import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
@@ -36,7 +36,7 @@ export const RequestFormPage: LFCModel<RequestFormPagePropsModel> = ({ ...props 
               <FormContainer
                 fields={[
                   {
-                    element: <RoutesField />,
+                    element: <RoutesInput />,
                     id: 'coordinates',
                   },
                 ]}
@@ -52,7 +52,7 @@ export const RequestFormPage: LFCModel<RequestFormPagePropsModel> = ({ ...props 
                 fields={[
                   {
                     element: (
-                      <SelectField
+                      <SelectInput
                         options={[
                           { id: VEHICLE_TYPE.CAR, label: 'Car' },
                           { id: VEHICLE_TYPE.CARGO_VAN, label: 'Cargo Van' },

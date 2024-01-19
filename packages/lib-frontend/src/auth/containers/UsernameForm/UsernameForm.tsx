@@ -15,13 +15,13 @@ import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { type FormFieldModel } from '@lib/frontend/data/components/FormContainer/FormContainer.models';
-import { TextField } from '@lib/frontend/data/components/TextField/TextField';
+import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
-import { CountryField } from '@lib/frontend/locale/components/CountryField/CountryField';
+import { CountryInput } from '@lib/frontend/locale/components/CountryInput/CountryInput';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { PhoneField } from '@lib/frontend/user/components/PhoneField/PhoneField';
+import { PhoneInput } from '@lib/frontend/user/components/PhoneInput/PhoneInput';
 import { AUTH, SIGN_IN_METHOD } from '@lib/shared/auth/auth.constants';
 import { type SignInMethodModel } from '@lib/shared/auth/auth.models';
 import { type OtpFormModel } from '@lib/shared/auth/resources/Otp/Otp.models';
@@ -67,7 +67,7 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
         return [
           {
             element: (
-              <TextField
+              <TextInput
                 autoComplete="email"
                 icon="email"
                 isAutoFocus
@@ -80,8 +80,8 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
         ];
       case SIGN_IN_METHOD.PHONE:
         return [
-          { element: <CountryField />, id: 'callingCode' },
-          { element: <PhoneField isAutoFocus />, id: 'phone' },
+          { element: <CountryInput />, id: 'callingCode' },
+          { element: <PhoneInput isAutoFocus />, id: 'phone' },
         ];
       default:
         return [];

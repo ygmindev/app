@@ -14,12 +14,12 @@ export const FORM_CONTAINER_PROPS_FIXTURE: FormContainerPropsModel<FormContainer
       fields: [
         { id: 'stringField', label: 'stringField' },
         // {
-        //   field: FORM_PROPERTY_TYPE.TEXT_FIELD,
+        //   field: FORM_PROPERTY_TYPE.TEXT_INPUT,
         //   id: 'stringFieldOptional',
         //   label: 'stringFieldOptional',
         // },
       ],
     },
-    // { fields: [{ field: FORM_PROPERTY_TYPE.TEXT_FIELD, id: 'numberField', label: 'numberField' }] },
+    // { fields: [{ field: FORM_PROPERTY_TYPE.TEXT_INPUT, id: 'numberField', label: 'numberField' }] },
   ]),
 };

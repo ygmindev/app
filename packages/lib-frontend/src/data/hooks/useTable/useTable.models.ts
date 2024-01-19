@@ -4,7 +4,7 @@ import { type TranslatableOptionModel } from '@lib/frontend/core/core.models';
 import {
   type DataFormatterModel,
   type DataRendererModel,
-  type FieldPropsModel,
+  type InputPropsModel,
 } from '@lib/frontend/data/data.models';
 import {
   type _UseTableModel,
@@ -33,7 +33,7 @@ export type TableColumnModel<
   TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
 > = WithIdModel<TKey> & {
   align?: FontAlignModel;
-  field?(params: { row: TType; value?: TType[TKey] }): ReactElement<FieldPropsModel<TType[TKey]>>;
+  field?(params: { row: TType; value?: TType[TKey] }): ReactElement<InputPropsModel<TType[TKey]>>;
   formatter?: DataFormatterModel<TType, TKey>;
   isHidden?: boolean;
   label?: TranslatableTextModel;

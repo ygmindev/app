@@ -8,7 +8,7 @@ import {
   type RLFCPropsModel,
 } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
-import { FieldGroup } from '@lib/frontend/data/components/FieldGroup/FieldGroup';
+import { InputGroup } from '@lib/frontend/data/components/InputGroup/InputGroup';
 import { Form } from '@lib/frontend/data/components/Form/Form';
 import {
   type FormContainerPropsModel,
@@ -20,7 +20,7 @@ import {
   type FormTileModel,
 } from '@lib/frontend/data/components/FormContainer/FormContainer.models';
 import { SubmittableButtons } from '@lib/frontend/data/components/SubmittableButtons/SubmittableButtons';
-import { type FieldPropsModel, type FieldRefModel } from '@lib/frontend/data/data.models';
+import { type InputPropsModel, type InputRefModel } from '@lib/frontend/data/data.models';
 import { useForm } from '@lib/frontend/data/hooks/useForm/useForm';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -163,17 +163,17 @@ const FormContainerF = forwardRef(
         onSubmit: handleSubmitF,
         ref:
           element.ref ??
-          ((elementF: FieldRefModel<TType, TKey>) =>
+          ((elementF: InputRefModel<TType, TKey>) =>
             fieldRefs.current && (fieldRefs.current[id] = elementF)),
         value: values[id],
-      } as FieldPropsModel<TType[TKey]>),
+      } as InputPropsModel<TType[TKey]>),
       id,
     });
 
     const getRow = (row: FormRowModel<TType>): ReactElement => {
       const fieldsF = map(row.fields, getField);
       return row.isGrouped ? (
-        <FieldGroup
+        <InputGroup
           fields={fieldsF}
           key={row.id}
         />

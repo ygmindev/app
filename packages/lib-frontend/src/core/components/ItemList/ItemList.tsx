@@ -5,7 +5,7 @@ import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { SearchField } from '@lib/frontend/search/components/SearchField/SearchField';
+import { SearchInput } from '@lib/frontend/search/components/SearchInput/SearchInput';
 import { useSearch } from '@lib/frontend/search/hooks/useSearch/useSearch';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
@@ -34,7 +34,7 @@ export const ItemList = <TType extends WithIdModel>({
         rightElement={
           isSearchable && items?.length
             ? () => (
-                <SearchField
+                <SearchInput
                   flex
                   onChange={search}
                   value={query}
