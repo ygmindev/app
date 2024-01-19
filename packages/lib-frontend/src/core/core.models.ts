@@ -1,18 +1,18 @@
-import { type ButtonPropsModel } from '@lib-frontend/core/components/Button/Button.models';
-import { type WithIconPropsModel } from '@lib-frontend/core/components/Icon/Icon.models';
-import { type CORNER, type DIRECTION, type ELEMENT_STATE } from '@lib-frontend/core/core.constants';
-import { type TranslatableTextModel } from '@lib-frontend/locale/locale.models';
-import { type LayoutStylePropsModel } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles.models';
-import { type TextStylePropsModel } from '@lib-frontend/style/hooks/useTextStyles/useTextStyles.models';
+import { type ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
+import { type WithIconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
+import { type CORNER, type DIRECTION, type ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { type TranslatableTextModel } from '@lib/frontend/locale/locale.models';
+import { type LayoutStylePropsModel } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles.models';
+import { type TextStylePropsModel } from '@lib/frontend/style/hooks/useTextStyles/useTextStyles.models';
 import {
   type StyleModel,
   type StylePropsModel,
   type ThemeSizeModel,
   type ThemeSizeMoreModel,
   type ViewStyleModel,
-} from '@lib-frontend/style/style.models';
-import { type TestIdPropsModel } from '@lib-frontend/test/test.models';
-import { type WithIdModel } from '@lib-shared/core/utils/withId/withId.models';
+} from '@lib/frontend/style/style.models';
+import { type TestIdPropsModel } from '@lib/frontend/test/test.models';
+import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type ComponentType, type FC as _FC, type ReactNode, type Ref } from 'react';
 
 export type FCModel<TProps = object> = _FC<TProps & TestIdPropsModel & { nativeID?: string }>;

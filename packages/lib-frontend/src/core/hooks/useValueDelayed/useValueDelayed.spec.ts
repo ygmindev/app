@@ -1,5 +1,5 @@
-import { useValueDelayed } from '@lib-frontend/core/hooks/useValueDelayed/useValueDelayed';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { useValueDelayed } from '@lib/frontend/core/hooks/useValueDelayed/useValueDelayed';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ useValueDelayed });
 

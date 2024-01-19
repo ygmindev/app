@@ -1,5 +1,5 @@
-import { validateNotEmpty } from '@lib-frontend/data/utils/validateNotEmpty/validateNotEmpty';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { validateNotEmpty } from '@lib/frontend/data/utils/validateNotEmpty/validateNotEmpty';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ validateNotEmpty });
 

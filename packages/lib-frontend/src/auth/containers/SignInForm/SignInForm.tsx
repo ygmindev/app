@@ -1,17 +1,17 @@
-import { OtpForm } from '@lib-frontend/auth/containers/OtpForm/OtpForm';
-import { type SignInFormPropsModel } from '@lib-frontend/auth/containers/SignInForm/SignInForm.models';
-import { UsernameForm } from '@lib-frontend/auth/containers/UsernameForm/UsernameForm';
-import { useSignInResource } from '@lib-frontend/auth/hooks/useSignInResource/useSignInResource';
-import { Text } from '@lib-frontend/core/components/Text/Text';
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { type LFCModel } from '@lib-frontend/core/core.models';
-import { StepForm } from '@lib-frontend/data/components/StepForm/StepForm';
-import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { THEME_SIZE } from '@lib-frontend/style/style.constants';
-import { FONT_STYLE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { AUTH } from '@lib-shared/auth/auth.constants';
-import { type SignInFormModel } from '@lib-shared/auth/resources/SignIn/SignIn.models';
-import { FORM_MODE } from '@lib-shared/data/data.constants';
+import { OtpForm } from '@lib/frontend/auth/containers/OtpForm/OtpForm';
+import { type SignInFormPropsModel } from '@lib/frontend/auth/containers/SignInForm/SignInForm.models';
+import { UsernameForm } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm';
+import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
+import { Text } from '@lib/frontend/core/components/Text/Text';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { type LFCModel } from '@lib/frontend/core/core.models';
+import { StepForm } from '@lib/frontend/data/components/StepForm/StepForm';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { AUTH } from '@lib/shared/auth/auth.constants';
+import { type SignInFormModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
+import { FORM_MODE } from '@lib/shared/data/data.constants';
 
 export const SignInForm: LFCModel<SignInFormPropsModel> = ({
   method,

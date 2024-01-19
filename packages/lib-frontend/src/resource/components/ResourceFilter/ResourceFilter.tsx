@@ -1,18 +1,18 @@
 import { type ReactElement, useMemo } from 'react';
 
-import { SelectField } from '@lib-frontend/core/components/SelectField/SelectField';
-import { type LFCPropsModel } from '@lib-frontend/core/core.models';
-import { FormContainer } from '@lib-frontend/data/components/FormContainer/FormContainer';
-import { type FormTileModel } from '@lib-frontend/data/components/FormContainer/FormContainer.models';
-import { NumberRangeField } from '@lib-frontend/data/components/NumberRangeField/NumberRangeField';
-import { NUMBER_RANGE_TYPE } from '@lib-frontend/data/components/NumberRangeField/NumberRangeField.constants';
-import { TextFilterField } from '@lib-frontend/data/components/TextFilterField/TextFilterField';
-import { NUMBER_UNIT_TYPE } from '@lib-frontend/data/data.constants';
-import { type ResourceFilterPropsModel } from '@lib-frontend/resource/components/ResourceFilter/ResourceFilter.models';
-import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
-import { DATA_TYPE, DATA_TYPE_MORE } from '@lib-shared/data/data.constants';
-import { FILTER_CONDITION } from '@lib-shared/resource/utils/Filter/Filter.constants';
-import { type FilterModel } from '@lib-shared/resource/utils/Filter/Filter.models';
+import { SelectField } from '@lib/frontend/core/components/SelectField/SelectField';
+import { type LFCPropsModel } from '@lib/frontend/core/core.models';
+import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
+import { type FormTileModel } from '@lib/frontend/data/components/FormContainer/FormContainer.models';
+import { NumberRangeField } from '@lib/frontend/data/components/NumberRangeField/NumberRangeField';
+import { NUMBER_RANGE_TYPE } from '@lib/frontend/data/components/NumberRangeField/NumberRangeField.constants';
+import { TextFilterField } from '@lib/frontend/data/components/TextFilterField/TextFilterField';
+import { NUMBER_UNIT_TYPE } from '@lib/frontend/data/data.constants';
+import { type ResourceFilterPropsModel } from '@lib/frontend/resource/components/ResourceFilter/ResourceFilter.models';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { DATA_TYPE, DATA_TYPE_MORE } from '@lib/shared/data/data.constants';
+import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
+import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 
 export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
   fields,

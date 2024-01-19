@@ -1,7 +1,6 @@
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import get from 'lodash/get';
 import intersection from 'lodash/intersection';
-
-import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
 
 export const isTypeOf = (x: unknown, y: unknown): boolean =>
   intersection(

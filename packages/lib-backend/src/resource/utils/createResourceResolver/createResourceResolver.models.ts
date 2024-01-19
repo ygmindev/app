@@ -1,17 +1,17 @@
-import { type ResourceClassModel } from '@lib-backend/resource/resource.models';
-import { type ContextModel } from '@lib-platform/core/core.models';
-import { type AccessLevelModel } from '@lib-shared/auth/resources/Access/Access.models';
-import { type PartialModel } from '@lib-shared/core/core.models';
-import { type RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
+import { type ResourceClassModel } from '@lib/backend/resource/resource.models';
+import { type ContextModel } from '@lib/platform/core/core.models';
+import { type AccessLevelModel } from '@lib/shared/auth/resources/Access/Access.models';
+import { type PartialModel } from '@lib/shared/core/core.models';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import {
   type ResourceMethodTypeModel,
   type ResourceNameParamsModel,
   type ResourceReadMethodTypeModel,
   type ResourceWriteMethodTypeModel,
-} from '@lib-shared/resource/resource.models';
-import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
-import { type InputModel } from '@lib-shared/resource/utils/Input/Input.models';
-import { type ResourceServiceModel } from '@lib-shared/resource/utils/ResourceService/ResourceService.models';
+} from '@lib/shared/resource/resource.models';
+import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
+import { type ResourceServiceModel } from '@lib/shared/resource/utils/ResourceService/ResourceService.models';
 
 export type CreateResourceResolverParamsModel<
   TType,

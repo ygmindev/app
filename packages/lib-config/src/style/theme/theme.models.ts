@@ -7,8 +7,8 @@ import {
   type ThemeRoleModel,
   type ThemeSizeModel,
   type ThemeSizeMoreModel,
-} from '@lib-frontend/style/style.models';
-import { type FontFamilyModel } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.models';
+} from '@lib/frontend/style/style.models';
+import { type FontFamilyModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
 
 export type ThemeConfigModel = {
   animation: {

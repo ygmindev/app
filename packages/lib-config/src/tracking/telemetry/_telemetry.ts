@@ -1,14 +1,13 @@
+import {
+  type _TelemetryConfigModel,
+  type TelemetryConfigModel,
+} from '@lib/config/tracking/telemetry/telemetry.models';
 import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node';
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
 import { AwsLambdaInstrumentation } from '@opentelemetry/instrumentation-aws-lambda';
 import { CompressionAlgorithm } from '@opentelemetry/otlp-exporter-base';
 import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-base';
 import { configureOpentelemetry } from '@uptrace/node';
-
-import {
-  type _TelemetryConfigModel,
-  type TelemetryConfigModel,
-} from '@lib-config/tracking/telemetry/telemetry.models';
 
 export const _telemetry = ({
   batchSize,

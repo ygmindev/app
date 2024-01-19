@@ -3,12 +3,12 @@ import directory from 'inquirer-directory';
 import startCase from 'lodash/startCase';
 import toString from 'lodash/toString';
 
-import { fromPackages } from '@lib-backend/file/utils/fromPackages/fromPackages';
+import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import {
   type _PromptModel,
   type _PromptParamsModel,
-} from '@tool-task/core/utils/prompt/_prompt.models';
-import { PROMPT_TYPE } from '@tool-task/core/utils/prompt/prompt.constants';
+} from '@tool/task/core/utils/prompt/_prompt.models';
+import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 
 registerPrompt(PROMPT_TYPE.DIRECTORY, directory as prompts.PromptConstructor);
 

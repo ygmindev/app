@@ -1,4 +1,4 @@
-import { type _QueryConfigModel, type QueryConfigModel } from '@lib-config/data/query/query.models';
+import { type _QueryConfigModel, type QueryConfigModel } from '@lib/config/data/query/query.models';
 
 export const _query = ({ cacheTime }: QueryConfigModel): _QueryConfigModel => ({
   mutations: {

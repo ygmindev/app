@@ -1,4 +1,4 @@
-import { type PagePropsModel } from '@lib-frontend/core/core.models';
+import { type PagePropsModel } from '@lib/frontend/core/core.models';
 
 export type SnapshotPagePropsModel = PagePropsModel;
 

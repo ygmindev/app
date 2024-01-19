@@ -1,14 +1,14 @@
-import { _ChatContainer } from '@lib-frontend/chat/components/ChatContainer/_ChatContainer';
-import { type ChatContainerPropsModel } from '@lib-frontend/chat/components/ChatContainer/ChatContainer.models';
-import { Button } from '@lib-frontend/core/components/Button/Button';
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
-import { type LFCModel } from '@lib-frontend/core/core.models';
-import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useStore } from '@lib-frontend/state/hooks/useStore/useStore';
-import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR_MORE, THEME_ROLE, THEME_SIZE } from '@lib-frontend/style/style.constants';
+import { _ChatContainer } from '@lib/frontend/chat/components/ChatContainer/_ChatContainer';
+import { type ChatContainerPropsModel } from '@lib/frontend/chat/components/ChatContainer/ChatContainer.models';
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { type LFCModel } from '@lib/frontend/core/core.models';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_COLOR_MORE, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 
 export const ChatContainer: LFCModel<ChatContainerPropsModel> = ({
   messages,

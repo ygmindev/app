@@ -1,7 +1,7 @@
-import { LocaleSettingsPage } from '@lib-frontend/locale/pages/LocaleSettingsPage/LocaleSettingsPage';
-import { type LocaleSettingsPagePropsModel } from '@lib-frontend/locale/pages/LocaleSettingsPage/LocaleSettingsPage.models';
-import { render } from '@lib-frontend/test/utils/render/render';
-import { withTestComponent } from '@lib-frontend/test/utils/withTestComponent/withTestComponent';
+import { LocaleSettingsPage } from '@lib/frontend/locale/pages/LocaleSettingsPage/LocaleSettingsPage';
+import { type LocaleSettingsPagePropsModel } from '@lib/frontend/locale/pages/LocaleSettingsPage/LocaleSettingsPage.models';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<LocaleSettingsPagePropsModel>({
   target: LocaleSettingsPage,

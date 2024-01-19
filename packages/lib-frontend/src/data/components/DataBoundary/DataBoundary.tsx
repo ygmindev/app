@@ -1,10 +1,10 @@
-import { SkeletonGroup } from '@lib-frontend/animation/components/SkeletonGroup/SkeletonGroup';
-import { Loading } from '@lib-frontend/core/components/Loading/Loading';
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { AsyncBoundary } from '@lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
-import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
-import { type LFCPropsModel, type RLFCPropsModel } from '@lib-frontend/core/core.models';
-import { useAsync } from '@lib-frontend/core/hooks/useAsync/useAsync';
+import { SkeletonGroup } from '@lib/frontend/animation/components/SkeletonGroup/SkeletonGroup';
+import { Loading } from '@lib/frontend/core/components/Loading/Loading';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { AsyncBoundary } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { type LFCPropsModel, type RLFCPropsModel } from '@lib/frontend/core/core.models';
+import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
 import {
   type DataBoundaryPropsModel,
   type DataBoundaryRefModel,
@@ -12,13 +12,13 @@ import {
   type MutateComponentRefModel,
   type QueryComponentPropsModel,
   type QueryComponentRefModel,
-} from '@lib-frontend/data/components/DataBoundary/DataBoundary.models';
-import { useMutation } from '@lib-frontend/data/hooks/useMutation/useMutation';
-import { useQuery } from '@lib-frontend/data/hooks/useQuery/useQuery';
-import { TranslatableText } from '@lib-frontend/locale/components/TranslatableText/TranslatableText';
-import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { THEME_ROLE } from '@lib-frontend/style/style.constants';
-import { FONT_STYLE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+} from '@lib/frontend/data/components/DataBoundary/DataBoundary.models';
+import { useMutation } from '@lib/frontend/data/hooks/useMutation/useMutation';
+import { useQuery } from '@lib/frontend/data/hooks/useQuery/useQuery';
+import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { THEME_ROLE } from '@lib/frontend/style/style.constants';
+import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import {
   cloneElement,
   type ForwardedRef,

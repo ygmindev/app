@@ -1,11 +1,11 @@
-import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
-import { type UseThemePresetsModel } from '@lib-frontend/style/hooks/useThemePresets/useThemePresets.models';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { type UseThemePresetsModel } from '@lib/frontend/style/hooks/useThemePresets/useThemePresets.models';
 import {
   THEME_COLOR,
   THEME_COLOR_MORE,
   THEME_ROLE,
   THEME_SIZE,
-} from '@lib-frontend/style/style.constants';
+} from '@lib/frontend/style/style.constants';
 
 export const useThemePresets = (): UseThemePresetsModel => {
   const theme = useTheme();

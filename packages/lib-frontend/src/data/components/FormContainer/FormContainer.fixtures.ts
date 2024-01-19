@@ -1,5 +1,5 @@
-import { type FormContainerPropsModel } from '@lib-frontend/data/components/FormContainer/FormContainer.models';
-import { withId } from '@lib-shared/core/utils/withId/withId';
+import { type FormContainerPropsModel } from '@lib/frontend/data/components/FormContainer/FormContainer.models';
+import { withId } from '@lib/shared/core/utils/withId/withId';
 
 // TODO: move to shared
 export type FormContainerFixtureModel = {

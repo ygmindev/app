@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 import { generatePath } from 'react-router';
 import { matchPath, useLocation, useNavigate, useParams } from 'react-router-native';
 
-import { type _UseRouterModel } from '@lib-frontend/route/hooks/useRouter/_useRouter.models';
-import { type LocationContextModel, type RouteUpdateModel } from '@lib-frontend/route/route.models';
+import { type _UseRouterModel } from '@lib/frontend/route/hooks/useRouter/_useRouter.models';
+import { type LocationContextModel, type RouteUpdateModel } from '@lib/frontend/route/route.models';
 
 export const _useRouter = <TType = object,>(): _UseRouterModel<TType> => {
   const navigate = useNavigate();

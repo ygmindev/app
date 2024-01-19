@@ -1,16 +1,16 @@
-import { AccessService } from '@lib-backend/auth/resources/Access/AccessService/AccessService';
-import { Container } from '@lib-backend/core/utils/Container/Container';
-import { withContainer } from '@lib-backend/core/utils/withContainer/withContainer';
-import { Group } from '@lib-backend/group/resources/Group/Group';
-import { createEntityResourceService } from '@lib-backend/resource/utils/createEntityResourceService/createEntityResourceService';
-import { ACCESS_ROLE } from '@lib-shared/auth/resources/Access/Access.constants';
-import { GROUP_RESOURCE_NAME } from '@lib-shared/group/resources/Group/Group.constants';
+import { AccessService } from '@lib/backend/auth/resources/Access/AccessService/AccessService';
+import { Container } from '@lib/backend/core/utils/Container/Container';
+import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
+import { Group } from '@lib/backend/group/resources/Group/Group';
+import { createEntityResourceService } from '@lib/backend/resource/utils/createEntityResourceService/createEntityResourceService';
+import { ACCESS_ROLE } from '@lib/shared/auth/resources/Access/Access.constants';
+import { GROUP_RESOURCE_NAME } from '@lib/shared/group/resources/Group/Group.constants';
 import {
   type GroupFormModel,
   type GroupModel,
-} from '@lib-shared/group/resources/Group/Group.models';
-import { type GroupServiceModel } from '@lib-shared/group/resources/Group/GroupService/GroupService.models';
-import { USER_RESOURCE_NAME } from '@lib-shared/user/resources/User/User.constants';
+} from '@lib/shared/group/resources/Group/Group.models';
+import { type GroupServiceModel } from '@lib/shared/group/resources/Group/GroupService/GroupService.models';
+import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 
 @withContainer({ name: `${GROUP_RESOURCE_NAME}Service` })
 export class GroupService

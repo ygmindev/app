@@ -1,6 +1,6 @@
-import { type TABS_TYPE } from '@lib-frontend/core/components/Tabs/Tabs.constants';
-import { type TranslatableOptionModel } from '@lib-frontend/core/core.models';
-import { type ValuePropsModel } from '@lib-frontend/data/data.models';
+import { type TABS_TYPE } from '@lib/frontend/core/components/Tabs/Tabs.constants';
+import { type TranslatableOptionModel } from '@lib/frontend/core/core.models';
+import { type ValuePropsModel } from '@lib/frontend/data/data.models';
 
 export type TabsPropsModel = ValuePropsModel & {
   tabs?: Array<TabModel>;

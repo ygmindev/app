@@ -1,9 +1,8 @@
-import isArray from 'lodash/isArray';
-
 import {
   type WithConditionModel,
   type WithConditionParamsModel,
-} from '@lib-shared/core/utils/withCondition/withCondition.models';
+} from '@lib/shared/core/utils/withCondition/withCondition.models';
+import isArray from 'lodash/isArray';
 
 export const withCondition =
   (...[condition, ifTrue]: WithConditionParamsModel): WithConditionModel =>

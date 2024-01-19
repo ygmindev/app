@@ -1,19 +1,19 @@
-import { Text } from '@lib-frontend/core/components/Text/Text';
-import { VirtualizedList } from '@lib-frontend/core/components/VirtualizedList/VirtualizedList';
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { type LFCPropsModel } from '@lib-frontend/core/core.models';
-import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { THEME_SIZE } from '@lib-frontend/style/style.constants';
-import { FONT_STYLE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { Text } from '@lib/frontend/core/components/Text/Text';
+import { VirtualizedList } from '@lib/frontend/core/components/VirtualizedList/VirtualizedList';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { type LFCPropsModel } from '@lib/frontend/core/core.models';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import {
   type LibraryPropsModel,
   type LibraryVariantModel,
-} from '@lib-library/core/components/Library/Library.models';
-import { groupBy } from '@lib-shared/core/utils/groupBy/groupBy';
-import { stringify } from '@lib-shared/core/utils/stringify/stringify';
-import { withId } from '@lib-shared/core/utils/withId/withId';
-import { type WithIdModel } from '@lib-shared/core/utils/withId/withId.models';
+} from '@lib/library/core/components/Library/Library.models';
+import { groupBy } from '@lib/shared/core/utils/groupBy/groupBy';
+import { stringify } from '@lib/shared/core/utils/stringify/stringify';
+import { withId } from '@lib/shared/core/utils/withId/withId';
+import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import isArray from 'lodash/isArray';
 import isFunction from 'lodash/isFunction';
 import isPlainObject from 'lodash/isPlainObject';

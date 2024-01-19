@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
-import { type CarouselPropsModel } from '@lib-frontend/animation/components/Carousel/Carousel.models';
-import { Slides } from '@lib-frontend/animation/components/Slides/Slides';
-import { Button } from '@lib-frontend/core/components/Button/Button';
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
-import { type SFCModel } from '@lib-frontend/core/core.models';
+import { type CarouselPropsModel } from '@lib/frontend/animation/components/Carousel/Carousel.models';
+import { Slides } from '@lib/frontend/animation/components/Slides/Slides';
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { type SFCModel } from '@lib/frontend/core/core.models';
 
 export const Carousel: SFCModel<CarouselPropsModel> = ({ current, slides, testID, ...props }) => {
   const [currentF, currentSet] = useState<number>(current ?? 0);

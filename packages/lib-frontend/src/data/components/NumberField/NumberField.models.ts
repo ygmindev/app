@@ -1,6 +1,6 @@
-import { type TEXT_FIELD_KEYBOARD } from '@lib-frontend/data/components/TextField/TextField.constants';
-import { type TextFieldPropsModel } from '@lib-frontend/data/components/TextField/TextField.models';
-import { type FieldPropsModel, type FieldRefModel } from '@lib-frontend/data/data.models';
+import { type TEXT_FIELD_KEYBOARD } from '@lib/frontend/data/components/TextField/TextField.constants';
+import { type TextFieldPropsModel } from '@lib/frontend/data/components/TextField/TextField.models';
+import { type FieldPropsModel, type FieldRefModel } from '@lib/frontend/data/data.models';
 
 export type NumberFieldPropsModel = FieldPropsModel<number> &
   Omit<TextFieldPropsModel, 'defaultValue' | 'keyboard' | 'onChange' | 'value'> & {

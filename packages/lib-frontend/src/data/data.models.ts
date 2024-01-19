@@ -1,21 +1,21 @@
-import { type WithIconPropsModel } from '@lib-frontend/core/components/Icon/Icon.models';
-import { type ElementStatePropsModel } from '@lib-frontend/core/core.models';
+import { type WithIconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
+import { type ElementStatePropsModel } from '@lib/frontend/core/core.models';
 import {
   type FocusableRefModel,
   type FocusableWrapperPropsModel,
-} from '@lib-frontend/data/components/FocusableWrapper/FocusableWrapper.models';
+} from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper.models';
 import {
   type AMOUNT_UNIT,
   type NUMBER_UNIT_TYPE,
   type RATE_UNIT,
   type RELATIVE_DATE_UNIT,
-} from '@lib-frontend/data/data.constants';
-import { type TranslatableTextModel } from '@lib-frontend/locale/locale.models';
+} from '@lib/frontend/data/data.constants';
+import { type TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 import {
   type InferModel,
   type PrimitiveModel,
   type StringKeyModel,
-} from '@lib-shared/core/core.models';
+} from '@lib/shared/core/core.models';
 import { type QueryClient } from '@tanstack/react-query';
 import { type ReactElement } from 'react';
 

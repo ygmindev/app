@@ -1,9 +1,9 @@
-import { config } from '@lib-config/data/query/query';
-import { _useQueryConnection } from '@lib-frontend/data/hooks/useQueryConnection/_useQueryConnection';
+import { config } from '@lib/config/data/query/query';
+import { _useQueryConnection } from '@lib/frontend/data/hooks/useQueryConnection/_useQueryConnection';
 import {
   type UseQueryConnectionModel,
   type UseQueryConnectionParamsModel,
-} from '@lib-frontend/data/hooks/useQueryConnection/useQueryConnection.models';
+} from '@lib/frontend/data/hooks/useQueryConnection/useQueryConnection.models';
 
 export const useQueryConnection = <TParams = undefined, TResult = void>(
   ...[id, callback, options, params]: UseQueryConnectionParamsModel<TParams, TResult>

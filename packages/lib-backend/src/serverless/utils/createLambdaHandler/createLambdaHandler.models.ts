@@ -1,11 +1,11 @@
 import {
   type _CreateLambdaHandlerModel,
   type _CreateLambdaHandlerParamsModel,
-} from '@lib-backend/serverless/utils/createLambdaHandler/_createLambdaHandler.models';
+} from '@lib/backend/serverless/utils/createLambdaHandler/_createLambdaHandler.models';
 import {
   type LAMBDA_PLUGIN,
   type LAMBDA_TYPE,
-} from '@lib-backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
+} from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
 
 export type CreateLambdaHandlerParamsModel<TType extends LambdaTypeModel> =
   _CreateLambdaHandlerParamsModel<TType>;

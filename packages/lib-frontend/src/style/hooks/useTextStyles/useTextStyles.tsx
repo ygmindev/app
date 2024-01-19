@@ -1,9 +1,9 @@
-import { useStyles } from '@lib-frontend/style/hooks/useStyles/useStyles';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import {
   type UseTextStylesModel,
   type UseTextStylesParamsModel,
-} from '@lib-frontend/style/hooks/useTextStyles/useTextStyles.models';
-import { textStyler } from '@lib-frontend/style/utils/styler/textStyler/textStyler';
+} from '@lib/frontend/style/hooks/useTextStyles/useTextStyles.models';
+import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
 
 export const useTextStyles = <TType,>({
   props,

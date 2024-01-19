@@ -1,10 +1,10 @@
-import { OTP_EXPIRATION_SECONDS } from '@lib-backend/auth/resources/Otp/Otp.constants';
-import { EmbeddedResource } from '@lib-backend/resource/resources/EmbeddedResource/EmbeddedResource';
-import { withEntity } from '@lib-backend/resource/utils/withEntity/withEntity';
-import { withField } from '@lib-backend/resource/utils/withField/withField';
-import { DATA_TYPE } from '@lib-shared/data/data.constants';
-import { TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME } from '@lib-shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.constants';
-import { type TestableEmbeddedResourceModel } from '@lib-shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.models';
+import { OTP_EXPIRATION_SECONDS } from '@lib/backend/auth/resources/Otp/Otp.constants';
+import { EmbeddedResource } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResource';
+import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
+import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { DATA_TYPE } from '@lib/shared/data/data.constants';
+import { TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.constants';
+import { type TestableEmbeddedResourceModel } from '@lib/shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.models';
 
 @withEntity({
   isEmbeddable: true,

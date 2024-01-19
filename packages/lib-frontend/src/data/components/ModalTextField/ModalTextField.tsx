@@ -1,10 +1,10 @@
-import { Modal } from '@lib-frontend/core/components/Modal/Modal';
-import { type RLFCModel } from '@lib-frontend/core/core.models';
+import { Modal } from '@lib/frontend/core/components/Modal/Modal';
+import { type RLFCModel } from '@lib/frontend/core/core.models';
 import {
   type ModalTextFieldPropsModel,
   type ModalTextFieldRefModel,
-} from '@lib-frontend/data/components/ModalTextField/ModalTextField.models';
-import { TextField } from '@lib-frontend/data/components/TextField/TextField';
+} from '@lib/frontend/data/components/ModalTextField/ModalTextField.models';
+import { TextField } from '@lib/frontend/data/components/TextField/TextField';
 import { forwardRef, useState } from 'react';
 
 export const ModalTextField: RLFCModel<ModalTextFieldRefModel, ModalTextFieldPropsModel> =

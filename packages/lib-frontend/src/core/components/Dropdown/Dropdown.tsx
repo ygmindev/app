@@ -1,16 +1,16 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 
-import { _Dropdown } from '@lib-frontend/core/components/Dropdown/_Dropdown';
+import { _Dropdown } from '@lib/frontend/core/components/Dropdown/_Dropdown';
 import {
   type DropdownPropsModel,
   type DropdownRefModel,
-} from '@lib-frontend/core/components/Dropdown/Dropdown.models';
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { type WrapperRefModel } from '@lib-frontend/core/components/Wrapper/Wrapper.models';
-import { type RLFCModel } from '@lib-frontend/core/core.models';
-import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR_MORE, THEME_SIZE } from '@lib-frontend/style/style.constants';
+} from '@lib/frontend/core/components/Dropdown/Dropdown.models';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
+import { type RLFCModel } from '@lib/frontend/core/core.models';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_COLOR_MORE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 
 export const Dropdown: RLFCModel<DropdownRefModel, DropdownPropsModel> = forwardRef(
   (

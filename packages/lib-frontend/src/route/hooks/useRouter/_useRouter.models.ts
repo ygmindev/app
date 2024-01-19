@@ -1,4 +1,4 @@
-import { type LocationModel, type RouteUpdateModel } from '@lib-frontend/route/route.models';
+import { type LocationModel, type RouteUpdateModel } from '@lib/frontend/route/route.models';
 
 export type _UseRouterModel<TType = object> = {
   back(): void;

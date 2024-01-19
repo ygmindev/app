@@ -1,4 +1,4 @@
-import { type _CurrentCountryModel } from '@lib-frontend/locale/utils/currentCountry/_currentCountry.models';
+import { type _CurrentCountryModel } from '@lib/frontend/locale/utils/currentCountry/_currentCountry.models';
 import geolocator from 'geolocator';
 
 export const _currentCountry = async (): Promise<_CurrentCountryModel> => {

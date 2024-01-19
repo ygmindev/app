@@ -1,4 +1,4 @@
-import { type FormValidatorModel } from '@lib-frontend/data/data.models';
+import { type FormValidatorModel } from '@lib/frontend/data/data.models';
 
 // TODO: changemodels?
 export const validateAlphaNumeric: () => FormValidatorModel =

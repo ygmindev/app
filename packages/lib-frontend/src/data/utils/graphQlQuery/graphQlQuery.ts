@@ -9,8 +9,8 @@ import {
   type GraphQlQueryModel,
   type GraphQlQueryParamsFieldsModel,
   type GraphQlQueryParamsModel,
-} from '@lib-frontend/data/utils/graphQlQuery/graphQlQuery.models';
-import { trimDeep } from '@lib-shared/core/utils/trimDeep/trimDeep';
+} from '@lib/frontend/data/utils/graphQlQuery/graphQlQuery.models';
+import { trimDeep } from '@lib/shared/core/utils/trimDeep/trimDeep';
 
 const getGraphQlFields = <TType extends unknown>(
   fields: GraphQlQueryParamsFieldsModel<TType> | GraphQlFragmentFieldModel<TType>,

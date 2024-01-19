@@ -1,13 +1,13 @@
-import { EmbeddedResource } from '@lib-backend/resource/resources/EmbeddedResource/EmbeddedResource';
-import { withEmbeddableRootField } from '@lib-backend/resource/utils/withEmbeddableRootField/withEmbeddableRootField';
-import { withEntity } from '@lib-backend/resource/utils/withEntity/withEntity';
-import { withField } from '@lib-backend/resource/utils/withField/withField';
-import { User } from '@lib-backend/user/resources/User/User';
-import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import { type PaymentMethodTypeModel } from '@lib-shared/billing/resources/PaymentMethod/PaymentMethod.models';
-import { DATA_TYPE } from '@lib-shared/data/data.constants';
-import { USER_RESOURCE_NAME } from '@lib-shared/user/resources/User/User.constants';
-import { type UserModel } from '@lib-shared/user/resources/User/User.models';
+import { EmbeddedResource } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResource';
+import { withEmbeddableRootField } from '@lib/backend/resource/utils/withEmbeddableRootField/withEmbeddableRootField';
+import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
+import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { User } from '@lib/backend/user/resources/User/User';
+import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import { type PaymentMethodTypeModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { DATA_TYPE } from '@lib/shared/data/data.constants';
+import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
+import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withEntity({ name: PAYMENT_METHOD_RESOURCE_NAME })
 export class PaymentMethod extends EmbeddedResource {

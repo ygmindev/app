@@ -1,4 +1,4 @@
-import { uri } from '@lib-shared/http/utils/uri/uri';
+import { uri } from '@lib/shared/http/utils/uri/uri';
 
 export const PING = 'ping';
 

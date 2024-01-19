@@ -1,8 +1,8 @@
 import {
   type CreateResourceResolverModel,
   type CreateResourceResolverParamsModel,
-} from '@lib-backend/resource/utils/createResourceResolver/createResourceResolver.models';
-import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
+} from '@lib/backend/resource/utils/createResourceResolver/createResourceResolver.models';
+import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
 export type CreateEntityResourceResolverParamsModel<
   TType,

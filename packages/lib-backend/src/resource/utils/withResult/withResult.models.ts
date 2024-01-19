@@ -1,6 +1,6 @@
-import { type ResourceClassModel } from '@lib-backend/resource/resource.models';
-import { type WithAccessParamsModel } from '@lib-backend/resource/utils/withAccess/withAccess.models';
-import { type GraphQlOperationTypeModel } from '@lib-shared/graphql/graphql.models';
+import { type ResourceClassModel } from '@lib/backend/resource/resource.models';
+import { type WithAccessParamsModel } from '@lib/backend/resource/utils/withAccess/withAccess.models';
+import { type GraphQlOperationTypeModel } from '@lib/shared/graphql/graphql.models';
 
 export type WithResultParamsModel<TType> = WithAccessParamsModel & {
   Resource(): ResourceClassModel<TType>;

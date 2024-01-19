@@ -1,6 +1,5 @@
+import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type i18n, type Module } from 'i18next';
-
-import { type WithIdModel } from '@lib-shared/core/utils/withId/withId.models';
 
 export type InternationalizeConfigModel = {
   isPreload: boolean;

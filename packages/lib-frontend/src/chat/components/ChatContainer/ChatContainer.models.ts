@@ -1,4 +1,4 @@
-import { type _ChatContainerPropsModel } from '@lib-frontend/chat/components/ChatContainer/_ChatContainer.models';
+import { type _ChatContainerPropsModel } from '@lib/frontend/chat/components/ChatContainer/_ChatContainer.models';
 
 export type ChatContainerPropsModel = Omit<
   _ChatContainerPropsModel,

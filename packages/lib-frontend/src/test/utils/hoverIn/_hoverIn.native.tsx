@@ -1,7 +1,7 @@
 import {
   type _HoverInModel,
   type _HoverInParamsModel,
-} from '@lib-frontend/test/utils/hoverIn/_hoverIn.models';
+} from '@lib/frontend/test/utils/hoverIn/_hoverIn.models';
 import { fireEvent } from '@testing-library/react-native';
 import { type ReactTestInstance } from 'react-test-renderer';
 

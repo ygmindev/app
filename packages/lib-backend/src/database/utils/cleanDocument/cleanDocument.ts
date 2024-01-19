@@ -1,5 +1,5 @@
-import { cleanObject } from '@lib-shared/core/utils/cleanObject/cleanObject';
-import { type EntityResourceModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
+import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import isArray from 'lodash/isArray';
 import isEqual from 'lodash/isEqual';
 import isPlainObject from 'lodash/isPlainObject';

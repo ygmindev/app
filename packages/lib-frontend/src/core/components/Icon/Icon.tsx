@@ -1,17 +1,17 @@
 import { forwardRef } from 'react';
 
-import { type AnimatableRefModel } from '@lib-frontend/animation/animation.models';
-import { animatable } from '@lib-frontend/animation/utils/animatable/animatable';
-import { _Icon } from '@lib-frontend/core/components/Icon/_Icon';
-import { ICON_FONT_SIZE_OFFSET } from '@lib-frontend/core/components/Icon/Icon.constants';
-import { type IconPropsModel } from '@lib-frontend/core/components/Icon/Icon.models';
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { type RTFCModel } from '@lib-frontend/core/core.models';
-import { TranslatableText } from '@lib-frontend/locale/components/TranslatableText/TranslatableText';
-import { useStyles } from '@lib-frontend/style/hooks/useStyles/useStyles';
-import { THEME_SIZE_MORE } from '@lib-frontend/style/style.constants';
-import { type TextStyleModel } from '@lib-frontend/style/style.models';
-import { textStyler } from '@lib-frontend/style/utils/styler/textStyler/textStyler';
+import { type AnimatableRefModel } from '@lib/frontend/animation/animation.models';
+import { animatable } from '@lib/frontend/animation/utils/animatable/animatable';
+import { _Icon } from '@lib/frontend/core/components/Icon/_Icon';
+import { ICON_FONT_SIZE_OFFSET } from '@lib/frontend/core/components/Icon/Icon.constants';
+import { type IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { type RTFCModel } from '@lib/frontend/core/core.models';
+import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
+import { type TextStyleModel } from '@lib/frontend/style/style.models';
+import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
 
 const AnimatableIcon = animatable({ Component: _Icon });
 

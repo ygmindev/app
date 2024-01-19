@@ -1,12 +1,12 @@
-import { useSession } from '@lib-frontend/auth/hooks/useSession/useSession';
-import { type AuthProviderPropsModel } from '@lib-frontend/auth/providers/AuthProvider/AuthProvider.models';
-import { AUTH_STATUS } from '@lib-frontend/auth/stores/authStore/authStore.constants';
-import { type FCModel } from '@lib-frontend/core/core.models';
-import { useAsync } from '@lib-frontend/core/hooks/useAsync/useAsync';
-import { useStore } from '@lib-frontend/state/hooks/useStore/useStore';
-import { useUserResource } from '@lib-frontend/user/hooks/useUserResource/useUserResource';
-import { type PartialModel } from '@lib-shared/core/core.models';
-import { type UserModel } from '@lib-shared/user/resources/User/User.models';
+import { useSession } from '@lib/frontend/auth/hooks/useSession/useSession';
+import { type AuthProviderPropsModel } from '@lib/frontend/auth/providers/AuthProvider/AuthProvider.models';
+import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
+import { type FCModel } from '@lib/frontend/core/core.models';
+import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
+import { useUserResource } from '@lib/frontend/user/hooks/useUserResource/useUserResource';
+import { type PartialModel } from '@lib/shared/core/core.models';
+import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
   const { initialize } = useSession();

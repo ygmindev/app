@@ -1,7 +1,7 @@
 import {
   type RequireInteropModel,
   type RequireInteropParamsModel,
-} from '@lib-shared/core/utils/requireInterop/requireInterop.models';
+} from '@lib/shared/core/utils/requireInterop/requireInterop.models';
 
 export const requireInterop = <TType extends unknown>(
   params: RequireInteropParamsModel,

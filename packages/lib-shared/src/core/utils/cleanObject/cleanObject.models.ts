@@ -1,4 +1,4 @@
-import { type ClassModel } from '@lib-shared/core/core.models';
+import { type ClassModel } from '@lib/shared/core/core.models';
 
 export type CleanObjectParamsModel<TType> = [
   value: TType,

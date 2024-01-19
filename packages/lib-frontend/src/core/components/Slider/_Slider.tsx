@@ -3,8 +3,8 @@ import 'rc-slider/assets/index.css';
 import isArray from 'lodash/isArray';
 import Slider from 'rc-slider';
 
-import { type _SliderPropsModel } from '@lib-frontend/core/components/Slider/_Slider.models';
-import { type SFCModel } from '@lib-frontend/core/core.models';
+import { type _SliderPropsModel } from '@lib/frontend/core/components/Slider/_Slider.models';
+import { type SFCModel } from '@lib/frontend/core/core.models';
 
 export const _Slider: SFCModel<_SliderPropsModel> = ({
   backgroundColor,

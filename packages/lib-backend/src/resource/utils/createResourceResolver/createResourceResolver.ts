@@ -1,24 +1,24 @@
-import { Container } from '@lib-backend/core/utils/Container/Container';
-import { withContext } from '@lib-backend/http/utils/withContext/withContext';
-import { withResolver } from '@lib-backend/http/utils/withResolver/withResolver';
-import { type ResourceClassModel } from '@lib-backend/resource/resource.models';
+import { Container } from '@lib/backend/core/utils/Container/Container';
+import { withContext } from '@lib/backend/http/utils/withContext/withContext';
+import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
+import { type ResourceClassModel } from '@lib/backend/resource/resource.models';
 import {
   type CreateResourceResolverModel,
   type CreateResourceResolverParamsModel,
-} from '@lib-backend/resource/utils/createResourceResolver/createResourceResolver.models';
-import { withAuthorizer } from '@lib-backend/resource/utils/withAuthorizer/withAuthorizer';
-import { withInput } from '@lib-backend/resource/utils/withInput/withInput';
-import { withOutput } from '@lib-backend/resource/utils/withOutput/withOutput';
-import { type ContextModel } from '@lib-platform/core/core.models';
-import { ACCESS_LEVEL } from '@lib-shared/auth/resources/Access/Access.constants';
-import { type PrototypeModel } from '@lib-shared/core/core.models';
-import { NotImplementedError } from '@lib-shared/core/errors/NotImplementedError/NotImplementedError';
-import { cleanObject } from '@lib-shared/core/utils/cleanObject/cleanObject';
-import { withCondition } from '@lib-shared/core/utils/withCondition/withCondition';
-import { RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
-import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
-import { type InputModel } from '@lib-shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '@lib-shared/resource/utils/Output/Output.models';
+} from '@lib/backend/resource/utils/createResourceResolver/createResourceResolver.models';
+import { withAuthorizer } from '@lib/backend/resource/utils/withAuthorizer/withAuthorizer';
+import { withInput } from '@lib/backend/resource/utils/withInput/withInput';
+import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
+import { type ContextModel } from '@lib/platform/core/core.models';
+import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
+import { type PrototypeModel } from '@lib/shared/core/core.models';
+import { NotImplementedError } from '@lib/shared/core/errors/NotImplementedError/NotImplementedError';
+import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
+import { withCondition } from '@lib/shared/core/utils/withCondition/withCondition';
+import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
+import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 
 export const createResourceResolver = <
   TType,

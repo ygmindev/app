@@ -1,4 +1,4 @@
-import { type _UseRouterModel } from '@lib-frontend/route/hooks/useRouter/_useRouter.models';
+import { type _UseRouterModel } from '@lib/frontend/route/hooks/useRouter/_useRouter.models';
 
 export type PathMatchParamsModel = {
   from: string;

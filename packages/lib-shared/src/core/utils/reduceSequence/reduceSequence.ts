@@ -1,9 +1,8 @@
-import reduce from 'lodash/reduce';
-
 import {
   type ReduceSequenceModel,
   type ReduceSequenceParamsModel,
-} from '@lib-shared/core/utils/reduceSequence/reduceSequence.models';
+} from '@lib/shared/core/utils/reduceSequence/reduceSequence.models';
+import reduce from 'lodash/reduce';
 
 export const reduceSequence = async <TType, TResult>(
   ...[values, reducer, initialResult]: ReduceSequenceParamsModel<TType, TResult>

@@ -1,13 +1,13 @@
-import { Activatable } from '@lib-frontend/core/components/Activatable/Activatable';
-import { Button } from '@lib-frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '@lib-frontend/core/components/Button/Button.constants';
-import { Item } from '@lib-frontend/core/components/Item/Item';
-import { type PressableItemPropsModel } from '@lib-frontend/core/components/PressableItem/PressableItem.models';
-import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
-import { type LFCModel } from '@lib-frontend/core/core.models';
-import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { THEME_SIZE } from '@lib-frontend/style/style.constants';
-import { FLEX_JUSTIFY } from '@lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { Item } from '@lib/frontend/core/components/Item/Item';
+import { type PressableItemPropsModel } from '@lib/frontend/core/components/PressableItem/PressableItem.models';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { type LFCModel } from '@lib/frontend/core/core.models';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 
 export const PressableItem: LFCModel<PressableItemPropsModel> = ({
   color,

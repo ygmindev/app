@@ -1,6 +1,6 @@
-import { type FlexStylerParamsModel } from '@lib-frontend/style/utils/styler/flexStyler/flexStyler.models';
-import { type StylerModel } from '@lib-frontend/style/utils/styler/styler.models';
-import { cleanObject } from '@lib-shared/core/utils/cleanObject/cleanObject';
+import { type FlexStylerParamsModel } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.models';
+import { type StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
+import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 
 export const flexStyler: StylerModel<FlexStylerParamsModel> = ({
   align,

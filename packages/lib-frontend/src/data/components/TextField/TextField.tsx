@@ -1,39 +1,39 @@
-import { ANIMATION_STATES_FOCUSABLE } from '@lib-frontend/animation/animation.constants';
-import { type AnimationModel } from '@lib-frontend/animation/animation.models';
-import { Appearable } from '@lib-frontend/animation/components/Appearable/Appearable';
-import { Button } from '@lib-frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '@lib-frontend/core/components/Button/Button.constants';
-import { Icon } from '@lib-frontend/core/components/Icon/Icon';
-import { Tooltip } from '@lib-frontend/core/components/Tooltip/Tooltip';
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
-import { type ElementStateModel, type RLFCModel } from '@lib-frontend/core/core.models';
-import { useAsync } from '@lib-frontend/core/hooks/useAsync/useAsync';
-import { FocusableWrapper } from '@lib-frontend/data/components/FocusableWrapper/FocusableWrapper';
-import { type FocusableRefModel } from '@lib-frontend/data/components/FocusableWrapper/FocusableWrapper.models';
-import { _TextField } from '@lib-frontend/data/components/TextField/_TextField';
-import { TEXT_FIELD_KEYBOARD } from '@lib-frontend/data/components/TextField/TextField.constants';
+import { ANIMATION_STATES_FOCUSABLE } from '@lib/frontend/animation/animation.constants';
+import { type AnimationModel } from '@lib/frontend/animation/animation.models';
+import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { Icon } from '@lib/frontend/core/components/Icon/Icon';
+import { Tooltip } from '@lib/frontend/core/components/Tooltip/Tooltip';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { type ElementStateModel, type RLFCModel } from '@lib/frontend/core/core.models';
+import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
+import { FocusableWrapper } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper';
+import { type FocusableRefModel } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper.models';
+import { _TextField } from '@lib/frontend/data/components/TextField/_TextField';
+import { TEXT_FIELD_KEYBOARD } from '@lib/frontend/data/components/TextField/TextField.constants';
 import {
   type TextFieldPropsModel,
   type TextFieldRefModel,
-} from '@lib-frontend/data/components/TextField/TextField.models';
-import { useValueControlled } from '@lib-frontend/data/hooks/useValueControlled/useValueControlled';
-import { TranslatableText } from '@lib-frontend/locale/components/TranslatableText/TranslatableText';
-import { isTranslatableText } from '@lib-frontend/locale/utils/isTranslatableText/isTranslatableText';
-import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
+} from '@lib/frontend/data/components/TextField/TextField.models';
+import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
+import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
+import { isTranslatableText } from '@lib/frontend/locale/utils/isTranslatableText/isTranslatableText';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import {
   THEME_COLOR,
   THEME_COLOR_MORE,
   THEME_ROLE,
   THEME_SIZE,
   THEME_SIZE_MORE,
-} from '@lib-frontend/style/style.constants';
-import { type TextStyleModel } from '@lib-frontend/style/style.models';
-import { FLEX_ALIGN } from '@lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
-import { SHAPE_POSITION } from '@lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { merge } from '@lib-shared/core/utils/merge/merge';
-import { sleep } from '@lib-shared/core/utils/sleep/sleep';
+} from '@lib/frontend/style/style.constants';
+import { type TextStyleModel } from '@lib/frontend/style/style.models';
+import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { merge } from '@lib/shared/core/utils/merge/merge';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import isNumber from 'lodash/isNumber';
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 

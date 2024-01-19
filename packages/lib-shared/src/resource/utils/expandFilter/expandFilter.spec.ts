@@ -1,5 +1,5 @@
-import { expandFilter } from '@lib-shared/resource/utils/expandFilter/expandFilter';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { expandFilter } from '@lib/shared/resource/utils/expandFilter/expandFilter';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ expandFilter });
 

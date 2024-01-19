@@ -1,8 +1,8 @@
 import {
   type _mapMapParallelModel,
   type _mapMapParallelParamsModel,
-} from '@tool-task/core/utils/mapParallel/_mapParallel.models';
-import { type PARALLEL_CONDITION } from '@tool-task/core/utils/mapParallel/mapParallel.constants';
+} from '@tool/task/core/utils/mapParallel/_mapParallel.models';
+import { type PARALLEL_CONDITION } from '@tool/task/core/utils/mapParallel/mapParallel.constants';
 
 export type MapParallelParamsModel = _mapMapParallelParamsModel;
 

@@ -1,6 +1,6 @@
-import { type UseAppGraphQlModel } from '@lib-frontend/data/hooks/useAppGraphQl/useAppGraphQl.models';
-import { useGraphQl } from '@lib-frontend/data/hooks/useGraphQl/useGraphQl';
-import { GRAPHQL } from '@lib-shared/graphql/graphql.constants';
+import { type UseAppGraphQlModel } from '@lib/frontend/data/hooks/useAppGraphQl/useAppGraphQl.models';
+import { useGraphQl } from '@lib/frontend/data/hooks/useGraphQl/useGraphQl';
+import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
 
 export const useAppGraphQl = (): UseAppGraphQlModel =>
   useGraphQl({

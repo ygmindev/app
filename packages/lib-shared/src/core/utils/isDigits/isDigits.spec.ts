@@ -1,5 +1,5 @@
-import { isDigits } from '@lib-shared/core/utils/isDigits/isDigits';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { isDigits } from '@lib/shared/core/utils/isDigits/isDigits';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ isDigits });
 

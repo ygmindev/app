@@ -2,13 +2,13 @@ import isPlainObject from 'lodash/isPlainObject';
 import mapValues from 'lodash/mapValues';
 import { useState } from 'react';
 
-import { type NumberUnitModel } from '@lib-frontend/data/data.models';
-import { useFormatter } from '@lib-frontend/data/hooks/useFormatter/useFormatter';
-import { useValueControlled } from '@lib-frontend/data/hooks/useValueControlled/useValueControlled';
+import { type NumberUnitModel } from '@lib/frontend/data/data.models';
+import { useFormatter } from '@lib/frontend/data/hooks/useFormatter/useFormatter';
+import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import {
   type UseValueScaledModel,
   type UseValueScaledParamsModel,
-} from '@lib-frontend/data/hooks/useValueScaled/useValueScaled.models';
+} from '@lib/frontend/data/hooks/useValueScaled/useValueScaled.models';
 
 export const useValueScaled = <
   TType extends number | Record<string, number>,

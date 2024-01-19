@@ -1,5 +1,5 @@
-import { sort } from '@lib-shared/core/utils/sort/sort';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { sort } from '@lib/shared/core/utils/sort/sort';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ sort });
 

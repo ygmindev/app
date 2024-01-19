@@ -9,37 +9,37 @@ import {
   useState,
 } from 'react';
 
-import { Skeleton } from '@lib-frontend/animation/components/Skeleton/Skeleton';
-import { Button } from '@lib-frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '@lib-frontend/core/components/Button/Button.constants';
-import { Text } from '@lib-frontend/core/components/Text/Text';
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { DIRECTION } from '@lib-frontend/core/core.constants';
-import { type RLFCPropsModel } from '@lib-frontend/core/core.models';
-import { TABLE_CELL_WIDTH_DEFAULT } from '@lib-frontend/data/components/Table/Table.constants';
+import { Skeleton } from '@lib/frontend/animation/components/Skeleton/Skeleton';
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { Text } from '@lib/frontend/core/components/Text/Text';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { DIRECTION } from '@lib/frontend/core/core.constants';
+import { type RLFCPropsModel } from '@lib/frontend/core/core.models';
+import { TABLE_CELL_WIDTH_DEFAULT } from '@lib/frontend/data/components/Table/Table.constants';
 import {
   type TablePropsModel,
   type TableRefModel,
-} from '@lib-frontend/data/components/Table/Table.models';
-import { type FormErrorModel } from '@lib-frontend/data/data.models';
-import { useTable } from '@lib-frontend/data/hooks/useTable/useTable';
-import { useValidator } from '@lib-frontend/data/hooks/useValidator/useValidator';
-import { TranslatableText } from '@lib-frontend/locale/components/TranslatableText/TranslatableText';
-import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
+} from '@lib/frontend/data/components/Table/Table.models';
+import { type FormErrorModel } from '@lib/frontend/data/data.models';
+import { useTable } from '@lib/frontend/data/hooks/useTable/useTable';
+import { useValidator } from '@lib/frontend/data/hooks/useValidator/useValidator';
+import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import {
   THEME_COLOR,
   THEME_ROLE,
   THEME_SIZE,
   THEME_SIZE_MORE,
-} from '@lib-frontend/style/style.constants';
-import { FONT_ALIGN } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { SHAPE_POSITION } from '@lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { type StringKeyModel } from '@lib-shared/core/core.models';
-import { getValue } from '@lib-shared/core/utils/getValue/getValue';
-import { isEmpty } from '@lib-shared/core/utils/isEmpty/isEmpty';
-import { stringify } from '@lib-shared/core/utils/stringify/stringify';
+} from '@lib/frontend/style/style.constants';
+import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { type StringKeyModel } from '@lib/shared/core/core.models';
+import { getValue } from '@lib/shared/core/utils/getValue/getValue';
+import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
+import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 
 export const Table = forwardRef(
   <TType,>(

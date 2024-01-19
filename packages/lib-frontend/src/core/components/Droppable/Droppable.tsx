@@ -1,16 +1,16 @@
 import { cloneElement, useRef, useState } from 'react';
 
-import { Activatable } from '@lib-frontend/core/components/Activatable/Activatable';
-import { ACTIVATABLE_TRIGGER } from '@lib-frontend/core/components/Activatable/Activatable.constants';
-import { type ActivatableRefModel } from '@lib-frontend/core/components/Activatable/Activatable.models';
-import { Button } from '@lib-frontend/core/components/Button/Button';
-import { Dropdown } from '@lib-frontend/core/components/Dropdown/Dropdown';
-import { type DroppablePropsModel } from '@lib-frontend/core/components/Droppable/Droppable.models';
-import { Pressable } from '@lib-frontend/core/components/Pressable/Pressable';
-import { type PressablePropsModel } from '@lib-frontend/core/components/Pressable/Pressable.models';
-import { View } from '@lib-frontend/core/components/View/View';
-import { type SFCModel } from '@lib-frontend/core/core.models';
-import { isTypeOf } from '@lib-shared/core/utils/isTypeOf/isTypeOf';
+import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
+import { ACTIVATABLE_TRIGGER } from '@lib/frontend/core/components/Activatable/Activatable.constants';
+import { type ActivatableRefModel } from '@lib/frontend/core/components/Activatable/Activatable.models';
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { Dropdown } from '@lib/frontend/core/components/Dropdown/Dropdown';
+import { type DroppablePropsModel } from '@lib/frontend/core/components/Droppable/Droppable.models';
+import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
+import { type PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
+import { View } from '@lib/frontend/core/components/View/View';
+import { type SFCModel } from '@lib/frontend/core/core.models';
+import { isTypeOf } from '@lib/shared/core/utils/isTypeOf/isTypeOf';
 
 export const Droppable: SFCModel<DroppablePropsModel> = ({
   anchor,

@@ -1,7 +1,7 @@
-import { type ChartPropsModel } from '@lib-frontend/data/components/Chart/Chart.models';
-import { Chart } from '@lib-frontend/data/components/Chart/Chart';
-import { render } from '@lib-frontend/test/utils/render/render';
-import { withTestComponent } from '@lib-frontend/test/utils/withTestComponent/withTestComponent';
+import { type ChartPropsModel } from '@lib/frontend/data/components/Chart/Chart.models';
+import { Chart } from '@lib/frontend/data/components/Chart/Chart';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<ChartPropsModel>({
   target: Chart,

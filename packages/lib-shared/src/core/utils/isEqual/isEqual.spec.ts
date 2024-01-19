@@ -1,5 +1,5 @@
-import { isEqual } from '@lib-shared/core/utils/isEqual/isEqual';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ isEqual });
 

@@ -1,12 +1,12 @@
-import { SIGN_IN_TOKEN_CLAIM_KEYS } from '@lib-shared/auth/resources/SignIn/SignIn.constants';
-import { BANK_RESOURCE_NAME } from '@lib-shared/billing/resources/Bank/Bank.constants';
-import { CARD_RESOURCE_NAME } from '@lib-shared/billing/resources/Card/Card.constants';
-import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib-shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import { pick } from '@lib-shared/core/utils/pick/pick';
-import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
-import { getEntityResourceFixture } from '@lib-shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
-import { LINKED_USER_RESOURCE_NAME } from '@lib-shared/user/resources/LinkedUser/LinkedUser.constants';
-import { type UserModel } from '@lib-shared/user/resources/User/User.models';
+import { SIGN_IN_TOKEN_CLAIM_KEYS } from '@lib/shared/auth/resources/SignIn/SignIn.constants';
+import { BANK_RESOURCE_NAME } from '@lib/shared/billing/resources/Bank/Bank.constants';
+import { CARD_RESOURCE_NAME } from '@lib/shared/billing/resources/Card/Card.constants';
+import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import { pick } from '@lib/shared/core/utils/pick/pick';
+import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
+import { LINKED_USER_RESOURCE_NAME } from '@lib/shared/user/resources/LinkedUser/LinkedUser.constants';
+import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 export const USER_FIXTURE: UserModel = getEntityResourceFixture({
   data: () => ({

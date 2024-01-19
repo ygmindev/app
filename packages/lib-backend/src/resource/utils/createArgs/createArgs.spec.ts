@@ -1,9 +1,9 @@
-import { createArgs } from '@lib-backend/resource/utils/createArgs/createArgs';
-import { InvalidTypeError } from '@lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
-import { RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
-import { type ResourceMethodTypeModel } from '@lib-shared/resource/resource.models';
-import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib-shared/test/resources/TestableEntityResource/TestableEntityResource.constants';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { createArgs } from '@lib/backend/resource/utils/createArgs/createArgs';
+import { InvalidTypeError } from '@lib/shared/core/errors/InvalidTypeError/InvalidTypeError';
+import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
+import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.constants';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ createArgs });
 

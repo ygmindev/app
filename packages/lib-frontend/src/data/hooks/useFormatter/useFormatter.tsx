@@ -10,7 +10,7 @@ import {
   NUMBER_UNIT_TYPE,
   RATE_UNIT,
   RELATIVE_DATE_UNIT,
-} from '@lib-frontend/data/data.constants';
+} from '@lib/frontend/data/data.constants';
 import {
   type DateFormatterOptionsModel,
   type FormatterOptionsModel,
@@ -18,12 +18,12 @@ import {
   type NumberScaleOptionsModel,
   type UnformatModel,
   type UseFormatterModel,
-} from '@lib-frontend/data/hooks/useFormatter/useFormatter.models';
-import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
-import { DATA_TYPE } from '@lib-shared/data/data.constants';
-import { type FormattableTypeModel } from '@lib-shared/data/data.models';
-import { LOCALE } from '@lib-shared/locale/locale.constants';
+} from '@lib/frontend/data/hooks/useFormatter/useFormatter.models';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { DATA_TYPE } from '@lib/shared/data/data.constants';
+import { type FormattableTypeModel } from '@lib/shared/data/data.models';
+import { LOCALE } from '@lib/shared/locale/locale.constants';
 
 export const useFormatter = (): UseFormatterModel => {
   const { t } = useTranslation([LOCALE]);

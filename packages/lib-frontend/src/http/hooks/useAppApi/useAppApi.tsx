@@ -1,8 +1,8 @@
-import { useApi } from '@lib-frontend/http/hooks/useApi/useApi';
+import { useApi } from '@lib/frontend/http/hooks/useApi/useApi';
 import {
   type UseAppApiModel,
   type UseAppApiParamsModel,
-} from '@lib-frontend/http/hooks/useAppApi/useAppApi.models';
+} from '@lib/frontend/http/hooks/useAppApi/useAppApi.models';
 
 export const useAppApi = ({}: UseAppApiParamsModel = {}): UseAppApiModel =>
   useApi({

@@ -1,5 +1,5 @@
-import { type PROXY_HANDLER } from '@lib-config/http/proxy/proxy.constants';
-import { type UriParamsModel } from '@lib-shared/http/utils/uri/uri.models';
+import { type PROXY_HANDLER } from '@lib/config/http/proxy/proxy.constants';
+import { type UriParamsModel } from '@lib/shared/http/utils/uri/uri.models';
 
 export type ProxyConfigModel = {
   configFile: string;

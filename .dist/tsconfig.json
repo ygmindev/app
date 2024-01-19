@@ -33,46 +33,46 @@
       "redux-persist/integration/*": [
         "node_modules/redux-persist/types/integration/*"
       ],
-      "@app-native/*": [
+      "@app/native/*": [
         "packages/app-native/src/*"
       ],
-      "@app-web/*": [
+      "@app/web/*": [
         "packages/app-web/src/*"
       ],
-      "@app-web-admin/*": [
+      "@app/web-admin/*": [
         "packages/app-web-admin/src/*"
       ],
-      "@app-web-library/*": [
+      "@app/web-library/*": [
         "packages/app-web-library/src/*"
       ],
-      "@backend-graphql-sandbox/*": [
+      "@backend/graphql-sandbox/*": [
         "packages/backend-graphql-sandbox/src/*"
       ],
-      "@backend-lambda/*": [
+      "@backend/lambda/*": [
         "packages/backend-lambda/src/*"
       ],
-      "@lib-backend/*": [
+      "@lib/backend/*": [
         "packages/lib-backend/src/*"
       ],
-      "@lib-config/*": [
+      "@lib/config/*": [
         "packages/lib-config/src/*"
       ],
-      "@lib-frontend/*": [
+      "@lib/frontend/*": [
         "packages/lib-frontend/src/*"
       ],
-      "@lib-library/*": [
+      "@lib/library/*": [
         "packages/lib-library/src/*"
       ],
-      "@lib-platform/*": [
+      "@lib/platform/*": [
         "packages/lib-platform/src/*"
       ],
-      "@lib-shared/*": [
+      "@lib/shared/*": [
         "packages/lib-shared/src/*"
       ],
-      "@tool-generate/*": [
+      "@tool/generate/*": [
         "packages/tool-generate/src/*"
       ],
-      "@tool-task/*": [
+      "@tool/task/*": [
         "packages/tool-task/src/*"
       ]
     },

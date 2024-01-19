@@ -1,10 +1,9 @@
-import { parsePhoneNumberFromString } from 'libphonenumber-js';
-import trim from 'lodash/trim';
-
 import {
   type _PhoneParseModel,
   type _PhoneParseParamsModel,
-} from '@lib-shared/locale/utils/phoneParse/_phoneParse.models';
+} from '@lib/shared/locale/utils/phoneParse/_phoneParse.models';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
+import trim from 'lodash/trim';
 
 export const _phoneParse = (params: _PhoneParseParamsModel): _PhoneParseModel => {
   try {

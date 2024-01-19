@@ -1,4 +1,4 @@
-import { type DecoratorModel } from '@lib-shared/core/core.models';
+import { type DecoratorModel } from '@lib/shared/core/core.models';
 
 export type WithConditionParamsModel = [
   condition: () => boolean,

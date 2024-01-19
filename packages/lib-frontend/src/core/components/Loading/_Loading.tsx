@@ -1,8 +1,8 @@
 import { type LoaderSizeMarginProps } from 'react-spinners/helpers/props';
 import PulseLoader from 'react-spinners/PulseLoader';
 
-import { type _LoadingPropsModel } from '@lib-frontend/core/components/Loading/_Loading.models';
-import { composeComponent } from '@lib-frontend/core/utils/composeComponent/composeComponent';
+import { type _LoadingPropsModel } from '@lib/frontend/core/components/Loading/_Loading.models';
+import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 
 const PulseLoaderF =
   (PulseLoader as unknown as { default: typeof PulseLoader }).default ?? PulseLoader;

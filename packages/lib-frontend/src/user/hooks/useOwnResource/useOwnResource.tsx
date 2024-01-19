@@ -1,12 +1,12 @@
-import { useResource } from '@lib-frontend/resource/hooks/useResource/useResource';
-import { useStore } from '@lib-frontend/state/hooks/useStore/useStore';
+import { useResource } from '@lib/frontend/resource/hooks/useResource/useResource';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import {
   type UseOwnResourceModel,
   type UseOwnResourceParamsModel,
-} from '@lib-frontend/user/hooks/useOwnResource/useOwnResource.models';
-import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
-import { collapseFilter } from '@lib-shared/resource/utils/collapseFilter/collapseFilter';
-import { USER_RESOURCE_NAME } from '@lib-shared/user/resources/User/User.constants';
+} from '@lib/frontend/user/hooks/useOwnResource/useOwnResource.models';
+import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { collapseFilter } from '@lib/shared/resource/utils/collapseFilter/collapseFilter';
+import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import filter from 'lodash/filter';
 
 export const useOwnResource = <TType, TForm = EntityResourceDataModel<TType>>({

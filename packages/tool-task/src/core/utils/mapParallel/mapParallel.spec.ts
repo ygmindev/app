@@ -1,5 +1,5 @@
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
-import { mapParallel } from '@tool-task/core/utils/mapParallel/mapParallel';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { mapParallel } from '@tool/task/core/utils/mapParallel/mapParallel';
 
 const { displayName } = withTest({ mapParallel });
 

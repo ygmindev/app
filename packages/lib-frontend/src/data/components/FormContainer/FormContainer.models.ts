@@ -1,15 +1,15 @@
-import { type AsyncBoundaryContextModel } from '@lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
-import { type ElementStatePropsModel } from '@lib-frontend/core/core.models';
+import { type AsyncBoundaryContextModel } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
+import { type ElementStatePropsModel } from '@lib/frontend/core/core.models';
 import {
   type FieldPropsModel,
   type FieldRefModel,
   type FormRefModel,
   type SubmittablePropsModel,
-} from '@lib-frontend/data/data.models';
-import { type UseFormParamsModel } from '@lib-frontend/data/hooks/useForm/useForm.models';
-import { type TranslatableTextModel } from '@lib-frontend/locale/locale.models';
-import { type StringKeyModel } from '@lib-shared/core/core.models';
-import { type WithIdModel } from '@lib-shared/core/utils/withId/withId.models';
+} from '@lib/frontend/data/data.models';
+import { type UseFormParamsModel } from '@lib/frontend/data/hooks/useForm/useForm.models';
+import { type TranslatableTextModel } from '@lib/frontend/locale/locale.models';
+import { type StringKeyModel } from '@lib/shared/core/core.models';
+import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type FunctionComponentElement, type ReactNode, type RefObject } from 'react';
 
 export type FormContainerPropsModel<TType, TResult = void> = UseFormParamsModel<TType, TResult> &

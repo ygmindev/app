@@ -1,5 +1,5 @@
-import { reduceSequence } from '@lib-shared/core/utils/reduceSequence/reduceSequence';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { reduceSequence } from '@lib/shared/core/utils/reduceSequence/reduceSequence';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ reduceSequence });
 

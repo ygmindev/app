@@ -1,5 +1,5 @@
-import { withId } from '@lib-shared/core/utils/withId/withId';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { withId } from '@lib/shared/core/utils/withId/withId';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ withId });
 

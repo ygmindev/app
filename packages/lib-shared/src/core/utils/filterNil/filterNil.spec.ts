@@ -1,5 +1,5 @@
-import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ filterNil });
 

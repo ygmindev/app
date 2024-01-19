@@ -1,5 +1,5 @@
-import { _Store } from '@lib-frontend/state/utils/Store/_Store';
-import { type StoreModel } from '@lib-frontend/state/utils/Store/Store.models';
+import { _Store } from '@lib/frontend/state/utils/Store/_Store';
+import { type StoreModel } from '@lib/frontend/state/utils/Store/Store.models';
 
 export class Store<
     TKeys extends Array<string>,

@@ -1,7 +1,7 @@
 import {
   type _DatabaseConfigModel,
   type DatabaseConfigModel,
-} from '@lib-config/database/database.models';
+} from '@lib/config/database/database.models';
 
 export const _database = ({
   database,

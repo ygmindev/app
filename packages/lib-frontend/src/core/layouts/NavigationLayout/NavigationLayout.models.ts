@@ -1,8 +1,8 @@
 import {
   type ChildrenPropsModel,
   type TranslatableOptionModel,
-} from '@lib-frontend/core/core.models';
-import { type ValuePropsModel } from '@lib-frontend/data/data.models';
+} from '@lib/frontend/core/core.models';
+import { type ValuePropsModel } from '@lib/frontend/data/data.models';
 
 export type NavigationLayoutPropsModel<TType extends TranslatableOptionModel> =
   NavigationPropsModel<TType> & ChildrenPropsModel;

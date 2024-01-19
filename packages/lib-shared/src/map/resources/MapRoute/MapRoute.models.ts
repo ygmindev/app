@@ -1,4 +1,4 @@
-import { type PriceTierModel } from '@lib-shared/aroom/utils/PriceTier/PriceTier.models';
+import { type PriceTierModel } from '@lib/shared/aroom/utils/PriceTier/PriceTier.models';
 
 export type MapRouteModel = {
   distance: number;

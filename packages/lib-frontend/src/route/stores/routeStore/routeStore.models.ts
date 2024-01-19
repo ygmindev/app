@@ -1,6 +1,6 @@
-import { type LocationModel } from '@lib-frontend/route/route.models';
-import { type ReducerModel } from '@lib-frontend/state/state.models';
-import { type EmptyObjectModel } from '@lib-shared/core/core.models';
+import { type LocationModel } from '@lib/frontend/route/route.models';
+import { type ReducerModel } from '@lib/frontend/state/state.models';
+import { type EmptyObjectModel } from '@lib/shared/core/core.models';
 
 export type RouteHeaderModel = {
   title?: string;

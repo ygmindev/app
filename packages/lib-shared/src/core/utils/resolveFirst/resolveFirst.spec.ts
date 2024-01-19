@@ -1,5 +1,5 @@
-import { resolveFirst } from '@lib-shared/core/utils/resolveFirst/resolveFirst';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { resolveFirst } from '@lib/shared/core/utils/resolveFirst/resolveFirst';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ resolveFirst });
 

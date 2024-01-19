@@ -1,8 +1,8 @@
-import { fromExecutable } from '@lib-backend/file/utils/fromExecutable/fromExecutable';
+import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
 import {
   type RunServerModel,
   type RunServerParamsModel,
-} from '@tool-task/platform/server/utils/runServer/runServer.models';
+} from '@tool/task/platform/server/utils/runServer/runServer.models';
 
 export const runServer = ({
   host = process.env.STATIC_HOST,

@@ -1,5 +1,5 @@
-import { validateAlphaNumeric } from '@lib-frontend/data/utils/validateAlphaNumeric/validateAlphaNumeric';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { validateAlphaNumeric } from '@lib/frontend/data/utils/validateAlphaNumeric/validateAlphaNumeric';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ validateAlphaNumeric });
 

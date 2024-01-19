@@ -1,8 +1,8 @@
 import { type ReactElement } from 'react';
 
-import { type FormValidatorsModel } from '@lib-frontend/data/data.models';
-import { type UseTableParamsModel } from '@lib-frontend/data/hooks/useTable/useTable.models';
-import { type TranslatableTextModel } from '@lib-frontend/locale/locale.models';
+import { type FormValidatorsModel } from '@lib/frontend/data/data.models';
+import { type UseTableParamsModel } from '@lib/frontend/data/hooks/useTable/useTable.models';
+import { type TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 
 export type TablePropsModel<TType> = UseTableParamsModel<TType> & {
   emptyCell?: TranslatableTextModel;

@@ -1,7 +1,7 @@
 import {
   type _RenderModel,
   type _RenderParamsModel,
-} from '@lib-frontend/test/utils/render/_render.models';
+} from '@lib/frontend/test/utils/render/_render.models';
 import { render } from '@testing-library/react-native';
 import { type ReactElement } from 'react';
 

@@ -1,14 +1,14 @@
-import { fromConfig } from '@lib-backend/file/utils/fromConfig/fromConfig';
-import { toRelative } from '@lib-backend/file/utils/toRelative/toRelative';
-import { config as fileConfig } from '@lib-config/core/file/file';
+import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
+import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
+import { config as fileConfig } from '@lib/config/core/file/file';
 import {
   type _ServerlessConfigModel,
   type ServerlessConfigModel,
-} from '@lib-config/platform/serverless/serverless.models';
-import { trimPathname } from '@lib-frontend/route/utils/trimPathname/trimPathname';
-import { PLATFORM } from '@lib-platform/core/core.constants';
-import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
-import { HTTP_METHOD } from '@lib-shared/http/http.constants';
+} from '@lib/config/platform/serverless/serverless.models';
+import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
+import { PLATFORM } from '@lib/platform/core/core.constants';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { HTTP_METHOD } from '@lib/shared/http/http.constants';
 import { type AWS } from '@serverless/typescript';
 import reduce from 'lodash/reduce';
 

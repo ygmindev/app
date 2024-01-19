@@ -1,5 +1,5 @@
-import { type TaskParamsModel } from '@tool-task/core/core.models';
-import { type PortKillParamsModel } from '@tool-task/core/tasks/portKill/portKill.models';
+import { type TaskParamsModel } from '@tool/task/core/core.models';
+import { type PortKillParamsModel } from '@tool/task/core/tasks/portKill/portKill.models';
 
 const portKill: TaskParamsModel<PortKillParamsModel> = {
   name: 'port-kill',

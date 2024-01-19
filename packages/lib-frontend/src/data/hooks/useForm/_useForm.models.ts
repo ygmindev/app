@@ -1,5 +1,5 @@
-import { type FormErrorModel, type SubmittablePropsModel } from '@lib-frontend/data/data.models';
-import { type StringKeyModel } from '@lib-shared/core/core.models';
+import { type FormErrorModel, type SubmittablePropsModel } from '@lib/frontend/data/data.models';
+import { type StringKeyModel } from '@lib/shared/core/core.models';
 
 export type _UseFormParamsModel<TType, TResult = void> = Pick<
   SubmittablePropsModel<TType, TResult>,

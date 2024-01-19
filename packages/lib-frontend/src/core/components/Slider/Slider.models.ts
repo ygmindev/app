@@ -1,4 +1,4 @@
-import { type _SliderPropsModel } from '@lib-frontend/core/components/Slider/_Slider.models';
+import { type _SliderPropsModel } from '@lib/frontend/core/components/Slider/_Slider.models';
 
 export type SliderPropsModel = Omit<
   _SliderPropsModel,

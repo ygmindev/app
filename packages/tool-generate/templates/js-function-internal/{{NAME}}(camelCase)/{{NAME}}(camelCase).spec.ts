@@ -1,4 +1,4 @@
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { {{NAME}}(camelCase) } from '{{PATH}}/{{NAME}}(camelCase)/{{NAME}}(camelCase)';
 
 const { displayName } = withTest({ {{NAME}}(camelCase) });

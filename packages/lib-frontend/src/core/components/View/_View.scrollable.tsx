@@ -2,18 +2,18 @@ import { Fragment, useState } from 'react';
 import { type ViewProps } from 'react-native';
 import { ScrollView, StyleSheet } from 'react-native';
 
-import { ScrollBar } from '@lib-frontend/core/components/ScrollBar/ScrollBar';
-import { _viewParams as _viewParamsBase } from '@lib-frontend/core/components/View/_View';
+import { ScrollBar } from '@lib/frontend/core/components/ScrollBar/ScrollBar';
+import { _viewParams as _viewParamsBase } from '@lib/frontend/core/components/View/_View';
 import {
   type _ViewPropsModel,
   type _ViewRefModel,
-} from '@lib-frontend/core/components/View/_View.models';
-import { View } from '@lib-frontend/core/components/View/View';
-import { type MeasureModel, type PositionModel } from '@lib-frontend/core/core.models';
-import { composeComponent } from '@lib-frontend/core/utils/composeComponent/composeComponent';
-import { type ComposeComponentParamsModel } from '@lib-frontend/core/utils/composeComponent/composeComponent.models';
-import { type ViewStyleModel } from '@lib-frontend/style/style.models';
-import { partionObject } from '@lib-shared/core/utils/partionObject/partionObject';
+} from '@lib/frontend/core/components/View/_View.models';
+import { View } from '@lib/frontend/core/components/View/View';
+import { type MeasureModel, type PositionModel } from '@lib/frontend/core/core.models';
+import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
+import { type ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
+import { type ViewStyleModel } from '@lib/frontend/style/style.models';
+import { partionObject } from '@lib/shared/core/utils/partionObject/partionObject';
 
 export const _viewParams: ComposeComponentParamsModel<
   _ViewPropsModel,

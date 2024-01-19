@@ -1,14 +1,14 @@
 import { useContext } from 'react';
 
-import { asyncBoundaryContext } from '@lib-frontend/core/containers/AsyncBoundary/AsyncBoundary';
-import { type ErrorContextModel } from '@lib-frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
-import { ERROR_TYPE } from '@lib-frontend/core/hooks/useErrorContext/useErrorContext.constants';
-import { type UseErrorContextModel } from '@lib-frontend/core/hooks/useErrorContext/useErrorContext.models';
-import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useNotification } from '@lib-frontend/notification/hooks/useNotification/useNotification';
-import { type HttpError } from '@lib-shared/http/errors/HttpError/HttpError';
-import { HTTP_STATUS_CODE } from '@lib-shared/http/http.constants';
-import { error } from '@lib-shared/logging/utils/logger/logger';
+import { asyncBoundaryContext } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary';
+import { type ErrorContextModel } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
+import { ERROR_TYPE } from '@lib/frontend/core/hooks/useErrorContext/useErrorContext.constants';
+import { type UseErrorContextModel } from '@lib/frontend/core/hooks/useErrorContext/useErrorContext.models';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
+import { type HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
+import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
+import { error } from '@lib/shared/logging/utils/logger/logger';
 
 export const useErrorContext = (): UseErrorContextModel => {
   const { t } = useTranslation();

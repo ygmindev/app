@@ -1,11 +1,11 @@
-import { type NUMBER_RANGE_TYPE } from '@lib-frontend/data/components/NumberRangeField/NumberRangeField.constants';
+import { type NUMBER_RANGE_TYPE } from '@lib/frontend/data/components/NumberRangeField/NumberRangeField.constants';
 import {
   type FieldPropsModel,
   type FieldRefModel,
   type NumberUnitModel,
   type NumberUnitTypeModel,
-} from '@lib-frontend/data/data.models';
-import { type NumberRangeModel } from '@lib-shared/data/resources/NumberRange/NumberRange.models';
+} from '@lib/frontend/data/data.models';
+import { type NumberRangeModel } from '@lib/shared/data/resources/NumberRange/NumberRange.models';
 
 export type NumberRangeFieldPropsModel<TType extends NumberUnitModel> =
   FieldPropsModel<NumberRangeModel> & {

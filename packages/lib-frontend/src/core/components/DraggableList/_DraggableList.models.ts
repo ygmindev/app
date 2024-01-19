@@ -1,4 +1,4 @@
-import { type ValuePropsModel } from '@lib-frontend/data/data.models';
+import { type ValuePropsModel } from '@lib/frontend/data/data.models';
 import { type ReactElement } from 'react';
 
 export type _DraggableListPropsModel<TType> = ValuePropsModel<Array<TType>> & {

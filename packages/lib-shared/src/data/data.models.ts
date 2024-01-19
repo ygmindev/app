@@ -1,10 +1,10 @@
-import { type NumberUnitTypeModel } from '@lib-frontend/data/data.models';
+import { type NumberUnitTypeModel } from '@lib/frontend/data/data.models';
 import {
   type DATA_TYPE,
   type DATA_TYPE_MORE,
   type FORM_MODE,
   type PROPERTY_TYPE,
-} from '@lib-shared/data/data.constants';
+} from '@lib/shared/data/data.constants';
 
 export type FormModeModel = `${FORM_MODE}`;
 

@@ -1,10 +1,10 @@
-import { PressableItem } from '@lib-frontend/core/components/PressableItem/PressableItem';
-import { type TilePropsModel } from '@lib-frontend/core/components/Tile/Tile.models';
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { DIRECTION } from '@lib-frontend/core/core.constants';
-import { type LFCModel } from '@lib-frontend/core/core.models';
-import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { FONT_STYLE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { PressableItem } from '@lib/frontend/core/components/PressableItem/PressableItem';
+import { type TilePropsModel } from '@lib/frontend/core/components/Tile/Tile.models';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { DIRECTION } from '@lib/frontend/core/core.constants';
+import { type LFCModel } from '@lib/frontend/core/core.models';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 export const Tile: LFCModel<TilePropsModel> = ({
   children,

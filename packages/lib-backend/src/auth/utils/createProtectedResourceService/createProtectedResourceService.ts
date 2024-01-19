@@ -1,26 +1,26 @@
-import { AccessService } from '@lib-backend/auth/resources/Access/AccessService/AccessService';
+import { AccessService } from '@lib/backend/auth/resources/Access/AccessService/AccessService';
 import {
   type CreateProtectedResoureServiceModel,
   type CreateProtectedResoureServiceParamsModel,
-} from '@lib-backend/auth/utils/createProtectedResourceService/createProtectedResourceService.models';
-import { Container } from '@lib-backend/core/utils/Container/Container';
-import { GroupService } from '@lib-backend/group/resources/Group/GroupService/GroupService';
-import { createEntityResourceService } from '@lib-backend/resource/utils/createEntityResourceService/createEntityResourceService';
-import { type ContextModel } from '@lib-platform/core/core.models';
-import { UnauthenticatedError } from '@lib-shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
-import { type ProtectedResourceModel } from '@lib-shared/auth/resources/ProtectedResource/ProtectedResource.models';
-import { type PartialModel } from '@lib-shared/core/core.models';
-import { NotFoundError } from '@lib-shared/core/errors/NotFoundError/NotFoundError';
-import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
-import { withInject } from '@lib-shared/core/utils/withInject/withInject';
-import { GROUP_RESOURCE_NAME } from '@lib-shared/group/resources/Group/Group.constants';
-import { type GroupModel } from '@lib-shared/group/resources/Group/Group.models';
-import { type GroupServiceModel } from '@lib-shared/group/resources/Group/GroupService/GroupService.models';
-import { type RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
-import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
-import { type InputModel } from '@lib-shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '@lib-shared/resource/utils/Output/Output.models';
-import { USER_RESOURCE_NAME } from '@lib-shared/user/resources/User/User.constants';
+} from '@lib/backend/auth/utils/createProtectedResourceService/createProtectedResourceService.models';
+import { Container } from '@lib/backend/core/utils/Container/Container';
+import { GroupService } from '@lib/backend/group/resources/Group/GroupService/GroupService';
+import { createEntityResourceService } from '@lib/backend/resource/utils/createEntityResourceService/createEntityResourceService';
+import { type ContextModel } from '@lib/platform/core/core.models';
+import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
+import { type ProtectedResourceModel } from '@lib/shared/auth/resources/ProtectedResource/ProtectedResource.models';
+import { type PartialModel } from '@lib/shared/core/core.models';
+import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { withInject } from '@lib/shared/core/utils/withInject/withInject';
+import { GROUP_RESOURCE_NAME } from '@lib/shared/group/resources/Group/Group.constants';
+import { type GroupModel } from '@lib/shared/group/resources/Group/Group.models';
+import { type GroupServiceModel } from '@lib/shared/group/resources/Group/GroupService/GroupService.models';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
+import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import { ObjectId } from 'mongodb';
 
 export const createProtectedResoureService = <

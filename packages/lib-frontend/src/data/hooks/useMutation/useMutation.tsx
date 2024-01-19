@@ -1,12 +1,12 @@
-import { config } from '@lib-config/data/query/query';
-import { useErrorContext } from '@lib-frontend/core/hooks/useErrorContext/useErrorContext';
-import { ERROR_TYPE } from '@lib-frontend/core/hooks/useErrorContext/useErrorContext.constants';
-import { _useMutation } from '@lib-frontend/data/hooks/useMutation/_useMutation';
+import { config } from '@lib/config/data/query/query';
+import { useErrorContext } from '@lib/frontend/core/hooks/useErrorContext/useErrorContext';
+import { ERROR_TYPE } from '@lib/frontend/core/hooks/useErrorContext/useErrorContext.constants';
+import { _useMutation } from '@lib/frontend/data/hooks/useMutation/_useMutation';
 import {
   type UseMutationModel,
   type UseMutationParamsModel,
-} from '@lib-frontend/data/hooks/useMutation/useMutation.models';
-import { useStore } from '@lib-frontend/state/hooks/useStore/useStore';
+} from '@lib/frontend/data/hooks/useMutation/useMutation.models';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 
 export const useMutation = <TParams = undefined, TResult = void>(
   ...[id, callback, options]: UseMutationParamsModel<TParams, TResult>

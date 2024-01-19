@@ -1,9 +1,9 @@
-import { Dropdown } from '@lib-frontend/core/components/Dropdown/Dropdown';
-import { type DropdownPropsModel } from '@lib-frontend/core/components/Dropdown/Dropdown.models';
-import { WrapperFixture } from '@lib-frontend/core/components/Wrapper/Wrapper.fixtures';
-import { render } from '@lib-frontend/test/utils/render/render';
-import { waitForExpect } from '@lib-frontend/test/utils/waitForExpect/waitForExpect';
-import { withTestComponent } from '@lib-frontend/test/utils/withTestComponent/withTestComponent';
+import { Dropdown } from '@lib/frontend/core/components/Dropdown/Dropdown';
+import { type DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/Dropdown.models';
+import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { waitForExpect } from '@lib/frontend/test/utils/waitForExpect/waitForExpect';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const ANCHOR = 'ANCHOR';
 const CHILDREN = 'CHILDREN';

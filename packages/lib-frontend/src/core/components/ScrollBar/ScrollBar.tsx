@@ -1,10 +1,10 @@
-import { type ScrollBarPropsModel } from '@lib-frontend/core/components/ScrollBar/ScrollBar.models';
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { type LFCModel } from '@lib-frontend/core/core.models';
-import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR, THEME_SIZE } from '@lib-frontend/style/style.constants';
-import { SHAPE_POSITION } from '@lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { type ScrollBarPropsModel } from '@lib/frontend/core/components/ScrollBar/ScrollBar.models';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { type LFCModel } from '@lib/frontend/core/core.models';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const ScrollBar: LFCModel<ScrollBarPropsModel> = ({
   contentSize,

@@ -1,17 +1,17 @@
-import { type RLFCModel } from '@lib-frontend/core/core.models';
-import { DropdownField } from '@lib-frontend/data/components/DropdownField/DropdownField';
-import { useValueControlled } from '@lib-frontend/data/hooks/useValueControlled/useValueControlled';
+import { type RLFCModel } from '@lib/frontend/core/core.models';
+import { DropdownField } from '@lib/frontend/data/components/DropdownField/DropdownField';
+import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import {
   type AddressFieldPropsModel,
   type AddressFieldRefModel,
   type AddressOptionModel,
-} from '@lib-frontend/map/components/AddressField/AddressField.models';
+} from '@lib/frontend/map/components/AddressField/AddressField.models';
 import {
   deserializeAddress,
   serializeAddress,
   useMapQuery,
-} from '@lib-frontend/map/hooks/useMapQuery/useMapQuery';
-import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+} from '@lib/frontend/map/hooks/useMapQuery/useMapQuery';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { forwardRef } from 'react';
 
 export const AddressField: RLFCModel<AddressFieldRefModel, AddressFieldPropsModel> = forwardRef(

@@ -1,6 +1,6 @@
-import { defineConfig } from '@lib-config/core/utils/defineConfig/defineConfig';
-import { _query } from '@lib-config/data/query/_query';
-import { type QueryConfigModel } from '@lib-config/data/query/query.models';
+import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
+import { _query } from '@lib/config/data/query/_query';
+import { type QueryConfigModel } from '@lib/config/data/query/query.models';
 
 const { _config, config } = defineConfig({
   _config: _query,

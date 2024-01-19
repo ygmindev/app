@@ -1,9 +1,9 @@
 import {
   type UseStylesModel,
   type UseStylesParamsModel,
-} from '@lib-frontend/style/hooks/useStyles/useStyles.models';
-import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
-import { type StyleModel, type ViewStyleModel } from '@lib-frontend/style/style.models';
+} from '@lib/frontend/style/hooks/useStyles/useStyles.models';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { type StyleModel, type ViewStyleModel } from '@lib/frontend/style/style.models';
 import isFunction from 'lodash/isFunction';
 import { useMemo } from 'react';
 import { StyleSheet } from 'react-native';

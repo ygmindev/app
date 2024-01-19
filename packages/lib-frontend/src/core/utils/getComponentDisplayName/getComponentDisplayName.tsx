@@ -4,8 +4,8 @@ import { type ComponentType } from 'react';
 import {
   type GetComponentDisplayNameModel,
   type GetComponentDisplayNameParamsModel,
-} from '@lib-frontend/core/utils/getComponentDisplayName/getComponentDisplayName.models';
-import { uid } from '@lib-shared/core/utils/uid/uid';
+} from '@lib/frontend/core/utils/getComponentDisplayName/getComponentDisplayName.models';
+import { uid } from '@lib/shared/core/utils/uid/uid';
 
 export const getComponentDisplayName = (
   params: GetComponentDisplayNameParamsModel,

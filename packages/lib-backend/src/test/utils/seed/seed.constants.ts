@@ -1,8 +1,8 @@
-import { type SeedDataModel } from '@lib-backend/test/utils/seed/seed.models';
-import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib-shared/test/resources/TestableEntityResource/TestableEntityResource.constants';
-import { type TestableEntityResourceFormModel } from '@lib-shared/test/resources/TestableEntityResource/TestableEntityResource.models';
-import { USER_RESOURCE_NAME } from '@lib-shared/user/resources/User/User.constants';
-import { USER_FIXTURE } from '@lib-shared/user/resources/User/User.fixtures';
+import { type SeedDataModel } from '@lib/backend/test/utils/seed/seed.models';
+import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.constants';
+import { type TestableEntityResourceFormModel } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';
+import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
+import { USER_FIXTURE } from '@lib/shared/user/resources/User/User.fixtures';
 
 export const TESTABLE_ENTITY_RESOURCE_SEED_DATA: Array<TestableEntityResourceFormModel> = [
   {

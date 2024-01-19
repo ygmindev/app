@@ -1,7 +1,7 @@
 import {
   type ArrayPromptArgsModel,
   type StringPromptArgsModel,
-} from '@tool-task/core/utils/prompt/prompt.models';
+} from '@tool/task/core/utils/prompt/prompt.models';
 
 export type _PromptParamsModel<TType> = Array<
   {

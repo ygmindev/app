@@ -1,6 +1,6 @@
 // COMPLETE
-import { type PartialDeepModel } from '@lib-shared/core/core.models';
-import { type MergeStrategyModel } from '@lib-shared/core/utils/merge/merge.models';
+import { type PartialDeepModel } from '@lib/shared/core/core.models';
+import { type MergeStrategyModel } from '@lib/shared/core/utils/merge/merge.models';
 
 export type DefineConfigParamsModel<
   TParams,

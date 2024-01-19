@@ -1,31 +1,31 @@
-import { OtpService } from '@lib-backend/auth/resources/Otp/OtpService/OtpService';
-import { JwtService } from '@lib-backend/auth/utils/JwtService/JwtService';
-import { withContainer } from '@lib-backend/core/utils/withContainer/withContainer';
-import { objectToEquality } from '@lib-backend/resource/utils/objectToEquality/objectToEquality';
-import { UserService } from '@lib-backend/user/resources/User/UserService/UserService';
-import { type ContextModel } from '@lib-platform/core/core.models';
-import { UnauthorizedError } from '@lib-shared/auth/errors/UnauthorizedError/UnauthorizedError';
+import { OtpService } from '@lib/backend/auth/resources/Otp/OtpService/OtpService';
+import { JwtService } from '@lib/backend/auth/utils/JwtService/JwtService';
+import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
+import { objectToEquality } from '@lib/backend/resource/utils/objectToEquality/objectToEquality';
+import { UserService } from '@lib/backend/user/resources/User/UserService/UserService';
+import { type ContextModel } from '@lib/platform/core/core.models';
+import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import {
   SIGN_IN_RESOURCE_NAME,
   SIGN_IN_TOKEN_CLAIM_KEYS,
-} from '@lib-shared/auth/resources/SignIn/SignIn.constants';
+} from '@lib/shared/auth/resources/SignIn/SignIn.constants';
 import {
   type SignInFormModel,
   type SignInModel,
-} from '@lib-shared/auth/resources/SignIn/SignIn.models';
-import { type SignInServiceModel } from '@lib-shared/auth/resources/SignIn/SignInService/SignInService.models';
-import { type PartialModel } from '@lib-shared/core/core.models';
-import { NotFoundError } from '@lib-shared/core/errors/NotFoundError/NotFoundError';
-import { cleanObject } from '@lib-shared/core/utils/cleanObject/cleanObject';
-import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
-import { pick } from '@lib-shared/core/utils/pick/pick';
-import { withInject } from '@lib-shared/core/utils/withInject/withInject';
-import { HttpError } from '@lib-shared/http/errors/HttpError/HttpError';
-import { HTTP_STATUS_CODE } from '@lib-shared/http/http.constants';
-import { type RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
-import { type InputModel } from '@lib-shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '@lib-shared/resource/utils/Output/Output.models';
-import { type UserFormModel, type UserModel } from '@lib-shared/user/resources/User/User.models';
+} from '@lib/shared/auth/resources/SignIn/SignIn.models';
+import { type SignInServiceModel } from '@lib/shared/auth/resources/SignIn/SignInService/SignInService.models';
+import { type PartialModel } from '@lib/shared/core/core.models';
+import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
+import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { pick } from '@lib/shared/core/utils/pick/pick';
+import { withInject } from '@lib/shared/core/utils/withInject/withInject';
+import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
+import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
+import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { type UserFormModel, type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withContainer({ name: `${SIGN_IN_RESOURCE_NAME}Service` })
 export class SignInService implements SignInServiceModel {

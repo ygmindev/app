@@ -1,16 +1,16 @@
-import { withContainer } from '@lib-backend/core/utils/withContainer/withContainer';
-import { HttpService } from '@lib-backend/http/utils/HttpService/HttpService';
-import { PRICING_TABLE } from '@lib-backend/map/resources/MapRoute/MapRouteService/MapRouteService.constants';
-import { TIMING } from '@lib-shared/aroom/aroom.constants';
-import { type TimingModel, type VehicleTypeModel } from '@lib-shared/aroom/aroom.models';
-import { type PriceTierModel } from '@lib-shared/aroom/utils/PriceTier/PriceTier.models';
-import { withInject } from '@lib-shared/core/utils/withInject/withInject';
-import { type MapRouteModel } from '@lib-shared/map/resources/MapRoute/MapRoute.models';
+import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
+import { HttpService } from '@lib/backend/http/utils/HttpService/HttpService';
+import { PRICING_TABLE } from '@lib/backend/map/resources/MapRoute/MapRouteService/MapRouteService.constants';
+import { TIMING } from '@lib/shared/aroom/aroom.constants';
+import { type TimingModel, type VehicleTypeModel } from '@lib/shared/aroom/aroom.models';
+import { type PriceTierModel } from '@lib/shared/aroom/utils/PriceTier/PriceTier.models';
+import { withInject } from '@lib/shared/core/utils/withInject/withInject';
+import { type MapRouteModel } from '@lib/shared/map/resources/MapRoute/MapRoute.models';
 import {
   type GetRouteInputModel,
   type MapRouteServiceModel,
-} from '@lib-shared/map/resources/MapRoute/MapRouteService/MapRouteService.models';
-import { type CoordinateModel } from '@lib-shared/map/utils/Coordinate/Coordinate.models';
+} from '@lib/shared/map/resources/MapRoute/MapRouteService/MapRouteService.models';
+import { type CoordinateModel } from '@lib/shared/map/utils/Coordinate/Coordinate.models';
 import round from 'lodash/round';
 import toNumber from 'lodash/toNumber';
 

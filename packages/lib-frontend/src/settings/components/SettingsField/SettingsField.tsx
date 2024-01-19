@@ -1,17 +1,17 @@
-import { Accordion } from '@lib-frontend/animation/components/Accordion/Accordion';
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
-import { type LFCPropsModel } from '@lib-frontend/core/core.models';
-import { SwitchField } from '@lib-frontend/data/components/SwitchField/SwitchField';
-import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { type SettingsFieldPropsModel } from '@lib-frontend/settings/components/SettingsField/SettingsField.models';
-import { SETTINGS } from '@lib-frontend/settings/settings.constants';
-import { useActions } from '@lib-frontend/state/hooks/useActions/useActions';
-import { useStore } from '@lib-frontend/state/hooks/useStore/useStore';
-import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { type CallableModel } from '@lib-shared/core/core.models';
-import { getValue } from '@lib-shared/core/utils/getValue/getValue';
-import { isEmpty } from '@lib-shared/core/utils/isEmpty/isEmpty';
+import { Accordion } from '@lib/frontend/animation/components/Accordion/Accordion';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { type LFCPropsModel } from '@lib/frontend/core/core.models';
+import { SwitchField } from '@lib/frontend/data/components/SwitchField/SwitchField';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { type SettingsFieldPropsModel } from '@lib/frontend/settings/components/SettingsField/SettingsField.models';
+import { SETTINGS } from '@lib/frontend/settings/settings.constants';
+import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { type CallableModel } from '@lib/shared/core/core.models';
+import { getValue } from '@lib/shared/core/utils/getValue/getValue';
+import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { cloneElement, type ReactElement, useState } from 'react';
 
 export const SettingsField = <TType = string,>({

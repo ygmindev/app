@@ -7,16 +7,16 @@ import {
 } from 'axios';
 import axios from 'axios';
 
-import { stringify } from '@lib-shared/core/utils/stringify/stringify';
-import { HttpError } from '@lib-shared/http/errors/HttpError/HttpError';
-import { HTTP_METHOD, HTTP_STATUS_CODE } from '@lib-shared/http/http.constants';
-import { type HttpMethodModel, type HttpResponseTypeModel } from '@lib-shared/http/http.models';
+import { stringify } from '@lib/shared/core/utils/stringify/stringify';
+import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
+import { HTTP_METHOD, HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
+import { type HttpMethodModel, type HttpResponseTypeModel } from '@lib/shared/http/http.models';
 import {
   type _HttpRequestParamsModel,
   type _HttpServiceModel,
-} from '@lib-shared/http/utils/HttpService/_HttpService.models';
-import { type HttpServiceParamsModel } from '@lib-shared/http/utils/HttpService/HttpService.models';
-import { uri } from '@lib-shared/http/utils/uri/uri';
+} from '@lib/shared/http/utils/HttpService/_HttpService.models';
+import { type HttpServiceParamsModel } from '@lib/shared/http/utils/HttpService/HttpService.models';
+import { uri } from '@lib/shared/http/utils/uri/uri';
 
 export class _HttpService implements _HttpServiceModel {
   protected _instance: AxiosInstance;

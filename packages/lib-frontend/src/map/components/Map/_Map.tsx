@@ -1,5 +1,5 @@
-import { type FCModel } from '@lib-frontend/core/core.models';
-import { type _MapPropsModel } from '@lib-frontend/map/components/Map/_Map.models';
+import { type FCModel } from '@lib/frontend/core/core.models';
+import { type _MapPropsModel } from '@lib/frontend/map/components/Map/_Map.models';
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 
 export const _Map: FCModel<_MapPropsModel> = ({ latitude, longitude, markers, zoom }) => {

@@ -1,4 +1,4 @@
-import { type _LintConfigModel, type LintConfigModel } from '@lib-config/node/lint/lint.models';
+import { type _LintConfigModel, type LintConfigModel } from '@lib/config/node/lint/lint.models';
 
 export const _lint = ({
   exclude,

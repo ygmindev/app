@@ -1,5 +1,5 @@
-import { timezoneFormat } from '@lib-shared/data/utils/timezoneFormat/timezoneFormat';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { timezoneFormat } from '@lib/shared/data/utils/timezoneFormat/timezoneFormat';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ timezoneFormat });
 

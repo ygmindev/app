@@ -1,4 +1,4 @@
-import { type PhoneNumberValueModel } from '@lib-shared/locale/locale.models';
+import { type PhoneNumberValueModel } from '@lib/shared/locale/locale.models';
 
 export type _PhoneParseParamsModel = string;
 

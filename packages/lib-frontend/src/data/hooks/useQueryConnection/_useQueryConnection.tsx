@@ -4,11 +4,11 @@ import isNumber from 'lodash/isNumber';
 import {
   type _UseQueryConnectionModel,
   type _UseQueryConnectionParamsModel,
-} from '@lib-frontend/data/hooks/useQueryConnection/_useQueryConnection.models';
-import { USE_QUERY_CONNECTION_LIMIT_DEFAULT } from '@lib-frontend/data/hooks/useQueryConnection/useQueryConnection.constants';
-import { debounce } from '@lib-shared/core/utils/debounce/debounce';
-import { type ConnectionModel } from '@lib-shared/resource/utils/Connection/Connection.models';
-import { type PaginationModel } from '@lib-shared/resource/utils/Pagination/Pagination.models';
+} from '@lib/frontend/data/hooks/useQueryConnection/_useQueryConnection.models';
+import { USE_QUERY_CONNECTION_LIMIT_DEFAULT } from '@lib/frontend/data/hooks/useQueryConnection/useQueryConnection.constants';
+import { debounce } from '@lib/shared/core/utils/debounce/debounce';
+import { type ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
+import { type PaginationModel } from '@lib/shared/resource/utils/Pagination/Pagination.models';
 
 export const _useQueryConnection = <TParams = undefined, TResult = void>(
   ...[id, callback, options]: _UseQueryConnectionParamsModel<TParams, TResult>

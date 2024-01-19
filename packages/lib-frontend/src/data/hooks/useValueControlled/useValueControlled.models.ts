@@ -1,4 +1,4 @@
-import { type ValuePropsModel } from '@lib-frontend/data/data.models';
+import { type ValuePropsModel } from '@lib/frontend/data/data.models';
 
 export type UseValueControlledParamsModel<TType> = ValuePropsModel<TType>;
 

@@ -1,18 +1,18 @@
 import {
   type UseGraphQlModel,
   type UseGraphQlParamsModel,
-} from '@lib-frontend/data/hooks/useGraphQl/useGraphQl.models';
-import { graphQlQuery } from '@lib-frontend/data/utils/graphQlQuery/graphQlQuery';
+} from '@lib/frontend/data/hooks/useGraphQl/useGraphQl.models';
+import { graphQlQuery } from '@lib/frontend/data/utils/graphQlQuery/graphQlQuery';
 import {
   type GraphQlHttpResponseModel,
   type GraphQlQueryHttpParamsModel,
-} from '@lib-frontend/data/utils/graphQlQuery/graphQlQuery.models';
-import { useApi } from '@lib-frontend/http/hooks/useApi/useApi';
-import { cleanObject } from '@lib-shared/core/utils/cleanObject/cleanObject';
-import { GRAPHQL } from '@lib-shared/graphql/graphql.constants';
-import { HttpError } from '@lib-shared/http/errors/HttpError/HttpError';
-import { HTTP_STATUS_CODE } from '@lib-shared/http/http.constants';
-import { error } from '@lib-shared/logging/utils/logger/logger';
+} from '@lib/frontend/data/utils/graphQlQuery/graphQlQuery.models';
+import { useApi } from '@lib/frontend/http/hooks/useApi/useApi';
+import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
+import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
+import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
+import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
+import { error } from '@lib/shared/logging/utils/logger/logger';
 
 export const useGraphQl = (params: UseGraphQlParamsModel = {}): UseGraphQlModel => {
   const { post } = useApi({ ...params, pathname: `api/${GRAPHQL}` });

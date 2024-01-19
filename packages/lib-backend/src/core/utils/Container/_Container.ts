@@ -3,8 +3,8 @@ import 'reflect-metadata';
 import { Container } from 'inversify';
 import isFunction from 'lodash/isFunction';
 
-import { type _ContainerModel } from '@lib-backend/core/utils/Container/_Container.models';
-import { type ClassModel } from '@lib-shared/core/core.models';
+import { type _ContainerModel } from '@lib/backend/core/utils/Container/_Container.models';
+import { type ClassModel } from '@lib/shared/core/core.models';
 
 const container = new Container({
   autoBindInjectable: true,

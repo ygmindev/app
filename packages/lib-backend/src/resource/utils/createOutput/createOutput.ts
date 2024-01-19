@@ -1,16 +1,16 @@
-import { createConnection } from '@lib-backend/resource/utils/createConnection/createConnection';
+import { createConnection } from '@lib/backend/resource/utils/createConnection/createConnection';
 import {
   type CreateOutputModel,
   type CreateOutputParamsModel,
-} from '@lib-backend/resource/utils/createOutput/createOutput.models';
-import { createRoot } from '@lib-backend/resource/utils/createRoot/createRoot';
-import { withEntity } from '@lib-backend/resource/utils/withEntity/withEntity';
-import { withField } from '@lib-backend/resource/utils/withField/withField';
-import { PROPERTY_TYPE } from '@lib-shared/data/data.constants';
-import { RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
-import { type ResourceMethodTypeModel } from '@lib-shared/resource/resource.models';
-import { type OutputModel } from '@lib-shared/resource/utils/Output/Output.models';
-import { type ResultModel } from '@lib-shared/resource/utils/Result/Result.models';
+} from '@lib/backend/resource/utils/createOutput/createOutput.models';
+import { createRoot } from '@lib/backend/resource/utils/createRoot/createRoot';
+import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
+import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { PROPERTY_TYPE } from '@lib/shared/data/data.constants';
+import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
+import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { type ResultModel } from '@lib/shared/resource/utils/Result/Result.models';
 
 export const createOutput = <TMethod extends ResourceMethodTypeModel, TType, TRoot = undefined>({
   Resource,

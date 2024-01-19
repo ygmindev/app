@@ -1,26 +1,26 @@
-import { Container } from '@lib-backend/core/utils/Container/Container';
-import { getFilter } from '@lib-backend/database/utils/Database/_Database';
-import { getConnection } from '@lib-backend/database/utils/getConnection/getConnection';
+import { Container } from '@lib/backend/core/utils/Container/Container';
+import { getFilter } from '@lib/backend/database/utils/Database/_Database';
+import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
 import {
   type CreateEmbeddedResourceServiceModel,
   type CreateEmbeddedResourceServiceParamsModel,
-} from '@lib-backend/resource/utils/createEmbeddedResourceService/createEmbeddedResourceService.models';
-import { createResourceService } from '@lib-backend/resource/utils/createResourceService/createResourceService';
-import { type PartialModel } from '@lib-shared/core/core.models';
-import { InvalidArgumentError } from '@lib-shared/core/errors/InvalidArgumentError/InvalidArgumentError';
-import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
-import { flattenObject } from '@lib-shared/core/utils/flattenObject/flattenObject';
-import { pick } from '@lib-shared/core/utils/pick/pick';
-import { type RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
-import { type EmbeddedResourceModel } from '@lib-shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
-import { type EntityResourceModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
-import { type EntityResourceServiceModel } from '@lib-shared/resource/resources/EntityResource/EntityResourceService/EntityResourceService.models';
-import { type ProjectModel } from '@lib-shared/resource/utils/Args/Args.models';
-import { type FilterModel } from '@lib-shared/resource/utils/Filter/Filter.models';
-import { type InputModel } from '@lib-shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '@lib-shared/resource/utils/Output/Output.models';
-import { type RootInputModel } from '@lib-shared/resource/utils/Root/Root.models';
-import { type UpdateModel } from '@lib-shared/resource/utils/Update/Update.models';
+} from '@lib/backend/resource/utils/createEmbeddedResourceService/createEmbeddedResourceService.models';
+import { createResourceService } from '@lib/backend/resource/utils/createResourceService/createResourceService';
+import { type PartialModel } from '@lib/shared/core/core.models';
+import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { flattenObject } from '@lib/shared/core/utils/flattenObject/flattenObject';
+import { pick } from '@lib/shared/core/utils/pick/pick';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { type EmbeddedResourceModel } from '@lib/shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
+import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceServiceModel } from '@lib/shared/resource/resources/EntityResource/EntityResourceService/EntityResourceService.models';
+import { type ProjectModel } from '@lib/shared/resource/utils/Args/Args.models';
+import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
+import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
+import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { type RootInputModel } from '@lib/shared/resource/utils/Root/Root.models';
+import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 import forEach from 'lodash/forEach';
 import reduce from 'lodash/reduce';
 

@@ -1,5 +1,5 @@
-import { mapValuesAsync } from '@lib-shared/core/utils/mapValuesAsync/mapValuesAsync';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { mapValuesAsync } from '@lib/shared/core/utils/mapValuesAsync/mapValuesAsync';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ mapValuesAsync });
 

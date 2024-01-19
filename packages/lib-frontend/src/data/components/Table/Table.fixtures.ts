@@ -1,8 +1,8 @@
 import range from 'lodash/range';
 
-import { type TableColumnModel } from '@lib-frontend/data/hooks/useTable/useTable.models';
-import { dateTimeFormat } from '@lib-shared/data/utils/dateTimeFormat/dateTimeFormat';
-import { DATE_TIME_FORMAT_TYPE } from '@lib-shared/data/utils/dateTimeFormat/dateTimeFormat.constants';
+import { type TableColumnModel } from '@lib/frontend/data/hooks/useTable/useTable.models';
+import { dateTimeFormat } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat';
+import { DATE_TIME_FORMAT_TYPE } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat.constants';
 
 export type TableFixtureRowModel = {
   dateColumn: Date;

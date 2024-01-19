@@ -1,5 +1,5 @@
-import { validateLength } from '@lib-frontend/data/utils/validateLength/validateLength';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { validateLength } from '@lib/frontend/data/utils/validateLength/validateLength';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ validateLength });
 

@@ -1,7 +1,7 @@
-import { ScratchPadPage } from '@lib-frontend/dev/pages/ScratchPadPage/ScratchPadPage';
-import { type ScratchPadPagePropsModel } from '@lib-frontend/dev/pages/ScratchPadPage/ScratchPadPage.models';
-import { render } from '@lib-frontend/test/utils/render/render';
-import { withTestComponent } from '@lib-frontend/test/utils/withTestComponent/withTestComponent';
+import { ScratchPadPage } from '@lib/frontend/dev/pages/ScratchPadPage/ScratchPadPage';
+import { type ScratchPadPagePropsModel } from '@lib/frontend/dev/pages/ScratchPadPage/ScratchPadPage.models';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<ScratchPadPagePropsModel>({
   target: ScratchPadPage,

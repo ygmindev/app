@@ -4,16 +4,16 @@ import { type IconProps } from 'react-native-vector-icons/Icon';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import { type _IconPropsModel } from '@lib-frontend/core/components/Icon/_Icon.models';
+import { type _IconPropsModel } from '@lib/frontend/core/components/Icon/_Icon.models';
 import {
   FONTAWESOME_ICONS,
   ICONS,
   IONIC_ICONS,
   MATERIAL_ICONS,
-} from '@lib-frontend/core/components/Icon/Icon.constants';
-import { type SFCModel } from '@lib-frontend/core/core.models';
-import { useStyles } from '@lib-frontend/style/hooks/useStyles/useStyles';
-import { type TextStyleModel } from '@lib-frontend/style/style.models';
+} from '@lib/frontend/core/components/Icon/Icon.constants';
+import { type SFCModel } from '@lib/frontend/core/core.models';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { type TextStyleModel } from '@lib/frontend/style/style.models';
 
 export const _Icon: SFCModel<_IconPropsModel, TextStyleModel> = forwardRef(
   ({ icon, ...props }, ref) => {

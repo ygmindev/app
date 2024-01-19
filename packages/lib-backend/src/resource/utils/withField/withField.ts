@@ -14,13 +14,13 @@ import {
 import { Field, Float } from 'type-graphql';
 import { type ReturnTypeFuncValue } from 'type-graphql/dist/decorators/types';
 
-import { FIELD_RELATION } from '@lib-backend/resource/utils/withField/withField.constants';
+import { FIELD_RELATION } from '@lib/backend/resource/utils/withField/withField.constants';
 import {
   type WithFieldModel,
   type WithFieldParamsModel,
-} from '@lib-backend/resource/utils/withField/withField.models';
-import { type StringKeyModel } from '@lib-shared/core/core.models';
-import { DATA_TYPE, PROPERTY_TYPE } from '@lib-shared/data/data.constants';
+} from '@lib/backend/resource/utils/withField/withField.models';
+import { type StringKeyModel } from '@lib/shared/core/core.models';
+import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 
 const getField = <TType extends unknown>({
   Resource,

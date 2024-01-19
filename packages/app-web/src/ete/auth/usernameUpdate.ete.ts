@@ -1,10 +1,10 @@
-import { signIn } from '@app-web/ete/auth/utils/signIn/signIn';
-import { initialize } from '@lib-backend/setup/utils/initialize/initialize';
-import { seed } from '@lib-backend/test/utils/seed/seed';
-import { USERNAME_FORM_TEST_ID } from '@lib-frontend/auth/containers/UsernameForm/UsernameForm.constants';
-import { withScreen } from '@lib-frontend/test/utils/withScreen/withScreen';
-import { EMAIL, PERSONAL } from '@lib-frontend/user/user.constants';
-import { ACCOUNT } from '@lib-shared/user/user.constants';
+import { signIn } from '@app/web/ete/auth/utils/signIn/signIn';
+import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
+import { seed } from '@lib/backend/test/utils/seed/seed';
+import { USERNAME_FORM_TEST_ID } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.constants';
+import { withScreen } from '@lib/frontend/test/utils/withScreen/withScreen';
+import { EMAIL, PERSONAL } from '@lib/frontend/user/user.constants';
+import { ACCOUNT } from '@lib/shared/user/user.constants';
 
 describe('usernameUpdate', () => {
   beforeAll(async () => {

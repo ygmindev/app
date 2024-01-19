@@ -1,8 +1,8 @@
-import { ItemList } from '@lib-frontend/core/components/ItemList/ItemList';
-import { type LFCModel } from '@lib-frontend/core/core.models';
-import { type RouteListPropsModel } from '@lib-frontend/route/components/RouteList/RouteList.models';
-import { useRouter } from '@lib-frontend/route/hooks/useRouter/useRouter';
-import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { ItemList } from '@lib/frontend/core/components/ItemList/ItemList';
+import { type LFCModel } from '@lib/frontend/core/core.models';
+import { type RouteListPropsModel } from '@lib/frontend/route/components/RouteList/RouteList.models';
+import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
 export const RouteList: LFCModel<RouteListPropsModel> = ({ root, routes, title, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });

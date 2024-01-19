@@ -1,18 +1,18 @@
-import { Access } from '@lib-backend/auth/resources/Access/Access';
-import { createProtectedResoureService } from '@lib-backend/auth/utils/createProtectedResourceService/createProtectedResourceService';
-import { withContainer } from '@lib-backend/core/utils/withContainer/withContainer';
-import { type ContextModel } from '@lib-platform/core/core.models';
-import { UnauthenticatedError } from '@lib-shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
-import { ACCESS_RESOURCE_NAME } from '@lib-shared/auth/resources/Access/Access.constants';
+import { Access } from '@lib/backend/auth/resources/Access/Access';
+import { createProtectedResoureService } from '@lib/backend/auth/utils/createProtectedResourceService/createProtectedResourceService';
+import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
+import { type ContextModel } from '@lib/platform/core/core.models';
+import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
+import { ACCESS_RESOURCE_NAME } from '@lib/shared/auth/resources/Access/Access.constants';
 import {
   type AccessFormModel,
   type AccessModel,
-} from '@lib-shared/auth/resources/Access/Access.models';
-import { type AccessServiceModel } from '@lib-shared/auth/resources/Access/AccessService/AccessService.models';
-import { type RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
-import { type InputModel } from '@lib-shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '@lib-shared/resource/utils/Output/Output.models';
-import { USER_RESOURCE_NAME } from '@lib-shared/user/resources/User/User.constants';
+} from '@lib/shared/auth/resources/Access/Access.models';
+import { type AccessServiceModel } from '@lib/shared/auth/resources/Access/AccessService/AccessService.models';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
+import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 
 @withContainer({ name: `${ACCESS_RESOURCE_NAME}Service` })
 export class AccessService

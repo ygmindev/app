@@ -2,27 +2,27 @@ import range from 'lodash/range';
 import toNumber from 'lodash/toNumber';
 import { forwardRef, useState } from 'react';
 
-import { Appearable } from '@lib-frontend/animation/components/Appearable/Appearable';
+import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import {
   type OtpFieldPropsModel,
   type OtpFieldRefModel,
-} from '@lib-frontend/auth/components/OtpField/OtpField.models';
-import { Button } from '@lib-frontend/core/components/Button/Button';
-import { Loading } from '@lib-frontend/core/components/Loading/Loading';
-import { Tooltip } from '@lib-frontend/core/components/Tooltip/Tooltip';
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
-import { type MeasureModel, type RLFCModel } from '@lib-frontend/core/core.models';
-import { TextField } from '@lib-frontend/data/components/TextField/TextField';
-import { TEXT_FIELD_KEYBOARD } from '@lib-frontend/data/components/TextField/TextField.constants';
-import { useValueControlled } from '@lib-frontend/data/hooks/useValueControlled/useValueControlled';
-import { isTranslatableText } from '@lib-frontend/locale/utils/isTranslatableText/isTranslatableText';
-import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR, THEME_SIZE } from '@lib-frontend/style/style.constants';
-import { SHAPE_POSITION } from '@lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { sleep } from '@lib-shared/core/utils/sleep/sleep';
-import { withId } from '@lib-shared/core/utils/withId/withId';
+} from '@lib/frontend/auth/components/OtpField/OtpField.models';
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { Loading } from '@lib/frontend/core/components/Loading/Loading';
+import { Tooltip } from '@lib/frontend/core/components/Tooltip/Tooltip';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { type MeasureModel, type RLFCModel } from '@lib/frontend/core/core.models';
+import { TextField } from '@lib/frontend/data/components/TextField/TextField';
+import { TEXT_FIELD_KEYBOARD } from '@lib/frontend/data/components/TextField/TextField.constants';
+import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
+import { isTranslatableText } from '@lib/frontend/locale/utils/isTranslatableText/isTranslatableText';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
+import { withId } from '@lib/shared/core/utils/withId/withId';
 
 const otpLength = toNumber(process.env.SERVER_APP_OTP_LENGTH);
 

@@ -1,24 +1,24 @@
-import { type ResourceClassModel } from '@lib-backend/resource/resource.models';
+import { type ResourceClassModel } from '@lib/backend/resource/resource.models';
 import {
   type CreateArgsModel,
   type CreateArgsParamsModel,
-} from '@lib-backend/resource/utils/createArgs/createArgs.models';
-import { createFilter } from '@lib-backend/resource/utils/createFilter/createFilter';
-import { createForm } from '@lib-backend/resource/utils/createForm/createForm';
-import { createUpdate } from '@lib-backend/resource/utils/createUpdate/createUpdate';
-import { Pagination } from '@lib-backend/resource/utils/Pagination/Pagination';
-import { withEntity } from '@lib-backend/resource/utils/withEntity/withEntity';
-import { withField } from '@lib-backend/resource/utils/withField/withField';
-import { InvalidTypeError } from '@lib-shared/core/errors/InvalidTypeError/InvalidTypeError';
-import { withCondition } from '@lib-shared/core/utils/withCondition/withCondition';
-import { DATA_TYPE, PROPERTY_TYPE } from '@lib-shared/data/data.constants';
-import { RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
-import { type ResourceMethodTypeModel } from '@lib-shared/resource/resource.models';
-import { type ArgsModel } from '@lib-shared/resource/utils/Args/Args.models';
-import { type FilterModel } from '@lib-shared/resource/utils/Filter/Filter.models';
-import { type PaginationModel } from '@lib-shared/resource/utils/Pagination/Pagination.models';
-import { type RootInputModel } from '@lib-shared/resource/utils/Root/Root.models';
-import { type UpdateModel } from '@lib-shared/resource/utils/Update/Update.models';
+} from '@lib/backend/resource/utils/createArgs/createArgs.models';
+import { createFilter } from '@lib/backend/resource/utils/createFilter/createFilter';
+import { createForm } from '@lib/backend/resource/utils/createForm/createForm';
+import { createUpdate } from '@lib/backend/resource/utils/createUpdate/createUpdate';
+import { Pagination } from '@lib/backend/resource/utils/Pagination/Pagination';
+import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
+import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { InvalidTypeError } from '@lib/shared/core/errors/InvalidTypeError/InvalidTypeError';
+import { withCondition } from '@lib/shared/core/utils/withCondition/withCondition';
+import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
+import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
+import { type ArgsModel } from '@lib/shared/resource/utils/Args/Args.models';
+import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
+import { type PaginationModel } from '@lib/shared/resource/utils/Pagination/Pagination.models';
+import { type RootInputModel } from '@lib/shared/resource/utils/Root/Root.models';
+import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 
 @withEntity({ isAbstract: true })
 class Root<TRoot = undefined> implements RootInputModel<TRoot> {

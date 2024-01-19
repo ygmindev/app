@@ -1,5 +1,5 @@
-import { uri } from '@lib-shared/http/utils/uri/uri';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { uri } from '@lib/shared/http/utils/uri/uri';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ uri });
 

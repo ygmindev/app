@@ -1,5 +1,5 @@
-import { trimPathname } from '@lib-frontend/route/utils/trimPathname/trimPathname';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ trimPathname });
 

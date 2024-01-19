@@ -1,4 +1,4 @@
-import { type TextFieldKeyboardModel } from '@lib-frontend/data/components/TextField/TextField.models';
+import { type TextFieldKeyboardModel } from '@lib/frontend/data/components/TextField/TextField.models';
 
 export type _TextFieldPropsModel = {
   autoComplete?: string;

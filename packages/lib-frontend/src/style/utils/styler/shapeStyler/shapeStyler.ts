@@ -1,7 +1,7 @@
-import { SHAPE_POSITION } from '@lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { type ShapeStylerParamsModel } from '@lib-frontend/style/utils/styler/shapeStyler/shapeStyler.models';
-import { type StylerModel } from '@lib-frontend/style/utils/styler/styler.models';
-import { cleanObject } from '@lib-shared/core/utils/cleanObject/cleanObject';
+import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { type ShapeStylerParamsModel } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.models';
+import { type StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
+import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 
 export const shapeStyler: StylerModel<ShapeStylerParamsModel> = ({
   bottom,

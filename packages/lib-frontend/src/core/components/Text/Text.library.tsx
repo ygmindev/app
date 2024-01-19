@@ -1,12 +1,12 @@
-import { Text } from '@lib-frontend/core/components/Text/Text';
-import { TEXT_CASING } from '@lib-frontend/core/components/Text/Text.constants';
-import { type TextPropsModel } from '@lib-frontend/core/components/Text/Text.models';
-import { THEME_COLOR, THEME_ROLE, THEME_SIZE_MORE } from '@lib-frontend/style/style.constants';
+import { Text } from '@lib/frontend/core/components/Text/Text';
+import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
+import { type TextPropsModel } from '@lib/frontend/core/components/Text/Text.models';
+import { THEME_COLOR, THEME_ROLE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import {
   FONT_ALIGN,
   FONT_STYLE,
-} from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { type LibraryPropsModel } from '@lib-library/core/components/Library/Library.models';
+} from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { type LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
 export const props: LibraryPropsModel<TextPropsModel> = {
   Component: Text,

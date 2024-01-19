@@ -1,8 +1,8 @@
-import { _getValue } from '@lib-shared/core/utils/getValue/_getValue';
+import { _getValue } from '@lib/shared/core/utils/getValue/_getValue';
 import {
   type GetValueModel,
   type GetValueParamsModel,
-} from '@lib-shared/core/utils/getValue/getValue.models';
+} from '@lib/shared/core/utils/getValue/getValue.models';
 
 export const getValue = <TType, TPath extends string, TDefault = GetValueModel<TType, TPath>>(
   ...params: GetValueParamsModel<TType, TPath, TDefault>

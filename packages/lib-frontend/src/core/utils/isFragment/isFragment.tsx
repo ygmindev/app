@@ -1,7 +1,7 @@
 import {
   type IsFragmentModel,
   type IsFragmentParamsModel,
-} from '@lib-frontend/core/utils/isFragment/isFragment.models';
+} from '@lib/frontend/core/utils/isFragment/isFragment.models';
 import { type ExoticComponent, type ReactElement } from 'react';
 import { Fragment, isValidElement } from 'react';
 

@@ -1,11 +1,11 @@
-import { Container } from '@lib-backend/core/utils/Container/Container';
-import { SocketService } from '@lib-backend/http/resources/Socket/SocketService/SocketService';
-import { createLambdaHandler } from '@lib-backend/serverless/utils/createLambdaHandler/createLambdaHandler';
+import { Container } from '@lib/backend/core/utils/Container/Container';
+import { SocketService } from '@lib/backend/http/resources/Socket/SocketService/SocketService';
+import { createLambdaHandler } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler';
 import {
   LAMBDA_PLUGIN,
   LAMBDA_TYPE,
-} from '@lib-backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
-import { HTTP_STATUS_CODE } from '@lib-shared/http/http.constants';
+} from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
+import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 
 export const main = createLambdaHandler({
   handler: async ({ body, context }) => {

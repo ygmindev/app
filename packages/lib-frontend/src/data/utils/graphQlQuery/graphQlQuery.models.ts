@@ -7,9 +7,9 @@ import {
   type RequiredModel,
   type StringKeyModel,
   type UnionToIntersectionModel,
-} from '@lib-shared/core/core.models';
-import { type GraphQlOperationTypeModel } from '@lib-shared/graphql/graphql.models';
-import { type ConnectionModel } from '@lib-shared/resource/utils/Connection/Connection.models';
+} from '@lib/shared/core/core.models';
+import { type GraphQlOperationTypeModel } from '@lib/shared/graphql/graphql.models';
+import { type ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
 
 export type GraphQlParamsModel<TParams> = {
   query: string;

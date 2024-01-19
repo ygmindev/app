@@ -1,5 +1,5 @@
-import { preparePrerender } from '@lib-platform/web/exports/preparePrerender/preparePrerender';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { preparePrerender } from '@lib/platform/web/exports/preparePrerender/preparePrerender';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ preparePrerender });
 

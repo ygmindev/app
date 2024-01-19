@@ -1,6 +1,6 @@
-import { type ResourceResolverAuthorizerModel } from '@lib-backend/resource/utils/createResourceResolver/createResourceResolver.models';
-import { type ResourceMethodTypeModel } from '@lib-shared/resource/resource.models';
-import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type ResourceResolverAuthorizerModel } from '@lib/backend/resource/utils/createResourceResolver/createResourceResolver.models';
+import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
+import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
 export type WithAuthorizerParamsModel<
   TMethod extends ResourceMethodTypeModel,

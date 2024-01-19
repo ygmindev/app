@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
 
-import { type ItemPropsModel } from '@lib-frontend/core/components/Item/Item.models';
-import { type ChildrenPropsModel } from '@lib-frontend/core/core.models';
+import { type ItemPropsModel } from '@lib/frontend/core/components/Item/Item.models';
+import { type ChildrenPropsModel } from '@lib/frontend/core/core.models';
 
 export type ErrorContextModel = Omit<ItemPropsModel, 'color'>;
 

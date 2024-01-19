@@ -5,7 +5,7 @@ import {
   type PrimitiveModel,
   type RequiredModel,
   type StringKeyModel,
-} from '@lib-shared/core/core.models';
+} from '@lib/shared/core/core.models';
 
 export type ReducerModel<TType extends object, TParams extends object> = {
   actions: {

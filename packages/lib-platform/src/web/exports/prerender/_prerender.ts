@@ -1,13 +1,13 @@
-import { _config } from '@lib-config/locale/internationalize/internationalize.server';
-import { trimPathname } from '@lib-frontend/route/utils/trimPathname/trimPathname';
+import { _config } from '@lib/config/locale/internationalize/internationalize.server';
+import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import {
   type _PrerenderModel,
   type _PrerenderParamsModel,
-} from '@lib-platform/web/exports/prerender/_prerender.models';
-import { mapSequence } from '@lib-shared/core/utils/mapSequence/mapSequence';
-import { merge } from '@lib-shared/core/utils/merge/merge';
-import { LOCALE } from '@lib-shared/locale/locale.constants';
-import { ROUTE } from '@lib-shared/route/route.constants';
+} from '@lib/platform/web/exports/prerender/_prerender.models';
+import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
+import { merge } from '@lib/shared/core/utils/merge/merge';
+import { LOCALE } from '@lib/shared/locale/locale.constants';
+import { ROUTE } from '@lib/shared/route/route.constants';
 
 export const _prerender =
   ({ languageDefault, languages }: _PrerenderParamsModel): _PrerenderModel =>

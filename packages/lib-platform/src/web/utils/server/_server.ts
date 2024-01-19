@@ -3,19 +3,19 @@ import { type FastifyCookieOptions } from '@fastify/cookie';
 import { fastifyCookie } from '@fastify/cookie';
 import { fastifyMiddie } from '@fastify/middie';
 import { fastifyStatic } from '@fastify/static';
-import { fromStatic } from '@lib-backend/file/utils/fromStatic/fromStatic';
-import { _config } from '@lib-config/locale/internationalize/internationalize.server';
-import { config as webConfig } from '@lib-config/platform/web/web';
-import { type CookieOptionModel } from '@lib-frontend/state/state.models';
-import { render } from '@lib-platform/web/utils/render/render';
+import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
+import { _config } from '@lib/config/locale/internationalize/internationalize.server';
+import { config as webConfig } from '@lib/config/platform/web/web';
+import { type CookieOptionModel } from '@lib/frontend/state/state.models';
+import { render } from '@lib/platform/web/utils/render/render';
 import {
   type _ServerModel,
   type _ServerParamsModel,
-} from '@lib-platform/web/utils/server/_server.models';
-import { LOCALE } from '@lib-shared/locale/locale.constants';
-import { info } from '@lib-shared/logging/utils/logger/logger';
-import { ROUTE } from '@lib-shared/route/route.constants';
-import { STATE } from '@lib-shared/state/state.constants';
+} from '@lib/platform/web/utils/server/_server.models';
+import { LOCALE } from '@lib/shared/locale/locale.constants';
+import { info } from '@lib/shared/logging/utils/logger/logger';
+import { ROUTE } from '@lib/shared/route/route.constants';
+import { STATE } from '@lib/shared/state/state.constants';
 import { type FastifyPluginCallback, type FastifyRegisterOptions } from 'fastify';
 import { fastify } from 'fastify';
 import { type SecureServerOptions } from 'http2';

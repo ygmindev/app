@@ -1,5 +1,5 @@
-import { type ResourceClassModel } from '@lib-backend/resource/resource.models';
-import { type ClassModel, type PartialModel } from '@lib-shared/core/core.models';
+import { type ResourceClassModel } from '@lib/backend/resource/resource.models';
+import { type ClassModel, type PartialModel } from '@lib/shared/core/core.models';
 
 export type CreateUnionParamsModel<TType extends unknown> = {
   Resource: Array<ResourceClassModel<PartialModel<TType>>>;

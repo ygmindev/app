@@ -1,9 +1,9 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
-import { fromWorking } from '@lib-backend/file/utils/fromWorking/fromWorking';
-import { joinPaths } from '@lib-backend/file/utils/joinPaths/joinPaths';
-import { type BundleConfigModel } from '@lib-config/node/bundle/bundle.models';
-import { PLATFORM } from '@lib-platform/core/core.constants';
-import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
+import { PLATFORM } from '@lib/platform/core/core.constants';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 import { type Plugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';

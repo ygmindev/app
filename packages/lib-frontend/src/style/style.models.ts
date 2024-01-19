@@ -1,4 +1,4 @@
-import { type ThemeConfigModel } from '@lib-config/style/theme/theme.models';
+import { type ThemeConfigModel } from '@lib/config/style/theme/theme.models';
 import {
   type STYLE_BRIGHTNESS,
   type THEME_COLOR,
@@ -6,7 +6,7 @@ import {
   type THEME_ROLE,
   type THEME_SIZE,
   type THEME_SIZE_MORE,
-} from '@lib-frontend/style/style.constants';
+} from '@lib/frontend/style/style.constants';
 import { type ImageStyle, type TextStyle, type ViewStyle } from 'react-native';
 
 export type ViewStyleModel = ViewStyle;

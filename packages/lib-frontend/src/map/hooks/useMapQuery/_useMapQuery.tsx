@@ -1,15 +1,15 @@
 import toNumber from 'lodash/toNumber';
 import { useState } from 'react';
 
-import { useHttp } from '@lib-frontend/http/hooks/useHttp/useHttp';
+import { useHttp } from '@lib/frontend/http/hooks/useHttp/useHttp';
 import {
   type _UseMapQueryApiParamsModel,
   type _UseMapQueryApiResultModel,
   type _UseMapQueryModel,
-} from '@lib-frontend/map/hooks/useMapQuery/_useMapQuery.models';
-import { serializeAddress } from '@lib-frontend/map/hooks/useMapQuery/useMapQuery';
-import { type MapQueryResultModel } from '@lib-frontend/map/hooks/useMapQuery/useMapQuery.models';
-import { sort } from '@lib-shared/core/utils/sort/sort';
+} from '@lib/frontend/map/hooks/useMapQuery/_useMapQuery.models';
+import { serializeAddress } from '@lib/frontend/map/hooks/useMapQuery/useMapQuery';
+import { type MapQueryResultModel } from '@lib/frontend/map/hooks/useMapQuery/useMapQuery.models';
+import { sort } from '@lib/shared/core/utils/sort/sort';
 
 export const _useMapQuery = (): _UseMapQueryModel => {
   const { get } = useHttp();

@@ -1,11 +1,11 @@
-import { type RouteModel } from '@lib-frontend/route/route.models';
-import { trimPathname } from '@lib-frontend/route/utils/trimPathname/trimPathname';
-import { _preparePrerender } from '@lib-platform/web/exports/preparePrerender/_preparePrerender';
-import { type _PreparePrerenderParamsModel } from '@lib-platform/web/exports/preparePrerender/_preparePrerender.models';
+import { type RouteModel } from '@lib/frontend/route/route.models';
+import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
+import { _preparePrerender } from '@lib/platform/web/exports/preparePrerender/_preparePrerender';
+import { type _PreparePrerenderParamsModel } from '@lib/platform/web/exports/preparePrerender/_preparePrerender.models';
 import {
   type PreparePrerenderModel,
   type PreparePrerenderParamsModel,
-} from '@lib-platform/web/exports/preparePrerender/preparePrerender.models';
+} from '@lib/platform/web/exports/preparePrerender/preparePrerender.models';
 import isArray from 'lodash/isArray';
 import trimEnd from 'lodash/trimEnd';
 

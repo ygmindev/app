@@ -1,9 +1,9 @@
 import {
   type CreateResourceResolverModel,
   type CreateResourceResolverParamsModel,
-} from '@lib-backend/resource/utils/createResourceResolver/createResourceResolver.models';
-import { type EmbeddedResourceModel } from '@lib-shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
-import { type EntityResourceModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
+} from '@lib/backend/resource/utils/createResourceResolver/createResourceResolver.models';
+import { type EmbeddedResourceModel } from '@lib/shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
+import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
 export type CreateEmbeddedResourceResolverParamsModel<
   TType extends EmbeddedResourceModel,

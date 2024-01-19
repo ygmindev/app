@@ -1,12 +1,12 @@
-import { useCredentials } from '@lib-frontend/auth/hooks/useCredentials/useCredentials';
-import { useUnmount } from '@lib-frontend/core/hooks/useUnmount/useUnmount';
-import { _useWebsocket } from '@lib-frontend/http/hooks/useWebsocket/_useWebsocket';
+import { useCredentials } from '@lib/frontend/auth/hooks/useCredentials/useCredentials';
+import { useUnmount } from '@lib/frontend/core/hooks/useUnmount/useUnmount';
+import { _useWebsocket } from '@lib/frontend/http/hooks/useWebsocket/_useWebsocket';
 import {
   type UseWebsocketModel,
   type UseWebsocketParamsModel,
-} from '@lib-frontend/http/hooks/useWebsocket/useWebsocket.models';
-import { WEBSOCKET_STATUS } from '@lib-shared/http/http.constants';
-import { uri } from '@lib-shared/http/utils/uri/uri';
+} from '@lib/frontend/http/hooks/useWebsocket/useWebsocket.models';
+import { WEBSOCKET_STATUS } from '@lib/shared/http/http.constants';
+import { uri } from '@lib/shared/http/utils/uri/uri';
 
 export const useWebsocket = <TType = unknown,>({
   isCredentials = true,

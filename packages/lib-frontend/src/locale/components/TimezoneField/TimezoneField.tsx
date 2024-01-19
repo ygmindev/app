@@ -1,15 +1,15 @@
 import { useMemo } from 'react';
 
-import { type LFCModel } from '@lib-frontend/core/core.models';
-import { useAsync } from '@lib-frontend/core/hooks/useAsync/useAsync';
-import { DropdownField } from '@lib-frontend/data/components/DropdownField/DropdownField';
-import { useValueControlled } from '@lib-frontend/data/hooks/useValueControlled/useValueControlled';
-import { type TimezoneFieldPropsModel } from '@lib-frontend/locale/components/TimezoneField/TimezoneField.models';
-import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { timezones } from '@lib-frontend/locale/utils/timezones/timezones';
-import { useStore } from '@lib-frontend/state/hooks/useStore/useStore';
-import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { timezoneFormat } from '@lib-shared/data/utils/timezoneFormat/timezoneFormat';
+import { type LFCModel } from '@lib/frontend/core/core.models';
+import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
+import { DropdownField } from '@lib/frontend/data/components/DropdownField/DropdownField';
+import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
+import { type TimezoneFieldPropsModel } from '@lib/frontend/locale/components/TimezoneField/TimezoneField.models';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { timezones } from '@lib/frontend/locale/utils/timezones/timezones';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { timezoneFormat } from '@lib/shared/data/utils/timezoneFormat/timezoneFormat';
 
 export const TimezoneField: LFCModel<TimezoneFieldPropsModel> = ({
   defaultValue,

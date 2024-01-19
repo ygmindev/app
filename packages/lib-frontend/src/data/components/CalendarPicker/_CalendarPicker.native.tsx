@@ -1,5 +1,5 @@
-import { composeComponent } from '@lib-frontend/core/utils/composeComponent/composeComponent';
-import { type _CalendarPickerPropsModel } from '@lib-frontend/data/components/CalendarPicker/_CalendarPicker.models';
+import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
+import { type _CalendarPickerPropsModel } from '@lib/frontend/data/components/CalendarPicker/_CalendarPicker.models';
 import CalendarPicker, { type CalendarPickerProps } from 'react-native-calendar-picker';
 
 export const _CalendarPicker = composeComponent<_CalendarPickerPropsModel, CalendarPickerProps>({

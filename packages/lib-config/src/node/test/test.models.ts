@@ -1,7 +1,7 @@
 import { type Config } from '@jest/types';
 
-import { type BundleConfigModel } from '@lib-config/node/bundle/bundle.models';
-import { type DimensionModel } from '@lib-frontend/core/core.models';
+import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
+import { type DimensionModel } from '@lib/frontend/core/core.models';
 
 export type TestConfigModel = {
   bundleConfig(): BundleConfigModel;

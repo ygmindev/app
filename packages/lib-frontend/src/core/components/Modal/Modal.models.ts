@@ -1,12 +1,12 @@
 import { type ReactNode } from 'react';
 
-import { type AnimationModel } from '@lib-frontend/animation/animation.models';
+import { type AnimationModel } from '@lib/frontend/animation/animation.models';
 import {
   type ChildrenPropsModel,
   type DimensionModel,
   type ElementStatePropsModel,
-} from '@lib-frontend/core/core.models';
-import { type TranslatableTextModel } from '@lib-frontend/locale/locale.models';
+} from '@lib/frontend/core/core.models';
+import { type TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 
 export type ModalPropsModel = ChildrenPropsModel &
   DimensionModel &

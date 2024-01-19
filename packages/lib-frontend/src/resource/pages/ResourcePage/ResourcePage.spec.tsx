@@ -1,7 +1,7 @@
-import { ResourcePage } from '@lib-frontend/resource/pages/ResourcePage/ResourcePage';
-import { type ResourcePagePropsModel } from '@lib-frontend/resource/pages/ResourcePage/ResourcePage.models';
-import { render } from '@lib-frontend/test/utils/render/render';
-import { withTestComponent } from '@lib-frontend/test/utils/withTestComponent/withTestComponent';
+import { ResourcePage } from '@lib/frontend/resource/pages/ResourcePage/ResourcePage';
+import { type ResourcePagePropsModel } from '@lib/frontend/resource/pages/ResourcePage/ResourcePage.models';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<ResourcePagePropsModel>({
   target: ResourcePage,

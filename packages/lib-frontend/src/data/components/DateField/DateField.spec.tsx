@@ -1,7 +1,7 @@
-import { DateField } from '@lib-frontend/data/components/DateField/DateField';
-import { type DateFieldPropsModel } from '@lib-frontend/data/components/DateField/DateField.models';
-import { render } from '@lib-frontend/test/utils/render/render';
-import { withTestComponent } from '@lib-frontend/test/utils/withTestComponent/withTestComponent';
+import { DateField } from '@lib/frontend/data/components/DateField/DateField';
+import { type DateFieldPropsModel } from '@lib/frontend/data/components/DateField/DateField.models';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<DateFieldPropsModel>({ target: DateField });
 

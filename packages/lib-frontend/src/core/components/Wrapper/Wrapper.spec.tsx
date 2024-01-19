@@ -1,8 +1,8 @@
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { WrapperFixture } from '@lib-frontend/core/components/Wrapper/Wrapper.fixtures';
-import { type WrapperPropsModel } from '@lib-frontend/core/components/Wrapper/Wrapper.models';
-import { render } from '@lib-frontend/test/utils/render/render';
-import { withTestComponent } from '@lib-frontend/test/utils/withTestComponent/withTestComponent';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
+import { type WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<WrapperPropsModel>({
   defaultProps: {

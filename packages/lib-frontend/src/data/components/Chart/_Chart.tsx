@@ -2,17 +2,17 @@ import { type CSSProperties, type ReactElement, useMemo } from 'react';
 import { Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { type Payload } from 'recharts/types/component/DefaultLegendContent';
 
-import { type SFCPropsModel } from '@lib-frontend/core/core.models';
-import { type _ChartPropsModel } from '@lib-frontend/data/components/Chart/_Chart.models';
-import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
+import { type SFCPropsModel } from '@lib/frontend/core/core.models';
+import { type _ChartPropsModel } from '@lib/frontend/data/components/Chart/_Chart.models';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import {
   THEME_COLOR,
   THEME_COLOR_MORE,
   THEME_ROLE,
   THEME_SIZE,
-} from '@lib-frontend/style/style.constants';
-import { palette } from '@lib-frontend/style/utils/palette/palette';
+} from '@lib/frontend/style/style.constants';
+import { palette } from '@lib/frontend/style/utils/palette/palette';
 
 export const _Chart = <TType,>({
   data,

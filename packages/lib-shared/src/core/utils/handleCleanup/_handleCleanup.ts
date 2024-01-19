@@ -1,9 +1,8 @@
-import closeWithGrace from 'close-with-grace';
-
 import {
   type _HandleCleanupModel,
   type _HandleCleanupParamsModel,
-} from '@lib-shared/core/utils/handleCleanup/_handleCleanup.models';
+} from '@lib/shared/core/utils/handleCleanup/_handleCleanup.models';
+import closeWithGrace from 'close-with-grace';
 
 let isTerminated: boolean;
 

@@ -1,9 +1,9 @@
 import {
   type _ThemeConfigModel,
   type ThemeConfigModel,
-} from '@lib-config/style/theme/theme.models';
-import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '@lib-frontend/style/style.constants';
-import { merge } from '@lib-shared/core/utils/merge/merge';
+} from '@lib/config/style/theme/theme.models';
+import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { merge } from '@lib/shared/core/utils/merge/merge';
 import { DefaultTheme } from 'react-native-paper';
 
 export const _theme = ({ color, font, shape }: ThemeConfigModel): _ThemeConfigModel => {

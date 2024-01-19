@@ -1,7 +1,7 @@
-import { type DraggableListPropsModel } from '@lib-frontend/core/components/DraggableList/DraggableList.models';
-import { DraggableList } from '@lib-frontend/core/components/DraggableList/DraggableList';
-import { render } from '@lib-frontend/test/utils/render/render';
-import { withTestComponent } from '@lib-frontend/test/utils/withTestComponent/withTestComponent';
+import { type DraggableListPropsModel } from '@lib/frontend/core/components/DraggableList/DraggableList.models';
+import { DraggableList } from '@lib/frontend/core/components/DraggableList/DraggableList';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<DraggableListPropsModel>({
   target: DraggableList,

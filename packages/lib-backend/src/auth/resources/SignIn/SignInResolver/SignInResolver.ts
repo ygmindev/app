@@ -1,29 +1,29 @@
-import { SignIn, SignInForm } from '@lib-backend/auth/resources/SignIn/SignIn';
-import { type SignInResolverModel } from '@lib-backend/auth/resources/SignIn/SignInResolver/SignInResolver.models';
-import { SignInService } from '@lib-backend/auth/resources/SignIn/SignInService/SignInService';
-import { withContainer } from '@lib-backend/core/utils/withContainer/withContainer';
-import { withContext } from '@lib-backend/http/utils/withContext/withContext';
-import { withResolver } from '@lib-backend/http/utils/withResolver/withResolver';
-import { createEntityResourceResolver } from '@lib-backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
-import { withInput } from '@lib-backend/resource/utils/withInput/withInput';
-import { withOutput } from '@lib-backend/resource/utils/withOutput/withOutput';
-import { User } from '@lib-backend/user/resources/User/User';
-import { type ContextModel } from '@lib-platform/core/core.models';
-import { ACCESS_LEVEL } from '@lib-shared/auth/resources/Access/Access.constants';
+import { SignIn, SignInForm } from '@lib/backend/auth/resources/SignIn/SignIn';
+import { type SignInResolverModel } from '@lib/backend/auth/resources/SignIn/SignInResolver/SignInResolver.models';
+import { SignInService } from '@lib/backend/auth/resources/SignIn/SignInService/SignInService';
+import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
+import { withContext } from '@lib/backend/http/utils/withContext/withContext';
+import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
+import { createEntityResourceResolver } from '@lib/backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
+import { withInput } from '@lib/backend/resource/utils/withInput/withInput';
+import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
+import { User } from '@lib/backend/user/resources/User/User';
+import { type ContextModel } from '@lib/platform/core/core.models';
+import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import {
   SIGN_IN_RESOURCE_NAME,
   SIGN_IN_USER,
   SIGN_IN_USERNAME,
-} from '@lib-shared/auth/resources/SignIn/SignIn.constants';
+} from '@lib/shared/auth/resources/SignIn/SignIn.constants';
 import {
   type SignInFormModel,
   type SignInModel,
-} from '@lib-shared/auth/resources/SignIn/SignIn.models';
-import { withInject } from '@lib-shared/core/utils/withInject/withInject';
-import { RESOURCE_METHOD_TYPE } from '@lib-shared/resource/resource.constants';
-import { type InputModel } from '@lib-shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '@lib-shared/resource/utils/Output/Output.models';
-import { type UserFormModel, type UserModel } from '@lib-shared/user/resources/User/User.models';
+} from '@lib/shared/auth/resources/SignIn/SignIn.models';
+import { withInject } from '@lib/shared/core/utils/withInject/withInject';
+import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
+import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { type UserFormModel, type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withContainer()
 @withResolver({ Resource: () => SignIn })

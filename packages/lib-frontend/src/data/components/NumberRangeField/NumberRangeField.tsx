@@ -1,35 +1,35 @@
 import { type ForwardedRef, forwardRef, type ReactElement, useEffect, useState } from 'react';
 
-import { Button } from '@lib-frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '@lib-frontend/core/components/Button/Button.constants';
-import { SelectField } from '@lib-frontend/core/components/SelectField/SelectField';
-import { Slider } from '@lib-frontend/core/components/Slider/Slider';
-import { Text } from '@lib-frontend/core/components/Text/Text';
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { type LFCPropsModel, type RLFCPropsModel } from '@lib-frontend/core/core.models';
-import { NumberField } from '@lib-frontend/data/components/NumberField/NumberField';
-import { NUMBER_RANGE_TYPE } from '@lib-frontend/data/components/NumberRangeField/NumberRangeField.constants';
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { SelectField } from '@lib/frontend/core/components/SelectField/SelectField';
+import { Slider } from '@lib/frontend/core/components/Slider/Slider';
+import { Text } from '@lib/frontend/core/components/Text/Text';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { type LFCPropsModel, type RLFCPropsModel } from '@lib/frontend/core/core.models';
+import { NumberField } from '@lib/frontend/data/components/NumberField/NumberField';
+import { NUMBER_RANGE_TYPE } from '@lib/frontend/data/components/NumberRangeField/NumberRangeField.constants';
 import {
   type NumberRangeFieldPropsModel,
   type NumberRangeFieldRefModel,
   type NumberRangeTypeModel,
-} from '@lib-frontend/data/components/NumberRangeField/NumberRangeField.models';
-import { unitOptions } from '@lib-frontend/data/components/ScaledNumberField/ScaledNumberField';
-import { TEXT_FIELD_KEYBOARD } from '@lib-frontend/data/components/TextField/TextField.constants';
+} from '@lib/frontend/data/components/NumberRangeField/NumberRangeField.models';
+import { unitOptions } from '@lib/frontend/data/components/ScaledNumberField/ScaledNumberField';
+import { TEXT_FIELD_KEYBOARD } from '@lib/frontend/data/components/TextField/TextField.constants';
 import {
   AMOUNT_UNIT,
   DATA,
   NUMBER_UNIT_TYPE,
   RELATIVE_DATE_UNIT,
-} from '@lib-frontend/data/data.constants';
-import { type NumberUnitModel } from '@lib-frontend/data/data.models';
-import { useFormatter } from '@lib-frontend/data/hooks/useFormatter/useFormatter';
-import { useValueScaled } from '@lib-frontend/data/hooks/useValueScaled/useValueScaled';
-import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_SIZE } from '@lib-frontend/style/style.constants';
-import { type NumberRangeModel } from '@lib-shared/data/resources/NumberRange/NumberRange.models';
+} from '@lib/frontend/data/data.constants';
+import { type NumberUnitModel } from '@lib/frontend/data/data.models';
+import { useFormatter } from '@lib/frontend/data/hooks/useFormatter/useFormatter';
+import { useValueScaled } from '@lib/frontend/data/hooks/useValueScaled/useValueScaled';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { type NumberRangeModel } from '@lib/shared/data/resources/NumberRange/NumberRange.models';
 
 export const NumberRangeField = forwardRef(
   <TType extends NumberUnitModel>(

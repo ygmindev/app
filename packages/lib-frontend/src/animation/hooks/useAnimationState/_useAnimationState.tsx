@@ -1,9 +1,9 @@
 import {
   type _UseAnimationStateModel,
   type _UseAnimationStateParamsModel,
-} from '@lib-frontend/animation/hooks/useAnimationState/_useAnimationState.models';
-import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
-import { type StyleModel, type ViewStyleModel } from '@lib-frontend/style/style.models';
+} from '@lib/frontend/animation/hooks/useAnimationState/_useAnimationState.models';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { type StyleModel, type ViewStyleModel } from '@lib/frontend/style/style.models';
 import { type DynamicStyleProp, type MotiTranformProps, type UseDynamicAnimationState } from 'moti';
 import { useDynamicAnimation } from 'moti';
 import { ReduceMotion } from 'react-native-reanimated';

@@ -1,17 +1,17 @@
 import isFunction from 'lodash/isFunction';
 import { cloneElement, forwardRef, type ReactElement, useImperativeHandle, useState } from 'react';
 
-import { _isHoverable } from '@lib-frontend/core/components/Activatable/_isHoverable';
-import { ACTIVATABLE_TRIGGER } from '@lib-frontend/core/components/Activatable/Activatable.constants';
+import { _isHoverable } from '@lib/frontend/core/components/Activatable/_isHoverable';
+import { ACTIVATABLE_TRIGGER } from '@lib/frontend/core/components/Activatable/Activatable.constants';
 import {
   type ActivatablePropsModel,
   type ActivatableRefModel,
-} from '@lib-frontend/core/components/Activatable/Activatable.models';
-import { type PressablePropsModel } from '@lib-frontend/core/components/Pressable/Pressable.models';
-import { type RSFCModel } from '@lib-frontend/core/core.models';
-import { useIsMobile } from '@lib-frontend/core/hooks/useIsMobile/useIsMobile';
-import { useStyles } from '@lib-frontend/style/hooks/useStyles/useStyles';
-import { variableName } from '@lib-shared/core/utils/variableName/variableName';
+} from '@lib/frontend/core/components/Activatable/Activatable.models';
+import { type PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
+import { type RSFCModel } from '@lib/frontend/core/core.models';
+import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const Activatable: RSFCModel<ActivatableRefModel, ActivatablePropsModel> = forwardRef(
   ({ children, onActive, onInactive, trigger, ...props }, ref) => {

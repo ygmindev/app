@@ -1,6 +1,6 @@
-import { useAccessResource } from '@lib-frontend/auth/hooks/useAccessResource/useAccessResource';
-import { renderHook } from '@lib-frontend/test/utils/renderHook/renderHook';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { useAccessResource } from '@lib/frontend/auth/hooks/useAccessResource/useAccessResource';
+import { renderHook } from '@lib/frontend/test/utils/renderHook/renderHook';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ useAccessResource });
 

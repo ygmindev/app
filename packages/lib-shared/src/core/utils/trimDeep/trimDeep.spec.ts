@@ -1,5 +1,5 @@
-import { trimDeep } from '@lib-shared/core/utils/trimDeep/trimDeep';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { trimDeep } from '@lib/shared/core/utils/trimDeep/trimDeep';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ trimDeep });
 

@@ -1,14 +1,14 @@
-import { fromModules } from '@lib-backend/file/utils/fromModules/fromModules';
-import { fromPackages } from '@lib-backend/file/utils/fromPackages/fromPackages';
-import { fromRoot } from '@lib-backend/file/utils/fromRoot/fromRoot';
-import { fromWorking } from '@lib-backend/file/utils/fromWorking/fromWorking';
-import { packages } from '@lib-backend/file/utils/packages/packages';
-import { config as fileConfig } from '@lib-config/core/file/file';
-import { defineConfig } from '@lib-config/core/utils/defineConfig/defineConfig';
-import { _config as _babelConfig } from '@lib-config/node/babel/babel.base';
-import { _bundle } from '@lib-config/node/bundle/_bundle';
-import { type BundleConfigModel } from '@lib-config/node/bundle/bundle.models';
-import { extensions } from '@lib-platform/core/utils/extensions/extensions';
+import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
+import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
+import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import { packages } from '@lib/backend/file/utils/packages/packages';
+import { config as fileConfig } from '@lib/config/core/file/file';
+import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
+import { _config as _babelConfig } from '@lib/config/node/babel/babel.base';
+import { _bundle } from '@lib/config/node/bundle/_bundle';
+import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
+import { extensions } from '@lib/platform/core/utils/extensions/extensions';
 
 const { _config, config } = defineConfig({
   _config: _bundle,

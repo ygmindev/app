@@ -1,7 +1,7 @@
 import {
   type MapSequenceModel,
   type MapSequenceParamsModel,
-} from '@lib-shared/core/utils/mapSequence/mapSequence.models';
+} from '@lib/shared/core/utils/mapSequence/mapSequence.models';
 
 export const mapSequence = async <TType extends unknown>(
   params: MapSequenceParamsModel<TType>,

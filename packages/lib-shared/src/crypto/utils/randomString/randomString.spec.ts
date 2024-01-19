@@ -1,5 +1,5 @@
-import { randomString } from '@lib-shared/crypto/utils/randomString/randomString';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { randomString } from '@lib/shared/crypto/utils/randomString/randomString';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ randomString });
 

@@ -1,7 +1,7 @@
 import {
   type ResolveFirstModel,
   type ResolveFirstParamsModel,
-} from '@lib-shared/core/utils/resolveFirst/resolveFirst.models';
+} from '@lib/shared/core/utils/resolveFirst/resolveFirst.models';
 
 export const resolveFirst = async <TType>(
   params: ResolveFirstParamsModel<TType>,

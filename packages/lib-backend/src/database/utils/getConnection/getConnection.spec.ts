@@ -1,11 +1,11 @@
 import _filter from 'lodash/filter';
 
-import { getConnection } from '@lib-backend/database/utils/getConnection/getConnection';
+import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
 import {
   type TestableEntityResourceFormModel,
   type TestableEntityResourceModel,
-} from '@lib-shared/test/resources/TestableEntityResource/TestableEntityResource.models';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+} from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ getConnection });
 

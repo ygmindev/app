@@ -6,10 +6,10 @@ import { FlatList } from 'react-native';
 import {
   type _VirtualizedListPropsModel,
   type _VirtualizedListRefModel,
-} from '@lib-frontend/core/components/VirtualizedList/_VirtualizedList.models';
-import { type RSFCPropsModel } from '@lib-frontend/core/core.models';
-import { useStyles } from '@lib-frontend/style/hooks/useStyles/useStyles';
-import { type WithIdModel } from '@lib-shared/core/utils/withId/withId.models';
+} from '@lib/frontend/core/components/VirtualizedList/_VirtualizedList.models';
+import { type RSFCPropsModel } from '@lib/frontend/core/core.models';
+import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 
 export const _VirtualizedList = forwardRef(
   <TType extends WithIdModel>(

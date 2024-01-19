@@ -1,16 +1,16 @@
 import { type ReactElement } from 'react';
 
-import { Button } from '@lib-frontend/core/components/Button/Button';
-import { _DraggableList } from '@lib-frontend/core/components/DraggableList/_DraggableList';
-import { type DraggableListPropsModel } from '@lib-frontend/core/components/DraggableList/DraggableList.models';
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
-import { type LFCPropsModel } from '@lib-frontend/core/core.models';
-import { useValueControlled } from '@lib-frontend/data/hooks/useValueControlled/useValueControlled';
-import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_SIZE } from '@lib-frontend/style/style.constants';
-import { type WithIdModel } from '@lib-shared/core/utils/withId/withId.models';
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { _DraggableList } from '@lib/frontend/core/components/DraggableList/_DraggableList';
+import { type DraggableListPropsModel } from '@lib/frontend/core/components/DraggableList/DraggableList.models';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { type LFCPropsModel } from '@lib/frontend/core/core.models';
+import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 
 export const DraggableList = <TType extends WithIdModel>({
   defaultValue,

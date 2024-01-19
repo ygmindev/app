@@ -1,7 +1,7 @@
 import {
   type _GetValueModel,
   type _GetValueParamsModel,
-} from '@lib-shared/core/utils/getValue/_getValue.models';
+} from '@lib/shared/core/utils/getValue/_getValue.models';
 
 export type GetValueParamsModel<
   TType,

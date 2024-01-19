@@ -1,4 +1,4 @@
-import { type ChildrenPropsModel, type DirectionModel } from '@lib-frontend/core/core.models';
+import { type ChildrenPropsModel, type DirectionModel } from '@lib/frontend/core/core.models';
 import { type ReactNode } from 'react';
 
 export type _DropdownPropsModel = ChildrenPropsModel & {

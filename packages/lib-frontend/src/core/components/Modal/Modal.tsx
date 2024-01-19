@@ -1,26 +1,26 @@
 import {
   ANIMATION_STATES_APPEARABLE_OPAQUE,
   ANIMATION_STATES_SLIDABLE_VERTICAL,
-} from '@lib-frontend/animation/animation.constants';
-import { Exitable } from '@lib-frontend/animation/components/Exitable/Exitable';
-import { Button } from '@lib-frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '@lib-frontend/core/components/Button/Button.constants';
-import { KeyboardContainer } from '@lib-frontend/core/components/KeyboardContainer/KeyboardContainer';
+} from '@lib/frontend/animation/animation.constants';
+import { Exitable } from '@lib/frontend/animation/components/Exitable/Exitable';
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { KeyboardContainer } from '@lib/frontend/core/components/KeyboardContainer/KeyboardContainer';
 import {
   type ModalPropsModel,
   type ModalRefModel,
-} from '@lib-frontend/core/components/Modal/Modal.models';
-import { Portal } from '@lib-frontend/core/components/Portal/Portal';
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { CORNER, DIRECTION, ELEMENT_STATE } from '@lib-frontend/core/core.constants';
-import { type MeasureModel, type RLFCModel } from '@lib-frontend/core/core.models';
-import { useValueControlled } from '@lib-frontend/data/hooks/useValueControlled/useValueControlled';
-import { TranslatableText } from '@lib-frontend/locale/components/TranslatableText/TranslatableText';
-import { isTranslatableText } from '@lib-frontend/locale/utils/isTranslatableText/isTranslatableText';
-import { useStore } from '@lib-frontend/state/hooks/useStore/useStore';
-import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR_MORE, THEME_ROLE, THEME_SIZE } from '@lib-frontend/style/style.constants';
-import { SHAPE_POSITION } from '@lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+} from '@lib/frontend/core/components/Modal/Modal.models';
+import { Portal } from '@lib/frontend/core/components/Portal/Portal';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { CORNER, DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { type MeasureModel, type RLFCModel } from '@lib/frontend/core/core.models';
+import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
+import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
+import { isTranslatableText } from '@lib/frontend/locale/utils/isTranslatableText/isTranslatableText';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_COLOR_MORE, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 
 export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(

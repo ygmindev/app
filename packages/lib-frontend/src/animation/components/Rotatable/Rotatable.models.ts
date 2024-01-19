@@ -2,7 +2,7 @@ import {
   type ChildrenPropsModel,
   type DirectionModel,
   type ElementStatePropsModel,
-} from '@lib-frontend/core/core.models';
+} from '@lib/frontend/core/core.models';
 
 export type RotatablePropsModel = ElementStatePropsModel &
   ChildrenPropsModel & {

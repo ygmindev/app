@@ -3,10 +3,10 @@ import { getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import {
   type _UseTableModel,
   type _UseTableParamsModel,
-} from '@lib-frontend/data/hooks/useTable/_useTable.models';
-import { type TableHeaderModel } from '@lib-frontend/data/hooks/useTable/useTable.models';
-import { useTranslation } from '@lib-frontend/locale/hooks/useTranslation/useTranslation';
-import { type StringKeyModel } from '@lib-shared/core/core.models';
+} from '@lib/frontend/data/hooks/useTable/_useTable.models';
+import { type TableHeaderModel } from '@lib/frontend/data/hooks/useTable/useTable.models';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { type StringKeyModel } from '@lib/shared/core/core.models';
 
 export const _useTable = <TType,>({
   columns,

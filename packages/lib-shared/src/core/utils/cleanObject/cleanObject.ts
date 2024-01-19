@@ -1,9 +1,9 @@
-import { cleanObject as cleanObjectBase } from '@lib-shared/core/utils/cleanObject/cleanObject.base';
+import { cleanObject as cleanObjectBase } from '@lib/shared/core/utils/cleanObject/cleanObject.base';
 import {
   type CleanObjectModel,
   type CleanObjectParamsModel,
-} from '@lib-shared/core/utils/cleanObject/cleanObject.models';
-import { type EntityResourceModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
+} from '@lib/shared/core/utils/cleanObject/cleanObject.models';
+import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import toPlainObject from 'lodash/toPlainObject';
 import { ObjectId } from 'mongodb';
 

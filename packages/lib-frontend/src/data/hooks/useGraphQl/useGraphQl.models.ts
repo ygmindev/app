@@ -1,5 +1,5 @@
-import { type GraphQlQueryHttpParamsModel } from '@lib-frontend/data/utils/graphQlQuery/graphQlQuery.models';
-import { type UseApiParamsModel } from '@lib-frontend/http/hooks/useApi/useApi.models';
+import { type GraphQlQueryHttpParamsModel } from '@lib/frontend/data/utils/graphQlQuery/graphQlQuery.models';
+import { type UseApiParamsModel } from '@lib/frontend/http/hooks/useApi/useApi.models';
 
 export type UseGraphQlParamsModel = UseApiParamsModel;
 

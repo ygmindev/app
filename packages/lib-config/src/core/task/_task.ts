@@ -1,16 +1,16 @@
 // COMPLETE
-import { Container } from '@lib-backend/core/utils/Container/Container';
-import { fromGlobs } from '@lib-backend/file/utils/fromGlobs/fromGlobs';
-import { fromPackages } from '@lib-backend/file/utils/fromPackages/fromPackages';
-import { joinPaths } from '@lib-backend/file/utils/joinPaths/joinPaths';
-import { packages } from '@lib-backend/file/utils/packages/packages';
-import { type _TaskConfigModel, type TaskConfigModel } from '@lib-config/core/task/task.models';
-import { filterNil } from '@lib-shared/core/utils/filterNil/filterNil';
-import { requireInterop } from '@lib-shared/core/utils/requireInterop/requireInterop';
-import { type TaskParamsModel } from '@tool-task/core/core.models';
-import { prompt } from '@tool-task/core/utils/prompt/prompt';
-import { PROMPT_TYPE } from '@tool-task/core/utils/prompt/prompt.constants';
-import { TaskRunner } from '@tool-task/core/utils/TaskRunner/TaskRunner';
+import { Container } from '@lib/backend/core/utils/Container/Container';
+import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
+import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
+import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { packages } from '@lib/backend/file/utils/packages/packages';
+import { type _TaskConfigModel, type TaskConfigModel } from '@lib/config/core/task/task.models';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { requireInterop } from '@lib/shared/core/utils/requireInterop/requireInterop';
+import { type TaskParamsModel } from '@tool/task/core/core.models';
+import { prompt } from '@tool/task/core/utils/prompt/prompt';
+import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
+import { TaskRunner } from '@tool/task/core/utils/TaskRunner/TaskRunner';
 import { existsSync } from 'fs';
 
 export const _task = ({ packageFilename, taskExtension }: TaskConfigModel): _TaskConfigModel => {

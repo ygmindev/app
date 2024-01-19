@@ -1,6 +1,6 @@
 import { {{NAME}} } from '{{PATH}}/{{NAME}}(camelCase)/{{NAME}}(camelCase)';
-import { renderHook } from '@lib-frontend/test/utils/renderHook/renderHook';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { renderHook } from '@lib/frontend/test/utils/renderHook/renderHook';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ {{NAME}}(camelCase) });
 

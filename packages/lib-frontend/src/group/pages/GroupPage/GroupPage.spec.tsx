@@ -1,7 +1,7 @@
-import { GroupPage } from '@lib-frontend/group/pages/GroupPage/GroupPage';
-import { type GroupPagePropsModel } from '@lib-frontend/group/pages/GroupPage/GroupPage.models';
-import { render } from '@lib-frontend/test/utils/render/render';
-import { withTestComponent } from '@lib-frontend/test/utils/withTestComponent/withTestComponent';
+import { GroupPage } from '@lib/frontend/group/pages/GroupPage/GroupPage';
+import { type GroupPagePropsModel } from '@lib/frontend/group/pages/GroupPage/GroupPage.models';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<GroupPagePropsModel>({
   target: GroupPage,

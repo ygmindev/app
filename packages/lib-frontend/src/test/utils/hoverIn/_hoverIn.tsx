@@ -1,7 +1,7 @@
 import {
   type _HoverInModel,
   type _HoverInParamsModel,
-} from '@lib-frontend/test/utils/hoverIn/_hoverIn.models';
+} from '@lib/frontend/test/utils/hoverIn/_hoverIn.models';
 import { fireEvent } from '@testing-library/react';
 
 export const _hoverIn = (element: _HoverInParamsModel): _HoverInModel => {

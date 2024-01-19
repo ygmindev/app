@@ -1,5 +1,5 @@
-import { TIMING, VEHICLE_TYPE } from '@lib-shared/aroom/aroom.constants';
-import { type TimingModel, type VehicleTypeModel } from '@lib-shared/aroom/aroom.models';
+import { TIMING, VEHICLE_TYPE } from '@lib/shared/aroom/aroom.constants';
+import { type TimingModel, type VehicleTypeModel } from '@lib/shared/aroom/aroom.models';
 
 export const PRICING_TABLE: Record<
   VehicleTypeModel,

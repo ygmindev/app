@@ -1,5 +1,5 @@
-import { type AsyncPropsModel } from '@lib-frontend/data/data.models';
-import { type WithIdModel } from '@lib-shared/core/utils/withId/withId.models';
+import { type AsyncPropsModel } from '@lib/frontend/data/data.models';
+import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 
 export type _UseMutationOptionsModel = AsyncPropsModel & {
   cache?: boolean | number;

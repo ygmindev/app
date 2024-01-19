@@ -1,11 +1,11 @@
-import { type ClassModel } from '@lib-shared/core/core.models';
-import { type ResourceNameParamsModel } from '@lib-shared/resource/resource.models';
-import { type EntityResourceDataModel } from '@lib-shared/resource/resources/EntityResource/EntityResource.models';
+import { type ClassModel } from '@lib/shared/core/core.models';
+import { type ResourceNameParamsModel } from '@lib/shared/resource/resource.models';
+import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import {
   type ResourceServiceDecoratorModel,
   type ResourceServiceModel,
-} from '@lib-shared/resource/utils/ResourceService/ResourceService.models';
-import { type RootInputModel } from '@lib-shared/resource/utils/Root/Root.models';
+} from '@lib/shared/resource/utils/ResourceService/ResourceService.models';
+import { type RootInputModel } from '@lib/shared/resource/utils/Root/Root.models';
 
 export type CreateResourceServiceParamsModel<
   TType,

@@ -1,5 +1,5 @@
-import { type ResourceClassModel } from '@lib-backend/resource/resource.models';
-import { type UpdateModel } from '@lib-shared/resource/utils/Update/Update.models';
+import { type ResourceClassModel } from '@lib/backend/resource/resource.models';
+import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 
 export type CreateUpdateParamsModel<TType> = {
   Resource(): ResourceClassModel<TType>;

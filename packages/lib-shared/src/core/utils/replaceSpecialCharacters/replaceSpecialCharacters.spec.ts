@@ -1,5 +1,5 @@
-import { replaceSpecialCharacters } from '@lib-shared/core/utils/replaceSpecialCharacters/replaceSpecialCharacters';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { replaceSpecialCharacters } from '@lib/shared/core/utils/replaceSpecialCharacters/replaceSpecialCharacters';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ replaceSpecialCharacters });
 

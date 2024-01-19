@@ -1,8 +1,8 @@
 import {
   type _UseQueryModel,
   type _UseQueryParamsModel,
-} from '@lib-frontend/data/hooks/useQuery/_useQuery.models';
-import { debounce } from '@lib-shared/core/utils/debounce/debounce';
+} from '@lib/frontend/data/hooks/useQuery/_useQuery.models';
+import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import isNumber from 'lodash/isNumber';
 

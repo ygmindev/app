@@ -3,8 +3,8 @@ import reduce from 'lodash/reduce';
 import {
   type ObjectToEqualityModel,
   type ObjectToEqualityParamsModel,
-} from '@lib-backend/resource/utils/objectToEquality/objectToEquality.models';
-import { type StringKeyModel } from '@lib-shared/core/core.models';
+} from '@lib/backend/resource/utils/objectToEquality/objectToEquality.models';
+import { type StringKeyModel } from '@lib/shared/core/core.models';
 
 export const objectToEquality = <TType extends unknown>(
   params: ObjectToEqualityParamsModel<TType>,

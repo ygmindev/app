@@ -1,16 +1,16 @@
-import { RoutesField } from '@lib-frontend/aroom/components/RoutesField/RoutesField';
-import { SelectField } from '@lib-frontend/core/components/SelectField/SelectField';
-import { Text } from '@lib-frontend/core/components/Text/Text';
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { type LFCModel } from '@lib-frontend/core/core.models';
-import { FormContainer } from '@lib-frontend/data/components/FormContainer/FormContainer';
-import { StepForm } from '@lib-frontend/data/components/StepForm/StepForm';
-import { type ScratchPadPagePropsModel } from '@lib-frontend/dev/pages/ScratchPadPage/ScratchPadPage.models';
-import { useMapRoutes } from '@lib-frontend/map/hooks/useMapRoutes/useMapRoutes';
-import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { FONT_STYLE } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { VEHICLE_TYPE } from '@lib-shared/aroom/aroom.constants';
-import { type GetRouteInputModel } from '@lib-shared/map/resources/MapRoute/MapRouteService/MapRouteService.models';
+import { RoutesField } from '@lib/frontend/aroom/components/RoutesField/RoutesField';
+import { SelectField } from '@lib/frontend/core/components/SelectField/SelectField';
+import { Text } from '@lib/frontend/core/components/Text/Text';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { type LFCModel } from '@lib/frontend/core/core.models';
+import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
+import { StepForm } from '@lib/frontend/data/components/StepForm/StepForm';
+import { type ScratchPadPagePropsModel } from '@lib/frontend/dev/pages/ScratchPadPage/ScratchPadPage.models';
+import { useMapRoutes } from '@lib/frontend/map/hooks/useMapRoutes/useMapRoutes';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { VEHICLE_TYPE } from '@lib/shared/aroom/aroom.constants';
+import { type GetRouteInputModel } from '@lib/shared/map/resources/MapRoute/MapRouteService/MapRouteService.models';
 
 export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });

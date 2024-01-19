@@ -1,10 +1,9 @@
-import { readdirSync, statSync } from 'fs';
-import { join, normalize } from 'path';
-
 import {
   type ChildrenModel,
   type ChildrenParamsModel,
-} from '@lib-backend/file/utils/children/children.models';
+} from '@lib/backend/file/utils/children/children.models';
+import { readdirSync, statSync } from 'fs';
+import { join, normalize } from 'path';
 
 export const children = (...[from, options]: ChildrenParamsModel): ChildrenModel => {
   const root = `/${normalize(from)}`;

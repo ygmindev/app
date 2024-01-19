@@ -1,7 +1,7 @@
 import {
   type CollapseFilterModel,
   type CollapseFilterParamsModel,
-} from '@lib-shared/resource/utils/collapseFilter/collapseFilter.models';
+} from '@lib/shared/resource/utils/collapseFilter/collapseFilter.models';
 
 export const collapseFilter = <TType extends unknown>(
   params?: CollapseFilterParamsModel<TType>,

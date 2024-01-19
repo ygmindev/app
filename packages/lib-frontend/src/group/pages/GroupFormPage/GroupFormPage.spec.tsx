@@ -1,7 +1,7 @@
-import { GroupFormPage } from '@lib-frontend/group/pages/GroupFormPage/GroupFormPage';
-import { type GroupFormPagePropsModel } from '@lib-frontend/group/pages/GroupFormPage/GroupFormPage.models';
-import { render } from '@lib-frontend/test/utils/render/render';
-import { withTestComponent } from '@lib-frontend/test/utils/withTestComponent/withTestComponent';
+import { GroupFormPage } from '@lib/frontend/group/pages/GroupFormPage/GroupFormPage';
+import { type GroupFormPagePropsModel } from '@lib/frontend/group/pages/GroupFormPage/GroupFormPage.models';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const { Component, displayName, testID } = withTestComponent<GroupFormPagePropsModel>({
   target: GroupFormPage,

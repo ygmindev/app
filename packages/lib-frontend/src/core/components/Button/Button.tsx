@@ -1,34 +1,34 @@
 import isNumber from 'lodash/isNumber';
 import { useMemo } from 'react';
 
-import { type AnimationModel } from '@lib-frontend/animation/animation.models';
-import { Appearable } from '@lib-frontend/animation/components/Appearable/Appearable';
-import { BUTTON_TYPE } from '@lib-frontend/core/components/Button/Button.constants';
-import { type ButtonPropsModel } from '@lib-frontend/core/components/Button/Button.models';
-import { Icon } from '@lib-frontend/core/components/Icon/Icon';
-import { Loading } from '@lib-frontend/core/components/Loading/Loading';
-import { Pressable } from '@lib-frontend/core/components/Pressable/Pressable';
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { type WrapperRefModel } from '@lib-frontend/core/components/Wrapper/Wrapper.models';
-import { ELEMENT_STATE } from '@lib-frontend/core/core.constants';
-import { type ElementStateModel, type RLFCModel } from '@lib-frontend/core/core.models';
-import { useValueControlled } from '@lib-frontend/data/hooks/useValueControlled/useValueControlled';
-import { TranslatableText } from '@lib-frontend/locale/components/TranslatableText/TranslatableText';
-import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useTheme } from '@lib-frontend/style/hooks/useTheme/useTheme';
+import { type AnimationModel } from '@lib/frontend/animation/animation.models';
+import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { type ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
+import { Icon } from '@lib/frontend/core/components/Icon/Icon';
+import { Loading } from '@lib/frontend/core/components/Loading/Loading';
+import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { type ElementStateModel, type RLFCModel } from '@lib/frontend/core/core.models';
+import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
+import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import {
   THEME_COLOR,
   THEME_ROLE,
   THEME_SIZE,
   THEME_SIZE_MORE,
-} from '@lib-frontend/style/style.constants';
-import { type ThemeRoleModel, type ThemeSizeModel } from '@lib-frontend/style/style.models';
+} from '@lib/frontend/style/style.constants';
+import { type ThemeRoleModel, type ThemeSizeModel } from '@lib/frontend/style/style.models';
 import {
   FLEX_ALIGN,
   FLEX_JUSTIFY,
-} from '@lib-frontend/style/utils/styler/flexStyler/flexStyler.constants';
-import { FONT_ALIGN } from '@lib-frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { SHAPE_POSITION } from '@lib-frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+} from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
   align = FLEX_ALIGN.CENTER,

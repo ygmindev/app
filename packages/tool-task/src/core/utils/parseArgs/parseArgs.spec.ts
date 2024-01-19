@@ -1,5 +1,5 @@
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
-import { parseArgs } from '@tool-task/core/utils/parseArgs/parseArgs';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { parseArgs } from '@tool/task/core/utils/parseArgs/parseArgs';
 
 const { displayName } = withTest({ parseArgs });
 

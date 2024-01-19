@@ -1,12 +1,12 @@
 import kebabCase from 'lodash/kebabCase';
 import { join } from 'path';
 
-import { fromRoot } from '@lib-backend/file/utils/fromRoot/fromRoot';
-import { config } from '@lib-config/core/file/file';
-import { dateTimeFormat } from '@lib-shared/data/utils/dateTimeFormat/dateTimeFormat';
-import { DATE_TIME_FORMAT_TYPE } from '@lib-shared/data/utils/dateTimeFormat/dateTimeFormat.constants';
-import { type TaskParamsModel } from '@tool-task/core/core.models';
-import { type BackupParamsModel } from '@tool-task/core/tasks/backup/backup.models';
+import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { config } from '@lib/config/core/file/file';
+import { dateTimeFormat } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat';
+import { DATE_TIME_FORMAT_TYPE } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat.constants';
+import { type TaskParamsModel } from '@tool/task/core/core.models';
+import { type BackupParamsModel } from '@tool/task/core/tasks/backup/backup.models';
 
 const backup: TaskParamsModel<BackupParamsModel> = {
   name: 'backup',

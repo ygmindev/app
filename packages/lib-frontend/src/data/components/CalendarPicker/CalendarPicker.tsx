@@ -1,16 +1,16 @@
-import { Wrapper } from '@lib-frontend/core/components/Wrapper/Wrapper';
-import { type RLFCModel } from '@lib-frontend/core/core.models';
-import { _CalendarPicker } from '@lib-frontend/data/components/CalendarPicker/_CalendarPicker';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { type RLFCModel } from '@lib/frontend/core/core.models';
+import { _CalendarPicker } from '@lib/frontend/data/components/CalendarPicker/_CalendarPicker';
 import {
   type CalendarPickerPropsModel,
   type CalendarPickerRefModel,
-} from '@lib-frontend/data/components/CalendarPicker/CalendarPicker.models';
-import { useValueControlled } from '@lib-frontend/data/hooks/useValueControlled/useValueControlled';
-import { TranslatableText } from '@lib-frontend/locale/components/TranslatableText/TranslatableText';
-import { useLayoutStyles } from '@lib-frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useThemePresets } from '@lib-frontend/style/hooks/useThemePresets/useThemePresets';
-import { THEME_SIZE } from '@lib-frontend/style/style.constants';
-import { variableName } from '@lib-shared/core/utils/variableName/variableName';
+} from '@lib/frontend/data/components/CalendarPicker/CalendarPicker.models';
+import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
+import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useThemePresets } from '@lib/frontend/style/hooks/useThemePresets/useThemePresets';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { forwardRef } from 'react';
 
 export const CalendarPicker: RLFCModel<CalendarPickerRefModel, CalendarPickerPropsModel> =

@@ -1,5 +1,5 @@
-import { trimPathname } from '@lib-frontend/route/utils/trimPathname/trimPathname';
-import { type UriParamsModel } from '@lib-shared/http/utils/uri/uri.models';
+import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
+import { type UriParamsModel } from '@lib/shared/http/utils/uri/uri.models';
 
 export const uri = <TType extends unknown>({
   host = '',

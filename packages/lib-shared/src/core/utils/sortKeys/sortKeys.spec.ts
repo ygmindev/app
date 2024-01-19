@@ -1,5 +1,5 @@
-import { sortKeys } from '@lib-shared/core/utils/sortKeys/sortKeys';
-import { withTest } from '@lib-shared/test/utils/withTest/withTest';
+import { sortKeys } from '@lib/shared/core/utils/sortKeys/sortKeys';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ sortKeys });
 

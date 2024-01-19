@@ -893,7 +893,7 @@
           "process.env.SERVER_APP_GOOGLE_API_KEY": "\"AIzaSyBq_IqxNvsOEWJ3agu-bN5E2DxfY1w_iZ4\"",
           "process.env.ENV_NAME": "\"SERVER_LAMBDA\"",
           "process.env.SERVER_PLAID_COUNTRY_CODES": "\"US,CA\"",
-          "process.env.SERVER_FIREBASE_ADMIN_EMAIL": "\"firebase-adminsdk-ofw76@app-46c38.iam.gserviceaccount.com\"",
+          "process.env.SERVER_FIREBASE_ADMIN_EMAIL": "\"firebase-adminsdk-ofw76@app/46c38.iam.gserviceaccount.com\"",
           "process.env.SERVER_PLAID_VERSION": "\"2020-09-14\"",
           "process.env.NODE_ENV": "\"production\"",
           "process.env.SERVER_APP_OTP_LENGTH": "\"6\"",
