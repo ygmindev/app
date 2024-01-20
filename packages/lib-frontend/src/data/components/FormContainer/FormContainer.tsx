@@ -8,7 +8,6 @@ import {
   type RLFCPropsModel,
 } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
-import { InputGroup } from '@lib/frontend/data/components/InputGroup/InputGroup';
 import { Form } from '@lib/frontend/data/components/Form/Form';
 import {
   type FormContainerPropsModel,
@@ -19,6 +18,7 @@ import {
   type FormRowModel,
   type FormTileModel,
 } from '@lib/frontend/data/components/FormContainer/FormContainer.models';
+import { InputGroup } from '@lib/frontend/data/components/InputGroup/InputGroup';
 import { SubmittableButtons } from '@lib/frontend/data/components/SubmittableButtons/SubmittableButtons';
 import { type InputPropsModel, type InputRefModel } from '@lib/frontend/data/data.models';
 import { useForm } from '@lib/frontend/data/hooks/useForm/useForm';

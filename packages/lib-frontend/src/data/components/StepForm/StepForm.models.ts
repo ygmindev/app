@@ -25,5 +25,5 @@ export type FormStepModel<
   TResult = void,
 > = WithIdModel & {
   element: ReactElement<FormStepPropsModel<TType, TStep, TResult>>;
-  title: TranslatableTextModel;
+  title?: TranslatableTextModel;
 };

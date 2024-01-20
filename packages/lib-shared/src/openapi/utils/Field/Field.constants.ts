@@ -1,4 +1,5 @@
-export enum FIELD_DEFINITION_TYPE {
+export enum FIELD_TYPE {
+  ADDRESS = 'address',
   CATEGORY = 'category',
   DATE = 'date',
   NUMBER = 'number',

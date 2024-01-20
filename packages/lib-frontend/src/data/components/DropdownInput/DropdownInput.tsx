@@ -94,7 +94,7 @@ export const DropdownInput = forwardRef(
         : undefined;
 
     const handleSearch = (v: string): void => {
-      onSearch && onSearch(v);
+      v ? onSearch && onSearch(v) : handleToggle(false);
       textValueSet(v);
     };
 
@@ -102,7 +102,6 @@ export const DropdownInput = forwardRef(
       valueControlledSet(v);
       handleToggle(false);
     };
-
     return (
       <Menu
         anchor={(isOpen) => (
