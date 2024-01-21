@@ -1,5 +1,3 @@
-import { forwardRef, useImperativeHandle, useRef } from 'react';
-
 import { _Dropdown } from '@lib/frontend/core/components/Dropdown/_Dropdown';
 import {
   type DropdownPropsModel,
@@ -11,6 +9,7 @@ import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR_MORE, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 export const Dropdown: RLFCModel<DropdownRefModel, DropdownPropsModel> = forwardRef(
   (
@@ -33,7 +32,7 @@ export const Dropdown: RLFCModel<DropdownRefModel, DropdownPropsModel> = forward
     const wrapperRef = useRef<WrapperRefModel>(null);
     const { styles } = useLayoutStyles({ props });
     useImperativeHandle(ref, () => ({
-      isOpen: () => isOpen || false,
+      isOpen: () => isOpen ?? false,
       scrollTo: (params) => wrapperRef?.current?.scrollTo(params),
       toggle: onToggle,
     }));

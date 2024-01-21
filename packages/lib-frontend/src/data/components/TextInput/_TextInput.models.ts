@@ -3,7 +3,7 @@ import { type TextInputKeyboardModel } from '@lib/frontend/data/components/TextI
 export type _TextInputPropsModel = {
   autoComplete?: string;
   foregroundColor: string;
-  height: number;
+  height?: number;
   isCenter?: boolean;
   isDisabled?: boolean;
   keyboard?: TextInputKeyboardModel;

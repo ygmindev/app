@@ -1,14 +1,13 @@
-import { type ReactElement, useState } from 'react';
-
-import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { DropdownInput } from '@lib/frontend/data/components/DropdownInput/DropdownInput';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
+import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { type ResourceFormPropsModel } from '@lib/frontend/resource/containers/ResourceForm/ResourceForm.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { DATA_TYPE_MORE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type ReactElement, useState } from 'react';
 
 export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoot = undefined>({
   fields,

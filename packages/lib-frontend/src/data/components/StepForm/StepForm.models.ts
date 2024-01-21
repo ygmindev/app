@@ -7,7 +7,7 @@ import { type ReactElement } from 'react';
 
 export type StepFormPropsModel<TType, TResult = void> = UseFormParamsModel<TType, TResult> & {
   steps: Array<FormStepModel<TType, PartialModel<TType>>>;
-  topElement?: ReactElement;
+  topElement?: ReactElement | null;
 };
 
 export type FormStepPropsModel<

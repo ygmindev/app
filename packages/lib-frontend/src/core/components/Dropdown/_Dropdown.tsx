@@ -12,13 +12,13 @@ import {
   useInteractions,
   useRole,
 } from '@floating-ui/react';
-import { type CSSProperties } from 'react';
-
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { type _DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/_Dropdown.models';
 import { type SFCModel } from '@lib/frontend/core/core.models';
 import { useValueDelayed } from '@lib/frontend/core/hooks/useValueDelayed/useValueDelayed';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { type CSSProperties } from 'react';
 
 export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   anchor,
@@ -57,7 +57,9 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   const click = useClick(context);
   const dismiss = useDismiss(context);
   const role = useRole(context);
-  const { getFloatingProps, getReferenceProps } = useInteractions([click, dismiss, role]);
+  const { getFloatingProps, getReferenceProps } = useInteractions(
+    filterNil([click, dismiss, role]),
+  );
   return (
     <>
       <div

@@ -1,8 +1,4 @@
-import { type ReactElement, Suspense } from 'react';
-import { cloneElement, createContext, useMemo } from 'react';
-
 import { AppProvider } from '@lib/frontend/app/containers/AppProvider/AppProvider';
-import { AuthProvider } from '@lib/frontend/auth/providers/AuthProvider/AuthProvider';
 import { AsyncBoundary } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { QueryProvider } from '@lib/frontend/data/providers/QueryProvider/QueryProvider';
@@ -19,6 +15,8 @@ import {
 import { Store } from '@lib/frontend/state/utils/Store/Store';
 import { StyleProvider } from '@lib/frontend/style/providers/StyleProvider/StyleProvider';
 import { TrackingProvider } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider';
+import { type ReactElement, Suspense } from 'react';
+import { cloneElement, createContext, useMemo } from 'react';
 
 export const actionContext = createContext<RootActionsModel | undefined>(undefined);
 
@@ -42,7 +40,7 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
       <ContextProvider value={context} />,
       <TrackingProvider />,
       <QueryProvider value={context?.query} />,
-      <AuthProvider />,
+      // <AuthProvider />,
       <AsyncBoundary />,
       <StyleProvider />,
       <LocaleProvider value={context?.locale} />,

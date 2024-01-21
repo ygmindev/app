@@ -1,6 +1,3 @@
-import cloneDeep from 'lodash/cloneDeep';
-import { forwardRef, useImperativeHandle, useRef } from 'react';
-
 import {
   type RoutesInputPropsModel,
   type RoutesInputRefModel,
@@ -19,6 +16,8 @@ import {
 } from '@lib/frontend/map/components/AddressInput/AddressInput.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { uid } from '@lib/shared/core/utils/uid/uid';
+import cloneDeep from 'lodash/cloneDeep';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 export const RoutesInput: RLFCModel<RoutesInputRefModel, RoutesInputPropsModel> = forwardRef(
   ({ onChange, value, ...props }, ref) => {
@@ -27,8 +26,8 @@ export const RoutesInput: RLFCModel<RoutesInputRefModel, RoutesInputPropsModel> 
     const fieldRef = useRef<AddressInputRefModel>(null);
     const { valueControlled, valueControlledSet } = useValueControlled({
       defaultValue: [
-        { id: '0', label: '', latitude: 0, longitude: 0 },
-        { id: '1', label: '', latitude: 1, longitude: 1 },
+        { id: '0', latitude: 0, longitude: 0 },
+        { id: '1', latitude: 1, longitude: 1 },
       ],
       onChange,
       value,
@@ -78,7 +77,6 @@ export const RoutesInput: RLFCModel<RoutesInputRefModel, RoutesInputPropsModel> 
               ...(valueControlled ?? []),
               {
                 id: uid(),
-                label: '',
                 latitude: valueControlled?.length ?? 0,
                 longitude: valueControlled?.length ?? 0,
               },

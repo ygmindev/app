@@ -11,6 +11,7 @@ export type FieldTypeModel = `${FIELD_TYPE}`;
 
 export type BaseFieldModel = WithIdModel & {
   isArray?: boolean;
+  isOptional?: boolean;
   translation?: Record<string, string>;
 };
 

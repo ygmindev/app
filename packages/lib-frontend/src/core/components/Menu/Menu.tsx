@@ -69,7 +69,7 @@ export const Menu = forwardRef(
       onPress: async () => {
         if (!isDisabled) {
           onPress && (await onPress());
-          handleToggle(!isOpen);
+          handleToggle(true);
         }
       },
     });

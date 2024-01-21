@@ -1,19 +1,18 @@
-import { forwardRef, useImperativeHandle, useRef } from 'react';
-
 import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { DropdownInput } from '@lib/frontend/data/components/DropdownInput/DropdownInput';
 import { InputGroup } from '@lib/frontend/data/components/InputGroup/InputGroup';
-import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import {
   type TextFilterInputPropsModel,
   type TextFilterInputRefModel,
 } from '@lib/frontend/data/components/TextFilterInput/TextFilterInput.models';
+import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { type InputRefModel } from '@lib/frontend/data/data.models';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import { type FilterConditionModel } from '@lib/shared/resource/utils/Filter/Filter.models';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 export const TextFilterInput: RLFCModel<TextFilterInputRefModel, TextFilterInputPropsModel> =
   forwardRef(({ defaultValue, onChange, value, ...props }, ref) => {

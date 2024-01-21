@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
 import { DropdownInput } from '@lib/frontend/data/components/DropdownInput/DropdownInput';
@@ -10,6 +8,7 @@ import { timezones } from '@lib/frontend/locale/utils/timezones/timezones';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { timezoneFormat } from '@lib/shared/data/utils/timezoneFormat/timezoneFormat';
+import { useMemo } from 'react';
 
 export const TimezoneInput: LFCModel<TimezoneInputPropsModel> = ({
   defaultValue,

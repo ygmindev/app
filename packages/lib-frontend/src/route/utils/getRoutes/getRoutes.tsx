@@ -16,6 +16,9 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
       element: <PingPage />,
       pathname: PING,
     },
+
+    ...devRoutes,
+
     {
       element: <AppLayout />,
       pathname: '/',
@@ -25,8 +28,6 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
         ...userRoutes,
 
         ...authRoutes,
-
-        ...devRoutes,
 
         // TODO: fix after build
         // {

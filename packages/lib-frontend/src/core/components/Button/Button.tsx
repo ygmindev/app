@@ -1,6 +1,3 @@
-import isNumber from 'lodash/isNumber';
-import { useMemo } from 'react';
-
 import { type AnimationModel } from '@lib/frontend/animation/animation.models';
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
@@ -29,6 +26,8 @@ import {
 } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import isNumber from 'lodash/isNumber';
+import { useMemo } from 'react';
 
 export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
   align = FLEX_ALIGN.CENTER,
@@ -138,7 +137,8 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
     <TranslatableText
       align={FONT_ALIGN.CENTER}
       color={color}
-      colorRole={childColorRole}>
+      colorRole={childColorRole}
+      isEllipsis>
       {children}
     </TranslatableText>
   );

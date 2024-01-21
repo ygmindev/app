@@ -12,6 +12,7 @@ import {
   type DropdownInputRefModel,
 } from '@lib/frontend/data/components/DropdownInput/DropdownInput.models';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
+import { type TextInputRefModel } from '@lib/frontend/data/components/TextInput/TextInput.models';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useSearch } from '@lib/frontend/search/hooks/useSearch/useSearch';
@@ -19,7 +20,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import find from 'lodash/find';
 import lowerCase from 'lodash/lowerCase';
 import { type ForwardedRef, forwardRef, type ReactElement, useState } from 'react';
-import { useRef } from 'react';
+import { useImperativeHandle, useRef } from 'react';
 
 export const DropdownInput = forwardRef(
   <TType extends MenuOptionModel = MenuOptionModel>(
@@ -34,11 +35,12 @@ export const DropdownInput = forwardRef(
       onBlur,
       onChange,
       onFocus,
-      onSearch,
       onSubmit,
+      onTextChange,
       options,
       renderOption,
       renderValue,
+      rightElement,
       round,
       value,
       width,
@@ -53,8 +55,15 @@ export const DropdownInput = forwardRef(
       onChange,
       value,
     });
-
     const menuRef = useRef<MenuRefModel>(null);
+    const inputRef = useRef<TextInputRefModel>(null);
+
+    useImperativeHandle(ref, () => ({
+      beforeSubmit: inputRef.current?.beforeSubmit,
+      blur: () => inputRef.current?.blur,
+      focus: () => inputRef.current?.focus,
+      submit: inputRef.current?.submit,
+    }));
 
     const { query, result, search } = useSearch<TType>({
       items: options.map(({ label, ...option }) => ({
@@ -69,19 +78,19 @@ export const DropdownInput = forwardRef(
 
     const handleToggle = (isOpen?: boolean): void => {
       menuRef.current?.toggle(isOpen);
-      onSearch && onSearch('');
       search('');
     };
 
     const handleSelect = (): void => {
       const queryValue = find(optionsF, ({ id }) => lowerCase(query) === lowerCase(id));
       const selected = queryValue ?? (optionsF && optionsF[0]);
-      const selectedValue = selected.id;
-      if (selectedValue) {
-        valueControlledSet(selectedValue);
+      const id = selected?.id;
+      if (id) {
+        valueControlledSet(id);
         onSubmit && onSubmit();
       }
       handleToggle(false);
+      inputRef.current?.blur();
     };
 
     const selectedOption = options.find(({ id }) => id === valueControlled);
@@ -93,15 +102,37 @@ export const DropdownInput = forwardRef(
           : selectedOption.label ?? selectedOption.id
         : undefined;
 
-    const handleSearch = (v: string): void => {
-      v ? onSearch && onSearch(v) : handleToggle(false);
+    const handleQuery = (v: string): void => {
       textValueSet(v);
+      onTextChange && onTextChange(v);
     };
 
     const handleChange = (v: string): void => {
       valueControlledSet(v);
+      inputRef.current?.blur();
       handleToggle(false);
     };
+
+    const rightElementF = rightElement ? (
+      rightElement(elementState)
+    ) : (
+      <AnimatableView
+        animation={{
+          states: {
+            [ELEMENT_STATE.INACTIVE]: { transform: [{ rotateZ: '0deg' }] },
+            [ELEMENT_STATE.ACTIVE]: { transform: [{ rotateZ: '-180deg' }] },
+          },
+        }}
+        elementState={elementState}>
+        <Icon icon="chevronDown" />
+      </AnimatableView>
+    );
+
+    const handleFocus = (): void => {
+      onFocus && onFocus();
+      menuRef.current?.toggle(true);
+    };
+
     return (
       <Menu
         anchor={(isOpen) => (
@@ -112,29 +143,17 @@ export const DropdownInput = forwardRef(
             error={error}
             icon={icon}
             isAutoFocus={isAutoFocus}
-            isNoClear
             isTransparent={isTransparent}
             label={label}
             leftElement={
               selectedOption && selectedOption.icon && <Icon icon={selectedOption.icon} />
             }
             onBlur={onBlur}
-            onChange={handleSearch}
-            onFocus={onFocus}
+            onChange={handleQuery}
+            onFocus={handleFocus}
             onSubmit={handleSelect}
-            ref={ref}
-            rightElement={
-              <AnimatableView
-                animation={{
-                  states: {
-                    [ELEMENT_STATE.INACTIVE]: { transform: [{ rotateZ: '0deg' }] },
-                    [ELEMENT_STATE.ACTIVE]: { transform: [{ rotateZ: '-180deg' }] },
-                  },
-                }}
-                elementState={elementState}>
-                <Icon icon="chevronDown" />
-              </AnimatableView>
-            }
+            ref={inputRef}
+            rightElement={isOpen ? rightElementF : displayLabel ? <Icon icon="edit" /> : null}
             round={round}
             value={isOpen ? textValue : t(displayLabel)}
             width={width}
