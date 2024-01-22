@@ -9,7 +9,6 @@ export const props: LibraryPropsModel<OtpInputPropsModel> = {
   defaultProps: {},
   variants: [
     ...Object.values(ELEMENT_STATE).map((elementState) => ({ props: { elementState } })),
-    // { props: { isAutoFocus: true } },
     // { props: { isDisabled: true } },
     // { props: { error: true } },
     // { props: { error: 'error' } },

@@ -1,7 +1,3 @@
-import range from 'lodash/range';
-import toNumber from 'lodash/toNumber';
-import { forwardRef, useState } from 'react';
-
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import {
   type OtpInputPropsModel,
@@ -23,13 +19,16 @@ import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { withId } from '@lib/shared/core/utils/withId/withId';
+import range from 'lodash/range';
+import toNumber from 'lodash/toNumber';
+import { forwardRef, useState } from 'react';
 
 const otpLength = toNumber(process.env.SERVER_APP_OTP_LENGTH);
 
 const IDS = withId(range(otpLength));
 
 export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forwardRef(
-  ({ elementState, error, isAutoFocus, onChange, onSubmit, value, ...props }, ref) => {
+  ({ elementState, error, onChange, onSubmit, value, ...props }, ref) => {
     const { wrapperProps } = useLayoutStyles({ props });
     const theme = useTheme();
     const { valueControlled, valueControlledSet } = useValueControlled({
@@ -58,7 +57,6 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
             <TextInput
               defaultValue=""
               elementState={elementState}
-              isAutoFocus={isAutoFocus}
               isNoClear
               keyboard={TEXT_INPUT_KEYBOARD.NUMBER}
               maxLength={otpLength}

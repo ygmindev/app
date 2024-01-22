@@ -10,7 +10,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { forwardRef, useState } from 'react';
 
 export const AddressInput: RLFCModel<AddressInputRefModel, AddressInputPropsModel> = forwardRef(
-  ({ defaultValue, isAutoFocus, label, onChange, value, ...props }, _) => {
+  ({ defaultValue, label, onChange, value, ...props }, _) => {
     const { wrapperProps } = useLayoutStyles({ props });
     const [textValue, textValueSet] = useState<string>();
     const { valueControlledSet } = useValueControlled({
@@ -23,7 +23,6 @@ export const AddressInput: RLFCModel<AddressInputRefModel, AddressInputPropsMode
       <MenuInput
         {...wrapperProps}
         icon="location"
-        isAutoFocus={isAutoFocus}
         label={label}
         onChange={(v) => {
           const selectedValue = data.find(({ id }) => id === v);

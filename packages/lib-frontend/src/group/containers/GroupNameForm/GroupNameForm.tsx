@@ -24,12 +24,7 @@ export const GroupNameForm: LFCModel<GroupNameFormPropsModel> = ({
       {...wrapperProps}
       fields={[
         {
-          element: (
-            <TextInput
-              isAutoFocus
-              label={t('core:name')}
-            />
-          ),
+          element: <TextInput label={t('core:name')} />,
           id: 'name',
         },
       ]}

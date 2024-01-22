@@ -8,7 +8,6 @@ import { Tooltip } from '@lib/frontend/core/components/Tooltip/Tooltip';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
-import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
 import { FocusableWrapper } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper';
 import { type FocusableRefModel } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper.models';
 import { _TextInput } from '@lib/frontend/data/components/TextInput/_TextInput';
@@ -33,7 +32,6 @@ import { type TextStyleModel } from '@lib/frontend/style/style.models';
 import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { merge } from '@lib/shared/core/utils/merge/merge';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import isNumber from 'lodash/isNumber';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 
@@ -46,7 +44,6 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
       elementState,
       height,
       icon,
-      isAutoFocus,
       isCenter,
       isNoClear,
       isTransparent,
@@ -114,15 +111,6 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
         }
       }
     };
-
-    useAsync(async (isMounted) => {
-      if (isAutoFocus) {
-        await sleep(theme.animation.transition);
-        if (isMounted()) {
-          handleFocus(true);
-        }
-      }
-    });
 
     const leftElementF = leftElement && <Wrapper isRowAlign>{leftElement}</Wrapper>;
 

@@ -15,19 +15,9 @@ export const InputForm: LFCModel<InputFormPropsModel> = ({ specification, ...pro
     const element = (() => {
       switch (type) {
         case FIELD_TYPE.STRING:
-          return (
-            <TextInput
-              isAutoFocus
-              label={id}
-            />
-          );
+          return <TextInput label={id} />;
         case FIELD_TYPE.ADDRESS:
-          return (
-            <AddressInput
-              isAutoFocus
-              label={id}
-            />
-          );
+          return <AddressInput label={id} />;
         default:
           return <></>;
       }

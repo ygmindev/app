@@ -11,7 +11,6 @@ export const props: LibraryPropsModel<MenuInputPropsModel> = {
   minWidth: 200,
   variants: [
     { props: { icon: 'personCircle' } },
-    { props: { isAutoFocus: true } },
     { props: { label: 'label' } },
     ...Object.values(ELEMENT_STATE).map((elementState) => ({ props: { elementState } })),
   ],

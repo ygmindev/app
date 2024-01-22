@@ -54,7 +54,6 @@ export type InputPropsModel<TType = string> = FocusableWrapperPropsModel &
   WithIconPropsModel &
   ValuePropsModel<TType> & {
     beforeSubmit?(value: TType, id: string): Promise<unknown>;
-    isAutoFocus?: boolean;
     isTransparent?: boolean;
     label?: TranslatableTextModel;
     onBlur?(): void;

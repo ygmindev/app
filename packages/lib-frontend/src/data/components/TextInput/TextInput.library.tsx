@@ -10,7 +10,6 @@ export const props: LibraryPropsModel<TextInputPropsModel> = {
   defaultProps: {},
   minWidth: 200,
   variants: [
-    { props: { isAutoFocus: true } },
     { props: { label: 'label' } },
     { props: { isNoClear: true } },
     { props: { value: 'value' } },

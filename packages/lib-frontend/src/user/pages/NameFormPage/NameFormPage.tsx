@@ -26,12 +26,7 @@ export const NameFormPage: LFCModel<NameFormPagePropsModel> = ({ ...props }) => 
         {
           fields: [
             {
-              element: (
-                <TextInput
-                  isAutoFocus
-                  label={t('user:first')}
-                />
-              ),
+              element: <TextInput label={t('user:first')} />,
               id: 'first',
             },
             {

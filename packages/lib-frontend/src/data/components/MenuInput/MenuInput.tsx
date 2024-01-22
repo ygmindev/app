@@ -28,7 +28,6 @@ export const MenuInput = forwardRef(
       elementState,
       error,
       icon,
-      isAutoFocus,
       isTransparent,
       label,
       onBlur,
@@ -122,7 +121,6 @@ export const MenuInput = forwardRef(
             elementState={elementStateF}
             error={error}
             icon={icon}
-            isAutoFocus={isAutoFocus}
             isTransparent={isTransparent}
             label={label}
             leftElement={
