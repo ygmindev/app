@@ -2,14 +2,14 @@ import { children } from '@lib/backend/file/utils/children/children';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { packages } from '@lib/backend/file/utils/packages/packages';
 import { sort } from '@lib/shared/core/utils/sort/sort';
-import { _boilerplate } from '@tool/generate/utils/boilerplate/_boilerplate';
-import { BOILERPLATE_TEMPLATE_VARIABLE_PATTERN } from '@tool/generate/utils/boilerplate/boilerplate.constants';
+import { prompt } from '@tool/task/core/utils/prompt/prompt';
+import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
+import { _boilerplate } from '@tool/task/generate/utils/boilerplate/_boilerplate';
+import { BOILERPLATE_TEMPLATE_VARIABLE_PATTERN } from '@tool/task/generate/utils/boilerplate/boilerplate.constants';
 import {
   type BoilerplateModel,
   type BoilerplateParamsModel,
-} from '@tool/generate/utils/boilerplate/boilerplate.models';
-import { prompt } from '@tool/task/core/utils/prompt/prompt';
-import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
+} from '@tool/task/generate/utils/boilerplate/boilerplate.models';
 import { readFileSync } from 'fs';
 import pullAll from 'lodash/pullAll';
 import trim from 'lodash/trim';
@@ -36,7 +36,7 @@ export const boilerplate = async ({
   template,
   variables,
 }: BoilerplateParamsModel): Promise<BoilerplateModel> => {
-  const templateDir = fromPackages('tool-generate/templates', template);
+  const templateDir = fromPackages('tool-task/templates', template);
   let templateVariables = await getTemplateVariables(templateDir);
   templateVariables = sort(uniq(templateVariables));
   templateVariables = variables

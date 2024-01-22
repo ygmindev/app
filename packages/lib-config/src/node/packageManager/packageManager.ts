@@ -12,13 +12,13 @@ const { _config, config } = defineConfig({
 
     installCommand: (names, packages, options = {}) =>
       names && packages
-        ? `pnpm add ${packages ? packages.map((v) => `--filter @${v}`).join(' ') : ''} ${options.isDev ? '-D' : ''} ${names}`
+        ? `pnpm add ${packages ? packages.map((v) => `--filter @${v.replace('-', '/')}`).join(' ') : ''} ${options.isDev ? '-D' : ''} ${names}`
         : 'pnpm install --shamefully-hoist',
 
     name: 'pnpm',
 
     removeCommand: (names, packages) =>
-      `pnpm remove ${packages ? packages.map((v) => `--filter @${v}`).join(' ') : ''} ${names}`,
+      `pnpm remove ${packages ? packages.map((v) => `--filter @${v.replace('-', '/')}`).join(' ') : ''} ${names}`,
 
     toJsx: [
       fromModules('react-native-animatable/createAnimatableComponent.js'),

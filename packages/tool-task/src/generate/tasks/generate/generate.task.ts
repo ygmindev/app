@@ -3,10 +3,10 @@ import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages'
 import { config } from '@lib/config/core/generate/generate';
 import { type GenerateConfigModel } from '@lib/config/core/generate/generate.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
-import { type GenerateParamsModel } from '@tool/generate/tasks/generate/generate.models';
-import { boilerplate } from '@tool/generate/utils/boilerplate/boilerplate';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
+import { type GenerateParamsModel } from '@tool/task/generate/tasks/generate/generate.models';
+import { boilerplate } from '@tool/task/generate/utils/boilerplate/boilerplate';
 
 const generate: TaskParamsModel<GenerateParamsModel> = {
   name: 'generate',
@@ -14,7 +14,7 @@ const generate: TaskParamsModel<GenerateParamsModel> = {
   options: [
     {
       key: 'template',
-      options: children(fromPackages('tool-generate/templates'), { isDirectory: true }).map(
+      options: children(fromPackages('tool-task/templates'), { isDirectory: true }).map(
         ({ name }) => name,
       ),
       type: PROMPT_TYPE.LIST,

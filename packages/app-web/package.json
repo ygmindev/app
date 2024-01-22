@@ -21,6 +21,7 @@
     "ag-grid-react": "^31.0.1",
     "amplitude-js": "^8.21.9",
     "axios": "^1.6.5",
+    "color": "^4.2.3",
     "cookies-js": "^1.2.3",
     "core-js": "^3.35.0",
     "countries-list": "^3.0.6",

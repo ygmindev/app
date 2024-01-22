@@ -1,7 +1,3 @@
-import { type ForwardedRef, type ReactElement } from 'react';
-import { forwardRef } from 'react';
-import DragList from 'react-native-draglist';
-
 import {
   type _DraggableListPropsModel,
   type _DraggableListRefModel,
@@ -9,6 +5,9 @@ import {
 import { type RSFCPropsModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
+import { type ForwardedRef, type ReactElement } from 'react';
+import { forwardRef } from 'react';
+import DragList from 'react-native-draglist';
 
 export const _DraggableList = forwardRef(
   <TType extends WithIdModel>(

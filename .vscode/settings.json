@@ -23,13 +23,13 @@
   "explorer.compactFolders": false,
   "explorer.expandSingleFolderWorkspaces": false,
   "files.associations": {
-    "**/packages/tool-generate/templates/**/*": "plaintext"
+    "**/packages/tool-task/templates/**/*": "plaintext"
   },
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "GitHub Dark",
+  "workbench.colorTheme": "Quiet Light",
   "workbench.iconTheme": "vs-minimal",
   "workbench.sideBar.location": "right",
   "typescript.tsdk": "node_modules/typescript/lib"

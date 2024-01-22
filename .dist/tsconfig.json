@@ -69,9 +69,6 @@
       "@lib/shared/*": [
         "packages/lib-shared/src/*"
       ],
-      "@tool/generate/*": [
-        "packages/tool-generate/src/*"
-      ],
       "@tool/task/*": [
         "packages/tool-task/src/*"
       ]

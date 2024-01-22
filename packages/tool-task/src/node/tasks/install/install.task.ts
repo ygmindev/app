@@ -15,7 +15,7 @@ const install: TaskParamsModel<InstallParamsModel> = {
       key: 'packages',
       options: children(fromPackages(), { isDirectory: true }).reduce(
         (result, { name }) =>
-          name.startsWith('app-') || name.startsWith('backend-') || name.startsWith('tool-')
+          name.startsWith('app') || name.startsWith('backend') || name.startsWith('tool')
             ? [...result, name]
             : result,
         [] as Array<string>,

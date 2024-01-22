@@ -1,5 +1,5 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { GENERATE_TEMPLATE_CASING_OPTIONS } from '@tool/generate/tasks/generateTemplate/generateTemplate.constants';
+import { GENERATE_TEMPLATE_CASING_OPTIONS } from '@tool/task/generate/tasks/generateTemplate/generateTemplate.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
@@ -45,7 +45,7 @@ const generateTemplate: TaskParamsModel<unknown> = {
       await copy({
         from: fromPackages(path),
         overrides,
-        to: fromPackages('tool-generate/templates', templateName),
+        to: fromPackages('tool-task/templates', templateName),
       });
     },
   ],

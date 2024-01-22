@@ -18,6 +18,7 @@
     "@tanstack/react-query-persist-client": "^5.17.8",
     "@tanstack/react-table": "^8.11.3",
     "axios": "^1.6.5",
+    "color": "^4.2.3",
     "core-js": "^3.35.0",
     "countries-list": "^3.0.6",
     "date-fns": "^3.2.0",

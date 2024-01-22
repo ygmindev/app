@@ -1,4 +1,4 @@
 {
     "extends": "../../.dist/tsconfig.json",
-    "include": ["../lib-config/src/node/typescript/types/index.d.ts", "src/**/*", "*.ts", "*.js", "../tool-generate/templates/js-entity-resource/lib-shared/src/{{MODULE}}(camelCase)/resources/Deleteme"]
+    "include": ["../lib-config/src/node/typescript/types/index.d.ts", "src/**/*", "*.ts", "*.js"]
 }

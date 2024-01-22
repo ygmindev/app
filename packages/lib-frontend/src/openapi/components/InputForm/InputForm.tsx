@@ -1,5 +1,6 @@
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
+import { MultipleInput } from '@lib/frontend/data/components/MultipleInput/MultipleInput';
 import { StepForm } from '@lib/frontend/data/components/StepForm/StepForm';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { validateNotEmpty } from '@lib/frontend/data/utils/validateNotEmpty/validateNotEmpty';
@@ -11,7 +12,7 @@ import { FIELD_TYPE } from '@lib/shared/openapi/utils/Field/Field.constants';
 export const InputForm: LFCModel<InputFormPropsModel> = ({ specification, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
 
-  const steps = specification.fields.map(({ id, isOptional, type }) => {
+  const steps = specification.fields.map(({ id, isArray, isOptional, type }) => {
     const element = (() => {
       switch (type) {
         case FIELD_TYPE.STRING:
@@ -25,7 +26,7 @@ export const InputForm: LFCModel<InputFormPropsModel> = ({ specification, ...pro
     return {
       element: (
         <FormContainer
-          fields={[{ element, id }]}
+          fields={[{ element: isArray ? <MultipleInput element={element} /> : element, id }]}
           flex
           isCenter
           validators={{ [id]: isOptional ? undefined : validateNotEmpty }}
