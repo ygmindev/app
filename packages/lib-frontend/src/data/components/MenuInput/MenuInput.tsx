@@ -77,9 +77,7 @@ export const MenuInput = forwardRef(
       const queryValue = find(optionsF, ({ id }) => lowerCase(query) === lowerCase(id));
       const selected = queryValue ?? (optionsF && optionsF[0]);
       const id = selected?.id;
-      if (id) {
-        valueControlledSet(id);
-      }
+      id && valueControlledSet(id);
     };
 
     const handleTextChange = (v: string): void => {
@@ -111,6 +109,11 @@ export const MenuInput = forwardRef(
           : selectedOption.label ?? selectedOption.id
         : valueControlled;
 
+    const handleBlur = (): void => {
+      onBlur && onBlur();
+      handleTextChange('');
+    };
+
     const isActive = elementStateF === ELEMENT_STATE.ACTIVE;
     return (
       <Menu
@@ -126,7 +129,7 @@ export const MenuInput = forwardRef(
             leftElement={
               selectedOption && selectedOption.icon && <Icon icon={selectedOption.icon} />
             }
-            onBlur={onBlur}
+            onBlur={handleBlur}
             onChange={handleTextChange}
             onElementStateChange={onElementStateChangeF}
             onFocus={onFocus}

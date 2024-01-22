@@ -32,6 +32,7 @@ import { type TextStyleModel } from '@lib/frontend/style/style.models';
 import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { merge } from '@lib/shared/core/utils/merge/merge';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import isNumber from 'lodash/isNumber';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 
@@ -90,6 +91,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
 
     const isDisabled =
       elementStateF === ELEMENT_STATE.DISABLED || elementStateF === ELEMENT_STATE.LOADING;
+    const isActive = elementStateF === ELEMENT_STATE.ACTIVE;
 
     const theme = useTheme();
     const { valueControlled, valueControlledSet } = useValueControlled({
@@ -98,13 +100,14 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
       value,
     });
 
-    const handleFocus = (v?: boolean): void => {
+    const handleFocus = async (v?: boolean): Promise<void> => {
       if (!isDisabled) {
         if (v) {
           onFocus && onFocus();
           inputRef.current?.focus();
           focusableRef.current?.focus();
         } else {
+          await sleep(100);
           onBlur && onBlur();
           inputRef.current?.blur();
           focusableRef.current?.blur();
@@ -116,15 +119,17 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
 
     const rightElementF = (
       <Wrapper
+        backgroundColor={THEME_COLOR_MORE.SURFACE}
         bottom={0}
         isRowAlign
         position={SHAPE_POSITION.ABSOLUTE}
         right={0}
-        top={0}>
-        {!isNoClear && valueControlled && valueControlled.length > 0 && (
+        top={0}
+        zIndex={elementStateF === ELEMENT_STATE.ACTIVE ? 0 : -1}>
+        {!isNoClear && isActive && (
           <Appearable
             elementState={elementStateF}
-            isActive={elementStateF === ELEMENT_STATE.ACTIVE}
+            isActive={(valueControlled?.length ?? 0) > 0}
             isCenter>
             <Button
               icon="times"
@@ -225,7 +230,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
             language={language}
             maxLength={maxLength}
             numberOfLines={numberOfLines}
-            onBlur={() => handleFocus(false)}
+            onBlur={() => void handleFocus(false)}
             onChange={handleChange}
             onEscape={() => {
               if (!isNoClear) {
@@ -233,7 +238,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
                 onEscape && onEscape();
               }
             }}
-            onFocus={() => handleFocus(true)}
+            onFocus={() => void handleFocus(true)}
             onRemove={onRemove}
             onSubmit={onSubmit}
             placeholder={placeholder}

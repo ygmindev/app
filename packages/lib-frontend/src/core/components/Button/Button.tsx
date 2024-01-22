@@ -186,7 +186,7 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
       <>
         <Appearable
           isActive={!isLoading}
-          isFullWidth>
+          isFullWidth={!isIconOnly}>
           {childrenF}
         </Appearable>
 
