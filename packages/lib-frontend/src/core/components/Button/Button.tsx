@@ -138,7 +138,8 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
       align={FONT_ALIGN.CENTER}
       color={color}
       colorRole={childColorRole}
-      isEllipsis>
+      isEllipsis
+      isFullWidth>
       {children}
     </TranslatableText>
   );
@@ -183,7 +184,11 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
       round={isIconOnly ? heightF / 2 : true}
       width={props.width ?? (children ? undefined : heightF)}>
       <>
-        <Appearable isActive={!isLoading}>{childrenF}</Appearable>
+        <Appearable
+          isActive={!isLoading}
+          isFullWidth>
+          {childrenF}
+        </Appearable>
 
         <Appearable
           isAbsoluteFill

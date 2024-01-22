@@ -12,7 +12,6 @@ import {
   type DropdownInputRefModel,
 } from '@lib/frontend/data/components/DropdownInput/DropdownInput.models';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
-import { type TextInputRefModel } from '@lib/frontend/data/components/TextInput/TextInput.models';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useSearch } from '@lib/frontend/search/hooks/useSearch/useSearch';
@@ -20,7 +19,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import find from 'lodash/find';
 import lowerCase from 'lodash/lowerCase';
 import { type ForwardedRef, forwardRef, type ReactElement, useState } from 'react';
-import { useImperativeHandle, useRef } from 'react';
+import { useRef } from 'react';
 
 export const DropdownInput = forwardRef(
   <TType extends MenuOptionModel = MenuOptionModel>(
@@ -35,8 +34,8 @@ export const DropdownInput = forwardRef(
       onBlur,
       onChange,
       onFocus,
+      onSearch,
       onSubmit,
-      onTextChange,
       options,
       renderOption,
       renderValue,
@@ -56,14 +55,6 @@ export const DropdownInput = forwardRef(
       value,
     });
     const menuRef = useRef<MenuRefModel>(null);
-    const inputRef = useRef<TextInputRefModel>(null);
-
-    useImperativeHandle(ref, () => ({
-      beforeSubmit: inputRef.current?.beforeSubmit,
-      blur: () => inputRef.current?.blur,
-      focus: () => inputRef.current?.focus,
-      submit: inputRef.current?.submit,
-    }));
 
     const { query, result, search } = useSearch<TType>({
       items: options.map(({ label, ...option }) => ({
@@ -76,9 +67,11 @@ export const DropdownInput = forwardRef(
     const optionsF = result.length > 0 ? result : options;
     const [textValue, textValueSet] = useState<string>();
 
+    const handleSearch = onSearch ?? search;
+
     const handleToggle = (isOpen?: boolean): void => {
       menuRef.current?.toggle(isOpen);
-      search('');
+      !isOpen && search('');
     };
 
     const handleSelect = (): void => {
@@ -90,7 +83,6 @@ export const DropdownInput = forwardRef(
         onSubmit && onSubmit();
       }
       handleToggle(false);
-      inputRef.current?.blur();
     };
 
     const selectedOption = options.find(({ id }) => id === valueControlled);
@@ -100,17 +92,21 @@ export const DropdownInput = forwardRef(
         ? renderOption
           ? renderOption(selectedOption)
           : selectedOption.label ?? selectedOption.id
-        : undefined;
+        : valueControlled;
 
-    const handleQuery = (v: string): void => {
+    const handleTextChange = (v: string): void => {
       textValueSet(v);
-      onTextChange && onTextChange(v);
+      handleSearch(v);
     };
 
-    const handleChange = (v: string): void => {
-      valueControlledSet(v);
-      inputRef.current?.blur();
-      handleToggle(false);
+    const handleBlur = (): void => {
+      onBlur && onBlur();
+      handleTextChange('');
+    };
+
+    const handleFocus = (): void => {
+      menuRef.current?.toggle(true);
+      onFocus && onFocus();
     };
 
     const rightElementF = rightElement ? (
@@ -128,11 +124,6 @@ export const DropdownInput = forwardRef(
       </AnimatableView>
     );
 
-    const handleFocus = (): void => {
-      onFocus && onFocus();
-      menuRef.current?.toggle(true);
-    };
-
     return (
       <Menu
         anchor={(isOpen) => (
@@ -148,11 +139,11 @@ export const DropdownInput = forwardRef(
             leftElement={
               selectedOption && selectedOption.icon && <Icon icon={selectedOption.icon} />
             }
-            onBlur={onBlur}
-            onChange={handleQuery}
+            onBlur={handleBlur}
+            onChange={handleTextChange}
             onFocus={handleFocus}
             onSubmit={handleSelect}
-            ref={inputRef}
+            ref={ref}
             rightElement={isOpen ? rightElementF : displayLabel ? <Icon icon="edit" /> : null}
             round={round}
             value={isOpen ? textValue : t(displayLabel)}
@@ -161,7 +152,7 @@ export const DropdownInput = forwardRef(
         )}
         elementState={elementState}
         isFullWidth
-        onChange={handleChange}
+        onChange={valueControlledSet}
         options={optionsF}
         ref={menuRef}
         renderOption={renderOption}

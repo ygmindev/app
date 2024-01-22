@@ -14,7 +14,7 @@ export type DropdownInputPropsModel<TType extends MenuOptionModel = MenuOptionMo
 > &
   Pick<MenuPropsModel<TType>, 'options' | 'renderOption'> &
   Omit<InputPropsModel, 'label' | 'error'> & {
-    onTextChange?(value?: string): void;
+    onSearch?(value?: string): void;
     renderValue?(value?: string): TranslatableTextModel | undefined;
     rightElement?: (elementState?: ElementStateModel) => ReactElement | null;
   };

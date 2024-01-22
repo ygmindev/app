@@ -20,6 +20,7 @@ export type MenuPropsModel<TType extends MenuOptionModel = MenuOptionModel> = Pi
 > &
   Omit<InputPropsModel, 'id'> & {
     anchor(isOpen?: boolean): ReactElement<PressablePropsModel>;
+    onToggle?(isOpen?: boolean): void;
     options: Array<TType>;
     renderOption?(option: TType): TranslatableTextModel;
     title?: TranslatableTextModel;

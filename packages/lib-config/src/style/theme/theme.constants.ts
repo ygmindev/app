@@ -103,6 +103,7 @@ export const THEME_CONFIG = {
       [THEME_SIZE.LARGE]: 30,
 
       [THEME_SIZE.MEDIUM]: 20,
+      // [THEME_SIZE.MEDIUM]: 8,
 
       [THEME_SIZE.SMALL]: 8,
     },
