@@ -1,6 +1,6 @@
 import { INTERNATIONALIZE_CONFIG } from '@lib/config/locale/internationalize/internationalize.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
-import { DropdownInput } from '@lib/frontend/data/components/DropdownInput/DropdownInput';
+import { MenuInput } from '@lib/frontend/data/components/MenuInput/MenuInput';
 import { type LanguageInputPropsModel } from '@lib/frontend/locale/components/LanguageInput/LanguageInput.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -10,7 +10,7 @@ export const LanguageInput: LFCModel<LanguageInputPropsModel> = ({ elementState,
   const { currentLanguage, currentLanguageSet, t } = useTranslation([LOCALE]);
   const { wrapperProps } = useLayoutStyles({ props });
   return (
-    <DropdownInput
+    <MenuInput
       {...wrapperProps}
       elementState={elementState}
       icon="language"

@@ -1,6 +1,6 @@
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
-import { DropdownInput } from '@lib/frontend/data/components/DropdownInput/DropdownInput';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
+import { MenuInput } from '@lib/frontend/data/components/MenuInput/MenuInput';
 import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { type ResourceFormPropsModel } from '@lib/frontend/resource/containers/ResourceForm/ResourceForm.models';
@@ -47,7 +47,7 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
             }
             default:
               return options ? (
-                <DropdownInput
+                <MenuInput
                   label={labelF}
                   options={options}
                 />

@@ -25,6 +25,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   children,
   delay,
   direction,
+  isDismiss = true,
   isFullWidth,
   isOpen,
   maxHeight,
@@ -58,7 +59,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   const dismiss = useDismiss(context);
   const role = useRole(context);
   const { getFloatingProps, getReferenceProps } = useInteractions(
-    filterNil([click, dismiss, role]),
+    filterNil([click, isDismiss && dismiss, role]),
   );
   return (
     <>
@@ -72,6 +73,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
       {(isOpen || isOpenF) && (
         <FloatingPortal>
           <FloatingFocusManager
+            closeOnFocusOut={!isDismiss}
             context={context}
             modal={false}>
             <div

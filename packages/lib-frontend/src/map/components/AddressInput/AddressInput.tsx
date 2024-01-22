@@ -1,5 +1,5 @@
 import { type RLFCModel } from '@lib/frontend/core/core.models';
-import { DropdownInput } from '@lib/frontend/data/components/DropdownInput/DropdownInput';
+import { MenuInput } from '@lib/frontend/data/components/MenuInput/MenuInput';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import {
   type AddressInputPropsModel,
@@ -20,7 +20,7 @@ export const AddressInput: RLFCModel<AddressInputRefModel, AddressInputPropsMode
     });
     const { data, query } = useMapQuery();
     return (
-      <DropdownInput
+      <MenuInput
         {...wrapperProps}
         icon="location"
         isAutoFocus={isAutoFocus}

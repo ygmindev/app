@@ -1,3 +1,3 @@
-import { type DropdownInputPropsModel } from '@lib/frontend/data/components/DropdownInput/DropdownInput.models';
+import { type MenuInputPropsModel } from '@lib/frontend/data/components/MenuInput/MenuInput.models';
 
-export type TimezoneInputPropsModel = Omit<DropdownInputPropsModel, 'options'>;
+export type TimezoneInputPropsModel = Omit<MenuInputPropsModel, 'options'>;

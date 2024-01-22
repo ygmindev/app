@@ -16,12 +16,13 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
+import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { type ForwardedRef, type ReactElement } from 'react';
-import { cloneElement, forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import { cloneElement, forwardRef, useImperativeHandle, useRef } from 'react';
 import { type ScrollView } from 'react-native';
 
 export const Menu = forwardRef(
@@ -30,8 +31,11 @@ export const Menu = forwardRef(
       anchor,
       direction,
       elementState,
+      isDismiss = true,
       isFullWidth,
+      isPressable = true,
       onChange,
+      onElementStateChange,
       options,
       renderOption,
       title,
@@ -43,18 +47,23 @@ export const Menu = forwardRef(
   ): ReactElement<RLFCPropsModel<MenuRefModel, MenuPropsModel<TType>>> => {
     const { wrapperProps } = useLayoutStyles({ props });
     const isMobile = useIsMobile();
-    const [isOpen, isOpenSet] = useState<boolean>(false);
     const dropdownRef = useRef<DropdownRefModel>(null);
     const virtualizedListRef = useRef<VirtualizedListRefModel>(null);
 
+    const { valueControlled: elementStateF, valueControlledSet: onElementStateChangeF } =
+      useValueControlled({
+        onChange: onElementStateChange,
+        value: elementState,
+      });
+
     useImperativeHandle(ref, () => ({
-      isOpen: () => dropdownRef.current?.isOpen() || false,
       scrollTo: (params) =>
         (virtualizedListRef.current?.getScrollableNode() as ScrollView).scrollTo(params),
       toggle: (params) => dropdownRef.current?.toggle(params),
     }));
 
-    const handleToggle = (isActive?: boolean): void => isOpenSet(!!isActive);
+    const handleToggle = (v?: boolean): void =>
+      onElementStateChangeF(v ? ELEMENT_STATE.INACTIVE : ELEMENT_STATE.ACTIVE);
 
     const handlePressOption = async ({ id, onPress }: MenuOptionModel): Promise<void> => {
       onPress && (await onPress());
@@ -62,17 +71,21 @@ export const Menu = forwardRef(
       handleToggle(false);
     };
 
-    const isDisabled = elementState === ELEMENT_STATE.DISABLED;
-    let anchorF: ReactElement<PressablePropsModel> = anchor(isOpen);
-    const { onPress } = anchorF.props;
-    anchorF = cloneElement(anchorF, {
-      onPress: async () => {
-        if (!isDisabled) {
-          onPress && (await onPress());
-          handleToggle(true);
-        }
-      },
-    });
+    const isDisabled = elementStateF === ELEMENT_STATE.DISABLED;
+    const isActive = elementStateF === ELEMENT_STATE.ACTIVE;
+    let anchorF: ReactElement<PressablePropsModel> = anchor(isActive);
+
+    if (isPressable) {
+      const { onPress } = anchorF.props;
+      anchorF = cloneElement(anchorF, {
+        onPress: async () => {
+          if (!isDisabled) {
+            onPress && (await onPress());
+            handleToggle(true);
+          }
+        },
+      });
+    }
 
     const children = (
       <Wrapper pVertical={THEME_SIZE.SMALL}>
@@ -108,7 +121,7 @@ export const Menu = forwardRef(
         <Modal
           {...wrapperProps}
           isFullSize={false}
-          isOpen={isOpen}
+          isOpen={isActive}
           onToggle={handleToggle}
           title={title}>
           {children}
@@ -119,9 +132,10 @@ export const Menu = forwardRef(
         {...wrapperProps}
         anchor={anchorF}
         direction={direction}
+        isDismiss={isDismiss}
         isFullWidth={isFullWidth}
         isHidden={!options?.length}
-        isOpen={isOpen}
+        isOpen={isActive}
         onToggle={handleToggle}
         ref={dropdownRef}
         width={width}>

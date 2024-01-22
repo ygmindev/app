@@ -7,7 +7,7 @@ import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Tooltip } from '@lib/frontend/core/components/Tooltip/Tooltip';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import { type ElementStateModel, type RLFCModel } from '@lib/frontend/core/core.models';
+import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
 import { FocusableWrapper } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper';
 import { type FocusableRefModel } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper.models';
@@ -35,7 +35,7 @@ import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/sha
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import isNumber from 'lodash/isNumber';
-import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forwardRef(
   (
@@ -43,6 +43,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
       autoComplete,
       beforeSubmit,
       defaultValue,
+      elementState,
       height,
       icon,
       isAutoFocus,
@@ -58,6 +59,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
       numberOfLines,
       onBlur,
       onChange,
+      onElementStateChange,
       onEscape,
       onFocus,
       onRemove,
@@ -77,13 +79,20 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
 
     useImperativeHandle(ref, () => ({
       beforeSubmit,
-      blur: () => inputRef.current?.blur(),
-      focus: () => inputRef.current?.focus(),
+      blur: () => handleFocus(false),
+      focus: () => handleFocus(true),
+      submit: inputRef.current?.submit,
     }));
 
-    const [elementState, elementStateSet] = useState<ElementStateModel>();
-    const elementStateF = props.elementState ?? elementState;
+    const { valueControlled: elementStateF, valueControlledSet: onElementStateChangeF } =
+      useValueControlled({
+        onChange: onElementStateChange,
+        value: elementState,
+      });
     const sizeF = size ?? (label ? THEME_SIZE.MEDIUM : THEME_SIZE.SMALL);
+
+    const isDisabled =
+      elementStateF === ELEMENT_STATE.DISABLED || elementStateF === ELEMENT_STATE.LOADING;
 
     const theme = useTheme();
     const { valueControlled, valueControlledSet } = useValueControlled({
@@ -92,11 +101,25 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
       value,
     });
 
+    const handleFocus = (v?: boolean): void => {
+      if (!isDisabled) {
+        if (v) {
+          onFocus && onFocus();
+          inputRef.current?.focus();
+          focusableRef.current?.focus();
+        } else {
+          onBlur && onBlur();
+          inputRef.current?.blur();
+          focusableRef.current?.blur();
+        }
+      }
+    };
+
     useAsync(async (isMounted) => {
       if (isAutoFocus) {
         await sleep(theme.animation.transition);
         if (isMounted()) {
-          inputRef.current?.focus();
+          handleFocus(true);
         }
       }
     });
@@ -185,16 +208,13 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
       ]),
     };
 
-    const isDisabled =
-      elementStateF === ELEMENT_STATE.DISABLED || elementStateF === ELEMENT_STATE.LOADING;
-
     return (
       <FocusableWrapper
         {...wrapperProps}
         border={!isTransparent}
         elementState={elementStateF}
         height={height ?? (isNumber(sizeF) ? sizeF : theme.shape.size[sizeF])}
-        onElementStateChange={elementStateSet}
+        onElementStateChange={onElementStateChangeF}
         pHorizontal
         position={SHAPE_POSITION.RELATIVE}
         ref={focusableRef}
@@ -217,12 +237,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
             language={language}
             maxLength={maxLength}
             numberOfLines={numberOfLines}
-            onBlur={() => {
-              if (!isDisabled) {
-                onBlur && onBlur();
-                void sleep(100).then(() => focusableRef.current?.blur());
-              }
-            }}
+            onBlur={() => handleFocus(false)}
             onChange={handleChange}
             onEscape={() => {
               if (!isNoClear) {
@@ -230,12 +245,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
                 onEscape && onEscape();
               }
             }}
-            onFocus={() => {
-              if (!isDisabled) {
-                onFocus && onFocus();
-                focusableRef?.current?.focus();
-              }
-            }}
+            onFocus={() => handleFocus(true)}
             onRemove={onRemove}
             onSubmit={onSubmit}
             placeholder={placeholder}

@@ -1,8 +1,6 @@
-import { type ReactElement } from 'react';
-
 import { type LFCPropsModel, type TranslatableOptionModel } from '@lib/frontend/core/core.models';
-import { DropdownInput } from '@lib/frontend/data/components/DropdownInput/DropdownInput';
 import { InputGroup } from '@lib/frontend/data/components/InputGroup/InputGroup';
+import { MenuInput } from '@lib/frontend/data/components/MenuInput/MenuInput';
 import { NumberInput } from '@lib/frontend/data/components/NumberInput/NumberInput';
 import {
   AMOUNT_UNIT_OPTIONS,
@@ -15,6 +13,7 @@ import { type NumberUnitModel, type NumberUnitTypeModel } from '@lib/frontend/da
 import { useValueScaled } from '@lib/frontend/data/hooks/useValueScaled/useValueScaled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { type ReactElement } from 'react';
 
 export const unitOptions = <TType extends NumberUnitModel>(
   type: NumberUnitTypeModel,
@@ -70,7 +69,7 @@ export const ScaledNumberInput = <TType extends NumberUnitModel>({
         },
         {
           element: (
-            <DropdownInput<TType>
+            <MenuInput<TType>
               label={t('core:unit')}
               onChange={(v: TType) => {
                 unitSet(v);

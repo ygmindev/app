@@ -1,8 +1,5 @@
-import find from 'lodash/find';
-import { forwardRef, useEffect, useMemo } from 'react';
-
 import { type RLFCModel } from '@lib/frontend/core/core.models';
-import { DropdownInput } from '@lib/frontend/data/components/DropdownInput/DropdownInput';
+import { MenuInput } from '@lib/frontend/data/components/MenuInput/MenuInput';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import {
   type CountryInputPropsModel,
@@ -12,6 +9,8 @@ import { useCountries } from '@lib/frontend/locale/hooks/useCountries/useCountri
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import find from 'lodash/find';
+import { forwardRef, useEffect, useMemo } from 'react';
 
 export const CountryInput: RLFCModel<CountryInputRefModel, CountryInputPropsModel> = forwardRef(
   ({ defaultValue, onChange, value, ...props }, ref) => {
@@ -44,7 +43,7 @@ export const CountryInput: RLFCModel<CountryInputRefModel, CountryInputPropsMode
     }, [countryCode, options, valueControlled]);
 
     return (
-      <DropdownInput
+      <MenuInput
         {...wrapperProps}
         icon="globe"
         label={t('core:country')}

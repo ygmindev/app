@@ -1,16 +1,16 @@
 import { type OptionModel } from '@lib/frontend/core/core.models';
-import { DropdownInput } from '@lib/frontend/data/components/DropdownInput/DropdownInput';
-import { type DropdownInputPropsModel } from '@lib/frontend/data/components/DropdownInput/DropdownInput.models';
+import { MenuInput } from '@lib/frontend/data/components/MenuInput/MenuInput';
+import { type MenuInputPropsModel } from '@lib/frontend/data/components/MenuInput/MenuInput.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
 const OPTIONS: Array<OptionModel> = [];
 
-const { Component, displayName, testID } = withTestComponent<DropdownInputPropsModel>({
+const { Component, displayName, testID } = withTestComponent<MenuInputPropsModel>({
   defaultProps: {
     options: OPTIONS,
   },
-  target: DropdownInput,
+  target: MenuInput,
 });
 
 describe(displayName, () => {

@@ -1,6 +1,6 @@
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
-import { DropdownInput } from '@lib/frontend/data/components/DropdownInput/DropdownInput';
+import { MenuInput } from '@lib/frontend/data/components/MenuInput/MenuInput';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { type TimezoneInputPropsModel } from '@lib/frontend/locale/components/TimezoneInput/TimezoneInput.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
@@ -40,7 +40,7 @@ export const TimezoneInput: LFCModel<TimezoneInputPropsModel> = ({
   );
 
   return (
-    <DropdownInput
+    <MenuInput
       {...wrapperProps}
       elementState={elementState}
       icon="time"

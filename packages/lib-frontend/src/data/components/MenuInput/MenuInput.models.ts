@@ -8,7 +8,7 @@ import { type InputPropsModel, type InputRefModel } from '@lib/frontend/data/dat
 import { type TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 import { type ReactElement } from 'react';
 
-export type DropdownInputPropsModel<TType extends MenuOptionModel = MenuOptionModel> = Omit<
+export type MenuInputPropsModel<TType extends MenuOptionModel = MenuOptionModel> = Omit<
   TextInputPropsModel,
   'rightElement'
 > &
@@ -19,4 +19,4 @@ export type DropdownInputPropsModel<TType extends MenuOptionModel = MenuOptionMo
     rightElement?: (elementState?: ElementStateModel) => ReactElement | null;
   };
 
-export type DropdownInputRefModel = InputRefModel;
+export type MenuInputRefModel = InputRefModel;

@@ -1,6 +1,6 @@
 import { type RLFCModel } from '@lib/frontend/core/core.models';
-import { DropdownInput } from '@lib/frontend/data/components/DropdownInput/DropdownInput';
 import { InputGroup } from '@lib/frontend/data/components/InputGroup/InputGroup';
+import { MenuInput } from '@lib/frontend/data/components/MenuInput/MenuInput';
 import {
   type TextFilterInputPropsModel,
   type TextFilterInputRefModel,
@@ -54,7 +54,7 @@ export const TextFilterInput: RLFCModel<TextFilterInputRefModel, TextFilterInput
           },
           {
             element: (
-              <DropdownInput
+              <MenuInput
                 defaultValue={FILTER_CONDITION.CONTAINS}
                 label={t('core:condition')}
                 onChange={(v) => conditionSet(v as FilterConditionModel)}

@@ -10,6 +10,5 @@ export type DropdownPropsModel = Omit<
 };
 
 export type DropdownRefModel = Pick<WrapperRefModel, 'scrollTo'> & {
-  isOpen(): boolean;
   toggle(isOpen?: boolean): void;
 };
