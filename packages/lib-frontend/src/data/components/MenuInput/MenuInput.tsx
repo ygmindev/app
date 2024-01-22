@@ -16,6 +16,7 @@ import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useSearch } from '@lib/frontend/search/hooks/useSearch/useSearch';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import find from 'lodash/find';
 import lowerCase from 'lodash/lowerCase';
 import { type ForwardedRef, forwardRef, type ReactElement, useState } from 'react';
@@ -135,7 +136,16 @@ export const MenuInput = forwardRef(
             onFocus={onFocus}
             onSubmit={handleSubmit}
             ref={ref}
-            rightElement={isActive ? rightElementF : displayLabel ? <Icon icon="edit" /> : null}
+            rightElement={
+              isActive ? (
+                rightElementF
+              ) : displayLabel ? (
+                <Icon
+                  color={THEME_COLOR.PRIMARY}
+                  icon="edit"
+                />
+              ) : null
+            }
             round={round}
             value={isActive ? textValue : t(displayLabel)}
             width={width}
