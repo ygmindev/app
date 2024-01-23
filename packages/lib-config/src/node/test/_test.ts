@@ -1,9 +1,3 @@
-import reduce from 'lodash/reduce';
-import trim from 'lodash/trim';
-import trimStart from 'lodash/trimStart';
-import { join } from 'path';
-import { pathsToModuleNameMapper } from 'ts-jest';
-
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
@@ -13,6 +7,11 @@ import { _config } from '@lib/config/node/typescript/typescript';
 import { PLATFORM } from '@lib/platform/core/core.constants';
 import { BOOLEAN_STRING } from '@lib/shared/core/core.constants';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
+import reduce from 'lodash/reduce';
+import trim from 'lodash/trim';
+import trimStart from 'lodash/trimStart';
+import { join } from 'path';
+import { pathsToModuleNameMapper } from 'ts-jest';
 
 export const _test = ({
   bundleConfig,

@@ -2,9 +2,9 @@ import { type UriModel } from '@lib/frontend/route/route.models';
 import {
   type _WithScreenModel,
   type _WithScreenParamsModel,
-} from '@lib/frontend/test/utils/withScreen/_withScreen.models';
+} from '@lib/shared/crawling/utils/withScreen/_withScreen.models';
 
-export type WithScreenParamsModel = _WithScreenParamsModel;
+export type WithScreenParamsModel = _WithScreenParamsModel[0];
 
 export type WithScreenModel = _WithScreenModel;
 
@@ -15,9 +15,9 @@ export type ScreenModel = {
 
   press(params: string): Promise<void>;
 
-  snapshot(params?: { match?: boolean }): Promise<void>;
+  snapshot(): Promise<Buffer>;
 
-  type(testID: string, value?: string): Promise<void>;
+  type(id: string, value?: string): Promise<void>;
 
   uri(): UriModel;
 

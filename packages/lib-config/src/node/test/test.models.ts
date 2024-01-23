@@ -1,22 +1,17 @@
 import { type Config } from '@jest/types';
-
+import { type ScreenConfigModel } from '@lib/config/crawling/screen/screen.models';
 import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
-import { type DimensionModel } from '@lib/frontend/core/core.models';
 
-export type TestConfigModel = {
+export type TestConfigModel = Pick<ScreenConfigModel, 'idSelector'> & {
   bundleConfig(): BundleConfigModel;
 
   cachePath: string;
 
   delay: number;
 
-  dimension?: DimensionModel;
-
   eteExtension: string;
 
   fileExtensions: Array<string>;
-
-  isBrowser?: boolean;
 
   isWatch?: boolean;
 

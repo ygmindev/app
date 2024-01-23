@@ -77,7 +77,7 @@ const PRUNE_PATTERNS: Array<string> = [
   'node_modules/**/aws-xray-sdk-core/doc-src/**',
 ];
 
-const { _config, config } = defineConfig({
+const { config } = defineConfig({
   config: {
     backupDir: fromRoot('../backups'),
 
@@ -99,4 +99,4 @@ const { _config, config } = defineConfig({
   } satisfies FileConfigModel,
 });
 
-export { _config, config };
+export { config };

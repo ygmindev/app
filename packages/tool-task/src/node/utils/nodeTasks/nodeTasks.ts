@@ -1,5 +1,3 @@
-import range from 'lodash/range';
-
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { config } from '@lib/config/core/file/file';
@@ -21,6 +19,7 @@ import {
   type NodeTasksMdoel,
   type NodeTasksParamsModel,
 } from '@tool/task/node/utils/nodeTasks/nodeTasks.models';
+import range from 'lodash/range';
 
 export const nodeTasks = ({
   additionalTasks,

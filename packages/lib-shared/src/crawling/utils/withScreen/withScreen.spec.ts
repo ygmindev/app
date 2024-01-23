@@ -1,5 +1,5 @@
-import { withScreen } from '@lib/frontend/test/utils/withScreen/withScreen';
-import { type WithScreenModel } from '@lib/frontend/test/utils/withScreen/withScreen.models';
+import { withScreen } from '@lib/shared/crawling/utils/withScreen/withScreen';
+import { type WithScreenModel } from '@lib/shared/crawling/utils/withScreen/withScreen.models';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ screen });
