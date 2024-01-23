@@ -12,7 +12,8 @@ export const withScreen = async (callback: WithScreenParamsModel): Promise<WithS
     (screen) =>
       callback({
         ...screen,
-        goto: async (route) => screen.goto(`${APP_URI}${trimPathname(route)}`),
+        goto: async (pathname) =>
+          screen.goto(pathname.startsWith('/') ? `${APP_URI}${trimPathname(pathname)}` : pathname),
       }),
     screenConfig,
   );

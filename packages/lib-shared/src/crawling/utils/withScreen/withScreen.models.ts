@@ -11,7 +11,7 @@ export type WithScreenModel = _WithScreenModel;
 export type ScreenModel = {
   close(): Promise<void>;
 
-  goto(params: string): Promise<void>;
+  goto(pathname: string): Promise<void>;
 
   press(params: string): Promise<void>;
 
