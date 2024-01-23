@@ -1,3 +1,4 @@
+import { type SelectorModel } from '@lib/config/crawling/screen/screen.models';
 import { type UriModel } from '@lib/frontend/route/route.models';
 import {
   type _WithScreenModel,
@@ -13,11 +14,11 @@ export type ScreenModel = {
 
   goto(pathname: string): Promise<void>;
 
-  press(params: string): Promise<void>;
+  press(params: SelectorModel): Promise<void>;
 
   snapshot(): Promise<Buffer>;
 
-  type(id: string, value?: string): Promise<void>;
+  type(text: string, params: SelectorModel): Promise<void>;
 
   uri(): UriModel;
 

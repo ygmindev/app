@@ -7,7 +7,8 @@ const crawl: TaskParamsModel<unknown> = {
   task: [
     async () => {
       await withScreen(async (screen) => {
-        await screen.goto('https://savelist.co/about');
+        await screen.goto('https://app.curri.com/login');
+        await screen.type('support@essentialhomeimprovement.com', 'login-email', 'e2e-id');
       });
     },
   ],

@@ -39,10 +39,10 @@ export const _withScreen = async (
       await sleepForTransition();
     },
 
-    press: async (id) => {
-      const selector = options.idSelector(id);
-      await page.waitForSelector(selector, { timeout });
-      await page.$eval(selector, (element) => (element as HTMLButtonElement).click());
+    press: async (params) => {
+      const selectorF = options.idSelector(params);
+      await page.waitForSelector(selectorF, { timeout });
+      await page.$eval(selectorF, (element) => (element as HTMLButtonElement).click());
     },
 
     snapshot: async () => {
@@ -50,14 +50,14 @@ export const _withScreen = async (
       return page.screenshot();
     },
 
-    type: async (id, value) => {
-      const selector = options.idSelector(id);
-      await page.waitForSelector(selector, { timeout });
-      const [input] = await page.$$(selector);
+    type: async (text, params) => {
+      const selectorF = options.idSelector(params);
+      await page.waitForSelector(selectorF, { timeout });
+      const [input] = await page.$$(selectorF);
       await sleepForEffect();
       await input.focus();
       await sleepForEffect();
-      value && (await page.keyboard.type(value));
+      text && (await page.keyboard.type(text));
     },
 
     uri: () => {

@@ -1,8 +1,7 @@
 import { type Config } from '@jest/types';
-import { type ScreenConfigModel } from '@lib/config/crawling/screen/screen.models';
 import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 
-export type TestConfigModel = Pick<ScreenConfigModel, 'idSelector'> & {
+export type TestConfigModel = {
   bundleConfig(): BundleConfigModel;
 
   cachePath: string;

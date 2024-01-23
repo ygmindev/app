@@ -4,7 +4,7 @@ import { type PuppeteerLaunchOptions } from 'puppeteer';
 export type ScreenConfigModel = {
   dimension: DimensionModel;
 
-  idSelector(id: string): string;
+  idSelector(params: SelectorModel): string;
 
   isHeadless: boolean;
 
@@ -12,3 +12,9 @@ export type ScreenConfigModel = {
 };
 
 export type _ScreenConfigModel = PuppeteerLaunchOptions;
+
+export type SelectorModel = {
+  key?: string;
+  paths?: Array<string>;
+  value: string;
+};

@@ -5,11 +5,12 @@ const { config } = defineConfig({
   config: {
     dimension: { height: 800, width: 1280 },
 
-    idSelector: (id) => `#${id}`,
+    idSelector: ({ key, paths, value }) =>
+      `${key ? `[data-${key}="${value}"]` : `#${value}`}${paths ? ` ${paths.join(' ')}` : ''}`,
 
     isHeadless: false,
 
-    timeout: 1000,
+    timeout: 5000,
   } satisfies ScreenConfigModel,
 });
 
