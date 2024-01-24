@@ -15,7 +15,7 @@ import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexSt
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import filter from 'lodash/filter';
-import { cloneElement, type ForwardedRef, forwardRef, type ReactElement } from 'react';
+import { type ForwardedRef, forwardRef, type ReactElement } from 'react';
 
 export const MultipleInput = forwardRef(
   <TType extends WithIdModel>(
@@ -62,7 +62,7 @@ export const MultipleInput = forwardRef(
           <Wrapper
             isRowAlign
             key={v.id}>
-            <Wrapper flex>{cloneElement(element, { value: valueControlled[i].id })}</Wrapper>
+            {/* <Wrapper flex>{cloneElement(element, { value: valueControlled[i].id })}</Wrapper> */}
 
             {valueControlled.length > 1 && (
               <Button

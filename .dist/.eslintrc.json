@@ -13,9 +13,7 @@
     "plugin:typescript-sort-keys/recommended"
   ],
   "ignorePatterns": [
-    "!(../packages/*/src/**/*.tsx|../packages/*/src/**/*.ts|../packages/*/src/**/*.jsx|../packages/*/src/**/*.js)",
-    "**/*.spec.*",
-    "**/*.ete.*"
+    "!(../packages/*/src/**/*.tsx|../packages/*/src/**/*.ts|../packages/*/src/**/*.jsx|../packages/*/src/**/*.js)"
   ],
   "overrides": [
     {

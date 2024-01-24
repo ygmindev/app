@@ -1,9 +1,9 @@
-import { InputForm } from '@lib/frontend/openapi/components/InputForm/InputForm';
-import { type InputFormPropsModel } from '@lib/frontend/openapi/components/InputForm/InputForm.models';
+import { SpecificationForm } from '@lib/frontend/openapi/components/SpecificationForm/SpecificationForm';
+import { type SpecificationFormPropsModel } from '@lib/frontend/openapi/components/SpecificationForm/SpecificationForm.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<InputFormPropsModel>({ target: InputForm });
+const { Component, displayName, testID } = withTestComponent<SpecificationFormPropsModel>({ target: SpecificationForm });
 
 describe(displayName, () => {
   test('works', async () => {

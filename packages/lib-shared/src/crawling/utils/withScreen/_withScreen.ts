@@ -35,7 +35,7 @@ export const _withScreen = async (
     let result: Array<ElementHandle<TType>> = [];
     for (const handle of handlesF) {
       const innerText = await handle.evaluate((e) => (e as unknown as HTMLSpanElement).innerText);
-      if (innerText?.toLowerCase()?.includes(value.toLowerCase())) {
+      if (innerText === value) {
         result.push(handle);
         if (!isMultiple) {
           break;
@@ -146,11 +146,12 @@ export const _withScreen = async (
 
     type: async ({ conditions, target, value }) => {
       const element = (await select<HTMLInputElement>({ conditions, target }))?.[0];
+      await element?.type(value);
       await sleep(delay);
-      void element?.focus();
-      await sleep(delay);
-      await page.keyboard.type(value);
-      await sleep(delay);
+      // await sleepForEffect();
+      // void element?.focus();
+      // await sleepForEffect();
+      // await page.keyboard.type(value);
     },
 
     uri: () => {

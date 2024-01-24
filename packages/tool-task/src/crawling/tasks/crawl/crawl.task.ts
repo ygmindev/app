@@ -1,15 +1,18 @@
 import { SELECTOR_TYPE } from '@lib/config/crawling/screen/screen.constants';
+import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { withScreen } from '@lib/shared/crawling/utils/withScreen/withScreen';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 
 const PARAMS = {
-  dropoff: '116th Broadway, New York, NY',
+  dest: '116th and Broadway',
   email: 'support@essentialhomeimprovement.com',
+  origin: '200 W 57th St',
   password: 'Huespace123!',
-  pickup: '200 West Street, New York, NY',
   stops: ['56 Leonard Street, New York, NY', '104 W 35th St, New York, NY'],
+  timing: 'rush',
   url: 'https://app.curri.com/login',
+  vehicle: 'cargo-van',
 };
 
 const crawl: TaskParamsModel<unknown> = {
@@ -26,7 +29,7 @@ const crawl: TaskParamsModel<unknown> = {
         });
         // press continue
         await screen.press({
-          conditions: [{ type: SELECTOR_TYPE.TEXT, value: 'continue' }],
+          conditions: [{ type: SELECTOR_TYPE.TEXT, value: 'Continue' }],
           target: { value: 'button' },
         });
         // type password
@@ -36,14 +39,14 @@ const crawl: TaskParamsModel<unknown> = {
         });
         // press sign in
         await screen.press({
-          conditions: [{ type: SELECTOR_TYPE.TEXT, value: 'log in' }],
+          conditions: [{ type: SELECTOR_TYPE.TEXT, value: 'Log in' }],
           target: { value: 'button' },
         });
 
         // add pickup
         await screen.type({
           target: { key: 'e2e-id', type: SELECTOR_TYPE.DATA, value: 'book-addresses-input-0' },
-          value: PARAMS.pickup,
+          value: PARAMS.origin,
         });
         await screen.press({
           target: {
@@ -54,20 +57,28 @@ const crawl: TaskParamsModel<unknown> = {
         });
 
         // add stops
-        for (let i = 1; i <= PARAMS.stops.length; i++) {
-          await screen.press({ target: { type: SELECTOR_TYPE.TEXT, value: 'add another stop' } });
-          await screen.type({
-            target: { key: 'e2e-id', type: SELECTOR_TYPE.DATA, value: `book-addresses-input-${i}` },
-            value: PARAMS.stops[i],
-          });
-          await screen.press({
-            target: {
-              key: 'e2e-id',
-              type: SELECTOR_TYPE.DATA,
-              value: 'book-address-recommendation-0',
-            },
-          });
-        }
+        await mapSequence(
+          PARAMS.stops.map((stop, i) => async () => {
+            await screen.press({
+              target: { key: 'e2e-id', type: SELECTOR_TYPE.DATA, value: 'book-addresses-add-stop' },
+            });
+            await screen.type({
+              target: {
+                key: 'e2e-id',
+                type: SELECTOR_TYPE.DATA,
+                value: `book-addresses-input-${i + 1}`,
+              },
+              value: stop,
+            });
+            await screen.press({
+              target: {
+                key: 'e2e-id',
+                type: SELECTOR_TYPE.DATA,
+                value: 'book-address-recommendation-0',
+              },
+            });
+          }),
+        );
 
         // add dropoff
         await screen.type({
@@ -76,7 +87,7 @@ const crawl: TaskParamsModel<unknown> = {
             type: SELECTOR_TYPE.DATA,
             value: `book-addresses-input-${PARAMS.stops.length + 1}`,
           },
-          value: PARAMS.dropoff,
+          value: PARAMS.dest,
         });
         await screen.press({
           target: {
@@ -88,8 +99,25 @@ const crawl: TaskParamsModel<unknown> = {
 
         // press next
         await screen.press({
-          conditions: [{ type: SELECTOR_TYPE.TEXT, value: 'next' }],
-          target: { value: 'button' },
+          target: { value: 'button[type=submit]' },
+        });
+
+        // press vehicle
+        await screen.press({
+          target: {
+            key: 'ph-capture-attribute-vehicle-sku',
+            type: SELECTOR_TYPE.DATA,
+            value: PARAMS.vehicle,
+          },
+        });
+
+        // press timing
+        await screen.press({
+          target: {
+            key: 'ph-capture-attribute-priority-type',
+            type: SELECTOR_TYPE.DATA,
+            value: PARAMS.timing,
+          },
         });
 
         await sleep(10000);

@@ -1,5 +1,3 @@
-import { forwardRef } from 'react';
-
 import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { TEXT_INPUT_KEYBOARD } from '@lib/frontend/data/components/TextInput/TextInput.constants';
@@ -9,6 +7,7 @@ import {
   type PhoneInputPropsModel,
   type PhoneInputRefModel,
 } from '@lib/frontend/user/components/PhoneInput/PhoneInput.models';
+import { forwardRef } from 'react';
 
 export const PhoneInput: RLFCModel<PhoneInputRefModel, PhoneInputPropsModel> = forwardRef(
   ({ defaultValue, onChange, value, ...props }, ref) => {

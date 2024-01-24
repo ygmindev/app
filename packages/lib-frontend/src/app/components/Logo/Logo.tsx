@@ -1,5 +1,4 @@
 import { type LogoPropsModel } from '@lib/frontend/app/components/Logo/Logo.models';
-import { Image } from '@lib/frontend/core/components/Image/Image';
 import { Link } from '@lib/frontend/core/components/Link/Link';
 import { type LinkPropsModel } from '@lib/frontend/core/components/Link/Link.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
@@ -10,19 +9,22 @@ export const Logo = composeComponent<LogoPropsModel, LinkPropsModel>({
   Component: Link,
 
   getProps: ({ size = THEME_SIZE.SMALL, src = '/images/logos/logo.png', ...props }, theme) => {
-    // const height = isNumber(size) ? size : theme.shape.size[size];
-    const height = 22;
     return {
-      children: (
-        <Image
-          {...props}
-          height={height}
-          isAutoSize
-          src={src}
-        />
-      ),
-      pathname: '/',
+      children: <></>,
     };
+    // // const height = isNumber(size) ? size : theme.shape.size[size];
+    // const height = 22;
+    // return {
+    //   children: (
+    //     <Image
+    //       {...props}
+    //       height={height}
+    //       isAutoSize
+    //       src={src}
+    //     />
+    //   ),
+    //   pathname: '/',
+    // };
   },
 });
 
