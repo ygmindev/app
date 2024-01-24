@@ -1,7 +1,6 @@
 import { SELECTOR_TYPE } from '@lib/config/crawling/screen/screen.constants';
 import { type SelectorPathModel } from '@lib/config/crawling/screen/screen.models';
-import { sleepForEffect } from '@lib/frontend/animation/utils/sleepForEffect/sleepForEffect';
-import { sleepForTransition } from '@lib/frontend/animation/utils/sleepForTransition/sleepForTransition';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import {
   type _WithScreenModel,
   type _WithScreenParamsModel,
@@ -10,7 +9,7 @@ import { type ScreenModel } from '@lib/shared/crawling/utils/withScreen/withScre
 import { type ElementHandle, launch } from 'puppeteer';
 
 export const _withScreen = async (
-  ...[callback, { dimension, isHeadless, timeout }]: _WithScreenParamsModel
+  ...[callback, { delay, dimension, isHeadless, timeout }]: _WithScreenParamsModel
 ): Promise<_WithScreenModel> => {
   let isOpen: boolean;
 
@@ -126,26 +125,32 @@ export const _withScreen = async (
       isOpen && (await page.waitForNavigation({ timeout, waitUntil: 'networkidle0' }));
       await page.goto(route, { timeout, waitUntil: 'networkidle0' });
       isOpen = true;
-      await sleepForTransition();
+      await sleep(delay);
     },
 
     press: async ({ conditions, target }) => {
       const element = (await select<HTMLButtonElement>({ conditions, target }))?.[0];
-      console.warn(element);
       await element?.click();
+      await sleep(delay);
     },
 
     snapshot: async () => {
-      await sleepForEffect();
+      await sleep(delay);
       return page.screenshot();
+    },
+
+    submit: async () => {
+      await page.keyboard.press('Enter');
+      await sleep(delay);
     },
 
     type: async ({ conditions, target, value }) => {
       const element = (await select<HTMLInputElement>({ conditions, target }))?.[0];
-      await sleepForEffect();
+      await sleep(delay);
       void element?.focus();
-      await sleepForEffect();
+      await sleep(delay);
       await page.keyboard.type(value);
+      await sleep(delay);
     },
 
     uri: () => {

@@ -21,6 +21,8 @@ export type ScreenModel = {
 
   snapshot(): Promise<Buffer>;
 
+  submit(): Promise<void>;
+
   type(params: {
     conditions?: Array<SelectorPathModel>;
     target: SelectorPathModel;

@@ -3,6 +3,8 @@ import { type DimensionModel } from '@lib/frontend/core/core.models';
 import { type PuppeteerLaunchOptions } from 'puppeteer';
 
 export type ScreenConfigModel = {
+  delay: number;
+
   dimension: DimensionModel;
 
   isHeadless: boolean;
