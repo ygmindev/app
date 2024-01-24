@@ -76,7 +76,7 @@ export const _withScreen = async (
     for (const handle of handlesF) {
       if (target.type === SELECTOR_TYPE.TEXT) {
         if ((await selectByText({ handles: [handle], isMultiple, value: target.value })).length) {
-          void handle.evaluate((e) => console.warn(e));
+          await handle.evaluate(async (e) => console.warn(e.innerHTML));
         }
         result = [
           ...result,
