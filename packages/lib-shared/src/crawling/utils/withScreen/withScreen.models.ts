@@ -1,4 +1,4 @@
-import { type SelectorModel } from '@lib/config/crawling/screen/screen.models';
+import { type SelectorPathModel } from '@lib/config/crawling/screen/screen.models';
 import { type UriModel } from '@lib/frontend/route/route.models';
 import {
   type _WithScreenModel,
@@ -14,11 +14,18 @@ export type ScreenModel = {
 
   goto(pathname: string): Promise<void>;
 
-  press(params: SelectorModel): Promise<void>;
+  press(params: {
+    conditions?: Array<SelectorPathModel>;
+    target: SelectorPathModel;
+  }): Promise<void>;
 
   snapshot(): Promise<Buffer>;
 
-  type(text: string, params: SelectorModel): Promise<void>;
+  type(params: {
+    conditions?: Array<SelectorPathModel>;
+    target: SelectorPathModel;
+    value: string;
+  }): Promise<void>;
 
   uri(): UriModel;
 
