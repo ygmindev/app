@@ -1,9 +1,5 @@
-import { importConfig } from '@lib/config/core/utils/importConfig/importConfig';
 import { SELECTOR_TYPE } from '@lib/config/crawling/screen/screen.constants';
-import {
-  type ScreenConfigModel,
-  type SelectorPathModel,
-} from '@lib/config/crawling/screen/screen.models';
+import { type SelectorPathModel } from '@lib/config/crawling/screen/screen.models';
 import { sleepForEffect } from '@lib/frontend/animation/utils/sleepForEffect/sleepForEffect';
 import { sleepForTransition } from '@lib/frontend/animation/utils/sleepForTransition/sleepForTransition';
 import {
@@ -14,11 +10,8 @@ import { type ScreenModel } from '@lib/shared/crawling/utils/withScreen/withScre
 import { type ElementHandle, launch } from 'puppeteer';
 
 export const _withScreen = async (
-  ...[callback, options]: _WithScreenParamsModel
+  ...[callback, { dimension, isHeadless, timeout }]: _WithScreenParamsModel
 ): Promise<_WithScreenModel> => {
-  const { config } = await importConfig<ScreenConfigModel>('crawling/screen/screen');
-  const { dimension, isHeadless, timeout } = config;
-
   let isOpen: boolean;
 
   const browser = await launch({
@@ -39,7 +32,7 @@ export const _withScreen = async (
     isMultiple?: boolean;
     value: string;
   }): Promise<Array<ElementHandle<TType>>> => {
-    const handlesF = handles ?? ((await page.$$('*')) as Array<ElementHandle<TType>>);
+    const handlesF = handles ?? ((await page.$$('body *')) as Array<ElementHandle<TType>>);
     let result: Array<ElementHandle<TType>> = [];
     for (const handle of handlesF) {
       const innerText = await handle.evaluate((e) => (e as unknown as HTMLSpanElement).innerText);
@@ -71,13 +64,10 @@ export const _withScreen = async (
     isMultiple?: boolean;
     target: SelectorPathModel;
   }): Promise<Array<ElementHandle<TType>>> => {
-    const handlesF = handles ?? ((await page.$$('*')) as Array<ElementHandle<TType>>);
+    const handlesF = handles ?? ((await page.$$('body *')) as Array<ElementHandle<TType>>);
     let result: Array<ElementHandle<TType>> = [];
     for (const handle of handlesF) {
       if (target.type === SELECTOR_TYPE.TEXT) {
-        if ((await selectByText({ handles: [handle], isMultiple, value: target.value })).length) {
-          await handle.evaluate(async (e) => console.warn(e.innerHTML));
-        }
         result = [
           ...result,
           ...(await selectByText({ handles: [handle], isMultiple, value: target.value })),
@@ -104,7 +94,7 @@ export const _withScreen = async (
       }
     }
 
-    if (conditions) {
+    if (conditions?.length) {
       const [condition, ...conditionsF] = conditions;
       const resultF: Array<ElementHandle<TType>> = [];
       for (const handle of result) {
@@ -141,6 +131,7 @@ export const _withScreen = async (
 
     press: async ({ conditions, target }) => {
       const element = (await select<HTMLButtonElement>({ conditions, target }))?.[0];
+      console.warn(element);
       await element?.click();
     },
 

@@ -18,12 +18,9 @@ const crawl: TaskParamsModel<unknown> = {
           },
           value: 'support@essentialhomeimprovement.com',
         });
-        // await screen.press({
-        //   conditions: [{ type: SELECTOR_TYPE.TEXT, value: 'Continue' }],
-        //   target: { value: 'button' },
-        // });
         await screen.press({
-          target: { type: SELECTOR_TYPE.TEXT, value: 'Continue' },
+          conditions: [{ type: SELECTOR_TYPE.TEXT, value: 'Continue' }],
+          target: { value: 'button' },
         });
         await sleep(10000);
       });
