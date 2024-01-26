@@ -1,7 +1,13 @@
+import { Accordion } from '@lib/frontend/animation/components/Accordion/Accordion';
+import { Chip } from '@lib/frontend/core/components/Chip/Chip';
+import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { type SpecificationDetailPropsModel } from '@lib/frontend/openapi/components/SpecificationDetail/SpecificationDetail.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import { FIELD_TYPE } from '@lib/shared/openapi/utils/Field/Field.constants';
 import { type ReactElement } from 'react';
 
 export const SpecificationDetail = <TType,>({
@@ -14,7 +20,37 @@ export const SpecificationDetail = <TType,>({
   return (
     <Wrapper
       {...wrapperProps}
-      flex
-    />
+      align={FLEX_ALIGN.START}>
+      <Text isBold>{specification.name}</Text>
+
+      {specification.fields.map((field) => {
+        const isProperty = field.type === FIELD_TYPE.PROPERTY;
+        return (
+          <Accordion
+            isTransparent
+            key={field.id}
+            size={THEME_SIZE.SMALL}
+            title={
+              <Wrapper isRowAlign>
+                <Text>{field.id}</Text>
+
+                <Chip
+                  color={isProperty ? THEME_COLOR.SECONDARY : undefined}
+                  icon={field.isArray ? 'documents' : 'document'}>
+                  {isProperty ? field.specification.name : field.type}
+                </Chip>
+              </Wrapper>
+            }>
+            <Wrapper
+              border
+              mLeft
+              p
+              round>
+              {isProperty && <SpecificationDetail specification={field.specification} />}
+            </Wrapper>
+          </Accordion>
+        );
+      })}
+    </Wrapper>
   );
 };

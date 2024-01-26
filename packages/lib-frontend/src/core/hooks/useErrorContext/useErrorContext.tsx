@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-
 import { asyncBoundaryContext } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary';
 import { type ErrorContextModel } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import { ERROR_TYPE } from '@lib/frontend/core/hooks/useErrorContext/useErrorContext.constants';
@@ -9,6 +7,7 @@ import { useNotification } from '@lib/frontend/notification/hooks/useNotificatio
 import { type HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import { error } from '@lib/shared/logging/utils/logger/logger';
+import { useContext } from 'react';
 
 export const useErrorContext = (): UseErrorContextModel => {
   const { t } = useTranslation();

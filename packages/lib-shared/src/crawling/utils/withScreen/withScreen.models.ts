@@ -4,6 +4,7 @@ import {
   type _WithScreenModel,
   type _WithScreenParamsModel,
 } from '@lib/shared/crawling/utils/withScreen/_withScreen.models';
+import { type KEY_TYPE } from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
 
 export type WithScreenParamsModel = _WithScreenParamsModel[0];
 
@@ -14,17 +15,19 @@ export type ScreenModel = {
 
   goto(pathname: string): Promise<void>;
 
+  key(params: { isDelay?: boolean; value: KeyTypeModel }): Promise<void>;
+
   press(params: {
     conditions?: Array<SelectorPathModel>;
+    isDelay?: boolean;
     target: SelectorPathModel;
   }): Promise<void>;
 
   snapshot(): Promise<Buffer>;
 
-  submit(): Promise<void>;
-
   type(params: {
     conditions?: Array<SelectorPathModel>;
+    isDelay?: boolean;
     target: SelectorPathModel;
     value: string;
   }): Promise<void>;
@@ -33,3 +36,5 @@ export type ScreenModel = {
 
   waitForText(value?: string): Promise<void>;
 };
+
+export type KeyTypeModel = `${KEY_TYPE}`;

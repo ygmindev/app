@@ -4,7 +4,8 @@ import { type ElementStatePropsModel } from '@lib/frontend/core/core.models';
 import { type ReactElement } from 'react';
 
 export type PressableItemPropsModel = ElementStatePropsModel &
-  Omit<ItemPropsModel, 'rightElement'> &
+  Omit<ItemPropsModel, 'leftElement' | 'rightElement'> &
   Pick<PressablePropsModel, 'onPress'> & {
+    leftElement?(isActive?: boolean): ReactElement;
     rightElement?(isActive?: boolean): ReactElement;
   };

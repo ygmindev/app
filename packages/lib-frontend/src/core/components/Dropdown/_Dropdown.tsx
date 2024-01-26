@@ -73,7 +73,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
       {(isOpen || isOpenF) && (
         <FloatingPortal>
           <FloatingFocusManager
-            closeOnFocusOut={!isDismiss}
+            closeOnFocusOut={isDismiss}
             context={context}
             modal={false}>
             <div

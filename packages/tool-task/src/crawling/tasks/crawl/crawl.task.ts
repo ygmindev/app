@@ -2,15 +2,19 @@ import { SELECTOR_TYPE } from '@lib/config/crawling/screen/screen.constants';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { withScreen } from '@lib/shared/crawling/utils/withScreen/withScreen';
+import { KEY_TYPE } from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 
 const PARAMS = {
   dest: '116th and Broadway',
   email: 'support@essentialhomeimprovement.com',
+  item: 'Medium Item',
+  orderNumber: '12345',
   origin: '200 W 57th St',
   password: 'Huespace123!',
   stops: ['56 Leonard Street, New York, NY', '104 W 35th St, New York, NY'],
   timing: 'rush',
+  totalWeightLbs: '150',
   url: 'https://app.curri.com/login',
   vehicle: 'cargo-van',
 };
@@ -45,10 +49,12 @@ const crawl: TaskParamsModel<unknown> = {
 
         // add pickup
         await screen.type({
+          isDelay: true,
           target: { key: 'e2e-id', type: SELECTOR_TYPE.DATA, value: 'book-addresses-input-0' },
           value: PARAMS.origin,
         });
         await screen.press({
+          isDelay: true,
           target: {
             key: 'e2e-id',
             type: SELECTOR_TYPE.DATA,
@@ -71,6 +77,7 @@ const crawl: TaskParamsModel<unknown> = {
               value: stop,
             });
             await screen.press({
+              isDelay: true,
               target: {
                 key: 'e2e-id',
                 type: SELECTOR_TYPE.DATA,
@@ -90,6 +97,7 @@ const crawl: TaskParamsModel<unknown> = {
           value: PARAMS.dest,
         });
         await screen.press({
+          isDelay: true,
           target: {
             key: 'e2e-id',
             type: SELECTOR_TYPE.DATA,
@@ -99,6 +107,7 @@ const crawl: TaskParamsModel<unknown> = {
 
         // press next
         await screen.press({
+          isDelay: true,
           target: { value: 'button[type=submit]' },
         });
 
@@ -118,6 +127,27 @@ const crawl: TaskParamsModel<unknown> = {
             type: SELECTOR_TYPE.DATA,
             value: PARAMS.timing,
           },
+        });
+
+        //  press item
+        await screen.type({
+          target: { type: SELECTOR_TYPE.ID, value: 'payload-description' },
+          value: PARAMS.item,
+        });
+        await screen.key({ isDelay: true, value: KEY_TYPE.DOWN });
+        await screen.key({ value: KEY_TYPE.ENTER });
+
+        // type weight
+        await screen.type({
+          isDelay: true,
+          target: { type: SELECTOR_TYPE.ID, value: 'weight' },
+          value: PARAMS.totalWeightLbs,
+        });
+
+        // press next
+        await screen.press({
+          isDelay: true,
+          target: { value: 'button[type=submit]' },
         });
 
         await sleep(10000);

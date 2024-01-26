@@ -5,7 +5,7 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import { Divider } from '@lib/frontend/core/components/Divider/Divider';
 import { PressableItem } from '@lib/frontend/core/components/PressableItem/PressableItem';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import {
   type ElementStateModel,
   type LFCModel,
@@ -22,7 +22,9 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
   fontStyle,
   icon,
   image,
+  isTransparent,
   onChange,
+  size,
   title,
   value,
   ...props
@@ -43,7 +45,7 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
   return (
     <Wrapper
       {...wrapperProps}
-      border
+      border={!isTransparent}
       round>
       <PressableItem
         color={color}
@@ -51,18 +53,22 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
         fontStyle={fontStyle}
         icon={icon}
         image={image}
-        mHorizontal
-        onPress={handleToggle}
-        rightElement={(isActive) => (
-          <Rotatable elementState={valueControlled}>
+        leftElement={(isActive) => (
+          <Rotatable
+            directionInactive={DIRECTION.RIGHT}
+            elementState={valueControlled}>
             <Button
               elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
-              icon="chevronDown"
+              icon="chevronUp"
               isHidden
+              size={size}
               type={BUTTON_TYPE.INVISIBLE}
             />
           </Rotatable>
         )}
+        mHorizontal
+        onPress={handleToggle}
+        rightElement={() => <></>}
         title={title}
       />
 
@@ -74,12 +80,11 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
           },
         }}
         elementState={valueControlled}
-        isOverflowHidden
-        testID="aaa">
+        isOverflowHidden>
         <Wrapper onMeasure={measureSet}>
-          <Divider mHorizontal />
+          {!isTransparent && <Divider mHorizontal />}
 
-          {children}
+          <Wrapper>{children}</Wrapper>
         </Wrapper>
       </Wrapper>
     </Wrapper>

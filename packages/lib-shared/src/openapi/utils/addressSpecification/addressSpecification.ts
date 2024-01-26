@@ -1,7 +1,7 @@
-import { type AddressPropertyModel } from '@lib/shared/openapi/utils/addressProperty/addressProperty.models';
+import { type AddressSpecificationModel } from '@lib/shared/openapi/utils/addressSpecification/addressSpecification.models';
 import { FIELD_TYPE } from '@lib/shared/openapi/utils/Field/Field.constants';
 
-export const addressProperty = {
+export const addressSpecification = {
   fields: [
     { id: 'id', type: FIELD_TYPE.STRING },
     { id: 'latitude', type: FIELD_TYPE.NUMBER },
@@ -9,4 +9,4 @@ export const addressProperty = {
   ],
   name: 'address',
   translation: {},
-} satisfies AddressPropertyModel;
+} satisfies AddressSpecificationModel;

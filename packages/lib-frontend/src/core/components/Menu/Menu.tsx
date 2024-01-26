@@ -63,7 +63,7 @@ export const Menu = forwardRef(
     }));
 
     const handleToggle = (v?: boolean): void =>
-      onElementStateChangeF(v ? ELEMENT_STATE.INACTIVE : ELEMENT_STATE.ACTIVE);
+      onElementStateChangeF(v ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE);
 
     const handlePressOption = async ({ id, onPress }: MenuOptionModel): Promise<void> => {
       onPress && (await onPress());
@@ -81,7 +81,7 @@ export const Menu = forwardRef(
         onPress: async () => {
           if (!isDisabled) {
             onPress && (await onPress());
-            handleToggle(true);
+            handleToggle(elementStateF !== ELEMENT_STATE.ACTIVE);
           }
         },
       });
@@ -113,7 +113,6 @@ export const Menu = forwardRef(
         />
       </Wrapper>
     );
-
     return isMobile ? (
       <>
         {anchorF}

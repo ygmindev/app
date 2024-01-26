@@ -1,12 +1,13 @@
 import { type DeliverySpecificationModel } from '@lib/shared/aroom/utils/deliverySpecification/deliverySpecification.models';
-import { addressProperty } from '@lib/shared/openapi/utils/addressProperty/addressProperty';
+import { addressSpecification } from '@lib/shared/openapi/utils/addressSpecification/addressSpecification';
 import { FIELD_TYPE } from '@lib/shared/openapi/utils/Field/Field.constants';
 import { type SpecificationModel } from '@lib/shared/openapi/utils/Specification/Specification.models';
 
 export const deliverySpecification = {
   fields: [
-    { id: 'pickup', property: addressProperty, type: FIELD_TYPE.PROPERTY },
-    { id: 'dropoff', property: addressProperty, type: FIELD_TYPE.PROPERTY },
+    { id: 'pickup', specification: addressSpecification, type: FIELD_TYPE.PROPERTY },
+    { id: 'stops', isArray: true, specification: addressSpecification, type: FIELD_TYPE.PROPERTY },
+    { id: 'dropoff', specification: addressSpecification, type: FIELD_TYPE.PROPERTY },
     { id: 'email', type: FIELD_TYPE.STRING },
   ],
   name: 'deliveryRequest',

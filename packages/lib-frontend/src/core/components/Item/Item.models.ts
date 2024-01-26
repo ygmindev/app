@@ -11,6 +11,7 @@ export type ItemPropsModel = ElementStatePropsModel &
   Pick<FontStylerParamsModel, 'fontStyle'> & {
     description?: TranslatableTextModel;
     image?: string;
+    leftElement?: ReactElement | null;
     rightElement?: ReactElement | null;
-    title?: TranslatableTextModel;
+    title?: TranslatableTextModel | ReactElement;
   };

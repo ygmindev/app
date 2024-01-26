@@ -15,6 +15,7 @@ export const PressableItem: LFCModel<PressableItemPropsModel> = ({
   fontStyle,
   icon,
   image,
+  leftElement,
   onPress,
   pVertical = THEME_SIZE.SMALL,
   rightElement,
@@ -45,6 +46,7 @@ export const PressableItem: LFCModel<PressableItemPropsModel> = ({
           fontStyle={fontStyle}
           icon={icon}
           image={image}
+          leftElement={leftElement && leftElement(isActive)}
           onPress={onPress}
           pVertical={pVertical}
           rightElement={rightElementF && rightElementF(isActive)}

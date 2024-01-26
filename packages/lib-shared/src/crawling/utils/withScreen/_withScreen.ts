@@ -1,10 +1,12 @@
 import { SELECTOR_TYPE } from '@lib/config/crawling/screen/screen.constants';
 import { type SelectorPathModel } from '@lib/config/crawling/screen/screen.models';
+import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import {
   type _WithScreenModel,
   type _WithScreenParamsModel,
 } from '@lib/shared/crawling/utils/withScreen/_withScreen.models';
+import { KEY_TYPE } from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
 import { type ScreenModel } from '@lib/shared/crawling/utils/withScreen/withScreen.models';
 import { type ElementHandle, launch } from 'puppeteer';
 
@@ -77,7 +79,7 @@ export const _withScreen = async (
             case SELECTOR_TYPE.DATA:
               return `[data-${target.key}="${target.value}"]`;
             case SELECTOR_TYPE.ID:
-              return `#${target.value}}`;
+              return `#${target.value}`;
             default:
               return target.value;
           }
@@ -128,10 +130,27 @@ export const _withScreen = async (
       await sleep(delay);
     },
 
-    press: async ({ conditions, target }) => {
+    key: async ({ isDelay, value }) => {
+      isDelay && (await sleep(delay));
+      const input = (() => {
+        switch (value) {
+          case KEY_TYPE.ENTER:
+            return 'Enter';
+          case KEY_TYPE.UP:
+            return 'ArrowUp';
+          case KEY_TYPE.DOWN:
+            return 'ArrowDown';
+          default:
+            throw new InvalidArgumentError();
+        }
+      })();
+      await page.keyboard.press(input);
+    },
+
+    press: async ({ conditions, isDelay, target }) => {
+      isDelay && (await sleep(delay));
       const element = (await select<HTMLButtonElement>({ conditions, target }))?.[0];
       await element?.click();
-      await sleep(delay);
     },
 
     snapshot: async () => {
@@ -139,15 +158,10 @@ export const _withScreen = async (
       return page.screenshot();
     },
 
-    submit: async () => {
-      await page.keyboard.press('Enter');
-      await sleep(delay);
-    },
-
-    type: async ({ conditions, target, value }) => {
+    type: async ({ conditions, isDelay, target, value }) => {
+      isDelay && (await sleep(delay));
       const element = (await select<HTMLInputElement>({ conditions, target }))?.[0];
       await element?.type(value);
-      await sleep(delay);
       // await sleepForEffect();
       // void element?.focus();
       // await sleepForEffect();

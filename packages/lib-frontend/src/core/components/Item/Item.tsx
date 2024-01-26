@@ -5,6 +5,7 @@ import { type ItemPropsModel } from '@lib/frontend/core/components/Item/Item.mod
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
+import { isTranslatableText } from '@lib/frontend/locale/utils/isTranslatableText/isTranslatableText';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
@@ -16,6 +17,7 @@ export const Item: LFCModel<ItemPropsModel> = ({
   fontStyle,
   icon,
   image,
+  leftElement,
   rightElement,
   title,
   ...props
@@ -25,7 +27,10 @@ export const Item: LFCModel<ItemPropsModel> = ({
   return (
     <Wrapper
       {...wrapperProps}
+      flex
       isRowAlign>
+      {leftElement && <Skeleton elementState={elementState}>{leftElement}</Skeleton>}
+
       {image && (
         <Skeleton elementState={elementState}>
           <Image
@@ -47,18 +52,20 @@ export const Item: LFCModel<ItemPropsModel> = ({
         </Skeleton>
       )}
 
-      <Wrapper
-        flex
-        s={THEME_SIZE.SMALL}>
+      <Wrapper s={THEME_SIZE.SMALL}>
         {title && (
           <Skeleton
             elementState={elementState}
             flex>
-            <TranslatableText
-              color={color}
-              fontStyle={fontStyle}>
-              {title}
-            </TranslatableText>
+            {isTranslatableText(title) ? (
+              <TranslatableText
+                color={color}
+                fontStyle={fontStyle}>
+                {title}
+              </TranslatableText>
+            ) : (
+              title
+            )}
           </Skeleton>
         )}
 

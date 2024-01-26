@@ -1,5 +1,3 @@
-import { type ObjectId } from 'mongodb';
-
 import { type PrimitiveModel } from '@lib/shared/core/core.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
@@ -7,14 +5,16 @@ import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.model
 import { type PaginationModel } from '@lib/shared/resource/utils/Pagination/Pagination.models';
 import { type RootInputModel } from '@lib/shared/resource/utils/Root/Root.models';
 import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
+import { type ObjectId } from 'mongodb';
 
-type ProjectPropertyModel<TType> = TType extends Array<infer TElement>
-  ? ProjectPropertyModel<TElement> | boolean
-  : TType extends PrimitiveModel | ObjectId
-    ? boolean
-    : TType extends object
-      ? ProjectModel<TType>
-      : boolean;
+type ProjectPropertyModel<TType> =
+  TType extends Array<infer TElement>
+    ? ProjectPropertyModel<TElement> | boolean
+    : TType extends PrimitiveModel | ObjectId
+      ? boolean
+      : TType extends object
+        ? ProjectModel<TType>
+        : boolean;
 
 export type ProjectModel<TType> = {
   [TKey in keyof TType]?: ProjectPropertyModel<TType[TKey]>;
