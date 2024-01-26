@@ -2,7 +2,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { type ScratchPadPagePropsModel } from '@lib/frontend/dev/pages/ScratchPadPage/ScratchPadPage.models';
 import { SpecificationDetail } from '@lib/frontend/openapi/components/SpecificationDetail/SpecificationDetail';
-// import { SpecificationForm } from '@lib/frontend/openapi/components/SpecificationForm/SpecificationForm';
+import { SpecificationForm } from '@lib/frontend/openapi/components/SpecificationForm/SpecificationForm';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { deliverySpecification } from '@lib/shared/aroom/utils/deliverySpecification/deliverySpecification';
 
@@ -13,9 +13,13 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
       {...wrapperProps}
       flex
       p>
-      {/* <SpecificationForm specification={deliverySpecification} /> */}
+      <Wrapper flex>
+        <SpecificationForm specification={deliverySpecification} />
+      </Wrapper>
 
-      <SpecificationDetail specification={deliverySpecification} />
+      <Wrapper flex>
+        <SpecificationDetail specification={deliverySpecification} />
+      </Wrapper>
     </Wrapper>
   );
 };
