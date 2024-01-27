@@ -199,6 +199,22 @@ input AccessUpdateUpdateInput {
   role: [String]
 }
 
+input AroomOrderInput {
+  additionalNote: String
+  dropoff: String
+  dropoffPhoneNumber: String
+  orderNumber: Float
+  pickup: String
+  pickupPhoneNumber: String
+}
+
+input AroomUserInput {
+  companyName: String
+  email: String
+  name: String
+  phoneNumber: Float
+}
+
 type Bank {
   User: User
   _id: String
@@ -768,10 +784,28 @@ input CoordinateInput {
   longitude: Float
 }
 
+input CreateDeliveryInput {
+  Creator: AroomUserInput
+  finalDropoff: String
+  firstPickup: String
+  orderInformation: [AroomOrderInput]
+  pickupDate: DateTime
+  submitDate: DateTime
+  totalVolume: String
+  totalWeight: Float
+  tripPricing: Float
+  vehicleType: String
+  waypoint: [String]
+}
+
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
 scalar DateTime
+
+type DeliveryResult {
+  success: Boolean
+}
 
 input GetRouteInput {
   coordinates: [CoordinateInput]
@@ -1000,6 +1034,7 @@ type Mutation {
   ChatCreateMany(input: ChatCreateManyInput): ChatCreateManyOutput
   ChatRemove(input: ChatRemoveInput): ChatRemoveOutput
   ChatUpdate(input: ChatUpdateInput): ChatUpdateOutput
+  CreateDelivery(input: CreateDeliveryInput): DeliveryResult
   GroupCreate(input: GroupCreateInput): GroupCreateOutput
   GroupCreateMany(input: GroupCreateManyInput): GroupCreateManyOutput
   GroupRemove(input: GroupRemoveInput): GroupRemoveOutput

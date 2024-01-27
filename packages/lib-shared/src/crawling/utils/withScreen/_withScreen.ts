@@ -1,7 +1,9 @@
 import { SELECTOR_TYPE } from '@lib/config/crawling/screen/screen.constants';
 import { type SelectorPathModel } from '@lib/config/crawling/screen/screen.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
+import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
+import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import {
   type _WithScreenModel,
   type _WithScreenParamsModel,
@@ -17,7 +19,7 @@ export const _withScreen = async (
 
   const browser = await launch({
     args: dimension ? [`--window-size-${dimension.width},${dimension.height}`] : undefined,
-    defaultViewport: null,
+    defaultViewport: dimension,
     headless: isHeadless ? 'new' : false,
     ignoreHTTPSErrors: true,
   });
@@ -33,7 +35,7 @@ export const _withScreen = async (
     isMultiple?: boolean;
     value: string;
   }): Promise<Array<ElementHandle<TType>>> => {
-    const handlesF = handles ?? ((await page.$$('body *')) as Array<ElementHandle<TType>>);
+    const handlesF = handles ?? ((await page.$$('body > *')) as Array<ElementHandle<TType>>);
     let result: Array<ElementHandle<TType>> = [];
     for (const handle of handlesF) {
       const innerText = await handle.evaluate((e) => (e as unknown as HTMLSpanElement).innerText);
@@ -43,13 +45,17 @@ export const _withScreen = async (
           break;
         }
       }
-      const children = await selectByText({ handles: await handle.$$('*'), value });
-      if (children?.length) {
-        result = [...result, ...(children as Array<ElementHandle<TType>>)];
-        if (!isMultiple) {
-          break;
+      const childHandles = await handle.$$('*');
+      if (childHandles?.length) {
+        const children = await selectByText({ handles: childHandles, value });
+        if (children?.length) {
+          result = [...result, ...(children as Array<ElementHandle<TType>>)];
+          if (!isMultiple) {
+            break;
+          }
         }
       }
+      break;
     }
     return result;
   };
@@ -77,7 +83,7 @@ export const _withScreen = async (
         const selector = await (async () => {
           switch (target.type) {
             case SELECTOR_TYPE.DATA:
-              return `[data-${target.key}="${target.value}"]`;
+              return `[${target.key}="${target.value}"]`;
             case SELECTOR_TYPE.ID:
               return `#${target.value}`;
             default:
@@ -123,6 +129,11 @@ export const _withScreen = async (
       await browser.close();
     },
 
+    getValue: async ({ conditions, target }): Promise<string> => {
+      const element = (await select<HTMLSpanElement>({ conditions, target }))?.[0];
+      return element.evaluate(async (el) => el.innerText);
+    },
+
     goto: async (route) => {
       isOpen && (await page.waitForNavigation({ timeout, waitUntil: 'networkidle0' }));
       await page.goto(route, { timeout, waitUntil: 'networkidle0' });
@@ -147,10 +158,19 @@ export const _withScreen = async (
       await page.keyboard.press(input);
     },
 
-    press: async ({ conditions, isDelay, target }) => {
+    press: async ({ conditions, index = 0, isDelay, target }) => {
       isDelay && (await sleep(delay));
-      const element = (await select<HTMLButtonElement>({ conditions, target }))?.[0];
-      await element?.click();
+      const element = await select<HTMLButtonElement>({
+        conditions,
+        isMultiple: index > 0,
+        target,
+      });
+      const elementF = element?.[index];
+      if (elementF) {
+        await elementF.click();
+      } else {
+        throw new NotFoundError(stringify({ conditions, target }));
+      }
     },
 
     snapshot: async () => {
@@ -158,10 +178,15 @@ export const _withScreen = async (
       return page.screenshot();
     },
 
-    type: async ({ conditions, isDelay, target, value }) => {
+    type: async ({ conditions, index = 0, isDelay, target, value }) => {
       isDelay && (await sleep(delay));
-      const element = (await select<HTMLInputElement>({ conditions, target }))?.[0];
-      await element?.type(value);
+      const element = await select<HTMLInputElement>({ conditions, isMultiple: index > 0, target });
+      const elementF = element?.[index];
+      if (elementF) {
+        await elementF.type(value);
+      } else {
+        throw new NotFoundError(stringify({ conditions, target }));
+      }
       // await sleepForEffect();
       // void element?.focus();
       // await sleepForEffect();
@@ -171,6 +196,13 @@ export const _withScreen = async (
     uri: () => {
       const { host, pathname, port } = new URL(page.url());
       return { host, pathname, port };
+    },
+
+    waitFor: async ({ conditions, target }) => {
+      const element = (await select<HTMLButtonElement>({ conditions, target }))?.[0];
+      if (!element) {
+        throw new NotFoundError(stringify({ conditions, target }));
+      }
     },
 
     waitForText: async (value) => {

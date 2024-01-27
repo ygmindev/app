@@ -13,12 +13,19 @@ export type WithScreenModel = _WithScreenModel;
 export type ScreenModel = {
   close(): Promise<void>;
 
+  getValue(params: {
+    conditions?: Array<SelectorPathModel>;
+    isDelay: boolean;
+    target: SelectorPathModel;
+  }): Promise<string>;
+
   goto(pathname: string): Promise<void>;
 
   key(params: { isDelay?: boolean; value: KeyTypeModel }): Promise<void>;
 
   press(params: {
     conditions?: Array<SelectorPathModel>;
+    index?: number;
     isDelay?: boolean;
     target: SelectorPathModel;
   }): Promise<void>;
@@ -27,12 +34,18 @@ export type ScreenModel = {
 
   type(params: {
     conditions?: Array<SelectorPathModel>;
+    index?: number;
     isDelay?: boolean;
     target: SelectorPathModel;
     value: string;
   }): Promise<void>;
 
   uri(): UriModel;
+
+  waitFor(params: {
+    conditions?: Array<SelectorPathModel>;
+    target: SelectorPathModel;
+  }): Promise<void>;
 
   waitForText(value?: string): Promise<void>;
 };

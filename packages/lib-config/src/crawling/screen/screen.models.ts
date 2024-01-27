@@ -1,11 +1,12 @@
 import { type SELECTOR_TYPE } from '@lib/config/crawling/screen/screen.constants';
 import { type DimensionModel } from '@lib/frontend/core/core.models';
+import { type RequiredModel } from '@lib/shared/core/core.models';
 import { type PuppeteerLaunchOptions } from 'puppeteer';
 
 export type ScreenConfigModel = {
   delay: number;
 
-  dimension: DimensionModel;
+  dimension: RequiredModel<DimensionModel>;
 
   isHeadless: boolean;
 

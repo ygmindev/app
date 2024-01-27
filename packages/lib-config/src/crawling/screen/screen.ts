@@ -5,7 +5,7 @@ const { config } = defineConfig({
   config: {
     delay: 2000,
 
-    dimension: { height: 800, width: 1280 },
+    dimension: { height: 5000, width: 1000 },
 
     isHeadless: false,
 

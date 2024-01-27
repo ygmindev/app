@@ -1,5 +1,6 @@
 import { UtilityResolver } from '@lib/backend/admin/resources/Utility/UtilityResolver/UtilityResolver';
 import { VendorResolver } from '@lib/backend/admin/resources/Vendor/VendorResolver/VendorResolver';
+import { DeliveryResolver } from '@lib/backend/aroom/resources/Delivery/DeliveryResolver/DeliveryResolver';
 import { AccessResolver } from '@lib/backend/auth/resources/Access/AccessResolver/AccessResolver';
 import { OtpResolver } from '@lib/backend/auth/resources/Otp/OtpResolver/OtpResolver';
 import { SignInResolver } from '@lib/backend/auth/resources/SignIn/SignInResolver/SignInResolver';
@@ -46,6 +47,7 @@ const { _config, config } = defineConfig({
         VendorResolver,
         UtilityResolver,
 
+        DeliveryResolver,
         MapRouteResolver,
 
         // process.env.NODE_ENV === 'test' && SnapshotResolver,
