@@ -15,7 +15,9 @@ export type ScreenModel = {
 
   getValue(params: {
     conditions?: Array<SelectorPathModel>;
-    isDelay: boolean;
+    index?: number;
+    isDelay?: boolean;
+    parent?: SelectorPathModel;
     target: SelectorPathModel;
   }): Promise<string>;
 
@@ -27,6 +29,7 @@ export type ScreenModel = {
     conditions?: Array<SelectorPathModel>;
     index?: number;
     isDelay?: boolean;
+    parent?: SelectorPathModel;
     target: SelectorPathModel;
   }): Promise<void>;
 
@@ -36,6 +39,7 @@ export type ScreenModel = {
     conditions?: Array<SelectorPathModel>;
     index?: number;
     isDelay?: boolean;
+    parent?: SelectorPathModel;
     target: SelectorPathModel;
     value: string;
   }): Promise<void>;

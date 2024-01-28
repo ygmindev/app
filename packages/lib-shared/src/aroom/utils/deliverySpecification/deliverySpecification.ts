@@ -5,9 +5,9 @@ import { type SpecificationModel } from '@lib/shared/openapi/utils/Specification
 
 export const deliverySpecification = {
   fields: [
-    { id: 'pickup', specification: addressSpecification, type: FIELD_TYPE.PROPERTY },
+    { id: 'origin', specification: addressSpecification, type: FIELD_TYPE.PROPERTY },
     { id: 'stops', isArray: true, specification: addressSpecification, type: FIELD_TYPE.PROPERTY },
-    { id: 'dropoff', specification: addressSpecification, type: FIELD_TYPE.PROPERTY },
+    { id: 'destination', specification: addressSpecification, type: FIELD_TYPE.PROPERTY },
     { id: 'email', type: FIELD_TYPE.STRING },
   ],
   name: 'deliveryRequest',

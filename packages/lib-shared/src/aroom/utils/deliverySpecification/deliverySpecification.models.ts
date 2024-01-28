@@ -1,8 +1,8 @@
 import { type AddressModel } from '@lib/shared/openapi/utils/addressSpecification/addressSpecification.models';
 
 export type DeliverySpecificationModel = {
-  dropoff: AddressModel;
+  destination: AddressModel;
   email: string;
-  pickup: AddressModel;
+  origin: AddressModel;
   stops?: Array<AddressModel>;
 };

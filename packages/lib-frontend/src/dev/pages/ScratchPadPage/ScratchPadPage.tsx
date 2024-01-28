@@ -1,5 +1,6 @@
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
+import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { type ScratchPadPagePropsModel } from '@lib/frontend/dev/pages/ScratchPadPage/ScratchPadPage.models';
 import { SpecificationDetail } from '@lib/frontend/openapi/components/SpecificationDetail/SpecificationDetail';
 import { SpecificationForm } from '@lib/frontend/openapi/components/SpecificationForm/SpecificationForm';
@@ -9,9 +10,11 @@ import { deliverySpecification } from '@lib/shared/aroom/utils/deliverySpecifica
 export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   return (
-    <Wrapper
+    <MainLayout
       {...wrapperProps}
       flex
+      isFullHeight
+      isFullWidth
       p>
       <Wrapper flex>
         <SpecificationForm specification={deliverySpecification} />
@@ -20,6 +23,6 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
       <Wrapper flex>
         <SpecificationDetail specification={deliverySpecification} />
       </Wrapper>
-    </Wrapper>
+    </MainLayout>
   );
 };

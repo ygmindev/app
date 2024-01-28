@@ -1,7 +1,3 @@
-import { Fragment, useState } from 'react';
-import { type ViewProps } from 'react-native';
-import { ScrollView, StyleSheet } from 'react-native';
-
 import { ScrollBar } from '@lib/frontend/core/components/ScrollBar/ScrollBar';
 import { _viewParams as _viewParamsBase } from '@lib/frontend/core/components/View/_View';
 import {
@@ -14,6 +10,9 @@ import { composeComponent } from '@lib/frontend/core/utils/composeComponent/comp
 import { type ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
 import { type ViewStyleModel } from '@lib/frontend/style/style.models';
 import { partionObject } from '@lib/shared/core/utils/partionObject/partionObject';
+import { Fragment, useState } from 'react';
+import { type ViewProps } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 export const _viewParams: ComposeComponentParamsModel<
   _ViewPropsModel,
@@ -58,7 +57,6 @@ export const _viewParams: ComposeComponentParamsModel<
       isVerticalScrollable &&
       isVerticalScrollableVisible &&
       (measure?.height ?? 0) < (measureContent?.height ?? 0);
-
     return {
       children: (
         <View
@@ -78,7 +76,7 @@ export const _viewParams: ComposeComponentParamsModel<
             {...(_viewParamsBase.getProps && _viewParamsBase.getProps(props, theme, ref))}
             alwaysBounceHorizontal={false}
             alwaysBounceVertical={false}
-            contentContainerStyle={{ ...stylesContainer }}
+            contentContainerStyle={{ ...stylesContainer, flexGrow: 1 }}
             horizontal={isHorizontalScrollable ?? false}
             onContentSizeChange={(width, height) => measureContentSet({ height, width })}
             onLayout={({

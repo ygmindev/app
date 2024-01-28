@@ -38,24 +38,27 @@ export const _withScreen = async (
     const handlesF = handles ?? ((await page.$$('body > *')) as Array<ElementHandle<TType>>);
     let result: Array<ElementHandle<TType>> = [];
     for (const handle of handlesF) {
-      const innerText = await handle.evaluate((e) => (e as unknown as HTMLSpanElement).innerText);
-      if (innerText === value) {
-        result.push(handle);
-        if (!isMultiple) {
-          break;
+      const childrenCount = await handle.evaluate(async (el) => el.childElementCount);
+      if (childrenCount > 1) {
+        const childHandles = await handle.$$('*');
+        if (childHandles?.length) {
+          const children = await selectByText({ handles: childHandles, isMultiple: true, value });
+          if (children?.length) {
+            result = [...result, ...(children as Array<ElementHandle<TType>>)];
+            if (!isMultiple) {
+              break;
+            }
+          }
         }
-      }
-      const childHandles = await handle.$$('*');
-      if (childHandles?.length) {
-        const children = await selectByText({ handles: childHandles, value });
-        if (children?.length) {
-          result = [...result, ...(children as Array<ElementHandle<TType>>)];
+      } else {
+        const innerText = await handle.evaluate((e) => (e as unknown as HTMLSpanElement).innerText);
+        if (innerText?.trim() === value) {
+          result.push(handle);
           if (!isMultiple) {
             break;
           }
         }
       }
-      break;
     }
     return result;
   };
@@ -77,7 +80,7 @@ export const _withScreen = async (
       if (target.type === SELECTOR_TYPE.TEXT) {
         result = [
           ...result,
-          ...(await selectByText({ handles: [handle], isMultiple, value: target.value })),
+          ...(await selectByText({ handles: [handle], isMultiple: true, value: target.value })),
         ];
       } else {
         const selector = await (async () => {
@@ -129,16 +132,26 @@ export const _withScreen = async (
       await browser.close();
     },
 
-    getValue: async ({ conditions, target }): Promise<string> => {
-      const element = (await select<HTMLSpanElement>({ conditions, target }))?.[0];
-      return element.evaluate(async (el) => el.innerText);
+    getValue: async ({ conditions, index = 0, isDelay, parent, target }): Promise<string> => {
+      isDelay && (await sleep(delay));
+      const element = await select<HTMLSpanElement>({
+        conditions,
+        handles: parent ? await select({ isMultiple: true, target: parent }) : undefined,
+        isMultiple: index > 0,
+        target,
+      });
+      const elementF = element?.[index];
+      if (elementF) {
+        return elementF.evaluate(async (el) => el.innerHTML);
+      } else {
+        throw new NotFoundError(stringify({ conditions, target }));
+      }
     },
 
     goto: async (route) => {
       isOpen && (await page.waitForNavigation({ timeout, waitUntil: 'networkidle0' }));
       await page.goto(route, { timeout, waitUntil: 'networkidle0' });
       isOpen = true;
-      await sleep(delay);
     },
 
     key: async ({ isDelay, value }) => {
@@ -158,10 +171,11 @@ export const _withScreen = async (
       await page.keyboard.press(input);
     },
 
-    press: async ({ conditions, index = 0, isDelay, target }) => {
+    press: async ({ conditions, index = 0, isDelay, parent, target }) => {
       isDelay && (await sleep(delay));
       const element = await select<HTMLButtonElement>({
         conditions,
+        handles: parent ? await select({ isMultiple: true, target: parent }) : undefined,
         isMultiple: index > 0,
         target,
       });
@@ -178,9 +192,14 @@ export const _withScreen = async (
       return page.screenshot();
     },
 
-    type: async ({ conditions, index = 0, isDelay, target, value }) => {
+    type: async ({ conditions, index = 0, isDelay, parent, target, value }) => {
       isDelay && (await sleep(delay));
-      const element = await select<HTMLInputElement>({ conditions, isMultiple: index > 0, target });
+      const element = await select<HTMLInputElement>({
+        conditions,
+        handles: parent ? await select({ isMultiple: true, target: parent }) : undefined,
+        isMultiple: index > 0,
+        target,
+      });
       const elementF = element?.[index];
       if (elementF) {
         await elementF.type(value);

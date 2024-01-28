@@ -1,10 +1,12 @@
 import { SELECTOR_TYPE } from '@lib/config/crawling/screen/screen.constants';
+import { type SelectorPathModel } from '@lib/config/crawling/screen/screen.models';
 import { type CreateDeliveryInputModel } from '@lib/shared/aroom/resources/Delivery/DeliveryService/DeliveryService.models';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { withScreen } from '@lib/shared/crawling/utils/withScreen/withScreen';
 import { KEY_TYPE } from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
+import findIndex from 'lodash/findIndex';
 
 const CREDENTIALS = {
   email: 'support@essentialhomeimprovement.com',
@@ -204,6 +206,7 @@ const crawl: TaskParamsModel<unknown> = {
         });
 
         // add items
+        const parent: SelectorPathModel = { value: '#submitPayload' };
         orderInformation &&
           (await mapSequence(
             orderInformation.map((order, i) => async () => {
@@ -214,27 +217,77 @@ const crawl: TaskParamsModel<unknown> = {
               // pickup: '56 Leonard St, New York, NY 10013',
               // pickupPhoneNumber: '2161111111',
 
+              const pickupIndex = findIndex([firstPickup, ...(waypoint ?? [])], order.pickup);
+              const dropoffIndex = findIndex([...(waypoint ?? []), finalDropoff], order.dropoff);
+
               i > 0 &&
                 (await screen.press({
+                  parent,
                   target: { type: SELECTOR_TYPE.TEXT, value: 'Add another order' },
                 }));
 
               await screen.type({
                 index: i,
+                parent,
                 target: { key: 'name', type: SELECTOR_TYPE.DATA, value: 'orderNumber' },
                 value: `${order.orderNumber}`,
               });
 
-              //  press item
+              // press item
               await screen.type({
                 index: i,
+                parent,
                 target: { type: SELECTOR_TYPE.ID, value: 'payload-description' },
                 value: 'Medium Item',
               });
               await screen.key({ isDelay: true, value: KEY_TYPE.DOWN });
               await screen.key({ value: KEY_TYPE.ENTER });
+
+              // press pickup
+              console.warn(
+                `###${pickupIndex} ${pickupIndex >= 0} ${[firstPickup, ...(waypoint ?? [])].join(',')} ${order.pickup}`,
+              );
+              if (pickupIndex >= 0) {
+                console.warn('FIND???');
+                const pickupValue = await screen.getValue({
+                  index: pickupIndex,
+                  parent: { key: 'name', type: SELECTOR_TYPE.DATA, value: 'pickupQuoteIndex' },
+                  target: { value: 'option' },
+                });
+                console.warn('FOUND!!!');
+                console.warn(`@@@${pickupValue}`);
+                pickupValue &&
+                  (await screen.type({
+                    index: i,
+                    parent,
+                    target: { key: 'name', type: SELECTOR_TYPE.DATA, value: 'pickupQuoteIndex' },
+                    value: pickupValue,
+                  }));
+              }
+
+              // press dropoff
+              if (dropoffIndex >= 0) {
+                const dropoffValue = await screen.getValue({
+                  index: dropoffIndex,
+                  parent: { key: 'name', type: SELECTOR_TYPE.DATA, value: 'dropoffQuoteIndex' },
+                  target: { value: 'option' },
+                });
+                dropoffValue &&
+                  (await screen.type({
+                    index: i,
+                    parent,
+                    target: { key: 'name', type: SELECTOR_TYPE.DATA, value: 'dropoffQuoteIndex' },
+                    value: dropoffValue,
+                  }));
+              }
             }),
           ));
+
+        // press next
+        await screen.press({
+          isDelay: true,
+          target: { value: 'button[type=submit]' },
+        });
 
         await sleep(100000000);
 
