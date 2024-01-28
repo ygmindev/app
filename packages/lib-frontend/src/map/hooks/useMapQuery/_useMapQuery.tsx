@@ -31,6 +31,7 @@ export const _useMapQuery = (): _UseMapQueryModel => {
                 address1: filterNil([address?.house_number, address?.road]).join(' '),
                 city: address?.city,
                 country: address?.country,
+                countryCode: address?.country_code,
                 latitude: lat ? toNumber(lat) : undefined,
                 longitude: lon ? toNumber(lon) : undefined,
                 name: display_name,

@@ -8,6 +8,7 @@ export type AddressModel = CoordinateModel & {
   address2?: string;
   city?: string;
   country?: string;
+  countryCode?: string;
   name?: string;
   postalCode?: string;
   province?: string;
