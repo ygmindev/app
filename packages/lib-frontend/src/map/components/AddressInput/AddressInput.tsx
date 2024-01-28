@@ -19,20 +19,21 @@ export const AddressInput: RLFCModel<AddressInputRefModel, AddressInputPropsMode
       value,
     });
     const { data, query } = useMapQuery();
+    const options = data.map((v) => ({ ...v, id: v.name ?? '' }));
     return (
       <MenuInput
         {...wrapperProps}
         icon="location"
         label={label}
         onChange={(v) => {
-          const selectedValue = data.find(({ id }) => id === v);
+          const selectedValue = options.find(({ id }) => id === v);
           selectedValue && valueControlledSet(selectedValue);
           textValueSet(v);
         }}
         onSearch={(v) => {
           void query(v);
         }}
-        options={data}
+        options={options}
         rightElement={() => null}
         value={textValue}
       />

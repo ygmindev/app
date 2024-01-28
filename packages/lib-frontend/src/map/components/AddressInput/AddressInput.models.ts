@@ -1,9 +1,9 @@
 import { type InputPropsModel, type InputRefModel } from '@lib/frontend/data/data.models';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
-import { type CoordinateModel } from '@lib/shared/map/map.models';
+import { type AddressModel } from '@lib/shared/openapi/utils/addressSpecification/addressSpecification.models';
 
 export type AddressInputPropsModel = InputPropsModel<AddressOptionModel>;
 
 export type AddressInputRefModel = InputRefModel<AddressOptionModel>;
 
-export type AddressOptionModel = WithIdModel & CoordinateModel;
+export type AddressOptionModel = AddressModel & WithIdModel;

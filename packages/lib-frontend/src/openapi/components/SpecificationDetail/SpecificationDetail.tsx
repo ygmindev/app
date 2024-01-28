@@ -36,7 +36,7 @@ export const SpecificationDetail = <TType,>({
 
                 <Chip
                   color={isProperty ? THEME_COLOR.SECONDARY : undefined}
-                  icon={field.isArray ? 'documents' : 'document'}>
+                  icon={isProperty ? (field.isArray ? 'documents' : 'document') : 'pencil'}>
                   {isProperty ? field.specification.name : field.type}
                 </Chip>
               </Wrapper>

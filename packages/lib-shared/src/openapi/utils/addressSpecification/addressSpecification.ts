@@ -4,9 +4,12 @@ import { WIDGET_TYPE } from '@lib/shared/openapi/utils/Specification/Specificati
 
 export const addressSpecification = {
   fields: [
-    { id: 'id', type: FIELD_TYPE.STRING },
-    { id: 'latitude', type: FIELD_TYPE.NUMBER },
-    { id: 'longitude', type: FIELD_TYPE.NUMBER },
+    { id: 'address1', type: FIELD_TYPE.STRING },
+    { id: 'address2', type: FIELD_TYPE.STRING },
+    { id: 'city', type: FIELD_TYPE.STRING },
+    { id: 'country', type: FIELD_TYPE.STRING },
+    { id: 'postalCode', type: FIELD_TYPE.STRING },
+    { id: 'province', type: FIELD_TYPE.STRING },
   ],
   name: 'address',
   translation: {},

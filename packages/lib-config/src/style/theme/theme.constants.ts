@@ -133,7 +133,7 @@ export const THEME_CONFIG = {
 
       [THEME_SIZE.MEDIUM]: 16,
 
-      [THEME_SIZE.SMALL]: 8,
+      [THEME_SIZE.SMALL]: 6,
     },
   },
 } satisfies PartialDeepModel<ThemeConfigModel>;

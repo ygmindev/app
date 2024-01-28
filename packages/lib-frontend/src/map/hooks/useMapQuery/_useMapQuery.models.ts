@@ -1,5 +1,4 @@
 import { type MapQueryResultModel } from '@lib/frontend/map/hooks/useMapQuery/useMapQuery.models';
-import { type CoordinateModel } from '@lib/shared/map/map.models';
 
 export type _UseMapQueryModel = {
   data: Array<MapQueryResultModel>;
@@ -7,15 +6,23 @@ export type _UseMapQueryModel = {
 };
 
 export type _UseMapQueryApiParamsModel = {
-  api_key: string;
+  addressdetails: number;
+  format: string;
   q: string;
 };
 
-export type _UseMapQueryApiResultModel = Array<
-  CoordinateModel & {
-    display_name: string;
-    importance?: number;
-    lat: string;
-    lon: string;
-  }
->;
+export type _UseMapQueryApiResultModel = Array<{
+  address?: {
+    city?: string;
+    country?: string;
+    country_code?: string;
+    house_number?: string;
+    postalCode?: string;
+    road?: string;
+    state?: string;
+  };
+  display_name?: string;
+  importance?: number;
+  lat?: string;
+  lon?: string;
+}>;

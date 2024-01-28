@@ -10,11 +10,11 @@ export const _Map: FCModel<_MapPropsModel> = ({ latitude, longitude, markers, zo
   return (
     isLoaded && (
       <GoogleMap
-        center={{ lat: latitude, lng: longitude }}
+        center={{ lat: latitude ?? 0, lng: longitude ?? 0 }}
         mapContainerStyle={{ flex: 1 }}
         zoom={zoom}>
         {markers?.map((marker) => (
-          <Marker position={{ lat: marker.latitude, lng: marker.longitude }} />
+          <Marker position={{ lat: marker.latitude ?? 0, lng: marker.longitude ?? 0 }} />
         ))}
       </GoogleMap>
     )
