@@ -56,5 +56,5 @@ export type FormFieldsRefModel<TType> = {
 };
 
 export type FormContainerRefModel<TType> = FormRefModel<TType> & {
-  fieldRefs: RefObject<FormFieldsRefModel<TType>>;
+  inputRefs: RefObject<FormFieldsRefModel<TType>>;
 };

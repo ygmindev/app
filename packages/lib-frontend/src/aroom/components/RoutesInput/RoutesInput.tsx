@@ -23,7 +23,7 @@ export const RoutesInput: RLFCModel<RoutesInputRefModel, RoutesInputPropsModel> 
   ({ onChange, value, ...props }, ref) => {
     const { wrapperProps } = useLayoutStyles({ props });
     const { t } = useTranslation();
-    const fieldRef = useRef<AddressInputRefModel>(null);
+    const inputRef = useRef<AddressInputRefModel>(null);
     const { valueControlled, valueControlledSet } = useValueControlled({
       defaultValue: [
         { id: '0', latitude: 0, longitude: 0 },
@@ -39,8 +39,8 @@ export const RoutesInput: RLFCModel<RoutesInputRefModel, RoutesInputPropsModel> 
           latitude,
           longitude,
         })),
-      blur: () => fieldRef.current?.blur(),
-      focus: () => fieldRef.current?.focus(),
+      blur: () => inputRef.current?.blur(),
+      focus: () => inputRef.current?.focus(),
       reset: () => null,
     }));
 
@@ -61,7 +61,7 @@ export const RoutesInput: RLFCModel<RoutesInputRefModel, RoutesInputPropsModel> 
                 valueNew[i] = v;
                 valueControlledSet(valueNew);
               }}
-              ref={fieldRef}
+              ref={inputRef}
               value={valueControlled?.[i]}
             />
           )}

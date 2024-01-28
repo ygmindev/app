@@ -88,10 +88,10 @@ const FormContainerF = forwardRef(
     const [isAppLoading] = useStore('app.isLoading');
     const { wrapperProps } = useLayoutStyles({ props });
 
-    const fieldRefs = useRef<FormFieldsRefModel<TType>>({});
+    const inputRefs = useRef<FormFieldsRefModel<TType>>({});
 
     useImperativeHandle(ref, () => ({
-      fieldRefs,
+      inputRefs,
       reset: handleReset,
       submit: async () => handleSubmitF(),
       valuesSet,
@@ -110,7 +110,7 @@ const FormContainerF = forwardRef(
               return { ...result, ...(await getValues(data, fieldsF)) };
             }
             const value = data[field.id as StringKeyModel<TType>];
-            const beforeSubmit = fieldRefs.current[field.id]?.beforeSubmit;
+            const beforeSubmit = inputRefs.current[field.id]?.beforeSubmit;
             return {
               ...result,
               ...{ [field.id]: beforeSubmit ? await beforeSubmit(value, field.id) : value },
@@ -164,7 +164,7 @@ const FormContainerF = forwardRef(
         ref:
           element.ref ??
           ((elementF: InputRefModel<TType, TKey>) =>
-            fieldRefs.current && (fieldRefs.current[id] = elementF)),
+            inputRefs.current && (inputRefs.current[id] = elementF)),
         value: values[id],
       } as InputPropsModel<TType[TKey]>),
       id,

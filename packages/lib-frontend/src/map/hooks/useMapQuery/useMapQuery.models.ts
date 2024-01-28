@@ -1,5 +1,5 @@
 import { type _UseMapQueryModel } from '@lib/frontend/map/hooks/useMapQuery/_useMapQuery.models';
-import { type AddressModel } from '@lib/shared/openapi/utils/addressSpecification/addressSpecification.models';
+import { type AddressModel } from '@lib/shared/map/map.models';
 
 export type UseMapQueryModel = _UseMapQueryModel;
 

@@ -28,12 +28,12 @@ export const TextFilterInput: RLFCModel<TextFilterInputRefModel, TextFilterInput
       useValueControlled<FilterConditionModel>({
         defaultValue: FILTER_CONDITION.CONTAINS,
       });
-    const fieldRef = useRef<InputRefModel>(null);
+    const inputRef = useRef<InputRefModel>(null);
 
     useImperativeHandle(ref, () => ({
       beforeSubmit: async (v, k) => [{ condition, field: k, value: v }],
-      blur: () => fieldRef.current?.blur(),
-      focus: () => fieldRef.current?.focus(),
+      blur: () => inputRef.current?.blur(),
+      focus: () => inputRef.current?.focus(),
     }));
 
     return (
@@ -69,7 +69,7 @@ export const TextFilterInput: RLFCModel<TextFilterInputRefModel, TextFilterInput
             id: 'condition',
           },
         ]}
-        ref={fieldRef}
+        ref={inputRef}
       />
     );
   });

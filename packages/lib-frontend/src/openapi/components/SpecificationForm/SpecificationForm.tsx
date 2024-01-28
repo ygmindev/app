@@ -65,6 +65,10 @@ export const SpecificationForm = <TType,>({
     }
   };
 
+  const handleSubmit = async (data: unknown) => {
+    console.warn(data);
+  };
+
   const steps = specification.fields.map((field) => {
     const element = getElement(field);
     return {
@@ -81,7 +85,7 @@ export const SpecificationForm = <TType,>({
           }
           flex
           isCenter
-          // validators={{ [id]: isOptional ? undefined : validateNotEmpty }}
+          onSubmit={handleSubmit}
         />
       ),
       id: field.id,

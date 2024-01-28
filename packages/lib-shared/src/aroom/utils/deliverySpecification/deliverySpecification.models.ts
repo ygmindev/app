@@ -1,4 +1,4 @@
-import { type AddressModel } from '@lib/shared/openapi/utils/addressSpecification/addressSpecification.models';
+import { type AddressModel } from '@lib/shared/map/map.models';
 
 export type DeliverySpecificationModel = {
   destination: AddressModel;
