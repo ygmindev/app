@@ -35,7 +35,7 @@ export const _useMapQuery = (): _UseMapQueryModel => {
                 latitude: lat ? toNumber(lat) : undefined,
                 longitude: lon ? toNumber(lon) : undefined,
                 name: display_name,
-                postalCode: address?.postalCode,
+                postalCode: address?.postcode,
                 province: address?.state,
               }))
             : [],

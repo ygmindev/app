@@ -17,7 +17,7 @@ export type _UseMapQueryApiResultModel = Array<{
     country?: string;
     country_code?: string;
     house_number?: string;
-    postalCode?: string;
+    postcode?: string;
     road?: string;
     state?: string;
   };
