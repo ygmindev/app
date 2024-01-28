@@ -1,3 +1,3 @@
-import { type GroupServiceModel } from '@lib/shared/group/resources/Group/GroupService/GroupService.models';
+import { type GroupImplementationModel } from '@lib/shared/group/resources/Group/GroupImplementation/GroupImplementation.models';
 
-export type UseGroupResourceModel = GroupServiceModel;
+export type UseGroupResourceModel = GroupImplementationModel;

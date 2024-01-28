@@ -1,3 +1,3 @@
-import { type {{NAME}}(pascalCase)ServiceModel } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Service/{{NAME}}(pascalCase)Service.models';
+import { type {{NAME}}(pascalCase)ImplementationModel } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Implementation/{{NAME}}(pascalCase)Implementation.models';
 
-export type {{NAME}}(pascalCase)ResolverModel = {{NAME}}(pascalCase)ServiceModel;
+export type {{NAME}}(pascalCase)ResolverModel = {{NAME}}(pascalCase)ImplementationModel;

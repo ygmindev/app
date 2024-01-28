@@ -7,9 +7,9 @@ import { type EntityResourceDataModel } from '@lib/shared/resource/resources/Ent
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 import {
-  type ResourceServiceAfterDecoratorModel,
-  type ResourceServiceBeforeDecoratorModel,
-} from '@lib/shared/resource/utils/ResourceService/ResourceService.models';
+  type ResourceImplementationAfterDecoratorModel,
+  type ResourceImplementationBeforeDecoratorModel,
+} from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { type RootInputModel } from '@lib/shared/resource/utils/Root/Root.models';
 
 export type UseResourceMethodParamsFieldsModel<
@@ -25,8 +25,8 @@ export type UseResourceMethodParamsModel<
   TRoot = undefined,
 > = ResourceNameParamsModel &
   RootInputModel<TRoot> & {
-    after?: ResourceServiceAfterDecoratorModel<TMethod, TType, TForm, TRoot>;
-    before?: ResourceServiceBeforeDecoratorModel<TMethod, TType, TForm, TRoot>;
+    after?: ResourceImplementationAfterDecoratorModel<TMethod, TType, TForm, TRoot>;
+    before?: ResourceImplementationBeforeDecoratorModel<TMethod, TType, TForm, TRoot>;
     fields: UseResourceMethodParamsFieldsModel<TMethod, TType, TRoot>;
     method: TMethod;
   };

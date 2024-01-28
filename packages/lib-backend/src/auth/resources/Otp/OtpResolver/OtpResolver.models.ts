@@ -1,3 +1,3 @@
-import { type OtpServiceModel } from '@lib/shared/auth/resources/Otp/OtpService/OtpService.models';
+import { type OtpImplementationModel } from '@lib/shared/auth/resources/Otp/OtpImplementation/OtpImplementation.models';
 
-export type OtpResolverModel = OtpServiceModel;
+export type OtpResolverModel = OtpImplementationModel;

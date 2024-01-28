@@ -1,13 +1,13 @@
-import { createProtectedResoureService } from '@lib/backend/auth/utils/createProtectedResourceService/createProtectedResourceService';
+import { createProtectedResoureImplementation } from '@lib/backend/auth/utils/createProtectedResourceImplementation/createProtectedResourceImplementation';
 import { Container } from '@lib/backend/core/utils/Container/Container';
-import { TestableProtectedResoureService } from '@lib/backend/test/resources/TestableProtectedResoure/TestableProtectedResoureService/TestableProtectedResoureService';
-import { testResourceService } from '@lib/backend/test/utils/testResourceService/testResourceService';
+import { TestableProtectedResoureImplementation } from '@lib/backend/test/resources/TestableProtectedResoure/TestableProtectedResoureImplementation/TestableProtectedResoureImplementation';
+import { testResourceImplementation } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ createProtectedResoureService });
+const { displayName } = withTest({ createProtectedResoureImplementation });
 
 describe(displayName, () => {
-  void testResourceService({
-    getService: () => Container.get(TestableProtectedResoureService),
+  void testResourceImplementation({
+    getImplementation: () => Container.get(TestableProtectedResoureImplementation),
   });
 });

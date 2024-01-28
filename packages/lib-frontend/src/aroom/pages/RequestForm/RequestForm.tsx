@@ -12,7 +12,7 @@ import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { VEHICLE_TYPE } from '@lib/shared/aroom/aroom.constants';
-import { type GetRouteInputModel } from '@lib/shared/map/resources/MapRoute/MapRouteService/MapRouteService.models';
+import { type GetRouteInputModel } from '@lib/shared/map/resources/MapRoute/MapRouteImplementation/MapRouteImplementation.models';
 
 export const RequestFormPage: LFCModel<RequestFormPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });

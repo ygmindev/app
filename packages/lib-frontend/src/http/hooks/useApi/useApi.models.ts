@@ -1,11 +1,11 @@
 import { type PartialModel } from '@lib/shared/core/core.models';
 import {
-  type HttpServiceModel,
-  type HttpServiceParamsModel,
-} from '@lib/shared/http/utils/HttpService/HttpService.models';
+  type HttpImplementationModel,
+  type HttpImplementationParamsModel,
+} from '@lib/shared/http/utils/HttpImplementation/HttpImplementation.models';
 import { type UriParamsModel } from '@lib/shared/http/utils/uri/uri.models';
 
-export type UseApiParamsModel = Pick<HttpServiceParamsModel, 'onRequest' | 'onResponse'> &
+export type UseApiParamsModel = Pick<HttpImplementationParamsModel, 'onRequest' | 'onResponse'> &
   PartialModel<UriParamsModel> & { isCredentials?: boolean };
 
-export type UseApiModel = HttpServiceModel;
+export type UseApiModel = HttpImplementationModel;

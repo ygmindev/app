@@ -1,8 +1,8 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { MapRoute } from '@lib/backend/map/resources/MapRoute/MapRoute';
+import { MapRouteImplementation } from '@lib/backend/map/resources/MapRoute/MapRouteImplementation/MapRouteImplementation';
 import { type MapRouteResolverModel } from '@lib/backend/map/resources/MapRoute/MapRouteResolver/MapRouteResolver.models';
-import { MapRouteService } from '@lib/backend/map/resources/MapRoute/MapRouteService/MapRouteService';
 import { Coordinate } from '@lib/backend/map/utils/Coordinate/Coordinate';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
@@ -13,7 +13,7 @@ import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 import { MAP_ROUTE_RESOURCE } from '@lib/shared/map/resources/MapRoute/MapRoute.constants';
 import { type MapRouteModel } from '@lib/shared/map/resources/MapRoute/MapRoute.models';
-import { type GetRouteInputModel } from '@lib/shared/map/resources/MapRoute/MapRouteService/MapRouteService.models';
+import { type GetRouteInputModel } from '@lib/shared/map/resources/MapRoute/MapRouteImplementation/MapRouteImplementation.models';
 import { type CoordinateModel } from '@lib/shared/map/utils/Coordinate/Coordinate.models';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 
@@ -32,7 +32,7 @@ export class GetRouteInput implements GetRouteInputModel {
 @withContainer()
 @withResolver()
 export class MapRouteResolver implements MapRouteResolverModel {
-  @withInject(MapRouteService) protected mapRouteService!: MapRouteService;
+  @withInject(MapRouteImplementation) protected mapRouteImplementation!: MapRouteImplementation;
 
   @withResult({
     Resource: () => MapRoute,
@@ -42,6 +42,6 @@ export class MapRouteResolver implements MapRouteResolverModel {
     @withParams({ Resource: () => GetRouteInput })
     input: GetRouteInputModel,
   ): Promise<MapRouteModel> {
-    return this.mapRouteService.getRoute(input);
+    return this.mapRouteImplementation.getRoute(input);
   }
 }

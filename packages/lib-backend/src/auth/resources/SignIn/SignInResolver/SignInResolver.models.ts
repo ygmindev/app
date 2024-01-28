@@ -1,3 +1,3 @@
-import { type SignInServiceModel } from '@lib/shared/auth/resources/SignIn/SignInService/SignInService.models';
+import { type SignInImplementationModel } from '@lib/shared/auth/resources/SignIn/SignInImplementation/SignInImplementation.models';
 
-export type SignInResolverModel = SignInServiceModel;
+export type SignInResolverModel = SignInImplementationModel;

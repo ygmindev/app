@@ -3,7 +3,7 @@ import { type UseMapRoutesModel } from '@lib/frontend/map/hooks/useMapRoutes/use
 import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 import { MAP_ROUTE_RESOURCE } from '@lib/shared/map/resources/MapRoute/MapRoute.constants';
 import { type MapRouteModel } from '@lib/shared/map/resources/MapRoute/MapRoute.models';
-import { type GetRouteInputModel } from '@lib/shared/map/resources/MapRoute/MapRouteService/MapRouteService.models';
+import { type GetRouteInputModel } from '@lib/shared/map/resources/MapRoute/MapRouteImplementation/MapRouteImplementation.models';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 
 export const useMapRoutes = (): UseMapRoutesModel => {

@@ -1,7 +1,7 @@
 import { selfAuthorizer } from '@lib/backend/auth/utils/selfAuthorizer/selfAuthorizer';
 import { PaymentMethod } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethod';
+import { PaymentMethodImplementation } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation';
 import { type PaymentMethodResolverModel } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethodResolver/PaymentMethodResolver.models';
-import { PaymentMethodService } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethodService/PaymentMethodService';
 import { Container } from '@lib/backend/core/utils/Container/Container';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
@@ -21,7 +21,7 @@ import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 export class PaymentMethodResolver
   extends createEmbeddedResourceResolver<PaymentMethodModel, undefined, UserModel>({
     Resource: () => PaymentMethod,
-    ResourceService: PaymentMethodService,
+    ResourceImplementation: PaymentMethodImplementation,
     RootResource: () => User,
     authorizer: { default: selfAuthorizer() },
     name: PAYMENT_METHOD_RESOURCE_NAME,
@@ -40,6 +40,6 @@ export class PaymentMethodResolver
     })
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, string, undefined, UserModel>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, string, UserModel>> {
-    return Container.get(PaymentMethodService).createToken(input);
+    return Container.get(PaymentMethodImplementation).createToken(input);
   }
 }

@@ -27,7 +27,7 @@ export const createResourceResolver = <
 >({
   Resource,
   ResourceData,
-  ResourceService,
+  ResourceImplementation,
   RootResource,
   access = { default: ACCESS_LEVEL.RESTRICTED },
   authorizer,
@@ -37,7 +37,7 @@ export const createResourceResolver = <
   TForm,
   TRoot
 > => {
-  const { prototype } = ResourceService;
+  const { prototype } = ResourceImplementation;
   const createExists = prototype.create !== undefined;
   const createManyExists = prototype.createMany !== undefined;
   const getExists = prototype.get !== undefined;
@@ -50,7 +50,7 @@ export const createResourceResolver = <
   class ResourceResolver
     implements PrototypeModel<CreateResourceResolverModel<TType, TForm, TRoot>>
   {
-    protected _service = Container.get(ResourceService);
+    protected _service = Container.get(ResourceImplementation);
 
     @withCondition(
       () => createExists,

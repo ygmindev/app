@@ -1,3 +1,3 @@
-import { type UserServiceModel } from '@lib/shared/user/resources/User/UserService/UserService.models';
+import { type UserImplementationModel } from '@lib/shared/user/resources/User/UserImplementation/UserImplementation.models';
 
-export type UserResolverModel = UserServiceModel;
+export type UserResolverModel = UserImplementationModel;

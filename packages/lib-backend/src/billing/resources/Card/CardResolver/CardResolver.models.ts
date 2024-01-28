@@ -1,3 +1,3 @@
-import { type CardServiceModel } from '@lib/shared/billing/resources/Card/CardService/CardService.models';
+import { type CardImplementationModel } from '@lib/shared/billing/resources/Card/CardImplementation/CardImplementation.models';
 
-export type CardResolverModel = CardServiceModel;
+export type CardResolverModel = CardImplementationModel;

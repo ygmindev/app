@@ -1,7 +1,6 @@
+import { type RenameParamsModel } from '@tool/task/core/utils/rename/rename.models';
 import { readdirSync, renameSync, statSync } from 'fs';
 import { resolve } from 'path';
-
-import { type RenameParamsModel } from '@tool/task/core/utils/rename/rename.models';
 
 export const rename = async ({ from, path, to }: RenameParamsModel): Promise<void> => {
   for (const filename of readdirSync(path)) {

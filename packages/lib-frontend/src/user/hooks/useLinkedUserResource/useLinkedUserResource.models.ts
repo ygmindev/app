@@ -1,3 +1,3 @@
-import { type LinkedUserServiceModel } from '@lib/shared/user/resources/LinkedUser/LinkedUserService/LinkedUserService.models';
+import { type LinkedUserImplementationModel } from '@lib/shared/user/resources/LinkedUser/LinkedUserImplementation/LinkedUserImplementation.models';
 
-export type UseLinkedUserResourceModel = LinkedUserServiceModel;
+export type UseLinkedUserResourceModel = LinkedUserImplementationModel;

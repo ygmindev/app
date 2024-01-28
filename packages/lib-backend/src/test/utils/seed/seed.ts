@@ -3,19 +3,19 @@ import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { SEED_DATA } from '@lib/backend/test/utils/seed/seed.constants';
 import { type SeedModel } from '@lib/backend/test/utils/seed/seed.models';
-import { type EntityResourceServiceModel } from '@lib/shared/resource/resources/EntityResource/EntityResourceService/EntityResourceService.models';
+import { type EntityResourceImplementationModel } from '@lib/shared/resource/resources/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
 
 export const seed = async (): Promise<SeedModel> => {
   for (const resource of SEED_DATA) {
     const { data, name } = resource;
-    const services = fromGlobs([`**/resources/**/${name}Service.ts`], {
+    const services = fromGlobs([`**/resources/**/${name}Implementation.ts`], {
       isAbsolute: true,
       root: fromPackages('lib-backend/src'),
     });
     for (const service of services) {
       await import(service);
     }
-    const service = Container.get<EntityResourceServiceModel<unknown, unknown>>(`${name}Service`);
+    const service = Container.get<EntityResourceImplementationModel<unknown, unknown>>(`${name}Implementation`);
     for (const form of data()) {
       service.create && (await service.create({ form }));
     }

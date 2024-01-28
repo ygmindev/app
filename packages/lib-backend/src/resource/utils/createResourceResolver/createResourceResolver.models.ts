@@ -11,7 +11,7 @@ import {
 } from '@lib/shared/resource/resource.models';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
-import { type ResourceServiceModel } from '@lib/shared/resource/utils/ResourceService/ResourceService.models';
+import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 
 export type CreateResourceResolverParamsModel<
   TType,
@@ -22,7 +22,9 @@ export type CreateResourceResolverParamsModel<
 
   ResourceData?(): ResourceClassModel<TForm>;
 
-  ResourceService: ResourceClassModel<PartialModel<ResourceServiceModel<TType, TForm, TRoot>>>;
+  ResourceImplementation: ResourceClassModel<
+    PartialModel<ResourceImplementationModel<TType, TForm, TRoot>>
+  >;
 
   RootResource?(): TRoot extends undefined ? never : ResourceClassModel<TRoot>;
 
@@ -43,7 +45,7 @@ export type CreateResourceResolverModel<
   TType,
   TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
-> = ResourceClassModel<ResourceServiceModel<TType, TForm, TRoot>>;
+> = ResourceClassModel<ResourceImplementationModel<TType, TForm, TRoot>>;
 
 export type ResourceResolverAccessTypeModel =
   | 'default'

@@ -1,6 +1,6 @@
 import { Vendor } from '@lib/backend/admin/resources/Vendor/Vendor';
 import { type VendorResolverModel } from '@lib/backend/admin/resources/Vendor/VendorResolver/VendorResolver.models';
-import { VendorService } from '@lib/backend/admin/resources/Vendor/VendorService/VendorService';
+import { VendorImplementation } from '@lib/backend/admin/resources/Vendor/VendorImplementation/VendorImplementation';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEntityResourceResolver } from '@lib/backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
@@ -15,7 +15,7 @@ import {
 export class VendorResolver
   extends createEntityResourceResolver<VendorModel, VendorFormModel>({
     Resource: () => Vendor,
-    ResourceService: VendorService,
+    ResourceImplementation: VendorImplementation,
     name: VENDOR_RESOURCE_NAME,
   })
   implements VendorResolverModel {}

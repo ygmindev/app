@@ -1,3 +1,3 @@
-import { type DeliveryServiceModel } from '@lib/shared/aroom/resources/Delivery/DeliveryService/DeliveryService.models';
+import { type DeliveryImplementationModel } from '@lib/shared/aroom/resources/Delivery/DeliveryImplementation/DeliveryImplementation.models';
 
-export type DeliveryResolverModel = DeliveryServiceModel;
+export type DeliveryResolverModel = DeliveryImplementationModel;

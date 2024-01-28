@@ -3,10 +3,10 @@ import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { DELIVERY_RESOURCE } from '@lib/shared/aroom/resources/Delivery/Delivery.constants';
 import {
   type AroomOrderModel,
-  AroomUserModel,
+  type AroomUserModel,
   type DeliveryModel,
 } from '@lib/shared/aroom/resources/Delivery/Delivery.models';
-import { type CreateDeliveryResultModel } from '@lib/shared/aroom/resources/Delivery/DeliveryService/DeliveryService.models';
+import { type CreateDeliveryResultModel } from '@lib/shared/aroom/resources/Delivery/DeliveryImplementation/DeliveryImplementation.models';
 import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ name: 'AroomUser' })

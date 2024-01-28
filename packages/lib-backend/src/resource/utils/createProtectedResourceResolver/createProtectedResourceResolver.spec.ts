@@ -1,10 +1,10 @@
 import { Container } from '@lib/backend/core/utils/Container/Container';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
+import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import { createEntityResourceResolver } from '@lib/backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
-import { createEntityResourceService } from '@lib/backend/resource/utils/createEntityResourceService/createEntityResourceService';
 import { TestableEntityResource } from '@lib/backend/test/resources/TestableEntityResource/TestableEntityResource';
-import { TestableEntityResourceService } from '@lib/backend/test/resources/TestableEntityResource/TestableEntityResourceService/TestableEntityResourceService';
-import { testResourceService } from '@lib/backend/test/utils/testResourceService/testResourceService';
+import { TestableEntityResourceImplementation } from '@lib/backend/test/resources/TestableEntityResource/TestableEntityResourceImplementation/TestableEntityResourceImplementation';
+import { testResourceImplementation } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation';
 import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.constants';
 import {
   type TestableEntityResourceFormModel,
@@ -12,7 +12,7 @@ import {
 } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ createEntityResourceService });
+const { displayName } = withTest({ createEntityResourceImplementation });
 
 describe(displayName, () => {
   @withContainer()
@@ -21,9 +21,9 @@ describe(displayName, () => {
     TestableEntityResourceFormModel
   >({
     Resource: () => TestableEntityResource,
-    ResourceService: TestableEntityResourceService,
+    ResourceImplementation: TestableEntityResourceImplementation,
     name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
   }) {}
 
-  void testResourceService({ getService: () => Container.get(Resolver) });
+  void testResourceImplementation({ getImplementation: () => Container.get(Resolver) });
 });

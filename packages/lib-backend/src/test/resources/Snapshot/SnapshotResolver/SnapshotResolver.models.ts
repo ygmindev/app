@@ -1,3 +1,3 @@
-import { type SnapshotServiceModel } from '@lib/shared/test/resources/Snapshot/SnapshotService/SnapshotService.models';
+import { type SnapshotImplementationModel } from '@lib/shared/test/resources/Snapshot/SnapshotImplementation/SnapshotImplementation.models';
 
-export type SnapshotResolverModel = SnapshotServiceModel;
+export type SnapshotResolverModel = SnapshotImplementationModel;

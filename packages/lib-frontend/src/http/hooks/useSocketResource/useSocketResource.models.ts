@@ -1,3 +1,3 @@
-import { type SocketServiceModel } from '@lib/shared/http/resources/Socket/SocketService/SocketService.models';
+import { type SocketImplementationModel } from '@lib/shared/http/resources/Socket/SocketImplementation/SocketImplementation.models';
 
-export type UseSocketResourceModel = SocketServiceModel;
+export type UseSocketResourceModel = SocketImplementationModel;

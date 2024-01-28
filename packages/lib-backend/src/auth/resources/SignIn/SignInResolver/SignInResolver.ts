@@ -1,6 +1,6 @@
 import { SignIn, SignInForm } from '@lib/backend/auth/resources/SignIn/SignIn';
 import { type SignInResolverModel } from '@lib/backend/auth/resources/SignIn/SignInResolver/SignInResolver.models';
-import { SignInService } from '@lib/backend/auth/resources/SignIn/SignInService/SignInService';
+import { SignInImplementation } from '@lib/backend/auth/resources/SignIn/SignInImplementation/SignInImplementation';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withContext } from '@lib/backend/http/utils/withContext/withContext';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
@@ -31,7 +31,7 @@ export class SignInResolver
   extends createEntityResourceResolver<SignInModel, SignInFormModel>({
     Resource: () => SignIn,
     ResourceData: () => SignInForm,
-    ResourceService: SignInService,
+    ResourceImplementation: SignInImplementation,
     access: {
       [RESOURCE_METHOD_TYPE.CREATE]: ACCESS_LEVEL.PUBLIC,
     },
@@ -39,7 +39,7 @@ export class SignInResolver
   })
   implements SignInResolverModel
 {
-  @withInject(SignInService) protected signInService!: SignInService;
+  @withInject(SignInImplementation) protected signInImplementation!: SignInImplementation;
 
   @withOutput({
     Resource: () => SignIn,
@@ -57,7 +57,7 @@ export class SignInResolver
     @withContext()
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
-    return this.signInService.userUpdate(input, context);
+    return this.signInImplementation.userUpdate(input, context);
   }
 
   @withOutput({
@@ -76,6 +76,6 @@ export class SignInResolver
     @withContext()
     context?: ContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
-    return this.signInService.usernameUpdate(input, context);
+    return this.signInImplementation.usernameUpdate(input, context);
   }
 }

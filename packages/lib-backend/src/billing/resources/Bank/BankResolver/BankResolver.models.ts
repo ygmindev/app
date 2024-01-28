@@ -1,3 +1,3 @@
-import { type BankServiceModel } from '@lib/shared/billing/resources/Bank/BankService/BankService.models';
+import { type BankImplementationModel } from '@lib/shared/billing/resources/Bank/BankImplementation/BankImplementation.models';
 
-export type BankResolverModel = BankServiceModel;
+export type BankResolverModel = BankImplementationModel;

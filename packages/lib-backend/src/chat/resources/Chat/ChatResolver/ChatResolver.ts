@@ -1,6 +1,6 @@
 import { Chat } from '@lib/backend/chat/resources/Chat/Chat';
+import { ChatImplementation } from '@lib/backend/chat/resources/Chat/ChatImplementation/ChatImplementation';
 import { type ChatResolverModel } from '@lib/backend/chat/resources/Chat/ChatResolver/ChatResolver.models';
-import { ChatService } from '@lib/backend/chat/resources/Chat/ChatService/ChatService';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEntityResourceResolver } from '@lib/backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
@@ -12,7 +12,7 @@ import { type ChatFormModel, type ChatModel } from '@lib/shared/chat/resources/C
 export class ChatResolver
   extends createEntityResourceResolver<ChatModel, ChatFormModel>({
     Resource: () => Chat,
-    ResourceService: ChatService,
+    ResourceImplementation: ChatImplementation,
     name: CHAT_RESOURCE_NAME,
   })
   implements ChatResolverModel {}

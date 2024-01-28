@@ -1,7 +1,7 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { {{NAME}}(pascalCase) } from '@lib/backend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)';
 import { type {{NAME}}(pascalCase)ResolverModel } from '@lib/backend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Resolver/{{NAME}}(pascalCase)Resolver.models';
-import { {{NAME}}(pascalCase)Service } from '@lib/backend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Service/{{NAME}}(pascalCase)Service';
+import { {{NAME}}(pascalCase)Implementation } from '@lib/backend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Implementation/{{NAME}}(pascalCase)Implementation';
 import { {{NAME_ROOT}}(pascalCase) } from '@lib/backend/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase)';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEmbeddedResourceResolver } from '@lib/backend/resource/utils/createEmbeddedResourceResolver/createEmbeddedResourceResolver';
@@ -17,7 +17,7 @@ import { type {{NAME_ROOT}}(pascalCase)Model } from '@lib/shared/{{MODULE_ROOT}}
 export class {{NAME}}(pascalCase)Resolver
   extends createEmbeddedResourceResolver<{{NAME}}(pascalCase)Model, {{NAME}}(pascalCase)FormModel, {{NAME_ROOT}}(pascalCase)Model>({
     Resource: () => {{NAME}}(pascalCase),
-    ResourceService: {{NAME}}(pascalCase)Service,
+    ResourceImplementation: {{NAME}}(pascalCase)Implementation,
     RootResource: () => {{NAME_ROOT}}(pascalCase),
     name: {{NAME}}(constantCase)_RESOURCE_NAME,
   })

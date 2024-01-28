@@ -1,8 +1,8 @@
 import {
-  type HttpServiceModel,
-  type HttpServiceParamsModel,
-} from '@lib/shared/http/utils/HttpService/HttpService.models';
+  type HttpImplementationModel,
+  type HttpImplementationParamsModel,
+} from '@lib/shared/http/utils/HttpImplementation/HttpImplementation.models';
 
-export type UseHttpParamsModel = HttpServiceParamsModel;
+export type UseHttpParamsModel = HttpImplementationParamsModel;
 
-export type UseHttpModel = HttpServiceModel;
+export type UseHttpModel = HttpImplementationModel;

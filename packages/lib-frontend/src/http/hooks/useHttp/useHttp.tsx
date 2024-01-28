@@ -6,11 +6,11 @@ import {
 import { CONNECTIVITY } from '@lib/frontend/http/http.constants';
 import { getConnectivity } from '@lib/frontend/http/utils/getConnectivity/getConnectivity';
 import { OfflineError } from '@lib/shared/http/errors/OfflineError/OfflineError';
-import { HttpService } from '@lib/shared/http/utils/HttpService/HttpService';
+import { HttpImplementation } from '@lib/shared/http/utils/HttpImplementation/HttpImplementation';
 
 export const useHttp = (params: UseHttpParamsModel = {}): UseHttpModel => {
   const { handleError } = useErrorContext();
-  return new HttpService({
+  return new HttpImplementation({
     ...params,
     onError: async (e) => {
       const eF =

@@ -1,6 +1,6 @@
 import { Delivery, DeliveryResult } from '@lib/backend/aroom/resources/Delivery/Delivery';
+import { DeliveryImplementation } from '@lib/backend/aroom/resources/Delivery/DeliveryImplementation/DeliveryImplementation';
 import { type DeliveryResolverModel } from '@lib/backend/aroom/resources/Delivery/DeliveryResolver/DeliveryResolver.models';
-import { DeliveryService } from '@lib/backend/aroom/resources/Delivery/DeliveryService/DeliveryService';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
@@ -8,9 +8,9 @@ import { withParams } from '@lib/backend/resource/utils/withParams/withParams';
 import { withResult } from '@lib/backend/resource/utils/withResult/withResult';
 import { DELIVERY_RESOURCE } from '@lib/shared/aroom/resources/Delivery/Delivery.constants';
 import {
-  CreateDeliveryInputModel,
+  type CreateDeliveryInputModel,
   type CreateDeliveryResultModel,
-} from '@lib/shared/aroom/resources/Delivery/DeliveryService/DeliveryService.models';
+} from '@lib/shared/aroom/resources/Delivery/DeliveryImplementation/DeliveryImplementation.models';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
@@ -21,7 +21,7 @@ export class CreateDeliveryInput extends Delivery implements CreateDeliveryInput
 @withContainer()
 @withResolver()
 export class DeliveryResolver implements DeliveryResolverModel {
-  @withInject(DeliveryService) protected deliveryService!: DeliveryService;
+  @withInject(DeliveryImplementation) protected deliveryImplementation!: DeliveryImplementation;
 
   @withResult({
     Resource: () => DeliveryResult,
@@ -32,6 +32,6 @@ export class DeliveryResolver implements DeliveryResolverModel {
     @withParams({ Resource: () => CreateDeliveryInput })
     input: CreateDeliveryInputModel,
   ): Promise<CreateDeliveryResultModel> {
-    return this.deliveryService.createDelivery(input);
+    return this.deliveryImplementation.createDelivery(input);
   }
 }

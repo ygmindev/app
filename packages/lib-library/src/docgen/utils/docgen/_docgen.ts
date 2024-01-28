@@ -3,10 +3,10 @@ import map from 'lodash/map';
 import sortBy from 'lodash/sortBy';
 import { dirname } from 'path';
 import { withCustomConfig } from 'react-docgen-typescript';
-import { type LanguageService, type Program } from 'typescript';
+import { type LanguageImplementation, type Program } from 'typescript';
 import {
   createDocumentRegistry,
-  createLanguageService,
+  createLanguageImplementation,
   getDefaultLibFilePath,
   parseJsonConfigFileContent,
   readConfigFile,
@@ -29,7 +29,7 @@ export const _docgen = (params: _DocgenParamsModel): _DocgenModel => {
     shouldRemoveUndefinedFromOptional: true,
   });
 
-  const service: LanguageService = createLanguageService(
+  const service: LanguageImplementation = createLanguageImplementation(
     {
       fileExists: sys.fileExists,
       getCompilationSettings: () =>

@@ -2,9 +2,9 @@ import { type ResourceParamsModel } from '@lib/frontend/resource/resource.models
 import { type ResourceNameParamsModel } from '@lib/shared/resource/resource.models';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import {
-  type ResourceServiceDecoratorModel,
-  type ResourceServiceModel,
-} from '@lib/shared/resource/utils/ResourceService/ResourceService.models';
+  type ResourceImplementationDecoratorModel,
+  type ResourceImplementationModel,
+} from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { type RootInputModel } from '@lib/shared/resource/utils/Root/Root.models';
 
 export type UseResourceParamsModel<
@@ -13,11 +13,11 @@ export type UseResourceParamsModel<
   TRoot = undefined,
 > = RootInputModel<TRoot> &
   ResourceNameParamsModel<TRoot> &
-  ResourceServiceDecoratorModel<TType, TForm, TRoot> &
+  ResourceImplementationDecoratorModel<TType, TForm, TRoot> &
   ResourceParamsModel<TType, TRoot>;
 
 export type UseResourceModel<
   TType,
   TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
-> = ResourceServiceModel<TType, TForm, TRoot>;
+> = ResourceImplementationModel<TType, TForm, TRoot>;

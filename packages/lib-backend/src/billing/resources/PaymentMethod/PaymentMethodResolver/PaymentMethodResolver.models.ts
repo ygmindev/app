@@ -1,3 +1,3 @@
-import { type PaymentMethodServiceModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethodService/PaymentMethodService.models';
+import { type PaymentMethodImplementationModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation.models';
 
-export type PaymentMethodResolverModel = PaymentMethodServiceModel;
+export type PaymentMethodResolverModel = PaymentMethodImplementationModel;

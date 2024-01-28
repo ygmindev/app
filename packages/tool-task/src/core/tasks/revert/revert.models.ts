@@ -1,3 +1,3 @@
-export type ReverParamsModel = {
+export type RevertParamsModel = {
   name: string;
 };

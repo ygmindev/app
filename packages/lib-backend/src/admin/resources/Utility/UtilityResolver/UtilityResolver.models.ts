@@ -1,3 +1,3 @@
-import { type UtilityServiceModel } from '@lib/shared/admin/resources/Utility/UtilityService/UtilityService.models';
+import { type UtilityImplementationModel } from '@lib/shared/admin/resources/Utility/UtilityImplementation/UtilityImplementation.models';
 
-export type UtilityResolverModel = UtilityServiceModel;
+export type UtilityResolverModel = UtilityImplementationModel;

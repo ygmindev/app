@@ -1,3 +1,3 @@
-import { type VendorServiceModel } from '@lib/shared/admin/resources/Vendor/VendorService/VendorService.models';
+import { type VendorImplementationModel } from '@lib/shared/admin/resources/Vendor/VendorImplementation/VendorImplementation.models';
 
-export type VendorResolverModel = VendorServiceModel;
+export type VendorResolverModel = VendorImplementationModel;

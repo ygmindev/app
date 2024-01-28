@@ -1,12 +1,11 @@
 import { SELECTOR_TYPE } from '@lib/config/crawling/screen/screen.constants';
 import { type SelectorPathModel } from '@lib/config/crawling/screen/screen.models';
-import { type CreateDeliveryInputModel } from '@lib/shared/aroom/resources/Delivery/DeliveryService/DeliveryService.models';
+import { type CreateDeliveryInputModel } from '@lib/shared/aroom/resources/Delivery/DeliveryImplementation/DeliveryImplementation.models';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { withScreen } from '@lib/shared/crawling/utils/withScreen/withScreen';
 import { KEY_TYPE } from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
-import findIndex from 'lodash/findIndex';
 
 const CREDENTIALS = {
   email: 'support@essentialhomeimprovement.com',
@@ -217,8 +216,12 @@ const crawl: TaskParamsModel<unknown> = {
               // pickup: '56 Leonard St, New York, NY 10013',
               // pickupPhoneNumber: '2161111111',
 
-              const pickupIndex = findIndex([firstPickup, ...(waypoint ?? [])], order.pickup);
-              const dropoffIndex = findIndex([...(waypoint ?? []), finalDropoff], order.dropoff);
+              const pickupIndex = [firstPickup, ...(waypoint ?? [])].findIndex(
+                (v) => v === order.pickup,
+              );
+              const dropoffIndex = [...(waypoint ?? []), finalDropoff].findIndex(
+                (v) => v === order.dropoff,
+              );
 
               i > 0 &&
                 (await screen.press({
@@ -244,18 +247,12 @@ const crawl: TaskParamsModel<unknown> = {
               await screen.key({ value: KEY_TYPE.ENTER });
 
               // press pickup
-              console.warn(
-                `###${pickupIndex} ${pickupIndex >= 0} ${[firstPickup, ...(waypoint ?? [])].join(',')} ${order.pickup}`,
-              );
               if (pickupIndex >= 0) {
-                console.warn('FIND???');
                 const pickupValue = await screen.getValue({
                   index: pickupIndex,
                   parent: { key: 'name', type: SELECTOR_TYPE.DATA, value: 'pickupQuoteIndex' },
                   target: { value: 'option' },
                 });
-                console.warn('FOUND!!!');
-                console.warn(`@@@${pickupValue}`);
                 pickupValue &&
                   (await screen.type({
                     index: i,

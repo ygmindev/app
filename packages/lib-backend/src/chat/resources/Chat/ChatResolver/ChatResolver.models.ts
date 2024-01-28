@@ -1,3 +1,3 @@
-import { type ChatServiceModel } from '@lib/shared/chat/resources/Chat/ChatService/ChatService.models';
+import { type ChatImplementationModel } from '@lib/shared/chat/resources/Chat/ChatImplementation/ChatImplementation.models';
 
-export type ChatResolverModel = ChatServiceModel;
+export type ChatResolverModel = ChatImplementationModel;

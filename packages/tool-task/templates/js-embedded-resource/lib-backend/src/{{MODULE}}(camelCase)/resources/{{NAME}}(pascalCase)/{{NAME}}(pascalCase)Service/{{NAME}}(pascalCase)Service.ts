@@ -1,12 +1,12 @@
-import { createEmbeddedResourceService } from '@lib/backend/resource/utils/createEmbeddedResourceService/createEmbeddedResourceService';
-import { {{NAME_ROOT}}(pascalCase)Service } from '@lib/backend/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase)Service/{{NAME_ROOT}}(pascalCase)Service';
+import { createEmbeddedResourceImplementation } from '@lib/backend/resource/utils/createEmbeddedResourceImplementation/createEmbeddedResourceImplementation';
+import { {{NAME_ROOT}}(pascalCase)Implementation } from '@lib/backend/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase)Implementation/{{NAME_ROOT}}(pascalCase)Implementation';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { {{NAME}}(constantCase)_RESOURCE_NAME } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).constants';
 import {
 type  {{NAME}}(pascalCase)FormModel,
   {{NAME}}(pascalCase)Model,
 } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
-import { type {{NAME}}(pascalCase)ServiceModel } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Service/{{NAME}}(pascalCase)Service.models';
+import { type {{NAME}}(pascalCase)ImplementationModel } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Implementation/{{NAME}}(pascalCase)Implementation.models';
 import { {{NAME}}(pascalCase) } from '@lib/backend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)';
 import {
 type  {{NAME_ROOT}}(pascalCase)FormModel,
@@ -14,15 +14,15 @@ type  {{NAME_ROOT}}(pascalCase)FormModel,
 } from '@lib/shared/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase).models';
 
 @withContainer()
-export class {{NAME}}(pascalCase)Service
-  extends createEmbeddedResourceService<
+export class {{NAME}}(pascalCase)Implementation
+  extends createEmbeddedResourceImplementation<
     {{NAME}}(pascalCase)Model,
     {{NAME}}(pascalCase)FormModel,
     {{NAME_ROOT}}(pascalCase)Model,
     {{NAME_ROOT}}(pascalCase)FormModel,
   >({
     Resource: {{NAME}}(pascalCase),
-    RootService: {{NAME_ROOT}}(pascalCase)Service,
+    RootImplementation: {{NAME_ROOT}}(pascalCase)Implementation,
     name: {{NAME}}(constantCase)_RESOURCE_NAME,
   })
-  implements {{NAME}}(pascalCase)ServiceModel {}
+  implements {{NAME}}(pascalCase)ImplementationModel {}

@@ -1,5 +1,5 @@
 import { {{NAME}}(pascalCase) } from '@lib/backend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)';
-import { {{NAME}}(pascalCase)Service } from '@lib/backend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Service/{{NAME}}(pascalCase)Service';
+import { {{NAME}}(pascalCase)Implementation } from '@lib/backend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Implementation/{{NAME}}(pascalCase)Implementation';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEntityResourceResolver } from '@lib/backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
@@ -15,7 +15,7 @@ import { type {{NAME}}(pascalCase)ResolverModel } from '@lib/backend/{{MODULE}}(
 export class {{NAME}}(pascalCase)Resolver
   extends createEntityResourceResolver<{{NAME}}(pascalCase)Model, {{NAME}}(pascalCase)FormModel>({
     Resource: () => {{NAME}}(pascalCase),
-    ResourceService: {{NAME}}(pascalCase)Service,
+    ResourceImplementation: {{NAME}}(pascalCase)Implementation,
     name: {{NAME}}(constantCase)_RESOURCE_NAME,
   })
   implements {{NAME}}(pascalCase)ResolverModel {}
