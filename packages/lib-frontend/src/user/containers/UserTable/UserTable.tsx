@@ -8,12 +8,12 @@ import { type UserFormModel, type UserModel } from '@lib/shared/user/resources/U
 
 export const UserTable: LFCModel<UserTablePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const service = useUserResource();
+  const implementation = useUserResource();
   return (
     <ResourceTable<UserModel, UserFormModel>
       {...wrapperProps}
       {...USER_RESOURCE_PARAMS}
-      service={service}
+      implementation={implementation}
     />
   );
 };

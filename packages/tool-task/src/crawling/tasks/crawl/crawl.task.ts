@@ -26,17 +26,21 @@ const SAMPLE_DELIVERY: CreateDeliveryInputModel = {
     {
       additionalNote: 'this is the first order',
       dropoff: '200 W 57th St, New York, NY 10019',
+      dropoffName: 'Stop 2 name',
       dropoffPhoneNumber: '2162222222',
       orderNumber: 111,
       pickup: '56 Leonard St, New York, NY 10013',
+      pickupName: 'Stop 1 name',
       pickupPhoneNumber: '2161111111',
     },
     {
       additionalNote: 'this is the second order',
       dropoff: 'Columbia University, 116th And Broadway, New York, NY 10027',
+      dropoffName: 'Stop 3 Name',
       dropoffPhoneNumber: '2163333333',
       orderNumber: 111,
       pickup: '200 W 57th St, New York, NY 10019',
+      pickupName: 'Stop 2 Name',
       pickupPhoneNumber: '2162222222',
     },
   ],
@@ -286,8 +290,6 @@ const crawl: TaskParamsModel<unknown> = {
           target: { value: 'button[type=submit]' },
         });
 
-        await sleep(100000000);
-
         // // type weight
         // await screen.type({
         //   isDelay: true,
@@ -300,6 +302,24 @@ const crawl: TaskParamsModel<unknown> = {
         //   isDelay: true,
         //   target: { value: 'button[type=submit]' },
         // });
+
+        //  type stops info
+        const stopsAll = [firstPickup, ...(waypoint ?? []), finalDropoff];
+        const stopsInfo =
+          orderInformation &&
+          stopsAll.map((stop) => {
+            const pickupInfo = orderInformation.find((order) => order.pickup === stop);
+            const dropoffInfo = orderInformation.find((order) => order.dropoff === stop);
+            const name = pickupInfo?.pickupName ?? dropoffInfo?.dropoffName;
+            const contact = pickupInfo?.pickupPhoneNumber ?? dropoffInfo?.dropoffPhoneNumber;
+            const note = pickupInfo?.additionalNote ?? dropoffInfo?.additionalNote;
+            return { contact, name, note, stop };
+          });
+
+        for (const stopInfo of stopsInfo) {
+        }
+
+        await sleep(100000000);
 
         await sleep(10000);
       });

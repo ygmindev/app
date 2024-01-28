@@ -9,14 +9,14 @@ export type AroomOrderModel = {
   additionalNote?: string;
   dropoff: string;
   // dropoffContactPostionNumber: number;
-  // dropoffName: string;
+  dropoffName: string;
   dropoffPhoneNumber: string;
   orderNumber: number;
   // orderPositionNumber: number;
   // orderReceiptAttach: unknown;
   pickup: string;
   // pickupContactPositionNumber: number;
-  // pickupName: string;
+  pickupName: string;
   pickupPhoneNumber: string;
   // submitDate: Date;
 };

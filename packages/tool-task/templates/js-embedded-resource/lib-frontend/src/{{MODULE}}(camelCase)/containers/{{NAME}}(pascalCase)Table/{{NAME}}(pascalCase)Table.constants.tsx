@@ -12,4 +12,4 @@ export const {{NAME}}(constantCase)_TABLE_PROPS = {
     { id: 'name', type: DATA_TYPE.STRING },
   ],
   name: {{NAME}}(constantCase)_RESOURCE_NAME,
-} satisfies Omit<ResourceTablePropsModel<{{NAME}}(pascalCase)Model, {{NAME}}(pascalCase)FormModel>, 'service'>;
+} satisfies Omit<ResourceTablePropsModel<{{NAME}}(pascalCase)Model, {{NAME}}(pascalCase)FormModel>, 'implementation'>;

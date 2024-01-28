@@ -12,8 +12,8 @@ export const testEmbeddedResourceImplementation = async ({
   getImplementation,
 }: TestEmbeddedResourceImplementationParamsModel): Promise<void> =>
   testResourceImplementation({
-    before: async (service) => {
-      if (service) {
+    before: async (implementation) => {
+      if (implementation) {
         const { result } = await Container.get(Database, DATABASE_TYPE.MONGO)
           .getRepository<TestableEntityResourceModel>({
             name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
@@ -22,9 +22,9 @@ export const testEmbeddedResourceImplementation = async ({
 
         if (result) {
           for (const form of TESTABLE_ENTITY_RESOURCE_SEED_DATA) {
-            await service.create({ form, root: result._id });
+            await implementation.create({ form, root: result._id });
           }
-          service.decorators = { ...service.decorators, root: result._id };
+          implementation.decorators = { ...implementation.decorators, root: result._id };
         }
       }
     },

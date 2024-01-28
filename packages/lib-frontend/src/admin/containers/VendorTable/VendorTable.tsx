@@ -11,12 +11,12 @@ import {
 
 export const VendorTable: LFCModel<VendorTablePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const service = useVendorResource();
+  const implementation = useVendorResource();
   return (
     <ResourceTable<VendorModel, VendorFormModel>
       {...wrapperProps}
       {...VENDOR_RESOURCE_PARAMS}
-      service={service}
+      implementation={implementation}
     />
   );
 };

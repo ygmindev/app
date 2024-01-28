@@ -93,7 +93,7 @@ export class _Database implements _DatabaseModel {
   getRepository = <TType, TForm = EntityResourceDataModel<TType>>({
     name,
   }: ResourceNameParamsModel): RepositoryModel<TType, TForm> => {
-    const service: RepositoryModel<TType, TForm> = {
+    const implementation: RepositoryModel<TType, TForm> = {
       clear: async () => {
         await this._getEntityManager().getRepository(name).nativeDelete({});
       },
@@ -159,8 +159,8 @@ export class _Database implements _DatabaseModel {
 
       getConnection: async ({ filter, pagination } = {}) => {
         const { result } = await getConnection({
-          count: await service.count(),
-          getMany: service.getMany,
+          count: await implementation.count(),
+          getMany: implementation.getMany,
           input: { filter },
           pagination,
         });
@@ -197,7 +197,7 @@ export class _Database implements _DatabaseModel {
       remove: async ({ filter } = {}) => {
         const em = this._getEntityManager();
         const filterF = getFilter<TType>(filter);
-        const entity = await service.get({ filter });
+        const entity = await implementation.get({ filter });
         await em.getRepository(name).nativeDelete(filterF);
         // TODO: don't return for remove?
         return entity as unknown as OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType>;
@@ -228,7 +228,7 @@ export class _Database implements _DatabaseModel {
         return { result } as OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
       },
     };
-    return service;
+    return implementation;
   };
 
   close = async (): Promise<void> => {

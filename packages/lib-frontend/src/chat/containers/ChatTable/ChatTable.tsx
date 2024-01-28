@@ -8,12 +8,12 @@ import { type ChatFormModel, type ChatModel } from '@lib/shared/chat/resources/C
 
 export const ChatTable: LFCModel<ChatTablePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const service = useChatResource();
+  const implementation = useChatResource();
   return (
     <ResourceTable<ChatModel, ChatFormModel>
       {...wrapperProps}
       {...CHAT_TABLE_PROPS}
-      service={service}
+      implementation={implementation}
     />
   );
 };

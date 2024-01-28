@@ -50,7 +50,7 @@ export const createResourceResolver = <
   class ResourceResolver
     implements PrototypeModel<CreateResourceResolverModel<TType, TForm, TRoot>>
   {
-    protected _service = Container.get(ResourceImplementation);
+    protected _implementation = Container.get(ResourceImplementation);
 
     @withCondition(
       () => createExists,
@@ -81,8 +81,8 @@ export const createResourceResolver = <
       @withContext()
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> {
-      if (this._service.create) {
-        return this._service.create(cleanObject(input), context);
+      if (this._implementation.create) {
+        return this._implementation.create(cleanObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.CREATE);
     }
@@ -116,8 +116,8 @@ export const createResourceResolver = <
       @withContext()
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>> {
-      if (this._service.createMany) {
-        return this._service.createMany(cleanObject(input), context);
+      if (this._implementation.createMany) {
+        return this._implementation.createMany(cleanObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.CREATE_MANY);
     }
@@ -151,8 +151,8 @@ export const createResourceResolver = <
       @withContext()
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>> {
-      if (this._service.get) {
-        return this._service.get(cleanObject(input), context);
+      if (this._implementation.get) {
+        return this._implementation.get(cleanObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.GET);
     }
@@ -186,8 +186,8 @@ export const createResourceResolver = <
       @withContext()
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> {
-      if (this._service.getMany) {
-        return this._service.getMany(cleanObject(input), context);
+      if (this._implementation.getMany) {
+        return this._implementation.getMany(cleanObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.GET_MANY);
     }
@@ -221,8 +221,8 @@ export const createResourceResolver = <
       @withContext()
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>> {
-      if (this._service.getConnection) {
-        return this._service.getConnection(cleanObject(input), context);
+      if (this._implementation.getConnection) {
+        return this._implementation.getConnection(cleanObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.GET_CONNECTION);
     }
@@ -256,8 +256,8 @@ export const createResourceResolver = <
       @withContext()
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>> {
-      if (this._service.update) {
-        return this._service.update(cleanObject(input), context);
+      if (this._implementation.update) {
+        return this._implementation.update(cleanObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.UPDATE);
     }
@@ -291,8 +291,8 @@ export const createResourceResolver = <
       @withContext()
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>> {
-      if (this._service.remove) {
-        return this._service.remove(cleanObject(input), context);
+      if (this._implementation.remove) {
+        return this._implementation.remove(cleanObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.REMOVE);
     }

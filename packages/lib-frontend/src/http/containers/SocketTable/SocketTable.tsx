@@ -4,20 +4,20 @@ import { type SocketTablePropsModel } from '@lib/frontend/http/containers/Socket
 import { useSocketResource } from '@lib/frontend/http/hooks/useSocketResource/useSocketResource';
 import { ResourceTable } from '@lib/frontend/resource/components/ResourceTable/ResourceTable';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { type ChatModel } from '@lib/shared/chat/resources/Chat/Chat.models';
 import {
   type SocketFormModel,
   type SocketModel,
 } from '@lib/shared/http/resources/Socket/Socket.models';
-import { type ChatModel } from '@lib/shared/chat/resources/Chat/Chat.models';
 
 export const SocketTable: LFCModel<SocketTablePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const service = useSocketResource();
+  const implementation = useSocketResource();
   return (
     <ResourceTable<SocketModel, SocketFormModel, ChatModel>
       {...wrapperProps}
       {...SOCKET_TABLE_PROPS}
-      service={service}
+      implementation={implementation}
     />
   );
 };

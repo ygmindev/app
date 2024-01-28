@@ -11,12 +11,12 @@ import {
 
 export const {{NAME}}(pascalCase)Table: LFCModel<{{NAME}}(pascalCase)TablePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const service = use{{NAME}}(pascalCase)Resource();
+  const implementation = use{{NAME}}(pascalCase)Resource();
   return (
     <ResourceTable<{{NAME}}(pascalCase)Model, {{NAME}}(pascalCase)FormModel>
       {...wrapperProps}
       {...{{NAME}}(constantCase)_TABLE_PROPS}
-      service={service}
+      implementation={implementation}
     />
   );
 };

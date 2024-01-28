@@ -8,12 +8,12 @@ import { type OtpFormModel, type OtpModel } from '@lib/shared/auth/resources/Otp
 
 export const OtpTable: LFCModel<OtpTablePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const service = useOtpResource();
+  const implementation = useOtpResource();
   return (
     <ResourceTable<OtpModel, OtpFormModel>
       {...wrapperProps}
       {...OTP_RESOURCE_PARAMS}
-      service={service}
+      implementation={implementation}
     />
   );
 };

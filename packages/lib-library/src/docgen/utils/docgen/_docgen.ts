@@ -1,3 +1,8 @@
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import {
+  type _DocgenModel,
+  type _DocgenParamsModel,
+} from '@lib/library/docgen/utils/docgen/_docgen.models';
 import { existsSync, readFileSync } from 'fs';
 import map from 'lodash/map';
 import sortBy from 'lodash/sortBy';
@@ -14,12 +19,6 @@ import {
   sys,
 } from 'typescript';
 
-import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import {
-  type _DocgenModel,
-  type _DocgenParamsModel,
-} from '@lib/library/docgen/utils/docgen/_docgen.models';
-
 const fileCache = new Map<string, { text: string; version: number }>();
 
 export const _docgen = (params: _DocgenParamsModel): _DocgenModel => {
@@ -29,7 +28,7 @@ export const _docgen = (params: _DocgenParamsModel): _DocgenModel => {
     shouldRemoveUndefinedFromOptional: true,
   });
 
-  const service: LanguageImplementation = createLanguageImplementation(
+  const implementation: LanguageImplementation = createLanguageImplementation(
     {
       fileExists: sys.fileExists,
       getCompilationSettings: () =>
@@ -65,7 +64,10 @@ export const _docgen = (params: _DocgenParamsModel): _DocgenModel => {
   );
 
   fileCache.set(params, { text: readFileSync(params, 'utf-8'), version: 0 });
-  const parsed = parser.parseWithProgramProvider(params, () => service.getProgram() as Program);
+  const parsed = parser.parseWithProgramProvider(
+    params,
+    () => implementation.getProgram() as Program,
+  );
   if (parsed && parsed[0]) {
     return {
       name: parsed[0].displayName,

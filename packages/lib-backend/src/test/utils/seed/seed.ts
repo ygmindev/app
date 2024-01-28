@@ -8,16 +8,18 @@ import { type EntityResourceImplementationModel } from '@lib/shared/resource/res
 export const seed = async (): Promise<SeedModel> => {
   for (const resource of SEED_DATA) {
     const { data, name } = resource;
-    const services = fromGlobs([`**/resources/**/${name}Implementation.ts`], {
+    const implementations = fromGlobs([`**/resources/**/${name}Implementation.ts`], {
       isAbsolute: true,
       root: fromPackages('lib-backend/src'),
     });
-    for (const service of services) {
-      await import(service);
+    for (const implementation of implementations) {
+      await import(implementation);
     }
-    const service = Container.get<EntityResourceImplementationModel<unknown, unknown>>(`${name}Implementation`);
+    const implementation = Container.get<EntityResourceImplementationModel<unknown, unknown>>(
+      `${name}Implementation`,
+    );
     for (const form of data()) {
-      service.create && (await service.create({ form }));
+      implementation.create && (await implementation.create({ form }));
     }
   }
 };

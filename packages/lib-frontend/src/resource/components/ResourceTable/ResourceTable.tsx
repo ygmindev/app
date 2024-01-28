@@ -1,6 +1,3 @@
-import range from 'lodash/range';
-import { type ReactElement, useState } from 'react';
-
 import { FloatingFooter } from '@lib/frontend/app/components/FloatingFooter/FloatingFooter';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -19,19 +16,21 @@ import { type PartialModel } from '@lib/shared/core/core.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
+import range from 'lodash/range';
+import { type ReactElement, useState } from 'react';
 
 export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRoot = undefined>({
   fields,
+  implementation,
   name,
   rootName,
-  service,
   ...props
 }: LFCPropsModel<ResourceTablePropsModel<TType, TForm, TRoot>>): ReactElement<
   LFCPropsModel<ResourceTablePropsModel<TType, TForm, TRoot>>
 > => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
-  const { create, getConnection } = service;
+  const { create, getConnection } = implementation;
   const [params, paramsSet] = useState<InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>>();
 
   const handleSubmit = async (

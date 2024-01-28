@@ -33,6 +33,9 @@ export class AroomOrder implements AroomOrderModel {
   dropoff!: string;
 
   @withField({ type: DATA_TYPE.STRING })
+  dropoffName!: string;
+
+  @withField({ type: DATA_TYPE.STRING })
   dropoffPhoneNumber!: string;
 
   @withField({ type: DATA_TYPE.NUMBER })
@@ -44,6 +47,9 @@ export class AroomOrder implements AroomOrderModel {
   @withField({ type: DATA_TYPE.STRING })
   pickup!: string;
   // pickupContactPositionNumber: number;
+
+  @withField({ type: DATA_TYPE.STRING })
+  pickupName!: string;
 
   @withField({ type: DATA_TYPE.STRING })
   pickupPhoneNumber!: string;

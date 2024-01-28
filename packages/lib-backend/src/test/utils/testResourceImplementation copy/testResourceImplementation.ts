@@ -1,7 +1,3 @@
-import { default as _filter } from 'lodash/filter';
-import find from 'lodash/find';
-import reduce from 'lodash/reduce';
-
 import { cleanup } from '@lib/backend/setup/utils/cleanup/cleanup';
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { seed } from '@lib/backend/test/utils/seed/seed';
@@ -18,6 +14,9 @@ import {
   type TestableEntityResourceFormModel,
   type TestableEntityResourceModel,
 } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';
+import { default as _filter } from 'lodash/filter';
+import find from 'lodash/find';
+import reduce from 'lodash/reduce';
 
 const _getFilter = (
   filters: Array<FilterModel<TestableEntityResourceModel>> = [],
@@ -44,14 +43,14 @@ export const testResourceImplementation = async ({
   before,
   getImplementation,
 }: TestResourceImplementationParamsModel): Promise<void> => {
-  let service: TestableResourceImplementationModel;
+  let implementation: TestableResourceImplementationModel;
   const PROJECT_FIELDS = ['_id', 'stringFieldOptional'] satisfies Array<
     keyof TestableEntityResourceModel
   >;
 
   beforeAll(async () => {
     await initialize();
-    service = getImplementation();
+    implementation = getImplementation();
   });
 
   afterAll(async () => {
@@ -60,7 +59,7 @@ export const testResourceImplementation = async ({
 
   beforeEach(async () => {
     await seed();
-    before && (await before(service));
+    before && (await before(implementation));
     jest.clearAllMocks();
   });
 
@@ -72,7 +71,7 @@ export const testResourceImplementation = async ({
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
     >;
-    const { result } = await service.create(input);
+    const { result } = await implementation.create(input);
     expect(result?._id).toBeDefined();
     expect(result?.created && new Date().getTime() - result?.created.getTime()).toBeLessThan(1000);
     expect(result?.stringField).toStrictEqual(input.form.stringField);
@@ -80,7 +79,7 @@ export const testResourceImplementation = async ({
   });
 
   test('works with get by id', async () => {
-    const { result: data = [] } = await service.getMany({ filter: [] });
+    const { result: data = [] } = await implementation.getMany({ filter: [] });
     const input = {
       filter: [{ field: '_id', value: data[0]._id }],
     } satisfies InputModel<
@@ -88,13 +87,13 @@ export const testResourceImplementation = async ({
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
     >;
-    const { result } = await service.get(input);
+    const { result } = await implementation.get(input);
     const expected = _find(data, input.filter);
     expect(result?._id).toStrictEqual(expected?._id);
   });
 
   test('works with get by partial', async () => {
-    const { result: data } = await service.getMany({ filter: [] });
+    const { result: data } = await implementation.getMany({ filter: [] });
     const input = {
       filter: [{ field: 'stringField', value: 'stringField1' }],
     } satisfies InputModel<
@@ -102,13 +101,13 @@ export const testResourceImplementation = async ({
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
     >;
-    const { result } = await service.get(input);
+    const { result } = await implementation.get(input);
     const expected = _find(data, input.filter);
     expect(result?._id).toStrictEqual(expected?._id);
   });
 
   // test('works with get by and condition', async () => {
-  //   const { result: data } = await service.getMany({ filter: [] });
+  //   const { result: data } = await implementation.getMany({ filter: [] });
   //   const input: InputModel<
   //     RESOURCE_METHOD_TYPE.GET,
   //     TestableEntityResourceModel,
@@ -121,7 +120,7 @@ export const testResourceImplementation = async ({
   //       ],
   //     },
   //   };
-  //   const { result } = await service.get(input);
+  //   const { result } = await implementation.get(input);
   //   const expected = find(
   //     data,
   //     merge(
@@ -134,7 +133,7 @@ export const testResourceImplementation = async ({
   // });
 
   // test('works with get by or condition', async () => {
-  //   const { result: data } = await service.getMany({ filter: [] });
+  //   const { result: data } = await implementation.getMany({ filter: [] });
   //   const input: InputModel<
   //     RESOURCE_METHOD_TYPE.GET,
   //     TestableEntityResourceModel,
@@ -144,7 +143,7 @@ export const testResourceImplementation = async ({
   //       $or: [{ stringField: 'stringField1' }, { stringFieldOptional: 'does not exist' }],
   //     },
   //   };
-  //   const { result } = await service.get(input);
+  //   const { result } = await implementation.get(input);
   //   const expected = find(data, (row) =>
   //     some((input.filter as FilterCombineModel<TestableEntityResourceModel>).$or, (condition) => {
   //       const rowF = pick(row, Object.keys(condition) as Array<keyof typeof row>);
@@ -156,7 +155,7 @@ export const testResourceImplementation = async ({
   // });
 
   test('works with get with project', async () => {
-    const { result: data = [] } = await service.getMany({ filter: [] });
+    const { result: data = [] } = await implementation.getMany({ filter: [] });
     const input = {
       filter: [{ field: '_id', value: data[0]._id }],
       options: {
@@ -167,14 +166,14 @@ export const testResourceImplementation = async ({
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
     >;
-    const { result } = await service.get(input);
+    const { result } = await implementation.get(input);
     const expected = _find(data, input.filter);
     expect(result?._id).toStrictEqual(expected?._id);
     expect(result && Object.keys(result)).toStrictEqual(PROJECT_FIELDS);
   });
 
   test('works with getMany by partial', async () => {
-    const { result: data } = await service.getMany({ filter: [] });
+    const { result: data } = await implementation.getMany({ filter: [] });
     const input = {
       filter: [{ field: 'stringField', value: 'stringField1' }],
     } satisfies InputModel<
@@ -182,13 +181,13 @@ export const testResourceImplementation = async ({
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
     >;
-    const { result } = await service.getMany(input);
+    const { result } = await implementation.getMany(input);
     const expected = _findAll(data, input.filter);
     expect(result).toStrictEqual(expected);
   });
 
   // test('works with getMany by and condition', async () => {
-  //   const { result: data } = await service.getMany({ filter: [] });
+  //   const { result: data } = await implementation.getMany({ filter: [] });
   //   const input: InputModel<
   //     RESOURCE_METHOD_TYPE.GET_MANY,
   //     TestableEntityResourceModel,
@@ -201,7 +200,7 @@ export const testResourceImplementation = async ({
   //       ],
   //     },
   //   };
-  //   const { result } = await service.getMany(input);
+  //   const { result } = await implementation.getMany(input);
   //   const expected = filter(
   //     data,
   //     merge(
@@ -214,7 +213,7 @@ export const testResourceImplementation = async ({
   // });
 
   // test('works with getMany by or condition', async () => {
-  //   const { result: data } = await service.getMany({ filter: [] });
+  //   const { result: data } = await implementation.getMany({ filter: [] });
   //   const input: InputModel<
   //     RESOURCE_METHOD_TYPE.GET_MANY,
   //     TestableEntityResourceModel,
@@ -224,7 +223,7 @@ export const testResourceImplementation = async ({
   //       $or: [{ stringField: 'stringField1' }, { stringFieldOptional: 'does not exist' }],
   //     },
   //   };
-  //   const { result } = await service.getMany(input);
+  //   const { result } = await implementation.getMany(input);
   //   const expected = filter(data, (row) =>
   //     some((input.filter as FilterCombineModel<TestableEntityResourceModel>).$or, (condition) => {
   //       const rowF = pick(row, Object.keys(condition) as Array<keyof typeof row>);
@@ -239,7 +238,7 @@ export const testResourceImplementation = async ({
     const SKIP = 1;
     const TAKE = 1;
 
-    const { result: data } = await service.getMany({ filter: [] });
+    const { result: data } = await implementation.getMany({ filter: [] });
     const input = {
       filter: [{ field: 'stringField', value: 'stringField1' }],
       options: { skip: SKIP, take: TAKE },
@@ -248,14 +247,14 @@ export const testResourceImplementation = async ({
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
     >;
-    const { result } = await service.getMany(input);
+    const { result } = await implementation.getMany(input);
     let expected = _findAll(data, input.filter);
     expected = expected.slice(SKIP, SKIP + TAKE);
     expect(result).toStrictEqual(expected);
   });
 
   test('works with getMany with project', async () => {
-    const { result: data = [] } = await service.getMany({ filter: [] });
+    const { result: data = [] } = await implementation.getMany({ filter: [] });
     const input = {
       filter: [{ field: 'stringField', value: 'stringField1' }],
       options: {
@@ -266,7 +265,7 @@ export const testResourceImplementation = async ({
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
     >;
-    const { result } = await service.getMany(input);
+    const { result } = await implementation.getMany(input);
     const resultF = result && result[0];
     const expected = _find(data, input.filter);
     expect(resultF?._id).toStrictEqual(expected?._id);
@@ -274,8 +273,8 @@ export const testResourceImplementation = async ({
   });
 
   test('works with getConnection all result', async () => {
-    const { result: data = [] } = await service.getMany({ filter: [] });
-    const { result } = await service.getConnection({ filter: [], pagination: {} });
+    const { result: data = [] } = await implementation.getMany({ filter: [] });
+    const { result } = await implementation.getConnection({ filter: [], pagination: {} });
 
     expect(result?.edges.length).toStrictEqual(data.length);
     expect(result?.edges[0].node._id).toStrictEqual(data[0]._id);
@@ -287,7 +286,7 @@ export const testResourceImplementation = async ({
   });
 
   test('works with getConnection filtered result', async () => {
-    const { result: data } = await service.getMany({ filter: [] });
+    const { result: data } = await implementation.getMany({ filter: [] });
     const input = {
       filter: [{ field: 'stringField', value: 'stringField1' }],
       pagination: {},
@@ -296,7 +295,7 @@ export const testResourceImplementation = async ({
       TestableEntityResourceModel,
       undefined
     >;
-    const { result } = await service.getConnection(input);
+    const { result } = await implementation.getConnection(input);
     const expected = _findAll(data, input.filter);
     expect(result?.edges.length).toStrictEqual(expected.length);
     expect(result?.edges[0].node._id).toStrictEqual(expected[0]._id);
@@ -312,14 +311,14 @@ export const testResourceImplementation = async ({
   });
 
   test('works with getConnection paged result first', async () => {
-    const { result: data = [] } = await service.getMany({ filter: [] });
+    const { result: data = [] } = await implementation.getMany({ filter: [] });
     const size = 2;
     const input = { filter: [], pagination: { first: size } } satisfies InputModel<
       RESOURCE_METHOD_TYPE.GET_CONNECTION,
       TestableEntityResourceModel,
       undefined
     >;
-    const { result } = await service.getConnection(input);
+    const { result } = await implementation.getConnection(input);
 
     expect(result?.edges.length).toStrictEqual(size);
     expect(result?.edges[0].node._id).toStrictEqual(data[0]._id);
@@ -333,9 +332,12 @@ export const testResourceImplementation = async ({
   });
 
   test('works with getConnection cursored paged result first', async () => {
-    const { result: data = [] } = await service.getMany({ filter: [] });
+    const { result: data = [] } = await implementation.getMany({ filter: [] });
     const size = 2;
-    const { result: allResult } = await service.getConnection({ filter: [], pagination: {} });
+    const { result: allResult } = await implementation.getConnection({
+      filter: [],
+      pagination: {},
+    });
     const input = {
       filter: [],
       pagination: { after: allResult?.edges[size - 1].cursor, first: size },
@@ -344,7 +346,7 @@ export const testResourceImplementation = async ({
       TestableEntityResourceModel,
       undefined
     >;
-    const { result } = await service.getConnection(input);
+    const { result } = await implementation.getConnection(input);
 
     expect(result?.edges.length).toStrictEqual(size);
     expect(result?.edges[0].node._id).toStrictEqual(data[size]._id);
@@ -358,14 +360,14 @@ export const testResourceImplementation = async ({
   });
 
   test('works with getConnection paged result last', async () => {
-    const { result: data = [] } = await service.getMany({ filter: [] });
+    const { result: data = [] } = await implementation.getMany({ filter: [] });
     const size = 2;
     const input = { filter: [], pagination: { last: size } } satisfies InputModel<
       RESOURCE_METHOD_TYPE.GET_CONNECTION,
       TestableEntityResourceModel,
       undefined
     >;
-    const { result } = await service.getConnection(input);
+    const { result } = await implementation.getConnection(input);
 
     expect(result?.edges.length).toStrictEqual(size);
     expect(result?.edges[0].node._id).toStrictEqual(data[data.length - 2]._id);
@@ -379,9 +381,12 @@ export const testResourceImplementation = async ({
   });
 
   test('works with getConnection cursored paged result last', async () => {
-    const { result: data = [] } = await service.getMany({ filter: [] });
+    const { result: data = [] } = await implementation.getMany({ filter: [] });
     const size = 2;
-    const { result: allResult } = await service.getConnection({ filter: [], pagination: {} });
+    const { result: allResult } = await implementation.getConnection({
+      filter: [],
+      pagination: {},
+    });
     const input = {
       filter: [],
       pagination: { before: allResult?.edges[size].cursor, last: size },
@@ -390,7 +395,7 @@ export const testResourceImplementation = async ({
       TestableEntityResourceModel,
       undefined
     >;
-    const { result } = await service.getConnection(input);
+    const { result } = await implementation.getConnection(input);
 
     expect(result?.edges.length).toStrictEqual(size);
     expect(result?.edges[0].node._id).toStrictEqual(data[size - 2]._id);
@@ -404,7 +409,7 @@ export const testResourceImplementation = async ({
   });
 
   test('works with update by partial', async () => {
-    const { result: data = [] } = await service.getMany({ filter: [] });
+    const { result: data = [] } = await implementation.getMany({ filter: [] });
     const input = {
       filter: [{ field: '_id', value: data[0]._id }],
       update: { stringField: 'stringField2' },
@@ -413,13 +418,13 @@ export const testResourceImplementation = async ({
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
     >;
-    const { result } = await service.update(input);
+    const { result } = await implementation.update(input);
 
     expect(result?.stringField).toStrictEqual('stringField2');
   });
 
   test('works with update by push', async () => {
-    const { result: data = [] } = await service.getMany({ filter: [] });
+    const { result: data = [] } = await implementation.getMany({ filter: [] });
     const input = {
       filter: [{ field: '_id', value: data[0]._id }],
       update: { $push: { stringArrayField: 'stringArrayFieldElement1' } },
@@ -428,7 +433,7 @@ export const testResourceImplementation = async ({
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
     >;
-    const { result } = await service.update(input);
+    const { result } = await implementation.update(input);
 
     expect(result?.stringArrayField).toStrictEqual([
       ...(data[0].stringArrayField ?? []),
@@ -437,7 +442,7 @@ export const testResourceImplementation = async ({
   });
 
   test('works with update by pull', async () => {
-    const { result: data = [] } = await service.getMany({ filter: [] });
+    const { result: data = [] } = await implementation.getMany({ filter: [] });
     const input = {
       filter: [{ field: '_id', value: data[0]._id }],
       update: { $pull: { stringArrayField: 'stringArrayFieldElement1' } },
@@ -446,13 +451,13 @@ export const testResourceImplementation = async ({
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
     >;
-    const { result } = await service.update(input);
+    const { result } = await implementation.update(input);
     const expected = _filter(data[0].stringArrayField, input.update.$pull);
     expect(result?.stringArrayField ?? []).toStrictEqual(expected);
   });
 
   test('works with update with project', async () => {
-    const { result: data = [] } = await service.getMany({ filter: [] });
+    const { result: data = [] } = await implementation.getMany({ filter: [] });
     const input = {
       filter: [{ field: '_id', value: data[0]._id }],
       options: {
@@ -464,7 +469,7 @@ export const testResourceImplementation = async ({
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
     >;
-    const { result } = await service.update(input);
+    const { result } = await implementation.update(input);
     expect(result && Object.keys(result)).toStrictEqual(PROJECT_FIELDS);
   });
 
@@ -476,8 +481,8 @@ export const testResourceImplementation = async ({
       TestableEntityResourceModel,
       TestableEntityResourceFormModel
     >;
-    await service.remove(input);
-    const { result } = await service.get(input);
+    await implementation.remove(input);
+    const { result } = await implementation.get(input);
     expect(result).toBeFalsy();
   });
 };
