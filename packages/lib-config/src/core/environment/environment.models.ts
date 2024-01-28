@@ -11,7 +11,6 @@ export type EnvironmentConfigModel = {
   APP_FIREBASE_PROJECT_ID: string;
   APP_FIREBASE_SENDER_ID: string;
   APP_FIREBASE_STORAGE_BUCKET: string;
-  APP_GEOCODING_API_KEY: string;
   APP_HOST: string;
   APP_IS_DEBUG: BooleanStringModel;
   APP_IS_STATIC_SERVER: BooleanStringModel;
