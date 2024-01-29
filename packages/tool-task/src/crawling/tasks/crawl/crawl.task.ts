@@ -1,6 +1,7 @@
 import { SELECTOR_TYPE } from '@lib/config/crawling/screen/screen.constants';
 import { type SelectorPathModel } from '@lib/config/crawling/screen/screen.models';
 import { type CreateDeliveryInputModel } from '@lib/shared/aroom/resources/Delivery/DeliveryImplementation/DeliveryImplementation.models';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { withScreen } from '@lib/shared/crawling/utils/withScreen/withScreen';
@@ -38,7 +39,7 @@ const SAMPLE_DELIVERY: CreateDeliveryInputModel = {
       dropoff: 'Columbia University, 116th And Broadway, New York, NY 10027',
       dropoffName: 'Stop 3 Name',
       dropoffPhoneNumber: '2163333333',
-      orderNumber: 111,
+      orderNumber: 222,
       pickup: '200 W 57th St, New York, NY 10019',
       pickupName: 'Stop 2 Name',
       pickupPhoneNumber: '2162222222',
@@ -209,17 +210,10 @@ const crawl: TaskParamsModel<unknown> = {
         });
 
         // add items
-        const parent: SelectorPathModel = { value: '#submitPayload' };
+        let parent: SelectorPathModel = { value: '#submitPayload' };
         orderInformation &&
           (await mapSequence(
             orderInformation.map((order, i) => async () => {
-              // additionalNote: 'this is the first order',
-              // dropoff: '200 W 57th St, New York, NY 10019',
-              // dropoffPhoneNumber: '2162222222',
-              // orderNumber: 111,
-              // pickup: '56 Leonard St, New York, NY 10013',
-              // pickupPhoneNumber: '2161111111',
-
               const pickupIndex = [firstPickup, ...(waypoint ?? [])].findIndex(
                 (v) => v === order.pickup,
               );
@@ -257,6 +251,7 @@ const crawl: TaskParamsModel<unknown> = {
                   parent: { key: 'name', type: SELECTOR_TYPE.DATA, value: 'pickupQuoteIndex' },
                   target: { value: 'option' },
                 });
+                console.warn(`@@@ ORDER: ${i}: PICKUP ${pickupValue}`);
                 pickupValue &&
                   (await screen.type({
                     index: i,
@@ -273,6 +268,7 @@ const crawl: TaskParamsModel<unknown> = {
                   parent: { key: 'name', type: SELECTOR_TYPE.DATA, value: 'dropoffQuoteIndex' },
                   target: { value: 'option' },
                 });
+                console.warn(`@@@ ORDER: ${i}: DROPOFF ${dropoffValue}`);
                 dropoffValue &&
                   (await screen.type({
                     index: i,
@@ -284,12 +280,6 @@ const crawl: TaskParamsModel<unknown> = {
             }),
           ));
 
-        // press next
-        await screen.press({
-          isDelay: true,
-          target: { value: 'button[type=submit]' },
-        });
-
         // // type weight
         // await screen.type({
         //   isDelay: true,
@@ -297,11 +287,11 @@ const crawl: TaskParamsModel<unknown> = {
         //   value: CREDENTIALS.totalWeightLbs,
         // });
 
-        // // press next
-        // await screen.press({
-        //   isDelay: true,
-        //   target: { value: 'button[type=submit]' },
-        // });
+        // press next
+        await screen.press({
+          isDelay: true,
+          target: { value: 'button[type=submit]' },
+        });
 
         //  type stops info
         const stopsAll = [firstPickup, ...(waypoint ?? []), finalDropoff];
@@ -312,12 +302,44 @@ const crawl: TaskParamsModel<unknown> = {
             const dropoffInfo = orderInformation.find((order) => order.dropoff === stop);
             const name = pickupInfo?.pickupName ?? dropoffInfo?.dropoffName;
             const contact = pickupInfo?.pickupPhoneNumber ?? dropoffInfo?.dropoffPhoneNumber;
-            const note = pickupInfo?.additionalNote ?? dropoffInfo?.additionalNote;
+            const note = filterNil([pickupInfo?.additionalNote, dropoffInfo?.additionalNote]).join(
+              '. ',
+            );
             return { contact, name, note, stop };
           });
 
+        let stepIndex = 1;
+        parent = { value: '#submitInfo' };
         for (const stopInfo of stopsInfo) {
+          stopInfo.name &&
+            (await screen.type({
+              index: stepIndex * 1 - 1,
+              parent,
+              target: { value: 'input' },
+              value: stopInfo.name,
+            }));
+          stopInfo.contact &&
+            (await screen.type({
+              index: stepIndex * 2 - 1,
+              parent,
+              target: { value: 'input' },
+              value: stopInfo.contact,
+            }));
+          stopInfo.note &&
+            (await screen.type({
+              index: stepIndex,
+              parent,
+              target: { value: 'textarea' },
+              value: stopInfo.note,
+            }));
+          stepIndex++;
         }
+
+        // press next
+        await screen.press({
+          isDelay: true,
+          target: { value: 'button[type=submit]' },
+        });
 
         await sleep(100000000);
 

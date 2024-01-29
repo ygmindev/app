@@ -5,25 +5,6 @@
       "name": "serverless"
     },
     "provider": {
-      "apiGateway": {
-        "resourcePolicy": [
-          {
-            "Action": [
-              "execute-api:Invoke"
-            ],
-            "Condition": {
-              "IpAddress": {
-                "aws:SourceIp": [
-                  "72.227.223.4"
-                ]
-              }
-            },
-            "Effect": "Allow",
-            "Principal": "*",
-            "Resource": "execute-api:/*/*/*"
-          }
-        ]
-      },
       "httpApi": {
         "cors": {
           "allowedHeaders": [
@@ -130,12 +111,6 @@
               "LogGroupName": "/aws/lambda/serverless-production-ping"
             }
           },
-          "WebsocketLogGroup": {
-            "Type": "AWS::Logs::LogGroup",
-            "Properties": {
-              "LogGroupName": "/aws/lambda/serverless-production-websocket"
-            }
-          },
           "IamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -193,17 +168,6 @@
                             "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-production*:*:*"
                           }
                         ]
-                      },
-                      {
-                        "Effect": "Allow",
-                        "Action": [
-                          "execute-api:ManageConnections"
-                        ],
-                        "Resource": [
-                          {
-                            "Fn::Sub": "arn:${AWS::Partition}:execute-api:*:*:*/@connections/*"
-                          }
-                        ]
                       }
                     ]
                   }
@@ -225,14 +189,14 @@
               }
             }
           },
-          "CustomLambdaLayera1b548088c4ca0992864a58fefacab102dbf33ed": {
+          "CustomLambdaLayer580d14c97bf9f4c4087c0908037efbc761202afe": {
             "Type": "AWS::Lambda::LayerVersion",
             "Properties": {
               "Content": {
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless/production/1705341995192-2024-01-15T18:06:35.192Z/custom.zip"
+                "S3Key": "serverless/serverless/production/1706498098361-2024-01-29T03:14:58.361Z/custom.zip"
               },
               "LayerName": "custom",
               "CompatibleRuntimes": [
@@ -248,7 +212,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless/production/1705349577075-2024-01-15T20:12:57.075Z/graphql.zip"
+                "S3Key": "serverless/serverless/production/1706498098361-2024-01-29T03:14:58.361Z/graphql.zip"
               },
               "Handler": "src/functions/graphql/graphql.main",
               "Runtime": "nodejs18.x",
@@ -284,7 +248,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless/production/1705349577075-2024-01-15T20:12:57.075Z/ping.zip"
+                "S3Key": "serverless/serverless/production/1706498098361-2024-01-29T03:14:58.361Z/ping.zip"
               },
               "Handler": "src/functions/ping/ping.main",
               "Runtime": "nodejs18.x",
@@ -312,190 +276,6 @@
             "DependsOn": [
               "PingLogGroup"
             ]
-          },
-          "WebsocketLambdaFunction": {
-            "Type": "AWS::Lambda::Function",
-            "Properties": {
-              "Code": {
-                "S3Bucket": {
-                  "Ref": "ServerlessDeploymentBucket"
-                },
-                "S3Key": "serverless/serverless/production/1705349577075-2024-01-15T20:12:57.075Z/websocket.zip"
-              },
-              "Handler": "src/functions/websocket/websocket.main",
-              "Runtime": "nodejs18.x",
-              "FunctionName": "serverless-production-websocket",
-              "MemorySize": 128,
-              "Timeout": 15,
-              "Environment": {
-                "Variables": {
-                  "ENV_NAME": "SERVER_LAMBDA",
-                  "ENV_PLATFORM": "node"
-                }
-              },
-              "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
-              },
-              "Layers": [
-                {
-                  "Ref": "CustomLambdaLayer"
-                }
-              ]
-            },
-            "DependsOn": [
-              "WebsocketLogGroup"
-            ]
-          },
-          "WebsocketsApi": {
-            "Type": "AWS::ApiGatewayV2::Api",
-            "Properties": {
-              "Name": "production-serverless-websockets",
-              "RouteSelectionExpression": "$request.body.action",
-              "Description": "Serverless Websockets",
-              "ProtocolType": "WEBSOCKET"
-            }
-          },
-          "WebsocketWebsocketsIntegration": {
-            "Type": "AWS::ApiGatewayV2::Integration",
-            "Properties": {
-              "ApiId": {
-                "Ref": "WebsocketsApi"
-              },
-              "IntegrationType": "AWS_PROXY",
-              "IntegrationUri": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition"
-                    },
-                    ":apigateway:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":lambda:path/2015-03-31/functions/",
-                    {
-                      "Fn::GetAtt": [
-                        "WebsocketLambdaFunction",
-                        "Arn"
-                      ]
-                    },
-                    "/invocations"
-                  ]
-                ]
-              }
-            }
-          },
-          "WebsocketLambdaPermissionWebsockets": {
-            "Type": "AWS::Lambda::Permission",
-            "DependsOn": [
-              "WebsocketsApi",
-              "WebsocketLambdaFunction"
-            ],
-            "Properties": {
-              "FunctionName": {
-                "Fn::GetAtt": [
-                  "WebsocketLambdaFunction",
-                  "Arn"
-                ]
-              },
-              "Action": "lambda:InvokeFunction",
-              "Principal": "apigateway.amazonaws.com"
-            }
-          },
-          "SconnectWebsocketsRoute": {
-            "Type": "AWS::ApiGatewayV2::Route",
-            "Properties": {
-              "ApiId": {
-                "Ref": "WebsocketsApi"
-              },
-              "RouteKey": "$connect",
-              "AuthorizationType": "NONE",
-              "Target": {
-                "Fn::Join": [
-                  "/",
-                  [
-                    "integrations",
-                    {
-                      "Ref": "WebsocketWebsocketsIntegration"
-                    }
-                  ]
-                ]
-              }
-            }
-          },
-          "SdisconnectWebsocketsRoute": {
-            "Type": "AWS::ApiGatewayV2::Route",
-            "Properties": {
-              "ApiId": {
-                "Ref": "WebsocketsApi"
-              },
-              "RouteKey": "$disconnect",
-              "AuthorizationType": "NONE",
-              "Target": {
-                "Fn::Join": [
-                  "/",
-                  [
-                    "integrations",
-                    {
-                      "Ref": "WebsocketWebsocketsIntegration"
-                    }
-                  ]
-                ]
-              }
-            }
-          },
-          "SdefaultWebsocketsRoute": {
-            "Type": "AWS::ApiGatewayV2::Route",
-            "Properties": {
-              "ApiId": {
-                "Ref": "WebsocketsApi"
-              },
-              "RouteKey": "$default",
-              "AuthorizationType": "NONE",
-              "Target": {
-                "Fn::Join": [
-                  "/",
-                  [
-                    "integrations",
-                    {
-                      "Ref": "WebsocketWebsocketsIntegration"
-                    }
-                  ]
-                ]
-              }
-            }
-          },
-          "WebsocketsDeploymentStage": {
-            "Type": "AWS::ApiGatewayV2::Stage",
-            "Properties": {
-              "ApiId": {
-                "Ref": "WebsocketsApi"
-              },
-              "StageName": "production",
-              "Description": "Serverless Websockets",
-              "DeploymentId": {
-                "Ref": "WebsocketsDeploymentXxxs5qMHqIFYn1HXwDm17C68KwuONmiE7Hjf5O2Js"
-              }
-            }
-          },
-          "WebsocketsDeploymentXxxs5qMHqIFYn1HXwDm17C68KwuONmiE7Hjf5O2Js": {
-            "Type": "AWS::ApiGatewayV2::Deployment",
-            "DependsOn": [
-              "SconnectWebsocketsRoute",
-              "SdisconnectWebsocketsRoute",
-              "SdefaultWebsocketsRoute"
-            ],
-            "Properties": {
-              "ApiId": {
-                "Ref": "WebsocketsApi"
-              },
-              "Description": "Serverless Websockets"
-            }
           },
           "HttpApi": {
             "Type": "AWS::ApiGatewayV2::Api",
@@ -687,7 +467,7 @@
           "CustomLambdaLayerQualifiedArn": {
             "Description": "Current Lambda layer version",
             "Value": {
-              "Ref": "CustomLambdaLayera1b548088c4ca0992864a58fefacab102dbf33ed"
+              "Ref": "CustomLambdaLayer580d14c97bf9f4c4087c0908037efbc761202afe"
             },
             "Export": {
               "Name": "sls-serverless-production-CustomLambdaLayerQualifiedArn"
@@ -695,42 +475,16 @@
           },
           "CustomLambdaLayerHash": {
             "Description": "Current Lambda layer hash",
-            "Value": "a1b548088c4ca0992864a58fefacab102dbf33ed",
+            "Value": "580d14c97bf9f4c4087c0908037efbc761202afe",
             "Export": {
               "Name": "sls-serverless-production-CustomLambdaLayerHash"
             }
           },
           "CustomLambdaLayerS3Key": {
             "Description": "Current Lambda layer S3Key",
-            "Value": "serverless/serverless/production/1705341995192-2024-01-15T18:06:35.192Z/custom.zip",
+            "Value": "serverless/serverless/production/1706498098361-2024-01-29T03:14:58.361Z/custom.zip",
             "Export": {
               "Name": "sls-serverless-production-CustomLambdaLayerS3Key"
-            }
-          },
-          "ServiceEndpointWebsocket": {
-            "Description": "URL of the service endpoint",
-            "Value": {
-              "Fn::Join": [
-                "",
-                [
-                  "wss://",
-                  {
-                    "Ref": "WebsocketsApi"
-                  },
-                  ".execute-api.",
-                  {
-                    "Ref": "AWS::Region"
-                  },
-                  ".",
-                  {
-                    "Ref": "AWS::URLSuffix"
-                  },
-                  "/production"
-                ]
-              ]
-            },
-            "Export": {
-              "Name": "sls-serverless-production-ServiceEndpointWebsocket"
             }
           },
           "HttpApiId": {
@@ -861,7 +615,6 @@
         "allowCache": false,
         "ignoreJWTSignature": true,
         "noPrependStageInUrl": true,
-        "httpPort": null,
         "lambdaPort": null
       },
       "esbuild": {
@@ -884,16 +637,18 @@
           "process.env.SERVER_KEY_LENGTH": "\"32\"",
           "process.env.SERVER_REGION": "\"us-east-1\"",
           "process.env.SERVER_PLAID_PRODUCTS": "\"auth\"",
-          "process.env.SERVER_PLAID_REDIRECT_URI": "\"http://127.0.0.1:3000/oauth\"",
+          "process.env.SERVER_PLAID_REDIRECT_URI": "\"https://127.0.0.1:3000/oauth\"",
           "process.env.SERVER_SALT_LENGTH": "\"16\"",
           "process.env.SERVER_DB_MONGO_NAME": "\"production\"",
           "process.env.SERVER_DB_MONGO_PASSWORD": "\"AOJQET44fUQMbLXE\"",
           "process.env.ENV_PLATFORM": "\"node\"",
+          "process.env.SERVER_SSL_PUBLIC_KEY": "\"localhost.pem\"",
+          "process.env.SERVER_SSL_PRIVATE_KEY": "\"localhost-key.pem\"",
           "process.env.SERVER_PLAID_ENV": "\"sandbox\"",
           "process.env.SERVER_APP_GOOGLE_API_KEY": "\"AIzaSyBq_IqxNvsOEWJ3agu-bN5E2DxfY1w_iZ4\"",
           "process.env.ENV_NAME": "\"SERVER_LAMBDA\"",
           "process.env.SERVER_PLAID_COUNTRY_CODES": "\"US,CA\"",
-          "process.env.SERVER_FIREBASE_ADMIN_EMAIL": "\"firebase-adminsdk-ofw76@app/46c38.iam.gserviceaccount.com\"",
+          "process.env.SERVER_FIREBASE_ADMIN_EMAIL": "\"firebase-adminsdk-ofw76@app-46c38.iam.gserviceaccount.com\"",
           "process.env.SERVER_PLAID_VERSION": "\"2020-09-14\"",
           "process.env.NODE_ENV": "\"production\"",
           "process.env.SERVER_APP_OTP_LENGTH": "\"6\"",
@@ -915,13 +670,13 @@
           "/Users/yoongeemin/Developer/Projects/app/packages/app-web-library/node_modules",
           "/Users/yoongeemin/Developer/Projects/app/packages/backend-graphql-sandbox/node_modules",
           "/Users/yoongeemin/Developer/Projects/app/packages/backend-lambda/node_modules",
+          "/Users/yoongeemin/Developer/Projects/app/packages/backend-process/node_modules",
           "/Users/yoongeemin/Developer/Projects/app/packages/lib-backend/node_modules",
           "/Users/yoongeemin/Developer/Projects/app/packages/lib-config/node_modules",
           "/Users/yoongeemin/Developer/Projects/app/packages/lib-frontend/node_modules",
           "/Users/yoongeemin/Developer/Projects/app/packages/lib-library/node_modules",
           "/Users/yoongeemin/Developer/Projects/app/packages/lib-platform/node_modules",
           "/Users/yoongeemin/Developer/Projects/app/packages/lib-shared/node_modules",
-          "/Users/yoongeemin/Developer/Projects/app/packages/tool-generate/node_modules",
           "/Users/yoongeemin/Developer/Projects/app/packages/tool-task/node_modules"
         ],
         "plugins": "../lib-config/src/platform/serverless/_plugins.js",
@@ -1007,37 +762,6 @@
         "memory": 128,
         "runtime": "nodejs18.x",
         "vpc": {}
-      },
-      "websocket": {
-        "events": [
-          {
-            "websocket": {
-              "route": "$connect"
-            }
-          },
-          {
-            "websocket": {
-              "route": "$disconnect"
-            }
-          },
-          {
-            "websocket": {
-              "route": "$default"
-            }
-          }
-        ],
-        "handler": "src/functions/websocket/websocket.main",
-        "layers": {
-          "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"WebsocketLambdaFunction\"][\"Properties\"][\"Layers\"]"
-        },
-        "timeout": 15,
-        "name": "serverless-production-websocket",
-        "package": {
-          "artifact": ".serverless/websocket.zip"
-        },
-        "memory": 128,
-        "runtime": "nodejs18.x",
-        "vpc": {}
       }
     },
     "configValidationMode": "warn",
@@ -1052,14 +776,13 @@
       "layers": {
         "custom": {
           "compatibleRuntimes": {
-            "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"CustomLambdaLayera1b548088c4ca0992864a58fefacab102dbf33ed\"][\"Properties\"][\"CompatibleRuntimes\"]"
+            "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"CustomLambdaLayer580d14c97bf9f4c4087c0908037efbc761202afe\"][\"Properties\"][\"CompatibleRuntimes\"]"
           },
           "package": {
             "artifact": "/Users/yoongeemin/Developer/Projects/app/packages/backend-lambda/.serverless/custom.zip"
           },
           "path": "./.build/layers",
-          "retain": true,
-          "artifactAlreadyUploaded": true
+          "retain": true
         }
       },
       "package": {
@@ -1082,7 +805,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/serverless/production/1705349577075-2024-01-15T20:12:57.075Z",
+    "artifactDirectoryName": "serverless/serverless/production/1706498098361-2024-01-29T03:14:58.361Z",
     "artifact": ""
   }
 }

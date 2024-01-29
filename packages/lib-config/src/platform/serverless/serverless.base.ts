@@ -5,7 +5,6 @@ import { _serverless } from '@lib/config/platform/serverless/_serverless';
 import { type ServerlessConfigModel } from '@lib/config/platform/serverless/serverless.models';
 import { PLATFORM } from '@lib/platform/core/core.constants';
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
-import { APP_URI } from '@lib/shared/http/http.constants';
 
 const { _config, config } = defineConfig({
   _config: _serverless,
@@ -32,7 +31,8 @@ const { _config, config } = defineConfig({
         cors: {
           allowedHeaders: ['*'],
 
-          allowedOrigins: process.env.NODE_ENV === 'production' ? [APP_URI] : ['*'],
+          // allowedOrigins: process.env.NODE_ENV === 'production' ? [APP_URI] : ['*'],
+          allowedOrigins: ['*'],
         },
 
         memory: 128,

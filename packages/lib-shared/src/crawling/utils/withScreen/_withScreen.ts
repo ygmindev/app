@@ -9,7 +9,11 @@ import {
   type _WithScreenParamsModel,
 } from '@lib/shared/crawling/utils/withScreen/_withScreen.models';
 import { KEY_TYPE } from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
-import { type ScreenModel } from '@lib/shared/crawling/utils/withScreen/withScreen.models';
+import {
+  type FindOptionModel,
+  type ScreenElement,
+  type ScreenModel,
+} from '@lib/shared/crawling/utils/withScreen/withScreen.models';
 import { type ElementHandle, launch } from 'puppeteer';
 
 export const _withScreen = async (
@@ -19,8 +23,8 @@ export const _withScreen = async (
 
   const browser = await launch({
     args: dimension ? [`--window-size-${dimension.width},${dimension.height}`] : undefined,
-    defaultViewport: dimension,
     headless: isHeadless ? 'new' : false,
+    ignoreDefaultArgs: ['--hide-scrollbars'],
     ignoreHTTPSErrors: true,
   });
 
@@ -126,11 +130,41 @@ export const _withScreen = async (
     return result;
   };
 
+  const getSelector = (path: SelectorPathModel) => {
+    switch (path.type) {
+      case SELECTOR_TYPE.DATA:
+        return `[${path.key}="${path.value}"]`;
+      case SELECTOR_TYPE.ID:
+        return `#${path.value}`;
+      default:
+        return path.value;
+    }
+  };
+
+  const find = async (
+    path: SelectorPathModel,
+    { isDelay }: FindOptionModel = {},
+    handle?: ElementHandle,
+  ): Promise<ScreenElement | null> => {
+    isDelay && (await sleep(delay));
+    const selector = getSelector(path);
+    const selected = await (handle ?? page).$(selector);
+    return selected
+      ? {
+          find: async (pathF, optionsF) => find(pathF, optionsF, selected),
+          press: selected.click,
+          type: selected.type,
+        }
+      : null;
+  };
+
   const screen: ScreenModel = {
     close: async () => {
       isOpen = false;
       await browser.close();
     },
+
+    find: async (path, options) => find(path, options),
 
     getValue: async ({ conditions, index = 0, isDelay, parent, target }): Promise<string> => {
       isDelay && (await sleep(delay));
@@ -206,10 +240,6 @@ export const _withScreen = async (
       } else {
         throw new NotFoundError(stringify({ conditions, target }));
       }
-      // await sleepForEffect();
-      // void element?.focus();
-      // await sleepForEffect();
-      // await page.keyboard.type(value);
     },
 
     uri: () => {

@@ -5,6 +5,10 @@
   "private": true,
   "dependencies": {
     "@react-google-maps/api": "^2.19.2",
+    "@rpldy/upload-button": "^1.7.1",
+    "@rpldy/upload-drop-zone": "^1.7.1",
+    "@rpldy/uploader": "^1.7.1",
+    "@rpldy/uploady": "^1.7.1",
     "color": "^4.2.3",
     "date-fns": "^3.2.0",
     "react-day-picker": "^8.10.0",

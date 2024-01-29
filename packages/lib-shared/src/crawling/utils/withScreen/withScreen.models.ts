@@ -10,8 +10,23 @@ export type WithScreenParamsModel = _WithScreenParamsModel[0];
 
 export type WithScreenModel = _WithScreenModel;
 
+export type FindModel = (
+  path: SelectorPathModel,
+  options?: FindOptionModel,
+) => Promise<ScreenElement | null>;
+
+export type ScreenElement = {
+  find: FindModel;
+  press(): Promise<void>;
+  type(value: string): Promise<void>;
+};
+
+export type FindOptionModel = { isDelay?: boolean };
+
 export type ScreenModel = {
   close(): Promise<void>;
+
+  find: FindModel;
 
   getValue(params: {
     conditions?: Array<SelectorPathModel>;

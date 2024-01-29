@@ -27,7 +27,6 @@ export const Item: LFCModel<ItemPropsModel> = ({
   return (
     <Wrapper
       {...wrapperProps}
-      flex
       isRowAlign>
       {leftElement && <Skeleton elementState={elementState}>{leftElement}</Skeleton>}
 

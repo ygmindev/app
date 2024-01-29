@@ -57,6 +57,7 @@ export const IONIC_ICONS = {
   eyeOff: 'eye-off-outline',
   filter: 'filter-outline',
   fingerprint: 'finger-print-outline',
+  folder: 'folder-open-outline',
   git: 'git-branch-outline',
   globe: 'globe-outline',
   grid: 'grid-outline',

@@ -20,3 +20,10 @@ export type RangeModel<TType> = {
   max?: TType;
   min?: TType;
 };
+
+export type FileModel = {
+  name: string;
+  size?: number;
+  type: string;
+  url: string;
+};

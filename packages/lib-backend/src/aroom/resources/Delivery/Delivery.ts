@@ -61,10 +61,10 @@ export class Delivery implements DeliveryModel {
   Creator!: AroomUserModel;
 
   @withField({ type: DATA_TYPE.STRING })
-  finalDropoff!: string;
+  dropoff!: string;
 
   @withField({ type: DATA_TYPE.STRING })
-  firstPickup!: string;
+  pickup!: string;
 
   @withField({ Resource: () => AroomOrder, isArray: true, type: PROPERTY_TYPE.RESOURCE })
   orderInformation!: Array<AroomOrderModel>;
