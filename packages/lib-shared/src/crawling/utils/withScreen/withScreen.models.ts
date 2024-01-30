@@ -1,72 +1,46 @@
-import { type SelectorPathModel } from '@lib/config/crawling/screen/screen.models';
-import { type UriModel } from '@lib/frontend/route/route.models';
 import {
   type _WithScreenModel,
   type _WithScreenParamsModel,
 } from '@lib/shared/crawling/utils/withScreen/_withScreen.models';
-import { type KEY_TYPE } from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
+import {
+  type KEY_TYPE,
+  type SELECTOR_TYPE,
+} from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
+import { type UriModel } from '@lib/shared/route/route.models';
 
 export type WithScreenParamsModel = _WithScreenParamsModel[0];
 
 export type WithScreenModel = _WithScreenModel;
 
-export type FindModel = (
-  path: SelectorPathModel,
-  options?: FindOptionModel,
-) => Promise<ScreenElement | null>;
-
-export type ScreenElement = {
-  find: FindModel;
-  press(): Promise<void>;
-  type(value: string): Promise<void>;
-};
-
-export type FindOptionModel = { isDelay?: boolean };
-
-export type ScreenModel = {
+export type ScreenModel = Pick<HandleModel, 'find' | 'findAll'> & {
   close(): Promise<void>;
 
-  find: FindModel;
+  key(value: KeyTypeModel, options?: SelectorOptionModel): Promise<void>;
 
-  getValue(params: {
-    conditions?: Array<SelectorPathModel>;
-    index?: number;
-    isDelay?: boolean;
-    parent?: SelectorPathModel;
-    target: SelectorPathModel;
-  }): Promise<string>;
-
-  goto(pathname: string): Promise<void>;
-
-  key(params: { isDelay?: boolean; value: KeyTypeModel }): Promise<void>;
-
-  press(params: {
-    conditions?: Array<SelectorPathModel>;
-    index?: number;
-    isDelay?: boolean;
-    parent?: SelectorPathModel;
-    target: SelectorPathModel;
-  }): Promise<void>;
+  open(uri: string): Promise<void>;
 
   snapshot(): Promise<Buffer>;
 
-  type(params: {
-    conditions?: Array<SelectorPathModel>;
-    index?: number;
-    isDelay?: boolean;
-    parent?: SelectorPathModel;
-    target: SelectorPathModel;
-    value: string;
-  }): Promise<void>;
-
   uri(): UriModel;
-
-  waitFor(params: {
-    conditions?: Array<SelectorPathModel>;
-    target: SelectorPathModel;
-  }): Promise<void>;
-
-  waitForText(value?: string): Promise<void>;
 };
 
+export type HandleModel = {
+  find(selector: SelectorModel, options?: SelectorOptionModel): Promise<HandleModel | null>;
+  findAll(selector: SelectorModel, options?: SelectorOptionModel): Promise<Array<HandleModel>>;
+  press(options?: SelectorOptionModel): Promise<void>;
+  text(options?: SelectorOptionModel): Promise<string | null>;
+  type(value: string, options?: SelectorOptionModel): Promise<void>;
+};
+
+export type SelectorOptionModel = { isDelay?: boolean; isWait?: boolean };
+
+export type SelectorModel = {
+  value: string;
+} & (
+  | { key?: never; type?: SELECTOR_TYPE.ID | SELECTOR_TYPE.TEXT }
+  | { key: string; type?: SELECTOR_TYPE.DATA }
+);
+
 export type KeyTypeModel = `${KEY_TYPE}`;
+
+export type SelectorType = `${SELECTOR_TYPE}`;

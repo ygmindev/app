@@ -2,6 +2,7 @@ import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { DELIVERY_RESOURCE } from '@lib/shared/aroom/resources/Delivery/Delivery.constants';
 import {
+  type AroomOrderContactModel,
   type AroomOrderModel,
   type AroomUserModel,
   type DeliveryModel,
@@ -27,32 +28,28 @@ export class AroomUser implements AroomUserModel {
 @withEntity({ name: 'AroomOrder' })
 export class AroomOrder implements AroomOrderModel {
   @withField({ type: DATA_TYPE.STRING })
-  additionalNote?: string;
-
-  @withField({ type: DATA_TYPE.STRING })
   dropoff!: string;
-
-  @withField({ type: DATA_TYPE.STRING })
-  dropoffName!: string;
-
-  @withField({ type: DATA_TYPE.STRING })
-  dropoffPhoneNumber!: string;
 
   @withField({ type: DATA_TYPE.NUMBER })
   orderNumber!: number;
 
-  // orderPositionNumber: number;
-  // orderReceiptAttach: unknown;
+  @withField({ isOptional: true, type: DATA_TYPE.STRING })
+  orderReceiptAttach?: string;
 
   @withField({ type: DATA_TYPE.STRING })
   pickup!: string;
-  // pickupContactPositionNumber: number;
+}
+
+@withEntity({ name: 'AroomOrderContact' })
+export class AroomOrderContact implements AroomOrderContactModel {
+  @withField({ type: DATA_TYPE.STRING })
+  stopAddress!: string;
 
   @withField({ type: DATA_TYPE.STRING })
-  pickupName!: string;
+  stopName!: string;
 
   @withField({ type: DATA_TYPE.STRING })
-  pickupPhoneNumber!: string;
+  stopPhoneNumber!: string;
 }
 
 @withEntity({ name: DELIVERY_RESOURCE })
@@ -61,10 +58,18 @@ export class Delivery implements DeliveryModel {
   Creator!: AroomUserModel;
 
   @withField({ type: DATA_TYPE.STRING })
-  dropoff!: string;
+  finalDropoff!: string;
 
   @withField({ type: DATA_TYPE.STRING })
-  pickup!: string;
+  firstPickup!: string;
+
+  @withField({
+    Resource: () => AroomOrderContact,
+    isArray: true,
+    isOptional: true,
+    type: PROPERTY_TYPE.RESOURCE,
+  })
+  orderContact?: Array<AroomOrderContactModel>;
 
   @withField({ Resource: () => AroomOrder, isArray: true, type: PROPERTY_TYPE.RESOURCE })
   orderInformation!: Array<AroomOrderModel>;

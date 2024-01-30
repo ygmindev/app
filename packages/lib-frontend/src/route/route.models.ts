@@ -32,14 +32,6 @@ export type RouteModel<
   transition?: RouteTransitionModel;
 };
 
-export type UriModel<TType = object> = {
-  host?: string;
-  isProtocol?: boolean;
-  params?: TType;
-  pathname?: string;
-  port?: number | string;
-};
-
 export type LocationModel<TType = object> = {
   context?: LocationContextModel;
   params?: TType;

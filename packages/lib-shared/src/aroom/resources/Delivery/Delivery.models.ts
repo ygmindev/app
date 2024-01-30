@@ -6,25 +6,23 @@ export type AroomUserModel = {
 };
 
 export type AroomOrderModel = {
-  additionalNote?: string;
   dropoff: string;
-  // dropoffContactPostionNumber: number;
-  dropoffName: string;
-  dropoffPhoneNumber: string;
   orderNumber: number;
-  // orderPositionNumber: number;
-  // orderReceiptAttach: unknown;
+  orderReceiptAttach?: string;
   pickup: string;
-  // pickupContactPositionNumber: number;
-  pickupName: string;
-  pickupPhoneNumber: string;
-  // submitDate: Date;
+};
+
+export type AroomOrderContactModel = {
+  stopAddress: string;
+  stopName: string;
+  stopPhoneNumber: string;
 };
 
 export type DeliveryModel = {
   Creator: AroomUserModel;
   finalDropoff: string;
   firstPickup: string;
+  orderContact?: Array<AroomOrderContactModel>;
   orderInformation: Array<AroomOrderModel>;
   pickupDate: Date;
   submitDate: Date;

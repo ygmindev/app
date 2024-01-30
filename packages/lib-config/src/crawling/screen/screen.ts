@@ -5,11 +5,13 @@ const { config } = defineConfig({
   config: {
     delay: 3000,
 
-    dimension: { height: 700, width: 1000 },
+    delayDefault: 1000,
+
+    dimension: { height: 1000, width: 1000 },
 
     isHeadless: false,
 
-    timeout: 10000,
+    timeout: 30000,
   } satisfies ScreenConfigModel,
 });
 
