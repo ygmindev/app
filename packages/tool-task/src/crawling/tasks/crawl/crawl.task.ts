@@ -87,8 +87,6 @@ const crawl: TaskParamsModel<unknown> = {
 
         // add pickup
         let parent = await screen.find({ type: SELECTOR_TYPE.ID, value: 'submitAddress' });
-        console.warn('@PARENT!');
-        console.warn(parent);
         await parent
           ?.find({ key: 'data-e2e-id', type: SELECTOR_TYPE.DATA, value: 'book-addresses-input-0' })
           .then((h) => h?.type(firstPickup));
@@ -158,8 +156,8 @@ const crawl: TaskParamsModel<unknown> = {
           .then((h) => h?.press());
 
         // press next
-        await parent
-          ?.find({ value: 'button[type=submit]' }, { isDelay: true })
+        await screen
+          .find({ value: 'button[type=submit]' }, { isDelay: true })
           .then((h) => h?.press());
 
         // press vehicle
@@ -184,7 +182,8 @@ const crawl: TaskParamsModel<unknown> = {
 
         // pick date
         let tries = 0;
-        const pickupDateFormatted = format(pickupDate, 'ddd EEE dd yyyy');
+        const pickupDateFormatted = format(pickupDate, 'EEE MMM dd yyyy');
+        console.warn(`@@@${pickupDateFormatted}`);
         while (tries <= 10) {
           try {
             await parent
@@ -198,7 +197,7 @@ const crawl: TaskParamsModel<unknown> = {
         }
 
         // press next
-        await parent?.find({ value: 'button[type=submit]' }).then((h) => h?.press());
+        await screen.find({ value: 'button[type=submit]' }).then((h) => h?.press());
 
         // add items
         parent = await screen.find({ type: SELECTOR_TYPE.ID, value: 'submitPayload' });
@@ -226,16 +225,18 @@ const crawl: TaskParamsModel<unknown> = {
               await parent
                 ?.find({ type: SELECTOR_TYPE.ID, value: 'payload-description' })
                 .then((h) => h?.type('Medium Item'));
-              await screen.key(KEY_TYPE.DOWN, { isDelay: true });
-              await screen.key(KEY_TYPE.ENTER, { isDelay: true });
+              await screen.key(KEY_TYPE.DOWN);
+              await screen.key(KEY_TYPE.ENTER);
 
               // press pickup
               if (pickupIndex >= 0) {
                 const pickupValue = await parent
-                  ?.find({ key: 'name', type: SELECTOR_TYPE.DATA, value: 'pickupQuoteIndex' })
+                  ?.find(
+                    { key: 'name', type: SELECTOR_TYPE.DATA, value: 'pickupQuoteIndex' },
+                    { index: i },
+                  )
                   .then((h) => h?.find({ value: 'option' }, { index: pickupIndex }))
                   .then((h) => h?.text());
-                console.warn(`@@@ ORDER: ${i}: PICKUP ${pickupValue}`);
                 pickupValue &&
                   (await parent
                     ?.find(
@@ -248,10 +249,12 @@ const crawl: TaskParamsModel<unknown> = {
               // press pickup
               if (dropoffIndex >= 0) {
                 const dropoffValue = await parent
-                  ?.find({ key: 'name', type: SELECTOR_TYPE.DATA, value: 'dropoffQuoteIndex' })
+                  ?.find(
+                    { key: 'name', type: SELECTOR_TYPE.DATA, value: 'dropoffQuoteIndex' },
+                    { index: i },
+                  )
                   .then((h) => h?.find({ value: 'option' }, { index: dropoffIndex }))
                   .then((h) => h?.text());
-                console.warn(`@@@ ORDER: ${i}: DROPOFF ${dropoffValue}`);
                 dropoffValue &&
                   (await parent
                     ?.find(
