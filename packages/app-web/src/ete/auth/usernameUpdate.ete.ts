@@ -2,9 +2,9 @@ import { signIn } from '@app/web/ete/auth/utils/signIn/signIn';
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { seed } from '@lib/backend/test/utils/seed/seed';
 import { withTestScreen } from '@lib/backend/test/utils/withTestScreen/withTestScreen';
-import { SELECTOR_TYPE } from '@lib/config/crawling/screen/screen.constants';
 import { USERNAME_FORM_TEST_ID } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.constants';
 import { EMAIL, PERSONAL } from '@lib/frontend/user/user.constants';
+import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
 import { ACCOUNT } from '@lib/shared/user/user.constants';
 
 describe('usernameUpdate', () => {
@@ -20,28 +20,28 @@ describe('usernameUpdate', () => {
 
   test('works', async () => {
     await withTestScreen(async (screen) => {
-      await screen.goto(`/${ACCOUNT}/${PERSONAL}/${EMAIL}`);
+      await screen.open(`/${ACCOUNT}/${PERSONAL}/${EMAIL}`);
       await screen.snapshot();
       await signIn({ screen });
       await screen.snapshot();
-      await screen.type({
-        target: { key: 'test-id', type: SELECTOR_TYPE.DATA, value: 'email' },
-        value: USERNAME_NEW,
-      });
+      await screen
+        .find({ key: 'data-test-id', type: SELECTOR_TYPE.DATA, value: 'email' })
+        .then((h) => h?.type(USERNAME_NEW));
       await screen.snapshot();
-      await screen.press({
-        target: {
+      await screen
+        .find({
           key: 'test-id',
           type: SELECTOR_TYPE.DATA,
           value: `${USERNAME_FORM_TEST_ID}-submit`,
-        },
-      });
-      await screen.type({
-        target: { key: 'test-id', type: SELECTOR_TYPE.DATA, value: 'otp' },
-        value: process.env.SERVER_OTP_STATIC ?? '',
-      });
-      await screen.goto(`${ACCOUNT}/${PERSONAL}`);
-      await screen.waitForText(USERNAME_NEW);
+        })
+        .then((h) => h?.press);
+
+      await screen
+        .find({ key: 'data-test-id', type: SELECTOR_TYPE.DATA, value: 'otp' })
+        .then((h) => h?.type(process.env.SERVER_OTP_STATIC ?? ''));
+
+      await screen.open(`${ACCOUNT}/${PERSONAL}`);
+      await screen.find({ type: SELECTOR_TYPE.TEXT, value: USERNAME_NEW });
       await screen.snapshot();
     });
   });

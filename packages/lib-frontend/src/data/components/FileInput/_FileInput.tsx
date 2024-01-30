@@ -22,6 +22,7 @@ export const _FileInput = composeComponent<_FileInputPropsModel, UploadyProps>({
     ),
     destination: { url: '' },
     multiple: isMultiple,
+    noPortal: true,
   }),
 });
 
