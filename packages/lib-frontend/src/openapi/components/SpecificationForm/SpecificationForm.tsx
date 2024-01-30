@@ -1,5 +1,6 @@
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
+import { DateInput } from '@lib/frontend/data/components/DateInput/DateInput';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { type FormFieldsModel } from '@lib/frontend/data/components/FormContainer/FormContainer.models';
 import { NumberInput } from '@lib/frontend/data/components/NumberInput/NumberInput';
@@ -25,9 +26,9 @@ export const SpecificationForm = <TType,>({
 
   const getElement = <TField,>(field: SpecificationFieldModel<TField>): ReactElement => {
     switch (field.type) {
-      case FIELD_TYPE.PHONE:
+      case FIELD_TYPE.DATE:
         return (
-          <PhoneInput
+          <DateInput
             key={field.id}
             label={field.id}
           />
@@ -35,6 +36,13 @@ export const SpecificationForm = <TType,>({
       case FIELD_TYPE.NUMBER:
         return (
           <NumberInput
+            key={field.id}
+            label={field.id}
+          />
+        );
+      case FIELD_TYPE.PHONE:
+        return (
+          <PhoneInput
             key={field.id}
             label={field.id}
           />
@@ -85,7 +93,6 @@ export const SpecificationForm = <TType,>({
           }
           flex
           isCenter
-          onSubmit={handleSubmit}
         />
       ),
       id: field.id,
@@ -96,7 +103,7 @@ export const SpecificationForm = <TType,>({
     <StepForm
       {...wrapperProps}
       flex
-      onSubmit={async () => null}
+      onSubmit={handleSubmit}
       steps={steps}
     />
   );

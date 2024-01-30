@@ -3,6 +3,6 @@ import {
   type _CalendarPickerRefModel,
 } from '@lib/frontend/data/components/CalendarPicker/_CalendarPicker.models';
 
-export type CalendarPickerPropsModel = Omit<_CalendarPickerPropsModel, 'textStyle'>;
+export type CalendarPickerPropsModel = _CalendarPickerPropsModel;
 
 export type CalendarPickerRefModel = _CalendarPickerRefModel;

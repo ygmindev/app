@@ -1,8 +1,3 @@
-import reduce from 'lodash/reduce';
-import { type ReactElement, type ReactNode } from 'react';
-import { Children, cloneElement, createElement, forwardRef, isValidElement, useMemo } from 'react';
-import { StyleSheet } from 'react-native';
-
 import { AnimatableView } from '@lib/frontend/animation/components/AnimatableView/AnimatableView';
 import { View } from '@lib/frontend/core/components/View/View';
 import {
@@ -17,6 +12,10 @@ import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { spacingStyler } from '@lib/frontend/style/utils/styler/spacingStyler/spacingStyler';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
+import reduce from 'lodash/reduce';
+import { type ReactElement, type ReactNode } from 'react';
+import { Children, cloneElement, createElement, forwardRef, isValidElement, useMemo } from 'react';
+import { StyleSheet } from 'react-native';
 
 export const Wrapper: RLFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef(
   ({ animation, children, isDistribute, ...props }, ref) => {

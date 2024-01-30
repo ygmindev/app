@@ -25,7 +25,10 @@ export type ScreenModel = Pick<HandleModel, 'find' | 'findAll'> & {
 };
 
 export type HandleModel = {
-  find(selector: SelectorModel, options?: SelectorOptionModel): Promise<HandleModel | null>;
+  find(
+    selector: SelectorModel,
+    options?: SelectorOptionModel & { index?: number },
+  ): Promise<HandleModel | null>;
   findAll(selector: SelectorModel, options?: SelectorOptionModel): Promise<Array<HandleModel>>;
   press(options?: SelectorOptionModel): Promise<void>;
   text(options?: SelectorOptionModel): Promise<string | null>;

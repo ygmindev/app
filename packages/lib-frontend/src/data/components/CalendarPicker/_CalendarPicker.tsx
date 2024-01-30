@@ -10,8 +10,17 @@ export const _CalendarPicker = composeComponent<
 >({
   Component: DayPicker,
 
-  getProps: ({ isRange, onChange, shapePrimaryMainStyle, textMainStyle, value }) =>
+  getProps: ({
+    disable = (date) => date < new Date(),
+    isRange,
+    onChange,
+    shapePrimaryMainStyle,
+    textMainStyle,
+    value,
+  }) =>
     ({
+      disabled: disable,
+      hideHead: true,
       mode: isRange ? 'range' : 'single',
       modifiersStyles: {
         selected: shapePrimaryMainStyle,

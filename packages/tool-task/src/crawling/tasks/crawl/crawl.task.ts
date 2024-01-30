@@ -86,12 +86,15 @@ const crawl: TaskParamsModel<unknown> = {
         await screen.find({ type: SELECTOR_TYPE.TEXT, value: 'Log in' }).then((h) => h?.press());
 
         // add pickup
-        await screen
-          .find({ key: 'data-e2e-id', type: SELECTOR_TYPE.DATA, value: 'book-addresses-input-0' })
+        let parent = await screen.find({ type: SELECTOR_TYPE.ID, value: 'submitAddress' });
+        console.warn('@PARENT!');
+        console.warn(parent);
+        await parent
+          ?.find({ key: 'data-e2e-id', type: SELECTOR_TYPE.DATA, value: 'book-addresses-input-0' })
           .then((h) => h?.type(firstPickup));
 
-        await screen
-          .find(
+        await parent
+          ?.find(
             {
               key: 'data-e2e-id',
               type: SELECTOR_TYPE.DATA,
@@ -105,24 +108,24 @@ const crawl: TaskParamsModel<unknown> = {
         waypoint &&
           (await mapSequence(
             waypoint.map((stop, i) => async () => {
-              await screen
-                .find({
+              await parent
+                ?.find({
                   key: 'data-e2e-id',
                   type: SELECTOR_TYPE.DATA,
                   value: 'book-addresses-add-stop',
                 })
                 .then((h) => h?.press());
 
-              await screen
-                .find({
+              await parent
+                ?.find({
                   key: 'data-e2e-id',
                   type: SELECTOR_TYPE.DATA,
                   value: `book-addresses-input-${i + 1}`,
                 })
                 .then((h) => h?.type(stop));
 
-              await screen
-                .find(
+              await parent
+                ?.find(
                   {
                     key: 'data-e2e-id',
                     type: SELECTOR_TYPE.DATA,
@@ -135,16 +138,16 @@ const crawl: TaskParamsModel<unknown> = {
           ));
 
         // add dropoff
-        await screen
-          .find({
+        await parent
+          ?.find({
             key: 'data-e2e-id',
             type: SELECTOR_TYPE.DATA,
             value: `book-addresses-input-${(waypoint?.length ?? 0) + 1}`,
           })
           .then((h) => h?.type(finalDropoff));
 
-        await screen
-          .find(
+        await parent
+          ?.find(
             {
               key: 'data-e2e-id',
               type: SELECTOR_TYPE.DATA,
@@ -155,13 +158,14 @@ const crawl: TaskParamsModel<unknown> = {
           .then((h) => h?.press());
 
         // press next
-        await screen
-          .find({ value: 'button[type=submit]' }, { isDelay: true })
+        await parent
+          ?.find({ value: 'button[type=submit]' }, { isDelay: true })
           .then((h) => h?.press());
 
         // press vehicle
-        await screen
-          .find({
+        parent = await screen.find({ type: SELECTOR_TYPE.ID, value: 'submitVehicle' });
+        await parent
+          ?.find({
             key: 'data-ph-capture-attribute-vehicle-sku',
             type: SELECTOR_TYPE.DATA,
             value: vehicleType,
@@ -169,8 +173,9 @@ const crawl: TaskParamsModel<unknown> = {
           .then((h) => h?.press());
 
         // press timing
-        await screen
-          .find({
+        parent = await screen.find({ type: SELECTOR_TYPE.ID, value: 'submitTiming' });
+        await parent
+          ?.find({
             key: 'data-ph-capture-attribute-priority-type',
             type: SELECTOR_TYPE.DATA,
             value: 'scheduled',
@@ -182,21 +187,21 @@ const crawl: TaskParamsModel<unknown> = {
         const pickupDateFormatted = format(pickupDate, 'ddd EEE dd yyyy');
         while (tries <= 10) {
           try {
-            await screen
-              .find({ key: 'aria-label', type: SELECTOR_TYPE.DATA, value: pickupDateFormatted })
+            await parent
+              ?.find({ key: 'aria-label', type: SELECTOR_TYPE.DATA, value: pickupDateFormatted })
               .then((h) => h?.press());
             break;
           } catch (e) {
-            await screen.find({ value: '.DayPicker-NavButton--next' }).then((h) => h?.press());
+            await parent?.find({ value: '.DayPicker-NavButton--next' }).then((h) => h?.press());
             tries++;
           }
         }
 
         // press next
-        await screen.find({ value: 'button[type=submit]' }).then((h) => h?.press());
+        await parent?.find({ value: 'button[type=submit]' }).then((h) => h?.press());
 
         // add items
-        const parent = await screen.find({ value: '#submitPayload' });
+        parent = await screen.find({ type: SELECTOR_TYPE.ID, value: 'submitPayload' });
         orderInformation &&
           (await mapSequence(
             orderInformation.map((order, i) => async () => {
@@ -208,55 +213,53 @@ const crawl: TaskParamsModel<unknown> = {
               );
 
               i > 0 &&
-                (await screen
-                  .find({ type: SELECTOR_TYPE.TEXT, value: 'Add another order' })
+                (await parent
+                  ?.find({ type: SELECTOR_TYPE.TEXT, value: 'Add another order' })
                   .then((h) => h?.press()));
 
               // type order number
-              await screen
-                .find({ key: 'name', type: SELECTOR_TYPE.DATA, value: 'orderNumber' })
+              await parent
+                ?.find({ key: 'name', type: SELECTOR_TYPE.DATA, value: 'orderNumber' })
                 .then((h) => h?.type(`${order.orderNumber}`));
 
               // select item type
-              await screen
-                .find({ type: SELECTOR_TYPE.ID, value: 'payload-description' })
+              await parent
+                ?.find({ type: SELECTOR_TYPE.ID, value: 'payload-description' })
                 .then((h) => h?.type('Medium Item'));
               await screen.key(KEY_TYPE.DOWN, { isDelay: true });
               await screen.key(KEY_TYPE.ENTER, { isDelay: true });
 
-              // // press pickup
-              // if (pickupIndex >= 0) {
-              //   const pickupValue = await screen.getValue({
-              //     index: pickupIndex,
-              //     parent: { key: 'name', type: SELECTOR_TYPE.DATA, value: 'pickupQuoteIndex' },
-              //     target: { value: 'option' },
-              //   });
-              //   console.warn(`@@@ ORDER: ${i}: PICKUP ${pickupValue}`);
-              //   pickupValue &&
-              //     (await screen.type({
-              //       index: i,
-              //       parent,
-              //       target: { key: 'name', type: SELECTOR_TYPE.DATA, value: 'pickupQuoteIndex' },
-              //       value: pickupValue,
-              //     }));
-              // }
+              // press pickup
+              if (pickupIndex >= 0) {
+                const pickupValue = await parent
+                  ?.find({ key: 'name', type: SELECTOR_TYPE.DATA, value: 'pickupQuoteIndex' })
+                  .then((h) => h?.find({ value: 'option' }, { index: pickupIndex }))
+                  .then((h) => h?.text());
+                console.warn(`@@@ ORDER: ${i}: PICKUP ${pickupValue}`);
+                pickupValue &&
+                  (await parent
+                    ?.find(
+                      { key: 'name', type: SELECTOR_TYPE.DATA, value: 'pickupQuoteIndex' },
+                      { index: i },
+                    )
+                    .then((h) => h?.type(pickupValue)));
+              }
 
-              // // press dropoff
-              // if (dropoffIndex >= 0) {
-              //   const dropoffValue = await screen.getValue({
-              //     index: dropoffIndex,
-              //     parent: { key: 'name', type: SELECTOR_TYPE.DATA, value: 'dropoffQuoteIndex' },
-              //     target: { value: 'option' },
-              //   });
-              //   console.warn(`@@@ ORDER: ${i}: DROPOFF ${dropoffValue}`);
-              //   dropoffValue &&
-              //     (await screen.type({
-              //       index: i,
-              //       parent,
-              //       target: { key: 'name', type: SELECTOR_TYPE.DATA, value: 'dropoffQuoteIndex' },
-              //       value: dropoffValue,
-              //     }));
-              // }
+              // press pickup
+              if (dropoffIndex >= 0) {
+                const dropoffValue = await parent
+                  ?.find({ key: 'name', type: SELECTOR_TYPE.DATA, value: 'dropoffQuoteIndex' })
+                  .then((h) => h?.find({ value: 'option' }, { index: dropoffIndex }))
+                  .then((h) => h?.text());
+                console.warn(`@@@ ORDER: ${i}: DROPOFF ${dropoffValue}`);
+                dropoffValue &&
+                  (await parent
+                    ?.find(
+                      { key: 'name', type: SELECTOR_TYPE.DATA, value: 'dropoffQuoteIndex' },
+                      { index: i },
+                    )
+                    .then((h) => h?.type(dropoffValue)));
+              }
             }),
           ));
 
@@ -321,7 +324,7 @@ const crawl: TaskParamsModel<unknown> = {
         //   target: { value: 'button[type=submit]' },
         // });
 
-        await sleep(30000);
+        await sleep(100000);
       });
     },
   ],

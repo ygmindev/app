@@ -1,9 +1,8 @@
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
-import { FileInput } from '@lib/frontend/data/components/FileInput/FileInput';
 import { type ScratchPadPagePropsModel } from '@lib/frontend/dev/pages/ScratchPadPage/ScratchPadPage.models';
-import { SpecificationDetail } from '@lib/frontend/openapi/components/SpecificationDetail/SpecificationDetail';
+// import { SpecificationDetail } from '@lib/frontend/openapi/components/SpecificationDetail/SpecificationDetail';
 import { SpecificationForm } from '@lib/frontend/openapi/components/SpecificationForm/SpecificationForm';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { deliverySpecification } from '@lib/shared/aroom/utils/deliverySpecification/deliverySpecification';
@@ -17,15 +16,13 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
       isFullHeight
       isFullWidth
       p>
-      <FileInput isMultiple />
-
       <Wrapper flex>
         <SpecificationForm specification={deliverySpecification} />
       </Wrapper>
 
-      <Wrapper flex>
+      {/* <Wrapper flex>
         <SpecificationDetail specification={deliverySpecification} />
-      </Wrapper>
+      </Wrapper> */}
     </MainLayout>
   );
 };

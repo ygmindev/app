@@ -11,7 +11,6 @@
     "@rpldy/uploady": "^1.7.1",
     "color": "^4.2.3",
     "date-fns": "^3.2.0",
-    "react-day-picker": "^8.10.0",
-    "react-native-calendar-picker": "^8.0.0"
+    "react-day-picker": "^8.10.0"
   }
 }

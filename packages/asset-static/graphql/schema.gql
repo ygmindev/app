@@ -199,13 +199,17 @@ input AccessUpdateUpdateInput {
   role: [String]
 }
 
+input AroomOrderContactInput {
+  stopAddress: String
+  stopName: String
+  stopPhoneNumber: String
+}
+
 input AroomOrderInput {
-  additionalNote: String
   dropoff: String
-  dropoffPhoneNumber: String
   orderNumber: Float
+  orderReceiptAttach: String
   pickup: String
-  pickupPhoneNumber: String
 }
 
 input AroomUserInput {
@@ -788,6 +792,7 @@ input CreateDeliveryInput {
   Creator: AroomUserInput
   finalDropoff: String
   firstPickup: String
+  orderContact: [AroomOrderContactInput]
   orderInformation: [AroomOrderInput]
   pickupDate: DateTime
   submitDate: DateTime

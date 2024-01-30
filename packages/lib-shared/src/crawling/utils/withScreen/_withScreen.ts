@@ -45,19 +45,24 @@ export const _withScreen = async (
 
   const findF = async (
     selector: SelectorModel,
-    { isDelay, isWait }: SelectorOptionModel = {},
+    { index = -1, isDelay, isWait = true }: SelectorOptionModel & { index?: number } = {},
     handle?: ElementHandle,
   ): Promise<HandleModel | null> => {
     await sleep(isDelay ? delay : delayDefault);
     const selectorF = getSelector(selector);
     isWait && (await (handle ?? page).waitForSelector(selectorF, { timeout }));
-    const selected = await (handle ?? page).$(selectorF);
+    let selected;
+    if (index >= 0) {
+      selected = (await (handle ?? page).$$(selectorF))?.[index];
+    } else {
+      selected = await (handle ?? page).$(selectorF);
+    }
     return selected && new _Handle(selected);
   };
 
   const findAllF = async (
     selector: SelectorModel,
-    { isDelay, isWait }: SelectorOptionModel = {},
+    { isDelay, isWait = true }: SelectorOptionModel = {},
     handle?: ElementHandle,
   ): Promise<Array<HandleModel>> => {
     await sleep(isDelay ? delay : delayDefault);

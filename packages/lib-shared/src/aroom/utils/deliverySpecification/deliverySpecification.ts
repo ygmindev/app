@@ -5,6 +5,7 @@ import { type SpecificationModel } from '@lib/shared/openapi/utils/Specification
 
 export const deliverySpecification = {
   fields: [
+    { id: 'date', isOptional: true, type: FIELD_TYPE.DATE },
     { id: 'origin', specification: addressSpecification, type: FIELD_TYPE.PROPERTY },
     { id: 'destination', specification: addressSpecification, type: FIELD_TYPE.PROPERTY },
   ],
