@@ -21,8 +21,6 @@ const { _config, config } = defineConfig({
       mockDir: fromConfig('node/test/__mocks__'),
 
       outputPath: joinPaths([fileConfig.buildPath, 'test']),
-
-      snapshotPath: joinPaths([fileConfig.buildPath, 'test', 'snapshots']),
     }) satisfies TestConfigModel,
 });
 
