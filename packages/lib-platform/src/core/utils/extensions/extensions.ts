@@ -18,6 +18,10 @@ export const extensions = (): ExtensionsModel => {
       ]),
       EXTENSIONS_BASE,
     ),
+    ...permuteString(
+      filterNil([process.env.NODE_ENV && `.${process.env.NODE_ENV}`]),
+      EXTENSIONS_BASE,
+    ),
     ...EXTENSIONS_BASE,
   ];
 };

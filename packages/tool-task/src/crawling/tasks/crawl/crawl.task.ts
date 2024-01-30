@@ -24,6 +24,23 @@ const SAMPLE_DELIVERY: CreateDeliveryInputModel = {
   },
   finalDropoff: 'Columbia University, 116th And Broadway, New York, NY 10027',
   firstPickup: '56 Leonard St, New York, NY 10013',
+  orderContact: [
+    {
+      stopAddress: '56 Leonard St, New York, NY 10013',
+      stopName: 'Stop 1',
+      stopPhoneNumber: '2121111111',
+    },
+    {
+      stopAddress: '200 W 57th St, New York, NY 10019',
+      stopName: 'Stop 2',
+      stopPhoneNumber: '2122222222',
+    },
+    {
+      stopAddress: 'Columbia University, 116th And Broadway, New York, NY 10027',
+      stopName: 'Stop 3',
+      stopPhoneNumber: '2123333333',
+    },
+  ],
   orderInformation: [
     {
       dropoff: '200 W 57th St, New York, NY 10019',
@@ -57,6 +74,7 @@ const crawl: TaskParamsModel<unknown> = {
           Creator,
           finalDropoff,
           firstPickup,
+          orderContact,
           orderInformation,
           pickupDate,
           submitDate,
@@ -183,11 +201,13 @@ const crawl: TaskParamsModel<unknown> = {
         // pick date
         let tries = 0;
         const pickupDateFormatted = format(pickupDate, 'EEE MMM dd yyyy');
-        console.warn(`@@@${pickupDateFormatted}`);
         while (tries <= 10) {
           try {
             await parent
-              ?.find({ key: 'aria-label', type: SELECTOR_TYPE.DATA, value: pickupDateFormatted })
+              ?.find(
+                { key: 'aria-label', type: SELECTOR_TYPE.DATA, value: pickupDateFormatted },
+                { isWait: false },
+              )
               .then((h) => h?.press());
             break;
           } catch (e) {
@@ -211,6 +231,7 @@ const crawl: TaskParamsModel<unknown> = {
                 (v) => v === order.dropoff,
               );
 
+              // add order
               i > 0 &&
                 (await parent
                   ?.find({ type: SELECTOR_TYPE.TEXT, value: 'Add another order' })
@@ -218,51 +239,37 @@ const crawl: TaskParamsModel<unknown> = {
 
               // type order number
               await parent
-                ?.find({ key: 'name', type: SELECTOR_TYPE.DATA, value: 'orderNumber' })
+                ?.find(
+                  { key: 'name', type: SELECTOR_TYPE.DATA, value: 'orderNumber' },
+                  { index: i },
+                )
                 .then((h) => h?.type(`${order.orderNumber}`));
 
               // select item type
               await parent
-                ?.find({ type: SELECTOR_TYPE.ID, value: 'payload-description' })
+                ?.find({ type: SELECTOR_TYPE.ID, value: 'payload-description' }, { index: i })
                 .then((h) => h?.type('Medium Item'));
-              await screen.key(KEY_TYPE.DOWN);
+              await screen.key(KEY_TYPE.DOWN, { isDelay: true });
               await screen.key(KEY_TYPE.ENTER);
 
               // press pickup
-              if (pickupIndex >= 0) {
-                const pickupValue = await parent
+              pickupIndex >= 0 &&
+                (await parent
                   ?.find(
                     { key: 'name', type: SELECTOR_TYPE.DATA, value: 'pickupQuoteIndex' },
                     { index: i },
                   )
-                  .then((h) => h?.find({ value: 'option' }, { index: pickupIndex }))
-                  .then((h) => h?.text());
-                pickupValue &&
-                  (await parent
-                    ?.find(
-                      { key: 'name', type: SELECTOR_TYPE.DATA, value: 'pickupQuoteIndex' },
-                      { index: i },
-                    )
-                    .then((h) => h?.type(pickupValue)));
-              }
+                  .then((h) => h?.select(`${pickupIndex}`)));
 
-              // press pickup
-              if (dropoffIndex >= 0) {
-                const dropoffValue = await parent
+              // press dropoff
+              dropoffIndex >= 0 &&
+                (await parent
                   ?.find(
                     { key: 'name', type: SELECTOR_TYPE.DATA, value: 'dropoffQuoteIndex' },
                     { index: i },
                   )
                   .then((h) => h?.find({ value: 'option' }, { index: dropoffIndex }))
-                  .then((h) => h?.text());
-                dropoffValue &&
-                  (await parent
-                    ?.find(
-                      { key: 'name', type: SELECTOR_TYPE.DATA, value: 'dropoffQuoteIndex' },
-                      { index: i },
-                    )
-                    .then((h) => h?.type(dropoffValue)));
-              }
+                  .then((h) => h?.text()));
             }),
           ));
 
@@ -273,59 +280,29 @@ const crawl: TaskParamsModel<unknown> = {
         // //   value: CREDENTIALS.totalWeightLbs,
         // // });
 
-        // // press next
-        // await screen.press({
-        //   isDelay: true,
-        //   target: { value: 'button[type=submit]' },
-        // });
+        // press next
+        await screen
+          .find({ value: 'button[type=submit]' }, { isDelay: true })
+          .then((h) => h?.press());
 
-        // //  type stops info
-        // const stopsAll = [firstPickup, ...(waypoint ?? []), finalDropoff];
-        // const stopsInfo =
-        //   orderInformation &&
-        //   stopsAll.map((stop) => {
-        //     const pickupInfo = orderInformation.find((order) => order.pickup === stop);
-        //     const dropoffInfo = orderInformation.find((order) => order.dropoff === stop);
-        //     const name = pickupInfo?.pickupName ?? dropoffInfo?.dropoffName;
-        //     const contact = pickupInfo?.pickupPhoneNumber ?? dropoffInfo?.dropoffPhoneNumber;
-        //     const note = filterNil([pickupInfo?.additionalNote, dropoffInfo?.additionalNote]).join(
-        //       '. ',
-        //     );
-        //     return { contact, name, note, stop };
-        //   });
+        let stepIndex = 0;
+        parent = await screen.find({ type: SELECTOR_TYPE.ID, value: 'submitInfo' });
+        for (const orderInfo of orderContact ?? []) {
+          orderInfo.stopName &&
+            (await parent
+              ?.find({ value: 'input' }, { index: stepIndex * 4 })
+              .then((h) => h?.type(orderInfo.stopName)));
+          orderInfo.stopPhoneNumber &&
+            (await parent
+              ?.find({ value: 'input' }, { index: stepIndex * 4 + 1 })
+              .then((h) => h?.type(orderInfo.stopPhoneNumber)));
+          stepIndex++;
+        }
 
-        // let stepIndex = 1;
-        // parent = { value: '#submitInfo' };
-        // for (const stopInfo of stopsInfo) {
-        //   stopInfo.name &&
-        //     (await screen.type({
-        //       index: stepIndex * 1 - 1,
-        //       parent,
-        //       target: { value: 'input' },
-        //       value: stopInfo.name,
-        //     }));
-        //   stopInfo.contact &&
-        //     (await screen.type({
-        //       index: stepIndex * 2 - 1,
-        //       parent,
-        //       target: { value: 'input' },
-        //       value: stopInfo.contact,
-        //     }));
-        //   stopInfo.note &&
-        //     (await screen.type({
-        //       index: stepIndex,
-        //       parent,
-        //       target: { value: 'textarea' },
-        //       value: stopInfo.note,
-        //     }));
-        //   stepIndex++;
-        // }
-
-        // // press next
-        // await screen.press({
-        //   isDelay: true,
-        //   target: { value: 'button[type=submit]' },
-        // });
+        // press next
+        await screen
+          .find({ value: 'button[type=submit]' }, { isDelay: true })
+          .then((h) => h?.press());
 
         await sleep(100000);
       });

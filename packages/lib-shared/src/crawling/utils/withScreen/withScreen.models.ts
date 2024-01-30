@@ -30,12 +30,14 @@ export type HandleModel = {
     options?: SelectorOptionModel & { index?: number },
   ): Promise<HandleModel | null>;
   findAll(selector: SelectorModel, options?: SelectorOptionModel): Promise<Array<HandleModel>>;
+  has(selector: SelectorModel): Promise<HandleModel | null>;
   press(options?: SelectorOptionModel): Promise<void>;
+  select(value: string, options?: SelectorOptionModel): Promise<void>;
   text(options?: SelectorOptionModel): Promise<string | null>;
   type(value: string, options?: SelectorOptionModel): Promise<void>;
 };
 
-export type SelectorOptionModel = { isDelay?: boolean; isWait?: boolean };
+export type SelectorOptionModel = { isDelay?: boolean; isThrow?: boolean; isWait?: boolean };
 
 export type SelectorModel = {
   value: string;

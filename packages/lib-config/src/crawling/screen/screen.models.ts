@@ -11,6 +11,10 @@ export type ScreenConfigModel = {
 
   isHeadless: boolean;
 
+  snapshotPath: string;
+
+  snapshotPrefix: string;
+
   timeout: number;
 };
 

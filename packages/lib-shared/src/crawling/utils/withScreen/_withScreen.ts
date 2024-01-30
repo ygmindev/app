@@ -1,5 +1,7 @@
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
+import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
+import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import {
   type _WithScreenModel,
   type _WithScreenParamsModel,
@@ -45,31 +47,48 @@ export const _withScreen = async (
 
   const findF = async (
     selector: SelectorModel,
-    { index = -1, isDelay, isWait = true }: SelectorOptionModel & { index?: number } = {},
+    {
+      index = -1,
+      isDelay,
+      isThrow = true,
+      isWait = true,
+    }: SelectorOptionModel & { index?: number } = {},
     handle?: ElementHandle,
   ): Promise<HandleModel | null> => {
     await sleep(isDelay ? delay : delayDefault);
     const selectorF = getSelector(selector);
-    isWait && (await (handle ?? page).waitForSelector(selectorF, { timeout }));
+    try {
+      isWait && (await (handle ?? page).waitForSelector(selectorF, { timeout }));
+    } catch (_) {}
     let selected;
     if (index >= 0) {
       selected = (await (handle ?? page).$$(selectorF))?.[index];
     } else {
       selected = await (handle ?? page).$(selectorF);
     }
-    return selected && new _Handle(selected);
+    if (selected) {
+      return new _Handle(selected);
+    }
+    isThrow && new NotFoundError(stringify(selector));
+    return null;
   };
 
   const findAllF = async (
     selector: SelectorModel,
-    { isDelay, isWait = true }: SelectorOptionModel = {},
+    { isDelay, isThrow = true, isWait = true }: SelectorOptionModel = {},
     handle?: ElementHandle,
   ): Promise<Array<HandleModel>> => {
     await sleep(isDelay ? delay : delayDefault);
     const selectorF = getSelector(selector);
-    isWait && (await (handle ?? page).waitForSelector(selectorF, { timeout }));
+    try {
+      isWait && (await (handle ?? page).waitForSelector(selectorF, { timeout }));
+    } catch (_) {}
     const selected = await (handle ?? page).$$(selectorF);
-    return selected?.map((v) => new _Handle(v));
+    if (selected) {
+      return selected?.map((v) => new _Handle(v));
+    }
+    isThrow && new NotFoundError(stringify(selector));
+    return [];
   };
 
   class _Handle implements HandleModel {
@@ -86,6 +105,11 @@ export const _withScreen = async (
       return findF(selector, options, this.handle);
     }
 
+    async has(selector: SelectorModel): Promise<HandleModel | null> {
+      const selected = await findF(selector, { isThrow: false, isWait: false }, this.handle);
+      return selected ? this : null;
+    }
+
     async findAll(
       selector: SelectorModel,
       options: SelectorOptionModel = {},
@@ -95,6 +119,10 @@ export const _withScreen = async (
 
     async press(): Promise<void> {
       this.handle?.click && (await this.handle?.click());
+    }
+
+    async select(value: string): Promise<void> {
+      this.handle?.select && (await this.handle?.select(value));
     }
 
     async text(): Promise<string | null> {

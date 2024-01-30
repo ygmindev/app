@@ -32,10 +32,6 @@ export type TestConfigModel = {
 
   root?: string;
 
-  snapshotPath: string;
-
-  snapshotPrefix: string;
-
   specExtension: string;
 
   timeout: number;
