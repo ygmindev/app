@@ -1,7 +1,3 @@
-import { getApps, initializeApp } from 'firebase/app';
-import { type Auth, type AuthError, onIdTokenChanged, type User } from 'firebase/auth';
-import { getAuth, onAuthStateChanged, signInWithCustomToken, signOut } from 'firebase/auth';
-
 import {
   type _UseSessionModel,
   type _UseSessionParamsModel,
@@ -10,6 +6,9 @@ import { isServer } from '@lib/platform/core/utils/isServer/isServer';
 import { type SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 import { OfflineError } from '@lib/shared/http/errors/OfflineError/OfflineError';
 import { warn } from '@lib/shared/logging/utils/logger/logger';
+import { getApps, initializeApp } from 'firebase/app';
+import { type Auth, type AuthError, onIdTokenChanged, type User } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signInWithCustomToken, signOut } from 'firebase/auth';
 
 let auth: Auth;
 

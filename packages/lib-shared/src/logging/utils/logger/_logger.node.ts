@@ -1,9 +1,8 @@
-import { type Logger } from 'winston';
-import { createLogger, format, transports } from 'winston';
-
 import { dateTimeFormat } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat';
 import { DATE_TIME_FORMAT_TYPE } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat.constants';
 import { type _LoggerModel } from '@lib/shared/logging/utils/logger/_logger.models';
+import { type Logger } from 'winston';
+import { createLogger, format, transports } from 'winston';
 
 const enumerateErrorFormat = format((info) => {
   if (info instanceof Error) {
@@ -19,9 +18,7 @@ const logger: Logger = createLogger({
     format.splat(),
     format.printf(
       ({ level, message }: { level: string; message: string }) =>
-        `[${dateTimeFormat({
-          format: DATE_TIME_FORMAT_TYPE.DATE_TIME_SECONDS_SHORT,
-        })}] ${level}: ${message}`,
+        `[${dateTimeFormat(new Date(), DATE_TIME_FORMAT_TYPE.DATE_TIME_SECONDS_SHORT)}] ${level}: ${message}`,
     ),
   ),
   level: process.env.NODE_ENV === 'development' ? 'debug' : 'info',

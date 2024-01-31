@@ -27,6 +27,6 @@ export const _CalendarPicker = composeComponent<
       },
       onSelect: onChange,
       selected: value,
-      styles: { root: { ...textMainStyle } },
+      styles: { caption: { ...textMainStyle }, root: { ...textMainStyle } },
     }) as DayPickerSingleProps | DayPickerRangeProps,
 });
