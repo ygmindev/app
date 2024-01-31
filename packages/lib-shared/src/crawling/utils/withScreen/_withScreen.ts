@@ -31,6 +31,7 @@ export const _withScreen = async (
 
   const browser = await launch({
     args: dimension ? [`--window-size-${dimension.width},${dimension.height}`] : undefined,
+    defaultViewport: dimension,
     headless: isHeadless ? 'new' : false,
     ignoreDefaultArgs: ['--hide-scrollbars'],
     ignoreHTTPSErrors: true,
@@ -127,6 +128,11 @@ export const _withScreen = async (
       this.handle?.click && (await this.handle?.click());
     }
 
+    async value(): Promise<string | null> {
+      const text = await this.handle?.evaluate(async (el) => (el as HTMLInputElement).value);
+      return text ?? null;
+    }
+
     async select(value: string): Promise<void> {
       this.handle?.select && (await this.handle?.select(value));
     }
@@ -175,11 +181,17 @@ export const _withScreen = async (
     },
 
     snapshot: async ({ filename } = {}) => {
-      await sleep(delay);
+      await page.$eval('[banneroffsetheight="0"]', (h) => h?.remove());
+      const element = await page.$('#bookingFunnelBody > div').then((h) => h?.boundingBox());
       const dirname = joinPaths([fromWorking(), snapshotPath]);
       !existsSync(dirname) && mkdirSync(dirname, { recursive: true });
       return page.screenshot({
-        fullPage: true,
+        clip: {
+          height: element?.height ?? dimension.height,
+          width: element?.width ?? dimension.width,
+          x: 0,
+          y: 0,
+        },
         path: filename ? joinPaths([dirname, `${filename}.png`]) : undefined,
       });
     },

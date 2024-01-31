@@ -19,7 +19,7 @@ export type ScreenModel = Pick<HandleModel, 'find' | 'findAll'> & {
 
   open(uri: string): Promise<void>;
 
-  snapshot(params?: { filename?: string }): Promise<Buffer>;
+  snapshot(params?: { filename?: string }): Promise<Buffer | null>;
 
   uri(): UriModel;
 };
@@ -35,6 +35,7 @@ export type HandleModel = {
   select(value: string, options?: SelectorOptionModel): Promise<void>;
   text(options?: SelectorOptionModel): Promise<string | null>;
   type(value: string, options?: SelectorOptionModel): Promise<void>;
+  value(): Promise<string | null>;
 };
 
 export type SelectorOptionModel = { isDelay?: boolean; isThrow?: boolean; isWait?: boolean };

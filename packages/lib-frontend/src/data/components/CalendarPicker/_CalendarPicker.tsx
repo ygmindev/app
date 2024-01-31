@@ -22,9 +22,7 @@ export const _CalendarPicker = composeComponent<
       disabled: disable,
       hideHead: true,
       mode: isRange ? 'range' : 'single',
-      modifiersStyles: {
-        selected: shapePrimaryMainStyle,
-      },
+      modifiersStyles: { selected: shapePrimaryMainStyle },
       onSelect: onChange,
       selected: value,
       styles: { caption: { ...textMainStyle }, root: { ...textMainStyle } },
