@@ -1,14 +1,17 @@
-import { Button } from '@lib/frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Dropdown } from '@lib/frontend/core/components/Dropdown/Dropdown';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { CalendarPicker } from '@lib/frontend/data/components/CalendarPicker/CalendarPicker';
 import {
   type DateInputPropsModel,
   type DateInputRefModel,
 } from '@lib/frontend/data/components/DateInput/DateInput.models';
+import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
+import { useFormatter } from '@lib/frontend/data/hooks/useFormatter/useFormatter';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { forwardRef, useState } from 'react';
 
 export const DateInput: RLFCModel<DateInputRefModel, DateInputPropsModel> = forwardRef(
@@ -19,23 +22,35 @@ export const DateInput: RLFCModel<DateInputRefModel, DateInputPropsModel> = forw
       onChange,
       value,
     });
+    const { format } = useFormatter();
     const [isActive, isActiveSet] = useState<boolean>();
     return (
       <Dropdown
         {...wrapperProps}
         anchor={
-          <Button
-            icon="calendar"
-            onPress={() => isActiveSet(!isActive)}
-            type={BUTTON_TYPE.TRANSPARENT}>
-            {label}
-          </Button>
+          <Wrapper position={SHAPE_POSITION.RELATIVE}>
+            <Wrapper
+              isAbsoluteFill
+              zIndex
+            />
+
+            <TextInput
+              elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
+              icon="calendar"
+              isNoClear
+              label={label}
+              value={format(valueControlled)}
+            />
+          </Wrapper>
         }
         isOpen={isActive}
         onToggle={isActiveSet}>
         <CalendarPicker
           isRange={false}
-          onChange={valueControlledSet}
+          onChange={(v) => {
+            isActiveSet(false);
+            valueControlledSet(v);
+          }}
           value={valueControlled}
         />
       </Dropdown>

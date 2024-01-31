@@ -1,10 +1,3 @@
-import isDate from 'lodash/isDate';
-import isNil from 'lodash/isNil';
-import isNumber from 'lodash/isNumber';
-import toNumber from 'lodash/toNumber';
-import toString from 'lodash/toString';
-import moment from 'moment';
-
 import {
   AMOUNT_UNIT,
   NUMBER_UNIT_TYPE,
@@ -23,7 +16,14 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { type FormattableTypeModel } from '@lib/shared/data/data.models';
+import { dateTimeFormat } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
+import isDate from 'lodash/isDate';
+import isNil from 'lodash/isNil';
+import isNumber from 'lodash/isNumber';
+import toNumber from 'lodash/toNumber';
+import toString from 'lodash/toString';
+import moment from 'moment';
 
 export const useFormatter = (): UseFormatterModel => {
   const { t } = useTranslation([LOCALE]);
@@ -71,7 +71,10 @@ export const useFormatter = (): UseFormatterModel => {
     return value;
   };
 
-  const format = <TType,>(value?: TType, options?: FormatterOptionsModel<TType>): string => {
+  const format = <TType,>(
+    value?: TType,
+    options?: FormatterOptionsModel<TType>,
+  ): string | undefined => {
     if (isNil(value)) {
       return '';
     }
@@ -153,7 +156,7 @@ export const useFormatter = (): UseFormatterModel => {
             return t('locale:today');
         }
       }
-      return moment(value).format(format ?? 'M/D/YYYY');
+      return dateTimeFormat(value, format);
     }
     return toString(value);
   };

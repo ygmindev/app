@@ -1,9 +1,10 @@
-import { type _DateTimeFormatParamsModel } from '@lib/shared/data/utils/dateTimeFormat/_dateTimeFormat.models';
+import {
+  type _DateTimeFormatModel,
+  type _DateTimeFormatParamsModel,
+} from '@lib/shared/data/utils/dateTimeFormat/_dateTimeFormat.models';
 import { DATE_TIME_FORMAT_TYPE } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat.constants';
-import moment from 'moment';
+import { format as formatF } from 'date-fns';
 
 export const _dateTimeFormat = (
-  { format = DATE_TIME_FORMAT_TYPE.DATE, value }: _DateTimeFormatParamsModel = {
-    format: DATE_TIME_FORMAT_TYPE.DATE,
-  },
-): string => moment(value).format(format);
+  ...[value, format = DATE_TIME_FORMAT_TYPE.DATE]: _DateTimeFormatParamsModel
+): _DateTimeFormatModel => value && formatF(value, format);

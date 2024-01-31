@@ -9,13 +9,11 @@ const { config } = defineConfig({
 
     delayDefault: 500,
 
-    dimension: { height: 1000, width: 1000 },
+    dimension: { height: 2000, width: 1000 },
 
-    isHeadless: false,
+    isHeadless: true,
 
     snapshotPath: joinPaths([fileConfig.buildPath, 'snapshots']),
-
-    snapshotPrefix: 'snapshot',
 
     timeout: 10000,
   } satisfies ScreenConfigModel,

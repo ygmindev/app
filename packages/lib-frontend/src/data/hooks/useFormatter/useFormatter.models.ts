@@ -2,9 +2,10 @@ import { type NumberUnitModel } from '@lib/frontend/data/data.models';
 import { type DATA_TYPE } from '@lib/shared/data/data.constants';
 import { type FormattableTypeModel } from '@lib/shared/data/data.models';
 import { type NumberRangeModel } from '@lib/shared/data/resources/NumberRange/NumberRange.models';
+import { type DateTimeFormatTypeModel } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat.models';
 
 export type UseFormatterModel = {
-  format<TType>(value?: TType, options?: FormatterOptionsModel<TType>): string;
+  format<TType>(value?: TType, options?: FormatterOptionsModel<TType>): string | undefined;
 
   formatRange(value?: NumberRangeModel, options?: NumberFormatterOptionsModel): string;
 
@@ -34,7 +35,7 @@ export type NumberFormatterOptionsModel = NumberScaleOptionsModel & {
 };
 
 export type DateFormatterOptionsModel = {
-  format?: string;
+  format?: DateTimeFormatTypeModel;
   isReadable?: boolean;
 };
 

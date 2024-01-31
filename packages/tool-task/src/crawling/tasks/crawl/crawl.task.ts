@@ -304,6 +304,8 @@ const crawl: TaskParamsModel<unknown> = {
           .find({ value: 'button[type=submit]' }, { isDelay: true })
           .then((h) => h?.press());
 
+        await screen.snapshot({ filename: 'curri' });
+
         await sleep(100000);
       });
     },

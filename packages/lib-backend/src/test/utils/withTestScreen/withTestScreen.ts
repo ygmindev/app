@@ -4,6 +4,7 @@ import {
   type WithTestScreenModel,
   type WithTestScreenParamsModel,
 } from '@lib/backend/test/utils/withTestScreen/withTestScreen.models';
+import { config as screenConfig } from '@lib/config/crawling/screen/screen';
 import { config as testConfig } from '@lib/config/node/test/test.base';
 import { slug } from '@lib/frontend/route/utils/slug/slug';
 import { withScreen } from '@lib/shared/crawling/utils/withScreen/withScreen';
@@ -11,18 +12,18 @@ import { withScreen } from '@lib/shared/crawling/utils/withScreen/withScreen';
 export const withTestScreen = async (
   callback: WithTestScreenParamsModel,
 ): Promise<WithTestScreenModel> => {
-  const { outputPath, snapshotPath, snapshotPrefix } = testConfig();
+  const { outputPath } = testConfig();
   return withScreen((screen) =>
     callback({
       ...screen,
-      snapshot: async () => {
-        const img = await screen.snapshot();
+      snapshot: async (params) => {
+        const img = await screen.snapshot({ ...params, filename: undefined });
         expect(img).toMatchImageSnapshot({
           customDiffDir: fromWorking(outputPath, 'diffs'),
           customReceivedDir: fromWorking(outputPath, 'received'),
           customSnapshotIdentifier: ({ counter, currentTestName }) =>
-            joinPaths([slug(currentTestName), `${snapshotPrefix}-${counter.toString()}`]),
-          customSnapshotsDir: fromWorking(snapshotPath),
+            joinPaths([slug(currentTestName), counter.toString(), params?.filename]),
+          customSnapshotsDir: fromWorking(screenConfig.snapshotPath),
         });
         return img;
       },

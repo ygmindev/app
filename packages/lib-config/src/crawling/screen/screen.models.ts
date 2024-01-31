@@ -13,8 +13,6 @@ export type ScreenConfigModel = {
 
   snapshotPath: string;
 
-  snapshotPrefix: string;
-
   timeout: number;
 };
 
