@@ -1,7 +1,7 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { Item } from '@lib/frontend/core/components/Item/Item';
 import { Text } from '@lib/frontend/core/components/Text/Text';
+import { Title } from '@lib/frontend/core/components/Title/Title';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import { _FileInput } from '@lib/frontend/data/components/FileInput/_FileInput';
@@ -80,7 +80,7 @@ export const FileInput = forwardRef(
             s={THEME_SIZE.SMALL}>
             {valueControlled?.length ? (
               valueControlled.map(({ name, size }) => (
-                <Item
+                <Title
                   icon="image"
                   key={name}
                   leftElement={

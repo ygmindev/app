@@ -1,5 +1,5 @@
 import { type ItemListPropsModel } from '@lib/frontend/core/components/ItemList/ItemList.models';
-import { PressableItem } from '@lib/frontend/core/components/PressableItem/PressableItem';
+import { PressableTitle } from '@lib/frontend/core/components/PressableTitle/PressableTitle';
 import { Tile } from '@lib/frontend/core/components/Tile/Tile';
 import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
@@ -25,7 +25,7 @@ export const ItemList = <TType extends WithIdModel>({
       <Tile title={title}>
         {items && items.length > 0 ? (
           items.map((item, i) => (
-            <PressableItem
+            <PressableTitle
               {...item}
               border={i > 0 ? DIRECTION.TOP : undefined}
               elementState={elementState}
@@ -36,7 +36,7 @@ export const ItemList = <TType extends WithIdModel>({
             />
           ))
         ) : (
-          <PressableItem
+          <PressableTitle
             elementState={ELEMENT_STATE.DISABLED}
             icon="empty"
             pVertical

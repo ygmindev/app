@@ -5,7 +5,7 @@ import { type ThemeColorPropsModel } from '@lib/frontend/style/style.models';
 import { type FontStylerParamsModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
 import { type ReactElement } from 'react';
 
-export type ItemPropsModel = ElementStatePropsModel &
+export type TitlePropsModel = ElementStatePropsModel &
   WithIconPropsModel &
   ThemeColorPropsModel &
   Pick<FontStylerParamsModel, 'fontStyle'> & {

@@ -1,5 +1,5 @@
 import { type ItemInputPropsModel } from '@lib/frontend/core/components/CategoryInput/CategoryInput.models';
-import { PressableItem } from '@lib/frontend/core/components/PressableItem/PressableItem';
+import { PressableTitle } from '@lib/frontend/core/components/PressableTitle/PressableTitle';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel, type TranslatableOptionModel } from '@lib/frontend/core/core.models';
@@ -49,7 +49,7 @@ const CategoryInputResult: LFCModel<
         emptyLabel && ({ icon: 'times', id: '', label: emptyLabel } as TranslatableOptionModel),
         ...(options ?? []),
       ]).map(({ icon, id, image, label }) => (
-        <PressableItem
+        <PressableTitle
           elementState={valueControlled === id ? ELEMENT_STATE.ACTIVE : undefined}
           icon={icon}
           image={image}

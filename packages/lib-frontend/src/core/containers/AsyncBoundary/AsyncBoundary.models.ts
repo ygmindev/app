@@ -1,9 +1,9 @@
-import { type ItemPropsModel } from '@lib/frontend/core/components/Item/Item.models';
+import { type TitlePropsModel } from '@lib/frontend/core/components/Title/Title.models';
 import { type ChildrenPropsModel } from '@lib/frontend/core/core.models';
 import { type TranslatableTextModel } from '@lib/frontend/locale/locale.models';
 import { type ReactElement } from 'react';
 
-export type ErrorContextModel = Omit<ItemPropsModel, 'color' | 'title'> & {
+export type ErrorContextModel = Omit<TitlePropsModel, 'color' | 'title'> & {
   title?: TranslatableTextModel;
 };
 

@@ -1,15 +1,15 @@
 import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
-import { Item } from '@lib/frontend/core/components/Item/Item';
-import { type PressableItemPropsModel } from '@lib/frontend/core/components/PressableItem/PressableItem.models';
+import { type PressableTitlePropsModel } from '@lib/frontend/core/components/PressableTitle/PressableTitle.models';
+import { Title } from '@lib/frontend/core/components/Title/Title';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 
-export const PressableItem: LFCModel<PressableItemPropsModel> = ({
+export const PressableTitle: LFCModel<PressableTitlePropsModel> = ({
   color,
   elementState,
   fontStyle,
@@ -39,7 +39,7 @@ export const PressableItem: LFCModel<PressableItemPropsModel> = ({
   return (
     <Activatable>
       {(isActive) => (
-        <Item
+        <Title
           {...wrapperProps}
           color={color}
           elementState={elementState}

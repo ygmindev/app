@@ -1,4 +1,4 @@
-import { type PressableItemPropsModel } from '@lib/frontend/core/components/PressableItem/PressableItem.models';
+import { type PressableTitlePropsModel } from '@lib/frontend/core/components/PressableTitle/PressableTitle.models';
 import {
   type ChildrenPropsModel,
   type ElementStateModel,
@@ -9,6 +9,6 @@ import { type ValuePropsModel } from '@lib/frontend/data/data.models';
 export type AccordionPropsModel = ChildrenPropsModel &
   SizablePropsModel &
   ValuePropsModel<ElementStateModel> &
-  Omit<PressableItemPropsModel, 'border' | 'children' | 'onPress'> & {
+  Omit<PressableTitlePropsModel, 'border' | 'children' | 'onPress'> & {
     isTransparent?: boolean;
   };
