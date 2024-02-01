@@ -212,7 +212,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless/production/1706498098361-2024-01-29T03:14:58.361Z/graphql.zip"
+                "S3Key": "serverless/serverless/production/1706743515717-2024-01-31T23:25:15.717Z/graphql.zip"
               },
               "Handler": "src/functions/graphql/graphql.main",
               "Runtime": "nodejs18.x",
@@ -248,7 +248,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless/production/1706498098361-2024-01-29T03:14:58.361Z/ping.zip"
+                "S3Key": "serverless/serverless/production/1706743515717-2024-01-31T23:25:15.717Z/ping.zip"
               },
               "Handler": "src/functions/ping/ping.main",
               "Runtime": "nodejs18.x",
@@ -685,6 +685,10 @@
           ".node.ts",
           ".node.jsx",
           ".node.js",
+          ".production.tsx",
+          ".production.ts",
+          ".production.jsx",
+          ".production.js",
           ".tsx",
           ".ts",
           ".jsx",
@@ -782,7 +786,8 @@
             "artifact": "/Users/yoongeemin/Developer/Projects/app/packages/backend-lambda/.serverless/custom.zip"
           },
           "path": "./.build/layers",
-          "retain": true
+          "retain": true,
+          "artifactAlreadyUploaded": true
         }
       },
       "package": {
@@ -805,7 +810,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/serverless/production/1706498098361-2024-01-29T03:14:58.361Z",
+    "artifactDirectoryName": "serverless/serverless/production/1706743515717-2024-01-31T23:25:15.717Z",
     "artifact": ""
   }
 }

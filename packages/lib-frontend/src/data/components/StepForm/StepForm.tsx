@@ -97,7 +97,7 @@ export const StepForm = <TType, TResult = void>({
             element: cloneElement(step.element, {
               data: values as PartialModel<TType>,
               elementState: isLoadingFF ? ELEMENT_STATE.LOADING : undefined,
-              initialValues: initialValues as PartialModel<TType>,
+              initialValues: { ...initialValues, ...values } as PartialModel<TType>,
               key: step.id,
               onBack: () => {
                 step.element.props.onBack && step.element.props.onBack();

@@ -82,15 +82,7 @@ export const SpecificationForm = <TType,>({
     return {
       element: (
         <FormContainer
-          fields={
-            [
-              {
-                // element: field.isArray ? <MultipleInput element={element} /> : element,
-                element,
-                id: field.id,
-              },
-            ] as Array<FormFieldsModel<unknown>>
-          }
+          fields={[{ element, id: field.id }] as Array<FormFieldsModel<unknown>>}
           flex
           isCenter
         />

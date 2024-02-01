@@ -13,7 +13,7 @@ import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 export const AddressInput: RLFCModel<AddressInputRefModel, AddressInputPropsModel> = forwardRef(
   ({ defaultValue, label, onChange, value, ...props }, ref) => {
     const { wrapperProps } = useLayoutStyles({ props });
-    const [textValue, textValueSet] = useState<string>();
+    const [textValue, textValueSet] = useState<string | undefined>(defaultValue?.name);
     const { valueControlled, valueControlledSet } = useValueControlled({
       defaultValue,
       onChange,

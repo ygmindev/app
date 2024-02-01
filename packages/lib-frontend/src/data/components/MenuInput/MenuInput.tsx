@@ -41,6 +41,7 @@ export const MenuInput = forwardRef(
       renderValue,
       rightElement,
       round,
+      textDefaultValue,
       value,
       width,
       ...props
@@ -72,7 +73,7 @@ export const MenuInput = forwardRef(
     });
     const optionsF = result.length > 0 ? result : options;
 
-    const [textValue, textValueSet] = useState<string>();
+    const [textValue, textValueSet] = useState<string | undefined>(textDefaultValue);
 
     const handleSubmit = (): void => {
       const queryValue = find(optionsF, ({ id }) => lowerCase(query) === lowerCase(id));

@@ -17,6 +17,7 @@ export type MenuInputPropsModel<TType extends MenuOptionModel = MenuOptionModel>
     onSearch?(value?: string): void;
     renderValue?(value?: string): TranslatableTextModel | undefined;
     rightElement?: (elementState?: ElementStateModel) => ReactElement | null;
+    textDefaultValue?: string;
   };
 
 export type MenuInputRefModel = InputRefModel;
