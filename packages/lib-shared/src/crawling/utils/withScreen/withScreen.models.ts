@@ -31,10 +31,14 @@ export type HandleModel = {
   ): Promise<HandleModel | null>;
   findAll(selector: SelectorModel, options?: SelectorOptionModel): Promise<Array<HandleModel>>;
   has(selector: SelectorModel): Promise<HandleModel | null>;
+  next(): Promise<HandleModel | null>;
   press(options?: SelectorOptionModel): Promise<void>;
+  previous(): Promise<HandleModel | null>;
   select(value: string, options?: SelectorOptionModel): Promise<void>;
+  src(): Promise<string | null>;
   text(options?: SelectorOptionModel): Promise<string | null>;
   type(value: string, options?: SelectorOptionModel): Promise<void>;
+  url(): Promise<string | null>;
   value(): Promise<string | null>;
 };
 

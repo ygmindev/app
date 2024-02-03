@@ -19,7 +19,11 @@ import {
   type SelectorOptionModel,
 } from '@lib/shared/crawling/utils/withScreen/withScreen.models';
 import { existsSync, mkdirSync } from 'fs';
-import { type ElementHandle, launch } from 'puppeteer';
+import { type ElementHandle } from 'puppeteer';
+import puppeteer from 'puppeteer-extra';
+import StealthPlugin from 'puppeteer-extra-plugin-stealth';
+
+puppeteer.use(StealthPlugin());
 
 export const _withScreen = async (
   ...[
@@ -29,7 +33,7 @@ export const _withScreen = async (
 ): Promise<_WithScreenModel> => {
   let isOpen: boolean;
 
-  const browser = await launch({
+  const browser = await puppeteer.launch({
     args: dimension ? [`--window-size-${dimension.width},${dimension.height}`] : undefined,
     defaultViewport: dimension,
     headless: isHeadless ? 'new' : false,
@@ -128,6 +132,26 @@ export const _withScreen = async (
       this.handle?.click && (await this.handle?.click());
     }
 
+    async previous(): Promise<HandleModel | null> {
+      const previous = await this.handle?.evaluateHandle((h) => h?.previousElementSibling);
+      return previous ? new _Handle(previous as ElementHandle) : null;
+    }
+
+    async next(): Promise<HandleModel | null> {
+      const next = await this.handle?.evaluateHandle((h) => h?.nextElementSibling);
+      return next ? new _Handle(next as ElementHandle) : null;
+    }
+
+    async url(): Promise<string | null> {
+      const text = await this.handle?.evaluate(async (el) => (el as HTMLAnchorElement).href);
+      return text ?? null;
+    }
+
+    async src(): Promise<string | null> {
+      const text = await this.handle?.evaluate(async (el) => (el as HTMLImageElement).src);
+      return text ?? null;
+    }
+
     async value(): Promise<string | null> {
       const text = await this.handle?.evaluate(async (el) => (el as HTMLInputElement).value);
       return text ?? null;
@@ -175,7 +199,6 @@ export const _withScreen = async (
     },
 
     open: async (route) => {
-      isOpen && (await page.waitForNavigation({ timeout, waitUntil: 'networkidle0' }));
       await page.goto(route, { timeout, waitUntil: 'networkidle0' });
       isOpen = true;
     },
