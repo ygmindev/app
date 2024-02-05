@@ -1,5 +1,5 @@
-import { type SpecificationModel } from '@lib/shared/openapi/utils/Specification/Specification.models';
+import { type SpecificationFormModel } from '@lib/shared/openapi/resources/Specification/Specification.models';
 
 export type SpecificationDetailPropsModel<TType> = {
-  specification: SpecificationModel<TType>;
+  specification: SpecificationFormModel;
 };

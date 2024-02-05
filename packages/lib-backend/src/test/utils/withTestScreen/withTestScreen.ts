@@ -6,7 +6,7 @@ import {
 } from '@lib/backend/test/utils/withTestScreen/withTestScreen.models';
 import { config as screenConfig } from '@lib/config/crawling/screen/screen';
 import { config as testConfig } from '@lib/config/node/test/test.base';
-import { slug } from '@lib/frontend/route/utils/slug/slug';
+import { slug } from '@lib/shared/core/utils/slug/slug';
 import { withScreen } from '@lib/shared/crawling/utils/withScreen/withScreen';
 
 export const withTestScreen = async (

@@ -9,6 +9,7 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
+import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
 import { error } from '@lib/shared/logging/utils/logger/logger';
 
@@ -33,12 +34,13 @@ export const useForm = <TType, TResult = void>({
 
   const handleSubmit = async (values: TType): Promise<TResult | null> => {
     try {
+      const valuesF = cleanObject(values);
       isValidateChanged &&
-        isEqual(values, initialValues) &&
+        isEqual(valuesF, initialValues) &&
         handleError(Error(t('core:validateChanged')));
       isBlocking && isLoadingSet(true);
-      const data = onSubmit && (await onSubmit(values));
-      onSuccess && (await onSuccess(values, data));
+      const data = onSubmit && (await onSubmit(valuesF));
+      onSuccess && (await onSuccess(valuesF, data));
       successMessage && success({ description: t('core:updateSuccess') });
       redirectTo && replace(redirectTo);
       return data ?? null;

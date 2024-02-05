@@ -1,7 +1,7 @@
 import {
   type _{{NAME}}(pascalCase)Model,
   type _{{NAME}}(pascalCase)ParamsModel,
-} from '{{PATH}}/{{NAME}}(camelCase)/_{{NAME}}(camelCase).models';
+} from '{{PATH}}(pathCase)/{{NAME}}(camelCase)/_{{NAME}}(camelCase).models';
 
 export const _{{NAME}}(camelCase) = (
   {}: _{{NAME}}(pascalCase)ParamsModel,

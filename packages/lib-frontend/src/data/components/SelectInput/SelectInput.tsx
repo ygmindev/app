@@ -1,16 +1,14 @@
-import { type ForwardedRef, forwardRef, type ReactElement, useMemo, useState } from 'react';
-
 import { ANIMATION_STATES_APPEAR_SCALABLE } from '@lib/frontend/animation/animation.constants';
 import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
 import { Circle } from '@lib/frontend/core/components/Circle/Circle';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { type LFCPropsModel, type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import {
   type SelectInputPropsModel,
   type SelectInputRefModel,
 } from '@lib/frontend/data/components/SelectInput/SelectInput.models';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import { type LFCPropsModel, type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import { SwitchInput } from '@lib/frontend/data/components/SwitchInput/SwitchInput';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
@@ -28,13 +26,14 @@ import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/sha
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
 import { sort } from '@lib/shared/core/utils/sort/sort';
+import { type ForwardedRef, forwardRef, type ReactElement, useMemo, useState } from 'react';
 
 export const SelectInput = forwardRef(
   <TType extends string | Array<string> = string>(
     {
       defaultValue,
       elementState,
-      isHorizontal,
+      isHorizontal = true,
       isMultiple,
       label,
       onChange,
@@ -84,10 +83,11 @@ export const SelectInput = forwardRef(
         opacity={isDisabled ? theme.opaque[THEME_SIZE.LARGE] : undefined}
         position={SHAPE_POSITION.RELATIVE}
         s={THEME_SIZE.SMALL}>
-        {label && <TranslatableText isBold>{label}</TranslatableText>}
+        <TranslatableText isBold>{label}</TranslatableText>
 
         <Wrapper
           isRowAlign={isHorizontal}
+          isWrap
           s={THEME_SIZE.SMALL}>
           {isMultiple && (
             <SwitchInput
@@ -143,7 +143,7 @@ export const SelectInput = forwardRef(
                       />
                     )}
 
-                    <TranslatableText>{label}</TranslatableText>
+                    <TranslatableText>{label ?? id}</TranslatableText>
                   </Wrapper>
                 )}
               </Activatable>

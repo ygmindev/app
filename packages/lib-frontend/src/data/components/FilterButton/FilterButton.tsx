@@ -1,5 +1,3 @@
-import { cloneElement, useRef } from 'react';
-
 import { type ModalRefModel } from '@lib/frontend/core/components/Modal/Modal.models';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -10,6 +8,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
+import { cloneElement, useRef } from 'react';
 
 export const FilterButton: LFCModel<FilterButtonPropsModel> = ({ element, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -21,9 +20,9 @@ export const FilterButton: LFCModel<FilterButtonPropsModel> = ({ element, ...pro
       isRowAlign
       justify={FLEX_JUSTIFY.END}>
       <ModalButton
-        element={({ onCancel }) =>
+        element={({ onClose }) =>
           cloneElement(element, {
-            onCancel,
+            onCancel: onClose,
             onSubmit: async (data: Array<FilterModel<unknown>>) => {
               element.props.onSubmit && (await element.props.onSubmit(data));
               modalRef.current?.toggle(false);

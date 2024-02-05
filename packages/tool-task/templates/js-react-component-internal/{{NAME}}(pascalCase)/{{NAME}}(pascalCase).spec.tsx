@@ -1,5 +1,5 @@
-import { type {{NAME}}PropsModel } from '{{PATH}}/{{NAME}}/{{NAME}}.models';
-import { {{NAME}} } from '{{PATH}}/{{NAME}}/{{NAME}}';
+import { type {{NAME}}PropsModel } from '{{PATH}}(pathCase)/{{NAME}}/{{NAME}}.models';
+import { {{NAME}} } from '{{PATH}}(pathCase)/{{NAME}}/{{NAME}}';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 

@@ -38,6 +38,7 @@ export const Wrapper: RLFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
       );
 
       const { length } = childrenF;
+      const isRowF = wrapperProps.isRow || wrapperProps.isRowAlign;
       return reduce(
         childrenF as Array<ReactElement>,
         (result, child) => {
@@ -49,19 +50,21 @@ export const Wrapper: RLFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
                 filterNil([
                   isDistribute && { flexGrow: 1, flexShrink: 1 },
                   ((wrapperProps.isReverse && result.length !== length - 1) ||
-                    (!wrapperProps.isReverse && result.length > 0)) &&
+                    (!wrapperProps.isReverse && result.length <= length - 1)) &&
                     spacingStyler(
                       {
-                        mLeft:
-                          childProps.mLeft === undefined
-                            ? wrapperProps.isRow &&
+                        mBottom:
+                          childProps.mBottom ??
+                          (isRowF && wrapperProps.isWrap
+                            ? THEME_SIZE.SMALL
+                            : !wrapperProps.isRow && wrapperProps.s),
+                        mRight:
+                          childProps.mRight ??
+                          (!isRowF && wrapperProps.isWrap
+                            ? THEME_SIZE.SMALL
+                            : wrapperProps.isRow &&
                               (wrapperProps.s ??
-                                (wrapperProps.isRowAlign ? THEME_SIZE.SMALL : undefined))
-                            : childProps.mLeft,
-                        mTop:
-                          childProps.mTop === undefined
-                            ? !wrapperProps.isRow && wrapperProps.s
-                            : childProps.mTop,
+                                (wrapperProps.isRowAlign ? THEME_SIZE.SMALL : undefined))),
                       },
                       theme,
                     ),

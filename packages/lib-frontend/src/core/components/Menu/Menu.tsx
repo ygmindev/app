@@ -21,6 +21,7 @@ import { TranslatableText } from '@lib/frontend/locale/components/TranslatableTe
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { type ForwardedRef, type ReactElement } from 'react';
 import { cloneElement, forwardRef, useImperativeHandle, useRef } from 'react';
 import { type ScrollView } from 'react-native';
@@ -103,7 +104,17 @@ export const Menu = forwardRef(
                 isFullWidth
                 key={id}
                 onPress={() => handlePressOption(option)}
-                rightElement={value && id === value ? <Icon icon="check" /> : undefined}
+                rightElement={
+                  value && id === value ? (
+                    <Wrapper
+                      bottom={0}
+                      position={SHAPE_POSITION.ABSOLUTE}
+                      right={0}
+                      top={0}>
+                      <Icon icon="check" />
+                    </Wrapper>
+                  ) : undefined
+                }
                 type={BUTTON_TYPE.INVISIBLE}>
                 {(renderOption ? renderOption(option) : label) ?? id}
               </Button>

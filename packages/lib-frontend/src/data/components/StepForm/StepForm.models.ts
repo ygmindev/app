@@ -19,11 +19,9 @@ export type FormStepPropsModel<
   onBack?(): void;
 };
 
-export type FormStepModel<
-  TType,
-  TStep extends PartialModel<TType>,
-  TResult = void,
-> = WithIdModel & {
-  element: ReactElement<FormStepPropsModel<TType, TStep, TResult>>;
-  title?: TranslatableTextModel;
-};
+export type FormStepModel<TType, TStep extends PartialModel<TType>, TResult = void> = WithIdModel &
+  Pick<FormContainerPropsModel<TStep, TResult>, 'fields'> & {
+    element?: ReactElement<FormStepPropsModel<TType, TStep, TResult>>;
+    message?: TranslatableTextModel;
+    title?: TranslatableTextModel;
+  };

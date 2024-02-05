@@ -25,6 +25,7 @@ export type ScreenModel = Pick<HandleModel, 'find' | 'findAll'> & {
 };
 
 export type HandleModel = {
+  content(): Promise<string | null>;
   find(
     selector: SelectorModel,
     options?: SelectorOptionModel & { index?: number },

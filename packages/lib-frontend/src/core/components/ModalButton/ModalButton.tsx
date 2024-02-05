@@ -6,25 +6,31 @@ import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { forwardRef, useState } from 'react';
 
 export const ModalButton: RLFCModel<ModalRefModel, ModalButtonPropsModel> = forwardRef(
-  ({ element, onPress, ref: _, title, ...props }, ref) => {
+  ({ element, onClose, onPress, ref: _, title, ...props }, ref) => {
     const [isOpen, isOpenSet] = useState<boolean>();
+
+    const handleToggle = (isOpen?: boolean): void => {
+      !isOpen && onClose && onClose();
+      isOpenSet(isOpen);
+    };
+
     return (
       <>
         <Button
           {...props}
           onPress={async () => {
             onPress && (await onPress());
-            isOpenSet(!isOpen);
+            handleToggle(!isOpen);
           }}
         />
 
         <Modal
           isFullSize
           isOpen={isOpen}
-          onToggle={isOpenSet}
+          onToggle={handleToggle}
           ref={ref}
           title={title}>
-          {element({ onCancel: () => isOpenSet(false) })}
+          {element({ onClose: () => handleToggle(false) })}
         </Modal>
       </>
     );

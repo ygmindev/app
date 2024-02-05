@@ -18,6 +18,7 @@ import {
   type SelectorModel,
   type SelectorOptionModel,
 } from '@lib/shared/crawling/utils/withScreen/withScreen.models';
+import { debug } from '@lib/shared/logging/utils/logger/logger';
 import { existsSync, mkdirSync } from 'fs';
 import { type ElementHandle } from 'puppeteer';
 import puppeteer from 'puppeteer-extra';
@@ -69,8 +70,9 @@ export const _withScreen = async (
     await sleep(isDelay ? delay : delayDefault);
     const selectorF = getSelector(selector);
     try {
+      debug(`Finding ${stringify(selector)}...`);
       isWait && (await (handle ?? page).waitForSelector(selectorF, { timeout }));
-    } catch (_) {}
+    } catch (e) {}
     let selected;
     if (index >= 0) {
       selected = (await (handle ?? page).$$(selectorF))?.[index];
@@ -78,6 +80,7 @@ export const _withScreen = async (
       selected = await (handle ?? page).$(selectorF);
     }
     if (selected) {
+      debug(`Found ${stringify(selector)}!`);
       return new _Handle(selected);
     }
     isThrow && new NotFoundError(stringify(selector));
@@ -92,10 +95,12 @@ export const _withScreen = async (
     await sleep(isDelay ? delay : delayDefault);
     const selectorF = getSelector(selector);
     try {
+      debug(`Finding all ${stringify(selector)}...`);
       isWait && (await (handle ?? page).waitForSelector(selectorF, { timeout }));
-    } catch (_) {}
+    } catch (e) {}
     const selected = await (handle ?? page).$$(selectorF);
     if (selected) {
+      debug(`Found all ${stringify(selector)}!`);
       return selected?.map((v) => new _Handle(v));
     }
     isThrow && new NotFoundError(stringify(selector));
@@ -143,17 +148,22 @@ export const _withScreen = async (
     }
 
     async url(): Promise<string | null> {
-      const text = await this.handle?.evaluate(async (el) => (el as HTMLAnchorElement).href);
+      const text = await this.handle?.evaluate(async (el) => (el as HTMLAnchorElement)?.href);
+      return text ?? null;
+    }
+
+    async content(): Promise<string | null> {
+      const text = await this.handle?.evaluate(async (el) => el?.innerHTML);
       return text ?? null;
     }
 
     async src(): Promise<string | null> {
-      const text = await this.handle?.evaluate(async (el) => (el as HTMLImageElement).src);
+      const text = await this.handle?.evaluate(async (el) => (el as HTMLImageElement)?.src);
       return text ?? null;
     }
 
     async value(): Promise<string | null> {
-      const text = await this.handle?.evaluate(async (el) => (el as HTMLInputElement).value);
+      const text = await this.handle?.evaluate(async (el) => (el as HTMLInputElement)?.value);
       return text ?? null;
     }
 
@@ -199,7 +209,7 @@ export const _withScreen = async (
     },
 
     open: async (route) => {
-      await page.goto(route, { timeout, waitUntil: 'networkidle0' });
+      await page.goto(route, { timeout, waitUntil: 'domcontentloaded' });
       isOpen = true;
     },
 

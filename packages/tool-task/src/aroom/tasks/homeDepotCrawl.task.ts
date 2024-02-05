@@ -1,5 +1,6 @@
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
+import { slug } from '@lib/shared/core/utils/slug/slug';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { withScreen } from '@lib/shared/crawling/utils/withScreen/withScreen';
 import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
@@ -18,109 +19,173 @@ const crawl: TaskParamsModel<unknown> = {
 
         const pageIndices = range(0, 21);
         for (const index of pageIndices) {
-          await screen.open(
-            `https://www.homedepot.com/b/Lumber-Composites/N-5yc1vZbqpg?catStyle=ShowProducts&sortorder=desc&sortby=topsellers&Nao=${index * 24}`,
-          );
-          const urls = await screen
-            .findAll({ value: '.product-image' })
-            .then((handles) => handles.map((h) => h?.url()));
+          try {
+            await screen.open(
+              `https://www.homedepot.com/b/Building-Materials/N-5yc1vZaqnsZbwo5l?NCNI-5&sortorder=desc&sortby=topsellers&Nao=${index * 24}`,
+            );
+            const urls = await screen
+              .findAll({ value: '.product-image' })
+              .then((handles) => handles.map((h) => h?.url()));
 
-          for (const url of urls) {
-            const urlF = await url;
-            if (urlF?.startsWith('https://www.homedepot.com')) {
+            for (const url of urls) {
               try {
-                const row: Record<string, unknown> = {};
-                await screen.open(urlF);
+                const urlF = await url;
+                if (urlF?.startsWith('https://www.homedepot.com')) {
+                  const row: Record<string, unknown> = {};
+                  await screen.open(urlF);
 
-                const accordions = await screen.findAll({ value: '.accordion-title-container' });
-                for (const accordion of accordions) {
-                  await accordion.press();
-                }
+                  const accordions = await screen.findAll({ value: '.accordion-title-container' });
+                  for (const accordion of accordions) {
+                    await accordion.press();
+                  }
 
-                // title
-                row.title = await screen
-                  .find({
-                    key: 'data-component',
-                    type: SELECTOR_TYPE.DATA,
-                    value: 'ProductDetailsTitle',
-                  })
-                  .then((h) => h?.find({ value: 'h1' }).then((h) => h?.text()));
+                  // category
+                  const tags = [];
+                  const categories = await screen
+                    .findAll({ value: '.breadcrumb__item a' })
+                    .then((handles) => handles.map((h) => h?.text()));
+                  for (const category of categories) {
+                    const categoryF = await category;
+                    categoryF && categoryF !== 'Home' && tags.push(categoryF);
+                  }
+                  if (tags) {
+                    const [category, ...tagsF] = tags;
+                    row['Product Category'] = category;
+                    tagsF && (row.Tags = `"${tagsF.join(',')}"`);
+                  }
 
-                // description
-                row.description = await screen
-                  .find({ value: '.desktop-content-wrapper__main-description' })
-                  .then((h) => h?.text());
+                  // title
+                  row.Title = await screen
+                    .find({
+                      key: 'data-component',
+                      type: SELECTOR_TYPE.DATA,
+                      value: 'ProductDetailsTitle',
+                    })
+                    .then((h) => h?.find({ value: 'h1' }).then((h) => h?.text()));
+                  row.Title && (row.Handle = slug(row.Title as string));
 
-                // price
-                const priceContainer = await screen.find({ value: '.price-format__main-price' });
-                if (priceContainer) {
-                  const spans = await priceContainer.findAll({
-                    value: 'span',
-                  });
-                  const dollar = await spans[1]?.text();
-                  const cent = await spans[3]?.text();
-                  row.price = toNumber(`${dollar ?? 0}.${cent ?? 0}`);
-                }
+                  // description
+                  row['Body (HTML)'] = await screen
+                    .find({ value: '.desktop-content-wrapper__main-description' })
+                    .then((h) => h?.content());
 
-                // dimensions
-                row.len = await screen
-                  .find({ type: SELECTOR_TYPE.TEXT, value: 'Actual Product Length (in.)' })
-                  .then((h) => h?.next())
-                  .then((h) => h?.text())
-                  .then((h) => h?.replace(' in', ''))
-                  .then((h) => toNumber(h));
+                  // price
+                  const priceContainer = await screen.find({ value: '.price-format__main-price' });
+                  if (priceContainer) {
+                    const spans = await priceContainer.findAll({
+                      value: 'span',
+                    });
+                    const dollar = await spans[1]?.text();
+                    const cent = await spans[3]?.text();
+                    row['Variant Price'] = toNumber(`${dollar ?? 0}.${cent ?? 0}`);
+                  }
 
-                row.width = await screen
-                  .find({ type: SELECTOR_TYPE.TEXT, value: 'Actual Product Width (in.)' })
-                  .then((h) => h?.next())
-                  .then((h) => h?.text())
-                  .then((h) => h?.replace(' in', ''))
-                  .then((h) => toNumber(h));
+                  const specificationsContainer = await screen.find({ value: '.specifications' });
+                  if (specificationsContainer) {
+                    // dimensions
+                    row.Length = await specificationsContainer
+                      .find({ type: SELECTOR_TYPE.TEXT, value: 'Length (in.)' })
+                      .then((h) => h?.next())
+                      .then((h) => h?.text())
+                      .then((h) => h?.replace(' in.', '').replace(' in', ''))
+                      .then((h) => toNumber(h));
+                    if (!row.Length) {
+                      row.Length = await specificationsContainer
+                        .find({ type: SELECTOR_TYPE.TEXT, value: 'Length (ft.)' })
+                        .then((h) => h?.next())
+                        .then((h) => h?.text())
+                        .then((h) => h?.replace(' ft.', '').replace(' ft', ''))
+                        .then((h) => toNumber(h));
+                      row.Length && (row['Length Unit'] = 'ft');
+                    } else {
+                      row['Length Unit'] = 'in';
+                    }
 
-                row.thickness = await screen
-                  .find({ type: SELECTOR_TYPE.TEXT, value: 'Actual Product Thickness (in.)' })
-                  .then((h) => h?.next())
-                  .then((h) => h?.text())
-                  .then((h) => h?.replace(' in', ''))
-                  .then((h) => toNumber(h));
+                    row.Width = await specificationsContainer
+                      .find({ type: SELECTOR_TYPE.TEXT, value: 'Width (in.)' })
+                      .then((h) => h?.next())
+                      .then((h) => h?.text())
+                      .then((h) => h?.replace(' in.', '').replace(' in', ''))
+                      .then((h) => toNumber(h));
+                    if (!row.Width) {
+                      row.Width = await specificationsContainer
+                        .find({ type: SELECTOR_TYPE.TEXT, value: 'Width (ft.)' })
+                        .then((h) => h?.next())
+                        .then((h) => h?.text())
+                        .then((h) => h?.replace(' ft.', '').replace(' ft', ''))
+                        .then((h) => toNumber(h));
+                      row.Width && (row['Width Unit'] = 'ft');
+                    } else {
+                      row['Width Unit'] = 'in';
+                    }
 
-                // images
-                const thumbnails = await screen.findAll({ value: '.mediagallery__imgblock' });
-                let i = 1;
-                for (const thumbnail of thumbnails) {
-                  await thumbnail.press();
-                  const src = await screen
-                    .find({ value: '.mediagallery__mainimage' })
-                    .then((h) =>
-                      h?.find({
-                        key: 'data-testid',
-                        type: SELECTOR_TYPE.DATA,
-                        value: 'small-image',
-                      }),
-                    )
-                    .then((h) => h?.src());
-                  row[`image-${i}`] = src;
-                  i++;
-                }
+                    row.Thickness = await specificationsContainer
+                      .find({ type: SELECTOR_TYPE.TEXT, value: 'Thickness (in.)' })
+                      .then((h) => h?.next())
+                      .then((h) => h?.text())
+                      .then((h) => h?.replace(' in.', '').replace(' in', ''))
+                      .then((h) => toNumber(h));
+                    if (!row.Thickness) {
+                      row.Thickness = await specificationsContainer
+                        .find({ type: SELECTOR_TYPE.TEXT, value: 'Thickness (ft.)' })
+                        .then((h) => h?.next())
+                        .then((h) => h?.text())
+                        .then((h) => h?.replace(' ft.', '').replace(' ft', ''))
+                        .then((h) => toNumber(h));
+                      row.Thickness && (row['Thickness Unit'] = 'ft');
+                    } else {
+                      row['Thickness Unit'] = 'in';
+                    }
 
-                console.warn(stringify(row));
-                result.push(row);
+                    row['Variant Weight'] = await specificationsContainer
+                      .find({ type: SELECTOR_TYPE.TEXT, value: 'Weight (lb.)' })
+                      .then((h) => h?.next())
+                      .then((h) => h?.text())
+                      .then((h) => h?.replace(' lb.', '').replace(' lb', ''))
+                      .then((h) => toNumber(h));
+                    row['Variant Weight'] && (row['Variant Weight Unit'] = 'lb');
+                  }
 
-                if (result) {
-                  const headers = Object.keys(result[0]);
-                  const resultF = [
-                    headers,
-                    ...result.map((row) => headers.map((h) => stringify(row[h]))),
-                  ];
-                  writeFile({
-                    filename: fromWorking('result.csv'),
-                    value: csv(resultF),
-                  });
+                  // images
+                  const thumbnail = await screen.find({ value: '.mediagallery__imgblock' });
+                  if (thumbnail) {
+                    await thumbnail.press();
+                    const src = await screen
+                      .find({ value: '.mediagallery__mainimage' })
+                      .then((h) =>
+                        h?.find({
+                          key: 'data-testid',
+                          type: SELECTOR_TYPE.DATA,
+                          value: 'small-image',
+                        }),
+                      )
+                      .then((h) => h?.src());
+                    row['Image Src'] = src;
+                  }
+
+                  console.warn(stringify(row));
+                  result.push(row);
+
+                  if (result) {
+                    const headers = Object.keys(result[0]);
+                    const resultF = [
+                      headers,
+                      ...result.map((row) => headers.map((h) => stringify(row[h]))),
+                    ];
+                    writeFile({
+                      filename: fromWorking('result.csv'),
+                      value: csv(resultF),
+                    });
+                  }
                 }
               } catch (e) {
                 console.warn(e);
+                continue;
               }
             }
+          } catch (e) {
+            console.warn(e);
+            continue;
           }
         }
       });
