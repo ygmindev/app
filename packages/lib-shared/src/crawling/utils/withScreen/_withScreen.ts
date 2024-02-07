@@ -20,6 +20,7 @@ import {
 } from '@lib/shared/crawling/utils/withScreen/withScreen.models';
 import { debug } from '@lib/shared/logging/utils/logger/logger';
 import { existsSync, mkdirSync } from 'fs';
+import isNumber from 'lodash/isNumber';
 import { type ElementHandle } from 'puppeteer';
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
@@ -63,7 +64,7 @@ export const _withScreen = async (
       index = -1,
       isDelay,
       isThrow = true,
-      isWait = true,
+      timeout: timeoutF = true,
     }: SelectorOptionModel & { index?: number } = {},
     handle?: ElementHandle,
   ): Promise<HandleModel | null> => {
@@ -71,7 +72,10 @@ export const _withScreen = async (
     const selectorF = getSelector(selector);
     try {
       debug(`Finding ${stringify(selector)}...`);
-      isWait && (await (handle ?? page).waitForSelector(selectorF, { timeout }));
+      timeout &&
+        (await (handle ?? page).waitForSelector(selectorF, {
+          timeout: isNumber(timeoutF) ? timeoutF : timeout,
+        }));
     } catch (e) {}
     let selected;
     if (index >= 0) {
@@ -89,14 +93,17 @@ export const _withScreen = async (
 
   const findAllF = async (
     selector: SelectorModel,
-    { isDelay, isThrow = true, isWait = true }: SelectorOptionModel = {},
+    { isDelay, isThrow = true, timeout: timeoutF = true }: SelectorOptionModel = {},
     handle?: ElementHandle,
   ): Promise<Array<HandleModel>> => {
     await sleep(isDelay ? delay : delayDefault);
     const selectorF = getSelector(selector);
     try {
       debug(`Finding all ${stringify(selector)}...`);
-      isWait && (await (handle ?? page).waitForSelector(selectorF, { timeout }));
+      timeout &&
+        (await (handle ?? page).waitForSelector(selectorF, {
+          timeout: isNumber(timeoutF) ? timeoutF : timeout,
+        }));
     } catch (e) {}
     const selected = await (handle ?? page).$$(selectorF);
     if (selected) {
@@ -122,7 +129,7 @@ export const _withScreen = async (
     }
 
     async has(selector: SelectorModel): Promise<HandleModel | null> {
-      const selected = await findF(selector, { isThrow: false, isWait: false }, this.handle);
+      const selected = await findF(selector, { isThrow: false, timeout: false }, this.handle);
       return selected ? this : null;
     }
 

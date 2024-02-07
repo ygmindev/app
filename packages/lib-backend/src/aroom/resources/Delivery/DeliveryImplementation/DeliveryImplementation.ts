@@ -195,7 +195,7 @@ export class DeliveryImplementation implements DeliveryImplementationModel {
           await parent
             ?.find(
               { key: 'aria-label', type: SELECTOR_TYPE.DATA, value: pickupDateFormatted },
-              { isWait: false },
+              { timeout: false },
             )
             .then((h) => h?.press());
           break;

@@ -1,6 +1,5 @@
 {
   "add": "add {{value}}",
-  "alreadyExists": "{{value}} already exists",
   "any": "any",
   "browse": "TRANSLATION_MISSING",
   "cancel": "cancel",
@@ -10,6 +9,7 @@
   "continueWith": "continue with {{value}}",
   "country": "country",
   "dragAndDrop": "TRANSLATION_MISSING",
+  "edit": "edit",
   "errorForbidden": "Forbidden",
   "errorGeneric": "please try refreshing",
   "errorOffline": "You are offline",
@@ -19,17 +19,17 @@
   "image": "TRANSLATION_MISSING",
   "measureIn": "measure in",
   "name": "name",
-  "nameMessage": "Enter the name of the {{value}}",
   "new": "new {{value}}",
-  "no": "TRANSLATION_MISSING",
+  "no": "no",
   "notFound": "not found",
   "nothingToShow": "Nothing to show",
   "open": "TRANSLATION_MISSING",
   "or": "or",
+  "remove": "remove",
   "search": "search",
   "selectAll": "select all",
   "somethingWentWrong": "something went wrong",
-  "success": "TRANSLATION_MISSING",
+  "success": "success",
   "tryAgain": "try again",
   "unit": "unit",
   "updateSuccess": "Successfully updated {{value}}",
@@ -43,5 +43,5 @@
   "validateZipCode": "TRANSLATION_MISSING",
   "welcome": "welcome to {{value}}",
   "welcomeBack": "welcome back",
-  "yes": "TRANSLATION_MISSING"
+  "yes": "yes"
 }

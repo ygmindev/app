@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-
 import {
   defaultStateContext,
   persistedStateContext,
@@ -15,6 +13,7 @@ import { type DeepKeyModel } from '@lib/shared/core/core.models';
 import { type _GetValueModel } from '@lib/shared/core/utils/getValue/_getValue.models';
 import { getValue } from '@lib/shared/core/utils/getValue/getValue';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
+import { useContext } from 'react';
 
 export const useStore = <TKey extends DeepKeyModel<RootStateModel>>(
   key: UseStoreParamsModel<TKey>,

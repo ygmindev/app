@@ -15,7 +15,7 @@ const { config } = defineConfig({
 
     snapshotPath: joinPaths([fileConfig.buildPath, 'snapshots']),
 
-    timeout: 10000,
+    timeout: 20000,
   } satisfies ScreenConfigModel,
 });
 

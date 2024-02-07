@@ -1,13 +1,15 @@
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 import { slug } from '@lib/shared/core/utils/slug/slug';
-import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { withScreen } from '@lib/shared/crawling/utils/withScreen/withScreen';
 import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { stringify as csv } from 'csv-stringify/sync';
 import range from 'lodash/range';
+import sortBy from 'lodash/sortBy';
 import toNumber from 'lodash/toNumber';
+
+const ELEMENT_TIMEOUT = 7000;
 
 const crawl: TaskParamsModel<unknown> = {
   name: 'home-depot-crawl',
@@ -16,6 +18,7 @@ const crawl: TaskParamsModel<unknown> = {
     async () => {
       await withScreen(async (screen) => {
         const result: Array<Record<string, unknown>> = [];
+        let resultF: Array<Array<string>> = [];
 
         const pageIndices = range(0, 21);
         for (const index of pageIndices) {
@@ -48,20 +51,21 @@ const crawl: TaskParamsModel<unknown> = {
                     const categoryF = await category;
                     categoryF && categoryF !== 'Home' && tags.push(categoryF);
                   }
-                  if (tags) {
-                    const [category, ...tagsF] = tags;
-                    row['Product Category'] = category;
-                    tagsF && (row.Tags = `"${tagsF.join(',')}"`);
-                  }
+                  row.Tags = tags ? `"${tags.join(',')}"` : '';
+
+                  // brand
+                  row.Vendor =
+                    (await screen.find({ value: '.brand' }).then((h) => h?.text())) ?? '';
 
                   // title
-                  row.Title = await screen
-                    .find({
-                      key: 'data-component',
-                      type: SELECTOR_TYPE.DATA,
-                      value: 'ProductDetailsTitle',
-                    })
-                    .then((h) => h?.find({ value: 'h1' }).then((h) => h?.text()));
+                  row.Title =
+                    (await screen
+                      .find({
+                        key: 'data-component',
+                        type: SELECTOR_TYPE.DATA,
+                        value: 'ProductDetailsTitle',
+                      })
+                      .then((h) => h?.find({ value: 'h1' }).then((h) => h?.text()))) ?? '';
                   row.Title && (row.Handle = slug(row.Title as string));
 
                   // description
@@ -77,100 +81,131 @@ const crawl: TaskParamsModel<unknown> = {
                     });
                     const dollar = await spans[1]?.text();
                     const cent = await spans[3]?.text();
-                    row['Variant Price'] = toNumber(`${dollar ?? 0}.${cent ?? 0}`);
+                    row['Variant Price'] =
+                      dollar && cent ? toNumber(`${dollar ?? 0}.${cent ?? 0}`) : '';
                   }
 
                   const specificationsContainer = await screen.find({ value: '.specifications' });
                   if (specificationsContainer) {
                     // dimensions
-                    row.Length = await specificationsContainer
-                      .find({ type: SELECTOR_TYPE.TEXT, value: 'Length (in.)' })
-                      .then((h) => h?.next())
-                      .then((h) => h?.text())
-                      .then((h) => h?.replace(' in.', '').replace(' in', ''))
-                      .then((h) => toNumber(h));
+                    row.Length =
+                      (await specificationsContainer
+                        .find(
+                          { type: SELECTOR_TYPE.TEXT, value: 'ength (ft.)' },
+                          { timeout: ELEMENT_TIMEOUT },
+                        )
+                        .then((h) => h?.next())
+                        .then((h) => h?.text())
+                        .then((h) => h?.replace(' ft.', '').replace(' ft', ''))
+                        .then((h) => h && toNumber(h))) ?? '';
                     if (!row.Length) {
-                      row.Length = await specificationsContainer
-                        .find({ type: SELECTOR_TYPE.TEXT, value: 'Length (ft.)' })
+                      row.Length =
+                        (await specificationsContainer
+                          .find(
+                            { type: SELECTOR_TYPE.TEXT, value: 'ength (in.)' },
+                            { timeout: ELEMENT_TIMEOUT },
+                          )
+                          .then((h) => h?.next())
+                          .then((h) => h?.text())
+                          .then((h) => h?.replace(' in.', '').replace(' in', ''))
+                          .then((h) => h && toNumber(h))) ?? '';
+                      row.Length && (row['Length Unit'] = 'in');
+                    } else {
+                      row['Length Unit'] = 'ft';
+                    }
+
+                    row.Width =
+                      (await specificationsContainer
+                        .find(
+                          { type: SELECTOR_TYPE.TEXT, value: 'idth (ft.)' },
+                          { timeout: ELEMENT_TIMEOUT },
+                        )
                         .then((h) => h?.next())
                         .then((h) => h?.text())
                         .then((h) => h?.replace(' ft.', '').replace(' ft', ''))
-                        .then((h) => toNumber(h));
-                      row.Length && (row['Length Unit'] = 'ft');
-                    } else {
-                      row['Length Unit'] = 'in';
-                    }
-
-                    row.Width = await specificationsContainer
-                      .find({ type: SELECTOR_TYPE.TEXT, value: 'Width (in.)' })
-                      .then((h) => h?.next())
-                      .then((h) => h?.text())
-                      .then((h) => h?.replace(' in.', '').replace(' in', ''))
-                      .then((h) => toNumber(h));
+                        .then((h) => h && toNumber(h))) ?? '';
                     if (!row.Width) {
-                      row.Width = await specificationsContainer
-                        .find({ type: SELECTOR_TYPE.TEXT, value: 'Width (ft.)' })
+                      row.Width =
+                        (await specificationsContainer
+                          .find(
+                            { type: SELECTOR_TYPE.TEXT, value: 'idth (in.)' },
+                            { timeout: ELEMENT_TIMEOUT },
+                          )
+                          .then((h) => h?.next())
+                          .then((h) => h?.text())
+                          .then((h) => h?.replace(' in.', '').replace(' in', ''))
+                          .then((h) => h && toNumber(h))) ?? '';
+                      row.Width && (row['Width Unit'] = 'in');
+                    } else {
+                      row['Width Unit'] = 'ft';
+                    }
+
+                    row.Thickness =
+                      (await specificationsContainer
+                        .find(
+                          { type: SELECTOR_TYPE.TEXT, value: 'hickness (ft.)' },
+                          { timeout: ELEMENT_TIMEOUT },
+                        )
                         .then((h) => h?.next())
                         .then((h) => h?.text())
                         .then((h) => h?.replace(' ft.', '').replace(' ft', ''))
-                        .then((h) => toNumber(h));
-                      row.Width && (row['Width Unit'] = 'ft');
-                    } else {
-                      row['Width Unit'] = 'in';
-                    }
-
-                    row.Thickness = await specificationsContainer
-                      .find({ type: SELECTOR_TYPE.TEXT, value: 'Thickness (in.)' })
-                      .then((h) => h?.next())
-                      .then((h) => h?.text())
-                      .then((h) => h?.replace(' in.', '').replace(' in', ''))
-                      .then((h) => toNumber(h));
+                        .then((h) => h && toNumber(h))) ?? '';
                     if (!row.Thickness) {
-                      row.Thickness = await specificationsContainer
-                        .find({ type: SELECTOR_TYPE.TEXT, value: 'Thickness (ft.)' })
-                        .then((h) => h?.next())
-                        .then((h) => h?.text())
-                        .then((h) => h?.replace(' ft.', '').replace(' ft', ''))
-                        .then((h) => toNumber(h));
-                      row.Thickness && (row['Thickness Unit'] = 'ft');
+                      row.Thickness =
+                        (await specificationsContainer
+                          .find(
+                            { type: SELECTOR_TYPE.TEXT, value: 'hickness (in.)' },
+                            { timeout: ELEMENT_TIMEOUT },
+                          )
+                          .then((h) => h?.next())
+                          .then((h) => h?.text())
+                          .then((h) => h?.replace(' in.', '').replace(' in', ''))
+                          .then((h) => h && toNumber(h))) ?? '';
+                      row.Thickness && (row['Thickness Unit'] = 'in');
                     } else {
-                      row['Thickness Unit'] = 'in';
+                      row['Thickness Unit'] = 'ft';
                     }
 
-                    row['Variant Weight'] = await specificationsContainer
-                      .find({ type: SELECTOR_TYPE.TEXT, value: 'Weight (lb.)' })
-                      .then((h) => h?.next())
-                      .then((h) => h?.text())
-                      .then((h) => h?.replace(' lb.', '').replace(' lb', ''))
-                      .then((h) => toNumber(h));
+                    row['Variant Weight'] =
+                      (await specificationsContainer
+                        .find(
+                          { type: SELECTOR_TYPE.TEXT, value: 'eight (lb.)' },
+                          { timeout: ELEMENT_TIMEOUT },
+                        )
+                        .then((h) => h?.next())
+                        .then((h) => h?.text())
+                        .then((h) => h?.replace(' lb.', '').replace(' lb', ''))
+                        .then((h) => h && toNumber(h))) ?? '';
                     row['Variant Weight'] && (row['Variant Weight Unit'] = 'lb');
                   }
 
                   // images
-                  const thumbnail = await screen.find({ value: '.mediagallery__imgblock' });
-                  if (thumbnail) {
+                  const thumbnails = await screen.findAll({ value: '.mediagallery__imgblock' });
+                  let i = 1;
+                  for (const thumbnail of thumbnails) {
                     await thumbnail.press();
                     const src = await screen
                       .find({ value: '.mediagallery__mainimage' })
-                      .then((h) =>
-                        h?.find({
-                          key: 'data-testid',
-                          type: SELECTOR_TYPE.DATA,
-                          value: 'small-image',
-                        }),
-                      )
+                      .then((h) => h?.find({ value: 'img' }))
                       .then((h) => h?.src());
-                    row['Image Src'] = src;
+
+                    if (src) {
+                      row.URL = urlF;
+                      const rowToAdd = i > 1 ? { Handle: row.Handle } : row;
+                      rowToAdd['Image Src'] = src;
+                      rowToAdd['Image Position'] = i;
+                      result.push(rowToAdd);
+                      i++;
+                    }
                   }
 
-                  console.warn(stringify(row));
-                  result.push(row);
-
                   if (result) {
-                    const headers = Object.keys(result[0]);
-                    const resultF = [
+                    let headersAll = result.map((row) => Object.keys(row));
+                    headersAll = sortBy(headersAll, (v) => -1 * v.length);
+                    const [headers, ..._] = headersAll;
+                    resultF = [
                       headers,
-                      ...result.map((row) => headers.map((h) => stringify(row[h]))),
+                      ...result.map((row) => headers.map((h) => `${row[h] as string}`)),
                     ];
                     writeFile({
                       filename: fromWorking('result.csv'),

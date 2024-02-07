@@ -1,3 +1,4 @@
+import { type AsyncPropsModel } from '@lib/frontend/data/data.models';
 import {
   type _UseMutationModel,
   type _UseMutationParamsModel,
@@ -12,3 +13,7 @@ export type UseMutationModel<TParams = undefined, TResult = void> = _UseMutation
   TParams,
   TResult
 >;
+
+export type UseMutationOptionsModel = AsyncPropsModel & {
+  cache?: boolean | number;
+};

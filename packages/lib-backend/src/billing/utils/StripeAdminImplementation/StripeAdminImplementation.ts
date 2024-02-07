@@ -1,4 +1,3 @@
-import { STRIPE_ADMIN_SERVICE_API_VERSION } from '@lib/backend/billing/utils/StripeAdminImplementation/StripeAdminImplementation.constants';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { ExternalError } from '@lib/shared/core/errors/ExternalError/ExternalError';
 import Stripe from 'stripe';
@@ -6,7 +5,7 @@ import Stripe from 'stripe';
 @withContainer()
 export class StripeAdminImplementation {
   stripe: Stripe = new Stripe(process.env.SERVER_STRIPE_TOKEN, {
-    apiVersion: STRIPE_ADMIN_SERVICE_API_VERSION,
+    apiVersion: process.env.SERVER_STRIPE_API_VERSION as Stripe.LatestApiVersion,
   });
 
   createCustomer = async (): Promise<string> => {

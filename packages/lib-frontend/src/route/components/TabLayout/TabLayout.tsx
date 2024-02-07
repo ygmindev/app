@@ -1,6 +1,3 @@
-import find from 'lodash/find';
-import { useEffect } from 'react';
-
 import { Tabs } from '@lib/frontend/core/components/Tabs/Tabs';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
@@ -10,6 +7,8 @@ import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { type RouteModel } from '@lib/frontend/route/route.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import find from 'lodash/find';
+import { useEffect } from 'react';
 
 export const TabLayout: LFCModel<TabLayoutPropsModel> = ({ children, route, type, ...props }) => {
   const { t } = useTranslation();

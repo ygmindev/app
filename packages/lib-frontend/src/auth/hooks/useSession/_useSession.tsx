@@ -37,7 +37,7 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
           onAuthStateChanged(auth, (user: User | null) => {
             if (user) {
               user
-                .getIdTokenResult()
+                .getIdTokenResult(true)
                 .then(({ claims }) => onAuthenticate({ _id: user.uid, claims } as SignInTokenModel))
                 .catch((e) => {
                   const error =

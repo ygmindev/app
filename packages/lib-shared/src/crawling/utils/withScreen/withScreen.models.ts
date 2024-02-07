@@ -43,7 +43,11 @@ export type HandleModel = {
   value(): Promise<string | null>;
 };
 
-export type SelectorOptionModel = { isDelay?: boolean; isThrow?: boolean; isWait?: boolean };
+export type SelectorOptionModel = {
+  isDelay?: boolean;
+  isThrow?: boolean;
+  timeout?: boolean | number;
+};
 
 export type SelectorModel = {
   value: string;

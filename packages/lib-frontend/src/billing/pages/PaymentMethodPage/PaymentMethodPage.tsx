@@ -6,7 +6,6 @@ import { usePaymentMethodResource } from '@lib/frontend/billing/hooks/usePayment
 import { type PaymentMethodPagePropsModel } from '@lib/frontend/billing/pages/PaymentMethodPage/PaymentMethodPage.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { ItemList } from '@lib/frontend/core/components/ItemList/ItemList';
-import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBoundary';
@@ -64,14 +63,14 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
               title: t('billing:paymentMethodTitle', { last4, name }),
               type,
             }))}
-            rightElement={({ isActive, item }) => (
+            rightElement={({ item }) => (
               <Button
                 color={THEME_COLOR.ERROR}
                 confirmMessage={t('core:confirmRemove', {
                   value: t('billing:paymentMethodTitle', { last4: item.last4, name: item.name }),
                 })}
-                elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
                 icon="trash"
+                iconText={t('core:remove')}
                 onPress={async () => {
                   switch (item.type) {
                     case PAYMENT_METHOD_TYPE.BANK:

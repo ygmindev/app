@@ -7,6 +7,7 @@ import { usePaymentMethodResource } from '@lib/frontend/billing/hooks/usePayment
 import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { useErrorContext } from '@lib/frontend/core/hooks/useErrorContext/useErrorContext';
 import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBoundary';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { forwardRef } from 'react';
@@ -15,6 +16,7 @@ export const PaymentMethodInput: RLFCModel<
   PaymentMethodInputRefModel,
   PaymentMethodInputPropsModel
 > = forwardRef(({ ...props }, ref) => {
+  const { wrapperProps } = useLayoutStyles({ props });
   const currentUser = useCurrentUser();
   const { createToken } = usePaymentMethodResource();
   const { handleError } = useErrorContext();
@@ -25,6 +27,7 @@ export const PaymentMethodInput: RLFCModel<
 
   return (
     <DataBoundary
+      {...wrapperProps}
       flex
       id="cardToken"
       query={query}>

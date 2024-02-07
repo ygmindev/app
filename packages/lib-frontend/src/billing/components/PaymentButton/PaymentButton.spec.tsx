@@ -1,11 +1,9 @@
-import { type {{NAME}}PropsModel } from '@{{PATH}}(pathCase)/{{NAME}}/{{NAME}}.models';
-import { {{NAME}} } from '@{{PATH}}(pathCase)/{{NAME}}/{{NAME}}';
+import { PaymentButton } from 'lib/frontend/billing/components/PaymentButton/PaymentButton';
+import { type PaymentButtonPropsModel } from 'lib/frontend/billing/components/PaymentButton/PaymentButton.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<{{NAME}}(pascalCase)PropsModel>({
-  target: {{NAME}}(pascalCase),
-});
+const { Component, displayName, testID } = withTestComponent<PaymentButtonPropsModel>({ target: PaymentButton });
 
 describe(displayName, () => {
   test('works', async () => {
