@@ -1,4 +1,4 @@
-import { PaymentButton } from '@lib/frontend/billing/components/PaymentButton/PaymentButton';
+import { CheckoutButton } from '@lib/frontend/billing/components/CheckoutButton/CheckoutButton';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
@@ -15,7 +15,7 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
       flex
       isFullHeight
       p>
-      <PaymentButton
+      <CheckoutButton
         price={{
           currency: '$',
           value: 123.12,

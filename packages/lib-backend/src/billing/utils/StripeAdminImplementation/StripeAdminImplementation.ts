@@ -15,8 +15,8 @@ export class StripeAdminImplementation {
 
   createIntent = async (id: string): Promise<string> => {
     const { client_secret } = await this.stripe.setupIntents.create({
+      automatic_payment_methods: { enabled: true },
       customer: id,
-      payment_method_types: ['card', 'us_bank_account'],
     });
     if (client_secret) {
       return client_secret;

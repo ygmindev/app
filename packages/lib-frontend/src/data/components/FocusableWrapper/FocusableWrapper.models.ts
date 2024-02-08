@@ -8,6 +8,6 @@ export type FocusableWrapperPropsModel = ElementStatePropsModel &
   ChildrenPropsModel & { error?: TranslatableTextModel | boolean };
 
 export type FocusableRefModel = {
-  blur(): void;
-  focus(): void;
+  blur?(): void;
+  focus?(): void;
 };

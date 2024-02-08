@@ -20,7 +20,11 @@ import {
   PAYMENT_METHOD_RESOURCE_NAME,
   PAYMENT_METHOD_TYPE,
 } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
+import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 import { useRef } from 'react';
 
 export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...props }) => {
@@ -31,7 +35,12 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
   const { getMany } = usePaymentMethodResource();
   const { remove: bankRemove } = useBankResource({ root: currentUser?._id });
   const { remove: cardRemove } = useCardResource({ root: currentUser?._id });
-  const ref = useRef<DataBoundaryRefModel>(null);
+  const ref =
+    useRef<
+      DataBoundaryRefModel<
+        OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>
+      >
+    >(null);
   return (
     <MainLayout
       {...wrapperProps}

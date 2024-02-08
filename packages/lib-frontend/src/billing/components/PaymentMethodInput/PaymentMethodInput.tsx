@@ -3,13 +3,9 @@ import {
   type PaymentMethodInputPropsModel,
   type PaymentMethodInputRefModel,
 } from '@lib/frontend/billing/components/PaymentMethodInput/PaymentMethodInput.models';
-import { usePaymentMethodResource } from '@lib/frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
-import { useErrorContext } from '@lib/frontend/core/hooks/useErrorContext/useErrorContext';
-import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBoundary';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
-import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { forwardRef } from 'react';
 
 export const PaymentMethodInput: RLFCModel<
@@ -17,28 +13,9 @@ export const PaymentMethodInput: RLFCModel<
   PaymentMethodInputPropsModel
 > = forwardRef(({ ...props }, ref) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const currentUser = useCurrentUser();
-  const { createToken } = usePaymentMethodResource();
-  const { handleError } = useErrorContext();
-
-  const query = async (): Promise<{ data?: PaymentMethodModel; token?: string }> => ({
-    token: (await createToken({ root: currentUser?._id })).result,
-  });
-
   return (
-    <DataBoundary
-      {...wrapperProps}
-      flex
-      id="cardToken"
-      query={query}>
-      {({ data }) => (
-        <_PaymentMethodInput
-          {...props}
-          onError={handleError}
-          ref={ref}
-          token={data?.token}
-        />
-      )}
-    </DataBoundary>
+    <Wrapper {...wrapperProps}>
+      <_PaymentMethodInput ref={ref} />
+    </Wrapper>
   );
 });

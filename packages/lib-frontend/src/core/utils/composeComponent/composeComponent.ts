@@ -1,7 +1,3 @@
-import { type ReactElement } from 'react';
-import { createElement, forwardRef } from 'react';
-import { unstable_createElement } from 'react-native-web';
-
 import {
   type ComposeComponentModel,
   type ComposeComponentParamsModel,
@@ -14,6 +10,9 @@ import {
   type StylePropsModel,
   type ViewStyleModel,
 } from '@lib/frontend/style/style.models';
+import { type ReactElement } from 'react';
+import { createElement, forwardRef } from 'react';
+import { unstable_createElement } from 'react-native-web';
 
 export const composeComponent = <
   TProps,

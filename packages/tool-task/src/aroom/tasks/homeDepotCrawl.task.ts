@@ -97,7 +97,7 @@ const crawl: TaskParamsModel<unknown> = {
                         .then((h) => h?.next())
                         .then((h) => h?.text())
                         .then((h) => h?.replace(' ft.', '').replace(' ft', ''))
-                        .then((h) => h && toNumber(h))) ?? '';
+                        .then((h) => h && toNumber(eval(h)))) ?? '';
                     if (!row.Length) {
                       row.Length =
                         (await specificationsContainer
@@ -108,7 +108,7 @@ const crawl: TaskParamsModel<unknown> = {
                           .then((h) => h?.next())
                           .then((h) => h?.text())
                           .then((h) => h?.replace(' in.', '').replace(' in', ''))
-                          .then((h) => h && toNumber(h))) ?? '';
+                          .then((h) => h && toNumber(eval(h)))) ?? '';
                       row.Length && (row['Length Unit'] = 'in');
                     } else {
                       row['Length Unit'] = 'ft';
@@ -123,7 +123,7 @@ const crawl: TaskParamsModel<unknown> = {
                         .then((h) => h?.next())
                         .then((h) => h?.text())
                         .then((h) => h?.replace(' ft.', '').replace(' ft', ''))
-                        .then((h) => h && toNumber(h))) ?? '';
+                        .then((h) => h && toNumber(eval(h)))) ?? '';
                     if (!row.Width) {
                       row.Width =
                         (await specificationsContainer
@@ -134,7 +134,7 @@ const crawl: TaskParamsModel<unknown> = {
                           .then((h) => h?.next())
                           .then((h) => h?.text())
                           .then((h) => h?.replace(' in.', '').replace(' in', ''))
-                          .then((h) => h && toNumber(h))) ?? '';
+                          .then((h) => h && toNumber(eval(h)))) ?? '';
                       row.Width && (row['Width Unit'] = 'in');
                     } else {
                       row['Width Unit'] = 'ft';
@@ -149,7 +149,7 @@ const crawl: TaskParamsModel<unknown> = {
                         .then((h) => h?.next())
                         .then((h) => h?.text())
                         .then((h) => h?.replace(' ft.', '').replace(' ft', ''))
-                        .then((h) => h && toNumber(h))) ?? '';
+                        .then((h) => h && toNumber(eval(h)))) ?? '';
                     if (!row.Thickness) {
                       row.Thickness =
                         (await specificationsContainer
@@ -160,7 +160,7 @@ const crawl: TaskParamsModel<unknown> = {
                           .then((h) => h?.next())
                           .then((h) => h?.text())
                           .then((h) => h?.replace(' in.', '').replace(' in', ''))
-                          .then((h) => h && toNumber(h))) ?? '';
+                          .then((h) => h && toNumber(eval(h)))) ?? '';
                       row.Thickness && (row['Thickness Unit'] = 'in');
                     } else {
                       row['Thickness Unit'] = 'ft';
@@ -175,7 +175,7 @@ const crawl: TaskParamsModel<unknown> = {
                         .then((h) => h?.next())
                         .then((h) => h?.text())
                         .then((h) => h?.replace(' lb.', '').replace(' lb', ''))
-                        .then((h) => h && toNumber(h))) ?? '';
+                        .then((h) => h && toNumber(eval(h)))) ?? '';
                     row['Variant Weight'] && (row['Variant Weight Unit'] = 'lb');
                   }
 

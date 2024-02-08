@@ -22,7 +22,8 @@ export type DataBoundaryPropsModel<TParams = undefined, TResult = void> = Omit<
     fallbackData?: TResult;
   };
 
-export type DataBoundaryRefModel = QueryComponentRefModel & MutateComponentRefModel;
+export type DataBoundaryRefModel<TResult = void> = QueryComponentRefModel<TResult> &
+  MutateComponentRefModel<TResult>;
 
 export type QueryComponentPropsModel<TParams = undefined, TResult = void> = WithIdModel &
   AsyncPropsModel &
@@ -34,7 +35,8 @@ export type QueryComponentPropsModel<TParams = undefined, TResult = void> = With
     query: UseQueryParamsModel<TParams, TResult>[1];
   };
 
-export type QueryComponentRefModel = {
+export type QueryComponentRefModel<TResult = void> = {
+  getData(): TResult | null | undefined;
   query?(): Promise<void>;
   reset?(): Promise<void>;
 };
@@ -49,7 +51,8 @@ export type MutateComponentPropsModel<TParams = undefined, TResult = void> = Wit
     params?: TParams;
   };
 
-export type MutateComponentRefModel = {
+export type MutateComponentRefModel<TResult = void> = {
+  getData(): TResult | null | undefined;
   mutate?(): Promise<void>;
   reset?(): Promise<void>;
 };

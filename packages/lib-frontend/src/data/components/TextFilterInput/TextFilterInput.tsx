@@ -31,9 +31,8 @@ export const TextFilterInput: RLFCModel<TextFilterInputRefModel, TextFilterInput
     const inputRef = useRef<InputRefModel>(null);
 
     useImperativeHandle(ref, () => ({
+      ...inputRef.current,
       beforeSubmit: async (v, k) => [{ condition, field: k, value: v }],
-      blur: () => inputRef.current?.blur(),
-      focus: () => inputRef.current?.focus(),
     }));
 
     return (

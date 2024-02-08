@@ -34,13 +34,12 @@ export const RoutesInput: RLFCModel<RoutesInputRefModel, RoutesInputPropsModel> 
     });
 
     useImperativeHandle(ref, () => ({
+      ...inputRef.current,
       beforeSubmit: async () =>
         valueControlled?.map(({ latitude, longitude }) => ({
           latitude,
           longitude,
         })),
-      blur: () => inputRef.current?.blur(),
-      focus: () => inputRef.current?.focus(),
       reset: () => null,
     }));
 

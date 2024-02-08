@@ -24,6 +24,7 @@ export const AddressInput: RLFCModel<AddressInputRefModel, AddressInputPropsMode
     const inputRef = useRef<MenuInputRefModel>(null);
 
     useImperativeHandle(ref, () => ({
+      ...inputRef.current,
       beforeSubmit: async () => {
         if (valueControlled) {
           const { id: _, ...valueControlledF } = valueControlled;
@@ -31,9 +32,6 @@ export const AddressInput: RLFCModel<AddressInputRefModel, AddressInputPropsMode
         }
         return valueControlled;
       },
-      blur: () => inputRef.current?.blur(),
-      focus: () => inputRef.current?.focus(),
-      reset: () => null,
     }));
 
     return (

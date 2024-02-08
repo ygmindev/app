@@ -1,9 +1,11 @@
-import { PaymentButton } from 'lib/frontend/billing/components/PaymentButton/PaymentButton';
-import { type PaymentButtonPropsModel } from 'lib/frontend/billing/components/PaymentButton/PaymentButton.models';
+import { CheckoutButton } from '@lib/frontend/billing/components/CheckoutButton/CheckoutButton';
+import { type CheckoutButtonPropsModel } from '@lib/frontend/billing/components/CheckoutButton/CheckoutButton.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<PaymentButtonPropsModel>({ target: PaymentButton });
+const { Component, displayName, testID } = withTestComponent<CheckoutButtonPropsModel>({
+  target: CheckoutButton,
+});
 
 describe(displayName, () => {
   test('works', async () => {

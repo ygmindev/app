@@ -40,9 +40,9 @@ const QueryComponent = forwardRef(
       query,
       ...props
     }: LFCPropsModel<QueryComponentPropsModel<TParams, TResult>>,
-    ref: ForwardedRef<QueryComponentRefModel>,
+    ref: ForwardedRef<QueryComponentRefModel<TResult>>,
   ): ReactElement<
-    RLFCPropsModel<QueryComponentRefModel, QueryComponentPropsModel<TParams, TResult>>
+    RLFCPropsModel<QueryComponentRefModel<TResult>, QueryComponentPropsModel<TParams, TResult>>
   > => {
     const { wrapperProps } = useLayoutStyles({ props });
     const {
@@ -52,6 +52,7 @@ const QueryComponent = forwardRef(
     } = useQuery<TParams, TResult>(id, query, { isBlocking }, params);
 
     useImperativeHandle(ref, () => ({
+      getData: () => data,
       query: async () => {
         await queryF();
       },
@@ -74,9 +75,12 @@ const QueryComponent = forwardRef(
     );
   },
 ) as <TParams = undefined, TResult = void>(
-  props: RLFCPropsModel<QueryComponentRefModel, QueryComponentPropsModel<TParams, TResult>>,
+  props: RLFCPropsModel<
+    QueryComponentRefModel<TResult>,
+    QueryComponentPropsModel<TParams, TResult>
+  >,
 ) => ReactElement<
-  RLFCPropsModel<QueryComponentRefModel, QueryComponentPropsModel<TParams, TResult>>
+  RLFCPropsModel<QueryComponentRefModel<TResult>, QueryComponentPropsModel<TParams, TResult>>
 >;
 
 const MutateComponent = forwardRef(
@@ -90,16 +94,16 @@ const MutateComponent = forwardRef(
       params,
       ...props
     }: LFCPropsModel<MutateComponentPropsModel<TParams, TResult>>,
-    ref: ForwardedRef<MutateComponentRefModel>,
+    ref: ForwardedRef<MutateComponentRefModel<TResult>>,
   ): ReactElement<
-    RLFCPropsModel<MutateComponentRefModel, MutateComponentPropsModel<TParams, TResult>>
+    RLFCPropsModel<MutateComponentRefModel<TResult>, MutateComponentPropsModel<TParams, TResult>>
   > => {
     const { wrapperProps } = useLayoutStyles({ props });
     const { data, mutate: mutateF } = useMutation<TParams, TResult>(id, mutate, { isBlocking });
 
     useAsync(async () => mutateF(params));
 
-    useImperativeHandle(ref, () => ({ mutate: mutateF }));
+    useImperativeHandle(ref, () => ({ getData: () => data, mutate: mutateF }));
 
     return (
       (children && children({ data })) || (
@@ -117,9 +121,12 @@ const MutateComponent = forwardRef(
     );
   },
 ) as <TParams = undefined, TResult = void>(
-  props: RLFCPropsModel<MutateComponentRefModel, MutateComponentPropsModel<TParams, TResult>>,
+  props: RLFCPropsModel<
+    MutateComponentRefModel<TResult>,
+    MutateComponentPropsModel<TParams, TResult>
+  >,
 ) => ReactElement<
-  RLFCPropsModel<MutateComponentRefModel, MutateComponentPropsModel<TParams, TResult>>
+  RLFCPropsModel<MutateComponentRefModel<TResult>, MutateComponentPropsModel<TParams, TResult>>
 >;
 
 export const DataBoundary = forwardRef(
@@ -175,7 +182,7 @@ export const DataBoundary = forwardRef(
             isBlocking={isBlocking}
             params={params}
             query={query}
-            ref={refFF as ForwardedRef<QueryComponentRefModel>}>
+            ref={refFF as ForwardedRef<QueryComponentRefModel<TResult>>}>
             {children}
           </QueryComponent>
         ) : mutate ? (
@@ -186,7 +193,7 @@ export const DataBoundary = forwardRef(
             isBlocking={isBlocking}
             mutate={mutate}
             params={params}
-            ref={refFF as ForwardedRef<MutateComponentRefModel>}>
+            ref={refFF as ForwardedRef<MutateComponentRefModel<TResult>>}>
             {children}
           </MutateComponent>
         ) : null}
@@ -194,5 +201,7 @@ export const DataBoundary = forwardRef(
     );
   },
 ) as <TParams = undefined, TResult = void>(
-  props: RLFCPropsModel<DataBoundaryRefModel, DataBoundaryPropsModel<TParams, TResult>>,
-) => ReactElement<RLFCPropsModel<DataBoundaryRefModel, DataBoundaryPropsModel<TParams, TResult>>>;
+  props: RLFCPropsModel<DataBoundaryRefModel<TResult>, DataBoundaryPropsModel<TParams, TResult>>,
+) => ReactElement<
+  RLFCPropsModel<DataBoundaryRefModel<TResult>, DataBoundaryPropsModel<TParams, TResult>>
+>;
