@@ -7,6 +7,7 @@ import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedErr
 import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type PaymentMethodImplementationModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation.models';
+import { type PaymentArgsModel } from '@lib/shared/billing/utils/PaymentArgs/PaymentArgs.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { pick } from '@lib/shared/core/utils/pick/pick';
@@ -63,7 +64,7 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
   }
 
   async createToken(
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, string, undefined, UserModel>,
+    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, string, PaymentArgsModel, UserModel>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, string, UserModel>> {
     if (input?.root) {
       let { result: linkedUser } = await this.linkedUserImplementation.get({
@@ -82,7 +83,11 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
       if (linkedUser) {
         const result =
           linkedUser.externalId &&
-          (await this.stripeAdminImplementation.createIntent(linkedUser.externalId));
+          (await this.stripeAdminImplementation.createToken({
+            items: input.form?.items,
+            paymentMethodId: input.form?.paymentMethodId,
+            userId: linkedUser.externalId,
+          }));
         return { result };
       }
       throw new NotFoundError('linked user');

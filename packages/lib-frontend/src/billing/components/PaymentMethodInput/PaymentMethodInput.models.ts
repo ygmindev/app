@@ -1,7 +1,8 @@
-import { type _PaymentMethodInputPropsModel } from '@lib/frontend/billing/components/PaymentMethodInput/_PaymentMethodInput.models';
-import { type InputRefModel } from '@lib/frontend/data/data.models';
-import { type PaymentMethodFormModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import {
+  type _PaymentMethodInputPropsModel,
+  type _PaymentMethodInputRefModel,
+} from '@lib/frontend/billing/components/PaymentMethodInput/_PaymentMethodInput.models';
 
-export type PaymentMethodInputPropsModel = _PaymentMethodInputPropsModel;
+export type PaymentMethodInputPropsModel = Omit<_PaymentMethodInputPropsModel, 'onSetup' | 'token'>;
 
-export type PaymentMethodInputRefModel = InputRefModel<PaymentMethodFormModel>;
+export type PaymentMethodInputRefModel = _PaymentMethodInputRefModel;

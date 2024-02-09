@@ -7,6 +7,7 @@ import { useResource } from '@lib/frontend/resource/hooks/useResource/useResourc
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { type PaymentArgsModel } from '@lib/shared/billing/utils/PaymentArgs/PaymentArgs.models';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
@@ -16,7 +17,7 @@ export const usePaymentMethodResource = ({
   const { query: createToken } = useResourceMethod<
     RESOURCE_METHOD_TYPE.CREATE,
     string,
-    undefined,
+    PaymentArgsModel,
     UserModel
   >({
     fields: ['result'],

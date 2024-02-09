@@ -1,4 +1,4 @@
-import { type PriceModel } from '@lib/shared/billing/resources/Price/Price.models';
+import { type PriceModel } from '@lib/shared/billing/utils/Price/Price.models';
 import {
   type PRICING_FREQUENCY,
   type PRICING_TYPE,

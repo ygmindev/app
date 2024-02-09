@@ -3,7 +3,6 @@ import { type CheckoutButtonPropsModel } from '@lib/frontend/billing/components/
 import { PaymentMethodInput } from '@lib/frontend/billing/components/PaymentMethodInput/PaymentMethodInput';
 import { type PaymentMethodInputRefModel } from '@lib/frontend/billing/components/PaymentMethodInput/PaymentMethodInput.models';
 import { SavedPaymentMethodInput } from '@lib/frontend/billing/components/SavedPaymentMethodInput/SavedPaymentMethodInput';
-import { usePaymentMethodResource } from '@lib/frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Tabs } from '@lib/frontend/core/components/Tabs/Tabs';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -11,7 +10,7 @@ import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
-import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
+import { PAYMENT_METHOD_MODE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { useRef, useState } from 'react';
@@ -21,15 +20,10 @@ export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({ price, ...p
   const { t } = useTranslation([BILLING]);
   const [tab, tabSet] = useState<string>('saved');
   const [paymentMethod, paymentMethodSet] = useState<PartialModel<PaymentMethodModel>>();
-  const currentUser = useCurrentUser();
-  const { createToken } = usePaymentMethodResource();
   const ref = useRef<PaymentMethodInputRefModel>(null);
 
-  const handlePayment = async (): Promise<void> => {
-    const token =
-      tab === 'saved'
-        ? (await createToken({ root: currentUser?._id })).result
-        : ref.current?.getToken();
+  const handleSubmit = async () => {
+    void ref.current?.submit();
   };
 
   return (
@@ -56,12 +50,18 @@ export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({ price, ...p
         />
       )}
 
-      {tab === 'new' && <PaymentMethodInput ref={ref} />}
+      {tab === 'new' && (
+        <PaymentMethodInput
+          mode={PAYMENT_METHOD_MODE.CHECKOUT}
+          ref={ref}
+        />
+      )}
 
       <Button
         color={THEME_COLOR.SUCCESS}
         icon="lock"
-        onPress={handlePayment}>
+        onPress={handleSubmit}>
+        {/* TODO: price formatter */}
         {t('billing:pay', { value: `${price.currency}${price.value}` })}
       </Button>
     </Wrapper>
