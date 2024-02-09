@@ -16,6 +16,8 @@ export type CardModel = EmbeddedResourceModel & {
 
   externalId: string;
 
+  fingerprint?: string;
+
   funding: CardFundingModel;
 
   last4: string;

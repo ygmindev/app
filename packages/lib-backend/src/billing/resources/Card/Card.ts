@@ -13,7 +13,11 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
-@withEntity({ isRepository: true, name: CARD_RESOURCE_NAME })
+@withEntity({
+  indices: [[USER_RESOURCE_NAME, 'fingerprint']],
+  isRepository: true,
+  name: CARD_RESOURCE_NAME,
+})
 export class Card extends EmbeddedResource implements CardModel {
   @withEmbeddableRootField({ Resource: () => User })
   [USER_RESOURCE_NAME]!: UserModel;
@@ -26,6 +30,9 @@ export class Card extends EmbeddedResource implements CardModel {
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   externalId!: string;
+
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  fingerprint?: string;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   funding!: CardFundingModel;

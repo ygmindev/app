@@ -10,13 +10,20 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
-@withEntity({ isRepository: true, name: BANK_RESOURCE_NAME })
+@withEntity({
+  indices: [[USER_RESOURCE_NAME, 'fingerprint']],
+  isRepository: true,
+  name: BANK_RESOURCE_NAME,
+})
 export class Bank extends EmbeddedResource implements BankModel {
   @withEmbeddableRootField({ Resource: () => User })
   [USER_RESOURCE_NAME]!: UserModel;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   externalId!: string;
+
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  fingerprint?: string;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   last4!: string;

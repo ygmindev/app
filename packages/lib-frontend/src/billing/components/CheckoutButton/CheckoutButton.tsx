@@ -18,11 +18,7 @@ import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMe
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { useRef, useState } from 'react';
 
-export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({
-  onElementStateChange,
-  price,
-  ...props
-}) => {
+export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({ price, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([BILLING]);
   const [tab, tabSet] = useState<string>('saved');

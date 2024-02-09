@@ -9,6 +9,8 @@ export type BankModel = EmbeddedResourceModel & {
 
   externalId: string;
 
+  fingerprint?: string;
+
   last4: string;
 
   name: string;
