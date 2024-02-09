@@ -83,9 +83,15 @@ const crawl: TaskParamsModel<unknown> = {
                         .then((h) => h?.find({ value: 'h1' }).then((h) => h?.text()))) ?? '';
                     row.Title && (row.Handle = slug(row.Title as string));
 
+                    // // description
+                    // row['Body (HTML)'] = await screen
+                    //   .find({ value: '.desktop-content-wrapper__main-description' })
+                    //   .then((h) => h?.content());
                     // description
                     row['Body (HTML)'] = await screen
-                      .find({ value: '.desktop-content-wrapper__main-description' })
+                      .find({ value: '#product-overview-desktop-content' })
+                      .then((h) => h?.find({ value: 'div' }))
+                      .then((h) => h?.find({ value: 'div' }))
                       .then((h) => h?.content());
 
                     // price

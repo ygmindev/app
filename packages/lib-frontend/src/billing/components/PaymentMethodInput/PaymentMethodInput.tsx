@@ -20,49 +20,52 @@ import { forwardRef } from 'react';
 export const PaymentMethodInput: RLFCModel<
   PaymentMethodInputRefModel,
   PaymentMethodInputPropsModel
-> = forwardRef(({ mode, price, redirectTo = `${APP_URI}/${REDIRECT}`, ...props }, ref) => {
-  const { wrapperProps } = useLayoutStyles({ props });
-  const { createToken } = usePaymentMethodResource();
+> = forwardRef(
+  ({ mode, onChange, price, redirectTo = `${APP_URI}/${REDIRECT}`, ...props }, ref) => {
+    const { wrapperProps } = useLayoutStyles({ props });
+    const { createToken } = usePaymentMethodResource();
 
-  const currentUser = useCurrentUser();
-  const { create: bankCreate } = useBankResource({ root: currentUser?._id });
-  const { create: cardCreate } = useCardResource({ root: currentUser?._id });
-  const [paymentMethods, paymentMethodsSet] = useStore('billing.PaymentMethod');
+    const currentUser = useCurrentUser();
+    const { create: bankCreate } = useBankResource({ root: currentUser?._id });
+    const { create: cardCreate } = useCardResource({ root: currentUser?._id });
+    const [paymentMethods, paymentMethodsSet] = useStore('billing.PaymentMethod');
 
-  const handleCreate = async (form: PaymentMethodFormModel): Promise<void> => {
-    if (form) {
-      const paymentMethod = await (async () => {
-        switch (form.type) {
-          case PAYMENT_METHOD_TYPE.BANK:
-            return (await bankCreate({ form })).result;
-          case PAYMENT_METHOD_TYPE.CARD:
-            return (await cardCreate({ form })).result;
-        }
-      })();
-      paymentMethod && paymentMethodsSet([...(paymentMethods ?? []), paymentMethod]);
-    }
-  };
-
-  return (
-    <DataBoundary
-      {...wrapperProps}
-      flex
-      id="paymentMethodToken"
-      query={async () =>
-        (await createToken({ form: { items: ['1'] }, root: currentUser?._id })).result
-      }>
-      {({ data }) =>
-        data && (
-          <_PaymentMethodInput
-            mode={mode}
-            onCreate={handleCreate}
-            price={price}
-            redirectTo={redirectTo}
-            ref={ref}
-            token={data}
-          />
-        )
+    const handleCreate = async (form: PaymentMethodFormModel): Promise<void> => {
+      if (form) {
+        const paymentMethod = await (async () => {
+          switch (form.type) {
+            case PAYMENT_METHOD_TYPE.BANK:
+              return (await bankCreate({ form })).result;
+            case PAYMENT_METHOD_TYPE.CARD:
+              return (await cardCreate({ form })).result;
+          }
+        })();
+        paymentMethod && paymentMethodsSet([...(paymentMethods ?? []), paymentMethod]);
       }
-    </DataBoundary>
-  );
-});
+    };
+
+    return (
+      <DataBoundary
+        {...wrapperProps}
+        flex
+        id="paymentMethodToken"
+        query={async () =>
+          (await createToken({ form: { items: ['1'] }, root: currentUser?._id })).result
+        }>
+        {({ data }) =>
+          data && (
+            <_PaymentMethodInput
+              mode={mode}
+              onChange={onChange}
+              onCreate={handleCreate}
+              price={price}
+              redirectTo={redirectTo}
+              ref={ref}
+              token={data}
+            />
+          )
+        }
+      </DataBoundary>
+    );
+  },
+);

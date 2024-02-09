@@ -6,6 +6,7 @@ import { type PriceModel } from '@lib/shared/billing/utils/Price/Price.models';
 
 export type _PaymentMethodInputPropsModel = {
   mode: PaymentMethodModeModel;
+  onChange?(params: { isComplete?: boolean }): void;
   onCreate?(form?: PaymentMethodFormModel): Promise<void>;
   price?: PriceModel;
   redirectTo?: string;

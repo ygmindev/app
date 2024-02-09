@@ -24,8 +24,10 @@ export class StripeAdminImplementation implements StripeAdminImplementationModel
           await this.stripe.paymentIntents.create({
             amount: 50,
             automatic_payment_methods: { allow_redirects: 'never', enabled: true },
+            confirm: !!paymentMethodId,
             currency: 'usd',
             customer: userId,
+            off_session: !!paymentMethodId,
             payment_method: paymentMethodId,
             setup_future_usage: 'off_session',
           })

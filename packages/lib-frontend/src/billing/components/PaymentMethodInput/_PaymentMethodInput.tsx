@@ -26,7 +26,7 @@ const stripe = loadStripe(process.env.APP_STRIPE_TOKEN);
 export const _PaymentMethodInput: RLFCModel<
   _PaymentMethodInputRefModel,
   _PaymentMethodInputPropsModel
-> = forwardRef(({ mode, onCreate, price, redirectTo, token }, ref) => {
+> = forwardRef(({ mode, onChange, onCreate, price, redirectTo, token }, ref) => {
   const theme = useTheme();
   return (
     <Elements
@@ -46,6 +46,7 @@ export const _PaymentMethodInput: RLFCModel<
       stripe={stripe}>
       <StripeInput
         mode={mode}
+        onChange={onChange}
         onCreate={onCreate}
         price={price}
         redirectTo={redirectTo}
@@ -57,7 +58,7 @@ export const _PaymentMethodInput: RLFCModel<
 });
 
 const StripeInput: RLFCModel<_PaymentMethodInputRefModel, _PaymentMethodInputPropsModel> =
-  forwardRef(({ mode, onCreate, redirectTo, token }, ref) => {
+  forwardRef(({ mode, onChange, onCreate, redirectTo, token }, ref) => {
     const stripeClient = useStripe();
     const elements = useElements();
     const isReady = stripeClient && elements;
@@ -138,5 +139,10 @@ const StripeInput: RLFCModel<_PaymentMethodInputRefModel, _PaymentMethodInputPro
       },
     }));
 
-    return <PaymentElement options={{ layout: { type: 'tabs' } } as StripePaymentElementOptions} />;
+    return (
+      <PaymentElement
+        onChange={({ complete }) => onChange && onChange({ isComplete: complete })}
+        options={{ layout: { type: 'tabs' } } as StripePaymentElementOptions}
+      />
+    );
   });
