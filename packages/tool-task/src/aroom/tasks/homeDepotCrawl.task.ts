@@ -23,68 +23,98 @@ const crawl: TaskParamsModel<unknown> = {
         let resultF: Array<Array<string>> = [];
 
         const categories = [
+          // [
+          //   'https://www.homedepot.com/b/Lumber-Composites-Plywood-Sheathing-Plywood/N-5yc1vZc7q5?sortorder=desc&sortby=topsellers',
+          //   '',
+          // ],
+          // [
+          //   'https://www.homedepot.com/b/Lumber-Composites-Plywood-Hardwood-Plywood/N-5yc1vZc7r1?sortorder=desc&sortby=topsellers',
+          //   '',
+          // ],
+          // [
+          //   'https://www.homedepot.com/b/Lumber-Composites-Plywood-Oriented-Strand-Board-OSB/N-5yc1vZbqpq?sortorder=desc&sortby=topsellers',
+          //   '',
+          // ],
+          // [
+          //   'https://www.homedepot.com/b/Lumber-Composites-Timber/N-5yc1vZbym5?sortorder=desc&sortby=topsellers',
+          //   'Timber',
+          // ],
+          // [
+          //   'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Boards-Wood-Decking-Boards/Pressure-Treated/N-5yc1vZc80mZ1z0n5mi?sortorder=desc&sortby=topsellers',
+          //   '',
+          // ],
+          // [
+          //   'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Stairs-Outdoor-Stair-Stringers/N-5yc1vZbqlk?sortorder=desc&sortby=topsellers',
+          //   'Stringers',
+          // ],
+          // [
+          //   'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Railings-Balusters-Spindles/Pressure-Treated/N-5yc1vZc5q0Z1z0n5mi?sortorder=desc&sortby=topsellers',
+          //   '',
+          // ],
+          // [
+          //   'https://www.homedepot.com/b/Lumber-Composites-Pressure-Treated-Lumber/2-in-x-4-in/N-5yc1vZc3srZ1z0n4we?sortorder=desc&sortby=topsellers',
+          //   '',
+          // ],
+          // [
+          //   'https://www.homedepot.com/b/Lumber-Composites-Pressure-Treated-Lumber/2-in-x-6-in/N-5yc1vZc3srZ1z0n4w1?sortorder=desc&sortby=topsellers',
+          //   '',
+          // ],
+          // [
+          //   'https://www.homedepot.com/b/Lumber-Composites-Pressure-Treated-Lumber/2-in-x-10-in/N-5yc1vZc3srZ1z0n4uq?sortorder=desc&sortby=topsellers',
+          //   '',
+          // ],
+          // [
+          //   'https://www.homedepot.com/b/Lumber-Composites-Timber/4-in/6-in/N-5yc1vZ2fkp9hkZ1z1rkokZ1z1sonl?sortorder=desc&sortby=topsellers',
+          //   '',
+          // ],
+
+          // [
+          //   'https://www.homedepot.com/b/Lumber-Composites-Plywood-Project-Panels/N-5yc1vZc7hm?sortorder=desc&sortby=topsellers',
+          //   '',
+          // ],
+          // [
+          //   'https://www.homedepot.com/b/Lumber-Composites-Pressure-Treated-Lumber/2-in-x-10-in/2-in-x-6-in/2-in-x-8-in/N-5yc1vZc3srZ1z0n4uqZ1z0n4w1Z1z0n4w4?NCNI-5&sortorder=desc&sortby=topsellers',
+          //   'Joist',
+          // ],
+          // [
+          //   'https://www.homedepot.com/b/Hardware-Fasteners/N-5yc1vZc255?catStyle=ShowProducts&sortorder=desc&sortby=topsellers',
+          //   '',
+          // ],
+          // [
+          //   'https://www.homedepot.com/b/Building-Materials/N-5yc1vZaqnsZbwo5l?NCNI-5&sortorder=desc&sortby=topsellers',
+          //   '',
+          // ],
+          // [
+          //   'https://www.homedepot.com/b/Paint/N-5yc1vZar2d?catStyle=ShowProducts&sortorder=desc&sortby=topsellers',
+          //   '',
+          // ],
+          // [
+          //   'https://www.homedepot.com/b/Tools/N-5yc1vZc1xy?catStyle=ShowProducts&sortorder=desc&sortby=topsellers',
+          //   '',
+          // ],
+          // [
+          //   'https://www.homedepot.com/b/Paint-Paint-Supplies-Tape/N-5yc1vZc5dk?sortorder=desc&sortby=topsellers',
+          //   '',
+          // ],
+          // [
+          //   'https://www.homedepot.com/b/Flooring/N-5yc1vZaq7r?catStyle=ShowProducts&sortorder=desc&sortby=topsellers',
+          //   '',
+          // ],
+          // [
+          //   'https://www.homedepot.com/b/Lumber-Composites-Boards-Planks-Panels/N-5yc1vZ1z18h41?sortorder=desc&sortby=topsellers',
+          //   '',
+          // ],
+
           [
-            'https://www.homedepot.com/b/Building-Materials/N-5yc1vZaqnsZbwo5l?NCNI-5&sortorder=desc&sortby=topsellers',
+            'https://www.homedepot.com/b/Hardware-Fasteners/N-5yc1vZc255?catStyle=ShowProducts&sortorder=desc&sortby=topsellers',
             '',
           ],
           [
-            'https://www.homedepot.com/b/Tools/N-5yc1vZc1xy?catStyle=ShowProducts&sortorder=desc&sortby=topsellers',
+            'https://www.homedepot.com/b/Lumber-Composites-Fencing-Gates/N-5yc1vZbrk7?sortorder=desc&sortby=topsellers',
             '',
           ],
           [
-            'https://www.homedepot.com/b/Paint/N-5yc1vZar2d?catStyle=ShowProducts&sortorder=desc&sortby=topsellers',
-            '',
-          ],
-          [
-            'https://www.homedepot.com/b/Paint-Paint-Supplies-Tape/N-5yc1vZc5dk?sortorder=desc&sortby=topsellers',
-            '',
-          ],
-          [
-            'https://www.homedepot.com/b/Flooring/N-5yc1vZaq7r?catStyle=ShowProducts&sortorder=desc&sortby=topsellers',
-            '',
-          ],
-          [
-            'https://www.homedepot.com/b/Lumber-Composites-Boards-Planks-Panels/N-5yc1vZ1z18h41?sortorder=desc&sortby=topsellers',
-            '',
-          ],
-          [
-            'https://www.homedepot.com/b/Lumber-Composites-Plywood-Project-Panels/N-5yc1vZc7hm?sortorder=desc&sortby=topsellers',
-            '',
-          ],
-          [
-            'https://www.homedepot.com/b/Lumber-Composites-Timber/N-5yc1vZbym5?sortorder=desc&sortby=topsellers',
-            'Timber',
-          ],
-          [
-            'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Boards-Wood-Decking-Boards/Pressure-Treated/N-5yc1vZc80mZ1z0n5mi?sortorder=desc&sortby=topsellers',
-            '',
-          ],
-          [
-            'https://www.homedepot.com/b/Lumber-Composites-Pressure-Treated-Lumber/2-in-x-10-in/2-in-x-6-in/2-in-x-8-in/N-5yc1vZc3srZ1z0n4uqZ1z0n4w1Z1z0n4w4?NCNI-5&sortorder=desc&sortby=topsellers',
-            'Joist',
-          ],
-          [
-            'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Stairs-Outdoor-Stair-Stringers/N-5yc1vZbqlk?sortorder=desc&sortby=topsellers',
-            'Stringers',
-          ],
-          [
-            'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Railings-Balusters-Spindles/Pressure-Treated/N-5yc1vZc5q0Z1z0n5mi?sortorder=desc&sortby=topsellers',
-            '',
-          ],
-          [
-            'https://www.homedepot.com/b/Lumber-Composites-Pressure-Treated-Lumber/2-in-x-4-in/N-5yc1vZc3srZ1z0n4we?sortorder=desc&sortby=topsellers',
-            '',
-          ],
-          [
-            'https://www.homedepot.com/b/Lumber-Composites-Pressure-Treated-Lumber/2-in-x-6-in/N-5yc1vZc3srZ1z0n4w1?sortorder=desc&sortby=topsellers',
-            '',
-          ],
-          [
-            'https://www.homedepot.com/b/Lumber-Composites-Pressure-Treated-Lumber/2-in-x-10-in/N-5yc1vZc3srZ1z0n4uq?sortorder=desc&sortby=topsellers',
-            '',
-          ],
-          [
-            'https://www.homedepot.com/b/Lumber-Composites-Timber/4-in/6-in/N-5yc1vZ2fkp9hkZ1z1rkokZ1z1sonl?sortorder=desc&sortby=topsellers',
+            'https://www.homedepot.com/b/Building-Materials-Building-Hardware/N-5yc1vZaqzs?sortorder=desc&sortby=topsellers',
             '',
           ],
         ];
@@ -97,6 +127,11 @@ const crawl: TaskParamsModel<unknown> = {
               await screen.open(`${category}&Nao=${index * 24}`);
 
               await sleep(3000);
+
+              await screen
+                .find({ value: '.results-layout__toggle-grid' }, { timeout: ELEMENT_TIMEOUT })
+                .then((h) => h?.press());
+
               const urls = await screen
                 .findAll({ value: '.product-image' })
                 .then((handles) => handles.map((h) => h?.url()));
@@ -112,12 +147,10 @@ const crawl: TaskParamsModel<unknown> = {
                       value: '.accordion-title-container',
                     });
                     for (const accordion of accordions) {
-                      await accordion.press();
+                      try {
+                        await accordion.press();
+                      } catch (e) {}
                     }
-
-                    await screen
-                      .find({ value: '.results-layout__toggle-grid' })
-                      .then((h) => h?.press());
 
                     // category
                     let tags = [];
@@ -285,6 +318,8 @@ const crawl: TaskParamsModel<unknown> = {
 
                       if (src) {
                         row.URL = urlF;
+                        row.Page = index + 1;
+                        row.Category = category;
                         const rowToAdd = i > 1 ? { Handle: row.Handle } : row;
                         rowToAdd['Image Src'] = src;
                         rowToAdd['Image Position'] = i;

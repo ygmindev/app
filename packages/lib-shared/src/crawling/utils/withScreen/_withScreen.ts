@@ -22,10 +22,11 @@ import { debug } from '@lib/shared/logging/utils/logger/logger';
 import { existsSync, mkdirSync } from 'fs';
 import isNumber from 'lodash/isNumber';
 import { type ElementHandle } from 'puppeteer';
-import puppeteer from 'puppeteer-extra';
-import StealthPlugin from 'puppeteer-extra-plugin-stealth';
+import puppeteer from 'puppeteer';
+// import puppeteer from 'puppeteer-extra';
+// import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 
-puppeteer.use(StealthPlugin());
+// puppeteer.use(StealthPlugin());
 
 export const _withScreen = async (
   ...[
@@ -41,6 +42,7 @@ export const _withScreen = async (
     headless: isHeadless ? 'new' : false,
     ignoreDefaultArgs: ['--hide-scrollbars'],
     ignoreHTTPSErrors: true,
+    protocolTimeout: 0,
   });
 
   const page = await browser.newPage();
