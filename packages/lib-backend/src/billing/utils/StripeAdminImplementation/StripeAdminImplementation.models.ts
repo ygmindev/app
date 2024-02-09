@@ -3,5 +3,5 @@ import { type PaymentArgsModel } from '@lib/shared/billing/utils/PaymentArgs/Pay
 export type StripeAdminImplementationModel = {
   createCustomer(): Promise<string>;
 
-  createToken(params: PaymentArgsModel): Promise<string | null>;
+  createToken(params: PaymentArgsModel, userId: string): Promise<string | null>;
 };

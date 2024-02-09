@@ -15,11 +15,14 @@ export class StripeAdminImplementation implements StripeAdminImplementationModel
     return id;
   };
 
-  createToken = async ({ items, paymentMethodId, userId }: PaymentArgsModel): Promise<string> => {
+  createToken = async (
+    { items, paymentMethodId }: PaymentArgsModel,
+    userId: string,
+  ): Promise<string> => {
     const token = items
       ? (
           await this.stripe.paymentIntents.create({
-            amount: 1,
+            amount: 50,
             automatic_payment_methods: { allow_redirects: 'never', enabled: true },
             currency: 'usd',
             customer: userId,

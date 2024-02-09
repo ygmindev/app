@@ -35,6 +35,7 @@ export const _PaymentMethodInput: RLFCModel<
         ...(mode === PAYMENT_METHOD_MODE.CHECKOUT
           ? {
               amount: price?.value,
+              confirm: true,
               currency: price?.currency,
               mode: 'payment',
               setup_future_usage: 'off_session',
@@ -105,23 +106,19 @@ const StripeInput: RLFCModel<_PaymentMethodInputRefModel, _PaymentMethodInputPro
           if (submitError) {
             throw new Error(submitError.message);
           }
-
           switch (mode) {
             case PAYMENT_METHOD_MODE.CHECKOUT: {
-              const { error: confirmError } = await stripeClient.confirmPayment({
+              const { error, paymentIntent } = await stripeClient.confirmPayment({
                 clientSecret: token,
-                confirmParams: { return_url: redirectTo ?? '' },
+                confirmParams: { expand: ['payment_method'], return_url: redirectTo ?? '' },
                 elements,
                 redirect: 'if_required',
               });
-              if (confirmError) {
-                throw new Error(confirmError.message);
-              }
-              const { error, paymentIntent } = await stripeClient.retrievePaymentIntent(token);
               if (error) {
                 throw new Error(error.message);
               }
               paymentIntent && (await handleSetup(paymentIntent));
+              break;
             }
             case PAYMENT_METHOD_MODE.SETUP: {
               const { error, setupIntent } = await stripeClient.confirmSetup({
@@ -134,6 +131,7 @@ const StripeInput: RLFCModel<_PaymentMethodInputRefModel, _PaymentMethodInputPro
                 throw new Error(error.message);
               }
               setupIntent && (await handleSetup(setupIntent));
+              break;
             }
           }
         }

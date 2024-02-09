@@ -83,11 +83,13 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
       if (linkedUser) {
         const result =
           linkedUser.externalId &&
-          (await this.stripeAdminImplementation.createToken({
-            items: input.form?.items,
-            paymentMethodId: input.form?.paymentMethodId,
-            userId: linkedUser.externalId,
-          }));
+          (await this.stripeAdminImplementation.createToken(
+            {
+              items: input.form?.items,
+              paymentMethodId: input.form?.paymentMethodId,
+            },
+            linkedUser.externalId,
+          ));
         return { result };
       }
       throw new NotFoundError('linked user');

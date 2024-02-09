@@ -48,7 +48,9 @@ export const PaymentMethodInput: RLFCModel<
       {...wrapperProps}
       flex
       id="paymentMethodToken"
-      query={async () => (await createToken({ root: currentUser?._id })).result}>
+      query={async () =>
+        (await createToken({ form: { items: ['1'] }, root: currentUser?._id })).result
+      }>
       {({ data }) =>
         data && (
           <_PaymentMethodInput

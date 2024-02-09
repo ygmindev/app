@@ -1306,7 +1306,13 @@ input PaymentMethodInput {
   type: String
 }
 
+input PaymentMethodTokenCreateFormInput {
+  items: [String]
+  paymentMethodId: String
+}
+
 input PaymentMethodTokenCreateInput {
+  form: PaymentMethodTokenCreateFormInput
   root: String
 }
 

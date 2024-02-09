@@ -22,8 +22,8 @@ export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({ price, ...p
   const [paymentMethod, paymentMethodSet] = useState<PartialModel<PaymentMethodModel>>();
   const ref = useRef<PaymentMethodInputRefModel>(null);
 
-  const handleSubmit = async () => {
-    void ref.current?.submit();
+  const handleSubmit = async (): Promise<void> => {
+    await ref.current?.submit();
   };
 
   return (
@@ -53,6 +53,7 @@ export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({ price, ...p
       {tab === 'new' && (
         <PaymentMethodInput
           mode={PAYMENT_METHOD_MODE.CHECKOUT}
+          price={price}
           ref={ref}
         />
       )}

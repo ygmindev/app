@@ -10,7 +10,4 @@ export class PaymentArgs implements PaymentArgsModel {
 
   @withField({ isOptional: true, type: DATA_TYPE.STRING })
   paymentMethodId?: string;
-
-  @withField({ type: DATA_TYPE.STRING })
-  userId!: string;
 }
