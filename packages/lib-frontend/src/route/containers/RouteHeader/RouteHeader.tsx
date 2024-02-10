@@ -38,8 +38,7 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, ...props }
       isRowAlign
       pHorizontal
       position={SHAPE_POSITION.RELATIVE}
-      ref={ref}
-      s>
+      ref={ref}>
       {!!previous && (
         <Button
           elementState={isLoading ? ELEMENT_STATE.DISABLED : undefined}
@@ -50,6 +49,7 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, ...props }
             pathnames.splice(pathnames.length - previous, previous);
             return push({ isBack: true, pathname: getPath(pathnames.join('/'), location.params) });
           }}
+          testID="XXX"
           type={BUTTON_TYPE.INVISIBLE}
         />
       )}
