@@ -1,5 +1,7 @@
 import { type StripeAdminImplementationModel } from '@lib/backend/billing/utils/StripeAdminImplementation/StripeAdminImplementation.models';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
+import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import { type PaymentMethodTypeModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type PaymentArgsModel } from '@lib/shared/billing/utils/PaymentArgs/PaymentArgs.models';
 import { ExternalError } from '@lib/shared/core/errors/ExternalError/ExternalError';
 import Stripe from 'stripe';
@@ -13,6 +15,28 @@ export class StripeAdminImplementation implements StripeAdminImplementationModel
   createCustomer = async (): Promise<string> => {
     const { id } = await this.stripe.customers.create();
     return id;
+  };
+
+  getFingerprint = async ({
+    id,
+    type,
+  }: {
+    id: string;
+    type: PaymentMethodTypeModel;
+  }): Promise<string | null> => {
+    const paymentMethod = await this.stripe.paymentMethods.retrieve(id);
+    return (
+      (() => {
+        switch (type) {
+          case PAYMENT_METHOD_TYPE.BANK:
+            return paymentMethod.us_bank_account?.fingerprint;
+          case PAYMENT_METHOD_TYPE.CARD:
+            return paymentMethod.card?.fingerprint;
+          default:
+            return null;
+        }
+      })() ?? null
+    );
   };
 
   createToken = async (

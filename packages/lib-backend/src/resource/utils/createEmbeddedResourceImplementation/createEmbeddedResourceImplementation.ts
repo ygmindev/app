@@ -6,6 +6,7 @@ import {
   type CreateEmbeddedResourceImplementationParamsModel,
 } from '@lib/backend/resource/utils/createEmbeddedResourceImplementation/createEmbeddedResourceImplementation.models';
 import { createResourceImplementation } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation';
+import { getMetadata } from '@lib/backend/resource/utils/getMetadata/getMetadata';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
@@ -16,6 +17,7 @@ import { type EmbeddedResourceModel } from '@lib/shared/resource/resources/Embed
 import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type EntityResourceImplementationModel } from '@lib/shared/resource/resources/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
 import { type ProjectModel } from '@lib/shared/resource/utils/Args/Args.models';
+import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
@@ -111,7 +113,6 @@ export const createEmbeddedResourceImplementation = <
     }
     throw new InvalidArgumentError('root');
   };
-
   return createResourceImplementation<TType, TForm, TRoot>({
     Resource,
     afterCreate,
@@ -130,10 +131,24 @@ export const createEmbeddedResourceImplementation = <
     beforeUpdate,
     count: getCount,
     create: async (input = {}) => {
+      const meta = getMetadata({ Resource: () => Resource });
       if (input.root) {
         const formF = await getForm(input.form);
         const { result: rootResult } = await getRootImplementation().update({
-          filter: [{ field: '_id', value: input.root }],
+          filter: [
+            { field: '_id', value: input.root },
+            ...(meta.indices
+              ? meta.indices
+                  .map((indices) =>
+                    indices.map((index) => ({
+                      condition: FILTER_CONDITION.NOT_EQUAL,
+                      field: `${name}.${index}`,
+                      value: formF[index],
+                    })),
+                  )
+                  .flat()
+              : []),
+          ],
           update: { $push: { [name]: formF } } as UpdateModel<TRoot>,
         });
         return { result: formF, root: rootResult };

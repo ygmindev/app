@@ -75,7 +75,6 @@ const StripeInput: RLFCModel<_PaymentMethodInputRefModel, _PaymentMethodInputPro
                 us_bank_account &&
                 ({
                   externalId: id,
-                  fingerprint: us_bank_account?.fingerprint,
                   last4: us_bank_account.last4,
                   name: us_bank_account.bank_name,
                   type: PAYMENT_METHOD_TYPE.BANK,
@@ -89,7 +88,6 @@ const StripeInput: RLFCModel<_PaymentMethodInputRefModel, _PaymentMethodInputPro
                   expMonth: card.exp_month,
                   expYear: card.exp_year,
                   externalId: id,
-                  fingerprint: card?.fingerprint,
                   funding: card.funding as CardFundingModel,
                   last4: card.last4,
                   name: card.brand,

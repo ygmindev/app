@@ -5,6 +5,7 @@ import {
 import { type ContextModel } from '@lib/platform/core/core.models';
 import { type PrototypeModel } from '@lib/shared/core/core.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
+import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { collapseFilter } from '@lib/shared/resource/utils/collapseFilter/collapseFilter';
@@ -122,11 +123,21 @@ export const createResourceImplementation = <
       input: InputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TForm> = {},
       context?: ContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>> {
-      const inputF = cleanObject(
-        this.decorators.beforeCreateMany
-          ? await this.decorators.beforeCreateMany({ input }, context)
-          : input,
-      );
+      let inputF = this.decorators.beforeCreateMany
+        ? await this.decorators.beforeCreateMany({ input }, context)
+        : input;
+
+      inputF = inputF?.form
+        ? ((await mapSequence(
+            inputF?.form?.map(
+              (form) => async () =>
+                this.decorators.beforeCreate &&
+                this.decorators.beforeCreate({ input: { form } }, context),
+            ),
+          )) as InputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TForm>)
+        : inputF;
+
+      inputF = cleanObject(inputF);
       const root = inputF?.root ?? this._decorators.root;
       inputF && root && (inputF.root = root);
       const output: OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot> = await createMany(
