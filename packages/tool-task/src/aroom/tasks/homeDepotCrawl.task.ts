@@ -9,6 +9,7 @@ import { stringify as csv } from 'csv-stringify/sync';
 import range from 'lodash/range';
 import sortBy from 'lodash/sortBy';
 import toNumber from 'lodash/toNumber';
+import uniq from 'lodash/uniq';
 
 const ELEMENT_TIMEOUT = 7000;
 
@@ -22,19 +23,76 @@ const crawl: TaskParamsModel<unknown> = {
         let resultF: Array<Array<string>> = [];
 
         const categories = [
-          'https://www.homedepot.com/b/Building-Materials/N-5yc1vZaqnsZbwo5l?NCNI-5&sortorder=desc&sortby=topsellers',
-          'https://www.homedepot.com/b/Hardware-Fasteners/N-5yc1vZc255?catStyle=ShowProducts&sortorder=desc&sortby=topsellers',
-          'https://www.homedepot.com/b/Paint-Paint-Supplies-Tape/N-5yc1vZc5dk?sortorder=desc&sortby=topsellers',
-          'https://www.homedepot.com/b/Tools/N-5yc1vZc1xy?catStyle=ShowProducts&sortorder=desc&sortby=topsellers',
-          'https://www.homedepot.com/b/Lumber-Composites/N-5yc1vZbqpg?catStyle=ShowProducts&NCNI-5&searchRedirect=lumber&semanticToken=k27r10r00f22000000000e_202402090359488677805831880_us-east4-6fkc%20k27r10r00f22000000000e%20%3E%20st%3A%7Blumber%7D%3Ast%20ml%3A%7B24%7D%3Aml%20nr%3A%7Blumber%7D%3Anr%20nf%3A%7Bn%2Fa%7D%3Anf%20qu%3A%7Blumber%7D%3Aqu%20ie%3A%7B0%7D%3Aie%20qr%3A%7Blumber%7D%3Aqr&sortorder=desc&sortby=topsellers',
-          'https://www.homedepot.com/b/Paint/N-5yc1vZar2d?catStyle=ShowProducts&sortorder=desc&sortby=topsellers',
-          'https://www.homedepot.com/b/Flooring/N-5yc1vZaq7r?catStyle=ShowProducts&sortorder=desc&sortby=topsellers',
+          [
+            'https://www.homedepot.com/b/Building-Materials/N-5yc1vZaqnsZbwo5l?NCNI-5&sortorder=desc&sortby=topsellers',
+            '',
+          ],
+          [
+            'https://www.homedepot.com/b/Tools/N-5yc1vZc1xy?catStyle=ShowProducts&sortorder=desc&sortby=topsellers',
+            '',
+          ],
+          [
+            'https://www.homedepot.com/b/Paint/N-5yc1vZar2d?catStyle=ShowProducts&sortorder=desc&sortby=topsellers',
+            '',
+          ],
+          [
+            'https://www.homedepot.com/b/Paint-Paint-Supplies-Tape/N-5yc1vZc5dk?sortorder=desc&sortby=topsellers',
+            '',
+          ],
+          [
+            'https://www.homedepot.com/b/Flooring/N-5yc1vZaq7r?catStyle=ShowProducts&sortorder=desc&sortby=topsellers',
+            '',
+          ],
+          [
+            'https://www.homedepot.com/b/Lumber-Composites-Boards-Planks-Panels/N-5yc1vZ1z18h41?sortorder=desc&sortby=topsellers',
+            '',
+          ],
+          [
+            'https://www.homedepot.com/b/Lumber-Composites-Plywood-Project-Panels/N-5yc1vZc7hm?sortorder=desc&sortby=topsellers',
+            '',
+          ],
+          [
+            'https://www.homedepot.com/b/Lumber-Composites-Timber/N-5yc1vZbym5?sortorder=desc&sortby=topsellers',
+            'Timber',
+          ],
+          [
+            'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Boards-Wood-Decking-Boards/Pressure-Treated/N-5yc1vZc80mZ1z0n5mi?sortorder=desc&sortby=topsellers',
+            '',
+          ],
+          [
+            'https://www.homedepot.com/b/Lumber-Composites-Pressure-Treated-Lumber/2-in-x-10-in/2-in-x-6-in/2-in-x-8-in/N-5yc1vZc3srZ1z0n4uqZ1z0n4w1Z1z0n4w4?NCNI-5&sortorder=desc&sortby=topsellers',
+            'Joist',
+          ],
+          [
+            'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Stairs-Outdoor-Stair-Stringers/N-5yc1vZbqlk?sortorder=desc&sortby=topsellers',
+            'Stringers',
+          ],
+          [
+            'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Railings-Balusters-Spindles/Pressure-Treated/N-5yc1vZc5q0Z1z0n5mi?sortorder=desc&sortby=topsellers',
+            '',
+          ],
+          [
+            'https://www.homedepot.com/b/Lumber-Composites-Pressure-Treated-Lumber/2-in-x-4-in/N-5yc1vZc3srZ1z0n4we?sortorder=desc&sortby=topsellers',
+            '',
+          ],
+          [
+            'https://www.homedepot.com/b/Lumber-Composites-Pressure-Treated-Lumber/2-in-x-6-in/N-5yc1vZc3srZ1z0n4w1?sortorder=desc&sortby=topsellers',
+            '',
+          ],
+          [
+            'https://www.homedepot.com/b/Lumber-Composites-Pressure-Treated-Lumber/2-in-x-10-in/N-5yc1vZc3srZ1z0n4uq?sortorder=desc&sortby=topsellers',
+            '',
+          ],
+          [
+            'https://www.homedepot.com/b/Lumber-Composites-Timber/4-in/6-in/N-5yc1vZ2fkp9hkZ1z1rkokZ1z1sonl?sortorder=desc&sortby=topsellers',
+            '',
+          ],
         ];
 
         const pageIndices = range(0, 10);
         for (const index of pageIndices) {
-          console.warn(`@@@ PAGE: ${index}`);
-          for (const category of categories) {
+          for (const [category, extraTag] of categories) {
+            console.warn(`### PAGE: ${index}, CATEGORY: ${category}`);
             try {
               await screen.open(`${category}&Nao=${index * 24}`);
 
@@ -57,8 +115,12 @@ const crawl: TaskParamsModel<unknown> = {
                       await accordion.press();
                     }
 
+                    await screen
+                      .find({ value: '.results-layout__toggle-grid' })
+                      .then((h) => h?.press());
+
                     // category
-                    const tags = [];
+                    let tags = [];
                     const categories = await screen
                       .findAll({ value: '.breadcrumb__item a' })
                       .then((handles) => handles.map((h) => h?.text()));
@@ -66,6 +128,8 @@ const crawl: TaskParamsModel<unknown> = {
                       const categoryF = await category;
                       categoryF && categoryF !== 'Home' && tags.push(categoryF);
                     }
+                    extraTag && tags.push(extraTag);
+                    tags = uniq(tags);
                     row.Tags = tags ? `"${tags.join(',')}"` : '';
 
                     // brand
@@ -83,16 +147,23 @@ const crawl: TaskParamsModel<unknown> = {
                         .then((h) => h?.find({ value: 'h1' }).then((h) => h?.text()))) ?? '';
                     row.Title && (row.Handle = slug(row.Title as string));
 
-                    // // description
-                    // row['Body (HTML)'] = await screen
-                    //   .find({ value: '.desktop-content-wrapper__main-description' })
-                    //   .then((h) => h?.content());
+                    // description
                     // description
                     row['Body (HTML)'] = await screen
-                      .find({ value: '#product-overview-desktop-content' })
-                      .then((h) => h?.find({ value: 'div' }))
-                      .then((h) => h?.find({ value: 'div' }))
+                      .find({
+                        key: 'data-testid',
+                        type: SELECTOR_TYPE.DATA,
+                        value: 'desktop-content',
+                      })
+                      .then((h) => h?.find({ value: '.sui-flex-col' }))
+                      .then((h) => h?.find({ value: '.sui-flex-col' }))
                       .then((h) => h?.content());
+
+                    row['Body (HTML)'] =
+                      row['Body (HTML)'] ??
+                      (await screen
+                        .find({ value: '.desktop-content-wrapper__main-description' })
+                        .then((h) => h?.content()));
 
                     // price
                     const priceContainer = await screen.find({
