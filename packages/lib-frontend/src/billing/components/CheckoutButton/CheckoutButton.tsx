@@ -13,7 +13,6 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
-import { PAYMENT_METHOD_MODE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { useRef, useState } from 'react';
@@ -79,7 +78,7 @@ export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({ price, ...p
 
       {tab === 'new' && (
         <PaymentMethodInput
-          mode={PAYMENT_METHOD_MODE.CHECKOUT}
+          items={['test']}
           onChange={({ isComplete: v }) => isCompleteSet(v)}
           price={price}
           ref={ref}

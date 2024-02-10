@@ -21,7 +21,7 @@ export const PaymentMethodInput: RLFCModel<
   PaymentMethodInputRefModel,
   PaymentMethodInputPropsModel
 > = forwardRef(
-  ({ mode, onChange, price, redirectTo = `${APP_URI}/${REDIRECT}`, ...props }, ref) => {
+  ({ items, onChange, price, redirectTo = `${APP_URI}/${REDIRECT}`, ...props }, ref) => {
     const { wrapperProps } = useLayoutStyles({ props });
     const { createToken } = usePaymentMethodResource();
 
@@ -49,13 +49,11 @@ export const PaymentMethodInput: RLFCModel<
         {...wrapperProps}
         flex
         id="paymentMethodToken"
-        query={async () =>
-          (await createToken({ form: { items: ['1'] }, root: currentUser?._id })).result
-        }>
+        query={async () => (await createToken({ form: {}, root: currentUser?._id })).result}>
         {({ data }) =>
           data && (
             <_PaymentMethodInput
-              mode={mode}
+              items={items}
               onChange={onChange}
               onCreate={handleCreate}
               price={price}

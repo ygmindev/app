@@ -6,8 +6,3 @@ export enum PAYMENT_METHOD_TYPE {
   BANK = 'bank',
   CARD = 'card',
 }
-
-export enum PAYMENT_METHOD_MODE {
-  CHECKOUT = 'checkout',
-  SETUP = 'setup',
-}

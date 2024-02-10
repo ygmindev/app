@@ -224,6 +224,7 @@ type Bank {
   _id: String
   created: DateTime
   externalId: String
+  fingerprint: String
   last4: String
   name: String
   type: String
@@ -234,6 +235,7 @@ input BankCreateFormInput {
   _id: String
   created: DateTime
   externalId: String
+  fingerprint: String
   last4: String
   name: String
   type: String
@@ -249,6 +251,7 @@ input BankCreateManyFormInput {
   _id: String
   created: DateTime
   externalId: String
+  fingerprint: String
   last4: String
   name: String
   type: String
@@ -351,6 +354,7 @@ input BankInput {
   _id: String
   created: DateTime
   externalId: String
+  fingerprint: String
   last4: String
   name: String
   type: String
@@ -406,6 +410,7 @@ input BankUpdateUpdateInput {
   _id: String
   created: DateTime
   externalId: String
+  fingerprint: String
   last4: String
   name: String
   type: String
@@ -418,6 +423,7 @@ type Card {
   expMonth: Float
   expYear: Float
   externalId: String
+  fingerprint: String
   funding: String
   last4: String
   name: String
@@ -431,6 +437,7 @@ input CardCreateFormInput {
   expMonth: Float
   expYear: Float
   externalId: String
+  fingerprint: String
   funding: String
   last4: String
   name: String
@@ -449,6 +456,7 @@ input CardCreateManyFormInput {
   expMonth: Float
   expYear: Float
   externalId: String
+  fingerprint: String
   funding: String
   last4: String
   name: String
@@ -554,6 +562,7 @@ input CardInput {
   expMonth: Float
   expYear: Float
   externalId: String
+  fingerprint: String
   funding: String
   last4: String
   name: String
@@ -612,6 +621,7 @@ input CardUpdateUpdateInput {
   expMonth: Float
   expYear: Float
   externalId: String
+  fingerprint: String
   funding: String
   last4: String
   name: String

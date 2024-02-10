@@ -10,10 +10,7 @@ import {
   type CardFormModel,
   type CardFundingModel,
 } from '@lib/shared/billing/resources/Card/Card.models';
-import {
-  PAYMENT_METHOD_MODE,
-  PAYMENT_METHOD_TYPE,
-} from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { InvalidTypeError } from '@lib/shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { Elements, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import {
@@ -30,13 +27,13 @@ const stripe = loadStripe(process.env.APP_STRIPE_TOKEN);
 export const _PaymentMethodInput: RLFCModel<
   _PaymentMethodInputRefModel,
   _PaymentMethodInputPropsModel
-> = forwardRef(({ mode, onChange, onCreate, price, redirectTo, token }, ref) => {
+> = forwardRef(({ items, onChange, onCreate, price, redirectTo, token }, ref) => {
   const theme = useTheme();
   return (
     <Elements
       options={{
         ...STRIPE_ELEMENTS_STYLE(theme),
-        ...(mode === PAYMENT_METHOD_MODE.CHECKOUT
+        ...(items
           ? {
               amount: price?.value,
               confirm: true,
@@ -49,7 +46,7 @@ export const _PaymentMethodInput: RLFCModel<
       }}
       stripe={stripe}>
       <StripeInput
-        mode={mode}
+        items={items}
         onChange={onChange}
         onCreate={onCreate}
         price={price}
@@ -62,7 +59,7 @@ export const _PaymentMethodInput: RLFCModel<
 });
 
 const StripeInput: RLFCModel<_PaymentMethodInputRefModel, _PaymentMethodInputPropsModel> =
-  forwardRef(({ mode, onChange, onCreate, redirectTo, token }, ref) => {
+  forwardRef(({ items, onChange, onCreate, redirectTo, token }, ref) => {
     const stripeClient = useStripe();
     const elements = useElements();
     const isReady = stripeClient && elements;
@@ -115,33 +112,28 @@ const StripeInput: RLFCModel<_PaymentMethodInputRefModel, _PaymentMethodInputPro
           if (submitError) {
             throw new Error(submitError.message);
           }
-          switch (mode) {
-            case PAYMENT_METHOD_MODE.CHECKOUT: {
-              const { error, paymentIntent } = await stripeClient.confirmPayment({
-                clientSecret: token,
-                confirmParams: { expand: ['payment_method'], return_url: redirectTo ?? '' },
-                elements,
-                redirect: 'if_required',
-              });
-              if (error) {
-                throw new Error(error.message);
-              }
-              paymentIntent && (await handleSetup(paymentIntent));
-              break;
+          if (items) {
+            const { error, paymentIntent } = await stripeClient.confirmPayment({
+              clientSecret: token,
+              confirmParams: { expand: ['payment_method'], return_url: redirectTo ?? '' },
+              elements,
+              redirect: 'if_required',
+            });
+            if (error) {
+              throw new Error(error.message);
             }
-            case PAYMENT_METHOD_MODE.SETUP: {
-              const { error, setupIntent } = await stripeClient.confirmSetup({
-                clientSecret: token,
-                confirmParams: { expand: ['payment_method'], return_url: redirectTo ?? '' },
-                elements,
-                redirect: 'if_required',
-              });
-              if (error) {
-                throw new Error(error.message);
-              }
-              setupIntent && (await handleSetup(setupIntent));
-              break;
+            paymentIntent && (await handleSetup(paymentIntent));
+          } else {
+            const { error, setupIntent } = await stripeClient.confirmSetup({
+              clientSecret: token,
+              confirmParams: { expand: ['payment_method'], return_url: redirectTo ?? '' },
+              elements,
+              redirect: 'if_required',
+            });
+            if (error) {
+              throw new Error(error.message);
             }
+            setupIntent && (await handleSetup(setupIntent));
           }
         }
       },
