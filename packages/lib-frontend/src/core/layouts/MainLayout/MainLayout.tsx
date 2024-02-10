@@ -26,7 +26,6 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
   const widthF = isFullWidthF ? width : isNumber(size) ? size : theme.layout.width[size];
   return (
     <Wrapper
-      {...wrapperProps}
       flex
       isFullWidth>
       {topElement && (
@@ -38,6 +37,7 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
       )}
 
       <Wrapper
+        {...wrapperProps}
         isFullHeight={isFullHeight}
         isFullWidth
         isVerticalScrollable={isFullHeight}
@@ -59,6 +59,7 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
           <Wrapper
             key="element-bottom"
             mHorizontal="auto"
+            p
             width={widthF}>
             {bottomElement}
           </Wrapper>

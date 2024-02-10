@@ -49,8 +49,10 @@ export const Wrapper: RLFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
               style: StyleSheet.flatten(
                 filterNil([
                   isDistribute && { flexGrow: 1, flexShrink: 1 },
-                  ((wrapperProps.isReverse && result.length !== length - 1) ||
-                    (!wrapperProps.isReverse && result.length <= length - 1)) &&
+                  ((wrapperProps.isReverse && result.length > 1 && result.length !== length - 1) ||
+                    (!wrapperProps.isReverse &&
+                      result.length > 1 &&
+                      result.length <= length - 1)) &&
                     spacingStyler(
                       {
                         mBottom:
