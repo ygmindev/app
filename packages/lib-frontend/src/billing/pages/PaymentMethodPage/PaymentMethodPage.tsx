@@ -13,7 +13,6 @@ import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBoundary';
 import { type DataBoundaryRefModel } from '@lib/frontend/data/components/DataBoundary/DataBoundary.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
@@ -32,7 +31,6 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
   const { wrapperProps } = useLayoutStyles({ props });
   const currentUser = useCurrentUser();
   const { t } = useTranslation([BILLING]);
-  const { push } = useRouter();
   const { getMany } = usePaymentMethodResource();
   const { remove: bankRemove } = useBankResource({ root: currentUser?._id });
   const { remove: cardRemove } = useCardResource({ root: currentUser?._id });

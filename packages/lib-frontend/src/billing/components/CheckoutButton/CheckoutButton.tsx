@@ -15,6 +15,7 @@ import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
+import { numberFormat } from '@lib/shared/data/utils/numberFormat/numberFormat';
 import { useRef, useState } from 'react';
 
 export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({ price, ...props }) => {
@@ -91,7 +92,7 @@ export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({ price, ...p
         icon="lock"
         onPress={handleSubmit}>
         {/* TODO: price formatter */}
-        {t('billing:pay', { value: `${price.currency}${price.value}` })}
+        {t('billing:pay', { value: numberFormat(price.value, { currency: price.currency }) })}
       </Button>
     </Wrapper>
   );

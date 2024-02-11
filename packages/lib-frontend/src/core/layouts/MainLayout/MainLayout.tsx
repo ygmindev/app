@@ -27,7 +27,8 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
   return (
     <Wrapper
       flex
-      isFullWidth>
+      isFullWidth
+      s>
       {topElement && (
         <>
           <Wrapper key="element-top">{topElement}</Wrapper>
@@ -59,7 +60,6 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
           <Wrapper
             key="element-bottom"
             mHorizontal="auto"
-            p
             width={widthF}>
             {bottomElement}
           </Wrapper>

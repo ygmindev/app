@@ -10,7 +10,6 @@ import {
 } from '@lib/shared/data/utils/numberFormat/numberFormat.models';
 import { numberScale } from '@lib/shared/data/utils/numberScale/numberScale';
 import isNil from 'lodash/isNil';
-import toString from 'lodash/toString';
 
 export const numberFormat = (
   ...[value, options = {}]: NumberFormatParamsModel
@@ -18,7 +17,7 @@ export const numberFormat = (
   if (isNil(value)) {
     return '';
   }
-  const { isReverse, isSeparated = true, multiplier, precision, prefix, unit } = options;
+  const { currency, isReverse, isSeparated = true, multiplier, precision, prefix, unit } = options;
   let { postfix } = options;
   const valueF = numberScale(value, { isReverse, multiplier, unit });
   if (!!valueF) {
@@ -64,18 +63,19 @@ export const numberFormat = (
         }
       }
     }
-    return `${prefix ?? ''}${
-      isSeparated
-        ? valueF.toLocaleString(
-            'en-US',
-            isNil(precision)
-              ? undefined
-              : { maximumFractionDigits: precision, minimumFractionDigits: precision },
-          )
-        : isNil(precision)
-          ? toString(valueF)
-          : valueF.toFixed(precision)
-    }${postfix ?? ''}`;
+    const localeOptions: Intl.NumberFormatOptions = {};
+    if (!!precision) {
+      localeOptions.maximumFractionDigits = precision;
+      localeOptions.minimumFractionDigits = precision;
+    }
+    if (isSeparated) {
+      localeOptions.useGrouping = true;
+    }
+    if (currency) {
+      localeOptions.style = 'currency';
+      localeOptions.currency = currency;
+    }
+    return `${prefix ?? ''}${valueF.toLocaleString('en-US', localeOptions)}${postfix ?? ''}`;
   }
   return '';
 };

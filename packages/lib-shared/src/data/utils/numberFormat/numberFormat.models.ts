@@ -28,6 +28,7 @@ export type NumberUnitModel =
   | OtherNumberUnitModel;
 
 export type NumberFormatOptionsModel = NumberScaleOptionsModel & {
+  currency?: string;
   isSeparated?: boolean;
   postfix?: string;
   precision?: number;

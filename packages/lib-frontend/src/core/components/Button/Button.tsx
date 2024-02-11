@@ -15,6 +15,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import {
   THEME_COLOR,
+  THEME_COLOR_MORE,
   THEME_ROLE,
   THEME_SIZE,
   THEME_SIZE_MORE,
@@ -99,28 +100,28 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
       }
       case BUTTON_TYPE.INVISIBLE:
       case BUTTON_TYPE.TRANSPARENT: {
-        const colorInactive = theme.color.palette.surface.main;
+        const colorInactive = theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MAIN];
         return {
           animation: {
             states: {
               [ELEMENT_STATE.ACTIVE]: {
                 backgroundColor: colorF.muted,
-                borderColor: activeColor,
+                borderColor: mainColor,
                 opacity: 1,
               },
               [ELEMENT_STATE.DISABLED]: {
                 backgroundColor: colorInactive,
-                borderColor: activeColor,
+                borderColor: mainColor,
                 opacity,
               },
               [ELEMENT_STATE.LOADING]: {
                 backgroundColor: colorInactive,
-                borderColor: activeColor,
+                borderColor: mainColor,
                 opacity,
               },
               [ELEMENT_STATE.INACTIVE]: {
                 backgroundColor: colorInactive,
-                borderColor: activeColor,
+                borderColor: mainColor,
                 opacity: 1,
               },
             },
