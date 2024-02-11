@@ -1,6 +1,7 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { type SubmittableButtonsPropsModel } from '@lib/frontend/data/components/SubmittableButtons/SubmittableButtons.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
@@ -20,6 +21,8 @@ export const SubmittableButtons = <TType,>({
 > => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
+  const isDisabled =
+    elementState == ELEMENT_STATE.LOADING || elementState == ELEMENT_STATE.DISABLED;
   return (
     <Wrapper
       {...wrapperProps}
@@ -28,7 +31,7 @@ export const SubmittableButtons = <TType,>({
       justify={FLEX_JUSTIFY.END}>
       {onCancel && (
         <Button
-          elementState={elementState}
+          elementState={isDisabled ? ELEMENT_STATE.DISABLED : undefined}
           icon="chevronLeft"
           onPress={onCancel}
           type={BUTTON_TYPE.INVISIBLE}>
