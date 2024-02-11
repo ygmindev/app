@@ -10,7 +10,6 @@ export const LocaleSettingsPage: LFCModel<LocaleSettingsPagePropsModel> = ({ ...
   return (
     <MainLayout
       {...wrapperProps}
-      flex
       p
       s>
       {LOCALE_SETTINGS_PAGE_FIELDS.map(({ element, id, title }) => (

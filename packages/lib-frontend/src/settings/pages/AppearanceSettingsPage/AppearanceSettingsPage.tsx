@@ -12,7 +12,6 @@ export const AppearanceSettingsPage: LFCModel<AppearanceSettingsPagePropsModel> 
   return (
     <MainLayout
       {...wrapperProps}
-      flex
       p
       s>
       {APPEARANCE_SETTINGS_PAGE_FIELDS.map(({ element, id, title }) => (
