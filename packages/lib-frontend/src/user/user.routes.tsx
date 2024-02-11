@@ -55,13 +55,6 @@ export const userRoutes: Array<RouteModel> = [
         ],
         title: ({ t }) => t('user:personal'),
       },
-      {
-        icon: 'settings',
-        navigation: ROUTE_NAVIGATION.LIST,
-        pathname: SETTINGS,
-        routes: settingsRoutes,
-        title: ({ t }) => t('settings:settings'),
-      },
 
       {
         icon: 'dollar',
@@ -69,6 +62,14 @@ export const userRoutes: Array<RouteModel> = [
         pathname: BILLING,
         routes: billingRoutes,
         title: ({ t }) => t('billing:billing'),
+      },
+
+      {
+        icon: 'settings',
+        navigation: ROUTE_NAVIGATION.LIST,
+        pathname: SETTINGS,
+        routes: settingsRoutes,
+        title: ({ t }) => t('settings:settings'),
       },
     ],
     title: ({ t }) => t('user:account'),
