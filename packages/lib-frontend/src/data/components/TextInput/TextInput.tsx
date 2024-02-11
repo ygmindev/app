@@ -119,7 +119,6 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
 
     const rightElementF = (
       <Wrapper
-        backgroundColor={THEME_COLOR_MORE.SURFACE}
         bottom={0}
         isRowAlign
         position={SHAPE_POSITION.ABSOLUTE}
