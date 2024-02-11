@@ -17,7 +17,6 @@ export type RouteModel<
   element?: ReactElement<TProps>;
   fullpath?: string;
   header?: { previous?: number };
-  isFullScreen?: boolean;
   isIndex?: boolean;
   isNavigatable?: boolean;
   isProtectable?: boolean;

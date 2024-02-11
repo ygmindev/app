@@ -88,13 +88,10 @@ export const Route: LFCModel<RoutePropsModel> = ({ depth, route, ...props }) => 
       {...route.layoutProps}
       backgroundColor={THEME_COLOR_MORE.SURFACE}
       isAbsoluteFill
-      mTop={route.isFullScreen ? theme.layout.header.height : undefined}
       zIndex>
       {element}
     </Wrapper>
   );
-
-  element = route.isFullScreen ? <Portal>{element}</Portal> : element;
 
   return (
     <>

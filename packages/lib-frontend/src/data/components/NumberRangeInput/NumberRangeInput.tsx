@@ -1,8 +1,5 @@
-import { type ForwardedRef, forwardRef, type ReactElement, useEffect, useState } from 'react';
-
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
-import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { Slider } from '@lib/frontend/core/components/Slider/Slider';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -15,21 +12,23 @@ import {
   type NumberRangeTypeModel,
 } from '@lib/frontend/data/components/NumberRangeInput/NumberRangeInput.models';
 import { unitOptions } from '@lib/frontend/data/components/ScaledNumberInput/ScaledNumberInput';
+import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { TEXT_INPUT_KEYBOARD } from '@lib/frontend/data/components/TextInput/TextInput.constants';
-import {
-  AMOUNT_UNIT,
-  DATA,
-  NUMBER_UNIT_TYPE,
-  RELATIVE_DATE_UNIT,
-} from '@lib/frontend/data/data.constants';
-import { type NumberUnitModel } from '@lib/frontend/data/data.models';
-import { useFormatter } from '@lib/frontend/data/hooks/useFormatter/useFormatter';
+import { DATA } from '@lib/frontend/data/data.constants';
 import { useValueScaled } from '@lib/frontend/data/hooks/useValueScaled/useValueScaled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { type NumberRangeModel } from '@lib/shared/data/resources/NumberRange/NumberRange.models';
+import { numberFormat } from '@lib/shared/data/utils/numberFormat/numberFormat';
+import {
+  AMOUNT_UNIT,
+  NUMBER_UNIT_TYPE,
+  RELATIVE_DATE_UNIT,
+} from '@lib/shared/data/utils/numberFormat/numberFormat.constants';
+import { type NumberUnitModel } from '@lib/shared/data/utils/numberFormat/numberFormat.models';
+import { type ForwardedRef, forwardRef, type ReactElement, useEffect, useState } from 'react';
 
 export const NumberRangeInput = forwardRef(
   <TType extends NumberUnitModel>(
@@ -55,7 +54,6 @@ export const NumberRangeInput = forwardRef(
     const isRange = rangeTypeState === NUMBER_RANGE_TYPE.RANGE;
     // TODO: adjust default range
     const [range, rangeSet] = useState<[number, number]>([0, 1e3]);
-    const { format } = useFormatter();
 
     const unitOptionsF = unitOptions(type);
     const { unit, valueControlled, valueControlledSet, valueScaled } = useValueScaled({
@@ -159,7 +157,7 @@ export const NumberRangeInput = forwardRef(
         </Wrapper>
 
         <Slider
-          formatter={(v) => format(v, { isScale: false, unit })}
+          formatter={(v) => numberFormat(v, { unit })}
           isRange={isRange}
           lower={range[0]}
           onChange={handleChange}

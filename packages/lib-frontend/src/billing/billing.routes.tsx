@@ -1,5 +1,5 @@
 import { PAYMENT_METHOD } from '@lib/frontend/billing/billing.constants';
-import { PaymentMethodFormPage } from '@lib/frontend/billing/pages/PaymentMethodFormPage/PaymentMethodFormPage';
+import { PaymentMethodForm } from '@lib/frontend/billing/containers/PaymentMethodForm/PaymentMethodForm';
 import { PaymentMethodPage } from '@lib/frontend/billing/pages/PaymentMethodPage/PaymentMethodPage';
 import { FORM } from '@lib/frontend/data/data.constants';
 import { ROUTE_NAVIGATION } from '@lib/frontend/route/route.constants';
@@ -13,8 +13,7 @@ export const billingRoutes = [
     pathname: PAYMENT_METHOD,
     routes: [
       {
-        element: <PaymentMethodFormPage />,
-        isFullScreen: true,
+        element: <PaymentMethodForm />,
         pathname: FORM,
         title: ({ t }) => t('billing:paymentMethod'),
       },

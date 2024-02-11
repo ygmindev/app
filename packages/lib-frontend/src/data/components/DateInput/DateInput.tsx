@@ -8,10 +8,10 @@ import {
   type DateInputRefModel,
 } from '@lib/frontend/data/components/DateInput/DateInput.models';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
-import { useFormatter } from '@lib/frontend/data/hooks/useFormatter/useFormatter';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { dateTimeFormat } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat';
 import { forwardRef, useState } from 'react';
 
 export const DateInput: RLFCModel<DateInputRefModel, DateInputPropsModel> = forwardRef(
@@ -22,7 +22,6 @@ export const DateInput: RLFCModel<DateInputRefModel, DateInputPropsModel> = forw
       onChange,
       value,
     });
-    const { format } = useFormatter();
     const [isActive, isActiveSet] = useState<boolean>();
     return (
       <Dropdown
@@ -39,7 +38,7 @@ export const DateInput: RLFCModel<DateInputRefModel, DateInputPropsModel> = forw
               icon="calendar"
               isNoClear
               label={label}
-              value={format(valueControlled)}
+              value={dateTimeFormat(valueControlled)}
             />
           </Wrapper>
         }

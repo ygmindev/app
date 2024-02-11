@@ -1,16 +1,17 @@
 import { FloatingFooter } from '@lib/frontend/app/components/FloatingFooter/FloatingFooter';
 import { BILLING } from '@lib/frontend/billing/billing.constants';
+import { PaymentMethodForm } from '@lib/frontend/billing/containers/PaymentMethodForm/PaymentMethodForm';
 import { useBankResource } from '@lib/frontend/billing/hooks/useBankResource/useBankResource';
 import { useCardResource } from '@lib/frontend/billing/hooks/useCardResource/useCardResource';
 import { usePaymentMethodResource } from '@lib/frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
 import { type PaymentMethodPagePropsModel } from '@lib/frontend/billing/pages/PaymentMethodPage/PaymentMethodPage.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { ItemList } from '@lib/frontend/core/components/ItemList/ItemList';
+import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBoundary';
 import { type DataBoundaryRefModel } from '@lib/frontend/data/components/DataBoundary/DataBoundary.models';
-import { FORM } from '@lib/frontend/data/data.constants';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -96,12 +97,17 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
       </DataBoundary>
 
       <FloatingFooter>
-        <Button
+        <ModalButton
+          element={({ onClose }) => (
+            <PaymentMethodForm
+              onCancel={onClose}
+              onSuccess={async () => onClose()}
+            />
+          )}
           icon="add"
-          isShadow
-          onPress={() => push({ pathname: FORM, root: true })}>
+          isShadow>
           {t('core:new', { value: PAYMENT_METHOD_RESOURCE_NAME })}
-        </Button>
+        </ModalButton>
       </FloatingFooter>
     </MainLayout>
   );

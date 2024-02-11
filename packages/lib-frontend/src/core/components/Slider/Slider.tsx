@@ -1,5 +1,3 @@
-import toString from 'lodash/toString';
-
 import { _Slider } from '@lib/frontend/core/components/Slider/_Slider';
 import { type SliderPropsModel } from '@lib/frontend/core/components/Slider/Slider.models';
 import { Text } from '@lib/frontend/core/components/Text/Text';
@@ -18,6 +16,7 @@ import {
 } from '@lib/frontend/style/style.constants';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { type NumberRangeModel } from '@lib/shared/data/resources/NumberRange/NumberRange.models';
+import toString from 'lodash/toString';
 
 export const Slider: LFCModel<SliderPropsModel> = ({
   defaultValue,
