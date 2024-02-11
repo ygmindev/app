@@ -34,7 +34,7 @@ export const SubmittableButtons = <TType,>({
           elementState={isDisabled ? ELEMENT_STATE.DISABLED : undefined}
           icon="chevronLeft"
           onPress={onCancel}
-          type={BUTTON_TYPE.INVISIBLE}>
+          type={BUTTON_TYPE.TRANSPARENT}>
           {cancelLabel ?? t('core:cancel')}
         </Button>
       )}
