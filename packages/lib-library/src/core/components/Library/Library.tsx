@@ -131,6 +131,8 @@ export const Library = <TProps,>({
                 s={THEME_SIZE.SMALL}>
                 <Wrapper
                   border
+                  isHorizontalScrollable
+                  isVerticalScrollable
                   minWidth={minWidth}
                   p
                   round
