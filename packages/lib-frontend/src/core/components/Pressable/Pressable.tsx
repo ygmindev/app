@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
@@ -16,6 +14,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { isPromise } from '@lib/shared/core/utils/isPromise/isPromise';
+import { useState } from 'react';
 
 export const Pressable: RLFCModel<WrapperRefModel, PressablePropsModel> = ({
   animation,
@@ -113,7 +112,9 @@ export const Pressable: RLFCModel<WrapperRefModel, PressablePropsModel> = ({
             s>
             {confirmMessage && <TranslatableText>{confirmMessage}</TranslatableText>}
 
-            <Wrapper isRowAlign>
+            <Wrapper
+              isAlign
+              isRow>
               <Button
                 elementState={valueControlled}
                 icon="chevronLeft"

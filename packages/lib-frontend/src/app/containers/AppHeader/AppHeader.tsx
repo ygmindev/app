@@ -16,13 +16,15 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
       {...wrapperProps}
       border={DIRECTION.BOTTOM}
       height={theme.layout.header.height}
+      isAlign
       isFullWidth
-      isRowAlign
+      isRow
       pHorizontal
       position={SHAPE_POSITION.RELATIVE}>
       <Wrapper
-        grow
-        isRowAlign>
+        flex
+        isAlign
+        isRow>
         <Logo />
       </Wrapper>
 

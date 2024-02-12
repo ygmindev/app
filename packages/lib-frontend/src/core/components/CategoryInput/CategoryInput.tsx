@@ -57,7 +57,8 @@ const CategoryInputResult: LFCModel<
     <Wrapper
       {...wrapperProps}
       flex
-      isRowAlign>
+      isAlign
+      isRow>
       {filterNil([
         emptyLabel && ({ icon: 'times', id: '', label: emptyLabel } as TranslatableOptionModel),
         ...(options ?? []),

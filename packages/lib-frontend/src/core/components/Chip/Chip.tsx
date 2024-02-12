@@ -22,8 +22,9 @@ export const Chip: LFCModel<ChipPropsModel> = ({
       {...wrapperProps}
       alignSelf={FLEX_ALIGN.START}
       backgroundColor={color}
+      isAlign
       isCenter
-      isRowAlign
+      isRow
       justifySelf={FLEX_JUSTIFY.START}
       p={THEME_SIZE.SMALL}
       round>

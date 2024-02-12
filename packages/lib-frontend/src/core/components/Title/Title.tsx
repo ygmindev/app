@@ -27,7 +27,8 @@ export const Title: LFCModel<TitlePropsModel> = ({
   return (
     <Wrapper
       {...wrapperProps}
-      isRowAlign>
+      isAlign
+      isRow>
       {leftElement && <Skeleton elementState={elementState}>{leftElement}</Skeleton>}
 
       {image && (

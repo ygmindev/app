@@ -26,8 +26,9 @@ export const SubmittableButtons = <TType,>({
   return (
     <Wrapper
       {...wrapperProps}
+      isAlign
       isDistribute
-      isRowAlign
+      isRow
       justify={FLEX_JUSTIFY.END}>
       {onCancel && (
         <Button

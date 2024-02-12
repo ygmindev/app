@@ -34,8 +34,9 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, ...props }
       border={DIRECTION.BOTTOM}
       elementState={ELEMENT_STATE.ACTIVE}
       height={theme.layout.header.height}
+      isAlign
       isFullWidth
-      isRowAlign
+      isRow
       pHorizontal
       position={SHAPE_POSITION.RELATIVE}
       ref={ref}>

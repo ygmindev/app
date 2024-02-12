@@ -57,8 +57,9 @@ export const Slider: LFCModel<SliderPropsModel> = ({
       />
 
       <Wrapper
+        isAlign
         isDistribute
-        isRowAlign>
+        isRow>
         {lower !== undefined && (
           <Text align={FONT_ALIGN.LEFT}>{formatter ? formatter(lower) : toString(lower)}</Text>
         )}

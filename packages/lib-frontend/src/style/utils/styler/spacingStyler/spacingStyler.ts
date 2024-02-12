@@ -1,5 +1,3 @@
-import isNumber from 'lodash/isNumber';
-
 import { type UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { type ThemeSizeModel } from '@lib/frontend/style/style.models';
@@ -9,14 +7,17 @@ import {
 } from '@lib/frontend/style/utils/styler/spacingStyler/spacingStyler.models';
 import { type StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
+import isNumber from 'lodash/isNumber';
 
-export const getSpacing = (
-  value: SpacingModel | 'auto' | number | undefined,
+export const getSpacing = <TType extends SpacingModel | 'auto' | number | undefined>(
+  value: TType,
   theme: UseThemeModel,
-): 'auto' | number | undefined =>
-  value === undefined || value === 'auto' || isNumber(value)
+): TType extends 'auto' ? 'auto' : number | undefined =>
+  (value === undefined || value === 'auto' || isNumber(value)
     ? value
-    : theme.shape.spacing[value === true ? THEME_SIZE.MEDIUM : (value as ThemeSizeModel)];
+    : theme.shape.spacing[
+        value === true ? THEME_SIZE.MEDIUM : (value as ThemeSizeModel)
+      ]) as TType extends 'auto' ? 'auto' : number | undefined;
 
 export const spacingStyler: StylerModel<SpacingStylerParamsModel> = (
   {
@@ -34,16 +35,18 @@ export const spacingStyler: StylerModel<SpacingStylerParamsModel> = (
     pRight,
     pTop,
     pVertical,
+    s,
   },
   theme,
 ) => {
   const mF = getSpacing(m, theme);
-  const mHorizontalF = mF || getSpacing(mHorizontal, theme);
-  const mVerticalF = mF || getSpacing(mVertical, theme);
+  const mHorizontalF = mF ?? getSpacing(mHorizontal, theme);
+  const mVerticalF = mF ?? getSpacing(mVertical, theme);
   const pF = getSpacing(p, theme);
-  const pHorizontalF = pF || getSpacing(pHorizontal, theme);
-  const pVerticalF = pF || getSpacing(pVertical, theme);
+  const pHorizontalF = pF ?? getSpacing(pHorizontal, theme);
+  const pVerticalF = pF ?? getSpacing(pVertical, theme);
   return cleanObject({
+    gap: getSpacing(s, theme),
     margin: mF,
     marginBottom: getSpacing(mBottom, theme) ?? mVerticalF,
     marginLeft: getSpacing(mLeft, theme) ?? mHorizontalF,

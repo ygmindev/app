@@ -86,7 +86,8 @@ export const SelectInput = forwardRef(
         <TranslatableText isBold>{label}</TranslatableText>
 
         <Wrapper
-          isRowAlign={isHorizontal}
+          isAlign
+          isRow={isHorizontal}
           isWrap
           s={THEME_SIZE.SMALL}>
           {isMultiple && (
@@ -106,7 +107,8 @@ export const SelectInput = forwardRef(
                   <Wrapper
                     border
                     borderColor={THEME_COLOR.PRIMARY}
-                    isRowAlign
+                    isAlign
+                    isRow
                     onPress={handleChange(id)}
                     p={THEME_SIZE.SMALL}
                     round>

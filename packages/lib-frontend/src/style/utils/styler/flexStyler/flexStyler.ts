@@ -8,6 +8,7 @@ export const flexStyler: StylerModel<FlexStylerParamsModel> = ({
   basis,
   flex,
   grow,
+  isAlign,
   isReverse,
   isRow,
   isWrap,
@@ -16,7 +17,7 @@ export const flexStyler: StylerModel<FlexStylerParamsModel> = ({
   shrink,
 }) =>
   cleanObject({
-    alignItems: align,
+    alignItems: isAlign ? 'center' : align,
     alignSelf,
     display: 'flex',
     flex: flex === true ? 1 : flex === false ? undefined : flex,

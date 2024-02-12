@@ -1,5 +1,3 @@
-import { Fragment } from 'react';
-
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import { type WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
@@ -21,21 +19,22 @@ export const props: LibraryPropsModel<WrapperPropsModel> = {
     { props: { isFullWidth: true } },
     { props: { s: true } },
     { props: { isRow: true, s: true } },
-    {
-      name: 'with fragment',
-      props: {
-        children: [
-          <WrapperFixture>1</WrapperFixture>,
-          <Fragment>
-            <WrapperFixture>2</WrapperFixture>
+    { props: { isAlign: true, isRow: true } },
+    // {
+    //   name: 'with fragment',
+    //   props: {
+    //     children: [
+    //       <WrapperFixture>1</WrapperFixture>,
+    //       <Fragment>
+    //         <WrapperFixture>2</WrapperFixture>
 
-            <WrapperFixture>3</WrapperFixture>
+    //         <WrapperFixture>3</WrapperFixture>
 
-            <WrapperFixture>4</WrapperFixture>
-          </Fragment>,
-        ],
-        s: true,
-      },
-    },
+    //         <WrapperFixture>4</WrapperFixture>
+    //       </Fragment>,
+    //     ],
+    //     s: true,
+    //   },
+    // },
   ],
 };

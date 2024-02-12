@@ -17,7 +17,8 @@ export const FilterButton: LFCModel<FilterButtonPropsModel> = ({ element, ...pro
   return (
     <Wrapper
       {...wrapperProps}
-      isRowAlign
+      isAlign
+      isRow
       justify={FLEX_JUSTIFY.END}>
       <ModalButton
         element={({ onClose }) =>

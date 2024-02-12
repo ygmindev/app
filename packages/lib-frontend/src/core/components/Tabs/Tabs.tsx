@@ -55,7 +55,8 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
                   onPress={() => valueControlledSet(tab.id)}
                   position={SHAPE_POSITION.RELATIVE}>
                   <Wrapper
-                    isRowAlign
+                    isAlign
+                    isRow
                     pHorizontal
                     pVertical={THEME_SIZE.SMALL}>
                     {tab.icon && (

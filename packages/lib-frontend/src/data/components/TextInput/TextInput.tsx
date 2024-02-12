@@ -115,12 +115,19 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
       }
     };
 
-    const leftElementF = leftElement && <Wrapper isRowAlign>{leftElement}</Wrapper>;
+    const leftElementF = leftElement && (
+      <Wrapper
+        isAlign
+        isRow>
+        {leftElement}
+      </Wrapper>
+    );
 
     const rightElementF = (
       <Wrapper
         bottom={0}
-        isRowAlign
+        isAlign
+        isRow
         position={SHAPE_POSITION.ABSOLUTE}
         right={0}
         top={0}
@@ -253,8 +260,9 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
         <Wrapper
           animation={containerAnimation}
           elementState={placeholder ? ELEMENT_STATE.ACTIVE : elementStateF}
+          isAlign
           isCenter
-          isRowAlign
+          isRow
           left={0}
           pHorizontal
           position={SHAPE_POSITION.ABSOLUTE}

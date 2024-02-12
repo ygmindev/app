@@ -179,8 +179,9 @@ const FormContainerF = forwardRef(
         />
       ) : (
         <Wrapper
+          isAlign
           isDistribute
-          isRowAlign
+          isRow
           key={row.id}>
           {fieldsF.map(({ element }) => element)}
         </Wrapper>

@@ -157,7 +157,9 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
   ) : undefined;
 
   childrenF = childrenF ? (
-    <Wrapper isRowAlign>
+    <Wrapper
+      isAlign
+      isRow>
       {leftElement}
 
       {iconF}

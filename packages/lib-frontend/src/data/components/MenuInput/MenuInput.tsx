@@ -132,7 +132,9 @@ export const MenuInput = forwardRef(
             onSubmit={handleSubmit}
             ref={ref}
             rightElement={
-              <Wrapper isRowAlign>
+              <Wrapper
+                isAlign
+                isRow>
                 {valueControlled && (
                   <Icon
                     fontSize={THEME_SIZE.SMALL}

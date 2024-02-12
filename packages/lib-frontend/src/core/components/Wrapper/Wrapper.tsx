@@ -7,9 +7,6 @@ import {
 import { type ChildrenPropsModel, type RLFCModel } from '@lib/frontend/core/core.models';
 import { isFragment } from '@lib/frontend/core/utils/isFragment/isFragment';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
-import { spacingStyler } from '@lib/frontend/style/utils/styler/spacingStyler/spacingStyler';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import reduce from 'lodash/reduce';
@@ -19,8 +16,7 @@ import { StyleSheet } from 'react-native';
 
 export const Wrapper: RLFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef(
   ({ animation, children, isDistribute, ...props }, ref) => {
-    const theme = useTheme();
-    const { styles, wrapperProps } = useLayoutStyles({ props });
+    const { styles } = useLayoutStyles({ props });
 
     const getChildren = (children: ReactNode | Array<ReactNode>): Array<ReactNode> => {
       const childrenF = reduce(
@@ -36,9 +32,6 @@ export const Wrapper: RLFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
             : result,
         [] as Array<ReactNode>,
       );
-
-      const { length } = childrenF;
-      const isRowF = wrapperProps.isRow || wrapperProps.isRowAlign;
       return reduce(
         childrenF as Array<ReactElement>,
         (result, child) => {
@@ -47,33 +40,7 @@ export const Wrapper: RLFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
             ...result,
             cloneElement(child, {
               style: StyleSheet.flatten(
-                filterNil([
-                  isDistribute && { flexGrow: 1, flexShrink: 1 },
-                  ((wrapperProps.isReverse &&
-                    childrenF.length > 1 &&
-                    result.length !== length - 1) ||
-                    (!wrapperProps.isReverse &&
-                      childrenF.length > 1 &&
-                      result.length <= length - 1)) &&
-                    spacingStyler(
-                      {
-                        mBottom:
-                          childProps.mBottom ??
-                          (isRowF && wrapperProps.isWrap
-                            ? THEME_SIZE.SMALL
-                            : !wrapperProps.isRow && wrapperProps.s),
-                        mRight:
-                          childProps.mRight ??
-                          (!isRowF && wrapperProps.isWrap
-                            ? THEME_SIZE.SMALL
-                            : wrapperProps.isRow &&
-                              (wrapperProps.s ??
-                                (wrapperProps.isRowAlign ? THEME_SIZE.SMALL : undefined))),
-                      },
-                      theme,
-                    ),
-                  childProps.style,
-                ]),
+                filterNil([isDistribute && { flexGrow: 1, flexShrink: 1 }, , childProps.style]),
               ),
             }),
           ];

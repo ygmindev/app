@@ -37,7 +37,7 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
                 root={GROUP}
                 route={{ pathname: _id ?? '' }}
                 title={name}>
-                <Wrapper isRowAlign>{types?.map((type) => <Chip key={type}>{type}</Chip>)}</Wrapper>
+                <Wrapper isRow isAlign>{types?.map((type) => <Chip key={type}>{type}</Chip>)}</Wrapper>
               </RouteItem>
             ))}
           </ItemList>

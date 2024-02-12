@@ -27,15 +27,17 @@ export const TimingFormPage: LFCModel<TimingFormPagePropsModel> = ({ ...props })
       {location.params?.priceTiers.map(({ price, timing }) => (
         <Wrapper
           border
+          isAlign
           isCenter
-          isRowAlign
+          isRow
           key={timing}
           p
           round
           s>
           <Wrapper
             flex
-            isRowAlign>
+            isAlign
+            isRow>
             <Icon icon={timing === 'rush' ? 'thunder' : 'time'} />
 
             <Text fontSize={THEME_SIZE.LARGE}>{timing}</Text>

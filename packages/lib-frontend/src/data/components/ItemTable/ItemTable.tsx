@@ -1,5 +1,3 @@
-import isString from 'lodash/isString';
-
 import { Skeleton } from '@lib/frontend/animation/components/Skeleton/Skeleton';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Image } from '@lib/frontend/core/components/Image/Image';
@@ -12,6 +10,7 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import isString from 'lodash/isString';
 
 export const ItemTable: LFCModel<ItemTablePropsModel> = ({ elementState, items, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -22,7 +21,8 @@ export const ItemTable: LFCModel<ItemTablePropsModel> = ({ elementState, items, 
       s={THEME_SIZE.SMALL}>
       {filterNil(items).map(({ description, icon, id, image, title }) => (
         <Wrapper
-          isRowAlign
+          isAlign
+          isRow
           key={id}>
           {image && (
             <Skeleton elementState={elementState}>

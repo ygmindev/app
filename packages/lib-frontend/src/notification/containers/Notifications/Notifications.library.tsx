@@ -11,7 +11,9 @@ export const props: LibraryPropsModel<NotificationsPropsModel> = {
   Renderer: () => {
     const { add } = useNotification();
     return (
-      <Wrapper isRowAlign>
+      <Wrapper
+        isAlign
+        isRow>
         {Object.values(THEME_COLOR).map((color) => (
           <Button
             color={color}

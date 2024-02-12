@@ -1,5 +1,3 @@
-import { useRef } from 'react';
-
 import { ANIMATION_STATES_APPEARABLE } from '@lib/frontend/animation/animation.constants';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
@@ -17,6 +15,7 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
+import { useRef } from 'react';
 
 export const Notification: LFCModel<NotificationPropsModel> = ({
   color = THEME_COLOR.PRIMARY,
@@ -77,8 +76,9 @@ export const Notification: LFCModel<NotificationPropsModel> = ({
       )}
 
       <Wrapper
-        grow
-        isRowAlign
+        flex
+        isAlign
+        isRow
         p>
         <Icon
           color={color}
@@ -89,7 +89,7 @@ export const Notification: LFCModel<NotificationPropsModel> = ({
 
         <Wrapper
           basis={0}
-          grow
+          flex
           isWrap
           s={THEME_SIZE.SMALL}>
           {title && (

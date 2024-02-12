@@ -143,7 +143,9 @@ export const Library = <TProps,>({
                   )}
                 </Wrapper>
 
-                <Wrapper isRowAlign>
+                <Wrapper
+                  isAlign
+                  isRow>
                   {map(variantProps as object, (v, k) => (
                     <Wrapper key={k}>
                       <Text

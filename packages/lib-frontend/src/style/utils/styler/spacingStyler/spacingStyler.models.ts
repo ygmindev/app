@@ -17,4 +17,5 @@ export type SpacingStylerParamsModel = {
   pRight?: SpacingModel;
   pTop?: SpacingModel;
   pVertical?: SpacingModel;
+  s?: SpacingModel;
 };

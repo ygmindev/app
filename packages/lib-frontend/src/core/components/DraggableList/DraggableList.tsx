@@ -1,5 +1,3 @@
-import { type ReactElement } from 'react';
-
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { _DraggableList } from '@lib/frontend/core/components/DraggableList/_DraggableList';
 import { type DraggableListPropsModel } from '@lib/frontend/core/components/DraggableList/DraggableList.models';
@@ -11,6 +9,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
+import { type ReactElement } from 'react';
 
 export const DraggableList = <TType extends WithIdModel>({
   defaultValue,
@@ -40,7 +39,8 @@ export const DraggableList = <TType extends WithIdModel>({
         onChange={valueControlledSet}
         render={({ anchor, i, isActive, item }) => (
           <Wrapper
-            isRowAlign
+            isAlign
+            isRow
             opacity={isActive ? theme.opaque[THEME_SIZE.MEDIUM] : 1}>
             {anchor}
 

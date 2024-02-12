@@ -127,7 +127,9 @@ export const NumberRangeInput = forwardRef(
           value={unit}
         />
 
-        <Wrapper isRowAlign>
+        <Wrapper
+          isAlign
+          isRow>
           <NumberInput
             error={error}
             flex

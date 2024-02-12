@@ -1,14 +1,3 @@
-import cloneDeep from 'lodash/cloneDeep';
-import isNil from 'lodash/isNil';
-import {
-  cloneElement,
-  type ForwardedRef,
-  forwardRef,
-  type ReactElement,
-  useImperativeHandle,
-  useState,
-} from 'react';
-
 import { Skeleton } from '@lib/frontend/animation/components/Skeleton/Skeleton';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
@@ -40,6 +29,16 @@ import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { getValue } from '@lib/shared/core/utils/getValue/getValue';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
+import cloneDeep from 'lodash/cloneDeep';
+import isNil from 'lodash/isNil';
+import {
+  cloneElement,
+  type ForwardedRef,
+  forwardRef,
+  type ReactElement,
+  useImperativeHandle,
+  useState,
+} from 'react';
 
 export const Table = forwardRef(
   <TType,>(
@@ -91,8 +90,9 @@ export const Table = forwardRef(
         {!isHeadless && (
           <Wrapper
             border={DIRECTION.BOTTOM}
+            isAlign
             isFullWidth={isFullWidth}
-            isRowAlign>
+            isRow>
             {isDeletable && <Wrapper width={theme.shape.size[THEME_SIZE.MEDIUM]} />}
 
             {headers.map(
@@ -122,7 +122,8 @@ export const Table = forwardRef(
             <Wrapper
               border={DIRECTION.BOTTOM}
               borderColor={theme.color.border}
-              isRowAlign
+              isAlign
+              isRow
               key={row.id}
               minHeight={theme.shape.size[THEME_SIZE_MORE.XSMALL]}
               pVertical={THEME_SIZE.SMALL}>

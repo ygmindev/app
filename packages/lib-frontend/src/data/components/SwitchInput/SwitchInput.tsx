@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -21,6 +19,7 @@ import {
   THEME_SIZE,
 } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { useMemo } from 'react';
 
 export const SwitchInput: LFCModel<SwitchInputPropsModel> = ({
   defaultValue,
@@ -69,7 +68,8 @@ export const SwitchInput: LFCModel<SwitchInputPropsModel> = ({
     <Wrapper
       {...wrapperProps}
       elementState={elementStateF}
-      isRowAlign
+      isAlign
+      isRow
       onPress={() => valueControlledSet(!valueControlled)}>
       <Wrapper
         animation={{

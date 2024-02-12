@@ -31,7 +31,9 @@ export const SpecificationDetail = <TType,>({
             key={field.id}
             size={THEME_SIZE.SMALL}
             title={
-              <Wrapper isRowAlign>
+              <Wrapper
+                isAlign
+                isRow>
                 <Text>{field.id}</Text>
 
                 <Chip

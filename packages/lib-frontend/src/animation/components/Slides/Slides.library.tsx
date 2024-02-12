@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { Slides } from '@lib/frontend/animation/components/Slides/Slides';
 import { type SlidesPropsModel } from '@lib/frontend/animation/components/Slides/Slides.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
@@ -8,6 +6,7 @@ import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fi
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 import { withId } from '@lib/shared/core/utils/withId/withId';
+import { useState } from 'react';
 
 export const props: LibraryPropsModel<SlidesPropsModel> = {
   Component: Slides,
@@ -18,7 +17,9 @@ export const props: LibraryPropsModel<SlidesPropsModel> = {
       <Wrapper
         isCenter
         s>
-        <Wrapper isRowAlign>
+        <Wrapper
+          isAlign
+          isRow>
           <Button
             elementState={current <= 0 ? ELEMENT_STATE.DISABLED : undefined}
             onPress={() => currentSet(Math.max(0, current - 1))}>

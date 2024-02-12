@@ -46,9 +46,10 @@ export const NavigationBar = ({
       <Wrapper
         basis={0}
         border={isHorizontalF ? DIRECTION.BOTTOM : DIRECTION.RIGHT}
+        isAlign={isHorizontalF}
         isFullWidth={isHorizontalF}
         isHorizontalScrollable={isHorizontalF}
-        isRowAlign={isHorizontalF}
+        isRow={isHorizontalF}
         isVerticalScrollable={!isHorizontalF}
         p
         s
@@ -57,7 +58,8 @@ export const NavigationBar = ({
         {map(categories, (v, k) => {
           const optionsF = (
             <Wrapper
-              isRowAlign={!k && isHorizontalF}
+              isAlign={!k && isHorizontalF}
+              isRow={!k && isHorizontalF}
               key={toString(k)}
               s={THEME_SIZE.SMALL}>
               {v.map(({ icon, id, label, onPress }) => (

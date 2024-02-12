@@ -47,7 +47,8 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
         isCenter
         isFullWidth>
         <Wrapper
-          isRowAlign
+          isAlign
+          isRow
           onMeasure={measureSet}
           position={SHAPE_POSITION.RELATIVE}>
           <Wrapper
@@ -94,7 +95,8 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
           ))}
 
           <Wrapper
-            isRowAlign
+            isAlign
+            isRow
             left={(measure?.width ?? 0) + theme.shape.spacing[THEME_SIZE.SMALL]}
             position={SHAPE_POSITION.ABSOLUTE}
             zIndex>

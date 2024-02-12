@@ -74,7 +74,8 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
                   <KeyboardContainer>
                     <Wrapper
                       border={DIRECTION.BOTTOM}
-                      isRowAlign
+                      isAlign
+                      isRow
                       pHorizontal
                       pVertical={THEME_SIZE.SMALL}>
                       {title && (

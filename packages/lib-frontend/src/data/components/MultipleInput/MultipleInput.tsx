@@ -62,7 +62,8 @@ export const MultipleInput = forwardRef(
         {...wrapperProps}
         s={THEME_SIZE.SMALL}>
         <Wrapper
-          isRowAlign
+          isAlign
+          isRow
           justify={FLEX_JUSTIFY.END}>
           <Wrapper flex>
             <TranslatableText>{label}</TranslatableText>
@@ -105,7 +106,8 @@ export const MultipleInput = forwardRef(
 
         {valueControlled?.map((v) => (
           <Wrapper
-            isRowAlign
+            isAlign
+            isRow
             key={v.id}>
             <Wrapper flex>{displayElement(v)}</Wrapper>
 
