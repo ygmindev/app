@@ -84,13 +84,13 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
 
     const { valueControlled: elementStateF, valueControlledSet: onElementStateChangeF } =
       useValueControlled({
+        defaultValue: ELEMENT_STATE.ACTIVE,
         onChange: onElementStateChange,
-        value: elementState,
       });
     const sizeF = size ?? (label ? THEME_SIZE.MEDIUM : THEME_SIZE.SMALL);
-
     const isDisabled =
       elementStateF === ELEMENT_STATE.DISABLED || elementStateF === ELEMENT_STATE.LOADING;
+
     const isActive = elementStateF === ELEMENT_STATE.ACTIVE;
 
     const theme = useTheme();
@@ -125,7 +125,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
         right={0}
         top={0}
         zIndex={elementStateF === ELEMENT_STATE.ACTIVE ? 0 : -1}>
-        {!isNoClear && isActive && (
+        {!isNoClear && !isActive && (
           <Appearable
             elementState={elementStateF}
             isActive={(valueControlled?.length ?? 0) > 0}

@@ -107,7 +107,6 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
                       elementState={elementStateF}
                       icon="phone"
                       onPress={() => valueControlledSet(SIGN_IN_METHOD.PHONE)}
-                      testID="XXX"
                       type={BUTTON_TYPE.TRANSPARENT}>
                       {t('core:continueWith', { value: t('user:phone') })}
                     </Button>

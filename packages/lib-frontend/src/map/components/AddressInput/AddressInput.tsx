@@ -50,7 +50,6 @@ export const AddressInput: RLFCModel<AddressInputRefModel, AddressInputPropsMode
         options={options}
         ref={inputRef}
         rightElement={() => null}
-        testID="XXX"
         value={textValue}
       />
     );

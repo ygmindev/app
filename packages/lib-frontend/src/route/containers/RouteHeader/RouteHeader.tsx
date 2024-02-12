@@ -49,7 +49,6 @@ export const RouteHeader: SFCModel<RouteHeaderPropsModel> = ({ route, ...props }
             pathnames.splice(pathnames.length - previous, previous);
             return push({ isBack: true, pathname: getPath(pathnames.join('/'), location.params) });
           }}
-          testID="XXX"
           type={BUTTON_TYPE.INVISIBLE}
         />
       )}

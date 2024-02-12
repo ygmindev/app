@@ -77,7 +77,7 @@ export const SpecificationInputForm = <TType extends unknown>({
     }
   };
 
-  const handleSubmit = async (data: unknown) => {
+  const handleSubmit = async (data: unknown): Promise<void> => {
     console.warn(data);
   };
 
@@ -87,7 +87,6 @@ export const SpecificationInputForm = <TType extends unknown>({
       element: (
         <FormContainer
           fields={[{ element, id: field.id }] as Array<FormFieldsModel<unknown>>}
-          flex
           isCenter
         />
       ),
@@ -98,7 +97,6 @@ export const SpecificationInputForm = <TType extends unknown>({
   return (
     <StepForm
       {...wrapperProps}
-      flex
       onSubmit={handleSubmit}
       steps={steps}
     />

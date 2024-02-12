@@ -12,7 +12,7 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
   return (
     <MainLayout
       {...wrapperProps}
-      flex
+      isFullHeight
       p>
       {/* <CheckoutButton
         price={{

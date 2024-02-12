@@ -48,6 +48,7 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
       topElement={
         mode === FORM_MODE.UPDATE ? undefined : (
           <Wrapper
+            flex
             isCenter
             s>
             <Text fontStyle={FONT_STYLE.HEADLINE}>
