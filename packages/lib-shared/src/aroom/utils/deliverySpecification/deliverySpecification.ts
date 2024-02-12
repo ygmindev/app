@@ -1,4 +1,3 @@
-import { type SpecificationFormModel } from '@lib/shared/openapi/resources/Specification/Specification.models';
 import { FIELD_TYPE } from '@lib/shared/openapi/utils/Field/Field.constants';
 
 export const deliverySpecification = {

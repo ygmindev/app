@@ -10,7 +10,7 @@ import { type SpecificationInputFormPropsModel } from '@lib/frontend/openapi/com
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { PhoneInput } from '@lib/frontend/user/components/PhoneInput/PhoneInput';
 import { FIELD_TYPE } from '@lib/shared/openapi/utils/Field/Field.constants';
-import { type FieldModel } from '@lib/shared/openapi/utils/Field/Field.models';
+import { type SpecificationFieldModel } from '@lib/shared/openapi/utils/Specification/Specification.models';
 import { type ReactElement } from 'react';
 
 export const SpecificationInputForm = <TType extends unknown>({
@@ -21,7 +21,7 @@ export const SpecificationInputForm = <TType extends unknown>({
 > => {
   const { wrapperProps } = useLayoutStyles({ props });
 
-  const getElement = (field: FieldModel): ReactElement => {
+  const getElement = (field: SpecificationFieldModel<TType>): ReactElement => {
     switch (field.type) {
       case FIELD_TYPE.ADDRESS:
         return (
