@@ -6,6 +6,7 @@ import { type ViewStylerParamsModel } from '@lib/frontend/style/utils/styler/vie
 export type WrapperPropsModel = ViewPropsModel &
   ViewStylerParamsModel &
   AnimatablePropsModel & {
+    isAlign?: boolean;
     isCenter?: boolean;
     isDistribute?: boolean;
     isHorizontalCenter?: boolean;

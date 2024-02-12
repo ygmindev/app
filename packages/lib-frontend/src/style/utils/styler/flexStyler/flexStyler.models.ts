@@ -13,7 +13,6 @@ export type FlexStylerParamsModel = {
   basis?: number | 'auto';
   flex?: boolean | number;
   grow?: boolean | number;
-  isAlign?: boolean;
   isReverse?: boolean;
   isRow?: boolean;
   isWrap?: boolean;
