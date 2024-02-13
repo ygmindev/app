@@ -91,6 +91,7 @@ export const SpecificationInputForm = <TType extends unknown>({
         />
       ),
       id: field.id,
+      title: 'test',
     };
   });
 

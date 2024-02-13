@@ -1,6 +1,5 @@
-import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Slides } from '@lib/frontend/animation/components/Slides/Slides';
-import { Button } from '@lib/frontend/core/components/Button/Button';
+import { NavigationHeader } from '@lib/frontend/app/components/NavigationHeader/NavigationHeader';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
@@ -17,7 +16,7 @@ import { TranslatableText } from '@lib/frontend/locale/components/TranslatableTe
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { type PartialModel } from '@lib/shared/core/core.models';
@@ -85,17 +84,10 @@ export const StepForm = <TType, TResult = void>({
         flex
         isFullWidth
         s>
-        <Wrapper
-          isRow
-          pVertical={THEME_SIZE.SMALL}>
-          <Appearable isActive={current > 0}>
-            <Button
-              elementState={current <= 0 || isLoading ? ELEMENT_STATE.DISABLED : undefined}
-              icon="arrowLeft"
-              onPress={() => handleCurrentSet(current - 1)}
-            />
-          </Appearable>
-        </Wrapper>
+        <NavigationHeader
+          onBack={current > 0 ? () => handleCurrentSet(current - 1) : undefined}
+          title={steps[current]?.title}
+        />
 
         {topElement}
 

@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-
 import {
   ANIMATION_STATES_APPEARABLE,
   ANIMATION_STATES_SLIDABLE_HORIZONTAL,
@@ -14,6 +12,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { merge } from '@lib/shared/core/utils/merge/merge';
+import { useMemo } from 'react';
 
 export const Slide: LFCModel<SlidePropsModel> = ({
   children,
