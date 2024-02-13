@@ -39,14 +39,14 @@ export const NavigationHeader: LFCModel<NavigationHeaderPropsModel> = ({
       pHorizontal
       position={SHAPE_POSITION.RELATIVE}
       ref={ref}>
-      {onBack && (
+      <Appearable isActive={!!onBack}>
         <Button
           elementState={isLoading ? ELEMENT_STATE.DISABLED : undefined}
           icon="chevronLeft"
           onPress={onBack}
           type={BUTTON_TYPE.INVISIBLE}
         />
-      )}
+      </Appearable>
 
       <Appearable isActive={!!title}>
         <TranslatableText fontStyle={FONT_STYLE.SUBTITLE}>{title}</TranslatableText>

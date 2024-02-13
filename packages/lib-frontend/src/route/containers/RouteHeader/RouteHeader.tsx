@@ -16,10 +16,13 @@ export const RouteHeader: LFCModel<RouteHeaderPropsModel> = ({ route, ...props }
       elementState={ELEMENT_STATE.ACTIVE}
       onBack={
         previous
-          ? () => {
+          ? async () => {
               const pathnames = location.pathname.split('/');
               pathnames.splice(pathnames.length - previous, previous);
-              void push({ isBack: true, pathname: getPath(pathnames.join('/'), location.params) });
+              return push({
+                isBack: true,
+                pathname: getPath(pathnames.join('/'), location.params),
+              });
             }
           : undefined
       }

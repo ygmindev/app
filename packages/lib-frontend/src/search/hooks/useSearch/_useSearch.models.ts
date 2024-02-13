@@ -1,4 +1,6 @@
-export type _UseSearchParamsModel<TType> = {
+import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
+
+export type _UseSearchParamsModel<TType extends WithIdModel> = {
   delay?: number;
   items: Array<TType>;
   keys: Array<string>;

@@ -8,10 +8,12 @@ import {
   SEARCH_THRESHOLD,
 } from '@lib/frontend/search/hooks/useSearch/useSearch.constants';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
+import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import Fuse from 'fuse.js';
+import uniqBy from 'lodash/uniqBy';
 import { useMemo, useState } from 'react';
 
-export const _useSearch = <TType,>({
+export const _useSearch = <TType extends WithIdModel>({
   delay = SEARCH_DELAY,
   items,
   keys,
@@ -22,7 +24,8 @@ export const _useSearch = <TType,>({
 
   const searchF = debounce(
     (value: string) => {
-      const resultF = value ? fuse.search(value, { limit }).map(({ item }) => item) : items;
+      let resultF = value ? fuse.search(value, { limit }).map(({ item }) => item) : items;
+      resultF = uniqBy(resultF, 'id');
       resultSet(resultF);
     },
     { duration: delay },

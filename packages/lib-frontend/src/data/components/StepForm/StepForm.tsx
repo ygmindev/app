@@ -85,7 +85,8 @@ export const StepForm = <TType, TResult = void>({
         isFullWidth
         s>
         <NavigationHeader
-          onBack={current > 0 ? () => handleCurrentSet(current - 1) : undefined}
+          elementState={ELEMENT_STATE.ACTIVE}
+          onBack={current > 0 ? async () => handleCurrentSet(current - 1) : undefined}
           title={steps[current]?.title}
         />
 

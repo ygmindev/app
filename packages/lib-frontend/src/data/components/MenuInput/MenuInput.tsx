@@ -72,6 +72,7 @@ export const MenuInput = forwardRef(
       keys: ['label', 'id'],
       onChange: () => menuRef.current?.scrollTo({ x: 0, y: 0 }),
     });
+
     const optionsF = result.length > 0 ? result : options;
 
     const [textValue, textValueSet] = useState<string | undefined>(textDefaultValue);
