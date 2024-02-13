@@ -1,5 +1,5 @@
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
-import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { type ScratchPadPagePropsModel } from '@lib/frontend/dev/pages/ScratchPadPage/ScratchPadPage.models';
 import { SpecificationInputForm } from '@lib/frontend/openapi/components/SpecificationInputForm/SpecificationInputForm';
 // import { SpecificationDetail } from '@lib/frontend/openapi/components/SpecificationDetail/SpecificationDetail';
@@ -10,9 +10,9 @@ import { deliverySpecification } from '@lib/shared/openapi/specifications/delive
 export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   return (
-    <MainLayout
+    <Wrapper
       {...wrapperProps}
-      isFullHeight
+      flex
       p>
       {/* <CheckoutButton
         price={{
@@ -21,7 +21,10 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
         }}
       /> */}
 
-      <SpecificationInputForm specification={deliverySpecification} />
-    </MainLayout>
+      <SpecificationInputForm
+        flex
+        specification={deliverySpecification}
+      />
+    </Wrapper>
   );
 };
