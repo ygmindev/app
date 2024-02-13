@@ -111,6 +111,7 @@ export const MenuInput = forwardRef(
     };
 
     const isActive = elementStateF === ELEMENT_STATE.ACTIVE;
+
     return (
       <Menu
         anchor={() => (

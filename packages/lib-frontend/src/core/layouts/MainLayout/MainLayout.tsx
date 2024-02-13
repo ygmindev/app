@@ -30,11 +30,17 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
       isFullWidth
       s>
       {topElement && (
-        <>
-          <Wrapper key="element-top">{topElement}</Wrapper>
+        <Wrapper isFullWidth>
+          <Wrapper
+            isFullWidth={isFullWidthF}
+            mHorizontal="auto"
+            p={isFullHeight}
+            width={widthF}>
+            {topElement}
+          </Wrapper>
 
-          {isFullHeight && <Divider key="divider-top" />}
-        </>
+          {isFullHeight && <Divider />}
+        </Wrapper>
       )}
 
       <Wrapper
@@ -54,17 +60,17 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
       </Wrapper>
 
       {bottomElement && (
-        <>
-          {isFullHeight && <Divider key="divider-bottom" />}
+        <Wrapper isFullWidth>
+          {isFullHeight && <Divider />}
 
           <Wrapper
-            key="element-bottom"
+            isFullWidth={isFullWidthF}
             mHorizontal="auto"
             p={isFullHeight}
             width={widthF}>
             {bottomElement}
           </Wrapper>
-        </>
+        </Wrapper>
       )}
     </Wrapper>
   );
