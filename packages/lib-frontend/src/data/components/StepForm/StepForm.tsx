@@ -86,9 +86,7 @@ export const StepForm = <TType, TResult = void>({
         isFullWidth
         s>
         <Wrapper
-          isAlign
           isRow
-          pHorizontal
           pVertical={THEME_SIZE.SMALL}>
           <Appearable isActive={current > 0}>
             <Button
