@@ -11,7 +11,10 @@ import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { FocusableWrapper } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper';
 import { type FocusableRefModel } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper.models';
 import { _TextInput } from '@lib/frontend/data/components/TextInput/_TextInput';
-import { TEXT_INPUT_KEYBOARD } from '@lib/frontend/data/components/TextInput/TextInput.constants';
+import {
+  TEXT_INPUT_KEY,
+  TEXT_INPUT_KEYBOARD,
+} from '@lib/frontend/data/components/TextInput/TextInput.constants';
 import {
   type TextInputPropsModel,
   type TextInputRefModel,
@@ -58,9 +61,8 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
       onBlur,
       onChange,
       onElementStateChange,
-      onEscape,
       onFocus,
-      onRemove,
+      onKey,
       onSubmit,
       placeholder,
       rightElement,
@@ -241,14 +243,16 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
             numberOfLines={numberOfLines}
             onBlur={() => void handleFocus(false)}
             onChange={handleChange}
-            onEscape={() => {
-              if (!isNoClear) {
-                handleChange('');
-                onEscape && onEscape();
-              }
-            }}
             onFocus={() => void handleFocus(true)}
-            onRemove={onRemove}
+            onKey={(key) => {
+              switch (key) {
+                case TEXT_INPUT_KEY.ESCAPE: {
+                  !isNoClear && handleChange('');
+                  break;
+                }
+              }
+              onKey && onKey(key);
+            }}
             onSubmit={onSubmit}
             placeholder={placeholder}
             ref={inputRef}

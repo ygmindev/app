@@ -8,3 +8,12 @@ export enum TEXT_INPUT_KEYBOARD {
   TEL = 'tel',
   TEXT = 'text',
 }
+
+export enum TEXT_INPUT_KEY {
+  DOWN = 'down',
+  ESCAPE = 'escape',
+  LEFT = 'left',
+  REMOVE = 'remove',
+  RIGHT = 'right',
+  UP = 'up',
+}

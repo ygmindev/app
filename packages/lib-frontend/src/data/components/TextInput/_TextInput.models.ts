@@ -1,4 +1,7 @@
-import { type TextInputKeyboardModel } from '@lib/frontend/data/components/TextInput/TextInput.models';
+import {
+  type TextInputKeyboardModel,
+  type TextInputKeyModel,
+} from '@lib/frontend/data/components/TextInput/TextInput.models';
 
 export type _TextInputPropsModel = {
   autoComplete?: string;
@@ -12,9 +15,8 @@ export type _TextInputPropsModel = {
   numberOfLines?: number;
   onBlur?(): void;
   onChange?(value?: string): void;
-  onEscape?(): void;
   onFocus?(): void;
-  onRemove?(): void;
+  onKey?(key: TextInputKeyModel): void;
   onSubmit?(value?: string): void;
   placeholder?: string;
   value?: string;

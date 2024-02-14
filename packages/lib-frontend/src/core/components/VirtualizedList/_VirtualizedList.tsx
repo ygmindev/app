@@ -6,9 +6,8 @@ import { type RSFCPropsModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type ForwardedRef, type ReactElement } from 'react';
-import { forwardRef, useCallback } from 'react';
-import { type ListRenderItem } from 'react-native';
-import { FlatList } from 'react-native';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { FlatList, type ScrollView } from 'react-native';
 
 export const _VirtualizedList = forwardRef(
   <TType extends WithIdModel>(
@@ -23,7 +22,12 @@ export const _VirtualizedList = forwardRef(
     ref: ForwardedRef<_VirtualizedListRefModel>,
   ): ReactElement<RSFCPropsModel<_VirtualizedListRefModel, _VirtualizedListPropsModel<TType>>> => {
     const { styles } = useStyles({ props });
-    const renderItem = useCallback<ListRenderItem<TType>>(({ item }) => render(item), [items]);
+    const flatListRef = useRef<FlatList>(null);
+
+    useImperativeHandle(ref, () => ({
+      scrollTo: (flatListRef.current?.getScrollableNode() as ScrollView).scrollTo,
+    }));
+
     return (
       <FlatList<TType>
         ItemSeparatorComponent={divider ? () => divider : undefined}
@@ -31,8 +35,8 @@ export const _VirtualizedList = forwardRef(
         data={items}
         horizontal={isHorizontal}
         keyExtractor={({ id }) => id}
-        ref={ref}
-        renderItem={renderItem}
+        ref={flatListRef}
+        renderItem={({ index, item }) => render(item, index)}
         scrollEnabled
         style={styles}
         testID={testID}

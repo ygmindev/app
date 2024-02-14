@@ -11,7 +11,6 @@ import {
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import { type PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
 import { VirtualizedList } from '@lib/frontend/core/components/VirtualizedList/VirtualizedList';
-import { type VirtualizedListRefModel } from '@lib/frontend/core/components/VirtualizedList/VirtualizedList.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCPropsModel } from '@lib/frontend/core/core.models';
@@ -24,7 +23,6 @@ import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyl
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { type ForwardedRef, type ReactElement } from 'react';
 import { cloneElement, forwardRef, useImperativeHandle, useRef } from 'react';
-import { type ScrollView } from 'react-native';
 
 export const Menu = forwardRef(
   <TType extends MenuOptionModel = MenuOptionModel>(
@@ -32,6 +30,7 @@ export const Menu = forwardRef(
       anchor,
       direction,
       elementState,
+      focused,
       isDismiss = true,
       isFullWidth,
       isPressable = true,
@@ -49,7 +48,6 @@ export const Menu = forwardRef(
     const { wrapperProps } = useLayoutStyles({ props });
     const isMobile = useIsMobile();
     const dropdownRef = useRef<DropdownRefModel>(null);
-    const virtualizedListRef = useRef<VirtualizedListRefModel>(null);
 
     const { valueControlled: elementStateF, valueControlledSet: onElementStateChangeF } =
       useValueControlled({
@@ -58,8 +56,7 @@ export const Menu = forwardRef(
       });
 
     useImperativeHandle(ref, () => ({
-      scrollTo: (params) =>
-        (virtualizedListRef.current?.getScrollableNode() as ScrollView).scrollTo(params),
+      scrollTo: (params) => dropdownRef.current?.scrollTo(params),
       toggle: (params) => dropdownRef.current?.toggle(params),
     }));
 
@@ -92,14 +89,17 @@ export const Menu = forwardRef(
       <Wrapper pVertical={THEME_SIZE.SMALL}>
         <VirtualizedList
           items={options}
-          ref={virtualizedListRef}
-          render={(option: TType) => {
+          render={(option: TType, index) => {
             const { color, confirmMessage, icon, id, label } = option;
             return (
               <Button
                 color={color}
                 confirmMessage={confirmMessage}
-                elementState={option.elementState}
+                elementState={
+                  (focused ?? 0) >= 0 && index === focused
+                    ? ELEMENT_STATE.ACTIVE
+                    : option.elementState
+                }
                 icon={icon}
                 isFullWidth
                 key={id}

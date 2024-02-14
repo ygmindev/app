@@ -1,6 +1,9 @@
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { type _TextInputPropsModel } from '@lib/frontend/data/components/TextInput/_TextInput.models';
-import { TEXT_INPUT_KEYBOARD } from '@lib/frontend/data/components/TextInput/TextInput.constants';
+import {
+  TEXT_INPUT_KEY,
+  TEXT_INPUT_KEYBOARD,
+} from '@lib/frontend/data/components/TextInput/TextInput.constants';
 import { type TextInputKeyboardModel } from '@lib/frontend/data/components/TextInput/TextInput.models';
 import { type InputModeOptions, type TextInputProps } from 'react-native';
 import { TextInput } from 'react-native';
@@ -68,9 +71,8 @@ export const _TextInput = composeComponent<_TextInputPropsModel, TextInputProps>
       numberOfLines,
       onBlur,
       onChange,
-      onEscape,
       onFocus,
-      onRemove,
+      onKey,
       onSubmit,
       placeholder,
       value,
@@ -89,16 +91,26 @@ export const _TextInput = composeComponent<_TextInputPropsModel, TextInputProps>
     onBlur,
     onChangeText: isDisabled ? undefined : (v) => onChange && onChange(v),
     onFocus,
-    onKeyPress: (e) => {
-      switch (e.nativeEvent.key) {
-        case 'Backspace':
-          return onRemove && onRemove();
-        case 'Escape':
-          return onEscape && onEscape();
-        default:
-          return null;
-      }
-    },
+    onKeyPress: onKey
+      ? (e) => {
+          switch (e.nativeEvent.key) {
+            case 'ArrowDown':
+              return onKey(TEXT_INPUT_KEY.DOWN);
+            case 'ArrowLeft':
+              return onKey(TEXT_INPUT_KEY.LEFT);
+            case 'ArrowRight':
+              return onKey(TEXT_INPUT_KEY.RIGHT);
+            case 'ArrowUp':
+              return onKey(TEXT_INPUT_KEY.UP);
+            case 'Backspace':
+              return onKey(TEXT_INPUT_KEY.REMOVE);
+            case 'Escape':
+              return onKey(TEXT_INPUT_KEY.ESCAPE);
+            default:
+              return null;
+          }
+        }
+      : undefined,
     onSubmitEditing: onSubmit ? () => onSubmit(value) : undefined,
     placeholder,
     placeholderTextColor: theme.color.border,

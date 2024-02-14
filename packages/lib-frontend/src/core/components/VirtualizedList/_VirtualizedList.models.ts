@@ -1,12 +1,14 @@
+import { type PositionModel } from '@lib/frontend/core/core.models';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type ReactElement } from 'react';
-import { type FlatList } from 'react-native';
 
 export type _VirtualizedListPropsModel<TType extends WithIdModel> = {
   divider?: ReactElement;
   isHorizontal?: boolean;
   items: Array<TType>;
-  render(item: TType): ReactElement;
+  render(item: TType, index?: number): ReactElement;
 };
 
-export type _VirtualizedListRefModel = FlatList;
+export type _VirtualizedListRefModel = {
+  scrollTo(params: PositionModel): void;
+};

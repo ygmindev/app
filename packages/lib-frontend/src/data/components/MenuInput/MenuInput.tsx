@@ -13,10 +13,13 @@ import {
   type MenuInputRefModel,
 } from '@lib/frontend/data/components/MenuInput/MenuInput.models';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
+import { TEXT_INPUT_KEY } from '@lib/frontend/data/components/TextInput/TextInput.constants';
+import { type TextInputKeyModel } from '@lib/frontend/data/components/TextInput/TextInput.models';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useSearch } from '@lib/frontend/search/hooks/useSearch/useSearch';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import find from 'lodash/find';
 import lowerCase from 'lodash/lowerCase';
@@ -50,6 +53,7 @@ export const MenuInput = forwardRef(
     ref: ForwardedRef<MenuInputRefModel>,
   ): ReactElement<RLFCPropsModel<MenuInputRefModel, MenuInputPropsModel<TType>>> => {
     const { wrapperProps } = useLayoutStyles({ props });
+    const theme = useTheme();
     const { t } = useTranslation();
     const { valueControlled, valueControlledSet } = useValueControlled({
       defaultValue,
@@ -62,6 +66,7 @@ export const MenuInput = forwardRef(
         value: elementState,
       });
 
+    const [focused, focusedSet] = useState<number | undefined>();
     const menuRef = useRef<MenuRefModel>(null);
 
     const { query, result, search } = useSearch<TType>({
@@ -82,11 +87,13 @@ export const MenuInput = forwardRef(
       const selected = queryValue ?? (optionsF && optionsF[0]);
       const id = selected?.id;
       id && valueControlledSet(id);
+      focusedSet(undefined);
     };
 
     const handleTextChange = (v: string): void => {
       textValueSet(v);
       (onSearch ?? search)(v);
+      focusedSet(undefined);
     };
 
     const rightElementF = rightElement ? (
@@ -113,6 +120,21 @@ export const MenuInput = forwardRef(
 
     const isActive = elementStateF === ELEMENT_STATE.ACTIVE;
 
+    const optionHeight = theme.shape.size[THEME_SIZE.MEDIUM];
+
+    const handleKey = (key: TextInputKeyModel): void => {
+      const index = (() => {
+        switch (key) {
+          case TEXT_INPUT_KEY.UP:
+            return focused ? focused - 1 : undefined;
+          case TEXT_INPUT_KEY.DOWN:
+            return focused === undefined ? 0 : Math.min(focused + 1, optionsF.length - 1);
+        }
+      })();
+      menuRef.current?.scrollTo({ y: (index ?? 0) * optionHeight });
+      return focusedSet(index);
+    };
+
     return (
       <Menu
         anchor={() => (
@@ -131,6 +153,7 @@ export const MenuInput = forwardRef(
             onChange={handleTextChange}
             onElementStateChange={onElementStateChangeF}
             onFocus={onFocus}
+            onKey={optionsF?.length ? handleKey : undefined}
             onSubmit={handleSubmit}
             ref={ref}
             rightElement={
@@ -153,6 +176,7 @@ export const MenuInput = forwardRef(
           />
         )}
         elementState={elementStateF}
+        focused={focused}
         isDismiss={false}
         isFullWidth
         isPressable={false}
