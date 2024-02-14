@@ -34,6 +34,7 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
   align = FLEX_ALIGN.CENTER,
   children,
   color = THEME_COLOR.PRIMARY,
+  description,
   elementState,
   height,
   icon,
@@ -139,11 +140,28 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
       align={FONT_ALIGN.CENTER}
       color={color}
       colorRole={childColorRole}
+      fontSize={THEME_SIZE.SMALL}
       isEllipsis
       isFullWidth>
       {children}
     </TranslatableText>
   );
+  description &&
+    (childrenF = (
+      <Wrapper>
+        <TranslatableText
+          align={FONT_ALIGN.CENTER}
+          color={color}
+          colorRole={childColorRole}
+          fontSize={THEME_SIZE_MORE.XSMALL}
+          isEllipsis
+          isFullWidth>
+          {description}
+        </TranslatableText>
+
+        {childrenF}
+      </Wrapper>
+    ));
 
   const iconF = icon ? (
     <Icon

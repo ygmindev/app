@@ -4,8 +4,6 @@
   "location": "location",
   "month": "month",
   "timezone": "timezone",
-  "today": "today",
   "week": "week",
-  "year": "year",
-  "yesterday": "yesterday"
+  "year": "year"
 }

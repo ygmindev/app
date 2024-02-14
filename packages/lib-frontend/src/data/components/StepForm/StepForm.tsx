@@ -1,5 +1,7 @@
 import { Slides } from '@lib/frontend/animation/components/Slides/Slides';
 import { NavigationHeader } from '@lib/frontend/app/components/NavigationHeader/NavigationHeader';
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
@@ -13,6 +15,7 @@ import {
 import { type FormValidatorsModel } from '@lib/frontend/data/data.models';
 import { useForm } from '@lib/frontend/data/hooks/useForm/useForm';
 import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
@@ -27,6 +30,7 @@ import { cloneElement, useState } from 'react';
 
 export const StepForm = <TType, TResult = void>({
   initialValues,
+  isProgress,
   onSubmit,
   onSuccess,
   redirectTo,
@@ -37,6 +41,7 @@ export const StepForm = <TType, TResult = void>({
 }: LFCPropsModel<StepFormPropsModel<TType, TResult>>): ReactElement<
   LFCPropsModel<StepFormPropsModel<TType, TResult>>
 > => {
+  const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
   const [width] = useStore('app.dimension.width');
   const theme = useTheme();
@@ -87,7 +92,28 @@ export const StepForm = <TType, TResult = void>({
         <NavigationHeader
           elementState={ELEMENT_STATE.ACTIVE}
           onBack={current > 0 ? async () => handleCurrentSet(current - 1) : undefined}
-          title={steps[current]?.title}
+          title={
+            isProgress ? (
+              <Wrapper
+                isAlign
+                isRow>
+                {steps.map((step, i) => {
+                  const isActive = i === current;
+                  return (
+                    <Button
+                      description={t('core:step', { value: i + 1 })}
+                      key={step.id}
+                      onPress={() => {
+                        void handleCurrentSet(i);
+                      }}
+                      type={isActive ? BUTTON_TYPE.FILLED : BUTTON_TYPE.TRANSPARENT}>
+                      {step.title}
+                    </Button>
+                  );
+                })}
+              </Wrapper>
+            ) : undefined
+          }
         />
 
         {topElement}

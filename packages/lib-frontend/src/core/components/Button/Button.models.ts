@@ -30,6 +30,7 @@ export type ButtonPropsModel = ChildrenPropsModel<TranslatableTextModel> &
     | 'onPressOut'
     | 'trigger'
   > & {
+    description?: TranslatableTextModel;
     leftElement?: ReactElement | null;
     rightElement?: ReactElement | null;
     type?: ButtonTypeModel;

@@ -98,6 +98,7 @@ export const SpecificationInputForm = <TType extends unknown>({
   return (
     <StepForm
       {...wrapperProps}
+      isProgress
       onSubmit={handleSubmit}
       steps={steps}
     />

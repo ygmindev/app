@@ -5,7 +5,11 @@ import { type LibraryPropsModel } from '@lib/library/core/components/Library/Lib
 export const props: LibraryPropsModel<SelectInputPropsModel> = {
   Component: SelectInput,
   defaultProps: {
-    options: [],
+    options: [
+      { id: '1', label: 'option 1' },
+      { id: '2', label: 'option 2' },
+      { id: '3', label: 'option 3' },
+    ],
   },
-  variants: [],
+  variants: [{ props: { isMultiple: true } }, { props: { isVertical: true } }],
 };

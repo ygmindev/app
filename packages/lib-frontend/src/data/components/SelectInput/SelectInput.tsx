@@ -4,7 +4,11 @@ import { Circle } from '@lib/frontend/core/components/Circle/Circle';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import { type LFCPropsModel, type RLFCPropsModel } from '@lib/frontend/core/core.models';
+import {
+  type LFCPropsModel,
+  type NamableComponentModel,
+  type RLFCPropsModel,
+} from '@lib/frontend/core/core.models';
 import {
   type SelectInputPropsModel,
   type SelectInputRefModel,
@@ -26,6 +30,7 @@ import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/sha
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
 import { sort } from '@lib/shared/core/utils/sort/sort';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { type ForwardedRef, forwardRef, type ReactElement, useMemo, useState } from 'react';
 
 export const SelectInput = forwardRef(
@@ -33,8 +38,8 @@ export const SelectInput = forwardRef(
     {
       defaultValue,
       elementState,
-      isHorizontal = true,
       isMultiple,
+      isVertical,
       label,
       onChange,
       options,
@@ -87,7 +92,7 @@ export const SelectInput = forwardRef(
 
         <Wrapper
           isAlign
-          isRow={isHorizontal}
+          isRow={!isVertical}
           isWrap
           s={THEME_SIZE.SMALL}>
           {isMultiple && (
@@ -162,6 +167,10 @@ export const SelectInput = forwardRef(
       </Wrapper>
     );
   },
-) as <TType extends string | Array<string> = string>(
-  props: RLFCPropsModel<SelectInputRefModel, SelectInputPropsModel<TType>>,
-) => ReactElement<RLFCPropsModel<SelectInputRefModel, SelectInputPropsModel<TType>>>;
+) as NamableComponentModel<
+  <TType extends string | Array<string> = string>(
+    props: RLFCPropsModel<SelectInputRefModel, SelectInputPropsModel<TType>>,
+  ) => ReactElement<RLFCPropsModel<SelectInputRefModel, SelectInputPropsModel<TType>>>
+>;
+
+process.env.APP_IS_DEBUG && (SelectInput.displayName = variableName({ SelectInput }));

@@ -1,5 +1,5 @@
-import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { type LFCModel } from '@lib/frontend/core/core.models';
+import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { type BrightnessInputPropsModel } from '@lib/frontend/style/components/BrightnessInput/BrightnessInput.models';
@@ -19,7 +19,7 @@ export const BrightnessInput: LFCModel<BrightnessInputPropsModel> = ({
     <SelectInput<StyleBrightnessStateModel>
       {...wrapperProps}
       elementState={elementState}
-      isHorizontal
+      isVertical
       onChange={brightnessSet}
       options={[
         {

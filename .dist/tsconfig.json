@@ -81,6 +81,7 @@
     "target": "esnext",
     "types": [
       "react-native",
+      "react",
       "jest",
       "vite/client",
       "@types/jest-image-snapshot"

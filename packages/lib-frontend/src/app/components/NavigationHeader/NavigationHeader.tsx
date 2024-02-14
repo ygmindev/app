@@ -8,6 +8,7 @@ import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrap
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
+import { isTranslatableText } from '@lib/frontend/locale/utils/isTranslatableText/isTranslatableText';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
@@ -49,7 +50,11 @@ export const NavigationHeader: LFCModel<NavigationHeaderPropsModel> = ({
       </Appearable>
 
       <Appearable isActive={!!title}>
-        <TranslatableText fontStyle={FONT_STYLE.SUBTITLE}>{title}</TranslatableText>
+        {isTranslatableText(title) ? (
+          <TranslatableText fontStyle={FONT_STYLE.SUBTITLE}>{title}</TranslatableText>
+        ) : (
+          title
+        )}
       </Appearable>
     </Wrapper>
   );

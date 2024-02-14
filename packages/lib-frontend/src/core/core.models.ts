@@ -15,6 +15,8 @@ import { type TestIdPropsModel } from '@lib/frontend/test/test.models';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type ComponentType, type FC as _FC, type ReactNode, type Ref } from 'react';
 
+export type NamableComponentModel<TType> = TType & { displayName?: string };
+
 export type FCModel<TProps = object> = _FC<TProps & TestIdPropsModel & { nativeID?: string }>;
 
 export type FCPropsModel<TProps = object> = PropsModel<FCModel<TProps>>;

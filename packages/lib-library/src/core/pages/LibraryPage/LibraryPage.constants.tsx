@@ -17,6 +17,7 @@ import { props as tileProps } from '@lib/frontend/core/components/Tile/Tile.libr
 import { props as tooltipProps } from '@lib/frontend/core/components/Tooltip/Tooltip.library';
 import { props as wrapperProps } from '@lib/frontend/core/components/Wrapper/Wrapper.library';
 import { props as calendarPickerProps } from '@lib/frontend/data/components/CalendarPicker/CalendarPicker.library';
+import { props as selectInputProps } from '@lib/frontend/data/components/SelectInput/SelectInput.library';
 import { props as switchInputProps } from '@lib/frontend/data/components/SwitchInput/SwitchInput.library';
 import { props as textInputProps } from '@lib/frontend/data/components/TextInput/TextInput.library';
 import { props as notificationProps } from '@lib/frontend/notification/components/Notification/Notification.library';
@@ -41,6 +42,7 @@ export const LIBRARY_PROPS = [
   notificationsProps,
   otpInputProps,
   searchInputProps,
+  selectInputProps,
   slidesProps,
   switchInputProps,
   textInputProps,

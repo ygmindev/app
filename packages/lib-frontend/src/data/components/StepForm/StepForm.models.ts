@@ -6,6 +6,7 @@ import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type ReactElement } from 'react';
 
 export type StepFormPropsModel<TType, TResult = void> = UseFormParamsModel<TType, TResult> & {
+  isProgress?: boolean;
   steps: Array<FormStepModel<TType, PartialModel<TType>>>;
   topElement?: ReactElement | null;
 };
@@ -23,5 +24,5 @@ export type FormStepModel<TType, TStep extends PartialModel<TType>, TResult = vo
   Pick<FormContainerPropsModel<TStep, TResult>, 'fields'> & {
     element?: ReactElement<FormStepPropsModel<TType, TStep, TResult>>;
     message?: TranslatableTextModel;
-    title?: TranslatableTextModel;
+    title: TranslatableTextModel;
   };

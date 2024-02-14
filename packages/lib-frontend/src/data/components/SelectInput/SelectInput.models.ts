@@ -3,8 +3,8 @@ import { type InputPropsModel, type InputRefModel } from '@lib/frontend/data/dat
 
 export type SelectInputPropsModel<TType extends string | Array<string> = string> =
   InputPropsModel<TType> & {
-    isHorizontal?: boolean;
     isMultiple?: boolean;
+    isVertical?: boolean;
     options: Array<TranslatableOptionModel>;
   };
 

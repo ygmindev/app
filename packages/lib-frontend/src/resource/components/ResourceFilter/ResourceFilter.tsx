@@ -1,11 +1,9 @@
-import { type ReactElement, useMemo } from 'react';
-
-import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { type FormTileModel } from '@lib/frontend/data/components/FormContainer/FormContainer.models';
 import { NumberRangeInput } from '@lib/frontend/data/components/NumberRangeInput/NumberRangeInput';
 import { NUMBER_RANGE_TYPE } from '@lib/frontend/data/components/NumberRangeInput/NumberRangeInput.constants';
+import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { TextFilterInput } from '@lib/frontend/data/components/TextFilterInput/TextFilterInput';
 import { NUMBER_UNIT_TYPE } from '@lib/frontend/data/data.constants';
 import { type ResourceFilterPropsModel } from '@lib/frontend/resource/components/ResourceFilter/ResourceFilter.models';
@@ -13,6 +11,7 @@ import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { DATA_TYPE, DATA_TYPE_MORE } from '@lib/shared/data/data.constants';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
+import { type ReactElement, useMemo } from 'react';
 
 export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
   fields,
@@ -34,8 +33,8 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
                   beforeSubmit={async (v, k) => [
                     { condition: FILTER_CONDITION.IN, field: k, value: v },
                   ]}
-                  isHorizontal
                   isMultiple
+                  isVertical
                   options={options ?? []}
                 />
               );

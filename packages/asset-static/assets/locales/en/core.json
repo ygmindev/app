@@ -29,6 +29,7 @@
   "search": "search",
   "selectAll": "select all",
   "somethingWentWrong": "something went wrong",
+  "step": "step {{value}}",
   "success": "success",
   "tryAgain": "try again",
   "unit": "unit",

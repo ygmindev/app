@@ -20,7 +20,7 @@ const { _config, config } = defineConfig({
 
     rootDir: fromRoot(),
 
-    types: ['react-native', 'jest', 'vite/client', '@types/jest-image-snapshot'],
+    types: ['react-native', 'react', 'jest', 'vite/client', '@types/jest-image-snapshot'],
   } satisfies TypescriptConfigModel,
 });
 

@@ -31,8 +31,8 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
             case DATA_TYPE_MORE.STRING_LIST:
               return (
                 <SelectInput
-                  isHorizontal
                   isMultiple
+                  isVertical
                   label={labelF}
                   options={options ?? []}
                 />
