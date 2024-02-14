@@ -84,7 +84,7 @@ export const MenuInput = forwardRef(
 
     const handleSubmit = (): void => {
       const queryValue = find(optionsF, ({ id }) => lowerCase(query) === lowerCase(id));
-      const selected = queryValue ?? (optionsF && optionsF[0]);
+      const selected = queryValue ?? (optionsF && optionsF[focused ?? 0]);
       const id = selected?.id;
       id && valueControlledSet(id);
       focusedSet(undefined);
