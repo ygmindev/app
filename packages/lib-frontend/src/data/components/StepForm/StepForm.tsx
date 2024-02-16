@@ -96,22 +96,24 @@ export const StepForm = <TType, TResult = void>({
           title={steps[current]?.title}
         />
 
-        <Wrapper
-          isAlign
-          isCenter
-          isRow>
-          {steps.map((step, i) => {
-            const isActive = i === current;
-            return (
-              <Circle
-                backgroundRole={isActive ? THEME_ROLE.ACTIVE : THEME_ROLE.MUTED}
-                key={step.id}
-                onPress={() => handleCurrentSet(i)}
-                size={THEME_SIZE_MORE.XSMALL}
-              />
-            );
-          })}
-        </Wrapper>
+        {isProgress && (
+          <Wrapper
+            isAlign
+            isCenter
+            isRow>
+            {steps.map((step, i) => {
+              const isActive = i === current;
+              return (
+                <Circle
+                  backgroundRole={isActive ? THEME_ROLE.MAIN : THEME_ROLE.MUTED}
+                  key={step.id}
+                  onPress={() => handleCurrentSet(i)}
+                  size={THEME_SIZE_MORE.XSMALL}
+                />
+              );
+            })}
+          </Wrapper>
+        )}
 
         {topElement}
 
