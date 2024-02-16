@@ -46,9 +46,9 @@ export const StepForm = <TType, TResult = void>({
   const [width] = useStore('app.dimension.width');
   const theme = useTheme();
   const [current, currentSet] = useState<number>(0);
-  const [max, maxSet] = useState<number>(0);
   const [isLoading, isLoadingSet] = useState<boolean>(false);
   const isLastStep = current === steps.length - 1;
+  const [valid, validSet] = useState<Record<string, boolean>>({});
 
   const {
     handleSubmit,
@@ -59,7 +59,6 @@ export const StepForm = <TType, TResult = void>({
 
   const handleCurrentSet = async (value: number): Promise<void> => {
     currentSet(value);
-    value > max && maxSet(value);
     await sleep(theme.animation.transition);
     width && barRef.current?.to({ width: (width / (steps.length + 1)) * (value + 1) });
   };
@@ -97,14 +96,15 @@ export const StepForm = <TType, TResult = void>({
           title={
             isProgress ? (
               <Wrapper
+                flex
                 isAlign
+                isCenter
                 isRow>
                 {steps.map((step, i) => {
                   const isActive = i === current;
                   return (
                     <Button
                       description={t('core:step', { value: i + 1 })}
-                      elementState={i > max ? ELEMENT_STATE.DISABLED : undefined}
                       key={step.id}
                       onPress={() => {
                         void handleCurrentSet(i);

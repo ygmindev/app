@@ -49,7 +49,9 @@ export const NavigationHeader: LFCModel<NavigationHeaderPropsModel> = ({
         />
       </Appearable>
 
-      <Appearable isActive={!!title}>
+      <Appearable
+        flex
+        isActive={!!title}>
         {isTranslatableText(title) ? (
           <TranslatableText fontStyle={FONT_STYLE.SUBTITLE}>{title}</TranslatableText>
         ) : (
