@@ -103,13 +103,17 @@ export const StepForm = <TType, TResult = void>({
                 isRow>
                 {steps.map((step, i) => {
                   const isActive = i === current;
+                  const isValidPrevious = isValid[steps[i - 1]?.id];
+                  const isValidCurrent = isValid[step.id];
                   return (
                     <Button
                       description={t('core:step', { value: i + 1 })}
                       elementState={
-                        isActive || isValid[step.id] ? undefined : ELEMENT_STATE.DISABLED
+                        isActive || isValidCurrent || isValidPrevious
+                          ? undefined
+                          : ELEMENT_STATE.DISABLED
                       }
-                      icon="check"
+                      icon={isValidCurrent ? 'check' : undefined}
                       key={step.id}
                       onPress={() => {
                         void handleCurrentSet(i);
