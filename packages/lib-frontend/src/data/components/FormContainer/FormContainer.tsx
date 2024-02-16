@@ -111,7 +111,6 @@ const FormContainerF = forwardRef(
       valuesSet,
     }));
 
-    const fieldIds = useMemo(() => getFieldId(fields), [fields]);
     const getFieldId = (fields?: Array<FormFieldsModel<TType>>): Array<string> =>
       fields
         ? flattenDeep(
@@ -121,6 +120,7 @@ const FormContainerF = forwardRef(
             }),
           )
         : [];
+    const fieldIds = useMemo(() => getFieldId(fields), [fields]);
 
     const getValues = async (
       data: TType,
