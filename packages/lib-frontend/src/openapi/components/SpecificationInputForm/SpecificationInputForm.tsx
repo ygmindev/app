@@ -15,6 +15,7 @@ import { type ReactElement } from 'react';
 
 export const SpecificationInputForm = <TType extends unknown>({
   specification,
+  validators,
   ...props
 }: LFCPropsModel<SpecificationInputFormPropsModel<TType>>): ReactElement<
   LFCPropsModel<SpecificationInputFormPropsModel<TType>>
@@ -88,6 +89,7 @@ export const SpecificationInputForm = <TType extends unknown>({
         <FormContainer
           fields={[{ element, id: field.id }] as Array<FormFieldsModel<unknown>>}
           isCenter
+          validators={validators}
         />
       ),
       id: field.id,

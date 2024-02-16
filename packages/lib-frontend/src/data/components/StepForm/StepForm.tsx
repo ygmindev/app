@@ -12,7 +12,7 @@ import {
   type FormStepPropsModel,
   type StepFormPropsModel,
 } from '@lib/frontend/data/components/StepForm/StepForm.models';
-import { type FormValidatorsModel } from '@lib/frontend/data/data.models';
+import { type FormErrorModel, type FormValidatorsModel } from '@lib/frontend/data/data.models';
 import { useForm } from '@lib/frontend/data/hooks/useForm/useForm';
 import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
@@ -24,6 +24,7 @@ import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyl
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { type ReactElement, useEffect, useRef } from 'react';
 import { cloneElement, useState } from 'react';
@@ -48,7 +49,9 @@ export const StepForm = <TType, TResult = void>({
   const [current, currentSet] = useState<number>(0);
   const [isLoading, isLoadingSet] = useState<boolean>(false);
   const isLastStep = current === steps.length - 1;
-  const [valid, validSet] = useState<Record<string, boolean>>({});
+  const [isValid, isValidSet] = useState<Record<string, boolean>>({});
+
+  console.warn(isValid);
 
   const {
     handleSubmit,
@@ -132,6 +135,7 @@ export const StepForm = <TType, TResult = void>({
                   fields={fields}
                   flex
                   isCenter
+                  validators={validators as FormValidatorsModel<PartialModel<TType>>}
                 />
               ) : (
                 element
@@ -170,8 +174,10 @@ export const StepForm = <TType, TResult = void>({
                         onSuccess: async (stepValues: PartialModel<TType>) => {
                           elementF.props.onSuccess && (await elementF.props.onSuccess(stepValues));
                           !isLastStep && void handleCurrentSet(current + 1);
+                          isValidSet({ ...isValid, [id]: true });
                         },
-                        validators: validators as FormValidatorsModel<PartialModel<TType>>,
+                        onValidate: (e?: FormErrorModel<PartialModel<TType>>) =>
+                          !isEmpty(e) && isValidSet({ ...isValid, [id]: false }),
                       })}
                     </Wrapper>
                   ),

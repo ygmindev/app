@@ -21,6 +21,7 @@ export const useForm = <TType, TResult = void>({
   onError,
   onSubmit,
   onSuccess,
+  onValidate,
   redirectTo,
   successMessage,
   validators,
@@ -35,9 +36,10 @@ export const useForm = <TType, TResult = void>({
   const handleSubmit = async (values: TType): Promise<TResult | null> => {
     try {
       const valuesF = cleanObject(values);
-      isValidateChanged &&
-        isEqual(valuesF, initialValues) &&
-        handleError(Error(t('core:validateChanged')));
+      if (isValidateChanged && isEqual(valuesF, initialValues)) {
+        const error = Error(t('core:validateChanged'));
+        onError ? onError(error) : handleError(error);
+      }
       isBlocking && isLoadingSet(true);
       const data = onSubmit && (await onSubmit(valuesF));
       onSuccess && (await onSuccess(valuesF, data));
@@ -57,6 +59,10 @@ export const useForm = <TType, TResult = void>({
   return _useForm<TType, TResult>({
     initialValues,
     onSubmit: handleSubmit,
-    onValidate: async (data) => validate({ data, validators }),
+    onValidate: async (data) => {
+      const error = validate({ data, validators });
+      onValidate && onValidate(error);
+      return error;
+    },
   });
 };

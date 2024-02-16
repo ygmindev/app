@@ -1,4 +1,8 @@
-import { type AsyncPropsModel, type FormValidatorsModel } from '@lib/frontend/data/data.models';
+import {
+  type AsyncPropsModel,
+  type FormErrorModel,
+  type FormValidatorsModel,
+} from '@lib/frontend/data/data.models';
 import {
   type _UseFormModel,
   type _UseFormParamsModel,
@@ -12,6 +16,7 @@ export type UseFormParamsModel<TType, TResult = void> = AsyncPropsModel &
     'initialValues' | 'onSubmit' | 'onSuccess' | 'onComplete' | 'onError'
   > & {
     isValidateChanged?: boolean;
+    onValidate?(errors?: FormErrorModel<TType>): void;
     redirectTo?: LocationModel;
     successMessage?: TranslatableTextModel;
     validators?: FormValidatorsModel<TType>;

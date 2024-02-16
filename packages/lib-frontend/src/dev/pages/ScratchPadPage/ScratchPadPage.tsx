@@ -1,5 +1,6 @@
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
+import { validateNotEmpty } from '@lib/frontend/data/utils/validateNotEmpty/validateNotEmpty';
 import { type ScratchPadPagePropsModel } from '@lib/frontend/dev/pages/ScratchPadPage/ScratchPadPage.models';
 import { SpecificationInputForm } from '@lib/frontend/openapi/components/SpecificationInputForm/SpecificationInputForm';
 // import { SpecificationDetail } from '@lib/frontend/openapi/components/SpecificationDetail/SpecificationDetail';
@@ -24,6 +25,10 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
       <SpecificationInputForm
         flex
         specification={deliverySpecification}
+        validators={{
+          from: validateNotEmpty,
+          to: validateNotEmpty,
+        }}
       />
     </Wrapper>
   );
