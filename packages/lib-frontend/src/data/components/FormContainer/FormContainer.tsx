@@ -20,14 +20,27 @@ import {
 } from '@lib/frontend/data/components/FormContainer/FormContainer.models';
 import { InputGroup } from '@lib/frontend/data/components/InputGroup/InputGroup';
 import { SubmittableButtons } from '@lib/frontend/data/components/SubmittableButtons/SubmittableButtons';
-import { type InputPropsModel, type InputRefModel } from '@lib/frontend/data/data.models';
+import {
+  type FormValidatorsModel,
+  type InputPropsModel,
+  type InputRefModel,
+} from '@lib/frontend/data/data.models';
 import { useForm } from '@lib/frontend/data/hooks/useForm/useForm';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
+import { pick } from '@lib/shared/core/utils/pick/pick';
 import { reduceSequence } from '@lib/shared/core/utils/reduceSequence/reduceSequence';
+import flattenDeep from 'lodash/flattenDeep';
 import map from 'lodash/map';
-import { cloneElement, type ForwardedRef, type ReactElement, type ReactNode, useRef } from 'react';
+import {
+  cloneElement,
+  type ForwardedRef,
+  type ReactElement,
+  type ReactNode,
+  useMemo,
+  useRef,
+} from 'react';
 import { forwardRef, useImperativeHandle } from 'react';
 
 export const FormContainer = forwardRef(
@@ -98,6 +111,17 @@ const FormContainerF = forwardRef(
       valuesSet,
     }));
 
+    const fieldIds = useMemo(() => getFieldId(fields), [fields]);
+    const getFieldId = (fields?: Array<FormFieldsModel<TType>>): Array<string> =>
+      fields
+        ? flattenDeep(
+            fields?.map((f) => {
+              const ff = (f as FormTileModel<TType> | FormRowModel<TType>).fields;
+              return ff ? getFieldId(ff) : f.id;
+            }),
+          )
+        : [];
+
     const getValues = async (
       data: TType,
       fields?: Array<FormFieldsModel<TType>>,
@@ -144,7 +168,8 @@ const FormContainerF = forwardRef(
         onValidate,
         redirectTo,
         successMessage,
-        validators,
+        validators:
+          validators && (pick(validators, fieldIds) as unknown as FormValidatorsModel<TType>),
       });
 
     const elementStateF = isAppLoading || isLoading ? ELEMENT_STATE.LOADING : elementState;
