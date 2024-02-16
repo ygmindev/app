@@ -118,7 +118,7 @@ export const SelectInput = forwardRef(
                     p={THEME_SIZE.SMALL}
                     round>
                     <Circle
-                      backgroundColor={isValue ? THEME_COLOR.PRIMARY : undefined}
+                      backgroundColor={isValue ? THEME_COLOR.PRIMARY : THEME_COLOR_MORE.SURFACE}
                       border
                       borderColor={THEME_COLOR.PRIMARY}
                       position={SHAPE_POSITION.RELATIVE}
@@ -132,7 +132,6 @@ export const SelectInput = forwardRef(
                       ) : (
                         <Circle
                           animation={{ states: ANIMATION_STATES_APPEAR_SCALABLE }}
-                          backgroundColor={THEME_COLOR.PRIMARY}
                           elementState={isActive ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE}
                           position={SHAPE_POSITION.ABSOLUTE}
                           size={

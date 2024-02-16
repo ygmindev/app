@@ -1,7 +1,6 @@
 import { Slides } from '@lib/frontend/animation/components/Slides/Slides';
 import { NavigationHeader } from '@lib/frontend/app/components/NavigationHeader/NavigationHeader';
-import { Button } from '@lib/frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { Circle } from '@lib/frontend/core/components/Circle/Circle';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
@@ -19,7 +18,7 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR } from '@lib/frontend/style/style.constants';
+import { THEME_COLOR, THEME_ROLE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { type PartialModel } from '@lib/shared/core/core.models';
@@ -46,6 +45,7 @@ export const StepForm = <TType, TResult = void>({
   const [width] = useStore('app.dimension.width');
   const theme = useTheme();
   const [current, currentSet] = useState<number>(0);
+  const [max, maxSet] = useState<number>(0);
   const [isLoading, isLoadingSet] = useState<boolean>(false);
   const isLastStep = current === steps.length - 1;
 
@@ -58,6 +58,7 @@ export const StepForm = <TType, TResult = void>({
 
   const handleCurrentSet = async (value: number): Promise<void> => {
     currentSet(value);
+    value > max && maxSet(value);
     await sleep(theme.animation.transition);
     width && barRef.current?.to({ width: (width / (steps.length + 1)) * (value + 1) });
   };
@@ -92,29 +93,25 @@ export const StepForm = <TType, TResult = void>({
         <NavigationHeader
           elementState={ELEMENT_STATE.ACTIVE}
           onBack={current > 0 ? async () => handleCurrentSet(current - 1) : undefined}
-          title={
-            isProgress ? (
-              <Wrapper
-                isAlign
-                isRow>
-                {steps.map((step, i) => {
-                  const isActive = i === current;
-                  return (
-                    <Button
-                      description={t('core:step', { value: i + 1 })}
-                      key={step.id}
-                      onPress={() => {
-                        void handleCurrentSet(i);
-                      }}
-                      type={isActive ? BUTTON_TYPE.FILLED : BUTTON_TYPE.TRANSPARENT}>
-                      {step.title}
-                    </Button>
-                  );
-                })}
-              </Wrapper>
-            ) : undefined
-          }
+          title={steps[current]?.title}
         />
+
+        <Wrapper
+          isAlign
+          isCenter
+          isRow>
+          {steps.map((step, i) => {
+            const isActive = i === current;
+            return (
+              <Circle
+                backgroundRole={isActive ? THEME_ROLE.ACTIVE : THEME_ROLE.MUTED}
+                key={step.id}
+                onPress={() => handleCurrentSet(i)}
+                size={THEME_SIZE_MORE.XSMALL}
+              />
+            );
+          })}
+        </Wrapper>
 
         {topElement}
 
