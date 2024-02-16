@@ -51,8 +51,6 @@ export const StepForm = <TType, TResult = void>({
   const isLastStep = current === steps.length - 1;
   const [isValid, isValidSet] = useState<Record<string, boolean>>({});
 
-  console.warn(isValid);
-
   const {
     handleSubmit,
     isLoading: isLoadingF,
