@@ -106,6 +106,10 @@ export const StepForm = <TType, TResult = void>({
                   return (
                     <Button
                       description={t('core:step', { value: i + 1 })}
+                      elementState={
+                        isActive || isValid[step.id] ? undefined : ELEMENT_STATE.DISABLED
+                      }
+                      icon="check"
                       key={step.id}
                       onPress={() => {
                         void handleCurrentSet(i);
