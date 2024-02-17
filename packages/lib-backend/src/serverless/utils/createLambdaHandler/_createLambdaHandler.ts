@@ -51,7 +51,6 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
     // authentication from header / query parameters
     if (plugins?.includes(LAMBDA_PLUGIN.AUTHENTICATION)) {
       const eventF = event as APIGatewayProxyEventV2;
-      console.warn(eventF);
       const authorization =
         eventF.headers?.authorization ?? eventF.queryStringParameters?.Authorization;
       const user = await getUserFromHeader(authorization);
@@ -112,8 +111,10 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
       case LAMBDA_TYPE.WEBSOCKET:
         if (contextF.pathname === '$default' && result.requestId && result.body) {
           try {
+            console.warn(event);
             const api = new ApiGatewayManagementApiClient({
-              endpoint: event.requestContext.domainName,
+              // endpoint: event.requestContext.domainName,
+              endpoint: 'https://localhost:3000',
             });
             const command = new PostToConnectionCommand({
               ConnectionId: result.requestId,

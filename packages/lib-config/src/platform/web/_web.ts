@@ -12,11 +12,13 @@ import { type WatchOptions } from 'vite';
 
 export const _web = ({
   bundleConfig,
-  certificate,
+  httpConfig,
   isSsr,
   publicPath,
 }: WebConfigModel): _WebConfigModel => {
   const bundleConfigF = bundleConfig();
+  const httpConfigF = httpConfig();
+  const { certificateDir, privateKeyFile, publicKeyFile } = httpConfigF.certificate;
   return merge(
     [
       {
@@ -30,8 +32,8 @@ export const _web = ({
           host: true,
 
           https: {
-            cert: readFileSync(joinPaths([certificate.certificateDir, certificate.publicKeyFile])),
-            key: readFileSync(joinPaths([certificate.certificateDir, certificate.privateKeyFile])),
+            cert: readFileSync(joinPaths([certificateDir, publicKeyFile])),
+            key: readFileSync(joinPaths([certificateDir, privateKeyFile])),
           },
 
           middlewareMode: true,

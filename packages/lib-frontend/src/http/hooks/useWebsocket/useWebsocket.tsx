@@ -6,23 +6,25 @@ import {
   type UseWebsocketParamsModel,
 } from '@lib/frontend/http/hooks/useWebsocket/useWebsocket.models';
 import { WEBSOCKET_STATUS } from '@lib/shared/http/http.constants';
-import { uri } from '@lib/shared/http/utils/uri/uri';
 
 export const useWebsocket = <TType = unknown,>({
+  host = process.env.SERVER_APP_WEBSOCKET_HOST,
   isCredentials = true,
+  pathname = '/ws',
+  port = process.env.SERVER_APP_WEBSOCKET_PORT,
   ...params
 }: UseWebsocketParamsModel<TType> = {}): UseWebsocketModel<TType> => {
   const credentials = useCredentials();
 
   const result = _useWebsocket<TType>({
     ...params,
-    url: uri({
-      host: process.env.SERVER_APP_WEBSOCKET_HOST,
-      params: isCredentials
-        ? credentials.Authorization && { Authorization: credentials.Authorization }
+    host,
+    params:
+      isCredentials && credentials.Authorization
+        ? { Authorization: credentials.Authorization }
         : undefined,
-      pathname: '/ws',
-    }),
+    pathname,
+    port,
   });
 
   useUnmount(() => {

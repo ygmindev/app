@@ -18,6 +18,7 @@ export const _serverless = ({
   environment,
   functions,
   host,
+  httpConfig,
   name,
   platform,
   port,
@@ -25,6 +26,8 @@ export const _serverless = ({
   server,
 }: ServerlessConfigModel): _ServerlessConfigModel => {
   const bundleConfigF = bundleConfig();
+  const httpConfigF = httpConfig();
+  const { certificateDir } = httpConfigF.certificate;
   return {
     custom: {
       dotenv: {
@@ -36,6 +39,7 @@ export const _serverless = ({
         allowCache: false,
         host: host?.split('://')[1],
         httpPort: port,
+        httpsProtocol: certificateDir,
         ignoreJWTSignature: true,
         lambdaPort: null,
         noPrependStageInUrl: true,

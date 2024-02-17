@@ -20,6 +20,7 @@ export type EnvironmentConfigModel = {
   APP_TRACKING_NAME: string;
   APP_UPTRACE_SOURCE: string;
   APP_USERNAME: string;
+  CAROOT: string;
   ENV_NAME: string;
   ENV_PLATFORM: PlatformModel;
   NODE_ENV: EnvironmentModel;

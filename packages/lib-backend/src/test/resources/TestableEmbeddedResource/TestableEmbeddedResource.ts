@@ -1,7 +1,7 @@
-import { OTP_EXPIRATION_SECONDS } from '@lib/backend/auth/resources/Otp/Otp.constants';
 import { EmbeddedResource } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResource';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { DATABASE_CONFIG } from '@lib/config/database/database.constants';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.constants';
 import { type TestableEmbeddedResourceModel } from '@lib/shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.models';
@@ -29,7 +29,7 @@ export class TestableEmbeddedResource
 
   @withField({
     defaultValue: () => new Date(),
-    expire: OTP_EXPIRATION_SECONDS,
+    expire: DATABASE_CONFIG.expireSeconds,
     isOptional: true,
     isRepository: true,
     type: DATA_TYPE.DATE,

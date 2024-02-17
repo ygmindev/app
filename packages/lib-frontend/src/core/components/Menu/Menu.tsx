@@ -86,7 +86,7 @@ export const Menu = forwardRef(
     }
 
     const children = (
-      <Wrapper pVertical={THEME_SIZE.SMALL}>
+      <Wrapper p={THEME_SIZE.SMALL}>
         <VirtualizedList
           items={options}
           render={(option: TType, index) => {

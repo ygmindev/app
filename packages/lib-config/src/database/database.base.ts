@@ -12,12 +12,15 @@ import { LinkedUser } from '@lib/backend/user/resources/LinkedUser/LinkedUser';
 import { User } from '@lib/backend/user/resources/User/User';
 import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { _database } from '@lib/config/database/_database';
+import { DATABASE_CONFIG } from '@lib/config/database/database.constants';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
 const { _config, config } = defineConfig({
   _config: _database,
 
   config: () => ({
+    ...DATABASE_CONFIG,
+
     entities: filterNil([
       Access,
       Bank,
@@ -32,8 +35,6 @@ const { _config, config } = defineConfig({
       Vendor,
       process.env.NODE_ENV !== 'production' && TestableEntityResource,
     ]),
-
-    pool: { max: 10 },
   }),
 });
 

@@ -1,6 +1,7 @@
 import { SERVERLESS_PROVIDER } from '@lib/backend/serverless/serverless.constants';
 import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
-import { _config as _bundleConfig } from '@lib/config/node/bundle/bundle.node';
+import { config as httpConfig } from '@lib/config/http/http/http';
+import { _config as bundleConfig } from '@lib/config/node/bundle/bundle.node';
 import { _serverless } from '@lib/config/platform/serverless/_serverless';
 import { type ServerlessConfigModel } from '@lib/config/platform/serverless/serverless.models';
 import { PLATFORM } from '@lib/platform/core/core.constants';
@@ -11,13 +12,15 @@ const { _config, config } = defineConfig({
 
   config: () =>
     ({
-      bundleConfig: _bundleConfig,
+      bundleConfig,
 
       dotenv: () => setEnvironment(),
 
       environment: process.env.NODE_ENV,
 
       host: process.env.SERVER_APP_HOST,
+
+      httpConfig,
 
       name: 'serverless',
 

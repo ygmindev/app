@@ -1,4 +1,5 @@
 import { type ServerlessProviderModel } from '@lib/backend/serverless/serverless.models';
+import { type HttpConfigModel } from '@lib/config/http/http/http.models';
 import { type _BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 import { type PlatformModel } from '@lib/platform/core/core.models';
 import { type EnvironmentModel } from '@lib/shared/environment/environment.models';
@@ -21,6 +22,8 @@ export type ServerlessConfigModel = Pick<UriParamsModel, 'host' | 'port'> & {
       pathname: string;
     }
   >;
+
+  httpConfig(): HttpConfigModel;
 
   name: string;
 
