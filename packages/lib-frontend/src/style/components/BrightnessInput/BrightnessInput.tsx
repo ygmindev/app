@@ -19,7 +19,6 @@ export const BrightnessInput: LFCModel<BrightnessInputPropsModel> = ({
     <SelectInput<StyleBrightnessStateModel>
       {...wrapperProps}
       elementState={elementState}
-      isVertical
       onChange={brightnessSet}
       options={[
         {

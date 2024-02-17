@@ -26,6 +26,7 @@ export const PhoneInput: RLFCModel<PhoneInputRefModel, PhoneInputPropsModel> = f
         label={t('user:phone')}
         onChange={valueControlledSet}
         ref={ref}
+        testID="XXX"
         value={valueControlled}
       />
     );

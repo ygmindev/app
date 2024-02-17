@@ -51,6 +51,7 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
     // authentication from header / query parameters
     if (plugins?.includes(LAMBDA_PLUGIN.AUTHENTICATION)) {
       const eventF = event as APIGatewayProxyEventV2;
+      console.warn(eventF);
       const authorization =
         eventF.headers?.authorization ?? eventF.queryStringParameters?.Authorization;
       const user = await getUserFromHeader(authorization);

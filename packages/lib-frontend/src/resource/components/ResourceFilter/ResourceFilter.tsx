@@ -5,10 +5,10 @@ import { NumberRangeInput } from '@lib/frontend/data/components/NumberRangeInput
 import { NUMBER_RANGE_TYPE } from '@lib/frontend/data/components/NumberRangeInput/NumberRangeInput.constants';
 import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { TextFilterInput } from '@lib/frontend/data/components/TextFilterInput/TextFilterInput';
-import { NUMBER_UNIT_TYPE } from '@lib/frontend/data/data.constants';
 import { type ResourceFilterPropsModel } from '@lib/frontend/resource/components/ResourceFilter/ResourceFilter.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { DATA_TYPE, DATA_TYPE_MORE } from '@lib/shared/data/data.constants';
+import { NUMBER_UNIT_TYPE } from '@lib/shared/data/utils/numberFormat/numberFormat.constants';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type ReactElement, useMemo } from 'react';
@@ -34,7 +34,6 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
                     { condition: FILTER_CONDITION.IN, field: k, value: v },
                   ]}
                   isMultiple
-                  isVertical
                   options={options ?? []}
                 />
               );

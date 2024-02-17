@@ -1,7 +1,7 @@
 import { ANIMATION_STATES_FOCUSABLE } from '@lib/frontend/animation/animation.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import { type ElementStateModel, type RLFCModel } from '@lib/frontend/core/core.models';
+import { type RLFCModel } from '@lib/frontend/core/core.models';
 import {
   type FocusableRefModel,
   type FocusableWrapperPropsModel,
@@ -15,7 +15,7 @@ export const FocusableWrapper: RLFCModel<FocusableRefModel, FocusableWrapperProp
   forwardRef(({ children, elementState, error, onElementStateChange, ...props }, ref) => {
     const theme = useTheme();
     const { wrapperProps } = useLayoutStyles({ props });
-    const { valueControlled, valueControlledSet } = useValueControlled<ElementStateModel>({
+    const { valueControlled, valueControlledSet } = useValueControlled({
       onChange: onElementStateChange,
       value: elementState,
     });

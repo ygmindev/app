@@ -121,7 +121,6 @@ export const NumberRangeInput = forwardRef(
         <Text>{t('core:measureIn')}</Text>
 
         <SelectInput<TType>
-          isVertical
           onChange={(v) => handleChange({ unit: v })}
           options={unitOptionsF}
           value={unit}

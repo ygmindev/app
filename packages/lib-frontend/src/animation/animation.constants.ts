@@ -78,11 +78,11 @@ export const ANIMATION_STATES_FOCUSABLE = ({
     [ELEMENT_STATE.ACTIVE]: { backgroundColor, [colorField]: activeColor, opacity: 1.0 },
     [ELEMENT_STATE.DISABLED]: {
       [colorField]: inactiveColor,
-      opacity: theme.opaque[THEME_SIZE.MEDIUM],
+      opacity: theme.opaque[THEME_SIZE.LARGE],
     },
     [ELEMENT_STATE.LOADING]: {
       [colorField]: inactiveColor,
-      opacity: theme.opaque[THEME_SIZE.MEDIUM],
+      opacity: theme.opaque[THEME_SIZE.LARGE],
     },
   };
 };

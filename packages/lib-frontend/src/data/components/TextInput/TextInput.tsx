@@ -86,7 +86,6 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
 
     const { valueControlled: elementStateF, valueControlledSet: onElementStateChangeF } =
       useValueControlled({
-        defaultValue: ELEMENT_STATE.ACTIVE,
         onChange: onElementStateChange,
         value: elementState,
       });

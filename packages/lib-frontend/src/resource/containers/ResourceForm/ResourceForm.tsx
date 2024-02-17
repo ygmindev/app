@@ -32,7 +32,6 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
               return (
                 <SelectInput
                   isMultiple
-                  isVertical
                   label={labelF}
                   options={options ?? []}
                 />
