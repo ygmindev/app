@@ -3,8 +3,8 @@ import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_METHOD, HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import { type HttpMethodModel, type HttpResponseTypeModel } from '@lib/shared/http/http.models';
 import {
-  type _HttpRequestParamsModel,
   type _HttpImplementationModel,
+  type _HttpRequestParamsModel,
 } from '@lib/shared/http/utils/HttpImplementation/_HttpImplementation.models';
 import { type HttpImplementationParamsModel } from '@lib/shared/http/utils/HttpImplementation/HttpImplementation.models';
 import { uri } from '@lib/shared/http/utils/uri/uri';
@@ -21,7 +21,13 @@ export class _HttpImplementation implements _HttpImplementationModel {
   protected _instance: AxiosInstance;
   protected _onError?(error: Error): Promise<void>;
 
-  constructor({ baseUri, onError, onRequest, onResponse, request }: HttpImplementationParamsModel = {}) {
+  constructor({
+    baseUri,
+    onError,
+    onRequest,
+    onResponse,
+    request,
+  }: HttpImplementationParamsModel = {}) {
     this._instance = axios.create({
       ...(request as AxiosRequestConfig),
       baseURL: baseUri ? uri(baseUri) : '',

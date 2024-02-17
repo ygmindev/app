@@ -39,7 +39,9 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
             <UsernameForm
               method={method}
               mode={mode}
-              onCancel={redirectTo ? () => replace(redirectTo) : undefined}
+              onCancel={
+                redirectTo && redirectTo?.pathname !== '/' ? () => replace(redirectTo) : undefined
+              }
             />
           ),
           id: 'username',
