@@ -8,7 +8,7 @@ const selfSignCertificate: TaskParamsModel<unknown> = {
     () => {
       const httpConfigF = httpConfig();
       const { privateKeyFile, publicKeyFile } = httpConfigF.certificate;
-      return `mkcert -install-cert-file ${publicKeyFile} -key-file ${privateKeyFile}`;
+      return `mkcert -install -cert-file ${publicKeyFile} -key-file ${privateKeyFile}`;
     },
   ],
 
