@@ -58,7 +58,7 @@ export const userRoutes: Array<RouteModel> = [
 
       {
         icon: 'dollar',
-        navigation: ROUTE_NAVIGATION.TAB,
+        navigation: ROUTE_NAVIGATION.LIST,
         pathname: BILLING,
         routes: billingRoutes,
         title: ({ t }) => t('billing:billing'),
