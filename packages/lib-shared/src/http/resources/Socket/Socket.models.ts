@@ -4,7 +4,7 @@ import {
 } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
 export type SocketModel = EntityResourceModel & {
-  externalId: string;
+  connectionId: string;
 
   name?: string;
 };

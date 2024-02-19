@@ -24,11 +24,7 @@ import { type ContextModel } from '@lib/platform/core/core.models';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
-import {
-  type APIGatewayProxyEventV2,
-  type APIGatewayProxyWebsocketEventV2,
-  type Context,
-} from 'aws-lambda';
+import { type APIGatewayProxyEventV2, type Context } from 'aws-lambda';
 import { type GraphQLError } from 'graphql';
 
 export const _createLambdaHandler = <TType extends LambdaTypeModel>({
@@ -65,11 +61,9 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
 
     // request id
     contextF.requestId =
-      type === LAMBDA_TYPE.WEBSOCKET
-        ? (event as APIGatewayProxyWebsocketEventV2).requestContext.connectionId
-        : context.awsRequestId;
+      type === LAMBDA_TYPE.WEBSOCKET ? event.requestContext.connectionId : contextF.requestId;
 
-    return { ...contextDefault, ...contextF };
+    return contextF;
   };
 
   return async (event: _LambdaEventModel<TType>, context, callback) => {
@@ -108,13 +102,11 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
     };
 
     switch (type) {
-      case LAMBDA_TYPE.WEBSOCKET:
+      case LAMBDA_TYPE.WEBSOCKET: {
         if (contextF.pathname === '$default' && result.requestId && result.body) {
           try {
-            console.warn(event);
             const api = new ApiGatewayManagementApiClient({
-              // endpoint: event.requestContext.domainName,
-              endpoint: 'https://localhost:3000',
+              endpoint: 'https://localhost:5002',
             });
             const command = new PostToConnectionCommand({
               ConnectionId: result.requestId,
@@ -128,6 +120,7 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
           }
         }
         return result;
+      }
       default: {
         result.body && (result.body = stringify(result.body));
         return result;

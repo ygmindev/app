@@ -1455,15 +1455,15 @@ type SignInUsernameCreateOutput {
 
 type Socket {
   _id: String
+  connectionId: String
   created: DateTime
-  externalId: String
   name: String
 }
 
 input SocketCreateFormInput {
   _id: String
+  connectionId: String
   created: DateTime
-  externalId: String
   name: String
 }
 
@@ -1474,8 +1474,8 @@ input SocketCreateInput {
 
 input SocketCreateManyFormInput {
   _id: String
+  connectionId: String
   created: DateTime
-  externalId: String
   name: String
 }
 
@@ -1568,8 +1568,8 @@ type SocketGetOutput {
 
 input SocketInput {
   _id: String
+  connectionId: String
   created: DateTime
-  externalId: String
   name: String
 }
 
@@ -1618,8 +1618,8 @@ type SocketUpdateOutput {
 
 input SocketUpdateUpdateInput {
   _id: String
+  connectionId: String
   created: DateTime
-  externalId: String
   name: String
 }
 

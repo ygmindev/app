@@ -1,4 +1,6 @@
 import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
+import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { config as httpConfig } from '@lib/config/http/http/http';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 
@@ -9,7 +11,12 @@ export const dev: TaskParamsModel<unknown> = {
 
   task: [fromExecutable('sls offline start --reloadHandler --verbose')],
 
-  // variables: () => ({
-  //   NODE_OPTIONS: `--require ${fromPackages('lib-config/src/tracking/telemetry/telemetry.js')}`,
-  // }),
+  variables: () => {
+    const httpConfigF = httpConfig();
+    const { caFile, certificateDir } = httpConfigF.certificate;
+    return {
+      // NODE_OPTIONS: `--require ${fromPackages('lib-config/src/tracking/telemetry/telemetry.js')}`,
+      NODE_EXTRA_CA_CERTS: joinPaths([certificateDir, caFile]),
+    };
+  },
 };

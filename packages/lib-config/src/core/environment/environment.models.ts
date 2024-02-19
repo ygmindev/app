@@ -24,6 +24,7 @@ export type EnvironmentConfigModel = {
   ENV_NAME: string;
   ENV_PLATFORM: PlatformModel;
   NODE_ENV: EnvironmentModel;
+  NODE_EXTRA_CA_CERTS: string;
   NODE_OPTIONS?: string;
   SERVER_APP_GOOGLE_API_KEY: string;
   SERVER_APP_HOST: string;

@@ -17,7 +17,7 @@ export const _useWebsocket = <TType,>({
   port,
 }: _UseWebsocketParamsModel<TType>): _UseWebsocketModel<TType> => {
   const { getWebSocket, readyState, sendMessage } = useSocketIO(uri({ host, pathname, port }), {
-    onClose,
+    onClose: console.warn,
     onMessage: (event) => {
       console.warn(event);
     },
@@ -25,7 +25,6 @@ export const _useWebsocket = <TType,>({
     queryParams: params as QueryParams,
     reconnectAttempts: 0,
     retryOnError: false,
-    shouldReconnect: () => false,
   });
 
   const status = (() => {

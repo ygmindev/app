@@ -17,7 +17,7 @@ export class Socket extends EntityResource implements SocketModel {
   declare created: Date;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  externalId!: string;
+  connectionId!: string;
 
   @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   name?: string;

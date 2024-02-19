@@ -6,6 +6,8 @@ const { config } = defineConfig({
   config: () =>
     ({
       certificate: {
+        caFile: 'rootCA.pem',
+
         certificateDir: fromStatic('certificates'),
 
         privateKeyFile: process.env.SERVER_SSL_PRIVATE_KEY,

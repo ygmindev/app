@@ -224,6 +224,7 @@ export class _Database implements _DatabaseModel {
           .findOneAndUpdate(filterF as Filter<Document>, updateF as UpdateFilter<object>, {
             projection: options?.project,
             returnDocument: 'after',
+            upsert: true,
           });
         return { result } as OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
       },

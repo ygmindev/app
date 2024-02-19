@@ -14,8 +14,8 @@ export const main = createLambdaHandler({
     switch (pathname) {
       case '$connect': {
         if (user) {
-          const socket = await socketImplementation.create({
-            form: { externalId: context.requestId },
+          await socketImplementation.create({
+            form: { connectionId: context.requestId, name: 'test' },
           });
         }
         return {
@@ -25,7 +25,7 @@ export const main = createLambdaHandler({
       }
       case '$disconnect': {
         await socketImplementation.remove({
-          filter: [{ field: 'externalId', value: context.requestId }],
+          filter: [{ field: 'connectionId', value: context.requestId }],
         });
         return {
           body: { message: 'success' },
@@ -33,9 +33,12 @@ export const main = createLambdaHandler({
         };
       }
       default: {
+        const { result } = await socketImplementation.get({
+          filter: [{ field: 'name', value: 'test' }],
+        });
         return {
           body,
-          requestId: context.requestId,
+          requestId: result?.connectionId,
         };
       }
     }
