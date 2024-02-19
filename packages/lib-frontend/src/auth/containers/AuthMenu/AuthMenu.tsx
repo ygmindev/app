@@ -9,25 +9,25 @@ import {
   type MenuRefModel,
 } from '@lib/frontend/core/components/Menu/Menu.models';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import { type SFCModel } from '@lib/frontend/core/core.models';
+import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { AUTH } from '@lib/shared/auth/auth.constants';
 import { ACCOUNT } from '@lib/shared/user/user.constants';
 import { useRef } from 'react';
 
-export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
+export const AuthMenu: LFCModel<AuthMenuPropsModel> = ({ ...props }) => {
   const { t } = useTranslation([AUTH]);
-  const { styles } = useStyles({ props });
+  const { wrapperProps } = useLayoutStyles({ props });
   const { signOut } = useSignInResource();
   const { push } = useRouter();
   const [authStatus] = useStore('auth.status');
   const [currentUser] = useStore('user.currentUser');
-  const isAuthenticated = authStatus === AUTH_STATUS.AUTHENTICATED;
   const menuRef = useRef<MenuRefModel>(null);
+  const isAuthenticated = authStatus === AUTH_STATUS.AUTHENTICATED;
   const optionsF: Array<MenuOptionModel> = isAuthenticated
     ? [
         {
@@ -55,6 +55,7 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
 
   return (
     <Menu
+      {...wrapperProps}
       anchor={(isOpen) => (
         <Button
           elementState={isOpen ? ELEMENT_STATE.ACTIVE : undefined}
@@ -63,7 +64,6 @@ export const AuthMenu: SFCModel<AuthMenuPropsModel> = ({ ...props }) => {
       )}
       options={optionsF}
       ref={menuRef}
-      style={styles}
       title={isAuthenticated ? currentUser?.email : undefined}
     />
   );

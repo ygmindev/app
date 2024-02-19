@@ -11,7 +11,7 @@ import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
   const { initialize } = useSession();
   const { get } = useUserResource();
-  const [authStatus, authStatusSet] = useStore('auth.status');
+  const [, authStatusSet] = useStore('auth.status');
   const [, authTokenSet] = useStore('auth.token');
   const [currentUser, currentUserSet] = useStore('user.currentUser');
 
@@ -37,5 +37,5 @@ export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
     });
   });
 
-  return <>{authStatus !== AUTH_STATUS.UNKNOWN && children}</>;
+  return <>{children}</>;
 };

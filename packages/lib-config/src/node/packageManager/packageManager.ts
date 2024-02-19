@@ -23,7 +23,6 @@ const { _config, config } = defineConfig({
     toJsx: [
       fromModules('react-native-animatable/createAnimatableComponent.js'),
       fromModules('react-native-gifted-chat/lib/Actions.js'),
-      fromModules('react-native-calendar-picker/CalendarPicker/Scroller.js'),
       fromModules('react-native-gifted-chat/lib/Composer.js'),
       fromModules('react-native-gifted-chat/lib/Day.js'),
       fromModules('react-native-gifted-chat/lib/GiftedChat.js'),

@@ -1,6 +1,3 @@
-import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
-import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vike/server';
-
 import { QueryClient } from '@lib/frontend/data/utils/QueryClient/QueryClient';
 import { type RootContextModel } from '@lib/frontend/root/root.models';
 import { ROOT_REDUCERS } from '@lib/frontend/root/stores/rootStore.constants';
@@ -20,6 +17,8 @@ import { pick } from '@lib/shared/core/utils/pick/pick';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { QUERY } from '@lib/shared/query/query.constants';
 import { STATE } from '@lib/shared/state/state.constants';
+import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
+import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vike/server';
 
 export const _renderServer =
   ({
