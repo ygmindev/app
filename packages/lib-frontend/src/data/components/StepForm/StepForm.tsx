@@ -113,7 +113,7 @@ export const StepForm = <TType, TResult = void>({
                           ? undefined
                           : ELEMENT_STATE.DISABLED
                       }
-                      icon={isValidCurrent ? 'check' : undefined}
+                      icon={isValidCurrent ? 'check' : 'dotsCircle'}
                       key={step.id}
                       onPress={() => {
                         void handleCurrentSet(i);
