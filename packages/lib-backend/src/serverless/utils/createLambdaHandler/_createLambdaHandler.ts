@@ -32,6 +32,7 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
   handler,
   plugins,
   type,
+  uri,
 }: _CreateLambdaHandlerParamsModel<TType>): _CreateLambdaHandlerModel => {
   const getContext = async ({
     context,
@@ -105,9 +106,7 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
       case LAMBDA_TYPE.WEBSOCKET: {
         if (contextF.pathname === '$default' && result.requestId && result.body) {
           try {
-            const api = new ApiGatewayManagementApiClient({
-              endpoint: 'https://localhost:5002',
-            });
+            const api = new ApiGatewayManagementApiClient({ endpoint: uri });
             const command = new PostToConnectionCommand({
               ConnectionId: result.requestId,
               Data: Buffer.from(result.body as string),

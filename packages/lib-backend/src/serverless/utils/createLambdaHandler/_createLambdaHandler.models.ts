@@ -22,6 +22,7 @@ export type _CreateLambdaHandlerParamsModel<TType extends LambdaTypeModel> = {
   }): Promise<LambdaResponseModel>;
   plugins?: Array<LambdaPluginModel>;
   type?: TType;
+  uri: string;
 };
 
 export type _CreateLambdaHandlerModel = Handler;
