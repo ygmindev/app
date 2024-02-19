@@ -5,7 +5,7 @@ import {
   LAMBDA_PLUGIN,
   LAMBDA_TYPE,
 } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
-import { HTTP_STATUS_CODE, SERVER_APP_URI } from '@lib/shared/http/http.constants';
+import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 
 export const main = createLambdaHandler({
   handler: async ({ body, context }) => {
@@ -45,5 +45,4 @@ export const main = createLambdaHandler({
   },
   plugins: [LAMBDA_PLUGIN.AUTHENTICATION, LAMBDA_PLUGIN.DATABASE],
   type: LAMBDA_TYPE.WEBSOCKET,
-  uri: SERVER_APP_URI,
 });
