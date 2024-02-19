@@ -21,6 +21,7 @@ export type RouteModel<
   isNavigatable?: boolean;
   isProtectable?: boolean;
   layoutProps?: LayoutStylePropsModel;
+  namespaces?: Array<string>;
   navigation?: RouteNavigationModel;
   params?: TParams;
   parent?: string;

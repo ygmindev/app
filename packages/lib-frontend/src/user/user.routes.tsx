@@ -58,6 +58,7 @@ export const userRoutes: Array<RouteModel> = [
 
       {
         icon: 'dollar',
+        namespaces: [BILLING],
         navigation: ROUTE_NAVIGATION.LIST,
         pathname: BILLING,
         routes: billingRoutes,

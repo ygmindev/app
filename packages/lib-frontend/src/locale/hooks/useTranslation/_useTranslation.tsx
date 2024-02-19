@@ -1,10 +1,9 @@
-import { useTranslation } from 'react-i18next';
-
 import { INTERNATIONALIZE_CONFIG } from '@lib/config/locale/internationalize/internationalize.constants';
 import {
   type _UseTranslationModel,
   type _UseTranslationParamsModel,
 } from '@lib/frontend/locale/hooks/useTranslation/_useTranslation.models';
+import { useTranslation } from 'react-i18next';
 
 const { languageDefault } = INTERNATIONALIZE_CONFIG;
 

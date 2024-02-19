@@ -1,23 +1,13 @@
-import { PAYMENT_METHOD } from '@lib/frontend/billing/billing.constants';
-import { PaymentMethodForm } from '@lib/frontend/billing/containers/PaymentMethodForm/PaymentMethodForm';
+import { BILLING, PAYMENT_METHOD } from '@lib/frontend/billing/billing.constants';
 import { PaymentMethodPage } from '@lib/frontend/billing/pages/PaymentMethodPage/PaymentMethodPage';
-import { FORM } from '@lib/frontend/data/data.constants';
-import { ROUTE_NAVIGATION } from '@lib/frontend/route/route.constants';
 import { type RouteModel } from '@lib/frontend/route/route.models';
 
 export const billingRoutes = [
   {
     element: <PaymentMethodPage />,
     icon: 'wallet',
-    navigation: ROUTE_NAVIGATION.TRANSITION,
+    namespaces: [BILLING],
     pathname: PAYMENT_METHOD,
-    routes: [
-      {
-        element: <PaymentMethodForm />,
-        pathname: FORM,
-        title: ({ t }) => t('billing:paymentMethod'),
-      },
-    ],
     title: ({ t }) => t('billing:paymentMethod'),
   },
 ] satisfies Array<RouteModel>;

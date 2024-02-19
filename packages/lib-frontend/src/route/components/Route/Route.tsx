@@ -5,6 +5,7 @@ import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type RoutePropsModel } from '@lib/frontend/route/components/Route/Route.models';
 import { TabLayout } from '@lib/frontend/route/components/TabLayout/TabLayout';
 import { RouteHeader } from '@lib/frontend/route/containers/RouteHeader/RouteHeader';
@@ -13,7 +14,6 @@ import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { ROUTE_NAVIGATION, ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR_MORE } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { useTracking } from '@lib/frontend/tracking/hooks/useTracking/useTracking';
@@ -24,7 +24,8 @@ import {
 import { cloneElement } from 'react';
 
 export const Route: LFCModel<RoutePropsModel> = ({ depth, route, ...props }) => {
-  const theme = useTheme();
+  useTranslation(route?.namespaces);
+
   const { wrapperProps } = useLayoutStyles({ props });
   const { isActive } = useRouter();
   const { track } = useTracking();

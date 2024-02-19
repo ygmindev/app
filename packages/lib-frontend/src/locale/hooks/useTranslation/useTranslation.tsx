@@ -23,7 +23,7 @@ export const useTranslation = (ns: UseTranslationParamsModel = []): UseTranslati
           ? key({ currentLanguage, currentLanguageSet, isInitialized, t })
           : _t(key, params ? params : { count: '', value: '' })
         : '',
-    [isInitialized, currentLanguage, _t],
+    [isInitialized, currentLanguage, ns, _t],
   );
 
   return { currentLanguage, currentLanguageSet, isInitialized, t };

@@ -18,7 +18,7 @@ const getNavigatableRoute = (route: RouteModel): RouteModel => {
     case ROUTE_NAVIGATION.LIST:
     case ROUTE_NAVIGATION.TAB:
     case ROUTE_NAVIGATION.TRANSITION: {
-      const { element, header, routes, title, ...routeF } = route;
+      const { element, header, namespaces, routes, title, ...routeF } = route;
       const elementF = (() => {
         switch (routeF.navigation) {
           case ROUTE_NAVIGATION.LIST:
@@ -34,11 +34,13 @@ const getNavigatableRoute = (route: RouteModel): RouteModel => {
       })();
       const routeFF = {
         ...routeF,
+        namespaces,
         routes: [
           {
             element: elementF,
             header: merge([header, { previous: 1 }]),
             isNavigatable: false,
+            namespaces,
             pathname: '/',
             title,
           },
@@ -50,6 +52,7 @@ const getNavigatableRoute = (route: RouteModel): RouteModel => {
                   { previous: route.navigation === ROUTE_NAVIGATION.TAB ? 2 : 1 },
                   header,
                 ]),
+                namespaces,
                 title: child.title ?? child.pathname,
               },
             ]),
@@ -57,7 +60,7 @@ const getNavigatableRoute = (route: RouteModel): RouteModel => {
         ],
         title,
         transition: ROUTE_TRANSITION.SLIDE,
-      };
+      } satisfies RouteModel;
       return routeFF;
     }
     default:
