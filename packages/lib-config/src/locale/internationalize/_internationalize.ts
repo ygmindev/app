@@ -30,11 +30,19 @@ export const _internationalize = ({
 
     lng: language,
 
+    load: 'languageOnly',
+
     ns: [],
+
+    partialBundledLanguages: !isPreload,
 
     preload: isPreload ? [languageF] : false,
 
-    react: { defaultTransParent: 'div', useSuspense: true },
+    react: {
+      bindI18n: 'languageChanged loaded',
+      defaultTransParent: 'div',
+      useSuspense: true,
+    },
 
     supportedLngs: languages.map(({ id }) => id),
   };
@@ -52,7 +60,7 @@ export const _internationalize = ({
   }
 
   if (!instance.isInitialized) {
-    modules?.forEach(instance.use);
+    modules?.forEach((m) => (instance = instance.use(m)));
     void instance.init(config);
   }
 
