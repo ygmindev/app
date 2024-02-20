@@ -11,6 +11,8 @@ export type ScreenConfigModel = {
 
   isHeadless: boolean;
 
+  maxConcurrency: number;
+
   snapshotPath: string;
 
   timeout: number;

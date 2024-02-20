@@ -13,6 +13,8 @@ const { config } = defineConfig({
 
     isHeadless: true,
 
+    maxConcurrency: 3,
+
     snapshotPath: joinPaths([fileConfig.buildPath, 'snapshots']),
 
     timeout: 15000,
