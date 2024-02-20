@@ -53,7 +53,7 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
 
           onIdTokenChanged(auth, (user: User | null) => {
             if (user) {
-              void user.getIdToken().then(onTokenRefresh);
+              void user.getIdToken(true).then(onTokenRefresh);
             }
           });
         }
