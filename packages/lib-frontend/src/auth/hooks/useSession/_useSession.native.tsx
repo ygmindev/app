@@ -1,13 +1,12 @@
-import { type FirebaseAuthTypes } from '@react-native-firebase/auth';
-import firebaseAuth from '@react-native-firebase/auth';
-import { type AuthError } from 'firebase/auth';
-
 import {
   type _UseSessionModel,
   type _UseSessionParamsModel,
 } from '@lib/frontend/auth/hooks/useSession/_useSession.models';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
+import { type FirebaseAuthTypes } from '@react-native-firebase/auth';
+import firebaseAuth from '@react-native-firebase/auth';
+import { type AuthError } from 'firebase/auth';
 
 let auth: FirebaseAuthTypes.Module;
 
@@ -35,7 +34,7 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
 
       auth.onIdTokenChanged((user: FirebaseAuthTypes.User | null) => {
         if (user) {
-          void user.getIdToken().then(onTokenRefresh);
+          void user.getIdToken(true).then(onTokenRefresh);
         }
       });
     }
